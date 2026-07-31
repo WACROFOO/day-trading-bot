@@ -1,0 +1,410 @@
+# ABCD Pattern: A Beginners Day Trading Strategy  #daytrading #stockmarket
+# https://www.youtube.com/watch?v=IHeJROuEzRU
+# duration_sec: 893
+
+[00:00:00] all right everyone so the topic of
+[00:00:01] today's episode is the abcd pattern this
+[00:00:04] is a multi-candlestick pattern and so
+[00:00:07] this is another episode in the
+[00:00:09] multi-part series on technical analysis
+[00:00:11] and candlestick charts and how to read
+[00:00:14] stock charts for day trading so let's
+[00:00:16] jump right in and look at the abcd
+[00:00:18] pattern in all its glory
+[00:00:20] there it is this is a picture perfect
+[00:00:23] drawing of an abcd pattern now this is
+[00:00:27] uh going to remind some of you of a bull
+[00:00:31] flag pattern and in fact an abcd pattern
+[00:00:35] is formed initially by a bull flag that
+[00:00:38] does not resolve by going all the way
+[00:00:40] through the high of day so let me show
+[00:00:42] you here on the whiteboard so a bull
+[00:00:45] flag begins of course with one sometimes
+[00:00:48] two or three green candles in a row
+[00:00:49] moving up
+[00:00:51] and then we have a little bit of
+[00:00:53] pullback
+[00:00:55] now a typical bull flag will pull back
+[00:00:57] for two or maybe three candles before
+[00:01:00] beginning to move back up to the high
+[00:01:03] however in an abcd pattern the stock
+[00:01:06] does not break through high of day
+[00:01:10] it cannot break through high of day or
+[00:01:12] it's no longer an abcd pattern it can
+[00:01:14] come back up right too high of day but
+[00:01:17] it cannot break through that level so an
+[00:01:19] abcd pattern is an example of a chart
+[00:01:22] that initially
+[00:01:23] is
+[00:01:24] a bull flag and in fact you can even
+[00:01:26] trade it as a bull flag the only
+[00:01:29] scenario that you might not take that
+[00:01:31] first candle to make a new high
+[00:01:33] is if you thought it was too extended
+[00:01:36] off the nine moving average
+[00:01:38] or if perhaps you had a higher volume
+[00:01:41] red candle or you had a red doji on this
+[00:01:44] one or a shooting star if you had higher
+[00:01:46] volume on this red candle you know
+[00:01:48] lighter volume on the green candles and
+[00:01:50] then higher volume on the red candle
+[00:01:52] that might be a warning sign that would
+[00:01:54] make you say no i don't think i'm going
+[00:01:56] to buy this but other times they're
+[00:01:58] simply just a totally decent bull flag
+[00:02:01] with light volume everything looks good
+[00:02:03] and it just for whatever reason when it
+[00:02:06] gets volume coming back in here on this
+[00:02:08] green candle it doesn't break through
+[00:02:10] the high
+[00:02:11] maybe there's a hidden seller up here at
+[00:02:14] you know 750 or whatever it is and
+[00:02:16] there's a big wall it's 30 000 shares
+[00:02:19] whatever and it cannot break through
+[00:02:20] that level so regardless of the reason
+[00:02:23] this is the beginning of an abcd pattern
+[00:02:26] what then happens
+[00:02:28] is another
+[00:02:30] essentially bull flag formation but
+[00:02:32] what's very important here is that in an
+[00:02:35] abcd pad and the pullback cannot come
+[00:02:37] below this level here
+[00:02:39] so this right here we go a
+[00:02:43] b
+[00:02:44] c
+[00:02:46] d
+[00:02:48] okay so this is gonna pull back down
+[00:02:50] here to point c now as it pulls back to
+[00:02:53] point c as i said point c cannot be
+[00:02:56] lower than point a they can double
+[00:02:59] bottom and sometimes they will sometimes
+[00:03:01] they'll pull back they'll double bottom
+[00:03:03] right at that level and then come back
+[00:03:05] up so that's totally fine and there's
+[00:03:08] definitely a strategy around trading the
+[00:03:10] double bottom here of being a buyer
+[00:03:12] right off of this level with your stop
+[00:03:14] right here especially when you've got
+[00:03:15] the moving average support but again
+[00:03:17] that's getting into strategy so let's
+[00:03:18] just focus on the pattern
+[00:03:20] the first candle to make a new high out
+[00:03:22] of this pattern you can buy however most
+[00:03:25] traders will wait to buy the break
+[00:03:28] through point b
+[00:03:30] so that's leg d here so a b c d so on
+[00:03:35] leg d as it breaks through the high
+[00:03:37] price here which would have been in this
+[00:03:38] example 750 that's where you're buying
+[00:03:41] and sure maybe you get in at you know 7
+[00:03:44] 48 if you start seeing volume really
+[00:03:46] coming up here as it starts to break out
+[00:03:48] that's fine but generally you're in
+[00:03:51] pretty close to that level unless
+[00:03:53] perhaps you already have profit from the
+[00:03:56] abc or from the first pullback the bull
+[00:03:58] flag
+[00:03:59] which gave you the confidence to take
+[00:04:01] the risk on the double bottom
+[00:04:03] now sometimes traders will say russ
+[00:04:06] would you have lost money on this bull
+[00:04:07] flag and the answer should be no
+[00:04:11] if you had a correct entry down here the
+[00:04:13] first candle to make a new high you
+[00:04:15] could have easily taken profit as it
+[00:04:17] came up to this level the only way you
+[00:04:18] would have lost is if you scaled in
+[00:04:21] aggressively
+[00:04:22] right underneath this level and then it
+[00:04:24] failed so as long as you had a good
+[00:04:26] entry and you didn't over leverage
+[00:04:28] yourself too much right into the high
+[00:04:29] day break this should have still been a
+[00:04:31] winning trade which then gives you the
+[00:04:33] opportunity to come back in for the
+[00:04:35] second attempt right here and oftentimes
+[00:04:38] this is a very strong pattern because
+[00:04:41] this period of consolidation gives many
+[00:04:44] traders the opportunity to see the
+[00:04:46] opportunity
+[00:04:47] and then take the trade right sometimes
+[00:04:49] patterns that are really really short
+[00:04:51] traders don't have a chance to see it
+[00:04:53] happening because you have to be either
+[00:04:54] watching it like in real time or you
+[00:04:56] just miss the whole thing so an abcd
+[00:04:58] pattern especially if this is a five
+[00:05:00] minute chart
+[00:05:02] you know this is going to take place
+[00:05:03] over the course of 30 40 minutes so
+[00:05:05] there's a lot of time for you know
+[00:05:07] traders collectively to be spreading the
+[00:05:09] word of hey there's an ebcd pattern
+[00:05:11] forming on this stock it looks really
+[00:05:12] good let's you know take the trade or
+[00:05:14] whatever
+[00:05:15] if it happens on a one minute time frame
+[00:05:17] not as long but that still works now
+[00:05:20] let's switch back over to the main
+[00:05:22] screen here and let's talk about the the
+[00:05:25] characteristics of the abcd pattern so
+[00:05:28] typically begins with three plus candles
+[00:05:31] moving up and then we have a pullback
+[00:05:34] two or more candles pull back towards
+[00:05:36] the nine moving average first candle
+[00:05:38] makes a new high but does not break
+[00:05:40] through the high of day which is point
+[00:05:43] two or point b
+[00:05:44] you then pull back again but not lower
+[00:05:46] than the original point a
+[00:05:48] and then it's on the next attempt where
+[00:05:50] you expect the breakout
+[00:05:53] this consolidation should occur above
+[00:05:56] the nine moving average which i drew
+[00:05:58] here is this blue line on the chart
+[00:06:00] whether it's a five minute or one minute
+[00:06:02] you still want to see that consolidation
+[00:06:04] above that moving average
+[00:06:06] so the entry point is generally speaking
+[00:06:08] the most obvious level which is the
+[00:06:10] break through the high and most traders
+[00:06:12] are going to get in just a little under
+[00:06:14] that level to anticipate that break
+[00:06:17] now one of the things that's interesting
+[00:06:19] is that a one minute abcd pattern
+[00:06:22] in this example here on the whiteboard
+[00:06:24] this is one two three four five six
+[00:06:27] seven eight nine ten eleven twelve
+[00:06:29] thirteen candles
+[00:06:31] so that means this pattern if we flipped
+[00:06:34] this to a five minute chart
+[00:06:36] and this was our um
+[00:06:38] from my last episode on both flags if we
+[00:06:40] switch to a five minute chart and we
+[00:06:43] drew this same exact pattern on the five
+[00:06:45] minute chart it's going to start with a
+[00:06:47] green candle
+[00:06:50] and then the next candle which is the
+[00:06:51] pullback candle was red
+[00:06:54] right
+[00:06:55] and then the next candle let's see it
+[00:06:57] comes back up is green but it does not
+[00:07:00] break through the high so it's kind of
+[00:07:02] like this
+[00:07:04] and again it could be like just a little
+[00:07:06] different this this candle could have
+[00:07:07] gone a little higher and then this is
+[00:07:09] sort of the beginning of the pullback
+[00:07:10] here but approximately it's like this
+[00:07:13] and then you've got another candle that
+[00:07:14] pulls back but it doesn't go lower and
+[00:07:17] then that's when you start to get that
+[00:07:18] breakout so this can end up forming
+[00:07:22] a bull flag on the five minute chart and
+[00:07:25] that's called multi
+[00:07:27] time frame
+[00:07:28] alignment i don't have to write the
+[00:07:30] whole thing multi-time frame alignment
+[00:07:32] so this isn't a perfect you know copy of
+[00:07:35] what this would look like on a five
+[00:07:36] minute but it is fairly close
+[00:07:39] you have the move up you have the pull
+[00:07:40] back sort of the false breakout the
+[00:07:42] second dip and then the break so now
+[00:07:45] let's look at a couple of examples of
+[00:07:47] actual charts where you can see very
+[00:07:49] clearly this multi-time frame alignment
+[00:07:53] so let's look here first at the
+[00:07:55] five-minute chart so don't even look at
+[00:07:56] the other side just look at the
+[00:07:57] five-minute chart first so you can see
+[00:07:59] the stock squeezed higher
+[00:08:01] it then pulled back
+[00:08:03] and then the first five-minute candle
+[00:08:05] made a new high and it broke through 550
+[00:08:06] and went up over six dollars for a 10
+[00:08:08] return right that's a totally decent
+[00:08:11] five-minute pullback it's a bull flag
+[00:08:13] right at the nine moving average right
+[00:08:15] here
+[00:08:16] it's fine volume profile is good it's
+[00:08:19] it's not fantastic because the high a
+[00:08:21] day actually was on slightly declining
+[00:08:24] volume
+[00:08:25] but it's not terrible so now let's look
+[00:08:27] at the one minute so the one minute
+[00:08:30] squeezes up initially on this sort of
+[00:08:32] long leg higher
+[00:08:33] and then it pulls back
+[00:08:36] it pops up but doesn't go back through
+[00:08:38] the high right
+[00:08:40] it pops up
+[00:08:42] and then stops and then comes back down
+[00:08:44] and in this example
+[00:08:46] perfect double bottom
+[00:08:48] double bottom support we then break
+[00:08:51] through point two right here on this leg
+[00:08:54] and that's where we break through the
+[00:08:55] highs and so the entry on this in this
+[00:08:58] example
+[00:09:00] is a little bit below high of day it
+[00:09:02] says we break 0.2 so in the drawing that
+[00:09:04] i did right here
+[00:09:06] the apex was at the very top however
+[00:09:09] it's totally possible that this stock
+[00:09:13] could have been more like this
+[00:09:15] and that this is the pullback oops sorry
+[00:09:19] my marker's getting a little dry here so
+[00:09:21] you could have this kind of scenario
+[00:09:24] where
+[00:09:25] it's more of this
+[00:09:26] wedge so you're breaking out here in
+[00:09:29] your entry here is still well below your
+[00:09:31] high a day that's very possible we see
+[00:09:33] that
+[00:09:34] all the time on an abcd pattern and
+[00:09:36] that's more what we see in this
+[00:09:38] particular example right here reminder
+[00:09:40] as always my results are not typical and
+[00:09:41] trading is risky i press that button by
+[00:09:43] accident all right so
+[00:09:45] we've got the high here that's the entry
+[00:09:48] right there all right now let's look at
+[00:09:50] a another example
+[00:09:53] so this is a little earlier in the day
+[00:09:55] here you have a five minute candle
+[00:09:57] that's squeezed up and ends up forming a
+[00:10:00] shooting star
+[00:10:01] candle on the five minute it drops down
+[00:10:05] right and so that was formed by this top
+[00:10:07] this sell-off
+[00:10:09] and then right there it pops up just for
+[00:10:12] a second
+[00:10:13] it pulls back
+[00:10:14] and right as it breaks through that
+[00:10:16] level of 0.2
+[00:10:18] you get that squeeze back through the
+[00:10:19] high
+[00:10:20] now this is interesting because the five
+[00:10:22] minute chart
+[00:10:23] the red candle is on lighter volume it
+[00:10:26] is a shooting star but it's on lighter
+[00:10:28] volume and when you look at the one
+[00:10:30] minute the one minute's not that bad
+[00:10:33] so this ends up
+[00:10:35] by using both the one minute and the
+[00:10:36] five minute it gives us a little bit
+[00:10:38] more confidence to take this trade
+[00:10:41] this is a five minute abcd pattern which
+[00:10:43] is uh kind of an interesting pattern
+[00:10:45] here a pop-up
+[00:10:47] a pullback a pop higher a dip and then a
+[00:10:50] break through the level then it retests
+[00:10:54] the previous resistance level
+[00:10:56] that provides support
+[00:10:58] and then we squeeze up to the high
+[00:11:00] then this is the first pullback
+[00:11:01] following the breakout
+[00:11:03] and then we move again higher actually
+[00:11:05] that was the second pullback we have the
+[00:11:06] first pullback which is right here and
+[00:11:07] then this is the second pullback and
+[00:11:09] then it goes higher so a little bit of
+[00:11:11] an interesting pattern on that one
+[00:11:14] this is another abcd pattern where you
+[00:11:16] squeeze up you dip down you pop up and
+[00:11:19] this is typically where you would expect
+[00:11:21] it to go back through the high but note
+[00:11:23] here high volume on this red candle
+[00:11:26] which is probably why traders hesitated
+[00:11:28] to buy it in this area which would have
+[00:11:31] needed to happen for it to go through
+[00:11:32] the high a day so it pulls back but it
+[00:11:35] doesn't sell off that much it holds this
+[00:11:37] level and then traders come back in and
+[00:11:40] now on the second attempt
+[00:11:42] they're able to break it through the
+[00:11:43] high a day and off it goes from 280 all
+[00:11:47] the way to 380 which is a really nice
+[00:11:49] breakout
+[00:11:51] this is another one the stock squeezes
+[00:11:53] from 110 to 170 pulls back you do have a
+[00:11:57] red doji so when it pops up it's not
+[00:11:59] quite strong enough to go back through
+[00:12:01] the highs it pulls back for a moment and
+[00:12:03] this becomes a micro pullback right
+[00:12:06] there so again by the way those who
+[00:12:08] haven't already downloaded my micro
+[00:12:10] pullback pdf if you go down in the
+[00:12:13] description
+[00:12:14] you will see my micro
+[00:12:16] pullback strategy
+[00:12:20] pdf
+[00:12:21] that is my strategy for how i trade
+[00:12:24] these micro pullbacks now micro
+[00:12:26] pullbacks can occur in the context of an
+[00:12:28] abcd pattern uh bull flag
+[00:12:31] it's it's more of the very short micro
+[00:12:34] pullback that occurs as a stock is just
+[00:12:37] beginning to break out and pull away
+[00:12:40] this is the opportunity that i find to
+[00:12:42] buy a really strong stock and again if
+[00:12:44] we go back just for a moment and think
+[00:12:46] about why these patterns work so well
+[00:12:48] they work well because traders are
+[00:12:50] watching them traders have their eyes on
+[00:12:53] these patterns so these only work when
+[00:12:55] you're trading the right stocks to trade
+[00:12:58] that means high relative volume
+[00:13:00] typically news already a leading gainer
+[00:13:03] on the day that way it's going to be on
+[00:13:05] the news traders are watching this
+[00:13:07] they're going to see it it should be a
+[00:13:09] stock that's moving quickly if it's not
+[00:13:11] obvious the patterns aren't going to
+[00:13:13] resolve as well these patterns are very
+[00:13:15] to me
+[00:13:16] very clear buy and sell signals that i
+[00:13:19] see right on the chart
+[00:13:21] but if you're looking at a chart and no
+[00:13:23] one else is looking at it then those buy
+[00:13:24] and sell signals it's a traffic light
+[00:13:27] that's blinking in the center of town
+[00:13:28] and it's two in the morning it's not
+[00:13:30] doing anything it's not really serving
+[00:13:32] any purpose but during the time of day
+[00:13:34] with congestion high volume that's when
+[00:13:36] these signals are really respected
+[00:13:39] okay so this is a nice little abcd
+[00:13:42] pattern and then we've got um
+[00:13:45] another one right here where you can see
+[00:13:47] this squeeze higher on the five minute a
+[00:13:49] micro pullback false breakout it drops
+[00:13:51] down and note of course that this was
+[00:13:55] very extended at that pullback off of
+[00:13:57] the nine moving average it then comes
+[00:14:00] down to that level bounces off the
+[00:14:02] volume weight average price and the nine
+[00:14:04] pops up pulls back one more time and
+[00:14:07] then makes a second attempt through the
+[00:14:09] highs even though in this example it
+[00:14:11] didn't really squeeze and go parabolic
+[00:14:13] like all the way up to the high the
+[00:14:15] entry from right here to right here
+[00:14:17] still provides a nice five six percent
+[00:14:20] winner that's not a bad trade at all
+[00:14:22] it's not a home run but
+[00:14:24] ultimately success as a trader is based
+[00:14:26] on hitting a lot of base hits not
+[00:14:29] hitting the occasional home run
+[00:14:31] all right so now that you know a little
+[00:14:33] bit more about the bull flag and the
+[00:14:35] flat top breakout you can continue on to
+[00:14:38] the next episode in this multi-part
+[00:14:40] series on technical analysis and
+[00:14:42] candlestick charts the next episode's
+[00:14:44] right there i hope you guys enjoy it i
+[00:14:46] hope you've been enjoying these episodes
+[00:14:47] and if you have as always i hope you hit
+[00:14:49] the thumbs up and subscribe to the
+[00:14:51] channel

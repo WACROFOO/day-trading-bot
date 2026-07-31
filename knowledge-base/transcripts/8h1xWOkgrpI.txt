@@ -1,0 +1,306 @@
+# Day Trading Tips: How To Build A Watch List
+# https://www.youtube.com/watch?v=8h1xWOkgrpI
+# duration_sec: 861
+
+[00:00:01] all right guys so uh we're going to do
+[00:00:03] uh a walk through of how I put together
+[00:00:06] my daily watch list so uh the first
+[00:00:09] thing I do is I open trade ideas as you
+[00:00:12] guys can see on the left I've got three
+[00:00:14] primary scanners that I'm using for
+[00:00:16] looking at uh Gap or stocks and then on
+[00:00:19] the right I've got my e signal charts
+[00:00:21] and up in the corner this is kind of a a
+[00:00:24] more info window that I can type in a
+[00:00:26] stock this is part of trade ideas uh to
+[00:00:29] get information
+[00:00:30] like float um and that sort of thing if
+[00:00:34] it maybe isn't already on my scanner so
+[00:00:38] starting with the top few gappers here
+[00:00:41] on this regular Gap scanner this one
+[00:00:43] sorts uh any stock gapping up or down
+[00:00:46] more than 4% so no filter except for Gap
+[00:00:50] uh PB phmd is at the top of the Gap
+[00:00:53] scan uh I usually open up market watch
+[00:00:57] and I've got benzinga open so I can
+[00:00:59] search
+[00:01:00] uh on both of those platforms to see if
+[00:01:02] I can figure out what the news is uh the
+[00:01:05] reason the Catalyst for The Gap so
+[00:01:10] phmd search on market watch and search
+[00:01:13] on
+[00:01:15] benzinga and let's see what we can
+[00:01:17] find now uh you know I I also look
+[00:01:22] pretty early on at the daily chart just
+[00:01:25] scroll back a little bit we've got the
+[00:01:27] 200 moving average here at 178
+[00:01:30] uh kind of coming down right now
+[00:01:33] pre-market we're at 160 so we're just
+[00:01:35] below the 200 which is not ideal I'd
+[00:01:38] rather have us be above it and the
+[00:01:40] pre-market chart we kind of had this
+[00:01:42] first move up to 160 a pullback this was
+[00:01:46] after hours and then opened up here
+[00:01:49] round two and it's kind of been fading
+[00:01:51] off that level so you know when we see
+[00:01:55] that kind of thing it's not really my
+[00:01:57] favorite uh looks like the headline
+[00:01:59] after hours was ictv Brands announces
+[00:02:03] definitive agreement to acquire the no
+[00:02:06] no hair removal brand so that's the
+[00:02:11] headline um which is good that there's a
+[00:02:15] headline but in terms of uh price action
+[00:02:20] we're kind of fading so what I'm going
+[00:02:22] to do here is I'm just going to write um
+[00:02:26] phmd on my watch list phmd
+[00:02:30] 7.69 million share float gapping up
+[00:02:35] 43% headline I past in the headline this
+[00:02:38] is for all the students and I'll say
+[00:02:40] possible setups but the pre-market chart
+[00:02:44] is a bit
+[00:02:47] weak and the daily chart has the
+[00:02:53] 200 uh EMA blocking a potential move I
+[00:02:58] think
+[00:03:01] all right so that's our first one second
+[00:03:03] one down uh Jag X now sometimes I'll
+[00:03:06] skip the first one go right to the
+[00:03:07] second one if the first one you know has
+[00:03:10] a very heavy float it just doesn't look
+[00:03:12] interesting or something like
+[00:03:15] that so Jag
+[00:03:19] X again looking at the daily chart we're
+[00:03:22] kind of coming into resistance at that
+[00:03:24] 200 moving
+[00:03:25] average popping up to
+[00:03:28] 135
+[00:03:30] high of 183 is 200 so I don't like that
+[00:03:35] uh but I'll check the headline on it
+[00:03:37] anyways this one is a low float stock
+[00:03:40] which means that with a good Catalyst it
+[00:03:43] can move quickly and potentially could
+[00:03:45] break through um you know any resistance
+[00:03:48] on The Daily so the headline today
+[00:03:53] um jaguar animal health and um Napo
+[00:03:58] Pharmaceuticals announced details for
+[00:04:00] proposed
+[00:04:02] merger all right so I've got the
+[00:04:04] headline on market
+[00:04:09] watch so when I look at
+[00:04:12] this uh sometimes these mergers can
+[00:04:16] outline price and that would effectively
+[00:04:20] make this trade flat but it looks like
+[00:04:25] um it's a letter of
+[00:04:28] intent you know
+[00:04:30] probably you know it's non-binding so
+[00:04:35] there's still potential that we could
+[00:04:37] have volatility in this name now a stock
+[00:04:40] like um what was it
+[00:04:43] enh what was that stock the other day
+[00:04:46] um now I can't remember it well maybe
+[00:04:50] we'll see an example today what's a
+[00:04:52] up now it doesn't look like we have any
+[00:04:55] buyouts today but in any case a stock
+[00:04:56] that gets bought out just trades flat
+[00:04:59] the price has been determined so there's
+[00:05:00] not going to be volatility anymore we
+[00:05:02] want
+[00:05:03] volatility so Jag X 4.28 million share
+[00:05:08] float gapping up
+[00:05:11] 26% on 19,000 shares volume headline
+[00:05:15] paste Post in the headline there
+[00:05:19] um and let me just flip back to this Jag
+[00:05:25] X we do have the 200 moving average so
+[00:05:29] I'd say possible resistance around
+[00:05:33] 183 which is the
+[00:05:36] 200 uh
+[00:05:38] EMA but above that clear skies and we we
+[00:05:44] still
+[00:05:46] have 40 cents to that
+[00:05:50] level all right so that one's a a
+[00:05:53] possible that one's definitely a
+[00:05:54] possibility we'll see all right next one
+[00:05:57] down
+[00:05:58] AUP now we've traded this one a couple
+[00:06:00] times in the last few days so I'm
+[00:06:02] already sort of familiar with it and I'm
+[00:06:04] also familiar with Jag X we've traded
+[00:06:06] that a bunch of times phmd we've traded
+[00:06:08] as well so it's very common especially
+[00:06:11] after you've been trading for you know
+[00:06:13] several years they you'll start to get
+[00:06:15] familiar with these names jagx AUP you
+[00:06:18] know cat B I see on the scanner Rada um
+[00:06:21] H uh hmn y you know some of these stocks
+[00:06:25] have been former Runners they're stocks
+[00:06:27] that have made big moves and that's
+[00:06:28] actually what this scanner right here is
+[00:06:30] for this filters all of these stocks and
+[00:06:33] shows me only the ones that um are
+[00:06:36] former Runners now this is former
+[00:06:39] runners in recent history so you know
+[00:06:41] some of these may have been former
+[00:06:42] Runners a little ways back and they're
+[00:06:44] no longer on this scanner because the
+[00:06:46] it's just a limitation to the
+[00:06:48] filters okay so AUP uh nice Gap there 8:
+[00:06:54] a.m.
+[00:06:55] today um so this it's a pharmaceutical
+[00:07:00] stock so the headline has kind of lots
+[00:07:03] of pharmaceutical lingo in it uh
+[00:07:08] AUP
+[00:07:09] 16.87% share
+[00:07:12] float gapping up
+[00:07:16] 24% here's the problem on 1.7 million
+[00:07:20] shares of
+[00:07:22] volume very heavy
+[00:07:25] volume
+[00:07:27] pre-market now the only concern here is
+[00:07:32] that it may be
+[00:07:35] crowded so when I say crowded I mean
+[00:07:38] that um you're going to have a lot of
+[00:07:40] Traders trying to capture a piece of
+[00:07:42] this move you're going to have Traders
+[00:07:45] with a very strong short bias who say
+[00:07:47] this thing is overdone there's no way it
+[00:07:49] should be priced at $5 it's going to
+[00:07:51] fade and they're going to be shorting it
+[00:07:53] then you've got long bias traders who
+[00:07:55] are going to be going long and that
+[00:07:57] creates a tug of war it's not not going
+[00:07:59] to necessarily be uh the most um the
+[00:08:04] most clean setup in the first few
+[00:08:05] minutes now usually what I look for is
+[00:08:08] the first pullback and the second
+[00:08:09] pullback the problem is this has already
+[00:08:11] had a first pullback and a second
+[00:08:14] pullback
+[00:08:16] pre-market so this is something you
+[00:08:18] could have traded pre-market based on
+[00:08:20] this level of
+[00:08:21] volume you know when the bell rings it's
+[00:08:24] not uncommon to see these dip down a
+[00:08:26] little bit and then we go for a red to
+[00:08:28] Green move that's usually a safer setup
+[00:08:30] but I'm not 100% sure how easy this one
+[00:08:34] will be to trade it may end up giving us
+[00:08:36] a really great setup or it may end up
+[00:08:38] fading and being choppy I'll keep it on
+[00:08:40] watch close watch but I'm just going to
+[00:08:43] be mindful of the fact that it may be
+[00:08:47] crowded okay next one down
+[00:08:51] alqa 3,000 shares of volume
+[00:08:58] premarket I don't really like the price
+[00:09:00] range not very interested in it so I'm
+[00:09:02] just going to skip over this one
+[00:09:05] zumz $20 stock a little outside my price
+[00:09:08] range on the other
+[00:09:13] side check the headline on it but this
+[00:09:16] isn't something I would usually take a
+[00:09:18] gap and go trade
+[00:09:20] on it's just going to be too thickly
+[00:09:25] traded
+[00:09:28] ZZ
+[00:09:29] yeah so sales results posted
+[00:09:33] yesterday I think this will be a little
+[00:09:35] bit
+[00:09:37] whippy um
+[00:09:40] scyx right down here skipping over
+[00:09:45] Guri scyx not a very good pre-market
+[00:09:48] chart moving up and then coming all the
+[00:09:50] way back down so probably be volatile
+[00:09:53] but not something that I'm super
+[00:09:56] interested in now that's a good point on
+[00:09:59] ZZ that
+[00:10:00] 37% short
+[00:10:03] interest you know that that's a that's a
+[00:10:05] good point that's a fair point but my my
+[00:10:09] concern would just be that this has the
+[00:10:12] potential to give us false breaks these
+[00:10:14] are much more common with this price
+[00:10:16] range so I'll I'll put the chart up here
+[00:10:20] um and I'll keep it on
+[00:10:23] watch for maybe you know maybe a scalp
+[00:10:26] on the first
+[00:10:28] pullback
+[00:10:38] let's see where's my
+[00:10:41] chart there we
+[00:10:43] go
+[00:10:45] ZZ okay uh
+[00:10:51] wpcs
+[00:10:53] um see if there's a headline on
+[00:10:58] it this one is sort of notorious for
+[00:11:01] popping up and then
+[00:11:07] fading so I'm not
+[00:11:10] sure incre backlog increases to 17.5
+[00:11:15] Million by securing 3 million in new
+[00:11:17] contracts during
+[00:11:20] September I mean that sounds like an
+[00:11:23] interesting
+[00:11:24] headline
+[00:11:28] um but again hard to really know if
+[00:11:32] that's going to give this one um
+[00:11:35] momentum so I'll just say
+[00:11:37] wpcs um
+[00:11:42] 4 where' It
+[00:11:44] Go Oh see now it just popped off the
+[00:11:46] scanner just moved out of the way
+[00:11:48] because
+[00:11:49] it's no longer gapping up
+[00:11:53] enough so all right well whatever uh hm
+[00:11:57] and Y let's take a peek at that one
+[00:11:58] because this one's a former Runner look
+[00:12:00] at this day where it went from $8 all
+[00:12:03] the way up to 16 that was a big
+[00:12:07] move all right so
+[00:12:16] hmny actually I don't see any headline
+[00:12:18] on it today there's not a it's a very
+[00:12:20] small Gap
+[00:12:22] so not surprising that there might not
+[00:12:25] be a headline rgsc this one has been in
+[00:12:27] play last few days ging up a little bit
+[00:12:30] but I'm not a big fan of this daily
+[00:12:31] chart the way it squeezed up and then
+[00:12:33] came all the way back down I just think
+[00:12:35] that's too risky so as we get closer to
+[00:12:39] the open here the names I'm going to be
+[00:12:41] watching uh I I'll keep an eye on JAG
+[00:12:45] X it's not the cleanest pre-market chart
+[00:12:48] because of the way it popped up and came
+[00:12:50] back down I'll watch AUP which is a
+[00:12:53] cleaner chart but it's already a little
+[00:12:56] extended I'll watch zumz
+[00:12:59] um and then I think what I'll do is I'll
+[00:13:02] keep my last chart
+[00:13:05] open uh I'll just flip through a couple
+[00:13:07] of these real quick nothing
+[00:13:12] there dram nothing
+[00:13:15] there so what I'll probably do is I'll
+[00:13:18] keep my last chart open to pull up
+[00:13:19] stocks that hit the highay Momo scanner
+[00:13:22] and you never know typically um some of
+[00:13:25] the stocks that have been on our
+[00:13:26] pre-market watch list if they start to
+[00:13:29] to squeeze up are going to hit the
+[00:13:30] scanner early on but there may be stocks
+[00:13:33] that are under the radar that we're not
+[00:13:35] watching that start hitting the scanner
+[00:13:37] as soon as the bell rings so we'll keep
+[00:13:39] an eye out for those see if we get a
+[00:13:41] good setup maybe a little bit of a slow
+[00:13:44] day there's nothing that looks like a
+[00:13:45] super obvious play and that is sometimes
+[00:13:47] the case and we just kind of have to
+[00:13:50] sort of play defense today wait to see
+[00:13:53] the momentum and then if it's present
+[00:13:55] you know jump in and and try to
+[00:13:57] capitalize on those opportunities and if
+[00:13:58] it's it's not then we just kind of sit
+[00:14:00] on the sidelines and uh trade lighter
+[00:14:03] and trade less until things start to
+[00:14:06] improve whether it's you know later this
+[00:14:07] afternoon or or
+[00:14:09] tomorrow
+[00:14:11] whichever okay so that's my uh that's my
+[00:14:15] watch list here and that's kind of what
+[00:14:16] I do pretty much every morning putting
+[00:14:18] together the watch list

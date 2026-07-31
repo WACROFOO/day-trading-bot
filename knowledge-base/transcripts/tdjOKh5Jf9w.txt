@@ -1,0 +1,609 @@
+# How to GET PAID to Trade with a Market Liquidity Strategy
+# https://www.youtube.com/watch?v=tdjOKh5Jf9w
+# duration_sec: 1474
+
+[00:00:00] in today's episode I'm going to teach
+[00:00:01] you everything you need to know about
+[00:00:03] liquidity in the market what liquidity
+[00:00:05] is why it's important what it means to
+[00:00:07] get paid the trade by adding liquidity
+[00:00:10] and receiving a rebate from exchanges
+[00:00:13] and what it means to take liquidity from
+[00:00:15] the market and pay a fee now let's start
+[00:00:17] high level with defining what liquidity
+[00:00:20] is liquidity refers to the presence of
+[00:00:23] other Traders in the market which means
+[00:00:25] the second that you want to buy shares
+[00:00:29] there's another Trader out there willing
+[00:00:30] to sell to you that person selling to
+[00:00:33] you is actually adding liquidity to the
+[00:00:35] market the presence of their sell order
+[00:00:38] is creating a fuller market now on the
+[00:00:40] flip side when you want to sell shares
+[00:00:43] the presence of another Trader willing
+[00:00:45] to buy that Trader is creating liquidity
+[00:00:48] so the presence of other Traders is what
+[00:00:51] creates a liquid Market in contrast an
+[00:00:54] illiquid market and this is very common
+[00:00:56] with penny stocks would be a security
+[00:00:58] where there's really nobody buying and
+[00:01:00] selling it there's nobody trading it so
+[00:01:03] if you own a position and you decide you
+[00:01:05] want to sell it could actually be
+[00:01:08] difficult to un unwind and unload that
+[00:01:11] position if there are no buyers or
+[00:01:14] conversely if you want to buy but
+[00:01:16] there's no sellers it would be hard to
+[00:01:18] get in and pay a reasonable price so the
+[00:01:22] more illiquid the market is the bigger
+[00:01:24] the spreads are between the bid the best
+[00:01:27] buyer on the bid and the lowest price
+[00:01:29] seller on the offer so you're going to
+[00:01:31] have larger spreads in illiquid market
+[00:01:33] and you'll get more slippage on your
+[00:01:35] order when you try to buy because
+[00:01:37] they're just not a lot of people selling
+[00:01:38] and you'll get a more slipage on your
+[00:01:40] sell order when you try to sell because
+[00:01:41] there's not a lot of people buying so
+[00:01:42] illiquid markets can be very difficult
+[00:01:44] to trade active Traders want more
+[00:01:46] liquidity we want to be able to get in
+[00:01:49] and get out quickly now one of the
+[00:01:51] things that highfrequency trading
+[00:01:53] algorithms and the institutions that run
+[00:01:55] them um tout is that they provide
+[00:01:58] liquidity to the market now the
+[00:02:00] institutions I want to talk about um
+[00:02:02] first are the ones that are serving in
+[00:02:04] the role of being a market maker so a
+[00:02:07] market maker um I'm just going to do mm
+[00:02:10] is essentially a middleman and they
+[00:02:14] profit from something called Arbitrage
+[00:02:17] which means when let's say for instance
+[00:02:20] you're holding right now A th000 shares
+[00:02:22] of Ford so let's just um so this is
+[00:02:24] going to be the level two uh this is the
+[00:02:27] level two and you've got $10 let's just
+[00:02:29] say on the bid and
+[00:02:31] $10.25 on the offer all right so this is
+[00:02:34] just say Ford whatever and a market
+[00:02:37] maker is able to do something kind of
+[00:02:39] unique they can post an order to buy and
+[00:02:42] also post an order to sell at the same
+[00:02:45] time so they're both a buyer and a
+[00:02:47] seller at the same time it's it's and
+[00:02:50] Retail Traders can't do this but market
+[00:02:51] makers are licensed to be able to do
+[00:02:54] this and so let's say you're already
+[00:02:55] holding a th000 shares of Ford but and
+[00:02:57] you want to get out right now so if you
+[00:02:59] want to get out right now you would just
+[00:03:01] sell right here at $10 right now if you
+[00:03:05] didn't mind sitting and waiting you
+[00:03:07] could post your order at
+[00:03:09] $10.25 and you would sit and you would
+[00:03:11] wait and wait and and hopefully your
+[00:03:13] order would get filled but if it didn't
+[00:03:15] You' have to cancel it so instead what
+[00:03:16] you do is you go ahead and sell uh right
+[00:03:18] at $10 let me show you on um let's just
+[00:03:21] pull up just for the sake of it let's
+[00:03:23] just go ahead and pull up Ford all right
+[00:03:25] so currently trading at $940 so I'm
+[00:03:27] going to buy um 250 shares of Ford right
+[00:03:30] here so I'm in 250 shares at well it
+[00:03:34] gave gave me the fill at 940 that's
+[00:03:36] actually not great for this
+[00:03:36] demonstration but it's fine so if I'm in
+[00:03:39] at 940 and I want to get out I can do
+[00:03:41] one of two things I can either put my
+[00:03:43] order at 941 and it sits there and I
+[00:03:46] have to wait and wait and wait and wait
+[00:03:49] and eventually if the price goes up my
+[00:03:51] order will get filled but I'm going to
+[00:03:53] have to wait alternatively if I just
+[00:03:54] want to get out I could just click 940
+[00:03:57] click sell and the shares are gone just
+[00:04:00] like that so who did I sell to just now
+[00:04:03] I sold to a market maker okay so in this
+[00:04:06] example that we were doing let's just
+[00:04:08] say you sold a th000 shares to this
+[00:04:09] Market maker at
+[00:04:11] $10 okay so let's just imagine this
+[00:04:13] Market maker they're over here so what
+[00:04:15] do they have on their book they're now
+[00:04:17] plus 1,000 shares of Ford at $10 right
+[00:04:22] you came along you sold them a th000
+[00:04:23] shares so now they're holding those
+[00:04:25] shares that they just bought from you
+[00:04:28] now let's say 3 minutes later later 3
+[00:04:30] minutes later someone comes along and
+[00:04:32] says I want to buy Ford and I'd like to
+[00:04:35] buy a th000 shares of it well that
+[00:04:37] market makers right here so they sell
+[00:04:39] them the th000 shares at
+[00:04:41] $10.25 so now they're back out with
+[00:04:43] 1,000 shares of Ford at 1025 and they've
+[00:04:47] pocketed a profit of
+[00:04:48] $250 the Arbitrage there was that they
+[00:04:51] just had to hold the stock for basically
+[00:04:54] 3 four minutes or whatever the case was
+[00:04:56] until someone else came along and wanted
+[00:04:58] to buy it they know that eventually
+[00:05:00] someone's going to come along and buy it
+[00:05:02] so they take the risk of holding the
+[00:05:04] stock and waiting and they profit from
+[00:05:07] the spread now they also are the ones
+[00:05:09] who create the spread oh well that makes
+[00:05:12] sense so in the old days back in let's
+[00:05:15] just you know let's let's go way back
+[00:05:17] let's go back to you know
+[00:05:19] 1925 so in 1925 a market maker worked on
+[00:05:24] the floor of the exchange so this is
+[00:05:25] going to be um we'll just do the na
+[00:05:28] NASDAQ so we'll just do NASDAQ NS um
+[00:05:33] well we'll just spell it all out I was
+[00:05:34] going to do the abbreviation but it's
+[00:05:35] fine so the market maker is sitting here
+[00:05:37] on the floor of the exchange and they're
+[00:05:39] at a desk and let's just say your great
+[00:05:41] great grandparents say oh we want to buy
+[00:05:44] shares of General Electric and so what
+[00:05:47] do they do they call a
+[00:05:49] broker and the broker calls their Trader
+[00:05:52] that works for them and the trader is
+[00:05:54] also on the floor of the exchange and
+[00:05:56] the trader walks over to the market
+[00:05:58] maker buys shares right so the market
+[00:06:01] Maker's got a bid and they've got an
+[00:06:03] offer so this Trader buys at the offer
+[00:06:05] price and then brings the shares back
+[00:06:07] and they go back to the client and this
+[00:06:10] Market maker is sitting here all day
+[00:06:11] long buying and selling buying and
+[00:06:13] selling buying and selling however this
+[00:06:16] person this stock broker is making the
+[00:06:19] market for General Electric but they are
+[00:06:22] not the only stock broker or Market
+[00:06:25] maker that's making the offer for
+[00:06:26] General making the market for General
+[00:06:28] Electric there there may half a dozen or
+[00:06:30] more that are all sitting there doing
+[00:06:32] the same thing and so this is where some
+[00:06:34] of the shouting gets involved because
+[00:06:35] they're kind of competing against each
+[00:06:36] other but they're competing but they
+[00:06:39] also they're undercutting each other to
+[00:06:42] keep the spreads tight and in fact the
+[00:06:44] more market makers there are the more
+[00:06:47] liquidity there is in the market which
+[00:06:50] means it's easier for whether it's a
+[00:06:52] active Trader like you and I today or an
+[00:06:55] investor just buying and selling a
+[00:06:56] position they're going to hold for
+[00:06:57] months or years it's easier to get in
+[00:07:00] and out of the market so the argument
+[00:07:02] today is that now with electronic
+[00:07:04] markets instead of the market maker
+[00:07:06] sitting on the floor of the exchange
+[00:07:09] what the market maker is doing today so
+[00:07:11] let's fast forward to today what they're
+[00:07:13] essentially doing is they're
+[00:07:15] maintaining an algorithm so it's an algo
+[00:07:18] that is maintaining the bid and the
+[00:07:21] offer and they're doing it in real time
+[00:07:24] adjusting it to the flow of orders that
+[00:07:26] are coming into the market and so
+[00:07:28] they've got this uh essentially very
+[00:07:31] sophisticated trading software that is
+[00:07:33] just maintaining the price of the stock
+[00:07:35] and you still have dozens of market
+[00:07:37] makers and they're all competing against
+[00:07:38] each other how did we get to this point
+[00:07:40] here well we went from 1925 all the way
+[00:07:43] to current day let's take um and of
+[00:07:46] course current day here is you don't
+[00:07:48] have to call anyone on the phone you're
+[00:07:50] still using your broker I guess uh of
+[00:07:51] course but you're using your your either
+[00:07:53] your your app on your phone or your on
+[00:07:55] your uh your computer but let's go back
+[00:07:58] here to
+[00:08:00] 1990 so this is the Advent of um the
+[00:08:04] small order execution system that was um
+[00:08:06] released by NASDAQ and it was released
+[00:08:09] following the um flash crash in
+[00:08:13] 1980 what was it 1987 1988 um so in 19
+[00:08:18] by 1990 the small order execution system
+[00:08:22] was live and the small order execution
+[00:08:25] system meant that a regular Trader did
+[00:08:28] not have to call their broker any longer
+[00:08:32] that they well actually they still had
+[00:08:33] to call their broker the broker did not
+[00:08:35] have to call the trader on the floor
+[00:08:38] this um this was a requirement after the
+[00:08:40] flash crash that all market makers had
+[00:08:43] to maintain a electronic bid so they had
+[00:08:47] to maintain a bid and an offer on the
+[00:08:51] small order execution system so that
+[00:08:53] Traders didn't have to call they could
+[00:08:56] actually just go ahead and execute the
+[00:08:57] order through this um early you know
+[00:09:00] internet platform and what that meant
+[00:09:03] was all of a sudden the market makers
+[00:09:05] had to begin developing these uh
+[00:09:08] algorithms and computer programs to
+[00:09:10] maintain the same bid that they were
+[00:09:13] offering on the trading floor so they
+[00:09:15] constantly were updating this and
+[00:09:16] updating this and trying to make sure it
+[00:09:18] matched and this ended up
+[00:09:22] resulting initially in a group of
+[00:09:25] Traders at um daytec which was a
+[00:09:29] basically became like a one of the
+[00:09:30] earliest day trading firms in New York
+[00:09:33] learning that they could
+[00:09:36] essentially play the market maker at its
+[00:09:39] own game and capture little slivers of
+[00:09:42] profit on every orders that go through
+[00:09:45] specifically when the market makers
+[00:09:47] failed to update their quote to the
+[00:09:50] current market so the rule was that if a
+[00:09:52] market maker had a quote they had to
+[00:09:54] honor it and so if the market maker had
+[00:09:57] a stale quote let's just say for
+[00:10:00] instance a market maker left a quote up
+[00:10:02] here to sell the stock for um for $2 or
+[00:10:07] for
+[00:10:09] $212 then you could buy for 212 and then
+[00:10:12] sell to a different Market maker that
+[00:10:14] doesn't have a stale order at 214 and
+[00:10:16] make a $2 per share profit and so you
+[00:10:18] could just do that you know 30 times in
+[00:10:20] a row until you'd bought all the shares
+[00:10:22] that market maker was selling at 212 and
+[00:10:25] so this this kind of was the beginning
+[00:10:28] of on online trading in this very early
+[00:10:32] sense now what ended up happening here
+[00:10:35] was um initially the NASDAQ nsdq had its
+[00:10:40] own exchange however uh daytec uh which
+[00:10:44] was one of these Brokers they realized
+[00:10:47] that they had so many
+[00:10:49] clients sometimes they had a client that
+[00:10:52] wanted to buy and wanted to sell at the
+[00:10:54] same exact moment and they realized why
+[00:10:57] send that order to NASDAQ we could just
+[00:11:00] fill it ourselves what if we sort of
+[00:11:03] internalize and create our own like mini
+[00:11:06] exchange so we create our own exchange
+[00:11:08] right here it's maybe not exactly an
+[00:11:10] exchange but our own internal execution
+[00:11:13] server and if we can match an order
+[00:11:14] we'll match it instantly uh and maybe an
+[00:11:17] order has to wait you know 15 seconds to
+[00:11:19] see if there's a match and if there's no
+[00:11:21] match they we'll send it out to The
+[00:11:22] Exchange and so what they did to reward
+[00:11:27] clients for placing order ERS on their
+[00:11:30] exchange right here instead of sending
+[00:11:32] them to NASDAQ was they created um
+[00:11:35] what's called The Maker taker fee
+[00:11:38] structure and this now ties into um
+[00:11:42] adding and removing uh liquidity so
+[00:11:46] maker uh taker fee structure so the way
+[00:11:49] this works is you're on this um you're
+[00:11:52] on this exchange so we'll just do
+[00:11:54] exchange and if you place an order to
+[00:11:57] buy at
+[00:11:59] $2 then because you placed an order
+[00:12:03] which now adds more uh depth to the book
+[00:12:06] you will receive a rebate based on the
+[00:12:09] number of shares that you added because
+[00:12:11] you are now adding liquidity when you
+[00:12:13] add liquidity you get a rebate of
+[00:12:15] 0.2 which means on let's just do a th000
+[00:12:19] shares you would make $2 it's not a lot
+[00:12:22] of money but it's two bucks now if you
+[00:12:24] put place in order to sell and you sell
+[00:12:26] in the ask at 220 1,000 shares you would
+[00:12:29] get that same rebate so buying and
+[00:12:31] selling so you get a rebate when you add
+[00:12:34] liquidity to the market and so by
+[00:12:36] creating this incentive what they
+[00:12:37] essentially did was they got all these
+[00:12:39] traders to start posting orders on their
+[00:12:42] exchange to buy and sell so now let's
+[00:12:45] switch back over to Ford and I'll show
+[00:12:47] you what it looks like to add liquidity
+[00:12:50] uh well actually we could do it right
+[00:12:51] here on this it's fine so let's just do
+[00:12:53] I'll do 100 shares here and I'm going to
+[00:12:56] place an order at 17 so might have to
+[00:12:59] come down a second I'm going to place
+[00:13:00] I'm going to move the order up so I'm
+[00:13:01] going to put the order at
+[00:13:03] 21 so of course my luck the Market's
+[00:13:05] moving up so I'm going to cancel those
+[00:13:07] orders I'll put place the order there
+[00:13:09] well 20 okay so you see how I filled
+[00:13:11] right here so that's not a good example
+[00:13:14] let me sell I need to be able to
+[00:13:16] actually add the liquidity so I'm going
+[00:13:17] to place my order at 17 and I'll just
+[00:13:19] let it sit there for a second all right
+[00:13:21] so right there I filled 100 shares and
+[00:13:24] you see how it says added liquidity
+[00:13:26] right here 100 so what that means was
+[00:13:29] that I added liquidity for 100 shares
+[00:13:33] someone wanted to sell to me and I was
+[00:13:36] there to buy and so I actually receive a
+[00:13:40] rebate now I only did 100 shares so
+[00:13:42] instead of $2 I I only make 20 cents but
+[00:13:45] now let me turn around and let me put
+[00:13:47] that sell order at
+[00:13:49] 18 so now I'm going to sell the 100
+[00:13:51] shares at 18 on the ask right here and
+[00:13:53] guess what's happening my order filled
+[00:13:55] and I added liquidity on the ask so now
+[00:13:58] let's do the math I made on that trade
+[00:14:02] 20 cents on the bid I made 20 cents
+[00:14:06] selling on the offer that's 40 plus with
+[00:14:09] 100 shares I made $1 on the spread so
+[00:14:13] now I made
+[00:14:15] $140 on that trade now if I did that
+[00:14:18] same thing with a th000 shares I'd be up
+[00:14:20] 14 bucks right if I did the same thing
+[00:14:22] with $1,000 shares I'd be up $140 if I
+[00:14:25] did that same thing 30 times or 100
+[00:14:28] times a day with 300,000 shares and all
+[00:14:31] of a sudden you're making thousands of
+[00:14:32] dollars a day and that's exactly what
+[00:14:34] market makers are doing now for
+[00:14:36] me this the the reason that this starts
+[00:14:39] to become important is because when you
+[00:14:41] look at different Brokers and you look
+[00:14:43] at the way they charge
+[00:14:44] commissions most Brokers that are
+[00:14:47] commission free don't charge any
+[00:14:49] commission you have no commission it's
+[00:14:51] totally free and what that essentially
+[00:14:52] means is for some of those Brokers when
+[00:14:56] your order goes through it may actually
+[00:14:59] be adding liquidity to the market but
+[00:15:03] you don't get paid for it the broker
+[00:15:05] keeps that profit themselves so they
+[00:15:08] they just don't give it to you now other
+[00:15:10] Brokers will pass those rebates on to
+[00:15:13] you so let's look at um a broker for
+[00:15:16] instance called light speed trading so
+[00:15:18] light speed is my favorite broker on my
+[00:15:20] broker comparison sheet and by the way
+[00:15:22] I'll just say I don't have any affiliate
+[00:15:24] relationship with any of these Brokers
+[00:15:25] so I'm not colored by the fact that I
+[00:15:27] make money by saying I like one more the
+[00:15:29] other I just happen to prefer light
+[00:15:31] speed so light speed uh charges a
+[00:15:35] commission they charge a commission of
+[00:15:36] $2 for every trade you take that's just
+[00:15:39] the fee that the broker charges so now
+[00:15:41] we come back over here to this page so
+[00:15:44] every time you place an order it's $2
+[00:15:47] with uh with light speed so we're going
+[00:15:49] to go back to current day so $2
+[00:15:54] however at this point when you send your
+[00:15:57] order to the market you either
+[00:16:00] uh you either pay a fee for routing or
+[00:16:03] you get a rebate and this is based on
+[00:16:06] whether you add liquidity so when you
+[00:16:09] add liquidity you get a rebate or when
+[00:16:11] you take liquidity you pay a fee so I
+[00:16:16] pay $2 no matter what that's just the
+[00:16:18] fee to the broker and then the broker
+[00:16:20] says that your uh your routing fee is
+[00:16:25] going to be based on whether you're
+[00:16:26] adding liquidity or taking liquidity
+[00:16:28] liquidity right here so if we scroll
+[00:16:31] down to NASDAQ um so NASDAQ right now is
+[00:16:35] Char is uh giving a rebate of
+[00:16:38] 0.0015 it's a little lower than it used
+[00:16:40] to be used to be 02 and they give you
+[00:16:43] they charge you 0.3 when you take
+[00:16:45] liquidity so on a th000 shares you pay
+[00:16:47] $3 for taking and you make a $150 for
+[00:16:51] adding and then the $150 difference is
+[00:16:54] the profit that NASDAQ keeps because
+[00:16:56] remember every transaction has someone
+[00:16:59] who is the maker and someone who is the
+[00:17:01] taker The Taker pays a little bit more
+[00:17:04] the maker gets a little bit of rebate
+[00:17:05] and NASDAQ gets the difference so every
+[00:17:08] transaction has a fee attached to it
+[00:17:10] depending on whether you're adding
+[00:17:12] liquidity to the market or you're taking
+[00:17:15] liquidity so when we look at the broker
+[00:17:17] comparison sheet for the most part these
+[00:17:20] routing fees are the same because the
+[00:17:22] fees charged by NASDAQ don't change
+[00:17:25] depending on which broker you use
+[00:17:27] doesn't matter if you're using
+[00:17:27] interactive brokers you're using light
+[00:17:29] speed you're using Center Point or
+[00:17:31] Guardian any of these Brokers that allow
+[00:17:33] you to send your orders directly to the
+[00:17:35] market you're going to pay the same fees
+[00:17:38] so really the commission that you pay
+[00:17:40] that is variable is what your actual
+[00:17:43] broker is charging and is the profit
+[00:17:45] that they make per trade so light speed
+[00:17:48] charges $2 a trade for instance Guardian
+[00:17:51] charges um based on the number of shares
+[00:17:54] you trade so it's a120 for a th000
+[00:17:57] shares but that also means 10,000 shares
+[00:17:59] would be 12 bucks whereas it's only $2
+[00:18:01] at light speed so these four are all
+[00:18:03] charging you per share actually these um
+[00:18:06] five and six and seven are all charging
+[00:18:08] on a per share basis now not to get too
+[00:18:12] deep into the broker comparison of why
+[00:18:14] someone would pay for routing when you
+[00:18:16] could just do a commission free broker
+[00:18:18] but what you're going to notice is that
+[00:18:19] these Brokers here all have very fast
+[00:18:23] execution speed and the Brokers that do
+[00:18:26] commission free trading have
+[00:18:29] slower execution speed and that is
+[00:18:32] because the Brokers that send your order
+[00:18:36] directly to the market are faster and
+[00:18:38] the Brokers that do commission free
+[00:18:40] trading are engaging in the business of
+[00:18:43] payment for order flow so their
+[00:18:45] structure is actually different so this
+[00:18:47] is this is a sort of the way it's been
+[00:18:50] for a long time and then we had the
+[00:18:53] payment for orderflow business
+[00:18:56] Arrangement which means you're here your
+[00:18:58] brok broker is here the exchange is here
+[00:19:03] and then the market maker is here and
+[00:19:04] the market maker said hey you know we
+[00:19:06] could sit on the exchange but what if we
+[00:19:09] cut out the exchange completely instead
+[00:19:11] of going like this and then you know
+[00:19:13] like this what about this little idea
+[00:19:16] how about you send your order straight
+[00:19:18] to us we just cut the exchange out
+[00:19:20] completely and we will fill your order
+[00:19:22] and give it back to you and so what they
+[00:19:24] essentially did was they created an
+[00:19:26] alternative trading system in ATS which
+[00:19:29] is an alternative to an exchange and so
+[00:19:32] what the market maker actually does is
+[00:19:34] they make so much money bypassing the
+[00:19:37] exchange that they split some of that
+[00:19:39] profit back with the broker all the way
+[00:19:41] to the point where the broker says hey
+[00:19:42] guess what we have free commissions
+[00:19:45] because we're getting paid so much from
+[00:19:47] this Market maker we don't need to
+[00:19:48] charge commissions and here's the good
+[00:19:50] news free commissions means more trading
+[00:19:52] more trading means more profit more
+[00:19:54] profit means more profit so now you kind
+[00:19:57] of get a sense of how that works now
+[00:19:59] when you're a commission-free broker
+[00:20:01] like thinker swim Robin Hood Weeble you
+[00:20:04] don't really have to worry about whether
+[00:20:06] you're adding or taking liquidity from
+[00:20:09] the market because the market maker they
+[00:20:11] take care of all that and they still
+[00:20:13] make a profit on it you only really have
+[00:20:15] to worry about adding and removing
+[00:20:17] liquidity when you're using what's
+[00:20:19] called a direct access broker but the
+[00:20:21] concept of liquidity is still important
+[00:20:23] and the concept uh is is valid whether
+[00:20:27] no matter what broker you're using
+[00:20:29] because liquidity is the presence of
+[00:20:31] other traders in the market and the
+[00:20:33] ability to buy and sell and liquidity
+[00:20:34] can be created by market makers but
+[00:20:37] liquidity can also be created just
+[00:20:39] simply by the presence of other Traders
+[00:20:42] other retail Traders because our orders
+[00:20:44] can also match if I happen to direct
+[00:20:46] route and throw my order on the ask as
+[00:20:48] you saw right here then all of a sudden
+[00:20:51] I am adding depth to the market I am a
+[00:20:54] Trader that's adding liquidity so the
+[00:20:57] only thing that I can't do is I can't
+[00:20:59] sit both on the bid and the offer so if
+[00:21:01] I place my order here to buy and I place
+[00:21:03] an order here or try to place an order
+[00:21:05] to sell it's going to reject it says
+[00:21:07] well because you can't cross your orders
+[00:21:09] so it's not going to let you do that you
+[00:21:11] can't hold you you just can't do it as
+[00:21:14] as a retail Trader so uh now so now
+[00:21:17] let's take a step back out of this here
+[00:21:19] for one second if we look at our
+[00:21:20] scanners right now and we just sort them
+[00:21:22] by volume right now the stock with the
+[00:21:24] most volume in the market today has 292
+[00:21:28] million shares of volume that is a huge
+[00:21:32] amount of volume and naturally because
+[00:21:34] the Stock's up 300% a lot of that volume
+[00:21:37] is probably being generated by retail
+[00:21:40] Traders but there to a certain extent
+[00:21:42] are market makers involved market makers
+[00:21:44] that are involved on the commission free
+[00:21:47] side here they're executing all these
+[00:21:48] orders buying and selling buying and
+[00:21:50] selling all day long and making
+[00:21:51] fractions of a penny just basically
+[00:21:53] sitting in the middle waiting for
+[00:21:55] someone to come and buy and just knowing
+[00:21:57] there's always going to be another
+[00:21:58] Trader right around the corner and then
+[00:21:59] of course there's retail traders that
+[00:22:01] are buying and selling buying and
+[00:22:02] selling so uh envo is a stock that has a
+[00:22:07] tremendous amount of liquidity it's very
+[00:22:10] easy to buy it's very easy to sell
+[00:22:13] you've got just and if we look at this
+[00:22:15] on the level two here you'll notice that
+[00:22:17] we have tight spreads Eno so it's a
+[00:22:21] stock that you could buy and sell 10,000
+[00:22:24] shares of you know and get filled an
+[00:22:25] instant so just as an example I'll do a
+[00:22:27] 5,000 share order so if I put my order
+[00:22:30] on the bid here I'm going to sit on the
+[00:22:32] bid and see I get filled now I'm going
+[00:22:34] to put my order on the ask right there
+[00:22:35] at 57 so I put my order on the bid I
+[00:22:39] bought at 57 now there's a 20,000 share
+[00:22:42] buyer right here at 56 so there's a
+[00:22:45] little bit of bid support So now with my
+[00:22:47] order sitting at 57 just like this I'm
+[00:22:50] getting filled now I didn't fill my
+[00:22:52] whole order I filled 2,300 shares or or
+[00:22:54] 1,700
+[00:22:56] shares so if I fill the rest to this at
+[00:22:59] 57 how much would I make I would make a
+[00:23:02] profit for adding liquidity now of
+[00:23:04] course it's going a little bit lower so
+[00:23:05] I'm going to end up taking a little bit
+[00:23:06] of loss and this also speaks to the fact
+[00:23:08] that trying to be a market maker is is
+[00:23:10] not really a profitable business for a
+[00:23:13] typical Trader like you or me because we
+[00:23:17] we don't have the sophisticated
+[00:23:19] algorithms or the ability to see the
+[00:23:20] market data to be able to move in and
+[00:23:22] out of the market that quickly so right
+[00:23:24] there now son of a gun it goes now as it
+[00:23:27] turns out I don't know you know what who
+[00:23:30] knows right anyways doesn't matter so um
+[00:23:34] so on that trade I bought at 57 and I
+[00:23:38] sold at 57 so a completely Break Even
+[00:23:41] trade but I added liquidity okay so now
+[00:23:45] let's do the math so 5,000
+[00:23:48] shares so 5,000 shares and let's just
+[00:23:52] let's just say it was um
+[00:23:54] 0.2 I'm not 100% sure it was so then um
+[00:23:58] so 5,000 shares so then I'm G to get a
+[00:24:00] rebate I'm GNA switch to different pen
+[00:24:03] of $10 so I made $10 when I bought and
+[00:24:06] then I made $10 when I sold and I got
+[00:24:09] paid that from The Exchange so that's
+[00:24:11] was a $20 winner even though it was a
+[00:24:13] break even trade it's a $20 winner and
+[00:24:15] that's that is essentially what it would
+[00:24:17] be like to be a market maker just all
+[00:24:19] day long just $20 $20 $20 $20 so if you
+[00:24:22] have enjoyed this episode on Market
+[00:24:24] liquidity how adding and removing
+[00:24:26] liquidity works I hope you hit that
+[00:24:28] thumbs up I hope you subscribe the
+[00:24:29] channel I'll see you for the next upload
+[00:24:31] real soon

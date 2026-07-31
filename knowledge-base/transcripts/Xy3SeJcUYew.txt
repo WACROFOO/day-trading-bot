@@ -1,0 +1,755 @@
+# HUGE Announcement on the PDT Rule...
+# https://www.youtube.com/watch?v=Xy3SeJcUYew
+# duration_sec: 1665
+
+[00:00:00] In today's episode, you're going to see
+[00:00:01] me featured as a guest on a podcast. The
+[00:00:04] topic is the pattern day trader rule
+[00:00:06] because guess what? Breaking news. Just
+[00:00:08] this week, FINRA announced that they
+[00:00:11] have approved a change to the pattern
+[00:00:13] day trader rule. For the first time in
+[00:00:15] nearly 25 years, this rule, which was
+[00:00:17] put into place after the.com bubble,
+[00:00:20] stated that all US residents who are day
+[00:00:23] trading, which means they're taking more
+[00:00:25] than three trades in a 5-day period,
+[00:00:27] have to maintain a minimum account
+[00:00:28] balance of $25,000 if they're going to
+[00:00:31] be trading using margin. Now,
+[00:00:33] historically, there has been no
+[00:00:35] difference between a margin account that
+[00:00:37] just gives you the ability to trade as
+[00:00:39] much as you want and an account with
+[00:00:42] four times leverage. So when you get
+[00:00:44] margin, you get leverage. And what
+[00:00:45] that's meant for beginner traders is
+[00:00:47] that if they can come up with a $25,000
+[00:00:50] in order to be a day trader, all of a
+[00:00:52] sudden they have four times leverage in
+[00:00:54] their account. And now as a beginner,
+[00:00:55] they could take $75,000 on a position.
+[00:00:58] They could take $100,000 on a position
+[00:01:00] if they wanted to. And all of a sudden,
+[00:01:03] a rule that was designed to help protect
+[00:01:05] retail traders is actually forcing them
+[00:01:07] to put themselves in a position where
+[00:01:08] they're taking a lot more risk than they
+[00:01:10] really should. So, I've been a longtime
+[00:01:12] advocate that this PDT rule should be
+[00:01:14] amended or completely abolished. And the
+[00:01:17] way that I've been helping advocate for
+[00:01:19] this change is by making large
+[00:01:21] contributions to organizations like the
+[00:01:23] organization that interviewed me in this
+[00:01:25] podcast so they can go out there and
+[00:01:27] essentially work, you know, on my behalf
+[00:01:30] and on behalf of all retail investors to
+[00:01:32] try to petition to have this rule
+[00:01:34] changed. Now, a lot of people have been
+[00:01:36] in favor of the rule being changed,
+[00:01:38] certainly brokers, because reducing the
+[00:01:40] account minimum will mean more trading
+[00:01:42] and more accounts for these brokers. But
+[00:01:44] there's also been people that have been
+[00:01:45] very much opposed to the pattern day
+[00:01:48] trader rule being removed, which I find
+[00:01:50] fascinating. We're going to get into
+[00:01:52] that and a whole lot more in this
+[00:01:53] episode. Now, I want to say that the two
+[00:01:55] people that are interviewing me for
+[00:01:56] today's podcast are both really
+[00:01:58] fascinating. Tom and Nick are both
+[00:02:00] attorneys. Both of them used to work at
+[00:02:02] the SEC as attorneys. And after their
+[00:02:04] work for the government, they went into
+[00:02:06] the private sector. In the private
+[00:02:07] sector, they were often defending
+[00:02:09] corporations and individuals against
+[00:02:12] government action and these regulators
+[00:02:14] who were overreaching. So they have now
+[00:02:17] founded a nonprofit organization that is
+[00:02:20] all about reform, reigning in government
+[00:02:23] regulators, and giving back the power of
+[00:02:25] choice to regular retail investors and
+[00:02:28] traders like you and I. Now, many of you
+[00:02:30] know right now I'm in the middle of a
+[00:02:32] small account challenge. I funded my
+[00:02:34] account with $2,000 to demonstrate what
+[00:02:37] it would be like if this pattern day
+[00:02:39] trader rule is in fact changed. Now, the
+[00:02:41] only way that I'm able to day trade
+[00:02:43] right now in spite of this rule is by
+[00:02:45] using an offshore broker. So, all of the
+[00:02:48] US brokers are at a competitive
+[00:02:50] disadvantage because of this rule. Now,
+[00:02:52] if you want to catch up with my progress
+[00:02:54] on the small account challenge, I'll put
+[00:02:55] a link at the end of this episode. And
+[00:02:56] without any further delay, let's go
+[00:02:58] ahead and jump into the interview.
+[00:03:00] >> Hello everyone. Welcome back to SEC
+[00:03:02] Roundup. I'm Tom Zakara, one of the
+[00:03:04] founders of ICAN. And with me as always
+[00:03:07] is Nick Morgan, founder and president of
+[00:03:11] Ian. Hi Nick.
+[00:03:12] >> Hey Tom, great to see you.
+[00:03:13] >> We are delighted to have Ross Cameron
+[00:03:16] joining us today. Ross uh is the founder
+[00:03:19] of Warrior Trading. He's a full-time and
+[00:03:23] very successful day trader. Uh he has a
+[00:03:26] YouTube channel with nearly two million
+[00:03:30] subscribers. So if you're listening to
+[00:03:32] this podcast, please go subscribe and
+[00:03:34] let's get Ross over two million. Uh
+[00:03:37] >> Ross, welcome. Welcome to the show.
+[00:03:39] >> Thank you. Thank you for having me.
+[00:03:40] >> Uh we're going to talk about day
+[00:03:42] trading, of course, since we have Ross
+[00:03:43] on the panel and in particular FINRA
+[00:03:46] rules concerning day trading. And the
+[00:03:48] rule we're going to talk about today,
+[00:03:49] which has been in the news recently, is
+[00:03:52] FINRA's pattern day trading rule.
+[00:03:56] >> So with that, Nick, do you want to talk
+[00:03:58] about the rule a little bit?
+[00:04:00] >> I do. And uh the pattern day trading
+[00:04:03] rule has been around for a while. It's
+[00:04:05] one of those things that if it doesn't
+[00:04:06] impact you, you might not even be aware
+[00:04:09] of it. So this this rule is, of course,
+[00:04:11] FINRA governs and regulates brokers in
+[00:04:14] the United States. and FINRA's pattern
+[00:04:18] day trading rules affect uh the extent
+[00:04:21] to which brokers can take on day traders
+[00:04:24] as clients as customers. So it came out
+[00:04:27] of the uh dot bust and the idea like a
+[00:04:32] lot of um rules that we talk about at
+[00:04:34] ICAN was a sort of paternalistic effort
+[00:04:37] to protect people from themselves. So,
+[00:04:40] the idea is that FINRA requires brokers
+[00:04:43] under certain circumstances to have
+[00:04:46] their customers maintain a $25,000
+[00:04:49] minimum amount. And Ross is an expert on
+[00:04:51] this. So, Ross, when you when it's your
+[00:04:52] turn, you can correct me if I've gotten
+[00:04:54] some of the details wrong because it it
+[00:04:56] it only applies to certain kinds of
+[00:04:57] accounts, accounts that exhibit pattern
+[00:05:00] day trading. Um, and so the reason we're
+[00:05:02] talking about it now, this rule's been
+[00:05:04] around for a long time. Um, well, the
+[00:05:06] reason we're talking about it now is
+[00:05:07] there is a movement a foot uh even at
+[00:05:10] FINRA to lower that $25,000
+[00:05:14] minimum balance uh requirement to
+[00:05:18] $2,000, which obviously would be a
+[00:05:20] fundamental change. Um, and as luck
+[00:05:22] would have it, it appears that, uh,
+[00:05:25] today, the day we're doing this
+[00:05:26] recording, um, FINRA has indicated and
+[00:05:29] put out a press release that they are
+[00:05:30] moving forward with this change and will
+[00:05:33] be, uh, doing what they need to do to
+[00:05:35] change it, which is to go ask the SEC
+[00:05:38] for approval. So, uh, it's a very
+[00:05:40] opportune time for us to be talking to
+[00:05:42] Ross. Uh, he has been a, uh, a strong
+[00:05:45] advocate for reforming this rule. So, be
+[00:05:48] great to get his viewpoint on this.
+[00:05:50] >> Yeah. And I'm I'm happy to share it. My
+[00:05:53] experience is that I funded my first
+[00:05:55] account in 2001.
+[00:05:58] They enacted the pattern day trader rule
+[00:06:00] on February 27th, 2001. So I've been
+[00:06:04] subject to the pattern day trader rule
+[00:06:06] for my entire career, which is
+[00:06:10] >> Yeah, it almost is. Um, now I think both
+[00:06:12] of you were very modest in your
+[00:06:13] introductions because you're both
+[00:06:15] terrific attorneys. Now, Nick, I know
+[00:06:17] you worked as an attorney at the SEC.
+[00:06:19] Tom, did you as well at one point?
+[00:06:21] >> I did. I worked with Nick.
+[00:06:23] >> Yeah. And and you're both very very
+[00:06:25] good. Both of you have been in private
+[00:06:26] practice for a long time before founding
+[00:06:28] I can. So, um I my feeling on the
+[00:06:32] pattern day trader rule and we could
+[00:06:34] talk about sort of all the different
+[00:06:35] aspects of it. Um is that I'm I've been
+[00:06:38] an advocate of having this rule removed
+[00:06:43] in in one way or another for a long
+[00:06:45] time. Here's the major problem that I
+[00:06:47] have with it. When I was first trading,
+[00:06:50] immediately my account got flagged as
+[00:06:52] being owned or operated by a pattern day
+[00:06:55] trader, which meant I was taking three
+[00:06:58] or more trades, day trades in a 5day
+[00:07:00] period. Now, most day traders take three
+[00:07:03] to five trades in a single day, maybe
+[00:07:04] even in an hour.
+[00:07:06] >> So, do that in five days is setting the
+[00:07:07] bar very low to even be considered a day
+[00:07:10] trader, but nonetheless, that's where it
+[00:07:12] was set. And so they said, "You can't
+[00:07:15] take any more trades until you add your
+[00:07:18] account up to $25,000."
+[00:07:21] So now all of a sudden, I can't trade
+[00:07:23] anymore. And of course, I want to trade
+[00:07:25] and I'm happy with the broker that I'm
+[00:07:27] using, but I can't use that account
+[00:07:29] until I add more money. So I was in a
+[00:07:32] position, you know, I was fortunate in
+[00:07:34] in some ways that I had received some
+[00:07:37] money when my father passed away when I
+[00:07:38] was younger. Uh the money was the good
+[00:07:41] part. Losing my father was the terrible
+[00:07:42] part. But with that money, I said, I'll
+[00:07:45] take out 25,000 and I'll put it in this
+[00:07:48] account and it'll just be enough to get
+[00:07:50] me over that level. Right? Well, here's
+[00:07:53] the problem. Once you have that $25,000
+[00:07:56] margin account, you've got four times
+[00:07:57] leverage. So now you could day trade
+[00:08:00] with up to $100,000.
+[00:08:03] So, a rule that on the surface is
+[00:08:06] designed to help maybe prevent a novice
+[00:08:10] or inexperienced trader or an underc
+[00:08:12] capitalized trader who really can't
+[00:08:14] afford to make mistakes uh actually puts
+[00:08:17] that trader who is exactly me in a
+[00:08:19] position where the stakes are now really
+[00:08:21] really high.
+[00:08:22] >> That's interesting.
+[00:08:22] >> Now, all of a sudden, if I make a
+[00:08:24] mistake
+[00:08:25] >> and it's very easy, you know, all the
+[00:08:26] most of these stocks you can use that
+[00:08:28] borrowed margin, that leverage on. So
+[00:08:30] you buy 10,000 shares of a $7 stock,
+[00:08:32] you're in $70,000, you know, into that
+[00:08:35] position.
+[00:08:36] >> Yeah.
+[00:08:36] >> It drops 20% and your account's 50%
+[00:08:39] gone. I mean, it's it just it can it can
+[00:08:42] add up so quickly.
+[00:08:44] >> Can I interrupt you for one second? So,
+[00:08:45] so just to hit the point home, and I
+[00:08:48] think you said it very well, but your
+[00:08:50] point is by requiring a minimum balance
+[00:08:51] of $25,000,
+[00:08:53] what it actually does in light of
+[00:08:55] margin, which can be four times, is
+[00:08:57] you're now like exposing these people to
+[00:09:00] more risk by by requiring a minimum
+[00:09:03] amount of $25,000. That's ironic. I
+[00:09:05] never thought of it that way. Uh, okay,
+[00:09:07] continue. Sorry to interrupt.
+[00:09:08] >> Yeah. So, you know, and and then there's
+[00:09:11] this other element that, okay, so now
+[00:09:13] I've got a account that I can't trade in
+[00:09:16] unless I either add this money. And I've
+[00:09:18] known traders who were so desperate that
+[00:09:20] they borrowed money from people or they
+[00:09:21] took out a title loan on their car just
+[00:09:24] to get that capital above 25K because
+[00:09:27] they knew they had proven success rate
+[00:09:30] trading in the simulator. So now they
+[00:09:32] want to actually put real money behind
+[00:09:34] that strategy, but they can only do it
+[00:09:36] with 25K. So about maybe 10 years later,
+[00:09:41] we started seeing these offshore brokers
+[00:09:43] pop up located sometimes in the
+[00:09:45] Caribbean, sometimes in Europe,
+[00:09:47] different places that will accept US
+[00:09:50] customers. So you can go fund an account
+[00:09:52] with them and they'll let you day trade
+[00:09:54] with as little as $500. Now my
+[00:09:57] understanding with this PDT rule is that
+[00:10:00] all US brokers have to enforce it. But
+[00:10:04] even US brokers that have international
+[00:10:06] branches, Weeble has branch in Mexico,
+[00:10:09] in Canada, and same with Interactive
+[00:10:12] Brokers, they have branches all around
+[00:10:13] the world. Well, if you open, if you're
+[00:10:16] an international customer and you open
+[00:10:17] an account at an international branch,
+[00:10:19] you're not subject to the PD rule. Now,
+[00:10:22] most of those brokers, if you're a US
+[00:10:23] resident and you try to open at the
+[00:10:25] Australian branch, they're going to pee
+[00:10:27] like, "Get back to the US, you know, we
+[00:10:30] can't accept you, you know." But there
+[00:10:32] are a small handful of brokers that
+[00:10:34] decided they would create a whole
+[00:10:35] business on taking that risk of saying
+[00:10:37] we will accept you as long as you agree
+[00:10:40] that we didn't solicit you and you have
+[00:10:42] to sort of sign this disclosure. We will
+[00:10:44] accept you. But then as a US customer
+[00:10:48] and US trader, you're now trading with
+[00:10:51] an offshore broker, which is a great
+[00:10:53] tool because you can day trade as much
+[00:10:55] as you want with as little as 500, but
+[00:10:58] they may not have deposit insurance the
+[00:11:00] way US accounts do. Now, some do, some
+[00:11:02] don't, depends on where they're located.
+[00:11:04] Uh, you've got to do wiring fees. Your
+[00:11:06] commissions are going to be higher
+[00:11:08] because they have a sort of a real
+[00:11:10] monopoly on that space. Not many
+[00:11:12] businesses are willing to take that risk
+[00:11:14] and so they compensate themselves by
+[00:11:17] charging a higher commission,
+[00:11:18] >> right?
+[00:11:19] >> And and and now you've got people that
+[00:11:21] are day trading potentially with as
+[00:11:23] little as $500
+[00:11:25] >> using still this leverage of four times
+[00:11:27] or even six times,
+[00:11:29] >> which could put them in a position where
+[00:11:30] they do end up blowing up their account.
+[00:11:33] But you know what I think most traders
+[00:11:34] are actually looking for isn't leverage.
+[00:11:38] They're looking for margin, which means
+[00:11:40] your trade settles overnight. So, right
+[00:11:44] now, we have T1 settlement. So, if you
+[00:11:47] take a trade today, you buy $1,000 of
+[00:11:50] stock, you sell it, and you're in a cash
+[00:11:52] account, that trade will settle
+[00:11:54] overnight. So, tomorrow you could trade
+[00:11:56] with $1,000 again. And you can only
+[00:11:58] trade that money once each day in a cash
+[00:12:00] account. So, in a margin account, that
+[00:12:03] trade still needs to settle overnight,
+[00:12:05] but the bank knows it's going to settle.
+[00:12:07] the broker knows that it's going to
+[00:12:09] settle, so they just extend you
+[00:12:10] basically like a loan, a margin loan
+[00:12:13] just to keep trading until that money
+[00:12:15] actually settles.
+[00:12:16] >> Now, this was a problem with Robin Hood
+[00:12:18] with collateral requirements and things
+[00:12:19] like that because of settlement time.
+[00:12:22] But setting that aside, for a retail
+[00:12:25] trader, a account that has settlement
+[00:12:28] margin with $2,000 would allow you to
+[00:12:30] trade that $2,000 as many times as you
+[00:12:33] want in a day. and then you don't have
+[00:12:36] the risk of four times leverage or or
+[00:12:37] potentially higher. And I think that
+[00:12:40] would be the perfect sort of middle
+[00:12:41] ground where you've got settlement
+[00:12:44] margin.
+[00:12:45] >> And then in order to get leverage, maybe
+[00:12:48] that's where, you know, and the brokers
+[00:12:51] ultimately could make this decision from
+[00:12:53] a risk standpoint. They may say, well,
+[00:12:55] you know, if FINRA and the SEC approve
+[00:12:57] the $2,000 PDT minimum, brokers might
+[00:13:00] say, well, we're not giving you four
+[00:13:01] times leverage unless you've got at
+[00:13:03] least $10,000. Mhm.
+[00:13:04] >> or something and that would that would
+[00:13:06] also be more reasonable. But
+[00:13:09] >> I think it's kind of interesting how
+[00:13:10] margin and leverage have become
+[00:13:12] intertwined
+[00:13:13] >> and and they really don't need to be.
+[00:13:15] But this PDT rule, you know, it just
+[00:13:17] sort of all is wrapped together.
+[00:13:19] >> Yeah. Yeah. You know, obviously Ross, 25
+[00:13:23] years or so have passed since the rule
+[00:13:25] was first adopted. Um have has the
+[00:13:29] perception of day trading changed in
+[00:13:31] those in that time do you think?
+[00:13:35] >> I would say yes. I you know the do
+[00:13:38] bubble I was exposed to it sort of on
+[00:13:41] the edges because the school that I was
+[00:13:44] at I was in school at the time um
+[00:13:46] several of the uh of the teachers were
+[00:13:48] very interested in the market. So they
+[00:13:50] ended up teaching these sort of they
+[00:13:52] they taught math by teaching you how to
+[00:13:54] you know add do do your stock positions.
+[00:13:57] So I think they were managing their
+[00:13:58] portfolio while they were in class. Uh
+[00:14:00] but they were so passionate about the
+[00:14:02] market. So, I got introduced to the
+[00:14:04] market, but there was definitely, you
+[00:14:07] know, a period of time with the advent
+[00:14:09] of these online trading platforms um in
+[00:14:12] the 90s that got a lot of people
+[00:14:13] interested in the market and day trading
+[00:14:15] was really popular and then a lot of
+[00:14:18] people blew up their accounts. You know,
+[00:14:20] they it's easy to I don't want to say
+[00:14:22] it's easy. It's easier to make money
+[00:14:24] when the market is very bullish and
+[00:14:26] you're in a really strong market, but
+[00:14:28] the your strategy will get tested when
+[00:14:30] it cools off. And
+[00:14:31] >> so when the bubble burst, people got
+[00:14:33] tested and lost money and then this rule
+[00:14:35] came out. I think from 2001 through
+[00:14:39] 2010, you know, we had the financial
+[00:14:41] crisis. So, you know, there was that
+[00:14:43] whole period. But during that era,
+[00:14:46] online trading continued to make
+[00:14:48] advances. Technology got better. And
+[00:14:51] then you come into 2015 and now you're
+[00:14:53] getting other speculative assets like
+[00:14:55] cryptocurrencies.
+[00:14:56] So now there's other exchanges, more
+[00:14:58] active trading, more innovation in the
+[00:15:00] trading space. And then all of a sudden
+[00:15:02] we come into the fall of 2019 with
+[00:15:05] commission free trading and that just is
+[00:15:08] like a spark. And then the pandemic just
+[00:15:12] ignited kind of the whole thing was
+[00:15:13] adding fuel to that fire. And now when I
+[00:15:16] talk to people about day trading, a lot
+[00:15:19] of people express interest in it and
+[00:15:21] especially in different parts of the
+[00:15:23] world. In Europe, people talk about it a
+[00:15:25] lot and they aren't talking necessarily
+[00:15:27] about day trading US equities. They're
+[00:15:29] talking about day trading
+[00:15:31] cryptocurrencies or maybe forex or
+[00:15:33] futures. Um, you know, so there are
+[00:15:37] people in in all these different areas
+[00:15:39] that I think are looking at trading
+[00:15:41] differently and as a more maybe I I
+[00:15:45] well, I don't know if I would encourage
+[00:15:47] a 17-year-old to focus on day trading
+[00:15:49] instead of go to college. I think that
+[00:15:51] you should build your skill set and be
+[00:15:54] prepared to be in the workforce. But I
+[00:15:56] think if you can gain financial
+[00:15:57] literacy, it's only going to benefit you
+[00:15:59] in the long run. And if you can make a
+[00:16:01] little money trading and you're doing
+[00:16:02] well enough at it, then you know there's
+[00:16:04] a costbenefit analysis between that and
+[00:16:06] the nineto-ive job.
+[00:16:08] >> Yeah. And I I I suppose as you said
+[00:16:11] earlier, if the printer were to change
+[00:16:13] the rule uh requiring just $2,000
+[00:16:18] in order to day trade, that reduces the
+[00:16:20] risk for day trade.
+[00:16:23] >> Yeah, I would say it does. This is one
+[00:16:25] of the things I've actually thought
+[00:16:26] about quite a bit. Uh a lot of times
+[00:16:29] when young people come into the market,
+[00:16:31] and I was young when I started trading,
+[00:16:33] we don't have a lot of money. We don't
+[00:16:34] have a lot of resources. So, we're kind
+[00:16:36] of forced to, you know, bootstrap our
+[00:16:37] our first account and the tools and
+[00:16:39] everything together. And so, this in a
+[00:16:42] way, we're very close to hitting rock
+[00:16:45] bottom. A couple of big losses and, you
+[00:16:47] know, we're out of the game. But I
+[00:16:49] actually think that's really good
+[00:16:50] because it forces you to experience
+[00:16:52] failure and to learn lessons from the
+[00:16:54] mistakes that you made. So, when you're
+[00:16:56] trading with a $2,000 account, and it
+[00:16:58] may be with an offshore broker today,
+[00:17:00] you blow up that account, you're going
+[00:17:02] to learn a big lesson. But a trader who
+[00:17:04] funds their account with $25,000
+[00:17:07] >> Yeah.
+[00:17:08] >> you they're further from rock bottom.
+[00:17:10] >> Yeah.
+[00:17:10] >> So they have more to lose before they
+[00:17:13] have that real emotional feeling of,
+[00:17:16] wow, I've made a huge mistake.
+[00:17:18] >> And so sometimes traders who come into
+[00:17:19] the market later in their life who have
+[00:17:22] built uh you know substantial resources
+[00:17:24] and have an IRA account with a couple
+[00:17:26] hundred,000 in it, you know, rock bottom
+[00:17:29] is so far away they might just slowly
+[00:17:31] eat away at that account for a long
+[00:17:32] time. And I'm a big advocate of
+[00:17:35] segregating all of your long-term stuff
+[00:17:38] way over there. And day trading is a new
+[00:17:40] endeavor. It's a speculative thing.
+[00:17:42] You're going to test out. You're going
+[00:17:43] to try it in a simulator. If it works,
+[00:17:45] you're going to put a couple thousand
+[00:17:46] dollars towards it. If it's successful,
+[00:17:49] the account will grow. If it's not, go
+[00:17:51] back to the drawing board. So, I I think
+[00:17:53] keeping the stakes low is really
+[00:17:55] important. And so I would say even
+[00:17:57] though you could argue you're giving
+[00:17:59] more people the opportunity to trade by
+[00:18:01] having a lower minimum, um I think that
+[00:18:05] it's I think it's a fair tradeoff
+[00:18:06] because by having a high minimum, people
+[00:18:08] are going to find a way. Where there's a
+[00:18:10] will, there's a way. They're going to
+[00:18:11] find a way to come up with the money and
+[00:18:12] then they're going to make big big
+[00:18:14] mistakes potentially.
+[00:18:15] >> Yeah.
+[00:18:17] uh other than your YouTube channel, are
+[00:18:19] there other educational resources for
+[00:18:22] new day traders who may now be entering
+[00:18:25] that practice, you know, given the
+[00:18:27] potential change in the infinity rule?
+[00:18:31] >> Yeah, I mean, I I've been putting
+[00:18:33] content out on YouTube since 2013, so my
+[00:18:36] channel's well established. I created it
+[00:18:39] during a time when there weren't a lot
+[00:18:41] of people really talking a lot about day
+[00:18:43] trading. So, I sort of was at the right
+[00:18:45] place at the right time to gain some
+[00:18:47] early momentum on the channel. I do have
+[00:18:50] over at Warrior Trading classes where I
+[00:18:52] teach my strategy and go into a lot more
+[00:18:54] depth and and you know, people are
+[00:18:55] welcome to check those out. We I've
+[00:18:58] definitely seen these eb and flow cycles
+[00:19:02] in the market um that that do seem to
+[00:19:05] correlate somewhat with other
+[00:19:07] speculative assets like cryptocurrency.
+[00:19:10] Um you know that when the crypto bubble
+[00:19:12] burst in it was it 2018 I think it was.
+[00:19:16] You know it seemed like the small cap
+[00:19:17] market really cooled off in 2022 when
+[00:19:20] interest rates went up and you know you
+[00:19:22] had the FTX collapse and everything
+[00:19:23] else. You know there was like the crypto
+[00:19:25] winter. it seemed like things kind of
+[00:19:27] slowed down. So, there does seem to be
+[00:19:28] this sort of larger eb and flow cycle
+[00:19:32] that I've now been through several times
+[00:19:35] that is really specific to
+[00:19:38] uh more speculative asset classes.
+[00:19:42] Something that I think is interesting is
+[00:19:43] when I travel internationally, a lot of
+[00:19:46] people don't think to trade the US
+[00:19:49] equities market in if they're
+[00:19:51] international. they think about trading
+[00:19:53] forex or they think maybe about trading
+[00:19:55] futures but forex is very popular and
+[00:19:58] the thing with forex is that well number
+[00:20:01] one there's no pdt rule so you can open
+[00:20:04] an account and you can start trading but
+[00:20:06] because uh currencies
+[00:20:08] don't move that much typically the only
+[00:20:11] way to make good money is to use a lot
+[00:20:13] of leverage so then a very small
+[00:20:16] fraction of a percent move is enough to
+[00:20:18] make money so a lot of forex brokers
+[00:20:21] give people 100 times leverage and you
+[00:20:23] could fund an account with a couple
+[00:20:25] hundred bucks and then all of a sudden
+[00:20:26] you've got a ton of leverage and people
+[00:20:29] blow up their accounts all the time
+[00:20:32] trying to time forex you I mean there
+[00:20:34] are so many hedge funds that are experts
+[00:20:36] at you know latency arbitrage and and
+[00:20:38] making a profit off of these little
+[00:20:40] subtle price changes that as a retail
+[00:20:43] trader it's not realistic and but yet
+[00:20:47] people think oh forex you know I'll
+[00:20:50] trade currencies People do the same
+[00:20:51] thing with futures here in the US. There
+[00:20:53] is no PDT rule on futures. And yet the
+[00:20:56] futures market as we've seen is
+[00:20:58] dominated by these big institutional
+[00:21:01] players. And so you know those are the
+[00:21:04] whales in the market. And as a little
+[00:21:06] fish it's really easy to get eaten up.
+[00:21:09] And so for me the area of the market
+[00:21:12] where I focus uh is on I I'm really
+[00:21:15] trading breaking news. So I trade
+[00:21:17] volatility. So I look for instruments
+[00:21:19] that have breaking news. and we're going
+[00:21:20] to see like big big rates of change. And
+[00:21:23] there's no question that that is a
+[00:21:26] higher risk environment, but for me,
+[00:21:28] it's a calculation of risk and reward.
+[00:21:31] And if I want to be active, my approach
+[00:21:33] is getting in quickly and getting out
+[00:21:35] quickly and just trying to really
+[00:21:37] capitalize on that movement. And I need
+[00:21:38] to be able to day trade. That strategy
+[00:21:41] would not work if I was holding
+[00:21:42] overnight. And if you had a small
+[00:21:45] account, which is what I had when I got
+[00:21:46] started, buying something that's going
+[00:21:48] up a quarter of a percent when you've
+[00:21:50] got $2,000 account, you're not going to
+[00:21:53] make any money. So on the other hand, if
+[00:21:56] you found something that was going up
+[00:21:57] 30% or 40% in one day, now that's
+[00:22:00] something you might be able to work
+[00:22:02] with. So small account traders tend to
+[00:22:05] gravitate towards either using leverage
+[00:22:08] to amplify their buying power to profit
+[00:22:10] off very small moves or they gravitate
+[00:22:13] towards simply more volatile instruments
+[00:22:17] which some people would argue is
+[00:22:19] speculative. Now in the response to um
+[00:22:23] there was a a a response period where I
+[00:22:26] think it was the North American
+[00:22:27] Securities um what was it? Yeah, NASA
+[00:22:32] the other
+[00:22:32] >> Yeah, they had
+[00:22:34] Yeah, they had a response um in favor of
+[00:22:37] keeping the PDT rule at 25,000 and they
+[00:22:40] said, you know, this protects people
+[00:22:42] from day trading who shouldn't be day
+[00:22:43] trading and day trading is speculative
+[00:22:46] and day trading is basically the same as
+[00:22:49] gambling. Some people would they argue
+[00:22:51] and I think that's really interesting
+[00:22:53] for a couple reasons because number one,
+[00:22:55] there is no PDT rule when it comes to
+[00:22:57] gambling. There's not like only a
+[00:23:00] $25,000 table. If there were, the stakes
+[00:23:02] would be a lot higher, but there's not.
+[00:23:03] So, if you're going to compare it to
+[00:23:04] gambling, it's not a great comparison
+[00:23:06] because even if they were the same,
+[00:23:08] there's no PDT rule when it comes to
+[00:23:10] gambling. Some states say it's not
+[00:23:11] allowed, but that's the state's choice.
+[00:23:13] But it's not gambling. And then, so
+[00:23:16] second layer is, well, if day trading is
+[00:23:18] so risky, what about forex and what
+[00:23:20] about futures? Because there's no PDT
+[00:23:22] rule there. Yeah. So it feels sort of
+[00:23:24] arbitrary and it feels like the PDT rule
+[00:23:26] was one of these things like brokers
+[00:23:29] were dealing with margin calls. You
+[00:23:31] know, the brokers were losing money. So
+[00:23:33] they I don't know, maybe they push
+[00:23:35] regulators or regulators felt like we've
+[00:23:36] got to do something. So let's put this
+[00:23:38] thing in place.
+[00:23:40] >> And it it was 25 years ago nearly and it
+[00:23:42] it feels like it's time for it to be
+[00:23:44] amended.
+[00:23:45] >> Yeah.
+[00:23:45] >> And I think it's just as simple as that.
+[00:23:47] I don't think it's serving the purpose
+[00:23:48] really of protecting retail traders.
+[00:23:51] >> I think Let's hope our regulators do the
+[00:23:54] right thing.
+[00:23:54] >> Yeah. Yeah. I hope so. Uh and certainly
+[00:23:56] we will be uh pushing for the reform as
+[00:23:58] well. Um Tom's question was about
+[00:24:01] education and knowledge and
+[00:24:02] understanding and I know Rash you've
+[00:24:04] been a big proponent of understanding
+[00:24:06] the risks because it is a risky endeavor
+[00:24:08] day trading and and I'll just point out
+[00:24:10] that there are if you put in day trading
+[00:24:13] risks like you're going to get SEC
+[00:24:16] uh all the brokers have lots of uh
+[00:24:19] warnings about you know this is a risky
+[00:24:21] endeavor. So there's no shortage of
+[00:24:23] information about the risks and one of
+[00:24:26] the things I mean you know we are the
+[00:24:28] investor choice advocates network. One
+[00:24:30] of our mantras is that investors are the
+[00:24:33] best judges of their own risk tolerance
+[00:24:36] and so yes go find out what the risks
+[00:24:39] are make your own assessment given your
+[00:24:41] personal situation and then make the
+[00:24:43] decision for yourself. So um yeah we are
+[00:24:46] we're going to be very much in favor of
+[00:24:47] allowing that to happen.
+[00:24:49] >> Yeah. Yeah. I think that that is really
+[00:24:51] what it's all about because as as we've
+[00:24:54] seen with the PDT rule there there's
+[00:24:57] people that there's now this whole
+[00:24:58] business of offshore brokers that people
+[00:25:00] use and I think most people would
+[00:25:03] probably prefer to use a larger more
+[00:25:06] established US broker dealer. The only
+[00:25:08] reason they go offshore is is ultimately
+[00:25:10] because of this PD rule.
+[00:25:12] >> So now there's this subset business that
+[00:25:14] you know people sometimes struggle with.
+[00:25:16] The fees are higher this and that. So
+[00:25:18] that ends up hurting retail traders or
+[00:25:21] retail traders end up taking out loans
+[00:25:23] or borrowing money or whatever the case
+[00:25:24] is to get up to 25,000 and then the
+[00:25:27] stakes are a lot higher. The pressure is
+[00:25:29] a lot higher and that by itself has its
+[00:25:31] own influences on the way they're going
+[00:25:33] to trade because their emotional
+[00:25:35] disposition is is now changed,
+[00:25:37] >> right?
+[00:25:37] >> They become a bit compromised and so
+[00:25:39] that can set themselves up for failure.
+[00:25:41] So it's like keep the stakes low,
+[00:25:43] >> understand that yes, trading is risky.
+[00:25:46] go in knowing that and trade with
+[00:25:48] smaller amounts of money. You know,
+[00:25:49] that's the right way to learn. And and I
+[00:25:51] think the brokers can align themselves
+[00:25:53] in that way. You know, certainly if they
+[00:25:55] make the affirmative choice on their own
+[00:25:58] to say, "Listen, we're going to give you
+[00:26:00] margin because that's the rule. We we
+[00:26:02] have to give you margin now, the $2,000
+[00:26:04] minimum, but we're not going to give you
+[00:26:07] leverage until you're up more than a
+[00:26:09] certain amount." And brokers have the
+[00:26:10] discretion to do that. Even today,
+[00:26:13] there's certain stocks that they'll say,
+[00:26:15] "We're not giving you leverage on that
+[00:26:16] stock."
+[00:26:17] >> So, they'll give you leverage on Ford.
+[00:26:19] They'll give you leverage on Tesla, but
+[00:26:21] then they might not give you leverage on
+[00:26:22] some of these lower price penny stocks
+[00:26:24] or small cap stocks. They don't want to
+[00:26:26] have the risk.
+[00:26:28] >> So, they could choose that at any time.
+[00:26:29] And if they want to choose to say, "We
+[00:26:31] only give X leverage until your accounts
+[00:26:33] above these certain milestones," that
+[00:26:36] would be the more conservative way for
+[00:26:37] them to manage risk. and and that I
+[00:26:39] think would be protecting retail traders
+[00:26:42] in a more meaningful way.
+[00:26:43] >> Well, this is terrific, Ross. Thank you
+[00:26:45] so much for sharing all this with us and
+[00:26:47] with our listeners.
+[00:26:48] >> Thank you. Thank you for You're welcome.
+[00:26:50] It was a pleasure to come on. Thank you.
+[00:26:51] I hope you guys really enjoyed that
+[00:26:52] podcast. I loved sitting down and
+[00:26:54] talking with Nick and Tom about the PDT
+[00:26:56] rule. And as it turns out, I am in the
+[00:26:58] middle of a small account challenge
+[00:27:00] right now, which I funded with, guess
+[00:27:02] what? $2,000. I did that because I knew
+[00:27:05] this proposed amendment and change to
+[00:27:07] the PDT rule was on the table. I was
+[00:27:09] hoping it would get approved. It has. So
+[00:27:11] now you guys get to actually watch over
+[00:27:13] my shoulder and see what it looks like
+[00:27:14] for an experienced trader like myself to
+[00:27:17] trade with a $2,000 account. So you
+[00:27:19] haven't already checked out the
+[00:27:20] challenge, make sure you check it out
+[00:27:21] and I'll put a link to the first episode
+[00:27:23] in that challenge right here. So thank
+[00:27:24] you guys as always for tuning in.
+[00:27:25] Reminder, trading is risky. My results
+[00:27:27] aren't typical. So please manage your
+[00:27:28] risk and practice in a simulator before
+[00:27:30] putting real money on the line. I'll see
+[00:27:32] you for the next episode real soon.

@@ -1,0 +1,1292 @@
+# How I turned $600 into $335,181 in 1 Year (Trading 2hrs/Day)
+# https://www.youtube.com/watch?v=QBXlHOCIl8U
+# duration_sec: 2968
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to talk
+[00:00:03] about how I turned a day trading account
+[00:00:05] with less than $600 into more than
+[00:00:09] $335,000 in one year by the end of the
+[00:00:12] second year the account was at over
+[00:00:14] $800,000 by the end of the third year
+[00:00:16] I'd crossed over a million doar and by
+[00:00:18] the end of the 5ifth year the account
+[00:00:20] was over $10 million in verified and
+[00:00:23] audited profits today is going to be the
+[00:00:25] first time ever that some of you have
+[00:00:27] seen my thirdparty independent audit
+[00:00:30] verifying these returns now I don't want
+[00:00:33] to spend this whole episode focusing on
+[00:00:36] the profits and bragging about how much
+[00:00:38] money I've made profits are a byproduct
+[00:00:41] of a system and a strategy in today's
+[00:00:44] episode I'm going to share with you the
+[00:00:46] process I'm going to share with you the
+[00:00:48] set of rules that I followed in this
+[00:00:50] small account and how I was able to grow
+[00:00:52] it we're going to focus especially on
+[00:00:54] those first few weeks the first month
+[00:00:56] and the first year because that's when
+[00:00:58] the pressure was the highest
+[00:01:00] what you're going to learn is that the
+[00:01:02] hardest part about trading is learning
+[00:01:05] to consistently make just 15 to 20 cents
+[00:01:08] a day it seems like nothing but the
+[00:01:10] reality is once you're doing that
+[00:01:13] consistently scaling up from there well
+[00:01:17] it happens a lot faster than you might
+[00:01:19] expect now because this is a class that
+[00:01:21] I'm teaching today I have some handouts
+[00:01:23] for you so Linked In the description
+[00:01:25] pinned at the top of the comments you
+[00:01:26] will find a small count strategy PDF you
+[00:01:29] can download this and you can follow
+[00:01:31] along with me during this episode as I
+[00:01:33] break down for you the system the rules
+[00:01:35] and the strategy that I've used to grow
+[00:01:38] this tiny account so let's go ahead and
+[00:01:40] Dive Right In now for those of you who
+[00:01:41] enjoy reading I'm going to have some
+[00:01:43] recommended reading that I'll give you
+[00:01:44] at the end of this episode so you can
+[00:01:46] continue learning because I understand
+[00:01:49] that everyone learns in different ways
+[00:01:51] one of the most I suppose challenging
+[00:01:53] Parts about trading is that just to get
+[00:01:55] yourself ready for day one there's a lot
+[00:01:58] of information that you need to know I
+[00:02:00] would call it the general information
+[00:02:02] about how the stock market works now I
+[00:02:05] personally am a Hands-On learner and I
+[00:02:08] bet many of you are as well and so what
+[00:02:11] worked really well for me when I was
+[00:02:13] getting started was to actually go ahead
+[00:02:15] and open an account now I should have
+[00:02:17] used a trading simulator but I used real
+[00:02:19] money because I was naive and I didn't
+[00:02:21] know better but by opening up that real
+[00:02:23] account and going in and trying to take
+[00:02:26] my first trades all of a sudden I began
+[00:02:29] learning a lot of the necessary
+[00:02:31] information that you'll need to know for
+[00:02:33] day one of trading right I I started to
+[00:02:35] learn about the different types of
+[00:02:36] orders that you can use I started
+[00:02:38] learning about how the how the prices
+[00:02:40] are quoted I learned the difference
+[00:02:42] between the bid and the offer these are
+[00:02:45] all little bits of general knowledge
+[00:02:47] that you pick up as you're getting into
+[00:02:49] it now you can learn all of this in a
+[00:02:51] book and certainly that's a great way to
+[00:02:53] learn and and I do have a book that I've
+[00:02:55] written that covers a lot of this but
+[00:02:56] you can also learn just through the
+[00:02:58] process of actually doing it by getting
+[00:03:01] handson you're going to realize as you
+[00:03:02] get ready to take that first trade that
+[00:03:03] wait a second I don't know the
+[00:03:05] difference between these different order
+[00:03:07] types limit versus market and you're
+[00:03:09] going to do some basic research and
+[00:03:10] you're going to figure out okay this is
+[00:03:12] what these two orders do now one of the
+[00:03:14] things that they often say is that if
+[00:03:15] you love what you do you won't work a
+[00:03:17] day in your life in my experience as a
+[00:03:19] Trader because I've enjoyed it so much
+[00:03:21] it never feels like work to research and
+[00:03:25] learn more or to read books or to watch
+[00:03:27] episodes like this because it's
+[00:03:29] something that is so fascinating to me
+[00:03:32] and I think one of the reasons it's
+[00:03:33] fascinating for me and for many other
+[00:03:35] people is that we know if we're able to
+[00:03:38] find success the rewards can be
+[00:03:40] incredible now as we begin this episode
+[00:03:42] I want to put out a little bit of a
+[00:03:44] disclaimer I want you to know that
+[00:03:46] although I am sharing my results with
+[00:03:48] you I don't want you to assume that my
+[00:03:50] results are typical or that you'll
+[00:03:52] achieve a similar result whether you
+[00:03:54] learn from me or you trade on your own
+[00:03:56] what we know is that trading is risky
+[00:03:59] and most people do lose money I would
+[00:04:01] argue that the reason most people lose
+[00:04:04] money is for one of two reasons the
+[00:04:06] first reason is because they don't have
+[00:04:08] a strategy they don't have a system or a
+[00:04:11] set of rules that they're following that
+[00:04:13] dictates the type of stocks to buy where
+[00:04:15] to get in where to get out when to walk
+[00:04:17] away each day when to stop pushing and
+[00:04:20] when to double down and lean in so if
+[00:04:22] you don't have a strategy or set of
+[00:04:23] rules it's not going to be much of a
+[00:04:25] surprise if you don't find consistency
+[00:04:27] as a Trader now the second reason people
+[00:04:30] lose they have a system they have a
+[00:04:32] strategy but they are unable to maintain
+[00:04:36] the discipline to follow those rules and
+[00:04:38] this is something that I can really
+[00:04:40] relate to because as I went through the
+[00:04:42] process of developing the strategy that
+[00:04:44] I'm still trading today I struggled to
+[00:04:47] maintain the discipline to follow the
+[00:04:49] rules that I laid out for myself some of
+[00:04:52] you may have gone through this as well
+[00:04:54] so in this episode as I talk about the
+[00:04:56] system the strategy and the rules I'm
+[00:04:58] also going to share with you some tips
+[00:05:00] and tricks to help you be a more
+[00:05:03] disciplined Trader because ultimately it
+[00:05:05] is the traders who are the most
+[00:05:07] disciplined who typically find success
+[00:05:10] if you can't be disciplined as a Trader
+[00:05:12] if you can't follow your rules you can't
+[00:05:14] expect to succeed so when I funded my
+[00:05:15] account with less than $600 I was
+[00:05:17] already a profitable Trader I funded the
+[00:05:20] account with the goal of seeing really
+[00:05:23] whether or not it was even possible to
+[00:05:25] day trade with such a small amount of
+[00:05:27] money because a lot of people said it
+[00:05:29] wasn't impossible you couldn't do it and
+[00:05:31] you might be one of those Traders as
+[00:05:32] well who says there's no way this could
+[00:05:34] be done so I want to tell you that
+[00:05:36] that's not true it can be done but it is
+[00:05:40] very difficult and it requires knowing a
+[00:05:42] few different ways to trade because as
+[00:05:44] you may already understand if you open
+[00:05:46] an account with e trade or Merit trade
+[00:05:48] today thick or Swim they won't let you
+[00:05:51] day trade with a $600 account so right
+[00:05:54] away there's a little bit of a barrier
+[00:05:56] to entry to get in because you have to
+[00:05:58] know about the type of broker that I was
+[00:06:00] using which most people don't even know
+[00:06:02] about because they don't advertise here
+[00:06:04] to most Traders so in addition to the
+[00:06:06] link in the description to download my
+[00:06:07] small account strategy PDF you'll also
+[00:06:09] see a link to International Brokers so
+[00:06:12] when I began this small account
+[00:06:13] challenge with less than $600 I funded
+[00:06:16] an account with an international broker
+[00:06:19] International Brokers don't enforce the
+[00:06:20] PDT Rule and I found this to be
+[00:06:22] incredibly helpful because I knew that I
+[00:06:24] wanted to trade so let's jump onto the
+[00:06:26] Whiteboard here now I'm going to show
+[00:06:28] you these audit results in a moment but
+[00:06:30] first let me break down for you how this
+[00:06:32] worked when I funded the first account
+[00:06:33] so I funded the account here with just
+[00:06:35] under $600 we'll just do$ 600 just to
+[00:06:38] keep the numbers easy so just under $600
+[00:06:40] went in now the broker that I funded the
+[00:06:43] account with allowed what's called
+[00:06:44] Leverage leverage means you could trade
+[00:06:46] on borrowed money now if you funded an
+[00:06:49] account with thinker swim or E Trade
+[00:06:51] right now today you would get four times
+[00:06:53] leverage so that means let's say for
+[00:06:56] instance you funded an account with
+[00:06:57] 25,000 you have times four that means
+[00:07:00] you have
+[00:07:02] $100,000 of buying power but you notice
+[00:07:05] I started with
+[00:07:06] $25,000 that's because you need $25,000
+[00:07:10] minimum to day trade with a US broker
+[00:07:13] dealer $225,000 is kind of a steep Mark
+[00:07:16] right that's a lot of money so I didn't
+[00:07:18] want to fund an account with that much
+[00:07:20] money I wanted to prove that you could
+[00:07:21] do it with far less so I funded an
+[00:07:23] international account with
+[00:07:25] $600 now they offer six times leverage
+[00:07:28] so 6 * 6 is $33,600
+[00:07:31] that's how much money I had available in
+[00:07:35] buying power on day one so on day one
+[00:07:39] you know what my goal was my goal was to
+[00:07:42] see if I could make 15 to 20 cents a
+[00:07:45] share 15 to 20 cents that's it doesn't
+[00:07:49] sound like a lot but 15 to 20 cents a
+[00:07:51] day can be the difference between well
+[00:07:54] losing money and making more than $10
+[00:07:56] million over the course of 7 years which
+[00:07:58] is exactly what I've done so what I did
+[00:08:01] on day one was I was looking for a stock
+[00:08:04] ideally perfect price range $3 a share
+[00:08:08] approximately $3 a share to 360 why did
+[00:08:11] I choose that price range because I knew
+[00:08:14] at that price range I could buy 1,000
+[00:08:16] shares and if I could make 15 to 20
+[00:08:19] cents I would make $ 100 to $200 well
+[00:08:22] 150 $200 if I make 15 $150 to $200 and
+[00:08:27] that was my goal I wanted to see if I
+[00:08:29] could grow the account by $200 on day
+[00:08:31] one now what I want to do is I want to
+[00:08:33] show you the results of day one on day
+[00:08:36] one it came up a little bit short not
+[00:08:38] surprising I'd set the goal pretty high
+[00:08:40] I came out with
+[00:08:41] $125 70 on day two I made
+[00:08:46] $187.8 as you can see right here on day
+[00:08:49] three I made
+[00:08:50] $150 on day four I made
+[00:08:53] $154 so by the end of the first week
+[00:08:56] we've got 300 nearly $400 500 $600 a
+[00:08:59] profit so now let's look at how the
+[00:09:01] account looks now the account has closer
+[00:09:04] to $1,200 in it right $1200 here times 6
+[00:09:11] now I've got $7,000 plus of buying power
+[00:09:14] $7,200 of buying
+[00:09:17] power and that meant going into day five
+[00:09:21] day six day seven I could now buy a
+[00:09:24] little bit more stock of every trade I
+[00:09:26] took now some people will misunderstand
+[00:09:29] this style of trading as risking $7,000
+[00:09:33] or whatever it is on every single trade
+[00:09:36] but that's not the way I manage risk so
+[00:09:38] maybe what we should do is take a step
+[00:09:40] back and talk about the strategy the
+[00:09:42] system and the set of rules that I
+[00:09:44] follow my interest in the market began
+[00:09:46] in 1998 I was in school and I had a
+[00:09:49] semester dedicated to the stock market I
+[00:09:52] decided then and there that the stock
+[00:09:54] market was for me and I wanted to learn
+[00:09:56] everything about it that I possibly
+[00:09:58] could I wanted to start trading with
+[00:10:00] real money at that time but I wasn't
+[00:10:02] able to I was too young in 2001 I opened
+[00:10:05] my first account with real money but I
+[00:10:07] didn't find much success because I
+[00:10:09] didn't have a system or a strategy of
+[00:10:11] how to find strong stocks to trade so I
+[00:10:14] ended up not making any money at that
+[00:10:16] time but during the Great Recession this
+[00:10:18] was after the financial crisis of 20072
+[00:10:21] 2008 the job market was so abysmal and I
+[00:10:24] was living in rural Vermont that I I
+[00:10:27] couldn't find a good paying job and so I
+[00:10:29] went back to the idea of being an online
+[00:10:32] Trader trading the markets from the
+[00:10:34] comfort of my own home on my laptop that
+[00:10:37] sounded pretty good to me but I spent
+[00:10:39] the next two years going through a
+[00:10:40] period of trial and error trying to
+[00:10:42] figure out a strategy that would work
+[00:10:44] for me now what I want to do is I want
+[00:10:46] to actually show you here um my metrics
+[00:10:49] because uh I'm going to pull this up I'm
+[00:10:52] going to clear this out uh and we're
+[00:10:53] going to take a step back and look high
+[00:10:55] level at these metrics when we look at
+[00:10:57] these metrics high level these are to
+[00:10:59] tell a story they're going to paintt a
+[00:11:00] picture what I have right here so far uh
+[00:11:03] is just over $1 million in net profit
+[00:11:07] this is net of fees and commissions
+[00:11:10] right here okay so that's the total big
+[00:11:12] big number but where does that number
+[00:11:14] come from as you see where that number
+[00:11:16] comes from you're going to begin to
+[00:11:18] recognize that from just this data you
+[00:11:22] could build out a summary of my strategy
+[00:11:25] okay so let's look at my performance by
+[00:11:27] price and volume this is where I think
+[00:11:29] you'll see the most so what you'll see
+[00:11:32] is my performance by Price Right Here is
+[00:11:34] going to show you that I make the most
+[00:11:37] money on stocks priced well between 2
+[00:11:42] and 50 right here and certainly I make
+[00:11:46] the most in this range right here which
+[00:11:48] is between 2 and 20 so all of my profit
+[00:11:51] has been categorized here and sorted
+[00:11:53] based on the price of the stock I've
+[00:11:55] traded and this is where I do the best
+[00:11:58] now what you would also notice if we
+[00:11:59] scroll down a little bit further is that
+[00:12:02] actually we'll look over at the
+[00:12:03] instrument side if we look over here
+[00:12:05] some of my biggest winners in fact are
+[00:12:07] on Meme stocks cost GameStop cone unoe
+[00:12:12] carve these were stocks that made
+[00:12:14] incredible moves during 2001 2 uh sorry
+[00:12:17] 2021 but if we scroll down a little bit
+[00:12:20] further what you'll notice here is that
+[00:12:23] my performance predominantly is oh we're
+[00:12:27] going to switch back to this one here
+[00:12:29] stay on this one my performance is on
+[00:12:31] stocks that are up over 10% you see how
+[00:12:35] this is performance on stocks up over
+[00:12:37] 10% and what you'll also notice is that
+[00:12:40] I make the most money when we have high
+[00:12:43] relative volume so one of the things
+[00:12:46] that I look at very closely in these
+[00:12:48] metrics and we'll scroll back up here
+[00:12:51] this shows my performance by relative
+[00:12:53] volume if you see right here this is uh
+[00:12:56] $9 million over 80% of the profit is on
+[00:13:00] stocks that have five times relative
+[00:13:02] volume so let me help put this into kind
+[00:13:04] of simple
+[00:13:06] terms I make money when stocks have five
+[00:13:09] times higher volume on the day that I'm
+[00:13:11] trading them and I make money trading
+[00:13:13] stocks that are up 10% so I'll POS the
+[00:13:15] question to you why would a stock be up
+[00:13:17] more than 10% with five times higher
+[00:13:19] volume what's a possible reason news the
+[00:13:23] stock has breaking news so through two
+[00:13:27] years plus of trial and error error what
+[00:13:29] I learned was that I found the most
+[00:13:32] consistency trading relatively lower
+[00:13:35] price stocks when they have breaking
+[00:13:37] news these breaking news events and
+[00:13:39] there's all kinds of news catalysts that
+[00:13:41] can move a stock it could be a
+[00:13:43] pharmaceutical company with FDA
+[00:13:45] announcements clinical trial results it
+[00:13:47] could be any company that has great
+[00:13:49] earnings or a new contract but when you
+[00:13:51] have a lowprice stock that's trading at
+[00:13:54] two three four dollar a share and they
+[00:13:56] come out with really good news those
+[00:13:59] types of stocks can go up 50 to 100% in
+[00:14:02] a single day and these are the places
+[00:14:06] where I was making hands down the most
+[00:14:08] money and these stocks on these
+[00:14:10] particular days often are the biggest
+[00:14:13] percentage gainers on all of Wall Street
+[00:14:17] so out of 10,000 Plus stocks on any
+[00:14:19] given day that you could choose usually
+[00:14:21] the one I'm trading is the one that is
+[00:14:23] the leading percentage Gainer out of all
+[00:14:26] of them now finding that stock in real
+[00:14:30] time proved difficult and I'm going to
+[00:14:32] walk you through the process that I
+[00:14:33] follow to find those stocks so this
+[00:14:36] right here gives you a good sense that
+[00:14:38] I'm trading primarily a breaking news
+[00:14:41] strategy the stocks I make the most
+[00:14:43] money on have 25 million shares plus a
+[00:14:46] volume so I need that volume I need that
+[00:14:49] high relative volume relative volume by
+[00:14:52] the way is the measure of today's volume
+[00:14:55] relative to what's normal for this stock
+[00:14:58] so if it normally trades on only a
+[00:15:00] million shares of volume but today is 25
+[00:15:02] million it's got 25 times higher volume
+[00:15:05] today and obviously there's a catalyst
+[00:15:07] that's bringing that volume in so let's
+[00:15:09] begin to document what we know about my
+[00:15:11] strategy now for those who have already
+[00:15:12] downloaded the PDF you'll have this in
+[00:15:14] written form as well okay so what we
+[00:15:16] know is that price I'm focusing on
+[00:15:20] stocks between 2 and 20 that's where I
+[00:15:22] tend to do the best we know that we're
+[00:15:24] going to look at percentage of up at
+[00:15:26] least 10% today and we know we're going
+[00:15:29] to look at relative volume of at least a
+[00:15:31] ratio of uh five so 5 to one so it's got
+[00:15:34] to be at least five times higher than
+[00:15:37] average now what we know is that
+[00:15:39] typically there has to be a news
+[00:15:42] Catalyst because news is what's going to
+[00:15:44] create the rate of change and the
+[00:15:46] relative volume the price just happens
+[00:15:49] to be the range where I've found the
+[00:15:51] most success and I think for a lot of us
+[00:15:54] R Us being retail Traders lower price
+[00:15:56] stocks are easier to manage risk on and
+[00:15:57] they're easier to trade we have smaller
+[00:15:59] accounts we can't afford to buy $75 $100
+[00:16:02] $200 $500 a share stocks we would only
+[00:16:06] be able to buy a few shares of it so we
+[00:16:08] just naturally make more when we can
+[00:16:10] trade let's say a th000 shares of a $3
+[00:16:12] stock a th000 shares of a $3 stock or
+[00:16:15] 100 shares of a $30 stock or 10 shares
+[00:16:18] of a $300 stock it's same amount of
+[00:16:20] money but on one of them you're going to
+[00:16:23] be much more likely to see a 10 15% move
+[00:16:25] and you're going to get a bigger return
+[00:16:27] and that's always going to be on the
+[00:16:28] lower price side now certainly you could
+[00:16:30] do 10,000 shares on 30 Cent stock and
+[00:16:33] that's where you could see potentially
+[00:16:34] an even more explosive return but I
+[00:16:37] actually in my career haven't done super
+[00:16:39] well on those really cheap stocks as we
+[00:16:41] saw for my metrics although I uh at
+[00:16:45] times we'll trade them under $2 for me
+[00:16:47] is not a very rewarding spot I tend to
+[00:16:50] do better as you could see between 2 and
+[00:16:52] 20 that's really my sweet spot now
+[00:16:55] something that you may not understand in
+[00:16:58] trading is that we have the concept of
+[00:17:00] supply and demand you may have heard the
+[00:17:02] concept before of supply and demand when
+[00:17:04] there's a limited level of supply and a
+[00:17:06] lot of demand prices go up this is what
+[00:17:08] happened during the housing booms right
+[00:17:11] all of a sudden lots of people want to
+[00:17:12] buy the mortgage rates are super super
+[00:17:15] cheap so everyone wants to buy a home
+[00:17:17] but there's a limited level of Supply
+[00:17:18] what happens the price of homes go up
+[00:17:20] very very quickly well in the stock
+[00:17:23] market we have a similar experience with
+[00:17:25] supply and demand the supply is the
+[00:17:27] number of shares available to trade so
+[00:17:29] when a company does its initial public
+[00:17:31] offering they sell a fixed number of
+[00:17:32] shares onto the market and that's the
+[00:17:34] supply okay so it's a fixed number of
+[00:17:36] shares now if all of a sudden that
+[00:17:38] company puts out really great news
+[00:17:40] people are going to want to buy that
+[00:17:41] stock they're going to think the stock
+[00:17:43] price is going to go up in value and
+[00:17:45] since there's a limited level of Supply
+[00:17:48] the increase in demand pushes the price
+[00:17:51] up so let me show you this on the
+[00:17:53] Whiteboard all right so um I'm going to
+[00:17:56] uh do one more thing here first so float
+[00:17:59] which is the number of shares available
+[00:18:01] to trade float is the term we're going
+[00:18:03] to have this under 20 million I would
+[00:18:06] prefer under 10 this is my preference
+[00:18:09] but under 20 million is pretty much a
+[00:18:10] hard a hard number now there are some
+[00:18:12] exceptions to that GameStop when I
+[00:18:14] traded it was um was a higher float but
+[00:18:17] but generally speaking that's what I'm
+[00:18:19] going to prefer okay so this is going to
+[00:18:21] be a little relationship here between
+[00:18:25] demand and Supply supply and demand so
+[00:18:29] let's say you've got a float here of 10
+[00:18:31] million
+[00:18:32] shares and let's say you
+[00:18:34] have 10 million shares of volume so if
+[00:18:38] you have 10 million shares available to
+[00:18:41] trade and you have 10 million shares of
+[00:18:42] volume those seemingly kind of balance
+[00:18:45] each other out right you've got an equal
+[00:18:47] amount of demand and Supply now on a day
+[00:18:50] like this if the stock really has good
+[00:18:51] news the price can still go up and the
+[00:18:54] price can go up because there are people
+[00:18:56] that are holding that don't want to sell
+[00:18:58] so there can be still a relationship
+[00:19:00] where the price goes up but now let's
+[00:19:01] imagine this if there's only 1 million
+[00:19:04] shares of Supply there's only 1 million
+[00:19:06] shares of supply and there's 10 million
+[00:19:08] shares of demand that's when you see the
+[00:19:11] price move very very quickly and so when
+[00:19:14] we talk about something like GameStop
+[00:19:16] GameStop when it began its move had I
+[00:19:19] want to say about 30 million shares
+[00:19:21] available of Supply but it was trading
+[00:19:24] the amount of volume it was trading was
+[00:19:27] insane I mean it was hundreds of
+[00:19:29] millions of shares of volume was pushing
+[00:19:32] this higher and so essentially you had
+[00:19:35] such a heavy amount of demand the stock
+[00:19:39] went parabolic and that's how it went
+[00:19:41] from $30 a share to 40 to 50 to 60 to 70
+[00:19:45] to 100 and then to 200 and then to 300
+[00:19:48] and then to 500 just this massive
+[00:19:51] squeeze and what effectively happened
+[00:19:53] there was we had what's called a short
+[00:19:55] squeeze now I could spend a lot of time
+[00:19:57] talking about short squeeze
+[00:19:59] but for right now we'll stay focused and
+[00:20:01] just say that when I'm looking at my
+[00:20:04] strategy what I know is that I need the
+[00:20:06] price between 2 and 20 it needs to be up
+[00:20:08] at least 10% on the day the relative
+[00:20:10] volume should be five there should be
+[00:20:12] news and the float should be less than
+[00:20:14] 20 million shares although less than 10
+[00:20:16] million is preferable and certainly if
+[00:20:17] you have a situation of a float of less
+[00:20:19] than a million shares that can be even
+[00:20:22] stronger but it's not necessary if it
+[00:20:23] happens it's fine but what we really
+[00:20:25] want to see is a massive imbalance
+[00:20:27] between Supply and demand now because we
+[00:20:30] have more than 10,000 stocks in the
+[00:20:32] market that you could trade on any given
+[00:20:34] day there is almost always a stock on
+[00:20:37] any particular day that has a breaking
+[00:20:39] news Catalyst this breaking news and
+[00:20:42] it's just to pause on that what's really
+[00:20:44] interesting is that as a breaking news
+[00:20:47] Trader I'm usually trading different
+[00:20:49] stocks pretty much every day I'm just
+[00:20:51] trading what has news today so I'm
+[00:20:53] moving all around the market some people
+[00:20:56] have the notion that you should get
+[00:20:58] really good at at trading One stock like
+[00:21:00] apple or Tesla or something like that
+[00:21:03] however what I've learned is that if you
+[00:21:04] try to do that what you're trying to do
+[00:21:07] is the equivalent of play chess against
+[00:21:09] the computer because what you may know
+[00:21:11] is that more than 60% of the volume in
+[00:21:14] the market is actually driven by high
+[00:21:16] frequency trading algorithms these are
+[00:21:19] computer programs that institutional
+[00:21:21] Traders have developed they hire MIT you
+[00:21:24] know graduates these phds who are
+[00:21:26] incredibly smart instead of having them
+[00:21:29] work on you know I don't know things
+[00:21:31] that are really maybe important they are
+[00:21:33] put to work figuring out how to create
+[00:21:35] an algorithm and a code to make more
+[00:21:38] money in the stock market so that's what
+[00:21:40] they do and as a result stocks are very
+[00:21:44] liquid like Tesla Nvidia the S&P 500
+[00:21:47] they are dominated by these high
+[00:21:49] frequency trading algorithms that are
+[00:21:51] competing to make money but if we look
+[00:21:53] at my metrics you could see certainly
+[00:21:55] those aren't the type of stocks that I'm
+[00:21:57] Trading in fact these are the types of
+[00:22:00] stocks that those highfrequency trading
+[00:22:01] algorithms wouldn't really have that
+[00:22:03] much interest in and you want to know
+[00:22:05] why it's because they want
+[00:22:08] predictability when they have a computer
+[00:22:10] trading for them they don't want to be
+[00:22:12] trading something that could be going up
+[00:22:13] or down 50% in one day that's way too
+[00:22:17] much volatility in fact a lot of these
+[00:22:20] algorithms are trained to be turned off
+[00:22:23] if the market exceeds a certain
+[00:22:25] variation in percentage change so these
+[00:22:28] algorithms create a lot of liquidity by
+[00:22:30] buying and selling when stocks are
+[00:22:32] moving in a narrow range but when they
+[00:22:35] start moving out those algorithms turn
+[00:22:37] off and that's when things get exciting
+[00:22:39] so on a day where apple or Tesla or one
+[00:22:42] of these big S&P 500 types of companies
+[00:22:45] has big news then it'll actually more
+[00:22:47] likely on that particular day have less
+[00:22:50] high frequency trading algorithms and
+[00:22:51] have more individual Traders and that
+[00:22:54] would be a day that you could consider
+[00:22:55] trading it but for me I've always
+[00:22:57] focused on this area this little niche
+[00:22:59] of the market which is small cap stocks
+[00:23:02] because these small cap stocks when they
+[00:23:04] have news that's when we see these big
+[00:23:06] percentage moves okay so my system is to
+[00:23:10] look for these types of stocks every
+[00:23:12] single day this is what I know I trade
+[00:23:15] this is what I know that I make money on
+[00:23:17] but how do I find these in real time I'm
+[00:23:20] using stock scanners so I actually hired
+[00:23:23] a development team to build out these
+[00:23:24] stock scanners for me and these scanners
+[00:23:27] are literally searching the market in
+[00:23:28] real time for stocks that meet the
+[00:23:30] criteria I just broke down for you so
+[00:23:32] this stock right here Duo is up
+[00:23:36] 313 price is $165 it has 100 million
+[00:23:40] shares of volume but the float is only
+[00:23:43] 5.85 million shares the relative volume
+[00:23:46] is
+[00:23:47] 561 so if we go back here this me oops
+[00:23:51] sorry it's this this this meets pretty
+[00:23:53] much all of our criteria it's a little
+[00:23:54] cheaper than maybe I'd like but other
+[00:23:56] than that I mean this thing has relative
+[00:23:58] volume of 500 it's got It's up well over
+[00:24:02] our minimum of 10% this is the type of
+[00:24:05] stock that we could get really excited
+[00:24:07] about the second uh leading percentage
+[00:24:10] Gainer and this I always sort by the
+[00:24:12] leading gainers you could sort it by
+[00:24:14] other columns I sorted by this flj 200%
+[00:24:18] jfb up 100% ipw up 96% opgn or Ogen up
+[00:24:24] 43% ctnt up 43% Xin up 39% % so I could
+[00:24:29] check on any one of these stocks and I
+[00:24:31] could look at the chart I could start to
+[00:24:32] get dialed in and ask myself all right
+[00:24:35] this thing is moving so now the next
+[00:24:37] question is where am I going to buy it
+[00:24:39] if I was going to break down how to
+[00:24:40] trade as a beginner into three steps
+[00:24:42] this is how I would do it step one is to
+[00:24:44] learn a strategy it should be a strategy
+[00:24:46] that other people are trading and is
+[00:24:47] proven profitable whether it's my
+[00:24:49] strategy or it's someone else's it
+[00:24:51] doesn't matter but just make sure it's a
+[00:24:52] strategy that actually is working for
+[00:24:54] other people that's step one learn that
+[00:24:56] strategy in and out that will include
+[00:24:59] how to find those stocks and also your
+[00:25:01] entries and your exits step two is to
+[00:25:03] practice trading in a simulated
+[00:25:05] environment because if you can't make
+[00:25:06] money in a Sim you have no business
+[00:25:08] trading with real money step three is to
+[00:25:10] flip the switch and trade with real
+[00:25:11] money but start with small size and only
+[00:25:13] increase if you're producing
+[00:25:15] profitability now when it comes to
+[00:25:17] learning a strategy it's really
+[00:25:19] important that the strategy that you're
+[00:25:20] going to learn is actually profitable
+[00:25:23] and so I'll take this as an opportunity
+[00:25:24] to show you and this will be the first
+[00:25:26] time some of you have seen this my third
+[00:25:28] party independent audit this is an
+[00:25:30] independent accountant report of my
+[00:25:32] trading profits and so what we have here
+[00:25:35] is um when I began the account the small
+[00:25:38] account
+[00:25:39] challenge I funded it with
+[00:25:42] $583 this is right here so I funded it
+[00:25:46] right here with $583 that was on uh day
+[00:25:49] one month one by the end of that month
+[00:25:52] January I was up
+[00:25:53] $116,000 February I was up 60,000 and
+[00:25:56] this is recording every every single
+[00:25:58] month so
+[00:26:00] $335,000 for the first year from a $583
+[00:26:04] starting balance I began the next year
+[00:26:06] with $35,000 in the account I took
+[00:26:09] profit out I took out 300 Grand I
+[00:26:11] finished with 500 Grand of profit now
+[00:26:13] I'm up over
+[00:26:15] $800,000 then I go into year three I
+[00:26:17] cross over a million doll I go into year
+[00:26:20] four I make 4.5 million I go into year
+[00:26:23] five I make 3.8 I go into year 6 I make
+[00:26:25] 800 I go into year 7 I'm up 300
+[00:26:29] this is a total cumulative profit of
+[00:26:31] seven sorry
+[00:26:34] 10,719
+[00:26:36] 735 an average monthly return of$
+[00:26:38] 127,000 a month an average monthly
+[00:26:41] percentage return of 64% per month this
+[00:26:44] is real money this is an audit this is
+[00:26:46] an independent accountants report
+[00:26:48] analyzing each of the broker brokerage
+[00:26:50] accounts I had during this period of
+[00:26:52] time I share this with you because I
+[00:26:56] can't this is real money my performance
+[00:26:59] speaks for itself now I will say as
+[00:27:01] always my results aren't typical and you
+[00:27:03] shouldn't assume that you'll make this
+[00:27:05] kind of money and you shouldn't assume
+[00:27:06] just because you learn from me that
+[00:27:07] you'll be a successful Trader because
+[00:27:08] there's no guarantee of that but what it
+[00:27:10] is important is that you know that if
+[00:27:12] you're going to spend time trying to
+[00:27:14] learn someone's strategy that's actually
+[00:27:17] profitable if they don't have at least
+[00:27:20] broker statements on their website
+[00:27:22] you've got to ask the question of why
+[00:27:24] not and I think there's only one
+[00:27:25] reasonable answer because anyone who is
+[00:27:28] trying to put themselves out there and
+[00:27:29] say that they're profitable is going to
+[00:27:31] put up the proof and so I like to share
+[00:27:34] this with you so you know beyond a
+[00:27:35] shadow of a doubt that the person you're
+[00:27:36] learning from is credible and qualified
+[00:27:38] the strategy is being traded by me every
+[00:27:41] single day with real money rain or shine
+[00:27:43] no matter what the market is I'm showing
+[00:27:45] up okay so this is a strategy that I'm
+[00:27:48] trading every single day and my starting
+[00:27:51] point each day is using this scanner to
+[00:27:53] find the stocks that are moving once I
+[00:27:56] found a stock that's moving
+[00:27:59] now I have a goal my goal is to try to
+[00:28:02] capture just 15 to 20 cents per share
+[00:28:05] that's the starting point and as I said
+[00:28:07] one of the things that's frustrating for
+[00:28:09] a lot of Traders is that it's just 15 to
+[00:28:11] 20 cents I'm not asking for a lot but
+[00:28:14] you can struggle to make that
+[00:28:16] consistently for years and years and
+[00:28:18] years and years but once you're
+[00:28:20] consistently making 15 to20 cents per
+[00:28:23] share right on your trades let's do the
+[00:28:26] math okay so your average avering let's
+[00:28:28] say 15 cents per share you're doing that
+[00:28:31] in the simulator with 100 shares so your
+[00:28:33] winners are
+[00:28:35] $15 okay it's not a lot of money but
+[00:28:38] you're doing that consistently you're
+[00:28:39] making $15 a day so you flip the switch
+[00:28:41] you trade with real money and you
+[00:28:43] continue making 15 a day and you say you
+[00:28:45] know what I'm going to start increasing
+[00:28:47] so now you go up to 200 shares now
+[00:28:49] you're making 30 a day then you go up to
+[00:28:52] 300 shares you're making 45 a day you go
+[00:28:55] up to 500 shares right you're making $75
+[00:28:59] a day then eventually you make your way
+[00:29:01] to 1,000 shares you're making 150 a day
+[00:29:04] then you say you know what I'm not going
+[00:29:05] to stop here I'm going to go to 2,000
+[00:29:07] shares now you're making 300 a day you
+[00:29:10] go to 4,000 shares right you're making
+[00:29:13] 600 a day this is how it scales up now I
+[00:29:16] always say that there is a limit to
+[00:29:18] scalability in the market some people
+[00:29:21] think well gez if I could do it with a
+[00:29:22] 100 shares I could do it with a 100,000
+[00:29:25] shares but what you will find is that
+[00:29:28] actually there is a bit of a diminishing
+[00:29:31] return in fact if you tried to do it
+[00:29:33] with such big size you would actually
+[00:29:35] lose money so there is a sweet spot
+[00:29:38] where you will find that you make the
+[00:29:39] most and for me generally it's on
+[00:29:42] positions between I would say 10 and
+[00:29:45] 20,000 shares where I kind of do the
+[00:29:47] best when I start to go heavier than
+[00:29:49] that I find that I have to either hold
+[00:29:52] longer to mitigate the fact that I get
+[00:29:54] some slippage on my entries and exits
+[00:29:57] because there's not always the liquidity
+[00:29:58] to move that in and out of the market
+[00:30:00] with this kind of position so it's not a
+[00:30:02] linear curve it's not a linear kind of
+[00:30:05] growth as you just increase size you
+[00:30:07] can't just grow exponentially but the
+[00:30:09] difference between a 100 shares and a
+[00:30:12] th000 on a liquid stock there's very
+[00:30:14] little slippage so this is the area that
+[00:30:17] most beginner Traders should be focusing
+[00:30:19] starting with 100 shares and focusing on
+[00:30:22] just 15 to 20 cents per share now this
+[00:30:24] is especially if you're focusing on the
+[00:30:26] lower price stocks like I am if you're
+[00:30:28] trading stocks like Tesla and
+[00:30:30] Nvidia 15 cents isn't going to be enough
+[00:30:33] profit because on your losers you're
+[00:30:35] going to be losing 15 cents so the way I
+[00:30:38] think about trading in terms of risk if
+[00:30:41] I'm going to take risk let's say I'm
+[00:30:42] going to risk 100 I want the potential
+[00:30:44] to make 200 so I want to have a 2: one
+[00:30:46] profit to loss ratio so that means if my
+[00:30:49] profit Target is 15 to 20 cents I don't
+[00:30:52] want to lose more than S to 10 cents a
+[00:30:54] share if I can that's going to be my
+[00:30:57] goal to try to keep my Max loss very
+[00:30:59] tight on a trade so now we found the
+[00:31:03] stock that we like it's going to be the
+[00:31:04] leading percentage Gainer the one that's
+[00:31:06] moving up the most today in the entire
+[00:31:09] Market okay the question next is where
+[00:31:12] do I get in where I can get my 15 cents
+[00:31:15] a share without risking more than you
+[00:31:18] know 7 to 10
+[00:31:20] cents okay so this is going to get into
+[00:31:23] technical analysis technical analysis is
+[00:31:26] the universal language of the financial
+[00:31:29] markets it doesn't matter if you're
+[00:31:30] trading stocks Forex
+[00:31:32] cryptocurrency you could be trading any
+[00:31:34] Financial instrument and if you can pull
+[00:31:36] up a Candlestick chart like what you're
+[00:31:38] seeing right here you can do technical
+[00:31:40] analysis so learning how to read
+[00:31:43] Candlestick charts will no doubt be a
+[00:31:46] critical component to being a successful
+[00:31:48] Trader what I will share with you in
+[00:31:50] this episode is the basic form of
+[00:31:54] technical analysis and one of my most
+[00:31:57] preferred
+[00:31:58] entry patterns this is going to be a
+[00:32:00] multi Candlestick pattern now for those
+[00:32:02] of you watching they're at the very
+[00:32:04] beginning of your learning curve who
+[00:32:06] haven't learned anything about
+[00:32:07] Candlestick charts I have episodes that
+[00:32:10] are dedicated specifically to this topic
+[00:32:12] where the full episode is just how to
+[00:32:14] read Candlestick charts for beginners so
+[00:32:17] I don't want to repeat everything in
+[00:32:18] that episode here today but I'll give
+[00:32:20] you a cliff notes version and then we're
+[00:32:21] going to talk about this pattern so a
+[00:32:24] Candlestick chart is a
+[00:32:28] chart that shows us historical price so
+[00:32:32] when we look at this um just go like
+[00:32:34] this here this is showing us the the
+[00:32:37] history of this stock this is a daily
+[00:32:39] chart which means each one of these
+[00:32:40] candles represents one day of time and
+[00:32:43] we could see very clearly by looking at
+[00:32:45] this chart that this is a stock that's
+[00:32:46] been selling off for quite a while so
+[00:32:49] what the chart does is it gives us
+[00:32:51] context it helps us understand the
+[00:32:53] current price relative to where it's
+[00:32:55] been because if all you saw was oh this
+[00:32:57] stock is 65 C you wouldn't know if
+[00:32:59] that's a good thing or a bad thing it's
+[00:33:01] a good thing if the stock has always
+[00:33:03] been trading at 4 cents a share but it's
+[00:33:05] a bad thing if it used to be trading at
+[00:33:07] $10 a share which this one did so the
+[00:33:10] stock chart the historical chart gives
+[00:33:12] us context but what we're ultimately
+[00:33:15] trying to do is we're trying to make a
+[00:33:17] prediction about what's going to happen
+[00:33:19] next so we use a combination of
+[00:33:21] technical analysis analyzing the
+[00:33:24] historical chart here with looking at
+[00:33:27] breaking news and watching the
+[00:33:30] trend so when I'm looking at a
+[00:33:32] Candlestick chart to give you the
+[00:33:34] anatomy each Candlestick communicates
+[00:33:37] four pieces of
+[00:33:38] information the open the close the high
+[00:33:43] and the low if this is a daily
+[00:33:46] chart then this Candlestick represents
+[00:33:48] one whole day of price action that means
+[00:33:50] the market opened at this price it hit a
+[00:33:53] low of this price down here which we
+[00:33:55] call the bottom of the candle wick it
+[00:33:57] squeezed Eed up it hit a high of way up
+[00:33:59] here and then it closed right there the
+[00:34:01] only difference between a red candle and
+[00:34:04] a green candle is that the open is at
+[00:34:06] the top and the close is at the bottom
+[00:34:09] because a red candle is going down in
+[00:34:11] price right but the shapes can be B more
+[00:34:14] or less the same so we as active Traders
+[00:34:18] use the daily chart to help us gain
+[00:34:21] context but we're primarily naturally
+[00:34:24] trading on intraday charts I'm trading
+[00:34:27] on five 5 minute and one minute charts
+[00:34:31] that means each Candlestick I'm looking
+[00:34:33] at if I'm looking at a 5 minute will
+[00:34:34] represent 5 minutes of time so generally
+[00:34:37] this is what happens a stock comes out
+[00:34:40] with breaking news so boom boom boom
+[00:34:42] there's the news let's say it's 8:00
+[00:34:44] a.m. top of the hour breaking news comes
+[00:34:48] out so we've got a news alert now how do
+[00:34:51] we know that there's news do we search
+[00:34:53] for every breaking news headline of
+[00:34:54] every stock in the entire Market no that
+[00:34:57] would be imp possible and even if we
+[00:34:59] could do that we wouldn't know the
+[00:35:00] context of whether or not that news is
+[00:35:02] good or bad without looking at the chart
+[00:35:04] to see if the price is going up or down
+[00:35:06] you would have to know the company very
+[00:35:08] very well to know just by reading the
+[00:35:10] headline what the stock is going to do
+[00:35:12] so we don't try to read every single
+[00:35:14] headline that comes out that's would be
+[00:35:16] a waste of energy instead what we do is
+[00:35:19] we use these stock scanners right here
+[00:35:21] to search the market for stocks that are
+[00:35:23] making new highs these stocks right here
+[00:35:26] are hitting my high of momentum scanner
+[00:35:29] so as they make a new high each time it
+[00:35:31] hits a new high of day as it's pushing
+[00:35:34] higher it hits a new high of day a new
+[00:35:35] high of day a new high of day it
+[00:35:37] triggers an alert as long as it meets
+[00:35:40] the criteria that we already talked
+[00:35:42] about from the perspective of price
+[00:35:44] volume percentage change and Float so
+[00:35:47] now we see a stock hitting the scanner
+[00:35:49] and firing alerts these are audio alerts
+[00:35:52] so even if I was outside or across the
+[00:35:54] room I'm going to hear that there's a
+[00:35:55] stock moving up on my scanner so now I'm
+[00:35:57] going to come over and I'm going to look
+[00:35:58] at it what I know is that there's a
+[00:36:00] psychology that happens in the market
+[00:36:03] among Traders when a stock begins moving
+[00:36:05] what happens initially is the stock pops
+[00:36:08] up people see it and they're like oh my
+[00:36:11] gosh something is moving I want to get a
+[00:36:13] piece of the action now you will have
+[00:36:15] some traders who were in the stock
+[00:36:18] already before the news came out so as
+[00:36:20] soon as it pops up they're like holy
+[00:36:22] smokes I'm going to sell and take profit
+[00:36:24] so we have the initials squeeze up and
+[00:36:27] then we have a little bit of a pullback
+[00:36:29] now if there's a lot of people that want
+[00:36:31] to sell that's going to create a lot of
+[00:36:33] Supply they're going to sell sell sell
+[00:36:35] sell sell and the price could go all the
+[00:36:38] way back down so this is the moment
+[00:36:40] where supply and demand comes into play
+[00:36:43] so at this moment right here we start to
+[00:36:45] see a little bit of a pullback we see
+[00:36:47] some selling some people are taking
+[00:36:49] profit which is natural and to be
+[00:36:51] expected we dip down we dip down a
+[00:36:54] little bit more and now at this point
+[00:36:56] there's a couple questions I'm going to
+[00:36:58] ask how much selling is occurring on
+[00:37:00] these candles the way I will know how
+[00:37:03] much selling is occurring is by checking
+[00:37:05] the volume bars on these candles so let
+[00:37:08] me show you an example if you look on
+[00:37:10] this chart right here you'll see that we
+[00:37:12] had the initial Spike up right here we
+[00:37:15] got this move where a stock actually
+[00:37:16] went from $5 to six to 7 to8 to 9 to 10
+[00:37:20] almost to $111 a share which was a
+[00:37:22] really incredible move up well over 100%
+[00:37:24] just in 5 minutes but then it started to
+[00:37:27] pull back
+[00:37:28] and what I look at is the amount of
+[00:37:29] volume on the selling candles so each
+[00:37:32] Candlestick is driven by a certain
+[00:37:35] number of shares and these Shares are
+[00:37:37] tracked down here as volume so what I
+[00:37:40] saw here was there was more selling
+[00:37:43] volume than buying volume and when
+[00:37:46] there's more selling volume than buying
+[00:37:48] volume usually what that means is the
+[00:37:50] stock is going to keep declining I'll
+[00:37:53] show you another example uh right here
+[00:37:56] this is a great example where you've got
+[00:37:57] very light volume buying and then high
+[00:38:00] volume selling 1 2 3 four five red
+[00:38:04] candles so when I pull up the chart I
+[00:38:07] like to see those big green candles but
+[00:38:09] then the next thing I'm asking is when
+[00:38:11] we have the pullback are those candles
+[00:38:14] huge red candles or are they small so in
+[00:38:17] this case what we would want to see is
+[00:38:19] that when we have the first move up
+[00:38:21] let's just say for
+[00:38:23] example we have high volume green
+[00:38:25] candles and then we have have lighter
+[00:38:28] volume red candles that's what we would
+[00:38:30] want to see if I saw that these were way
+[00:38:33] up here I would completely change my
+[00:38:36] bias on this potential trade I would say
+[00:38:39] there's too much selling this is not
+[00:38:40] going to work so one of the first things
+[00:38:43] I check is the amount of volume that's
+[00:38:44] occurring on the pullback candles then
+[00:38:47] what I'm watching is we had this move up
+[00:38:50] we had a little bit of a pullback if
+[00:38:52] this is a light volume pullback that
+[00:38:54] tells me it's just a little bit of
+[00:38:55] profit taking and so now I'm thinking
+[00:38:58] people are still liking this the stock
+[00:39:00] is still holding up and what I want to
+[00:39:02] do is I want to jump on the next wave up
+[00:39:05] so how do I know when the next wave up
+[00:39:07] is going to
+[00:39:08] begin what I look at is the first candle
+[00:39:12] that makes a step up you have a step
+[00:39:14] down a step down a step down and this
+[00:39:16] right here is making a step up another
+[00:39:19] step up a third step up a fourth step up
+[00:39:23] now you don't want to buy way up here
+[00:39:24] this is too extended I want to get in at
+[00:39:26] the first step up so that means my entry
+[00:39:29] is going to be this candle right here
+[00:39:32] and I'm going to be buying that candle
+[00:39:34] the moment it breaks the high of this
+[00:39:37] red candle so let's say the high there
+[00:39:39] was $7 the moment it breaks over seven
+[00:39:42] that's where I'm a buyer my Max loss on
+[00:39:45] this trade is the low of this candle so
+[00:39:47] now based on this because I know my Max
+[00:39:50] loss is the low of this candle and the
+[00:39:52] reason I know that is because if this re
+[00:39:54] turned around and went like this the
+[00:39:55] pattern would be broken okay so no
+[00:39:58] reason to keep holding if it comes back
+[00:39:59] down to those levels so let's say this
+[00:40:02] is 680 the low of that candle 680 then
+[00:40:06] you're going to say well wait a second
+[00:40:08] shoot that's 20 cents a share you're
+[00:40:11] right okay so now we have to think if
+[00:40:15] I'm going to risk 20 cents I need the
+[00:40:16] potential to make 40 cents the 2:1 ratio
+[00:40:19] is the same whether it's 5 cents or 15
+[00:40:21] cents it's still the ratio so then we
+[00:40:23] look at the chart and what if we see
+[00:40:24] that the high up here which would be our
+[00:40:27] first profit Target a retest a high a
+[00:40:29] day was at
+[00:40:33] $765 then what we would know is we've
+[00:40:35] got room from 7 to 7.65 that's 65 cents
+[00:40:38] that covers our profit potential now
+[00:40:40] we've got 2 to one so I could take this
+[00:40:42] trade now maybe on day one I can't take
+[00:40:45] it with a th000 shares because a 20 cent
+[00:40:47] stop is 200 bucks I don't want to risk
+[00:40:49] that much money so maybe on this one I
+[00:40:52] buy just 500 shares and I risk $100 I
+[00:40:55] risk $100 on this trade Max loss is 680
+[00:40:59] now if this stock is in fact the number
+[00:41:01] one leading percentage Gainer on the day
+[00:41:04] if it is obvious if other people see it
+[00:41:07] if volume is coming in it's going to get
+[00:41:09] good follow through that's typically how
+[00:41:11] it works so now I'm watching that first
+[00:41:13] candle to make a new high and I'm
+[00:41:15] looking for that squeeze back to the
+[00:41:16] high of day and up here as it starts
+[00:41:18] moving up I can take a little profit off
+[00:41:20] the table here I could sell 250 shares I
+[00:41:23] could sell another 100 shares up here I
+[00:41:25] could sell another 100 shares up here
+[00:41:27] here and then I wouldn't sell the rest
+[00:41:29] until the first
+[00:41:31] candle steps down so holding until we
+[00:41:35] have that first step down now I don't
+[00:41:36] like to hold the full position until we
+[00:41:38] have a step down I like to pay myself
+[00:41:40] and take some profit off the table but
+[00:41:42] the last position I'd like to hold if I
+[00:41:44] can until we have that first step down
+[00:41:47] up here this is one of my favorite
+[00:41:50] patterns now this is just one pattern I
+[00:41:52] have dozens of different technical
+[00:41:54] setups that I will trade and these are
+[00:41:56] all part of of the universal language of
+[00:41:58] the financial markets what's more
+[00:42:00] important than ultimately the perfect
+[00:42:02] pattern is making sure I'm trading the
+[00:42:04] right stock the right stock is one that
+[00:42:06] meets all of my criteria and is super
+[00:42:09] super obvious there are times where
+[00:42:11] there'll be a stock that meets all my
+[00:42:13] criteria but there'll be another stock
+[00:42:16] that is more obvious in the market maybe
+[00:42:18] it is a stock at 15 or 20 cents that is
+[00:42:21] up 700% so it's the leading percentage
+[00:42:25] Gainer more people are going to focus on
+[00:42:26] it but I don't like it as much cuz it's
+[00:42:28] too cheap or maybe the leader is one
+[00:42:30] that's too expensive or maybe the float
+[00:42:32] is too high so the best days for me are
+[00:42:36] the days when the most obvious stock is
+[00:42:39] also one that meets my parameters for
+[00:42:41] being the type that I would make the
+[00:42:43] most money on that's not going to happen
+[00:42:45] every single day but on the days when it
+[00:42:47] does happen that's when I can do really
+[00:42:49] well so this pullback pattern is just
+[00:42:52] one of many different patterns that I
+[00:42:54] would apply essentially when I'm
+[00:42:56] watching chart patterns forming I'm
+[00:42:58] happy to trade whatever I see now I have
+[00:43:01] learned over the years a number of
+[00:43:04] different patterns that work really well
+[00:43:07] what we are doing as traders in a lot of
+[00:43:09] ways is we are attempting to predict the
+[00:43:12] future and the way we do that is by
+[00:43:15] visualizing patterns so this right here
+[00:43:19] when we see this much of the pattern
+[00:43:20] we're seeing only the beginning of it we
+[00:43:22] see the first two candles the pullback
+[00:43:24] and we now have to visualize what's
+[00:43:26] going to happen next
+[00:43:27] so how do we make that visualization
+[00:43:30] this is really pattern recognition we've
+[00:43:32] seen this pattern play out again and
+[00:43:34] again and again we we print out the
+[00:43:36] charts those of you who have already
+[00:43:38] downloaded and printed out my small
+[00:43:40] account strategy PDF you have that you
+[00:43:42] can print out charts just like this put
+[00:43:44] them around your desk and then when you
+[00:43:46] start to see in real time a stock that
+[00:43:49] looks very similar to this chart that
+[00:43:51] you've printed out you're going to say
+[00:43:52] to yourself now wait a second we've got
+[00:43:55] 1 2 3 4 5 six green candles in a row
+[00:43:57] we've got a light volume pullback right
+[00:43:59] here now I've got the first candle
+[00:44:00] making a new high this is where I should
+[00:44:02] buy and I should take a little profit it
+[00:44:04] goes through the high a little more
+[00:44:05] profit and then the first candle that
+[00:44:07] dips down steps down I'll take off the
+[00:44:09] rest and right there you've got to trade
+[00:44:10] from $6 up to $8 a share that's a 20%
+[00:44:14] intraday return and you do it in this
+[00:44:17] case in about four minutes that is
+[00:44:19] fantastic that's what you like to see
+[00:44:22] there's another example you're seeing
+[00:44:23] that move up a little dip and then a
+[00:44:25] push higher this is the pattern that I'm
+[00:44:28] trading pretty much every single day but
+[00:44:30] again it doesn't have to be that
+[00:44:32] specific pattern there's a number of
+[00:44:33] different patterns that I'm happy to
+[00:44:35] trade we've got uh variations of this
+[00:44:37] pattern sometimes just for instance
+[00:44:39] we'll come up to the high here and then
+[00:44:43] uh so we'll have a green candle and then
+[00:44:44] we'll pull back one more time all right
+[00:44:47] so sometimes that'll happen we call that
+[00:44:49] an ABCD pattern so then we come up for
+[00:44:51] the second attempt so sometimes it'll do
+[00:44:53] that and these are all fine I'm happy to
+[00:44:55] trade this breakout here and get back
+[00:44:57] out and then get back in right here as
+[00:44:59] it comes up for the second attempt as a
+[00:45:02] Trader it's more important that you're
+[00:45:04] trading the right stock every day than
+[00:45:06] trading the picture perfect pattern you
+[00:45:09] will learn more patterns as you gain
+[00:45:11] more experience now some of you are at
+[00:45:15] the very beginning of your learning
+[00:45:16] curve and you're experiencing poor
+[00:45:18] accuracy in your trading you maybe only
+[00:45:20] write 30% of time 40% of time and if
+[00:45:23] you're in that situation I want to speak
+[00:45:25] directly to you because there's
+[00:45:26] something that I could share with you
+[00:45:28] one of the things that you want to think
+[00:45:29] about when it comes to profitability are
+[00:45:31] that there are three core components you
+[00:45:33] have your accuracy you have your profit
+[00:45:35] loss ratio and then you have your
+[00:45:37] consistency and the most important of
+[00:45:39] the three is your accuracy here's the
+[00:45:41] good news accuracy gets better with
+[00:45:43] experience any beginner Trader is going
+[00:45:46] to have poor accuracy you don't have a
+[00:45:48] lot of Ed educated intuition you don't
+[00:45:49] have a lot of experience you don't have
+[00:45:50] a lot of time sitting in this chair
+[00:45:52] watching these charts forming I've got
+[00:45:54] more than a decade of this experience so
+[00:45:56] I've seen more charts I could possibly
+[00:45:59] list this is something that can be a
+[00:46:02] benefit for you by being part of a
+[00:46:03] trading Community like my community if
+[00:46:05] you choose you get to piggyback off of
+[00:46:08] all of the knowledge I've picked up so
+[00:46:10] what I will also do is in the
+[00:46:11] description I'll put a link to a twoe
+[00:46:13] trial at Warrior trading where you can
+[00:46:14] have two weeks it's a twoe trial and you
+[00:46:17] can use my scanners you can use my
+[00:46:18] charts you can listen to my broadcast
+[00:46:19] you can watch some more of my classes to
+[00:46:21] begin to pick up on what it's like to be
+[00:46:24] in a community of traders who are doing
+[00:46:26] this every single day for those of you
+[00:46:28] who are have the time and availability
+[00:46:30] to make this happen then you should
+[00:46:31] definitely do the twoe trial for those
+[00:46:33] of you that are still studying you're
+[00:46:35] working full-time you're not able to
+[00:46:37] trade full-time yet keep watching
+[00:46:40] episodes like this keep studying keep
+[00:46:42] learning the more you can immerse
+[00:46:44] yourself in this environment the faster
+[00:46:46] you will pick things up so now after
+[00:46:48] watching this episode you don't have to
+[00:46:49] be the trader who's trading without a
+[00:46:51] strategy you could start trading a
+[00:46:53] strategy that I'm trading every single
+[00:46:55] day you could practice it in a simulator
+[00:46:57] but you still run the risk of being the
+[00:46:59] traiter who is unable to have the
+[00:47:00] discipline to follow the rules so how do
+[00:47:03] we create and cultivate more discipline
+[00:47:05] in our life I will tell you that
+[00:47:07] discipline is a muscle that you can
+[00:47:08] strengthen with exercise and practice
+[00:47:11] things that are going to force you to be
+[00:47:13] disciplined in your life can include an
+[00:47:15] exercise regimen and daily meditation I
+[00:47:19] do both in my life and both of these
+[00:47:21] help me strengthen that muscle because
+[00:47:24] there are this is the thing with trading
+[00:47:25] there are going to be moments where all
+[00:47:27] of a sudden you have the big emotions
+[00:47:29] that come with experiencing loss the
+[00:47:31] frustration the disappointment and your
+[00:47:34] gut instinct is to try to recoup losses
+[00:47:36] quickly and to break your rules and when
+[00:47:39] you start breaking your rules well
+[00:47:40] there's no sense in having them if
+[00:47:42] you're going to break them the system
+[00:47:44] only works when a Trader has the
+[00:47:46] discipline to follow the rules now of
+[00:47:49] course you need aptitude there are some
+[00:47:51] natural aptitudes that are going to make
+[00:47:52] it much more likely that you'll succeed
+[00:47:54] than than not but ultimately if you're
+[00:47:57] not able to be disciplined regardless of
+[00:47:59] aptitude you're not going to get
+[00:48:01] anywhere now when it comes to
+[00:48:02] recommended reading there's a couple
+[00:48:03] books that I would encourage you to
+[00:48:04] check out this book right here is uh by
+[00:48:07] Gary Dayton it's called trade mindfully
+[00:48:10] and this is all about the psychology of
+[00:48:13] trading this is a trading psychology
+[00:48:15] book so for those of you that struggle
+[00:48:16] with psychology this is a mustre for
+[00:48:19] those of you that want to learn a little
+[00:48:20] bit more about candlesticks this is a
+[00:48:22] good book it's a little expensive and
+[00:48:24] honestly if you watch my video on how to
+[00:48:26] read candlesticks
+[00:48:27] uh for for beginners you'll find it
+[00:48:29] actually more helpful than this book but
+[00:48:30] for those that like books this would be
+[00:48:32] a fine one of course you could check out
+[00:48:33] my book how to day trade the plain truth
+[00:48:35] and I encourage you to check out um this
+[00:48:37] book here quit by Annie Duke this talks
+[00:48:39] about the power of knowing when to walk
+[00:48:41] away the best Traders are the traders
+[00:48:44] who learn to roll with the punches to
+[00:48:46] take their losses and walk away because
+[00:48:48] this is trading you're going to be red
+[00:48:49] you're going to have losses so you
+[00:48:51] better get used to it and you better get
+[00:48:52] good at it becoming really good at
+[00:48:54] losing is an important skill and
+[00:48:57] learning when to walk away sooner is
+[00:48:59] always better so this is something that
+[00:49:01] she teaches in this book learn to walk
+[00:49:03] away before you have a close call now if
+[00:49:06] you found this episode helpful I hope
+[00:49:07] you hit that thumbs up I hope you
+[00:49:09] subscribe to the channel and I'm looking
+[00:49:10] forward to seeing you during the 2E
+[00:49:11] trial I hope you printed out the PDF and
+[00:49:14] hope you're getting a lot of value out
+[00:49:15] of this Channel and episodes just like
+[00:49:17] it so thanks as always for tuning in and
+[00:49:18] I'll remind you as always trading is
+[00:49:20] risky so take it slow manage your risk
+[00:49:22] and I'll see you back here for the next
+[00:49:23] episode real soon

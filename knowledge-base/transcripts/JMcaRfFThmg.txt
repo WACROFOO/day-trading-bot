@@ -1,0 +1,398 @@
+# How to Trade Breaking News 📰
+# https://www.youtube.com/watch?v=JMcaRfFThmg
+# duration_sec: 951
+
+[00:00:00] what's up everyone alright so in this
+[00:00:01] episode I'm gonna break down for you how
+[00:00:03] to day trade breaking news and I had a
+[00:00:05] perfect example of it today a stock pops
+[00:00:07] up I'm gonna show you the headline the
+[00:00:09] live trading recording the initial
+[00:00:11] market response me jumping in the first
+[00:00:14] pullback riding that momentum and taking
+[00:00:17] profit on the way up
+[00:00:19] three minute long trade over $1500 of
+[00:00:22] profit now this is a stock that has
+[00:00:24] ended up coming almost all the way back
+[00:00:26] down it were traced the entire move and
+[00:00:29] that's not uncommon with breaking news
+[00:00:31] headlines sometimes the initial market
+[00:00:33] response is really dramatic and then
+[00:00:35] things kind of settle down as investors
+[00:00:37] and and traders kind of really circulate
+[00:00:39] and better understand the news that's
+[00:00:41] why it's always important when you're
+[00:00:43] trading these that number one you
+[00:00:44] understand how much you're risking on
+[00:00:46] the trade on this trade has risking $700
+[00:00:49] my profit target a thousand to 1500
+[00:00:52] ended up getting that which means I was
+[00:00:53] risking 700 to make 1500 that's a 2 to 1
+[00:00:57] profit - loss ratio which means if I'm
+[00:01:00] right only 33% of the time trading that
+[00:01:03] setup and breakeven
+[00:01:04] so if I'm right 50% of the time or 60%
+[00:01:07] I'm or 70% of time I'm making a lot of
+[00:01:10] money in fact you'll see today that I'm
+[00:01:12] up over $11,000 on all my trades across
+[00:01:16] the board today was a really solid day
+[00:01:18] in the market now as you're watching
+[00:01:20] this episode you might have a couple of
+[00:01:22] questions about risk management about
+[00:01:24] stock selection scanners flow breaking
+[00:01:27] news so if I don't answer all of them in
+[00:01:29] this episode what I want you to do is
+[00:01:31] click the link right in the description
+[00:01:32] to register to my next live webinar I
+[00:01:35] think that will help get some of those
+[00:01:37] questions answered and of course you can
+[00:01:38] leave questions right down there below
+[00:01:40] in the comments if you enjoy these
+[00:01:41] videos I hope you are already subscribe
+[00:01:43] to the channel but if not hit that
+[00:01:45] subscribe button alright so let's get
+[00:01:46] into it let's start talking about how to
+[00:01:47] day trade breaking news are you guys so
+[00:01:50] this is kind of funny because literally
+[00:01:52] yesterday I was telling myself I should
+[00:01:54] make a
+[00:01:56] an episode of video on how to day trade
+[00:01:59] breaking news and I was like man it's
+[00:02:01] been kind of a while since I had a
+[00:02:03] really good breaking news headline that
+[00:02:05] I traded so I was like well you know I
+[00:02:07] guess I'll just have to kind of you know
+[00:02:09] stay on the lookout for one and and
+[00:02:11] maybe if it comes up hopefully I'll be
+[00:02:13] recording and I'll trade it and
+[00:02:14] everything else boom today breaking news
+[00:02:17] on NB Evie and I traded it now I'll
+[00:02:21] preface this by saying that basically
+[00:02:22] every day I am trading breaking news
+[00:02:26] because when I trade a stock that's on
+[00:02:28] this gap scanner here the stock dare for
+[00:02:32] instance or this stock ad AP this stock
+[00:02:35] ad AP is right here is our second lead
+[00:02:38] in gapper of 45% this morning with two
+[00:02:40] hundred and seventy five percent gain as
+[00:02:42] of right now it had breaking news but I
+[00:02:46] wouldn't really consider this to be
+[00:02:47] trading breaking news because the news
+[00:02:51] was out hours beforehand I was more
+[00:02:53] jumping on the momentum once the market
+[00:02:55] opened breaking news I would consider to
+[00:02:59] be more like this trade on nbe V where
+[00:03:01] the stock was doing nothing absolutely
+[00:03:05] nothing and then all of a sudden is
+[00:03:07] doing something incredible right that is
+[00:03:11] more typical of breaking news and so
+[00:03:14] this is what I've got a really good
+[00:03:15] example of today so nbe V is the stock
+[00:03:18] let's go back and let's see I'm gonna
+[00:03:20] pull this up on my chatroom feed here so
+[00:03:25] I can show you guys the news as it was
+[00:03:27] posted in the room um alright so here we
+[00:03:32] go alright so this is our chatroom
+[00:03:36] software and newsdesk is this
+[00:03:39] proprietary news feed that we have that
+[00:03:41] API so the news is posted right into the
+[00:03:44] chatroom so news desk post nbe V that's
+[00:03:47] the stock symbol Kendall Jenner's diet
+[00:03:49] includes new-age beverage brands she
+[00:03:51] told E news that she drinks this to
+[00:03:54] start her day every morning and that was
+[00:03:57] in a tweet NB evey was a tweet from the
+[00:03:59] company all right so we've got tweet
+[00:04:02] from the company the kendall Jenner and
+[00:04:04] I don't know if it's a it sounds like a
+[00:04:06] little bit of an informal celebrity
+[00:04:09] you know kind of promotion there or
+[00:04:12] maybe it's formal I don't know but in
+[00:04:14] any case paid unpaid I don't know all I
+[00:04:17] know is that when I pulled it up the
+[00:04:19] stock was already hitting a dollar and
+[00:04:20] 96 cents so I'm gonna bring this down to
+[00:04:22] the 10-second chart because this is such
+[00:04:25] a fast-moving
+[00:04:27] trade that I ended up taking all right
+[00:04:30] so I pulled it up and it was right
+[00:04:31] around right around here
+[00:04:33] it actually was right around here and
+[00:04:36] let me pull up my live trading recording
+[00:04:39] for you as well let's see and I will
+[00:04:43] break this down okay so hold up let me
+[00:04:48] just get this alright so there we go
+[00:04:53] okay all right so and we'll pull this up
+[00:04:59] right here and be evey currently its
+[00:05:01] back of the dollar 87 88 so it's kind of
+[00:05:04] like one of the things I say with
+[00:05:06] trading a lot is we don't want to marry
+[00:05:09] these stocks and you don't want to get
+[00:05:12] emotionally attached because they will
+[00:05:14] they will let you down
+[00:05:16] these are stocks that you want to be
+[00:05:18] actively trading you want to get in get
+[00:05:20] your profit and get out sometimes
+[00:05:23] these stocks will continue higher like
+[00:05:25] abap and of course you think oh man I
+[00:05:28] should have stuck with it longer but
+[00:05:30] more often than not they do this and so
+[00:05:32] one of the things we also say the
+[00:05:34] traders you don't go broke taking profit
+[00:05:36] you take money off the table and every
+[00:05:37] single day when you're trading you were
+[00:05:39] doing one of two things you were either
+[00:05:41] giving back money to the market or you
+[00:05:43] are walking away with profit and
+[00:05:44] potentially leaving a little bit of
+[00:05:46] money on the table look at this this
+[00:05:48] just dropped from was that $5 to you
+[00:05:51] know for 68 I would rather walk away
+[00:05:55] knowing that I did a great job
+[00:05:56] maybe I'm leaving the little money on
+[00:05:58] the table but I feel better walking with
+[00:06:00] profit then let's say giving back half
+[00:06:03] my gains because I over trade the market
+[00:06:05] so on nbe V I don't think I I think I
+[00:06:08] sold it a little too soon I left a
+[00:06:10] little money on the table and and we'll
+[00:06:11] you'll see this here alright so so let's
+[00:06:14] go back so we've got the the news
+[00:06:17] headline right here
+[00:06:18] kendall Jenner blah blah blah alright so
+[00:06:20] I see that I pull up the stock and
+[00:06:23] as I pulled it up and saw that it was
+[00:06:25] already up this much
+[00:06:26] I started pressing the Buy button so I
+[00:06:29] bought in thousand share increments 97
+[00:06:32] 98 99 99 now the thousand share
+[00:06:35] increment you could just as easily
+[00:06:37] change this to anything else under your
+[00:06:39] share size settings I have my custom
+[00:06:42] orders here for buy a thousand shares
+[00:06:44] I probably it's probably worth changing
+[00:06:47] this I did a small account challenge and
+[00:06:49] as I was preparing for that I trade I
+[00:06:52] put myself into boot camp where I could
+[00:06:53] only trade with 2,000 shares but I
+[00:06:56] haven't changed it since then so I don't
+[00:06:58] know I whatever
+[00:06:59] I've been on a good hot streak kind of
+[00:07:01] want to change what's been working in TD
+[00:07:04] Ameritrade I would have typed in nbe V
+[00:07:06] just like this and then I'd be able to
+[00:07:08] either click this for a thousand shares
+[00:07:10] or 500 and then click the buy market
+[00:07:12] button alright that's the easiest way to
+[00:07:14] jump in here
+[00:07:16] okay so nbe V it's surging up and I go
+[00:07:22] ahead and jump in it so I'm now in it
+[00:07:24] right now and as you can see I actually
+[00:07:28] added at two dollars and six cents so I
+[00:07:31] was kind of adding as it's moving higher
+[00:07:33] and now it's at 218 up 28% and it's got
+[00:07:38] 1.9 million shares of volume almost 2
+[00:07:40] million shares and you know it's not a
+[00:07:42] stock that I trade a lot you can see nbe
+[00:07:44] V hitting the scanners here it's got 71
+[00:07:46] million share flow now the float is the
+[00:07:49] number of shares available to trade and
+[00:07:51] if you're not super familiar with that
+[00:07:52] you can watch a couple of my other
+[00:07:54] videos or click down below there's a
+[00:07:56] link to register to one of my workshops
+[00:07:57] where I'll teach you about float and and
+[00:08:00] how I qualify a stock for having the
+[00:08:02] potential to have homerun you know a
+[00:08:05] homerun tray nbe V I was a little
+[00:08:09] skeptical I know it's a stock that
+[00:08:11] sometimes a little bit more thickly
+[00:08:12] traded so up here when it starts to kind
+[00:08:15] of run into a little resistance at to 18
+[00:08:17] to 19 I kind of was like oh let's see
+[00:08:21] what this does
+[00:08:22] so there's 223 and then it flushes down
+[00:08:26] here to 16 15 14 13 and I was like oh it
+[00:08:30] even hit to 11 there for a second so I
+[00:08:33] ended up taking some profit off the
+[00:08:35] table
+[00:08:36] I thought that maybe this is gonna come
+[00:08:38] right back down to two and I hey I
+[00:08:40] better just walk away with some profit
+[00:08:41] so I took some profit off the table
+[00:08:44] it ends up holding this level of 2:11
+[00:08:48] bouncing back up and on the on the
+[00:08:51] 10-second chart here it's actually
+[00:08:53] forming the micro pullback just like it
+[00:08:54] did right here so the high is around 23
+[00:08:57] so over 23 we'll be making new highs
+[00:09:00] note that it's just a strong volume the
+[00:09:04] time and sales which is this here in
+[00:09:06] green is just sewing so much strength so
+[00:09:09] and then just like that it's up to 29 by
+[00:09:12] 34 so now I've got a little bit of FOMO
+[00:09:15] cuz I'm thinking man I sold 5,000 shares
+[00:09:18] at 213 if I'd held that to 233 I would
+[00:09:23] have made an extra $1,200 at the same
+[00:09:27] time had it come right back down to two
+[00:09:29] I could have been getting out break-even
+[00:09:31] for the whole trade or even potentially
+[00:09:33] for a loss and that's not acceptable so
+[00:09:36] on this trade I left a little money on
+[00:09:39] the table but I'm walking away with
+[00:09:41] profit so it's squeezing up I'm gonna
+[00:09:44] you can see this red l uld
+[00:09:48] right here at 34 that tells us that if
+[00:09:51] it hits that level and holds above that
+[00:09:54] level the stock will get halted on a
+[00:09:55] circuit breaker so L ul D is right here
+[00:09:58] it has to stay the bid price has to stay
+[00:10:00] above this level for at least fifteen
+[00:10:02] seconds for the whole stock to get
+[00:10:04] halted again if you're not familiar with
+[00:10:06] the circuit breaker halts or things like
+[00:10:08] that make sure you register to my
+[00:10:09] webinar it's really a day trading 101
+[00:10:11] where I break down a risk-management
+[00:10:13] stock selection and chart patterns so
+[00:10:16] this pattern right here is a micro
+[00:10:19] pullback buying the first candle to make
+[00:10:20] a new high now I was already in from
+[00:10:22] down here so I just held through the
+[00:10:24] pullback alright so now we're at 34 and
+[00:10:27] you can see I've got a 1290 $4.99 of
+[00:10:31] unrealized profit open P&L and I've
+[00:10:33] already locked up 700 bucks
+[00:10:35] so right here I'm as it's starting to
+[00:10:40] look like it's not gonna halt I started
+[00:10:42] to get a little nervous and think you
+[00:10:44] know what I better take a little more
+[00:10:46] off the table the halt level has moved
+[00:10:50] up hot levels are based on the stock
+[00:10:53] moving 10% in the last five minutes and
+[00:10:56] so the average price of the last five
+[00:10:59] minutes is always changing as time moves
+[00:11:02] forward the average price is different
+[00:11:04] and so it's always 10% above the average
+[00:11:06] price I'm sorry actually it's 20% and in
+[00:11:09] the case of this stock so there you get
+[00:11:10] a quick drop I sold some at 30 and I'm
+[00:11:13] feeling grateful that I did that now
+[00:11:15] we're down at 17 or 19 19 and I'm gonna
+[00:11:24] end up scaling out of this and taking my
+[00:11:26] profit off the table and walking away
+[00:11:28] with about $1,500 which isn't bad for 3
+[00:11:32] minutes of work however I will tell you
+[00:11:35] that when you trade breaking news the
+[00:11:37] biggest challenge and this kind of like
+[00:11:39] what comes first the chicken or the egg
+[00:11:40] you know what comes first the news or
+[00:11:43] the stock moving now obviously the news
+[00:11:46] comes first the stocks not going to move
+[00:11:48] without the news but if you're the first
+[00:11:50] person to get breaking news what do you
+[00:11:54] do with it cuz you don't necessarily
+[00:11:57] know if the market will interpret that
+[00:12:00] news positively or negatively and
+[00:12:03] certainly something like a social media
+[00:12:06] tweet related to you know a celebrity
+[00:12:09] kind of sponsorship type of thing or
+[00:12:11] whatever it is and you would typically
+[00:12:13] think that would be received positively
+[00:12:15] but there are other headlines that
+[00:12:17] you'll sometimes see you know FDA FDA
+[00:12:21] approval or Pat and result or something
+[00:12:23] like that the market just doesn't really
+[00:12:25] respond to
+[00:12:26] so rather than searching all day long
+[00:12:29] for breaking news which every minute of
+[00:12:32] the day there's a news headline coming
+[00:12:33] out what I wait for is a stock to
+[00:12:36] respond to it and then I know that the
+[00:12:39] market is interested and so I waited for
+[00:12:41] the stock to respond and then I bought
+[00:12:43] on the first pull back with a tight stop
+[00:12:46] all right so when I was in here at
+[00:12:48] ninety eight and there were 95 96 97 98
+[00:12:50] my stop was at 89 so I was using about a
+[00:12:53] seven eight cent stop risking about
+[00:12:55] seven eight hundred dollars for a total
+[00:12:57] profit of 1500 thats a two to one profit
+[00:13:00] or loss ratio I'll risk a hundred to
+[00:13:02] make 200
+[00:13:03] 700 to make 15 14 14 1500 that's my risk
+[00:13:08] management philosophy so on this one it
+[00:13:10] ended up working out really well and but
+[00:13:13] there are certainly times where you'll
+[00:13:13] see a stock that has breaking news that
+[00:13:15] you might think is positive and then it
+[00:13:18] just drops really really hard and you're
+[00:13:20] like huh that's weird
+[00:13:21] for some reason investors thought it was
+[00:13:23] negative and then people panic and sell
+[00:13:26] here some traders thought it was
+[00:13:29] positive and people jumped in and kind
+[00:13:31] of it's this kind of group mentality
+[00:13:34] where it's self-fulfilling prophecy the
+[00:13:37] market kind of starts to do based on the
+[00:13:39] initial reaction and then it just
+[00:13:41] continues because that was sort of the
+[00:13:42] initial reaction it's a little
+[00:13:44] surprising to me that this is now back
+[00:13:46] at $1 84 up only 8% but that may be
+[00:13:50] because it's not an official partnership
+[00:13:53] it's not an official sponsorship it was
+[00:13:54] a tweet and that was it right and that
+[00:13:57] might not really materialize I mean who
+[00:13:59] knows if that's gonna turn into more
+[00:14:00] sales for the company or maybe it won't
+[00:14:02] so this one's back down ad ap over here
+[00:14:06] is up 257 percent again a little bit of
+[00:14:09] a different type of trade on AD ap
+[00:14:11] because of course the news was out much
+[00:14:14] earlier in the day and so traders and
+[00:14:17] investors had a lot of time to react to
+[00:14:18] it but as the momentum starts to
+[00:14:21] increase you know traders can start to
+[00:14:23] get more and more aggressive
+[00:14:24] trying to capitalize on these
+[00:14:26] opportunities and that's where you can
+[00:14:28] see some real volatility the good news
+[00:14:30] there is that with volatility comes
+[00:14:33] opportunity and so if you manage your
+[00:14:36] risk you keep really tight stops and you
+[00:14:39] jump in at low risk pull backs like
+[00:14:41] let's say right here or right here then
+[00:14:44] what you're essentially doing is you're
+[00:14:47] capping your downside risk and you're
+[00:14:49] maximizing your upside potential all
+[00:14:53] right you guys so I hope you've enjoyed
+[00:14:54] this this is kind of a just that ended
+[00:14:56] up being a perfect breaking news example
+[00:14:59] it didn't end up being my biggest
+[00:15:01] breaking news winner of all time by any
+[00:15:03] means if it squeezed up to 250 3 and 4
+[00:15:06] and kept going then maybe it would have
+[00:15:09] been but it didn't do that but doesn't
+[00:15:11] mean there wasn't an opportunity to make
+[00:15:12] some money so as always questions
+[00:15:14] comments leave them right down below
+[00:15:16] if you want to learn more about my
+[00:15:17] strategy how I find these stocks and
+[00:15:19] things like that make sure you check out
+[00:15:21] the link to register to my next webinar
+[00:15:22] which will be right down below in the
+[00:15:24] description alright so again I'll see
+[00:15:27] you guys for the next episode and
+[00:15:29] questions comments leave them below hey
+[00:15:31] did you know every morning I go live to
+[00:15:33] stream at pre market watch list
+[00:15:35] subscribe to the channel press the alert
+[00:15:36] button and you'll get the notifications
+[00:15:38] if you want to learn more about trading
+[00:15:40] check out the links in the description
+[00:15:41] and if you have questions post them in
+[00:15:43] the comments because I personally
+[00:15:45] respond to every comment posts on my
+[00:15:47] channel
+[00:15:49] [Music]

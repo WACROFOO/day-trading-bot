@@ -1,0 +1,993 @@
+# How to use the Relative Volume Trading Strategy (with ZERO experience)
+# https://www.youtube.com/watch?v=yFoBnM0iSlc
+# duration_sec: 2374
+
+[00:00:00] what's up everyone all right you guys
+[00:00:01] are in for a treat today because I'm
+[00:00:02] gonna break down for you the indicator
+[00:00:04] that I use to find stock to have home
+[00:00:07] run potential this is big its relative
+[00:00:09] volume and during this video I'm going
+[00:00:11] to show you some of my metrics you'll
+[00:00:13] see that I have over three point and it
+[00:00:15] was 3.3 million dollars in profit in the
+[00:00:17] last three and a half four years of
+[00:00:18] trading and almost 98% of it comes from
+[00:00:21] stocks that have relative volume of 5 or
+[00:00:23] higher so what is relative volume how
+[00:00:26] you find out what number it says is it
+[00:00:28] fours and fives of tens one hundred I'm
+[00:00:30] gonna break that down for you right here
+[00:00:32] in this episode now for those of you
+[00:00:35] guys who go through this whole video
+[00:00:36] what you're gonna learn is that this is
+[00:00:38] focused specifically on stock selection
+[00:00:41] how to find stocks that have homerun
+[00:00:43] potential but what do you do once you
+[00:00:45] find a stock that has homerun potential
+[00:00:47] well you need to know where to get in
+[00:00:49] and where to get out you need to know
+[00:00:51] the tools to use the platform the
+[00:00:53] scanners everything else and so because
+[00:00:55] I don't want this video to be six and a
+[00:00:57] half hours long what I'm gonna do is I'm
+[00:00:58] gonna put a link right down below for my
+[00:01:01] beginners getting started kit now that
+[00:01:03] kit will expand upon what we're gonna
+[00:01:04] talk about here relative volume and how
+[00:01:06] I use that for stock selection and
+[00:01:08] continue with an analysis of risk
+[00:01:10] management profit loss ratios and
+[00:01:12] finding low risk entries that minimize
+[00:01:15] your downside risk while maximizing your
+[00:01:17] upside potential which is what we really
+[00:01:19] all want to do as active day traders all
+[00:01:22] right so I hope you guys enjoy this
+[00:01:24] video I think you really will leave
+[00:01:25] questions and comments down below and
+[00:01:26] make sure you check out that link to
+[00:01:27] download my beginners getting started
+[00:01:29] kit and I'll see you guys first thing on
+[00:01:31] Monday morning live streaming right here
+[00:01:34] on youtube by pre market watchlist and
+[00:01:35] if you haven't already hit that
+[00:01:36] subscribe button make sure you subscribe
+[00:01:38] that will get the notification when I go
+[00:01:40] live right around 8:45 9 o'clock alright
+[00:01:43] enjoy the video I'll see you guys for
+[00:01:44] the next episode
+[00:01:59] what's up everyone all right so I was
+[00:02:03] just looking through YouTube comments
+[00:02:05] which many you guys know we got a lot of
+[00:02:07] comments on YouTube and I try to go
+[00:02:09] through all them and at least for the
+[00:02:11] first comment give a give a little
+[00:02:13] answer so one of the common themes that
+[00:02:16] I've been noticing in youtube facebook
+[00:02:19] comments and even in email our traders
+[00:02:23] asking you know two things number one
+[00:02:25] Russ what is your number one favorite
+[00:02:27] technical indicator if you could only
+[00:02:29] use one what would it be so I'm gonna
+[00:02:33] answer that question and I'm gonna at
+[00:02:36] the same time answer a second question
+[00:02:38] which is Ross how do you find these
+[00:02:41] stocks before they make the big move
+[00:02:43] this is you know it's it's it's crazy I
+[00:02:45] mean day after day you seem to find the
+[00:02:48] big momentum stocks how you do it so at
+[00:02:51] today's a day where I'll put my P&L up
+[00:02:53] here again so you guys can see where I'm
+[00:02:55] at I'm up thirty five thousand dollars
+[00:02:57] not bad not not as good as I was just
+[00:03:02] before my last trade on whimmy where I
+[00:03:04] lost I don't know eight thousand or so I
+[00:03:06] was up over forty thousand today but in
+[00:03:08] any case thirty five thousand is still a
+[00:03:10] really good day so how did I know the
+[00:03:13] boffo and whimmy we're going to be
+[00:03:16] stocks worth trading so for on the first
+[00:03:20] question of my favorite indicator or if
+[00:03:22] I could only use one indicator I mean
+[00:03:24] it's kind of like asking a question of
+[00:03:25] if you could only have one arm which arm
+[00:03:27] would you use or which arm would you
+[00:03:28] would you choose it I hope that I'm
+[00:03:31] never in the situation where I have to
+[00:03:33] only choose one indicator because the
+[00:03:36] reality is I haven't been presented with
+[00:03:39] that situation yet in all my years of
+[00:03:41] trading and I don't see a scenario where
+[00:03:43] I would I understand the value of
+[00:03:46] keeping your charts a really simple as
+[00:03:49] much as you can and so for that reason I
+[00:03:51] don't use a lot of indicators but I
+[00:03:54] would say on my actual charts from
+[00:03:57] indicator standpoint you can see all I
+[00:03:59] have here are moving averages the volume
+[00:04:01] weighted average price and then this
+[00:04:03] yellow line which indicates today's open
+[00:04:05] that's all I have so as far as those
+[00:04:08] indicators go on my actual try
+[00:04:10] those are pretty similar or pretty
+[00:04:12] simple but for me probably the biggest
+[00:04:16] indicator that a stock is going to have
+[00:04:19] the potential to make a big move is
+[00:04:22] relative volume so I would say that is
+[00:04:26] probably my favorite technical indicator
+[00:04:28] although it's not one that you put on
+[00:04:30] the chart it's an indicator of a stock
+[00:04:33] trading on above-average volume and in
+[00:04:36] my opinion with the potential to make a
+[00:04:38] really big move so and let me just open
+[00:04:40] up this window here I got my let's
+[00:04:45] logged out of this window accident so
+[00:04:47] you guys can see there we go so back in
+[00:04:50] the chat all right so so you guys can
+[00:04:54] see when we here this is the chart so
+[00:04:56] let's go back and look at this and kind
+[00:04:59] of break down the relative volume and
+[00:05:00] what is relative volume so relative
+[00:05:03] volume is a measurement of today's
+[00:05:06] volume versus what is normal for that
+[00:05:09] stock now that's really important I
+[00:05:12] don't look I don't search stocks I could
+[00:05:15] go up here to a new topless window and I
+[00:05:17] could say volume and I could I could
+[00:05:20] look at volume leaders load settings and
+[00:05:22] I could look at the stocks that have the
+[00:05:24] most volume today and you would see that
+[00:05:27] niño has the most volume today at 140
+[00:05:31] million shares now women does come in
+[00:05:33] second at 43 and then Oh Jen is third as
+[00:05:36] triple Q is fourth psv American Airlines
+[00:05:40] I don't look at the total highest volume
+[00:05:43] stocks if we pull up niño while this has
+[00:05:46] high volume today in fact its relative
+[00:05:50] volume is low so what is the relative
+[00:05:54] volume for the stock well let's actually
+[00:05:56] go and we can go into properties here
+[00:05:59] and or collapse no it's not that
+[00:06:00] hang on I'm just gonna add the column
+[00:06:02] configure columns and we're gonna add
+[00:06:08] relative volume ratio okay so the
+[00:06:11] relative volume today is three point
+[00:06:15] three four all right where's the
+[00:06:17] relative volume on win
+[00:06:19] is 1403 so whimmy if we search sorted by
+[00:06:24] highest relative volume we would see
+[00:06:26] women s PA q p SB and wafu alright and
+[00:06:31] and all of these have over a hundred a
+[00:06:33] relative volume over 100 so relative
+[00:06:36] volume in contrast to total volume
+[00:06:38] compares the volume today to what is
+[00:06:40] normal for that stock and it's over a
+[00:06:43] set period of days and I don't know if
+[00:06:46] different platforms might use a
+[00:06:48] different number of days whether it's 14
+[00:06:50] days or 30 days I'm not actually
+[00:06:52] entirely sure but it's the average
+[00:06:54] volume over a period of time so neo or
+[00:06:58] ni o whatever you want to call it in
+[00:07:01] fact today has much lower volume than it
+[00:07:03] had two days ago or three days ago but
+[00:07:06] compared to the volume that it traded on
+[00:07:08] a month ago it is as you can tell for
+[00:07:12] sure high relative volume from a month
+[00:07:14] ago but again just because this has a
+[00:07:18] relative volume of three in my opinion
+[00:07:21] is not high enough what that tells us is
+[00:07:23] that the volume is three times higher
+[00:07:25] than what it was during this previous
+[00:07:28] you know average from thirty days ago
+[00:07:31] in contrast whimmy with the leading
+[00:07:33] volume although I struggled with it a
+[00:07:36] little bit and you can see that it's
+[00:07:38] it's red today and it's kind of been
+[00:07:40] choppy
+[00:07:40] I was Green on it and then I gave back
+[00:07:42] my profit doing a sort of dip trade in
+[00:07:45] this area so anyways but the fact is
+[00:07:48] this was the right stock to be watching
+[00:07:50] it had how much volume yesterday
+[00:07:54] 1.3 million shares and how much volume
+[00:07:57] today 43 million and it's only 1042 so
+[00:08:02] it's still early in the day by the end
+[00:08:04] of the day this might have 75 maybe even
+[00:08:06] a hundred million shares of volume
+[00:08:08] so as the day goes on I mean the volume
+[00:08:11] is just gonna keep increasing in the
+[00:08:12] relative volume it's just gonna continue
+[00:08:13] to be tremendously high compared to the
+[00:08:17] previous day so how did I know that this
+[00:08:20] would have high relative volume well pre
+[00:08:23] market when I sat down and I looked at
+[00:08:25] my gap scanner so this is the scan that
+[00:08:27] I run and you can run scans like this
+[00:08:29] different trading platforms but and this
+[00:08:32] is the scan that I was running and I saw
+[00:08:34] let's see we'll do timeframe historical
+[00:08:37] date I'll run this for like nine 9:20
+[00:08:40] a.m.
+[00:08:40] all right so 9:20 a.m. whimmy was up
+[00:08:45] here now
+[00:08:46] it doesn't actually this software
+[00:08:47] doesn't actually populate relative
+[00:08:50] volume pre-market so you can't actually
+[00:08:53] see what the number is but I was able to
+[00:08:56] see that had 12 million shares of volume
+[00:08:58] and I was able to look at the chart and
+[00:09:00] just eyeball it and realize wow it's
+[00:09:03] already a relative volume of 10 versus
+[00:09:06] yesterday meaning it has 10 times more
+[00:09:08] volume than it had yesterday and now the
+[00:09:11] relative volume versus 30 days ago or
+[00:09:13] whatever the case says may even be
+[00:09:15] clearly higher than that so it's a
+[00:09:18] comparison of the volume today versus
+[00:09:20] what is normal so what why is relative
+[00:09:23] volume such an important indicator for
+[00:09:25] me in telling me the stock has the
+[00:09:28] potential to give us potentially a
+[00:09:32] homerun well relative volume a stock
+[00:09:36] trading on much higher volume today than
+[00:09:39] what is normal indicates that something
+[00:09:43] special is happening with this stock and
+[00:09:45] in my opinion it shows us you know
+[00:09:48] there's only a handful of stocks each
+[00:09:49] day that have really really high
+[00:09:51] relative volume and of course today
+[00:09:54] women and woful were both on the top of
+[00:09:57] the list
+[00:09:57] both of these stocks had a reason to
+[00:10:00] make a big move and the relative volume
+[00:10:02] tells us that most likely a lot of
+[00:10:05] people are watching this stock and
+[00:10:06] trading it today that we're not
+[00:10:08] interested in it yesterday or the day
+[00:10:10] before so you know in your opinion what
+[00:10:13] would allow a stock to have 1.3 million
+[00:10:16] shares of volume one day and the next
+[00:10:17] day have 44 million shares of volume
+[00:10:19] this is outrageous
+[00:10:20] let's look at a few other stocks look at
+[00:10:22] the volume spikes so from 2.4 million
+[00:10:26] shares of volume to 58 million shares of
+[00:10:28] volume two days later let's look at you
+[00:10:31] owe any this was a big one from last
+[00:10:34] month so from 300,000 shares to the next
+[00:10:37] day 25
+[00:10:38] the day after that 43 million two days
+[00:10:41] later back to 58 million so how does
+[00:10:44] that happen it's the result of typically
+[00:10:47] breaking news now you owe any doesn't
+[00:10:50] have news today but let's look at with
+[00:10:51] me for instance
+[00:10:52] so whimmy has news today it was posted
+[00:10:54] at 5:31 a.m. now i don't go searching
+[00:10:58] the news and get up at 5:30 1:00 in the
+[00:11:00] morning to check to see every stock that
+[00:11:02] has a headline because you know what I
+[00:11:03] mean I can just pull up almost any stock
+[00:11:07] and you'll see SP has headlines you pull
+[00:11:09] up an American lunch of power mean you
+[00:11:12] could just go through stock after stock
+[00:11:14] after stock and you'll just keep seeing
+[00:11:15] headlines so searching for headlines
+[00:11:17] that's an sorry I'll I can move the
+[00:11:20] video well I can move the video to this
+[00:11:21] to the side here so searching for
+[00:11:24] headlines in my opinion is not really
+[00:11:28] it's not it's not a good use of time
+[00:11:30] what I want to look for early in a day
+[00:11:33] as early as possible you know you
+[00:11:34] forty-five nine o'clock and so that's
+[00:11:37] not as early as possible you get up at
+[00:11:38] 4:00 in the morning but usually kind of
+[00:11:40] thirty minutes before the bell I like to
+[00:11:42] start to look at which stocks are
+[00:11:44] gapping up the most in the market and
+[00:11:46] then I check it and I say well what's
+[00:11:48] the reason it's moving up and what does
+[00:11:50] the volume look like the reason it's
+[00:11:51] moving up is a catalyst and I don't need
+[00:11:53] to go and read all its catalysts
+[00:11:56] information and go and do research on 5g
+[00:11:59] holographic applications I don't need to
+[00:12:01] do that I can see just by looking at it
+[00:12:03] that there is a fundamental catalyst
+[00:12:05] that is driving the price action that's
+[00:12:08] creating this this interest in the stock
+[00:12:11] which started as you can see initially
+[00:12:14] not a lot of interest down at 4:00 a.m.
+[00:12:16] 5:30 but starting at about 7:00 a.m. it
+[00:12:20] started getting picked up and traders
+[00:12:22] obviously started buying it as it
+[00:12:24] squeezed higher and it hit a high of
+[00:12:26] seven pull back up to 750 pull back and
+[00:12:29] so at this point when I started looking
+[00:12:30] at it wherever this was in here clearly
+[00:12:33] it was already moving up it already no
+[00:12:35] doubt was gonna have probably the
+[00:12:37] highest relative volume today out of any
+[00:12:39] stock in the market and in fact it has
+[00:12:42] now that doesn't guarantee that it'll be
+[00:12:44] easy to trade because this is the
+[00:12:46] strategy that I use for finding stocks
+[00:12:48] to trade and my act
+[00:12:49] is about 68 to 70 percent so you know
+[00:12:52] today my accuracy I guess you could say
+[00:12:55] is 50% on to the two stocks but in all
+[00:12:58] the trades I took today my accuracy was
+[00:13:00] probably 68 70 % I had some winners on
+[00:13:02] women and gave back some profit I had a
+[00:13:05] bunch of winners on wafu but also a
+[00:13:07] couple losers
+[00:13:07] so generally although I'm not going to
+[00:13:09] be agreeing on every single stock this
+[00:13:11] is still a really good way of finding
+[00:13:13] stocks that are worth trading and then
+[00:13:15] ultimately once you find a stock that's
+[00:13:17] worth trading you think has the
+[00:13:18] potential to make a big move then the
+[00:13:20] question is what's your entry and exit
+[00:13:22] how do you manage risk because it's not
+[00:13:24] enough just to find the stock you need
+[00:13:26] the strategy to put together and that's
+[00:13:28] what of course the warrior starter and
+[00:13:30] the warrior pro classes are all about
+[00:13:31] it's about teaching you the fundamentals
+[00:13:33] of trading and helping you understand
+[00:13:34] the strategy so of course we have stock
+[00:13:37] selection which is chapter chapter 2 and
+[00:13:40] the starter and chapter 3 and the pro
+[00:13:41] classes and then from there we go into
+[00:13:44] breaking down your daily charts
+[00:13:45] understanding why not only is it
+[00:13:48] important that this had high relative
+[00:13:50] volume but it also had no upside
+[00:13:51] resistance above this level of 6 however
+[00:13:55] the flow at 6 million shares here is in
+[00:13:58] fact was not accurate the floats a
+[00:13:59] little bit higher I think it's closer to
+[00:14:00] 20 or maybe even 30 million shares and
+[00:14:04] certainly this one was a bit choppier
+[00:14:07] than I expect it to be is also easy to
+[00:14:11] borrow so sometimes stocks are easy to
+[00:14:13] borrow you're gonna see a lot more short
+[00:14:14] sellers trading it to the short side no
+[00:14:17] short sale restriction or anything like
+[00:14:18] that
+[00:14:18] so again those are more of sort of the
+[00:14:20] nuances that I would apply once I
+[00:14:23] identified the stock just on the surface
+[00:14:25] has or will have high relative volume
+[00:14:28] now if we look at wafu the relative
+[00:14:32] volume on that one is a hundred and
+[00:14:35] fourteen now this one's kind of
+[00:14:37] interesting because it was how to move
+[00:14:39] that started yesterday after hours on
+[00:14:42] news about it's a Chinese company and
+[00:14:45] they do I guess online sort digital
+[00:14:47] education and so the news that Chinese
+[00:14:50] schools are closing that had given kind
+[00:14:52] of a spike of momentum to some of the
+[00:14:55] companies that are
+[00:14:56] in this space and so that started to pop
+[00:14:58] up yesterday and was continuation today
+[00:15:01] so that's an interesting catalyst
+[00:15:03] because although it appears that there's
+[00:15:04] no new specific to the stock in fact
+[00:15:07] it's a in this case more of a global
+[00:15:10] type of headline and that did give some
+[00:15:13] opportunities that began pre market and
+[00:15:15] then continued with this nice red to
+[00:15:18] green move from 782 up to nine dollars
+[00:15:21] and ten cents or whatever so for me
+[00:15:25] relative volume is much more important
+[00:15:28] than total volume and there may even be
+[00:15:31] times where I'll see a stock on the scan
+[00:15:33] let's just say for instance I don't know
+[00:15:36] let's just say mmm ATX just for instance
+[00:15:40] so I might see oh well it's got 19,000
+[00:15:43] shares of volume and typically you would
+[00:15:44] say 19,000 shares of volume that's very
+[00:15:46] light but you know we pull up the stock
+[00:15:48] it is up 24 percent on 19 thousand
+[00:15:51] shares and so I might look at it and say
+[00:15:54] alright well you know what does the
+[00:15:55] chart look like alright what is the
+[00:15:57] headline what's the daily chart look
+[00:15:59] like and how much volume did it have
+[00:16:01] yesterday because this actually has high
+[00:16:03] relative volume today although it's not
+[00:16:05] as high as some of the others let's see
+[00:16:10] I'm not sure where if it's even on the
+[00:16:12] top of this list I can sort
+[00:16:14] alphabetically yeah it doesn't look like
+[00:16:19] it's even made the cut here on probably
+[00:16:21] the top 100 or so but in any case you
+[00:16:24] can tell that it's got it does have a
+[00:16:25] little bit more volume so although it
+[00:16:27] had light volume pre-market that doesn't
+[00:16:30] necessarily mean I wouldn't consider it
+[00:16:32] because what I'm looking at is what is
+[00:16:33] the likelihood that this will have high
+[00:16:35] relative volume how much is it gapping
+[00:16:38] up and the question really is is this
+[00:16:41] going to be an obvious stock to trade
+[00:16:43] you know is this going to be one that
+[00:16:46] people look at and they're like wow this
+[00:16:48] is this is the one and I thought that
+[00:16:51] that would be the case with whimmy and
+[00:16:53] it usually is the case that you're the
+[00:16:56] leading gap or the second or third
+[00:16:57] leading gap errs are the obvious ones
+[00:17:01] right that everyone's looking at that is
+[00:17:03] just like you know and that's important
+[00:17:06] because in my opinion
+[00:17:08] some people would disagree with this but
+[00:17:10] I think it's good to be kind of trading
+[00:17:12] with the pack or with the herd so to
+[00:17:14] speak and maybe for institutional
+[00:17:17] traders you know the herd has been
+[00:17:18] focusing on Tesla on that sort of you
+[00:17:21] know higher price ranges this just goes
+[00:17:23] higher and higher and higher and higher
+[00:17:25] and maybe on Amazon as it goes higher
+[00:17:27] and higher and higher higher so as a
+[00:17:29] small cap trader and for traders that
+[00:17:32] have smaller accounts usually the
+[00:17:34] percentage gap or leading percentage gap
+[00:17:36] or is the one that traders are going to
+[00:17:37] focus on because this is the going to be
+[00:17:40] relatively affordable and have the
+[00:17:42] potential if it works well to squeeze up
+[00:17:45] 20 30 40 percent maybe even higher as
+[00:17:47] we've certainly seen with some of these
+[00:17:50] stocks like PSV here it was gapping up
+[00:17:52] 70 percent although it's a little on the
+[00:17:53] cheaper side you already had four point
+[00:17:55] three million shares of volume pre
+[00:17:56] market so let's look at this on the on
+[00:17:58] the daily chart how much volume did it
+[00:18:00] have yesterday it had one point four
+[00:18:02] million and today it has 35 million
+[00:18:04] shares so it is our second highest
+[00:18:07] relative volume stock today again not
+[00:18:10] total volume but relative volume so a
+[00:18:12] lot of people are watching this stock
+[00:18:14] today that weren't watching at the
+[00:18:15] previous day and that means because you
+[00:18:17] have a lot of eyes on it that
+[00:18:19] traditional patterns such as the first
+[00:18:22] candle to make a new high will be well
+[00:18:24] respected topping tail doji's will be
+[00:18:26] shorted a breakout over 115 here would
+[00:18:29] be very probably widely considered an
+[00:18:31] entry for a move back up to 129 the
+[00:18:34] volume weighted average price will be
+[00:18:35] well respected so if you're gonna trade
+[00:18:38] these traditional patterns and use these
+[00:18:41] traditional indicators the only reason
+[00:18:43] that they work is because people believe
+[00:18:46] in them people believe the view app is
+[00:18:48] going to provide a level of support
+[00:18:49] therefore they buy at the view app right
+[00:18:53] and and people are maybe have cautious
+[00:18:55] on shorting right at the view app
+[00:18:56] because it's shorting right on to
+[00:18:58] support the only reason the first candle
+[00:19:00] make a new high works so well is because
+[00:19:02] people respect it and they see that as
+[00:19:04] an opportunity so if you're trying to
+[00:19:06] apply those types of patterns to a stock
+[00:19:08] that nobody is trading and no one has
+[00:19:11] interest in and nobody is watching you
+[00:19:14] will not get predictable resolution
+[00:19:16] resolution to patterns becomes
+[00:19:19] predictable when you're trading the
+[00:19:21] right
+[00:19:21] type of stock and that is a stock that
+[00:19:23] has high relative volume so one of the
+[00:19:25] biggest mistakes that beginner traders
+[00:19:27] make well they'll say oh well nu GT
+[00:19:29] let's look at this this has well this
+[00:19:31] doesn't have a lot of volume but let's
+[00:19:33] just say they're like oh well this has a
+[00:19:34] lot of all you just got 1.1 million
+[00:19:35] shares and it's kind of curling up at
+[00:19:37] breaking the V wipe maybe I should trade
+[00:19:39] this the relative volume on this is a
+[00:19:41] fraction of the previous day traders are
+[00:19:43] not watching this if you're trading this
+[00:19:45] you're off in the weeds you're all by
+[00:19:46] yourself over here because what's mostly
+[00:19:49] trading this I would guess would be
+[00:19:50] maybe high-frequency trading algorithms
+[00:19:53] some institutional trading but not very
+[00:19:54] many day traders are looking at this
+[00:19:56] type of stock today again American
+[00:19:58] Electric Power you pull this up one
+[00:20:00] obscure stock whose whose day trading
+[00:20:02] this today not a lot of people and in
+[00:20:06] the news recently we've certainly heard
+[00:20:08] I've certainly heard you know Jim Cramer
+[00:20:10] and some of these you know you know will
+[00:20:13] very well-respected people in the
+[00:20:14] industry saying that you know day
+[00:20:18] trading is incredibly risky and it's
+[00:20:20] gonna end in tears for everyone and Leon
+[00:20:22] Cooper man and some of these other big
+[00:20:24] hedge fund people are there all day
+[00:20:25] traders they're essentially just
+[00:20:28] criticizing us as being stupid and that
+[00:20:30] we're buying stocks like American
+[00:20:33] Airlines Warren Buffett yeah he was
+[00:20:35] smart to sell it because their balance
+[00:20:36] sheet is upside down but you know
+[00:20:38] meanwhile hey but meanwhile day traders
+[00:20:43] have no problem buying it as it squeezes
+[00:20:46] up right here creating this surge from
+[00:20:48] 10 all the way up to $22 right hey girl
+[00:20:52] come on and I coined that you know
+[00:20:59] obviously to be a little insulting
+[00:21:00] because you know the fact is although a
+[00:21:04] if someone bought this you know with the
+[00:21:06] intention of it being an investment and
+[00:21:08] hoping it's gonna go back to $50 and now
+[00:21:10] they're underwater okay
+[00:21:11] that obviously would have been the wrong
+[00:21:14] approach I mean it's it's back down to
+[00:21:16] the lows but the fact is you know Warren
+[00:21:19] Buffett didn't trade or invest in Amazon
+[00:21:21] and the p/e ratio of Amazon for any
+[00:21:24] logical investor would have said even at
+[00:21:27] $2,000 it was crazy overpriced right
+[00:21:31] back here p/e ratio is out of control
+[00:21:33] and here we go it's up to 3,000 and so
+[00:21:36] although stocks can be irrationally
+[00:21:39] strong or weak compared to their balance
+[00:21:41] sheet compared to their book value which
+[00:21:44] is the value of all their assets you
+[00:21:47] know Warren Buffett value investors they
+[00:21:48] like to buy stocks that are actually
+[00:21:50] trading below their book value you know
+[00:21:52] so their book value is the value of all
+[00:21:54] their fixed assets all their equipment
+[00:21:55] everything else so if a stock is trading
+[00:21:58] below you know the actual you know book
+[00:22:03] value of the company that can be a great
+[00:22:05] investment okay it can be but stocks can
+[00:22:10] be priced irrationally for very long
+[00:22:12] periods of time and you know here you've
+[00:22:14] got Carl Icahn who's been holding a
+[00:22:16] position on Oh X Y for I don't know over
+[00:22:20] a year he's got billions of dollars in
+[00:22:22] it and you know look at this thing it's
+[00:22:24] been it's been you know really not a
+[00:22:26] good although maybe it made sense from a
+[00:22:30] fundamental perspective for a variety of
+[00:22:32] reasons from a technical perspective
+[00:22:34] it's been week and so day traders
+[00:22:36] short-term traders can capitalize on
+[00:22:39] those opportunities and again I'm not
+[00:22:41] trying to criticize the big investors
+[00:22:42] they're much more successful than I'll
+[00:22:43] ever be but they have a different place
+[00:22:46] in the market and they have a different
+[00:22:47] strategy and I don't think it's really
+[00:22:49] totally fair to criticize day traders or
+[00:22:53] say owed day trading should be outlawed
+[00:22:55] you know this these because they're so
+[00:22:57] stupid because they're buying stocks
+[00:22:59] with you know terrible fundamentals or
+[00:23:02] terrible book value yeah well you know
+[00:23:04] here's the stock that maybe had good
+[00:23:05] Book value and still drop 70% you know
+[00:23:09] or here's the stock that had outrageous
+[00:23:12] had book value that is a fraction of the
+[00:23:16] current trading price but still went up
+[00:23:18] another 50% or another hundred percent
+[00:23:20] so there are opportunities and that's
+[00:23:24] what we're searching for is day traders
+[00:23:26] and so in my opinion what we have to
+[00:23:28] look for are stocks that have high
+[00:23:31] relative volume that have really strong
+[00:23:34] daily charts and that generally have
+[00:23:37] some type of catalysts to justify the
+[00:23:39] move and then to ride that momentum so
+[00:23:42] we all have a place in the market
+[00:23:44] you know and so our place in the market
+[00:23:46] as active day traders is capitalizing on
+[00:23:49] these short-term the short-term sort of
+[00:23:55] imbalances in price and the volatility
+[00:24:00] that we see on a very short-term basis
+[00:24:02] and it's so for me I really don't spend
+[00:24:05] a lot of time reading quarterly earnings
+[00:24:07] or going through all the fundamentals
+[00:24:09] because the fact is although long term
+[00:24:12] you would think it'll probably matter
+[00:24:13] short term as a as a day trader it
+[00:24:17] really doesn't matter short term we have
+[00:24:19] to be focused on technical analysis and
+[00:24:21] so that's what we do and so I would
+[00:24:22] wager that you know as a day trader I
+[00:24:25] probably can read very short price
+[00:24:28] action a lot better than someone who
+[00:24:30] focuses just on the fundamentals but the
+[00:24:33] downside to what I'm doing is that you
+[00:24:37] can't really move in out of the market
+[00:24:39] with you know 150 million dollars as a
+[00:24:43] day trade and so that's why those big
+[00:24:46] investors would just say well day
+[00:24:47] trading you know since its kids play you
+[00:24:49] know what what are you making two
+[00:24:51] hundred thousand a year five hundred
+[00:24:52] thousand a year a million a year if
+[00:24:53] you're good that's a joke right they're
+[00:24:56] trying to make hundreds of millions and
+[00:24:58] I get that so we all have a different
+[00:25:00] place in the market we all come in to
+[00:25:01] the same market but we trade it in
+[00:25:03] different ways we have to have risk
+[00:25:04] tolerances different account sizes and
+[00:25:06] different goals so the set of criteria
+[00:25:09] and my number one indicator for finding
+[00:25:11] a stock that has what I think is homerun
+[00:25:13] potential in the course of like a couple
+[00:25:17] of hours is gonna be very different from
+[00:25:20] the criteria that a big hedge fund
+[00:25:22] manager or whatever would look for for a
+[00:25:24] three month to six month type of
+[00:25:26] position where they're putting tens of
+[00:25:28] millions or hundreds of millions of
+[00:25:29] dollars or billions of dollars at risk
+[00:25:31] and so of course I would say that my
+[00:25:35] strategy is probably much more
+[00:25:39] appropriate for the average person
+[00:25:41] because it is a strategy based on really
+[00:25:45] minimizing risk not holding stocks
+[00:25:47] overnight taking short term trades
+[00:25:49] getting in getting out and so we could
+[00:25:51] have on a stock a you know five or 10
+[00:25:54] minute long opportunity you know
+[00:25:57] this has gone from $13 to $20 today
+[00:26:00] that's almost 50% now I didn't trade
+[00:26:02] this one but the fact is the relative
+[00:26:06] volume today let's look at it so the
+[00:26:09] relative volume today on it yesterday's
+[00:26:11] volume was 400,000 shares is 2.3 million
+[00:26:14] so it is four times higher volume than
+[00:26:16] yesterday this is a bullish engulfing
+[00:26:17] candle on the on the daily chart but it
+[00:26:20] has a absence of news and so that would
+[00:26:24] certainly make me cautious I believe
+[00:26:26] this is one of the companies that we
+[00:26:29] traded a couple weeks ago but in any
+[00:26:33] case so although it's a former momentum
+[00:26:36] stock which sometimes by itself is
+[00:26:38] enough because traders will say hey this
+[00:26:40] stock was really strong two weeks ago
+[00:26:41] right now it's up a lot I'm gonna jump
+[00:26:43] in and so sometimes you know that that
+[00:26:46] can work but it's it's still gonna be a
+[00:26:49] little bit less predictable in my
+[00:26:51] opinion without that news catalyst and
+[00:26:53] and now here's whimmy so coming back up
+[00:26:56] and attempting to break the view app
+[00:26:58] again that view app is going to be very
+[00:27:00] well respected this is gonna continue to
+[00:27:01] be the highest relative volume stock on
+[00:27:04] the market today it's not gonna get beat
+[00:27:06] out by the end of the day it's gonna be
+[00:27:07] the highest what are the obvious levels
+[00:27:10] the obvious levels on something like
+[00:27:12] this right now would be the high here
+[00:27:14] if it breaks 8:45 then I would look for
+[00:27:17] a move up to 925 and because it has high
+[00:27:20] relative volume tens of thousands maybe
+[00:27:23] hundreds of thousands of traders out
+[00:27:24] there have lines drawn at the exact same
+[00:27:27] places because they're obvious and
+[00:27:30] that's what you want you want obvious
+[00:27:33] because that means what happens there
+[00:27:36] should be predictable now of course
+[00:27:38] again sometimes you'll have something
+[00:27:40] that is unexpected and I suppose that
+[00:27:42] happens whatever thirty percent of the
+[00:27:44] time which is why I'm right only 68 70
+[00:27:47] percent but I'm still right more than
+[00:27:49] I'm wrong and it's 100 percent because I
+[00:27:52] focus on stocks with high relative
+[00:27:53] volume so let me back this up with some
+[00:27:55] numbers for you guys and just because
+[00:27:58] some you are probably curious well you
+[00:27:59] know okay how much does you really make
+[00:28:01] on high relative volume stocks so let me
+[00:28:04] log in here alright so I have my metrics
+[00:28:07] here and this is from like the last four
+[00:28:09] years or so of trading
+[00:28:10] and what I'm gonna do is I'm gonna show
+[00:28:14] you my profitability by relative volume
+[00:28:19] that's kind of cool right so here we go
+[00:28:23] so this is my profitability by relative
+[00:28:29] volume right there
+[00:28:32] so that's 3.1 million dollars trading
+[00:28:35] stocks that have at least a relative
+[00:28:37] volume of five five hundred percent
+[00:28:39] would be five times higher than than
+[00:28:41] what's normal
+[00:28:42] 3.1 million and then this is in like
+[00:28:46] four years of trading so everything else
+[00:28:48] is on stocks that have much much less
+[00:28:52] relative volume so where do I make my
+[00:28:55] money by finding the stock each day that
+[00:28:58] I think will have relative volume and I
+[00:29:00] can certainly jump into something you
+[00:29:04] know like like whimmy on the early side
+[00:29:06] and already see at this point I already
+[00:29:08] had ten times relative volume it was
+[00:29:09] already moving in the right direction
+[00:29:10] and so even though it wasn't maybe this
+[00:29:14] high at that point I was able to with
+[00:29:17] reasonable certainty predict that this
+[00:29:20] would have the highest relative on today
+[00:29:22] and that's where the challenge comes in
+[00:29:23] because it's not enough to find the
+[00:29:25] stock after the fact you have to find it
+[00:29:27] before it happens now this is kind of
+[00:29:29] interesting right here this is
+[00:29:30] performance by the prior day relative
+[00:29:32] volume and so what would you speculate
+[00:29:35] would be the reason that we would see
+[00:29:37] this kind of curve here this is due to
+[00:29:42] continuation so the majority my profit
+[00:29:46] is on stocks like whimmy or or wafu that
+[00:29:50] have a much higher volume than the
+[00:29:53] previous day however a good portion is
+[00:29:56] also on a stock like this which would be
+[00:30:00] continuation so this here the second day
+[00:30:03] I mean this might have been maybe in
+[00:30:06] this area here because this looked like
+[00:30:08] about two times relative volume on the
+[00:30:10] second day but it certainly wasn't as
+[00:30:12] high as the day over day right here and
+[00:30:16] then there'll be some instances where
+[00:30:18] it's even less than that so a yhs which
+[00:30:22] this one two days in a row so I trade it
+[00:30:24] on this day and I trade it again on this
+[00:30:26] day so on this day the relative balling
+[00:30:28] was actually a little bit lower than the
+[00:30:31] previous day it was still a continuation
+[00:30:33] set up and it was still high relative
+[00:30:36] volume versus you know a week ago so
+[00:30:39] both of the trades would have fallen
+[00:30:41] into this column right here or this yeah
+[00:30:44] this column this section just because
+[00:30:47] they both on both days it had high
+[00:30:49] relative volume versus the you know
+[00:30:51] month ago or whatever is that basing
+[00:30:54] today's relative volume because today's
+[00:30:56] relative volume as a calculation is not
+[00:30:58] based on yesterday it's based on the
+[00:31:01] average over 30 days right or 14 days I
+[00:31:06] don't know exactly again with the time
+[00:31:07] this actually says it's over 50 days
+[00:31:09] which is fine so but then this one so
+[00:31:14] there's that one there and then this
+[00:31:15] one's versus the previous day so again
+[00:31:18] that's the cause for this sort of
+[00:31:20] discrepancy here where my performance is
+[00:31:23] always almost always on the stocks that
+[00:31:26] have at least five times relative volume
+[00:31:28] but not always five times versus the
+[00:31:30] previous day because of continuation
+[00:31:32] setups so you know that right there is
+[00:31:35] the proof the proof is in the pudding
+[00:31:36] there that that is the way I find stocks
+[00:31:39] to trade day in day out it's by looking
+[00:31:41] for stocks that have high relative
+[00:31:44] volume and again my accuracy and well
+[00:31:47] you can see right here so my accuracy is
+[00:31:50] 71% right there I mean that's pretty
+[00:31:53] good it's it's not perfect and this is
+[00:31:56] you know day trading and meteorology are
+[00:32:00] the only jobs where you can be wrong 30
+[00:32:02] percent of time and still get paid
+[00:32:03] pretty well I guarantee you you're not
+[00:32:05] gonna have you're not gonna be able do
+[00:32:07] that as a pharmacist you can't be wrong
+[00:32:09] 30 percent of time and sometimes give
+[00:32:10] someone blood pressure medicine and
+[00:32:12] sometimes give them you know I don't
+[00:32:14] know xanax and sometimes give them
+[00:32:17] I don't know whatever else you know some
+[00:32:20] antibiotic you can't be wrong 30% of the
+[00:32:22] time as a pharmacist it's not gonna work
+[00:32:24] you're gonna get fired you can't be
+[00:32:25] wrong 30% of time as a surgeon but in
+[00:32:29] the field of day trading you can be
+[00:32:32] wrong 30% of the time and still make
+[00:32:33] money and that comes down to this right
+[00:32:37] here which is your average winner versus
+[00:32:38] your average loser and so my average
+[00:32:40] winners are about a thousand my average
+[00:32:42] losers are about a thousand so we would
+[00:32:44] call that approximately a one to one
+[00:32:46] ratio I make a hundred and I lose 100
+[00:32:49] after to make a thousand I lose a
+[00:32:50] thousand on average so it's about one to
+[00:32:51] one those aren't the best metrics in the
+[00:32:53] world a really good trader might have
+[00:32:56] closer to 2 to 1 or 3 to 1 average but
+[00:33:00] once one is okay so if I make a thousand
+[00:33:03] and lose a thousand what is my
+[00:33:05] break-even point 50% so as long as I'm
+[00:33:08] accurate and right more than 50% of the
+[00:33:11] time I make money now if I was if my
+[00:33:15] profit loss ratio was two to one and my
+[00:33:17] average winners were 2,000 and my
+[00:33:19] average losers were only a thousand or
+[00:33:23] yeah then I actually would only need to
+[00:33:25] be right
+[00:33:25] 33% at a time in order to break even
+[00:33:28] oops I gave that 3 an extra little
+[00:33:30] squiggle but again it's nice to set the
+[00:33:34] bar low and make it easier for you to be
+[00:33:37] successful but this is kind of a
+[00:33:40] decision that you have to make because
+[00:33:41] for instance and this gets this gets a
+[00:33:45] little bit away from relative volume but
+[00:33:47] just to touch on it for a moment again
+[00:33:50] relative volume is my number one
+[00:33:52] indicator for telling you whether or not
+[00:33:54] a stock has a potential to make a big
+[00:33:55] move but then once I've identified the
+[00:33:57] relative volume now I've got to actually
+[00:34:00] take the trade right I've got to execute
+[00:34:01] on the trade so wafu right here this was
+[00:34:06] an entry that I took as you squeezed up
+[00:34:09] right here to do a red to green move so
+[00:34:11] it was red on the day and then it curled
+[00:34:12] up and went green and as you can see
+[00:34:14] from here went from about 780 up to 2 8
+[00:34:18] 825 850 875 9 all the way up to almost
+[00:34:23] nine dollars and 40 cents okay so that
+[00:34:26] was that short-term
+[00:34:28] little squeeze right there now you know
+[00:34:32] one of the things with this is there's
+[00:34:34] two ways you could trade this one way
+[00:34:36] and maybe even if we look at this this
+[00:34:41] little pullback so one way would be you
+[00:34:43] know your your long right here at Eddie
+[00:34:46] and you believe with pretty high level
+[00:34:50] of certainty that this thing is going to
+[00:34:53] rip through you know 825 so it squeezed
+[00:34:57] up to 810 815 and you sell the whole
+[00:35:00] thing at a 8:20
+[00:35:01] all right that's only 20 cents a share
+[00:35:03] all right so you made 20 cents a share
+[00:35:05] and then it goes all the way to 9 you're
+[00:35:07] like wow I left a lot of money on the
+[00:35:09] table but it's not as hard to predict a
+[00:35:13] 20 cent move and so if you took profit
+[00:35:15] every time you were up 20 cents you know
+[00:35:17] what your accuracy would be pretty high
+[00:35:19] because there'd be enough times where it
+[00:35:20] did go up 25 or 30 cents and then came
+[00:35:22] right back down to break-even like it
+[00:35:25] did kind of right here first one-minute
+[00:35:27] candle to make a new high well respected
+[00:35:29] it pops up it does not break back over
+[00:35:32] the highs drops back down but if you
+[00:35:34] were aggressive you still could have
+[00:35:36] made money on that trade and you could
+[00:35:37] have made money on this trade right here
+[00:35:39] you could have been profitable on both
+[00:35:40] of them if you were quick about taking
+[00:35:42] your profits the result would be very
+[00:35:45] high accuracy but lower average winners
+[00:35:49] therefore lower profit or loss ratio and
+[00:35:52] the other way would be to say I'm gonna
+[00:35:53] buy this and I'm not gonna sell it at
+[00:35:55] 8:20 I'm gonna hold the whole thing
+[00:35:57] looking for the break at the pre market
+[00:35:59] high of 850 and I want to break that
+[00:36:01] level so I'm not gonna sell anything
+[00:36:03] till it hits 9 well for every one time
+[00:36:06] that it goes all the way from 8 to 9 you
+[00:36:07] get a full dollar share there's probably
+[00:36:10] gonna be 5 other times that it goes up
+[00:36:12] to here and then comes back down to
+[00:36:14] break-even and so when you swing for
+[00:36:17] bigger trades your accuracy goes down
+[00:36:20] because you don't take the quick profit
+[00:36:22] off the table when you have it and so
+[00:36:24] although your profit loss ratio goes up
+[00:36:26] your accuracy goes down and so at the
+[00:36:28] end of the day I feel better having high
+[00:36:31] accuracy because it makes me feel more
+[00:36:33] confident and even though it hurts my
+[00:36:36] profit loss rate
+[00:36:36] show a little bit my biggest winners
+[00:36:38] 38,000 my biggest losers 18,000 you know
+[00:36:41] I mean it's I don't like having really
+[00:36:43] big losses but unfortunately it happens
+[00:36:47] sometimes and then that draws down my
+[00:36:48] average losers
+[00:36:50] to the point where I really only have a
+[00:36:51] 1 to 1 ratio but again by focusing on
+[00:36:54] the right type of stocks the setups that
+[00:36:56] I consider to be predictable will
+[00:36:58] respond in a more predictable way if you
+[00:37:01] told me right now Ross starting today
+[00:37:03] you can't trade any of the top ten
+[00:37:06] leading relative volume stocks each day
+[00:37:09] what would that do to my strategy I
+[00:37:12] would have to start making the money on
+[00:37:15] on these ones down here I would have to
+[00:37:17] start trading stocks like Apple you know
+[00:37:21] I mean I would have to start trading
+[00:37:24] stocks that have a decent amount of
+[00:37:25] volume even though their relative volume
+[00:37:28] is low and you know what's gonna happen
+[00:37:29] most the time you try to day trade
+[00:37:30] stocks like these choppy choppy choppy
+[00:37:33] so again for a lot of the students that
+[00:37:36] I've known over the years who have
+[00:37:37] struggled a big part of it has been that
+[00:37:41] they start focusing on stocks of
+[00:37:42] companies or shares of companies that
+[00:37:44] they know and are familiar with and they
+[00:37:47] like the idea of trading Nike or trading
+[00:37:49] app or trading Facebook around the cases
+[00:37:51] but without that relative volume the
+[00:37:53] patterns aren't predictable and so
+[00:37:54] technical analysis really doesn't work
+[00:37:56] in the way that you would hope it would
+[00:37:58] so relative volume leads the way as far
+[00:38:02] as in my opinion technical indicators
+[00:38:05] for helping predict potential homeruns
+[00:38:09] something to work on her percent of time
+[00:38:11] but for me it works more often than it
+[00:38:13] doesn't so I hope this has been helpful
+[00:38:14] for you guys
+[00:38:15] this is something that I kind of want to
+[00:38:17] work on after seeing some comments about
+[00:38:19] you know how I find these kind of big
+[00:38:22] movers everyday so the answer is I look
+[00:38:25] for the relative volume and even though
+[00:38:27] there's not an actual metric for
+[00:38:29] relative volume I could add a relative
+[00:38:31] volume column here
+[00:38:32] nothing you would just show blank
+[00:38:33] pre-market I can still with a reasonable
+[00:38:36] amount of certainty just eyeball it and
+[00:38:39] look at the daily chart this trade with
+[00:38:41] 1.3 million shares yesterday and today
+[00:38:43] pre market and 915 already has 12
+[00:38:45] million yeah that's high relative Olli
+[00:38:48] alright so that's really all it is
+[00:38:50] that's the first step
+[00:38:52] finding the right type of stock to trade
+[00:38:53] and again for those you guys that are
+[00:38:55] watching this that may be watching on
+[00:38:57] Facebook or YouTube if you want to
+[00:38:59] actually learn not only how to find the
+[00:39:01] right type of stock to trade but where
+[00:39:03] to get in and where to get it out that's
+[00:39:06] what you'll learn in the warrior starter
+[00:39:08] and the warrior pro classes so keep
+[00:39:10] learning keep studying and as always if
+[00:39:11] you have questions feel free to leave
+[00:39:12] them below and that right there was an
+[00:39:14] entire video with no ads I don't
+[00:39:16] monetize my youtube channel video ads
+[00:39:18] which means you guys get to enjoy the
+[00:39:19] content but do me a favor please hit
+[00:39:22] that subscribe button and give me a
+[00:39:23] thumbs up and let YouTube know that this
+[00:39:25] channel is the channel to watch if you
+[00:39:27] want to learn about day tree
+[00:39:32] [Music]

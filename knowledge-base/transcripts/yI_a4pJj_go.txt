@@ -1,0 +1,734 @@
+# Candlestick Charts DIDN’T WORK Until I Learned This Easy ONE (1) STEP TRICK
+# https://www.youtube.com/watch?v=yI_a4pJj_go
+# duration_sec: 1669
+
+[00:00:00] [Music]
+[00:00:01] learning to read Candlestick charts was
+[00:00:03] extremely hard for me when I was getting
+[00:00:05] started until I learned this one very
+[00:00:08] specific step and once I started taking
+[00:00:11] that step it was like the water broke
+[00:00:13] through the dam and finally I was able
+[00:00:15] to see the charts clearly I was able to
+[00:00:17] see the patterns that I knew had the
+[00:00:18] highest probability of success and I was
+[00:00:21] able to trade them with consistency and
+[00:00:23] confidence now what I'm going to share
+[00:00:25] with you is not something that I read in
+[00:00:26] a lot of the books that help teach you
+[00:00:28] how to read Candlestick charts and I I
+[00:00:30] worry that maybe I've neglected to
+[00:00:32] emphasize how important this step is in
+[00:00:35] some of my previous videos because I was
+[00:00:36] just looking at a comment and one of you
+[00:00:38] guys asked a question it was on a video
+[00:00:40] where I was breaking down and dissecting
+[00:00:42] the anatomy of a very specific
+[00:00:44] Candlestick pattern and one of you guys
+[00:00:46] asked you said Ross I I saw this pattern
+[00:00:49] in in the wild in real time on a chart
+[00:00:52] and I took the trade and it was a
+[00:00:53] perfect pattern but I lost it didn't end
+[00:00:56] up working and I don't understand why
+[00:00:58] can you look at the chart and I said a
+[00:01:00] shirt I want to look at that cuz I want
+[00:01:01] to understand you know where was the
+[00:01:03] disconnect here now truth be told even
+[00:01:05] the patterns that have the highest
+[00:01:07] probability of success might only work
+[00:01:10] 75 to 80% of the time so there's always
+[00:01:12] going to be that margin where you've got
+[00:01:14] the right idea but the pattern just
+[00:01:15] doesn't work and that's okay but I took
+[00:01:18] a look at the chart and they shared with
+[00:01:20] me a chart of the S&P 500 and I thought
+[00:01:23] right away I was like okay see here's
+[00:01:26] the problem you're trying to trade the
+[00:01:29] S&P 5 00 and this is what I'm going to
+[00:01:32] say when I was getting started as a
+[00:01:34] beginner Trader I had the idea that I
+[00:01:37] should just trade the S&P 500 and I
+[00:01:40] should just trade Apple every single day
+[00:01:43] I should get to know how those how they
+[00:01:45] traded essentially how they moved and
+[00:01:48] just trade them every day and even
+[00:01:49] though I couldn't afford to buy them
+[00:01:50] outright I was trading them using
+[00:01:53] options so I was buying calls and buying
+[00:01:55] puts and I remember a time where I
+[00:01:57] pulled up my chart and this is a chart
+[00:01:59] of Nvidia but we could just as easily
+[00:02:01] pull up um apple or we could pull up the
+[00:02:03] S&P 500 and I remember pulling up the
+[00:02:06] chart and sitting here and looking at it
+[00:02:09] and thinking you know what I don't see a
+[00:02:12] thing I don't see any obvious buy or
+[00:02:17] sell signal I don't see anything here
+[00:02:19] that makes sense now something that's
+[00:02:21] worth noting is if you're trading large
+[00:02:23] caps you're trading the S&P 500 and
+[00:02:25] you're trading options you need fairly
+[00:02:29] big moves in the value of the underlying
+[00:02:32] asset in order to have a good profit
+[00:02:34] especially because a lot of options
+[00:02:35] contracts have larger spreads that's the
+[00:02:37] difference between the bid and the offer
+[00:02:39] so in other words if you're right and
+[00:02:42] the stock goes up or down like 15 20 30
+[00:02:45] cents that's not going to be enough to
+[00:02:47] make any money on the options trade so
+[00:02:49] essentially for me for the way I was
+[00:02:51] trading those I was looking for big
+[00:02:52] moves and as I was sitting down on this
+[00:02:54] one day I was looking at my charts and I
+[00:02:56] just I I put my hands up in frustration
+[00:02:58] because I didn't see a thing something
+[00:03:01] that I've learned about myself is that I
+[00:03:04] have a really hard time learning
+[00:03:07] languages this was something that was
+[00:03:09] incredibly difficult for me in school
+[00:03:11] you know other people like picked it up
+[00:03:12] really quickly and for me it was a
+[00:03:14] struggle and what I've come to realize
+[00:03:16] and recognize is that learning to read
+[00:03:18] Candlestick charts is like learning a
+[00:03:21] different language I'll give you an
+[00:03:23] example it's a visual language in a lot
+[00:03:25] of ways so right now I know the
+[00:03:28] difference in uh the meaning behind each
+[00:03:31] of these shapes each one of these
+[00:03:33] communicates a different type of message
+[00:03:36] to me and it the message is different
+[00:03:38] depending on where these shapes occur
+[00:03:40] where they occur at the top of a move
+[00:03:42] they occur at the bottom of a move or
+[00:03:44] they occur during a period of
+[00:03:46] consolidation so I've sometimes joked
+[00:03:48] that you know a thousand years from now
+[00:03:50] when like I don't know stock market's
+[00:03:52] obsolete people look back at our you
+[00:03:54] know Wall Street and they'll be like
+[00:03:55] what are these like these are like
+[00:03:57] hieroglyphs what were they doing what
+[00:03:58] were they thinking um you know these
+[00:04:01] charts that we put so much emphasis into
+[00:04:04] right now but for us it it really is a
+[00:04:07] language and so what was important for
+[00:04:10] me to learn this language and to get
+[00:04:12] really good at performing technical
+[00:04:14] analysis which for me in my trading
+[00:04:17] really does give me an edge I had to get
+[00:04:20] good at understanding the subtle
+[00:04:22] differences of when these specific
+[00:04:26] shapes carry meaning and when they don't
+[00:04:30] so when we try to trade something like
+[00:04:32] the S&P 500 or we're trading Apple one
+[00:04:34] of the things that I've learned is that
+[00:04:37] these stocks or indices have very high
+[00:04:40] levels of institutional ownership
+[00:04:42] they're also included in many different
+[00:04:44] mutual funds and so what that means is
+[00:04:47] that every single day a huge percentage
+[00:04:50] of all the transactions that are going
+[00:04:52] through the market are just based on
+[00:04:54] institutional Traders adjusting
+[00:04:56] portfolios for their clients mutual
+[00:04:58] funds adjusting port folios buying and
+[00:05:00] selling and it's actually a very small
+[00:05:03] percentage that is I would say organic
+[00:05:06] retail Traders buying and selling and so
+[00:05:10] something that's really incredible to
+[00:05:11] watch in the market is that when the S&P
+[00:05:14] 500 is moving down you can look at 15
+[00:05:17] other stocks and see that they're doing
+[00:05:19] actually the exact same thing or you'll
+[00:05:22] realize that some stocks have inverse
+[00:05:24] relationships when oil goes up Airlines
+[00:05:27] go down when when oil goes down Airlines
+[00:05:30] go up because they have this
+[00:05:31] relationship where the price of oil
+[00:05:32] affects the profitability of these
+[00:05:34] Airline stocks and so once I realized
+[00:05:36] that there were these sort of deeper um
+[00:05:39] deeper elements at play in the market it
+[00:05:43] helped me understand why performing
+[00:05:46] technical analysis on some of these
+[00:05:48] stocks was so difficult because when
+[00:05:50] you're performing your technical
+[00:05:51] analysis and you're looking at your
+[00:05:52] Candlestick chart this is kind of in an
+[00:05:55] isolated bubble you're looking at this
+[00:05:57] very specific stock and you're like okay
+[00:06:00] I'm looking at this bare flag or I'm
+[00:06:02] looking at this flat bottom breakdown or
+[00:06:03] this flat top breakout or whatever
+[00:06:05] whatever the case might be but to take
+[00:06:08] it out of the context of what's
+[00:06:10] happening in the larger market so on so
+[00:06:12] forth you may end up taking a trade and
+[00:06:15] then all of a sudden at you know 1 p.m.
+[00:06:18] there's a Federal Reserve announcement
+[00:06:20] and boom all of a sudden the stock
+[00:06:21] starts making this huge move and it was
+[00:06:23] unexpected for you because you were too
+[00:06:26] tunnel vision you were too zoomed in so
+[00:06:29] this is what I learned reading
+[00:06:31] Candlestick charts for me got easier
+[00:06:34] once I realized the type of stocks that
+[00:06:37] I made the most money on this comes back
+[00:06:41] to stock selection so to reduce our risk
+[00:06:45] in trading recognizing that of course
+[00:06:47] trading is risky I I've learned that I
+[00:06:50] can reduce my Risk by focusing on the
+[00:06:52] right stocks to trade when I try to
+[00:06:54] focus on trading Apple Microsoft Nvidia
+[00:06:59] these stocks with huge percentages of
+[00:07:02] institutional ownership I get chopped
+[00:07:04] out by the algorithm and just by the the
+[00:07:08] position adjustment of these big
+[00:07:10] portfolios moving in and moving out of
+[00:07:11] the market you know you might have one
+[00:07:13] client who said liquidate a $500 million
+[00:07:16] portfolio I want to go buy a yacht or
+[00:07:18] whatever and now their portfolio manager
+[00:07:20] is like okay I got to start selling they
+[00:07:22] start selling and all of a sudden that's
+[00:07:24] creating these big candle wicks on the
+[00:07:25] chart and you're like why is this
+[00:07:27] happening I don't understand it and it's
+[00:07:29] happening just because of something
+[00:07:31] that's completely out of your control
+[00:07:32] now I'm actually going to put a link um
+[00:07:34] for a PDF in the comments it'll be
+[00:07:36] pinned at the top of the comments and
+[00:07:38] it'll be linked in the description it's
+[00:07:39] a PDF for my stock selection uh criteria
+[00:07:43] and you can download this and I
+[00:07:45] encourage you to download it you can
+[00:07:47] print it out you can have it on your
+[00:07:48] desk and when you hear somebody talking
+[00:07:50] about a stock or you're seeing something
+[00:07:52] that's popping up you're seeing it on
+[00:07:53] the scanners or however you're coming
+[00:07:54] across it run that by that checklist and
+[00:07:57] ask yourself how closely does this meet
+[00:07:59] the criteria that Ross has set up now of
+[00:08:01] course it's the criteria that I use but
+[00:08:03] this is what I look for in order to
+[00:08:05] consider if something is worth trading I
+[00:08:07] feel like this for me helps me reduce my
+[00:08:11] risk because it helps me avoid stocks
+[00:08:13] that are more likely to have a high
+[00:08:14] degree of institutional ownership are
+[00:08:16] more likely to cause me to get chopped
+[00:08:18] out where I'm going to get frustrated
+[00:08:19] and then emotional have unnecessary
+[00:08:22] losses so download this stock selection
+[00:08:25] uh criteria PDF you can print it out
+[00:08:27] have it next to your desk and just use
+[00:08:29] this kind of a reference to gut check
+[00:08:31] like am I focusing on the right stuff
+[00:08:34] each day so what is the right type of
+[00:08:37] stock to trade for me I'm a volatility
+[00:08:40] Trader which means that I make money
+[00:08:43] trading things that move I don't make
+[00:08:45] money buying something at $5 and selling
+[00:08:46] it at $5 and make money money selling
+[00:08:49] buying something at five and selling it
+[00:08:50] at eight nine 10 or higher and if I
+[00:08:52] could do that in one day I'm going to be
+[00:08:54] very happy now today we had a few
+[00:08:56] examples of stocks that made those kind
+[00:08:58] of moves GA was one of them this stock
+[00:09:01] went up about 180% this morning and so
+[00:09:05] you can see this pattern right here now
+[00:09:07] this right here was bucking the trend of
+[00:09:10] the overall market and this is a f
+[00:09:12] minute chart but we can zoom in on the
+[00:09:13] one minute chart to get a little bit
+[00:09:14] more dialed in and I can show you my
+[00:09:16] exact entry so this was the this was
+[00:09:19] bucking the trend of the overall Market
+[00:09:20] the overall market today was actually
+[00:09:22] pulling back a little bit but this is a
+[00:09:24] stock that had a catalyst this is a
+[00:09:27] stock that had a reason to make a big
+[00:09:30] move and because of that news Catalyst
+[00:09:33] it had volume it had volatility it had
+[00:09:36] the rate of change that I look for and I
+[00:09:39] was able to capture profit so to put my
+[00:09:41] money where my mouth is you can see I'm
+[00:09:43] up $641
+[00:09:45] 1640 trading zpp now I'm not going to be
+[00:09:48] green every single day and I'm not going
+[00:09:50] to be green on every single stock I
+[00:09:51] trade so I want you to understand that
+[00:09:53] when I'm teaching you some of these
+[00:09:55] patterns that I really like even me with
+[00:09:58] years of experience there's no such
+[00:10:00] thing as being right 100% of the time
+[00:10:02] that doesn't exist in trading I know a
+[00:10:04] lot of you look for that certainty you
+[00:10:06] want to be right 100% of time you never
+[00:10:08] want to lose and I get it cuz I was like
+[00:10:10] that too when I got started it actually
+[00:10:12] sent me on what I would call the hunt
+[00:10:14] for the Holy Grail I was looking for the
+[00:10:17] perfect combination of technical
+[00:10:19] indicators that would basically
+[00:10:20] guarantee I would never lose money and
+[00:10:22] after spending years searching I
+[00:10:25] realized it doesn't exist not for retail
+[00:10:27] Traders like you and I the people who
+[00:10:29] make money every day maybe are the
+[00:10:31] Brokers right but but not retail Traders
+[00:10:33] we have to fight it out we're on the
+[00:10:35] ground floor here we're in the weeds but
+[00:10:37] if we find a pattern that works more
+[00:10:39] often than it doesn't and we're able to
+[00:10:42] keep our losses really small we can
+[00:10:44] develop an edge in the market and that's
+[00:10:46] exactly what I've been able to do so
+[00:10:48] let's talk about the criteria for the
+[00:10:51] right stock to trade because in terms of
+[00:10:54] setting a foundation for for success as
+[00:10:56] a Trader number one you've got to
+[00:10:58] understand risk management and risk
+[00:11:00] management to me is at at its base
+[00:11:04] understanding that you should never risk
+[00:11:06] more than you stand to gain as a Trader
+[00:11:08] so if you're going to risk a th000 you
+[00:11:10] better have the potential to make at
+[00:11:12] least a th000 if not 2,000 or 3,000 that
+[00:11:15] alone can save you all kinds of
+[00:11:17] heartache and frustration because I
+[00:11:19] can't tell you the number of traders who
+[00:11:21] have come to me and they said oh I lost
+[00:11:23] $5,000 on this trade and I'll say well
+[00:11:25] what was your stop what was your max
+[00:11:27] loss when you took the trade and what
+[00:11:28] was the most that you could have made if
+[00:11:30] it worked out well not being like
+[00:11:32] unrealistic but like realistic
+[00:11:34] expectations how much did you stand to
+[00:11:35] gain and they'll be like oh well when
+[00:11:37] you put it that way only like $1,500 but
+[00:11:40] they lost five grand right so totally
+[00:11:43] mismanage mismanaging their risk so if
+[00:11:46] you can understand number one that in
+[00:11:48] trading never risk more than you can
+[00:11:50] stand to gain that's step number one
+[00:11:52] step one all right so we we want to have
+[00:11:54] one to one profit to loss ratio and
+[00:11:57] minimum is 50% accuracy in order to be
+[00:11:59] Break Even anything above that is going
+[00:12:01] to be positive number two stock
+[00:12:04] selection and then number three is the
+[00:12:06] technical analysis right technical
+[00:12:09] analysis of actually reading the
+[00:12:11] Candlestick charts right so number two
+[00:12:15] stock selection for me what I found and
+[00:12:18] this is based on years of my own trading
+[00:12:21] data so I've gone through all of my data
+[00:12:23] and I can share it with you here just
+[00:12:24] really briefly just to kind of give you
+[00:12:26] a sense of how how much data we're
+[00:12:28] looking at so if we step back here this
+[00:12:30] is going to be oh let's see we're going
+[00:12:33] to clear this out I'm going to have
+[00:12:35] about 11.2 million in gross profit here
+[00:12:39] now I'll say right now my results are
+[00:12:41] not typical you shouldn't assume that
+[00:12:42] you're going to make the same amount as
+[00:12:44] me but this is important to learn from
+[00:12:46] someone who's proven profitable I have
+[00:12:48] this track record and it is real money
+[00:12:50] so with $1.2 million of profit let's
+[00:12:52] look for a second um at uh price and
+[00:12:55] volume so this is telling you the price
+[00:12:58] stocks I make the most money right so
+[00:13:01] okay so all right so we're we're trading
+[00:13:03] between $2 generally and 50 and you can
+[00:13:06] see the sweet spot for me is really
+[00:13:07] between 2 and 20 that's the spot where I
+[00:13:10] make the most money so let's start sort
+[00:13:13] of outlining this as stock selection
+[00:13:15] number one price so we're going to do
+[00:13:18] price and we'll just we'll flip it over
+[00:13:19] to this side here we'll start fresh all
+[00:13:21] right so stock selection so number one
+[00:13:23] price between 2 and 20 that's my sweet
+[00:13:27] spot now I'm not saying that I don't
+[00:13:29] make money when I trade stocks that are
+[00:13:31] a little more expensive or a little
+[00:13:32] cheaper but this is my sweet spot
+[00:13:34] between 2 and 20 where I do the best as
+[00:13:36] a beginner it seems to me that it would
+[00:13:38] make sense to focus on the sweet spot
+[00:13:40] where other Traders are doing their very
+[00:13:42] best rather than trading sort of the
+[00:13:44] edges of where they find success right
+[00:13:46] so number one price between 2 and 20 all
+[00:13:49] right now something that's very
+[00:13:51] interesting here we can look at um
+[00:13:53] instrument and we're going to scroll
+[00:13:55] down here when this loads we're going to
+[00:13:58] look at perform performance by
+[00:13:59] instrument relative volume and what
+[00:14:02] you'll see here is that the performance
+[00:14:03] by the instrument relative volume it's
+[00:14:06] very clear right down here so what does
+[00:14:09] this mean what this means is that the
+[00:14:12] majority of my profit is on stocks I
+[00:14:14] have 500 times higher volume today than
+[00:14:17] their 50-day average that means today
+[00:14:20] they have high volume relative to normal
+[00:14:23] what's the cause of high volume
+[00:14:25] typically a catalyst so let's start
+[00:14:27] plugging this in all right number two
+[00:14:29] five times
+[00:14:31] relative volume this is a measurement
+[00:14:34] that we can get from scanners number
+[00:14:36] three news
+[00:14:39] Catalyst all right number four all right
+[00:14:43] so we're going to go number four here
+[00:14:44] and if we scroll down here what we're
+[00:14:46] going to see is that uh performance by
+[00:14:49] instrument movement and performance by
+[00:14:50] opening Gap the majority of the profit
+[00:14:52] is when stocks are gapping up at least
+[00:14:54] 2% gapping up means moving higher than
+[00:14:57] they closed the previous day so up
+[00:14:59] 10% so if I just apply these four things
+[00:15:04] right here these are going to eliminate
+[00:15:07] how many
+[00:15:08] losers thousands and thousands of losing
+[00:15:11] trades I can completely eliminate I'm
+[00:15:12] not even going to consider it if the
+[00:15:14] stock doesn't fit within my price range
+[00:15:16] with the relative volume up at least 5%
+[00:15:18] on the day I prefer 10% or higher I'm
+[00:15:21] not even going to trade it so the S&P
+[00:15:23] 500 no trade Apple no trade Nvidia on
+[00:15:28] most days no trades now I'm not saying
+[00:15:31] that there aren't exceptions to this
+[00:15:33] rule there are going to be days when
+[00:15:35] Nvidia has news and makes a huge move
+[00:15:37] and it's it's worthwhile considering
+[00:15:39] there's days where Apple has news and
+[00:15:41] it's worth considering those are days
+[00:15:43] where the prices outside are my focus
+[00:15:45] area but it's got the the relative
+[00:15:47] volume it's got the news Catalyst maybe
+[00:15:49] it's not up 10% but it's up four or
+[00:15:51] five% and for a large cap stock all of
+[00:15:53] that could could support considering an
+[00:15:56] entry now one of the fifth things I look
+[00:15:59] at is
+[00:16:01] float under 20 million shares and lower
+[00:16:06] is better float is the number of shares
+[00:16:08] available to trade so when a company
+[00:16:10] does their initial public offering they
+[00:16:12] sell shares onto the open market from
+[00:16:14] that point forward that's the float so
+[00:16:16] what we've actually done here is we've
+[00:16:17] just created a list of demand and Supply
+[00:16:21] also known as supply and demand so now
+[00:16:23] let's think about this for a second so
+[00:16:26] we've got Demand right here
+[00:16:29] and demand initially is created first by
+[00:16:32] news then by the stock going up 10%
+[00:16:35] which then will bring in 5 times
+[00:16:37] relative volume right all of a sudden
+[00:16:39] now it's moving and usually stocks
+[00:16:41] between 2 and 20 are going to show
+[00:16:42] bigger percentage returns
+[00:16:45] Supply this is the number of shares
+[00:16:47] available to trade so let's say the
+[00:16:49] float is 20 million shares and let's say
+[00:16:51] on this particular day it the stock has
+[00:16:54] 100 million shares of volume so 100
+[00:16:57] million shares of demand vers verus 20
+[00:16:59] million shares of Supply what do you
+[00:17:01] think is going to happen you're going to
+[00:17:02] have a huge move that's what we like to
+[00:17:04] see so now let's go back and look at
+[00:17:06] this stock today that I traded so we're
+[00:17:08] going to pull back this um graph right
+[00:17:10] here I'm going to move that out of the
+[00:17:11] way so um zap zpp this has a float of
+[00:17:17] 4.29 million shares that's that's the
+[00:17:19] amount of shares available to trade 4.29
+[00:17:22] million this is a relatively small cap
+[00:17:24] company right the total market cap of
+[00:17:26] this company4 million time $3 a share so
+[00:17:29] this is not this is not a high price
+[00:17:31] company in terms of market cap today it
+[00:17:33] traded an incredible 91 million shares
+[00:17:37] of volume now I always think that this
+[00:17:39] is pretty amazing because in fact today
+[00:17:43] it traded the entire market cap the
+[00:17:46] entire float traded multiple times
+[00:17:49] people bought people sold people bought
+[00:17:51] people sold this traded well nearly
+[00:17:53] let's see 270 $300
+[00:17:57] million of stock tra traded hands why
+[00:18:00] did it cycle so quickly because we had
+[00:18:03] news we have news we have the percentage
+[00:18:05] return we've got that brings in the
+[00:18:07] volume what really starts all of this
+[00:18:09] the chicken or the egg it begins with a
+[00:18:12] news Catalyst you get the news Catalyst
+[00:18:14] that comes out and you have these high
+[00:18:16] frequency trading algorithms that
+[00:18:17] respond to news instantaneously they
+[00:18:21] instantaneously execute buy orders and
+[00:18:23] when other algorithms see this surge of
+[00:18:26] buy orders coming in they pull their
+[00:18:28] orders off the market because they don't
+[00:18:30] want to accidentally short a stock
+[00:18:32] that's suddenly spiking up and without
+[00:18:34] those sell orders holding it down all of
+[00:18:36] a sudden the stock start squeezing so
+[00:18:38] something that's kind of interesting is
+[00:18:39] that there's a misconception that high
+[00:18:43] frequency trading algorithms create
+[00:18:45] liquidity in the market they do but not
+[00:18:48] when the market becomes volatile because
+[00:18:50] when the market gets volatile they step
+[00:18:52] back because they don't want to lose
+[00:18:53] money so they turn off all those buy and
+[00:18:55] sell orders are gone and so now the sell
+[00:18:57] orders that would have created
+[00:18:59] uh sort of a level of Supply overhead
+[00:19:02] Supply they're gone and now the price
+[00:19:04] can Skyrocket and that's what we've seen
+[00:19:06] in fact I've seen stocks that have gone
+[00:19:08] from $2 to5 $25 in a matter of 15
+[00:19:13] minutes which is absolutely incredible
+[00:19:16] when it happens now in order to fully
+[00:19:19] capitalize on those types of stocks no
+[00:19:22] doubt you need to be an expert at number
+[00:19:24] three technical analysis right step one
+[00:19:27] understanding risk step two is stocks
+[00:19:28] selection step three is technical
+[00:19:30] analysis now by the way if you want to
+[00:19:32] download my stock selection PDF I'm
+[00:19:35] going to put the PDF it's a PDF that you
+[00:19:37] can download I'm going to put the link
+[00:19:38] in the description and I'm going to pin
+[00:19:40] it to the top of the comments so this is
+[00:19:42] going to break down my criteria for
+[00:19:44] buying a stock the demand and the supply
+[00:19:47] and it's going to make it it's it puts
+[00:19:48] it in a nice format so you can download
+[00:19:49] it you can print it out and you can put
+[00:19:51] it right next to your desk I really
+[00:19:52] encourage you to do that because in my
+[00:19:55] opinion in order to have success you
+[00:19:58] need to be trading the right stuff and
+[00:20:02] this is the biggest mistake so that
+[00:20:04] member or that subscriber that made that
+[00:20:06] comment about the stock that they were
+[00:20:08] looking at was S&P 500 and I was like
+[00:20:10] well you know but here's the problem
+[00:20:12] you're trying to trade something that's
+[00:20:13] range bound it's not moving and no
+[00:20:16] wonder you're going to get chopped up
+[00:20:17] you know what the pattern you saw that
+[00:20:20] big green candle that created the bull
+[00:20:21] flag that could have just been one
+[00:20:23] institutional Trader executing an order
+[00:20:25] for a client there wasn't a catalyst
+[00:20:28] behind it that carries meaning so what I
+[00:20:30] mean by that is when we're looking at a
+[00:20:33] stock that has the potential to make a
+[00:20:35] big move you know I'll just sort of go
+[00:20:38] like this why is a stock going to go up
+[00:20:41] 15 20% like that I'll do it in a
+[00:20:43] different color so it's easier to read
+[00:20:45] why is a stock going to make a big move
+[00:20:46] like this you know One initial pop and
+[00:20:48] then back down it's a catalyst why are
+[00:20:51] people going to buy this pullback
+[00:20:52] because when we're looking at a bull
+[00:20:54] flag we're looking at Green candles up
+[00:20:56] up up and then we look at the red candle
+[00:20:59] pulling back right here red candle
+[00:21:01] pulling back and then we look for the
+[00:21:02] next candle to come in for the next leg
+[00:21:04] up but why are people going to buy for
+[00:21:07] that next leg up they're not going to
+[00:21:09] buy for that next leg up if they don't
+[00:21:10] think this has the potential to make a
+[00:21:13] big move what gives it the potential for
+[00:21:16] that big move is when you have the news
+[00:21:19] Catalyst now I will say that there are
+[00:21:21] some exceptions to this you can for
+[00:21:24] instance have a stock that suddenly and
+[00:21:26] we don't always know why squeezes up 25
+[00:21:29] 30% or 40% something like that it makes
+[00:21:31] a huge move now it could be because an
+[00:21:33] Institutional Trader decided to take a
+[00:21:35] position but they took such a big
+[00:21:37] position that they move the stock up 30%
+[00:21:40] okay so now suddenly we're looking at
+[00:21:42] the stock and it's up 30% and we're like
+[00:21:44] well gez this meets our criteria it
+[00:21:46] doesn't have news but it's up 30% it
+[00:21:49] already has five times relative volume
+[00:21:50] it's the right price and the floats
+[00:21:53] right so the absence of news in this
+[00:21:56] case I I can tolerate it as long as we
+[00:21:59] have everything else so there are times
+[00:22:01] where I'll take those trades and at that
+[00:22:03] when when that's the case I'm doing the
+[00:22:05] same level of technical analysis I'm
+[00:22:06] pulling up the chart and I'm saying okay
+[00:22:09] well where's the pullback so if we look
+[00:22:11] at this um I'm actually going to zoom in
+[00:22:13] on this micro time frame here so on zap
+[00:22:17] this had an amazing little micro
+[00:22:20] pullback um right at
+[00:22:23] $2.50 uh it was an ascending wedge right
+[00:22:25] here so that was the spot and see how
+[00:22:28] this was ascending support so what I
+[00:22:31] often will do is I'll actually draw this
+[00:22:33] kind of ascending support trend line
+[00:22:35] like this and then we've got this flat
+[00:22:37] top right here right underneath the
+[00:22:40] psychological resistance of the half
+[00:22:41] dollar and it finally pushes away and
+[00:22:44] this thing squeezes from 250 straight up
+[00:22:46] to three halts up because it's so
+[00:22:48] volatile it opens it pushes even higher
+[00:22:51] and next thing you know we're hitting a
+[00:22:52] high of 380 but notice this candle right
+[00:22:55] here so what do we know about that
+[00:22:57] candle see now this is where we're
+[00:22:58] applying what we're learning about the
+[00:23:00] language of technical analysis we know
+[00:23:02] that this candle has a very tall upper
+[00:23:05] candle wick so how are upper candle
+[00:23:07] wicks created an upper candle wick is
+[00:23:09] created when the price and I'm just
+[00:23:12] going to use this orange just for the
+[00:23:13] just because the quickest to grab so the
+[00:23:15] price squeezes up and if it closed at
+[00:23:19] the high you've got a very bullish
+[00:23:20] candle price is going up right but if it
+[00:23:24] squeezes up and then the sellers p push
+[00:23:28] it back down and it closes like this
+[00:23:32] that shows that sellers were in control
+[00:23:35] so now in this moment the sentiment is
+[00:23:37] weak now I know how to read that candle
+[00:23:39] I know what this topping tail means this
+[00:23:42] is bearish bearish weak not good if
+[00:23:46] you're long now the opposite of a
+[00:23:48] bottoming tail a bottoming tail is
+[00:23:50] bullish and is strong we usually like to
+[00:23:51] see that uh so in any case as I saw that
+[00:23:54] topping tail candle I thought all right
+[00:23:56] well that's not great to see this is
+[00:23:58] probably going to be the high of day but
+[00:24:01] it may come back up and retest it and
+[00:24:03] form a double top that's a double top
+[00:24:05] right there this was potentially going
+[00:24:07] to form a cup and handle pattern for a
+[00:24:10] move higher but it didn't now all of
+[00:24:12] this technical analysis is worth
+[00:24:14] performing because we're looking at
+[00:24:16] something that has volatility we're
+[00:24:18] looking at something that's moving
+[00:24:20] that's what's important so if we look at
+[00:24:22] some of the other stocks today that were
+[00:24:23] volatile This was um Z AL this is one
+[00:24:28] that's currently up
+[00:24:30] 136% we back this chart out here and
+[00:24:32] you're going to see again this is the
+[00:24:34] type of thing that you want to be
+[00:24:35] looking at you want to look at these
+[00:24:36] candles you want to look at them at the
+[00:24:38] 1 minute you want to look at them on the
+[00:24:39] 10sec look at it on the 5 minute check
+[00:24:41] the daily when you have something that
+[00:24:43] goes between a120 and 350 there's a lot
+[00:24:47] of opportunity here even if you only
+[00:24:50] capture a little sliver of it getting in
+[00:24:52] at 230 and selling at 250 or 260 a
+[00:24:55] little sliver of this huge move that's a
+[00:24:57] 10% return right there you're not going
+[00:25:00] to get 10% returns trying to day trade
+[00:25:02] apple or Nvidia or the S&P 500 again
+[00:25:06] unless you're trading options and it's a
+[00:25:08] day where the price is particularly
+[00:25:11] volatile but that's not the case on most
+[00:25:14] days so one of the things for me that
+[00:25:17] was really like helped me have a
+[00:25:20] breakthrough was the realization that
+[00:25:23] focusing exclusively on technical
+[00:25:26] analysis without thinking about the
+[00:25:28] right type of stock to trade was
+[00:25:30] resulting in me getting chopped out and
+[00:25:32] losing money I was losing money I was
+[00:25:34] struggling once I realized the type of
+[00:25:37] stocks that had the biggest moves were
+[00:25:38] the ones I was making the most money on
+[00:25:40] I decided to only perform technical
+[00:25:41] analysis on those I left everything else
+[00:25:44] behind and guess what things started to
+[00:25:46] improve I started seeing stocks that
+[00:25:48] were going up 30 40 50% and even though
+[00:25:50] I was only capturing a little piece of
+[00:25:52] that move 10 cents here 15 cents there
+[00:25:55] boom with 1,000 shares it's 150 bucks
+[00:25:57] another 15 bucks now I'm up 200 on the
+[00:25:59] day that was my daily goal when I was
+[00:26:01] getting started and I found it was a lot
+[00:26:03] easier to hit my $200 daily goal when I
+[00:26:06] was trading stocks going up 40 50 100%
+[00:26:10] than by trying to trade things that are
+[00:26:11] going sideways so if you're someone
+[00:26:13] who's been trading cryptocurrency you'll
+[00:26:16] know that trading the ones that are the
+[00:26:18] most volatile is where you're going to
+[00:26:20] find success you trade cryptocurrencies
+[00:26:21] like Bitcoin volatile but a lot of chop
+[00:26:26] very difficult to perform technical
+[00:26:27] analysis you want to trade Forex some
+[00:26:29] currency pairs are going to be more
+[00:26:30] volatile than others you want to trade
+[00:26:32] Futures there are certain days of the
+[00:26:33] week certain week days out of the month
+[00:26:35] where individual future contracts are
+[00:26:37] going to be more volatile than others as
+[00:26:40] active Traders we hunt for volatility
+[00:26:43] but we have to be managers of risk so at
+[00:26:45] the end of the day I'm thinking about my
+[00:26:47] risk and I feel like I reduce my risk as
+[00:26:50] a Trader by only trading things that are
+[00:26:53] moving when I get bored and I start
+[00:26:55] looking at Tesla or Nvidia because while
+[00:26:59] they're moving in dollars per share this
+[00:27:02] the percentage it's not there and that's
+[00:27:05] when I end up struggling that's when I
+[00:27:07] end up getting chopped up that's when I
+[00:27:08] end up losing money so the big lesson
+[00:27:11] that made Reading Candlestick charts a
+[00:27:13] lot easier for me was recognizing the
+[00:27:16] right type of things to trade for me
+[00:27:19] it's stocks so I hope you download my
+[00:27:21] stock selection PDF it's going to break
+[00:27:23] down the type of stocks that I like to
+[00:27:25] trade every single day and I think if
+[00:27:26] you set this as sort of part of your
+[00:27:28] foundation practice trading these in the
+[00:27:30] simulator see what happens I think
+[00:27:33] you'll be impressed now as always I'll
+[00:27:35] remind you trading is risky and my
+[00:27:36] results aren't typical so take it slow
+[00:27:38] and look if you enjoyed this episode I
+[00:27:40] hope you hit that thumbs up I hope you
+[00:27:41] subscribe and I'll see you for the next
+[00:27:42] upload real soon
+[00:27:44] [Music]

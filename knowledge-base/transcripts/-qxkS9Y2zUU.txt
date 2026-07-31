@@ -1,0 +1,352 @@
+# 7 Rules of Day Trader
+# https://www.youtube.com/watch?v=-qxkS9Y2zUU
+# duration_sec: 847
+
+[00:00:00] I took
+[00:00:02] 24,26 individual day trades and I
+[00:00:04] produced just under 122.5 million in
+[00:00:07] gross profit those results are not
+[00:00:09] typical but in today's episode I'm going
+[00:00:11] to extract the data from all of those
+[00:00:13] trades to share with you the strategies
+[00:00:15] that are working in today's market and
+[00:00:18] to give you guard rails that you can
+[00:00:20] Implement in your own trading today
+[00:00:24] these are the rules that I follow that
+[00:00:26] have led to my success as a momentum day
+[00:00:29] trader so we're going to jump right in
+[00:00:31] with rule number one knowing the day of
+[00:00:33] the week that I make the most money and
+[00:00:35] my goal as a Trader who is trying to
+[00:00:38] produce consistent income is that I
+[00:00:41] finish each week in the green I
+[00:00:43] understand that not every single day
+[00:00:45] will be a green day I'll have some red
+[00:00:47] days but at the very least I want to
+[00:00:49] finish each week in the green and I want
+[00:00:51] to finish each month in the green and of
+[00:00:53] course I want to finish each year in the
+[00:00:56] green so what I do on Monday morning
+[00:00:59] because I'm starting from zero is I ease
+[00:01:01] into the market slowly I take a few
+[00:01:04] trades just to dip my toe in the water
+[00:01:06] and if I find some success I start to
+[00:01:09] lean in a little bit so generally on
+[00:01:11] Mondays I produce a smaller profit I'm
+[00:01:14] building a cushion for the week on
+[00:01:16] Tuesdays if Monday was good I step up to
+[00:01:19] the plate a little bit more and on
+[00:01:20] Wednesday and Thursday I am at Peak
+[00:01:23] Performance before I cool off going into
+[00:01:26] the weekend on Friday I don't want to
+[00:01:28] screw up on Friday and get give up 4
+[00:01:30] days of progress so I reduce my risk and
+[00:01:33] that's partly because I want to go into
+[00:01:35] the weekend with some confidence feeling
+[00:01:37] good like I finished the week strong a
+[00:01:40] big part of trading is maintaining the
+[00:01:43] head space it's the mental game one of
+[00:01:46] the things that I've learned in all of
+[00:01:47] my years of trading is that the people
+[00:01:50] who make the most money are the ones who
+[00:01:52] need it the least and this is a really
+[00:01:54] frustrating and sad reality but it's the
+[00:01:57] case because people who don't need the
+[00:01:59] money are not desperate they're not as
+[00:02:02] likely to give into the emotions of fear
+[00:02:05] and greed they're just able to trade
+[00:02:07] from the genuine interest of trading the
+[00:02:09] market and so
+[00:02:11] unfortunately for Traders that aren't in
+[00:02:14] that place by default because you're not
+[00:02:16] rich already before you start trading
+[00:02:17] and I certainly wasn't we have to kind
+[00:02:19] of fake it till we make it which means
+[00:02:21] we have to do everything possible to
+[00:02:23] preserve our mental game to keep
+[00:02:25] ourselves focused and that means knowing
+[00:02:28] when to push hard and knowing when to
+[00:02:30] ease off the throttle rule number two
+[00:02:35] the time of day to trade and knowing
+[00:02:37] when to quit so if you asked me 3 years
+[00:02:40] ago Russ what's the best time a day to
+[00:02:42] trade I would have told you from 9:30
+[00:02:45] until about 10:30 in the morning 1 hour
+[00:02:49] it's the opening range and the reason
+[00:02:50] the open historically has been such a
+[00:02:53] strong time of day to trade is because
+[00:02:55] that's when stocks are reacting to
+[00:02:58] breaking news that came out
+[00:03:00] overnight however in the last few years
+[00:03:03] what we've seen is that as soon as a
+[00:03:05] company has news and news headlines
+[00:03:08] often come out at 7:00 a.m. at 8:00 a.m.
+[00:03:11] and at 9:00 a.m. that as soon as the
+[00:03:13] news is released Traders are jumping on
+[00:03:16] because they don't want to miss that
+[00:03:18] opportunity and so as a result the
+[00:03:20] window has actually gotten bigger
+[00:03:22] currently my window where I make the
+[00:03:24] most money is between 8:00 a.m. and
+[00:03:27] 10:00 a.m. it's a 2hour window now I can
+[00:03:30] start trading as early as about 7 prior
+[00:03:33] to 7 a.m. we don't see a lot of volume
+[00:03:36] and one of the reasons is because a lot
+[00:03:37] of the commission free Brokers don't
+[00:03:40] even let people start trading before
+[00:03:42] 7:00 a.m. so 7: a.m. is when volume
+[00:03:44] starts to come into the market and then
+[00:03:46] I found that after that opening range
+[00:03:49] you know around 10:30 11 it really cools
+[00:03:52] down and it's slow for the middle of the
+[00:03:55] day now historically we've had what's
+[00:03:57] called Power Hour that's from 3:00 p.m.
+[00:04:00] to 4:00 p.m. going into the close and
+[00:04:02] that's when we do see some increased
+[00:04:04] volatility but it's more from investors
+[00:04:07] in swing traders who are establishing
+[00:04:09] new positions and closing positions
+[00:04:11] based on the daily charts that are just
+[00:04:13] getting ready to form so active day
+[00:04:17] Traders Power Hour in my experience has
+[00:04:20] not been the time when I perform the
+[00:04:21] best my window of opportunity is from
+[00:04:24] 8:00 a.m. to 10:00 a.m. knowing that if
+[00:04:27] it's 9:45 and I haven't taken a trade
+[00:04:30] yet I know that my window is closing so
+[00:04:33] it's really important to know when to
+[00:04:36] walk away walking away sooner is one of
+[00:04:39] the biggest lessons I wish I had learned
+[00:04:42] earlier in my career the reality is if
+[00:04:45] you have a goal of making $200 a day
+[00:04:48] 50,000 a year or 400 a day 100,000 a
+[00:04:51] year as soon as you hit that goal
+[00:04:53] there's nothing wrong with packing up
+[00:04:55] and walking away so many Traders hit
+[00:04:58] their goal keep keep trading and then
+[00:05:00] slowly give it back until they finish
+[00:05:02] the day in the red an important lesson
+[00:05:05] to learn is to to walk away especially
+[00:05:08] when you're coming to the end of your
+[00:05:09] window when you make the most money and
+[00:05:11] for me it's between 8:00 a.m. and 10:00
+[00:05:13] a.m. rule number three know your sweet
+[00:05:17] spot or your strategy when I started I
+[00:05:20] had a small account and I couldn't
+[00:05:21] afford to buy 5060 $70 a share stocks my
+[00:05:25] goal was to buy a $5 stock and sell it
+[00:05:28] at $550 for 10% gain it's very hard to
+[00:05:31] get a 10% gain day trading 50 60 $70
+[00:05:35] stocks it's not impossible but it's
+[00:05:37] pretty hard where I found the most
+[00:05:39] opportunity was on the lower price
+[00:05:41] stocks and my sweet spot where I make
+[00:05:43] the most is between 5 and 10 generally
+[00:05:46] speaking I will trade between 2 and 20
+[00:05:49] but I found under two I don't make a lot
+[00:05:52] and over 20 I do make money trading and
+[00:05:55] certainly there were examples like
+[00:05:56] GameStop that was over 20 and I did well
+[00:05:59] on that but those are the exception not
+[00:06:01] the norm so on a day-to-day basis I know
+[00:06:04] the sweet spot for the momentum strategy
+[00:06:07] that I trade and stocks generally
+[00:06:09] between 2 and 20 and specifically
+[00:06:11] between 5 and 10 rule number four throw
+[00:06:14] away most of those technical indicators
+[00:06:16] cuz the majority of them are garbage I
+[00:06:19] learned this the hard way I spent a
+[00:06:21] number of years early in my career
+[00:06:23] trying to find the perfect combination
+[00:06:25] of technical indicators and there's a
+[00:06:27] lot of people out there who sell
+[00:06:29] technical indicators and what they're
+[00:06:31] selling in my opinion is the dream of
+[00:06:33] the Holy Grail an indicator that's right
+[00:06:36] 100% of the time that never has losses
+[00:06:39] but let's face it that's not reality and
+[00:06:41] and even if there was an indicator that
+[00:06:43] was really really good it's only going
+[00:06:45] to be as good as the trader who adheres
+[00:06:48] to it because if you don't follow every
+[00:06:51] single signal your success is going to
+[00:06:53] really differ from whatever that
+[00:06:54] indicator says it could possibly do so I
+[00:06:58] try to keep it simple I took away all of
+[00:07:00] those excessive indicators all those
+[00:07:02] custom indicators and I brought it down
+[00:07:04] just to the basics in a way this felt
+[00:07:08] like I could see more clearly because
+[00:07:11] all those indicators created this lens
+[00:07:13] where I was getting this analysis
+[00:07:16] paralysis too much stuff was going on
+[00:07:18] and I couldn't see what was right in
+[00:07:20] front of me so by taking away those
+[00:07:22] indicators and focusing simply on the N9
+[00:07:25] moving average exponential the 20 EMA
+[00:07:28] the 200 M volume weight at average price
+[00:07:32] volume bars and maybe throwing on the
+[00:07:35] macd moving average convergence
+[00:07:38] Divergence indicator keeping it simple
+[00:07:41] is so important because at the end of
+[00:07:43] the day what you really want to be
+[00:07:44] focusing on are the Candlestick patterns
+[00:07:48] themselves if you're overlaying so many
+[00:07:50] indicators that you can't even read the
+[00:07:51] charts well you're done screwed up you
+[00:07:54] got to go back to basics so I encourage
+[00:07:56] you to keep it simple and focus on
+[00:07:58] what's most important important the
+[00:07:59] candlesticks and of course the actual
+[00:08:02] depth of the market which is in level
+[00:08:04] two you're not even going to see that on
+[00:08:07] the chart so as important as charts are
+[00:08:09] for identifying patterns ultimately
+[00:08:12] where I'm executing trades is on the
+[00:08:15] level two number five when I break my
+[00:08:18] rules I tend with 80% likelihood of
+[00:08:22] losing twice as much as if I had stopped
+[00:08:26] the moment before I broke my rule now
+[00:08:28] I've done a lot of tracking on breaking
+[00:08:31] rules breaking rules in trading what
+[00:08:33] does that mean well I have a rule for
+[00:08:36] instance of a daily Max loss but every
+[00:08:38] now and then I'll get emotionally fueled
+[00:08:41] I'll say no I'm going to take one or two
+[00:08:43] more trades but with an 80% likelihood I
+[00:08:46] will double my loss on the day if I keep
+[00:08:49] trading so I really have to stick to
+[00:08:52] cutting it at my Max loss and I
+[00:08:55] encourage you to do the same now I have
+[00:08:57] also found this true when when I break
+[00:08:59] another rule which is knowing when to
+[00:09:01] walk away so when I am trading on any
+[00:09:04] given day I'll make money have some
+[00:09:06] winners have some gains and naturally
+[00:09:08] I'll have a couple of losses so at what
+[00:09:10] point do you walk away and at what point
+[00:09:12] do you continue trading my rule of thumb
+[00:09:14] is that if I give back more than half of
+[00:09:16] my day I walk away at least with profit
+[00:09:20] in my pocket yes the glass is half empty
+[00:09:22] but at least it's half full because I
+[00:09:24] have more than I had two hours or
+[00:09:26] earlier so I stop if I've given back
+[00:09:28] half I can't tell you how many times
+[00:09:31] I've given back half and I said I'll
+[00:09:32] take one more trade I set up for a hail
+[00:09:35] Mar pass and I end up giving back the
+[00:09:38] other half I still had and going red on
+[00:09:41] the day doubling the initial loss so
+[00:09:45] with Statistics in my favor knowing the
+[00:09:48] metrics that if I continue trading when
+[00:09:50] I break rules I'm likely just to
+[00:09:51] continue to lose it's helped me be a
+[00:09:54] more disciplined Trader so I really
+[00:09:56] encourage you in your own Trading when
+[00:09:59] you set rules you have to stick to them
+[00:10:02] there's no sense in having rules if
+[00:10:03] you're not going to follow them so
+[00:10:05] setting rules of Max share size max
+[00:10:08] daily loss Max weekly loss you know at
+[00:10:11] what point do you walk away if you've
+[00:10:13] given back half Etc set the rules and
+[00:10:15] follow the rules now all the rules that
+[00:10:18] I created were from my own experiences
+[00:10:20] just of realizing that if I give back
+[00:10:21] more than half I get emotionally
+[00:10:23] triggered I'm not really as dialed in as
+[00:10:25] I as I was beforehand I could probably
+[00:10:27] change that rule to a a give back 40%
+[00:10:30] but it's easier to remember half than 40
+[00:10:32] because you know you know you're up 5
+[00:10:34] grand so if you're up only 2500 you know
+[00:10:37] you give him back half the numbers are
+[00:10:39] easy keep it simple but follow your
+[00:10:42] rules number six if it's not obvious to
+[00:10:45] you what stock you should be trading
+[00:10:47] then there is not an a quality setup and
+[00:10:49] there's no reason to force trades you do
+[00:10:52] not have to trade every single day and
+[00:10:55] on days when you trade sometimes you'll
+[00:10:57] take a couple trades you might make a a
+[00:10:59] little lose a little it's it's just not
+[00:11:01] a day where anything is really happening
+[00:11:02] and if there's nothing that's obvious
+[00:11:05] the best thing to do is to walk away I
+[00:11:07] find without question I make the most
+[00:11:10] money when I'm trading the stocks that
+[00:11:12] are obvious and if we think about that
+[00:11:15] in terms of stock selection my
+[00:11:17] requirements for being interested in
+[00:11:19] trading a stock of course I want to see
+[00:11:20] the price between 2 and 20 I'd like to
+[00:11:23] see if the stock has news I'd like to
+[00:11:25] see that it has high relative volume I'd
+[00:11:28] like to see it's already up at least 10%
+[00:11:31] cuz I found that stocks that are up 10%
+[00:11:33] have the highest likelihood of
+[00:11:34] continuing higher and I want to see the
+[00:11:37] float is under 20 million shares that's
+[00:11:39] my sort of five criteria for a good
+[00:11:41] Supply demand imbalance and if there's
+[00:11:44] not a stock that meets those five
+[00:11:46] criteria and is super obvious then the
+[00:11:50] best course of action is to wait until
+[00:11:52] tomorrow the market will be here there
+[00:11:55] is no sense in forcing it number seven
+[00:11:58] track your metrics and analyze your
+[00:12:01] trading data everything I've shared with
+[00:12:04] you today is the result of me analyzing
+[00:12:08] 24,26 trades worth of data I know
+[00:12:12] without a doubt the time of day when I
+[00:12:14] make the most money the day of the week
+[00:12:16] that I make the most money the months of
+[00:12:18] the year that I make the most money
+[00:12:20] which by the way I tend to make the most
+[00:12:22] money from October November December
+[00:12:24] January February March with the
+[00:12:26] exception of June in 2020 which was an
+[00:12:28] incredible year but that was again an
+[00:12:31] exception not the norm I found that
+[00:12:33] summers are typically slower but if I
+[00:12:35] didn't have my data showing me that I
+[00:12:38] might think it but I might think a lot
+[00:12:40] of things but I wouldn't know if they
+[00:12:41] were fact this trading data that you
+[00:12:45] have is accessible to you there are
+[00:12:47] secrets in there in fact it was in my
+[00:12:50] own trading metrics early on that I
+[00:12:53] discovered even though I was losing
+[00:12:55] money in whole there were aspects of my
+[00:12:58] Trading where I was making money so if
+[00:13:00] you looked at all of your metrics and
+[00:13:02] you saw wow I make money on stocks
+[00:13:04] between 5 and 20 but then I give back
+[00:13:06] all the profit when I trade stocks over
+[00:13:08] 20 you would now know there's an action
+[00:13:10] item I can take from this information
+[00:13:13] which is to stop trading stocks over $20
+[00:13:15] a share do that for a month and then see
+[00:13:17] what happens all of a sudden now you're
+[00:13:18] a profitable Trader you know these
+[00:13:21] things you would think they would just
+[00:13:22] occur to us but when it's right there in
+[00:13:25] the data that's when it becomes the most
+[00:13:27] obvious so I encourage you to track your
+[00:13:30] analytics monitor your data and always
+[00:13:34] look for opportunities to become a
+[00:13:36] better Trader this is the reality with
+[00:13:38] trading this is a marathon not a Sprint
+[00:13:41] it's a lifelong career and even though
+[00:13:43] I've been doing it for a really long
+[00:13:45] time I still feel like even I can get
+[00:13:48] better and I can learn from other
+[00:13:49] Traders out there you'll never be a
+[00:13:52] perfect Trader there is no such thing
+[00:13:54] there's always room for improvement for
+[00:13:56] those of you who are at the beginning of
+[00:13:57] your learning curve hit the thumbs up
+[00:13:59] and check out this episode right here
+[00:14:01] that YouTube thinks you're going to love
+[00:14:04] I'll see you for the next one real soon

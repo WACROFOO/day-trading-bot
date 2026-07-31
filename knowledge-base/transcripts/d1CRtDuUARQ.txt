@@ -1,0 +1,1530 @@
+# The Simple Trading Strategy I'd Use If I Had To Start Over... 💥 DAY 1 | Small Account Challenge
+# https://www.youtube.com/watch?v=d1CRtDuUARQ
+# duration_sec: 3546
+
+[00:00:02] today is day one of my brand new small
+[00:00:04] account challenge but for this challenge
+[00:00:06] I'm going to do things a little bit
+[00:00:08] differently unlike my last challenge I'm
+[00:00:10] going to be trading in a cash only
+[00:00:12] account that means no leverage and no
+[00:00:15] margin and I will be using thinker swim
+[00:00:18] as my platform this is a challenge that
+[00:00:21] many of you guys have asked me to do
+[00:00:22] because a lot of beginner Traders come
+[00:00:24] to the table with relatively small
+[00:00:26] accounts and like to use commission free
+[00:00:28] Brokers like thinker swim Robin Hood
+[00:00:30] Weeble and several of the others so what
+[00:00:32] I'm going to do in this class right now
+[00:00:35] is I'm going to break down for you step
+[00:00:37] by step the strategy that I will be
+[00:00:39] trading during this challenge how I have
+[00:00:42] customized thinker swim to get the most
+[00:00:45] out of it for active trading and I will
+[00:00:47] share with you my hotkeys my settings
+[00:00:49] and my layout and I'm going to share
+[00:00:51] with you how I made the determination to
+[00:00:53] choose a cash account cuz there are
+[00:00:55] several different account types that you
+[00:00:57] can choose at thinker swim so let's go
+[00:00:59] ahead and jump in we've got a full slide
+[00:01:01] deck I've got the Whiteboard and I hope
+[00:01:03] you are ready to learn so I'm going to
+[00:01:06] make this full screen here and we're
+[00:01:07] going to Dive Right In now the first
+[00:01:10] thing that I want to cover is the
+[00:01:11] strategy that I'm going to be trading
+[00:01:12] during this challenge when I'm trading
+[00:01:15] with my large account I really trade the
+[00:01:18] same strategy that I'm going to trade
+[00:01:20] here with the small account the only
+[00:01:22] difference is with the small account the
+[00:01:23] guardrails are off I can trade a 100
+[00:01:26] times in one day if I want to of course
+[00:01:28] my account is large enough that that I
+[00:01:30] have the buying power to trade very
+[00:01:32] aggressively I could take large
+[00:01:33] positions and in fact today in my main
+[00:01:36] account I was up over
+[00:01:37] $1,000 and that account has about
+[00:01:40] $150,000 in it so it's almost a 10%
+[00:01:43] return not quite 77% return in one day
+[00:01:48] all right so let's pair that down how am
+[00:01:50] I going to lock up a 7% gain or maybe a
+[00:01:53] 10% gain in a small account if you've
+[00:01:56] got a small account whether it's $500 or
+[00:01:58] 5,000 or 10,000 you you know getting
+[00:02:00] that $500 $700 $1,000 winner is a big
+[00:02:05] deal and of course you're limited in how
+[00:02:07] many trades you can take so each trade
+[00:02:10] has to count so this is the way I'm
+[00:02:12] going to approach it the small account
+[00:02:14] strategy day one step one is in order to
+[00:02:18] grow the account I need big percentage
+[00:02:20] gains I need stocks that are going up
+[00:02:23] not just 10 15 20% but 50% 75% 100% 200%
+[00:02:30] or higher and that's the type of stuff
+[00:02:32] that I'm going to look for and those are
+[00:02:33] the stocks I traded today so I'll have
+[00:02:36] to search each day for the largest
+[00:02:39] percentage gainers now there's a little
+[00:02:41] bit of a myth that well gosh if
+[00:02:43] something's already up 50% I'd missed
+[00:02:46] the move and I would disagree with you I
+[00:02:48] would say if a stock is up 50% that
+[00:02:51] tells you that a lot of people are very
+[00:02:53] interested in this stock and in fact
+[00:02:56] there's a much higher likelihood of that
+[00:02:58] stock going up another 50% versus a
+[00:03:01] stock that nobody's paying attention to
+[00:03:03] going up 50% and here's the thing with a
+[00:03:05] small account you can't afford to tie up
+[00:03:08] your capital and wait around hoping that
+[00:03:11] a trade that you're in is going to work
+[00:03:13] you need to focus on trading things that
+[00:03:14] are moving right now so as part of a day
+[00:03:18] trading strategy I'm going to be
+[00:03:20] focusing each day on the leading
+[00:03:22] percentage gainers and I'm going to
+[00:03:24] naturally prefer stocks that are lower
+[00:03:26] priced because well I can buy more
+[00:03:28] shares you know this is kind of the part
+[00:03:30] of trading where you know you just sort
+[00:03:32] of figure let's say um you know you want
+[00:03:34] to buy 10,000 shares of a stock well at
+[00:03:37] 70 cents you might be able to do that
+[00:03:40] but at $7 is not going to happen right
+[00:03:42] you've got a $110,000 account 70 cents
+[00:03:45] 10,000 shares that's a $7,000 position
+[00:03:48] and this is the type of position where
+[00:03:49] if this thing goes up to 80 cents 90
+[00:03:52] cents or a dollar you could end up
+[00:03:54] making $3,000 of profit your account's
+[00:03:57] up almost 50% in one day that's actually
+[00:04:00] in a lot of ways more obtainable than
+[00:04:02] catching a stock going from $7 to $10
+[00:04:06] not that that doesn't happen but
+[00:04:08] realistically for this challenge lower
+[00:04:10] price stocks are going to be where it's
+[00:04:12] at so this is going to be my routine
+[00:04:14] each day I'm going to sit down I'm going
+[00:04:16] to pull up my scans and I'm going to be
+[00:04:17] looking for the top leading percentage
+[00:04:20] gainers if I see that those are stocks
+[00:04:22] that are 20 $30 a share I'm not even
+[00:04:24] going to trade them they're going to be
+[00:04:26] too expensive I won't be able to buy
+[00:04:28] enough shares in order for it to make it
+[00:04:31] worthwhile even in spite of the fact
+[00:04:32] that thinker swim is commission free I
+[00:04:35] really need to be able to maximize my
+[00:04:37] buying power by trading stocks that have
+[00:04:39] the potential to go up 20 30 40 50% and
+[00:04:43] a $30 stock I mean if it goes to 33 it's
+[00:04:45] up 10% and I'm not going to get a full
+[00:04:47] $3 a share on a day trade those of you
+[00:04:50] guys who know my strategy you know that
+[00:04:53] it is um my approach to focus on stocks
+[00:04:56] of course that are trending up and to
+[00:04:58] trade quickly so I am jumping in and
+[00:05:00] jumping out as the momentum is rising so
+[00:05:03] what I'm doing essentially is I'm
+[00:05:05] looking for something that's already
+[00:05:06] trending up like this and I'm looking
+[00:05:08] for these little pullbacks right here
+[00:05:10] and right here to buy these dips for the
+[00:05:13] next leg higher but the risk with this
+[00:05:15] strategy is that if you get in up here
+[00:05:17] and suddenly it starts to reverse you've
+[00:05:19] got to get out quickly and if you get in
+[00:05:21] up here and you've got some profit you
+[00:05:23] want to make sure you pay yourself so if
+[00:05:25] you look at my metrics one of the things
+[00:05:27] that you'll notice and this is based on
+[00:05:29] uh over 1 $ million of gross profit
+[00:05:31] which by the way is not a typical result
+[00:05:33] I've been doing this for a very long
+[00:05:34] time uh but one thing that I'll say is
+[00:05:36] that if you're an Aspire and Trader the
+[00:05:38] best time to have learned how to start
+[00:05:40] trading was 5 years ago so today you
+[00:05:42] would possess the knowledge and the
+[00:05:44] skill to be able to capitalize on the
+[00:05:45] volatility that we're seeing right now
+[00:05:47] the next best time to learn is to start
+[00:05:50] today so that 3 years four years 5 years
+[00:05:53] down the road you have all of this
+[00:05:56] accumulated knowledge skill and
+[00:05:58] intuition just simp simply by absorbing
+[00:06:00] and learning more about the market for a
+[00:06:02] couple hours a day it doesn't have to be
+[00:06:05] a Sprint where you're trying to learn
+[00:06:06] everything overnight but if you just
+[00:06:08] keep incrementally learning a little bit
+[00:06:10] more a little bit more and practicing
+[00:06:12] and gaining experience that is a real
+[00:06:15] game changer now one of the things that
+[00:06:17] uh you'll notice here with my trades is
+[00:06:18] that my average hold time is 5 minutes
+[00:06:20] so I really am getting in and out fairly
+[00:06:22] quickly these are not going to be long
+[00:06:23] hold times and that's not going to be
+[00:06:25] any different for this small account
+[00:06:27] challenge but what naturally will be
+[00:06:29] different for this challenge is I am
+[00:06:31] Limited in the number of Trades that I
+[00:06:33] can take each day that's going to be the
+[00:06:35] biggest limiting factor and so for that
+[00:06:38] reason I'm focusing on these big
+[00:06:39] percentage gainers so each morning when
+[00:06:41] I sit down I'm going of course pull up
+[00:06:42] thinker swim and I'm also going to pull
+[00:06:44] up day trade Dash day trade Dash is the
+[00:06:47] software that I've developed at Warrior
+[00:06:48] trading that our members use and this
+[00:06:51] software is scanning for stocks that
+[00:06:53] meet the five pillars of stock selection
+[00:06:56] now if you're trying to um use free
+[00:06:59] software or you know you're you're not
+[00:07:02] able to subscribe to this software right
+[00:07:03] now that's okay what I will do is I will
+[00:07:05] put a link and I'll pin it the top of
+[00:07:07] the comments and Link it in the
+[00:07:08] description where you can download a um
+[00:07:12] basically a bunch of resources I'm going
+[00:07:13] to give you my stock selection PDF so
+[00:07:17] you're going to know the five pillars of
+[00:07:18] stock selection if you want to plug that
+[00:07:20] in to your own scanning software that's
+[00:07:22] fine if you want to use what I have here
+[00:07:24] that's okay too um I'm also going to
+[00:07:26] give you my thinker swim layout so the
+[00:07:28] layout is is saved and you can load it
+[00:07:32] right into your um instance of thinker
+[00:07:34] swim so you just go to setup you go to
+[00:07:37] um let's see it's open shared item
+[00:07:40] you're going to open the shared item and
+[00:07:41] then you're going to paste in the link
+[00:07:43] that I'm going to give you and then
+[00:07:44] you'll have the same exact layout as me
+[00:07:47] and your hotkeys will be set up the same
+[00:07:48] as mine and everything else so um that
+[00:07:51] is going to be um the the link for all
+[00:07:53] of those gifts will be um pinned at the
+[00:07:56] top of the comments and Linked In the
+[00:07:57] description now for those of you guys
+[00:07:59] that are trying to use um free software
+[00:08:02] things like that one thing to be aware
+[00:08:04] of is that market data vendors have kind
+[00:08:07] of like a monopoly on Market data and
+[00:08:10] they make everyone pay for that data so
+[00:08:13] the only way you can get really truly
+[00:08:15] free scanners is if they're on delayed
+[00:08:18] data if it's a 20-minute delay then you
+[00:08:20] can get access to it for free but how
+[00:08:24] useful is data that's 20 minute delayed
+[00:08:26] well I would say that if you're looking
+[00:08:29] just for a list of the biggest
+[00:08:31] percentage gainers each day that would
+[00:08:34] be okay if it's on 20-minute delay
+[00:08:35] Because by the time you pull up the
+[00:08:37] chart and you're getting ready to start
+[00:08:38] trading it you at least know that this
+[00:08:40] is a stock that's in play if it's the
+[00:08:43] number one leading percentage Gainer 10
+[00:08:45] to 10 20 minutes ago it'll probably
+[00:08:46] still be that today right now at this
+[00:08:48] moment so I think that's that a scan
+[00:08:51] that um it's probably all right if
+[00:08:53] you're using delayed data because that's
+[00:08:54] all um that you can get access to for
+[00:08:56] right now okay so step step one is to
+[00:09:00] find a stock that meets all five of my
+[00:09:02] pillars or criteria for stock selection
+[00:09:06] from step one I'm going to proceed to
+[00:09:08] step two although I have dozens of
+[00:09:11] different setups that I like to trade
+[00:09:13] and a setup is a technical pattern it's
+[00:09:16] a Candlestick chart pattern that gives
+[00:09:18] me a very specific Buy Signal and an
+[00:09:21] exit indicator or a sell signal for this
+[00:09:24] challenge I really can only trade the
+[00:09:26] highest probability setups the reason is
+[00:09:29] I'm going to be limited essentially to
+[00:09:31] taking one trade a day and there will be
+[00:09:34] days that I don't take any trades
+[00:09:35] because nothing perfectly lines up with
+[00:09:37] my criteria like in the example of a
+[00:09:40] stock that's the number one leading
+[00:09:42] percentage Gainer but is $30 a share it
+[00:09:44] is the most obvious stock in the market
+[00:09:46] it's what other people are trading but
+[00:09:48] I'm priced out I can't afford it so if
+[00:09:51] there's days like that then for the
+[00:09:52] small account it's going to have to be a
+[00:09:54] no trade day I really can only trade on
+[00:09:57] days when I've got 85 90% conviction
+[00:10:01] that this setup is going to work and the
+[00:10:03] stock fits within the profile of having
+[00:10:06] the potential to go up you know at least
+[00:10:08] 20% from my entry point so if we think
+[00:10:11] about that for a second if I bought a
+[00:10:13] stock at $3 that means I want to see
+[00:10:15] that it has the potential to go you know
+[00:10:17] to 3 330 360 ideally right 10 20% so as
+[00:10:22] you start to get into higher price
+[00:10:24] ranges getting that full 15 20% is going
+[00:10:27] to be harder when I'm looking at
+[00:10:28] something that's 50 cents a share gosh
+[00:10:30] if it goes to 60 cents boom I'm done
+[00:10:33] right 70 cents I'm in great shape so
+[00:10:35] that's what I'm going to end up honing
+[00:10:37] in on and focusing on and that's really
+[00:10:39] specific to trading um in a small
+[00:10:42] account when you're in a small account
+[00:10:44] you've got to kind of hone in on the
+[00:10:46] type of stocks that can give you the
+[00:10:47] biggest bang for your buck that's the
+[00:10:49] biggest difference between my regular
+[00:10:52] strategy and the small account strategy
+[00:10:55] for the regular strategy I'll trade
+[00:10:57] lower price stocks I'll trade higher
+[00:10:58] price stocks I'll trade 50 times a day
+[00:11:01] if I see enough opportunities and I'm
+[00:11:03] I'm feel good about them but for this
+[00:11:05] challenge I really can only trade if I'm
+[00:11:08] going to go aggressive only once a day
+[00:11:11] and that means that I'm going to use all
+[00:11:13] of my buying power on one trade I'll
+[00:11:16] explain how that's going to work in a
+[00:11:17] second okay so so step one is to find
+[00:11:20] the stock that meets my criteria and
+[00:11:21] then step two is to actually take the
+[00:11:23] trade and what I'm going to focus on is
+[00:11:25] trading micro pullbacks on the front
+[00:11:28] side of a break out when the macd is
+[00:11:30] above the signal line I will also
+[00:11:33] include my micro pullback PDF in um the
+[00:11:36] selection of uh free resources that you
+[00:11:38] guys can download uh over on the link
+[00:11:41] that's pinned in the description and in
+[00:11:42] the top of the comments so if we look at
+[00:11:44] the stock that I traded today and we can
+[00:11:46] pull up um thinker swim here so BCT X
+[00:11:50] was um was the first stock that I traded
+[00:11:52] actually um no sorry this was the second
+[00:11:53] stock I trade today up $552 on it and if
+[00:11:56] we pull up um the chart let let's look
+[00:11:59] at this so we're going to back this up
+[00:12:01] here um I'm going to zoom in to right
+[00:12:05] here so initially this stock squeezed up
+[00:12:08] and hit our scanners right in this
+[00:12:10] little leg higher it then pulls back and
+[00:12:13] as it comes back up that's right there
+[00:12:16] where I got in and we ended up getting a
+[00:12:17] move on this from a dollar all the way
+[00:12:19] up to just under $140 so right there
+[00:12:22] you're talking about a 40% move that is
+[00:12:25] awesome it then broke a $140 and went up
+[00:12:28] to $150 all the way up to $2 a share
+[00:12:30] went a little bit higher than two went
+[00:12:32] up to a high of
+[00:12:33] 210 so at that point this was our number
+[00:12:36] one leading percentage Gainer and this
+[00:12:38] is a stock that had news today so as
+[00:12:41] part of my criteria of analyzing a stock
+[00:12:44] and trying to decide whether or not it's
+[00:12:45] worth trading I'm trying to understand
+[00:12:46] what the catalyst is they had a catalyst
+[00:12:49] this morning of um overall positive
+[00:12:51] positive overall survival in metastatic
+[00:12:53] breast cancer so they've got a great
+[00:12:55] headline the stock squeezed up 150 200%
+[00:12:58] later the day they end up doing an
+[00:13:00] offering that's not uncommon and that's
+[00:13:02] one of the reasons that it's really
+[00:13:03] important to get in and get out and not
+[00:13:06] overstay you're welcome those of you
+[00:13:08] guys that have gone through my warrior
+[00:13:10] starter class my day tradeing the basics
+[00:13:13] or my full length strategies and scaling
+[00:13:15] course you guys know all about offerings
+[00:13:18] shelf
+[00:13:19] registrations the different types of
+[00:13:21] filings that these companies make that
+[00:13:23] will put shareholders on notice that
+[00:13:25] there's a possibility that they'll raise
+[00:13:27] money but even though there's a
+[00:13:28] possibility that a lot of these
+[00:13:30] companies will need to at some point
+[00:13:31] raise money in the short term when
+[00:13:34] you've got a breaking news Catalyst a
+[00:13:35] headline like that there's an
+[00:13:37] opportunity for volatility and as active
+[00:13:39] Traders what do we love we love
+[00:13:42] volatility we don't make money buying
+[00:13:44] something at five and selling it at five
+[00:13:45] we make money buying something at a
+[00:13:47] dollar and selling it at
+[00:13:49] a120 so this setup that I'm going to be
+[00:13:52] focusing on and which I took um which
+[00:13:54] which I traded on bcx is called the
+[00:13:57] micro pullback so if I back this up here
+[00:14:00] the micro pullback when the stock is
+[00:14:03] above the macd so the first leg of the
+[00:14:06] move up is essentially when a stock is
+[00:14:08] quickly moving higher and this was
+[00:14:10] actually this one gave us kind of two
+[00:14:13] two nice moves this was the first one
+[00:14:14] right here from 85 up to a dollar pulled
+[00:14:17] back up to
+[00:14:19] a1510 and each one of those little dips
+[00:14:22] right there and right there and right
+[00:14:24] there each one of those represent
+[00:14:27] possible buying opportunities now
+[00:14:29] there's a great book that some of you
+[00:14:30] guys may have read it's called thinking
+[00:14:31] in bets by Annie dug this is the copy of
+[00:14:33] the book right here and in this book she
+[00:14:35] talks about her brother teaching her how
+[00:14:37] to play poker and he said these are the
+[00:14:39] hands that you play and you don't play
+[00:14:41] anything other than those hands and she
+[00:14:43] said well wait a second I've been
+[00:14:45] watching these really successful poker
+[00:14:48] players playing all kinds of different
+[00:14:50] hands that aren't what you showed me and
+[00:14:51] he said yeah yeah yeah yeah when you get
+[00:14:54] good you can play those hands but as a
+[00:14:57] beginner just play these ones these are
+[00:14:59] the ones that have the highest
+[00:15:01] probability of success and so that's
+[00:15:03] kind of the way I'm approaching the
+[00:15:04] small account challenge I'm not going to
+[00:15:06] focus on trading every different setup
+[00:15:08] that I'm comfortable with I'm going to
+[00:15:10] focus on the ones that I have the
+[00:15:11] highest conviction in because here's the
+[00:15:14] thing if I'm only going to take one
+[00:15:15] trade a day if I use all of my cash in
+[00:15:18] the account to take one trade I'm not
+[00:15:21] risking the whole account because of
+[00:15:22] course if the stock goes down then I'll
+[00:15:24] get out for a small loss but let's say
+[00:15:26] I'm going to risk as much as 3% of the
+[00:15:28] account in one day or 5% of the account
+[00:15:30] I'll take a little bit of risk it's a
+[00:15:31] small account so I'm going to get in and
+[00:15:33] if that stock drops then I I'm out and I
+[00:15:36] can't take another trade until tomorrow
+[00:15:39] I can only trade with settled cash so I
+[00:15:42] have to be really confident that the
+[00:15:45] setup is going to work because it's the
+[00:15:46] only shot that I get for that day now
+[00:15:49] the other option would be to trade more
+[00:15:52] frequently but with smaller positions
+[00:15:55] the problem with doing that is that I'm
+[00:15:57] going to be under capitalized ing on
+[00:15:59] those a quality opportunities and when I
+[00:16:02] see something that's really good I'm
+[00:16:04] going to take the risk I'm going to take
+[00:16:05] the trade because I have the conviction
+[00:16:07] in my intuition I I know when I'm right
+[00:16:10] you know when I've got the confidence uh
+[00:16:12] and I know what I'm doing that I can do
+[00:16:13] really well so I'm going to put my money
+[00:16:15] where my mouth is on that okay so on um
+[00:16:18] bcx this first part of the move here the
+[00:16:21] macd is um we've got the macd that's
+[00:16:23] positive it's above the signal line
+[00:16:25] right here and we've got these micro
+[00:16:27] pullbacks right here right here and
+[00:16:28] right right here so this was that first
+[00:16:30] leg higher right here and that's
+[00:16:32] actually where I took my first trade um
+[00:16:34] then I came back in in this area and
+[00:16:37] this was where I traded it in my main
+[00:16:40] account so in my big account I was like
+[00:16:42] all right in this area now I'm going to
+[00:16:44] come in and take some trades but my
+[00:16:46] first goal today was building a cushion
+[00:16:48] in the small account and I did a pretty
+[00:16:50] good job of that
+[00:16:52] $552 okay so now let's pull our slide
+[00:16:54] deck back up here so trading micro
+[00:16:58] pullbacks on the front side of the move
+[00:17:00] um the front side of a breakout when the
+[00:17:02] macd is above the signal line for me is
+[00:17:05] my goto setup again you can read about
+[00:17:08] that in the download uh the PDF download
+[00:17:11] all right so I'm going to be of course
+[00:17:13] using my um my my charts here now
+[00:17:18] although you could use charts um I
+[00:17:20] suppose anywhere you want with day trade
+[00:17:23] Dash we have charts built in so I'll of
+[00:17:25] course use the charts right here this is
+[00:17:28] an example of the macd being above the
+[00:17:30] signal line right here once it crosses
+[00:17:32] over that's when things start to get
+[00:17:34] choppy so front side of the move right
+[00:17:36] here like when this stock goes from 250
+[00:17:39] to 3 350 to 4 450 to 5 this is the type
+[00:17:43] of area where I want to be focusing on
+[00:17:46] trading in this area here when it's
+[00:17:47] getting choppy no I don't care about
+[00:17:49] that now I already know I don't care
+[00:17:51] about that just based on the price
+[00:17:53] action but the macd is a really helpful
+[00:17:55] indicator just to remind you that when
+[00:17:58] the macd is open the stock is usually
+[00:18:00] moving quickly once it crosses over
+[00:18:02] we're coming into consolidation and
+[00:18:03] although you can see another cross back
+[00:18:06] later and another move higher this just
+[00:18:09] tends to be the area where things get a
+[00:18:11] little bit choppier so step one finding
+[00:18:14] a stock that meets my five criteria that
+[00:18:17] means it's got to be moving and it's got
+[00:18:19] to be lower priced step two performing
+[00:18:22] my technical analysis and looking for
+[00:18:24] that first pullback now with thinker
+[00:18:27] swim I am going to be using um the level
+[00:18:29] two so when you're using thinker swim
+[00:18:31] you have the ladder right here and then
+[00:18:34] you also have the level two right down
+[00:18:35] here now if you use level two with a
+[00:18:37] different platform that's fine but the
+[00:18:39] the level two is is the same across
+[00:18:41] these platforms the only thing that's
+[00:18:42] different uh between the platform that I
+[00:18:45] typically use and this is that I have my
+[00:18:48] gradient a different color I I just I
+[00:18:50] don't prefer this shade but it's not a
+[00:18:53] deal breaker I mean I I'll use you know
+[00:18:55] I'll use what's here and this is fine so
+[00:18:57] the way I'll trade especially premarket
+[00:19:00] is I'll type in the symbol bcx and those
+[00:19:03] you guys that download my layout you'll
+[00:19:04] be able to um do this just the same as
+[00:19:06] me so oops bcx and I'm using the active
+[00:19:10] Trader tab right here so it's under
+[00:19:13] Trade and then under active Trader and
+[00:19:15] I'm going to go right down here and I
+[00:19:17] like to actually make it just a teeny
+[00:19:19] bit narrower right here like that and
+[00:19:21] the reason I like to do this is because
+[00:19:23] I have buy ask right here and that's the
+[00:19:26] button that I'm pressing pre-market I
+[00:19:28] have it on extended hours so I could do
+[00:19:30] a pre-market trade it's set to Auto send
+[00:19:33] so buy ask and then sell bid or sell ask
+[00:19:36] and typically I buy the ask and I also
+[00:19:39] try to sell on the ask I do that because
+[00:19:42] that way I get the best exit now when I
+[00:19:44] buy on the ask I'm not getting the best
+[00:19:47] price but what I have found is that when
+[00:19:49] a stock is moving quickly if you try to
+[00:19:52] buy on the bid you have to wait for
+[00:19:55] someone to sell you shares and when a
+[00:19:56] stock is moving quickly no one's selling
+[00:19:58] shares so you're not going to get any
+[00:19:59] shares filled it's too competitive to
+[00:20:02] sit on the bid you just won't get filled
+[00:20:03] you'll miss the move so during regular
+[00:20:06] trading hours I would be happy to buy
+[00:20:08] market and sell Market but remember
+[00:20:11] pre-market and after hours Market orders
+[00:20:14] don't work so in thinker swim the only
+[00:20:16] way to trade pre-market and after hours
+[00:20:19] is to buy the ask or sell the ask or buy
+[00:20:21] the bid or sell the bid now what I can
+[00:20:23] also do is I can point and click here so
+[00:20:27] I can press down the control button and
+[00:20:29] instead of being a stop order it'll be a
+[00:20:31] limit order so I could point and click
+[00:20:33] and click buy right here and that would
+[00:20:35] be fine too I can do the point and click
+[00:20:37] here or point and click on the cell side
+[00:20:40] I can also point and click on um the
+[00:20:43] level two window down here however it's
+[00:20:45] important to note that the level two
+[00:20:48] window is not connected with this order
+[00:20:50] template which means the level two
+[00:20:52] window down here will execute orders
+[00:20:54] based actually on up here application
+[00:20:58] share shared order defaults this number
+[00:21:01] of shares so make sure if you're going
+[00:21:03] to point and click on the level two that
+[00:21:05] you have the number of shares in here
+[00:21:07] that you want to work because otherwise
+[00:21:10] you're going to end up getting confused
+[00:21:11] because you might type 7,500 shares to
+[00:21:13] buy a penny stock but it only goes
+[00:21:15] through for you know whatever your order
+[00:21:17] default is maybe 100 shares or something
+[00:21:19] like that now for the duration of this
+[00:21:21] challenge if you guys want to watch me
+[00:21:23] while I'm trading you can join where
+[00:21:26] you're trading you can do a twoe trial
+[00:21:27] and even if you're watching this weeks
+[00:21:29] from now or months from now you could
+[00:21:30] join a twoe trial and you could watch
+[00:21:32] over my shoulder for two weeks and get a
+[00:21:34] sense of what it's like to be in the
+[00:21:35] community now when you do the twoe trial
+[00:21:37] it's uh two weeks for 20 bucks and the
+[00:21:40] $20 helps cover your Market data costs
+[00:21:42] so we're going to give you realtime
+[00:21:44] Market data so $20 for the real-time
+[00:21:46] Market data so you'll have the scanners
+[00:21:49] the charts the news feed all of this
+[00:21:51] here running on Real Time data so if you
+[00:21:55] want to check it out for 2 weeks you're
+[00:21:56] welcome to do that and then you can
+[00:21:58] watch over my shoulder as I'm doing this
+[00:22:00] challenge or if it's in the future as
+[00:22:01] I'm trading just in my regular account
+[00:22:03] or perhaps in the middle of a new
+[00:22:05] challenge so step three is to execute
+[00:22:08] the trades in thinker swims active
+[00:22:10] Trader window all right so I already
+[00:22:12] started getting into this now I'm pretty
+[00:22:14] particular about how I want this window
+[00:22:16] set up because I'm used to being able to
+[00:22:20] move in and out of the market quickly
+[00:22:22] and thinker swim if I'm going to be
+[00:22:24] honest is not the most intuitive
+[00:22:26] platform it's just a little funny
+[00:22:28] compared to what I'm used to and again
+[00:22:30] it's it's fine you know I can use it
+[00:22:32] it's just not my absolute favorite the
+[00:22:35] biggest disadvantage with thinker swim
+[00:22:38] is that the buttons don't allow offsets
+[00:22:41] so I can't set orders above or below the
+[00:22:44] current ask or the current bid without
+[00:22:47] either pointing or clicking which I can
+[00:22:49] do or manually entering an order which
+[00:22:51] is kind of a pain and similarly the
+[00:22:54] hotkey settings which I'll share with
+[00:22:55] you in a second I have those scripted so
+[00:22:58] with just the Press of buttons on my
+[00:22:59] keyboard I could be getting in add of
+[00:23:01] trade so this is my keyboard right here
+[00:23:03] I'll show you on the overhead so this is
+[00:23:05] the keyboard that I'm using and so shift
+[00:23:08] one for example is a buy order but it
+[00:23:11] can't be a market order because that
+[00:23:12] won't work pre-market so shift one has
+[00:23:14] to be Buy Ask shift two well there's no
+[00:23:17] real sense in doing that because the
+[00:23:19] order is based on the number of shares
+[00:23:22] that you've put into your quantity so
+[00:23:25] shift one basically sends the order for
+[00:23:27] that number of share
+[00:23:29] and then I have a button for bailing out
+[00:23:31] and selling on the bid so rather than
+[00:23:34] having to point and click I can just do
+[00:23:37] it with my my keyboard which allows me
+[00:23:39] to trade uh pretty quickly so I can move
+[00:23:41] in and out of the market um pretty fast
+[00:23:44] which is important but I think something
+[00:23:46] that we have to talk about here is risk
+[00:23:48] management okay risk management and
+[00:23:51] profit targets so for a small account
+[00:23:54] challenge it is so important to focus on
+[00:23:56] the process I always always say that
+[00:23:59] profits are a byproduct of that process
+[00:24:02] the goal is to take one trade per day
+[00:24:05] with a minimum of 1,000 shares all right
+[00:24:09] so we're going to start writing this out
+[00:24:10] here so minimum position is 1,000 shares
+[00:24:14] why is that the reason is because I want
+[00:24:18] to make at least $200 on each trade and
+[00:24:23] I know on certainly on stocks between
+[00:24:25] three and4 or5 a share getting 20 cents
+[00:24:28] is pretty obtainable for a good setup on
+[00:24:31] a micro pullback I can get 20 cents
+[00:24:34] which means I can get $200 so my kind of
+[00:24:37] minimum goal is that each day that I
+[00:24:39] trade in the account I'm able to grow
+[00:24:41] the account by $200 today I was able to
+[00:24:43] do better than that of course some days
+[00:24:45] I'll come up short but the minimum goal
+[00:24:47] is 200 so 1,000 shares um times 20s per
+[00:24:53] share equals uh
+[00:24:56] $200 now again
+[00:24:58] what's obvious here is that if I'm
+[00:25:00] trading a stock that's priced at 50
+[00:25:04] cents a share I'm probably not going to
+[00:25:06] capture it all the way to 70 cents that
+[00:25:09] would be yes a 20 cent move but
+[00:25:11] realistically on something like this
+[00:25:12] that's cheaper I'm going to take bigger
+[00:25:14] share size so I can essentially make the
+[00:25:18] most uh from that move so in a second
+[00:25:20] I'll share with you the account balance
+[00:25:22] that I have and because that's going to
+[00:25:24] sort of dictate um essentially what my
+[00:25:26] um my Max price points are all right so
+[00:25:29] uh so goal number one is um to trade try
+[00:25:32] to focus on one trade a day with a
+[00:25:33] minimum of thousand shares so anything
+[00:25:35] that's higher price where I can't afford
+[00:25:37] at least a thousand shares I'm not going
+[00:25:39] to trade it I'm just I'm just going to
+[00:25:41] say it's not worth it and on that day
+[00:25:42] I'll trade in my main account I won't
+[00:25:44] trade with thinker swim um so 20 cent
+[00:25:47] profit Target per share that's kind of
+[00:25:49] going to be the standard when I'm
+[00:25:50] trading stocks in the you know $2 to $10
+[00:25:54] well not quite but you know that kind of
+[00:25:55] price range the lower price range but
+[00:25:57] not penny stocks
+[00:25:59] so um and then I've got to establish a
+[00:26:02] 2:1 profit to loss ratio before taking a
+[00:26:05] trade so what that means is that if I'm
+[00:26:08] looking at the setup and I'm plowing up
+[00:26:09] the charts I'm thinking all right how
+[00:26:11] much am I risking on this trade and how
+[00:26:13] much do I stand a gain so on this setup
+[00:26:16] right here for the Breakthrough a dollar
+[00:26:18] which was right here I said all right if
+[00:26:20] I buy this right here at 95 cents my
+[00:26:22] stop is 90 cents so I'm risking 5 cents
+[00:26:24] a share and my profit Target on this is
+[00:26:27] 10 cents a share
+[00:26:28] right so getting it at 95 cents profit
+[00:26:30] Target a15 and boom we got that right
+[00:26:33] there and that was a really clean trade
+[00:26:35] this is a nice micro pullback and we got
+[00:26:38] that nice move up and that's one of the
+[00:26:40] reasons I love the micro pullback the
+[00:26:43] the psychology around this setup is you
+[00:26:47] have a stock right now that has breaking
+[00:26:49] news it's squeezing on news Traders are
+[00:26:53] excited about it and while it will pull
+[00:26:55] back the pullbacks are momentary it just
+[00:26:58] just dips for a second before another
+[00:27:00] round of Traders come in and start
+[00:27:02] buying up that pullback for the next leg
+[00:27:05] higher so this is so common when we have
+[00:27:09] a really strong stock in fact every
+[00:27:11] stock that I trade today that I made
+[00:27:13] money on showed a micro pullback and
+[00:27:16] then this pulled back a little bit
+[00:27:17] deeper this was no longer a micro
+[00:27:18] pullback this was a true dip below
+[00:27:20] volume weight average price which is one
+[00:27:22] of the technical indicators that I like
+[00:27:23] to use and then as it rallied back up we
+[00:27:26] got some micro pullbacks in this area as
+[00:27:29] we got that leg higher but to be honest
+[00:27:31] the the cleanest one really was that one
+[00:27:33] right there at the beginning of the move
+[00:27:34] and it's just so common that those first
+[00:27:37] couple of pullbacks are the cleanest
+[00:27:39] that's when there's the most exuberance
+[00:27:41] that's when people are the most excited
+[00:27:43] cuz look this is a stock that has fresh
+[00:27:45] breaking news people are excited about
+[00:27:47] they want to trade it so now my risk
+[00:27:50] management is and this is kind of
+[00:27:52] something I was thinking about quite a
+[00:27:54] bit I don't want to lose more than 10%
+[00:27:56] of the account at any given time so
+[00:27:58] that's not exactly like a single I mean
+[00:28:00] gosh I hope I don't lose 10% in one day
+[00:28:03] but but if I had like three red days for
+[00:28:06] instance or or I had a bad week I don't
+[00:28:08] want to lose more than 10% of the
+[00:28:09] account during a draw down I understand
+[00:28:12] that some Traders are going to say look
+[00:28:14] Ross 10% of the account I mean what are
+[00:28:16] we talking about here this is you know
+[00:28:17] the S&P 500 might not go up 10% in a
+[00:28:20] whole year you can't be risking that
+[00:28:22] much some people would say you should
+[00:28:24] never risk more than 1% in a trade okay
+[00:28:27] it's going to depend on a account size
+[00:28:28] so let's get real here for a second if
+[00:28:30] you have a $500 account and you're only
+[00:28:34] going to risk 1% of that account let's
+[00:28:37] get real you're not going to take trades
+[00:28:39] where you're truly risking $5 to make
+[00:28:41] $10 and see any growth in that account
+[00:28:44] anytime soon and if you're telling me
+[00:28:46] Ross I have to follow this risk
+[00:28:48] management because this is my last $500
+[00:28:50] I would say okay that's fine I I
+[00:28:52] understand that but what I would also
+[00:28:54] say is that this $500 could probably
+[00:28:57] earn more doing something else like for
+[00:28:59] instance buying a lawn mower and mowing
+[00:29:01] five Lawns a day for $20 a lawn you're
+[00:29:04] going to make $100 a day with this lawn
+[00:29:06] mower that's going to make a lot more
+[00:29:08] than what you're going to make day
+[00:29:09] trading with a $500 account especially
+[00:29:11] if it's a cash account with no leverage
+[00:29:13] so you go up to A500 or a $5,000 account
+[00:29:16] or whatever the case is 10% of the
+[00:29:18] account 50 bucks here $500 right so this
+[00:29:22] is like to me I I just don't feel like I
+[00:29:26] can make enough growth without taking
+[00:29:30] risk and risk for me means I'm
+[00:29:32] comfortable losing 10% in the account
+[00:29:34] but what I know is that based on my
+[00:29:36] strategy my accuracy is 65 70% so over
+[00:29:41] the course of 10 trades or over the
+[00:29:42] course of 100 trades I will certainly
+[00:29:44] have a handful of losses right 30% will
+[00:29:47] be losers so I might start with a loser
+[00:29:50] I might have three losers in a row to
+[00:29:51] start the challenge well I actually had
+[00:29:53] a loser on my first trade today uh but
+[00:29:55] then the second trade was a winner and
+[00:29:57] that was fine but anyways statistically
+[00:29:59] what I know is that if I have enough
+[00:30:01] time I will recover so what I really
+[00:30:04] have to be thinking about is am I going
+[00:30:06] to lose 10% before the statistical
+[00:30:09] Advantage comes back in my favor and
+[00:30:11] that means how how many losses in a row
+[00:30:14] could I potentially have right that's
+[00:30:16] when that's when you're asking the real
+[00:30:18] question so let's just say I had three
+[00:30:22] losses in a row all right and each loss
+[00:30:24] was 3% of the account so then I'm coming
+[00:30:27] down toward you know a 10% draw down all
+[00:30:30] right so you know I suppose that's
+[00:30:33] probably the way I should look at it
+[00:30:35] it's possible that I could lose uh on
+[00:30:38] you know in theory the first three
+[00:30:39] trades now fortunately although I lost
+[00:30:42] on the first one I did lose on the
+[00:30:43] second so now I've already started to
+[00:30:45] build the cushion and move in the right
+[00:30:46] direction uh and we'll get into today's
+[00:30:48] trades uh in a little bit more detail in
+[00:30:50] a second but now let's talk for a second
+[00:30:52] about uh my thinker swim settings
+[00:30:54] because you got to customize thinker
+[00:30:56] swim for active trading the first
+[00:31:00] setting is quote speed you got to set
+[00:31:02] the quote speed to real time with no
+[00:31:03] delay this goes without saying but it's
+[00:31:06] important and not everyone has it set
+[00:31:08] that way so if you go into your settings
+[00:31:10] in thinker swim you pull up thinker swim
+[00:31:12] and I've got it right up here so you
+[00:31:14] pull up thinker swim you go to your
+[00:31:16] settings right here you go to
+[00:31:17] application settings and then you go
+[00:31:19] down here to active uh no sorry what was
+[00:31:22] it um system you go to real time no
+[00:31:25] delay all right so that's your first one
+[00:31:27] you've got to do that now the other
+[00:31:28] changes are also in the same um account
+[00:31:31] settings area so the second change is
+[00:31:33] under active Trader settings and what I
+[00:31:36] do under active Trader settings is I set
+[00:31:39] the order submission limit to zero I
+[00:31:42] don't want to have a limit because if I
+[00:31:43] want to click twice or I want to press
+[00:31:45] the buy button twice I want to make sure
+[00:31:47] those orders are getting filled so I
+[00:31:49] don't want to have a limit on my order
+[00:31:51] submission rate and then the second is I
+[00:31:53] want the ladder to Auto Center as
+[00:31:57] frequently as it can the more frequently
+[00:32:00] at Auto Centers the easier it is for
+[00:32:02] oops the easier it is for me to see the
+[00:32:05] current price so this is referring to
+[00:32:07] this ladder right here Auto centering at
+[00:32:10] the current trading price so that's
+[00:32:12] number two and then number three um I
+[00:32:15] have reset active Trader order template
+[00:32:18] after sending I uncheck that because if
+[00:32:20] I click if I put in a template that's
+[00:32:23] very specific I don't want it resetting
+[00:32:26] after I send the order I'm probably
+[00:32:27] going to keep using those template that
+[00:32:29] template settings as long as I'm trading
+[00:32:31] the stock so I I get so annoyed when it
+[00:32:33] resets on me so you don't want it
+[00:32:35] resetting on you uh and then your hotkey
+[00:32:38] settings are uh the next important one
+[00:32:40] now some of these settings will transfer
+[00:32:43] when you load my layout but I'm not sure
+[00:32:45] if all of them will so I'll go over um
+[00:32:47] the hotkey settings uh with you here for
+[00:32:49] one quick second all right so we're
+[00:32:52] going to go to hot keys we're going to
+[00:32:54] go down to active Trader and we're going
+[00:32:57] to enable those hot Keys as you can see
+[00:32:59] right here and this is how I'm going to
+[00:33:00] set it up shift one is by ask shift two
+[00:33:04] is by market contrl Z is sell bid
+[00:33:08] control or sorry alt Z is sell market
+[00:33:13] and control K is sell ask control Q is
+[00:33:17] cancel all open orders and that's it
+[00:33:19] that's all I do it just I try to keep it
+[00:33:21] really simple I don't want to over
+[00:33:23] complicate it so all I have to remember
+[00:33:25] really is shift one and contrl Z those
+[00:33:29] are the two orders shift 1 contrl Z and
+[00:33:31] then contrl Q to cancel orders the
+[00:33:33] contrl K and then the Aly Al's Market
+[00:33:37] order so it's only going to work during
+[00:33:38] regular trading hours and most likely by
+[00:33:41] the time the bell rings at 9:30 I will
+[00:33:44] have already taken my one and only trade
+[00:33:46] for the day and I'm going to be out of
+[00:33:48] buying power and have to wait I'm G to
+[00:33:49] have to wait till tomorrow so that's
+[00:33:52] just the way it's going to be and that's
+[00:33:53] because most of the stocks I'm trading
+[00:33:56] are squeezing up on breaking news stocks
+[00:33:59] are moving up on breaking news the news
+[00:34:01] comes out pre-market so that's the
+[00:34:02] window to be
+[00:34:04] focusing um the next setting is
+[00:34:06] assigning more memory to thinker swim so
+[00:34:09] when you first load it you can click a
+[00:34:11] little settings widget and you can come
+[00:34:12] down here to assign more memory to it of
+[00:34:15] course you have to be mindful of uh your
+[00:34:17] computer and whether or not your
+[00:34:18] computer can handle the memory that
+[00:34:20] you're trying to um have it allocate
+[00:34:22] towards think or Swim but hopefully your
+[00:34:24] computer is able to now the thinker swim
+[00:34:28] layout um you can download it that's
+[00:34:31] going to be pinned in the top comment
+[00:34:32] Linked In the description that's part of
+[00:34:34] the um the group of downloads that you
+[00:34:36] guys will have so you're going to get my
+[00:34:37] micro pullback strategy you're going to
+[00:34:39] get my stock selection PDF and you're
+[00:34:41] going to get my layout my thinker swim
+[00:34:44] layout and then you can install it and
+[00:34:45] the way I'm going to have this setup is
+[00:34:47] thinker swim is on the right and uh my
+[00:34:50] day trade Dash platform is on the left
+[00:34:52] so they're kind of on the same monitor
+[00:34:54] on the right and on the left this uh s
+[00:34:57] or Swim is just really purely for order
+[00:35:00] execution that's all it's for I'm only
+[00:35:02] executing orders there I'm not using it
+[00:35:04] for charting now you could use thinker
+[00:35:07] swim for charting but I'm used to using
+[00:35:08] the software that I've been using for
+[00:35:10] charting and of course this is also
+[00:35:11] where we've got the news feed the
+[00:35:14] scanners and the chat room and
+[00:35:15] everything else is built in so for those
+[00:35:17] of you guys using day trade Dash you
+[00:35:19] sort of have all of this in one
+[00:35:21] platform and and you can use thinker
+[00:35:23] swim with real money or you can use
+[00:35:25] thinker swim for paper trading to be
+[00:35:27] clear using it for real money so this is
+[00:35:29] a real money trading account all right
+[00:35:32] so I'm going to have it set up basically
+[00:35:33] on my monitor this is on the side kind
+[00:35:36] of just like this and you know I'll I'll
+[00:35:38] sort of squeeze it squish it down a
+[00:35:40] little bit just to take up uh less space
+[00:35:43] but to keep the cancel button here and
+[00:35:45] these buttons stacked above each other
+[00:35:47] that's how I like it to be so that's how
+[00:35:49] it is each day and then I've got my um
+[00:35:53] my day trade Dash right here and then of
+[00:35:56] course if I'm trading uh if in my
+[00:35:57] regular account as well then my regular
+[00:35:59] account will be here and then I'll move
+[00:36:01] day trade Dash up to my second monitor
+[00:36:03] just above so it'll be up there so
+[00:36:06] that'll allow me to kind of go back and
+[00:36:07] forth uh and now one thing that I'll say
+[00:36:09] is that trading in two accounts at the
+[00:36:11] same time is not easy there will be
+[00:36:13] times where I see a setup that's so good
+[00:36:15] I'm like I I want to take it in thinker
+[00:36:18] swim but I also want to take it in my
+[00:36:19] main account so I can not make 500 but
+[00:36:22] make 5,000 so there will be times where
+[00:36:25] I'll try to take the same trade in both
+[00:36:28] accounts that's never easy to do
+[00:36:30] generally what it means is I'm going to
+[00:36:32] say all right well okay um I like the
+[00:36:35] setup I'm going to buy it here in
+[00:36:37] thinker swim and I might click I'll
+[00:36:39] click the buy button buy it in think or
+[00:36:40] Swim and then I'll say okay in thinker
+[00:36:42] swim I'm going to hold it for a second
+[00:36:43] and now I'm going to trade it over in my
+[00:36:45] light speed account on the next setup so
+[00:36:48] I might trade either two different
+[00:36:50] setups so I I'll hold one through both
+[00:36:52] setups or I'll just do the best I can to
+[00:36:56] kind of click the buy button here and
+[00:36:58] then click the buy button in my
+[00:36:59] lightseed account sort of as quickly as
+[00:37:01] I can it's not a super smooth process
+[00:37:05] but I've done it before and and I I
+[00:37:07] don't mind doing that and I did that
+[00:37:09] today so it's it's fine it's just it's a
+[00:37:11] little clunky and to be honest I'll I'll
+[00:37:14] always perform better if I'm just
+[00:37:16] focusing on one account but doing these
+[00:37:19] challenges does potentially come at a
+[00:37:21] sacrifice to my main account you know if
+[00:37:24] we look at my main trading account I did
+[00:37:26] 170,00 ,000 last month 230,000 the month
+[00:37:30] before so I'm happy to do a small
+[00:37:33] account challenge I try to figure out
+[00:37:35] how to do it at the same time as trading
+[00:37:37] my regular account so I'm not
+[00:37:39] sacrificing the gains from a main
+[00:37:41] account so sometimes that'll mean the
+[00:37:43] first trade I'll just take in thinker
+[00:37:45] swim that'll be my one trade of the day
+[00:37:47] and then thinker swim goes on the side
+[00:37:49] and I'm in my main account for the rest
+[00:37:50] of the day that's probably what I'm
+[00:37:52] going to do um on most days but again
+[00:37:54] it'll depend on the setups that we're
+[00:37:56] that we're looking at
+[00:37:58] so now let's talk for a second um about
+[00:38:01] the account type that I chose and then
+[00:38:03] we'll look at the trades from today so I
+[00:38:05] chose a cash account versus a margin
+[00:38:08] account with a cash account as you know
+[00:38:11] the Trad settle overnight and this is an
+[00:38:14] improvement this year we went from two
+[00:38:16] day settlement to one night settlement
+[00:38:17] so T1 so all of the trades I took today
+[00:38:21] will settle and I can trade that money
+[00:38:24] again bright and early tomorrow morning
+[00:38:26] think or swim allows trading beginning
+[00:38:28] at exactly 7 a.m. so starting at 7 a.m.
+[00:38:32] my account will be settled and I'll be
+[00:38:34] able to take as many trades as I want up
+[00:38:36] until my Max cash balance so the way I
+[00:38:40] kind of calculated this uh I thought
+[00:38:43] about a margin account and the advantage
+[00:38:45] of of a margin account is that I could
+[00:38:48] take three trades in one day so for
+[00:38:51] those of you who can only trade one day
+[00:38:52] a week a margin account could actually
+[00:38:55] be appealing you could take all three
+[00:38:57] trades in one day but then you can't
+[00:38:59] trade again for 5 days so you got to
+[00:39:01] wait a full week because the PDT rule is
+[00:39:05] uh governs margin accounts so in a
+[00:39:07] margin account where you could Shore and
+[00:39:10] you could use leverage you have to have
+[00:39:11] at least
+[00:39:12] $25,000 if you're going to day trade if
+[00:39:15] you're not going to day trade if you're
+[00:39:16] holding overnight then it doesn't matter
+[00:39:18] but you're restricted to only three day
+[00:39:20] trades in a 5day period so the net
+[00:39:24] effect is that you can't trade as
+[00:39:26] frequently in a margin well that's
+[00:39:28] actually funny you can trade more
+[00:39:29] frequently because you could trade three
+[00:39:31] times in one day but then that's it for
+[00:39:32] the rest of the week whereas in a cash
+[00:39:35] account you can trade 10 times or 30
+[00:39:38] times or 100 times in one day if you're
+[00:39:40] trading with just one share and you
+[00:39:41] don't run out of buying power you could
+[00:39:43] just keep trading and trading and
+[00:39:44] trading so I actually did the math now
+[00:39:46] what I ended up doing was I set up a
+[00:39:49] Roth IRA account this is a an individual
+[00:39:53] retirement account and this it is a Roth
+[00:39:55] account and I did two years of
+[00:39:58] contributions so what I ended up doing
+[00:40:01] and any anyone can do this you can go
+[00:40:02] over to think or Swim right now or
+[00:40:03] Charles Schwab and you click retirement
+[00:40:06] account you click open account and you
+[00:40:08] can open it and you can fund the account
+[00:40:10] using one contribution for last year and
+[00:40:14] then you can do this year's contribution
+[00:40:16] depending on when it is in the year
+[00:40:17] later in the year you could do one for
+[00:40:19] this year and you can do one for next
+[00:40:21] year so pretty much at any time you
+[00:40:23] could do two years worth of
+[00:40:24] contributions and the maximum contri
+[00:40:27] contribution amount is
+[00:40:30] $6,500 so I created this Roth IRA and I
+[00:40:33] did two contributions now the
+[00:40:35] contribution is a post income tax income
+[00:40:39] it's so it's post tax income so I
+[00:40:41] already paid income tax on the
+[00:40:43] $6500 and then I made that contribution
+[00:40:46] now it just so happened that I set this
+[00:40:48] account up and I was thinking well you
+[00:40:50] know it's it is below the PDT Rule and
+[00:40:53] this is kind of exactly what I did with
+[00:40:55] my big Roth IRA my big Roth IRA I did
+[00:40:58] three contributions over the course of
+[00:41:00] three years right it was like two and a
+[00:41:02] half years but anyway anyways so it's
+[00:41:04] three contributions toing
+[00:41:06] $188,000 and then I day traded in it
+[00:41:08] just once a day until the account was
+[00:41:10] over 25k and then once it was over 25k I
+[00:41:13] hit the PDT level and boom smooth
+[00:41:15] sailing I was Off to the Races I could
+[00:41:17] trade as much as I wanted and that
+[00:41:19] account I have grown from
+[00:41:22] $118,000 in initial contributions so I
+[00:41:25] put in $188,000 to today that account is
+[00:41:28] over $7
+[00:41:31] million I've grown it to over $7 million
+[00:41:33] in fully audited gains now I'll say as
+[00:41:36] always those results are not typical but
+[00:41:38] I did it trading the same strategies
+[00:41:40] that I'm going to be trading during this
+[00:41:41] challenge well certainly for the first
+[00:41:43] few weeks or the first few months
+[00:41:45] growing it from 18,000 to 25,000 I was
+[00:41:47] only able to trade you know a couple
+[00:41:49] times a week on a quality setups and I
+[00:41:51] had to be very careful because I knew if
+[00:41:53] I lost money I'm not allowed to add more
+[00:41:55] money to the account because that would
+[00:41:57] exceed your maximum contribution balance
+[00:42:00] for each year so I started with
+[00:42:03] $113,000 in this account so the account
+[00:42:06] right now has um so I started today and
+[00:42:09] we'll I'll pull this up for you here so
+[00:42:11] $133,000 and if we monitor it here my
+[00:42:14] year-to-date p&l my my p&l on the day
+[00:42:18] today is um what is it 30 and uh
+[00:42:23] something
+[00:42:24] $398 $398
+[00:42:27] that's my p&l on The Day My overall p&l
+[00:42:30] on the year is
+[00:42:33] $434 so I don't know if it's interest or
+[00:42:37] I I might have taken a trade uh earlier
+[00:42:39] in the year when I was teaching class
+[00:42:41] just kind of like messing around I was
+[00:42:42] just showing people oh look you buy this
+[00:42:43] is how you use thinker swim so maybe
+[00:42:45] there are a couple trades but anyways
+[00:42:46] you can see this is where I'm at year to
+[00:42:48] date so as we go through this challenge
+[00:42:50] um you'll know that I started with
+[00:42:52] $113,000 in contributions and that's my
+[00:42:55] starting balance now some of you guys
+[00:42:56] are going to say Ross that's not a small
+[00:42:58] account I'm I'm trading with $1300 okay
+[00:43:01] fair enough if you're trading with
+[00:43:03] $1,300 and I would trade with $1,300 too
+[00:43:05] then today would be a $40 Green Day if
+[00:43:08] I'm trading with
+[00:43:09] $130,000 then I guess today might have
+[00:43:11] been a $4,000 Green Day although as it
+[00:43:14] turns out that's not the case because in
+[00:43:16] my main account with about 150,000 I was
+[00:43:19] up 11,000 I peaked at about
+[00:43:22] $1,300
+[00:43:23] $400 and I was able to do that because I
+[00:43:26] was able to take takes so many trades so
+[00:43:29] right now the growth is going to be
+[00:43:31] limited and it's going to be slower
+[00:43:33] while I'm under that PDT level that's
+[00:43:35] just the way it's going to be so I've
+[00:43:37] got to work with what I've got the the
+[00:43:39] growth is going to be a little bit
+[00:43:40] slower but it's going to be steady so my
+[00:43:43] focus each day is going to be sit
+[00:43:46] sitting down and starting step one with
+[00:43:48] finding a stock that meets My Five
+[00:43:50] Pillars of stock selection it's got to
+[00:43:52] be a stock that's moving quickly now the
+[00:43:54] first trade today uh was kind of funny
+[00:43:56] because if I pull this back up here um
+[00:43:59] my first
+[00:44:01] trade it was on um let's see qh so qh
+[00:44:07] this is a stock that um oops sorry and
+[00:44:10] I'll I'll put this um over here for you
+[00:44:12] guys to check out as well in a second so
+[00:44:14] qh this one um this stock made a big
+[00:44:19] move earlier today and I tried to jump
+[00:44:23] in it and I kind of screwed up on that
+[00:44:25] trade so the problem that I was having
+[00:44:28] was I got in qh and I was green on it
+[00:44:32] but I was fumbling my orders so I I just
+[00:44:36] I kept pressing sell I I think it was
+[00:44:39] well you know what I think that might
+[00:44:40] have happened is my template reset
+[00:44:42] because it my orders were were not going
+[00:44:44] through I kept pressing sell ask sell
+[00:44:46] ask sell ask I wasn't filling anything
+[00:44:49] finally I sold on the bid and what
+[00:44:51] initially was a profit ended up being a
+[00:44:53] loss of $154 and I was like all right
+[00:44:56] this is not good so now I've taken my
+[00:44:58] first trade the only thing that was good
+[00:45:01] about it was that it was with a small
+[00:45:03] enough position that I didn't use all of
+[00:45:05] my buying power and so when uh when we
+[00:45:09] had this move on bcx when bcx popped up
+[00:45:13] I was like this is perfect BCT X is the
+[00:45:16] right price and what I actually ended up
+[00:45:18] doing on BCT X was I bought I think it
+[00:45:21] was 5,000 shares so 5,000 shares is
+[00:45:24] about uh 75 no it's 95 cents a share so
+[00:45:27] let's see I can pull this up here so I
+[00:45:30] got in this for the break over a dollar
+[00:45:33] so my
+[00:45:35] entry let's see yeah I added for the
+[00:45:38] break over a dollar and my best exit was
+[00:45:41] actually at a do and 11 a1. 111 which is
+[00:45:46] pretty good so on that one I captured uh
+[00:45:49] it's like about 10 cents a share uh yeah
+[00:45:52] about 11 cents a share and that gave me
+[00:45:54] the uh $552 of profit so for that I was
+[00:45:59] like awesome and that put me net right
+[00:46:01] around $398 400 on the day so with a
+[00:46:04] $3,000 account now I'm sitting with a
+[00:46:07] balance of
+[00:46:10] $3,422 65 my goal is to grow this
+[00:46:14] account to
+[00:46:15] $25,000 and it's not a matter of if I
+[00:46:18] can do it it's just a matter of how long
+[00:46:21] it's going to take most likely what's
+[00:46:24] going to happen is I'm going to take one
+[00:46:27] trade a day I'm going to use the full
+[00:46:29] $113,000 of buying power so essentially
+[00:46:32] what that means knowing I've got 13,000
+[00:46:34] in this account right now and the goal
+[00:46:35] is 25k if I see a stock that pops up on
+[00:46:38] my scanner at let's say you know $2 a
+[00:46:42] share a $2 stock well I could buy 6,000
+[00:46:45] shares of that so I could actually take
+[00:46:47] a pretty decent Siz position I could now
+[00:46:50] the only question is risk if I buy at
+[00:46:53] two and it drops to 80 I'm going to be
+[00:46:56] down1 00 in one trade so I might be able
+[00:46:59] to afford 6,000 shares but I might not
+[00:47:02] feel I can manage the risk to take 6,000
+[00:47:05] so it's going to depend on the
+[00:47:06] difference between my entry and my stop
+[00:47:08] and that's going to be based on the
+[00:47:10] micro pullback so if I'm buying down
+[00:47:12] here for the first candle to make a new
+[00:47:14] high and my stop is the low of that
+[00:47:16] micro pullback which you'll learn about
+[00:47:17] in that PDF then let's say this is a
+[00:47:20] 5cent stop 5cent stop 6,000 shares I'm
+[00:47:23] risking 300 bucks all right so 300 bucks
+[00:47:26] that's about 3% of the account I could
+[00:47:28] tolerate that profit Target it's got to
+[00:47:30] be 10 cents a share I need to be able to
+[00:47:32] make $600 and if I think that that's
+[00:47:34] reasonable two to1 profit loss ratio
+[00:47:36] boom I'll take the trade with 6,000
+[00:47:38] shares now if we have a stock that's at
+[00:47:41] um $4 a share then I'm only going to be
+[00:47:43] able to buy 3,000 shares approximately
+[00:47:45] right if we have a stock that's at $5 a
+[00:47:48] share I'm going to be able to buy you
+[00:47:49] know a little over 2,000 shares and I'm
+[00:47:51] going to just have to kind of do the
+[00:47:52] math quickly of what can I afford what
+[00:47:54] can I afford to buy now of course I can
+[00:47:56] type in the order and I could get my
+[00:47:58] order rejected and then I'll know oh I
+[00:48:01] put I put it in for too many shares so
+[00:48:03] that's I could do that but it's going to
+[00:48:05] be probably faster if I can just think
+[00:48:07] of the number based on just the quick
+[00:48:10] math of 5 time 2 is 10 I can afford that
+[00:48:12] maybe I'll do 2200 shares now if we have
+[00:48:15] a cheap stock something that's 70 cents
+[00:48:17] a share I could potentially take 15,000
+[00:48:20] shares 20,000 shares so not quite 20,000
+[00:48:23] but I could start to take some big
+[00:48:25] positions and if this goes up from 7
+[00:48:27] cents to 85 cents a share you know
+[00:48:30] that's
+[00:48:30] $1,500 so I guess the question here is
+[00:48:34] what is the what is the most likely path
+[00:48:37] to making 1500 bucks is it buying 15,000
+[00:48:41] shares of something at7 cents or is it
+[00:48:43] buying 6,000 shares of something at $2
+[00:48:47] on the one hand part of me thinks that
+[00:48:50] this is kind of The Sweet Spot because
+[00:48:52] what we know is that when stocks trade
+[00:48:54] below $1 a share they trade down to the
+[00:48:57] 1/100th of a penny so 99 um 17 they
+[00:49:02] could trade all the way down to the
+[00:49:04] 1/100th of a penny whereas once they're
+[00:49:06] over $1 a share 101 by 102 so that means
+[00:49:10] the number of increments for a stock to
+[00:49:12] go from a dollar from $1 to A110 is 1 2
+[00:49:17] 3 4 5 6 7 8 N9 A110 oops $110 there's 10
+[00:49:22] pennies but for a stock to go from 90
+[00:49:25] cents with two zeros all the way to $1
+[00:49:29] is technically
+[00:49:32] 1,000 increments because each penny has
+[00:49:36] one/ 100th of a penny quotes so well
+[00:49:39] stocks don't usually trade that thickly
+[00:49:41] that it'll take 1,000 ticks for a stock
+[00:49:45] to go from 90 cents to a dollar what we
+[00:49:47] do know is that it is infinitely thicker
+[00:49:50] when it's below a dollar and when it's
+[00:49:52] above a dollar it's
+[00:49:54] 1% less than 1% a 10 of a percent as
+[00:49:57] thick and so once a stock breaks above a
+[00:50:00] dollar and holds above a dollar that's
+[00:50:02] when things get interesting so generally
+[00:50:04] speaking stocks between
+[00:50:08] $125 you know holding above a dollar
+[00:50:10] anything above a dollar though between a
+[00:50:12] dollar and you know
+[00:50:15] 250 that could be the sweet spot for
+[00:50:18] getting nice 20 to 30 Cent potential
+[00:50:21] winners a 30 Cent winner on 6,000 shares
+[00:50:24] that'd be an $1,800 winner
+[00:50:27] now it's also possible that we could
+[00:50:28] have stocks that um you know like we had
+[00:50:31] yesterday we had that nice um stock it
+[00:50:33] was um gosh it was SM uh SMX so SM oh
+[00:50:38] let me pull it up over here so SMX uh
+[00:50:41] ended up squeezing uh yesterday morning
+[00:50:44] from $2 all the way up to $5 a share so
+[00:50:48] you know we could get something like
+[00:50:49] that that gives us a really huge move
+[00:50:51] and even if I only have 2,000 shares if
+[00:50:54] I got a full dollar a share well shoot
+[00:50:57] you know that could work very nicely so
+[00:50:59] at the end of the day profits as I said
+[00:51:02] are a byproduct of following a
+[00:51:04] consistent process that is repeatable so
+[00:51:08] each day when I sit down I am looking
+[00:51:10] for stocks that have the potential to
+[00:51:12] make a big move I see a stock like CNE
+[00:51:15] I'm going to be interested it's up 278
+[00:51:18] it's priced at a13 a share I mean it's
+[00:51:20] got the 2 million share float it's got
+[00:51:22] the crazy high relative volume you know
+[00:51:24] if it's got news and everything else I'm
+[00:51:26] definitely going to be interested and
+[00:51:28] I'm going to be focusing on buying the
+[00:51:29] micro pullback I'm going to try to use
+[00:51:31] pretty much the full
+[00:51:33] $113,000 one trade get in get out if I
+[00:51:36] can make if I can grow the account each
+[00:51:39] day by 10% that would be amazing
+[00:51:44] realistically I'm probably not going to
+[00:51:46] see that growth without using leverage
+[00:51:48] and I don't have leverage in this
+[00:51:49] account in the past when I've done small
+[00:51:51] account challenges I've had leverage
+[00:51:53] I've had four times or even six times
+[00:51:55] leverage so with a $3,000 deposit I have
+[00:51:58] $133,000 of buying power so I can grow
+[00:52:00] the $3,000 account by $1,500 in one day
+[00:52:04] it's a 50% potentially and I've done
+[00:52:06] that before I'm not going to be able to
+[00:52:08] do that every single day in a row with
+[00:52:11] this account it's just not possible so
+[00:52:13] the biggest challenge in this thinker
+[00:52:16] swim challenge is being patient being
+[00:52:19] patient with the fact that I'm just not
+[00:52:22] going to be able to take huge trades and
+[00:52:25] see really fast growth now my plan
+[00:52:29] through this challenge is that I'm going
+[00:52:30] to be updating traders in the Warrior
+[00:52:33] trading community in the Warrior
+[00:52:34] training chat room every day when I take
+[00:52:36] a trade you guys will see it in real
+[00:52:38] time I may not upload a recap for every
+[00:52:42] single trade here to YouTube and that's
+[00:52:45] just going to depend on the fact that
+[00:52:46] I'm going to do my regular Recaps every
+[00:52:48] single day as always and the small
+[00:52:50] account if I have a day where i'm up $42
+[00:52:52] I don't know if I'm going to do a recap
+[00:52:54] for it it's just not a big enough gain
+[00:52:55] so I might wait until I have I don't
+[00:52:58] know 5 days or six days or something
+[00:53:00] like that that you know I've made some
+[00:53:01] nice progress and then do a progress
+[00:53:04] report do a recap for that so episode
+[00:53:06] two while it may come tomorrow if I have
+[00:53:09] a really nice day don't expect that I'm
+[00:53:11] going to have uploads every single day
+[00:53:13] as part of this thinker swim challenge
+[00:53:15] they'll be more periodic but for those
+[00:53:17] of you guys who are doing the twoe trial
+[00:53:18] you'll of course be able to watch in
+[00:53:20] real time as I'm growing the account and
+[00:53:22] I'll give you my breakdown of the stocks
+[00:53:24] I'm choosing why I'm getting in where
+[00:53:26] I'm getting in why I'm taking profit
+[00:53:28] where I'm taking profit as always the
+[00:53:30] focus has to be quality something that
+[00:53:33] I've noticed um that a lot of beginner
+[00:53:35] Traders struggle with is something that
+[00:53:38] I call a uh negative feedback loop and
+[00:53:41] this begins with losses that get bigger
+[00:53:44] and bigger and bigger and it starts with
+[00:53:47] poor accuracy you've got a poor profit
+[00:53:50] loss rati sorry you've got poor accuracy
+[00:53:52] which means out of you know 10 trades
+[00:53:54] you might be WR in only four four or
+[00:53:56] five so like 40 to 50% accuracy
+[00:53:59] approximately you've got low accuracy
+[00:54:01] and then that in turn the result of poor
+[00:54:04] accuracy is that you take more losses
+[00:54:09] than necessary and you expose yourself
+[00:54:12] to large losses so large negative trades
+[00:54:16] big losses and you then have a negative
+[00:54:20] profit to loss ratio where your average
+[00:54:22] losers are bigger than your average
+[00:54:24] winners this in turn hurts your accuracy
+[00:54:27] or your consistency so when you look at
+[00:54:29] your calendar all of these days start to
+[00:54:31] be red because your profit loss ratio is
+[00:54:33] negative you're just losing money and
+[00:54:35] then what does that do that hurts
+[00:54:37] confidence so your confidence takes a
+[00:54:39] hit and then you start um adjusting your
+[00:54:43] position sizes and a lot of people start
+[00:54:45] to get emotionally fueled so now the
+[00:54:47] emotions start to build up you start to
+[00:54:49] feel pressure and frustration and this
+[00:54:51] just feeds this negative feedback loop
+[00:54:54] and with a small account it's very easy
+[00:54:56] for this to happen because the pressure
+[00:54:58] is high when you have high stakes you
+[00:55:00] feel like you've got a lot of pressure
+[00:55:01] it's a lot easier to make these mistakes
+[00:55:04] so one of the things that I'm going to
+[00:55:06] be a big advocate of here um sorry I
+[00:55:08] don't know why that was black for a
+[00:55:09] second one of the reasons I'm going to
+[00:55:10] be a big advocate of focusing on
+[00:55:12] accuracy is that by focusing on the
+[00:55:15] highest quality setups I can put myself
+[00:55:17] on a positive feedback loop and today
+[00:55:19] was day one of that positive feedback
+[00:55:21] loop so although the first trade was a
+[00:55:24] loser and although I guess you could
+[00:55:25] argue the that my accuracy was only 50%
+[00:55:27] today focusing on high accuracy part of
+[00:55:29] that was because I fumbled um so I still
+[00:55:32] ended up having uh a great profit to
+[00:55:35] loss ratio today my profit loss ratio
+[00:55:37] for this challenge so far is a $150
+[00:55:39] loser um versus a $552 winner that's my
+[00:55:44] current profit loss ratio because I've
+[00:55:45] only got two trades in my accuracy
+[00:55:47] currently is 50% but I'm green so on the
+[00:55:51] calendar we've got a nice Green Day here
+[00:55:53] all right so what does that create
+[00:55:55] confidence
+[00:55:56] and what does that make me feel good
+[00:55:57] about doing tomorrow trading with you
+[00:56:00] know big big percentage big size being
+[00:56:03] aggressive and continuing to only trade
+[00:56:05] a quality setups I don't feel
+[00:56:07] desperation I don't feel like oh man
+[00:56:09] tomorrow I need to make up for that
+[00:56:11] screw up today not at all tomorrow if
+[00:56:14] there's nothing good I will not trade
+[00:56:17] now if you're doing a small account
+[00:56:18] Challenge on your own you're showing up
+[00:56:19] every single day and there's nothing
+[00:56:20] that looks good for real money you
+[00:56:22] should trade in the simulator so you
+[00:56:24] still gain experience but with the real
+[00:56:26] money account you say nope this this day
+[00:56:28] doesn't doesn't call for real money it's
+[00:56:30] not good enough the setups aren't strong
+[00:56:32] enough they're not worthy of my money
+[00:56:34] and then you don't trade real money at
+[00:56:35] all you say nope I'm just going to trade
+[00:56:37] in the Sim today and that' be totally
+[00:56:39] okay so but today was a good day uh even
+[00:56:42] though accuracy was low but I think I
+[00:56:43] can solve for that just by sort of
+[00:56:46] smoothing out ironing out some of these
+[00:56:48] bumps with a new platform and so
+[00:56:50] tomorrow I'm coming in with confidence
+[00:56:52] I'm going to feel comfortable trading
+[00:56:53] using the full $1 13,000 now $400
+[00:56:56] $13,400 on a trade and hopefully I can
+[00:57:00] get one good trade if I can get 20 30
+[00:57:02] cents a share boom that's going to be
+[00:57:04] another Green Day and that's going to go
+[00:57:05] into more confidence and so I'm going to
+[00:57:07] build this track record focusing
+[00:57:09] generally on one trade a day now as I
+[00:57:12] said there may be times where I see a
+[00:57:14] stock at $2 a share and I'm like I can't
+[00:57:17] buy 6,000 shares of it and so I'm only
+[00:57:19] going to buy 3,000 shares of it which
+[00:57:22] means I still have buying power left
+[00:57:24] over and I could go ahead and take trade
+[00:57:26] number two or trade number three so
+[00:57:27] there may be some days like today where
+[00:57:31] I'm not using all my buying power I'm
+[00:57:33] and I have the available cash to you
+[00:57:36] know take more trades and that's totally
+[00:57:38] fine I don't think that's going to be
+[00:57:40] the case on most days because if I have
+[00:57:43] the conviction I'm going to jump in
+[00:57:45] quick but something that could also
+[00:57:47] happen and this actually reminds me did
+[00:57:49] happen today on on one of the trades uh
+[00:57:52] was not getting
+[00:57:53] filled so uh I pressed the buy button
+[00:57:57] and my order just sat there I didn't get
+[00:57:59] filled so then I was like golly that's
+[00:58:02] annoying because that was a good setup
+[00:58:04] and I had the right idea and I tried to
+[00:58:06] get in but my order got skipped and look
+[00:58:09] that's going to happen sometimes so you
+[00:58:12] know there may be days where my order
+[00:58:14] gets skipped or I get only a partial
+[00:58:15] fill and so I'm left over with some
+[00:58:18] buying power that I could potentially
+[00:58:19] use on another trade so this challenge
+[00:58:22] is going to be a little bit different
+[00:58:23] from challenges I've done in the past
+[00:58:24] I've got no leverage I've got no no
+[00:58:26] margin cash only settled cash and I've
+[00:58:29] got to make each trade count I'm going
+[00:58:31] to focus on those lower price stocks
+[00:58:32] that have the potential to make big
+[00:58:34] moves if you want to watch me as I'm
+[00:58:36] doing this challenge in real time make
+[00:58:38] sure you check out a two-e trial at
+[00:58:39] Warrior trading if you want to download
+[00:58:41] all of those PDFs make sure you check
+[00:58:43] out that link that's pinned at the top
+[00:58:44] of the comments and Linked In the
+[00:58:45] description and if you enjoy episodes
+[00:58:47] about trading strategy like this I hope
+[00:58:49] you hit that Thumbs Up And subscribe the
+[00:58:51] channel I'll remind you as always that
+[00:58:52] trading is risky my results aren't
+[00:58:54] typical so manage your risk and always
+[00:58:56] practice new strategies you're learning
+[00:58:58] in a safe simulated environment thanks
+[00:59:01] as always for tuning in I'll see you for
+[00:59:03] the next upload real soon

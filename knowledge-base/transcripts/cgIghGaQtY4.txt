@@ -1,0 +1,770 @@
+# I Grew 3 Small Accounts with 3 Different Brokers...Here's What I Learned (And Exciting PDT News)
+# https://www.youtube.com/watch?v=cgIghGaQtY4
+# duration_sec: 1728
+
+[00:00:00] Over the past six months, I did three
+[00:00:02] different small account challenges. The
+[00:00:04] premise of these challenges were
+[00:00:05] basically the same. I would fund an
+[00:00:07] account with $2,000 and I would try to
+[00:00:10] actively trade the US equities market
+[00:00:12] and to see how quickly I could grow this
+[00:00:15] small account. The difference between
+[00:00:16] these three challenges was not the
+[00:00:18] amount of money and not what I was
+[00:00:20] trading, but the type of account. a
+[00:00:22] seemingly very small check of a box that
+[00:00:25] it's either a cash account, a margin
+[00:00:27] account, or an account that offers not
+[00:00:30] just margin, but also leverage. The
+[00:00:33] reason I did these three different
+[00:00:34] challenges and the reason I used $2,000
+[00:00:37] as the starting balance for each of them
+[00:00:39] is because in September, FINRA, the
+[00:00:41] regulator of the US equities market,
+[00:00:44] announced a proposed rule change to the
+[00:00:47] pattern day trader rule that was first
+[00:00:49] put into place on February 27th, 2001,
+[00:00:53] nearly 25 years ago. This pattern day
+[00:00:56] trader rule, also known as the PDT rule,
+[00:00:59] states that in order to day trade in a
+[00:01:02] margin account and to get access to up
+[00:01:04] to four times leverage here in the
+[00:01:06] United States, you need to maintain a
+[00:01:08] minimum balance of $25,000.
+[00:01:12] This rule change came after the boom and
+[00:01:15] the bust of the dot bubble. Brokers lost
+[00:01:18] money. Many traders were trading on
+[00:01:20] leveraged. They lost money. They got
+[00:01:22] margin calls. They couldn't meet those
+[00:01:24] margin calls. So the brokers were on the
+[00:01:26] hook and regulators came in and created
+[00:01:28] this pattern day trader rule to protect
+[00:01:31] in theory both novice investors and
+[00:01:33] traders and to protect broker dealers.
+[00:01:36] Now this paternal instinct of regulators
+[00:01:38] came from a good place. But as we've
+[00:01:40] seen over the past 25 years and as
+[00:01:42] you'll see from these three small
+[00:01:44] account challenges, the pattern day
+[00:01:47] trader rule is doing more harm than it
+[00:01:49] is good. Let's go ahead and jump onto
+[00:01:51] the screen share. I've got a slide deck
+[00:01:53] for you today and I'm going to give you
+[00:01:55] the update of where I stand on these
+[00:01:58] three separate small account challenges.
+[00:02:00] We're going to look at the analytics
+[00:02:01] here. For those of you guys tuning in
+[00:02:02] perhaps for the first time, my name is
+[00:02:04] Ross Cameron. I am a full-time trader. I
+[00:02:06] funded my first account in 2001 after
+[00:02:09] the PDT rule was enacted. So during my
+[00:02:11] entire time experience in the market, I
+[00:02:14] have been subject to this pattern day
+[00:02:16] trader rule. But now for the first time,
+[00:02:18] FINRA has proposed a rule change. They
+[00:02:20] have sent an application to the SEC and
+[00:02:23] it is now time for brokers, for
+[00:02:26] individuals, institutions to provide
+[00:02:28] comment on this potential rule change
+[00:02:31] and then for the SEC to ultimately make
+[00:02:33] their decision. So my hope here is that
+[00:02:36] this episode adds to discussion of
+[00:02:38] whether or not this rule change should
+[00:02:39] take effect. And I'm going to share with
+[00:02:41] you four compelling arguments in favor
+[00:02:44] of the PDT rule being either amended to
+[00:02:46] $2,000 or outright abolished. I'm going
+[00:02:49] to share with you why I think it's
+[00:02:50] harmful for US traders, why it's harmful
+[00:02:53] for market participants in general, and
+[00:02:56] why it's certainly harmful for US broker
+[00:02:58] dealers, which I know many people aren't
+[00:02:59] going to be um you know, playing the
+[00:03:02] violin for these big broker dealers that
+[00:03:04] make billions of dollars, but
+[00:03:05] nonetheless, it is harmful for them and
+[00:03:06] their US businesses. And um I'd like to
+[00:03:09] see them succeed as well. So, uh, if we
+[00:03:11] jump onto the screen share here again,
+[00:03:13] uh, FINRA did propose this rule change
+[00:03:16] in September 2025. And so, it is now,
+[00:03:18] um, in progress, which is great. And the
+[00:03:21] timeline of when the SEC will ultimately
+[00:03:24] make their decision, um, is a bit
+[00:03:26] unknown, although uh, hopefully it will
+[00:03:28] be uh, sooner rather than later. So,
+[00:03:32] here are my four compelling reasons, and
+[00:03:34] I'm going to back these up as we go
+[00:03:35] through today's episode, that the PDT
+[00:03:37] rule should be abolished. Uh the first
+[00:03:39] is that the pattern day trader rule
+[00:03:41] unfairly limits access to the market to
+[00:03:44] only those with robust financial
+[00:03:47] resources. Number two is that the
+[00:03:49] pattern day trader rule makes it harder
+[00:03:51] for traders with less than $25,000 to
+[00:03:54] profit in the market because they are
+[00:03:56] limited in how often they can trade.
+[00:03:58] Number three, the pattern day trader
+[00:04:00] rule limits liquidity in the market by
+[00:04:02] reducing trading volumes across the
+[00:04:04] board. And number four, the pattern day
+[00:04:06] trader rule encourages US traders to
+[00:04:09] leave regulated and insured US brokers
+[00:04:13] in order to trade with international
+[00:04:14] brokers that don't enforce the pattern
+[00:04:16] day trader rule. We know that these are
+[00:04:18] the offshore brokers that many active
+[00:04:19] traders like myself are using. So, let's
+[00:04:22] talk first about these last three small
+[00:04:24] account challenges that I've done. The
+[00:04:27] latest small account challenge was
+[00:04:29] utilizing what's called a cash account.
+[00:04:31] This was using a US broker dealer. In
+[00:04:33] this case, it was Weeble, but it could
+[00:04:35] have been any US broker dealer. Robin
+[00:04:37] Hood, Charles Schwab, doesn't matter.
+[00:04:39] With these brokers, you do not have the
+[00:04:42] ability to day trade with margin or
+[00:04:45] leverage if you have less than $25,000.
+[00:04:48] The use of leverage, for those that are
+[00:04:51] new perhaps to this episode or new to
+[00:04:54] this topic, leverage allows you to trade
+[00:04:57] on borrowed money. It's not new. It's
+[00:04:59] been around for hundred years, more than
+[00:05:01] 100 years here in the US equities
+[00:05:02] market. Uh what it does is it allows you
+[00:05:04] to trade on borrowed money. So if you
+[00:05:06] fund an account right now with $25,000
+[00:05:09] with Charles Schwab, for example, you
+[00:05:11] will have if it's a margin account, you
+[00:05:14] will have not only margin, you'll also
+[00:05:16] have leverage. And your leverage ratio
+[00:05:19] is four, which means you could buy
+[00:05:21] $100,000
+[00:05:24] worth of stock during the day. This is
+[00:05:27] your day trading leverage. So leverage
+[00:05:30] gives you a multiple on your cash
+[00:05:33] deposit essentially the cash that you've
+[00:05:34] put in and it allows you to trade on
+[00:05:36] borrowed money. Now you might naturally
+[00:05:38] observe that this sounds very risky and
+[00:05:41] it is it is risky and in fact during uh
+[00:05:44] the 1920s there was a as we know now a
+[00:05:47] great deal of uh participation in the
+[00:05:49] market that was on leverage which was
+[00:05:51] borrowed money and it essentially
+[00:05:53] propped up the entire market
+[00:05:54] artificially with all this borrowed
+[00:05:56] money and that was all good while the
+[00:05:58] market was going up but when the market
+[00:06:00] turned around and started to drop well
+[00:06:02] just think about it if you're in a stock
+[00:06:04] with $100,000
+[00:06:06] and it drops by 50%. Well, all of a
+[00:06:10] sudden you're down 50 grand. You only
+[00:06:12] had $25,000 of equity in the account.
+[00:06:14] Your account now is in the red minus
+[00:06:17] 25,000. You have what's called a margin
+[00:06:19] call. Now, a margin call is bad for you
+[00:06:22] because you owe money to the broker, but
+[00:06:24] it's also bad for the broker because the
+[00:06:26] broker's on the hook until you can pay.
+[00:06:28] And if you're completely unable to pay,
+[00:06:30] then the broker's stuck with it. So this
+[00:06:33] is of course what happened during the
+[00:06:34] the um the the great depression, the
+[00:06:38] stock market crash in 1929, but it's
+[00:06:40] also what happened uh to a lesser extent
+[00:06:42] during the dotcom bubble, especially
+[00:06:44] with the advent of online trading that
+[00:06:46] really became popular in the late 1980s,
+[00:06:48] but really in the 1990s.
+[00:06:50] So here today in the US, we really have
+[00:06:53] two types of accounts. you either have a
+[00:06:56] cash account um and in a cash account
+[00:06:59] you have your cash balance and that's
+[00:07:02] it. You have no leverage. So you don't
+[00:07:04] have borrowed money. You can't borrow
+[00:07:05] money at all. Uh but you also don't have
+[00:07:08] um settlement margin. So, what that
+[00:07:11] means is that if you buy $25,000 worth
+[00:07:14] of stock and sell it in a day trade, you
+[00:07:17] have to wait overnight, it's T1, for all
+[00:07:20] of those tra that one trade to settle
+[00:07:22] and then you can trade with that money
+[00:07:23] again tomorrow. Whereas in a margin
+[00:07:26] account, the trade still takes overnight
+[00:07:29] to settle, but you're borrowing money
+[00:07:31] from the bank to continue to trade
+[00:07:33] because they know that the trade will
+[00:07:35] settle. This isn't like a check that's
+[00:07:36] going to bounce. They know the trade
+[00:07:37] will settle. So they basically extend
+[00:07:40] you margin, the ability to keep trading
+[00:07:43] uh on borrowed money but using only your
+[00:07:45] cash balance in in this instance. So a
+[00:07:48] margin account allows unlimited trading
+[00:07:51] and there's no settlement period or you
+[00:07:54] don't have to wait for settlement. In
+[00:07:55] other words, you don't wait have to wait
+[00:07:57] for it. While with a cash account, you
+[00:08:00] are subject to waiting for settlement.
+[00:08:03] So essentially during these small
+[00:08:05] account challenges, the three that I did
+[00:08:07] was the first one is a cash account, the
+[00:08:09] second one was a margin account with
+[00:08:12] just 1x leverage and the third was a
+[00:08:14] margin account with six times leverage.
+[00:08:18] And so then if we compare the um the
+[00:08:21] total profit and the growth between
+[00:08:23] these three accounts, I'm I'm pretty
+[00:08:26] certain you could make a safe guess at
+[00:08:29] which one performed the best. Ding,
+[00:08:31] ding, ding. right here. And which one
+[00:08:33] was the slowest right here? Well, this
+[00:08:35] is the account that most US traders are
+[00:08:39] forced to use if they have less than
+[00:08:41] $25,000.
+[00:08:42] They have no choice but to use this
+[00:08:44] account. Which means that it's almost
+[00:08:46] institutionalized that they are set up
+[00:08:49] to not perform as well as traders who
+[00:08:52] are from more um uh from from more
+[00:08:55] adequate or or more substantial
+[00:08:57] financial um have more financial
+[00:09:00] resources, which is unfair by its very
+[00:09:02] nature. So, using a cash account,
+[00:09:05] focusing on just one trade a day, using
+[00:09:08] the entire cash balance, I funded an
+[00:09:10] account with Weeble with $2,000.
+[00:09:13] And over the course of 10 trades, which
+[00:09:15] was 10 days, I made $1,760.
+[00:09:20] I had uh nine winners and one loser,
+[00:09:22] which was good accuracy, 90% accuracy.
+[00:09:24] And my average daily gain was $176. This
+[00:09:27] is pretty good. So now, if we
+[00:09:29] extrapolated this to how much I would
+[00:09:31] have made if I had traded 20 days out of
+[00:09:34] the month and then 12 months out of the
+[00:09:36] year, I would have averaged about $3,500
+[00:09:39] that month and $42,000 over the course
+[00:09:41] of the year. Now, my trades actually
+[00:09:43] didn't add up to this because I only did
+[00:09:45] the 10 trades and my attention was split
+[00:09:47] between my primary trading accounts and
+[00:09:50] and this small account challenge. But
+[00:09:52] nonetheless, I took these 10 trades and
+[00:09:55] and this really demonstrated to me the
+[00:09:58] challenge of trading in a cash account,
+[00:10:00] which was that I was obviously severely
+[00:10:02] limited in how many trades I could took
+[00:10:04] and so I took fewer trades and the
+[00:10:07] account grew at as a result a much
+[00:10:09] slower rate. So I was thinking about all
+[00:10:12] the traders in the US that are choosing
+[00:10:15] to use the US broker dealer because they
+[00:10:18] want the insurance. They want to be, you
+[00:10:20] know, using an insured regulated broker.
+[00:10:22] They want commission free trading which
+[00:10:25] is currently not available with these
+[00:10:27] international brokers, but then they end
+[00:10:29] up subjecting themselves to these
+[00:10:30] restrictions that greatly reduce their
+[00:10:32] ability to grow an account. We'll get
+[00:10:34] into more depth in that in a minute, but
+[00:10:36] let's look at the second small account
+[00:10:37] challenge I did. So the second small
+[00:10:40] account challenge was the one right here
+[00:10:42] in the middle. I was using settlement
+[00:10:44] margin so I could day trade as much as I
+[00:10:46] wanted to but I had no leverage. So this
+[00:10:49] feels like the safer method because here
+[00:10:52] I was not exposing myself to the risk of
+[00:10:55] uh a margin call because I wasn't
+[00:10:56] trading with borrowed money. I was just
+[00:10:59] trading with the amount of money that
+[00:11:00] was in my account. I started uh with
+[00:11:03] $1,940
+[00:11:05] in the account and by the end of day 12
+[00:11:08] I had taken 31 trades. So I was able to
+[00:11:10] take almost three trades a day. That
+[00:11:12] would have been 36 trades, but almost
+[00:11:14] three trades a day. And I uh had total
+[00:11:17] profit of $4,167.98.
+[00:11:21] So my account grew from about just under
+[00:11:24] 2,000 to just over $6,000. So 3x in 12
+[00:11:28] days. That's phenomenal. and I made $347
+[00:11:32] daily average. That was approximately my
+[00:11:34] daily average over those 12 days. So, if
+[00:11:37] I had traded that way over the course of
+[00:11:39] a month, 20 trading days, it's close to
+[00:11:41] $7,000 in a month. Over the course of a
+[00:11:43] year, close to $83,000 in a year. I
+[00:11:45] would say that's pretty phenomenal. And
+[00:11:47] this right here highlights the type of
+[00:11:49] account that is not currently available
+[00:11:52] in the United States. This is not
+[00:11:54] available in the United States unless
+[00:11:56] you have $25,000.
+[00:11:57] With $2,000, you don't get settlement
+[00:12:00] margin. Even though it doesn't have
+[00:12:02] leverage and even though in theory you
+[00:12:04] have no risk of a margin call and it is
+[00:12:06] not as risky, this is the only type of
+[00:12:09] account you could use. And as you could
+[00:12:11] see in this account style, I was making
+[00:12:14] less than half as much. Now, the third
+[00:12:16] type of account, that's this one uh
+[00:12:19] right here where I had six times
+[00:12:21] leverage. Okay, so with that account,
+[00:12:23] well, that was pretty crazy. So, I
+[00:12:26] funded the account with just under
+[00:12:27] $2,000.
+[00:12:29] And my total profit as of day six, also
+[00:12:32] with just 31 trades, was 57,1767.
+[00:12:38] I was averaging nearly $10,000 a day.
+[00:12:41] That would have me averaging 190,000 a
+[00:12:43] month and $2.2 million by the end of the
+[00:12:45] year. Well, here's the reality. The only
+[00:12:48] day that was really difficult was the
+[00:12:49] first day because on day one, how much
+[00:12:51] money did I have in the account? $2,000,
+[00:12:54] right? And how much buying power did I
+[00:12:56] have? 2 * 6 is 12. $12,000 of buying
+[00:13:00] power. So on day one, I was able to buy
+[00:13:02] $12,000 worth of stock. Now granted,
+[00:13:05] 10,000 of it was borrowed money, which
+[00:13:07] is what clearly presents an incredible
+[00:13:10] risk that if I had made a mistake, I'
+[00:13:12] I'd lose a lot of money. Now, this small
+[00:13:14] account challenge that I had that I had
+[00:13:16] done, uh the whole idea with it was that
+[00:13:18] all of the profit that I was making was
+[00:13:21] getting donated to charity. And so I
+[00:13:22] actually ended up uh donating uh a
+[00:13:25] little over $200,000 to various
+[00:13:27] charities as part of these small account
+[00:13:29] challenges that I was doing. So it was
+[00:13:30] for a good cause. I was trying to see
+[00:13:32] how quickly I could make the money,
+[00:13:33] raise the money, and then donate it,
+[00:13:35] which was uh has already been now
+[00:13:37] donated. Uh but uh the fact is during
+[00:13:41] this challenge, I was basically able to
+[00:13:44] trade the way I trade in my regular
+[00:13:46] account after like day three and day
+[00:13:48] four. And if we look at uh this was just
+[00:13:52] over the course of as it turned out six
+[00:13:54] days and it was a it was very strong
+[00:13:56] those six days of trading. But if we
+[00:13:58] look at uh the year as a whole I ended
+[00:14:01] up finishing with um right around $6.5
+[00:14:05] million in trading profits. So it it's
+[00:14:08] not unreasonable to think that uh I
+[00:14:11] could have started the year with $2,000
+[00:14:13] in the account. I've got $57,000 over
+[00:14:16] the course of six days and then I just
+[00:14:18] continually actively trade in the US
+[00:14:20] equities market. Um, and very quickly
+[00:14:23] I'm trading with a two $300,000 account.
+[00:14:25] I've got more than enough buying power,
+[00:14:27] especially with six times leverage to
+[00:14:29] trade very aggressively. Now, this is an
+[00:14:31] area where I have to acknowledge that of
+[00:14:33] course my results are not typical. I
+[00:14:35] have been trading for a long time. So,
+[00:14:37] there's no guarantee that you would have
+[00:14:38] a similar result as me. Just be to be
+[00:14:40] very, very clear about that. But I
+[00:14:42] wanted to demonstrate what it's like for
+[00:14:44] a seasoned trader like myself to use
+[00:14:46] these three different account types. And
+[00:14:48] there is just absolutely no question
+[00:14:51] that when you look at the profits, now
+[00:14:53] granted, if I had taken a total of 31
+[00:14:56] trades here, 31 trades here, and 31
+[00:14:58] trades here, this was $57,000.
+[00:15:01] This was about $4,000. And over the
+[00:15:03] course of 10 trades here, I was at uh
+[00:15:05] $1,700. So, if we if we go and, you
+[00:15:09] know, all the way up to 30 trades, you
+[00:15:11] know, would I be up to $4,000 here?
+[00:15:14] Maybe I would. It's both of them are
+[00:15:16] cash accounts essentially, except this
+[00:15:18] one I was able to do in 12 days, and
+[00:15:21] this one would take 31 days to take 31
+[00:15:24] trades with the same amount of money
+[00:15:26] because I have to wait overnight. So,
+[00:15:28] this allows me to trade three times
+[00:15:30] faster. And this allows me to trade not
+[00:15:33] only three times faster, but with six
+[00:15:35] times more money. So, three times, six
+[00:15:37] times, and then that's how all of a
+[00:15:39] sudden we get up here to $57,000.
+[00:15:43] But here's the reality.
+[00:15:45] These two types of accounts are not
+[00:15:48] available in the United States. Now, I
+[00:15:50] think you could be safe to say that this
+[00:15:53] maybe shouldn't be available. Maybe it's
+[00:15:55] not safe certainly for a beginner trader
+[00:15:58] to have six times leverage. I can agree
+[00:16:00] with that. Six times leverage is very
+[00:16:02] aggressive. But what about this? just
+[00:16:05] simply settlement margin.
+[00:16:07] Why is this not available? And this
+[00:16:09] doesn't make sense to me. Unfortunately,
+[00:16:11] what it's doing is it's setting up
+[00:16:13] traders in a lot of ways to fail because
+[00:16:15] they're forced to use if they're trading
+[00:16:17] in the US, they're forced to use a cash
+[00:16:18] account. So, I would argue that cash
+[00:16:21] accounts are actually risky for
+[00:16:24] beginners. I know this seems um
+[00:16:26] completely contrary to the whole idea of
+[00:16:28] a cash account, but what I've learned is
+[00:16:30] that while it's possible to grow a small
+[00:16:32] cash a small cash account, using a cash
+[00:16:35] account creates unnecessary obstacles.
+[00:16:38] Number one, you're more likely to hold
+[00:16:40] your losers longer so you don't waste
+[00:16:41] your buying power. You hesitate on your
+[00:16:44] trades. And I'm speaking personally from
+[00:16:45] my own experience as a seasoned trader.
+[00:16:48] I hesitate because on the one hand, I
+[00:16:50] don't want to waste my buying power.
+[00:16:52] Remember how I only have the cash buying
+[00:16:54] power? So if I take a trade and that
+[00:16:57] trade doesn't work immediately on the
+[00:16:59] one hand, I could sell it, but then I
+[00:17:02] can't take another trade till tomorrow.
+[00:17:04] So then what I'm going to do is I'm
+[00:17:05] going to hold my losers longer because I
+[00:17:08] don't want to waste that one trade. And
+[00:17:10] on the other hand, I'm also going to
+[00:17:12] hesitate to get in something that might
+[00:17:14] end up working, but I'm going to
+[00:17:16] hesitate because if I waste that one
+[00:17:18] trade, I'm going to be really
+[00:17:20] frustrated. But then as we get closer to
+[00:17:22] the end of the day, if I haven't used
+[00:17:24] all my buying power, I also feel like
+[00:17:26] I'm not growing my account as
+[00:17:28] efficiently as necessary. So the limit
+[00:17:30] of running out of cash and no longer
+[00:17:32] being able to trade and on the other
+[00:17:34] hand, not utilizing all your cash
+[00:17:36] creates unnecessary pressure on what is
+[00:17:40] really I mean it's it's it's proven that
+[00:17:42] this is a very difficult task of
+[00:17:44] profitably trading the equity markets.
+[00:17:47] So the unnecessary pressure that comes
+[00:17:49] with trading in a cash account only
+[00:17:51] makes it harder. And now we have this
+[00:17:53] additional interesting challenge which
+[00:17:55] is that on days when the market is hot.
+[00:17:57] Usually what I found is that when it's
+[00:17:59] hot, I want to trade a lot on that day.
+[00:18:02] And then if the next day is cold, I
+[00:18:04] don't want to take any trades. Well, you
+[00:18:05] can't really do that in a cash account.
+[00:18:07] You just take the same number of trades
+[00:18:08] every day. If it's hot, you still take
+[00:18:10] your one trade. If it's cold, you don't
+[00:18:12] have to trade, but you weren't able to
+[00:18:14] make up for it when it was hot. So now
+[00:18:16] you're dealing with this psychological
+[00:18:17] challenge and it is the direct result of
+[00:18:21] the type of account that you're using
+[00:18:23] which I think is very interesting. Using
+[00:18:26] a cash account today is a choice. It's a
+[00:18:30] choice that traders are affirmatively
+[00:18:31] making. Now some traders are making the
+[00:18:33] choice because they don't know about the
+[00:18:35] other options. They don't know about
+[00:18:36] using international broker dealers.
+[00:18:39] International broker dealers are not
+[00:18:40] allowed to advertise to US residents.
+[00:18:42] That's a rule. So you only find out
+[00:18:45] about them really through word of mouth,
+[00:18:47] but they're very well known in trading
+[00:18:49] communities. So most traders will know
+[00:18:50] about them, but it's certainly possible
+[00:18:52] that a beginner trader who's not in any
+[00:18:54] trading communities wouldn't be aware of
+[00:18:56] these offshore brokers. And then what do
+[00:18:58] they do? They have less than $25,000. So
+[00:19:00] they open an account with Erade or
+[00:19:02] Schwab or Fidelity, Trade Station,
+[00:19:04] doesn't matter what broker, and they
+[00:19:06] realize, oh, I can only trade cash
+[00:19:08] amount, you know, in my it's a cash
+[00:19:10] account. And so they they can't trade
+[00:19:13] hardly at all. And so now what ends up
+[00:19:16] happening is they are I feel like
+[00:19:19] unfairly discriminated against in the
+[00:19:23] fact that they cannot actively
+[00:19:25] participate in the market. And another
+[00:19:27] trader who gets a check from 25 of
+[00:19:29] $25,000 from their dad all of a sudden
+[00:19:32] has an unfair advantage that now they
+[00:19:34] can actively trade as much as they want.
+[00:19:36] And so there's that old expression, it
+[00:19:38] takes money to make money. And we talk a
+[00:19:41] lot about how we want to democratize
+[00:19:44] investing and the market. We hear about
+[00:19:46] this all the time. And yet with the PDT
+[00:19:49] rule, we're not doing that. With the PDT
+[00:19:51] rule, we're only allowing people that
+[00:19:53] already have money to trade and
+[00:19:54] participate in the market. So using a
+[00:19:56] cash account is a choice. What I need in
+[00:19:59] order to actively trade is at the the
+[00:20:01] bare minimum, I need settlement margin,
+[00:20:04] instant settlement. I don't need the
+[00:20:06] leverage. And I don't think a beginner
+[00:20:07] trader should use leverage. I really
+[00:20:09] don't. Unfortunately, in the United
+[00:20:12] States, you get leverage at the same
+[00:20:14] time that you get margin. They don't
+[00:20:16] separate them. So now, in a way, they
+[00:20:19] should have three tiers. Cash, I
+[00:20:22] suppose, margin, and then margin with
+[00:20:24] leverage. And if you had this one in the
+[00:20:26] middle, this is the place that everyone
+[00:20:28] really should be, unless you're a more
+[00:20:29] experienced trader. Again, I'm not
+[00:20:32] trying to create more restrictions to
+[00:20:33] get leverage, but just in theory, what
+[00:20:36] is most logical is that anyone could
+[00:20:40] have a settlement margin. Settlement
+[00:20:42] margin allows unlimited trading, but it
+[00:20:44] protects traders from taking positions
+[00:20:46] on margin and making a big mistake on
+[00:20:48] leverage. that is now not to get into
+[00:20:51] the weeds but short selling is another
+[00:20:54] kind of can of worms because if you
+[00:20:55] short a stock on margin then you have to
+[00:20:58] buy back and if it goes significantly
+[00:21:01] higher you could end up taking a really
+[00:21:03] big loss. So I also think that shorting
+[00:21:05] should be reserved for you know higher
+[00:21:08] risk um traders traders who are
+[00:21:10] comfortable with that level of risk.
+[00:21:12] Now, if I feel confident in my strategy
+[00:21:15] and I have a proven track record of
+[00:21:17] success, I definitely want the full
+[00:21:18] margin um or the full leverage. So, a
+[00:21:21] margin account with six times leverage
+[00:21:22] or four times leverage that allows
+[00:21:24] traders with small accounts to trade on
+[00:21:25] borrowed money. But it does create this
+[00:21:27] risk. But because the US does not allow
+[00:21:29] settlement margin or leverage accounts
+[00:21:31] under 25,000, the only choice as of
+[00:21:34] today, as of right now, is to use an
+[00:21:36] offshore broker. These brokers can limit
+[00:21:39] your leverage to 1x if you ask them to,
+[00:21:41] but by default they give between 3x and
+[00:21:43] six times leverage depending on which
+[00:21:45] broker you end up choosing. So, as we
+[00:21:48] sit right now, the short-term solution
+[00:21:50] for most traders is either wait till the
+[00:21:52] PDT rule hopefully changes or use an
+[00:21:55] offshore broker. But we do know this
+[00:21:57] long-term solution is on the horizon.
+[00:21:59] And I'm hopeful that the SEC does
+[00:22:01] approve FINRA's proposed rule change. I
+[00:22:05] think if they do approve this rule
+[00:22:07] change, it's going to be a big win for
+[00:22:09] US broker dealers and we'll likely see
+[00:22:12] increased liquidity in the market which
+[00:22:14] allows traders to buy and sell larger
+[00:22:16] positions and that means better uh price
+[00:22:18] improvement and less slippage for all
+[00:22:21] market participants. So number one, I
+[00:22:24] said at the beginning that the PAT rule
+[00:22:25] unfairly limits access to the market to
+[00:22:27] only those with robust financial
+[00:22:29] resources. Traders who may possess the
+[00:22:32] aptitude, the interest, and the time to
+[00:22:34] become active traders in the market are
+[00:22:36] restricted by the arbitrary requirement
+[00:22:38] to have $25,000 in order to begin
+[00:22:40] trading. This has led some traders to
+[00:22:42] make the following decisions, each of
+[00:22:44] which are detrimental in different ways.
+[00:22:46] Number one, borrow money to fund a
+[00:22:48] $25,000 account. I've heard of traders
+[00:22:51] who have taken out uh title loans on
+[00:22:52] their car to do this. This allow this
+[00:22:55] allows greater risk because all of a
+[00:22:56] sudden now they've got $25,000. it's
+[00:22:59] borrowed money. Plus, they have four
+[00:23:00] times borrowed money from the broker.
+[00:23:02] They could trade on $100,000 and they
+[00:23:04] could make a huge mistake and it could
+[00:23:06] result essentially in them becoming uh
+[00:23:09] bankrupt. And not to mention the fact
+[00:23:11] that they could be paying interest on
+[00:23:12] the loan. Number two, they use an
+[00:23:15] offshore broker. Offshore brokers have
+[00:23:17] higher fees. They have greater risks.
+[00:23:18] They're not regulated in the same way
+[00:23:20] and insured in the same way as US broker
+[00:23:22] dealers. Not to say that there aren't
+[00:23:24] international brokers that are regulated
+[00:23:25] and insured, but it's not the same if
+[00:23:27] you're a US resident. If something goes
+[00:23:29] wrong, you don't have the same recourse.
+[00:23:32] Number three, they use a cash account,
+[00:23:34] and that greatly limits their ability to
+[00:23:35] actively trade and grow their account,
+[00:23:37] which means likely they're going to give
+[00:23:39] up. They might give up as another failed
+[00:23:41] trader. Because here's something
+[00:23:42] interesting. When we look at my profits
+[00:23:44] from last year, $6.5 million, you might
+[00:23:47] think, "Wow, Ross must be hitting these
+[00:23:49] huge winners." That's not true. I took
+[00:23:52] thousands and thousands of trades and my
+[00:23:54] average winners were only about 18 cents
+[00:23:57] per share. 18 cents per share. That's
+[00:23:59] not a lot. So, think about having a
+[00:24:01] $2,000 account. You've got a $2,000
+[00:24:03] account and you want to take a trade on
+[00:24:05] a $20 stock.
+[00:24:07] $2,000 account, $20 stock. How many
+[00:24:10] shares can you afford? You could afford
+[00:24:12] if you bought if you went all in, you
+[00:24:13] could afford 100 shares. So, you've got
+[00:24:15] a 100 shares of this stock here. Now,
+[00:24:17] unfortunately, the reality is if this
+[00:24:20] thing goes up plus $18 cents a share,
+[00:24:23] you're up $18. Is that enough for you to
+[00:24:25] take profit? You might say to yourself,
+[00:24:28] it's not. Now, I might take the same
+[00:24:30] trade. On that same trade, I might take
+[00:24:32] just for the sake of argument, 10,000
+[00:24:34] shares. And yes, 10,000 shares of a $20
+[00:24:36] stock is a lot of money in the trade,
+[00:24:38] but I might go ahead and do it. And I'm
+[00:24:40] up $1,800. I do that five or six times
+[00:24:43] in the day on that same stock actively
+[00:24:45] buying and selling. I'm up $10,000
+[00:24:48] easily. You take the same trade, you can
+[00:24:50] only take one trade and you're up $18.
+[00:24:53] And you say, Ross, it's not worth it. 18
+[00:24:55] isn't enough. So you get in at $20 and
+[00:24:58] you say, "I'm not selling when it goes
+[00:24:59] to $208. I take profit. I'm happy with
+[00:25:02] that." But you say, "No, I I'm not going
+[00:25:04] to sell unless it goes to 21." Now
+[00:25:06] you're trying to make a full dollar a
+[00:25:07] share. You're trying to make five times
+[00:25:09] what I make on average. I've been doing
+[00:25:11] this for a really long time and and that
+[00:25:14] doesn't make sense. But you're not
+[00:25:16] content with the small base hits because
+[00:25:18] $18 it doesn't really work. So then what
+[00:25:21] do you end up doing? You say, "Well, I
+[00:25:22] can't trade $20 stocks now because I
+[00:25:24] can't afford them." So then you don't
+[00:25:26] trade $20 stocks. You end up trading
+[00:25:28] penny stocks, cheap stocks, OTC stocks.
+[00:25:31] Those are going to have a higher risk of
+[00:25:32] squeezing up and then coming all the way
+[00:25:34] back down. Then you end up seeing some
+[00:25:35] big losses, huge extreme moves, 50%
+[00:25:38] drops in one day. So now you're moving
+[00:25:41] to an area of the market that's going to
+[00:25:42] be more subject to those big swings and
+[00:25:45] once again you're going to struggle.
+[00:25:47] Whereas a trader like myself is happily
+[00:25:49] trading a $20 stock getting 18 cents a
+[00:25:52] share again and again and again. And if
+[00:25:54] you had settlement margin at least you
+[00:25:57] could make $18. You do that five times
+[00:25:58] in a day you got $100. $100 a day.
+[00:26:01] That's pretty good if you've got a
+[00:26:02] $2,000 trading account. So, the PDT rule
+[00:26:05] is unfairly limiting access to the
+[00:26:06] market to only those with robust
+[00:26:08] financial resources. It also makes it
+[00:26:10] harder for traders with less than
+[00:26:11] $25,000 to profit in the market because
+[00:26:15] they are limited and how often they
+[00:26:17] could trade. A trader with under $25,000
+[00:26:20] can only trade with settle settled cash.
+[00:26:22] This reduces their ability to capitalize
+[00:26:25] on opportunities as they present
+[00:26:27] themselves in the market. A trader with
+[00:26:29] a cash account is more likely to hold
+[00:26:30] losers longer so they don't waste their
+[00:26:32] limited buying power. That same trader
+[00:26:34] is more likely to sell their winner
+[00:26:36] sooner to avoid a winner turning into a
+[00:26:37] loser. So cash accounts influence a
+[00:26:40] trader psychology in ways that are
+[00:26:42] harmful to them. I know because I've
+[00:26:45] been doing it and you see my trading is
+[00:26:47] totally different in the cash account
+[00:26:49] even though I know that I shouldn't be
+[00:26:50] holding these losers. The pattern day
+[00:26:53] trader rule limits liquidity in the
+[00:26:54] market by reducing trading volumes. By
+[00:26:56] restricting traders below $25,000 from
+[00:26:59] actively and freely participating in the
+[00:27:01] market, trading volumes are greatly
+[00:27:04] reduced. So this in turn results in
+[00:27:06] naturally less liquidity in the market.
+[00:27:09] That means all market participants pay
+[00:27:10] the price when they try to buy or sell a
+[00:27:12] position and they have fewer
+[00:27:14] counterparties to match their orders.
+[00:27:15] That means more slippage on your
+[00:27:17] executions, a worse execution price,
+[00:27:20] losing money because of the pattern day
+[00:27:22] trader rule. Number four, the pattern
+[00:27:24] day trader rule encourages US traders to
+[00:27:26] leave regulated and insured US brokers
+[00:27:29] in order to trade with international
+[00:27:30] broker dealers that don't have the PDT
+[00:27:32] rule. It's a logical solution for an
+[00:27:34] individual determined to actively trade
+[00:27:36] in under $25,000. I get it. I've used
+[00:27:39] those offshore brokers myself, but it's
+[00:27:41] bad for US broker dealers as they lose
+[00:27:43] business and it creates more risk for
+[00:27:45] the US traders as they're trading with
+[00:27:47] an international broker dealer where if
+[00:27:48] something goes wrong now you've got to
+[00:27:50] hire a lawyer down in, you know, in
+[00:27:52] Bermuda or Bahamas or somewhere you
+[00:27:54] don't know that that's just going to be
+[00:27:56] a lot more difficult. The bottom line is
+[00:27:58] that the pattern day trader rule is bad
+[00:28:00] for us traders. It's bad for market
+[00:28:03] participants in general and it's bad for
+[00:28:06] US broker dealers. and the rule at the
+[00:28:09] very least should be amended. I'm really
+[00:28:12] eager to hear your thoughts, your
+[00:28:15] comments. Please feel free to leave them
+[00:28:16] down below. I'll remind you as always,
+[00:28:18] everything I share with you, this is
+[00:28:19] educational. This is just my opinion.
+[00:28:21] And as I want to reiterate, my results
+[00:28:24] in trading are not typical. I shared
+[00:28:25] with you some of my profits here in this
+[00:28:27] episode. I don't want you to assume
+[00:28:28] that's a typical result. I've been doing
+[00:28:30] this for a long time. So, please manage
+[00:28:31] your risk. Always practice in a
+[00:28:33] simulator before putting real money on
+[00:28:35] the line. And remember, there's no
+[00:28:37] guarantee you'll find success in the
+[00:28:38] market, whether you trade with me or you
+[00:28:40] learn on your own. So, manage your risk,
+[00:28:42] take it slow, and I'll see you guys here
+[00:28:44] for the next episode real soon.

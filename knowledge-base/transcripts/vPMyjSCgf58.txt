@@ -1,0 +1,1394 @@
+# I risked $2,500 to make $76,112.42. Here’s how I did it.
+# https://www.youtube.com/watch?v=vPMyjSCgf58
+# duration_sec: 3161
+
+[00:00:00] in today's episode we're going to talk
+[00:00:02] about risk and I'm going to share with
+[00:00:03] you a risk management technique that you
+[00:00:05] can Implement in your own trading
+[00:00:06] starting today the goal of this
+[00:00:08] technique is that it will help you
+[00:00:09] reduce the size of your losses and the
+[00:00:12] frequency of your big red days I want to
+[00:00:15] teach you how to put the pedal to the
+[00:00:16] metal when the Market's hot but have
+[00:00:18] just as quickly ease off the throttle
+[00:00:20] when it starts to get choppy I'm going
+[00:00:22] to use my trades from today as a case
+[00:00:24] study this morning I took
+[00:00:26] $2,500 of risk on my first trade that
+[00:00:30] was the most I was willing to go red on
+[00:00:32] the day on that trade that trade was a
+[00:00:34] winner I used the profit as a cushion
+[00:00:37] and I walked my way all the way up to a
+[00:00:39] profit today of over
+[00:00:42] $76,000 that is real money now let me be
+[00:00:44] the first to tell you that my results
+[00:00:46] are not typical my name is Ross Cameron
+[00:00:48] I'm a full-time Trader and I funded my
+[00:00:50] first account in 2001 so I've been
+[00:00:52] trading for a long time I don't want you
+[00:00:54] to assume that you're going to watch
+[00:00:55] this episode and make $76,000 tomorrow
+[00:00:59] being able to make make consistent
+[00:01:00] profits in the market takes a
+[00:01:02] combination of skill strategy and
+[00:01:06] experience I'm going to help you
+[00:01:07] jumpstart your learning curve here today
+[00:01:09] and we're going to talk all about how to
+[00:01:11] get better at managing risk so let's go
+[00:01:13] ahead and jump onto the Whiteboard we've
+[00:01:15] got a lot to cover and this is the stock
+[00:01:17] that I trade today it is up right now
+[00:01:22] 48% 48% this is
+[00:01:26] unbelievable this is a huge move and
+[00:01:29] this was my biggest winner of the day
+[00:01:31] but you know what let's take a step back
+[00:01:32] let's pull up the slide deck cuz we
+[00:01:34] really do have a lot to cover today so
+[00:01:36] I'm going to go and put this full screen
+[00:01:38] we have the Whiteboard here so we're
+[00:01:39] going to take some notes over on the
+[00:01:41] Whiteboard and up here on this slide
+[00:01:43] deck I'm going to go into presenter mode
+[00:01:45] I'm going to do slideshow presenter view
+[00:01:47] I'm going to slide this over here onto
+[00:01:49] this Monitor and we're going to talk
+[00:01:50] about a risk management strategy that
+[00:01:52] you can Implement in your own trading
+[00:01:54] starting today let's begin with a little
+[00:01:56] bit of a quiz so let's level set and
+[00:01:59] make sure we're all in the same page at
+[00:02:00] the beginning of this class is this a
+[00:02:02] good place to buy this stock now you
+[00:02:05] already know pfx made a huge move up
+[00:02:07] over 400% but the question is is this a
+[00:02:10] place right now where you would be able
+[00:02:12] to manage risk because if you can't
+[00:02:15] manage risk it's not worth taking the
+[00:02:16] trade so as I look at this chart right
+[00:02:19] now here's what I see we have a stock
+[00:02:22] that has how many green candles in a row
+[00:02:23] we've got let's see 1 2 3 4 5 6 7 8 9 10
+[00:02:29] 11 11 Green candles in a row it's
+[00:02:32] incredibly strong but if you're getting
+[00:02:33] in here for your first entry you miss
+[00:02:36] the boat you're buying way too high so
+[00:02:39] the problem here is that you you might
+[00:02:41] be thinking about upside reward well
+[00:02:43] what if this thing goes straight to
+[00:02:45] wherever okay I get it I like to think
+[00:02:47] about the upside reward too I'm always
+[00:02:49] optimistic about what a stock could do
+[00:02:51] but we have to ask ourselves first
+[00:02:53] what's the downside risk on this trade
+[00:02:55] and unfortunately typically the way we
+[00:02:57] look at this is that we look for areas
+[00:03:00] of support and then the next leg up so
+[00:03:03] right now the last area of support was
+[00:03:05] way back here that's four big green
+[00:03:07] candles away that means if we got in and
+[00:03:09] we set our stop at this previous sort of
+[00:03:11] support level it would be too far away
+[00:03:14] we would need to be able to make two
+[00:03:15] times what we're risking that's what
+[00:03:16] we're risking we need to actually get to
+[00:03:18] here just to take profit in order to
+[00:03:21] justify the risk involved with taking
+[00:03:22] the trade so if we had taken that trade
+[00:03:25] what would have happened well as you can
+[00:03:28] see it did go higher which is wonderful
+[00:03:31] but this big red candle could stopped
+[00:03:33] you out in this candle it dropped from a
+[00:03:35] high of $10 a share all the way down to
+[00:03:37] about $8 a share that's a two-point drop
+[00:03:40] with 5,000 shares you could have lost 10
+[00:03:42] grand you stop out you take your max
+[00:03:44] loss only to watch it rip a moment later
+[00:03:48] now let me tell you I have done this
+[00:03:50] before and it is infuriating there's
+[00:03:53] nothing more frustrating than getting
+[00:03:55] stopped out and watching a stock rip
+[00:03:58] without you but here's what I can tell
+[00:04:00] you whenever that has happened to me
+[00:04:02] it's been because my initial entry was
+[00:04:05] not well timed I was giving into fomo I
+[00:04:07] was buying too high I was chasing it and
+[00:04:10] then suddenly the bottom fell out and
+[00:04:13] rather I mean unfortunately when that
+[00:04:15] happens you're just in the sort of like
+[00:04:17] deer in the headlights mode because you
+[00:04:19] know you're in too high and now you're
+[00:04:21] like if I if this halts down I could be
+[00:04:25] totally wrecked so you just Panic cell
+[00:04:28] you're hitting the bottom and then
+[00:04:30] oftentimes it bounces right there and
+[00:04:32] goes back up in fact I had a trade uh
+[00:04:34] yesterday that did almost exactly that
+[00:04:37] so you're not totally no one's immune to
+[00:04:39] making these mistakes but you've got to
+[00:04:41] develop a sense of awareness around the
+[00:04:43] way you're trading and certainly monitor
+[00:04:45] your metric so you can try to improve
+[00:04:47] okay so now let's look at this one so is
+[00:04:49] this a good place to buy right here this
+[00:04:52] this very moment of course the answer is
+[00:04:54] no yes it's true that the macd is
+[00:04:56] positive yes it's true you've got a nice
+[00:04:58] volume profile but what we don't have is
+[00:05:01] a pullback in fact we have a topping
+[00:05:02] tail which means this is an extension
+[00:05:05] buying at the top of an extension would
+[00:05:06] expose us to way too much risk so the
+[00:05:09] risk to reward on that trade is not good
+[00:05:11] well you'll sometimes see people write
+[00:05:13] certainly um in the chat room at Warrior
+[00:05:15] trading is um RR they'll say you know no
+[00:05:19] RR on um you know
+[00:05:23] XYZ and sometimes people are like what
+[00:05:25] what is this and RR is risk reward
+[00:05:27] there's no risk reward on this trp
+[00:05:30] there's risk but there's no reward so
+[00:05:33] unfortunately it's not going to be
+[00:05:34] something that's worth taking all right
+[00:05:36] let's look at the next one so how about
+[00:05:38] this now this paints a little bit a
+[00:05:40] different picture here we've got a stock
+[00:05:41] that's squeezing up it's going sideways
+[00:05:44] right here so now we're on the first
+[00:05:45] pullback right the macd is open the
+[00:05:48] volume not bad yeah you've got a little
+[00:05:50] more volume on that red candle but
+[00:05:51] overall it's not too bad and of course
+[00:05:53] we look at the float we see it's 2.5
+[00:05:55] million shares that's right there and we
+[00:05:58] know let's just say for instance since
+[00:05:59] today the Market's really hot is that a
+[00:06:01] trade that I would take the answer is
+[00:06:03] yes it's a trade that I did take and it
+[00:06:05] goes from A180 all the way up to two to
+[00:06:07] 240 to 280 to to 290 to three pulls back
+[00:06:11] goes up to 360 up to four so that down
+[00:06:14] there was a fantastic entry that was the
+[00:06:17] good entry buying it way up here that
+[00:06:19] would not be a good entry buying it way
+[00:06:21] up here that would be capitulating
+[00:06:23] capitulation is when you just give in
+[00:06:26] you give in fomo you just end up getting
+[00:06:28] in at the very Tippy time top and it's
+[00:06:30] almost never a good idea now what about
+[00:06:32] this all right so now we actually have
+[00:06:34] that red candle that's formed so after
+[00:06:37] the red candle has formed it's created a
+[00:06:39] base off that low we now use that as our
+[00:06:43] low point which means that's our Max
+[00:06:45] loss so now instead of the max loss
+[00:06:47] being way down here the max loss has
+[00:06:49] moved up so now if we can get in and I
+[00:06:52] did buy near this dip and I'll show you
+[00:06:54] my trades as we get into this class I
+[00:06:56] get in down here now I'm looking for a
+[00:06:57] move back up through the high on in off
+[00:07:00] support and look at that we get a
+[00:07:02] squeeze from 10 all the way up to 12
+[00:07:04] it's amazing how sometimes beginner
+[00:07:07] Traders will find themselves buying the
+[00:07:09] tops and selling the bottoms and it's
+[00:07:11] like it it's not the intention that I'm
+[00:07:14] going to keep buying the top and selling
+[00:07:15] the bottom it just it keeps happening
+[00:07:17] why is it happening and it typically
+[00:07:19] happening because you're falling victim
+[00:07:21] to fomo you're chasing it you know the
+[00:07:23] stock starts squeezing up and you feel
+[00:07:25] like you missed an entry and now it's
+[00:07:26] going higher and higher and you're just
+[00:07:27] sort of say you know what I'm just going
+[00:07:29] to get in here forget it and then all of
+[00:07:31] a sudden you're in at the tippy top and
+[00:07:34] it flushes and then you stop out and
+[00:07:36] where you're stopping out is where more
+[00:07:38] season Traders maybe like myself are
+[00:07:40] saying I'm going to buy this dip so then
+[00:07:43] we're buying there it rallies back up
+[00:07:45] from people that are dip buyers it goes
+[00:07:47] through the new high and the beginner is
+[00:07:49] like what is going on and the
+[00:07:51] experienced Traders are like that was a
+[00:07:52] nice dip trade right so it it the
+[00:07:54] difference between success and failure
+[00:07:56] and trading can be so subtle you could
+[00:07:57] be this close to turning the corner you
+[00:08:00] just have to make a couple of really
+[00:08:01] slight adjustments and I want to help
+[00:08:03] you do that as you learn about risk
+[00:08:04] management in today's class so here's
+[00:08:07] the thing that I'll tell you about
+[00:08:08] trading you've got to be really careful
+[00:08:10] of the negative feedback loop the
+[00:08:13] negative feedback loop in trading begins
+[00:08:15] with a poor track record when you have a
+[00:08:18] poor track record you've got a history
+[00:08:20] of poor decisions losing money and
+[00:08:23] emotional trading typically a beginner
+[00:08:25] Trader who comes into the market you can
+[00:08:27] fund an account with real money on your
+[00:08:29] phone in in a matter of minutes and next
+[00:08:32] thing you know you're pressing the buy
+[00:08:33] button you're jumping into stocks but
+[00:08:35] without a strategy without a system
+[00:08:37] without set of rules what's going to
+[00:08:38] happen the inevitable happens you lose
+[00:08:40] money you start spiraling after you take
+[00:08:43] that first loss let's think about what
+[00:08:45] happens if you can recall back to taking
+[00:08:47] your first loss you take a your first
+[00:08:49] loss and how do you feel angry right
+[00:08:52] I'll do draw a sad face you feel angry
+[00:08:54] frustrated upset disappointed and this
+[00:08:57] emotion is so bad you want to do
+[00:08:59] anything to turn that frown upside down
+[00:09:03] and how do you turn a frown upside down
+[00:09:05] when it comes to trading if you're upset
+[00:09:07] that you're down $10,000 the fastest way
+[00:09:10] to not be upset anymore what would that
+[00:09:12] be to make 10 grand boom easy right well
+[00:09:16] that would make you feel better
+[00:09:17] unfortunately it's easier said than done
+[00:09:19] so what ends up happening is you're in
+[00:09:22] the red you're super frustrated you want
+[00:09:24] to go back into the green and so you
+[00:09:26] start taking more trades unfortunately
+[00:09:28] because you're beginner Trader without a
+[00:09:30] lot of experience or track record you
+[00:09:32] start losing more money and this only
+[00:09:34] serves to increase emotions now you're
+[00:09:37] really upset you're starting to spiral
+[00:09:40] you take more trades and this becomes a
+[00:09:42] downward spiral that is it's the epitome
+[00:09:45] of a negative feedback loop because the
+[00:09:47] bigger the emotions get the more you
+[00:09:49] trade the more share size you trade and
+[00:09:51] you can go on a full spiral and where
+[00:09:53] does it end with your account imploding
+[00:09:56] gone I've seen Traders do this in fact
+[00:09:58] I've had some days or pretty bad myself
+[00:10:00] so I'm not completely immune to it it's
+[00:10:02] it's unfortunately uh something that can
+[00:10:04] happen when emotions get the best of us
+[00:10:07] so because this is such a real
+[00:10:09] phenomenon in trading what I want to
+[00:10:11] help you do is number one develop the
+[00:10:13] awareness of it so if you're in this
+[00:10:15] negative feedback loop right now I'm
+[00:10:17] going to teach you by the end of this
+[00:10:18] episode how to break out of it so that's
+[00:10:20] number one number two if you're a
+[00:10:22] beginner Trader and you're not in this
+[00:10:23] Loop thank goodness but I want you to be
+[00:10:25] aware of how easily you can fall into it
+[00:10:27] so if it does happen you'll know how to
+[00:10:29] get out we can also take some steps to
+[00:10:31] avoid being in this place in the first
+[00:10:33] place so let's talk about the
+[00:10:35] relationship when it comes to risk
+[00:10:37] management of profit versus loss so
+[00:10:40] today on my first trade I was risking
+[00:10:43] $2,500 so we have a column here for risk
+[00:10:46] and we have a second column for reward
+[00:10:49] so let's just do ratios to begin with
+[00:10:52] and then we'll put dollars behind it so
+[00:10:54] if you risk a dollar to make a dollar
+[00:10:56] you have to be right 50% of the time in
+[00:10:58] order to break even 50% your break even
+[00:11:00] point right so if you make a dollar lose
+[00:11:02] a dollar 50% is your break even if you
+[00:11:05] risk a dollar to make $2 you only need
+[00:11:09] to be right 33% of the time in order to
+[00:11:11] be profitable and see this is where you
+[00:11:14] can get an edge in the market so if you
+[00:11:16] think about people who um go to the
+[00:11:18] casinos and stuff like that they're
+[00:11:20] thinking about what are games that I can
+[00:11:22] play that give me an edge if you're
+[00:11:24] playing Blackjack you bet $25 if you win
+[00:11:28] you make $25 if you lose your 25 is gone
+[00:11:31] so essentially your risk to reward ratio
+[00:11:33] is 1: one which means you need to be you
+[00:11:36] need to have really high accuracy in
+[00:11:39] order to be profitable how do you get
+[00:11:41] high accuracy playing Blackjack well you
+[00:11:45] can get a little bit of an edge by
+[00:11:46] knowing exactly what cards to hit
+[00:11:49] exactly what cards to stay exactly what
+[00:11:51] cards to double you could get an edge if
+[00:11:53] you're trading or if you're at a casino
+[00:11:56] where you know how many decks are in uh
+[00:11:58] that that that they're that they have in
+[00:12:00] the in the shuffle in the shoe so you
+[00:12:02] know okay you start counting the cards
+[00:12:05] right but you're trying to get that edge
+[00:12:07] so success at the casino is a bit of a
+[00:12:10] game of statistics and most people can't
+[00:12:12] find it success in trading is also a
+[00:12:15] game of statistics and what I have found
+[00:12:18] is that when you understand the
+[00:12:20] relationship between uh risk and reward
+[00:12:23] you can position yourself where you
+[00:12:25] avoid the trades that are going to
+[00:12:27] create unnecessary risk so here let's
+[00:12:30] just say for instance you focus on
+[00:12:32] risking $1 to make $2 now this is not an
+[00:12:36] option certainly with Blackjack but it
+[00:12:39] is an option with trading you can decide
+[00:12:41] how much you're willing to risk so let's
+[00:12:43] just say for instance we have a stock
+[00:12:45] that's popping up it squeezes up you got
+[00:12:47] one candle two candles and then we're
+[00:12:49] going to give it a little pullback
+[00:12:50] candle right here all right so it gives
+[00:12:52] a little pullback this creates our
+[00:12:54] pullback which creates um the support
+[00:12:57] level so now this is support the low the
+[00:12:59] pullback becomes support so now we're
+[00:13:02] thinking okay if I buy right here if I
+[00:13:05] buy let's say right there my Max loss is
+[00:13:08] right here Max loss so then what I'm
+[00:13:11] risking is the difference between my
+[00:13:14] entry and my Max loss so let me show you
+[00:13:17] my first trade from today so first trade
+[00:13:20] from today we'll pull it up on the
+[00:13:21] charts here um this was on um P pfx so
+[00:13:26] pfx ends up making as as you can see of
+[00:13:29] course a phenomenal move today it was
+[00:13:31] really impressive and I see a couple
+[00:13:33] other stocks that are still moving which
+[00:13:34] is great to see so PR FX we're going to
+[00:13:38] go back here my first trade on it was um
+[00:13:41] coming into 7 a.m. so was right in
+[00:13:44] here so my first trade was actually a
+[00:13:47] micro
+[00:13:49] pullback and I got in it was right about
+[00:13:54] right in here so we had this nice rally
+[00:13:57] up the little dip another rally up a
+[00:13:59] little dip I like to buy these dips
+[00:14:02] right here so when I got in here I
+[00:14:05] bought 25,000 shares so 255,000 shares
+[00:14:09] it's not a small position but that's
+[00:14:10] what I bought so my entry 25,000 shares
+[00:14:14] now my Max loss on this trade I set at
+[00:14:17] minus10 cents so one of the things it
+[00:14:20] was the low of this pullback so-1 C
+[00:14:24] which means I was risking from my entry
+[00:14:26] to my Max loss 2500 25,000 shares time
+[00:14:30] 10 cents is
+[00:14:32] $2,500 so that was my risk right there
+[00:14:35] now what I knew was I was looking for a
+[00:14:37] move back through the high so as we got
+[00:14:39] this first candle making new high I was
+[00:14:41] looking for a move not only back through
+[00:14:43] the high but over the psychological
+[00:14:46] resistance of $7 the break of seven we
+[00:14:50] broke through seven we go up to 715 720
+[00:14:52] we actually made our way all the way up
+[00:14:54] to a high of 7 just about 750 which was
+[00:14:57] the next psychological area of res
+[00:14:59] resistance and so on that first trade
+[00:15:01] taking an initial risk of
+[00:15:03] $2,500 I'm immediately in the green by
+[00:15:07] about $8,000 so that first trade gave me
+[00:15:10] a 3: one profit to loss ratio my risk
+[00:15:15] was 2500 I made a little over 7500 8,000
+[00:15:18] we'll just round down to 3:1 all right
+[00:15:20] so 3:1 profit to loss ratio now if we
+[00:15:22] jump back over to our slide deck what
+[00:15:25] accuracy do I need in order to be
+[00:15:28] profitable with a 3:1 profit to loss
+[00:15:30] ratio I actually only need to be right
+[00:15:33] 25% of the time one out of four trades
+[00:15:36] one out of well yeah one out of every
+[00:15:38] four trades as long as I'm right on one
+[00:15:40] out of every four trades One winner and
+[00:15:41] then three losers at a three to one
+[00:15:44] profit to loss ratio I would still be a
+[00:15:46] profitable Trader now of course it's not
+[00:15:48] my goal to be right only 25% of the time
+[00:15:52] my goal is to be right the majority of
+[00:15:54] the time greater than 50% on a good day
+[00:15:57] I can trade up to 75 even 80% accuracy I
+[00:16:00] mean occasionally I'll have a day where
+[00:16:01] i'm higher than that but of course if
+[00:16:03] you only take one trade and it's a
+[00:16:04] winner you're at 100% but if you're
+[00:16:05] trading you know frequently 30 40 trades
+[00:16:08] a day or whatever the case may be uh
+[00:16:09] hovering around 75 80% is really nice on
+[00:16:12] a solid green day so I broke the ice
+[00:16:16] with this first trade now here's where
+[00:16:18] it gets interesting so I've got that
+[00:16:20] first trade which was a profit of um
+[00:16:22] about
+[00:16:24] $8,300 first trade and now I'm in the
+[00:16:27] green I start started the day at zero
+[00:16:30] right just like everyone else I'm not
+[00:16:32] carrying any trades over from the
+[00:16:34] previous day so I start the day at zero
+[00:16:36] which means my highest risk is on my
+[00:16:39] very first trade because if that very
+[00:16:41] first trade is a loser I'm now in the
+[00:16:44] red I'm having a give back I'm giving
+[00:16:46] back profit to the market profit that I
+[00:16:48] maybe made in previous days my account
+[00:16:50] is going down so the highest risk for me
+[00:16:53] is on that very first trade now I want
+[00:16:55] to jump over here and show you um this
+[00:16:58] technique that implemented in my trading
+[00:17:01] so we know about the negative feedback
+[00:17:03] loop but there's something that I
+[00:17:05] discovered if we look at my metrics from
+[00:17:07] the last 12 months you'll notice that
+[00:17:09] there was a real turning point right
+[00:17:10] around here a significant turning point
+[00:17:13] and right now I'm sitting at about
+[00:17:16] $350,000 on the month of December and
+[00:17:18] that does not include today's trades
+[00:17:20] today's profit of 76,000 so this is
+[00:17:23] actually going to become my biggest
+[00:17:26] green month of the year as of right now
+[00:17:28] now we still nine trading days left in
+[00:17:30] the year so of course there's time for
+[00:17:32] me to make mistakes and hopefully I
+[00:17:33] don't but there's also time for me to
+[00:17:35] add more profit and make my way up
+[00:17:36] towards potentially half a million
+[00:17:38] dollars in one month so there was
+[00:17:40] clearly a big turning point that
+[00:17:42] happened right around here let's look at
+[00:17:44] my metrics for the year sitting right
+[00:17:46] now at about $1.9 million in trading
+[00:17:49] profit average daily gain 8,000 bucks
+[00:17:52] but let's get dialed in on a couple
+[00:17:54] things my current accuracy across the
+[00:17:57] entire year is about 6
+[00:17:59] 65% my average winners right now are
+[00:18:03] $877 and my average losers are
+[00:18:07] $592 which leaves me with a greater than
+[00:18:10] 1:1 profit to loss ratio it's not quite
+[00:18:13] 2:1 this is minus 600 rounding up so I'd
+[00:18:16] have to be at $1,200 average winners for
+[00:18:18] a 2:1 profit loss ratio so I'm at like
+[00:18:20] 1.5 to1 but what we know about 1:1 is if
+[00:18:24] you WR 50% time your break even I'm at
+[00:18:26] 1.5 to1 and I'm right 65% at a time now
+[00:18:29] you also note that my average hold time
+[00:18:31] is short 4 minutes I've gotten really
+[00:18:33] good at timing Apex points and breakouts
+[00:18:37] which means I am looking to take a trade
+[00:18:39] at a place where I think if the stock
+[00:18:41] breaks this level it is going to rip
+[00:18:44] it's going to squeeze and if I'm right I
+[00:18:46] have a winner immediately and if I'm
+[00:18:48] wrong I have a loser immediately but
+[00:18:50] it's a pretty much instant it's an
+[00:18:52] instant resolution it either works or it
+[00:18:54] doesn't which is why I follow the
+[00:18:56] philosophy of breakout or bailout so if
+[00:18:58] I get in it doesn't work then I jump
+[00:19:00] right out now when we're thinking about
+[00:19:02] profit loss ratio there's a couple of
+[00:19:05] things that I I think about for trading
+[00:19:08] there's three core components of
+[00:19:10] profitability your first is your
+[00:19:12] accuracy down here your second is your
+[00:19:15] profit loss ratio and your third is your
+[00:19:17] consistency not in any particular order
+[00:19:19] I'm not trying to go counterclockwise
+[00:19:20] but just the these are your Three core
+[00:19:22] components so the way I think about it
+[00:19:25] is everyone if you're trading right now
+[00:19:27] you could pull up your met Mets and see
+[00:19:29] what your profit loss ratio is now I'll
+[00:19:31] tell you that if you don't know what
+[00:19:33] your metrics are right now you're doing
+[00:19:35] yourself a huge disservice you should
+[00:19:37] know this information you should know
+[00:19:39] your profit loss ratio now let's just
+[00:19:41] say you don't know your metrics and
+[00:19:43] you're like man I'm not trading very
+[00:19:45] well but I don't I can't figure it out
+[00:19:47] what is wrong with me well let's say I
+[00:19:50] imported your trades I looked at them in
+[00:19:52] this software what would I notice okay
+[00:19:54] I'm noticing you're losing money in the
+[00:19:55] afternoon so maybe you should stop
+[00:19:57] trading in the afternoon what else am I
+[00:19:59] noticing performance Maybe by price and
+[00:20:01] volume well you're not making a lot of
+[00:20:03] money trading stocks over $20 maybe
+[00:20:05] focusing on them is taking your
+[00:20:07] attention away from other areas where
+[00:20:08] you do better so what I would do is I
+[00:20:10] would say these are the areas you're
+[00:20:12] doing well let's double down on that
+[00:20:14] these are the areas you're not doing as
+[00:20:15] well at let's pull back on those in fact
+[00:20:17] if we go to the month of March uh last
+[00:20:19] March I had uh a difficult month it
+[00:20:22] wasn't a good month for me it was a
+[00:20:23] pretty bad month actually and this is
+[00:20:25] what my metric showed me that golly I
+[00:20:27] was not doing well trading stocks
+[00:20:29] outside this little range 2 to 10 was my
+[00:20:32] sweet spot it was very clear by the end
+[00:20:35] of the month my metrics told me a story
+[00:20:38] now I needed to listen to the story and
+[00:20:40] take the tip and apply it and so I did
+[00:20:42] so going into April what do you think I
+[00:20:44] did you think I changed I made a change
+[00:20:46] I said you know what for April how about
+[00:20:48] let's not trade stocks over $20 let's
+[00:20:52] let's keep it focused on lower price
+[00:20:53] that's where my sweet spot is and boom
+[00:20:55] the month of April was a big turning
+[00:20:57] point right so if you don't know your
+[00:20:59] metrics you're leaving so much data on
+[00:21:01] the table that could be telling you what
+[00:21:03] you could do right now in your own
+[00:21:05] trading to get better so you really have
+[00:21:08] three core components that I look at
+[00:21:10] you've got your accuracy you've got your
+[00:21:12] profit loss ratio and you've got your
+[00:21:14] consistency so these all kind of go
+[00:21:16] together and sometimes Traders will say
+[00:21:17] well I don't know which one to focus on
+[00:21:20] you know I want to be a more consistent
+[00:21:21] Trader I want to be green more I don't
+[00:21:23] want to have as many losses how do I
+[00:21:25] focus on being more consistent or
+[00:21:27] they'll say I want a better profit loss
+[00:21:28] ratio but my losers are huge and my
+[00:21:31] winners are kind of small I try to cut
+[00:21:33] my losses faster but it's not working
+[00:21:35] what should I do all right so this is
+[00:21:37] how I would approach
+[00:21:39] it what I know is that focusing on
+[00:21:43] accuracy is the starting point and this
+[00:21:45] in fact is the place where you can break
+[00:21:47] the cycle of a negative feedback loop if
+[00:21:50] you are already on one so if we go back
+[00:21:53] here and and let's just so I don't know
+[00:21:56] if we tied this back in so let me just
+[00:21:57] go pull up theart for you one second um
+[00:22:00] so if we're back on the chart here for
+[00:22:02] pfrx uh this was that this was that
+[00:22:04] first trade where I made about
+[00:22:05] $8,300 so right in here we got this dip
+[00:22:08] and this rip up to 760 so that was a
+[00:22:11] nice clean trade it ends up pulling back
+[00:22:13] kind of going sideways and then we got
+[00:22:16] another rip higher now this one was a
+[00:22:19] little tricky right here because we did
+[00:22:21] have these two topping Tails so I took
+[00:22:23] this trade but I took it with smaller
+[00:22:26] size because I recognize with these
+[00:22:28] topping Tails there was a potential of
+[00:22:30] another one and then to drop back down
+[00:22:32] so that was kind of a smaller green
+[00:22:34] trade and then we came back and we did
+[00:22:36] pulled back a little bit more we dipped
+[00:22:38] all the way back down here we end up
+[00:22:39] going sideways and then I'll show you
+[00:22:41] some of the next trades we're going to
+[00:22:43] switch over to a one minute chart so
+[00:22:46] before I do that let's finish um talking
+[00:22:48] about breaking the negative feedback
+[00:22:50] loop and instead getting yourself on a
+[00:22:52] positive feedback loop it begins with
+[00:22:54] accuracy so if you're struggling right
+[00:22:57] now this is what I would say
+[00:22:58] focus on on Focus everything you can on
+[00:23:03] improving your accuracy so how do we
+[00:23:05] improve our accuracy you start trading a
+[00:23:08] quality setups I can't tell you how many
+[00:23:11] Traders get caught trading lowquality
+[00:23:13] setups but it happens all the time you
+[00:23:15] start trading lowquality setups out of
+[00:23:18] desperation maybe you're just feeling
+[00:23:20] kind of bored you're sitting here you're
+[00:23:22] like I should trade something so it's
+[00:23:24] not there's nothing that's a quality so
+[00:23:25] I'll just trade this it's moving
+[00:23:27] whatever you start doing that what's
+[00:23:29] going to happen is you're trading low
+[00:23:31] quality stocks so your accuracy accuracy
+[00:23:34] is going to decline so let's say you're
+[00:23:35] typically trading at about 70% accuracy
+[00:23:38] so 70% accuracy is your average but you
+[00:23:40] go trading these low quality setups your
+[00:23:42] accuracy drops to 50% so what's now
+[00:23:44] happened is you've suffered a drop in
+[00:23:46] accuracy which means you've introduced
+[00:23:48] more losers by introducing more losers
+[00:23:50] especially on lowquality stocks some of
+[00:23:52] them are going to be big so now you're G
+[00:23:54] to have more losers that contribute to
+[00:23:57] your total average loss and because
+[00:23:59] you're introducing low quality setups
+[00:24:01] you're going to have some big losers
+[00:24:02] your profit loss ratio is going to
+[00:24:03] decline so your accuracy goes down that
+[00:24:06] directly drives down your profit loss
+[00:24:08] ratio and then that harms your
+[00:24:10] consistency right so let's go back to
+[00:24:12] the beginning focus on a quality stocks
+[00:24:15] a quality is going to increase your
+[00:24:17] profit loss ratio because you're cutting
+[00:24:19] out those outlier losses that are that
+[00:24:21] are really drawing down your your
+[00:24:23] metrics that increased profit loss ratio
+[00:24:26] then feeds higher consistency now you've
+[00:24:28] got higher consistency what does that
+[00:24:30] breed that breeds self-confidence so now
+[00:24:33] your Trader's got strong track record
+[00:24:35] You're Building confidence and you're
+[00:24:36] going to increase your share size you're
+[00:24:38] going to increase your trade quantity
+[00:24:40] and that increases your
+[00:24:42] profitability now you're on a positive
+[00:24:44] feedback loop so it's incredible when
+[00:24:47] you're on a positive feedback loop how
+[00:24:50] it feels night and day from when you're
+[00:24:52] kind of like down in the dumps you're in
+[00:24:54] a draw down you're just feeling hesitant
+[00:24:56] and when you hesitate you end up second
+[00:24:59] guessing yourself you end up missing a
+[00:25:00] stock that does exactly what you thought
+[00:25:02] it would do but you're you're just not
+[00:25:04] you're not on and you know what I know
+[00:25:06] what that's like and I get that too
+[00:25:07] sometimes when I get into a slump I'll
+[00:25:09] feel I'll hesitate more and then I
+[00:25:11] finally break the ice but I
+[00:25:13] overcompensate by getting in too high
+[00:25:15] with too much size and and it's like man
+[00:25:18] I just need to like reset my brain so
+[00:25:20] the way to reset if you're currently in
+[00:25:22] a negative feedback loop is to bring
+[00:25:24] down share size step one so you need to
+[00:25:26] bring down share size we'll go to this
+[00:25:28] side of the
+[00:25:29] Whiteboard so reduce your size step one
+[00:25:33] step two so size
+[00:25:36] down step two is um
+[00:25:40] focus on accuracy
+[00:25:43] quality so a quality and that means
+[00:25:47] you've got to understand what is a
+[00:25:49] quality so what is right now the profile
+[00:25:51] of a quality setups so what I'm going to
+[00:25:53] do for you guys is um I'm going to put
+[00:25:55] my stock selection
+[00:25:59] PDF guide as a link in the description
+[00:26:03] and pin at the top comments where you
+[00:26:04] guys can download it and this will break
+[00:26:06] down for you my 1 two 3 four five
+[00:26:10] criteria for stock selection that I'm
+[00:26:12] using in my trading right now to help me
+[00:26:14] find these big momentum stocks it's
+[00:26:18] important that you're trading the right
+[00:26:19] stocks so number one size down number
+[00:26:22] two focus on accuracy do not increase
+[00:26:25] size until you've had a stretch of at
+[00:26:27] least two weeks of green trading doesn't
+[00:26:30] have to be huge profit it's not about
+[00:26:32] making a lot of money it's just about
+[00:26:34] rebuilding that confidence because once
+[00:26:36] the confidence comes back then you'll
+[00:26:38] feel comfortable increasing your size
+[00:26:40] and getting more aggressive so let's
+[00:26:42] talk about my turning point that
+[00:26:44] happened back in June there was a big
+[00:26:45] turning point for me and it began with a
+[00:26:48] big red day this tends to always be the
+[00:26:51] case that it's a big red day kind of
+[00:26:53] hitting rock bottom where I'm like okay
+[00:26:56] what am I going to do differently here I
+[00:26:58] have a major problem I cannot keep
+[00:27:00] having red days like this and so what I
+[00:27:02] often do is I go back to the drawing
+[00:27:04] board and I say all right I just need to
+[00:27:05] put everything on the table and figure
+[00:27:07] out what I'm doing right and what I'm
+[00:27:09] doing wrong for those of you guys who
+[00:27:11] have seen the movie Apollo 13 do you
+[00:27:13] remember the scene where the astronauts
+[00:27:16] Tom Hanks are all up there in the space
+[00:27:18] shuttle and down at Houston right down
+[00:27:21] in I guess Texas probably right Houston
+[00:27:23] Texas I don't know um they're down there
+[00:27:26] and all the scientist that that work
+[00:27:29] there they put everything on a table
+[00:27:31] that the astronauts have in the space
+[00:27:33] shuttle everything they have they put it
+[00:27:34] on the table and they say we got to
+[00:27:35] figure out how to I think it was like a
+[00:27:37] CO2 carbon monoxide scrubber something
+[00:27:39] like that they had to figure out how to
+[00:27:40] create this with what they had and so
+[00:27:42] like putting together fans and I feel
+[00:27:44] like that's what we do as Traders we're
+[00:27:46] almost like scientists in a way research
+[00:27:50] um analysts I mean we've got to be like
+[00:27:52] so focused on our metrics and trying to
+[00:27:56] find discoveries at how to be better so
+[00:27:58] we're inquisitive we're just critical
+[00:28:01] thinkers we we want to do better always
+[00:28:04] and so what I ended up doing in June was
+[00:28:07] I kind of threw it all on the table and
+[00:28:08] I was like all right I got to dig into
+[00:28:09] my metrics and I got to figure out
+[00:28:11] what's going on because these big big
+[00:28:13] red days are are really not fun I'm
+[00:28:15] frustrated with them I've got to turn it
+[00:28:16] around and I can't believe I hadn't
+[00:28:18] noticed it before but this is what I
+[00:28:20] noticed on my losing days uh this year
+[00:28:23] my accuracy was only
+[00:28:26] 46% 46% % on my losing days whereas on
+[00:28:30] my green days it was close to 70% that's
+[00:28:32] what was giving me this kind of average
+[00:28:34] of like 65% I was trading more on green
+[00:28:36] days so my average is sort of skewed
+[00:28:38] higher to the to that level uh the red
+[00:28:40] days are sort of few and far between so
+[00:28:43] it's not that the AC the accuracy splits
+[00:28:46] exactly down the middle but on my red
+[00:28:47] days my accuracy was very poor so then I
+[00:28:50] thought to myself is there a way that I
+[00:28:52] could know that today is going to be a
+[00:28:55] red day sooner so that I could stop
+[00:28:56] trading now I wish my broker could give
+[00:28:59] me a signal like today's 90% chance
+[00:29:02] being a red day stop trading now and you
+[00:29:06] know what I I want to say that if Alexa
+[00:29:10] or Siri were like Ross today is about to
+[00:29:12] be a red day stop trading I'd be like
+[00:29:15] get out of here I am not listening to a
+[00:29:17] robot I know better but nonetheless it
+[00:29:21] would be nice because I feel
+[00:29:23] like I feel like Brokers could do more
+[00:29:27] to help encourage traders to slow down
+[00:29:31] when their statistics tell a story that
+[00:29:34] if you keep trading you're going to lose
+[00:29:36] more money the problem is there's a bit
+[00:29:37] of a conflict of interest on the one
+[00:29:39] hand the Brokers don't want to see you
+[00:29:40] blow up your account they want you to
+[00:29:42] trade for Forever on the other hand
+[00:29:45] short-term go goals as many of these
+[00:29:47] publicly trade companies that are
+[00:29:48] Brokers have they want you trading as
+[00:29:50] much as possible so you're generating
+[00:29:52] more um more more order flow and that
+[00:29:55] more that increased order flow creates
+[00:29:57] more profit for them on payment for
+[00:29:58] order flow so so nonetheless um I I
+[00:30:02] realized that my accuracy on these red
+[00:30:04] days is is really quite poor and I need
+[00:30:06] to to figure that out so this is what I
+[00:30:09] did I looked at my typical green days
+[00:30:12] and on my typical green days you know I
+[00:30:13] start strong typically with big size on
+[00:30:16] the first trade and I'm up like $122,000
+[00:30:19] First Trade boom home run right but the
+[00:30:23] problem is a typical red day I'm going
+[00:30:25] deep red because I'm getting smoked on
+[00:30:27] that for first trade and then what
+[00:30:29] happens when we go deep red right let's
+[00:30:31] go back to that um that negative
+[00:30:33] feedback loop big loss First Trade
+[00:30:37] emotion sad face maybe even a couple of
+[00:30:39] tears and and it's probably just
+[00:30:41] allergies but but maybe it's not so
+[00:30:44] really sad face and then desperation so
+[00:30:47] grasping at straws these are this is
+[00:30:50] these are straws I'm not an artist and
+[00:30:53] then what's that R what's that do it
+[00:30:55] increases your loss so now you start
+[00:30:56] spiraling and all of a sudden you're
+[00:30:59] sitting on a day where in a matter of
+[00:31:00] you know 15 minutes you go from break
+[00:31:04] even on the day so start the day to to
+[00:31:06] Max loss or more you just it just gets
+[00:31:08] worse and worse and worse so I proposed
+[00:31:12] a change uh and the the change I
+[00:31:15] proposed was that I would cap my share
+[00:31:17] size at one quarter of my full-size
+[00:31:21] position until I'm up 20 cents per share
+[00:31:25] in
+[00:31:26] profit and scale up to full size only if
+[00:31:30] I hit that first profit Target and I
+[00:31:32] said if I never cross that profit Target
+[00:31:35] The Profit profit Target on the day that
+[00:31:38] I would stay with quarter size for the
+[00:31:41] entire day the max loss is always the
+[00:31:43] same as my daily goal so whatever your
+[00:31:44] daily goal is to Max loss is the same so
+[00:31:47] the idea here was that instead of
+[00:31:50] trading big size on that first trade and
+[00:31:53] yes potentially getting a nice big
+[00:31:55] winner which would be great but exposing
+[00:31:57] myself on that highest risk trade of the
+[00:31:59] day of going deep into the red that
+[00:32:02] instead I would wait I would be calm
+[00:32:04] cool and collected and I would on those
+[00:32:06] first trades I would break the ice with
+[00:32:09] a quarter of full size and if that trade
+[00:32:11] was a winner now I've got a profit
+[00:32:14] cushion I'm starting to build a little
+[00:32:15] bit of a cushion and that's something
+[00:32:17] that I can work with I can scale into
+[00:32:19] that and if it's a red day then it's
+[00:32:21] like okay I'm glad I was at quarter size
+[00:32:23] for the first trade I'll take a second
+[00:32:25] trade but still at quarter size if it's
+[00:32:27] a second red trade then it's like wow
+[00:32:29] this Market's not good so I'm now down
+[00:32:31] on two losses a quarter of what I would
+[00:32:33] have been down if I was trading with
+[00:32:34] full size so now the loss if it's going
+[00:32:36] to be a red day is going to be smaller
+[00:32:38] if I take a third loss I say you know
+[00:32:40] what three strikes you're out this is
+[00:32:42] not happening it's just this Market is
+[00:32:43] cold and I'm out with a quarter of what
+[00:32:46] would have been the loss if I had been
+[00:32:48] trading with full size and and honestly
+[00:32:50] probably even less because I'm not
+[00:32:52] emotionally hijacked I'm not frustrated
+[00:32:55] I'm not going through this spiral I'm
+[00:32:56] just accepting that all right you know
+[00:32:59] it's not happening and I'm out and it's
+[00:33:01] okay to have small red days this is a
+[00:33:03] thing that so many beginner Traders
+[00:33:05] struggle with they refuse to allow
+[00:33:07] themselves to have small red days small
+[00:33:10] red days are healthy in totality if you
+[00:33:12] are green over the course of days and
+[00:33:15] weeks and months individual days don't
+[00:33:18] really matter it's the big picture that
+[00:33:21] matters so it's not a big deal to have
+[00:33:24] small red days you've got to be able to
+[00:33:26] take those red days with grain of salt
+[00:33:28] and so by implementing that change my
+[00:33:32] days changed a little bit my typical
+[00:33:33] Green Day I'm not hitting that big home
+[00:33:35] run on the first trade I'm kind of
+[00:33:37] legging in breaking the ice getting a
+[00:33:39] little bit of a cushion Now using that
+[00:33:41] cushion to take risk on my next trades
+[00:33:43] and working my way up towards my daily
+[00:33:45] goal which is $5,000 5,000 a day is a
+[00:33:47] million dollars a year now this year I'm
+[00:33:49] above the daily goal right now at 1.9
+[00:33:51] million so this year I've had a lot of
+[00:33:53] days where I cross the daily gold and
+[00:33:55] just for reference for those that are
+[00:33:56] curious when I hit my daily goal I don't
+[00:33:59] stop trading I don't stop trading just
+[00:34:01] because I hit the goal if the Market's
+[00:34:03] hot and I hit my goal in my first three
+[00:34:04] trades that's awesome I'm going to keep
+[00:34:07] trading I'm going to stop trading once I
+[00:34:09] give back usually about 10% off the top
+[00:34:12] and I just feel like H you know what
+[00:34:13] it's not happening anymore it's best for
+[00:34:15] me just to you know call it a day uh but
+[00:34:18] this is also a very typical day where I
+[00:34:20] go in the red but it's not deep red I'm
+[00:34:22] not emotional I'm not super frustrated
+[00:34:25] it's just a small loss it's no big deal
+[00:34:27] and stay focused trading with small size
+[00:34:29] and then once I rally up and I get my
+[00:34:32] cushion then I size up now the trick is
+[00:34:34] if I go back down to below my my initial
+[00:34:37] first profit Target I've got a size back
+[00:34:39] down and then on a red day here yes I
+[00:34:41] went red $3,000 Max loss is 5 grand this
+[00:34:45] is a tolerable loss I can handle that so
+[00:34:48] after this change I proceeded to have 47
+[00:34:51] consecutive green days in a row and I
+[00:34:53] realized that in
+[00:34:55] theory I should never have another red
+[00:34:58] day now this is kind of crazy but here's
+[00:35:02] why it's true in theory I'll never have
+[00:35:05] another red day because as long as I can
+[00:35:08] take 10 more trades every single day and
+[00:35:12] I if I can maintain 65 75% accuracy I'll
+[00:35:15] will be green so in theory I'll never
+[00:35:17] have another red day in reality that's
+[00:35:20] not the case because if I'm going to be
+[00:35:22] focused on trading a quality setups
+[00:35:24] there will be days where there aren't
+[00:35:26] going to be 10 more trades so
+[00:35:28] unfortunately I run out of setups I run
+[00:35:30] out of time the window closes and I do
+[00:35:32] have to book a red day so I've had a few
+[00:35:34] red days um which is fine I've had I've
+[00:35:36] taken a few red days here you know over
+[00:35:38] the the last um few months but for the
+[00:35:40] most part they've been um they've been
+[00:35:42] pretty small and they've been pretty
+[00:35:43] moderate so this is kind of what I've
+[00:35:45] noticed um with the quality filter if
+[00:35:48] you're focusing on a quality setups I
+[00:35:50] can I can maintain 80 90% accuracy with
+[00:35:53] a quality setups 2 to1 profit loss ratio
+[00:35:55] in a hot Market I might get 5 to 10
+[00:35:57] really really good trades a day but in a
+[00:35:59] cold Market well it's going to slow down
+[00:36:02] this carried over to the next line but
+[00:36:03] it might only be like 1 to three maybe
+[00:36:05] not
+[00:36:06] even however so in a cold Market you're
+[00:36:08] like ah there's only one two setups
+[00:36:10] maybe I'll take some B quality setups
+[00:36:13] introduce more trades your accuracy is
+[00:36:15] going to go down if you do that your
+[00:36:17] profit loss ratio is going to go down
+[00:36:19] but you will get more trades you go to C
+[00:36:21] quality your accuracy is going to go
+[00:36:23] down even more you will also get more
+[00:36:24] trades but your profit loss ratio is
+[00:36:26] going down and so is is it worth it and
+[00:36:28] so I think that there is a line here
+[00:36:32] where if and this is going to be kind of
+[00:36:34] an interesting graph but if you only
+[00:36:37] trade a quality setups um you know you
+[00:36:40] can make money but you're going to be
+[00:36:42] limited by the fact that well that was
+[00:36:45] my one two three trades of the day I
+[00:36:46] can't take any more trades so and this
+[00:36:49] is sort of total profit so now let's say
+[00:36:51] you get your a quality setups those are
+[00:36:53] done now you introduce B quality setups
+[00:36:55] so B quality maybe can't make as much
+[00:36:58] money but you can make a little bit your
+[00:36:59] accuracy is a little lower so you get
+[00:37:01] maybe five trades here and then you say
+[00:37:03] I'm going to do some C quality setups so
+[00:37:05] now what's going to happen here if the
+[00:37:07] Market's hot maybe you keep going higher
+[00:37:10] if it's cold well now maybe you start
+[00:37:12] giving back profit now you start give
+[00:37:14] back profit say well now I'm just going
+[00:37:15] to trade whatever because now I'm
+[00:37:16] frustrated and now you start to really
+[00:37:19] come back down so there is a point of
+[00:37:21] diminishing returns here's where I like
+[00:37:24] to trade right around here the reason I
+[00:37:26] like to trade here is because I like to
+[00:37:27] know that I've hit my Peak and come down
+[00:37:30] you won't know that you've peaked unless
+[00:37:32] you start to come down a little bit off
+[00:37:33] the top so if I stop while I'm still on
+[00:37:36] the onramp I ask myself well how much
+[00:37:39] more could I have made if I just kept
+[00:37:40] trading so giving back a little off the
+[00:37:43] top for me is a good exit indicator to
+[00:37:45] walk away and that can be 10 to 15% off
+[00:37:48] the top and that's just a healthy time
+[00:37:50] to walk away if I give back 50% that's
+[00:37:53] like a hard stop I have to stop because
+[00:37:57] if I give back half my profit I'm going
+[00:37:59] to become emotionally fueled I'm going
+[00:38:00] to get frustrated I'll be disappointed
+[00:38:02] and that's when I'm going to be more AP
+[00:38:03] to make mistakes there's this book here
+[00:38:05] that I like to recommend quit the power
+[00:38:07] of Knowing When to Walk Away written by
+[00:38:10] Annie Duke professional poker player and
+[00:38:12] it's really a terrific book so I think
+[00:38:13] that this would be worth you can listen
+[00:38:15] to it on audio book you don't have to
+[00:38:16] read it um if you if you don't like
+[00:38:18] reading but um but in any case it is it
+[00:38:20] is a book worth checking out so when it
+[00:38:23] comes to trading I think there is kind
+[00:38:24] of a sweet spot there of introducing
+[00:38:26] lower quality setups it's going to hurt
+[00:38:28] your accuracy but increase total trade
+[00:38:30] quantity and in a hot Market it can be
+[00:38:32] worth it and so the question is right
+[00:38:34] now what's your accuracy so something
+[00:38:36] that I actually started doing is while
+[00:38:38] I'm trading I've got a little whiteboard
+[00:38:40] like this and you know I listen I'm not
+[00:38:42] going to put some of you guys are going
+[00:38:43] to say Ross where's the link to the
+[00:38:44] Whiteboard I'm not going to put an
+[00:38:46] affiliate link to an $1 whiteboard on
+[00:38:48] Amazon I don't do that here there's no
+[00:38:50] affiliate link so any of the tools I
+[00:38:52] recommend any of the Brokers that I
+[00:38:54] suggest any of the software whatever
+[00:38:56] there's no affiliate links I don't get
+[00:38:58] compensated it's just whatever you like
+[00:39:00] so if you like it use it I like some of
+[00:39:02] these things so I'm going to use them so
+[00:39:03] this is a whiteboard that I like I'm not
+[00:39:05] going to make a official recommendation
+[00:39:07] on it but in any case um so so so here's
+[00:39:10] the thing what I like to do is uh while
+[00:39:12] I'm trading I'll just have a
+[00:39:14] winners and a losers column and I just
+[00:39:18] kind of start to track
+[00:39:19] it loser you know another winner another
+[00:39:22] loser so you know I started seeing all
+[00:39:24] right you know I've got eight trades
+[00:39:25] here you know nine 10 trades
+[00:39:27] approximately what's my accuracy right
+[00:39:29] so so kind of keep a running like where
+[00:39:31] I'm at 70% cuz if I start the day with
+[00:39:34] three losers then what do I know I'm
+[00:39:36] already at 0% accuracy and now even if I
+[00:39:40] have one winner I'm still going to be at
+[00:39:41] only 25% accuracy if I have two winners
+[00:39:44] three winners I'm only getting up to 50%
+[00:39:46] so like when I start with big losses I
+[00:39:48] immediately am putting the sort of I'm
+[00:39:50] setting the bar really high which is why
+[00:39:52] it comes back at the very beginning what
+[00:39:55] do we first have to focus on if we want
+[00:39:57] to be consistent Traders we have to
+[00:39:59] focus on accuracy accuracy is number one
+[00:40:03] creating that strong positive feedback
+[00:40:05] loop high accuracy improves your profit
+[00:40:08] loss ratio improves your consistency
+[00:40:09] improves your self-confidence and that's
+[00:40:11] where things really start to to pick up
+[00:40:13] speed so when we look at my trades from
+[00:40:15] today you could see I'm up currently $
+[00:40:19] 76,120,000
+[00:40:23] came from pfx 21,00 ,000 came from TP
+[00:40:29] 3,000 came from BPTH 500 came from Pho
+[00:40:34] and then I have these three stocks that
+[00:40:35] I was read on but here's the thing I
+[00:40:38] started today at zero right that was
+[00:40:40] where I started what's my profit Target
+[00:40:43] 5,000 what's my Max loss 5,000 right so
+[00:40:46] that's what I know at the beginning of
+[00:40:47] the day every single day my my profit
+[00:40:49] Target daily goal and my Max loss I
+[00:40:52] don't know what the day is going to give
+[00:40:53] me but what I do know is that yesterday
+[00:40:55] we had some incredible momentum we had a
+[00:40:57] stock that over the last three days went
+[00:40:59] up like 2,000% so unbelievable strength
+[00:41:02] that's great to see the market is high
+[00:41:05] so when I first sat down this morning
+[00:41:07] the first thing I do is I pull up my
+[00:41:09] scanners so again if you download the
+[00:41:12] stock selection PDF that's pinned in the
+[00:41:14] comments you'll know how I analyze these
+[00:41:16] stocks that are on my scanners right
+[00:41:18] here to decide which one to trade now
+[00:41:20] pfx is the one that I traded of course
+[00:41:22] that I did the best on U PBM is one that
+[00:41:25] I traded earlier and I actually lost
+[00:41:27] $690 on it it finally pulled away here
+[00:41:31] at about like 11:00 a.m. or so kind of
+[00:41:34] right when I started teaching this
+[00:41:35] episode so that's great to see I didn't
+[00:41:38] get any profit on it maybe I left some
+[00:41:42] money on the table not trading that but
+[00:41:44] that's fine um I traded earlier and lost
+[00:41:46] uavs I lost and U nukk I lost on as well
+[00:41:50] but those losses were tolerable so
+[00:41:53] here's the deal I started the day first
+[00:41:55] trade out of the day a quality set up
+[00:41:57] boom I'm immediately up and we should
+[00:41:59] probably bring this scale in just to be
+[00:42:01] because it's going to be we're not going
+[00:42:03] to be able to go up to 76,000 so
+[00:42:05] immediately First Trade I'm up
+[00:42:07] $88,000 within the next couple trades
+[00:42:10] I'm up 20,000 so I got myself up 20,000
+[00:42:13] real quick today now I ended up dipping
+[00:42:16] down to um 18,000 right here and then
+[00:42:20] rallying back up to uh 288,000
+[00:42:24] 28,000 and very quickly I got myself up
+[00:42:27] to uh
+[00:42:29] 44,000 and when I got to 44,000 that was
+[00:42:32] on um TP TP was squeezing so as I made
+[00:42:37] my way up and then eventually got myself
+[00:42:39] all the way up to
+[00:42:40] 76,000 um I never was risking going more
+[00:42:43] red well than my Max loss I was
+[00:42:45] comfortable with but my first trade the
+[00:42:47] risk that I took was minus 2,500 so that
+[00:42:50] was my initial risk coming into the day
+[00:42:53] I took that risk on my first trade if I
+[00:42:56] had lost on it then on the next trade I
+[00:42:58] would had to be careful now 25,000
+[00:43:00] shares is a big position that's not
+[00:43:02] really a quarter of my full size today
+[00:43:05] my full size
+[00:43:07] today full full full size right now
+[00:43:09] probably 75,000 shares full full size
+[00:43:12] and that would be on a stock that's
+[00:43:13] super liquid and is lower priced now for
+[00:43:16] reference um pfrx is too expensive right
+[00:43:19] now to take that kind of size tpet is
+[00:43:21] got 100 million shares of volume 75,000
+[00:43:23] shares maybe um PBM has 57 million
+[00:43:28] shares of volume so we need like a lot
+[00:43:31] of volume for me to take that kind of
+[00:43:32] size but nonetheless so today was
+[00:43:34] starting with you know closer to you
+[00:43:36] know third to even maybe half of full
+[00:43:39] size which was a calculated uh decision
+[00:43:42] to take a little bit more risk because
+[00:43:44] this Market's been hotter and my average
+[00:43:46] daily gain's been higher so you need to
+[00:43:48] be able to kind of adjust your share
+[00:43:50] size based on your risk tolerance and
+[00:43:52] what you're comfortable with but that
+[00:43:54] was my initial risk right there and this
+[00:43:56] is what I ended up producing so we ended
+[00:43:58] up having obviously a really solid day
+[00:44:00] today and it began with pfrx so pfx
+[00:44:05] sorry I keep um this one's a tricky one
+[00:44:07] for me so first trades on it built the
+[00:44:11] cushion early in the morning and then
+[00:44:13] what was kind of interesting was this is
+[00:44:14] where I got my initial cushion on um pfx
+[00:44:18] trading through this move right at 7
+[00:44:21] a.m. as we squeezed up to a high of
+[00:44:23] eight right so we had um this first can
+[00:44:27] sort of back this up here for a second
+[00:44:29] so and you know what's interesting is on
+[00:44:31] this one I actually was looking at it
+[00:44:34] let's see on the one minute chart I was
+[00:44:36] actually watching it right through here
+[00:44:38] and I was looking at it right down here
+[00:44:40] for an entry off of support but what
+[00:44:43] threw me off was that I couldn't find
+[00:44:45] the Catalyst I couldn't figure out why
+[00:44:47] the stock was squeezing and so I was
+[00:44:49] like I don't know sometimes what you
+[00:44:51] have happened is after a day with really
+[00:44:53] hot momentum which we had yesterday
+[00:44:56] Traders will jump on anything that's
+[00:44:57] moving but those moves don't sustain
+[00:45:00] because the stock doesn't really have
+[00:45:01] any business being up that much and ends
+[00:45:03] up rolling over so it's very common to
+[00:45:06] have a big red day right after a Big
+[00:45:08] Green Day and so you sort of have to be
+[00:45:10] careful of that and that's what I was
+[00:45:11] worried about today so anyways um so I
+[00:45:15] had my I broke the ice with the first
+[00:45:17] trades um let's see what what time was
+[00:45:19] this this was um right in this area when
+[00:45:22] we got this micro pullback which I
+[00:45:23] showed you on the 10-second chart and
+[00:45:25] then then it ends up ripping High higher
+[00:45:27] goes up to a high of um 827 on this uh
+[00:45:30] second pullback so by this area right
+[00:45:33] here I was already up $20,000 so I had
+[00:45:35] $20,000 of profit in my pocket that was
+[00:45:38] solid but then it starts to pull back
+[00:45:40] it's pulling back and I'm like all right
+[00:45:42] well darn you know I guess I don't know
+[00:45:44] I guess maybe it's not going to work so
+[00:45:46] at that point I switched to trading nukk
+[00:45:49] nukk was one of the strong moves from
+[00:45:51] yesterday and I traded it this
+[00:45:54] morning uh and I got in on this pullback
+[00:45:58] right here it rallies all the way up to
+[00:46:00] here and I did something risky I added
+[00:46:04] full size at $80 a share it brought my
+[00:46:08] cost basis from way down here all the
+[00:46:10] way up to here and in the next
+[00:46:13] candle came all the way down I had
+[00:46:16] unrealized profit and I took the risk it
+[00:46:18] was a calculated risk to double my
+[00:46:20] position for the Breakthrough
+[00:46:21] yesterday's high and a squeeze up
+[00:46:23] towards $100 a share and I lost on it
+[00:46:26] and I went red on that by $3,300 so that
+[00:46:29] was disappointing but I already had such
+[00:46:31] a big cushion on the day that I felt
+[00:46:32] that I could afford that risk and so
+[00:46:34] that was fine so then uh then all of a
+[00:46:37] sudden we have TP that pops up on the
+[00:46:39] scanner so TP pops up on the scanner uh
+[00:46:43] Trio petroleum and initially I'm like
+[00:46:45] petroleum I don't know but this thing
+[00:46:48] squeezed up like this it goes sideways
+[00:46:50] right here and all of a sudden there it
+[00:46:52] goes so as it started to pull away right
+[00:46:54] here that was that really nice dip entry
+[00:46:56] this round up all the way to 360 it
+[00:46:59] pulls back it rips higher so I made the
+[00:47:01] bulk of my profit on tpet right in this
+[00:47:05] area from $2 to $3 really solid trading
+[00:47:09] pulls back gives us one more push up
+[00:47:11] here but remember with that toing tail
+[00:47:13] this was a difficult spot to enter in
+[00:47:16] fact today there was an interesting
+[00:47:17] pattern where stocks were kind of going
+[00:47:18] straight up straight up without really a
+[00:47:21] one minute pullback the biggest
+[00:47:23] pullbacks we were seeing were on the
+[00:47:25] 10-second chart on the 10-sec chart we
+[00:47:27] were getting a decent little pullback um
+[00:47:30] but but on the one minute it it just
+[00:47:32] wasn't really waiting so 10-second
+[00:47:33] pullback here 10c pullback here one
+[00:47:36] right there so anyway so I traded the
+[00:47:38] 10-second pullbacks on TP locked up
+[00:47:41] $21,000 on that and then coming into the
+[00:47:44] open
+[00:47:46] pfx is back in play and this thing
+[00:47:49] unbelievable at the open it literally
+[00:47:52] goes from
+[00:47:54] $4 four $5 share from $5 to nearly
+[00:47:59] 17 this move was unbelievable had
+[00:48:02] multiple halts up dip and rip and this
+[00:48:05] is just classic momentum trading now to
+[00:48:08] get you really dialed in on exactly
+[00:48:11] where I get in and where I get out on
+[00:48:13] these you've got to be focusing on the
+[00:48:15] one minute chart and the 10-second chart
+[00:48:18] on the 10-second chart that's where
+[00:48:19] you're going to see these dips and
+[00:48:20] they're going to be a lot more clear
+[00:48:22] these are momentary pullbacks that's all
+[00:48:24] the Stock's willing to give as a
+[00:48:25] momentary dip before the rity back up
+[00:48:27] and if you want to learn how to trade
+[00:48:29] those micro pullbacks I will also put a
+[00:48:31] link in the description you can download
+[00:48:33] my stock selection PDF and my micro
+[00:48:36] pullback PDF that micro pullback PDF is
+[00:48:39] a strategy that I Implement every single
+[00:48:41] day when I'm trading and I use it
+[00:48:43] specifically on strong stocks like this
+[00:48:45] because they often I mean this thing
+[00:48:46] went from $5 to nearly 17 without having
+[00:48:49] a proper pullback it just kept going
+[00:48:51] higher and higher and higher if we look
+[00:48:53] at PBM you're going to see pretty much
+[00:48:55] the same thing this stock just rallies
+[00:48:57] from 250 all the way up to 8 hardly
+[00:49:00] pulls back at all this one um you know
+[00:49:03] parabolic in a couple little stretches
+[00:49:05] here a couple bigger red candles there
+[00:49:07] uh macd is now negative on this uh
+[00:49:09] position but overall some really decent
+[00:49:13] action today so here's what I can tell
+[00:49:14] you the market is hot and the best time
+[00:49:18] to learn how to trade was 5 years ago
+[00:49:20] that way you're already a successful
+[00:49:22] Trader you're coming into the market
+[00:49:23] right now and you're able to fire in all
+[00:49:25] cylinders the next best time to learn
+[00:49:26] learn is today so by watching these
+[00:49:29] episodes by watching as many episodes
+[00:49:31] that you can that I've uploaded here on
+[00:49:32] YouTube You're immersing yourself in the
+[00:49:35] language of the financial markets you're
+[00:49:36] just going to start hearing me speak the
+[00:49:38] language and you're going to start to
+[00:49:40] learn it so learning how to trade that
+[00:49:42] means learning technical analysis
+[00:49:44] learning how to choose the strongest
+[00:49:45] stocks each day and I encourage you to
+[00:49:47] download my stock selection PDF and my
+[00:49:49] micro pullback strategy PDF and hey if
+[00:49:51] you want to watch over my shoulder while
+[00:49:53] I'm trading it's no secret you can come
+[00:49:55] over here to Warrior trading and you'll
+[00:49:56] see my p&l you'll see me getting in and
+[00:49:58] out of these stocks in real time so I
+[00:50:01] think there's nothing better than
+[00:50:02] getting the realtime Market commentary
+[00:50:04] from someone who's been in the market
+[00:50:05] for as long as me I can share with you
+[00:50:08] the insights that I gain from educated
+[00:50:11] intuition from all the years I've been
+[00:50:13] trading you know I've been able to get
+[00:50:14] to a place where I have a sense of where
+[00:50:17] stocks are going to go now I'm not right
+[00:50:19] 100% of time I have losses just like
+[00:50:21] anyone else and you'll see my biggest uh
+[00:50:23] green days here on YouTube you'll see my
+[00:50:25] biggest red days as well I don't s it
+[00:50:26] under the carpet I do red day Recaps
+[00:50:28] when they come um but the last Red day I
+[00:50:31] had uh was in
+[00:50:35] November uh let's see so the last Red
+[00:50:37] day was oh it was actually the last day
+[00:50:39] of November it was um yeah that was that
+[00:50:41] was annoying yeah I remember that now
+[00:50:43] yeah $6,000 and that was again one of
+[00:50:45] those days where it was like all right
+[00:50:46] you know I'm just out of time I'm I'm
+[00:50:48] not going to be able to recoup my losses
+[00:50:51] uh it's just not going to happen I still
+[00:50:52] finished the month of November with
+[00:50:55] $339,000 of gross profit as we come into
+[00:50:58] December right now not including today's
+[00:51:00] profit I'm already at 359 so today
+[00:51:03] that's going to put it up over $400,000
+[00:51:05] on the month and right now to me pedal
+[00:51:08] is to the metal the Market's hot I want
+[00:51:10] to try to be aggressive I want to try to
+[00:51:12] capitalize when the windows open because
+[00:51:13] you never know how long the Market's
+[00:51:15] going to be hot for the market goes
+[00:51:16] through es and flows hot streaks and
+[00:51:18] cold streaks so when it's hot I want to
+[00:51:21] amplify my risk I still want to focus on
+[00:51:23] a quality setups but I want to be more
+[00:51:25] aggressive that means taking larger
+[00:51:26] position position sizes and trying to
+[00:51:28] jump in a little faster now that
+[00:51:29] strategy in a cold Market will not work
+[00:51:32] so you've got to be able to adapt
+[00:51:33] between hot and cold markets and that's
+[00:51:35] when you get really good at putting the
+[00:51:36] pill of the metal and then quickly
+[00:51:38] easing off the throttle and I'll tell
+[00:51:40] you that is one of the hardest things
+[00:51:42] for successful traders to get good at
+[00:51:44] even Traders I've known who have made
+[00:51:45] over a million dollars who've been doing
+[00:51:46] this for years they still struggle with
+[00:51:49] doing really well during a hot streak
+[00:51:51] and then giv back 20% of it in 2 days
+[00:51:54] when the market cools off I've been
+[00:51:56] there too so what I think is the better
+[00:51:59] you can get at starting each day a
+[00:52:02] smaller size building your cushion kind
+[00:52:04] of getting a feeler is today going to be
+[00:52:06] that red day or is it a green day that's
+[00:52:08] going to be good I don't want to be
+[00:52:09] negative and and kind of have you coming
+[00:52:11] in every day like oh today could be a
+[00:52:12] red day but on the other hand we have to
+[00:52:15] think about risk first that's what
+[00:52:17] separates Traders from gamblers we're
+[00:52:19] really thinking about risk and asking
+[00:52:20] ourselves can we get a good risk reward
+[00:52:23] ratio on this trade if we can't I can't
+[00:52:25] take it listen if you've enjoyed this
+[00:52:27] episode thank you so much I hope you hit
+[00:52:29] the thumbs up I hope you subscribe to
+[00:52:30] the channel and I'll see you for the
+[00:52:31] next upload real soon and let me remind
+[00:52:33] you that trading is risky my results
+[00:52:34] aren't typical so please manage your
+[00:52:36] risk take it slow and I'll see you back
+[00:52:37] here for the next episode real soon

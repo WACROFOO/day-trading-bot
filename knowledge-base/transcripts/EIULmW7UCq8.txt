@@ -1,0 +1,895 @@
+# How to Day Trade using TradeZero (Platform Demo & Honest Review)
+# https://www.youtube.com/watch?v=EIULmW7UCq8
+# duration_sec: 2143
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to teach
+[00:00:02] you how to day trade using trade zero
+[00:00:04] this episode will be a platform demo
+[00:00:06] where I'm going to walk you through how
+[00:00:08] I create my layout and how I've
+[00:00:09] optimized the trade zero desktop
+[00:00:11] software for my day trading strategy at
+[00:00:14] the end of this episode I'm going to
+[00:00:15] give trade zero a Ross score but I'm
+[00:00:17] going to share with you whether or not I
+[00:00:18] would use this account with real money
+[00:00:21] both with a small account or if I would
+[00:00:23] consider using them as my primary
+[00:00:24] day-to-day trading account now one thing
+[00:00:27] I'll say at the beginning of this
+[00:00:28] episode is that trade zero is a very
+[00:00:30] popular broker dealer and one of the
+[00:00:32] reasons they're so popular is because
+[00:00:34] they have an international branch and
+[00:00:36] for international customers who sign up
+[00:00:38] through their international branch they
+[00:00:40] get six times leverage so if you put in
+[00:00:43] $1,000 you could trade with up to
+[00:00:45] $66,000 of buying power which is amazing
+[00:00:49] and they do not enforce the pattern day
+[00:00:52] trader rule however that is only for
+[00:00:55] international clients so sometimes us
+[00:00:57] Traders will be looking for an
+[00:00:59] international broker dealer so they can
+[00:01:01] get around the pattern day trader rule
+[00:01:03] but trade zero with their international
+[00:01:05] branch does not accept us customers for
+[00:01:07] that purpose now they also have a US
+[00:01:10] Branch but the US Branch requires the
+[00:01:12] standard $25,000 to day trade in a
+[00:01:15] margin account but for international
+[00:01:16] Traders Trad zero is very popular and
+[00:01:18] you know what Trad zero is also very
+[00:01:20] popular for short sellers for a couple
+[00:01:22] very specific reasons we're going to get
+[00:01:25] into that as we dive into this episode
+[00:01:27] so through this episode I'm also going
+[00:01:29] to share with you a a a broker
+[00:01:30] comparison where we're going to look at
+[00:01:33] a number of different broker dealers
+[00:01:34] here and rank how trade zero Compares
+[00:01:38] now on the most key elements that I
+[00:01:41] require for my day trading strategy
+[00:01:43] trade zero ranks well they have level
+[00:01:46] two that's a must they have hot keys on
+[00:01:48] the desktop they allow offsets on the
+[00:01:51] hot Keys you can sell by percentage of
+[00:01:53] your position and they show H levels
+[00:01:55] okay so these are really to me some of
+[00:01:57] the most important and trade zero has
+[00:02:00] all of them now we're going to go
+[00:02:01] through all of these in a moment but
+[00:02:03] let's just step back and take a look at
+[00:02:05] the trade zero desktop software so when
+[00:02:07] you first install it on your computer it
+[00:02:09] comes um preloaded with kind of a simple
+[00:02:12] layout I have um a screenshot of it
+[00:02:15] right here it's you know it's fine um
+[00:02:18] it's just sort of a standard layout but
+[00:02:20] not exactly what I was looking for now
+[00:02:23] by the way when I first created My Demo
+[00:02:25] account uh it it rejected me I think
+[00:02:29] maybe because they already had my email
+[00:02:30] in their system but I I don't really
+[00:02:32] know I use a different email and I was
+[00:02:34] able to get the download link and from
+[00:02:36] that link download trade z uh Zer Pro
+[00:02:40] right here which is their desktop
+[00:02:42] software they also have webbased
+[00:02:44] software and um mobile a mobile app
+[00:02:47] which you could check out as well all
+[00:02:49] right so then you get logged in here
+[00:02:50] with your username and your password and
+[00:02:52] you are good to go all right so I
+[00:02:55] immediately needed to sort of adjust
+[00:02:57] this platform to my standard so let me
+[00:02:59] show you you um just as an example here
+[00:03:02] this software that you're going to see
+[00:03:04] right here is Light Speed trading so and
+[00:03:07] by the way I'll just tell you right now
+[00:03:08] I don't have any affiliate relationship
+[00:03:10] with trade zero with light speed with
+[00:03:12] any broker dealer so everything I'm
+[00:03:13] sharing with you here is just my honest
+[00:03:15] opinion of the platforms that I like
+[00:03:17] that I think are really great but it's
+[00:03:19] not colored by me getting a commission
+[00:03:20] if you sign up so sign up where you want
+[00:03:23] don't sign up where you don't want it's
+[00:03:24] it's really up to you I'm just sharing
+[00:03:26] based on all my years of trading
+[00:03:27] experience the type of things that I
+[00:03:29] think are must haves in trading software
+[00:03:33] so the way I lay out my software is I
+[00:03:36] have four level two windows which you
+[00:03:38] can see right here now with light speed
+[00:03:41] they change the color of the one that's
+[00:03:43] in focus to be you can have it be
+[00:03:44] brighter and has this yellow ring around
+[00:03:46] it and that's important because that's
+[00:03:49] the window that your hot keys are going
+[00:03:50] to work on so you kind of want to know
+[00:03:53] like which if I send a hotkey which
+[00:03:55] order which window is it going to go
+[00:03:56] through um and then in the top left I
+[00:04:00] have my positions window here which just
+[00:04:01] shows me the stock the position size the
+[00:04:04] cost basis the open p&l and the realized
+[00:04:06] p&l active orders sit here so if I place
+[00:04:09] an order on this down here for instance
+[00:04:12] it's going to sit there and active
+[00:04:13] orders so I like to know if I have an
+[00:04:16] active order live before I close my
+[00:04:18] platform for the day cancel and executed
+[00:04:20] orders are here news window is here so
+[00:04:24] this is pretty much how I this is the
+[00:04:27] layout that I'm accustomed to so I try
+[00:04:29] to replicate this whenever I set up a
+[00:04:32] different platform so one thing that
+[00:04:34] I'll say as sort of my one of my first
+[00:04:37] observations um is when I open this up I
+[00:04:41] click on the market depth so Market
+[00:04:43] depth is going to open up a level two
+[00:04:44] window I start popping them out so I
+[00:04:46] popped out four of them and immediately
+[00:04:48] I'm like this is great visually this is
+[00:04:50] exactly what I look for um you can go
+[00:04:52] into preferences and you can change from
+[00:04:55] the this gradient to the old classic to
+[00:04:58] the Sterling green I use the old classic
+[00:05:01] personally I actually prefer as you
+[00:05:03] could see on my light speed account to
+[00:05:05] have the green on top so I have the
+[00:05:07] colors a little bit different I think
+[00:05:09] the coloring that I have is maybe what
+[00:05:11] was standard on um uh eade many years
+[00:05:15] ago when I was using it so that's what I
+[00:05:17] got used to but anyways doesn't really
+[00:05:19] matter so you can apply that some
+[00:05:22] platforms do let you actually rightclick
+[00:05:25] and you can change the colors there um
+[00:05:28] this doesn't seem to give that option
+[00:05:30] but that's all right so anyway so I got
+[00:05:33] this set up and you can also link your
+[00:05:35] windows so here you could see my chart
+[00:05:38] has a a right there so ABC D blah blah
+[00:05:41] blah blah so you can link this to a and
+[00:05:44] then what'll happen is if we change this
+[00:05:46] it'll change this so now our windows are
+[00:05:48] linked together and that's a very nice
+[00:05:50] intuitive way to have your windows
+[00:05:52] linking it's logical uh there's other
+[00:05:55] software out there that allows you to
+[00:05:57] link but you have to do some weird
+[00:05:59] clicking and it's very you would have to
+[00:06:01] go into the instruction manual to figure
+[00:06:03] it out you don't have to do that with
+[00:06:04] this it's pretty straightforward you can
+[00:06:06] figure it out pretty easily so we'll
+[00:06:08] switch back to this ticker
+[00:06:09] GCL so we've got our time and sales here
+[00:06:13] uh we got our sorry our time and sales
+[00:06:14] right here and we've got our level two
+[00:06:17] right here and for the most part there's
+[00:06:20] nothing I would really change about this
+[00:06:22] this works for me just fine now I'll
+[00:06:25] I'll preface by saying this is not a
+[00:06:28] funded account this is an account that I
+[00:06:30] just set up the demo just to walk you
+[00:06:33] through how to use this software the the
+[00:06:36] primary reason that people would use
+[00:06:38] trade zero would be number one you're
+[00:06:41] International and you're looking for a
+[00:06:42] broker that offers six times leverage
+[00:06:44] and doesn't enforce the PDT rule or
+[00:06:47] number two you're a short seller and you
+[00:06:49] either don't mind opening the US Branch
+[00:06:51] or you're an international short seller
+[00:06:53] because trade zero has a great inventory
+[00:06:56] of shares available to borrow and
+[00:06:58] they're low cost if you're interested in
+[00:07:00] short selling one thing they'll tell you
+[00:07:02] is that most short sellers are going to
+[00:07:04] have multiple brokerage accounts because
+[00:07:07] on the day when you see your a quality
+[00:07:09] setup you want to be able to get shares
+[00:07:13] and now what if it's just the luck of
+[00:07:14] the draw that the broker that you have
+[00:07:16] doesn't have shares available right
+[00:07:18] because in order to short a stock you
+[00:07:19] have to borrow it and then sell the
+[00:07:22] shares onto the open market then you buy
+[00:07:24] back those shares to cover it so to get
+[00:07:26] the initial shares in the first place
+[00:07:27] the broker has to lend them to you now
+[00:07:30] this is the process that everyone goes
+[00:07:32] through but for some stocks it can be
+[00:07:34] very hard to borrow and you have to pay
+[00:07:36] a high fee and that fee is priced on
+[00:07:39] every share you borrow so I've seen
+[00:07:42] times where you could be paying
+[00:07:45] $10,000 to borrow 10,000 shares with one
+[00:07:48] broker and with another broker you pay
+[00:07:50] $500 so that is substantial so making
+[00:07:54] sure you're shopping around for a broker
+[00:07:56] that is lower priced with uh borrowing
+[00:07:58] rates is going to be really important so
+[00:08:00] trade zero is going to be sort of one of
+[00:08:02] the tools in your tool belt as a short
+[00:08:04] seller along with perhaps Center Point
+[00:08:08] um Guardian Cobra and maybe interactive
+[00:08:12] brokers although I probably wouldn't use
+[00:08:13] interactive brokers all right so uh but
+[00:08:16] for my purposes trade zero um and I
+[00:08:19] don't want to give away my score this
+[00:08:21] doesn't affect the score but for my
+[00:08:23] purposes it's not a broker that has a
+[00:08:25] super appeal to me um because it it
+[00:08:28] doesn't have something that I really
+[00:08:30] need that I can't find anywhere else
+[00:08:32] that's just my experience so far all
+[00:08:34] right so we've got our level two here um
+[00:08:37] now one thing that I do like with other
+[00:08:39] platforms also is the ability to change
+[00:08:41] the font here now I'm going to say
+[00:08:44] something that you guys are going to
+[00:08:45] think is probably crazy you're not even
+[00:08:46] going to believe it but you know I keep
+[00:08:48] hearing this trend of people saying I'm
+[00:08:51] sick of using Ariel as my font you know
+[00:08:54] I really want to start using Papyrus and
+[00:08:56] I get it Papyrus is fun you know it's a
+[00:08:59] it's a cool font it it's kind of Whimsy
+[00:09:02] you know it's like oh this is so
+[00:09:04] interesting and you can't do that over
+[00:09:07] at trade zero so I don't know what they
+[00:09:09] have against Papyrus but they won't
+[00:09:12] allow it you can't change the font here
+[00:09:15] so it's a real shame uh and for me it's
+[00:09:18] not just the font it's making it Bold
+[00:09:21] And for those that didn't catch on there
+[00:09:23] I'm not serious that I like Papyrus I I
+[00:09:26] keep it at aeriel but I do like it as
+[00:09:28] bold and you can't change that either so
+[00:09:30] that's a little bit of a limitation is
+[00:09:32] it a deal breaker no but it's a
+[00:09:34] limitation now one thing I'll say
+[00:09:36] because I'm jumping in and out of
+[00:09:37] preferences a lot is each time I open
+[00:09:39] the preferences window do you see how it
+[00:09:41] kind of goes white and then it sort of
+[00:09:44] populates that is not something I love
+[00:09:48] it makes me feel like the software is
+[00:09:52] just a little slow to load you know
+[00:09:55] everything kind of stops while it's
+[00:09:56] loading that and and I don't really know
+[00:09:58] why that's the case um it's not the case
+[00:10:02] with other platforms that I'm accustomed
+[00:10:05] to so you know that's kind of something
+[00:10:07] that I just sort of noticed initially
+[00:10:09] and that will come back on um as a you
+[00:10:12] know a little piece of feedback that
+[00:10:14] I've also um heard from other Traders
+[00:10:18] all right so we'll leave that there for
+[00:10:19] now and then I'll I just won't save
+[00:10:21] those changes all right so over here um
+[00:10:24] you can also go into your preferences
+[00:10:26] and you can change your order buttons
+[00:10:27] down below so you've got the order
+[00:10:28] buttons down here um you can go down
+[00:10:31] here to oops uh what is it buttons so
+[00:10:34] you could change these buttons around as
+[00:10:36] you'd like so I think that's kind of
+[00:10:37] nice you could change those
+[00:10:39] buttons um for trading um this is
+[00:10:42] something that uh basically by default
+[00:10:46] everyone's on Smart routing so trade
+[00:10:49] zero also has an interesting Niche here
+[00:10:52] where not only are they a broker that
+[00:10:57] allows six times leverage for
+[00:10:59] International customers um and does not
+[00:11:02] enforce the PDT rule they also have zero
+[00:11:04] commissions what zero commissions how do
+[00:11:07] they do it this is amazing so the way it
+[00:11:10] works on their pricing is that um it's
+[00:11:13] it's very it's very interesting um free
+[00:11:16] limit and um Market orders right here
+[00:11:21] so this is just really fantastic and and
+[00:11:25] you know it's a competitive Advantage
+[00:11:27] because all the other offshore broker
+[00:11:29] like CME or ocean one they charge
+[00:11:33] commissions and they're not cheap so
+[00:11:35] trade zero if you an international
+[00:11:38] customer and you could choose any of
+[00:11:39] these three you'd probably be inclined
+[00:11:42] to seriously consider trade zero they're
+[00:11:44] free right that's fantastic and they
+[00:11:47] allow trading starting at 400 a.m. this
+[00:11:49] is this is really a great platform if
+[00:11:52] you're a Us customer and looking for a
+[00:11:54] PDT you know weight around it then
+[00:11:57] they're not an option so then you're
+[00:11:59] forced with using one of these two
+[00:12:00] Brokers and I think that the if I'm
+[00:12:02] going to be honest the reason these
+[00:12:04] Brokers um they accept us customers but
+[00:12:07] there's risk in doing that and they
+[00:12:09] charge the commission and they make
+[00:12:10] money doing that and that offsets the
+[00:12:12] risk and I think trade zero is not
+[00:12:13] interested in taking that risk they've
+[00:12:14] been around for a long time they want to
+[00:12:16] be around for a long time and so they
+[00:12:19] just don't do it but International
+[00:12:21] Traders is is okay now before I forget
+[00:12:24] some of you guys tuning in right now
+[00:12:25] might be interested in learning more
+[00:12:26] about my day trading strategy so I'm
+[00:12:28] going to put link I'll pin it to the top
+[00:12:30] comment and I'll link it in the top of
+[00:12:31] the description where you can download
+[00:12:33] my small account worksheet as a PDF
+[00:12:36] that's a resource that you can utilize
+[00:12:37] in your own trading it's going to walk
+[00:12:39] you through my trading plan the type of
+[00:12:41] stocks I like to trade my five pillars
+[00:12:44] of stock selection that I use to find
+[00:12:46] stocks that I think have the potential
+[00:12:47] to go up 50 to 100% or more and I'm
+[00:12:51] going to walk you through my precise
+[00:12:52] entries and exits so as you're learning
+[00:12:55] more about trading platforms if you want
+[00:12:56] to learn more about my strategy make
+[00:12:57] sure you check out that link pin to the
+[00:12:59] top comment and in the description so uh
+[00:13:02] so basically the commissions are are
+[00:13:05] free uh however you can't choose
+[00:13:08] anything other than smart routing so
+[00:13:10] it's just smart routing so it's not a
+[00:13:13] direct access broker although that's um
+[00:13:17] you know I mean that's the deal with all
+[00:13:19] the other commission free Brokers
+[00:13:20] they're commission free but they're not
+[00:13:21] direct access and if you choose to
+[00:13:23] direct access route which for instance
+[00:13:25] you could do with um trade station and a
+[00:13:28] few others you could choose to direct
+[00:13:30] route your order well then you do pay a
+[00:13:32] commission and the commission um could
+[00:13:34] actually be you know fairly fairly
+[00:13:36] expensive so that that's kind of your
+[00:13:41] you know that that's your choice whether
+[00:13:42] you want to go the commission free route
+[00:13:44] or you want to pay commission um the
+[00:13:47] advantage of paying commissions is
+[00:13:49] direct access routing faster order
+[00:13:51] execution um but you pay for it and so
+[00:13:54] for most traders who have smaller
+[00:13:56] accounts who are just getting started
+[00:13:58] they're going to choose commission free
+[00:14:00] because it just is it's just a more
+[00:14:02] economical way to get your kind of foot
+[00:14:04] in the door and start trading so you've
+[00:14:07] got your level two windows you've got
+[00:14:09] your um your standard order entry window
+[00:14:11] down here now one thing that I like to
+[00:14:13] do is I go into preferences or actually
+[00:14:16] um yeah it's right here I go to
+[00:14:18] preferences and autoload quantity from
+[00:14:21] positions on symol change I actually
+[00:14:23] don't like to do that I like to keep my
+[00:14:26] uh quantity default
+[00:14:29] for me I switch tickers quite a bit and
+[00:14:32] if I have a stock I'm already holding a
+[00:14:33] position on I might be considering
+[00:14:35] adding to it but I don't want it to
+[00:14:37] default to the total position size of
+[00:14:41] that position so I just turn that off
+[00:14:43] entirely um and and I think that that
+[00:14:45] for me works better but again that
+[00:14:48] that's personal preference so now once
+[00:14:50] you've got this laid out like this we've
+[00:14:52] got our portfolio over on the left so
+[00:14:54] this is going to show the stocks or the
+[00:14:56] positions that I'm holding this is my
+[00:14:58] open order orders if I have any open
+[00:15:00] orders this is my order history down
+[00:15:02] here is my news window over here on this
+[00:15:04] side we've got a chart trade zeros
+[00:15:06] charts are fairly basic um which is
+[00:15:09] common a lot among a lot of these
+[00:15:10] Brokers you can't kind of manipulate
+[00:15:12] them and scroll and zoom in um to sort
+[00:15:15] of make it look the way you'd like it to
+[00:15:17] um you you have a bunch of indicators
+[00:15:19] you can add and it's fine in that regard
+[00:15:21] but the problem for me is that I really
+[00:15:23] like a platform where I can zoom by
+[00:15:26] clicking on the AIS here um click and
+[00:15:29] zoom and you can't do that here so what
+[00:15:33] a lot of platforms are using now is the
+[00:15:35] uh trading view uh engine and then they
+[00:15:38] connect it to their own Market data and
+[00:15:40] we use that at day trade Dash as well so
+[00:15:43] that gives a little bit of a better
+[00:15:44] experience for me but one reason that
+[00:15:47] some people would prefer to have it all
+[00:15:49] in one place is that you know very
+[00:15:52] quickly you can oops well that one's not
+[00:15:54] linked but very quickly you're updating
+[00:15:56] your charts right you're not having to
+[00:15:57] type in two places at once which is what
+[00:16:00] otherwise you would have to do if you're
+[00:16:02] using let's say light speed for order
+[00:16:05] execution but then you're using day
+[00:16:08] trade dash for scanning this is the day
+[00:16:10] trade Dash software that I use so for me
+[00:16:13] I do end up having to click twice or
+[00:16:14] type it twice so I have to type here and
+[00:16:16] then I have to type again in my order
+[00:16:18] entry window so you don't have to do
+[00:16:20] that with um with trade zero as long as
+[00:16:22] you're okay with you know this software
+[00:16:25] kind of looking the way it does which um
+[00:16:29] you know it's like is it the end of the
+[00:16:30] world no it's not you take away the
+[00:16:32] previous close and that by itself see
+[00:16:35] how much that changes the chart because
+[00:16:37] when you include the previous close on a
+[00:16:39] stock that's up
+[00:16:41] 175% your chart has that yellow line at
+[00:16:44] the bottom so you take that off and that
+[00:16:46] by itself makes the chart easier to read
+[00:16:49] quite a lot easier to read so I I can
+[00:16:50] appreciate that for sure now one thing
+[00:16:52] that I will say about the charts that's
+[00:16:54] really nice is you can actually go into
+[00:16:56] the settings on uh trade zero and you
+[00:16:59] can make sure that your trades are
+[00:17:01] displayed right on the chart so this is
+[00:17:04] something that's really nice about
+[00:17:05] having charts that are integrated into
+[00:17:07] the platform you can show your trades
+[00:17:08] here and you can have arrows and and you
+[00:17:11] know sort of different details about it
+[00:17:13] if you want um I think this is great and
+[00:17:16] so to me even though these charts are
+[00:17:19] not to me you know in my experience
+[00:17:22] quite as nice as the charts that are
+[00:17:24] powered by the trading view engine which
+[00:17:26] is uh what I use here but is also what
+[00:17:28] you would use with um interactive
+[00:17:30] brokers and a number of other platforms
+[00:17:32] that have um utilized trading views
+[00:17:35] engine the charts aren't terrible you
+[00:17:38] know you can work with them and yeah I
+[00:17:41] would like it if you could click and
+[00:17:42] scroll here to zoom in um and click here
+[00:17:45] but you know it's it's not the worst
+[00:17:47] that I've ever seen it really isn't and
+[00:17:50] and you can go down to 5c 10 second 15
+[00:17:52] second 30 second time frames so the
+[00:17:54] charts are not bad you can link them as
+[00:17:57] you would expect and um as long as you
+[00:18:00] turn off the previous day's close you're
+[00:18:02] going to get a better View kind of
+[00:18:03] zoomed in of what you want and they're
+[00:18:05] fast it loads quickly the disadvantage
+[00:18:07] of using you know a third-party platform
+[00:18:11] for charting is that then you've got to
+[00:18:13] go type the symbol twice right you type
+[00:18:15] it once in here for your level two and
+[00:18:17] you type it once in the other platform
+[00:18:19] now that's exactly what I've been doing
+[00:18:20] for all these years I enter once um you
+[00:18:24] know right here and then I have to enter
+[00:18:26] it right here as well so it's it's
+[00:18:28] doable but you know nothing's perfect so
+[00:18:30] it's kind of finding what works best for
+[00:18:32] you now let's talk about setting up your
+[00:18:34] hot keys with trade zero so hotkeys are
+[00:18:38] a must for my day trading strategy
+[00:18:40] they're easy to set up here you go to
+[00:18:42] the menu you click the hotkeys boom now
+[00:18:44] you select what type of hotkey you want
+[00:18:46] to create so I'm going to go for set up
+[00:18:49] or send order we're going to do buy side
+[00:18:51] we're going to change the quantity to
+[00:18:53] shares and we're going to make it a
+[00:18:54] th000 shares boom it's a th000 shares
+[00:18:57] order type we're going to do
+[00:18:59] um it's going to have to be a limit
+[00:19:00] order because um if it's if I'm trading
+[00:19:03] pre-market and we'll do an offset of 10
+[00:19:05] cents which will allow some slippage
+[00:19:07] it's going to be a smart order smart
+[00:19:09] route which I'm in the demo so they you
+[00:19:12] can't pull that up it's going to be day
+[00:19:13] plus and um we're going to do ask plus
+[00:19:17] 10 cents and I'm just going to leave
+[00:19:19] that there and I'm going to Auto send
+[00:19:20] the order and that's it this is very
+[00:19:24] simple to set up it's intuitive it makes
+[00:19:27] sense you don't have to kind of like
+[00:19:28] rack your brain like H wait is it a offs
+[00:19:32] is it you know for instance trade
+[00:19:34] station has uh shave and improve or join
+[00:19:39] instead of just saying offset let's just
+[00:19:40] make it simple we're talking about an
+[00:19:42] Offset you want to or to send a Buy
+[00:19:45] order buy a th shares you want it above
+[00:19:47] the ask or below the ask I want it above
+[00:19:49] the ask boom I want it below the ask
+[00:19:50] let's make it simple so they make it
+[00:19:52] simple it's easy to use easy to
+[00:19:54] understand and just like that you're
+[00:19:56] good to go you script it to your key and
+[00:19:58] boom you're all set so um now if we go
+[00:20:02] over to the hotkey grid here you can
+[00:20:04] select which key you want to be on and
+[00:20:06] then you're you're fine so the thing
+[00:20:09] that um that I think is important is
+[00:20:13] that there's one specific so I'll set
+[00:20:15] this to shift one I'll click apply and
+[00:20:17] then we'll go over to the hotkey deck
+[00:20:19] right so now we're going to go to um s
+[00:20:22] to uh symbol
+[00:20:25] liquidate so this is a super important
+[00:20:28] order for me so I want to be able to
+[00:20:30] send an order to sell half of my
+[00:20:33] position right sometimes I just want to
+[00:20:35] sell half so I don't want the
+[00:20:38] confirmation I just want to sell half
+[00:20:39] leave the root like that and we're going
+[00:20:41] to set that to control Z control X to
+[00:20:44] sell half and so now you're able to move
+[00:20:47] in and out of the market selling half
+[00:20:50] adding back selling half and then you
+[00:20:52] create another hotkey for selling full
+[00:20:54] and you're able to create all these hot
+[00:20:55] Keys which I think is really important
+[00:20:57] so I'm a big advocate of being able to
+[00:21:01] have hot keys that enable you to move in
+[00:21:04] and out of the market quickly and and if
+[00:21:06] you can't do that then what are you
+[00:21:09] doing you look here's the thing trading
+[00:21:12] is hard enough as it is without using
+[00:21:14] lowquality software so let's pull up um
+[00:21:17] our broker comparison and so let me just
+[00:21:20] before I do that let me just say um when
+[00:21:22] it comes to the hotkeys I keep it really
+[00:21:24] simple so I'll just pull up my keyboard
+[00:21:27] here so these the keys that I use and I
+[00:21:29] would use as a beginner getting started
+[00:21:31] shift one buy a th shares you want to
+[00:21:33] say it to 100 say to 100 shift 1 2 3
+[00:21:36] four five for 100 200 up to 500 Etc you
+[00:21:40] could do that for 1,000 up to 5,000
+[00:21:42] 10,000 to 50,000 but you know the number
+[00:21:44] doesn't matter it's just that's how we
+[00:21:46] do it then to sell contrl Z to sell my
+[00:21:50] full position contrl X to sell half my
+[00:21:53] position contrl C to sell a quarter and
+[00:21:55] these are all going to liquidate the
+[00:21:57] position so I'm going to do sell to bail
+[00:21:59] out now um to sell in the ask I'm going
+[00:22:02] to do controll K or l or semicolon here
+[00:22:06] to sell adding liquidity so if we go
+[00:22:08] back to the hotkey here um we can go
+[00:22:11] again uh set up or send order so we'll
+[00:22:15] do sell side we'll do position you could
+[00:22:17] do 50% here it's a limit order you're
+[00:22:21] going to do um leave that the same
+[00:22:24] you're going to go this way here day uh
+[00:22:27] we're going to do bid and you could do
+[00:22:29] minus minus 10 cents so it's an offset
+[00:22:31] 10 cents below the bid and just like
+[00:22:33] that you could set up that hotkey so you
+[00:22:37] just have to know if you're a pre-market
+[00:22:39] Trader remember you have to use limit
+[00:22:41] orders you cannot use Market orders
+[00:22:44] during regular trading hours that's just
+[00:22:45] the one thing you have to remember um
+[00:22:47] but you can during um during during
+[00:22:51] pre-market we use limit and during uh
+[00:22:53] regular hours you could do Market all
+[00:22:55] right so we'll go like that and then add
+[00:22:56] to hotkey grid so got that one and then
+[00:23:00] you add a couple more and you're good to
+[00:23:01] go so you want to sell on the ask boom
+[00:23:03] we don't do an offset selling on the ask
+[00:23:05] we just put it right at the ask price so
+[00:23:07] that's contrl K oops contrl K like that
+[00:23:12] and um let's
+[00:23:14] see oh did I create a new one so create
+[00:23:16] a new hotkey we got to create a new one
+[00:23:18] but you get the idea so you can go
+[00:23:19] through this and it takes a little bit
+[00:23:20] of time but once you've got it set up
+[00:23:23] then then you're good to go and you
+[00:23:24] don't have to change it anymore so you
+[00:23:26] just do it once and then you're all set
+[00:23:28] you got to go back in and you know
+[00:23:29] change this oh I don't want to have that
+[00:23:31] offset like that so set to zero and um
+[00:23:35] keep the edits so you just check it down
+[00:23:37] there to make sure you have it set up
+[00:23:39] the way you want all right okay so now
+[00:23:41] let's do our broker comparison let's
+[00:23:43] pull up the broker comparison sheet so
+[00:23:45] I'm going to give trade zero score of
+[00:23:47] 7.5 um
+[00:23:51] I as I say that
+[00:23:54] um I'm kind of I'm kind of waffling a
+[00:23:56] little bit here but that's that's around
+[00:23:58] where I'm going to put it for right now
+[00:24:00] so here's my thought trade zero is a I
+[00:24:04] mean let's just go down this let's just
+[00:24:06] go down the list let's look at it across
+[00:24:07] the board so we're look all these
+[00:24:09] Brokers that we've got up here and trade
+[00:24:11] zero now this is a working sheet so I I
+[00:24:13] update this periodically as I sort of
+[00:24:16] discover new things about different
+[00:24:17] Brokers this and that let's start with
+[00:24:18] execution speed so speed is important
+[00:24:21] and they are not the fastest but they
+[00:24:23] are not the slowest by far um the
+[00:24:26] slowest actually you know the slowest ER
+[00:24:29] trade and and Weeble are are the slowest
+[00:24:32] um and Weeble still scored pretty well
+[00:24:34] and they scored well because their
+[00:24:36] platform is solid so trade zero has a
+[00:24:40] solid platform um but let's start at the
+[00:24:42] top so when it comes to execution speed
+[00:24:44] 035 where do I get this data from um all
+[00:24:48] Brokers that do payment for orderflow
+[00:24:50] are required to disclose um execution
+[00:24:54] speed and price Improvement and so you
+[00:24:56] get price Improvement on 25% % of your
+[00:24:58] orders and your average execution speed
+[00:25:00] is 035 which is solid uh that's
+[00:25:03] definitely faster than um certainly
+[00:25:06] faster than Weeble it's faster than
+[00:25:08] trade station it's faster than Charles
+[00:25:10] Schwab but it's not as fast as light
+[00:25:12] speed it wouldn't be as fast as guardian
+[00:25:15] or Center Point
+[00:25:17] CME and ocean one I haven't traded with
+[00:25:20] ocean one so I couldn't say for sure CME
+[00:25:23] it's probably similar cmeg is not as
+[00:25:26] fast as light speed it's fast but not as
+[00:25:28] fast um but trade zero is a commission
+[00:25:31] free broker and that gives them appeal
+[00:25:33] so they're commission free and they're
+[00:25:35] fast what more can you ask for um well
+[00:25:38] there is one thing and I'll I'll share
+[00:25:40] with you my my biggest critique of the
+[00:25:41] platform I'll share with you I'll share
+[00:25:43] that with you in a minute um so they
+[00:25:46] don't publish how much price Improvement
+[00:25:48] you get for every hundred shares they
+[00:25:50] just say you get price Improvement on
+[00:25:51] 25% of your order so it's a little bit
+[00:25:53] vague how much improvement you get but
+[00:25:56] you do get price Improvement that's good
+[00:25:58] you don't have routing fees because
+[00:25:59] they're commission free the PDT rule is
+[00:26:03] um is only for us residents so us
+[00:26:05] residents are do have to abide by the
+[00:26:08] $25,000 PDT rule leverage you get six
+[00:26:11] times leverage but only if you're
+[00:26:12] International us residents get the
+[00:26:14] standard four times so I'll just say um
+[00:26:17] 4X for us residents 6X for um
+[00:26:23] International residents and we'll just
+[00:26:25] say um no or
+[00:26:28] yes yes for us residents no for
+[00:26:34] international all right um or we could
+[00:26:36] just say only at us
+[00:26:39] Branch but also for us residents well I
+[00:26:42] don't know anyways um Weeble is again
+[00:26:45] only at the US Branch but but if a Us
+[00:26:48] customer goes to the international
+[00:26:49] branch they would get rejected and that
+[00:26:51] would be the case with trade zero as
+[00:26:52] well they do offer paper trading uh
+[00:26:54] minimum account size it's $500 um we
+[00:26:57] could go over over to their website and
+[00:26:59] check yeah it's $500 now one thing that
+[00:27:01] I'll say um is trade zero feels like
+[00:27:04] they're kind of almost like trying to
+[00:27:07] position themselves as the Robin Hood
+[00:27:09] for international Traders because
+[00:27:12] International Traders don't have payment
+[00:27:14] for order flow generally they they don't
+[00:27:16] get commission free trading but trade
+[00:27:18] zeros found a way to make it possible so
+[00:27:21] International Traders using um so we're
+[00:27:24] on the international platform right here
+[00:27:25] you can go to the US um web site but the
+[00:27:29] platforms are the same so it's $59 right
+[00:27:32] here for the platform and then we'll go
+[00:27:35] back to
+[00:27:35] International and we'll go over to um
+[00:27:39] let's see uh we want to go
+[00:27:43] to zero free is
+[00:27:47] um one of their other platforms but zero
+[00:27:50] Pro right here and I think we just want
+[00:27:53] to go over to pricing and fees here just
+[00:27:55] to look at how this works so we might
+[00:27:58] need to pull this up to get more detail
+[00:28:00] on it
+[00:28:01] but
+[00:28:03] um yeah so this is trades Z
+[00:28:06] International limit orders must not
+[00:28:08] create an immediate match so you get
+[00:28:10] free limit orders so that's free
+[00:28:15] non-marketable limit orders um but
+[00:28:18] what's a little bit confusing here with
+[00:28:20] trade zero um is their
+[00:28:24] commissions so here they say free limit
+[00:28:27] orders this this is on the international
+[00:28:29] side so on the international side you
+[00:28:31] get free limit orders but if we go to
+[00:28:34] the US side the US side is free limit
+[00:28:38] orders and Market orders so it it's it's
+[00:28:42] kind of it's sort of confusing um if
+[00:28:46] you're an international customer you get
+[00:28:48] free limit orders but not free market
+[00:28:51] orders and the limit order cannot create
+[00:28:53] an immediate match so let me show you
+[00:28:55] what that means just to help you better
+[00:28:57] understand how this commission free
+[00:28:59] trading works so let's go back in here
+[00:29:02] for one second I couldn't possibly with
+[00:29:03] this font um do need to make it um
+[00:29:07] aerial bold so there we go all right so
+[00:29:10] back to Aerial bold all right so this
+[00:29:14] right here is a marketable order it'll
+[00:29:19] execute immediately it's marketable so
+[00:29:21] even though it's a limit order it
+[00:29:23] executes instantaneously it immediately
+[00:29:25] creates a match whereas this order here
+[00:29:29] here I put the buy order at
+[00:29:32] 85 that order did not immediately create
+[00:29:35] a match and so what that means is that
+[00:29:38] my order is adding liquidity to the
+[00:29:41] market and trade zero will actually earn
+[00:29:44] a rebate for all their customers that
+[00:29:47] add liquidity they keep the rebate and
+[00:29:50] that's what gives them some profit so
+[00:29:52] they can give you commission free
+[00:29:53] trading so other platforms would give
+[00:29:55] the rebate to you but then also you
+[00:29:58] would pay a fee when you execute a
+[00:30:01] marketable order so with trade zero here
+[00:30:05] the way this works is uh your paid
+[00:30:08] orders would cost $5 for a th000 shares
+[00:30:11] so if you do an order for th000 shares
+[00:30:13] it's $5 it's 0.5 10,000 shares be 50
+[00:30:17] bucks so it's going to add up now if you
+[00:30:20] looked at just a competitive uh um let's
+[00:30:23] see light speed routing fees if you look
+[00:30:26] at light speed's fees over here
+[00:30:28] um pricing just to compare it they're um
+[00:30:34] as low as
+[00:30:36] 01 right so they're actually I mean
+[00:30:40] trade zero is five times more expensive
+[00:30:43] 0.005 so the difference between $10 for
+[00:30:46] 10,000 shares or $50 for 10,000 shares
+[00:30:49] trade zero is more expensive so what do
+[00:30:51] you get at trade zero that's worth
+[00:30:53] spending that money for well if you're a
+[00:30:56] Canadian customer hey
+[00:30:58] they accept Canadians I shouldn't say
+[00:31:00] hey I should say hey hey they can they
+[00:31:02] accept Canadians so this is nice
+[00:31:05] Canadians have a really tough time with
+[00:31:07] us broker dealers a lot of us broker
+[00:31:09] dealers won't accept them um centerp
+[00:31:12] Point does um but light speed does not
+[00:31:15] trade station does not Schwab does not
+[00:31:18] so if you're Canadian you don't have a
+[00:31:20] lot of choices so you end up paying a
+[00:31:21] little bit more in commission if you're
+[00:31:23] an international Trader who is looking
+[00:31:25] for six times leverage you you don't
+[00:31:28] have a lot of choices you pay the higher
+[00:31:29] commission if you're an international
+[00:31:31] Trader who wants uh great access to
+[00:31:35] shorts availability of shares to borrow
+[00:31:38] then you know you're back to here so
+[00:31:40] this is they do have an offering that is
+[00:31:43] competitive I mean they have things that
+[00:31:45] you don't get everywhere else for
+[00:31:46] certain people now their us branch and I
+[00:31:49] suppose we could split this between
+[00:31:51] trade zero International and trade zero
+[00:31:53] us um I mean I might as well so if we
+[00:31:57] were going to do that trade zero um
+[00:32:00] International Trade zero um USA trade
+[00:32:04] zero International um gives you six
+[00:32:08] times leverage um but you just have to
+[00:32:11] note does not accept us customers so
+[00:32:14] people who are trying to go there for
+[00:32:16] the PDT rule you're you're it's just not
+[00:32:18] going to happen so no PDT rule so the
+[00:32:23] answer is no and the answer here is yes
+[00:32:25] all right so um here here you've got um
+[00:32:29] you have price Improvement on the US
+[00:32:31] side you don't have it on the
+[00:32:33] international side here it's free on um
+[00:32:38] non-marketable limit
+[00:32:41] orders uh or 05 per share for marketable
+[00:32:47] SL marketable orders of any kind and
+[00:32:50] then there you get free free across the
+[00:32:52] board um going down further this is
+[00:32:56] going to be essentially I would say your
+[00:32:58] minimum in the US effectively is $25,000
+[00:33:01] because of the PDT rule even if it's not
+[00:33:04] actually that's effectively what it is
+[00:33:05] the platform's the same for both um and
+[00:33:09] this is all the same for both and this
+[00:33:12] is all the same well down here um yeah
+[00:33:17] for the most part this is all the same
+[00:33:18] the only one is the Canadian um the US
+[00:33:21] Branch probably doesn't accept Canadians
+[00:33:23] if I had to guess but I I'm I'm just
+[00:33:25] going to leave that as um a blank CU I
+[00:33:28] have to just confirm that and the US
+[00:33:30] Branch probably does not accept um
+[00:33:33] International accounts but I'll leave
+[00:33:34] that those two as a blank until I
+[00:33:35] confirm it all right so this gives you a
+[00:33:38] sense of of where um trade zero sits um
+[00:33:43] I think in in my opinion if you're a Us
+[00:33:47] customer um if you're a Us customer
+[00:33:51] you're most likely going to be better
+[00:33:52] off with Schwab and D Trader and the
+[00:33:55] reason is you're going to get more price
+[00:33:57] Improvement the execution speed is
+[00:33:59] similar and um and the Das Trader
+[00:34:03] platform is really solid people have
+[00:34:05] given great feedback about it for a long
+[00:34:07] time so it's a really solid platform so
+[00:34:11] I would almost say here um it's a little
+[00:34:14] bit lower and I I had a notes column
+[00:34:17] I'll just add it back um so trade zero
+[00:34:19] USA um great for short
+[00:34:23] inventory um some users complain about
+[00:34:27] platform form stability so the platform
+[00:34:30] just not being as great and this is
+[00:34:32] great for short inventory um no PDT for
+[00:34:36] international customers six times
+[00:34:39] leverage and great short inventory all
+[00:34:42] right so you've got thatth right there
+[00:34:44] going for it so trade Zer International
+[00:34:47] to me is the one that's a bit more
+[00:34:49] competitive um and has a bit more of a
+[00:34:52] value proposition and it would attract
+[00:34:54] people that Charles Schwab just can't
+[00:34:56] attract just because of the just the
+[00:35:00] nature of it so that is my score right
+[00:35:04] now and subject to change um you know as
+[00:35:07] always I do think about this from time
+[00:35:09] to time and make adjustments but for
+[00:35:10] right now I'm going to say trade zero
+[00:35:13] International is a 7.5 and uh if you're
+[00:35:15] a Us customer I would encourage you to
+[00:35:17] check out uh Charles Schwab using D
+[00:35:19] Traders you can check out the DH Trader
+[00:35:20] demo and you can also check out Weeble
+[00:35:22] which is a great platform for us
+[00:35:24] customers as well and if you enjoyed
+[00:35:25] this episode I hope you hit the thumbs
+[00:35:27] up I hope you're subscrib to the channel
+[00:35:28] if you want to learn more about my
+[00:35:29] strategy make sure you download my small
+[00:35:31] account worksheet the link is pinned at
+[00:35:33] the top of the comments and in the
+[00:35:34] description all right that's it for me
+[00:35:36] I'll see you for the next upload real
+[00:35:37] soon
+[00:35:39] [Music]

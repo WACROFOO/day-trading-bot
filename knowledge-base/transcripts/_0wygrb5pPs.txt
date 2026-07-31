@@ -1,0 +1,2410 @@
+# My Bear Market 🐻 Day Trading Strategy
+# https://www.youtube.com/watch?v=_0wygrb5pPs
+# duration_sec: 5088
+
+[00:00:00] So, in this episode, I'm going to share
+[00:00:01] with you the bear market strategies that
+[00:00:03] I've been trading during this most
+[00:00:05] recent drawdown. Now, listen, this is
+[00:00:07] part of trading. There's ups and there's
+[00:00:09] downs, and as a trader, you have to be
+[00:00:11] able to pivot and adapt to the market
+[00:00:13] you're in. You can't just stubbornly
+[00:00:15] trade the way you love trading if the
+[00:00:17] market is not supporting that. So, if
+[00:00:19] you're a trader who's kind of hitting
+[00:00:21] against a wall, you're running into a
+[00:00:22] wall, it may be because you're trying to
+[00:00:25] trade a strategy the market's not
+[00:00:26] supporting. And that's very common when
+[00:00:28] you have downturns in the market.
+[00:00:29] Although, it can also be common if you
+[00:00:31] have a swing back up in the market and
+[00:00:33] you develop a strategy specifically for
+[00:00:34] trading downturns. So, you have to be
+[00:00:36] able to adapt. So, in this episode, I'm
+[00:00:38] going to share with you the bear market
+[00:00:39] strategy that I'm trading right now.
+[00:00:42] This is the best that I've ever done
+[00:00:44] trading during a bear market, and it's
+[00:00:46] not just because of the setups that I'm
+[00:00:48] taking or, you know, the particular
+[00:00:50] stocks that we're trading. More than
+[00:00:52] anything, it's because I've been able to
+[00:00:55] adopt the discipline to be patient. Cuz
+[00:00:58] this is one of the challenges, and I had
+[00:00:59] to learn it the hard way.
+[00:01:01] In a bear market, you've got a headwind.
+[00:01:03] You will not see the same level of
+[00:01:05] parabolic momentum, these crazy extreme
+[00:01:08] moves, that you see during a bull
+[00:01:09] market. So, during a bear market, you
+[00:01:11] have to set lower expectations. You have
+[00:01:13] to be content with hitting smaller base
+[00:01:15] hits. And if you're not disciplined
+[00:01:17] enough to be able to do that, you're
+[00:01:19] going to find yourself spinning your
+[00:01:21] wheels. Two steps forward, two steps
+[00:01:23] back, two steps forward, five steps
+[00:01:25] back. And that's not a way to make
+[00:01:27] money. So, the traders right now who get
+[00:01:30] through the bear market, or those who
+[00:01:32] are learning, perhaps you, those who are
+[00:01:34] learning to trade during a bear market.
+[00:01:36] If you can succeed during a bear market,
+[00:01:38] you are setting a really solid
+[00:01:40] foundation for the future. Because the
+[00:01:43] fact is, the only traders who make it
+[00:01:44] through bear markets are ones that have
+[00:01:46] discipline, and that discipline will
+[00:01:47] allow you to thrive when the market
+[00:01:50] starts to heat up. So, I hope that this
+[00:01:52] inspires you. I hope it motivates you to
+[00:01:54] continue studying. This is a class that
+[00:01:56] I taught live about a month ago and it
+[00:01:58] was really popular. Everyone loved it. I
+[00:02:01] got great feedback from it. So,
+[00:02:03] I wanted to premiere it here on YouTube
+[00:02:05] for you guys. So, we're going to do
+[00:02:07] something special during this premiere.
+[00:02:08] For every thumbs up we get, I'm going to
+[00:02:10] donate a dollar to charity. For every
+[00:02:13] share we get, I'm going to donate $2 to
+[00:02:15] charity during this live premiere. So,
+[00:02:17] please hit that thumbs up, hit the
+[00:02:19] share, and I'm doing something extra
+[00:02:22] special for you guys. There's a link
+[00:02:23] right down below you can check out now
+[00:02:25] or anytime during the episode a 2-week
+[00:02:27] trial over at Warrior Trading. 2 weeks
+[00:02:30] to trade side by side with me. So, check
+[00:02:32] out that link for the 2-week trial.
+[00:02:33] You're going to have access to the chat
+[00:02:35] room, the ultra-low latency broadcast,
+[00:02:37] ad-free, real-time market commentary.
+[00:02:40] You'll have access to the scanners that
+[00:02:41] I use, the news API, and you'll get a
+[00:02:43] sense of the way I trade in real time.
+[00:02:46] You'll get a sense of whether or not you
+[00:02:48] like the way I trade, you like the
+[00:02:49] strategy, you like the community, and
+[00:02:51] you like the tools. So, give it a shot.
+[00:02:53] I think you'll really enjoy it. There'll
+[00:02:54] be a link right down below to check out
+[00:02:55] the 2-week trial, and let's go ahead and
+[00:02:58] jump in to bear market strategies. Let's
+[00:03:01] get into it.
+[00:03:02] Cool. Okay. Well, why don't we uh go
+[00:03:05] ahead and jump
+[00:03:08] right in. This workshop
+[00:03:11] is for those of you guys trying to
+[00:03:13] figure out how the heck to trade through
+[00:03:16] a bear market. Day trading in a bear
+[00:03:19] market. Listen, if you're going to be a
+[00:03:20] day trader and you want to be at this
+[00:03:22] for the long haul, sooner or later,
+[00:03:25] you're going to have to trade through a
+[00:03:26] bear market. So, if you're watching this
+[00:03:28] right now, of course, live, it's cuz
+[00:03:31] we're in a bear market. If you're
+[00:03:32] watching this on the replay, maybe it's
+[00:03:34] because we've entered another bear
+[00:03:35] market or we're still in this bear bear
+[00:03:37] market. I will try to record this uh
+[00:03:39] study session uh as long as my internet
+[00:03:42] doesn't uh break in the middle of this
+[00:03:44] stream, the recording should be fine and
+[00:03:46] I'll be able to um give that to you
+[00:03:48] guys. So, uh thank you guys uh who are
+[00:03:50] watching on the replay. Everything I'm
+[00:03:51] going to talk about today is still just
+[00:03:53] as valid as it was the day we
+[00:03:56] we had this session. For the most part,
+[00:03:58] the strategies I've been trading are
+[00:04:01] unchanged over the last 10 years with
+[00:04:03] the exception of, you know, a few a
+[00:04:05] little bit of adapting to current
+[00:04:06] market, but the strategies really are
+[00:04:08] are pretty much the same.
+[00:04:10] So,
+[00:04:11] and this is especially for those of you
+[00:04:13] guys that wake up every day pumped,
+[00:04:15] excited, ready to have an awesome day of
+[00:04:18] trading, and then fall flat on your face
+[00:04:22] as you get chopped up in another bear
+[00:04:25] market.
+[00:04:27] You guys, you are my people.
+[00:04:30] This is you, right here.
+[00:04:33] Every single one of you.
+[00:04:35] I know this is you.
+[00:04:37] You think you're going to come out hot,
+[00:04:38] have a great day, boom,
+[00:04:41] on your face.
+[00:04:43] Everyone here, you guys are the JV team.
+[00:04:46] You're You're not even the JV team.
+[00:04:47] You're not even second string. All
+[00:04:49] right, we are the bottom of the barrel.
+[00:04:50] We are all scraping the bottom of the
+[00:04:52] market to try to do the best we can
+[00:04:56] to make a little bit of money. And you'd
+[00:04:57] think it wouldn't be so difficult, but
+[00:05:00] obviously, as we all know and as we have
+[00:05:02] all proven in our own accounts,
+[00:05:04] this is some really hard stuff. So, some
+[00:05:07] of you guys are
+[00:05:09] you know, you you are real savages. You
+[00:05:11] will just put yourself through the
+[00:05:12] wringer and you probably won't take any
+[00:05:15] of the good advice I'm going to share
+[00:05:16] with you today because you're just uh
+[00:05:19] you're you're out to make it harder than
+[00:05:20] it has to be. But, there are a few of
+[00:05:23] you here today who will apply what I am
+[00:05:26] going to share with you.
+[00:05:27] And this could be a real game changer
+[00:05:29] for you. So, really take it to heart.
+[00:05:31] This is important. Learning how to trade
+[00:05:33] through a bear market is a
+[00:05:35] criteria for long-term success as a
+[00:05:38] trader.
+[00:05:39] And here's the here's the thing. Being
+[00:05:41] successful is about following rules and
+[00:05:44] about having the discipline and the
+[00:05:46] aptitude. I will give you the rules. I
+[00:05:48] will give you the blueprint of how to
+[00:05:51] trade. I can tell you right here today
+[00:05:53] how to day trade.
+[00:05:54] You have to bring aptitude and you have
+[00:05:57] to bring the discipline to follow the
+[00:05:59] rules. And if you don't bring those,
+[00:06:01] you're never going to be successful. All
+[00:06:03] right, so I'm going to get out, you
+[00:06:05] know, give out as much as I can, but
+[00:06:06] you've got to bring it also. All right,
+[00:06:07] so let's go ahead
+[00:06:09] let's get started. And by the way,
+[00:06:12] you can call me coach. All right.
+[00:06:15] School's in session.
+[00:06:18] This
+[00:06:18] class today is going to be, like I said,
+[00:06:20] 90 minutes, maybe 2 hours long.
+[00:06:23] Um I'm going to give you a chance to
+[00:06:24] vote on the class that I'm going to
+[00:06:26] teach today.
+[00:06:27] Um
+[00:06:28] but I also have a little spin on that
+[00:06:30] because I have something that I'm I'm
+[00:06:31] definitely going to include, which isn't
+[00:06:32] on um the topics you vote for.
+[00:06:35] I'm also going to give you guys a uh new
+[00:06:38] member coupon code. Some of you guys are
+[00:06:39] going to decide, "Hey, this is the right
+[00:06:41] place for me. I want to keep learning
+[00:06:42] from Ross. This is an awesome day, and
+[00:06:44] let's keep it going." So, I'm going to
+[00:06:46] bring on um 10 students to work with me
+[00:06:49] over the next year. It's the beginning
+[00:06:51] of a 90-day long program. So, I'll give
+[00:06:53] you guys a link where you can join. All
+[00:06:56] right, so that will be first come, first
+[00:06:57] serve. All right, so bringing on 10
+[00:07:00] traders today.
+[00:07:01] Couple bonuses. Number one, I'm going to
+[00:07:03] give you guys a free outline of my small
+[00:07:04] account day trading strategy, and I'm
+[00:07:06] going to give you a copy of my
+[00:07:08] best-selling book titled How to Day
+[00:07:10] Trade.
+[00:07:11] Where's the copy? I always keep a copy
+[00:07:12] on my desk, but uh I don't know where it
+[00:07:15] went. Anyways,
+[00:07:16] uh
+[00:07:17] so,
+[00:07:19] here's the deal.
+[00:07:21] The market's dropping,
+[00:07:22] and I'm making money.
+[00:07:24] I can't tell you how good it feels to be
+[00:07:28] the guy who's making money while the
+[00:07:31] market's dropping. And during this last
+[00:07:34] bear market, I have traded better than I
+[00:07:36] have ever traded before in a bear
+[00:07:38] market. You want to know how I feel
+[00:07:41] during a bear market when I make money?
+[00:07:44] This is it.
+[00:07:48] Oh, yeah.
+[00:07:50] Oh, it feels good.
+[00:07:52] Oh my god.
+[00:07:53] Another green day? What? Are you
+[00:07:55] serious? Long-term investors losing
+[00:07:57] money? Not me.
+[00:08:00] Oh, yeah. Day trading in a bear market.
+[00:08:04] Now, you might not think it can be done.
+[00:08:07] But, it can.
+[00:08:10] I have a day where it was the biggest
+[00:08:12] red day that we had ever seen in the
+[00:08:14] market. And you know who was green? This
+[00:08:16] guy, right here. Because I'm trading
+[00:08:19] volatility.
+[00:08:20] All right. So, this is the power of day
+[00:08:23] trading. This right here is a stock it
+[00:08:25] was up 80%
+[00:08:27] On this day, I was up $50,000.
+[00:08:30] The stock goes from 650 up to $9. You
+[00:08:32] will have events like this in bear
+[00:08:34] markets. You will have events like this
+[00:08:36] in bull markets. All right? This is not
+[00:08:38] just a bull market type of thing. You
+[00:08:39] see it in all markets.
+[00:08:42] Now, one of the things that I want to
+[00:08:43] share with you is the fact that I am
+[00:08:45] actually a profitable trader. These are
+[00:08:47] over This is over $11 million in gross
+[00:08:49] profit, nearly 20,000 trades.
+[00:08:52] Accuracy 69%.
+[00:08:54] I mean, why am I sharing all this with
+[00:08:56] you? What's the big deal?
+[00:08:58] It's important that you know the person
+[00:09:00] you're learning from is qualified.
+[00:09:03] Here's a guy who made a video of how to
+[00:09:04] gain 1 million views in just 3 days.
+[00:09:08] He's got seven views, and the video was
+[00:09:09] uploaded 2 years ago.
+[00:09:12] All right. So, I'm not going to spend
+[00:09:13] all my time telling you how much money
+[00:09:15] I've made, but I want you to know beyond
+[00:09:17] a shadow of a doubt that my gains are
+[00:09:19] real. And this is actually right here,
+[00:09:22] um
+[00:09:23] this is my, uh, audited, uh, broker
+[00:09:26] statement. Let's see. I'll go full
+[00:09:28] camera view here. This is my audited
+[00:09:30] broker statement showing a 1.6 million
+[00:09:32] percent return.
+[00:09:34] When I began this account with $583.
+[00:09:38] It was January 1st, 2017.
+[00:09:41] The account has over 10 million in gross
+[00:09:44] profit.
+[00:09:46] All right. Now,
+[00:09:47] it's important that you know the person
+[00:09:49] you learn from is qualified. I've got my
+[00:09:50] broker statements on the website, and
+[00:09:52] this is the audit right here showing you
+[00:09:54] that those broker statements are the
+[00:09:55] real deal. So, I'm not saying that
+[00:09:57] there's a guarantee that you'll make
+[00:09:58] money. In fact, I'm going to explicitly
+[00:10:00] tell you that my results are not
+[00:10:03] typical,
+[00:10:04] and that there is no guarantee that you
+[00:10:07] will make money whether you learn from
+[00:10:08] me or you trade on your own.
+[00:10:11] All right? Trading is risky. And let me
+[00:10:14] just throw up a little um a little poll
+[00:10:17] here.
+[00:10:18] I'm going to I'm going to throw a little
+[00:10:20] question at you guys. Um so, I'm going
+[00:10:23] to ask you,
+[00:10:24] is day trading risky? And the answer is
+[00:10:27] yes
+[00:10:28] or
+[00:10:29] yes.
+[00:10:31] Go ahead. You see if you can fill that
+[00:10:33] out.
+[00:10:35] This is the real deal, guys. I I'm not
+[00:10:36] going to tell you that trading is easy.
+[00:10:38] I'm not going to tell you you're going
+[00:10:39] to make a million you million bucks
+[00:10:40] overnight. I'm not going to tell you
+[00:10:41] you're going to be a millionaire.
+[00:10:43] I will talk during this workshop about
+[00:10:44] the success that I've had,
+[00:10:46] and I will talk about the success that
+[00:10:48] some of the traders that are part of the
+[00:10:49] Warrior Pro community have had. I'm very
+[00:10:51] proud of those who have been successful.
+[00:10:53] In fact, one of the the most recent
+[00:10:54] student who's made over a million
+[00:10:55] dollars, who got a million dollar badge,
+[00:10:58] he did something really, really
+[00:11:00] important in the way he approached
+[00:11:02] trading that I'm going to share with you
+[00:11:03] guys today because every single one of
+[00:11:05] you can take a lesson from some of the
+[00:11:06] things that he did right. But, let's
+[00:11:09] this is the real deal. Trading is hard.
+[00:11:10] It is hard. I mean, it's not it's not
+[00:11:12] being a roofer in July, but it's you
+[00:11:15] know, pressing buttons. That's easy.
+[00:11:17] Look, I just press buttons. Making money
+[00:11:19] trading is hard. All right? That's
+[00:11:21] what's hard. So, I'm I don't want to
+[00:11:23] discount the fact that it is difficult.
+[00:11:24] Um I I want to be very up front with you
+[00:11:26] and let you know that. So, all the
+[00:11:28] statistics tell us that most traders
+[00:11:29] lose money.
+[00:11:30] All right. So, this class is for uh
+[00:11:33] beginner and experienced traders alike.
+[00:11:35] I'll cover the core concepts as part of
+[00:11:38] setting a good foundation for you to
+[00:11:39] understand how I approach trading in a
+[00:11:41] bear market, and then we're going to
+[00:11:42] talk about advanced strategy
+[00:11:43] development. All right? My job is to
+[00:11:45] teach you financial literacy and the
+[00:11:46] language of financial markets. This is
+[00:11:48] the tip of the iceberg. There's a lot to
+[00:11:50] learn, but we're going to get started
+[00:11:51] here today. There's no better place here
+[00:11:53] um than today to jump in. So, why don't
+[00:11:55] you guys tell me which of these chapters
+[00:11:58] you want me to teach? I said I would
+[00:11:59] teach one chapter from the Warrior Pro
+[00:12:01] curriculum.
+[00:12:02] So, those not already familiar, and you
+[00:12:04] can just call out the one that you want
+[00:12:05] me to teach. Um the Warrior Pro
+[00:12:07] curriculum is a um 20-chapter
+[00:12:11] curriculum. Uh this is it right here.
+[00:12:14] So, this is um chapter eight, momentum
+[00:12:17] day trading strategies, long setup
+[00:12:19] number four, the micro pullback. That's
+[00:12:21] slide 732. This goes all the way down to
+[00:12:23] slide 1400 right now, and um my thought
+[00:12:28] was that I would probably
+[00:12:30] because of course we're catering and
+[00:12:32] sort of focusing this study group on
+[00:12:35] trading in a bear market,
+[00:12:38] I I want to make sure that, you know,
+[00:12:40] I'm sort of approaching it from that
+[00:12:41] perspective. So, we're not going to talk
+[00:12:43] It doesn't seem like there's a lot of
+[00:12:44] interest in setup five, consecutive
+[00:12:46] candles uh five consecutive candles. So,
+[00:12:49] I'm probably going to leave that alone.
+[00:12:50] Right now, it seems like there's a lot
+[00:12:51] of interest in the ABCD pattern. Um and
+[00:12:54] you know what I also want to do here
+[00:12:56] is and there's a good amount of interest
+[00:12:58] in the bull flag.
+[00:13:00] What I would like to do is I'm going to
+[00:13:01] put up a poll to ask uh how long you
+[00:13:03] guys have been trading.
+[00:13:04] This is going to help me also get a
+[00:13:06] sense of um the traders that are in this
+[00:13:09] um study session today and make sure
+[00:13:10] that we're sort of catering it um to the
+[00:13:13] right, you know, audience.
+[00:13:14] It It seems like
+[00:13:17] we've got
+[00:13:19] an interesting split so far, um sort of
+[00:13:23] high on the more than a year and a
+[00:13:25] little higher on the brand new, and not
+[00:13:27] as many people kind of right in the
+[00:13:29] middle.
+[00:13:30] Which is um
+[00:13:32] actually kind of interesting cuz it's
+[00:13:34] sort of opposite approaches for uh
+[00:13:36] teaching brand brand new beginners
+[00:13:37] versus those who've been doing it for a
+[00:13:39] while. Um
+[00:13:41] So,
+[00:13:42] okay, no no worries. No worries. Um
+[00:13:46] Okay, so that that is that is helpful
+[00:13:48] for me. All right, so and a lot of a lot
+[00:13:50] of folks interested in uh parabolic as
+[00:13:53] well.
+[00:13:54] Okay. Okay. Um
+[00:13:58] All right. I I've I know I I have what I
+[00:14:01] need. Um
+[00:14:02] I'm going to do a little uh
+[00:14:04] m- mitch- match mix-match here. Um but
+[00:14:07] it's good. It's good. I think this is
+[00:14:08] going to work. So, before I jump into um
+[00:14:12] the lesson, I want to give you guys a
+[00:14:13] little bit of, you know, I'm not going
+[00:14:15] to tell you my entire history, you know,
+[00:14:18] of my life, but I want to share with you
+[00:14:20] a little bit of how I got to where I am
+[00:14:22] right here today. Um you know, it's it's
+[00:14:25] the story of of your coach. It's an
+[00:14:27] inspiring story. So, let me share it
+[00:14:28] with you. My family has a fairly long
+[00:14:31] history in the stock market. Um my
+[00:14:33] great-grandfather
+[00:14:35] uh his name was Lincoln, and he actually
+[00:14:37] was working on the floor of the stock
+[00:14:40] exchange
+[00:14:42] 1929
+[00:14:43] during the great the the great crash.
+[00:14:46] It's it's kind of a uh
+[00:14:49] incredible story because he was on the
+[00:14:51] floor, he was just getting started. Um
+[00:14:54] he was brand new,
+[00:14:56] and he lost he like everyone was out of
+[00:14:58] a job. That was it. He was out of a job,
+[00:15:00] he lost the money that he was there, you
+[00:15:02] know, however it worked. I've heard this
+[00:15:05] story through my aunts and uncles.
+[00:15:07] And so, he ended up going into the
+[00:15:09] insurance business and and pretty much
+[00:15:11] being very, very risk adverse for um
+[00:15:15] adverse for the rest of his life. He was
+[00:15:16] not interested in in the stock market.
+[00:15:19] Uh when I was going through middle
+[00:15:20] school, 1997, '98, 99, it was the dot
+[00:15:23] com bubble. And I was fortunate that the
+[00:15:26] teacher in the middle school, it was a
+[00:15:28] Montessori middle school, so not maybe a
+[00:15:29] traditional middle school. So,
+[00:15:32] the way this worked, there was one
+[00:15:33] teacher for the whole, you know, you
+[00:15:35] didn't go to the different teachers. It
+[00:15:36] was one teacher. And he was really into
+[00:15:38] stock market. And so, what he decided to
+[00:15:39] do was he actually created a
+[00:15:42] whole
+[00:15:43] curriculum semester around paper
+[00:15:46] trading. And so, every single day we
+[00:15:49] would partner up My partner was named
+[00:15:50] Cooper, and he and I would partner up
+[00:15:52] and we would choose different stocks
+[00:15:53] that we were going to be investing in.
+[00:15:55] And we had a paper trade account. And he
+[00:15:57] had the teacher, Kevin, had all of the
+[00:15:59] stocks up on the board, and he would
+[00:16:02] update the prices every single day. And
+[00:16:04] at the end of that semester we went down
+[00:16:05] to the New York Stock Exchange as part
+[00:16:08] of a
+[00:16:09] you know, celebration at the end of the
+[00:16:11] semester. So, I I in a way started
+[00:16:15] getting interested in trading at a very
+[00:16:17] young age, middle school, which is, you
+[00:16:19] know, it's quite young. A few years
+[00:16:20] later,
+[00:16:21] in high school, my friend Ben, that's
+[00:16:24] Ben, third one in right there,
+[00:16:27] he made about $15,000 trading a penny
+[00:16:30] stock. And so,
+[00:16:33] that summer I opened my first Ameritrade
+[00:16:35] account. And that was actually before
+[00:16:37] they merged with TD Waterhouse. It was
+[00:16:39] just Ameritrade at that time.
+[00:16:41] I have some of the
+[00:16:43] old statements over here from
+[00:16:45] when they when it was just originally an
+[00:16:48] Ameritrade account. It doesn't really
+[00:16:49] matter. Anyways. Um
+[00:16:51] So, I traded a little bit in high
+[00:16:53] school. That was with real money.
+[00:16:55] But I didn't really make money. My
+[00:16:57] approach at that time was I bought some
+[00:16:59] shares of Exxon Mobil, I bought some
+[00:17:01] shares of Pfizer. You know, this was
+[00:17:03] like 2001. I bought some shares of a
+[00:17:05] couple stocks that I knew. I had about
+[00:17:06] $1,000 to play with. And I didn't really
+[00:17:09] make any money by the end of the summer.
+[00:17:10] None of the stocks had really done
+[00:17:12] anything. And I sold out of positions
+[00:17:14] for flat. Ended up buying a
+[00:17:17] 1990 Volvo 240 station wagon for a
+[00:17:21] thousand bucks.
+[00:17:23] I ended up selling that car
+[00:17:25] about five years later for
+[00:17:27] I think it was $1,500, which was a
+[00:17:29] pretty good ROI when you think about it.
+[00:17:31] It was a 50% improvement.
+[00:17:33] Uh
+[00:17:34] so very sturdy car, but in any case
+[00:17:38] was out of the market.
+[00:17:39] This is my high school graduation, my
+[00:17:41] mom and my dad, and at this point
+[00:17:44] finishing high school getting ready to
+[00:17:45] go off to college. I did not know what I
+[00:17:47] wanted to do in college. I didn't even
+[00:17:49] really want to go to college, but my mom
+[00:17:51] was pushing me. She was like, "Ross, you
+[00:17:52] got to go to college. You got to go to
+[00:17:53] college."
+[00:17:54] And so I ended up going to college, and
+[00:17:56] I did about
+[00:17:58] three semesters of college before moving
+[00:18:00] home. I moved home. My father was
+[00:18:02] diagnosed stage four lung cancer, less
+[00:18:05] than a year to live. He said he's
+[00:18:08] already metastasized to his brain.
+[00:18:10] And so I was 20 and 19 20 years old when
+[00:18:13] that when he was diagnosed, and so I
+[00:18:16] lived at home. I pumped gas at the Snoco
+[00:18:18] gas station. I drove dad to chemo and
+[00:18:21] radiation therapy.
+[00:18:22] And I sort of changed my my whole view
+[00:18:26] of what all this was worth. You know, my
+[00:18:28] dad never got to really have a true
+[00:18:30] retirement. He died at the age of 61.
+[00:18:33] That was the same age his father died.
+[00:18:35] So they both died at age 61. My
+[00:18:37] grandfather died of a heart attack the
+[00:18:38] day after Thanksgiving, and my father,
+[00:18:42] you know, of of lung cancer at 61 years
+[00:18:44] old.
+[00:18:45] So neither of them really got to live a
+[00:18:46] retirement, and it kind of made me think
+[00:18:48] that
+[00:18:49] you know,
+[00:18:51] life doesn't always work out even when
+[00:18:54] you're not trying to do what you really
+[00:18:55] want to do. So you might as well try to
+[00:18:58] do what you actually love to do cuz if
+[00:19:00] it if there's no guarantee it's going to
+[00:19:01] work out, might as well at least go for
+[00:19:04] the shot that it could work.
+[00:19:06] So for a little while I lived down in
+[00:19:09] New York City, and I
+[00:19:10] um pursuing architecture and design. I
+[00:19:12] did finish my four-year degree.
+[00:19:15] And um I I I was sort of falling in into
+[00:19:17] the rat race. And I thought that maybe,
+[00:19:20] you know, this was the right approach.
+[00:19:21] And this was 2008, 2009.
+[00:19:24] And of course, we had the recession,
+[00:19:27] right? So, I'm coming out of college at
+[00:19:29] the beginning of the recession, which is
+[00:19:30] the worst time to be coming out of
+[00:19:32] college. No one was hiring. People with
+[00:19:34] master's degrees were
+[00:19:35] applying for unpaid internships.
+[00:19:38] So, I ended up moving uh back home to
+[00:19:41] Vermont. And when my younger sister
+[00:19:43] turned 21, I inherited $100,000 from my
+[00:19:46] father.
+[00:19:47] And so, with that money, I thought to
+[00:19:49] myself,
+[00:19:50] uh I'm up in Vermont. There's really no
+[00:19:53] good employment prospects. But, maybe
+[00:19:58] I can trade this account. And even if I
+[00:20:00] only make, you know, $1,000 a month, the
+[00:20:02] cost of living at 23, 24, 25 years old
+[00:20:05] up in Vermont, it's not that high. So,
+[00:20:08] at that time, I thought that I could
+[00:20:09] maybe make a go of it. And I set up my
+[00:20:12] trading station. You know, I had a
+[00:20:15] couple computers kind of pieced
+[00:20:16] together, a couple different monitors
+[00:20:18] pieced together. It wasn't fancy. It
+[00:20:20] wasn't anything, you know, high-tech.
+[00:20:22] But, it was enough. It worked.
+[00:20:24] Well, you know, the problem was um
+[00:20:27] I really didn't know what the heck I was
+[00:20:29] doing. I didn't have anyone to learn
+[00:20:30] from. I was just trying to piece it
+[00:20:32] together 100% myself. And what ended up
+[00:20:36] happening was I I hit rock bottom.
+[00:20:38] So, the $100,000 that he gave me over
+[00:20:41] the course of 2 years, I spent it on
+[00:20:43] cost of living. And what I didn't spend,
+[00:20:45] I lost in trading profits, trading
+[00:20:47] losses. So, I lost it all the way down
+[00:20:50] to having just my trading account, but I
+[00:20:53] had accumulated over $30,000 in credit
+[00:20:56] card debt.
+[00:20:57] So, that for me was rock bottom. And um
+[00:21:00] you know, every day I would sit down.
+[00:21:02] I'd be excited to trade. And then I
+[00:21:05] couldn't get out of my own way.
+[00:21:07] It It was like It was like clockwork.
+[00:21:10] And I'm you know, it's like this
+[00:21:12] shouldn't feel this complicated. Um you
+[00:21:14] know, let's see. Where Where's this
+[00:21:16] Where's this guy? I had a I had a good
+[00:21:17] one here. Where Where'd he go? Um
+[00:21:20] Here it is.
+[00:21:22] This is me
+[00:21:24] every day.
+[00:21:26] I can't even walk down the sidewalk.
+[00:21:29] I mean, that's how I felt when it came
+[00:21:33] to my trading. It was like every
+[00:21:35] single day.
+[00:21:37] And what ended up happening was I I
+[00:21:39] really started
+[00:21:40] snowballing. I started to compound. The
+[00:21:43] losses started to accelerate.
+[00:21:45] This was me.
+[00:21:55] Again? Are you kidding me? Again?
+[00:21:58] Again, boom. $3,000 loss. $4,000 loss.
+[00:22:01] Again.
+[00:22:03] Every single week.
+[00:22:07] Come on, guys.
+[00:22:10] It doesn't Oh, woo hoo. Hot Hot mic.
+[00:22:13] Language.
+[00:22:14] But this is what kept happening. I mean,
+[00:22:16] it was like time and time again. And
+[00:22:19] listen, it's important to get knocked
+[00:22:21] down. It's important to be able to get
+[00:22:23] back up. That is That is part of
+[00:22:25] trading. But then, you know, on the
+[00:22:27] other hand, you've got to learn from
+[00:22:30] your mistakes.
+[00:22:32] And this was for me. I just couldn't get
+[00:22:34] out of my own way. And so, my my rock
+[00:22:36] bottom was having a $5,000 loss the very
+[00:22:38] beginning of a new month, and that put
+[00:22:41] my account below PDT level, so I
+[00:22:43] couldn't trade in it. So, at this point,
+[00:22:45] now my account's got like $19,000 in it.
+[00:22:47] I can't day trade in it. I've got
+[00:22:49] $30,000 of credit card debt, and I I'm
+[00:22:53] I'm like, what am I going to do? And
+[00:22:55] this is where desperation starts to set
+[00:22:57] in. Now, for me, fortunately, because my
+[00:23:00] account was locked out, I couldn't
+[00:23:01] trade. And so, what I ended up doing was
+[00:23:03] I reviewed all of my metrics. And this
+[00:23:05] was really important, and this is
+[00:23:06] something that we'll talk about during
+[00:23:07] this
+[00:23:07] study group.
+[00:23:09] You have to know your metrics. And so,
+[00:23:10] by reviewing my metrics, I actually
+[00:23:13] discovered, and I'm so grateful for
+[00:23:15] this, I discovered that there was a
+[00:23:17] pattern in my trading. And this is what
+[00:23:20] this data was telling me. I I you know,
+[00:23:22] as of right now, I've got almost 20,000
+[00:23:24] trades, 20,000 individual trades that
+[00:23:26] you can review. I mean, it's so much
+[00:23:28] data. You can analyze your metrics, your
+[00:23:30] performance. And that's what I did. So,
+[00:23:33] you have to be willing to adapt to what
+[00:23:35] the market is telling you. Patience
+[00:23:38] isn't always the optimal way. Sometimes
+[00:23:41] you do have to change directions.
+[00:23:43] Being patient and just, you know,
+[00:23:45] sticking it out, that wasn't working for
+[00:23:48] me.
+[00:23:50] You know, I I I was I was struggling.
+[00:23:52] And And here's the deal.
+[00:23:54] Trading is hard
+[00:23:56] to learn. But once you've got it, it
+[00:23:58] doesn't feel hard in the same way as
+[00:24:01] when you were getting started. It
+[00:24:02] shouldn't feel like every single day is
+[00:24:06] a struggle.
+[00:24:11] That's the realization.
+[00:24:14] It shouldn't
+[00:24:15] be a struggle.
+[00:24:17] This can be easier.
+[00:24:19] I'm making it harder
+[00:24:21] than it has to be.
+[00:24:23] And so, that's that hitting of rock
+[00:24:24] bottom, and then waking up and being
+[00:24:26] like, "Wow.
+[00:24:27] Okay.
+[00:24:28] Let's take this back to the drawing
+[00:24:30] board. Let's look at this a different
+[00:24:32] way."
+[00:24:34] And so, what I discovered
+[00:24:37] was that, in fact,
+[00:24:39] my biggest winners all had something in
+[00:24:41] common.
+[00:24:42] My biggest winners were all on stocks
+[00:24:44] that had high relative volume
+[00:24:48] and were gapping up.
+[00:24:52] That was really important. Now, if I
+[00:24:54] could consolidate all my trading into
+[00:24:56] that,
+[00:24:57] this is what I This is what you get.
+[00:24:58] This is what happened.
+[00:25:00] Of over 10 million dollars in gross
+[00:25:02] profit,
+[00:25:03] all of it is on stocks up over 10% which
+[00:25:06] you can see right here. This is right in
+[00:25:07] here. It's up over 10%. I'll turn on my
+[00:25:10] my laser pointer. So, up over 10% is
+[00:25:12] right here.
+[00:25:13] And this is stocks that have five times
+[00:25:15] relative volume.
+[00:25:17] So, now we've got to sort of reverse
+[00:25:19] engineer for you guys how do you
+[00:25:21] actually find those stocks?
+[00:25:24] All right. How do you find those stocks
+[00:25:25] so you can produce metrics like that?
+[00:25:27] Now, obviously there's no guarantee
+[00:25:28] you'll produce metrics like that, but
+[00:25:30] produce metrics where your winners are
+[00:25:31] consolidated within one sort of type.
+[00:25:36] So, now I am so fortunate to be able to
+[00:25:39] share the strategy that I trade every
+[00:25:41] single day with traders all around the
+[00:25:43] world and it it's it makes it more fun
+[00:25:46] to learn to trade. You don't have to be
+[00:25:48] doing this on your own. We've got over
+[00:25:50] 2,200 testimonials over on Trustpilot,
+[00:25:53] probably more by today.
+[00:25:55] Uh five 92% giving us five star. So,
+[00:25:59] that doesn't happen by accident.
+[00:26:02] That's because we've designed a really
+[00:26:05] thorough, comprehensive program that 92%
+[00:26:09] of the people that go through it say,
+[00:26:11] "This was awesome."
+[00:26:12] All right. So, I'm not going to um you
+[00:26:15] know, read every single one of those
+[00:26:17] 2,000 testimonials, but I just want to
+[00:26:20] reiterate that the person you're
+[00:26:22] learning from right now is qualified to
+[00:26:24] teach day trading.
+[00:26:26] And that if you want to take it a step
+[00:26:28] further and actually become a member of
+[00:26:30] the Warrior Trading community, that
+[00:26:32] you're coming to a place where 92% of
+[00:26:34] the people in the community have said
+[00:26:36] through Trustpilot that this has been an
+[00:26:38] awesome fit for them.
+[00:26:40] All right. So, um
+[00:26:42] you know, the choice is yours. Um do you
+[00:26:44] want to
+[00:26:45] make this harder than it has to be?
+[00:26:48] Um this this is a good one. I'm I'm
+[00:26:50] going to show you that one in a second.
+[00:26:53] I I have I have another one. It's so
+[00:26:54] good. I'll I'll I'll I'll get it in a
+[00:26:56] second.
+[00:26:57] You want to make this harder than it has
+[00:26:59] to be or you want to go the easy way?
+[00:27:02] And this is just to me trying to
+[00:27:03] reinvent the wheel or trying to learn
+[00:27:05] from a strategy that someone is already
+[00:27:07] trading every single day.
+[00:27:08] So,
+[00:27:10] um
+[00:27:11] we're going to go ahead and jump in
+[00:27:12] here. Um
+[00:27:14] I've I've got the micro pullbacks right
+[00:27:16] here and what I was kind of thinking um
+[00:27:19] I think I might do this a little bit
+[00:27:21] differently and kind of mix in two
+[00:27:25] sections. We've got um
+[00:27:28] half dollar whole dollar entries. That
+[00:27:29] one I don't think I'm going to focus on
+[00:27:31] that. We've got our ABCD pattern, which
+[00:27:33] a number of you guys were interested in.
+[00:27:35] I think what I'm going to do is I'm
+[00:27:36] going to start with the first pullback
+[00:27:40] on the bull flag and then we can do a
+[00:27:45] brief discussion of micro pullback and
+[00:27:48] then we can do a little bit of ABCD.
+[00:27:50] Because ABCD pattern is basically you
+[00:27:52] have the first pullback, it then fails
+[00:27:55] and then it continues higher. That's
+[00:27:57] sort of the way it works. So, um now
+[00:27:59] let's go ahead and jump in here. Uh
+[00:28:02] oh, wait, 1 second. Uh first, I want you
+[00:28:06] to promise me that you won't throw
+[00:28:08] hard-earned money into the market before
+[00:28:11] you have first proven
+[00:28:13] that you can make money by trading in a
+[00:28:16] simulator. All right, so
+[00:28:18] um
+[00:28:19] this one uh this was the one I was um
+[00:28:22] So, look at what happens to this guy's
+[00:28:23] head. Now, I want you to think about
+[00:28:25] this. This is what it's like when you
+[00:28:26] trade with real money.
+[00:28:28] When you trade with real money before
+[00:28:30] uh-oh uh-oh uh-oh.
+[00:28:33] What do you think's going to happen to
+[00:28:34] his head and his like brain area?
+[00:28:37] Whoa.
+[00:28:38] Close call.
+[00:28:39] Okay.
+[00:28:40] But, let's not risk it. Right? When you
+[00:28:43] trade with real money and you don't know
+[00:28:45] what you're doing, you are setting
+[00:28:46] yourself up for failure.
+[00:28:49] Seriously.
+[00:28:51] You don't have to do it that way. So
+[00:28:53] many people do it that way and you don't
+[00:28:54] have to do it that way. So, I have to
+[00:28:56] ask you guys a really simple question,
+[00:28:57] which is um
+[00:29:00] how bad do you want this?
+[00:29:01] Because if you really want this, you
+[00:29:03] will be patient.
+[00:29:05] And you will be disciplined.
+[00:29:07] If you get desperate, you say, "I need
+[00:29:09] to make this money next week. I need to
+[00:29:10] make this money by the end of the
+[00:29:11] month."
+[00:29:12] You will lose. I guarantee you.
+[00:29:15] So, if you really want this, be patient,
+[00:29:18] be disciplined, pay your dues.
+[00:29:21] And in a bear market, this is the best
+[00:29:23] time to be learning. Because if you can
+[00:29:26] make money in a bear market, you are
+[00:29:28] setting a really strong foundation for
+[00:29:31] when the market heats up. And when the
+[00:29:33] market does start to heat up, you are
+[00:29:35] ready to put the pedal to the metal and
+[00:29:37] scale into it.
+[00:29:39] Now, if you start learning when the
+[00:29:40] market's hot,
+[00:29:41] you're missing out on that opportunity.
+[00:29:43] Because you're not going to be able to
+[00:29:44] fully capitalize on it because you're
+[00:29:45] new. So, you are starting. You are
+[00:29:47] learning right now at the perfect time.
+[00:29:53] Okay. Um so, I want to talk about risk
+[00:29:56] management. Um
+[00:29:57] let's lay the foundation here for um
+[00:30:00] the for trading in a bear market by
+[00:30:03] talking about risk management.
+[00:30:05] Trading is risky, all right? We
+[00:30:07] understand that. But let's think about
+[00:30:09] how this works. So, this is a a table,
+[00:30:11] as you can see right here, and it's
+[00:30:13] comparing risk and reward. And so, if
+[00:30:15] you risk a dollar to make a dollar, you
+[00:30:17] have to be right 50% of the time to
+[00:30:19] break even. All right? That's your
+[00:30:20] break-even point. Now, if you risk a
+[00:30:23] dollar to make $2, you actually only
+[00:30:26] have to be right 33% of the time in
+[00:30:29] order to break even. That means you can
+[00:30:30] be wrong 70% of the time, 65% of time,
+[00:30:34] whatever. And you can still make money.
+[00:30:36] That's incredible.
+[00:30:38] That's because you understand
+[00:30:40] statistics. Now, what a lot of beginner
+[00:30:42] traders do, and you might be able to
+[00:30:44] relate to this, is they hold losers too
+[00:30:46] long and they sell winners too soon.
+[00:30:51] If that is something you do,
+[00:30:53] you hold your losers too long and you
+[00:30:54] sell your winners too soon, I can
+[00:30:55] guarantee you you will have a negative
+[00:30:58] profit loss ratio. You win a dollar on
+[00:31:00] average, but you lose $3. And if that's
+[00:31:03] the case, you would need to be right 75%
+[00:31:05] of the time in order to be profitable.
+[00:31:08] Now, if you look back at the metrics
+[00:31:09] that I showed you earlier on the over 10
+[00:31:11] million in gross profit, you would
+[00:31:12] notice my accuracy is 69%.
+[00:31:15] 69%? That's great. That doesn't tell the
+[00:31:17] whole story. You can have 69% accuracy
+[00:31:20] and still lose money if you have a
+[00:31:22] negative profit loss ratio.
+[00:31:24] Or you could be right 69% and make $10
+[00:31:26] million.
+[00:31:28] Right? So, it's how do these numbers
+[00:31:29] come together? And this is what being
+[00:31:33] cognizant of risk management
+[00:31:36] allows you to empower yourself to be
+[00:31:39] successful and make money even if you're
+[00:31:41] not right 100% of the time. All right?
+[00:31:44] So, and here you go. I have this slide
+[00:31:47] here again. So, 69% accuracy right
+[00:31:49] there. You can see my average winners
+[00:31:50] and average losers are are approximately
+[00:31:52] the same. They're roughly the same. They
+[00:31:54] could be a little bit closer, but
+[00:31:55] they're pretty close.
+[00:31:57] Uh and Casey says, "Me too. I sell too
+[00:31:59] quick."
+[00:32:00] Listen, it's a fear-based deci- it's a
+[00:32:03] fear-based habit. It's a behavior driven
+[00:32:05] by fear. It's the fear of losing the
+[00:32:08] small gain that causes you to cut it and
+[00:32:10] tell and sell it and take the profit.
+[00:32:12] And inversely, when you're in a loser,
+[00:32:15] you don't want to have a loss. And the
+[00:32:16] only way that it maybe won't turn into a
+[00:32:19] loss is if you hold it and then it goes
+[00:32:21] back up.
+[00:32:22] So, you keep holding it hoping it goes
+[00:32:24] back up cuz it's not really a loss
+[00:32:27] until you press the sell button. There's
+[00:32:28] always hope until you press the sell
+[00:32:30] button, so you keep holding.
+[00:32:32] The sort of our human emotions
+[00:32:35] are not designed to trade the market.
+[00:32:38] Right? The market Humans have been
+[00:32:40] around a lot longer than the stock
+[00:32:41] market. We have to adapt our mind to
+[00:32:44] trade the stock market successfully
+[00:32:46] because the way we are naturally wired
+[00:32:48] will cause you to lose money.
+[00:32:50] So, this is about it's not And so,
+[00:32:52] Marvin says it's about controlling
+[00:32:53] emotions.
+[00:32:55] That's one way to put it.
+[00:32:57] But, on the other hand, I would say that
+[00:32:58] it's difficult to control your emotions.
+[00:33:01] You can't just not be angry. You can't
+[00:33:03] just not be frustrated. You'll feel
+[00:33:05] that.
+[00:33:06] It's developing awareness that I'm
+[00:33:09] feeling pissed off right now. That means
+[00:33:12] this is a good time for me to walk away
+[00:33:13] and stop trading.
+[00:33:15] That's what it's about. That's the best
+[00:33:16] you can do. You will still get emotions.
+[00:33:18] I still get them. I still get angry. I
+[00:33:20] still get excited. I still have all the
+[00:33:22] emotions.
+[00:33:23] But, what I've gotten better at is
+[00:33:25] learning to recognize their influence in
+[00:33:27] the way I trade.
+[00:33:29] That way I can cut off real quick and
+[00:33:31] get out when I'm starting to feel myself
+[00:33:33] getting what I call emotionally
+[00:33:35] activated.
+[00:33:36] All right. So, I've kind of laid out
+[00:33:40] profitability in terms of three core
+[00:33:41] components, which I'll just share with
+[00:33:43] you briefly here. The three core
+[00:33:45] components are consistency, profit loss
+[00:33:47] ratio, and accuracy. Your profit loss
+[00:33:50] ratio I just talked about is your
+[00:33:51] average winners versus losers. And your
+[00:33:53] accuracy is your percentage of success
+[00:33:55] over, you know, X number of trades, how
+[00:33:56] many were winners. The third was
+[00:33:58] consistency. Now, sometimes traders say,
+[00:34:00] "Ross, which one should I focus on?" And
+[00:34:03] so, I'm going to take this as an
+[00:34:04] opportunity to get up the whiteboard
+[00:34:06] here.
+[00:34:07] This is This is kind of There's
+[00:34:09] different ways to approach it. But, this
+[00:34:10] is what I would focus on.
+[00:34:12] Focus
+[00:34:14] on A quality A++ triple A setups.
+[00:34:19] The best setups.
+[00:34:22] Focus on trading the very best set
+[00:34:25] goes up.
+[00:34:26] And you know what happens when accuracy
+[00:34:28] goes up?
+[00:34:30] You have fewer losers.
+[00:34:31] So, you know what improves?
+[00:34:33] Your profit-loss ratio because your
+[00:34:35] losses are smaller when they happen
+[00:34:37] because you're focusing on the right
+[00:34:38] type of stocks. And you know what that
+[00:34:40] then leads to?
+[00:34:41] Consistency improves. Consistency goes
+[00:34:44] up.
+[00:34:45] So, where do you need to start? Right
+[00:34:47] here.
+[00:34:48] And this is true whether you're in a
+[00:34:50] bear market or a bull market. Focus on
+[00:34:53] best quality setups.
+[00:34:55] Now, that's a great question. Dennis
+[00:34:57] says, "Which setups are best?"
+[00:35:00] Dennis,
+[00:35:01] you are sending us right into the next
+[00:35:04] section. I couldn't be more grateful.
+[00:35:06] What a perfect transition.
+[00:35:09] Can we get Dennis here every time I have
+[00:35:10] a study group?
+[00:35:13] I created a process for finding the
+[00:35:16] right stocks each morning.
+[00:35:19] So, as I mentioned, the realization that
+[00:35:21] I had years ago in my trading was that
+[00:35:24] my profits were from stocks that were up
+[00:35:26] 10%.
+[00:35:28] Okay, so well, up 10% then. That that
+[00:35:30] that's easy, right? So,
+[00:35:32] just have to look for a stock that's up
+[00:35:34] 10%. Boom, done.
+[00:35:36] Okay, well, it's not it's more than that
+[00:35:37] though. It's a little bit more than
+[00:35:39] that. It's It's up 10% and then it has
+[00:35:42] the potential to keep going up. So, so
+[00:35:44] what else is it?
+[00:35:46] All right. So, in order for a stock to
+[00:35:47] have the potential to go up 20 to 30% at
+[00:35:49] a minimum, right? There needs to be an
+[00:35:52] imbalance between supply and demand.
+[00:35:57] My biggest winners are almost always
+[00:35:59] sharing similar supply-demand
+[00:36:01] characteristics.
+[00:36:03] All right. So, this is an imbalance
+[00:36:06] between supply and demand when a stock
+[00:36:07] goes up uh more than 10% and when you
+[00:36:09] have five times relative volume, it's
+[00:36:11] showing a very high level of demand.
+[00:36:14] Okay. So,
+[00:36:16] this is the scanner system that I've
+[00:36:18] actually I mean, this It's funny. You
+[00:36:21] wouldn't think this would take years to
+[00:36:23] figure out, but when you're doing trial
+[00:36:25] and error, this slide right here took me
+[00:36:28] years to discover. If someone had given
+[00:36:30] me this on day one when I started day
+[00:36:32] trading,
+[00:36:33] I can't tell you how much it would have
+[00:36:34] sped up my learning curve. So, these are
+[00:36:36] the tidbits that you guys should be
+[00:36:38] writing down because I wish I had known
+[00:36:39] this stuff when I got started.
+[00:36:42] So, in order for a stock to go up 20,
+[00:36:44] 30%, these are the indicators of a high
+[00:36:47] supply demand imbalance. All right, high
+[00:36:49] demand, low supply.
+[00:36:51] So, number one,
+[00:36:53] we need five times relative volume. All
+[00:36:55] right, so let's switch over here.
+[00:36:57] So,
+[00:36:59] I'll just take this one off. Well, I
+[00:37:00] don't need to write it down. We've
+[00:37:01] already got it right here. So, but let's
+[00:37:02] let's kind of talk about how this works.
+[00:37:04] Let's talk about why this works. So,
+[00:37:07] we're looking for a stock that has a
+[00:37:09] potential to go up 20, 30%, right? Let's
+[00:37:11] just think sort of outside the box on
+[00:37:13] this. So, a stock go goes up 20, 30%.
+[00:37:15] How does this happen?
+[00:37:17] Why does this happen?
+[00:37:18] Why would a stock go up 20, 30% one day?
+[00:37:20] Why would it go up 100% one day?
+[00:37:22] There's probably news, right?
+[00:37:25] Okay, so some type of news event. Number
+[00:37:26] three, there's a news event moving the
+[00:37:28] stock higher. We sometimes will call
+[00:37:30] that a fundamental catalyst. There's a
+[00:37:32] catalyst.
+[00:37:33] Okay.
+[00:37:34] The stock
+[00:37:35] should have five times relative volume.
+[00:37:37] Well, what would what would make a stock
+[00:37:39] have five times relative volume?
+[00:37:41] A stock is going to have five times
+[00:37:42] relative volume if there's something
+[00:37:44] really exciting happening with it today,
+[00:37:47] which means it's got news and it's
+[00:37:49] already up. It's already moving. So, the
+[00:37:51] way this is and this is really I mean,
+[00:37:53] this gets into some really deep stuff
+[00:37:54] that we're not going to have time to get
+[00:37:55] into today, but for those of you that
+[00:37:57] become Warrior Pro members, we'll talk
+[00:37:59] about it in more detail.
+[00:38:00] This gets into algo trading
+[00:38:02] and being able to scalp algos. So, what
+[00:38:04] ends up happening is news comes out.
+[00:38:06] News hits the PR News hits the wire at
+[00:38:08] 9:00 a.m. 9:00 a.m. news hits.
+[00:38:11] Immediately, algo
+[00:38:13] reads
+[00:38:15] news
+[00:38:17] and instantaneously initiates
+[00:38:20] buy.
+[00:38:21] They buy and they pull
+[00:38:24] sell orders.
+[00:38:25] So, what does that do? All of a sudden,
+[00:38:27] you have a level two like this. They
+[00:38:29] start pulling the sell orders. They
+[00:38:31] start hitting the bid. And now you've
+[00:38:32] got an imbalance. The stock starts
+[00:38:34] moving up fast. Now, it starts hitting
+[00:38:37] high of day momo scanners. Starts
+[00:38:39] hitting high day momo scanners as it's
+[00:38:41] moving up. Boom, boom, boom, boom, boom.
+[00:38:43] Now, you have retail traders they're
+[00:38:45] jumping on and this is now accelerating
+[00:38:47] and moving faster. It starts with an
+[00:38:50] algo spike squeeze and then we jump on
+[00:38:52] and ride that momentum.
+[00:38:55] It comes back to the news. But, here's
+[00:38:57] the thing.
+[00:38:59] It's not helpful. We I mean, we have a
+[00:39:01] news feed that we use, a proprietary
+[00:39:03] news feed that puts news headlines in
+[00:39:04] our room. But, the fact is
+[00:39:06] news is coming out all the time.
+[00:39:09] Okay, so just listening to news it it
+[00:39:13] you know, you could listen to news all
+[00:39:15] day long.
+[00:39:16] In fact, we need to use these scanners
+[00:39:19] because
+[00:39:21] we need to see something moving up. So,
+[00:39:22] the scanners are the radar. So, I have a
+[00:39:25] development team that I hire. These are
+[00:39:27] coding people. They developed this. They
+[00:39:29] built this scanner for me. We subscribe
+[00:39:32] to market data.
+[00:39:33] Okay, so what we want to do is we want
+[00:39:35] to get market data basically the same
+[00:39:38] time that those high frequency trading
+[00:39:39] algorithms are getting their market
+[00:39:41] data. So, we all subscribe to market
+[00:39:43] data. And there's this big competition
+[00:39:45] about co-locating the servers. So,
+[00:39:46] you're getting market data at the same
+[00:39:48] time as everyone else. Right? They
+[00:39:50] there's even like having the same length
+[00:39:53] of fiber connection. So, everyone's
+[00:39:55] getting the same sort of level playing
+[00:39:57] field. But, it's never really level. You
+[00:39:59] guys know that. It's not level.
+[00:40:01] But, we do everything we can as a re as
+[00:40:02] a retail trader to kind of get our edge.
+[00:40:04] So, we have a market data vendor. We get
+[00:40:06] the market data. And then we process it
+[00:40:08] in our own servers. And we are looking
+[00:40:10] for stocks that are moving up quickly
+[00:40:12] right now.
+[00:40:13] And as a Warrior Pro Alex's member, you
+[00:40:15] guys have access to the same tool that I
+[00:40:17] use. I've made it available to you guys.
+[00:40:19] So, and that that was one of the nice
+[00:40:20] things is being able to have a
+[00:40:22] development team build this out for me
+[00:40:23] and then share it with you. So, we get
+[00:40:25] this news we get this stock squeezing
+[00:40:27] up. We see it starting to move higher
+[00:40:30] and then immediately we see, okay, it's
+[00:40:32] got a news headline. It's already up
+[00:40:34] 10%.
+[00:40:35] The stock is between 1 and 20, which is
+[00:40:37] only important because those stocks can
+[00:40:39] make bigger percentage moves. A $1 stock
+[00:40:42] that goes to five bucks is up 4 500%. A
+[00:40:45] $50 that goes up to 55, it's up the same
+[00:40:48] $5 a share but it's only up 10%, right?
+[00:40:51] So, lower price moves in a percentage
+[00:40:54] gainer sense faster, much more
+[00:40:57] attractive for retail traders who are
+[00:40:58] often trading with smaller accounts.
+[00:41:01] And then we've got the supply side. Less
+[00:41:03] than 10 million shares available to
+[00:41:05] trade.
+[00:41:06] That's preferable.
+[00:41:07] So, when a company does an IPO, they
+[00:41:09] sell a certain number number of shares
+[00:41:10] onto the market. Companies that sell
+[00:41:12] fewer shares have a lower level of
+[00:41:14] supply. So, you know, Tesla's a is a
+[00:41:17] really big company but they haven't sold
+[00:41:19] nearly as many shares as a company like
+[00:41:20] Bank of America. Some companies out
+[00:41:22] there sell a lot more shares to raise
+[00:41:24] money and and others sell fewer. So,
+[00:41:26] companies that sell fewer shares, when
+[00:41:28] people want them, you know, boom boom
+[00:41:30] boom, it starts to move up up more and
+[00:41:32] more and more and more. There's just a a
+[00:41:33] limited level of demand.
+[00:41:35] Now, at the end of the day, you still
+[00:41:36] have the market cap equation which is
+[00:41:38] number of shares and the price that it's
+[00:41:40] trading at.
+[00:41:41] And by the way, if I'm getting a little
+[00:41:42] over your head, have faith.
+[00:41:45] This is
+[00:41:47] all stuff that first of all, we cover in
+[00:41:49] a lot more detail for traders that are
+[00:41:50] part of the curriculum.
+[00:41:52] And there's a lot to learn here. So, I
+[00:41:54] don't want you to get overwhelmed. Just
+[00:41:56] soak it up today and if you're if this
+[00:41:59] stuff is interesting to you and you're
+[00:42:01] like, I want to keep learning, then keep
+[00:42:03] learning. It's like learning a new
+[00:42:05] language in a way. I mean, there's
+[00:42:06] there's a lot here to learn, there's a
+[00:42:07] lot to unpack. I try to make it pretty
+[00:42:10] clear but
+[00:42:11] uh
+[00:42:12] Anyways, so um you know, the the fact is
+[00:42:15] at this point for me finding stocks to
+[00:42:18] trade is no longer
+[00:42:21] a struggle. And and that's I mean,
+[00:42:23] that's really a a a big deal. So, I find
+[00:42:26] these stocks to trade every single day.
+[00:42:28] So,
+[00:42:29] circling back to Dennis' question, how
+[00:42:31] do you find what is a a quality setup?
+[00:42:33] We're going to talk about the setups in
+[00:42:35] just a second when we get into the
+[00:42:37] actual um curriculum for Warrior Pro.
+[00:42:40] But, in terms of the right type of stock
+[00:42:41] to trade, um
+[00:42:43] and I'll just I have it on the back of
+[00:42:45] this. Um so, we can refer back to it.
+[00:42:47] We're looking for 10% at least, price
+[00:42:50] between 2 and 20 120, relative volume 5
+[00:42:53] and higher, news catalyst, float under
+[00:42:55] 20 million 10 million's preferable.
+[00:42:57] Okay, so this is this is the general
+[00:42:59] criteria. If a stock right now doesn't
+[00:43:02] meet this,
+[00:43:03] I'm probably not going to trade it.
+[00:43:05] Okay. Now, it might meet like three of
+[00:43:07] these, but I want to meet all of them,
+[00:43:09] especially in a bear market, right? If
+[00:43:11] we're focusing on, you know, AAA A
+[00:43:13] quality A+ setups,
+[00:43:15] they should have all of these.
+[00:43:17] So, if it has, you know, four of these,
+[00:43:19] but the float is like 100 million
+[00:43:21] shares, that's probably going to be a
+[00:43:22] deal breaker.
+[00:43:24] If it has everything, but it has no
+[00:43:25] news,
+[00:43:27] it's going to be hard to trust. I might
+[00:43:28] still take a couple trades on it, but
+[00:43:30] it's going to be hard to trust.
+[00:43:31] And you know, I I probably shouldn't
+[00:43:33] trade it at all. Okay. So, if it's got
+[00:43:35] all of this, but the price is $50 a
+[00:43:36] share, that's going to be too risky.
+[00:43:39] So, it's got to have everything. In a
+[00:43:40] bull market, you might see a stock that
+[00:43:42] has everything, you might see five of
+[00:43:43] them a day. In a bear market, you might
+[00:43:45] see five of them a week. So, the
+[00:43:47] opportunities are still there, but
+[00:43:49] they're a little fewer and further
+[00:43:51] between.
+[00:43:52] All right. So, let's go ahead and jump
+[00:43:53] into the class. Have I lost you guys?
+[00:43:56] Are you guys still with me? Does it
+[00:43:57] sound good?
+[00:43:59] All right.
+[00:44:00] Um
+[00:44:02] This is Some of you guys This is where
+[00:44:03] some of you guys are right now. You're
+[00:44:04] like, "Oh my god."
+[00:44:10] Done. I'm out.
+[00:44:12] I know it's a lot. Listen, I know it's a
+[00:44:14] lot. I know I know this is some heavy
+[00:44:15] stuff.
+[00:44:19] No pain, no gain, right?
+[00:44:21] Okay.
+[00:44:23] All right, let's keep going.
+[00:44:26] Okay, so all right, so I'm going to back
+[00:44:28] this out here. I'm going to put this up
+[00:44:30] here. So, I'll bring this back. We'll
+[00:44:31] I'll show this to you
+[00:44:33] in a in a few minutes. All right, so now
+[00:44:36] let's go over So, let's go let's go full
+[00:44:39] screen on the bull flag. So,
+[00:44:45] So, what I want to do here is
+[00:44:48] um
+[00:44:49] I'm going to kind of play this out for
+[00:44:50] you for a second. So, this is the this
+[00:44:53] is a bull flag pattern. So, for those of
+[00:44:56] you guys that are, you know, again, like
+[00:44:58] beginning of the learning curve, which
+[00:45:00] was kind of a good number of you. We're
+[00:45:02] using candlestick charts, all right? So,
+[00:45:04] the reason we're using candlestick
+[00:45:05] charts is because a candlestick
+[00:45:07] communicates four pieces of information.
+[00:45:09] The open, the close, the high, and the
+[00:45:10] low. So, really super quick candlestick
+[00:45:13] 101, this is a candlestick right here.
+[00:45:17] And we've got the open,
+[00:45:19] the close, so that's the close. That's
+[00:45:22] the open. That's the low, and that's the
+[00:45:24] high.
+[00:45:26] All right, now if it was a red candle,
+[00:45:27] it opens at the top and closes at the
+[00:45:29] bottom. Those are flipped, but these are
+[00:45:31] still the high and the low. So, we like
+[00:45:34] candlesticks because they communicate
+[00:45:36] market sentiment. Doesn't it make sense
+[00:45:38] that a candle that looks like um
+[00:45:42] that looks like this
+[00:45:45] communicate something different than a
+[00:45:47] candle that looks like this.
+[00:45:52] Right? Clearly those are sending a
+[00:45:54] message. So, this is pattern
+[00:45:56] recognition.
+[00:45:58] And this is what we can begin to do as
+[00:45:59] we recognize these patterns. And so, in
+[00:46:02] the context of a bull flag, what we have
+[00:46:04] is a stock that has quickly moved
+[00:46:06] higher. So, these are our candlesticks
+[00:46:08] moving up.
+[00:46:10] Okay. Now,
+[00:46:12] it starts to develop a pullback.
+[00:46:14] Like this.
+[00:46:18] And this is the important place to start
+[00:46:19] watching it. We will find a stock doing
+[00:46:22] this
+[00:46:23] right here as it's going up on our
+[00:46:25] scanners.
+[00:46:26] The scanners are the radar that we use.
+[00:46:29] So, each Each one of these dots is the
+[00:46:31] stock hitting the scanner. So, we're
+[00:46:32] going to pull up the stock, we're going
+[00:46:33] to see, "Okay, this stock is moving
+[00:46:35] higher right now. It's on our scanners."
+[00:46:37] But, I don't want to chase it.
+[00:46:40] I got to wait for a pullback. And so,
+[00:46:42] this is the bull flag pullback right
+[00:46:44] here.
+[00:46:45] So, we wait for a momentary pullback.
+[00:46:47] Now, the interesting thing is this could
+[00:46:49] be
+[00:46:51] on a 10-second chart.
+[00:46:54] This could be on a 1-minute chart. Could
+[00:46:56] be on a 5-minute chart.
+[00:46:58] You could trade on a 15-minute chart.
+[00:46:59] You could even trade it on a daily chart
+[00:47:01] if you wanted to. The pattern occurs in
+[00:47:04] all time frames.
+[00:47:06] So, it's up to you which pattern or
+[00:47:08] which time frame you prefer to trade on.
+[00:47:10] I am primarily using 1-minute and
+[00:47:12] 5-minute, but I am also applying this to
+[00:47:16] a 10-second chart.
+[00:47:18] So, we've got our micro pullback.
+[00:47:20] And during this time where it's pulling
+[00:47:22] back, I'm going to be watching it
+[00:47:23] closely. And my hand is going to be on
+[00:47:25] what button?
+[00:47:28] The buy button.
+[00:47:29] So, I'm ready to tap that buy button the
+[00:47:33] second I see a candle break
+[00:47:36] that price right there, that dotted
+[00:47:37] line.
+[00:47:38] The second this stock breaks over this
+[00:47:41] level. And so, what I'm going to have to
+[00:47:42] be doing is I'm going to be have to use
+[00:47:44] my charts to be constantly checking,
+[00:47:46] what was the high of this candle?
+[00:47:48] What was the high of this candle right
+[00:47:50] here?
+[00:47:51] What's the high of this candle here?
+[00:47:53] Now, if this candle high is $3.10,
+[00:47:56] then on my level two window, when I see
+[00:47:59] uh 307
+[00:48:01] by 308,
+[00:48:03] and then I'm seeing green prints at 308,
+[00:48:06] I'm going to start thinking to myself,
+[00:48:07] there's a good chance this is going to
+[00:48:10] break through
+[00:48:12] 310.
+[00:48:13] I'm going to punch it. I'm going to hit
+[00:48:14] the buy button.
+[00:48:16] I'm going to step up to the plate on
+[00:48:17] this.
+[00:48:18] You have enough people that step up to
+[00:48:19] the plate, enough people that press that
+[00:48:20] buy button,
+[00:48:22] and that becomes a self-fulfilling
+[00:48:23] prophecy. And that's the reason chart
+[00:48:25] patterns work so well on stocks that
+[00:48:28] have high relative volume. It's because
+[00:48:30] so many traders use them.
+[00:48:32] Okay, and Dan, I don't exclude the
+[00:48:35] wicks. I include the wicks.
+[00:48:37] So, I do include the wick. Now, the
+[00:48:39] first candle make a new high, I'm long
+[00:48:40] there, let's say 310. And of course, the
+[00:48:42] first target is a move back to the high.
+[00:48:45] We break through the high right there.
+[00:48:47] We continue higher. And then,
+[00:48:51] we wait for the next pullback.
+[00:48:54] And then we do it again.
+[00:48:57] And that's what I do on the bull flag,
+[00:48:59] and I do it all day long.
+[00:49:02] Now, I'm going to be most aggressive and
+[00:49:03] this is these are the waves that stocks
+[00:49:05] are trading in.
+[00:49:08] This seems simple.
+[00:49:10] And this is fairly simple.
+[00:49:12] Where do people make the mistake?
+[00:49:15] They try to apply that pattern to the
+[00:49:17] wrong type of stock.
+[00:49:20] It works well when you trade the right
+[00:49:21] type of stock. When you trade stocks
+[00:49:23] that have high relative volume, you've
+[00:49:25] got a lot of people watching this
+[00:49:27] pullback. A lot of people watching means
+[00:49:30] a lot of people pressing the buy button
+[00:49:32] as it starts to dip back down.
+[00:49:35] If you start to apply this to a stock
+[00:49:37] that has a high level of high frequency
+[00:49:39] trading, like Bank of America or
+[00:49:41] something like that, you are not going
+[00:49:43] to see good resolution out of this
+[00:49:45] pattern. It will not resolve correctly.
+[00:49:48] There's no reason for it to resolve
+[00:49:49] correctly.
+[00:49:51] You have to trade the right type of
+[00:49:52] stock.
+[00:49:53] That's got to be first and foremost.
+[00:49:55] Right type of stock to trade. And then
+[00:49:57] you apply these patterns to that setup.
+[00:50:00] All right. So, um so let's jump back on
+[00:50:03] to the screen here.
+[00:50:05] So, you can do this on This could be a
+[00:50:08] 1-minute. So, like my example here on
+[00:50:10] the whiteboard, this could be This could
+[00:50:12] be a 10-second chart.
+[00:50:13] And remember, if this was a 10-second
+[00:50:15] chart, then the 1-minute chart probably
+[00:50:17] looks like this.
+[00:50:20] It might have a small topping tail,
+[00:50:21] which was formed right there. And the
+[00:50:23] next candle on the 1-minute opens a
+[00:50:24] little bit lower.
+[00:50:26] And then it goes higher.
+[00:50:28] And then there's another slight topping
+[00:50:30] tail as it opens a little bit lower and
+[00:50:32] then goes higher again.
+[00:50:34] Okay. Now, we look for
+[00:50:36] the same pattern
+[00:50:38] except for on
+[00:50:41] the 1-minute chart.
+[00:50:43] Right? So, this is the zoomed-in
+[00:50:45] 10-second chart. Now, we do the same
+[00:50:47] thing on the 1-minute. And then we could
+[00:50:48] do the same thing on the 5-minute. And
+[00:50:51] uh Raj says, "What's my risk?" Stop at
+[00:50:54] the low of the pullback. Stop at the low
+[00:50:56] of the pullback. Stop at the low of the
+[00:50:58] pullback.
+[00:50:59] So, when I'm trying to buy a dip, I'm
+[00:51:02] trying to buy it down here off this
+[00:51:04] level, but I don't want to just start
+[00:51:06] buying it, you know, like right here
+[00:51:08] because I don't know it might pull back
+[00:51:10] more. And I don't want to buy it right
+[00:51:12] here cuz it might end up pulling back
+[00:51:13] more. In In fact, it might end up
+[00:51:15] pulling back all the way down and then
+[00:51:16] the chart's broken.
+[00:51:18] Okay. So, what I really want to do is I
+[00:51:20] want to wait to press the buy button
+[00:51:22] until I start seeing the green prints.
+[00:51:26] When I start seeing those green prints
+[00:51:27] on the level two, that's usually what
+[00:51:29] I'm going to look for as that first
+[00:51:30] indicator that the trend is starting to
+[00:51:33] shift.
+[00:51:35] So, this is This is a bull flag pattern.
+[00:51:39] Um and I'm going to I'm going to read
+[00:51:40] this to you so you don't have to um
+[00:51:42] you don't have to try to read it
+[00:51:43] yourself. I'll just um I'll put up my
+[00:51:45] camera so it's a little bit more
+[00:51:47] interesting to look at. All right, so
+[00:51:49] the first candle to make a new high, the
+[00:51:51] apex point of the bull flag or the
+[00:51:54] pattern, that's the entry. Okay, so
+[00:51:57] right here.
+[00:51:59] This is the apex.
+[00:52:01] Right there is the first candle to make
+[00:52:03] a new high. That's the entry.
+[00:52:05] Sometimes I will enter early to
+[00:52:08] anticipate the breakout as I said here.
+[00:52:10] If the first entry if the candles at
+[00:52:11] 310, but I'm seeing green prints at 308
+[00:52:14] and 309, that's an indicator go ahead
+[00:52:17] and press the buy button. This is time
+[00:52:19] and sales and this is level two. All
+[00:52:22] right, so this is again a little bit
+[00:52:23] more intricate but important stuff to
+[00:52:25] know. If you're an active trader, you've
+[00:52:26] probably already seen all this stuff.
+[00:52:29] So if I'm entering early, what typically
+[00:52:31] triggers that entry is a break through a
+[00:52:32] psychological level. Perhaps we dipped
+[00:52:35] below on this candle, we might have
+[00:52:37] dipped down to 299
+[00:52:40] or 298 and then we popped back up over
+[00:52:43] three. So breaking below and then back
+[00:52:45] above psychological levels, very
+[00:52:48] important. So even if a stock does not
+[00:52:51] is not quite yet at the first candle to
+[00:52:54] make a new high, if it breaks below this
+[00:52:57] critical level. So we were we're pulling
+[00:53:00] back here, we're pulling back.
+[00:53:02] And let's say
+[00:53:04] this
+[00:53:07] is $3.
+[00:53:09] So we dip below three and then as it
+[00:53:12] comes back up, there'll be green on the
+[00:53:14] tape. So as it comes back up there, 299
+[00:53:18] 301, if it can reclaim the whole dollar
+[00:53:21] psychological level, I'm going to punch
+[00:53:23] that buy button at 301.
+[00:53:26] 301 buy. And then the first candle to
+[00:53:28] make a new high is still at 310. What am
+[00:53:31] I going to do? I'm going to add more at
+[00:53:33] 310.
+[00:53:35] So now we've got this candle going up,
+[00:53:37] going back up, going back up. And of
+[00:53:38] course this was on the idea was on a
+[00:53:40] bull flag, right?
+[00:53:43] So, this is a psychological level.
+[00:53:46] And and again, just, you know, by the
+[00:53:48] way, this is
+[00:53:50] this is why it's so valuable to be
+[00:53:52] trading
+[00:53:54] in a community because you're not
+[00:53:55] trading on your own. While I'm trading,
+[00:53:58] I am articulating this type of price
+[00:54:01] action
+[00:54:02] in real time.
+[00:54:04] That's why you call me coach.
+[00:54:06] Right? You say, "Hey, coach. Look."
+[00:54:09] And I say, "That's right. We're watching
+[00:54:11] the stock." And that's right, my name's
+[00:54:12] coach. Don't forget it.
+[00:54:15] So, almost immediately upon entering,
+[00:54:19] I want to see the price move up. If the
+[00:54:20] price moves down immediately, my
+[00:54:22] timing's wrong. Usually, I'm pretty good
+[00:54:24] with my timing cuz I'm tape reading. Uh
+[00:54:26] but it sometimes the timing will be
+[00:54:27] wrong. And if the timing's wrong, I
+[00:54:29] usually cut it right away. So, if I take
+[00:54:31] a starter, then I add as it moves
+[00:54:33] higher.
+[00:54:35] Uh again, when I go right out trade
+[00:54:37] almost immediately, I often change my
+[00:54:39] perspective um to getting out break even
+[00:54:41] rather if possible rather than it being
+[00:54:44] a winner.
+[00:54:45] Uh I no longer kind of think, "Oh, this
+[00:54:46] is going to work." Cuz if if I get in
+[00:54:48] and immediately flushes, I my timing is
+[00:54:50] just wrong.
+[00:54:51] Okay, so now let's talk about the
+[00:54:53] target.
+[00:54:54] All right. So, first we've got the
+[00:54:55] entry. The entry is the first candle to
+[00:54:58] make a new high, right? But we sometimes
+[00:55:00] will anticipate it with an early entry
+[00:55:02] based on the tape and psychological
+[00:55:05] levels that we're trading around.
+[00:55:07] Okay. And and some of this is is stuff
+[00:55:10] that
+[00:55:11] an algo can't really do
+[00:55:14] yet.
+[00:55:15] Maybe eventually they will. But this is
+[00:55:18] where we have an edge as retail traders.
+[00:55:21] Right? We're able to read these nuances
+[00:55:25] both in the speed of orders going
+[00:55:26] through, the levels, the candles. This
+[00:55:30] is a lot of stuff to try to program into
+[00:55:33] an algo. And what we find is that stocks
+[00:55:36] that have very high levels of relative
+[00:55:38] volume are up more than 20 30% there's a
+[00:55:40] lot of algos that when a stock is up
+[00:55:42] that much they just turn it off.
+[00:55:44] And so there's this argument that high
+[00:55:46] frequency trading algorithms are are
+[00:55:48] providing liquidity to the market.
+[00:55:50] Yeah, until the market gets volatile and
+[00:55:52] then they turn off.
+[00:55:53] So when they turn off a volatile market
+[00:55:55] gets even more volatile because you
+[00:55:57] don't have those algos creating the bids
+[00:56:00] and and and offers that kind of just
+[00:56:03] tighten it back down. But that's
+[00:56:04] actually good for us because that's
+[00:56:06] where we start to see these big moves.
+[00:56:08] As day traders we profit in a way from
+[00:56:10] inefficiencies in the market. You know,
+[00:56:12] if if the market was perfectly efficient
+[00:56:15] the stock would just always be trading
+[00:56:17] at the exact correct value price and you
+[00:56:20] wouldn't have these fluctuations. You
+[00:56:21] wouldn't have these news spike. It would
+[00:56:24] just there'd be news and then
+[00:56:25] immediately it would be at the next
+[00:56:26] level. But it moves to these levels and
+[00:56:29] then comes down off of them. So
+[00:56:31] Um anyway, so the the target
+[00:56:34] is a retest of higher day. All right.
+[00:56:37] Now if the pullback is a bigger one then
+[00:56:40] we may start be getting into the mindset
+[00:56:41] of an ABCD pattern. And we're going to
+[00:56:43] talk about the ABCD pattern again in a
+[00:56:45] second but the ABCD pattern would be
+[00:56:47] like it pops up here and then it dips
+[00:56:50] down again
+[00:56:51] and then it starts to go. So it's like a
+[00:56:54] double bull flag.
+[00:56:56] Um and and in a way it can make this
+[00:56:58] final breakout more powerful because
+[00:57:01] during this sort of period of
+[00:57:02] consolidation more traders and these are
+[00:57:05] their eyes. They're like looking at it.
+[00:57:06] They're like "Ooh, this is exciting."
+[00:57:08] And this you know, he's kind of this
+[00:57:09] like his face and stuff. He's like "Ooh,
+[00:57:11] this is interesting." and then he's like
+[00:57:12] pressing the buy button.
+[00:57:15] When you have really fast patterns not
+[00:57:17] as many traders will always see them and
+[00:57:19] then that's going to reduce the volume.
+[00:57:21] So when you have a pattern that's very
+[00:57:23] obvious and is more drawn out here more
+[00:57:26] eyes mean usually better follow through.
+[00:57:29] Again, not always but that's that's
+[00:57:30] typically the case.
+[00:57:33] So, risk factors.
+[00:57:35] Um
+[00:57:36] So, here's the thing.
+[00:57:38] Uh
+[00:57:38] stops
+[00:57:40] are usually tight on this pattern.
+[00:57:42] However, we do have a risk factor of
+[00:57:45] false breakouts and double top
+[00:57:46] rejections. So, a double top rejection
+[00:57:49] is when um you come up to this level and
+[00:57:53] then you reject off of it and just kind
+[00:57:55] of like it sells really hard.
+[00:57:59] Now, a number of things can trigger
+[00:58:01] that, but initially, usually what it is
+[00:58:04] it starts with like a big sell order.
+[00:58:06] So, it comes up to this level and all of
+[00:58:07] the sudden someone puts out a big sell
+[00:58:08] order. And so, it immediately kind of
+[00:58:10] flashes down in that market order, and
+[00:58:12] then people that got in for this micro
+[00:58:13] pullback or or 1-minute pullback start
+[00:58:15] to bail, and then you get that panic
+[00:58:17] sell. And if it breaks through the low
+[00:58:19] of this last pullback, it's stopping
+[00:58:21] people out and now it's breaking down.
+[00:58:23] It may still end up working on a
+[00:58:24] 5-minute or a 15-minute time frame, but
+[00:58:27] whether or not you really want to hold
+[00:58:28] it that long is sort of the question.
+[00:58:30] So, this is something that
+[00:58:32] a lot of traders in this place
+[00:58:35] if you see that double top uh and it's
+[00:58:37] and it doesn't break through it, they're
+[00:58:38] going to bail out. So, that means buying
+[00:58:40] at the very high can be a little bit
+[00:58:42] risky, especially in a bear market.
+[00:58:44] Buying on the pullbacks going to be
+[00:58:45] better.
+[00:58:46] Um
+[00:58:47] and so, that that's probably the biggest
+[00:58:48] risk is a false breakout either formed
+[00:58:50] by a the double top or just through it
+[00:58:53] popping and then immediately reversing
+[00:58:54] back down. But, the stop loss is
+[00:58:57] typically tight at the low of the last
+[00:58:58] pullback. Now, this is all relative. If
+[00:59:00] this is a $3 stock, this might only be a
+[00:59:02] 15-cent stock. If it's a $30 stock, it
+[00:59:05] could be a $1.50 a per share stock.
+[00:59:09] But, as you know, we would rather trade
+[00:59:12] lower-priced stocks because it's easier
+[00:59:14] to manage risk on, and usually we'll see
+[00:59:16] more momentum on them anyways. So,
+[00:59:18] that's kind of my preference.
+[00:59:21] Um profit targets on this, I mean,
+[00:59:24] generally speaking, 1:1 is minimum. I I
+[00:59:27] aim for two to one. So, if I'm going to
+[00:59:29] risk 10 cents, I want to have the
+[00:59:30] potential to make 20.
+[00:59:32] The potential, the realistic potential.
+[00:59:35] So, if I'm looking at this setup and I'm
+[00:59:36] thinking about getting in,
+[00:59:37] the difference from this entry here to
+[00:59:39] the high has to be at least 20 cents.
+[00:59:42] That's a 10 cent stop, that's a 20 cent
+[00:59:43] target.
+[00:59:45] If that's not a bare minimum, I probably
+[00:59:47] won't take the trade because I'll just
+[00:59:48] say it's not worth it. You know, maybe
+[00:59:50] it's a B quality setup, maybe in a hot
+[00:59:53] market I would take a B quality setup in
+[00:59:54] a cold market, in a bear market, no. I'm
+[00:59:57] going to be focused on high quality
+[00:59:59] setups, which means during a a bear
+[01:00:01] market, I'm going to trade less
+[01:00:02] frequently.
+[01:00:04] But,
+[01:00:05] the trades that we have, I'll still be
+[01:00:07] aggressive on them, and when they work,
+[01:00:09] I'll do well. And so, that's the biggest
+[01:00:11] difference is fewer trading fewer
+[01:00:14] trades, more disciplined during the bear
+[01:00:16] market.
+[01:00:17] Um and also, in a strong market,
+[01:00:21] I would be adding into these levels. I'd
+[01:00:23] be adding up here, oops, um up here, I
+[01:00:26] would add up here, and I'll just add at
+[01:00:29] highs. When I'm seeing green on the
+[01:00:31] tape, I'll just keep adding into that
+[01:00:33] squeeze.
+[01:00:34] So, I'm just like, I'm all in. In a bear
+[01:00:37] market, I'm going to buy on the first
+[01:00:40] entry here, I might, you know, just take
+[01:00:41] a starter on this dip and then add into
+[01:00:43] this breakout, but I'm not going to be
+[01:00:45] as aggressive adding too high into the
+[01:00:47] breakout because of that false breakout
+[01:00:50] risk. So, a little bit more conservative
+[01:00:52] there, but even within a bear market,
+[01:00:55] there may be individual days in that
+[01:00:58] bear market where it actually does make
+[01:01:00] sense to be more aggressive.
+[01:01:02] You know, a bear market is kind of a hot
+[01:01:04] and cold market. You might have like
+[01:01:05] three or four cold days, and then you
+[01:01:07] have a really hot day. And so, on that
+[01:01:09] really hot day, yeah, you want to be
+[01:01:11] aggressive. And then on the rest of the
+[01:01:12] days, you just go easy.
+[01:01:14] So, and you never know which day's going
+[01:01:15] to be the hot day, that's the thing. So,
+[01:01:17] you show up every day, and you know, you
+[01:01:19] sit down, and you just see what the
+[01:01:20] opportunities are.
+[01:01:23] All right. So, um um
+[01:01:25] So, these are a couple of examples of
+[01:01:27] bull flags and flat tops. And what I'm
+[01:01:30] going to do I'm going to run you through
+[01:01:31] a couple examples of this, and then
+[01:01:35] let's see. Do you guys want to look at
+[01:01:36] the micro pullback next or do you want
+[01:01:38] to look at the ABCD pattern? We can kind
+[01:01:41] of do either.
+[01:01:42] Um
+[01:01:43] the ABCD pattern is just the extended
+[01:01:46] bull flag for a second leg.
+[01:01:48] And then the micro pullback is like all
+[01:01:50] of this condensed on like a very short
+[01:01:52] time frame.
+[01:01:54] I'll let you guys tell me what you
+[01:01:55] think.
+[01:01:56] All right. So, uh bull flags and flat
+[01:01:58] tops. So, this right here uh on on the
+[01:02:01] screen share, this shows um a nice
+[01:02:03] example there of that sort of pullback
+[01:02:06] and then the move higher, right? So,
+[01:02:08] pullback move higher. So, maybe we'll do
+[01:02:10] ABCD into micro pullback and then we'll
+[01:02:12] cover a little bit of parabolic to
+[01:02:13] finish it off. All right. So, pops up,
+[01:02:15] pulls back, and then rips. I mean, this
+[01:02:18] is a perfect example of that first
+[01:02:19] candle making a new high, right?
+[01:02:21] I mean, how is that not a perfect
+[01:02:23] example? You have the move up, the
+[01:02:25] pullback, and then it goes higher. Time
+[01:02:27] frame? That's a 5-minute chart.
+[01:02:29] So, you can trade this bull flag first
+[01:02:31] pullback on a 5-minute.
+[01:02:34] Now, this is um this is kind of
+[01:02:36] interesting. This is a 5-minute chart on
+[01:02:38] the left and a 1-minute on the right.
+[01:02:40] And right here, this is a 1-minute bull
+[01:02:42] flag, but it's kind of a false breakout.
+[01:02:46] See how it's a little bit of a false
+[01:02:47] breakout? Also, notice this is sort of a
+[01:02:50] floating way way way up here. It's super
+[01:02:52] extended.
+[01:02:53] It comes back down to this level at the
+[01:02:56] moving average, and then we set up first
+[01:02:58] 5-minute candle to make a new high, and
+[01:03:00] this thing goes from 360 all the way up
+[01:03:02] to 450, 460. Pulls back, and then that
+[01:03:06] pullback, it actually got bought up
+[01:03:07] pretty well. And the volume is
+[01:03:09] increasing.
+[01:03:11] Right? So, this is where we're starting
+[01:03:12] to see it's a small-cap stock, it's an
+[01:03:15] energy stock, it's moving fast, it's
+[01:03:18] traders are focused on it. You've got
+[01:03:20] you know, decent volume.
+[01:03:22] Here's another one. The stock goes from
+[01:03:23] two a dollar 24 to three dollars, over
+[01:03:26] 100%.
+[01:03:28] This is a five-minute chart. And so, you
+[01:03:31] can see early on a little bit of chop,
+[01:03:33] you know, this pop and pull back, pop
+[01:03:35] up, you know, it's a pull back right
+[01:03:36] there, but it gets a little cleaner
+[01:03:38] right here. That's a pretty clean pull
+[01:03:40] back. This one's a pretty clean pull
+[01:03:42] back. As they start to get more
+[01:03:43] extended, as they start to get more
+[01:03:45] volume, that's where we can start to see
+[01:03:47] these really clean patterns. It just
+[01:03:49] starts to become super obvious. This
+[01:03:52] one, really nice. This is a more
+[01:03:53] expensive stock at 26, goes up to 28,
+[01:03:56] but a very clean pull back.
+[01:03:58] Pops up, first pull back right here. A
+[01:04:01] very quick one and it goes higher. It
+[01:04:02] doesn't wait. It moves up, pulls back,
+[01:04:05] and then goes higher. And that going
+[01:04:07] higher and not waiting,
+[01:04:09] that's why we do so many micro pull
+[01:04:11] backs, especially in a bear market,
+[01:04:13] because when something starts to move,
+[01:04:14] traders jump on it fast. They don't
+[01:04:16] wait. They just jump on it fast cuz they
+[01:04:18] don't want to miss the opportunity, and
+[01:04:20] then off it goes.
+[01:04:22] And the problem is if you're sitting
+[01:04:23] there waiting for that five-minute pull
+[01:04:24] back, a lot of times we just don't get
+[01:04:26] it. So, in a bear market,
+[01:04:28] it's funny, but you actually in some
+[01:04:30] ways have to be faster, because the the
+[01:04:32] opportunities are short-lived. So, this
+[01:04:34] one starts, it goes red, and then it
+[01:04:36] pops up, and that right there on a
+[01:04:38] one-minute chart is like a micro pull
+[01:04:40] back, and then it just rips from 22 all
+[01:04:43] the way to 32 dollars a share. But,
+[01:04:45] don't get caught chasing it, cuz look at
+[01:04:47] that red candle as it comes back down.
+[01:04:49] Right?
+[01:04:51] So, this is another one, sort of red to
+[01:04:54] green move, then it breaks over the
+[01:04:56] VWAP, pulls back, pops higher, pulls
+[01:04:59] back, inverted head and shoulders, dips
+[01:05:02] down, pops up, pulls back, and goes
+[01:05:03] higher. Not the the cleanest, but not
+[01:05:06] bad, either.
+[01:05:08] This is a nice one. Curls over VWAP,
+[01:05:10] pulls back right there, five-minute time
+[01:05:12] frame, and breaks from 12 up to $18 a
+[01:05:16] share.
+[01:05:17] That's fantastic. That's a really nice
+[01:05:19] move.
+[01:05:20] Okay, so now let's talk for a second
+[01:05:22] about uh let's go into the ABCD pattern.
+[01:05:25] So, let's see. Our ABCD pattern, where
+[01:05:28] was it? Um
+[01:05:29] So, the ABCD pattern, I'm going to show
+[01:05:32] you a couple examples of this.
+[01:05:34] The ABCD pattern is basically it it's a
+[01:05:39] bull flag, a first pullback that fails.
+[01:05:42] So, what ends up happening is we have
+[01:05:44] that pullback right here. It pulls back,
+[01:05:47] it makes a new high right there, and
+[01:05:49] then it doesn't go through the high.
+[01:05:52] So, initially, it's a failed bull flag.
+[01:05:56] It pops up, it doesn't go to the high,
+[01:05:57] and it pulls back. But, sometimes that's
+[01:05:59] okay. And it actually actually can
+[01:06:01] create this coiling, this really strong
+[01:06:03] pattern that ends up breaking even
+[01:06:06] stronger when it finally goes than if it
+[01:06:08] had gone on this first setup.
+[01:06:10] So, this shows us a pullback, a
+[01:06:12] breakout, pullback. It pops up right
+[01:06:15] here. It pulls back. It does not break
+[01:06:18] the low. So, that's the important thing.
+[01:06:20] Let's go to the whiteboard.
+[01:06:21] So, the important thing on this setup
+[01:06:24] here for the ABCD pattern
+[01:06:26] is that uh we're moving higher.
+[01:06:31] Okay, we're moving we move higher like
+[01:06:32] this, and then we have the our first
+[01:06:34] pullback right here.
+[01:06:37] And then we pop up here.
+[01:06:39] But, we don't make new highs, right? And
+[01:06:41] then we pull back just a little bit.
+[01:06:44] And then
+[01:06:45] we come up right here, and this is where
+[01:06:47] we break through. So, this is where we
+[01:06:49] start to have this like wedge formation.
+[01:06:51] So, the levels that are important on
+[01:06:53] this pattern is that it cannot break the
+[01:06:56] low of this pullback.
+[01:06:58] If it breaks the low of that pullback
+[01:07:00] then what it's doing
+[01:07:02] is it's stair-stepping down.
+[01:07:05] And that's bearish.
+[01:07:06] It has to hold this level. It can double
+[01:07:08] bottom, but it can't break it. So, it
+[01:07:11] could double bottom right here. It could
+[01:07:12] double bottom and then go higher. So, it
+[01:07:15] forms this kind of W pattern.
+[01:07:17] And sometimes even goes for another leg
+[01:07:19] and then it breaks. I don't usually like
+[01:07:21] to wait too long. If it's not strong
+[01:07:23] enough to break on the first try, I
+[01:07:25] mean, I'm kind of like already like I
+[01:07:27] don't know. This should have kind of
+[01:07:29] gone on the first try, but let's give it
+[01:07:31] a second and then if it goes on the
+[01:07:34] second try, that completes the ABCD
+[01:07:36] pattern, good. If it doesn't go on that
+[01:07:38] try, then I I I really am kind of like
+[01:07:40] this isn't strong enough. If it was
+[01:07:42] really strong, it would have already
+[01:07:44] gone. For some reason, it's just kind of
+[01:07:46] being held back a little bit.
+[01:07:49] So, you can see this one here being held
+[01:07:51] back a little bit. Um
+[01:07:53] this is one, let's see. Um this one's
+[01:07:56] this one's a little bit probably harder
+[01:07:58] to to visualize as a beginner. I'll show
+[01:08:01] you. Um
+[01:08:03] Let's see.
+[01:08:06] So, this one is is right in here. So, it
+[01:08:08] pulls back, it pops up, it dips down,
+[01:08:12] but not below that low and then it goes.
+[01:08:15] And then the first pullback following
+[01:08:16] the breakout provides an opportunity to
+[01:08:18] buy that dip right there.
+[01:08:21] This is another one right in here.
+[01:08:23] Pullback, pop up, pullback, starts to
+[01:08:26] come up, almost starts to form more of
+[01:08:28] like a double top. Pulls back and then
+[01:08:30] it goes on the third try.
+[01:08:33] Sort of similar here. Pulls back, pops
+[01:08:35] up, pulls back and then it goes.
+[01:08:37] So, it's it's really like an
+[01:08:39] an extended bull flag. This is a little
+[01:08:41] bit cleaner. I mean, this one's pretty
+[01:08:43] clean. It pops up, it pulls back, it
+[01:08:45] pops up. And in this case here,
+[01:08:48] this is really common. When you get a
+[01:08:50] big pullback, I mean, this went all the
+[01:08:52] way to nine and then dropped below
+[01:08:54] eight. So, that's a big pullback. It
+[01:08:57] then bounces back up, but it's it's just
+[01:09:00] not really realistic that's going to go
+[01:09:02] all the way back through nine. So, it
+[01:09:03] bounces back up but then not quite
+[01:09:05] enough. It pulls back and then here we
+[01:09:08] start to get this consolidation and now
+[01:09:11] it's like, "Okay, it's holding this
+[01:09:12] level."
+[01:09:13] If it breaks this level here, the next
+[01:09:16] logical spot is a retest of the high and
+[01:09:19] then we're off to the races. So, that
+[01:09:21] one is actually a pretty nice ABCD
+[01:09:23] pattern.
+[01:09:25] This one's a little bit a little bit
+[01:09:27] sloppier. It kind of pulls back and
+[01:09:28] sells off below VWAP, rips back up,
+[01:09:31] pulls back and then it goes.
+[01:09:34] So,
+[01:09:35] I mean, really it's about looking at the
+[01:09:36] trend. You know, is this thing trending
+[01:09:38] higher? Is it moving higher, generally
+[01:09:41] speaking? What are the pivots? You know,
+[01:09:44] when I say pivots, I'm thinking, what
+[01:09:45] are the levels that if this breaks, then
+[01:09:48] the next target is high of day? So,
+[01:09:50] that's those are kind of the spots that
+[01:09:52] I'm trying to get dialed in.
+[01:09:54] Um I think that's that's same one again.
+[01:09:56] Uh so, we're right here we've got this
+[01:09:57] pop up, this pullback, sort of like a
+[01:09:59] little pivot right there.
+[01:10:01] This is a clean one. Pop up, pullback,
+[01:10:03] pop up, pullback and then it goes.
+[01:10:06] It's just usually formed by a little bit
+[01:10:08] of a steeper initial drawdown.
+[01:10:11] And then a rally back up and then
+[01:10:13] another pullback. So,
+[01:10:15] to be honest, in this current market,
+[01:10:19] ABCD patterns are not my favorite
+[01:10:21] because
+[01:10:23] they are already indicating just a
+[01:10:25] little too much weakness and in this
+[01:10:27] market we really need some serious
+[01:10:29] strength.
+[01:10:30] So, let's see. Um so, let's look now for
+[01:10:33] a second at micro pullbacks. So,
+[01:10:36] this and this is important. One of the
+[01:10:38] reasons I wanted to share with you a
+[01:10:39] little bit on the micro pullback is
+[01:10:41] because in this market, stocks are
+[01:10:44] moving when they start to move, they
+[01:10:45] move quick. Traders are not waiting.
+[01:10:48] They just boom, they're off to the races
+[01:10:49] and they go and we don't get we don't
+[01:10:52] get a lot of the ABCD patterns. We don't
+[01:10:54] even get a lot of really clean first
+[01:10:56] pullbacks like on a 5-minute chart. We
+[01:10:59] get a micro pullback, a 1-minute
+[01:11:02] pullback, and then that's it. So, and
+[01:11:04] you know, it goes, and then it just
+[01:11:06] comes back down. So, if you're not
+[01:11:07] jumping in quick on these micro
+[01:11:08] pullbacks, you're missing the whole
+[01:11:09] thing.
+[01:11:10] So,
+[01:11:12] this micro pullback here, let's say this
+[01:11:14] is a 1-minute chart. This was designed
+[01:11:16] as a 1-minute chart.
+[01:11:18] Having said that, it it you could have
+[01:11:20] this same pattern occur on a 5-minute
+[01:11:22] chart,
+[01:11:23] on a 10-second, not really. It's too too
+[01:11:26] fast, but on a 1-minute, yes. So, the
+[01:11:29] way this is formed is a stock is
+[01:11:32] squeezing up, squeezing up, and let's
+[01:11:35] say it hits $3.
+[01:11:37] That's $3 right there. So, we know that
+[01:11:39] that could be considered a level of um
+[01:11:43] psychological resistance. It hits three,
+[01:11:47] and then it pulls back. You see the
+[01:11:48] level two, you see it uh dip back down
+[01:11:51] here till like 292.
+[01:11:54] And then it starts to come back up to
+[01:11:56] 296, 297, 298. Boom, it pops through
+[01:12:00] that level.
+[01:12:01] Okay? So, then we have another green
+[01:12:03] candle. So, what ended up happening,
+[01:12:06] this actually looks kind of more like
+[01:12:09] example two, entry two, where it's like
+[01:12:12] it goes just a little lower, and then it
+[01:12:15] surges through.
+[01:12:17] And that's a pretty classic micro
+[01:12:18] pullback, and it's very common to occur
+[01:12:20] around half and whole dollars.
+[01:12:24] All right? Those have that psychological
+[01:12:26] resistance. So, it comes up to three,
+[01:12:28] and then it moves higher, and in this
+[01:12:29] case we go up to let's say 350,
+[01:12:32] and then it does it again.
+[01:12:34] And so, in this case, maybe it pulls
+[01:12:35] back to 338.
+[01:12:38] And maybe it even has a little red
+[01:12:41] candle here.
+[01:12:43] Now, this could be a 1-minute chart, or
+[01:12:44] it could be a 10-second chart, could be
+[01:12:46] a 5-minute chart, but then it rallies
+[01:12:49] right back up, and goes through 350 up
+[01:12:51] to 375, and then up to next level four.
+[01:12:55] Right? Those are the levels that we'd be
+[01:12:56] trading around half dollars, whole
+[01:12:58] dollars.
+[01:12:59] And then that's all very common. That's
+[01:13:01] the type of pattern that we see all the
+[01:13:02] time.
+[01:13:03] So, when this is happening,
+[01:13:06] if you're just sitting on the sidelines
+[01:13:08] saying, "Well, I'm going to wait for a
+[01:13:09] clean 5-minute bull flag."
+[01:13:12] This stock could go up 40 50% before
+[01:13:14] that happens. And then you you you don't
+[01:13:17] get it. You miss it completely. Right?
+[01:13:19] And that's a problem. And so, the micro
+[01:13:21] pullback is a pattern that if you can
+[01:13:24] visualize it, helps you get into a
+[01:13:27] strong stock sooner. That's the idea.
+[01:13:30] You've got a stock that's really strong.
+[01:13:32] So, what's the fastest way you can get
+[01:13:35] in? Well, number one would be just to
+[01:13:37] press the buy button. But, if you just
+[01:13:39] press the buy button in the middle of
+[01:13:41] this candle squeezing up, like, you
+[01:13:43] know, right here, just randomly, you're
+[01:13:46] just you're just not managing your risk
+[01:13:48] well and you're just buying high today.
+[01:13:50] By getting in right here,
+[01:13:53] I manage my risk off the low of that
+[01:13:55] dip. It's a micro It's a very micro dip,
+[01:13:58] but I'm still managing my risk off that
+[01:13:59] level.
+[01:14:00] Right? So, the pullback
+[01:14:03] helps establish low risk. In a way, it
+[01:14:05] is a micro
+[01:14:07] bull flag.
+[01:14:08] And then the pullback here, it helps
+[01:14:09] establish risk. So, now the risk is
+[01:14:12] right here. Now, you're not going to be
+[01:14:14] able to take this with like 100,000
+[01:14:16] shares because realistically with such a
+[01:14:19] micro pullback, it could flush back down
+[01:14:21] if you took huge size. There probably
+[01:14:24] wouldn't be the liquidity to be able to
+[01:14:25] sell on the bid if you had to. So, this
+[01:14:27] is more like, you know, 10,000 shares.
+[01:14:31] Which honestly is fine that you can do
+[01:14:33] very well trading with 10,000 share
+[01:14:35] blocks. If you want to trade with 500 or
+[01:14:36] 1,000 shares, that's fine, too. You
+[01:14:38] know, from $3 to 350 with 10,000 shares
+[01:14:41] is $5,000.
+[01:14:42] And then doing another micro pullback
+[01:14:44] here, I mean, this could be a 10 $15,000
+[01:14:46] trade potentially, you You depending on
+[01:14:48] how you size and scale into the move.
+[01:14:51] So, for me, it's usually starter here,
+[01:14:54] again, looking for green on the tape.
+[01:14:56] So, we've got the time and sales. We're
+[01:14:58] looking for green orders to go through.
+[01:15:00] Boom, jumping in right there. Maybe then
+[01:15:03] adding to the position if it's going
+[01:15:05] really strong, or if it does a micro
+[01:15:07] pullback kind of right in here. Add
+[01:15:09] again at like 3 you know, 28, and then
+[01:15:12] look for profit around 345, 350. Expect
+[01:15:15] the pullback here, and then hold the
+[01:15:17] core position. Add back to that position
+[01:15:20] right here. Now looking for the move up
+[01:15:22] to 375. If we get a micro pullback
+[01:15:24] there, then add 380 for the move up to
+[01:15:26] four. And again, take profit as we
+[01:15:28] approach four. Wait for pullback around
+[01:15:31] four. If it starts to accelerate, and
+[01:15:33] accelerating means that volume bars
+[01:15:36] are increasing. So, these are the volume
+[01:15:38] bars on on the bottom. If the volume is
+[01:15:41] increasing, that's telling us that this
+[01:15:43] is something that really has a lot of
+[01:15:45] potential.
+[01:15:46] And by this point, no doubt, it's
+[01:15:48] already up 10%. The price of it is good.
+[01:15:50] The relative volume's there. It
+[01:15:52] hopefully has a news catalyst. And if
+[01:15:53] the float is lower, we've already got
+[01:15:55] everything needed for a quality setup.
+[01:15:57] So, on that one, I'm going to naturally
+[01:15:59] be a bit more aggressive.
+[01:16:02] All right. So, that's So, that's the
+[01:16:04] micro pullback. And you know, just to
+[01:16:07] show you a couple examples of micro
+[01:16:09] pullback. Right there, micro pullback at
+[01:16:11] 449. Micro pullback. It pulls back just
+[01:16:14] for a second and then goes up higher.
+[01:16:17] And that's all you got. This thing went
+[01:16:19] to six bucks. That's all you got. If you
+[01:16:21] were looking for a pullback, you didn't
+[01:16:22] get much.
+[01:16:24] On this one, micro pullback right here
+[01:16:26] at 316, then it goes up to 391.
+[01:16:29] Pulls back here. That's a proper
+[01:16:30] pullback. Goes higher. Micro pullback
+[01:16:33] right there. False breakout as it gets
+[01:16:35] more extended.
+[01:16:36] Same risk with um with the others uh
+[01:16:39] with the with as a as regular first
+[01:16:40] pullback is false breakout risk. Um
+[01:16:43] first pullback right here, micro
+[01:16:44] pullback at 350, goes up to 390, all the
+[01:16:47] way up to four, rejects off that level,
+[01:16:49] comes back down. Highest volume ends up
+[01:16:51] being on a red candle. Reminding us that
+[01:16:53] we want to get in early on these and not
+[01:16:56] be chasing them too much. Nice micro
+[01:16:58] pullback here. Up to this high, dip,
+[01:17:01] rips higher.
+[01:17:03] These uh they're a lot easier to sort of
+[01:17:06] um you know, articulate when it's
+[01:17:08] happening in real time. These move These
+[01:17:11] can just move so quickly. Even the
+[01:17:13] screenshots are kind of um well, tricky.
+[01:17:16] That That's a nice micro pullback right
+[01:17:17] there on ACB. This one, GLSI. I mean,
+[01:17:20] this thing went bananas. It it It did
+[01:17:22] this nice micro pullback right there at
+[01:17:24] 47.45, 47.50, then rips up to 50, 55, 60
+[01:17:29] dollars a share. This thing went up to
+[01:17:30] like 100 dollars a share. It was crazy.
+[01:17:33] Uh another one right here. Pulls back,
+[01:17:36] pops up, little pullback, and then it
+[01:17:38] goes higher. So, for all of these, I
+[01:17:40] have, you know, live trading examples
+[01:17:41] and things like that. Um these are like
+[01:17:43] all live trading examples of the whole
+[01:17:45] half dollar, whole dollar break. We're
+[01:17:46] not going to go into those right now. I
+[01:17:48] want to just keep it kind of high-level.
+[01:17:50] Uh those that end up wanting to watch
+[01:17:51] those, you're welcome to down the road.
+[01:17:53] So, now let's look at um
+[01:17:56] parabolic.
+[01:18:01] Um so, let's see. Um
+[01:18:06] I'm going to just hide my notes here on
+[01:18:08] these. Um
+[01:18:10] Parabolic during parabolic price action.
+[01:18:15] So, I guess let's see what section this
+[01:18:18] is.
+[01:18:20] We've got a lot of mentions of parabolic
+[01:18:22] here. Um
+[01:18:25] Um yeah, some of these ones could be
+[01:18:26] pretty crazy. These are the These are
+[01:18:28] the low volume ones especially.
+[01:18:30] Um I mean, that This is parabolic,
+[01:18:32] right? So, this was
+[01:18:35] I mean, this stock went from $6 to 38
+[01:18:38] bucks. You know, on this particular day
+[01:18:41] trading, I think I went up like $175,000
+[01:18:44] on the day. I should remind you that my
+[01:18:46] results are not typical. Trading is
+[01:18:48] risky. GameStop, this was I was up uh
+[01:18:52] $100 a share. I was in at 29 229
+[01:18:57] dollars. It's at 332. Only 250 shares.
+[01:19:01] I'm up 25 grand on it.
+[01:19:02] Um that's obviously parabolic. And so,
+[01:19:05] the thing with parabolic is that
+[01:19:07] when something is going parabolic, you
+[01:19:10] do not have a lot of time. You You are
+[01:19:14] not usually going to get proper 5-minute
+[01:19:17] pullbacks. So, when you're getting into
+[01:19:18] parabolic stuff, you're really only
+[01:19:21] getting micro pullbacks. And so, let's
+[01:19:23] think about why that's the case.
+[01:19:25] That's the case because
+[01:19:29] so many traders are jumping in to
+[01:19:32] capture this move that it's not It's not
+[01:19:35] pulling back. It pops up, it pulls back
+[01:19:38] for a second, and then more traders are
+[01:19:40] right there ready to jump in. And then
+[01:19:42] it goes the next leg up. And now, you're
+[01:19:44] having short covering. Short sellers are
+[01:19:46] panic covering, and now it's just
+[01:19:49] continuing higher. The reality is
+[01:19:52] this is something that occurs in bear
+[01:19:54] markets. You have short squeezes in bear
+[01:19:56] markets. We had one just last week. So,
+[01:20:00] I mean, it happens. You do have bear
+[01:20:02] market You do have short squeezes in
+[01:20:03] bear markets. In fact, some of the best
+[01:20:05] short squeezes can be towards the end of
+[01:20:07] the bear market as short sellers are
+[01:20:09] getting really comfortable, really
+[01:20:11] confident, just hitting things short.
+[01:20:14] And then you get one that, you know,
+[01:20:15] does something like
+[01:20:17] like this that just accelerates like
+[01:20:19] crazy. And you know what? Eventually,
+[01:20:22] look, this thing came back down. It went
+[01:20:23] all the way up to 36. It squeezed out
+[01:20:26] all the shorts, totally liquidated them,
+[01:20:29] and then ends up coming back down to 12.
+[01:20:31] So, maybe they were right about you
+[01:20:33] know, long-term, but can you afford to
+[01:20:35] hold 10,000 shares going $300,000
+[01:20:37] against you? No. And even if you could,
+[01:20:40] why would you?
+[01:20:41] We've seen stocks that, you know, like
+[01:20:43] well, GameStop went to 500. So, you you
+[01:20:47] you learn to manage risk. You learn to
+[01:20:49] get the heck out when, you know, there's
+[01:20:51] something moving crazy. You don't want
+[01:20:53] to get run over. It's not worth it. You
+[01:20:55] never want to empower one trade to ruin
+[01:20:57] your career, you know, and and blow you
+[01:20:59] out of a trade uh you know, blow your
+[01:21:01] account up.
+[01:21:02] What What was I out on this? $102,000
+[01:21:05] on this stock around the day? I mean,
+[01:21:07] this was wild. This thing goes from 350
+[01:21:09] to 13 bucks. So, each one of these
+[01:21:11] arrows are where I was trading it.
+[01:21:13] Micro pullback. Micro pullback. Micro
+[01:21:16] pullback. Micro pullback. Micro
+[01:21:18] pullback, nice breakout. Micro pullback,
+[01:21:21] pops higher. Micro pullback, nice break.
+[01:21:24] Micro pullback, nice break. Reverses,
+[01:21:26] back down. Inverted head and shoulders,
+[01:21:29] breaks through nine. Micro pullback 950,
+[01:21:32] parabolic up to 11. Micro pullback up to
+[01:21:34] 13. Boom. Now we're moving. This is what
+[01:21:37] we're looking for. That was a nice one.
+[01:21:40] You know, that's when it starts to get
+[01:21:42] really exciting. And these are
+[01:21:43] fast-moving trades. And this is where
+[01:21:46] you have the benefit of trading those of
+[01:21:48] you that are part of the community. You
+[01:21:49] trade side by side of me. You can hear
+[01:21:50] me articulating what I'm seeing. It
+[01:21:53] doesn't mean I'm right on everything. I
+[01:21:54] mean, I of course have my share of
+[01:21:55] losers. But, being able to have that
+[01:21:58] kind of first base coach there to tell
+[01:21:59] you what's going on, you don't have to
+[01:22:02] do this all by yourself. So, the biggest
+[01:22:04] thing with parabolic is it really this
+[01:22:06] ties back to the micro pullback. It's
+[01:22:09] jumping on those micro pullbacks as
+[01:22:11] they're moving higher. So, a stock like
+[01:22:12] this one, um we can go in full screen on
+[01:22:15] this for a second. Um
+[01:22:17] So, on this one right here,
+[01:22:20] really all you got.
+[01:22:22] So, first it starts to break out right
+[01:22:24] here. It squeezes up to eight, does a
+[01:22:26] micro pullback there and then goes up to
+[01:22:28] like 850 and nine. It dips. It breaks
+[01:22:32] through 10, squeezes up to 12, it gets
+[01:22:34] halted. It pops higher, it pulls back.
+[01:22:37] This is a micro pullback right here. It
+[01:22:39] goes up to 12, then up to 14. It halts.
+[01:22:42] It opens.
+[01:22:44] Now, it opens right here. It dips down.
+[01:22:46] See the bottom of that candle wick?
+[01:22:48] So, it dipped down and then it surges
+[01:22:51] right back up to 20. Pulls back, squeeze
+[01:22:54] up to 21, 22 right into a halt. So, that
+[01:22:56] was another micro pullback there at 20.
+[01:22:58] I mean,
+[01:22:59] these are quick.
+[01:23:00] So, if you're not able to jump on fast,
+[01:23:03] you're going to miss
+[01:23:04] the entire move.
+[01:23:06] Now, as part of this study group, I want
+[01:23:09] to answer some questions that some of
+[01:23:11] you guys have about trading in general
+[01:23:13] and in trading during a bear market in
+[01:23:15] general. So,
+[01:23:17] why don't I why don't we do some Q So, I
+[01:23:20] taught this class live. I ended up going
+[01:23:22] on for another hour and a half of Q&A.
+[01:23:24] So, in an effort to keep this episode
+[01:23:26] relatively concise, I'm going to cut it
+[01:23:28] here and I want to remind you guys if
+[01:23:30] you want to do a two-week trial over at
+[01:23:32] Warrior Trading and get a sense of
+[01:23:33] whether you like the way I trade in real
+[01:23:35] time, there's a link right down below
+[01:23:37] that you can check out. During the
+[01:23:38] two-week trial, you'll have access to
+[01:23:40] the chat room, ultra-low latency
+[01:23:42] broadcast, so you can listen and watch
+[01:23:44] me while I'm streaming ad-free using the
+[01:23:46] fastest streaming servers that we were
+[01:23:49] able to develop. I have my own
+[01:23:50] development team and we built this out
+[01:23:53] to achieve this goal of giving you
+[01:23:55] real-time market commentary. You'll also
+[01:23:58] have access to the same scanners that I
+[01:24:00] use every single day. And so, during
+[01:24:02] your two-week trial, you'll get a sense
+[01:24:03] of whether you like the way I trade,
+[01:24:05] whether you like the community, and
+[01:24:06] whether you like the tools that we've
+[01:24:08] built. And if you like it and you love
+[01:24:10] it, then you'll stick with it and we'd
+[01:24:11] love to have you as a long-time member
+[01:24:13] of the community. And if not, no harm,
+[01:24:14] no foul. You gave it a try, you got a
+[01:24:16] sense of what it's like, and it's no big
+[01:24:18] deal. So, I I to encourage you to take
+[01:24:20] advantage of the two week trial right
+[01:24:22] down below and I want to thank you again
+[01:24:25] as always if you have questions and
+[01:24:26] comments please leave them down below.
+[01:24:28] We do respond to every comment posted on
+[01:24:30] the video and I hope you subscribe to
+[01:24:32] the channel if you haven't already. All
+[01:24:33] right, so keep learning, keep studying.
+[01:24:36] The only way to get through this market
+[01:24:37] is by being disciplined. So you can
+[01:24:40] check out a couple more episodes from
+[01:24:41] our channel right here and right here.
+[01:24:44] All right, thanks so much. See you guys
+[01:24:46] soon.

@@ -1,0 +1,753 @@
+# The "Sub VWAP Trap" Trading Strategy 🍏 (Big Breakout Setup)
+# https://www.youtube.com/watch?v=W3jXQlgGbBc
+# duration_sec: 1793
+
+[00:00:00] in today's episode I'm going to teach
+[00:00:01] you how to trade the sub vwap trap this
+[00:00:04] is a setup that I really love because
+[00:00:06] when it occurs it catches a lot of
+[00:00:08] Traders by surprise shorts feel like
+[00:00:11] they're in the driver's seat they're all
+[00:00:12] nice comfy and cozy Longs not really
+[00:00:14] paying attention and all of a sudden you
+[00:00:17] get this big breakout shorts are
+[00:00:20] covering Longs are jumping in and next
+[00:00:22] thing you know we're looking at a
+[00:00:23] parabolic squeeze through the high of
+[00:00:24] day and that's exactly what happened
+[00:00:26] today now although I like this setup a
+[00:00:28] lot it doesn't show up all that often so
+[00:00:31] when we had a good example today I knew
+[00:00:33] this is the time to make an episode for
+[00:00:35] you guys and use this as a case study so
+[00:00:37] this is the stock
+[00:00:39] scni uh it's it's just a regular stock
+[00:00:42] and by the way you could use this uh VAP
+[00:00:44] breakout setup even if you're not
+[00:00:45] trading stocks but you're trading
+[00:00:46] currency pairs or futures or something
+[00:00:48] like that it's a setup that is really
+[00:00:51] based on this swing between the buyers
+[00:00:54] and the sellers it's a sentiment shift
+[00:00:57] and it can create a really violent move
+[00:01:00] so this ended up going up 125% you can
+[00:01:03] see right here that I locked up $1
+[00:01:06] 4,279 72 of profit on it which now is
+[00:01:09] putting me up just about $65,000 on the
+[00:01:12] month and we still have two full weeks
+[00:01:14] left so I'm in a pretty good position
+[00:01:16] here and one of the things I said is
+[00:01:17] that each day that I'm hitting like a
+[00:01:19] big green p&l like this I'm going to
+[00:01:22] teach a mini class based around the
+[00:01:23] strategy that I was trading on that day
+[00:01:25] so thank you guys for tuning in I hope
+[00:01:27] you're hit the hitting the thumbs up and
+[00:01:28] subscribing to the channel let's go
+[00:01:29] ahead head and dive into today's class
+[00:01:32] so I've got the live recording from scni
+[00:01:36] so we'll go over that in a second but
+[00:01:37] first we're going to go full screen here
+[00:01:40] I'm going to back this up and we're
+[00:01:42] going to talk about the sub vwap trap
+[00:01:45] okay so these are the topics we're going
+[00:01:47] to cover five topics going to or five
+[00:01:50] this is the the I guess five subtopics
+[00:01:52] we're going to run through them pretty
+[00:01:54] quickly because I want to jam-pack this
+[00:01:56] class with content for you guys so the
+[00:01:58] definition of subv weap trap the pros
+[00:02:00] and cons trading it tools required to
+[00:02:02] trade this strategy I'm going to share
+[00:02:04] with you my subv WAP strategy subwap
+[00:02:07] trap strategy and then I'm going to tell
+[00:02:09] you the skills that you need in order to
+[00:02:11] start trading it on your own okay so
+[00:02:15] first let's make sure we're all coming
+[00:02:17] here with a level set even playing field
+[00:02:20] let me give you the definition of volume
+[00:02:21] weighted average price vwap this
+[00:02:24] calculates the average price of a stock
+[00:02:27] over the period of the day and it
+[00:02:30] factors in not just the average price
+[00:02:32] but the amount of volume that is traded
+[00:02:35] so the way this calculation works is it
+[00:02:39] takes um the high plus the low plus the
+[00:02:43] close and then divide it by three and
+[00:02:46] that gives you the average price for one
+[00:02:49] period of time and then it multiplies
+[00:02:52] that by the volume and then it divides
+[00:02:54] it by the cumulative volume so the
+[00:02:57] result is you get a plus otted line on
+[00:03:01] your chart that is essentially showing
+[00:03:03] you the equilibrium point of a stock
+[00:03:07] factoring in the amount of shares that
+[00:03:09] traded so it shows you the exact average
+[00:03:13] price in other words if we know the
+[00:03:16] exact average price and we see that the
+[00:03:18] stock is trading above that price we can
+[00:03:21] assume that the Bulls are in control and
+[00:03:24] if it's trading below that price then
+[00:03:25] the Bears are in control I have it
+[00:03:28] plotted as an orange line right here on
+[00:03:30] my charts in the past I had it as a
+[00:03:32] dotted line which was a little easier to
+[00:03:34] see but um right now it's plotted as a
+[00:03:36] solid line so that orange line that you
+[00:03:38] see right there in the background is the
+[00:03:40] volume weighted average price so in the
+[00:03:43] case of this stock it had breaking news
+[00:03:45] right at 7 a.m. and that resulted in the
+[00:03:48] stock squeezing from 450 up to about 850
+[00:03:52] in it was like 15 minutes it was
+[00:03:54] basically straight up and it of course
+[00:03:57] at that time was trading well above the
+[00:03:59] volume average price but then we got a
+[00:04:02] swing back down some sellers came in and
+[00:04:05] for the rest of this sort of morning
+[00:04:06] session we were trading below volume
+[00:04:09] weighted average price and so it seemed
+[00:04:11] at that time like who was in control the
+[00:04:14] Bears it wasn't the Bulls this stock was
+[00:04:16] just a little too weak for whatever
+[00:04:19] reason not exactly sure why um it can be
+[00:04:22] kind of difficult to know the exact
+[00:04:25] reason why one stock you know has a
+[00:04:28] great headline and then continues to
+[00:04:30] stay above vwap all day long and just
+[00:04:33] grind higher and higher and higher
+[00:04:35] whereas another one with what is
+[00:04:37] seemingly good news pops up and then
+[00:04:39] flushes and is below vwap for the rest
+[00:04:42] of the day but one of the variables is
+[00:04:45] whether or not the company is selling
+[00:04:47] shares so if the company is selling
+[00:04:49] shares then that's going to drive the
+[00:04:51] price down if there's insiders selling
+[00:04:53] shares that can also Drive the price
+[00:04:54] down so you know that's going to vary
+[00:04:56] from company to company based on the
+[00:04:58] circumstances of who's invested in that
+[00:05:01] company what the balance sheet of that
+[00:05:02] company looks like so on and so forth so
+[00:05:05] for whatever reason today uh scni ended
+[00:05:08] up coming down below vwap and then right
+[00:05:11] here is where we got the vwap Trap so
+[00:05:15] the sub vwap trap occurs when the stock
+[00:05:18] is trading below vwap and you typically
+[00:05:22] the stock needs to have previously
+[00:05:24] squeezed up at least 10% but now it's
+[00:05:27] declined and it's pulled back below
+[00:05:29] volume weight average price and usually
+[00:05:32] we like to see that it's failed previous
+[00:05:34] attempts to break over vwap so the
+[00:05:36] reason we like that I'll show you on the
+[00:05:38] on the Whiteboard and we're going to
+[00:05:41] draw this as the vwap line here so that
+[00:05:44] means the price would have squeezed up
+[00:05:47] and then I'll just keep it in green come
+[00:05:49] back down tried to get back above it
+[00:05:51] pulled back tried to get back above it
+[00:05:53] pulled back and then right here comes
+[00:05:55] back up for one more attempt and then
+[00:05:58] this is where we break sometimes we'll
+[00:06:00] pull back and we'll retest and then if
+[00:06:02] we hold We're Off to the Races almost
+[00:06:04] always making a new high relative to uh
+[00:06:07] the previous high of day so the thing
+[00:06:11] with volume weight average price is that
+[00:06:13] when we're below it and the price comes
+[00:06:16] up to it a lot of times it serves as
+[00:06:19] resistance so price can't break it
+[00:06:22] shorts are adding to their position here
+[00:06:25] and Traders who bought the dip down here
+[00:06:27] are taking profit right here this is
+[00:06:29] reversal trading when you're buying
+[00:06:32] really like way down here and taking
+[00:06:34] profit here but other shorts are going
+[00:06:36] to be shorting here and maybe not even
+[00:06:39] adding here but looking for kind of the
+[00:06:41] all day fade back down which is not
+[00:06:44] impossible you could certainly see that
+[00:06:46] kind of move and we have seen it um on a
+[00:06:48] number of stocks over the years where
+[00:06:49] you have the pop and then it can't get
+[00:06:51] back over vwap and it just Fades all day
+[00:06:54] so it's definitely a strategy for short
+[00:06:56] sellers to short that fade with a stop
+[00:07:00] just above vwap so then when the price
+[00:07:03] suddenly breaks vwap the momentum
+[00:07:07] suddenly shifts back into the hands of
+[00:07:10] the Bulls shorts begin covering Bulls
+[00:07:13] are buying there's an imbalance to the
+[00:07:15] buy side and a squeeze begins and that's
+[00:07:18] exactly what we saw today so the pros of
+[00:07:21] this strategy are fairly straightforward
+[00:07:23] when it works the moves can be really
+[00:07:25] big as we saw here from uh 550 all the
+[00:07:28] way up to 9 a share that's a fantastic
+[00:07:31] move we can possibly get um parabolic
+[00:07:35] squeezes through new high of day when
+[00:07:37] this works really well and the entry is
+[00:07:39] fairly easy to understand even for
+[00:07:42] beginners which makes this a really
+[00:07:44] appealing strategy however there's also
+[00:07:47] some cons the cons of this strategy is
+[00:07:50] that there's inherent weakness because
+[00:07:52] the stock already broke below vwap right
+[00:07:56] possible causes could include as I
+[00:07:57] mentioned earlier the company selling
+[00:07:59] shares investors exercising warrants and
+[00:08:02] selling shares insiders dumping shares
+[00:08:04] investors dumping shares selling selling
+[00:08:07] selling selling selling something is
+[00:08:09] creating an imbalance to the sell side
+[00:08:12] yes the stock popped up early made a
+[00:08:14] nice big squeeze but now it just feels
+[00:08:17] like there's unrelenting selling selling
+[00:08:19] selling and just driving the price back
+[00:08:22] down so when that's the case it's not
+[00:08:24] impossible you could get a subv app trap
+[00:08:27] but if the selling is really strong
+[00:08:29] doesn't usually happen which makes this
+[00:08:31] setup a little bit more rare shorts may
+[00:08:34] be more aggressive to try to hold the
+[00:08:36] stock back if they are in heavy which
+[00:08:38] means if they take a big position while
+[00:08:41] the price is dropping well I'll do I'll
+[00:08:44] show this on my chart here so let's say
+[00:08:47] shorts um you know a short takes a
+[00:08:50] really big position on this stock right
+[00:08:52] in this area they're shorting the break
+[00:08:54] of vwap and then they're adding on the
+[00:08:56] pops and they're looking for this thing
+[00:08:58] to come all the way back down to before
+[00:09:00] so when it starts to pop back up here
+[00:09:02] they might put a 50,000 share sell order
+[00:09:05] on the ask to try to scare off any
+[00:09:08] buyers well if buyers buy that up then
+[00:09:11] we get the move higher but you'll have
+[00:09:13] sellers defending this level defending
+[00:09:17] means they're putting their orders up
+[00:09:18] against that level and they're they're
+[00:09:20] hoping that they're creating a wall that
+[00:09:23] does not break but of course if that
+[00:09:25] wall does break suddenly you get that
+[00:09:27] flip in sentiment and that's when things
+[00:09:29] can get pretty crazy so you know this is
+[00:09:33] a setup that has a bit more tug-of-war
+[00:09:35] it's a bit more of a battle between
+[00:09:37] Longs and shorts um and the other thing
+[00:09:39] that's tricky about this is that
+[00:09:41] breakouts can occur at unusual times
+[00:09:43] like lunchtime or in the afternoon it's
+[00:09:45] kind it usually is sort of unexpected
+[00:09:48] and that's kind of part of what makes
+[00:09:50] this setup work so well is that there's
+[00:09:52] a bit of an element of surprise just all
+[00:09:55] of a sudden boom this thing is taking
+[00:09:57] off and and it's like whoa what's going
+[00:09:59] on and Traders are kind of scrambling
+[00:10:01] shorts are scrambling to cover Longs are
+[00:10:03] scrambling to get in and when this setup
+[00:10:05] works really well during regular Market
+[00:10:07] hours the break of vwap results in a
+[00:10:09] halt up so it squeezes and halts up
+[00:10:12] because the stock goes up more than 10%
+[00:10:14] in less than five minutes it then is
+[00:10:16] paused for five minutes on a volatility
+[00:10:18] trading pause resumes and often dips and
+[00:10:22] rips higher sometimes even into a second
+[00:10:23] Hall and this is where shorts hardly
+[00:10:26] have a chance to unwind the position and
+[00:10:29] this this is a big thing that they talk
+[00:10:30] about is that now the stock can start
+[00:10:32] just skipping levels next thing you know
+[00:10:34] is just pushing up 50 cents a dollar a
+[00:10:36] share at a time because there's no
+[00:10:38] liquidity the interesting thing about
+[00:10:40] the market is that there'll be a
+[00:10:42] tremendous amount of liquidity right
+[00:10:44] around the current trading price so when
+[00:10:47] we have sort of like um let's see like
+[00:10:50] this area right here we have this area
+[00:10:52] right here there's a lot of liquidity a
+[00:10:53] lot of volume in this area but then when
+[00:10:55] it starts to pull away there won't be as
+[00:10:58] many people lined up to sell in these
+[00:11:00] areas because well if this thing breaks
+[00:11:03] these levels it could make a big move so
+[00:11:05] we end up having sort of like if we
+[00:11:07] looked at the distribution of orders not
+[00:11:09] a lot of orders not a lot of orders and
+[00:11:11] then more and more and more and more and
+[00:11:14] then fewer and fewer and fewer so as
+[00:11:16] long as a stock stays within this range
+[00:11:19] it's going to be very congested and and
+[00:11:21] it's going to move slowly but as soon as
+[00:11:23] it breaks out it'll move fast to the
+[00:11:25] upside or fast to the downside so we're
+[00:11:27] looking to trade breakouts especially as
+[00:11:30] momentum Traders and this can be a
+[00:11:32] little tricky because the entry
+[00:11:33] initially is while the stock is still in
+[00:11:36] a bit of a period of
+[00:11:38] consolidation so the tools required to
+[00:11:41] trade this strategy I mean for the most
+[00:11:43] part it's the same as any other strategy
+[00:11:46] you need to have some software for
+[00:11:48] finding volatility in real time so I'm
+[00:11:51] using the day trade Dash scanners as you
+[00:11:53] guys know you can see them that that's
+[00:11:55] what you're seeing in the background
+[00:11:56] here whenever I'm pulling my charts up
+[00:11:58] so I've got my scan scaners right here
+[00:12:00] and of course um scni is sitting on the
+[00:12:02] scan right now up
+[00:12:04] 41% uh but earlier as it was squeezing
+[00:12:07] higher it was on this scanner as well
+[00:12:09] and it was very obvious that this is a
+[00:12:11] stock to pay close attention to so you
+[00:12:13] need to have your scanners you're going
+[00:12:15] to need to have charts of course you
+[00:12:16] need to be able to plot where the volume
+[00:12:18] weight price average the vwap is on uh
+[00:12:22] the actual
+[00:12:23] chart um and you're going to need a
+[00:12:25] platform that's going to give you access
+[00:12:27] to level two data level two data uh and
+[00:12:30] watching the level two is actually what
+[00:12:31] gave me indication to take my first
+[00:12:33] trade for the break of vwap or the sub
+[00:12:36] vwap trap on scni and you'll see that in
+[00:12:38] a second having hot Keys even simple
+[00:12:41] hotkeys just to buy and sell quickly
+[00:12:43] it's going to make it a little bit
+[00:12:44] easier um so for me I have a hotkey that
+[00:12:47] is
+[00:12:48] shift so I press shift and then I press
+[00:12:52] the the number one right here shift plus
+[00:12:55] one right here and that's going to send
+[00:12:57] a Buy order to buy at the ask plus 15
+[00:13:01] cents it gives an offset so as something
+[00:13:03] is moving up quickly I can jump in now
+[00:13:06] you can script that for as many shares
+[00:13:07] as you're comfortable with depending on
+[00:13:09] what your risk tolerance is a lot of
+[00:13:10] people will set it for like a th000 and
+[00:13:12] then shift two is 2,000 3 is 3,000 four
+[00:13:15] is 4,000 5 is 5,000 Etc you go all the
+[00:13:18] way up to 10,000 if you want whatever
+[00:13:20] you want um and then I have another
+[00:13:23] button that is um contrl so contrl uh Z
+[00:13:28] and control Z is sell bid minus 15 and
+[00:13:34] it's for full position so selling my
+[00:13:37] full position at the bid minus 15 cents
+[00:13:40] then I have another key that's control K
+[00:13:42] the K button kind of in this area and
+[00:13:45] control L and this is for selling at the
+[00:13:48] ask uh so selling the position instead
+[00:13:51] of the bid it's just ask price to sell
+[00:13:54] into strength so having even just those
+[00:13:56] four simple hot Keys plus control key
+[00:13:59] you up here to cancel any open orders
+[00:14:02] that's going to get you um the ability
+[00:14:04] to move in and out of these trades
+[00:14:06] pretty quickly which is what you're
+[00:14:07] going to want when you've got a fast
+[00:14:09] moving stock and of course as always
+[00:14:11] it's great to have software that you can
+[00:14:13] use to review your analytics and I use
+[00:14:15] Trader viiew for that and I don't have
+[00:14:17] any affiliate relationship with them so
+[00:14:18] use them if you want or don't use them
+[00:14:20] if you don't want it's up to you okay so
+[00:14:23] now let's talk about my subv WAP trap
+[00:14:25] strategy so Step One is finding a stock
+[00:14:28] that's volatile all right so step one
+[00:14:31] find the stock on the scanner oops it's
+[00:14:33] okay we'll just go like this um so step
+[00:14:36] one find the stock on the scanner step
+[00:14:38] two is to figure out what the news
+[00:14:39] catalyst is now a news catalyst is
+[00:14:42] actually important for the vwap sub vwap
+[00:14:44] trap because it gives the reason for the
+[00:14:46] stock to change from being bearish to
+[00:14:49] bullish so this did have news out this
+[00:14:52] morning um we had a headline here which
+[00:14:54] was great so we had a catalyst that gave
+[00:14:57] us step two step three I perform my
+[00:15:00] technical analysis which is based on
+[00:15:02] reading Candlestick charts so if you
+[00:15:04] haven't watched my full length episode
+[00:15:05] on how to read Candlestick charts from
+[00:15:07] zero make sure you check that out I'll
+[00:15:09] put a link to that at the end of this
+[00:15:10] episode um so when I'm talking about
+[00:15:14] technical analysis I check the following
+[00:15:17] time frames you'll see the 10sec the 1
+[00:15:19] minute the 5 minute and the daily chart
+[00:15:21] right down here so I have four time
+[00:15:23] frames all for the same stock I start
+[00:15:25] with the largest time frame first and I
+[00:15:28] looked at see if there's any nearby
+[00:15:30] resistance and in fact we did have
+[00:15:32] resistance right here at the 200 moving
+[00:15:34] average but it was up around like 850 so
+[00:15:37] it was a resistance level that came into
+[00:15:39] play but it wasn't an issue immediately
+[00:15:42] we also had a day back here where the
+[00:15:44] stock had 30 million shares of volume
+[00:15:46] popped up and sold off all day long so
+[00:15:49] that made me a little bit nervous on
+[00:15:51] this but it was able to show a good
+[00:15:54] amount of strength but it's not totally
+[00:15:56] surprising that today sort of is
+[00:15:58] matching that
+[00:15:59] both high volume red days you know as
+[00:16:01] we're getting further into the trading
+[00:16:04] session then from there I look at the
+[00:16:06] 5-minute chart and what the five- minute
+[00:16:07] chart showed me on scni was that we had
+[00:16:11] made this initial move up right here
+[00:16:12] which I knew because I had already
+[00:16:13] traded that and then we got this
+[00:16:15] pullback and we were consolidating under
+[00:16:17] vwap now at the time uh I didn't see
+[00:16:20] anything really more to look at so I
+[00:16:22] didn't jump into focusing on the one
+[00:16:23] minute chart or the 10-second chart I
+[00:16:26] would really only do that if I was at a
+[00:16:28] point where I was actually considering
+[00:16:30] taking the trade but I wasn't
+[00:16:32] considering taking a trade uh at the
+[00:16:34] moment that you know I sort of first was
+[00:16:36] looking at this uh but someone in the
+[00:16:38] chat room um Alexandra she mentioned um
+[00:16:42] take a look at snci for a dip trade and
+[00:16:45] I pulled it up and when I first pulled
+[00:16:47] it up I think it was probably around
+[00:16:49] this area here and I said well I don't
+[00:16:52] know it's a little tricky it has pulled
+[00:16:55] back a good bit it's definitely below
+[00:16:57] vwap
+[00:16:59] I don't know and my thinking at that
+[00:17:01] time was that there were a couple of
+[00:17:02] other stocks that were moving and that
+[00:17:05] were obvious you could see we have other
+[00:17:07] stocks here that are up more than
+[00:17:09] scni so I was sort of focusing on those
+[00:17:12] and I got some trades on a couple of
+[00:17:14] them crkn dats
+[00:17:17] ivp so and by the way ivp was straight
+[00:17:20] off the watch list from uh yesterday so
+[00:17:22] that was a nice trade I didn't make as
+[00:17:24] much on it as I guess I could have but
+[00:17:26] nonetheless um had a couple trades here
+[00:17:29] but then as we started getting a little
+[00:17:30] closer to the open I started recognizing
+[00:17:33] that all of the leaders were pulling
+[00:17:36] back and they didn't really look very
+[00:17:38] good and I kind of flipped back over to
+[00:17:41] scni which was on a side chart and it
+[00:17:43] was sort of right in this area right
+[00:17:45] here and I kind of what this is what I
+[00:17:47] noticed it's basing when I say it's
+[00:17:50] basing I mean it's holding support it's
+[00:17:53] holding this low so in this area we were
+[00:17:56] kind of making new lows making new lows
+[00:17:57] making new lows and then we kind of
+[00:17:59] stopped making new lows and in fact we
+[00:18:01] made a little pop up and so that little
+[00:18:04] teeny pop up there got me kind of
+[00:18:06] thinking that we're starting to base out
+[00:18:09] we're still below volume weight average
+[00:18:11] price but we're starting to base out so
+[00:18:14] what I decided to do here was to look
+[00:18:16] for an entry so step four once I've done
+[00:18:19] my technical analysis and I begin to see
+[00:18:21] a setup I look for an entry and this is
+[00:18:24] where I'm pulling up my level two so
+[00:18:26] we're going to go ahead and jump into uh
+[00:18:28] the screen here so this is going to show
+[00:18:31] you my actual trading platform right
+[00:18:33] here this is from this morning and so I
+[00:18:36] have scni up on this level two window
+[00:18:39] it's up 40% here about 4.2 million
+[00:18:42] shares of volume and right at this
+[00:18:43] moment there's a spread of 14 cents 560
+[00:18:47] by 574 575 but right here right in that
+[00:18:52] moment the bid tightened up so the bid
+[00:18:54] tightened up there a little bit and now
+[00:18:56] there's a little green on the tape so at
+[00:18:58] this point I pull up the chart and I'm
+[00:19:00] starting to think we might have
+[00:19:02] something to work with so what I end up
+[00:19:04] doing is I type my uh order for 1,000
+[00:19:06] shares and the price is 5.85 and I'm
+[00:19:09] kind of just looking at this level here
+[00:19:11] looking at the one minute chart 10sec
+[00:19:13] chart's not showing a lot because it's a
+[00:19:15] little bit more thinly traded but I'm
+[00:19:17] just watching the time in sales and
+[00:19:19] watch right there when I saw that burst
+[00:19:21] of order go through I said I'm jumping
+[00:19:23] in that's it I'm jumping in right here
+[00:19:25] so now I'm in at 85 my order is right
+[00:19:27] there so I'm minute 85 and now you've
+[00:19:30] got 75 by
+[00:19:31] 93 so all of a sudden we're starting to
+[00:19:34] kind of perk up now and when we look at
+[00:19:37] the uh the F minute chart and the one
+[00:19:39] minute chart you can see that the the
+[00:19:41] sentiment is starting to shift a little
+[00:19:43] bit right all of a sudden we have this
+[00:19:45] five minute candle right and the one
+[00:19:47] minute starting to push up here towards
+[00:19:49] six now the second I got in the way I
+[00:19:53] trade I follow a philosophy of breakout
+[00:19:57] or bailout which means if I time my
+[00:19:59] entries correctly I I should have pretty
+[00:20:01] much immediate resolution if I'm correct
+[00:20:04] at the entry point it'll work right away
+[00:20:06] and if I get in and it kind of stalls
+[00:20:08] and nothing happens for a few minutes
+[00:20:10] that's when I'm thinking I might have
+[00:20:12] timed this wrong you know maybe I've got
+[00:20:14] the right idea but it's not going to
+[00:20:16] work and the the biggest concern that I
+[00:20:18] had with this stock at the time was that
+[00:20:21] it was it was not I I was concerned it
+[00:20:25] was not quite obvious enough so if we
+[00:20:27] look at the scan and um it was up 41%
+[00:20:31] here but it was in let's see 1 2 3 4 5
+[00:20:35] 6th Place it was in sixth place oh you
+[00:20:38] can't see because of my video let me
+[00:20:39] just hide that video so it was in sixth
+[00:20:41] place here um in terms of um its
+[00:20:45] position on the scan I usually like to
+[00:20:47] trade a stock that's in like first or
+[00:20:49] second place but I'd already traded dats
+[00:20:53] got some profit on it these ones were a
+[00:20:54] little too cheap DJ djt I didn't want to
+[00:20:57] trade cuz I knew it'd be too risky
+[00:20:59] mirror was too cheap and so this kind of
+[00:21:01] left me with this was the most obvious
+[00:21:03] one for me but I didn't know if other
+[00:21:05] people would feel that way so when I
+[00:21:08] first jump in it pops up to 93 but
+[00:21:11] there's a little bit of a Moment of
+[00:21:13] Truth here and so I ended up taking a
+[00:21:15] little profit off the table and then
+[00:21:17] when it goes up to six it goes up to 606
+[00:21:20] 610 and it's it's now going to give us
+[00:21:24] that kind of uh push higher and this is
+[00:21:26] something I noticed right here a 20,000
+[00:21:29] share buyer at 615 so see that buyer
+[00:21:33] right there at
+[00:21:35] 615 I had just taken the last off the
+[00:21:37] table at
+[00:21:38] $6.7 before that buyer came up but on
+[00:21:42] the one hand I looked at that buyer and
+[00:21:44] I thought this is bullish someone's
+[00:21:46] putting out a buy order to buy 21,000
+[00:21:48] shares but on the other hand I thought
+[00:21:52] maybe this is the Trap maybe this is not
+[00:21:54] going to be a subv appap trap maybe this
+[00:21:57] is going to be a bull trap and they're
+[00:21:59] putting that order there to try to get
+[00:22:01] bullish Traders like me to buy only for
+[00:22:04] them to dump it so I was a little bit
+[00:22:07] unsure about what was going to happen
+[00:22:09] here and we were coming up to the volume
+[00:22:11] weight average price which is right
+[00:22:13] around 650 so we end up that buyer is
+[00:22:17] right there at 15 you see that buyer on
+[00:22:20] the level two there at 15 so we end up
+[00:22:22] pushing higher I end up moving an order
+[00:22:24] up to
+[00:22:26] 659 and I'm starting starting to get
+[00:22:29] kind of situated now in hindsight I had
+[00:22:32] a great entry on this and I sold because
+[00:22:35] well essentially I took my base hit now
+[00:22:38] I'm just still watching the level two
+[00:22:40] here um okay so let me just comment for
+[00:22:43] one second on base hit trading I'm a big
+[00:22:45] Advocate um of taking base hits and
+[00:22:49] here's the reason if you get in a trade
+[00:22:51] and it goes up 10
+[00:22:53] 15 if you pay yourself then you've got a
+[00:22:57] winner locked up and the thing is it's a
+[00:22:58] lot easier to predict when a stock will
+[00:23:00] go up 15 105 cents than 50 cents to a
+[00:23:03] dollar a share so if every time it goes
+[00:23:05] up 105 cents you take profit you're
+[00:23:07] going to have much higher accuracy than
+[00:23:09] traders who don't take anything off the
+[00:23:11] table until they're up at least 50 cents
+[00:23:13] a share now traders who wait till L up
+[00:23:15] 50 cents a share will have bigger
+[00:23:17] average winners but lower accuracy lower
+[00:23:20] accuracy hurts self-confidence at least
+[00:23:22] for me I think it does for other Traders
+[00:23:24] as well so I end up being in the sort of
+[00:23:27] mindset of taking base hits locking them
+[00:23:30] up and then walking away now here's the
+[00:23:32] problem that buy order got pulled it
+[00:23:35] didn't fill you see the order flow here
+[00:23:38] no one filled 20,000 shares to the sell
+[00:23:41] side that buy order just disappeared so
+[00:23:44] that's when I started getting a little
+[00:23:45] bit I was a I I was a little skeptical
+[00:23:48] about what was going on there little
+[00:23:50] shady little something was a little
+[00:23:52] funny but you know it is kind of holding
+[00:23:55] up and it's moving towards vwap so I'm
+[00:23:57] like you know we're moving in the right
+[00:23:59] direction so it pushes up here to 35 it
+[00:24:02] goes up to 49 I take a trade right up
+[00:24:05] here and now I'm trying to take that
+[00:24:07] break through the high so now we've got
+[00:24:10] 680
+[00:24:13] 698 and I'm looking for that squeeze up
+[00:24:15] to seven so now you see all of a sudden
+[00:24:17] I've scaled into a bigger position
+[00:24:19] 10,000 shares and I'm looking for that
+[00:24:22] squeeze on this up through what well at
+[00:24:25] that time my target was a retest to the
+[00:24:28] highest day so if we look at the one
+[00:24:30] minute right here I was looking for a
+[00:24:32] push straight up to $8 but this is what
+[00:24:37] ended up happening it squeezed up to
+[00:24:40] about 720 and then it drops down then it
+[00:24:43] comes back up to 720 and it drops down
+[00:24:48] so right here at 720 we had clear
+[00:24:50] resistance but we were holding support
+[00:24:53] more or less at volume weight average
+[00:24:55] price and I think again I'm little so I
+[00:24:58] noticed that this stock has warrants at
+[00:25:02] $6.50 a share and so that made me start
+[00:25:06] to wonder if um we were dealing with an
+[00:25:09] issue here um with insiders selling
+[00:25:13] these or with the comp with with people
+[00:25:14] selling these warrants so I'm not sure
+[00:25:18] we may see news later in the day to that
+[00:25:20] effect um we may not but nonetheless so
+[00:25:24] I end up taking that trade uh I'm in
+[00:25:26] nice shape here but it ends up dropping
+[00:25:28] back back down so I stop out it pulls
+[00:25:31] back for a little bit and then we come
+[00:25:32] back up so we retest vwap and then we're
+[00:25:35] looking for that curl back up and
+[00:25:37] through this area really I just kept
+[00:25:39] trading it and buying dips and taking
+[00:25:43] breakouts but look right here um we just
+[00:25:46] had that 20,000 share buyer back again
+[00:25:49] right so back again there at 675 and and
+[00:25:52] this is why I was just like you know is
+[00:25:56] this thing going to work so now we come
+[00:25:57] up here to
+[00:25:59] $7 I'm adding for the break of seven and
+[00:26:02] I'm like let's go finally we get the
+[00:26:04] break of seven so now once again I'm
+[00:26:06] back in with 10,000 shares again and
+[00:26:08] we've got 685 on uh as my entry we're
+[00:26:11] showing 709 by 711 and this is what I
+[00:26:14] finally wanted I was like yes let's pull
+[00:26:17] away here let's get that squeeze up to
+[00:26:19] 758 or higher but you know what happened
+[00:26:22] once again it kind of stalled out it
+[00:26:24] ends up pulling back so then when it
+[00:26:26] finally comes back up at the open
+[00:26:30] naturally I was a little cautious about
+[00:26:32] it it was not it was feeling like not
+[00:26:34] trustworthy but then finally it ends up
+[00:26:37] ripping and so you can see here I just
+[00:26:40] end up taking small trades as it pushes
+[00:26:43] higher but this is a stock that um there
+[00:26:46] was definitely some tug-of-war going on
+[00:26:48] with it I mean like it was moving higher
+[00:26:50] and I got some nice trades in here and
+[00:26:52] worked my way up to you know 14,000 on
+[00:26:55] the day but it just it did even in spite
+[00:26:59] of the break of vwap it just had this
+[00:27:01] sort of inherent weakness in it and
+[00:27:04] actually here let's back this up
+[00:27:05] [Music]
+[00:27:07] um so let's watch this so right here
+[00:27:11] snci is squeezing up there's 84 on the
+[00:27:15] offer so I end up taking some profit and
+[00:27:18] then watch this
+[00:27:20] flush I think these flushes were
+[00:27:23] happening cuz there were there was
+[00:27:24] someone inside I don't know just
+[00:27:27] pressing the cell button watch this whoa
+[00:27:30] dollar a share drop a dollar a share in
+[00:27:34] one candle like what is going on so that
+[00:27:37] ended up being kind of the problem and I
+[00:27:39] think again this highlights some of the
+[00:27:42] inherent risks with trading a stock that
+[00:27:44] has previously broken below V app it
+[00:27:47] just shows that clearly there's a bit of
+[00:27:48] a struggle going on you end up on the
+[00:27:50] one minute having um that pattern that
+[00:27:53] that I often call sort of the the devil
+[00:27:56] horns right there those two top tals a
+[00:27:59] nasty rejection and then further selling
+[00:28:02] so I am concerned that we may see some
+[00:28:04] news out later today of exercising
+[00:28:06] warrants and the thing is they they'll
+[00:28:09] they'll put out the news that they
+[00:28:12] exercise during the day and then that
+[00:28:14] goes back and explains the price action
+[00:28:16] but I could be wrong it could just be I
+[00:28:19] don't know something else that's causing
+[00:28:20] the selling I I don't know for sure but
+[00:28:23] it's just there's obviously a lot of
+[00:28:24] selling on this one so you know I think
+[00:28:27] for for me at the end of the day I've
+[00:28:29] got to review my metrics I've got to
+[00:28:31] analyze them carefully and to get a
+[00:28:33] better understanding of the skills you
+[00:28:34] need to trade this strategy essentially
+[00:28:37] it's not a lot different from trading in
+[00:28:39] general the biggest thing is you need
+[00:28:41] the discipline to cut your losses
+[00:28:43] quickly when you're trading something
+[00:28:45] that's against the trend and when you're
+[00:28:46] trading something that is is against
+[00:28:48] vwap below vwap that's got more risk and
+[00:28:51] when you're trading something that's
+[00:28:52] showing you some of these big jack knife
+[00:28:54] candles these big reversals you know
+[00:28:56] that can result in some big losses so
+[00:28:57] you got to be a little bit careful not
+[00:28:59] the cleanest stock that I've ever traded
+[00:29:02] but locking up some nice profit today
+[00:29:05] and I'm going to try to do it again
+[00:29:06] tomorrow and hey those of you guys that
+[00:29:07] want to join me I will put a link right
+[00:29:09] here I'll pin it to the top of the
+[00:29:10] description and in the comments for a
+[00:29:12] two-e trial so you can trade over my
+[00:29:14] shoulder for the next two weeks you can
+[00:29:15] use the software the charts the scanners
+[00:29:17] you'll have access to the chat room I
+[00:29:19] broadcast and our Newsfeed and you can
+[00:29:21] see what it's like to be a member of the
+[00:29:22] warrior trading Community we like to
+[00:29:24] think that we are the number one home
+[00:29:25] for momentum Traders so come on and join
+[00:29:29] us and thank you as always for tuning in
+[00:29:30] I hope you hit that thumbs up I want to
+[00:29:32] remind you as always in case I had
+[00:29:34] already said it trading is risky my
+[00:29:37] results are not typical and there's no
+[00:29:38] guarantee you'll find success whether
+[00:29:40] you trade with me or you learn on your
+[00:29:41] own so please manage your risk take it
+[00:29:43] slow and I'll see you for the next
+[00:29:45] episode here tomorrow hopefully we have
+[00:29:46] another really solid day tomorrow
+[00:29:48] morning all right I'll see you guys
+[00:29:49] tomorrow

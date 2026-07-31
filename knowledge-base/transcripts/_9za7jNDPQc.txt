@@ -1,0 +1,1491 @@
+# Don't Use Candlestick Charts Without THIS
+# https://www.youtube.com/watch?v=_9za7jNDPQc
+# duration_sec: 3435
+
+[00:00:00] [Music]
+[00:00:01] If you've been trying to learn how to
+[00:00:03] trade, there's no question you've spent
+[00:00:04] a considerable amount of time studying
+[00:00:06] how to read candlestick charts. And
+[00:00:08] don't get me wrong, candlestick charts
+[00:00:10] are critical. I cannot trade without
+[00:00:12] them. However, like anything else, they
+[00:00:15] do have some limitations. And one of the
+[00:00:17] big limitations of candlestick charts is
+[00:00:20] that they are a historical record of
+[00:00:22] what has already happened. In other
+[00:00:24] words, they're looking backwards. But
+[00:00:26] what we're trying to do is predict
+[00:00:28] what's going to happen next. Now, when
+[00:00:31] we study candlestick charts, we're
+[00:00:33] looking for traditional candlestick
+[00:00:35] chart patterns where we can begin to see
+[00:00:37] the formation of the pattern and
+[00:00:39] therefore predict that if this pattern
+[00:00:41] resolves the way we expect it to, this
+[00:00:44] is what's going to happen next. But what
+[00:00:46] if there were a tool that you could use
+[00:00:48] that would help you very definitively
+[00:00:50] predict what will happen next? There is
+[00:00:54] one. It's called using level two market
+[00:00:57] data. And when you combine level two
+[00:00:59] market data with the historical context
+[00:01:02] of a candlestick chart, that's where the
+[00:01:05] magic happens. Now, whenever I'm
+[00:01:07] teaching people how to day trade, I
+[00:01:09] always start by teaching the basics of
+[00:01:10] how to read candlestick charts. That's
+[00:01:13] the foundation. And once you've got that
+[00:01:15] down, that's when we take it to the next
+[00:01:17] level and we add this new layer, which
+[00:01:19] is learning how to read level two market
+[00:01:22] data. So, what exactly is level two
+[00:01:25] market data? Well, what you see on my
+[00:01:27] screen right now is the level two window
+[00:01:30] for Bank of America. This is a very
+[00:01:32] popular stock listed on the New York
+[00:01:35] Stock Exchange. And what the level two
+[00:01:38] is displaying are all of the buyers and
+[00:01:41] all of the sellers. And right next to
+[00:01:44] the level two is this little window
+[00:01:46] here, which is showing us what's called
+[00:01:48] the time in sales. This is a record of
+[00:01:51] every single transaction that goes
+[00:01:54] through the market. And so what's very
+[00:01:56] interesting here is that this these are
+[00:01:59] just numbers. This is without context
+[00:02:02] not something you could trade with. You
+[00:02:04] can't trade just on these numbers alone.
+[00:02:07] You can see the current price. What you
+[00:02:09] can see is on the left there are people
+[00:02:12] that are bidding to buy at
+[00:02:16] $4342 and on the right there are people
+[00:02:19] that have an offer posted to sell at
+[00:02:23] $4343. Therefore we have a 1 cent spread
+[00:02:27] between the bid and the offer. Now you
+[00:02:29] can see the price goes down for a moment
+[00:02:31] then it comes back up and as that's
+[00:02:33] happening actual transactions are going
+[00:02:35] through the market. So the level two is
+[00:02:38] very dynamic. It's moving. But let's add
+[00:02:42] context. So we need that candlestick
+[00:02:45] chart to give us the big picture. So
+[00:02:48] this is the candlestick chart for Bank
+[00:02:50] of America right now. All right. So this
+[00:02:52] is our five-minute chart right here in
+[00:02:54] the center. I've got my one minute chart
+[00:02:56] over here on the right. I have a
+[00:02:58] 10-second chart down here at the bottom
+[00:03:00] corner. And I've got a daily chart right
+[00:03:02] here. So, these are the charts that I'm
+[00:03:04] using to actually identify and look for
+[00:03:07] patterns. But once I've identified a
+[00:03:09] pattern, and let's say I'm thinking
+[00:03:11] about buying this right here, what does
+[00:03:13] the level two really do for me? Well,
+[00:03:16] let's think about it for a second. If I
+[00:03:18] was considering taking a big position
+[00:03:20] right down here, what is something that
+[00:03:22] I certainly would not want to see? I
+[00:03:25] would not want to see, let's say, for
+[00:03:27] example, someone selling 1 million
+[00:03:31] shares at
+[00:03:33] $4341. Because if I saw that really big
+[00:03:37] sell order, what would that communicate
+[00:03:39] to me? That would communicate weakness,
+[00:03:42] bearishness. Someone wants to sell a
+[00:03:45] huge position. And until someone else
+[00:03:47] has bought all of those shares, the
+[00:03:49] price is not going to go up. That
+[00:03:52] person, in other words, is sort of
+[00:03:53] blocking the price from moving higher.
+[00:03:55] He's putting a a real lid on it. So, we
+[00:03:58] might love the candlestick chart
+[00:04:00] pattern, but then when we add level two
+[00:04:03] market data, we can see that uhoh, we
+[00:04:06] can't take this trade because there's a
+[00:04:08] big seller. Or maybe inversely, we pull
+[00:04:11] up the level two market data and we see
+[00:04:13] that there's a 1 million share buyer
+[00:04:16] right down here at
+[00:04:18] $43.40. And what does that communicate?
+[00:04:20] that communicates strength. That gives
+[00:04:22] us now conviction that there's someone
+[00:04:24] else in the market that likes this setup
+[00:04:27] a lot. And if we jump in right here,
+[00:04:30] we're getting in just ahead of someone
+[00:04:32] who has a big order out there who is
+[00:04:35] creating support. So big orders on the
+[00:04:40] level two can create support and
+[00:04:43] resistance. Now these are orders that
+[00:04:45] have been placed but have not yet
+[00:04:47] executed. So candlestick charts tell us
+[00:04:51] what has already happened. Whereas level
+[00:04:53] two is helping us understand what is
+[00:04:56] about to happen simply by looking at the
+[00:04:59] presence of big orders either on the bid
+[00:05:02] to buy or on the offer or the ask to
+[00:05:06] sell. Now I remember the first time I
+[00:05:08] pulled up a level two window. I was
+[00:05:09] overwhelmed. I saw all these numbers. I
+[00:05:11] saw a lot of things moving, a lot of
+[00:05:12] colors and I couldn't figure out what
+[00:05:14] was going on. So, I can relate and
+[00:05:16] that's why I wanted to make this episode
+[00:05:17] for you. And what I'm going to do to
+[00:05:18] make it really simple for you guys to
+[00:05:20] learn is I'm going to break level two
+[00:05:22] down into its most fundamental
+[00:05:24] components that you need to understand
+[00:05:26] so you can start utilizing this tool in
+[00:05:29] your own trading starting today. Because
+[00:05:31] I'm telling you, if you're trying to
+[00:05:32] trade and you're not using level two,
+[00:05:34] you're at a disadvantage. It it would
+[00:05:36] almost be like trying to drive by just
+[00:05:39] looking in the rearview mirror because
+[00:05:41] remember the charts are the historical
+[00:05:42] context. So yes, looking in the rearview
+[00:05:45] mirror, I yes, you can understand
+[00:05:47] relatively what's going on, but you got
+[00:05:49] to be looking forward. And level two to
+[00:05:51] me is like looking through the
+[00:05:53] windshield because that's where I'm
+[00:05:54] seeing all of the buy orders and all the
+[00:05:56] sell orders. So that's what's helping me
+[00:05:58] predict what's going to happen next. So
+[00:06:00] in today's episode, I'm going to give
+[00:06:01] you a fantastic demonstration of some
+[00:06:04] trades that I took. I'm gonna make about
+[00:06:06] $30,000 in this live trading archive.
+[00:06:09] And I'm going to break it down, slow it
+[00:06:10] down, and and let you really see the
+[00:06:13] signals on the level two that gave me
+[00:06:17] really the indication that this was
+[00:06:19] going to move higher or that it was
+[00:06:21] going to stop moving up and I had to get
+[00:06:23] out. This is some really exciting stuff.
+[00:06:25] So, let's go ahead and jump on the
+[00:06:26] screen share. We've got a lot to cover.
+[00:06:28] Now, this is the candlestick chart for
+[00:06:29] the demonstration that I'm going to be
+[00:06:30] giving you. The price is currently
+[00:06:32] up
+[00:06:34] 172% on breaking news. Okay, this is
+[00:06:37] fantastic. This is exactly what we like
+[00:06:40] to see. But just to get, you know, take
+[00:06:42] a big picture look, how do we even find
+[00:06:44] these types of big moves in real time?
+[00:06:47] Now, as I was editing this class, I
+[00:06:49] realized some of you guys might like a
+[00:06:51] PDF resource, uh, sort of a cheat sheet
+[00:06:54] of notes to go along with everything
+[00:06:56] that I'm teaching today. So, what I'm
+[00:06:57] going to do is I'm actually going to put
+[00:06:58] a link pinned to the top comment and in
+[00:07:01] the description where you can download a
+[00:07:03] series of PDF resources, including my
+[00:07:05] stock selection criteria, the five
+[00:07:07] pillars of stock selection that I input
+[00:07:09] into the scanners to help me find stocks
+[00:07:11] in real time. And I'm also going to
+[00:07:12] include the PDF resource for my
+[00:07:14] technical analysis strategy and my small
+[00:07:17] account strategy, which I think you guys
+[00:07:19] will really enjoy. So, make sure you
+[00:07:20] guys check those out. I just want to say
+[00:07:22] that before I forgot. And now, let's go
+[00:07:23] ahead and jump right back into it. I'm
+[00:07:25] using scanners. And these scanners are
+[00:07:28] hunting for volatility because that's
+[00:07:30] the strategy that I trade. I've learned
+[00:07:32] that I don't make money buying something
+[00:07:34] at $5 and selling it at five. I make
+[00:07:36] money buying something at five and
+[00:07:38] hopefully selling it at six, seven,
+[00:07:40] eight, nine, maybe even $10 a share goes
+[00:07:42] up 100%. That'd be fantastic. Now, that
+[00:07:44] doesn't happen every single day, but it
+[00:07:46] happens more often than you might guess.
+[00:07:48] And so my focus each morning is
+[00:07:51] searching the entire market for
+[00:07:53] volatility. And typically, think about
+[00:07:55] it, why would something go up 50% or
+[00:07:58] 100% in one day? Typically, it's because
+[00:08:01] it has some type of breaking news
+[00:08:03] catalyst. So on this particular day,
+[00:08:06] we've got FRGT, which at 7:14 in the
+[00:08:09] morning, and this was Eastern Standard
+[00:08:11] Time, was already up 88% on 15 million
+[00:08:15] shares of volume. this thing is moving
+[00:08:18] and it's moving quickly. So once I see
+[00:08:20] it moving, what's my next step? Do I
+[00:08:22] evaluate it based on the price, how much
+[00:08:25] volume it has, the float, which is the
+[00:08:28] number of shares available to trade. And
+[00:08:29] by the way, it doesn't matter whether
+[00:08:31] you're trading cryptocurrency, you're
+[00:08:33] trading futures or or forex. You could
+[00:08:35] be trading really any market and you can
+[00:08:37] pull up candlestick charts and you can
+[00:08:39] pull up level two market data. However,
+[00:08:42] some markets that have a lot more volume
+[00:08:45] will be a lot easier to read than a
+[00:08:47] market that has very little volume. So,
+[00:08:49] that's worth noting. So, once we've
+[00:08:51] identified that this was the leading
+[00:08:54] percentage gainer in the entire market,
+[00:08:57] there was a really good chance a lot of
+[00:08:59] other active traders like myself would
+[00:09:01] be focusing on it. So then at that
+[00:09:03] moment, we pull up the chart and we
+[00:09:04] begin to ask oursel where can I buy
+[00:09:06] this? Is there a way that I can manage
+[00:09:09] my risk while still participating in the
+[00:09:12] momentum that this is experiencing? By
+[00:09:15] the way, for those of you guys who are
+[00:09:16] longtime subscribers here on the
+[00:09:18] channel, you know we're about to dive
+[00:09:19] into a fulllength training. So, I hope
+[00:09:21] you hit that thumbs up. And for those of
+[00:09:23] you guys who are brand new to the
+[00:09:24] channel, my name is Ross Cameron. I'm a
+[00:09:26] full-time trader and I'm probably best
+[00:09:27] known for turning an account with less
+[00:09:29] than $600 into more than $12.5 million
+[00:09:33] of verified and independently audited
+[00:09:36] trading profits. Now, I share that with
+[00:09:38] you not because I want you to assume
+[00:09:39] that my results are typical, but because
+[00:09:41] I want you to know that the person that
+[00:09:43] you're spending time learning from today
+[00:09:45] actually knows what the heck they're
+[00:09:46] talking about. So, with that said, I
+[00:09:48] hope you subscribe to the channel and
+[00:09:49] hit that thumbs up. Now, this is the
+[00:09:51] candlestick chart, of course, and so
+[00:09:53] we're looking for a way where we can
+[00:09:54] jump in and manage our risk. And just to
+[00:09:57] give you some context, here are a couple
+[00:09:59] other charts of stocks that I've traded
+[00:10:01] on this day, locking up $11,000. This is
+[00:10:04] a stock that was moving up. Leading
+[00:10:06] percentage gainer biotech uh stock
+[00:10:09] pharmaceutical company with breaking
+[00:10:10] news squeezes up over 100%. That was up
+[00:10:14] $11,000 on that day. Here's one. I'm up
+[00:10:16] $14,000 on the day. Stock goes up over
+[00:10:19] 200%. Here's a day I'm up
+[00:10:21] $24,000. Stock goes up 3400%. These are
+[00:10:25] incredible moves. $30,000 on this day,
+[00:10:28] $45,000 on this day. So, how do I
+[00:10:31] approach taking that first entry? It's
+[00:10:33] using one of my favorite candlestick
+[00:10:35] chart patterns, and that is the bull
+[00:10:37] flag pattern. So, on a bull flag
+[00:10:39] pattern, we're looking for the stock to
+[00:10:41] squeeze up very quickly, start to pull
+[00:10:43] back, and then what am I looking for?
+[00:10:45] I'm waiting for that first candle to
+[00:10:48] make a new high. So, right here, based
+[00:10:50] on this candlestick chart pattern, what
+[00:10:52] do we think is going to happen next?
+[00:10:54] Well, if the next candle opens and is
+[00:10:57] red, then the price could continue to
+[00:10:59] decline, and I wouldn't buy it. But if
+[00:11:01] the next candle opens and immediately
+[00:11:03] begins to move higher and breaks the
+[00:11:06] high of this candle right here, then
+[00:11:09] that's the place where I'm a buyer. And
+[00:11:10] so where do I get in? Right there. It's
+[00:11:13] right the moment right there that this
+[00:11:15] candle breaks the high of the previous
+[00:11:18] candle. We call that a candle over
+[00:11:20] candle formation. So when we're pulling
+[00:11:23] back, candles are making new lows and
+[00:11:25] they're dipping down. And one of the
+[00:11:26] things that we pay really close
+[00:11:28] attention to as traders are these
+[00:11:30] moments where the price changes
+[00:11:32] directions, these pivots. So, we want to
+[00:11:34] buy at the bottoms and sell at the tops.
+[00:11:36] Buy at the bottoms and sell at the tops.
+[00:11:39] So, we're always paying really close
+[00:11:40] attention after something has made a big
+[00:11:42] move to try to see where is it about to
+[00:11:46] roll over because if I'm already in way
+[00:11:48] down here, I want to make sure I get out
+[00:11:50] while maximizing my profit but without
+[00:11:53] selling too soon. You don't want to sell
+[00:11:55] too soon. and you don't want to hold too
+[00:11:56] long. It's finding that perfect exit.
+[00:11:58] And then when it's pulling back and
+[00:12:00] we're thinking about getting back in, we
+[00:12:02] don't want to get back in too soon and
+[00:12:03] have it keep selling off, but we don't
+[00:12:05] want to get back in too late and have it
+[00:12:07] go all the way up without us. So, what
+[00:12:10] we're paying really close attention to
+[00:12:12] certainly are these candlestick shapes.
+[00:12:14] But what we're going to do is we're
+[00:12:15] going to add on that additional layer of
+[00:12:17] using level two market data because what
+[00:12:19] if just for the sake of argument, what
+[00:12:22] if as this popped up right here, let's
+[00:12:25] just say uh right on this candle, let's
+[00:12:27] say there was a 200,000 share seller
+[00:12:30] right there. Well, if there was that big
+[00:12:32] seller right there, then as this started
+[00:12:34] to pop up, while the candlestick chart
+[00:12:36] might have looked great, the level two
+[00:12:39] would have told a different story. And
+[00:12:41] the level two would have been a better
+[00:12:43] predictor of what's actually going to
+[00:12:45] happen because it would tell us this is
+[00:12:48] not going higher until someone comes
+[00:12:50] along and buys 200,000 shares. And
+[00:12:51] that's probably not going to happen. So
+[00:12:53] essentially, that person has created a
+[00:12:55] wall and it's going to keep the stock
+[00:12:56] from going higher. That's going to be a
+[00:12:58] problem. So when we look at these
+[00:13:00] candlestick chart patterns, the patterns
+[00:13:02] by themselves tell us what we would
+[00:13:04] expect to have happen as long as the
+[00:13:07] level two data isn't giving us a big
+[00:13:10] sell signal. So right here we have two,
+[00:13:13] three candles that go up, a candle of
+[00:13:15] pullback, pullback, first candle to make
+[00:13:17] a new high, that's the entry, and then
+[00:13:19] we get that nice resolution as it moves
+[00:13:21] higher. So in this case, there were no
+[00:13:23] big sellers that were blocking the way,
+[00:13:24] which is good. That is often the case,
+[00:13:27] but it's not always the case. So, here
+[00:13:29] we get another move up, a little
+[00:13:31] pullback. First candle makes a new high,
+[00:13:33] and it surges higher. Just like that.
+[00:13:35] Here we got another one. Now, this is
+[00:13:36] actually going to be a pop quiz. All
+[00:13:38] right. So, right here, what would you
+[00:13:40] do? We've got one candle pulling back,
+[00:13:42] second candle pulling back, third candle
+[00:13:45] pulling back. So, if this next candle
+[00:13:47] breaks what level would we be a buyer?
+[00:13:50] The high right there. So, that's where
+[00:13:52] we'd be a buyer. Now, if it doesn't
+[00:13:54] break that level, we don't buy. So,
+[00:13:55] we're sitting and we're watching and
+[00:13:57] we're waiting and it breaks. But now,
+[00:14:00] what if on the level two, just before it
+[00:14:02] broke, let's just say down here, there
+[00:14:04] was a 200,000 share buyer. What would
+[00:14:07] that communicate? That would give us a
+[00:14:09] sense of there's some real support down
+[00:14:11] here. There's a buyer that is almost
+[00:14:14] propping up the stock. They're holding
+[00:14:16] it up and creating support with that
+[00:14:18] large buy order. So now if I want to
+[00:14:20] jump in, I can cut in front of that
+[00:14:22] order and I can just buy on the open
+[00:14:25] market. And that's going to be really
+[00:14:27] important to understand that the orders
+[00:14:29] that we're seeing on the level two are
+[00:14:32] all limit orders. Those are orders that
+[00:14:35] people have placed to buy either on the
+[00:14:38] bid or to sell on the offer. But at any
+[00:14:41] time you can execute what's called a
+[00:14:44] marketable order where you would get in
+[00:14:46] at current market price. And so if you
+[00:14:48] see a big buyer down here creating
+[00:14:50] support, that's great. You can still
+[00:14:52] jump in just ahead of them. And the way
+[00:14:54] you would do that is by actually buying
+[00:14:56] on the offer. So let me just show you an
+[00:14:58] example of what that would look like.
+[00:15:00] I'll show you with um this stock right
+[00:15:02] here. So Bank of America again. So here
+[00:15:04] we go. This is the chart or this is the
+[00:15:06] the level two window. So let's say I
+[00:15:08] want to buy this. I'll pull up my order
+[00:15:10] entry window. So if I want to buy,
+[00:15:12] there's two ways that I could buy. One
+[00:15:14] way would be to buy right here on the
+[00:15:16] offer at 42. Right? If I click that buy
+[00:15:19] button, what's going to happen? I'm
+[00:15:20] gonna instantly fill 2500 shares. Now,
+[00:15:23] I'm probably in slightly between the
+[00:15:24] spread. If we actually looked at the
+[00:15:26] execution down to the decimal point, I'm
+[00:15:28] probably in slightly between the spread,
+[00:15:30] but just for the sake of argument, let's
+[00:15:31] say I'm in right there. Now, I'm going
+[00:15:32] to go ahead and sell right there, and
+[00:15:34] I'm back out at 41. So, I I bought at
+[00:15:38] 42, and I sold at 41 approximately, and
+[00:15:41] lost $12. Now, what if instead I want to
+[00:15:45] buy at 41? Now, if I want to buy at 41,
+[00:15:48] I can make my order visible, 2500
+[00:15:50] shares, which by default most people
+[00:15:52] will do. And by doing that, I'm going to
+[00:15:54] place the order, and my order is now
+[00:15:56] sitting there right there at
+[00:15:58] 41. Right? So, now I filled a little bit
+[00:16:00] of shares. Someone came and sold me some
+[00:16:03] shares. Now, I might have to wait. I
+[00:16:05] might have to be patient. But if you
+[00:16:06] want, if you're placing a large order, a
+[00:16:09] lot of traders and investors will place
+[00:16:11] their orders like this so they can be
+[00:16:13] patient and they can get in at the exact
+[00:16:15] price they wanted. Now, I'm going to
+[00:16:16] cancel the order and I'm going to turn
+[00:16:18] around and place the same order 1553 on
+[00:16:21] the offer. Now, it just so happens the
+[00:16:23] price is dropping a little bit, but
+[00:16:24] that's okay. Just for the sake of
+[00:16:25] argument, I'm going to place the order
+[00:16:27] to sell right there at
+[00:16:30] 4340. So, now I place the order on the
+[00:16:32] offer. And now, what do I have to do? I
+[00:16:35] have to wait. I have to wait until
+[00:16:37] someone comes and buys those shares from
+[00:16:38] me. And it might take a few minutes. But
+[00:16:41] if you had a really large sell order,
+[00:16:44] why would you sell like this by putting
+[00:16:46] your order on the offer? Well, what you
+[00:16:48] might not want to do is sell on the bid?
+[00:16:51] Because if you sold on the bid typically
+[00:16:54] and it's a large order, the price will
+[00:16:56] drop. And so if you have a large order,
+[00:16:58] you're typically going to buy on the bid
+[00:17:01] or sell on the offer. That's that's
+[00:17:03] typically the way people are going to do
+[00:17:04] it. So here I move my order down to 38
+[00:17:07] and I'm gonna have to keep sitting keep
+[00:17:09] waiting for someone to come and buy
+[00:17:10] those shares. So let's say all of a
+[00:17:12] sudden here we saw a 200,000 share
+[00:17:15] seller show up at 38. That would tell us
+[00:17:18] this thing has a big wall of resistance.
+[00:17:21] It's probably not going to go up. Or if
+[00:17:23] we saw this big buyer pop up right here
+[00:17:25] at 35, that would give us some
+[00:17:27] conviction that there's someone else
+[00:17:28] that likes this. So, I'm gonna go ahead
+[00:17:30] and get out of this trade and I'm going
+[00:17:31] to sell right here at 36 and take the
+[00:17:34] loss. So, I don't mind losing 90 bucks
+[00:17:36] or whatever it is. This is a
+[00:17:37] demonstration just to kind of help you
+[00:17:39] guys better understand how level two
+[00:17:41] data works. So, now let's jump back onto
+[00:17:44] this pop quiz. All right. So, now we've
+[00:17:46] got a chart where we've got the price
+[00:17:47] moving up very quickly. We've got a ton
+[00:17:49] of green candles in a row. It pulls back
+[00:17:52] and then what are we looking for? The
+[00:17:54] first candle to make a new high. And
+[00:17:56] boom, there it is. So that's our entry
+[00:17:59] point. Now, as long as we don't have
+[00:18:01] something on level two that's telling us
+[00:18:03] no, the candlestick chart would be
+[00:18:05] confirming that this is the place to
+[00:18:06] buy. So for me, I'm using the
+[00:18:09] candlestick charts to help me understand
+[00:18:12] where I want to get in or out. And
+[00:18:13] that's why I said that if I just pull up
+[00:18:15] the level two data, I can't do anything
+[00:18:17] with that. This is this is price with no
+[00:18:20] context. Is 4336 good or is it bad? I
+[00:18:24] don't know. There's no context around
+[00:18:26] it. So, I need to have the candlestick
+[00:18:29] chart, but you can have a great looking
+[00:18:32] candlestick chart and the setup still
+[00:18:35] doesn't work. And that's because of the
+[00:18:37] big seller. And I've seen so many
+[00:18:39] traders who will buy into that type of
+[00:18:41] setup. And I'm like, guys, there's a
+[00:18:44] huge seller blocking the way. Why are
+[00:18:46] you buying? We've got to wait for that
+[00:18:48] seller to move for either for someone
+[00:18:50] else to buy their shares or for them to
+[00:18:51] cancel the order. But the fact is, this
+[00:18:54] setup's probably not going to work
+[00:18:55] because that seller is there. Even if
+[00:18:56] someone does come in and buy their
+[00:18:58] shares, who knows? Maybe that this same
+[00:19:00] person is going to sell more shares and
+[00:19:01] keep selling all day long. Sometimes we
+[00:19:04] do see that. Whether it's an insider
+[00:19:06] that's selling shares or a long-term
+[00:19:08] investor that's been holding, we don't
+[00:19:09] know. But the presence of those really
+[00:19:11] large sell orders, that's not a good
+[00:19:13] thing. On the other hand, the presence
+[00:19:15] of really large buy orders, that could
+[00:19:17] give me the conviction to size up and be
+[00:19:20] even more aggressive. Therefore, using
+[00:19:23] level two allows me to make more on some
+[00:19:26] of my best trades and lose less or
+[00:19:29] potentially avoid unnecessary losses by
+[00:19:31] not taking trades at all when I see even
+[00:19:34] though the candlestick chart looks good,
+[00:19:35] those really big sellers popping up. So,
+[00:19:37] right after we get into a trade, we want
+[00:19:39] to see strength, right? So, if this is
+[00:19:42] popping up, it's squeezing up, pulling
+[00:19:44] back, pushing higher, pulling back. We
+[00:19:46] get in right here. And right after we
+[00:19:48] get in, what do we want to see? big
+[00:19:51] green candles, right? High volume
+[00:19:53] buying. That would be fantastic. And of
+[00:19:56] course, for the price to be moving up.
+[00:19:58] So, large green candles, price moving
+[00:20:00] up, and big buyers. In other words, what
+[00:20:04] don't we want to see after we buy? We
+[00:20:07] don't want to see large red candles. We
+[00:20:09] don't want to see the price going down,
+[00:20:11] and we don't want to see big sellers.
+[00:20:13] But here's the really interesting thing
+[00:20:15] about those large red candles. By the
+[00:20:18] time the large red candle has occurred,
+[00:20:20] the price has already dropped, right?
+[00:20:23] So, if we pull up the whiteboard here,
+[00:20:24] let's draw it out. The price is moving
+[00:20:26] up nicely. We've got a couple of nice
+[00:20:28] big green candles and then we get a
+[00:20:30] little bit of a pullback here. And let's
+[00:20:32] just say we're watching this to make a
+[00:20:34] new high. And then suddenly, right up
+[00:20:36] here at the very top, we got in and then
+[00:20:39] we come up here and there's a 500,000
+[00:20:43] share sell order. That's a huge wall.
+[00:20:47] And so the what's going to happen is the
+[00:20:49] second the price comes up to there and
+[00:20:51] everyone sees that sell order on the
+[00:20:53] level two, they're going to bail out.
+[00:20:55] And so you're going to end up having a
+[00:20:56] red topping tail and a big red candle
+[00:21:00] because people bail out because all of a
+[00:21:01] sudden they lose hope in this setup
+[00:21:03] working now. They think if they got in
+[00:21:05] down here, this is not going to go
+[00:21:06] through a new high. And now with all the
+[00:21:08] longs bailing out and selling, who else
+[00:21:11] is selling? Short sellers. Because short
+[00:21:14] sellers say, "Wait a second. This is a
+[00:21:16] level of resistance. So, if I short this
+[00:21:18] right here, as long as this seller stays
+[00:21:21] put right there, then this is going to
+[00:21:23] keep going lower and and I don't have to
+[00:21:25] worry about taking a big loss.
+[00:21:27] Basically, it's the inverse of if we got
+[00:21:29] in this pattern and we saw down here,
+[00:21:33] uh, we'll use the brown. We saw down
+[00:21:35] here the 200,000 share buyer, right? The
+[00:21:38] 200,000 share buyer down here. That
+[00:21:40] gives me the confidence as a long biased
+[00:21:42] trader to be even more aggressive to buy
+[00:21:44] an even bigger position for a bigger
+[00:21:46] move up because I know that even if I
+[00:21:48] have to get out, I've got this person
+[00:21:50] that I could sell to. In fact, maybe I
+[00:21:53] could even buy 200,000 shares because if
+[00:21:55] I got in with 5 cents of risk, I can
+[00:21:58] turn around and sell those shares to
+[00:21:59] this person right here. So, that creates
+[00:22:02] a backs stop. Now, I'll tell you, it's
+[00:22:04] not a guaranteed backs stop because they
+[00:22:06] could cancel their order and it's gone.
+[00:22:08] So you still have to be a little bit
+[00:22:09] thoughtful of that. But the practice of
+[00:22:11] placing orders and canceling placing and
+[00:22:13] cancelling with the intention of trying
+[00:22:16] to move the market higher like this is
+[00:22:19] an illegal practice. So if a trader or
+[00:22:22] an investor was doing that, they would
+[00:22:24] end up getting their account banned. So
+[00:22:26] you know the algorithms can detect when
+[00:22:28] someone's doing that. So that doesn't
+[00:22:30] happen very often. Yes, it could happen.
+[00:22:31] And I understand why someone might say,
+[00:22:33] "Well, you know, someone could just
+[00:22:34] place that order to get everyone to buy,
+[00:22:36] but you're not allowed to do that." And
+[00:22:38] so it it really doesn't happen that
+[00:22:40] often. It It's not that it never
+[00:22:41] happens, but for the most part, I trust
+[00:22:44] level two data. I take it at face value
+[00:22:47] that if there's a 200,000 share buyer,
+[00:22:49] someone clearly has a large enough
+[00:22:50] account to place that order and most
+[00:22:52] likely is trying to buy. So before the
+[00:22:56] large red candle even occurs, we can see
+[00:22:59] that big order on the level two. So now
+[00:23:02] let's begin breaking down each of these
+[00:23:05] components in the level two window.
+[00:23:07] There's going to be a bit to cover. All
+[00:23:09] right. So what have we got going on?
+[00:23:11] Well, right here in this column, and you
+[00:23:14] can see uh this is uh sort of uh it's
+[00:23:16] not mirrored, but these are these are
+[00:23:18] both um the same. So on this side right
+[00:23:22] here, we have the bid. So, this is where
+[00:23:24] all the buyers have their orders placed.
+[00:23:27] And on this side, we have the offer. So,
+[00:23:30] we've got the bid and we've got the
+[00:23:31] offer or sometimes we call it the ask.
+[00:23:34] Now, on the bid, on the left side, we
+[00:23:37] have each of these symbols. Well,
+[00:23:39] they're they're there's the symbols.
+[00:23:42] They're they're letters. They reference
+[00:23:44] the exchange that the order is being
+[00:23:46] placed on and the route that it's going
+[00:23:49] through to the market. So, ARCA, BATS,
+[00:23:52] Edge X, NASDAQ, MEMX, MIAX, Edge A, BAT
+[00:23:58] Y, so on so forth. So, these are the
+[00:24:01] different exchanges that traders use to
+[00:24:04] execute their orders. Now, if you're
+[00:24:07] using a route, if you're using a broker
+[00:24:08] such as Charles Schwab or Erade, what
+[00:24:12] you're going to use when you're placing
+[00:24:13] your order with them is what's called a
+[00:24:16] smart route. And so when you do smart
+[00:24:18] routing, their order, your order goes
+[00:24:21] through their sort of algorithm and gets
+[00:24:24] sent out to the market, but it goes
+[00:24:27] through what's called a wholesaler,
+[00:24:28] which is an intermediary. So you don't
+[00:24:31] have control over actually which
+[00:24:33] exchange your order goes to,
+[00:24:35] unfortunately. But if you're using a
+[00:24:37] more sophisticated broker like Lightseed
+[00:24:40] Trading for instance or even Interactive
+[00:24:43] Brokers or Trade Station, you can select
+[00:24:45] which route you want to use for your
+[00:24:48] order. Now, the reason that I like to
+[00:24:50] choose a specific route is not because I
+[00:24:53] see that it's the route that has the
+[00:24:54] best price. You could say, "Oh, should I
+[00:24:57] send to Arca because it has the current
+[00:24:59] best price if I'm going to sell or
+[00:25:01] should I send to BAT because it has the
+[00:25:02] best price if I wanted to buy these
+[00:25:04] shares?" And that's not necessary
+[00:25:07] because of a regulation in the market
+[00:25:10] which states that even if you sent your
+[00:25:12] buy order to NASDAQ and their best order
+[00:25:15] is at
+[00:25:17] $911, they have to reroute your order to
+[00:25:20] whoever is currently posting the best
+[00:25:23] price. And so their your order would
+[00:25:25] just go over to Bats and it would happen
+[00:25:27] instantaneously. You wouldn't even
+[00:25:29] notice any latency or any lag from your
+[00:25:32] order getting sent over to Bats. happens
+[00:25:34] so quickly. So for me, for my practice
+[00:25:37] and for my trading, I just use NASDAQ as
+[00:25:40] my market maker. So all of my orders go
+[00:25:42] through NASDAQ. So in a way, you could
+[00:25:46] almost live without this
+[00:25:48] column. It it doesn't really serve a lot
+[00:25:52] of purpose for me. However, it's not
+[00:25:55] something that most platforms allow you
+[00:25:58] to remove. So it's just there by
+[00:26:00] default. So, so it's it's good to know
+[00:26:03] what it is, but it's also not really
+[00:26:05] that helpful. And I don't actually do
+[00:26:07] anything with this information. So, I
+[00:26:09] don't spend time looking at that column
+[00:26:11] or this column right here. But the
+[00:26:13] column in the middle of price, I
+[00:26:15] certainly do pay close attention to. And
+[00:26:18] so, I'm going to walk you through the
+[00:26:20] coloring and why they're green and red
+[00:26:22] and yellow and blue and gray uh in a
+[00:26:24] moment. But what we have here at the top
+[00:26:27] is the current best price. So on the
+[00:26:30] left we have the bid which is $8.91 in
+[00:26:33] this case. So
+[00:26:34] $8.91 that is the highest priced buyer.
+[00:26:38] So someone right now says I want to buy
+[00:26:41] this but the most I'm willing to pay is
+[00:26:44] $8.91. Now if you wanted to buy right
+[00:26:47] now you could put an order at $8.91 but
+[00:26:50] you have to sit and wait for someone to
+[00:26:51] sell you shares. But wait a second over
+[00:26:54] here on the offer there is someone
+[00:26:56] selling shares. And the lowest price
+[00:26:58] seller right now is at
+[00:27:01] $9.3. So if you wanted to buy and you
+[00:27:04] didn't want to be patient, you want to
+[00:27:05] get in right now, this second, well, you
+[00:27:08] can buy at
+[00:27:10] $9.3. So you're going to pay more than
+[00:27:12] if you sit in and you're patient down
+[00:27:14] here to the tune of 13 cents a share or
+[00:27:17] 12 cents a share, right? So 8.91 up to
+[00:27:20] 9003. And what we call that is the
+[00:27:23] spread. The difference between the bid
+[00:27:25] and the offer is the spread. Now,
+[00:27:27] typically lowerric stocks will tend to
+[00:27:30] have tighter spreads and higher price
+[00:27:33] stocks will tend to have bigger spreads.
+[00:27:35] That's not always true. There are
+[00:27:37] exceptions to that, but it's typically
+[00:27:39] the case that the lower the price, the
+[00:27:41] tighter the spreads, and the higher the
+[00:27:44] price, the wider the spreads. So when
+[00:27:46] you have a wider spread, it does create
+[00:27:49] a little bit more risk because if you
+[00:27:50] buy this right now at 9003 and then
+[00:27:53] immediately turn around and sell it,
+[00:27:55] you're already down 12 cents a share
+[00:27:57] instantly, right? So if you had a stock
+[00:28:00] that had just a 1 cent spread, for
+[00:28:03] instance, you could get in and turn
+[00:28:05] around and sell it for only a one cent
+[00:28:07] loss, and that would be much more
+[00:28:09] manageable. So when you start when you
+[00:28:11] start to get higher priced and bigger
+[00:28:13] spreads, you start to carry more risk.
+[00:28:15] And that's that's the nature of trading.
+[00:28:17] Now, on the other hand, high risk can at
+[00:28:20] times mean high reward. And this is a
+[00:28:22] stock, as you can see, that's up
+[00:28:25] 492%. So this is a pretty huge move on
+[00:28:28] 69 million shares of volume. So was it
+[00:28:33] worth it? Was it worth trading it in
+[00:28:34] spite of the spread? I I think the
+[00:28:36] answer is yes, but you have to decide
+[00:28:37] for yourself. So, we've got the price in
+[00:28:41] the middle and then what we have on the
+[00:28:43] next column are the number of shares
+[00:28:45] that that person is trying to buy or
+[00:28:47] sell. And what most platforms do just to
+[00:28:50] make it easier to read is they drop two
+[00:28:53] zeros. So, this is 100 even though it
+[00:28:56] only shows one and this is 2,00 even
+[00:28:59] though it only shows 20. Now, I know
+[00:29:01] that's takes a second to kind of get
+[00:29:03] used to, but you get used to it pretty
+[00:29:05] quickly. And there are some platforms
+[00:29:07] that include the zeros, but it sometimes
+[00:29:10] becomes a little congested and hard to
+[00:29:12] read, especially if you have a stock
+[00:29:14] where you're regularly seeing 30,000,
+[00:29:17] 75, 100,000 share orders or or higher.
+[00:29:20] Uh because then you've got a lot of
+[00:29:21] zeros. So, we've got the exchange that
+[00:29:24] the order is going through, the market
+[00:29:26] maker. We've got, and I'm saying
+[00:29:28] exchange because that's kind of the
+[00:29:29] easiest way to understand it. It's
+[00:29:31] technically an ECN, the market maker. Uh
+[00:29:34] the exchange would be NASDAQ, the New
+[00:29:37] York Stock Exchange or AMX, American
+[00:29:39] Stock Exchange. But anyways, for the
+[00:29:41] purposes of keeping it simple, I just am
+[00:29:42] using that phrase. Then the price is in
+[00:29:44] the middle. And then the number of
+[00:29:46] shares is on the far side right here. So
+[00:29:49] what I end up spending a lot of time
+[00:29:51] looking at when I'm in a trade or when
+[00:29:52] I'm about to take a trade is the spread,
+[00:29:55] the uh size of the current buyer, and
+[00:29:58] the size of the current seller. Now, if
+[00:30:01] we look at 8.90, you'll notice that
+[00:30:03] there's four rows that are all the same
+[00:30:05] color. And that's because there are four
+[00:30:07] buyers all at the same price. So, 8.90
+[00:30:10] 8.90 8.90 8.90. Now, on this side,
+[00:30:13] there's only one order in that same red
+[00:30:16] color, and it's because there's only one
+[00:30:17] seller at that price. So, these colors
+[00:30:21] are based on the number of tiers away
+[00:30:24] you are from the current best price. The
+[00:30:26] best price is green. The second best
+[00:30:29] price is red. The third best price is
+[00:30:31] yellow. The fourth is blue. And
+[00:30:33] everything beyond that is gray. So this
+[00:30:36] actually communicates something
+[00:30:37] interesting because in the first in the
+[00:30:39] four tiers closest to the market,
+[00:30:41] there's a lot more buyers than there are
+[00:30:44] sellers in the four tiers moving away
+[00:30:46] from the market, moving up. So that that
+[00:30:49] visually shows a balance. And so what I
+[00:30:53] see there is that there's more buyers
+[00:30:55] than there are sellers. And that's a
+[00:30:58] that's a good thing if we have a long
+[00:30:59] bias. Now, if we pull up um something
+[00:31:01] like Bank of America, this is fairly
+[00:31:04] evenly balanced. The buyers on the left
+[00:31:06] and the sellers on the right, you can
+[00:31:07] see it's it's fairly evenly balanced. Um
+[00:31:10] EDBL, this one's fairly evenly balanced
+[00:31:13] at the moment as well, but it's got 100
+[00:31:16] million shares of volume. It's certainly
+[00:31:17] very actively traded. It's up 56%. So,
+[00:31:20] it's up a fair amount, but not as much
+[00:31:22] as perhaps other uh stocks today. So you
+[00:31:26] can see that, you know, the two orders
+[00:31:29] both at 61 are both in green. Now at 63,
+[00:31:32] then only one at 65, two at 67. So when
+[00:31:36] we're watching level two in real time,
+[00:31:39] that's when a lot starts happening.
+[00:31:41] You're seeing the price is moving. And
+[00:31:44] so where does the eye gravitate towards?
+[00:31:46] Right here. This is where I keep my eye
+[00:31:49] because I'm thinking about, of course,
+[00:31:51] the price going higher. And so I'm
+[00:31:53] looking at the seller and how big is
+[00:31:55] this seller? Because this is ultimately
+[00:31:57] the person that's holding it back. Now
+[00:31:59] I'll glance at the bid and if I see a
+[00:32:02] large order pop up, I'll notice it
+[00:32:04] pretty quickly. My eye is usually sort
+[00:32:06] of spots that fairly quickly, but
+[00:32:08] otherwise I'm watching the sellers here
+[00:32:12] and I want to see lots of buyers uh
+[00:32:14] which are the transactions that go
+[00:32:16] through right here on what's called the
+[00:32:18] time and sales. So you want to see these
+[00:32:20] orders going through fairly quickly and
+[00:32:23] this again is how we kind of understand
+[00:32:25] the difference between um the charts
+[00:32:28] which are very historical in nature and
+[00:32:31] then the level two which is really
+[00:32:33] showing us the future. So the chart this
+[00:32:36] is all the stuff that's already
+[00:32:37] happened. These candles are now a
+[00:32:39] permanent record for this chart. It's
+[00:32:42] going to be this way forever. It's never
+[00:32:44] going to change. Those are permanent
+[00:32:45] candles. It's a historical record. So if
+[00:32:48] the candlestick charts are
+[00:32:50] historical, the level two is the future.
+[00:32:54] I really would say that. Now, it's true
+[00:32:56] that a candlestick chart does give us
+[00:32:59] some level of prediction over what's
+[00:33:01] going to happen next. When you have a
+[00:33:02] price that makes the move up very
+[00:33:04] quickly or you have one of these very
+[00:33:06] traditional patterns, what we're doing
+[00:33:08] is we're doing pattern recognition all
+[00:33:10] day long. So, as traders, we're saying,
+[00:33:12] well, you know, I often notice when I
+[00:33:15] see this and this little pullback on a
+[00:33:18] really strong stock that this is an area
+[00:33:21] where people come in and buy it. So, you
+[00:33:23] start noticing that and then that
+[00:33:25] pattern almost becomes self-fulfilling
+[00:33:27] because the more people that see it and
+[00:33:30] believe it and recognize it, the better
+[00:33:32] it works. This is just like traffic
+[00:33:34] signs, right? Stop signs work not
+[00:33:37] because they're one color or another,
+[00:33:38] but because people respect them. they've
+[00:33:40] come to understand what they mean. If
+[00:33:42] nobody respects them, then they don't
+[00:33:43] work anymore. And so candlestick charts
+[00:33:45] are sort of similar. They are the the
+[00:33:48] patterns become predictable and then
+[00:33:50] they work because traders believe they
+[00:33:52] they'll work and they they work because
+[00:33:54] they they make sense. It makes sense
+[00:33:56] after the price moves up very quickly
+[00:33:58] that you would have a momentary pullback
+[00:34:00] where some people might take some profit
+[00:34:02] or maybe some early short sellers try to
+[00:34:04] establish a position and then if it
+[00:34:07] holds up then it goes for the next leg
+[00:34:09] higher. And so all markets it really
+[00:34:12] doesn't matter um what they are they
+[00:34:14] don't go just straight up. That doesn't
+[00:34:15] happen. It's these sort of waves higher.
+[00:34:18] And so our goal therefore is to try to
+[00:34:22] buy, you know, at the lowest price
+[00:34:24] without getting in too early and then to
+[00:34:26] get out at the best price without either
+[00:34:29] selling too early or waiting too long to
+[00:34:32] sell because then you're selling on the
+[00:34:34] way back down. And that's not what you
+[00:34:36] want to be doing. So now level two is
+[00:34:38] the future. Now, if I pull up my level
+[00:34:40] two window right here, just to give you
+[00:34:42] another another demonstration, um, and
+[00:34:45] I'll just move this to the side just so
+[00:34:46] it's not overlapping here. I'll just
+[00:34:48] push this over here. So on my level two
+[00:34:51] window, I do have the ability to go in
+[00:34:53] and adjust the settings a little bit. So
+[00:34:55] if I go into the settings, I can
+[00:34:57] actually go to design, level two, design
+[00:35:00] colors, and I can change the colors. So
+[00:35:02] if I want to change the colors
+[00:35:04] completely differently, I could. But
+[00:35:06] this is this is the way um this is the
+[00:35:09] way most platforms will display level
+[00:35:13] two data. uh some platforms. So I I I'll
+[00:35:16] show you just for example um Charles
+[00:35:19] Schwab here just for one second. So
+[00:35:21] Charles Schwab is is a real kind of um
+[00:35:24] pain in the butt. So Charles Schwab on
+[00:35:27] the ThinkersW platform right
+[00:35:29] here. So they show level two a little
+[00:35:32] bit differently. Um it's uh so it's
+[00:35:36] right here. This is the level two
+[00:35:37] window. And you can see it's all a
+[00:35:39] gradient. It's a blue gradient. I can't
+[00:35:43] stand that because it's harder for me to
+[00:35:45] visualize the tiers and and and to see
+[00:35:47] that imbalance between more buyers or or
+[00:35:50] more sellers. So, they do this gradient
+[00:35:53] and there's no way to change the
+[00:35:54] settings on it. So, if you went into
+[00:35:57] trade and then active trader and you
+[00:35:59] went over to level two, it I find it
+[00:36:02] very difficult to read. I I don't like
+[00:36:03] that so much. Now they also have the
+[00:36:05] ladder here which is essentially taking
+[00:36:09] level two and instead of having it side
+[00:36:12] by side like this, it stacks it on top
+[00:36:15] of each other. So all the buyers are on
+[00:36:17] um are right down here and all the
+[00:36:20] sellers are right up here and the best
+[00:36:22] price is right there in the middle. Now
+[00:36:25] I don't like that so much either. um you
+[00:36:28] can sort of visually see the volume and
+[00:36:31] sort of how it's displayed, but this is
+[00:36:34] not intuitive and not very many people
+[00:36:36] use the ladder um for active trading
+[00:36:40] because it's just not you really and
+[00:36:42] they don't even display it very well.
+[00:36:44] You can't even really see it very well.
+[00:36:46] So most traders, even if they're using
+[00:36:49] um Charles Schwab, will end up using a
+[00:36:52] third-party
+[00:36:54] uh trading platform that APIs with
+[00:36:56] Schwab that looks a little bit more uh
+[00:36:59] like this right here, which allows you
+[00:37:01] to very very easily see these important
+[00:37:05] signals on the level two to change your
+[00:37:07] font, to make it bigger, you know,
+[00:37:09] really just to be able to get a good
+[00:37:10] hang of it. Now, you can see right down
+[00:37:12] there, do you see the 311s? So the 311s
+[00:37:15] there is um an 11,000 share order. So
+[00:37:18] that's a slightly larger buy order right
+[00:37:20] there. Now it's not and now they
+[00:37:21] canceled it. Now it's not the largest
+[00:37:23] buy order we've ever seen, but it's a
+[00:37:25] little bit of a bigger buy order. So
+[00:37:27] that's something that I pay attention
+[00:37:29] to. So they're down there at 53 right
+[00:37:32] there. Down at 53. So on MEMX. So you
+[00:37:36] see, all right. So there's a little
+[00:37:37] maybe there's a little bit of support
+[00:37:39] down here. Now, on a stock that's got a
+[00:37:41] 100 million shares of volume, a 10,000
+[00:37:43] share order is not really significant. A
+[00:37:46] 100,000 shares is significant, but
+[00:37:49] 10,000 shares, nah, not really.
+[00:37:51] Percentage- wise, it's a very small
+[00:37:53] piece of the volume. So, it's not
+[00:37:55] something that I really would pay a lot
+[00:37:57] of attention to. So, what my eye is
+[00:37:59] looking at is the level two right here,
+[00:38:02] specifically the ask. So that's what my
+[00:38:04] eye is pinned to and I see those bursts
+[00:38:06] of green and that's what I love seeing.
+[00:38:09] Burst of green like that and the price
+[00:38:11] should move up. Now that burst of green
+[00:38:14] and the price moving up will then
+[00:38:16] translate to the candlestick forming.
+[00:38:19] But what happens first? The candlestick
+[00:38:21] or the price? Is the price? This is
+[00:38:24] where it happens first and then the
+[00:38:25] candlestick chart records it. Now it
+[00:38:28] happens practically simultaneously. It's
+[00:38:31] almost
+[00:38:33] instantaneous. But it's important to
+[00:38:35] understand this relationship between the
+[00:38:38] current depth of the market and which is
+[00:38:40] level two and that candlestick chart. So
+[00:38:43] right here and we could do a 10-second
+[00:38:45] chart.
+[00:38:47] Um so I'll I'll just zoom in here on
+[00:38:50] this 10-second chart. So this is our
+[00:38:52] 10-second chart. Um and this is going to
+[00:38:54] be our level two window right here. So
+[00:38:56] just move this over. So what happens
+[00:38:59] here is now we're seeing
+[00:39:02] 6667. The candlestick chart is showing
+[00:39:06] that price which is the last price that
+[00:39:08] went through the
+[00:39:09] market. But the true source of this data
+[00:39:12] is right here. This is the source of the
+[00:39:15] data. The level two and then this record
+[00:39:18] right here which is called the time and
+[00:39:21] sales. So I spend most of my time
+[00:39:24] staring at the level two right here at
+[00:39:26] the ask at the time in sales and then
+[00:39:28] glancing back at the chart. So even
+[00:39:31] right now I would say this might be the
+[00:39:33] beginning of a micro pullback. Now
+[00:39:35] granted it's on a 10-second chart and
+[00:39:37] not at the time of day that I would
+[00:39:38] typically be trading. The one minute
+[00:39:40] chart is showing this larger topping
+[00:39:42] tail back here. That's a that's bearish.
+[00:39:45] The price on this moved up nicely
+[00:39:46] earlier and then dropped pretty hard.
+[00:39:48] So, I I don't I don't really think that
+[00:39:50] this is a pattern that I would consider
+[00:39:52] trading right now, but if I was going to
+[00:39:55] start to get dialed in on it, I'd be
+[00:39:57] looking at the candlestick chart, but
+[00:39:58] before I take the trade, I'd be pulling
+[00:40:00] up the level two right here. So, now
+[00:40:03] let's get into this demonstration. All
+[00:40:05] right, so this is going back to this
+[00:40:08] stock that was up 88% on the morning on
+[00:40:11] this particular day that I traded it.
+[00:40:12] And this is a a demonstration that I
+[00:40:14] recorded, so I'm going to play it back
+[00:40:16] for you. And this is a stock that by the
+[00:40:19] way is is a little bit more um thickly
+[00:40:22] traded. So stocks can be on the spectrum
+[00:40:25] of being either thinly traded or thickly
+[00:40:28] traded. So let me just show you an
+[00:40:30] example of that. Um and and I think I
+[00:40:33] already mentioned this, but the time and
+[00:40:35] sales window is this window right here,
+[00:40:38] which shows every transaction that's
+[00:40:40] been placed. Transactions that are in
+[00:40:42] white are orders that occurred between
+[00:40:45] the spread. Transactions in green occur
+[00:40:48] at the offer. Transactions in red occur
+[00:40:51] at the bid. So what we like to see is a
+[00:40:54] stream or flow of buying on uh in green,
+[00:40:59] right? Because that would be buying at
+[00:41:00] the offer, buying at the ask price. So,
+[00:41:03] if we move this back over this time in
+[00:41:05] sales window, and it's just a bigger,
+[00:41:07] this is just a bigger version of what's
+[00:41:09] sort of already right there. You could
+[00:41:10] just pop out a second one, so it's even
+[00:41:12] bigger. Um, but this is showing every
+[00:41:14] transaction that goes through. Now, uh,
+[00:41:17] in the old
+[00:41:18] days, investors uh could subscribe to
+[00:41:22] and and use a ticker tape machine. and a
+[00:41:25] ticker tape machine uh displayed a print
+[00:41:29] out of the current price of the last
+[00:41:31] orders that went through the market. And
+[00:41:33] they went they it it communicated almost
+[00:41:35] like um like uh Morris code through the
+[00:41:39] through the telephone line and the
+[00:41:41] ticker tape machine would print out
+[00:41:43] every transaction. And so if you ever
+[00:41:45] saw that movie All the Money in the
+[00:41:47] World about um John Paul Getty, I think
+[00:41:51] that was his name. Um he in one scene is
+[00:41:55] standing in this sort of dark library
+[00:41:57] holding this reel that's going, you
+[00:41:59] know, it's it's printing out the quotes
+[00:42:03] of the stock. That's when his son was
+[00:42:04] kidnapped and he was like, "No, no, no.
+[00:42:05] I'm, you know, watching the money." And
+[00:42:08] so anyways, in the older days, uh people
+[00:42:11] in in his situation, he would not have
+[00:42:13] had candlestick charts, but he would
+[00:42:15] have had the ticker tape. And so what he
+[00:42:17] would have had from the the ticker tape
+[00:42:19] and from the newspaper, he would have
+[00:42:22] known the previous day's closing price.
+[00:42:24] So he would have known the previous
+[00:42:26] day's closing price. And what he could
+[00:42:27] have actually done, and this is what
+[00:42:28] people did, is they would begin to graph
+[00:42:30] out the actual price today. So they'd be
+[00:42:33] like, "Oh, previous days, this is, you
+[00:42:35] know, so oldfashioned." They'd be like,
+[00:42:37] "Previous day's closing price was $40."
+[00:42:39] All right. So then they're looking at
+[00:42:41] the ticker tape and they're seeing these
+[00:42:43] orders. they're going through at 39 and
+[00:42:44] a quarter, 39 and a half or whatever. So
+[00:42:47] they're like, "Okay, the price is going
+[00:42:48] down and then they start to see the
+[00:42:49] price going up and then the price is
+[00:42:51] going down and the price is going up and
+[00:42:52] then the price is going down." And so
+[00:42:53] they kind of create this this graph and
+[00:42:56] and old oldtime traders would actually
+[00:42:59] trade off of these handmade graphs of
+[00:43:02] what they thought was happening in real
+[00:43:04] time. And their source of data was the
+[00:43:06] time in sales. They didn't they didn't
+[00:43:08] have level two data. All they had was
+[00:43:11] this window right here. Now I will tell
+[00:43:14] you that there are times that I have
+[00:43:17] traded using just this type of data. And
+[00:43:21] the only time has been when a stock does
+[00:43:25] an initial public offering, an IPO,
+[00:43:28] because sometimes right at the moment of
+[00:43:30] the IPO, there's so much data that
+[00:43:34] charts stop working. This has sort of
+[00:43:36] historically been the case. And so all
+[00:43:39] you have is the price. And so when you
+[00:43:41] have a really hyped up IPO like like
+[00:43:44] Facebook or you know something like that
+[00:43:45] where there's millions of people that
+[00:43:47] are watching it, the second it begins
+[00:43:49] trading, boom, it just bursts in volume.
+[00:43:52] And so if you want to trade it in those
+[00:43:53] first few seconds and try to ride that
+[00:43:55] momentum, all you have to work with is a
+[00:43:58] time in sales. So that means you're
+[00:43:59] watching those orders that it go through
+[00:44:01] and you're just keeping a mental sort of
+[00:44:03] memory and record of what was the
+[00:44:05] highest price. All right, it's dipping
+[00:44:07] down. And so now if it goes back to that
+[00:44:08] level, I'm going to look for a squeeze
+[00:44:10] for the high. So I just start thinking
+[00:44:11] about what was the high, what was the
+[00:44:13] low. And so in a
+[00:44:16] way I almost I almost could can trade
+[00:44:22] without charts and I have before because
+[00:44:24] on these rare occasions that charts go
+[00:44:26] out. It wouldn't really make sense.
+[00:44:28] There would be no purpose in doing it,
+[00:44:30] you know, intentionally. You would just
+[00:44:32] be trading with less information. It's
+[00:44:33] not going to give you an edge by any
+[00:44:35] means, but but it could be done. Um, and
+[00:44:38] could I trade without level two? I
+[00:44:41] could, but my accuracy would be lower
+[00:44:43] because I would miss some of the signals
+[00:44:45] that this communicates, the bursts of
+[00:44:47] buying like right there, the bursts of
+[00:44:49] selling or the large buy and sell
+[00:44:50] orders. So, could I do it? Yes. But it
+[00:44:53] wouldn't be ideal. Now, the spectrum of
+[00:44:56] um thin to thick markets is what I
+[00:44:59] wanted to kind of mention here before we
+[00:45:00] get into this demonstration. So, a thin
+[00:45:04] market is going to be typically a higher
+[00:45:06] price stock and you have a large spread.
+[00:45:09] Look at the spread between the bid and
+[00:45:11] the offer. That is substantial. That's a
+[00:45:13] three-point spread. Point is a dollar a
+[00:45:16] share. So, three-point spread. That's a
+[00:45:17] $3 a share spread. $3.40. That's a huge
+[00:45:20] spread. So, if you bought this with
+[00:45:22] a,000 shares at 50, you're down
+[00:45:25] $3,400 if you just turn around and sell
+[00:45:27] it to this buyer right here. and there
+[00:45:29] that buyer is only buying 200 shares. So
+[00:45:32] you might not even sell everything to
+[00:45:33] them. The price drops and now you've got
+[00:45:36] to try to fill in the next level down.
+[00:45:38] Or up here, if you want to buy a,000
+[00:45:40] shares, you might not even be able to
+[00:45:41] buy a,000. You'd be able to buy 200
+[00:45:43] because there's 200 for sale and then
+[00:45:45] the price is going to go up. Now this
+[00:45:47] stock is a little cheaper at $17 a share
+[00:45:50] and has a 28 cent spread, 7 million
+[00:45:52] shares of volume. So, it's got a little
+[00:45:54] bit of a tighter spread, but still a
+[00:45:56] little bit bigger compared to this
+[00:45:59] stock. This stock's got 48 million
+[00:46:01] shares of volume and has a a seven cent
+[00:46:03] spread. So, now you've got or 6 cent
+[00:46:05] spread. So, now you've got a tighter
+[00:46:06] spread, right? Seven cents. So, a little
+[00:46:08] bit tighter. And then here, BNZI, you've
+[00:46:10] got a 1-cent spread. So, now this is
+[00:46:12] this is great. You've got a really tight
+[00:46:14] spread on this one. Um, however, at
+[00:46:17] times you could argue that the spread
+[00:46:20] could be too thin to the market could be
+[00:46:23] too thin and you could also argue the
+[00:46:25] market could be too thick. When you've
+[00:46:27] got a really big when you got a really a
+[00:46:29] big market, thick market and a tight
+[00:46:31] spread, the problem is that these stocks
+[00:46:34] can be very congested and they don't
+[00:46:36] move very quickly. Okay, so let's go
+[00:46:38] ahead and jump into this demonstration.
+[00:46:40] So, the price as of right now is up
+[00:46:45] 172%. Okay, that's a big move. And the
+[00:46:48] pattern that we're working with here is
+[00:46:50] a little bit of a variation of the
+[00:46:52] traditional buying the first candle to
+[00:46:54] make a new high because in fact it
+[00:46:57] already did that right there. It pulled
+[00:46:59] back. It made a new high and it failed
+[00:47:03] to go higher. Why? There was at the time
+[00:47:06] a big seller right there at 280. So it
+[00:47:10] went to 279. You can see the seller at
+[00:47:12] 280 and it didn't break. It dropped
+[00:47:14] down. So now as it comes back up again,
+[00:47:17] I'm looking at this as being a level of
+[00:47:19] resistance. And I'm asking myself, is
+[00:47:23] that seller still going to be there? So
+[00:47:25] I like the candlestick chart pattern. I
+[00:47:28] I I think this this has the potential to
+[00:47:30] go higher. It's just come out with
+[00:47:31] breaking news. It's obviously up a lot.
+[00:47:34] Some would argue, oh, it's up 170%. How
+[00:47:36] much higher can it go? And I would argue
+[00:47:38] that it can go higher because when
+[00:47:40] you've got strong momentum, these can
+[00:47:42] really move quickly. So, I'm bullish on
+[00:47:44] it. I want to buy. I just want to see if
+[00:47:46] that seller is gone. And I want to see
+[00:47:48] what happens when it comes up to 280.
+[00:47:51] So, let's watch this right here. And I'm
+[00:47:52] going to play it. And then I'll pause it
+[00:47:54] and play it and pause it. So, as we come
+[00:47:57] up to 271,
+[00:47:59] 272, there's 274, 275, 2, and right
+[00:48:02] there, the seller is gone. That's 10,000
+[00:48:05] shares. That's not the big seller that
+[00:48:07] was there before. So, what do I do? I
+[00:48:09] immediately buy. I press the buy button,
+[00:48:12] and I buy instantaneously. Now, what
+[00:48:16] ends up happening is I actually get
+[00:48:18] filled a little bit above the current
+[00:48:19] price. It actually already shows that I
+[00:48:21] filled at 284 right here, even though my
+[00:48:24] order hasn't yet gone through the
+[00:48:25] market. Unpause it for a second and
+[00:48:27] there, that was my order went through
+[00:48:29] the market. And so now I'm in right now
+[00:48:31] with 30,000 shares at 287. And I bought
+[00:48:35] this because now I've got the
+[00:48:37] confirmation that that big seller is
+[00:48:39] gone. Now I don't mind paying 5 cents, 7
+[00:48:42] cents, or even 10 cents higher than the
+[00:48:44] perfect price of 280 when I have
+[00:48:48] confirmation. So, I have confirmation
+[00:48:50] and what I'm what am I looking for now?
+[00:48:52] The breakthrough three. So, I added and
+[00:48:55] I've got now 35,000 shares and I'm
+[00:48:58] already up
+[00:49:01] $4,8962. So, on this it breaks over
+[00:49:04] three. And I'm just kind of watching to
+[00:49:07] see do we have big sellers. And right
+[00:49:09] there, just for a moment, there was a
+[00:49:11] bigger seller. So, let's just back this
+[00:49:14] up. So, we break over three.
+[00:49:18] We're looking good right here. And I
+[00:49:20] decide to add because we're holding
+[00:49:22] three. So I add right there. And then
+[00:49:25] there's a 26,000 shares seller. Now
+[00:49:27] that's a little bit bigger. It's not
+[00:49:30] huge, but we've got only 20 million
+[00:49:31] shares of volume so far. So that's a
+[00:49:33] little bit bigger. So now I get a little
+[00:49:35] nervous. That's a slightly larger
+[00:49:37] seller. And I was hoping this would
+[00:49:39] squeeze right up to 315, maybe
+[00:49:42] 325, ideally to 350. So it goes up to
+[00:49:46] 312.
+[00:49:48] 312 313. You can see I'm up unrealized
+[00:49:52] about
+[00:49:55] $9,800 and I decide to take some profit,
+[00:49:58] which is okay. I take some profit
+[00:50:00] because it sort of hesitated up there.
+[00:50:02] So, if we go back to that peak, it came
+[00:50:05] up here and because I had just added and
+[00:50:08] then it sort of didn't pull away, I
+[00:50:11] decided to sell what I had added. So, I
+[00:50:13] reduce my position and now I'm watching
+[00:50:16] to see what it does up around
+[00:50:20] 3:15. So, there's 310, there's 312, 313,
+[00:50:24] and right there it breaks and I add
+[00:50:25] back. So, now I'm back in at 313 and
+[00:50:29] there's
+[00:50:30] 325. So, on the on the 10-second chart,
+[00:50:34] you can see that micro pullback. Now, in
+[00:50:36] hindsight, I probably shouldn't have
+[00:50:38] sold it all. I should have held the
+[00:50:39] whole position. Um, but because I had
+[00:50:42] added and then I was sort sort of not up
+[00:50:44] that much from where I added, I I felt I
+[00:50:46] should get out of the position. So now
+[00:50:50] we're coming up towards 340 and 350. So
+[00:50:53] I take a little profit. And the reason I
+[00:50:55] do that is because what I know is that
+[00:50:57] most stocks will have some resistance at
+[00:51:00] half dollars and whole dollars. So a
+[00:51:02] psychological area of resistance 3 350
+[00:51:06] 4455. So, as we approach 350, I took
+[00:51:09] some profit off the table. Now, if this
+[00:51:12] can hold 350, I'm going to add back. And
+[00:51:14] I do. I add back here. And now, I'm
+[00:51:17] looking for a squeeze up to 365, 375,
+[00:51:21] and back of the mind target would be
+[00:51:22] four. But, did you see what we had right
+[00:51:24] there in the 60s? So, let's watch this.
+[00:51:28] It pops up. I'm holding a big position
+[00:51:30] on this. I put out a profit target order
+[00:51:32] at 378. It pops up here to 360. 360 378
+[00:51:37] and some of my shares get filled right
+[00:51:39] up here which is great. So I get some
+[00:51:42] profit and then watch right here there's
+[00:51:44] a 50,000 share seller at 365 and what I
+[00:51:48] probably should have done was just sold
+[00:51:51] the rest of the position. Now in this
+[00:51:53] moment how would I sell? I could put my
+[00:51:56] order on the offer at
+[00:51:58] 364, essentially put it right underneath
+[00:52:01] this 50,000 share seller, but everyone's
+[00:52:03] going to see that sell order, the 50,000
+[00:52:05] share sell order, and that's going to
+[00:52:06] stop them from buying. So, the best way
+[00:52:08] to get out of this in this moment is to
+[00:52:10] hit the bid and to sell at 364 or even
+[00:52:14] 361. And that's what I end up doing.
+[00:52:16] Now, that sell order comes down to
+[00:52:20] 360. So, see, and now they're at 359. So
+[00:52:24] that sell order 358. That sell order is
+[00:52:27] actually pushing the price down. That's
+[00:52:29] a a very specific type of order called a
+[00:52:32] pegged order. It's pegged to the best uh
+[00:52:36] to to the offer to the ask. And so as
+[00:52:38] the ask drops, as someone tries to
+[00:52:40] undercut them, their order moves
+[00:52:42] automatically to that lower price. And
+[00:52:45] so the problem is that this creates a
+[00:52:47] real wall of selling pressure that
+[00:52:49] pushes the price down all the way here
+[00:52:51] down to
+[00:52:52] 51, right? Okay. And down to 49 and down
+[00:52:55] to well looks like about 47 and then
+[00:52:57] people started buying. So finally people
+[00:52:59] started to buy and the seller's gone.
+[00:53:02] But unfortunately at that point I've
+[00:53:03] already come all the way back down
+[00:53:04] nearly to break even and now there's
+[00:53:06] another seller that came out. So in this
+[00:53:08] case that big seller at 65 was very
+[00:53:12] clear writing on the wall that that's
+[00:53:14] going to be the high. Now let's look at
+[00:53:15] our candlestick chart. What's the shape
+[00:53:18] of this one minute candle? In all that
+[00:53:20] time, were you even looking at the
+[00:53:22] candles? Perhaps not. You were so
+[00:53:24] focused on the level two. And that's
+[00:53:26] what I often do myself. Once I first see
+[00:53:29] the stock moving higher and I've kind of
+[00:53:31] understood, okay, this is support, then
+[00:53:33] I'm taking my entry. And at that point,
+[00:53:36] I'm actively trading it, buying and
+[00:53:38] selling, buying and selling as it's
+[00:53:39] moving higher. Now, some people might
+[00:53:41] take the approach of just buying,
+[00:53:43] holding the whole thing, and then
+[00:53:44] waiting for the candlestick chart to
+[00:53:46] say, I should get out. And the
+[00:53:48] candlestick chart saying you should get
+[00:53:49] out would be the topping tail forming
+[00:53:52] and then that candle ultimately closing.
+[00:53:54] Now, currently the time is 7:30 and 47
+[00:53:57] seconds, which means we have 13 seconds,
+[00:53:59] 12,
+[00:54:00] 10, 9, 8 before this candle closes. So,
+[00:54:05] by the time you get your exit indicator,
+[00:54:07] the price could already be down 30 cents
+[00:54:09] or more. On a 30,000 share position,
+[00:54:12] that's $9,000.
+[00:54:14] So with a big position, you you can't
+[00:54:17] really wait that long. You've got to see
+[00:54:19] the exit indicator sooner and you got to
+[00:54:21] see the entry indicator sooner so you
+[00:54:23] can be jumping in and getting out and
+[00:54:25] really capitalizing on these
+[00:54:26] moves. So in this case, by the time the
+[00:54:30] candlestick formed and the exit
+[00:54:32] indicator formed in that visual sense,
+[00:54:34] you should have easily been able to get
+[00:54:36] out much sooner. And so that's where
+[00:54:38] level two is giving you that early edge.
+[00:54:40] And now all of a sudden we're looking at
+[00:54:41] the P&L and holy smokes I'm sitting up
+[00:54:44] $39,000 on the morning. $39,000. I went
+[00:54:48] from $10,000 to $39,000 in about what
+[00:54:51] was that 10 minutes. Happened very
+[00:54:54] quickly. The stock went from $250 up to
+[00:54:56] nearly $4 a share. And so just the
+[00:54:59] candlestick charts alone wouldn't have
+[00:55:01] given me the conviction to buy where I
+[00:55:04] bought or to sell where I sold. Which
+[00:55:07] means if I was using only candlestick
+[00:55:09] charts, my accuracy would be lower and I
+[00:55:12] wouldn't feel confident taking as big of
+[00:55:14] positions and the net result is that I
+[00:55:16] would make less money. Now candlestick
+[00:55:19] charts are your foundation. You need to
+[00:55:21] know how to read candlestick charts. And
+[00:55:23] then when you when when you then study
+[00:55:26] level two, that's where you're kind of
+[00:55:28] putting together the pieces of the
+[00:55:29] puzzle because the level two helps you
+[00:55:31] better understand what is happening
+[00:55:34] inside each one of those candlesticks,
+[00:55:37] how those candlesticks are actually
+[00:55:39] being created, and how your orders
+[00:55:42] actually participate in the market. If
+[00:55:45] you're going to buy 10,000 shares of
+[00:55:46] this stock right here at 275, the price
+[00:55:50] is going to go 2.76 because of your
+[00:55:52] order. because you just bought all those
+[00:55:54] shares. That's what you would expect to
+[00:55:56] have happen. If you sell 10,000 shares
+[00:55:58] at 74, the price is actually going to
+[00:56:00] drop from 74 down to 73 because there's
+[00:56:03] not 10,000 shares available there to buy
+[00:56:05] what you're trying to sell. So, the way
+[00:56:07] your orders interact with the market,
+[00:56:09] the way you read the time and sales, the
+[00:56:11] way these candles are being created,
+[00:56:13] this is the next level of learning how
+[00:56:16] to trade. And as always, the best way to
+[00:56:19] learn is to practice these new
+[00:56:21] strategies in a simulator. That's the
+[00:56:23] safest way to learn. So, if you want to
+[00:56:26] keep learning, here's what I'll do. I'm
+[00:56:27] going to put a link. It'll be in the
+[00:56:28] description of this episode and in the
+[00:56:30] top comments where you can do a two-eek
+[00:56:32] trial at Warrior Trading. During your
+[00:56:34] trial, you will have access to my
+[00:56:36] charts, my scanner, my newsfeed, and you
+[00:56:38] can begin practicing trading the
+[00:56:40] strategies that I trade every single
+[00:56:42] day. You'll also be able to enjoy my
+[00:56:44] real time commentary. So, you'll be able
+[00:56:46] to hear me. You'll be able to see my
+[00:56:47] positions window while I'm trading the
+[00:56:49] market in real time. Now, if you need a
+[00:56:51] refresher on how to perform technical
+[00:56:53] analysis the right way, I'll put a link
+[00:56:55] to one of those episodes right here.
+[00:56:56] I'll put another long form episode over
+[00:56:58] there. And as always, if you enjoyed and
+[00:57:00] got value out of this class here today,
+[00:57:02] I hope you hit that thumbs up. I hope
+[00:57:03] you subscribe to the channel. And let me
+[00:57:04] remind you, as always, trading is risky.
+[00:57:06] My results aren't typical. So, please
+[00:57:07] manage your risk, take it slow, and I'll
+[00:57:09] see you for the next episode real soon.
+[00:57:12] [Music]

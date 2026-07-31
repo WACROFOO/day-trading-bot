@@ -1,0 +1,1520 @@
+# The Moving Average Trading Strategy You Need! (Full Training)
+# https://www.youtube.com/watch?v=w2owyBNunDQ
+# duration_sec: 3598
+
+[00:00:00] in today's episode I'm going to teach
+[00:00:02] three moving average trading strategies
+[00:00:04] that are perfect for beginner Traders
+[00:00:06] now if we take a look at my p&l for
+[00:00:08] today you'll see that I'm up $222,222.22
+[00:00:30] are not typical I've been doing this for
+[00:00:31] more than a decade but if you're wanting
+[00:00:33] to learn how to trade and you want to
+[00:00:35] learn a strategy that is currently being
+[00:00:36] traded every single day by a real money
+[00:00:39] Trader this is the class to watch and
+[00:00:42] this is the channel to subscribe to now
+[00:00:44] I'll say at the beginning of the week I
+[00:00:46] had a feeling that the market was going
+[00:00:48] to be pretty hot and so I said every day
+[00:00:50] this week that I double my daily goal I
+[00:00:53] will teach a fulllength class on the
+[00:00:56] strategy and the setup that day that
+[00:00:58] gave me my biggest win and today it was
+[00:01:01] on the moving average strategy and it
+[00:01:03] was on
+[00:01:04] CR right here so let's go ahead and jump
+[00:01:07] into the slides we've got a lot to cover
+[00:01:09] we've got the slide deck we've got the
+[00:01:10] Whiteboard and we're going to have some
+[00:01:11] live trading archives so I'm going to go
+[00:01:13] full screen on this slide deck here and
+[00:01:16] we're going to start with uh the first
+[00:01:18] slide in this uh slide deck the topics
+[00:01:21] of today's class so I'm going to break
+[00:01:23] down for you the definition of the
+[00:01:24] moving average strategy we're going to
+[00:01:26] share the strategy with you in today's
+[00:01:28] class and going to talk about the pro PR
+[00:01:30] and the cons of this strategy because
+[00:01:32] although it's a strategy that I like
+[00:01:34] there are some elements of it that are a
+[00:01:37] little bit challenging and it's really
+[00:01:39] important you understand them at the
+[00:01:40] beginning I will also share with you the
+[00:01:42] skills and the tools required so you can
+[00:01:44] start trading this strategy today as
+[00:01:47] always if you're testing a new strategy
+[00:01:50] like one of the ones I'm using I
+[00:01:51] encourage you to practice in a simulator
+[00:01:54] before you put real money on the line it
+[00:01:56] works for me this strategy but prove
+[00:01:58] that it can work for you before you put
+[00:02:00] real money out there okay so we're going
+[00:02:03] to start with the definition of the
+[00:02:04] moving average strategy and I'll begin
+[00:02:06] by defining what moving averages are for
+[00:02:08] those that aren't familiar moving
+[00:02:10] averages are one of the most popular
+[00:02:13] technical indicators and on almost every
+[00:02:16] chart you will see some type of moving
+[00:02:18] average there are different types but
+[00:02:20] you will see moving averages on almost
+[00:02:22] any chart and usually when you first
+[00:02:24] load a trading platform and you you open
+[00:02:27] up a chart you'll see some moving
+[00:02:29] averages on that chart
+[00:02:30] so moving averages are calculated by
+[00:02:34] adding a number of candles together and
+[00:02:37] then dividing by the number of candles
+[00:02:39] you added so for example the average of
+[00:02:42] 5 6 7 8 9 if you add up these five
+[00:02:46] prices you would get the the total of
+[00:02:48] $35 if these are all dollars and then
+[00:02:51] you divide by five which would be the
+[00:02:52] number of candles in this period and you
+[00:02:55] get the number seven so seven is the
+[00:02:58] average so when we see see for instance
+[00:03:00] the price squeeze up from 5 6 789 the
+[00:03:04] average is going to be seven why is the
+[00:03:06] average important well when the price is
+[00:03:08] above the average it's bullish and when
+[00:03:10] it's below the average it's bearish so
+[00:03:14] moving averages can serve as both
+[00:03:17] support when the price is above it and
+[00:03:19] resistance when the price is below it
+[00:03:22] one of the most well-respected moving
+[00:03:25] averages is the 200 period moving
+[00:03:28] average 200 periods means it takes the
+[00:03:31] average price over the last 200
+[00:03:34] individual periods and in this case I'm
+[00:03:37] using it on a daily chart so this is the
+[00:03:40] average price over the last 200 days we
+[00:03:43] look at let's say for instance the S&P
+[00:03:45] 500 and you'll notice that any time the
+[00:03:48] price comes down to the 200 it's a
+[00:03:51] buying opportunity it usually bounces
+[00:03:53] off that level and comes back up when
+[00:03:55] it's below the 200 and we're in a bare
+[00:03:57] Market it comes up to the 200 f off that
+[00:04:00] level so the 200 moving average is
+[00:04:03] resistance when the price is below it
+[00:04:04] and support when the price is above it
+[00:04:06] and that's specifically on the daily
+[00:04:09] chart but let's look at an example here
+[00:04:10] of moving average support this is the
+[00:04:13] 200 moving average as well but this is a
+[00:04:16] 5 minute chart which means this is the
+[00:04:18] average price over the last 2005 minute
+[00:04:21] candles and it's still well respected on
+[00:04:24] the F minute time frame and you can see
+[00:04:26] here the price comes down to this level
+[00:04:28] bounces off it and comes back up so if
+[00:04:31] you did not have this moving average on
+[00:04:34] your chart you probably wouldn't have
+[00:04:35] identified this as a place to buy but
+[00:04:38] once you have it on your chart you
+[00:04:40] recognize oh we're probably going to
+[00:04:42] have support here because this is a
+[00:04:44] logical area where other Traders are
+[00:04:46] also going to recognize there's support
+[00:04:49] we've got the moving average there so
+[00:04:51] one of the things I often tell Traders
+[00:04:53] is that once you have your indicators
+[00:04:55] set up correctly and you've been trained
+[00:04:57] to use them you're going to start to
+[00:04:59] visualize
+[00:05:00] buy and sell signals right on the chart
+[00:05:03] that a beginner Trader just might not
+[00:05:05] see it's not because they're not there
+[00:05:07] it's just because their eye hasn't been
+[00:05:09] trained to recognize them but your
+[00:05:11] ability to recognize that this right
+[00:05:13] down here is a Buy Signal can translate
+[00:05:16] to you actually making money on that
+[00:05:18] trade as long as of course you're
+[00:05:19] managing your risk so the popular moving
+[00:05:23] averages include the 200 EMA the 100 EMA
+[00:05:27] the 50 EMA the 20 EMA
+[00:05:30] and then the 9 or 10 EMA now there's
+[00:05:33] really two uh types of moving averages
+[00:05:36] there's the
+[00:05:37] EMA and there's the SMA so the EMA is
+[00:05:42] the exponential moving average and the
+[00:05:45] way this works is if the price is
+[00:05:48] increasing steadily uh rather than the
+[00:05:50] moving average going like this it'll
+[00:05:52] actually slope up like that and the
+[00:05:55] reason it does that is because it waits
+[00:05:58] more recent price action
+[00:06:00] heavier than price action that was from
+[00:06:02] further back so an exponential moving
+[00:06:05] average is faster to respond to changes
+[00:06:08] in price than a simple moving average a
+[00:06:11] simple moving average will be much more
+[00:06:13] linear in the sense that it weights each
+[00:06:16] candle exactly the same whether it was
+[00:06:19] 200 candles ago or it was one candle ago
+[00:06:22] so a simple moving average is commonly
+[00:06:25] used for some Traders but most active
+[00:06:27] Traders are going to use the exponential
+[00:06:30] moving average setting so you could
+[00:06:32] choose simple or exponential and I'm
+[00:06:34] going to choose the exponential moving
+[00:06:36] average so you'll see minor EMAs which
+[00:06:39] stands for exponential moving average so
+[00:06:42] the five that we have listed here of
+[00:06:44] them I actually only use three I use the
+[00:06:48] 200 EMA and I use the 20 EMA and I use
+[00:06:51] the 9 EMA I don't use the 100 and I
+[00:06:55] don't use the 50 although there are some
+[00:06:58] traders who will I personally don't find
+[00:07:01] them particularly helpful in my trading
+[00:07:04] I don't feel like they're as well
+[00:07:06] respected and I'm a big believer in
+[00:07:09] keeping it simple now that's the the
+[00:07:11] kiss method keep it simple and then
+[00:07:14] comma stupid so keep it simple stupid is
+[00:07:18] a concept with well with life I guess in
+[00:07:20] general but certainly with trading to
+[00:07:22] not over complicate your charts keep
+[00:07:25] them simple and easy to read and so
+[00:07:28] that's why when we look at the next
+[00:07:30] slide here you're going to see a nice
+[00:07:32] clean chart so look at this we only have
+[00:07:35] three moving averages on here we have
+[00:07:37] the nine the 20 and the 200 right up
+[00:07:40] here now the reason some people use the
+[00:07:43] nine instead of the 10 is kind of
+[00:07:45] interesting the 10 moving average would
+[00:07:47] sort of be most logical if you're going
+[00:07:49] to use the 10 then use the 20 the 50 the
+[00:07:52] 100 the 200 but somewhere along the line
+[00:07:55] a lot of Traders started using the nine
+[00:07:58] exponential moving average a and I
+[00:08:00] joined on that bandwagon I don't know if
+[00:08:02] the idea is that your signal will just
+[00:08:04] be a slight hair ahead of anyone using
+[00:08:08] the 10 uh I think that's kind of the
+[00:08:11] idea the reason it would be that way is
+[00:08:14] when we're using moving averages we're
+[00:08:15] often looking at crossovers so you've
+[00:08:18] got the 20 here and then you get the
+[00:08:20] nine that crosses over like this well
+[00:08:23] the nine is faster so if you had the 10
+[00:08:26] the 10 would cross over right here so if
+[00:08:29] you want to be trading a crossover
+[00:08:31] you're going to use a shorter time frame
+[00:08:33] so you know what might happen is a few
+[00:08:34] years from now Traders are going to say
+[00:08:36] you know I should really move move a
+[00:08:38] little bit ahead and start using the
+[00:08:40] eight that way I'm ahead of everyone
+[00:08:42] using the nine and then eventually
+[00:08:44] everyone's going to use the seven and
+[00:08:45] then the six and the five and the four
+[00:08:46] and three to one I don't know if that'll
+[00:08:48] happen but we've been using the nine for
+[00:08:51] well for me I've been using it for a
+[00:08:52] decade so more than a decade and it
+[00:08:54] hasn't moved to the eight but it's
+[00:08:57] possible that it will in the future none
+[00:08:59] nonetheless for right now the three
+[00:09:02] moving averages that I'm using are the 9
+[00:09:06] the 20 and the 200 I have the 200 in
+[00:09:09] magenta the nine in this light blue and
+[00:09:12] sorry the 20 in the light blue and then
+[00:09:14] the nine in Gray so when we look at the
+[00:09:17] chart here uh you'll see that the 200
+[00:09:19] moving average is way up here at about
+[00:09:21] $20 a share now I'll I'll talk about how
+[00:09:24] I use these moving averages on different
+[00:09:27] time frames and how I'm using them to
+[00:09:31] help me see buy Andor sell signals
+[00:09:34] that'll be as we get more into the
+[00:09:36] strategy now let's talk for a second
+[00:09:38] about the alligator indicator so this is
+[00:09:41] an indicator that I think is a really
+[00:09:43] interesting one the alligator indicator
+[00:09:46] is U an indicator that uses three moving
+[00:09:49] averages he uses the 13 the eight and
+[00:09:53] the five so the way this looks on a
+[00:09:56] chart is you've got blue which is the 13
+[00:10:00] so we'll write that here this is the 13
+[00:10:03] you've got the red which is the eight
+[00:10:06] right here and then you've got the green
+[00:10:08] which is the five so these are the
+[00:10:10] moving averages right here and these are
+[00:10:13] supposed to reflect uh the idea is an
+[00:10:16] alligator so if the price is going
+[00:10:19] sideways here right let's just say the
+[00:10:20] stock is going more or less sideways
+[00:10:22] these are small green candles and then
+[00:10:25] the price starts to move away and pull
+[00:10:27] up right here what's going to happen is
+[00:10:29] what moving average is going to move
+[00:10:31] first well it's the shorter one it's
+[00:10:33] sorry it's the five not the not the
+[00:10:35] eight so the shorter one is going to
+[00:10:37] move the fastest so this one's going to
+[00:10:39] jump up like this which means this is
+[00:10:42] going to be like this and this is going
+[00:10:44] to be like this and when it takes this
+[00:10:48] form right here and it actually has to
+[00:10:50] go like
+[00:10:51] this you're going to have this crossover
+[00:10:55] where you have green red and blue so so
+[00:10:59] if you picture an alligator this is the
+[00:11:01] alligator's nose right here that's the
+[00:11:04] nose of the alligator these are his
+[00:11:06] teeth right here he's eating and this is
+[00:11:09] the water line right here so when the
+[00:11:11] alligator's nose pushes through and
+[00:11:14] Crosses above that is when you have a
+[00:11:17] period of volatility and you want to
+[00:11:19] trade so when the alligator is eating
+[00:11:22] that's when we're seeing strong momentum
+[00:11:24] so that's when we're going to have this
+[00:11:26] nice crossover then you get a pullback
+[00:11:28] the price dips down and let's say it
+[00:11:30] keeps going down you're going to have a
+[00:11:32] crossover back down like this when you
+[00:11:34] have a crossover back down now the
+[00:11:36] alligator is said to be sleeping right
+[00:11:40] so now you get this full crossover where
+[00:11:43] it goes negative so the alligator is
+[00:11:45] diving back down and it's actually going
+[00:11:47] to sleep so this is a moving average
+[00:11:50] crossover it's designed to help Traders
+[00:11:53] identify Trends in the market and to
+[00:11:56] only trade when something is trending
+[00:11:59] I'm a big advocate of this if you don't
+[00:12:01] already know a little bit about my
+[00:12:02] strategy I am a momentum Trader which
+[00:12:04] means I trade with the trend ultimately
+[00:12:07] when it comes to active trading there
+[00:12:08] are two strategies you can be a trend
+[00:12:11] Trader or you can be a counter Trend
+[00:12:13] Trader counter Trend trading means
+[00:12:15] you're trading reversals you're buying
+[00:12:17] something really weak or you're shorting
+[00:12:18] something really strong and I always
+[00:12:20] find it really difficult to trade
+[00:12:21] against the trend I found in my entire
+[00:12:24] career that I've done far better joining
+[00:12:27] an established EX existing Trend and
+[00:12:30] riding that to the next level so when
+[00:12:33] I'm using these types of indicators
+[00:12:35] these are sort of like a red light or a
+[00:12:37] green light so if you're going to use
+[00:12:39] the alligator indicator the only time
+[00:12:41] you want to be trading is when they're
+[00:12:43] lined up like this green red and blue
+[00:12:46] when they're lined up you don't trade
+[00:12:48] when they're NE when they're against
+[00:12:49] each other like this because that's said
+[00:12:51] that the alligator is sleeping and
+[00:12:53] nobody makes money when the alligator's
+[00:12:54] sleeping you don't make money when
+[00:12:55] they're crossed you only make money when
+[00:12:57] they're open unless you're trading to
+[00:13:00] the short side in which case during a
+[00:13:02] strong downtrend I guess you would be
+[00:13:04] trading them inversely but but this
+[00:13:07] wasn't really designed for Traders who
+[00:13:08] are trading to the short side this is
+[00:13:10] really designed for momentum trading to
+[00:13:11] the long side so the alligator indicator
+[00:13:14] is a combination of moving averages
+[00:13:17] where you're trading essentially a
+[00:13:20] unique type of crossover now you
+[00:13:23] probably haven't heard me talk about
+[00:13:25] this a lot and one of the reasons you
+[00:13:26] haven't heard me talk about it a lot is
+[00:13:28] because when you actually put the
+[00:13:30] alligator indicator on your charts I I
+[00:13:33] honestly find that my charts get a
+[00:13:35] little bit messy so this chart right
+[00:13:39] here actually has the alligator
+[00:13:41] indicator uh turned on so I've got the
+[00:13:43] green the red and the blue so the nose
+[00:13:46] the teeth and then the waterline so
+[00:13:48] right here this whole stretch the
+[00:13:50] alligator indicator is positive but
+[00:13:52] right here we go negative and it's not
+[00:13:55] it's it's fairly straightforward to say
+[00:13:57] that yeah I probably shouldn't be
+[00:13:58] trading it to the long side in this area
+[00:14:01] but I see it all the time traders who
+[00:14:04] are overtrading The Backs side of the
+[00:14:05] move so through this whole period from
+[00:14:08] this point forward your alligator
+[00:14:10] indicator is negative it doesn't give
+[00:14:12] you a confirmation so essentially you
+[00:14:14] should not be taking any trades in this
+[00:14:17] whole area if you're using this
+[00:14:18] indicator to help you confirm whether or
+[00:14:20] not a a setup is worth trading you'll
+[00:14:23] see that the first the mouth closes as
+[00:14:26] the green crosses the red and then as he
+[00:14:28] cross is the blue he goes underwater and
+[00:14:31] this alligator goes to sleep so for me
+[00:14:35] it's I'm not opposed to using it but I
+[00:14:38] find it harder to see when I have this
+[00:14:41] many moving averages especially because
+[00:14:43] of the way they're behind the price you
+[00:14:45] just can't see it very clearly without
+[00:14:48] making them really bold which you could
+[00:14:51] do but then again you start making these
+[00:14:53] really bold and now it just becomes a
+[00:14:56] bit a bit busy and a little messy and
+[00:14:59] I'm just not a huge fan of that this is
+[00:15:01] a stage where the alligator is fully
+[00:15:04] negative Green's on the bottom then red
+[00:15:06] and then blue so course wouldn't be
+[00:15:07] trading in that area so and and you can
+[00:15:11] use this on any time frame you can use
+[00:15:12] it on the one minute you can use it on
+[00:15:13] the five minute or you can use it on the
+[00:15:15] daily chart so the alligator indicator
+[00:15:17] is the first moving
+[00:15:20] average well I'm not going to call it a
+[00:15:22] strategy in total just yet I'm going to
+[00:15:24] add some more detail to it but it's it's
+[00:15:25] that's the first thing that I wanted to
+[00:15:27] share with you now the second is trading
+[00:15:30] these moving average pullbacks so a
+[00:15:33] moving average pullback is interesting
+[00:15:35] because if you've been following me for
+[00:15:37] a while you know that some of my
+[00:15:38] favorite setups include micro pullbacks
+[00:15:42] and bull Flags I'll put some links at
+[00:15:44] the end of this episode to uh those
+[00:15:46] strategies so you can learn more about
+[00:15:47] them but the way the micro pullback
+[00:15:49] works is we have the price moving up
+[00:15:52] very quickly just like this we have a
+[00:15:55] moment of pullback and then we surge
+[00:15:59] higher now during this setup right here
+[00:16:02] the moving average is almost always qu
+[00:16:05] quite far away because the price is
+[00:16:07] moving so quickly so there's no doubt
+[00:16:10] that during this entry right here the
+[00:16:13] alligator is going to be open and eating
+[00:16:16] hungry that's that's a that's a given
+[00:16:19] but that's not going to help you really
+[00:16:21] get into that trade because at that
+[00:16:23] point well the crossover was probably
+[00:16:26] way back here so if you're Trad trating
+[00:16:29] a breakout of a consolidation period if
+[00:16:32] you have a period where the price has
+[00:16:34] been going sideways for quite a while
+[00:16:36] and then it starts to break out you'll
+[00:16:38] see that moving average crossover for
+[00:16:40] the alligator indicator that's the place
+[00:16:42] to be considering an entry but when you
+[00:16:44] have something that's moving really
+[00:16:45] quickly and you want to jump on that
+[00:16:47] Trend well unfortunately I'm not going
+[00:16:50] to trade a moving average pullback
+[00:16:52] because it's already too extended and
+[00:16:54] the Crossovers aren't going to be super
+[00:16:55] helpful so in this area I'm trading
+[00:16:58] either the micro pullback or I'm going
+[00:17:00] to trade uh the proper bull flag so a
+[00:17:03] bull flag would be a couple of red
+[00:17:04] candles and then maybe a little dogee
+[00:17:07] candle here and then first candle making
+[00:17:09] a new high and surging back up so the
+[00:17:12] bull flag bull flag strategy um let's
+[00:17:16] see bull
+[00:17:18] flag and then uh the micro pullback
+[00:17:21] micro
+[00:17:22] pullback all right so these are the two
+[00:17:24] that I would be trading first and second
+[00:17:26] and then the third is the m a uh
+[00:17:29] pullback so the the moving average
+[00:17:32] pullback occurs typically when the price
+[00:17:36] breaks out as it did on this stock here
+[00:17:39] this is the one I traded today it breaks
+[00:17:42] out and then it pulls back quite a lot
+[00:17:45] so if you see this here you've got these
+[00:17:46] two big green candles and then this high
+[00:17:48] volume red candle it drops down and I
+[00:17:50] wouldn't buy that candle right there
+[00:17:53] even though it is technically the first
+[00:17:55] candle to make a new high it's not a
+[00:17:57] clean bull flag because too much selling
+[00:18:00] volume on this red candle it's just too
+[00:18:03] weak so I wouldn't buy that candle and I
+[00:18:05] probably wouldn't buy this one either
+[00:18:07] although it's true that the price came
+[00:18:08] back above the volume weighted average
+[00:18:10] price which is our technical indicator
+[00:18:13] again given the high volume of this
+[00:18:15] selling candle given this rejection I
+[00:18:17] wouldn't have trusted it right here but
+[00:18:19] then the price dips back down and it
+[00:18:21] comes back up again and pushes up again
+[00:18:23] but once again it kind of tops out and
+[00:18:26] then it pulls back so this is a chart
+[00:18:28] pattern where you're really not getting
+[00:18:31] clean bull Flags you get this sort of
+[00:18:34] pop up and then the drop and then pop up
+[00:18:37] and then the drop this pop up and then
+[00:18:39] the drop but you know what I noticed I
+[00:18:41] noticed that wait a second this price
+[00:18:44] seems to keep finding support around the
+[00:18:47] area of the 20 moving average so the 20
+[00:18:51] is this um light blue moving average
+[00:18:54] right down here so we came kind of back
+[00:18:57] down to the nine here
+[00:18:59] back up back down to the nine right
+[00:19:01] above the 20 back up back down and on
+[00:19:04] this wave right here I started watching
+[00:19:05] it and I thought you know if this starts
+[00:19:08] to pull away right here what am I
+[00:19:10] looking for I'm looking for a break
+[00:19:12] through 10 and then I'm looking for a
+[00:19:14] squeeze up to this level and we actually
+[00:19:16] got exactly that so the entry on this
+[00:19:18] was actually down here near the moving
+[00:19:21] average right near this support level
+[00:19:23] and the great thing about this entry is
+[00:19:25] that you're getting in close to support
+[00:19:28] so you've got a tight stop now this
+[00:19:30] ended up squeezing here up to 10 as it
+[00:19:33] broke this level of $10 a share that was
+[00:19:36] a breakout so my first trade on this was
+[00:19:38] getting in on this green candle right
+[00:19:40] here I didn't get in before that and the
+[00:19:43] reason I didn't get in before that was
+[00:19:44] because I was waiting for a little more
+[00:19:46] volume now if we look at these candles
+[00:19:48] here let's see we've got uh sorry this
+[00:19:50] is a candle that has the volume this
+[00:19:51] green one here so once we started to get
+[00:19:53] the volume and start to pull away this
+[00:19:56] is where I got in this and what I was
+[00:19:58] looking for was a retest of the high
+[00:20:01] here a break of 10 and we got to squeeze
+[00:20:04] all the way up to 11 then we got a micro
+[00:20:06] pullback and we got to push all the way
+[00:20:08] up to 12 to 13 to $14 a share so this
+[00:20:12] actually went from $9 to $14 a share now
+[00:20:17] this is a stock that had a news Catalyst
+[00:20:19] today where they make uh wheels for cars
+[00:20:22] and their wheels are going to be um
+[00:20:23] featured on the new uh Corvette the new
+[00:20:26] Chevy Corvette so that's you know pretty
+[00:20:29] big headline for this company that
+[00:20:31] General Motors has contracted them to
+[00:20:32] make the wheels for this car and that
+[00:20:34] was the news Catalyst that was pushing
+[00:20:35] this higher so I'm going to show you um
+[00:20:38] a couple three other exam two other
+[00:20:40] really good examples of moving average
+[00:20:41] pullbacks uh in just a moment now the
+[00:20:45] moving average uh crossover here is uh
+[00:20:49] sort of goes hand inand with the macd so
+[00:20:53] a moving average crossover and again
+[00:20:55] this is a slight variation of your
+[00:20:58] alligator indicator your alligator
+[00:21:00] indicator is using the 13 the 8 and the
+[00:21:03] five exponential moving averages I use
+[00:21:05] the n and the 20 on my charts so when
+[00:21:08] the nine crosses against the 20 and then
+[00:21:11] it crosses back up those are the
+[00:21:13] Crossovers that I'm paying attention to
+[00:21:16] this is another crossover right here and
+[00:21:18] so what I've come to learn is that when
+[00:21:20] the nine moving average crosses below
+[00:21:22] the 20 I should no longer be buying this
+[00:21:26] stock so the way I moving averages is
+[00:21:30] they tell me when to stop trading
+[00:21:32] because we've gotten a negative
+[00:21:33] crossover and they tell me when to start
+[00:21:35] trading so once we get the positive
+[00:21:37] crossover right here I'm interested
+[00:21:39] again so right there at that point we
+[00:21:42] got a positive crossover and I'm like
+[00:21:44] okay it's game time and that stays
+[00:21:46] positive until right here so we ended up
+[00:21:49] having this window from about here to
+[00:21:51] here where all of this price action
+[00:21:53] occurred when the nine moving average
+[00:21:56] was above the 20 and and then as soon as
+[00:21:59] we get that negative Crossover at that
+[00:22:01] point I'm done and I walk away now for
+[00:22:04] some Traders it can be hard to visualize
+[00:22:06] these crossovers in real time and so
+[00:22:10] using the macd is really helpful the
+[00:22:12] macd is called uh is an acronym for
+[00:22:15] moving average convergence Divergence
+[00:22:17] indicator and when the macd crosses its
+[00:22:19] signal line that is essentially showing
+[00:22:23] you visually down on this pane right
+[00:22:25] here this moving average crossover and
+[00:22:28] in fact the macd is formulated so that
+[00:22:31] moving average crossover is going to be
+[00:22:33] a little earlier than when it actually
+[00:22:35] happens with these two indicators with
+[00:22:37] these two moving averages so if we pull
+[00:22:39] up the macd right here let's see let me
+[00:22:42] grab my chart so when we pull up the
+[00:22:45] macd there it
+[00:22:47] is we're going to go full screen on this
+[00:22:50] so the macd uses the following inputs it
+[00:22:54] uses the 12 and the 26 so it's um and
+[00:22:59] then the signal length is the nine so
+[00:23:01] the 12 is the fast length the 26 is the
+[00:23:05] slow length and then the nine is the
+[00:23:07] signal and we're watching when the macd
+[00:23:10] average crosses the signal line so this
+[00:23:14] cross is actually happening a little bit
+[00:23:16] before the nine and the 20 crossover so
+[00:23:20] anytime the nine and the 20 cross over
+[00:23:22] just slightly before that you would have
+[00:23:24] had a standard macd crossover now the
+[00:23:26] moving average convergence Divergence
+[00:23:28] indicator settings that I'm using are
+[00:23:30] the standard settings that everyone uses
+[00:23:33] they're the standard settings that will
+[00:23:35] be applied when you add macd to your
+[00:23:36] chart they're not custom they're not
+[00:23:38] special and that's important I want to
+[00:23:40] see the macd and I want to see these
+[00:23:42] crossovers the same as everyone else
+[00:23:44] because these are the very clear buy and
+[00:23:47] sell signals in the market that's a Buy
+[00:23:49] Signal and that's a sell signal the
+[00:23:51] reason it's important to see it just
+[00:23:53] like it's important to understand what a
+[00:23:54] stop sign means you want to make sure
+[00:23:56] everyone who's driving knows what a stop
+[00:23:58] sign means that creates more I guess
+[00:24:01] uniformity in the way everyone drives
+[00:24:03] less accidents so with trading having
+[00:24:05] indicators that very clearly say stop or
+[00:24:08] go makes it easier and more predictable
+[00:24:12] to trade these stocks so for me having
+[00:24:16] the macd on there is a must-have so I
+[00:24:19] have the macd on because that allows me
+[00:24:21] to visualize when we're having these
+[00:24:23] moving average crossovers so we've got
+[00:24:26] the alligator indicator we've got the
+[00:24:27] moving average pull back and we've got
+[00:24:29] these moving average crossovers now I
+[00:24:32] have this example here that I wanted to
+[00:24:34] show you um this is going to show you
+[00:24:36] where we have the Crossovers on the
+[00:24:39] alligator indicator you can see right
+[00:24:41] there we get a crossover which is
+[00:24:43] negative so that tells you to stop
+[00:24:45] trading it there you get a crossover
+[00:24:47] right here which tells you to stop
+[00:24:48] trading it then you get a crossover here
+[00:24:51] which tells you to start trading it so
+[00:24:53] this is uh stop and then this is start
+[00:24:56] right back here that's a crossover right
+[00:24:58] there this is stop this is start and
+[00:25:01] this right here is stop so when we
+[00:25:04] compare that to our um macd right
+[00:25:09] here what you would notice is that the
+[00:25:11] macd indicators are going to be sharper
+[00:25:13] and they're going to be faster they're
+[00:25:15] going to be faster than the 9 and the 20
+[00:25:17] and they're going to be a little bit
+[00:25:18] faster than using the alligator
+[00:25:20] indicator so between the three I think
+[00:25:23] the macd is going to be the best one to
+[00:25:25] use for helping you identify when the
+[00:25:27] trend is Shifting okay so and now here
+[00:25:32] we've got uh again
+[00:25:34] CR where we've got the alligator
+[00:25:36] indicator turned on and this right here
+[00:25:39] shows that the alligator indicator was
+[00:25:41] positive it was already positive the
+[00:25:44] macd crossed over right
+[00:25:46] here and I guess actually in this case
+[00:25:49] the alligator indicator was kind of
+[00:25:51] somewhat positive the whole time except
+[00:25:52] that it dipped down for a second right
+[00:25:54] here and again this is showing a much
+[00:25:57] more atic swing right there that's
+[00:26:00] showing it much more visually like
+[00:26:02] that's the clear break and that's that's
+[00:26:04] clearly the spot where this thing went
+[00:26:06] into play it wasn't really easy in this
+[00:26:09] area even though the alligator indicator
+[00:26:11] was generally open it it's just slightly
+[00:26:15] lagging behind price action so here's
+[00:26:19] the way I trade with the moving averages
+[00:26:21] and we're going to talk specifically
+[00:26:23] about a moving average pullback and one
+[00:26:25] that I took this week that gave me a
+[00:26:28] really solid trade so I'm going to walk
+[00:26:31] you through each one of these Steps step
+[00:26:33] one is to find a stock that has
+[00:26:37] volatility and is moving quickly I'm
+[00:26:39] going to close my video here so you can
+[00:26:40] see um this circled area on the chart so
+[00:26:44] this was uh on Tuesday and we had
+[00:26:47] a this is the stock right down here now
+[00:26:50] this stock uh at the time I got the
+[00:26:52] screenshot was up 425 per on the day
+[00:26:57] which is remarkable had 14 million
+[00:26:59] shares of volume a 600,000 share float
+[00:27:02] the price is $852 so this thing is going
+[00:27:05] absolutely crazy it in fact is the
+[00:27:08] number one leading percentage gainer in
+[00:27:11] the entire stock market now this is the
+[00:27:14] stock that I ended up making about 28
+[00:27:17] $29,000 on on Tuesday so Step One is
+[00:27:21] finding a stock to trade and the way I
+[00:27:25] focus is to look for the stocks that are
+[00:27:27] the number number one number two or
+[00:27:29] number three leading percentage gainers
+[00:27:31] that's usually where I find the most
+[00:27:33] success now once I find a stock that's
+[00:27:36] up 50% 100% 200% whatever is the most
+[00:27:40] whatever's the biggest percentage Gainer
+[00:27:41] on that day some days the biggest
+[00:27:43] percentage Gainer is 50% some days it's
+[00:27:46] 100 sometimes it's 400 whatever it is
+[00:27:48] that's the one that I'm going to focus
+[00:27:49] on then I try to figure out why is it up
+[00:27:51] this much so I'm going to actually give
+[00:27:54] you guys a uh a PDF that you can
+[00:27:56] download this is my stock selection
+[00:27:58] worksheet the link is going to be pinned
+[00:28:00] to the top of the comments and linked in
+[00:28:01] the uh the top of the description so you
+[00:28:03] can download my stock selection PDF and
+[00:28:06] that will actually break down for you
+[00:28:07] the six criteria that I use to determine
+[00:28:11] whether or not a stock that is up and is
+[00:28:14] the number one leading Gainer is
+[00:28:16] actually worth trading because it's not
+[00:28:18] just that it's the number one leading
+[00:28:19] Gainer it's also a measure of the float
+[00:28:22] the price the relative volume the news
+[00:28:24] Etc so make sure you guys download that
+[00:28:26] worksheet and then you can use that in
+[00:28:28] your trading so I'm going to have that
+[00:28:30] link and you guys can um check that out
+[00:28:32] right now you can pause the episode if
+[00:28:33] you want you can download the worksheet
+[00:28:35] and then you could follow along as we
+[00:28:36] keep going so step two is to check to
+[00:28:40] see what the catalyst is why is this
+[00:28:42] stock up this much so in this case we
+[00:28:45] had a news headline and typically there
+[00:28:48] will be some type of news that's driving
+[00:28:51] the stock up although there are times
+[00:28:54] where we'll see something that's up 50%
+[00:28:56] 100% and in fact there's not a very
+[00:28:59] clear Catalyst when that's the case if
+[00:29:02] the market is really hot and we've got
+[00:29:05] really strong sentiment really strong
+[00:29:07] momentum I will consider taking the
+[00:29:09] trade anyways but if the Market's a
+[00:29:11] little colder I'll be a little bit more
+[00:29:13] cautious because I'll know that short
+[00:29:16] sellers are going to short this stock
+[00:29:18] realizing look it's up 75% and there's
+[00:29:21] no fundamental reason for that it's
+[00:29:23] definitely going to fade but one of the
+[00:29:25] things that we know is long biased
+[00:29:27] Traders is that sometimes a stock can be
+[00:29:29] up 75% with no news and the reason is
+[00:29:32] because early short sellers are getting
+[00:29:34] squeezed out think about GameStop the
+[00:29:37] Catalyst there was high short interest
+[00:29:39] so it may not be a fundamental Catalyst
+[00:29:42] it could be a technical Catalyst that's
+[00:29:44] driving the price higher in any case uh
+[00:29:47] I Look to try to understand what the
+[00:29:49] news is and a did have a news headline
+[00:29:52] so that was good uh and then do the
+[00:29:55] market sentiment check right so again if
+[00:29:57] sentiment is strong strong I'll be more
+[00:29:59] aggressive on anything that has news and
+[00:30:01] what I'm ultimately looking for is a
+[00:30:03] fast rate of change that is the number
+[00:30:06] one requirement that the price is moving
+[00:30:08] quickly if the price isn't moving
+[00:30:10] quickly regardless of how much something
+[00:30:12] is up on the day I'm not going to want
+[00:30:14] to trade it I want to see that the price
+[00:30:15] is moving quickly right now so then step
+[00:30:19] three is where we get into technical
+[00:30:21] analysis and this is where we get into
+[00:30:22] analyzing our moving averages so I
+[00:30:25] always start by analyzing the daily
+[00:30:27] chart I check the daily chart because I
+[00:30:28] want to look at the big picture and so
+[00:30:30] in the case of a this stock which will
+[00:30:33] be our case study uh from Tuesday I
+[00:30:35] notice that we had a large gap the Gap
+[00:30:38] was from
+[00:30:39] $8.85 which was the high of this day
+[00:30:42] back here and that went all the way to
+[00:30:44] the low of this day right here which was
+[00:30:47] $24.30 so we had a huge gap on the daily
+[00:30:51] chart a gap represents an area where
+[00:30:54] there is no resistance there is no
+[00:30:57] resistance until the low of that candle
+[00:30:59] right there now it doesn't mean that
+[00:31:00] we're necessarily going to go all the
+[00:31:02] way at 24 but it certainly shows that we
+[00:31:04] have more potential than if the stock
+[00:31:07] had clear resistance at 875 880 9 950 10
+[00:31:13] 1050 11 12 Etc right because each time
+[00:31:16] it comes up to that level it's going to
+[00:31:17] slow down and then eventually the price
+[00:31:19] is going to roll over so this had
+[00:31:22] basically no resistance here until $24 I
+[00:31:26] also checked the position of the
+[00:31:28] exponential moving average and I saw
+[00:31:30] it's up around $27 a share so that's the
+[00:31:33] average price over the last 200 days
+[00:31:35] which told me again that this is not
+[00:31:37] going to be nearby resistance if that
+[00:31:39] 200 moving average was right down here I
+[00:31:42] would worry about that being upside
+[00:31:43] resistance because most likely the price
+[00:31:45] would hit it and it would fade off of it
+[00:31:47] but in this case the 200 EMA checks out
+[00:31:49] so now my due diligence on the chart is
+[00:31:52] nice Gap lots of room to the 200 recent
+[00:31:55] reverse split which has the effect of
+[00:31:58] reducing the float of the stock and we
+[00:32:00] have news today so check check check
+[00:32:02] this is all looking good so that's the
+[00:32:04] daily chart now we look at the intraday
+[00:32:07] chart now on the intraday chart we've
+[00:32:09] got fast acceleration following the
+[00:32:11] breaking news we have a micro pullback
+[00:32:14] that occurred right here at about 220
+[00:32:16] and then we got the first one minute
+[00:32:18] pullback which was right in here we have
+[00:32:20] increasing volume the macd is open and
+[00:32:24] even though we didn't get the we didn't
+[00:32:26] get a crossover here that gave you the
+[00:32:28] ability to buy so once again this is
+[00:32:30] going to be a trade where your first
+[00:32:32] entry is going to be on a micro pullback
+[00:32:34] or the first one minute candle to make a
+[00:32:36] new high it's not going to be a Mac it's
+[00:32:40] not going to be a macd crossover it's
+[00:32:41] not going to be a moving average
+[00:32:42] pullback and it's not going to be an
+[00:32:44] alligator indicator trade because the
+[00:32:47] stock basically went straight up so the
+[00:32:49] only way you're going to be able to take
+[00:32:50] one of those trades is if we get a more
+[00:32:53] sustained pullback that results in a
+[00:32:55] moving average pullback or we get such a
+[00:32:58] big pullback that our moving averages
+[00:32:59] cross to negative we go sideways for a
+[00:33:02] while and then we come back to cross to
+[00:33:04] positive and then that's when the
+[00:33:05] alligator indicator can come into play
+[00:33:08] or a macd crossover so my first trades
+[00:33:11] were right here at the very beginning
+[00:33:13] trading the standard micro pullbacks and
+[00:33:15] first um bull Flags but then we ended up
+[00:33:18] getting a moving average pullback so the
+[00:33:22] next step is moving into your order
+[00:33:24] entry window and actually executing the
+[00:33:26] trades so this is what my order entry
+[00:33:28] window looks like I've got my buy and
+[00:33:30] sell orders down here this is the level
+[00:33:32] two where I can see the depth of the
+[00:33:34] market and this is where I'm actively
+[00:33:36] trading so now let's talk about the
+[00:33:38] moving average pullback strategy trade
+[00:33:42] that I took on
+[00:33:43] a so if we look at this on the one
+[00:33:47] minute chart this is the one minute on
+[00:33:48] the right and this is the five minute on
+[00:33:50] the left so on the one minute chart we
+[00:33:52] get this Quick Squeeze up our alligator
+[00:33:54] indicator is positive the whole way it
+[00:33:57] cross is like right in this area but
+[00:33:59] then it opens again right here so this
+[00:34:03] is the spot where we got both the
+[00:34:06] alligator indicator confirming an entry
+[00:34:08] and the macd crossover right here and we
+[00:34:11] were on a moving average pullback so
+[00:34:14] what happened here was we had the first
+[00:34:17] well first of all we had a micro
+[00:34:19] pullback right here which I took a trade
+[00:34:20] on then we had this pullback right here
+[00:34:23] which I traded we had a small pullback
+[00:34:25] here which I traded we had another one
+[00:34:27] here here which I traded and another one
+[00:34:29] right in here so this is like 1 2 3 4 5
+[00:34:32] six seven trades as it's squeezing up
+[00:34:34] but it ends up doing a little false
+[00:34:36] breakout here and dipping back down and
+[00:34:39] notice where do it come to support right
+[00:34:41] down here along our moving average
+[00:34:44] typical very typical it comes back up
+[00:34:47] here and actually traded right in this
+[00:34:50] area and what I thought might happen is
+[00:34:52] a squeeze back through the high and a
+[00:34:55] move higher right here but that didn't
+[00:34:57] end up working ended up stalling out and
+[00:34:59] dropping back down and then this is
+[00:35:02] where we're no longer looking this is no
+[00:35:04] longer in this area a bull flag a bull
+[00:35:07] flag is when we have the very well this
+[00:35:09] this is actually a bull flag right here
+[00:35:11] this is where you've got four or five
+[00:35:13] green candles up one two three candles
+[00:35:16] that are red in this case it was four
+[00:35:18] which is a little more than you'd like
+[00:35:20] three four candles of pullback and then
+[00:35:22] it goes higher but on the one minute
+[00:35:25] this is not a bull flag it's not an ABCD
+[00:35:27] pattern at this point it's just sideways
+[00:35:30] consolidation but I call it a moving
+[00:35:33] average pullback when that consolidation
+[00:35:35] comes right down to a moving average and
+[00:35:38] the 20 was just below this because
+[00:35:40] remember this is the five the8 and the
+[00:35:42] 13 so we're right at the 20 which would
+[00:35:44] have been right down here and then what
+[00:35:47] happens is we pull away right there so
+[00:35:50] this is a moving average pullback and
+[00:35:52] what's interesting here is that on the
+[00:35:54] one minute we have a moving average
+[00:35:56] pullback while on the five minute we
+[00:35:59] have something that looks a lot more
+[00:36:01] like a bull flag five green candles up
+[00:36:04] and then one candle sideways two candles
+[00:36:06] sideways three candles sideways four
+[00:36:08] candles sideways again right down to
+[00:36:10] that moving average and then boom We
+[00:36:13] squeeze from $5 all the way up to 12
+[00:36:17] that trade right there was I mean it was
+[00:36:19] really phenomenal so I want to actually
+[00:36:22] show you my executions on this uh move
+[00:36:25] the these are my actual trades and I'll
+[00:36:28] tell you that I traded it a lot so my
+[00:36:32] strategy I guess it's everyone has their
+[00:36:34] sort of own strategy my strategy is to
+[00:36:36] get in and get out so I'm going to get
+[00:36:38] in I'm going to get back out I'm going
+[00:36:39] to get in I'm going to get back out and
+[00:36:41] so if we look at this um right
+[00:36:43] here you could actually zoom in here and
+[00:36:46] you could see all of these trades so I
+[00:36:49] was trading the breakout either green is
+[00:36:52] the buy the red is the sell so buying
+[00:36:54] and then selling and then buying and
+[00:36:55] then selling buying and then selling so
+[00:36:57] I'm trading as it's pushing higher I
+[00:36:59] just continue trading it it pulls back
+[00:37:01] here for a second it comes back up I buy
+[00:37:04] it I buy it I add and then I sell a
+[00:37:06] little bit and now right here I'm flat
+[00:37:08] on the trade because basically it's not
+[00:37:10] working right so I didn't trade it
+[00:37:13] through this area right here and I
+[00:37:15] didn't trade it through this area right
+[00:37:17] here but right here as we start to pull
+[00:37:20] away what happens I'm back in so this is
+[00:37:24] the moving average pullback and what we
+[00:37:26] want to not Noti is that the stock is
+[00:37:29] holding the support of these moving
+[00:37:31] averages it's had the opportunity to
+[00:37:33] fail and it's not failing the longer it
+[00:37:37] doesn't fail and the further the price
+[00:37:40] moves just slightly up creeping higher
+[00:37:42] the higher likelihood that we're going
+[00:37:44] to break these levels now what I do is I
+[00:37:46] try to identify what are critical levels
+[00:37:49] on this chart that I should be paying
+[00:37:51] attention to so in this case we had um a
+[00:37:54] little bit of descending resistance
+[00:37:56] right here so we had a little bit of a
+[00:37:58] wedge the wedge was sort of in this area
+[00:38:01] here and I thought if we break the high
+[00:38:03] of this candle right here and the high
+[00:38:05] was
+[00:38:06] $541 we're going and so I decided to get
+[00:38:10] in right down here knowing that my stop
+[00:38:13] was just below the low of this pullback
+[00:38:15] remember when we're looking at 5 Minute
+[00:38:17] charts your stop is always the low of
+[00:38:19] the last 5 minute candle so the low of
+[00:38:22] this last 5minute candle was like $5 so
+[00:38:25] when I got in at about 515 52 money I
+[00:38:28] only had about a 15 cent 20 cent stop my
+[00:38:31] stop was super tight now there was a
+[00:38:33] possibility that I would get in like I
+[00:38:35] did here and have to get back out maybe
+[00:38:37] it's a small winner or maybe it's a
+[00:38:39] small loser but I'm okay with taking
+[00:38:40] that trade especially given the fact
+[00:38:43] that I know this stock meets all my
+[00:38:45] criteria for having the potential to
+[00:38:47] make a big move again those criteria are
+[00:38:50] broken down in my stock selection
+[00:38:52] worksheet that's going to highlight for
+[00:38:54] you the type of stocks that can make
+[00:38:57] bigy moves because if you don't
+[00:38:58] understand the type of stocks that can
+[00:38:59] make big moves what's going to end up
+[00:39:01] happening is you're trading the wrong
+[00:39:03] type of stocks you're expecting big
+[00:39:04] resolution it's not going to happen
+[00:39:06] you're going to get chopped up and
+[00:39:07] you're going to realize no one else is
+[00:39:09] trading this and the reason they're not
+[00:39:10] trading it is because it's not the right
+[00:39:12] type of stock to focus on it's not the
+[00:39:14] type of stock that has the potential to
+[00:39:16] make a big move so people are not
+[00:39:17] interested in it all right so this is
+[00:39:21] also by the way an example of what we
+[00:39:22] call multi-time Frame Alignment the 5
+[00:39:24] minute checks out and the one minute is
+[00:39:26] confirming as well now it's true the one
+[00:39:28] minute's not a bull flag or an ABCD
+[00:39:30] pattern it's just sideways consolidation
+[00:39:33] a gentle moving average pullback while
+[00:39:35] this is more of the clear pattern and
+[00:39:37] that's fine a clear five minute breakout
+[00:39:40] is is usually going to be more powerful
+[00:39:42] than a one minute breakout so as long as
+[00:39:44] the one minute chart isn't telling you
+[00:39:46] something to like if the one minute
+[00:39:49] chart for instance had a huge red volume
+[00:39:51] bar here with a big topping tail and
+[00:39:54] another one right here the 5 minute
+[00:39:56] might not show that detail right the 5
+[00:40:00] minute is averaging 5 minute candles so
+[00:40:02] it can kind of hide little secrets here
+[00:40:05] like a big huge red volume bar with a
+[00:40:07] topping tail it could end up being a
+[00:40:09] green Candle on the 5 minute and it just
+[00:40:11] looks like a small sort of little
+[00:40:12] topping tail it's not as dramatic but
+[00:40:15] when you see those warning signs on here
+[00:40:17] that's going to give you pause to say
+[00:40:19] well the problem is the one minute
+[00:40:20] doesn't look good so even though the 5
+[00:40:22] minute looks good the one minute has got
+[00:40:24] these warning signs but here the one
+[00:40:25] minute checked out no no warning signs
+[00:40:28] and now we're getting ready for this big
+[00:40:29] macd crossover the stock is
+[00:40:32] consolidating in the top 15% of its
+[00:40:35] range on the day which indicates very
+[00:40:39] strong bullish sentiment Traders had the
+[00:40:41] opportunity to short it sellers had the
+[00:40:43] opportunity to come in and it didn't
+[00:40:44] drop and now this is when you get that
+[00:40:46] push
+[00:40:47] higher so so let's jump into um so yeah
+[00:40:51] so let's go back to right here so right
+[00:40:53] here I end up jumping in right here as
+[00:40:55] we start to pull away I add I take a
+[00:40:58] little profit to protect myself which is
+[00:41:00] always the right move and then I'm like
+[00:41:02] oh this is going I add back I add a
+[00:41:05] little bit more and in here I add I take
+[00:41:07] a little profit I add I take a little
+[00:41:09] profit I add and then I take a little
+[00:41:11] profit and I just actively trade the
+[00:41:13] range the reason I add and take profit
+[00:41:16] is because when I'm trading I'm using
+[00:41:19] the level two in my trading right here
+[00:41:20] for my order entry and I'll see the flow
+[00:41:23] of orders so I'll jump in I'll see a lot
+[00:41:26] of buy orders so I'll jump in also and
+[00:41:28] then all of a sudden maybe I see a big
+[00:41:29] sell order I'm like o there's a 25,000
+[00:41:32] share seller I should jump out of this
+[00:41:34] and maybe the price drops 15 cents and
+[00:41:37] then I'll add back on a dip and then
+[00:41:38] I'll get back in and then it goes up
+[00:41:40] another 25 cents or 30 cents and then
+[00:41:42] there's another seller so I take profit
+[00:41:44] and then dips down so the fact is even
+[00:41:47] stocks that are moving as cleanly like
+[00:41:49] as this are moving in these waves so I
+[00:41:52] like to add add add take a little profit
+[00:41:54] add add add add take a little profit add
+[00:41:57] add add add take a little profit and so
+[00:41:59] on and so forth that for me is is the
+[00:42:02] way I've always traded and part of that
+[00:42:04] was because I learned to trade during a
+[00:42:06] time in the market where winners didn't
+[00:42:08] come easily and if you didn't take the
+[00:42:10] profit off the table when you had it
+[00:42:12] that profit would disappear so I trained
+[00:42:14] myself to take the profit when you have
+[00:42:16] it and then look there's nothing wrong
+[00:42:18] with getting back in if you have another
+[00:42:20] setup so right so this was the trade on
+[00:42:24] um a right here as we started to pull
+[00:42:26] away and then step five is to analyze my
+[00:42:29] metrics now before we do that let me
+[00:42:31] show you um this is another uh trade
+[00:42:34] here this one was on um let's see I
+[00:42:37] think this was on P AI right okay so
+[00:42:40] watch this so this is another really
+[00:42:42] good example
+[00:42:43] here so right here we're looking at our
+[00:42:47] uh one minute chart and let me actually
+[00:42:49] grab um I'm going to pull up the 5
+[00:42:52] minute chart and just show you what it
+[00:42:53] looked like before we uh take this trade
+[00:42:56] or before I show you the recording
+[00:42:57] okay so poai this is the one um from
+[00:43:01] yesterday I think it was so the 5 minute
+[00:43:04] chart looks like this right
+[00:43:07] here okay so this was the 5 minute and
+[00:43:11] then we're going to back this up and
+[00:43:12] I'll show you the one
+[00:43:15] minute okay so this was the one
+[00:43:19] minute so I'm just going to close these
+[00:43:21] out just to give it a little bit more
+[00:43:24] space okay uh I'll just close all this
+[00:43:27] out it's fine all right so on this one
+[00:43:30] here we had uh five minute pop up pulls
+[00:43:33] back squeezes higher pulls back little
+[00:43:36] false breakout and then dips down so
+[00:43:38] we're sort of in this consolidation
+[00:43:39] right down here and on the one minute
+[00:43:41] chart I was looking at this right in
+[00:43:43] this area and what I noticed was
+[00:43:46] ascending support so I saw you know what
+[00:43:50] we've got this support level tap tap tap
+[00:43:54] tap and what I noticed is that we're
+[00:43:57] making um higher lows so the low here
+[00:44:00] isn't as low as the previous low which
+[00:44:02] means we're sort of stair stepping up
+[00:44:04] and what I kind of thought was that it
+[00:44:05] was only a matter of time before we got
+[00:44:07] a squeeze back through the high of day
+[00:44:09] now the only red flag with this was this
+[00:44:12] red candle here uh you could see we have
+[00:44:14] this red candle here and it marked sort
+[00:44:17] of this not perfect five minute setup so
+[00:44:20] it's not a perfect bull flag but this is
+[00:44:23] almost a picture perfect moving average
+[00:44:24] pullback so you have the dip the PO up
+[00:44:27] holding holding and I took a starter
+[00:44:29] right here and then we get this really
+[00:44:31] nice breakout so let me show you this so
+[00:44:34] here I was watching this and we had
+[00:44:37] dipped down to about $2 and I had said
+[00:44:41] I'm I'm watching this off of two because
+[00:44:44] it keeps dipping down to two and holding
+[00:44:47] and I feel like if I can get in really
+[00:44:49] close to $2 a share I'm going to just
+[00:44:51] have a better entry so I've got my hand
+[00:44:53] on the buy button and I see a little bit
+[00:44:56] of green come in and I say you know what
+[00:44:58] I'm going to jump in too I I just feel
+[00:45:00] like if I keep waiting I'm going to miss
+[00:45:02] this move so I end up getting in there
+[00:45:05] at um
+[00:45:07] $211 and there is a 26,000 share seller
+[00:45:11] right here at
+[00:45:12] 2113 my stop is $2 we break through that
+[00:45:16] seller there's another seller there at
+[00:45:18] 14 but we broke through that as well and
+[00:45:21] now we're starting to pull away off of
+[00:45:23] this moving average now as we pull away
+[00:45:25] off this moving average what's the
+[00:45:27] profit Target well initially I want to
+[00:45:29] see a squeeze to the high a day but what
+[00:45:32] I'm also thinking is that anyone who
+[00:45:33] shorted for this red candle being a
+[00:45:35] reversal on the high of day is probably
+[00:45:37] going to have their stop at that level
+[00:45:40] or maybe just below that level so I'm
+[00:45:42] thinking as it gets closer to the high
+[00:45:44] of day shorts are going to start
+[00:45:46] covering and when I see that buyer right
+[00:45:49] there on the bid at 22 at uh 2222 222
+[00:45:54] 177,000 share buyer I'm thinking okay
+[00:45:57] someone's trying to buy shares here
+[00:45:59] maybe it's someone trying to cover a
+[00:46:00] short so I put my new order up and I add
+[00:46:03] to the position here for the squeeze
+[00:46:05] through the high of day so I'm going to
+[00:46:07] look to add I add right there at like 23
+[00:46:12] brings my average up a little bit to 216
+[00:46:15] no doubt my average is higher but I'm
+[00:46:17] looking for that squeeze through the
+[00:46:18] high and look at this right there we
+[00:46:22] break through to high a day this candle
+[00:46:24] has almost a million shares of volume on
+[00:46:26] it and I easily was able to take a
+[00:46:28] little bit of profit off the table so I
+[00:46:30] took a little profit at 27 into the high
+[00:46:33] day breakout which you know that order
+[00:46:36] was kind of funny because it was like
+[00:46:38] right as we we broke this
+[00:46:41] level it was just sort of like right as
+[00:46:44] that happened I took a little profit off
+[00:46:45] and I'm taking a little bit more profit
+[00:46:47] into the highs so that's
+[00:46:50] 233 237 so right there we marked a high
+[00:46:54] of 238 238 23 9 and then what ended up
+[00:46:58] happening here was we had this 30,000
+[00:47:00] share seller that came out at 240 and we
+[00:47:02] ended up stalling out at this 240 level
+[00:47:05] for a little bit and then we pulled back
+[00:47:07] again and then we kind of pushed a
+[00:47:09] little bit higher but that right there
+[00:47:11] was a moving average pullback so one of
+[00:47:13] the things that's also uh important to
+[00:47:15] note is that I love trading around half
+[00:47:18] dollars and whole dollars so the fact
+[00:47:21] that the stock kept dipping down and
+[00:47:23] holding to dipping down Di dipping down
+[00:47:27] dipping down I felt like if I could get
+[00:47:29] in as close to the psychological support
+[00:47:31] of of two and this ascending support
+[00:47:34] line and the moving average I had like
+[00:47:36] triple support right under my trade so
+[00:47:40] that support was only like 10 cents away
+[00:47:42] which gives me a really tight stop now
+[00:47:45] when we talk about the pros and cons of
+[00:47:47] this strategy one of the things that is
+[00:47:49] a little bit challenging that you might
+[00:47:51] notice but you may not um is when and
+[00:47:56] well I'll just just go ahead and jump to
+[00:47:57] that and then we'll come back to the
+[00:47:58] metrics in a second so when we talk
+[00:48:00] about the pros of this strategy in a hot
+[00:48:03] Market that long period of consolidation
+[00:48:05] can result in a really large breakout
+[00:48:08] many Traders I've got to typo fix that
+[00:48:10] have the opportunity to participate
+[00:48:13] because the consolidation period offers
+[00:48:15] the ability to take positions in
+[00:48:17] anticipation of the breakout so people
+[00:48:19] are buying buying accumulating while
+[00:48:21] we're going sideways because they're
+[00:48:23] expecting that the stock is going to go
+[00:48:25] higher they're looking at it and
+[00:48:26] thinking look this thing has news I like
+[00:48:29] it I want to buy it and so people are
+[00:48:31] buying buying buying during this long
+[00:48:33] accumulation phase but of course you
+[00:48:35] also have shorts who are shorting
+[00:48:37] shorting shorting thinking look the
+[00:48:39] Stock's up 100% I don't think it has a
+[00:48:41] good enough reason to be up this much
+[00:48:43] it's going to fade and then boom all of
+[00:48:45] a sudden when it's pushing new highs
+[00:48:47] they have no choice but to either add to
+[00:48:49] the position which could make their loss
+[00:48:52] even bigger if it goes higher or cover
+[00:48:54] it and so you have double buying here
+[00:48:56] you have long buyers who are buying for
+[00:48:58] the breakout and you have short sellers
+[00:48:59] who are covering and that's what creates
+[00:49:01] that big squeeze so in a hot Market we
+[00:49:04] have these really nice breakouts and
+[00:49:07] I'll show you so let's see um Let me let
+[00:49:10] me grab my uh charts here for one second
+[00:49:13] so if we look at um so POI gave us this
+[00:49:17] nice moving average pullback and then
+[00:49:19] nice breakout here CR from today this
+[00:49:23] one gave us similarly this really nice
+[00:49:26] sort of
+[00:49:27] pop up pull back and then pulling away
+[00:49:29] here right off those moving averages and
+[00:49:32] this was right off of $9 psychological
+[00:49:35] support it held nine and then boom off
+[00:49:37] it goes and then it held 10 it retested
+[00:49:40] and then squeezes up to 14 and then we
+[00:49:43] had a which gave us this really nice
+[00:49:46] pullback which was also a f minute um a
+[00:49:49] f minute bull flag so that was right
+[00:49:51] here the 5minute bull flag that gave us
+[00:49:53] that squeeze higher which on the one
+[00:49:55] minute chart was more of um that moving
+[00:49:58] average pullback so just that kind of
+[00:50:00] picture perfect pullback now this ended
+[00:50:01] up doing a secondary offering the next
+[00:50:03] day which is why it dropped but uh
+[00:50:05] nonetheless this was the spot right here
+[00:50:07] where it was like strong setups here
+[00:50:10] here and here and then macd crosses over
+[00:50:12] it goes negative so I don't want to
+[00:50:14] trade it here I don't really want to now
+[00:50:16] I did take a trade here and I was I had
+[00:50:18] enough profit on a stock that I was
+[00:50:20] willing to take that risk with that
+[00:50:21] trade but it was risky it drops down and
+[00:50:24] then comes up again and I at this point
+[00:50:26] I was like look guys we're holding the
+[00:50:28] support of this moving average see how
+[00:50:30] we're right at that 20 moving average
+[00:50:32] the macd is crossing over we've got the
+[00:50:35] psychological support of $5 here it's
+[00:50:38] like boom boom boom everything is right
+[00:50:40] there supporting it now as a beginner
+[00:50:42] Trader you might not be able to
+[00:50:44] understand initially the psychological
+[00:50:47] levels of support that are there so
+[00:50:48] you're like I don't know I can't quite
+[00:50:50] see the entry and to be honest for most
+[00:50:52] beginners probably a simpler strategy is
+[00:50:55] the simple bull flag or micro pullback
+[00:50:58] because those are really purely
+[00:51:00] Candlestick patterns that are very easy
+[00:51:02] to visualize the exact entry point on a
+[00:51:06] moving average pullback is a bit more
+[00:51:08] ambiguous and that's one of the cons of
+[00:51:11] this strategy so the cons are well
+[00:51:15] typically by the time the stock pulls
+[00:51:17] back to a moving average the McD's
+[00:51:18] crossed over the bull flag has already
+[00:51:20] failed and the stock has shown some
+[00:51:22] weakness now sometimes it's like well
+[00:51:25] it's bound to show a little bit of
+[00:51:26] weakness here it's up 300% on the day
+[00:51:28] like let's be reasonable so it's you
+[00:51:31] know it's okay but at the same time it
+[00:51:34] did stop going you know basically
+[00:51:37] straight up right so this was a little
+[00:51:39] bit of weakness here there's a little
+[00:51:41] bit more selling the macd crossed over
+[00:51:43] and so if this was your first trade of
+[00:51:45] the day I would say you missed the
+[00:51:47] easier trades which were right here here
+[00:51:50] and here but if you already got those
+[00:51:53] trades and you're looking to add another
+[00:51:55] strategy to your to Belt then this is a
+[00:51:58] great one because of that consolidation
+[00:52:01] breakout so a couple things you could do
+[00:52:03] to help you get better draw descending
+[00:52:06] resistance right here to help create the
+[00:52:08] wedge so visually create the wedge and
+[00:52:11] then you'll notice here that the Apex
+[00:52:13] was right here this was the spot where
+[00:52:15] the wedge kind of had to break it broke
+[00:52:17] a little early and they often will a
+[00:52:20] strong stock will often break early but
+[00:52:21] once you break that descending
+[00:52:23] resistance be aware that sometimes
+[00:52:25] you'll break you you'll retest it real
+[00:52:27] quick and then you'll go so just cuz it
+[00:52:29] breaks and dips doesn't mean it's not
+[00:52:31] going to work can it hold above that
+[00:52:34] level if it can it's game time so this
+[00:52:37] is a moving average pullback a break of
+[00:52:39] that descending resistance and then that
+[00:52:41] squeeze higher so watch the descending
+[00:52:43] resistance look for support how is the
+[00:52:46] stock behaving around half dollars and
+[00:52:48] whole dollars how close are we to a
+[00:52:50] level of support so right here we've got
+[00:52:52] our moving average support we've got the
+[00:52:54] whole dollar we've got a sending support
+[00:52:57] here propping it up so it's like check
+[00:52:59] check check now if we look at um poai
+[00:53:03] from
+[00:53:03] yesterday that one we'll do that on the
+[00:53:06] one minute chart so this one here let's
+[00:53:10] see right in this area so we're going to
+[00:53:12] do something kind of similar
+[00:53:14] here so on this one we had ascending
+[00:53:17] support right in this area so I kind of
+[00:53:20] connected I was sort of like you know
+[00:53:22] which what sort of is like the the exact
+[00:53:24] right way and it's a little arbitrary
+[00:53:26] you sort of draw it in the way that it
+[00:53:27] feels like it connects in the most spots
+[00:53:30] so even if you just connected these two
+[00:53:32] spots here that would have been fine and
+[00:53:34] then you're like okay is this going to
+[00:53:35] work it does next bounce yep okay here
+[00:53:38] we go it's holding this level that's
+[00:53:41] proving that it's valid validity and
+[00:53:44] then on this side you can sort of draw
+[00:53:47] something kind of like this now this
+[00:53:50] Crossing is okay because what happened
+[00:53:52] is it tried and it failed so it tried
+[00:53:55] and it wasn't able to close above that
+[00:53:56] level so again right here you've got a
+[00:53:58] wedge breakout you've got this
+[00:54:00] consolidation and then the wedge
+[00:54:01] breakout right there so draw those lines
+[00:54:04] right there the descending and the
+[00:54:06] ascending tread lines try to connect
+[00:54:08] them where they touch in the most places
+[00:54:10] because that's going to usually be the
+[00:54:12] most valid and a lot of times you draw a
+[00:54:13] trend like line like this and then you
+[00:54:15] look back and you're like yeah okay that
+[00:54:18] actually seems like it's fairly valid
+[00:54:20] price is below it above it below it
+[00:54:22] above it support at it here below it
+[00:54:25] here now in this area I don't know if
+[00:54:27] this one this one kind of bounced off of
+[00:54:29] it right here I often will keep these on
+[00:54:31] all day long because we'll see if we get
+[00:54:34] a big sell off we'll bounce off that
+[00:54:35] level and then we'll come back up if
+[00:54:37] it's been proven earlier it usually will
+[00:54:39] continue to hold up so let's see so now
+[00:54:43] the the other cons of this
+[00:54:46] strategy it does take a little more time
+[00:54:48] for the pattern to form um and breakouts
+[00:54:51] can result in dramatic false breakouts
+[00:54:54] that create the jack knife so I'm sure
+[00:54:57] some of you have seen these really nasty
+[00:54:59] Jack knives I'm just looking to see if I
+[00:55:01] have a good example of um a jack knife
+[00:55:04] here I don't think I have one at the um
+[00:55:08] I do have one here let's see how good
+[00:55:10] this was well this one wasn't so this
+[00:55:13] one wasn't a moving average pullback um
+[00:55:16] this is where we did have that ascending
+[00:55:18] support line here we did pull back but
+[00:55:20] then we broke below it so we failed so
+[00:55:22] that that is a jack knife but it's not
+[00:55:25] it's not part of a moving average
+[00:55:26] pullback in fact right here you could
+[00:55:27] see that the moving averages were
+[00:55:29] crossed over we were negative so really
+[00:55:32] shouldn't have taken that trade but you
+[00:55:34] know was taking a little bit more risk
+[00:55:35] on that one for whatever reason so um
+[00:55:38] and I'll say right now um it's better to
+[00:55:41] as a beginner air on the side of caution
+[00:55:43] and not take high-risk setups I might
+[00:55:45] feel a comfort to take some high-risk
+[00:55:47] setups because of my educated intuition
+[00:55:49] and the com The Profit cushion that I
+[00:55:51] have and this and that but you want to
+[00:55:52] be more careful so the uh the jack knife
+[00:55:56] is more common in a cold Market where
+[00:55:59] we'll see that breakout but then it
+[00:56:02] instantly reverses it's like kind of
+[00:56:04] like this where it pops up and then
+[00:56:05] instantly back down so that's more
+[00:56:08] common in a colder market and you've got
+[00:56:10] to be more careful with it um now the
+[00:56:13] tools and the skills to trade this
+[00:56:15] strategy you need you need scanners
+[00:56:18] stock scanners to help you find stocks
+[00:56:19] that are moving I'm using day trade Dash
+[00:56:21] these are scanners that I custom built
+[00:56:23] with my development team I'll give you a
+[00:56:25] link for a two we trial in the
+[00:56:26] description of this video if you want to
+[00:56:28] check it out um you need access to level
+[00:56:30] two because level two and being able to
+[00:56:32] visualize the way the orders are stacked
+[00:56:34] around the half dollars and whole
+[00:56:35] dollars or be whether to the buy side or
+[00:56:38] the sell side is very important for
+[00:56:40] active day trading you'll need hot keys
+[00:56:43] for Rapid order execution and you'll
+[00:56:45] want software for analyzing um your
+[00:56:48] analytics right reviewing your trades
+[00:56:50] which I use Trader viiew for that and
+[00:56:52] when it comes to skill obviously you
+[00:56:55] need to understand the basics of trading
+[00:56:56] if you haven't already checked out my
+[00:56:58] episode of how to start day trading from
+[00:56:59] zero or how to read Candlestick charts
+[00:57:01] from zero those are great episodes that
+[00:57:04] you should definitely watch you need to
+[00:57:06] know how to use your scanners how to
+[00:57:07] read level two you need to have the
+[00:57:09] discipline to follow the rules of your
+[00:57:11] strategy and to know when to walk away
+[00:57:13] that's so important you have to
+[00:57:16] recognize that um intuition the acquired
+[00:57:18] intuition to make quick decisions um it
+[00:57:21] takes time not everyone's going to have
+[00:57:22] it but you need to be able to develop it
+[00:57:24] you have to have the discipline to cut
+[00:57:25] your losses quickly and you need a
+[00:57:27] really good ability to read sentiment in
+[00:57:29] the market and to know if this is a
+[00:57:31] current market where the moving average
+[00:57:33] strategy is
+[00:57:34] appropriate um because if it's not it's
+[00:57:37] just not worth trading now this when we
+[00:57:40] go back to step five analyzing the
+[00:57:42] metrics when the Market's hot I'm going
+[00:57:44] to be a lot more active I'm going to
+[00:57:46] trade more frequently I'm going to trade
+[00:57:48] more of my setups not just my like top
+[00:57:51] tier a quality setups both in
+[00:57:54] Candlestick form and even on the type of
+[00:57:56] stocks I'll trade but I'll open up to
+[00:57:58] trading B and even see quality setups
+[00:57:59] cuz when the market is really hot it's
+[00:58:02] like the wind is at your back and it
+[00:58:04] just feels like these work better but
+[00:58:07] when the market is cold that's when it's
+[00:58:09] time to go back to basics go back to
+[00:58:12] doing what you know Works Focus just on
+[00:58:14] your bread and butter and that's what
+[00:58:16] gets you through those slow patches so
+[00:58:18] for me when we had a 30% correction in
+[00:58:21] the market in a big bare Market I
+[00:58:23] hungered down I said I'm going to batten
+[00:58:24] down the hatches I'm only going to trade
+[00:58:26] the absolute best quality setups as per
+[00:58:29] my stock selection worksheet which you
+[00:58:30] guys can download I'm only going to
+[00:58:32] trade my absolute favorite entries micro
+[00:58:35] pullbacks on the front side of the move
+[00:58:37] bull Flags maybe ABCD patterns but
+[00:58:40] probably not long consolidation moving
+[00:58:43] average pullbacks they're just going to
+[00:58:44] be too risky I'll still use the macd and
+[00:58:47] the moving average crossover to tell me
+[00:58:49] when I should and should not be trading
+[00:58:50] a stock but I'm not going to take that
+[00:58:52] long pullback and I'm G I'm probably not
+[00:58:54] going to take red to Green setups and
+[00:58:56] there's just head and shoulders patterns
+[00:58:57] there's just certain setups I'm going to
+[00:58:58] say you know what this isn't the market
+[00:59:00] to take those trades in so your
+[00:59:02] analytics will help guide you to what's
+[00:59:05] working for you both on you know a
+[00:59:08] day-to-day basis but also on sort of a
+[00:59:09] weekly a monthly and an annual basis and
+[00:59:12] ultimately when I'm sharing my
+[00:59:14] strategies with you all of it is
+[00:59:17] informed by these analytics 12.9 million
+[00:59:21] in profit and what's the price stock
+[00:59:24] that I make the most money on What's the
+[00:59:26] a day I make the most money what's the
+[00:59:27] day of the week what's the relative
+[00:59:28] volume what's the Gap I have all of that
+[00:59:31] data and that's of course what I share
+[00:59:33] with all the members that are in our
+[00:59:34] fulllength uh Warrior Pro uh courses
+[00:59:37] part of the curriculum and with students
+[00:59:39] who are uh streaming every single day
+[00:59:40] while I'm trading so listen if you
+[00:59:42] enjoyed this episode I hope you hit that
+[00:59:44] thumbs up I hope you subscrib to the
+[00:59:45] channel and I'll remind you again as
+[00:59:47] always that listen trading is risky so
+[00:59:49] manage your risk take it slow and
+[00:59:51] practice in a simulator before you put
+[00:59:53] real money on the line and I'll see you
+[00:59:54] for the next episode real soon

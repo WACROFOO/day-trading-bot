@@ -1,0 +1,729 @@
+# 5 Cent Tick Pilot Program Explained
+# https://www.youtube.com/watch?v=xCsTmqzBIco
+# duration_sec: 1787
+
+[00:00:01] What's up everybody? All right, so today
+[00:00:03] we're going to be talking about day
+[00:00:04] trading terminology and the term of the
+[00:00:06] day is the 5-cent tick pilot program.
+[00:00:09] Now whether you're a day trader, a swing
+[00:00:12] trader, or an investor, it's really
+[00:00:14] important for you understand the ins and
+[00:00:16] outs of this program. This could affect
+[00:00:17] some of the stocks you're trading. And
+[00:00:19] if you're not aware of it, you're really
+[00:00:20] going to be at a disadvantage when you
+[00:00:22] pull up one of those stocks and you try
+[00:00:24] to take a position because they're going
+[00:00:26] to look a little bit different. This is
+[00:00:28] actually the first time in over 15 years
+[00:00:31] that the SEC is changing uh the bid ask
+[00:00:34] spread. Now, as many of you know, in
+[00:00:36] 2001, we went through decimalization.
+[00:00:40] Prior to that, the market traded in
+[00:00:42] fractions. And so, uh the minimum
+[00:00:44] spread, the smallest spread we could
+[00:00:46] possibly have was 116th, which is 6.25.
+[00:00:51] Now, when we went through
+[00:00:52] decimalization, all of a sudden, the
+[00:00:54] minimum spread became one penny. Right?
+[00:00:56] Stocks right now trade u in in a minimum
+[00:00:59] of a one penny spread. You'll never see
+[00:01:01] a spread smaller than a penny except for
+[00:01:04] stocks that are trading uh below a
+[00:01:06] dollar. All right, so this is a stock
+[00:01:08] here trading uh it should be trading 425
+[00:01:11] by 426. All right, this is like a false
+[00:01:14] order, but that's a one one cent spread.
+[00:01:17] Now, uh this 5-cent tick pilot program
+[00:01:19] is changing the minimum spread from one
+[00:01:23] penny back up to 5 cents. All right. So,
+[00:01:26] that's a pretty big deal. Now, um on
+[00:01:29] April 9th, 2001, uh all stocks trading
+[00:01:32] above $1 were required to begin trading
+[00:01:35] with 1-centent increments, right? So,
+[00:01:37] meaning stocks that were trading at, you
+[00:01:40] know, at an eighth or trading at a 16th.
+[00:01:43] Uh they now had increments at every
+[00:01:46] penny uh between the whole dollar. So,
+[00:01:49] from $1 to $2, that's 100 increments,
+[00:01:52] right? When you think of all the places
+[00:01:54] you could have an order. So, previously
+[00:01:56] it was only, you know, eight or 16
+[00:01:58] depending on how the stock traded. So,
+[00:02:00] that represented a 600 to 1,000%
+[00:02:04] increase in the number of price points
+[00:02:07] where traders could place their orders
+[00:02:09] between each whole dollar. All right.
+[00:02:12] Now, there's uh several theories about
+[00:02:14] what drove lawmakers and regulators to
+[00:02:17] support the shift to decimalization. And
+[00:02:20] the first belief was that since the US
+[00:02:21] market was the only stock exchange at
+[00:02:23] the time not trading in decimals that
+[00:02:26] the move to decimals would make the
+[00:02:28] market easier and more attractive for
+[00:02:30] foreign investment, right? Easier to
+[00:02:32] understand the pricing. You know, if we
+[00:02:34] if right now I went to go trade on a
+[00:02:36] market that was fractions, it would be
+[00:02:38] pretty confusing. So, if we want to
+[00:02:39] attract foreign investment, you know,
+[00:02:41] that was that was one theory. Uh the
+[00:02:43] second belief was that uh decimalization
+[00:02:46] would bring more trading volume into the
+[00:02:48] market that would increase liquidity and
+[00:02:50] improve trading for investors. All
+[00:02:53] right. Now uh in the 15 years since
+[00:02:56] decimalization uh traders and investors
+[00:02:59] are reflecting back on the impact of
+[00:03:02] that historical shift to a minimum
+[00:03:04] spread of one penny. uh Greg Godsy, the
+[00:03:08] head of uh 360 Wealth Management, uh he
+[00:03:12] said, quote, "In my opinion,
+[00:03:13] decimalization is a negative because it
+[00:03:16] narrowed the spreads." And on the
+[00:03:18] surface, you would think that would be
+[00:03:20] better for the markets, but narrower
+[00:03:22] spreads mean less profit for market
+[00:03:24] makers, and less profit leads to less
+[00:03:26] capital, and less capital leads to less
+[00:03:29] liquidity, which is really interesting.
+[00:03:31] So, a market maker, a market maker's job
+[00:03:34] is to sit on both the bid and the ask.
+[00:03:38] So, we can pull up a stock um let's see,
+[00:03:40] let's just look at um DRYS for instance,
+[00:03:44] one that has a probably a better spread.
+[00:03:46] So, here you've got Edex and Edex is a
+[00:03:48] market maker sitting on both the bid and
+[00:03:50] the ask. All right? He's on both sides.
+[00:03:52] He's making the market and these market
+[00:03:54] makers create the spread and they profit
+[00:03:57] by trading across the spread. All right?
+[00:03:59] So when you have a bigger spread,
+[00:04:01] there's more opportunity for profit,
+[00:04:03] right? A five-cent spread with 10,000
+[00:04:05] shares is $500. So every time they move
+[00:04:08] 10,000 shares, that's $500 profit. But
+[00:04:11] with a one-cent spread, well, that's
+[00:04:12] only $100. So the profits go down to the
+[00:04:16] point uh and this is the theory, to the
+[00:04:19] point that some market makers have lost
+[00:04:21] the incentive to even make the market on
+[00:04:24] these types of stocks. So what does that
+[00:04:26] mean? That means uh less of the big
+[00:04:28] institutions, less of the market makers
+[00:04:31] are holding positions of these stocks.
+[00:04:33] Um they're in turn less likely to uh
+[00:04:36] issue reports, research reports, uh you
+[00:04:40] know, price analysis, uh upgrades,
+[00:04:43] downgrades, you know, stuff like that.
+[00:04:46] They're less likely maybe to have
+[00:04:49] investors come in and take large
+[00:04:51] positions. And so uh all of this uh
+[00:04:55] concern was based on Congress uh being
+[00:04:59] worried about uh the small cap market
+[00:05:02] and and really uh also concerned about
+[00:05:05] IPOs because isn't the goal that a stock
+[00:05:08] comes into the market as a small cap IPO
+[00:05:11] as a small cap and then grows and grows
+[00:05:13] and grows? A lot of the big companies
+[00:05:15] started at very low prices. You think of
+[00:05:17] Apple and some of the others and then
+[00:05:19] they've grown to some of the largest
+[00:05:20] stocks on the market. So, you know, we
+[00:05:23] certainly want to continue to see that
+[00:05:25] um you know, that trend. And that's why
+[00:05:28] in 2011, a group of professionals known
+[00:05:31] as the IPO task force released a report
+[00:05:34] that sharply criticized decimalization.
+[00:05:38] It stated, quote, "The adoption of
+[00:05:41] decimal pricing, wherein stocks are
+[00:05:42] priced in pennies instead of by
+[00:05:44] fractions of dollars, by 2001, further
+[00:05:47] reduce the economic opportunity per
+[00:05:49] trade for investment banks, right?"
+[00:05:52] Right. And it's kind of funny like as if
+[00:05:53] as if the retail traders really care
+[00:05:55] about what's good for investment banks,
+[00:05:56] but uh you know this is sort of that
+[00:05:59] trickle down theory that if it's not
+[00:06:01] good for them, they're not going to be
+[00:06:02] investing in these small stocks and then
+[00:06:04] you know there's less opportunity for
+[00:06:06] growth in and I continue here and this
+[00:06:09] quote in the new lowcost frictionless
+[00:06:12] environment promulgated by electronic
+[00:06:14] trading and decimalization investment
+[00:06:17] banks now generate revenue primarily by
+[00:06:19] executing high volume of lowpric trades
+[00:06:22] meant to capitalize on short-term
+[00:06:25] changes in the price of highly liquid
+[00:06:28] very large cap stocks. All right, so
+[00:06:31] let's let's kind of break that down. You
+[00:06:33] know, this is um that might be a little
+[00:06:35] confusing. So in other words, market
+[00:06:38] makers are less likely this suggests to
+[00:06:42] trade small cap stocks and they're more
+[00:06:44] likely to trade large cap stocks uh such
+[00:06:47] as a stock like Siri. All right. This is
+[00:06:49] a stock where uh you've got 200,000
+[00:06:52] shares on the bid, 200,000 shares on the
+[00:06:54] ask. And these shares crossing the bid
+[00:06:56] and ask all day long. It's $100 each
+[00:06:59] time. $100, $100, $100. This is fairly
+[00:07:02] safe. Look at I mean, realistically,
+[00:07:03] look at the volatility here. Even with
+[00:07:06] 100,000 shares, you're just not seeing
+[00:07:08] that much movement. This stock pretty
+[00:07:09] much just goes sideways.
+[00:07:11] This is the type of stock uh that a
+[00:07:14] market maker is going to profit on with
+[00:07:15] high frequency trading. and a stock like
+[00:07:18] um let's just say for example DRYS or or
+[00:07:22] GBS an even more thinly traded stock
+[00:07:25] there aren't very many market makers
+[00:07:27] trading this stock right so the result
+[00:07:30] is that this is not a very liquid stock
+[00:07:33] it would be hard to get into this stock
+[00:07:35] and get out of it with size meaning that
+[00:07:38] if there was an investor who actually
+[00:07:40] wanted to take a position you he
+[00:07:43] probably wouldn't be able to buy 50,000
+[00:07:44] shares of this without it making a
+[00:07:46] really giant move and that's because
+[00:07:48] there's not market makers providing the
+[00:07:50] market for that type of liquidity.
+[00:07:55] So the long and the short of it is that
+[00:07:57] um in this uh IPO task force report in
+[00:08:00] 2011 um you know they made note of the
+[00:08:04] fact that Apple, Cisco, FedEx and
+[00:08:06] Starbucks all enter the market with an
+[00:08:09] IPO as a small cap stock. small and
+[00:08:11] midcap companies that have since grown
+[00:08:14] to become some of the largest companies
+[00:08:16] on the market. So, uh the task force
+[00:08:19] suggests that decimalization has made
+[00:08:22] for a less than favorable environment
+[00:08:24] for small cap stocks because market
+[00:08:26] makers and investment banks don't profit
+[00:08:28] from the spread the way they used to and
+[00:08:30] as a result they're less inclined to
+[00:08:32] provide or make the market on those
+[00:08:33] stocks, support their IPOs or conduct
+[00:08:36] research on these emerging emerging
+[00:08:38] companies. All right. So evidence to
+[00:08:41] support that theory was the fact that
+[00:08:42] the number of IPOs between 2001 and 2011
+[00:08:46] had dropped sharply versus the 10 years
+[00:08:49] prior. All right. So uh in 2012 now um
+[00:08:55] the jumpstart our business startups the
+[00:08:59] jobs act required in section 106 that
+[00:09:02] the SEC issue a report on the impact of
+[00:09:05] decimalization and in particular its
+[00:09:07] impact on IPOs. Right now you guys
+[00:09:11] probably didn't know this. Uh so this
+[00:09:13] was actually uh mandated that the SEC
+[00:09:15] had to issue this report and in this
+[00:09:18] report uh the SEC directly responded to
+[00:09:21] the IPO task force report and at the end
+[00:09:23] of their uh 27page report they concluded
+[00:09:27] uh the impact of mandate mandating an
+[00:09:30] increase in the minimum tick size for
+[00:09:32] small capitalization companies on the
+[00:09:34] structure of our markets and on the
+[00:09:37] willingness of small companies to
+[00:09:39] undertake initial public offerings is at
+[00:09:41] test uncertain. Although mandating an
+[00:09:44] increase in tick size to levels greater
+[00:09:46] than those uh presently dictated by
+[00:09:48] market forces may provide more
+[00:09:50] incentives to market makers in certain
+[00:09:52] stocks, the full impact of such a
+[00:09:54] change, including whether or not an
+[00:09:56] increase in tick size would indeed
+[00:09:58] result in more IPOs and whether there
+[00:10:01] would be a significant negative or
+[00:10:03] unintended consequence is difficult to
+[00:10:06] ascertain. That was their report to
+[00:10:07] Congress. So the commission determined
+[00:10:10] that they should not make a change at
+[00:10:12] that time uh from the minimum 1 cent
+[00:10:14] spread on all stocks over a dollar.
+[00:10:17] Well, in 2014, despite that 2012 report,
+[00:10:21] a 2014 bill by the House of
+[00:10:23] Representatives required the SEC to
+[00:10:26] implement a two-year long pilot program
+[00:10:28] to test the impact of a larger minimum
+[00:10:30] spread. Lawmakers and regulators um
+[00:10:33] again are hypothesizing that increasing
+[00:10:36] the minimum spread will create
+[00:10:37] incentives for brokers and investment
+[00:10:39] bankers uh to make the markets on small
+[00:10:42] cap stocks and this in turn will make
+[00:10:44] them more likely to support the IPOs,
+[00:10:46] issue research reports and actively
+[00:10:49] invest in small cap markets. So this
+[00:10:52] pilot program that we're seeing right
+[00:10:54] now uh will also examine whether a
+[00:10:56] larger spread will increase liquidity,
+[00:10:59] reduce volatility, and result in
+[00:11:02] sustainable long-term growth in small
+[00:11:04] cap stocks.
+[00:11:06] Now, some of the opponents of the
+[00:11:08] ticksiz pilot program argue that
+[00:11:10] increasing the minimum spread will
+[00:11:11] result actually in greater risk for
+[00:11:13] investors, increased con uh complexity
+[00:11:16] in the exchange, and higher commission
+[00:11:18] costs. Greenwitch Associates conducted a
+[00:11:21] survey of institutional traders and
+[00:11:23] found that only 4% believe uh increased
+[00:11:26] capital formation opportunities for
+[00:11:28] emerging growth companies um will be the
+[00:11:30] result of the uh 5-cent spread. In
+[00:11:34] addition, only 9% believe it will
+[00:11:36] actually improve liquidities uh
+[00:11:38] liquidity in those securities. All
+[00:11:40] right, so um this is kind of where we're
+[00:11:43] at right now. forced to comply. The SEC
+[00:11:46] and FINRA worked with market makers and
+[00:11:47] the investment banks uh over the course
+[00:11:49] of two years from 2014 to 2016 to build
+[00:11:53] out the framework and the technology to
+[00:11:55] create the 5-cent spread. So now two
+[00:11:58] years later, here we are the end of 2016
+[00:12:01] um the on October 3rd uh the 5-cent tick
+[00:12:06] program is launched. All right. And now
+[00:12:09] for the first time in over 15 years, the
+[00:12:11] minimum tick size has changed for
+[00:12:13] approximately uh 1,200 stocks that are
+[00:12:16] um part of the tick size pilot program.
+[00:12:18] All right, so these stocks now trade
+[00:12:21] with a minimum of a 5-cent spread. So
+[00:12:23] remember how we were looking at Siri
+[00:12:25] before. This is a stock that trades with
+[00:12:26] a 1-cent spread, uh but trades very very
+[00:12:30] thickly. It it really doesn't move.
+[00:12:32] Well, let's look at the float. The float
+[00:12:35] of this stock is 3.79
+[00:12:37] billion shares with a 21 billion share
+[00:12:40] mark 21 million sorry 21 billion market
+[00:12:43] cap. So this is a very thickly traded
+[00:12:46] stock. Let's look at another one that
+[00:12:47] trades uh pretty thickly. Bank of
+[00:12:50] America 10 billion share float $227
+[00:12:53] billion market cap. Another one um
+[00:12:57] Sprint $33 billion market cap float of
+[00:13:00] 2.79 billion shares. And we can look at
+[00:13:03] Sprint. These stocks, they don't move.
+[00:13:06] So these are the types of stocks that uh
+[00:13:08] and actually this one's been a little
+[00:13:09] bit more volatile, but for the most
+[00:13:10] part, these stocks really don't make big
+[00:13:12] moves. We're talking about a 10-cent
+[00:13:14] range. So as a result, these are the
+[00:13:16] ones that are more popular among the uh
+[00:13:19] investment bankers and, you know, the
+[00:13:21] the market makers, high frequency
+[00:13:22] traders, because they're so liquid. They
+[00:13:25] can shift 10,000 shares, you know, every
+[00:13:28] couple seconds from one side to another,
+[00:13:30] and it's not going to affect the
+[00:13:31] liquidity. You could literally come in
+[00:13:33] here and buy a million dollars worth of
+[00:13:36] stock and it wouldn't move a penny. If
+[00:13:38] you tried to do the same thing on GBS,
+[00:13:40] this stock would probably drop, you
+[00:13:42] know, if you tried to sell a million
+[00:13:44] dollars worth of stock, this thing would
+[00:13:45] probably drop like a point and a half
+[00:13:47] because there's no liquidity. There's no
+[00:13:49] one there to absorb uh that type of of
+[00:13:52] sell order. All right? And that's
+[00:13:54] obviously that does increase risk for
+[00:13:56] for investors. Someone who does want to
+[00:13:58] buy a really large position, it would it
+[00:14:00] would be really hard. So, you know, I
+[00:14:02] understand that. But here's the thing.
+[00:14:05] Uh, with the 5-cent tick, um, stocks
+[00:14:09] that previously traded sort of the way
+[00:14:12] GBS trades now trade like this. Look at
+[00:14:15] that. Look at how similar that is to
+[00:14:18] Sprint or to Siri, right? Now, it starts
+[00:14:21] to look the same. All right. Well,
+[00:14:24] here's the reason. By implementing a
+[00:14:26] 5-cent spread, there will now be only 20
+[00:14:29] price points between each whole dollar.
+[00:14:32] Right? So, when there were 100, you
+[00:14:35] could put an order, let's say, at 401,
+[00:14:36] 402, 403, 404, etc., all the way up to
+[00:14:40] $4.99 and $5. That's 100 price points
+[00:14:43] where you can place orders. Well, now we
+[00:14:45] just pulled out 80% of those price
+[00:14:47] points, and there's only 20 left, and
+[00:14:49] they're at every 5-cent increment. So,
+[00:14:52] they're now priced. Um, we'll go to
+[00:14:54] ship. You'll see here on the level two,
+[00:14:56] everything is in fives. Uh it'll either
+[00:14:59] be on the dime or on the nickel. So 120,
+[00:15:02] 125, 130, 135, etc. Here's another one.
+[00:15:06] DPRX.
+[00:15:08] Everything is going to be uh priced on
+[00:15:10] the nickel. All right? So the dime and
+[00:15:13] the nickel. Now this means u when you
+[00:15:17] remove 80% of the price points all of
+[00:15:20] the buyers and sellers are forced into
+[00:15:22] these little trenches right and so
+[00:15:25] everyone groups together in these
+[00:15:26] trenches right at the nickel and the and
+[00:15:28] the dime. So you now have a lot more
+[00:15:32] liquidity and you do you could get into
+[00:15:34] this with 20,000 shares now where in the
+[00:15:37] past that stock might have traded like
+[00:15:39] GBS and you simply wouldn't have been
+[00:15:41] able to. You can see here you've got
+[00:15:43] a,000 shares at 510, 200 at 518, zero at
+[00:15:48] 522 and 100 shares at 535. This could
+[00:15:52] move up to 535 in almost a heartbeat.
+[00:15:55] Siri on the other hand obviously can't
+[00:15:57] even move up to you know 5.55 in a
+[00:16:00] heartbeat and now ship a similar stock
+[00:16:04] uh because of the 5-cent tick this even
+[00:16:06] to move 10 cents would require a
+[00:16:08] tremendous amount of volume and so
+[00:16:10] what's really interesting is that uh
+[00:16:13] ship is a fairly low float stock and
+[00:16:15] I'll pull up my um let's see my um
+[00:16:19] report here so let's see what is ship at
+[00:16:22] now ship looks on the level two just
+[00:16:24] like Sprint, but it's actually only a 13
+[00:16:27] million share float with a market cap of
+[00:16:29] just 40 million shares. So, it is a
+[00:16:31] fraction of the size, but now it's
+[00:16:33] trading in almost the same way. So, if
+[00:16:36] you have a trader now with a 20 30,000
+[00:16:38] share position, he can sell here onto
+[00:16:40] the market and it will be executed
+[00:16:42] instantly. He probably won't get any
+[00:16:44] slippage because there's a lot more
+[00:16:45] liquidity. So, during these uh two
+[00:16:49] years, this will sort of be the test.
+[00:16:52] Does this actually increase uh IPOs?
+[00:16:55] Does it increase uh investment bankers
+[00:16:58] and market makers to be engaged in these
+[00:17:01] stocks uh putting out research reports
+[00:17:03] and taking investments? Um does it
+[00:17:06] reduce volatility and make for a more
+[00:17:08] favorable environment uh for investors?
+[00:17:11] And you know the priority here is not
+[00:17:13] what's good for traders. Day traders
+[00:17:14] profit from volatility but really what's
+[00:17:16] good for investors and what's good for
+[00:17:18] long-term um you know success of these
+[00:17:21] small small cap stocks. Okay. So uh in
+[00:17:25] the pilot program the the stocks
+[00:17:27] affected are split into groups. The
+[00:17:29] first group contains about 200 stocks
+[00:17:31] and this is considered uh the control
+[00:17:33] group and these stocks will continue to
+[00:17:34] trade at 1-cent spreads. The first test
+[00:17:37] group will be quoted in 5-cent
+[00:17:39] increments but will continue to trade at
+[00:17:41] their current increments. So, it'll be
+[00:17:43] quoted at 5-cent increments, but trades
+[00:17:45] can go through between the spread. Uh,
+[00:17:48] the second test group will be quoted at
+[00:17:50] 5-cent increments, uh, but will allow
+[00:17:53] certain exceptions, including midpoint
+[00:17:55] trades for retail investor executions.
+[00:17:59] So, that group uh will only allow
+[00:18:01] midpoint trades. So, a trade I guess at
+[00:18:04] um 122 uh.5.
+[00:18:08] The third test group will be quoted at
+[00:18:10] 5-cent increments and traded at 5-cent
+[00:18:13] increments uh and will follow the same
+[00:18:16] requirements of the second group uh
+[00:18:18] which will allow midpoints but will also
+[00:18:21] be subject to a trade at requirement um
+[00:18:24] which is something that is detailed in
+[00:18:26] the FINRA on the FINRA website. All
+[00:18:28] right. So essentially these stocks right
+[00:18:32] now uh for the next two years that are
+[00:18:34] trading in 5-cent increments look like
+[00:18:36] this. So when I see a stock uh and this
+[00:18:38] is today is a good example and it's why
+[00:18:40] I wanted to do this video. I saw DPRX as
+[00:18:42] the leading gapper gapping up 65% with a
+[00:18:45] 5.47 million share float. It's a lowflat
+[00:18:48] stock. This is the type of stock that in
+[00:18:50] the past uh like DRYS DRYS look at how
+[00:18:54] this stock moved. This stock went from
+[00:18:57] uh literally $4 to over $100 in four
+[00:19:01] trading days. That was an incredible
+[00:19:04] opportunity for traders. But this type
+[00:19:06] of volatility
+[00:19:08] may not be favorable for investors. It's
+[00:19:11] really hard to invest in stocks that
+[00:19:12] could do this type of thing because it
+[00:19:14] could just it could just catch you so
+[00:19:16] offguard. And as quick as it went up, it
+[00:19:18] came all the way back down. So, you
+[00:19:20] know, here's a stock like DPRX that is
+[00:19:24] similar in the float. And we might think
+[00:19:26] on uh another day or if this was a um a
+[00:19:30] difference sorry DP DPRX on another day
+[00:19:34] with a stock not affected by the pilot
+[00:19:36] program. It's the type that could
+[00:19:38] potentially move up uh quite a bit. We
+[00:19:41] could easily see a 20 30 40% move. But
+[00:19:44] today the biggest move was pre-market
+[00:19:47] when the uh liquidity was lower and then
+[00:19:49] as soon as the bell rang we just sold
+[00:19:51] off.
+[00:19:53] So you can see here uh at this point the
+[00:19:56] market makers are really able to control
+[00:19:57] the stock in a lot of ways. They're able
+[00:19:59] to control the stock and that's going to
+[00:20:02] be a problem for retail traders for day
+[00:20:04] traders and for swing traders. For
+[00:20:07] investors that are looking at the
+[00:20:08] fundamentals over the long term of 3 6
+[00:20:11] 12 months uh this is not going to have
+[00:20:13] as much of an impact because the
+[00:20:15] positions are such a different time
+[00:20:17] frame. But for short-term traders, this
+[00:20:19] is really um decreasing our ability to
+[00:20:22] profit because we are seeing as a result
+[00:20:25] less volatility. All right? And that's
+[00:20:28] an important thing to understand. So uh
+[00:20:30] you know right now uh the initial
+[00:20:32] reaction to the u you know the ticksiz
+[00:20:35] pilot program among traders is that it
+[00:20:38] is in fact reducing volatility among
+[00:20:40] small caps and thereby it is achieving
+[00:20:42] one of the goals of the program. So a
+[00:20:44] stock like DPRX that formally might have
+[00:20:46] squeezed up 20 30% or even more, you
+[00:20:49] know, now appears pretty much pegged at
+[00:20:51] the same price, especially after a
+[00:20:53] period of, you know, a couple hours just
+[00:20:55] consolidating. And this is a time frame
+[00:20:57] when the market makers can start to
+[00:20:59] profit right now. They can just move
+[00:21:01] this move across that 5-cent spread and
+[00:21:04] and they can generate a profit. So uh
+[00:21:06] they are really trading a lot uh a lot
+[00:21:09] like these large cap stocks like Sprint
+[00:21:12] which of course has lots of market
+[00:21:14] makers, lots of institutional traders,
+[00:21:16] lots of research, analysis, lots of
+[00:21:18] opinion, all that stuff. And um you know
+[00:21:21] obviously Sprint is I suppose making its
+[00:21:25] way out of the small caps. I mean slowly
+[00:21:27] but it is making its way. It's up over
+[00:21:30] the last year about u you know looks
+[00:21:34] like it's doubled from $3 well almost
+[00:21:37] tripled up to $9. So this is the type of
+[00:21:40] thing I think uh you know that Congress
+[00:21:42] and lawmakers are thinking is what you
+[00:21:44] want to see small caps doing. Have them
+[00:21:47] IPO. Of course, this has been around for
+[00:21:49] a long time, but have them IPO, have
+[00:21:50] them start uh, you know, attracting
+[00:21:52] retail investors, attracting uh,
+[00:21:54] institutional investors and grow from a
+[00:21:57] small cap up into a midcap and a large
+[00:22:00] cap stock. And will the tick size pilot
+[00:22:03] program uh, help in that, you know, in
+[00:22:06] that goal? Maybe it will. And it will
+[00:22:09] change the way we look at some of the
+[00:22:11] small cap stocks. So what it may do is
+[00:22:14] it may force us to start trading stocks
+[00:22:16] um that are not going to be affected by
+[00:22:19] this um by this program. All right? So
+[00:22:22] stocks that are a slightly higher price
+[00:22:24] but are still really volatile. So how
+[00:22:27] would we find those stocks? Well, the
+[00:22:28] easiest way to do it is to create a
+[00:22:30] simple scanner. Now I can go in here uh
+[00:22:34] go into advanced. This is trade ideas uh
+[00:22:37] trade ideas software that I'm using. And
+[00:22:39] you know this isn't something that we
+[00:22:40] really need to worry about now. And
+[00:22:42] again, we're in we're at 2016. It was
+[00:22:45] 2012 when Congress or the House of
+[00:22:48] Representatives
+[00:22:50] required that the um the SEC do this
+[00:22:53] two-yearong program. It took them two
+[00:22:55] years to figure out how they would do
+[00:22:56] it. Now, we're starting it here. It'll
+[00:22:58] finish in 2018 and then who knows how
+[00:23:01] long it would take if they decide to
+[00:23:02] actually implement something across the
+[00:23:04] whole market. It could take another, you
+[00:23:06] know, year or two. Who knows? So this is
+[00:23:10] not something we really need to worry
+[00:23:11] about immediately, but it does also show
+[00:23:13] the value of being able to diversify
+[00:23:15] your strategies. The good thing about
+[00:23:17] trading is that once you understand
+[00:23:18] chart patterns, you can apply them to
+[00:23:20] any stock of any price range. The reason
+[00:23:22] I like trading small cap stocks is
+[00:23:24] because right now they are so popular
+[00:23:27] among retail investors and stocks like
+[00:23:30] Sprint and Bank of America are not
+[00:23:32] retail traders don't trade this type of
+[00:23:34] stuff. All right? So if there ends up
+[00:23:37] being a change where small caps trade
+[00:23:39] like Sprint and uh and Bank of America,
+[00:23:42] then all retail traders most likely will
+[00:23:45] switch to a different area of the
+[00:23:47] market. Whether it's um you know the
+[00:23:49] stocks priced between 20 and $30 that
+[00:23:52] start to get a lot of attention. I'm not
+[00:23:54] sure, but you can you can bet that
+[00:23:56] retail traders will find another area of
+[00:23:58] the market for volatility.
+[00:24:01] All right. So, just to create a simple
+[00:24:03] scan here, we could go in um and we
+[00:24:06] could say, you know, we're going to look
+[00:24:07] at stocks um if we know, for instance,
+[00:24:10] that um the they're going to be applying
+[00:24:14] this to a certain market cap, we can go
+[00:24:16] and create a market cap filter to only
+[00:24:18] look for stocks that have a market cap
+[00:24:19] of over, let's say, 100 million shares,
+[00:24:23] $100 million. Um all right, so market
+[00:24:25] cap of $100 million. And then we could
+[00:24:28] say um you know we only want to look at
+[00:24:30] stocks priced above $10. And then we
+[00:24:33] only want to look at stocks that are
+[00:24:34] volatile that that actually move. The
+[00:24:37] best way to do that is to use average
+[00:24:39] true range. So we can go and we can add
+[00:24:41] this. I could say I want a minimum
+[00:24:43] average true range of you know let's
+[00:24:45] just say 50 cents a day. And that's
+[00:24:48] probably setting it low. All right. So
+[00:24:51] here we can call this um high ATR 1 cent
+[00:24:55] spread stocks.
+[00:24:58] And then here you can start sorting
+[00:25:01] based on the float if you wanted to or
+[00:25:05] you could start if it's based on um
+[00:25:07] market cap you'll still have some
+[00:25:08] lowflat stocks or you could uh you could
+[00:25:12] sort by average true range. You got to
+[00:25:14] go in here to configure uh advanced and
+[00:25:18] add the column. So let's just add the
+[00:25:20] column for ATR.
+[00:25:22] Move that over there. say okay.
+[00:25:26] Okay. And now if I stretch this out
+[00:25:29] here, we'll see ATR. So I can look now
+[00:25:32] at the stocks that have large ATRs. And
+[00:25:35] maybe I want to put a price cap so I'm
+[00:25:37] not seeing stocks that expensive. But
+[00:25:38] here's a stock blue, for instance. It's
+[00:25:40] got a four $4 ATR, which is a pretty big
+[00:25:43] ATR for a $60 stock. So this one's going
+[00:25:46] to continue to trade most likely in one
+[00:25:48] cent spreads. I mean unless they change
+[00:25:50] what the thresholds are and I just put
+[00:25:52] in 100 million but uh you know this is a
+[00:25:54] stock that here you have you know your
+[00:25:56] bull flag and that's a bull flag
+[00:25:58] breakout. So the reason these patterns
+[00:26:01] work is because thousands and thousands
+[00:26:03] of traders are buying at the breakout
+[00:26:05] point because they know these are the
+[00:26:07] types of stocks that provide the biggest
+[00:26:09] opportunities for profit. So, you know,
+[00:26:12] my my thought is that if small caps, for
+[00:26:15] whatever reason, because this in 2018,
+[00:26:18] 2019, 2020, uh, turn into 5-cent spread,
+[00:26:22] then I would imagine all retail traders
+[00:26:25] will start focusing on, you know, stocks
+[00:26:27] that are volatile and still provide
+[00:26:29] opportunities. So, stocks like blue
+[00:26:31] would start getting better
+[00:26:32] followthrough. Agio here, um, this one's
+[00:26:37] $40 stock. Again, a lot of range between
+[00:26:41] 42 there and 4268.
+[00:26:43] So, these patterns right now, they don't
+[00:26:46] get as much followth through because
+[00:26:48] traders generally prefer to trade the
+[00:26:50] lower price stocks. They're more
+[00:26:52] profitable. But, you know, if that
+[00:26:54] changes, the market changes, then we'll
+[00:26:56] see traders shift. And uh they may shift
+[00:26:58] to the OTC market or to penny stocks,
+[00:27:00] but I hope they don't. I I hope that
+[00:27:02] retail traders um stay on NYC and NASDAQ
+[00:27:06] and just look at the higher priced
+[00:27:07] options. That's what I'm going to do.
+[00:27:08] I'm not going to get into OT OTC stuff.
+[00:27:10] At least I I hope I don't have to. I
+[00:27:12] hope that we'll still see opportunities
+[00:27:14] here. And I think we will. We already
+[00:27:16] have some and I think they'll just
+[00:27:18] continue to get better. All right. So,
+[00:27:20] um at this point right now, uh in 2000,
+[00:27:24] in the spring of 2018, uh the SEC uh
+[00:27:27] will be in April uh of 2018, uh issuing
+[00:27:31] a report on their findings. So this is
+[00:27:34] something that day traders, swing
+[00:27:36] traders and investors, market makers,
+[00:27:39] regulators, investment bankers, and
+[00:27:41] lawmakers will all be uh eagerly
+[00:27:44] awaiting. All right. So uh you know,
+[00:27:47] we'll see. I mean, the whole idea here
+[00:27:49] with the 2012 jobs act was to create
+[00:27:51] more jobs, was to help small companies,
+[00:27:54] uh to have more IPOs, uh and more
+[00:27:57] benefit from investment and stuff like
+[00:27:59] that. So this is uh you know when you
+[00:28:02] think about the big picture this is for
+[00:28:04] the economic good of u you know th this
+[00:28:07] u you know I suppose country and and all
+[00:28:09] stocks on this market. So we just have
+[00:28:12] to adjust as traders and of course in
+[00:28:14] 2001 all traders had to adjust when
+[00:28:16] everything changed from fractions to
+[00:28:19] decimals. So this is part of the life of
+[00:28:21] being a trader. You do have to adjust.
+[00:28:23] There are going to be times where there
+[00:28:25] are things that are just outside our
+[00:28:27] control. So, uh, for the next two years,
+[00:28:29] I want you guys to make sure you know
+[00:28:31] how to identify stocks with the 5-cent
+[00:28:33] spread. Easiest way is to pull up the
+[00:28:35] level two, uh, and look, if you only see
+[00:28:38] quotes at nickels and dimes, there's a
+[00:28:41] good chance this stock is a 5-cent
+[00:28:43] spread, right? 5-cent tick. So, I would
+[00:28:47] probably say I'm not going to trade it.
+[00:28:48] These ones are not easy to day trade,
+[00:28:51] and that's the easiest way to do it.
+[00:28:53] just look at the level two and if that's
+[00:28:55] what you see then uh then you'll skip on
+[00:28:57] the trade. And that also exemplifies the
+[00:28:59] importance of using level two to be able
+[00:29:01] to see these types of things because if
+[00:29:02] you're not using this as a tool then you
+[00:29:05] really are trading almost with one eye
+[00:29:07] closed. So uh if you don't know how to
+[00:29:09] use level two we've got another video
+[00:29:10] day trading terminology level two that
+[00:29:12] you guys can check out. Uh and uh yeah
+[00:29:16] if you have any questions feel free to
+[00:29:17] put comments below. I'm happy to answer
+[00:29:19] them. And I hope you guys all um trade
+[00:29:22] safe and trade smart. All right, guys.
+[00:29:24] I'll talk to you soon.
+[00:29:27] Let's be honest. If you made it this
+[00:29:29] far, you must have really enjoyed that
+[00:29:30] video. So, what's stopping you?
+[00:29:33] Subscribe right here and get email
+[00:29:35] alerts anytime I upload new content.
+[00:29:38] Until then, happy surfing.

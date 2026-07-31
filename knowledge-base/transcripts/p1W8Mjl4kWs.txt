@@ -1,0 +1,1460 @@
+# High Accuracy 1 Minute Scalping Strategy (Full Training)
+# https://www.youtube.com/watch?v=p1W8Mjl4kWs
+# duration_sec: 3442
+
+[00:00:00] in today's episode I'm going to teach
+[00:00:01] you the simple scalping strategy that I
+[00:00:03] use in my own trading to capitalize on
+[00:00:05] the shortterm burst of volatility that
+[00:00:08] we see nearly every single day in the
+[00:00:11] market I'm primarily using 5 minute and
+[00:00:14] 1 minute time frames I do supplement
+[00:00:17] that with a 10-second chart but I want
+[00:00:19] to encourage you guys to keep it simple
+[00:00:20] I think a lot of you are making this a
+[00:00:22] lot more complicated than it needs to be
+[00:00:25] so today I'm going to walk you through
+[00:00:28] quite simply how to start scalping we're
+[00:00:30] going to zoom in here on this slide deck
+[00:00:32] we're going to have a great case study
+[00:00:34] for my trades today on zpp as you could
+[00:00:36] see I'm up over
+[00:00:37] $10,000 on this stock and I did most of
+[00:00:40] these trades in less than just two hours
+[00:00:42] this morning so scalp trading is a
+[00:00:44] strategy you can Implement every single
+[00:00:47] day in the markets and let's go ahead
+[00:00:49] and Dive Right In okay so we're going to
+[00:00:51] full screen this slide deck here and
+[00:00:54] you'll be able to see my my trades here
+[00:00:56] on zpp zap this is a stock that when up
+[00:01:00] today over 100% I mean this is a
+[00:01:03] phenomenal move and these are the types
+[00:01:05] of stocks that a lot of beginner Traders
+[00:01:07] will struggle with because if you're not
+[00:01:09] scalp trading you almost can't trade it
+[00:01:11] because the stock is up too much you'll
+[00:01:13] just feel like I I can't get in this
+[00:01:16] High because I can't manage my risk but
+[00:01:19] if we change our perspective and we
+[00:01:21] focus instead on you know having a nice
+[00:01:22] 10 20 30% winner to just a 10 15 20 cent
+[00:01:27] winner now you've sort of adjusted the
+[00:01:29] param parameters of the trade and you
+[00:01:31] could find a spot where you can get in
+[00:01:33] with 15 cents of risk and 253 cents of
+[00:01:36] upside potential that is a scalp trade
+[00:01:39] that's worth taking and so scalp Traders
+[00:01:41] like myself are able to participate in
+[00:01:44] these moves even when they get extended
+[00:01:47] and in fact this can be where we have
+[00:01:49] some of our best trades so these green
+[00:01:51] dots are where I was buying buying
+[00:01:54] buying the red dots are where I was
+[00:01:55] selling and so this is classic scalp
+[00:01:57] trading where I'm getting in and I'm
+[00:01:59] getting out I'm getting back in I'm
+[00:02:01] getting back out back in back out back
+[00:02:03] in back out and I keep trading the whole
+[00:02:05] range up but what's very important is
+[00:02:07] that I do not overstay my welcome or
+[00:02:09] trade the backside coming back down now
+[00:02:12] when it starts to pull away again I'm
+[00:02:14] ready to participate I'm trading again
+[00:02:16] in these areas right here and in these
+[00:02:18] areas here and in this uh dip right
+[00:02:20] there looking for that curl back up
+[00:02:22] through the high so what are we going to
+[00:02:24] talk about in today's class the topics
+[00:02:26] we've got five of them I'm going to
+[00:02:28] Define scalp trading for you for those
+[00:02:30] that don't understand exactly how it
+[00:02:31] works I'm going to share with you the
+[00:02:32] pros and cons of scalp trading because
+[00:02:34] it's not all you know easy sailing it
+[00:02:36] can be very challenging I'm going to
+[00:02:38] share with you the tools required to
+[00:02:40] scalp the skills required to scalp and
+[00:02:42] I'm going to share with you my scalp
+[00:02:44] trading strategy I'm also going to give
+[00:02:46] you guys a PDF where you can download
+[00:02:48] all of the rules of my strategy that
+[00:02:50] will be pinned to the top of the
+[00:02:51] comments so those are free gifts for you
+[00:02:52] guys who are watching today's episode
+[00:02:54] let's start with the definition of what
+[00:02:56] scalp trading is scalp trading is a
+[00:02:59] fastpac Bas day trading strategy you
+[00:03:02] cannot scalp trade as a swing Trader or
+[00:03:04] as an investor it is a day trading
+[00:03:07] strategy and it's designed to capitalize
+[00:03:10] on short duration volatility in price so
+[00:03:14] when the price is really volatile and
+[00:03:16] it's jumping up and down that's when
+[00:03:18] we're scalp trading we don't scalp trade
+[00:03:20] a stock that's going sideways if you get
+[00:03:22] in a stock at five and you sell it at
+[00:03:23] five you don't make money we want to get
+[00:03:25] in at five and sell it at 525 530 540
+[00:03:28] 550 or higher but for scalp Traders we
+[00:03:31] don't usually try to hit home runs we
+[00:03:34] take small base hits and we just do it
+[00:03:36] again and again and again and these base
+[00:03:38] hits add up to they can to substantial
+[00:03:41] amounts of profit as the case has been
+[00:03:42] for me although Al caveat that as always
+[00:03:45] results are not typical and you've got
+[00:03:46] to manage your risk when you're trading
+[00:03:48] number three it's a high accuracy
+[00:03:51] strategy for Traders who execute it
+[00:03:54] correctly high accuracy I think is
+[00:03:57] important because when you trade with 65
+[00:03:59] 70 75% accuracy it's a real confidence
+[00:04:03] booster it's like I I'm right more than
+[00:04:05] I'm wrong I really know what I'm doing
+[00:04:07] now there are some Traders out there
+[00:04:09] that can trade with 30 or 40% accuracy
+[00:04:12] and still make money because they
+[00:04:14] occasionally hit home runs and that's
+[00:04:16] great but it can also be disheartening
+[00:04:19] when you're wrong the majority of the
+[00:04:20] time I understand it can work and it can
+[00:04:22] be part of a profitable strategy but
+[00:04:24] you've got to have the emotional
+[00:04:25] discipline to be able to tolerate those
+[00:04:27] stretches of losses and well I I don't
+[00:04:29] don't really have it and then number
+[00:04:31] four scalp trading is a way to
+[00:04:34] participate in a move up that would be
+[00:04:37] unsafe for swing trading or long-term
+[00:04:39] hold times as I already mentioned okay
+[00:04:41] so what are the pros of scalp trading I
+[00:04:43] would say one of the pros is that you're
+[00:04:45] never married to a position at any time
+[00:04:47] you can just hit the bid and bail out
+[00:04:49] now for me I really like that scalp
+[00:04:52] trading allows me to trade and
+[00:04:55] participate in parabolic extensions
+[00:04:58] because that really is where I make the
+[00:05:00] most money I don't do super well trading
+[00:05:03] stocks are within a 10 or 15 cent range
+[00:05:06] you know they're going up a little bit
+[00:05:07] then dropping back down that it's just
+[00:05:09] not enough range for me to make a lot of
+[00:05:12] money certainly even as a scalp Trader
+[00:05:14] but but also if you're trying to hold
+[00:05:15] for a bigger move that's just not enough
+[00:05:17] range but the problem is unless you're
+[00:05:21] in during this period of consolidation
+[00:05:24] right so let's just say we have a stock
+[00:05:25] that's made a move up has pulled back
+[00:05:27] and is now kind of in range here this is
+[00:05:30] the range where we've only got let's
+[00:05:32] just say 15 cents of you know upside
+[00:05:34] downside so there's not a lot of profit
+[00:05:37] but by the time it finally is back up
+[00:05:39] here well unless you bought and held
+[00:05:42] during this consolidation to take profit
+[00:05:45] well it's up too high unless you're
+[00:05:47] willing to scalp and then you take a
+[00:05:49] little micro pullback for the next leg
+[00:05:51] up now someone who's taking a huge
+[00:05:53] position probably wouldn't feel
+[00:05:55] comfortable buying up here but for scalp
+[00:05:57] traders who are jumping in and out of
+[00:05:59] the market with often relatively smaller
+[00:06:01] positions that's a perfectly reasonable
+[00:06:03] place to take a trade so you can
+[00:06:05] participate in those areas I also feel
+[00:06:08] like as I indicated there's a big
+[00:06:11] benefit to maintaining high accuracy by
+[00:06:13] selling when you're green now I know a
+[00:06:16] lot of Traders will struggle with um
+[00:06:18] having winners that are really small and
+[00:06:19] losers that are too big and that is one
+[00:06:21] of the cons of scalp trading so the
+[00:06:24] drawback to scalp trading well number
+[00:06:26] one is that your commissions and fees is
+[00:06:27] related to frequent Trading can be
+[00:06:30] expensive now that's going to depend on
+[00:06:31] the broker that you're trading with if
+[00:06:33] you're using a commission free broker
+[00:06:35] like thinker swim then you don't have to
+[00:06:37] worry about commissions but you do H
+[00:06:39] still have some fees that they pass on
+[00:06:42] from the exchanges so they're small but
+[00:06:45] they will add up if you trade millions
+[00:06:47] of shares a day and some people do now
+[00:06:51] one of the challenges with scalp trading
+[00:06:52] is that most scalp Traders will have
+[00:06:54] small average winners and that creates
+[00:06:58] the biggest risk here which is that you
+[00:07:00] can have an inverted profit to loss
+[00:07:02] ratio we're going to talk about profit
+[00:07:04] to loss ratios a little bit more as we
+[00:07:06] get into this class here because it's an
+[00:07:07] important concept to understand when it
+[00:07:09] comes to choosing the best entries but
+[00:07:12] the the long and short of it is that if
+[00:07:14] you have relatively small average
+[00:07:16] winners and you're not good at cutting
+[00:07:18] your losses quickly then you'll have
+[00:07:21] average losers that are bigger than your
+[00:07:22] winners now if you've got really high
+[00:07:25] accuracy you can still be profitable
+[00:07:27] with that inverted profit to l l
+[00:07:29] relationship but it just makes it harder
+[00:07:32] so one of the things that's really
+[00:07:34] important with scalp trading is that you
+[00:07:36] cut your losses quickly however this is
+[00:07:39] hard for a lot of beginner Traders for a
+[00:07:41] multitude of reasons number one just
+[00:07:44] instinctually they don't want to cut
+[00:07:45] their losses you want to keep holding
+[00:07:47] and hope that it turns around so you've
+[00:07:48] got to fight your instinct to hold
+[00:07:50] number two your educated intuition is
+[00:07:53] not yet refined to be able to see the
+[00:07:55] exit indicator before it's too late and
+[00:07:58] number three
+[00:08:00] depending on the tools you're using the
+[00:08:02] platform and the hotkeys you may not be
+[00:08:04] fully equipping yourself to move in out
+[00:08:06] of the market as quickly as you need to
+[00:08:08] as a scalp Trader but I'm going to help
+[00:08:10] you with all of these things in today's
+[00:08:12] episode so I I would say um the fourth
+[00:08:16] risk is the loss of profit between the
+[00:08:19] spread on Market orders a lot of
+[00:08:21] beginner Traders are using Market orders
+[00:08:23] and if you happen to have a stock that
+[00:08:25] has a larger spread um and this is an
+[00:08:27] example of one right here that I'll show
+[00:08:29] you just just for the sake of it uh this
+[00:08:31] stock right now has a 13 cent spread and
+[00:08:34] the spread's jumping around it's 1588 by
+[00:08:37] uh 15.95 so at times it's a 10 cent at
+[00:08:41] times it's 8 cent and then at other
+[00:08:43] times it's 1520 cents with a bigger
+[00:08:45] spread like this if you buy at a market
+[00:08:48] order you'll fill on the offer at $15.99
+[00:08:51] or 16 and then if you turn right around
+[00:08:53] and sell on the bid as a market order
+[00:08:56] you're going to lose 5 to 10 cents just
+[00:08:57] on the spread so scalping becomes
+[00:09:00] increasingly difficult as the price of
+[00:09:02] the stock goes higher now there's
+[00:09:05] definitely a sweet spot in terms of
+[00:09:07] price that I'm going to share with you
+[00:09:09] as we get into my strategy for scalping
+[00:09:12] but just it's it's worth being aware of
+[00:09:15] um one of the cons to scalping is the
+[00:09:18] loss of profit between the spread on
+[00:09:20] Market orders so the tools required to
+[00:09:23] be a scalp Trader number one you're
+[00:09:25] going to need software for finding
+[00:09:27] volatility in real time and for me
+[00:09:30] that's the day trade Dash scanner that I
+[00:09:32] have on my uh screen and I'm using every
+[00:09:34] single day for trading so these are the
+[00:09:36] scanners right here that I'm using these
+[00:09:39] have been developed by my own
+[00:09:40] development team it's a subscription at
+[00:09:42] Warrior trading that many of our members
+[00:09:44] are are using so these are the scanners
+[00:09:47] I'm using to find stocks to day trade
+[00:09:49] you can certainly use social media you
+[00:09:52] can use some free tools and free tools
+[00:09:55] could give you a list of some of the
+[00:09:57] most volatile stocks today but in in
+[00:09:59] real time I like having this radar
+[00:10:02] because it's actually telling me in real
+[00:10:04] time ohvs right now this second is
+[00:10:07] making a new high right so as this stock
+[00:10:09] is pushing higher this is telling me
+[00:10:12] instantaneously that that's happening
+[00:10:14] and that's what I need if I'm just
+[00:10:16] looking at a list that refreshes every
+[00:10:18] 15 20 minutes that's not going to be
+[00:10:20] sufficient all right so we need to have
+[00:10:23] scanners we also need to have access to
+[00:10:26] level two Market data level two Market
+[00:10:28] data is what you just saw amvs right
+[00:10:30] here it's available with all Brokers you
+[00:10:32] just have to sub subscribe to it and
+[00:10:34] some Brokers will make you pay a little
+[00:10:35] extra for it number three you need at a
+[00:10:38] minimum simple hot keys that will allow
+[00:10:41] for Rapid order
+[00:10:43] execution preferably more advanced
+[00:10:45] hotkeys for complex orders would be
+[00:10:47] great but if you don't have that at
+[00:10:49] least simple hotkeys is a must so
+[00:10:51] there's a lot of Brokers that offer
+[00:10:52] simple hotkeys that you can get away
+[00:10:54] with and it's good enough and there's a
+[00:10:56] small number of Brokers that offer
+[00:10:58] complex hotkeys we talk about those more
+[00:11:00] in detail as well and then number five
+[00:11:02] or number four you need software for
+[00:11:04] your analytics I like to use Trader view
+[00:11:06] for my analytics uh this is what I'm
+[00:11:08] using right here you can see this screen
+[00:11:11] this is um aggregating all of my trading
+[00:11:13] data $12.7 million here in gross profit
+[00:11:16] and it's giving me all of the metrics
+[00:11:18] around these trades we're going to
+[00:11:20] analyze some of these metrics as we go
+[00:11:22] through this class because these metrics
+[00:11:24] will show you where I'm trading the best
+[00:11:26] the price range the time of day
+[00:11:29] I think it as you're aspiring to learn
+[00:11:32] how to be a successful Trader it makes a
+[00:11:34] lot of sense to analyze the metrics of
+[00:11:36] someone who's been doing it before you
+[00:11:38] and is doing well right it always makes
+[00:11:40] sense to learn from the mistakes of
+[00:11:42] people um who have come before you and
+[00:11:44] to learn from the successes as well all
+[00:11:46] right so now let's get into the meat of
+[00:11:47] what we're talking about here my scalp
+[00:11:50] trading strategy and I'm going to break
+[00:11:52] this down into five steps starting with
+[00:11:55] step number one which is finding a stock
+[00:11:57] that's volatile so of course I'm using
+[00:11:59] my my scanners to find these stocks but
+[00:12:02] what I'm specifically looking for on the
+[00:12:04] scanners is a stock that has at least
+[00:12:06] five times relative volume five times
+[00:12:09] relative volume means the volume is five
+[00:12:11] times higher than its uh 14-day average
+[00:12:15] so if we look at
+[00:12:16] umvs right now as it hits a high of 1720
+[00:12:20] right here we can see that the relative
+[00:12:22] volume on The Daily is
+[00:12:25] 10.39 that means this stock is trading
+[00:12:27] on 10 times higher volume than average
+[00:12:30] we already said my minimum threshold is
+[00:12:32] five this is at 10 which is great uh zpp
+[00:12:36] which is the stock that I traded today
+[00:12:38] uh is actually a little lower this one's
+[00:12:40] at four which is kind of interesting but
+[00:12:44] this falls into the category of what we
+[00:12:46] would call a continuation setup
+[00:12:49] continuation setups are stocks that have
+[00:12:52] been very strong for several days and
+[00:12:54] we're riding that momentum higher
+[00:12:57] however because of high volume in
+[00:12:59] previous trading sessions the average
+[00:13:01] daily volume is going to go lower
+[00:13:04] because each of these previous trading
+[00:13:05] sessions are increasing the daily volume
+[00:13:07] so continuation stocks can be um one
+[00:13:11] category of stocks that sometimes will
+[00:13:12] fall just below your relative volume
+[00:13:15] threshold but will'll meet the other
+[00:13:16] criteria um number two demand should be
+[00:13:19] up uh we want to see that the stock is
+[00:13:21] up at least 10% on the day so five times
+[00:13:24] relative volume that indicates high
+[00:13:26] demand the stock being up 10% that
+[00:13:28] indicates high demand demand envs is
+[00:13:30] currently up 52%
+[00:13:32] zap uh hit a high of just about 100%
+[00:13:36] number three we like to see the stock
+[00:13:38] has a catalyst all right so when we're
+[00:13:41] talking about a catalyst generally
+[00:13:43] speaking we're talking about some type
+[00:13:45] of news event right we need to see if
+[00:13:48] the stock has a reason to be moving
+[00:13:50] higher in the case ofvs and zpp both of
+[00:13:55] these stocks are examples of
+[00:13:57] continuation where clear catalysts are
+[00:14:01] not as obvious and I think that this is
+[00:14:03] a challenge for a lot of beginner
+[00:14:05] Traders because it's like you know why
+[00:14:08] what is the Catalyst and a lot of people
+[00:14:10] think that the Catalyst should be very
+[00:14:13] much like a fundamental piece of news
+[00:14:16] but it's not impossible the Catalyst can
+[00:14:19] be something a little less tangible such
+[00:14:21] as the stock is up 400% in the last 30
+[00:14:25] days and some shorts are starting to get
+[00:14:27] squeezed out and the price keeps going
+[00:14:29] higher that can be a catalyst number
+[00:14:32] four I prefer to trade stocks that
+[00:14:34] priced between $1 and $20 this is the
+[00:14:37] kind of range that I like amvs currently
+[00:14:40] up around 17 is at the high end of that
+[00:14:42] range and you can see it's already back
+[00:14:44] down to $
+[00:14:45] 16624 so when you get into the high end
+[00:14:48] of this range the volatility is high but
+[00:14:51] the ability to manage risk goes down so
+[00:14:54] you kind of have this inverse
+[00:14:56] relationship where as price
+[00:14:59] price increases so does risk so price
+[00:15:03] and risk here so when we get here I I
+[00:15:07] kind of like to trade down you know if
+[00:15:10] we go I don't know maybe down into the
+[00:15:12] under $1 range the the risk is low and
+[00:15:17] and also I suppose we've got another
+[00:15:19] angle here on um exactly where
+[00:15:23] profitability fits in so if we just map
+[00:15:25] my profitability we'll find that let's
+[00:15:28] just say for the make of argument
+[00:15:30] that um we're just going to put you know
+[00:15:33] some of my biggest winners I've had some
+[00:15:35] big Winners up here which have been on
+[00:15:36] GameStop but these have also contributed
+[00:15:39] this high price high risk to some of my
+[00:15:41] biggest losses right so I've also had
+[00:15:43] some big losses so here's where you'll
+[00:15:45] see plus you know
+[00:15:47] $475,000 my biggest Green Day of all
+[00:15:49] time but you'll also see minus
+[00:15:52] $275,000 my biggest red day of all time
+[00:15:55] and then down in here is where we're
+[00:15:57] seeing more of kind of my standard green
+[00:15:59] days of up around $55,000 daily goal so
+[00:16:03] I found that when we're talking about
+[00:16:05] this area which is lower risk this is
+[00:16:08] when we're going to be looking at stocks
+[00:16:09] that are generally priced between 2 and
+[00:16:12] 20 again when you get to the high end of
+[00:16:14] that range it starts to get a little
+[00:16:16] riskier and number five I know that when
+[00:16:19] I am trading stocks have a float of less
+[00:16:21] than 10 million shares I tend to do
+[00:16:22] better float is the number of shares
+[00:16:24] available to trade so when we go back to
+[00:16:26] the scanners here what we're going to
+[00:16:28] see is that these stocks are telling us
+[00:16:31] uh essentially how well they meet the
+[00:16:33] criteria that I already know is where I
+[00:16:36] find the most profitability so we're
+[00:16:39] seeing here we've got the relative
+[00:16:41] volume we've got the change from the
+[00:16:42] close we've got the price we've got the
+[00:16:44] total volume on the day and then we can
+[00:16:46] see what the news catalyst is on this
+[00:16:48] particular stock so if we tie in my
+[00:16:53] metrics here all of this will support
+[00:16:56] what I've already shared with you if we
+[00:16:57] look at price and volum volume you're
+[00:16:59] going to see that my performance is
+[00:17:01] predominantly in you know the under $20
+[00:17:03] price range yes I've got some winners
+[00:17:05] here but of course also have some bigger
+[00:17:07] losers we look at Performance Based on
+[00:17:11] relative volume and what we'll see is uh
+[00:17:13] we've got to go over to instrument we
+[00:17:15] look at performance by instrument volume
+[00:17:17] and what we'll see is that when we have
+[00:17:19] a stock that has high relative volume
+[00:17:22] that's when I'm going to do better all
+[00:17:24] right so this is performance by
+[00:17:25] instruments relative volume right here
+[00:17:27] okay so this is where you could see
+[00:17:29] basically all of my profit is when the
+[00:17:32] stock has five times higher volume today
+[00:17:35] than average now this right in this area
+[00:17:38] is um actually where zap is going to fit
+[00:17:41] in zpp is going to be in this range here
+[00:17:44] where the performance relative to the
+[00:17:46] prior days relative volume is actually
+[00:17:50] much lower and that's because it's a
+[00:17:52] continuation stock so all of these
+[00:17:55] metrics these essentially are defining
+[00:17:58] the strategy but it's communicating it
+[00:18:00] in a way that may be very hard for a
+[00:18:03] beginner Trader to understand and so
+[00:18:05] this is kind of that
+[00:18:07] translation of what the metrics are
+[00:18:09] saying the metrics are saying that this
+[00:18:11] is where I make the most money this is
+[00:18:13] where I find the most success now if we
+[00:18:15] want to talk about some of the facts of
+[00:18:17] my biggest winning tra of not just my
+[00:18:19] biggest winning trades but the facts of
+[00:18:21] my trading history in total a couple of
+[00:18:24] highlights I'm right about 68.5% of the
+[00:18:28] time again this is not just my opinion
+[00:18:31] this is backed up by this data right
+[00:18:34] here 68.5% of the time that's my
+[00:18:37] accuracy and this is based on nine years
+[00:18:40] of trading history and that's not my
+[00:18:42] entire career that's just the trading
+[00:18:43] history that I've been able to put into
+[00:18:45] this um software here so my accuracy is
+[00:18:50] 68.5% my average winners and average
+[00:18:53] losers are approximately equal in dollar
+[00:18:57] amount I profit therefore by having
+[00:19:00] accuracy above 50% because if my
+[00:19:03] accuracy was 50% and my average winners
+[00:19:05] and losers are even then I'm a break
+[00:19:08] even Trader but because I'm right 68.5%
+[00:19:11] of the time I am profitable now my
+[00:19:15] average winners are about 14 cents per
+[00:19:17] share and my average share size is about
+[00:19:19] 10,000 shares and my average profit per
+[00:19:22] trade is
+[00:19:25] $1,400 now in order to make
+[00:19:27] 14 which which you could argue is a
+[00:19:29] scalp trade the price needs to go up
+[00:19:32] closer I would say to 30 cents now this
+[00:19:36] is why I say that you'll never capture
+[00:19:38] the perfect bottom to top of a move
+[00:19:41] right you pull up a chart you've got a
+[00:19:43] nice pullback you're never going to get
+[00:19:45] the perfect entry and the perfect exit
+[00:19:47] you may get a perfect exit you may get a
+[00:19:49] perfect entry you'll never get both in
+[00:19:50] one trade it just doesn't happen so I
+[00:19:53] like to figure that
+[00:19:55] realistically at best I might only
+[00:19:57] capture half of the move and part of
+[00:19:59] that is because of the factor that
+[00:20:01] spreads play into a move and the fact
+[00:20:04] that by the time I see my exit indicator
+[00:20:07] the price is probably already going to
+[00:20:08] pull back a little bit so at best I
+[00:20:11] might capture half which means if my
+[00:20:14] average winner is 14 cents a share if I
+[00:20:17] don't think a stock has the potential to
+[00:20:19] go up 30 cents I shouldn't even touch it
+[00:20:23] that's the truth so for a scalp Trader
+[00:20:25] you need to really ask yourself does
+[00:20:28] this have the potential to give me X
+[00:20:30] number of cents per share I would say 30
+[00:20:32] cents is sort of a good minimum because
+[00:20:34] again even if a scalp trade is only
+[00:20:36] three or four cents a share as it will
+[00:20:38] be with some Traders you still want to
+[00:20:40] know that you have the potential for a
+[00:20:42] bigger winner now um as I said I'll
+[00:20:45] never capture the perfect bottom and top
+[00:20:47] of a move I have to accommodate for
+[00:20:48] slippage and spreads and if I can't keep
+[00:20:51] tight stops I shouldn't take the trade
+[00:20:54] and so when I look at a stock like zpp
+[00:20:56] that has the the degree of volatility
+[00:20:58] plus the spreads that it's got I don't
+[00:21:01] think that I could keep my stop to only
+[00:21:04] 15 cents a share when you've got 20 cent
+[00:21:06] spreads that's a 18 Cent spread so
+[00:21:09] because of the spreads I don't think I
+[00:21:11] can manage my risk effectively on the
+[00:21:12] stock and in fact I tried to trade it
+[00:21:14] and I learned that lesson today on just
+[00:21:17] the trades I took on it and at that
+[00:21:19] point I said all right I should leave
+[00:21:20] this stock alone and focus on the one
+[00:21:22] that's going to be easier to manage risk
+[00:21:24] on that actually highlights a very
+[00:21:27] important skill for scalp Traders learn
+[00:21:30] to lean in and double down on what's
+[00:21:33] working and totally leave and abandon
+[00:21:36] what's not working if you got a stock
+[00:21:38] that you're r on and it's just not
+[00:21:39] working forget about that stock move on
+[00:21:42] if you've got one that you're finding
+[00:21:44] some success on hone in on that that's
+[00:21:47] where you want to focus okay so now you
+[00:21:50] know a little bit of um a few the facts
+[00:21:53] of my uh trading strategy so step one is
+[00:21:58] to find the stock moving and step two
+[00:22:01] then is to find out what the catalyst is
+[00:22:05] now I always like to see that we have a
+[00:22:07] news Catalyst such as earnings clinical
+[00:22:10] trial results or FDA approvals or a new
+[00:22:12] contract now we can see what the news
+[00:22:14] headline is right inside day trade Dash
+[00:22:18] inside this platform but again I I'm not
+[00:22:20] here just to tell you guys to sign up
+[00:22:22] for day trade Das you can use whatever
+[00:22:23] software you want if you want to go to
+[00:22:25] market watch you want to go to Google or
+[00:22:26] Yahoo finance you can you can use free
+[00:22:28] tools like that and you can find the
+[00:22:29] news so you in the stock quote window
+[00:22:32] here for the software that I'm using I
+[00:22:34] can pull up the stock and I can see what
+[00:22:35] the news catalyst is now if I see
+[00:22:38] there's no clear news Catalyst then in
+[00:22:41] that case I understand that this is a
+[00:22:43] continuation setup where the stock is
+[00:22:45] moving higher and I can go back and
+[00:22:47] check was there news back on this day
+[00:22:49] here that sent the stock this much
+[00:22:51] higher and we're still trading kind of
+[00:22:53] in the you know the wave of that move
+[00:22:56] that was created and if that's the case
+[00:22:58] then I can understand that's the
+[00:22:59] Catalyst in the case of meme stocks like
+[00:23:02] GameStop and some of the others the
+[00:23:04] Catalyst may just be that Traders like
+[00:23:06] the stock and they're buying it and the
+[00:23:08] price is moving higher and that's it's
+[00:23:10] not invalid I mean that is a catalyst so
+[00:23:14] the news Catalyst can be very clear or
+[00:23:17] it can be a little bit more
+[00:23:19] indirect however there are some
+[00:23:21] multiplying factors when we have a
+[00:23:23] headline that includes keywords of a
+[00:23:25] current Trend like AI or Co or something
+[00:23:29] like that that can create more buying
+[00:23:33] power just based on the headline and
+[00:23:35] you'll see that some stocks
+[00:23:37] will keyword stuff their headlines with
+[00:23:41] words that they think high frequency
+[00:23:43] trading algorithms will pick up on like
+[00:23:46] Amazon Apple Google Nvidia right bigname
+[00:23:50] companies Walmart when you have a small
+[00:23:52] company that puts out a headline and
+[00:23:54] they've got one of those big names in
+[00:23:55] the headlines Traders are a little
+[00:23:57] faster to jump on up on it so a headline
+[00:24:01] that includes keywords of a current
+[00:24:02] Trend can do better not always sustained
+[00:24:06] momentum if it's just keyword stuffing
+[00:24:08] but it can still do better in the short
+[00:24:10] term which is enough for a scalp trade
+[00:24:12] if the stock fits within a current hot
+[00:24:14] sector Pharmaceuticals Chinese AI that
+[00:24:17] can also give it more attention and if
+[00:24:19] the stock is a recent IPO initial public
+[00:24:22] offering a recent special acquisition
+[00:24:24] company or it has a recent reverse split
+[00:24:27] these can all be daily setups that
+[00:24:30] create more volatility so once I
+[00:24:33] understand the news headline and whether
+[00:24:35] or not the the stock has multiplying
+[00:24:37] factors that's when I can begin to move
+[00:24:40] towards step three step three is where I
+[00:24:42] perform my technical analysis for taking
+[00:24:44] a scalp trade so what I'm looking for
+[00:24:47] here is finding a great entry and I'm
+[00:24:49] going to come back to this question of
+[00:24:51] does this stock have the potential to go
+[00:24:52] up 50 cents or more my first profit
+[00:24:55] Target is going to be 15 to 20 cents
+[00:24:57] which would give me a to one ratio so if
+[00:25:00] we look at performance by intrade price
+[00:25:02] range this is interesting my total
+[00:25:05] performance when a stock only goes up 9
+[00:25:08] cents from when I get in to when I exit
+[00:25:11] well I clearly don't make a lot of money
+[00:25:13] there but I've taken a good number of
+[00:25:15] trades on stocks that don't give me that
+[00:25:16] kind of big move in fact 2,000 trades
+[00:25:19] that fall within that um trade that this
+[00:25:22] is the distribution of Trades I've taken
+[00:25:24] that fall within this price range of
+[00:25:26] this is how much they move and then this
+[00:25:27] is how much I've made so my the most
+[00:25:30] profit is down here when stocks go up
+[00:25:32] between $1 and $5 a share that accounts
+[00:25:35] for more than 30% of my total profit
+[00:25:38] right it's not the most uh trades I've
+[00:25:41] ever taken the most are in the 50 Cent
+[00:25:44] to a dollar range but interestingly 50
+[00:25:46] cents to a dollar produces substantially
+[00:25:49] less profit than $1
+[00:25:51] to5 and I suppose that that makes sense
+[00:25:54] based on the way this is broken down but
+[00:25:57] I think what's important to understand
+[00:25:59] here is that we're not going to make
+[00:26:00] money if a stock isn't moving up very
+[00:26:02] much we need volatility and it's easy
+[00:26:06] for Traders to jump in a trade and think
+[00:26:09] oh this could go up 5 cents and with
+[00:26:10] 10,000 shares I'll make 500 bucks and
+[00:26:13] then it drops 8 cents and it's like you
+[00:26:15] only had the potential to make 5 cents
+[00:26:17] but you lost eight cents a share that's
+[00:26:19] not a good risk to reward ratio so when
+[00:26:22] it comes back to risk management risk to
+[00:26:24] reward ratios are important to
+[00:26:26] understand okay so the Rel relationship
+[00:26:28] they have is that if you risk a dollar
+[00:26:30] to make a dollar you've got to be right
+[00:26:32] 50% of the time to break even all right
+[00:26:35] that's your break even point if you risk
+[00:26:37] a dollar to make $2 you only need to be
+[00:26:41] right 33% of the time to break even now
+[00:26:44] as we know for my metrics my accuracy is
+[00:26:47] 68% but my profit loss ratio is about 1:
+[00:26:51] one and so as a result I'm profitable my
+[00:26:54] break even point is 50% accuracy
+[00:26:56] anything above that I'm green so so it's
+[00:26:58] 67 68% I'm doing just fine but there
+[00:27:01] could be a Trader who trades with 67 or
+[00:27:03] 68% accuracy but is break even and theyd
+[00:27:07] be break even if their losers are twice
+[00:27:10] their winners on average that's not
+[00:27:13] sustainable and I know that because when
+[00:27:16] I was getting started I traded with a
+[00:27:18] 2:1 negative profit loss ratio so my
+[00:27:21] average losers were twice my average
+[00:27:22] winners and that was happening because I
+[00:27:25] was stubborn about cutting my losses and
+[00:27:28] I hadn't developed the educated
+[00:27:30] intuition to get really good at picking
+[00:27:33] the strongest setups and and really
+[00:27:35] having the best entries so as a beginner
+[00:27:38] Trader naturally out of all the trades
+[00:27:41] you take right you're going to have as a
+[00:27:44] beginner a fair share of Trades that
+[00:27:46] unfortunately you know we'll just say
+[00:27:48] this is um dollar lost dollar lost and I
+[00:27:53] don't know what we have over here but
+[00:27:54] anyways you're going to have a fair
+[00:27:56] number of Trades up here where you've
+[00:27:57] got big losses and part of it is let's
+[00:28:01] say quality so this is quality over here
+[00:28:04] and this is a b c d f so you've got some
+[00:28:11] big losses that are on F quality setups
+[00:28:15] well why are you taking F quality setups
+[00:28:17] well part of it is because you don't
+[00:28:19] have the educated intuition you're
+[00:28:21] looking at it you're thinking I think
+[00:28:22] this is an a b or c you know an A or B
+[00:28:24] setup but another Trader like myself
+[00:28:26] would say no that's an F setup so now
+[00:28:29] you've got all these unnecessary losses
+[00:28:31] and that's what I had when I was getting
+[00:28:32] started now I still had nice trades in
+[00:28:34] here that were nice winners and you know
+[00:28:36] maybe this is this is winner and then
+[00:28:39] this is loss over here something like
+[00:28:41] that so we could kind of a spectrum
+[00:28:42] where this is your break even so you
+[00:28:45] want to be focusing on down here where
+[00:28:47] you're green and that's going to be
+[00:28:49] focusing on a quality setups that's
+[00:28:51] going to be the best place to focus so
+[00:28:54] if you cut out all of these here if you
+[00:28:56] cut out all the f quality setups you're
+[00:28:59] probably going to cut out a lot of
+[00:29:00] unnecessary losses now it may be true
+[00:29:02] that occasionally you take an F quality
+[00:29:04] setup and you have a winner it's not
+[00:29:06] common but occasionally it's going to
+[00:29:08] happen unfortunately that's one of the
+[00:29:10] worst things that you can experience
+[00:29:12] because it's going to encourage you to
+[00:29:14] keep swinging for these terrible trades
+[00:29:16] because there's a chance that maybe it
+[00:29:19] will work it would be better if the
+[00:29:21] market gave us very consistent feedback
+[00:29:24] but the fact is the market will
+[00:29:25] sometimes reward you even though you
+[00:29:27] broke rules even though you didn't have
+[00:29:29] the discipline the stock will happen to
+[00:29:31] go in the direction that favors your
+[00:29:32] trade and you win and that's terrible
+[00:29:35] thing to have happened because it
+[00:29:36] reinforces making bad decisions if the
+[00:29:39] market always consistently punished us
+[00:29:41] when we made bad decisions we would stop
+[00:29:43] making those decisions but that you know
+[00:29:46] intermittent kind of enforcement is the
+[00:29:47] challenge so what we have to do is we
+[00:29:50] have to rely on our historical data that
+[00:29:53] tells us beyond a shadow of a doubt that
+[00:29:55] when I trade this strategy over the long
+[00:29:58] long term I am a profitable Trader and
+[00:30:00] when I deviate from the rules that's
+[00:30:02] when mistakes happen now you're probably
+[00:30:04] wondering what the rules are for my
+[00:30:06] trading so let's start talking about the
+[00:30:08] entries okay so when I'm trading and I'm
+[00:30:13] scalp trading I'm focusing on trading
+[00:30:16] momentum I'm trading the trend this is
+[00:30:19] so important many Traders over
+[00:30:21] complicate this and end up not even
+[00:30:23] trading the trend you're trading The
+[00:30:25] Backs side of the move let's look right
+[00:30:27] now at a vs I am sure there are Traders
+[00:30:30] right now at this moment who are trading
+[00:30:32] envs and who are losing money and you
+[00:30:35] know what I would say you're trading the
+[00:30:36] back side of the move the front side of
+[00:30:39] the move when this stock was still
+[00:30:40] moving higher was right in here front
+[00:30:42] side front side front side a little bit
+[00:30:44] of a steeper pullback rallying back up
+[00:30:47] still on the front side we're holding
+[00:30:49] above our moving
+[00:30:50] averages when you have a moving average
+[00:30:52] cross over here and you cross below the
+[00:30:55] 20 moving average the price is now
+[00:30:58] declining you are stair stepping back
+[00:31:00] down so at this point here once we broke
+[00:31:03] below that 20 exponential moving average
+[00:31:06] there is no doubt that this is the
+[00:31:07] backside of the move at least for for
+[00:31:10] the time being and you shouldn't trade
+[00:31:12] the back side of the move you're going
+[00:31:14] to get chopped out you're trading
+[00:31:15] against the trend now on zpp this
+[00:31:19] morning I think I did a pretty good job
+[00:31:21] of trading the trend we had a stretch
+[00:31:24] here where the trend was really strong I
+[00:31:26] crushed it and then I stepped back I
+[00:31:28] waited during this period because once
+[00:31:30] again we broke Trend we broke below this
+[00:31:33] moving average we we weren't able to
+[00:31:34] hold it we had a macd crossover macd is
+[00:31:38] a simple indicator you can use on your
+[00:31:39] trading when the macd is open I like to
+[00:31:42] focus on trading to the long side when
+[00:31:44] the macd crosses over some people will
+[00:31:46] flip short but for scalp traders to the
+[00:31:48] long side we just sit on the sidelines
+[00:31:51] and wait now we did get a nice rally
+[00:31:53] here and we got a couple of nice dips
+[00:31:56] down here off of this support line those
+[00:31:59] gave me a couple of nice trades but then
+[00:32:01] I said I don't want to overstay my
+[00:32:02] welcome and so again I'm sure there are
+[00:32:04] traders that are overtrading the back
+[00:32:06] side of this move here but they've
+[00:32:07] missed the boat so here's what I would
+[00:32:10] encourage trade the front side as
+[00:32:12] aggressively as you can and then once we
+[00:32:14] get that crossover a moving average
+[00:32:16] crossover a macd crossover or we break
+[00:32:19] below that 20 moving average leave it
+[00:32:21] alone stop wait for the next setup wait
+[00:32:24] for the next time either this stock goes
+[00:32:27] back to the highs
+[00:32:28] and shows that has a potential to
+[00:32:29] continue that that Trend or wait for the
+[00:32:32] next stock that shows up now imagine
+[00:32:34] this imagine a Trader traded just the
+[00:32:36] front side of the move here on on zpp
+[00:32:39] and then they completely waited
+[00:32:40] completely waited completely waited
+[00:32:41] didn't trade any of this but thenvs
+[00:32:44] starts popping up and they say you know
+[00:32:46] what this is pulling up squeezing away
+[00:32:48] I'm going to jump in this right here so
+[00:32:50] taking these pullbacks and buying for
+[00:32:52] this leg up well they probably would
+[00:32:54] have done well on that because in this
+[00:32:56] range the stock went from 13 150 up to
+[00:32:58] 177 and you could easily be scalping
+[00:33:00] this getting in getting out getting in
+[00:33:02] getting out getting in getting out now
+[00:33:04] where I traded a little bit earlier in
+[00:33:06] the day was right in this area on this
+[00:33:07] pullback and this was a Fine Place to
+[00:33:10] trade the macd was open but as it turns
+[00:33:12] out you know because of the spreads and
+[00:33:14] everything else it dropped down I took a
+[00:33:16] loss and for me I called it a day I
+[00:33:19] didn't overstay my welcome I stepped out
+[00:33:20] and said I've done well enough for today
+[00:33:22] at $10,000 this is a good day for me
+[00:33:25] it's a green day and I'm at Double my
+[00:33:27] daily goal
+[00:33:28] now we'll talk about when to walk away
+[00:33:29] in a moment but when it comes to
+[00:33:31] technical analysis what I'm looking for
+[00:33:34] is a stock that is showing one of the
+[00:33:36] following patterns I like to trade the
+[00:33:38] first pullback as you could see right
+[00:33:40] here we had that pattern Picture Perfect
+[00:33:44] onvs this is a f minute scalping pattern
+[00:33:47] you get that pullback right there and
+[00:33:49] the way I trade this is I'm looking for
+[00:33:52] the first candle to make a new high
+[00:33:55] that's the pattern so we get the move up
+[00:33:59] we get the pullback bottoming tail here
+[00:34:01] first candle to make a new high is the
+[00:34:03] entry and that's where I take a scalp I
+[00:34:06] can get in right there for that first
+[00:34:07] candle making a new high I set a tight
+[00:34:10] stop I don't stop at the low of this
+[00:34:11] pullback that's too far I use an
+[00:34:13] arbitrary stop generally of 10 to 15
+[00:34:16] cents because I don't want my average
+[00:34:18] losers to be bigger than that 15 cents
+[00:34:20] is my average loser 14 15 cents I don't
+[00:34:22] want them to be bigger so I set
+[00:34:24] arbitrary stop at 15 cents I get in and
+[00:34:26] I look for that continue uation I'm
+[00:34:28] expecting a wave of buying to come in
+[00:34:30] here because we have a 5minute pattern
+[00:34:33] first 5minute candle to make a new high
+[00:34:35] that's a scalp pattern now we could
+[00:34:37] trade that on the one minute as well the
+[00:34:39] first one minute candle to make a new
+[00:34:41] high right there you have a squeeze up
+[00:34:43] and a pullback first one minute candle
+[00:34:45] to make a new high is right there first
+[00:34:47] one minute candle to make a new high is
+[00:34:49] right here first one minute candle to
+[00:34:50] make a new high is right here it's the
+[00:34:52] first one minute candle to make a new
+[00:34:54] high after a move up and a little
+[00:34:56] pullback so in fact on this one we have
+[00:34:59] 1 2 3 four of that pattern that happened
+[00:35:04] four times in a row then we drop back
+[00:35:06] down here and we pull back down to the
+[00:35:07] 20 so it doesn't look good don't trade
+[00:35:09] it down here then it comes back up and
+[00:35:11] number five there's another pattern
+[00:35:13] right there so that's that same pattern
+[00:35:15] and you you got five instance instances
+[00:35:18] of it on zap from this morning now on
+[00:35:23] zpp I can actually do something a little
+[00:35:25] different um on this one I can show you
+[00:35:27] let me just pull this back up so I'm
+[00:35:29] going to full screen this this is going
+[00:35:31] to actually show you um the individual
+[00:35:34] trades here now it gets a little bit
+[00:35:36] hard to read this but um let's see so
+[00:35:40] right in here I bought this dip right it
+[00:35:43] um this was about 660 so we had the
+[00:35:46] first pop here at six added on the
+[00:35:48] pullback a nice little pop up so that's
+[00:35:51] that dip this was the same thing we
+[00:35:53] popped up we pulled back then we pushed
+[00:35:54] higher little dip pushing higher little
+[00:35:57] dip pushing higher little dip pushing
+[00:35:58] higher now the challenge is this is um I
+[00:36:01] don't like using these charts they show
+[00:36:03] my entries which is great but the charts
+[00:36:06] aren't very good so they're hard to move
+[00:36:07] in and out of so if we go back and look
+[00:36:10] at it here now it's much more clear boom
+[00:36:12] right there right that's the spot that
+[00:36:15] little spot there at 660 that's perfect
+[00:36:18] that's the pattern you want to trade now
+[00:36:20] if you want to download my micro
+[00:36:22] pullback strategy as a PDF I will put
+[00:36:25] the link in the description and you can
+[00:36:27] download that so it's going to cover the
+[00:36:30] micro pullback strategy PDF and it's
+[00:36:33] also got my small account strategy in
+[00:36:35] that download as well right here we've
+[00:36:38] got the half doll whole dollar and then
+[00:36:39] this is the micro pullback when we get
+[00:36:42] that pop up that little pullback just
+[00:36:44] for a moment and then the push higher
+[00:36:47] that's what we're looking for so I'm
+[00:36:49] going to go back here on this one to
+[00:36:51] right here so we've got that pop up this
+[00:36:53] is at the half doll whole dollar very
+[00:36:56] common that we see resistance right at
+[00:36:58] these levels so let me pull this back up
+[00:37:00] here on the chart so we're going to go
+[00:37:02] for Z here let's see all right so on
+[00:37:08] this one um we came up first to $6
+[00:37:11] little bit of resistance we pulled back
+[00:37:12] we came we come back up nice pull back
+[00:37:15] right there a little pull back right
+[00:37:17] here and then it pushes higher now it
+[00:37:19] ends up pulling back a little bit all
+[00:37:21] right so it pulls back for a little
+[00:37:23] bit right in this area notice the
+[00:37:26] resistance that we were having
+[00:37:28] see how we had this resistance level it
+[00:37:30] kept coming up to it not holding
+[00:37:32] dropping back down back down back down
+[00:37:35] so this is an area where we had that
+[00:37:36] resistance this is a stock that was
+[00:37:39] respecting half dollars and whole
+[00:37:41] dollars fairly well seven was um the
+[00:37:44] whole dollar right around here and then
+[00:37:47] it was right around 750 757 that we were
+[00:37:50] having resistance so the price was
+[00:37:53] really in this range every time it broke
+[00:37:55] below seven what happened it got bought
+[00:37:58] up right the dips got bought up but
+[00:38:01] every time it broke over 750 what
+[00:38:03] happened it dropped back down it wasn't
+[00:38:05] able to hold and So eventually it had to
+[00:38:08] break out of this range and in this case
+[00:38:10] it broke to the downside buyers didn't
+[00:38:12] come in anymore and sellers took over
+[00:38:15] and brought it back down but we could
+[00:38:16] have seen just the opposite happen and
+[00:38:18] if we had levels that we would have been
+[00:38:20] watching closely would have been around
+[00:38:22] $8 the psychological resistance of eight
+[00:38:26] and what's very common with a lot of
+[00:38:28] these stocks that when you come up to
+[00:38:29] these areas of psychological support and
+[00:38:31] resistance you'll see big orders now you
+[00:38:34] can see it on your level two window but
+[00:38:36] I'm going to pull up another tool here
+[00:38:38] um this is going to show you right down
+[00:38:41] here look at all these big buyers down
+[00:38:43] at 6 45,000 shares on the bid at 6 and
+[00:38:47] then up here at 740 750 and then look at
+[00:38:49] that up there at 8 so all of those
+[00:38:51] sellers are sitting up there at 8 all of
+[00:38:53] those buyers are sitting down here at 6
+[00:38:55] and it's been like that basically all
+[00:38:57] morning so all morning we've had that
+[00:39:00] seller stacked at eight they're sitting
+[00:39:02] right at that level of psychological
+[00:39:04] resistance so the way I would trade this
+[00:39:07] type of stock is I'm looking for it to
+[00:39:09] approach these levels and what I like to
+[00:39:11] do is I like to catch that dip and then
+[00:39:14] take that squeeze back up now one of the
+[00:39:16] things that a lot of Traders struggle
+[00:39:18] with is learning how to anticipate a
+[00:39:22] breakout because when a breakout
+[00:39:24] actually occurs the price can pop over
+[00:39:28] this level so fast that you could miss
+[00:39:31] the trade entirely so let me actually
+[00:39:33] show you a couple of live trading
+[00:39:35] examples of these really fast breakouts
+[00:39:39] okay so this is a trade from zpp this
+[00:39:41] morning now when I started uh on this
+[00:39:43] trade I'm you can see I'm at
+[00:39:45] $5,200 on the day I'm currently holding
+[00:39:48] uh 1,700 shares at an average price of
+[00:39:50] 740 so let's watch how this trade played
+[00:39:53] out now the level that I'm watching is
+[00:39:55] 775
+[00:39:58] I know that there's a seller up around
+[00:40:00] 775 so watch on this dip right here I'm
+[00:40:04] studying the level
+[00:40:06] two I'm watching The Price
+[00:40:09] here I enter my order at
+[00:40:14] 780 all I have to do is click the buy
+[00:40:17] button I take a little more profit on
+[00:40:19] the current position I'm holding at
+[00:40:21] about 764 on the
+[00:40:25] offer it dips down to 7
+[00:40:29] 755 what I'm watching right here is the
+[00:40:32] formation of a current 1 minute uh micro
+[00:40:35] pullback so we had the squeeze up on two
+[00:40:37] three four green Candles now we're
+[00:40:39] pulling back a little bit and I'm
+[00:40:40] watching for a dip
+[00:40:42] trade right there I added to my position
+[00:40:45] and I'm looking for the break through
+[00:40:52] 775
+[00:40:55] holding there you go there's 78 there's
+[00:40:59] 80 I believed that once we broke 75 we
+[00:41:03] would squeeze up to $8 a share and it
+[00:41:07] happened fast all of a sudden by the
+[00:41:10] time the price broke I'd be getting in
+[00:41:13] right here if I waited for the price to
+[00:41:14] break I would have been getting in right
+[00:41:16] here now you can see I'm up $3,000 on
+[00:41:18] this trade I had to be in a little early
+[00:41:22] so let's back that up for a second I'm
+[00:41:24] anticipating that the first 1 minute C
+[00:41:27] will make a new high why am I
+[00:41:30] anticipating that well look at this
+[00:41:32] chart we have four big green candles in
+[00:41:34] a row the stock is squeezing up are we
+[00:41:37] on the front side of the move yes does
+[00:41:39] this stock meet my criteria for being
+[00:41:41] the type of stock I want to trade based
+[00:41:43] on the percentage change the volume the
+[00:41:46] fact that it's the most obvious stock in
+[00:41:48] the market right now at this moment
+[00:41:51] check check check check check and that
+[00:41:53] means pullbacks are going to get bought
+[00:41:56] up and as they get get bought up not
+[00:41:57] only will the price go higher but people
+[00:41:59] who may be holding short positions are
+[00:42:02] going to be forced to cover covering
+[00:42:04] means buying and so I'm expecting as we
+[00:42:06] break to new highs each time we break to
+[00:42:08] new highs the price is going to Surge
+[00:42:11] higher and so I'm expecting that to
+[00:42:13] happen now what gave me the conviction
+[00:42:16] to buy down here at 760 was that there
+[00:42:19] was a 10,000 share buyer sitting on the
+[00:42:23] bid I saw that on the level twoo so I'm
+[00:42:26] looking at the level two I see the
+[00:42:29] buyers I see the ask where we've got the
+[00:42:32] sellers and I saw a 10,000 share buyer
+[00:42:35] at 750 right around there it was around
+[00:42:37] 750 and so I thought to myself if I get
+[00:42:40] in right here at 760 my Max loss is 750
+[00:42:45] I'll stop out if the price comes down
+[00:42:47] here and there's 10,000 shares they're
+[00:42:50] buying I can sell that buyer so now I
+[00:42:53] know what I'm risking on this trade is
+[00:42:55] 10 cents a share 10 cents a share times
+[00:42:58] 8,000 shares I'm taking $800 of risk on
+[00:43:02] this trade now it's a scalp trade it's
+[00:43:04] still a very short trade I'm risking
+[00:43:05] $800 which is 10 cents how much do I
+[00:43:08] need to make on this trade well
+[00:43:10] obviously you know 8 cents I I'd like to
+[00:43:13] at least make 8 cents for 1:1 ratio but
+[00:43:15] if I could make 16 cents or even higher
+[00:43:18] that's great now what I knew was that
+[00:43:21] there was a seller on the level two up
+[00:43:23] around 75 I knew that because I had seen
+[00:43:26] it when we first came up to this level
+[00:43:28] we had come up to this level and right
+[00:43:30] up here at 75 there was a seller so I I
+[00:43:33] didn't want to buy at that seller
+[00:43:34] because I didn't know if potentially
+[00:43:38] that was going to be a big Wall of
+[00:43:39] Resistance and the price wouldn't break
+[00:43:41] so I got in a little early I'm waiting
+[00:43:44] for the first candle to make a new high
+[00:43:46] and then I'm in and I'm holding and I'm
+[00:43:48] waiting and all of a sudden right there
+[00:43:51] the buyer perhaps that was at 750 moved
+[00:43:54] their order up what we know is that
+[00:43:57] there's now a 19,000 share buyer on the
+[00:44:00] bid right here at
+[00:44:03] 760 and so when I see that I'm thinking
+[00:44:07] this is bullish this is good short
+[00:44:09] sellers are probably thinking the same
+[00:44:11] thing except they're not thinking it's
+[00:44:12] good they're thinking it's bad they
+[00:44:14] better cover they better get out so what
+[00:44:16] do they do all of a sudden buy orders
+[00:44:19] start executing buy ERS start executing
+[00:44:22] and we immediately look at all the green
+[00:44:24] on the tape this is the tape that's the
+[00:44:26] level two we see all of this green right
+[00:44:29] here very bullish we go to 73 76 78 to
+[00:44:33] 80 to 84 to 85 now a little profit
+[00:44:36] taking here at 78 okay that's fine we
+[00:44:40] hold 82 on the bid 86 on the offer 87
+[00:44:44] now we're at 95 I added at 75 and 93
+[00:44:48] small size using my hotkey we get 95 on
+[00:44:51] the offer I put in order to take a
+[00:44:53] little profit and then I cancel it I say
+[00:44:55] you know what let's see if this thing
+[00:44:56] can actually break
+[00:44:58] $8 I'm in at
+[00:45:00] $761 which means right now I'm up 39
+[00:45:04] cents a
+[00:45:05] share okay this is a great profit to
+[00:45:08] loss ratio right there boom that's a
+[00:45:10] $4,000 winner and I'm taking some profit
+[00:45:13] on the offer at
+[00:45:15] 8:14 now how am I moving in and out this
+[00:45:18] fast I'm using hot Keys that's one of
+[00:45:21] the tools that you need to be able to
+[00:45:22] use we'll talk about that in a second
+[00:45:24] now let's go back up here all right so
+[00:45:27] we're going to be right in here so this
+[00:45:29] was where we were doing micro pullbacks
+[00:45:31] all right so we did the first pullback
+[00:45:34] right here which is essentially what we
+[00:45:36] got on zpp it was a sort of a hybrid
+[00:45:40] between a first pullback and a micro
+[00:45:43] pullback the reason I say that is
+[00:45:45] because it happened so fast it didn't
+[00:45:48] happen to be an entry next to a half
+[00:45:49] dooll whole dollar but as we came up to
+[00:45:52] eight that actually was and maybe I'll
+[00:45:56] highlight that again just for a quick
+[00:45:58] second because that trade up around
+[00:46:00] eight is worth noting because what's
+[00:46:03] very common with these stocks is that
+[00:46:05] we'll see this resistance up around this
+[00:46:07] level so right up here I'll just back
+[00:46:10] this up 10 seconds 10 seconds so watch
+[00:46:13] right here we are we'll back it up one
+[00:46:15] more so we come up to eight so let's see
+[00:46:20] where's this trade all right oh we got
+[00:46:21] to jump forward so we're going to come
+[00:46:23] up to eight and right when we're up at
+[00:46:25] $8 that that's where we kind of have
+[00:46:28] that we we're sort of like right at that
+[00:46:30] wall so where is this like right in
+[00:46:34] here it was it was when we had 799 on
+[00:46:37] the offer or eight on the offer it's
+[00:46:40] fine it's it's like right here yeah this
+[00:46:42] is the spot so we come up to eight and
+[00:46:44] see how we have that wall right there
+[00:46:45] at8 now we're going to pull back just
+[00:46:47] for a moment and there are Traders 100%
+[00:46:50] that buy right here at 8 and I actually
+[00:46:52] added at $799 too for the break of eight
+[00:46:55] then taking profit as it breaks through
+[00:46:57] that level so that's a scalp at the half
+[00:47:00] dollar and whole dollar that by itself
+[00:47:02] is a trade getting in at $799 for the
+[00:47:04] break of eight okay so we'll move this
+[00:47:07] back up here now some of this requires
+[00:47:11] an ability to read
+[00:47:13] alos high frequency trading algorithms
+[00:47:15] account for over 60% of the volume in
+[00:47:18] the markets so you have to look for key
+[00:47:21] technical levels where you're expecting
+[00:47:22] a breakout a breakout is a surge of
+[00:47:25] buying volume caused by short sellers
+[00:47:27] stopping out and buy stop orders
+[00:47:29] executing for long positions and
+[00:47:31] manually entered limited market buy
+[00:47:33] orders that are executing so how do
+[00:47:35] market makers and Algos respond to these
+[00:47:37] spikes in buying and selling they pull
+[00:47:39] the offers they pull the bids that
+[00:47:41] creates slippage which is basically
+[00:47:44] worse for retail Traders but better for
+[00:47:46] them and it amplifies the move this is
+[00:47:50] where we will sometimes see these really
+[00:47:52] big swings and that's what we ultimately
+[00:47:55] want so my strategy for entry and exit
+[00:47:59] requires reading the tape using the
+[00:48:03] level two to your advantage to see where
+[00:48:06] those big buyers and sellers are to
+[00:48:08] watch the level two to watch the tape
+[00:48:10] and to try to predict where we're going
+[00:48:11] to get these moves now I want to share
+[00:48:13] with you my entry and exit indicators so
+[00:48:17] what for an entry indicator I like to
+[00:48:19] see my preferred chart pattern which is
+[00:48:22] going to be one of the patterns I just
+[00:48:24] showed you the micro pullback the first
+[00:48:26] pull back or an entry under a half or
+[00:48:28] whole dollar by the way I break those
+[00:48:30] down in more detail with the rules in my
+[00:48:34] PDF so you can download that PDF print
+[00:48:36] it out have it next to your desk and you
+[00:48:38] can start practicing the strategies that
+[00:48:40] I'm trading right now I always will
+[00:48:42] recommend you practice in a simulator
+[00:48:44] before you put real money on the line so
+[00:48:47] I then understand my risk reward ratio I
+[00:48:49] check the level two for possible
+[00:48:51] resistance in the form of big Sellers
+[00:48:53] and then I am pressing the buy button
+[00:48:55] and I'm looking for the price to move up
+[00:48:56] quick quickly if the price does not move
+[00:48:58] up quickly I timed my entry wrong it's
+[00:49:01] as simple as that my exit indicator is
+[00:49:04] if the price stops moving up or slows
+[00:49:06] down Green candles get smaller that for
+[00:49:09] me is an exit indicator so as the price
+[00:49:11] is moving up and green candles are
+[00:49:13] getting smaller and smaller and smaller
+[00:49:15] and smaller usually that means they're
+[00:49:17] going to come back down right the fact
+[00:49:19] that they're getting smaller shows the
+[00:49:20] trend is getting exhausted I'd rather
+[00:49:22] see the candles are getting bigger and
+[00:49:24] bigger and bigger that's what we see
+[00:49:26] during a parabolic move if I see a
+[00:49:29] topping tail or a dogee pattern same
+[00:49:31] thing so topping tail basically we'll
+[00:49:34] just use a green candle here so price
+[00:49:36] has been moving up candle's moving up
+[00:49:39] and then up here we have this big
+[00:49:41] topping tail right so that big upper
+[00:49:43] candle wick that shows that the sellers
+[00:49:45] pulled the price back down so topping
+[00:49:48] tails and Topping Tails can also be a
+[00:49:50] shooting star like
+[00:49:52] this or it can just be a dogee or a
+[00:49:55] gravestone dogee like that any of those
+[00:49:57] topping Tails indicate a reversal is
+[00:49:59] imminent so if I see that candle I'm G
+[00:50:02] to get out before the reversal really
+[00:50:06] well it's going to be a red candle but
+[00:50:07] you get the idea before the reversal
+[00:50:08] really pushes in full learning how to
+[00:50:11] exit sooner is going to be a skill that
+[00:50:14] you'll want to master get out sooner get
+[00:50:18] in a little sooner get out a little
+[00:50:19] sooner take your profit you've got to
+[00:50:21] pay yourself all right so if I see big
+[00:50:25] sellers on the tape or on the level too
+[00:50:27] that can also be an indicator to exit
+[00:50:28] when I try to follow the philosophy of
+[00:50:30] breakout or bailout when I get in I want
+[00:50:32] to see the price moving up like right
+[00:50:35] now and if I don't I got to get out and
+[00:50:37] certainly if my Max loss is hit I'm
+[00:50:39] going to exit now I use hot keys for
+[00:50:42] entries and exits these are the hotkeys
+[00:50:45] that I'm using well these aren't all of
+[00:50:46] them but these are the simple ones so
+[00:50:49] shift one is to buy X number of shares
+[00:50:53] you can type in the number of shares you
+[00:50:54] want you could do 100 shares you could
+[00:50:55] do a th you can do 10 ,000 doesn't
+[00:50:57] matter it's to buy X number of shares at
+[00:51:00] the ask price with a 15c offset for
+[00:51:03] slippage that is a lot of slippage on
+[00:51:05] most low price stocks but on higher
+[00:51:07] price stocks I consider it to be
+[00:51:08] acceptable shift two again buy and
+[00:51:12] that's just a larger position so
+[00:51:13] historically I've used 1,000 2,000 share
+[00:51:15] positions recently I've reduced these to
+[00:51:18] 250 and 500 shares just to accommodate
+[00:51:20] the fact that in a lighter volume Market
+[00:51:22] I've got to be a little more careful
+[00:51:24] hotkey number three is Control Plus Q
+[00:51:27] this cancels all open orders buy or sell
+[00:51:30] it just cancels all the orders now my
+[00:51:33] selling buttons control Z sell full
+[00:51:36] position at the bid with 15 cents of
+[00:51:37] slippage going down contrl X sell half
+[00:51:41] of my position at the bid so I don't
+[00:51:43] have to calculate the number of shares
+[00:51:45] it's my full position half of my
+[00:51:47] position a quarter of my position these
+[00:51:50] three hotkeys sell on the bid these
+[00:51:53] three hotkeys sell at the ask price so I
+[00:51:56] sell at the ask price as you saw in some
+[00:51:58] of those trades on zpp I'm getting out
+[00:52:01] up here at 68 69 now of course I'll get
+[00:52:05] out as long as there's green on the tape
+[00:52:06] and there are people that are buying if
+[00:52:08] there are no buyers I'll have to sell on
+[00:52:10] the bid so I have hot keys for both
+[00:52:12] buying uh sorry selling on the bid and
+[00:52:15] selling on the offer even if the price
+[00:52:17] drops quickly and there aren't a lot of
+[00:52:19] buyers there could still be buyers when
+[00:52:21] shorts cover so a short covering a
+[00:52:23] position they could cover on the bid
+[00:52:25] they cover on the offer if they cover
+[00:52:26] cover on the offer they could buy my
+[00:52:27] shares so I always try to sell my shares
+[00:52:31] although I won't always get filled now
+[00:52:33] step five of my strategy is to analyze
+[00:52:36] my metrics I'm obsessed with analyzing
+[00:52:39] metrics I want to know about my average
+[00:52:41] winners and my average losers I want to
+[00:52:43] know what I'm doing right and even more
+[00:52:45] importantly I need to know what I'm
+[00:52:46] doing wrong so I can stop doing it now
+[00:52:50] what I know right now is that my average
+[00:52:52] losers are actually about 18 cents a
+[00:52:53] share um it's a little bigger than I
+[00:52:55] said before I thought it was 15 cents 18
+[00:52:57] cents a share as the average losers uh
+[00:52:59] fortunately my average losing trade well
+[00:53:02] $1,500 versus $1,400 winners you know
+[00:53:06] it's based on taking 10,000 share
+[00:53:09] average this is about $1,400 winners my
+[00:53:12] average losers aren't 1,800 which would
+[00:53:14] be the case with average uh losing
+[00:53:16] position of 10,000 shares so it shows
+[00:53:19] that my average losers have slightly
+[00:53:21] smaller share size which could indicate
+[00:53:23] that I'm not quite as confident in the
+[00:53:25] trade to begin with which is why I'm
+[00:53:26] trading with smaller size something to
+[00:53:28] be thoughtful of now of course we looked
+[00:53:31] at Z and the Trad trading the wave up
+[00:53:35] taking a break and then trading when I
+[00:53:37] thought it was going to break out again
+[00:53:39] taking a break trading when it starts to
+[00:53:41] break out this is where I like to trade
+[00:53:43] breakouts now I'm okay with buying off
+[00:53:45] of support but I do want to be careful
+[00:53:47] not to overstay my welcome so let's talk
+[00:53:51] about the skills required to be a scalp
+[00:53:54] Trader certainly you need to have a base
+[00:53:56] basic understanding of how to day trade
+[00:53:58] now some of you may have read my book
+[00:54:00] how to day trade the plain truth I think
+[00:54:02] I've got a copy of that right here I've
+[00:54:03] got my book but there's a ton of other
+[00:54:05] books you could read I've also got a ton
+[00:54:06] of videos right here on YouTube of how
+[00:54:08] to day trade for beginners starting from
+[00:54:10] zero so check out those episodes now if
+[00:54:13] you want to check out my classes at
+[00:54:14] Warrior trading that's a fulllength deep
+[00:54:17] dive comprehensive Curriculum by all
+[00:54:20] means happy for you to check that out as
+[00:54:21] well but number one you need to
+[00:54:23] understand the basics of how to day
+[00:54:25] trade number two two you need to know
+[00:54:27] how to use stock scanners number three
+[00:54:29] you need to know how to read level two
+[00:54:30] and the time in sales being a master of
+[00:54:32] reading the tape will be a very
+[00:54:34] important skill to learn if you want to
+[00:54:36] scalp trade number four you need to be
+[00:54:39] able to follow the rules having the
+[00:54:41] discipline to follow the rules no doubt
+[00:54:44] critical to long-term success having the
+[00:54:47] discipline and the emotional
+[00:54:49] intelligence to know when to walk away
+[00:54:52] that's perhaps even more important this
+[00:54:54] is a book I'd encourage thinking bets by
+[00:54:57] Annie Duke make smart decisions learn
+[00:55:00] when to walk away she's got another book
+[00:55:01] that she wrote called tra uh sorry
+[00:55:04] called quit the power of Knowing When to
+[00:55:07] Walk Away both of these books are a must
+[00:55:09] read for an aspiring Trader and
+[00:55:11] certainly for a scalp
+[00:55:14] Trader you've got to develop the
+[00:55:16] acquired intuition to make quick
+[00:55:18] decisions it doesn't happen overnight
+[00:55:21] the best time to learn to start trading
+[00:55:23] was 5 years ago the next best time is
+[00:55:25] now because the sooner you can begin to
+[00:55:28] accumulate that intuition that
+[00:55:30] experience the better you'll get at
+[00:55:32] knowing when to buy and when to sell and
+[00:55:35] number seven I can't say it enough
+[00:55:37] having the discipline to cut your losses
+[00:55:40] quickly this is so critical to your
+[00:55:43] long-term success as a Trader and
+[00:55:45] specifically if you're thinking about
+[00:55:47] scalp trading now I want to keep this
+[00:55:49] episode relatively quick and and not go
+[00:55:51] beyond an hour I want to be
+[00:55:53] comprehensive but mindful of time so
+[00:55:56] those those you guys that want to keep
+[00:55:57] learning I encourage you to try a two-e
+[00:55:59] trial with me over at Warrior trading
+[00:56:01] you can watch over my shoulder as I'm
+[00:56:03] trading the markets you don't have to do
+[00:56:05] this by yourself you can learn a lot
+[00:56:07] right here on YouTube watching these
+[00:56:09] free classes W going through my watch
+[00:56:11] list and everything else in fact zpp was
+[00:56:14] on my watch list yesterday I put it on
+[00:56:16] my watch list yesterday I said I was
+[00:56:18] watching zpp for continuation and some
+[00:56:21] people would have traded it and some
+[00:56:23] might not have understood the right
+[00:56:24] places to get in and out so being a ble
+[00:56:26] to tune in for the live broadcast gives
+[00:56:29] you that classroom experience where I'm
+[00:56:31] right there side by side with you giving
+[00:56:33] you my realtime commentary I have I had
+[00:56:37] a bunch more live trading examples I was
+[00:56:39] hoping to go through but um I don't have
+[00:56:41] time for those today so we're going to
+[00:56:43] save those uh for another day all of
+[00:56:45] these are part of my full length
+[00:56:46] curriculum so you're welcome to check
+[00:56:48] that out and if you haven't already
+[00:56:49] downloaded the PDF make sure you check
+[00:56:52] that out there's a PDF that has um it's
+[00:56:54] a download with a bunch of different
+[00:56:56] things things in it's got my small
+[00:56:57] account strategy guide It's got my micro
+[00:56:59] pullback PDF so check that out and I
+[00:57:02] thank you guys as always for tuning in I
+[00:57:04] hope you hit that thumbs up I hope
+[00:57:05] you're already subscribed to the channel
+[00:57:06] and I'll remind you as always that hey
+[00:57:08] trading is risky my results aren't
+[00:57:09] typical so manage your risk take it slow
+[00:57:12] practice in a simulator before you put
+[00:57:14] real money on the line and I'll see you
+[00:57:15] for the next episode real soon

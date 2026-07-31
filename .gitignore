@@ -21,3 +21,10 @@ config.local.py
 .idea/
 Thumbs.db
 .DS_Store
+
+# Scraped research material (local only, not redistributed)
+data/subtitles/
+data/subtitles_raw/
+
+# Fetch logs
+data/*.log

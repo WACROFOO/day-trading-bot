@@ -1,0 +1,694 @@
+# How to use Level 2 for Beginner Day Traders 🍏 #daytrading #stockmarket #learntotrade
+# https://www.youtube.com/watch?v=eY7JdVjg0kw
+# duration_sec: 1496
+
+[00:00:05] what's up everyone ross here from
+[00:00:06] warrior trading so in this episode i'm
+[00:00:08] going to break down for you how to use
+[00:00:09] level 2 to improve your trading all
+[00:00:11] right so we're going to jump in here on
+[00:00:13] how to use level 2 to improve your
+[00:00:14] trading for those of you out there that
+[00:00:16] are beginner traders i'm going to try to
+[00:00:18] be concise but comprehensive i'm not
+[00:00:21] going to be able to hit every nuance of
+[00:00:23] level 2 that i've learned over all my
+[00:00:26] years of trading in a short video for
+[00:00:29] those that want to learn more after
+[00:00:31] you've watched this video i encourage
+[00:00:33] you to go and watch my recaps go and
+[00:00:36] watch my live trading morning shows and
+[00:00:38] for those that want to take the leap and
+[00:00:40] become a member over at warrior trading
+[00:00:42] we've got a whole archive library of
+[00:00:45] live trading plus the curriculum and
+[00:00:48] that's where i go in the most depth of
+[00:00:51] just trying to give you the chance to
+[00:00:52] download everything that i know about
+[00:00:54] trading into your brain but right now
+[00:00:56] i'm going to try to go quick be concise
+[00:00:58] but give you enough to
+[00:01:01] make you feel like you've really learned
+[00:01:02] something in this video and i hope you
+[00:01:04] do so let's go ahead level 2 what is it
+[00:01:07] all right so this is the s p 500 on the
+[00:01:10] left here top corner when i'm trading
+[00:01:12] this is what i'm mostly looking at are
+[00:01:14] level two windows you don't even see
+[00:01:16] charts on this window i've got level two
+[00:01:18] and i've got scanners the scanners are
+[00:01:21] the proprietary software over warrior
+[00:01:23] trading that i use to find stocks to
+[00:01:25] trade every single day and when one hits
+[00:01:27] my scanner i pull it up agri and the
+[00:01:30] first thing i'm doing is i'm looking at
+[00:01:31] the level two and i'm asking myself can
+[00:01:33] i take a trade can i manage risk and how
+[00:01:36] much will this stock go up now i can't
+[00:01:38] do all of that without looking at the
+[00:01:41] charts so i keep charts up on a monitor
+[00:01:43] just above my trading screen usually for
+[00:01:46] two stocks one on the left one on the
+[00:01:47] right
+[00:01:48] and so i will look at a chart because
+[00:01:50] that helps me understand how much a
+[00:01:52] stock is up it helps me understand where
+[00:01:54] we might see recent support like down
+[00:01:57] here at 7 6 95 7 where we might see
+[00:02:00] resistance 749
+[00:02:02] but when it comes to actually executing
+[00:02:04] the trades and managing open positions
+[00:02:07] i'm using level two
+[00:02:08] so level two is an island this right
+[00:02:11] here is an island anyone who wants to
+[00:02:13] buy or sell shares of the any of these
+[00:02:15] stocks
+[00:02:16] they're going to do it right here
+[00:02:18] this is all of the buyers on the left
+[00:02:20] and these are all the sellers on the
+[00:02:22] right the left is the bid the right is
+[00:02:25] the ask
+[00:02:26] and this is the tape the tape is the
+[00:02:28] time and sales so every order that goes
+[00:02:31] through
+[00:02:32] is going to be on the tape
+[00:02:34] now i want to actually um open up my
+[00:02:39] uh trading classes uh slide deck here
+[00:02:42] so
+[00:02:43] uh students that are part of the warrior
+[00:02:46] pro membership have access to this
+[00:02:49] course which is 1400 slides long
+[00:02:53] and also to the starter course which is
+[00:02:55] about 400 slides long so let's look here
+[00:03:00] at
+[00:03:01] level two but before we look at level
+[00:03:03] two let's talk for a second about level
+[00:03:04] one so let's back this out
+[00:03:07] so what i'm gonna do is
+[00:03:09] i'm gonna look at this video this is a
+[00:03:12] um
+[00:03:12] a cropped image
+[00:03:14] so there's the whole thing so this is
+[00:03:17] level two
+[00:03:18] right but we're going to crop this down
+[00:03:20] and just look at the first row which is
+[00:03:22] level one so what does level one tell us
+[00:03:26] well this is the first depth of the
+[00:03:27] market of the island so on the island
+[00:03:30] where people come to buy and sell on one
+[00:03:32] side of the island you have all the
+[00:03:33] buyers on the bid on the other side you
+[00:03:36] have all the sellers on the ask
+[00:03:38] now if you just uh want to buy or sell
+[00:03:40] shares
+[00:03:41] you've got all those people lined up on
+[00:03:43] the bid and on the ask so there's people
+[00:03:44] actively saying i want to sell i want to
+[00:03:46] sell and this is how much i'm willing to
+[00:03:47] sell for
+[00:03:49] and this is 226 on the ask so if you
+[00:03:52] want to buy right now you don't have to
+[00:03:54] sit with all the other buyers at 225 and
+[00:03:57] wait you can just go ahead and buy from
+[00:03:59] someone selling at 226.
+[00:04:01] remember every transaction has a buyer
+[00:04:04] and a seller so when you buy you're
+[00:04:06] buying from someone who's selling to you
+[00:04:07] when you sell you're selling to someone
+[00:04:09] who's buying from you
+[00:04:11] so this is our bid and this is our ask
+[00:04:14] the bid is the highest price that buyers
+[00:04:17] are willing to pay
+[00:04:18] and when we look at it on the level two
+[00:04:20] we can see the price and the number of
+[00:04:22] shares that they want to buy in this
+[00:04:24] case it's 6 700. we always add two zeros
+[00:04:28] and we can see the market maker that
+[00:04:30] they're using to execute their order
+[00:04:32] so they don't actually go to the island
+[00:04:34] they send someone for them and that
+[00:04:36] person is you know standing there but
+[00:04:38] it's all digital of course it's not
+[00:04:39] really down on the exchange it's the way
+[00:04:41] it used to be it's all digital
+[00:04:43] so you've got arca which is your market
+[00:04:45] maker and they're wanting to buy 6 700
+[00:04:49] shares at 225
+[00:04:50] and then you have the same market maker
+[00:04:52] also executing a sell order for someone
+[00:04:55] at 226 for 1100 shares now market makers
+[00:05:00] provide liquidity by being on both the
+[00:05:02] bid and the ask at the same time they
+[00:05:05] create the spread
+[00:05:06] they get compensated for the risk of
+[00:05:08] holding the stock by being able to sell
+[00:05:10] shares across the spread to make money
+[00:05:13] as a retail trader we use market makers
+[00:05:15] to execute our orders we can't ourselves
+[00:05:18] do it without this intermediary
+[00:05:21] so on the level 2 we can see the market
+[00:05:23] maker the price and the shares available
+[00:05:26] that's level one data
+[00:05:27] now level two data
+[00:05:30] is when you can go ahead and see let's
+[00:05:32] go to crop image
+[00:05:34] not just the first depth of the market
+[00:05:37] the best buyer and the best seller but
+[00:05:40] you go one row down
+[00:05:42] now one row down you see well hold up
+[00:05:44] there's actually two buyers at 225
+[00:05:47] one is for 6 700 shares the other is for
+[00:05:49] 800 and there's actually two sellers at
+[00:05:51] 226. well what if we go another row down
+[00:05:55] we'll go two more rows down you see
+[00:05:57] there's four buyers at 225. so 225 now
+[00:06:01] is getting some psychological support
+[00:06:03] there are four buyers all wanting to buy
+[00:06:05] at the same price
+[00:06:06] but there's only two sellers at 226. so
+[00:06:09] who's got the upper hand here it seems
+[00:06:10] the buyers are a little stronger
+[00:06:13] and if you notice
+[00:06:14] over on the side this is the tape
+[00:06:17] these are the actual orders that are
+[00:06:19] going through so when an order goes
+[00:06:21] through it's colored based on whether it
+[00:06:23] occurs at the bid
+[00:06:25] or the ask
+[00:06:27] so let's look at this right here for the
+[00:06:29] color scheme
+[00:06:30] let's see
+[00:06:34] orders at the ask or above are green
+[00:06:38] orders at the bid or below are red
+[00:06:41] orders between the spread are typically
+[00:06:45] white
+[00:06:46] they're between the spread so orders
+[00:06:47] that occur between the spread a little
+[00:06:49] indifference right they're they're not
+[00:06:51] strong enough to be at the ask
+[00:06:53] they they kind of met at the midpoint of
+[00:06:55] the spread then they happen so it's not
+[00:06:58] unusual but it doesn't communicate the
+[00:07:00] same sentiment as an order that's either
+[00:07:03] red or that's green
+[00:07:05] alright so let's go back up here
+[00:07:09] so
+[00:07:10] back on this window here
+[00:07:13] in terms of color scheme
+[00:07:15] the first row
+[00:07:17] is green and the second and third and
+[00:07:19] fourth row are green why because they're
+[00:07:20] all at the same price the the first tier
+[00:07:24] is green the first tier of the level two
+[00:07:27] is green the second tier is red easily
+[00:07:30] distinguishable large stack at the first
+[00:07:32] tier smaller stack at the second tier
+[00:07:34] and very small at the third and fourth
+[00:07:36] tier
+[00:07:37] on the ask side it's the same the best
+[00:07:40] tier is green but in this case there's
+[00:07:43] only two sellers at the best price so
+[00:07:45] green is only two rows deep and then
+[00:07:48] you've got three rows of red so a little
+[00:07:50] bit more there and then you've got one
+[00:07:52] row of yellow and a row there
+[00:07:54] and then from there that point as it
+[00:07:56] goes down is just gray and you can see
+[00:07:58] over on
+[00:08:00] my light speed platform it's sort of the
+[00:08:02] same so you can scroll
+[00:08:04] or you can drag the window to make it
+[00:08:06] larger to see more depth and depending
+[00:08:08] on the market data subscription that you
+[00:08:10] have you can maybe see more depth or
+[00:08:12] less depth but this to me is is adequate
+[00:08:14] it's more than enough you can see what
+[00:08:16] you need to see and in this case i see
+[00:08:18] bid support at 47 and right there boom a
+[00:08:21] big green burst of orders that went
+[00:08:23] through on the tape
+[00:08:25] popped up to 53 where there was another
+[00:08:27] little stack of sellers
+[00:08:29] you could probably tell fairly quickly
+[00:08:30] that
+[00:08:31] learning to read level two isn't
+[00:08:34] something that's going to happen
+[00:08:34] overnight you can learn the basics of
+[00:08:36] the bit in the ask the spread the color
+[00:08:39] scheme
+[00:08:40] but then there's a degree of
+[00:08:43] gaining experience the more you read it
+[00:08:45] the more you recognize these patterns
+[00:08:48] the more familiar you get with these
+[00:08:49] patterns and what type of price action
+[00:08:51] they may or may not be predicting
+[00:08:53] especially when that coincides with
+[00:08:55] certain chart patterns so we're not
+[00:08:57] forgetting about charts but in this
+[00:09:00] video we're talking really specifically
+[00:09:01] about how to utilize charts
+[00:09:04] to reaffirm so how to utilize level two
+[00:09:06] to reaffirm what you're already seeing
+[00:09:08] on
+[00:09:09] the charts
+[00:09:11] all right so now let's back this out
+[00:09:12] again
+[00:09:14] so when i first pull up a stock one of
+[00:09:17] the things i'll be looking for are if
+[00:09:19] there are really big
+[00:09:21] well a couple things number one
+[00:09:23] if there's big buyers or big sellers and
+[00:09:25] if it's thinly traded or thickly traded
+[00:09:28] thinly traded stocks
+[00:09:30] have level two where there's often only
+[00:09:32] one two
+[00:09:33] uh one one or two um orders at each tier
+[00:09:38] and the tiers are spread out so there's
+[00:09:41] not a tier at every cent they're spread
+[00:09:44] out as you go up the level two in higher
+[00:09:47] in price or as you go down you go lower
+[00:09:49] in price and there's a spread here
+[00:09:51] between the bid and the ask
+[00:09:53] so let's look at an example of another
+[00:09:55] one
+[00:09:56] from today a drts so this right now has
+[00:09:58] a five cent spread and above 60 is 65 69
+[00:10:02] 68 1495 1501 1524 1564 1588 1613
+[00:10:09] it doesn't take much for the stock to go
+[00:10:10] from 1460 to 1613.
+[00:10:13] i can assure you it's not the same with
+[00:10:15] bank of america
+[00:10:16] bank of america is going to be much more
+[00:10:18] thickly traded
+[00:10:19] much much more thickly traded this is a
+[00:10:21] stock that will not move quickly the s p
+[00:10:24] 500 very similar these are not going to
+[00:10:25] be fast-moving stocks really under
+[00:10:28] any circumstances they are thickly
+[00:10:30] traded
+[00:10:31] so what we know is that stocks that have
+[00:10:35] thinner level twos
+[00:10:37] typically have lower floats the shares
+[00:10:39] outstanding the number is lower
+[00:10:41] typically less than 50 million whereas
+[00:10:44] more thickly traded stocks such as bank
+[00:10:46] of america 8.1 billion
+[00:10:49] have many many shares outstanding large
+[00:10:52] market caps and while that creates good
+[00:10:55] opportunity for lower risk investing for
+[00:10:57] long-term investors pension funds hedge
+[00:10:59] funds things like that
+[00:11:00] for active traders it's not what we're
+[00:11:03] looking for because as an active trader
+[00:11:05] my job each day is to try to find the
+[00:11:07] most volatile stocks so i'm looking at
+[00:11:09] stocks that have the highest relative
+[00:11:11] volume and i'm looking at the stocks
+[00:11:12] that are the top gainers
+[00:11:14] ll is our third leading gainer in the
+[00:11:16] entire market today up 31 percent and
+[00:11:19] note that it's the stock that i made the
+[00:11:20] most money on
+[00:11:22] you're not going to make a lot of money
+[00:11:23] trading bank of america or the spy and i
+[00:11:26] didn't really make a lot of money today
+[00:11:27] all things considered between my two
+[00:11:29] accounts about nine thousand uh my
+[00:11:31] results obviously are not typical but
+[00:11:33] that for me isn't uh really that great
+[00:11:35] of a day well the biggest gainer's only
+[00:11:37] uh 33 well that one's 32 the biggest one
+[00:11:40] is 63 percent and if we pulled up that
+[00:11:43] chart we'd probably see that it's not
+[00:11:45] really
+[00:11:46] been that interesting or has given that
+[00:11:48] many opportunities
+[00:11:49] it looks like uh well in this case
+[00:11:53] the bulk of the move was uh later in the
+[00:11:56] day so at this point i wasn't actively
+[00:11:58] trading anymore so
+[00:11:59] that actually did give some
+[00:12:00] opportunities
+[00:12:02] but in any case i missed it because it
+[00:12:04] wasn't in the morning so my focus each
+[00:12:06] day is trying to find stocks that have
+[00:12:08] the potential to make a huge move and
+[00:12:10] then even if i can only capture a small
+[00:12:12] piece of it a small piece of a big move
+[00:12:14] is enough to survive
+[00:12:16] a small piece of one percent is not
+[00:12:18] enough to survive you can't make money
+[00:12:20] trading on really tiny moves so we're
+[00:12:23] looking for bigger moves and so when i
+[00:12:25] see a stock hit my scanners one of the
+[00:12:27] first things i'll check is the level two
+[00:12:30] so i'm going to look at the level two
+[00:12:32] and i'm going to ask myself is this
+[00:12:33] thinly traded is it thickly traded and
+[00:12:35] it doesn't matter how much volume you
+[00:12:37] can have 69 million shares of volume
+[00:12:39] this is a more thinly traded level too
+[00:12:41] this is level two where if we have the
+[00:12:43] right chart pattern we could quickly see
+[00:12:45] a move up to 475 or five that's a ten
+[00:12:47] percent move
+[00:12:48] drts we could quickly see a move up to
+[00:12:50] 15 or 16 that could be five ten percent
+[00:12:53] move so these are the type of stocks i'm
+[00:12:55] going to be more interested in so
+[00:12:57] looking at the level two can tell me
+[00:12:59] pretty quickly whether a stock is thinly
+[00:13:01] traded or thickly traded of course i can
+[00:13:03] see the flow listed right there as well
+[00:13:04] but it also communicates that so more
+[00:13:07] thickly traded there
+[00:13:09] and then what we're going to be looking
+[00:13:10] at are um
+[00:13:14] the size of the orders so let's see um
+[00:13:18] let's look here
+[00:13:20] where was this oh i'm going to go into
+[00:13:22] um
+[00:13:22] [Music]
+[00:13:24] let's see
+[00:13:26] jump up here
+[00:13:30] so we've got some order routing
+[00:13:32] conversation here i'm going to leave
+[00:13:33] that alone for right now
+[00:13:35] institutional traders
+[00:13:37] transaction sizes okay so here you have
+[00:13:40] a 1.1 million share sell order
+[00:13:44] now if you're not using level 2 data
+[00:13:47] you might have bought this at 144 saying
+[00:13:49] hey it's up 25
+[00:13:50] who knows maybe this is going to be like
+[00:13:52] uh
+[00:13:53] this sdh
+[00:13:55] and
+[00:13:56] rip up to 2.25 i'll make a nice profit
+[00:14:00] probably not not if you've got a 1.1
+[00:14:02] million seller sitting there at 144
+[00:14:05] that's a huge order and until that gets
+[00:14:07] bought up this thing's not moving it's
+[00:14:09] not going to go that much higher yeah
+[00:14:10] sure there'll be some people that buy
+[00:14:12] because they don't see it but not that
+[00:14:13] many
+[00:14:14] now on the other hand what if that was
+[00:14:16] on the bid
+[00:14:17] well that's psychological support
+[00:14:19] so that means i could buy this at 144
+[00:14:22] 145 and i would know with a 1.1 million
+[00:14:25] share buy order that i could probably
+[00:14:27] safely hold it with only a very tight
+[00:14:29] stop of two or three cents maybe i could
+[00:14:32] even buy a hundred thousand shares
+[00:14:34] now if it comes down to 144 if that's
+[00:14:36] where the bid was or 142
+[00:14:38] and i start to see that 1.1 million
+[00:14:40] share buyer get sold into it goes from
+[00:14:44] 1.1 to 1 to 900 to 800 700 600 500 400
+[00:14:48] 300
+[00:14:49] as it starts to thin out i might decide
+[00:14:52] to sell because once that support breaks
+[00:14:55] it could drop
+[00:14:57] and once this resistance breaks
+[00:15:00] like a break in a big way
+[00:15:02] so seeing the bids
+[00:15:04] and the size of the sellers is helpful
+[00:15:07] in interpreting where we might have
+[00:15:08] psychological resistance 600 000 shares
+[00:15:11] for sale there at 10
+[00:15:13] right or where we might have some
+[00:15:15] support
+[00:15:16] so when i trade i am looking at the ask
+[00:15:19] price
+[00:15:20] so i buy at the ask
+[00:15:22] because if i want to get in
+[00:15:24] and this stock is ripping i'm not gonna
+[00:15:26] get filled if i sit on the bid i can put
+[00:15:28] an order on the bid right now and i'm
+[00:15:30] not gonna fill but if i press the buy
+[00:15:32] button for 70 i will fill instantly here
+[00:15:35] i'll show you i'll give you an example
+[00:15:36] all right so there's 60.
+[00:15:38] see my order's just sitting there and
+[00:15:39] i'm not filling
+[00:15:41] but what if i want to buy at 70 watch
+[00:15:43] this
+[00:15:44] boom i'm long at 70. instantly
+[00:15:47] instant fill so i buy at the ask and
+[00:15:49] then to get the best price on my exit
+[00:15:51] i'll try to sell on the ask as well i'll
+[00:15:53] put a five cent profit on that
+[00:15:55] i don't know if i'll get filled this
+[00:15:56] isn't you know a good trade by any means
+[00:15:59] here but just for instance i buy on the
+[00:16:01] ask because when i want to get in i want
+[00:16:03] to get in and i try to sell on the ask
+[00:16:05] to sell into strength as a momentum
+[00:16:07] trader we buy high we sell higher
+[00:16:10] now
+[00:16:11] selling on the ad and there we go got
+[00:16:12] out five cents a profit
+[00:16:15] so selling on the ask
+[00:16:17] works when the stock is strong but it
+[00:16:20] means you're sometimes going to be
+[00:16:21] selling too soon and so it's not
+[00:16:24] a problem in my opinion to hold and wait
+[00:16:28] for it to top out and then
+[00:16:30] sell a little bit as it starts to pull
+[00:16:31] back because that way you know at least
+[00:16:33] you held
+[00:16:34] through the bulk of the move whereas if
+[00:16:37] you sell in the ask it might keep going
+[00:16:38] like it just went to 14.90 well shoot i
+[00:16:41] sold at 75 i could have waited to sell
+[00:16:42] at 90 and i would have made more money
+[00:16:45] and 100 shares were bought at 90. so you
+[00:16:48] know son of a gun i sold too soon
+[00:16:51] all right so maybe i should have sold
+[00:16:53] half
+[00:16:54] 50 and then held the rest to either sell
+[00:16:57] more as it kept going or as it comes
+[00:16:59] back down
+[00:17:00] again that that gets more into position
+[00:17:02] management which isn't really about
+[00:17:04] level two
+[00:17:05] but
+[00:17:06] i just wanted to make that note that my
+[00:17:08] eye is at the ask and watching the tape
+[00:17:10] and i also uh even when i'm selling i'm
+[00:17:12] still focused on the ask price
+[00:17:14] so now let's look at a couple of
+[00:17:16] examples
+[00:17:18] through the
+[00:17:19] warrior pro curriculum
+[00:17:21] students have access to my live trading
+[00:17:22] archives
+[00:17:24] so
+[00:17:25] you have uh
+[00:17:27] for those that are interested if you
+[00:17:29] join you would have a ton of examples to
+[00:17:31] look at but here are a select few
+[00:17:33] examples of
+[00:17:36] large sellers
+[00:17:39] so let's see um
+[00:17:41] [Music]
+[00:17:42] i've got a couple different ones here
+[00:17:45] i'm gonna pull this one up um all right
+[00:17:47] so let's jump that out
+[00:17:49] [Music]
+[00:17:51] all right so let's see
+[00:17:54] all right so this one and this ends up
+[00:17:57] being a little bit of a dip trade
+[00:17:59] so this is 9 29 56 we're right at the
+[00:18:02] opening bell
+[00:18:03] the bell is gonna ring we're gonna have
+[00:18:05] a moment of pause right here
+[00:18:07] and then all of a sudden i'm gonna press
+[00:18:09] the buy button why
+[00:18:10] technical pattern here is along for the
+[00:18:13] breakthrough
+[00:18:14] ten dollars target 1065 the pre-market
+[00:18:17] high
+[00:18:18] now i press the buy button very quickly
+[00:18:21] and then i realize uh oh
+[00:18:25] there's a 59 there's a 500
+[00:18:28] 000 share seller
+[00:18:30] right there i try to cancel the order
+[00:18:33] but it won't let me cancel it the order
+[00:18:35] executes
+[00:18:36] and now i'm in
+[00:18:39] okay well it's a small position of 3
+[00:18:41] thousand shares to start i put an order
+[00:18:43] at ten dollars so it's going to put it
+[00:18:45] probably move this up to ten dollars so
+[00:18:46] it's going to be ready to go but now
+[00:18:48] we're pulling back a little bit
+[00:18:50] so as we dip down psychological support
+[00:18:52] will be at 950. i can add off of
+[00:18:54] psychological support at 9.50 with a
+[00:18:56] stop at about 9.45 so watch right here
+[00:19:00] i'm going to add down there now i've got
+[00:19:02] 6 000 shares with an average of 9.78
+[00:19:05] it's important to start with starter
+[00:19:07] positions that way you can afford to add
+[00:19:09] if it pulls back or add if it goes
+[00:19:11] higher if you go in full size right away
+[00:19:13] you can't you can't maneuver
+[00:19:16] so now i'm coming back up here and watch
+[00:19:19] 85 and 95 85 95
+[00:19:22] but that that seller that 600 000 share
+[00:19:26] seller he's still there now it's 750 000
+[00:19:29] shares
+[00:19:30] and it's not just one it's one two three
+[00:19:33] four five sellers
+[00:19:35] i gotta sell here
+[00:19:36] because that seller's not breaking
+[00:19:38] so what am i going to do i'll give it a
+[00:19:39] second
+[00:19:41] and then i sell at 98. i sold at the ask
+[00:19:44] at 98. got a good exit happy with that
+[00:19:47] got green on it so profit was probably
+[00:19:50] before i sold like eleven hundred
+[00:19:52] dollars or so
+[00:19:53] let's see yeah eleven hundred dollars so
+[00:19:55] a small profit nothing crazy uh but
+[00:19:59] that
+[00:20:00] uh that seller there if you were just
+[00:20:02] using your charts you wouldn't have seen
+[00:20:04] it and that was a problem
+[00:20:06] all right let's look at another one
+[00:20:08] let's see
+[00:20:11] all right so
+[00:20:12] we'll do a couple more quick examples
+[00:20:17] all right so on this one on mark we had
+[00:20:20] a seller here at 50 and watch it get
+[00:20:22] bought up it's it's nasdaq but it's also
+[00:20:25] edgex antarctica so it's about 100 000
+[00:20:27] shares watch them get bought up
+[00:20:29] and i start adding right there as they
+[00:20:31] start getting bought up i add and watch
+[00:20:34] as it breaks this is that boom breaking
+[00:20:36] through a level instant to 55. that's
+[00:20:39] five cents instantly now with ten
+[00:20:42] thousand shares that's 500 bucks
+[00:20:44] i could take that off the table right
+[00:20:45] here and be happy
+[00:20:46] there we go there's 500
+[00:20:49] maybe it goes a little higher again
+[00:20:51] maybe i should sell half hold more for a
+[00:20:53] bigger move but maybe i could take the
+[00:20:55] 500 and pay myself
+[00:20:59] all right here's another one this is
+[00:21:00] this is a powerful one all right so on
+[00:21:02] this one
+[00:21:04] uh this is going to be a little bit
+[00:21:05] complicated
+[00:21:07] the stock was halted not going to get
+[00:21:09] into halts on this video but it was
+[00:21:11] halted it resumes it dips
+[00:21:14] and i look to buy the uh the price there
+[00:21:17] which is 1029.
+[00:21:19] i add there for the break at 10 29
+[00:21:21] assuming an instant break
+[00:21:24] but i'm wrong
+[00:21:25] and what i notice is that there's a
+[00:21:28] bit of a wall there's buy orders going
+[00:21:31] through but it's not breaking that's
+[00:21:33] called a hidden seller you can see you
+[00:21:35] can visualize it on the level two
+[00:21:36] because there's a sell order but the
+[00:21:38] stock is not breaking
+[00:21:40] now these could be a problem because we
+[00:21:42] don't know how big that cell water will
+[00:21:44] be but think of that dam
+[00:21:46] the water is being held back right now
+[00:21:49] and if it breaks this level if it breaks
+[00:21:51] 29 what's going to happen it's going to
+[00:21:52] shoot up
+[00:21:54] so if it doesn't break and that's just
+[00:21:55] resistance then i'm in a little high so
+[00:21:57] i do try to unwind half the position at
+[00:21:59] 28 to reduce my risk and then what i'm
+[00:22:01] going to do is i'm going to add back on
+[00:22:03] a dip
+[00:22:04] so again this is a little aggressive of
+[00:22:06] a strategy to add back on a dip
+[00:22:09] but
+[00:22:10] again this isn't really a strategy class
+[00:22:12] right now this is more of
+[00:22:14] level two
+[00:22:16] so now what we're going to look for
+[00:22:18] is this to curl up
+[00:22:21] through 25 and watch what happens when
+[00:22:24] it breaks 25.
+[00:22:27] added there 8 now 18 is my average
+[00:22:30] added at 19
+[00:22:32] what we often see is tap tap
+[00:22:36] and then break
+[00:22:38] so there's 99 i mean this was instant
+[00:22:42] this instantly went up to 11 bucks let's
+[00:22:45] back that up one more time
+[00:22:48] look at that look at that
+[00:22:50] i mean that's the water broke and it
+[00:22:53] snapped
+[00:22:54] and so for traders using level two
+[00:22:57] that right there presented an
+[00:22:58] opportunity
+[00:23:00] right
+[00:23:01] so i think that that um i hope is
+[00:23:03] motivation for you to keep learning
+[00:23:05] about level two to keep watching uh
+[00:23:08] hopefully the morning show the recaps
+[00:23:11] and if you decide you wanna learn more
+[00:23:14] and be a student over where you're
+[00:23:15] trading we'd love to have you join
+[00:23:17] warrior pro membership gives you access
+[00:23:19] to my curriculum of classes
+[00:23:22] which is essentially me putting
+[00:23:24] everything i know about trading
+[00:23:26] into
+[00:23:27] this series of
+[00:23:29] of classes it's it's really a
+[00:23:31] robust and very comprehensive program
+[00:23:34] it's not about being concise some of the
+[00:23:36] classes are long they're detailed
+[00:23:37] they're nuanced and
+[00:23:39] they're for traders that are looking to
+[00:23:41] learn every bit they possibly can
+[00:23:44] about the market
+[00:23:46] so i hope you found this interesting
+[00:23:48] please hit the thumbs up if you enjoyed
+[00:23:50] it and i look forward to
+[00:23:53] seeing you guys uh for the morning show
+[00:23:54] and if you haven't already checked out
+[00:23:56] the newsletter
+[00:23:57] again you guys are welcome to check that
+[00:23:59] out where did i put that
+[00:24:02] right here so members on the newsletter
+[00:24:04] will get emails for uh recaps
+[00:24:07] watch lists morning show you get you get
+[00:24:10] uh emails of help videos live trading
+[00:24:12] archives and things like that that
+[00:24:14] occasionally we give out just people
+[00:24:15] that are on the newsletter that don't go
+[00:24:17] on youtube
+[00:24:18] so make sure you're subscribed to the
+[00:24:19] newsletter and i hope you're also
+[00:24:21] subscribed the channel so you get the
+[00:24:22] notification when i go live which is
+[00:24:24] every day for the morning show
+[00:24:27] all right i hope this was a helpful
+[00:24:28] video i will see you for the next one
+[00:24:31] using level two you can get really good
+[00:24:33] at capitalizing on opportunities but you
+[00:24:35] need to build level two around a
+[00:24:37] strategy so i want you to check out
+[00:24:39] these two videos number one how to buy
+[00:24:41] the dip and number two the simplest
+[00:24:44] strategy for beginner traders keep
+[00:24:47] studying keep learning have fun and make
+[00:24:49] sure you tune in every morning monday
+[00:24:51] through friday for the morning show
+[00:24:53] right here on youtube

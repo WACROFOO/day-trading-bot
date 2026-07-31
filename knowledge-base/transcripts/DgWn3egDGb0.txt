@@ -1,0 +1,635 @@
+# Bollinger Bands: Why Millionaire Traders Are Using This Technical Indicator
+# https://www.youtube.com/watch?v=DgWn3egDGb0
+# duration_sec: 1494
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to walk you
+[00:00:03] through how to use Binger bands to help
+[00:00:05] predict when the price is going to
+[00:00:07] reverse Ballinger bands are a technical
+[00:00:10] indicator that you can put on your
+[00:00:11] charts and since they're an indicator
+[00:00:13] they're part of the universal language
+[00:00:16] of the financial markets that is
+[00:00:18] technical analysis what that means is
+[00:00:20] that when a Binger band communicates a
+[00:00:23] buy or a sell signal there are so many
+[00:00:26] other traders that are seeing that same
+[00:00:28] signal and responding to it that in a
+[00:00:31] sense it becomes a self-fulfilling
+[00:00:33] prophecy so there's a very clear
+[00:00:35] correlation between a buy and sell
+[00:00:37] signal with the Ballinger bands and then
+[00:00:39] seeing the price react so traders who
+[00:00:42] get really good at recognizing these
+[00:00:44] signals are going to have an edge
+[00:00:46] against other traders in the market and
+[00:00:48] you're the traders who are going to get
+[00:00:49] really good at predicting where the
+[00:00:51] price is going to go next clearly the
+[00:00:54] traders who can predict the future the
+[00:00:56] best will be the ones who are the most
+[00:00:58] consistent in the long run now it
+[00:01:00] doesn't matter whether you're trading
+[00:01:01] stocks Forex Futures you're trading
+[00:01:03] cryptocurrency you can apply Ballinger
+[00:01:05] bands to any Financial instrument where
+[00:01:07] you can pull up a chart so we're going
+[00:01:10] to go over some stocks that I was
+[00:01:11] watching today and we'll look at one of
+[00:01:13] them that I actually traded and I'll
+[00:01:15] help you break down where the Binger
+[00:01:17] bands give you an edge okay so we're
+[00:01:19] going to start by looking at uh CM uh
+[00:01:21] ctmx here this is just a stock that uh
+[00:01:24] is up today about 200% on breaking news
+[00:01:27] which is pretty impressive and you you
+[00:01:29] can see we got this move up here we got
+[00:01:31] a little pullback we got another move
+[00:01:33] higher we got a dip and then notice this
+[00:01:35] false breakout right here what you'll
+[00:01:37] see is that the price popped up and then
+[00:01:39] it rejected and reversed back down now
+[00:01:42] this was somewhat predictable both
+[00:01:45] because of Ballinger bands and a couple
+[00:01:47] of other indicators that I'm going to
+[00:01:48] show you right now so this is the chart
+[00:01:51] without Binger bands on it and now I
+[00:01:53] want to pop the Binger bands on to show
+[00:01:55] you how different it looks so we're
+[00:01:57] going to go over here to um this
+[00:02:00] indicator I'm going to search for Binger
+[00:02:02] bands and I'm going to pop it on right
+[00:02:04] here now when I put on Binger bands the
+[00:02:06] settings that I use are the standard
+[00:02:08] settings I don't edit them in any way
+[00:02:11] here's the problem with editing your
+[00:02:13] Binger band settings if you change them
+[00:02:16] from what everyone else is using you're
+[00:02:19] going to see different buy and sell
+[00:02:21] signals so if you said oh I really want
+[00:02:23] to use a length of like you know 37 and
+[00:02:26] a multiple of two you know 3.5 you're
+[00:02:30] totally changing the way the indicator
+[00:02:32] looks on your chart and now anything
+[00:02:34] that you see is going to be totally
+[00:02:35] different from what other people see so
+[00:02:38] my recommendation is to keep it exactly
+[00:02:41] standard and I do the same thing with
+[00:02:43] all of my indicators whether it's macd
+[00:02:45] or it's RSI I just keep the settings
+[00:02:47] totally standard because I want to make
+[00:02:49] sure that I'm seeing the same things
+[00:02:51] that other people are seeing okay so
+[00:02:54] when we look at this now let's pull up
+[00:02:57] uh full screen five minute chart
+[00:03:00] here's what I look at whenever I see a
+[00:03:03] candle that is fully outside the Binger
+[00:03:08] bands I expect a reversal is coming soon
+[00:03:12] it is an indicator of a reversal it is
+[00:03:14] not a guarantee that we will get a
+[00:03:16] reversal but it is a high likelihood
+[00:03:18] that we will so what that looks like is
+[00:03:21] this candle right here this candle is
+[00:03:24] fully outside the Ballinger bands so
+[00:03:27] this blue band here is the top of the
+[00:03:29] Ballinger band
+[00:03:30] this is the bottom of the Ballinger
+[00:03:31] bands right here and the Ballinger bands
+[00:03:34] depending on your settings may also have
+[00:03:37] an uh an average line that's going to be
+[00:03:40] down the center so you'll have the
+[00:03:42] median line right here you see how it's
+[00:03:44] in
+[00:03:45] Orange so this is the average between uh
+[00:03:48] the two Ballinger bands right in the
+[00:03:50] middle and then you have the upper band
+[00:03:53] and you have the lower band now what
+[00:03:55] some people would do is they would
+[00:03:57] change the color on this and change the
+[00:03:58] gradient to make it um either more
+[00:04:01] difficult to see the price action inside
+[00:04:03] the Ballinger bands or less difficult I
+[00:04:05] think it's fine to leave it again at
+[00:04:07] really this is as you'd like this is
+[00:04:09] more of a visual display but making it a
+[00:04:11] little bit um more contrast I think is
+[00:04:14] helpful for one important reason I like
+[00:04:17] to be focusing on stocks that are either
+[00:04:20] at the moment riding the top of the
+[00:04:23] Ballinger bands right here or are
+[00:04:25] outside the Ballinger bands cuz this is
+[00:04:27] when the price action gets the most
+[00:04:29] interesting when the price comes back
+[00:04:32] within the Binger bands as it is here
+[00:04:34] this is often when we see the stock is
+[00:04:37] going to be choppier we're not going to
+[00:04:39] see clean moves and you're more likely
+[00:04:41] to get caught into false breakouts so
+[00:04:45] the indicator that I look at number one
+[00:04:47] is
+[00:04:49] price
+[00:04:51] outside Binger
+[00:04:53] bands if the price is outside the Binger
+[00:04:56] bands either to the upside or the
+[00:04:57] downside there's a high likelihood that
+[00:05:00] we will reverse soon it it's just the
+[00:05:03] fact is nearly 95% of the price action
+[00:05:07] during the day will occur inside the
+[00:05:09] Binger bands so as you see this is all
+[00:05:12] the price action that's occurring um
+[00:05:14] inside the Binger bands here right we're
+[00:05:15] inside we're inside we're inside so it's
+[00:05:18] a very limited period of time when
+[00:05:19] you're outside and stocks don't remain
+[00:05:23] irrational like this for a long time now
+[00:05:26] there's a saying that they can remain
+[00:05:28] irrational longer than you can remain
+[00:05:30] solvent so just because the price is
+[00:05:32] starting to break outside the top of the
+[00:05:34] Ballinger bands doesn't mean you should
+[00:05:36] sell or go short it just means that we
+[00:05:39] are getting extended and the likelihood
+[00:05:42] and the probability of a retracement and
+[00:05:44] a reversal is now increasing so as we
+[00:05:48] have this candle right here that has the
+[00:05:50] red topping tail it's a red topping tail
+[00:05:52] with this upper candle wick it's a bit
+[00:05:55] of a dogee with this sort of spinning
+[00:05:57] top body right here it's a very small
+[00:05:59] body the confirmation is then when the
+[00:06:02] next candle breaks the low and your stop
+[00:06:05] is always at the high of day so if you
+[00:06:08] had exited this position which you would
+[00:06:11] have been holding let's say to the long
+[00:06:13] side if you had gotten in down here for
+[00:06:14] the red to Green move a proper exit
+[00:06:17] would have been the first candle that
+[00:06:19] made the new low which is right here now
+[00:06:21] it did hold for a few minutes and it did
+[00:06:24] make another attempt back up but it
+[00:06:26] ended up being a dramatic reversal this
+[00:06:29] to me was predictable that this would be
+[00:06:31] a reversal because this consolidation
+[00:06:35] was occurring outside the Ballinger
+[00:06:37] bands and well above the support of the
+[00:06:40] nine exponential moving average those of
+[00:06:43] you guys um so
+[00:06:46] reversal
+[00:06:47] indicators those of you guys who know
+[00:06:50] the way that I trade I like to focus on
+[00:06:52] stocks that are near the 90m and I like
+[00:06:54] to focus on trading when the macd is
+[00:06:57] open or when it's above the signal line
+[00:07:00] and I'll show you that here in just a
+[00:07:02] moment as well so let's go ahead and add
+[00:07:06] macd to this time frame we're looking at
+[00:07:08] a 5 minute chart right now but you can
+[00:07:10] use uh Binger bands really on any time
+[00:07:13] frame the one minute and the 5 minute
+[00:07:14] are both appropriate so macd I primarily
+[00:07:17] use on the one minute but I'll show this
+[00:07:19] to you in any case on the 5 minute all
+[00:07:21] right so we're going to go back to full
+[00:07:22] screen here and what you're going to see
+[00:07:24] is that in this period at the beginning
+[00:07:26] of the move the macd is open so the macd
+[00:07:29] is above o the signal line which is this
+[00:07:31] orange line here we come back down a
+[00:07:33] little bit and we come back up so based
+[00:07:35] on the macd this was open for trading
+[00:07:37] basically from here until here the only
+[00:07:40] problem is you could see right here this
+[00:07:42] is sort of right when the macd was
+[00:07:44] curling against the trade and then we
+[00:07:47] get that crossover right at this big
+[00:07:49] rejection candle so one of the things
+[00:07:52] that is important is using your
+[00:07:54] indicators to help you rule out whether
+[00:07:57] or not you should take a trade so on a
+[00:07:59] position like this if I was watching
+[00:08:01] this consolidation right in this area
+[00:08:03] this is what I would say I would say
+[00:08:05] well we've got a couple problems here
+[00:08:07] number one we've got the price which is
+[00:08:10] outside the Binger bands which means
+[00:08:12] it's extended and we've got a higher
+[00:08:13] likelihood of a reversal number two the
+[00:08:16] price is well extended off of the N9
+[00:08:18] moving average which increases the
+[00:08:20] likelihood of a false breakout and
+[00:08:22] number three the macd is starting to
+[00:08:24] curl against the trade and number four
+[00:08:26] volume profile shows high volume selling
+[00:08:28] candles both at the open and on this
+[00:08:31] topping tail candle right here for those
+[00:08:33] reasons it would be too risky to take a
+[00:08:36] new position right here and then you
+[00:08:38] know of course as you can see the result
+[00:08:41] was that we ended up getting this um
+[00:08:43] this break where it popped up reversed
+[00:08:45] and came back down and from that point
+[00:08:47] forward this is no longer something I
+[00:08:49] would be interested in trading now some
+[00:08:51] people would have taken this as a short
+[00:08:53] position with a stop at the high and
+[00:08:55] that's perfectly reasonable stop is at
+[00:08:57] the high that's your logical stop right
+[00:08:59] there you're shorting based on the price
+[00:09:02] being extended outside the Binger bands
+[00:09:04] extended off the 9 em and the macd
+[00:09:06] approaching a crossover the the point to
+[00:09:09] cover this position usually is going to
+[00:09:11] be when it comes first down to the 9 EMA
+[00:09:14] then down to the 20 EMA and then down to
+[00:09:16] the volume weight average price we
+[00:09:19] eventually make our way to the midpoint
+[00:09:21] of the Binger bands in this orange line
+[00:09:23] but takes a little bit longer to do that
+[00:09:26] now here we are later in the day the
+[00:09:28] Binger bands have become very compressed
+[00:09:30] they're very close together and the
+[00:09:32] price is trading in a fairly narrow
+[00:09:33] range this can sometimes lead to an
+[00:09:37] expansion where the price will pull away
+[00:09:39] so it wouldn't entirely shock me if that
+[00:09:42] started to happen however from a
+[00:09:45] technical perspective a couple issues we
+[00:09:47] have would be the high of this pivot
+[00:09:49] back here at 522 that we need to cross
+[00:09:51] and then the high of this rejection
+[00:09:53] candle right here so if we can get over
+[00:09:56] 522 and hold that level then the next
+[00:09:59] stop is 568 and then we're back to the
+[00:10:01] high of 587 and that's when we would
+[00:10:04] then look for that secondary move to the
+[00:10:06] upside which would be through Power Hour
+[00:10:08] what you have going for you on this one
+[00:10:10] right now is that the macd is now
+[00:10:12] crossed into the positive but you also
+[00:10:14] have the problem of declining volume as
+[00:10:17] we have come later into the trading
+[00:10:19] session so this is an analysis of ctmx
+[00:10:23] using Binger bands now we're going to
+[00:10:25] switch and look at
+[00:10:26] P pal is actually the stock that I
+[00:10:29] traded this morning which also had
+[00:10:31] breaking news now what's interesting
+[00:10:34] about
+[00:10:35] p is we got this initial squeeze right
+[00:10:38] here on breaking news and then what
+[00:10:40] ended up happening was it basically
+[00:10:43] stalled out so we got a surge higher the
+[00:10:46] macd was certainly open as it surged
+[00:10:49] higher we had a nice big green volume
+[00:10:51] bar but then the following candle was
+[00:10:54] red pulled back and is fully outside the
+[00:10:57] Binger bands that's High likelihood of a
+[00:11:00] reversal it ends up coming back down and
+[00:11:02] as you can see it pulls all the way back
+[00:11:05] down to that nine exponential moving
+[00:11:07] average it then comes down to the 20
+[00:11:10] moving average and eventually makes its
+[00:11:11] way down to the midpoint so this is
+[00:11:15] again on a 5 minute time frame but you
+[00:11:17] can see how clear it is that those
+[00:11:20] candles were outside the Ballinger bands
+[00:11:22] now if we look at this on um over the
+[00:11:25] course of the day you can see again how
+[00:11:28] in this area uh the Binger bands became
+[00:11:31] very compressed and then that led to a
+[00:11:34] selloff back down so the range became
+[00:11:37] very very narrow and then we broke to
+[00:11:39] the downside which in this case was
+[00:11:42] fairly predictable that if we were going
+[00:11:44] to break one way or the other we would
+[00:11:45] break to the downside because the price
+[00:11:47] was below the volume weighted average
+[00:11:49] price it was really weak it wasn't
+[00:11:51] holding up well overall the stock was
+[00:11:54] showing weakness the macd um at this
+[00:11:57] time right here was actually it was
+[00:11:59] positive and then it it broke to the
+[00:12:00] downside but being below the volume
+[00:12:02] weight average price was really our
+[00:12:04] problem so both of these have been a
+[00:12:07] review on the F minute chart so now what
+[00:12:09] I'm going to do is I'm going to switch
+[00:12:12] this to uh the one minute chart so on
+[00:12:14] the one minute chart I'm going to go
+[00:12:15] ahead and add Binger bands right here
+[00:12:18] the times that I was using Binger bands
+[00:12:20] the most in my career is when I was
+[00:12:22] predominantly trading reversals when I
+[00:12:25] was trading reversals I really wanted to
+[00:12:28] pay super close attention to those
+[00:12:30] candles outside the Ballinger bands to
+[00:12:32] help me get a good indication if we were
+[00:12:35] going to have a reversal so right here
+[00:12:38] we have the initial popup so we have
+[00:12:41] this initial push right here we have a
+[00:12:43] little bit of a a two candle pullback
+[00:12:46] and then we push higher now this is the
+[00:12:48] spot right here where if we had a candle
+[00:12:51] that had made a new low right down here
+[00:12:54] this could have been our reversal
+[00:12:55] indicator right away because that candle
+[00:12:58] was fully outside the B bands but
+[00:13:00] remember this is a caution flag it's not
+[00:13:03] the indicator to sell or go short
+[00:13:04] immediately what you're looking for is
+[00:13:06] the confirmation which is the next
+[00:13:08] candle to make a new low and we didn't
+[00:13:10] get that this candle held and then this
+[00:13:12] one broke the high of this level and so
+[00:13:15] the Bull Run continues it pushes a
+[00:13:17] little higher pushes a little higher
+[00:13:18] pushes a little higher continuing to
+[00:13:20] ride the top of the Ballinger band but
+[00:13:24] because we're at the top of the
+[00:13:25] Ballinger band we can clearly tell that
+[00:13:27] the price is really extended we end up
+[00:13:29] having a small little dogee right here
+[00:13:32] and then the first candle to make a new
+[00:13:33] low is this red candle and at that point
+[00:13:36] it's never able to get back to high a
+[00:13:38] day from that point on for the rest of
+[00:13:40] the day so right there that first candle
+[00:13:42] making a new low as an indicator to sell
+[00:13:44] or or go short depending on your
+[00:13:46] strategy that obviously pulled back down
+[00:13:48] to the N9 moving average then pulled to
+[00:13:50] the 20 and it just kept retracing if we
+[00:13:53] switch back to um
+[00:13:56] ctmx let's see
+[00:13:59] we'll look at this one on the one minute
+[00:14:02] chart this one shows a couple of
+[00:14:04] interesting
+[00:14:05] moments
+[00:14:07] um right here this was the most notable
+[00:14:10] um when we got this extension we got
+[00:14:12] this push higher and you'll notice how
+[00:14:15] sometimes the Ballinger Bands Will
+[00:14:16] compress and then they quickly pull away
+[00:14:18] as it did right here it sort of
+[00:14:20] compresses and then it pulls away so the
+[00:14:22] Ballinger bands are moving on both sides
+[00:14:24] as we're having height and volatility
+[00:14:27] now at the beginning of this move
+[00:14:29] uh let's see back here we were riding
+[00:14:33] the top of the Binger band we pulled
+[00:14:35] back but we more or less went sideways
+[00:14:38] we finally got a candle that made a new
+[00:14:39] low but by that point we were already at
+[00:14:41] the support of the nine moving average
+[00:14:43] so that's not really a good short
+[00:14:45] because you're too close to support it
+[00:14:46] ends up grinding a little higher pulling
+[00:14:48] back coming up again pulling back a
+[00:14:50] little bit more selling off and then
+[00:14:52] doing this uh red to Green move so we
+[00:14:55] get the red to Green move and all of a
+[00:14:57] sudden from here it's back to the top of
+[00:14:58] the the Binger bands top of the Binger
+[00:15:00] band a short-term reversal here back
+[00:15:03] down to the nine moving average sideways
+[00:15:06] sideways and then a spike back up
+[00:15:08] sideways sideways and now it starts to
+[00:15:10] really punch higher little micro pull
+[00:15:13] back it pushes even higher even higher
+[00:15:15] now we're up outside the Binger bands
+[00:15:17] and this gives way to a bigger reversal
+[00:15:19] right here coming back down support at
+[00:15:22] the N9 moving average then support down
+[00:15:25] here around the 20 all right so you know
+[00:15:29] this is the um these these are a couple
+[00:15:31] examples of reversals where we were
+[00:15:35] looking at the move to the top side um
+[00:15:38] smci this is one that gave us a move uh
+[00:15:41] to the downside so let's look at this
+[00:15:43] one for a
+[00:15:44] second okay so this is an after hour
+[00:15:47] selloff here so first you have this
+[00:15:51] massive moment of volatility way above
+[00:15:54] the top of the Binger bands right here
+[00:15:56] the price squeezes up way above it and
+[00:15:59] then a rapid reversal all the way to the
+[00:16:01] bottom outside the Ballinger band and a
+[00:16:04] retracement back up so it's like these
+[00:16:07] these Ballinger bands think of them as
+[00:16:09] rubber bands and when they're really
+[00:16:11] stretched out when the price is at those
+[00:16:13] extremes it's increasing the probability
+[00:16:15] that we're going to have to snap back
+[00:16:17] and when we snap back our Target is
+[00:16:20] volume weighted average price but
+[00:16:22] naturally because we've got a couple of
+[00:16:24] other indicators coming up to us in the
+[00:16:26] way we first look at the nine the the 20
+[00:16:29] and then we look at the vwap so I'm
+[00:16:32] going to get my drawing tools out
+[00:16:35] here so we've got the Binger bands right
+[00:16:39] here we've got the volume weight average
+[00:16:42] price somewhere in the middle usually
+[00:16:44] something like that we've got if the
+[00:16:48] price is up on the on the upper side
+[00:16:49] we've got um the nine moving average up
+[00:16:52] here and then we would have the 20 right
+[00:16:56] in here just for instance so when the
+[00:16:59] price is up here our first Target when
+[00:17:02] we're getting a reversal would be
+[00:17:05] support at the nine then support at the
+[00:17:08] 20 and then support at volume weight
+[00:17:10] average price if we were trading
+[00:17:13] below so let's
+[00:17:16] see so this isn't going to be exactly
+[00:17:18] perfect but we'll just do it anyways so
+[00:17:20] if we were below like this the price was
+[00:17:24] down here we'd been selling off so we
+[00:17:26] had a candle where we dipped below the
+[00:17:28] bottom then we're looking for that
+[00:17:30] bounce back up here first level of
+[00:17:32] support at the nine second or resistance
+[00:17:35] second level of resistance at the 20 and
+[00:17:37] then ultimate Target back to vwap and
+[00:17:40] vwap right here that's when the rubber
+[00:17:42] band is basically slack that's when
+[00:17:44] you're back to the equilibrium point for
+[00:17:47] the day so here on smci we end up um
+[00:17:51] seeing the price come back to
+[00:17:54] equilibrium and then roll over again and
+[00:17:56] it starts to go lower and it goes lower
+[00:17:58] lower and lower and you see these dois
+[00:18:01] this type of dogee here down there that
+[00:18:04] is like a classic reversal indicator
+[00:18:07] classic reversal indicator dogee at the
+[00:18:10] extension of the move because what this
+[00:18:12] is communicating the dogee candle is
+[00:18:15] communicating the battle between buyers
+[00:18:17] and sellers right the price
+[00:18:21] opens it spikes up it dips down and then
+[00:18:25] it bounces back and closes like that so
+[00:18:27] it's a tug-of-war and when you have this
+[00:18:29] in the context of just having had a long
+[00:18:32] period of selling off this there was
+[00:18:35] very clear Market sentiment it was weak
+[00:18:38] a ton of weakness now right here it's
+[00:18:41] showing a sign of strength the fact that
+[00:18:44] there was enough strength for it to
+[00:18:46] Rally off the low and come back up here
+[00:18:49] and even to bounce up here this is
+[00:18:52] showing that some strength is coming
+[00:18:53] into this candle so
+[00:18:56] dogee is a candle of indecis
+[00:18:59] when you have a dogee candle that occurs
+[00:19:02] when the price is outside of the Binger
+[00:19:04] bands that is amplifying the likelihood
+[00:19:08] that we're going to see this reversal
+[00:19:10] and the reversal is of course we're
+[00:19:12] going to come back to the 9 the 20 and
+[00:19:13] the VF now increasing the likelihood of
+[00:19:16] the reversal is when we're extended off
+[00:19:19] our 9 EMA and when the macd is closed or
+[00:19:24] closing either one closed or closing is
+[00:19:27] going to increase the likelihood of that
+[00:19:29] reversal back in now in my day-to-day
+[00:19:33] trading I have gotten to a point where I
+[00:19:36] can pretty well visualize whether or not
+[00:19:39] the price is outside the Binger bands
+[00:19:42] without actually having them plotted on
+[00:19:44] my chart because I can just recognize
+[00:19:47] that the stock is extended so when I see
+[00:19:50] an extended chart I see that we've got
+[00:19:52] this like really big move we're really
+[00:19:53] stretched out I'm already thinking the
+[00:19:56] prices outside the Binger bands without
+[00:19:58] needing it on there now getting to the
+[00:20:01] point where you can visualize that
+[00:20:04] without having the indicator it's going
+[00:20:06] to take some time and similarly if we
+[00:20:08] look at cmtx um or sorry it was um ctmx
+[00:20:13] if we look back at ctmx traders who have
+[00:20:16] been in the market for a long time will
+[00:20:18] get see there we go it's starting to
+[00:20:19] pull away traders who have been in the
+[00:20:21] market for a long time will start to
+[00:20:23] recognize a pivot like this one here at
+[00:20:25] 522 and you may not need to draw it
+[00:20:28] because you just are able to visualize
+[00:20:30] oh it's right there so that's going to
+[00:20:32] be an issue we're going to run into that
+[00:20:34] but as a beginner Trader it's a great
+[00:20:36] idea to draw these trend lines because
+[00:20:38] they're going to help you just better
+[00:20:39] visualize the price action and better
+[00:20:41] understand areas where we might see
+[00:20:43] possible levels of resistance so you
+[00:20:46] know if that's one maybe you know
+[00:20:48] something like that something in that
+[00:20:50] area so then as this moves forward you
+[00:20:53] would say all right well when it comes
+[00:20:54] back down here I'm going to look for
+[00:20:56] this bounce off this ascending support
+[00:20:58] line
+[00:20:59] so the more experience you have the more
+[00:21:02] second nature it becomes to be able to
+[00:21:05] visualize and predict when the price is
+[00:21:06] outside the Ballinger bands and actually
+[00:21:08] the um just as it it broke there we got
+[00:21:11] up outside the Ballinger bands and then
+[00:21:13] again because of this issue with this
+[00:21:16] resistance here at
+[00:21:17] 522 and the time of the day you know the
+[00:21:20] volume on this candle right here is a
+[00:21:22] fraction of the volume we saw earlier in
+[00:21:24] the day so if we're really going to make
+[00:21:26] it all the way back up to this level
+[00:21:29] presumably we would need more or less
+[00:21:31] that same amount of volume but that's
+[00:21:33] not likely to happen when you've got 15
+[00:21:36] to 20 minutes to the closing bell right
+[00:21:38] because it's now later in the afternoon
+[00:21:40] so this is a higher likelihood of a
+[00:21:42] false breakout right price is outside
+[00:21:44] the Ballinger bands the volume it's a
+[00:21:47] little a little light and you've got
+[00:21:49] some resistance coming back up here one
+[00:21:51] thing that I would caution is adding too
+[00:21:53] many indicators to your charts because
+[00:21:55] if you had too many indicators you can
+[00:21:57] fall into this pattern of analysis
+[00:21:59] paralysis right your charts just start
+[00:22:01] to get so busy that it's hard to really
+[00:22:05] see um the woods through the trees so to
+[00:22:08] speak and if we go in here um you can
+[00:22:10] see all of these different indicators
+[00:22:13] that you could add and when you start
+[00:22:14] adding a lot of these your charts can
+[00:22:16] get really really messy so when I'm
+[00:22:20] thinking about some of the most
+[00:22:21] essential some of the most valuable
+[00:22:24] indicators these are the ones that I'm
+[00:22:25] thinking about and I'll give you a
+[00:22:27] little list right here so Ballinger
+[00:22:30] bands so we'll say and this isn't in any
+[00:22:33] particular order so Ballinger bands
+[00:22:37] macd RSI relative strength index um
+[00:22:42] EMAs and smas moving averages um so
+[00:22:46] moving averages uh and exponential
+[00:22:48] moving averages and volume weight
+[00:22:50] average price these are these are
+[00:22:52] probably the most essential that you're
+[00:22:54] going to see on most charts now some
+[00:22:57] Traders are going to start searching for
+[00:23:00] the Holy Grail and some of you know
+[00:23:02] exactly what I'm talking about you're
+[00:23:03] searching for an indicator that will
+[00:23:05] give you 100% accuracy so you'll never
+[00:23:07] lose money but let's let's get real
+[00:23:09] trading carries risk and you will have
+[00:23:11] losses even the most successful Traders
+[00:23:14] lose all the time I have over $12
+[00:23:16] million of gross profit and I'm wrong
+[00:23:18] 30% of the almost 32% of the time so you
+[00:23:21] don't have to be right all the time but
+[00:23:23] you have to get good at cutting your
+[00:23:24] losses and you want to make sure that
+[00:23:27] generally speaking your winners are
+[00:23:30] bigger than your losers using techical
+[00:23:32] indicators can help give you an edge
+[00:23:35] because they help you better understand
+[00:23:37] what type of setup is a quality and
+[00:23:40] which ones are like B or C quality so
+[00:23:42] when you're looking at your indicators
+[00:23:44] these help either confirm or sort of
+[00:23:46] deny whether or not the setup is valid
+[00:23:49] so in the case of um ctmx right here it
+[00:23:52] wouldn't have been hard for me to talk
+[00:23:54] myself out of this trade based on the
+[00:23:57] position of these indicators however if
+[00:24:00] you have 25 indicators that you have to
+[00:24:02] review every time before you take a
+[00:24:03] trade you're going to start getting
+[00:24:05] conflicting signals you're going to get
+[00:24:07] analysis paralysis and you may find
+[00:24:09] yourself Talking yourself out of too
+[00:24:12] many trades and missing what could have
+[00:24:13] been some really solid opportunities now
+[00:24:16] if you want to learn more about
+[00:24:17] technical analysis I will put a link
+[00:24:19] down below pinned to the top of the
+[00:24:20] description and in the comments where
+[00:24:22] you can download My ultimate technical
+[00:24:24] analysis PDF it's a document that you
+[00:24:27] can download you can print it out can
+[00:24:28] have it next to your trading station and
+[00:24:30] it's going to walk you through all of
+[00:24:31] the indicators that I like and it's
+[00:24:33] going to break down uh several
+[00:24:34] Candlestick chart patterns that I rely
+[00:24:37] on in my own trading so if you found
+[00:24:39] this episode interesting I hope you hit
+[00:24:40] that thumbs up and I hope you subscribe
+[00:24:42] to the channel for more episodes about
+[00:24:43] trading strategy just like this
+[00:24:49] [Music]

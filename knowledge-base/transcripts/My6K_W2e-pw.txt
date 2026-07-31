@@ -1,0 +1,583 @@
+# How to Day Trade with Robinhood Legend (Platform Demo & Honest Review)
+# https://www.youtube.com/watch?v=My6K_W2e-pw
+# duration_sec: 1302
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to teach
+[00:00:02] you how to day trade using Robin Hood
+[00:00:04] Legend this episode will be a full
+[00:00:06] platform demo where I'll walk you
+[00:00:08] through my settings and how I optimize
+[00:00:10] Robin Hood legend for day trading and at
+[00:00:12] the end of this episode I will give it a
+[00:00:14] Ross score which will determine whether
+[00:00:16] or not I would use this software for
+[00:00:18] real money for the strategy that I trade
+[00:00:20] every single day my name is Ross Cameron
+[00:00:22] I'm a full-time Trader and in case you
+[00:00:24] didn't know I turned a small account
+[00:00:26] with less than $600 into more than $10
+[00:00:28] million of verified and independently
+[00:00:30] audited trading profits I'm not saying
+[00:00:32] that because I want you to assume that
+[00:00:33] my results are typical because they are
+[00:00:35] not but I want you to understand that
+[00:00:36] I've been in the market for a long time
+[00:00:38] in fact I funded my first account in
+[00:00:40] 2001 so I've used so many different
+[00:00:42] platforms I have a really good sense of
+[00:00:44] what I need in trading software in order
+[00:00:48] to extract profit from the market
+[00:00:50] consistently so I'm kind of in a unique
+[00:00:52] position where I can really share some
+[00:00:54] insight as I review these different
+[00:00:56] platforms and and I think share with you
+[00:00:58] whether or not these are really viable
+[00:01:00] for trading the way I like to day trade
+[00:01:02] and I'm of course a momentum Trader so
+[00:01:04] I'm trading things that are moving fast
+[00:01:06] all right so we're looking at Robin Hood
+[00:01:07] Legend right here front and center this
+[00:01:10] is the software and you know what it
+[00:01:11] looks great it's I mean visually look at
+[00:01:14] this it's fantastic you know for those
+[00:01:16] of us for those of you who have tuned
+[00:01:18] into some of my other platform demos
+[00:01:20] just the charts by themselves are really
+[00:01:23] nice I mean some of these platforms that
+[00:01:26] that we've used the charts I mean you
+[00:01:29] can't you can you can hardly move them
+[00:01:30] around this is trade station these
+[00:01:33] charts you know they're they're really
+[00:01:35] basic it's not easy to kind of navigate
+[00:01:39] them Fidelity is even worse I mean you
+[00:01:42] know it it's so Robin Hood has done a
+[00:01:44] good job with the charting but let's
+[00:01:45] take a step back and start at the
+[00:01:47] beginning here so I'm going to pull up a
+[00:01:48] slide deck for Robin Hood all right so
+[00:01:52] your first the first thing that I'll
+[00:01:53] observe with Robin Hood is that the
+[00:01:55] platform is fun when you set up your
+[00:01:58] account you get these you know cool
+[00:02:00] little Graphics instant deposit
+[00:02:02] available so this was kind of cool I
+[00:02:04] funded the account with
+[00:02:06] $26,000 so I could day trade in it right
+[00:02:09] that makes sense you need $225,000
+[00:02:11] minimum because they enforce the pattern
+[00:02:12] day trader rule on margin accounts on a
+[00:02:15] cash account you could put in 500 bucks
+[00:02:17] and you could day trade with it but once
+[00:02:19] you take $500 worth of Trades you've got
+[00:02:22] to wait till all those trades settle
+[00:02:24] which takes place overnight it's called
+[00:02:25] T1 settlement so then you could trade
+[00:02:27] that same amount of money the next day
+[00:02:29] but when you fund your account uh they
+[00:02:31] gave me instant access to up to $5,000
+[00:02:35] which was nice because the a deposit did
+[00:02:38] take almost a week before it settled so
+[00:02:41] I was able to kind of get set up and
+[00:02:43] take a few trades uh with small share
+[00:02:46] size just to sort of test the water so I
+[00:02:47] thought that was nice now when I first
+[00:02:50] got set up here and this is what most
+[00:02:52] people will do I did a link between my
+[00:02:54] bank account for that a transfer you can
+[00:02:57] do direct deposit you could do of course
+[00:03:00] wire transfers there's different ways
+[00:03:02] you could fund your account but for me
+[00:03:04] it was just easier to set up this direct
+[00:03:05] link but even in spite of that it still
+[00:03:07] took a little bit of time to get it
+[00:03:08] going so now the old web platform is
+[00:03:12] kind of interesting H and I'm going to
+[00:03:13] jump out of this here and just show you
+[00:03:15] what that looks like so prior to
+[00:03:17] launching Robin Hood Legend you had sort
+[00:03:19] of two options for trading on Robin Hood
+[00:03:21] the first was to pull up well originally
+[00:03:24] Robin Hood didn't even have um anything
+[00:03:26] on the web it was just a mobile app now
+[00:03:29] I got to look at it with my face so we
+[00:03:32] had the mobile app right here so on the
+[00:03:34] mobile app on Robin Hood this is of
+[00:03:37] course what people have been using for a
+[00:03:38] long time so during you know the
+[00:03:40] GameStop um big move and everything else
+[00:03:42] people were using Robin Hood so and it
+[00:03:44] was on a mobile app so let's just pull
+[00:03:46] up a stock um CDT all right so we're
+[00:03:49] going to pull up CDT Pharmaceuticals
+[00:03:51] this stock right now is up 82% today so
+[00:03:54] if I wanted to trade this and I wanted
+[00:03:56] to really get dialed in I could just
+[00:03:58] click the buy button right here so I
+[00:03:59] click the buy button there I Choose You
+[00:04:01] Know
+[00:04:02] $20 and I could review but I could also
+[00:04:05] change that to buy and shares so I could
+[00:04:07] say I want to buy you know 20 shares
+[00:04:10] whatever review and then just like that
+[00:04:12] boom swipe up to submit you could place
+[00:04:14] an order so the order gets sent right so
+[00:04:18] this is how a lot of people were trading
+[00:04:19] right on uh Robin Hood now if you click
+[00:04:22] this little arrow right here that little
+[00:04:24] arrow is going to bring up the level two
+[00:04:27] which is really nice so on your mobile
+[00:04:29] app you you actually have level two for
+[00:04:31] these you know for the stocks that
+[00:04:33] you're looking at so you can see the bid
+[00:04:34] on the left the ask on the right so the
+[00:04:37] mobile app is is what most people
+[00:04:39] probably use Robin Hood for but um I was
+[00:04:42] specifically asked to do a platform demo
+[00:04:45] of Robin Hood Legend and this is this is
+[00:04:48] not Robin Hood Legend This is Robin Hood
+[00:04:49] the mobile app now by the way as I was
+[00:04:51] editing this video I was thinking that
+[00:04:53] some of you may be interested in
+[00:04:54] learning more about my day trading
+[00:04:57] strategy so I'm going to put a link
+[00:04:58] it'll be pined at the top of the
+[00:04:59] comments and in the top of the
+[00:05:00] description where you can download my
+[00:05:02] small account worksheet it's a PDF
+[00:05:05] that's going to walk you through my
+[00:05:06] process of how I build small accounts
+[00:05:08] beginning with of course Risk Management
+[00:05:10] stock selection my Five Pillars for
+[00:05:12] choosing the strongest stocks to trade
+[00:05:14] each day and then the entry setups that
+[00:05:16] I use in order to minimize my risk while
+[00:05:19] maximizing my upside profit so make sure
+[00:05:21] you guys check out that PDF resource you
+[00:05:23] can implement it in your own trading
+[00:05:25] starting today and I think it'll really
+[00:05:27] help you okay so with that let's get
+[00:05:28] back on to the desktop and start looking
+[00:05:30] at Robin Hood Legend well before we do
+[00:05:33] that let's just look at the website so
+[00:05:34] they essentially mimic the functionality
+[00:05:37] of the mobile app on the website so if
+[00:05:39] we pull up CDT which I'm now holding a
+[00:05:41] 20 share position on um we pull up CDT
+[00:05:44] right
+[00:05:45] here and you could see of course the
+[00:05:48] stock you can go to um Advanced right
+[00:05:52] here you could start to get into the
+[00:05:53] details of it you could pull up the
+[00:05:55] order book right here so that's under
+[00:05:57] level two so you get to add the order
+[00:05:59] book so you can have uh your level two
+[00:06:02] on this you could see the charts you
+[00:06:04] could of course manipulate them change
+[00:06:05] them you don't want to do a line chart
+[00:06:06] you want to switch it to a Candlestick
+[00:06:08] you know you could change all that stuff
+[00:06:09] around as you'd like so this is kind of
+[00:06:12] what most people are using on the
+[00:06:14] computer if they were trying to uh you
+[00:06:18] know trying to day trade uh you know any
+[00:06:20] any ordinary stock and then they
+[00:06:23] launched Robin Hood Legend So This is
+[00:06:25] the Robin Hood Legend uh platform as we
+[00:06:28] sit right now so you could see I've
+[00:06:31] already got my one position of 20 shares
+[00:06:33] so let's say um so I just put the chart
+[00:06:36] front and center just kind of because I
+[00:06:38] thought that was sort of the most
+[00:06:39] intuitive way to set this up um you can
+[00:06:41] see the order that filled right here for
+[00:06:43] CDT you can see my position it's showing
+[00:06:45] I'm holding 20 shares average cost of
+[00:06:48] 284 I'm up7 cents whatever that's the
+[00:06:51] last price that's my p&l open uh one day
+[00:06:55] that's the p&l percentage in one day
+[00:06:57] that's the market value so the first
+[00:06:59] thing that I did when I got logged in
+[00:07:01] here is I was like all right I got to
+[00:07:02] kind of situate and get this sort of
+[00:07:04] organized the way I like it so I started
+[00:07:07] let's see so the first thing I did um
+[00:07:10] let me just oh yeah that's full screen
+[00:07:12] so the first thing I did was I went to
+[00:07:14] add widget and I was like I'm going to
+[00:07:16] want to add my recent order window right
+[00:07:19] so I want my recent orders and where
+[00:07:21] should I put that so I was like I'm
+[00:07:22] going to kind of set this up here maybe
+[00:07:25] I'll put it up here now maybe I'll put
+[00:07:27] it up here so I kind of got that dialed
+[00:07:29] in and I ended up putting my recent
+[00:07:31] orders right over here so they're right
+[00:07:33] there now you could drop drag and drop
+[00:07:35] this although you could see it's it's a
+[00:07:37] little it's it's like a little clunky it
+[00:07:41] doesn't let you drag and drop it's sort
+[00:07:42] of like a grid in a way um which is okay
+[00:07:47] I suppose uh I'm going to be a little
+[00:07:50] nitpicky here but to me it's it's kind
+[00:07:54] of it's almost like Tetris it's like
+[00:07:56] this is like sort of silly uh the way
+[00:07:58] you sort of move this around so if I was
+[00:08:00] going to give a critique of sort of how
+[00:08:02] to navigate this platform in this way I
+[00:08:05] I would say personally Weeble is much
+[00:08:07] easier to navigate you could click and
+[00:08:09] drag the window and then you can say I
+[00:08:12] want it right here and I want to tab it
+[00:08:13] or I want it here or here or here or
+[00:08:16] here this functionality is great um so
+[00:08:19] or you could WR have it pop out entirely
+[00:08:21] so I I prefer the Weeble platform for
+[00:08:24] that ux of the way you can move Windows
+[00:08:27] around but um but anyways that they
+[00:08:30] it'll probably get better in time so and
+[00:08:33] and then you see sort of the way you
+[00:08:34] sort of have to adjust these like it's
+[00:08:35] just kind of a little bit bizar now you
+[00:08:39] can customize your columns so you can
+[00:08:41] say you know what I don't need to see
+[00:08:42] the bid in the ask so I took those ones
+[00:08:44] off there's some others that I took off
+[00:08:46] uh but you could add columns if they
+[00:08:47] were specifically relevant for you if
+[00:08:49] you're trading options and you need to
+[00:08:51] see the strike price or whatever you
+[00:08:52] could do that so could take off the mark
+[00:08:55] could take off the last um I don't
+[00:08:57] really need to see market value
+[00:08:59] personally I don't need to see the
+[00:09:01] percentage um this is this is usually
+[00:09:04] just pretty much the way I do it um so
+[00:09:07] open p&l and then usually I have another
+[00:09:11] line for closed p&l so uh so let's just
+[00:09:16] so we'll leave that right now just for
+[00:09:18] the time being and let me just show you
+[00:09:21] a couple different things so this is how
+[00:09:23] I usually have my platform set up is
+[00:09:25] that I have my positions window in the
+[00:09:26] top left corner so this is kind of what
+[00:09:28] my ey naturally is gravitating towards
+[00:09:31] is all right got to check my position
+[00:09:33] this is where I look so top left corner
+[00:09:35] so I kind of make it a little bit
+[00:09:36] smaller so I can just sort see what I
+[00:09:37] need now this is my this is my software
+[00:09:40] right here that I use uh on a day-to-day
+[00:09:42] basis for my primary account so
+[00:09:44] positions window top Corner symbol
+[00:09:47] position size average cost open p&l and
+[00:09:50] then closed p&l now the closed p&l is
+[00:09:53] helpful because I have zero position on
+[00:09:54] these stocks right now but I like to be
+[00:09:56] able to see you know of course how much
+[00:09:58] I made on them then I have active orders
+[00:10:00] and then recent orders and then we have
+[00:10:02] my level two windows and then for me I
+[00:10:05] use charting um I actually don't use
+[00:10:07] charting in my broker because although
+[00:10:09] my broker is great for order execution
+[00:10:11] the charts aren't that good so I use day
+[00:10:13] trade Dash right here for scanning and
+[00:10:16] charting right so this is day trade Dash
+[00:10:18] so I use this for all my scanning and
+[00:10:20] all my charting and I this is this is a
+[00:10:22] good workflow for me all right so back
+[00:10:26] on Robin Hood Legend as I was kind of
+[00:10:28] setting this platform up I was like all
+[00:10:30] right so first things first we're going
+[00:10:32] to put our positions here then we put
+[00:10:35] our recent uh orders here and usually I
+[00:10:38] kind of move this to be about the same
+[00:10:39] size so quantity and price good cryptos
+[00:10:42] to watch don't need that but um you
+[00:10:46] don't have it doesn't have to be cryptos
+[00:10:47] you could just change to um stocks you
+[00:10:50] know Ross's watch list like
+[00:10:55] that all right um so go like that and
+[00:10:58] then you could add a symbol and say CDT
+[00:11:00] we'll watch that one and tnxp this is
+[00:11:03] another one that was up a bit today uh
+[00:11:05] we'll just and then that's fine we'll
+[00:11:07] just leave it at that for now so you can
+[00:11:09] have a couple stocks on watching all
+[00:11:10] right so then the buying power I could
+[00:11:12] just kind of leave that down here for
+[00:11:14] right now I don't really I probably
+[00:11:16] don't I don't need that on a day-to-day
+[00:11:18] basis and then the charts usually I put
+[00:11:20] if I'm going to have it in the top
+[00:11:21] Corner kind of like this so make that a
+[00:11:24] little bit smaller and like I said the
+[00:11:26] charts are are great um you've got 1
+[00:11:29] minute time frames but you can also go
+[00:11:31] down to a 30- second chart so you can
+[00:11:32] have fast time frames which is great you
+[00:11:34] you get that at um Weeble as well and
+[00:11:37] we'll do I will pull up a broker
+[00:11:39] comparison sheet right here by the way
+[00:11:42] where we're going to really rank um you
+[00:11:44] know these platforms I'm going to kind
+[00:11:45] of go over their different features so
+[00:11:47] I'll go over that more in in a moment um
+[00:11:50] but the biggest issue right now is that
+[00:11:52] as of today if you go to add widget
+[00:11:56] you've got watch list chart positions
+[00:11:58] account summary options chain recent
+[00:12:00] orders that's it you only have six
+[00:12:03] widgets we don't have a news feed
+[00:12:05] there's no news you don't have level two
+[00:12:08] there's no Market depth now at first I
+[00:12:10] was like there there's got to be Market
+[00:12:12] depth how how could there not be right
+[00:12:14] is it maybe it's just you have to add it
+[00:12:16] here as an indicator right kind of so
+[00:12:19] I'm like order book nope level level two
+[00:12:22] nope Market depth no so it's not on the
+[00:12:25] level two see the reason I thought maybe
+[00:12:27] it would be is because um on their web
+[00:12:30] platform you get to level two by sort of
+[00:12:32] being on the chart and then clicking
+[00:12:34] Advanced um but it unfortunately right
+[00:12:37] now they have not yet added level two a
+[00:12:40] level two window to Robin Hood
+[00:12:44] Legend okay so that's a major problem
+[00:12:49] because I need level two data I need it
+[00:12:52] to be able to trade so that's that
+[00:12:56] that's our first major issue all right
+[00:12:58] so we don't level two data so then all
+[00:13:00] right so now we're just working off of a
+[00:13:02] chart so we've got a chart here so we'll
+[00:13:04] just go like this for now um this will
+[00:13:06] just put down here for now I mean
+[00:13:08] whatever so at this point this is
+[00:13:11] becoming less of a platform for day
+[00:13:13] trading and more of a platform for just
+[00:13:15] quickly obser observing the positions
+[00:13:18] that you might be holding uh so now I
+[00:13:21] say well I want to get out of this
+[00:13:22] position so what do I
+[00:13:24] do I could click on this right here
+[00:13:27] right so I could set a limit order let's
+[00:13:29] see um
+[00:13:31] limit and I could say
+[00:13:33] sell right so if I want to get out I
+[00:13:35] could click sell right here um or if I
+[00:13:38] want to add how do I add I click the buy
+[00:13:40] button right here and then I could buy
+[00:13:42] you know 100 more shares or 10 more
+[00:13:44] shares doesn't matter so you can see the
+[00:13:47] order goes through there see how it's
+[00:13:50] working so right now that order is
+[00:13:52] working the price just popped up just a
+[00:13:54] little bit so we're going to have to
+[00:13:55] cancel the order we're going to buy
+[00:13:57] again and this time instead of a limit
+[00:13:58] order I'm going to do a market order so
+[00:14:00] it's faster so let's see how fast the
+[00:14:02] execution
+[00:14:04] is pretty instant that went from uh 20
+[00:14:08] to 30 pretty fast let's do it again
+[00:14:11] Market
+[00:14:14] 10 pretty fast let's let's go ahead and
+[00:14:17] just let's just up this let's just do
+[00:14:20] 2500 shares this is going to cost this
+[00:14:22] might cost me a little bit of money but
+[00:14:23] I'll do
+[00:14:25] it pretty fast right so now let's go and
+[00:14:30] sell the full position but now we got to
+[00:14:32] type in every time we do this we're
+[00:14:33] having to type in the position size 2500
+[00:14:36] shares so now let's go market and let's
+[00:14:39] click
+[00:14:40] sell so I'm all out and how much am I up
+[00:14:44] or down on the
+[00:14:45] day well I can look down here and see
+[00:14:47] I'm down $79 but my position is not
+[00:14:50] showing because I've now closed my
+[00:14:52] position so you know for me um usually
+[00:14:57] platforms will give you a chance to
+[00:14:59] select filter to show zero positions
+[00:15:03] that's what um we typically would expect
+[00:15:06] and so unfortunately that type of
+[00:15:08] functionality does not appear to
+[00:15:10] currently exist so now we're sort of
+[00:15:13] stuck with the fact that um we just um
+[00:15:18] we have to sort of guess how much we're
+[00:15:19] up or down on any particular stock now
+[00:15:22] if we pull up our broker comparison
+[00:15:24] sheet here um we're going to start
+[00:15:27] getting into it so this is Robin Hood
+[00:15:30] right here so currently level two data
+[00:15:33] is not available on Robin Hood Legend
+[00:15:35] I'm sure it's going to come soon I mean
+[00:15:38] how could it not but it's not there yet
+[00:15:40] they also don't have hot Keys there's no
+[00:15:43] hot Keys there's so as a res of course
+[00:15:45] there's no hockey offsets there's no
+[00:15:47] position selling by percentage of
+[00:15:49] position there's no halt levels there's
+[00:15:51] no resumption quotes well you don't have
+[00:15:52] level two we also don't have a news feed
+[00:15:55] I didn't even add this on here because
+[00:15:57] everyone else has a news feed
+[00:16:00] but they don't have a Newsfeed so the
+[00:16:02] desktop experience is poor very limited
+[00:16:04] features so would I use this with real
+[00:16:06] money Robin Hood Legend right now gets
+[00:16:08] the lowest score of any platform that
+[00:16:09] I've demoed it is not something that I
+[00:16:12] could use for day trading it would
+[00:16:14] simply not be possible this was
+[00:16:16] something that was you guys requested I
+[00:16:19] do this platform demo and so it's a
+[00:16:21] pretty short one there's not a lot to
+[00:16:22] say there's no level two there's no hot
+[00:16:24] Keys you can't move in and out of
+[00:16:26] positions quickly they don't publish
+[00:16:28] their execution speed it's not I mean we
+[00:16:31] just saw those trades is it the slowest
+[00:16:33] we've ever seen no probably not but is
+[00:16:36] it the fastest either no probably not
+[00:16:38] I'll just do a quick U demo here um I'm
+[00:16:41] going to just jump into this here boom
+[00:16:43] boom just like that do you see how fast
+[00:16:46] you you you blink and you missed it
+[00:16:48] that's how fast I just lost 50 bucks but
+[00:16:50] you could jump in and out of the market
+[00:16:52] that fast instant executions I'll do it
+[00:16:54] one more time so that was a little slow
+[00:16:58] you know what I don't know actually so
+[00:17:00] that was a little bit slow that was a
+[00:17:01] little bit slow which is unusual I'll do
+[00:17:02] it one more time just so so you can see
+[00:17:04] all right so boom 5,000 shares now
+[00:17:06] there's a buyer there I'm going to go
+[00:17:08] contrl Z out the whole thing gone
+[00:17:11] instant it's just so fast and that's
+[00:17:15] what I need so I need software for my
+[00:17:18] strategy where when I see a stock moving
+[00:17:20] I can get in quickly so I about a year
+[00:17:23] ago did a challenge it was uh me versus
+[00:17:27] one of my students and uh he was using
+[00:17:29] thinker swim and I was using my software
+[00:17:31] and we just set a challenge to see how
+[00:17:33] we could do during the course of a month
+[00:17:35] and what was really interesting was that
+[00:17:37] the stock that had breaking news that
+[00:17:40] popped up all of a sudden like 88 a.m.
+[00:17:41] start squeezing up he wasn't able to
+[00:17:44] trade his routing was too slow he
+[00:17:46] wouldn't fill he would just get partial
+[00:17:47] fills on the orders he wouldn't get
+[00:17:49] filled the shares he wanted and then it
+[00:17:51] would just go without him and he didn't
+[00:17:52] want to chase it whereas me because of
+[00:17:54] the software that I'm using I was able
+[00:17:56] to get in quickly and I'll say it's not
+[00:17:58] just the software it's the broker as
+[00:18:01] well so the broker is what of course
+[00:18:03] connects you they're the inter
+[00:18:04] intermediary between you and the market
+[00:18:06] so if the broker is slow in routing your
+[00:18:08] order to the market then you know you
+[00:18:11] might miss a trade and I can't afford to
+[00:18:12] miss trades so for me getting in and out
+[00:18:15] quickly is is key for my strategy so
+[00:18:19] this is the software that I'm using
+[00:18:20] light speed trading and I'll say I don't
+[00:18:22] have any affiliate relationship with
+[00:18:23] them uh or with any of these other
+[00:18:25] Brokers I have no affiliate
+[00:18:27] relationships I don't need an ex ra 50
+[00:18:29] bucks if you guys sign up for an account
+[00:18:31] it doesn't matter to me so I'm just
+[00:18:33] giving you my honest opinion here of
+[00:18:35] whether or not I could use these
+[00:18:36] platforms for the strategy that I'm
+[00:18:38] trading every single day and an
+[00:18:40] additional uh note is that they don't
+[00:18:42] offer paper trading right now at Robin
+[00:18:44] Hood uh which I think is um kind of a
+[00:18:47] bummer because they offer it at so many
+[00:18:49] other places so if I was comparing Robin
+[00:18:51] Hood to any of these other ones they're
+[00:18:53] all better but a real good competitor
+[00:18:56] that is a much better option for my
+[00:18:58] strategy would be Weeble Weeble it's a
+[00:19:00] 7.5 on my score the only downside is
+[00:19:03] that it's not a direct access broker so
+[00:19:05] your execution will not be as fast as
+[00:19:07] the broker that I'm using but it's
+[00:19:09] commission free Charles Schwab using the
+[00:19:12] dash Trader software to have a better
+[00:19:15] front end that's a pretty good
+[00:19:16] experience so you do have a couple of
+[00:19:18] options here that are still commission
+[00:19:20] free and then you start getting another
+[00:19:21] Brokers that charge commission and you
+[00:19:23] get really fast execution but you start
+[00:19:26] paying the fees Interactive Broker
+[00:19:28] unfortunately this is a platform that
+[00:19:30] could be as high as an8 but they enforce
+[00:19:33] rule 144 rule 144 states that uh anyone
+[00:19:39] uh who is an affiliate of a company who
+[00:19:41] sells more than 1% of the outstanding
+[00:19:44] shares of the company or 1% of the
+[00:19:47] average reported weekly volume um would
+[00:19:50] have to file a
+[00:19:52] disclosure and so what interactive
+[00:19:55] brokers does is they air on the side of
+[00:19:56] caution and assume that everyone is an
+[00:20:00] affiliate of the company so if you try
+[00:20:02] to sell more than 1% of the average
+[00:20:04] volume of a stock over a 4-we period
+[00:20:07] they will block you from selling before
+[00:20:09] and you have to go through their
+[00:20:10] compliance department and affirmatively
+[00:20:12] say I'm not an affiliate of this company
+[00:20:15] so the problem with that is that that
+[00:20:16] could take 45 minutes it could take an
+[00:20:18] hour it could take three hours and
+[00:20:20] you're not able to sell your position
+[00:20:22] now of course you're most likely not an
+[00:20:24] affiliate to the company so by the time
+[00:20:25] you finally are able to sell well the
+[00:20:26] stock could be at a very different price
+[00:20:28] and now you've gotten smoked so even
+[00:20:30] though interactive brokers um could be
+[00:20:32] an eight using the DH Trader platform
+[00:20:35] they're they're not viable either so
+[00:20:38] thinker swim ER trade um interactive
+[00:20:41] brokers they've got a couple three
+[00:20:42] different versions I looked at Fidelity
+[00:20:45] Robin Hood and and trade station I
+[00:20:47] haven't done my given them my raw score
+[00:20:48] yet uh but they're they're not bad
+[00:20:50] they're probably going to be um in the
+[00:20:54] range of five uh above five they'll be
+[00:20:58] above a five
+[00:20:59] I I'll just give it a placeholder of a
+[00:21:01] 5.5 for right now it might go a little
+[00:21:03] higher than that um but they're not bad
+[00:21:06] um so so this is where Robin Hood Legend
+[00:21:09] sits all right so if you want to check
+[00:21:11] out a platform that might be a little
+[00:21:13] bit better I will give you a link I'll
+[00:21:16] post it right up here so you can check
+[00:21:17] out my Weeble platform demo which I
+[00:21:19] think you might enjoy or uh my Charles
+[00:21:22] Schwab using the DH Trader platform
+[00:21:25] check out that platform demo right there
+[00:21:26] I think you'd have a better experience
+[00:21:28] with either of those two softwares all
+[00:21:30] right now if you want to learn more
+[00:21:31] about my strategy I trade every single
+[00:21:32] day check out the links in the
+[00:21:34] description and I'll see you for the
+[00:21:35] next upload real soon
+[00:21:38] [Music]

@@ -1,0 +1,432 @@
+# Avoiding the False Breakout & Algo Flush 💣 Beginner Day Trading Strategies 🍏
+# https://www.youtube.com/watch?v=uJy9XIJq1cQ
+# duration_sec: 892
+
+[00:00:00] [Music]
+[00:00:03] what's up everyone all right well today
+[00:00:04] just before i was about to sign off and
+[00:00:06] was finished trading for the day we had
+[00:00:09] pretty epic algo flush and i thought
+[00:00:11] this is a good opportunity to do an
+[00:00:13] episode on how the algo flush works so
+[00:00:16] whether you're a beginner trader or an
+[00:00:18] experienced trader these algo flushes
+[00:00:20] where a stock drops like you know 10
+[00:00:22] in one second
+[00:00:24] it's baffling how does this happen how's
+[00:00:27] the stock with
+[00:00:29] this one's got 34 million shares of
+[00:00:31] volume how does it go from you know
+[00:00:33] trading it in this case eight dollars
+[00:00:35] and 25 cents to just
+[00:00:36] dropping to 740 and halting going down
+[00:00:39] in two seconds how does that how does
+[00:00:41] that
+[00:00:42] happen
+[00:00:43] and so to understand this you have to
+[00:00:45] understand
+[00:00:47] market structure a little bit and you
+[00:00:48] have to understand the mechanics of how
+[00:00:50] our orders are sent to the market the
+[00:00:52] market of course is uh is an island
+[00:00:54] where it's processing all the incoming
+[00:00:56] orders from traders all around the world
+[00:00:59] we also have to understand the role of
+[00:01:00] market makers and high frequency trading
+[00:01:04] algorithms now i already did an episode
+[00:01:08] and this is a longer episode it's like
+[00:01:09] an hour long that was specifically
+[00:01:11] getting into the detail of market
+[00:01:12] structure high frequency trading
+[00:01:14] algorithms dark pools and things like
+[00:01:16] that so if you haven't already checked
+[00:01:17] out that video i encourage you to do
+[00:01:19] that i'll put a link at the end of this
+[00:01:21] video so you can watch that you can
+[00:01:23] watch this video and i think you'll
+[00:01:24] learn quite a bit about this algo flush
+[00:01:27] and then if you want to keep learning
+[00:01:28] more about how these market makers work
+[00:01:31] and some of the tricks they play then
+[00:01:33] you can check out that episode next so
+[00:01:35] that'll be at the end it'll be the next
+[00:01:36] video to watch
+[00:01:37] so
+[00:01:38] what ends up kind of happening here is
+[00:01:42] this is
+[00:01:43] a big part of the algo flush
+[00:01:46] is
+[00:01:47] these high frequency trading algorithms
+[00:01:48] and the market makers so
+[00:01:50] first you sort of have to understand the
+[00:01:52] role of the market maker
+[00:01:55] in the market so
+[00:01:57] when i am wanting to sell a stock you
+[00:02:00] know let's say i'm holding 10 000 shares
+[00:02:01] of a stock
+[00:02:02] the second i press that sell button i
+[00:02:05] get filled
+[00:02:06] right now it may not be the case that
+[00:02:09] there was another trader out there in
+[00:02:11] the world that wanted to buy that same
+[00:02:13] exact stock at the price that i sold at
+[00:02:16] and so who's the intermediary it's a
+[00:02:19] market maker and so the market maker
+[00:02:21] stands at the ready to buy shares from
+[00:02:24] people who are selling and to sell
+[00:02:26] shares to people who are buying and they
+[00:02:28] profit from the spread between the stock
+[00:02:30] now they also carry risk by holding by
+[00:02:33] sort of
+[00:02:34] it's kind of like a um
+[00:02:36] uh arbitrage because they're holding for
+[00:02:38] a very short period of time thinking
+[00:02:40] that okay i'll buy these shares from
+[00:02:43] this guy ross but then i'm going to turn
+[00:02:44] around and resell them a minute later to
+[00:02:47] someone else who wants them or five
+[00:02:48] minutes later or whatever it is so
+[00:02:50] they're just holding for very short
+[00:02:51] periods of time
+[00:02:53] but
+[00:02:53] what if all of a sudden someone starts
+[00:02:56] selling a hundred thousand shares two
+[00:02:58] hundred thousand three hundred thousand
+[00:02:59] a million shares a market maker can't
+[00:03:02] just buy an infinite number of shares if
+[00:03:05] they do that they become massively
+[00:03:07] imbalanced in the risk that they have
+[00:03:10] when they're providing the market for
+[00:03:12] hundreds thousands of different stocks
+[00:03:14] you know they have these risk models
+[00:03:16] that they have to be
+[00:03:17] that they're using to make sure their
+[00:03:19] portfolio doesn't become imbalanced
+[00:03:21] and so they're adjusting their bids and
+[00:03:24] their offers in real time based on
+[00:03:26] what's happening in the market of course
+[00:03:28] they've trained in the old days it was
+[00:03:30] actual market makers and specialists
+[00:03:32] that were sitting at their computers or
+[00:03:34] sitting on the exchange making the
+[00:03:36] market well that's not the case anymore
+[00:03:38] now that's automated to
+[00:03:40] these high frequency trading algorithms
+[00:03:42] that essentially are doing the job uh
+[00:03:44] instead of having a real person doing it
+[00:03:46] in most cases so
+[00:03:48] what ends up happening here is and this
+[00:03:50] was the case with this stock which we'll
+[00:03:51] show you when we sort of get into the
+[00:03:53] the nitty gritty
+[00:03:54] what happened was someone put out a
+[00:03:57] really big cell order okay so that sell
+[00:03:59] order was received and
+[00:04:02] it was processed and now because all
+[00:04:04] these market makers subscribe to these
+[00:04:06] incredibly
+[00:04:08] data rich feeds from the exchanges they
+[00:04:10] see these big sell orders coming through
+[00:04:13] and now they're going to start pulling
+[00:04:15] their offers
+[00:04:16] right because they don't want to
+[00:04:18] oversell the stock right or in this case
+[00:04:21] they're buying so they don't want to
+[00:04:22] overbuy the stock what if what if the
+[00:04:24] stock is you know the company's filed
+[00:04:26] for bankruptcy what if something really
+[00:04:27] bad has happened so part of their risk
+[00:04:29] model is making sure that they don't
+[00:04:31] over buy or oversell they have to
+[00:04:32] maintain a balance on the position
+[00:04:34] ultimately the best market maker is
+[00:04:36] going to be able to buy and sell the
+[00:04:38] same number of shares in one day let's
+[00:04:40] say it's a million shares and they
+[00:04:42] profit from the spread
+[00:04:43] so you know 10 000 shares a penny is 100
+[00:04:46] bucks a hundred thousand shares of
+[00:04:48] pennies a thousand bucks a million
+[00:04:50] shares a penny is uh
+[00:04:53] what is ten thousand dollars right it
+[00:04:54] just keeps going up so
+[00:04:56] you know this this is where
+[00:04:59] that's their goal
+[00:05:00] but that means the algo that they've
+[00:05:03] employed needs to respond when there's
+[00:05:05] sudden surges in demand or in supply
+[00:05:08] and so in this case all of a sudden this
+[00:05:10] big sell order comes in and so it gets
+[00:05:12] filled probably with some slippage and
+[00:05:14] then the person sends another order that
+[00:05:17] was even bigger and now the market
+[00:05:19] makers have already started to pull
+[00:05:20] their offers so pulling start pulling
+[00:05:22] the bids and then that order gets filled
+[00:05:25] even lower and now what starts to happen
+[00:05:28] is this runaway cycle now you've got
+[00:05:30] panic selling now you've got some stop
+[00:05:32] orders they're firing you've got some
+[00:05:33] traders who are like whoa
+[00:05:35] did this thing just drop 40 cents and
+[00:05:37] then that sort of triggers this
+[00:05:38] immediate panic cell that goes right
+[00:05:40] into the hull
+[00:05:41] and now in this case because there was
+[00:05:43] no actual news associated with it it was
+[00:05:45] just this algo flush it's ended up
+[00:05:47] rallying back up to pretty much where it
+[00:05:49] was before the flush
+[00:05:51] so we're going to get into it in a bit
+[00:05:53] more detail i'm going to show you the
+[00:05:54] chart and if you're interested in market
+[00:05:57] structure and you want to learn a little
+[00:05:58] bit more about how market makers work
+[00:06:00] how these high frequency trading
+[00:06:01] algorithms work then make sure you check
+[00:06:03] out the episode at the end of this video
+[00:06:05] i think you'll get a lot out of it
+[00:06:06] alright so i hope you enjoy and i'll see
+[00:06:08] you for the next episode
+[00:06:14] [Music]
+[00:06:25] all right so let's jump in and look at
+[00:06:26] this i'll go flush so pev this is a
+[00:06:29] stock that
+[00:06:31] is up 33
+[00:06:33] it's actually not up a whole lot but
+[00:06:35] um it had a nice move yesterday and was
+[00:06:39] very volatile yesterday and it actually
+[00:06:41] had a couple of these moves yesterday
+[00:06:43] but we just had one that i want to kind
+[00:06:45] of highlight so
+[00:06:46] the algo flush it's when basically the
+[00:06:49] stock is trading and all of a sudden it
+[00:06:51] feels like the bid disappears and
+[00:06:55] you get this flush and all of a sudden
+[00:06:57] all these stop borders are firing and
+[00:06:59] then they're hitting the bid and it sort
+[00:07:00] of is this um
+[00:07:02] it's it's like self-fulfilling
+[00:07:05] accelerating sell-off and then into a
+[00:07:08] circuit breaker halt if there weren't
+[00:07:10] circuit breaker halts
+[00:07:12] this could keep accelerating but the
+[00:07:13] circuit breaker halt stops it when it
+[00:07:15] drops more than 10
+[00:07:17] within a period of five minutes
+[00:07:20] so pv
+[00:07:22] you know was started trading
+[00:07:24] fine today i mean a little choppy in a
+[00:07:26] couple spots there's a red candle here
+[00:07:28] red candle here but generally was pretty
+[00:07:29] good it squeezes up to about 8.50 is
+[00:07:32] pulling back consolidating nothing
+[00:07:34] really on the one minute super alarming
+[00:07:36] i mean yes it did have a false breakout
+[00:07:39] right here well kind of just a double
+[00:07:41] top you know it tried to break this
+[00:07:42] level couldn't break it so you've got a
+[00:07:44] double top
+[00:07:46] sort of higher red volume
+[00:07:48] you know but again nothing nothing
+[00:07:50] super super crazy
+[00:07:52] and then all of a sudden it drops right
+[00:07:55] here in a one minute candle from 8 28 to
+[00:07:58] 7 40. boom halts down that's a one
+[00:08:01] minute candle so now let's zoom in on
+[00:08:03] that one minute candle
+[00:08:05] on this time frame right here we can
+[00:08:07] look at a 10 second chart
+[00:08:09] so on a 10 second chart
+[00:08:11] basically it's like this thing just
+[00:08:13] instantly dropped right there
+[00:08:15] let's zoom it in one more time five
+[00:08:18] second chart
+[00:08:19] so on a five second chart wow that
+[00:08:21] basically was like one candle let's look
+[00:08:24] at this on a one second chart
+[00:08:27] on a one second chart
+[00:08:29] what you're going to see is that
+[00:08:31] basically this thing
+[00:08:33] just
+[00:08:35] instantly dropped to eight
+[00:08:38] first
+[00:08:39] and then
+[00:08:41] it went all the way to 747.
+[00:08:44] it held there for a second
+[00:08:46] and then it dropped lower
+[00:08:49] so how does something like that happen
+[00:08:51] you know this stock was trading at 8.25
+[00:08:53] i mean what's the deal
+[00:08:55] and
+[00:08:56] over on um
+[00:08:58] of course when you're watching a stock
+[00:09:00] trade you you could see the the orders
+[00:09:02] going through you can see the prints
+[00:09:04] going through and
+[00:09:05] one of the things that
+[00:09:07] some traders will do is they'll and you
+[00:09:09] can do this on
+[00:09:12] think or swim
+[00:09:13] very easily you can filter the level two
+[00:09:17] to show or filter the time and sales to
+[00:09:19] just show you orders over a certain
+[00:09:23] share size and so
+[00:09:25] i'm going to show you this here and this
+[00:09:26] is
+[00:09:27] small but we'll make it a little bit
+[00:09:30] bigger
+[00:09:30] so this shows you oops
+[00:09:33] sorry
+[00:09:34] um where do we go
+[00:09:37] there we go sorry
+[00:09:39] this shows you we'll zoom it back in
+[00:09:43] this is right in this candle and so what
+[00:09:45] you see here and i'll just move this out
+[00:09:47] of the way because it's distracting
+[00:09:49] is
+[00:09:51] um
+[00:09:52] you know there's a there's a buy order
+[00:09:54] of seven thousand shares whatever and
+[00:09:56] then all of a sudden there's a thirty
+[00:09:58] thousand share sell order at eight dolla
+[00:10:01] it fills at eight ten
+[00:10:03] so think about that for a second the
+[00:10:04] order fills at 8 10 which most likely
+[00:10:08] means
+[00:10:09] that
+[00:10:10] someone
+[00:10:11] pressed the sell button for 30
+[00:10:15] 141 shares when it was trading at around
+[00:10:18] 8.25
+[00:10:20] and what do we know about the way market
+[00:10:22] makers and ecn's how their high
+[00:10:24] frequency trading algorithms the way the
+[00:10:26] algorithms match orders what do they do
+[00:10:28] when they see those big orders come in
+[00:10:31] now if you've watched the video on the
+[00:10:33] truth about high frequency trading
+[00:10:34] algorithms and market makers you already
+[00:10:36] know all the details of this but to
+[00:10:39] summarize
+[00:10:40] what happens is that order is received
+[00:10:44] it starts to fill
+[00:10:45] and then all of a sudden you're going to
+[00:10:47] see the bids
+[00:10:48] start to get pulled
+[00:10:50] and i mean you would have to slow this
+[00:10:52] down to like the nanosecond it happens
+[00:10:55] so fast the bids start to get pulled
+[00:10:58] order receives slippage
+[00:11:00] then a second order is executed for 38
+[00:11:04] 925 shares at 801 a second big block
+[00:11:07] order and it's those big block orders
+[00:11:09] like that that all of a sudden now the
+[00:11:11] market maker's moving out of the way
+[00:11:13] again
+[00:11:14] and now as it's moving out
+[00:11:16] flush and that becomes that accelerating
+[00:11:19] self-fulfilling prophecy so
+[00:11:22] this is all around
+[00:11:24] how
+[00:11:26] i mean this is this is i mean this gets
+[00:11:28] into the topic of how
+[00:11:30] computers
+[00:11:31] ultimately are kind of governing the
+[00:11:33] price of stocks
+[00:11:35] yes individual traders we're adding
+[00:11:37] liquidity to the market we're coming in
+[00:11:39] we're pressing the buy button we're
+[00:11:40] pressing the sell button and then
+[00:11:42] there's everything behind the scenes
+[00:11:44] that's matching those orders so all of
+[00:11:47] that order matching and when you and
+[00:11:49] what you know is that market makers
+[00:11:51] provide liquidity they sit on both the
+[00:11:53] bid and the offer so when you have
+[00:11:56] someone that comes in and hits the bid
+[00:11:58] with a really big order the market maker
+[00:12:00] algo
+[00:12:01] doesn't know
+[00:12:03] you know it cannot just absorb a million
+[00:12:06] shares if someone just tries to sell a
+[00:12:08] million shares on the bid
+[00:12:10] right they can't just buy
+[00:12:12] an infinite number of shares so they are
+[00:12:14] responding by moving their bids and
+[00:12:17] moving their offers
+[00:12:19] based on current market based on the way
+[00:12:21] their algo works and so when you have
+[00:12:23] this moment where all of a sudden
+[00:12:25] there's a influx of selling you get the
+[00:12:27] algo flush and so we call it this algo
+[00:12:30] flush i mean these are actual real
+[00:12:31] orders that are going through
+[00:12:33] but it's um
+[00:12:35] it's it's sort of fueled by the way the
+[00:12:37] algo responds to these orders where you
+[00:12:40] get this rug pull effect and then you
+[00:12:42] have stop orders that are firing right
+[00:12:44] stop orders fire they hit at market
+[00:12:47] price as market orders and then that
+[00:12:49] fuels it even more and the reason we
+[00:12:51] need these circuit breaker halts is to
+[00:12:53] prevent flash crashes because otherwise
+[00:12:55] we would see just the
+[00:12:58] the snowballing accelerate so on a stock
+[00:13:01] like this it instantly drops you know 10
+[00:13:03] percent
+[00:13:04] and then that kind of stops the algo it
+[00:13:06] stops everything now the stocks halted
+[00:13:09] for five minutes all right so during
+[00:13:11] that time traders get a chance to kind
+[00:13:12] of catch their bearings
+[00:13:14] and then that's when some traders say
+[00:13:16] well wait a second that was overdone and
+[00:13:18] they come in they buy the dip and then
+[00:13:20] you get that you know sometimes you get
+[00:13:22] the rally back up now if it had actual
+[00:13:25] news that something terrible you know i
+[00:13:27] don't know an offering or something was
+[00:13:28] happening then it would probably
+[00:13:30] continue lower and we would say that it
+[00:13:33] was most likely an algo that received a
+[00:13:37] high frequency trading algorithm that
+[00:13:39] received the breaking news first and
+[00:13:42] that was what created and began the
+[00:13:45] sell-off but in this case it may have
+[00:13:48] very likely been
+[00:13:50] a couple of really big orders now you
+[00:13:52] know these are these are for 30 40 000
+[00:13:54] shareholders these are big orders that
+[00:13:55] are going through
+[00:13:57] and then you know a couple more go
+[00:13:58] through here
+[00:13:59] it's not
+[00:14:00] it's not clear
+[00:14:02] that those are necessarily related to
+[00:14:04] the same order but um those might just
+[00:14:07] be other other traders that hit the bid
+[00:14:09] so
+[00:14:10] you know i don't want to
+[00:14:12] i'm not going to go into all the details
+[00:14:14] of high frequency trading algorithms and
+[00:14:15] market makers if you guys are really
+[00:14:17] interested in that you want to learn
+[00:14:18] more about that you want to learn more
+[00:14:20] about dark pool routing then you know
+[00:14:22] check out the other video i did on it i
+[00:14:23] think you'll really enjoy it so um i'll
+[00:14:26] i'll put the link up here in the top
+[00:14:28] corner check out that video the truth on
+[00:14:29] market makers and high frequency trading
+[00:14:31] algorithms this is a good example you
+[00:14:33] got the algo flush and you can also get
+[00:14:35] algo spikes it goes both ways so
+[00:14:37] learning how to sort of read the algo
+[00:14:40] and understand how it works
+[00:14:42] i think is very helpful if you know
+[00:14:44] you're trying to trade actively in these
+[00:14:46] markets all right so that's it for me
+[00:14:48] check out that video and i'll see you
+[00:14:49] guys first thing tomorrow morning

@@ -1,0 +1,419 @@
+# The Ultimate SCALP TRADING Indicator for Active Traders
+# https://www.youtube.com/watch?v=DywXmtXsG1Q
+# duration_sec: 972
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to walk you
+[00:00:03] through how to use the stochastic
+[00:00:04] oscillator in your trading now this is
+[00:00:06] an oscillator that's range bound it goes
+[00:00:08] between 0 and 100 like RSI it can never
+[00:00:11] actually go outside that range it is an
+[00:00:14] indicator that's used to help predict
+[00:00:17] when the price is going to begin to move
+[00:00:19] it's calculated using the closing price
+[00:00:23] of the last 14 periods and as the
+[00:00:26] closing prices are slowly moving up
+[00:00:28] that's going to bump the St Astic higher
+[00:00:31] so if you have a chart for instance
+[00:00:32] where the price isn't necessarily moving
+[00:00:35] higher but the close is just kind of
+[00:00:37] like inching just slightly higher and
+[00:00:39] the lows are not as low that by itself
+[00:00:43] will help push that stochastic indicator
+[00:00:46] up and it's going to be a precursor a a
+[00:00:48] leading indicator that's going to show
+[00:00:51] when the price is potentially going to
+[00:00:53] begin to break out now most indicators
+[00:00:56] are lagging behind price action but
+[00:00:59] invented in the 19 1950s the stochastic
+[00:01:01] oscillator is specifically designed to
+[00:01:03] predict when the price is about to break
+[00:01:06] out so let's go ahead and jump on the
+[00:01:08] chart now because this was invented in
+[00:01:10] the 1950s it has been around for over 75
+[00:01:14] years nearly which is pretty incredible
+[00:01:17] when you think about it uh back then
+[00:01:19] they certainly weren't using uh
+[00:01:21] computers like this to plot the
+[00:01:23] stochastic indicator so what you see on
+[00:01:25] my charts here is what I'm typically
+[00:01:27] using for trading I have my Candlestick
+[00:01:29] chart I've got my volume Pro my volume
+[00:01:32] uh bars down here I've got the macd the
+[00:01:35] moving average convergence Divergence
+[00:01:37] indicator and up here I have a select
+[00:01:39] handful of moving averages the 9 EMA the
+[00:01:42] 20 EMA the 200 EMA and the volume
+[00:01:46] weighted average price so I generally
+[00:01:48] keep my indicators very simple when it
+[00:01:50] comes to trading in fact I would say if
+[00:01:53] I was going to list the top four I would
+[00:01:55] say moving averages so I'll just say Mas
+[00:01:58] um certainly volume bars uh
+[00:02:02] macd and then vwap uh these would be my
+[00:02:05] top four now in my years of trading
+[00:02:08] early on I did use uh stochastics but I
+[00:02:12] honestly uh early in my career I didn't
+[00:02:14] find them super helpful and I think
+[00:02:16] you're going to understand why when I
+[00:02:17] pop them on my chart so we're going to
+[00:02:19] back this out I'm going to go to my
+[00:02:21] indicators I'm going to type in
+[00:02:22] stochastic and um you'll see right here
+[00:02:25] it's now plotted on the chart right down
+[00:02:27] in this bottom panel what you might
+[00:02:29] immediately Noti is that it looks like
+[00:02:32] someone who has like a terrible heart
+[00:02:34] condition and is in the ICU because this
+[00:02:36] is erratic I mean it is all over the
+[00:02:38] place it's jumping up and down it is
+[00:02:41] very um it's very jumpy and that is
+[00:02:44] exactly what I don't like about it but
+[00:02:47] what some people like about it is that
+[00:02:50] those jumps like let's just say for
+[00:02:53] instance um look at right in here see
+[00:02:55] how big of a jump it made right in there
+[00:02:58] your macd was not giving you any
+[00:03:00] indicator that this is a buy spot but
+[00:03:02] right here when we got that Quick
+[00:03:04] Squeeze all of a sudden you got this
+[00:03:06] move up and it did end up being sort of
+[00:03:08] a precursor for what became a much
+[00:03:10] bigger move I think that for most
+[00:03:13] traders who are trying to use the
+[00:03:15] stochastic oscillator they're using it
+[00:03:17] in combination with a number of other
+[00:03:19] indicators something that you have to be
+[00:03:21] cautious about is um the concept of
+[00:03:24] analysis paralysis how many indicators
+[00:03:27] can you realistically look at on yourart
+[00:03:30] because indicators only work if you use
+[00:03:32] them consistently so if you have the
+[00:03:34] stochastic indicator on here but you
+[00:03:36] only use it on one out of every 10
+[00:03:38] trades how do you really know if it's
+[00:03:41] helping you or not I mean unless you're
+[00:03:42] actually specifically marking down and
+[00:03:45] tracking in an Excel sheet or something
+[00:03:47] that I used it for this trade and this
+[00:03:49] is the outcome it would be hard to
+[00:03:51] actually figure out how much you make or
+[00:03:53] lose by using an indicator unless you're
+[00:03:55] using it every single time but if you
+[00:03:57] have 15 20 30 indicators on your charts
+[00:03:59] trust me I've seen people who have done
+[00:04:01] this you're going to get analysis
+[00:04:02] paralysis you're going to get
+[00:04:04] conflicting signals and it's going to be
+[00:04:06] very difficult to focus it's also going
+[00:04:08] to get to a point where you're not going
+[00:04:10] to be able to see the forest through the
+[00:04:11] trees so to speak because you're going
+[00:04:13] to lose sight of this price action right
+[00:04:16] here so what I'll tell you is that for
+[00:04:18] me as a Trader what I actually look at I
+[00:04:22] I have this analogy where I talk about
+[00:04:24] trading like driving a car and my charts
+[00:04:28] are my rearview mirrors my side mirrors
+[00:04:30] my rearview mirror I'm checking them
+[00:04:32] because the chart is showing me what has
+[00:04:34] already happened it's behind me it's
+[00:04:36] historical however I can use it as we
+[00:04:39] know to predict what I think might come
+[00:04:42] next because it does provide context but
+[00:04:45] in order to actually see what's coming
+[00:04:46] next you know what I have to look at
+[00:04:48] I've got to look at the depth of Market
+[00:04:50] I've got to look at the level two
+[00:04:51] because that's where I'm going to see
+[00:04:52] all the orders lined up of people who
+[00:04:54] want to buy and people who want to sell
+[00:04:57] that for me is the road ahead so I'm
+[00:04:59] looking at the level two specifically at
+[00:05:01] the ask price I'm glancing at the tape
+[00:05:04] I'm glancing at my rearview mirrors here
+[00:05:06] to check the charts but I don't want to
+[00:05:08] get too hung up on Staring at an
+[00:05:11] indicator what I want to do is I want to
+[00:05:13] check the indicator and if the indicator
+[00:05:16] is confirming what I already suspect is
+[00:05:18] going to happen then I take that as
+[00:05:21] helpful so it has to confirm what I'm
+[00:05:23] already seeing in other words I would
+[00:05:25] never trade just on an indicator without
+[00:05:29] first also relying and looking at level
+[00:05:32] two and checking like the Candlestick
+[00:05:34] pattern so for instance to trade like
+[00:05:36] with this type of view would not be
+[00:05:38] realistic I don't think anyone would
+[00:05:40] actually do that so it's a little bit of
+[00:05:42] an extreme example but just to say all
+[00:05:44] right so when we look at stochastics
+[00:05:46] what you can see here is that you have
+[00:05:49] two lines now if we double click this
+[00:05:51] we'll pull up uh the settings for these
+[00:05:53] two
+[00:05:53] lines these are similar to The macd in
+[00:05:58] that you have a signal line which is
+[00:06:00] your average and then you have the the
+[00:06:04] actual calculation this is used based on
+[00:06:06] the last 14 closes and it's comparing
+[00:06:10] the the the range versus the close and
+[00:06:14] the low so when you have a an example
+[00:06:17] here where this is the sort of the
+[00:06:19] perfect example where the price is sort
+[00:06:21] of like it's it's moving up enough that
+[00:06:25] it's really shooting the stochastics way
+[00:06:27] back up here because the Clos are higher
+[00:06:30] the lows are higher right now our other
+[00:06:33] indicators aren't really telling us to
+[00:06:34] buy because the price currently is below
+[00:06:36] the volume weight average price the macd
+[00:06:39] is negative on the position so this is
+[00:06:43] the only indicator right now that's
+[00:06:45] saying maybe it's a buy right because
+[00:06:47] you've got this move back up now the way
+[00:06:50] RSI works the relative strength index is
+[00:06:53] it's on a scale of 0 to 100 it's an
+[00:06:55] oscillator as well and zero means the
+[00:06:58] stock has been way way way oversold so
+[00:07:00] if you're down below zero you you expect
+[00:07:03] that you're going to start to look for a
+[00:07:04] reversal and when you're way above 80
+[00:07:06] you're going to expect to look for a
+[00:07:08] reversal back down now the thing is uh
+[00:07:12] stocks and not just stocks but a
+[00:07:14] financial instruments this can be
+[00:07:16] applied to cryptocurrency the Futures
+[00:07:18] Forex doesn't matter the price can
+[00:07:21] remain irrational and in this extended
+[00:07:24] period for a long time if there is some
+[00:07:26] serious momentum so I
+[00:07:30] personally don't pay as much attention
+[00:07:33] to trying to buy when we're in the
+[00:07:35] oversold down here or thinking about
+[00:07:37] shorting when we're up in this section
+[00:07:39] the way I have used stochastics in the
+[00:07:42] past is looking at this type of area
+[00:07:45] where we're getting a Divergence so the
+[00:07:47] Divergence is what's interesting and the
+[00:07:50] reason is it's because this is such a
+[00:07:53] hyper sensitive indicator that's going
+[00:07:56] to start sending off some alerts before
+[00:07:58] something happens
+[00:08:00] the only problem with that is that you
+[00:08:02] can also get some false alerts like
+[00:08:04] right here for instance you see this big
+[00:08:06] red candle at the open and this created
+[00:08:09] a big drop in the stochastic but then it
+[00:08:11] bounced right back up to over 80 so like
+[00:08:14] that could have kind of chopped you out
+[00:08:17] um as you can see but then at this point
+[00:08:19] we start to break back down and that was
+[00:08:21] in line with what was happening with the
+[00:08:23] chart and that was in line with what was
+[00:08:25] happening right there on the
+[00:08:26] macd now if I show you you uh this will
+[00:08:30] be an interesting area down here so this
+[00:08:34] is a chart from a stock I traded um just
+[00:08:37] the other day I locked up about $5,000
+[00:08:40] trading it and we had this initial move
+[00:08:43] up sideways consolidation we started to
+[00:08:45] push higher a little pull back and a
+[00:08:47] little bit higher we dip down we punch
+[00:08:49] higher and then we drop so the
+[00:08:51] stochastic kind of comes down and now
+[00:08:52] we're in this sideways zone right here
+[00:08:54] price is more or less going sideways you
+[00:08:56] get a false breakout there but there was
+[00:08:59] no indicator here to be a buyer going
+[00:09:01] into that level there wasn't a big
+[00:09:03] crossover what we look at are the the
+[00:09:06] sort of dramatic crossovers like this uh
+[00:09:09] and there really wasn't one but then
+[00:09:11] what we get over in this area here let's
+[00:09:13] watch this so what we get here is this
+[00:09:17] big swing back to the upside so when you
+[00:09:20] have this swing from low to high here
+[00:09:24] this is where we're seeing clearly the
+[00:09:26] the big moves so there we've got that
+[00:09:27] little micro pullback at
+[00:09:30] $6 and if we were looking at this and
+[00:09:32] thinking should I buy this now we check
+[00:09:34] our indicators we've got high volume on
+[00:09:37] these candles here volume's coming in
+[00:09:39] the macd has gone positive and the
+[00:09:41] stochastic is also positive it showed
+[00:09:43] that it recently crossed over and it's
+[00:09:45] starting to move back up and has a good
+[00:09:47] amount of room before it gets oversold
+[00:09:49] or sorry overbought so all of that helps
+[00:09:53] you form a bias essentially an opinion a
+[00:09:57] thesis that this is going to go higher
+[00:09:59] and it does go higher now right here you
+[00:10:02] get this dip down the stochastic pulls
+[00:10:04] down as well the macd does not cross
+[00:10:07] over but the stochastic does go
+[00:10:09] negative and then all of a sudden we're
+[00:10:12] going to see this swing back here back
+[00:10:14] up and a punch higher this is showing a
+[00:10:18] Divergence divergences are something to
+[00:10:20] be aware of what's happening is the
+[00:10:24] stochastic is not actually going higher
+[00:10:28] despite the price going higher do you
+[00:10:30] see how the price is going higher but
+[00:10:32] this is stalling out this can be
+[00:10:34] indicative of what will not be a
+[00:10:37] sustained move we want to see that the
+[00:10:40] stochastic is staying high and pinned
+[00:10:43] when we're seeing it kind of coming back
+[00:10:44] down and sort of just barely getting
+[00:10:47] back to the high when the price is at
+[00:10:49] all-time highs or for this move that's a
+[00:10:52] warning sign so this is what we're
+[00:10:54] talking about wanting to detect
+[00:10:56] divergences where the stochastics are
+[00:10:59] doing something a little different from
+[00:11:00] what everything else is showing this is
+[00:11:02] very strong this is only so so strong
+[00:11:05] right up here this is a little weak
+[00:11:07] whereas everything else is strong so
+[00:11:09] that can give an indicator that uhoh are
+[00:11:10] we about to change directions is this
+[00:11:12] going to be sustained and as you can see
+[00:11:15] it it was not sustained this ended up
+[00:11:17] being the high of day so you you did get
+[00:11:19] a nice move but the fact that the price
+[00:11:22] was going higher while this was going
+[00:11:24] flat again it it just sort of is an
+[00:11:27] indicator of something to be aware of
+[00:11:29] does it mean you couldn't have made
+[00:11:30] money trading right in here or right in
+[00:11:32] here no you certainly could have you
+[00:11:34] could have easily bought this pullback
+[00:11:36] made money even though the stochastic
+[00:11:38] wasn't really in I mean it wasn't it was
+[00:11:41] just giving this signal and and I think
+[00:11:44] this is where a lot of beginner Traders
+[00:11:47] will struggle if you have too many
+[00:11:48] indicators so for me when I first had
+[00:11:51] stochastics on my chart more than a
+[00:11:53] decade ago when I was getting started I
+[00:11:55] was looking at these kind of areas here
+[00:11:57] and I was like I don't even know what
+[00:11:59] what I'm supposed to be looking at like
+[00:12:01] these are this is jumping around so much
+[00:12:03] am I supposed to buy on every crossover
+[00:12:05] it crosses 1 2 three four five times in
+[00:12:09] like six
+[00:12:10] minutes so I'm not going to trade every
+[00:12:13] crossover the way I would with
+[00:12:15] macd with macd you've got one let's see
+[00:12:19] you've got the first breakout and then
+[00:12:21] one crossover negative one crossover
+[00:12:24] positive so that's 1 2 3 four and then
+[00:12:28] there'll be a crossover over here about
+[00:12:29] five so you only have a small handful of
+[00:12:31] crossovers on the macd and I like to
+[00:12:33] trade when the macd is above the signal
+[00:12:34] line so here here and back here that's
+[00:12:38] much more clear the area where this can
+[00:12:42] come in handy is when you're trying to
+[00:12:45] decide whether or not you think macd is
+[00:12:48] about to cross over so when I'm looking
+[00:12:51] at the level when I'm looking at the
+[00:12:53] levels and I'm looking at macd and I'm
+[00:12:55] asking myself are we about to get let's
+[00:12:58] say for instance right here is this
+[00:13:00] going to be a macd crossover because if
+[00:13:02] this is a macd crossover swing to the
+[00:13:04] upside we should see the price move
+[00:13:06] higher right we should see it punch
+[00:13:08] higher and so then I'm looking at this
+[00:13:10] and I'm thinking okay this is already
+[00:13:11] given me that early signal that it's
+[00:13:13] moving up right because this is this is
+[00:13:16] already started it's more reactive it's
+[00:13:19] already pushing higher so this helps
+[00:13:21] confirm what we're thinking same as what
+[00:13:23] we had back here this helps confirm what
+[00:13:25] we were expecting to happen right about
+[00:13:27] here now we did get this drop and then
+[00:13:29] it comes back up but you know it's again
+[00:13:32] you have to try not to get faked out by
+[00:13:35] those drops nonetheless this was a big
+[00:13:37] red candle so that was kind of tricky
+[00:13:39] now it pulls back here again comes back
+[00:13:41] up macd is still open now the macd
+[00:13:44] crosses over here so you get a little
+[00:13:47] macd
+[00:13:48] crossover this is showing it's in the
+[00:13:50] over overbought area so it's extended
+[00:13:53] and this tells us this is not a safe
+[00:13:54] place to be taking a long position and
+[00:13:56] the next thing you know it's coming way
+[00:13:58] back down
+[00:13:59] now we're back in the oversold area big
+[00:14:03] selloff could you take that swing back
+[00:14:05] up right here you know you could but
+[00:14:09] what I would say on this is I'd be
+[00:14:11] checking my other indicators and I'd be
+[00:14:13] saying right now although we're above
+[00:14:15] the volume weight average price we just
+[00:14:17] had this really big selloff when you
+[00:14:19] have a big selloff like that we're going
+[00:14:21] to have some upside resistance as we try
+[00:14:22] to come back up right so we're going to
+[00:14:25] have resistance back around here at 8
+[00:14:27] unless we can get over that pivot this
+[00:14:28] is going to be tricky and of course we
+[00:14:30] weren't able to really fully get over
+[00:14:32] that level it tried but it just wasn't
+[00:14:34] able to so I think what you'll find for
+[00:14:38] probably most beginner Traders is that
+[00:14:41] stochastics while they can be helpful
+[00:14:43] it's going to be too noisy it's too
+[00:14:45] jumpy there's too much stuff going on
+[00:14:47] and for that reason I don't keep it on
+[00:14:49] my chart occasionally I'll pop it on
+[00:14:51] just to look at it I hear people mention
+[00:14:53] it I I'm happy to look at it but I think
+[00:14:56] for most Traders you're going to find it
+[00:14:58] to be too busy you step back and just
+[00:15:00] look at how Wild it is and this is not
+[00:15:02] going to be super helpful I think it's
+[00:15:04] going to lead more to analysis paralysis
+[00:15:07] again if you're using it in conjunction
+[00:15:09] with a few other indicators and you're
+[00:15:10] trying to use it in specific instances
+[00:15:12] to get an edge over like a macd
+[00:15:14] crossover trying to predict when that's
+[00:15:16] going to happen I think there are some
+[00:15:17] limited cases where it can be helpful
+[00:15:19] but trying to use it on every trade or
+[00:15:21] trying to use it in place of the macd I
+[00:15:24] don't think that you would find success
+[00:15:25] with that I'm a big fan of keeping it
+[00:15:27] simple so if you want to use Fantastics
+[00:15:29] on your charts then you may need to pop
+[00:15:31] out one of the other indicators so you
+[00:15:32] don't fall victim to analysis paralysis
+[00:15:36] if you want to check out my ultimate
+[00:15:37] technical analysis guide I have a link
+[00:15:39] it's a PDF you can download you can
+[00:15:41] print it out you can have it as a
+[00:15:42] resource to help you better understand
+[00:15:44] technical analysis especially through
+[00:15:46] the lens that I view it as an active day
+[00:15:49] trader focusing on trading momentum I'm
+[00:15:51] a trend-based Trader so I'm looking to
+[00:15:53] buy high and sell higher that's what I
+[00:15:56] do every day and I've been doing it for
+[00:15:57] more than a decade and I would love to
+[00:15:59] check out the ultimate technical
+[00:16:00] analysis PDF link will be pinned in the
+[00:16:02] description top of the comments and I
+[00:16:04] hope to see you for the next episode
+[00:16:05] real soon
+[00:16:07] [Music]

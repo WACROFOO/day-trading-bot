@@ -1,0 +1,448 @@
+# Alligator Indicator Definition | Trading Terminology
+# https://www.youtube.com/watch?v=NE0IxWksuqo
+# duration_sec: 1042
+
+[00:00:00] what's up everybody all right so today
+[00:00:01] we're going to talk about day trading
+[00:00:03] terminology and the term of the day
+[00:00:05] today is the alligator indicator now
+[00:00:08] this is kind of a funny name uh the
+[00:00:10] alligator indicator is as much an
+[00:00:12] indicator as it is a metaphor so I'm
+[00:00:15] going to walk you through um how to use
+[00:00:17] this indicator where it came from how it
+[00:00:20] works how to set it up on your charts um
+[00:00:23] and you know you'll see if you get some
+[00:00:24] use out of it I personally don't use it
+[00:00:27] on a day-to-day basis I've used it in
+[00:00:29] the past fast I don't find it to be
+[00:00:31] incredibly helpful but it is a cool
+[00:00:33] indicator that you can put on your
+[00:00:35] charts I've got it right here on this
+[00:00:36] chart uh and this right here is giving a
+[00:00:39] buy indicator at uh 947 just before it
+[00:00:43] squeezed up uh from 340 all the way up
+[00:00:46] to 480 so it's important to know how to
+[00:00:48] use this and you know this right here uh
+[00:00:50] certainly would have paid for itself all
+[00:00:52] right although of course it's a free
+[00:00:54] indicator you can just put it on your
+[00:00:55] charts with moving averages so it'll pay
+[00:00:58] for the time it takes you to learn about
+[00:00:59] it all right so the alligator indicator
+[00:01:02] now this was uh created in the 1990s it
+[00:01:06] was released I believe in 1995 by the
+[00:01:09] legendary Trader Bill Williams all right
+[00:01:12] now many of you guys may have heard of
+[00:01:14] him uh he's got a lot of technical
+[00:01:16] indicators out a lot of them are on uh
+[00:01:19] thinker swim a merit trade um he's got
+[00:01:22] some oscillators some different special
+[00:01:24] moving averages and stuff like that um
+[00:01:27] he's a pretty well-known Trader and the
+[00:01:29] allig at indicator was designed to give
+[00:01:32] very simple buy and sell alerts really
+[00:01:35] simple uh to help Traders see momentum
+[00:01:37] and to know when to be in trades and
+[00:01:39] when to not be in them and it was uh
+[00:01:42] originally designed for use in Forex
+[00:01:44] where it would only be used on commonly
+[00:01:46] traded currency pairs so uh you know
+[00:01:49] with trading you can apply this to
+[00:01:52] really any stock although I personally
+[00:01:55] only find it helpful on stocks that have
+[00:01:58] high relative volume so uh stocks like
+[00:02:01] um you know indices or ETFs those types
+[00:02:04] of things for me just don't really seem
+[00:02:06] to respond well to the alligator
+[00:02:08] indicator and neither do stocks that
+[00:02:10] have really low volume now at the same
+[00:02:12] time uh my whole trading strategy is
+[00:02:15] based on trading stocks with high volume
+[00:02:18] so uh I may be a little bit biased there
+[00:02:21] but I still think it works better on
+[00:02:22] those types of stocks all right now um
+[00:02:26] the alligator indicator um formula
+[00:02:29] alligator indicator formula is pretty
+[00:02:31] simple it's uh three moving averages and
+[00:02:34] that's it so the first moving average
+[00:02:36] right here are the aligators lips and
+[00:02:39] they're green and it's a five simple
+[00:02:41] moving average the second moving average
+[00:02:43] are the alligators teeth and they're red
+[00:02:46] it's because he's been eating and that's
+[00:02:48] an eight simple moving average and the
+[00:02:50] third moving average is the alligator's
+[00:02:52] jaw which is blue because his jaw is
+[00:02:54] kind of right below the water line and
+[00:02:57] that's a 13 simple moving average all
+[00:02:59] right so uh these three lines that we
+[00:03:01] see on charts um uh represent the
+[00:03:05] alligator and it's really designed to
+[00:03:07] help us understand Direction so we talk
+[00:03:10] about the alligator as either uh
+[00:03:12] sleeping or as being hungry and eating
+[00:03:16] he's doing one or the other now I'll
+[00:03:19] show you a bunch of examples of what
+[00:03:21] that looks like all right so uh the
+[00:03:25] traits of the alligator they are uh
+[00:03:27] numerous if the three lines the three
+[00:03:30] moving averages are all crossed together
+[00:03:32] if they're all intertwined uh then the
+[00:03:34] alligator is sleeping his mouth is
+[00:03:36] closed he's taking a nap um but as the
+[00:03:39] alligator sleeps he gets hungry and
+[00:03:41] hungrier by the minute now if he's been
+[00:03:45] sleeping for a long time and then he
+[00:03:47] starts to open his mouth which will be
+[00:03:49] when the green line crosses up through
+[00:03:51] the blue and the red line then he's
+[00:03:53] going to wake from his Slumber and he's
+[00:03:55] going to eat this is when uh the trend
+[00:03:58] takes shape so when the alligator wakes
+[00:04:00] up he's hungry and he starts eating once
+[00:04:02] he's eaten then he goes back to sleep
+[00:04:05] and that's when the lines will become
+[00:04:07] Twisted again so you don't want to be
+[00:04:08] trading a stock when the alligator is
+[00:04:10] sleeping you only want to be trading
+[00:04:12] when he's eating and you know that he's
+[00:04:13] going to be the hungriest when he first
+[00:04:16] wakes up from a long period of sleeping
+[00:04:18] so that's a stock that's been
+[00:04:19] consolidating for a long time and is now
+[00:04:23] finally starting to break out and
+[00:04:25] squeeze to the upside now uh this is
+[00:04:28] also designed to help keep traders in
+[00:04:30] trades longer because uh Traders should
+[00:04:33] hold positions until that green line
+[00:04:36] crosses back down below the red line
+[00:04:39] that's when the alligator has stopped
+[00:04:41] eating right but as long as he's eating
+[00:04:43] those lines will be uh all open and
+[00:04:46] they'll be um kind of like a ribbon
+[00:04:48] you'll have the blue line then the red
+[00:04:50] line then the green line all right so
+[00:04:53] this is an example here um during this
+[00:04:56] period the lines were crossed all right
+[00:04:59] so this is when the alligator was
+[00:05:00] sleeping and then as the Green Line
+[00:05:03] crossed up above the red line right now
+[00:05:07] the alligator is awaking from the
+[00:05:09] Slumber so as you see this curling up as
+[00:05:11] this breaks out now his mouth is open so
+[00:05:14] during this whole point this is his Jaws
+[00:05:16] open he's eating eating eating eating
+[00:05:18] and then right here he stops eating
+[00:05:20] right at this point here when this green
+[00:05:22] line crosses below the red line now you
+[00:05:24] guys know that I'm a big fan of keeping
+[00:05:26] my chart simple and moving averages are
+[00:05:29] about as simple as it gets and I keep
+[00:05:30] those on all my charts so in that sense
+[00:05:33] I like the alligator indicator because
+[00:05:35] it's a very simple way of understanding
+[00:05:37] Trend by using moving averages now a lot
+[00:05:41] of traders who use the alligator
+[00:05:44] indicator use it uh in
+[00:05:46] combination with an oscillating
+[00:05:49] indicator like what you see right here
+[00:05:51] this is the macd the moving average
+[00:05:54] convergence Divergence indicator macd
+[00:05:56] for short and this these here are stoh
+[00:05:59] itics um both of these oscillate and can
+[00:06:02] help you understand Trend now moving
+[00:06:05] averages as they as this opens up these
+[00:06:08] are moving averages that are spreading
+[00:06:10] apart and that happens when stocks are
+[00:06:12] moving uh moving up very quickly now
+[00:06:15] when they start to move back down as was
+[00:06:17] the case right here uh they start to
+[00:06:19] cross and so obviously this is almost
+[00:06:21] projecting exactly what's happening with
+[00:06:23] the moving averages so these two are
+[00:06:26] sort of redundant uh whereas stoas is
+[00:06:30] not as redundant because it's it's not
+[00:06:33] based on moving
+[00:06:34] averages this may be something that you
+[00:06:36] find helpful I don't like using either
+[00:06:39] of these on a day-to-day basis so I just
+[00:06:41] keep my chart simple and use just the
+[00:06:43] moving averages but for Traders who are
+[00:06:46] using uh the alligator indicator it may
+[00:06:49] be helpful to have an oscillator on here
+[00:06:52] whether it's stastics or CCI uh the
+[00:06:55] commodity Channel index you know those
+[00:06:58] types of things might help give you a
+[00:07:00] little bit of a better uh sense of the
+[00:07:02] context all right but in this trade here
+[00:07:05] your entry would have been right here
+[00:07:07] now this entry makes sense because it's
+[00:07:08] the first five minute candle to make a
+[00:07:10] new high so it already makes sense based
+[00:07:12] on my strategy and now you have
+[00:07:13] confirmation from the moving average as
+[00:07:15] it's crossing over the only thing that's
+[00:07:17] different is that this tells you not to
+[00:07:19] sell until the green line crosses which
+[00:07:22] would be right here and that's a move
+[00:07:23] from about 9
+[00:07:26] 970 or no sorry 9 945 950 all the way up
+[00:07:31] to 1020 and of course you got the move
+[00:07:33] up to a high of 1040 and then it pulled
+[00:07:35] back and that's kind of the risk with
+[00:07:37] any indicators that it lags a little bit
+[00:07:40] by the time this moving average is
+[00:07:42] crossing we have already pulled back a
+[00:07:44] little bit now we didn't pull back as
+[00:07:46] far as here but we have pulled back a
+[00:07:48] bit this is not uh used when this
+[00:07:53] crosses that does not mean it's a short
+[00:07:55] it just means that the alligator is
+[00:07:57] getting ready to sleep and he he could
+[00:07:58] sleep for a while we could just go
+[00:08:00] sideways this happened to break down but
+[00:08:02] it's not uh indicative of a short
+[00:08:04] position that that should be taken all
+[00:08:07] right here's another example um this
+[00:08:09] right here is the initial break this
+[00:08:11] long period of sleeping like the lines
+[00:08:13] are all twisted right and you can see
+[00:08:16] same with the macd it's all twisted
+[00:08:18] together and then we start to break out
+[00:08:20] we break out here and stastics you know
+[00:08:23] are showing we're kind of trending up
+[00:08:25] trending up and even though we cross a
+[00:08:29] little bit here we do cross so we dip
+[00:08:32] down here and then we get a second entry
+[00:08:34] here and I suppose in this case you
+[00:08:37] would say that you know the stastics are
+[00:08:39] still strong they're not dipping down
+[00:08:41] you're not having when you have a
+[00:08:42] Divergence where one indicator gives a
+[00:08:44] positive and the other one's giving a
+[00:08:46] negative it can be an indicator that the
+[00:08:48] trend is Shifting or that there is some
+[00:08:51] um you know some some type of struggle
+[00:08:53] happening between the buyers and the
+[00:08:54] sellers that's also true when you have a
+[00:08:56] big breakout and the price moves way up
+[00:08:59] but it's it's on light volume we like to
+[00:09:01] see that these things are correlated and
+[00:09:02] connected when they're disconnected it
+[00:09:04] can often be indicative of a fake out
+[00:09:07] but in this case we have the move up a
+[00:09:09] little sideways consolidation and then
+[00:09:11] another move up and now this sideways
+[00:09:13] consolidation just kind of barely dips
+[00:09:15] down but we stay uh pretty much above
+[00:09:18] our moving average there the green line
+[00:09:20] and then it opens up again it dips down
+[00:09:22] opens up again so each one of these
+[00:09:24] could be considered you know entries and
+[00:09:26] either holding kind of with a loose stop
+[00:09:30] or getting out and then getting back in
+[00:09:33] once we get up here at the very top and
+[00:09:35] the lines cross all the way through
+[00:09:38] through the blue one now we know that
+[00:09:39] the trend has really changed directions
+[00:09:41] okay so at this point we would
+[00:09:43] definitely be out of our final position
+[00:09:45] and you can trade this a lot of
+[00:09:47] different ways traders who are um you
+[00:09:49] know more aggressive are going to get in
+[00:09:51] and get out and get in and get out
+[00:09:52] that's kind of what I would do traders
+[00:09:54] who are a little more conservative just
+[00:09:55] kind of want to get in hold the position
+[00:09:57] let it work they could get in early when
+[00:10:00] we first get the break and then use a
+[00:10:02] trailing stop and essentially be holding
+[00:10:04] this most likely all the way until here
+[00:10:07] um they might get stopped out during one
+[00:10:09] of these pullbacks but for the most part
+[00:10:11] this was a pretty strong setup and it
+[00:10:13] was just continuing to grind higher and
+[00:10:15] that's the idea with the um the
+[00:10:17] indicator that it keeps you in strong
+[00:10:19] trades longer and it helps you see the
+[00:10:21] big picture and the big picture is that
+[00:10:23] this is still a strong stock although
+[00:10:25] you recognize when you start to get up
+[00:10:27] here the alligator is still eating but
+[00:10:31] he's a pretty long ways away from his
+[00:10:33] period of sleeping and it's always best
+[00:10:35] to be in uh just after he wakes up you
+[00:10:38] almost always now this case we kind of
+[00:10:40] have increasing volume as you can see
+[00:10:42] here higher higher higher higher and
+[00:10:45] then finally peing volume at the
+[00:10:48] top now this of course is an example of
+[00:10:50] a stock that breaks out and then almost
+[00:10:52] immediately the lines start to cross and
+[00:10:55] I use this example because I had Traders
+[00:10:57] asking me right around around here like
+[00:10:59] in this area if I should buy this stock
+[00:11:02] for a bottom bounce and I don't like it
+[00:11:04] for a bottom bounce because I look for
+[00:11:07] stocks that are really extended to the
+[00:11:08] downside that have had you know five to
+[00:11:11] 10 consecutive red candles before I Look
+[00:11:13] to get in but you know despite that the
+[00:11:17] alligator indicator on this particular
+[00:11:19] setup would say no this is definitely
+[00:11:21] not a period that you want to be buying
+[00:11:23] um this is actually the ribbon is
+[00:11:25] clearly reversed so this is actually a
+[00:11:28] short uh and this is one of those times
+[00:11:31] where you could consider this a short
+[00:11:34] because they're not Twisted they're
+[00:11:35] upside down so he's now diving under the
+[00:11:38] water to get something to eat so until
+[00:11:41] it starts to cross here he's not
+[00:11:43] sleeping and now during this period he's
+[00:11:45] sleeping so sure potentially out of this
+[00:11:48] long consolidation it could start to
+[00:11:51] open up to go back up you know but that
+[00:11:53] wasn't the
+[00:11:54] case all right and here's another setup
+[00:11:57] this one um almost you you know as soon
+[00:11:59] as the bell rang you we knew that we
+[00:12:01] were going to have a positive uh signal
+[00:12:04] just because the stock was opening
+[00:12:06] slightly higher so we opened higher we
+[00:12:08] have the positive signal we're
+[00:12:10] consolidating we get in here around 8
+[00:12:13] 860 or 870 for the first 5 minute candle
+[00:12:16] to make a new high which is a setup that
+[00:12:18] makes sense opening range breakout stop
+[00:12:21] is at the low and now with this one we
+[00:12:23] can ride this momentum all the way up
+[00:12:25] the alligator is eating he's eating he's
+[00:12:27] eating and he doesn't stop eating until
+[00:12:28] right here again though the only problem
+[00:12:31] is if you wait to exit until you get the
+[00:12:33] actual indicator well at that point
+[00:12:35] you've had multiple red candles so I
+[00:12:38] think the takeaway here is to try to
+[00:12:40] remember you know is the momentum still
+[00:12:43] strong is this indicator still giving us
+[00:12:45] a Buy Signal if it is then try to hold
+[00:12:48] that piece a little bit longer maybe
+[00:12:50] until the first red candle which would
+[00:12:52] be like right here and then at that
+[00:12:54] point you could say okay I've had a
+[00:12:55] pretty good trade from 850 to 950 I'm
+[00:12:58] going to stop out and maybe I'll get
+[00:13:00] back in if we get another setup like you
+[00:13:03] saw in some of those other trades all
+[00:13:05] right so now this is an example um just
+[00:13:09] from today which was a pretty good one
+[00:13:11] this this stock cool uh was a gapper now
+[00:13:14] when the market opened we actually
+[00:13:16] dipped down and you know we dipped down
+[00:13:18] not out of a period of sleeping just
+[00:13:20] kind of a gap dip down and then boom it
+[00:13:23] it starts to spike up well I got in this
+[00:13:26] right here the high was of this candle
+[00:13:28] was um 330 and I bought right at this
+[00:13:31] line here on this green candle and
+[00:13:33] notice that that's almost exactly where
+[00:13:36] that green line surged through surged
+[00:13:39] through there so I bought there and then
+[00:13:41] we had a pullback and then I got back in
+[00:13:44] right here at 348 and notice what
+[00:13:47] happened there at 348 this green line
+[00:13:49] surging through again now the thing I
+[00:13:51] did wrong on this trade is that I sold
+[00:13:54] my whole
+[00:13:55] position in the 80s I sold it here and
+[00:13:59] then I had to get back in up here so
+[00:14:02] using the alligator indicator I might
+[00:14:04] have been able to stay in this a little
+[00:14:06] bit longer and certainly I would have
+[00:14:07] done better holding the whole position
+[00:14:09] from 348 even if I had a smaller
+[00:14:12] position I could have made more money by
+[00:14:14] holding this longer so this kind of can
+[00:14:17] help Traders get out of the habit of
+[00:14:19] scalping I'm always in the habit of
+[00:14:21] taking quick profits I get in I'm
+[00:14:23] looking for the quick breakout take my
+[00:14:25] profit adjust my stop to break even and
+[00:14:28] that works really well for me but at the
+[00:14:30] same time sometimes there are setups you
+[00:14:32] know like this one or some of the others
+[00:14:34] that you just saw that run for 10 20 30
+[00:14:37] 40 50% and you sold the whole thing when
+[00:14:40] it was up only 10% and there really
+[00:14:42] wasn't any good exit indicator other
+[00:14:45] than your first profit Target hit you
+[00:14:47] know if you set a profit Target of $100
+[00:14:50] should you just walk away and and let it
+[00:14:52] run to the point where it could have
+[00:14:53] been up a th000 or 2,000 or 3,000 it's
+[00:14:57] important to try to keep a little bit of
+[00:14:58] a pie pie in there and so you know even
+[00:15:01] for me I work on doing that selling half
+[00:15:04] and holding the rest for the bigger move
+[00:15:06] it's hard and especially on a week like
+[00:15:08] this which has been a little bit slow
+[00:15:10] I'm more inclined to take all of my
+[00:15:13] profit when I actually have profit but
+[00:15:16] um you know if I can work towards
+[00:15:17] holding some of these positions a little
+[00:15:19] bit longer this went up from 348 all the
+[00:15:21] way to 484 I mean that's a really big
+[00:15:24] move and and on that move I could have
+[00:15:25] made uh certainly a lot more money than
+[00:15:27] I made just in this 30 Cent here so I
+[00:15:30] sold basically a point to soon and you
+[00:15:33] know that's that's kind of the benefit
+[00:15:35] of this indicator and especially with uh
+[00:15:37] traders who were trading Forex and who
+[00:15:38] were trading you know currency pairs uh
+[00:15:41] you want to get in and hold as long as
+[00:15:43] you can because there when you're only
+[00:15:44] trading a couple of different pairs you
+[00:15:47] may not have good setups every single
+[00:15:49] day you may only have one or two good
+[00:15:51] setups each week and that means you
+[00:15:53] really have to capitalize on them as day
+[00:15:55] Traders we're kind of spoiled because
+[00:15:57] there are good setups almost every
+[00:15:59] single day some weeks are better than
+[00:16:01] others but we know if we kind of
+[00:16:03] mismanage one trade there'll be another
+[00:16:05] one right around the corner and maybe
+[00:16:07] that doesn't Force us to be as
+[00:16:09] disciplined but I think if we can get in
+[00:16:11] the habit of holding the winners longer
+[00:16:13] with a trailing stop that we could see
+[00:16:16] our winners get larger and then we can
+[00:16:17] start to be in the position of having um
+[00:16:20] you know bigger and bigger winners which
+[00:16:22] means better and better profit loss
+[00:16:24] ratios and that means essentially you
+[00:16:28] have big winners and small losers you
+[00:16:30] now having worked with a lot of students
+[00:16:32] over the years so many Traders come to
+[00:16:34] me with the exact opposite they've got
+[00:16:36] big losers and small winners it's
+[00:16:38] because they sell the whole position too
+[00:16:40] soon when it's a winner but when it's a
+[00:16:42] loser you know they hold the whole thing
+[00:16:44] through these big pullbacks all right so
+[00:16:47] um anyways I hope this has been um
+[00:16:49] helpful and that you guys uh will now
+[00:16:51] know what the alligator indicator is and
+[00:16:53] how it works if you have any questions
+[00:16:55] I'd love to have you guys uh give me
+[00:16:57] feedback and comments down below and
+[00:16:59] I'll be sure to answer them all right
+[00:17:01] thanks guys let's be honest if you made
+[00:17:04] it this far you must have really enjoyed
+[00:17:06] that video so what's stopping you
+[00:17:08] subscribe right here and get email
+[00:17:11] alerts anytime I upload new content
+[00:17:14] until then Happy surfing

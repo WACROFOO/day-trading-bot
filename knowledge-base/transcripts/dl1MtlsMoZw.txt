@@ -1,0 +1,647 @@
+# What is Day Trading and How to Start Day Trading as a Beginner 🍏
+# https://www.youtube.com/watch?v=dl1MtlsMoZw
+# duration_sec: 1396
+
+[00:00:00] what's up everyone in today's episode
+[00:00:01] i'm going to answer a few questions
+[00:00:03] about day trading the first is what is
+[00:00:05] day trading
+[00:00:07] how to make money day trading and how to
+[00:00:09] start day trading we've got the white
+[00:00:11] board we've got screen share and we've
+[00:00:14] got the camera so before i jump in
+[00:00:17] answering the first question of what is
+[00:00:19] day trading let me talk to you for one
+[00:00:21] second about why i'm qualified to answer
+[00:00:23] this question i
+[00:00:24] am a day trader and
+[00:00:27] i'm a profitable day trader now that's
+[00:00:29] pretty rare i should probably say my
+[00:00:31] results are not typical i printed out my
+[00:00:33] most recent audit i have my broker
+[00:00:34] statements audited at the end of each
+[00:00:36] year and that right there is 9.5 million
+[00:00:39] dollars
+[00:00:40] with 159 000 of average monthly profit
+[00:00:44] over the last 60 months that's real
+[00:00:47] money now again i share that not because
+[00:00:50] i want you to assume that my results are
+[00:00:51] typical and not because i want you to
+[00:00:53] assume that trading is easy because it's
+[00:00:55] not but i want you to know that the
+[00:00:57] person that you're about to learn from
+[00:00:58] right here today actually knows what the
+[00:01:01] heck they're talking about because
+[00:01:02] there's a lot of people that post videos
+[00:01:03] on youtube tik tok instagram and they
+[00:01:06] don't have any profits to back up the
+[00:01:07] things they're saying i am in the
+[00:01:09] trenches every single day trading the
+[00:01:11] markets so let me answer some of these
+[00:01:13] questions for you the first one is what
+[00:01:15] is day trading and let's switch to the
+[00:01:17] whiteboard so i'm going to answer this
+[00:01:19] question with an example so a day trade
+[00:01:22] is simply when you buy and sell a stock
+[00:01:25] intraday so let's say you have stock and
+[00:01:27] we'll just name it after maybe we'll
+[00:01:28] just say ross let's say stock ross you
+[00:01:31] buy it
+[00:01:32] at four dollars
+[00:01:34] and then you sell it at 440. that would
+[00:01:38] be a ten 10 profit
+[00:01:40] intraday and this type of thing happens
+[00:01:43] all the time especially especially on
+[00:01:46] lower price stocks now if you start
+[00:01:48] trading trading stocks like apple
+[00:01:50] facebook facebook netflix these higher
+[00:01:52] priced stocks they don't go up 10
+[00:01:54] intraday but there's a lot of lower
+[00:01:56] price stocks that do almost every single
+[00:01:58] day and if we jump over the screen share
+[00:01:59] real quick just as an example of that we
+[00:02:02] can see that our leading gainer today is
+[00:02:05] up 59
+[00:02:07] dtst
+[00:02:08] now that's a pretty big gainer for one
+[00:02:11] day
+[00:02:12] so the whole idea of day trading is to
+[00:02:14] try to find those types of stocks to
+[00:02:16] trade to get in and get out before the
+[00:02:19] end of the day now the market opens at 4
+[00:02:21] 00 a.m eastern standard time that's the
+[00:02:24] beginning of pre-market and the market
+[00:02:27] closes at 8 p.m that's the end of after
+[00:02:29] hours the traditional trading day is
+[00:02:31] from 9 30 until 4 p.m but these days you
+[00:02:34] could trade anytime pre-market and of
+[00:02:36] course you could trade from your phone
+[00:02:38] you can trade from of course your laptop
+[00:02:40] and so you can execute trades during the
+[00:02:42] pre-market session from nine four a.m
+[00:02:45] till 9 30 just as easily as you could if
+[00:02:47] you wait until 9 30 and trade from 9 30
+[00:02:49] to 10 or 11. so the whole idea of
+[00:02:52] trading is try to capitalize on intraday
+[00:02:55] volatility
+[00:02:57] so one of the things that a lot of day
+[00:02:58] traders will do
+[00:02:59] is within a very short period of time in
+[00:03:02] order to capitalize on what might be a
+[00:03:05] relatively small move in a stock they
+[00:03:08] use a larger position that's really the
+[00:03:11] whole idea
+[00:03:12] if you're a long-term investor you know
+[00:03:14] you would probably never put 50 percent
+[00:03:16] of your account in one stock that would
+[00:03:19] not be good diversification there would
+[00:03:21] be too much risk in doing that but as a
+[00:03:23] day trader we do that all the time so if
+[00:03:26] you're a day trader and you've got let's
+[00:03:27] say a 2500 account
+[00:03:30] if you put fifteen hundred dollars into
+[00:03:33] one stock and that stock goes up ten
+[00:03:36] percent
+[00:03:36] you're up 150 bucks so you know this
+[00:03:39] trade right here on um
+[00:03:41] on ross right you're in with 50 of your
+[00:03:44] account or whatever it is at four
+[00:03:46] dollars you're out at four four forty
+[00:03:48] that's position is up ten percent your
+[00:03:51] account in one day is up five percent
+[00:03:54] now if you know about the history of the
+[00:03:56] market the trajectory of the market over
+[00:03:58] the long period of time has been seven
+[00:04:00] percent per
+[00:04:02] year
+[00:04:04] that's per year
+[00:04:06] all right so
+[00:04:07] as a day trader
+[00:04:09] you know i mean it's not like our goal
+[00:04:10] is to do seven percent per day and to do
+[00:04:12] that you know compounding but the idea
+[00:04:15] is to try to find one or two maybe three
+[00:04:18] opportunities each day
+[00:04:20] to capture a stock that's moving and
+[00:04:22] some profit from it and so instead of
+[00:04:25] using
+[00:04:26] typical diversification of maybe one
+[00:04:29] tenth of our portfolio in any single day
+[00:04:31] trade the way i trade is i take one
+[00:04:34] trade at a time and i'll put a larger
+[00:04:36] percentage of my account into it
+[00:04:38] in order to try to capitalize on that
+[00:04:40] relatively small move in price now hey
+[00:04:43] sometimes we end up finding stocks that
+[00:04:45] go up 59 60 75 100 in one day
+[00:04:49] and those become the huge winners they
+[00:04:52] don't happen all the time but they
+[00:04:53] happen frequently enough you might not
+[00:04:55] think so if you're new to the market but
+[00:04:58] there's a whole world of stocks pretty
+[00:05:00] much every single day they're making
+[00:05:02] these really big moves and they're
+[00:05:03] generally small cap stocks they're not
+[00:05:06] your netflix facebook you know apple
+[00:05:08] tesla they're your lower price stocks
+[00:05:10] between two dollars and 10 15
+[00:05:14] that are small cap companies and they
+[00:05:16] come out with news whether it's
+[00:05:17] quarterly earnings or something like
+[00:05:18] that and all of a sudden the stock can
+[00:05:20] go up 50 or 100
+[00:05:22] in one day
+[00:05:23] so as a day trader those are the types
+[00:05:25] of stocks that we're really looking for
+[00:05:27] so now
+[00:05:28] the second question is how to make money
+[00:05:31] day trading
+[00:05:32] so what is day trading is simply buying
+[00:05:34] and selling a stock intraday and the way
+[00:05:36] to make money day trading is to find a
+[00:05:39] stock that's going up and to buy it
+[00:05:43] and sell it higher now one of the things
+[00:05:45] that's kind of interesting when you're
+[00:05:46] talking about day trading is that by the
+[00:05:49] time you're seeing a stock so i run
+[00:05:51] these scanners
+[00:05:53] and these scanners which you can see
+[00:05:54] right here are searching the market for
+[00:05:56] stocks moving up right now so this stock
+[00:05:58] marps just hit my scanners
+[00:06:01] so i can pull up the chart on it and i
+[00:06:02] can look at the chart and i can see that
+[00:06:04] this stock is moving a bit it's gone
+[00:06:06] from 820 up to
+[00:06:08] about 9.50 which is more than 10
+[00:06:12] in less than five minutes which is a
+[00:06:14] pretty impressive move one of the last
+[00:06:16] stocks that hit the scanner was indu
+[00:06:19] so indo went from 15 to 18 that's 20
+[00:06:24] a 20 move in about 20 minutes
+[00:06:28] so as a day trader what you're typically
+[00:06:30] going to be doing is buying high and
+[00:06:32] selling higher you're buying something
+[00:06:35] that's already starting to move so i
+[00:06:37] think of this sort of as like a wave and
+[00:06:39] you're jumping on the wave it's already
+[00:06:41] building some momentum and then you want
+[00:06:43] to ride that wave but get out before it
+[00:06:46] pulls back so you sort of think of these
+[00:06:48] stocks as waves of momentum they
+[00:06:51] increase in volume they increase
+[00:06:52] momentum they get that nice big move and
+[00:06:54] then they start to pull back which is
+[00:06:56] really exactly what you can see on this
+[00:06:57] chart right here this nice increasing
+[00:07:00] move as it goes higher and right here
+[00:07:02] it's now on the pullback
+[00:07:04] so the idea with a day trade is that
+[00:07:08] this is enough volatility to potentially
+[00:07:12] be profitable right you've got a high
+[00:07:14] here of 1874 and you've got this area
+[00:07:16] back here that was at like 1523.
+[00:07:19] so that range right there that's enough
+[00:07:22] range to make money
+[00:07:24] so your goal as a trader is to try to
+[00:07:27] find
+[00:07:28] those types of stocks
+[00:07:30] basically in real time
+[00:07:33] and buy
+[00:07:34] high ultimately you're never going to
+[00:07:36] buy a low as a day trader that's
+[00:07:38] investing that's like a warren buffett
+[00:07:40] thing
+[00:07:41] within the confines of one day a stock
+[00:07:44] is not going to go from low to high
+[00:07:46] it'll go from high to higher it'll go
+[00:07:48] from low to lower but it's not going to
+[00:07:50] go from low
+[00:07:52] to high
+[00:07:53] within just one day that's just not the
+[00:07:55] way it's not it's too short of a amount
+[00:07:58] of time and so what we're looking for as
+[00:08:00] a day trader is to find something that's
+[00:08:02] already started to move and to buy it on
+[00:08:05] hopefully a pullback which i don't want
+[00:08:07] to get into too much of the nitty gritty
+[00:08:09] here but that's the idea is to buy a
+[00:08:10] little bit of a pullback on the wave and
+[00:08:12] then get in for that next wave higher
+[00:08:15] so the way to make money trading is
+[00:08:17] pretty simply to find the right stocks
+[00:08:19] to trade to get in and then sell for a
+[00:08:23] profit
+[00:08:24] okay that's very simplified and it's
+[00:08:27] obviously easier said than done the
+[00:08:29] reality of trading is that most traders
+[00:08:32] somehow manage to lose money they jump
+[00:08:35] into the market at all of the wrong
+[00:08:36] times and they lose money and the reason
+[00:08:39] is because they don't follow any
+[00:08:41] strategy they just shoot from the hip
+[00:08:44] they follow emotions and this is an area
+[00:08:46] where the market will trap you it will
+[00:08:48] trick you and what traders end up doing
+[00:08:51] and it's a chronic mistake for beginner
+[00:08:53] traders and even seasoned traders
+[00:08:55] is they will watch something starting to
+[00:08:57] move and they don't get in they don't
+[00:08:58] get in and then it finally is up a lot
+[00:09:01] which means they miss the whole
+[00:09:03] opportunity and they get in and if they
+[00:09:05] have a profit because they got in so
+[00:09:08] high they're nervous that the profits
+[00:09:10] could disappear and so they sell it
+[00:09:12] immediately so their profits are tiny
+[00:09:14] but if they get in and it draws down and
+[00:09:16] it pulls back like on this big red
+[00:09:17] candle right here they end up holding on
+[00:09:20] the pullback why because they're afraid
+[00:09:22] of actually having a real loss and so
+[00:09:24] they keep holding until it turns around
+[00:09:27] what successful traders do
+[00:09:29] is they wait for opportunities to buy
+[00:09:32] pullbacks and then they sell
+[00:09:34] into strength so essentially that kind
+[00:09:37] of is a little bit on a very micro scale
+[00:09:40] of the whole warren buffett theory of be
+[00:09:42] greedy when others are fearful and when
+[00:09:44] others are greedy be fearful
+[00:09:46] so when a stock has been strong but then
+[00:09:49] momentarily pulls back it's it sort of
+[00:09:52] reflects a little bit of fear people are
+[00:09:54] a little scared it's pulling back it's
+[00:09:55] dipping that's the place that i want to
+[00:09:58] be a buyer i want to buy that micro dip
+[00:10:01] to ride the next leg up now for those
+[00:10:05] that are curious i will put a link um in
+[00:10:07] the description and let's see i'll jump
+[00:10:09] over to the whiteboard down the
+[00:10:10] description i'll put a link to download
+[00:10:14] my
+[00:10:15] micro pullback
+[00:10:17] strategy
+[00:10:18] pdf all right so it's a pdf right here
+[00:10:21] and it's a strategy pdf that actually
+[00:10:23] walks you through the strategy that i
+[00:10:25] trade around micro pullbacks and just to
+[00:10:27] show you a visual what that would look
+[00:10:29] like let's pretend that this stock that
+[00:10:31] we just talked about has squeezed up
+[00:10:33] here from 350 up to 370 380 and pulled
+[00:10:39] up here to about four
+[00:10:40] and then it dips down right here
+[00:10:43] and this is the area that i would
+[00:10:45] consider the micro pullback and i want
+[00:10:47] to be a buyer right here to ride the
+[00:10:50] next wave higher and if it goes all the
+[00:10:53] way up to here that's fantastic so let's
+[00:10:55] say the entry was right down here at
+[00:10:57] four dollars
+[00:10:58] and up here is you know 440. that right
+[00:11:01] there is your 10 move what so many
+[00:11:03] traders do is they buy right up here
+[00:11:06] they hold through the pullback and if it
+[00:11:08] keeps going lower they end up losing or
+[00:11:10] if it goes back up you know okay they
+[00:11:12] make money but their entry is terrible
+[00:11:15] so timing is critical as a day trader
+[00:11:18] ultimately timing is one of the most
+[00:11:20] important things you have a stock that's
+[00:11:22] moving
+[00:11:23] can you time your entry and your exit
+[00:11:26] well
+[00:11:27] so if you can you'll make money and if
+[00:11:30] you can't
+[00:11:31] you'll lose money i mean it's kind of as
+[00:11:33] as simple as that
+[00:11:35] so
+[00:11:35] now let's talk about the third question
+[00:11:38] which is how to start day trading
+[00:11:41] so there's a couple different approaches
+[00:11:43] to this but i'll sort of lay out for you
+[00:11:46] what i would do if i were starting over
+[00:11:48] today if i was going to start over today
+[00:11:49] as a brand new trader
+[00:11:51] i would probably do things a little
+[00:11:52] differently from how i started years and
+[00:11:54] years ago the first thing i would do is
+[00:11:57] i would not put real money into the
+[00:11:59] market
+[00:12:00] until i had first proven i could be
+[00:12:02] profitable in a simulator and this is
+[00:12:05] like it seems like so logical i mean you
+[00:12:08] don't fly a plane without practicing in
+[00:12:10] a flight simulator and doing
+[00:12:12] hours and hours and hours more than just
+[00:12:14] two or three but you know probably
+[00:12:16] hundreds of hours of training you
+[00:12:18] wouldn't perform surgery before you know
+[00:12:21] doing your residency and watching other
+[00:12:23] people do it and this i mean it's just
+[00:12:25] like there's a process of how you learn
+[00:12:27] to do things that are difficult and that
+[00:12:30] require a pretty high level of
+[00:12:32] experience and then there's the way that
+[00:12:34] most people start day trading and the
+[00:12:36] way most people start day trading is
+[00:12:38] they open an account on their phone
+[00:12:39] robinhood e-trade ameritrade and on
+[00:12:42] their phone they tap the buy button and
+[00:12:44] they're in and just like that money's on
+[00:12:46] the line and you know why traders are
+[00:12:49] inclined to do that
+[00:12:51] it's because they want they want it fast
+[00:12:53] they want to make money quick and i can
+[00:12:55] tell you after years of doing this
+[00:12:57] there's no shortcuts you're not going to
+[00:12:59] have quick money you're not going to be
+[00:13:00] able to blindly follow me or anyone else
+[00:13:02] and just make money overnight or within
+[00:13:05] like five minutes
+[00:13:06] you need to pay your dues and so if you
+[00:13:08] actually want to learn how to day trade
+[00:13:11] your best bet is to set up a simulated
+[00:13:14] trading account
+[00:13:15] and in that simulated trading account so
+[00:13:17] a pretend money account and you could do
+[00:13:19] this with td ameritrade i do have a
+[00:13:21] simulator that members over at warrior
+[00:13:23] trading use but it has real-time market
+[00:13:25] data so it costs money with td
+[00:13:28] ameritrade they often will let people
+[00:13:31] with a very small account even like 500
+[00:13:32] bucks use the simulator that they have
+[00:13:34] for free it's not perfect it's not as
+[00:13:37] good as the simulator that that i use
+[00:13:39] but you know it it can work if you want
+[00:13:41] to start and you're on a budget
+[00:13:43] so practice is a simulator and what you
+[00:13:46] want to start practicing is test out a
+[00:13:49] strategy so like that micro pullback
+[00:13:51] strategy pdf try trading that in a
+[00:13:53] simulator and see if you can make money
+[00:13:55] doing it because here's the thing if
+[00:13:57] there's someone else out there that has
+[00:14:00] this blueprint and they're making money
+[00:14:01] trading then you want to try to figure
+[00:14:03] out what they're doing you want to see
+[00:14:04] if you can replicate it it's not about
+[00:14:07] blindly following it's about actually
+[00:14:09] understanding how they're getting in and
+[00:14:11] out how they're trading the market this
+[00:14:13] would be the same if you're going to
+[00:14:14] open a coffee shop what makes sense it
+[00:14:17] probably makes sense to look at a
+[00:14:18] business model for coffee shops because
+[00:14:20] it's a proven business model but yet
+[00:14:22] there are some people that open a coffee
+[00:14:24] shop and go out of business they fail
+[00:14:27] so it seems like some of those failures
+[00:14:29] are somewhat avoidable if
+[00:14:31] they take the time ahead of things to
+[00:14:34] really research what they're getting
+[00:14:36] into and to really think about it
+[00:14:37] carefully
+[00:14:38] so i think the best way to start day
+[00:14:40] trading is to set up a simulated trading
+[00:14:42] account and to practice trading a
+[00:14:44] strategy that someone else has already
+[00:14:45] proven is profitable now whether that's
+[00:14:47] mine or someone else's you do as you'd
+[00:14:49] like but the whole idea here is just to
+[00:14:51] kind of get your feet wet to see whether
+[00:14:53] or not you feel like this makes sense
+[00:14:55] and you can do this so let me jump over
+[00:14:58] to the charts and let me just show you a
+[00:14:59] couple of things here so one of the
+[00:15:01] things that i do each morning
+[00:15:04] is i try to find the right type of stock
+[00:15:05] to trade this is one of the most
+[00:15:07] important things you'll learn as a
+[00:15:09] aspiring trader is that 99 of the stocks
+[00:15:12] in the market on any given day are not
+[00:15:16] good stocks to try to day trade because
+[00:15:18] they won't have enough intraday
+[00:15:20] volatility they'll move but they won't
+[00:15:22] move enough you know this is a stock
+[00:15:24] that went up 30 percent if we look at
+[00:15:26] our um so these are the scanners that i
+[00:15:28] use here um so we can look at top
+[00:15:30] gainers right now
+[00:15:32] so our top gainer scanner right now
+[00:15:33] shows agris holding at first place
+[00:15:36] as a 44 gap then you've a 44 gainer
+[00:15:40] you've got awh at 41 dtst is pulled back
+[00:15:44] is it 35 now versus a gap pre-market of
+[00:15:47] 59
+[00:15:48] and this is some lingo gaps and stuff
+[00:15:50] like that you'll learn that the more you
+[00:15:52] tune in the more you kind of study and
+[00:15:54] watch the markets you can also subscribe
+[00:15:56] because every morning i go live on
+[00:15:58] youtube for the morning show so you can
+[00:15:59] watch the morning show and that's when i
+[00:16:01] break down my watch list
+[00:16:02] all right so
+[00:16:04] my goal is to try to find these stocks
+[00:16:07] as early in the morning as possible
+[00:16:09] and so what i do is i have a system of
+[00:16:12] scanning the market and that's what this
+[00:16:15] all this software is if you're not
+[00:16:16] familiar with it this is stock scanning
+[00:16:19] software so this is actually searching
+[00:16:21] the market in real time kind of like
+[00:16:24] radar it's searching for something
+[00:16:26] moving if something starts moving
+[00:16:29] i'm going to get audio alerts and it's
+[00:16:31] going to pop up right here i'm going to
+[00:16:33] be able to pull up that stock really
+[00:16:34] quickly so marps indo you know these
+[00:16:38] started alerting let's see indo started
+[00:16:41] alerting down at
+[00:16:43] what was it 15
+[00:16:44] 15 73 1565
+[00:16:47] and it kept alerting
+[00:16:49] right the fact the stock kept alerting
+[00:16:50] kept alerting kept alerting it gave
+[00:16:53] multiple opportunities to see that stock
+[00:16:55] moving in real time and then the
+[00:16:57] question is you know was there a micro
+[00:16:59] pullback that you were comfortable with
+[00:17:00] that you were able to take a trade on
+[00:17:02] and then how did you perform
+[00:17:04] on that trade
+[00:17:06] so the way i kind of break down stock
+[00:17:08] selection
+[00:17:10] uh
+[00:17:11] and i'll back this up there's a couple
+[00:17:12] of criteria that i look for
+[00:17:15] so in order to find a stock that i think
+[00:17:17] has the potential to do something like
+[00:17:19] this right to go up at least 10 percent
+[00:17:23] what i'm gonna do is i'm gonna look for
+[00:17:24] stocks number one
+[00:17:26] price
+[00:17:27] between
+[00:17:29] uh two dollars and twenty bucks by
+[00:17:31] looking at this price range
+[00:17:33] this these stocks a two dollar stock for
+[00:17:36] it to go up 10 it only needs to go up 20
+[00:17:38] cents that's very achievable if the
+[00:17:42] stock has a catalyst
+[00:17:45] so what's a catalyst this is um in
+[00:17:47] parentheses news
+[00:17:50] all right so over here what i'm
+[00:17:52] searching for on these stocks is what's
+[00:17:54] the headline so dtst this one i pull it
+[00:17:58] up on warrior and i pull uh scroll down
+[00:18:00] here and i can see that we've got
+[00:18:02] headline right here so this was earnings
+[00:18:05] that was the headline this morning
+[00:18:06] reports a 230 percent 236 percent
+[00:18:09] increase in revenue and achieves
+[00:18:11] profitability so
+[00:18:12] that's a catalyst
+[00:18:14] that's a real stock a real company that
+[00:18:17] is putting out news
+[00:18:19] right and that's what sent the stock up
+[00:18:21] sixty percent now the thing is this news
+[00:18:23] was posted at seven a.m
+[00:18:26] okay now we know that pre-market starts
+[00:18:28] at 4 a.m so let's look at the chart dtst
+[00:18:32] so and let's look at 4 a.m this is
+[00:18:34] pulled back a little bit or 7 a.m so the
+[00:18:36] news comes out and pretty much
+[00:18:37] immediately it starts squeezing up and
+[00:18:40] so that right there gives you multiple
+[00:18:42] opportunities to see the stock in real
+[00:18:45] time so the price on this is right okay
+[00:18:48] the price is between 2 and 20. it's got
+[00:18:50] a catalyst it's got news
+[00:18:53] and the number three one of the things i
+[00:18:54] look for is relative volume
+[00:18:57] five
+[00:18:58] five times
+[00:18:59] or higher
+[00:19:01] so this is an interesting calculation
+[00:19:03] relative volume
+[00:19:05] what this does is it tells us the
+[00:19:06] average volume of the stock
+[00:19:08] over the last period over a fixed period
+[00:19:11] of time and then what the volume is
+[00:19:12] today so yesterday for instance this
+[00:19:14] traded on 30 000 shares of volume and
+[00:19:16] today has is that 60 million shares so
+[00:19:20] the relative volume is ridiculous and
+[00:19:22] this is going to show actually is
+[00:19:24] 1167
+[00:19:27] times relative volume over on my scanner
+[00:19:30] right here so
+[00:19:32] 1167 times relative volume that's huge
+[00:19:36] that certainly meets my minimum of being
+[00:19:39] at least five times higher but the fact
+[00:19:41] is if we look back at this scam we'll
+[00:19:43] see today in the entire market of
+[00:19:46] thousands and thousands of stocks to
+[00:19:48] trade
+[00:19:49] you know there's less than probably 20
+[00:19:51] that have relative volume of five times
+[00:19:53] are up
+[00:19:54] so just like that in terms of finding
+[00:19:58] stocks to day trade i've whittled down
+[00:20:00] from 5 000 stocks or 7 000 stocks
+[00:20:04] down to about 20
+[00:20:06] just with one filter one filter relative
+[00:20:08] volume and now you filter again you add
+[00:20:11] a price filter on it you have the price
+[00:20:13] filter between two and 20 you add a
+[00:20:15] couple more filters and next thing you
+[00:20:17] know you've got a list of three or four
+[00:20:18] stocks and those are the ones that you
+[00:20:20] want to be watching very very closely
+[00:20:24] so if we go back to the whiteboard
+[00:20:27] at the top you know the basic question
+[00:20:29] is what is day trading and day trading
+[00:20:31] is the simple act of buying and selling
+[00:20:34] within a very short period of time with
+[00:20:36] the goal of producing profit and the way
+[00:20:38] to make money day trading is to find
+[00:20:40] stocks moving quickly and to be able to
+[00:20:43] get in and get out capturing a profit
+[00:20:46] you want to make more than you lose on
+[00:20:48] average and you want to win more
+[00:20:50] frequently than you lose on average and
+[00:20:52] this all of this goes back to metrics so
+[00:20:55] you know i've got my um you know my
+[00:20:57] broker statements here which are over on
+[00:20:59] the warrior trading website but i have a
+[00:21:01] long
+[00:21:02] history of data from my trading that i
+[00:21:05] can review and i can look at those
+[00:21:06] metrics and from those metrics i can
+[00:21:08] draw insights about what time of day i
+[00:21:10] perform the best what price range stock
+[00:21:12] i trade the best
+[00:21:13] uh what um we've got time of day we've
+[00:21:16] got price range we've got what my
+[00:21:17] accuracy is what my average profit to
+[00:21:19] loss ratio is so all of that data
+[00:21:22] really is pointing me in the direction
+[00:21:24] of what i should focus on and what i
+[00:21:25] should avoid
+[00:21:27] so
+[00:21:27] the idea is to double down on what
+[00:21:30] you're good at and if you have things
+[00:21:32] that you're losing on that you're not
+[00:21:33] doing well at to cut those out and the
+[00:21:35] best way to start is by practicing in a
+[00:21:38] simulator practice trading in a safe
+[00:21:41] environment where the losses
+[00:21:43] won't cost you actual money but it gives
+[00:21:46] you the opportunity to begin learning
+[00:21:48] these early lessons about what works and
+[00:21:50] what doesn't work that's the best way to
+[00:21:52] get started so i do encourage you to
+[00:21:54] download my micro pullback strategy pdf
+[00:21:57] it's going to be down in the description
+[00:21:58] i think you guys will enjoy that uh i
+[00:22:01] encourage you to practice trading in a
+[00:22:02] simulator and i'd i'd love to have you
+[00:22:04] subscribe to the channel and tune in for
+[00:22:06] the morning show or watch some of my
+[00:22:07] live trading archives where you can go
+[00:22:09] back and actually see me trading a stock
+[00:22:11] that would have met the criteria for
+[00:22:13] being the right type of stock to trade
+[00:22:14] is of course a day trade and on some of
+[00:22:16] those days i actually make money now
+[00:22:18] some of those days i lose money just
+[00:22:20] like anyone else you know there's no
+[00:22:22] such thing as 100 accuracy
+[00:22:24] you can actually be a trader and lose
+[00:22:26] money thirty forty percent of time it's
+[00:22:28] very typical the accuracy usually is
+[00:22:30] like sixty to seventy percent for for
+[00:22:32] decent traders
+[00:22:34] so that's part of the deal you just have
+[00:22:35] to learn to be really good at cutting
+[00:22:37] your losses quickly
+[00:22:39] don't get emotional cut them quick and
+[00:22:41] then focus on doubling down on the
+[00:22:43] winning setups and letting your winners
+[00:22:46] run it's oversimplified but as a at a
+[00:22:48] very high level the whole idea for this
+[00:22:51] video is just to talk to you about the
+[00:22:52] basics of what is day trading how you
+[00:22:54] make money day trading and how do you
+[00:22:56] get started as a beginner if you want to
+[00:22:59] continue learning and you like this
+[00:23:01] episode i'm going to put two more
+[00:23:03] recommendations right here of videos you
+[00:23:05] should continue watching so there'll be
+[00:23:07] one right here and there'll be another
+[00:23:09] right there so keep studying keep
+[00:23:11] learning and i'll look forward to seeing
+[00:23:13] you in the next episode

@@ -1,0 +1,1406 @@
+# The TREND TRADING Day Trading Strategy (Millionaire Traders LOVE This)
+# https://www.youtube.com/watch?v=EHnIFKnJiXA
+# duration_sec: 3406
+
+[00:00:00] in today's episode we're going to talk
+[00:00:01] about momentum Chasers and I'm going to
+[00:00:03] share with you the techniques that I use
+[00:00:05] to figure out what I should trade on a
+[00:00:08] day when there's a ton of stuff moving
+[00:00:10] all at the same time and a lot of it
+[00:00:12] looks really good now it doesn't matter
+[00:00:15] if you're trading forx pairs you're
+[00:00:16] trading cryptocurrency futures or you're
+[00:00:18] trading stock like I am there will be
+[00:00:21] days where maybe as a result of some
+[00:00:23] type of news Catalyst in the sector
+[00:00:25] within a particular instrument or just
+[00:00:27] in the global markets there's a lot of
+[00:00:30] volatility and a lot of opportunity and
+[00:00:32] you know today a day where I saw some
+[00:00:34] Traders do really really well and I saw
+[00:00:37] other Traders struggle they struggle to
+[00:00:40] jump from instrument to instrument as
+[00:00:42] attention was shifting but that's
+[00:00:44] exactly what was happening in the market
+[00:00:46] we would see one stock that made a huge
+[00:00:48] move and then it would fade and then the
+[00:00:49] next one comes up and then the next one
+[00:00:51] the next one so chasing momentum is
+[00:00:54] something that's been around literally
+[00:00:56] for Generations it's been around for
+[00:00:57] centuries the concept of Chase in
+[00:01:00] momentum is the idea of seeking out
+[00:01:03] profit by jumping on a current Trend and
+[00:01:07] so back in the 1600s we had tulip Mania
+[00:01:11] in the Dutch golden age when the price
+[00:01:14] of tulips were skyrocketing and that
+[00:01:16] ended up being a bubble but there are
+[00:01:18] investors who made a lot of money during
+[00:01:20] that bubble because they were chasing
+[00:01:22] opportunity you really can be one of two
+[00:01:24] things in the market you can be a trend
+[00:01:26] Trader or a counter Trend Trader I find
+[00:01:29] it it to be a lot easier to join the
+[00:01:31] trend and to trade in the direction of
+[00:01:33] where things are already going so when
+[00:01:35] we look at my p&l today you're going to
+[00:01:37] notice that I actually traded 14
+[00:01:40] different stocks to come out to a total
+[00:01:42] of
+[00:01:44] $1,327 39 of profit that's a lot of
+[00:01:47] trading no doubt about it but I think
+[00:01:50] this is a really good case study because
+[00:01:52] I'm going to exemplify here how I was
+[00:01:54] able to master jumping from stock to
+[00:01:57] stock to stock and essentially being the
+[00:02:00] embodiment of a momentum Chaser now some
+[00:02:03] people are a little critical of this
+[00:02:05] term Chaser chasing in terms of the
+[00:02:09] general Trend I think is okay as long as
+[00:02:12] you're managing your risk that's what it
+[00:02:14] comes down to chasing momentum to me
+[00:02:17] means you're jumping on the trend that's
+[00:02:19] already established and that is a proven
+[00:02:22] strategy that Traders have been
+[00:02:24] implementing literally for Generations
+[00:02:27] so let's dial in here now why did I
+[00:02:29] trade so many different stocks well we
+[00:02:31] can look at the stock on the chart right
+[00:02:33] here this stock went up 100% today over
+[00:02:36] 100% from $4 up to 750 but then you can
+[00:02:39] see after it made this big move it kind
+[00:02:41] of rolled over and pulled back we'll
+[00:02:43] analyze this chart in more detail in a
+[00:02:44] few minutes but let's jump over and look
+[00:02:46] at a couple other charts so the way I
+[00:02:48] set up my monitors my main trading
+[00:02:51] screen is uh this is the screen that you
+[00:02:54] can see on my screen share while I'm
+[00:02:55] streaming for all of our members at
+[00:02:57] Warrior trading you see my p&l if if I'm
+[00:03:00] in positions if I'm out of positions and
+[00:03:01] you can see my charts you can see my
+[00:03:03] scanners now on my bottom window down
+[00:03:06] right below which is my laptop screen I
+[00:03:09] actually have my uh trading platform so
+[00:03:11] this is where I have my level two window
+[00:03:13] which is right here and this is showing
+[00:03:15] all of my actual order entries where I'm
+[00:03:18] getting in where I'm getting out so this
+[00:03:20] is the screen that I record for our live
+[00:03:22] trading archives on my second monitor
+[00:03:24] over here I guess it's my third monitor
+[00:03:26] I have two stocks that are on watch this
+[00:03:30] right here is a 1 minute 5 minute daily
+[00:03:33] and 10c time frame for the stock nexi
+[00:03:36] nexi is a stock today that if we look at
+[00:03:38] the chart went from $2 a share to seven
+[00:03:41] bucks so yes I traded it then we have
+[00:03:43] this stock here Ford so we've got again
+[00:03:46] 10c 1 minute 5 minute in Daily time
+[00:03:48] frame for this one stock and this one
+[00:03:51] went from $4 a share up to nearly $9 a
+[00:03:54] share another 100% move now we jump over
+[00:03:57] to my fourth Monitor and we've got a
+[00:03:59] couple other stocks I've got on watch so
+[00:04:02] here we had bdrx went from 80 to $160 a
+[00:04:06] nice clean 100% move and then we had lcf
+[00:04:09] y this was today's record from $2 a
+[00:04:13] share to over 11 bucks this went up
+[00:04:18] 385 in one day okay so what we ended up
+[00:04:23] essentially having happen today was it
+[00:04:26] felt like we had a week's worth of
+[00:04:28] momentum all clust clustered into one
+[00:04:31] day why does this happen well I've
+[00:04:34] actually noticed a phenomenon in the
+[00:04:36] market and we can look back at my
+[00:04:37] metrics here uh let's pull up let's see
+[00:04:40] the month of February just as an example
+[00:04:43] so I love tracking my metrics here
+[00:04:46] because this allows me to really get
+[00:04:48] detailed into my analytics of where I
+[00:04:50] make money where I lose money what I
+[00:04:52] need to lean into and why I need to stop
+[00:04:54] doing completely so if we go back here
+[00:04:57] we're going to go to reports and we're
+[00:04:59] we're going to look at let's see we're
+[00:05:01] going to do year to dat so uh year to
+[00:05:04] date right here we're going to refresh
+[00:05:06] that and we're going to go let's see
+[00:05:08] month and year and we're going to jump
+[00:05:10] into the month of February so let's see
+[00:05:12] we'll do calendar all right so February
+[00:05:15] right here this is a month where
+[00:05:18] momentum really picked up you can see I
+[00:05:20] actually only have one red day for the
+[00:05:22] whole month of February started you know
+[00:05:24] pretty nicely that first week $1,500 of
+[00:05:27] profit the second week was solid and
+[00:05:29] then look at this third week right here
+[00:05:31] of February $9,000 on the 12th 18 on the
+[00:05:34] 13th 20,000 on Wednesday the 14th today
+[00:05:39] that day uh I missed because I can't
+[00:05:41] remember what was going on but I missed
+[00:05:42] that day of trading completely I was out
+[00:05:44] then 12,000 on Friday the 16th and then
+[00:05:47] this was President's Day and then this
+[00:05:49] was Monday the uh Tuesday the 20th so it
+[00:05:51] was like
+[00:05:53] $60,000 $70,000 in like six days so we
+[00:05:58] had this little cluster of momentum and
+[00:06:01] what I've noticed for me with my trading
+[00:06:03] is that I'll have these green days and
+[00:06:05] then all of a sudden the the big green
+[00:06:08] days get stacked together and then it
+[00:06:10] slows down and you know what usually
+[00:06:11] happens here is if I'm not careful I'll
+[00:06:14] have a big red day and then this is
+[00:06:16] basically when the hot streak ends and a
+[00:06:19] cold streak begins and now during the
+[00:06:21] cold streak these green days usually are
+[00:06:24] recouping this loss right here until the
+[00:06:27] next hot streak begins but it's true
+[00:06:29] that hot streaks are usually clustered
+[00:06:31] together so what we ended up having
+[00:06:33] happen uh really so far this week has
+[00:06:36] been momentum all of a sudden has been
+[00:06:39] really hot and in fact I think this all
+[00:06:41] kind of began back in May it was it was
+[00:06:44] really in May and in June with um the
+[00:06:48] Resurgence of GameStop you know GameStop
+[00:06:50] was back in the in play with Roar and
+[00:06:52] Kitty coming back and and posting on
+[00:06:54] social media that continued into June
+[00:06:57] and then here in July I I mean this was
+[00:07:00] uh $33,000 on the week before today's
+[00:07:03] 11,000 so this is a $44,000 green week
+[00:07:06] right here right it's probably my second
+[00:07:09] biggest green week of the year and it's
+[00:07:12] in four days so literally here in 4 days
+[00:07:17] I will have made more than I might have
+[00:07:19] made in the entire month of January for
+[00:07:22] instance all a sudden Mo momentum is hot
+[00:07:24] the Market's hot and we're seeing
+[00:07:26] opportunity after opportunity after
+[00:07:28] opportunity so what I noticed happening
+[00:07:32] was um back on Wednesday so about a week
+[00:07:37] and a half ago a week and a day ago we
+[00:07:39] had one stock that made a really
+[00:07:42] impressive move and that ignited this
+[00:07:45] current round of momentum that was the
+[00:07:48] beginning so let's go back and look at
+[00:07:50] that day that was uh Wednesday right
+[00:07:53] here the the third and so the stock in
+[00:07:56] question was uh cost Koss um
+[00:08:00] this is a stock that has been a meme
+[00:08:03] social media Reddit favorite uh and
+[00:08:06] remarkably we had this move here I'll
+[00:08:09] zoom out and show you the five minute
+[00:08:11] chart where this thing in over the
+[00:08:14] course of two days basically goes from
+[00:08:17] about $4 a share all the way up to 20
+[00:08:20] bucks this was incredible and then the
+[00:08:22] next day it pulled back but it came back
+[00:08:24] up again it gave another
+[00:08:26] move I think that got the fire started
+[00:08:29] now once that begins what happens there
+[00:08:33] is a shift so we're going to talk for a
+[00:08:36] second about the shift between cold
+[00:08:38] markets and hot markets and then I'm
+[00:08:40] going to share with you the technique
+[00:08:41] that I use to capitalize when the
+[00:08:43] Market's hot and we have all these
+[00:08:44] stocks moving at the same time so the
+[00:08:47] shift occurs typically with an event
+[00:08:50] it's a catalyst it's it's one stock
+[00:08:53] usually that makes a really big move and
+[00:08:56] what that suddenly does is it catches a
+[00:08:59] lot Traders by surprise a lot of Traders
+[00:09:02] like myself who are long biased traders
+[00:09:04] meaning we profit when stocks go up may
+[00:09:06] have been sitting on the sidelines and
+[00:09:08] you know a little bit of a slump right
+[00:09:10] here not taking necessarily a lot of
+[00:09:12] risk just kind of you know chipping away
+[00:09:15] hold holding it together nothing crazy
+[00:09:17] and short sellers traders who profit
+[00:09:20] when the market declines have perhaps
+[00:09:22] started had the inverse experience where
+[00:09:25] their p&l uh could be perhaps almost
+[00:09:28] exactly inverse where having big green
+[00:09:30] days when we're having um slow days and
+[00:09:33] then we're having big green days they're
+[00:09:35] having slower days so you sort of have
+[00:09:37] this inverse now you might think gosh
+[00:09:39] wouldn't the perfect Trader just be able
+[00:09:40] to do a little bit of both and just like
+[00:09:44] as this looks a little chaotic it's a
+[00:09:46] lot easier said than done to flip long
+[00:09:48] short long short a lot of traders who
+[00:09:50] end up doing that end up kind of getting
+[00:09:52] analysis paralysis and and losing money
+[00:09:55] making mistakes so sometimes it's better
+[00:09:57] as I said in yesterday's class to be a
+[00:09:59] master of one setup one strategy before
+[00:10:03] you try to spin off five six others so
+[00:10:06] what ends up happening is you have this
+[00:10:08] stock that ignites a round of momentum
+[00:10:10] short sellers are caught by surprise and
+[00:10:13] can end up experiencing some really big
+[00:10:16] losses and that ignites a short squeeze
+[00:10:20] where when they're negative on the
+[00:10:21] position they now have to buy back
+[00:10:23] shares at a higher price and that pushes
+[00:10:25] a stock even higher and that's where all
+[00:10:27] of a sudden one day we see a stock that
+[00:10:29] goes from 30% to 50% and Traders maybe
+[00:10:32] are like ah well that's good but let's
+[00:10:34] see what it does next thing you know it
+[00:10:36] spikes up to 100% now it's up 150% 200%
+[00:10:40] and now shorts are feeling the pain and
+[00:10:42] Longs are starting to see something
+[00:10:44] breaking that standard deviation
+[00:10:46] starting to get a little excitement so
+[00:10:48] now we jump in but a little cautiously
+[00:10:50] because we've been burnt a few times in
+[00:10:52] this last cold streak so we jump in
+[00:10:54] cautiously but it's really the short
+[00:10:55] sellers that ignite that move now what
+[00:10:59] happens after that is there's a shift in
+[00:11:02] sentiment in the market traders to the
+[00:11:04] long side are starting to feel a little
+[00:11:06] bit of fomo fear of missing out those
+[00:11:10] who missed that big move like cost so
+[00:11:13] traders who missed this big move on cost
+[00:11:15] start to feel a little bit of fomo right
+[00:11:18] they're like oh man that I didn't expect
+[00:11:19] that I didn't see that coming at the
+[00:11:21] same exact time shorts are being to feel
+[00:11:24] like ooh I just began you know I just
+[00:11:27] had my first big red day I better slow
+[00:11:30] down and be a little more careful we're
+[00:11:31] starting to see things shift and what
+[00:11:34] then usually happens is the next stock
+[00:11:38] that has a similar setup that maybe is a
+[00:11:41] similar price or has a similar type of
+[00:11:43] catalyst gets a lot of attention and
+[00:11:47] then you have the beginning of this
+[00:11:49] round of momentum so when we look at my
+[00:11:52] uh calendar here we had uh so we had
+[00:11:55] Wednesday where we had this really
+[00:11:57] impressive move sorry let me put my
+[00:11:59] calendar up so we had this really
+[00:12:00] impressive move on Wednesday and then we
+[00:12:02] had the market closed for the 4th of
+[00:12:03] July so it just happened to be around a
+[00:12:05] holiday uh Friday was actually a little
+[00:12:07] slow um it wasn't it was kind of
+[00:12:10] surprising but also a day after a
+[00:12:12] holiday not too surprising and then
+[00:12:14] Monday morning we get zap
+[00:12:16] zap so zap this isn't a stock that uh is
+[00:12:21] NE is really super related to cost in
+[00:12:24] any way but you can see this thing it
+[00:12:27] began the move on let's see so it's
+[00:12:31] actually started moving on the same day
+[00:12:33] as cost but it continued moving higher
+[00:12:35] so the fifth it was a little slow and
+[00:12:38] then back mon that Monday it starts to
+[00:12:41] pick up and it makes this huge move
+[00:12:42] pre-market from 5 to 7 it pulls back and
+[00:12:45] then it pushes higher and higher and
+[00:12:47] higher it ends up going all the way up
+[00:12:48] to
+[00:12:49] $19 now it didn't do it in one day like
+[00:12:52] cost did but it just kept sustaining
+[00:12:54] this momentum so all of a sudden we get
+[00:12:57] this really big move here on zpp and
+[00:13:01] then that I think just reaffirmed for
+[00:13:04] short sellers that now is the time to
+[00:13:06] lay low hunger down and just wait until
+[00:13:09] things really roll over before going
+[00:13:11] short and now long Traders are
+[00:13:13] experiencing so much fomo and so much
+[00:13:16] excitement they're jumping into every
+[00:13:18] stock that's popping up so typically
+[00:13:21] these cycles of momentum will Peak with
+[00:13:26] days like today where everything that
+[00:13:29] hits the scanner is just getting that
+[00:13:31] much more attention because short
+[00:13:33] sellers are cautious to short anything
+[00:13:35] and long buyers are jumping in quickly
+[00:13:38] and some beginner Traders maybe haven't
+[00:13:40] learned that you can't just jump into
+[00:13:42] everything that pops up and expect to
+[00:13:44] make money maybe you could do that for a
+[00:13:46] couple of days in a really hot Market
+[00:13:48] but longterm that won't work so in this
+[00:13:51] stage right now we're kind of in the the
+[00:13:53] middle or later stage I think of a hot
+[00:13:55] streak where everything that pops up is
+[00:13:57] getting attention and that's going to
+[00:13:59] work until we get a really nasty
+[00:14:04] rejection and once we get a really nasty
+[00:14:07] rejection shorts are going to come back
+[00:14:09] in with stronger sentiment and Longs are
+[00:14:11] going to start to get a little nervous
+[00:14:12] now what surprises me actually in some
+[00:14:15] ways is that we didn't experience that
+[00:14:17] more uh this morning because LG VN
+[00:14:20] yesterday this was one of the stocks
+[00:14:22] that we traded and and did quite well on
+[00:14:26] but as you can see phenomenal move from
+[00:14:29] 80 up to 720 yesterday but then by the
+[00:14:32] end of the day it had really given back
+[00:14:33] almost all of the gains so it kind of
+[00:14:36] felt like you know on the one hand was
+[00:14:38] it strong yes it was but on the other
+[00:14:41] hand it didn't hold up super well now
+[00:14:44] another stock yesterday that I traded uh
+[00:14:46] and I actually traded this after my
+[00:14:48] recap yesterday was ivp ivp ends up
+[00:14:52] squeezing up here to 950 from you know
+[00:14:54] 350 in the morning so this made another
+[00:14:57] really big move but did it hold up well
+[00:15:00] as you can see by the end of by the end
+[00:15:02] of the trading hours at 8:00 p.m. it had
+[00:15:04] pulled back 30% off the low and by the
+[00:15:07] next morning here it was already down
+[00:15:08] almost 40% off the low and it's
+[00:15:11] continued to sell off so after seeing
+[00:15:14] those moves I was a little cautious this
+[00:15:18] morning in in wondering you know whether
+[00:15:20] or not yesterday was perhaps sort of the
+[00:15:24] the end of the road but yesterday I will
+[00:15:27] acknowledge we also just had a lot of
+[00:15:29] stocks moving up yesterday we had vvpr
+[00:15:32] this one made a really big move um you
+[00:15:34] know I mean overall from $4 up to six
+[00:15:37] nearly that was impressive
+[00:15:39] Naas this one made a big move yesterday
+[00:15:42] right we're looking at these charts A180
+[00:15:44] to
+[00:15:45] $6 sometimes it's hard to get the the
+[00:15:47] scale but these are really big moves we
+[00:15:50] had GX AI this one uh I don't know if
+[00:15:52] this one held up super well no this is
+[00:15:55] more of one that kind of popped up in
+[00:15:57] reversed but still I mean it popped from
+[00:15:59] $3 to almost six it's like a 100% pop
+[00:16:02] before It reversed then we already
+[00:16:04] looked at LG VN we had atnf this is
+[00:16:07] another one so like you know we had a
+[00:16:10] lot of stocks yesterday that made big
+[00:16:13] moves or in the last few days and then
+[00:16:16] pulled back so I was kind of concerned
+[00:16:18] this morning about whether or not we
+[00:16:20] were going to see continuation so my
+[00:16:21] first trade the day today was actually
+[00:16:23] vlcm so this morning when I first sit
+[00:16:26] down my routine and and kind of my
+[00:16:28] workflow
+[00:16:29] is that I pull up my phone in the
+[00:16:31] morning and I check the scanners on my
+[00:16:33] phone so the software that I'm using as
+[00:16:35] you guys probably well know is day trade
+[00:16:37] Dash this is software that I developed
+[00:16:40] with my own development team and it's
+[00:16:41] available for our members at Warrior
+[00:16:43] trading you can sign up just for the
+[00:16:44] software or if you're a warrior Pro
+[00:16:46] member you can get access to the
+[00:16:47] software in addition to the education so
+[00:16:50] I pull up the scanners on my phone and I
+[00:16:52] saw that vcn was the leading Gainer and
+[00:16:56] what I noticed about vcn immediately was
+[00:16:59] that the float was showing 200,000
+[00:17:01] shares so I was like wow this is a crazy
+[00:17:05] low float stock and what we have noticed
+[00:17:07] in the last few days is that some of the
+[00:17:09] biggest moves have been on stocks with
+[00:17:11] floats of under a million shares this is
+[00:17:13] where we've seen some really exaggerated
+[00:17:15] squeezes so if you haven't watched some
+[00:17:18] of my episodes where I talk about stock
+[00:17:20] selection I'll give you just a 90 second
+[00:17:23] refresher so what I'm looking for when
+[00:17:27] I'm I'm personally searching for a trade
+[00:17:30] I'm a momentum Trader and if you want to
+[00:17:32] say a momentum Trader or if you want to
+[00:17:34] say Chaser that's fine so like a
+[00:17:36] stormchaser those of you guys who have
+[00:17:38] seen uh twister right stormchasers
+[00:17:41] searching around looking to get in the
+[00:17:42] middle of a tornado well here we are
+[00:17:44] momentum Chasers we're looking to get in
+[00:17:46] the middle of some serious momentum and
+[00:17:48] volatility and we're going to try to
+[00:17:50] capitalize on it so Momo Trader Momo
+[00:17:53] Chaser however you want to call it so
+[00:17:55] I'm looking for stocks between 2 and 20
+[00:17:57] price range I'm looking for stocks that
+[00:17:59] are up at least 10% on the day with five
+[00:18:02] times relative volume I prefer a news
+[00:18:05] Catalyst although asri if Hot Market if
+[00:18:09] the market is hot then sometimes we will
+[00:18:13] see big moves even without a clear
+[00:18:15] Catalyst and number five I prefer floats
+[00:18:18] of uh
+[00:18:19] under 20 million shares but I know that
+[00:18:22] lower is better this is uh Supply right
+[00:18:25] here float represents the supply and
+[00:18:28] this all represents demand so the
+[00:18:30] imbalance between supply and demand is
+[00:18:32] created and that's when we see these big
+[00:18:34] moves so when I saw vcn on my scanners I
+[00:18:37] thought oh boy you know this looks
+[00:18:38] pretty good and that was right about
+[00:18:40] here pre-market so on my very first
+[00:18:43] trade on it I sat down and I jumped in
+[00:18:47] at about 680 right here and I was
+[00:18:49] looking for the break through $7 and it
+[00:18:52] squeeze up to 720 I get I get in at 680
+[00:18:56] I get out at 7 I then get back in at
+[00:18:59] 750 and I add at 765 and 775 and I'm
+[00:19:03] looking for the squeeze up to 8 I'm
+[00:19:05] starting to feel pretty confident and
+[00:19:07] you'll see what happens is Boom it comes
+[00:19:09] back down so I actually went red on that
+[00:19:12] first uh that first stock vlcn and I'm
+[00:19:14] still read on it today I didn't get
+[00:19:17] married to it I didn't hold it I'm not
+[00:19:19] still holding it thank goodness if I was
+[00:19:21] still holding it I had 10,000 shares so
+[00:19:23] if I was still holding it I would be
+[00:19:25] down right now you know almost $30,000
+[00:19:29] it's not worth it to hold these you've
+[00:19:31] got to be ruthless about cutting your
+[00:19:33] losses move on Let It Go I get out with
+[00:19:37] the Press of a button I'm out of that
+[00:19:39] trade so I let it go and you know at
+[00:19:42] that time I was like all right well you
+[00:19:44] know yesterday was a little cooler than
+[00:19:48] the previous two days Monday and Tuesday
+[00:19:51] and here I am starting the day in the
+[00:19:53] red by $4,000 or three whatever it was
+[00:19:55] $3,000 I was like this is not a great
+[00:19:57] start but but it's early so let's see
+[00:20:01] what happens now in a hot Market I'm
+[00:20:04] more likely to try to trade longer at
+[00:20:07] least until I'm seeing profit once I'm
+[00:20:09] seeing diminishing returns then I'll
+[00:20:11] stop trading but as long as I'm seeing
+[00:20:12] good opportunity I'll trade earlier in
+[00:20:14] the morning and I'll trade till later in
+[00:20:15] the uh morning or the afternoon so first
+[00:20:19] trade on vcn broke the ice and we get
+[00:20:22] this big flush second trade was on
+[00:20:25] Cyn Cyn this stock pops up right here
+[00:20:29] and this was incredible it went from $4
+[00:20:32] down here all the way up to five to six
+[00:20:36] to 650 up to 7 it pulls back and then
+[00:20:40] rips back up here to
+[00:20:42] 750 and here's what happened essentially
+[00:20:46] vcn when vcn rejected when we had that
+[00:20:51] nasty flush the chart was kind of ruined
+[00:20:54] from a technical perspective for those
+[00:20:56] of you guys who have gotten good at
+[00:20:57] reading Candlestick chart charts you're
+[00:20:58] going to know what I'm talking about if
+[00:21:00] you're not already good at that check
+[00:21:01] out my other episodes on how to read
+[00:21:03] Candlestick charts beginner's guide or
+[00:21:05] starting from zero these are some really
+[00:21:06] good episodes so as I looked at the
+[00:21:09] chart on vcn I just thought man this
+[00:21:11] chart's broken we've got this you know
+[00:21:14] high volume rejection we've come all the
+[00:21:16] way back down here I don't think it's
+[00:21:19] going to work you know we had nice
+[00:21:21] volume on the buying but just for
+[00:21:22] whatever reason we got a big rejection
+[00:21:24] now why did this fail in spite of low
+[00:21:27] float and high and I couldn't really say
+[00:21:30] some of these will hold up really well
+[00:21:32] and do great and others will sell it
+[00:21:34] could be insiders that are selling it
+[00:21:36] could be the company that's selling we
+[00:21:38] don't always know but the fact is with
+[00:21:40] these red candles I felt like the chart
+[00:21:42] was broken and so even though at the
+[00:21:44] time it was still up 100% nearly on the
+[00:21:48] day I started looking for the next stock
+[00:21:52] that was moving and I knew that I wanted
+[00:21:54] to try to get in at the beginning of the
+[00:21:56] move if possible but here's something
+[00:21:58] that's challenging what you're going to
+[00:22:00] notice on a day like today when the
+[00:22:01] Market's hot are lots of stocks hitting
+[00:22:04] this scanner right here so this is my
+[00:22:06] high of day momentum scanner and it's
+[00:22:08] showing all the stocks that are making
+[00:22:10] new highs and it's got the time stamps
+[00:22:12] on it and there I mean there's hundreds
+[00:22:14] of alerts on this during a day like
+[00:22:16] today because there's lots of stocks
+[00:22:18] making new highs and a lot of Traders
+[00:22:20] are going to be jumping on each of them
+[00:22:22] you can see right now bfrg has just made
+[00:22:24] a move from $1.70 up to 240 while I've
+[00:22:27] been teaching this class so missing this
+[00:22:29] and that's fine but this is another
+[00:22:31] example where Traders are jumping on it
+[00:22:32] does it have a clear Catalyst nope
+[00:22:35] floats 5 million shares it's got 500,000
+[00:22:37] shares of volume it's up 50% Traders are
+[00:22:40] jumping on and this is generating
+[00:22:42] momentum and now the fact that it's up
+[00:22:45] this much by itself is its own Catalyst
+[00:22:48] but the problem is a lot of beginner
+[00:22:50] Traders are jumping on these stocks that
+[00:22:51] have no volume they have 10 10,000
+[00:22:54] shares 15,000 shares so there's really
+[00:22:55] no volume and if there's also no clear
+[00:22:58] Catalyst like breaking news it's really
+[00:23:01] hard to know which of these are going to
+[00:23:03] kind of ignite each of them are a small
+[00:23:06] spark right a little pop but which one's
+[00:23:09] going to gain attention which one's
+[00:23:11] going to go into a flame and and it's
+[00:23:13] really hard to know because you can have
+[00:23:15] dozens of stocks that pop up that all
+[00:23:18] look similar and then just but only one
+[00:23:20] of them ignites and goes up 100% why
+[00:23:23] that one and not the others if if anyone
+[00:23:26] knew with certainty they would end up
+[00:23:28] being an incredibly successful Trader of
+[00:23:30] course and so the best we can do in my
+[00:23:33] opinion is wait for one to start to
+[00:23:38] really gain some momentum and so what I
+[00:23:40] mean by that is not just pop up a teeny
+[00:23:43] bit but actually pop up and try to pull
+[00:23:47] back and sustain that first pull back so
+[00:23:49] in this case I would say uh on bfrg the
+[00:23:53] place where this gets interesting is is
+[00:23:54] right around here first it pops up and
+[00:23:57] pulls back but on very light volume as
+[00:23:59] you can see then it pushes a little
+[00:24:00] higher and pulls back and the fact that
+[00:24:03] here it doesn't just go all the way down
+[00:24:06] that it's holding up and volume is
+[00:24:09] increasing okay it's time to take this
+[00:24:11] more seriously for the break of two and
+[00:24:13] then there's a micro pullback there at
+[00:24:14] 206 there's a micro pullback there at
+[00:24:16] 225 and you could be trading all of
+[00:24:19] these on the way up now the reason I
+[00:24:21] love trading micro pullbacks is because
+[00:24:23] it's a strategy that allows me to
+[00:24:25] capitalize on volatility when in the
+[00:24:28] middle of a move traders who don't trade
+[00:24:31] micro pullbacks but are are just waiting
+[00:24:33] for the first five minute pattern to
+[00:24:35] form a lot of times they're going to
+[00:24:37] miss this entire move because it's not
+[00:24:40] you're not going to have a f- minute
+[00:24:41] pattern you'll have a stock that goes up
+[00:24:43] 100% in 5 minutes or 10 15 minutes and
+[00:24:46] then comes all the way back down now
+[00:24:48] there's an opportunity in that
+[00:24:50] volatility to capture some profit but
+[00:24:52] you have to be willing to reduce your
+[00:24:53] time frame down to one minute charts and
+[00:24:56] even 10-second time frames to to take
+[00:24:58] those micro pullbacks I will put a link
+[00:25:01] to my micro pullback strategy PDF it's a
+[00:25:04] free download that you can print out put
+[00:25:06] it on your computer or you know print
+[00:25:08] print it put it on your desk and you can
+[00:25:10] follow in your own trading as always if
+[00:25:12] you're going to start following my
+[00:25:13] strategy I encourage you to practice in
+[00:25:15] a simulator before you put real money on
+[00:25:17] the line because you're testing
+[00:25:18] something new that's unfamiliar right so
+[00:25:20] manage your risk and take it slow but
+[00:25:22] that'll be pinned to the top of the
+[00:25:23] comments and Linked In the description
+[00:25:25] so micro pullbacks for me as soon as it
+[00:25:28] starts to pull away has been the best
+[00:25:30] way for me to trade these if I jump in
+[00:25:33] everything that's popping on the scan
+[00:25:35] like plsc this one just pops up H where
+[00:25:38] do you where do you buy this right I
+[00:25:41] mean there's no liquidity there's no
+[00:25:42] volume unless it had breaking news that
+[00:25:45] just came out or it's moving really
+[00:25:47] really fast it's probably going to be
+[00:25:50] too dangerous to trade it so I got to
+[00:25:52] let it move up and then wait for that
+[00:25:54] first micro pullback to jump on and so
+[00:25:58] with Cyn that's exactly what I did Cyn
+[00:26:02] will pull this up here and we'll we'll
+[00:26:03] zoom in even on the 10-second chart on
+[00:26:05] this one because it was such a fast
+[00:26:07] moving stock um we have 10-second charts
+[00:26:10] as part of the day trade Dash platform
+[00:26:12] by the way so you guys can use these in
+[00:26:13] your trading okay so so right here we
+[00:26:17] start to pull away look at that pullback
+[00:26:19] right there 520 that's so clean just a
+[00:26:22] really nice little dip now it's not it's
+[00:26:25] not the biggest pullback but it's not
+[00:26:27] bad either so so let's see so Cyn we get
+[00:26:30] this move here pull back at 520 moves up
+[00:26:33] again another micro pullback there moves
+[00:26:36] up again a little bit of a bigger dip
+[00:26:39] but then reclaims $6 right here gets
+[00:26:41] back above that whole dollar and rips
+[00:26:44] back through the high of 640 squeezes up
+[00:26:46] to 680 up to 7 little dip and then up to
+[00:26:50] 720 that right there I mean that's a
+[00:26:52] clean you know beginning of the move and
+[00:26:55] then it pulls back right here gets back
+[00:26:58] low volume weight average price and then
+[00:27:00] as soon as it's back above it first
+[00:27:01] pullback back in play moving higher
+[00:27:04] another pullback back in play moving
+[00:27:06] higher so essentially the best way to
+[00:27:09] trade these for me is to wait for these
+[00:27:11] little dips and to buy these pullbacks
+[00:27:13] for the next leg higher so I can draw as
+[00:27:15] sending support lines if that's helpful
+[00:27:18] and you're welcome to do that if that's
+[00:27:19] helpful for you watch when the price
+[00:27:21] gets near these support lines and look
+[00:27:23] for them that move back up especially
+[00:27:26] you want to focus on volume seeing
+[00:27:28] increasing volume increasing volume that
+[00:27:31] tells you that more Traders are focusing
+[00:27:33] on this stock people are getting excited
+[00:27:35] about it and that's what we like to see
+[00:27:38] so Cyn I'm aggressively trading it here
+[00:27:41] in this section of the move and I would
+[00:27:43] call that the front side of the move so
+[00:27:47] on a in a market that's really frothy
+[00:27:49] where you've got you know these stocks
+[00:27:51] popping up and jumping higher you want
+[00:27:54] to focus on trading the front side and
+[00:27:56] you're going to have these exaggerated
+[00:27:58] moves where the front side can be really
+[00:28:00] big like this but the back side can be
+[00:28:03] big as well where you get that big flush
+[00:28:05] so that was the front side marked by a
+[00:28:08] topping tail dogee candle and then a
+[00:28:11] correction back down now we have the
+[00:28:13] macd crossing over here we go under vwap
+[00:28:16] and then we come back up right here when
+[00:28:18] we come back up right here notice the
+[00:28:20] macd crosses back into the positive and
+[00:28:22] that's my signal here as this comes
+[00:28:24] above vwap and then macd confirms that
+[00:28:26] we're moving back in the right direction
+[00:28:28] to trade these pullbacks micro pullback
+[00:28:31] one minute pullback for that retest of
+[00:28:33] the high of day once we drop down again
+[00:28:36] once again macd crosses over back out of
+[00:28:38] the trade now in this area I started to
+[00:28:41] lose interest because I felt like if it
+[00:28:43] was really strong it shouldn't have
+[00:28:45] pulled back quite this much it should
+[00:28:46] have kind of H hung out like up in this
+[00:28:49] area for a move through eight so I ended
+[00:28:52] up kind of giving up on this one after a
+[00:28:53] little while which was the right move it
+[00:28:55] pulled back and you know what happened a
+[00:28:57] lot of Traders gave up on it as well
+[00:29:00] Traders were really excited on Cyn and
+[00:29:03] then once it started to fade they're
+[00:29:05] like I can't get in
+[00:29:07] here I'm I'm done with it and and what
+[00:29:09] you'll notice is that Traders can be
+[00:29:11] very fickle they'll jump from stock to
+[00:29:13] stock to stock to stock so whatever is
+[00:29:16] currently at the highs that's the stock
+[00:29:19] that's going to have the most volume at
+[00:29:21] that moment and I like to focus on
+[00:29:23] trading what has that volume because
+[00:29:25] that's liquidity that allows you to
+[00:29:27] easily get in and out with 5,000 10,000
+[00:29:31] 15 20,000 shares boom boom in out and
+[00:29:34] that's where with 5 10 15 20 cents of uh
+[00:29:37] profit you're locking up some really
+[00:29:39] nice gains so switch to Cyn it makes a
+[00:29:43] nice move and then it starts to pull
+[00:29:45] back and after a bunch of trades on that
+[00:29:47] I was like all right we got to switch
+[00:29:48] gears so switch gears and let's see next
+[00:29:52] trade KZ
+[00:29:55] KZ this is a penny stock that I traded
+[00:29:57] and I'm not going to go over every
+[00:29:59] single one of these trades because
+[00:30:00] there's too many I think to
+[00:30:02] realistically go over but I'll just
+[00:30:03] highlight some of them so
+[00:30:05] kzi we had a couple of nice trades on
+[00:30:08] this but you can see this was a really
+[00:30:09] nice stretch at the front side of the
+[00:30:10] move on heavy volume it broke through
+[00:30:13] that 120 pre-market level and it pushes
+[00:30:16] up to 130 140 150 up to 160 and then it
+[00:30:19] dips down so this is one again you want
+[00:30:22] to trade the front side of the move when
+[00:30:23] the macd is open avoid trading on the
+[00:30:26] back side and this is also a stock where
+[00:30:29] because it's lower priced you've got a
+[00:30:31] lot of Traders with big big orders that
+[00:30:33] are selling and th that those can create
+[00:30:35] big flushes so this area here macd is
+[00:30:38] open it's the front side of the move and
+[00:30:40] then once we pull back like this moving
+[00:30:42] averages the nine starts to go flat high
+[00:30:45] volume rejection at the top all right
+[00:30:47] it's time to step back look for the next
+[00:30:49] one so once again the way I'm looking
+[00:30:52] for the next one is I'm watching the
+[00:30:54] scanners I'm seeing some stocks popping
+[00:30:56] up but I'm asking myself which one is
+[00:30:58] really going to hold right which one is
+[00:31:00] is going to really show me that it it
+[00:31:02] wants to make a big move not just like a
+[00:31:04] teeny little pop but it's going to
+[00:31:06] actually pull away so the next one was a
+[00:31:10] bdrx so bdrx this one comes up here
+[00:31:14] we'll back this one up go to the one
+[00:31:17] minute chart and really out of nowhere
+[00:31:20] this was so this was so impressive it's
+[00:31:22] like 80 cents a share and it just starts
+[00:31:24] squeezing up right so on this one I
+[00:31:27] didn't didn't break the ice on it up in
+[00:31:29] here I didn't take my first trade until
+[00:31:31] this pullback right there that was the
+[00:31:33] pullback where I took my first trade at
+[00:31:35] about $125 do30 that was my first entry
+[00:31:38] and I felt like that made sense because
+[00:31:40] I you know I don't usually trade under a
+[00:31:41] dollar it pops up it pulls back the
+[00:31:44] volume profile was good green volume
+[00:31:46] nice big green candles light volume red
+[00:31:49] red candle yes we did have a little
+[00:31:51] gravestone dogee here that's a dogee
+[00:31:53] with a flat bottom and a sort of taller
+[00:31:56] upper Wick like this so this is a
+[00:31:58] gravestone
+[00:31:59] dogee a little nervous about that but
+[00:32:02] the volume was there and Traders bought
+[00:32:04] it up and off it goes up to 150 pulls
+[00:32:07] back and then goes up to 160 170 and
+[00:32:09] then right here it failed to break
+[00:32:11] through new highs and macd Crosses over
+[00:32:14] done with the trade it pulls back it
+[00:32:16] tries to come back up one more time and
+[00:32:18] actually did get back in it at 160 it
+[00:32:21] was a little risky but macd was coming
+[00:32:23] back up volume was coming back in I was
+[00:32:25] looking for the break of 170 and as you
+[00:32:27] could see it stalled out so I think I
+[00:32:30] maximized on this one pretty well you
+[00:32:32] know
+[00:32:33] $1,800 that's certainly not bad best
+[00:32:36] exit probably around 167 168 so you know
+[00:32:41] again traded that one and then once it
+[00:32:42] rejected here it halts down and now I'm
+[00:32:46] like all right well if it's halting down
+[00:32:49] I I'm obviously not interested in it
+[00:32:50] here so well what else is moving so then
+[00:32:54] back to the scanners so now watching the
+[00:32:56] scanners again look to see what else is
+[00:32:58] popping up so the next one was um
+[00:33:03] hscs now hscs is interesting I'm
+[00:33:06] actually not up that much on this one um
+[00:33:09] hscs this one rejected hard look at this
+[00:33:13] so this one went from 45 to 750 and then
+[00:33:17] came all the way back down and is
+[00:33:18] actually red on the day today now it had
+[00:33:22] news which is the crazy thing the news
+[00:33:25] was granted a patent which is not I mean
+[00:33:29] not everyone loves patent news headlines
+[00:33:31] but it is a headline nonetheless so this
+[00:33:34] one pops up on my scan and my first
+[00:33:37] entry on it was let's see um I got in
+[00:33:41] just over $5 so it pops up right here it
+[00:33:45] drops down and then it starts to curl
+[00:33:48] now this was looking really good right
+[00:33:50] here it moves up to 6 650 to 7 I'm
+[00:33:53] taking profit and then here can you see
+[00:33:56] what the problem was look at the selling
+[00:33:59] volume so even right here high volume
+[00:34:03] selling so this to me was a bit of a
+[00:34:06] warning sign and you know because I
+[00:34:09] traded 14 different stocks today I
+[00:34:11] didn't have an opportunity to pull up uh
+[00:34:13] the filings on each of these before I
+[00:34:15] was taking trades these were just moving
+[00:34:17] way too fast so if we pull up the
+[00:34:19] filings we could look to see well do
+[00:34:21] they have a shelf registration is there
+[00:34:23] a risk of them doing an offering do they
+[00:34:25] have warrants what are the warrants
+[00:34:27] priced at you know what's the balance
+[00:34:28] sheet look like what does their cash
+[00:34:30] position you know what are what are
+[00:34:31] their operating costs is this a company
+[00:34:33] in other words that has a high risk of
+[00:34:36] um duding the value of the company by
+[00:34:38] offering shares and selling shares
+[00:34:40] because if they do have a high risk then
+[00:34:43] we may see that today even though the
+[00:34:45] news isn't maybe phenomenal it's it's
+[00:34:48] enough for them to sell some shares on
+[00:34:49] the market and to raise some money they
+[00:34:51] may take that opportunity so you know
+[00:34:53] once you get into the balance sheet you
+[00:34:55] start looking at you know how things
+[00:34:57] look you can get a better
+[00:34:58] better perspective but for me just
+[00:35:00] purely from a technical point of view
+[00:35:03] just technical analysis entry take
+[00:35:06] profit as it moves higher first candle
+[00:35:08] to go red is a hard exit and high volume
+[00:35:11] selling there's no re-entry there's no
+[00:35:13] new pattern so that was it that was over
+[00:35:16] and it just sold off from there and
+[00:35:18] Traders got in it traded it some people
+[00:35:21] made money some people shorted it
+[00:35:22] whatever and then everyone's off to the
+[00:35:25] next stock that's moving higher so the
+[00:35:27] next that was moving higher oh let's see
+[00:35:29] went back to bdrx and then had a trade
+[00:35:31] on zap had a small trade on znf and then
+[00:35:34] um lcf y all right so lcf y ended up
+[00:35:37] being the next one this was around uh
+[00:35:39] 10:15 when we got this squeeze up and it
+[00:35:42] pulls back so this is the one that ended
+[00:35:45] up making the biggest move today
+[00:35:47] 385 which was really impressive and when
+[00:35:50] I first got in it I was like well we
+[00:35:53] have the 200 moving average right here
+[00:35:55] at around 520 that's probably going to
+[00:35:57] be an issue but I took my first trade on
+[00:36:00] it at about
+[00:36:03] 560 let's
+[00:36:04] see so we'll back this up so we're going
+[00:36:08] to go back here so my first trade on it
+[00:36:11] uh it halted it resumes and I got in
+[00:36:15] right here as it starts to break higher
+[00:36:17] it ends up squeezing up to 675 opening
+[00:36:20] and then dip and rip up halting up and
+[00:36:23] then opening dip and rip from 7 to 750
+[00:36:25] up to 9 squeezes all the way up to a
+[00:36:28] high of 950 then in one candle drops
+[00:36:31] comes back up and as you see we it'll
+[00:36:34] pull back we have a little bit of false
+[00:36:35] candle here and then rips up here and
+[00:36:38] then that candle yikes that is a close
+[00:36:42] call so that was a big rejection and
+[00:36:45] after that candle I had actually been in
+[00:36:47] it on this breakout right here and I had
+[00:36:50] bought and I took some profit right
+[00:36:52] before this candle and I got out and
+[00:36:55] then all of a sudden you get this
+[00:36:56] three-point FL will halt down on the
+[00:36:59] resumption I did a dip trade but it
+[00:37:01] didn't bounce and I was just like wow
+[00:37:03] that was a close call maybe maybe I
+[00:37:06] should call it a day right maybe I
+[00:37:07] should be done I don't want to overstay
+[00:37:09] my welcome when it's Tau you want to try
+[00:37:11] to lean in and double down and be
+[00:37:13] aggressive but on the other hand once
+[00:37:14] you have a close call you got to be
+[00:37:16] careful but nonetheless the next stock
+[00:37:19] that pops up nexi squeezes up it halts
+[00:37:23] it pulls back it then rips up to four
+[00:37:25] 450 I took a dip and rip on presumption
+[00:37:28] up to 5 up to 550 up to 6 and holy
+[00:37:30] smokes while we were doing this class
+[00:37:32] this one went up to 7 wow I mean it's
+[00:37:35] still happening so I I've left some
+[00:37:37] money on the table here today but I'll
+[00:37:39] remind you just as I did yesterday every
+[00:37:42] day you're doing one of two things
+[00:37:43] you're either leaving money on the table
+[00:37:45] or you're giving back profit now
+[00:37:48] sometimes if you're special you'll
+[00:37:49] manage to do both and the only way
+[00:37:51] you'll do that is if you take a break
+[00:37:53] for like an hour and you miss a lot of
+[00:37:55] opportunities so you leave some profit
+[00:37:57] on the table and then you come back and
+[00:37:59] trade and lose money then you've lost
+[00:38:02] twice so you really want to be careful
+[00:38:04] about that so for me when I do these
+[00:38:06] Recaps and I do these episodes later in
+[00:38:07] the day and I see these stocks moving I
+[00:38:09] have to be really careful that I don't
+[00:38:11] try to overcompensate for the fact that
+[00:38:13] I missed the move right I'm doing this
+[00:38:15] class for you guys I missed this move
+[00:38:17] and look I think I did well enough today
+[00:38:20] I'm up $1,000 it's a green day as it
+[00:38:23] turns out I probably could have gotten
+[00:38:24] to 12 or 13 if I kept Trading but
+[00:38:28] hindsight is always 2020 because it'll
+[00:38:31] never sort of account for the fact that
+[00:38:33] what if this had one of those massive
+[00:38:35] drops here uh like what we saw on um
+[00:38:39] whichever it was LC lcf Y which is
+[00:38:42] currently up still
+[00:38:44] 198% so this one's up 198% it's
+[00:38:47] obviously doing really well but nexi not
+[00:38:50] bad it's up
+[00:38:52] 165% so you know this is this is what we
+[00:38:56] like to see okay so let's see so let's
+[00:38:59] jump back and get reoriented here so
+[00:39:01] nexi right so traded that so my entry on
+[00:39:05] This was um yeah so we went over this it
+[00:39:09] was back in um in this area we had this
+[00:39:11] first pop this pullback halts up opens
+[00:39:14] dip in a rip got long there got the
+[00:39:17] squeeze up to 560 up to seven up to six
+[00:39:20] uh 620 high and then a rejection drops
+[00:39:23] back down now an issue with nexi was
+[00:39:25] that the 200 moving average was right
+[00:39:27] here at about
+[00:39:28] 575 so it's a little unusual that we
+[00:39:32] would break the 200 down and then be
+[00:39:35] able to get back above it which you know
+[00:39:37] ends up we even were below volume weight
+[00:39:40] average price so what sent this all the
+[00:39:43] way back up to five to six and up to
+[00:39:45] seven well there's some serious momentum
+[00:39:48] in the market right now and it's that I
+[00:39:50] wouldn't say you shouldn't consider
+[00:39:52] trading something like this I mean this
+[00:39:54] is moving it was obvious at the time
+[00:39:57] when of the scanners that I like to use
+[00:39:59] um let's see let me pull it up so um top
+[00:40:02] volume in the F last five minutes so top
+[00:40:05] volume in the last five minutes is going
+[00:40:07] to show you the stocks right now that
+[00:40:10] have the most volume and this is in the
+[00:40:12] entire market so nexi and lcf Y and Ford
+[00:40:16] and bfrg these all are peing in the
+[00:40:19] entire stock market so you want to
+[00:40:22] follow the volume around the market if
+[00:40:24] you're a stormchaser right you're using
+[00:40:26] your meteorology skills to figure out
+[00:40:29] where you might have a storm if you're a
+[00:40:31] Momo Chaser you're using your scanners
+[00:40:34] to try to figure out what's moving now
+[00:40:36] some momentum Traders are going to use
+[00:40:38] Reddit and social media and that can be
+[00:40:40] helpful through Word of Mouth to find
+[00:40:42] out what's moving but I think scanners
+[00:40:44] are great because you're getting
+[00:40:45] realtime data from the market and it's
+[00:40:48] telling you right now instantaneously
+[00:40:50] what's happening so anyway so so nexi
+[00:40:54] that would have been the easiest way to
+[00:40:55] find it one thing that be a little
+[00:40:57] tricky is that um a like this stock here
+[00:41:01] H VR that's moving up or this one here
+[00:41:04] that has the Green Arrow moving up these
+[00:41:06] are moving up the scan so you might not
+[00:41:09] notice them when they're lower down on
+[00:41:10] the scanner and that's where this works
+[00:41:13] nicely in conjunction with your high a
+[00:41:16] day scanner so you've got the high a day
+[00:41:17] scanner showing you something making new
+[00:41:19] Highs but then you also have the top
+[00:41:21] volume scanner showing you just in the
+[00:41:23] last five minutes what's got the most
+[00:41:25] volume right and the the top Gainer
+[00:41:27] scanner showing you the biggest
+[00:41:28] percentage gainers in the market uh and
+[00:41:31] so you know very clearly telling us
+[00:41:34] where there's attention where people are
+[00:41:35] focusing so we got this move on nexi
+[00:41:38] then following nexi uh let's see the
+[00:41:41] next one was Ford all right so then all
+[00:41:44] of a sudden Ford pops up now here's
+[00:41:46] here's the the thing about Ford when
+[00:41:49] this one first hit my scanner look at
+[00:41:51] this move this is pretty much a
+[00:41:53] rejection higher volume selling right
+[00:41:55] definitely higher volume selling on Ford
+[00:41:57] also pierced the 200 moving average and
+[00:41:59] pulled back this is the type of day
+[00:42:02] where you could have 30 stocks like Ford
+[00:42:07] go up 100% And it's crazy and and a lot
+[00:42:11] of traders who trade momentum will jump
+[00:42:13] from stock to stock to stock to stock
+[00:42:15] and a lot of short sellers on a day like
+[00:42:17] today maybe building a cushion shorting
+[00:42:19] these because in fact we're seeing a lot
+[00:42:21] of them are pulling back what I would
+[00:42:24] actually prefer to see is one that's
+[00:42:27] just going absolutely insane versus 20
+[00:42:31] that pop up and then do a full reversal
+[00:42:34] all the way back down because what what
+[00:42:36] happens when you have moves like this is
+[00:42:38] short sellers are going to start
+[00:42:39] shorting earlier and earlier and earlier
+[00:42:41] knowing that this is going to happen you
+[00:42:44] need more moves like nxi where they
+[00:42:47] don't drop I mean and this dropped
+[00:42:49] enough that shorts probably could have
+[00:42:50] covered for profit but you need you need
+[00:42:52] ones that just keep sustaining remember
+[00:42:55] that's what started this whole cycle of
+[00:42:56] momentum
+[00:42:57] we go back to the beginning it was zap
+[00:42:59] right it was cost these stocks that over
+[00:43:02] the course of several days just did not
+[00:43:05] let up so like yes there were momentary
+[00:43:07] pullbacks but it just generally kept
+[00:43:10] going higher so shorts just were not
+[00:43:12] getting a break on it costs same thing
+[00:43:15] shorts not getting a break and this
+[00:43:17] really went parabolic going from 10 to
+[00:43:20] 20 in like 10 minutes so people just
+[00:43:22] momentum Traders crushed it and short
+[00:43:24] sellers got taken by surprise and and
+[00:43:27] lost I'm sure there are millions of
+[00:43:29] dollars in cumulative losses by shorts
+[00:43:31] so with Ford this one popped up but the
+[00:43:35] problem with Ford was that from the very
+[00:43:37] beginning the volume was very light so
+[00:43:40] it popped up and halted up
+[00:43:43] here let's see the first halt up was
+[00:43:45] actually here at 487 and it was on about
+[00:43:48] 70,000 shares of volume okay so it's
+[00:43:51] very light I tried to get in into this
+[00:43:54] halt because I saw it moving higher and
+[00:43:56] I filled 348 shares that was I mean I I
+[00:44:00] tried to get in with 500 and I filled
+[00:44:02] 348 so I couldn't even buy a l of shares
+[00:44:04] cuz there was just no volume it opens
+[00:44:07] and it drops and then immediately goes
+[00:44:09] into another halt right here and it
+[00:44:12] happened so fast and the volatility was
+[00:44:14] so big that I was just like you know I
+[00:44:18] only have 348 shares and I ended up
+[00:44:20] stopping out so I stopped out for like a
+[00:44:23] $17 loss when it dropped here and then
+[00:44:26] when it came back up I got back in with
+[00:44:28] 250 shares and got a small little trade
+[00:44:31] as it came up to the halt level it then
+[00:44:33] drops pops up drops halts up right here
+[00:44:37] at 620 opens and immediately goes to
+[00:44:39] another halt opens almost to another
+[00:44:42] Halt and then drops down hals down then
+[00:44:45] it bounces here comes back up and right
+[00:44:47] in here I'm okay with it this still has
+[00:44:50] the potential of reclaiming these levels
+[00:44:52] but then macd cross over and starts to
+[00:44:54] sell off more and that that was was the
+[00:44:57] end of the day for Ford and you know
+[00:44:59] very quickly Traders sort of abandoned
+[00:45:01] Ford and jumped on to the next one now
+[00:45:04] that's where I ended up saying so let's
+[00:45:07] see um so this this peaked at about
+[00:45:09] 12:15 so that's about where I called it
+[00:45:11] a day so as we looked at bfrg earlier um
+[00:45:14] I missed that move this one went from a
+[00:45:16] $170 to 40 but right now would you say
+[00:45:19] it's on the front side or the back side
+[00:45:20] of the move I would say it's on the
+[00:45:22] backs side McD's crossed over right high
+[00:45:25] volume on these candles here we're on
+[00:45:27] the back side of the move the fun is
+[00:45:29] over for now on bfrg and that's fine we
+[00:45:32] had another stock that hit the scanner
+[00:45:34] xtlb did this one give smacking not
+[00:45:37] really right super light volume it
+[00:45:40] didn't drop but it's not holding up gri
+[00:45:43] 283,000 share float Traders aren't
+[00:45:46] jumping right they're not biting they're
+[00:45:48] not going for that one we looked at at
+[00:45:50] oh no we looked at
+[00:45:51] PLS um at at you know these ones they're
+[00:45:55] light volume they're just not going so
+[00:45:58] bfrg that gave a bigger move Hao it
+[00:46:02] tried but Traders didn't go for it they
+[00:46:05] didn't bite so this is the thing like I
+[00:46:07] just never know you know what Traders
+[00:46:09] are going to bite on you know we we I
+[00:46:12] don't think we do so we just sort of go
+[00:46:14] with what's moving right now and here
+[00:46:16] you know nexi makes that second leg
+[00:46:18] higher that's great to see so it got
+[00:46:21] back over vwap and maybe just the fact
+[00:46:22] that had made such a big move earlier
+[00:46:25] Traders were quick to jump on it this
+[00:46:27] probably is a company that's not
+[00:46:28] prepared to sell shares uh today uh they
+[00:46:32] they whether or not they have a shelf
+[00:46:33] registration you know again we can go
+[00:46:35] into the filings and check now that
+[00:46:37] we've got a moment of pause um they
+[00:46:40] actually do have a valid shelf
+[00:46:42] registration it appears although I
+[00:46:45] couldn't say for sure because that's
+[00:46:47] four wait 22 that's no it's only two
+[00:46:49] years ago um let's see so
+[00:46:55] then respect
+[00:46:57] this
+[00:46:59] so you know again you could look you
+[00:47:01] could spend time going through all of
+[00:47:03] this and looking to see you know okay so
+[00:47:05] here was an offering in February that's
+[00:47:06] what I was looking for so there's an
+[00:47:08] offering of 300,000 shares TW price of
+[00:47:11] 1205 wow um so they raised some money on
+[00:47:14] that one so what was the price of this
+[00:47:16] back
+[00:47:17] then oh yeah right right right right
+[00:47:20] right right yeah so this was one that
+[00:47:23] made a big move back here this was
+[00:47:24] incredible from $56 to $28 so that's
+[00:47:27] probably part of it it's a stock that's
+[00:47:28] a history of making this these big moves
+[00:47:31] I actually forgot about that uh but you
+[00:47:33] know again that 200 moving average it's
+[00:47:34] it's kind of I don't know usually these
+[00:47:37] stocks when they make a crazy move like
+[00:47:39] that they're kind of you know these are
+[00:47:41] always kind of like little aftershocks
+[00:47:43] they're never as big usually as the
+[00:47:45] first move but what's interesting is
+[00:47:47] that the volume today is higher I
+[00:47:49] suppose that's the price was lower
+[00:47:51] people were able to trade more shares so
+[00:47:53] that's going to contribute to it the
+[00:47:55] total dollar amount of of uh shares
+[00:47:57] traded is probably low so so then yeah
+[00:48:00] so then that was nexi and as I'm looking
+[00:48:02] at the chat room right now it's it's 137
+[00:48:04] in the afternoon there's still a bunch
+[00:48:06] of Traders chatting talking about
+[00:48:08] different stocks they're watching um
+[00:48:10] some are watching lcfy0nsrw
+[00:48:26] still active and I saw a number of
+[00:48:28] people saying that they were going to
+[00:48:29] come back for power hour so Power Hour
+[00:48:32] is from 300 p.m. till 4:00 p.m. and then
+[00:48:35] of course markets open until um 8:00 P.M
+[00:48:37] for after hours trading so the window
+[00:48:40] that I've been focusing you've got 4:
+[00:48:43] a.m. to 7 a.m. so 4:00 a.m. to 7: a.m.
+[00:48:47] this is early pre-market so it's it's
+[00:48:50] premarket but I'm going to say early
+[00:48:52] premarket and then 700 a.m. to
+[00:48:55] 9:30 is is sort of what I would call
+[00:48:58] just regular pre-market and the reason I
+[00:49:00] am distinguishing these is because the
+[00:49:03] number of Brokers that are online here
+[00:49:07] from 400 a.m. I mean you've got so many
+[00:49:10] Brokers that they don't even come online
+[00:49:12] until 7 a.m. right so this is like all
+[00:49:15] of the Brokers out there your you know
+[00:49:18] all your free commission Brokers and
+[00:49:20] then you've got just a small handful of
+[00:49:22] Brokers that are that start this early
+[00:49:24] so as a result since you don't have a
+[00:49:26] lot of Brokers that are even online
+[00:49:28] before 7 you don't have a lot of volume
+[00:49:30] before 7:00 a.m. it's light volume but
+[00:49:33] then from 7:00 a.m. until 9:30 we're
+[00:49:36] fine from 9:30 until 400 p.m. we're fine
+[00:49:39] and then from 4 p.m. until 8:00 p.m.
+[00:49:41] that's the end of after hours and that's
+[00:49:43] when it stops for for everyone so
+[00:49:45] everyone stops at 4 pm that's the end of
+[00:49:47] the day but most Traders cannot use
+[00:49:50] leverage after hours which is
+[00:49:52] interesting but you can pre-market that
+[00:49:54] depends on the broker you use but a lot
+[00:49:56] of Brokers will restrict leverage at 4
+[00:49:58] p.m. so 4 p.m. because leverage gets
+[00:50:01] restricted now once again the trading
+[00:50:04] between 4 P.M and 8 pm. is going to be
+[00:50:05] lighter volume not as many people focus
+[00:50:07] that out that period And even from here
+[00:50:10] I would say that 9:30 to you know 12 is
+[00:50:14] sort of a window of opportunity and then
+[00:50:17] from you know 12 to two it's usually
+[00:50:20] slow and then from 2 to 4 that's when
+[00:50:22] we're starting to get sort of focused on
+[00:50:24] are we going to have anything for Power
+[00:50:25] Hour which really begins at 300 p.m.
+[00:50:28] right so 3: p.m. to 4:00 p.m. so that's
+[00:50:30] kind of the breakdown of the hours of
+[00:50:31] the day and during a during I would say
+[00:50:34] a typical Market I'm going to trade um
+[00:50:38] you know primarily in this area here
+[00:50:40] during a hot market I'll sometimes go
+[00:50:43] all the way to here sometimes I've even
+[00:50:46] done this from 400 a.m to 8:00 P.M
+[00:50:50] that's unusual I don't do that often uh
+[00:50:52] I've probably actually only done the
+[00:50:54] full 400 am to 800 pm
+[00:50:57] I've only actually done that one day and
+[00:50:59] that was in uh 2021 on GameStop so
+[00:51:03] that's the only time I've actually done
+[00:51:05] the full full full day um but I will
+[00:51:08] often I don't usually get up at 4 a.m.
+[00:51:10] but I will I will sometimes when the
+[00:51:11] Market's really hot and I've done that
+[00:51:13] with GameStop several times uh but
+[00:51:15] usually in this kind of Market I'm
+[00:51:16] sitting down around 7 and I'm here until
+[00:51:20] 12 or something like that and then the
+[00:51:22] afternoon I just don't expect there's
+[00:51:24] going to be a lot but the fact is these
+[00:51:25] last couple of afternoons we have
+[00:51:27] continued to see quite a lot and so for
+[00:51:30] that reason I have traded longer and I I
+[00:51:33] guess if we looked at my calendar from
+[00:51:37] uh the last couple days what you would
+[00:51:38] notice is that um so Thursday so Tuesday
+[00:51:43] you can see I peaked at 177,000 then
+[00:51:46] gave back a little bit by the end of the
+[00:51:47] day we go back to um let's see where's
+[00:51:51] the calendar so we go back to Monday
+[00:51:56] so
+[00:51:57] Monday closed at the highs so that was
+[00:52:00] fine closed at the high on Monday
+[00:52:02] Wednesday was up 14,000 and closed at
+[00:52:07] 10,900 so you know the last couple days
+[00:52:10] closed a little low but today right now
+[00:52:13] this is my high of day
+[00:52:15] $1,327 39 so closing at or near high of
+[00:52:20] day is always great oop here we go we've
+[00:52:21] got stock on the scanner so I'm looking
+[00:52:24] at this and immediately I'm seeing the
+[00:52:25] float's 161 1 million shares is it a
+[00:52:28] recent reverse split which could give us
+[00:52:29] reason to question the float no we can
+[00:52:32] just double check the filings so what
+[00:52:34] was the ticker again
+[00:52:36] awl so AMW I look at the quarterly
+[00:52:40] filings and I check the shares 263
+[00:52:43] million right there so yep we're too
+[00:52:45] high so that float that this is not
+[00:52:47] going to be one I would trade so I
+[00:52:49] sometimes we'll just double check it now
+[00:52:51] syt okay this one low float probably
+[00:52:55] have to double check that as as well
+[00:52:56] that's very very low um looking at this
+[00:53:00] it's below the 200 moving average as you
+[00:53:02] can see does it have a catalyst no just
+[00:53:05] popped from 180 to 205 so this is sort
+[00:53:08] of my quick due diligence but the fact
+[00:53:10] is the volume on both of these is very
+[00:53:11] light so either way the safest thing for
+[00:53:14] me is to wait to see if either of these
+[00:53:17] could prove themselves right continue to
+[00:53:19] hold up show me a micro pullback and
+[00:53:21] then when I actually pull up the level
+[00:53:23] two and I start looking at it that's
+[00:53:25] when I can also see all right well
+[00:53:27] where's the halt level 239 halt up 159
+[00:53:30] halt down right you can script this so
+[00:53:33] it's right here on your level two so L
+[00:53:35] LD up uh down this gives you some
+[00:53:38] perspective right now you've got a 4
+[00:53:40] Cent spread 8,000 shares on the bid I
+[00:53:42] mean it's not bad uh tight spread but
+[00:53:46] there's no volume so right now there's
+[00:53:48] no trade now you could take it a step
+[00:53:50] further and you could check short
+[00:53:51] interest or you could check not short
+[00:53:53] interest so no shares available all
+[00:53:56] right so that's kind of interesting so
+[00:53:58] then I could go uh use this other
+[00:54:00] software here let's just see so s
+[00:54:04] syt short
+[00:54:06] interest so we'll pull this up currently
+[00:54:09] the short interest is basically showing
+[00:54:11] nothing so not showing High short
+[00:54:13] interest here on fintel uh there's some
+[00:54:16] other um Services you can use to check
+[00:54:18] short interest that's a little bit more
+[00:54:20] real time but it doesn't look like this
+[00:54:22] is one that has a high level of short
+[00:54:25] interest
+[00:54:26] so let's see I'm just checking another
+[00:54:29] feed I'm showing 7% short interest so
+[00:54:31] doesn't have high short interest doesn't
+[00:54:33] have a catalyst is it going to do
+[00:54:35] anything probably not but you know there
+[00:54:38] might be some traders who did just jump
+[00:54:39] in it there because they're in that
+[00:54:41] mindset of jumping in everything that
+[00:54:43] moves now as a momentum Chaser and a
+[00:54:47] momentum Trader I know what that's like
+[00:54:49] when it's a hot Market I often will jump
+[00:54:52] very quickly but there is some basic due
+[00:54:55] diligence have to do before I jump in
+[00:54:57] I've got to make sure I've got decent
+[00:54:59] spreads I've got to make sure that it's
+[00:55:01] moving it's got rate of change and so
+[00:55:03] those are kind of things I'm doing as a
+[00:55:04] gut check now like anyone else I'm not
+[00:55:07] right 100% of the time I'm going to have
+[00:55:08] my fair share losses but I think one of
+[00:55:10] the things that a lot of our members at
+[00:55:11] Warrior trading benefit from is that
+[00:55:14] when they're tuning in my broadcast
+[00:55:16] they're able to get my real-time
+[00:55:17] commentary and you're able to benefit
+[00:55:19] from all of the educated intuition that
+[00:55:22] I've spent more than a decade building
+[00:55:25] so for a beginner Trader
+[00:55:26] that's invaluable so if you haven't
+[00:55:28] already checked out my micro pullback
+[00:55:30] strategy PDF that link is in the
+[00:55:32] description there will also be a link in
+[00:55:33] the description to do a twoe trial at
+[00:55:35] Warrior trading so come on over and join
+[00:55:37] me for two weeks you could trade side by
+[00:55:39] side with me you can use the software
+[00:55:40] that we've got here as part of that twoe
+[00:55:42] trial so you'll have access to all of
+[00:55:44] these charts you'll have access to the
+[00:55:46] scanners you'll have access to the
+[00:55:47] newsfeed plus my chat room and my
+[00:55:50] broadcast now we're uh we're always
+[00:55:52] doing improvements on this software so
+[00:55:55] um by the time some you guys may end up
+[00:55:57] doing a twoe trial a month from now or
+[00:56:00] even a year from now if you decide to
+[00:56:01] wait and do it later that's fine you may
+[00:56:03] see um there's a whole lot more features
+[00:56:05] in this platform than you see here today
+[00:56:08] so I want to thank you guys as always
+[00:56:09] for tuning into to these episodes I hope
+[00:56:11] you found this one valuable this week
+[00:56:13] has been packed with really nice long
+[00:56:15] form episodes because the market has
+[00:56:17] been giving us so many great case
+[00:56:19] studies and it's just a ton of stuff to
+[00:56:22] go over so right now I I hope you guys
+[00:56:24] are enjoying it and if you are hit that
+[00:56:27] thumbs up I hope you subscribe to the
+[00:56:28] channel and I will see you for the next
+[00:56:30] upload real soon and I'll take this
+[00:56:32] opportunity to remind you as always that
+[00:56:33] trading is risky my results aren't
+[00:56:35] typical and there is no guarantee you'll
+[00:56:37] find success whether you trade with me
+[00:56:38] or you learn on your own so please take
+[00:56:40] it slow manage your risk and I'll see
+[00:56:43] you for the next upload real soon

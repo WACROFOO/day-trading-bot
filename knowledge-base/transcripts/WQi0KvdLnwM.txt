@@ -1,0 +1,1438 @@
+# When to BUY & SELL using Candlestick Charts (with ZERO experience)
+# https://www.youtube.com/watch?v=WQi0KvdLnwM
+# duration_sec: 3331
+
+[00:00:00] as you probably already know a lot of
+[00:00:01] beginner Traders are losing money and
+[00:00:03] most beginner Traders don't know the
+[00:00:05] right places to buy if you don't have a
+[00:00:07] good entry your trade is flawed from the
+[00:00:10] beginning now it doesn't matter if
+[00:00:11] you're trading Futures Forex
+[00:00:14] cryptocurrency or you're trading stock
+[00:00:16] in this episode I'm going to share with
+[00:00:18] you the universal language of the
+[00:00:20] financial markets I'm going to show you
+[00:00:22] the very clear buy and sell signals that
+[00:00:26] exist on all Candlestick charts now if
+[00:00:29] you're not currently seeing them it's
+[00:00:31] just because your eye hasn't yet been
+[00:00:33] trained to recognize these patterns but
+[00:00:36] that is about to change right now so
+[00:00:38] let's go ahead and jump into this deep
+[00:00:40] dive of knowing the right places to buy
+[00:00:43] let's start high level we're looking at
+[00:00:44] a 5-minute Candlestick chart that means
+[00:00:47] each one of these candlesticks
+[00:00:48] represents 5 minutes of time as you may
+[00:00:51] already know from watching some of my
+[00:00:53] other episodes which have been deep
+[00:00:54] dives into technical analysis and how to
+[00:00:56] read Candlestick charts the shape of
+[00:00:59] these candles
+[00:01:00] communicate Market sentiment and when we
+[00:01:02] have multiple candles together they
+[00:01:05] create chart patterns these chart
+[00:01:08] patterns become easily recognizable buy
+[00:01:11] and sell signals this is a language of
+[00:01:14] the financial markets again it doesn't
+[00:01:16] matter if you're trading Forex
+[00:01:17] cryptocurrency futures or you're trading
+[00:01:19] stock this is a universal language
+[00:01:21] because all financial instruments can
+[00:01:23] offer Candlestick charts so when you're
+[00:01:25] looking at these charts when I look at
+[00:01:27] these when I look at this right here I'm
+[00:01:29] seeing very clear buy and sell signals
+[00:01:31] and that's what I want you to be able to
+[00:01:33] understand by the end of this episode so
+[00:01:36] high level we have um the price which is
+[00:01:39] clearly moving higher right and then at
+[00:01:41] this certain point it rolls over so as a
+[00:01:44] beginner Trader you may look at this and
+[00:01:45] think gosh all right well you know
+[00:01:47] clearly in hindsight I should have
+[00:01:50] bought maybe here or or here but it's
+[00:01:53] always easy to say that in hindsight
+[00:01:56] because in real time you know in real
+[00:01:59] time when we're looking at a chart we're
+[00:02:01] seeing the candles forming one candle at
+[00:02:03] a time and now we have to make a
+[00:02:05] prediction gosh is this really going to
+[00:02:07] get back up to this you know 6364 level
+[00:02:11] or is this going to come back down to 56
+[00:02:13] and for a beginner Trader it feels like
+[00:02:16] a guess you're looking at it and you're
+[00:02:18] like I don't know and I remember exactly
+[00:02:21] what that was like in fact I remember a
+[00:02:23] time where I've been trading for
+[00:02:24] probably almost a year and I sat down
+[00:02:27] and I looked at my charts and I was like
+[00:02:28] I don't see anything I feel like I'm
+[00:02:32] blind like I don't
+[00:02:34] see any buy or sell signals I I just F I
+[00:02:38] think I was having a moment where I just
+[00:02:39] was feeling really overwhelmed and maybe
+[00:02:41] I was looking at a really bad chart
+[00:02:43] which is probably part of the problem
+[00:02:44] but I just wasn't seeing anything so
+[00:02:47] let's back out of the chart for a moment
+[00:02:49] and jump onto the Whiteboard and what I
+[00:02:51] want to do is just sort of communicate
+[00:02:53] high level um what we're trying to
+[00:02:55] achieve so if we've got something uh um
+[00:03:00] if we've got the price which is moving
+[00:03:01] up and I'm going to just do this as a
+[00:03:02] dotted line
+[00:03:04] here as it's moving up we know that
+[00:03:08] these uh always sort of Go In Waves you
+[00:03:11] have a wave up and then you have a
+[00:03:12] pullback and another wave up and the
+[00:03:14] reason it's like that is because during
+[00:03:17] this first wave you have sort of the
+[00:03:19] first round of buyers who are coming in
+[00:03:21] and then up in this area you have your
+[00:03:24] first round of profit taking there are
+[00:03:26] people who are like all right I'm going
+[00:03:27] to look lock up some profit take some
+[00:03:29] money out and that creates a little bit
+[00:03:30] of selling pressure and then a new round
+[00:03:34] of buyers come in and the this second
+[00:03:36] round of buyers essentially they're
+[00:03:38] looking at a stock or or whatever it is
+[00:03:40] it could be a a f a Forex pair or a
+[00:03:42] commodity uh doesn't doesn't matter
+[00:03:44] they're looking at the price and they're
+[00:03:45] like this thing has made a big move
+[00:03:47] which therefore makes me interested now
+[00:03:51] something that is important to
+[00:03:52] understand is that what creates
+[00:03:54] sustained momentum is typically a
+[00:03:57] catalyst so having some type typ of news
+[00:04:00] driving the move is really important so
+[00:04:04] if you're trading Forex it could be
+[00:04:05] economic news um unemployment things
+[00:04:08] like that which can move currencies if
+[00:04:12] you're trading stocks then you're
+[00:04:14] looking at something like quarterly
+[00:04:15] earnings that have just come out news of
+[00:04:17] a new contract maybe FDA approvals
+[00:04:19] clinical trials things like that a a
+[00:04:21] true Catalyst because the catalyst is
+[00:04:25] why people bought down here in the first
+[00:04:28] place they got in in because there was
+[00:04:31] news that's why they bought right and
+[00:04:34] now naturally there's going to be some
+[00:04:36] people who take some profit they're like
+[00:04:37] all right you know I've i' I made enough
+[00:04:39] money on this so I'm going to sell a
+[00:04:41] little here sell a little here they take
+[00:04:42] a little profit and then there's a whole
+[00:04:44] new round of buyers that sit down and
+[00:04:47] see holy smokes this thing is up let's
+[00:04:50] just say it's you know 10% on the day
+[00:04:53] just just through this area so at this
+[00:04:55] point you can't see any of that none of
+[00:04:57] this has happened yet all right so you
+[00:04:59] just see well this thing is up 10% on
+[00:05:01] the day and it's pulling back so now the
+[00:05:04] question is where do I buy is this going
+[00:05:07] to go higher or is it going to go lower
+[00:05:10] how can I make an educated guess as to
+[00:05:12] which way it's going to go so the way to
+[00:05:15] do this is to use the Candlestick charts
+[00:05:19] to begin to draw out areas of potential
+[00:05:23] support the closer you can buy to a
+[00:05:26] level of support the lower your risk
+[00:05:28] will be now if I jump back on the
+[00:05:31] Whiteboard something that I'll show you
+[00:05:32] here which I always have found very
+[00:05:35] interesting is that um most financial
+[00:05:38] instruments trade with um a lot of
+[00:05:42] respect to half dollars and whole
+[00:05:46] dollars so I'm just going to draw out
+[00:05:49] these are going to be resistance lines
+[00:05:51] initially they'll be resistance lines so
+[00:05:54] we're going to look at um let's just say
+[00:05:57] we've got a news event here new news
+[00:06:00] comes out at 8:00 a.m. 8:00 a.m. eastern
+[00:06:04] and it could be any news it doesn't
+[00:06:05] matter you know just but news comes out
+[00:06:07] and the initial response is that boom
+[00:06:10] there's a wave of buying so we have our
+[00:06:12] first green candle that forms as news
+[00:06:15] comes out what's very common is that
+[00:06:18] when the news first comes out there's a
+[00:06:20] huge pop so early traders jump in really
+[00:06:24] quickly and the the stock if it's a
+[00:06:26] stock that you're looking at the chart
+[00:06:27] will have this blastoff kind of move and
+[00:06:29] then what typically happens is we come
+[00:06:32] into an area of resistance now when a
+[00:06:36] stock or or whatever it is is moving up
+[00:06:38] uh and if it doesn't have obvious
+[00:06:41] resistance on the daily chart the
+[00:06:43] resistance is going to come in around
+[00:06:45] the half dollar or the whole dollar so
+[00:06:47] when we're looking at a daily chart when
+[00:06:49] I see a a something hit my scanner and
+[00:06:52] it's moving up when I'm looking at the
+[00:06:55] daily chart the thing that I'm checking
+[00:06:57] generally is the position of the 200
+[00:07:00] exponential moving average now on a
+[00:07:03] recent IPO like Reddit we don't have a
+[00:07:05] 200 moving average yet because there
+[00:07:06] have not yet been 200 periods of price
+[00:07:09] action so if we don't have 200 periods
+[00:07:11] of price action there's not going to be
+[00:07:12] a 200 moving average but if we look at
+[00:07:15] um let's see we had one
+[00:07:17] today uh we can look at lxt lxt this is
+[00:07:22] a stock that had news this morning and
+[00:07:26] you could see it did make a little bit
+[00:07:27] of a move but pre-market as it started
+[00:07:30] moving pre-market I was like well we
+[00:07:33] have an issue here which is the 200
+[00:07:35] moving average right here at about
+[00:07:39] $326 so pre-market it moved up and then
+[00:07:44] at the open it opened up here above the
+[00:07:47] 200 and now look it's coming back down
+[00:07:49] to this level so it's now finding
+[00:07:53] support at around the 200 because it's
+[00:07:55] above it if you're below it you're going
+[00:07:57] to have resistance if you're above it
+[00:07:58] you're going to find support so this is
+[00:08:00] a very well-respected level of support
+[00:08:03] and resistance so if we had something
+[00:08:05] like that on the daily chart as the
+[00:08:07] price is moving up then I would say oh
+[00:08:09] we've got to take a look at our daily
+[00:08:11] chart to look for potential areas of
+[00:08:12] resistance and the F the the most common
+[00:08:15] is the 200 and you could see this is an
+[00:08:17] example where the price came right up to
+[00:08:18] the 200 and then it faded off that level
+[00:08:21] so once you recognize how common it is
+[00:08:24] for the price to hit the 200 in fade
+[00:08:26] you're going to look at the position of
+[00:08:27] the 200 exponential moving average
+[00:08:30] pretty much any time before you take a
+[00:08:31] trade you're going to say what's the
+[00:08:32] position of the 200 because if the 200
+[00:08:34] is really close then this isn't
+[00:08:36] something that I'm going to be able to
+[00:08:38] trade here so look at this the2 200 is
+[00:08:40] at $2 so we know that that's going to be
+[00:08:42] upside resistance if it comes up to that
+[00:08:44] level okay so given that we can
+[00:08:48] initially do some due diligence by
+[00:08:50] looking at the daily chart the next step
+[00:08:53] is by actually looking at the in the
+[00:08:55] intraday Candlestick chart so this is
+[00:08:57] going to be it could be a f minute chart
+[00:08:59] it could be a 1 minute chart it could
+[00:09:00] even be a 10-second chart but what I
+[00:09:02] know is that if there's not a daily
+[00:09:06] resistance level that's obvious such as
+[00:09:08] the 200 moving average the next levels
+[00:09:10] of resistance will be at half dollars
+[00:09:12] and whole dollars so for instance this
+[00:09:15] could be um six this could be 650 this
+[00:09:19] could be 7 this could be 750 that would
+[00:09:22] be very common and then what we see is
+[00:09:24] as the price squeezes up to this level
+[00:09:26] of 650 it's going to pull back for just
+[00:09:28] a moment
+[00:09:30] it's going to pull back for a moment and
+[00:09:32] then what we want to see is the squeeze
+[00:09:35] through this level so this right here is
+[00:09:39] beginning to represent the place to be a
+[00:09:41] buyer right in there now if you were a
+[00:09:44] buyer as this was squeezing up the
+[00:09:47] problem is where was where's support I
+[00:09:49] would say that support was the low of
+[00:09:52] the last pullback which is down here
+[00:09:55] support would be back where it came from
+[00:09:57] so that's not going to work now after
+[00:10:00] two green candles in a row and a couple
+[00:10:01] of red candles I would say that this is
+[00:10:04] starting to show support right around
+[00:10:06] here at the bottom of this pullback this
+[00:10:08] is the area to be watching for an
+[00:10:11] entry the way I do it is I get really
+[00:10:14] zoomed in on these this area right here
+[00:10:16] and what the price is doing so let's say
+[00:10:18] for example this is 650 on the offer 650
+[00:10:22] up here and down here let's just say
+[00:10:24] it's you know
+[00:10:26] 6:30 so what I'm going to watch
+[00:10:30] is as we come down to 6:30 are there
+[00:10:33] buyers at 6:30 because if there are
+[00:10:36] they're going to be forming a level of
+[00:10:38] support those big buy orders if I see
+[00:10:41] big buy orders and I begin to see orders
+[00:10:44] actually passing through the tape orders
+[00:10:47] passing through the tape means I see it
+[00:10:49] on the actual time in sales I'll show
+[00:10:51] you what that looks like so I've got my
+[00:10:54] um small account platform right here so
+[00:10:58] I had take any trades in the small
+[00:11:00] account uh yet today so I'll just show
+[00:11:03] you this okay so let's pull up a stock
+[00:11:05] um CZ this one's moving a little bit so
+[00:11:08] this is the tape these are all the
+[00:11:10] orders going through the time in sales
+[00:11:12] right so you see all those orders going
+[00:11:14] through some are red some are green the
+[00:11:16] ones that are green are taking place at
+[00:11:18] the ask price the ones that are red take
+[00:11:20] place at the bid and the ones that are
+[00:11:22] white are in between the spread so as
+[00:11:25] I'm watching a stock I'm going to watch
+[00:11:27] it pull back down towards a of what I
+[00:11:29] think could be support now this is
+[00:11:32] actually an interesting example right
+[00:11:33] here um just as it turns out because we
+[00:11:37] had um this is almost perfect because
+[00:11:40] look at this see how it had resistance
+[00:11:42] at $8 we came up to
+[00:11:45] eight once resistance came up again
+[00:11:48] resistance came up a third time we break
+[00:11:50] through eight what's the next Target 850
+[00:11:52] it goes right to 850 where it pulls back
+[00:11:54] for a moment then it pushes higher up to
+[00:11:57] 9 next level of resistance at the hold
+[00:11:59] dollar this one's a little bit more
+[00:12:01] expensive so it's showing more respect
+[00:12:02] at whole dollars and it was able to get
+[00:12:05] through the half dollar uh pretty
+[00:12:07] quickly but this is very common so once
+[00:12:10] you learn to recognize this it would
+[00:12:13] help you better understand why this
+[00:12:15] could be a strong entry right down here
+[00:12:17] to anticipate the break through this
+[00:12:19] resistance level because we know if we
+[00:12:21] break that resistance level our next
+[00:12:22] Target is a squeeze up to the next half
+[00:12:26] dollar and potentially whole dollar if
+[00:12:28] the stock is really strong
+[00:12:30] so now we're looking for a move up
+[00:12:31] towards s now again it wouldn't be
+[00:12:33] uncommon if we pull back around seven
+[00:12:35] for a moment and then that gives us the
+[00:12:38] opportunity to establish a new level of
+[00:12:40] risk at the low of this pullback and
+[00:12:43] then we get back in for the next leg up
+[00:12:46] next leg up right here so sometimes
+[00:12:48] they'll they'll break through if they're
+[00:12:50] really strong it's possible not as
+[00:12:51] common though so the entry that I want
+[00:12:55] to focus on where to buy is during these
+[00:12:58] little pullbacks
+[00:13:00] because what's happening the psychology
+[00:13:02] of this pullback you think about what
+[00:13:05] what other Traders are thinking in that
+[00:13:06] moment so some Traders were in earlier
+[00:13:10] and we had this huge squeeze and they're
+[00:13:11] like I'm going to take some profit off
+[00:13:12] the table I'm going to press the sell
+[00:13:14] button so some Traders start pressing
+[00:13:15] the sell button when they start pressing
+[00:13:17] the sell button orders start to go
+[00:13:19] through on the tape in Red so we'll see
+[00:13:22] a you know we would see a burst of
+[00:13:24] orders going through here in red the
+[00:13:27] those are sell orders people are selling
+[00:13:29] now when other Traders see Traders are
+[00:13:32] selling they sort of feed off of that
+[00:13:34] they're like oh people are selling they
+[00:13:36] don't like this right now I'm going to
+[00:13:37] sell too and so you get this momentary
+[00:13:41] pullback this momentary dip however two
+[00:13:45] things will happen the first is that the
+[00:13:48] selling continues and we don't see any
+[00:13:52] buyers step in so this will happen if
+[00:13:56] usually there's not a really strong
+[00:13:57] Catalyst behind the move because buyers
+[00:14:00] who are watching the stock are like okay
+[00:14:01] I see it's up but why is it up you know
+[00:14:03] I don't quite trust it so if they don't
+[00:14:05] trust it they're not going to press the
+[00:14:06] buy button they're not going to come in
+[00:14:08] and become bid support so there's no
+[00:14:10] support and then sellers keep selling
+[00:14:12] and selling and selling until you have
+[00:14:14] what we would call a round trip where
+[00:14:16] the price went up and then came all the
+[00:14:17] way back down that's not uncommon it can
+[00:14:19] happen if there's no real fundamental
+[00:14:21] news to support the move so if we have
+[00:14:24] fundamental news if we have a true
+[00:14:26] Catalyst and it's strong we have a
+[00:14:29] higher likelihood that we're going to
+[00:14:32] see continuation higher now it's not a
+[00:14:34] guarantee because of course there are
+[00:14:36] times where you have really great news
+[00:14:37] and the price will go up a little bit
+[00:14:38] but then it rolls over but the the
+[00:14:40] probability is higher that the trend
+[00:14:42] will continue if you have a strong
+[00:14:44] headline that's supporting the move so
+[00:14:47] then what happens is you get the red you
+[00:14:50] get the pullback a couple of red candles
+[00:14:53] and then you start to see the green on
+[00:14:55] the tape the buyers step in and as I
+[00:14:59] said when one buyer steps in a few more
+[00:15:01] buyers step in all of a sudden you start
+[00:15:02] seeing green on the tape now sentiment
+[00:15:05] has shifted so you could almost look at
+[00:15:08] this as a sort of mini sentiment meter
+[00:15:12] what is the sentiment I mean in these
+[00:15:14] moments right here the sentiment is is
+[00:15:16] red people are selling they're like no I
+[00:15:19] don't I don't like it anymore people are
+[00:15:20] choosing to sell it right but then the
+[00:15:23] sentiment shifts very quickly and now
+[00:15:25] people are like I want to buy it I want
+[00:15:26] to buy it I want to buy it no I want to
+[00:15:27] sell it I want to sell it I want to sell
+[00:15:29] it I actually want to buy it I want to
+[00:15:30] buy it I want to buy it so keeping a
+[00:15:33] very tight gauge on what is current
+[00:15:35] sentiment are people wanting to buy this
+[00:15:37] or people wanting to sell this and I
+[00:15:40] want to buy when other people are buying
+[00:15:42] now this is the exact opposite of what
+[00:15:44] someone like Warren Buffett would say he
+[00:15:46] says buy when others are Fe fearful and
+[00:15:48] sell when when others are
+[00:15:50] greedy that is a value investing concept
+[00:15:54] the concept of value investing and where
+[00:15:57] to buy a strong stock or currency or or
+[00:16:00] Futures commodity is that you want to
+[00:16:03] buy when everyone else is selling
+[00:16:06] because there's such a strong imbalance
+[00:16:08] everyone's like really bearish they
+[00:16:09] don't like it they don't like it and
+[00:16:11] that's the time where you can have um a
+[00:16:14] pricing disconnect where the price is
+[00:16:17] actually lower than the True Value
+[00:16:19] because people have almost oversold it
+[00:16:22] due to emotion because emotion creates
+[00:16:25] the volatility in the market so as a
+[00:16:27] value investor you want to buy things
+[00:16:29] that are undervalued and the way you do
+[00:16:31] that is by buying something that
+[00:16:32] everyone else is selling you're like no
+[00:16:34] one else wants this I'm going to buy it
+[00:16:35] up now you know look there was a period
+[00:16:38] where everyone wanted uh what do they
+[00:16:40] call them uh beanie babies right
+[00:16:42] everyone wanted them they were buying
+[00:16:43] them buying them buying it was a craze
+[00:16:45] and then that kind of rolled over and
+[00:16:47] then there was a period where no one
+[00:16:48] wanted them but did Warren Buffett go in
+[00:16:51] and buy all the Beanie Babies no because
+[00:16:54] just cuz no one wants it doesn't mean by
+[00:16:56] default you actually should buy it you
+[00:16:58] need to have more criteria so on an
+[00:17:00] intraday
+[00:17:02] level I actually want to buy when I'm
+[00:17:05] seeing other people are interested and
+[00:17:07] the reason is we profit from volatility
+[00:17:11] and so that means we profit from the
+[00:17:13] emotions they're present in the market
+[00:17:16] the emotions that other Traders are
+[00:17:18] experiencing so if all the Traders are
+[00:17:20] pressing the sell button I want to be
+[00:17:22] careful because obviously the price is
+[00:17:24] going to be declining and it may not
+[00:17:26] bounce back
+[00:17:27] up as soon as I start to see that shift
+[00:17:30] in momentum that's where I want to get
+[00:17:32] in picture yourself at the
+[00:17:36] beach and picture the tide rolling in
+[00:17:39] you know and roll rolling
+[00:17:41] out and imagine this the most you
+[00:17:45] imagine that you'll make a lot of money
+[00:17:48] if you can be the first to predict the
+[00:17:51] moment the tide changes now this can be
+[00:17:54] very tricky if you've ever been to the
+[00:17:56] ocean and probably most of you have
+[00:17:58] right so you see the tides rolling out
+[00:18:00] rolling out but even when it's rolling
+[00:18:02] out it there's a wave that comes in and
+[00:18:05] then it pulls back and it comes in and
+[00:18:07] then it pulls back a little more and it
+[00:18:08] comes in it pulls back a little bit more
+[00:18:09] so the Tide's coming out and then all of
+[00:18:11] a sudden you have this period where you
+[00:18:14] have this moment of slack tide now with
+[00:18:18] the tide it's more measured because you
+[00:18:20] know it's going to come back but with
+[00:18:22] trading it's not measured but the moment
+[00:18:24] it starts to roll back forward that's
+[00:18:27] the place to be a buyer so as a
+[00:18:30] Trader I often think of this in a
+[00:18:33] similar way as as kind of the ocean that
+[00:18:36] we're riding these waves and sometimes
+[00:18:39] there'll be a big wave and then
+[00:18:42] sometimes there'll be a little bit of a
+[00:18:43] pullback and then we want to get on the
+[00:18:46] next wave up so the trader who can
+[00:18:48] predict and be in sort of as early as
+[00:18:52] possible down here will make the most
+[00:18:54] money now as you have something that
+[00:18:56] stair stepping down I would say this is
+[00:18:58] weakness it's going lower I'm not a
+[00:19:00] buyer the moment it fails to make
+[00:19:03] another step down and begins to curl
+[00:19:06] that right there is the indicator that
+[00:19:08] something different is happening so with
+[00:19:12] the price moving up we know as the price
+[00:19:15] is moving up you're going to have these
+[00:19:17] waves and pullbacks so again I'm looking
+[00:19:20] at this as kind of that stair stepping
+[00:19:22] pattern stair stepping pattern moving up
+[00:19:25] you know more or less right so the
+[00:19:28] second we
+[00:19:29] have a move where the price sort of
+[00:19:34] comes up and then starts to sort of
+[00:19:36] decline that's when you're pulling away
+[00:19:39] the instead of stepping up you're
+[00:19:41] starting to drop back down I'll I'll
+[00:19:43] I'll draw it out a little bit lower so
+[00:19:46] the way this would look is all of a
+[00:19:48] sudden right here you're supposed to
+[00:19:50] come up and it kind of goes like this
+[00:19:53] right and then it starts to step down so
+[00:19:57] now this is where we're seeing that
+[00:20:00] Divergence in real time it's easy to see
+[00:20:04] this when you're looking at the tape so
+[00:20:06] when you're watching the tape and you're
+[00:20:08] seeing all those orders in green like
+[00:20:09] we're seeing right now we're seeing the
+[00:20:11] price on this uh just as this real- time
+[00:20:14] example coming back up to
+[00:20:16] $9 right so we know right now in these
+[00:20:19] moments people are like I want to buy it
+[00:20:20] I want to buy it what we also know is
+[00:20:23] that it's likely going to have
+[00:20:25] resistance at 9 the same way it had
+[00:20:27] resistance at 8 right here and right
+[00:20:29] here while it may be able to break
+[00:20:31] through it and it would be a a strong
+[00:20:33] achievement um for the stock if it can
+[00:20:36] it's also possible that a lot of people
+[00:20:38] will place sell orders around that half
+[00:20:40] dollar and whole dollar both to take
+[00:20:42] profit and potentially to
+[00:20:44] short so resistance look at how firm
+[00:20:46] that resistance is at
+[00:20:48] 9 did you see how the sellers were
+[00:20:51] stacked up there at 9 and now look at
+[00:20:53] that drop all the way back down to
+[00:20:56] 845 so you can see how buying right up
+[00:20:59] there would have been a risky
+[00:21:01] entry so let's talk about
+[00:21:04] support what I like to do is I like to
+[00:21:07] draw these ascending support lines where
+[00:21:09] I connect the lows of recent
+[00:21:13] pullbacks the most valid lines will be
+[00:21:15] the ones that touch the price in the
+[00:21:18] most places when you start to see a
+[00:21:20] level like this this is where I would
+[00:21:22] say that anywhere near the support level
+[00:21:25] would be a safer place to buy than up
+[00:21:28] against the resistance level so if I can
+[00:21:31] buy down here off of 845 850 then I'm in
+[00:21:36] with a very tight Max loss I would set
+[00:21:40] my Max loss just below this blue line as
+[00:21:43] long as we hold it I'm going to keep
+[00:21:45] holding but if we break it then I'm
+[00:21:47] going to get out so the thing here is
+[00:21:50] that on these little pullbacks we have a
+[00:21:53] dip down we see a little green on the
+[00:21:55] tape I like to take a starter down here
+[00:21:58] I don't want to wait till it's all the
+[00:21:59] way at the top I want to take a starter
+[00:22:01] down at the bottom down in this area
+[00:22:03] because if I take a starter near support
+[00:22:07] I'm managing my risk better because my
+[00:22:09] Max loss is very close so then the loss
+[00:22:12] will be small now if it creeps up I can
+[00:22:15] always add to the position if it moves
+[00:22:17] higher so if we break over nine what'll
+[00:22:19] likely happen is we'll come back and
+[00:22:21] we'll retest that resistance level if we
+[00:22:24] can hold above it then I take another
+[00:22:27] trade right there for the next next leg
+[00:22:28] up and that's where we start stare
+[00:22:31] stepping up right we start stair
+[00:22:33] stepping up and moving higher and that's
+[00:22:35] exactly what we want to see and that is
+[00:22:37] what we see when we have a stock that
+[00:22:39] has strong momentum now one problem with
+[00:22:41] this particular stock today is that it
+[00:22:43] doesn't have a news Catalyst there's no
+[00:22:45] fresh news now it it may go higher just
+[00:22:49] because it's already up quite a bit
+[00:22:50] there's lack of other stocks to trade
+[00:22:53] and people are focusing on it but I
+[00:22:55] think at a certain point buyers are
+[00:22:57] going to get n nervous adding too high
+[00:23:00] because they're just going to feel like
+[00:23:01] you know this thing is it's just too
+[00:23:02] extended I just can't I can't bring
+[00:23:04] myself to buy it up 100% with no news
+[00:23:07] and short sellers are going to look at
+[00:23:09] this and start to think you know what I
+[00:23:11] think this is an opportunity to short it
+[00:23:13] coming back down because it has no
+[00:23:15] reason to be up this high so when it
+[00:23:18] comes to knowing the right place to buy
+[00:23:21] from the perspective of a Candlestick
+[00:23:23] chart where we want to be buying is on a
+[00:23:26] pullback so first we have let's just say
+[00:23:29] a big green candle like this a red cand
+[00:23:32] another green candle and then we have
+[00:23:34] the first red candle and a second red
+[00:23:36] candle these red candles help us
+[00:23:38] establish that we're currently on a
+[00:23:40] pullback I have a rule of thumb that if
+[00:23:43] a stock pulls back more than 50% of its
+[00:23:47] initial move here I'm no longer
+[00:23:49] interested so 50% is the most it can
+[00:23:52] pull back I'd prefer that it only pulled
+[00:23:54] back to about the 75% it only pulled
+[00:23:56] back like about 25% here so it still
+[00:23:58] hold holding 75% of the move up this is
+[00:24:01] preferable so then what I'm looking for
+[00:24:04] is on the actual level two which is the
+[00:24:07] depth of the market that's what we see
+[00:24:08] by actually pulling up our platform what
+[00:24:11] I want to see are stacks of buyers now
+[00:24:14] right now this is beginning to break
+[00:24:16] this level which again is not surprising
+[00:24:18] considering there's no news but see how
+[00:24:20] there's a buyer right down there of uh
+[00:24:22] 12,500 shares at
+[00:24:25] 815 so now you're seeing some buying
+[00:24:28] support
+[00:24:29] some people are selling into it but it's
+[00:24:31] not breaking
+[00:24:32] yet that starts to establish that okay
+[00:24:35] there is a buyer that is stepping up on
+[00:24:38] this now in this particular example the
+[00:24:40] Candlestick chart doesn't really line up
+[00:24:43] very well so it's not a trade I would
+[00:24:45] take but if it was a perfect pattern on
+[00:24:48] the chart and we saw that buyer that
+[00:24:50] 15,000 share buyer or whatever it is
+[00:24:53] down here then that's starting to show
+[00:24:54] we've got some support So once I see the
+[00:24:57] buyer coming in then the next thing I'm
+[00:25:00] looking for is on the time and
+[00:25:04] sales the time and sales window I want
+[00:25:06] to see orders going through in green
+[00:25:09] this is what's telling me that the wave
+[00:25:12] the tide of the sentiment is beginning
+[00:25:15] to shift so we'll start to see some
+[00:25:17] green orders going through so maybe the
+[00:25:20] first one is you know sort of at this
+[00:25:22] lower price here and then what we want
+[00:25:24] to see is that the price starts to move
+[00:25:26] higher but as soon as I see those first
+[00:25:27] green orders going through that's where
+[00:25:29] I'm taking usually a starter position
+[00:25:32] and my stop is around the level of this
+[00:25:34] uh buyer and I always for for myself
+[00:25:37] from a risk management
+[00:25:39] perspective I want to risk 100 to make
+[00:25:42] at least 200 as a general rule of thumb
+[00:25:44] now the reality is I am eternally
+[00:25:47] optimistic so if I think a stock has a
+[00:25:49] potential to give me $200 of profit
+[00:25:51] that's optimistic I probably only going
+[00:25:53] to make a 100 so that's fine but I
+[00:25:56] factor that in knowing that I sort of
+[00:25:59] have I'm overly optimistic so when the
+[00:26:01] trade is said and done usually my profit
+[00:26:03] to loss ratio is closer to 1: one okay
+[00:26:06] so if I'm going to risk a th000 it's
+[00:26:08] because I believe I have the potential
+[00:26:09] to make 2,000 on the move back up and
+[00:26:12] although I may only lock up a th000 in
+[00:26:13] total profit with a one:1 ratio that
+[00:26:15] would still leave me with uh being
+[00:26:17] profitable at 50% accuracy so then as we
+[00:26:20] move higher and we move higher this is
+[00:26:23] where I would start to take profit off
+[00:26:24] the table so when to sell this is
+[00:26:27] locking up profit as the price is moving
+[00:26:29] higher it's about being disciplined
+[00:26:31] taking your profit off the table not
+[00:26:33] overstaying your welcome and then
+[00:26:35] expecting at some point we're going to
+[00:26:37] see another
+[00:26:38] pullback one of the ways that I can try
+[00:26:40] to keep myself in the position as long
+[00:26:42] as possible is by waiting to sell until
+[00:26:45] I start seeing orders in red coming
+[00:26:47] through the tape now the fact is um if I
+[00:26:52] wait to see the first indicators here
+[00:26:55] then I I'll sort of be joining the crowd
+[00:26:58] of Sellers and I might not get as good
+[00:27:00] of a price but on the other hand it
+[00:27:03] keeps me in the position as long as
+[00:27:05] possible and I want to stay in the
+[00:27:06] position as long as possible because if
+[00:27:07] we have something that is strong then
+[00:27:10] who knows this could end up making a
+[00:27:12] move you know here from 6 to 650 to 7 to
+[00:27:14] 750 you know with 10,000 shares this
+[00:27:17] could be a $10,000 winner you know this
+[00:27:19] could be a huge trade so I want to try
+[00:27:21] to hold as long as possible the worst
+[00:27:23] thing you can do is have a great entry
+[00:27:26] and then sell like right here
+[00:27:29] and I've done that many times I've had a
+[00:27:31] terrific entry and then I sell when I'm
+[00:27:33] up like 10 cents and so you have to ask
+[00:27:36] yourself if you know the right place to
+[00:27:38] buy you're buying near support you've
+[00:27:41] got a very well understood level of risk
+[00:27:43] that you're taking why would you sell
+[00:27:46] too soon why would you bail out
+[00:27:49] typically what causes this behavior is
+[00:27:52] fear it's the fear of losing this winner
+[00:27:57] so when you're in a trade and it's up 5
+[00:27:59] cents a share 10 cents a share it's not
+[00:28:02] a big winner but it is a winner and if
+[00:28:04] you sell right then and there you lock
+[00:28:06] it up so what drives the action is the
+[00:28:09] fear of losing this tiny winner you
+[00:28:11] don't want to have it turn into a loser
+[00:28:13] so you're like you know what I'm just
+[00:28:14] going to press the sell button you press
+[00:28:15] the sell button and then you're out of
+[00:28:16] the trade and then you watch it do
+[00:28:18] exactly what you thought it was going to
+[00:28:19] do it goes a lot higher and you're like
+[00:28:20] oh my gosh so the worst thing you then
+[00:28:22] could do is add back at the top of this
+[00:28:25] move you know buy back right up here you
+[00:28:29] give to fomo and you now get back in up
+[00:28:31] here and then you stop out down here as
+[00:28:34] it dips down right at support where the
+[00:28:36] more season Traders like me are going to
+[00:28:38] be getting in and that's how easily you
+[00:28:41] could be on the wrong side of a trade
+[00:28:43] when you give into fomo when you give
+[00:28:44] into emotion it's fear of missing out
+[00:28:46] but it's also just fear in general now
+[00:28:49] fear also has uh the effect of making
+[00:28:53] losses bigger because when you're in a
+[00:28:55] losing trade rather than just cut the
+[00:28:57] loss
+[00:28:58] and move on we tend to hold and hope
+[00:29:03] it'll turn around and the reason we do
+[00:29:04] this is because until you press the sell
+[00:29:07] button there's always the hope that it
+[00:29:10] could reverse and go back up because
+[00:29:12] there it doesn't feel good to lose now
+[00:29:15] this is something that is really hard
+[00:29:16] because trading requires a lot of losing
+[00:29:19] you have to be a really good loser to be
+[00:29:21] a good Trader the fact is I lose all the
+[00:29:23] time and even after all these years I'm
+[00:29:28] gon to be honest it it it's not easy
+[00:29:31] it's still painful it's still
+[00:29:33] frustrating it's still upsetting if I
+[00:29:36] have a whole week where you know I'm not
+[00:29:39] able to get in the zone I feel like I
+[00:29:40] just have loser after loser even if I'm
+[00:29:42] not losing a lot of money it's just like
+[00:29:44] how many times can you sit down to play
+[00:29:46] Monopoly and lose before you're going to
+[00:29:48] flip the game board you know what I mean
+[00:29:50] you start to just lose your cool it's
+[00:29:52] like oh my gosh am I losing again today
+[00:29:55] this is ridiculous right so now emotions
+[00:29:58] coming in you're getting frustrated now
+[00:30:00] you're more likely to get stubborn and
+[00:30:02] kind of try to like I've refused to sell
+[00:30:05] it's going down but I will not sell and
+[00:30:08] now things can unravel pretty quickly so
+[00:30:13] it's really important to recognize
+[00:30:15] that really good trading habits it's not
+[00:30:19] just about knowing the right place to
+[00:30:21] buy it's also making sure that you
+[00:30:24] follow the plan of the trade so let's
+[00:30:28] talk high level for a second about what
+[00:30:30] a trading plan should look like a
+[00:30:32] trading plan number
+[00:30:34] one needs to dictate the following all
+[00:30:37] right so we're going to write trading
+[00:30:40] plan so a trading plan number one needs
+[00:30:43] to dictate your strategy now for me my
+[00:30:46] strategy is Trend trading so I'm a trend
+[00:30:49] Trader which is also called a Momo
+[00:30:52] Trader a momentum Trader so I'm trading
+[00:30:54] the trend I'm trading momentum all right
+[00:30:57] so then the sub of that is a time of day
+[00:31:01] what time of day are you trading so this
+[00:31:03] is going to be based on your time zone
+[00:31:06] so if you're in and and look it it
+[00:31:08] depending on what you trade if you trade
+[00:31:09] cryptocurrency it's open 24 hours a day
+[00:31:11] if you're trading Forex you're going to
+[00:31:13] trade during the windows where the Forex
+[00:31:15] P pairs are trading depending on when
+[00:31:17] the banks are open for that country so
+[00:31:19] you could choose really to trade during
+[00:31:22] whatever time you want that's convenient
+[00:31:25] for your work schedule and everything
+[00:31:26] else I choose to trade trade I'm on
+[00:31:28] Eastern Standard Time and I choose to
+[00:31:30] trade from 7:00 a.m. eastern to about
+[00:31:33] 11:00 a.m. at the latest um at this
+[00:31:36] point unless it's a really strong day in
+[00:31:37] the market B you got to talk about the
+[00:31:41] price stock you're going to focus on or
+[00:31:43] commodity or whatever the case is for me
+[00:31:45] it's between $1 and 20 lower price
+[00:31:48] number c you have to talk about um the
+[00:31:52] the actual patterns that you're going to
+[00:31:53] trade right so what's your go-to setup
+[00:31:55] and this for me is where we're talking
+[00:31:57] about first and
+[00:31:59] second pullback so we're focusing on the
+[00:32:02] first and second pullback buying those
+[00:32:04] dips and then we talk about um let's see
+[00:32:08] D stock uh specifics so stock details so
+[00:32:13] this would be things like news Catalyst
+[00:32:16] um the
+[00:32:17] float right daily chart and we start to
+[00:32:21] get into the details once you dial all
+[00:32:23] of this in and let's not forget um of
+[00:32:25] course a big sub a big uh item is your
+[00:32:28] risk management practice so how are you
+[00:32:30] going to manage your risk right so
+[00:32:33] documenting all of that is what creates
+[00:32:36] the trading plan and you're going to
+[00:32:38] have rules in that plan the way I think
+[00:32:40] of the trading rules is I think of them
+[00:32:42] kind of as training
+[00:32:44] wheels and the reason I think of it like
+[00:32:47] that is because as a beginner Trader
+[00:32:49] just like someone riding a bicycle as a
+[00:32:51] beginner training wheels are helpful
+[00:32:53] they help you build confidence they help
+[00:32:55] you stay in control they help keep you
+[00:32:57] safe safe so the the type of training
+[00:33:01] wheels that I would put on your account
+[00:33:03] if you were a beginner Trader I would
+[00:33:05] say we've got to have training wheels of
+[00:33:07] your maximum position size you know how
+[00:33:09] much leverage you're going to use what
+[00:33:11] your risk is because as a beginner
+[00:33:14] you're going to make mistakes right so
+[00:33:17] we don't want to set you up for a
+[00:33:19] disaster by giving you too much free
+[00:33:22] range at the very beginning of your
+[00:33:24] learning curve that would be Reckless
+[00:33:26] it's not a good idea but a lot of people
+[00:33:28] do it and they do it because the Brokers
+[00:33:29] are happy to give you the leverage
+[00:33:31] they're happy to let you trade with tons
+[00:33:32] of of borrowed money because more
+[00:33:34] trading for them means more money for
+[00:33:36] them so they have their interest in mind
+[00:33:39] right not necessarily your interest you
+[00:33:41] want to be the small percentage of
+[00:33:43] traders who is consistently successful
+[00:33:46] that's of course the idea that's the
+[00:33:47] goal so that means you've got to
+[00:33:49] approach it and think about it
+[00:33:51] differently from what most people are
+[00:33:52] doing so you've got to document your
+[00:33:55] trading plan you have to have the
+[00:33:57] discipline to follow all of the rules
+[00:33:59] and you've got to keep your training
+[00:34:00] wheels on relatively tight when you're
+[00:34:02] getting started now what I'll do for
+[00:34:04] this episode if you click uh at the top
+[00:34:06] of the comments pinned to the top
+[00:34:08] comment and at the top of the
+[00:34:09] description I'll put a link where you
+[00:34:11] can download my small count strategy PDF
+[00:34:14] this is a document that you can print
+[00:34:16] out and it has essentially all of this
+[00:34:19] except not in messy handwriting but it
+[00:34:22] has more it details the ins and outs of
+[00:34:24] my strategy as I trade it right now and
+[00:34:27] you could apply that strategy to really
+[00:34:29] any Market that you want although I'm
+[00:34:30] choosing to apply it to the stock market
+[00:34:33] which is where I have found a lot of
+[00:34:35] success so now what I want to do is I
+[00:34:36] want to show you a live trade this is a
+[00:34:38] trade that I took in my small account
+[00:34:40] and this is a recording so I'll pause
+[00:34:41] this for one second so we'll get
+[00:34:43] oriented okay so this account currently
+[00:34:45] has um when I was recording this video
+[00:34:50] $2,314 in it that was my Equity so
+[00:34:52] pretty small account this is the stock
+[00:34:54] that I'm looking at it is up currently
+[00:34:57] 21% on the day it's just been hitting my
+[00:35:00] scanners as you can see right here as it
+[00:35:02] popped up to about $7 and what I noticed
+[00:35:05] was it popped up and then it pulled back
+[00:35:08] it came up again to seven it pulled back
+[00:35:12] it came up again to seven and what I'm
+[00:35:14] looking is to see if it can hold over
+[00:35:16] seven so I want to see it break seven
+[00:35:18] and if it can hold over seven on this
+[00:35:21] trade I'm going to buy with a stop right
+[00:35:23] at 7 so I'm using $7 as my support and
+[00:35:27] resistance resistance level so in this
+[00:35:29] case watch I just bought a th000 shares
+[00:35:32] at
+[00:35:34] 723 we now have 750 on the offer 749 no
+[00:35:38] look at that look at first of all let's
+[00:35:40] just back this up for 10
+[00:35:42] seconds watch how this respects half
+[00:35:44] dollars and whole dollars resistance at
+[00:35:46] 750 next resistance is at8 next
+[00:35:49] resistance is at $850 next resistance is
+[00:35:52] at N9 I put the order out to take a
+[00:35:54] little profit I sell a few shares at
+[00:35:58] 836 a few more shares there at something
+[00:36:02] whatever price that
+[00:36:05] was now you've got on the offer
+[00:36:10] 793 and I'm unwinding a little bit more
+[00:36:13] this is a setup where we got a big
+[00:36:16] breakout the price broke through
+[00:36:19] resistance so what was resistance
+[00:36:22] resistance was at $7 so in this case
+[00:36:25] then there's different ways you can
+[00:36:26] trade this but in this particular case
+[00:36:28] what I decided to do was because I was a
+[00:36:31] little bit concerned about the fact
+[00:36:34] that uh I'll just delete uh erase this
+[00:36:37] for a second so because I was a little
+[00:36:39] bit concerned about the fact that we'd
+[00:36:42] already come up to seven once and then
+[00:36:44] pulled back and then came up a second
+[00:36:45] time and then kind of pulled back as we
+[00:36:47] were coming back up this third time
+[00:36:49] right so we came up once and then we
+[00:36:51] started pulled back down and then we
+[00:36:53] came up a second time and then we kind
+[00:36:54] of pulled back down I was like m i don't
+[00:36:57] want get in right here and have it fade
+[00:36:59] back down right that's not going to work
+[00:37:02] so I said I want to see if it can prove
+[00:37:04] that it can break over this level if it
+[00:37:06] can break through this resistance at
+[00:37:07] seven then I'm interested because then
+[00:37:10] I'm buying here and my Max
+[00:37:13] loss is right here right underneath the
+[00:37:16] previous resistance which means I'm in
+[00:37:18] at 725 approximately with 1,00 shares
+[00:37:22] and my Max loss is about 6 98 so 698 so
+[00:37:27] that means I'm RIS rking approximately
+[00:37:28] $250 on the trade I don't mind taking
+[00:37:31] $250 of risk to make
+[00:37:35] $672 that as it turns out in this case
+[00:37:37] is a great profit to loss ratio now
+[00:37:40] realistically my target was not that it
+[00:37:43] was going to go all the way up here boom
+[00:37:46] to8 or $9 it was just initially can this
+[00:37:50] get up to 750 and then to 8 and it just
+[00:37:54] end up making a really nice move which
+[00:37:56] sometimes happens but most important is
+[00:37:58] that you have a good entry when you have
+[00:38:00] a good entry you can manage your risk so
+[00:38:04] I'm watching very closely these levels
+[00:38:06] of resistance and I want to do one of
+[00:38:08] two things I either want to wait and let
+[00:38:10] it prove that it can hold over it or I
+[00:38:12] want to buy that pullback now let me
+[00:38:13] show you an example of the pullback okay
+[00:38:15] so GX has just hit my scanners and it's
+[00:38:18] up
+[00:38:19] 177% so this stock is popping up it's
+[00:38:22] moving up and what we can see is that it
+[00:38:24] hit a high of about $66 5 and is now
+[00:38:28] pulling back this is forming that micro
+[00:38:31] pullback so what I end up doing is I
+[00:38:33] press the order to see how many shares I
+[00:38:35] can buy and as soon as I see this green
+[00:38:38] on the tape right here I'm in all right
+[00:38:41] I already know that we had this pullback
+[00:38:43] so we already had the red and as soon as
+[00:38:45] I see the green coming back in I know
+[00:38:48] that I want to buy now something that I
+[00:38:50] could tell you about this stock is that
+[00:38:51] it is just past 8:30 the bottom of the
+[00:38:54] hour news has just come out the stock is
+[00:38:57] moving it's got a micro pullback the
+[00:38:59] beginning of the move and I want to jump
+[00:39:00] in let's watch and see what happens so
+[00:39:03] on this one I'm in at $648 there's 669
+[00:39:07] there's 670 on the
+[00:39:09] offer 625 670 685 there's seven now
+[00:39:14] we've got 717 on the offer 770 on the
+[00:39:18] offer I took a little off the table
+[00:39:20] there sold three cords of my position at
+[00:39:22] about 750 725 actually currently up
+[00:39:28] $657 on a 1,000 share position again Max
+[00:39:31] risk on this trade is about
+[00:39:33] $250 getting $600 a profit is a great
+[00:39:36] trade so this is the profit loss ratio
+[00:39:38] that I'm aiming for what we're seeing
+[00:39:40] right now again is a 10-second micro
+[00:39:42] pullback so see right in this area watch
+[00:39:45] as we get there's green see the green on
+[00:39:47] the tape and we pop up to 775 785 796 up
+[00:39:51] to8 we break through eight we go all the
+[00:39:53] way to 850 now should I have gotten in
+[00:39:56] right there I should have I should have
+[00:39:58] punched it for another trade right there
+[00:40:00] there was the first pullback right here
+[00:40:02] and then there was the second pullback
+[00:40:04] right here we had the dip and then once
+[00:40:07] that green came back in so this is
+[00:40:09] riding those waves so we want to let the
+[00:40:12] tide go out and then as soon as we see
+[00:40:13] it coming back in boom and then let it
+[00:40:15] go out and then as soon as we see it
+[00:40:16] coming back in boom and this is where I
+[00:40:20] have found so much success it's by being
+[00:40:22] able to sort of predict where those
+[00:40:25] moments are going to shift where where
+[00:40:27] we go from selling to buying and then
+[00:40:29] shifting back from buying to selling now
+[00:40:32] it's it's something that takes time it
+[00:40:34] takes time to get good at it takes time
+[00:40:36] to practice you've got to not only have
+[00:40:38] a really good understanding of the chart
+[00:40:41] patterns but you also have to be able as
+[00:40:44] you can see to read the order flow the
+[00:40:47] order flow is sort of the zoomed in view
+[00:40:51] of the market now order flow is not
+[00:40:54] showing you a chart but it's showing you
+[00:40:56] in real time the current sentiment so
+[00:40:59] right now you've got a lot of buying and
+[00:41:01] this gave us another move higher right
+[00:41:04] so now we've got three legs up one two
+[00:41:07] and then this was the third one for that
+[00:41:09] next push up towards
+[00:41:11] $9 so this is the type of instrument I
+[00:41:15] want to be trading it's now up 60% we've
+[00:41:18] had days where we've seen uh stocks go
+[00:41:20] up over 500% over 1,000% because they
+[00:41:24] have news it starts squeezing up and it
+[00:41:26] just goes High higher and higher and
+[00:41:28] higher this is especially true with
+[00:41:30] lower price companies small cap stocks
+[00:41:32] because for these companies good news
+[00:41:34] can change the course of the company
+[00:41:36] entirely all of a sudden it makes the
+[00:41:38] company a buyout Target from one of
+[00:41:40] these bigger companies and then Traders
+[00:41:43] can get really excited about it okay so
+[00:41:45] now we've got two examples of buying
+[00:41:48] these either a pullback in this case
+[00:41:51] here or in the second case buying as we
+[00:41:53] get the break of resistance right so
+[00:41:56] these are the levels that you want to be
+[00:41:58] watching watch your half dollars watch
+[00:42:00] your whole dollars watch in these areas
+[00:42:03] and watch your pullbacks so you're going
+[00:42:06] to see things squeezing up just because
+[00:42:08] it's squeezing up doesn't mean it makes
+[00:42:10] sense to punch it just here or punch it
+[00:42:12] here you want to wait for that little
+[00:42:14] bit of a pullback now in this case this
+[00:42:16] is a little bit of a bigger pullback
+[00:42:17] than we would like we' probably prefer
+[00:42:19] something that's a little bit more like
+[00:42:22] this and one other thing that it's
+[00:42:25] important for you to understand
+[00:42:27] is the concept of the volume
+[00:42:31] profile so we'll just have it push
+[00:42:33] through here that'll look a little bit
+[00:42:34] better so this is called a cup and this
+[00:42:38] is called a handle right there so this
+[00:42:41] is this again is just a better way of
+[00:42:44] understanding potential entries when you
+[00:42:46] have the price come up it sells off and
+[00:42:49] then comes back up this is usually a
+[00:42:51] double top and double tops reject they
+[00:42:54] don't usually work so that forms the cup
+[00:42:57] and then you need the handle and once
+[00:42:59] you have a handle your support is at the
+[00:43:02] low of the pullback but what you can
+[00:43:03] always look at this is like
+[00:43:05] understanding constellations but what
+[00:43:07] you can always look at is what is the
+[00:43:08] low of the last pullback what is support
+[00:43:11] what is resistance because these are the
+[00:43:12] levels that you're always trading around
+[00:43:15] the closer you can buy to support to
+[00:43:17] support the better you'll do but you
+[00:43:19] don't want to buy until you see that the
+[00:43:21] trend is beginning to shift and the way
+[00:43:23] I see the trend is beginning to shift is
+[00:43:25] by looking at the tape looking at the
+[00:43:26] level two
+[00:43:27] I understand that for some Traders this
+[00:43:30] is going to feel overwhelming because
+[00:43:31] you're like oh my God this is a whole
+[00:43:32] new language it is you're learning a
+[00:43:34] language it's the language of the
+[00:43:36] financial markets but here's the cool
+[00:43:38] thing if you immerse yourself in
+[00:43:40] communities that are speaking this
+[00:43:41] language just like trying to learn
+[00:43:44] French or Italian or anything any other
+[00:43:46] language it's going to come more
+[00:43:48] naturally but you have to do the work
+[00:43:50] you've got to commit to it you've got to
+[00:43:51] immerse yourself in those communities
+[00:43:53] you've got to read the language you've
+[00:43:54] got to just start studying and you got
+[00:43:56] to push through those moments where you
+[00:43:57] feel a bit frustrated because there will
+[00:44:00] be gaps that will get filled in with
+[00:44:02] time one of the things that I've noticed
+[00:44:04] about pretty much every beginner Trader
+[00:44:05] is that your accuracy is poor a lot of
+[00:44:08] beginner Traders come in kind of
+[00:44:10] overconfident they don't know what they
+[00:44:11] don't know they take too much risk they
+[00:44:13] make a lot of mistakes they lose money
+[00:44:16] and then there's this humbling point of
+[00:44:17] like realizing how much there is to
+[00:44:19] learn really sort of settling in and
+[00:44:22] being like I want to learn this thing I
+[00:44:24] want to learn as much as there is to
+[00:44:25] know about it which is probably why
+[00:44:26] you're watching this episode so thank
+[00:44:28] you for doing that I hope by the way you
+[00:44:29] hit the Thumbs Up And subscribe to the
+[00:44:30] channel and then you get this period
+[00:44:33] where you start to see rewards from all
+[00:44:35] of that hard work you're starting to
+[00:44:37] really look at these patterns in real
+[00:44:38] time and be like yes I think this is
+[00:44:40] going to go higher and you watch you
+[00:44:42] know as you kind of get this pullback
+[00:44:44] and it's like right I think right now
+[00:44:47] we're seeing the micro pullback right
+[00:44:49] here at $760 this is the place that I
+[00:44:51] have to be a buyer so I want to take a
+[00:44:53] moment to walk you through what I view
+[00:44:55] as the steps to becoming a day trader
+[00:44:58] and these steps would be pretty much the
+[00:45:00] same for being a Trader of any type if
+[00:45:02] you're going to be a swing Trader or
+[00:45:04] just a shortterm investor the steps
+[00:45:06] would be the same if you're going to
+[00:45:07] trade Forex Futures cryptocurrency the
+[00:45:09] steps are more or less the same so the
+[00:45:12] first step is to learn the foundational
+[00:45:14] Concepts and when I'm talking about
+[00:45:17] foundational Concepts I'm talking about
+[00:45:20] these 10 specific things that you really
+[00:45:23] need to know in order to find success as
+[00:45:26] a trater I sort of talk about the
+[00:45:29] minimal viable product
+[00:45:32] MVP MVP I talk about this um in my book
+[00:45:37] that I wrote how to day trade the plain
+[00:45:38] truth the minimal viable product for day
+[00:45:40] one of trading in a simulator so for day
+[00:45:43] one of sim you know I mean look you
+[00:45:45] could get in a car and sit down with
+[00:45:47] zero experience and probably figure it
+[00:45:49] out you could sit down and simulator and
+[00:45:51] start pressing some buttons and you
+[00:45:52] could probably figure it out but if you
+[00:45:54] want to have a good experience to get
+[00:45:57] ready for day one sim the minimal viable
+[00:45:59] level of information is the following
+[00:46:01] first you need to know your
+[00:46:03] terminology and this is something that
+[00:46:06] although I have a glossery of all of the
+[00:46:09] terms that you know you need to know and
+[00:46:12] that I frequently use as an active
+[00:46:13] Trader uh which you could reference in
+[00:46:15] my book uh the terminology is mostly
+[00:46:18] going to be something you'll pick up
+[00:46:20] along the way so you're going to be
+[00:46:22] picking it up just as you're going
+[00:46:23] through the classes watching episodes
+[00:46:26] like this one right here on YouTube and
+[00:46:29] so on and so forth so you know yes there
+[00:46:31] are a lot of terms that we talk about
+[00:46:33] what's a dogee what's the market cap
+[00:46:35] what's a margin call what's a reversal
+[00:46:38] what's scaling you know just these
+[00:46:40] different terms related to trading so
+[00:46:43] these are important uh so number one you
+[00:46:45] need to know the terminology you need to
+[00:46:47] know the lingo and I really think the
+[00:46:49] best way to pick it up is of course just
+[00:46:51] to keep watching episodes like this to
+[00:46:54] read books on trading and to immerse
+[00:46:56] yourself in a community of Traders
+[00:46:58] because that's where you're going to see
+[00:46:59] other people talking the language and
+[00:47:01] you're going to pick it up faster step
+[00:47:03] number two um or item number two you
+[00:47:05] need to learn technical analysis
+[00:47:07] technical analysis this is what we're
+[00:47:09] talking about right now is charting
+[00:47:11] essentially but to really understand
+[00:47:13] technical analysis you need to know the
+[00:47:15] ins and- outs charts and you need to
+[00:47:16] know how to use different technical
+[00:47:17] indicators and you need to be really
+[00:47:19] comfortable with being able to analyze
+[00:47:21] different time frames you want to be
+[00:47:22] able to recognize when you have
+[00:47:24] multi-time Frame Alignment and when you
+[00:47:26] don't number three you're going need to
+[00:47:28] get good at fundamental analysis now as
+[00:47:30] an active Trader the amount of
+[00:47:32] fundamental analysis that we do is
+[00:47:34] relatively limited right we're not
+[00:47:37] reading at night all of the quarterly
+[00:47:40] filings you know we're not doing the
+[00:47:42] level of due diligence that someone like
+[00:47:44] a Warren Buffett would be doing before
+[00:47:45] he's taking a position in a company and
+[00:47:48] planning on holding it for months or
+[00:47:49] years but we do need to be able to
+[00:47:52] understand some basic fundamentals of a
+[00:47:55] company and this helps us better
+[00:47:58] interpret and understand the news so
+[00:48:00] when news comes out we be we're able to
+[00:48:03] understand how significant this news
+[00:48:05] headline is number four you're going to
+[00:48:08] need to get really good at risk
+[00:48:09] management you need to also be able to
+[00:48:11] understand the concept of
+[00:48:13] successful red days because red days
+[00:48:17] will happen as a Trader and a successful
+[00:48:20] red day is a red day where you don't
+[00:48:23] lose your cool you don't lose your
+[00:48:25] emotional composure okay you take a loss
+[00:48:28] but it's within your parameters that
+[00:48:30] you've previously set for yourself and
+[00:48:33] that's that's the best you could do a
+[00:48:35] successful red day generally is going to
+[00:48:37] be a small red day but most importantly
+[00:48:39] it's a red day where you continue to
+[00:48:41] follow your rules remember it's so much
+[00:48:43] easier to recover from small red days
+[00:48:46] than from days where you have you know
+[00:48:48] things really go off the rails and you
+[00:48:49] have a huge draw down that can take
+[00:48:52] weeks to recover from so I always look
+[00:48:54] back on those days and I'm like why
+[00:48:56] didn't I just walk away here if I'd
+[00:48:58] walked away right there that would have
+[00:49:00] been a successful red day so that's
+[00:49:02] something that you really will get
+[00:49:03] better at through making mistakes and
+[00:49:06] experience and even with all that
+[00:49:08] experience it'll still happen sometimes
+[00:49:10] you have what would be considered an
+[00:49:11] unsuccessful red day but getting really
+[00:49:14] good at your risk management and
+[00:49:15] understanding successful red days is
+[00:49:17] Paramount to your long-term success as a
+[00:49:19] Trader number five you're need to get
+[00:49:21] really good at stock selection now stock
+[00:49:23] selection specific for stock currency
+[00:49:25] selection currency pay pairs for Forex
+[00:49:27] Traders commodities for futures Traders
+[00:49:30] but you need to get good at figuring out
+[00:49:32] what's going to move and the fact is
+[00:49:35] regardless of um you know we could just
+[00:49:37] say asset selection um regardless of
+[00:49:41] what you're going to be
+[00:49:42] trading what you're looking for is
+[00:49:45] volatility right we're volatility
+[00:49:47] Traders we want to be trading something
+[00:49:49] that is moving higher if something is
+[00:49:52] going sideways we don't make money we
+[00:49:54] don't make money by buying something at
+[00:49:56] five and selling it at five we make zero
+[00:49:59] money we take risk and we get not we
+[00:50:01] don't get rewarded for it there's no
+[00:50:02] reward we want to buy something at five
+[00:50:04] and sell it at seven and we'd love to do
+[00:50:07] that in like 10 minutes and you know
+[00:50:10] what in the stock market that happens
+[00:50:12] all the time I see that happen almost on
+[00:50:14] a daily basis so you need to get really
+[00:50:16] good at asset selection this is also a
+[00:50:18] form of risk management because the
+[00:50:19] better you get at choosing the strongest
+[00:50:22] assets the more you're reducing your
+[00:50:23] risk of unnecessary losses number six
+[00:50:25] you're going to need to get really good
+[00:50:27] at using trading platforms so that means
+[00:50:29] you know how to use the software you
+[00:50:30] know how to press the buy button how to
+[00:50:31] press the sell button you know how to
+[00:50:33] adjust all the settings you become a
+[00:50:35] master of the software that you're using
+[00:50:37] the software is an extension of your
+[00:50:39] mind and body you are able to use it to
+[00:50:41] trade the markets number seven you're
+[00:50:43] going to need to get really good at
+[00:50:44] order entry and using hotkeys order
+[00:50:47] entry and hotkeys this will streamline
+[00:50:50] your ability to get in and out of
+[00:50:51] positions so you need to be able to
+[00:50:53] master that number eight you need to get
+[00:50:54] really good at reading level two and
+[00:50:56] reading the time in sales tape readers
+[00:50:58] level two reading this is important for
+[00:51:00] active trading not as important for
+[00:51:02] longer term trading swing trading but
+[00:51:04] definitely for day trading number nine
+[00:51:06] you're going to need to get your trading
+[00:51:08] psychology dialed in and this ties into
+[00:51:11] successful red days not giving into
+[00:51:13] emotion being able to recognize what
+[00:51:14] your triggers are of where you're
+[00:51:16] starting to become more emotionally
+[00:51:18] fueled and potentially uh your triggers
+[00:51:20] for an emotional hijack episode and
+[00:51:23] number 10 you need to get really good at
+[00:51:24] position management knowing when to
+[00:51:26] scale SC in when to scale out so a lot
+[00:51:29] of beginner Traders will just take the
+[00:51:31] approach of one entry and one exit but
+[00:51:33] they're not maximizing their profit by
+[00:51:35] doing that so more experienced Traders
+[00:51:37] will add to a position a little higher a
+[00:51:39] little lower and then they'll scale out
+[00:51:41] of position trying to capture as much of
+[00:51:43] the move as
+[00:51:45] possible so these are 10 of the I would
+[00:51:48] say lessons that are certainly covered
+[00:51:50] in depth in my warrior Pro curriculum
+[00:51:53] but that you could learn uh on your own
+[00:51:55] it would probably take longer but by
+[00:51:57] just sort of reading books watching
+[00:51:59] episodes like this um and so on and so
+[00:52:01] forth
+[00:52:03] so the eight steps here to becoming a
+[00:52:06] successful Trader number one learning
+[00:52:08] the foundational Concepts number two SIM
+[00:52:11] trading number three evaluating your
+[00:52:13] metrics and
+[00:52:14] adjusting so when you're trading in the
+[00:52:17] simulator you're going to be producing a
+[00:52:18] lot of historical data a lot of trading
+[00:52:20] metrics you want to evaluate those
+[00:52:22] metrics and make adjustments based on
+[00:52:24] your performance better for you know
+[00:52:25] better for worse
+[00:52:27] number four go live only once you've
+[00:52:30] first proven profitability in the
+[00:52:31] simulator and go live with small share
+[00:52:33] size start small at first because you
+[00:52:35] have to begin the process of
+[00:52:37] conditioning yourself to experiencing
+[00:52:39] the emotions that come with trading with
+[00:52:41] real money number five scale up slowly
+[00:52:45] you don't want to go in too deep too
+[00:52:48] quickly if you do that you can get
+[00:52:49] yourself into trouble so scale up slowly
+[00:52:52] again this is part of the process of
+[00:52:54] emotional conditioning and then you're
+[00:52:55] going to experi your first draw down
+[00:52:58] when you experience your first draw down
+[00:52:59] it's really scary because you've had
+[00:53:01] some success and now potentially you
+[00:53:03] give it all back in one day of emotional
+[00:53:05] hijack and you're like oh my goodness so
+[00:53:08] your first successful recovery is a huge
+[00:53:10] milestone and in your first successful
+[00:53:12] recovery what I want you to look at is
+[00:53:15] the previous track record that you have
+[00:53:17] that's what's going to give you the
+[00:53:18] confidence that okay you had this loss
+[00:53:20] but it's time to reset go back to the
+[00:53:22] drawing board get focused and then
+[00:53:24] rebuild once you make your first
+[00:53:26] successful recovery recouping all of
+[00:53:28] those losses that's when it's time to
+[00:53:30] scale up in a bigger way so this is
+[00:53:34] where sort of the rubber meets the road
+[00:53:37] the process of converting the general
+[00:53:40] knowledge that you're picking up right
+[00:53:42] now in this class into actual skill is
+[00:53:46] done through practice you've got to
+[00:53:48] practice and what I would encourage you
+[00:53:50] to do is download my small account
+[00:53:52] strategy PDF print it out put it on your
+[00:53:54] wall and then take scen screenshots when
+[00:53:57] you see charts like this and print these
+[00:54:00] out and put them on your wall and mark
+[00:54:02] up the areas of support and resistance
+[00:54:05] so be like okay we had resistance here
+[00:54:07] we had resistance here this was the low
+[00:54:09] so notice the stair stepping up it goes
+[00:54:12] up it comes back down it holds this
+[00:54:14] level and then it moves higher the more
+[00:54:16] you recognize these patterns the better
+[00:54:18] you'll do Traders um are are really
+[00:54:21] doing something kind of incredible which
+[00:54:23] is we we're dealing with pattern
+[00:54:26] recognition so we're seeing these
+[00:54:28] patterns but we get to the point where
+[00:54:30] we see just this much of it and we're
+[00:54:33] now able to visualize everything else
+[00:54:35] that's going to come next right so right
+[00:54:38] now you see this and you might be like I
+[00:54:39] have no idea what's going to come next
+[00:54:41] but the more you practice the more
+[00:54:43] experience you gain the better your
+[00:54:45] intuition will get at being able to make
+[00:54:47] a prediction of what's coming next
+[00:54:49] that's that's the cool thing about
+[00:54:50] trading and for me even after more than
+[00:54:52] a decade of trading experience I still
+[00:54:54] feel like I'm learning I still feel like
+[00:54:56] my own own intuition is getting better
+[00:54:57] and I've been doing it for that long so
+[00:54:59] the sooner you start I think the better
+[00:55:02] this is one of those things where it
+[00:55:03] would have been great if you had started
+[00:55:05] five years ago or eight years ago or 10
+[00:55:06] years ago the next best time to start is
+[00:55:09] now so I hope you just keep watching all
+[00:55:12] of these episodes like this I've got so
+[00:55:14] many classes on strategy a lot of free
+[00:55:16] content that I put out on YouTube for
+[00:55:18] the trading Community but of course I've
+[00:55:19] got my content that's part of my warrior
+[00:55:21] Pro curriculum over at Warrior trading
+[00:55:23] so you're welcome to check it out but in
+[00:55:24] the meantime I hope you hit that thumbs
+[00:55:25] up I hope hope you subscribe to the
+[00:55:27] channel and I'll see you for my next
+[00:55:28] upload real
+[00:55:29] soon

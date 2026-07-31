@@ -1,0 +1,1453 @@
+# The BEST Stock Market Simulators (Step-by-Step Guide)
+# https://www.youtube.com/watch?v=5aWoZdbXJrA
+# duration_sec: 3473
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to rank the
+[00:00:02] top three best stock market simulators
+[00:00:05] that I think are especially good for
+[00:00:07] beginner traders who want to learn the
+[00:00:08] ropes of how to trade in the market but
+[00:00:10] who don't want to lose hard-earned money
+[00:00:13] in the process now I can already hear
+[00:00:14] some of you guys saying wait a second
+[00:00:16] Ross already lost hard earn money and I
+[00:00:18] don't blame you I did the same thing
+[00:00:20] when I was getting started so do most
+[00:00:21] beginner Traders it's easy to fun an
+[00:00:24] account it's easy to start trading with
+[00:00:25] real money but if you don't have a
+[00:00:28] strategy you don't have a system or set
+[00:00:30] of rules and you may not even have a
+[00:00:31] working knowledge of the software what's
+[00:00:33] bound to happen is you lose money so you
+[00:00:36] take losses and what is unexpected is
+[00:00:38] that feeds emotion so all of a sudden
+[00:00:41] you get emotional you're upset that you
+[00:00:43] lost money and you feel like I need to
+[00:00:45] make this back as quickly as possible
+[00:00:48] the problem is since you still don't
+[00:00:50] have a strategy and you still don't
+[00:00:51] necessarily know exactly how to use the
+[00:00:53] software you end up losing more money
+[00:00:56] this becomes a negative feedback loop
+[00:00:58] where the more you lose the more
+[00:00:59] emotionally you get until you are
+[00:01:01] escorted out of the market this has
+[00:01:03] happened to more Traders than we'll
+[00:01:05] probably ever know a lot of beginner
+[00:01:06] Traders come into the market they jump
+[00:01:08] in head first into the deep end lose
+[00:01:11] money and then they're gone and many of
+[00:01:13] those Traders might have actually become
+[00:01:15] very successful If Only They had first
+[00:01:17] slowed down and laid a solid foundation
+[00:01:20] so if you've already made those beginner
+[00:01:22] mistakes that I made and so many others
+[00:01:24] have made as well let's put a pause on
+[00:01:27] trading Grill money let's make learning
+[00:01:29] how to trade Fun by bringing down the
+[00:01:31] pressure and by practicing in a stock
+[00:01:33] market simulator in this episode I'm
+[00:01:36] going to walk you through the features
+[00:01:38] of what I think are the three best stock
+[00:01:40] market simulators or paper trading
+[00:01:41] simulators that are out there today I
+[00:01:44] will also give you a full demo of each
+[00:01:46] of these three platforms so if you
+[00:01:48] decide to use one of them you're already
+[00:01:50] going to have a strong Foundation of
+[00:01:52] understanding how they work how to set
+[00:01:54] it up and how to lay it out now before I
+[00:01:56] forget I put a link uh also pinned at
+[00:01:58] the top of the comments and Link in the
+[00:01:59] description
+[00:02:00] where you can download my small account
+[00:02:03] strategy worksheet this is great for you
+[00:02:05] guys to follow while you're in the
+[00:02:07] trading simulator it's all about
+[00:02:09] managing your risk focusing on the
+[00:02:11] highest quality setups and building that
+[00:02:14] positive feedback loop if you recall
+[00:02:17] most beginner Traders they go on a
+[00:02:19] negative feedback loop that starts with
+[00:02:21] losing money getting emo emotional and
+[00:02:25] then losing more it's a spiral let's
+[00:02:28] break that spiral not focus on the money
+[00:02:30] but instead focus on accuracy trading
+[00:02:33] the highest quality setups A+ I'm going
+[00:02:37] to show you what those are and walk you
+[00:02:38] through what I would consider the five
+[00:02:40] pillars of stock selection focusing on
+[00:02:42] high accuracy improves your profit loss
+[00:02:45] ratio that improves your consistency
+[00:02:47] your calendar starts looking really nice
+[00:02:49] and green that increases your confidence
+[00:02:52] so now you're feeling really good about
+[00:02:54] your trading you're going to increase
+[00:02:55] your quantity increase your share size
+[00:02:58] and this is the beginning of of a
+[00:03:00] positive feedback loop so I want to make
+[00:03:02] sure you download my small count
+[00:03:03] strategy worksheet so you can get
+[00:03:04] started today all right so let's go
+[00:03:06] ahead and jump on to the screen share
+[00:03:08] I've got a slide deck here we're going
+[00:03:10] to go full screen on this so let's start
+[00:03:13] by just talking about why a lot of
+[00:03:16] Brokers don't even offer a simulator
+[00:03:18] this is crazy to me for instance Robin
+[00:03:20] Hood currently does not offer a
+[00:03:22] simulator so the reason here it makes
+[00:03:26] sense when you realize the way these
+[00:03:29] Brokers make money
+[00:03:30] they don't make money by offering a free
+[00:03:33] trading simulator you're using Market
+[00:03:35] data you're using their software you're
+[00:03:37] using the services everything else the
+[00:03:39] bandwidth on the servers I mean it
+[00:03:40] creates a lot of load and you're not
+[00:03:43] using real money they make nothing off
+[00:03:45] of you doing that they make money when
+[00:03:47] you trade with real money and that's
+[00:03:50] because a lot of these commission-free
+[00:03:52] brokers in fact all of them are engaged
+[00:03:54] in the payment for orderflow business
+[00:03:57] model where they sell all of your order
+[00:04:00] flow to an Institutional trading firm
+[00:04:02] and that institutional trading firm is
+[00:04:04] able to give you wholesale prices and
+[00:04:07] scalp essentially all of their the
+[00:04:09] orders that go through for fractions of
+[00:04:11] a penny now fractions of a penny add up
+[00:04:14] to the tune of billions of dollars a
+[00:04:16] year for these big firms and then the
+[00:04:18] retail Brokers get the payment from
+[00:04:20] those firms so their motivation is to
+[00:04:23] encourage you to trade with real money
+[00:04:27] and so a lot of platforms don't even
+[00:04:29] offer a s simulator cuz there's no money
+[00:04:31] in it some of them will offer simulators
+[00:04:33] but they only offer them for a limited
+[00:04:35] period of time or they limit the
+[00:04:37] features that are included in a
+[00:04:39] simulator which then encourages you to
+[00:04:41] just trade with real money which is what
+[00:04:43] they want after all so we're going to
+[00:04:45] talk about what I think are probably
+[00:04:47] your three best options you've got
+[00:04:49] Weeble you've got thinker swim and then
+[00:04:51] you've got the warrior trading Sim now
+[00:04:53] of course you'll say I'm biased with a
+[00:04:54] warrior trading Sim and maybe I am but
+[00:04:56] you look and compare the options as I
+[00:04:58] lay them out for these three
+[00:05:00] so what we're going to do first is we're
+[00:05:02] going to compare and contrast on seven
+[00:05:04] key points whether or not you can trade
+[00:05:06] extended hours which is pre-market
+[00:05:09] through after hours whether or not they
+[00:05:11] include level two data whether or not
+[00:05:13] you have hot Keys whether or not you can
+[00:05:16] see halt levels resumption quotes from
+[00:05:18] when a stock is halted whether or not
+[00:05:20] they offer trading metrics and what the
+[00:05:23] prices of the software we're going to
+[00:05:25] start by looking at thinker swim okay
+[00:05:27] well actually let's go row by row let's
+[00:05:29] compare them across row by row so we'll
+[00:05:31] start with extended hours so extended
+[00:05:33] hours for those of you guys who are not
+[00:05:35] familiar The Market opens technically at
+[00:05:38] 9:30 a.m. that's the opening bell on
+[00:05:41] Wall Street and it closes at 400 p.m.
+[00:05:44] this is regular trading hours after
+[00:05:47] hours goes till 8:00 p.m. and pre-market
+[00:05:50] starts at 4:00 a.m. currently can you
+[00:05:54] trade pre-market or after hours on The
+[00:05:56] Thinker swim Simulator the answer is no
+[00:06:00] can you do it on Weeble the answer is
+[00:06:02] yes can you do it on Warrior trading Sim
+[00:06:04] the answer is yes all right so right
+[00:06:06] there The Thinker swim is the only
+[00:06:08] platform that doesn't offer it next one
+[00:06:10] is level two data all three platforms
+[00:06:12] offer level two data so they're all the
+[00:06:15] same there Advanced
+[00:06:17] hotkeys Unfortunately The Thinker swim
+[00:06:19] platform does not offer Advanced hotkeys
+[00:06:22] whe neither for production real money or
+[00:06:24] for simulated trading they do have some
+[00:06:26] basic hot keys and I'll show you how
+[00:06:27] those work when we get into the platform
+[00:06:29] demo but they're basic Weeble does offer
+[00:06:33] excellent hot Keys asteris it's only
+[00:06:36] available with real money it's not
+[00:06:39] available in the paper trading simulator
+[00:06:41] which is a total bummer and there's not
+[00:06:44] any logical reason why that would be the
+[00:06:45] case but that is the case Warrior
+[00:06:47] trading Sim does offer hotkeys they do
+[00:06:49] not show you halt levels on thinker swim
+[00:06:53] but they do show them on Weeble if you
+[00:06:55] have real money production version and
+[00:06:58] you do have them on the warrior trading
+[00:06:59] Sim resumption quotes you don't have
+[00:07:01] them on thinker swim you do have them on
+[00:07:03] Weeble again only with the funded
+[00:07:05] account and you do have them on the
+[00:07:06] warrior trading Sim metrics uh I think
+[00:07:09] Warrior trading Sim is the only one that
+[00:07:10] offers the metrics you don't have them
+[00:07:11] on Weeble you don't have them on thinker
+[00:07:13] swim there may be other platforms out
+[00:07:15] there that offer metrics only but you've
+[00:07:17] got to import your metrics and it's it's
+[00:07:19] a separate thing and then the price
+[00:07:21] thinker swim is free so there's a lot of
+[00:07:24] things you don't get but it is free
+[00:07:26] Weeble costs 10 bucks a month and you're
+[00:07:28] paying for the Market data but you have
+[00:07:31] to have an account funded you could fund
+[00:07:33] it with just like 10 bucks well maybe
+[00:07:36] you should fund it with a little more
+[00:07:37] because of the $10 monthly fee but you
+[00:07:38] could fund it with $100 let's just say
+[00:07:41] and then you could have basically almost
+[00:07:44] everything and then I and I'll show you
+[00:07:46] how I would do that so it it can work
+[00:07:49] this is a pretty good option it can work
+[00:07:52] um but you've got to do a work around
+[00:07:53] and I'll show you how to do that and
+[00:07:54] then the warrior trading Sim is a great
+[00:07:56] option but it's $100 a month now we
+[00:07:59] don't make money on payment for order
+[00:08:01] flow we're not a broker dealer so we
+[00:08:03] have to pay Market data fees to NASDAQ
+[00:08:05] to the exchanges we have to pay for our
+[00:08:06] server cost and everything else so we
+[00:08:08] have a simulator it's free for 90 days
+[00:08:10] for warrior Pro members and then after
+[00:08:12] that it's 100 bucks a month so it's out
+[00:08:14] there and these are your basically what
+[00:08:16] I would say are your three best options
+[00:08:17] now before we do the platform demo I
+[00:08:19] think it's worth acknowledging that
+[00:08:21] we're talking about the best stock
+[00:08:23] market Simulator for simulated trading
+[00:08:26] but we also have to ask the question of
+[00:08:28] what is the best platform for trading
+[00:08:31] with real money well in fact we're going
+[00:08:33] to use the same standard everything here
+[00:08:35] applies for real money we've got to have
+[00:08:37] extended hours we need level two data we
+[00:08:39] need hotkeys we want halt levels we want
+[00:08:42] resumption quotes and So based on this
+[00:08:45] thinker swim for real money to me
+[00:08:48] doesn't work very well unless you pay I
+[00:08:53] think it's $150 to
+[00:08:55] $175 a month for a third-party ad add on
+[00:09:00] and that third party add-on will give
+[00:09:03] you the hot Keys the halt levels and the
+[00:09:05] resumption quotes So if you really want
+[00:09:08] to make thinker swim work you're going
+[00:09:10] to have to spend that money for that
+[00:09:12] add-on and that's that's using a
+[00:09:14] platform called um Dash Trader
+[00:09:18] D so Dash Trader is the third-party
+[00:09:21] add-on it's an actual trading platform
+[00:09:24] you connect it to your Charles Schwab
+[00:09:26] account and you don't even have to log
+[00:09:28] in to think or swim so it has your
+[00:09:30] positions it has your orders it it has
+[00:09:33] charts although they're very basic it
+[00:09:35] has your level two windows and so you
+[00:09:37] could do all your trading right inside
+[00:09:39] the dash Trader platform the only
+[00:09:41] downside is the obvious $175 per month
+[00:09:46] however if you were considering using
+[00:09:49] thinker swim with Das and $175 a month
+[00:09:53] you know comp and you're comparing that
+[00:09:56] with a broker like the broker that I use
+[00:09:59] uh
+[00:10:00] I pay a commission on every trade I take
+[00:10:03] I spend far more than $175 a month on
+[00:10:05] commissions now the broker that I use so
+[00:10:07] for what it's worth Weeble is its own
+[00:10:09] broker thinker swims its own broker
+[00:10:11] Warrior trading is not a broker but our
+[00:10:13] simulator that we offer uh is actually
+[00:10:16] powered by Sterling so we license the
+[00:10:19] Sterling um software and we just have it
+[00:10:22] connected to a simulated uh exchange but
+[00:10:25] Sterling is a platform that you can use
+[00:10:28] with real money Mone Brokers you can use
+[00:10:30] it with light speed light speed makes it
+[00:10:33] available you can use it with Guardian
+[00:10:36] uh pretty sure you can use it with
+[00:10:38] Centerpoint you can use it with CME
+[00:10:41] which is an offshore broker dealer down
+[00:10:43] in the Caribbean I mean there's dozens
+[00:10:45] and dozens of different Brokers that you
+[00:10:47] can use Sterling with there's also
+[00:10:50] dozens of different Brokers that you can
+[00:10:51] use Das with you can use Das with all of
+[00:10:54] these Brokers and and just as many so
+[00:10:56] Das and Sterling are both Trading
+[00:10:59] platforms that are popular with small
+[00:11:02] Brokers that can't afford to develop
+[00:11:05] their own thinker swim platform right
+[00:11:07] thinker swim is actually a platform
+[00:11:09] owned by Charles schwap we bu they built
+[00:11:11] their own platform you know but these
+[00:11:12] Brokers that are big enough and have the
+[00:11:14] money they can do it so the question
+[00:11:17] here is it I I think it's just worth
+[00:11:20] noting that it's important to do
+[00:11:22] simulated trading ideally on the same
+[00:11:26] software you're going to use with real
+[00:11:27] money it would imagine doing a flight
+[00:11:29] simulator in a Cessna pretend Cessna but
+[00:11:32] you're going to fly 747 it's like you're
+[00:11:35] you got to do apples to apples here so
+[00:11:38] the thing with Weeble that I'll say now
+[00:11:40] I've traded with I've traded with um
+[00:11:42] with well with Weeble with thinker swim
+[00:11:44] I've used light speed I've used
+[00:11:46] Centerpoint I've used CME I've traded
+[00:11:49] with dozens of different Brokers so if
+[00:11:51] we're going to talk about which of these
+[00:11:52] platforms and Brokers are actually best
+[00:11:54] for real money there's a couple things
+[00:11:56] that we should acknowledge so an issue
+[00:11:57] that some people have with Weeble is
+[00:11:59] that it's owned by a Chinese holding
+[00:12:01] company so it's the ownership being
+[00:12:04] Chinese has left some Americans feeling
+[00:12:07] like I don't want to put my money in
+[00:12:09] into a Chinese broker dealer and you
+[00:12:12] know maybe that's blown out of
+[00:12:13] proportion but some people feel that way
+[00:12:15] strongly and so there has been this
+[00:12:17] Chinese influence in the stock market
+[00:12:20] certainly we've seen that in the small
+[00:12:21] cap Market it's not always been good and
+[00:12:23] so some people are just resistant and
+[00:12:26] hesitant to opening an account with a a
+[00:12:29] a Chinese company so that's that's the
+[00:12:31] first potential issue with Weeble you
+[00:12:33] don't have that with thinker swim of
+[00:12:34] course um you know so that that's just
+[00:12:37] something with with Weeble to be aware
+[00:12:39] of now um an issue that I had with my
+[00:12:42] Weeble account was orders getting
+[00:12:45] rejected because they exceeded maximum
+[00:12:47] quantity threshold for a single order
+[00:12:50] and I'll tell you the way this happened
+[00:12:51] um basically what happened was um I had
+[00:12:56] a stock I was trading and it was priced
+[00:12:58] around like $4 a share and I had my buy
+[00:13:01] button so buy button for 2,000 shares 2K
+[00:13:04] shares and so I clicked that um four
+[00:13:09] times and because I stipulated a limit
+[00:13:13] on my order of you know like 401 or
+[00:13:16] whatever it was because I had a limit I
+[00:13:18] actually only got a partial fill of
+[00:13:20] about 6,300 shares so it's kind of a
+[00:13:22] partial fill anyways I I took the trade
+[00:13:26] and I decided you know after I was in I
+[00:13:28] was like okay I'm ready to get out so I
+[00:13:30] pressed my
+[00:13:31] sell full position hotkey that's it sell
+[00:13:36] full position it's a hotkey and usually
+[00:13:39] I press that and boom I'm out of the
+[00:13:41] trade instantly and nothing happened and
+[00:13:44] I sat there and I'm like what is going
+[00:13:46] on what's Happening and now I'm starting
+[00:13:48] to panic a little bit because I'm trying
+[00:13:50] to Stell and I cannot get out and the
+[00:13:52] stock starts dropping and I'm like okay
+[00:13:55] this is a problem so I I can't even
+[00:13:58] click outside like anything I click in
+[00:14:01] the actual app I'm just getting this you
+[00:14:04] know Windows like d d kind of like error
+[00:14:07] like it won't let me click anything I
+[00:14:08] have no idea what's going on so I go
+[00:14:11] down I'm getting ready to force quit I
+[00:14:13] go to my taskbar to rightclick the
+[00:14:15] platform and I see there's two windows
+[00:14:17] so I'm like what is this so I click on
+[00:14:19] the second one and I see that there's a
+[00:14:22] notification and so the notification was
+[00:14:24] actually sort of hidden I couldn't even
+[00:14:26] see that there was a notification
+[00:14:29] and but there was and it said that my
+[00:14:31] order was rejected because it exceeded
+[00:14:33] the maximum quantity threshold so I was
+[00:14:36] like what in the heck all right so I was
+[00:14:38] like well whatever I'll just press my
+[00:14:40] sell half hotkey I got the same
+[00:14:44] notification for selling half that's
+[00:14:46] 3,150 shares now I'll tell you that this
+[00:14:49] wasn't a trade during extended hours the
+[00:14:52] stock had a lot of volume it wasn't a
+[00:14:53] low volume stock but this was the error
+[00:14:55] that I was getting I wasn't able to
+[00:14:57] finally sell until until I manually
+[00:15:00] typed in my order for it was like a th
+[00:15:03] shares and then had to slowly get out
+[00:15:06] while that was happening you know what
+[00:15:07] the price was doing it was dropping
+[00:15:10] because I had my Max lo I had my stop
+[00:15:13] and this just happened to be the bad
+[00:15:14] luck that it was on a losing trade that
+[00:15:16] it happened so I got in the stock went
+[00:15:18] up it came down to my stop I tried to
+[00:15:19] get out couldn't get out and then it
+[00:15:21] keeps going lower that has um that has
+[00:15:24] not happened to me at thinker swim uh
+[00:15:28] however what has happened at thinker
+[00:15:29] swim is I put the sell order or the buy
+[00:15:32] order out there and it just sits in the
+[00:15:34] working order Tab and it just sits and
+[00:15:38] sits and sits and the order is a valid
+[00:15:41] order the time and force everything is
+[00:15:43] right but it it just lags and it takes
+[00:15:46] 15 seconds 20 seconds 30 seconds maybe
+[00:15:49] even a minute before my order finally
+[00:15:52] executes now I'll tell you something
+[00:15:54] trading is hard enough without dealing
+[00:15:57] with stuff like this happening
+[00:15:59] so if you were going to force me right
+[00:16:01] now today to use one of these two
+[00:16:03] Brokers for real money I I would
+[00:16:06] probably use um Charles Schwab thinker
+[00:16:09] swim using D Trader and pay the $175 a
+[00:16:12] month right because the order rejection
+[00:16:14] is not feasible for me with Weeble but
+[00:16:17] that's because I trade with larger
+[00:16:18] positions so now there's kind of this
+[00:16:20] question of what is the best broker for
+[00:16:24] real money and the best for real money
+[00:16:28] is going to for for real money is going
+[00:16:29] to ask this question forces me to ask
+[00:16:32] you a question which is how much uh how
+[00:16:35] many shares are you trading with CU if
+[00:16:36] you're trading with between one and you
+[00:16:39] know I'd say 5,000 shares commission
+[00:16:43] free Brokers are fine they're they're
+[00:16:45] fine yes you might get a little slippage
+[00:16:47] you might have a few orders especially
+[00:16:49] when you're on the larger side here that
+[00:16:51] start to cause you some issues as we saw
+[00:16:52] with Weeble um but for the most part
+[00:16:55] when you're trading with relatively
+[00:16:56] small size it's fine and commission free
+[00:16:59] is great but when you start trading with
+[00:17:01] above 5,000 shares a broker like Weeble
+[00:17:04] is going to be a problem and think or
+[00:17:05] swim while it can work you'll certainly
+[00:17:08] want to still spend the money here um
+[00:17:11] you'll you could still have issues with
+[00:17:13] orders that sit there and lag and don't
+[00:17:15] fill quickly so the advantage with these
+[00:17:18] types of Brokers is that these cater to
+[00:17:22] six figure seven figure eight figure
+[00:17:24] Traders they're not going to give you
+[00:17:26] order rejection for share size you want
+[00:17:28] to take 100,000 shares you could take
+[00:17:30] 100,000 shares you want to trade
+[00:17:31] aggressively you want to trade fast this
+[00:17:34] software Sterling Sim and Das Trader
+[00:17:36] integrated with these platforms is
+[00:17:38] designed for super fast trading I mean
+[00:17:41] even high frequency trading so these
+[00:17:44] platforms really kind of take the take
+[00:17:47] the leash off and you can run you can
+[00:17:49] move fast in the market big size in big
+[00:17:53] size out and so for me if I was going to
+[00:17:56] trade with a commission free broker I
+[00:17:58] think I would kind of my profit was sort
+[00:18:00] of cap whereas this is kind of where the
+[00:18:04] um the other Brokers pick up so again if
+[00:18:08] you're down here commission free and
+[00:18:10] Weeble might be great and it is
+[00:18:11] definitely cheaper than using the 175 a
+[00:18:13] month but if you're kind of getting up
+[00:18:15] into this area then you want to scale up
+[00:18:17] so the question now is as a
+[00:18:20] beginner which platform should I use
+[00:18:23] anticipating that I want to take this
+[00:18:25] ramp to the upside and you might find
+[00:18:27] this to be surprising but I would
+[00:18:29] actually probably say either Weeble or
+[00:18:31] Warrior and not think or Swim because
+[00:18:34] you don't want to spend $175 a month on
+[00:18:37] Das and using thinker swims
+[00:18:40] platform right here you would learn to
+[00:18:42] use software that is so unique to think
+[00:18:46] or swim the skills you learn don't
+[00:18:48] really translate to any other broker
+[00:18:50] because this platform is so unusual so
+[00:18:53] if you were going to eventually scale up
+[00:18:55] then you'd have to sort of start from
+[00:18:56] scratch with learning something new so I
+[00:18:59] think Weeble at you know approximately
+[00:19:01] $12 well $10 a month and then plus maybe
+[00:19:04] a couple dollars for other data um you
+[00:19:06] know is a good is a good starting point
+[00:19:09] and you can trade there just fine with
+[00:19:11] relatively small size but you know when
+[00:19:14] then you're ready to transfer you sort
+[00:19:16] of transition to one of these Brokers or
+[00:19:18] you use the warrior trading Sim and
+[00:19:20] you're a warrior Pro member so you get
+[00:19:22] access to it for 90 days and then right
+[00:19:24] from there you could either go use
+[00:19:25] Weeble with real money or you could use
+[00:19:27] one of these Brokers and that would be
+[00:19:28] fine too so now let's do our platform
+[00:19:31] demos real quick I'm going to start by
+[00:19:33] doing a well I'll go through the
+[00:19:34] platform Demos in depth but I'm going to
+[00:19:36] start by doing a comparison so let's
+[00:19:39] pull up first The Thinker swim platform
+[00:19:41] so with thinker swim if you want to
+[00:19:44] trade in The Thinker swim paper money
+[00:19:46] you actually have to log out of real
+[00:19:48] money and log in to paper money so
+[00:19:51] you've got live trading and then paper
+[00:19:53] money when you're logged into paper
+[00:19:55] money there's a orange ring around it or
+[00:19:58] kind of a yellow ring around it it says
+[00:19:59] simulated trading what I want to do
+[00:20:01] first is I just want to do a execution
+[00:20:05] speed test of all three platforms and
+[00:20:08] let's just see which one executes the
+[00:20:10] trades the fastest that's just going to
+[00:20:12] be the first thing we're going to do so
+[00:20:14] I'm going to hide this um as well so
+[00:20:17] we're just going to go right here all
+[00:20:19] right so we're on the simulated trading
+[00:20:21] mode we're going to do we'll just do a
+[00:20:23] th shares doesn't really matter this is
+[00:20:26] wky and we're going to click um buy
+[00:20:32] Market okay so let's
+[00:20:34] see right
+[00:20:37] now it doesn't appear that my order is
+[00:20:40] filled but there's no logical reason why
+[00:20:42] it wouldn't have filled there it is okay
+[00:20:45] so you can see it took a second right
+[00:20:48] I'm in but it took a second now let's go
+[00:20:51] sell
+[00:20:52] Market 1 2 3 4 5
+[00:20:59] six oh my gosh I could read the
+[00:21:00] newspaper 7 8 9 10 11 11 seconds to fill
+[00:21:07] my goodness as long as you don't mind
+[00:21:10] being patient all right okay so think or
+[00:21:13] Swim uh you've set the bar relatively
+[00:21:16] low let's go ahead and pull up Weeble
+[00:21:19] all right so we're going to pull up
+[00:21:20] Weeble here um this is the uh paper
+[00:21:23] trading simulator on Weeble we're going
+[00:21:25] to do the same stock WK y um and I'm
+[00:21:28] going to click buy
+[00:21:30] Market okay orders here 1 2 3 4 5 6 7 8
+[00:21:42] 9 9 seconds I'm INE 89 let's click sell
+[00:21:47] sell Market uh we're going to go sell
+[00:21:50] sell bid that's fine either one would be
+[00:21:52] fine 1 2 3 four so sold in about 4
+[00:21:58] seconds so is it
+[00:22:01] faster not on the buy side um let's try
+[00:22:04] buying
+[00:22:06] ask let's see one 2 3 four five 5
+[00:22:12] Seconds to buy sell bid 1 2 3
+[00:22:19] 4 5 6 seven my order hasn't even come up
+[00:22:24] though um did it not accept the
+[00:22:27] order so did I get an error
+[00:22:30] message sell bid order submitted okay 1
+[00:22:35] 2 3 4 5 6 7 8
+[00:22:43] so you can't you can't really say either
+[00:22:46] of these are super fast and I'll just
+[00:22:48] I'll just show you for one second um so
+[00:22:52] I'll just put up my um this is a real
+[00:22:53] money account here um I'll just do I'll
+[00:22:55] just do one share just for instance um
+[00:22:57] just to show you how how fast it is so
+[00:22:59] this is a real money account one share
+[00:23:02] in instantly one share sell gone
+[00:23:05] instantly in and out do you see how fast
+[00:23:08] that is it is lightning now let's go
+[00:23:10] ahead let's just try um switching to
+[00:23:13] thinker SW or to um Weeble production
+[00:23:16] all right so this is a real money
+[00:23:17] account
+[00:23:19] here let's see W ke
+[00:23:23] Y and I'm just going to do um let's see
+[00:23:28] want to do a small order
+[00:23:30] so I'm going to pull up the widget for
+[00:23:34] your order entry window uh where is it
+[00:23:36] so add
+[00:23:38] widget
+[00:23:40] um classic trade that's fine all right
+[00:23:43] so we're just going to do 100 shares
+[00:23:45] whatever doesn't matter just 100 shares
+[00:23:47] we're going to do a buy order we're
+[00:23:48] going to do a market order and we're
+[00:23:50] going to click buy so let's count it out
+[00:23:53] one instant instant I'm in immediately
+[00:23:59] let's turn around and
+[00:24:01] sell instant it's instant so why is that
+[00:24:06] why is the simulator so slow but real
+[00:24:09] money is instant well maybe we already
+[00:24:12] talked about it all right let's test
+[00:24:14] that out we'll test the same thing out
+[00:24:16] in thinker swim um I will log out of
+[00:24:20] this real quick so let's go ahead well
+[00:24:22] just close it so I'm just going to close
+[00:24:24] this log off and then we'll log back in
+[00:24:26] and then we'll pull up the warrior
+[00:24:27] trading Sim as well so the warrior
+[00:24:29] trading Sim is using the same software
+[00:24:33] um that you can use with real money it's
+[00:24:34] just connected to a simulator so I'm
+[00:24:36] going to press shift one and you can see
+[00:24:38] it's instant contrl Z so yeah I can't
+[00:24:42] even count I mean I'll do the count one
+[00:24:46] okay there we go and one so it's like
+[00:24:48] one second not even all right let's
+[00:24:50] check let's check thinker swim uh
+[00:24:52] simulator so what I think is the issue
+[00:24:55] here is that these platforms allocate
+[00:24:58] more resources to production to real
+[00:25:00] money and they don't allocate the
+[00:25:03] resources for simulated trading because
+[00:25:04] there's not money in it that I think
+[00:25:07] that's the problem there's just not
+[00:25:08] money in letting people use the
+[00:25:10] simulator now we have a simulator at
+[00:25:12] Warrior tradeing of course it but it
+[00:25:13] costs money but we have now the
+[00:25:15] expectation to give our members a great
+[00:25:17] experience using it so um you know I
+[00:25:19] wanted to show you this by the way the
+[00:25:22] purpose of this is not just to say that
+[00:25:25] the warrior trading Sim is the best CU I
+[00:25:26] don't think it is the best for everyone
+[00:25:28] I actually think there's a way to make
+[00:25:29] Weeble work well and I'm going to I'm
+[00:25:31] going to explain what that technique
+[00:25:33] would be all right so now let's just do
+[00:25:36] um let's just do 100 shares here on
+[00:25:39] thinker swim so we're going to do uh buy
+[00:25:42] Market 100
+[00:25:43] shares instant basic basically instant
+[00:25:47] sell
+[00:25:48] Market it's pretty quick buy
+[00:25:51] market sell Market was it as quick as
+[00:25:54] light speed no I don't think so I don't
+[00:25:57] think as quite as fast as light speed
+[00:25:59] but it was fast it it was it's pretty
+[00:26:01] darn fast and and so both Weeble and
+[00:26:06] thinker swim are much faster with real
+[00:26:09] money than when you're Sim trading all
+[00:26:12] right so this is important information
+[00:26:13] so let's get back onto the slide deck
+[00:26:15] here for a second so if we go back here
+[00:26:18] what we now know is that we could add
+[00:26:21] another row here actually we'll go ahead
+[00:26:23] and add a row uh let's
+[00:26:26] see so
+[00:26:29] sorry sometimes I fumble with this
+[00:26:30] insert row above um better with real
+[00:26:34] money question mark yes yes na a not
+[00:26:38] applicable so the better with real money
+[00:26:42] is is interesting because uh it it
+[00:26:44] incentivizes you to go ahead and trade
+[00:26:47] with real money so this is what I would
+[00:26:49] say thinker swim platform uh it does not
+[00:26:53] allow you to trade extended hours in the
+[00:26:55] simulator it doesn't give you level two
+[00:26:57] data oh sorry it does give you L 2 day
+[00:26:59] it does not give you hot Keys it doesn't
+[00:27:01] give you halot resumptions it doesn't
+[00:27:02] give you um Hal levels quotes anything
+[00:27:05] like that so the only thing that changes
+[00:27:07] with real money so we'll say if you use
+[00:27:10] real money then you can trade extended
+[00:27:12] hours with Weeble you can trade extended
+[00:27:15] hours both ways so if you were going to
+[00:27:18] fund a real money account with thinker
+[00:27:20] swim the problem is you still wouldn't
+[00:27:22] get these three items here that you
+[00:27:24] would get with Weeble you don't get
+[00:27:26] Advanced hot Keys you don't get levels
+[00:27:28] you don't get resumption quotes so this
+[00:27:31] is what I would propose if you want to
+[00:27:33] use what is more or less a free
+[00:27:36] simulator you could use thinker swim or
+[00:27:39] Weeble $10 a month all right pay the $10
+[00:27:42] a month and do Weeble $10 a month you're
+[00:27:44] going to get level two data you're going
+[00:27:46] to get Advanced hotkeys halt levels and
+[00:27:48] resumption quotes but you have to fund
+[00:27:51] an account with real money and then what
+[00:27:53] I would do is I would trade just with
+[00:27:56] one share see now you beat the system
+[00:27:58] they're not going to make that much
+[00:27:59] money on one share but they're going to
+[00:28:01] give you access to all the features so
+[00:28:05] now this requires you I will say to be
+[00:28:08] disciplined can you discipline yourself
+[00:28:09] to only trading with one share as long
+[00:28:12] as you can do that then I think that
+[00:28:14] this is a good workaround and it's a
+[00:28:16] more or less as close to free as it gets
+[00:28:18] so I'm going to go on the assumption
+[00:28:21] that we're not going to use the actual
+[00:28:24] Simulator for thinker swimmer Weeble
+[00:28:26] we're going to use the production
+[00:28:27] environment so if we use the production
+[00:28:29] environment for thinker swim as I have
+[00:28:32] it right here we're back logged into the
+[00:28:34] production environment this is how I
+[00:28:35] would set it up for thinker swim I would
+[00:28:39] set up these buttons right here so you
+[00:28:41] see how I have these buttons this for me
+[00:28:44] it I think is is pretty much like the
+[00:28:45] best way to set it up what I'm actually
+[00:28:47] going to do is I'm going to put a link
+[00:28:48] in the description where you can
+[00:28:50] download my layouts and then you can go
+[00:28:53] and install them yourself so you don't
+[00:28:55] have to customize it the way I've done
+[00:28:56] I'll do it for you and then you can just
+[00:28:58] install my layout so there'll be a link
+[00:28:59] where you can download it pinned at the
+[00:29:01] top of the comments and Linked In the
+[00:29:03] description so on thinker swim I like
+[00:29:06] thinker swim I think the charts are
+[00:29:08] great they're easy to use I would love
+[00:29:10] it if they offered 10sec charts they
+[00:29:13] don't one minutes the the fast the
+[00:29:15] charts get but I I think they're nice
+[00:29:17] looking charts they're easy to navigate
+[00:29:19] you can kind of move them around nicely
+[00:29:21] you can zoom in you can slide left and
+[00:29:23] right it's a nice platform it it's clean
+[00:29:26] and of course it works on your mobile
+[00:29:28] phone which is super convenient what I
+[00:29:30] do is I actually go to trade up here in
+[00:29:32] the top menu I go to trade and then I go
+[00:29:35] to the active Trader window and this is
+[00:29:37] what this is the way I've lik to set
+[00:29:39] enjoyed setting it up other people have
+[00:29:40] done um a couple different ways some
+[00:29:42] people will go to charts and they'll go
+[00:29:44] to the flexible grid and that that can
+[00:29:46] work too but I just do trade and then
+[00:29:49] active Trader and the way I set it up is
+[00:29:51] I use the active Trader right here this
+[00:29:55] active Trader is what gives you the
+[00:29:57] buttons so you've got the buy and the
+[00:29:59] sell buttons and you can customize them
+[00:30:01] the way you want so what I go in and do
+[00:30:03] is I actually customize these exactly to
+[00:30:06] my liking so I want to be able to buy
+[00:30:08] ask buy market and buy on the bid those
+[00:30:11] are the three types of buy buttons I
+[00:30:13] have then I have sell bid sell market
+[00:30:16] and sell ask now the problem that I run
+[00:30:19] into is if we have a stock that's moving
+[00:30:22] fast and it's moving
+[00:30:25] pre-market I can't press bu
+[00:30:28] Market because Market orders only work
+[00:30:32] from 9:30 a.m. till 400 p.m. so during
+[00:30:35] this window you have Market orders and
+[00:30:38] you have stop orders so from 4:00 a.m.
+[00:30:41] to 9:30 and from 400 p.m. to 8:00 pm you
+[00:30:44] can only use limit orders and I don't
+[00:30:47] have a problem using limit orders but
+[00:30:50] what I want to be able to do is create
+[00:30:52] an offset an offset looks like this so
+[00:30:57] we're looking at a stock like w ke Y and
+[00:31:00] the ask is 198 or 193 I put the order up
+[00:31:04] 1 2 3 4 5 6 7 8910 C something like that
+[00:31:08] so now I have an offset slightly above
+[00:31:11] the current ask by having that offset it
+[00:31:14] allows me to fill my entire order I may
+[00:31:17] get some slippage but I would rather get
+[00:31:20] filled with a little slippage than miss
+[00:31:22] the trade entirely and unfortunately
+[00:31:25] with thinker swim they don't have a
+[00:31:27] hotkey that allows you to create an
+[00:31:29] offset if you go into the application
+[00:31:32] settings you can create hot keys but
+[00:31:34] they don't they don't have an offset so
+[00:31:36] your hotkey will be buy ask or bu Market
+[00:31:39] or buy bid and the problem with buy ask
+[00:31:41] is that if you want to buy let's say
+[00:31:44] 10,000 shares and on the ask there's
+[00:31:47] only a th000 shares for sale you'll buy
+[00:31:50] the thousand shares and then your order
+[00:31:52] is just going to wait and it's not going
+[00:31:53] to move higher so now you're not going
+[00:31:55] to get filled on your order and the
+[00:31:56] Stock's going to go without you and then
+[00:31:58] you're going to be sitting there
+[00:31:59] twiddling your thumbs feeling like an
+[00:32:00] idiot so for me what I would rather do
+[00:32:03] is use an offset so unfortunately since
+[00:32:06] you can't do that with the buttons or
+[00:32:08] with the hot keys at think or Swim I use
+[00:32:11] the ladder right here where I manually
+[00:32:14] click on the the actual price so you
+[00:32:18] press the control button and then you
+[00:32:20] click the price where you want to get in
+[00:32:22] so you click to buy and then you click
+[00:32:24] to sell but one of the problems is let's
+[00:32:27] say you buy like you know an odd number
+[00:32:30] of shares let's say you buy 13 shares
+[00:32:31] and you want to sell it well you can
+[00:32:34] press the flatten button but that only
+[00:32:36] works during regular trading hours
+[00:32:38] because it's a market order so if you
+[00:32:40] want to get out you've got to go and
+[00:32:42] manually type here ah shoot 13 not 113
+[00:32:46] 13 and when you're feeling the pressure
+[00:32:49] your fingers are shaking a little bit
+[00:32:50] all of a sudden you're fumbling you're
+[00:32:52] not doing it fast enough and the profit
+[00:32:54] you had is gone it's gone the stock
+[00:32:56] dropped down you didn't lock it up and
+[00:32:58] it's so annoying so for me if we
+[00:33:02] contrast that with Weeble we're over
+[00:33:05] here on Weeble and I'm in the middle of
+[00:33:08] doing a little challenge here with um
+[00:33:10] this Weeble account I'll do an episode
+[00:33:12] on that at some point in the future um
+[00:33:14] but in any case you come over to Weeble
+[00:33:16] and so let's say um I want to buy uh
+[00:33:21] let's see I got to go back to my to my
+[00:33:22] layout here all right so let's say I see
+[00:33:25] snti or we'll switch we'll switch over
+[00:33:27] to wkey so let's say I want to buy it um
+[00:33:31] I can use the buy button down here and I
+[00:33:33] can punch and click and create these
+[00:33:35] orders or I can create hot keys so if I
+[00:33:38] go up into the hot keys under um
+[00:33:40] settings go to settings under the hot
+[00:33:42] keys I can create trading hotkeys and
+[00:33:45] these are the ones I've created right
+[00:33:46] here so under hotkey settings I can have
+[00:33:49] the buy Market buy bid Buy Ask they have
+[00:33:51] the standard ones the same ones
+[00:33:53] essentially that are available with
+[00:33:54] think or Swim except they offer this
+[00:33:57] plus button create a customized button
+[00:34:00] oh my goodness my dream come true why
+[00:34:02] doesn't thinker swim do this it would be
+[00:34:04] so simple so byy ask offset 10 cents so
+[00:34:09] we're going to do a buy order offset bid
+[00:34:11] oh sorry buy it's a buy order we're
+[00:34:13] going to do a th000
+[00:34:15] shares do a th000 shares we're going to
+[00:34:18] do ask price and we're going to go
+[00:34:21] offset 10 cents like that it's going to
+[00:34:24] be a day order and we're going to allow
+[00:34:26] extended hours and just like that we
+[00:34:29] create it and we script it to a button
+[00:34:31] and all you have to do is press that
+[00:34:32] button and it'll send an order for an
+[00:34:34] offset a buy order offset 10 cents above
+[00:34:37] the ask now let's say you want to turn
+[00:34:38] around and sell so you're like okay I
+[00:34:40] got I got this buy button to to buy uh
+[00:34:43] let's go ahead and create a sell button
+[00:34:46] so
+[00:34:47] sell bid 50% half so let's create a cell
+[00:34:51] button here and we're going to sell
+[00:34:53] quantity instead of doing shares let's
+[00:34:56] change it to percentage
+[00:34:59] 50% so now we're going to do 50% we're
+[00:35:01] going to sell at the bid maybe we'll do
+[00:35:03] an offset uh just below the bid so we'll
+[00:35:06] do 10 cents below the bid it's a day
+[00:35:09] order we're going to include extended
+[00:35:10] hours and then you script it to your key
+[00:35:13] done so now you've got the hot keys that
+[00:35:16] you need with the Press of a button to
+[00:35:18] be able to move in and move out of the
+[00:35:20] market quickly that's exactly what we
+[00:35:23] want that's what we want from thicker
+[00:35:24] swim they have it right here at Weeble
+[00:35:27] so so if I was going to compare and
+[00:35:29] contrast thinker swim versus Weeble I
+[00:35:32] would have to say that Weeble as a
+[00:35:34] platform is better you've got your order
+[00:35:37] book here which has your level two data
+[00:35:40] now I will say that um one thing that
+[00:35:42] you've got to do with Weeble is you've
+[00:35:44] got to go and subscribe to the data so
+[00:35:47] you could see right here I subscribed
+[00:35:49] for $99 oh sorry it's $2 a month I think
+[00:35:52] um subscription history so it's um 299 a
+[00:35:56] month for level two and $9.99 a month
+[00:35:58] for nbbo so it's not very I mean all
+[00:36:02] things considered I don't think it's
+[00:36:04] very expensive that's a relative you
+[00:36:06] know that's relative what's cheap for
+[00:36:07] someone might be expensive to someone
+[00:36:08] else but I don't think it's too bad and
+[00:36:11] by doing that if you fund this account
+[00:36:13] with a couple hundred bucks you could
+[00:36:16] trade with one share now you're not
+[00:36:17] going to be able to trade one share of
+[00:36:20] Amazon or apple higher PRC stocks you're
+[00:36:23] going to run out of buying power but you
+[00:36:25] could trade with one share of some of
+[00:36:27] these lower stocks so you could get in
+[00:36:29] you could get out you could trade all
+[00:36:30] day long just buying and selling buying
+[00:36:32] and selling one share and then you're
+[00:36:34] able to actually track your metrics now
+[00:36:36] another problem that I didn't mention
+[00:36:37] with um the paper trading simulator at
+[00:36:41] Weeble well we were we were really
+[00:36:42] focusing on um thinker swim so let's go
+[00:36:44] back to thinker swim let's stay focused
+[00:36:46] all right so thinker swim um I'm just
+[00:36:49] going to hide this for a second so back
+[00:36:51] to thinker
+[00:36:52] swim so again look some of you guys are
+[00:36:55] already using thinker swim you like the
+[00:36:56] platform you don't want to switch I get
+[00:36:58] it it's not fun to switch so if it if
+[00:37:01] you've got a workflow that you're dialed
+[00:37:04] in on it feels good for you then by all
+[00:37:06] means don't let me stand your way do
+[00:37:07] whatever you'd like and I I should say
+[00:37:09] that I don't have any affiliate
+[00:37:10] relationship with Weeble or thinker swim
+[00:37:12] I don't make any money if you use one or
+[00:37:14] the other it doesn't make any difference
+[00:37:15] to me so it's whatever works for you and
+[00:37:18] this is the way I've done it I recently
+[00:37:20] did a thinker swim challenge I grew my
+[00:37:22] small account um all the way up to like
+[00:37:26] $27,000 and I did it just using the
+[00:37:28] Thinker swim platform I didn't use any
+[00:37:30] third party Integrations I didn't use
+[00:37:32] any fancy hot keys I just did pointand
+[00:37:35] click it can be done I know a lot of
+[00:37:37] traders who do it it doesn't feel as
+[00:37:39] fast to me but it can be done uh the
+[00:37:42] only thing is that you really have to
+[00:37:44] use the real money um you have to use a
+[00:37:47] real money account if you want to use it
+[00:37:49] because the simulator is just too slow
+[00:37:52] so that means you've got to fund an
+[00:37:54] account with a couple hundred bucks so
+[00:37:55] you can buy and sell one one share you
+[00:37:59] will be limited uh in some ways because
+[00:38:01] you're not going to have halt levels and
+[00:38:03] you're not going to be able to see
+[00:38:04] resumption quotes so let's talk about
+[00:38:06] that for a second because that felt that
+[00:38:08] felt important um with Weeble so and one
+[00:38:12] other thing that I'll mention though is
+[00:38:14] that um when you go over to monitor you
+[00:38:17] can actually monitor in um thinker swim
+[00:38:21] your profits and you can export them and
+[00:38:24] you could do this both with the SIM but
+[00:38:26] also with real money and the nice thing
+[00:38:28] is if you export those you can import
+[00:38:30] them to a platform like Trader view so
+[00:38:33] I'll show you Trader view for a second
+[00:38:36] this
+[00:38:37] platform uh is what I use for my metrics
+[00:38:40] so it's not free it's $50 a month again
+[00:38:43] I don't have an affiliate relationship
+[00:38:44] with them so if you use it it's fine if
+[00:38:46] not it doesn't matter but to me but uh
+[00:38:48] this is what I've been using for since
+[00:38:50] 2016 so I have that many years of
+[00:38:53] trading data inside Trader view it is
+[00:38:56] $49 a month month but you can import
+[00:38:58] your trades so what I'm able to do since
+[00:39:02] my broker light speed light speed
+[00:39:04] doesn't give me my metrics they don't
+[00:39:07] give me analytics on my trading
+[00:39:08] performance but it's important to me so
+[00:39:11] I pay the $50 a month to import all my
+[00:39:13] trades here and then I can see over the
+[00:39:15] last 30 days I'm up well let's see uh
+[00:39:17] that was April so we'll do last 30 days
+[00:39:20] here I'm up
+[00:39:22] $63,000 but what I find really helpful
+[00:39:24] about analyzing metrics like this is
+[00:39:26] that let's say
+[00:39:27] we have a month like March so March of
+[00:39:30] this year for instance was not a great
+[00:39:33] month for me I just gosh I was really
+[00:39:36] kind of in a bit of a a rut and when I
+[00:39:38] looked at my metrics I noticed H seem to
+[00:39:41] be losing money trading higher price
+[00:39:44] stocks but I'm doing well on stocks
+[00:39:46] between two and 10 so I took that and I
+[00:39:49] said you know what for the month of
+[00:39:50] April I'm just going to focus on stocks
+[00:39:52] between 2 and 10 and by focusing on
+[00:39:54] stocks between 2 and 10 I made twice as
+[00:39:56] much money in April
+[00:39:57] because I I eliminated those outlier
+[00:40:00] losses so I really think knowing your
+[00:40:02] metrics is very important when you're
+[00:40:04] Sim trading because you need to know
+[00:40:07] what are you doing that's working and
+[00:40:09] what's not working what's where's your
+[00:40:10] profit coming from and if you have no
+[00:40:12] idea then you're kind of Flying Blind
+[00:40:13] and I really think that that's a problem
+[00:40:16] so with neither Weeble nor thinker swim
+[00:40:20] give you your metrics um at at the
+[00:40:23] warrior trading Sim we do um aggregate
+[00:40:25] your data and produce metric tricks for
+[00:40:27] you mine aren't in here because I
+[00:40:29] haven't been I don't trade in the
+[00:40:30] simulator but it would give you your
+[00:40:32] profit loss ratio your profitability by
+[00:40:34] Price instrument volume time a day
+[00:40:37] basically all of the relevant info that
+[00:40:39] I use in um in in uh Trader viiew so
+[00:40:44] that would save you the $50 a month uh
+[00:40:46] so anyways uh now when so so one issue
+[00:40:52] well it's two things so number one you
+[00:40:53] can go to import trades and you can
+[00:40:55] import directly from from um Weeble
+[00:40:58] which is going to be down at the bottom
+[00:40:59] you can import from the tra Warrior
+[00:41:01] trading simulator if you want the data
+[00:41:03] that I mean we give it to you but some
+[00:41:04] people want it to import it here so they
+[00:41:06] made it available um and then you've got
+[00:41:08] Schwab but then you've also got thinker
+[00:41:10] swim um somewhere around here so a bcde
+[00:41:14] e
+[00:41:15] FG there it is thinker swim so you can
+[00:41:17] import from thinker swim you just follow
+[00:41:19] the instructions and then import your
+[00:41:20] trades so if you were going to use um
+[00:41:23] either Weeble or thinker swim you would
+[00:41:27] kind of have to factor in adding um you
+[00:41:31] know uh some software for analyzing your
+[00:41:34] metrics because that is important so
+[00:41:36] that's going to cost you a little bit
+[00:41:38] more money so I would just say
+[00:41:41] metrics uh price so $49 $49 or
+[00:41:47] included so now you're kind of at like
+[00:41:49] $50 so $60 a month all right versus $100
+[00:41:53] a month so you know it's again you're
+[00:41:55] going to be better off using the Weeble
+[00:41:56] simulator later if um you're not in our
+[00:41:59] classes if you're in our classes you'll
+[00:42:01] get a discount because you get the 90
+[00:42:03] days for free but uh in any case it's
+[00:42:06] it's kind of up to you so I'm just going
+[00:42:07] to put these as um as red I suppose for
+[00:42:09] now um oops let's see go to
+[00:42:12] Red okay so now one problem with um the
+[00:42:18] paper trading with Weeble that I noticed
+[00:42:22] is that if you paper trade with Weeble
+[00:42:24] it doesn't keep your positions which is
+[00:42:27] really interesting so let's just say I
+[00:42:29] do um buy let's see buy a th000 ask so
+[00:42:34] it submits the order the order is going
+[00:42:37] to sit for 10 seconds as we know it
+[00:42:39] takes a little while to fill and well
+[00:42:42] you can already see because I took these
+[00:42:43] trades on WK y earlier but it doesn't
+[00:42:47] show you that open position it's not
+[00:42:49] sitting there so I don't have this
+[00:42:52] window here that shows me my open
+[00:42:54] position to how much money I made and
+[00:42:56] that by the way took an long time let's
+[00:42:58] do cell bid um so sell bid 100% 1 2 3 4
+[00:43:05] five six 7 eight eight seconds that's
+[00:43:10] too long that's too long you go to real
+[00:43:12] money and you're going to be in and out
+[00:43:14] of this thing as quick as as quick as it
+[00:43:15] be can be close your eyes close your
+[00:43:17] eyes okay there we go we're in
+[00:43:20] so uh so
+[00:43:22] here what I can do Under the positions
+[00:43:26] window is I can go go to condition
+[00:43:28] filter uh
+[00:43:31] display uh which one is it um show
+[00:43:34] today's closed positions off I could
+[00:43:36] turn it back on so you just have to save
+[00:43:38] your layout so you turn it back on and
+[00:43:41] then you can sort of organize this the
+[00:43:43] way you want so the way I would have it
+[00:43:45] I don't need the name of the company I
+[00:43:47] do usually show my open pnl and I would
+[00:43:50] show my average cost so I'll move that
+[00:43:52] over there I don't need the other ones
+[00:43:55] so
+[00:43:57] make this bigger so I have my symbol
+[00:44:00] which one was this quantity we need that
+[00:44:02] the p&l we need that um open pnl we need
+[00:44:07] that
+[00:44:09] and yeah days realize yeah so actually I
+[00:44:13] would do it I do it like this um and
+[00:44:16] then I'll move that over like that so
+[00:44:19] that's really all that I need right
+[00:44:21] there and then on this side I would go
+[00:44:22] ahead and add um you could add a chart
+[00:44:25] if you wanted to have your charts in
+[00:44:26] here now now I've been in the habit of
+[00:44:28] using um you know different software for
+[00:44:30] charts uh which works for me but it's
+[00:44:33] it's not something that everyone's going
+[00:44:34] to want to do all right so now now that
+[00:44:38] we've kind of gone over and compared and
+[00:44:40] contrasted um these two platforms on a
+[00:44:44] couple of levels we've talked about
+[00:44:47] they're both better with real money
+[00:44:48] extended hours you don't get it with
+[00:44:50] think or Swim unless you're doing
+[00:44:51] production you do get it with Weeble and
+[00:44:53] the Sim but it's the Sim's too slow
+[00:44:55] level two you get a across the board
+[00:44:57] Advanced hotkeys no question they're
+[00:44:59] better at Weeble you can create
+[00:45:01] customized hotkeys to your liking that's
+[00:45:04] fantastic your halt levels so you do
+[00:45:06] have to subscribe to that market data to
+[00:45:08] get those halt levels and then if you're
+[00:45:10] on um Let's do let's see
+[00:45:15] display we're going to go
+[00:45:18] to order book settings
+[00:45:20] nbbo so on the nbbo this is where you'll
+[00:45:24] see your halt levels and your halt
+[00:45:28] resumptions so the way these halts work
+[00:45:31] is for those that are new and are not
+[00:45:34] familiar um the the
+[00:45:37] market has this mechanism to prevent
+[00:45:40] flash crashes and they're called
+[00:45:43] volatility trading pauses so if a stock
+[00:45:46] drops like 30% that can't happen it
+[00:45:50] can't happen that it drops 30% instantly
+[00:45:52] because it'll be paused by this
+[00:45:54] mechanism but it also works with stocks
+[00:45:56] that spiking up so essentially this um
+[00:46:00] this these halts kind of restrain
+[00:46:04] volatility but they only work between
+[00:46:07] 9:30 and a.m and 400 p.m so you you have
+[00:46:11] halts during regular trading hours on
+[00:46:13] volatility which are
+[00:46:15] lld halts but you don't have them
+[00:46:19] pre-market and you don't have them after
+[00:46:20] hours which is kind of funny so I do a
+[00:46:22] lot of my trading pre-market and one of
+[00:46:24] the things I found is that during that
+[00:46:26] time of day when you you don't have halt
+[00:46:27] you can have incredible moves we we had
+[00:46:29] a stock just um a couple was like last
+[00:46:32] week actually let's pull up the chart
+[00:46:34] this stock um had breaking news zjk it
+[00:46:38] went from like $8 a share to
+[00:46:41] $50 a share and it did it in like 10
+[00:46:44] minutes it was unbelievable I mean this
+[00:46:47] is like absolutely crazy so let's look
+[00:46:49] at this chart holy smokes this thing
+[00:46:51] went straight up it was just insane so
+[00:46:55] from $7 a share $8 a share all the way
+[00:46:57] up to 50 bucks and there were no halts
+[00:46:59] on it of course it came back down there
+[00:47:01] were also no halts on it but there's no
+[00:47:03] halts pre-market there's no halts after
+[00:47:05] hours but during regular trading hours
+[00:47:07] there are halts and it's important to
+[00:47:09] know the halt data because when a stock
+[00:47:13] is about to be halted you want to know
+[00:47:16] because trading will be paused for 5
+[00:47:19] minutes you can't buy and you can't sell
+[00:47:22] so if you get in right before a stock is
+[00:47:24] about to be halted you're now stuck you
+[00:47:26] can't buy or sale you've just got to
+[00:47:27] wait till it resumes and then during the
+[00:47:30] Hal you may wonder where is it going to
+[00:47:33] resume now I have access to that data
+[00:47:35] you can get access to that data with
+[00:47:37] Weeble you can get access to that data
+[00:47:38] with the warrior trading Sim but thinker
+[00:47:40] swim doesn't offer that data so you're
+[00:47:43] kind of Flying Blind you don't know
+[00:47:44] where the halt levels are and you don't
+[00:47:46] know where the resumption prices are
+[00:47:48] that's a problem that's not going to
+[00:47:49] work if you're an active Trader you need
+[00:47:51] that data to make informed decisions so
+[00:47:55] with Weeble you unlock that data with
+[00:47:58] your nbbo subscription so you have to
+[00:48:01] subscribe to the nbbo right here and
+[00:48:03] then you unlock that data and what it
+[00:48:06] looks like is when the when during
+[00:48:09] regular trading hours it's after hours
+[00:48:11] right now but during regular trading
+[00:48:12] hours you'll see down here at the bottom
+[00:48:15] a word it'll say limit up and limit down
+[00:48:18] and it tells you the price and that's
+[00:48:20] the price where if the stock goes to
+[00:48:22] that level the price will be halted for
+[00:48:24] a minimum of five minutes now the way
+[00:48:27] these halts work
+[00:48:29] is um they were they were created to
+[00:48:32] prevent and sort of restrict volatility
+[00:48:35] and so the way the halts work is they're
+[00:48:38] based on the price of the stock of the
+[00:48:41] prior
+[00:48:42] close so if the prior close was less
+[00:48:47] than
+[00:48:48] 75 the stock will halt every 15
+[00:48:53] cents from the reference price
+[00:48:57] reference
+[00:48:59] price equals average
+[00:49:03] price over 5 minutes so that means if
+[00:49:07] the stock go if a stock is at 50 cents a
+[00:49:10] share and it goes up 15 cents in less
+[00:49:14] than 5 minutes it's going to be halted
+[00:49:16] for a period of 5 minutes because it
+[00:49:18] went up the to basically the max limit
+[00:49:21] based on the reference price stocks um
+[00:49:24] between 75 cents and
+[00:49:28] $3 they halt every
+[00:49:31] 20% and stocks above
+[00:49:33] $3 halt every 10% and so that means a
+[00:49:37] stock yesterday that closed at
+[00:49:41] $2.95 would halt uh in sorry in in let's
+[00:49:47] do this scenario so it would be in this
+[00:49:49] in this bracket here if it halted if it
+[00:49:51] was at
+[00:49:52] $2.95 yesterday it would halt at
+[00:49:55] approximately you know 360 right 20% 20%
+[00:49:59] above the current price so if all of a
+[00:50:01] sudden in a matter of you know 3 or 4
+[00:50:04] minutes the company comes out with
+[00:50:05] breaking news and starts squeezing up
+[00:50:07] you would want to know that this thing's
+[00:50:08] about to be halted because if you're in
+[00:50:10] during the halt you can't sell but
+[00:50:12] what's interesting is that while the
+[00:50:14] stock is halted we can see the
+[00:50:17] resumption price it's not the current
+[00:50:20] price but it's the it's the price the
+[00:50:21] stock is going to resume at so what that
+[00:50:24] means is that even though you can't
+[00:50:25] trade dur a halt you can place an order
+[00:50:28] to buy or sell so if a stock halts going
+[00:50:31] up usually people are going to cancel
+[00:50:33] their sell orders and hope it keeps
+[00:50:35] going higher and so usually that creates
+[00:50:38] an auction where during the halt people
+[00:50:41] are putting out buy orders and putting
+[00:50:43] out sell orders and there's more buy
+[00:50:44] orders and fewer sell orders which
+[00:50:46] creates an imbalance where the
+[00:50:48] resumption price is higher than the
+[00:50:51] price where the stock halted and that's
+[00:50:53] exactly what happened today on um wky
+[00:50:56] why so if I pull up this chart as an
+[00:50:59] example this stock halted this morning
+[00:51:02] um after it had the news of the SpaceX
+[00:51:05] um satellite launch so it squeezed up
+[00:51:08] we'll just back it up here it squeezed
+[00:51:10] up and immediately halted going up at
+[00:51:13] 370 no sorry it was a little lower than
+[00:51:15] that it was at you know it was at 370
+[00:51:18] and then it opened at $4 nearly 70 it
+[00:51:22] opened a dollar a share higher because
+[00:51:24] during the halt people said I like this
+[00:51:26] I want to buy it and anyone who had sell
+[00:51:28] orders out canel their sell orders
+[00:51:30] because now they're in a stock that's
+[00:51:31] got breaking news and the news is good
+[00:51:33] so all of a sudden it opens here and it
+[00:51:35] goes up and it goes again to up more
+[00:51:39] than 10% above the reference price so it
+[00:51:42] was halted all right because this stock
+[00:51:44] closed uh the previous day at just over
+[00:51:47] $3 so because it was over $3 it fell
+[00:51:50] into the in the range of 10% halts so it
+[00:51:54] goes up another 10% it's halt
+[00:51:57] and then it resumes and squeezes up all
+[00:51:59] the way to
+[00:52:01] $6.40 now the thing is I took this trade
+[00:52:04] and while it was halted the stock was
+[00:52:06] halted I was looking at the resumption
+[00:52:08] prices I could see where it was going to
+[00:52:10] resume now I subscribed to that data
+[00:52:12] rate here with uh light speed which is
+[00:52:15] the platform I use for real money but we
+[00:52:17] use uh essentially the same Market data
+[00:52:19] here for our simulator so we get that
+[00:52:21] data so you can see both the halt levels
+[00:52:24] and the resumption prices and if you
+[00:52:26] subscribe to the nbbo with uh Weeble you
+[00:52:29] can do the same which is great so now
+[00:52:31] you have access to that data which is
+[00:52:34] important once you have access to that
+[00:52:36] data all of a sudden you now you've got
+[00:52:38] your eyes open you can see the
+[00:52:40] resumption prices you know when a stock
+[00:52:41] is about to be halted and you can move
+[00:52:43] sort of in and out of those areas with
+[00:52:45] that knowledge and as part of learning
+[00:52:48] how to trade I mean these are it would
+[00:52:51] be silly to trade without that data no
+[00:52:54] one would do it with real money why
+[00:52:55] would you do it in a Sim
+[00:52:57] well I mean people do it with real money
+[00:52:58] I guess at thick or Swim right now
+[00:53:00] because they don't offer it even in
+[00:53:02] their real money
+[00:53:03] environment uh which is to me crazy but
+[00:53:06] we actually have I know a number of
+[00:53:07] people that subscribe to our simulator
+[00:53:10] and just use it for the data even though
+[00:53:13] they're executing their trades on
+[00:53:14] thinker swim so they're just subscribing
+[00:53:17] to this so they can get the the data
+[00:53:19] although it would be cheaper just to use
+[00:53:21] Weeble but they you know whatever maybe
+[00:53:23] they're using the SIM for practicing
+[00:53:24] other stuff as well I'm not sure but in
+[00:53:26] any case I've heard people say that so I
+[00:53:28] think Weeble Weeble is a little bit of a
+[00:53:30] newer platform that people have been a
+[00:53:32] little skeptical of I'm pretty sure
+[00:53:34] their ownership is um let me just look
+[00:53:38] it up um owner of Weeble so let's see
+[00:53:46] um who is Weeble owned by um yeah it's a
+[00:53:49] Chinese holding company so that I think
+[00:53:52] that's what's created some skepticism
+[00:53:54] for people but you know I mean I
+[00:53:57] mean be that as it may it's a decent
+[00:54:00] platform so you know that's that's what
+[00:54:02] I feel like you can't really argue with
+[00:54:04] it's a decent platform um so all right
+[00:54:07] so let's see so let's go back over to
+[00:54:09] our um slide deck here so we've looked
+[00:54:12] at thinker swim we've looked at Weeble
+[00:54:14] we've looked at the warrior trading
+[00:54:15] simulator a little bit now again the
+[00:54:17] purpose of this video wasn't just to
+[00:54:19] highlight what's great about the warrior
+[00:54:20] trading simulator I think it's a great
+[00:54:22] platform but it's got to be right for
+[00:54:24] you and it makes a lot more sense if
+[00:54:26] you're going to be a student because
+[00:54:27] then you'll get access to it for 90 days
+[00:54:29] for free um but you can go in here and
+[00:54:31] you can in the settings under hot Keys
+[00:54:34] you can create the same type of hotkeys
+[00:54:36] that I just created in Weeble using your
+[00:54:38] offsets you can script them to your
+[00:54:40] keyboard so it essentially offers I
+[00:54:43] would say more or less the same features
+[00:54:45] as Weeble except you don't need to fund
+[00:54:49] an account with real money cuz that's
+[00:54:51] the one thing with Weeble is that in
+[00:54:52] order to use it the way I'm using it you
+[00:54:55] need to fund an account and trade with
+[00:54:56] real money in which case they kind of
+[00:54:58] win because now you're giving them a
+[00:55:00] little order flow again it's only one
+[00:55:01] share it's not like they're going to
+[00:55:03] make a killing off of it but it it is it
+[00:55:06] is what it is so if you're comfortable
+[00:55:09] funding an account with a couple hundred
+[00:55:10] bucks and trading with just one share
+[00:55:13] then Weeble is is not a bad option it's
+[00:55:15] commission free you've got no
+[00:55:16] commissions you get practice in it yes
+[00:55:18] you're going to have to pay for your
+[00:55:21] Trader view metrics it's 50 bucks a
+[00:55:24] month that you have to do that because
+[00:55:26] because you need to know your metrics if
+[00:55:28] you don't know your metrics you don't
+[00:55:29] know what you're doing right you're not
+[00:55:30] going to improve as a Trader so you know
+[00:55:32] you're going to spend $70 a month um I
+[00:55:35] guess $60 a month when you combine those
+[00:55:37] two but in any case and you got to fund
+[00:55:39] the account so if you're okay with that
+[00:55:41] then I think Weeble is your best option
+[00:55:43] if you don't want to fund an account
+[00:55:45] with real money or you know for whatever
+[00:55:48] reason you're like that's just too
+[00:55:49] complicated for me right now I don't
+[00:55:50] want to do it um then the warrior
+[00:55:53] trading Sim is is probably your next
+[00:55:55] best bet and then beyond that this is
+[00:55:58] where it gets really tricky because
+[00:55:59] there's really not a lot of platforms
+[00:56:02] out there in fact there aren't any
+[00:56:03] others that I've looked at that I think
+[00:56:05] really compare so Weeble or the warrior
+[00:56:08] trading Sim at this point right now are
+[00:56:11] your Best Bets so now the ball is in
+[00:56:13] your court whether you use thinker swim
+[00:56:15] Weeble or the warrior trading simulator
+[00:56:16] you can make any of them work I do think
+[00:56:19] Weeble and the warrior trading simulator
+[00:56:21] are the best of these three and of
+[00:56:23] course there's dozens of other platforms
+[00:56:24] out there that I've looked at and I
+[00:56:25] narrowed it down down to these three
+[00:56:27] partly because I include thinker swim
+[00:56:29] because it is so popular I know a lot of
+[00:56:30] people use it but Weeble it's up
+[00:56:33] upcoming platform but they're doing
+[00:56:34] really well they're offering features
+[00:56:37] that established platforms like thinker
+[00:56:38] swim that have been around for forever
+[00:56:40] just have neglected to put out there it
+[00:56:42] doesn't make sense to me when they're in
+[00:56:44] such high demand by active Traders and
+[00:56:46] you know what it is those active traders
+[00:56:48] who are doing a lot of trading helping
+[00:56:50] generate a lot of the profits for those
+[00:56:52] big Brokers so it would be nice if they
+[00:56:54] included some of the features that we we
+[00:56:56] use every day but regardless of which
+[00:56:58] platform you use if you check out the
+[00:57:00] link posted in pin at the top of the
+[00:57:01] comments and Linked In the description
+[00:57:03] you can download my layout for thinker
+[00:57:04] swim and I'll also include a download
+[00:57:06] for my small account strategy worksheet
+[00:57:08] so for those of you guys who are at the
+[00:57:10] very beginning of your learning curve
+[00:57:11] you can get yourself off to a strong
+[00:57:13] start by following the trading plan that
+[00:57:15] is laid out in that worksheet and I want
+[00:57:18] to encourage you to practice in the
+[00:57:20] simulator before you put real money on
+[00:57:22] the line now again if you want to use
+[00:57:24] one share with real money I think that
+[00:57:26] that's fine that's kind of the exception
+[00:57:28] but you've got to really restrain
+[00:57:30] yourself and be disciplined to only
+[00:57:32] trade with one share now if you want to
+[00:57:33] learn more about my strategy I will put
+[00:57:35] a link down below where you can either
+[00:57:36] do a twoe trial at Warrior trading or
+[00:57:39] you could watch one of my full length
+[00:57:40] classes that'll walk you through the
+[00:57:42] strategy that I trade every single day I
+[00:57:44] want to thank you guys for tuning in and
+[00:57:45] I will see you for the next upload real
+[00:57:47] soon
+[00:57:49] [Music]

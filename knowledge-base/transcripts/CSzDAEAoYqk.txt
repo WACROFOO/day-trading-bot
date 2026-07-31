@@ -1,0 +1,669 @@
+# How to Read BUY and SELL Signals on Candlestick Charts (Beginner to Advanced)
+# https://www.youtube.com/watch?v=CSzDAEAoYqk
+# duration_sec: 1514
+
+[00:00:00] in today's episode I'm going to share
+[00:00:01] with you the signals that I look for
+[00:00:03] that tell me when to buy when to hold
+[00:00:06] and when to sell now I have a perfect
+[00:00:08] example from today we had a stock that
+[00:00:11] basically perfectly met my criteria for
+[00:00:14] being the right type of stock trade I'm
+[00:00:17] going to break down those criteria in
+[00:00:18] today's episode and I actually took one
+[00:00:20] trade on the stock but I wasn't
+[00:00:22] impressed with the price action and so
+[00:00:25] as the chart was forming it was creating
+[00:00:27] a pattern and a bit of a setup and I
+[00:00:29] began to think maybe I should get back
+[00:00:31] in but I actually saw a very specific
+[00:00:35] signal that told me not to get back in
+[00:00:38] and I didn't I followed that signal and
+[00:00:41] as a result I saved myself what would
+[00:00:43] have undoubtedly been an unnecessary
+[00:00:46] loss experience in trading which is
+[00:00:48] something I have a lot of generates a
+[00:00:51] level of educated intuition I have a gut
+[00:00:54] feeling of when things are going to work
+[00:00:57] and when they're more likely to fail now
+[00:00:59] I'm not right 100% of the time but I do
+[00:01:02] have an edge in the market and part of
+[00:01:04] this is the result of all the experience
+[00:01:06] that I have my hope for these episodes
+[00:01:09] is that I'm able to help you piggyback
+[00:01:11] off of my experience by sharing with you
+[00:01:13] these subtle signals that I see that
+[00:01:16] sort of get my hair standing on end and
+[00:01:18] help me recognize wait a second this is
+[00:01:20] a this is a setup that's a trap I have
+[00:01:22] to step back and wait for a second
+[00:01:24] because what I'm about to show you was a
+[00:01:26] hands down absolute trap and I saw begin
+[00:01:30] Traders fall into it my hope is that you
+[00:01:32] can avoid falling into these traps in
+[00:01:34] the future so let's go ahead and jump in
+[00:01:36] to today's episode I want to start by
+[00:01:38] making sure we're all on the same page
+[00:01:39] when it comes to stock selection so I'm
+[00:01:40] going to break down my criteria for you
+[00:01:42] and I'm also going to share with you
+[00:01:43] some of my bonus criteria by the way
+[00:01:45] there will be a link pinned to the top
+[00:01:47] comment and Linked In the description if
+[00:01:49] you want to download my stock selection
+[00:01:51] criteria as a PDF you can print it out
+[00:01:54] you can have it on your desk and if
+[00:01:55] you're learning to trade momentum the
+[00:01:57] way I trade it then you should be
+[00:01:59] definitely using this criteria to help
+[00:02:01] you identify stocks that are worthy of
+[00:02:03] trading from stocks that you should
+[00:02:05] completely leave alone okay so let's
+[00:02:07] jump into it now the stock that we're
+[00:02:09] going to be doing a deep dive on today
+[00:02:11] met my criteria from this perspective
+[00:02:13] right here number one the price was
+[00:02:15] between 2 and 20 this is the price range
+[00:02:18] where we typically see the most momentum
+[00:02:20] we see the cleanest moves uh number two
+[00:02:23] the price was already up 10% which is
+[00:02:25] good because that means it's fairly
+[00:02:26] obvious it's getting some attention it's
+[00:02:28] breaking the standard deviation of what
+[00:02:30] most stocks are doing number three the
+[00:02:32] relative volume was five times which is
+[00:02:34] good I like to see higher relative
+[00:02:37] volume because that helps me understand
+[00:02:40] that today is a significant event
+[00:02:42] compared to what's normal for the
+[00:02:44] company I like to trade stocks that are
+[00:02:46] experiencing heightened volatility and
+[00:02:48] usually that volatility requires a high
+[00:02:51] level of volume that's above average
+[00:02:54] number four that's typically brought in
+[00:02:56] by some type of breaking news event a
+[00:02:58] catalyst and that was the case today now
+[00:03:01] these four items here these are all um
+[00:03:04] characteristics of high demand so I'll
+[00:03:06] just put a d here for demand these are
+[00:03:09] all indicative of a stock that has a
+[00:03:10] very high demand breaking news the price
+[00:03:12] the percentage change the relative
+[00:03:14] volume and this right here is Supply and
+[00:03:17] now we're talking about the supply and
+[00:03:19] demand imbalance Supply is the number of
+[00:03:21] shares available to trade it's the float
+[00:03:23] and so the float on the particular stock
+[00:03:25] that we're going to be looking at today
+[00:03:27] was 1.3 1.3 million shares so it's a
+[00:03:30] very small float the float is created
+[00:03:33] when a company does its initial public
+[00:03:35] offering now the float can change over
+[00:03:38] time from the number of shares they sell
+[00:03:40] during the IPO a company could do a
+[00:03:42] secondary offerings and sell more shares
+[00:03:44] onto the market they could also do
+[00:03:46] BuyBacks and they can do stock splits
+[00:03:48] traditional splits and reverse splits so
+[00:03:50] the float can change the the best way to
+[00:03:52] know with certainty what the current
+[00:03:54] float is today is to look at the most
+[00:03:57] recent quarterly earnings statement
+[00:03:59] which will say the number of shares
+[00:04:01] outstanding and then check to see if
+[00:04:03] there have been any news events between
+[00:04:05] that statement and today's date that
+[00:04:07] would have changed the float generally
+[00:04:09] speaking you the market data vendors
+[00:04:11] that we use are pretty accurate with
+[00:04:13] showing the float so this is the stock
+[00:04:15] selection criteria these are the five
+[00:04:17] things that I I pretty much must see in
+[00:04:20] order to consider taking a trade now
+[00:04:22] we've got some bonus criteria here on
+[00:04:24] the back the bonus criteria is number
+[00:04:27] one if the stock is without a doubt
+[00:04:29] obvious in order for me to consider a
+[00:04:32] stock to be obvious it usually has to be
+[00:04:34] like the number one leading percentage
+[00:04:36] gainer in the market also leading in
+[00:04:38] terms of volume this can be tricky
+[00:04:41] because sometimes you'll have a stock
+[00:04:42] that is the leading percentage Gainer
+[00:04:45] but it doesn't have a lot of volume so
+[00:04:47] then is it really obvious other times
+[00:04:49] you'll have a stock that um is maybe the
+[00:04:52] fourth leading percentage Gainer but has
+[00:04:53] a ton of volume so it's like trying to
+[00:04:56] figure out which is obvious is a
+[00:04:57] combination of which is the number one
+[00:05:00] leading Gainer but which stock also has
+[00:05:04] the most volume because ultimately
+[00:05:05] volume is communicating what's obvious
+[00:05:07] to other Traders uh it's also a bonus
+[00:05:09] criteria if a stock is a recent reverse
+[00:05:11] split uh this one was a recent reverse
+[00:05:14] somewhat recent reverse split a recent
+[00:05:16] IPO these are can be particularly
+[00:05:19] powerful setups a blue sky is when a
+[00:05:22] stock is at all-time highs and number
+[00:05:25] five if the stock Falls within a hot
+[00:05:27] sector hot sectors VAR
+[00:05:30] from you know time to time what's hot
+[00:05:32] today may not be hot 6 weeks or a month
+[00:05:34] from now or whatever the case is 6
+[00:05:35] months from now but whatever's hot right
+[00:05:38] now if a stock is in that sector and is
+[00:05:41] also obvious if it's also recent reverse
+[00:05:44] split that's when you can get kind of
+[00:05:46] the perfect storm here which is
+[00:05:49] sometimes we'll see a stock that is the
+[00:05:51] most obvious it's also a recent reverse
+[00:05:54] split and it's also a hot sector you
+[00:05:57] wouldn't typically have a recent reverse
+[00:05:58] split and a recent IPO or recent reverse
+[00:06:01] split and a blue sky setup that that's
+[00:06:03] not going to be very common but it is
+[00:06:06] possible that you could have three out
+[00:06:08] of the five bonus criteria and when
+[00:06:10] that's the case well this is definitely
+[00:06:12] a stock that's going to very closely
+[00:06:13] meet our criteria plus the bonus
+[00:06:15] criteria so it's something I definitely
+[00:06:17] want to pay attention to okay so the
+[00:06:19] stock that we're going to do the Deep
+[00:06:20] dive on today dtss met really all of
+[00:06:24] these criteria everything checked out
+[00:06:27] except for one very important thing
+[00:06:29] everything we're talking about here this
+[00:06:31] is more or less absent the chart right
+[00:06:35] the way the chart looks isn't really
+[00:06:36] factoring in to stock selection stock
+[00:06:39] selection is focusing first just on the
+[00:06:42] vehicle on the actual stock we're
+[00:06:44] looking at and whether or not it meets
+[00:06:45] the criteria for being worth trading but
+[00:06:47] then we have to look at the chart and so
+[00:06:49] when we look at the chart that's when
+[00:06:51] things in the case of dtss start to
+[00:06:54] change so we're going to get zoomed in
+[00:06:56] here um first on the one minute I'm
+[00:06:59] actually going to play for you my
+[00:07:02] commentary that I gave this morning
+[00:07:04] while I was trading it before this all
+[00:07:06] played out now we can see the stock has
+[00:07:09] declined quite a bit from uh where I was
+[00:07:11] initially looking at it nearly 25% so
+[00:07:14] it's definitely pulled back I definitely
+[00:07:16] had the right call to stay on the
+[00:07:18] sidelines after I saw this chop but
+[00:07:21] let's jump back over to the Whiteboard
+[00:07:22] for one second and talk about um our
+[00:07:25] criteria from the perspective of getting
+[00:07:28] into the chart so so this is going to be
+[00:07:30] ta our technical analysis the previous
+[00:07:34] criteria are a little bit more on the
+[00:07:35] fundamental analysis side of things um
+[00:07:39] not completely but sort of bordering on
+[00:07:41] that okay so charting and technical
+[00:07:44] analysis so number one I like to trade
+[00:07:47] when the macd is open and when it's um
+[00:07:51] when it's moving up so I avoid trading
+[00:07:54] after we've got this crossover right
+[00:07:57] here I'll show you what that looks like
+[00:07:58] in a second number two I want to focus
+[00:08:01] on um
+[00:08:03] clean uh
+[00:08:05] Candlestick patterns so I'll just do c
+[00:08:08] Candlestick uh patterns so I'm looking
+[00:08:11] for clean Candlestick patterns here and
+[00:08:13] what that means is on the chart I'm
+[00:08:14] going to look for the characteristic
+[00:08:16] patterns I trade all the time including
+[00:08:19] for example our bull flag so we have a
+[00:08:21] stock that makes a nice quick move up a
+[00:08:23] little micro pullback maybe on the 1
+[00:08:25] minute could even be on the 10-second
+[00:08:27] chart and then for the push higher right
+[00:08:30] here so I want to see clean Candlestick
+[00:08:33] patterns um and in other words um sort
+[00:08:36] of part you know a subpart to this um so
+[00:08:39] a would be seeing the actual pattern and
+[00:08:41] then B um no uh topping
+[00:08:45] Tails right number three we're looking
+[00:08:48] at volume profile so the profile of the
+[00:08:52] volume
+[00:08:53] oops profile of the volume and then
+[00:08:55] number four we're going to look at
+[00:08:57] Market depth so this is where we're
+[00:09:00] starting to get into a little bit more
+[00:09:02] of the weeds but these all create those
+[00:09:04] subtle buy or sell signals okay so if we
+[00:09:08] jump back onto the chart here the first
+[00:09:10] thing that I'm going to point your eye
+[00:09:11] to is um the original shape of these
+[00:09:16] candlesticks so without even looking at
+[00:09:19] um we could just um I'll just minimize I
+[00:09:21] I'll just let's see get I'll just close
+[00:09:24] it for a second I I'll hide it and we'll
+[00:09:26] we'll bring it back let's see hang on
+[00:09:28] let me just hide it and hide it so
+[00:09:29] without looking at volume without
+[00:09:31] looking at macd we're just going to look
+[00:09:33] at the candlesticks first and what
+[00:09:35] you're going to see on this um on this
+[00:09:37] chart is we have a big green candle
+[00:09:39] another big green candle and a micro
+[00:09:41] pullback this is where I took my first
+[00:09:43] trade on that micro pullback and that
+[00:09:45] was okay it was a small trade it wasn't
+[00:09:47] a big winner but that's okay I I was
+[00:09:49] being a little conservative on share
+[00:09:50] size because uh of an issue in Market
+[00:09:52] depth that we'll talk about in a minute
+[00:09:54] it ends up pushing higher and then it
+[00:09:56] reverses and comes back down when it
+[00:09:58] comes back down I noticed that we've got
+[00:10:00] a little topping tail at the top of that
+[00:10:02] candle now we break below volume weight
+[00:10:04] average price which is our orange line
+[00:10:06] so that's quite a bit of weakness it
+[00:10:08] does bounce back up but another topping
+[00:10:10] tail and it goes back below vwap it's
+[00:10:12] not able to hold it Go does come back up
+[00:10:14] vwap and now we've got three topping
+[00:10:16] tails in a row followed by this kind of
+[00:10:18] rejection and about this time I you know
+[00:10:20] you could draw this kind of ascending
+[00:10:22] support line connecting the lows of
+[00:10:25] these candles with the low of this
+[00:10:26] candle so we're starting to see okay
+[00:10:28] there is some support but what are our
+[00:10:30] candlesticks telling us when we have
+[00:10:32] these types of
+[00:10:34] candles where we have this topping tail
+[00:10:37] a topping tail like this is
+[00:10:39] communicating a message of weakness
+[00:10:41] because the price goes up and the
+[00:10:42] sellers pull it back down right so the
+[00:10:45] sellers are the ones who dominate by the
+[00:10:47] end of this candle they're the ones who
+[00:10:49] are in charge okay so because of that
+[00:10:52] I'm seeing these topping Tails I'm not
+[00:10:54] liking it let's add volume in so now
+[00:10:56] we're going to check the volume and the
+[00:10:58] profile pattern on the volume is high
+[00:11:01] volume red candles high volume red
+[00:11:03] candles high volume red candles high
+[00:11:05] volume red candles this is a subtle hint
+[00:11:08] that there is more selling than there is
+[00:11:10] buying we don't like to see that now we
+[00:11:13] check the macd we look at the macd and
+[00:11:15] we see that there's this dramatic
+[00:11:16] crossover right here and for the rest of
+[00:11:18] the move more or less the macd is
+[00:11:20] negative it barely gets positive for a
+[00:11:22] second here before going back into the
+[00:11:24] negative so the macd is a moving average
+[00:11:27] convergence Divergence indicator and
+[00:11:29] showing that the moving averages are
+[00:11:30] converging they're moving together we're
+[00:11:32] going into a period of consolidation and
+[00:11:34] I said what what could very likely
+[00:11:36] happen on this is we get a break to the
+[00:11:38] upside and then a dramatic flush we
+[00:11:40] ended up not even getting that break to
+[00:11:42] the upside it wasn't even we didn't even
+[00:11:44] get that it just eventually rolled over
+[00:11:46] and basically got crushed so the issue
+[00:11:49] here on this was that unfortunately we
+[00:11:52] had we had poor charts we we did not
+[00:11:55] have clean price action we didn't have
+[00:11:58] any really nice um good-look
+[00:12:00] candlesticks that I was able to work
+[00:12:01] with we had these topping tails you know
+[00:12:03] we didn't have a nice bull flag we broke
+[00:12:06] below the moving average we got back
+[00:12:07] above it macd was crossing over we
+[00:12:09] didn't have a good volume profile now
+[00:12:11] let's go a step deeper we're going to
+[00:12:13] start talking about Market depth so what
+[00:12:16] I want to do right now is I want to jump
+[00:12:18] into to the commentary from this morning
+[00:12:21] I'm going to play that so you can listen
+[00:12:22] to it and then I'm going to resume I'm
+[00:12:24] going to pick back up when that
+[00:12:25] commentary finished so if you're looking
+[00:12:27] just at the chart um on this stock you
+[00:12:31] might think it's not a bad looking chart
+[00:12:32] you can see we've got this ascending
+[00:12:35] support trend line so we look at the one
+[00:12:37] minute chart draw the trend line over
+[00:12:39] here as well so it keeps dipping down
+[00:12:43] that's the low of this pullback we got a
+[00:12:45] double bottom there it's kind of holding
+[00:12:48] up in this area now maybe some people
+[00:12:50] would draw the trend line like that
+[00:12:52] depending on how you draw it it keeps
+[00:12:54] kind of coming up to this um 710 area so
+[00:12:59] 710 the problem is that each time it
+[00:13:03] comes up it's rejecting so when we look
+[00:13:06] here we're seeing all of these topping
+[00:13:08] Tails so it's tapping rejecting tapping
+[00:13:12] rejecting now I think you know I've
+[00:13:14] noticed some people who have gotten
+[00:13:15] frustrated because they keep trading
+[00:13:16] this and they keep losing but let's take
+[00:13:18] a step back and ask a couple questions
+[00:13:20] is this an a equality setup right now
+[00:13:22] well based on my criteria for an a
+[00:13:24] quality stock I I would argue that it
+[00:13:27] it's not a bad stock
+[00:13:30] it's got a 1.3 million share float the
+[00:13:33] price is between $2 and $10 the relative
+[00:13:37] volume on it is
+[00:13:40] 3,899 it has news the 200 moving average
+[00:13:44] well it just broke above it right now
+[00:13:45] it's kind of at it but it's not bad from
+[00:13:49] all of those perspectives is it the most
+[00:13:52] obvious stock
+[00:13:53] today I'm not sure that it is um it's up
+[00:13:57] 53% it's got
+[00:13:59] volume so you know it's fairly
+[00:14:03] obvious
+[00:14:05] but from the perspective of taking a
+[00:14:07] trade on it right now macd has crossed
+[00:14:09] over right we had this big move up a
+[00:14:12] dramatic pullback look at the high
+[00:14:14] volume on the selling candles high
+[00:14:16] volume on the selling Candles now if you
+[00:14:18] look at um the level two you could see
+[00:14:20] on the level two that we're periodically
+[00:14:22] seeing these sellers stacked up we pull
+[00:14:24] up um this view here of level two and
+[00:14:28] this is showing us the to visually on
+[00:14:30] the chart horizontally so you see these
+[00:14:32] are all of the orders that are currently
+[00:14:34] placed on the stock and what you can see
+[00:14:37] is that right up here at 7 we've got a
+[00:14:40] wall that's what this um kind of heat
+[00:14:42] map is showing this is a wall of sellers
+[00:14:45] 18,000 shares at 710 30,000 shares at
+[00:14:49] 720 19,000 shares at 730 so this is a
+[00:14:54] giant Wall of Resistance right here and
+[00:14:57] realistically
+[00:14:59] for it to break this level you need
+[00:15:00] 50,000 shares of buy orders now what
+[00:15:02] I've seen happen before and this is
+[00:15:04] really sketchy when this happens is
+[00:15:07] because you've got a big wall like this
+[00:15:09] short sellers are going to start to feel
+[00:15:10] like confident going short they're going
+[00:15:13] to be like look there's a huge level of
+[00:15:15] resistance here I'm going to short it
+[00:15:17] and then what all of a sudden happens is
+[00:15:18] you get a clear out move the clear out
+[00:15:21] is where this breaks short stop so you
+[00:15:25] get a ton of volume that goes through
+[00:15:27] some Longs jump in and then immediately
+[00:15:30] it reverses and it flushes back down so
+[00:15:34] what you end up having are a couple of
+[00:15:35] candles of really high volume which
+[00:15:37] creates the liquidity for these people
+[00:15:40] to dump their shares so they can
+[00:15:42] actually cancel their orders they take
+[00:15:44] their orders away the stock rips up and
+[00:15:47] then as it's ripping up they start
+[00:15:49] selling its Market orders shorts are
+[00:15:51] covering so they're selling to shorts
+[00:15:53] Longs are buying they're selling to
+[00:15:54] Longs and then when it fails to go
+[00:15:56] higher all of a sudden everyone dumps
+[00:15:58] and bails out and you get that jack
+[00:16:00] knife reversal back down so that's what
+[00:16:04] I would be concerned about happening now
+[00:16:06] it right now it's not even at at current
+[00:16:11] prices it's not uh it's not breaking
+[00:16:14] that level those sellers are still
+[00:16:15] holding firm at
+[00:16:17] 710 and we don't really know who's
+[00:16:19] selling all those shares we don't know
+[00:16:21] if it's a short seller we don't know if
+[00:16:23] it's a Trader who's been holding for a
+[00:16:25] long time uh you know an investor
+[00:16:29] we don't know we don't know how
+[00:16:31] sophisticated the sellers are who have
+[00:16:33] those orders up there if they're an
+[00:16:35] institution then they're more likely to
+[00:16:37] use the sort of the tricks that I just
+[00:16:39] talked about if it's a retail Trader
+[00:16:42] they may not know they might just be
+[00:16:43] throwing out orders on this stock and
+[00:16:45] just saying well I'll just put these
+[00:16:47] orders out and leave them there but even
+[00:16:49] without looking into that market depth
+[00:16:52] what you can see here are high volume
+[00:16:54] selling bars high volume selling candles
+[00:16:56] high volume selling candles so in
+[00:16:58] totality today the highest volume
+[00:17:00] candles are all red and when you look at
+[00:17:03] the chart topping tail topping tail
+[00:17:05] topping tail you look at the macd we
+[00:17:07] were open but then we crossed over and
+[00:17:09] we've been steadily declining so we're
+[00:17:11] in a period of consolidation the price
+[00:17:13] is going sideways and these are periods
+[00:17:15] where when we get the breakout it can be
+[00:17:17] very dramatic you the pop and then the
+[00:17:19] flush now we could get the opposite a
+[00:17:22] drop and then a pop back up but I don't
+[00:17:25] expect that based on um the profile that
+[00:17:28] we're here of these sellers but the
+[00:17:31] thing is there's a lot of people who are
+[00:17:32] buying these green bubbles are people
+[00:17:33] buying into these breakouts so they're
+[00:17:36] buying right up here into these levels
+[00:17:38] and I think it's because they don't see
+[00:17:40] the depth of the market they don't see
+[00:17:42] all those orders on the level two so
+[00:17:44] they keep thinking oh this thing's going
+[00:17:45] to break this thing's going to break and
+[00:17:47] they keep getting disappointed they keep
+[00:17:50] getting let
+[00:17:51] down I'm not going to get tricked into
+[00:17:53] that I am sitting on the sidelines now
+[00:17:55] granted I haven't taken very many trades
+[00:17:57] today I'm only up 300 bucks which is
+[00:17:58] just a very slow day but it's better
+[00:18:01] than being red uh obviously and my focus
+[00:18:04] right now is trading high quality stocks
+[00:18:08] and high quality setups we need that
+[00:18:11] combination of the stock and the setup
+[00:18:13] so right here you see we're kind of
+[00:18:15] coming back up to that uh $710 10 cent
+[00:18:19] level and each time it comes up it's
+[00:18:22] sort of accumulates and then you get
+[00:18:23] that dump it accumulates and then you
+[00:18:25] get that
+[00:18:26] dump this is just that classic choppy
+[00:18:30] price action that's going to stop out a
+[00:18:32] lot of Traders you're going to get a lot
+[00:18:33] of paper cuts they may not be huge
+[00:18:35] losses but it's just like small loss
+[00:18:37] small loss small loss to the point where
+[00:18:40] eventually you say you know what this is
+[00:18:41] ridiculous I'm getting frustrated and
+[00:18:44] you leave you know down whatever it is
+[00:18:46] 500 a th000 a couple thousand bucks and
+[00:18:50] my feeling is that this is unnecessary
+[00:18:52] so the first criteria is this the right
+[00:18:54] type of stock to trade yeah it's the
+[00:18:57] right type of stock is the most obvious
+[00:18:59] one today well if we look and sort sort
+[00:19:02] of use volume as a measure of
+[00:19:04] obvious it's there's other stocks that
+[00:19:07] have more volume today right 9 million
+[00:19:09] shares is not nothing but there's other
+[00:19:11] stocks that have quite a lot more volume
+[00:19:13] and they're mostly cheaper stocks or
+[00:19:14] higher float stocks uh but from a
+[00:19:17] percentage change on the day you know
+[00:19:19] 54% not bad so it's it's probably okay I
+[00:19:23] think the real issue on this is that for
+[00:19:25] whatever reason there is either a group
+[00:19:28] or a fund or one seller who's just
+[00:19:31] trying to unload shares and you can see
+[00:19:34] that you know when this move kind of
+[00:19:35] first started they weren't there it
+[00:19:38] pulled back and then they kind of
+[00:19:40] appeared with their first order and then
+[00:19:42] the next one came on there was another
+[00:19:44] one here this one got canceled right
+[00:19:46] there then this one came up right here
+[00:19:49] and some of them have gotten even bigger
+[00:19:51] now you do see there's a buy order there
+[00:19:53] and there's a currently a buy order here
+[00:19:54] at 660 that could be a short seller that
+[00:19:57] could be someone who's buying to cover a
+[00:19:59] position that they took off of this
+[00:20:00] level so if we come down to here we may
+[00:20:02] see a little bit of support uh around
+[00:20:05] that price that could be a spot to
+[00:20:06] consider a dip but honestly I'm really
+[00:20:09] not that interested in trading this at
+[00:20:11] all because I think it's just when you
+[00:20:14] see a stock that has this type of stuff
+[00:20:17] going
+[00:20:17] on I mean this is just the stuff that we
+[00:20:20] can see there's more stuff happening
+[00:20:21] behind the scenes behind the curtains
+[00:20:23] that we can't even see so I'd rather
+[00:20:25] just steer clear this and wait for
+[00:20:28] something else
+[00:20:29] so it's the right type of stock but the
+[00:20:32] chart pattern not supporting an entry
+[00:20:34] it's way too choppy and then the market
+[00:20:36] depth through the level two is adding
+[00:20:38] even more context that is telling me
+[00:20:41] this is something I should just
+[00:20:42] completely leave alone now the fact is
+[00:20:46] it costs money to subscribe to these
+[00:20:47] levels of Market data you're going to
+[00:20:49] spend more money on it these tools are
+[00:20:51] more expensive you know it's it's
+[00:20:54] something that a lot of beginner Traders
+[00:20:56] won't spend the money on and I get it CU
+[00:20:58] you know trading you know you want to
+[00:21:01] keep your kind of burn rate low you
+[00:21:03] don't want to be subscribing and
+[00:21:04] spending 500 700 800 ,000 a month on all
+[00:21:08] these different monthly subscriptions
+[00:21:11] because it's just going to eat into your
+[00:21:12] profit so I I get people wanting to do
+[00:21:14] things on a budget but you can also tell
+[00:21:18] that when you have more money to invest
+[00:21:22] in better tools you're going to see the
+[00:21:24] market through a different lens and that
+[00:21:27] can be the difference between seeing
+[00:21:29] something that has a very high
+[00:21:31] likelihood of being a false breakout and
+[00:21:33] leading to disappointment uh and
+[00:21:36] thinking something oh actually this
+[00:21:37] looks pretty good and and taking the
+[00:21:39] trade and then being disappointed
+[00:21:40] afterwards and I I guess if you think
+[00:21:42] about it like that you might be able to
+[00:21:45] argue that the money you
+[00:21:48] save uh you know paying for the tool is
+[00:21:52] uh is more than you know what you would
+[00:21:54] have what it would have cost you in the
+[00:21:56] losses I mean that's
+[00:21:59] that's always something you kind of I
+[00:22:00] guess have to make a judgment on and
+[00:22:02] it's hard to
+[00:22:04] know really exactly what that is and
+[00:22:08] that's the same thing that I deal with
+[00:22:09] with commissions too you know I'm paying
+[00:22:10] fees and commissions on all my trades
+[00:22:12] and it's like is this money well spent
+[00:22:15] or am I saving more than it's costing me
+[00:22:18] with these commissions H you know I'm
+[00:22:19] not really sure so kind of it's hard to
+[00:22:23] know with certainty but you know if
+[00:22:26] you're obviously if you're making money
+[00:22:28] generally then you're doing the right
+[00:22:29] thing so if you got caught up and
+[00:22:32] chopped out on dtss you know I get it
+[00:22:36] but just sort of a word to the wise that
+[00:22:39] when you see this kind of price action
+[00:22:40] even without looking at Market depth
+[00:22:43] you've got the topping Tails macd
+[00:22:45] crossed over so the only trade that I
+[00:22:47] took was on this dip right in here so we
+[00:22:49] got this pop we got a little dip and I
+[00:22:52] traded it was small size because it had
+[00:22:54] just come out of a halt and it had light
+[00:22:55] volume and if we remember this volume
+[00:22:58] the volume on this candle was high
+[00:22:59] volume and it was red it was selling so
+[00:23:02] I was like I'll I'll take a you
+[00:23:05] know I'll take a starter but I I really
+[00:23:08] didn't get comfortable with it and I got
+[00:23:10] out very quickly and then I didn't feel
+[00:23:12] comfortable getting back in So gut check
+[00:23:15] macd not good volume profile high volume
+[00:23:19] selling candle formation lots of topping
+[00:23:22] Tails showing the sellers are you know
+[00:23:24] pulling the price back down those three
+[00:23:26] things check those three things that
+[00:23:28] that you can do on a budget you don't
+[00:23:30] need extra Market data to do that now
+[00:23:32] you subscribe to level two data you
+[00:23:34] could start to see sort of some of the
+[00:23:36] some of the orders there uh first tier
+[00:23:38] of level level two top of book you'll
+[00:23:41] start to see those bigger sellers lining
+[00:23:43] up right so then you'll be able to
+[00:23:45] visualize that you want to spend a
+[00:23:46] little bit more for total view now you
+[00:23:49] can see all of the orders on the book
+[00:23:52] and you know when you do that we see
+[00:23:55] right now there's not a lot of buy
+[00:23:56] orders down here we've got sell orders
+[00:23:59] but not buy
+[00:24:00] orders so you know that's that's
+[00:24:04] painting a picture for
+[00:24:05] sure all right I hope that was helpful
+[00:24:08] for you guys um sitting here right
+[00:24:10] now kind of looking to see if we get any
+[00:24:13] other opportunities um because at the
+[00:24:15] end of the day it only takes one good
+[00:24:16] trade a day and if I focus you know on
+[00:24:19] just taking one really good trade each
+[00:24:22] day I could do a lot better than taking
+[00:24:24] 100 trades a day so it's just quality
+[00:24:27] over quantity so that was my live
+[00:24:29] commentary from this morning's trades on
+[00:24:31] dtss and I my hope is that for Traders
+[00:24:35] that are tuning in my broadcast all of
+[00:24:36] our Warrior Pro members that you're able
+[00:24:38] to benefit and piggyback off all the
+[00:24:40] educated intuition that I've picked up
+[00:24:43] over more than a decade of experience
+[00:24:45] trading the markets and I want to give
+[00:24:46] you guys a link where you can tune in
+[00:24:48] for a two-e trial so you can listen over
+[00:24:50] my shoulder you can even use the tools
+[00:24:52] the scanners the charts everything that
+[00:24:54] I'm using every single day and see
+[00:24:56] whether or not you like this platform
+[00:24:58] see whether or not you like this
+[00:25:00] community so if you're ready to become
+[00:25:01] part of the warrior Pro Community we'd
+[00:25:02] love to have you check out that link
+[00:25:04] right below and I'll see you for the
+[00:25:05] next episode real soon and I'll remind
+[00:25:07] you as always that trading is risky my
+[00:25:09] results aren't typical so manage your
+[00:25:10] risk take it slow and we'll see you for
+[00:25:12] the next upload real soon

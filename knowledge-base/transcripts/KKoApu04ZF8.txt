@@ -1,0 +1,672 @@
+# How I made $22,654 in LESS THAN 90 min of Day Trading | Deep Dive
+# https://www.youtube.com/watch?v=KKoApu04ZF8
+# duration_sec: 1652
+
+[00:00:00] So, naturally, I think you're going to
+[00:00:02] have some questions for me, like, Ross,
+[00:00:04] how much money did you risk to make
+[00:00:05] that? Or, Ross, how did you know that
+[00:00:08] was a strong stock to buy? Or for those
+[00:00:09] of you who have been trading for a
+[00:00:10] while, Ross, can you show me exactly
+[00:00:13] where you bought and where you sold? I'm
+[00:00:15] going to answer all of those questions
+[00:00:17] and many more in today's deep dive. All
+[00:00:20] right, so we're going to start high
+[00:00:21] level and then we'll drill in on all the
+[00:00:23] details. High level, this is the stock
+[00:00:25] chart of the stock I traded today. It is
+[00:00:27] a biotech stock, a pharmaceutical
+[00:00:29] company. And you can see my P&L right
+[00:00:31] there on the screen. You'll also see a
+[00:00:34] couple of arrows, these yellow arrows.
+[00:00:36] The first one right down here is for my
+[00:00:38] first entry, which was at $3.79.
+[00:00:42] And the second one was for my best exit,
+[00:00:45] which was at $7.81.
+[00:00:48] All right. So now you're probably asking
+[00:00:50] yourself, Ross, how in the world does a
+[00:00:52] stock go up this much in one day? All
+[00:00:55] right. So take a guess. Why in the world
+[00:00:59] would a stock go up 600% in one day?
+[00:01:02] News. There was news and it was great
+[00:01:04] news for this company. Now this is a
+[00:01:06] pharmaceutical company and they've got
+[00:01:08] um clinical trial positive topline
+[00:01:11] results for a uh PTSD drug, a PTSD
+[00:01:15] treatment. All right. So this is
+[00:01:17] something that um I actually just had an
+[00:01:19] episode that I recorded uh two days ago
+[00:01:22] on a similar pharmaceutical company.
+[00:01:24] That one was SLN O. That was a stock
+[00:01:26] ticker. And that one went up 400% on
+[00:01:30] news. Again, clinical trial topline
+[00:01:33] results were good for a drug they're
+[00:01:36] working on for the treatment of a rare
+[00:01:38] genetic disorder. And I think what's
+[00:01:40] important to recognize is that the
+[00:01:42] purpose that a lot of these small
+[00:01:44] publicly traded biotech firms serve is
+[00:01:48] that investors investors put their money
+[00:01:51] into the company. the company uses that
+[00:01:53] money for research and development and
+[00:01:55] they usually just have a couple of drugs
+[00:01:57] that they're working on. But if they're
+[00:02:00] successful, all of a sudden it is a huge
+[00:02:03] deal for that company because now that
+[00:02:05] company becomes a buyout candidate by
+[00:02:08] the big pharmaceutical companies. Now,
+[00:02:10] of course, the big pharmaceutical
+[00:02:11] companies do their own R&D, but when
+[00:02:14] there's a small company that comes out
+[00:02:15] with something that's really great, they
+[00:02:17] can just swoop in and buy them up. So,
+[00:02:19] in the publicly traded markets, what we
+[00:02:21] often see is when these stocks have good
+[00:02:24] news, they can make really big moves.
+[00:02:27] And what I actually want to do here, uh,
+[00:02:28] again, similar to what we did the other
+[00:02:30] day in my last episode, is I want to
+[00:02:32] start tracking the list of criteria for
+[00:02:36] a stock to make this kind of move. So,
+[00:02:38] the first one that we already know is
+[00:02:40] news.
+[00:02:42] This stock had news today. Now,
+[00:02:45] obviously, there's companies that have
+[00:02:46] news and put out news headlines all the
+[00:02:48] time. I mean, there's news coming out
+[00:02:50] every day, and a lot of it, the markets
+[00:02:53] don't really respond at all. The markets
+[00:02:55] are kind of indifferent. The stock
+[00:02:56] doesn't go up or down. Of course,
+[00:02:58] there's headlines where the stock goes
+[00:02:59] down. There's headlines where the stock
+[00:03:01] goes up just a teeny bit. But how can
+[00:03:03] you predict something like this? And the
+[00:03:07] answer is, truthfully, you can't really
+[00:03:10] predict it. There's no way to really
+[00:03:12] know when this is going to happen, but
+[00:03:15] there are ways to spot it as it's
+[00:03:17] starting to happen before it's already
+[00:03:19] up 600%. And that's exactly what I did.
+[00:03:22] And that's why I was able to take my
+[00:03:24] first trades on it when it was down here
+[00:03:26] at let's see about $3.79.
+[00:03:30] All right. So,
+[00:03:33] let's go through basically um how I
+[00:03:36] found this stock and what my game plan
+[00:03:40] was on it. All right. So, each morning
+[00:03:43] when I sit down, and I usually sit down
+[00:03:45] between 7 and 8:00 a.m. Today, I sat
+[00:03:48] down uh it was around 7:30. So, this
+[00:03:50] stock was already squeezing up. And the
+[00:03:53] way I knew that was because I was using
+[00:03:54] this tool called the gap scanner. It's
+[00:03:57] called Ross' Gap Scan for a reason. All
+[00:03:59] right. Ross' top gappers. And you'll
+[00:04:02] notice that BNOX was on the top of that
+[00:04:05] scam. Now, of course, it is now because
+[00:04:07] it's up 480%. But even down here, it was
+[00:04:10] already up over 200%. And the second
+[00:04:13] leading gapper was up 87%. As you can
+[00:04:16] see right here. So, what I usually do
+[00:04:20] with this scan, this is searching the
+[00:04:22] entire stock market for stocks that are
+[00:04:25] up at more than 10%, more than 5%
+[00:04:28] actually. and I sort it from biggest to
+[00:04:31] to smallest in terms of gain. And then
+[00:04:34] generally what I do is I just look at
+[00:04:35] the top the top couple. So let me open
+[00:04:38] um my news window and I'm going to put
+[00:04:42] this right up here and I'll show you
+[00:04:44] what my process was today. So I saw BNOX
+[00:04:49] on the top of the scan. I have it uh
+[00:04:52] right here. These are linked. These
+[00:04:54] windows are linked. And I see that
+[00:04:56] there's this news. So the next thing I
+[00:04:58] notice is that this is a biotech stock.
+[00:05:01] I notice that just looking at the
+[00:05:02] headline that this is a clinical trial
+[00:05:04] result. So when I first see it, I don't
+[00:05:07] know exactly whether or not this is a
+[00:05:09] biotech or it's a, you know, some kind
+[00:05:11] of digital company, a crypto company. I
+[00:05:14] I don't really know. The things I take
+[00:05:16] note of are the percentage of the gap,
+[00:05:19] how big the gap is, the price of the
+[00:05:21] stock, the amount of volume, and the
+[00:05:25] float. Those are the things I look at
+[00:05:27] first and foremost. And then I also
+[00:05:29] check this column right here, which is
+[00:05:31] relative volume on the day. So, let's
+[00:05:34] break down each one of these in a little
+[00:05:35] bit more detail. All right. So, we've
+[00:05:38] got the percentage gain on the day,
+[00:05:40] which is how much it's up versus
+[00:05:41] yesterday's close. And then we've got
+[00:05:43] the price. Now, one of the things that I
+[00:05:45] know is that stocks that are priced
+[00:05:48] between two and 20 tend to make the
+[00:05:53] biggest percentage moves.
+[00:05:55] And that sort of makes sense because
+[00:05:57] it's easier for a stock to go up 100% if
+[00:06:00] it's $2 a share. From $2 to $4 is 100%.
+[00:06:04] From 20 to 40 is also 100%, but a stock
+[00:06:07] going from 20 to 40 is is a lot more
+[00:06:09] difficult. So, we see these big
+[00:06:11] percentage moves more frequently on the
+[00:06:14] lowerric stocks. However, under $2, I
+[00:06:18] find we get into a a price range where
+[00:06:21] the stocks become very thickly traded
+[00:06:23] and and I just personally don't like
+[00:06:26] trading penny stocks. That's a little
+[00:06:27] bit of preference, but it's preference
+[00:06:30] based on my own analytics, my own
+[00:06:32] metrics, which tell me that that's not
+[00:06:34] the type of stock where I make the most
+[00:06:36] money. I make more money when it's a
+[00:06:38] little bit more expensive rather than
+[00:06:39] cheaper. So, the 2 and 20 price range is
+[00:06:42] what I really like. And uh certainly
+[00:06:44] BNOX was within that price. Now, one of
+[00:06:48] the other things that I like is when the
+[00:06:50] relative volume is five times or higher.
+[00:06:56] Now, everything I'm going through here,
+[00:06:58] this is the same stuff I was talking
+[00:06:59] about in my episode on uh Tuesday of
+[00:07:02] this week when SLNO, the other biotech
+[00:07:05] stock, made that big move um on news.
+[00:07:08] This is the same criteria. And I'll also
+[00:07:11] remind you that what I said on Tuesday
+[00:07:14] was that if you missed this move, don't
+[00:07:17] worry. Don't get FOMO. Don't get
+[00:07:19] frustrated. Study it. Learn from it.
+[00:07:21] Understand the ingredients that led to
+[00:07:24] this type of move, the setups that
+[00:07:27] experienced traders like myself were
+[00:07:28] focusing on, and try to apply all of
+[00:07:31] that. So the next time we get a setup
+[00:07:33] like this, you can capitalize on it.
+[00:07:35] Well, we got a setup just like it two
+[00:07:37] days later today. So, if you're watching
+[00:07:39] this today and you're like, "Man, oh,
+[00:07:41] can't believe I missed it." Don't worry.
+[00:07:43] There'll be another one around the
+[00:07:45] corner. Study, study, study. And like I
+[00:07:48] said, you know, I started trading when I
+[00:07:50] was 17. Well, I was I was in high school
+[00:07:51] when I took my first real money trade,
+[00:07:53] 17 years old, so this was a really long
+[00:07:55] time ago. It learning to trade is an
+[00:07:57] incremental process of just gaining a
+[00:07:59] little bit more information with every
+[00:08:01] month and year that passes. So, it's not
+[00:08:04] a sprint, it's a marathon. Okay. So with
+[00:08:07] that said, let's go back to the screen
+[00:08:08] share here. So BNOX um was certainly
+[00:08:12] bucking the trend this morning with the
+[00:08:13] big gap. The price was fine. The volume
+[00:08:16] was fine. There was a lot of shares
+[00:08:17] traded. The relative volume was 487. Now
+[00:08:21] that's as of the end of the day. So that
+[00:08:24] means it traded on 487 times higher
+[00:08:28] volume than average. It's a ratio of 487
+[00:08:33] to1. That is a huge ratio and that is
+[00:08:36] what we like to see those big ratios are
+[00:08:39] what generally lead to big moves in a
+[00:08:42] stock. So the fact for me I set these uh
+[00:08:46] ingredients as kind of the minimum
+[00:08:48] criteria. We like to see news we like to
+[00:08:50] see between two and 20. Ideally you know
+[00:08:53] sometimes a little under or a little
+[00:08:54] over is okay. At a minimum I'd like to
+[00:08:56] see the relative volume be at least five
+[00:08:59] times. And number four, before I'm
+[00:09:02] willing to trade it, the stock needs to
+[00:09:04] be up at least 10%. Because that tells
+[00:09:07] me it's breaking essentially the
+[00:09:10] standard deviation of what most stocks
+[00:09:12] do. So, you know, most stocks on any
+[00:09:14] single day have these volatility bands
+[00:09:16] of, you know, plus 3% or minus 3%. So
+[00:09:21] when you have a stock that is breaking
+[00:09:23] and is up here at 10% on the day, it
+[00:09:26] honestly is one of probably 30 stocks in
+[00:09:30] the entire stock market to be up that
+[00:09:33] amount. It is a very small handful of
+[00:09:35] stocks. And of course, BNOX not only was
+[00:09:37] in that handful, it was the strong
+[00:09:39] leader among all those stocks. So I like
+[00:09:43] to see the stock is up at least 10% as a
+[00:09:45] minimum. And then number five, I like to
+[00:09:48] see that the float
+[00:09:50] or the number of shares available is
+[00:09:52] less than 20 million. So when the
+[00:09:55] company does its initial public
+[00:09:57] offering, they sell shares onto the open
+[00:09:58] market. And I like to see it the total
+[00:10:00] number of shares available at trade is
+[00:10:01] less than 20 million. This right here
+[00:10:04] represents supply.
+[00:10:08] This is the supply. And you know what
+[00:10:10] these represent? Demand. I'll just put
+[00:10:13] the D there for demand. These are all
+[00:10:15] indicators of demand news price at a
+[00:10:18] price that's going to be attractive uh
+[00:10:20] to retail traders. High relative volume
+[00:10:22] indicative of demand up 10% indicative
+[00:10:24] of high level of demand. So what are we
+[00:10:27] looking at here? We're looking at an
+[00:10:28] imbalance between supply and demand. All
+[00:10:31] right, this is what creates and allows
+[00:10:33] these big moves to happen. And in this
+[00:10:36] particular case, the company having
+[00:10:37] really good news was what brought the
+[00:10:39] volume in in the first place. So, you
+[00:10:41] know, it's the chicken or the egg. What
+[00:10:42] comes first? What comes first is the
+[00:10:45] news catalyst. That's the first thing
+[00:10:47] that happens is news hits the wire and
+[00:10:51] then algorithms and real money traders
+[00:10:54] in and institutional traders of all
+[00:10:56] levels start getting involved and today
+[00:10:59] they started buying it up and from that
+[00:11:01] point forward the stock start to
+[00:11:04] populate on the stock scanners like the
+[00:11:05] ones that I use and then more and more
+[00:11:07] traders become aware of the opportunity
+[00:11:09] that's forming in real time. Okay. So
+[00:11:14] now I think I've walked you through
+[00:11:15] pretty well how I found this stock and
+[00:11:20] why I believed it was a stock that was
+[00:11:22] worth paying close attention to. It was
+[00:11:25] the leading gapper in the entire stock
+[00:11:28] market today. It was the leading
+[00:11:30] percentage gainer in the entire stock
+[00:11:32] market today. So this is this is a
+[00:11:33] pretty big deal. Okay. So well that's
+[00:11:36] great. We've figured out that this is
+[00:11:37] the right type of stock to trade. And
+[00:11:39] for you as an aspiring trader or someone
+[00:11:41] who's maybe been doing it for a while,
+[00:11:43] the process of building a watch list is
+[00:11:46] fairly straightforward, but obviously
+[00:11:47] understands uh requires understanding
+[00:11:50] those five ingredients that I just
+[00:11:51] shared with you, right? You've got to
+[00:11:53] understand those ingredients to be able
+[00:11:54] to build a watch list. And each day,
+[00:11:56] your watch list is going to consist of
+[00:11:58] the stock or stocks that most closely
+[00:12:02] meet those parameters. All right, those
+[00:12:04] are the ones that are going to have the
+[00:12:06] most potential. And today it was BNOX.
+[00:12:08] So, I knew this stock had potential. The
+[00:12:11] question from that point was where do I
+[00:12:15] buy it? So, now I can close my scan so I
+[00:12:17] can close my news because now I found
+[00:12:18] the stock that I'm wanting to focus on.
+[00:12:22] And what you'll see here was this stock
+[00:12:25] uh had a pullback. It came up. It pulled
+[00:12:27] back. And although it might have been
+[00:12:30] nice if I had bought the bottom of this
+[00:12:32] pullback right down here, which would
+[00:12:34] have been closer to support, what I
+[00:12:37] instead did on this stock was a breakout
+[00:12:40] trade. I bought as the stock was
+[00:12:42] breaking through the resistance of the
+[00:12:44] high a day. This is a little bit of a
+[00:12:47] riskier setup. It doesn't work on every
+[00:12:50] single stock. Um, in in fact, most of
+[00:12:53] the setups I trade won't work on most
+[00:12:55] stocks. They're only going to work on
+[00:12:57] the stocks that are bucking the trend of
+[00:12:58] the overall market because we need all
+[00:13:00] of that volume to create those really
+[00:13:02] extreme moves. So in this case, the
+[00:13:06] stock had already squeezed up. These are
+[00:13:08] just pretend those are full
+[00:13:09] candlesticks. It had pulled back and
+[00:13:11] then it's coming back up to the high and
+[00:13:14] this level right here is our resistance
+[00:13:16] level. So there's two ways to trade
+[00:13:19] this. One is to buy as it's breaking
+[00:13:22] right here. The other is to wait for it
+[00:13:24] to break, retest, hold support, and then
+[00:13:28] take the trade. I actually did both. I
+[00:13:31] took a trade right here at 379. That was
+[00:13:34] my first entry. It broke. It went up to
+[00:13:37] about 385, 390. It pulled back and then
+[00:13:41] I added right there for the break over
+[00:13:43] four, which was the second trade.
+[00:13:47] So now, let's talk about this. Um, let's
+[00:13:50] talk about two things. First, I want to
+[00:13:52] talk about uh how much risk I was taking
+[00:13:55] on these trades and then I also want to
+[00:13:57] share with you basically what my game
+[00:14:00] plan was for today. So, when it comes to
+[00:14:03] risk, you might think that Ross, in
+[00:14:07] order to make $20,000, you you had to
+[00:14:09] have been risking a lot of money. And
+[00:14:11] that's really not the case. The 20
+[00:14:14] $22,000 that I made today was not the
+[00:14:17] result of one individual trade with one
+[00:14:20] entry and one exit. It was the
+[00:14:22] culmination of a number of trades that
+[00:14:24] added together. So on my very first
+[00:14:27] trade today, when I got in at about 379,
+[00:14:32] I was risking about $1,000. I was taking
+[00:14:35] about $1,000 of risk on that first
+[00:14:37] trade. And so in a sense today I took a
+[00:14:41] thousand dollars of risk because that's
+[00:14:43] how much I could have gone red on the
+[00:14:45] day. But I I went green on the first
+[00:14:47] trade, added more on the second, added
+[00:14:49] more on the third. And from that point
+[00:14:51] forward, I kept adding profit to the
+[00:14:53] day. And so I risked going down a
+[00:14:55] thousand. And then once I had profit, I
+[00:14:57] just kept adding to it as I kept taking
+[00:14:59] more and more trades. So ultimately
+[00:15:02] today, the most I was risking going red
+[00:15:04] on the day was about $1,000. Now, it
+[00:15:07] would be hard to risk a,000 and make
+[00:15:09] 20,000. If you were trying to do that in
+[00:15:11] one single trade, but when you're doing
+[00:15:13] it through the culmination of of
+[00:15:14] multiple trades, it's certainly
+[00:15:16] possible, as you can see here today.
+[00:15:19] So, this was my first trade down here
+[00:15:21] for the break of four. Uh, we got this
+[00:15:23] squeeze, as you can see here, all the
+[00:15:25] way up to five and then a rather
+[00:15:27] dramatic pullback and then it curls back
+[00:15:30] up and it breaks through. And I got
+[00:15:32] another trade as it broke through the
+[00:15:33] high. But on this one, I bought it when
+[00:15:35] it was a little bit lower. And I want to
+[00:15:38] show you, let me let me show you a chart
+[00:15:40] that gave me some inspiration on this
+[00:15:42] particular trade today. So, I'm going to
+[00:15:45] show you, let's see, um I'm going to
+[00:15:49] show you the chart on SLN.
+[00:15:52] And this is a chart from uh just the
+[00:15:55] other day. So, let's see.
+[00:15:58] So, we're going to look at this. We're
+[00:16:00] going to look at this. And I want you to
+[00:16:01] look at this pattern.
+[00:16:04] Being a trader is about pattern
+[00:16:06] recognition. Do you notice this pattern,
+[00:16:08] the squeeze up, the drop, and the curl
+[00:16:10] back up? That looks really familiar
+[00:16:13] compared to that pattern right there. In
+[00:16:16] fact, it's it's it's almost identical.
+[00:16:18] It's really the same exact pattern,
+[00:16:21] right? It's it's just so similar. So,
+[00:16:23] when you start seeing these patterns
+[00:16:26] repeating themselves, your memory you
+[00:16:28] you learn to memorize it. And when you
+[00:16:30] see that pattern forming in real time,
+[00:16:32] you're thinking this is an opportunity,
+[00:16:35] the the memory really holds tight to it
+[00:16:38] because this pattern produces profit. So
+[00:16:42] a pattern that produces profit is a
+[00:16:43] pattern that you're going to remember. A
+[00:16:45] pattern that produces loss is also a
+[00:16:47] pattern that you're going to remember.
+[00:16:49] So what I'd like to do is uh show you
+[00:16:52] guys a couple of uh the trades that I
+[00:16:54] took on this uh showing the the actual
+[00:16:56] entries and exits. Um, but before I do,
+[00:16:59] my game plan on this stock today,
+[00:17:03] as soon as I saw that we had a leading
+[00:17:05] gapper that was up over a 100% and that
+[00:17:09] it was a biotech stock, this immediately
+[00:17:12] felt like, wow, this is really similar
+[00:17:15] to what we just saw two days ago. So
+[00:17:17] that was pattern recognition. And then
+[00:17:20] the way it was actually trading was very
+[00:17:22] similar. So now they kind of are like a
+[00:17:25] mirror image and traders are they're
+[00:17:27] really projecting what happened on this
+[00:17:29] stock is probably going to happen on
+[00:17:30] this and their entire day traded very
+[00:17:33] similarly from pre-market to selling off
+[00:17:36] at the open. They were both so similar.
+[00:17:38] So my game plan was all right it's the
+[00:17:41] right type of stock. It meets all the
+[00:17:42] five criteria. Uh which means I think
+[00:17:45] this stock has a lot of potential to
+[00:17:47] make a big move. And now the question is
+[00:17:50] simply where can I buy it and sell it in
+[00:17:53] order to capitalize on the opportunity
+[00:17:55] and minimize my risk. So at that point I
+[00:17:58] was switching gears and focusing on the
+[00:18:00] chart and focusing on my level two and
+[00:18:03] which is reading the tape and that's
+[00:18:05] where I found my exact entries.
+[00:18:08] Okay. So we're going to be looking at
+[00:18:09] the live recording of my trades from
+[00:18:11] this morning. I upload these for my
+[00:18:13] Warrior Pro students but I'll show you
+[00:18:15] this uh clip here right now. Now, what I
+[00:18:17] want you to focus on is the level two.
+[00:18:20] So, this is what I say about level two.
+[00:18:22] I think of it, imagine driving a car.
+[00:18:26] Your charts, your stock charts are your
+[00:18:29] what's in your rearview mirror. It's
+[00:18:31] what's just happened. And we look in our
+[00:18:33] rearview mirror. We check our rearview
+[00:18:35] mirror to see what's going on. It's not
+[00:18:36] a perfect analogy, but it's close
+[00:18:37] enough. We look in the rearview mirror.
+[00:18:39] We want to check what's just happened.
+[00:18:41] But what do we really want to be looking
+[00:18:43] forward out? The front of the car. And
+[00:18:46] that to me is the level two. The level
+[00:18:48] two is the road ahead. Because here's
+[00:18:50] something interesting. What you won't
+[00:18:52] see on the charts are these orders. So
+[00:18:55] right now you can see on this stock, and
+[00:18:58] this is the stock I trade today at
+[00:19:00] $4.50.
+[00:19:02] You can see that there's a couple of
+[00:19:04] sellers. Well, you can't see that on the
+[00:19:07] chart. This is the this is the chart of
+[00:19:09] the stock at that same moment, but you
+[00:19:11] can't see those sellers on the chart. So
+[00:19:14] there's a little bit of a disconnect
+[00:19:16] between what you see on the chart and
+[00:19:19] the orders that are lining up in the
+[00:19:22] market on the book. So level two, to
+[00:19:25] give sort of another analogy, uh I I
+[00:19:29] think of it actually sort of like um
+[00:19:31] it's sort of like an island. It's an
+[00:19:33] island where all the buyers who want to
+[00:19:36] buy the stock and all the sellers who
+[00:19:38] want to sell the stock come to exchange
+[00:19:41] their shares. And so on the left side
+[00:19:44] here, we have all of the buyers. Those
+[00:19:46] are all the buyers and they're on the
+[00:19:48] bid. And on the right side, we have all
+[00:19:51] of the sellers and they're on the ask
+[00:19:53] that they're on the offer, the ask. So
+[00:19:55] they're asking $4.50 for their shares.
+[00:19:59] And what we have in between the two is a
+[00:20:00] spread in this case of three cents. So I
+[00:20:03] look at the road ahead because this is
+[00:20:06] telling me what's going to happen. Now
+[00:20:08] the chart is giving me a good indicator
+[00:20:10] of what's probably going to happen. And
+[00:20:12] in this case, this is the uh the pattern
+[00:20:14] that I was looking at uh before on SLNO
+[00:20:16] where we had that squeeze up on SLNO,
+[00:20:18] the selloff, and then it curled back up
+[00:20:21] through the high. So, I was sort of
+[00:20:24] thinking that was my game plan that I
+[00:20:26] thought something like that was going to
+[00:20:27] happen again uh on this uh stock here
+[00:20:30] today. So, remember just a moment ago
+[00:20:33] when I was talking about those uh
+[00:20:36] support and resistance levels. So, right
+[00:20:38] now, this stock has tapped 450 several
+[00:20:42] times. All right. So, it came So, we
+[00:20:45] squeezed up um obviously we sold off
+[00:20:48] quite a bit and then we came back up and
+[00:20:51] we've hit a couple times right under
+[00:20:53] 450. All right. So, this green candle,
+[00:20:56] these are all right underneath this
+[00:20:59] $4.50 level right here. All right. So,
+[00:21:02] that's kind of that upside resistance.
+[00:21:04] It's actually this white line on the
+[00:21:06] chart. um which is representing that
+[00:21:09] it's a psychological level of
+[00:21:10] resistance, half dollar, whole dollar.
+[00:21:12] And so on this trade, the stock is going
+[00:21:16] to break 450. It's then going to come
+[00:21:19] back down and retest it. And in this
+[00:21:22] case, it holds it. And I see that there
+[00:21:25] are some nice buyers on the bid at 450.
+[00:21:28] And I press the buy button myself. And I
+[00:21:30] get filled at about $465,
+[00:21:33] approximately $4.65, 65, which is a
+[00:21:36] little higher than I might prefer, but
+[00:21:38] my max loss is about $4.49,
+[00:21:41] which isn't too bad. It's only about 14
+[00:21:44] 16 cents away, right? So, it's a pretty
+[00:21:46] tight stop. That's my max loss on the
+[00:21:48] trade. And my profit target is a retest
+[00:21:51] of the previous high, which was $5. So,
+[00:21:55] we've got 35 cents of profit target,
+[00:21:57] about 15 cents of stop. That's a good
+[00:22:00] 2:1 profit to loss ratio. And remember,
+[00:22:03] with that kind of ratio, I really only
+[00:22:06] need to be right 33% of the time in
+[00:22:08] order to break even with a 2:1 profit
+[00:22:11] loss ratio. So that's the golden ratio
+[00:22:13] that I always aim for. Okay, so let's
+[00:22:15] watch this live trade. Okay, so the
+[00:22:18] stock is uh squeezing up here.
+[00:22:23] Uh we've got you can see 445 on the ask,
+[00:22:27] 443, 444,
+[00:22:29] 449, 450, 460. Okay, it breaks, but can
+[00:22:33] it hold it? Let's watch as it comes back
+[00:22:35] down. There's 451 on the bid. This is
+[00:22:39] the chance right here where it could
+[00:22:41] have broken. It could have flushed right
+[00:22:44] back down to like 440. And if it had
+[00:22:47] done that, it would have proven it
+[00:22:49] wasn't strong enough to hold that
+[00:22:51] psychological resistance. Resistance did
+[00:22:54] not become support. But in this case, it
+[00:22:57] does. And so because it does now I'm
+[00:23:00] feeling confident to press that buy
+[00:23:02] button and I press it and I get filled a
+[00:23:05] little high
+[00:23:07] to to get detailed on the order type.
+[00:23:09] You can see how I'm entering my order
+[00:23:11] right here.
+[00:23:13] Uh the type of order that I entered and
+[00:23:15] I am able to trade pre-market and you
+[00:23:17] can trade premarket with any broker
+[00:23:18] dealer. Robin Hood, Weeble, Thinker
+[00:23:20] Swim, doesn't matter. The broker that I
+[00:23:22] use is a broker that really caters to
+[00:23:25] professional institutional traders but
+[00:23:27] also uh day traders that are very active
+[00:23:30] like like myself. And I am entering a
+[00:23:33] limit order. So there are two types of
+[00:23:36] orders. We have market orders and limit
+[00:23:38] orders. Market orders don't work
+[00:23:40] pre-market and this was a pre-market
+[00:23:42] trade. So market order just wouldn't
+[00:23:44] have been an option. All right. But uh
+[00:23:46] the limit order was fine. And so notice
+[00:23:49] that my limit order is at let's see
+[00:23:52] what's that. Um my limit order is at 472
+[00:23:58] right now. All right. So let's just move
+[00:23:59] this forward a little bit. All right. So
+[00:24:01] my limit or at 472. So I press the buy
+[00:24:04] button and I fill 3,000 share
+[00:24:07] increments. I pressed it three times and
+[00:24:10] I filled uh nothing higher than 472. I
+[00:24:14] would never fill higher than the top of
+[00:24:16] my limit price, but I fell up to that
+[00:24:18] price and I fell instantaneously as you
+[00:24:21] can see. So now I'm in at 472 or sorry
+[00:24:26] 465 and I'm looking first for about 20
+[00:24:31] cents of profit. If I can get a 1:1
+[00:24:33] ratio, that makes me feel pretty good.
+[00:24:35] Now in this case, notice what I just did
+[00:24:37] there. I moved my order up to $510 and I
+[00:24:41] added another 3,000 shares. You might
+[00:24:43] say, "Ross, why would you do that? You
+[00:24:45] just had 9,000 shares, a pretty good
+[00:24:47] average. You add another 3,000 and now
+[00:24:49] your cost space has gone up by 8 cents."
+[00:24:53] You're right. It has. But what I'm doing
+[00:24:55] right here is I'm adding to a winner.
+[00:24:59] This is something that I like to do and
+[00:25:00] it's been really a huge I mean, this is
+[00:25:03] like one of these things, tips and
+[00:25:04] tricks for beginner traders. Add to
+[00:25:06] winners, not to losers. So many people
+[00:25:09] add to losers by averaging down. they're
+[00:25:11] in a losing position and then they add
+[00:25:13] more shares as it's going lower. I do
+[00:25:15] the opposite. Okay? I cut losers
+[00:25:17] ruthlessly. I get rid of them. I let
+[00:25:19] them go. I don't care. Stock is dead to
+[00:25:21] me. All right? But on a winner, I add
+[00:25:24] and add. I I add into it because clearly
+[00:25:27] it's already working. This trade is
+[00:25:29] working really well. So on my best
+[00:25:32] trades, usually I say to myself, I wish
+[00:25:34] I bought more shares. So rather than
+[00:25:36] wishing it, I actually do it. I bought
+[00:25:38] more shares. So, I bought another 3,000
+[00:25:40] shares to anticipate the break through
+[00:25:42] the psychological resistance of five.
+[00:25:45] Now, I suspected it would break because
+[00:25:48] of the amount of strength that we just
+[00:25:50] had in, you know, the last like 10
+[00:25:52] seconds. And again, this is the type of
+[00:25:54] thing where reading the tape and seeing
+[00:25:57] these all of these orders going through
+[00:25:59] in green,
+[00:26:01] that's what helps me better understand
+[00:26:03] this price action. So, let's see. Let's
+[00:26:06] just back this up for one second.
+[00:26:09] So, lots of green on the tape. I add at
+[00:26:11] 96. It breaks through five. And right as
+[00:26:14] it breaks through, I press my sell
+[00:26:16] button. I take my profit off the table.
+[00:26:18] I get filled right there at 507. And I
+[00:26:21] lock up
+[00:26:23] $4,000 right there. $4,000 in really
+[00:26:27] less than a minute. Now, I ended up
+[00:26:29] trading this, as I said, a bunch of
+[00:26:31] times today. One of the things I I will
+[00:26:34] also tell you is that a big part of
+[00:26:36] trading is being patient, sitting and
+[00:26:39] waiting for these opportunities to
+[00:26:42] present themselves. So a lot of today,
+[00:26:45] and this is true of any day, but a lot
+[00:26:46] of it is doing my watch list, creating
+[00:26:50] my game plan, looking at the chart, and
+[00:26:52] then asking myself, where can I get in?
+[00:26:54] Thinking about those patterns. So
+[00:26:56] sometimes I'll be watching a pattern
+[00:26:58] like this forming here for, you know, 10
+[00:27:01] 15 minutes until I finally start to get
+[00:27:03] comfortable and I think, okay, this is
+[00:27:05] the spot where I'm going to get in. And
+[00:27:07] so on this one, you know, this is where
+[00:27:09] I punched it. It was at um you know
+[00:27:11] what? So whatever it was at 450 and we
+[00:27:14] got a move on this all the way up to
+[00:27:16] over $5 a share. And the thing that I
+[00:27:20] want to encourage beginner traders, but
+[00:27:22] even experienced traders to think about
+[00:27:25] is the importance of capturing even just
+[00:27:28] 10 cents out of the market each day.

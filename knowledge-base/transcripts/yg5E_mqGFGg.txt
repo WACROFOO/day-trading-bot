@@ -1,0 +1,598 @@
+# Stock Scanners for Beginner Day Trading Strategies
+# https://www.youtube.com/watch?v=yg5E_mqGFGg
+# duration_sec: 1377
+
+[00:00:00] [Laughter]
+[00:00:03] what's up everyone all right so in this
+[00:00:04] episode I'm going to walk you through
+[00:00:06] the scanners that I use every single day
+[00:00:08] while I'm day trading now scanners are
+[00:00:11] very important these are where you find
+[00:00:13] stocks that are moving so what I did
+[00:00:15] probably different from most people is I
+[00:00:17] hired a development team to build out my
+[00:00:20] own set of custom scanners and I've been
+[00:00:22] using these now for a long time as many
+[00:00:24] of you already know so I'm going to walk
+[00:00:26] you through each of those scanners right
+[00:00:27] now in this episode but I also want you
+[00:00:29] to know that my team is constantly
+[00:00:31] working on building out new scanners at
+[00:00:34] my request I'll say Hey you know I
+[00:00:35] really am looking for whatever uh right
+[00:00:38] now I'm looking for a scanner that
+[00:00:39] focuses primarily on recent IPOs d-spac
+[00:00:42] type of companies because those have
+[00:00:43] been particularly strong so we've got
+[00:00:45] that scanner right now that's in
+[00:00:46] development that I'm working on so if
+[00:00:48] you're watching this weeks or months
+[00:00:50] from now there may be some variations
+[00:00:52] there may be some new scanners that have
+[00:00:54] been added to my library of scans but
+[00:00:57] one of the things that I learned is I
+[00:00:58] was starting trading was that all of my
+[00:01:01] winners for the most part a share
+[00:01:03] similar cut characteristics in terms of
+[00:01:05] the actual stock in terms of price float
+[00:01:09] volume there's a number of
+[00:01:10] characteristics that they all share and
+[00:01:12] so if I can find a stock that is meeting
+[00:01:15] most of those characteristics before
+[00:01:18] it's gone you know made its entire move
+[00:01:20] that's what I really need to be seeing
+[00:01:23] those are the type of alerts they look
+[00:01:24] for so I've built out these scanners to
+[00:01:27] look for those types of stocks many of
+[00:01:29] you guys know these scanners I've made
+[00:01:31] available to Warrior Pro members over at
+[00:01:33] Warrior trading these scanners are also
+[00:01:36] available for members over at daytrade
+[00:01:38] Dash so if you want to check out either
+[00:01:39] warriortrader day trade Dash there'll be
+[00:01:41] links right down in the description I'll
+[00:01:42] probably pin one to the comments so you
+[00:01:44] can check it out and for those that are
+[00:01:46] curious if you have more questions leave
+[00:01:47] them down down below or if you have
+[00:01:48] suggestions of scanners that you'd like
+[00:01:50] to see me build out leave those below as
+[00:01:52] well I can add them to the list and I
+[00:01:54] think it's interesting then I'll have my
+[00:01:55] team work on it so thanks for watching
+[00:01:58] this episode I hope you really enjoy it
+[00:01:59] and as always if you do please hit the
+[00:02:01] thumbs up makes a huge difference with
+[00:02:02] the channel alright so let's jump in and
+[00:02:04] start talking about these scanners
+[00:02:07] okay so I'm going to walk you through
+[00:02:08] the stock scanners that I use every
+[00:02:11] single day this is a tool that I hired a
+[00:02:14] development team to build for me I use
+[00:02:17] this every day in my trading and I built
+[00:02:21] it to make it available to members at
+[00:02:23] Warrior trading and members of day trade
+[00:02:25] Dash so these scanners I'm going to walk
+[00:02:28] you through the different scanners that
+[00:02:30] are available right now we are
+[00:02:32] constantly adding to the library of
+[00:02:35] scanners and we're also from time to
+[00:02:37] time making tweaks to improve scanners
+[00:02:40] this is a little different than
+[00:02:42] um perhaps software you've used in the
+[00:02:45] past in that I've actually developed
+[00:02:47] each of these scanners to look for very
+[00:02:50] specific types of setups and I find this
+[00:02:53] to be more helpful
+[00:02:54] for me because when something pops up on
+[00:02:57] the scanner I know exactly whether or
+[00:02:59] not it's worth looking at number one and
+[00:03:01] then number two as a member using this
+[00:03:03] software I think it's helpful for you
+[00:03:05] because you don't have to try to just
+[00:03:07] sort of
+[00:03:09] re-engineer like how does he develop a
+[00:03:11] scanner and try to piece it together
+[00:03:13] yourself you could just literally plug
+[00:03:15] and play and use the scanner exactly as
+[00:03:18] I use it every single day so this is
+[00:03:22] basically the way I have it when I first
+[00:03:24] log in which you can see here it's
+[00:03:26] fairly focused on small cap stocks and
+[00:03:31] of course that's the strategy that I'm
+[00:03:33] trading every day so like right now
+[00:03:36] surge is hitting the scanner now we'd
+[00:03:39] actually have to make the scanner either
+[00:03:40] make it a little bit bigger or scroll it
+[00:03:42] over to see the exact alert that's
+[00:03:43] hitting it's low flow former Momo stock
+[00:03:48] and so these are the different
+[00:03:49] strategies that are all built into this
+[00:03:51] alert window you see medium flow High
+[00:03:53] relative volume squeeze alert I'm going
+[00:03:55] to walk you through which each what each
+[00:03:57] one of these is looking for specifically
+[00:03:59] but this is the scanning window that I
+[00:04:02] use
+[00:04:03] um the most frequently to find stocks to
+[00:04:07] um for that are good candidates for
+[00:04:09] momentum all right
+[00:04:10] so from the tools section over in the
+[00:04:13] corner you can click on scanners and the
+[00:04:16] first item is stock quote right here now
+[00:04:19] the stock quote is actually this window
+[00:04:21] that I have in the middle and this
+[00:04:23] allows you to type in a stock like I did
+[00:04:25] for apple or you could type in another
+[00:04:26] one and you can quickly see some
+[00:04:28] information about the stock probably the
+[00:04:30] most helpful one is float right so you
+[00:04:33] could check the flow and you can see
+[00:04:35] whether or not this is a float that
+[00:04:36] you're interested in so sometimes
+[00:04:37] someone will mention a stock and they'll
+[00:04:40] say hey check out kspn and I'm like oh I
+[00:04:43] don't see it on my scanners so one of
+[00:04:44] the first things I'm curious about is
+[00:04:46] what's the float uh floats 1.6 million
+[00:04:48] shares okay now I know that information
+[00:04:50] is relevant I I understand what float is
+[00:04:53] of course if you're watching this and
+[00:04:56] you're not clear on what float is uh I
+[00:04:58] can put some links down in the
+[00:04:59] description of this video where you can
+[00:05:00] better understand some of the
+[00:05:02] terminology but uh I as an active Trader
+[00:05:05] I understand the importance of float and
+[00:05:07] so now I might be more interested in
+[00:05:09] kspn although I would also ask myself
+[00:05:12] well it's clearly uh not meeting the
+[00:05:15] criteria to hit this High a day momentum
+[00:05:17] scanner at least not right now at this
+[00:05:19] moment and so that must say something
+[00:05:22] about what's going on with the stock
+[00:05:25] so there's basically two types of
+[00:05:28] scanners uh that are part of this
+[00:05:31] platform there's scanners that are a
+[00:05:35] list which is like our top uh gainers
+[00:05:38] after hours this is a list of stocks and
+[00:05:41] it's sorted as you can see right here
+[00:05:43] you could sort it differently if you'd
+[00:05:44] prefer you could sort it by Price you
+[00:05:45] could sort by volume you could sort by
+[00:05:47] float you can sort however you want
+[00:05:50] let's see I've got two combined in there
+[00:05:52] but the way I usually do it is I leave
+[00:05:55] it sorted by a percentage change from
+[00:05:58] the close and so after hours yesterday
+[00:06:01] for instance we had this really big move
+[00:06:03] on hsdt and apdn so at 4 pm I was
+[00:06:08] watching this after hours list of course
+[00:06:11] a lot of the stocks that were on this
+[00:06:13] we're still hitting the high day
+[00:06:14] momentum scanner they were still moving
+[00:06:16] higher but
+[00:06:18] this gives you a list so if I close out
+[00:06:22] um a couple of these and this is our
+[00:06:23] Newsroom so I'll close this out here so
+[00:06:27] um we'll start by going over the lists
+[00:06:30] so my top gappers is a list this is a
+[00:06:34] list of all the stocks gapping as you
+[00:06:36] can see here more than seven percent
+[00:06:38] gapping up more than seven percent and
+[00:06:42] gapping down more than seven percent
+[00:06:44] this is helpful for me because it shows
+[00:06:46] me the biggest moves in the market so I
+[00:06:48] sort this by gapper initially percentage
+[00:06:51] gapper
+[00:06:52] then you see the symbol you can click on
+[00:06:54] the symbol if you want to read the news
+[00:06:56] about it and so if we click on this it
+[00:06:59] look on Warrior it'll come over to the
+[00:07:01] warrior website where we can see
+[00:07:02] different headlines right down here all
+[00:07:05] right so we can see what the news is
+[00:07:06] right there
+[00:07:08] breaking news is posted in The Newsroom
+[00:07:10] so this is like breaking news headline
+[00:07:12] it'll get posted here likely before it
+[00:07:15] even hits the website so this is
+[00:07:18] breaking news whereas clicking here is
+[00:07:20] this is where you'll see like oh they
+[00:07:22] had earnings posted yesterday or
+[00:07:24] something like that something that's
+[00:07:25] very you know very obvious whatever it
+[00:07:27] is
+[00:07:28] so we've got the symbol then we have the
+[00:07:31] price we have the volume which is the
+[00:07:33] number of shares traded today we have
+[00:07:35] the float now I color flow and
+[00:07:37] prioritize lower float stocks because we
+[00:07:40] know lower float stocks are the ones
+[00:07:42] that can make really big moves so we
+[00:07:45] have from lowest float and then it kind
+[00:07:47] of goes into a gradient as the float
+[00:07:49] gets higher as we get to the highest
+[00:07:51] float I sort of lose interest in it
+[00:07:53] completely I'm just like now these
+[00:07:54] really aren't the type of stocks I'm
+[00:07:56] particularly interested in I know I'm
+[00:07:58] rarely going to trade you know a 700
+[00:08:00] million share float stock
+[00:08:02] so you could sort this every day by
+[00:08:05] float I think the two ways that are
+[00:08:07] helpful is to store it by volume to just
+[00:08:10] check to see where's the volume this
+[00:08:11] morning
+[00:08:12] and then to sort it by Gap
+[00:08:15] we also have columns here for relative
+[00:08:18] volume this is very important as many of
+[00:08:21] you know I'm a big advocate of trading
+[00:08:22] stocks with high relative volume so
+[00:08:25] highest relative volume today is on pstx
+[00:08:27] if we refer to the chart on this we'll
+[00:08:29] see pstx has made this really pretty
+[00:08:32] phenomenal move from 350 up to 550 has
+[00:08:35] news so it's moving higher
+[00:08:38] we've got relative volume in the last
+[00:08:40] five minutes now this is an interesting
+[00:08:43] one because this is helpful for seeing
+[00:08:44] volume spiking up and moving right now
+[00:08:47] it's a little different than daily
+[00:08:50] relative volume because it's just
+[00:08:52] showing you in this current time frame
+[00:08:53] how quickly it's moving we've got the
+[00:08:56] change from the close uh the ATR rate
+[00:08:58] average true range we've got short
+[00:09:00] interest short ratio and and we can
+[00:09:03] scroll over and there's going to be some
+[00:09:04] more columns here that you can look at
+[00:09:06] if you're interested but in the effort
+[00:09:09] of keeping this relatively concise
+[00:09:11] um I think I'll let me well actually
+[00:09:15] um I want to I want to go over two other
+[00:09:16] lists generally speaking these lists are
+[00:09:21] they're all going to have the same
+[00:09:24] pretty much the same criteria here
+[00:09:27] you've got so top gainers
+[00:09:30] this is again sorted by a percentage
+[00:09:32] gain you've got symbol price volume flow
+[00:09:36] relative volume volume on the five Gap
+[00:09:39] how much it gapped up short interest
+[00:09:41] short ratio all right now if we switch
+[00:09:44] over to uh the next one down we've got
+[00:09:48] top relative volume
+[00:09:50] all right so top relative volume is
+[00:09:52] giving us our relative volume leaders
+[00:09:54] today so these are the stocks with the
+[00:09:56] highest relative volume right now we of
+[00:09:59] course like these uh these are the
+[00:10:01] stocks generally that we're going to be
+[00:10:03] focusing on making quick moves High
+[00:10:05] relative volume go hand in hand all
+[00:10:07] right volatility
+[00:10:09] then we've got uh top RSI this is a this
+[00:10:13] is a bit more of a reversal list but
+[00:10:15] it's showing you the stocks that have
+[00:10:17] the highest and the lowest RSI over the
+[00:10:19] last five minutes these can be good for
+[00:10:22] reversal indicators so worth watching
+[00:10:25] these if you're a reversal Trader
+[00:10:27] specifically
+[00:10:29] if you like shorting tops and buying
+[00:10:31] lows
+[00:10:33] top volume in the last five minutes
+[00:10:35] this is showing you the stock to the
+[00:10:37] highest volume in the last five minutes
+[00:10:39] these this can be helpful for finding
+[00:10:41] current volume spikes what's moving
+[00:10:43] right now although I typically would use
+[00:10:45] my high day momentum scanner for that
+[00:10:48] we also have top losers all right so
+[00:10:52] we've got the top gainers and then we've
+[00:10:54] got the top losers side by side
+[00:10:55] rearrange this here I'll put this up
+[00:10:57] here
+[00:10:58] I'll move this one over here
+[00:11:01] so top gainers top losers
+[00:11:03] all right and let's see top gainers top
+[00:11:06] losers top RSI top relative volume top
+[00:11:09] volume in the last five minutes
+[00:11:11] and we had
+[00:11:14] um after hours gainers which I think I
+[00:11:16] already showed you that's right here so
+[00:11:18] this starts working at 4 pm this doesn't
+[00:11:22] work so right now it's showing you it
+[00:11:24] says not today it's showing you
+[00:11:25] yesterday's after hours it doesn't work
+[00:11:27] during regular trading hours it is just
+[00:11:29] an after hours scanner
+[00:11:32] um and oh I've got my continuation
+[00:11:34] scanner so the continuation scanner this
+[00:11:37] is an interesting one because
+[00:11:39] um this is specifically giving you a
+[00:11:41] list of stocks that have made big moves
+[00:11:43] in the last two weeks and this is a
+[00:11:46] great list to go through just to look
+[00:11:47] for momentum stocks some of these could
+[00:11:50] be setting up for a daily breakout a
+[00:11:52] bull flag a flat top breakout maybe a
+[00:11:55] reversal so usually these stocks are
+[00:11:57] worth keeping an eye on as part of
+[00:11:59] building out sort of your daily watch
+[00:12:03] list
+[00:12:04] and then I've got a couple others that
+[00:12:05] we're working on that are still in
+[00:12:06] development
+[00:12:07] um one of them that I'm working on but
+[00:12:09] hasn't been uh it's in beta hasn't been
+[00:12:11] released to everyone yet is recent top
+[00:12:13] IPO stocks moving this is one that
+[00:12:16] um many of you will enjoy because we've
+[00:12:20] had a lot of momentum on recent IPO
+[00:12:23] stocks pgy that was a recent IPO stock
+[00:12:26] right
+[00:12:27] HKD recent IPO stock so that's one of
+[00:12:31] the ones that will be coming soon it's
+[00:12:32] going to be a top list of recent IPOs
+[00:12:35] that are moving higher right okay so
+[00:12:38] this is um these are all of the you know
+[00:12:41] the top stocks and the list goes down it
+[00:12:45] might be it might even be a hundred
+[00:12:47] stocks
+[00:12:48] on some of these lists uh at least 50.
+[00:12:51] so you've got a pretty good list
+[00:12:52] probably more than you need but
+[00:12:55] again you it gives you something to work
+[00:12:58] with as you're putting together your
+[00:12:59] daily watch list all right so I'm gonna
+[00:13:02] um X Out of these close them up
+[00:13:06] okay
+[00:13:07] so we're back to top gappers and I'll
+[00:13:11] switch to sorting by percentage Gap all
+[00:13:13] right so now let's look at
+[00:13:16] um okay so we looked at the the list
+[00:13:18] here
+[00:13:19] we've got a couple more lists we have
+[00:13:22] um let's see
+[00:13:24] Penny top gappers so this is a top Gap
+[00:13:28] or specifically prep for penny stocks
+[00:13:30] lower price stocks all right so we'll go
+[00:13:33] down you know 10 cent 12 13 stocks
+[00:13:36] really cheap ones but we'll show up to
+[00:13:38] three four five dollars so we do show
+[00:13:40] slightly higher price but you know more
+[00:13:43] of traditional penny stocks which I
+[00:13:44] typically uh don't trade
+[00:13:46] then we have a large cap top gappers so
+[00:13:51] these are large cap stocks so you'll see
+[00:13:53] stocks with larger market caps on here
+[00:13:55] PayPal Tupperware
+[00:13:58] Etc and then you have large cap with
+[00:14:00] earnings so these are large caps that
+[00:14:03] are gapping up that have had earnings
+[00:14:05] and this gives you the report date of
+[00:14:07] when the earnings were so earnings
+[00:14:09] within I believe it's 48 hours so we're
+[00:14:12] either right before or right after
+[00:14:13] earnings or something very very close to
+[00:14:16] earnings
+[00:14:17] uh and then I believe yep those are
+[00:14:21] um that that is oh and then the last one
+[00:14:23] is a list of um stocks getting halted
+[00:14:26] this is uh I suppose actually not
+[00:14:29] technically a list this is the first
+[00:14:31] scanner that is an alert so this gives
+[00:14:33] you a time stamp of the alert and it's
+[00:14:36] telling you a stock that was halted so
+[00:14:38] stocks that are halted up here here on
+[00:14:41] this list so you can see oh the stock is
+[00:14:44] halted maybe it's worth taking a look at
+[00:14:46] you know HKD is halted coming down okay
+[00:14:48] hsdt this one is halted um as well
+[00:14:52] coming down that's pretty dramatic uh
+[00:14:55] earlier we had kspn halted going up so
+[00:14:59] you've got some halts on here this can
+[00:15:01] be helpful just for keeping an eye on
+[00:15:03] what's moving
+[00:15:04] now uh the next
+[00:15:08] set of scanners I want to go over are
+[00:15:11] my small cap High day momentum scanners
+[00:15:15] so this is a this is an alert style as
+[00:15:18] well so these are scanners they're
+[00:15:20] giving you an alert with a time stamp of
+[00:15:23] when a stock meets certain criteria and
+[00:15:26] you can see kspn was lighting up the
+[00:15:28] scanner it was actually hitting multiple
+[00:15:30] scanners all at the same time low float
+[00:15:33] High relative volume scanner
+[00:15:35] so low float and high relative volume
+[00:15:37] that's what we're looking for priced
+[00:15:39] under 20 so a stock with a lower float
+[00:15:42] and very high relative volume moving
+[00:15:44] right now price under 20. we have low
+[00:15:47] float former Momo stock that this is
+[00:15:49] also hitting which means this is a stock
+[00:15:51] that in the past has made a big move and
+[00:15:53] you can see right back here that big
+[00:15:55] move now when I'm scanning for low float
+[00:15:59] former Momo stock
+[00:16:01] the scanners are a little bit different
+[00:16:03] because low float former momo stocks
+[00:16:06] when they pick up they can start moving
+[00:16:08] really quickly and so for that reason I
+[00:16:11] want to see them a little sooner than
+[00:16:13] maybe your ordinary stock so some of the
+[00:16:16] filters are adjusted a little bit so I
+[00:16:18] can see whether or not this is something
+[00:16:21] that so I could see it quicker so I
+[00:16:23] could see it faster
+[00:16:24] I don't do that for every type of stock
+[00:16:27] because otherwise you start getting a
+[00:16:29] lot of false alerts and I don't want
+[00:16:30] false alerts I want good quality alerts
+[00:16:33] so and then the other scanner that it's
+[00:16:36] hitting is squeeze up alert up 10 in 10
+[00:16:39] minutes that's valid squeezing up moving
+[00:16:41] fast right now I like to see those
+[00:16:44] stocks because if they're moving quickly
+[00:16:45] it may be something worth watching now
+[00:16:47] you can see that costs actually hit the
+[00:16:50] low float former Momo stock but only hit
+[00:16:52] it once it triggered it once which might
+[00:16:55] have been an opportunity to pull it up
+[00:16:56] and take a look and you probably see ah
+[00:16:58] it doesn't have a lot of volume just
+[00:17:00] sort of popped up probably not going to
+[00:17:02] trade it so a stock hitting scanners
+[00:17:04] more and more times is definitely a good
+[00:17:09] indicator that it's got some momentum
+[00:17:11] and it's worth watching
+[00:17:12] some of the other scanners in here in
+[00:17:15] this window
+[00:17:16] we've got squeeze up alert up five
+[00:17:19] percent in five minutes so that's kind
+[00:17:21] of like a pre-alert for something
+[00:17:23] possibly that will go up 10 in 10
+[00:17:25] minutes but it's just moving faster on
+[00:17:29] um on the five percent in five minutes
+[00:17:31] so we have a little bit of a pre-alert
+[00:17:32] there usually if something just blows
+[00:17:35] right through it's going to trigger the
+[00:17:36] other one
+[00:17:37] kspn is hitting the scans again up there
+[00:17:40] at five
+[00:17:41] uh let's see we've got medium float High
+[00:17:44] relative volume price under 20. usually
+[00:17:46] when you have a stock that's under 20
+[00:17:48] and it has a medium float you're going
+[00:17:50] to have high degree of algorithmic
+[00:17:52] trading it's going to be a more of a
+[00:17:53] grinder it's not usually something I'm
+[00:17:55] going to really look at for momentum
+[00:17:57] Trading but a medium float that's under
+[00:18:01] 20 that has really really high relative
+[00:18:03] volume it can be worth looking at as you
+[00:18:05] can see with pstx right pstx the float
+[00:18:08] is a little higher but it did make a
+[00:18:10] nice move so it was it was worth
+[00:18:12] watching
+[00:18:14] kspn moving just a smidge higher there
+[00:18:17] up to 520 which is good
+[00:18:20] uh so we've got medium float High
+[00:18:22] relative volume price under 20.
+[00:18:25] pstx was hitting that one earlier uh we
+[00:18:28] have
+[00:18:29] uh let's go a little further down
+[00:18:33] all right so I'll refer to my list over
+[00:18:35] here we've got the different scanners in
+[00:18:38] this low float medium relative volume
+[00:18:40] low flow but medium relative volume
+[00:18:42] those can be alerts that are worth
+[00:18:44] looking at we prefer higher relative
+[00:18:46] volume but maybe you're just seeing
+[00:18:48] we're seeing and getting alert to the
+[00:18:50] stock early in the move and it's just
+[00:18:53] starting to take off so looking for more
+[00:18:55] relative volume to come in low float
+[00:18:58] High relative volume that's the one
+[00:19:00] where we're going to usually see big
+[00:19:01] momentum type of stocks watching that
+[00:19:03] closely low float High relative volume
+[00:19:05] price over 20. higher price these ones
+[00:19:08] can have bigger spreads they can be a
+[00:19:10] little bit choppier are worth watching
+[00:19:12] with the high relative volume but manage
+[00:19:15] your risk low float for Momo stock
+[00:19:17] already showed you that one medium float
+[00:19:20] medium relative volume price 20 and up
+[00:19:23] again sometimes you can have one that's
+[00:19:25] a little bit higher price medium
+[00:19:26] relative volume but with a higher price
+[00:19:28] uh starts to open up a little bit not my
+[00:19:32] favorite scanner not one that I would
+[00:19:33] typically put the audio alerts on so I
+[00:19:36] only have the audio alerts enabled for
+[00:19:38] low float and squeezing up 10 in 10
+[00:19:40] minutes the others I I don't use audio
+[00:19:42] alerts for I just don't I don't find
+[00:19:45] them important enough that I want to get
+[00:19:47] an audio alert for it
+[00:19:49] uh so medium float High relative volume
+[00:19:51] price 20 and up medium float High
+[00:19:53] relative volume price under 20.
+[00:19:56] squeeze up 10 10 minutes squeeze up five
+[00:19:59] percent in five minutes
+[00:20:01] and then a 52-week breakout so 52-week
+[00:20:04] breakout is
+[00:20:06] um high of year high of the last 52
+[00:20:08] weeks that can be uh helpful some
+[00:20:11] Traders would take profit at 52-week
+[00:20:12] highs some short sellers would cover
+[00:20:14] other short sellers will come in so you
+[00:20:16] can just simply have volatility at
+[00:20:18] 52-week highs it can sometimes indicate
+[00:20:20] that it could be a blue sky setup blue
+[00:20:22] sky is all-time Highs but it's not a
+[00:20:25] guarantee of that because of course
+[00:20:27] um Blue Sky can just be 52-week highs
+[00:20:30] can just be something that's at 52-week
+[00:20:33] Highs but has been selling off for like
+[00:20:34] 10 years so it's not going to be a blue
+[00:20:36] sky setup in that case
+[00:20:39] uh there are some alert style scanners
+[00:20:42] for
+[00:20:43] the large cap room here so large cap has
+[00:20:48] high day momentum scanner as well
+[00:20:49] similar to the one that we have here
+[00:20:53] also has
+[00:20:55] um let's see
+[00:20:57] the reversal scanner right here so this
+[00:21:01] reversal scanner you can see we've got
+[00:21:03] PayPal on here so here we've got a
+[00:21:06] number of different types of alerts
+[00:21:08] we're looking at consecutive five minute
+[00:21:10] candles
+[00:21:12] bottom reversal candle outside Bollinger
+[00:21:14] Bands all of these indicate a stock
+[00:21:16] that's getting to extremes and could be
+[00:21:18] due for a reversal the more consecutive
+[00:21:22] candles you have usually I feel the
+[00:21:25] better so I like to see high number of
+[00:21:27] consecutive candles and then we look at
+[00:21:29] that for a possible reversal so PayPal
+[00:21:32] on the five minute is showing whatever
+[00:21:35] it was seven consecutive candles so
+[00:21:36] selling off here so this is the type of
+[00:21:39] setup that maybe you would look at for a
+[00:21:41] reversal coming back up you know maybe
+[00:21:43] yes maybe no
+[00:21:44] but depend of course on your strategy so
+[00:21:47] these are all reversal based top
+[00:21:50] reversals mean you're going to look too
+[00:21:51] short off the top bottom reversals mean
+[00:21:54] you're looking to buy off the low
+[00:21:56] so a number of reversal scanners here
+[00:21:58] with some slightly different filters to
+[00:22:00] try to help you find confirmation
+[00:22:02] looking for the most extreme reversal uh
+[00:22:05] examples the generally the more extreme
+[00:22:08] the better because this just helps give
+[00:22:10] you um that added confirmation so inside
+[00:22:14] the reversal scanner you've got several
+[00:22:16] scans and uh that can also be used in
+[00:22:21] combination with top RSI scanner for
+[00:22:23] those looking for reversals
+[00:22:25] okay so with that uh I think I've given
+[00:22:29] you a good walkthrough of the scanners
+[00:22:31] that are currently in production I hope
+[00:22:33] you found that helpful and as always
+[00:22:36] reach out with questions I hope you
+[00:22:38] really enjoyed that video and make sure
+[00:22:39] you hit the Thumbs Up And subscribe to
+[00:22:41] the channel if you haven't already our
+[00:22:43] goal is to hit 1 million subscribers
+[00:22:45] this year but we won't get there without
+[00:22:47] your help so please please please hit
+[00:22:49] that subscribe button
+[00:22:50] [Music]

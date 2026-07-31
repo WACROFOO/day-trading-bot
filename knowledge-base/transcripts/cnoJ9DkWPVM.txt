@@ -1,0 +1,374 @@
+# Big PDT Rule Change and What it Means for You
+# https://www.youtube.com/watch?v=cnoJ9DkWPVM
+# duration_sec: 818
+
+[00:00:00] Breaking news, just moments ago the SEC,
+[00:00:03] Securities and Exchange Commission,
+[00:00:05] regulators of the US financial markets,
+[00:00:07] approved a change to the pattern day
+[00:00:09] trader rule, effectively reducing the
+[00:00:11] minimum account size required in order
+[00:00:13] to day trade the US equities market from
+[00:00:16] $25,000 down to just $2,000.
+[00:00:20] This rule change will be effective 45
+[00:00:22] days from the regulatory notice, which
+[00:00:24] is expected any moment. This is the
+[00:00:26] first time we've had a change to the
+[00:00:29] pattern day trader rule since it was
+[00:00:30] first enacted after the boom and bust of
+[00:00:33] the dot-com bubble on February 27th,
+[00:00:36] 2001. This is a really big deal. My
+[00:00:39] entire career as a trader, I have been
+[00:00:42] under the constraints of this pattern
+[00:00:44] day trader rule. It has always meant
+[00:00:46] that in order to day trade using
+[00:00:48] settlement margin, which means your
+[00:00:50] trade settles instantly, so you could
+[00:00:52] trade as much as you want, you needed a
+[00:00:55] minimum account size of $25,000.
+[00:00:57] Even if you didn't want to use leverage,
+[00:01:01] in order just to get that settlement
+[00:01:02] margin, you needed $25,000. Well, that
+[00:01:06] is antiquated. And as you might know,
+[00:01:08] there is no such thing as a pattern day
+[00:01:10] trader rule in the futures markets, in
+[00:01:12] the crypto markets, or in the forex
+[00:01:14] markets.
+[00:01:15] By reducing the minimum account size to
+[00:01:17] $2,000, this democratizes the market. It
+[00:01:21] improves accessibility to the market.
+[00:01:24] There should not be a barrier to entry
+[00:01:26] of $25,000 in order to day trade, and in
+[00:01:29] about 45 days, there won't be. This
+[00:01:32] really is a big deal. So, let's go ahead
+[00:01:34] and jump on the screen share, and I'm
+[00:01:35] just going to walk you through this
+[00:01:37] filing which was just posted here today.
+[00:01:39] So, this is the announcement of the rule
+[00:01:41] change posted by the SEC. As you may
+[00:01:44] recall, in the fall of this past year,
+[00:01:47] FINRA, the other regulator of the US
+[00:01:49] financial markets, proposed this rule
+[00:01:52] change. And as you might imagine, there
+[00:01:54] were many brokers that were backing this
+[00:01:57] rule change. If you think about it, the
+[00:01:59] $25,000 minimum not only hurt individual
+[00:02:02] retail traders like you and I, it limits
+[00:02:04] our access to the market requiring more
+[00:02:07] capital to begin with, but it also is
+[00:02:09] hurting broker dealers because there's a
+[00:02:11] whole cottage industry of offshore
+[00:02:13] broker dealers that for the last 25
+[00:02:16] years have been drawing US traders to
+[00:02:19] their services, which means who
+[00:02:21] suffered? The US broker dealers have
+[00:02:23] lost all of those active traders. Those
+[00:02:26] active traders generate a lot of volume
+[00:02:28] and a lot of profit, especially for the
+[00:02:30] commission-free traders of today that
+[00:02:32] benefit from payment for order flow. So,
+[00:02:35] those brokers were very incentivized to
+[00:02:38] encourage regulators to make this
+[00:02:40] change. It's always a good thing when
+[00:02:42] the big money, these big lobbyists, are
+[00:02:44] also doing something that is in your
+[00:02:46] benefit as well.
+[00:02:47] It's more likely that it's going to get
+[00:02:49] done. And so, while this reduction of
+[00:02:51] the pattern day trader rule minimum from
+[00:02:53] 25,000 down to 2,000 is a benefit to
+[00:02:55] them, the clear benefit is also for us.
+[00:02:59] We no longer have to rely on
+[00:03:00] international broker dealers. We could
+[00:03:02] trade right here in the United States
+[00:03:05] with regulated and insured dealer broker
+[00:03:08] dealers where our deposits are insured
+[00:03:10] and protected. And I think that this is
+[00:03:12] going to be a good thing for the market.
+[00:03:14] Now, if I jump onto the whiteboard, I'm
+[00:03:16] going to walk you through what this is
+[00:03:18] going to look like. So, this rule change
+[00:03:21] reduced the PDT Oops, the the pattern
+[00:03:23] day trader rule $25,000 minimum PDT
+[00:03:27] uh from 25,000 down to just $2,000.
+[00:03:32] However, as you may know, currently,
+[00:03:35] when you have a margin account, you
+[00:03:37] also, in addition to getting instant
+[00:03:40] settlement, you get instant settlement,
+[00:03:42] which is great. That means you could
+[00:03:43] trade as many times as you want in one
+[00:03:45] day. What you also get is four times
+[00:03:50] intraday leverage.
+[00:03:52] Okay, so this is kind of a big deal. So
+[00:03:56] now, if we look at any any individual
+[00:03:59] stock, whatever, let's say you've got a
+[00:04:01] stock that you want to buy
+[00:04:03] and you've got $25,000 in your account,
+[00:04:06] even if you didn't want to use leverage,
+[00:04:08] your $25,000 account times four gives
+[00:04:11] you $100,000
+[00:04:14] of buying power. Now, I personally was
+[00:04:16] advocating that they separate margin
+[00:04:20] from leverage. They say, "Look,
+[00:04:23] leverage, maybe you still have to have
+[00:04:25] more money in your account in order to
+[00:04:27] use leverage, but margin, which is just
+[00:04:29] instant settlement, that should be
+[00:04:31] available no matter the account size,
+[00:04:33] even with just $100." Well,
+[00:04:35] unfortunately, decoupling margin and
+[00:04:37] leverage was not something that they
+[00:04:38] were able to do in this rule change. And
+[00:04:40] so all they simply did was keep the rule
+[00:04:42] pretty much exactly as it is, but change
+[00:04:45] the minimum account size from 25,000
+[00:04:47] down to 2,000. Now, there were some
+[00:04:49] changes in the way intraday margin will
+[00:04:52] be cap uh calculated based on current
+[00:04:55] balance rather than the previous day's
+[00:04:57] balance. So you're getting a real-time
+[00:05:00] um calculation of your of your margin,
+[00:05:03] which is going to protect you and also
+[00:05:04] protect the brokers, but that's not
+[00:05:06] exactly uh what I was hoping for.
+[00:05:08] Nonetheless, this is still a a huge step
+[00:05:11] in the right direction. And so what this
+[00:05:13] essentially means is that some brokers,
+[00:05:16] and I know several that are already
+[00:05:18] lined up ready to do this, will give you
+[00:05:19] four times leverage with a $2,000
+[00:05:22] account, giving you $8,000 of buying
+[00:05:24] power. While others may say you only get
+[00:05:27] two times, and others might say you only
+[00:05:29] get one times, equaling $2,000 or
+[00:05:32] $4,000.
+[00:05:33] In other words, it will be the
+[00:05:35] discretion of the broker to decide how
+[00:05:38] much leverage you get. This rule does
+[00:05:42] not state that you are entitled to four
+[00:05:44] times leverage with as little as $2,000.
+[00:05:47] This will be the discretion of the
+[00:05:48] broker. What it requires is that you are
+[00:05:50] entitled to instant settlement right
+[00:05:53] here.
+[00:05:54] Instant settlement with a $2,000
+[00:05:57] account. Now, while the rule states that
+[00:06:01] the earliest this can be implemented is
+[00:06:03] in 45 days, it also states down here
+[00:06:07] that there is an 18-month rollout
+[00:06:09] period, which means brokers have up to
+[00:06:14] 18 months to implement this rule change.
+[00:06:17] And that can be a little bit confusing.
+[00:06:19] So, while there are some brokers that
+[00:06:20] will no doubt implement this rule change
+[00:06:22] in 45 days because they want all of
+[00:06:25] those retail traders trading at their
+[00:06:27] firm. Generates more profit for the
+[00:06:29] firm, right? Goes without saying. There
+[00:06:31] may be other brokers that drag their
+[00:06:33] feet. Wouldn't really make any sense to
+[00:06:35] me why they would, but let's just say
+[00:06:37] there's some brokers out there that
+[00:06:39] really don't cater to day trading, you
+[00:06:41] know, whatever. So, it's going to take
+[00:06:42] them perhaps a little bit longer to set
+[00:06:45] up the infrastructure and make the
+[00:06:46] changes to calculate the intraday margin
+[00:06:49] requirements and this and that. So, they
+[00:06:50] have up to 18 months to roll this out,
+[00:06:54] but my guess and I imagine you'd agree
+[00:06:56] with me is that the brokers that are top
+[00:06:59] contenders for taking the market share
+[00:07:01] for day trading are going to be rolling
+[00:07:03] this out in 45 days from the regulatory
+[00:07:06] notice. They're already ready to go.
+[00:07:09] I've I've spoken with two brokers that
+[00:07:10] are already today ready to offer $2,000
+[00:07:14] accounts and four times leverage. They
+[00:07:16] were just not sure what the notice
+[00:07:18] period would be and how many days they
+[00:07:20] would have to implement it. So, now we
+[00:07:21] know. It'll be in 45 days.
+[00:07:24] So, let's talk about what this is going
+[00:07:26] to mean for the overall market.
+[00:07:28] As you would imagine, it's going to
+[00:07:31] increase the trading volume in the
+[00:07:33] market because it's going to make the
+[00:07:35] market even more accessible. Now, over
+[00:07:37] the last 10 years the market has become
+[00:07:39] more accessible today than it ever was
+[00:07:41] before. Through online tools, the
+[00:07:44] different brokers, apps, and just the
+[00:07:47] accessibility of of high-speed internet
+[00:07:49] and even with mobile apps, the market
+[00:07:51] has never been more accessible than it
+[00:07:52] is today. But that was at a $25,000
+[00:07:55] minimum. If you had less than $25,000,
+[00:07:57] you could day trade, but you were
+[00:07:59] restricted to trading in cash. So you
+[00:08:01] could only trade the amount of cash you
+[00:08:02] had in your account. So now you can
+[00:08:05] cycle that money as much as you want.
+[00:08:07] You can get in, get out, get in, get
+[00:08:08] out. Just as an example here, I'll just
+[00:08:10] open up our um SIM platform just so you
+[00:08:12] can see what this looks like. So let me
+[00:08:14] just open this up. Over on our
+[00:08:17] simulator, and as always, I encourage
+[00:08:18] you guys to practice this simulator
+[00:08:20] before you ever put real money on the
+[00:08:21] line. This is a simulator, so obviously
+[00:08:24] it's not real money, but I can buy, buy,
+[00:08:26] buy, and then I can sell, sell, sell,
+[00:08:28] buy, buy, buy, sell, sell, sell, and I
+[00:08:30] could do this all day long. Well, you
+[00:08:33] could do this with real money as well.
+[00:08:35] You could just get in, get out, get in,
+[00:08:36] get out. Now if you were trading in a
+[00:08:38] cash account, you would run out of
+[00:08:39] buying power. You would run out of cash.
+[00:08:41] So you're restricted to only taking one
+[00:08:43] or two trades. So if you've seen me
+[00:08:45] doing small account challenges in the
+[00:08:46] past, what you'll know is that I would
+[00:08:49] focus on taking just one trade a day
+[00:08:51] when I was using one of the US
+[00:08:52] broker-dealers, because that was the
+[00:08:54] most trades I could take. Well, that's
+[00:08:56] not going to be the same anymore. So you
+[00:08:58] better believe that I will be doing
+[00:08:59] another small account challenge the day
+[00:09:02] this rule is implemented. So there'll be
+[00:09:04] more information coming about that. For
+[00:09:07] those of you guys who've been sitting on
+[00:09:08] the sidelines for the past several years
+[00:09:10] or months or however long it's been
+[00:09:12] since you gained some interest in the
+[00:09:13] market, I would encourage you to start
+[00:09:15] learning and to start practicing in a
+[00:09:18] simulator starting as soon as possible.
+[00:09:21] Because here's the deal.
+[00:09:23] There are traders like myself who are
+[00:09:25] going to hit the ground running the day
+[00:09:27] this rule change takes effect and we see
+[00:09:29] increased volume, which will be
+[00:09:30] increased liquidity, which will likely
+[00:09:33] result in increased volatility.
+[00:09:36] I want to be able to capitalize on that.
+[00:09:38] I'm going to hit the ground running cuz
+[00:09:39] I've been trading for so long. I know
+[00:09:40] exactly what to do when I start seeing
+[00:09:42] stocks moving. So, you've got 45 days
+[00:09:44] right now to get into as good a shape as
+[00:09:47] you possibly can in order to capitalize
+[00:09:50] on the height in volatility and volume
+[00:09:51] that we're going to see likely during
+[00:09:53] the summer months of trading. Now,
+[00:09:54] typically, summer is not the strongest
+[00:09:56] or most exciting time of year,
+[00:09:58] but that's not always been the case, and
+[00:09:59] I don't think it's going to be the case
+[00:10:01] this year because of this rule change.
+[00:10:04] So, what you're going to likely see is a
+[00:10:06] lot of attention among retail traders on
+[00:10:08] a select handful of stocks each day, and
+[00:10:11] those stocks are going to get a huge
+[00:10:13] amount of volume. When you get a lot of
+[00:10:15] volume, it means it's easier to get in
+[00:10:17] and out with large positions. Large
+[00:10:19] positions means more profitability.
+[00:10:21] These stocks, even just today, this
+[00:10:23] stock is up 329%
+[00:10:25] on 700 million shares of volume, and
+[00:10:29] this is with currently the $25,000
+[00:10:31] pattern day trader rule. So, let's just
+[00:10:34] say the amount of trading on this is
+[00:10:36] able to triple, maybe quadruple.
+[00:10:39] It could even It could likely be even
+[00:10:41] higher than that. We're going to see
+[00:10:43] unprecedented levels of volume. That is
+[00:10:46] just going to be absolutely insane. It's
+[00:10:49] something that we've really never seen
+[00:10:51] before. Although, we've kind of tasted
+[00:10:53] it. We got a taste of it when a
+[00:10:55] tremendous amount of volume came into
+[00:10:57] the market during the pandemic, as you
+[00:10:59] may recall. Then we had this lockdown,
+[00:11:01] people were working from home, a lot of
+[00:11:03] people got into the market. They started
+[00:11:04] trading, and we saw huge increases in
+[00:11:07] volume, huge increases in volatility,
+[00:11:10] and in 2020,
+[00:11:12] I had what at that time was the best
+[00:11:13] year of my career, and I made 10 times
+[00:11:16] more in 2020 than I had made in my
+[00:11:19] previous best year. That was really
+[00:11:22] That's really saying something. So, this
+[00:11:24] is something they'll tell you about
+[00:11:25] trading. When the markets are cold, it's
+[00:11:28] a double-edged sword. There's not as
+[00:11:30] much volume in the market cuz people
+[00:11:32] don't want to participate. There's not
+[00:11:34] as many opportunities in the market
+[00:11:36] because
+[00:11:37] companies know that this isn't the time
+[00:11:38] to put out headlines. So, they kind of
+[00:11:40] pull back on it. So, less liquidity and
+[00:11:42] fewer opportunities, even if you saw a
+[00:11:44] good setup, you can't take as much share
+[00:11:46] size because the market is cooler and
+[00:11:48] there's not as much liquidity. So, it
+[00:11:49] means you make not just half as much as
+[00:11:51] in a hot market, but even less. In fact,
+[00:11:54] my cold market daily goal is 1/5 of my
+[00:11:58] hot market daily goal. That's the
+[00:11:59] reality. 1 1
+[00:12:01] 25% roughly. 1 1/4 to 1/5 for cold
+[00:12:04] market to hot market. In other words, in
+[00:12:06] a hot market, I make four to five times
+[00:12:08] as much money.
+[00:12:09] Now, a hot market, including a reduction
+[00:12:12] in the pattern day trader rule, meaning
+[00:12:15] all of these traders are no are no
+[00:12:17] longer using offshore broker-dealers,
+[00:12:18] which charge fees and commissions, but
+[00:12:20] are trading using US broker-dealers that
+[00:12:22] are commission-free, like WeBull,
+[00:12:24] Charles Schwab, maybe Robinhood, some of
+[00:12:27] the others,
+[00:12:28] it's going to be it's going to be a
+[00:12:29] game-changer in terms of volume. So, I
+[00:12:31] encourage you guys to get ready. Now, if
+[00:12:35] you haven't already checked out any of
+[00:12:36] my full-length episodes on learning how
+[00:12:39] to start trading, I'll put links to them
+[00:12:41] here at the end of this episode, and
+[00:12:42] also put a link in the top of the
+[00:12:43] comments, where you guys can download
+[00:12:45] one of my getting started guides that's
+[00:12:47] going to walk you through my approach to
+[00:12:49] reading technical analysis. I use
+[00:12:51] candlestick charts. Candlestick charts
+[00:12:54] are the universal language of the
+[00:12:55] financial markets. Once you learn how to
+[00:12:57] read them, you can apply them to any
+[00:12:59] instrument, whether it's forex, futures,
+[00:13:01] crypto, or stocks. I'm going to of
+[00:13:03] course be applying them to stocks. So,
+[00:13:05] take a look at that PDF and check out
+[00:13:07] some of these other episodes. I think
+[00:13:08] you guys will really enjoy that'll give
+[00:13:10] you a deep dive into how to start day
+[00:13:12] trading. The pattern day trader rule
+[00:13:14] being reduced from $25,000 to just
+[00:13:16] $2,000, this is a big deal. All right.
+[00:13:18] So, I'm excited. I hope you guys are,
+[00:13:20] too. Leave questions, comments down
+[00:13:22] below, and I'll see you for the next
+[00:13:23] upload real soon. I'll remind you as was
+[00:13:25] that trading is risky, and my results
+[00:13:26] aren't typical. So, manage your risk,
+[00:13:28] take it slow, and I'll see you bright
+[00:13:29] and early. I'll be streaming as always
+[00:13:31] tomorrow at 7:00 a.m. Eastern Standard
+[00:13:34] Time for members at Warrior Trading.

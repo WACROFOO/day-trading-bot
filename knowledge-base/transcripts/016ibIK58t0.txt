@@ -1,0 +1,540 @@
+# A Lesson on Short Selling +$31,076.62 in 2hrs
+# https://www.youtube.com/watch?v=016ibIK58t0
+# duration_sec: 1266
+
+[00:00:00] What's up, everyone? All right, so in
+[00:00:02] today's episode, I'm going to break down
+[00:00:03] my trades from the morning. But before
+[00:00:05] we do, I want to talk about yesterday's
+[00:00:08] [music] 4,000% short squeeze on TCGL.
+[00:00:13] So, that stock ended up peaking at about
+[00:00:15] $457
+[00:00:18] per share. You'd say it was a black
+[00:00:20] swan. And for short sellers, and I saw a
+[00:00:23] number of them on social media who blew
+[00:00:25] up their accounts yesterday, it's an eye
+[00:00:27] openener. Now, they're called short
+[00:00:29] sellers because they have short memory.
+[00:00:32] The fact is that move, it's not the
+[00:00:34] first time I've seen something like
+[00:00:35] that. I've seen that type of thing
+[00:00:37] happen dozens of times. Literally dozens
+[00:00:41] of times. We just were teaching the
+[00:00:43] class on lowflow parabolic moves just
+[00:00:46] this week and I was showing you an
+[00:00:48] example of a stock that went from about
+[00:00:49] $5 a share to 500. I showed you an
+[00:00:52] example of a stock that went from $10 a
+[00:00:54] share to $2,600
+[00:00:56] a share. This one could have gone
+[00:00:58] higher. It stopped where it stopped. We
+[00:01:00] don't know why. I can speculate, but
+[00:01:03] we've seen even bigger short squeezes.
+[00:01:06] The problem with a short bias strategy,
+[00:01:09] especially with small caps, is that it
+[00:01:11] can be very hard to control your losses
+[00:01:14] when they start going against you,
+[00:01:15] especially when they start halting back
+[00:01:17] to back to back. This TCGL yesterday
+[00:01:21] halted up at $53. It resumes at 114.
+[00:01:25] How do you manage your risk on that?
+[00:01:27] You've got 10,000 shares, you're down
+[00:01:28] half a million dollars in an instant.
+[00:01:30] And there's nothing you could have done
+[00:01:31] about it. It's just instant massive
+[00:01:33] loss. What about the one a year and a
+[00:01:35] half ago that halted up at $20 a share
+[00:01:38] and resumed at 500? A $470
+[00:01:42] per share gap. 10,000 shares on that,
+[00:01:44] you're down nearly $5 million. So, the
+[00:01:47] problem with the short bias strategy is
+[00:01:50] there are a lot of people out there that
+[00:01:52] sell you on this technique. They tell
+[00:01:54] you all you have to do is keep adding,
+[00:01:57] keep adding, keep adding because
+[00:01:58] everything that goes up eventually comes
+[00:02:00] back down. That's true, but can you
+[00:02:04] afford to hold through the very top of
+[00:02:06] the peak? And what ends up happening is
+[00:02:08] while that technique can work nine out
+[00:02:10] of 10 times, you add, you add, you add,
+[00:02:13] it comes back down, you cover for
+[00:02:14] profit. On that 10th time, you get a
+[00:02:16] stock that goes up to 150, 200, 300,
+[00:02:19] $400 a share. You give back everything
+[00:02:21] you've made. you've got a margin call
+[00:02:23] and you're broke. In in fact, you're
+[00:02:26] potentially bankrupt because now you owe
+[00:02:28] your broker a lot of money. Now, I'm not
+[00:02:30] saying trading to the long side doesn't
+[00:02:32] come with risk because it does. Trading
+[00:02:34] to the long side is risky. If I buy a
+[00:02:35] thousand shares of a stock at $5 a
+[00:02:37] share, I'm putting that money in. But
+[00:02:39] what's the worst thing that can happen?
+[00:02:41] It goes to zero. Now, I have seen stocks
+[00:02:44] that have dropped 90% in a single day.
+[00:02:47] They tend to be Chinese number one or a
+[00:02:50] stock that has terrible news which has
+[00:02:52] come out but that's actually less likely
+[00:02:54] less common. What it happens more often
+[00:02:56] is we see a foreign listed stock drop
+[00:02:58] 90% in a single day. However, as long as
+[00:03:02] you're trading during the pre-market
+[00:03:04] session, you have the ability to get out
+[00:03:07] without getting caught in a halt. So
+[00:03:10] essentially, yes, your worst case
+[00:03:11] scenario, trading the long size, the
+[00:03:12] stock goes to zero through either bad
+[00:03:15] news or being a Chinese liquidation, but
+[00:03:18] you're not exposed to an infinite loss
+[00:03:22] like what happens when you short a stock
+[00:03:23] at five and it goes to $400 a share.
+[00:03:26] That's where it gets really scary. So,
+[00:03:29] because we had this crazy move
+[00:03:31] yesterday, I was expecting um today
+[00:03:35] would be volatile. I I wasn't, you know,
+[00:03:38] it's Friday, kind of a wild card day.
+[00:03:40] Um, I wasn't sure exactly what to
+[00:03:43] expect. TCGL has pulled back off the
+[00:03:45] high. So, most likely what happened is
+[00:03:48] there were some shorts and we've already
+[00:03:50] seen them posting about it on social
+[00:03:52] media that got liquidated. So, their
+[00:03:54] broker autoquidated and closed their
+[00:03:56] position for them and took over their
+[00:03:58] account, pressed the buy button, and
+[00:04:00] they're they're out. So, you know, that
+[00:04:03] probably fueled this squeeze right here
+[00:04:06] all the way up to $457 a share
+[00:04:09] approximately, something like that. Then
+[00:04:11] it drops all the way back down to 80.
+[00:04:13] All right. Then it bounces up to 240.
+[00:04:15] And at this point, it's just there's
+[00:04:18] there's not the liquidity to trade it.
+[00:04:20] I'm not going to get into trading it.
+[00:04:21] I'm just going to, you know, leave this
+[00:04:22] alone. Um I will just for the sake of it
+[00:04:25] here, I'll just pull up my class. Um so
+[00:04:27] this is a section we were teaching or
+[00:04:29] that I've been teaching. um this past
+[00:04:32] week. So, if we go up here, um oh, so
+[00:04:36] this was the one here that halted up at
+[00:04:39] uh like, you know, $25 a share, whatever
+[00:04:41] it was, opened at 500. That was insane.
+[00:04:44] Um this one halted up at 20, opened at
+[00:04:47] like went to $220 a share. Insane. This
+[00:04:51] is not the first time we've seen this
+[00:04:52] happen. Not even close. Um then we go
+[00:04:55] up. These are some of the Chinese
+[00:04:56] liquidation events, but I'm going to go
+[00:04:58] up here a little bit more to let's see
+[00:05:02] um some of the lowflat uh and light
+[00:05:07] volume. Let's see. Low float recent
+[00:05:10] reverse split. These recent reverse
+[00:05:12] splits.
+[00:05:14] Yeah, let's see. Uh oh, this is actually
+[00:05:16] what I wanted to look for up here. So,
+[00:05:19] uh this one here from $10 to 35 in one
+[00:05:22] day, right? this one here from $3 to 13
+[00:05:26] in one day. All right. You know, these
+[00:05:28] are these are big. They're not I mean,
+[00:05:30] we've we've certainly seen bigger moves
+[00:05:31] than that. Um, let's see. This is the
+[00:05:34] parabolic momentum section. So, let me
+[00:05:36] just go to this one here. This one's the
+[00:05:39] this is where things get crazy. This one
+[00:05:42] goes from $8 to 80 bucks.
+[00:05:45] You could see that uh chart. And there's
+[00:05:47] no way to manage your risk if you're
+[00:05:48] short. This one goes from $20 to $80.
+[00:05:52] Similar. This one goes from $10 to 130.
+[00:05:56] I mean, I've seen these happen more
+[00:05:57] times than I can count. I mean, I have
+[00:05:59] some of the screenshots here, but we see
+[00:06:00] it happen again and again. Now, anytime
+[00:06:03] it happens, I rarely trade these moves.
+[00:06:05] The reason I rarely trade them is
+[00:06:07] because they're hard to manage your risk
+[00:06:09] on. Um, this was HKD, which is the one
+[00:06:11] that ended up going all the way up to
+[00:06:13] $1,000. Then the next day it goes even
+[00:06:16] higher to $2,600 a share. Um, but the
+[00:06:19] fact is I don't usually trade them uh
+[00:06:22] because they're not liquid. You can't
+[00:06:24] easily get in and out. Now, I will say
+[00:06:26] that TCGL had pretty good volume
+[00:06:28] yesterday. I mean, and well, you know,
+[00:06:31] comparatively, relatively speaking,
+[00:06:32] having over four nearly 5 million shares
+[00:06:34] of volume was pretty good. We look back
+[00:06:36] at HKD and that had less than 100,000
+[00:06:39] shares of volume on some of the days it
+[00:06:41] was making big moves. So, it was very
+[00:06:42] illquid. But even right now, if I look
+[00:06:44] at the level two on um TCGL,
+[00:06:49] oh, it's well, it's halted right now.
+[00:06:50] So, it's on a halt. But in any case, the
+[00:06:52] level two for most of um the time that I
+[00:06:54] was looking at it yesterday and even
+[00:06:56] this morning, 10point spreads, it's got
+[00:06:59] very light volume. It's it's not really
+[00:07:01] tradable um for anyone to the long side.
+[00:07:06] So, you might say, how is it even going
+[00:07:07] higher? Who was buying it at $50 a share
+[00:07:10] yesterday? who was pressing the buy
+[00:07:11] button at 160, 200, 280, 300. And I
+[00:07:15] would argue that it's short sellers who
+[00:07:17] were shorting into the strength. They
+[00:07:19] were shorting as it was going higher and
+[00:07:21] higher and higher and then are forced to
+[00:07:22] buy back. Now the thing with a lot of
+[00:07:24] these foreign companies and this is
+[00:07:25] typically the type of company this
+[00:07:27] happens to is that uh usually the
+[00:07:30] ownership of um the shares is
+[00:07:32] concentrated among a very small number
+[00:07:35] of people. And so the actual tradable
+[00:07:37] float is very low. And it's not uncommon
+[00:07:40] to see these start to squeeze and it
+[00:07:42] doesn't make sense, but they just keep
+[00:07:44] going higher. And then shorts
+[00:07:46] essentially it becomes a self-fulfilling
+[00:07:48] prophecy that they create their own
+[00:07:50] squeeze by getting short too
+[00:07:53] aggressively and then they're forced to
+[00:07:55] buy back the shares. So in any case, we
+[00:07:58] had this huge move yesterday. Um I
+[00:08:01] didn't trade it yesterday. I didn't
+[00:08:02] trade today. Full disclosure, I didn't
+[00:08:04] feel like I could manage the risk on it.
+[00:08:06] So that was the right decision for me.
+[00:08:08] Uh but coming in this morning I was
+[00:08:09] thinking well is this going to create
+[00:08:11] sympathy momentum because often that is
+[00:08:14] the case that we get sympathy momentum
+[00:08:16] after you know a big move. So FATBB um
+[00:08:19] is up 556%.
+[00:08:22] However it started below 50 cents a
+[00:08:24] share and usually when these start
+[00:08:26] pretty cheap like that um they're not
+[00:08:28] super easy to trade and so this one's
+[00:08:30] been very thickly traded. It's been very
+[00:08:32] crowded. Um FATBB uh it's also halted
+[00:08:35] right now. But in any case, I just sort
+[00:08:38] of knew at this price point, I probably
+[00:08:40] wouldn't do very well on it. So, when I
+[00:08:42] first looked at the scanners this
+[00:08:43] morning, I was like, uh, that one's I
+[00:08:45] can't really work with that. Um, ANL,
+[00:08:48] um, this one ends up going from $5 up to
+[00:08:52] 6 7 8 910 after hours. Double tops at
+[00:08:56] 14, then rolls over. Um, BMAI, this one
+[00:08:59] had an interesting headline today. a
+[00:09:01] private placement uh $1.5 million at $63
+[00:09:05] a share. That's a really high price. So,
+[00:09:08] I was sort of surprised it isn't holding
+[00:09:11] up better. But anyways, I I you know, I
+[00:09:15] don't know. It that's what it is. Um
+[00:09:17] TWWNP, this one's cheaper. Left that one
+[00:09:20] alone. GITS, this one uh now squeezing
+[00:09:23] up a little bit more. But to me, this is
+[00:09:25] more of a um just a daily setup. first
+[00:09:28] daily candle to make a new high kind of
+[00:09:30] continuation. Doesn't have fresh news.
+[00:09:33] Um, but the one that I did trade was
+[00:09:36] LRHC.
+[00:09:38] Now, this one has popped up a couple
+[00:09:39] times, but it made a pretty big move
+[00:09:41] after hours from three all the way up to
+[00:09:43] eight. It dips down. It curls back up.
+[00:09:46] And I took this trade this morning on
+[00:09:47] the break through the volume weight
+[00:09:49] average price. And here's the way I
+[00:09:51] thought about this.
+[00:09:53] It was consolidating right underneath
+[00:09:54] VWAP. We had essentially a little cup
+[00:09:56] and handle formation right under VWAP.
+[00:09:59] And I said to myself, if this thing can
+[00:10:01] break through VWAP, we get up to 6 650.
+[00:10:04] If we get over seven, all of a sudden,
+[00:10:07] you're looking right back at this uh
+[00:10:09] pre-market high of eight. We get up to
+[00:10:11] that level, this is going to be our
+[00:10:13] leading gainer in the market. And given
+[00:10:15] it's a recent reverse split with a lot
+[00:10:17] of room on the daily chart up to the 200
+[00:10:20] moving average, I felt like this one had
+[00:10:22] some potential. So, I sized up. I took a
+[00:10:26] pretty big position. I jumped in. I put
+[00:10:28] my money where my mouth is. I was like,
+[00:10:29] "All right, here we go. I'm gonna be
+[00:10:31] aggressive on this. I'm not going to
+[00:10:33] take a lot of trades, but when I take a
+[00:10:35] trade, I'm going to be aggressive." So,
+[00:10:37] I jumped in and I'm adding, adding,
+[00:10:39] adding, adding, adding as it's going
+[00:10:41] higher. And it's ripping. It's going 50
+[00:10:44] cents a share. It's going 530, 550, 580,
+[00:10:48] 590, $6, 625, 650, $7. and it comes up
+[00:10:52] to a high of 725 and I was like this is
+[00:10:57] fantastic. This is a this is a beautiful
+[00:10:59] almost $2 a share of profit at that
+[00:11:01] peak. Not quite but it was getting close
+[00:11:03] to that. And at that point I was like
+[00:11:05] all right if we hold over seven then
+[00:11:09] yeah absolutely looking for 758 and if
+[00:11:11] we could break through that level then
+[00:11:13] 910. That's what I'm thinking in the
+[00:11:15] back of my mind. I thought this had the
+[00:11:17] potential to be maybe one of the biggest
+[00:11:20] winners of the year. The reason I
+[00:11:23] thought that was because of course the
+[00:11:25] momentum and the sort of sympathy
+[00:11:27] momentum from yesterday's move on TCGL.
+[00:11:30] So I thought that was sort of the
+[00:11:31] initial catalyst. Traders are more
+[00:11:33] aggressive today. Short sellers are more
+[00:11:35] cautious today. This could be the
+[00:11:37] perfect storm for a stock to make a
+[00:11:40] really impressive move again here today
+[00:11:42] like we had yesterday. And this one
+[00:11:44] already had maybe well at eight or nine
+[00:11:48] t million shares of volume something
+[00:11:50] like it had a lot of volume already so
+[00:11:52] it was liquid. It was maybe the fourth
+[00:11:54] leading gainer something up up in this
+[00:11:56] area about where it is now third or
+[00:11:58] fourth. Um but the ones that were the
+[00:12:00] leaders weren't really looking that
+[00:12:02] great. So I felt like this was sort of
+[00:12:04] like the market was primed. This was set
+[00:12:07] up and I stepped up to the plate. And
+[00:12:10] then you know what ended up happening is
+[00:12:13] up around seven it became a battle and
+[00:12:17] it dips below seven and I'm adding
+[00:12:20] adding adding and I started getting a
+[00:12:21] little stubborn. I was like this doesn't
+[00:12:23] make sense. Why is this so heavy here?
+[00:12:27] It's a recent reverse split. It's a low
+[00:12:28] float. What's going on? And I'm having a
+[00:12:32] hard time understanding why this thing
+[00:12:33] isn't already at 750 and 8. So I mean
+[00:12:38] ultimately this is the mystery in the
+[00:12:39] market. Why does one go to 400 and
+[00:12:41] another one only goes to seven and can't
+[00:12:44] even get to 725? Um, and at the end of
+[00:12:47] the day, um, I I I don't know the exact
+[00:12:51] answer, but when I looked at this, um,
+[00:12:55] the thing that I was thinking about was,
+[00:12:57] do we have a recent shelf registration?
+[00:13:00] And, um, what are their financials? Is
+[00:13:03] this a company that is likely to be
+[00:13:04] selling shares on the open market like
+[00:13:07] ASAP?
+[00:13:09] Someone mentioned that they had um some
+[00:13:11] convertible notes. They had some
+[00:13:13] warrants, but they were priced a bit
+[00:13:15] higher. So, I was like, "All right,
+[00:13:16] well, if they're priced higher, no one's
+[00:13:18] going to execute on them." Um when we
+[00:13:20] look at the financials here, this is,
+[00:13:22] you know, typically what I'll end up
+[00:13:24] doing is I'll check the financials. I'll
+[00:13:25] look at their um current assets and how
+[00:13:27] much cash they have on the balance sheet
+[00:13:28] specifically. And I I don't have a
+[00:13:30] chance to do this before the trade. It's
+[00:13:32] usually after the trade or maybe while
+[00:13:35] I'm still in the trade that I start to
+[00:13:38] check to see what is this situation
+[00:13:40] because when I first take the trade,
+[00:13:42] it's purely technical. The stock's on a
+[00:13:44] scanner. It's at technical level. You
+[00:13:46] know, the volume's right. It's moving.
+[00:13:48] So that that's what I'm doing in real
+[00:13:50] time. And the fact is you can have
+[00:13:51] companies that don't have a very good
+[00:13:53] balance sheet. Um they're not making
+[00:13:55] money and the price still goes higher.
+[00:13:58] So the loss from operations here for the
+[00:14:00] three months ending September 30th shows
+[00:14:02] $5 million. All right. So $5 million.
+[00:14:04] Now they're doing revenue, but they're
+[00:14:06] spending a lot of money to generate that
+[00:14:08] revenue. So they're losing money here.
+[00:14:09] So they've got a net loss. So then you
+[00:14:11] look back at the cash on the balance
+[00:14:12] sheet. It's not adequate to cover even
+[00:14:15] really another three months of
+[00:14:16] operations. So now you sort of have this
+[00:14:20] question of okay, are they working with
+[00:14:22] an underwriter to sell shares on the
+[00:14:24] open market in order to capitalize on
+[00:14:27] the fact that the stock is up? Since the
+[00:14:29] move began yesterday,
+[00:14:32] they already, I'm sure, got alerts that
+[00:14:34] their stock price is up over 100%, you
+[00:14:37] know, in after hours trading. So, it
+[00:14:40] wouldn't surprise me that they would be
+[00:14:42] ready to start taking um action and
+[00:14:45] raise money on the market. When a stock
+[00:14:48] pops up initially on breaking news, like
+[00:14:51] within two minutes of that breaking
+[00:14:53] news, sometimes we also see selling. And
+[00:14:55] when that's the case, it makes me think
+[00:14:56] that the underwriter is working with a
+[00:14:58] company. They know when the news is
+[00:15:00] coming out, and they're planning to
+[00:15:02] start selling as soon as liquidity comes
+[00:15:04] into the name. So, how much these stocks
+[00:15:07] go up ultimately in a lot of ways is
+[00:15:10] determined by the company themselves. If
+[00:15:13] they decide to start selling into all
+[00:15:15] the buying, they're affecting the supply
+[00:15:17] demand uh equation and they're stopping
+[00:15:20] their stock from going higher. If they
+[00:15:22] don't sell into the market, then their
+[00:15:24] stock is able to keep going higher. Now,
+[00:15:26] if the company has previously sold a lot
+[00:15:28] of warrants, if they had, you know,
+[00:15:30] convertible uh share loan deals, then
+[00:15:33] there may be institutional traders that
+[00:15:35] are out there that also are owning
+[00:15:37] shares that will take the opportunity to
+[00:15:39] sell. And that's more of the company's
+[00:15:41] previous decisions to dilute kind of
+[00:15:45] coming back and creating an issue even
+[00:15:46] if it's not the company in on that
+[00:15:48] particular day that's selling. So, while
+[00:15:52] you can spend a lot of time getting into
+[00:15:54] the filings, the shelf registrations,
+[00:15:57] looking at all the warrants and
+[00:15:58] everything else, if the price action and
+[00:16:01] the technicals no longer support being
+[00:16:03] in the trade, I get out and I can then
+[00:16:07] go and check and try to speculate why
+[00:16:09] did this one, you know, get so difficult
+[00:16:11] here? Why wasn't it able to pull away to
+[00:16:13] 750 and to 8, you know, especially on a
+[00:16:15] day like today where it felt like we had
+[00:16:17] so much potential. So, I ended up giving
+[00:16:20] back some profit off the top. I had
+[00:16:21] unrealized profit. In fact, I mean,
+[00:16:24] gosh, I had a good amount of unrealized
+[00:16:25] profit. Um, and I gave some of that back
+[00:16:28] off the top by the time I finally sold.
+[00:16:30] And then because I kept kind of taking
+[00:16:32] stabs at it around seven, thinking that
+[00:16:35] this thing was going to work, it just I
+[00:16:38] just need to be patient with it, it, you
+[00:16:41] know, eventually gave back even more.
+[00:16:43] So, um, you know, at the end of the day,
+[00:16:46] I think the most I was up in realized
+[00:16:49] locked up gains, maybe 40,000, 39,000.
+[00:16:53] So, gave back, you know, 25% off the
+[00:16:56] top. That's kind of similar actually to
+[00:16:58] what I did. Was it yesterday? No, it was
+[00:17:00] the day before. It was the day before.
+[00:17:02] Um, and you know what? I guess like I
+[00:17:06] often say, every day you're doing one of
+[00:17:07] two things. You're leaving money on the
+[00:17:08] table or you're giving back profit. And
+[00:17:10] I'm trying to be aggressive when the
+[00:17:12] market seems like it's calling for that.
+[00:17:15] And I am stepping up to the plate. I'm
+[00:17:17] taking bigger positions. And you know
+[00:17:19] what? I'm gonna have a few times this
+[00:17:21] year where it connects and I have a
+[00:17:22] trade like this that goes to 8 to 9 to
+[00:17:24] 10 11 12 and I'm up 150 grand. And I'm
+[00:17:28] going to have some days like today where
+[00:17:29] I step up to the plate in a big way and
+[00:17:32] I don't hit a home run, but you know,
+[00:17:35] I'm on second base or whatever you want
+[00:17:37] to stick with that analogy, right? where
+[00:17:39] it's still more than a base hit, but you
+[00:17:43] know, it's not the home run. And I was
+[00:17:44] almost to third and then I had to run
+[00:17:46] back to second and, you know, settle for
+[00:17:48] a little bit less than what I wanted.
+[00:17:49] But, um, you know, I did have one day
+[00:17:53] last year where I was up unrealized
+[00:17:57] $250,000
+[00:17:59] on a stock and I didn't take any of it
+[00:18:02] off the table and I ended up being down
+[00:18:04] 50,000 on that stock. And that was a
+[00:18:08] little disappointing. Um I think it was
+[00:18:10] ESB. Uh or maybe it was BMR. But in any
+[00:18:14] case, I sized up heavy and it was like
+[00:18:18] 40,000 shares or something like that and
+[00:18:20] I was up five $6 a share and then and it
+[00:18:24] was when the stock was like 4849 $50 a
+[00:18:28] share. So it was a huge position. VCN.
+[00:18:30] There you go. and and I'm I was up five
+[00:18:33] six points and then in an instant it got
+[00:18:37] smoked. It just flushed like a
+[00:18:39] liquidation and all of a sudden I went
+[00:18:42] from being up six points to being break
+[00:18:44] even and then I was down two points and
+[00:18:46] I was like what's going on here?
+[00:18:48] Anyways, um you know I want to try to
+[00:18:51] avoid having too many days like that. Um
+[00:18:54] it is important to you know not turn
+[00:18:57] trades from winners to losers. So
+[00:19:00] although I gave back a little bit, um I
+[00:19:02] had the cushion to take that risk and I
+[00:19:04] can I can live with that. So um anyways,
+[00:19:07] you know, curious to hear how you guys
+[00:19:08] did today. U this one gave us that break
+[00:19:11] of VWAP. That was a nice move. There
+[00:19:13] were a few others that popped up. GITS
+[00:19:15] looks like this one uh coming back down
+[00:19:18] a little bit off the double top. Maybe
+[00:19:20] we'll have, you know, more momentum
+[00:19:22] later in the day, but you know, it's
+[00:19:23] hard. And this one also popped up. I I
+[00:19:26] left that alone. Um I was considering it
+[00:19:29] but I noticed it's easy to borrow. Uh
+[00:19:31] pulled that up one pulled that one up on
+[00:19:33] um light speeded. Let's see. So um
+[00:19:38] PMN
+[00:19:40] and saw it's easy to borrow right here.
+[00:19:42] So I was like nah it could work but I'm
+[00:19:45] going to have to be a little patient
+[00:19:46] with it. Anyways didn't end up working.
+[00:19:48] So yeah I don't know. I guess I'm not
+[00:19:51] super shocked. Sometimes the day after a
+[00:19:53] big move things can be a little sloppy.
+[00:19:55] um you know there's FOMO in the market,
+[00:19:58] people are jumping on anything popping
+[00:19:59] up, you have some round trips. I you
+[00:20:02] know and the fact is LRHC it didn't have
+[00:20:05] a clear catalyst. Um so you know that
+[00:20:08] was something that concerned me on the
+[00:20:11] one hand but on the other hand it was
+[00:20:14] the you know third leading gainer or
+[00:20:16] whatever it was. So it's like you know
+[00:20:18] that it was up quite a lot um and it it
+[00:20:22] definitely had a lot of volume. So I was
+[00:20:25] I wasn't really worried about like an
+[00:20:27] immediate round trip. I mean it has
+[00:20:29] pulled back but I wasn't worried like an
+[00:20:30] instant rejection feed on the scanner
+[00:20:33] just kind of grinding a little higher
+[00:20:35] continuation on the daily chart. So
+[00:20:38] anyways um good job for those you guys
+[00:20:40] that got in you got green manage your
+[00:20:42] risk. Reminder as always of course
+[00:20:43] trading is risky. My results aren't
+[00:20:45] typical and there's no guarantee you'll
+[00:20:46] find success whether you trade with me
+[00:20:48] or you learn on your own. So, the best
+[00:20:50] thing you can do is manage your risk by
+[00:20:51] learning and practicing in a simulator
+[00:20:54] before you ever put real money on the
+[00:20:56] line. I hope you guys have a great
+[00:20:57] weekend and we'll be back at it bright
+[00:20:59] and early Monday morning, 7 a.m. I'll be
+[00:21:02] streaming for members here at Warrior
+[00:21:04] Trading.

@@ -1,0 +1,469 @@
+# Don't Make These Mistakes! Taxes for Day Traders
+# https://www.youtube.com/watch?v=WJHgMDyNXKo
+# duration_sec: 972
+
+[00:00:05] what's up everyone all right so the
+[00:00:06] topic of today's episode is taxes
+[00:00:08] trading and taxes it's a good thing
+[00:00:10] you're checking out this video now
+[00:00:11] because you want to make sure you get
+[00:00:13] ahead of it and the fact is you have the
+[00:00:15] opportunity to make some affirmative
+[00:00:17] decisions about how you handle your
+[00:00:18] taxes if you make the right decisions
+[00:00:20] those can compound
+[00:00:22] for months years in the future and the
+[00:00:24] benefit is huge all right so
+[00:00:27] short-term capital gains wash sales and
+[00:00:30] mark to market accounting these are our
+[00:00:32] three main topics for today the fact is
+[00:00:35] as a trader all of your profits from a
+[00:00:38] position held for less than one year is
+[00:00:40] going to be categorized as a short-term
+[00:00:42] capital gain
+[00:00:43] in contrast to a long-term capital gain
+[00:00:46] long-term capital gains have preferred
+[00:00:48] preferential lower tax rates which
+[00:00:51] encourages investors to hold positions
+[00:00:53] longer and not you know bail out and
+[00:00:55] then jump back in so
+[00:00:57] it is what it is but as a day trader
+[00:01:00] i mean it just is not applying to us all
+[00:01:03] of our gains are less than a year so
+[00:01:05] they're all going to fall into the
+[00:01:06] column of a short-term capital gain so
+[00:01:09] how's the short-term capital gain taxed
+[00:01:11] it's taxed at your regular income tax
+[00:01:13] bracket now i want to say a couple
+[00:01:15] things here before we go further one i'm
+[00:01:17] not going to talk about what those
+[00:01:18] brackets are because they're always
+[00:01:20] changing so check out some links in the
+[00:01:22] description or go over to the irs
+[00:01:23] website to see where the brackets are
+[00:01:25] right now how big they are and and where
+[00:01:27] the cutoffs are
+[00:01:29] number two i want to remind you that i'm
+[00:01:30] not a cpa so i encourage you to consult
+[00:01:33] your own cpa do your own research
+[00:01:35] because this is not accounting advice
+[00:01:37] i'm just sharing with you what i've
+[00:01:38] learned from all my years is filing
+[00:01:40] taxes as a trader i have my own cpa i
+[00:01:43] don't try to file my taxes myself and i
+[00:01:45] don't really think probably anyone
+[00:01:48] should it just makes sense to use some
+[00:01:49] type of service to help file your taxes
+[00:01:51] but of course make the decision that
+[00:01:53] makes the most sense for you
+[00:01:55] so
+[00:01:56] we've got our short-term capital gains
+[00:01:57] and are going to be taxable at your
+[00:01:59] regular income tax bracket and so some
+[00:02:01] people will say geez
+[00:02:03] i made a hundred thousand dollars in
+[00:02:04] trading profits i didn't realize i was
+[00:02:06] going to have to
+[00:02:07] pay 20 000 or more of that in tax
+[00:02:11] well here's the thing
+[00:02:13] if you had made that same amount of
+[00:02:14] money as a long-term capital gain yes
+[00:02:16] the tax would be lower but if you made
+[00:02:18] that same amount of money as a w-2 from
+[00:02:21] an employer
+[00:02:23] you would actually pay more tax because
+[00:02:24] you would have your income bracket for
+[00:02:26] making a hundred thousand dollars plus
+[00:02:28] you would have social security and you
+[00:02:30] would have medicare all right now if you
+[00:02:31] made that hundred thousand dollars as a
+[00:02:33] freelancer in your own llc you know
+[00:02:36] you've got your own side business
+[00:02:37] self-employment tax 15
+[00:02:40] so you know this is sort of the area
+[00:02:42] where if you compared the short-term
+[00:02:44] capital gains to
+[00:02:45] self-employment tax inc self-employment
+[00:02:48] income or w-2 income you're actually
+[00:02:50] going to be paying a slightly lower rate
+[00:02:53] on the irs website and i'll have the
+[00:02:54] link down the description they clearly
+[00:02:56] state that
+[00:02:58] short-term capital gains are not subject
+[00:02:59] to self-employment tax
+[00:03:02] so yes you're definitely paying more
+[00:03:03] than a long-term capital gain but you're
+[00:03:05] paying less than uh w-2 or 1099 from
+[00:03:09] self-employment so there's some benefit
+[00:03:12] there a little silver lining but i know
+[00:03:14] you are still paying a lot in tax and
+[00:03:16] what makes it worse is when you get your
+[00:03:18] 1099 from your broker and you see this
+[00:03:20] column that says wash sales exempt so
+[00:03:23] what the heck is a wash sale
+[00:03:26] well uh
+[00:03:27] they create the wash sale because what
+[00:03:29] people used to do they found this little
+[00:03:31] loophole in their in the taxes where on
+[00:03:34] december
+[00:03:35] 31st if they had a position they were
+[00:03:37] holding and they were down uh ten
+[00:03:39] thousand dollars on it they're down ten
+[00:03:41] thousand dollars on the position they
+[00:03:42] would say you know what it's a long-term
+[00:03:44] capital gain i'm not going to be able to
+[00:03:46] write off that ten thousand dollars
+[00:03:48] against my gains for the year so i'm
+[00:03:51] gonna sell the position i'm gonna book
+[00:03:53] the ten thousand dollar loss it's gonna
+[00:03:55] reduce my taxable income uh from you
+[00:03:58] know let's say
+[00:03:59] 90 000
+[00:04:01] you know down minus 10
+[00:04:03] to 80 000
+[00:04:05] and then on january 2nd i'll just buy
+[00:04:09] the position back so i'll be back in it
+[00:04:11] and my profit loss on it will be zero
+[00:04:14] but you know i'll sell you know x number
+[00:04:16] of shares and i'll just buy back the
+[00:04:18] same number of shares on january 2nd and
+[00:04:20] the irs said
+[00:04:21] hold up
+[00:04:24] no you can't do that we're going to say
+[00:04:26] if you buy back a substantially similar
+[00:04:29] and this is in quote substantially
+[00:04:31] similar position within 30 days you
+[00:04:33] can't write off that first loss you
+[00:04:35] can't do it that's not you're not
+[00:04:37] allowed to do it and so that
+[00:04:39] inadvertently had a huge effect on
+[00:04:42] traders like you and me because traders
+[00:04:45] like us we're constantly buying and
+[00:04:46] selling buying and selling and there may
+[00:04:48] be many times where we buy a stock sell
+[00:04:51] it for a loss and then buy it back maybe
+[00:04:52] even in the same day
+[00:04:54] so how the heck does that affect our our
+[00:04:56] taxable gain so on the 1099 you're going
+[00:04:59] to see long-term capital gains
+[00:05:01] short-term capital gains and let's say
+[00:05:03] your short-term capital gains are like a
+[00:05:04] hundred thousand dollars
+[00:05:06] and then you might see capital uh wash
+[00:05:09] sales exempt and let's say it's ten
+[00:05:11] thousand dollars so then your actual
+[00:05:13] taxable is 110. it's the wash sale plus
+[00:05:17] the short-term capital gains so it makes
+[00:05:19] your taxable
+[00:05:21] the total taxable gain larger
+[00:05:24] one of the things that i noticed in my
+[00:05:26] first few years of trading even though i
+[00:05:28] was trading a lot of the same stocks day
+[00:05:30] after day after day
+[00:05:31] the amount that i had exempt in wash
+[00:05:33] sales at the end of the year wasn't
+[00:05:35] really that high so this is an area
+[00:05:38] where as retail traders we don't have a
+[00:05:40] lot of insight into how
+[00:05:42] broker dealers in the clearing firms are
+[00:05:45] considering something substantially
+[00:05:47] similar and then flagging the initial
+[00:05:49] loss to be exempt right so
+[00:05:53] it's a little tricky and i don't even
+[00:05:55] know if there's a way mid-year to
+[00:05:57] contact your broker and find out where
+[00:05:59] you sit with wash sales because it could
+[00:06:02] become substantial and it could become a
+[00:06:04] problem but then there's also just
+[00:06:06] simple logic to it like if you were
+[00:06:09] trading one style let's say you're
+[00:06:10] trading apple all year long you buy sell
+[00:06:13] buy sell by sell
+[00:06:14] at the end of the year you made
+[00:06:17] you know a million dollars on apple but
+[00:06:19] you lost you know 980 000 so you're
+[00:06:22] really only up 20 grand are you telling
+[00:06:24] me you're gonna owe taxes on a million
+[00:06:26] dollars obviously that doesn't make
+[00:06:28] sense and it that doesn't make sense in
+[00:06:30] any stretch of imagination right it's
+[00:06:33] not the way it works
+[00:06:34] so there's clearly some formula that as
+[00:06:36] retail traders we just don't have a lot
+[00:06:38] of i don't have a lot of insight into if
+[00:06:41] you do feel free to comment down below
+[00:06:43] and share with us because that would
+[00:06:44] certainly help me it would help other
+[00:06:45] traders
+[00:06:47] so the fact is we do have some um
+[00:06:50] profits or our losses that are exempt
+[00:06:52] from writing off due to the wash sale
+[00:06:54] rule but then
+[00:06:56] there's this
+[00:06:58] other thing called mark to market
+[00:07:01] accounting
+[00:07:02] all right so mark to market accounting
+[00:07:04] is kind of interesting this um
+[00:07:07] this is sort of in in direct response to
+[00:07:10] um the
+[00:07:12] the wash sale rule we have this mark to
+[00:07:14] market accounting and what mark to
+[00:07:16] market accounting is is it's an
+[00:07:18] accounting type that you apply for with
+[00:07:20] the irs and when you apply for it and
+[00:07:23] you are accepted
+[00:07:25] wash
+[00:07:26] sales
+[00:07:28] are
+[00:07:29] no more you don't have any wash sales
+[00:07:31] now once you get the acceptance notice
+[00:07:33] from the irs you do have to send that to
+[00:07:36] your broker so they can update on the
+[00:07:38] back end of your account that you do not
+[00:07:40] have wash sales on your account so then
+[00:07:43] at the end of that next tax year you'll
+[00:07:45] have your 1099 you'll probably have no
+[00:07:47] long-term capital gains you'll have a
+[00:07:48] ton of short-term capital gains and you
+[00:07:50] won't have anything that's exempt as a
+[00:07:52] wash sale which is great
+[00:07:54] the other benefit to this is that
+[00:07:56] with to market accounting you can write
+[00:07:58] off unlimited losses and this is
+[00:08:00] something that has come with a little
+[00:08:02] bit of controversy because
+[00:08:04] just like the wash sales were created
+[00:08:06] because some people were using this sort
+[00:08:07] of loophole of selling on december 31st
+[00:08:09] and then buying back with mark to market
+[00:08:11] accounting
+[00:08:12] big firms corporations can carry forward
+[00:08:15] these huge
+[00:08:17] losses and write off
+[00:08:19] i mean unthinkably big
+[00:08:21] business losses
+[00:08:23] but you could do it on the trading side
+[00:08:25] as well so
+[00:08:27] this is what it is for right now it's
+[00:08:29] always subject to change um i suppose so
+[00:08:32] you could check down the description or
+[00:08:34] i might put a video um right here if
+[00:08:37] there's something that has substantially
+[00:08:39] changed i'll put a video maybe right up
+[00:08:41] here in the corner so you guys could
+[00:08:42] check that out and jump over to that
+[00:08:43] video with new information but if there
+[00:08:45] if i haven't put anything there then
+[00:08:47] this is probably still more or less the
+[00:08:49] way it is so
+[00:08:51] with mark to market accounting you can
+[00:08:53] write off an unlimited number of losses
+[00:08:55] now this isn't something that probably
+[00:08:58] you want to aspire to
+[00:09:00] um but you know it's just worth noting
+[00:09:02] so
+[00:09:03] if you um go to the irs website irs.gov
+[00:09:08] down in the description i'll have a link
+[00:09:10] to tax topics and
+[00:09:12] the topic number is 429 it's traders and
+[00:09:14] securities and this is where they talk
+[00:09:16] about um section i believe it's 475
+[00:09:21] f
+[00:09:22] mark to market account trading and
+[00:09:24] securities and then they get into
+[00:09:26] applying for the mark to market
+[00:09:29] election uh they also note that
+[00:09:32] uh traders should report
+[00:09:36] losses business gains and losses on
+[00:09:39] schedule c
+[00:09:40] and expenses related to
+[00:09:42] trading so this is an area where you
+[00:09:45] have an opportunity as a trader
+[00:09:47] depending on how you want to approach
+[00:09:49] this
+[00:09:50] where if you're running this as a
+[00:09:52] business and being a trader is like
+[00:09:54] running a business you've got taxes
+[00:09:56] you've got gains you've got losses
+[00:09:57] you've got expenses you've got computers
+[00:10:00] you've got internet costs if you're
+[00:10:01] using 10 of your your home office you
+[00:10:04] have a dedicated room that is an office
+[00:10:06] for you
+[00:10:07] some people use a home office deduction
+[00:10:09] right so there there's a whole number of
+[00:10:11] lists of things that you could do if you
+[00:10:13] want to try to maximize on your tax
+[00:10:16] savings some people are going to be more
+[00:10:17] aggressive on this some people are going
+[00:10:19] to be more conservative
+[00:10:20] and this is where for some people it
+[00:10:22] gets into forming an llc for trading for
+[00:10:25] the trading account and the reason the
+[00:10:27] llc is so popular is because llc's are
+[00:10:29] super easy to set up
+[00:10:31] the income is passed through if it's a
+[00:10:33] single member llc to your own return so
+[00:10:36] you're not having to file a corporate
+[00:10:37] return for the llc and then a separate
+[00:10:39] return for yourself it just flows right
+[00:10:41] through to your own return
+[00:10:43] you get some degree of um sort of uh
+[00:10:47] i guess you would say like insurance or
+[00:10:49] protection knowing that your trading
+[00:10:50] account is now owned by an llc so you
+[00:10:53] have some
+[00:10:54] a protection of that asset which is
+[00:10:56] important
+[00:10:57] and setting up an llc is super easy so
+[00:11:00] some people do and
+[00:11:02] lastly but probably more importantly is
+[00:11:04] that it makes it very easy to segregate
+[00:11:06] your expenses related trading now you
+[00:11:08] have an ein you have an account you have
+[00:11:11] a credit card for the llc
+[00:11:14] and so all your expenses relate to
+[00:11:16] trading you consolidate in the llc it
+[00:11:18] makes the taxes a lot simpler and it
+[00:11:20] makes it very clean especially if you're
+[00:11:22] working with an accountant though you'll
+[00:11:23] have your p l for the llc this is all
+[00:11:25] the trading profit and then these are
+[00:11:27] the expenses related to trading it was
+[00:11:29] my subscriptions my market data fees you
+[00:11:32] know this and that that were related to
+[00:11:33] that income so you know again you have
+[00:11:36] to talk to an accountant on this because
+[00:11:38] different accounts will have different
+[00:11:39] points of view on it um you know and
+[00:11:42] short-term capital gains also
+[00:11:43] self-employment tax this is an area
+[00:11:45] where uh there could be
+[00:11:47] some accounts they might have an opinion
+[00:11:50] on if you're setting up a business at
+[00:11:52] what point what is the nature of that
+[00:11:54] business what is it doing if it's all
+[00:11:56] its income is short-term capital gains
+[00:11:58] then okay
+[00:11:59] if there's other business you're
+[00:12:01] commingling in the same llc
+[00:12:03] then you can start to have some issues
+[00:12:04] so make sure you talk to an accountant
+[00:12:07] about all of this stuff
+[00:12:09] write down your notes think about what
+[00:12:10] your goals are and talk to a cpa
+[00:12:12] one of the things that i also want to
+[00:12:15] encourage you to think about is
+[00:12:17] tax
+[00:12:18] free
+[00:12:20] or
+[00:12:21] tax
+[00:12:22] deferred accounts so a tax deferred
+[00:12:25] account for instance would be a
+[00:12:27] 401k oops or a
+[00:12:31] traditional i ira
+[00:12:34] or a tax-free account would be a roth
+[00:12:36] ira now as you may know roth iras are
+[00:12:40] extremely popular and there's been some
+[00:12:43] conversation about whether or not
+[00:12:45] the amount of money you can grow in a
+[00:12:46] roth ira should be limited because some
+[00:12:48] people have grown them to billions of
+[00:12:50] dollars completely tax-free so again
+[00:12:53] it's become maybe a tax loophole if you
+[00:12:55] want to call it that but it's perfectly
+[00:12:58] within your right to trade in a
+[00:12:59] tax-deferred account and so if you don't
+[00:13:02] need all of the money that you're making
+[00:13:04] right now does it make sense to start
+[00:13:06] making that step today to trade more in
+[00:13:08] a tax-deferred account so you can plan
+[00:13:10] for your retirement and these are things
+[00:13:12] that if you start doing them sooner the
+[00:13:14] sooner you start the more you can
+[00:13:15] benefit from the compound interest from
+[00:13:17] that good decision so tax deferred
+[00:13:19] accounts they're a big plus there's a
+[00:13:22] lot of brokers including td ameritrade
+[00:13:23] that will let you trade in a roth ira
+[00:13:26] so you know why not and then if you're
+[00:13:28] trading in that account you don't have
+[00:13:29] to worry about wash sales because you
+[00:13:30] don't have to worry about taxes it's
+[00:13:32] tax-free so think about it you've got
+[00:13:35] your short-term capital gains but that's
+[00:13:37] only for
+[00:13:38] trades that are in a traditional cash or
+[00:13:40] margin account in your own name not tax
+[00:13:42] deferred account you will have wash
+[00:13:44] sales you could apply to mark to market
+[00:13:46] accounting if you wanted to if you
+[00:13:48] thought it was significant enough but
+[00:13:50] you may think it's not worth the trouble
+[00:13:51] and you might not be wrong about that
+[00:13:53] it's whatever makes the most sense for
+[00:13:54] you and then of course you have moving
+[00:13:56] towards tax deferred accounts and then
+[00:13:59] you know ultimately probably the best
+[00:14:00] scenario would be that your taxable
+[00:14:03] account becomes long-term investments
+[00:14:07] and dividend passive fixed income so if
+[00:14:09] you start getting fixed income passive
+[00:14:10] income from dividend investments that
+[00:14:12] are a long-term capital gain that's at a
+[00:14:15] lower rate so wouldn't that be sort of
+[00:14:17] the perfect scenario that you've moved
+[00:14:19] as much as possible of your um short
+[00:14:23] term
+[00:14:24] capital gains into
+[00:14:27] a 401k
+[00:14:28] oops sorry uh an ira my goodness or a
+[00:14:32] roth
+[00:14:34] all right that would be great and then
+[00:14:36] your um
+[00:14:38] your your regular account that's taxable
+[00:14:41] would be
+[00:14:42] so you know taxable account
+[00:14:45] this would be your um your long-term
+[00:14:49] capital gains it would be your
+[00:14:51] you know potentially dividends you you
+[00:14:54] would have um fixed income things like
+[00:14:56] that maybe maybe you would also just in
+[00:14:59] general have rental income or things
+[00:15:01] like that again you know it depends on
+[00:15:04] what your situation is but your goal
+[00:15:06] would be anything that's a short-term
+[00:15:07] capital gain see if you can get that
+[00:15:09] moved over into
+[00:15:12] one of these tax accounts tax-free
+[00:15:14] accounts or tax deferred accounts that
+[00:15:15] would be a good decision right and if
+[00:15:17] you're young enough and you start doing
+[00:15:19] that now the benefits will compound over
+[00:15:22] years and years and years if you're a
+[00:15:23] little bit older you know well then you
+[00:15:26] know you're in a little bit different
+[00:15:27] situation also from tax bracket
+[00:15:29] roth ira and things like that are a
+[00:15:31] little bit different if you're a bit
+[00:15:31] older so you know there's a lot of
+[00:15:33] different factors there's not um you
+[00:15:35] know one solution for everyone and
+[00:15:37] that's why it's such a good idea to
+[00:15:39] consult a cpa before you make any final
+[00:15:41] decisions so i hope this has been
+[00:15:42] helpful if it has hit the thumbs up and
+[00:15:44] i'll put another video here of another
+[00:15:46] one i think you guys should check out if
+[00:15:47] you want to keep learning about trading
+[00:15:49] all right i'll see you for the next
+[00:15:50] episode and that right there was an
+[00:15:52] entire video with no ads i don't
+[00:15:54] monetize my youtube channel with video
+[00:15:56] ads which means you guys get to enjoy
+[00:15:57] the content but do me a favor please hit
+[00:16:00] that subscribe button and give me a
+[00:16:01] thumbs up and let youtube know that this
+[00:16:03] channel is the channel to watch if you
+[00:16:05] want to learn about day trading
+[00:16:08] [Music]

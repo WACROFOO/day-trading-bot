@@ -1,0 +1,554 @@
+# Coping with Setbacks as a Beginner Day Trader
+# https://www.youtube.com/watch?v=xauLV_WHXgc
+# duration_sec: 1428
+
+[00:00:00] What's up, guys? All right, so we're
+[00:00:03] going to do a little segment here called
+[00:00:06] Driving with Ross. Take a little drive.
+[00:00:08] We're going to talk about life. We're
+[00:00:10] going to talk about the stock market and
+[00:00:13] we're going to talk about some of my
+[00:00:15] biggest struggles as a trader.
+[00:00:18] So, over the years, um, you know, I've
+[00:00:21] always spent a lot of time in the car
+[00:00:23] when I was driving back and forth from
+[00:00:25] New York City to Vermont and then just
+[00:00:27] living in Vermont. It's a rural area, so
+[00:00:30] you know, anytime you want to go
+[00:00:31] somewhere, it's a good 20 minutes, 30
+[00:00:33] minutes, sometimes longer. Um, so you
+[00:00:36] end up spending a lot of time in the
+[00:00:37] car, which uh is nice and for me is
+[00:00:41] always giving me time to kind of reflect
+[00:00:43] on um you know, what's going on in my
+[00:00:46] life. And trading has been a really big
+[00:00:49] part of my life for um quite a long time
+[00:00:52] now. And of course, as a beginner
+[00:00:55] trader, it was a real it was a real
+[00:00:59] struggle for me. And so the time I would
+[00:01:01] spend in the car would be kind of
+[00:01:03] reflecting on the struggles I was
+[00:01:06] having, the challenges, and trying to
+[00:01:08] kind of brainstorm how I could really
+[00:01:12] get a grasp on, you know, how to make a
+[00:01:15] a living as a trader. One of the things
+[00:01:17] that for me was always um you know kind
+[00:01:21] of a challenge was seeing how successful
+[00:01:26] you could be as a trader. Uh and that
+[00:01:29] you can see that just uh you know
+[00:01:31] whether you're looking at other people,
+[00:01:33] you know, talking about their wins or
+[00:01:36] even seeing when you take a couple
+[00:01:37] trades how within minutes you can be up
+[00:01:42] or down, you know, hundreds or thousands
+[00:01:44] of dollars. So you realize the market
+[00:01:48] offers potential to be extremely
+[00:01:51] profitable and and to become fairly
+[00:01:53] wealthy if you can just master uh some
+[00:01:58] type of strategy to give you right good
+[00:02:00] entries uh and to know when to sell.
+[00:02:04] Sounds easy but obviously for most um
+[00:02:08] that doesn't come easily and it doesn't
+[00:02:10] doesn't ever come at all. only 10% of
+[00:02:12] the traders who uh try to trade the
+[00:02:15] markets profitably will end up uh making
+[00:02:18] a career out of it and and the rest just
+[00:02:20] you know leave the market frustrated um
+[00:02:24] with big losses and and sometimes very
+[00:02:26] angry and I can understand that because
+[00:02:29] I uh felt very frustrated during my
+[00:02:32] early years trying to learn how to
+[00:02:34] trade. It was seeming like everything I
+[00:02:37] tried was the exact opposite. Every time
+[00:02:40] I went long, I should have been going
+[00:02:42] short. Every time I bought calls, I
+[00:02:44] should have been buying puts. It was
+[00:02:46] just really uh a very frustrating
+[00:02:49] process.
+[00:02:51] And so I would spend time in the car uh
+[00:02:53] kind of thinking about it. And I I can
+[00:02:55] remember days um I remember a summer day
+[00:03:00] I was driving and I had just taken a
+[00:03:02] $4,000 loss and I just felt so
+[00:03:06] devastated and I was kind of, you know,
+[00:03:08] talking to myself about what are you
+[00:03:10] doing here? How how much longer are you
+[00:03:12] going to, you know, keep doing this? I
+[00:03:14] mean, you're taking these big losses.
+[00:03:17] You have a winning streak of two or
+[00:03:21] three weeks where you make maybe $1,000
+[00:03:23] a week. And then in one day you lose
+[00:03:26] four grand. You just gave back a month
+[00:03:28] of progress and you know what is wrong
+[00:03:31] with me? Why do I keep doing that?
+[00:03:34] And you know through that kind of period
+[00:03:38] of self-reflection
+[00:03:41] um combined with you know later going
+[00:03:44] home and actually pouring through my
+[00:03:47] trade logs and trying to figure out is
+[00:03:49] there some rhyme or reason to what I'm
+[00:03:51] doing? Is there a pattern where I do
+[00:03:54] really well with one thing and I'm doing
+[00:03:56] badly with another? Uh through all of
+[00:03:58] that, I was able to kind of hone in on a
+[00:04:03] couple of strategies that were
+[00:04:04] moderately consistent.
+[00:04:07] Uh that was trading momentum and in the
+[00:04:11] form of like bull flag patterns, flat
+[00:04:13] top breakouts, stuff like that. Uh and I
+[00:04:16] found that I was most successful on
+[00:04:18] those patterns on lowerric stocks.
+[00:04:21] Although I traded higher price stocks
+[00:04:22] for quite a while also and those
+[00:04:24] patterns do work on higher price stocks
+[00:04:26] uh and they can work really well. You
+[00:04:28] just can't take as much size so you
+[00:04:29] can't make as much money usually. Um
+[00:04:33] your risk is going to be higher. And
+[00:04:35] then also trading reversals, bottom
+[00:04:39] bounces, stocks that have had, you know,
+[00:04:42] 10, 15 consecutive red candles, looking
+[00:04:45] for that first green candle. It's pretty
+[00:04:47] consistent uh when you dial in and
+[00:04:50] really have all the filters tuned
+[00:04:51] properly. And then trading the gappers,
+[00:04:54] stocks that were gapping up uh or
+[00:04:56] gapping down and then trading those uh
+[00:04:59] you know either to the upside with the
+[00:05:01] trend or the downside depending on the
+[00:05:03] setup
+[00:05:05] and I was able to generate some success
+[00:05:08] focusing on just those three strategies.
+[00:05:11] And so, you know, those are the three
+[00:05:13] strategies that we teach now in uh the
+[00:05:15] trading courses, and they're the three
+[00:05:17] strategies that I pretty much use to
+[00:05:19] make a living as a trader. This week, I
+[00:05:22] made $11,000. Last week, I made $11,000.
+[00:05:25] It's it's crazy. That's more money in in
+[00:05:28] two weeks than I made my whole first
+[00:05:30] year of trading. That's more than I made
+[00:05:32] net in my first 18 months of trading
+[00:05:35] because I was red the whole time. So,
+[00:05:38] you know, that that was sort of like
+[00:05:39] knowing that that was the potential as a
+[00:05:42] beginner trader, that in one week I
+[00:05:44] could make $11,000.
+[00:05:47] That's kind of what what kept me going
+[00:05:49] for a long time is knowing that if I can
+[00:05:51] get this, I can do really well. It's
+[00:05:54] just a matter of uh you know, adopting
+[00:05:57] that strategy. And for me, it was just
+[00:05:59] developing it. I didn't really have a
+[00:06:01] strategy that I could adopt. And so all
+[00:06:03] of our students are fortunate in that
+[00:06:05] sense because you can look at my
+[00:06:08] strategy as sort of a template of what
+[00:06:10] works. And it's not to say it's going to
+[00:06:12] work for everybody because we all have
+[00:06:13] different trading styles and you know
+[00:06:16] different aptitudes for uh you know
+[00:06:18] computers and success in the market. But
+[00:06:21] it's a strategy that does work for me.
+[00:06:23] It's a good idea to look at it as kind
+[00:06:25] of a
+[00:06:26] um you know a plan or a a template or a
+[00:06:30] strategy for potentially being
+[00:06:32] successful in the market. Um so you guys
+[00:06:36] are at a a pretty big advantage by
+[00:06:38] having someone that can teach you that.
+[00:06:41] I didn't have that really when I was
+[00:06:42] learning to trade. And it's not to say
+[00:06:45] that there weren't people out there that
+[00:06:46] were um you know teaching trading and
+[00:06:49] stuff like that. I just I I suppose I
+[00:06:52] was being a little stubborn and I didn't
+[00:06:55] want to uh take a class. You know, the
+[00:06:58] classes that I saw out there, I just
+[00:07:00] couldn't tell if they were reputable and
+[00:07:02] the chat rooms I would try out didn't
+[00:07:06] feel very educational. So, there was
+[00:07:07] really no desire to try to learn more
+[00:07:09] from whoever was running that room. Um,
+[00:07:14] and you know, things are different now.
+[00:07:17] And we offer, of course, the chat room,
+[00:07:20] which gives people a kind of real time
+[00:07:22] glimpse into what it's like to be uh,
+[00:07:25] you know, a professional full-time
+[00:07:27] trader. And
+[00:07:29] then, of course, all of the trades that
+[00:07:31] we call out in the room come with a deep
+[00:07:34] analysis, the commentary, you know, the
+[00:07:37] trade reviews. And so, it's not just I
+[00:07:40] bought XYZ
+[00:07:43] and that's it. It's I bought this
+[00:07:44] because it's this strategy. this is the
+[00:07:47] setup, this is what I like about it. And
+[00:07:50] you know, that all gives a lot more
+[00:07:52] context to the trades and that allows
+[00:07:54] students to really learn. And then if
+[00:07:55] they're ready to dedicate themselves,
+[00:07:57] they can of course join our trading
+[00:07:59] courses.
+[00:08:00] So, um, in any case, kind of talk a
+[00:08:06] little bit about my trades from the week
+[00:08:08] here and the month of August so far.
+[00:08:11] This month has been really crazy because
+[00:08:13] I have done really well. I've had some
+[00:08:17] really huge winners. I had a $10,000 day
+[00:08:20] this week and I had a $10,000 day uh
+[00:08:23] last week as well. So, some big days.
+[00:08:26] But during the last two weeks, I've also
+[00:08:29] seen a lot of volatility where I've seen
+[00:08:31] uh my biggest single trade winner of the
+[00:08:34] year, my biggest single trade loss of
+[00:08:36] the year, and uh my biggest uh point
+[00:08:41] gain of the year, which was crazy. So,
+[00:08:44] uh, let's just kind of do a a brief
+[00:08:46] recap of where I'm at on the month. And
+[00:08:48] this is what I'm going to do here is is
+[00:08:50] basically the type of thing I would do,
+[00:08:52] um, just by myself for myself for my own
+[00:08:55] benefit because this is the type of
+[00:08:57] thing that I needed to do to really get
+[00:09:00] a better understanding of my trading is
+[00:09:02] having these periods of reflection.
+[00:09:05] So, what's going on this month with me?
+[00:09:07] Why am I trading in such a kind of
+[00:09:10] whippy way?
+[00:09:12] Well, I think that I've had it in my
+[00:09:15] mind that August was going to be a tough
+[00:09:17] month. It's kind of historically been a
+[00:09:19] hard month for me the last couple years.
+[00:09:21] So, I was sort of worried that it would
+[00:09:24] be slow summer trading and we wouldn't
+[00:09:26] be seeing good resolution on the
+[00:09:29] momentum and that I would really have to
+[00:09:32] be super aggressive on, you know, a
+[00:09:36] small number of trades if I was going to
+[00:09:37] do well this month.
+[00:09:40] So, I kind of came into the month with a
+[00:09:42] little bit of a mental bias that it was
+[00:09:44] going to be a hard month. Uh, and then
+[00:09:46] with that said, I also get a little
+[00:09:49] aggressive at the beginning of each
+[00:09:51] month because I really want to get
+[00:09:53] myself into the driver's seat. Everyone
+[00:09:55] wants to be in the driver's seat, and to
+[00:09:56] me that means I'm green on the month.
+[00:09:58] I've got a cushion, and now anything
+[00:10:01] that I'm adding is just like icing on
+[00:10:03] the cake. But you got to do the hard
+[00:10:05] work before you can get into the
+[00:10:07] driver's seat. you can't just, you know,
+[00:10:09] start in the driver's seat. And I feel
+[00:10:11] this way at the beginning of uh each
+[00:10:13] calendar year. I feel it a little bit at
+[00:10:15] the beginning of each month and a little
+[00:10:17] bit at the beginning of each week. It's
+[00:10:18] just sort of that mental um you know,
+[00:10:21] you're sort of starting over, fresh
+[00:10:23] week, fresh month, fresh year. And you
+[00:10:25] really want to get yourself into the
+[00:10:26] green as quickly as possible. Uh
+[00:10:28] sometimes that's led me to be overly
+[00:10:31] aggressive at the beginning of the
+[00:10:32] month, kind of in like desperation to
+[00:10:34] get myself in that driver's seat.
+[00:10:37] Uh that happened a little bit this
+[00:10:40] month. Um I got aggressive pretty early
+[00:10:43] on and on on Tuesday, the second count,
+[00:10:46] second trading day of August, I traded
+[00:10:49] ship. I was up $3,000 on it, which was
+[00:10:53] awesome. But I wasn't happy with that
+[00:10:56] because I missed the good entry at $4. I
+[00:11:00] saw it at $4 and I thought the volume
+[00:11:02] was a little bit too low. So, I was
+[00:11:04] like, uh,
+[00:11:06] I mean, I like the setup. It looks good,
+[00:11:08] but there was only maybe 50 or 60,000
+[00:11:11] shares of volume. So, I was just kind of
+[00:11:14] like, I don't know if people are if
+[00:11:15] anyone's really watching this stock. I'm
+[00:11:17] not sure if it's going to be a hot
+[00:11:18] stock. Next thing I know, it spikes up
+[00:11:20] to $5 and then up to 550. So, I was
+[00:11:24] like, "Oh, man. Oh, really missed missed
+[00:11:27] the boat on this one." But I decide to
+[00:11:30] jump in at 550 anyways on a micro
+[00:11:33] pullback. Small bull flag under 550. I
+[00:11:37] jump in for the breakout and I ride it
+[00:11:40] up to 650 and I scale out on the move to
+[00:11:43] 650. Uh making $3,000.
+[00:11:47] I thought, "Hey, that's great. Good
+[00:11:48] job." Next thing I know, it's at $7. Now
+[00:11:51] it's at $750.
+[00:11:53] And I'm starting to feel frustrated.
+[00:11:55] I've got that kind of fear of missing
+[00:11:57] out. The feeling that man, this stock
+[00:11:59] just ran from $4 to 750 and I I didn't
+[00:12:03] capitalize on it properly. Um, you know,
+[00:12:07] what is going on with me? What? I should
+[00:12:09] have been holding this longer.
+[00:12:11] Maybe this is the stock that's going to
+[00:12:13] run to, you know, $10. How far is it
+[00:12:16] going to go? So, I add back at 750. I
+[00:12:19] stop out at 650 and I lose $6,000.
+[00:12:24] So, I go from being up three grand to
+[00:12:25] down three grand. It was brutal. And and
+[00:12:28] there's nothing worse than going from
+[00:12:31] being way above your daily goal to being
+[00:12:33] at your max loss on the day. It's one of
+[00:12:36] the single worst things you can do
+[00:12:39] emotionally and psychologically for
+[00:12:41] yourself. So, I was like, "Oh, great."
+[00:12:43] You know, I really just screwed myself
+[00:12:46] up there. And that was my that was kind
+[00:12:48] of the start of my cushion on the month
+[00:12:50] and I just threw it away. being overly
+[00:12:52] aggressive, chasing.
+[00:12:55] So, I was very disappointed with myself
+[00:12:57] on that day. Uh, I don't mind losing,
+[00:13:00] but I I don't like losing when I feel
+[00:13:02] like it's just unnecessary because I
+[00:13:05] kind of broke a rule, like chasing or
+[00:13:08] something like that, or mismanaging
+[00:13:10] risk, which I did. Also, I took too much
+[00:13:12] size. Um, I took 6,000 shares, which was
+[00:13:16] too much size for a second entry after a
+[00:13:19] second halt. It's just not smart.
+[00:13:22] So, you know, if you're going to get
+[00:13:24] aggressive, and this is no matter what
+[00:13:26] it is, if it's trading, you know, if
+[00:13:28] it's skiing, um, you know, mountain
+[00:13:31] biking, when you get aggressive,
+[00:13:33] sometimes you you get knocked down. And
+[00:13:37] you just have to know that that's uh
+[00:13:39] what comes with the territory. So, if
+[00:13:42] you want to be aggressive, that's fine.
+[00:13:44] It's fun when it works out, but when it
+[00:13:46] doesn't work out, you just have to be
+[00:13:47] prepared for it to hurt a little bit.
+[00:13:51] Some people aren't and so they're going
+[00:13:52] to, you know, kind of gravitate to a
+[00:13:55] more moderate strategy that's more
+[00:13:56] conservative. Other people, they want to
+[00:13:59] feel those big extremes and they're
+[00:14:01] going to go big for stuff and sometimes
+[00:14:03] it's going to pay off big time and
+[00:14:04] sometimes it won't. So anyways, had that
+[00:14:08] red day early in the month. Um, I
+[00:14:11] bounced back the next day uh with a
+[00:14:16] aggressive trade and I made $10,000.
+[00:14:19] It's not uncommon for me to have uh
+[00:14:22] back-to-back trades that are really big
+[00:14:25] losses and then really big winners. And
+[00:14:28] I know it's because I'm compensating for
+[00:14:29] the loss by being more aggressive on the
+[00:14:31] following trade. That can be good and it
+[00:14:34] can be bad. Uh the the risk is that if
+[00:14:38] you're a beginner trader,
+[00:14:40] when you decide to overcompensate and be
+[00:14:43] aggressive, because you're still new,
+[00:14:45] your accuracy is probably not as good.
+[00:14:47] So, you're more apt to be aggressive on
+[00:14:50] not a very good setup, on a bad setup,
+[00:14:52] and then you have a good chance of
+[00:14:55] losing even more. Now, you've lost once,
+[00:14:58] you went in with double the size, now
+[00:14:59] you've lost double the amount, and
+[00:15:01] you're down three times. You know, I
+[00:15:02] mean, it's that's what happened to me a
+[00:15:05] lot as a beginner trader. And that's
+[00:15:06] what would cause those snowball days
+[00:15:08] where, you know, I would have a red day
+[00:15:11] and then the next day would be even more
+[00:15:12] red, then even more and even more. and
+[00:15:14] I'd have three days or so where I would
+[00:15:16] give back, you know, a ton of progress.
+[00:15:18] So,
+[00:15:21] that instinct can be dangerous. Uh, but
+[00:15:25] once you have good intuition and you can
+[00:15:29] say that all of your trading decisions
+[00:15:32] are, you know, educated and and well
+[00:15:34] informed, and for me, I have a 70%
+[00:15:37] success rate. And that's even when I'm
+[00:15:39] making kind of risky decisions, my
+[00:15:41] success rate is still about 70% because
+[00:15:44] generally I make good decisions. So that
+[00:15:46] means that even if I'm going to be
+[00:15:47] aggressive, I still have a 70% chance
+[00:15:49] that I'm going to be right. And those
+[00:15:51] are pretty good odds. So statistics are
+[00:15:54] in my favor. So the next day I had a big
+[00:15:56] bounce back, which was good.
+[00:15:58] The day after that, I hit my max loss
+[00:16:00] again. So, um, you know, I was trying to
+[00:16:06] be aggressive again, hit my max loss,
+[00:16:09] and then that was on SP, uh, no, S AEX,
+[00:16:14] the stock that went from like $2 to
+[00:16:19] was it $10? It went from $10 to $30. And
+[00:16:23] I got in at 30 thinking, look, this
+[00:16:25] thing is strong. A break over the whole
+[00:16:27] dollar looks good. It breaks over 30 up
+[00:16:30] to maybe 3050 or 31 and it drops down to
+[00:16:34] 25. I lost like four points. It was
+[00:16:37] pathetic. It was a just pathetic
+[00:16:40] display. Um I had small size, but I
+[00:16:44] still ended up hitting my max loss and I
+[00:16:46] was really frustrated. The next day I
+[00:16:49] get back in, I look at it and it had
+[00:16:51] gone up to $48. From $10 to $48 in one
+[00:16:55] day, which is crazy. I saw it gapping up
+[00:16:58] the next day and looking like it was
+[00:17:00] opening just under 48. And I thought,
+[00:17:03] you know what? If this thing opens and
+[00:17:04] breaks 48, yesterday's high, it's going
+[00:17:07] to be a squeeze. This looks just like,
+[00:17:09] you know, AQXP, KBIO, some of those
+[00:17:12] stocks that just went crazy. And then
+[00:17:14] the following day, even crazier. So, I
+[00:17:17] got in at $48 and I scaled out on the
+[00:17:22] move to $72 per share. with only 200
+[00:17:26] shares, I made $4,000
+[00:17:28] for my biggest point gainer ever. Um, I
+[00:17:32] think that might be my biggest point
+[00:17:33] gainer ever. I had a really good trade
+[00:17:35] on VRX last year. I don't know how many
+[00:17:37] points it was, but in any case, it was
+[00:17:40] definitely my biggest point gainer of
+[00:17:41] the year being up uh like 22 points or
+[00:17:45] 24 points per share, $24 per share,
+[00:17:48] which is ridiculous.
+[00:17:51] So, you know, came back on that Friday
+[00:17:54] up whatever it was, $4,000 on the day.
+[00:17:57] Really solid day. And then this week,
+[00:18:01] you know, again, I was like, early in
+[00:18:03] the week, I was like, look, you got to
+[00:18:04] kind of stabilize this volatility
+[00:18:06] because you're I I don't I want to just
+[00:18:09] I'd love to make $10,000 a week
+[00:18:11] consistently doing 2500 a day or
+[00:18:15] something like that. not having a day
+[00:18:17] where I'm down four grand and then up 10
+[00:18:19] grand or whatever.
+[00:18:22] But, uh, nonetheless, I got aggressive
+[00:18:25] this week and I I went red.
+[00:18:30] First day of the week, I was up $3,000
+[00:18:32] or 2,800.
+[00:18:34] Um, solid day, solid Monday, great start
+[00:18:38] to the week. And then I come back after
+[00:18:40] lunch. Um, and I'm sitting in front of
+[00:18:43] my computer, which I do. I mean, I come
+[00:18:44] back, I don't leave for the day. Okay, I
+[00:18:45] come back and I usually work. I'll maybe
+[00:18:47] do a blog post or I have uh meetings
+[00:18:50] with students, mentor sessions, stuff
+[00:18:52] like that. So, I'm I'm working in one
+[00:18:54] way or another, but I don't usually
+[00:18:55] trade in the afternoon because my
+[00:18:57] accuracy is low and I just I usually
+[00:18:59] screw up. But for whatever reason, I
+[00:19:02] decided to take a trade in the
+[00:19:04] afternoon. And I took 5,000 shares. I
+[00:19:08] think it was 5,000. And I promptly lost
+[00:19:11] 1,300 bucks.
+[00:19:13] So, I again, you know, I went from being
+[00:19:15] up 2,800 to up only about $1,000,
+[00:19:19] $1,300, which still my daily goal, but
+[00:19:22] was annoying.
+[00:19:24] Uh, I come in Tuesday,
+[00:19:28] take three trades. The first one I lose
+[00:19:30] on, second one I lose on, the third one
+[00:19:35] I lost on. Three trades in a in a row,
+[00:19:38] down 2,800 bucks. Max loss, I'm done for
+[00:19:40] the day. My last trade was like the big
+[00:19:43] loser. So,
+[00:19:46] so annoying. Uh, stopped out. You know,
+[00:19:49] this is also something that I find. I'm
+[00:19:51] either on or I'm off. My green days, I'm
+[00:19:54] green on, you know, five out of five
+[00:19:56] names. And on my red days, I'm usually
+[00:19:58] red on everything. And I have a rule
+[00:20:00] where if I take three losses in a row
+[00:20:02] back to back, I'm done trading on the
+[00:20:03] day. I also have a rule that once I'm
+[00:20:05] down more than a,000 bucks, I won't take
+[00:20:08] on any new trades. But that doesn't stop
+[00:20:10] me from being down 400 and taking 10,000
+[00:20:14] shares and then losing 20 cents, which
+[00:20:16] is what happened on um on Tuesday.
+[00:20:21] Wednesday, I come back and
+[00:20:24] uh I only made $29. There was just
+[00:20:27] nothing moving. The market felt slow.
+[00:20:29] So, I was like, "All right, that's fine.
+[00:20:31] It's kind of a rest day, you know, not
+[00:20:33] it's not a bounceback day, but I'm just
+[00:20:36] kind of break even, whatever."
+[00:20:38] And then uh Thursday, $10,000 day.
+[00:20:43] Crushed it. Two big trades. Uh7,000 on
+[00:20:47] one name, like 3,000 or so on another.
+[00:20:50] Just really solid, awesome trades. Nice
+[00:20:54] momentum. And I was being aggressive. 5
+[00:20:56] 10,000 shares looking for big moves. And
+[00:20:59] I got them.
+[00:21:02] Uh Friday, another 2500 bucks. Again,
+[00:21:06] good success, good accuracy. Finished
+[00:21:09] the week up 11,000. $11,000 plus or
+[00:21:12] minus right around there. About the
+[00:21:13] same, almost about the same within
+[00:21:15] probably $30 of of uh last week. So,
+[00:21:19] puts me up about 22,000 on the month. Uh
+[00:21:22] my best month ever right now is $34,000.
+[00:21:26] So, that was June. And then in July, I
+[00:21:29] did 32,000. Almost breaking my record. I
+[00:21:32] was in uh Paris for a week in July
+[00:21:37] and when I was on vacation, you know, I
+[00:21:40] was trading on my laptops and I
+[00:21:43] typically trade with smaller size when
+[00:21:45] I'm on vacation. Uh and I did I trade
+[00:21:47] with smaller size. So even with a week
+[00:21:50] where I was being really conservative, I
+[00:21:53] still made $32,000.
+[00:21:55] And now here we are in August, typically
+[00:21:58] a slow month, and I'm up 22,000 still
+[00:22:01] with I think 13 or 14 trading days left
+[00:22:05] in the month. So, I would really like to
+[00:22:09] um I'd love to be able to break my goal
+[00:22:11] from June. On the other hand, my monthly
+[00:22:14] goal, I've already beaten it being up
+[00:22:16] 22,000. So, I don't want to be super
+[00:22:19] aggressive and then res have the, you
+[00:22:22] know, a big loss as a result. If I can
+[00:22:25] do just, you know, kind of scale it back
+[00:22:27] down to five to$7,000 a week, I still
+[00:22:30] have a good chance of beating my June
+[00:22:33] goal and
+[00:22:36] adding some icing to the cake. Now, this
+[00:22:38] month I I do get competitive. I want to
+[00:22:41] beat my own record, but I don't want to
+[00:22:44] let that um cloud my judgment and cause
+[00:22:49] me to make high risk decisions. So
+[00:22:53] hopefully we'll continue to see good
+[00:22:54] opportunities. When I see a good
+[00:22:56] opportunity, I'll be aggressive and if I
+[00:22:58] don't see anything good, I won't trade
+[00:22:59] at all. That's pretty much the way I'm
+[00:23:01] going to do it. Uh that's going to may
+[00:23:03] mean I have high percentage of success,
+[00:23:05] really good accuracy. Um hopefully I'll
+[00:23:08] have good profit loss ratios and even if
+[00:23:11] I'm not taking really big size, I should
+[00:23:13] be able to generate some solid profits.
+[00:23:16] So goal is to try to level out this
+[00:23:19] equity curve a little bit in uh you know
+[00:23:23] the next two weeks.
+[00:23:25] Uh but also hopefully finish the month
+[00:23:27] with some good gains.
+[00:23:29] All right, so um I guess that about
+[00:23:33] wraps up uh this episode of Driving with
+[00:23:36] Ross. I hope you guys have enjoyed it.
+[00:23:39] Uh you can leave comments or of course
+[00:23:41] email me rosswarriortrading.com.
+[00:23:44] All right guys, I'll see you in the chat
+[00:23:45] room. uh first thing tomorrow morning.

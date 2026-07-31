@@ -1,0 +1,520 @@
+# Short Selling Stocks Explained
+# https://www.youtube.com/watch?v=TTvaXCmtVbI
+# duration_sec: 1237
+
+[00:00:00] what's up everybody all right so today
+[00:00:02] we're going to talk about short selling
+[00:00:04] Traders often ask me the question what
+[00:00:07] is short selling and how do I short
+[00:00:09] stocks all right so today we're going to
+[00:00:12] go into day trading terminology and the
+[00:00:14] term short selling now this also is
+[00:00:17] going to require understanding a few
+[00:00:19] other terms so I'm going to walk you
+[00:00:21] through those and we're going to jump
+[00:00:22] right in here all right so um to start
+[00:00:25] with short selling is the very simple
+[00:00:29] process of selling a stock and then
+[00:00:32] buying it back at a lower price now most
+[00:00:34] of us we've got a long bias on the
+[00:00:36] market that means we look at the market
+[00:00:38] and we see a stock and we want to buy it
+[00:00:40] and sell it for a higher price well you
+[00:00:42] can do just the opposite you can sell a
+[00:00:44] price sell a stock high and then cover
+[00:00:47] it buy back that position at a lower
+[00:00:49] price you sell High you buy low you can
+[00:00:53] trade the market both directions which
+[00:00:55] is a really cool thing but there are a
+[00:00:58] few reasons why the market is
+[00:00:59] structuring
+[00:01:00] to be long biased so it's kind of like a
+[00:01:03] house advantage I think there's a long
+[00:01:05] Advantage when you're trading the market
+[00:01:07] and it's just because of um a few
+[00:01:09] regulations and a few ways that uh
+[00:01:11] shorts are structured all right so we're
+[00:01:13] going to go into that uh but first you
+[00:01:15] need to understand that to short sell
+[00:01:18] you need a margin account there are two
+[00:01:20] types of accounts that you can open when
+[00:01:22] you uh set up an account with a broker
+[00:01:24] you can have a cash account or you can
+[00:01:26] have a margin account now in a cash
+[00:01:30] account uh you fund the account with
+[00:01:32] $10,000 and you've got $10,000 cash in
+[00:01:35] that account now when you buy a stock
+[00:01:37] let's say for $8,000 and sell it you not
+[00:01:40] have to wait three days for that
+[00:01:42] transaction to settle before you can
+[00:01:44] trade with that money again now when you
+[00:01:47] apply for a margin account it's an
+[00:01:49] agreement between you and the broker and
+[00:01:51] they're going to say you know what yes
+[00:01:53] that trade is going to take 3 days to
+[00:01:55] settle but we're going to go ahead and
+[00:01:56] let you keep trading with your $110,000
+[00:01:59] because we know you're good for it all
+[00:02:01] right so you don't have to wait
+[00:02:03] settlement periods you can start trading
+[00:02:05] right away and you can also borrow money
+[00:02:08] from the broker now when you trade on
+[00:02:10] you know on margin or when you're
+[00:02:12] trading while positions are settling you
+[00:02:14] essentially already are borrowing money
+[00:02:16] from the broker but when you start
+[00:02:18] shorting stocks you're going to be
+[00:02:20] selling a position that the broker has
+[00:02:23] you sell shares that they have and
+[00:02:25] you're basically selling it and then
+[00:02:27] later you buy back and pay them back so
+[00:02:30] to start Short Selling you need to have
+[00:02:32] a margin account as a day trader we
+[00:02:36] already use margin we need margin
+[00:02:38] because it's what allows us to trade 10
+[00:02:40] times a day even if you only have a
+[00:02:42] $30,000 balance you could trade $3,000
+[00:02:46] or $400,000 worth of stock in a single
+[00:02:49] day and that's thanks to having a margin
+[00:02:52] account all right so short side trading
+[00:02:55] or short selling these are traders who
+[00:02:57] are bearish on the market they look at
+[00:03:00] the market and they look for stocks that
+[00:03:01] they think are really extended to the
+[00:03:04] upside and need to reverse they need to
+[00:03:06] come back down so when you short when
+[00:03:09] you take a short position what you're
+[00:03:11] doing is you're creating a negative
+[00:03:13] share balance all right so I'm going to
+[00:03:15] show you what that looks like here um
+[00:03:18] basically what it means is that if you
+[00:03:19] short a th000 shares you're going to
+[00:03:21] show up as in your in your positions as
+[00:03:24] having minus 1,000 shares that's the
+[00:03:27] same as when you buy a stock and you
+[00:03:29] have Plus a th000 when you short a stock
+[00:03:31] you're going to have minus a th000 all
+[00:03:33] right so let me show you here this is
+[00:03:35] our fancy stock Traders simulator so
+[00:03:38] we're going to do let's do a a Sprint
+[00:03:41] here all right so a th000 shares if I
+[00:03:43] buy a th000 shares right let me just do
+[00:03:46] this with the hotkey I buy a th000
+[00:03:47] shares right I'm long 1,000 I go ahead
+[00:03:51] and sell it I'm break even now I go
+[00:03:54] ahead and short and now I've got minus
+[00:03:56] 1,000 shares so I can trade the market
+[00:03:59] both directions I'm not restricted to
+[00:04:01] only trading uh One Direction only
+[00:04:03] trading to the long side and that makes
+[00:04:05] us much more agile as day Traders now
+[00:04:08] there are often times my primary
+[00:04:10] strategy for shorting stocks is to look
+[00:04:12] for stocks that are really extended to
+[00:04:15] the upside and then take the reversal
+[00:04:17] take the short waiting for the stock to
+[00:04:19] come back to
+[00:04:21] equilibrium so I'm looking for those big
+[00:04:23] extensions and I find them using these
+[00:04:26] stock scanners right here so let's look
+[00:04:28] at Autodesk um we traded this one
+[00:04:31] yesterday this was a stock that was
+[00:04:33] really extended and you can see this was
+[00:04:35] a good reversal even today you have this
+[00:04:38] many consecutive green candles this is
+[00:04:40] let's see 2 4 6 8 10 12 13 consecutive
+[00:04:46] green candles you know just
+[00:04:48] statistically this is just a matter of
+[00:04:50] odds that the more consecutive green
+[00:04:52] candles you have the higher the
+[00:04:54] likelihood that the next one will be red
+[00:04:57] right so this is where a short seller
+[00:04:59] would start to think okay I'm going to
+[00:05:01] take a short position and maybe I'll
+[00:05:03] take it on the first candle to make a
+[00:05:05] new low if you take it on the F minute
+[00:05:07] chart you'd be short at
+[00:05:08] 8067 and you would cover that position
+[00:05:11] on the move down here towards 8013 so
+[00:05:15] that's like $600 winner with you know a
+[00:05:17] th000 shares on the one minute chart
+[00:05:19] some Traders will take an entry for the
+[00:05:21] first candle to make a new low and you
+[00:05:23] can see that would have been right here
+[00:05:26] pretty easy entry at
+[00:05:28] 8086 and then you get that move back
+[00:05:30] down to 8041 and then further down from
+[00:05:33] there again quick $400 with 1,000 shares
+[00:05:37] That's The Power of Short Selling now
+[00:05:39] although you can do this on an intraday
+[00:05:41] chart you can also do it on daily charts
+[00:05:44] depending on your strategy and so here
+[00:05:46] we'll see this stock drys this is a
+[00:05:49] stock that went literally from $4 a
+[00:05:52] share to over $100 a share in four
+[00:05:55] trading sessions now this also
+[00:05:58] exemplifies the risk risk of shorting
+[00:06:01] because if you shorted a th shares of
+[00:06:03] this right down here you know this could
+[00:06:06] get very painful very fast this could
+[00:06:08] have been a $100,000 loss and that's the
+[00:06:11] thing with a shorting your losses are
+[00:06:14] Limitless because if this did go up to
+[00:06:17] $100 or $200 a share and you're still
+[00:06:20] short eventually you need to cover the
+[00:06:23] position right your broker's going to
+[00:06:25] say you need to cover this position and
+[00:06:27] the only way to do it is to buy
+[00:06:30] now you have to buy the th shares so if
+[00:06:32] you've got to buy them back at you know
+[00:06:34] $500 a share it doesn't really matter
+[00:06:36] whatever it is is what it is so the risk
+[00:06:39] when you're trading to the long side is
+[00:06:42] that the amount of money you've paid to
+[00:06:44] buy that stock is the total amount that
+[00:06:46] you could lose so a th000 shares of a $4
+[00:06:49] stock is
+[00:06:50] $4,000 the maximum amount you can lose
+[00:06:52] on a Shore is unlimited that's important
+[00:06:56] and this right here this move on drys
+[00:06:58] exemplifies the fact that if you start
+[00:07:00] shorting early there are people that
+[00:07:03] shorted this in the 20s in the 30s in
+[00:07:06] the 40s and they got squeezed all the
+[00:07:08] way through this push this is the type
+[00:07:11] of move that can destroy a beginner
+[00:07:13] Trader who doesn't understand risk
+[00:07:15] management so short selling is an
+[00:07:17] important concept to understand but you
+[00:07:20] always have to come back to managing
+[00:07:21] your risk on every single trade you take
+[00:07:25] all right so now when we jump back here
+[00:07:27] into the slides what you can see is that
+[00:07:29] uh when you short right you create that
+[00:07:32] negative balance so you sell the shares
+[00:07:35] before you own them and then you buy
+[00:07:37] back to cover so what you're doing is
+[00:07:39] you're borrowing shares from your broker
+[00:07:42] and you'll probably hear short sellers
+[00:07:43] talk about this oh man I didn't have any
+[00:07:46] shares available to borrow right you
+[00:07:48] have to borrow them from your broker but
+[00:07:50] some Brokers don't have shares of every
+[00:07:52] stock available in fact Brokers never
+[00:07:55] have shares available of IPOs right a
+[00:07:58] stock that does its initial public
+[00:07:59] offering is almost never uh available
+[00:08:02] for shorting uh but even stocks that
+[00:08:04] have been traded for years and years and
+[00:08:06] years some Brokers just just simply
+[00:08:08] don't have shares available to borrow so
+[00:08:11] when you're a short seller uh you're
+[00:08:13] limited to shares that you can find and
+[00:08:15] that's why a lot of short sellers will
+[00:08:17] end up funding two three four or even
+[00:08:20] five brokerage accounts hoping that
+[00:08:23] between the five of them they'll be able
+[00:08:24] to find shares to borrow of almost every
+[00:08:27] stock out there all right now once
+[00:08:30] you've created your short position which
+[00:08:32] is simply by pressing the sell button
+[00:08:35] you're now negative shares well what you
+[00:08:37] have to do is you at some point have to
+[00:08:40] close that position we close that
+[00:08:42] position by covering all right so to
+[00:08:45] close a a short position you cover your
+[00:08:48] position you're buying back shares and
+[00:08:51] you're basically repaying the broker you
+[00:08:54] cover the position and you give back the
+[00:08:56] shares that you borrowed to the broker
+[00:08:58] now like a alongside a Trader you can
+[00:09:00] cover in small increments you don't have
+[00:09:03] to cover all at once if you're up $1,000
+[00:09:05] you could cover half of the position and
+[00:09:08] uh hold the rest for a bigger move cover
+[00:09:10] another quarter etc etc but you will
+[00:09:13] have to cover the
+[00:09:15] position now you also have a limited
+[00:09:19] number of days before you will be forced
+[00:09:21] to cover the position and this again is
+[00:09:23] one of these this is maybe the first
+[00:09:25] example of why the market is structured
+[00:09:28] towards longside trading and not short
+[00:09:30] selling there's no restriction on the
+[00:09:33] number of days you can hold a stock to
+[00:09:35] the long side when you buy it but there
+[00:09:37] are a number of days that you can only
+[00:09:39] hold a stock when you're shorting it
+[00:09:41] those are the days that you have to
+[00:09:42] cover in so days to cover these could be
+[00:09:45] 7 Days 14 days 20 days 30 days it's a
+[00:09:48] period of time and if you have not
+[00:09:50] covered your position by that date the
+[00:09:53] broker can do it manually and they'll
+[00:09:55] charge you a liquidation fee now when
+[00:09:57] you're a long biased Trader and you're
+[00:09:59] trading a stock and it's just kind of
+[00:10:01] you know trending up moving up moving up
+[00:10:03] uh we could look at Bank of America you
+[00:10:05] know you can just stick with it and
+[00:10:08] let's say you're in a stock that's been
+[00:10:09] moving down for a while well you could
+[00:10:11] also stick with it and you could
+[00:10:13] continue to add at a lower price and you
+[00:10:16] reduce your average let's say you bought
+[00:10:18] this stock at $16 thinking it would
+[00:10:21] bounce right back well it comes down to
+[00:10:23] 15 you're still holding it so maybe you
+[00:10:25] add another 500 shares you reduce your
+[00:10:28] cost right reduce your your average cost
+[00:10:30] well it drops down more down to 12 down
+[00:10:32] to 13 whatever you can add more add more
+[00:10:35] and what you're doing is you're reducing
+[00:10:37] your average price you're increasing
+[00:10:39] your position this isn't something that
+[00:10:40] I uh that I ever do but let's just say
+[00:10:43] for the sake of argument that you're
+[00:10:44] doing this well you don't have a limited
+[00:10:47] number of days that you can hold this
+[00:10:48] position you can hold it for years if
+[00:10:50] you want right if it takes years for it
+[00:10:52] to bounce back up and go back into the
+[00:10:54] green you could hold through that the
+[00:10:56] same is not true for short selling so
+[00:10:58] let's say someone short of the stock at
+[00:11:00] $16 well here we are you know 3 weeks
+[00:11:03] later up at
+[00:11:04] $22 and they're down significantly right
+[00:11:07] and the thing is they can't just keep
+[00:11:09] holding and holding and holding at a
+[00:11:11] certain point the days to cover is going
+[00:11:13] to expire and they're going to need to
+[00:11:15] cover that position and that's when uh
+[00:11:18] in this case they'd be taking the
+[00:11:20] loss now it's also important to
+[00:11:23] understand short interest all right
+[00:11:25] short interest refers to the total
+[00:11:27] number of shares that are currently
+[00:11:29] being held as short positions against
+[00:11:31] the stock so let's say a company uh they
+[00:11:34] did their initial public offering and it
+[00:11:36] was a 10 million share IPO so they have
+[00:11:39] a float of 10 million shares and let's
+[00:11:41] say 1 million of those Shares are being
+[00:11:44] held short that stock has a short
+[00:11:46] interest of
+[00:11:48] 10% when a stock has a short interest of
+[00:11:51] 30% 40% or 50% you can see some huge
+[00:11:55] squeezes this happens because so many
+[00:11:58] people are short the stock that if it
+[00:12:00] starts moving
+[00:12:02] up those people are going to be forced
+[00:12:04] to cover so let's just say for instance
+[00:12:06] this stock had 50% short interest 50% of
+[00:12:09] the people holding this stock are now
+[00:12:11] down you know suddenly 20 30% whatever
+[00:12:14] it might be and they're going to start
+[00:12:15] covering well how do they cover their
+[00:12:18] position they cover by pressing the buy
+[00:12:21] button right and that means you're going
+[00:12:23] to have lots of people pressing the buy
+[00:12:25] button that's going to make the stock go
+[00:12:27] up even more
+[00:12:29] all right so that's what creates that
+[00:12:31] short squeeze it creates a parabolic
+[00:12:33] move and we've seen stocks that just go
+[00:12:36] almost straight up like we just saw on
+[00:12:37] drys that example I showed you but we've
+[00:12:40] seen it on uh on many stocks hmny this
+[00:12:43] is another one that went parabolic you
+[00:12:45] know all of a sudden you start to get
+[00:12:47] that squeeze um let's see what's that
+[00:12:50] other one rgsc this is a stock that over
+[00:12:53] the course of two days ran from
+[00:12:56] a186 to $8 right that right there is an
+[00:12:59] opportunity right but this is also a
+[00:13:02] place where short sellers would have
+[00:13:03] gotten smoked now they had their
+[00:13:05] Redemption on the backside right so once
+[00:13:08] the stock put in the top and started to
+[00:13:10] give confirmation of the reversal they
+[00:13:12] had an opportunity to make that same
+[00:13:14] profit coming right back down so this
+[00:13:16] shows you can trade the market on both
+[00:13:18] sides both to the upside and to the
+[00:13:21] downside all right so now you understand
+[00:13:24] days to cover and you understand short
+[00:13:26] interest well that short interest is
+[00:13:28] what creates the short squeeze all of
+[00:13:30] the buying lots and lots of buying
+[00:13:33] stocks moving up and you get this
+[00:13:35] massive imbalance between the buyers and
+[00:13:37] the sellers and we know that stocks move
+[00:13:40] based on supply and demand so stocks
+[00:13:42] that are going to be really um really
+[00:13:45] primed for a short squeeze are going to
+[00:13:47] be stocks that have two things one is a
+[00:13:50] low float meaning the number of shares
+[00:13:52] available to trade is less than 100
+[00:13:55] million shares and stocks that have a
+[00:13:57] float of 5 million or 10 million shares
+[00:14:00] can be absolutely explosive those are
+[00:14:02] the ones that can move 50 to 100% in a
+[00:14:05] single day but it's only when they have
+[00:14:07] the second criteria which is a catalyst
+[00:14:10] some type of news some type of news that
+[00:14:12] catches all the short sellers off guard
+[00:14:16] right a company that you thought was
+[00:14:17] doomed for bankruptcy everyone had a
+[00:14:19] short bias on it it's dropping dropping
+[00:14:21] dropping suddenly they get you know a
+[00:14:24] huge $20 million order that just really
+[00:14:27] turns things around something like that
+[00:14:29] can be all it takes for the momentum to
+[00:14:31] shift and when it shifts it can move
+[00:14:33] very very
+[00:14:34] quickly now it's also important to
+[00:14:37] understand short sale restriction and
+[00:14:39] this is uh another one of those areas
+[00:14:41] where uh the market is really biased
+[00:14:44] towards longside trading there's no such
+[00:14:46] thing as a longside restriction but
+[00:14:49] there is a short sale restriction when a
+[00:14:51] stock drops 10% or more in a single day
+[00:14:54] short sale restriction will be turned on
+[00:14:56] and that means a short seller cannot
+[00:14:58] just just Market into the stock they can
+[00:15:01] only short when the stock is moving up
+[00:15:04] or when it's giving an uptick sometimes
+[00:15:06] it's called the uptick rule so that
+[00:15:08] means you can't have people just
+[00:15:10] hammering the stock down that helps
+[00:15:14] prevent flash crashes which is certainly
+[00:15:17] good but again when a stock is squeezing
+[00:15:20] up there's nothing to prevent long bias
+[00:15:23] Traders from hitting Market orders and
+[00:15:24] just squeezing these stocks up so this
+[00:15:27] shows us that there really is this sort
+[00:15:29] of institutional bias towards longside
+[00:15:32] trading all right so the house advantage
+[00:15:35] feels like uh to me at least that it's
+[00:15:37] on the side of the
+[00:15:40] Bulls all right now um the important
+[00:15:43] thing to realize here with short sale
+[00:15:44] restriction is that stocks that have
+[00:15:46] short sale restriction turned on are
+[00:15:49] going to be harder to short that means
+[00:15:51] if we have a stock for instance that
+[00:15:53] dips down 10% when the Market opens and
+[00:15:57] then squeezes up 40%
+[00:15:59] even if people want to short it it's
+[00:16:01] going to be harder for them to short it
+[00:16:03] even though it's squeezing up because
+[00:16:05] you have short sale restriction turned
+[00:16:06] on and that can fuel that parabolic move
+[00:16:10] because people that maybe do think it's
+[00:16:12] extended are going to have a hard time
+[00:16:14] getting their
+[00:16:16] short now a couple other terms that are
+[00:16:19] important to understand cost average
+[00:16:21] dollar cost averaging and averaging up
+[00:16:24] or averaging down so your average cost
+[00:16:27] this is the price you pay for a stock
+[00:16:29] whether you're long or short so let's
+[00:16:31] say you buy a stock at $10 or let's say
+[00:16:34] you short a stock at $10 you short a
+[00:16:36] th000 shares at $10 and then you short
+[00:16:38] another thousand shares at $9 your
+[00:16:41] average cost is $950 right now dollar
+[00:16:45] cost averaging in that example I was
+[00:16:47] showing you where someone was adding as
+[00:16:49] the stock was going down uh that's a
+[00:16:52] strategy used uh often times by uh
+[00:16:55] investors it's not really used by day
+[00:16:57] Traders so the strategy there is well
+[00:16:59] let's just say I put $20,000 into the
+[00:17:02] market each month I put in 20,000 here I
+[00:17:04] put in 20,000 here 20,000 here 20,000
+[00:17:08] here so yeah sometimes the Market's up
+[00:17:11] when you put in the money sometimes it's
+[00:17:12] down but over the Long Haul you're going
+[00:17:14] to end up having having an average cost
+[00:17:17] so your average cost is going to be
+[00:17:18] somewhere in the middle and that helps
+[00:17:20] buffer out some of the big moves up and
+[00:17:23] the big moves to the downside now
+[00:17:26] averaging up or averaging down I avoid
+[00:17:28] void averaging down at all costs if I'm
+[00:17:31] in a bad position whether it's a long
+[00:17:34] position or a short position I don't add
+[00:17:36] more money to it right so if I got into
+[00:17:39] a stock and I'm down uh $1,000 I have
+[00:17:42] two options one is that I sell and take
+[00:17:44] the ,000 loss the other option is that I
+[00:17:48] double my position now I'll still be
+[00:17:51] down
+[00:17:52] $1,000 but if the stock goes up just
+[00:17:54] halfway to my entry I'll be a break even
+[00:17:58] so let's say took 1,000 shares and a
+[00:17:59] stock drops from $10 to $9 and I'm long
+[00:18:03] well if I double to 2,000 shares my
+[00:18:05] average is now $950 which means when the
+[00:18:07] stock comes back up to 950 I'm Break
+[00:18:10] Even instead of down
+[00:18:12] $500 but of course if it drops to 850
+[00:18:16] I'm now down a lot more right the loss
+[00:18:20] has gotten bigger I'm now down $2,000
+[00:18:23] and that's the risk with averaging down
+[00:18:26] the best trades work out pretty much
+[00:18:28] immedi medely and the worst trades well
+[00:18:30] you're you're read on them pretty much
+[00:18:32] immediately so if you're read on the
+[00:18:34] trade you already know it's not going to
+[00:18:37] be one of your best trades ever so the
+[00:18:39] decision to add more money to that
+[00:18:41] position really is just adding more risk
+[00:18:43] to a bad situation the better thing for
+[00:18:46] me and I've always felt this way is to
+[00:18:48] cut the loss and then look for a better
+[00:18:50] opportunity because you also have the
+[00:18:52] opportunity cost when you tie up your
+[00:18:55] money and your energy into a bad
+[00:18:57] position it keeps you from finding the
+[00:18:59] next good position the next good trade
+[00:19:02] so you can see this is a stock that you
+[00:19:04] know made the move from $2 to $8 and
+[00:19:06] then right back down I'm sure there are
+[00:19:09] traders who you know on the short side
+[00:19:11] got squeezed into the move up and on the
+[00:19:13] long side you know got buried onto in
+[00:19:16] the move down so it's just a matter of
+[00:19:20] understanding your risk on every trade
+[00:19:22] you have your max loss and you follow it
+[00:19:25] that's especially important when you're
+[00:19:27] a short seller because of the fact that
+[00:19:29] your losses can be unlimited now that's
+[00:19:32] especially true when we're talking about
+[00:19:34] these stocks that can move 300400 500%
+[00:19:38] in a single day Traders with small
+[00:19:40] accounts once one move like this can
+[00:19:43] wipe out your whole account that's the
+[00:19:45] importance of having stops knowing your
+[00:19:47] max loss and following the rules being
+[00:19:51] successful at trading it's really not
+[00:19:52] that hard it's just a matter of
+[00:19:54] understanding the rules that have to be
+[00:19:56] in play following those rules on every
+[00:19:58] every single trade if you can do that
+[00:20:00] you can come out on the other side
+[00:20:02] profitable day after day all right guys
+[00:20:05] so I hope this has been a helpful
+[00:20:07] explanation of Short Selling if you have
+[00:20:09] any questions please feel free to email
+[00:20:11] me Ross atw warriortrading.com
+[00:20:16] hey guys I also want to remind you to
+[00:20:19] subscribe to our YouTube channel you can
+[00:20:22] click by subscribing that way you can
+[00:20:24] get alerts when I upload new videos like
+[00:20:26] my teaching you how to day trade video
+[00:20:28] for the video right toward $11,000 into
+[00:20:32] $8,600 in one month thanks guys

@@ -1,0 +1,989 @@
+# How to Predict A False Breakout
+# https://www.youtube.com/watch?v=dGhN8uCaMIk
+# duration_sec: 2183
+
+[00:00:00] all right we've got six Traders here and
+[00:00:02] we're all going to talk to you about how
+[00:00:03] we predict and anticipate false
+[00:00:07] breakouts or flushes now sometimes our
+[00:00:10] algo flushes sometimes they're we don't
+[00:00:12] really always know exactly what triggers
+[00:00:14] them but we see them in the market it's
+[00:00:16] nothing new maybe more prevalent in a
+[00:00:19] bare market right now than a year ago
+[00:00:21] when the market was a bit more bullish
+[00:00:24] but let's talk and go around the table
+[00:00:25] about some of the things that we see
+[00:00:28] that help us uh stay out of potential
+[00:00:31] flushes and uh avoid getting caught in
+[00:00:35] those um those Jack knives where it pops
+[00:00:37] up and then drops down so who who wants
+[00:00:40] to start this um who wants to kick it
+[00:00:43] off I can take it off go ahead yeah yeah
+[00:00:45] okay sure um so the first thing I look
+[00:00:48] at is I look at the daily chart right
+[00:00:50] daily chart is important if you look at
+[00:00:51] the wick up if there's going to be a lot
+[00:00:53] of uh if there's you're like I so I
+[00:00:56] learned this from other Trader SO
+[00:00:58] trading is like uh being a detect
+[00:01:00] right so like being a detective so you
+[00:01:02] just have to find traces to uh to to the
+[00:01:05] answer that you're looking for right so
+[00:01:07] look at a daily chart you know uh the
+[00:01:09] historical performance of the stock and
+[00:01:11] uh that's the first thing so you kind of
+[00:01:13] died in on the short uh the short time
+[00:01:15] the short time frame then I look at uh
+[00:01:18] the pre-market action so if the
+[00:01:20] pre-market action if there's like a
+[00:01:21] spike up and then and literally there's
+[00:01:24] like a dump right after that it means
+[00:01:25] like there's a big seller coming uh
+[00:01:27] coming after the stock so it like a
+[00:01:30] signal to me saying that hey you might
+[00:01:32] be you might need to be a little
+[00:01:33] cautious and then uh second is okay so
+[00:01:36] right at right at the market open I look
+[00:01:38] at how the stock performs right if it
+[00:01:40] just dumps right it means hey no one
+[00:01:42] really wants to buy this even though you
+[00:01:44] now you held up pretty well in
+[00:01:45] pre-market but out of out of the uh the
+[00:01:47] market open there's probably a big
+[00:01:48] seller that came uh that comes after the
+[00:01:50] stock yeah and then uh and then there's
+[00:01:54] I also look at the the level two to see
+[00:01:57] how it kind of plays around some level
+[00:02:00] um if it's at a critical level and it's
+[00:02:02] not actually breaking instead like
+[00:02:03] there's more sellers that actually you
+[00:02:05] know come into uh that step up uh to the
+[00:02:07] game then I might be a little cautious
+[00:02:10] just probably just exit out my position
+[00:02:12] and uh once I feel like it's safe I can
+[00:02:14] always come back in right there's you
+[00:02:16] just lose on the you just lose take a
+[00:02:19] paper cot instead of taking like a being
+[00:02:21] smoked yeah and uh that's pretty much it
+[00:02:25] and then other otherwise it really comes
+[00:02:27] down to just the trader intuition of of
+[00:02:30] how I think the stock will behave uh
+[00:02:32] based on my my observation interesting
+[00:02:35] so and Henry has this $1 million badge
+[00:02:38] and so the things that I'm hearing from
+[00:02:41] you are more about um indicators for the
+[00:02:45] sentiment or behavior of the stock is
+[00:02:47] the stock going to be choppy is it has
+[00:02:49] it already shown something weird and and
+[00:02:51] I totally relate to that and and do that
+[00:02:54] too if I see a stock one of the things
+[00:02:56] if I see it's got a history of really
+[00:02:58] nasty false breakouts if I've seen it
+[00:03:00] already done it that's done it earlier
+[00:03:02] in the day once or twice I'm like
+[00:03:04] because I don't know why it's happening
+[00:03:06] but clearly we're seeing these big flush
+[00:03:09] candles and if a stock is shown it can
+[00:03:11] do that it can do it again so I try to
+[00:03:13] be cautious so it is important to learn
+[00:03:16] the personality or sort of you know
+[00:03:19] profile of a stock because it can start
+[00:03:21] to give you some insight into okay for
+[00:03:23] whatever reason there's there's someone
+[00:03:24] dumping some really big share size on
+[00:03:26] this now if it has short sale
+[00:03:28] restriction and you're seeing these
+[00:03:31] flushes of 50,000 shares well that's not
+[00:03:34] someone who's going short that's someone
+[00:03:36] who's unwinding a long position because
+[00:03:37] on short sale restriction you can't hit
+[00:03:39] the bid so then you're thinking oh who
+[00:03:41] is unwinding a really big long position
+[00:03:43] on this where's the stock been in the
+[00:03:46] last few months is it what's
+[00:03:48] institutional investors look like what's
+[00:03:50] the percentage of in institutional
+[00:03:51] ownership you start to put those pieces
+[00:03:53] together that's the personality profile
+[00:03:56] but go ahead no no no I just want to say
+[00:03:58] when it comes to Trading have to be a
+[00:04:00] little creative yeah think outside the
+[00:04:01] box right right for sure and so the
+[00:04:04] thing that um that that I'm thinking
+[00:04:07] about that I think others will give some
+[00:04:09] insight into is in the moments right
+[00:04:13] before it does a false breakout what
+[00:04:16] what are we seeing that gives us the
+[00:04:18] indication that um maybe I should jump
+[00:04:20] out and one of the things you mentioned
+[00:04:22] is some sellers reloading on the level
+[00:04:25] twoo and that's one like if I'm buying a
+[00:04:27] stock right under $5
+[00:04:29] 39 five 493 495 looking for the break of
+[00:04:33] five it comes up to 98 it breaks goes to
+[00:04:36] 99 and then all of a sudden it goes from
+[00:04:37] 8,000 shares on the ass to like 28,000
+[00:04:40] I'm like okay someone's selling right
+[00:04:42] here let's say it buys through that it
+[00:04:44] goes from 28 to 25 to 22 to 15 10 9 8 76
+[00:04:49] 54 3 2 1 and I see a lot of green on the
+[00:04:52] tape but it's not going it's not going
+[00:04:54] lower than one now I know there's an
+[00:04:56] iceberg there's a big seller hitting
+[00:04:59] High in back there hidden behind that
+[00:05:02] 100 shares and they're just unloading to
+[00:05:04] people buying it at 98 and so when I see
+[00:05:06] something like that I want to get out
+[00:05:09] because you know with these types of
+[00:05:10] stocks with a false breakout you don't
+[00:05:12] want to be rushing to the exit with
+[00:05:14] everyone else if you do you're going to
+[00:05:16] get slippage on your exit you want to be
+[00:05:18] able if you can to have that intuition
+[00:05:21] and that instinct to bail out early you
+[00:05:24] know it's the first person out the door
+[00:05:26] is going to be the the one who survives
+[00:05:28] exactly I feel like what I want to add
+[00:05:30] to that is you uh so if you've been in
+[00:05:34] the market long enough like you know uh
+[00:05:37] the effect of your
+[00:05:39] orders on this particular stock right if
+[00:05:42] you send in this this sheer size into
+[00:05:44] the stock it should have done this right
+[00:05:47] so even if it even when I'm watching
+[00:05:49] when I'm reading the lead level two
+[00:05:51] right when I'm sending in my order like
+[00:05:53] if something I don't have to wait until
+[00:05:55] it comes down to one and it does a break
+[00:05:56] to identify that here there's ice uh
+[00:05:58] Iceberg water sitting on the ask sure
+[00:06:01] like instantly I can be like send in an
+[00:06:03] order and this thing feels a little
+[00:06:04] weird to me like I get that instin alert
+[00:06:07] say that hey there might be a hidden
+[00:06:09] order like a hidden seller on the ass
+[00:06:11] like let me just let me just take it
+[00:06:14] easy and I'll step back and then see
+[00:06:16] what the stock wants to do right maybe
+[00:06:18] I'm wrong the SEC and I I have that too
+[00:06:20] so sometimes as soon as you get in if
+[00:06:22] you see 20,000 shares on the ask or even
+[00:06:24] you don't see you see only 100 shares on
+[00:06:26] the ask but you do a 20,000 share order
+[00:06:28] you're going to expect you're probably
+[00:06:30] going to get four or five cents of
+[00:06:31] slippage if you get no slippage and you
+[00:06:33] feel the whole thing right there then
+[00:06:35] you realize wait a second I just bought
+[00:06:37] from a hidden seller so in that moment I
+[00:06:41] sometimes hesitate to just bail right
+[00:06:43] out because I of course I don't know how
+[00:06:45] big the seller is and maybe it'll break
+[00:06:49] but I often feel that the instinct to
+[00:06:51] exit is the right one because there's a
+[00:06:54] wall there and I just don't know how big
+[00:06:55] it is so then you know I guess the
+[00:06:57] question is how strong is the setup
+[00:07:00] how strong is the stock otherwise does
+[00:07:02] that is that override the fact that
+[00:07:05] there is a seller here I don't know
+[00:07:08] because other Traders will notice they
+[00:07:10] other Traders will start to see that
+[00:07:11] hidden seller and then that that's kind
+[00:07:13] of like you know the there's now now
+[00:07:16] you've got some smoke in the building
+[00:07:18] but uh you've also realized that like
+[00:07:20] three of the doors are like nailed
+[00:07:22] shut it's like wait a second hey do you
+[00:07:25] guys see what I see here because
+[00:07:27] something's not looking right because
+[00:07:28] then all of a sudden you've got this
+[00:07:29] sell side and everyone buying is buying
+[00:07:32] from that seller and then if there's no
+[00:07:34] bid support when all those people turn
+[00:07:36] around and sell you're going to get that
+[00:07:38] flush so when you have those hidden
+[00:07:40] sellers that's that's a really important
+[00:07:42] one and you really cannot see hidden
+[00:07:45] sellers without using level two which is
+[00:07:47] why I do feel level two is important in
+[00:07:51] trading um I suppose if you really have
+[00:07:54] a great entry off of support purely
+[00:07:56] based on the chart Maybe you wouldn't
+[00:08:00] need to worry about a hidden seller at
+[00:08:02] that spot as much but that's just not
+[00:08:04] how I trade or interesting enough is you
+[00:08:07] uh sometimes if you look at the uh the
+[00:08:09] resistance level on a chart you can
+[00:08:11] identify where you can kind of like
+[00:08:13] guess where the hidden seller will be
+[00:08:15] right at a particular or a a particular
+[00:08:18] critical point um on the chart right
+[00:08:21] that's where most likely the the hidden
+[00:08:24] seller will you know stack their order
+[00:08:25] there to make sure that it doesn't pass
+[00:08:27] this point right absolutely no and you
+[00:08:30] know what hidden buyers do the same
+[00:08:31] thing they'll put a huge buy order at
+[00:08:33] vwap yeah because that's a that's a
+[00:08:35] psychological support level if they can
+[00:08:38] hold that level with well whether or not
+[00:08:40] they can really hold that level with
+[00:08:42] just one order but if they can at least
+[00:08:44] put out bid support and be a buyer at
+[00:08:46] that level maybe they'll get some shares
+[00:08:48] at that level which is a good spot to be
+[00:08:50] in maybe it breaks and they have to cut
+[00:08:51] it but if not then they're in there
+[00:08:54] right at support so yeah and inverse
+[00:08:57] with shorting off of like a critical
+[00:08:59] daily pivot something like that I have
+[00:09:01] uh something to add yeah please Marcelo
+[00:09:05] Marcel yeah specifically about you what
+[00:09:07] you were saying that there's some short
+[00:09:08] sellers or or people taking profit that
+[00:09:10] you know mindfully put orders in those
+[00:09:13] critical levels but I've also noticed
+[00:09:15] another way to identify false breakouts
+[00:09:17] Why by use utilizing the level two is
+[00:09:19] depending how strong a breakout is when
+[00:09:21] you get to a breakout level let's say
+[00:09:24] you know let's say high is $5 and then
+[00:09:25] we go to $5 and we only Break by 2 cents
+[00:09:28] that's a clear IND Ator that that's just
+[00:09:30] going to immediately be a bull trap trap
+[00:09:33] some you know newbie traders that are
+[00:09:34] jumping way too late for the breakout on
+[00:09:36] the other side of the breakout and then
+[00:09:38] you know slamming back down all the way
+[00:09:39] down to to laow of day let's say because
+[00:09:42] at the at the end of the day what I like
+[00:09:43] to think is what is the other side what
+[00:09:45] is the trader on the other side really
+[00:09:46] thinking what is the emotions on the
+[00:09:48] other what is happening on the other
+[00:09:49] side of the trader usually the other
+[00:09:51] side of my trade is a short seller and
+[00:09:54] if I'm thinking that a short sell is
+[00:09:56] going to be short off of high of day
+[00:09:58] they're probably gonna have their their
+[00:09:59] stop loss at high of day their stop loss
+[00:10:02] is that they have to cover and close the
+[00:10:03] position that means buying right yep so
+[00:10:05] whenever we have a strong breakout they
+[00:10:07] are very close to stopping out so the
+[00:10:09] price actions we see at that level
+[00:10:11] really is going to determine whether
+[00:10:13] they stop stop out and cover or if they
+[00:10:15] just hold the position because they know
+[00:10:17] that it's going to reverse off of that
+[00:10:19] level and even add to that level
+[00:10:20] depending how strong or weak the the
+[00:10:22] breakout is so for example if we break
+[00:10:24] five by 10 cents 15 cents immediately if
+[00:10:28] I was a short sell tell I would
+[00:10:29] immediately be covering my position
+[00:10:31] because that is too strong of a breakout
+[00:10:33] and I would have fear you know getting
+[00:10:35] caught off a getting caught on a huge
+[00:10:36] push yeah as a long bias Trader I see
+[00:10:38] that weakness on the level two and I
+[00:10:40] would probably add for for you know for
+[00:10:42] another leg for another push for to 550
+[00:10:44] or something like that totally that's
+[00:10:45] scenario one scenario two is we break by
+[00:10:48] two cents we attempt to hold five show
+[00:10:51] cells haven't covered just just watching
+[00:10:52] at the price action and he's like is
+[00:10:54] this going to be a false breakout is it
+[00:10:55] not and then it starts to reverse then
+[00:10:57] they don't cover there's no buying
+[00:10:58] balling top and all we see is more
+[00:11:00] selling and then you get that IM that
+[00:11:02] immediate you know immediate flush in
+[00:11:04] reversal bird trap yep beginner Traders
+[00:11:06] bail out Panic cell short cells get more
+[00:11:09] aggressive and then they add to it
+[00:11:11] because now you've got the rejection off
+[00:11:12] of a critical level which can often on a
+[00:11:15] momentum stock that can be high of day
+[00:11:17] right so that rejection then it's not
+[00:11:19] just because you would think oh well
+[00:11:20] they'll just cover when it drops down
+[00:11:22] but inversely they could just add more
+[00:11:24] exactly keep their stop at the top and
+[00:11:26] now you're good unless it comes back up
+[00:11:29] and breaks through that high right and
+[00:11:31] then you have a second attempt at that
+[00:11:32] level which we saw in one of them today
+[00:11:34] and then yeah because as most of you
+[00:11:36] guys here in the chat room or or taking
+[00:11:38] a look at this video are probably long
+[00:11:40] bias Traders you got to think it the as
+[00:11:42] the other way around you long to dip and
+[00:11:43] your stop loss is going to be somewhere
+[00:11:45] at support if you see a stock come down
+[00:11:47] you have two choices either I add
+[00:11:49] against my support or if I see or or if
+[00:11:51] I clearly see that this level doesn't
+[00:11:52] hold I bail out when you bail out you
+[00:11:54] sell you probably create a flush because
+[00:11:56] a lot of people going to be are going to
+[00:11:58] be selling with you stopping out out and
+[00:11:59] all that but if you see that the level
+[00:12:01] just comes back down do a does a little
+[00:12:03] bit of a double double double bottom
+[00:12:05] that's even a better opportunity for you
+[00:12:07] to add to your position against support
+[00:12:09] and then ride the way back up exact same
+[00:12:11] thing is happening is happening on the
+[00:12:13] on the opposite side when we are you
+[00:12:15] know trying to go along against high of
+[00:12:16] Day short sellers are in in that stock
+[00:12:19] hoping for a double top we do if we do
+[00:12:21] get the double top they're just going to
+[00:12:23] get they're just going to get even more
+[00:12:24] aggressive ping more short and then you
+[00:12:26] know create that huge flush of you know
+[00:12:29] of a HSE breakout or something like that
+[00:12:31] yeah so you know always thinking about
+[00:12:33] the psychology and where's the head of
+[00:12:35] of this of the person on the other side
+[00:12:37] of the trade always helps yeah I like
+[00:12:39] that I can add a little bit when I think
+[00:12:42] of those big nasty whip false breakouts
+[00:12:45] like that's what I'm thinking right now
+[00:12:46] I think of them in like three primary
+[00:12:48] areas like we have like pre-market right
+[00:12:51] at 9:30 when the bell rings and then
+[00:12:53] after the market at Market opens so
+[00:12:55] pre-market from my experience what I've
+[00:12:58] usually seen is
+[00:13:00] stocks that I'm interested in that look
+[00:13:02] Prime for a huge breakout maybe like
+[00:13:05] skipping dollars a share but volume is
+[00:13:07] very very very light um there are three
+[00:13:10] things I two things I like to look for
+[00:13:12] in each instance um multi-time Frame
+[00:13:14] Alignment and the volume so say for
+[00:13:17] example premarket you see a breakout and
+[00:13:20] the volume is very light if you do not
+[00:13:22] see more volume coming in at the
+[00:13:24] breakout odds are it's going to be a
+[00:13:26] false breakout and you're going to see a
+[00:13:29] a bid drop and you're going to see the
+[00:13:30] stock come right back down to your
+[00:13:33] potential entry price or lower so I
+[00:13:36] always make to like to make sure I see
+[00:13:37] volume coming in especially pre-market
+[00:13:40] um at the bell at
+[00:13:43] 9:30 you know that we're always we're
+[00:13:46] always prone to seeing those big whips
+[00:13:48] um you know 9:30 9:31 a.m. and for those
+[00:13:53] types of um those types of whips I like
+[00:13:55] to manage them by just taking a very
+[00:13:57] very quick profit so if you're
+[00:13:59] anticipating a level of like maybe
+[00:14:02] $3.50 breaking um for a gap and go
+[00:14:06] trade let the let the stock move up a
+[00:14:08] little bit and trim most of it off and
+[00:14:10] leave just a little bit left so that way
+[00:14:12] if it does continue to keep going you
+[00:14:14] have a little bit of your skin left in
+[00:14:15] the game if it flushes maybe you get out
+[00:14:18] on the flush but you're already got some
+[00:14:20] profit and you can even get out break
+[00:14:23] even the big one for me is when you're
+[00:14:26] trading after the Market opens and we
+[00:14:29] see you know we see them time and time
+[00:14:32] again those big flush whips um but I
+[00:14:35] always Resort back to looking at
+[00:14:36] multi-time Frame Alignment and the
+[00:14:38] volume so if we've had a nice Gap and go
+[00:14:42] trade and you're looking Prime for
+[00:14:43] another breakout or another leg up if
+[00:14:45] the stock really is extended just know
+[00:14:48] you are more likely apt for a false
+[00:14:51] breakout and that's not to say that the
+[00:14:54] stock can't continue but again with
+[00:14:56] volume if you see the volume coming in
+[00:14:58] then then it's more likely to take that
+[00:15:00] second leg up so even when you're in
+[00:15:03] those tight little consolidations if you
+[00:15:05] see like a declining volume profile
+[00:15:07] especially on the F minute chart you're
+[00:15:10] more likely to see like a pop and a fade
+[00:15:13] um if you see like a slight ramp up a
+[00:15:15] volume during the consolidation then
+[00:15:17] you're more likely to have at least a
+[00:15:19] more resolved breakout so I always look
+[00:15:21] for multi-timeframe alignment and the
+[00:15:23] volume profile and those are two kind of
+[00:15:27] you know rules of thumb that I use but
+[00:15:29] of course it always depends on
+[00:15:31] everything else whether there's a hidden
+[00:15:33] seller right at that level you're
+[00:15:35] already in the trade you know there's
+[00:15:36] all of those factors but like big level
+[00:15:38] picture yeah if you anticipate getting
+[00:15:41] into a trade at least look at those two
+[00:15:43] factors yeah yeah very good yeah I I
+[00:15:45] agree with that um generally what I've
+[00:15:49] noticed is that we'll have uh when we're
+[00:15:53] going to have a false breakout we'll
+[00:15:54] first have a nice move up and then we'll
+[00:15:56] have a pullback and then we're looking
+[00:15:58] for either first candle to make a new
+[00:16:00] high which often times will pop up on
+[00:16:04] medium green volume bigger than the
+[00:16:06] previous red candles and then what
+[00:16:07] either happens is we see this flush back
+[00:16:11] down where it ends up closing as a high
+[00:16:13] volume red candle which then the the
+[00:16:16] pattern's broken or it resolves and go
+[00:16:18] back goes back to the high if it's going
+[00:16:20] to resolve and go back to the high it
+[00:16:21] will almost always have higher volume
+[00:16:24] than the first gr green candle of that
+[00:16:26] move because more Traders have seen the
+[00:16:29] opportunity and are buying that pullback
+[00:16:30] and any short sellers who shorted on the
+[00:16:33] way up are covering because it's like
+[00:16:35] okay this thing is strong it's going
+[00:16:37] higher so the false breakouts tend to be
+[00:16:41] uh when when you have lighter volume and
+[00:16:43] so I look at the volume of that candle
+[00:16:45] pretty closely that's definitely one uh
+[00:16:47] looking at the hidden looking for hidden
+[00:16:49] sellers is another one and I feel like
+[00:16:53] recently I don't know I've seen some
+[00:16:55] stocks where it's they just start to
+[00:16:57] have this feeling of getting really
+[00:17:00] crowded right before the breakout spot
+[00:17:04] where where in the past sometimes that
+[00:17:06] was like a coiling pattern where they
+[00:17:09] would coil up and support was coming
+[00:17:10] closer and closer and closer and then it
+[00:17:13] would just start to like pull away and
+[00:17:14] that's almost like an obvious spot to be
+[00:17:17] a buyer too have that yeah it is and I
+[00:17:20] think that I don't know if it's like a
+[00:17:22] liquidity trap or some type of Market
+[00:17:24] maker algo where we see that we see it
+[00:17:28] break and then what we'll often see is
+[00:17:31] this big dump of of order of shares sell
+[00:17:34] so it breaks and then it dumps and
+[00:17:36] either there's enough retail Traders out
+[00:17:40] there that are going to bid it up so
+[00:17:42] when it dumps they're they're absorbing
+[00:17:44] those that sell and then it goes higher
+[00:17:46] or it Jack knives so it pops up and then
+[00:17:49] it
+[00:17:49] reverses and then of course if it if it
+[00:17:52] reverses and that usually marks the high
+[00:17:55] right there and now you've got this
+[00:17:56] chart where you have a high volume red C
+[00:17:59] it's a reversal so I've been a little
+[00:18:01] bit more cautious on high volume
+[00:18:04] consolidation especially when SP on a
+[00:18:06] one minute time frame because that that
+[00:18:08] for me has seemed more recently it's
+[00:18:11] almost so obvious that it's like that's
+[00:18:13] where the the algo trap is they just
+[00:18:16] they're setting this trap for Traders to
+[00:18:18] fall
+[00:18:19] into I don't know I mean it just you
+[00:18:22] know I I don't I'm not on the other side
+[00:18:24] of the you know that trade to know how
+[00:18:28] market makers
+[00:18:29] or different institutions operate with
+[00:18:32] their high frequency trading algorithms
+[00:18:33] and things like that but and I think
+[00:18:35] that's what you just said speaks well to
+[00:18:37] what Henry just said as as well like
+[00:18:40] knowing the personality of the stock so
+[00:18:42] if it did it once it's more likely than
+[00:18:43] not going to do it again but also if
+[00:18:45] we're in a time in the market where
+[00:18:48] these patterns just aren't resolving the
+[00:18:50] way we a long bias Trader would want
+[00:18:52] them to maybe be a little more cautious
+[00:18:55] around those breakout points yeah yeah
+[00:18:58] yeah well and that's something that we
+[00:19:00] talked about at one of the at the last
+[00:19:02] uh trading Summit that I hosted manoli
+[00:19:05] was talking a lot about the theme right
+[00:19:07] what's the theme right now you know and
+[00:19:09] and we had the theme earlier this year
+[00:19:12] of recent reverse splits and then we had
+[00:19:14] the theme of recent IPOs then we had the
+[00:19:16] theme of Chinese IPOs which was like the
+[00:19:19] first two on steroids and so you know
+[00:19:23] but previously we've had in thinking
+[00:19:25] back we had themes of anything related
+[00:19:28] to co 19 during an ebola outbreak in
+[00:19:31] 2014 or may was 15 we had anything
+[00:19:34] related to biohazard suits during the
+[00:19:36] shooting in um Ferguson and I don't
+[00:19:39] remember what year that was there was uh
+[00:19:41] digital Ally in taser the for the body
+[00:19:44] cameras that was a theme that security
+[00:19:46] oil industry and then there's energy we
+[00:19:49] had the big energy theme earlier this
+[00:19:50] year so and sometimes the theme is uh
+[00:19:54] sector sometimes it's price sometimes um
+[00:19:58] it it's like a technical setup like a
+[00:20:00] spack or a reverse split uh then we had
+[00:20:03] meme stocks the meme theme so I think
+[00:20:07] it's important to keep an eye on that
+[00:20:09] and I don't know to what extent you know
+[00:20:12] an algo responds to stocks that are sort
+[00:20:16] of in the theme if they risk off and
+[00:20:19] just kind of let those stocks go crazy
+[00:20:21] and don't try to do stuff or if those
+[00:20:24] stocks just go crazy because they're the
+[00:20:27] theme in retail Traders are just
+[00:20:29] swarming them and are getting so excited
+[00:20:31] that they just overpower it and it just
+[00:20:32] goes crazy it it's one of these things
+[00:20:34] it's always hard to know is it this or
+[00:20:36] is at that but uh but but when you're
+[00:20:40] lacking a theme when you're in between
+[00:20:42] themes uh or when a theme is sort of
+[00:20:45] fading that can be a time where you
+[00:20:47] start to have traps as Traders got
+[00:20:50] comfortable thinking this thing was
+[00:20:52] going to keep working like recent
+[00:20:54] reverse splits or something like that
+[00:20:56] and what we've seen on those recent
+[00:20:57] reverse splits is they pop up and they
+[00:20:59] come right back down and you know it's
+[00:21:03] the obviously there's so many
+[00:21:06] complexities of the market in terms of
+[00:21:08] Market participants including you know
+[00:21:11] alos that we don't fully understand so
+[00:21:15] and even the people that understand it
+[00:21:18] that understand theirs the very best
+[00:21:20] don't understand necessarily exactly how
+[00:21:21] the competition is running the ones that
+[00:21:23] they have so I mean it is very complex
+[00:21:26] and really all we can do
+[00:21:29] is try to draw insights like you said be
+[00:21:32] a detective what are the insights that
+[00:21:33] we can draw from the price action of
+[00:21:35] this stock what's its Behavior been like
+[00:21:37] so far today what's the theme of the
+[00:21:38] market uh you know is it showing that
+[00:21:41] it's trustworthy and it is I'm going to
+[00:21:42] trade aggressively when it's not that's
+[00:21:45] when I say I probably won't trade this
+[00:21:47] stock at all because I can't manage my
+[00:21:49] risk when a stock is shown me and we had
+[00:21:51] one uh earlier this week or maybe it was
+[00:21:54] last week where it went from I bought it
+[00:21:56] at$ 4.97 for the break of 5 I was there
+[00:21:59] was already 180,000 sh share seller at
+[00:22:02] 508 and and it did get bought up I was
+[00:22:04] like good it broke it goes to 515 I was
+[00:22:07] like okay I'm G to take my profit and
+[00:22:08] then it dropped to 445 and was pinned at
+[00:22:12] the halt down someone it looked like
+[00:22:14] someone Market ordered a 200,000 share
+[00:22:16] order and just blew through the tape and
+[00:22:19] everything was red and just swept the
+[00:22:21] book and after that I was just like you
+[00:22:24] know what I already wasn't sure about
+[00:22:25] this because of that big seller I
+[00:22:27] thought that was odd
+[00:22:29] now I'm certain that I don't want to
+[00:22:30] touch this again and you know it did end
+[00:22:32] up going higher but I just felt like I
+[00:22:33] couldn't touch it and I can't manage my
+[00:22:35] risk when a stock is showing me has the
+[00:22:37] potential to flush 75 cents a share
+[00:22:40] because where where's the safe entry I
+[00:22:42] mean maybe really really at support but
+[00:22:44] even that broke support so you know I I
+[00:22:48] so I don't know do you anyone else want
+[00:22:49] to share some tips on avoiding false
+[00:22:51] breakouts Timmy you got one or Nick yeah
+[00:22:53] actually Timmy go first um I mean I
+[00:22:55] agree with pretty much everything
+[00:22:56] everyone else has said the only one I
+[00:22:58] would add is which maybe doesn't come up
+[00:23:00] quite as much with just a lot of the
+[00:23:02] stocks not really
+[00:23:04] making sustained moves over a long
+[00:23:06] period of time but I just used to always
+[00:23:09] see it was like that fourth tap that we
+[00:23:11] would get the big false breakouts and
+[00:23:14] I'm just like you see it it's like oh
+[00:23:16] it's not going it's not going it's not
+[00:23:17] going and that fourth one breaks for two
+[00:23:19] cents like Marcela was saying that's
+[00:23:22] huge drop and it's just like you know I
+[00:23:26] got caught in a false breakout literally
+[00:23:28] today and and it was came back down and
+[00:23:31] you end up stopping out you know pretty
+[00:23:34] much right at the low and that ends up
+[00:23:35] being support and it's just how it is
+[00:23:38] right now you know it double bottomed
+[00:23:40] right at that low and then came up and
+[00:23:42] the third the third attempt is when it
+[00:23:44] actually went through that level so you
+[00:23:47] know that's something that I got to pay
+[00:23:49] attention to same with what Henry was
+[00:23:50] saying with the
+[00:23:52] overall stock and other stocks like we
+[00:23:55] had earlier this week with ensc you know
+[00:23:57] just false Breakout pretty much full
+[00:23:59] circle and once you see that premarket
+[00:24:01] it doesn't really make you feel very
+[00:24:03] good about the next thing that pops up
+[00:24:05] so in the past the that tap tap tap and
+[00:24:08] then break I mean that used to be like a
+[00:24:10] classic flat top breakout pattern
+[00:24:12] ascending support we tap tap tap and
+[00:24:15] break and I used to think of it as like
+[00:24:17] we're there's there's clearly a seller
+[00:24:19] some resistance there maybe it's at a
+[00:24:21] daily level or whatever it is so we're
+[00:24:23] kind of like eating into that sell boom
+[00:24:25] boom boom and then when we break it's
+[00:24:28] like okay we're off and now I really
+[00:24:31] just see that as being inherently weak
+[00:24:33] that we have that resistance there and
+[00:24:36] we tap it once we can't break it that's
+[00:24:37] not great a second time still can't
+[00:24:39] break it wow that's a lot of resistance
+[00:24:41] a third time wow this thing is hard to
+[00:24:43] break a fourth time we break by two
+[00:24:45] cents uh oh that's all another sell's
+[00:24:48] lined up there three cents higher
+[00:24:50] everyone that accumulated for that
+[00:24:52] breakout they're just like I'm done I'm
+[00:24:54] done and then that's when you get the
+[00:24:55] combination simultaneously of short
+[00:24:58] the fact that it only broke out by two
+[00:25:00] cents back to what Marcel was saying
+[00:25:02] that's the confirmation to hit this
+[00:25:04] thing short and Longs bail at the same
+[00:25:06] time now you have double side self side
+[00:25:09] so uh I hope this has been helpful for
+[00:25:11] you guys in identifying some false
+[00:25:13] breakouts Nick did you have anything you
+[00:25:14] wanted to add on this it depends on how
+[00:25:16] long you want to talk about it well um I
+[00:25:18] can do I can do a little yeah let's do
+[00:25:21] two minutes um this subject is is I
+[00:25:25] think what you'll notice about everyone
+[00:25:27] here is that they have a direct
+[00:25:29] connection with the information
+[00:25:32] generated by the market and they're not
+[00:25:33] kind of filtering anything through
+[00:25:34] someone else's Viewpoint and that's how
+[00:25:37] they're able to see what's going on
+[00:25:41] um so like Henry's for example isn't
+[00:25:45] thinking like so much of like what Ross
+[00:25:50] is thinking as much as he's thinking
+[00:25:52] what the chart is doing um and I'm
+[00:25:55] thinking the same way um I would say
+[00:25:58] study study the take the worst
+[00:26:02] situations that you find in the market
+[00:26:04] screenshot them and look what's before
+[00:26:06] like kind of just like scroll back look
+[00:26:09] what happens to set that up and to make
+[00:26:11] it vulnerable and prone because they
+[00:26:12] don't just happen out of nowhere I'll
+[00:26:14] tell you that much um I look at charts
+[00:26:17] and stuff every day like this yeah and
+[00:26:19] there are some very very clear things
+[00:26:21] that happen over and over and over again
+[00:26:24] and it it'll depend on like your
+[00:26:25] indicators that you use your EMAs or
+[00:26:27] your smas or whatever um in the time
+[00:26:30] frame that you're on but there are very
+[00:26:31] clear indicators and you kind of have to
+[00:26:33] find those for yourself on the charts
+[00:26:35] that you're looking at um and like it's
+[00:26:39] it's a very personalized thing because
+[00:26:40] everyone has a different way that they
+[00:26:42] look at the market so you you really
+[00:26:43] have to go in and check that out for
+[00:26:44] yourself but there are patterns and
+[00:26:47] there are trend lines almost like um
+[00:26:50] I'll give you one that like is is too
+[00:26:52] complex for me to use but if you if you
+[00:26:55] draw you can almost draw web Trends from
+[00:26:59] like different points at candles and
+[00:27:02] like there's a reaction at every point
+[00:27:04] in when it touches that um and you'll
+[00:27:07] see that and the only thing that's
+[00:27:08] complex enough to do that is a computer
+[00:27:10] which market makers and I have a theory
+[00:27:13] that they're just like placing orders
+[00:27:15] out at these at these different points
+[00:27:16] and these every every different Trend
+[00:27:19] area that you can draw and so like I'll
+[00:27:21] draw it out on my charts and it's just
+[00:27:23] like a web of like the these Chopsticks
+[00:27:25] basically but there's reactions at every
+[00:27:27] point from yeah I've done I've done the
+[00:27:29] exact same thing drawing connecting two
+[00:27:31] Candlestick tops earlier in the day and
+[00:27:34] that's the thing that's crazy you some
+[00:27:36] some sometimes someone will be like hey
+[00:27:38] look and they'll be like I got a dip
+[00:27:39] trade at like 443 and you're like what
+[00:27:40] did you get that and they had like two
+[00:27:42] trend lines two candles connected from
+[00:27:44] like premarket and then like way later
+[00:27:46] in the day it's there and I'm like how
+[00:27:48] did you like sometimes those are the
+[00:27:50] most powerful too I mean because they're
+[00:27:51] just so obscure but you know it's yeah
+[00:27:54] in terms of where there's orders sitting
+[00:27:57] on the book those pivots are especially
+[00:28:00] is I think are especially powerful
+[00:28:02] because essentially what those Mark are
+[00:28:03] highs and lows you know so recent kind
+[00:28:05] of extrems of the moves yeah and so
+[00:28:08] that's where we end up seeing those
+[00:28:10] orders sort of on the book as like
+[00:28:12] propped and then when you have that
+[00:28:13] flush it's like you then look back and
+[00:28:15] you're like whoa okay that was a double
+[00:28:16] bottom with it it just happened to be on
+[00:28:18] this one and maybe they had an order a
+[00:28:20] little higher another candle wick and
+[00:28:22] that one got taken out but then the one
+[00:28:24] a little further down was big enough
+[00:28:25] that that that held that it and think I
+[00:28:28] think I've also noticed too that in
+[00:28:30] order for a stock to go higher yeah
+[00:28:33] probably about 80 80 to 90% of the time
+[00:28:35] it has to break below the range first it
+[00:28:38] it has to do break below the range it's
+[00:28:40] like almost like it's checking like the
+[00:28:42] market makers or whoever or shorts
+[00:28:44] strong yeah is this is this going to be
+[00:28:46] able to go down or is this like is
+[00:28:48] anyone going to start selling into this
+[00:28:49] and get shaken out and if not and if it
+[00:28:51] just starts like curling back up again
+[00:28:53] that's when it's like the green light
+[00:28:55] for like market makers to move out of
+[00:28:57] the way yeah um and they're like well we
+[00:28:59] can't we can't hedge our risk against
+[00:29:00] this right now because it's like it's
+[00:29:03] probably pretty strong if no one's going
+[00:29:04] to sell out everyone's got a strong hand
+[00:29:06] yeah so that there little things like
+[00:29:07] that you got to really really pay
+[00:29:09] attention and study and have a lot of
+[00:29:11] time and knowing the level two is very
+[00:29:12] important
+[00:29:15] um I think when I think when you get
+[00:29:17] into trying to um take long-term
+[00:29:20] positions that's when all of that starts
+[00:29:23] to become more and more relevant because
+[00:29:24] you're trying not to get chopped out
+[00:29:26] you're trying to hold for a bigger move
+[00:29:29] is this real is this move real so like
+[00:29:31] whether it's down against you or up in
+[00:29:33] your favor is this a real move right
+[00:29:35] like like what and what indicators can
+[00:29:37] you use to to to tell you if that's a
+[00:29:39] real move yeah you got to find that for
+[00:29:40] yourself everyone uses something
+[00:29:42] different um I I use a 20 SMA just
+[00:29:44] because it doesn't move as much when I'm
+[00:29:46] reviewing and I can look back and it's
+[00:29:48] more stable whereas EMA will adjust each
+[00:29:50] candle in anticipation or like in
+[00:29:52] reaction and it'll move and it won't be
+[00:29:54] the same before the trade as after the
+[00:29:56] trade right but you have to look for
+[00:29:59] something that works so you can review
+[00:30:01] it yeah and the thing with technical
+[00:30:02] indicators is that you have to use them
+[00:30:04] consistently so right you know if you
+[00:30:06] have a technical indicator but you only
+[00:30:08] use it you know 10% of the time whatever
+[00:30:12] percentage of the time it's working
+[00:30:13] you're missing a lot of it so I I try
+[00:30:17] you know one of the things that I try to
+[00:30:18] do is I try to focus on things like the
+[00:30:19] volume profile which is just to look at
+[00:30:21] the actual volume the Candlestick
+[00:30:24] patterns I try to keep it fairly
+[00:30:26] straightforward with that and you know
+[00:30:28] of course we've got volume weight
+[00:30:29] average price and our moving averages
+[00:30:31] there are some Traders out there that
+[00:30:33] get you know pretty deep into the
+[00:30:34] complexities of different
+[00:30:36] indicators you know what if you're that
+[00:30:38] Trader and it works for you then then
+[00:30:40] stick with it at times I will add
+[00:30:43] another indicator when I'm feeling like
+[00:30:45] I need like a little extra confirmation
+[00:30:47] of like kind of this is a red light
+[00:30:50] don't trade this when it's in this range
+[00:30:51] but when I'm in a strong market and I'm
+[00:30:53] really like in the sort of Flow State
+[00:30:56] I'm not using those I'm just I'm really
+[00:30:58] Vol the volume will negate a lot yeah
+[00:31:00] and that's the thing the volume will and
+[00:31:01] so when you've got those high volume
+[00:31:02] bars it's going to new highs that's
+[00:31:04] going to be I mean that's the biggest
+[00:31:06] sign of conviction for me at this point
+[00:31:09] even if that volume is generated by
+[00:31:11] market maker
+[00:31:13] alos the the fact
+[00:31:15] is I feel like you don't have to worry
+[00:31:18] about that as much because they're so
+[00:31:22] when you think about the role of a
+[00:31:24] market maker they're sitting both on the
+[00:31:26] bid and the ask they're making the
+[00:31:28] market and they get compensated by the
+[00:31:30] spread so a good Market maker will buy
+[00:31:33] and sell the same number of shares each
+[00:31:34] day and profit from the spread all day
+[00:31:37] long so and think think about think
+[00:31:38] about their motivation and and what
+[00:31:40] makes them money it's the amount of
+[00:31:42] Trades taken in a day so they're more
+[00:31:45] likely to keep it range bound and keep
+[00:31:47] sellers trying to sell into it and
+[00:31:48] buyers trying to buy into it sure and
+[00:31:51] and this will keep a action going all
+[00:31:52] day whereas something just going
+[00:31:54] straight up right that's that's 100%
+[00:31:57] true
+[00:31:58] but they also have to be careful because
+[00:32:00] they gotta hedge it right they got a
+[00:32:01] hedge it so if they put a big cell on
+[00:32:02] the ask a big wall of 180,000 shares for
+[00:32:06] instance and that just gets bought up in
+[00:32:08] a snap now they could be imbalanced in
+[00:32:11] their risk and they could be effectively
+[00:32:12] short you know 100,000 shares or
+[00:32:14] whatever it is then it starts skipping
+[00:32:17] up Five Points 10 points they could be
+[00:32:18] down a million dollars on that trade
+[00:32:20] which obviously shows why these market
+[00:32:22] makers are going to use incredibly
+[00:32:24] sophisticated alos to help them manage
+[00:32:27] their risk
+[00:32:28] but at the same time that that can
+[00:32:30] create um as we've seen just this
+[00:32:34] sometimes uh choppiness in the charts as
+[00:32:37] you're seeing these sort of like almost
+[00:32:39] almost like little like bait and switch
+[00:32:42] like attempts to stop people out the
+[00:32:44] flush to see if it stops people out the
+[00:32:46] pop to see if it stops people out I I
+[00:32:48] play these really low volume stuff a lot
+[00:32:50] um and that's probably why I don't
+[00:32:52] mention a bunch but it's like stuff
+[00:32:56] where like there's almost no volume
+[00:32:57] going through and I can actually see
+[00:32:58] orders one by one going through the
+[00:33:00] level two of like size and stuff and I
+[00:33:01] have a filter on it so I don't see like
+[00:33:03] one share orders or anything like that
+[00:33:05] yeah and it's like every time I hit hit
+[00:33:07] the ask and buy orders off the ass
+[00:33:10] immediately like the market maker pulls
+[00:33:12] pulls the bid yeah just to test me to
+[00:33:14] see if it's like if if I'm for real and
+[00:33:17] so like I just go in expecting to be
+[00:33:19] like down 10 cents like almost
+[00:33:22] immediately um pretty much no matter
+[00:33:24] what like that's the programming of the
+[00:33:27] that's the pr in of the Alo because they
+[00:33:28] have to make money like like and their
+[00:33:30] money is when someone buys on the ass
+[00:33:32] and sells on the bid and if they can get
+[00:33:34] a better price by scaring you out I mean
+[00:33:37] I would do it yeah right sure I'd take
+[00:33:41] it but it's pretty complex and you
+[00:33:43] probably should pay attention to it like
+[00:33:45] there there's a lot to understand and a
+[00:33:46] lot to especially if you're trading on a
+[00:33:48] shorter time frame where a lot of this
+[00:33:50] stuff comes into play on the longer time
+[00:33:51] frames it won't so I I think for um for
+[00:33:55] folks tuning in it it could be easy to
+[00:33:58] feel a little uh overwhelmed with the
+[00:34:01] the complexity the intricacies of the
+[00:34:03] market but but I think they I think they
+[00:34:04] should be right like you should be aware
+[00:34:07] that there's so much to know yeah yeah
+[00:34:09] like and then like piece by piece you
+[00:34:11] got to work through it and see how how
+[00:34:13] to apply it into your day-to-day trade
+[00:34:15] yeah and I think that um you know one of
+[00:34:18] the things that is important is being
+[00:34:20] able to have a good sense of the right
+[00:34:22] type of stocks to trade because in any
+[00:34:24] given day there'll be some stocks that
+[00:34:27] you'll find trade much more cleanly more
+[00:34:30] predictably and others that are much
+[00:34:32] much choppier so now you've got to
+[00:34:34] figure out how do I filter out the
+[00:34:36] stocks that have a higher likelihood of
+[00:34:38] giving these false breakouts of being
+[00:34:40] choppy and I should avoid them and focus
+[00:34:42] in on the ones that have the higher
+[00:34:44] level being you know more predictable
+[00:34:46] and so you know I of course use my
+[00:34:48] scanners that I've developed for
+[00:34:50] searching for the right stocks to trade
+[00:34:52] even when I have my scanners they'll
+[00:34:53] give me a list of 10 stocks I then have
+[00:34:55] to manually look through them and try to
+[00:34:57] gauge the the profile of that stock and
+[00:34:59] the behavior and personality of it and
+[00:35:01] the ones that I see have done false
+[00:35:03] breakouts I'll say nope I'm not going to
+[00:35:05] trade that one anymore that one's off
+[00:35:06] the list another one that I might not
+[00:35:08] think is going to be clean ends up
+[00:35:09] having great price action and so I focus
+[00:35:12] in on that so at the end of the day um
+[00:35:15] you know it's it's super super helpful
+[00:35:17] to tune into these episodes but what's
+[00:35:19] even probably more helpful is in real
+[00:35:22] time being able to be part of a
+[00:35:25] community and listen to Traders who are
+[00:35:28] watching all this stuff happen because
+[00:35:30] it's it's a lot that's going on in real
+[00:35:32] time and of course there's a lot of
+[00:35:34] people out there that I'm sure have
+[00:35:35] traded with some degree of success
+[00:35:37] without having to go as deep as we've
+[00:35:40] just gone right now but I think in more
+[00:35:43] difficult markets eventually everyone's
+[00:35:45] going to have to start looking a little
+[00:35:46] more closely at how to identify false
+[00:35:48] breakouts how to avoid them because they
+[00:35:51] create unnecessarily large losses which
+[00:35:53] reduces your profit to loss ratio it
+[00:35:55] reduces your accuracy and all that can
+[00:35:57] reduce your confidence all right so
+[00:35:59] thanks for tuning in this episode and
+[00:36:01] we'll be back at it for the next one
+[00:36:02] real soon hey I want to thank you for
+[00:36:05] watching this episode I hope you really
+[00:36:07] enjoyed it this channel has crossed over
+[00:36:09] 1 million subscribers and it's thanks to
+[00:36:11] viewers like you if you want to check
+[00:36:14] out a couple other episodes that other
+[00:36:16] Traders are watching you can see them
+[00:36:17] listed right here thank you as always
+[00:36:20] for tuning in and I hope you subscribe
+[00:36:21] to the channel

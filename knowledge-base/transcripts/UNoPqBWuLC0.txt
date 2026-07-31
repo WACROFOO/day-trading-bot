@@ -1,0 +1,525 @@
+# Bull Flag Pattern 🐮 The #1 Beginner Day Trading Strategy 🍏
+# https://www.youtube.com/watch?v=UNoPqBWuLC0
+# duration_sec: 1127
+
+[00:00:00] what's up everyone all right so in this
+[00:00:01] episode i'm gonna break down for you the
+[00:00:03] bull flag it is my hands down favorite
+[00:00:05] pattern that i trade as frequently as i
+[00:00:08] see it i mean i trade it all the time
+[00:00:09] almost on a daily basis as an active day
+[00:00:12] trader now this is another episode in
+[00:00:14] the multi-part series on technical
+[00:00:16] analysis and candlestick charts and it's
+[00:00:18] our first episode where we're going to
+[00:00:20] talk about a multi-candlestick pattern
+[00:00:22] we already laid the foundation with what
+[00:00:24] candlestick charts are and we talked
+[00:00:26] about individual candle formations such
+[00:00:29] as dojis shooting stars hammers etc and
+[00:00:33] now we're going to talk about the bull
+[00:00:34] flag the bull flag can never be formed
+[00:00:36] by just one single candle it is always a
+[00:00:39] pattern formed by multiple candles and
+[00:00:43] i'll show you a quick example of the
+[00:00:44] bull flag you can see it right here on
+[00:00:46] my chart this is a standard bull flag
+[00:00:48] green candle three candles of pullback
+[00:00:50] first candle makes a new high and it
+[00:00:52] squeezes back up so i'm going to show
+[00:00:54] you a bunch of examples like this and
+[00:00:55] we're going to break down the anatomy of
+[00:00:57] this pattern and i'm going to talk a
+[00:00:58] little bit about uh in what scenarios i
+[00:01:02] am most interested in
+[00:01:04] now before we get into that you may ask
+[00:01:06] yourself why is this pattern work so
+[00:01:08] well
+[00:01:09] i consider this pattern to be a buy
+[00:01:11] signal when i see it the chart is
+[00:01:14] clearly telling me this stock is strong
+[00:01:16] because the candle just squeezed up so
+[00:01:18] much and this is the first pullback
+[00:01:21] it's an opportunity to buy a strong
+[00:01:23] stock and because so many traders use
+[00:01:26] the same language of the financial
+[00:01:28] markets traders collectively when they
+[00:01:30] see this pattern it becomes a
+[00:01:31] self-fulfilling prophecy as they see it
+[00:01:34] pulling back they start accumulating on
+[00:01:35] the pullback they buy that first kill to
+[00:01:37] make a new high and then early short
+[00:01:39] sellers cover and new traders buy as it
+[00:01:41] goes through the high and you get this
+[00:01:42] extension and it happens again and again
+[00:01:45] and again so your job as a trader is to
+[00:01:48] try to learn to predict the future i've
+[00:01:50] already said that now it's easier said
+[00:01:52] than done but we use stock charts to
+[00:01:55] help us understand the context of the
+[00:01:56] current price and through these patterns
+[00:01:59] we're able to draw conclusions with some
+[00:02:01] reasonable level of certainty that when
+[00:02:03] we see this pattern on the right type of
+[00:02:05] stock
+[00:02:06] more often than not it results in the
+[00:02:08] stock breaking to the upside okay so
+[00:02:11] let's jump over here to the white board
+[00:02:12] and let's draw out
+[00:02:14] a bull flag all right so
+[00:02:17] a bull flag uh can be formed by just
+[00:02:19] simply one big green candle but more
+[00:02:22] often than not is formed by several
+[00:02:24] green candles in a row this can be on
+[00:02:27] any time frame it can be on a daily
+[00:02:29] chart a five minute chart a one minute
+[00:02:31] chart a 15 second chart a 10 second
+[00:02:35] chart it doesn't really matter it could
+[00:02:36] be on any time frame the pattern is the
+[00:02:38] same green candles moving up
+[00:02:41] followed by
+[00:02:43] red candles coming back down
+[00:02:45] now there's a couple of important things
+[00:02:47] we're going to talk about that
+[00:02:49] make this a valid pattern okay so first
+[00:02:52] candle to make a new high is the entry
+[00:02:53] so let's say the high of this candle
+[00:02:56] is
+[00:02:57] uh four dollars
+[00:02:58] and 15 cents
+[00:03:01] what's your stop
+[00:03:02] your stop is the low of this candle
+[00:03:05] let's say that's four dollars that means
+[00:03:07] you're risking 15 cents
+[00:03:09] what's the high of day well that's your
+[00:03:11] profit target and let's say in this case
+[00:03:13] the high of day is uh 450 so then your
+[00:03:16] profit target is about 35 cents which in
+[00:03:20] this case is a fair reasonable two to
+[00:03:23] one profit to loss ratio
+[00:03:27] so if you got in this right here you'd
+[00:03:29] be looking to buy as soon as this candle
+[00:03:31] which may be opened here as soon as it
+[00:03:33] breaks through
+[00:03:35] 4 15 that's the place i buy now
+[00:03:38] sometimes i'll buy a little early at 4
+[00:03:40] 13 or 4 14 to anticipate that break if i
+[00:03:44] already see volume coming in which is
+[00:03:46] telling me that people are actively
+[00:03:47] buying up this stock we look for the
+[00:03:49] break through that level and then
+[00:03:51] continuation through the highs all the
+[00:03:54] way to another pullback where we would
+[00:03:56] then look for a second bull flag now
+[00:04:00] usually the first and second pullbacks
+[00:04:02] are the best and let me switch to the
+[00:04:04] slides here because an important thing
+[00:04:06] to note
+[00:04:07] is not just the candlestick pattern
+[00:04:10] but also the candlestick
+[00:04:12] shape notice that we do not have doji's
+[00:04:16] at the top of this pattern so if you end
+[00:04:18] up having a doji at the very top let's
+[00:04:20] say for instance that this candle and
+[00:04:23] i'll go back to the whiteboard that this
+[00:04:25] candle right here
+[00:04:27] opened at this price it squeezed up but
+[00:04:30] then it closed red like that
+[00:04:33] well that's a shooting star candle
+[00:04:35] that's not great it doesn't mean that
+[00:04:37] this pattern won't work but suddenly
+[00:04:40] that puts a red flag on the pattern and
+[00:04:42] this is something that a seasoned trader
+[00:04:43] would certainly recognize
+[00:04:45] in addition to the formation of the
+[00:04:48] candles that form the top
+[00:04:50] the bottom down here it's totally okay
+[00:04:52] if this candle has a bottoming tail like
+[00:04:54] that there's no problem with that but if
+[00:04:57] this candle has an upper wick like this
+[00:05:00] that's no good why because that actually
+[00:05:03] formed a false breakout
+[00:05:05] and it would have been a premature
+[00:05:06] breakout now it's true that when you're
+[00:05:09] taking a bull flag set up you don't know
+[00:05:11] is certainty that the candle where
+[00:05:14] you're buying so let's say right here
+[00:05:16] you got in the candle opened you got it
+[00:05:18] at 4 15. it went up a little higher and
+[00:05:20] then immediately reversed and dropped
+[00:05:22] down the candle then turns red and
+[00:05:24] closes like that what kind of pattern is
+[00:05:26] that
+[00:05:27] false
+[00:05:28] breakout
+[00:05:30] however while false breakouts happen
+[00:05:33] you can avoid false breakouts by making
+[00:05:35] sure you are only trading bull flags on
+[00:05:38] the right stock to trade when you start
+[00:05:41] trading the wrong type of stocks of
+[00:05:42] trade that's when you get yourself in
+[00:05:44] trouble now what we're talking about
+[00:05:46] really here in this episode and through
+[00:05:48] this multi-part series is technical
+[00:05:50] analysis
+[00:05:51] we're talking about candlestick charts
+[00:05:53] and and how to read charts for day
+[00:05:54] trading so i'm not really getting into a
+[00:05:57] lot of uh or really any strategy
+[00:05:59] development as part of this series
+[00:06:01] because that's sort of a whole nother
+[00:06:03] level this is laying the foundation
+[00:06:05] however
+[00:06:06] if you want to learn a little bit more
+[00:06:07] about strategy development i will put a
+[00:06:09] link down in the
+[00:06:11] description you will see a link to
+[00:06:13] download
+[00:06:15] my
+[00:06:16] pdf and it's a micro pullback strategy
+[00:06:20] so that strategy is around how i trade
+[00:06:23] and the type of stocks i trade
+[00:06:26] the micro pullbacks
+[00:06:28] pattern on a micro pullback is when you
+[00:06:30] get them just a very quick pullback like
+[00:06:32] this and then immediately
+[00:06:34] continue back up and i'll show you a
+[00:06:36] couple examples of that in a moment
+[00:06:38] so check that out down in the
+[00:06:40] description below if you want to learn a
+[00:06:41] little bit more about strategy
+[00:06:43] now let's jump over here to the bull
+[00:06:46] flag
+[00:06:47] pattern so in this particular instance
+[00:06:49] as you can see on the chart this was
+[00:06:51] formed by one green candle and then
+[00:06:54] three red candles
+[00:06:55] first candle to make a new high right
+[00:06:57] there is your entry then you're looking
+[00:06:58] for a move back up
+[00:07:00] this does not have one critical
+[00:07:02] component
+[00:07:04] volume bars
+[00:07:05] so now we're going to add the volume
+[00:07:07] bars we're layering knowledge on here
+[00:07:10] we're laying the foundation for this
+[00:07:11] pattern we first look at the actual
+[00:07:13] candlestick shapes the candlestick
+[00:07:15] pattern and now we're going to talk
+[00:07:17] about the volume profile
+[00:07:19] the ideal volume profile
+[00:07:21] we want to see high volume on the move
+[00:07:24] up a light volume on the pullback and
+[00:07:27] then volume come back in as it squeezes
+[00:07:30] back through the high so i'm going to
+[00:07:31] switch back to the white board here and
+[00:07:33] let me show you this uh this is a
+[00:07:35] different drawing here so we've got the
+[00:07:37] stock squeezing up and right down here
+[00:07:40] i've drawn volume bars
+[00:07:42] increasing volume as it moves higher
+[00:07:46] light volume on the pullback right here
+[00:07:49] this is and this represents the first
+[00:07:51] pullback and then we want to see high
+[00:07:53] volume coming back in right here
+[00:07:56] as it makes new highs right there that's
+[00:07:59] what we want to see this is the perfect
+[00:08:00] volume profile and we want to see that
+[00:08:02] volume here is increasing
+[00:08:04] as the stock is moving higher because
+[00:08:06] that tells us that traders are getting
+[00:08:08] really excited about it more traders are
+[00:08:10] buying and we're getting a bigger
+[00:08:12] breakout
+[00:08:13] now this example right here this could
+[00:08:16] be on a
+[00:08:17] uh it could be on a one-minute chart it
+[00:08:19] could be on a five-minute chart it could
+[00:08:21] even be on a 10-second chart
+[00:08:23] so let's just say for instance that this
+[00:08:25] is a 10 second chart
+[00:08:27] that means each one of these candles
+[00:08:29] represents 10 seconds of time so this is
+[00:08:32] 10 20 30
+[00:08:34] 40 50 60. so this right here is the end
+[00:08:37] of the one minute candle so what does
+[00:08:39] that one minute candle look like
+[00:08:41] well it's green it started low it went
+[00:08:45] way up there but then it closed about
+[00:08:47] here
+[00:08:48] okay so that is approximately the shape
+[00:08:51] of that candle
+[00:08:52] so we would fill that in it's a green
+[00:08:53] candle but it's got a little bit of an
+[00:08:55] upper candle wick
+[00:08:57] now i would have been a buyer on this
+[00:08:59] chart
+[00:09:00] right here on the micro pullback for the
+[00:09:03] first camel to make a new high
+[00:09:05] on the one minute when you look back at
+[00:09:06] that chart you'll see a stock that opens
+[00:09:08] here and just continues going up so you
+[00:09:11] just have two big green candles and you
+[00:09:13] might say ross i don't understand why
+[00:09:16] you got in
+[00:09:17] right here what was that entry
+[00:09:20] and i'm going to tell you that entry was
+[00:09:22] the micro pullback that was right here
+[00:09:25] as it dipped on the 10 second chart that
+[00:09:29] was my entry
+[00:09:30] now let's switch back to the screen here
+[00:09:32] and let me show you and let's talk a
+[00:09:34] little bit about the anatomy of the bull
+[00:09:37] flag pattern
+[00:09:38] so a bull flag has the following
+[00:09:40] characteristics generally we have three
+[00:09:43] green candles moving up
+[00:09:45] followed by two or more red candles
+[00:09:48] pulling back
+[00:09:49] sometimes a bull flag can be created by
+[00:09:51] just one huge green candle but it's
+[00:09:54] usually better when it's several candles
+[00:09:56] kind of increasing in volume as they're
+[00:09:59] moving higher and then two candles
+[00:10:01] pulling back now those two candles
+[00:10:03] pulling back cannot create false
+[00:10:05] breakouts or the pattern is broken
+[00:10:08] a perfect five minute bull flag would
+[00:10:11] pull back to the nine ema on the five
+[00:10:13] minute chart
+[00:10:15] so we haven't talked about moving
+[00:10:16] averages yet as part of the series but
+[00:10:18] just so you know a moving average
+[00:10:20] generally trails behind the price like
+[00:10:22] this
+[00:10:23] and so since this
+[00:10:25] if let's say this was a five minute
+[00:10:26] chart it didn't touch the nine moving
+[00:10:29] average it's a little extended off that
+[00:10:31] level that creates a little bit of risk
+[00:10:34] if it uh the nine moving average was
+[00:10:36] right here then that would be almost
+[00:10:38] picture perfect and i'll show you a
+[00:10:39] couple examples of that sort of picture
+[00:10:41] perfect pattern
+[00:10:43] yeah and again the nine moving average
+[00:10:45] is valid as an exponential moving
+[00:10:47] average whether it's on the one minute
+[00:10:48] or the five minute chart you're still
+[00:10:49] looking for that pullback to the moving
+[00:10:51] average because it's a pullback to
+[00:10:53] support that's how traders recognize
+[00:10:55] that this is an opportunity to buy a
+[00:10:57] strong stock for the next leg up
+[00:11:00] the entry point is the first candle to
+[00:11:02] make a new high after two
+[00:11:04] consecutive red candles and a top of the
+[00:11:07] nine moving average which is perfect
+[00:11:09] scenario with your stop at the low of
+[00:11:11] the pullback
+[00:11:13] however a bull flag should not retrace
+[00:11:16] more than 50
+[00:11:17] of the move up
+[00:11:19] so let's get back to the white board
+[00:11:22] here if we have a stock that squeezes up
+[00:11:24] here on several green candles in a row
+[00:11:27] and then it pulls back like
+[00:11:30] oops all the way down if we have this
+[00:11:32] really sharp pullback that's going to be
+[00:11:34] a broken pattern
+[00:11:37] this is not clean this is retraced more
+[00:11:40] than 50 percent of the move i measure 50
+[00:11:42] based on where it started and the top
+[00:11:45] draw approximately at the halfway point
+[00:11:47] and i'm okay with a gradual pullback
+[00:11:50] down to 50
+[00:11:52] right and then the move back up but i
+[00:11:55] don't want it more than 50
+[00:11:57] i would also note that if you have a
+[00:12:00] scenario where you have this green
+[00:12:01] candle and you have high volume and then
+[00:12:04] the pullback just becomes this kind of
+[00:12:06] gradual sell-off it just keeps not going
+[00:12:09] higher
+[00:12:10] this i'm also going to lose interest in
+[00:12:13] because if the stock is truly strong
+[00:12:15] it's not going to pull back for this
+[00:12:17] long before the next leg up you'll pull
+[00:12:20] back at most for maybe four candles
+[00:12:23] before the first candle makes a new high
+[00:12:25] when you get to five six pullback
+[00:12:26] candles
+[00:12:28] traders are just not interested in
+[00:12:29] buying this pullback for whatever reason
+[00:12:31] now that could be that someone is
+[00:12:33] unloading a big position they're selling
+[00:12:35] and they're preventing the traders who
+[00:12:37] are buying from seeing that breakout or
+[00:12:40] it could be just that for whatever
+[00:12:41] reason this is not the right type of
+[00:12:42] stock to trade because traders are not
+[00:12:44] interested
+[00:12:45] so let's jump back onto the screen and
+[00:12:47] now let me show you a
+[00:12:49] chart example of a bull flag
+[00:12:52] so here we can see a stock that had
+[00:12:55] seven green candles in a row squeezing
+[00:12:57] up
+[00:12:58] a pullback here and this pullback is
+[00:13:01] right to the nine moving average the
+[00:13:03] nine ema
+[00:13:05] we've got one red candle a second red
+[00:13:07] candle and then this candle is green
+[00:13:10] now some traders who are more seasoned
+[00:13:12] and perhaps more confident may have felt
+[00:13:15] comfortable buying this
+[00:13:17] off of the psychological support of
+[00:13:19] approximately 350 which is like right
+[00:13:21] down here that's going to be a little
+[00:13:23] bit of a riskier entry that's going to
+[00:13:25] be a strategy an intuition based
+[00:13:27] decision but this pattern does not give
+[00:13:29] us confirmation until this level right
+[00:13:32] about here when this green candle breaks
+[00:13:34] the high
+[00:13:35] of this candle
+[00:13:37] that is your confirmation of your entry
+[00:13:39] now a lot of trainers who are have a lot
+[00:13:41] of experience will begin taking trades
+[00:13:43] to anticipate breakouts the only problem
+[00:13:47] with taking trades to anticipate
+[00:13:48] breakouts is that if you're wrong you're
+[00:13:50] getting in you're going to look back on
+[00:13:52] that pattern and you're going to realize
+[00:13:53] it never actually gave me the green
+[00:13:56] light it never gave me the buy signal i
+[00:13:58] got in a little early thinking it was
+[00:14:00] going to happen so if you're going to
+[00:14:01] get in the habit of getting in early to
+[00:14:03] anticipate you want to make sure you're
+[00:14:05] managing your risk
+[00:14:07] all right here's another example now
+[00:14:09] this one's kind of interesting because
+[00:14:10] this actually has a doji at the top of
+[00:14:13] the pattern and it's on higher volume
+[00:14:17] and it's a red candle so that's a little
+[00:14:19] bit of a red flag there it pulls back
+[00:14:21] and we actually have four candles of
+[00:14:23] pullback and there are four dojis in a
+[00:14:25] row but even still the first camel that
+[00:14:28] makes a new high does end up giving us a
+[00:14:31] squeeze now this could be a combination
+[00:14:33] of some traders who started to short in
+[00:14:35] this area thinking okay it's a doji at
+[00:14:38] the top it's probably going to fade and
+[00:14:39] then being forced to cover as it makes
+[00:14:41] new highs and it could also just be that
+[00:14:43] the news on this stock on this
+[00:14:45] particular day was strong enough that
+[00:14:47] traders went ahead and jumped in it
+[00:14:48] despite that doji and it could be also
+[00:14:51] the daily chart was really strong and so
+[00:14:53] people were willing to take the risk in
+[00:14:55] any case they got rewarded as it went
+[00:14:57] from about 275 all the way up to 320.
+[00:15:00] that's a nice trade
+[00:15:02] now this is another example here this is
+[00:15:05] actually a good example of a micro
+[00:15:07] pullback so here we have the five minute
+[00:15:10] chart squeezing higher and on the one
+[00:15:12] minute we're getting the first pullback
+[00:15:15] after a fresh five minute breakout i'm
+[00:15:17] always watching these closely first
+[00:15:19] pullbacks on fresh five-minute breakouts
+[00:15:22] on the right type of stock to trade
+[00:15:24] that's very important the right type of
+[00:15:25] stock to trade often get bought up so
+[00:15:28] the first candle to make a new high on
+[00:15:30] this is at 418
+[00:15:32] max losses down here around 410 so it's
+[00:15:34] only eight cents of risk and immediately
+[00:15:37] you break through 423 and continue up
+[00:15:39] towards the half dollar of 450 topping
+[00:15:42] here at about 413.
+[00:15:44] all right now and by the way this is
+[00:15:47] also a
+[00:15:48] five minute bull flag that just occurred
+[00:15:50] here so this is the micro pullback
+[00:15:53] right on this time frame this is kind of
+[00:15:55] an interesting example here because this
+[00:15:57] is our first five minute camel to make a
+[00:15:59] new high at about 380.
+[00:16:01] but notice that the top of the move
+[00:16:05] is uh
+[00:16:06] one doji and a second doji forming a
+[00:16:09] double top
+[00:16:10] so that was formed right here
+[00:16:13] and right here because these candles
+[00:16:15] close this little block here is five
+[00:16:18] minutes of time from 11 20 to 11 25.
+[00:16:21] this is 11 25 to 11 30. so this five
+[00:16:24] minute candle actually closed
+[00:16:26] right here and then the new candle
+[00:16:28] opened it double top at the same level
+[00:16:31] and then pulled back
+[00:16:33] it retraced and came back up he pulled
+[00:16:35] back and then right in here some traders
+[00:16:37] you can tell got in right there to
+[00:16:40] anticipate that break
+[00:16:41] on the five minute chart so the five
+[00:16:44] minute chart was forming that pullback
+[00:16:46] and some traders got in a little early
+[00:16:48] most likely watching for multi-time
+[00:16:50] frame alignment but those who missed it
+[00:16:53] still had the opportunity of buying the
+[00:16:55] first pullback on the one minute
+[00:16:56] following the fresh breakout
+[00:16:59] and this is a third example here's a
+[00:17:01] fourth example you've got one two three
+[00:17:03] four five green candles in a row two
+[00:17:05] counts of pull back note the volume is a
+[00:17:08] little higher on this red candle it
+[00:17:11] pulls back we have this small green
+[00:17:13] candle and then first count make a new
+[00:17:15] high so 418 was the low 424 is the entry
+[00:17:19] that's a six cent stop that's not bad
+[00:17:22] profit target up here was first through
+[00:17:24] the high we got that break and all the
+[00:17:27] way up towards 450 which is a pretty
+[00:17:30] nice return about a four to one profit
+[00:17:32] to loss ratio if you got out at the very
+[00:17:35] top if you scaled out as it squeezed
+[00:17:37] higher you probably got a two to one
+[00:17:39] profit to loss ratio which is still very
+[00:17:42] good
+[00:17:44] so one of the things that you have to be
+[00:17:46] really mindful of as i think you can
+[00:17:48] already tell is that you're trading the
+[00:17:50] bull flag on the right type of stock
+[00:17:54] by itself a bull flag is simply a
+[00:17:56] pattern the degree and the probability
+[00:17:58] whether it's going to break to the
+[00:18:00] upside or just go sideways or break to
+[00:18:02] the downside is going to be based on
+[00:18:04] factors beyond just purely the
+[00:18:06] technicals of the chart it's going to be
+[00:18:08] based on the price of the stock the flow
+[00:18:10] of the stock the relative volume of the
+[00:18:12] stock is the stock a leading gainer
+[00:18:14] today does it have news does it have a
+[00:18:16] catalyst is it an obvious stock that
+[00:18:19] everyone is looking at because if it is
+[00:18:22] then a lot of eyes are going to see the
+[00:18:24] buy signal and the sell signal if you're
+[00:18:27] looking at a stock that not a lot of
+[00:18:28] other people are watching not many
+[00:18:30] people are going to see those buy and
+[00:18:31] sell signals they won't be respected as
+[00:18:32] well you won't see the level of volume
+[00:18:34] at the breakout that you need for the
+[00:18:35] trade to work and you're going to be
+[00:18:37] frustrated so keep studying keep
+[00:18:39] learning and if you want to learn about
+[00:18:41] the next pattern we're going to talk
+[00:18:42] about the abcd pattern you can check
+[00:18:45] that out right there

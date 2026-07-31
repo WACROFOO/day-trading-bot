@@ -1,0 +1,846 @@
+# Circuit Breaker Halt Explained (With Examples)
+# https://www.youtube.com/watch?v=StpXbe3Ga3Y
+# duration_sec: 2239
+
+[00:00:00] what's up traders alright so today we're
+[00:00:02] going to talk about day trading
+[00:00:04] terminology specifically the term
+[00:00:06] circuit-breaker halts now whenever we
+[00:00:09] have a stock that makes a crazy move
+[00:00:11] like dro is right here which went from
+[00:00:13] four dollars to over a hundred dollars
+[00:00:16] per share in four trading sessions I get
+[00:00:19] lots of traders emailing me asking about
+[00:00:20] circuit breaker halts during the move up
+[00:00:23] this stock got halted many times so what
+[00:00:26] triggers a circuit breaker halt and what
+[00:00:28] exactly does that even mean now this is
+[00:00:31] the thing stocks can get halted at any
+[00:00:34] given time and when a stock is halted
+[00:00:36] you cannot buy and you cannot sell the
+[00:00:39] only thing you can do is hang on for the
+[00:00:41] ride and hope that doesn't open lower
+[00:00:44] than the price that it halted at so it's
+[00:00:46] important for beginner traders and even
+[00:00:48] experienced traders to really understand
+[00:00:51] the causes of circuit breaker halts so
+[00:00:52] you can help reduce your risk you can
+[00:00:55] help prevent being a situation where
+[00:00:57] you're likely to get stuck holding a
+[00:00:59] position through a halt alright so we're
+[00:01:02] going to jump in here now as we talk
+[00:01:04] about day trading terminology it's
+[00:01:06] inevitable that other terms will come up
+[00:01:08] as we talk about circuit breaker halts
+[00:01:10] so if some of those are unfamiliar to
+[00:01:12] you you can go on our website for your
+[00:01:14] trading calm and look them up there so
+[00:01:18] circuit breaker halts a stock can be
+[00:01:20] halted and pause from trading for
+[00:01:22] several reasons now during these halts
+[00:01:25] you cannot trade you cannot trade the
+[00:01:27] stock in any way and these halts will
+[00:01:29] last for a minimum of five minutes but
+[00:01:32] can last for hours or even days now we
+[00:01:35] have written extensively on circuit
+[00:01:37] breaker halts and there are a lot of
+[00:01:38] intricacies to the halts so if this
+[00:01:42] video by itself isn't enough to give you
+[00:01:44] a full explanation you can also go over
+[00:01:47] to our website and read about it there
+[00:01:49] there are a couple of different types of
+[00:01:51] halts that you guys should be aware of
+[00:01:53] the first is a code t1 this is halted
+[00:01:56] pending news now this can happen when
+[00:01:58] the company requests the trading be
+[00:02:00] halted in their stock so they can
+[00:02:02] release material news there's a couple
+[00:02:04] reasons this might happen let's say for
+[00:02:07] some reason that a company wants to
+[00:02:08] release their news in the middle of the
+[00:02:10] day typically companies will release
+[00:02:12] their news after
+[00:02:13] hours so they don't have to have the
+[00:02:15] stock halted right but if you release
+[00:02:18] material news in the middle of the day
+[00:02:19] the company will often ask the exchange
+[00:02:22] to halt their health or stock so no
+[00:02:24] trading can take place so earnings could
+[00:02:27] be an example another thing that happens
+[00:02:29] from time to time is when we see a stock
+[00:02:31] that makes a really quick move up like a
+[00:02:34] 10 20 30 percent move up the company
+[00:02:37] will halt the stock to respond to the
+[00:02:40] price action let's say for instance that
+[00:02:42] the stock is moving up because there's
+[00:02:43] rumors you know that they're going to
+[00:02:45] get bought out by like Apple or
+[00:02:47] something like that well the company can
+[00:02:49] ask the exchange to halt shares of
+[00:02:51] helped pile trading and say we're going
+[00:02:53] to respond to this and they respond and
+[00:02:54] say well yes it's true apples gonna buy
+[00:02:58] us the stock is going to reopen higher
+[00:03:00] right or they say you know what there's
+[00:03:03] that rumor is completely false we are
+[00:03:06] not interested in a sale there's there's
+[00:03:08] just no truth to it the stock usually
+[00:03:10] opens lower so when you're trading
+[00:03:13] stocks on rumors you have to realize
+[00:03:15] that there's always the potential that
+[00:03:17] the company can request that the shares
+[00:03:19] be halted from trading while they
+[00:03:21] respond to that news that's why I
+[00:03:23] holding stocks that have been trading on
+[00:03:25] rumors can be a bit risky now a code h10
+[00:03:29] this is the SEC suspending trading in a
+[00:03:32] stock this is bad you never want to be
+[00:03:34] holding a stock to the long side that's
+[00:03:36] halted on an H 10 code this basically is
+[00:03:39] the type of halts we see with penny
+[00:03:42] stocks you know with companies suspected
+[00:03:45] of stock promotion or fraud you know
+[00:03:47] those companies that send out those
+[00:03:49] mailers and the emails and stuff the
+[00:03:51] next thousand percent runner those are
+[00:03:53] the types of stocks that often get
+[00:03:55] halted the SEC wants to try to figure
+[00:03:57] out you know who's manipulating it who's
+[00:03:59] behind this and the sad thing is that
+[00:04:01] the people who are usually still holding
+[00:04:04] when it gets halted are not the people
+[00:04:06] who initially got this stock going in
+[00:04:08] the first place it's you know the
+[00:04:10] postman and you know your plumber and
+[00:04:12] just people that bought the stock
+[00:04:14] because they saw the mailer and they you
+[00:04:16] know wanted their chance to have a big
+[00:04:19] win but unfortunately this is a halt
+[00:04:22] that we do see from time to time the
+[00:04:24] good news is that
+[00:04:25] this isn't something that really affects
+[00:04:26] me because I don't trade penny stocks
+[00:04:28] and I have a big advocate of not trading
+[00:04:31] penny stocks I instead trade stocks
+[00:04:32] usually between like a dollar fifty and
+[00:04:35] and ten dollars a share so halted
+[00:04:38] pending news and halted on SEC
+[00:04:41] investigation those are two halts that
+[00:04:43] we see you know on a fairly regular
+[00:04:45] basis but they're they're pretty easy to
+[00:04:47] avoid don't trade penny stocks and be
+[00:04:49] careful trading stocks that you know are
+[00:04:51] running on rumors now the next type of
+[00:04:54] halt is the Lu DP Hall this is the limit
+[00:04:58] up limit down pause it's a volatility
+[00:05:00] trading pause and this is a to prevent
+[00:05:04] stocks essentially from having a flash
+[00:05:06] crash so if a stock suddenly drops you
+[00:05:09] know 80% well we need to have some type
+[00:05:14] of mechanism in place to prevent that
+[00:05:16] from happening now when we've had flash
+[00:05:19] crashes in the past there's been
+[00:05:22] suspicion that these were caused by
+[00:05:24] fat-finger orders so fat-finger orders
+[00:05:27] when you type in 2000 shares and you
+[00:05:30] accidentally press it for 200,000 shares
+[00:05:33] and you send the Buy button and all of a
+[00:05:36] sudden this stock takes off someone just
+[00:05:38] you know sold 200,000 shares the market
+[00:05:42] can't handle that type of sell you get a
+[00:05:44] huge drop other traders start panicking
+[00:05:46] and then all of a sudden you get a flash
+[00:05:48] crash and you know that's what happened
+[00:05:50] we've seen that happen several times in
+[00:05:53] May of 2010 there was a flash crash the
+[00:05:56] Dow Jones lost almost a thousand points
+[00:05:59] and it was in ten minutes right now that
+[00:06:03] happened again in 87 a drop of 500
+[00:06:06] points there's 22% drop and you know
+[00:06:09] this is the the fear that you know the
+[00:06:11] market is designed for stocks to go up
+[00:06:15] right stocks go up traders make money
+[00:06:17] investors make money your 401ks grow so
+[00:06:20] it's important for the exchange is to
+[00:06:22] put in some mechanisms to help prevent a
+[00:06:25] flash crash now this is what they did
+[00:06:28] they've got the limit up limit down
+[00:06:30] pause so this is a five-minute halt to
+[00:06:33] pause trading it allows traders and
+[00:06:36] investors to kind of
+[00:06:38] you know gather themselves circulate the
+[00:06:40] news understand what's happening and it
+[00:06:43] just you know slows down that panic
+[00:06:46] alright now there are some different
+[00:06:49] thresholds of what will trigger a
+[00:06:51] circuit breaker halt alright and stocks
+[00:06:54] under three dollars have different
+[00:06:56] circuit breaker rules than stocks over
+[00:06:58] three dollars the circuit breaker
+[00:07:00] thresholds are also doubled between 9:30
+[00:07:03] and 9:45 because that's the time of day
+[00:07:06] when peak volatility exists alright so
+[00:07:09] let's look at the breakdown of what
+[00:07:11] stocks are going to be included in the
+[00:07:13] circuit breaker halts so tier 1 and tier
+[00:07:16] 2 securities between 9:45 and 335 p.m.
+[00:07:22] all right the tier 1 securities if they
+[00:07:25] move up or down 5% in a period of 5
+[00:07:30] minutes a circuit breaker halt will be
+[00:07:32] triggered in it will pause trading tier
+[00:07:36] 1 stocks are all securities in the sp500
+[00:07:38] the Russell 1000 index and includes some
+[00:07:42] exchange-traded products they need an
+[00:07:45] average of 2,000,000 shares in daily
+[00:07:48] volume so the bands here are 5% so the
+[00:07:52] stock is not expected these big you know
+[00:07:55] large market cap stocks they're not
+[00:07:57] expected to move more than 5% in a
+[00:08:00] period of 5 minutes alright now what do
+[00:08:04] we use as the reference point for that
+[00:08:07] 5% and this is this has been a question
+[00:08:10] that lots of traders ask me and this is
+[00:08:12] sort of where we get into the
+[00:08:13] intricacies well I'll explain it in one
+[00:08:16] second now
+[00:08:17] tier 2 stocks these are these are all
+[00:08:20] stocks priced above $3 but they don't
+[00:08:22] require 2 million dollars a day or 2
+[00:08:25] million shares a day and volume so
+[00:08:28] they're a little less they're not as
+[00:08:30] thickly traded these are the stocks that
+[00:08:32] we are typically trading the tier 2
+[00:08:33] stocks these have thresholds at 10% so
+[00:08:37] if the stock moves up or down 10 percent
+[00:08:40] in a five-minute period it can get
+[00:08:43] halted now between the hours of 9:30 and
+[00:08:46] 9:45 and 335 and 4 p.m. at the O
+[00:08:50] and the clothes when we see peak
+[00:08:52] volatility the bands are doubled the
+[00:08:54] volatility bands so instead of being 10%
+[00:08:57] they're 20% and that allows for that you
+[00:09:00] know those spikes and whipsaws that we
+[00:09:02] often see right out of the gates all
+[00:09:06] right now I won't cover the lower priced
+[00:09:08] stocks and we I mean I guess I'll cover
+[00:09:12] just for the sake of it but I typically
+[00:09:14] wouldn't be trading a stock you know
+[00:09:15] below $1 but the stocks between 75 cents
+[00:09:19] and three dollars they do have larger
+[00:09:22] bands as well all right so these give
+[00:09:25] you a little bit more room before
+[00:09:26] circuit-breaker halts going to trigger
+[00:09:28] and that's probably most useful when
+[00:09:30] you're talking about a stock that's like
+[00:09:32] a $2.00 stock you know it's just kind of
+[00:09:34] below the $3.00 threshold those stocks
+[00:09:37] potentially can squeeze and move more
+[00:09:40] because they're not going to get halted
+[00:09:42] every 10% or every 20% right they've got
+[00:09:45] a bigger band between the open during
+[00:09:48] the hours at the open and the hours of
+[00:09:50] the close those bands will be up to 40%
+[00:09:54] all right so 40% moves that allows a lot
+[00:09:57] more volatility so what I want to do is
+[00:10:02] give you an example of the circuit
+[00:10:04] breaker haul so what we're going to do
+[00:10:05] is step out of this for one second we're
+[00:10:07] going to take a look at cool this is a
+[00:10:09] stock today that ran from a low of 415
+[00:10:12] all the way to a high of 622 it ran up
+[00:10:16] well it was gapping up 32% and then it
+[00:10:19] ran another 60% so a trader might say
+[00:10:22] hey Rossi I ran 60% how many times does
+[00:10:24] it get halted it got halted zero times
+[00:10:26] just when you thought you understood
+[00:10:28] circuit breaker halts you realize
+[00:10:31] there's more to learn all right so
+[00:10:33] here's the thing the circuit breaker
+[00:10:35] halt uses a reference price now the
+[00:10:38] reference price is based on a 5 the
+[00:10:41] average price over the last five minutes
+[00:10:42] and it's a 5-minute rolling period it's
+[00:10:46] not just the last five minute candle
+[00:10:47] it's the last five minutes alright so
+[00:10:50] let me let me show you let's break this
+[00:10:52] down so now cool opened here we had a
+[00:10:55] pre market high of 450 we pulled back a
+[00:10:57] little bit and then we started squeezing
+[00:10:59] up now if I switch this here to a
+[00:11:02] one-minute chart
+[00:11:04] pull this back here like this so in the
+[00:11:08] first one minute candle this squeeze
+[00:11:10] from 416 up to a high of 487 which is a
+[00:11:14] pretty big move but it's not twenty
+[00:11:17] percent now remember because we're
+[00:11:19] trading in the first 15 minutes our
+[00:11:21] thresholds are doubled this is a stock
+[00:11:23] priced above three dollars it's a Tier
+[00:11:25] two security
+[00:11:26] so it's bands are 10% from 9:45 until
+[00:11:30] 3:30 five and at the open at the close
+[00:11:32] the bands are 20% so if this moves 20%
+[00:11:36] it'll get halted on a 5-minute
+[00:11:38] circuit-breaker halt however that's 20%
+[00:11:41] from where is it 20% from the low of
+[00:11:44] this candle no it's 20% from the average
+[00:11:48] price over the last five minutes so here
+[00:11:52] you know the high of the last five
+[00:11:53] minutes was 449 and the low was 410 so
+[00:11:59] we've got an average price of just about
+[00:12:01] 425 all right so with an average price
+[00:12:04] of 425 this would need to move 85 cents
+[00:12:07] from 425 in order to get halted all
+[00:12:12] right so that would put us at five
+[00:12:14] dollars and ten cents we didn't get to
+[00:12:16] five dollars and ten cents we pull back
+[00:12:18] so we did not get a circuit breaker halt
+[00:12:20] all right now the next candle start to
+[00:12:23] squeeze up and we move here from 450 up
+[00:12:26] to 550 but again we're always basing on
+[00:12:30] the rolling period of the last five
+[00:12:32] minutes so let's say now we're looking
+[00:12:34] at the last five minutes let's say at
+[00:12:36] this red candle I'll just put a line
+[00:12:38] here this is our mark this is our mark
+[00:12:40] price will mark this here so the last
+[00:12:41] five minutes one two three four five so
+[00:12:43] the average price of these five minutes
+[00:12:45] right here we had a low of 416 and a
+[00:12:49] high of 497 so 497 - 416 is 81 cents so
+[00:12:55] the average price is 550 s 456 right
+[00:12:59] around 456 that's our midpoint
+[00:13:01] all right so 456 times 20% is 91 cents
+[00:13:07] so we need to go from 456 plus 91 cents
+[00:13:12] we need to go up to 547 in order to get
+[00:13:15] a circuit breaker Hall
+[00:13:16] all right so look at this squeeze the
+[00:13:18] squeeze is here up to five dollars up to
+[00:13:22] five 30 up to five thirty seven up to
+[00:13:27] 550 so that's really interesting right
+[00:13:29] we just got to 550 right here but by the
+[00:13:32] point so from here to here we just hit
+[00:13:35] that 20% but I remember at this point
+[00:13:37] now we're basing the midpoint price on
+[00:13:41] the last five minutes
+[00:13:42] so here the last five minutes the high
+[00:13:45] was 537 and the low is one two three
+[00:13:48] four five and the low is 427 so 537 -
+[00:13:54] 427 is let's see do I advise so it's 55
+[00:13:59] so 537 - 55 cents is 42 so now this
+[00:14:06] needs to go up 20% from 482 which would
+[00:14:09] be 96 cents plus 482 is 578 so now the
+[00:14:15] trigger is 578 well we haven't hit it
+[00:14:17] yet right we hit 550 now this is what
+[00:14:21] keeps happening every 5-minute rolling
+[00:14:23] period we're getting the midpoint or the
+[00:14:25] mid price the reference price is being
+[00:14:27] reset and it keeps getting reset
+[00:14:29] throughout the day so what we need to
+[00:14:31] see in order for a stock to get halted
+[00:14:33] is inside five minutes and it's not five
+[00:14:36] minute candles it's just inside five
+[00:14:38] minute periods we need to see the stock
+[00:14:40] squeeze up more than 20% if we're at the
+[00:14:43] open or closed or more than 10% during
+[00:14:46] the day now here's another thing that
+[00:14:49] makes this a little tricky just because
+[00:14:52] the stock breaks the band does not
+[00:14:55] immediately trigger a halt the stock
+[00:14:58] actually has to break the band and hold
+[00:15:01] above the top or bottom band for 15
+[00:15:04] seconds so as soon as the stock breaks
+[00:15:07] out of its band a 15 second timer starts
+[00:15:09] if the stock returns to trading back
+[00:15:11] within the reasonable bands we won't
+[00:15:14] have a circuit breaker Hall but if it
+[00:15:16] continues to trade outside those bands
+[00:15:18] the stock will be halted for five
+[00:15:20] minutes now during a five-minute circuit
+[00:15:22] breaker halt a stock can then be halted
+[00:15:25] pending news so the hall code can change
+[00:15:27] in the middle of a circuit breaker hall
+[00:15:29] let's say you get a circuit breaker hall
+[00:15:31] and then the company says well hold up
+[00:15:33] we actually the stock is running maybe
+[00:15:35] on a rumor or something like that
+[00:15:37] we do want to halt trading because we're
+[00:15:39] going to release material news you know
+[00:15:40] we're going to say yes this halt is or
+[00:15:42] yes this rumor is real or no this rumor
+[00:15:45] is not real etc so we can have that
+[00:15:48] happen it happens from time to time now
+[00:15:50] let's look at another example here so
+[00:15:53] that was a stock that ran 60 percent
+[00:15:56] without getting halted because it just
+[00:15:58] was falling slightly short of the
+[00:16:00] circuit breaker halt thresholds alright
+[00:16:03] and that's specifically because of the
+[00:16:06] five-minute rolling period if that was
+[00:16:08] based on the midpoint of the last five
+[00:16:11] minute candle it would have been halted
+[00:16:13] all right but that's not what it's based
+[00:16:15] on all right so now let's look at d ry s
+[00:16:17] this is the stock that made the crazy
+[00:16:19] crazy move all right so here we go we've
+[00:16:23] got this stock here so this is a stock
+[00:16:27] that was halted for a cup for a ce o--'s
+[00:16:30] halted for a day it was a day and action
+[00:16:34] well let's see I can see the dates right
+[00:16:35] here yeah it was halted for a day it was
+[00:16:37] helped for about a day and a couple
+[00:16:38] hours so I was halted pre-market and it
+[00:16:41] was halted I believe it was halted by
+[00:16:43] the exchange they they're like okay this
+[00:16:46] stock is $120 a share we need to halt
+[00:16:48] this and we need the company to respond
+[00:16:51] to what's going on with the stock so I
+[00:16:53] believe it was halted pending more
+[00:16:55] information from the company and then so
+[00:16:57] pelted by the SEC or by a Nasdaq and
+[00:17:00] then during this time when it was halted
+[00:17:03] the company did a secondary offering all
+[00:17:06] right we talked about this in our Terms
+[00:17:10] video where we talk about flow all right
+[00:17:12] so the company did a secondary offering
+[00:17:14] it's like a second IPO they sell more
+[00:17:17] shares onto the open market to raise
+[00:17:19] money all right stock reopens and it
+[00:17:22] reopens a lot lower all right and now
+[00:17:26] we're at a point where I'm not sure if
+[00:17:28] I'll be able to go back far enough on my
+[00:17:29] one-minute chart here but now we're at a
+[00:17:31] point where we're going to see many
+[00:17:33] circuit-breaker halts back to back to
+[00:17:35] back to back the stock is just tanking
+[00:17:37] and basically you don't have buyers all
+[00:17:40] you have are sellers and so what you
+[00:17:42] have is a real in Val
+[00:17:43] once between the buyers and the sellers
+[00:17:44] and that caused the stock to drop very
+[00:17:47] quickly all right so you can see right
+[00:17:50] here so let's back up all right so we
+[00:18:01] opened this candle open at 50 108 50 108
+[00:18:07] and it dropped to a low of 45 97 before
+[00:18:12] it was halted so it basically dropped
+[00:18:13] five points and was halted it reopens
+[00:18:17] here at $36 it drops to 31 drops about
+[00:18:22] three points and is halted
+[00:18:25] it opens lower it opens at a low of it
+[00:18:29] opens at 26 it drops down and then is
+[00:18:33] halted again we resume and on this one
+[00:18:37] we bounced up and here we get halted
+[00:18:39] going back up we squeeze up you know
+[00:18:42] about two and a half points and we're
+[00:18:43] halted so this keeps getting halted on
+[00:18:45] 10% circuit breakers we halt three times
+[00:18:48] going down we halt once going up and
+[00:18:51] let's see there was the one halt there
+[00:18:54] and I can see by looking at the timer
+[00:18:56] that this was 10:43 this candle and this
+[00:18:59] candle was 1048 so I know there was a
+[00:19:01] five-minute circuit breaker right there
+[00:19:02] and let's see 54:59 we had another five
+[00:19:07] minutes circuit breaker right here so
+[00:19:09] this was halted at 54 going up and
+[00:19:12] reopens here a little bit higher so we
+[00:19:14] had one two three four five circuit
+[00:19:17] breaker halts you know it a period of
+[00:19:20] gosh when did this resume it resumed at
+[00:19:22] 10:30 so in a period of about 35 minutes
+[00:19:25] this was an extremely volatile stock
+[00:19:28] what's important to know is that when
+[00:19:30] stocks are halted going down
+[00:19:32] they usually open lower their halting
+[00:19:35] going down because there's no buyers and
+[00:19:37] if they're if the buyers don't show up
+[00:19:39] all you have our sellers trying to get
+[00:19:42] out and the result is that the stock is
+[00:19:44] going to open lower you don't have
+[00:19:45] buyers there to create the bit stock
+[00:19:48] opens lower on the other hand when
+[00:19:50] stocks get halted squeezing up there's a
+[00:19:53] very good chance that they open higher
+[00:19:54] and this is
+[00:19:55] what we were seeing on dro is through
+[00:19:58] these halts we were having a squeeze
+[00:20:00] halt and open higher you can see some of
+[00:20:02] these in here let's see where's a good
+[00:20:04] one to do you've got a couple right in
+[00:20:09] here we squeeze we open a little bit
+[00:20:12] higher it's not the not the best example
+[00:20:15] and Gogi lbs this one might be a better
+[00:20:16] one and but when stocks are squeezing go
+[00:20:19] and going up they usually end up opening
+[00:20:21] higher and so the result and here you go
+[00:20:24] there's there's some good jumps so it
+[00:20:27] just keeps opening high or higher higher
+[00:20:28] higher and this is a stock they
+[00:20:30] literally went from $8 a share to $24 a
+[00:20:33] share in one day right so there's huge
+[00:20:37] potential there but what if you're the
+[00:20:38] guy that bought on this candle at 22 and
+[00:20:41] then all of a sudden it resumes at 16
+[00:20:43] right that's when things get scary so
+[00:20:46] you have to be careful trading halts my
+[00:20:49] rule of thumb when I trade halts is that
+[00:20:51] if a stock gets halted I will trade
+[00:20:53] after the first halt and if it squeezes
+[00:20:56] up and gets helped it again I'll trade
+[00:20:57] after the second halt I don't trade
+[00:20:59] after the third halt that's my rule I
+[00:21:01] trade after the first and the second
+[00:21:03] halt but I don't go further than that
+[00:21:05] that's kind of for me like trading the
+[00:21:07] first and second pullback you know I
+[00:21:09] trade the first pullback on a bull flag
+[00:21:11] I trade the second pullback but then I
+[00:21:13] don't push my luck after that all right
+[00:21:16] so let's jump back into the slides here
+[00:21:18] so we've gone through this you
+[00:21:20] understand that there are some
+[00:21:21] intricacies here this is not the most
+[00:21:23] crystal clear type of thing and of
+[00:21:26] course if you're in our chat room I'll
+[00:21:27] be able to walk you guys through this
+[00:21:28] when we have examples in real time but I
+[00:21:31] also have a couple examples right here
+[00:21:33] that I recorded so what you're going to
+[00:21:35] notice is that the stock adjust before
+[00:21:37] it's halted the level 2 becomes pinned
+[00:21:40] at a fixed price so when the level 2 is
+[00:21:43] pinned it's a really good indicator that
+[00:21:44] the stock is about to get halted we're
+[00:21:47] looking at a kao which is this level 2
+[00:21:50] right down here in the the bottom the
+[00:21:52] bottom corner alright so we're going to
+[00:21:55] watch this is a stock squeezing up
+[00:21:56] currently up 30% and I believe we're at
+[00:22:00] 9:30 so we're in the early morning we've
+[00:22:02] got our larger 20% bands we just
+[00:22:05] squeezed up now we're 50 by 60 50 on the
+[00:22:08] bid 51 on the ass
+[00:22:09] so we know this thing you know just
+[00:22:12] popped up it just flash being up I think
+[00:22:15] 40 percent or something like that for a
+[00:22:17] moment but remember it has to hold for
+[00:22:19] 15 seconds over those bands in order to
+[00:22:22] get circuit breaker halts alright so we
+[00:22:25] get just a little bit of a pullback so
+[00:22:28] this is the type of stock I'm watching
+[00:22:30] as soon as it pops back over the
+[00:22:31] half-dollar
+[00:22:32] there's the pop over the half-dollar now
+[00:22:34] we're up to 70 80 74 on the bid 82 on
+[00:22:39] the ask 69 on the ask so this is one of
+[00:22:44] those ones that I'm thinking the next
+[00:22:45] target is five dollars can this move up
+[00:22:47] to five dollars
+[00:22:48] there's 84 I jumped in now we're
+[00:22:53] starting to trade outside the bands so
+[00:22:56] 15 second timer has started see how the
+[00:23:00] price is pinned right here 5:13 we're
+[00:23:03] about to get halted see how it's stacked
+[00:23:06] there and pinned right at 5:13 this is
+[00:23:09] going to get halted it's going to show a
+[00:23:10] P right here for pause there we go we're
+[00:23:13] paused so we're halted now and we're
+[00:23:15] going to be halted for exactly five
+[00:23:17] minutes
+[00:23:17] so this halted at 30 205 it's going to
+[00:23:20] resume at thirty seven oh five exactly
+[00:23:23] five minutes later almost almost exactly
+[00:23:26] all right so let's fast-forward this
+[00:23:28] just a little bit alright so we've got
+[00:23:34] about 30 seconds left now the high was 5
+[00:23:37] 13 over 5 13 is a potential ad now I
+[00:23:40] jumped into this but I chased it and
+[00:23:42] I've got small size so this is going to
+[00:23:44] be a big winner for me but I have had
+[00:23:47] trades where I'm holding through a hall
+[00:23:48] with 5,000 or even 10,000 shares and
+[00:23:51] when they open higher the profits they
+[00:23:54] can just be crazy you can make a ton of
+[00:23:56] money trading circuit breaker halts if
+[00:23:58] you understand the right entries all
+[00:24:01] right so this should be resuming in
+[00:24:02] about 10 seconds it will resume like I
+[00:24:03] said 5 minutes from when it was halted
+[00:24:05] 37 o 1 o 2 3 there we go and we're open
+[00:24:11] 5:45 look at that look at that so on
+[00:24:14] this one I'm just adding I'm like let's
+[00:24:16] just ride this alright but remember
+[00:24:18] we're going to watch the bands so we've
+[00:24:21] got up to a high of 608 we
+[00:24:24] squeezed up we didn't hold up there long
+[00:24:25] enough to get the full halt I added and
+[00:24:28] then I flipped back out ended up making
+[00:24:32] $1,200 on this trade profiting just by
+[00:24:35] understanding the stocks that get halted
+[00:24:37] they've got this imbalance they're very
+[00:24:39] likely to continue squeezing so we have
+[00:24:42] the high of 608 now when I watch this
+[00:24:44] you know we'll see what happens on the
+[00:24:47] low we certainly wouldn't want to see a
+[00:24:49] break below $5 but these ones sometimes
+[00:24:53] are not able to hold up if they are
+[00:24:55] getting just irrationally strong let's
+[00:25:02] fast-forward this a little bit more so
+[00:25:08] and this one is actually switched and
+[00:25:09] jumped in Oh PGN trading a different
+[00:25:12] stock but I don't think that that one's
+[00:25:14] gonna get halted it looks like a kao is
+[00:25:21] just kind of fading not doing much yet
+[00:25:24] so in any case is you know $2,200 in 10
+[00:25:29] minutes of trading not too bad alright
+[00:25:32] now let's look at another example
+[00:25:35] all right looking at the stock about to
+[00:25:38] get halted so right now we've got hm NY
+[00:25:40] that was halted and it was halted at
+[00:25:43] 1204 and something so this will resume
+[00:25:46] any moment there's the resumption I'm
+[00:25:49] watching this looking to get in I jumped
+[00:25:53] in right there 5,000 shares at 66 and or
+[00:25:56] 16 and look at how quickly we just
+[00:25:58] squeezed up we're 460 on the ask so this
+[00:26:02] was halted and just squeezed five
+[00:26:05] dollars next target now right now are we
+[00:26:11] trading outside those bands see the way
+[00:26:13] this is trading it looked like for a
+[00:26:15] second we may have been trading outside
+[00:26:17] those bands so there's a little bit of
+[00:26:18] risk there risk of a of a second haul
+[00:26:23] and we do see stocks like d ry s that
+[00:26:25] halt back-to-back-to-back-to-back look
+[00:26:30] at the spreads on this this one's tough
+[00:26:31] because we're like 490 and then 440 it's
+[00:26:34] all over the place so I was able to put
+[00:26:36] out an order up there
+[00:26:37] gaile out most my position locked up
+[00:26:40] 2,000 dollars in profit if you can get
+[00:26:43] over $5 obviously that would be awesome
+[00:26:45] but this is a tough one to trade for 33
+[00:26:48] by 474 we're up 326 percent today that's
+[00:26:53] pretty crazy but as day traders we love
+[00:26:55] volatility this is what we look for
+[00:26:57] stocks that are making big moves because
+[00:26:59] this is where we can profit so let's see
+[00:27:05] let's fast forward this a little bit
+[00:27:06] more it looks like I sold the rest of
+[00:27:09] that position little pullback still
+[00:27:15] hanging out there under that five dollar
+[00:27:16] spot so we broke over five looks like we
+[00:27:22] broke 518 as soon as we broke that level
+[00:27:25] suddenly were 550 on the ask anyone who
+[00:27:27] had shorted starts covering they're like
+[00:27:28] all right you know except two feet I was
+[00:27:31] wrong on this one and all of a sudden
+[00:27:33] right we were outside for 15 seconds and
+[00:27:36] now how the level 2 is getting pinned 62
+[00:27:39] by 64 60 to 62 or halted now we're going
+[00:27:45] to be halted for 5 minutes we'll resume
+[00:27:47] at 1218 and about 16 seconds so I fast
+[00:27:52] forwarded this right to that point so
+[00:27:54] now we're going to resume I look to add
+[00:27:57] over 560 whenever I trade stocks out of
+[00:28:00] halts I usually like to add over the
+[00:28:02] high of the hull if we open lower or if
+[00:28:06] we open higher I'll add at a whole
+[00:28:07] dollar like $4 the way I did here or
+[00:28:10] sometimes I'll add you know at the half
+[00:28:12] dollar of like 450 now we're still
+[00:28:15] having an issue with fairly big spreads
+[00:28:17] on this which does make it a little bit
+[00:28:19] more risky but this is fairly similar to
+[00:28:22] what we saw on dr ys
+[00:28:28] there's 67 there's 70 72 on the ask 61
+[00:28:35] on the bid at this point I'm up $4,600
+[00:28:38] on the day so I'm not being as
+[00:28:39] aggressive to buy this really high just
+[00:28:41] knowing how quickly it could drop back
+[00:28:43] down to 520 with 4,000 shares I'd be
+[00:28:46] down $2,000 it's not hard to give up
+[00:28:48] half your day being too aggressive in
+[00:28:50] the afternoon or you know a lunchtime
+[00:28:58] we're up four hundred and forty percent
+[00:29:00] in one day for thirty five on the ask
+[00:29:04] that kind of thing happens when someone
+[00:29:06] who's short just presses the market
+[00:29:08] order to bail out and you know suddenly
+[00:29:10] you get this spike up to the next level
+[00:29:13] but in this case this stock you know
+[00:29:15] we're looking at the 5-minute rolling
+[00:29:17] period right so we're looking at the
+[00:29:18] price over the last five minutes and if
+[00:29:21] it doesn't exceed 10 percent then you
+[00:29:24] know we're not going to get halted so it
+[00:29:25] just continues to look at the last five
+[00:29:27] minutes actually this one this one may
+[00:29:31] have been under different threshold
+[00:29:33] because of the fact that it started
+[00:29:37] below $3 that's actually an interesting
+[00:29:38] interesting question I'm not sure at
+[00:29:40] what point the rule changes say a stock
+[00:29:44] you know opens under $3 what point does
+[00:29:47] it cross over to changing thresholds I
+[00:29:50] don't know if that happens midday or if
+[00:29:51] that happens only at any time during a
+[00:29:56] day all right so here we have CD RB this
+[00:30:00] is up 33% and it's currently halted it
+[00:30:03] was halted at 10:00 22 and 24 seconds so
+[00:30:06] to resume 10 27 and 24 seconds so
+[00:30:10] fast-forward this a little bit all right
+[00:30:14] so as soon as we resume the highway 625
+[00:30:16] 625 would be a possible entry so I've
+[00:30:23] got my order at 6:30 right now
+[00:30:26] resumption is there so we open a little
+[00:30:32] higher end up opening high we've got a
+[00:30:34] high of 660 and now it's kind of like
+[00:30:36] are we going to see buyers just pour
+[00:30:38] into this and are we going to squeeze
+[00:30:41] or are we going to see this rollover as
+[00:30:44] soon as I see that bid there of 55
+[00:30:46] that's kind of the thing that I look for
+[00:30:47] that tells me that other traders are
+[00:30:49] looking at this too so now we're 84 by
+[00:30:55] $7.25 spread not ideal
+[00:31:06] so there's 704 717 732 so you can see
+[00:31:19] this is moving up but at the same time
+[00:31:22] we've got these big spreads and you know
+[00:31:24] it's certain point here we're going to
+[00:31:26] get close to the outside of those bands
+[00:31:31] right so it's six sixty or six seventy
+[00:31:34] it's about you know 60 cent 70 cent band
+[00:31:38] it needs to hold outside of that for 15
+[00:31:42] seconds
+[00:31:51] so every one minute candle that closes
+[00:31:53] the reference point when these are
+[00:31:56] moving quickly is going to move up
+[00:31:57] quickly as well because the average
+[00:31:59] price of the last candle is 675 so it's
+[00:32:03] going to keep moving up
+[00:32:05] that means stocks really have to be
+[00:32:07] extreme in order to get halted so this
+[00:32:15] is very light volume you know 717 by 726
+[00:32:18] right now I've been watching it haven't
+[00:32:21] taken a position on it little
+[00:32:26] fast-forward this a little bit see if we
+[00:32:28] pop up for another halt so this right
+[00:32:33] here is forming a flag on the one-minute
+[00:32:35] chart we've got our bull flag the big
+[00:32:37] flagpole the candle is coming back so
+[00:32:39] this is one where I would say well over
+[00:32:41] seven dollars you know we could get an
+[00:32:43] opportunity possibly a break but you
+[00:32:46] know the more it sells off here is it
+[00:32:48] starts to fill the gap coming down it
+[00:32:50] just becomes broken especially as it
+[00:32:52] breaks that moving average which is
+[00:32:55] really more getting into both flags but
+[00:32:58] in any case it's good to know that so
+[00:33:02] this one's this one would be out of play
+[00:33:03] for me now as many of you guys know we
+[00:33:07] had Black Monday this was August 24th
+[00:33:09] 2015 Black Monday round two
+[00:33:11] there were over 1200 circuit breaker
+[00:33:14] halts when the market opened it was
+[00:33:17] pretty crazy
+[00:33:18] so the market tanked thousand points
+[00:33:20] causing circuit breaker halts on the way
+[00:33:23] down and then as stocks popped up we had
+[00:33:26] circuit breaker halts going back up
+[00:33:28] there was so much volatility but you
+[00:33:31] know it actually could have been a lot
+[00:33:33] worse if we didn't have those circuit
+[00:33:35] breaker halts it could have been a lot
+[00:33:36] worse because I mean the market was just
+[00:33:38] it was completely tanking so these you
+[00:33:41] know are there to really to help reduce
+[00:33:44] to help reduce risk to help reduce
+[00:33:47] volatility so that when we have bad days
+[00:33:49] they're not going to be you know they're
+[00:33:52] not going to be as bad as you know as
+[00:33:56] they could be so let's go back here
+[00:33:57] let's see if I can go back Shea might
+[00:33:59] not be oh I'm out of five minutes sharp
+[00:34:01] just say alright so let's look at the
+[00:34:03] daily chart I just want to show you this
+[00:34:06] and every stock I mean you know from
+[00:34:08] Facebook I mean every single stock was
+[00:34:11] halting I mean these are stocks dropping
+[00:34:14] you know Tier one stocks dropping five
+[00:34:16] percent and getting triggered on these
+[00:34:18] circuit breaker halts so let's see where
+[00:34:21] we know so on this day right here August
+[00:34:28] 24th the market just absolutely tanks I
+[00:34:31] mean you can see this is we dropped from
+[00:34:33] 196 here on the spy all the way down to
+[00:34:36] the low of 182 that's a heat that's a
+[00:34:39] huge huge drop in one day but you know
+[00:34:42] this candle ended up being it ended up
+[00:34:44] being a bounce we drop down and then we
+[00:34:46] popped right back up and I think that's
+[00:34:48] thanks to the fact that we had those
+[00:34:50] circuit breaker halts traders were
+[00:34:52] allowed to pause think about what was
+[00:34:54] going on some of them realized the
+[00:34:55] selling was overdone and then we were
+[00:34:58] able to in between one of those circuit
+[00:35:00] breaker halts momentum shifts and all of
+[00:35:03] a sudden buyers start to come in
+[00:35:04] thinking you know what I can get these
+[00:35:06] stocks on discount right now they just
+[00:35:08] drop 10 percent I'm going to come in I'm
+[00:35:10] going to buy them up on discount and
+[00:35:12] look we got this big pop over the next
+[00:35:14] even over the next few weeks we got 10%
+[00:35:17] move off those lows so that was a quick
+[00:35:19] 10 percent bounce in major indices and
+[00:35:22] in sp500 stocks so this is you know
+[00:35:26] circuit breaker halts for us is
+[00:35:28] something that we deal with primarily
+[00:35:29] with a low price stocks because that's
+[00:35:31] where we see it the most but these also
+[00:35:34] exist for the high price stocks for the
+[00:35:36] tier 1 stocks and even for the entire
+[00:35:39] exchanges alright so you know this is
+[00:35:42] one of those ways to try to prevent risk
+[00:35:45] and you know reduce the the chance of
+[00:35:48] having the market drop you know 2,000
+[00:35:50] points in one day and that's important
+[00:35:52] you know the so many investors and
+[00:35:55] traders we have a long bias
+[00:35:56] you know we buy stocks expecting them to
+[00:35:58] go up you certainly don't want to have
+[00:36:00] the risk that a stock can lose 50
+[00:36:02] percent over the course of five minutes
+[00:36:04] because somebody puts out a giant order
+[00:36:07] by accident right and I think as it
+[00:36:10] turned out that was not the cause of the
+[00:36:11] the flash crashes that we
+[00:36:14] scene but they weren't fat-finger orders
+[00:36:16] but it was like algorithms that went
+[00:36:19] haywire but in any case I think it's
+[00:36:22] still a good security measure to have
+[00:36:23] and the cool thing is that as traders
+[00:36:27] looking for volatility we found a way
+[00:36:29] that we can profit from the circuit
+[00:36:31] breaker halts so you know when we see a
+[00:36:33] stock that's halted it pauses it gives
+[00:36:36] traders a chance to catch up on what's
+[00:36:38] going on so we can jump in and get a
+[00:36:40] piece of the action all right guys so I
+[00:36:43] hope this has helped you understand
+[00:36:45] circuit breaker halts I know it can be a
+[00:36:47] little confusing if you have any
+[00:36:48] questions feel free to ask me either in
+[00:36:50] our chat room in the comments or by
+[00:36:53] email Ross at warrior trading comm hey
+[00:36:59] guys I also want to remind you to
+[00:37:01] subscribe to our YouTube channel you can
+[00:37:04] click by subscribing that way you can
+[00:37:06] get alerts when I upload new videos like
+[00:37:08] my teaching you had a day trade video or
+[00:37:10] the video right turned a thousand
+[00:37:12] dollars into eight thousand six hundred
+[00:37:14] dollars in one month thanks guys

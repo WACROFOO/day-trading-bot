@@ -1,0 +1,710 @@
+# My #1 Indicator for HOLDING WINNERS LONGER
+# https://www.youtube.com/watch?v=Ai6r6xjk8Uk
+# duration_sec: 1648
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to teach
+[00:00:03] you how to use hakashi Candlestick
+[00:00:05] charts to improve your hold time so you
+[00:00:07] stop selling your winners too soon the
+[00:00:10] original inventor of Candlestick charts
+[00:00:13] was a Japanese rice Futures Trader back
+[00:00:16] in the 1700s and he actually created two
+[00:00:19] different types of charts one are the
+[00:00:21] traditional Candlestick charts that you
+[00:00:23] and I are very familiar with and the
+[00:00:25] second is the hakashi Candlestick chart
+[00:00:28] a hakashi chart stands for average bar
+[00:00:31] chart so it's an average smooth chart
+[00:00:36] and it makes the price action look a lot
+[00:00:37] cleaner which for us as active Traders
+[00:00:40] it makes it easier to visualize the
+[00:00:43] trend and to clearly see when the trend
+[00:00:45] is changing so when you compare these
+[00:00:47] two charts side by side traditional
+[00:00:49] Candlestick charts will give you an edge
+[00:00:52] on your entries but haki charts will
+[00:00:55] help you hold your positions longer
+[00:00:57] let's go ahead and jump into today's
+[00:00:59] class we're get on the slide deck here
+[00:01:01] I've got a full screen now actually
+[00:01:02] before I do that let me give you a
+[00:01:03] little teaser of what these charts look
+[00:01:06] like so this is a hakashi Candlestick
+[00:01:08] chart right down here and this is the
+[00:01:10] same stock right up above with a
+[00:01:13] traditional Candlestick chart now for
+[00:01:15] reference it doesn't matter whether
+[00:01:16] you're trading stocks Forex Futures
+[00:01:18] cryptocurrency you can use these
+[00:01:20] Candlestick charts on any Financial
+[00:01:22] instrument and they are very well
+[00:01:24] respected across small caps large caps
+[00:01:26] again doesn't matter so this was a trade
+[00:01:29] that I actually took just yesterday and
+[00:01:31] uh this is the hakashi Candlestick chart
+[00:01:33] here where you can see that you have
+[00:01:35] these uh long stretches of green candles
+[00:01:38] longer stretches of red candles and the
+[00:01:40] idea here is that and I'll show you the
+[00:01:42] calculation of how these candles are
+[00:01:44] created but it's averaging the price
+[00:01:47] over two candles so it's smoothing out
+[00:01:50] that price action and these give a much
+[00:01:53] Clear uh depiction of trend so when we
+[00:01:57] look at this over long periods of time
+[00:01:58] we can see very easily when we're
+[00:02:01] trending one way or or when the trend is
+[00:02:03] potentially about to shift so one of the
+[00:02:06] strategies that a lot of Traders will
+[00:02:07] use with these Candlestick charts is
+[00:02:09] that once they get in a position they'll
+[00:02:11] hold until there's a change in the color
+[00:02:14] of the candle so essentially it's a long
+[00:02:17] much longer hold time which is what
+[00:02:18] we're going for if we want to really
+[00:02:19] improve our trading so this is a trade
+[00:02:22] where uh the stock squeezed up here from
+[00:02:25] $4.60 all the way to 625 which is a
+[00:02:28] great move but here's the problem you
+[00:02:31] have a great move like that and let's
+[00:02:33] just say for instance that you missed
+[00:02:35] your your entry or all of a sudden you
+[00:02:37] sit down and this stock is hitting your
+[00:02:38] scanner ding ding ding ding it's hitting
+[00:02:40] the scanner it's moving higher and
+[00:02:42] you're like shoot where do I get in so
+[00:02:44] with a hakashi Candlestick chart it's
+[00:02:47] more difficult to time your entries
+[00:02:49] because you're buying in the middle of
+[00:02:51] this long stretch of trend right now you
+[00:02:55] can see that there's a little dip right
+[00:02:58] here but it's not to me as visually
+[00:03:00] noticeable as that dip is right there on
+[00:03:03] a traditional Candlestick chart so this
+[00:03:06] is what this is the way I like to use
+[00:03:07] these um we've got in the background
+[00:03:10] here my stock scanners and my trading
+[00:03:13] platform which are just standard
+[00:03:14] Candlestick charts so when a stock hits
+[00:03:17] my scanner like mlgo did yesterday it
+[00:03:20] hits my scan I see it squeezing up and
+[00:03:22] I'm looking at traditional Candlestick
+[00:03:24] charts we get this first pullback right
+[00:03:26] here and that's where I'm taking my
+[00:03:29] entry this is what I call a micro
+[00:03:31] pullback this is actually one of my
+[00:03:33] favorite patterns that I trade and this
+[00:03:34] is a pattern specific to traditional
+[00:03:37] Candlestick charts so to give you kind
+[00:03:40] of the anatomy of this pattern typically
+[00:03:42] it's characterized by a large green
+[00:03:45] candle at least one but it could be it
+[00:03:48] could be three it could be four it
+[00:03:50] doesn't really matter but you've got at
+[00:03:52] least some serious rate of change this
+[00:03:55] is typically triggered as was the case
+[00:03:57] um with a lot of stocks with a new
+[00:04:00] catalyst so you've got breaking news
+[00:04:02] that comes out and that sends the stock
+[00:04:04] higher so as the stock is moving higher
+[00:04:07] what's happening it's hitting a new high
+[00:04:09] and for me it's meeting the criteria to
+[00:04:12] hit my scanners so my scanners are
+[00:04:15] searching for very specific things in
+[00:04:16] the market we're looking for rate of
+[00:04:18] change we're looking for volatility
+[00:04:20] we're looking for liquidity and so this
+[00:04:22] stock it's meet let's just say it's
+[00:04:23] meeting all of those criteria so I'm
+[00:04:25] getting the audio alert so I'll draw a
+[00:04:26] little picture of a bell here so we're
+[00:04:29] getting the audio alert ding ding ding
+[00:04:31] ding all right so now I'm looking at the
+[00:04:32] stock but where do I get in now if I'm
+[00:04:34] looking at a hakashi Candlestick chart
+[00:04:37] I'm I'm just going to see these big
+[00:04:39] green bars so this is going to be hard
+[00:04:41] for me to really visualize that I where
+[00:04:44] should I buy and so this is where I'm
+[00:04:47] using traditional Candlestick charts and
+[00:04:49] what I'm looking for is that first
+[00:04:50] pullback right here the first pullback
+[00:04:53] after initial move for me is one of my
+[00:04:56] absolute favorite patterns I call this I
+[00:04:59] often call it a micro pullback I'll
+[00:05:03] actually put a link in the description
+[00:05:04] and I'll pin it to the comments top of
+[00:05:06] the comments where you can download my
+[00:05:07] micro uh pullback strategy PDF all right
+[00:05:11] it's a PDF you can print out and you can
+[00:05:12] start practicing this on your own if
+[00:05:13] you'd like so then where I'm buying is
+[00:05:16] first candle to make a new high right
+[00:05:18] here this is the spot where I'm getting
+[00:05:20] really excited it's that first candle to
+[00:05:22] make a new High versus the high the
+[00:05:23] previous candle right so let's say the
+[00:05:26] high of this previous candle was 375
+[00:05:29] as soon as this price breaks 375 I'm a
+[00:05:33] buyer my stop is at the low of the
+[00:05:35] pullback that's my Max loss and my
+[00:05:37] profit Target is a squeeze through the
+[00:05:39] high but what I know about this pattern
+[00:05:40] is that if I'm getting in at the
+[00:05:41] beginning of a move typically these will
+[00:05:43] continue to Trend higher okay so now
+[00:05:48] let's say I I I did I did my micro
+[00:05:51] pullback strategy PDF uh entry right
+[00:05:53] here so I'm in at 550 which is exactly
+[00:05:57] where I bought so I bought this yester
+[00:05:59] yesterday at 550 now it starts squeezing
+[00:06:02] up right here but you'll notice o we got
+[00:06:04] this little red candle right there now
+[00:06:07] traditionally most traders who are just
+[00:06:09] using Candlestick charts are going to
+[00:06:10] look at this and say uhoh you've got a
+[00:06:13] candle that is
+[00:06:15] communicating indecision and potential
+[00:06:17] reversal now if we get zoomed in on this
+[00:06:20] this particular candle this candle is
+[00:06:22] actually telling us something very
+[00:06:23] interesting so let's let's zoom into it
+[00:06:26] here a little bit more all right so this
+[00:06:29] candle do you see how it has this larger
+[00:06:31] topping tail right there the topping
+[00:06:34] tail is the top of the candle right
+[00:06:36] there so when we talk about the anatomy
+[00:06:38] of individual candlesticks what we know
+[00:06:41] is that a Candlestick has a
+[00:06:43] body and it can have a lower Wick and an
+[00:06:46] upper Wick we also call these topping
+[00:06:49] tails and bottoming Tails right so this
+[00:06:51] is the high this is the low that's the
+[00:06:53] open that's the close if this is a green
+[00:06:55] candle if it's a red candle it opens at
+[00:06:57] the top closes at the bottom and the
+[00:06:59] candle is red all right so candle was
+[00:07:01] going down in price so what we know is
+[00:07:04] that if we have a large topping tail so
+[00:07:06] in this case we'll do the correct color
+[00:07:08] so we have a red candle and it has a
+[00:07:11] large topping tail and it was after a
+[00:07:13] series of nice strong green candles
+[00:07:16] right so you have a series of nice
+[00:07:18] strong green candles and then this red
+[00:07:19] candle here what this is telling us is
+[00:07:21] that the price the buyers pushed it
+[00:07:23] higher and then the sellers pulled it
+[00:07:26] back down so this communicates that the
+[00:07:28] sellers were were in control by the end
+[00:07:30] of that Candlestick period and the
+[00:07:32] Candlestick closed red this is a candle
+[00:07:35] of certainly indecision in fact it's a
+[00:07:37] reversal indicator what confirms the
+[00:07:40] reversal is if the next candle is also
+[00:07:42] red and goes lower okay so now let's
+[00:07:45] look at our charts so in this case here
+[00:07:48] we have that red shooting star we call
+[00:07:51] it a shooting star because it's got that
+[00:07:52] large topping tail so we've got a red
+[00:07:54] shooting star right here but the next
+[00:07:57] candle doesn't go lower and so this
+[00:08:00] would be very very easy to get stopped
+[00:08:02] out and to me as a very active Trader I
+[00:08:06] typically would stop out I would I would
+[00:08:08] get out because I see this candle it's
+[00:08:10] Candle that's indicating a possible
+[00:08:11] reversal and I jump out of the trade and
+[00:08:13] next thing you know it's back up at six
+[00:08:15] and then you're like ah shoot do I get
+[00:08:17] back in here it's a 615 625 and now gosh
+[00:08:20] darn it look at this move so let's
+[00:08:23] contrast that with our hakashi candle
+[00:08:26] all right so we'll back this up here we
+[00:08:27] we'll make it Center so the hakashi
+[00:08:31] candle is not as good with giving us a
+[00:08:33] clear entry it's not visually showing
+[00:08:35] that micro pullback that I like to see
+[00:08:37] right in this area here it does sort of
+[00:08:40] it is there but it's not as visually
+[00:08:42] clear to me it's much clear in this
+[00:08:45] format with one red candle showing a
+[00:08:48] visual pullback and you can also look at
+[00:08:49] the volume profile more clearly to see
+[00:08:52] was the volume higher on the red candle
+[00:08:54] because if it was that indicates less
+[00:08:56] selling if the volume is lower on the
+[00:08:58] red candle then that's like oh okay okay
+[00:08:59] this is good it's just a little bit of
+[00:09:01] pullback and then we're looking for the
+[00:09:02] next move higher so you don't get that
+[00:09:05] with this so this is not Excel when it
+[00:09:08] comes to your entries but when it comes
+[00:09:11] to holding longer holding until that
+[00:09:13] first candle is red now one of the
+[00:09:16] things to be aware of is the fact that
+[00:09:20] while while you're trading these candles
+[00:09:22] are of course actively forming so it's
+[00:09:25] always possible that a candle could be
+[00:09:27] flashing red flashing red and then
+[00:09:30] closes green that's tricky because in
+[00:09:34] those moments I typically would be very
+[00:09:36] close to stopping out so this is a
+[00:09:38] candle where it was quite firmly red and
+[00:09:42] to be honest it's a pretty steep
+[00:09:43] pullback on this candle because we
+[00:09:45] dropped that was this candle right here
+[00:09:49] is coming through right at this moment
+[00:09:52] right so that's that candle now you do
+[00:09:55] have one red candle here on the uh
+[00:09:58] Candlestick chart
+[00:10:00] when this one was green so that same
+[00:10:02] candle right same time frame the chart's
+[00:10:05] not perfectly aligned but same same time
+[00:10:07] frame same moment the candle is green on
+[00:10:09] the hakashi but it's red on the
+[00:10:12] traditional Candlestick chart and that's
+[00:10:14] because this was taking the average of
+[00:10:16] the previous candle to calculate the the
+[00:10:19] this candle and this one is just
+[00:10:21] actually taking the current price so for
+[00:10:25] me there's a couple of other things I
+[00:10:26] like to use that help um that help PR
+[00:10:29] prevent false breakouts help me get out
+[00:10:31] a little bit sooner so looking at the
+[00:10:33] macd for instance right we've got our
+[00:10:35] moving average convergence Divergence
+[00:10:36] indicator there's a crossover we know
+[00:10:39] once we've had the crossover the price
+[00:10:40] action is going to be choppier so even
+[00:10:42] though we might see a uh oops move that
+[00:10:46] like that so even though we might see uh
+[00:10:49] a trend on the hakashi Candlestick that
+[00:10:51] begins to move back up say down here
+[00:10:53] where you've got some green candles we
+[00:10:55] would still know that well wait a second
+[00:10:57] the macd is against the trade so we're
+[00:10:58] not going to take it so I'm not going to
+[00:11:00] rely exclusively on Candlestick or
+[00:11:04] hakashi I'm still going to use my
+[00:11:06] technical indicators but the hakashi
+[00:11:08] Candlestick can help you with your exits
+[00:11:11] so let's um jump into the slide deck
+[00:11:13] here I'm going to go full screen and
+[00:11:16] let's start to talk about how these
+[00:11:17] candles are created so as I said the
+[00:11:21] hakashi Candlestick was created by the
+[00:11:23] inventor of the traditional Candlestick
+[00:11:25] chart hakin stands for average Ashi is
+[00:11:29] bar these are Japanese candlesticks so
+[00:11:33] the calculation of hakashi Candlestick
+[00:11:35] charts the open price which with a
+[00:11:37] traditional Candlestick chart is
+[00:11:39] literally the open price of the candle
+[00:11:42] at that moment right we know the anatomy
+[00:11:44] of the bar so we've got the high the low
+[00:11:47] the open and the close so this is the
+[00:11:49] opening price of that candle at that
+[00:11:52] period of time if this is a one minute
+[00:11:53] chart it's a one minute if it's a 5
+[00:11:55] minute chart it's a 5 minute depending
+[00:11:56] on the period of time of that candle so
+[00:11:59] with a hakashi Candlestick
+[00:12:02] chart uh the open is the open of the
+[00:12:07] previous bar plus the close of the
+[00:12:11] previous bar divided two and the close
+[00:12:15] of the current bar is the open plus the
+[00:12:18] close plus the high plus the low of the
+[00:12:21] current bar divided by four right so
+[00:12:25] this is a this is a different
+[00:12:26] calculation we're still using the same
+[00:12:29] data points of open and close high and
+[00:12:32] low but it's using the previous bar in
+[00:12:36] combination with the current bar to
+[00:12:39] smooth the price action the high is the
+[00:12:42] maximum high value from the high open or
+[00:12:45] close of the current period the low is
+[00:12:46] the minimum value of the low open close
+[00:12:49] of the of the current period so the high
+[00:12:50] and the low are the same but the open
+[00:12:54] and the close are different because
+[00:12:56] they're
+[00:12:57] averaging so the benefits of hakashi
+[00:13:00] Candlestick charts is that they smooth
+[00:13:03] the Candlestick so visually it's easier
+[00:13:05] to stay focused on the bigger Trend and
+[00:13:08] this is especially helpful if you are
+[00:13:11] trading large cap stocks because what we
+[00:13:13] know about large cap stocks um the S&P
+[00:13:16] might not be a great example of it
+[00:13:17] because the S&P is pretty choppy but if
+[00:13:19] we look at Nvidia we could just pull
+[00:13:21] this up just for a second um and maybe
+[00:13:23] we'll we'll pull up adobe in a moment
+[00:13:25] because that was one that was trending
+[00:13:26] the other day so let's see uh um where
+[00:13:30] are we in
+[00:13:31] time so you can see you've got these
+[00:13:33] longer periods where you've got this
+[00:13:36] more established Trend now this is not
+[00:13:38] it's not perfect but it's not uncommon
+[00:13:40] with a hakashi chart to see this is 2 4
+[00:13:43] 6 8 10 12 14 15 green candles in a row
+[00:13:48] these long stretches of trending price
+[00:13:52] and when you're in something that's
+[00:13:53] trending like that it's a lot easier
+[00:13:55] just to keep holding right when you're
+[00:13:58] at least you're able to visualize it
+[00:14:00] with a traditional Candlestick chart
+[00:14:02] it's very common to have you know five
+[00:14:04] six green candles in a row oops Adobe um
+[00:14:07] but eventually you know you get a you
+[00:14:09] get a red candle and it's easy to get
+[00:14:11] faked out and think oh shoot we've got a
+[00:14:13] red candle I better jump out of this
+[00:14:14] trade so we can go back to here at the
+[00:14:17] beginning of the
+[00:14:19] day all right so scroll this back one
+[00:14:22] minute one
+[00:14:24] minute so zoom out of this one step
+[00:14:27] there we go so this is an example here
+[00:14:29] where during this run up right in this
+[00:14:32] area you can see that this runup with a
+[00:14:35] Candlestick chart was characterized by
+[00:14:37] one two three red candles whereas here
+[00:14:42] once that Trend changed at the opening
+[00:14:44] range break out you had a nice solid
+[00:14:47] stretch and it's true that while you had
+[00:14:49] a couple red candles here the trend was
+[00:14:51] still intact yes you you could have said
+[00:14:55] oh I should get out cuz it's a red
+[00:14:56] candle but the big picture Trend was
+[00:14:58] still intact so I find this to be really
+[00:15:01] helpful if we're taking kind of like a
+[00:15:02] step back now some people would say well
+[00:15:04] what if we just look at the five-minute
+[00:15:05] chart right just zoom out one time frame
+[00:15:08] from off of the one minute and look at
+[00:15:09] the 5 minute you'll get a little bit of
+[00:15:11] a more smooth price action and while
+[00:15:13] you're not wrong about that one of the
+[00:15:15] problems with the five minute chart that
+[00:15:18] I have as an active Trader is that by
+[00:15:21] the time the candle has formed it's sort
+[00:15:24] of too late so you need to have a much
+[00:15:27] um looser leash on the stock because of
+[00:15:30] the amount of volatility that can occur
+[00:15:32] in 5 minutes right this is a big candle
+[00:15:36] so even if we actually switch both of
+[00:15:38] them to a 5minute chart then you get
+[00:15:41] even more clarity with the hakashi
+[00:15:42] candle so let's see so this one we'll
+[00:15:45] Zoom this forward so here you get an
+[00:15:47] even longer stretch where it's green and
+[00:15:49] you get let's see so 2 4 6 8 10 11 Green
+[00:15:53] candles right in the same area but you
+[00:15:56] can see here that this goes from $512
+[00:16:00] all the way up to
+[00:16:01] 530 so it's a much longer stretch
+[00:16:03] whereas this even on the five minute is
+[00:16:05] still characterized by these red candles
+[00:16:08] which might cause you to stop out
+[00:16:10] prematurely uh let's let's see we can
+[00:16:13] look at and I I'm I'm a active Trader so
+[00:16:15] I like using one minute and five minute
+[00:16:17] charts but uh really I'm I'm using
+[00:16:19] pretty fast time frames so I'll we'll
+[00:16:22] pull up the S&P 500 just to take a peek
+[00:16:24] at it so S&P 500 here so this was the
+[00:16:27] close so you can see during these
+[00:16:29] periods of course it's very
+[00:16:30] choppy and this definitely helps smooth
+[00:16:33] it out right so we're we're looking at
+[00:16:38] the same it's the same stock index but
+[00:16:42] you could see on this side down here
+[00:16:45] much longer stretches of trending
+[00:16:47] whereas in this area it's showing these
+[00:16:49] periodic red candles and the problem for
+[00:16:52] an active Trader is that it's very easy
+[00:16:55] for those red candles to stop you out so
+[00:16:58] the benefits of the hakashi candle is
+[00:17:00] that it does smooth the Candlestick so
+[00:17:01] it's easier to stay focused on the
+[00:17:03] bigger Trend which is a good thing it
+[00:17:04] can help you stay in the trade a little
+[00:17:06] bit longer even if it's just with a
+[00:17:08] small piece of your original position of
+[00:17:10] course there's nothing wrong with taking
+[00:17:12] profit as the price moves higher but you
+[00:17:14] know taking a little off the table a
+[00:17:16] little off the table and then holding
+[00:17:17] that last piece until you get that first
+[00:17:19] candle that ends up going red and
+[00:17:22] closing red but the drawbacks are that
+[00:17:25] because they Ed the prior period in
+[00:17:27] their calculation they can lag behind
+[00:17:29] the chart and so you can have moments
+[00:17:31] where you get that sudden drop and if
+[00:17:35] you were you know if you were using a
+[00:17:37] traditional chart you would have seen
+[00:17:39] kind of the writing on the wall a little
+[00:17:40] bit earlier of course this was a red
+[00:17:42] candle and so is this and this but the
+[00:17:45] trend continued now we know that the
+[00:17:47] first pullback and the second pullback
+[00:17:48] are always the strongest so this is now
+[00:17:51] coming into third pullback territory and
+[00:17:53] this was a bigger red candle this one
+[00:17:55] right here I was kind of surprised when
+[00:17:56] we had it dropped down as much as it did
+[00:17:58] it's quickly as it did but you know
+[00:18:01] nonetheless it happens I think that if
+[00:18:03] you were in using the a traditional
+[00:18:06] candlesticks on a micro pullback on your
+[00:18:08] entry that was a good entry and then
+[00:18:11] taking a little profit as it squeezes
+[00:18:13] higher is always good and then Final
+[00:18:16] Exit once you have a hakashi candle that
+[00:18:19] is going red you don't have to wait for
+[00:18:21] it to close red but once it starts going
+[00:18:23] red and you've got that candle under
+[00:18:25] candle formation that's what's important
+[00:18:27] to pay close attention to so candle
+[00:18:29] under candle is the opposite of the
+[00:18:32] first candle making a new high so when
+[00:18:34] I'm trading this pullback pattern right
+[00:18:36] here I'm looking for dip dip so these
+[00:18:40] candles make new lows right this one is
+[00:18:43] right here and then this one breaks the
+[00:18:45] low of the previous candle so that right
+[00:18:47] there is a candle going under the low of
+[00:18:50] the previous candle so it's Candle under
+[00:18:52] candle and then that reverses right here
+[00:18:54] as that green candle makes a new high
+[00:18:57] this is candle over candle right here so
+[00:18:59] now we're moving back up all right so
+[00:19:02] during a pullback an a good exit
+[00:19:04] indicator can be to hold until you get
+[00:19:07] that candle under candle formation so
+[00:19:10] sometimes for instance like this this
+[00:19:12] isn't this is a little bit of a funny
+[00:19:14] chart I just of course drew it but um
+[00:19:17] you've got big green candles and then
+[00:19:18] you have this red candle and then if
+[00:19:20] this next one goes higher like this you
+[00:19:23] never actually had a candle that made a
+[00:19:24] new low cuz the red candle didn't break
+[00:19:26] the low of the previous candle so in
+[00:19:28] this case the hakashi chart wouldn't
+[00:19:30] show a red candle it would only show
+[00:19:31] Green right and you would have been fine
+[00:19:34] to keep holding however if you get a
+[00:19:36] candle that actually breaks the low of
+[00:19:38] the previous candle like this that's
+[00:19:41] where we're having a problem and so you
+[00:19:43] can see that both on the hakashi and on
+[00:19:45] the traditional Candlestick charts so
+[00:19:47] looking and holding until you get a
+[00:19:49] candle that makes a new low is um is one
+[00:19:53] of the things that that I kind of focus
+[00:19:55] on U an additional drawback of hakashi
+[00:19:59] uh charts are that it is more difficult
+[00:20:02] to find an entry mid Trend it's in some
+[00:20:06] ways easier for uh I think reversal
+[00:20:09] trading where you're not getting in
+[00:20:11] until it reverses either you know to the
+[00:20:14] topside coming down or to the bottom
+[00:20:16] going back up but that's not how I like
+[00:20:19] to trade I don't prefer reversal trading
+[00:20:22] I find it easier to trade with the
+[00:20:24] general Trend than to try to trade
+[00:20:25] against the trend so that's where need
+[00:20:29] the traditional Candlestick chart to
+[00:20:30] find my entry as something's beginning
+[00:20:32] to open up and then I can use the
+[00:20:35] hakashi chart in conjunction to help me
+[00:20:38] hold a little bit longer on that
+[00:20:41] position all right so now the benefits
+[00:20:44] of the traditional Candlestick Charter
+[00:20:46] pretty well stated you you can much much
+[00:20:48] easier to identify micro pullbacks for
+[00:20:50] the entries again my micro pullback
+[00:20:52] strategy PDF is in the top of the
+[00:20:55] comments and in the description if you
+[00:20:56] want to download it and Candlestick
+[00:20:58] charts are also very well respected for
+[00:21:00] their buy and sell indicators topping
+[00:21:02] tails and bottoming Tails so many
+[00:21:04] Traders are using Candlestick charts
+[00:21:06] that when you see a big topping tail
+[00:21:08] like that a lot of people will bail out
+[00:21:10] because they're like oh topping tail
+[00:21:11] means weakness is coming in so it's good
+[00:21:13] to be able to see what other people are
+[00:21:15] seeing I would not under any
+[00:21:17] circumstances use hakashi charts instead
+[00:21:21] of traditional Candlestick charts I
+[00:21:23] would only use them in addition to and
+[00:21:26] to be fully transparent I TR I I
+[00:21:28] typically I'm only using uh the
+[00:21:30] traditional Candlestick chart and the
+[00:21:32] reason for that is simply because of my
+[00:21:33] workflow of not having the time on a
+[00:21:36] very fast-moving trade to pull up the
+[00:21:39] hakashi candle the H the hakashi chart
+[00:21:42] so I have to have a position where I
+[00:21:45] really like the stock a lot and it's
+[00:21:47] trending really nicely in order for me
+[00:21:49] to feel like I have the time to actually
+[00:21:52] come over here and pull this up because
+[00:21:54] I only use thinker swim um I use it for
+[00:21:57] for looking at options pricing you know
+[00:21:59] I'm not really trading with thinker swim
+[00:22:02] that actively because it's not the
+[00:22:04] platform that I really like so this is
+[00:22:07] sort of like on a side chart but I like
+[00:22:09] to have it as a reference point and you
+[00:22:13] know it's just something that I'm always
+[00:22:14] thinking about because when I look at my
+[00:22:16] statistics and my metrics which I pay
+[00:22:18] very close attention to I'm always
+[00:22:20] asking myself you know what can I do
+[00:22:22] what can I do better and one of the
+[00:22:24] things that I often come back to is that
+[00:22:26] I need to hold my winners a little
+[00:22:28] longer longer I'm selling them too soon
+[00:22:31] you know I get stopped out then the
+[00:22:33] price goes higher and I get back in and
+[00:22:36] it's okay to be kind of like a really
+[00:22:37] active Trader and jump out and jump back
+[00:22:39] in but when you look at some of these
+[00:22:41] you think geez I should have just kept
+[00:22:43] holding why did I sell as early as I did
+[00:22:46] right now this is obviously trending
+[00:22:48] down right here this area we were
+[00:22:50] trending up nicely so like you know
+[00:22:53] that's a little spot right there which
+[00:22:55] could have given you a nice entry um in
+[00:22:58] any case I think that it's a it's a nice
+[00:23:00] tool to add to your uh toolkit and like
+[00:23:03] any other indicator it's only going to
+[00:23:05] be helpful if you're using it
+[00:23:06] consistently but there are going going
+[00:23:09] to be times where I think it's going to
+[00:23:10] help you a lot
+[00:23:12] so um so yes the benefits of Candlestick
+[00:23:15] charts there's no question about it
+[00:23:18] they're very clear signals and they're
+[00:23:19] well respected and it is easier to
+[00:23:21] identify these micro movements in price
+[00:23:24] but the drawbacks is that these quick
+[00:23:27] signals sort of a blessing and a curse
+[00:23:29] because these quick signals can also
+[00:23:31] cause you to exit a position too soon
+[00:23:35] during a moment of hesitation only to
+[00:23:38] watch it go higher and this is something
+[00:23:40] that I I would say is kind of my biggest
+[00:23:41] struggle especially during a little bit
+[00:23:43] of a colder market during a hot Market I
+[00:23:46] don't feel that I need to lean on some
+[00:23:48] of these tools as much like the
+[00:23:50] technical indicators of macd RSI uh
+[00:23:53] Bullinger bands or hakashi charts but
+[00:23:56] during a colder Market I feel like
+[00:23:58] that's when you really need to be like
+[00:24:00] Precision Trading you've got to be
+[00:24:01] really dialed in get your entry squeeze
+[00:24:04] as much as you can out of that trade and
+[00:24:06] then don't overstay your welcome and so
+[00:24:08] if you get in and then you jump right
+[00:24:10] back out and then you get in then you're
+[00:24:12] churning shares you're getting slippage
+[00:24:14] on your entries and your eggs it's
+[00:24:16] especially if it's a lighter volume
+[00:24:18] stock or just a lighter volume day in
+[00:24:19] the market and you would have been
+[00:24:21] better off if you had just taken an
+[00:24:23] initial position and stuck with it a
+[00:24:25] little bit longer so my recommendation
+[00:24:27] is to test out using hakashi Candlestick
+[00:24:30] charts and do it in the same way that
+[00:24:31] I'm doing it where it's side by side so
+[00:24:34] you can of course use the do this in
+[00:24:36] think or Swim and many other platforms
+[00:24:38] as well so you're looking at it side by
+[00:24:40] side and you can sort of see as your one
+[00:24:42] minute chart is forming you've got the
+[00:24:45] um the variation here on the hakashi
+[00:24:48] chart forming as well so you can see the
+[00:24:50] two of them side by side and this is
+[00:24:52] another kind of good example light
+[00:24:54] volume at this time but showing much
+[00:24:57] more Trend here much easier to visualize
+[00:25:00] so a lot of people really like this
+[00:25:02] smoothing price action when you're
+[00:25:04] trying to hold longer and not get
+[00:25:07] chopped out now like I said although
+[00:25:10] it's popular with large caps I and
+[00:25:12] people use it with um Forex INF Futures
+[00:25:14] quite a lot too I focus on small caps
+[00:25:17] that's the area of the market where I
+[00:25:18] found the most success so you know if
+[00:25:20] you're trading the same more or less
+[00:25:22] momentum strategy that I'm trading you
+[00:25:24] could try having them both up side by
+[00:25:26] side I would continue to use traditional
+[00:25:28] Candlestick charts for your entries and
+[00:25:31] then keep that uh hakashi chart up for
+[00:25:34] your exits and try to ask yourself if
+[00:25:36] you can hold until that first candle on
+[00:25:40] the hakashi chart is going candle under
+[00:25:43] candle red if you could do that then I
+[00:25:47] think you're going to squeeze a little
+[00:25:48] bit more out of the position now
+[00:25:49] something that I did to help me fight
+[00:25:51] that urge to sell my entire position
+[00:25:53] when I was up 10 cents was to change the
+[00:25:56] script on my hotkey from selling full
+[00:25:59] position to selling half that was
+[00:26:01] something that I did because early on
+[00:26:03] when I first was getting into trading
+[00:26:04] the way I set up my hot keys and I'll
+[00:26:07] drag this keyboard over so you can see
+[00:26:08] it a little bit better the way I set up
+[00:26:10] my hot Keys um were uh shift one was buy
+[00:26:13] a th000 shares shift 2 was by 2,000
+[00:26:16] shares contrl Z was sell the full
+[00:26:18] position at the bid and so then I said
+[00:26:20] let's make the contrl x button sell half
+[00:26:23] and I'm going to train myself to start
+[00:26:25] pressing this button instead so instead
+[00:26:27] of selling the full position I'm going
+[00:26:28] to sell half the position so by doing
+[00:26:32] that I sort of I get to um sort of have
+[00:26:36] that sense of all right I've locked up a
+[00:26:38] little bit of profit I've Done Right but
+[00:26:41] I'm still keeping a little piece in this
+[00:26:43] position until I get a proper exit
+[00:26:44] indicator because a lot of us we're not
+[00:26:47] selling because we see an exit indicator
+[00:26:49] we're selling because we're green and we
+[00:26:51] don't want to lose the profit which
+[00:26:52] comes from a place of fear that gets you
+[00:26:55] into the habit of holding losers too
+[00:26:57] long and selling winners too soon and
+[00:26:59] when you do that you've got an inverted
+[00:27:01] profit loss ratio and statistically
+[00:27:03] you're setting yourself up for failure
+[00:27:05] so if this helps you extend your winners
+[00:27:07] a little bit longer I think that would
+[00:27:09] be great I hope you enjoy this episode I
+[00:27:11] hope you hit that thumbs up and hey feel
+[00:27:12] free to download my micro pullback
+[00:27:14] strategy PDF pin in the top of the
+[00:27:16] comments Linked In the description and
+[00:27:17] I'll remind you as always that trading
+[00:27:19] is risky so take it slow manage your
+[00:27:21] risk and I'll see you here for the next
+[00:27:22] episode real soon
+[00:27:24] [Music]

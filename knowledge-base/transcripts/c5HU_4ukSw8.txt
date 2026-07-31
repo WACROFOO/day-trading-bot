@@ -1,0 +1,510 @@
+# How To Short Stocks 📉
+# https://www.youtube.com/watch?v=c5HU_4ukSw8
+# duration_sec: 1306
+
+[00:00:00] what's up everyone Ross here from
+[00:00:01] Warrior Training and I'm going to talk
+[00:00:03] to you today about short selling what it
+[00:00:05] is how it works what you need to know
+[00:00:06] about it and some of the risks
+[00:00:08] associated with short sell I'm also
+[00:00:11] going to show you a live example of me
+[00:00:13] taking a short position and making about
+[00:00:15] four hundred dollars which is pretty
+[00:00:16] cool so we're gonna start this episode
+[00:00:18] out here on the whiteboard and then
+[00:00:19] we're gonna go into my office and get on
+[00:00:21] the computer and I'll actually show you
+[00:00:22] taking trades to the short side so first
+[00:00:25] of all let's talk about what short
+[00:00:27] selling is now traditionally when you
+[00:00:29] think about the stock market most people
+[00:00:31] think about buying the stock and you
+[00:00:33] know price down here let's say $40 a
+[00:00:36] share and the stock goes up to $80 a
+[00:00:39] share and you make a profit but what
+[00:00:42] about when the stock goes down back to
+[00:00:44] 40 well most people would just think
+[00:00:46] that if you were holding here from 80
+[00:00:48] down to 40 you would lose money and of
+[00:00:51] course traditionally you would but what
+[00:00:53] if you go ahead and you sell - 1000
+[00:00:57] shares up here at $80 and then you buy
+[00:01:00] back those shares you buy back plus 1000
+[00:01:03] at 40 you'll actually profit on the way
+[00:01:07] down
+[00:01:07] just as you would have profited right
+[00:01:09] here by buying a thousand shares and
+[00:01:11] selling it at the top you can then go
+[00:01:14] ahead and sell and create a negative
+[00:01:15] position that you then have to cover by
+[00:01:18] buying shares down here at the bottom
+[00:01:20] now something that's really interesting
+[00:01:22] about short selling is that whether or
+[00:01:25] not you can sell to the short side and
+[00:01:28] take a short position on stock is going
+[00:01:30] to be dependent on your broker your
+[00:01:32] broker has to have an inventory of the
+[00:01:36] stock in order to let you borrow the
+[00:01:38] shares and so basically there are gonna
+[00:01:40] be some brokers that are really great
+[00:01:41] for short selling and some brokers that
+[00:01:43] are not so great just simply because
+[00:01:45] they don't keep a large inventory of all
+[00:01:48] these shares to borrow and what's also
+[00:01:49] interesting is that as a stock is moving
+[00:01:51] up higher and higher and higher and
+[00:01:53] higher the availability of shares that
+[00:01:55] the broker has will start to decrease so
+[00:01:58] initially at the beginning of a day or a
+[00:02:01] month let's say they have
+[00:02:03] a hundred thousand shares available for
+[00:02:06] people to sell to the short side well as
+[00:02:09] the stock goes up and more and more
+[00:02:11] people start to recognize that it's
+[00:02:13] extended and likely to reverse more
+[00:02:16] people will start shorting it and that
+[00:02:17] inventory will go down from a hundred to
+[00:02:19] 90 to 80 to 70 60 50 40 30 10 and then
+[00:02:23] zero and then the stock becomes hard to
+[00:02:26] borrow so when you're trading a stock in
+[00:02:29] your order entry window typically it
+[00:02:32] looks something like this so you'll type
+[00:02:33] in the stock so a a PL for instant and
+[00:02:39] then you'll be able to you'll see over
+[00:02:42] here in the corner you usually see
+[00:02:43] something they'll say e which means the
+[00:02:46] stock is easy to bar sometimes a broker
+[00:02:50] will call it an e t be easy to borrow
+[00:02:55] and then once the stock is getting very
+[00:02:58] low on inventory it'll often say L for
+[00:03:02] locate and that means if you call your
+[00:03:04] broker you might be able to call them on
+[00:03:06] the phone and they might be able to find
+[00:03:08] shares for you too sure but it's no
+[00:03:11] guarantee and then you'll get to a point
+[00:03:13] where it says t and that means there are
+[00:03:16] simply no shares available it's not
+[00:03:18] option can't do it so these are the
+[00:03:21] three different messages that you'll
+[00:03:22] sometimes see on your order entry window
+[00:03:24] and that'll let you know whether or not
+[00:03:26] your broker has an inventory of shares
+[00:03:28] of a little bar now people who are
+[00:03:30] really aggressive on trading to the
+[00:03:32] short side they'll often have brokerage
+[00:03:35] accounts with several different brokers
+[00:03:37] that way they've kind of covered their
+[00:03:39] bases and if one broker doesn't have
+[00:03:41] shares of their available to borrow then
+[00:03:43] another one might of course the
+[00:03:45] challenge as a beginner trader is that
+[00:03:48] it's not always cost-effective or even
+[00:03:50] affordable to open multiple brokerage
+[00:03:53] accounts and so for that reason I don't
+[00:03:56] think that short selling is really a
+[00:03:58] beginner's trading strategy the other
+[00:04:01] thing that is important to know is that
+[00:04:02] when you short a stock let's say we
+[00:04:05] short the stock at 80 what happens if
+[00:04:08] the stock goes up to
+[00:04:10] ninety or goes up to 100 or 120 or 150
+[00:04:14] well your position here too short a
+[00:04:17] thousand shares at 80 is an $80,000
+[00:04:20] position but as the stock goes up it's
+[00:04:23] now a hundred thousand position and now
+[00:04:25] it's 120 and now it's a hundred and
+[00:04:28] fifty and what if this stock goes up to
+[00:04:31] let's say a thousand dollars a share
+[00:04:33] you're losing potentially an infinite
+[00:04:36] amount of money I mean the sky is the
+[00:04:38] limit now you don't see stocks that go
+[00:04:41] to from 80 to $100,000 overnight but
+[00:04:45] they can go from 80 to 100 to 160 or
+[00:04:47] maybe 200 in a matter of weeks or months
+[00:04:50] and potentially you could lose a lot of
+[00:04:52] money where is over here when you bought
+[00:04:54] a thousand shares of this stock at $40
+[00:04:56] how much money did you have in it forty
+[00:04:59] thousand dollars all right so the worst
+[00:05:02] case scenario is that the stock went to
+[00:05:05] zero and you lost what you put in so
+[00:05:08] when you trade to the long side you buy
+[00:05:10] stocks your worst case scenario you're
+[00:05:12] max risk is the money you put in but
+[00:05:15] when you short a stock your max risk
+[00:05:17] technically speaking is infinite now
+[00:05:21] because you have an infinite amount of
+[00:05:23] risk brokers will not let you short
+[00:05:25] stocks with a cash account they require
+[00:05:29] you to sign a margin agreement and trade
+[00:05:32] in a margin account a margin account
+[00:05:34] means that if you lose more money than
+[00:05:36] the balance of your account you owe it
+[00:05:39] back to your broker
+[00:05:39] all right so for that reason again short
+[00:05:43] selling not really a strategy for most
+[00:05:45] beginner traders number one you need to
+[00:05:47] sign a margin agreement which means you
+[00:05:48] need to get approved for margin
+[00:05:50] sometimes that requires certain
+[00:05:52] employment experience or an income
+[00:05:54] requirements certain credit checks
+[00:05:56] number two you have potentially an
+[00:05:59] infinite loss even if you do have the
+[00:06:01] margin approval and number three you
+[00:06:03] need to search around for the brokers
+[00:06:05] that have the largest availability of
+[00:06:07] shares to borrow or though are the
+[00:06:09] largest inventory often those brokers
+[00:06:11] that have the highest inventory also
+[00:06:14] have high
+[00:06:15] minimum account balances which means
+[00:06:17] opening an account may require a minimum
+[00:06:19] of $50,000 and of course that's gonna
+[00:06:23] price out all the beginner traders so I
+[00:06:26] generally would look at shark selling is
+[00:06:28] more of an advanced strategy and a
+[00:06:30] strategy more suitable for beginner
+[00:06:32] traders would be one that I'll have a
+[00:06:34] link to right in my description below
+[00:06:36] which will be a momentum strategy
+[00:06:38] trading to the long side where I would
+[00:06:40] go ahead and buy a stock just like this
+[00:06:42] with a max loss at let's say $38 so with
+[00:06:46] a thousand shares I'd be risking $2,000
+[00:06:48] and my profit target would be forty four
+[00:06:51] to forty five which would mean I'd be
+[00:06:54] making between four and five thousand
+[00:06:56] dollars for a two to one profit - loss
+[00:06:59] ratio now why don't we go into my office
+[00:07:02] and actually look at me taking the short
+[00:07:05] position so you can see what it looks
+[00:07:06] like to execute that position to have a
+[00:07:08] negative position in your open positions
+[00:07:11] window and then to cover it for problem
+[00:07:13] all right so I'm going to show you guys
+[00:07:15] a real example of me taking a short
+[00:07:19] position which I took yesterday and made
+[00:07:21] about $400 shorting a stock but before I
+[00:07:24] do I'm going to show you in this trading
+[00:07:27] simulator what it looks like to take a
+[00:07:30] position to the short side so I'm gonna
+[00:07:32] type in this stock right here a GTC the
+[00:07:35] stock is it $8.67 and so I'm gonna type
+[00:07:39] 65 and I'm gonna press the short button
+[00:07:41] right here and just like that I'm now
+[00:07:44] negative 3000 shares all right so I am
+[00:07:47] short the stock and I'm short at 66
+[00:07:50] now if the stock drops down to 850 or
+[00:07:56] you know 845 I will make money you can
+[00:07:59] see right now okay it's at 63 so at 64
+[00:08:04] cents I'm making a little bit of money
+[00:08:06] now if it pops up here I'm gonna lose
+[00:08:09] money and potentially if it breaks over
+[00:08:11] $9 and squeezes this stock could go
+[00:08:14] quite a bit higher so let's see what it
+[00:08:16] does I can move my order up at let's see
+[00:08:20] I'm gonna put it up around 9 to get out
+[00:08:26] now in order to get out of a short
+[00:08:28] position
+[00:08:29] I have to press the Buy button I have to
+[00:08:31] buy shares all right so I'm gonna go
+[00:08:32] ahead and cover I'll try to cover a
+[00:08:34] little bit into this dip so I'll type in
+[00:08:37] 1,500 shares I'm gonna cancel that order
+[00:08:40] put it at 55 seems like it's kind of
+[00:08:43] stair stepping down here a little bit
+[00:08:45] and you can see on this trade my realize
+[00:08:48] profit unrealized right now is $150
+[00:08:51] that's you know $30 it kind of
+[00:08:53] fluctuates as the trade as the stock is
+[00:08:57] moving up and down so with this negative
+[00:09:00] balance of 3000 shares I've borrowed
+[00:09:03] these shares from my broker now this is
+[00:09:07] obviously a trading simulator so it's
+[00:09:09] not a real borrow but if I had borrowed
+[00:09:11] them in real life from my broker my
+[00:09:13] broker would eventually want me to buy
+[00:09:15] back the shares that I had sold and
+[00:09:19] they're only gonna let me borrow them
+[00:09:21] for so long there's a limited number of
+[00:09:23] time a limited period of time that a
+[00:09:25] broker will let you hold a stock to the
+[00:09:27] short side because you are borrowing the
+[00:09:30] shares and no one else can short it
+[00:09:31] while you have them borrowed so during
+[00:09:35] this period of time I've got the stock
+[00:09:36] tied up to the short side and obviously
+[00:09:40] right here on this type of setup I'd be
+[00:09:42] hoping that it breaks below a 50 or
+[00:09:45] something like that maybe drops down
+[00:09:47] into the 8 40s so maybe I put an order
+[00:09:50] to cover 750 shares down here at 8:48
+[00:09:55] something that is also important for you
+[00:09:58] guys to know is something called short
+[00:10:01] sale restriction the market has a short
+[00:10:04] sale restriction and what a short sale
+[00:10:06] restriction means is you cannot short
+[00:10:10] the stock by selling the shares at the
+[00:10:13] bid price this is the bid on the left
+[00:10:16] and this is the ask on the right so in
+[00:10:18] this case I can go ahead and I can I can
+[00:10:20] cancel user I can press short right here
+[00:10:23] on the bid and I'm getting filled right
+[00:10:24] away but during a short sale restriction
+[00:10:27] I can only short by putting my shares on
+[00:10:29] the ask so let me put my shares at 69
+[00:10:32] and press short what you can see is that
+[00:10:34] my order is just gonna sit here until
+[00:10:36] the stock pops up and it's also
+[00:10:38] sometimes called the uptick rule because
+[00:10:41] you won't get filled until
+[00:10:42] the stock ticks up like it just did
+[00:10:44] right there and usually when a stock is
+[00:10:47] going up is not what you want to be
+[00:10:49] getting filled this right here is a
+[00:10:51] perfect example of me starting to get
+[00:10:53] squeezed on the trade it's I'm short at
+[00:10:57] 66 and now the stock is moving up and if
+[00:11:00] it breaks over 9 look at how quickly I'm
+[00:11:02] going into the red now of course just as
+[00:11:06] easily you could be going into the green
+[00:11:08] if you had been long at that same
+[00:11:09] position and this actually was a fairly
+[00:11:11] bullish pattern we'll see what it ends
+[00:11:14] up doing but what's important to also
+[00:11:16] recognize is that if I put my entire
+[00:11:19] account into that trade at 66 as the
+[00:11:23] stock is going up it's gonna cost more
+[00:11:26] money to buy the shares because I've got
+[00:11:28] to buy to cover so I'm gonna buy 4,500
+[00:11:31] shares and buying 45 hundred shares cost
+[00:11:33] more at 870 and then it does it 860 so
+[00:11:39] if I put my entire account into the
+[00:11:40] trade open here looks like we're getting
+[00:11:42] a little false breakout so let's put
+[00:11:45] that order down here to cover a little
+[00:11:47] bit we'll see if it breaks below the
+[00:11:48] half dollar if it breaks the half dollar
+[00:11:51] maybe I'll do 1,500 shares see if we get
+[00:11:55] that false breakout and that flush might
+[00:11:58] end up fading back down towards $8 all
+[00:12:02] right so there we go
+[00:12:03] so you know all's well that ends well on
+[00:12:05] this one I guess but it still goes to
+[00:12:07] show that these can squeeze the wrong
+[00:12:11] way and when you're short and they're
+[00:12:13] squeezing the wrong way it's costing
+[00:12:15] more and more money to buy back the
+[00:12:16] shares and that means you could get into
+[00:12:18] a situation where you're gonna have
+[00:12:21] what's called a margin call
+[00:12:23] on your account and a margin call is
+[00:12:26] when you basically your account has gone
+[00:12:28] into the negative all right so that was
+[00:12:30] a little example of a short sell selling
+[00:12:33] the stock short getting squeezed as it
+[00:12:35] was going up and then covering for a
+[00:12:37] profit as it came back down let's look
+[00:12:39] at an example of this in practice
+[00:12:42] yesterday so yesterday we had this stock
+[00:12:45] here a bi Oh a bi Oh was squeezing up
+[00:12:50] right here to this purple line now this
+[00:12:53] purple line is the 200
+[00:12:56] moving average and what's important to
+[00:12:58] know about that is that is considered a
+[00:13:01] critical level of resistance so that
+[00:13:04] right there is resistance at at it was
+[00:13:07] approximately six dollars and thirty one
+[00:13:09] cents now on the side here I could see
+[00:13:12] under the news window that there was no
+[00:13:14] news on the stock so it's up nine
+[00:13:17] percent on light volume hitting
+[00:13:19] resistance with no news that to me made
+[00:13:23] me think that it was gonna fade and
+[00:13:25] another one of the reasons I thought
+[00:13:27] that it was gonna fade or sell off and
+[00:13:29] come back down was the fact that we had
+[00:13:31] seen a couple of stocks um sort of
+[00:13:35] similar pop up a little bit and then
+[00:13:37] come right back down and so what I
+[00:13:39] decided to do was press the sell button
+[00:13:41] alright so I put my order up here and
+[00:13:43] I'm gonna get ready to take it so we've
+[00:13:46] got thirty eight on the ask so I click
+[00:13:48] thirty eight and then I click sell right
+[00:13:52] now my order is this yellow order on
+[00:13:55] NASDAQ at six dollars and 38 cents so
+[00:13:58] I've put my order to sell now this stock
+[00:14:01] does not have the short sale restriction
+[00:14:04] on it so and you can see right here it
+[00:14:06] is e-easy to borrow whereas this one is
+[00:14:08] L locate hard to borrow all right so
+[00:14:11] it's easy to borrow there's no short
+[00:14:13] sale restriction on it you would either
+[00:14:14] see SSR or CB this stock had short sale
+[00:14:19] restriction but doesn't have that so I
+[00:14:21] don't have too short
+[00:14:22] on an uptick however in this case
+[00:14:24] there's a 15 cent spread between 6:23
+[00:14:29] the bed and 6:38 the ask and so I figure
+[00:14:33] I'll try to sell short on the ask so I
+[00:14:36] go short I put my order there at 38 I
+[00:14:38] put another whole order here at 35 in
+[00:14:39] between the spread the order at 35
+[00:14:42] Phil's in partial my order at 38
+[00:14:46] despite the ask being at 44 is not
+[00:14:49] filling so now and there we go so now
+[00:14:54] it's starting to turn around and you can
+[00:14:55] see it's coming back down so it tapped
+[00:14:57] that resistance level and is coming back
+[00:14:59] down so I'm now short 1200 shares at 6
+[00:15:02] dollars and 35 cents that's my cost
+[00:15:04] basis alright so what I'm gonna end up
+[00:15:08] doing is I'm gonna cancel these orders
+[00:15:10] once I feel pretty confident that
+[00:15:12] they're not going to fill so we've got
+[00:15:20] six 14 on the bid 610 605 now I'm
+[00:15:24] putting my order right down here at 6:00
+[00:15:26] to buy and I click the Buy button for
+[00:15:30] two thousand shares now the problem with
+[00:15:32] this is if that order executed I would
+[00:15:35] go from being short 1,200 to being long
+[00:15:40] 7,500 which is not what I want
+[00:15:42] and so I neglected to type in the exact
+[00:15:47] amount on this trade which ended up not
+[00:15:51] being the end of the world I cancelled
+[00:15:53] the order and then put typed it in for
+[00:15:54] 10 81 and clicked the Buy button at $6
+[00:15:59] so now I have a buy order at $6 and when
+[00:16:04] that order gets filled I'll go from
+[00:16:06] negative 1081 shares to flat on the
+[00:16:10] position and I will book a profit of
+[00:16:12] about $400 so let's see what this does
+[00:16:17] here so I put an order at 6:31 or 630
+[00:16:23] this is my bail out button if I have to
+[00:16:25] cancel my order and press buy I can bail
+[00:16:28] out but nope just like that I got filled
+[00:16:30] four hundred and forty two dollars and
+[00:16:32] fifty cents fifty seven cents and that
+[00:16:34] was a short off of daily resistance now
+[00:16:38] you can short and you know based on any
+[00:16:40] setup that you happen to see obviously
+[00:16:43] this setup here was just like an example
+[00:16:45] it wasn't really it really wasn't a
+[00:16:47] short this wasn't a short set up right
+[00:16:49] right here and the false break of nine
+[00:16:51] maybe that was a short with a stop near
+[00:16:54] the high but you got to be kind of
+[00:16:55] careful on those generally shorting off
+[00:16:58] of critical resistance levels such as a
+[00:17:01] 200 moving average is going to be best
+[00:17:04] although there will be times where
+[00:17:06] you'll see a stock that spikes up like
+[00:17:08] this and this stock is up a hundred and
+[00:17:10] four percent today and you'll think wow
+[00:17:11] it's so extended it's got to come back
+[00:17:14] down but you want to be really careful
+[00:17:18] that you're not casting your opinion of
+[00:17:21] what's reasonable what's rational on the
+[00:17:24] market because the market can be
+[00:17:26] irrational you might see a couple
+[00:17:28] examples of irrational let's look at L
+[00:17:31] fi n this stock is currently at 38 cents
+[00:17:34] but let's back up this chart a little
+[00:17:37] bit we back up this chart and you're
+[00:17:39] gonna see back here that the stock over
+[00:17:42] the course of well three days went from
+[00:17:45] five dollars and 51 cents all the way on
+[00:17:49] day two to $26 on day three it opened
+[00:17:53] higher it opens at 39 squeezed up to 40
+[00:17:56] to 50 to 60 70 80 90 it hit a hundred
+[00:17:59] and then squeezed all the way to a
+[00:18:01] hundred and forty two dollars per share
+[00:18:04] stock can be irrationally strong stocks
+[00:18:08] can be irrationally strong far longer
+[00:18:10] than you'll be able to afford to hold
+[00:18:12] them here's a stock that went from $45
+[00:18:15] to over oh just about 400 dollars a
+[00:18:18] share so you know this is the thing that
+[00:18:21] puts the fear into career short sellers
+[00:18:26] that you'll take a position on something
+[00:18:28] like this and you'll get smoked rkd a
+[00:18:31] this is a great example of this that
+[00:18:34] this is something that ended up
+[00:18:35] bankrupting a small firm with a I think
+[00:18:38] it was a fifteen or sixteen million
+[00:18:40] dollar loss alright so through this
+[00:18:44] period right here I believe it was this
+[00:18:46] period and this fund saw the stock
+[00:18:49] popping up hitting that 200 moving
+[00:18:51] average which is the Purple Line and
+[00:18:53] realized that it was squeezing up with
+[00:18:55] no news it had no reason to be moving
+[00:18:58] higher and so they took a short position
+[00:19:00] starting with 100,000 shares it
+[00:19:03] continues to squeeze up they add more
+[00:19:05] shares to the short side they end up
+[00:19:07] with a position of about eight hundred
+[00:19:09] thousand shares short and on this red
+[00:19:11] days it starts to come down it's looking
+[00:19:14] great and then you know what happened
+[00:19:16] the next day the stock gaps up right
+[00:19:19] here and squeezes from eighteen to
+[00:19:21] twenty to thirty to forty it hit a high
+[00:19:25] of $54.99 and while it was squeezing up
+[00:19:30] the firm started pressing the Buy button
+[00:19:33] to cover the position so remember when
+[00:19:36] you're short and you have that negative
+[00:19:38] the only way to cover it is to press the
+[00:19:41] Buy button now what happens when you
+[00:19:44] press the Buy button while a stock is
+[00:19:46] squeezing up from 20 to 30 to 40 or 50
+[00:19:49] you are fueling the squeeze now in this
+[00:19:53] case that ended up fueling the losses
+[00:19:56] for that firm and it became a really
+[00:19:59] catastrophic loss the shorting eight
+[00:20:01] hundred thousand shares of a low float
+[00:20:05] stock like this is incredibly risky as
+[00:20:09] you would imagine but even if you're
+[00:20:11] just shorted eight hundred shares where
+[00:20:13] you had shorted eight thousand you could
+[00:20:15] have made an equally relatively equally
+[00:20:18] large mistake so one of the important
+[00:20:21] things with shorting is that you always
+[00:20:23] are mindful of your max loss and of
+[00:20:26] course that's the same with trading to
+[00:20:28] the long side let's say you were the
+[00:20:31] trader who bought this up here at $56
+[00:20:33] thinking maybe it would go to a hundred
+[00:20:35] like L fi n and the next thing you know
+[00:20:37] it's down here at 20 you don't want to
+[00:20:39] be holding you got to cut your losses so
+[00:20:42] that's sort of the moral of trading in
+[00:20:44] general is keeping losses small and
+[00:20:45] letting you know the winners run but the
+[00:20:49] problem with short selling is that if
+[00:20:51] you make a mistake you lose more than
+[00:20:54] you put into the position and if you go
+[00:20:57] and you know if you go really aggressive
+[00:21:00] then you could end up really getting
+[00:21:03] destroyed so anyways I hope this has
+[00:21:06] been helpful this is a little bit of
+[00:21:07] short selling 101 with a live trading
+[00:21:10] sim tray example here on AG TC and a
+[00:21:15] real money trade that I took yesterday
+[00:21:17] on a bi oh all right you guys that's it
+[00:21:20] for me as always questions comments
+[00:21:21] leave them right down below and I will
+[00:21:22] see you for the next episode bye
+[00:21:25] everyone hey have you seen my most
+[00:21:27] popular video on YouTube it's got over 5
+[00:21:29] million views you can check it out right
+[00:21:32] here and check out one of my other
+[00:21:33] videos on YouTube right here I hope you
+[00:21:35] guys enjoy it as always if you have
+[00:21:37] questions leave them down below in the
+[00:21:39] comment section I personally respond to
+[00:21:41] every comment that's posted
+[00:21:42] [Music]

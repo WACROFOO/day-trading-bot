@@ -1,0 +1,1289 @@
+# STOP Using Basic Candlestick Charts! These NEW Charts Are 10x Better
+# https://www.youtube.com/watch?v=OQLfHuO8KlI
+# duration_sec: 3176
+
+[00:00:00] [Music]
+[00:00:02] you have to stop using Candlestick
+[00:00:03] charts right now because there is a new
+[00:00:05] type of chart out there that is 10 times
+[00:00:07] better the reason it's so much better is
+[00:00:10] because it actually displays the depth
+[00:00:12] of Market the level two data right on
+[00:00:14] the chart and that means you can
+[00:00:16] visualize the support and the resistance
+[00:00:19] that's created by these big buy and sell
+[00:00:22] orders so imagine this you're watching
+[00:00:24] the price selling off quickly and you're
+[00:00:26] trying to figure out where to buy the
+[00:00:28] dip for a bounce back up but you don't
+[00:00:30] want to get in too early then all of a
+[00:00:32] sudden you see the big buy order appear
+[00:00:36] right on your chart and now you know
+[00:00:38] this is going to be support because that
+[00:00:40] buy order is so large you don't have the
+[00:00:43] confidence to get in right there or
+[00:00:45] imagine this you're watching a breakout
+[00:00:48] pattern forming and you're thinking
+[00:00:49] about taking a position for a squeeze
+[00:00:51] through the high of day when suddenly
+[00:00:54] there's a big block of a seller right
+[00:00:56] there on the offer you know that they're
+[00:00:59] going to create resistance and they're
+[00:01:00] going to prevent the breakout from
+[00:01:02] working it's going to be a false
+[00:01:03] breakout but you avoid the loss these
+[00:01:07] charts will make you a more accurate
+[00:01:09] Trader they are so good it's like
+[00:01:11] combining quantum mechanics and general
+[00:01:13] relativity into one universal unified
+[00:01:17] theory okay that's what people have been
+[00:01:20] telling me for the last 18 months and I
+[00:01:22] have been skeptical I've been like guys
+[00:01:24] there is no way there's a new type of
+[00:01:26] chart that's going to replace
+[00:01:28] Candlestick charts come on I've been
+[00:01:30] using Candlestick charts like this for
+[00:01:31] my entire career and Traders have been
+[00:01:34] using these charts for Generations
+[00:01:37] Candlestick charts are the universal
+[00:01:40] language of the financial markets but
+[00:01:42] you know what I finally broke down I say
+[00:01:44] you know I I'll give it a try I'll give
+[00:01:46] it a try I'll see how it works and I've
+[00:01:48] actually been pleasantly surprised and
+[00:01:52] impressed by these new charts I didn't
+[00:01:55] expect it but you know what these do
+[00:01:57] something a little different from some
+[00:01:59] of the charts that have come and gone
+[00:02:01] over the years some of the other
+[00:02:03] platforms that have been a fad that
+[00:02:05] people get really into and then it just
+[00:02:06] kind of Fades away because these charts
+[00:02:10] are actually using the level two Market
+[00:02:12] data and that's valid I use level two in
+[00:02:16] my own trading big time so let's go
+[00:02:19] ahead and Dive Right In full disclosure
+[00:02:22] there is no affiliate relationship that
+[00:02:24] I have with this platform this is called
+[00:02:27] bookmap if you want to use it after you
+[00:02:29] watch this episode by all means if you
+[00:02:31] don't want to use it don't use it am I
+[00:02:34] going to keep using it in my own trading
+[00:02:36] that is still to be determined but I
+[00:02:37] think you'll have a better guess by the
+[00:02:39] end of this episode so what bookmap does
+[00:02:42] is it actually takes all of the orders
+[00:02:45] that have gone through and it takes the
+[00:02:47] orders that were placed on the level two
+[00:02:49] and it displays them visually on the
+[00:02:51] chart what I like about this is that a
+[00:02:54] traditional Candlestick chart is just
+[00:02:57] showing us the historical price action
+[00:03:00] it doesn't show us what the spreads
+[00:03:02] looked like and it doesn't show us what
+[00:03:04] the level two looked like as the price
+[00:03:07] was moving up or moving down but bookmap
+[00:03:10] does exactly that this is actually
+[00:03:12] showing us what the level two looked
+[00:03:14] like now at first this is probably hard
+[00:03:16] for you to visualize and it was for me
+[00:03:19] too in fact I laughed a little bit I I
+[00:03:21] was like guys this is absurd please this
+[00:03:24] is not a real chart this is not a real
+[00:03:26] thing but I I will stand corrected here
+[00:03:29] so let's go ahead and jump into this
+[00:03:31] slide deck and I'm going to break down
+[00:03:33] for you how this actually works how to
+[00:03:35] use bookmap I think the first thing I
+[00:03:38] need to do is help you get oriented with
+[00:03:40] what we're looking at so there are four
+[00:03:42] things I want you to understand number
+[00:03:44] one bookmap displays level two orders
+[00:03:48] depth of Market orders visually on the
+[00:03:51] chart they also display where large
+[00:03:54] limit orders were placed and were
+[00:03:58] cancelled this is very help because you
+[00:04:00] can see where big orders were placed on
+[00:04:02] the chart but then were pulled off it
+[00:04:04] also displays where large buy and sell
+[00:04:06] orders were actually executed so it
+[00:04:09] shows you big block order prints it also
+[00:04:13] displays and can display if you choose a
+[00:04:16] point of control line which is a sort of
+[00:04:19] taking a concept from volume profile in
+[00:04:23] fact what bookmap says they do is they
+[00:04:25] sort of take Concepts from a number of
+[00:04:27] different popular types of charts or
+[00:04:29] indicators including volume profile
+[00:04:32] footprint charts and just their standard
+[00:04:35] depth of Market it takes some of the
+[00:04:37] best of each of these things and
+[00:04:39] combines them into this one unified
+[00:04:43] platform so if we start just with one
+[00:04:46] component of this platform and and we'll
+[00:04:48] sort of walk through each one we're
+[00:04:50] going to start with the historical
+[00:04:52] prints so the historical prints are in
+[00:04:55] bubbles so each of these bubbles that
+[00:04:57] you see these are actual order that went
+[00:05:00] through the bigger the bubble the bigger
+[00:05:02] the share size of the order now this is
+[00:05:05] relative which is the first thing that I
+[00:05:07] don't like because if you have a stock
+[00:05:10] that has very light volume this might
+[00:05:12] only be like a 3,000 share order which
+[00:05:15] honestly is not significant at all but
+[00:05:18] if you have higher volume this could be
+[00:05:19] a 300,000 share order so the bubble size
+[00:05:22] is not standard across uh every
+[00:05:25] different chart you're looking at it's
+[00:05:26] relative to what's big for this specific
+[00:05:29] stock so that's something to be aware of
+[00:05:32] the green bubbles going up naturally
+[00:05:33] price is going higher red bubbles are
+[00:05:36] some sell orders green bubbles again are
+[00:05:38] buy orders now whether a bubble is green
+[00:05:41] or red brings up the topic of how
+[00:05:44] exactly do you figure out if it's a buy
+[00:05:46] order or a sell order because whenever
+[00:05:48] you have someone who's buying well
+[00:05:50] obviously someone sold them shares and
+[00:05:52] whenever you sell someone is a buyer so
+[00:05:54] it's based on which Trader has initiated
+[00:05:58] the transaction
+[00:06:00] and this is a a phrase that is used in
+[00:06:04] um in Market data and and in the way
+[00:06:06] fees are charged on trading but it's
+[00:06:09] about who is taking liquidity and who is
+[00:06:13] adding liquidity so I'll pull up my
+[00:06:15] whiteboard here the way this works is
+[00:06:18] when we're looking at the level two here
+[00:06:20] we've got the level two and we've got
+[00:06:23] the bid and we've got the ask the offer
+[00:06:26] so if you have let's say 405 by
+[00:06:30] 45 if I want to buy this right now I
+[00:06:33] could place an order to buy at 405 and I
+[00:06:36] could get in line behind this person who
+[00:06:38] was there first or I could place an
+[00:06:40] order let's say at uh 406 I'm going to
+[00:06:43] bump the other guy down he's going to
+[00:06:44] still be at 405 and I'm going to jump in
+[00:06:46] between at 406 and I could sit here with
+[00:06:49] my 1,000 share bu order for a long time
+[00:06:51] and wait until someone comes and sells
+[00:06:53] me shares by doing this my 1,000 shares
+[00:06:57] is actually adding liquidity to the
+[00:06:59] market because I'm making it so someone
+[00:07:02] else can come create a the transaction
+[00:07:05] by selling me shares and by adding
+[00:07:07] liquidity NASDAQ will actually pay me a
+[00:07:11] little bit of money it's not a lot of
+[00:07:13] money it's about a a 15th of a penny but
+[00:07:17] on 10,000 shares that's $15 so it does
+[00:07:20] add up over time highfrequency trading
+[00:07:23] firms will use this type of uh rebate
+[00:07:27] relationship to actually generate some
+[00:07:29] profit for themselves by just buying and
+[00:07:31] selling all day long they are creating
+[00:07:34] liquidity in the market and the market
+[00:07:36] makers the ecn uh like that so now on
+[00:07:39] the other hand if I say I want to get in
+[00:07:42] this right now I could just buy from the
+[00:07:45] person selling here at 415 and if I do
+[00:07:48] that then the order is going to go
+[00:07:49] through the time in sales right down
+[00:07:51] here as a green transaction it'll be a
+[00:07:55] green print at 415 415 it's a buy order
+[00:08:00] so yes someone was selling but I was the
+[00:08:03] one as the buyer who initiated the
+[00:08:05] transaction which means that we would we
+[00:08:08] would consider this to be a bullish
+[00:08:10] transaction that occurred at the ask
+[00:08:12] price so when the orders are green it
+[00:08:14] means that it was a buyer who is
+[00:08:16] initiating the transaction and when
+[00:08:18] they're read it means it was a seller
+[00:08:20] who was initiating the transaction so
+[00:08:23] when we look at this chart we're going
+[00:08:25] to see uh I suppose on this particular
+[00:08:27] chart there are more sell orders that
+[00:08:30] were initiated than buy orders in fact
+[00:08:33] there really only a few large buy orders
+[00:08:35] there are a lot more large sell orders
+[00:08:38] on this particular chart which does
+[00:08:40] communicate that there's a bit of an
+[00:08:42] imbalance towards the sell side on this
+[00:08:44] chart okay so the bubbles reflect actual
+[00:08:47] prints actual orders that went through
+[00:08:48] the market and the biggest bubble will
+[00:08:50] be the largest single order that went
+[00:08:53] through during the course of time that
+[00:08:55] we're looking at here on this particular
+[00:08:56] chart now by the way you can use these
+[00:09:00] um these bookmap charts on really any
+[00:09:02] Financial instrument that you want you
+[00:09:04] can use them on cryptocurrency you can
+[00:09:06] use them on stock as I am right here you
+[00:09:08] can use them on Forex it doesn't really
+[00:09:10] matter so I'm focusing of course on
+[00:09:12] stock because that's what I trade but as
+[00:09:14] far as understanding how these work uh
+[00:09:16] this will be uh the same no matter what
+[00:09:18] you're looking at Okay so we've got the
+[00:09:20] historical prints in the bubbles and
+[00:09:22] then we've got um let's see the current
+[00:09:26] order book so the current order book Co
+[00:09:29] B is right here and this is essentially
+[00:09:32] level two displayed as a ladder so
+[00:09:36] instead of um the current price is right
+[00:09:39] here at this line so this is the bid and
+[00:09:43] this is the offer right so typically
+[00:09:46] they're side by side with the bid being
+[00:09:48] on the left and the offer or the ask
+[00:09:51] being on the right right and so this is
+[00:09:54] kind of a ladder and this is sort of a
+[00:09:58] ladder so to speak and if you stack them
+[00:10:00] on top of each other and invert the ask
+[00:10:03] then you have this tall ladder so that's
+[00:10:05] essentially um the way this is displayed
+[00:10:07] and it's not totally uncommon um so this
+[00:10:11] is the current price this is the bid
+[00:10:14] down here and this is the ask up here
+[00:10:17] and the offer naturally goes higher and
+[00:10:19] the bid naturally goes lower and this is
+[00:10:22] the current the current market now I
+[00:10:24] personally have never really liked
+[00:10:27] looking at the level two in the latter
+[00:10:30] form because for me I find it difficult
+[00:10:34] to sort of move my eye vertically up and
+[00:10:38] down here I I just find it to be a lot
+[00:10:41] easier to visualize level two in this
+[00:10:44] more standardized form where we're
+[00:10:47] looking at um the bid on the left and
+[00:10:49] the offer on the right this is just for
+[00:10:52] me it's what I'm used to but I think if
+[00:10:54] forced I I could probably train myself
+[00:10:57] to use this but you also don't have the
+[00:11:01] same this is a very different way
+[00:11:03] visually of looking at level two let's
+[00:11:04] be honest this shows me tiers it shows
+[00:11:08] me how many buyers at the same tier 58
+[00:11:10] or 62 55 53 so like if I just take um
+[00:11:16] you know just sort of pause this for a
+[00:11:18] moment you've got 1 two 3 four buyers at
+[00:11:20] 53 now at 50 this is just a very
+[00:11:23] different way of visually looking at the
+[00:11:25] market and I prefer it uh however what
+[00:11:28] we have here essentially is level two
+[00:11:32] and it's just displayed in the latter
+[00:11:34] form but what is helpful I suppose to
+[00:11:37] visualize here is that you have this
+[00:11:40] histogram which shows you where you have
+[00:11:42] large orders so right now we have a very
+[00:11:45] large order here at 105 uh sorry uh
+[00:11:49] 105,000 shares at
+[00:11:52] $3.40 approximately right so you can
+[00:11:55] visually see that now it's displaying it
+[00:11:58] for you right here on the order book
+[00:12:02] which it is helpful it's definitely a
+[00:12:04] much more visual representation than
+[00:12:06] what you would see here so bookmap isn't
+[00:12:09] currently set up to allow you as the end
+[00:12:12] user to fully customize the display of
+[00:12:15] this um current order book the way I
+[00:12:18] might like to I think that if I was
+[00:12:20] going to really try to get on board with
+[00:12:21] using a ladder I would try to display it
+[00:12:24] differently because using level two is
+[00:12:26] super important for my trading but I
+[00:12:28] don't like the L that's just personal
+[00:12:30] preference okay so um so so first of all
+[00:12:33] we've got our uh prints which are the
+[00:12:36] historical uh orders the bubbles that go
+[00:12:38] through uh these are all over the chart
+[00:12:41] then we have the current order book
+[00:12:43] which is displaying uh the actual level
+[00:12:45] two of the current market and the
+[00:12:47] histogram is showing us where we have um
+[00:12:49] big orders that are sitting on the
+[00:12:51] current bid or the current offer which
+[00:12:53] is great so now we know where those are
+[00:12:55] okay so the next thing is uh the heat
+[00:12:59] map of previous limit orders and this is
+[00:13:03] what you're seeing in the background
+[00:13:05] right here so this order at uh 105,000
+[00:13:09] shares has been there since right here
+[00:13:13] so you see how this actually goes all
+[00:13:15] the way back here to there it's because
+[00:13:18] that's the moment that order was placed
+[00:13:20] there this heat map for the 48,000
+[00:13:24] shares at $3 goes all the way back to
+[00:13:27] right here so that's when that order was
+[00:13:30] placed and these orders were placed
+[00:13:32] right here this order was placed right
+[00:13:34] here and what you'll sometimes see is an
+[00:13:37] order like this one right here that was
+[00:13:39] placed and then disappears it was
+[00:13:42] cancelled it didn't get filled because
+[00:13:44] the order just ended it went away so
+[00:13:47] that was an order that was sitting on
+[00:13:48] the level two but then got cancelled
+[00:13:52] this is an order that was sitting on the
+[00:13:53] level two and got canceled um this is an
+[00:13:56] order right here that was sitting and
+[00:13:58] got canceled these are orders right here
+[00:14:00] that got cancelled this is an order here
+[00:14:03] that uh got canceled right there so I
+[00:14:06] find that to be very interesting because
+[00:14:09] I have never used any software that
+[00:14:12] allowed me to see where big orders were
+[00:14:16] placed and then cancelled or that show
+[00:14:19] me how long an order has been on the
+[00:14:21] level two the level 2 for me has always
+[00:14:24] been this Dynamic real time moving tool
+[00:14:29] I haven't ever been able to visually see
+[00:14:32] sort of in static form how it looked
+[00:14:36] during previous periods of time but you
+[00:14:38] can actually see exactly that with
+[00:14:40] bookmap so I find that to be fascinating
+[00:14:44] um and I'll talk about to the extent
+[00:14:46] that I've used it and it's helped me in
+[00:14:48] my trading now this column right here is
+[00:14:51] SVP session volume profile so the
+[00:14:55] session volume profile what this is
+[00:14:58] doing is it's actually uh adding up all
+[00:15:01] of the shares of volume that have
+[00:15:02] occurred today and it's Distributing
+[00:15:05] them across the different prices where
+[00:15:07] they occurred and it is separating
+[00:15:09] between the buy orders and the sell
+[00:15:11] orders so what's interesting here is
+[00:15:13] that naturally because the high of day
+[00:15:15] is right here just under 360 there are
+[00:15:18] no orders that occurred above that there
+[00:15:20] may be orders on the level two that are
+[00:15:22] sell orders and there are buy orders
+[00:15:24] below the lowest price of the day but uh
+[00:15:28] these are where all the orders have
+[00:15:30] actually taken place during the day um
+[00:15:33] what did they create here is this yellow
+[00:15:35] dotted line which is called the point of
+[00:15:37] control the point of control is wherever
+[00:15:39] you had the most volume during the day
+[00:15:43] uh this is kind of similar to volume
+[00:15:46] weight at average price the volume
+[00:15:48] weight average price is going to be uh
+[00:15:50] basically the average price of the stock
+[00:15:53] when you factor in all of the volume so
+[00:15:56] I've seen some instances where your
+[00:15:58] point of control is significantly
+[00:16:01] different than your volume uh weighted
+[00:16:03] average price but that doesn't seem to
+[00:16:04] happen as often so I actually don't
+[00:16:07] think the point of control is a
+[00:16:09] necessary line to have on and I actually
+[00:16:12] snapped it off my chart um so that is
+[00:16:16] going to give you a walk through of
+[00:16:18] essentially what you're seeing on this
+[00:16:21] chart you've got the bubbles which are
+[00:16:23] the historical prints you've got um the
+[00:16:26] current order book and then you have the
+[00:16:28] heat map which shows all of the
+[00:16:30] historical orders uh that that are
+[00:16:32] currently still on the book and that
+[00:16:34] were there but then ended up getting
+[00:16:36] cancelled or uh or perhaps getting
+[00:16:38] filled we do have volume bars down at
+[00:16:41] the bottom which are your standard
+[00:16:42] volume bars this is nothing um nothing
+[00:16:45] different from what you would be
+[00:16:46] accustomed to so if I pull up um book
+[00:16:49] map right here I can go uh full screen
+[00:16:52] on this for a moment and we could look
+[00:16:55] at uh it doesn't really matter we could
+[00:16:57] look at any old stock
+[00:16:59] um the thing that I will say is that if
+[00:17:02] if we're going to be honest I don't know
+[00:17:06] how you could possibly trade off of this
+[00:17:09] chart alone honestly that's just my
+[00:17:12] perspective and my opinion but I don't
+[00:17:14] know how you could trade off of just
+[00:17:16] this you don't have the candlesticks
+[00:17:19] there's no candles I mean I'll I'll I'll
+[00:17:22] say that you can add the candlesticks
+[00:17:24] and I'll talk about that in a second but
+[00:17:26] I wouldn't add them because when I added
+[00:17:28] them they were not accurate so basically
+[00:17:31] this is what you have and with this I
+[00:17:34] don't think that you could actually
+[00:17:36] confidently trade it would be almost
+[00:17:39] like trading with like one eye clo it
+[00:17:42] would be like driving with one eye
+[00:17:43] closed could you do it sure but why
+[00:17:46] would you do something so silly that's
+[00:17:48] again that's my that's my truth that's
+[00:17:50] my opinion but what if we think about it
+[00:17:53] a little differently and think about
+[00:17:54] using both combining the benefits of
+[00:17:57] bookmap with everything that we already
+[00:18:00] use on Candlestick charts now that might
+[00:18:02] be a better solution so here on sgbx we
+[00:18:05] have a very nice clean Candlestick chart
+[00:18:07] pattern so let's jump back into the
+[00:18:09] slides here okay so I want to show you
+[00:18:12] something that I noticed that I thought
+[00:18:13] was very interesting the change in the
+[00:18:16] order book that occurs right at Market
+[00:18:19] open and at Market
+[00:18:22] close okay so what I noticed was that
+[00:18:27] right at Market open
+[00:18:29] all of a sudden at 9:30 a.m. this is
+[00:18:33] 9:30 a.m. right here look at how much
+[00:18:36] the orderbook changes all of a sudden
+[00:18:39] all of these orders come online it's
+[00:18:42] like exactly at 9:30 the order book
+[00:18:45] changes completely and that's no
+[00:18:48] surprise what we have always known is
+[00:18:50] that right at the 9:30 opening bell
+[00:18:53] there's a lot of high frequency trading
+[00:18:54] algorithms that begin trading a lot of
+[00:18:56] market makers that come online and and
+[00:18:59] there are retail traders who placed
+[00:19:02] orders that don't work premarket they
+[00:19:05] only work during regular trading hours
+[00:19:07] so as soon as the Market opens at 9:30
+[00:19:09] all of those orders come online which
+[00:19:12] essentially means that this order book
+[00:19:15] the current order book became a lot more
+[00:19:18] crowded right at 9:30 so there was a
+[00:19:22] very distinctive difference between the
+[00:19:24] way this was trading before 9:30 and the
+[00:19:26] way it trades after 9:30 now I won't say
+[00:19:29] that there weren't still orders on the
+[00:19:31] book of course there were there was a l
+[00:19:32] relatively large sell order that has
+[00:19:34] been here since premarket basically
+[00:19:36] since this first started moving up there
+[00:19:38] were even even some before the move
+[00:19:40] began which is always a little
+[00:19:42] suspicious and actually I would say this
+[00:19:44] is something that's really helpful be
+[00:19:46] and this may be helpful for Regulators
+[00:19:48] too because if they see something like
+[00:19:50] this that out of nowhere squeezes up 100
+[00:19:53] 200% and then they see that you know
+[00:19:56] someone put an order out to sell before
+[00:19:59] the move began hello all right that's
+[00:20:02] something to take a look at why did that
+[00:20:03] person place that order was it just a
+[00:20:05] coincidence or did they know something
+[00:20:07] because we know especially with a lot of
+[00:20:09] the Chinese small cap stocks that
+[00:20:10] there's some shady stuff that goes on so
+[00:20:13] that this could actually be something
+[00:20:14] that could help them but in any case
+[00:20:16] what we definitely notice is that right
+[00:20:18] at 9:30 a.m. the order book gets a lot
+[00:20:21] thicker a lot more orders and they go
+[00:20:23] away at 4 p.m. so right at the end of
+[00:20:26] the day 4 p.m. all of a sudden it's the
+[00:20:28] exact opposite it the order book just it
+[00:20:30] thins out and shuts off so it's like it
+[00:20:32] gets really quiet so this right here is
+[00:20:35] another example of um Market open so
+[00:20:38] this was pre-market and then this was
+[00:20:40] right at 9:30 a.m. so all of a sudden
+[00:20:42] 9:30 the order book it just gets so much
+[00:20:45] thicker you've got a bunch more orders
+[00:20:47] that come online uh I I think that's
+[00:20:50] interesting I think it's noteworthy um
+[00:20:52] you can see that on the current order
+[00:20:54] book right here in the histogram large
+[00:20:56] orders large orders and so that should
+[00:20:59] help you better understand where we may
+[00:21:02] have areas of
+[00:21:04] resistance so we know that for sure when
+[00:21:08] I'm trading at least I'm trading based
+[00:21:10] on the moment we have breaking news and
+[00:21:13] those trades start early pre-market they
+[00:21:15] could start at 7 738 839 but often times
+[00:21:20] at 9:30 we get stocks that start to
+[00:21:23] become very thickly traded and and I've
+[00:21:25] been able to say that but this actually
+[00:21:27] shows you what thickly traded looks like
+[00:21:29] so thickly traded means there's a whole
+[00:21:31] lot more Sellers and a whole lot more
+[00:21:33] buyers it's just more
+[00:21:35] congested now I don't think any of that
+[00:21:37] is necessarily going to help you be a
+[00:21:38] better Trader it's just something to be
+[00:21:39] aware of so now let's use a case study
+[00:21:42] here of a momentum stock this is sgbx
+[00:21:45] okay so sgbx this is the traditional
+[00:21:48] view on just a regular chart right
+[00:21:51] regular Candlestick
+[00:21:53] chart so you see the price um we got
+[00:21:56] this nice squeeze up a pullback and then
+[00:21:57] it ends up pushing higher this is
+[00:22:00] showing that same exact chart same chart
+[00:22:04] but this is showing the heat map and the
+[00:22:07] heat map is displaying as we already
+[00:22:09] talked about uh the big orders that are
+[00:22:12] placed on the level two the bubbles are
+[00:22:15] the orders that actually went through so
+[00:22:17] when the price first started squeezing
+[00:22:19] up it was a lot of small orders a lot of
+[00:22:21] small orders a few sell orders few more
+[00:22:23] small orders some sell orders few more
+[00:22:25] small buy orders another bigger buy
+[00:22:28] order bigger buy order bigger sell order
+[00:22:31] sell order buy order sell order and then
+[00:22:33] some sell orders as we came down we kind
+[00:22:35] of went sideways before we started to
+[00:22:37] get some buy orders that came in right
+[00:22:38] here you can see this was a seller on
+[00:22:41] the level two this was another seller on
+[00:22:43] the level two this was a buyer on the
+[00:22:45] level two this was a buy order that was
+[00:22:47] placed and canceled very quickly this
+[00:22:49] was an order that was placed and then
+[00:22:51] this person bought up all of those
+[00:22:53] shares so that's how that works so that
+[00:22:56] order was now gone right at the open
+[00:22:58] this was 930 opening bell again Market
+[00:23:01] gets much thicker a buy order a sell
+[00:23:04] order and then this was sort of that red
+[00:23:06] de green move as the price surged higher
+[00:23:08] and you can see as it was moving there
+[00:23:10] were just a lot of buy orders down here
+[00:23:13] but there were also a good number of
+[00:23:14] sell orders as it was coming up a bigger
+[00:23:17] buy order a little bit down low a sell
+[00:23:19] order up here okay so does any of this
+[00:23:23] really help you with taking better
+[00:23:25] trades on it as of right now
+[00:23:29] I don't know now what about the second
+[00:23:31] pullback let's watch this so here we had
+[00:23:34] this um this move to the upside right
+[00:23:37] here we pulled back we sold off we came
+[00:23:40] back up we squeezed higher we pulled
+[00:23:41] back and we punched higher up to six and
+[00:23:44] right in this area I was watching to
+[00:23:46] take a long right here this is where I
+[00:23:48] was watching to take that breakout now
+[00:23:50] at this point I was already up $5,000 on
+[00:23:53] the day and I'll kind of walk you
+[00:23:55] through some of the trades I took in
+[00:23:56] just a moment but I was already at 5,000
+[00:23:58] on the day and I was thinking about
+[00:23:59] taking this trade now I looked at my
+[00:24:01] heat map and you know what I
+[00:24:03] saw look at this I saw this huge block
+[00:24:07] of sell orders right here between 6 and
+[00:24:11] 620 so look at all that
+[00:24:13] resistance that's a lot of resistance
+[00:24:16] now down here we have some support at
+[00:24:18] 520 that's an interesting place to be
+[00:24:20] buying but buying right here right into
+[00:24:23] this resistance from all those sell
+[00:24:25] orders doesn't seem like a good idea now
+[00:24:28] granted all of these sell orders were
+[00:24:30] displayed on the traditional level two
+[00:24:33] depth of market so just looking at level
+[00:24:36] two you should have been able to see
+[00:24:37] them but this is a more visual way of
+[00:24:41] seeing it it makes it impossible to miss
+[00:24:44] so I predicted because of all these sell
+[00:24:46] orders right here that this was going to
+[00:24:48] reject that this would pop up and reject
+[00:24:51] back down and let's look at what
+[00:24:53] happened it popped up and rejected back
+[00:24:56] down exactly what we thought right right
+[00:24:59] it came into this level and rejected
+[00:25:01] back down and you had a lot of people
+[00:25:02] that dumped down here but look at where
+[00:25:04] it bounced off of surprise surprise
+[00:25:09] 520 right where that big buy order was
+[00:25:13] now this isn't really any different from
+[00:25:15] how I already trade because I use level
+[00:25:17] two so actively in my trading I'm
+[00:25:20] watching the big bids this is where I'm
+[00:25:23] buying so it for someone who is never
+[00:25:26] using level two then this chart would be
+[00:25:29] like incredible because all of a sudden
+[00:25:31] you would have insight into the depth of
+[00:25:33] the market for Traders who are already
+[00:25:35] using level two which hopefully are all
+[00:25:37] of the members at Warrior trading
+[00:25:39] because this is something that I teach
+[00:25:40] you I think that this is just a
+[00:25:43] different way of visualizing it and it's
+[00:25:47] interesting and it may be helpful now I
+[00:25:49] actually pinned a link to the top of the
+[00:25:51] comments and I put it in the description
+[00:25:52] where you can download my micro pullback
+[00:25:55] strategy PDF you can download it you can
+[00:25:57] print it out you can have it next to
+[00:25:58] your desk and you can use that as a
+[00:25:59] resource because what it does is it
+[00:26:01] walks you through the strategy that I'm
+[00:26:03] using of where I'm getting in and where
+[00:26:05] I'm getting out when we have a strong
+[00:26:07] setup like sgbx that is pushing higher
+[00:26:10] now that is my go-to strategy I've been
+[00:26:12] trading for years it doesn't include the
+[00:26:15] sort of new addition of of bookmap I I'm
+[00:26:18] not sure to the extent that I'm going to
+[00:26:19] be using this long term that's still to
+[00:26:21] be determined but for those of you that
+[00:26:23] want to get a better sense of the way
+[00:26:24] I'm trading these stocks right now make
+[00:26:26] sure you download that PDF cuz it's
+[00:26:28] going to help you a lot now I want to
+[00:26:30] show you this example here of what I
+[00:26:31] would call a thickly traded grinding and
+[00:26:34] congested stock so this is one where we
+[00:26:37] can see right at 9:30 at the opening
+[00:26:40] bell all of a sudden all of these orders
+[00:26:43] filled in and it became really thickly
+[00:26:45] traded lots of orders on the buy side
+[00:26:48] lots of orders on the sell side and this
+[00:26:50] was just a stock that was not moving
+[00:26:53] quickly it was not easy to trade when we
+[00:26:56] looked at the chart we could see on the
+[00:26:58] Candlestick chart it was grinding like
+[00:27:00] it was moving higher but it was kind of
+[00:27:02] going sideways you know it just wasn't
+[00:27:05] clean and if we looked at the level two
+[00:27:07] on this one you know we would see that
+[00:27:09] the level two was very thick it was just
+[00:27:11] really stacked up this is just something
+[00:27:14] that I wouldn't have wanted to day trade
+[00:27:16] and when we're looking at this is like
+[00:27:18] the historical book and this is moving
+[00:27:21] forward so this is current time right
+[00:27:23] here which is why there's no volume bars
+[00:27:25] here so basically it just projects all
+[00:27:28] of the current orders forward If you're
+[00:27:31] sort of scrolled back like this uh which
+[00:27:33] is fine it's it's a fine way to look at
+[00:27:35] it but this is a thickly traded stock
+[00:27:37] now when I say something thickly traded
+[00:27:40] sometimes people are like what does that
+[00:27:41] really mean and what it means to me is
+[00:27:43] that there's a lot of orders stacked on
+[00:27:45] the bid there's a lot of orders on the
+[00:27:46] offer this thing is just like so
+[00:27:48] congested with orders it's not moving
+[00:27:51] quickly it's like it's just like trying
+[00:27:54] to Sprint underwater in a pool like it's
+[00:27:57] just you know you just cannot seem to
+[00:28:00] get going that's what these feel like so
+[00:28:04] it's very clear in the visual display
+[00:28:07] here when you're looking at something
+[00:28:08] that's going to be thickly traded and
+[00:28:10] there's no question that that uh
+[00:28:12] deviates significantly from something
+[00:28:14] like sgbx which was uh today's best
+[00:28:18] trade so um now one of the things you
+[00:28:21] can also do is identify large block
+[00:28:23] orders that are just sitting on the
+[00:28:24] order book and occasionally I've pulled
+[00:28:27] up a chart and I've seen something
+[00:28:28] something like this so just a random
+[00:28:30] 20,000 share sell sell order at $3 it's
+[00:28:33] like wow that is a significant order
+[00:28:36] that's a big sell order that's just
+[00:28:38] sitting there relative to everything
+[00:28:40] else um this is a range created by large
+[00:28:43] sellers so look you've got this big
+[00:28:45] seller here you've got this big buyer
+[00:28:47] here so the range is created honestly it
+[00:28:50] wouldn't surprise me at all if this was
+[00:28:52] the same Market maker that was sitting
+[00:28:54] on the offer and on the bid that might
+[00:28:56] be the same firm the same institutional
+[00:28:58] trading firm and they're basically
+[00:29:00] holding this between these ranges um so
+[00:29:03] this is and this is a large cap by the
+[00:29:05] way I think this was Apple that we were
+[00:29:06] looking at at that time uh this was I
+[00:29:09] think Tesla and again big sell order up
+[00:29:12] here at 190 creating that wall sell
+[00:29:15] orders Here Sell orders Here Sell orders
+[00:29:18] here and the sell orders kind of like
+[00:29:21] increasing in size and then decreasing
+[00:29:23] and then increasing and then decreasing
+[00:29:29] and then a new sell order comes in right
+[00:29:31] here right as the price comes up boom
+[00:29:33] sell order comes in they block it right
+[00:29:35] they blocked the way they say no not
+[00:29:37] today buddy and then here you've got
+[00:29:39] this big buy order down here and this
+[00:29:41] person sold into that buy order and
+[00:29:44] knocked it out the buy order was gone
+[00:29:45] after that sell after that sell went
+[00:29:47] through so this is an order that was
+[00:29:49] sitting on the book all day long and
+[00:29:51] then finally that sell order took it out
+[00:29:54] right here you have some orders that
+[00:29:55] were placed and canceled here you had an
+[00:29:57] order order that was sitting and got
+[00:29:59] taken out more orders came back they got
+[00:30:02] taken out so more people were buying so
+[00:30:04] you can kind of see this it just tells
+[00:30:07] you a slightly different story when you
+[00:30:09] can factor in the actual orders that
+[00:30:12] were sitting there but again without the
+[00:30:14] Candlestick charts it it does feel like
+[00:30:17] a real absence of context but it's not
+[00:30:21] that it's not helpful it's just that
+[00:30:22] it's lacking so here's a big order
+[00:30:25] there's another big order uh a order
+[00:30:28] down here now this is an interesting
+[00:30:32] pattern right here where you see that
+[00:30:34] there were sell orders and they keep
+[00:30:36] getting accumulated by buyers people
+[00:30:38] keep buying up those sellers so this is
+[00:30:40] an accumulation of sell orders because
+[00:30:43] the sell order gets bought up it
+[00:30:44] disappears gets bought up huge buy order
+[00:30:47] right here that sell order got bought up
+[00:30:50] we came up to here and then that sell
+[00:30:52] order got bought up so this was Nvidia
+[00:30:54] it just there were buyers that just kept
+[00:30:56] buying it up more and more and more but
+[00:30:59] you know what's really fascinating is
+[00:31:01] watching high frequency trading
+[00:31:03] algorithms and watching market makers
+[00:31:05] control price action this is the S&P
+[00:31:09] 500 this is a visual display of computer
+[00:31:13] algorithms moving the market that's
+[00:31:16] that's literally what is happening right
+[00:31:18] here it's pretty wild this isn't
+[00:31:21] something that um I had really ever seen
+[00:31:25] in this visual display and I actually
+[00:31:28] want to show you a video here of me
+[00:31:30] recording these high frequency trading
+[00:31:32] algorithms at work so let me grab this
+[00:31:36] um video for you here this is this is
+[00:31:39] really
+[00:31:40] interesting so this is on the um the
+[00:31:44] iwm uh which is the Russell 2000 Index
+[00:31:48] and let's see why is this glitching on
+[00:31:50] me a little bit all right
+[00:31:53] so this is showing all of the orders
+[00:31:56] that have been placed and again just
+[00:31:58] showing this pattern of orders being
+[00:32:00] placed and disappearing placed and
+[00:32:01] disappearing right and this right here
+[00:32:04] is current time so as this is moving
+[00:32:07] these are current orders that are being
+[00:32:10] placed and look at how rapidly they're
+[00:32:12] going to be placed and then
+[00:32:14] disappear those orders are being placed
+[00:32:17] and pulled placed and pulled placed and
+[00:32:21] pulled this it this flicker of orders
+[00:32:26] being put on the market and taken off
+[00:32:27] the market and put on the market and
+[00:32:29] taken off the market these are high
+[00:32:31] frequency trading algorithms and they
+[00:32:33] are actually affecting the market to
+[00:32:35] what extent they're even allowed to do
+[00:32:37] this I don't know because this to me
+[00:32:42] looks like it could be order spoofing
+[00:32:44] because they're putting out orders and
+[00:32:46] then canceling them putting out orders
+[00:32:48] and canceling them but you know this
+[00:32:51] this happens every single day and this
+[00:32:53] happens in fact all day long every
+[00:32:56] single day they're just jumping around
+[00:32:58] jumping around jumping around so that is
+[00:33:02] in is indicative of highfrequency
+[00:33:04] trading algorithms now um you know to
+[00:33:08] the extent that this is going to happen
+[00:33:11] on a small cap stock not as likely small
+[00:33:14] cap stocks are not as popular by these
+[00:33:16] big institutional traders who are sort
+[00:33:17] of you know gaming the system the small
+[00:33:20] cap stocks it's th those are there's not
+[00:33:23] even enough profit potential in it for
+[00:33:25] them so that's the area of the market
+[00:33:27] where we as retail Traders actually have
+[00:33:30] a little bit of an edge for me so I
+[00:33:31] showed you the orders of the videos
+[00:33:33] being placed um now this is an example
+[00:33:36] of orders getting really tight around
+[00:33:40] the current price this creates the
+[00:33:42] illusion of liquidity because you've got
+[00:33:44] a lot of orders right here and then you
+[00:33:47] have a big stretch with like basically
+[00:33:49] no orders there's look at how empty the
+[00:33:52] heat map is there's nothing there
+[00:33:54] nothing until here so with this tell you
+[00:33:58] is that there's a lot of there's a
+[00:33:59] probably an Institutional trading firm
+[00:34:01] that's holding the price firm in this
+[00:34:03] area but if it busted out of that it
+[00:34:06] would go right up to here or it would
+[00:34:08] drop probably right down to here so
+[00:34:10] you'd get a big move but as long as it
+[00:34:13] stays pinned in this range it's not
+[00:34:15] going to move it's going to be tight
+[00:34:16] right in there so now let's talk about
+[00:34:19] some of the drawbacks of using bookmap
+[00:34:21] because there are some drawbacks the
+[00:34:22] first is that this is resource intensive
+[00:34:25] on my machine you can see right here
+[00:34:27] bookmap is taking up 15% of my CPU usage
+[00:34:30] is taking up a ton of my memory now
+[00:34:32] Firefox is definitely a hog because I'm
+[00:34:34] I mean I've got my slides and I've got a
+[00:34:36] ton of stuff and I probably have like a
+[00:34:39] 100 tabs open at any given time but
+[00:34:42] regardless of that um don't judge me
+[00:34:44] here this stands by itself as being
+[00:34:48] pretty intensive I think that's just my
+[00:34:49] opinion I think it's pretty intensive
+[00:34:51] and this computer that I'm using right
+[00:34:52] now is it's probably a 3,000 might even
+[00:34:55] be a four $3,000 definitely computer
+[00:34:57] it's a pretty expensive computer so it's
+[00:35:00] resource int resource intensive on my
+[00:35:03] machine most challenging is the
+[00:35:06] onboarding it is really confusing to
+[00:35:09] sign up for bookmap so much so that I
+[00:35:12] almost gave up I was like this is
+[00:35:14] ridiculous this is just silly like I
+[00:35:17] don't even understand why this is so
+[00:35:19] difficult I actually looked at their um
+[00:35:21] reviews and one of the one of the first
+[00:35:25] reviews was onboarding is incredibly
+[00:35:26] cumbersome and they're not wrong I mean
+[00:35:30] they're 100% right it like you shouldn't
+[00:35:33] have I've been trading for more than a
+[00:35:35] decade I'm good with computers I'm good
+[00:35:36] with trading software and it took me a
+[00:35:38] minute to figure it out so I I just kind
+[00:35:42] of felt like you know why is it so
+[00:35:44] complicated you've got to make it simple
+[00:35:46] it's just an honest critique make it
+[00:35:48] simple and people are going to use it
+[00:35:50] it's going to be easier for people to
+[00:35:51] use if it's hard for an experienced
+[00:35:53] Trader to figure out how to start using
+[00:35:54] it that's not a good idea now major
+[00:35:58] problem for me was that the candlesticks
+[00:36:00] appear to be
+[00:36:01] inaccurate so if we pull up the actual
+[00:36:04] platform here um and well before I do
+[00:36:07] that I'll also just comment that it's
+[00:36:08] expensive so when you sign up you first
+[00:36:12] sign up for the platform itself but it
+[00:36:15] doesn't have any Market data and this is
+[00:36:17] what was super annoying so basically I
+[00:36:20] just create a new workspace um let's
+[00:36:23] create a new workspace here so when you
+[00:36:24] first open the platform it looks like
+[00:36:26] this and you're like at least I was like
+[00:36:30] what in the world is this I just paid
+[00:36:34] for it you know $50 6060 $59 a month I
+[00:36:38] think it is $60 a month something like
+[00:36:40] that so I or maybe it's a $100 a month I
+[00:36:43] can't remember anyways I I paid for it
+[00:36:45] check their website and I'm like please
+[00:36:48] configure and select a platform from the
+[00:36:49] connections menu what in the you know
+[00:36:54] how does this work so I'm like trade
+[00:36:56] oate
+[00:36:58] what is that I don't have a trade ofate
+[00:37:00] account that's for futures Traders so
+[00:37:03] I'm like okay I don't have that um you
+[00:37:07] know bookmap data so this is just going
+[00:37:10] d da I couldn't get this to work
+[00:37:13] so I I got nothing on this and I was I
+[00:37:17] was confused so I was like okay then I
+[00:37:21] go into connector to configure and I go
+[00:37:25] um add connection
+[00:37:27] here and it adds a connection go and it
+[00:37:30] just now you go to the drop down and
+[00:37:32] it's like these are the different
+[00:37:35] connections you can
+[00:37:36] make so I'm like okay trade station
+[00:37:39] ninja Trader you know all right um trade
+[00:37:44] ofate interactive brokers so it it
+[00:37:47] appears that you can connect and I'm
+[00:37:50] sure you can to different platforms now
+[00:37:53] I've downloaded a plugin whatever um but
+[00:37:57] to me it it I I really just I found this
+[00:38:00] to be really not intuitive I I could not
+[00:38:04] figure this out so then I you know going
+[00:38:07] around on their website it's I saw that
+[00:38:09] you could sign up to DX feed and that's
+[00:38:12] I think $100 a
+[00:38:14] month so I was like okay so now I've got
+[00:38:17] to sign up for that so now I have two
+[00:38:18] subscriptions to them one is for the
+[00:38:21] software and then the others for the
+[00:38:23] market
+[00:38:24] data so now I'm like all right so let's
+[00:38:28] see and you can see right here it's I
+[00:38:31] don't know what it's doing so so let's
+[00:38:33] just go create a new workspace again so
+[00:38:36] create new
+[00:38:38] workspace looks like it's kind of
+[00:38:40] stalled out on me all right so I'm just
+[00:38:42] going to exit without
+[00:38:45] saving um close that video down so I'm
+[00:38:48] going to load it again we'll see if I
+[00:38:49] can get it to load so this you know I I
+[00:38:52] I think if I were if I were them if I
+[00:38:55] own the company I would try to make this
+[00:38:58] much more streamlined for onboarding but
+[00:39:02] I I guess that there's a lot of people
+[00:39:05] that are using this um and just
+[00:39:08] connecting it to their own Market data
+[00:39:09] feeds which is nice because if you do
+[00:39:11] that you're not double paying on data it
+[00:39:14] just so happens that I don't have Market
+[00:39:17] data with any one of these uh providers
+[00:39:21] that wasn't an option for me so I just
+[00:39:23] had to sign up and pay for it again I
+[00:39:25] mean I already pay for Market data but
+[00:39:27] it's just not one of the ones they
+[00:39:28] support so now I'm paying an extra $100
+[00:39:30] a month in Market data so it's going to
+[00:39:32] be
+[00:39:33] like 60 $170 a month or so I think for
+[00:39:37] this platform um you know it's it's it's
+[00:39:41] it's not cheap
+[00:39:43] um and to me it's it's kind of like I
+[00:39:47] don't know it feels like it's missing
+[00:39:49] some of the things that I that I would
+[00:39:50] want so anyway so so then when once
+[00:39:52] you're in it so if you get over the
+[00:39:54] price and you're fine with that or you
+[00:39:55] have a market data feed and that's only
+[00:39:57] like $60 a month for you so then what
+[00:39:59] you do when you first log in is
+[00:40:01] everything is blank here and you're
+[00:40:03] probably like what how do I this is a
+[00:40:05] weird way to log in you click the plus
+[00:40:07] button and then you can start typing in
+[00:40:09] what you want to pull up so it'll pull
+[00:40:11] up the S&P 500 here and this is actually
+[00:40:15] going to be kind of interesting because
+[00:40:16] we're coming right into uh Market close
+[00:40:19] so right now is uh 357 we're coming into
+[00:40:23] the market close so we'll see the orders
+[00:40:24] uh change a little bit iwm we could
+[00:40:26] subscribe to
+[00:40:28] that so when we look at it like this um
+[00:40:33] you do have the ability to add more
+[00:40:35] columns here you can hide this column
+[00:40:37] you can add a new column um you can
+[00:40:39] configure the column I'm going to turn
+[00:40:41] off the point of control line actually
+[00:40:43] don't think it's really helpful um so
+[00:40:47] this is showing all the orders that have
+[00:40:48] been placed and where we had the peak
+[00:40:50] volume this is showing our current order
+[00:40:53] book and showing the orders that are
+[00:40:55] moving around and they're very dynamic
+[00:40:57] they're moving very quickly as you can
+[00:40:59] see this is the S&P 500 on a Friday
+[00:41:03] options expiration you know orders are
+[00:41:06] jumping
+[00:41:07] around if you if you press the um
+[00:41:09] studies
+[00:41:11] configuration right here you could add
+[00:41:15] candlesticks and it says that the
+[00:41:17] interval is a one minute chart so I'm
+[00:41:19] like okay that makes sense um you change
+[00:41:22] it to a 5-minute chart whatever okay so
+[00:41:25] I change it to a one minute chart and
+[00:41:27] and I'm looking at this right here and
+[00:41:31] I'm thinking to myself um let's look at
+[00:41:34] the S&P
+[00:41:35] 500 we at the one minute
+[00:41:39] chart and we'll just compare them okay
+[00:41:42] so this is the one minute chart for um
+[00:41:46] the S&P 500 this is the actual one
+[00:41:48] minute
+[00:41:49] chart and this is saying it's a 1 minute
+[00:41:51] chart but look red red red red red green
+[00:41:56] red green red
+[00:41:58] red green these are not the same candles
+[00:42:02] they're
+[00:42:04] different so now I'm left a little
+[00:42:08] confused about why a one minute and a
+[00:42:11] one minute chart aren't matching and
+[00:42:14] look at how this green candle sort of
+[00:42:16] overlaying on top of that red
+[00:42:18] candle so that to me looks not right I
+[00:42:22] mean it looks weird it's obviously it's
+[00:42:24] weird um
+[00:42:27] so and we're coming right up here to
+[00:42:30] 400m so we'll see the at the bottom of
+[00:42:32] the hour but you can see like this
+[00:42:33] candle this is this is real this is
+[00:42:35] accurate 100% accurate so this is my
+[00:42:38] source of Truth here and I could just
+[00:42:40] tell that there's a difference what I
+[00:42:42] was hoping was that you know
+[00:42:45] maybe you know not really maybe for me
+[00:42:48] but but for other people that these
+[00:42:50] candlesticks would be so good that you
+[00:42:53] could actually use this for your entire
+[00:42:55] platform but it doesn't actually feel
+[00:42:58] like you would be able to do that you
+[00:43:02] see right there that sort of change so
+[00:43:04] we just went into after
+[00:43:06] hours so now look at
+[00:43:09] that so the alos are shutting off
+[00:43:12] they're saying good night I'll see you
+[00:43:15] next week night night
+[00:43:17] computers and now we're and after hours
+[00:43:21] trading and this is a reminder of how
+[00:43:24] much of the market is dominated by High
+[00:43:26] frequen quency trading algorithms if you
+[00:43:29] are trying to trade the S&P 500 you're
+[00:43:32] trying to trade I mean even if you're
+[00:43:34] trying to trade apple on a typical day
+[00:43:36] or Nvidia or Tesla you're trading
+[00:43:38] Against the Machine you will lose your
+[00:43:41] odds are stacked against you they have
+[00:43:43] every Edge that you couldn't even
+[00:43:45] imagine they will beat you and they will
+[00:43:47] take the money right out of your pocket
+[00:43:49] every single time so uh so I would say
+[00:43:54] what I do like about this um sgbx uh
+[00:43:57] oops sorry so again now you got to go
+[00:43:59] into subscribe this is kind of clumsy
+[00:44:01] sgbx you got to subscribe here you can
+[00:44:04] choose I'll just do 12 hours so I'm
+[00:44:06] going to subscribe every time you close
+[00:44:08] a window you've got a unsubscribe so
+[00:44:11] it's two clicks to close I just think
+[00:44:13] that's a little clumsy it just you know
+[00:44:15] it just feels like a platform that's not
+[00:44:18] polished and I feel like it has a lot of
+[00:44:20] potential what I would almost want them
+[00:44:23] to do is to like integrate some really
+[00:44:27] decent Candlestick charts on here so you
+[00:44:30] could overlay this like that's what I
+[00:44:32] would like I would like to Overlay this
+[00:44:34] on top of this that would look good that
+[00:44:37] could be very interesting now
+[00:44:39] unfortunately it's going to cost
+[00:44:41] $170 a month to do that is it worth
+[00:44:45] it you would have to have level two data
+[00:44:47] which cost you 100 a month and then you
+[00:44:50] know it's cost you $50 a month so like I
+[00:44:53] don't think it's going to make sense for
+[00:44:54] me to add it to this platform to to add
+[00:44:57] um you know book map to this it's going
+[00:44:59] to be too expensive I don't know if they
+[00:45:01] let you add on to trading view if they
+[00:45:04] have like an API there where if you sign
+[00:45:06] up you can add it uh but anyways so if
+[00:45:10] we look at um when we first got the move
+[00:45:14] right here we scroll back this is going
+[00:45:16] to be the case study of my trade from
+[00:45:18] this morning so when I took that those
+[00:45:20] first trades on
+[00:45:23] sgbx um the way this happened was the
+[00:45:27] stock first hit my scanner and I'll pull
+[00:45:30] up here um let's see I'm going to pull
+[00:45:34] this up this is actually my case study
+[00:45:36] from just this morning so um it hits my
+[00:45:40] scanners sgbx at 9:00 a.m. $314 cents I
+[00:45:43] pull up the stock and I immediately buy
+[00:45:45] before I even pulled up um uh book map I
+[00:45:49] didn't even have chance to like click
+[00:45:50] the plus button and add the symbol I
+[00:45:52] just knew the stock so I bought it so I
+[00:45:54] got in at about a 325 average
+[00:45:57] so there's some green buy orders here um
+[00:46:00] small size orders relatively so I'm
+[00:46:02] adding in here it pushes higher um hits
+[00:46:05] a high up here of 60 it dips down it
+[00:46:08] pushes a little higher and then we start
+[00:46:11] seeing some of our first sell orders
+[00:46:13] right we see a little sell order right
+[00:46:16] here and we see a buy order here we end
+[00:46:19] up breaking over this level of 415 right
+[00:46:21] here and we push up a little higher
+[00:46:23] where we have a little resistance at 450
+[00:46:26] now the resistance at 450 made sense to
+[00:46:29] see those sell orders there why did that
+[00:46:32] make sense well if we look at our
+[00:46:34] Candlestick chart again we got to we
+[00:46:37] can't rely just on bookmap because the
+[00:46:39] Candlestick charts on bookmap are not uh
+[00:46:41] don't seem to be quite right um and
+[00:46:44] maybe I'm just doing it wrong but I've
+[00:46:46] never done Candlestick charts wrong
+[00:46:48] before it's kind of hard to anyways
+[00:46:49] maybe I'm wrong b f the doubt it's
+[00:46:51] probably me I'm probably just a just a
+[00:46:53] dummy all right so anyways um yesterday
+[00:46:57] sgbx came up hit this high right here of
+[00:47:00] 54 so this morning I expected it was
+[00:47:02] going to have resistance right at that
+[00:47:04] level and it did so when we when I saw
+[00:47:07] uh when I then pulled up bookmap and saw
+[00:47:09] those sell orders right there 54 I was
+[00:47:11] like yep that makes sense now it came up
+[00:47:14] we tried to buy into it couldn't break
+[00:47:16] the sell orders were too big we came
+[00:47:18] back down that didn't surprise me okay
+[00:47:20] so then we move a little bit further
+[00:47:21] forward we come back up again we still
+[00:47:23] can't break it people are buying but
+[00:47:25] there's people selling we come back down
+[00:47:27] again and look at in this area in this
+[00:47:30] area we see this bid support the the
+[00:47:32] buyers on the bid at about four and if
+[00:47:35] you remember from this morning I was
+[00:47:36] saying guys I'm buying here at 405 407
+[00:47:38] I'm trying to get in on this dip because
+[00:47:40] I think it's going to hold this level
+[00:47:41] part of that was seeing the buyers on
+[00:47:43] the level two and being able to see it
+[00:47:45] visually on book map was helpful that
+[00:47:46] was helpful to see it right there it was
+[00:47:48] plain as day so then uh coming into the
+[00:47:50] open we ended up pulling back a little
+[00:47:52] bit more we dipped down um so I was like
+[00:47:54] ah a little bit bummed out we pulled
+[00:47:56] back more and then right here there's
+[00:47:58] this big seller big seller right at four
+[00:48:01] right you see that wall it's right there
+[00:48:03] and then big buyers accumulate right
+[00:48:05] going into the open and watch this boom
+[00:48:07] it pops up it dumps down a little bit
+[00:48:10] and as soon as the bell rings again all
+[00:48:12] the orders start to come in and fill in
+[00:48:14] the book but there's some buy orders
+[00:48:16] here it squeezes up to 420 we break
+[00:48:19] through we punch up to 450 where we
+[00:48:21] still have um there's a seller there now
+[00:48:25] it's worth noting that it's not the same
+[00:48:28] seller cuz if it was that would have
+[00:48:30] been a a static bar all the way across
+[00:48:33] so those orders those sell orders were
+[00:48:35] canceled and new sell orders came out
+[00:48:37] and buyers blew right through them so
+[00:48:40] the buyers blew right through those sell
+[00:48:41] orders there and now it starts to pull
+[00:48:45] away so you know you start to get dialed
+[00:48:47] in here a little bit more it starts to
+[00:48:50] pull away higher and higher the red and
+[00:48:52] the green line is showing um it's
+[00:48:55] actually showing the spread
+[00:48:57] but honestly it's kind of hard to
+[00:48:58] visualize that I probably would take it
+[00:49:00] off the chart but but it is showing the
+[00:49:03] spread so anyways we push a little bit
+[00:49:05] higher to
+[00:49:06] 510 right so we come up to 510 and then
+[00:49:09] we push higher and and through this area
+[00:49:12] here there's just there's not a lot of
+[00:49:14] sellers like we have some but they're
+[00:49:16] not big and then this back here up
+[00:49:19] around $6 620 that was that big level of
+[00:49:22] resistance that I didn't think we were
+[00:49:23] going to be able to break and because I
+[00:49:25] saw that I didn't think we were going to
+[00:49:26] be able to break it but then watch what
+[00:49:28] happened right up
+[00:49:29] here so we end up coming back up coming
+[00:49:33] back up and very quickly let's see it
+[00:49:37] was right here we came back up and we
+[00:49:39] blew through that a huge buy order right
+[00:49:42] here this was a 95,000 share buy order
+[00:49:45] that went through that's a 95,000 share
+[00:49:47] bubble huge buy order and boom blasts up
+[00:49:50] to here big seller dips back down and
+[00:49:54] now we've got a new wallet 7 we come
+[00:49:56] back up and we busted through I didn't
+[00:49:58] think we would but we busted through the
+[00:50:01] fact is there were some big sellers that
+[00:50:03] were stacked up and it would have been
+[00:50:05] nice if we didn't see so many Sellers as
+[00:50:06] we were coming into these levels it did
+[00:50:08] move higher but look at these sellers
+[00:50:10] that started to stack up right and then
+[00:50:12] eventually well the buyers were weaker
+[00:50:16] and the sellers were stronger and the
+[00:50:17] price came way back down so anyways for
+[00:50:22] me I guess let's come back to the
+[00:50:24] question I asked at the beginning of the
+[00:50:25] episode am I going to continue to use
+[00:50:27] bookmap in my own trading I paid nearly
+[00:50:31] $70 for it for the month so let's see I
+[00:50:34] think I got a discount in my first month
+[00:50:35] so maybe I paid 110 so I'm in for a
+[00:50:38] month I'm not I got to get my money's
+[00:50:40] worth on this so yeah I'll use it for
+[00:50:42] the rest of the month and I've already
+[00:50:44] been using it for a little while so I'll
+[00:50:45] use it until the end of my subscription
+[00:50:47] and we'll see right now I would say that
+[00:50:51] I am finding myself checking it every
+[00:50:53] day but on a number of stocks that have
+[00:50:55] been kind of thickly traded this week
+[00:50:57] and not very interesting it hasn't given
+[00:51:00] me any real support but today finally we
+[00:51:03] had some momentum and I feel like it did
+[00:51:06] help me but it it I mean it definitely
+[00:51:09] stopped me from buying at six and it did
+[00:51:11] end up going up to 7 to eight and to
+[00:51:13] nine so I don't know we'll have to see I
+[00:51:16] think the jury is still out but for me
+[00:51:19] it's interesting nonetheless it's
+[00:51:21] interesting and I like the concept of
+[00:51:24] being able to display Market depth level
+[00:51:27] two right on the chart this is something
+[00:51:29] it's it's brand new I've never done this
+[00:51:31] before so I think it's worth giving it a
+[00:51:33] fair chance and maybe there'll be
+[00:51:35] someone out there that is able to to
+[00:51:38] sort of take this idea either to the
+[00:51:41] next level and integrate it into trading
+[00:51:43] view indicators or you know your thinker
+[00:51:46] swim charts so you don't have to pay
+[00:51:48] extra on Market data now book Maps
+[00:51:50] probably not going to want to do that I
+[00:51:51] mean maybe they will I don't know maybe
+[00:51:53] they will maybe they'll create some
+[00:51:55] Integrations that work a little bit
+[00:51:56] better and are more cost effective
+[00:51:58] because I think there's value in it so
+[00:52:01] yeah I I think that's kind of my
+[00:52:02] takeaway right now it's interesting I
+[00:52:04] wish it was a little bit less clumsy I
+[00:52:06] wish the platform itself was a little
+[00:52:08] better and I think it might be cleaner
+[00:52:10] if you could just overlay it on top of
+[00:52:13] your current charts but that would
+[00:52:15] ultimately require either platforms like
+[00:52:17] thinker swim or trading view to kind of
+[00:52:20] re-engineer like how does this work how
+[00:52:22] do you plot level two on your chart so
+[00:52:25] not really that complicated but no one's
+[00:52:26] ever done it before so I'm not going to
+[00:52:27] throw out my Candlestick charts anytime
+[00:52:29] soon but I don't mind adding a new tool
+[00:52:32] to my tool belt because this is
+[00:52:33] something that I actually think has the
+[00:52:35] potential to be very helpful in my
+[00:52:37] trading and I will continue to keep you
+[00:52:39] guys updated on what I think of using
+[00:52:42] bookmap thanks as always for tuning in I
+[00:52:43] hope you hit that thumbs up I hope
+[00:52:44] you're subscribed to the channel and
+[00:52:45] I'll see you for the next episode real
+[00:52:47] soon
+[00:52:48] [Music]

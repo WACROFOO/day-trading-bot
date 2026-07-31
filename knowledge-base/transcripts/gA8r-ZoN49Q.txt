@@ -1,0 +1,430 @@
+# $GFAI +72% on a Daily Breakout Setup
+# https://www.youtube.com/watch?v=gA8r-ZoN49Q
+# duration_sec: 992
+
+[00:00:00] what's up everyone all right so uh we're
+[00:00:02] gonna go over trades from today gfai was
+[00:00:06] the only stock I traded today and I
+[00:00:08] actually didn't think I was going to
+[00:00:09] take any trades today because coming
+[00:00:11] into the open
+[00:00:12] celz was our leading gapper leading
+[00:00:15] Gainer and
+[00:00:17] I just I I know that stocks under two
+[00:00:20] dollars
+[00:00:21] are not where I make money in fact even
+[00:00:24] yesterday I can't remember what stock it
+[00:00:26] was now I've already forgotten Lucy uh
+[00:00:28] Lucy is not under two dollars but it was
+[00:00:30] on the cheaper side and I churned a lot
+[00:00:33] of commissions on it so you know NASDAQ
+[00:00:36] made money because I do the direct
+[00:00:38] routing my broker made some money and I
+[00:00:40] didn't make a whole lot and I don't
+[00:00:42] really like that feeling
+[00:00:44] you know I'm just sitting here working
+[00:00:46] for them when I trade stocks like that
+[00:00:48] now you could say well geez these are
+[00:00:50] days that you should be trading in the
+[00:00:52] free commission broker TD Ameritrade or
+[00:00:55] you know whatever E-Trade something like
+[00:00:57] that and that that may be true but
+[00:01:02] in any case
+[00:01:03] um
+[00:01:04] I I think one of the other problems with
+[00:01:07] these and celz was the case as well is
+[00:01:10] that I like to do breakout trades I like
+[00:01:13] to buy dips and when you have a lower
+[00:01:15] price stock
+[00:01:16] we often see more of the grinding action
+[00:01:19] and I I kind of struggle with that
+[00:01:22] because the breakouts don't really give
+[00:01:24] you these exhaustion kind of squeezes uh
+[00:01:27] the dips don't really bounce up that
+[00:01:29] much you just have a compressed range
+[00:01:31] and I find that I end up churning a lot
+[00:01:34] of shares getting in getting out and
+[00:01:36] then and then you know with my luck I do
+[00:01:38] catch the one gross flush but I'm in it
+[00:01:41] uh so you know I end up losing on it
+[00:01:43] anyways celz made a nice move this
+[00:01:46] morning from you know 50 cents all the
+[00:01:48] way up to a dollar
+[00:01:50] 37 and I didn't trade it I sat on the
+[00:01:53] sidelines I watched it I watched it
+[00:01:55] right here at a dollar seven and I
+[00:01:57] thought yeah if it breaks a dollar seven
+[00:01:59] and it did it goes to a dollar nine then
+[00:02:01] it flushes back to 98 cents then it
+[00:02:03] comes back and rips back up to a dollar
+[00:02:05] twelve
+[00:02:06] then it drops again back down to a
+[00:02:08] dollar then it pulls away here to a
+[00:02:10] dollar eighteen and it squeezes up to 38
+[00:02:14] but then you know flushes again anyways
+[00:02:17] I I steered clear of it but it was
+[00:02:19] obviously the leading gapper it was the
+[00:02:21] stock everyone was talking about it was
+[00:02:23] up 160 percent and I said I'm not going
+[00:02:25] to trade it so
+[00:02:28] uh you know the problem here is that
+[00:02:30] there was an obvious stock today it just
+[00:02:33] happened to be one that I didn't like
+[00:02:37] so that can be that can be tough now
+[00:02:40] um you know the second or third leading
+[00:02:42] gapper maybe I like them more and
+[00:02:44] they're better for me just for instance
+[00:02:46] but if they're not obvious
+[00:02:49] well you know we may not get good
+[00:02:51] follow-through and we may not see clean
+[00:02:53] action and then I may be disappointed
+[00:02:56] when I'm aggressively trading them and
+[00:02:57] you know it doesn't work out so I have
+[00:02:59] to be cognizant of whether or not the
+[00:03:01] stock that is most obvious today uh you
+[00:03:04] know is the stock that I'm Trading
+[00:03:06] so anyway celz no trades on that and
+[00:03:10] then at the open
+[00:03:12] I'm just sitting here you know kind of
+[00:03:14] content thinking I might not get any
+[00:03:15] trades at all
+[00:03:17] um I'm looking at some other stuff and
+[00:03:20] I've got a class that I'm going to teach
+[00:03:22] today at noon time on YouTube so it's
+[00:03:24] like thinking about that and looking at
+[00:03:26] my slides for it anyways um you know
+[00:03:29] just kind of sitting here
+[00:03:32] actively watching listen but really just
+[00:03:34] listening to scans and that's when right
+[00:03:38] there at 9 32 gfai hit my scanner at
+[00:03:43] 18.30 so I heard the scanner alert ding
+[00:03:47] I look over oh gfai
+[00:03:52] and of course to just kind of like slow
+[00:03:56] down or what we're going to do we're
+[00:03:57] going to give you the anatomy of these
+[00:04:00] sort of two minutes uh actually I'm
+[00:04:02] going to give you two seconds in two
+[00:04:04] minutes so I'm gonna slow it down so
+[00:04:07] ding
+[00:04:09] look over first thing I look at is the
+[00:04:12] symbol I don't need to look at the time
+[00:04:14] that doesn't mean anything to me uh you
+[00:04:16] know I know what time it is I look at
+[00:04:17] the symbol gfai immediately
+[00:04:21] I'm having a flood of memories of gfai
+[00:04:24] yes traded this the other day traded a
+[00:04:26] couple times this week traded it last
+[00:04:27] week it's a former Mobile stock then I
+[00:04:29] look at 18 and 25 cents the price okay
+[00:04:32] that means it's coming up near the high
+[00:04:34] of the other day and I don't need to
+[00:04:36] look at anything more I see those two
+[00:04:38] things and I type in the symbol now I
+[00:04:41] could just click on and it'll update but
+[00:04:43] I just am used to typing it so anyways I
+[00:04:45] type it there I see the chart it's
+[00:04:48] popping up it's pulling away I'm looking
+[00:04:49] at the daily chart and I recognize
+[00:04:51] you've got this daily trigger at 1886.
+[00:04:54] at that point I then type in my level
+[00:04:56] two window gfai and boom I am pressing
+[00:05:01] the buy button so I started with hotkey
+[00:05:04] I didn't even have time to press the buy
+[00:05:06] button I pressed the hotkey shift 2 to
+[00:05:09] buy 2000 shares added two
+[00:05:12] added another two added another two six
+[00:05:15] thousand shares then it starts squeezing
+[00:05:18] up I add another 2 000 shares sorry no
+[00:05:22] added a thousand shares at
+[00:05:25] 18.75 1880 and for the break of 19 1897.
+[00:05:32] we then squeeze up to uh nineteen
+[00:05:36] dollars and fifty cents then we go up to
+[00:05:39] 2025 it pulls back right here and by
+[00:05:43] this point I'd already made four
+[00:05:44] thousand dollars
+[00:05:46] then I'm buying this dip here and we get
+[00:05:49] this squeeze up to 21.70 by that point I
+[00:05:52] was up about eight thousand it drops
+[00:05:55] down here I buy this dip but I got out
+[00:05:59] at like 21.25 I thought maybe it needed
+[00:06:02] more time to recharge and I'm not even
+[00:06:04] in it right now
+[00:06:06] as much as I like this
+[00:06:09] in some ways what I don't like are the
+[00:06:11] three topping tail candles right here
+[00:06:14] that marked out the high
+[00:06:16] so we've got a descending resistance
+[00:06:18] line right there you see we're hitting
+[00:06:20] I hope it goes higher I hope it squeezes
+[00:06:25] but unfortunately and I'll show you the
+[00:06:27] spreads on this so you've got a stack of
+[00:06:29] sellers right now at 50 48
+[00:06:32] so there's back up to the high
+[00:06:36] it's and that wow look at that amazing
+[00:06:39] but look at how fast that just hit a
+[00:06:42] high of 25.94 and is back at 25 on the
+[00:06:45] bid
+[00:06:46] right
+[00:06:48] so this you know this time it broke it
+[00:06:51] and that's an awesome trade
+[00:06:53] it broke the descending resistance line
+[00:06:55] right there 24 38 25 24.50
+[00:07:00] just
+[00:07:01] boom amazing so it's got more in it I
+[00:07:04] left some money on the table today
+[00:07:07] but you know that's part of trading and
+[00:07:09] and so this is one of the challenges
+[00:07:11] that a lot of Traders face Is Knowing
+[00:07:12] When to Walk Away
+[00:07:14] I hit a high of ten thousand dollars of
+[00:07:16] profit and I gave back 1500 because I'm
+[00:07:19] up only well only I'm up 8 500. so
+[00:07:22] giving back 1500 for me that was on this
+[00:07:27] second attempt right here I got in for
+[00:07:29] this and it flushed down so I gave back
+[00:07:31] a little profit and I thought you know
+[00:07:33] what it's better to walk away with money
+[00:07:34] in my pocket than to keep trading
+[00:07:36] because if I keep trading and I keep
+[00:07:39] losing
+[00:07:41] I'm gonna get myself frustrated now of
+[00:07:43] course if I keep trading and I keep
+[00:07:44] making money I won't be frustrated but
+[00:07:46] you have to think about downside risk
+[00:07:48] first you love seeing this but it could
+[00:07:51] have done another one of these it could
+[00:07:52] have popped to 2460 and then flushed to
+[00:07:54] 23 because we've seen some dramatic
+[00:07:57] moves so in any case
+[00:07:59] um
+[00:07:59] so I'm sure some Traders caught that
+[00:08:01] move it's obviously got some momentum
+[00:08:04] here now it's a 58 26.44
+[00:08:07] but this is the area where if you missed
+[00:08:10] that big squeeze right there which on
+[00:08:13] the 10 second chart is a topping tail
+[00:08:14] then you say well geez do I do I get in
+[00:08:17] here for the break of 26 am I chasing it
+[00:08:19] is this just too risky and and that's
+[00:08:22] actually what happened to me right here
+[00:08:24] I missed that big handle but then I got
+[00:08:27] in on this little pullback
+[00:08:28] but it really was like I missed the bulk
+[00:08:31] of that move
+[00:08:32] yeah I got a little piece of it here you
+[00:08:35] know and that's what I guess put me up
+[00:08:36] to ten thousand from 8 000 to 10 or
+[00:08:39] whatever but I missed this big candle
+[00:08:41] and right here I missed this big candle
+[00:08:43] and then look at that drop
+[00:08:45] right so now you know 25.50 you got 28
+[00:08:48] Cent spread and it starts to shake out
+[00:08:51] some people that bought a little too
+[00:08:52] high the bottom of that candle there was
+[00:08:54] 26.15.
+[00:08:57] so one of the things that we deal with
+[00:08:59] with these stocks at this price range
+[00:09:02] can be bigger spreads and you know when
+[00:09:05] it's going strong I guess that can work
+[00:09:07] to your advantage because next thing you
+[00:09:08] know you get these candles like this one
+[00:09:10] right here where it jumps up a dollar a
+[00:09:12] share but you can also get it going the
+[00:09:14] other way where it flushes a dollar a
+[00:09:16] share this candle right here has a one
+[00:09:18] dollar range
+[00:09:19] and when you catch it the wrong way and
+[00:09:22] you're having to just bail out at the
+[00:09:25] bottom I mean you never want to do that
+[00:09:27] but you know sometimes it does you're
+[00:09:28] hitting your max loss that's when you
+[00:09:30] get really frustrated
+[00:09:31] so uh so anyways my my process on this
+[00:09:35] was
+[00:09:36] saw the stock hit the scanner was
+[00:09:38] familiar with the name jumped in it very
+[00:09:41] quickly rode the momentum and made some
+[00:09:44] good money in the beginning of the move
+[00:09:47] I miss it went higher than I thought
+[00:09:49] this peak right here
+[00:09:52] the way we had this topping tail at 2170
+[00:09:57] you know that kind of made me a little
+[00:09:58] bit unsure I was like I don't know 25 70
+[00:10:01] 2170 it kind of topped out there came
+[00:10:04] all the way back down to V web and you
+[00:10:05] know what I thought was forming here
+[00:10:07] a head and shoulders pattern and
+[00:10:09] actually recall another instance
+[00:10:12] um not that long ago where I saw
+[00:10:14] something like this what I thought was a
+[00:10:15] head and shoulders pattern and then it
+[00:10:17] broke to the upside
+[00:10:20] so you know that's not typically what
+[00:10:22] you expect and maybe that's why it broke
+[00:10:24] so strongly is it caught some short
+[00:10:26] sellers off guard and then all of a
+[00:10:28] sudden you got that one candle right
+[00:10:30] there where even on lighter volume it
+[00:10:33] just rips I mean that was impressive and
+[00:10:35] I was really kind of bummed out that I
+[00:10:37] missed it
+[00:10:38] because I was trading it and then I got
+[00:10:40] out you know you see this candle hits
+[00:10:42] 21-14 and then it dips down here for a
+[00:10:45] second to 2180 and I had just gotten in
+[00:10:48] a little too high at like 21 made
+[00:10:51] like 10 cents a share or five cents a
+[00:10:54] share it dips down and then boom really
+[00:10:58] opens up
+[00:10:59] so
+[00:11:01] yeah these these can be tricky it can be
+[00:11:03] really hard to know whether or not you
+[00:11:05] should keep pushing it or you should
+[00:11:07] just be grateful and and walk away
+[00:11:10] I think you have to have a rule of thumb
+[00:11:13] that you're going to follow consistently
+[00:11:14] because if you're inconsistent with how
+[00:11:16] you follow those rules you're going to
+[00:11:18] have inconsistent results so one of the
+[00:11:20] things that I always try to remind
+[00:11:22] people is that uh it always feels better
+[00:11:26] in my experience to walk away with
+[00:11:30] profit in my pocket and yeah I'll feel a
+[00:11:32] little bummed out when I leave money on
+[00:11:33] the table like I did today but I feel so
+[00:11:37] much worse
+[00:11:39] when I give back half my day
+[00:11:42] and I could do that easily on a stock
+[00:11:44] like this with 2 000 shares I catch a
+[00:11:46] one point flush all of a sudden I'm
+[00:11:48] going to go from up 8 500 to up 6 500
+[00:11:51] and that's only with 2 000 shares right
+[00:11:54] like one of those moves and I'm telling
+[00:11:56] you right now I am sure there's someone
+[00:11:58] out there that's going to say
+[00:12:01] holy cow I just gave back my whole
+[00:12:03] morning
+[00:12:05] you know that that happens
+[00:12:07] and you've seen it happen to other
+[00:12:10] people you've maybe had it happen to
+[00:12:12] yourself a couple times that's a two and
+[00:12:14] a half Point drop with four thousand
+[00:12:15] shares in 30 seconds right there these
+[00:12:17] are 10 second candles in 30 seconds I
+[00:12:19] could have just gone from up 8 500 to up
+[00:12:22] 2200.
+[00:12:24] giving back my entire day
+[00:12:27] so you got to be grateful for what
+[00:12:29] you've got when you consistently look
+[00:12:31] back and you realize you're leaving
+[00:12:32] money on the table on a regular basis
+[00:12:34] then that's definitely a time to
+[00:12:35] consider pushing a little harder but
+[00:12:37] this year for me has been tricky this
+[00:12:40] year I've had a lot of days where I
+[00:12:44] have overstayed my welcome and given
+[00:12:46] back profit I've had a lot of days where
+[00:12:49] I've just churned commissions pushing it
+[00:12:51] too hard when the market wasn't really
+[00:12:53] hot
+[00:12:54] and so now I'm in a position where I
+[00:12:58] don't feel like I can really take a lot
+[00:13:01] of risk right now I'm kind of like
+[00:13:02] listen I've lost a little bit of ground
+[00:13:04] I just need to keep my head down and you
+[00:13:08] know set my pace and just sort of
+[00:13:11] chip away
+[00:13:13] I can't afford to swing big I just don't
+[00:13:16] feel like I can and so the result is
+[00:13:18] that hopefully I will be a bit more
+[00:13:21] consistent
+[00:13:23] but I may be leaving some money on the
+[00:13:24] table now once I get myself in a place
+[00:13:26] where after a period of some success and
+[00:13:29] consistency with you know keeping my
+[00:13:32] head down pacing myself and hitting bass
+[00:13:33] heads
+[00:13:34] maybe I'll be able to feel like I have a
+[00:13:37] cushion to step up to the plate a little
+[00:13:39] more but you know what I did step up to
+[00:13:41] the plate today and I gave back 15 off
+[00:13:42] the top so that for me you know that
+[00:13:45] could be a reminder to hold patience a
+[00:13:49] little longer so you don't blow yourself
+[00:13:50] out too soon you know I knocked myself
+[00:13:53] out of the game today granted I'm at 8
+[00:13:56] 500 but still I knocked myself out of
+[00:13:57] the game because I gave back a little
+[00:13:59] bit just enough off the top that I was
+[00:14:01] feeling frustrated
+[00:14:02] and I think that's also around the
+[00:14:04] psychology of hitting 10 000
+[00:14:07] and then going back to you know not just
+[00:14:10] nine but into the eights and that that's
+[00:14:13] kind of like a
+[00:14:14] little bit of a psychological number
+[00:14:16] when you fight against that it'd be like
+[00:14:18] going from up 5 000 to Up 3 800 you know
+[00:14:21] it's like ah man I was I was at five and
+[00:14:24] now I'm not just at Forum so you know
+[00:14:27] that that carries a little bit into
+[00:14:28] watching your p l but you do have to be
+[00:14:31] mindful of your p l and aware of where
+[00:14:33] you sit on the day and anyways so that's
+[00:14:35] where I'm at it's a great it's a green
+[00:14:37] day uh it recovers the loss from Monday
+[00:14:39] which was on oncs which was
+[00:14:42] kind of just
+[00:14:43] aggressively trading a stock that didn't
+[00:14:45] fit within my wheelhouse
+[00:14:47] so I'm glad to fully recoup that loss
+[00:14:49] now so I'm back at the high of
+[00:14:53] April the high of all time in terms of
+[00:14:56] my trading profits and I'm going to live
+[00:14:59] to trade another day I just saw right
+[00:15:01] now a 70 Cent spread it was 27 on the
+[00:15:04] ask and 26.30 on the bid
+[00:15:06] that's a tough spread you know 70 cents
+[00:15:09] now it's 20. it's tightening but to the
+[00:15:11] downside pressure at 26.30
+[00:15:14] you could see how you know see there's
+[00:15:18] that seller up there at 27 that just
+[00:15:20] popped up
+[00:15:21] this is I mean it's a typical this is a
+[00:15:23] difficult place to be a buyer no doubt
+[00:15:25] it's it's got some some headwind but
+[00:15:27] anyways
+[00:15:28] um good job for those that traded this
+[00:15:30] today and uh did well if you did well
+[00:15:32] those that came out on the wrong side
+[00:15:34] study the chart look back at where you
+[00:15:36] got in ask yourself what you were doing
+[00:15:38] wrong were you chasing it were you
+[00:15:39] selling too soon you know were you
+[00:15:41] buying into too much weakness where'd
+[00:15:43] you go wrong and what can you do better
+[00:15:44] next time and today is just one day
+[00:15:47] and we'll have many more days like this
+[00:15:50] of course this year where we see
+[00:15:52] something that's strong and we're able
+[00:15:53] to jump in and get aggressive on it so
+[00:15:55] maybe on the next one
+[00:15:57] I'll be able to do even a little bit
+[00:15:59] better than I did today but I'm grateful
+[00:16:01] for my gains and I'll be back at
+[00:16:03] tomorrow and reminder as always that
+[00:16:04] trading is risky my results are typical
+[00:16:06] so make sure you manage your risk and
+[00:16:07] trade cautiously practice in a simulator
+[00:16:09] before you put real money on the line
+[00:16:11] because there's no guarantee that you'll
+[00:16:12] find success as a Trader whether you're
+[00:16:14] trading your own you learn from me and
+[00:16:16] if you want to check out my class from
+[00:16:17] today 12 p.m I'll be teaching a class on
+[00:16:19] the Holy Grail technical indicator that
+[00:16:21] sounds interesting so if you are
+[00:16:24] watching this hopefully you maybe
+[00:16:25] already watched that class but if not
+[00:16:27] I'll put a link so you can check it out
+[00:16:28] here

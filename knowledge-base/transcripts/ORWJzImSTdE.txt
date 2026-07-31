@@ -1,0 +1,1568 @@
+# Master the Dip Trading Strategy (Step-by-Step Guide)
+# https://www.youtube.com/watch?v=ORWJzImSTdE
+# duration_sec: 3905
+
+[00:00:00] in today's episode I'm going to teach a
+[00:00:02] variation of my momentum trading
+[00:00:04] strategy where I focus exclusively on
+[00:00:06] buying dips that is I wait for the price
+[00:00:09] to flush and when other Traders are
+[00:00:12] Panic selling I am buying that dip and
+[00:00:16] looking for a squeeze back through high
+[00:00:18] a day this is a strategy that for me can
+[00:00:21] be very profitable and has a fantastic
+[00:00:24] profit to loss ratio and the reason is
+[00:00:27] because when I'm getting in I try to buy
+[00:00:30] really close to support which means I've
+[00:00:32] got a very tight stop my Max loss is
+[00:00:34] like right there and then if we get that
+[00:00:35] curl back up the profit loss ratio can
+[00:00:38] be 3 to1 4:1 5 to1 it could be fantastic
+[00:00:41] and today we've got some case studies of
+[00:00:42] some amazing trades that I took on a
+[00:00:45] stock that went up over 400% on news
+[00:00:49] this is incredible but here's something
+[00:00:51] I'll tell you a lot of beginner Traders
+[00:00:53] struggle with buying the dip and in fact
+[00:00:56] they have an expression that's called
+[00:00:58] trying to catch a falling kn knife you
+[00:01:00] try to catch a falling knife and you're
+[00:01:02] going to get cut so a lot of beginner
+[00:01:04] Traders will lose money trying to buy
+[00:01:06] dips because they don't have a set of
+[00:01:07] rules that they follow so what I'm going
+[00:01:09] to do in today's episode is I'm going to
+[00:01:11] share with you the rules that I use that
+[00:01:13] help me understand when to buy the dip
+[00:01:16] and when to sit on the sidelines and
+[00:01:18] wait for a better opportunity now let's
+[00:01:20] go ahead and jump into the screen share
+[00:01:22] you're going to see a stock on here now
+[00:01:25] whether or not you're trading stocks
+[00:01:26] Forex Futures you're trading Commodities
+[00:01:28] it doesn't matter because the philosophy
+[00:01:31] here and the concept is the same we're
+[00:01:33] looking to capitalize on momentary
+[00:01:36] imbalances where we get that flush and
+[00:01:38] then the move back up what's important
+[00:01:40] however is that you're trading something
+[00:01:43] that is trending trading something going
+[00:01:45] sideways it just happens to flush is not
+[00:01:48] going to work I need to trade something
+[00:01:50] that is moving up and when it's moving
+[00:01:53] up strongly those momentary dips of
+[00:01:56] panic can be excellent buying
+[00:01:58] opportunities so here we have SG sngx
+[00:02:02] which is just uh the stock that we'll
+[00:02:04] use as our case study for today and in
+[00:02:06] fact I traded it quite well I peaked at
+[00:02:09] about
+[00:02:11] $17,900 on this stock today I've got my
+[00:02:14] live trading archives that um we're
+[00:02:16] going to go over th this is going to
+[00:02:18] break down for you each of the trades
+[00:02:20] that I was taking as I was making my
+[00:02:23] profit on the way up and a number of
+[00:02:25] these were really awesome dip trades so
+[00:02:28] it's going to be a um a really good case
+[00:02:30] study and we're also going to go ahead
+[00:02:31] and jump into uh the slide deck here
+[00:02:33] this is uh an excerpt I'll I'll share
+[00:02:36] with you a couple of slides here from my
+[00:02:37] warrior Pro curriculum um what you'll
+[00:02:40] know for students that have already gone
+[00:02:43] through this curriculum is that a lot of
+[00:02:46] my strategy is based around dip trading
+[00:02:51] dip trading you'll see we've got the dip
+[00:02:53] strategy right here buying into or out
+[00:02:55] of halts is also based on buying dips we
+[00:02:58] call it the dip and the rip the reason
+[00:03:00] is because if we think big picture about
+[00:03:03] what's happening let's jump onto the
+[00:03:05] Whiteboard we've got the price moving up
+[00:03:09] right but the price never goes straight
+[00:03:11] up or like this invariably the price
+[00:03:15] Moves In Waves we get these waves up and
+[00:03:19] so if you can buy the bottom of a wave
+[00:03:23] this right here is a great entry near
+[00:03:26] support for the next leg up the Next
+[00:03:30] Step Up Now one of the challenges that a
+[00:03:32] lot of beginner Traders will face is
+[00:03:34] understanding whether or not we're still
+[00:03:37] sort of stair stepping up so to speak or
+[00:03:41] if we're now on the back side of the
+[00:03:43] move and we're coming back down I'm
+[00:03:45] going to help you differentiate the two
+[00:03:47] in today's episode so let's go ahead and
+[00:03:50] get started I'm going to jump on to the
+[00:03:52] slide deck here and I'm going to begin
+[00:03:54] with um this excerpt from chapter 8 of
+[00:03:58] momentum trading strategy course
+[00:04:00] uh and this is specifically on chapter 8
+[00:04:03] setup 8 the dip buy all right so we'll
+[00:04:06] go full screen on this here and I'll do
+[00:04:08] presenter viw all right so this is a big
+[00:04:10] slide deck by the way this has this is
+[00:04:12] on slide 905 of nearly 2,000 slides
+[00:04:16] right now so dip buys is when I'm buying
+[00:04:20] on a flush which some people call a wash
+[00:04:23] out or a panic cell this is specifically
+[00:04:27] when we have the price generally
+[00:04:29] trending up but then we get that
+[00:04:32] momentary I sometimes call it a jack
+[00:04:34] knife we get that kind of drop like that
+[00:04:37] now many of you have been in a trade
+[00:04:39] right here long and then suddenly you're
+[00:04:42] in this and you're selling down here in
+[00:04:44] fact you're doing the exact opposite of
+[00:04:46] what I'm going to show you in this
+[00:04:46] episode this is where I want to be
+[00:04:48] buying right here and then I'll add to
+[00:04:51] it as it comes back up here because what
+[00:04:52] often happens with these drops is we get
+[00:04:54] that Panic flush and then we come all
+[00:04:57] the way back up and that's the beginning
+[00:05:00] of the next wave so for me my first
+[00:05:04] entry into doing real dip trades was in
+[00:05:08] March of 2020 when the stock market
+[00:05:10] dropped
+[00:05:12] 35% it was during the covid pandemic and
+[00:05:15] what happened was I started buying
+[00:05:17] stocks that were about to be halted
+[00:05:20] going down or I would buy just after
+[00:05:23] several halts down if they showed
+[00:05:26] strength and I was noticing some
+[00:05:28] incredible
+[00:05:30] huge whips that created almost instant
+[00:05:33] winners so for those of you who are
+[00:05:35] familiar with circuit breaker halts the
+[00:05:38] way these work is when a stock is
+[00:05:41] trading in its normal range here there
+[00:05:43] are circuit breakers that are 10% above
+[00:05:48] and 10% below the current price and if
+[00:05:52] the stock drops 10% in less than 5
+[00:05:57] minutes what will typically happen is
+[00:05:59] it'll get halted on circuit breaker now
+[00:06:01] I could get into more detail about
+[00:06:03] exactly how these price bands are
+[00:06:05] calculated but for the sake of argument
+[00:06:06] right now we'll just say that they're
+[00:06:07] 10% away from the current price so if a
+[00:06:10] stock suddenly drops down and halts
+[00:06:13] it'll be halted for a period of five
+[00:06:14] minutes so we have a resting period and
+[00:06:17] then trading will resume and if it hals
+[00:06:19] down a second time it goes down another
+[00:06:21] 10% boy there's a lot of notes on that
+[00:06:23] side goes down another 10% then what we
+[00:06:25] end up having sometimes are multiple
+[00:06:28] halts down but what I Learned was that
+[00:06:30] typically after the second halt down you
+[00:06:33] want to start looking for a bounce back
+[00:06:34] up because now this is exaggerated it's
+[00:06:37] almost like thinking of a rubber band
+[00:06:39] that's getting stretched out and when it
+[00:06:41] gets really stretched out we snap back
+[00:06:44] and so that snap comes in the form of
+[00:06:46] buying we'll see it on the level two on
+[00:06:48] the time and sales and we get that
+[00:06:50] squeeze back up typically into a halt up
+[00:06:53] so now we're halted up for 5 minutes and
+[00:06:55] typically when you halt up you open
+[00:06:57] higher and then move even higher when
+[00:06:59] you halt down you open lower and move
+[00:07:01] even lower so after two or three halts
+[00:07:03] up we look for another halt down and in
+[00:07:05] fact we've had stocks that have been so
+[00:07:07] volatile we're just trading halts we had
+[00:07:09] a stock a couple weeks ago that traded
+[00:07:11] 40 that halted 41 times in one day it
+[00:07:14] kept getting halted because it was so
+[00:07:16] volatile which is kind of nuts but in
+[00:07:19] any case that that was the origin of
+[00:07:21] this strategy recognizing that sometimes
+[00:07:24] after several hals down we were getting
+[00:07:25] these really big bounces and so I
+[00:07:29] realized that um this is kind of similar
+[00:07:32] to what we see on some of these charts
+[00:07:34] so I'm going to show you an example um
+[00:07:37] let's see just today I'll pull up uh
+[00:07:40] this chart here and I bet we're going to
+[00:07:42] be able to go back in here and we'll
+[00:07:44] we'll find a we'll find a nice little
+[00:07:45] dip somewhere in here so this one for
+[00:07:48] instance you know that's kind of a big
+[00:07:50] flush this one right here that's another
+[00:07:52] big flush now these this one flushes
+[00:07:55] down and it pretty much immediately
+[00:07:56] bounces back up this flushes down
+[00:07:59] immediately bounces back up flushes down
+[00:08:01] and immediately bounces back up so while
+[00:08:04] there are people that are Panic selling
+[00:08:06] I would say that this is becoming a
+[00:08:08] level of support right so I would say
+[00:08:11] there's support right here in other
+[00:08:13] words people are buying right into this
+[00:08:15] area and there's demand because every
+[00:08:18] time it comes down to there it pops back
+[00:08:19] up in fact look at this here we halted
+[00:08:22] up we dip down and then we rip back up
+[00:08:27] the low is the bottom of this candle we
+[00:08:28] go from 6 80 all the way up to 840 so
+[00:08:31] these are all examples of dips you see
+[00:08:34] these low bottoming Tails so these are
+[00:08:36] opportunities to be buying and catching
+[00:08:38] a spring back up but clearly some of
+[00:08:41] these are working better than others
+[00:08:43] right some are just continuing low
+[00:08:45] continuing lower others are pushing a
+[00:08:47] lot higher that's a nice dip right there
+[00:08:50] that one makes way for a move back to
+[00:08:51] the new high right so that's the type of
+[00:08:53] dip that we really like this on the
+[00:08:55] other hand dips it does bounce back up
+[00:08:58] but then it kind of goes sideways it
+[00:08:59] doesn't get back to the highs so how do
+[00:09:01] we sort of differentiate the two types
+[00:09:03] of setups all right well let's jump back
+[00:09:05] into the slide deck this is where we're
+[00:09:06] going to learn so a panic selloff dip by
+[00:09:10] setup can occur while a stock is
+[00:09:13] extremely strong in total it's very
+[00:09:15] strong but it has a momentary bit of
+[00:09:19] panic where suddenly people bail out and
+[00:09:22] this is going to happen especially on a
+[00:09:24] stock that's up oh I don't know 400% on
+[00:09:28] the day right when you have a stock
+[00:09:30] that's up this much on the day you're
+[00:09:32] going to have some candles like that
+[00:09:34] those are created through a combination
+[00:09:36] of people bailing out who have perhaps
+[00:09:39] been holding for hours and are just
+[00:09:41] taking profit and and it could also be
+[00:09:44] short sellers hitting the bid doing
+[00:09:46] what's called a bare raid so a be raid
+[00:09:50] is a tactic that short sellers will use
+[00:09:53] where they sell aggressively hitting the
+[00:09:57] market they try to get the stock to
+[00:09:59] flush and they try to get people to stop
+[00:10:01] out when people stop out more sell sell
+[00:10:05] orders are sent to the market which
+[00:10:07] creates that sort of cascade effect
+[00:10:09] where you get that Panic sell off now in
+[00:10:12] fact that can go all the way to a halt
+[00:10:14] down and prior to circuit breaker halts
+[00:10:16] we would actually have what we called
+[00:10:18] flash crashes where the waterfall would
+[00:10:21] it would just start executing cell after
+[00:10:23] sell order after sell order and you we
+[00:10:26] would have a 70% drop and then it would
+[00:10:28] bounce right back up up which obviously
+[00:10:30] is unstable price action and that's why
+[00:10:34] Regulators came in and said we've got to
+[00:10:36] slow this down and create these halt
+[00:10:38] levels because the highfrequency trading
+[00:10:40] algorithms are actually making these um
+[00:10:43] these flushes worse so understanding how
+[00:10:46] these algorithms work uh will help you
+[00:10:48] in your trading and I'll I'll talk about
+[00:10:50] them a little bit I think as we go
+[00:10:51] through this class but but what we're
+[00:10:53] looking for is that momentary dip that
+[00:10:56] momentary little Panic so it can occur
+[00:10:58] because an individual sends a market
+[00:11:01] order or a marketable order for a huge
+[00:11:04] position it can happen uh because of the
+[00:11:07] high frequency trading algorithms it can
+[00:11:09] happen from a bar raid so there's
+[00:11:10] different causes and we won't always or
+[00:11:13] probably ever know exactly the cause of
+[00:11:15] a particular flush but nonetheless when
+[00:11:19] it's happening that's when I begin to
+[00:11:21] look for a dip now I think it's worth
+[00:11:23] separating the different types of dips
+[00:11:25] so we have um what I would call a
+[00:11:28] perhaps
+[00:11:29] small
+[00:11:31] dip and then we have a huge dip all
+[00:11:36] right
+[00:11:37] so these are both valid we're going to
+[00:11:40] start here because this is an easier
+[00:11:42] place for a beginner to get started so
+[00:11:45] for a small dip we're going to picture
+[00:11:48] that the price is moving up uh pretty
+[00:11:50] nicely right here it pulls back uh for a
+[00:11:54] moment kind of like this and it dips
+[00:11:57] down here like this this and rather than
+[00:12:01] waiting for the first candle to make a
+[00:12:03] new high which is what we're this is the
+[00:12:05] pattern we're expecting right here and
+[00:12:08] you're going to buy right down here
+[00:12:10] that's what I'm doing in this small dip
+[00:12:13] strategy setup so rather than waiting
+[00:12:16] for the confirmation and taking my first
+[00:12:18] entry here I'm taking a starter down
+[00:12:20] here or perhaps in here and then I'm
+[00:12:23] adding to the position here so rather
+[00:12:25] than having a cost basis up here my cost
+[00:12:28] BAS is going to be down a little bit
+[00:12:31] lower now you might not think well
+[00:12:32] what's the difference between here and
+[00:12:34] here you know either way but if we're
+[00:12:36] going to be fair our stop is always
+[00:12:38] going to be at the low of the pullback
+[00:12:40] so the tighter we can get our stop the
+[00:12:43] better the risk to reward ratio so if
+[00:12:46] this is a 3 Cent stop and the profit
+[00:12:49] Target is a retest a high a day and
+[00:12:51] that's 30 cents away we've got a 10 to1
+[00:12:53] profit to loss ratio in fact you only
+[00:12:55] need to be right on that trade 20% of
+[00:12:58] the time in order to be a profitable
+[00:12:59] Trader very profitable and if you're
+[00:13:02] right on this setup 50% 60% 70% time now
+[00:13:06] you're going to do really really well
+[00:13:08] because you've got your risk so well in
+[00:13:11] check now the second is the huge dip so
+[00:13:17] this is where you know we'll see
+[00:13:19] something kind of moving up like this it
+[00:13:22] pulls back you know easy gol lucky
+[00:13:24] whatever it pops up here oops where's
+[00:13:28] this runaway pen it goes up here like
+[00:13:31] this just let's say for instance and
+[00:13:33] then it does one of
+[00:13:37] these huge drop right so suddenly you
+[00:13:40] get this massive drop and it could be a
+[00:13:43] red candle um you know it's obviously be
+[00:13:46] a red doesn't have to have a huge
+[00:13:47] bottoming tail it could be just a huge
+[00:13:49] red candle just like this and the whole
+[00:13:51] thing is solid red so this is what a
+[00:13:55] huge dip is characterized by a red
+[00:13:58] candle that is far bigger than any of
+[00:14:02] the other candles that you've seen so
+[00:14:03] far it's going to be one of the top 10
+[00:14:06] biggest candles of the day so when
+[00:14:08] you're looking at the chart it it's kind
+[00:14:10] of easy to differentiate what would be
+[00:14:13] at least in my opinion a small Dip
+[00:14:16] versus a huge dip so that right there
+[00:14:20] that looks like a pretty huge dip that
+[00:14:22] looks like a pretty huge dip these look
+[00:14:24] like pretty big dips right here okay
+[00:14:27] this area in here it's a little bit of a
+[00:14:30] smaller dip this area in here a little
+[00:14:31] bit of a smaller dip you know I mean at
+[00:14:33] the time they might have been felt
+[00:14:35] pretty big but but for the most part you
+[00:14:37] could visually see which are bigger and
+[00:14:39] which are smaller now I'm actually going
+[00:14:42] to show you um all of my trades from
+[00:14:44] today so I'm finishing the day here uh
+[00:14:47] $1,796 34 it's a good day but I was up
+[00:14:51] close to1 18,000 and I gave back a
+[00:14:52] little profit off the top and you know
+[00:14:54] what's interesting is I actually gave
+[00:14:56] back profit not on dip trade but on just
+[00:15:00] standard run-of-the-mill breakout trades
+[00:15:03] that just happened to not work now I my
+[00:15:07] goal is always to be very transparent
+[00:15:08] with you to show you what does work to
+[00:15:10] show you what doesn't work in Total
+[00:15:12] there's no question that trading
+[00:15:14] momentum and breakouts works but there
+[00:15:16] will just be days where for whatever
+[00:15:19] reason dip trades work a lot better than
+[00:15:22] breakout trades or vice versa so you
+[00:15:25] have to be able to kind of adapt to the
+[00:15:26] market that you're in okay so now let's
+[00:15:29] jump back onto the slides here and talk
+[00:15:30] a little bit more about the entry so I I
+[00:15:34] mentioned here that wild dip trades have
+[00:15:37] been a great addition to my strategy I
+[00:15:39] remind everyone that when timed wrong
+[00:15:41] they can also produce really big losses
+[00:15:42] as you're buying right into a selloff so
+[00:15:45] the ultimate question is how to
+[00:15:46] determine when to buy and when to wait I
+[00:15:50] think that getting really good at dip
+[00:15:52] trading requires a degree of educated
+[00:15:56] intuition and an ability to read to tape
+[00:15:59] the time in sales and to see the level
+[00:16:01] two and to really be connected with it
+[00:16:04] so I don't think dip trading is probably
+[00:16:08] a good beginner strategy for like your
+[00:16:11] very first strategy I would say standard
+[00:16:14] momentum trading of actually waiting for
+[00:16:16] the confirmation of that first candle
+[00:16:18] making a new high makes a lot more sense
+[00:16:21] it's easier to visualize is easier to
+[00:16:24] understand but once you've mastered this
+[00:16:26] standard uh setup which I would call
+[00:16:28] call my micro pullback strategy then
+[00:16:32] it's time to take it up another notch
+[00:16:34] now if you want to download a PDF that
+[00:16:37] has the rules of my micro pullback
+[00:16:39] strategy and also has my small account
+[00:16:42] strategy built into it it's a big
+[00:16:44] collection of my PDFs I'll put a link
+[00:16:45] down in the description so you can
+[00:16:47] download that for those of you guys that
+[00:16:49] really want to get good at dip trading I
+[00:16:51] would encourage you to do a twoe trial
+[00:16:53] at Warrior trading and I'll put a link
+[00:16:55] in the description for that as well the
+[00:16:58] reason is
+[00:16:59] during your twoe trial you'll be able to
+[00:17:01] listen to my audio video broadcast and
+[00:17:04] you'll have the benefit of of being able
+[00:17:07] to sort of piggyback off my commentary
+[00:17:09] off of my educated intuition as always
+[00:17:11] my results aren't typical but the the
+[00:17:14] the really important thing is that
+[00:17:15] you're learning from someone who's
+[00:17:17] proven profitable and dip trading is a
+[00:17:20] lot easier to show you and and for you
+[00:17:23] to learn in that classroom setting where
+[00:17:26] we're watching the market in real time
+[00:17:27] now fortunately today we do have um my
+[00:17:30] live trades from this morning so we're
+[00:17:32] going to refer to those um and of course
+[00:17:34] those you guys that are uh doing a two
+[00:17:36] week trial already would have been able
+[00:17:38] to watch these live okay so we're going
+[00:17:40] to look at um just to get oriented here
+[00:17:44] um we're looking at s ngx and sngx I'll
+[00:17:49] just pull this up on my chart uh real
+[00:17:51] quick here so this is a stock by the way
+[00:17:53] uh today that did have breaking news so
+[00:17:56] if we pull up um the news window here we
+[00:17:58] could scroll down we would see that uh
+[00:18:00] this does have breaking news it came out
+[00:18:02] at 7:30 a.m. and basically immediately
+[00:18:05] the stock started squeezing up so
+[00:18:07] they've got a headline here um this is a
+[00:18:10] a US company late Stage
+[00:18:12] biopharmaceutical Company so it's not
+[00:18:15] Chinese stock which is you know an area
+[00:18:17] where we are a little bit cautious um
+[00:18:20] you know this is a oh and there you go
+[00:18:22] it's actually uh making even a new high
+[00:18:24] here as we speak that's that's great to
+[00:18:26] see I love seeing that so now it's up
+[00:18:28] let's see a high of 535 per. that's
+[00:18:31] fantastic breaking through the 200
+[00:18:33] moving average on the daily chart okay
+[00:18:36] so so SX um the thing here is that when
+[00:18:40] it first started squeezing what I knew
+[00:18:43] about it was that the float was less
+[00:18:45] than a million shares and it was moving
+[00:18:47] fast so I was like okay this is
+[00:18:49] definitely the type of stock that I want
+[00:18:51] to pay close attention to all right so
+[00:18:53] if we jump into the live trading archive
+[00:18:55] here let's see we're going to start with
+[00:18:58] one of the small dip trades so we're
+[00:19:00] going to start with something a little
+[00:19:01] bit more moderate and then I'll we'll
+[00:19:03] get into the stuff that's more
+[00:19:04] complicated so the level two for sngx is
+[00:19:08] um is right here this is our level two
+[00:19:10] window and this is actually the time and
+[00:19:12] sales uh for it so the time and sales
+[00:19:15] starts at the top and goes down you I
+[00:19:17] will end up moving sngx to this position
+[00:19:20] usually this is where I have the two
+[00:19:21] stocks that I'm watching the most
+[00:19:23] closely but um just in this case um
+[00:19:26] today I I left it in um in this bottom
+[00:19:29] window for the beginning of the day so
+[00:19:32] so sngx here has um squeezed up right in
+[00:19:36] this area and as it's pushed higher
+[00:19:40] let's see right here we dipped down so
+[00:19:42] you see how we had this high of about
+[00:19:45] 422 and we pulled back we climbed back
+[00:19:49] up we dropped down we popped up and then
+[00:19:51] right here we just dipped down now
+[00:19:54] something that is important to note is
+[00:19:56] that the position of the price right now
+[00:19:59] is very close to what it's very close to
+[00:20:02] a half dollar and a whole dollar so one
+[00:20:05] of the places that I always like taking
+[00:20:07] an entry is when we're near the half
+[00:20:10] dollar or the whole dollar so the best
+[00:20:13] tips are when I'm already watching the
+[00:20:15] stock and what seems like in a flash it
+[00:20:17] drops 50 cents or dollar a share to a
+[00:20:21] half dollar or a whole dollar because
+[00:20:23] what we know is that a lot of these
+[00:20:24] stocks will trade with a great deal of
+[00:20:27] respect for half do and whole dollars
+[00:20:29] that's where the orders tend to get
+[00:20:31] stacked up buyers are buying at the
+[00:20:33] whole dollar and half dollar sellers are
+[00:20:35] selling there and so the way I'm looking
+[00:20:38] at this is I want to take an entry I
+[00:20:41] watch it right here I'm watching the
+[00:20:43] level
+[00:20:44] two 3.99 do you see how it just showed
+[00:20:48] 3.99 on the bid showed 3.99 on the bid
+[00:20:50] and 402 on the
+[00:20:52] offer
+[00:20:55] 3.99 and I'm buying right here off off
+[00:20:58] of support so with an entry right there
+[00:21:02] I'm in at 403 and my stop on this
+[00:21:06] basically is 3.99 now whether or not I
+[00:21:09] would get out at 3.99 without a little
+[00:21:11] bit of slippage it's hard to say I might
+[00:21:13] get a little bit of slippage but I'm in
+[00:21:15] at 403 average and my stop is basically
+[00:21:18] if this breaks under four and isn't able
+[00:21:21] to get right back above four so I have a
+[00:21:23] four five cent stop on this with 6,000
+[00:21:25] shares I'm risking $300 to $400 now
+[00:21:28] again it's possible that when I press
+[00:21:30] the sell button I I could get some
+[00:21:31] slippage on my exit which is the
+[00:21:33] difference between where I want to get
+[00:21:35] filled and where I actually get filled
+[00:21:36] and that could make the loss a little
+[00:21:38] bit bigger but I'm still in very close
+[00:21:40] to support and I'm in right above the
+[00:21:43] whole dollar of four what's my price
+[00:21:46] Target what's my goal 420 okay so that's
+[00:21:49] 20 cents a share well 17 cents a share
+[00:21:52] that's still a pretty good risk to
+[00:21:54] reward
+[00:21:55] ratio now in this case this stock was
+[00:21:57] very interesting because as it would
+[00:21:59] come up to the highs look at this Flash
+[00:22:02] and still doing it even to even right
+[00:22:04] now as we just saw on the side chart how
+[00:22:07] it popped up to $14 a share and it did
+[00:22:10] it basically in one candle that just
+[00:22:12] kind of spikes up so this has been
+[00:22:14] putting in these spikes like this kind
+[00:22:16] of all day which has been really
+[00:22:19] impressive and I mean honestly I love
+[00:22:21] seeing that so it spikes and instantly
+[00:22:25] look at this I'm up
+[00:22:27] 1,950 $ on this trade I'm still holding
+[00:22:31] the full position we've got 37 on the
+[00:22:33] offer so that increases my profit on the
+[00:22:36] day from 4500 and I'll end up taking
+[00:22:39] some profit up in this area and and I
+[00:22:42] end up getting myself up to 6,500 so
+[00:22:44] what you're going to notice is that a
+[00:22:45] lot of these dip trades are going to
+[00:22:47] correspond to half dollars and whole
+[00:22:50] dollars so $4 $455 Etc so when I'm
+[00:22:55] watching this pattern forming this is
+[00:22:57] our standard micro pullback pattern also
+[00:23:00] known as a bull flag we got several
+[00:23:02] green candles up a couple candles of
+[00:23:03] pullback but instead of waiting for that
+[00:23:06] first C to make a new high if I notice
+[00:23:08] it's pulling back and it's right around
+[00:23:10] a psychological area I can take a dip as
+[00:23:14] a starter right there so I call that a
+[00:23:16] dip trade because I'm buying off of this
+[00:23:18] support level with the expectation that
+[00:23:20] it's immediately going to reclaim that
+[00:23:22] level now of course if it doesn't I'll
+[00:23:24] get out very quickly but if it does then
+[00:23:26] I'm in the driver's seat and I can add
+[00:23:28] to the position then we still get that
+[00:23:30] standard breakout and I can add to it as
+[00:23:33] if I'm only doing the breakout trade so
+[00:23:35] I still take that trade so in other
+[00:23:37] words I'm taking multiple setups at the
+[00:23:39] same time I'm buying the dip I'm adding
+[00:23:42] on the breakout adding perhaps into the
+[00:23:44] next half dollar and if this starts to
+[00:23:46] go parabolic up to five then I've got a
+[00:23:48] great entry down here from a 403 starter
+[00:23:50] or in this case if it stalls out at you
+[00:23:53] know whatever 37 or 38 that's fine too
+[00:23:55] it's still a green trade now let's um
+[00:23:58] look at an example of a huge dip okay so
+[00:24:02] these are definitely going to be a
+[00:24:03] little bit more complex uh for beginner
+[00:24:06] traders to get their head around so
+[00:24:07] we're going to watch here this is coming
+[00:24:09] into the open so coming into the open
+[00:24:14] I'm watching sngx and I'm really curious
+[00:24:17] to see how it trades now as you can see
+[00:24:19] it's started to pull back a little bit
+[00:24:22] as we've gotten closer to the opening
+[00:24:24] bell so right now let's see we'll just
+[00:24:27] zoom this forward we're just a let's see
+[00:24:30] 30 seconds maybe that'll probably be
+[00:24:32] enough so we're going to get oops Let's
+[00:24:34] see we got to back up
+[00:24:37] here so we're going to get right to the
+[00:24:39] open there it is so that's the open so
+[00:24:41] we're going to back up okay so so this
+[00:24:44] is the we're so the Market's about to
+[00:24:46] open right here so we're now officially
+[00:24:48] open and I'm looking for a possible
+[00:24:52] dip so watching the tape and we're now
+[00:24:56] on um on this level two right up here
+[00:24:58] so watching the tape what this is the
+[00:25:01] tape obviously seeing a lot of red going
+[00:25:03] through and I'm waiting for that dip so
+[00:25:06] what we're going to see here is 44 on
+[00:25:09] the ask 36 on the ask so see how a
+[00:25:12] seller has come down here and look at
+[00:25:14] how stacked it is we've got a big seller
+[00:25:16] here at 36 but I look at that and I'm
+[00:25:19] thinking this thing just dumped
+[00:25:20] basically 30 cents like that now I'm
+[00:25:24] seeing a little green on the tape if
+[00:25:26] this seller gets bought up where do you
+[00:25:28] think we're going to go we're probably
+[00:25:29] going to Spring right back to where we
+[00:25:31] were which is 660 so when I see that
+[00:25:34] green coming in right down
+[00:25:38] here boom starter look at that look at
+[00:25:41] that that's like picture perfect the
+[00:25:44] second I'm getting in there I'm getting
+[00:25:46] in and now we're right back to 65 that
+[00:25:49] is such a fast dip trade now on this one
+[00:25:54] it sold off a little bit more the entry
+[00:25:58] was above $6 of course but we were kind
+[00:26:00] of in between cuz I was in right at 635
+[00:26:03] which is kind of right in between and I
+[00:26:05] started to buy and you know what I think
+[00:26:07] probably happened on this so you've got
+[00:26:10] a sell order right here sell order right
+[00:26:13] here my order is at 37 is at 670 it's a
+[00:26:17] limit order so it's got a high offset
+[00:26:20] just because that's where I I left it
+[00:26:22] now I pressed the buy button and I got
+[00:26:24] filled some of these shares were mine
+[00:26:27] but I also for
+[00:26:29] sure for sure got massive slippage CU
+[00:26:34] let's look at this for a second one of
+[00:26:36] my orders is filling 2,000 shares at
+[00:26:39] 620 and the other is filling at
+[00:26:44] 650 I mean I see a few orders went
+[00:26:46] through at 650 but I don't even like my
+[00:26:48] order maybe hasn't gone through the tape
+[00:26:50] yet but that's kind of like 30 cents a
+[00:26:53] slippage that's $600 a slippage I should
+[00:26:56] have had the full 4,000 shares down
+[00:26:59] there at 20 cuz I pressed the buy button
+[00:27:01] when it was at 20 but somehow and this
+[00:27:03] is what the thing this is the thing the
+[00:27:04] way the algorithms work is when they see
+[00:27:06] those orders come in sometimes they'll
+[00:27:08] just move the price right out of the way
+[00:27:09] so you get a bad fill so anyways I got a
+[00:27:12] little bit of a bad fill on the second
+[00:27:13] part of that order it's now at 46 54 on
+[00:27:16] the offer 5565 and there I take half off
+[00:27:19] the table at 61 all right so taking a
+[00:27:22] little profit there and this now puts me
+[00:27:25] up over 177,000 on the day taking a
+[00:27:27] little more profit at 55 and still
+[00:27:30] holding a th000 shares left of that
+[00:27:32] position now we're about to see another
+[00:27:34] fairly dramatic drop here in just a
+[00:27:35] second so so let's watch this so we we
+[00:27:39] sort of creep back up to 660
+[00:27:43] 675 and then all of a sudden the
+[00:27:45] Bottom's going to fall out and you don't
+[00:27:47] really see it coming I'm sure there are
+[00:27:49] people that are buying in this area
+[00:27:51] looking for that trade to the next level
+[00:27:52] but look at this drop see how fast that
+[00:27:55] just dropped what do I do I buy
+[00:27:58] now unfortunately I wasn't very quick to
+[00:28:01] press my buy button and I pressed the
+[00:28:03] button that I have for a small order for
+[00:28:05] 250 shares that's great when I'm trading
+[00:28:07] a stock like GameStop but on this one I
+[00:28:10] should have bought 2500 in any case it's
+[00:28:13] fine so I'm in at 609 and I'm already up
+[00:28:16] 10 cents off the bid off off my entry so
+[00:28:19] let's back that up and I'll just show
+[00:28:20] you that drop again so you can see the
+[00:28:23] candle formation so basically all of a
+[00:28:25] sudden you get this capitulation you get
+[00:28:27] this bailout where people start selling
+[00:28:29] what does the algorithm do it moves out
+[00:28:31] of the way and all these people get a
+[00:28:33] ton of slippage and now they're filling
+[00:28:34] at 625 610 they're bailing out they're
+[00:28:37] getting terrible fills on Market orders
+[00:28:40] and now I see a moment of pause and a
+[00:28:43] little bit of green going through the
+[00:28:44] level two the tape so when I see that I
+[00:28:47] think this is a good spot to buy with a
+[00:28:49] stop at six so now I'm getting in with a
+[00:28:51] stop at $6 and that makes sense so again
+[00:28:55] that's that entry where I'm getting in
+[00:28:57] right with my stop at the basically cuz
+[00:28:59] we we in this case we flushed you know
+[00:29:02] it's the numbers are different but
+[00:29:03] basically all the way down here so
+[00:29:05] buying off of that that whole dollar
+[00:29:08] actually we went from 80 all the way
+[00:29:10] down to like here so buying that dip
+[00:29:13] here and then looking for that spring
+[00:29:15] back up now two things can happen well I
+[00:29:17] guess three things could happen in this
+[00:29:19] scenario uh when you take a dip trade
+[00:29:21] like this scenario number one is it
+[00:29:26] bounces not at all you get in at 609 and
+[00:29:29] it's sideways so if that happens if you
+[00:29:33] get in you get this drop and it's going
+[00:29:37] sideways right here that is a bare flag
+[00:29:40] for the next leg down so you don't want
+[00:29:43] to be holding right there if it's just
+[00:29:44] going sideways that's not good so if
+[00:29:46] it's just going sideways that's bad uh
+[00:29:48] scenario number two you could get in and
+[00:29:52] you basically got in in the middle of
+[00:29:53] the move and it keeps dropping however
+[00:29:55] if you waited to see green on the tape
+[00:29:58] like I did at 609 that shouldn't be a
+[00:30:00] problem so we're going to start writing
+[00:30:02] down The rules for this strategy where's
+[00:30:05] my Eraser okay
+[00:30:09] so rule number
+[00:30:12] one the rules for dip trading
+[00:30:17] okay so number one we need um volatility
+[00:30:23] and and basically in other words volume
+[00:30:26] sorry volume
+[00:30:28] and
+[00:30:30] volatility which means the price should
+[00:30:32] be up probably 30% or more on high
+[00:30:36] relative volume HRV High relative volume
+[00:30:40] number two so this is based on stock
+[00:30:43] selection right the type of stock we're
+[00:30:45] trading now again I'm trading stock but
+[00:30:48] you could apply this if you're trading
+[00:30:49] cryptocurrency you're trading Forex um
+[00:30:51] pairs you're trading Futures that's fine
+[00:30:54] or you're trading large caps if you see
+[00:30:55] a flash drop
+[00:30:58] that's often a buying opportunity as
+[00:31:00] long as um we check one thing which is
+[00:31:02] going to be in these rules so number two
+[00:31:05] we want to make sure we want to try um
+[00:31:08] look for
+[00:31:11] entries near half n whole dollars all
+[00:31:17] right so this is always my preference
+[00:31:20] because a we're buying
+[00:31:25] support buying support um which can be
+[00:31:30] ascending or descending resistance
+[00:31:32] levels or um ascending or descending or
+[00:31:36] it can be
+[00:31:38] horizontal horizontal all right and then
+[00:31:41] uh see the the half and whole doll so we
+[00:31:46] want to buy at those levels number three
+[00:31:48] we want to make sure when we're looking
+[00:31:50] for a dip trade that we're not going to
+[00:31:52] be um in a halt down so halt risk we'll
+[00:31:56] talk about that in just a second okay so
+[00:32:00] if we go back here and we look at
+[00:32:04] sngx let's back this up for one second
+[00:32:08] so the Hal levels on this are actually
+[00:32:12] 20% above the current price these are
+[00:32:14] wide halt bands because this stock on
+[00:32:17] the previous day was trading
+[00:32:19] between uh 75 cents a share and
+[00:32:23] $3 um so Hal bands Warrior
+[00:32:28] so I'm going to grab this blog here that
+[00:32:30] you'd be able to
+[00:32:32] see so the halt down on this is at
+[00:32:36] 521 so 521 is lld Limit Up limit down
+[00:32:41] halt up is at 782 so I'm not worried
+[00:32:44] about getting caught in a halt on this
+[00:32:46] um this is a um this is an article here
+[00:32:49] Warrior train.com Circ circuitbreaker
+[00:32:51] halt you could also search it if you're
+[00:32:53] on our website um but this goes over the
+[00:32:55] halt bands and how they work I've got
+[00:32:57] some videos on it on YouTube as well if
+[00:32:59] you want to watch those so this it the
+[00:33:03] reason I don't want to be caught in a
+[00:33:05] halt is because it's going to stop
+[00:33:06] trading for a period of at least 5
+[00:33:09] minutes and during that period news
+[00:33:12] could come out or I could find out that
+[00:33:15] the reason it dropped was because we
+[00:33:17] have breaking news that's bad and then
+[00:33:20] the price is going to resume lower and I
+[00:33:22] will have effectively caught a falling
+[00:33:24] knife so I have to be careful about the
+[00:33:26] halt levels the fact that this had the
+[00:33:28] halt level further away when it dropped
+[00:33:30] here I wasn't worried about getting
+[00:33:31] caught and a halt down I was getting in
+[00:33:34] at 609 right above $6 and I knew I could
+[00:33:37] turn around and stop out at six if I saw
+[00:33:40] that for example the halt level was 603
+[00:33:43] I probably wouldn't have taken this
+[00:33:44] trade because I would know that a little
+[00:33:47] bit more Panic selling read on the tape
+[00:33:49] and it's going to be halted down and I'm
+[00:33:51] probably going to be stuck and then I'm
+[00:33:53] looking at a you know halt down open
+[00:33:56] lower and you know if there's bad news
+[00:33:59] it could go down even more and that
+[00:34:01] would be a problem so I I want to really
+[00:34:03] be careful and mindful of that now let's
+[00:34:06] see I think I've got another um another
+[00:34:09] drop that we're going to jump forward to
+[00:34:12] here so let's move forward a couple
+[00:34:14] minutes we've got another big drop that
+[00:34:15] we can look at here this one's around 44
+[00:34:18] this one's even bigger so I know I laugh
+[00:34:21] just because they're so ridiculous um
+[00:34:23] they're abusing retail Traders like us
+[00:34:26] so
+[00:34:27] okay so first we get that drop and then
+[00:34:30] the price whips back up and it goes all
+[00:34:33] the way up to over $7 a share which is
+[00:34:35] impressive now we do have a couple of
+[00:34:39] issues you'll see that I have a blue
+[00:34:41] horizontal line drawn here this is a
+[00:34:44] resistance line based on Resistance here
+[00:34:47] and here from pre-market I also have
+[00:34:50] this yellow ascending support line which
+[00:34:53] I had drawn from several levels
+[00:34:54] premarket it goes way back so I know
+[00:34:57] that we're going to resistance here and
+[00:34:58] we might have resistance right up here
+[00:35:00] so we're kind of coming up to resistance
+[00:35:02] which is a bit of a risk factor okay so
+[00:35:04] we come up to this level we're sitting
+[00:35:06] here at 697 688
+[00:35:09] 688 and then all of a sudden it
+[00:35:13] dumps so let's watch this 85 on the bid
+[00:35:17] 67 you see how it just dropped in
+[00:35:19] basically an instant it goes from 680 to
+[00:35:22] 675 to
+[00:35:24] 667 the sell orders are just you know
+[00:35:27] relenting people are hitting the bid
+[00:35:30] they are hammering it so now it's
+[00:35:33] dropping to
+[00:35:35] 70 all right so it bounces for a moment
+[00:35:38] that's not too bad and then uhoh there
+[00:35:40] it goes again another flush all the way
+[00:35:43] down to 605 and now here we're $6 on the
+[00:35:48] bid five look at this
+[00:35:51] $579 so my order I pressed the buy
+[00:35:54] button first order got rejected I had to
+[00:35:55] change it and use my hot keys so the
+[00:35:58] reason my order got rejected was because
+[00:36:00] pressing an order for
+[00:36:02] $721 when the current price is at
+[00:36:05] $579 is more than 10% above the current
+[00:36:07] price your order will get rejected
+[00:36:09] because of risk parameters that they set
+[00:36:12] um at at my broker at least so my order
+[00:36:14] got rejected but I pressed my hotkey
+[00:36:16] twice or three times and bought 750
+[00:36:19] shares at 79 so again buying basically
+[00:36:22] this Panic flush now here we're bouncing
+[00:36:25] right off support of volume weighted
+[00:36:26] average price is it at the half dollar
+[00:36:28] the whole dollar no but we have another
+[00:36:30] level of support here that we're paying
+[00:36:31] attention to so I guess we should add
+[00:36:33] that support could be um ascending or
+[00:36:37] descending resistance lines horizontal
+[00:36:40] resistance lines or um half doll whole
+[00:36:43] dollars or something like
+[00:36:45] vwap uh vwap or Mas moving averages
+[00:36:49] something like the 200 EMA would be fine
+[00:36:52] okay so then in this case here we do end
+[00:36:56] up getting a bounce all right so let's
+[00:36:58] get this bounc let's see so I'm already
+[00:37:01] up here 80 89 on the
+[00:37:04] offer back to 80 on the
+[00:37:08] bid and as we know this ends up bouncing
+[00:37:11] and going all the way back up to 12 1314
+[00:37:13] a share so it bounced up a lot as the
+[00:37:15] day went on of course but just for a
+[00:37:17] short-term trade you could think of
+[00:37:20] these as scalps because it's a quick
+[00:37:22] entry and a quick exit so locked up my
+[00:37:24] by profit there on that trade uh some of
+[00:37:27] them have however are going to be more
+[00:37:29] so when I was talking about the the
+[00:37:31] three sort of scenarios the first is
+[00:37:34] that the price basically does nothing
+[00:37:37] you get in and it's sideways which means
+[00:37:39] we're bare flagging the second is the
+[00:37:41] price keeps dropping the third is that
+[00:37:43] well it works exactly as we expected and
+[00:37:45] it bounces and then it's just the degree
+[00:37:48] of how much it bounces sometimes they
+[00:37:51] really spring back up and in an instant
+[00:37:54] you're up 30 4050 cents a share at that
+[00:37:57] point it's like the wind is at my back
+[00:38:00] all I have to do is set my stop it break
+[00:38:01] even and let's see what this thing wants
+[00:38:03] to do because now I'm in the driver's
+[00:38:05] seat other times it bounces but the
+[00:38:08] bounce is a little bit smaller so let's
+[00:38:10] look at a smaller bounce here we're
+[00:38:12] going to go back to um let's see minute
+[00:38:15] 36 and 19 seconds so here we go uh
+[00:38:18] perfect right to 3619 that was very good
+[00:38:21] all right so so this is another dip um
+[00:38:24] this one's a little bit smaller what you
+[00:38:26] can see here is um a couple topping
+[00:38:29] Tails topping Tails a little topping
+[00:38:31] tail we just had a jack knife which is
+[00:38:33] that red candle the price popped up and
+[00:38:35] then reversed back down so as it
+[00:38:38] reverses back down here uh I end up
+[00:38:41] jumping in this at uh 75 and the reason
+[00:38:44] I bought here was because I saw this big
+[00:38:47] stack of buyers on the level two which
+[00:38:50] gave me a sense of confidence I was like
+[00:38:51] okay we've you know I I think I can get
+[00:38:53] in here and feel good about that so I'm
+[00:38:56] in at 75
+[00:38:58] and I want to see it hold this level now
+[00:39:01] basically as you can see instantly I'm
+[00:39:03] up 5 six cents a share so I'm up 240
+[00:39:06] bucks on 4,000 shares now if this thing
+[00:39:10] bounces up to 85 and up to 90 I'm in
+[00:39:13] better shape but you can see right here
+[00:39:15] I'm already taking profit because it
+[00:39:18] bounced but now we're under a whole
+[00:39:22] dollar so it seems like we're kind of
+[00:39:25] having some resistance here and if we
+[00:39:28] look at this chart on the one minute or
+[00:39:30] on the 10sec it's B down and then sort
+[00:39:32] of sideways which could look like a bare
+[00:39:35] flag so this at the moment is looking a
+[00:39:37] little iffy so I end up taking my profit
+[00:39:39] on it it's not a big winner but you know
+[00:39:42] can't really complain it's a small green
+[00:39:44] trade I'm happy for that let's jump
+[00:39:46] forward to to the next one this is going
+[00:39:48] to be at minute
+[00:39:51] 5024 okay so back here let's see minute
+[00:39:55] 50 all right so this will be close
+[00:39:57] enough
+[00:39:58] so all right so let's see so right here
+[00:40:00] so I just looks like I sold a position
+[00:40:03] there I'm up 11,000 on the day and
+[00:40:06] looking for a bounce off of
+[00:40:11] six so see right now we've got a seller
+[00:40:13] there at 601 they were at 608 they came
+[00:40:16] down to
+[00:40:19] 601 and I'm going to buy this dip right
+[00:40:23] here I'm in right there at 601 average
+[00:40:28] 602 average so now once again getting in
+[00:40:32] right at well we erased that I need a a
+[00:40:35] three-sided whiteboard right at the half
+[00:40:37] dooll whole dollar so I'm in at 602 stop
+[00:40:41] is about 5.95 about 5 Cent stop on this
+[00:40:44] and once again I'm immediately up $276
+[00:40:48] $300 so you can see what I mean where if
+[00:40:51] you do this 10 15 times in a day with
+[00:40:54] 80% accuracy next thing you know you're
+[00:40:57] going to be up a couple thousand bucks
+[00:40:59] now my accuracy comes from a combination
+[00:41:03] of following the rules knowing the right
+[00:41:07] stocks to trade making sure I'm looking
+[00:41:09] for entries at support half dollars
+[00:41:11] whole dollars ascending descending
+[00:41:13] horizontal and vwap moving averages
+[00:41:16] avoiding halt risk and one thing I
+[00:41:19] should also add here let's have uh rule
+[00:41:21] number four we're running out of space
+[00:41:24] we need a whiteboard extension is um
+[00:41:27] front
+[00:41:29] side so dip trading on the front side
+[00:41:33] not the back side we'll just see BS
+[00:41:37] trading the backside is BS we don't
+[00:41:40] trade the backside so backside is no
+[00:41:43] good the reason
+[00:41:45] is so to differentiate the front oops to
+[00:41:49] differentiate the front side and the
+[00:41:50] back side let's well let's just finish
+[00:41:52] this um this live example for one second
+[00:41:54] and then I'll go back and and show you
+[00:41:56] that all right so so in this particular
+[00:41:58] example
+[00:42:00] here
+[00:42:01] um yeah that was a good one um
+[00:42:05] so all right so let's back up so I added
+[00:42:09] right here at
+[00:42:12] 602 so I'll ask you the question do you
+[00:42:15] think we're on the front side of the
+[00:42:16] move or the back side of the move right
+[00:42:18] now well this is alltime highs so are we
+[00:42:23] on the back side we just had three
+[00:42:24] candles to pull back we've pulled back
+[00:42:25] to the half dollar whole dollar of six
+[00:42:28] check the macd macd is open do we have a
+[00:42:31] huge rejection candle or volume top like
+[00:42:33] a massive topping tail no we don't so
+[00:42:36] we're probably still on the front side
+[00:42:38] of the move macd is open not a big
+[00:42:40] rejection candle we're on the front side
+[00:42:42] of the move it's pretty clear when you
+[00:42:44] switch from front side to back side so
+[00:42:46] we're on the front side of the move
+[00:42:47] right now uh so I'm in at 602 average
+[00:42:50] with 6,000 shares now I've got a cushion
+[00:42:52] on the day so I'm starting to take a
+[00:42:53] little bit more risk I could just take
+[00:42:56] the profit off here at 69 but instead I
+[00:42:58] put a new order at 625 and I say you
+[00:43:00] know what I think I'm going to add to
+[00:43:01] the
+[00:43:02] position as long as this thing holds 6
+[00:43:05] what's my profit Target profit Target
+[00:43:07] and move back to high a day around 650
+[00:43:10] okay so I'm risking 5 cents a share so I
+[00:43:12] go ahead and add another 2,000 shares
+[00:43:14] there at
+[00:43:21] 610 it's jumping around but notice this
+[00:43:24] candle see that bottoming tail now we
+[00:43:27] have a bottoming tail that's formed I
+[00:43:29] mean it's just you know I got in off of
+[00:43:31] support at $6 and it started to rise
+[00:43:34] back up and before the candle closed it
+[00:43:36] ended up bottoming out now if you were
+[00:43:39] trading on a one minute pullback
+[00:43:42] pattern you you would have gotten in
+[00:43:45] right here so this would have been your
+[00:43:46] spot to buy right here which is probably
+[00:43:49] where that volume came in it was traders
+[00:43:51] who were taking that first one minute
+[00:43:52] candle to make a new high which was
+[00:43:54] closer to 825 I would say so around yeah
+[00:43:57] around 8:25 was the first one minute K
+[00:43:59] to make a new high I'm already in at 605
+[00:44:02] average 625 sorry so oh gosh darn it um
+[00:44:06] that's okay so 625 average sorry I'm I'm
+[00:44:11] in at a 605 average we're going to back
+[00:44:14] this up 105 seconds so there we go all
+[00:44:19] right so now we've got 625 on the offer
+[00:44:21] 630
+[00:44:23] 633 and we're looking for a move back to
+[00:44:26] 650
+[00:44:27] now I'm up $1,700 of unrealized profit
+[00:44:30] right now and in this case I end up
+[00:44:33] taking a little bit of it off the table
+[00:44:35] because we kind of end up stalling out
+[00:44:37] here underneath the high for whatever
+[00:44:39] reason we've got high volume like it we
+[00:44:41] should have gone but we just sort of
+[00:44:43] stalled out to be honest maybe I was
+[00:44:45] getting a little impatient and I think
+[00:44:46] in hindsight I'll probably think I
+[00:44:48] should have held a little longer but at
+[00:44:51] the end of the day green is good got to
+[00:44:53] lock up that profit got to be consistent
+[00:44:56] and you know that's my goal to show up
+[00:44:58] every single day to trade every single
+[00:45:00] day and to try to find profit and to try
+[00:45:02] to make sure I walk away before I give
+[00:45:04] back too much of it and more often than
+[00:45:06] not I'm walking away in the green as you
+[00:45:09] guys have seen certainly from my my
+[00:45:11] metrics my track record uh one thing
+[00:45:13] that I'll tell you is that every single
+[00:45:15] day you're doing one of two things
+[00:45:17] you're either giving back profit or
+[00:45:18] you're leaving money on the table now
+[00:45:21] today I left some money on the table
+[00:45:24] because I chose to stop trading I was
+[00:45:26] like I'm I'm going to be done trading
+[00:45:27] I've done I've done well enough I was up
+[00:45:28] just under 18,000 and then I felt a
+[00:45:31] little fomo that I stopped too soon so I
+[00:45:35] decided to get back in and then I
+[00:45:37] proceeded to give back profit which
+[00:45:38] means I both left money on the table by
+[00:45:42] taking a break and then gave back profit
+[00:45:44] anyways by coming back a little bit
+[00:45:45] later and taking some breakouts that
+[00:45:47] didn't work so that's kind of
+[00:45:50] discouraging you want to avoid that but
+[00:45:53] I'll tell you the emotion of fomo is so
+[00:45:55] strong that if you're sitting here and
+[00:45:57] you're watching these continue to go up
+[00:46:00] it it can be almost impossible not to
+[00:46:02] trade it so sometimes the best thing is
+[00:46:04] to walk away and to not come back that's
+[00:46:05] challenging for me because I'll walk
+[00:46:07] away and take a break and then I come
+[00:46:09] back to usually record my recap or to do
+[00:46:11] an episode like this and then that's
+[00:46:13] when I'm sitting down and I'm like well
+[00:46:14] maybe I'll take a couple trades before I
+[00:46:16] start recording so anyways it's all good
+[00:46:18] but um finishing here well let's see I
+[00:46:21] guess I'm where am I at on the day um so
+[00:46:24] on the day I'm sitting at uh 12,000
+[00:46:28] $796 which is still a great day more
+[00:46:30] than double the daily goal uh however um
+[00:46:34] in the interm here uh you may have
+[00:46:37] noticed uh this chart suddenly looks a
+[00:46:39] little bit different we actually had
+[00:46:41] some news come out uh that the company
+[00:46:43] is exercising uh warrants so they sold
+[00:46:47] warrants at $6 a share $700,000 of them
+[00:46:51] uh 700,000 shares worth of warrants so
+[00:46:53] some bad news came out here uh and
+[00:46:56] that's not totally uncommon when you
+[00:46:58] have a stock that's up 400 500 I think
+[00:47:02] we peaked at
+[00:47:03] 600% you're the company's going to raise
+[00:47:06] money that's not uncommon at all and so
+[00:47:08] one of the things that I'm thinking
+[00:47:09] about on these um companies is looking
+[00:47:11] at the filings understanding what they
+[00:47:14] have in terms of shelf registrations if
+[00:47:16] they've sold warrants what the strike
+[00:47:18] what the prices are of those warrants
+[00:47:20] because then that gives you the sense of
+[00:47:22] well if this is trading above $6 we've
+[00:47:24] got the risk that these warrants could
+[00:47:26] get executed and the price could drop
+[00:47:28] and that's where buying um a flush can
+[00:47:31] be really dangerous so for what it's
+[00:47:34] worth the to differentiate differentiate
+[00:47:36] the front side and the back side of the
+[00:47:38] move I think at this point this is where
+[00:47:41] I walked away this morning and that was
+[00:47:43] a Fine Place to walk away we ended up
+[00:47:45] going sideways and we put in another leg
+[00:47:47] higher which I missed we then started to
+[00:47:49] curl right here and I actually took this
+[00:47:51] trade and I was looking for the breakout
+[00:47:54] holding for the break of 12 and then we
+[00:47:56] got a reject ection and unfortunately on
+[00:47:58] this because I was taking breakout
+[00:48:00] trades I was already in before the flush
+[00:48:05] this is one of the things that can be
+[00:48:06] really frustrating so if we look at this
+[00:48:08] trade this is a fine little micro
+[00:48:11] pullback I bought that dip there for the
+[00:48:13] move through 12 and then it pulls back
+[00:48:16] and I stop out right here now actually
+[00:48:20] so I stopped out but I added to the
+[00:48:24] position down here and it brought my
+[00:48:26] cost basis from 1180 down to
+[00:48:29] 1118 but it wasn't enough to get back to
+[00:48:31] break even and I sold right through here
+[00:48:33] for a loss which is fine I still don't
+[00:48:36] want to panic sell I still want to add
+[00:48:38] into these drops as long as I'm not
+[00:48:41] looking at getting caught in a halt down
+[00:48:44] as long as that's not the risk and it
+[00:48:47] you know I'm getting in around $150 half
+[00:48:49] dollar whole dollar I'm okay with that
+[00:48:51] if it looks like we're getting to the
+[00:48:52] point of being caught in a halt down and
+[00:48:54] I'm in it that's where I have to panic
+[00:48:56] at exit and I hate having to do it but
+[00:48:58] you got to manage your risk you got to
+[00:49:00] cut your losses and you know that that's
+[00:49:02] what ends up happening and then there's
+[00:49:04] another stock that I went red on which
+[00:49:05] was atnf and this was actually on a um a
+[00:49:09] pullback setup as well not sorry not a
+[00:49:12] pullback setup a um a momentum trade
+[00:49:16] which was really trading uh right off of
+[00:49:18] the highs and we ended up getting a
+[00:49:20] rejection so uh it was actually right
+[00:49:23] well I'd have to get into the 10-second
+[00:49:25] chart on it but but that's okay so
+[00:49:27] anyways let's go back here to our slide
+[00:49:30] deck so um so when do I avoid buying
+[00:49:34] dips I want to really emphasize this
+[00:49:37] because this is important when a stock
+[00:49:39] is dropping due to breaking news if I
+[00:49:41] know that the news that it's just got
+[00:49:43] news that's just come out which I'll
+[00:49:45] sometimes see because in the chat room
+[00:49:47] we've got the news headline and so it'll
+[00:49:49] say offering you know stock symbol and
+[00:49:53] now I know that it's dropping because of
+[00:49:54] news I'm not going to get into that it's
+[00:49:56] going to have a poor profit to loss
+[00:49:58] ratio if it hals down it's going to open
+[00:49:59] substantially lower but if a stock is
+[00:50:02] dropping simply due to panic and it's
+[00:50:05] still trending up in general even if it
+[00:50:07] does halt down it's often still worth
+[00:50:09] watching for a bounce coming out of the
+[00:50:12] halt or if it doesn't halt then just for
+[00:50:15] a bounce off of what I can find as the
+[00:50:17] nearest level of support um on the chart
+[00:50:21] so this is a this is an example here
+[00:50:23] where you can see a number of these
+[00:50:25] bottoming tails bottoming Tails
+[00:50:28] bottoming Tails bottoming tails and I
+[00:50:30] got myself into this groove where I just
+[00:50:32] kept looking for these dips to get in
+[00:50:35] now I'll say that it's not um like you
+[00:50:40] know I'll reiterate that for a lot of
+[00:50:42] beginner Traders getting to the level of
+[00:50:45] Flow State where you're watching the
+[00:50:48] level two you're seeing this dip and
+[00:50:51] you're having the confidence to jump in
+[00:50:53] it that's not going to be the place for
+[00:50:56] most people and let's actually go back
+[00:50:58] here I want to show you this trade at um
+[00:51:01] let's see it was minute
+[00:51:03] 4540 so 4540 let's go back here um so on
+[00:51:09] this trade here this is a momentum trade
+[00:51:12] uh but this one's pretty interesting so
+[00:51:15] here we have a stock well it's the same
+[00:51:17] stock but here we have a chart pattern
+[00:51:19] where we kind of had this pop and then
+[00:51:22] we had the jack knife you recall I
+[00:51:24] bought the dip down here we got the move
+[00:51:26] back up so I'm sitting up 10 grand on
+[00:51:28] the day we hit a high of 547 and now
+[00:51:31] we're kind of struggling right at this
+[00:51:32] level so um as I'm watching this area
+[00:51:36] I'm trying to get a trade for the break
+[00:51:39] through
+[00:51:41] 550 and what I believe is that based on
+[00:51:44] what I know about half dollars and whole
+[00:51:47] dollars which right we erased that is
+[00:51:50] that if we can break over 550 and we can
+[00:51:52] hold over that level we should get a
+[00:51:55] nice move higher up towards 6 so in this
+[00:51:59] case here we've got um we've got 550 I
+[00:52:04] just banged my foot under the desk a I
+[00:52:07] so la last year um I oh I hurt my toe so
+[00:52:11] bad I I well I broke it anyways um I got
+[00:52:14] to be a little careful so let me just
+[00:52:16] back that up um so I got in here at
+[00:52:22] 547 and it goes to
+[00:52:25] 550 uh oh it doesn't break what do I do
+[00:52:29] I bail this is called breakout or
+[00:52:32] bailout I only give it a second and I'm
+[00:52:33] like you know what I'm in too high I'm
+[00:52:36] going to get out so on 4,000 shares
+[00:52:38] there I lost like a 100 bucks uh three
+[00:52:40] cents a share two cents a share it's not
+[00:52:43] a big deal I get out and I have my order
+[00:52:47] here at 560 I'm ready to get back in but
+[00:52:49] I just need to so I get back in here
+[00:52:51] because it comes back up and I'm
+[00:52:53] thinking all right we're coming back up
+[00:52:54] I'm going to give another try now you
+[00:52:56] might that maybe I shouldn't have even
+[00:52:57] gotten out but I got out and then it
+[00:52:59] comes back up I get back in and now if
+[00:53:02] this thing can hold I'm looking to add
+[00:53:03] for a squeeze up to six this is a
+[00:53:06] momentum trade so right now we've got
+[00:53:10] what you can tell is a bit of resistance
+[00:53:12] around 550 we're kind of struggling at
+[00:53:15] this area now to set the stage a little
+[00:53:18] bit more at this moment this stock is
+[00:53:21] the number one leading gainer in the
+[00:53:22] market it's up
+[00:53:24] 173% 13 million shares of volume 1
+[00:53:27] million share float relative volume is
+[00:53:30] crazy we've got news so is this the type
+[00:53:32] of stock that has a high likelihood of
+[00:53:35] continuing higher I think so some might
+[00:53:37] say well geez Ross it's already up 176%
+[00:53:40] how high can it go it's not going to go
+[00:53:41] to 200 not 300 not 400 certainly not
+[00:53:44] 625 which is what we saw but that can
+[00:53:48] happen so I'm looking at this thinking
+[00:53:51] if this starts to break away what's the
+[00:53:53] next level of resistance we've got a lot
+[00:53:55] of room right half dollar whole dollar
+[00:53:57] that's the next logical spot so as we
+[00:53:59] start to pull away here I add to the
+[00:54:02] position I'm in at six at $550 the half
+[00:54:05] dollar and now I'm looking to add for
+[00:54:07] the move up to
+[00:54:08] $6 so this ends up being a nice trade
+[00:54:11] all of a sudden here we pop up to
+[00:54:15] 6465 and I could take profit right here
+[00:54:18] but I don't now the thing is for what
+[00:54:20] it's worth this trade carries a little
+[00:54:23] bit more risk than a dip trade because
+[00:54:27] it could have dropped all the way back
+[00:54:29] down to um like 30 so I'm risking more
+[00:54:34] like 20 cents on this trade um so I kind
+[00:54:37] of need to make you know 30 or 40 cents
+[00:54:39] to have a better risk reward ratio so
+[00:54:42] right there I take half off the table
+[00:54:44] and that puts me up just under 12,000 on
+[00:54:46] the day and I I regretted it immediately
+[00:54:49] I was like I sold too soon I should have
+[00:54:51] waited for it to tap six but the problem
+[00:54:54] on this is that I added to my position I
+[00:54:57] scaled up to 10,000 shares so now I'm in
+[00:55:00] heavier and I'm up well I'm up only 15
+[00:55:03] cents right now and since I added at 70
+[00:55:06] when it came up to 80 and then it
+[00:55:08] stalled right there what I saw was I
+[00:55:11] think we have a hidden seller here at
+[00:55:13] 580 and for that reason I said I better
+[00:55:16] take some profit so let's talk for a
+[00:55:18] second about exit indicators this was a
+[00:55:21] special request um that was asked of me
+[00:55:24] um today so let's talk about what my
+[00:55:26] exit indicators are to sell why did I
+[00:55:29] sell there now I would say that one of
+[00:55:33] the indicators I'm using very closely in
+[00:55:35] my trading is level two I trade using
+[00:55:39] level two it's a tool that I'm using so
+[00:55:41] this is the level two right here I'm I'm
+[00:55:43] clearly watching the level two I'm
+[00:55:45] watching the time in sales and I'm
+[00:55:47] looking at the chart so I'm a very
+[00:55:48] technical Trader but the problem is
+[00:55:50] right here there's a there's a seller at
+[00:55:52] six there's a hidden seller at six and
+[00:55:55] we're having a hard time breaking it so
+[00:55:58] when we come up to a level and we see a
+[00:56:00] lot of buying but we fail to break that
+[00:56:03] level that tells us that there are
+[00:56:06] people that are unloading stock at that
+[00:56:09] level so that level has a high degree of
+[00:56:11] Supply so we're going to put our um put
+[00:56:14] our lines back on here for a second so
+[00:56:18] we go
+[00:56:19] through what happened here this was
+[00:56:21] working just a second ago all right so
+[00:56:24] we go through um whatever six we come up
+[00:56:28] or five we come up to 550 you know we
+[00:56:30] pull back for a second and then we punch
+[00:56:33] up here and we come up to six so what we
+[00:56:36] know is that if we looked at the
+[00:56:38] distribution of orders you would see in
+[00:56:41] terms of sell orders as we were looking
+[00:56:42] at this not a lot of sell orders and
+[00:56:45] then a lot of sell orders up here not a
+[00:56:47] lot and then a lot not a lot and then a
+[00:56:50] lot so as the price goes higher
+[00:56:54] essentially this is is a map telling us
+[00:56:58] where we're going to have possible
+[00:56:59] roadblocks so when I see sellers stacked
+[00:57:01] on the level two at 550 it's not
+[00:57:06] surprising but I know that if we can
+[00:57:08] break through this wall that the next
+[00:57:10] area where we're going to have sell
+[00:57:11] stacked is up at the next hold down with
+[00:57:14] lower price stocks this is the way it is
+[00:57:16] with higher price stocks like Tesla or
+[00:57:17] something like that um it's it's not as
+[00:57:20] much of this issue but but it is with
+[00:57:22] the lower price stocks uh and it makes
+[00:57:24] sense because so many people are buying
+[00:57:26] and selling and uh setting profit
+[00:57:28] targets at areas that they think are
+[00:57:29] psychological I'll put a profit Target
+[00:57:31] at uh you know a half dollar I'll take
+[00:57:34] profit when we come up to six right
+[00:57:36] something like that that's what a lot of
+[00:57:37] Traders think so that's where they're
+[00:57:38] putting their
+[00:57:40] orders so if I
+[00:57:43] see let's see let's go back to the
+[00:57:45] Whiteboard so if I see for
+[00:57:49] instance we're going to write exit
+[00:57:52] indicators all right so exit indicators
+[00:57:54] here um so number one I'm going to
+[00:57:58] say uh
+[00:58:00] large
+[00:58:01] seller on the level two but it could
+[00:58:04] also be a hidden
+[00:58:08] seller so large seller or a hidden
+[00:58:11] seller now large seller is going to be
+[00:58:13] visible on the level two that's when we
+[00:58:15] actually see the big 10,000 share order
+[00:58:17] and you've seen some of them during the
+[00:58:19] recordings today uh a hidden seller is
+[00:58:22] more like what we had there back at 80
+[00:58:24] where it it came up
+[00:58:26] but it just didn't break and there was a
+[00:58:29] lot of buying but it it couldn't break
+[00:58:31] so I end up taking profit and selling
+[00:58:34] usually when I see a hidden seller or I
+[00:58:36] see um a a large seller if I'm only up a
+[00:58:42] little bit on the trade now if I'm
+[00:58:43] already up a lot then what do I care I'm
+[00:58:47] I'm happy to hold and just let it work
+[00:58:49] but if I've just added to my position
+[00:58:51] like I've just doubled or tripled my
+[00:58:53] position and then the second after we
+[00:58:56] hit a heavy seller and
+[00:58:58] resistance then I'm kind of like I've
+[00:59:00] got my back right up against the ropes
+[00:59:02] because if I hit the bid I'm gonna I
+[00:59:04] might end up selling flat so that's when
+[00:59:07] I'm like maybe I should just try to get
+[00:59:08] out here and I could sell on the offer I
+[00:59:10] could try to get out on the ask I don't
+[00:59:12] have to sell in the bid but that's an
+[00:59:14] indicator for me to potentially exit so
+[00:59:16] seeing a large seller on the level two
+[00:59:18] or a hidden seller that's number one
+[00:59:21] number two is um
+[00:59:24] when the price um movement
+[00:59:29] stalls when it just kind of like stops
+[00:59:31] going up because here's the thing when
+[00:59:34] we're trading
+[00:59:35] momentum if the price stops moving that
+[00:59:38] inherently shows that some indecision is
+[00:59:41] is taking effect people are not buying
+[00:59:43] anymore why what what are people seeing
+[00:59:46] that I'm not seeing what's going on here
+[00:59:47] like the Music Stops that's when I'm
+[00:59:49] like wait a second what's going on so I
+[00:59:51] like to see that we're still seeing a
+[00:59:53] lot of orders going through we're still
+[00:59:54] seeing a lot of buying we're still
+[00:59:55] seeing volume so if volume suddenly
+[00:59:58] stalls out that's an indicator for me to
+[01:00:01] exit and I would say in general these
+[01:00:03] are probably two of the most respected
+[01:00:06] indicators that I use based on reading
+[01:00:08] the tape now based on the chart um
+[01:00:12] candle under
+[01:00:15] candle so a candle under candle is when
+[01:00:19] you actually have a candle that goes red
+[01:00:21] and breaks the low of the previous
+[01:00:22] candle so like right now we're still
+[01:00:24] fine based on candle over candle candle
+[01:00:27] under candle we haven't gotten an exit
+[01:00:29] indicator based on the candles yet if
+[01:00:32] you wait for the candle however that's
+[01:00:35] going to be a bit of a delayed exit
+[01:00:37] because some of these candles are so
+[01:00:39] huge that by the time you have a candle
+[01:00:41] that goes red it's like 50 cents off of
+[01:00:45] the high so in this case you can see for
+[01:00:48] sure I sold way too soon and if at the
+[01:00:52] end of this episode I'll put a link to
+[01:00:54] another episode I recently recorded on
+[01:00:56] one of the indicators I use to help me
+[01:00:57] hold my winners longer I wish I had used
+[01:00:59] it a little bit more today because I I
+[01:01:01] got out of some of these trades way too
+[01:01:03] soon and you know when you sell your
+[01:01:05] winners way too soon you're you're kind
+[01:01:06] of you know you're selling yourself
+[01:01:07] short you're cutting it's it's just it's
+[01:01:10] hard enough as a Trader and then you
+[01:01:12] have a winner and you don't let it
+[01:01:14] really work it's it's just that's not
+[01:01:16] great now I want to highlight the five
+[01:01:19] minute pattern here little pullback
+[01:01:21] little pullback and then we started to
+[01:01:22] pull away and what's important to note
+[01:01:24] here is that
+[01:01:26] when this broke out it kind of came back
+[01:01:29] down it didn't really hold this previous
+[01:01:31] level but when it broke out here and
+[01:01:33] came down it held the high which was of
+[01:01:36] this candle right here so it held that
+[01:01:39] level right there so we came up we held
+[01:01:42] this level and then we pushed higher
+[01:01:44] right here and that made it a really
+[01:01:46] nice five minute breakout So based on
+[01:01:49] candlesticks for sure having a first
+[01:01:51] candle go red candle under candle that's
+[01:01:54] an exit indicator but I would say these
+[01:01:56] are the things I'm looking at most
+[01:01:58] closely if I get into a trade and we
+[01:02:00] don't see big sellers the price is not
+[01:02:03] stalling which means no big Sellers and
+[01:02:05] the price is moving up and we're still
+[01:02:07] seeing candle over candle I'm going to
+[01:02:10] keep holding as long as I can and that's
+[01:02:12] when I'm going to potentially get into
+[01:02:14] uh a position to be in a parabolic trade
+[01:02:16] and we got a couple we've had a couple
+[01:02:17] nice parabolic trades I had one uh just
+[01:02:20] yesterday on
+[01:02:21] Z right yesterday on zap I had a
+[01:02:24] parabolic trade pre-market where I
+[01:02:26] jumped in this thing right in this
+[01:02:29] area it was right in here and next thing
+[01:02:32] you know it's breaking out we get a nice
+[01:02:35] little pullback and it goes to six to
+[01:02:37] 680 to 7 750 780 8 820 8840 then you get
+[01:02:42] the red candle So based on this alone
+[01:02:46] your first candle telling you to sell
+[01:02:48] was this red candle but it was a big one
+[01:02:51] and you would have gotten slippage on
+[01:02:52] your exit so it's important to take a
+[01:02:54] little profit you know it as you have it
+[01:02:57] it's always good to pay yourself and if
+[01:02:59] you can take profit by selling on the
+[01:03:02] offer then you're not feeding the tape
+[01:03:05] with a red order you're not throwing a
+[01:03:07] market order and hitting the bid you're
+[01:03:09] you're selling on the ask you're letting
+[01:03:11] a short sell buy your shares they're
+[01:03:13] covering their position they're buying
+[01:03:15] your shares to cover so selling on the
+[01:03:17] ask into strength is a great way to lock
+[01:03:21] up a little bit of profit without
+[01:03:23] hurting the existing position that
+[01:03:25] you're still holding and then when you
+[01:03:27] finally get that last exit indicator
+[01:03:29] maybe the candle making a new low a big
+[01:03:32] seller on the level two you know then
+[01:03:34] that that's your moment to exit and in
+[01:03:36] terms of When to Walk Away each day I
+[01:03:38] often say number one if I hit my Max
+[01:03:42] loss of course I have to walk away if
+[01:03:44] I've hit my daily goal and then give
+[01:03:46] back half my profit I have to walk away
+[01:03:49] so those are kind of my two things and
+[01:03:51] if I've give across my daily goal and
+[01:03:53] then any time given back half my profit
+[01:03:55] I have to walk away so today's a day
+[01:03:57] where I hit a peak of 18,000 I Dro down
+[01:04:00] to 13,000 or right around there and I'm
+[01:04:03] choosing to walk away before I give back
+[01:04:05] more right I'm kind of moving in the
+[01:04:06] wrong direction so I'm going to say you
+[01:04:08] know what I overstayed my welcome a
+[01:04:09] little bit today I kind of took a break
+[01:04:11] missed a nice move then came back in and
+[01:04:14] got stopped out so all right you know
+[01:04:17] look at the end of the day if you're
+[01:04:18] walking away with a little more in your
+[01:04:20] pocket than you had at the beginning of
+[01:04:21] the day you're doing well and my hope is
+[01:04:24] that learning to dip trade will help you
+[01:04:26] do exactly that now if you want to join
+[01:04:28] me for a two-e trial there's a link
+[01:04:29] that'll be pinned at the top of the
+[01:04:30] comments and in the description if you
+[01:04:32] want to download my collection of PDFs
+[01:04:35] including the micro pullback PDF and the
+[01:04:37] small account strategy PDF those will
+[01:04:40] also be pinned in the comments so I hope
+[01:04:42] you check those out thank you for tuning
+[01:04:44] in this episode I hope you hit that
+[01:04:45] thumbs up subscribe to the channel and
+[01:04:47] I'll see you for the next episode real
+[01:04:48] soon and I'll remind you as always that
+[01:04:50] hey in case you didn't know trading is
+[01:04:51] risky my results aren't typical so
+[01:04:54] manage your risk take it slow and always
+[01:04:56] practice in a simulator before you put
+[01:04:58] real money on the line I'll see you for
+[01:05:00] the next episode real soon

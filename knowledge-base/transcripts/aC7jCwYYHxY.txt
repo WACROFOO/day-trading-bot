@@ -1,0 +1,661 @@
+# How to use Moving Averages (Beginners)
+# https://www.youtube.com/watch?v=aC7jCwYYHxY
+# duration_sec: 1561
+
+[00:00:00] all right everybody so today we're going
+[00:00:02] to talk about day trading terminology
+[00:00:05] and the term of the day is moving
+[00:00:07] averages and we're actually going to be
+[00:00:08] talking about simple moving averages and
+[00:00:11] exponential moving averages so plural
+[00:00:14] moving averages and the two different
+[00:00:16] types all right now this is actually one
+[00:00:19] of my favorite technical indicators it's
+[00:00:21] very simple and for me I'm all about
+[00:00:24] keeping my charts simple I don't want to
+[00:00:26] overcomplicate it
+[00:00:27] I don't want tons of indicators you guys
+[00:00:29] have probably seen people on you know
+[00:00:32] social media and stuff posting charts
+[00:00:34] pictures of charts that are really
+[00:00:36] complicated I just don't find it
+[00:00:39] necessary and I've got a couple charts
+[00:00:41] on here that I can load that are a
+[00:00:43] little busier this one's I mean this
+[00:00:45] isn't even that busy really when we
+[00:00:47] think about it but you know you can get
+[00:00:51] a little bit more complicated on some of
+[00:00:53] these but for me I've always done well
+[00:00:55] keeping it simple and I'm a trader who
+[00:00:57] in the last six months is up over two
+[00:00:59] hundred thousand dollars so this goes to
+[00:01:01] show that you don't need tons of
+[00:01:04] technical indicators in order to be
+[00:01:06] profitable if you keep it simple you can
+[00:01:08] do really well so one of the moving
+[00:01:10] averages that I use almost every single
+[00:01:12] day is the nine moving average and I
+[00:01:15] show this to you guys pretty much on
+[00:01:17] every chart it's this gray line right
+[00:01:19] here I use the nine the twenty and then
+[00:01:22] the 200 these are all exponential moving
+[00:01:25] averages alright so let's talk about
+[00:01:28] what these are and how they work alright
+[00:01:30] so the term of the day moving averages
+[00:01:33] sometimes called MAS or EMA s now a
+[00:01:36] simple moving average is is very simply
+[00:01:39] the average price over a set period of
+[00:01:42] time so if you're looking at a nine
+[00:01:45] period moving average you're looking at
+[00:01:47] the average price over the last nine
+[00:01:49] periods now if you're looking at a one
+[00:01:51] minute chart the average price of the
+[00:01:53] last nine one-minute candles is going to
+[00:01:56] be different than the average price of
+[00:01:57] the last nine daily candles for instance
+[00:02:01] so your moving average prices will
+[00:02:03] change depending on which time frame
+[00:02:05] you're looking at and that's why I
+[00:02:07] always have the moving averages on all
+[00:02:09] three time frames that I use the one
+[00:02:11] minute the five minute and the daily or
+[00:02:13] some traders use the 15 minute the 60
+[00:02:15] minute or whatever and they would have
+[00:02:17] the moving averages on those timeframes
+[00:02:19] as well now in contrast to a simple
+[00:02:23] moving average we have the exponential
+[00:02:26] moving average like a simple moving
+[00:02:28] average it's based on a set period of
+[00:02:30] time the nine period the 20 period 25
+[00:02:34] whatever it might be and it's giving you
+[00:02:36] the average price over that period of
+[00:02:38] time
+[00:02:38] the only difference and this is an
+[00:02:40] important difference is that exponential
+[00:02:42] moving averages weight current price
+[00:02:45] action heavier than older price action
+[00:02:48] so what does that mean that means that
+[00:02:51] current price action is going to cause
+[00:02:53] the moving average to move quickly so
+[00:02:55] the moving average moves faster in
+[00:02:58] response to current changes in price and
+[00:03:00] you can see this example right here
+[00:03:02] where I have my exponential gray moving
+[00:03:05] average moving up and you can see the
+[00:03:08] the yellow is the simple the simple was
+[00:03:12] a little slower to start moving up and
+[00:03:14] then it was a little slower to start
+[00:03:16] slowing down
+[00:03:17] right to start coming back down once the
+[00:03:19] price dipped so that's what I really
+[00:03:21] like here about this exponential moving
+[00:03:23] average is that when the price pulled
+[00:03:25] back quickly this moving average had a
+[00:03:27] quick curve to it quickly pulled back
+[00:03:30] down whereas the simple is much more
+[00:03:32] gradual much more you know just like a
+[00:03:34] smooth ribbon and the exponential as a
+[00:03:36] day trader moves faster that's the 9 and
+[00:03:40] these are both 9 . this is the 20 period
+[00:03:44] exponential in blue green here you can
+[00:03:47] see it's a little quicker to respond to
+[00:03:49] the price but being that it's a longer
+[00:03:51] period it's always going to be a little
+[00:03:53] bit slower than the 9 shorter periods
+[00:03:56] move faster than longer periods but in
+[00:03:59] any case you can see here that the 20 is
+[00:04:01] curling up and then it starts to come
+[00:04:03] back down where's the simple moving
+[00:04:06] average here the thinner line in orange
+[00:04:08] is a little slower to start going up and
+[00:04:11] then a little slower to start pulling
+[00:04:13] back down so as a day trader I find the
+[00:04:16] exponential moving averages work really
+[00:04:18] well and I find that they're really well
+[00:04:20] respected on the intraday charts
+[00:04:22] especially the 5 minute chart the 1
+[00:04:25] minute timeframe
+[00:04:27] is good as well I use these moving
+[00:04:29] averages on that time frame but the five
+[00:04:30] minute is really where I find the
+[00:04:32] strongest setups and this is of course a
+[00:04:35] five minute time frame right here now if
+[00:04:38] we back up out of this and we can zoom
+[00:04:41] into one of these charts here and just
+[00:04:44] sort of look at the look at the
+[00:04:45] differences between these moving
+[00:04:47] averages now for me I'm using them not
+[00:04:50] just on the intraday charts but of
+[00:04:53] course also on the daily charts and it
+[00:04:55] really is incredible to see how well
+[00:04:57] respected these moving averages can be
+[00:04:59] when we see price come up and just tap
+[00:05:03] the moving average almost to the penny
+[00:05:05] it it really is a reminder that
+[00:05:07] thousands of traders are watching these
+[00:05:10] same exact price points so let's look at
+[00:05:14] a couple LP TN okay I've already got
+[00:05:19] this up so let's back up on this one
+[00:05:22] actually what I'm going to do is I'm
+[00:05:24] going to show you a slide that I have
+[00:05:28] here all right so this is LP TM this is
+[00:05:32] a what a ways back and look at on this
+[00:05:34] day how the price came up right here it
+[00:05:37] came up to the 200 moving average it
+[00:05:38] tapped that level and then it pulled
+[00:05:41] back off that level it's not a
+[00:05:42] coincidence when I'm trading and I see
+[00:05:45] the stock coming up to this moving
+[00:05:46] average I see this as resistance so this
+[00:05:49] to me is a point of resistance so the
+[00:05:51] price coming up here and running into it
+[00:05:53] and not being able to break over that
+[00:05:54] level that's predictable you can see
+[00:05:58] here on the other hand the 20 of the 200
+[00:06:02] moving average the Purple Line is
+[00:06:03] forming support the price first breaks
+[00:06:06] up above it and then often we come down
+[00:06:08] and we retest support so we test that
+[00:06:11] level right and we bounce off it and
+[00:06:13] then we're off to the races
+[00:06:14] well we end up coming down a few weeks
+[00:06:16] later maybe a month or two later we come
+[00:06:19] down we bounce off it again then we move
+[00:06:21] up we come down we bounce off it again
+[00:06:23] so this is becoming a very well-defined
+[00:06:25] level of support traders are really
+[00:06:27] respecting it in fact they're respecting
+[00:06:30] it quite a bit more really it seems than
+[00:06:32] like the 50 moving average this red line
+[00:06:35] or the 20 or the nine so sometimes we'll
+[00:06:38] notice that for whatever reason one
+[00:06:40] moving average is being respected more
+[00:06:42] than the others and that may be for any
+[00:06:45] number of reasons it could be that there
+[00:06:46] are some large institutional traders who
+[00:06:49] are trying to buy around the 200 moving
+[00:06:52] average because they see that as sort of
+[00:06:53] a safe entry point they're putting in
+[00:06:55] their buy orders and they're creating
+[00:06:57] support if you have a couple of those
+[00:06:58] guys using exponential moving averages
+[00:07:01] well then that's the one that's going to
+[00:07:02] get respected on another stock maybe it
+[00:07:04] will be the simple moving average that
+[00:07:06] gets respected it it sort of depends but
+[00:07:08] generally you will see that you know
+[00:07:11] moving averages are respected it just
+[00:07:13] can vary stock to stock which one is
+[00:07:16] kind of in the most control now an
+[00:07:23] example of a stock with saud just
+[00:07:25] yesterday was Ellie I and we look at the
+[00:07:27] daily chart on this one and in this case
+[00:07:29] it happens to be the 50 moving average
+[00:07:31] that's being really well respected see
+[00:07:33] how the price came up and tapped it and
+[00:07:35] then pulled back tapped it and then
+[00:07:37] pulled back we tapped it and then pulled
+[00:07:39] back so this has happened once twice
+[00:07:41] three times almost a fourth times just
+[00:07:43] yesterday as soon as I saw it popping up
+[00:07:45] yesterday I was like no I'm not going to
+[00:07:47] buy this because it's going to run into
+[00:07:49] resistance right here at 160 it's too
+[00:07:51] close it's too nearby now if we can
+[00:07:53] break over 160 then we have room from
+[00:07:56] 160 up to the 200 moving average so
+[00:07:59] that's the next one and again there will
+[00:08:02] be some traders using 100 moving
+[00:08:04] averages and traders using 120 and 200
+[00:08:07] at 250 it's true that you know if you
+[00:08:11] looked at a different moving average you
+[00:08:13] would see different areas of resistance
+[00:08:15] I focus on using the ones that are the
+[00:08:17] most common among traders the big
+[00:08:20] difference of course is that some
+[00:08:21] traders like simple and some like
+[00:08:23] exponential so if we change this to
+[00:08:25] let's see just for instance if we change
+[00:08:27] this to an exponential moving or a
+[00:08:29] simple moving average you know it does
+[00:08:31] change it a little bit it kind of it
+[00:08:33] clearly looks different than when it's
+[00:08:35] exponential to me the exponential is the
+[00:08:38] one that's kind of getting respected
+[00:08:39] more in this case but again you know
+[00:08:42] this is what I use as a trader and for
+[00:08:45] the sake of consistency I just keep it
+[00:08:48] you know keep it easy and use just the
+[00:08:51] exponential moving average
+[00:08:54] now as far as intraday charts go I'm
+[00:08:58] primarily using the 9 and the 20 I don't
+[00:09:01] use the 50 I don't feel that it helps me
+[00:09:04] or that it's really necessary I just
+[00:09:06] again keep it I'd say keep it simple but
+[00:09:10] I keep it exponential and just use this
+[00:09:14] that's 9 and the 20 I don't want to
+[00:09:16] overdo it and have things too
+[00:09:18] complicated all right so in this case
+[00:09:20] you can see the way the price pulled
+[00:09:22] back here to the 9 EMA that for me was a
+[00:09:26] buying opportunity I love that I love
+[00:09:28] seeing that type of pullback and that
+[00:09:30] for me is really it's almost the perfect
+[00:09:33] bull flag when we have that
+[00:09:35] consolidation over and at the moving
+[00:09:39] average it really is just exactly what I
+[00:09:41] look for in the strongest bull flags I'm
+[00:09:44] going to show you a couple of examples
+[00:09:46] here of bull flags that I've traded this
+[00:09:51] is one here and and you can see how
+[00:09:53] clean this is the move up the pullback
+[00:09:55] to the moving average right here first
+[00:09:57] camel make a new high as your entry
+[00:09:59] stops at the low this is based on the
+[00:10:01] moving average pullback now in this next
+[00:10:04] example I wouldn't buy up here because
+[00:10:07] of how extended we are off support
+[00:10:09] moving averages are levels of support
+[00:10:11] and resistance so I like to bind your
+[00:10:13] support and sell as we squeeze away from
+[00:10:15] it alright that makes sense
+[00:10:17] or short as we're far away and cover as
+[00:10:20] we come back down if you're a short
+[00:10:22] seller or you like reversals or bottom
+[00:10:24] bounces as well so here you get the
+[00:10:26] spike up first pullback entry squeeze
+[00:10:29] here and although this is a bull flag
+[00:10:32] pattern which is a specific you know
+[00:10:34] type of strategy and this stock has to
+[00:10:37] be the right type of stock to trade
+[00:10:38] meaning it's got low float it's got a
+[00:10:40] catalyst you know we're talking in this
+[00:10:43] terminology session specifically about
+[00:10:46] moving averages but one of the things
+[00:10:49] you'll realize is that all of these
+[00:10:51] lessons do sort of you know compound
+[00:10:54] onto the next one so this is part of
+[00:10:57] building your foundation one thing
+[00:10:59] affects another which affects another so
+[00:11:01] building your knowledge as a trader
+[00:11:04] requires you to understand how all these
+[00:11:06] different things in
+[00:11:07] act and you know you need to understand
+[00:11:10] moving averages you need to understand
+[00:11:11] candlestick patterns the bull flags the
+[00:11:14] flattop breakouts
+[00:11:15] you need to understand the right type of
+[00:11:17] stocks to trade those are going to be
+[00:11:18] ones that have the potential to move 20
+[00:11:21] or 30 percent intraday there's only
+[00:11:23] certain type of stock that has that
+[00:11:25] potential you need to learn how to find
+[00:11:26] it that means you need to know how to
+[00:11:28] use stock scanners I need to be able to
+[00:11:31] find those stocks that have big
+[00:11:33] potential jump into them as early as
+[00:11:35] possible understand risk management etc
+[00:11:38] etc but when it comes to the moving
+[00:11:41] averages for me I use them just simply
+[00:11:43] as this level of support so the pullback
+[00:11:45] to the moving average entry here sell
+[00:11:48] through the high pullback entry here
+[00:11:50] sell through the high this is another
+[00:11:53] one squeezing up the pullback entry stop
+[00:11:56] at the low selling through the squeeze
+[00:11:58] and these are stocks that I would find
+[00:12:00] right off my high a day scanners this is
+[00:12:03] another nice pullback squeeze up
+[00:12:05] pullback entry right here so this really
+[00:12:09] is important for me to understand
+[00:12:11] whether the stock is to extend it or not
+[00:12:13] if I didn't have the moving average
+[00:12:14] there I wouldn't really be able to
+[00:12:16] understand the context so that's what it
+[00:12:19] helps me understand it helps me see
+[00:12:20] context it helps me see kind of the big
+[00:12:22] picture is this stock too extended or is
+[00:12:25] this a safe place to get in so you know
+[00:12:28] in this case here we are a little bit
+[00:12:30] extended we ended up getting a little
+[00:12:32] bit of a false break alright so we'll
+[00:12:36] back out of that here and switch over to
+[00:12:39] Fred we'll look at this one today or
+[00:12:42] yesterday actually so one of the things
+[00:12:45] that I do I have when I trade reversals
+[00:12:47] there's two different ways that that you
+[00:12:50] can trade reversals one way is to short
+[00:12:54] as close to high a day as possible like
+[00:12:56] way up here in the top of this type of
+[00:12:58] candle and cover on the move back to the
+[00:13:02] moving average all right so this to me
+[00:13:04] is that rubber band snap back setup
+[00:13:06] where the rubber band is super stretched
+[00:13:08] out and you want to snap back so my
+[00:13:10] target is the moving average it's the 9
+[00:13:13] moving average on the 5-minute and the
+[00:13:15] 20 moving average on the one-minute
+[00:13:17] chart so in this case here
+[00:13:19] you're watching this short I think it
+[00:13:21] was you know right around here something
+[00:13:23] like that so this ends up dropping down
+[00:13:26] popping back up dropping down so if you
+[00:13:29] took the one-minute set up with a stop
+[00:13:31] at high of day you know 2035 this ended
+[00:13:35] up moving down to 1876 so a pretty
+[00:13:38] decent pullback when you think about it
+[00:13:40] some traders are going to use this
+[00:13:42] one-minute set up they're going to short
+[00:13:44] off the high and cover on the move down
+[00:13:46] to the 20 moving average knowing that
+[00:13:48] most stocks will bounce off this blue
+[00:13:50] line this one ended up not really
+[00:13:52] bouncing off that line it broke below it
+[00:13:54] popped back up above it but then you can
+[00:13:56] see right in this area we were kind of
+[00:13:59] forming some resistance right that blue
+[00:14:01] line was resistance and that's important
+[00:14:04] when you see a stock break below this
+[00:14:07] line now you set your stop on the other
+[00:14:10] side of the line so if the stock now
+[00:14:12] breaks up above the price breaks the
+[00:14:13] move the moving average then you're
+[00:14:15] going to stop out so some traders
+[00:14:17] instead of trading the short from the
+[00:14:20] extension down to the moving average
+[00:14:22] they wait for the moving average to
+[00:14:25] break and then they take a short
+[00:14:26] position like right in this area here
+[00:14:29] they get short right in here maybe not
+[00:14:32] on this first drop but after we pop back
+[00:14:33] up and then confirm and make a new low
+[00:14:36] and then they hold until the stock
+[00:14:39] breaks back over the moving average in
+[00:14:41] the other direction so in this case you
+[00:14:43] know they'd be back they'd be covering
+[00:14:45] their position right here
+[00:14:46] but of course in other cases when you
+[00:14:49] have a longer-term pullback those can be
+[00:14:52] a bit stronger this one you know didn't
+[00:14:55] really give us the the cleanest pullback
+[00:14:57] on that day it just sort of dropped down
+[00:15:01] and then ended up meandering higher and
+[00:15:04] overall being a fairly fairly strong
+[00:15:07] strong setup this here is another
+[00:15:10] example of a pullback and this stock
+[00:15:14] just was pretty much staying right below
+[00:15:16] that 20 moving average so anytime we
+[00:15:18] popped up to the moving average this was
+[00:15:20] also an opportunity to take a short and
+[00:15:21] then stop on the other side of it very
+[00:15:23] similar to the way I would buy a long
+[00:15:26] position on the pullback to the moving
+[00:15:28] average right you can short on a mount
+[00:15:32] up to the moving average
+[00:15:33] and then just ride this momentum down
+[00:15:35] this down here is a bottom bounce
+[00:15:37] opportunity the first target is a move
+[00:15:40] up to the moving average that's a that's
+[00:15:42] going to be a quick trade a little bit
+[00:15:43] of scalp off the low and other traders
+[00:15:45] would instead wait for the first time
+[00:15:48] this actually breaks over this moving
+[00:15:50] average and holds because when that
+[00:15:52] happens you can see it's going to be
+[00:15:53] significant it hasn't broken and held
+[00:15:55] over that level all day long so by the
+[00:15:57] time it does it that's going to signify
+[00:16:00] a real shift in trend so that's sort of
+[00:16:04] the thing with reversals and how moving
+[00:16:06] averages come into play you can either
+[00:16:08] take the rubber band snap or you can
+[00:16:12] take more of a trend reversal where
+[00:16:14] you're really looking at a shift in
+[00:16:15] momentum the tide shifting and you don't
+[00:16:18] get in you know right off the bottom for
+[00:16:20] a scalp you wait for the shift over the
+[00:16:23] moving average and then ride the moving
+[00:16:25] averages it comes back up with a stop
+[00:16:27] just below it this one here's another
+[00:16:32] example where we had a stock that was it
+[00:16:34] was pretty weak now on the 5-minute
+[00:16:37] chart we had this long period of selling
+[00:16:39] but there wasn't to me the clearest
+[00:16:43] entry for a reversal because of the way
+[00:16:46] you know I like when I do a 5-minute
+[00:16:49] bottom bounce to have at least five to
+[00:16:51] seven consecutive red candles but we had
+[00:16:54] that down here but then we kind of went
+[00:16:57] sideways and then washed out again with
+[00:16:59] peaking volume at the low so you can see
+[00:17:02] on the one-minute yes you ended up
+[00:17:05] getting a pretty big bounce right here
+[00:17:07] but who's to say it was going to happen
+[00:17:08] there and not you know here here and
+[00:17:12] here so when you're sort of watching
+[00:17:13] these selling off when it's not
+[00:17:15] consistent you don't I usually don't
+[00:17:17] trust trading on the one-minute chart so
+[00:17:19] I say okay well I'm not going to take
+[00:17:21] that one-minute bounce because we don't
+[00:17:23] have enough consecutive red candles now
+[00:17:25] if we had you know when we have a setup
+[00:17:29] where we've got ten consecutive
+[00:17:31] one-minute candles then I'll jump in on
+[00:17:34] the 1-minute chart that's fine but this
+[00:17:37] is one of those cases where we didn't
+[00:17:39] have that so just to give you a sense of
+[00:17:41] what it looks like when we have all
+[00:17:42] those consecutive candles this right
+[00:17:45] here happens
+[00:17:47] to be the five-minute but let's just say
+[00:17:48] this was the one-minute this is the time
+[00:17:50] where I would go ahead and short I was
+[00:17:52] short on the one-minute because it's so
+[00:17:53] obvious the first candle make a new low
+[00:17:55] is going to be you know a significant
+[00:17:58] point a spot worth you know taking a
+[00:18:01] trade on this is another one here that
+[00:18:04] you can see this one on the side happens
+[00:18:07] to be a one-minute where we have this
+[00:18:08] long sell off first one minute candle to
+[00:18:10] make a new high stop on the low it's a
+[00:18:13] two-point bounce so that's a time I
+[00:18:14] would take the one-minute chart but in
+[00:18:16] this case it's just a kind of grinding
+[00:18:19] lower I wouldn't feel safe taking the
+[00:18:21] one-minute it bounces right up to the 20
+[00:18:22] however I would be interested in the
+[00:18:26] trend shift where I get in for the break
+[00:18:29] of the 20 moving average so here we
+[00:18:31] break above it and now this is kind of
+[00:18:33] the point are we going to hold above it
+[00:18:35] so I would consider right here an entry
+[00:18:39] now that we're kind of consolidating
+[00:18:41] right at that level in entry over 22 72
+[00:18:44] with a stop at the low that's about a 30
+[00:18:46] cent stop looking for the break over the
+[00:18:48] moving average and now you can see here
+[00:18:51] the trend is starting to shift now we've
+[00:18:53] broken for the first time in quite a
+[00:18:55] while we've broken over this moving
+[00:18:57] average so this is significant now that
+[00:19:00] we've broken over it I would move my
+[00:19:01] stop up here to just below the moving
+[00:19:03] average so when my entry is 72 I've now
+[00:19:06] got like a 20 maybe 15 cent stop and now
+[00:19:10] you can see this is kind of riding and
+[00:19:12] now it's holding this moving average and
+[00:19:14] riding up so we can keep adjusting our
+[00:19:16] stop now we've got a profit stop you
+[00:19:18] know moving it up just under the whole
+[00:19:19] dollar
+[00:19:19] and it continues along so now this level
+[00:19:24] that was resistance has become support
+[00:19:27] again though it's important to
+[00:19:29] understand that you can't use the moving
+[00:19:31] averages on every single chart this is a
+[00:19:34] stock that had really high relative
+[00:19:36] volume so it comes back to you have to
+[00:19:38] trade the right stocks if you try to
+[00:19:40] trade you know moving averages with you
+[00:19:44] know the SP Y or something like that
+[00:19:46] you're going to see a lot more of this
+[00:19:48] type of stuff where it's just breaking
+[00:19:49] them up and down this is not really
+[00:19:52] respecting the moving average that much
+[00:19:54] right I mean maybe at times but for the
+[00:19:57] most part it's in between all over the
+[00:19:59] place
+[00:20:00] this is a stock that does not have high
+[00:20:01] relative high relative volume right
+[00:20:04] today the volume was lower than average
+[00:20:06] coming into the holidays that makes
+[00:20:08] sense but the important thing to take
+[00:20:10] away is that the only stocks worth day
+[00:20:12] trading our stocks that have high
+[00:20:14] relative volume and why is that it's
+[00:20:17] because stocks with high relative volume
+[00:20:19] have thousands and thousands tens of
+[00:20:21] thousands maybe even hundreds of
+[00:20:22] thousands of traders watching that stock
+[00:20:25] that means the brakes of moving averages
+[00:20:29] are going to come with more volume
+[00:20:32] they're going to be the logical levels
+[00:20:35] of support and resistance are going to
+[00:20:37] be well respected because you have
+[00:20:39] traders there who respect it on a stock
+[00:20:42] that doesn't have high relative volume
+[00:20:43] some of this might be end up becoming
+[00:20:45] algorithmic trading high-frequency
+[00:20:47] trading and the drops and pops are not
+[00:20:50] even related to an actual trade or
+[00:20:51] watching you know any particular stock
+[00:20:54] it's just kind of the you know the ups
+[00:20:56] and downs of the overall market so
+[00:20:59] that's why I really encourage traders
+[00:21:01] you know to make sure they're using
+[00:21:03] scanners like these where you can go in
+[00:21:05] and you can just immediately filter out
+[00:21:08] everything that doesn't have high volume
+[00:21:10] and that way you know you're focusing on
+[00:21:12] setups that other people are watching if
+[00:21:14] you're thinking about taking a bottom
+[00:21:16] bounce
+[00:21:16] you know why does the bottom bounce work
+[00:21:18] like back on CC it works because
+[00:21:20] thousands of traders are buying at that
+[00:21:23] same spot right that's why it works
+[00:21:26] because thousands of traders recognize
+[00:21:28] okay the trend is shifting it's it's
+[00:21:30] going to bounce all of this volume here
+[00:21:32] is what we look for the peaking volume
+[00:21:34] on the downside and the volume coming
+[00:21:36] back up and it's no different on you
+[00:21:39] know this on the smaller cap stocks the
+[00:21:41] low price stocks these are the same way
+[00:21:43] and I can scroll back this on this one a
+[00:21:45] couple days and you can see that we had
+[00:21:47] a really nice breakout and during that
+[00:21:51] break out the nine moving average was
+[00:21:53] very well respected so safe entries on
+[00:21:56] this ad support here's a support level
+[00:21:58] right here so I look for the
+[00:22:00] consolidation at support and I buy here
+[00:22:02] this is an entry at ten dollars whereas
+[00:22:04] my stop it's right down here it's a 20
+[00:22:06] cent stop 25 cents selling through the
+[00:22:09] high selling on the extension away from
+[00:22:11] the moving average up to a high of 12
+[00:22:14] and then pull back to the moving average
+[00:22:16] alright so now the low is 12 11 25 entry
+[00:22:20] at the first Campbell to make a new high
+[00:22:21] which is this green candle as it breaks
+[00:22:23] over this candle so your entries 1165
+[00:22:26] stop is 11:25 $0.40 stop and now selling
+[00:22:30] through the push now we're through high
+[00:22:32] up day of 12 we go up to a high of 13 so
+[00:22:36] 1165 to 13 you know that's a dollar
+[00:22:39] dollar 35 that's a really nice move
+[00:22:43] versus the 40 cent stop and you can just
+[00:22:46] do that all day long and it's by using
+[00:22:48] the moving average you don't need
+[00:22:49] anything else on your chart you don't
+[00:22:51] need MACD you don't need RSI you don't
+[00:22:53] need to do a Stix you don't need that
+[00:22:54] stuff if you have your moving averages
+[00:22:56] right moving averages and a candlestick
+[00:22:59] patterns that's really all you need but
+[00:23:01] of course you know you also need to be
+[00:23:03] able to find these setups in real time
+[00:23:05] understanding you know the criteria of
+[00:23:08] stocks that have homerun potential and
+[00:23:10] you know that does take practice so I
+[00:23:13] wouldn't discredit the value there but
+[00:23:16] you know just to say you can keep your
+[00:23:19] charts very simple you don't need to
+[00:23:20] overcomplicate it
+[00:23:21] the only other indicator that I use from
+[00:23:24] time to time are Bollinger Bands and I
+[00:23:27] use those for one specific purpose I use
+[00:23:29] those because I know that when the price
+[00:23:32] is trading outside the Bollinger Bands
+[00:23:34] the stock is experiencing extremes
+[00:23:37] alright when we put these Bollinger
+[00:23:39] Bands on you're going to see that almost
+[00:23:41] all of the price action is inside the
+[00:23:43] Bollinger Bands so if you have a candle
+[00:23:45] that's way up here outside the Bollinger
+[00:23:48] Bands that's an extreme right and that's
+[00:23:51] a good place to take a reversal trade to
+[00:23:54] take a short with a stop just above the
+[00:23:56] high because there's a really really
+[00:23:57] good chance that that stock is going to
+[00:23:59] come back down and is going to come
+[00:24:01] inside the Bollinger Bands right it can
+[00:24:03] only trade outside those Bollinger Bands
+[00:24:05] for so long you know before it's finally
+[00:24:07] just it's to extend it so as an example
+[00:24:12] of that let's see I think I've got a
+[00:24:14] good one here yeah here's a good one so
+[00:24:16] this is a stock squeezing way up outside
+[00:24:19] the Bollinger Bands that candle outside
+[00:24:20] the Bollinger Bands really uncommon to
+[00:24:22] see that and so when I see it I take a
+[00:24:25] short covering on the move
+[00:24:27] back down to the moving average and then
+[00:24:29] of course once we get to the moving
+[00:24:31] average some traders may take that
+[00:24:33] momentum shift trade for the break of
+[00:24:35] the moving average but by that point I
+[00:24:38] would already be up a lot from the short
+[00:24:40] when it was so extended and I always
+[00:24:42] find these to be easier to identify it's
+[00:24:45] easier to find stocks that are really
+[00:24:47] extended because I can use my scanners
+[00:24:49] right these reversal scanners to find a
+[00:24:51] stock that is consolidating you know at
+[00:24:55] the 20 moving average and maybe getting
+[00:24:56] ready to break over that level that's
+[00:24:59] not as easy to do you'd really have to
+[00:25:01] be watching that stock all day long the
+[00:25:03] good news is that if you focus on a
+[00:25:05] strategy of trading you know the top 4
+[00:25:09] highest volume stocks each day highest
+[00:25:12] relative volume then you can watch those
+[00:25:13] four stocks all day and when you get
+[00:25:16] these types of shifts in momentum
+[00:25:17] there's a good chance that you'll you'll
+[00:25:20] catch it and because it's a stock that's
+[00:25:22] in play thousands of other traders will
+[00:25:25] be watching as well alright so I hope
+[00:25:28] this has been a helpful helpful
+[00:25:31] terminology session if you guys do have
+[00:25:33] any questions you can always email me or
+[00:25:35] put comments down below all right thanks
+[00:25:38] guys let's be honest if you made it this
+[00:25:43] far you must have really enjoyed that
+[00:25:45] video so what's stopping you subscribe
+[00:25:48] right here and get email alerts anytime
+[00:25:51] I upload new content until then happy
+[00:25:54] surfing

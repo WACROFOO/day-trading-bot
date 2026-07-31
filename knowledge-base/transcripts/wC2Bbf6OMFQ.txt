@@ -1,0 +1,1393 @@
+# The RIGHT WAY to use Volume on Candlestick Charts (with ZERO experience)
+# https://www.youtube.com/watch?v=wC2Bbf6OMFQ
+# duration_sec: 3383
+
+[00:00:00] in today's episode I'm going to teach
+[00:00:02] you how to use the volume profile
+[00:00:04] indicator volume profile is a technical
+[00:00:06] indicator you can plot on your charts
+[00:00:08] that analyzes the volume that occurs and
+[00:00:11] it shows the different prices where the
+[00:00:14] most volume is taking place and it
+[00:00:16] communicates a central line that is the
+[00:00:19] point of control when a stock or
+[00:00:22] cryptocurrency Futures Contract whatever
+[00:00:24] is trading above the point of control
+[00:00:27] the Bulls are in charge when it's
+[00:00:29] trading below the bearss are in charge
+[00:00:31] and so it's especially important to
+[00:00:33] watch this POC pointed control line for
+[00:00:36] support and resistance and for
+[00:00:39] crossovers we're going to jump into the
+[00:00:41] charts here and I've got a full screen
+[00:00:43] slide deck that we're going to dive into
+[00:00:45] as well as promised this month each day
+[00:00:48] that I am double my daily goal which is
+[00:00:50] $5,000 or higher I'm teaching a full
+[00:00:53] length class on the strategy or the
+[00:00:55] indicator that I found most helpful on
+[00:00:57] that particular day so you can see right
+[00:00:59] here my p&l right now is
+[00:01:04] $1,661 and I will hopefully be the first
+[00:01:06] to let you know that hey my results are
+[00:01:08] not typical trading is risky but if
+[00:01:10] you're tuning in here for the first time
+[00:01:12] my name is Ross Cameron I'm a full-time
+[00:01:14] Trader I've been doing this for more
+[00:01:15] than a decade and what I want you to
+[00:01:17] know is that my profits are audited and
+[00:01:19] they are real and this is in contrast to
+[00:01:21] a lot of Traders on social media who
+[00:01:24] talk a big game but don't have the track
+[00:01:27] record to back it up so everything that
+[00:01:29] I I share with you in these episodes
+[00:01:32] comes from my own experiences trading
+[00:01:34] the markets all right let's go ahead and
+[00:01:36] dive into the slide deck here and we're
+[00:01:38] going to get this full screen and we're
+[00:01:40] going to start talking about how to use
+[00:01:42] volume profile so the topics of today's
+[00:01:45] class I'm going to Define volume and
+[00:01:48] volume profiles to make sure we're all
+[00:01:49] on the same page as we get started and
+[00:01:51] I'm going to show you how I use volume
+[00:01:53] profile in my trading then I'm going to
+[00:01:55] evaluate the pros and cons of using this
+[00:01:57] indicator and I'm going to rec cap each
+[00:02:00] of my trades from today now you will
+[00:02:02] note that my Biggest Loser I'm down
+[00:02:06] $3,719 and you know what those were my
+[00:02:09] first trades of the day on that stock so
+[00:02:11] today's a day where I went into the red
+[00:02:14] nearly to my daily Max loss which is
+[00:02:17] $5,000 my daily goal is five grand my
+[00:02:19] Max loss is five grand I went down
+[00:02:21] nearly five grand this morning before
+[00:02:23] recouping those losses and finishing in
+[00:02:25] the green thankfully and volume profile
+[00:02:28] helped helped helped lead the way to me
+[00:02:31] finding some profit in the market today
+[00:02:33] I got off to a rough start but I
+[00:02:34] finished strong so we will recap all of
+[00:02:36] these trades H at the end of this
+[00:02:38] episode all right so we're going to go
+[00:02:39] full screen here and by the way those of
+[00:02:41] you guys tuning in uh for the first time
+[00:02:43] I hope you guys enjoy this episode and
+[00:02:45] if you do I hope you hit the thumbs up
+[00:02:46] and you subscribe to the channel so
+[00:02:49] we're going to start with the definition
+[00:02:51] of volume most of you probably know what
+[00:02:53] volume is volume is the total number of
+[00:02:55] shares traded during a period of time so
+[00:02:59] volume is is traditionally displayed
+[00:03:01] along the time axis of a chart below
+[00:03:04] each Candlestick and it communicates
+[00:03:07] Trend and sentiment so right down here
+[00:03:10] is where the volume is displayed on this
+[00:03:12] chart so when I say the time access I
+[00:03:15] mean right along the very bottom we've
+[00:03:18] got time at the bottom right here and
+[00:03:21] then we've got um price on this axis
+[00:03:24] right here so we've got time and price
+[00:03:26] so as time goes on and price goes up of
+[00:03:28] course the chart looks like this which
+[00:03:30] is what we would like to see so this is
+[00:03:33] your standard uh volume pain we usually
+[00:03:36] call it a pain kind of like a window
+[00:03:38] pane you can sort of move this up and
+[00:03:40] down and we've got volume plotted on the
+[00:03:42] bottom now volume is incredibly
+[00:03:44] important in the market it is the number
+[00:03:47] of shares they're trading and it helps
+[00:03:49] communicate what sentiment is like in
+[00:03:52] this stock if it's really bullish we'll
+[00:03:55] see a lot of volume and of course we'll
+[00:03:56] see the price moving up quickly if it's
+[00:03:58] really bearish we'll see a lot of volume
+[00:04:00] and the price is moving down quickly so
+[00:04:02] this is sort of the relationship that we
+[00:04:04] look at as we're watching um these
+[00:04:06] stocks moving up and down and of course
+[00:04:08] the way I'm finding these stocks is
+[00:04:10] right here on my scanners so if we jump
+[00:04:12] back into the slide deck this is volume
+[00:04:15] which I think probably all of you are
+[00:04:16] familiar with although some of you may
+[00:04:18] plot volume slightly differently some
+[00:04:22] people use the same color regardless of
+[00:04:24] whether the candle is green or red I
+[00:04:27] want the color of the volume bar to
+[00:04:29] match match the color of the candle that
+[00:04:32] is very important for me because what it
+[00:04:34] helps me understand is whether we have
+[00:04:36] high volume on the buying candles or on
+[00:04:39] the selling Candles now what volume
+[00:04:43] profile does is it reports the number of
+[00:04:46] shares that traded at different prices
+[00:04:50] not at different times but at different
+[00:04:52] prices so it displays the volume across
+[00:04:55] the price axis of a chart and it's right
+[00:04:58] here so so this is actually displaying
+[00:05:01] all the volume that takes place and it's
+[00:05:04] aligning it to the different prices
+[00:05:07] right here and what we end up getting is
+[00:05:10] a point of control which is this uh Red
+[00:05:13] Line right here I'm going to talk about
+[00:05:15] that more in just one second but first I
+[00:05:16] want to make sure we all are using the
+[00:05:18] same volume profile settings so for most
+[00:05:22] um for most platforms and this not every
+[00:05:24] platform is going to have volume profile
+[00:05:26] but for most platforms you can go to
+[00:05:27] your indicators and you could type in
+[00:05:29] vol volume and then you'll look at all
+[00:05:31] the different volume um indicators that
+[00:05:34] exist inside your platform I want to use
+[00:05:37] volume profile and I'm going to choose a
+[00:05:39] visible range you could choose a fixed
+[00:05:41] range but then you have have to manually
+[00:05:43] select the range and I'm going to choose
+[00:05:45] visible range right here so you click on
+[00:05:48] volume profile you select the visible
+[00:05:50] range as I did right here and then you
+[00:05:54] will see the VP VR settings which are
+[00:05:58] the volume profile settings settings and
+[00:06:00] this is how I have it set up these are
+[00:06:02] the standard settings value area volume
+[00:06:05] is 70 row size 24 volume up versus down
+[00:06:10] this this is these are all the standard
+[00:06:12] settings that come when you first load
+[00:06:14] it up now I have my point of control by
+[00:06:17] default in red and that's the same as uh
+[00:06:20] what it is standard of course you could
+[00:06:21] change this to your liking if you would
+[00:06:24] prefer it look different um but it's I
+[00:06:27] think it's usually in this case
+[00:06:30] helpful to use more or less the same
+[00:06:32] settings that other Traders are using
+[00:06:34] especially that way if you're in a
+[00:06:36] community where you're looking at other
+[00:06:38] people's charts you can understand
+[00:06:40] exactly what someone's looking at it's
+[00:06:42] not like wait what in the heck is that
+[00:06:44] you know oh this is volume profile and
+[00:06:46] that's what that red line is about
+[00:06:48] because I don't use the red line for
+[00:06:49] anything other than the point of
+[00:06:52] control okay so now that you've got your
+[00:06:55] volume profile set up on your charts and
+[00:06:58] by the way in terms of time frames I do
+[00:07:01] not use it on my daily chart this is an
+[00:07:04] intraday indicator and I use it
+[00:07:07] primarily on the 5 minute chart but the
+[00:07:11] interesting thing with volume profile is
+[00:07:13] just like volume weight at average price
+[00:07:16] your volume profile is going to be the
+[00:07:18] same no matter what time frame you're
+[00:07:20] trading on because it's just showing you
+[00:07:22] the volume that's occurred today at the
+[00:07:24] different prices so the only way the
+[00:07:26] volume profile will change is if you're
+[00:07:29] looking at a very narrow view of the
+[00:07:31] chart in which case it's only going to
+[00:07:33] show you the profile for what's visible
+[00:07:36] so because I keep my five minute chart
+[00:07:38] zoomed out I have it on my f minute time
+[00:07:41] frame because I have my one minute chart
+[00:07:43] zoomed in if I put it on the one minute
+[00:07:46] time frame it would actually be
+[00:07:48] inaccurate so I'll show you an example
+[00:07:50] here of what this would look like so
+[00:07:53] oops uh well that's fine uh but I wanted
+[00:07:55] to grab um the volume profile so let me
+[00:07:59] just grab volume profile here let's see
+[00:08:01] copy and paste there we go so if I zoom
+[00:08:04] this in really tight here the volume
+[00:08:08] profile is going to start changing based
+[00:08:11] on how how zoomed in I am so let's see
+[00:08:14] if I zoom further out it starts moving
+[00:08:16] around so that's just something to be
+[00:08:18] aware of uh so for that reason I don't
+[00:08:21] use volume profile on my 1 minute chart
+[00:08:24] and that's just a choice of display and
+[00:08:26] it's because on my one minute I'm pretty
+[00:08:28] much always zooming zoomed in so my 1
+[00:08:31] minute is zoomed in like this so I can
+[00:08:32] see the price action very clearly and
+[00:08:34] then my 5 minute chart is zoomed out all
+[00:08:37] right so I choose to use it on the five
+[00:08:39] minute but you can do as you'd like all
+[00:08:41] right so now that we've got this on
+[00:08:42] let's talk about volume weighted average
+[00:08:44] price versus volume profile so many of
+[00:08:48] you know that
+[00:08:50] for probably a decade at least I've said
+[00:08:54] volume weighted average price is one of
+[00:08:56] my number one indicators I love having
+[00:08:59] volume weight a average price on my
+[00:09:01] charts because it clearly tells us the
+[00:09:04] average price of a stock with volume
+[00:09:08] factored in for the day so it is like
+[00:09:11] the equilibrium point of a stock and
+[00:09:14] when the the price is trading above it
+[00:09:16] we're bullish and when we're trading
+[00:09:18] below it we're naturally going to be
+[00:09:20] bearish so vwap is an area that is
+[00:09:23] fiercely defended when a stock dips down
+[00:09:26] so when we have a stock let's just say
+[00:09:28] that is really bullish and it makes this
+[00:09:31] nice move up and I'll just these would
+[00:09:33] be red candles but I'll just we'll do
+[00:09:35] just do this for now it's fine um so you
+[00:09:37] make you get this really nice clean move
+[00:09:39] up you get these pullbacks your volume
+[00:09:41] weighted average price is going to climb
+[00:09:43] up with you right and then what ends up
+[00:09:45] happening is if the price dips down and
+[00:09:47] breaks below vwap that's almost always a
+[00:09:50] high volume breakdown as you're dropping
+[00:09:53] and then if the price and of course if
+[00:09:55] you break below vwap your vwap is also
+[00:09:57] going to start to decline like this but
+[00:10:00] then if the price comes back up and
+[00:10:02] breaks back above vwap that breakout is
+[00:10:05] really important so we always pay close
+[00:10:07] attention to volume weight average price
+[00:10:09] as an area of support when the price
+[00:10:11] comes down to it if it can't hold we
+[00:10:13] usually see a big flush and then when it
+[00:10:16] comes back up a lot of times it's it's
+[00:10:18] resistance coming back up but if we can
+[00:10:20] break through it we often see high
+[00:10:22] volume on the breakout and a retest of
+[00:10:25] high of day so volume weighted average
+[00:10:28] price is important there's no question
+[00:10:29] about it and this episode is not going
+[00:10:32] to uh dissuade you of that importance
+[00:10:34] I'm going to continue use volume
+[00:10:37] weighted average price on my charts for
+[00:10:40] probably forever for the foreseeable
+[00:10:42] future for sure but volume profile is
+[00:10:45] pure volume which is great it displays
+[00:10:48] the prices where the volume is occurring
+[00:10:51] and of course a it averages in the price
+[00:10:53] and the volume volume weighted average
+[00:10:56] price it's essentially a moving average
+[00:10:58] so just like 9 EMA or your 20 EMA or 200
+[00:11:01] EMA it's always lagging a bit behind
+[00:11:04] price which is fine and it gives you
+[00:11:06] that average price at equilibrium over
+[00:11:08] the course of the day but volume profile
+[00:11:12] in contrast is going to adjust much more
+[00:11:15] rapidly when we have high levels of
+[00:11:17] volume so what often happens is a stock
+[00:11:20] will very quickly make a move up
+[00:11:23] sometimes on light volume but then it
+[00:11:25] comes into an area where we have a high
+[00:11:27] degree of volume and we have a lot of
+[00:11:29] consolidation and that's what ended up
+[00:11:31] occurring kind of right in this area
+[00:11:33] right here and this red line shows us
+[00:11:36] that this was the price that had the
+[00:11:37] peak amount of volume the price to the
+[00:11:41] penny is looks like about
+[00:11:44] $2.75 and that was well above the volume
+[00:11:47] weighted uh average price which is in
+[00:11:49] Orange down here so in this case
+[00:11:53] something that's interesting is that
+[00:11:55] there was a moment where the price was
+[00:11:56] below the point of control but above
+[00:12:00] vwap and what that sends are um contrary
+[00:12:05] indicators because on the one hand
+[00:12:07] you're above vwap which is bullish but
+[00:12:08] on the other hand you're below the point
+[00:12:10] of control which is bearish so it's a
+[00:12:13] spot to exercise caution in this case
+[00:12:16] the price bounced up it was not able to
+[00:12:18] hold up at these levels as it turned out
+[00:12:20] and the price came back down and then we
+[00:12:22] flushed back below the point of control
+[00:12:25] when we were back below the point of
+[00:12:26] control and we are wedged between point
+[00:12:28] of control and vwap here we were not
+[00:12:31] able to get back up and we ended up
+[00:12:33] rolling over and it's not super
+[00:12:36] surprising because usually when the
+[00:12:37] price is pinned between point of control
+[00:12:40] and vwap you're going to have basically
+[00:12:42] this upside resistance that was at this
+[00:12:45] critical pivot sometimes I'll refer to a
+[00:12:48] price as uh being a pivot which means if
+[00:12:53] we're below that level it's going to be
+[00:12:55] hard probably to break but if we do
+[00:12:57] break we'll see a nice move and if we're
+[00:13:00] above it then we want to see it has to
+[00:13:02] hold because if we break down well it's
+[00:13:05] like game over so a pivot is sometimes
+[00:13:07] also called a um a trigger so a trigger
+[00:13:11] again it's just a very specific price
+[00:13:14] where we expect something to happen in
+[00:13:16] terms of high volume and price movement
+[00:13:19] if we break that
+[00:13:20] level so the point of control also known
+[00:13:24] as POC is the price where the buyers and
+[00:13:27] sellers have exchanged the most
+[00:13:30] shares why is this helpful so what does
+[00:13:34] it mean if you see a price where buyers
+[00:13:36] and sellers are having the biggest
+[00:13:38] battle the highest volume and then we
+[00:13:42] see that the price is holding just below
+[00:13:45] that point of control price that to me
+[00:13:49] tells me that we have resistance at that
+[00:13:52] level and we're if we're below it the
+[00:13:55] Bears are winning the battle if we're
+[00:13:58] holding above it the Bulls are winning
+[00:14:00] the battle right so this tells me
+[00:14:03] sentiment and if I understand right now
+[00:14:05] that the Bulls are winning the battle
+[00:14:08] and the price is holding Above This
+[00:14:10] critical level then I'm going to have a
+[00:14:12] stronger long bias on the trade and I'm
+[00:14:15] going to have higher expectations that
+[00:14:17] this price can go higher if the price is
+[00:14:20] holding below this critical point of
+[00:14:22] control I'm going to be more concerned
+[00:14:24] that we will not see the follow through
+[00:14:26] that we want and we're going to see in
+[00:14:28] fact a reject and a flush back down what
+[00:14:31] does it mean if that battle line is
+[00:14:33] crossed right what if we have that very
+[00:14:36] clear point of control line the price
+[00:14:38] has been below it and then suddenly
+[00:14:39] snaps above it that tells us we're
+[00:14:42] having a shift in sentiment just like a
+[00:14:45] break of vwap so many of you may not
+[00:14:48] currently be using volume profile and
+[00:14:50] you may see these areas on a chart where
+[00:14:52] suddenly you get a spike of volume and
+[00:14:55] you're like man where did that come from
+[00:14:56] I I don't understand or you're seeing an
+[00:14:58] area that's clearly acting as support or
+[00:15:01] perhaps resistance and you're just not
+[00:15:04] understanding why that level is such a
+[00:15:06] battle and once you turn on volume
+[00:15:08] profile you're probably going to notice
+[00:15:10] that there are a number of levels that
+[00:15:12] suddenly become obvious because now this
+[00:15:15] indicator showing you oh that battle
+[00:15:17] there was because that was the point of
+[00:15:19] control that makes
+[00:15:21] sense okay so let's see um so vwap
+[00:15:25] versus point of control so the vwap and
+[00:15:28] I'm and I'm talking about the vwap price
+[00:15:30] like the current price of volume
+[00:15:32] weighted average price and I'll just
+[00:15:33] show you um on this uh chart right here
+[00:15:36] so so right now just for example the
+[00:15:39] point of control on this is below volume
+[00:15:41] weight average price it's at um let's
+[00:15:44] see the the current point of control
+[00:15:45] line I don't have it on my chart but
+[00:15:47] it's right around this level of 213 and
+[00:15:50] then the volume weight average price is
+[00:15:51] right here around sorry 513 and this
+[00:15:54] one's around
+[00:15:55] 537 so right now the point of control is
+[00:15:58] a little bit low and that's because of
+[00:15:59] the high amount of volume that occurred
+[00:16:02] well right in this area it peaked right
+[00:16:04] in that area all right now we did get
+[00:16:05] some decent volume up in this area but
+[00:16:07] we're back below that level so as I look
+[00:16:11] at this right here you've got your
+[00:16:13] volume weight average price you got your
+[00:16:14] point of control so how how do I use
+[00:16:16] these two and how do I compare
+[00:16:18] them so the volume weight average price
+[00:16:21] is a well-respected technical indicator
+[00:16:23] we know when the price is above it the
+[00:16:24] Stock's bullish when the when the price
+[00:16:25] is below it the stock is bearish and
+[00:16:28] trading above and below point of control
+[00:16:30] we have a similar bullish bearish
+[00:16:32] sentiment and relationship so the point
+[00:16:35] of control is an additional price level
+[00:16:38] that helps you visualize potential
+[00:16:41] changes in Trend or areas of support So
+[00:16:46] now let's look at this here this is
+[00:16:47] going to be the stock that I suppose is
+[00:16:49] our case study today um lipo this stock
+[00:16:53] ended up going up
+[00:16:57] 27% it might have even just a smidge
+[00:16:59] higher than that it was really an
+[00:17:01] incredible squeeze and you can see that
+[00:17:04] this is a stock that I made $
+[00:17:08] 7,569 on so this will be and was our
+[00:17:11] biggest percentage Gainer of the day now
+[00:17:13] before I I go into this chart I'll just
+[00:17:16] step back just to give you guys context
+[00:17:18] of how I found this stock so the way I'm
+[00:17:21] trading I find stocks using this
+[00:17:23] software that you can see right on my
+[00:17:25] screen and the top gappers scan right
+[00:17:28] here is showing us our number one
+[00:17:30] leading percentage Gainer pre-market and
+[00:17:33] that was Lio of 261 per premarket with
+[00:17:38] 90 million shares of volume it now has
+[00:17:41] 192 million which is incredible volume a
+[00:17:44] quarter of nearly a quarter billion
+[00:17:46] shares and the float is 4.6 million
+[00:17:50] shares the relative volume is
+[00:17:54] 28,800 so to help you understand
+[00:17:57] everything that's going on here what we
+[00:17:59] have is a stock that is
+[00:18:03] up
+[00:18:05] 261 float is 4.6 million shares it's got
+[00:18:10] 28,000 times RV which is relative volume
+[00:18:13] that means the current volume today is
+[00:18:15] 28,000 times higher than average which
+[00:18:19] is
+[00:18:20] outrageous um we have let's see so this
+[00:18:22] was this was the
+[00:18:24] float this was the percentage change
+[00:18:28] we've got the price which is which is
+[00:18:30] currently or it was
+[00:18:33] a146 right here this was the price and
+[00:18:37] we have guess what a news catalyst so
+[00:18:40] we've got a news headline on this stock
+[00:18:42] so this meets my criteria for being
+[00:18:44] worth trading because for me I'm looking
+[00:18:48] for stocks that this is what this stock
+[00:18:51] had and this is my minimum up
+[00:18:54] 10% u a float of under 20 million shares
+[00:18:58] so this one met that criteria relative
+[00:19:01] volume of five just five is enough for
+[00:19:03] me price generally I prefer between 2
+[00:19:07] and 20 and this one was a little bit on
+[00:19:09] the cheaper side but I was still willing
+[00:19:10] to trade it and positive for news so
+[00:19:14] this not only met my criteria it
+[00:19:16] exceeded my criteria in a number of
+[00:19:18] different respects okay so I find the
+[00:19:22] stock on my scanner this morning these
+[00:19:24] scanners are searching the market in
+[00:19:25] real time for stocks that meet my
+[00:19:27] criteria so i' I've trained it to look
+[00:19:29] for stocks that I like so when I see
+[00:19:31] lipo and I'll click on this so it comes
+[00:19:34] back up on our chart so I got to just
+[00:19:36] link my chart up so we're going to link
+[00:19:38] that up there we're going to click on
+[00:19:40] lipo so when I pull up lipo I see that
+[00:19:43] it's a pharmaceutical company it's a
+[00:19:45] NASDAQ listed stock and they have um
+[00:19:48] initiates phase 2A trial for um this um
+[00:19:52] this medication all right so that's our
+[00:19:54] catalyst so now we understand why the
+[00:19:57] stock is up this much today now you
+[00:19:58] don't have to be a pharmacist to
+[00:20:01] understand that the stock is a
+[00:20:02] pharmaceutical company it's got news and
+[00:20:05] the price is up I interpret that to be
+[00:20:07] positive I'm not an expert on the field
+[00:20:11] but I'm an expert on trading and so I
+[00:20:14] understand sentiment and how the the the
+[00:20:16] markets move especially in response to
+[00:20:19] different types of headlines so when the
+[00:20:21] stock first starts popping up I'm
+[00:20:24] watching it and I'm looking for my entry
+[00:20:27] now something that you'll notice with
+[00:20:28] both your point of control line and I'll
+[00:20:31] make this full screen and your volume
+[00:20:33] weight average price is that these
+[00:20:35] change as the price is moving so as the
+[00:20:38] price moves up your point of control is
+[00:20:41] moving up your volume profile is
+[00:20:43] changing and of course the volume weight
+[00:20:45] average price is moving up so when this
+[00:20:47] first was on the scanners it actually
+[00:20:49] started popping up at like 5:00 a.m. the
+[00:20:51] news came out early it pops up it pulls
+[00:20:54] back it comes up it pulls back and when
+[00:20:56] I sat down at about 700 a.m. it was our
+[00:20:58] leading percentage Gainer at about 70 at
+[00:21:01] that time I thought well I like it but
+[00:21:03] it's a little cheap I don't know let's
+[00:21:04] see what it can do and the other thing
+[00:21:06] that I said is if we look at our daily
+[00:21:08] chart on this the 200 EMA which is a
+[00:21:11] daily level of resistance is at 90 cents
+[00:21:14] so I kind of thought when we were up at
+[00:21:16] 75 cents and then 80 cents we were going
+[00:21:18] to have resistance here which we did but
+[00:21:20] we were able to break through it which
+[00:21:21] was good now now we've come back down
+[00:21:23] but nonetheless um at pre-market I was a
+[00:21:25] little bit concerned about the risk that
+[00:21:27] this would not ped up super well okay so
+[00:21:31] if we uh scan forward here we're going
+[00:21:34] to watch as the price starts to break
+[00:21:35] away and suddenly because of the big
+[00:21:37] surge of volume that we got right here
+[00:21:40] your point of control jumps up right so
+[00:21:42] now your point of control comes up to
+[00:21:44] about this area we had all this volume
+[00:21:46] in this area so that's the new point of
+[00:21:49] control line and the price moves higher
+[00:21:51] so we dip down we come back up to about
+[00:21:55] 85 cents here and right here we move
+[00:21:58] even higher this is one of the first
+[00:22:01] really good examples of the volume
+[00:22:04] profile showing an area of support right
+[00:22:08] here right look at that so this was an
+[00:22:11] area that was a battle those of you guys
+[00:22:13] who were watching this this morning in
+[00:22:14] this area it was really choppy and I
+[00:22:17] didn't trade it here I was like I don't
+[00:22:18] know guys it's it feels like there's a
+[00:22:21] major tug-of-war happening and there was
+[00:22:23] we were going above and below the point
+[00:22:24] of control line there was so much volume
+[00:22:27] here buyers were buying sellers were
+[00:22:28] shorting it was tug of-war and then we
+[00:22:30] pulled away we started to squeeze up but
+[00:22:33] now we were only like 4 cents away from
+[00:22:35] our 200 moving average and then it drops
+[00:22:38] back down and it comes down almost to
+[00:22:39] that point of control line where it
+[00:22:41] bounces as it comes back up right here I
+[00:22:45] thought in hindsight I should have just
+[00:22:46] gone ahead and bought that dip uh but
+[00:22:48] what I ended up doing was I connected a
+[00:22:51] trend line right here so I connected a
+[00:22:54] trend line right about there to connect
+[00:22:56] those two lines because I was like
+[00:22:57] clearly those are sign ific and I also
+[00:22:59] drew a trend line right about here so I
+[00:23:03] was connecting these lines right in this
+[00:23:05] area so now as the price came back up
+[00:23:08] here I was like well we're going to be
+[00:23:10] running into this resistance line and
+[00:23:12] we're right at the 200 EMA on The Daily
+[00:23:14] can we break this level and when we
+[00:23:17] broke that level I got in with my first
+[00:23:20] entry for the break of $1 so it was
+[00:23:22] right here where I took my first entry
+[00:23:25] that was where I bought the stock we
+[00:23:27] break a do
+[00:23:29] and we squeeze up to
+[00:23:30] A110 now at this point we're bullish
+[00:23:33] we're well above the point of control
+[00:23:35] we're well above the volume weight
+[00:23:37] average price there's no question that
+[00:23:39] the Bulls are in control right now the
+[00:23:41] the only regret that I have really is
+[00:23:43] that I didn't buy the dip back here off
+[00:23:45] of that previous point of control line
+[00:23:48] but you can see now the point of control
+[00:23:49] line is moving higher so we push a
+[00:23:51] little bit higher we push higher and
+[00:23:53] then we come back down we dip down a
+[00:23:54] little bit and going into the open we
+[00:23:57] squeeze all the way up here here to
+[00:23:58] about
+[00:23:59] $140 and the point of control continues
+[00:24:02] to to move uh higher as the price goes
+[00:24:04] up so now the point of control gets
+[00:24:07] really high right here at about 38 and
+[00:24:10] this is very interesting because right
+[00:24:13] here look at the volume weight average
+[00:24:15] price it's way down to like a dollar a
+[00:24:18] share so I'm like yeah we have supported
+[00:24:20] a dollar but the current trading price
+[00:24:21] is like a138 $140 so support is 40 cents
+[00:24:25] away I'm not going to hold it all the
+[00:24:26] way down to there and in this area here
+[00:24:29] I was looking for that trade on the
+[00:24:31] break through a150 and as we held this
+[00:24:34] support level I was like I think we're
+[00:24:36] in good shape I think we're going to see
+[00:24:38] that break and then we broke that point
+[00:24:40] of control level and at that point I was
+[00:24:42] like all right we're below the point of
+[00:24:44] control the Bears are starting to take
+[00:24:46] control of this stock so now we're below
+[00:24:49] the point of control line and here we
+[00:24:52] rally back up to it and we're struggling
+[00:24:54] at it do you see this struggle now we've
+[00:24:57] got a battle right here and
+[00:24:59] unfortunately although it did get back
+[00:25:01] above it it wasn't able to hold this
+[00:25:04] level it kept trying and then failing
+[00:25:06] trying testing holding and then
+[00:25:09] rejecting and so what ended up happening
+[00:25:11] was my best trades on it were right in
+[00:25:14] this area here and then once we start
+[00:25:17] experiencing this battle above and below
+[00:25:19] the point of control line we just became
+[00:25:22] too choppy now what I could also do here
+[00:25:25] on this is add my macd so those of you
+[00:25:29] guys who have um watched my classes on
+[00:25:31] how I use macd will notice that right up
+[00:25:34] here we had the macd that was open and
+[00:25:37] then we sort of had this crossover we're
+[00:25:40] sort of in this choppy area we go
+[00:25:42] positive and then we go back negative
+[00:25:44] right here so that ended up being the
+[00:25:46] macd reversal macd comes down it tries
+[00:25:50] to swing back positive but it fails it
+[00:25:52] tries but it fails and so the macd
+[00:25:56] basically tells us that we had a window
+[00:25:58] on this trade from about about 90 cents
+[00:26:01] here about
+[00:26:02] 8590 up to about
+[00:26:04] a120 then it pulls back tries again but
+[00:26:08] fails right here pulls back and then it
+[00:26:11] goes but it really to be honest not the
+[00:26:14] cleanest chart your macd is giving you
+[00:26:17] kind of the the indicator to weit your
+[00:26:20] volume profile is showing you we've got
+[00:26:22] this major tug-of-war happening around
+[00:26:24] $1
+[00:26:24] 38140 and it's not able to hold over
+[00:26:27] that level so the way I traded this was
+[00:26:29] I traded aggressively on the front side
+[00:26:32] of the move and then I stopped trading
+[00:26:34] it and I was done and I did not trade it
+[00:26:36] past this point right here we rejected
+[00:26:38] point of control we weren't able to hold
+[00:26:40] up and it just sold off for the rest of
+[00:26:42] the day now this is very interesting
+[00:26:44] here again see how it comes right back
+[00:26:46] up to that level to the penny and
+[00:26:47] rejects that means you're drawing when
+[00:26:50] you see something like that that tells
+[00:26:51] you you've drawn your ascending support
+[00:26:53] and resistance levels the right way now
+[00:26:56] those of you guys um who want to learn
+[00:26:58] learn more about technical analysis I'm
+[00:27:00] actually going to put a link in the top
+[00:27:01] of the comments it'll be pinned and in
+[00:27:03] the top of the description for my
+[00:27:04] ultimate technical analysis kit it's a
+[00:27:07] um it's a it's basically a comprehensive
+[00:27:10] a collection of PDFs that you can
+[00:27:12] download you can print them out you can
+[00:27:13] put them around your trading station and
+[00:27:15] you can use these to help you better
+[00:27:17] understand how I'm interpreting price
+[00:27:20] action and I'm doing this using
+[00:27:21] technical analysis if you haven't
+[00:27:23] already checked out um that download
+[00:27:25] make sure you download it print it out
+[00:27:27] and you can have it on your desk cuz
+[00:27:28] learning how to draw these support and
+[00:27:30] resistance lines the right way really is
+[00:27:33] critical cuz there's Traders no doubt
+[00:27:34] who bought right into this level and
+[00:27:37] then what does it do it rejects all
+[00:27:39] right so make sure you check out that
+[00:27:40] download that'll be a um a free gift for
+[00:27:42] you guys today okay so now we're going
+[00:27:45] to jump back into the slide deck here so
+[00:27:48] my first trade here on
+[00:27:51] lipo was based on breaking news so we
+[00:27:54] had a news headline right I was using
+[00:27:57] volume profile to help me understand uh
+[00:28:00] essentially in this case when to stop
+[00:28:02] trading it when I was first trading it
+[00:28:04] we were well above the point of control
+[00:28:07] but this did help me understand when to
+[00:28:08] stop trading it when we had this uh area
+[00:28:11] of challenge up here uh and then we sold
+[00:28:14] off at the open and I was glad I took my
+[00:28:15] profit now the next stock I want to look
+[00:28:17] at is y
+[00:28:20] IBO yibo I'm um I'm up $1,100 on so this
+[00:28:25] is not a huge winner for me today uh but
+[00:28:28] I want to cover the volume profile on
+[00:28:30] this one as well um I mean we will for
+[00:28:32] all of them but this is just the next
+[00:28:33] one that we'll talk about okay so here
+[00:28:37] this stock popped up kind of early at
+[00:28:39] about 4:15 a.m. it dips back down it
+[00:28:42] rallies back up it pulls back and then
+[00:28:46] kind of this 5:15 a.m. sort of
+[00:28:48] struggling in this area notice our point
+[00:28:50] of control line right so we're basically
+[00:28:53] again straddling it we're below it below
+[00:28:56] it below it above it below it below it
+[00:28:58] so this is an area in other words of
+[00:29:01] consolidation now granted we are above
+[00:29:03] the volume weighted average price the
+[00:29:05] whole time which is bullish but we're
+[00:29:08] not firmly holding above the point of
+[00:29:11] control we're generating a lot of volume
+[00:29:13] in this consolidation range and we're
+[00:29:15] kind of struggling to break out and then
+[00:29:17] what ends up happening is we start to
+[00:29:19] pull away we start to base out and hold
+[00:29:23] $5 which is psychological support at the
+[00:29:27] half dooll hold
+[00:29:28] so we hold five and we pull away up to
+[00:29:31] 525 550 up to 570 and then we start to
+[00:29:34] pull back so now let's jump forward to
+[00:29:36] the next slide here what ends up
+[00:29:38] happening is we come back up here to 550
+[00:29:41] we pull up right here the a point of
+[00:29:44] control line moves higher we have this
+[00:29:47] pop up this pullback and then right off
+[00:29:49] of this level we squeeze up to about 650
+[00:29:53] right here and then we start to sell off
+[00:29:56] so this again is our point of control
+[00:29:58] you can see that it moves as the price
+[00:29:59] moves now as we go further into the day
+[00:30:02] you'll see this point of control line
+[00:30:04] ended up staying right here around this
+[00:30:06] 545 level so we were below it then we
+[00:30:10] were above it and then we went back
+[00:30:12] below it which tells us that this stock
+[00:30:14] was really not easy to trade so now
+[00:30:16] you've sort of got double levels of
+[00:30:18] resistance coming back up you've got
+[00:30:19] vwap and you have the point of control
+[00:30:21] we sell off we sell off and then we rip
+[00:30:23] up here at the open which I think caught
+[00:30:26] a lot of Traders by surprise including
+[00:30:28] me we squeeze up for a second I got a
+[00:30:32] dip and a rip on the halt resumption we
+[00:30:35] halt we open higher a quick rip and then
+[00:30:37] we quickly roll over and we come all the
+[00:30:40] way back down we try to bounce off right
+[00:30:42] around this point of control line and
+[00:30:45] then we go lower we come back up to it
+[00:30:47] and then we go lower so again just
+[00:30:49] reaffirming this is a level where there
+[00:30:52] is a real battle and for the most part
+[00:30:54] today we were trading below it we were
+[00:30:57] above it for a short period we weren't
+[00:30:59] able to hold we went back negative then
+[00:31:00] we got back above it and almost
+[00:31:02] immediately rejected on high selling
+[00:31:07] volume so the volume is telling such a
+[00:31:10] story here you basically have a short
+[00:31:12] burst of buying and then heavy selling
+[00:31:14] following it so this tells me that there
+[00:31:16] were people that were unloading the
+[00:31:18] stock they were happy to get rid of it
+[00:31:21] and ultimately the selling outweighed
+[00:31:24] the buying and so the stock maintained a
+[00:31:27] bearish stance below vwap and below the
+[00:31:31] point of control line so although I got
+[00:31:33] a small scalp on it the volume profile
+[00:31:36] really wasn't very good and I wasn't
+[00:31:38] able to get position for a nice trade
+[00:31:40] which was sort of disappointing this
+[00:31:42] gives you a zoom in on the 10-second
+[00:31:44] chart here um and and what you have here
+[00:31:47] is sort of this Ascension the break of
+[00:31:50] vwap up to point of control and then it
+[00:31:52] wasn't until we broke and held above
+[00:31:54] point of control that we got this quick
+[00:31:56] move and I think that's really
+[00:31:58] interesting because normally you would
+[00:31:59] expect the Big Break will come as soon
+[00:32:01] as you break vwap but in this case
+[00:32:05] because the point of control line was
+[00:32:07] above vwap we broke vwap but then we had
+[00:32:10] another piece of resistance right here
+[00:32:12] so we ran into the next level and we
+[00:32:14] couldn't break that we pulled back and
+[00:32:16] then we're pinned between vwap and and
+[00:32:19] the point of control but in this case
+[00:32:21] because of the time a day and the strong
+[00:32:23] B buying volume here and I think because
+[00:32:25] of the fact that the daily chart on um
+[00:32:30] let's see uh why why
+[00:32:33] IBO was unique what was unique about
+[00:32:36] this daily chart is that it's a blue sky
+[00:32:39] setup the all-time high was back here at
+[00:32:42] $4 and when it squeezed up here there
+[00:32:44] was no resistance none whatsoever this
+[00:32:47] is a stock that's a somewhat recent IPO
+[00:32:50] now today it's got 30 million shares of
+[00:32:52] volume and unfortunately it's a red
+[00:32:54] candle but it's also not uncommon
+[00:32:56] because there's often people that got in
+[00:32:58] prior to the IPO they're going to take a
+[00:33:00] day like this to cash in now it's also
+[00:33:03] true that there is no upside resistance
+[00:33:05] so these can sometimes move a lot higher
+[00:33:08] but I always approach that with a little
+[00:33:09] bit of skepticism so unfortunately y IBO
+[00:33:13] I I was a little bit cautious on it let
+[00:33:15] me just check I think this was the
+[00:33:16] Chinese yeah and this was a Chinese
+[00:33:18] stock as well so I was like ah I don't
+[00:33:20] know if we're going to be able to trust
+[00:33:22] it and no surprise it did not hold its
+[00:33:25] levels so not shocking but ALS so not
+[00:33:28] really a big deal now if we look at this
+[00:33:30] chart
+[00:33:31] here uh you'll also notice uh sort of
+[00:33:35] this big difference between the point of
+[00:33:37] control line and how high the volume
+[00:33:39] weight average price remained right
+[00:33:42] volume weight average price remained
+[00:33:43] High because I I mean I guess just the
+[00:33:46] average of the prices the amount of
+[00:33:48] volume that occurred at these high
+[00:33:49] prices but ultimately this was the price
+[00:33:52] right here that in totality had the most
+[00:33:55] volume by far and so this became the
+[00:33:58] area of point of control below it
+[00:34:00] bearish above it somewhat bullish but
+[00:34:03] again still with a grain of salt because
+[00:34:04] it's below the volume weight average
+[00:34:06] price so some really interesting price
+[00:34:08] action on this one wibo okay so now
+[00:34:11] we'll jump back here and um we'll look
+[00:34:14] at Pali okay so P AI this one was
+[00:34:18] interesting this one had breaking news
+[00:34:20] at 8:30 a.m. and it completes microbiome
+[00:34:24] study confirming da da so it's another
+[00:34:26] one of these sort of bio tech stocks and
+[00:34:29] I'm familiar with P because I've traded
+[00:34:31] it before but what I also know is that
+[00:34:33] Pali doesn't always hold up it gives us
+[00:34:36] moves it gives us volatility but it
+[00:34:38] doesn't always hold those levels so when
+[00:34:40] it first hit my scanner I'm thinking all
+[00:34:42] right it's on my high day momentum
+[00:34:43] scanner so that's the scanner right in
+[00:34:45] this area and I am able to evaluate of
+[00:34:48] course the time of day of the alert the
+[00:34:50] price of the stock the float the volume
+[00:34:53] the the relative volume and then I can
+[00:34:55] see the news headline right here so I do
+[00:34:57] all of that and I see all right this has
+[00:34:59] news it's moving higher the float 728
+[00:35:02] th000 shares super low float this is a
+[00:35:05] stock that has moved in the past I
+[00:35:08] should pay attention to it so I put it
+[00:35:10] on my level two and I just had it kind
+[00:35:12] of on side chart I was like if it starts
+[00:35:13] to squeeze it starts to squeeze and in
+[00:35:15] this candle right here it starts to pull
+[00:35:17] away now at this point where's the point
+[00:35:20] of control it's way down at 480 right
+[00:35:22] vwap is down at like 470 so we're above
+[00:35:25] point of control we're AB above WAP So
+[00:35:28] based on all of that the position is
+[00:35:30] bullish at the beginning of this move
+[00:35:32] not surprising so we punch up here to
+[00:35:35] 530 we pull back and then we push up to
+[00:35:37] 550 we pull back and then as we break
+[00:35:40] 550 we go almost straight here to
+[00:35:44] 56586 up to 640 micro pullback and we
+[00:35:48] punch up to 660 so look at this volume
+[00:35:51] volume is increasing and then peing at
+[00:35:53] the high but that high volume has the
+[00:35:56] effect of pulling the point of control
+[00:35:59] way up real quick the volume weighted
+[00:36:01] average price moves up a little bit more
+[00:36:03] slowly lagging behind and once again we
+[00:36:06] get this similar position where the
+[00:36:08] price goes below point of control above
+[00:36:11] vwap bearish because we're below the
+[00:36:13] point of control line right we come back
+[00:36:16] up we can't sustain we drop back down
+[00:36:19] now we're between the two what happens
+[00:36:21] we roll over so we really want to see
+[00:36:24] when we have these pullbacks that we
+[00:36:26] hold the point point of control line
+[00:36:29] when we go below the point of control
+[00:36:30] line that's not good so on this one I I
+[00:36:33] had it on watch as soon as it had news
+[00:36:35] at 8:30 there were people in the chat
+[00:36:37] room that said hey P's got news keep it
+[00:36:39] on watch so at that point I was like
+[00:36:41] good call I didn't see the news headline
+[00:36:42] come out but thank you for bringing it
+[00:36:44] to my attention so I put the chart up on
+[00:36:46] a side chart and I pulled up the level
+[00:36:48] two so at that point all I was waiting
+[00:36:50] for was volume to come in right here we
+[00:36:53] got the first burst of volume a little
+[00:36:55] dip and then we got more right here so
+[00:36:57] once volume was coming in I was like I'm
+[00:36:59] jumping into this thing and I was
+[00:37:01] honestly surprised that we got a full
+[00:37:03] dollar a share out of it from 530 540
+[00:37:05] all the way up to 640 650 I think we had
+[00:37:08] hit a high of
+[00:37:10] 660 so a solid trade on Pali P which
+[00:37:14] ended up making it my biggest winner of
+[00:37:16] the day now what prevented me from
+[00:37:18] giving back that profit and going back
+[00:37:21] for another trade right in this area was
+[00:37:23] seeing that point of control line so
+[00:37:25] again this was really helping keep me
+[00:37:28] out of a trade that uh that I really
+[00:37:31] kind of wasn't set up uh quite right any
+[00:37:33] longer now I'll pull up um the charts
+[00:37:36] again and I'll show you the macd because
+[00:37:39] once again reaffirming that if you have
+[00:37:41] macd it's also going to give you an edge
+[00:37:43] in making sure you're not overstaying
+[00:37:45] your welcome here on these so oh let's
+[00:37:48] switch to the 10-second time frame all
+[00:37:49] right so 10-second chart here on this
+[00:37:51] one this was a fast moving stock all
+[00:37:53] right so we're going to pull this back
+[00:37:55] here
+[00:37:57] let's see all right so right in here
+[00:38:00] we're going get zoomed in and look at
+[00:38:02] the macd so you could see on this one I
+[00:38:04] don't usually use macd on a 10-second
+[00:38:06] chart but you can see again that's the
+[00:38:08] crossover right there so you know once
+[00:38:10] you have that crossover the moving
+[00:38:12] averages are converging we're coming
+[00:38:14] into this consolidation Zone below the
+[00:38:17] point of control you know it's just it's
+[00:38:20] not bullish anymore and the one of the
+[00:38:21] problems on this was this highest volume
+[00:38:24] candle being red that is a red flag
+[00:38:27] literally you could say so red flag
+[00:38:29] there on the high volume being red and
+[00:38:32] this had a chance right here to Rally
+[00:38:34] back up and when it failed that that was
+[00:38:36] when I was like this is not so great so
+[00:38:39] so that was P now if we jump back over
+[00:38:42] here um let's talk about the pros and
+[00:38:45] cons then we'll go over um the recap of
+[00:38:47] the Le of the rest of the trades from
+[00:38:49] today so what are the pros of using uh
+[00:38:52] volume profile the pros I would say is
+[00:38:55] you have a better understanding of the
+[00:38:56] point of control control in a stock
+[00:38:58] again you can use this on any Financial
+[00:39:00] instrument point of uh volume sorry
+[00:39:03] volume profile you can use it on Forex
+[00:39:05] or crypto or Futures whatever I'm using
+[00:39:08] it on stock but you can use it on
+[00:39:09] anything you can do technical analysis
+[00:39:11] on above the point of control is bullish
+[00:39:13] below is bearish and volume profile it
+[00:39:17] adds depth to the Candlestick patterns
+[00:39:20] because um it it helps you and sometimes
+[00:39:23] I put these slides together real quick
+[00:39:25] before I teach this class so I just
+[00:39:26] finished trading today and and I added
+[00:39:28] this slide so it helps you understand
+[00:39:31] why a stock is consolidating at various
+[00:39:34] levels so in this case it understanding
+[00:39:37] all right we're consolidating at this
+[00:39:39] level because this is the point of
+[00:39:41] control we're right below this critical
+[00:39:43] level that's why we're having resistance
+[00:39:46] here I think it's important and helpful
+[00:39:48] to see that now the cons of using volume
+[00:39:51] profile the only downside in my opinion
+[00:39:53] is that it's yet another indicator to
+[00:39:55] watch in your trading and if you don't
+[00:39:57] use indicators consistently you might as
+[00:39:59] well not use them at all because they're
+[00:40:01] really only useful if you're using them
+[00:40:02] consistently in you're trading if you're
+[00:40:03] using it you know on one out of every 10
+[00:40:06] trades then you're mostly ignoring it so
+[00:40:09] the the one time you use it maybe it's
+[00:40:11] not helpful right any just like anything
+[00:40:14] else there's no strategy that's right at
+[00:40:15] 100% of time there's no indicator that's
+[00:40:17] right at 100% of time so it's in
+[00:40:20] totality if you use it consistently does
+[00:40:22] it work now in this case I think um
+[00:40:26] volume profile is a helpful indicator to
+[00:40:28] use and to have on your charts but I
+[00:40:31] would use it on the 5 minute time frame
+[00:40:33] because it just will that'll show you
+[00:40:34] your point of control line and that's
+[00:40:36] really the most important thing uh one
+[00:40:38] thing that I do is I align it to the
+[00:40:40] left some people have it aligned to the
+[00:40:42] right and I don't like that because I
+[00:40:45] don't want it covering my candlesticks
+[00:40:47] so I just put it on the left and to be
+[00:40:50] honest you probably could if you really
+[00:40:52] wanted to get rid of the blue and the
+[00:40:54] the red here or the blue and the orange
+[00:40:56] and just have the point of control
+[00:40:57] control line um but I don't do that the
+[00:40:59] developing um you know I don't use those
+[00:41:02] right here this is um I I don't I
+[00:41:05] haven't found this to be helpful so this
+[00:41:08] is more of a um a standard deviation
+[00:41:10] offset but again not not helpful for me
+[00:41:14] so I just leave the point of control
+[00:41:16] line and and that's it when I see the
+[00:41:18] price is above it that's what I like to
+[00:41:19] see um it it is certainly noteworthy
+[00:41:22] when we have the price break out of a
+[00:41:25] consolidation Zone you you have a
+[00:41:27] consolidation Zone like that you break
+[00:41:29] above that zone and you can hold above
+[00:41:31] it that's important but I'm going to
+[00:41:33] visualize that usually um with
+[00:41:37] horizontal support and resistance lines
+[00:41:39] based on prices around half dollars and
+[00:41:41] whole dollars so this is a clear level
+[00:41:43] that was like a flat top we broke above
+[00:41:46] it and now we're holding so it's kind of
+[00:41:48] a combination of your technical analysis
+[00:41:51] that you're going to do with ascending
+[00:41:54] and horizontal support and resistance
+[00:41:55] lines and adding in point of control
+[00:41:58] along with volume weight average
+[00:42:00] price okay so now let's talk about my
+[00:42:03] biggest uh loser of the day so my
+[00:42:06] biggest winner as you can see was Pali
+[00:42:09] uh Lio and then Li boo those are my
+[00:42:11] three stocks I was green on but actually
+[00:42:13] had four stocks today that I was red on
+[00:42:15] and I started the day by going in the
+[00:42:17] red on my very first trade so I sat down
+[00:42:20] this morning at about
+[00:42:21] 645 and at that time I was looking at
+[00:42:23] the scanners and I saw lipo or Li yeah
+[00:42:26] lip
+[00:42:27] and I I thought you know I don't know
+[00:42:29] about it I'm not sure like I said it's a
+[00:42:31] little too cheap 200 EMA it's got some
+[00:42:33] issues we'll see uh and then BMR ends up
+[00:42:37] hitting my scans and BMR had news and
+[00:42:40] this one again you can see kind of like
+[00:42:42] P it ended up being read on the day
+[00:42:45] right now it's actually down
+[00:42:47] 6% which is kind of ridiculous so on
+[00:42:51] this one we'll go back to we'll start at
+[00:42:54] the 10-second chart we'll start really
+[00:42:57] zoomed in um and so first of all I
+[00:43:00] noticed on The Daily an area of
+[00:43:02] resistance here at 573 do you see that
+[00:43:05] flat top right there and then I saw if
+[00:43:08] we broke that we had room up to 671 so
+[00:43:10] that was sort of the daily analysis that
+[00:43:12] I did I then zoom in I'm on the the 10c
+[00:43:16] and the one minute time frame I'm
+[00:43:17] looking for trades on this and as it
+[00:43:20] first pops up right
+[00:43:22] here I'm thinking this is like 748 745
+[00:43:25] I'm like okay I I think think I can work
+[00:43:27] with this and I actually take my first
+[00:43:29] trade right here at 741 right here we're
+[00:43:33] above point of control we're above vwap
+[00:43:35] everything is bullish we've got breaking
+[00:43:37] news so I'm like this is fine I get in
+[00:43:39] at 541 2500 shars I get out at um 5 like
+[00:43:45] 53 or or 51 right here for like $200 a
+[00:43:49] profit then it squeezes up right here
+[00:43:52] and I was like I don't know if I want to
+[00:43:54] get back in because we've got this
+[00:43:55] resistance at 70 I think that's going to
+[00:43:57] be a problem so I hesitate right here I
+[00:44:00] don't get back in and then it comes back
+[00:44:02] up here and it just it happened so fast
+[00:44:07] where we're down here below sorry we're
+[00:44:10] down here below vwap which normally you
+[00:44:13] know is bearish we broke below vwap
+[00:44:15] that's not a good thing and then
+[00:44:16] suddenly we're back up above that level
+[00:44:19] so we rip right here and to be honest I
+[00:44:22] should have jumped back in right here as
+[00:44:25] soon as we were back over the point of
+[00:44:26] control and back overview app but I
+[00:44:29] hesitated cuz I was worried about this
+[00:44:30] level up around 73 so it finally comes
+[00:44:34] up here and I end up U buying this let's
+[00:44:37] see let me just check the time stamps
+[00:44:38] this is 54 yeah so I ended up buying
+[00:44:40] this at um
+[00:44:42] 590 and I bought to anticipate that we
+[00:44:45] were just going to squeeze right through
+[00:44:46] six with a target of 605 to 610 what
+[00:44:49] ends up happening is we tap a high of
+[00:44:53] 598 and then we drop back down here to 5
+[00:44:57] 81 so I'm like all right you know that's
+[00:45:00] not too bad so I add to my position I'm
+[00:45:03] adding on this micro pullback right here
+[00:45:05] and I'm looking for the squeeze through
+[00:45:07] six but guess what happens we break six
+[00:45:09] for a hot second and then we flush back
+[00:45:12] down and rather than take profit off the
+[00:45:15] table up here I decided to add to the
+[00:45:18] position so I started with 2500 shares
+[00:45:22] and then once I was up on the trade I
+[00:45:24] was like you know what this is I think
+[00:45:25] this is the one it's up it's moving so
+[00:45:29] I'm adding at 605 and 610 and now I've
+[00:45:32] got 15,000 shares and my average is
+[00:45:35] 598 right here and it dumps here down to
+[00:45:38] 580 and I was like shoot well I got to
+[00:45:40] get out so I got out for a $2,000 loss
+[00:45:44] on my first trade and that's a that's a
+[00:45:46] big loss for my first trade of the well
+[00:45:48] it's actually technically my second
+[00:45:49] trade so now I'm down ,800 on the day
+[00:45:52] and I'm I'm like yikes that okay that
+[00:45:55] was not great it dips down to 580 and
+[00:45:58] then um right here it comes back up so
+[00:46:01] when it comes back up I got right back
+[00:46:04] in right at six once we got back over
+[00:46:06] the point of control line I was like
+[00:46:08] okay I'm going to get back in here at $6
+[00:46:10] and we pop up to 620 and then we drop
+[00:46:14] back down again and same thing happened
+[00:46:16] I stopped out a second time so I think
+[00:46:19] most of you would probably look at this
+[00:46:21] and be like Ross this should have been a
+[00:46:23] winner this should have been a winner
+[00:46:26] what's going going on why were those not
+[00:46:28] winning trades you were clearly up on
+[00:46:30] them and the problem
+[00:46:32] was and I think this kind of speaks to
+[00:46:35] you know let's get some context here you
+[00:46:38] look at my trades from the last week and
+[00:46:41] you'll see that I don't know why this
+[00:46:43] isn't like um kind of that's weird
+[00:46:46] anyways it doesn't matter um so you look
+[00:46:48] at my trades from the last week here and
+[00:46:50] you'll see that I just have been having
+[00:46:52] these really big green days and I felt
+[00:46:55] like um these are 20 ,000 $40,000 days I
+[00:46:58] felt like when BMR was starting to pull
+[00:47:02] away that this was going to be the one
+[00:47:04] so I was really quick to size up in fact
+[00:47:08] I didn't wait until I had my $1,000
+[00:47:11] cushion before sizing up to 15,000
+[00:47:14] shares and that was my biggest mistake
+[00:47:17] rather than chip a couple base hits I
+[00:47:19] right away was like here we go home run
+[00:47:22] potential part of that was because my
+[00:47:23] first entry was at 540 and now I'm
+[00:47:25] trading it up at 6 50 cents higher so
+[00:47:28] I'm like clearly it's up but I just got
+[00:47:31] myself too focused too quick on trying
+[00:47:33] to hit a big winner rather than just
+[00:47:35] taking the base hit off the table
+[00:47:37] because I had the potential on this to
+[00:47:38] lock up three base hits right one was
+[00:47:42] this one right here and then regardless
+[00:47:44] of the fact that I didn't get this trade
+[00:47:45] down here this still could have been a
+[00:47:47] fine base hit and this was a fine base
+[00:47:49] hit but instead you know schmuck that I
+[00:47:51] am I added on this too high and I
+[00:47:55] screwed myself up so now I'm read
+[00:47:59] $3,700 I actually feel like I was read
+[00:48:01] four grand but um maybe that was because
+[00:48:04] of the next trade um yeah it was okay
+[00:48:07] the next trade was
+[00:48:08] LR okay so now LR hits my scanners you
+[00:48:12] can see I'm read $386 on this one it
+[00:48:15] hits my scanner this morning pretty
+[00:48:17] early and uh again I'm like okay this
+[00:48:21] thing's hitting my scanners I'm going to
+[00:48:22] take a stab at it and look at this
+[00:48:24] rejection holy smokes
+[00:48:27] I got in at two bucks and it goes up to
+[00:48:31] 240 I didn't take anything off the table
+[00:48:33] and I stopped out right here and I'm
+[00:48:35] glad I stopped out but man what a
+[00:48:37] rejection but again you know that could
+[00:48:40] have been a small base hit but I didn't
+[00:48:42] take my profit off the table because now
+[00:48:44] at this point I was down three
+[00:48:47] $3,700 on the day and I'm thinking I
+[00:48:50] need more than you know 20 cents a share
+[00:48:54] to kind of get me out of the hole I need
+[00:48:56] like a nice trade and that unfortunately
+[00:49:00] didn't happen on LR so now I'm down four
+[00:49:03] grand and as I said at the beginning of
+[00:49:04] this episode my daily Max loss is um
+[00:49:07] minus 5K that's my Max loss my daily
+[00:49:11] goal is 5K and my weekly goal is 15K
+[00:49:15] because I figure one day out of each
+[00:49:16] week I'll hit Max loss so three days of
+[00:49:19] 5K green One Day 5K red and then that
+[00:49:22] cancels out one of these days and this
+[00:49:24] was 5K so Monday Tuesday Wednesday
+[00:49:25] Thursday Friday so whatever day happens
+[00:49:28] to be the red day um that's going to
+[00:49:30] cancel out one of the green days so
+[00:49:32] weekly goal is Daily Times three so this
+[00:49:35] was kind of my thinking here is you know
+[00:49:38] now you're starting to get real close to
+[00:49:40] your daily Max loss so let's take a step
+[00:49:43] back for a second BMR not obvious enough
+[00:49:46] didn't work LR not obvious enough also
+[00:49:49] didn't work what is obvious right now
+[00:49:52] and that's when I said you know what
+[00:49:53] it's time to trade lipo so I switched
+[00:49:56] gears and started trading lipo and that
+[00:50:00] that ended up being my savior for the
+[00:50:03] morning so that recouped all my loss and
+[00:50:05] put me in the green trading that on the
+[00:50:08] front side of this move as it broke this
+[00:50:10] ascending resistance level and we
+[00:50:12] started to pull away right so we already
+[00:50:13] talked about lipo so this gave me my
+[00:50:16] profit then I got the trade on Pali that
+[00:50:19] one came up next and then I gave back on
+[00:50:22] my last two trades 900 on tww oou and cl
+[00:50:26] di CDI this one was actually in the
+[00:50:29] morning um again this is a stock that
+[00:50:32] hit my scanner early very similar
+[00:50:35] actually to a couple of the others right
+[00:50:37] like this pop up and then nasty
+[00:50:39] rejection so $800 loss on that a little
+[00:50:43] bit
+[00:50:43] annoying and and here's the thing that
+[00:50:45] I'll say about trading in general to a
+[00:50:48] certain extent it's a little bit of a
+[00:50:51] numbers game which is that you can if
+[00:50:53] you trade for years and years and years
+[00:50:55] and years you know that you're right 65%
+[00:50:58] time there's just going to be a certain
+[00:50:59] number of Trades four out of 10 roughly
+[00:51:02] three out of 10 that you're you're going
+[00:51:04] to lose on no matter what it's just the
+[00:51:06] way it is so I step up to the play if I
+[00:51:08] see something moving I'll take a stab
+[00:51:10] I'll try to break the ice but I took
+[00:51:12] some losses on those today now my
+[00:51:14] starter sizes across the board ended up
+[00:51:16] getting bigger today uh partly because
+[00:51:19] of the momentum I've had in the last two
+[00:51:21] weeks and then lipo gave me a nice
+[00:51:24] cushion so then I was like all right I
+[00:51:25] can be a little more aggressive
+[00:51:27] so
+[00:51:28] twou um this one uh this one actually
+[00:51:32] did go higher um before rejecting but I
+[00:51:36] got stopped out on it anyways and that
+[00:51:38] was this morning um right in this area
+[00:51:42] now what was interesting about this
+[00:51:43] chart was that we had Gap fill on The
+[00:51:46] Daily up to 398 and we filled that
+[00:51:48] almost to the penny so the way I traded
+[00:51:52] this was initially you know we got this
+[00:51:55] halul up and then it opened dipped and
+[00:51:58] ripped and I hesitated on it here and
+[00:52:01] then it ends up pushing higher and I was
+[00:52:03] like gosh darn it I I kind of screwed up
+[00:52:05] this trade so it pulls back um right
+[00:52:09] through here comes back up right through
+[00:52:12] here and I got in um right in this area
+[00:52:16] for the break through high a day and it
+[00:52:18] just kind of stalled out and you know
+[00:52:20] what I wasn't I I just I don't know I I
+[00:52:24] I just thought that it was going to
+[00:52:25] break once we pulled away from that
+[00:52:27] level so if I back this up you'll see
+[00:52:29] the point of control Line's going to
+[00:52:30] move down a little bit so I'm going to
+[00:52:33] have to move it back into this area so
+[00:52:36] as it started to pull away here at 80
+[00:52:37] this is where I was like okay we're
+[00:52:38] going for three and I got stopped out
+[00:52:40] right here then it rips back up but I
+[00:52:42] was like whatever so anyways 10,000
+[00:52:45] shares lost 9 cents a share on that one
+[00:52:48] and at that point I was like you know
+[00:52:50] what I I think I'm good you know I I
+[00:52:52] peaked at about 14,000 today uh maybe
+[00:52:55] 13,000 right around there so gave back
+[00:52:58] about two grand off the top on CDI I
+[00:53:02] guess a little bit and um CW oou and oh
+[00:53:06] and I actually gave back half of what I
+[00:53:07] had on W yibo I was up a bit more on
+[00:53:11] that and I gave back half so I
+[00:53:14] overstayed my welcome on that one a
+[00:53:15] little bit too and and so at that point
+[00:53:17] I was like you know what $11,000 is a
+[00:53:19] pretty solid day it's still double the
+[00:53:21] daily goal in gross profit now the one
+[00:53:23] thing I'll say today is that my
+[00:53:25] commissions are steep I traded a lot of
+[00:53:29] shares especially on lipo I was jumping
+[00:53:32] in jumping out jumping in jumping out so
+[00:53:34] my commissions on lipo are two over
+[00:53:38] $2,000 it's over 25% of my profit which
+[00:53:42] is a shame uh this is the cost of doing
+[00:53:45] business but you know it it is
+[00:53:47] unfortunate because I know a lot of you
+[00:53:49] guys trading with commission free
+[00:53:50] Brokers have zero commissions on those
+[00:53:52] trades but for me I paid the commission
+[00:53:55] on it and it is what it is so my net net
+[00:53:59] today after fees and commissions is
+[00:54:02] going to be
+[00:54:03] closer to 8 thou eight and eight and
+[00:54:05] change 8,000 something so I've got some
+[00:54:08] some real fees and commissions today for
+[00:54:10] sure but you know again at the end of
+[00:54:13] the day I I'm not too worried about it
+[00:54:15] because I don't typically trade those
+[00:54:17] low price stocks and it's still helped
+[00:54:20] me recover the losses that I had on BMR
+[00:54:23] and it's still a solid green day so I
+[00:54:25] had sort of a swing in the p&l from down
+[00:54:28] almost 5 to up 13 finishing at
+[00:54:32] 11,600 have some fees and commissions
+[00:54:35] wasn't the cleanest day so my goal is to
+[00:54:37] try to do a little bit better tomorrow
+[00:54:39] now those of you guys um who want to do
+[00:54:41] a twoe trial at Warrior trading I'm
+[00:54:43] actually going to give you a link here
+[00:54:44] um it's going to be pinned to the top of
+[00:54:46] the comments uh and it'll be right next
+[00:54:48] to the link to download my technical
+[00:54:49] analysis toolkit uh so or my my
+[00:54:52] comprehensive guide so this is a link
+[00:54:55] for the twoe trial Warrior trading so
+[00:54:57] you guys can do this it's $20 for two
+[00:54:59] weeks that'll give you two weeks of
+[00:55:00] access and it gives you access to uh all
+[00:55:03] of the market data so you'll have
+[00:55:04] realtime uh scans and charts during your
+[00:55:07] trial you can have access to this
+[00:55:09] platform in addition to my broadcast and
+[00:55:13] a selection of classes from the warrior
+[00:55:15] Pro curriculum so you guys should
+[00:55:17] definitely check that out if you haven't
+[00:55:19] already and if you didn't already
+[00:55:21] download my technical analysis worksheet
+[00:55:23] that PDF make sure you check that out
+[00:55:25] you download you can print it out and I
+[00:55:27] want to encourage you to start testing
+[00:55:28] out some of the things you're learning
+[00:55:30] but I want to remind you as always my
+[00:55:32] results are not typical I've been
+[00:55:33] trading for a long time and so I always
+[00:55:35] want you to trade in a simulator before
+[00:55:37] you put real money on the line because
+[00:55:38] look if you can't make money in a
+[00:55:40] simulator you have no business trading
+[00:55:42] with real money so take it slow the
+[00:55:45] market will be here for you all right so
+[00:55:47] set a solid foundation learn the right
+[00:55:49] way and I always think it's great to
+[00:55:51] learn from someone who is actually
+[00:55:52] proven profitable and if you're ever
+[00:55:54] curious you can check out my broker
+[00:55:56] statements are on the footer of the
+[00:55:57] website Warrior trading and you can see
+[00:55:59] my audited uh performance records as
+[00:56:01] well so thanks as always for tuning in I
+[00:56:03] hope you hit that thumbs up subscribe
+[00:56:05] the channel and I will see you for the
+[00:56:06] next episode real soon

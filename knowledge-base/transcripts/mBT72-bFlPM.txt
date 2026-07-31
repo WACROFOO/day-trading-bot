@@ -1,0 +1,729 @@
+# Trading was HARD Until I Learned this BASE HIT Strategy
+# https://www.youtube.com/watch?v=mBT72-bFlPM
+# duration_sec: 1757
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I want to share with
+[00:00:03] you one very specific turning point that
+[00:00:05] I had in my journey to become a
+[00:00:07] consistent confident and profitable
+[00:00:10] Trader this actually happened uh many
+[00:00:12] years ago is in
+[00:00:14] 2017 and prior to that I'd been making
+[00:00:16] money and I had just started my small
+[00:00:18] account Challenge on January 1st of that
+[00:00:20] year but I felt like I was in a cycle
+[00:00:24] the cycle was that I was swinging for
+[00:00:26] home runs and I kept having big
+[00:00:29] strikeouts I would take these really big
+[00:00:31] losses and the result was that My Equity
+[00:00:34] curve would periodically experience
+[00:00:36] these big dips and whenever I would have
+[00:00:39] these dips I would feel like I needed a
+[00:00:41] home run to get my account back to whole
+[00:00:44] so I would continue swinging for these
+[00:00:46] home runs but it was like I was on this
+[00:00:49] roller coaster where I kept having these
+[00:00:51] big dips so after one particularly bad
+[00:00:55] loss and this was in September of 2017 I
+[00:00:59] decided to take a look at the last 10
+[00:01:01] months of my trading data and I made a
+[00:01:04] discovery that I want to share with you
+[00:01:05] today from that Discovery I implemented
+[00:01:08] changes in my strategy that have
+[00:01:11] significantly altered the trajectory of
+[00:01:14] my trading career now as we know 2020
+[00:01:17] 2021 2022 the market was crazy but I was
+[00:01:21] still implementing the same lessons that
+[00:01:23] I learned from this very specific moment
+[00:01:26] in time where I made this discovery so
+[00:01:28] let's go ahead and jump into the data
+[00:01:31] here and I'm going to start walking you
+[00:01:32] through what I learned okay so if we
+[00:01:35] look at the month of September here it's
+[00:01:38] uh probably clear to you that it was a
+[00:01:40] red month I was down
+[00:01:43] $4,400 which you know at the end of the
+[00:01:45] day is not a crazy amount of money to
+[00:01:47] lose but it's definitely disheartening
+[00:01:49] and it's frustrating cuz look I showed
+[00:01:51] up every single day I'm showing up to
+[00:01:54] trade but I'm not walking away with
+[00:01:56] consistent profit now at this point in
+[00:01:59] the year if we take a step back and we
+[00:02:02] uh I don't know if we'll be able to
+[00:02:03] easily in this calendar view but it was
+[00:02:05] a good year in total I had a great start
+[00:02:09] January February March April was good
+[00:02:12] May was fine and then it did slow down
+[00:02:15] in June July in August so I had sort of
+[00:02:17] some slow summer months and then coming
+[00:02:20] into September I started with you know
+[00:02:23] well I guess is this in this case it was
+[00:02:25] first um first day of the month with a
+[00:02:27] $4,000 red day so now I'm digging my
+[00:02:29] myself a whole and I'm sure many of you
+[00:02:31] have experienced that then we have a
+[00:02:33] Memorial Day weekend I come back get a
+[00:02:35] trade on Wednesday it's a red trade so
+[00:02:38] now I'm down 8,000 on the month no
+[00:02:40] trades Thursday trying to be disciplined
+[00:02:42] small trades Friday still red on the
+[00:02:45] week so now two red weeks in a row I
+[00:02:47] come back for the next week the first
+[00:02:49] full week of September and you can see I
+[00:02:52] got nothing to show for it right I'm R
+[00:02:55] again this week not by a lot but I'm
+[00:02:57] feeling frustrated now the Third third
+[00:03:00] week of the month I got into a little
+[00:03:01] bit of a Groove made some progress did
+[00:03:03] really well and then boom in 2 days
+[00:03:06] literally gave back everything I had
+[00:03:08] just made in that last week so this is
+[00:03:11] where on this day right here I was like
+[00:03:13] all right man take a step back cuz this
+[00:03:16] was one of those days where I was ready
+[00:03:17] to flip my desk I was so frustrated I
+[00:03:21] wanted to throw my laptop out the window
+[00:03:23] I was just like I'm done I was so angry
+[00:03:27] I'm sure many of you can relate to this
+[00:03:29] who are AC Traders the emotions can get
+[00:03:32] big so after I had this like meltdown
+[00:03:35] just so angry I was like okay well take
+[00:03:38] a step back and slow down because you
+[00:03:40] know what I did several years before
+[00:03:42] that when I had a turning when I had
+[00:03:44] like a big struggle a big kind of blowup
+[00:03:46] loss I went back and I looked at all my
+[00:03:48] metrics and that was when I discovered
+[00:03:50] the momentum strategy that I still trade
+[00:03:52] to this day so I said let's do that same
+[00:03:55] thing let's go back and look at the data
+[00:03:58] so this is what I did I looked at the
+[00:04:01] previous 10 months of data and I made
+[00:04:04] some discoveries so one of the things I
+[00:04:07] noticed when I looked at my top uh my my
+[00:04:09] last 10 months of data was my I looked
+[00:04:12] at my first my top 25 biggest winners
+[00:04:14] and my top 25 biggest losers so my top
+[00:04:17] uh 25 so top 25 my biggest winners
+[00:04:21] amounted to uh
+[00:04:26] $215,000 and my biggest losers amounted
+[00:04:29] to minus
+[00:04:32] $23,000 so this was over the last 10
+[00:04:35] months of trading and this actually kind
+[00:04:38] of surprised me and I'll tell you why I
+[00:04:41] had the belief that My Success depended
+[00:04:44] on hitting home runs you know I
+[00:04:47] periodically would have a day where I
+[00:04:48] was up 15,000 or 20,000 or something
+[00:04:51] like that so you know when I was
+[00:04:52] thinking about my top 25 biggest days I
+[00:04:55] was thinking those would probably be
+[00:04:58] anywhere from 250 like
+[00:05:00] $300,000 so I was a little bit surprised
+[00:05:03] that my top 25 biggest trades were only
+[00:05:08] $25,000 because it means they were
+[00:05:09] averaging less than $10,000 that kind of
+[00:05:12] surprised me and then what surprised me
+[00:05:15] even more was that the losers my top 25
+[00:05:17] biggest losers were also averaging close
+[00:05:20] to $10,000 just under and I had lost
+[00:05:23] 203,000 so in other words if you took
+[00:05:26] away my top 25 biggest winners and my
+[00:05:29] top biggest losers from the last 10
+[00:05:31] months what am I plus and minus like 12
+[00:05:33] Grand right plus and minus you know
+[00:05:36] $112,000 it's uh it's not a lot of money
+[00:05:39] so I was like wait a second because
+[00:05:41] because here's the thing I knew that
+[00:05:44] over the last 10 months I had made
+[00:05:47] around
+[00:05:48] $300,000 so I was like if the profit
+[00:05:51] didn't come for my top 25 biggest
+[00:05:54] winners and losers then where did it
+[00:05:57] come from okay so so let's set this to
+[00:05:59] the side so what we know is that the top
+[00:06:01] 25 biggest winners and losers amounted
+[00:06:04] to only 12,000 in profit these are
+[00:06:06] trades where I was objectively hitting
+[00:06:08] for or swinging for the fences I was
+[00:06:10] trying to get a big win but sometimes
+[00:06:14] those big swings it's a big strikeout
+[00:06:16] and that's why I had the losses so you
+[00:06:19] know if you think about for instance um
+[00:06:21] one of these one of these trades that
+[00:06:23] maybe I took where we had a stock that
+[00:06:25] was kind of squeezing up the scanner
+[00:06:26] moving higher it pulls back you know
+[00:06:29] just for a moment then it pops up right
+[00:06:32] here and I get in it I'm in it and then
+[00:06:35] immediately we have one of those kind of
+[00:06:38] jack knife candles right and maybe this
+[00:06:40] is like a 10-second chart and on the one
+[00:06:42] minute it's just like a big you know
+[00:06:44] either topping tail dogee or even a
+[00:06:47] shooting star dogee so it's just like
+[00:06:49] you know I just had enough of those
+[00:06:51] trades where I stepped up to the plate
+[00:06:53] for that big trade and then with 10,000
+[00:06:56] shares the bottom falls out and I'm down
+[00:06:58] you know almost a shared down 10 grand
+[00:07:01] okay so you know and I so I was looking
+[00:07:05] back uh on January and for what it's
+[00:07:07] worth January 1st of 2017 was when I
+[00:07:10] funded my account with
+[00:07:14] $583 15 all right so the starting
+[00:07:17] balance here was
+[00:07:19] 58315 and I produced $116,000 of profit
+[00:07:22] which no doubt was a you know an
+[00:07:26] impressive amount of money to make in
+[00:07:29] that that first month some people by the
+[00:07:32] way you know like to see the broker
+[00:07:33] statement to verify that so I'll just
+[00:07:35] show this to you here um this is my
+[00:07:37] actual
+[00:07:38] audit of my trading that began on
+[00:07:41] January 1st of 2017 because this is when
+[00:07:43] I started my small account challenge so
+[00:07:45] that first month I actually got uh
+[00:07:47] 2746 return even though it wasn't like a
+[00:07:50] crazy amount of money at 16,000 it was
+[00:07:52] still a big percentage return now I've
+[00:07:55] continued trading in this account for
+[00:07:56] the last you know 1 2 3 4 5 6 7 8 years
+[00:08:02] and the account's still growing it's
+[00:08:03] over 10 million now and audited verified
+[00:08:06] gains I'll remind you as always that my
+[00:08:08] results are not typical but my hope for
+[00:08:10] an episode like this is that you're able
+[00:08:11] to learn from my lessons my mistakes
+[00:08:14] I've made and from some of the turning
+[00:08:15] points I've had in my career and that
+[00:08:17] perhaps some of these could help you in
+[00:08:19] your own trading so so anyways January
+[00:08:22] was 16,000 you know that was solid I did
+[00:08:25] though have you know that one kind of
+[00:08:27] bigger red day going into Fe February a
+[00:08:30] $60,000 green month which was great a
+[00:08:33] couple of big red days and this is sort
+[00:08:35] of the theme is that I'm generally
+[00:08:38] consistent but then periodically I'm
+[00:08:41] hitting losses that are bigger than my
+[00:08:43] average green days how many of you guys
+[00:08:45] experienced that you've got you know
+[00:08:47] nice decent green days but then when you
+[00:08:49] hit losses there you know three times or
+[00:08:52] four times what you're averaging on
+[00:08:53] those green days so this was kind of the
+[00:08:55] theme through 2017 uh this was a good
+[00:08:58] month in May the the red days were
+[00:09:00] really small but this was an exception
+[00:09:02] not the norm and in fact I didn't make
+[00:09:04] even a lot in in May and this was the
+[00:09:06] beginning of when things kind of slowed
+[00:09:08] down it was slow in June only with 8,000
+[00:09:10] in profit it was slow in July it was
+[00:09:14] slow in August and then as we know it
+[00:09:16] was read in September so this was part
+[00:09:19] of what was getting me so angry in
+[00:09:21] September was the fact that things had
+[00:09:24] gotten really slow and then sort of in
+[00:09:27] the midst of them getting really slow I
+[00:09:29] end up you know taking some big losses
+[00:09:32] and I feel like at that time I I just
+[00:09:34] couldn't afford it you know it was like
+[00:09:35] this isn't something that I could really
+[00:09:37] tolerate right now okay so since I knew
+[00:09:39] that my top 25 biggest winners and
+[00:09:41] losers had not accounted for a very
+[00:09:43] substantial amount of profit over the
+[00:09:45] last 10 months I decided to kind of open
+[00:09:47] up my filters a little bit more and I
+[00:09:48] said well let's let's look at winners
+[00:09:51] that are bigger than
+[00:09:54] $4,000 and then losers that are bigger
+[00:09:57] than 2,000 right so I I'm kind of
+[00:09:59] setting the bar just like a little bit
+[00:10:01] uh wider so you know casting a wider net
+[00:10:04] and what I discovered here was that my
+[00:10:06] winners that were 4,000 and up were
+[00:10:11] $319,000 and this of course included the
+[00:10:13] top 25 so I was like nice okay that's
+[00:10:16] that's more in line with you know what I
+[00:10:17] was expecting and then and then I look
+[00:10:20] at the losers which were $2,000 and up
+[00:10:25] and I realized that I had lost $
+[00:10:28] 361,000 000 in this same 10mon period so
+[00:10:32] I was actually down like 40 Grand
+[00:10:37] $42,000 and I was like wait a second
+[00:10:39] this is crazy so so you're telling me
+[00:10:42] that if I look at all my winners of more
+[00:10:45] than 4,000 which I felt like were like a
+[00:10:47] solid winner and I also look at all my
+[00:10:49] Losers of more than 2,000 in the last 10
+[00:10:51] months I'm actually losing an average of
+[00:10:53] four grand a month so now I was really
+[00:10:55] perplexed because I'm like well wait a
+[00:10:57] second then where is my profit coming
+[00:10:59] from so well the obvious place to look
+[00:11:03] now is Winners that are between $0 and
+[00:11:07] 4,000 which I would consider not to be a
+[00:11:10] home run but just kind of like a base
+[00:11:12] hit trade so I was like all right well
+[00:11:14] you know I I wasn't expecting to get
+[00:11:15] down this far but all right let's just
+[00:11:17] look at it so now I'm looking at winners
+[00:11:19] that are 0 to
+[00:11:21] 4,000 and losers that are between 0 and
+[00:11:26] 2,000 all right and this is what I
+[00:11:28] discovered right in here my winners
+[00:11:33] $510,000 in the last 10 months and my
+[00:11:36] losers were only
+[00:11:40] 156,000 which gave me a net profit of
+[00:11:43] 354,000 now remember when I said I was
+[00:11:46] only up about 300,000 in the last 10
+[00:11:48] months so all of a sudden I'm like wait
+[00:11:50] a second if I focus right in here
+[00:11:55] meaning I'm focusing on winners between
+[00:11:58] you know basically 0 and $4,000 and
+[00:12:00] losers of less than 2,000 I would be
+[00:12:03] averaging in fact $4,000 more per month
+[00:12:08] even if I never had any more home run
+[00:12:10] trades and this this really did confuse
+[00:12:12] me because I was like I I can't really
+[00:12:15] accept the fact that I could be making
+[00:12:18] more money with smaller share size
+[00:12:21] because this was the thing that I also
+[00:12:23] calculated my average position sizes up
+[00:12:26] here were about 15,000 shares all right
+[00:12:29] right now my average posi positions in
+[00:12:31] this area were more in the range of 6 to
+[00:12:33] 10,000 shares so they were smaller
+[00:12:36] positions so I'm like how am I making
+[00:12:38] more money with smaller positions that
+[00:12:41] seems counterintuitive to what I would
+[00:12:43] expect you know over the years having
+[00:12:45] thought about this
+[00:12:47] more with a smaller position it's a lot
+[00:12:51] easier emotionally to cut your losses
+[00:12:54] you can just let it go you're like it
+[00:12:55] doesn't matter and with a smaller
+[00:12:57] position it's also easier to move in and
+[00:12:59] out of the market you don't get as much
+[00:13:01] slippage you start trading with 15
+[00:13:03] 20,000 25,000 shares especially on a
+[00:13:06] thinly traded stock you could easily get
+[00:13:08] five eight even 10 cents of slippage and
+[00:13:11] that could be the difference between a
+[00:13:12] break even trade and a$2 or $3,000
+[00:13:15] losing trade and then on the losing
+[00:13:17] trades it's a difference between losing
+[00:13:19] only let's say with 5 to 6,000 shares
+[00:13:22] maybe you lose 10 cents you're down 600
+[00:13:24] bucks you do that same trade with 15,000
+[00:13:26] shares you're selling when the stock is
+[00:13:29] is dropping you're getting a ton of
+[00:13:30] slippage and you're losing let's say you
+[00:13:32] lose 30 cents all of a sudden you're
+[00:13:34] down 4500 on a trade that with only
+[00:13:36] 6,000 shares would been 600 bucks and I
+[00:13:38] think that that was one of the big
+[00:13:40] discoveries for me so this was again in
+[00:13:43] 2017 this was before the pandemic and
+[00:13:46] before commission free trading so it was
+[00:13:48] during a period of time when there
+[00:13:50] wasn't as much volume in the market as
+[00:13:52] there is today so moving in and out of
+[00:13:55] Trades at in those days was not as easy
+[00:13:58] as it is now so think there there are
+[00:14:00] some things that are a little bit
+[00:14:01] different but the moral of the story and
+[00:14:04] the big lesson for me was the
+[00:14:06] realization that I actually would be
+[00:14:08] making more money if I trade with
+[00:14:11] smaller share size and did not try to
+[00:14:14] swing for the fences and so what I ended
+[00:14:17] up doing coming out of this uh sort of
+[00:14:20] slump that I was in here in August and
+[00:14:22] September is I said all right well let's
+[00:14:25] see if I can apply this moving forward
+[00:14:28] so moving forward I decided to reduce my
+[00:14:31] share size so I brought my share size
+[00:14:33] back down I became a lot more
+[00:14:35] conservative and I ended up focusing
+[00:14:38] just on base hits now what ended up
+[00:14:40] happening was over the next uh 30 days I
+[00:14:43] had a nice stretch here that began as
+[00:14:46] you can see right here on September 27th
+[00:14:49] so this was the turning point right here
+[00:14:50] so these were nice nice small days and
+[00:14:53] then going into October look at this
+[00:14:56] this ended up being a no Red October now
+[00:15:00] to be honest I didn't have a lot of huge
+[00:15:02] green days I had a $5,000 day but the
+[00:15:05] rest of the days were in the range of
+[00:15:06] you know $2 $3,000 I finished up $35,000
+[00:15:10] here for the month of October and I felt
+[00:15:12] so confident I felt I felt on top of the
+[00:15:15] world my account was back at alltime
+[00:15:16] highs I was like yes I'm doing this I go
+[00:15:19] into November I keep it up now I'll say
+[00:15:22] as you can tell I had a couple of
+[00:15:24] setbacks one of the things with this
+[00:15:26] setback right here was that I had two
+[00:15:29] Incredible Days and these these days
+[00:15:32] were really interesting because this was
+[00:15:35] actually not the result of swinging for
+[00:15:38] home
+[00:15:39] runs this was actually the result of a
+[00:15:42] of an error in my trading software which
+[00:15:45] was kind of crazy so what what happened
+[00:15:49] there I remember these days because on
+[00:15:52] Wednesday the 15th I get into this trade
+[00:15:55] and you usually what I do for those of
+[00:15:58] you that are familiar is I'll often
+[00:16:00] press the buy button a couple of times
+[00:16:02] and I had just switched to new software
+[00:16:05] and the software that I was using was
+[00:16:07] changing the position quantity based on
+[00:16:12] um the current number of shares that I
+[00:16:14] had so typically if I'm getting into a
+[00:16:17] position with 3,000 share positions I'm
+[00:16:19] going to buy once and twice maybe three
+[00:16:21] times so I did that I got in 1 2 3 times
+[00:16:24] 9,000 shares so I I went kind of to the
+[00:16:26] top of my window of share size which is
+[00:16:28] about 10,000 ,000 shares and then I I
+[00:16:31] think I said I was like okay I want to
+[00:16:33] add to this position and go up to like
+[00:16:35] 10,000 shares or something like that and
+[00:16:37] so I pressed the buy button and I think
+[00:16:38] I pressed it twice and so it sent two
+[00:16:42] more orders out for 9,000 shares so now
+[00:16:44] all of a sudden I accidentally sent out
+[00:16:47] for a 27,000 share order and I remember
+[00:16:50] looking at the bid and being like whoa
+[00:16:51] there's someone bidding on this stock
+[00:16:53] and it was my order I didn't even
+[00:16:55] realize it so I I didn't get a full fill
+[00:16:57] on my order I got a partial fill and
+[00:17:00] then the rest of it was sitting on the
+[00:17:01] bid now the stock ends up going up over
+[00:17:03] a dollar a share and I locked up
+[00:17:06] $33,000 which I think at the time might
+[00:17:08] have been one of my biggest green days
+[00:17:11] that I had ever had and I realized after
+[00:17:13] the fact that I had had this like this
+[00:17:15] was this was nuts like what just
+[00:17:17] happened and so I thought I figured out
+[00:17:21] the problem and I thought that I fixed
+[00:17:23] it and then literally the next day it
+[00:17:27] happened again and it it's just like
+[00:17:30] honestly it was lucky that it happened
+[00:17:33] on days when the market happened to be
+[00:17:35] hot because if it happened on days when
+[00:17:37] the market was really cold I could have
+[00:17:38] gotten destroyed but the market was hot
+[00:17:40] and so I ended up having two huge green
+[00:17:42] days and then Friday ended up having
+[00:17:45] kind of a a bigger red day and you know
+[00:17:47] I don't recall what happened on this day
+[00:17:49] here um I guess we could take a look at
+[00:17:52] it and see see where things went
+[00:17:54] wrong H yeah so I went into the green
+[00:17:57] and then dipped down into the red and
+[00:17:59] then was down 5,000 this looks to me
+[00:18:03] like a day where I fell victim to what I
+[00:18:06] would call emotional hijack because my
+[00:18:11] final trade let's see what time of day
+[00:18:13] was this 11:50 so it's later in the
+[00:18:15] morning right I went from green to Red I
+[00:18:19] almost made it back to flat and then
+[00:18:21] back to a little deeper red and I think
+[00:18:23] I probably I probably took a high-risk
+[00:18:25] Hail Mary trade hoping to get myself
+[00:18:28] back to green and then flush deep into
+[00:18:30] the red I think this is a day of
+[00:18:31] emotional hijack and the fact is when I
+[00:18:34] look back in my trading unfortunately I
+[00:18:38] do still fall victim to emotional hijack
+[00:18:40] even today so now this is 2017 so we go
+[00:18:43] all the way forward to
+[00:18:44] 2024 and you know you'll see these nice
+[00:18:47] long stretches of green days but here in
+[00:18:49] March uh of this year emotional hijack
+[00:18:52] on this day right here it was actually
+[00:18:53] two days of emotional hijack and you
+[00:18:56] know I finished that that week red
+[00:18:58] 15,000
+[00:18:59] now one thing I would say about
+[00:19:02] emotional hijack is that you know
+[00:19:05] contrary to you know the focus here
+[00:19:07] which is on this is very much strategy
+[00:19:09] based this is about figuring out
+[00:19:12] essentially the analytics of your
+[00:19:14] trading and modifying your strategy so
+[00:19:17] you're doubling down on what's working
+[00:19:19] and totally dropping what's not working
+[00:19:21] my Discovery was learning that I was
+[00:19:23] making a lot more money on base hits and
+[00:19:25] so I should stop focusing on trying to
+[00:19:27] hit home runs and and just go all in on
+[00:19:29] base hits but inevitably what would
+[00:19:32] sometimes happen is after a period of
+[00:19:34] you know 2 3 weeks whatever four weeks
+[00:19:36] that are consecutive green weeks I'm
+[00:19:37] doing really well I have that day where
+[00:19:41] you know I step up for a base hit but
+[00:19:43] bad luck I get caught in a news flush or
+[00:19:47] a stock that announces like an offering
+[00:19:49] or whatever it is and with even small
+[00:19:52] size I'm down five grand and immediately
+[00:19:54] it's like a kick in the teeth and I'm
+[00:19:58] angry I'm frustrated and I'm immediately
+[00:20:02] hijacked by those emotions and now I'm
+[00:20:05] looking for another trade to try to
+[00:20:06] recoup that loss as quickly as I can we
+[00:20:09] can look at this Monday here um the the
+[00:20:12] 11th because this is a perfect example
+[00:20:14] of it I was in the red in the green and
+[00:20:16] then gave it up here and then traded all
+[00:20:19] the way to the end of the day this is
+[00:20:21] total emotional hijack terrible terrible
+[00:20:24] emotional self-control and then on this
+[00:20:26] day I came in swinging really hard and
+[00:20:29] just got totally smoked on a trade where
+[00:20:32] I took way too much risk and I took too
+[00:20:35] much uh too many shares and the reason I
+[00:20:37] took so many shares on that was because
+[00:20:39] I was trying to recoup the loss from the
+[00:20:41] previous day and so one thing that I've
+[00:20:44] come to learn is that with trading it's
+[00:20:46] very common even after years and years
+[00:20:48] of consistency and success to deviate
+[00:20:51] away from what you know is sort of the
+[00:20:53] rule of your strategy in moments of
+[00:20:55] emotional hijack and emotional pressure
+[00:20:58] where you feel like you've made a
+[00:20:59] mistake and now you need to recoup those
+[00:21:01] losses and maybe today it's okay that I
+[00:21:03] just take more size because the thing
+[00:21:05] that happens is when you're in this kind
+[00:21:07] of um mindset of focusing on base hits
+[00:21:12] you know just nice consistent Bas hit
+[00:21:14] trading when one of these happens all
+[00:21:17] the confidence and the good feelings you
+[00:21:19] had right here are gone and right here
+[00:21:22] you are feeling sad and you're angry
+[00:21:26] you're disappointed and the fact fastest
+[00:21:29] way to feel better is to be able to
+[00:21:31] press you know contrl Z undo the last
+[00:21:35] trade and go back to right here but
+[00:21:36] unfortunately as we know the market uh
+[00:21:38] doesn't work that way so the only way is
+[00:21:41] either to have a lucky trade that gets
+[00:21:43] you right back to whole or to accept
+[00:21:46] reality right now that you got knocked
+[00:21:49] down and it's going to take a little
+[00:21:50] while to recover and it's hard to accept
+[00:21:53] that until you accept that you'll keep
+[00:21:55] swinging like this and then that's when
+[00:21:57] you can end up you know going like this
+[00:21:59] and I've seen Traders do that I've seen
+[00:22:01] Traders have an excellent run of weeks
+[00:22:04] months even years and then a loss of
+[00:22:07] confidence stubbornness frustration and
+[00:22:10] now from a place of emotional hijack
+[00:22:12] they're not trading the market they're
+[00:22:13] trading their p&l and they just start
+[00:22:15] stare stepping down so you know we're I
+[00:22:18] think we're all um going to be victim to
+[00:22:21] this at some point because listen
+[00:22:23] trading is hard and we're only human and
+[00:22:25] we're trying to do something that's very
+[00:22:26] very difficult I have also come to learn
+[00:22:29] that most people in trading fail for one
+[00:22:32] of two reasons the first reason is
+[00:22:34] because they don't have a strategy at
+[00:22:36] all now a lot of the people that came
+[00:22:38] into the market during the pandemic
+[00:22:39] GameStop era and everything else they
+[00:22:41] had a lot of beginners luck it seemed
+[00:22:43] like everything that they might have
+[00:22:45] bought was going up and they didn't need
+[00:22:46] a lot of strategy same with the Doom
+[00:22:48] bubble but when the bubble burst and
+[00:22:50] when the pandemic you know when all of a
+[00:22:52] sudden interest rates went up because of
+[00:22:53] inflation everything else the market
+[00:22:55] softened and now people are like whoa
+[00:22:59] do I actually know what I'm doing and
+[00:23:00] some people started to lose money if you
+[00:23:02] don't have a strategy a system a set of
+[00:23:05] rules that you're going to follow every
+[00:23:07] single day in your trading you're not
+[00:23:08] going to be able to do this for decades
+[00:23:10] on end you're not going to have
+[00:23:11] beginners luck that'll last that long so
+[00:23:13] the first reason most beginner Traders
+[00:23:15] fail is because they don't have a system
+[00:23:17] or a strategy now I by the way I will
+[00:23:19] let you download the PDF of my small
+[00:23:22] account strategy you can download it
+[00:23:24] it's free you can practice trading it on
+[00:23:26] your own and if it's helpful for you I'm
+[00:23:28] happy for that if you decide to become a
+[00:23:30] member of warrior trading that's awesome
+[00:23:31] if you don't that's okay too there's
+[00:23:33] going to be a like pin to the top of the
+[00:23:34] comments and Linked In the description
+[00:23:36] where you can download my small account
+[00:23:37] strategy so you can download a strategy
+[00:23:39] you do not have to be the traders that
+[00:23:41] are in group number one who fail because
+[00:23:43] they have no strategy but then there's
+[00:23:45] group number two the second reason
+[00:23:48] people fail is they have a strategy but
+[00:23:51] they don't have the aptitude and the
+[00:23:54] emotional wherewithal and the discipline
+[00:23:57] to follow the rules of the strategy and
+[00:24:00] I'm telling you sometimes it feels like
+[00:24:01] I am barely holding it together myself
+[00:24:03] cuz it is such a struggle on some of
+[00:24:05] these days not to flip over my desk and
+[00:24:08] just start slamming that buy button CU
+[00:24:11] I'm angry but being able to have
+[00:24:13] discipline and composure is absolutely
+[00:24:16] what separates traders who make it long
+[00:24:19] term from those who don't and not
+[00:24:21] everyone has that attribute that ability
+[00:24:23] to be calm cool collected I don't think
+[00:24:25] that I naturally have it but I've
+[00:24:28] trained myself into it and so there is
+[00:24:31] hope there is a chance that you can
+[00:24:33] train it even if that's not how you are
+[00:24:35] naturally so these are really to me the
+[00:24:38] two most important things in trading a
+[00:24:39] strategy set of rules in a system and
+[00:24:42] the discipline to follow it but I want
+[00:24:44] you to remind yourself that yes you're
+[00:24:46] only human and you will have setbacks
+[00:24:47] from time to time and that's the thing
+[00:24:49] you'll be on a good track and then all
+[00:24:51] of a sudden you'll have a little bit of
+[00:24:52] a setback so if we look at my trading
+[00:24:54] here um I mean we could just look at the
+[00:24:56] last um last year uh we go to we can do
+[00:25:01] the last like 18 months or whatever um
+[00:25:03] let's see so we'll go to recent uh no I
+[00:25:07] want to go to detailed and I just want
+[00:25:09] to show you the equity curve here and
+[00:25:11] just to kind of give you perspective
+[00:25:13] that this is the reality for me at least
+[00:25:15] of what it's like to be a Trader there's
+[00:25:17] ups but there's obviously Downs you can
+[00:25:19] see these dips and when I'm having Downs
+[00:25:22] I get depressed I get bummed out and I
+[00:25:25] start to feel like man the only way to
+[00:25:26] recoup this loss quickly is to hit a
+[00:25:29] home run but base hit trading is how I
+[00:25:33] have built my career and even during the
+[00:25:35] crazy markets of the pandemic I was
+[00:25:37] still trading just focusing on base hits
+[00:25:40] the only difference there was that
+[00:25:41] everything seemed to be bigger I could
+[00:25:43] take bigger Shar size the base hits were
+[00:25:45] bigger but they were still for the most
+[00:25:47] part base hits so this is the way I
+[00:25:50] trade it's just slow and steady and if
+[00:25:53] we go back to looks like if I do it like
+[00:25:55] this I could go into 2017 so we'll go to
+[00:25:57] 2017 here and this is what you'll notice
+[00:26:01] so I had this really strong first
+[00:26:03] quarter of the year with a small account
+[00:26:05] and then I went into this period of
+[00:26:07] going kind of you know stagnant I was
+[00:26:09] going sideways and it was because I kept
+[00:26:11] having these bigger red days right if I
+[00:26:13] wasn't having these bigger red days
+[00:26:15] every couple of weeks I would have been
+[00:26:17] you know making progress up here and so
+[00:26:20] this was the turning point right here it
+[00:26:22] was September 27th that was the point
+[00:26:24] where I said all right Ross you got to
+[00:26:26] focus on base hits reduce share size and
+[00:26:29] I realized it's so much easier to get in
+[00:26:31] and out and to be Cutthroat about
+[00:26:33] cutting your losses when you trade with
+[00:26:35] small size you can be nimble you can
+[00:26:38] lock up these profits and you can do
+[00:26:39] really well now I'll tell you that as I
+[00:26:42] said during the pandemic I did pull away
+[00:26:44] a little bit with my share size and I
+[00:26:46] got more aggressive and that was the
+[00:26:47] right move for that market but even
+[00:26:49] today right now even though I've made
+[00:26:51] more than $10 million a trading I start
+[00:26:53] each day with a maximum position of
+[00:26:55] 5,000 shares until I have made more than
+[00:26:59] $11,000 I start each day at zero because
+[00:27:01] I'm a day trader and I set my Max loss I
+[00:27:04] don't like to go down more than five
+[00:27:05] grand but to be honest because I start
+[00:27:08] each day with $5,000 position size the
+[00:27:10] only way I can go down 5,000 is either
+[00:27:13] losing a full dollar a share on one
+[00:27:15] trade which is terrible or more likely
+[00:27:18] having like three losers like this where
+[00:27:21] it's just not working and if that
+[00:27:22] happens then that's fine I'm out of the
+[00:27:24] market but these are still for me
+[00:27:26] reasonably small days that are red and
+[00:27:29] as long as each one of these losses is
+[00:27:31] more in the range of
+[00:27:32] $1,500 I can tolerate three losses that
+[00:27:34] total out to 4,500 but on the flip side
+[00:27:37] on a day when things start working with
+[00:27:39] one or two trades next thing you know
+[00:27:40] I'm up, 1500 1,600 and then as soon as
+[00:27:43] I'm up more than $1,000 I take off that
+[00:27:46] cap I could start taking a slightly
+[00:27:48] bigger size up towards 10,000 15,000
+[00:27:50] shares Max generally speaking and then
+[00:27:54] you know I can make my way up towards my
+[00:27:55] daily goal which is 5,000 I like to set
+[00:27:58] my daily goal the same as my Max loss I
+[00:28:01] don't want to lose more in one day than
+[00:28:02] I can make in one day so if I'm
+[00:28:04] averaging only let's say 2500 a day in a
+[00:28:08] current market I'll tighten my Max loss
+[00:28:10] to that same amount and I'll set that as
+[00:28:13] my new Target so these are always this
+[00:28:15] is dynamic I do adjust it based on
+[00:28:17] market conditions and I adjust it based
+[00:28:19] on the price range stock I'm trading
+[00:28:21] naturally 10,000 shares of GameStop is
+[00:28:24] not the same as 10,000 shares of a 30
+[00:28:26] Cent stock or something like that so you
+[00:28:28] know you do have to be able to kind of
+[00:28:29] give this some wiggle room but um I I
+[00:28:31] think one of the things that I just want
+[00:28:33] to emphasize for you is that what I've
+[00:28:37] learned in my career is that trading
+[00:28:39] really is a marathon in the truest sense
+[00:28:41] of the word that you fight every day
+[00:28:44] it's a struggle it's not easy it's not
+[00:28:46] exactly fun but it can be rewarding and
+[00:28:50] those who find success are the ones
+[00:28:53] ultimately who are very disciplined I
+[00:28:56] hope you found this episode helpful if
+[00:28:58] you did I hope you hit that thumbs up I
+[00:28:59] hope you subscribe to the channel Feel
+[00:29:01] Free as always to download my small
+[00:29:03] account strategy PDF and I'll remind you
+[00:29:05] as always trading is risky my results
+[00:29:08] aren't typical so manage your risk take
+[00:29:10] it slow and I'll see you here for the
+[00:29:11] next episode real soon
+[00:29:13] [Music]

@@ -1,0 +1,702 @@
+# How I use Thinkorswim Platform for Day Trading (Settings, Charts, Hot keys)
+# https://www.youtube.com/watch?v=C4XZ_67c0Fo
+# duration_sec: 1717
+
+[00:00:00] what's up everyone alright so in this
+[00:00:01] video I'm gonna give you guys what
+[00:00:03] you've been asking for my TD Ameritrade
+[00:00:05] thinkorswim layout and you can check out
+[00:00:07] the link below and you can download my
+[00:00:08] latest layout even if you're watching
+[00:00:10] this a year from now or two years from
+[00:00:11] now you can still click the link and
+[00:00:13] i'll have my updated layout available
+[00:00:15] for download now during the video I'm
+[00:00:16] gonna walk you through the reasons that
+[00:00:18] I set up the platform the way I set it
+[00:00:21] up I'm an active day trader and so I
+[00:00:23] customized the platform in order for it
+[00:00:25] to be really fast and really efficient
+[00:00:28] because I want to be able to get into
+[00:00:29] trades quickly and get out of them
+[00:00:30] quickly so as you're going through the
+[00:00:32] video if you have any questions please
+[00:00:34] leave them below I will come back and
+[00:00:36] respond to every question and comment
+[00:00:38] post it on my channel and as always if
+[00:00:40] you loved the video give me a thumbs up
+[00:00:42] and feel free to subscribe to the
+[00:00:43] channel alright let's get into my TV
+[00:00:45] Ameritrade thinkorswim layout alright so
+[00:00:48] on my screen you can see four different
+[00:00:49] trading platforms right now we're going
+[00:00:51] to talk about TD Ameritrade and how I
+[00:00:54] have it set up for day trading now I set
+[00:00:57] it up probably a little differently from
+[00:00:59] what how a lot of traders would set it
+[00:01:01] up and that I actively trade in more
+[00:01:03] than one account at the same time this
+[00:01:07] is kind of crazy it's hard enough to be
+[00:01:08] profitable in one account but I traded
+[00:01:10] multiple accounts at the same time and
+[00:01:12] that's kind of where I'm at as a trader
+[00:01:15] and I can make more money doing that
+[00:01:17] so I've got Lightspeed on the left here
+[00:01:19] so today for instance I've got
+[00:01:21] Lightspeed on the left and I've got TD
+[00:01:22] Ameritrade on the right and this is how
+[00:01:24] I have them set up so while I'm trading
+[00:01:27] this is a screen that I'm looking at and
+[00:01:29] I'm actually going to show you a video
+[00:01:31] here just like a real clip quick clip
+[00:01:35] this is a screen recording of me trading
+[00:01:38] this morning so I was as you can see on
+[00:01:42] the Left I've got my Lightspeed and on
+[00:01:44] the right I've got my TD Ameritrade and
+[00:01:46] right down here you can see East signal
+[00:01:49] the charts and I've got scanners right
+[00:01:51] here on the side one of the things
+[00:01:53] that's kind of a pain about trading is
+[00:01:56] that a lot of traders end up using
+[00:01:57] multiple platforms now one of the nice
+[00:02:01] things about TD Ameritrade in contrast
+[00:02:03] is that they have amazing charts so the
+[00:02:08] only reason I use ecig kn'l is because
+[00:02:10] they've got great charts and they have
+[00:02:12] much better char
+[00:02:14] than Lightspeed or sterling Lightspeed
+[00:02:16] and sterling these are both trading
+[00:02:19] platforms that are used with boutique
+[00:02:20] brokers that really cater to active day
+[00:02:23] traders like professional day traders
+[00:02:25] making hundreds of thousands of dollars
+[00:02:27] and one of the ways they cater to us is
+[00:02:29] by providing incredibly fast execution
+[00:02:32] speeds low latency platforms bare-bones
+[00:02:36] just fast access to the market and
+[00:02:39] discounted commissions
+[00:02:41] well when TD Ameritrade went commission
+[00:02:44] free it kind of changed the game for
+[00:02:46] these boutique brokers they're offering
+[00:02:48] now of you know discount commissions
+[00:02:51] well that's not as good as free but the
+[00:02:54] benefit of fast trading that still is
+[00:02:56] there and I'll just show you for
+[00:02:57] instance here I'm gonna go down to my
+[00:03:00] settings and my hotkeys I can set up an
+[00:03:03] order to buy a hundred shares of this
+[00:03:06] stock by pressing shift one this is the
+[00:03:09] sp500 shift one see how fast this is
+[00:03:12] going from a you know zero to a thousand
+[00:03:14] and now i want to sell half control x
+[00:03:17] control x control x control x i'm
+[00:03:19] selling half of my open position until
+[00:03:21] it's gone so let me do that again up to
+[00:03:23] a thousand shares sell half sell half
+[00:03:26] sell half sell half sell half half half
+[00:03:29] half half half and then the rest you
+[00:03:32] can't do that with TD Ameritrade not
+[00:03:34] only do you not have the hot key
+[00:03:36] functionality but the routing is not as
+[00:03:39] fast however you can make money there
+[00:03:42] and you can you definitely use it for
+[00:03:44] day trading and you can see that today
+[00:03:45] I'm at five thousand nine hundred thirty
+[00:03:48] six dollars and this isn't a hundred
+[00:03:50] thousand dollar day trading account I've
+[00:03:52] got about twenty eight thousand dollars
+[00:03:54] in the account so you counts up like
+[00:03:56] twenty five percent in one day so you
+[00:03:58] can definitely day trade with TD
+[00:04:00] Ameritrade it's not gonna be quite as
+[00:04:01] fast so for you guys if your standard
+[00:04:05] for speed is a little bit lower then you
+[00:04:07] get the benefit of getting free
+[00:04:09] commissions and not having to pay the
+[00:04:12] hundred seventy dollars a month that I'm
+[00:04:14] paying to use e Sigma
+[00:04:17] because TD Ameritrade has awesome charts
+[00:04:19] so let me get into how I've got TD
+[00:04:21] Ameritrade laid out so this is how it
+[00:04:24] looks when I log in each
+[00:04:26] this is the active trader window so
+[00:04:28] under monitor you go to the left go to
+[00:04:30] trade or go to the right go to trade and
+[00:04:31] then over to active trader and then this
+[00:04:34] is how I have my layout kind of set up
+[00:04:37] which you know might be a little
+[00:04:38] different from how other traders use it
+[00:04:40] because what you'll notice is that my
+[00:04:42] monitor right here doesn't have any
+[00:04:45] charts on it I put my charts on a second
+[00:04:48] monitor and I do that because I like to
+[00:04:51] have my open orders right in front of me
+[00:04:54] and then I put the charts up on the
+[00:04:55] other screen so I look back and forth
+[00:04:57] but I like to have all of my orders in
+[00:05:00] one place I've heard of some people who
+[00:05:02] will set up their monitors so they have
+[00:05:06] like you know let's say a monitor up
+[00:05:08] here like this and then they'll float
+[00:05:10] the the order window above it but I
+[00:05:13] don't like that because then you got a
+[00:05:15] you know be looking all over the place
+[00:05:17] for your order windows and then you've
+[00:05:19] got to go look for the place where
+[00:05:20] you've got your you know like position
+[00:05:23] window and to me it makes sense to keep
+[00:05:25] all of that in one place and then just
+[00:05:28] easier to glance over to look at the
+[00:05:29] chart so anyways that's how I have it
+[00:05:31] set up so um for you though if you're
+[00:05:34] using TD Ameritrade is your primary
+[00:05:36] platform that means you've got all this
+[00:05:38] space right here you can take that out
+[00:05:39] of the way all right so now we've got a
+[00:05:41] little more room well one of the things
+[00:05:44] that's kind of interesting is if you
+[00:05:47] have this set up just like this this is
+[00:05:49] obviously a huge amount of space under
+[00:05:52] active trader so what most people would
+[00:05:53] do is they'll go up to this little link
+[00:05:55] right here there's a little button and
+[00:05:57] they would space this out a little bit
+[00:05:59] more so now we've got four windows by
+[00:06:02] the way if you want my layout I went to
+[00:06:04] setup and shared it and I put a link
+[00:06:06] right in the description down below you
+[00:06:08] can click that link and then you can
+[00:06:09] download my shared layout if you want to
+[00:06:11] just pop mine up there and make it fast
+[00:06:13] so what I'm going to do I could type a
+[00:06:16] pdn here and unfortunately if I train if
+[00:06:21] I change this stock to s py it's not
+[00:06:23] gonna change this one so what I need to
+[00:06:25] do if I want them to change together so
+[00:06:27] I need to link them with this order
+[00:06:28] linking so now I'm gonna go s py and
+[00:06:30] then I'll order link it to four order
+[00:06:34] link this one to four as well and now if
+[00:06:36] I trade this one a pdn it's got train
+[00:06:39] right it's gonna they're all linked
+[00:06:41] together so it'll change the trade
+[00:06:43] window for all four of them
+[00:06:45] of course you may say well you know I
+[00:06:47] want to be watching the S&P 500 or SCS
+[00:06:50] or whatever the case is on this side and
+[00:06:52] on this side is a different stock and
+[00:06:55] that's whatever you prefer so the way I
+[00:06:57] would do it is I have my active trader
+[00:07:01] right here now the reason I like this is
+[00:07:02] because I want to see how many shares
+[00:07:05] I'm currently holding and I need the
+[00:07:07] active trader in order to see it if I
+[00:07:09] take this away I have my level two and I
+[00:07:13] could put up my chart and see the chart
+[00:07:15] or put up the chart like this and but I
+[00:07:19] can't tell how many shares I'm holding I
+[00:07:23] can put up the the trade window here to
+[00:07:26] buy and sell but again it's not showing
+[00:07:29] me in a very obvious place how many
+[00:07:30] shares I'm holding and so instead I use
+[00:07:33] the active trading window because it
+[00:07:35] shows the number of shares I bought and
+[00:07:37] sold and my position so let's say I want
+[00:07:40] to buy this stock and I want to buy one
+[00:07:41] share I'm gonna click buy market hmm buy
+[00:07:45] market so what's going on doesn't seem
+[00:07:48] like I can't really tell what's going on
+[00:07:49] is my order this says I have to buy
+[00:07:51] orders all right so that's because this
+[00:07:55] what this has the buy orders highlighted
+[00:07:56] there but this is a little confusing now
+[00:07:59] I can't tell what's happening if I
+[00:08:02] minimize that window move it over here
+[00:08:03] for a second you'll see that on this
+[00:08:06] window it's showing my to open and
+[00:08:09] working orders now it's after hours so
+[00:08:11] I'm gonna cancel that order and cancel
+[00:08:13] this order market orders won't fill
+[00:08:15] after hours but that's kind of a problem
+[00:08:17] and so that's why I have this window
+[00:08:20] down here popped out this window is
+[00:08:22] actually this whole tab so what I did
+[00:08:26] was I went up here like this and I
+[00:08:28] popped it out so I pop it out and then I
+[00:08:31] put it right down here that way I can
+[00:08:33] always see if I have open orders so now
+[00:08:36] if I take in a place of by market right
+[00:08:38] away it shows me I got an open order and
+[00:08:40] then when I actually you know take a
+[00:08:43] trade it'll show me right away where I
+[00:08:45] got filled so I sold this stock and my
+[00:08:47] fill was at 1394 so it's very clear
+[00:08:50] where I got in and where I got out and I
+[00:08:52] could certainly make this big
+[00:08:53] if I want to so I can see you know all
+[00:08:55] the orders of where I got in where I got
+[00:08:57] out you can make it as big or as small
+[00:09:00] as you want it's kind of whatever is
+[00:09:01] enough so you see what you need to see
+[00:09:04] without being without having unnecessary
+[00:09:06] information
+[00:09:07] the only problem to me is that I wish I
+[00:09:10] could have this info in here in this
+[00:09:12] window because now I have this kind of
+[00:09:14] awkward situation of you know how do i
+[00:09:18] situate this do I make this like really
+[00:09:20] tall like that you know I mean I guess I
+[00:09:23] I could and then maybe I minimize some
+[00:09:26] of these to make it so I can make it a
+[00:09:28] little bit more narrow kind of like this
+[00:09:32] you know I could do that and if I click
+[00:09:34] by market I see it up there and then I
+[00:09:37] could cancel it right here cancel all so
+[00:09:40] maybe that's how I would do it if I was
+[00:09:41] using this as my only platform I'd
+[00:09:44] probably do something like that and then
+[00:09:45] just riously I don't need to see the
+[00:09:47] expiration so I would go in here and
+[00:09:49] remove some of those columns and kind of
+[00:09:50] clean that up
+[00:09:51] all right now you don't need for ladders
+[00:09:54] these are your different ladders so and
+[00:09:56] you do you might want charts and so what
+[00:09:58] I would do is I would pop this off and
+[00:09:59] down here I would put two charts like
+[00:10:02] this so this is how I usually have these
+[00:10:05] set up I actually typically put the bots
+[00:10:08] that that chart on the bottom so um it
+[00:10:11] would actually look a little different
+[00:10:12] but but let's just go with this for
+[00:10:13] right now so this is my five minute this
+[00:10:16] is my one minute so I've got the one
+[00:10:18] minute one day time frame that's the
+[00:10:20] five minute and the only indicator that
+[00:10:22] I need to see on this is my V web the
+[00:10:25] volume weighted average price it's the
+[00:10:26] most important indicator for active day
+[00:10:28] trading it's not to say you couldn't add
+[00:10:30] others if you want to the nine of the
+[00:10:32] twenty moving average are great on the
+[00:10:34] five-minute chart the 200 moving average
+[00:10:36] is great on the daily especially
+[00:10:38] important on the daily and just as just
+[00:10:41] to show you this stock hit resistance at
+[00:10:43] the 200 on the daily and when we were
+[00:10:46] trading this morning we were like well
+[00:10:47] it has no resistance until the 200 the
+[00:10:51] 200 is very well respected and and
+[00:10:53] typically I wouldn't have the same stock
+[00:10:55] on both sides I just do for some reason
+[00:10:58] there in any case so the 200 is
+[00:11:01] important so this is what my layout
+[00:11:02] looks like on my charts 1 minute 5
+[00:11:04] minute and daily so to replicate that in
+[00:11:07] TV Amer
+[00:11:07] trade I'm actually gonna have to open up
+[00:11:10] I'm gonna have to go down one more row
+[00:11:12] here and I'm gonna link this to number
+[00:11:14] four as well and this one I'm going to
+[00:11:18] let's see I'm gonna just scroll up here
+[00:11:20] so I can see this take that off and put
+[00:11:23] that on so now I've got the daily chart
+[00:11:25] right down here so the oh no sorry
+[00:11:28] this is gonna be the daily chart right
+[00:11:32] there so on this one I'll show you
+[00:11:36] we're gonna go to studies we're going to
+[00:11:38] add study and then we're gonna go to
+[00:11:39] moving average right here and I'm gonna
+[00:11:42] add the moving average exponential all
+[00:11:47] right so now I got a double click this
+[00:11:48] and I'm gonna change it to 200 and I'm
+[00:11:52] gonna have to change that color because
+[00:11:54] I really want to do more of this like
+[00:11:57] kind of like bright magenta that catches
+[00:12:00] my eye the style the width I'm gonna go
+[00:12:03] with to apply that's looking better
+[00:12:06] there we go see nice and clean all right
+[00:12:10] so now we've got our 200 moving average
+[00:12:12] up there so I'm gonna bring this back
+[00:12:13] down and I really only use the daily
+[00:12:16] chart just to kind of check it in the
+[00:12:17] morning and then you know sort of keep
+[00:12:19] an eye on it as the day goes on are we
+[00:12:21] running into resistance levels but I
+[00:12:22] don't look at it constantly so once I've
+[00:12:24] kind of analyzed the chart I can
+[00:12:25] minimize that well I focus on the one
+[00:12:27] minute or the five minute and sometimes
+[00:12:29] I'll go like this because I'm focusing
+[00:12:30] more on the one minute right now and
+[00:12:32] then I'll say well let me go and check
+[00:12:34] the five-minute chart just the 5 minute
+[00:12:36] checkout and then I kind of slide it
+[00:12:37] over that way
+[00:12:38] so I go back and forth throughout the
+[00:12:40] day based on time of day and stuff like
+[00:12:41] that those of you guys if you want to
+[00:12:44] learn more about my strategy I really
+[00:12:47] encourage you to check out the links in
+[00:12:48] the description I've got an online
+[00:12:49] training that is about two hours that
+[00:12:51] walks you through how I find stocks to
+[00:12:53] trade every single morning where I get
+[00:12:55] in where I get out I'm not gonna break
+[00:12:57] that down in this video right here but
+[00:12:59] if you guys want to learn about that I
+[00:13:00] encourage you to check out those looks
+[00:13:02] below so this is how I would generally
+[00:13:04] have it set up and having the volume
+[00:13:07] overlaid on price that's kind of
+[00:13:09] personal preference I don't personally
+[00:13:11] do that in a signal I have volume on a
+[00:13:15] separate pane so you know you'd have to
+[00:13:18] go in here
+[00:13:19] to your studies and edit studies and
+[00:13:22] then adjust this a little bit you got
+[00:13:25] change the settings on it but in any
+[00:13:27] case that's kind of the nuance stuff
+[00:13:29] that's personal preference all right so
+[00:13:31] we've got a PDF now so if I change this
+[00:13:33] to the sp500 this will all update and
+[00:13:36] you can see it's not the fastest but
+[00:13:40] it's it's not terribly slow either this
+[00:13:44] update I think updates a little bit
+[00:13:47] faster you know but again like this is a
+[00:13:51] it's 170 dollars a month for East signal
+[00:13:54] so I would hope it updates really fast
+[00:13:55] and this is free but it's it's really
+[00:13:57] good for free so let's go back to a PDF
+[00:14:01] alright so a PD n so that's on the left
+[00:14:03] and then if you wanted a second stock on
+[00:14:06] the right that's where I would have the
+[00:14:07] second one generally and today was s NCR
+[00:14:10] so this is the one I was watching on the
+[00:14:12] right hand side so here we're gonna
+[00:14:13] change this to like that we've got our
+[00:14:17] two charts and then right down here and
+[00:14:19] we've got the let's hope we got to go to
+[00:14:23] number four or what was that would we
+[00:14:25] link this to number two for yellow I go
+[00:14:28] pike I just you know colors that I like
+[00:14:31] so then we move this up a little bit
+[00:14:34] turn that on off turn that on now we've
+[00:14:37] got that we've got changed this from a
+[00:14:39] one-minute over to the daily and then I
+[00:14:44] can jump in here and add the 200 moving
+[00:14:46] average on if I want to I'll just do it
+[00:14:48] for the heck of it right now so moving
+[00:14:50] averages and moving average exponential
+[00:14:54] double click it once it's on there
+[00:14:56] change that to a two because what we did
+[00:15:00] change just to a magenta shade okay
+[00:15:04] apply and there we go oops that's still
+[00:15:08] a nine 200
+[00:15:14] okay all right there we go so this is
+[00:15:18] kind of how I would have it laid out now
+[00:15:20] generally I don't like focusing on more
+[00:15:22] than two stocks at once you certainly
+[00:15:25] could say and you know if you really you
+[00:15:28] could duplicate this entire window
+[00:15:31] across you know four monitors and be
+[00:15:35] watching well two four six eight
+[00:15:37] different stocks at the same time if you
+[00:15:40] do that your computer's probably gonna
+[00:15:42] run a little bit slower um I find it to
+[00:15:46] be a little more than I could even
+[00:15:49] handle watching I usually just like
+[00:15:50] being zoned in on two stocks at once and
+[00:15:53] now I want to show you a little bit
+[00:15:56] about how I set up this area here so I
+[00:15:59] have by market and sell Marcus so the by
+[00:16:02] market that clicks that just pops up
+[00:16:04] that order the only problem is that on a
+[00:16:06] stock that's really volatile like this
+[00:16:08] one you buy market and say you
+[00:16:12] accidentally typed in you meant a
+[00:16:13] thousand shares you actually typed in
+[00:16:15] ten thousand it could be you could get a
+[00:16:17] lot of slippage the difference between
+[00:16:19] when you press it and when you actually
+[00:16:20] get filled so I kind of like using buy
+[00:16:23] ask now the nice thing with buy ask is
+[00:16:26] that I'm getting filled at the ask price
+[00:16:29] and not higher you know but there's some
+[00:16:32] risk that my whole order won't fill and
+[00:16:35] let me show you a the real time example
+[00:16:38] of that so this is the video from this
+[00:16:40] morning and where I put my order let's
+[00:16:44] see go back to where I could jumped in
+[00:16:47] so I'm gonna buy this stock on the right
+[00:16:50] hand side with 3,000 shares right right
+[00:16:53] around here okay
+[00:16:56] all right so check this out so I'm gonna
+[00:16:58] click this Buy button right here
+[00:17:00] buy asked three times one two three just
+[00:17:04] like that I pressed it three times and
+[00:17:05] the order filled pretty quickly no doubt
+[00:17:08] about it I mean that was a pretty solid
+[00:17:09] fill but you know there was the risk
+[00:17:13] that if the stock ripped immediately
+[00:17:16] let's say the nine dollars that my
+[00:17:17] entire order wouldn't fill because I
+[00:17:19] said I'm only willing to pay 84 so right
+[00:17:23] there where it was at 87 and potentially
+[00:17:25] going higher
+[00:17:26] and like right here for a second I only
+[00:17:29] have 1400 shares so what I have to wait
+[00:17:31] is I'm now on the bid buying at 84 I've
+[00:17:35] got to wait for someone to sell me
+[00:17:36] shares and someone sells me the shares
+[00:17:38] whatever and I get filled my full three
+[00:17:40] thousand all right so now I'm in the
+[00:17:42] trade so that's why I use by ask I've
+[00:17:47] done both and you know I think they're
+[00:17:51] both okay by the ask feels a little
+[00:17:54] safer when you're dealing we're dealing
+[00:17:56] with a volatile stock so in here you can
+[00:17:59] click on this settings widget and you
+[00:18:01] can change which orders are on the first
+[00:18:03] line and second line or which buttons so
+[00:18:05] you can have by ask and you can add that
+[00:18:07] item and then we would just move this up
+[00:18:11] to right here and then you'll notice I
+[00:18:14] have this one called join ask so join
+[00:18:17] ask means I want to sell at the ask
+[00:18:19] price so let's see sell ask add item and
+[00:18:26] let's just say okay alright so there's
+[00:18:28] so now this is on the second row which
+[00:18:30] you know is maybe kind of a funny place
+[00:18:32] for it I might want to if I'm gonna keep
+[00:18:35] it there move it move it up so let's see
+[00:18:39] move up to maybe right here maybe that
+[00:18:44] makes sense by asked by market sell
+[00:18:47] market join task and then cancel alright
+[00:18:50] so and that's probably a better way to
+[00:18:53] do it and I'll actually update that on
+[00:18:55] my side here and then let's move that up
+[00:19:00] I'm still kind of fine-tuning how I want
+[00:19:04] to use the platform and what makes the
+[00:19:05] most sense alright so and then we've got
+[00:19:09] do I have to cancel
+[00:19:10] oh I've the cancel all I've cancelled
+[00:19:12] and cancel all and cancel all is
+[00:19:16] actually better than cancel because
+[00:19:18] cancelled dot dot brings up that second
+[00:19:21] window and since I'm only trading one
+[00:19:24] stock at a time cancel all is perfect
+[00:19:26] alright so we're gonna say okay there
+[00:19:29] the template I actually don't personally
+[00:19:32] use any of the templates you can use the
+[00:19:34] templates for bracket orders I just
+[00:19:37] don't like to use them for the way that
+[00:19:38] I'm trading I tried it and I did
+[00:19:40] find it particularly helpful so those
+[00:19:42] ones I take off as well remove item and
+[00:19:46] okay so we'll say okay so now there's
+[00:19:50] probably a way to save this as a default
+[00:19:56] but I'm not totally sure what that is so
+[00:20:00] I'll just remove this quickly and oops
+[00:20:05] cancel that
+[00:20:07] all right settings there we go so remove
+[00:20:11] item and then we're gonna add the cancel
+[00:20:13] all add and then we'll move that up and
+[00:20:20] we'll kick that one off okay there we go
+[00:20:23] so and I personally I haven't used the
+[00:20:26] reverse so I'm gonna take that one off
+[00:20:29] and I actually haven't used the flatten
+[00:20:31] although I've heard that that's a
+[00:20:32] helpful key because when you press
+[00:20:34] flatten it gets you out of the position
+[00:20:38] even if you have like sort of an odd
+[00:20:39] number of shares it just immediately
+[00:20:42] gets you right out so maybe I'll move
+[00:20:44] that up to I don't know next to I'll put
+[00:20:51] it next to the cell next to the cell the
+[00:20:53] ask one okay so this is I would say this
+[00:20:58] is almost exactly how I would use it
+[00:21:00] these this setting right here you can
+[00:21:03] see mine is a little bit cleaner on the
+[00:21:06] left and this one on the right that
+[00:21:07] pre-loaded has got a little more stuff
+[00:21:09] going on I felt that I didn't really
+[00:21:11] need to see the buy orders here because
+[00:21:15] I'm using the level two on my other
+[00:21:17] window so I guess that's the one thing
+[00:21:19] that we still don't have here is whether
+[00:21:21] or not you want to be using level two
+[00:21:23] which i think is a must-have so let's
+[00:21:28] see that's not the right one it's right
+[00:21:31] here customized so we're gonna take away
+[00:21:33] remove and I'm gonna remove volume and
+[00:21:38] I'm gonna remove cell orders so I'm
+[00:21:39] going to simplify it a little bit now
+[00:21:42] the level two you know we're starting to
+[00:21:45] run out of a little bit of space here so
+[00:21:47] I'd probably end up saying well once
+[00:21:50] I've looked at my daily chart I don't
+[00:21:51] really need to see it anymore the level
+[00:21:54] two
+[00:21:54] that's not gonna work there let's bring
+[00:21:57] this down a little bit so it probably
+[00:21:59] end up putting it right down here and
+[00:22:02] shrinking it down kind of like that okay
+[00:22:07] so just like that and I'm gonna give you
+[00:22:09] guys a link so you can download this
+[00:22:10] exact layout if you want to take it and
+[00:22:12] then kind of mess around with it you're
+[00:22:14] welcome to do that so in the morning
+[00:22:16] when I'm doing my pre market analysis I
+[00:22:18] don't need the active trader turned on
+[00:22:20] so I kind of move this whole section up
+[00:22:23] I'd focus on the one minute the five
+[00:22:25] minute the daily then once I've analyzed
+[00:22:27] the daily I'd probably bring that down a
+[00:22:29] little bit shrink it down focus more on
+[00:22:31] the five minute in the one minute bring
+[00:22:33] this down a little bit use the active
+[00:22:35] trader a little bit I've done some of
+[00:22:38] the pointing and clicking which means
+[00:22:41] right here you click this and it's just
+[00:22:43] sending an order right away
+[00:22:45] turn on the click auto send if you want
+[00:22:47] to send orders instantly so let's check
+[00:22:49] out this live recording again so when I
+[00:22:52] decided I wanted to start getting out
+[00:22:53] what I did was and I put an order I was
+[00:22:57] expecting at this stock if it broke over
+[00:22:59] nine dollars which was the store
+[00:23:01] technical resistance area here that it
+[00:23:03] would probably rip really quickly up to
+[00:23:06] at least 9 24 9 25 so what I went ahead
+[00:23:09] it did was I put a sell order at 9:20 in
+[00:23:12] 924 so let me go back to where I placed
+[00:23:15] that order so I'm scrolling up here and
+[00:23:18] I click once
+[00:23:19] then I click twice and now see how I
+[00:23:21] have two working orders the price is at
+[00:23:24] 9:20 and 924 all right so those orders
+[00:23:27] are working when the stock ends up
+[00:23:29] ripping through 9:00 boom it rips
+[00:23:33] through 9:00 I think I tried to add in
+[00:23:34] this account I don't I'm not sure what
+[00:23:36] happened but in any case it rips through
+[00:23:38] and as soon as it rips through I'm gonna
+[00:23:41] get my order filled watch that just like
+[00:23:43] that boom my orders filled at 9:20 and
+[00:23:45] the current price is 9:20 by 9:20 too so
+[00:23:48] the active trader here I think is
+[00:23:51] helpful for you know quickly throwing an
+[00:23:55] order up on the ask now of course in
+[00:23:58] Lightspeed I could just type you know I
+[00:24:01] could just click like this and then
+[00:24:03] click sell but I don't have this type of
+[00:24:06] order entry window so give
+[00:24:08] I don't have that I kind of have to work
+[00:24:10] with what I have I would say that in
+[00:24:12] terms of using space this is a little
+[00:24:15] taking up a little more space than I
+[00:24:17] wish it needed to but you know it's just
+[00:24:21] kind of the way it is so you make the
+[00:24:23] most of it and I think that this is a
+[00:24:26] good way to have TD Ameritrade set up
+[00:24:29] and this would give me trading on two
+[00:24:33] different stocks at the same time with
+[00:24:35] the orders window here so I can see
+[00:24:37] what's going on now excuse me I'm gonna
+[00:24:40] give you guys a couple of tips on
+[00:24:42] settings number one application settings
+[00:24:44] go here make sure on active trader this
+[00:24:47] is set to zero order submission rate
+[00:24:51] limit is zero if you have it set at 500
+[00:24:53] what's gonna happen is if you double
+[00:24:56] click this the first order goes through
+[00:24:59] and the second one asks you to approve
+[00:25:02] it because you've exceeded the order
+[00:25:05] rate the order submission rate so I'm
+[00:25:08] gonna cancel those orders so now I'm
+[00:25:09] gonna go back in here to setup I'm gonna
+[00:25:11] bring that back down to zero and what
+[00:25:14] will happen is now I can click this
+[00:25:16] twice and I've got two orders I click it
+[00:25:19] five times I've got five orders so it
+[00:25:21] makes it much faster to get in and get
+[00:25:25] out as you need to the second tip go to
+[00:25:29] application settings go to system and if
+[00:25:31] it's not already set to a real time
+[00:25:32] quote speed make sure you set it to real
+[00:25:35] time that is a really important setting
+[00:25:37] all right now let's see so we've got
+[00:25:41] this laid out again the one thing I
+[00:25:43] really wish is they give us an ability
+[00:25:46] to change the color settings here on the
+[00:25:50] level too and I really do wish I had an
+[00:25:53] ability to have an order prepared
+[00:25:55] because what I often do in this account
+[00:25:59] here as I say oh you know I'm thinking
+[00:26:01] about buying a pdn let's say at fifteen
+[00:26:04] twenty one or fifteen twenty five I put
+[00:26:07] the order ready to go and then I put it
+[00:26:09] a thousand shares well with TD you can't
+[00:26:12] really do that I mean you could kind of
+[00:26:15] do it by clicking here
+[00:26:18] turning off the auto send and
+[00:26:20] clicking here to buy and then it brings
+[00:26:22] this up and then you click Edit and
+[00:26:26] you're now editing the order and but
+[00:26:28] that feels so clunky I mean and it's
+[00:26:31] taking up all this space so I really
+[00:26:33] don't like that you know it
+[00:26:36] unfortunately is kind of one of those
+[00:26:39] things that if you really want to make
+[00:26:41] the most of the free Commission's you
+[00:26:43] have to accept some sacrifices on the
+[00:26:46] platform side and one of them is gonna
+[00:26:49] be some execution speed sacrifice it's
+[00:26:51] not gonna be as fast as Lightspeed this
+[00:26:54] platform is faster hands down
+[00:26:56] it just is you know and any platform any
+[00:27:00] broker you're using sterling with is
+[00:27:01] gonna be faster you will be able to
+[00:27:03] trade like this you can just can't trade
+[00:27:06] that fast with wood TV but it's a great
+[00:27:09] platform if you kind of focus on one
+[00:27:12] good quality entry and then one you know
+[00:27:14] good quality exit kind of a little bit
+[00:27:16] less active but more precise and being
+[00:27:19] picky is not a bad thing as a trader so
+[00:27:22] again I really encourage you guys to
+[00:27:25] check out some of the links in my
+[00:27:26] description if you want to attend the
+[00:27:27] online training where I walk you through
+[00:27:29] how I find these stocks to trade where
+[00:27:31] I'm getting in where I'm getting out I
+[00:27:33] think you'll learn a lot from it and if
+[00:27:35] you want to download this shared
+[00:27:38] workspace I'll put a link below where
+[00:27:40] you can jump over I'll keep the most
+[00:27:43] updated link on my website so you can
+[00:27:46] jump over there and download it and if
+[00:27:48] you guys have suggestions of things that
+[00:27:50] maybe I could do to get this platform
+[00:27:52] running even better for me feel free to
+[00:27:54] leave them below I'm not an expert on it
+[00:27:56] by any means but I've been testing it
+[00:27:59] out and getting a little bit of a sense
+[00:28:00] of how it works and I've been pretty
+[00:28:01] happy with it
+[00:28:02] so yeah so go you click here and detach
+[00:28:05] this if you want to pop this out and
+[00:28:08] float it to a different monitor alright
+[00:28:11] so as always questions comments leave
+[00:28:13] them below and I'll see you guys for the
+[00:28:15] next video
+[00:28:16] hey it's me again the most popular video
+[00:28:19] on day training on YouTube was made by
+[00:28:21] me you can check it out below if you
+[00:28:22] haven't already and as always if you
+[00:28:24] have questions leave them in the
+[00:28:26] comments I personally respond to every
+[00:28:28] question that's posted on my channel
+[00:28:31] [Music]

@@ -1,0 +1,2592 @@
+{
+  "channel": "Ross Cameron - Warrior Trading",
+  "channel_id": "UCBayuhgYpKNbhJxfExYkPfA",
+  "source_index": "daytradewarrior_videos.json",
+  "selection": {
+    "classes": [
+      "howto",
+      "rules",
+      "mistakes"
+    ],
+    "min_minutes": 8.0,
+    "counts": {
+      "howto": 158,
+      "rules": 85,
+      "mistakes": 14
+    },
+    "total_hours": 158.9
+  },
+  "video_count": 257,
+  "videos": [
+    {
+      "id": "W6BnX1T3KZ0",
+      "title": "How to Day Trade: The Plain Truth by Ross Cameron (Full Audiobook)",
+      "url": "https://www.youtube.com/watch?v=W6BnX1T3KZ0",
+      "duration_sec": 16281,
+      "view_count": 145000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "oxob0x0Xz7s",
+      "title": "The Ultimate Day Trading Guide (Full Training Chapters 1 - 10)",
+      "url": "https://www.youtube.com/watch?v=oxob0x0Xz7s",
+      "duration_sec": 11172,
+      "view_count": 1000000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "6Yszkb7ZZoY",
+      "title": "How I'd Retire from the 9-5 Job in 3 Years (Starting from ZERO)",
+      "url": "https://www.youtube.com/watch?v=6Yszkb7ZZoY",
+      "duration_sec": 7384,
+      "view_count": 167000,
+      "upload_date": null,
+      "timestamp": 1761868800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "js25lIZMUSY",
+      "title": "The Simplest Day Trading Strategy for Beginners (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=js25lIZMUSY",
+      "duration_sec": 6899,
+      "view_count": 144000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "w97KlUrVDk0",
+      "title": "How to Grow a Small Account with ZERO Experience (Full Training)",
+      "url": "https://www.youtube.com/watch?v=w97KlUrVDk0",
+      "duration_sec": 6517,
+      "view_count": 460000,
+      "upload_date": null,
+      "timestamp": 1759276800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "BUCPPCXOHbs",
+      "title": "The ONLY Technical Analysis Guide You'll Ever Need! (Beginner to Advanced)",
+      "url": "https://www.youtube.com/watch?v=BUCPPCXOHbs",
+      "duration_sec": 6090,
+      "view_count": 977000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "m5zu_X-_51I",
+      "title": "How I Made $1,000,000 in 51 Days of Day Trading (Full Training)",
+      "url": "https://www.youtube.com/watch?v=m5zu_X-_51I",
+      "duration_sec": 5971,
+      "view_count": 1300000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "aqTXoV923OE",
+      "title": "7 Candlestick Patterns I'M ACTUALLY USING Every Day",
+      "url": "https://www.youtube.com/watch?v=aqTXoV923OE",
+      "duration_sec": 5125,
+      "view_count": 207000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "_0wygrb5pPs",
+      "title": "My Bear Market 🐻 Day Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=_0wygrb5pPs",
+      "duration_sec": 5088,
+      "view_count": 172000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "M07xElrhVYM",
+      "title": "How Danny Scaled his Day Trading Strategy from $10/day to $350k/Year",
+      "url": "https://www.youtube.com/watch?v=M07xElrhVYM",
+      "duration_sec": 4861,
+      "view_count": 197000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Wsq8zdtCcis",
+      "title": "How I Made $500,000 in 7 Days of Day Trading (Full Training)",
+      "url": "https://www.youtube.com/watch?v=Wsq8zdtCcis",
+      "duration_sec": 4633,
+      "view_count": 87000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "oKlhUSSHe2Q",
+      "title": "How To Start Day Trading in 2026 (full training)",
+      "url": "https://www.youtube.com/watch?v=oKlhUSSHe2Q",
+      "duration_sec": 4477,
+      "view_count": 386000,
+      "upload_date": null,
+      "timestamp": 1767139200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "LNDd7rf-9FU",
+      "title": "How to Read Technical Indicators on Candlestick Charts",
+      "url": "https://www.youtube.com/watch?v=LNDd7rf-9FU",
+      "duration_sec": 4445,
+      "view_count": 117000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Q-7eBHjD1ks",
+      "title": "How to Day Trade with Lightspeed (Platform Demo & Honest Review)",
+      "url": "https://www.youtube.com/watch?v=Q-7eBHjD1ks",
+      "duration_sec": 4335,
+      "view_count": 65000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "EzHEGVb_9-c",
+      "title": "Year in Review: 2016 +$222,244.91 Day Trading Momentum Strategies",
+      "url": "https://www.youtube.com/watch?v=EzHEGVb_9-c",
+      "duration_sec": 4335,
+      "view_count": 406000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "myUKta-wicQ",
+      "title": "How to Read Candlestick Shapes & Charts (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=myUKta-wicQ",
+      "duration_sec": 4271,
+      "view_count": 1100000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "YiMItz4fgFk",
+      "title": "You're Probably Reading Candlestick Charts WRONG 💥 DAY 3 | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=YiMItz4fgFk",
+      "duration_sec": 3967,
+      "view_count": 54000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "y-sFO1ouTX4",
+      "title": "How I Made $175,767.72 in 3 Hours of Day Trading (Full Training)",
+      "url": "https://www.youtube.com/watch?v=y-sFO1ouTX4",
+      "duration_sec": 3963,
+      "view_count": 63000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ORWJzImSTdE",
+      "title": "Master the Dip Trading Strategy (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=ORWJzImSTdE",
+      "duration_sec": 3905,
+      "view_count": 91000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "d0wt45LbvWo",
+      "title": "How to WIN at Day Trading as a BEGINNER (Step by Step Guide)",
+      "url": "https://www.youtube.com/watch?v=d0wt45LbvWo",
+      "duration_sec": 3869,
+      "view_count": 994000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "w2owyBNunDQ",
+      "title": "The Moving Average Trading Strategy You Need! (Full Training)",
+      "url": "https://www.youtube.com/watch?v=w2owyBNunDQ",
+      "duration_sec": 3598,
+      "view_count": 108000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_pdkPhuTjuE",
+      "title": "GameStop EXPLAINED 🍏 The Roaring Kitty Thesis 2020-2024",
+      "url": "https://www.youtube.com/watch?v=_pdkPhuTjuE",
+      "duration_sec": 3597,
+      "view_count": 68000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "RLGDwe2m70E",
+      "title": "I Day Traded This ONE Strategy For 21 days...Here Are The Results",
+      "url": "https://www.youtube.com/watch?v=RLGDwe2m70E",
+      "duration_sec": 3596,
+      "view_count": 41000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "OHe6_FpxO0g",
+      "title": "How to Start Day Trading as a Business (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=OHe6_FpxO0g",
+      "duration_sec": 3595,
+      "view_count": 147000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "2n2Jt0PEPss",
+      "title": "+$45,546.52 TODAY with the 30 Minute MACD Scalping Strategy",
+      "url": "https://www.youtube.com/watch?v=2n2Jt0PEPss",
+      "duration_sec": 3595,
+      "view_count": 412000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "SLMXOd13uqI",
+      "title": "How to Day Trade BREAKING NEWS with a Scalping Strategy (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=SLMXOd13uqI",
+      "duration_sec": 3592,
+      "view_count": 158000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "iIC62xnblLc",
+      "title": "The ONLY Pattern I’m Trading for BIG Winners 💥 Day 2 | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=iIC62xnblLc",
+      "duration_sec": 3583,
+      "view_count": 105000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "1JOg8wZoeBI",
+      "title": "How to Trade Penny Stocks 💥 DAY 6 | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=1JOg8wZoeBI",
+      "duration_sec": 3578,
+      "view_count": 48000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "xgnqOu_fchA",
+      "title": "High Probability Candlestick Chart Patterns",
+      "url": "https://www.youtube.com/watch?v=xgnqOu_fchA",
+      "duration_sec": 3577,
+      "view_count": 67000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "E2SYZEF5AEs",
+      "title": "Proven Formula for Finding BEST Stocks to Day Trade (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=E2SYZEF5AEs",
+      "duration_sec": 3569,
+      "view_count": 113000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "t9G3SKzmuh4",
+      "title": "How I turned $514.22 to $4,000 in 7 Days | Small Account Challenge Ep 9",
+      "url": "https://www.youtube.com/watch?v=t9G3SKzmuh4",
+      "duration_sec": 3566,
+      "view_count": 132000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "OLdOfU01wHY",
+      "title": "13 Day Trading Rules and Regulations You NEED to Know About",
+      "url": "https://www.youtube.com/watch?v=OLdOfU01wHY",
+      "duration_sec": 3551,
+      "view_count": 68000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "mgUoZPlGGas",
+      "title": "How to Start Dividend Investing for Beginners (Full Course)",
+      "url": "https://www.youtube.com/watch?v=mgUoZPlGGas",
+      "duration_sec": 3550,
+      "view_count": 147000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "d1CRtDuUARQ",
+      "title": "The Simple Trading Strategy I'd Use If I Had To Start Over... 💥 DAY 1 | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=d1CRtDuUARQ",
+      "duration_sec": 3546,
+      "view_count": 225000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "_4Q0hlNFn-A",
+      "title": "Top 3 MOST Profitable Candlestick Chart Patterns (Full Training)",
+      "url": "https://www.youtube.com/watch?v=_4Q0hlNFn-A",
+      "duration_sec": 3542,
+      "view_count": 338000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "IwDORxvXAAs",
+      "title": "How to BUY THE DIP the RIGHT WAY",
+      "url": "https://www.youtube.com/watch?v=IwDORxvXAAs",
+      "duration_sec": 3540,
+      "view_count": 309000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "G4uTdr_zx1I",
+      "title": "How to Find Stocks BEFORE The Make A Big Move! (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=G4uTdr_zx1I",
+      "duration_sec": 3529,
+      "view_count": 39000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_RRClNoHamw",
+      "title": "Day Trading the 3-Day Squeeze Setup (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=_RRClNoHamw",
+      "duration_sec": 3524,
+      "view_count": 22000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "A3sbJBOLGuI",
+      "title": "PROVEN 3hr Day Trading Strategy (Highest Win Rate) 💥 DAY 8 & 9 Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=A3sbJBOLGuI",
+      "duration_sec": 3508,
+      "view_count": 152000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "zPJ4oemntmU",
+      "title": "3 Lessons I Learned Making $60k in 1 Month : Behind The Trades Ep. 04",
+      "url": "https://www.youtube.com/watch?v=zPJ4oemntmU",
+      "duration_sec": 3503,
+      "view_count": 257000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_fsRWw0VbS4",
+      "title": "Ultimate Step-by-Step Guide to Technical Analysis (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=_fsRWw0VbS4",
+      "duration_sec": 3499,
+      "view_count": 647000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "l7M03OXCIdA",
+      "title": "How I Grew My Small Day Trading Account to $28,093.54 in 16 Days 💥 (Full Training)",
+      "url": "https://www.youtube.com/watch?v=l7M03OXCIdA",
+      "duration_sec": 3495,
+      "view_count": 105000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "QzBogJmcl-c",
+      "title": "🫠 THIS is Why Beginner Traders are Losing (Even on Big Short Squeezes)",
+      "url": "https://www.youtube.com/watch?v=QzBogJmcl-c",
+      "duration_sec": 3495,
+      "view_count": 175000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "DP4ayEWhmvM",
+      "title": "Master the Bull Flag Trading Pattern TODAY (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=DP4ayEWhmvM",
+      "duration_sec": 3482,
+      "view_count": 94000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "5aWoZdbXJrA",
+      "title": "The BEST Stock Market Simulators (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=5aWoZdbXJrA",
+      "duration_sec": 3473,
+      "view_count": 192000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Bqo2XGDZtVU",
+      "title": "Day Trading: How To Start From ZERO (Beginner's Guide)",
+      "url": "https://www.youtube.com/watch?v=Bqo2XGDZtVU",
+      "duration_sec": 3470,
+      "view_count": 497000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_DU2SFWei2c",
+      "title": "A HUGE Mistake Becomes a Turning Point (Finding Your EDGE in the Market)",
+      "url": "https://www.youtube.com/watch?v=_DU2SFWei2c",
+      "duration_sec": 3461,
+      "view_count": 31000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "4syXgXshgsc",
+      "title": "What Beginners Get Wrong About Level 2 💥 Day 4 | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=4syXgXshgsc",
+      "duration_sec": 3451,
+      "view_count": 223000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "p1W8Mjl4kWs",
+      "title": "High Accuracy 1 Minute Scalping Strategy (Full Training)",
+      "url": "https://www.youtube.com/watch?v=p1W8Mjl4kWs",
+      "duration_sec": 3442,
+      "view_count": 362000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_9za7jNDPQc",
+      "title": "Don't Use Candlestick Charts Without THIS",
+      "url": "https://www.youtube.com/watch?v=_9za7jNDPQc",
+      "duration_sec": 3435,
+      "view_count": 72000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "aAmmKTLbAts",
+      "title": "+$100,176.35 TODAY Using This SIMPLE Day Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=aAmmKTLbAts",
+      "duration_sec": 3421,
+      "view_count": 140000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "PjVivCcM1B0",
+      "title": "How to Trade Pre-Market & After Hours (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=PjVivCcM1B0",
+      "duration_sec": 3418,
+      "view_count": 220000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "EHnIFKnJiXA",
+      "title": "The TREND TRADING Day Trading Strategy (Millionaire Traders LOVE This)",
+      "url": "https://www.youtube.com/watch?v=EHnIFKnJiXA",
+      "duration_sec": 3406,
+      "view_count": 36000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Is9TTagKKjI",
+      "title": "5 Rules For Selling Losers Faster!",
+      "url": "https://www.youtube.com/watch?v=Is9TTagKKjI",
+      "duration_sec": 3405,
+      "view_count": 149000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "7PVpVDHYF2E",
+      "title": "+$56,789.66 Day Trading the MACD Crossover Setup",
+      "url": "https://www.youtube.com/watch?v=7PVpVDHYF2E",
+      "duration_sec": 3388,
+      "view_count": 147000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "wC2Bbf6OMFQ",
+      "title": "The RIGHT WAY to use Volume on Candlestick Charts (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=wC2Bbf6OMFQ",
+      "duration_sec": 3383,
+      "view_count": 93000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "iBNcF_lPBIg",
+      "title": "How to Start Trading with $1,000 💥 Small Account Challenge Ep. 1",
+      "url": "https://www.youtube.com/watch?v=iBNcF_lPBIg",
+      "duration_sec": 3352,
+      "view_count": 411000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "XeSey4nSyh4",
+      "title": "How to Start Investing for Beginners (Full Course)",
+      "url": "https://www.youtube.com/watch?v=XeSey4nSyh4",
+      "duration_sec": 3339,
+      "view_count": 44000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "WQi0KvdLnwM",
+      "title": "When to BUY & SELL using Candlestick Charts (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=WQi0KvdLnwM",
+      "duration_sec": 3331,
+      "view_count": 200000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "wlH8zKZ8vXA",
+      "title": "How to Pick the BEST Stocks for Trading (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=wlH8zKZ8vXA",
+      "duration_sec": 3321,
+      "view_count": 695000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ul34Jfh-LOk",
+      "title": "How to Read Candlestick Charts (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=ul34Jfh-LOk",
+      "duration_sec": 3318,
+      "view_count": 3900000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "txWaMpSzHhM",
+      "title": "Ultimate Day Trading Strategy Guide 📚🍏for Beginners",
+      "url": "https://www.youtube.com/watch?v=txWaMpSzHhM",
+      "duration_sec": 3318,
+      "view_count": 10000000,
+      "upload_date": null,
+      "timestamp": 1438300800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "-CqME4wlzVs",
+      "title": "How to Start Day Trading (THE RIGHT WAY)",
+      "url": "https://www.youtube.com/watch?v=-CqME4wlzVs",
+      "duration_sec": 3313,
+      "view_count": 50000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "HYoQYCBW4sw",
+      "title": "Master This ONE Candlestick Pattern TODAY (Full Training)",
+      "url": "https://www.youtube.com/watch?v=HYoQYCBW4sw",
+      "duration_sec": 3311,
+      "view_count": 1600000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "a2xlibTeVO4",
+      "title": "How to use Level 2 market data for Day Trading",
+      "url": "https://www.youtube.com/watch?v=a2xlibTeVO4",
+      "duration_sec": 3310,
+      "view_count": 674000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "dvetF0H3pNo",
+      "title": "How to Read Candlestick Patterns (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=dvetF0H3pNo",
+      "duration_sec": 3296,
+      "view_count": 890000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "8eLtork_M50",
+      "title": "How to Deal with FOMO | Behind the Trades Ep. #2",
+      "url": "https://www.youtube.com/watch?v=8eLtork_M50",
+      "duration_sec": 3288,
+      "view_count": 24000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "N6UK6XX9FH4",
+      "title": "Day Trading & Taxes (Step by Step Guide)",
+      "url": "https://www.youtube.com/watch?v=N6UK6XX9FH4",
+      "duration_sec": 3278,
+      "view_count": 367000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "4t3GDiAXW18",
+      "title": "Year in Review: 2023 +$306,548.41 Day Trading Momentum Strategies",
+      "url": "https://www.youtube.com/watch?v=4t3GDiAXW18",
+      "duration_sec": 3276,
+      "view_count": 32000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "DoO4YnbPOPA",
+      "title": "Behind The Trades: How to get out of a Trading Rut | Ep. 7",
+      "url": "https://www.youtube.com/watch?v=DoO4YnbPOPA",
+      "duration_sec": 3272,
+      "view_count": 10000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "8SWCCRLg1p0",
+      "title": "Ultimate Guide to Trading in a Small Account ",
+      "url": "https://www.youtube.com/watch?v=8SWCCRLg1p0",
+      "duration_sec": 3250,
+      "view_count": 153000,
+      "upload_date": null,
+      "timestamp": 1777593600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "SmSOboqGPgs",
+      "title": "These Candlestick Tricks Will Change How You Trade",
+      "url": "https://www.youtube.com/watch?v=SmSOboqGPgs",
+      "duration_sec": 3243,
+      "view_count": 104000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "QstdS67Iyv0",
+      "title": "How to Start Day Trading (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=QstdS67Iyv0",
+      "duration_sec": 3235,
+      "view_count": 980000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "tR-tyjV1WQ0",
+      "title": "I Want to Improve My Trading Over The Next 4 Weeks…Here’s How I’d Do It",
+      "url": "https://www.youtube.com/watch?v=tR-tyjV1WQ0",
+      "duration_sec": 3211,
+      "view_count": 77000,
+      "upload_date": null,
+      "timestamp": 1767139200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "OQLfHuO8KlI",
+      "title": "STOP Using Basic Candlestick Charts! These NEW Charts Are 10x Better",
+      "url": "https://www.youtube.com/watch?v=OQLfHuO8KlI",
+      "duration_sec": 3176,
+      "view_count": 206000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "vPMyjSCgf58",
+      "title": "I risked $2,500 to make $76,112.42. Here’s how I did it.",
+      "url": "https://www.youtube.com/watch?v=vPMyjSCgf58",
+      "duration_sec": 3161,
+      "view_count": 109000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "YZ5nvP7DnQQ",
+      "title": "TOP 5 Day Trading Mistakes YOU NEED TO KNOW!!",
+      "url": "https://www.youtube.com/watch?v=YZ5nvP7DnQQ",
+      "duration_sec": 2988,
+      "view_count": 146000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "QBXlHOCIl8U",
+      "title": "How I turned $600 into $335,181 in 1 Year (Trading 2hrs/Day)",
+      "url": "https://www.youtube.com/watch?v=QBXlHOCIl8U",
+      "duration_sec": 2968,
+      "view_count": 107000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "xTPcI7HHu5w",
+      "title": "How I turned $583 into $335,027.71 in 1 YEAR Trading | Small Account Challenge",
+      "url": "https://www.youtube.com/watch?v=xTPcI7HHu5w",
+      "duration_sec": 2958,
+      "view_count": 2300000,
+      "upload_date": null,
+      "timestamp": 1532995200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "3rEakODkiEg",
+      "title": "The ULTIMATE Beginners Guide to Trading (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=3rEakODkiEg",
+      "duration_sec": 2942,
+      "view_count": 1000000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ZpiWEMTpvoo",
+      "title": "Top 3 Candlestick Chart Mistakes Beginners Don’t Know They’re Making 😬",
+      "url": "https://www.youtube.com/watch?v=ZpiWEMTpvoo",
+      "duration_sec": 2932,
+      "view_count": 27000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "yKV3C2DoaFg",
+      "title": "How to RESET after a bad month | Behind The Trades | Ep #10",
+      "url": "https://www.youtube.com/watch?v=yKV3C2DoaFg",
+      "duration_sec": 2900,
+      "view_count": 13000,
+      "upload_date": null,
+      "timestamp": 1532995200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "4Pc_von1wS4",
+      "title": "Reading Candlestick Charts Was HARD Until I Learned This 3 Step Trick",
+      "url": "https://www.youtube.com/watch?v=4Pc_von1wS4",
+      "duration_sec": 2895,
+      "view_count": 2000000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "2O1r_ICOnTI",
+      "title": "3 FACTS on Why Beginner Traders LOSE MONEY 🫠",
+      "url": "https://www.youtube.com/watch?v=2O1r_ICOnTI",
+      "duration_sec": 2889,
+      "view_count": 138000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "GMRmMf-RsfE",
+      "title": "How I turned $600 into $16,013.06 in 20 days | SMALL ACCOUNT CHALLENGE",
+      "url": "https://www.youtube.com/watch?v=GMRmMf-RsfE",
+      "duration_sec": 2888,
+      "view_count": 938000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "sv6U1nAO8BI",
+      "title": "Step-by-Step Guide to Beginner Day Trading Strategies (Full Training)",
+      "url": "https://www.youtube.com/watch?v=sv6U1nAO8BI",
+      "duration_sec": 2883,
+      "view_count": 56000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "nfCqhdfyLKo",
+      "title": "How Read PRICE ACTION on Candlestick Charts (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=nfCqhdfyLKo",
+      "duration_sec": 2866,
+      "view_count": 61000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Gf791LDEsQI",
+      "title": "Ultimate Beginners Guide to Candlestick Patterns, Support/Resistance & Technical Indicators | Ep. 4",
+      "url": "https://www.youtube.com/watch?v=Gf791LDEsQI",
+      "duration_sec": 2849,
+      "view_count": 302000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "qlhkAdaOg_Q",
+      "title": "The #1 Day Trading Strategy for Beginners | Backtested With 24,234 Trades",
+      "url": "https://www.youtube.com/watch?v=qlhkAdaOg_Q",
+      "duration_sec": 2790,
+      "view_count": 64000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "lkNRTWLroqY",
+      "title": "How I’m Trading the mpox Catalyst",
+      "url": "https://www.youtube.com/watch?v=lkNRTWLroqY",
+      "duration_sec": 2759,
+      "view_count": 44000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "2kMgCjsmFzY",
+      "title": "How I'm Making $286/Day| Day Trading with $1,000",
+      "url": "https://www.youtube.com/watch?v=2kMgCjsmFzY",
+      "duration_sec": 2745,
+      "view_count": 339000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "m7pV69LTYDw",
+      "title": "How to Start Day Trading (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=m7pV69LTYDw",
+      "duration_sec": 2736,
+      "view_count": 85000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "N3iqOuF8wQU",
+      "title": "How I Find Stocks as a Retail Trader",
+      "url": "https://www.youtube.com/watch?v=N3iqOuF8wQU",
+      "duration_sec": 2643,
+      "view_count": 33000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "q5DRctM5C-Q",
+      "title": "How to use Level 2 (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=q5DRctM5C-Q",
+      "duration_sec": 2640,
+      "view_count": 458000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "pYx756KSvR4",
+      "title": "How to Trade Penny Stocks for Beginners (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=pYx756KSvR4",
+      "duration_sec": 2611,
+      "view_count": 324000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "JSqI99gL_KA",
+      "title": "How To Recover From A Massive Loss Day Trading",
+      "url": "https://www.youtube.com/watch?v=JSqI99gL_KA",
+      "duration_sec": 2553,
+      "view_count": 59000,
+      "upload_date": null,
+      "timestamp": 1564531200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "s7kEHvd0TJk",
+      "title": "The Story of How I Lost $20k in 90 Seconds Day Trading 🫣😰🤬",
+      "url": "https://www.youtube.com/watch?v=s7kEHvd0TJk",
+      "duration_sec": 2536,
+      "view_count": 75000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "eTUYXkAr6Pc",
+      "title": "The Ultimate Step-by-Step Moving Average Trading Guide (Full Training)",
+      "url": "https://www.youtube.com/watch?v=eTUYXkAr6Pc",
+      "duration_sec": 2470,
+      "view_count": 253000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "wjIFTuprfOk",
+      "title": "How to Day Trade using Trade Station (Platform Demo & Honest Review)",
+      "url": "https://www.youtube.com/watch?v=wjIFTuprfOk",
+      "duration_sec": 2463,
+      "view_count": 58000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "yFoBnM0iSlc",
+      "title": "How to use the Relative Volume Trading Strategy (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=yFoBnM0iSlc",
+      "duration_sec": 2374,
+      "view_count": 1000000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "hUhFuaxAsiw",
+      "title": "How to Draw Trend Lines the RIGHT Way on CANDLESTICK Charts",
+      "url": "https://www.youtube.com/watch?v=hUhFuaxAsiw",
+      "duration_sec": 2360,
+      "view_count": 125000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "SCy6RrASpJY",
+      "title": "The Pre-Market Break of VWAP Setup",
+      "url": "https://www.youtube.com/watch?v=SCy6RrASpJY",
+      "duration_sec": 2353,
+      "view_count": 26000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "StpXbe3Ga3Y",
+      "title": "Circuit Breaker Halt Explained (With Examples)",
+      "url": "https://www.youtube.com/watch?v=StpXbe3Ga3Y",
+      "duration_sec": 2239,
+      "view_count": 55000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "dGhN8uCaMIk",
+      "title": "How to Predict A False Breakout",
+      "url": "https://www.youtube.com/watch?v=dGhN8uCaMIk",
+      "duration_sec": 2183,
+      "view_count": 60000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "EIULmW7UCq8",
+      "title": "How to Day Trade using TradeZero (Platform Demo & Honest Review)",
+      "url": "https://www.youtube.com/watch?v=EIULmW7UCq8",
+      "duration_sec": 2143,
+      "view_count": 57000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "1FKu4LH0Xss",
+      "title": "How to AVOID False Breakouts (Use This Technical Indicator)",
+      "url": "https://www.youtube.com/watch?v=1FKu4LH0Xss",
+      "duration_sec": 2141,
+      "view_count": 239000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "VSs11mUjdFg",
+      "title": "A Major Turning Point in My Day Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=VSs11mUjdFg",
+      "duration_sec": 1988,
+      "view_count": 23000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "vvXX2ycveuw",
+      "title": "The Simple MACD Strategy to Spot Big Winners Early (5,712% Example)",
+      "url": "https://www.youtube.com/watch?v=vvXX2ycveuw",
+      "duration_sec": 1911,
+      "view_count": 113000,
+      "upload_date": null,
+      "timestamp": 1759276800,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "jfe1Zl-5EQI",
+      "title": "Day Trading Strategy (reversals) for Beginners: Class 4 of 12 by Ross Cameron",
+      "url": "https://www.youtube.com/watch?v=jfe1Zl-5EQI",
+      "duration_sec": 1886,
+      "view_count": 660000,
+      "upload_date": null,
+      "timestamp": 1469923200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "hLn6LrlXgAE",
+      "title": "The Only Candlestick Pattern You’ll Ever Need (full training)",
+      "url": "https://www.youtube.com/watch?v=hLn6LrlXgAE",
+      "duration_sec": 1858,
+      "view_count": 232000,
+      "upload_date": null,
+      "timestamp": 1780185600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "fJcWMZ0YZGY",
+      "title": "How I Became a Day Trader (from BROKE to Millionaire)",
+      "url": "https://www.youtube.com/watch?v=fJcWMZ0YZGY",
+      "duration_sec": 1852,
+      "view_count": 84000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "XqLj6VYzN5c",
+      "title": "How to Find the Best Stocks to Day Trade | Deep Dive into my Favorite Trading Pattern",
+      "url": "https://www.youtube.com/watch?v=XqLj6VYzN5c",
+      "duration_sec": 1834,
+      "view_count": 123000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "hLtPtEVBBBQ",
+      "title": "How to BLOW UP Your Trading Account (Don't Do This)",
+      "url": "https://www.youtube.com/watch?v=hLtPtEVBBBQ",
+      "duration_sec": 1833,
+      "view_count": 36000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "FN-uqfbEVKw",
+      "title": "Trading Halts Explained (Common Halt Reasons & Resumption Times)",
+      "url": "https://www.youtube.com/watch?v=FN-uqfbEVKw",
+      "duration_sec": 1801,
+      "view_count": 52000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "jvC5GUHPl1I",
+      "title": "I'm a Broken Man and Here's How I'm Fixing It",
+      "url": "https://www.youtube.com/watch?v=jvC5GUHPl1I",
+      "duration_sec": 1800,
+      "view_count": 50000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "5AV2OLWD1gc",
+      "title": "Top 5 Reasons Why Traders Lose Money 💰Don’t Make These Mistakes!!!",
+      "url": "https://www.youtube.com/watch?v=5AV2OLWD1gc",
+      "duration_sec": 1793,
+      "view_count": 74000,
+      "upload_date": null,
+      "timestamp": 1780185600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "W3jXQlgGbBc",
+      "title": "The \"Sub VWAP Trap\" Trading Strategy 🍏 (Big Breakout Setup)",
+      "url": "https://www.youtube.com/watch?v=W3jXQlgGbBc",
+      "duration_sec": 1793,
+      "view_count": 96000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "HkCzaGuSJ1g",
+      "title": "How I Recovered from Yesterday's MAX LOSS Red Day",
+      "url": "https://www.youtube.com/watch?v=HkCzaGuSJ1g",
+      "duration_sec": 1789,
+      "view_count": 18000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "xCsTmqzBIco",
+      "title": "5 Cent Tick Pilot Program Explained",
+      "url": "https://www.youtube.com/watch?v=xCsTmqzBIco",
+      "duration_sec": 1787,
+      "view_count": 22000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "BFH-0N8S-IA",
+      "title": "Master Supply & Demand Trading (Ultimate Beginners Guide)",
+      "url": "https://www.youtube.com/watch?v=BFH-0N8S-IA",
+      "duration_sec": 1766,
+      "view_count": 54000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "mBT72-bFlPM",
+      "title": "Trading was HARD Until I Learned this BASE HIT Strategy",
+      "url": "https://www.youtube.com/watch?v=mBT72-bFlPM",
+      "duration_sec": 1757,
+      "view_count": 108000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "pJuG5YtVF84",
+      "title": "How to use Level 2 and Time & Sales as a Momentum Day Trader",
+      "url": "https://www.youtube.com/watch?v=pJuG5YtVF84",
+      "duration_sec": 1734,
+      "view_count": 552000,
+      "upload_date": null,
+      "timestamp": 1469923200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "cgIghGaQtY4",
+      "title": "I Grew 3 Small Accounts with 3 Different Brokers...Here's What I Learned (And Exciting PDT News)",
+      "url": "https://www.youtube.com/watch?v=cgIghGaQtY4",
+      "duration_sec": 1728,
+      "view_count": 48000,
+      "upload_date": null,
+      "timestamp": 1769817600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "5qu6YfbC7tM",
+      "title": "$PCSA +175% on the Reverse Split Setup",
+      "url": "https://www.youtube.com/watch?v=5qu6YfbC7tM",
+      "duration_sec": 1723,
+      "view_count": 17000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "C4XZ_67c0Fo",
+      "title": "How I use Thinkorswim Platform for Day Trading (Settings, Charts, Hot keys)",
+      "url": "https://www.youtube.com/watch?v=C4XZ_67c0Fo",
+      "duration_sec": 1717,
+      "view_count": 586000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "SpnidshD8Zk",
+      "title": "Day Trading this ONE Scalping Strategy",
+      "url": "https://www.youtube.com/watch?v=SpnidshD8Zk",
+      "duration_sec": 1673,
+      "view_count": 71000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "yI_a4pJj_go",
+      "title": "Candlestick Charts DIDN’T WORK Until I Learned This Easy ONE (1) STEP TRICK",
+      "url": "https://www.youtube.com/watch?v=yI_a4pJj_go",
+      "duration_sec": 1669,
+      "view_count": 85000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Xy3SeJcUYew",
+      "title": "HUGE Announcement on the PDT Rule...",
+      "url": "https://www.youtube.com/watch?v=Xy3SeJcUYew",
+      "duration_sec": 1665,
+      "view_count": 134000,
+      "upload_date": null,
+      "timestamp": 1759276800,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "iS5lvJGMM8E",
+      "title": "The Ultimate Relative Strength Index (RSI) Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=iS5lvJGMM8E",
+      "duration_sec": 1665,
+      "view_count": 135000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "nH-z-089CgM",
+      "title": "Indicators for Avoiding False Breakouts 🔪😭",
+      "url": "https://www.youtube.com/watch?v=nH-z-089CgM",
+      "duration_sec": 1663,
+      "view_count": 163000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "mbIwWiLY4DQ",
+      "title": "Day Trading For Beginners in 3 Steps ✅ Pick a Strategy,  Practice SIM Trading, then Go Live!",
+      "url": "https://www.youtube.com/watch?v=mbIwWiLY4DQ",
+      "duration_sec": 1657,
+      "view_count": 369000,
+      "upload_date": null,
+      "timestamp": 1438300800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "KKoApu04ZF8",
+      "title": "How I made $22,654 in LESS THAN 90 min of Day Trading | Deep Dive",
+      "url": "https://www.youtube.com/watch?v=KKoApu04ZF8",
+      "duration_sec": 1652,
+      "view_count": 29000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "BaZ4R2ovI9k",
+      "title": "How to use Level 2 data in your Day Trading Strategy (WITH LIVE MARKET EXAMPLES)",
+      "url": "https://www.youtube.com/watch?v=BaZ4R2ovI9k",
+      "duration_sec": 1651,
+      "view_count": 330000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Ai6r6xjk8Uk",
+      "title": "My #1 Indicator for HOLDING WINNERS LONGER",
+      "url": "https://www.youtube.com/watch?v=Ai6r6xjk8Uk",
+      "duration_sec": 1648,
+      "view_count": 39000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "RoAVk--vljU",
+      "title": "ChatGPT Open AI Trading Strategy RESULTS: +35% in 2 DAYS 🤖 $1,000 Small Account Challenge Ep. 8",
+      "url": "https://www.youtube.com/watch?v=RoAVk--vljU",
+      "duration_sec": 1644,
+      "view_count": 236000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "fOvtzvA923U",
+      "title": "The Simplest Strategy for Trading Penny Stocks #stockmarket",
+      "url": "https://www.youtube.com/watch?v=fOvtzvA923U",
+      "duration_sec": 1641,
+      "view_count": 98000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "nwVRxQuAPi0",
+      "title": "Full Disclosure...I Blew Up My Account Today 💣 - Small Account Challenge Ep 14",
+      "url": "https://www.youtube.com/watch?v=nwVRxQuAPi0",
+      "duration_sec": 1620,
+      "view_count": 98000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "ICbPz3iXbG0",
+      "title": "PROVEN Bear Market Trading & Investing Strategies (From Beginner to Advanced)",
+      "url": "https://www.youtube.com/watch?v=ICbPz3iXbG0",
+      "duration_sec": 1613,
+      "view_count": 54000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "aC7jCwYYHxY",
+      "title": "How to use Moving Averages (Beginners)",
+      "url": "https://www.youtube.com/watch?v=aC7jCwYYHxY",
+      "duration_sec": 1561,
+      "view_count": 122000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "SWPCn0ZDPU0",
+      "title": "Income Taxes for Traders (Step by Step Guide)",
+      "url": "https://www.youtube.com/watch?v=SWPCn0ZDPU0",
+      "duration_sec": 1554,
+      "view_count": 792000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "2stp2cJ9b8A",
+      "title": "Learn from my mistakes!  Swinging for the fences DOESN'T always work",
+      "url": "https://www.youtube.com/watch?v=2stp2cJ9b8A",
+      "duration_sec": 1538,
+      "view_count": 8800,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "bnnEm_DKwXE",
+      "title": "How to Day Trade while working full time and NOT get fired 👨‍💻🙄🚀",
+      "url": "https://www.youtube.com/watch?v=bnnEm_DKwXE",
+      "duration_sec": 1530,
+      "view_count": 340000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "OLvNqb3-xnY",
+      "title": "How to Day Trade Stocks with Big Spreads #stockmarket #daytrading",
+      "url": "https://www.youtube.com/watch?v=OLvNqb3-xnY",
+      "duration_sec": 1525,
+      "view_count": 30000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "CSzDAEAoYqk",
+      "title": "How to Read BUY and SELL Signals on Candlestick Charts (Beginner to Advanced)",
+      "url": "https://www.youtube.com/watch?v=CSzDAEAoYqk",
+      "duration_sec": 1514,
+      "view_count": 34000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "9hgpZMvCY08",
+      "title": "How to use Hotkeys for Day Trading",
+      "url": "https://www.youtube.com/watch?v=9hgpZMvCY08",
+      "duration_sec": 1510,
+      "view_count": 70000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "3hmDWJfZ0_0",
+      "title": "The Secret Nobody Tells You About Reading Candlestick Charts...",
+      "url": "https://www.youtube.com/watch?v=3hmDWJfZ0_0",
+      "duration_sec": 1508,
+      "view_count": 172000,
+      "upload_date": null,
+      "timestamp": 1774915200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "eY7JdVjg0kw",
+      "title": "How to use Level 2 for Beginner Day Traders 🍏 #daytrading #stockmarket #learntotrade",
+      "url": "https://www.youtube.com/watch?v=eY7JdVjg0kw",
+      "duration_sec": 1496,
+      "view_count": 303000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "DgWn3egDGb0",
+      "title": "Bollinger Bands: Why Millionaire Traders Are Using This Technical Indicator",
+      "url": "https://www.youtube.com/watch?v=DgWn3egDGb0",
+      "duration_sec": 1494,
+      "view_count": 98000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "L16yPlr8jyM",
+      "title": "The Ultimate Beginners Candlestick Trading Strategy (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=L16yPlr8jyM",
+      "duration_sec": 1493,
+      "view_count": 53000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ryOcGLJNOJU",
+      "title": "Pattern Day Trader Rule EXPLAINED (And How to Get Around it)",
+      "url": "https://www.youtube.com/watch?v=ryOcGLJNOJU",
+      "duration_sec": 1487,
+      "view_count": 41000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "3ovOiVIJ_aM",
+      "title": "I made a mistake today…",
+      "url": "https://www.youtube.com/watch?v=3ovOiVIJ_aM",
+      "duration_sec": 1482,
+      "view_count": 38000,
+      "upload_date": null,
+      "timestamp": 1772323200,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "MMwiCswgwHU",
+      "title": "Equity Swaps Explained (and How They're Used in GameStop & AMC)",
+      "url": "https://www.youtube.com/watch?v=MMwiCswgwHU",
+      "duration_sec": 1478,
+      "view_count": 17000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "tdjOKh5Jf9w",
+      "title": "How to GET PAID to Trade with a Market Liquidity Strategy",
+      "url": "https://www.youtube.com/watch?v=tdjOKh5Jf9w",
+      "duration_sec": 1474,
+      "view_count": 25000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "HMaTY5-x2N0",
+      "title": "$18k in 30 minutes with this Day Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=HMaTY5-x2N0",
+      "duration_sec": 1471,
+      "view_count": 25000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "xauLV_WHXgc",
+      "title": "Coping with Setbacks as a Beginner Day Trader",
+      "url": "https://www.youtube.com/watch?v=xauLV_WHXgc",
+      "duration_sec": 1428,
+      "view_count": 66000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "anuxv488waA",
+      "title": "How I lost $5,000 in 2-minutes Day Trading 🫢🤯",
+      "url": "https://www.youtube.com/watch?v=anuxv488waA",
+      "duration_sec": 1416,
+      "view_count": 21000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "dl1MtlsMoZw",
+      "title": "What is Day Trading and How to Start Day Trading as a Beginner 🍏",
+      "url": "https://www.youtube.com/watch?v=dl1MtlsMoZw",
+      "duration_sec": 1396,
+      "view_count": 15000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "RUuJzmz5jCg",
+      "title": "How I'm RED on a stock up 300%...",
+      "url": "https://www.youtube.com/watch?v=RUuJzmz5jCg",
+      "duration_sec": 1390,
+      "view_count": 40000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_NAM_oTYUQM",
+      "title": "Ross's Day Trading Strategy for a $500 Account 💥Small Account Challenge Episode 2",
+      "url": "https://www.youtube.com/watch?v=_NAM_oTYUQM",
+      "duration_sec": 1390,
+      "view_count": 648000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "aIqF9OvWYZ4",
+      "title": "Trading the Break of VWAP Setup",
+      "url": "https://www.youtube.com/watch?v=aIqF9OvWYZ4",
+      "duration_sec": 1385,
+      "view_count": 32000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "yg5E_mqGFGg",
+      "title": "Stock Scanners for Beginner Day Trading Strategies",
+      "url": "https://www.youtube.com/watch?v=yg5E_mqGFGg",
+      "duration_sec": 1377,
+      "view_count": 172000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Oz3sOXkAb6s",
+      "title": "How to Trade in an LLC or a Corp",
+      "url": "https://www.youtube.com/watch?v=Oz3sOXkAb6s",
+      "duration_sec": 1365,
+      "view_count": 325000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "SrYGENemM1w",
+      "title": "How to Choose the RIGHT Market Data for Day Trading",
+      "url": "https://www.youtube.com/watch?v=SrYGENemM1w",
+      "duration_sec": 1359,
+      "view_count": 30000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ZRRCyIoZnHE",
+      "title": "I blew up my small account… 🤯 Small Account Challenge Day 6",
+      "url": "https://www.youtube.com/watch?v=ZRRCyIoZnHE",
+      "duration_sec": 1354,
+      "view_count": 119000,
+      "upload_date": null,
+      "timestamp": 1759276800,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "C2bb5mQ0wSs",
+      "title": "How I'd Replace My 9-5 Income & Quit My Job (Starting from Zero)",
+      "url": "https://www.youtube.com/watch?v=C2bb5mQ0wSs",
+      "duration_sec": 1354,
+      "view_count": 60000,
+      "upload_date": null,
+      "timestamp": 1759276800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "7RbjGk9eNJU",
+      "title": "The Simplest Day Trading Strategy: Gap and Go ↗️📈 #stockmarket #daytrading",
+      "url": "https://www.youtube.com/watch?v=7RbjGk9eNJU",
+      "duration_sec": 1353,
+      "view_count": 214000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "uoig-Z6qtV0",
+      "title": "How to Trade IPOs (for Beginners)",
+      "url": "https://www.youtube.com/watch?v=uoig-Z6qtV0",
+      "duration_sec": 1345,
+      "view_count": 22000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "oWeCrBYBrG8",
+      "title": "Support and Resistance",
+      "url": "https://www.youtube.com/watch?v=oWeCrBYBrG8",
+      "duration_sec": 1341,
+      "view_count": 97000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "H9BRF4xynQA",
+      "title": "I made a big mistake…",
+      "url": "https://www.youtube.com/watch?v=H9BRF4xynQA",
+      "duration_sec": 1339,
+      "view_count": 24000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "taHYs-v3hBQ",
+      "title": "Top 5 Reasons Why Traders Lose Money 💰Don’t Make These Mistakes!!!",
+      "url": "https://www.youtube.com/watch?v=taHYs-v3hBQ",
+      "duration_sec": 1335,
+      "view_count": 1100000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "nDMX11XmYF0",
+      "title": "The 7 WORST Financial Mistakes You Can Make...",
+      "url": "https://www.youtube.com/watch?v=nDMX11XmYF0",
+      "duration_sec": 1320,
+      "view_count": 11000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "mfGQr2tHoX0",
+      "title": "How I Nailed Trading with the MACD Indicator (Step-by-Step Guide)",
+      "url": "https://www.youtube.com/watch?v=mfGQr2tHoX0",
+      "duration_sec": 1318,
+      "view_count": 1200000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "HY7i78bOJFA",
+      "title": "How to Make Money Trading in a COLD Market",
+      "url": "https://www.youtube.com/watch?v=HY7i78bOJFA",
+      "duration_sec": 1314,
+      "view_count": 13000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "y_Qp_ev2js8",
+      "title": "Understanding the Pattern Day Trader Rule (PDT) for Day Traders",
+      "url": "https://www.youtube.com/watch?v=y_Qp_ev2js8",
+      "duration_sec": 1314,
+      "view_count": 202000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "c5HU_4ukSw8",
+      "title": "How To Short Stocks 📉",
+      "url": "https://www.youtube.com/watch?v=c5HU_4ukSw8",
+      "duration_sec": 1306,
+      "view_count": 363000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "My6K_W2e-pw",
+      "title": "How to Day Trade with Robinhood Legend (Platform Demo & Honest Review)",
+      "url": "https://www.youtube.com/watch?v=My6K_W2e-pw",
+      "duration_sec": 1302,
+      "view_count": 96000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "vOZGdT9nYbc",
+      "title": "i just blew up my small account... for real this time 😰 Small Account Challenge Ep 17",
+      "url": "https://www.youtube.com/watch?v=vOZGdT9nYbc",
+      "duration_sec": 1301,
+      "view_count": 76000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "V9za4wt9ONo",
+      "title": "How to Hold Winners Longer",
+      "url": "https://www.youtube.com/watch?v=V9za4wt9ONo",
+      "duration_sec": 1276,
+      "view_count": 154000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Hq3sZh5B_l8",
+      "title": "Did I follow the 6 Rules of Trader Rehab?",
+      "url": "https://www.youtube.com/watch?v=Hq3sZh5B_l8",
+      "duration_sec": 1275,
+      "view_count": 23000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "016ibIK58t0",
+      "title": "A Lesson on Short Selling +$31,076.62 in 2hrs",
+      "url": "https://www.youtube.com/watch?v=016ibIK58t0",
+      "duration_sec": 1266,
+      "view_count": 46000,
+      "upload_date": null,
+      "timestamp": 1772323200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "bUAYYcgvvy8",
+      "title": "How to Setup Your Day Trading LLC",
+      "url": "https://www.youtube.com/watch?v=bUAYYcgvvy8",
+      "duration_sec": 1240,
+      "view_count": 81000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "TTvaXCmtVbI",
+      "title": "Short Selling Stocks Explained",
+      "url": "https://www.youtube.com/watch?v=TTvaXCmtVbI",
+      "duration_sec": 1237,
+      "view_count": 88000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "_O0AEVPar7k",
+      "title": "7 Day Traders discuss Managing Risk & Golden Rules",
+      "url": "https://www.youtube.com/watch?v=_O0AEVPar7k",
+      "duration_sec": 1236,
+      "view_count": 83000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "SfkJNbFUg0c",
+      "title": "$EVAX +130% on the Beaten Up Bottom Bounce Day Trading Setup",
+      "url": "https://www.youtube.com/watch?v=SfkJNbFUg0c",
+      "duration_sec": 1180,
+      "view_count": 13000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "nxelwVBl0iA",
+      "title": "Does this count as breaking a rule? 🤷‍♂️",
+      "url": "https://www.youtube.com/watch?v=nxelwVBl0iA",
+      "duration_sec": 1162,
+      "view_count": 16000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "trcKOZnoPPs",
+      "title": "The Bear Market Strategy Episode You NEED To Watch",
+      "url": "https://www.youtube.com/watch?v=trcKOZnoPPs",
+      "duration_sec": 1147,
+      "view_count": 47000,
+      "upload_date": null,
+      "timestamp": 1774915200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "UNoPqBWuLC0",
+      "title": "Bull Flag Pattern 🐮 The #1 Beginner Day Trading Strategy 🍏",
+      "url": "https://www.youtube.com/watch?v=UNoPqBWuLC0",
+      "duration_sec": 1127,
+      "view_count": 257000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ZtljL2kvh5I",
+      "title": "How I’d Retire in 5 Years Starting from ZERO",
+      "url": "https://www.youtube.com/watch?v=ZtljL2kvh5I",
+      "duration_sec": 1126,
+      "view_count": 466000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "qBfCXK_euDA",
+      "title": "The Ultimate Short Selling Guide - Everything You Need to Know About Shorting",
+      "url": "https://www.youtube.com/watch?v=qBfCXK_euDA",
+      "duration_sec": 1124,
+      "view_count": 101000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "bvy1pyzTrG4",
+      "title": "How to Crush Monday: Game Plan for 4/22/2024",
+      "url": "https://www.youtube.com/watch?v=bvy1pyzTrG4",
+      "duration_sec": 1111,
+      "view_count": 18000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "5X_ZcifasBg",
+      "title": "The Simplest Day Trading Strategy for Beginners (with ZERO experience)",
+      "url": "https://www.youtube.com/watch?v=5X_ZcifasBg",
+      "duration_sec": 1106,
+      "view_count": 1400000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "1axXKjgCe84",
+      "title": "How to Cut Losers Faster",
+      "url": "https://www.youtube.com/watch?v=1axXKjgCe84",
+      "duration_sec": 1103,
+      "view_count": 134000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "MMIUGlmiIqU",
+      "title": "Stock Scanning Software - How to find Stocks to Trade",
+      "url": "https://www.youtube.com/watch?v=MMIUGlmiIqU",
+      "duration_sec": 1097,
+      "view_count": 213000,
+      "upload_date": null,
+      "timestamp": 1469923200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "qPb8LF1k8vU",
+      "title": "How to Control Emotions as a Beginner Day Trader #stockmarket #daytrading",
+      "url": "https://www.youtube.com/watch?v=qPb8LF1k8vU",
+      "duration_sec": 1093,
+      "view_count": 30000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "AfTzD9VHdi4",
+      "title": "Stock Market for Beginners | How to Become a Trader",
+      "url": "https://www.youtube.com/watch?v=AfTzD9VHdi4",
+      "duration_sec": 1059,
+      "view_count": 16000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "HfkIM2MYBHg",
+      "title": "How to use E*TRADE for Day Trading",
+      "url": "https://www.youtube.com/watch?v=HfkIM2MYBHg",
+      "duration_sec": 1052,
+      "view_count": 166000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "NE0IxWksuqo",
+      "title": "Alligator Indicator Definition | Trading Terminology",
+      "url": "https://www.youtube.com/watch?v=NE0IxWksuqo",
+      "duration_sec": 1042,
+      "view_count": 32000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Xdw5azEqs6o",
+      "title": "How to Day Trade Bull Flag Pattern",
+      "url": "https://www.youtube.com/watch?v=Xdw5azEqs6o",
+      "duration_sec": 1041,
+      "view_count": 367000,
+      "upload_date": null,
+      "timestamp": 1469923200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "-N1qf9G3k5c",
+      "title": "Scaling a Strategy",
+      "url": "https://www.youtube.com/watch?v=-N1qf9G3k5c",
+      "duration_sec": 1040,
+      "view_count": 483000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "ag5JoiOlUy4",
+      "title": "Surprise Daily Breakout Setup at 9:30am ET",
+      "url": "https://www.youtube.com/watch?v=ag5JoiOlUy4",
+      "duration_sec": 1031,
+      "view_count": 29000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "2higxJXgl6o",
+      "title": "How I Deal With FOMO",
+      "url": "https://www.youtube.com/watch?v=2higxJXgl6o",
+      "duration_sec": 1028,
+      "view_count": 18000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "6w-7geIsq1A",
+      "title": "Day Trading the 1-Minute Dip & Rip Strategy",
+      "url": "https://www.youtube.com/watch?v=6w-7geIsq1A",
+      "duration_sec": 1020,
+      "view_count": 44000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "8g_b58OFsrc",
+      "title": "Stock Float Explained and Why it Matters",
+      "url": "https://www.youtube.com/watch?v=8g_b58OFsrc",
+      "duration_sec": 1018,
+      "view_count": 138000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "DJ9QEMbTdfA",
+      "title": "$AURC +200% on a SPAC Setup",
+      "url": "https://www.youtube.com/watch?v=DJ9QEMbTdfA",
+      "duration_sec": 997,
+      "view_count": 9800,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "gA8r-ZoN49Q",
+      "title": "$GFAI +72% on a Daily Breakout Setup",
+      "url": "https://www.youtube.com/watch?v=gA8r-ZoN49Q",
+      "duration_sec": 992,
+      "view_count": 11000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "IlEr-oGT_T4",
+      "title": "How to Read CANDLESTICK Charts (Step-by-Step Beginners Guide)",
+      "url": "https://www.youtube.com/watch?v=IlEr-oGT_T4",
+      "duration_sec": 989,
+      "view_count": 41000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "DywXmtXsG1Q",
+      "title": "The Ultimate SCALP TRADING Indicator for Active Traders",
+      "url": "https://www.youtube.com/watch?v=DywXmtXsG1Q",
+      "duration_sec": 972,
+      "view_count": 18000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "WJHgMDyNXKo",
+      "title": "Don't Make These Mistakes! Taxes for Day Traders",
+      "url": "https://www.youtube.com/watch?v=WJHgMDyNXKo",
+      "duration_sec": 972,
+      "view_count": 175000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "xn_Nxa_0JBU",
+      "title": "NEW 💥 How to Setup ThinkorSwim for Day Trading",
+      "url": "https://www.youtube.com/watch?v=xn_Nxa_0JBU",
+      "duration_sec": 966,
+      "view_count": 334000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "y3USmdoXKt8",
+      "title": "I asked ChatGPT to make me a Day Trading Strategy, and it did! Sort of..",
+      "url": "https://www.youtube.com/watch?v=y3USmdoXKt8",
+      "duration_sec": 954,
+      "view_count": 29000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "JMcaRfFThmg",
+      "title": "How to Trade Breaking News 📰",
+      "url": "https://www.youtube.com/watch?v=JMcaRfFThmg",
+      "duration_sec": 951,
+      "view_count": 194000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "LdLtyeZHbPU",
+      "title": "How to Travel & Trade the RIGHT WAY (Don't make the same mistakes as me)",
+      "url": "https://www.youtube.com/watch?v=LdLtyeZHbPU",
+      "duration_sec": 946,
+      "view_count": 13000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "0Zh105lq9Rk",
+      "title": "Day 11: Scanner Alert Sends My Account +220% 🥳",
+      "url": "https://www.youtube.com/watch?v=0Zh105lq9Rk",
+      "duration_sec": 939,
+      "view_count": 33000,
+      "upload_date": null,
+      "timestamp": 1761868800,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "ne75GMwzGD4",
+      "title": "5 Beginner Mistakes to Avoid",
+      "url": "https://www.youtube.com/watch?v=ne75GMwzGD4",
+      "duration_sec": 938,
+      "view_count": 77000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "eCSzHYl8apo",
+      "title": "How to Use Trade-Ideas Stock Scanners for Day Trading",
+      "url": "https://www.youtube.com/watch?v=eCSzHYl8apo",
+      "duration_sec": 934,
+      "view_count": 454000,
+      "upload_date": null,
+      "timestamp": 1438300800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "DAnpW98ZCSg",
+      "title": "I'm looking for this setup tomorrow!",
+      "url": "https://www.youtube.com/watch?v=DAnpW98ZCSg",
+      "duration_sec": 930,
+      "view_count": 32000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "S3vYOE9d6nU",
+      "title": "The \"Stair Step\" Day Trading Strategy | Full Breakdown",
+      "url": "https://www.youtube.com/watch?v=S3vYOE9d6nU",
+      "duration_sec": 910,
+      "view_count": 28000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "VNsh-8cS2Tg",
+      "title": "Learn how to Day Trade Gappers and Gaps (Beginner Momentum Trading Strategies)",
+      "url": "https://www.youtube.com/watch?v=VNsh-8cS2Tg",
+      "duration_sec": 894,
+      "view_count": 728000,
+      "upload_date": null,
+      "timestamp": 1406764800,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "IHeJROuEzRU",
+      "title": "ABCD Pattern: A Beginners Day Trading Strategy  #daytrading #stockmarket",
+      "url": "https://www.youtube.com/watch?v=IHeJROuEzRU",
+      "duration_sec": 893,
+      "view_count": 139000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "uJy9XIJq1cQ",
+      "title": "Avoiding the False Breakout & Algo Flush 💣 Beginner Day Trading Strategies 🍏",
+      "url": "https://www.youtube.com/watch?v=uJy9XIJq1cQ",
+      "duration_sec": 892,
+      "view_count": 59000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "OnPTodRZl7o",
+      "title": "Trading Multi-Day Continuation Setups",
+      "url": "https://www.youtube.com/watch?v=OnPTodRZl7o",
+      "duration_sec": 887,
+      "view_count": 25000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "qfReXP_lpQE",
+      "title": "The Discipline NOT to Trade Low Quality Setups",
+      "url": "https://www.youtube.com/watch?v=qfReXP_lpQE",
+      "duration_sec": 884,
+      "view_count": 24000,
+      "upload_date": null,
+      "timestamp": 1777593600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "vcfpJWEqaTU",
+      "title": "A Lesson on How to Manage Risk in a HOT Market...",
+      "url": "https://www.youtube.com/watch?v=vcfpJWEqaTU",
+      "duration_sec": 883,
+      "view_count": 48000,
+      "upload_date": null,
+      "timestamp": 1782864000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "D8Guwf84eAA",
+      "title": "The \"Blue Sky\" Day Trading Pattern",
+      "url": "https://www.youtube.com/watch?v=D8Guwf84eAA",
+      "duration_sec": 872,
+      "view_count": 23000,
+      "upload_date": null,
+      "timestamp": 1782864000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "ivuVYHlE_Ow",
+      "title": "Case Study of a 113% Gap and Go Day Trading Setup",
+      "url": "https://www.youtube.com/watch?v=ivuVYHlE_Ow",
+      "duration_sec": 866,
+      "view_count": 23000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "i1shm3ATwJI",
+      "title": "How to Travel Europe Living off of Trading",
+      "url": "https://www.youtube.com/watch?v=i1shm3ATwJI",
+      "duration_sec": 862,
+      "view_count": 457000,
+      "upload_date": null,
+      "timestamp": 1532995200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "8h1xWOkgrpI",
+      "title": "Day Trading Tips: How To Build A Watch List",
+      "url": "https://www.youtube.com/watch?v=8h1xWOkgrpI",
+      "duration_sec": 861,
+      "view_count": 35000,
+      "upload_date": null,
+      "timestamp": 1501459200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "P5Sn_mWJdy0",
+      "title": "Day Trading the Break of VWAP Setup",
+      "url": "https://www.youtube.com/watch?v=P5Sn_mWJdy0",
+      "duration_sec": 853,
+      "view_count": 24000,
+      "upload_date": null,
+      "timestamp": 1782864000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "-qxkS9Y2zUU",
+      "title": "7 Rules of Day Trader",
+      "url": "https://www.youtube.com/watch?v=-qxkS9Y2zUU",
+      "duration_sec": 847,
+      "view_count": 48000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "4jes2_N3m2I",
+      "title": "Flat Top Breakout Pattern: Day Trading Strategy for Beginners #stockmarket #daytrading",
+      "url": "https://www.youtube.com/watch?v=4jes2_N3m2I",
+      "duration_sec": 843,
+      "view_count": 61000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Hxjla5IZYbA",
+      "title": "Daily Breakout Setups",
+      "url": "https://www.youtube.com/watch?v=Hxjla5IZYbA",
+      "duration_sec": 825,
+      "view_count": 30000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "cnoJ9DkWPVM",
+      "title": "Big PDT Rule Change and What it Means for You",
+      "url": "https://www.youtube.com/watch?v=cnoJ9DkWPVM",
+      "duration_sec": 818,
+      "view_count": 198000,
+      "upload_date": null,
+      "timestamp": 1777593600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "_N5LQgR9wfE",
+      "title": "How To Catch A Scammer",
+      "url": "https://www.youtube.com/watch?v=_N5LQgR9wfE",
+      "duration_sec": 810,
+      "view_count": 30000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "yFKCn5e1ERc",
+      "title": "How To Manage Position Sizing",
+      "url": "https://www.youtube.com/watch?v=yFKCn5e1ERc",
+      "duration_sec": 809,
+      "view_count": 41000,
+      "upload_date": null,
+      "timestamp": 1596153600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "q_ZliMvD8yc",
+      "title": "Today I made a rookie mistake…",
+      "url": "https://www.youtube.com/watch?v=q_ZliMvD8yc",
+      "duration_sec": 782,
+      "view_count": 33000,
+      "upload_date": null,
+      "timestamp": 1761868800,
+      "teaching_class": "mistakes"
+    },
+    {
+      "id": "nM2MxYk6Eo0",
+      "title": "Day Trading a \"Continuation\" Setup",
+      "url": "https://www.youtube.com/watch?v=nM2MxYk6Eo0",
+      "duration_sec": 763,
+      "view_count": 24000,
+      "upload_date": null,
+      "timestamp": 1774915200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "nm-rhysU96k",
+      "title": "$SQL +261% Gap and Go Setup!",
+      "url": "https://www.youtube.com/watch?v=nm-rhysU96k",
+      "duration_sec": 761,
+      "view_count": 10000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "m12FrF4rrOg",
+      "title": "How to Read Candlestick Charts 📓📈 Beginner Trading Strategies 🍏",
+      "url": "https://www.youtube.com/watch?v=m12FrF4rrOg",
+      "duration_sec": 754,
+      "view_count": 196000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "nrrH3eISme0",
+      "title": "Small Account Pre-Trading Checklist",
+      "url": "https://www.youtube.com/watch?v=nrrH3eISme0",
+      "duration_sec": 742,
+      "view_count": 32000,
+      "upload_date": null,
+      "timestamp": 1627689600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "dtAnMp8siUY",
+      "title": "171% Short Squeeze on an EASY-TO-BORROW Continuation Setup!",
+      "url": "https://www.youtube.com/watch?v=dtAnMp8siUY",
+      "duration_sec": 738,
+      "view_count": 17000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "glDujVuXiiI",
+      "title": "How to Avoid Red Days...there is a trick...",
+      "url": "https://www.youtube.com/watch?v=glDujVuXiiI",
+      "duration_sec": 717,
+      "view_count": 36000,
+      "upload_date": null,
+      "timestamp": 1756598400,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "7_U5bDa3T1g",
+      "title": "How to set up a Traveling Trading Station",
+      "url": "https://www.youtube.com/watch?v=7_U5bDa3T1g",
+      "duration_sec": 699,
+      "view_count": 330000,
+      "upload_date": null,
+      "timestamp": 1532995200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "xyZ2UrYiUEw",
+      "title": "Traveling Day Trading Station Setup #Daytrading",
+      "url": "https://www.youtube.com/watch?v=xyZ2UrYiUEw",
+      "duration_sec": 696,
+      "view_count": 16000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "qRirYfM4XiY",
+      "title": "Best Day Trading Indicators For Beginner Day Traders (VWAP, EMA'S, Vol Bars, Candlesticks Patterns)",
+      "url": "https://www.youtube.com/watch?v=qRirYfM4XiY",
+      "duration_sec": 661,
+      "view_count": 133000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "MTbYDUswdbM",
+      "title": "+$10,790.64 Trading off the High of Day Momentum Scanner",
+      "url": "https://www.youtube.com/watch?v=MTbYDUswdbM",
+      "duration_sec": 656,
+      "view_count": 20000,
+      "upload_date": null,
+      "timestamp": 1753920000,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "N3E5eYS8d-I",
+      "title": "I asked ChatGPT to make a $750,000 Day Trading Strategy",
+      "url": "https://www.youtube.com/watch?v=N3E5eYS8d-I",
+      "duration_sec": 648,
+      "view_count": 79000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "jpPgEAAVMxY",
+      "title": "+$15,113.96 Day Trading a SPAC and a Recent Reverse Split Setup",
+      "url": "https://www.youtube.com/watch?v=jpPgEAAVMxY",
+      "duration_sec": 637,
+      "view_count": 21000,
+      "upload_date": null,
+      "timestamp": 1769817600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "45PHATChEJU",
+      "title": "Lessons on being Outside Your Comfort Zone!  Goodbye California!  Hello East Coast!",
+      "url": "https://www.youtube.com/watch?v=45PHATChEJU",
+      "duration_sec": 631,
+      "view_count": 9800,
+      "upload_date": null,
+      "timestamp": 1532995200,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "9VAKgj1Px3s",
+      "title": "$TCBP $OTRK Day Trading from Gap & Momentum Scanners",
+      "url": "https://www.youtube.com/watch?v=9VAKgj1Px3s",
+      "duration_sec": 601,
+      "view_count": 10000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "yBiAZvwpVww",
+      "title": "$CFRX Recent Reverse Split Gap and Go Setup",
+      "url": "https://www.youtube.com/watch?v=yBiAZvwpVww",
+      "duration_sec": 559,
+      "view_count": 9600,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "IKwm-KdCqpg",
+      "title": "One Trade / Day (Holiday Trading Strategy)",
+      "url": "https://www.youtube.com/watch?v=IKwm-KdCqpg",
+      "duration_sec": 557,
+      "view_count": 20000,
+      "upload_date": null,
+      "timestamp": 1767139200,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Ymzyd9fbsmI",
+      "title": "3 Doji Candlesticks Patterns That are Buy/Sell Indicators #daytrading #stockmarket",
+      "url": "https://www.youtube.com/watch?v=Ymzyd9fbsmI",
+      "duration_sec": 539,
+      "view_count": 123000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "kQ93wnMCMWQ",
+      "title": "Shooting Star & Hammer Candlesticks - Reversal Candlestick Strategy",
+      "url": "https://www.youtube.com/watch?v=kQ93wnMCMWQ",
+      "duration_sec": 538,
+      "view_count": 80000,
+      "upload_date": null,
+      "timestamp": 1659225600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "Fe4BaF8gCOQ",
+      "title": "My Day Trading Strategy for 2023 $LIPO +100%",
+      "url": "https://www.youtube.com/watch?v=Fe4BaF8gCOQ",
+      "duration_sec": 515,
+      "view_count": 10000,
+      "upload_date": null,
+      "timestamp": 1690761600,
+      "teaching_class": "rules"
+    },
+    {
+      "id": "yKXtPgsTXCk",
+      "title": "4 Lessons from Surviving a Stock Market Crash",
+      "url": "https://www.youtube.com/watch?v=yKXtPgsTXCk",
+      "duration_sec": 504,
+      "view_count": 18000,
+      "upload_date": null,
+      "timestamp": 1722384000,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "ZY_GJSl4nWk",
+      "title": "How I Went from RED on the Day to GREEN!",
+      "url": "https://www.youtube.com/watch?v=ZY_GJSl4nWk",
+      "duration_sec": 501,
+      "view_count": 25000,
+      "upload_date": null,
+      "timestamp": 1756598400,
+      "teaching_class": "howto"
+    },
+    {
+      "id": "Uft2BuJpap8",
+      "title": "Buying the Break of VWAP Setup",
+      "url": "https://www.youtube.com/watch?v=Uft2BuJpap8",
+      "duration_sec": 487,
+      "view_count": 34000,
+      "upload_date": null,
+      "timestamp": 1769817600,
+      "teaching_class": "rules"
+    }
+  ]
+}

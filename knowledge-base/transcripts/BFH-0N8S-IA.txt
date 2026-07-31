@@ -1,0 +1,727 @@
+# Master Supply & Demand Trading (Ultimate Beginners Guide)
+# https://www.youtube.com/watch?v=BFH-0N8S-IA
+# duration_sec: 1766
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to walk you
+[00:00:03] through how to read supply and demand
+[00:00:05] zones on a Candlestick chart these are
+[00:00:08] often referred to as areas of support
+[00:00:10] and resistance the better you get at
+[00:00:13] visualizing these areas on Candlestick
+[00:00:15] charts the better you'll be able to time
+[00:00:17] your entries and your exits because
+[00:00:20] after all if you're getting in really
+[00:00:22] close to an area of support what's your
+[00:00:25] max loss your max loss is if the price
+[00:00:27] doesn't hold support if it breaks
+[00:00:29] through that level which means the
+[00:00:31] closer you're getting in to that support
+[00:00:33] base your stop is Tiny which means you
+[00:00:36] now have the potential to get a 2:1 3:1
+[00:00:39] 4:1 5:1 maybe even
+[00:00:41] 10:1 profit versus loss ratio on the
+[00:00:46] trade and this is when you can do really
+[00:00:49] well even if you're only right half the
+[00:00:51] time you could be wrong 50% of the time
+[00:00:54] but when your average winners are five
+[00:00:55] times your average losers you're going
+[00:00:58] to do well what I'm going to share with
+[00:00:59] you today you can apply to Forex
+[00:01:02] cryptocurrency futures or you could
+[00:01:04] trade stocks the way I do so let's go
+[00:01:06] ahead and jump into the charts now we're
+[00:01:07] going to get started on a one minute
+[00:01:09] Candlestick chart of a stock that went
+[00:01:11] up over 100% now I haven't drawn the
+[00:01:15] supply and demand zones on this chart
+[00:01:17] yet but as soon as I do the light is
+[00:01:19] going to go on and you're going to be
+[00:01:20] like wow I can't believe I haven't
+[00:01:22] looked at charts like this before it's a
+[00:01:24] no-brainer once you start seeing them
+[00:01:27] through this lens but first I want to
+[00:01:29] get you sort of oriented to how I have
+[00:01:31] my charts set up so I'm an active day
+[00:01:34] trader and the chart that we're looking
+[00:01:36] at right here is a one minute chart
+[00:01:37] which means each one of these candles
+[00:01:39] represents one minute of time I also
+[00:01:41] have some standard technical indicators
+[00:01:43] on this chart technical indicators help
+[00:01:46] put price action in context because
+[00:01:49] otherwise it's it's hard you know if you
+[00:01:51] see say the price is $10 it's like well
+[00:01:54] is that good or bad what's it relative
+[00:01:56] to and so these technical indicators
+[00:01:59] that I use on my charts are pretty much
+[00:02:01] the same that millions of other Traders
+[00:02:04] are using so I'm just going to break
+[00:02:05] them down for you just to make sure
+[00:02:06] we're on the same page so number one I
+[00:02:09] have EMAs EMA stands for exponential
+[00:02:12] moving average and I use the nine the 20
+[00:02:16] and the 200 these are the moving
+[00:02:18] averages that I'm using on my charts and
+[00:02:20] so the nine is a gray line right here
+[00:02:24] the 20 is a blue line right here and the
+[00:02:27] 200 period moving average is this
+[00:02:29] magenta line that's further down a
+[00:02:31] moving average takes the average price
+[00:02:34] over said period and that helps sort of
+[00:02:38] provide context so what's the price
+[00:02:40] right now relative to the average price
+[00:02:42] over the last 200 candles so on a one
+[00:02:44] minute chart over the last 200 candles
+[00:02:46] the price is way down here at you know
+[00:02:50] 220 right so the current price is way
+[00:02:52] above it that helps give context and
+[00:02:55] that's what we want to see so I'm using
+[00:02:58] my uh 920 200 EMA the orange line right
+[00:03:02] here is volume weighted average price
+[00:03:05] the volume weighted average price is um
+[00:03:07] it is a moving average But it includes
+[00:03:09] the amount of volume that is traded at
+[00:03:12] each of the prices so it actually
+[00:03:14] represents the true equilibrium point of
+[00:03:17] a stock during the course of a day so
+[00:03:20] it's like slack tide or kind of like um
+[00:03:23] just a loose rubber band and then when
+[00:03:25] the price gets extended away from vwap
+[00:03:27] that gives context I have volume bars
+[00:03:30] down here so these are going to be
+[00:03:33] standard on most charts it just shows
+[00:03:34] the amount of volume that took place in
+[00:03:36] each candle but it's very helpful
+[00:03:37] visually to see when you've got high
+[00:03:39] volume versus low volume and then uh the
+[00:03:42] fourth indicator is the moving average
+[00:03:44] convergence Divergence indicator which
+[00:03:46] is known as macd so number three volume
+[00:03:50] bars and number four
+[00:03:53] macd and those are the standard
+[00:03:55] indicators that I have on my time frame
+[00:03:57] on pretty much all time frames but this
+[00:03:59] is just the one minute chart for right
+[00:04:01] now okay so let's get kind of dialed in
+[00:04:05] and In the Zone on this
+[00:04:08] chart okay so what we've got going on
+[00:04:10] here is a stock that went up over 100%
+[00:04:13] very quickly how do we understand areas
+[00:04:15] of support and resistance so what I
+[00:04:18] always do when I a stock is first coming
+[00:04:21] to my attention and it's first squeezing
+[00:04:23] up like this I pull up the chart and I
+[00:04:25] try to get context I try to understand
+[00:04:28] okay the current price is at 220 is that
+[00:04:31] good for this stock or is it bad for
+[00:04:33] this stock and so the first thing I'm
+[00:04:35] going to do is I'm actually going to
+[00:04:36] jump out to the daily chart and this is
+[00:04:39] the daily chart here and this all of a
+[00:04:42] sudden presents a ton of context because
+[00:04:44] now we see oh wow okay there's no doubt
+[00:04:48] that this is a stock that's been beaten
+[00:04:49] up for a long time it's sold off a lot
+[00:04:53] where are we going to have an area of
+[00:04:55] potential resistance and I would say
+[00:04:57] very logically around $3
+[00:05:00] .50 and what we're seeing here is that
+[00:05:03] this is the position of the 200 moving
+[00:05:04] average right around 350 the 200 moving
+[00:05:07] average is one of the most respected
+[00:05:10] technical indicators on the daily chart
+[00:05:13] and so what's important to understand
+[00:05:15] about technical indicators is that they
+[00:05:17] are a universal language and it is
+[00:05:19] respected by all the traders who read
+[00:05:21] that language and study that language so
+[00:05:24] just like a red light at a at a traffic
+[00:05:26] intersection means stop the 200 moving
+[00:05:29] average means stop it's the same thing
+[00:05:32] it's just the language of the financial
+[00:05:33] markets which is a language that you're
+[00:05:35] beginning to learn what I would say is
+[00:05:37] if you're new the more you immerse
+[00:05:39] yourself in this environment of learning
+[00:05:42] about the market the faster it'll start
+[00:05:44] to pick up for you just like learning
+[00:05:46] another language just surround yourself
+[00:05:48] watch these videos get into the
+[00:05:50] communities read books and all of this
+[00:05:53] will start to soak in and become second
+[00:05:55] nature so when I looked at the daily
+[00:05:57] chart the first level that I identified
+[00:05:59] as being a resistance point was at about
+[00:06:03] $3.50 and then I looked to the left this
+[00:06:06] way right here and I just asked myself
+[00:06:09] are there any areas here where we might
+[00:06:11] see um resistance and I noted this
+[00:06:16] candle here where there was a lot of
+[00:06:18] selling
+[00:06:19] volume uh and I looked over a little bit
+[00:06:22] for farther and then I saw the high of
+[00:06:24] this candle up here and and I also I
+[00:06:27] guess would say this is a possible area
+[00:06:29] here so there were a couple of areas
+[00:06:31] that I noted that could represent some
+[00:06:35] resistance uh and to kind of help you
+[00:06:37] better
+[00:06:39] understand how this um connects to
+[00:06:41] supply and demand if the price comes up
+[00:06:45] to 350 right here do you think there's
+[00:06:48] going to be a lot of Supply or a lot of
+[00:06:51] demand the answer is there will not be a
+[00:06:54] lot of demand most likely because we're
+[00:06:58] right at resistance so in fact there
+[00:07:00] will be a surplus of Supply in the form
+[00:07:03] of sellers there will be a lot of people
+[00:07:05] selling shares here that'll create
+[00:07:07] Supply and the price will decline when
+[00:07:10] there's a lot of demand the price goes
+[00:07:12] higher now if the price can get above
+[00:07:15] this 200 moving average and it can hold
+[00:07:17] above it then we could see demand off
+[00:07:20] that level for a move back up but first
+[00:07:23] it has to prove that it can get above it
+[00:07:25] and hold above it and that may not that
+[00:07:28] may not happen now it could happen
+[00:07:29] happen if because this does have news
+[00:07:31] and the catalyst is decent but it it's a
+[00:07:33] little bit of an if and what's pretty
+[00:07:35] much a sure thing is that we're going to
+[00:07:36] have resistance at this level at least
+[00:07:39] initially okay so when I'm trading this
+[00:07:42] is what my main monitor looks like and
+[00:07:45] we actually have four charts here one
+[00:07:48] let's see we've got one two three and
+[00:07:51] then number four these are all for the
+[00:07:55] same stock but what's different about
+[00:07:58] them is the time frame frame this is a
+[00:08:00] daily chart this is a 5 minute chart
+[00:08:03] this is our 1 minute chart and this is a
+[00:08:05] 10-second chart so when I'm focusing on
+[00:08:09] a stock I actually am primarily trading
+[00:08:11] off of the one minute the five minute
+[00:08:13] and the 10-second chart but the daily
+[00:08:15] chart provides that context so one of
+[00:08:17] the first things I do is I take a look
+[00:08:18] at the big picture because if I see for
+[00:08:20] instance on the daily chart that we're
+[00:08:22] coming into a supply Zone there's going
+[00:08:24] to be a lot of sellers I don't even have
+[00:08:26] to look at the five minute or the one
+[00:08:27] minute I'm not going to want to buy it
+[00:08:29] the five the daily chart has to check
+[00:08:31] out first and if it does I zoom into the
+[00:08:33] five minute if the five minute looks
+[00:08:35] good I zoom into the one minute if the
+[00:08:37] one minute looks good then I may pull up
+[00:08:38] the 10-second chart to find my initial
+[00:08:40] entry now for those of you who are
+[00:08:43] curious about how in the world I'm
+[00:08:45] finding stocks that are going up 50 75
+[00:08:48] 100% in one day I'll tell you that it I
+[00:08:51] have a system that I follow every single
+[00:08:53] day these are stocks that have news but
+[00:08:55] I'm not searching through all the
+[00:08:57] breaking news headlines you know that's
+[00:08:59] not the way to do it the there's
+[00:09:01] thousands and thousands of stocks in the
+[00:09:03] market that are putting out news every
+[00:09:05] day searching through the news
+[00:09:07] headlines that wouldn't help you and
+[00:09:09] even if you were the very first one to
+[00:09:11] get a news headline you wouldn't know if
+[00:09:14] it's good or bad without understanding
+[00:09:16] the company very well companies usually
+[00:09:19] put out headlines that sound good but
+[00:09:22] they could be terrible so a clinical
+[00:09:24] trial company you know of doing
+[00:09:26] pharmaceutical stuff could put out uh a
+[00:09:28] headline that this drug um you know
+[00:09:32] success among 60% of patients but the
+[00:09:35] last headline was that the success was
+[00:09:36] like with 80% so it's a decline so
+[00:09:39] unless you can put it in perspective you
+[00:09:40] can't take the trade so what I do
+[00:09:42] instead is I'm actually using these
+[00:09:44] stock scanners right here to search the
+[00:09:47] market in real time for stocks that are
+[00:09:49] moving up at any given time out of
+[00:09:52] 10,000 Plus stocks that you could be
+[00:09:54] trading there's probably only one or two
+[00:09:57] that have gone up more than 10 % in the
+[00:10:00] last 5 minutes but when a stock does
+[00:10:03] that it's going to hit my radar I'm
+[00:10:06] going to see it moving and then I'm
+[00:10:08] going to pull up the chart and I'm going
+[00:10:09] to check to see what's the Catalyst why
+[00:10:11] is it moving and so that's the process
+[00:10:13] that I followed yesterday uh or was it
+[00:10:15] uh yesterday or the day before when rebn
+[00:10:17] first popped up it was yesterday okay so
+[00:10:21] this pops up here and the first thing I
+[00:10:23] do is I check the daily chart to see if
+[00:10:25] there's any areas of Supply Zone and I
+[00:10:27] recognized that there would be
+[00:10:29] resistance Supply zone right around 350
+[00:10:32] but the current price at 220 I was like
+[00:10:34] no that's fine I mean we that's not a
+[00:10:36] concern right now I checked the F minute
+[00:10:39] chart there is zero nearby resistance so
+[00:10:42] we've got no issue on the f- minute
+[00:10:44] chart so now I'm thinking all right this
+[00:10:47] is something that I can trade but it's
+[00:10:50] squeezing up right now it needs to pull
+[00:10:53] back I need a momentary pullback to help
+[00:10:55] me establish risk and that comes in the
+[00:10:58] form of a red candle
+[00:10:59] right here we have a red candle we have
+[00:11:02] a high of about 240 and we have a low
+[00:11:04] down here of about 207 208 now the low
+[00:11:08] just above the whole dollar of two seems
+[00:11:11] to be holding as support right here we
+[00:11:14] have something very important that
+[00:11:15] happens and this is called a double
+[00:11:19] bottom a double bottom right here so see
+[00:11:22] how it it this is imagine a man or a
+[00:11:26] woman if you'd like or a man whichever
+[00:11:28] you prefer sitting and this is
+[00:11:31] establishing support as they're sitting
+[00:11:33] their little butt right here the double
+[00:11:35] bottom so now you've got support right
+[00:11:37] here and you've got that move that comes
+[00:11:39] back up so I would say now at this point
+[00:11:42] we can establish that 209 is an area
+[00:11:46] where demand came in there was support
+[00:11:50] here there is demand so this is a demand
+[00:11:52] zone right in here now we don't know um
+[00:11:57] exactly it hasn't been tested uh except
+[00:12:00] for these two candles here but we're
+[00:12:02] just going to draw that little demand
+[00:12:03] zone now from there the price begins to
+[00:12:05] move up and so I took my first trade
+[00:12:07] right off of this level and the price
+[00:12:09] goes up to 230 240 250 up to 280 but
+[00:12:13] notice up at 280 we start to have a uh a
+[00:12:17] little bit of a double top all right so
+[00:12:19] now we've got a little bit of resistance
+[00:12:21] right up here so we've got a possible
+[00:12:24] issue forming at around 280 and I said
+[00:12:28] I'm going to watch this Clos it pushes a
+[00:12:29] little higher and then notice how it
+[00:12:32] rejects so this is where I started to
+[00:12:34] think that we had resistance up around
+[00:12:36] $3 that is not uncommon at all because
+[00:12:40] most of these stocks will trade with a
+[00:12:43] decent amount of respect to half dollars
+[00:12:45] and whole dollars which that's another
+[00:12:47] way of saying that when the stock
+[00:12:49] approaches the psychological resistance
+[00:12:52] of three it's going to hit sellers why
+[00:12:55] does that happen well there's a lot of
+[00:12:57] people that will just throw sell orders
+[00:12:59] at the half dollar and the whole dollar
+[00:13:01] and market makers sort of know that and
+[00:13:03] so they do the same thing and so we
+[00:13:05] often see that when we're watching um
+[00:13:08] price moving up the way it moves up is
+[00:13:12] we'll have our uh I'll just sort of draw
+[00:13:15] this here these are going to be half
+[00:13:17] dollars and whole dollars right here so
+[00:13:20] we've got half dollars whole dollars
+[00:13:22] right here and so typically we're going
+[00:13:25] to see the price comes up and then it'll
+[00:13:27] pull back for a second and then it'll
+[00:13:29] punch through and pull back for a second
+[00:13:31] the pull back will be red but you get
+[00:13:32] the idea it'll pull back again for a
+[00:13:34] second and it'll pull back again for a
+[00:13:36] second and then when it finally reverses
+[00:13:38] it's usually reversing off of either a
+[00:13:40] half dollar or a whole dollar this is
+[00:13:42] very common so it it's common because of
+[00:13:45] the just psychological effect of oh I'm
+[00:13:48] just going to sell it $3 if this thing
+[00:13:50] goes to three I'm just going to sell at
+[00:13:51] three so a lot of people put their
+[00:13:53] orders at $298 $299 $3 so we saw this
+[00:13:56] double top here at 81 and then we pushed
+[00:13:59] up to three but we ran into this area of
+[00:14:01] resistance that I would say is more or
+[00:14:03] less between about like
+[00:14:06] 285 and about
+[00:14:08] 305 so we're going to draw this um sort
+[00:14:12] of right in here and this whole area I
+[00:14:15] would say appears that it's going to be
+[00:14:18] an area of Supply where people are
+[00:14:22] selling all right so now we're going to
+[00:14:23] watch to see how this Theory tests out
+[00:14:27] but that's my suspicion okay so now we
+[00:14:29] start to pull back a little bit as you
+[00:14:31] see we dip back down to about uh
+[00:14:34] 265 it sort of bare Flags a little bit
+[00:14:37] it goes a little bit lower our macd does
+[00:14:40] a crossover right here so now we're
+[00:14:42] getting into a little bit more weakness
+[00:14:44] but notice this bottoming tail a
+[00:14:47] bottoming tail there represents what
+[00:14:50] demand so now we may have a demand Zone
+[00:14:55] around
+[00:14:56] 250 right now that would would also make
+[00:14:59] sense and that's in line with the bounce
+[00:15:02] off of a half dollar so we came up let's
+[00:15:05] just say in this example to $3 and then
+[00:15:08] we bounced off of 250 so now we know
+[00:15:12] that it seems that we have a supply Zone
+[00:15:14] up here around three and a demand Zone
+[00:15:16] around 250 this is very common that it
+[00:15:19] would be uh correlating with these
+[00:15:21] prices so now I'm going to
+[00:15:24] draw uh a little bit of a demand Zone
+[00:15:26] starting here and I'm going to put it
+[00:15:28] about 10 on either side of the price so
+[00:15:31] and we'll just we'll we'll move this
+[00:15:33] forward as we keep going and this we're
+[00:15:34] going to continue to move forward okay
+[00:15:36] so now Watch What Happens here we've got
+[00:15:39] demand down here we bounced off this
+[00:15:40] level we came up and we kind of ran into
+[00:15:44] this resistance Zone here this
+[00:15:47] resistance zone or uh Supply Zone you
+[00:15:50] could interchange the two words it comes
+[00:15:52] back down now you come back to this area
+[00:15:54] doesn't quite come down to the demand
+[00:15:56] Zone but it comes down to this area and
+[00:15:59] then it sort of pushes back up here and
+[00:16:01] then let's draw this forward so watch
+[00:16:04] here we try to come back up into the
+[00:16:06] same area and we're not able to hold so
+[00:16:10] once again we come up to about $3 and
+[00:16:13] there's a supply there's a lot of
+[00:16:15] sellers up at this level selling selling
+[00:16:17] selling and we drop back down now in
+[00:16:20] this candle here this is a topping tail
+[00:16:22] a shooting star candle so we squeezed
+[00:16:24] through this level but we immediately
+[00:16:26] came back down which further confirmed
+[00:16:29] that there were a lot of sellers up at
+[00:16:31] this
+[00:16:32] price right now in this area here it it
+[00:16:35] may be fair to say that the supply zone
+[00:16:38] is a little higher it doesn't
+[00:16:40] necessarily have to be the bottom of the
+[00:16:42] candle it may be that it's a little
+[00:16:44] higher but these are kind of more or
+[00:16:46] less
+[00:16:47] zones it doesn't necessarily go to the
+[00:16:49] penny so now let's move this forward
+[00:16:51] here all right so we're going to move
+[00:16:52] this forward and we're going to move
+[00:16:54] this forward so this is the zone that
+[00:16:57] we're kind of playing in right now
+[00:16:59] so notice we are in the zone sellers
+[00:17:03] push it back down we try to come back up
+[00:17:06] sellers push it back down we come back
+[00:17:08] down here and now there's buyers we dip
+[00:17:11] down and the buyers bring it back up so
+[00:17:13] there's demand in this area now just by
+[00:17:16] simply drawing this initial trend line
+[00:17:19] at the low of this candle which is the
+[00:17:21] easiest way to do it you draw the trend
+[00:17:23] line at the low of this candle you could
+[00:17:25] draw the trend line at the top of this
+[00:17:26] candle drawing a c drawing a trend line
+[00:17:29] at the top of an upper candle wick is
+[00:17:34] helpful however also just keep in mind
+[00:17:37] if you've got a really big candle wick
+[00:17:39] like that what was the price action just
+[00:17:41] before you broke CU that's probably
+[00:17:43] going to be a better reflection of the
+[00:17:45] price that's going to be resistance as
+[00:17:48] we move forward okay so the easiest way
+[00:17:52] is to just draw those single lines and
+[00:17:54] know that it's going to be more or less
+[00:17:55] at that area now this price at about 280
+[00:17:59] uh which is sort of where we had this
+[00:18:00] double top you know it's kind of broken
+[00:18:02] it a couple times so that may not be as
+[00:18:05] valid of an area and sometimes if I
+[00:18:07] notice that the price is moving through
+[00:18:10] an area that I thought was resistance
+[00:18:12] quite freely I'll say maybe I was wrong
+[00:18:14] on that and I'll and I'll remove that
+[00:18:16] that particular uh trend line so maybe
+[00:18:19] at this point we say yeah that's maybe
+[00:18:21] not an accurate trend line and this
+[00:18:22] seems to be like a little bit more up in
+[00:18:24] that area all right now this trend line
+[00:18:27] that we drew down here at 209 has not
+[00:18:29] been tested it'll still be on the chart
+[00:18:31] but it's just right now not valid it
+[00:18:34] doesn't seem like it's tested okay so
+[00:18:36] now watch this so now something really
+[00:18:38] important is going to happen we come
+[00:18:40] back up to this area and we try to test
+[00:18:43] that 310 spot again that $3 area so we
+[00:18:47] push up to three we hit a high of 310 it
+[00:18:49] dips down and this is what's so
+[00:18:52] important are we able to break through
+[00:18:56] the supply Zone if we can break through
+[00:18:59] the resistance Supply Zone and hold
+[00:19:01] above it well we've just bought through
+[00:19:04] all of the sellers that were holding it
+[00:19:06] up now it's game time now the one thing
+[00:19:08] I'll say is that this has the highest
+[00:19:10] volume candle right here of the whole
+[00:19:12] day 600,000 shares in one minute another
+[00:19:15] 400,000 shares the next minute so that's
+[00:19:17] a million shares of volume right here
+[00:19:20] and it's kind of struggling so when you
+[00:19:22] have a lot of buying and we're
+[00:19:24] struggling to break that is further
+[00:19:27] confirming that there are a lot of
+[00:19:28] sellers right at this level and that was
+[00:19:31] something that I noticed yesterday and I
+[00:19:32] was a little concerned about it however
+[00:19:35] does push through as you can see and now
+[00:19:38] it's holding Above This level and as it
+[00:19:41] dips down off of that level it gets
+[00:19:43] bought back up and so this is the
+[00:19:46] process of an area that was formally
+[00:19:50] resistance formally a supply Zone
+[00:19:53] becoming support and then becoming a
+[00:19:56] demand zone now the price is holding
+[00:19:59] this level this is becoming a demand
+[00:20:01] Zone we're going to squeeze higher here
+[00:20:03] we're going to punch all the way up to a
+[00:20:05] high of 335 we come back down into the
+[00:20:09] same Zone and now it's a demand zone
+[00:20:13] right notice how we had um sorry back in
+[00:20:16] this area where we had the demand we had
+[00:20:17] the bottoming Tails bottoming Tails
+[00:20:19] right down here we dip down they get
+[00:20:21] bought right back up we dip down we get
+[00:20:22] bought right back up now we're dipping
+[00:20:24] down and we're getting bought right back
+[00:20:26] up if you are having trouble visualizing
+[00:20:29] possible support and resistance Zones
+[00:20:32] look for candle wicks big candle wicks
+[00:20:35] like that help identify that these are
+[00:20:37] areas of resistance Supply or demand
+[00:20:41] support so we bounce off 290 and then
+[00:20:44] watch this we push up to two uh to to
+[00:20:47] $295 to $3 we push all the way up to 390
+[00:20:51] now what do we have a problem with up
+[00:20:53] here well you know whole dollar right
+[00:20:56] 290 to 405 we' got this whole dollar
+[00:20:59] zone so now we've got a new Zone that's
+[00:21:01] starting right up here and in this case
+[00:21:04] you see that we really struggle with it
+[00:21:07] this is right around the half doll whole
+[00:21:08] dollar of of four we've got resistance
+[00:21:11] here and we are unable to hold and break
+[00:21:14] above it our supply Zone down here is
+[00:21:17] not being tested currently um in
+[00:21:21] fact you may be able to argue that we
+[00:21:25] have a new sort of support Zone that has
+[00:21:28] formed armed in this area uh
+[00:21:31] perhaps you've got a double bottom right
+[00:21:34] here double bottom it breaks through so
+[00:21:37] it seems like there may be a little bit
+[00:21:39] of a Zone in this area that could be
+[00:21:41] forming as um
+[00:21:44] support right in sort of this
+[00:21:46] area right so a little bit of a demand
+[00:21:49] Zone in here it finally is able to push
+[00:21:51] higher and it surges up to this level
+[00:21:55] here and again it tries to hold it tries
+[00:21:57] to hold it and then sellers push it back
+[00:21:59] down and then we come back to this
+[00:22:02] previous Zone down here and look at how
+[00:22:04] we trade in this zone for a long time
+[00:22:08] right and then we start to kind of break
+[00:22:10] below
+[00:22:12] it I mean this is for hours it's just in
+[00:22:15] this zone now you could see it tries to
+[00:22:18] kind of push outside it but at this time
+[00:22:21] it's below volume weight average price
+[00:22:23] it's not able to hold and then going
+[00:22:26] into the uh sort of end of the day
+[00:22:29] it just rolls it rolls over and then
+[00:22:31] that's where we come back down to the
+[00:22:33] next Zone here right there so we come
+[00:22:35] down to there and then we didn't come
+[00:22:37] even we didn't come much lower than that
+[00:22:40] so and then you can see again we're sort
+[00:22:42] of holding right at that area holding
+[00:22:45] right at that area and we continue to
+[00:22:47] hold in these areas these are these are
+[00:22:49] demand zones we bounce off this area but
+[00:22:52] again now at this point the catalyst is
+[00:22:54] kind of worn out and it's not really
+[00:22:56] holding but these are valid zones
+[00:22:59] look at this I mean let's step back
+[00:23:01] let's be real these are very valid zones
+[00:23:03] if you're drawing these on your chart
+[00:23:04] they're going to help you so these are
+[00:23:06] areas of um resistance where we've got a
+[00:23:09] surplus of Supply areas of support where
+[00:23:11] we've got a lot of demand okay so this
+[00:23:14] is rebn now um let's take a look at
+[00:23:17] another one we've got uh gsun here this
+[00:23:20] one's um particularly interesting we're
+[00:23:23] going to do the one minute chart on this
+[00:23:24] one um this was one that put in kind of
+[00:23:27] a fast move move and sometimes that'll
+[00:23:30] happen we'll have just like a big sort
+[00:23:32] of blast off and then it sort of Fades
+[00:23:35] back down okay so in this case here we
+[00:23:39] have this initial move higher all right
+[00:23:41] so we're going to get oriented so we got
+[00:23:42] this initial move higher the price
+[00:23:44] starts to pull away pull away pull away
+[00:23:46] and then it comes into a little bit of
+[00:23:47] resistance here all right so we'll just
+[00:23:49] draw um the trend lines here just to
+[00:23:51] make this one a little simpler so this
+[00:23:54] is going to be our um resistance zone so
+[00:23:57] we've got a little bit of supply up here
+[00:23:59] we punch through it we have a very nice
+[00:24:01] little one minute pullback right here so
+[00:24:04] love that pullback that is very clean
+[00:24:06] pulls back pushes higher it pulls back
+[00:24:10] again and each time it pulls back
+[00:24:12] there's demand because the price surges
+[00:24:14] higher and then we come up to topping
+[00:24:17] tails up in this area right so now I've
+[00:24:19] got this zone of topping Tails where did
+[00:24:22] we have support we had support down here
+[00:24:24] at this candle which held for a little
+[00:24:26] bit but unfortunately this particular
+[00:24:29] stock it just was not quite strong
+[00:24:32] enough to keep going and it was able to
+[00:24:33] push through that level coming down and
+[00:24:36] then what's the next level you're
+[00:24:37] worried about breaking right in this
+[00:24:39] area right then what's the next
+[00:24:42] level again back in this area so these
+[00:24:45] are the areas that become in play and
+[00:24:48] this is really helpful when you're
+[00:24:50] looking at a chart because now you're
+[00:24:52] able to sort of see okay is this is
+[00:24:54] coming back down where's it going to
+[00:24:56] come to and it's a helpful when we're in
+[00:24:59] the context of price moving up because
+[00:25:01] then we know okay we can buy off this
+[00:25:03] support as we start to curl we look for
+[00:25:06] some of our other indicators to aign
+[00:25:07] like a macd crossover volume starting to
+[00:25:10] pick up you know the moving averages and
+[00:25:12] the vwap supporting the move so it's not
+[00:25:14] just the supply zones but it's it's
+[00:25:17] certainly going to help in the trade now
+[00:25:20] uh let's look at let's see um
+[00:25:23] cpop cpop this is another one we'll look
+[00:25:26] at the um can look at the one minute
+[00:25:29] chart on this so this one the move
+[00:25:32] actually began after hours uh this area
+[00:25:35] back here is after hours and then this
+[00:25:37] is pre-market so the move begins back
+[00:25:39] here and initially it pops up hits a
+[00:25:42] high of about 240 and then it pulls back
+[00:25:45] pops up again so now it's like all right
+[00:25:47] what's our level definitely 240 right
+[00:25:50] we've got to draw that out that's a Zone
+[00:25:52] that's resistance right now it's a
+[00:25:54] supply Zone we're selling off it we get
+[00:25:56] above it now it's kind of holding
+[00:25:58] all right so this is that pivot but if
+[00:26:00] it comes back down there it is moves up
+[00:26:03] comes back down again so we know that
+[00:26:06] 240 level is important it's holding and
+[00:26:09] then right here as we start to kind of
+[00:26:10] pull away during the pre-market session
+[00:26:13] the following
+[00:26:14] morning I start to look at all right
+[00:26:16] well where did we have some topping
+[00:26:18] Tails right so we had this topping tail
+[00:26:20] right here this is coming up into this
+[00:26:22] area you know more or less we do get
+[00:26:26] above it right here
+[00:26:29] and so in this area it's
+[00:26:32] resistance and then we bust through it
+[00:26:35] we hold more or less hold and now it's
+[00:26:38] becoming support for the next leg higher
+[00:26:41] but look at how this plays out later in
+[00:26:42] the day it's still a critical level
+[00:26:45] right it breaks below it and then right
+[00:26:48] here it's still like right at that level
+[00:26:51] so you can see how this is a Zone where
+[00:26:53] there's a lot of volume sometimes when
+[00:26:56] there's a Zone like this that's very
+[00:26:57] very OD obvious um we'll call it a point
+[00:27:00] of control the price above point of
+[00:27:03] control is bullish below it is bearish
+[00:27:06] there are some indicators that um will
+[00:27:08] tell you based on total volume the
+[00:27:12] actual point of control which would be
+[00:27:13] the price for the most volume traded um
+[00:27:17] that may it's not always going to be as
+[00:27:19] obvious as this is sort of in this
+[00:27:21] example um you know in this case we do
+[00:27:24] have a fair amount of volume that took
+[00:27:26] place a little bit higher here but let's
+[00:27:27] see let me let me find the indicator and
+[00:27:29] I'll pop it on the chart we'll just see
+[00:27:30] what it looks like so um we're going to
+[00:27:33] do um
+[00:27:36] volume um fixed R visible range so this
+[00:27:41] is showing you the volume profile right
+[00:27:43] here and look at so look at how close
+[00:27:48] that is to the line that I drew right so
+[00:27:53] I mean that's mathematically telling you
+[00:27:55] where the most volume took place and it
+[00:27:57] was right at this level this is sort of
+[00:27:59] the point of control so I'm able to
+[00:28:01] visualize that just by looking at the
+[00:28:03] chart as a beginner Trader these
+[00:28:05] indicators such as um volume profile can
+[00:28:08] help you when you're still kind of
+[00:28:10] struggling to visualize it but what's
+[00:28:12] important here is that when the price is
+[00:28:14] above it's bullish when the price is
+[00:28:15] below it's bearish and of course this
+[00:28:17] line is going to move and be adjusting
+[00:28:19] during the day based on uh on volume and
+[00:28:22] sort of the the way uh the price action
+[00:28:24] is is moving so here you can see kind of
+[00:28:27] like coming back up and sort of testing
+[00:28:29] this level we'll see you know we'll see
+[00:28:31] what happens I wouldn't be interested in
+[00:28:33] buying it just because it's up at that
+[00:28:34] level now though because this is well
+[00:28:36] below the volume weight average price
+[00:28:38] and it's just at this point it's just
+[00:28:40] not a very bullish chart anymore you
+[00:28:42] know it was and then you know it kind of
+[00:28:45] fell apart so it it's just too weak for
+[00:28:48] me now if you want to learn more about
+[00:28:50] my strategy specifically as it pertains
+[00:28:53] to buying these micro pullbacks
+[00:28:55] following breakouts I'll put a link Pinn
+[00:28:58] to the top of the comments and Linked In
+[00:28:59] the description where you can download
+[00:29:01] my micro pullback strategy as a PDF you
+[00:29:03] can print it out you can start
+[00:29:04] practicing it in your own trading and
+[00:29:06] look if you enjoyed this episode I hope
+[00:29:08] you hit the thumbs up I hope you
+[00:29:09] subscribe to the channel and I'm looking
+[00:29:10] forward to seeing you for the next
+[00:29:11] episode real soon I'll remind you as
+[00:29:13] always trading is risky so manage your
+[00:29:15] risk take it slow and we'll see you back
+[00:29:16] here real soon
+[00:29:19] [Music]

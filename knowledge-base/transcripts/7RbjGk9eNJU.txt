@@ -1,0 +1,636 @@
+# The Simplest Day Trading Strategy: Gap and Go ↗️📈 #stockmarket #daytrading
+# https://www.youtube.com/watch?v=7RbjGk9eNJU
+# duration_sec: 1353
+
+[00:00:05] what's up everyone all right so today
+[00:00:06] i'm going to talk about trying to find
+[00:00:08] stocks to trade one of the biggest
+[00:00:10] challenges with being a day trader is
+[00:00:12] finding something to trade there are
+[00:00:13] thousands and thousands of stocks and
+[00:00:15] you can go on reddit you can go on
+[00:00:17] forums you could go in chat rooms you
+[00:00:19] could find stocks a million different
+[00:00:20] ways
+[00:00:21] and i have found a way that for me works
+[00:00:24] really well and so what i'm gonna do
+[00:00:26] here is i'm just gonna cut through all
+[00:00:27] the kind of bologna you guys know who i
+[00:00:29] am i don't even tell you about me i
+[00:00:31] don't need to tell you about why i'm
+[00:00:32] credible if you want to see my broker
+[00:00:34] statements you can actually see them on
+[00:00:35] my website warriortrading.com
+[00:00:38] i'm just going to tell you about this
+[00:00:39] strategy which is day trading gappers so
+[00:00:43] one of the challenges of course with
+[00:00:44] learning how to trade is finding stock
+[00:00:46] to trade one of the other challenges is
+[00:00:47] finding credible information that's
+[00:00:50] useful helpful and
+[00:00:52] helps you grow as a trader so what i
+[00:00:55] want to show you here is a perfect
+[00:00:57] example
+[00:00:58] of trading gappers so this is the topic
+[00:01:01] for today it's an excerpt straight from
+[00:01:04] the warrior pro courses obviously i
+[00:01:06] teach classes over warrior trading we'd
+[00:01:08] love to have you guys join us if you
+[00:01:09] want to learn more come over to
+[00:01:11] warriortrading.com
+[00:01:13] strategy there's a special page there
+[00:01:14] that's specifically for you guys
+[00:01:16] checking out this episode here on
+[00:01:18] trading gappers so let's go ahead and
+[00:01:21] jump in but before i do i'll remind you
+[00:01:23] as always that trading is risky in case
+[00:01:25] you didn't already know that and my
+[00:01:26] results are not typical so you should
+[00:01:28] not assume that you will achieve the
+[00:01:30] same or similar results as me and you
+[00:01:31] should not try to blindly follow me or
+[00:01:33] anyone else you've got to learn the
+[00:01:35] strategy
+[00:01:36] and ultimately that's the biggest
+[00:01:38] challenge with getting started trading
+[00:01:40] finding a strategy a system of where am
+[00:01:43] i going to find stocks to trade and then
+[00:01:45] once i find them where am i going to get
+[00:01:46] in where am i going to get out et cetera
+[00:01:49] and that's what i teach in the warrior
+[00:01:51] pro class so
+[00:01:52] this right here is um chapter um chapter
+[00:01:56] seven gap and go trading now gap and go
+[00:01:58] trading is a fairly long chapter it has
+[00:02:02] several parts let's see i can jump
+[00:02:05] forward to it
+[00:02:06] uh let's see what chapter is this this
+[00:02:08] is chapter eight by the way this slide
+[00:02:10] deck is over a thousand slides so it's
+[00:02:13] uh it's pretty packed
+[00:02:15] but uh so here's chapter seven gap and
+[00:02:17] go
+[00:02:19] so this is we're going to be kind of
+[00:02:20] getting into some of the basics here now
+[00:02:23] i'm going to talk about the process of
+[00:02:24] reviewing the gap scanners but before i
+[00:02:26] get in that far let's just step back for
+[00:02:28] a second and let's look at this chart
+[00:02:30] okay so what are we looking at here
+[00:02:32] let's get oriented
+[00:02:33] what we're looking at is a stock that
+[00:02:36] right now at this very moment is up
+[00:02:39] 225 percent
+[00:02:42] i'm up 77
+[00:02:44] 999.99 on it which is a terrific green
+[00:02:48] day okay it's got 111 million shares of
+[00:02:50] volume you can see that right there so
+[00:02:52] those are the number of shares they've
+[00:02:54] traded hands and it's a nasdaq stock
+[00:02:56] it's listed on nasdaq
+[00:02:57] it's not listed on the american exchange
+[00:02:59] or um nicey or on the otc exchange
+[00:03:04] all right well is there any inclination
+[00:03:06] that this stock was going to make this
+[00:03:08] huge move from 12 all the way up to a
+[00:03:11] high of 28
+[00:03:13] and 83 cents we'll mark out the high
+[00:03:15] right there well you know why don't we
+[00:03:17] clear all of our lines and kind of just
+[00:03:19] get back to basics keep this really
+[00:03:21] simple
+[00:03:22] i'm not gonna in this video break down
+[00:03:25] the nuances of drawing trend lines and
+[00:03:28] things like that we cover all of that
+[00:03:30] extensively in the classes i also have
+[00:03:32] other videos on youtube here and there
+[00:03:34] where i hint and sort of talk about the
+[00:03:36] process of drawing these lines
+[00:03:39] so i'm not going to go into that right
+[00:03:40] now but what you can see is a fairly
+[00:03:42] clean and fairly simple chart i have
+[00:03:45] volume bars i have some moving averages
+[00:03:47] i have the volume weight average price
+[00:03:49] this morning
+[00:03:51] indp was gapping up 67 what does it mean
+[00:03:55] for a stock to gap
+[00:03:57] up does anyone know
+[00:03:59] it means that it's gonna open today
+[00:04:01] higher than it closed yesterday so
+[00:04:03] yesterday the stock closed at about
+[00:04:05] seven dollars and this morning it opened
+[00:04:08] at 11.85
+[00:04:11] representing an impressive 67
+[00:04:13] gap on the daily chart so the word gap
+[00:04:17] comes from the fact that this chart
+[00:04:19] which is a daily chart has this big gap
+[00:04:21] right here
+[00:04:22] all right so some right right that's
+[00:04:24] that's the gap maybe it's uh oh it's
+[00:04:26] actually from about 705. in any case
+[00:04:29] so that's our gap on the daily chart
+[00:04:31] so this stock was gapping up
+[00:04:34] yesterday it traded on approximately
+[00:04:37] 170 000 shares of volume
+[00:04:40] and today is trading on 1 310 times
+[00:04:44] relative volume with total volume of now
+[00:04:47] 112 million shares how does the stock go
+[00:04:50] from 170 000 shares one day to 112
+[00:04:54] the next day
+[00:04:55] news
+[00:04:56] so this stock did have breaking news
+[00:04:58] this morning uh which of course is
+[00:05:01] what typically
+[00:05:03] creates a gap so the stock had news you
+[00:05:05] can see it out at 7 00 a.m right here
+[00:05:07] and i'm not a fundamental trader i'm not
+[00:05:10] really dissecting
+[00:05:12] the quality of the catalyst there are
+[00:05:14] times where
+[00:05:15] we'll see a headline that sounds really
+[00:05:17] great you know a stock has like fda
+[00:05:19] approval for
+[00:05:21] um you know a nasal spray for treating
+[00:05:24] migraines and then the stock drops 25
+[00:05:26] and you're like how is this possible
+[00:05:27] this seems like great news
+[00:05:29] so i try not to over analyze the news
+[00:05:32] and i just recognize that there is news
+[00:05:34] and if the stock is moving up then
+[00:05:36] clearly the market is responding
+[00:05:37] positively to the news
+[00:05:39] so i guess the news is good
+[00:05:41] that means i'm a technical trader i
+[00:05:44] focus on the technicals more than the
+[00:05:46] fundamentals
+[00:05:47] so this is the chart right here the
+[00:05:49] stock started squeezing up at 7 am as
+[00:05:51] soon as the news came out and it
+[00:05:52] actually squeezed from 750 up to 10
+[00:05:55] briefly it pulled back and then it
+[00:05:57] rallied up to 10.50 it pulled back and
+[00:05:59] then it rallied up to a high of 1287.
+[00:06:02] and there were certainly some traders
+[00:06:04] who were trading it early in the morning
+[00:06:05] who maybe sat down on the early side and
+[00:06:08] saw that this was an opportunity how
+[00:06:10] would they have seen it how would they
+[00:06:11] have known the stock was moving right
+[00:06:13] here
+[00:06:14] this right here is actually software
+[00:06:16] that i developed for my students and i
+[00:06:18] use it myself we all use it and this
+[00:06:21] software scans the entire stock market
+[00:06:25] for stocks that are gapping up
+[00:06:27] so right here we have it sorted by the
+[00:06:30] leading gapper so every student who's in
+[00:06:32] our warrior pro classes in the part of
+[00:06:34] the curriculum and part of the community
+[00:06:36] when you log in each morning you can log
+[00:06:38] into the chat room you can see me
+[00:06:39] trading and you can also see this gap
+[00:06:42] scanner so this is our small cap top
+[00:06:43] gappers
+[00:06:45] and you can see there were a number of
+[00:06:46] gappers today i look at something at
+[00:06:48] minimum up five percent if it's up at
+[00:06:50] least five percent that's to me uh
+[00:06:52] statistically significant but we also
+[00:06:55] look for stocks down more than five
+[00:06:56] percent because sometimes those present
+[00:06:58] opportunities uh either to short it or
+[00:07:01] for a gap down reversal but i'm going to
+[00:07:04] focus primarily here on
+[00:07:06] the leading gapper so each day when i
+[00:07:09] sit down
+[00:07:10] i'm usually looking at the top five
+[00:07:12] leading gappers the leading gapper is
+[00:07:14] the one that's up the most
+[00:07:16] and sometimes
+[00:07:18] it's a stock that's like you know 60 70
+[00:07:21] cents it's too cheap
+[00:07:22] i don't really want to trade it i don't
+[00:07:24] really get into trading penny stocks
+[00:07:26] sometimes it's a stock that's too
+[00:07:27] expensive it's 100 a share now that's
+[00:07:30] not as common because for a hundred
+[00:07:32] dollar
+[00:07:32] share stock to be gapping up 60 70
+[00:07:35] percent i mean that's a huge gap at a
+[00:07:37] high price
+[00:07:39] for us like a two dollar stock opening
+[00:07:41] at four dollars that's already a 100 gap
+[00:07:43] so it happens a lot faster on lower
+[00:07:45] price names
+[00:07:46] and so what i do to begin with is i
+[00:07:49] review the scan so if we pull this back
+[00:07:51] up here the process of reviewing the gap
+[00:07:53] scanner
+[00:07:54] all right so um
+[00:07:56] and these are some examples these are
+[00:07:58] some case studies of uh of gappers that
+[00:08:01] i traded this was um this was one forty
+[00:08:03] thousand dollars on pixie
+[00:08:05] uh so pixie on this day was the leading
+[00:08:07] gapper it was gapping up 78
+[00:08:11] had a 300 000 share float which i'll
+[00:08:13] explain in a second 1.8 million shares
+[00:08:15] of volume and a catalyst related to
+[00:08:17] covid so that was one of the ones i
+[00:08:19] traded forty thousand dollars on pixie
+[00:08:22] um another case study here mdgs on the
+[00:08:25] morning scans leading gapper took some
+[00:08:27] trades on that seven thousand dollars
+[00:08:31] a pop
+[00:08:32] second leading gapper so on this
+[00:08:34] particular day the leading gapper had a
+[00:08:36] float of 1.1 billion shares acb that's a
+[00:08:40] very very large float so let's talk
+[00:08:44] about that for a second the process of
+[00:08:46] reviewing the gap scanner
+[00:08:48] initially i looked at the percentage gap
+[00:08:50] if our biggest gap around the day is
+[00:08:52] only like five or eight percent then we
+[00:08:54] don't really have anything that's super
+[00:08:56] big so that's kind of disappointing
+[00:08:58] usually i like to see something at least
+[00:09:00] 20 percent if not higher
+[00:09:03] why
+[00:09:04] just as a quick
+[00:09:06] tangent it's significant for me to even
+[00:09:08] be approaching trading in this fashion
+[00:09:11] i'm going to pull up some metrics here
+[00:09:14] um again this isn't to like brag or
+[00:09:16] anything like that i'm simply doing this
+[00:09:19] to show you
+[00:09:20] um
+[00:09:21] why what i'm saying is credible
+[00:09:24] so this is about 9.5 million dollars in
+[00:09:27] gross profit and we're going to look at
+[00:09:29] instrument down here
+[00:09:32] and
+[00:09:32] let's see so
+[00:09:34] performance by instrument movement is uh
+[00:09:37] the majority on stocks that are over 10
+[00:09:40] and performance by the instrument's
+[00:09:42] opening gap
+[00:09:43] so of 9 million 9.5 8.8 million is on a
+[00:09:47] stock gapping up over two percent so i
+[00:09:50] make the majority of my profits trading
+[00:09:53] stocks that are gapping up that's why
+[00:09:56] it's important if you're thinking about
+[00:09:58] learning how to trade momentum that you
+[00:10:00] understand how to use a gap scanner
+[00:10:03] and how to trade gappers so the process
+[00:10:05] of reviewing the scan begins uh
+[00:10:07] initially just with looking at how big
+[00:10:09] the gaps are and in this case we've got
+[00:10:11] a couple of big gaps indp was the leader
+[00:10:14] now i might already be familiar with
+[00:10:16] that stock i can click on it and bring
+[00:10:19] up some
+[00:10:20] some more detailed info on it over at
+[00:10:21] warriortrading.com you could also search
+[00:10:23] right here and bring up info on it if
+[00:10:25] you wanted to
+[00:10:26] so we know we have news this morning 7
+[00:10:29] a.m
+[00:10:31] and
+[00:10:32] that's i suppose
+[00:10:34] you could see the news uh if we go back
+[00:10:36] over here
+[00:10:37] the float is 1.6 million shares now this
+[00:10:40] is uh important
+[00:10:44] so
+[00:10:44] if you haven't already watched any of my
+[00:10:47] videos on float i have videos where i do
+[00:10:50] a full definition of float and all the
+[00:10:53] ways that float can change and
+[00:10:54] everything else but just in very brief
+[00:10:56] summary here just to save you the time
+[00:10:59] uh float refers to the number of shares
+[00:11:02] available to trade so when a company
+[00:11:03] does an initial public offering they
+[00:11:05] sell shares onto the open market and
+[00:11:07] then from that point forward that
+[00:11:08] becomes the float so if a company sells
+[00:11:11] two million shares
+[00:11:13] dollars a share they'll raise 10 million
+[00:11:15] dollars in their ipo right and from that
+[00:11:18] point forward there's 2 million shares
+[00:11:20] available to trade so if you wanted to
+[00:11:23] buy i guess the whole company
+[00:11:25] you would buy 2 million shares now
+[00:11:28] um
+[00:11:29] there's
+[00:11:31] that's not always exactly true because
+[00:11:33] sometimes companies will have
+[00:11:35] uh larger blocks of shares that are a
+[00:11:37] different class so you wouldn't
+[00:11:39] necessarily be able to buy the whole
+[00:11:40] company by buying those two million but
+[00:11:42] that's getting more detailed that is
+[00:11:43] important what's important for right now
+[00:11:45] is understanding that the float
+[00:11:47] represents the level of supply so this
+[00:11:50] is coming into a very simple supply
+[00:11:51] demand equation if you have a stock that
+[00:11:54] is in very hot demand as idnp
+[00:11:58] uh indp was today
+[00:12:00] then the low supply creates an imbalance
+[00:12:03] and that's when you get a really big
+[00:12:04] move in the stock price obviously on
+[00:12:07] gamestop there was a huge imbalance
+[00:12:09] between supply and demand the float on
+[00:12:11] gamestop
+[00:12:13] is a bit higher
+[00:12:15] hey girl pull it together girl
+[00:12:17] showing right now at 46 million shares
+[00:12:22] but still relatively low compared to a
+[00:12:24] company perhaps like uh bank of america
+[00:12:26] which has 7.5 billion shares
+[00:12:30] 7.5 billion shares remember 1 billion is
+[00:12:32] a thousand millions
+[00:12:33] so a company like indp is
+[00:12:37] one seven thousandth
+[00:12:39] as big in terms of its float
+[00:12:42] as bank of america
+[00:12:44] it's tiny itty-bitty company and this
+[00:12:46] itty-bitty company how is it possible
+[00:12:48] that it could go up so much i mean
+[00:12:50] you wouldn't think that maybe it could
+[00:12:52] because it's such a small company and it
+[00:12:54] again comes back to supply and demand
+[00:12:56] the shares of the stock are trading
+[00:12:58] higher today on news
+[00:13:00] there are not a whole lot of sellers on
+[00:13:02] this stock and there are buyers and
+[00:13:05] people are buying it and they're excited
+[00:13:06] about it and this
+[00:13:08] is the definition of momentum trading
+[00:13:10] so
+[00:13:11] the
+[00:13:12] trading gappers i've i call it the gap
+[00:13:14] and go strategy
+[00:13:16] gap up go up now these stocks can be
+[00:13:18] volatile in both directions a gap up is
+[00:13:20] not a guarantee that they'll go higher
+[00:13:22] mos y is an example of one today that
+[00:13:26] did gap up and then sold off at the open
+[00:13:28] so what's different about these two
+[00:13:32] uh
+[00:13:33] mos y was the fourth leading gap well
+[00:13:35] both were worth keeping on watch and mos
+[00:13:38] y was worth uh in fact even trading
+[00:13:42] right through this area here as it was
+[00:13:44] breaking new
+[00:13:45] highs as it made new highs at the open
+[00:13:49] it wasn't worth trading here until it
+[00:13:52] broke over 680. so one of the setups
+[00:13:55] that i like to trade is the break of the
+[00:13:56] pre-market high
+[00:13:58] so through the gap and go
+[00:14:00] the full the full chapter in our classes
+[00:14:02] i talk about um taking the first and
+[00:14:05] second pullback and we have a bunch of
+[00:14:07] examples of that we also have live
+[00:14:08] trading archives then i've got um taking
+[00:14:12] the break of the pre-market highs so
+[00:14:14] this is the one that i'm looking at
+[00:14:15] right now break at the pre-market high
+[00:14:17] so in this case we didn't get a break of
+[00:14:19] the pre-market high on mos y
+[00:14:22] over on indp
+[00:14:26] we did get a break at the pre-market
+[00:14:27] high we got a pretty uh phenomenal break
+[00:14:29] of the pre-market high is really
+[00:14:31] spectacular right here
+[00:14:34] okay so that that was the critical level
+[00:14:36] that needed to break on mos y that
+[00:14:38] didn't and i think the fact that we had
+[00:14:40] something else that was so strong
+[00:14:42] this became the one that was really in
+[00:14:44] focus
+[00:14:45] and
+[00:14:46] you know there's only so many traders
+[00:14:47] out there and they can only focus on so
+[00:14:49] many stocks at the same time so
+[00:14:51] ultimately whichever one is the best one
+[00:14:54] becomes the one that people focus on and
+[00:14:56] people are trading
+[00:14:57] and so today that was indp
+[00:15:01] all right so we start by looking at the
+[00:15:02] gap scan
+[00:15:04] we then uh check the stock to see that
+[00:15:06] there is news sometimes
+[00:15:09] we'll have a stock on the gap scan
+[00:15:11] there's no news and that's a little
+[00:15:13] confusing because we don't fully
+[00:15:14] understand why it's gapping up so much
+[00:15:17] however
+[00:15:18] simply the fact that it's up becomes a
+[00:15:20] bit of its own catalyst especially if it
+[00:15:22] is one of the top five or ten leading
+[00:15:24] gappers in the entire market so no news
+[00:15:27] isn't necessarily a deal breaker
+[00:15:29] i checked the volume today
+[00:15:31] but not with a lot of focus on that more
+[00:15:32] than anything i look at the chart
+[00:15:35] and i look at the float if i see the
+[00:15:37] float is 125 million shares or 89
+[00:15:40] million or 100
+[00:15:41] these are in white which is a way of me
+[00:15:44] kind of disregarding them not not really
+[00:15:47] usually going to be very interested in
+[00:15:48] those stocks under 50 million is better
+[00:15:51] under 25 is better under 10 is better
+[00:15:54] under 5 is better
+[00:15:56] the lower the float
+[00:15:58] the more parabolic we see now it's not
+[00:16:01] always true because gamestop was
+[00:16:03] probably one of the most parabolic over
+[00:16:05] a multi-day period but what's more
+[00:16:07] common is that lower float stocks when
+[00:16:10] they have a good catalyst have a sharp
+[00:16:12] imbalance in supply and demand that
+[00:16:13] results in a really big move
+[00:16:15] so focusing on leading gapper and today
+[00:16:17] this one had a 1.16 a 1.61 million share
+[00:16:20] flow very low flow there are some more
+[00:16:23] metrics here that we can look at but
+[00:16:25] we're going to focus primarily on the
+[00:16:28] percentage gap
+[00:16:29] the price of the stock and the float
+[00:16:32] i do typically trade
+[00:16:35] lower price stocks
+[00:16:36] a little bit better than higher price
+[00:16:38] stocks when we start to get into the
+[00:16:40] price range
+[00:16:42] of
+[00:16:43] gosh like over 50
+[00:16:45] that's when
+[00:16:47] things can start to get a little sloppy
+[00:16:48] for me i probably have some metrics here
+[00:16:51] yeah so here we have some metrics um of
+[00:16:54] profitability based on price
+[00:16:56] so you know we start to get a little
+[00:16:58] higher price and
+[00:16:59] well gamestop kind of changed the
+[00:17:01] metrics on that for me because
+[00:17:03] i did really well on it but in any case
+[00:17:06] i do better between five and well i
+[00:17:09] guess you'd say between two and twenty
+[00:17:11] would kind of be my sweet spot
+[00:17:13] so generally anytime a stock is on the
+[00:17:15] gap scanner and it's between two and 20.
+[00:17:17] i'm gonna be pretty interested in it and
+[00:17:19] so in the case of indp on the gap
+[00:17:22] scanner moving up the chart looks good
+[00:17:25] which means it's above the volume weight
+[00:17:28] average price it's generally
+[00:17:30] consolidating sideways and the logical
+[00:17:32] breakout spot here based on setup number
+[00:17:34] two break of the pre-market highs
+[00:17:37] again i have a number of different
+[00:17:38] setups that i trade this one also
+[00:17:41] actually gave us a red to green move
+[00:17:43] right here
+[00:17:44] it dipped down and then broke out and we
+[00:17:46] could also even call it an opening range
+[00:17:48] breakout it was over 1250 and it ripped
+[00:17:51] up to 1348 and got halted on a circuit
+[00:17:54] breaker if you don't know what that is
+[00:17:56] again that's something we talk about
+[00:17:57] extensively in the classes you can check
+[00:17:59] out some of my other videos on youtube
+[00:18:01] if you want to look for it there anyways
+[00:18:03] it gaps squeezes up halts opens higher
+[00:18:06] dips down rips up to 15 and so we have a
+[00:18:08] couple of nice trades here
+[00:18:10] one is right here for the break at 1250
+[00:18:13] which was to anticipate the break
+[00:18:14] through the pre-market high of 1286.
+[00:18:16] alternatively an entry at 1286 would
+[00:18:19] have been fine but a little extended on
+[00:18:20] the one-minute chart it goes up to 1348
+[00:18:23] which is an opportunity either to take
+[00:18:25] profit or to hold for a bigger move it
+[00:18:27] goes up then to 14 18
+[00:18:30] dips down first one minute candle to
+[00:18:32] make a new high right here the first
+[00:18:33] pullback breakout up to 15.
+[00:18:37] and that's back to setup number one even
+[00:18:40] if you just took those two trades
+[00:18:42] you do not want to overstay your welcome
+[00:18:44] being a trader is not about taking 100
+[00:18:46] trades a day it's about managing your
+[00:18:48] risk and if you can take a couple of
+[00:18:50] trades one or two really good trades
+[00:18:52] each day by focusing on high quality
+[00:18:55] you're going to have a higher percentage
+[00:18:56] of success if you focus on just you know
+[00:18:59] kind of hitting trying to trade
+[00:19:00] everything that's moving
+[00:19:02] your accuracy is going to drop it's
+[00:19:04] really not a good way to approach
+[00:19:06] trading because every trade you take
+[00:19:08] carries risk
+[00:19:09] so the biggest way that i mitigate risk
+[00:19:12] is by finding a strong stock to trade
+[00:19:14] and it starts right here with gap
+[00:19:15] scanner then i try to find the best
+[00:19:18] entries and then i try to remind myself
+[00:19:20] not to overstay my welcome to trade it
+[00:19:24] as aggressively as i can but to know
+[00:19:26] when to walk away today i was up 103
+[00:19:28] thousand dollars and i gave back
+[00:19:31] about 15 000 off the top and that was my
+[00:19:33] cue to walk away
+[00:19:35] i gave back profit off the top i gave
+[00:19:38] back 10 000 on this red candle right
+[00:19:40] here
+[00:19:42] right there
+[00:19:43] and then i actually added back right
+[00:19:44] here i made back the 10 000 i lost
+[00:19:48] and then i lost 10 000 again right here
+[00:19:51] at that point i said you know what i
+[00:19:53] haven't made any money since right here
+[00:19:56] maybe it's time to just throw in the
+[00:19:57] towel and stop trading
+[00:19:59] now we did end up having more
+[00:20:01] opportunities later in the day on this
+[00:20:02] later in the morning but not without
+[00:20:04] some false breakouts and some choppiness
+[00:20:06] so you know
+[00:20:08] i'm sure there's people that traded all
+[00:20:09] day long that made more than me i'm sure
+[00:20:11] there's people who traded it all day
+[00:20:12] long that made less than me it's not a
+[00:20:14] competition to see how much you can make
+[00:20:16] or how much you could lose if you can
+[00:20:18] get green and you can shut it down
+[00:20:20] you're actually going to be doing
+[00:20:21] something that the majority of traders
+[00:20:22] haven't figured out how to do
+[00:20:24] consistently and it starts by knowing
+[00:20:26] how to find strong stocks to trade and
+[00:20:28] for me the gap scanner is the go-to
+[00:20:30] place
+[00:20:32] again just to emphasize i know you guys
+[00:20:35] have you know there's a million play a
+[00:20:37] million people out there talking about
+[00:20:38] trading and trying to teach you things
+[00:20:40] about trading one of the biggest
+[00:20:42] challenges that i found when i was
+[00:20:43] getting started is how to find credible
+[00:20:45] information i want to learn just cut
+[00:20:48] through all the nonsense all the bologna
+[00:20:50] just get straight to credible valuable
+[00:20:53] information that's got some
+[00:20:57] you know proof that it actually works
+[00:20:59] because a lot of people they talk a big
+[00:21:00] game but then there's no proof you guys
+[00:21:02] can see the broker statements on my
+[00:21:04] website you can see that my profits are
+[00:21:06] real and those are based on trading
+[00:21:08] gapping stocks
+[00:21:10] just like this the majority of the time
+[00:21:13] and if you want to keep learning if you
+[00:21:15] want to learn my whole strategy i am
+[00:21:17] happy to teach it to you that's what i
+[00:21:19] do over at warrior trading and you can
+[00:21:21] check it out
+[00:21:22] come over to worrytrain.com strategy
+[00:21:24] again this is just an excerpt from
+[00:21:27] chapter 7 of the warrior pro classes
+[00:21:30] it's a short one a short excerpt because
+[00:21:32] this is just by itself a fairly long
+[00:21:34] chapter but i hope that it's been
+[00:21:36] helpful i hope that uh it gets you guys
+[00:21:39] pointed in the right direction and at
+[00:21:41] the very least make sure you subscribe
+[00:21:43] to the channel so when i post uh
+[00:21:45] more helpful
+[00:21:47] videos like this you'll be able to watch
+[00:21:49] them as soon as they get posted all
+[00:21:51] right so thank you guys for tuning in
+[00:21:52] again if you want to learn more come
+[00:21:53] over to warriortrading.com
+[00:21:55] strategy and would love to have you join
+[00:21:58] the classes and become a student
+[00:22:00] because one of the things that's really
+[00:22:01] hard is trying to piece it all together
+[00:22:03] just by watching miscellaneous videos
+[00:22:05] trading is hard
+[00:22:07] it really is don't underestimate that
+[00:22:09] all right thanks for tuning in i'll see
+[00:22:11] you guys for the next episode and that
+[00:22:12] right there was an entire video with no
+[00:22:14] ads i don't monetize my youtube channel
+[00:22:16] with video ads which means you guys get
+[00:22:17] to enjoy the content but do me a favor
+[00:22:19] please hit that subscribe button and
+[00:22:21] give me a thumbs up and let youtube know
+[00:22:23] that this channel is the channel to
+[00:22:25] watch if you want to learn about day
+[00:22:26] trading

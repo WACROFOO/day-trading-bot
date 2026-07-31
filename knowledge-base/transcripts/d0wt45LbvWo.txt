@@ -1,0 +1,1802 @@
+# How to WIN at Day Trading as a BEGINNER (Step by Step Guide)
+# https://www.youtube.com/watch?v=d0wt45LbvWo
+# duration_sec: 3869
+
+[00:00:02] In today's episode, I'm going to walk
+[00:00:03] you through how to win at day trading as
+[00:00:05] a beginner. And I'm going to break it
+[00:00:07] down into three simple steps that you
+[00:00:09] can implement in your own trading and
+[00:00:11] begin following today. This is going to
+[00:00:13] help you jump-start your journey. Now,
+[00:00:16] at the end of today's class, I'm also
+[00:00:17] going to provide you with some
+[00:00:19] recommended reading and some links to
+[00:00:21] tools that you can use that will help
+[00:00:22] you as you're learning how to trade. So,
+[00:00:24] let's go ahead and jump right in. Now,
+[00:00:26] we know without question that there are
+[00:00:29] people out there who are consistently
+[00:00:31] winning when it comes to trading. I am
+[00:00:34] one of them, and I'll say I'm not going
+[00:00:36] to sugarcoat things in this episode. I'm
+[00:00:38] going to put it on the table as real as
+[00:00:39] it is. Learning to trade is hard. When I
+[00:00:42] turned $583
+[00:00:45] into $10 million,
+[00:00:46] you want to know really what the hardest
+[00:00:48] part of that whole challenge was?
+[00:00:50] The very hardest part was learning how
+[00:00:52] to consistently make just 10 cents a
+[00:00:55] day. That sounds like nothing, and it is
+[00:00:57] nothing. But until you're able to
+[00:00:59] consistently make even just 10 cents a
+[00:01:01] day, you will never thrive. But once you
+[00:01:05] turn the corner and you're consistently
+[00:01:07] making 10 cents a day, then you can
+[00:01:09] scale up, and that's exactly what I did.
+[00:01:11] I went from 10 cents to 20 cents to a
+[00:01:14] dollar to $100, and so on and so forth.
+[00:01:16] And next thing you know, I was averaging
+[00:01:18] over $1,500 per trade. And I've now
+[00:01:21] taken thousands of trades in my career.
+[00:01:24] So, you have the benefit right now of
+[00:01:26] being able to learn from someone who is
+[00:01:29] third-party audited verified profitable,
+[00:01:31] who actually knows what they're talking
+[00:01:33] about and what works in today's market.
+[00:01:37] What I'm going to do in this episode is
+[00:01:39] I'm going to help you figure out what
+[00:01:41] the pros are doing that is working for
+[00:01:43] them. Once we can document what they're
+[00:01:45] doing that's working, then that gives
+[00:01:47] you sort of a a road map of where you
+[00:01:50] want to get to. The question is, well,
+[00:01:52] where are you right now? And I don't
+[00:01:54] know the answer to that. You know, of
+[00:01:56] course, better than I could. But I can
+[00:01:58] tell you what the pros are doing that's
+[00:01:59] working, and I can pull back the
+[00:02:00] curtains and share with you what is
+[00:02:02] working in my own trading. So, first of
+[00:02:04] all, professional traders, the people
+[00:02:06] who are doing this full-time, who who at
+[00:02:07] least are making a good living as
+[00:02:09] traders, they have a tremendous amount
+[00:02:11] of general market knowledge that they've
+[00:02:13] accumulated over the years. Now, some of
+[00:02:15] it they may have accumulated before they
+[00:02:17] even started trading just through, you
+[00:02:19] know, maybe watching movies, reading
+[00:02:21] some books, and things like that. But
+[00:02:22] they have sort of just a peripheral
+[00:02:24] level of knowledge of how the stock
+[00:02:28] market works. This, of course, is
+[00:02:29] specifically for traders in the stock
+[00:02:31] market, but it's the same for traders
+[00:02:33] who are trading futures, trading Forex
+[00:02:35] pairs, or who are trading
+[00:02:37] cryptocurrency. There's just a general
+[00:02:39] level of market knowledge that you'll
+[00:02:41] need to pick up. Now, this is fairly
+[00:02:44] straightforward. This is mostly the easy
+[00:02:46] stuff that we're going to talk about
+[00:02:47] first.
+[00:02:48] Second, they've got a great knowledge of
+[00:02:50] the best tools and the best software.
+[00:02:52] This is something that is easy to kind
+[00:02:54] of discount as being like not that
+[00:02:56] significant, but when I was getting
+[00:02:58] started, and I can remember this, so I'm
+[00:03:00] sure you may be in a similar position,
+[00:03:02] I had no idea the right type of software
+[00:03:05] to use as a trader. I didn't know what
+[00:03:07] accounts I should use, I didn't know
+[00:03:09] what I should use to find news. I mean,
+[00:03:11] I I was completely lost. So, it's easy
+[00:03:14] for us to take us being more seasoned
+[00:03:16] traders to take for granted all of this
+[00:03:18] general knowledge that we possess that
+[00:03:21] beginner traders lack. So, you first
+[00:03:24] need general market knowledge, and you
+[00:03:25] need knowledge of the best tools and the
+[00:03:27] best software. And then we get into the
+[00:03:29] meat of really what separates the pros
+[00:03:31] from the beginners.
+[00:03:33] Pros have a rule-based system or a
+[00:03:36] strategy that they follow in their
+[00:03:38] trading every single day. By following
+[00:03:41] that rule-based system or strategy, they
+[00:03:44] have produced a proven track record that
+[00:03:46] they can draw on. When I say draw on a
+[00:03:49] track record, when you have a track
+[00:03:51] record of consistency, you're able to
+[00:03:54] look back on that when things are
+[00:03:56] difficult, you're able to look back and
+[00:03:57] say, "Wow, okay, I actually I know what
+[00:04:00] I'm doing." And when things are not
+[00:04:01] going well, you're able to look at that
+[00:04:03] track record and compare it against
+[00:04:05] times that were better. So, the data,
+[00:04:08] that historical data, is a huge resource
+[00:04:11] that experienced traders have. But you
+[00:04:13] don't have historical data until you've
+[00:04:15] been actively trading. So, as a
+[00:04:17] beginner, you're coming in with nothing,
+[00:04:19] and that makes it that much more
+[00:04:20] difficult to get started. Now, in
+[00:04:22] addition to a track record, what a lot
+[00:04:24] of pro traders have is community support
+[00:04:28] and peer support.
+[00:04:30] They've built friendships over the years
+[00:04:31] with other traders in this industry.
+[00:04:33] They may be involved in trading
+[00:04:35] communities like what we have at Warrior
+[00:04:37] Trading. And so, they're not isolated.
+[00:04:40] They're not trading alone. Trading is is
+[00:04:42] very difficult in the sense that you
+[00:04:45] have to deal with big emotional ranges.
+[00:04:48] The ups from having a great day, but the
+[00:04:50] downs from having a bad day. This is a a
+[00:04:52] job where you can come in and you can
+[00:04:55] work a regular, you know, full work week
+[00:04:58] and walk away with less money than you
+[00:04:59] had at the beginning of the week. It's
+[00:05:01] not like that with really any other job,
+[00:05:02] right? You have your flat hourly rate,
+[00:05:04] you get paid no matter what, for the
+[00:05:06] most part. But with trading, you can get
+[00:05:08] rewarded big time when things are good,
+[00:05:11] and you get a real big boost of
+[00:05:12] confidence. But when things aren't going
+[00:05:14] well and you have that drawdown, that
+[00:05:16] can hurt your confidence, and then that
+[00:05:18] can get you frustrated, get you angry,
+[00:05:20] and then it can lead to impulsive
+[00:05:22] trading, which is when you start to
+[00:05:24] spiral. Now, pro traders know all of
+[00:05:26] this, and they've learned to become
+[00:05:29] highly disciplined. They also have the
+[00:05:31] benefit of what I call educated
+[00:05:33] intuition. After years and years of
+[00:05:36] trading in the market, you just get a
+[00:05:38] sense of how things are going to move.
+[00:05:40] It's not really probably any different
+[00:05:42] from another career where you have many
+[00:05:45] years of experience. You just you do you
+[00:05:46] develop this subtle sense of the way
+[00:05:48] things are moving. Even if you're a
+[00:05:49] truck driver, something you might think
+[00:05:51] is simple, you you get a sense of how
+[00:05:53] the vehicle's running, and you could
+[00:05:54] probably figure out very quickly when
+[00:05:56] something's not running quite right. But
+[00:05:58] a beginner could be very hard to pick up
+[00:06:00] on those subtle hints, but those subtle
+[00:06:02] hints can be the difference a a huge
+[00:06:04] difference when it's a very important
+[00:06:07] moment, especially as a trader. So, for
+[00:06:09] instance, when I saw GameStop starting
+[00:06:13] to pull away in 2021, I already had at
+[00:06:16] that point nearly a decade of experience
+[00:06:18] under my belt. I knew what I was seeing,
+[00:06:20] I knew what to do, and during that week
+[00:06:23] alone, I made nearly a million dollars.
+[00:06:26] That was an incredible week. It was the
+[00:06:27] best week I've ever had as a trader. And
+[00:06:30] I wouldn't have been able to capitalize
+[00:06:32] on it in that way if I had been a
+[00:06:34] beginner, because a beginner wouldn't
+[00:06:36] have been able to pick up on those
+[00:06:37] subtle cues, the very minute signals
+[00:06:40] that are in the market. Because as
+[00:06:42] traders, we are trading the financial
+[00:06:44] markets, and what we are primarily using
+[00:06:46] is technical analysis. Now, we're going
+[00:06:48] to get into this more in a few minutes,
+[00:06:50] and I'm going to show you some
+[00:06:50] candlestick charts. But when I'm showing
+[00:06:52] you candlestick charts, what you're
+[00:06:54] going to realize is that these
+[00:06:55] candlesticks create the universal
+[00:06:58] language of the market. And once you
+[00:07:00] learn to read this language, you will
+[00:07:03] see the buy and sell signals plain as
+[00:07:05] day right on the chart. I'm going to
+[00:07:08] teach you how to spot those and how to
+[00:07:09] use those as entry and exit indicators
+[00:07:11] in just a moment. Okay. So, now let's
+[00:07:14] talk about step one, how to acquire the
+[00:07:17] general knowledge. So, when I'm talking
+[00:07:19] about general knowledge, I'm talking
+[00:07:21] about the general understanding of how
+[00:07:23] the stock market works, the dynamics of
+[00:07:25] the market, and the general
+[00:07:26] understanding of tools, platforms, and
+[00:07:28] things like that. So, I would first ask
+[00:07:31] you, what is your learning style? Now,
+[00:07:35] you're obviously watching a video right
+[00:07:36] now, so on the left I have watching
+[00:07:38] videos. You've got tons of videos,
+[00:07:41] educational content on YouTube. There's
+[00:07:43] movies on Netflix and and all of you
+[00:07:46] know, tons of other places that you
+[00:07:48] could watch that will teach you about
+[00:07:49] the stock market. So, you could pick up
+[00:07:51] a lot of information for free when it
+[00:07:54] comes to general market knowledge. Now,
+[00:07:56] if you're the type of person who likes
+[00:07:57] reading, you could pick up a book, you
+[00:07:59] could do some reading. I'll give you
+[00:08:00] some recommended reading at the end of
+[00:08:02] this episode. Um this is my book right
+[00:08:04] here that I wrote, How to Day Trade the
+[00:08:06] Plain Truth. So, for people that would
+[00:08:07] prefer to read, you've got it in written
+[00:08:09] form right here. Of course, you could
+[00:08:10] listen to it on audiobook. And then you
+[00:08:13] have learners who are hands-on. I'm a
+[00:08:15] hands-on learner. I learn best by
+[00:08:17] getting in there. I don't want to go
+[00:08:18] through a you know, an instruction
+[00:08:19] manual to start to build something. I
+[00:08:21] just want to start putting the pieces
+[00:08:22] together. That's my style. So, what
+[00:08:25] works better for me is to actually open
+[00:08:28] a trading account, and this is what I
+[00:08:29] did when I was getting started, and just
+[00:08:31] start kind of pressing the buttons and
+[00:08:32] see what happens. Now, I will preface
+[00:08:34] that it's very important that you open a
+[00:08:36] simulated trading account. So, when
+[00:08:38] you're pressing these buttons, you're
+[00:08:39] not making losing real money at the very
+[00:08:42] beginning of your learning curve when
+[00:08:43] you know basically nothing about
+[00:08:44] trading. Okay, so if you're a hands-on
+[00:08:47] learner, then by all means, you can open
+[00:08:48] up a platform, you can start trading.
+[00:08:50] And I'm actually going to put a link,
+[00:08:51] it'll be pinned to the top of the
+[00:08:53] comments, and it'll be linked in the
+[00:08:54] description, where you can do a two-week
+[00:08:56] trial at Warrior Trading if you want,
+[00:08:58] and you can start using our platform
+[00:08:59] just to get a sense of what it's like.
+[00:09:01] You can use the scanners, the charts, be
+[00:09:02] in the community, and start to feel
+[00:09:04] like, you know, really immerse yourself
+[00:09:06] in in in this environment of being a
+[00:09:07] trader. But again, it depends on your
+[00:09:09] learning style for where you're at. So,
+[00:09:12] step one is acquiring the general
+[00:09:14] knowledge, and these are three different
+[00:09:17] three different paths that you could
+[00:09:18] choose. And you could do all three if
+[00:09:20] that works just as well for you.
+[00:09:22] But when it comes to general knowledge,
+[00:09:24] this is something that I think can be
+[00:09:26] learned more or less
+[00:09:28] for free or for at a very minimal cost
+[00:09:31] just through watching videos, reading
+[00:09:33] books, and maybe doing some hands-on
+[00:09:35] learning. Okay, so step two is either
+[00:09:37] developing or adopting a system. I can
+[00:09:40] promise you that every trader out there
+[00:09:42] who has a consistent track record of
+[00:09:44] profitability and success has a system,
+[00:09:47] a set of rules, and strategy that they
+[00:09:49] follow. That's what allows them to keep
+[00:09:51] making money. So, if you want to win at
+[00:09:53] day trading, you You a system that
+[00:09:55] you're going to follow. All right, so
+[00:09:57] what I'm going to do in this section of
+[00:09:58] this class in this episode is I'm going
+[00:10:00] to share with you the system that I
+[00:10:02] follow and I'm going to share it with
+[00:10:03] you high level so you get a good sense
+[00:10:04] of the way I trade. Now, my strategy may
+[00:10:07] be different from the strategy that you
+[00:10:09] plan to trade, but really you have two
+[00:10:12] choices when it comes to step two. You
+[00:10:14] could develop your own system and
+[00:10:16] strategy or you could adopt one that is
+[00:10:19] proven profitable by somebody else. Now,
+[00:10:22] if you try to develop your own the
+[00:10:25] challenge that you'll have, which is the
+[00:10:26] challenge I had, is that it'll take a
+[00:10:29] significant amount of time to produce a
+[00:10:32] track record of consistency. So, you're
+[00:10:34] going to do a lot of paper trading, a
+[00:10:36] lot of this and a lot of that, a lot of
+[00:10:38] kind of testing different things out
+[00:10:40] because, you know, you're you're just
+[00:10:42] essentially trying to figure it out on
+[00:10:44] your own. So, the benefit of adopting a
+[00:10:46] strategy that someone else has proven
+[00:10:49] profitable is that you can sort of hit
+[00:10:51] the ground running with something that
+[00:10:52] you already know works, right? The
+[00:10:54] engine's already running, so you can
+[00:10:56] kind of roll with it. Now, just because
+[00:10:59] it works for someone else doesn't
+[00:11:00] guarantee that it'll work for you and
+[00:11:02] that's because of differences in risk
+[00:11:04] tolerance, differences in aptitude, and
+[00:11:07] perhaps differences in the tools that
+[00:11:09] you might use and and things like that.
+[00:11:11] So, that that's true, but I also think
+[00:11:14] it makes a lot more sense to start with
+[00:11:17] something that's already working and
+[00:11:18] then if you need to make adjustments to
+[00:11:20] it, you know, go from there. Because the
+[00:11:23] fact is, clearly someone else has
+[00:11:24] already proven that this strategy works
+[00:11:26] for them. So, whether you take my
+[00:11:28] strategy or you take a strategy from
+[00:11:29] anyone else, that's fine. Just make sure
+[00:11:32] that the person you're learning from is
+[00:11:34] actually proven profitable. That's very
+[00:11:37] important because there's a lot of
+[00:11:38] people, unfortunately, on YouTube and,
+[00:11:41] you know, TikTok and Instagram and the
+[00:11:42] other places that kind of put out
+[00:11:45] general market commentary and talk about
+[00:11:47] strategies, but they're content
+[00:11:49] creators. They're just getting paid by
+[00:11:51] social media essentially from ads.
+[00:11:53] They're not real traders. They don't
+[00:11:55] actually make money trading. So, in
+[00:11:57] order to know that who's qualified and
+[00:11:59] credible from who's not, what I always
+[00:12:01] look at is broker statements. So, if
+[00:12:03] you're curious, you can see my broker
+[00:12:05] statements on my website. They are
+[00:12:06] verified and they have been audited. You
+[00:12:08] can see the whole audit result if you'd
+[00:12:09] like.
+[00:12:10] Okay, so now let's talk about the
+[00:12:12] strategy that I'm trading every single
+[00:12:14] day.
+[00:12:15] So, my strategy, first of all, we've got
+[00:12:18] to choose the market that you're going
+[00:12:19] to trade. So, for me personally, I'm
+[00:12:22] trading the US market and I'm trading
+[00:12:24] the stock market. I'm not trading uh
+[00:12:27] Forex, I'm not trading futures, I'm not
+[00:12:28] trading cryptocurrency. Not that you
+[00:12:30] can't trade any of those or all of
+[00:12:32] those, but my choice of market is to
+[00:12:36] trade the US stock market and
+[00:12:38] specifically,
+[00:12:39] I focus on trading um equities. So, I'm
+[00:12:42] trading stocks and I'm trading uh
+[00:12:44] primarily small cap
+[00:12:48] stocks.
+[00:12:49] So, small caps. Now, the thing with
+[00:12:51] small caps that I like is these are
+[00:12:54] These are relatively small companies and
+[00:12:56] when they have a news catalyst, they can
+[00:12:58] make a big move. When you have a small
+[00:13:00] company that all of a sudden has news of
+[00:13:02] a partnership with like Amazon or Apple
+[00:13:05] or something like that, the small
+[00:13:06] company's value can quadruple overnight.
+[00:13:11] We see huge moves in these small cap
+[00:13:14] stocks. So, even traders with small
+[00:13:16] accounts, which was me when I was
+[00:13:18] getting started, can still do well. Now,
+[00:13:20] if you're a trader with a small account
+[00:13:22] and you're trying to trade stocks like
+[00:13:25] ExxonMobil or Pfizer, Johnson & Johnson,
+[00:13:28] or even Apple or Amazon outright,
+[00:13:31] the stocks don't move that much on any
+[00:13:33] given day, not in percentage terms. So,
+[00:13:36] if you have a $1,000 account, just for
+[00:13:37] instance, and you're trading a stock
+[00:13:39] that only goes up or down 2% in one day,
+[00:13:42] you're only up or down 20 bucks. And
+[00:13:44] that's if you put your whole account
+[00:13:45] into that trade. It's going to take you
+[00:13:46] a long time to grow the account. In
+[00:13:49] contrast, if you're trading a small cap
+[00:13:51] stock and it goes from $2 to $4 in one
+[00:13:54] day, that's the day where you could
+[00:13:55] double your account. So, I gravitated
+[00:13:58] towards those types of stocks when I was
+[00:14:00] getting started due really to the
+[00:14:02] parameters that were sort of set upon me
+[00:14:04] based on the fact that I didn't have a
+[00:14:06] lot of money, I had a small account, and
+[00:14:08] I needed to try to make money relatively
+[00:14:10] quickly, which did put me in a position
+[00:14:12] of a little bit of desperation, which I
+[00:14:14] wouldn't recommend because there really
+[00:14:16] is no such thing in my experience as
+[00:14:19] quick money or quick success in trading,
+[00:14:22] but there's no question that more
+[00:14:25] volatile stocks will produce bigger
+[00:14:27] percentage returns and for traders that
+[00:14:29] are looking for more growth, that's what
+[00:14:31] you're going to want to focus on. So,
+[00:14:33] the market is small cap. The time of day
+[00:14:37] I used to trade from about 9:30 until
+[00:14:39] 11:00 a.m. each day. And then what I
+[00:14:42] noticed, and this started happening
+[00:14:44] really during 2020,
+[00:14:47] was uh prior to 2020, when a company
+[00:14:50] would have news, they would put out news
+[00:14:52] generally pre-market before the market
+[00:14:54] opens at 9:30. So, they might put out a
+[00:14:56] headline at 7:30, 8:00, 8:30, 9:00,
+[00:14:58] whatever, but no one really traded
+[00:15:01] pre-market. Everyone just waited until
+[00:15:03] the market would open. In fact, a lot of
+[00:15:05] brokers didn't even allow pre-market
+[00:15:07] trading or if they did, you had to very
+[00:15:09] specifically um change your time in
+[00:15:12] force for an order in order for it to
+[00:15:14] work pre-market. So, as a result, a lot
+[00:15:16] of people didn't even know how to trade
+[00:15:17] pre-market. And then in 2020, the market
+[00:15:20] was going insane. We we had this 30%
+[00:15:22] drop and then we had this huge rally and
+[00:15:25] when we started to rally, if a stock had
+[00:15:28] news, what we noticed happening was
+[00:15:30] people started buying it just before the
+[00:15:33] open because we knew like right at 9:30
+[00:15:35] when the market opened, all the traders
+[00:15:38] were going to react to that breaking
+[00:15:39] news. And suddenly we started seeing it
+[00:15:41] like 9:28, people were buying. And it
+[00:15:44] was like, "Whoa, what's happening? It's
+[00:15:45] pre-market. The market's not even open."
+[00:15:47] Then it was like 9:25, then it was 9:20,
+[00:15:49] 9:15. So, people just started to get in
+[00:15:51] a little earlier, a little earlier, a
+[00:15:53] little earlier. So, as of right now, the
+[00:15:56] window has moved earlier in the day. It
+[00:15:59] used to be starting at 9:30, now it
+[00:16:01] starts at 7:00 a.m. So, my window has
+[00:16:04] begun a little earlier and it still goes
+[00:16:06] to about 11:00 a.m. And the reason here
+[00:16:09] is that before 7:00 a.m., even still, a
+[00:16:12] lot of brokers do not allow trading. So,
+[00:16:15] if they start allowed trading as early
+[00:16:16] as 4:00 a.m., which is currently the
+[00:16:18] when the pre-market session opens, we
+[00:16:20] may see trading start even earlier,
+[00:16:23] although I think realistically, even
+[00:16:25] today, what we notice is that between
+[00:16:28] the hours of 7:00 a.m. and 12:00 p.m.,
+[00:16:31] oops, 12:00 p.m., the volume
+[00:16:34] sort of goes like this.
+[00:16:36] So, the volume increases as more traders
+[00:16:40] come into the market and then as we get
+[00:16:42] kind of past 10:00 a.m., it starts to
+[00:16:44] wane back down as people are like, "Ah,
+[00:16:46] I've kind of made my money." So, if they
+[00:16:48] start if they really let people start
+[00:16:50] trading more actively as early as 4:00
+[00:16:52] a.m., I you know, you'd have European
+[00:16:54] traders, but maybe the curve would move
+[00:16:57] a little bit forward, but there's no
+[00:16:58] doubt that it would still peak sort of
+[00:17:00] right around the hours of 8:00 to to
+[00:17:02] maybe 9:00 a.m. Okay, so nonetheless,
+[00:17:05] the time of day right now that I'm
+[00:17:07] focusing on trading my strategy is
+[00:17:10] between the hours of approximately 7:00
+[00:17:12] a.m. and 11:00 a.m. And typically, what
+[00:17:15] I find is that right at the top and the
+[00:17:17] bottom of the hours, 7:00, 7:30, 8:00,
+[00:17:20] 8:30, 9:00, 9:30, etc., is when
+[00:17:23] companies put out their press releases.
+[00:17:25] A lot of times they schedule these in
+[00:17:26] advance, so they're just scheduled to
+[00:17:28] get released top and bottom of the hour.
+[00:17:29] They don't schedule it to go out at like
+[00:17:31] 7:27, some odd They just do 7:30, 8:00,
+[00:17:35] 8:30, 9:00. And so, as soon as that news
+[00:17:38] comes out, this is what happens.
+[00:17:41] That news catalyst is received by the
+[00:17:44] market and if there are certain keywords
+[00:17:48] in that news headline,
+[00:17:50] high-frequency trading algorithms
+[00:17:52] immediately
+[00:17:54] initiate buy orders and instantaneously,
+[00:17:57] the stock will start moving up. So,
+[00:17:59] stocks don't move up without people
+[00:18:01] pressing the buy button and they don't
+[00:18:02] move down without
+[00:18:04] people pressing the sell button. So,
+[00:18:05] they're moving in response to the news,
+[00:18:08] but the people who get the news first
+[00:18:11] are those high-frequency trading
+[00:18:12] algorithms. So, what we typically notice
+[00:18:14] is that we'll have a news headline that
+[00:18:17] comes out and let's just say it's at
+[00:18:18] 7:00 a.m. and instantly, there's
+[00:18:21] instantly a big green candle like that
+[00:18:23] as the price starts to squeeze up. And
+[00:18:26] that's when we know, okay, this is
+[00:18:27] something that we got to start paying
+[00:18:28] attention to. And from that point
+[00:18:30] forward, I'm looking at the stock chart
+[00:18:32] and I'm starting to get dialed in. So,
+[00:18:33] we're going to talk more about this in
+[00:18:34] just a second. So, let's jump onto the
+[00:18:36] whiteboard or back onto the screen
+[00:18:38] share. So, we've got uh number one for
+[00:18:40] my strategy, the market. Number two, the
+[00:18:42] time of day. Number three, we're going
+[00:18:45] to talk about the amount of capital in
+[00:18:46] the account.
+[00:18:47] So, this is going to vary depending on
+[00:18:50] where you're at. So, you could have as
+[00:18:52] little as I mean, you could have as
+[00:18:54] little as $100 with a Robinhood account
+[00:18:56] or something like that, but let's just
+[00:18:57] say $500 um sort of minimum starting
+[00:19:00] point. And having more is only going to
+[00:19:02] give you more buying power, which allows
+[00:19:04] you to grow the account faster. A 10%
+[00:19:06] return on a $50 account on a $500
+[00:19:09] account is 50, uh you know, 10% return
+[00:19:11] on a $5,000 account is 500, you know, so
+[00:19:14] on and so forth. So, if you add more
+[00:19:15] money, then that same 10% return gives
+[00:19:18] you obviously a bigger return in in how
+[00:19:20] much profit you can make. But for most
+[00:19:22] beginner traders, you want to start
+[00:19:24] small. You want to manage your risk. You
+[00:19:26] don't want to get in over your head
+[00:19:27] because you will make mistakes as a
+[00:19:29] beginner, just the way I did. That's
+[00:19:30] part of your learning curve. It'll be
+[00:19:32] part of your experience. So, it's better
+[00:19:34] to have a small account early on, make
+[00:19:36] those mistakes where the total cost, the
+[00:19:38] total damage won't be as significant,
+[00:19:41] won't hurt as much. Okay, so
+[00:19:44] uh account size, amount of capital in
+[00:19:46] the account, let's just say three $500
+[00:19:48] to start. And now, number four, you need
+[00:19:50] to have a system of, um, selection. So,
+[00:19:54] how are you going to choose what you're
+[00:19:55] going to trade? Now, if you're trading
+[00:19:57] cryptocurrencies, a lot of traders in
+[00:19:59] that market are focusing on which
+[00:20:01] cryptocurrency has the biggest
+[00:20:03] percentage gain today, and you may see
+[00:20:05] one that's up like 3,000% or something
+[00:20:07] like that. Some of these really small
+[00:20:09] altcoins. With currencies, you maybe do
+[00:20:12] similarly with regular forex, looking at
+[00:20:15] pairs throughout the biggest, uh, rate
+[00:20:16] of change today. Same with the futures
+[00:20:18] market, you'd look at Today we've got
+[00:20:20] oil moving, we've got gold moving,
+[00:20:22] natural gas, whatever it is. And with
+[00:20:24] the stock market, I'm doing really the
+[00:20:26] same thing. I'm looking for things that
+[00:20:27] are moving. So, to help you better
+[00:20:29] understand the philosophy behind this,
+[00:20:33] on any given day in the stock market,
+[00:20:35] we've got 10,000 stocks that you could
+[00:20:37] choose from. How do you possibly
+[00:20:40] select the one that's going to go up? It
+[00:20:43] would feel like choosing a needle in the
+[00:20:44] haystack. But here's the thing that's
+[00:20:46] interesting. Out of all those stocks in
+[00:20:48] the market,
+[00:20:49] on any given day,
+[00:20:52] I would say 98% of them are going to
+[00:20:55] trade within this range of up 2% or down
+[00:20:59] 2%.
+[00:21:00] They're not moving. Most stocks on any
+[00:21:02] given day, you know, they'll move up a
+[00:21:04] little bit, they'll move down a little
+[00:21:05] bit, but they're within a very narrow
+[00:21:07] range.
+[00:21:08] After all, the S&P 500 over the course
+[00:21:11] of a typical year is returning 10% in a
+[00:21:14] whole year. So, even broken down per
+[00:21:16] month, you're only talking about two,
+[00:21:17] two and a half percent a month. So, when
+[00:21:19] you're talking about per day, we're
+[00:21:21] getting very small moves in underlying
+[00:21:23] assets, especially when you're looking
+[00:21:24] at large cap stocks. So, if we said,
+[00:21:28] well, let's just, as a starter, say that
+[00:21:31] a stock has to be up at least 5%.
+[00:21:35] What you're going to do is you're going
+[00:21:36] to eliminate from 10,000 stocks each
+[00:21:39] day, you're probably going to draw down
+[00:21:41] to a list of about 50.
+[00:21:43] Wow. So, this filter right here of just
+[00:21:46] saying I need something up at least 5%
+[00:21:48] is going to help you weed out 95% of
+[00:21:51] stocks, 98% of stocks. Then, what we do
+[00:21:53] from here is we say, all right, well,
+[00:21:56] let's look at this list
+[00:21:57] and let's sort it. Let's look at the top
+[00:22:00] number one leading percentage gainer.
+[00:22:03] Let's look at the number two leading
+[00:22:04] percentage gainer, the number three,
+[00:22:06] number four, and number five. And this
+[00:22:08] is the same thing people do really in
+[00:22:09] all markets. Like I said, whether it's
+[00:22:11] cryptocurrency, it's forex, or it's
+[00:22:13] futures, you're looking at the biggest
+[00:22:15] movers. The reason we want to trade big
+[00:22:18] movers is because this is where the
+[00:22:19] attention is.
+[00:22:21] Traders are very active. So, we're
+[00:22:22] focusing on what's moving today, and on
+[00:22:25] any given day, we're switching our focus
+[00:22:27] to what's moving on that day. What's
+[00:22:29] moving
+[00:22:30] is it's almost a magnet for attention.
+[00:22:32] People start focusing on it. Next thing
+[00:22:34] you know, people are buying it, people
+[00:22:36] are actively trading it. That's going to
+[00:22:38] result in higher volume, better
+[00:22:40] liquidity, which means you can move in
+[00:22:42] and out with larger positions. And if
+[00:22:45] you think about it, we, as retail
+[00:22:48] traders, are the commodity for
+[00:22:51] commission-free brokers. Commission-free
+[00:22:53] brokers, they get paid not by us when
+[00:22:56] we, you know, they don't There's no
+[00:22:57] commission, right? There used to be
+[00:22:59] commissions, there's no commissions.
+[00:23:00] They get paid when we trade. Because
+[00:23:03] every share that we trade, they get a
+[00:23:05] kickback in the form of payment for
+[00:23:08] order flow. And they get that kickback
+[00:23:10] from the wholesalers. So, they're going
+[00:23:12] to encourage you and all other retail
+[00:23:14] traders, me included, to trade actively.
+[00:23:17] So, what are they going to do? They're
+[00:23:18] going to say, "Hey, look at the biggest
+[00:23:20] percentage movers today. This is up, you
+[00:23:22] know, 150%. This is up 300%, you know,
+[00:23:25] etc." They're just going to be like
+[00:23:27] helping you
+[00:23:28] They're really drawing your attention
+[00:23:30] even more onto this top list. And just
+[00:23:33] like the top list of, you know, a Google
+[00:23:35] search, it's the it's page one that
+[00:23:38] people really look at, and it's the top
+[00:23:39] two or three results that people really
+[00:23:41] look at. It's the same It's the same
+[00:23:43] mentality. That's just the way it is.
+[00:23:45] So, what I'm going to pull up here for
+[00:23:47] you in the background
+[00:23:49] are, uh, the scanners that I'm using.
+[00:23:51] So, these are the scanners that are
+[00:23:52] actually searching the market in real
+[00:23:54] time. And, uh, this right here is
+[00:23:57] showing our top, uh, percentage gainers
+[00:23:59] on the day. And the top one today is
+[00:24:01] 50%. The next one down's 46%, next one's
+[00:24:04] down 43%.
+[00:24:06] We can look at the price of these
+[00:24:07] stocks, we can look at the volume. 39
+[00:24:10] million shares, 66 million shares. These
+[00:24:12] have a lot of volume. These are
+[00:24:14] definitely the type of stocks that we
+[00:24:16] want to look at. Now, I'm going to walk
+[00:24:18] you through a little bit more of the
+[00:24:19] detail of how I make a choice of whether
+[00:24:22] or not I'm actually going to trade it,
+[00:24:23] but this is the tool that I'm using to
+[00:24:26] find these stocks in real time. So,
+[00:24:29] again, pinned to the top of the
+[00:24:30] comments, link in the description, you
+[00:24:31] could, uh, click that link and you could
+[00:24:33] check out a two-week trial using the
+[00:24:35] software if you'd like. It's It's
+[00:24:36] totally up to you. It's two weeks for 20
+[00:24:38] bucks. So, you could get free access to
+[00:24:40] the market data as part of that. Uh, we
+[00:24:42] include that. We also include, um, the
+[00:24:45] scanners, the charts, the newsfeed, and
+[00:24:47] you'll have access to a selection of my
+[00:24:49] classes. Okay, so, now, if we jump back
+[00:24:53] over here,
+[00:24:55] when I'm going through the stock
+[00:24:57] selection process, the first thing that
+[00:24:59] I'm asking myself is, what is our
+[00:25:02] biggest percentage gainer today? And
+[00:25:04] let's start breaking down
+[00:25:06] Uh, I'm going to pull up, uh, these
+[00:25:08] scans again.
+[00:25:10] So, let's break down, uh, BRFH.
+[00:25:14] So, it's up 49%.
+[00:25:16] The price is $1.54. It's got 39 million
+[00:25:19] shares of volume.
+[00:25:21] The float is 6.89 million shares.
+[00:25:24] For those of you that have never heard
+[00:25:26] the term float, float is the number of
+[00:25:29] shares available to trade.
+[00:25:31] It represents the supply for this stock.
+[00:25:34] So, when a company does an initial
+[00:25:36] public offering, they sell a fixed
+[00:25:37] number of shares onto the market. And
+[00:25:39] from that point forward, those are the
+[00:25:40] number of shares available to trade.
+[00:25:42] That's the supply level. Now, what's
+[00:25:44] interesting about, uh, this particular
+[00:25:46] stock is that it only has 6.89 million
+[00:25:49] shares available to trade, and yet it's
+[00:25:52] traded 39 million shares today.
+[00:25:55] How could that possibly happen?
+[00:25:57] It happens because people are actively
+[00:25:59] buying and selling, buying and selling,
+[00:26:01] buying and selling to each other. It's
+[00:26:02] like hot potato. People are getting in,
+[00:26:04] getting out, getting in, getting out,
+[00:26:05] and that is called float rotation. So,
+[00:26:09] let's just say, for instance, someone
+[00:26:11] owned 3 million shares of this stock. On
+[00:26:15] a typical day, when the stock maybe
+[00:26:16] trades less than a million shares of
+[00:26:18] volume, it would be hard for them to
+[00:26:20] sell all 3 million shares in one day.
+[00:26:23] There wouldn't be enough buyers for them
+[00:26:24] to sell all those shares. But on a day
+[00:26:26] like today, they could have sold all of
+[00:26:28] those shares.
+[00:26:30] And the reason this is important is
+[00:26:32] because the stock is up 150%,
+[00:26:35] and anyone who wanted to sell could have
+[00:26:37] easily sold, and the stock didn't drop
+[00:26:40] because they had enough buying volume to
+[00:26:42] keep it up. So, the higher the ratio
+[00:26:45] between the float and the volume today,
+[00:26:48] generally, the bigger the imbalance
+[00:26:51] between supply and demand, and therefore
+[00:26:52] the bigger percentage gains. So, that's
+[00:26:55] why this is up 50% right now. Now,
+[00:26:57] there's something else interesting here,
+[00:26:59] which is the relative volume, the
+[00:27:01] relative volume on the daily. It shows
+[00:27:03] as being 9,000.
+[00:27:06] So, what is relative volume?
+[00:27:08] Relative volume is the comparison of
+[00:27:11] today's volume versus what is normal or
+[00:27:14] average for this stock over the last 30
+[00:27:16] days. So, that means over the last 30
+[00:27:19] days, this stock trades on very light
+[00:27:21] volume. Because today, with 39 million
+[00:27:24] shares of volume, that is 9,000 times
+[00:27:28] higher than normal.
+[00:27:31] Wow.
+[00:27:32] So, if a stock, for instance, trades on
+[00:27:34] an average day with 1 million shares,
+[00:27:37] then today, if it trades 1 million
+[00:27:38] shares, its relative volume is one,
+[00:27:41] because it's right at average. If its
+[00:27:43] relative volume is 0.5, that means it's
+[00:27:45] half of what's normal. And if its
+[00:27:47] relative volume is two, that means it's
+[00:27:49] double what's normal. So, if the
+[00:27:51] relative volume is 9,000,
+[00:27:54] that is huge. So, how does a stock go
+[00:27:57] from having a couple hundred thousand
+[00:27:59] shares of volume to having 39 million
+[00:28:02] shares the next day?
+[00:28:04] It's a news catalyst. So, as part of my
+[00:28:06] stock selection process,
+[00:28:08] So, number one, we're going to do number
+[00:28:09] one, number two, number three, number
+[00:28:11] four, and number five. Okay, so, number
+[00:28:13] one, we're going to look for, um,
+[00:28:16] price
+[00:28:17] to be between
+[00:28:19] two and 20.
+[00:28:21] We're going to look for relative volume
+[00:28:24] to be five times or higher. We're going
+[00:28:27] to look for the percent change today to
+[00:28:29] be 10% or higher at a minimum.
+[00:28:33] We're going to look for a news catalyst.
+[00:28:36] So, news catalyst, that means there's a
+[00:28:37] reason the price is moving higher, and
+[00:28:40] we're going to look for a float, which
+[00:28:42] is the number shares to trade, of less
+[00:28:45] than 20 million shares.
+[00:28:50] And lower is better. But higher is going
+[00:28:52] to be a problem because when you start
+[00:28:53] to get higher, you have a higher level
+[00:28:55] of supply, and it takes almost an
+[00:28:57] unreasonable amount of demand to have
+[00:28:59] that imbalance. So, see how the float on
+[00:29:01] this is 6 million shares, and the volume
+[00:29:03] is 39 million? That's a good imbalance.
+[00:29:05] But if the float was 39 million shares,
+[00:29:08] and the volume's 39, then you don't have
+[00:29:11] that float rotation, so you likely
+[00:29:13] wouldn't have had as big of a percentage
+[00:29:15] move. So, you you want to see lower
+[00:29:17] float with higher volume. Now, if you
+[00:29:19] had 300 million shares,
+[00:29:21] okay, but if we look at the highest
+[00:29:23] volume today of any stock in the market,
+[00:29:26] it's 67 million shares. So, really, it's
+[00:29:29] not super realistic or very common to
+[00:29:31] see 500, 600, 700 million shares of
+[00:29:35] volume. And as a result, stocks that
+[00:29:38] have floats that are 100, 200, 300
+[00:29:41] million shares rarely make big
+[00:29:43] percentage moves. Maybe in In future
+[00:29:45] that'll change, but that's the way it is
+[00:29:46] right now.
+[00:29:48] So, the reason that I've created these
+[00:29:50] criteria is because these are all based
+[00:29:53] on my personal historical data. So, let
+[00:29:56] me show you this for a second.
+[00:29:59] Okay, so these are my metrics and we're
+[00:30:00] looking at $12.6 million
+[00:30:03] in gross profit. Average winner is about
+[00:30:04] $1,500, $1,400. Average losers $1,500.
+[00:30:08] Accuracy 68%. But, let's scroll down
+[00:30:11] here and look at
+[00:30:13] price and volume.
+[00:30:15] When we look at price and volume, you're
+[00:30:16] going to see that I don't make a lot of
+[00:30:18] money on stocks under $2 and I don't
+[00:30:20] make as much on stocks over 20. I I make
+[00:30:23] some money in GameStop and some of the
+[00:30:24] others were added to this, but it's not
+[00:30:27] as common. So, the area where I
+[00:30:29] consistently do the best is when the
+[00:30:31] stock is priced between 2 and 20. So,
+[00:30:34] for that reason, my educated intuition,
+[00:30:36] my proven track record tells me focus on
+[00:30:38] stocks between 2 and 20. Now, next one,
+[00:30:42] relative volume being five times. If we
+[00:30:44] scroll down here, what we will see, oh,
+[00:30:47] we got to go over to um I think it's
+[00:30:49] instrument here. So, we're going to jump
+[00:30:51] over to instrument.
+[00:30:52] We're going to scroll down again.
+[00:30:55] So, we're going to look at performance
+[00:30:58] by instrument relative volume. All
+[00:31:01] right. So, performance by instrument
+[00:31:02] relative volume and notice right here
+[00:31:05] that over $10.2 million of the profit
+[00:31:09] was on stocks that had five times higher
+[00:31:12] relative volume on the day I traded it.
+[00:31:15] So, if I see a stock and it's got only
+[00:31:18] one relative volume of one to 1.2,
+[00:31:21] I now know I shouldn't touch it. If it
+[00:31:24] has 1.5 to 1.99, I shouldn't touch it.
+[00:31:27] Two to three, well, I can make maybe a
+[00:31:29] little bit on it. Three to five, I can
+[00:31:31] make a little bit on it. If it has more
+[00:31:33] than five or it has like 9,000, that's
+[00:31:36] the place I need to focus.
+[00:31:38] So, this strategy and this stock
+[00:31:40] selection um these criteria, this isn't
+[00:31:43] just arbitrary. This is based on actual
+[00:31:47] historical data of my own trading.
+[00:31:50] Number three, percentage on the day.
+[00:31:53] Let's scroll down here. Performance by
+[00:31:56] instrument movement 10% $11.4 million.
+[00:32:00] Okay? So, once again, boom, backed up by
+[00:32:04] analytical data. Now, these two are not
+[00:32:07] reported on the metrics that I'm showing
+[00:32:10] you right here. They don't show the flow
+[00:32:11] They should, but for some reason they
+[00:32:13] don't. They don't show the float and
+[00:32:14] they don't show the news catalyst. So,
+[00:32:16] what I had to do was I had to manually
+[00:32:18] track over a sear over a period of time
+[00:32:21] all of my trades to see whether I did
+[00:32:23] better if I had a news catalyst and
+[00:32:25] where the float was under 20 million
+[00:32:26] shares. Float being under 20 million,
+[00:32:28] hands down, without question, definitely
+[00:32:31] have to have it. The news catalyst, this
+[00:32:34] one's a little bit more objective
+[00:32:35] because
+[00:32:37] or subjective because here's the thing
+[00:32:38] with the news catalyst. Um
+[00:32:41] For instance, GameStop. Did GameStop
+[00:32:45] have a clear news catalyst?
+[00:32:48] It had momentum. It had a catalyst.
+[00:32:51] But, it wasn't exactly news, not
+[00:32:53] exactly. And so, I have found that there
+[00:32:55] are times where because of sector-wide
+[00:32:58] strength, because of sentiment in the
+[00:33:00] market, that there can be great
+[00:33:02] opportunities, but there's not
+[00:33:04] necessarily a specific news catalyst.
+[00:33:06] So, as long as all of the other criteria
+[00:33:10] are met, I'm going to trade it. And the
+[00:33:12] news catalyst, I would recommend for
+[00:33:14] most beginner traders because it'll help
+[00:33:16] you stay out of maybe trades that aren't
+[00:33:18] going to go as well.
+[00:33:20] Just to sort of like make sure there's a
+[00:33:22] reason it's going up. But, the fact is,
+[00:33:24] if the price is right, if you've got the
+[00:33:26] relative volume, if you're up at least
+[00:33:27] 10%, if you've got the right float
+[00:33:29] combination, and maybe as a bonus, um
+[00:33:32] we'll put this down here,
+[00:33:34] is most
+[00:33:37] obvious
+[00:33:39] today.
+[00:33:40] If it's also the most obvious today,
+[00:33:43] meaning it's the number one leading
+[00:33:45] gapper on your scans, then that's really
+[00:33:48] reaffirming that this is the one that
+[00:33:50] you need to focus on, right? So, now
+[00:33:52] this one just took its place, BAC.
+[00:33:54] So, all of a sudden later in the
+[00:33:56] afternoon, this thing squeezes up. Now,
+[00:33:57] what we might look at on this is what's
+[00:34:00] driving this higher. And as I'm looking
+[00:34:02] at the newsfeed right here, the last
+[00:34:04] news headline was from yesterday. So, it
+[00:34:06] actually does not have fresh news today,
+[00:34:08] which means what's driving this move is
+[00:34:11] at least initially not clear. I mean,
+[00:34:14] you never know. It could have been could
+[00:34:15] be like Jim Cramer or one of these
+[00:34:16] people mentioned it on the news and all
+[00:34:19] of a sudden people are buying it. And
+[00:34:20] that's fine, but how long is that going
+[00:34:23] to sustain the move of what's now 82%?
+[00:34:27] Right? I'm not sure. But, this is
+[00:34:29] actually a good example of something
+[00:34:31] that we were just talking about. The
+[00:34:33] float is 1 million shares. The volume
+[00:34:35] right now is 485,000
+[00:34:38] shares. So, it's not quite a full float
+[00:34:40] rotation of one, but it's getting close.
+[00:34:43] The relative volume is three. You know,
+[00:34:44] 3.35. So, reg it it's average volume is
+[00:34:48] pretty low in these last few days.
+[00:34:50] But, what we know about this is that it
+[00:34:52] won't take a lot of volume for us to see
+[00:34:55] a fairly significant imbalance between
+[00:34:57] supply and demand and for the relative
+[00:34:59] volume to increase fairly quickly up to
+[00:35:01] 7, 8, 9, 10 and higher. So, this could
+[00:35:04] be the type of stock to keep an eye on
+[00:35:06] and right now,
+[00:35:09] it's obvious because it's the number one
+[00:35:12] leading percentage gainer in the entire
+[00:35:14] market. So, does it meet this? Yes. Yes.
+[00:35:17] Yes. No.
+[00:35:19] Yes and yes.
+[00:35:21] So, this would be worth watching.
+[00:35:24] Okay. So, this is going to give you This
+[00:35:26] helps you I I hope get a really good
+[00:35:28] sense of um the stock selection process.
+[00:35:32] All right. So, now we have to talk about
+[00:35:34] risk management. How are we going to
+[00:35:36] manage risk? We know that trading is
+[00:35:39] risky. We know that anytime you take a
+[00:35:42] position, you have the risk of losing
+[00:35:43] money. So, in order to manage the
+[00:35:46] downside risk, we need to implement
+[00:35:49] several strategies. Then we're going to
+[00:35:51] talk about where to buy and where to
+[00:35:53] sell. But, I don't want to talk about
+[00:35:54] where to buy and get you too excited yet
+[00:35:56] until we first talked about how to
+[00:35:58] manage that risk. So, you're no doubt
+[00:36:01] managing risk by having a relatively
+[00:36:03] small account. If you have $500, $1,000
+[00:36:05] in your account, you're definitely
+[00:36:07] capping your risk because you can only
+[00:36:08] lose so much. Your account's relatively
+[00:36:10] small. But, when you're looking at a
+[00:36:11] trade, what I always say is that a trade
+[00:36:15] should have the potential to double
+[00:36:17] whatever you're risking. But, that means
+[00:36:19] at the beginning of the trade, you have
+[00:36:21] to determine how much you're willing to
+[00:36:23] risk. Now,
+[00:36:25] unlike maybe other areas in life, when
+[00:36:29] it comes to trading, let's just say you
+[00:36:31] put the full $500 into a position, you
+[00:36:35] could say I'm risking 500.
+[00:36:37] But, that's not really true because
+[00:36:40] you're only risking 500 if you're going
+[00:36:43] to hold until it goes to zero, which
+[00:36:46] would be a terrible thing to do because
+[00:36:48] it would mean that when it was down 20%,
+[00:36:51] 30%, 40%, you just decide to keep
+[00:36:53] holding even though obviously you were
+[00:36:55] totally wrong on the trade. So, what if
+[00:36:58] we set a stop, let's say of more like
+[00:37:00] $50? So, I'm going to put a $500
+[00:37:04] position into this, but if it goes down
+[00:37:07] and I'm down $50, I'll sell and I'll
+[00:37:09] take a loss. That's called implementing
+[00:37:12] a stop loss.
+[00:37:14] So, that's what I would recommend is is
+[00:37:16] setting some type of stop loss before
+[00:37:17] you take the trade based on the dollar
+[00:37:19] amount of how much you're willing to
+[00:37:20] risk. So, if you're willing to risk $50,
+[00:37:22] that's fine. We're then going to look at
+[00:37:23] the chart and we're going to help
+[00:37:24] understand based on nearby support, how
+[00:37:28] many shares can you buy with only $50 of
+[00:37:31] risk?
+[00:37:32] Okay. So, based on $50 of risk, your
+[00:37:35] profit target should always be double.
+[00:37:37] So, if you're going to risk 50, you
+[00:37:39] should have the potential to make 100.
+[00:37:41] If you're going to risk 100, you should
+[00:37:41] have the potential to make 200. And
+[00:37:43] here's the really cool thing. If you can
+[00:37:46] maintain a two to one profit to loss
+[00:37:49] ratio, what do you think your break-even
+[00:37:52] point would be?
+[00:37:53] Your break-even
+[00:37:56] point with a two to one profit loss
+[00:37:58] ratio, so the five um
+[00:38:02] and then number five, we're going to
+[00:38:03] talk about risk management and we're
+[00:38:05] just going to write profit loss ratio
+[00:38:08] two to one or better
+[00:38:11] and accuracy 50% or better. So, if you
+[00:38:14] had a profit loss ratio of two to one,
+[00:38:17] 33% would be your break-even point. That
+[00:38:20] would be break-even, just 33% time. If
+[00:38:22] you had a one to one ratio, 50% is your
+[00:38:26] break-even. And if you have a two to one
+[00:38:27] ratio, sorry, a one to two ratio, where
+[00:38:30] your winners are half the size of your
+[00:38:32] losers, you would need to be right 66%
+[00:38:34] of time to break even. That's not
+[00:38:36] realistic for beginner traders. After
+[00:38:37] all, you just saw in my metrics that my
+[00:38:39] accuracy is 68% and I've been doing this
+[00:38:42] for more than a decade. So, you can be
+[00:38:45] very successful at 68%, but only if
+[00:38:47] you've got a good profit loss ratio.
+[00:38:49] So, if you're struggling as a beginner
+[00:38:52] with profit loss ratios or you're
+[00:38:54] struggling with consistency, then this
+[00:38:56] is what I would say.
+[00:38:58] I look at trading in three core
+[00:39:01] components.
+[00:39:03] You've got your um accuracy,
+[00:39:05] your profit to loss ratio and your
+[00:39:08] consistency. Um we'll just draw a little
+[00:39:10] picture of a calendar here. It's just
+[00:39:11] going to be faster. All right.
+[00:39:13] So, consistency is the number of weeks
+[00:39:16] you're green in a month,
+[00:39:18] right? So, over the last few months, how
+[00:39:20] many weeks were green, how many were
+[00:39:21] red. Accuracy is the percentage of all
+[00:39:23] your trades that are winners and your
+[00:39:24] profit loss ratio is the ratio between
+[00:39:26] your average winners and your average
+[00:39:27] losers. What a lot of beginner traders
+[00:39:29] struggle with is low accuracy, a
+[00:39:32] terrible negative profit loss ratio
+[00:39:34] where the average losers are bigger than
+[00:39:36] the average winners and of course the
+[00:39:37] result is that they're losing money.
+[00:39:39] So, when you're in this a situation and
+[00:39:42] we're talking about risk here,
+[00:39:44] what I focus on, I always tell people,
+[00:39:47] is accuracy.
+[00:39:49] Focus on accuracy, which means do not
+[00:39:52] take trades that don't give you a
+[00:39:55] two-to-one profit loss potential, do not
+[00:39:57] take trades that don't meet all five
+[00:39:59] criteria for stock selection, don't take
+[00:40:03] trades that are outside the time of day
+[00:40:05] that you typically trade, that are
+[00:40:07] outside the market you typically trade,
+[00:40:09] right? As long as you're following all
+[00:40:11] of these rules,
+[00:40:12] then you're going to be focusing on what
+[00:40:14] I would call an A+ quality setup, A
+[00:40:16] quality setup.
+[00:40:18] But, a lot of beginner traders, maybe
+[00:40:20] through boredom, feeling like they need
+[00:40:22] to trade every single day, if there's
+[00:40:24] nothing that's A quality, well, they
+[00:40:26] just sort of say, "Well, I'll just trade
+[00:40:27] whatever's here. If it's a B quality,
+[00:40:28] I'll trade it. If it's a C quality, I'll
+[00:40:30] trade it." But, let's just say for
+[00:40:31] instance that on A quality setups,
+[00:40:34] let's say your accuracy is 65%.
+[00:40:38] On B quality setups, let's say it's 60%,
+[00:40:41] and on C quality setups, let's say it's
+[00:40:42] 50%. So, unfortunately, the more you
+[00:40:46] lower your standards, the more you're
+[00:40:48] going to introduce losses. And
+[00:40:50] occasionally, some of those losses could
+[00:40:52] be big.
+[00:40:53] And then, that's hurting your profit
+[00:40:55] loss ratio, which in one day, one big
+[00:40:57] red day can hurt your consistency and
+[00:40:58] your accuracy.
+[00:41:00] So, start number here, start right here,
+[00:41:02] number one, focusing on A quality
+[00:41:04] setups. By focusing on A quality setups,
+[00:41:07] your profit loss ratio will improve.
+[00:41:10] It'll improve because you're exposing
+[00:41:11] yourself to fewer losses, and those
+[00:41:13] losses are going to be more measured.
+[00:41:15] With an improvement in profit loss
+[00:41:16] ratio, consistency is going to improve.
+[00:41:19] And then, what happens
+[00:41:21] right here, is you start to develop
+[00:41:23] what's called a positive feedback loop,
+[00:41:25] which creates self-confidence. And
+[00:41:27] that's what's going to encourage you to
+[00:41:29] increase your share size, to start to
+[00:41:31] scale up, to be more aggressive, and
+[00:41:33] that's where you're going to start
+[00:41:34] increasing profits. Profits are getting
+[00:41:36] bigger. But, if you're not careful, the
+[00:41:39] exact opposite can happen. You can go on
+[00:41:40] a negative spiral, where your profit
+[00:41:42] loss ratio declines, your your accuracy
+[00:41:45] declines, your profit loss ratio
+[00:41:46] declines, your consistency declines, and
+[00:41:48] now you start going on a downward
+[00:41:50] spiral, where losses are getting bigger
+[00:41:52] and bigger, you're losing your
+[00:41:53] confidence, and for some people, they
+[00:41:56] can blow out their accounts.
+[00:41:58] So, it's very important to cultivate a
+[00:42:01] mindset
+[00:42:03] that creates and and supports you
+[00:42:05] trading at your best. And that means
+[00:42:07] focusing first and foremost on
+[00:42:09] high-quality setups.
+[00:42:11] Okay, so, you're looking at high-quality
+[00:42:12] setups, and whenever you're thinking
+[00:42:13] about trading, you're thinking about a
+[00:42:15] profit loss ratio of two-to-one. So,
+[00:42:17] you're going to risk a dollar to make
+[00:42:19] $2. As long as you're right 50% of time,
+[00:42:22] well, as long as you're right uh 33% of
+[00:42:24] time, you're break even. If you're right
+[00:42:25] 50% of time, you're going to be making
+[00:42:26] money, you're going to be doing just
+[00:42:27] fine.
+[00:42:28] Okay, so now let's talk about where to
+[00:42:30] buy and where to sell. Now, I'm going to
+[00:42:32] pull up um
+[00:42:35] another slide deck here.
+[00:42:37] Uh this is actually um a slide for my
+[00:42:39] Warrior Pro curriculum. This has over
+[00:42:42] 1,600 slides in it, but we'll just start
+[00:42:44] here.
+[00:42:45] This is a candlestick chart. And
+[00:42:48] candlestick charts are the most popular
+[00:42:49] type of chart that active traders use.
+[00:42:52] They Each candlestick communicates four
+[00:42:54] pieces of information. A candlestick
+[00:42:56] communicates the open, the close, the
+[00:42:58] high, and the low. So, if I draw a
+[00:42:59] candle very quickly here,
+[00:43:02] this candle, this is the open.
+[00:43:06] This is the close.
+[00:43:08] That's the high,
+[00:43:10] and that down there is the low. A red
+[00:43:13] candle, the only difference
+[00:43:16] is that the open is here,
+[00:43:19] and the close is at the bottom. This is
+[00:43:21] still the low, and this is still the
+[00:43:23] high.
+[00:43:24] So, this is a candlestick. And a
+[00:43:27] candlestick can uh it it is basically
+[00:43:30] reflecting all of the price action that
+[00:43:32] occurs within a period of time. So, if
+[00:43:34] this is a one-minute candle, this
+[00:43:36] encompasses all of the price action that
+[00:43:38] occurred within one minute. If it's a
+[00:43:39] daily candle, it's encompassing all the
+[00:43:42] price action that occurred within one
+[00:43:44] day. It's a five-minute candle, it's a
+[00:43:45] five-minute five minutes of price
+[00:43:47] action.
+[00:43:48] What's interesting is that the shape of
+[00:43:49] the candle communicates market
+[00:43:51] sentiment. And multiple candles together
+[00:43:54] create what we have come to learn as
+[00:43:57] recognizable patterns that tell us
+[00:43:59] whether we should buy or whether we
+[00:44:00] should sell. This is part of the
+[00:44:01] universal language that you're going to
+[00:44:03] be learning.
+[00:44:04] So, and and some of this is part of the
+[00:44:06] general market knowledge of
+[00:44:07] understanding candlesticks, and some of
+[00:44:09] it is really focused on the nuance of
+[00:44:11] your strategy.
+[00:44:13] Okay, so, I'm going to do a little
+[00:44:14] animation here. We have a a stock where
+[00:44:16] the price has just started to move up.
+[00:44:18] And let's just say, for the sake of
+[00:44:20] argument, that this this meets all of
+[00:44:22] our criteria for being the right type of
+[00:44:24] stock to trade based on the price, the
+[00:44:25] flow, the number of share the the
+[00:44:28] relative volume, how much it's up today,
+[00:44:30] and a news catalyst. So, initially, the
+[00:44:33] news came out, and the price starts to
+[00:44:35] squeeze up. It pushes a little higher,
+[00:44:38] it goes even higher, and then it starts
+[00:44:40] to dip.
+[00:44:41] It pulls back.
+[00:44:43] Now, at this point right here, a lot of
+[00:44:45] beginner traders would think, "Oh, it's
+[00:44:47] going down. I shouldn't touch it, right?
+[00:44:49] It's weak, it's going down. I guess it's
+[00:44:51] all over." But, what a more seasoned
+[00:44:53] trader would look for is what's called a
+[00:44:56] pattern in the volume. So, what we would
+[00:44:59] look at on something like this is that
+[00:45:02] on the candles that are moving up like
+[00:45:04] this,
+[00:45:05] we would want to see that the volume
+[00:45:07] bars are increasing, which means more
+[00:45:10] people are buying as it moves up. And
+[00:45:12] then, when we get this candle of
+[00:45:13] pullback right up here,
+[00:45:15] we get a little pullback, a little more
+[00:45:16] pullback, we would want to see light
+[00:45:18] volume on the selling. This indicates an
+[00:45:21] imbalance between the buyers and the
+[00:45:23] sellers, where there are more buyers
+[00:45:24] than there are sellers. When this is the
+[00:45:26] case, then I always look for the first
+[00:45:28] candle to make a new high. When that
+[00:45:31] first candle makes a new high, what
+[00:45:33] we're looking for
+[00:45:35] is a reversal of the trend. So, the
+[00:45:37] trend is moving up, the trend is moving
+[00:45:38] down, and now we're looking for the
+[00:45:40] first candle to make a new high right
+[00:45:42] here.
+[00:45:43] And as that candle makes a new high, we
+[00:45:45] look for that surge back through the
+[00:45:47] high of day.
+[00:45:49] This is one of my favorite patterns as a
+[00:45:51] trader, because what I love about this
+[00:45:53] uh particular pattern
+[00:45:56] is that my max loss is always the low of
+[00:45:59] the pullback right here.
+[00:46:01] And my entry is always the first candle
+[00:46:03] to make a new high. First candle to make
+[00:46:05] a new high. So, let's just say this is
+[00:46:06] my entry right here, and that's my max
+[00:46:08] loss, and let's just say the difference
+[00:46:10] is six uh 10
+[00:46:12] and $6. That means I'm risking 10 cents
+[00:46:14] per share.
+[00:46:16] So, if I'm risking 10 cents per share,
+[00:46:18] how much do I need to make in order to
+[00:46:20] justify my profit loss ratio of
+[00:46:21] two-to-one? 20 cents.
+[00:46:24] Okay? So, now I look at the chart and I
+[00:46:26] ask myself, is this first target 20
+[00:46:29] cents away?
+[00:46:31] If it is, then I'll definitely take the
+[00:46:33] trade, and I'll hope that we extend even
+[00:46:35] higher. But, even if we don't, I could
+[00:46:38] still take profit right here, and have a
+[00:46:40] nice two-to-one profit to loss ratio.
+[00:46:42] Now, as long as the stock truly meets
+[00:46:45] all of our criteria for being worth
+[00:46:46] trading, most likely what's going to
+[00:46:48] happen on this first pullback is that
+[00:46:52] traders are going to buy it. The stock
+[00:46:55] has news, it has a reason to be moving
+[00:46:57] higher, and people are excited about it.
+[00:47:00] Here's an example of this pattern. So,
+[00:47:02] either price that moves up right here,
+[00:47:04] surges higher on the first pullback,
+[00:47:06] pulls back, second pullback right here,
+[00:47:08] first candle makes a new high, and then
+[00:47:10] off it goes.
+[00:47:12] Let's look at another example.
+[00:47:14] First move up, pull back, moves higher,
+[00:47:18] pull back, moves higher yet again. First
+[00:47:20] and second pullback.
+[00:47:22] Moves up, moves up, pulls back, moves
+[00:47:24] higher, pulls back, moves higher. First
+[00:47:27] and second pullback.
+[00:47:29] Pull back, pull back, little dip, little
+[00:47:32] dip, pushes a little higher. This is the
+[00:47:34] pattern that I trade again and again. I
+[00:47:36] mean, this chart's from 2017, this one's
+[00:47:38] from 2020. This one's from 2020. There's
+[00:47:41] charts here from I mean, this is These
+[00:47:44] are years and years of me trading the
+[00:47:47] same exact pattern. And I could pull up
+[00:47:50] examples of this today. We continue to
+[00:47:52] see this pattern, and it's because this
+[00:47:54] is a universal language of the market.
+[00:47:57] That's what it is. It's the universal
+[00:47:59] language. Buying the first and second
+[00:48:01] pullback right here.
+[00:48:03] Traders see that the price is moving
+[00:48:05] higher. They're excited about it. They
+[00:48:07] want to buy it. They want to get in,
+[00:48:09] they want to ride the momentum higher.
+[00:48:12] So, the place to buy for my strategy,
+[00:48:16] I have a number of different setups that
+[00:48:18] I trade. I have dozens of setups that I
+[00:48:20] trade. I'd be happy to teach you all of
+[00:48:21] them, but just for the sake of keeping
+[00:48:23] this class concise, but hopefully also
+[00:48:26] comprehensive for you.
+[00:48:28] I focus
+[00:48:29] one of my favorite strategies on buying
+[00:48:31] the first pullback, because it's easy to
+[00:48:33] find that setup, and it gives generally
+[00:48:35] good resolution. My accuracy on it is
+[00:48:37] strong. Okay, so, that's the place to
+[00:48:40] buy.
+[00:48:41] Now, where do I sell? Where do I take
+[00:48:43] profit?
+[00:48:45] So, when I first get into a trade, my
+[00:48:47] set of rules says that when I first get
+[00:48:49] in, there's a few things I want to see.
+[00:48:51] Number one, I want to see the price
+[00:48:54] move up, and I'd prefer to see it move
+[00:48:56] up at least 10 cents within the first
+[00:48:57] minute of getting in.
+[00:48:59] Because then, I can set my stop at break
+[00:49:01] even. I can move my stop from $6 up to
+[00:49:04] 610 at my entry price, and I've now
+[00:49:07] reduced my risk to zero. So, I want to
+[00:49:09] see the price move up 10 cents. I want
+[00:49:11] to see volume going up, volume
+[00:49:13] increasing, more volume coming in. I do
+[00:49:16] not I do not want to see big sellers.
+[00:49:21] Now, when we're trading as active
+[00:49:22] traders, we have access to something
+[00:49:24] called level two market data. Level two
+[00:49:26] market data shows us the depth of the
+[00:49:28] market. And when we're looking at the
+[00:49:31] depth of the market, we can actually see
+[00:49:33] if there's a really large seller. So,
+[00:49:35] this is showing the number of shares
+[00:49:37] that are for sale at these different
+[00:49:38] prices. This one's 20, this one's two,
+[00:49:41] one, one, one, four. None of these are
+[00:49:43] particularly big sellers, so not really
+[00:49:44] worried about that.
+[00:49:46] Uh we could pull up uh BAC K, this one
+[00:49:48] that's up now 87%.
+[00:49:51] It doesn't have a lot of sellers, but it
+[00:49:52] does have more sellers at 65 than it has
+[00:49:55] at 50, right? More sellers at 68.
+[00:49:59] So, once you learn how to read the tape
+[00:50:02] in this fashion, you're reading the
+[00:50:03] level two, you're actually going to get
+[00:50:05] a better sense of where the stock is
+[00:50:08] going to go.
+[00:50:09] So, I do not want to see big sellers.
+[00:50:12] All right? So, once I get into a trade,
+[00:50:14] I want to see the price move up 10%. I
+[00:50:16] want to see volume increasing. I do not
+[00:50:17] want to see big sellers.
+[00:50:19] So, what are my exit indicators?
+[00:50:22] My exit indicator is if the price does
+[00:50:24] not keep moving up, if the volume
+[00:50:27] declines, or if I do see a big seller.
+[00:50:31] And this is standard exit indicator
+[00:50:34] essentially for the rest of the trade.
+[00:50:36] So, the price goes down like 10 cents,
+[00:50:38] the volume is declining, or I see a big
+[00:50:41] seller.
+[00:50:43] If I see any of these things
+[00:50:46] as this is moving higher, I jump right
+[00:50:48] out. And it doesn't matter if I'm up 5
+[00:50:51] cents, if I'm down 5 cents, if I'm up 25
+[00:50:54] cents, if I'm up $5 a share.
+[00:50:56] Once I see these exit indicators coming
+[00:50:58] in, that's my cue to get out. Now,
+[00:51:01] for what it's worth, I am simplifying
+[00:51:03] this a little bit because if I'm in a
+[00:51:05] trade and I really am up two or three
+[00:51:07] dollars a share, I'm going to give it a
+[00:51:09] little bit more room because I've got
+[00:51:11] such a big profit cushion. Maybe I'll
+[00:51:13] see volume decline a little bit, but the
+[00:51:15] price is still okay and there's no big
+[00:51:17] sellers. There So, there is some subtle
+[00:51:20] variations to how I would implement
+[00:51:22] this, but one of the things that I'm
+[00:51:25] trying to convey for you is simplicity.
+[00:51:28] And starting by keeping a simple set of
+[00:51:31] rules is always easier, and then once
+[00:51:34] you gain more experience, you could take
+[00:51:35] the training wheels off, and you could
+[00:51:37] start testing out, well, I see that, you
+[00:51:40] know, volume is declined,
+[00:51:42] but there's no big sellers and the price
+[00:51:45] is, you know, still kind of moving up,
+[00:51:47] so maybe this is one where I'm going to
+[00:51:48] experiment with holding a little longer.
+[00:51:51] But, you're not allowed to get
+[00:51:52] comfortable experimenting and deviating
+[00:51:55] from sort of the written rule until
+[00:51:57] you've first proven consistency.
+[00:52:01] So,
+[00:52:03] one of the big questions that a lot of
+[00:52:04] beginner traders have is when to stop
+[00:52:06] trading each day. This is something that
+[00:52:09] is very hard. So, what I'm going to tell
+[00:52:12] you
+[00:52:13] is I'm going to share with you the set
+[00:52:14] of rules that I follow. You could choose
+[00:52:16] not to follow them, but most likely
+[00:52:19] you'll be giving back a lot more profit
+[00:52:20] if you make that choice.
+[00:52:22] So, um so, when
+[00:52:25] to stop.
+[00:52:27] Number one,
+[00:52:30] uh max loss.
+[00:52:33] So, we set a max loss on the day. Now, I
+[00:52:35] usually set it at my daily profit
+[00:52:37] target. So, if your daily profit
+[00:52:38] target's $200, your max loss would also
+[00:52:40] be 200. Now, certainly the goal is that
+[00:52:43] you have more green days than you have
+[00:52:44] red days because if you had the exact
+[00:52:46] same number of green days and red days,
+[00:52:48] you'd just be break even. But, you we
+[00:52:50] want your accuracy more than 50%, so
+[00:52:51] with max loss at the opposite of your
+[00:52:54] daily goal negative, that would keep you
+[00:52:56] um as long as your accuracy is high,
+[00:52:58] still in the green.
+[00:52:59] Number two,
+[00:53:01] um
+[00:53:02] let's see. So, after
+[00:53:05] daily goal,
+[00:53:08] giving back half.
+[00:53:09] Half loss. So, if you give back half.
+[00:53:11] Now, some people as a beginner, and this
+[00:53:14] is not a bad idea, would stop trading as
+[00:53:16] soon as they hit their daily goal.
+[00:53:18] That's fine, but as a more seasoned
+[00:53:20] trader, if you do that, then you're
+[00:53:22] capping your profits on some of your
+[00:53:24] best days. And statistically, those are
+[00:53:26] the days that you should dig deep and
+[00:53:28] trade longer until you give back profit.
+[00:53:31] Now, you don't want to keep trading
+[00:53:32] every day until you give back half of
+[00:53:33] whatever you've made, but for me, if I
+[00:53:36] ever give back half, I have to walk away
+[00:53:39] then and there before I get emotionally
+[00:53:41] activated because the feeling of losing
+[00:53:43] too much of what I've already made can
+[00:53:45] be really frustrating. That can trigger
+[00:53:47] an emotional response. So, the most sort
+[00:53:50] of intense area there is
+[00:53:53] after hitting the daily goal giving back
+[00:53:54] half, but certainly going
+[00:53:57] um from daily goal
+[00:54:00] to red,
+[00:54:02] down to red would be devastating and
+[00:54:04] absolutely have to walk away before you
+[00:54:06] make it worse.
+[00:54:07] Number four, more conservative would be
+[00:54:10] um walk away
+[00:54:13] uh 20% off highs. So, if you give back
+[00:54:15] 20% off the top, walk away, right? So,
+[00:54:18] if your daily goal's 200 and you give
+[00:54:19] back 40 bucks, all right, hit the road,
+[00:54:21] get out, come back tomorrow. You're
+[00:54:23] still walking away with 160, that's
+[00:54:25] still a pretty good day.
+[00:54:27] Number five,
+[00:54:29] if I feel
+[00:54:31] angry.
+[00:54:34] If I feel angry.
+[00:54:36] If I'm starting to have sort of black
+[00:54:38] and white thinking like, this never
+[00:54:39] works.
+[00:54:40] Uh you know, I I I'm I'm the worst
+[00:54:42] trader ever. This is horrible, you know,
+[00:54:44] if I start getting really extreme like
+[00:54:46] that, it's time to walk away because
+[00:54:49] what's happening is I'm starting to
+[00:54:50] become emotionally activated. And when
+[00:54:52] you become emotionally activated, you
+[00:54:54] could start to become impulsive in the
+[00:54:57] way you trade. A lot of this is coming
+[00:54:59] from fear and from anger for a lot of
+[00:55:01] traders, and I've been I've gone through
+[00:55:03] all of that myself, and so I've begun to
+[00:55:06] learn my triggers so I can walk away
+[00:55:09] before I become fully emotionally
+[00:55:12] hijacked. Emotionally hijacked is when
+[00:55:14] the emotions take over and you're
+[00:55:15] trading just from emotion, you're no
+[00:55:17] longer following your rules, and that
+[00:55:18] could be a very dangerous place. So,
+[00:55:21] before I even get there, I need to know
+[00:55:23] my triggers. So, if I cross this certain
+[00:55:25] threshold, it's like, walk away right
+[00:55:26] now before I make a mistake.
+[00:55:29] So,
+[00:55:31] and ultimately,
+[00:55:33] this all comes back to building
+[00:55:35] discipline as a trader. Having the
+[00:55:37] discipline to trade just your market,
+[00:55:39] just the right time of day, to know the
+[00:55:41] amount of capital in your account, to
+[00:55:42] manage your risk appropriately, to
+[00:55:43] choose the right stocks every day,
+[00:55:45] especially A-quality setups, to know
+[00:55:47] where to buy,
+[00:55:49] to know where to sell, to follow the
+[00:55:51] rules about when to stop each day.
+[00:55:53] So, how do we build discipline?
+[00:55:56] Discipline is a muscle. It's a muscle
+[00:55:58] that will get stronger the more you
+[00:56:01] exercise it. So, the way to build
+[00:56:03] discipline is to do things in your life
+[00:56:06] that require discipline.
+[00:56:09] If you're not disciplined in your life
+[00:56:10] naturally, it's going to be hard to be
+[00:56:12] disciplined in trading cuz the muscle is
+[00:56:14] weak. So, whether it's disciplining
+[00:56:16] yourself through exercise, it's
+[00:56:18] disciplining yourself through a daily
+[00:56:20] practice of meditation, it's
+[00:56:22] disciplining yourself with food,
+[00:56:24] whatever it is, you have to exercise
+[00:56:27] discipline in other areas of your life
+[00:56:30] so you can carry over to trading. So,
+[00:56:33] personally, the things that I've used
+[00:56:35] have been exercise and meditation, and
+[00:56:36] those have worked really well for me.
+[00:56:38] But, what I'll tell you is that
+[00:56:39] sometimes when trading is going really
+[00:56:41] well, I will get a little complacent.
+[00:56:43] I'll be like, I don't need to, you know,
+[00:56:44] do all that stuff right now. Trading's
+[00:56:46] going great.
+[00:56:47] And that's actually the time I needed
+[00:56:49] the very most because that's when you
+[00:56:51] let your guard down, and that's when you
+[00:56:53] can end up having a big mistake. And I
+[00:56:55] actually should show you. I mean, and
+[00:56:56] I've been doing this trading full-time
+[00:56:58] for more than a decade, um but but even
+[00:57:00] still, um I am human, and let's just
+[00:57:04] look at this overview here of my past um
+[00:57:07] the 60 days. Now, we'll do 90 days.
+[00:57:10] So, I ended up making about $100,000 in
+[00:57:13] this little stretch here, about 140,000,
+[00:57:16] and I was being really aggressive, but I
+[00:57:18] was taking away
+[00:57:20] some of the things I used to keep me
+[00:57:21] disciplined. The market was hot, I was
+[00:57:23] doing well, and then look at these two
+[00:57:25] huge red days. I lost 30 grand in two
+[00:57:27] days being way too aggressive and
+[00:57:29] breaking my rules.
+[00:57:31] So, I then had to do a big reset. I was
+[00:57:34] like, whoa, okay, stop right here before
+[00:57:37] this gets worse. I reset, and of course,
+[00:57:40] I've been able to rebuild, which is
+[00:57:41] great, but this could have been avoided
+[00:57:46] if I had maintained my practice of
+[00:57:49] discipline in other areas of my life,
+[00:57:51] I would have been able to make a better
+[00:57:52] decision. So, I really encourage you to
+[00:57:54] think about that, but it's very
+[00:57:56] important to focus on adopting
+[00:57:59] um a strategy for building discipline.
+[00:58:02] Okay, step number three for winning at
+[00:58:05] day trading. You've got to practice
+[00:58:06] trading. You've got to review your
+[00:58:08] metrics. You have to put in the time.
+[00:58:10] So, if you start practicing the strategy
+[00:58:13] that I'm trading every single day, and
+[00:58:15] you're you're of course welcome to. I'm
+[00:58:16] I'm happy for you to do that, then
+[00:58:18] you've got to just practice every single
+[00:58:19] day in a simulator, export your trades,
+[00:58:22] review your metrics. And then when
+[00:58:23] you're reviewing your metrics, and let's
+[00:58:25] just say for instance, let's look at my
+[00:58:27] metrics here for um uh let's see. I'm
+[00:58:29] going to show you
+[00:58:30] a month here um
+[00:58:33] 230.
+[00:58:35] This This shows something interesting.
+[00:58:37] So, when you look at your metrics,
+[00:58:39] uh we'll get detailed,
+[00:58:41] and we'll look at performance by uh
+[00:58:45] well,
+[00:58:46] we'll do we'll we'll we could do both of
+[00:58:48] these. So,
+[00:58:50] this performance by time of day tells a
+[00:58:52] story.
+[00:58:54] What does it tell?
+[00:58:55] It says I lost money before 7:00 a.m.,
+[00:58:58] and I lost money after 1:00 p.m. in the
+[00:59:00] afternoon. So, gosh, if I had just stuck
+[00:59:03] with trading from 7:00 a.m. to 11:00
+[00:59:05] a.m. like my rules state, I would have
+[00:59:07] done a lot better, right?
+[00:59:09] The rules are there for a reason, you
+[00:59:11] know, again, I I chose to trade outside
+[00:59:12] of them. Let's look at Monday and
+[00:59:14] Tuesday, this is more of an anomaly. I
+[00:59:16] wouldn't think too much into that, but
+[00:59:18] this is more significant. For this
+[00:59:20] period, I did really well trading
+[00:59:22] between two and and 10, and higher price
+[00:59:25] and lower price, I lost money on.
+[00:59:27] So, this is a short-term trend, and it
+[00:59:30] was a short-term trend that Mondays and
+[00:59:31] Tuesdays were bad. And that's something
+[00:59:33] to pay attention to, right? If there's
+[00:59:35] something here that's not working, you
+[00:59:36] got to adjust it. So, then I said, all
+[00:59:39] right, well, for the next um 30 days,
+[00:59:42] I'm going to practice uh being more
+[00:59:44] careful on
+[00:59:46] uh anything that's higher priced. And
+[00:59:48] let's look at how that's how that's uh
+[00:59:49] paid off for me.
+[00:59:51] Okay, so now we're going to look at just
+[00:59:53] um
+[00:59:54] this last range, and here you see much
+[00:59:56] better performance. Still took a few
+[00:59:59] lower priced, but only down 1,100, no
+[01:00:00] big deal. Couple higher priced, okay, I
+[01:00:03] took a couple, but managed the risk in a
+[01:00:05] responsible way. This is where the
+[01:00:06] profit is. So, then the day and the
+[01:00:08] time, that's going to be better.
+[01:00:10] Friday's been a little slow, but but
+[01:00:12] nonetheless, um time, nah, kind of an
+[01:00:14] anomaly here, but doing well between
+[01:00:16] 7:00 and and 8:00, and being really
+[01:00:18] disciplined to take the money off the
+[01:00:19] table and not overstay my welcome. Now,
+[01:00:21] these are just little periods of time,
+[01:00:24] but what you have the benefit of being
+[01:00:25] able to do when you're trading in the
+[01:00:27] simulator is
+[01:00:29] practice trading for a week, for 2
+[01:00:32] weeks. Pull all the data, look at the
+[01:00:34] data, and then make some decisions. Let
+[01:00:37] that data tell you what you need to do.
+[01:00:40] And ultimately,
+[01:00:42] you're going to get to a point where
+[01:00:44] you're looking at what you're doing
+[01:00:46] right now,
+[01:00:47] and you're able to start to better
+[01:00:49] evaluate, this is where I'm at, this is
+[01:00:51] where the pros are at. Because
+[01:00:52] ultimately, you have to identify the
+[01:00:55] gap.
+[01:00:56] And you have to outline the steps needed
+[01:00:58] to bridge the gap. Even after following
+[01:01:01] these three steps I've just shared with
+[01:01:02] you today, if you follow my strategy and
+[01:01:04] you're practicing in the simulator,
+[01:01:06] you'll likely as a beginner trader still
+[01:01:08] notice there's a gap between where
+[01:01:10] you're at and where I'm at, or someone
+[01:01:12] else who's been trading for a long time.
+[01:01:14] And so, the question is,
+[01:01:16] I mean, ultimately, if you were doing
+[01:01:17] everything exactly the same as me, you'd
+[01:01:19] make the same amount of money as me. So,
+[01:01:20] you're doing some things differently.
+[01:01:22] Maybe it's in how many shares you buy,
+[01:01:25] which could be a measure of risk
+[01:01:26] tolerance and account size, and that's
+[01:01:27] fine. But maybe it's something more
+[01:01:29] significant. You're not very good at
+[01:01:31] getting out of losers, you're holding
+[01:01:32] them too long. Or your entries are not
+[01:01:35] very good, right? So, then we start to
+[01:01:37] get dialed in. If you can outline
+[01:01:41] the difference between what you're doing
+[01:01:43] and what so the person you're sort of um
+[01:01:46] you know, the road map of where you're
+[01:01:48] trying to get to,
+[01:01:49] then that outline becomes the steps you
+[01:01:52] need to follow. It's like, I need to now
+[01:01:54] focus on better entries, getting in a
+[01:01:56] little earlier, buying more dips,
+[01:01:57] avoiding this specific setup. And that
+[01:02:01] ultimately is the process of continuing
+[01:02:04] to work and strive to improve as a
+[01:02:06] trader. So, like I said at the beginning
+[01:02:09] of this episode, trading is hard, but
+[01:02:11] the hardest part is the very beginning
+[01:02:14] of becoming consistent. And then once
+[01:02:16] you're consistent, yeah, it's like
+[01:02:18] learning to ride a bike. Now you can
+[01:02:20] ride. Now every day you can come in,
+[01:02:22] you've got a consistent strategy you can
+[01:02:24] depend on, but you've got to put in a
+[01:02:25] lot of work up front just to get to that
+[01:02:28] point. But once you get to that point,
+[01:02:31] that's when it's exciting. The
+[01:02:32] frustrating thing is that a lot of
+[01:02:34] traders will give up before crossing
+[01:02:37] that sort of threshold of becoming
+[01:02:39] consistent. They could spend a year, 2
+[01:02:41] years, they could spend 5 years, and
+[01:02:43] still not cross that threshold because
+[01:02:44] they haven't been able to really connect
+[01:02:46] the difference between what they're
+[01:02:48] doing and what successful traders are
+[01:02:49] doing. They haven't been able to
+[01:02:50] identify the steps they need to take to
+[01:02:52] improve and get better. They maybe
+[01:02:53] haven't sought out mentorship, they
+[01:02:55] haven't tried to get community feedback,
+[01:02:57] they haven't fully immersed themselves
+[01:02:58] in a community of traders. They're
+[01:03:00] isolated. Whatever the reason is,
+[01:03:02] they're not able to bridge the gap.
+[01:03:04] My hope for you is that you're able to
+[01:03:06] bridge the gap. Now, if you want to do a
+[01:03:08] 2-week trial with Warrior Trading,
+[01:03:09] there's a link pinned to the top of the
+[01:03:10] comments, in the description. Come join
+[01:03:12] us. You can trade side by side with me
+[01:03:14] for 2 weeks. You can see what it's like.
+[01:03:16] You You can start practicing. Get your
+[01:03:17] feet wet. Now, if you want some
+[01:03:19] recommended reading, we've got some
+[01:03:20] recommended reading over here. So, I'm
+[01:03:22] going to jump on the whiteboard here so
+[01:03:24] you can see like this. Uh this is my
+[01:03:25] book, How to Day Trade the Plain Truth.
+[01:03:27] Uh this is a great book by Annie Duke,
+[01:03:29] Thinking in Bets.
+[01:03:31] And a second book that she wrote,
+[01:03:33] The Power of Knowing When to Walk Away.
+[01:03:36] You are I think you already know how
+[01:03:37] important this is as a trader. Now, um
+[01:03:39] if you're interested in learning more
+[01:03:41] about technical analysis and candlestick
+[01:03:44] chart specifically,
+[01:03:46] the candlestick course by Steve Nison is
+[01:03:48] uh something you'll like. You might be
+[01:03:50] you I would encourage you to try to find
+[01:03:51] a free cop uh well, a used copy because
+[01:03:53] it's a little expensive if you buy it
+[01:03:54] new. Um and in terms of helping
+[01:03:59] cultivate a mindset of success,
+[01:04:03] I would check out this book called The
+[01:04:04] Happiness Advantage by Shawn Achor. I
+[01:04:07] think this will help you a lot. If you
+[01:04:08] enjoyed this episode, I hope you hit
+[01:04:10] that thumbs up. I hope you subscribe to
+[01:04:11] the channel, and stay tuned for more
+[01:04:13] episodes about trading strategy just
+[01:04:15] like this. And I'll remind you, as
+[01:04:17] always, trading is risky. My results are
+[01:04:20] not typical. So, manage your risk, take
+[01:04:22] it slow, and I'll see you back here for
+[01:04:23] the next episode real soon.

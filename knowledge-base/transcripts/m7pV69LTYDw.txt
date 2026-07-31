@@ -1,0 +1,1255 @@
+# How to Start Day Trading (Step-by-Step Guide)
+# https://www.youtube.com/watch?v=m7pV69LTYDw
+# duration_sec: 2736
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to talk
+[00:00:03] about the things that you need to know
+[00:00:04] when you're getting started as a Trader
+[00:00:07] I'm not going to sugarcoat it for you
+[00:00:08] trading is hard and one of the
+[00:00:10] challenges with trading is that there
+[00:00:12] are so many mistakes that beginner
+[00:00:14] Traders make and they end up shooting
+[00:00:16] themselves in the foot hardly before
+[00:00:18] they've even gotten started they knock
+[00:00:20] themselves out and they become a
+[00:00:21] statistic of another failed Trader so
+[00:00:24] even if you've been trading for a while
+[00:00:26] but without a lot of success it's not
+[00:00:27] too late to take a step back to slow
+[00:00:30] down and to start focusing on building a
+[00:00:32] really solid foundation that you can
+[00:00:35] scale I'm going to share with you the
+[00:00:37] blessing and the curse of being a Trader
+[00:00:40] the curse you could spend years
+[00:00:42] struggling to make even just $10 a day
+[00:00:46] and you'll feel like I'm not being
+[00:00:47] greedy I'm not asking to fly a private
+[00:00:50] jet or drive a Lamborghini it's $10 a
+[00:00:52] day why is this so difficult and it's
+[00:00:55] because until you have a set of rules
+[00:00:57] that you consistently follow every
+[00:00:58] single day you won't make $10
+[00:01:01] consistently but now here is the
+[00:01:03] blessing and this is the silver lining
+[00:01:05] for so many Traders once you are
+[00:01:08] consistently making $10 a day and let's
+[00:01:11] say you're doing that with 100 shares
+[00:01:13] the only difference between $10 a day
+[00:01:15] and scaling up to 50 to1 to $200 a day
+[00:01:19] is increasing your share size and you
+[00:01:21] can easily do that as you gain some
+[00:01:24] confidence and you have a track record
+[00:01:26] that supports putting a little more
+[00:01:28] money behind each of your trades that's
+[00:01:30] exactly what I did with my trading and
+[00:01:31] now I trade with an average position of
+[00:01:33] about 10,000 shares and that's the
+[00:01:35] biggest difference between my first few
+[00:01:37] months of turning the corner and the
+[00:01:39] amount of money I'm making today bigger
+[00:01:42] share size okay so my hope for you is
+[00:01:44] that in this episode I'm able to point
+[00:01:46] out a lot of the rookie mistakes that
+[00:01:48] many Traders make when they're getting
+[00:01:50] started and I was no exception in hopes
+[00:01:52] that I can help you avoid making those
+[00:01:55] same mistakes I'm also going to share
+[00:01:57] with you the five steps that I would
+[00:01:59] take if I were starting over today so
+[00:02:01] let's go ahead and jump in with the
+[00:02:03] first step that you need to take when
+[00:02:05] you're getting started the first step is
+[00:02:07] simply learning the basic concepts of
+[00:02:10] how to actually take trades how to do
+[00:02:12] technical analysis how to read
+[00:02:14] Candlestick charts how to read the level
+[00:02:17] two the tape how to interpret news it
+[00:02:19] seems like a lot and on the one hand it
+[00:02:22] is but on the other hand for me when I
+[00:02:24] started getting into trading I was so
+[00:02:26] excited to learn all this stuff because
+[00:02:29] I knew that once I learned it it would
+[00:02:31] Empower me right financial literacy that
+[00:02:34] would Empower me to become potentially a
+[00:02:36] better Trader a more successful Trader
+[00:02:38] more profitable Trader so I was super
+[00:02:40] motivated to learn all of the different
+[00:02:42] nuances of how to trade so step one for
+[00:02:46] me I'm not really good at like reading
+[00:02:49] an owner's manual for trading software
+[00:02:52] or just reading a book about how to
+[00:02:54] trade the easier way for me to learn is
+[00:02:56] Hands-On it's to actually start taking
+[00:02:58] my first trades now I want to say a
+[00:03:01] rookie mistake and I'll kind of you know
+[00:03:03] pepper these in throughout this episode
+[00:03:06] one big rookie mistake is trading with
+[00:03:08] real money before first proving you have
+[00:03:11] a track record of consistency in a
+[00:03:13] trading simulator a lot of beginner
+[00:03:15] Traders they'll just fund an account
+[00:03:16] with thinker swim Robin Hood you know
+[00:03:18] whatever the account is doesn't matter
+[00:03:19] each trade and they start taking
+[00:03:21] positions and unfortunately this can be
+[00:03:24] a very slippery slope where next thing
+[00:03:27] you know you're you're trading with big
+[00:03:29] size you're taking YOLO trades you're
+[00:03:31] swinging for the fences you're going
+[00:03:33] into the red now you're praying for a
+[00:03:35] Hail Mary to get yourself out of the red
+[00:03:37] and it's just very emotional it's very
+[00:03:40] stressful and it's completely
+[00:03:42] unnecessary it's not the right way to
+[00:03:44] start so while at the on the one hand
+[00:03:47] I'm a big advocate of just throwing
+[00:03:48] yourself in and starting a trade I would
+[00:03:50] just say as a note do it in a simulator
+[00:03:54] because you'll get the same learning but
+[00:03:56] you're not losing real money right now
+[00:04:00] for some of you you've already been
+[00:04:01] trading for some time and you have been
+[00:04:03] losing money and it might be hard for
+[00:04:05] you to say I'm going to step back and
+[00:04:08] switch to simulator because it feels
+[00:04:09] like a step in the wrong direction so if
+[00:04:12] you're in that position let me give you
+[00:04:15] one possible Word of Wisdom something
+[00:04:17] you could consider doing is reducing
+[00:04:20] your shares all the way down to like one
+[00:04:22] share or maybe 10 shares something
+[00:04:24] really small so the amount of money
+[00:04:26] you're losing is negligible but you're
+[00:04:29] still gaining experience and maybe even
+[00:04:31] better than Sim trading you're still
+[00:04:33] feeling some of the emotions that come
+[00:04:35] with gains and losses because ultimately
+[00:04:38] you will at one point or another sooner
+[00:04:40] or later have to begin conditioning
+[00:04:43] yourself to experience loss and not let
+[00:04:46] it get you rattled right so Step One is
+[00:04:49] learning the basic general knowledge of
+[00:04:52] trading and how the markets work and I
+[00:04:54] really think one of the best ways to do
+[00:04:56] it is by opening a simulated trading
+[00:04:58] account and taking your first trades
+[00:05:00] when you take your first trades you're
+[00:05:02] going to force yourself to learn the
+[00:05:04] basics of the different types of orders
+[00:05:07] you've got Market orders those work from
+[00:05:09] 9:30 a.m. till 4 p.m. you've got limit
+[00:05:11] orders those can work from 4:00 a.m.
+[00:05:13] till 8:00 p.m. depending on the hours of
+[00:05:16] the broker that you're trading with now
+[00:05:18] if you're trading with a broker like
+[00:05:19] thinker swim they're only open from 7:00
+[00:05:22] a.m. till 8:00 p.m. so it it depends a
+[00:05:24] little bit on the broker that you're
+[00:05:25] trading with but these are the things
+[00:05:26] that you'll learn as you begin
+[00:05:28] practicing in that safe simulated
+[00:05:31] environment you'll learn about how stop
+[00:05:33] orders work you'll realize that stop
+[00:05:35] orders like Market orders only work
+[00:05:37] between 9:30 and 4 p.m. pre-market and
+[00:05:40] after hours we have no Market orders no
+[00:05:42] stop orders so it takes a little bit um
+[00:05:44] it's a little bit riskier there's a lot
+[00:05:46] of volatility pre-market and after hours
+[00:05:49] but you have to use limit orders you'll
+[00:05:51] begin to learn about the offsets that
+[00:05:54] you can use for instance let's say you
+[00:05:56] want to buy a stock trading at $5 you'll
+[00:05:58] learn you could put a limit order at
+[00:06:00] 5505 5 cents above the current offer and
+[00:06:04] by doing that you have a better chance
+[00:06:05] of filling your full position if you
+[00:06:07] don't do an offset well what if there's
+[00:06:09] only 100 shares for sale at five and you
+[00:06:11] want to buy 5,000 you wouldn't fill the
+[00:06:13] full order so you start learning about
+[00:06:15] offsets you start learning about the
+[00:06:17] right indicator to press that buy button
+[00:06:20] what am I looking for that ultimately
+[00:06:22] gives me the conviction to send that
+[00:06:24] order is it green on the tape on the
+[00:06:26] time in sales is it the first candle
+[00:06:29] making a new high on a Candlestick chart
+[00:06:32] is it an indicator crossing over like
+[00:06:34] the macd or RSI reaching a certain point
+[00:06:37] that'll all depend on the strategy you
+[00:06:39] trade but ultimately the first step is
+[00:06:42] just learning all of these basic
+[00:06:44] concepts of trading learning how to read
+[00:06:47] the news what are the types of news
+[00:06:49] headlines that move the market and what
+[00:06:51] are news headlines that are kind of
+[00:06:53] negligable they don't really do anything
+[00:06:55] learning about quarterly earnings maybe
+[00:06:58] perhaps even getting into that uh
+[00:07:00] earning statement and learning how to
+[00:07:02] read it learning to recognize the
+[00:07:04] balance sheet and what it looks like
+[00:07:06] what a good balance sheet looks like
+[00:07:07] what a bad balance sheet looks like
+[00:07:09] learning what a shelf registration is
+[00:07:11] these are all kind of the basic things
+[00:07:13] that you begin to learn during your
+[00:07:15] first few weeks and your first few
+[00:07:17] months trading in a simulator now once
+[00:07:20] you've laid a solid foundation of all
+[00:07:23] this general knowledge about the market
+[00:07:26] it's time to take things up a notch so
+[00:07:29] so now let's talk about step number two
+[00:07:33] the second step of learning how to day
+[00:07:34] trade is learning one simple strategy
+[00:07:38] this is something that a lot of rookie
+[00:07:39] Traders make a mistake with they try to
+[00:07:41] trade many different strategies at the
+[00:07:44] same time maybe they're trading options
+[00:07:46] they're trading large caps they're
+[00:07:47] trading small caps they're buying some
+[00:07:49] meme stocks like AMC and GameStop
+[00:07:52] they're doing a little bit of everything
+[00:07:54] and they have mixed results there may be
+[00:07:56] some strategies that are more successful
+[00:07:58] than others but it's hard for them to
+[00:07:59] tell because they're doing a little bit
+[00:08:01] of everything the only way to really
+[00:08:03] accurately know what is actually working
+[00:08:05] when you're approaching trading in that
+[00:08:06] way is by taking really detailed notes
+[00:08:09] about every single trade you take that
+[00:08:12] way you can go back you can sort all of
+[00:08:13] your trades based on the strategy that
+[00:08:16] you were implementing at that time and
+[00:08:18] while there's nothing wrong with doing
+[00:08:19] that most beginner Traders won't do that
+[00:08:22] they'll be shooting from the hip doing a
+[00:08:23] little of this a little of that they'll
+[00:08:25] be inconsistent and then as a result
+[00:08:27] they just don't know what to do and
+[00:08:29] eventually they give up so at at the end
+[00:08:32] of the day I would say honestly success
+[00:08:34] in trading comes down to two things
+[00:08:36] having a strategy number one and number
+[00:08:38] two having the discipline to follow it
+[00:08:40] because when I see traders who end up
+[00:08:42] blowing up their accounts and leaving
+[00:08:44] it's for one of two reasons either
+[00:08:45] number one they didn't have a strategy
+[00:08:47] at all they were just sort of shooting
+[00:08:48] from the hip doing a little of this a
+[00:08:49] little of that until they blew up their
+[00:08:50] account or gave up or number two they
+[00:08:53] have a strategy but they don't have the
+[00:08:54] discipline to follow the strategy which
+[00:08:57] then is basically just as bad as not
+[00:08:58] having a strategy at all all it's
+[00:08:59] actually worse because you think that
+[00:09:01] you know what you're doing but then
+[00:09:03] you're you well you lack the discipline
+[00:09:05] to actually follow the rules so you have
+[00:09:07] confidence on the one hand but then you
+[00:09:09] continually make the same mistakes again
+[00:09:11] and again and again now regardless of
+[00:09:13] which position you're in if you haven't
+[00:09:15] learned a strategy yet then we're going
+[00:09:17] to talk about that in just a moment if
+[00:09:19] you've already learned a strategy but
+[00:09:20] you're struggling with discipline I can
+[00:09:22] help you with that too discipline is a
+[00:09:25] muscle it's something that you
+[00:09:26] strengthen with exercise and practice
+[00:09:28] and let's be honest it takes time to
+[00:09:31] become a disciplined Trader it doesn't
+[00:09:33] happen overnight and something that even
+[00:09:35] now after more than 10 years in the
+[00:09:37] market I still struggle with at times so
+[00:09:40] we can forgive ourselves because we are
+[00:09:42] only human and we're trying to do
+[00:09:44] something that is honestly very
+[00:09:47] difficult being a successful Trader is
+[00:09:49] not easy but let's start first by
+[00:09:52] talking about strategy so step number
+[00:09:54] two is learning one simple strategy now
+[00:09:57] for me the strategy that well there's
+[00:10:00] two strategies that came naturally to me
+[00:10:01] when I was getting started one of the
+[00:10:04] strategies that came naturally to me was
+[00:10:06] focusing on reversal trades and the
+[00:10:08] reason I focused on reversal trades was
+[00:10:10] because I had kind of a hard time when I
+[00:10:12] would look at stocks that were squeezing
+[00:10:14] up knowing when to get in now if we look
+[00:10:17] at this stock here and we look at the
+[00:10:19] chart we would see that naturally there
+[00:10:21] are some pullbacks and at this point uh
+[00:10:24] you'll know that probably you'll know
+[00:10:25] that I'm a big advocate of buying these
+[00:10:27] pullbacks and then selling into the mov
+[00:10:29] move up buying pullbacks and selling
+[00:10:30] into the move up but for some beginner
+[00:10:33] Traders it's just a little hard to get
+[00:10:35] their head around buying these pullbacks
+[00:10:37] and it's actually easier instead to look
+[00:10:39] for stocks that are going up and then
+[00:10:41] try to catch the reversal coming back
+[00:10:42] down or to look for stocks that are
+[00:10:44] going down and to try to catch the
+[00:10:45] reversal going back up so I actually
+[00:10:48] developed a specific scanner for that
+[00:10:50] type of strategy it's called a reversal
+[00:10:52] scanner what this reversal scanner is
+[00:10:55] doing is it's looking for stocks in real
+[00:10:57] time that are really extended so this
+[00:11:00] stock right here let me just put this up
+[00:11:02] here for instance has 11 consecutive
+[00:11:04] five minute Candles now you look at this
+[00:11:07] and maybe maybe we don't like this
+[00:11:09] particular stock but there's no denying
+[00:11:11] the fact that 1 2 3 4 5 6 7 8 9 10 11
+[00:11:14] Green candles in a row is quite extended
+[00:11:17] catching the first candle to go red and
+[00:11:19] then riding that momentum back down
+[00:11:22] could be a nice opportunity now
+[00:11:24] unfortunately this was coming right into
+[00:11:26] the close and going into the close some
+[00:11:29] of these stocks don't have a lot of uh
+[00:11:30] volume after hours so uh it's a better
+[00:11:33] scanner for trading during the day than
+[00:11:35] right at the close but this is another
+[00:11:37] example where you've got 1 2 3 four five
+[00:11:39] green candles in a row and then you
+[00:11:41] would be looking for that first candle
+[00:11:42] to go red to pull back down now A
+[00:11:45] reversal strategy like any other
+[00:11:47] strategy is going to have a system of a
+[00:11:49] set of rules that will dictate the type
+[00:11:51] of stocks that you buy when you get in
+[00:11:54] when you get out the time of day that
+[00:11:55] you trade some technical indicators that
+[00:11:57] you may reference it's very clearly
+[00:12:00] documented and it has a track record
+[00:12:02] that supports you trading it now for you
+[00:12:05] as a beginner you may be like well
+[00:12:07] that's all fine and well how do I find
+[00:12:09] that so what I'm going to do is I'm
+[00:12:11] going to put a link for you in the
+[00:12:12] description and I'll pin it at the top
+[00:12:13] of comments and it's a link to download
+[00:12:16] the PDF of my small account strategy
+[00:12:19] it's a strategy that I use in my trading
+[00:12:21] now although reversal trading was
+[00:12:23] something that I liked quite a bit when
+[00:12:25] I was getting started ultimately you
+[00:12:27] know what I learned it's really hard to
+[00:12:30] trade against the trend it's hard to
+[00:12:32] time those reversals so while it seems
+[00:12:35] to make sense to watch something selling
+[00:12:37] off and then catch that wave back up I
+[00:12:40] actually found that for me it's a lot
+[00:12:42] easier to buy something that is already
+[00:12:45] showing strength by buying a trending
+[00:12:48] stock during one of its nice gentle
+[00:12:51] pullbacks learning how to find those
+[00:12:53] entries for me was a little more
+[00:12:55] challenging but once I got them dialed
+[00:12:58] in it was much more rewarding and so for
+[00:13:01] me one of the patterns that I trade
+[00:13:03] pretty much every day while I'm um while
+[00:13:05] I'm trading is a pattern that I call the
+[00:13:07] first pullback pattern so I look for a
+[00:13:10] stock that's squeezing up kind of like
+[00:13:12] this so a couple of nice big green
+[00:13:14] candles I let it pull back a little bit
+[00:13:17] just like this and then I'm going to
+[00:13:18] look for that first candle to make a new
+[00:13:20] high now this next candle it opens and
+[00:13:23] if it goes red I'm not buying if it
+[00:13:25] keeps going red keeps going red I'm not
+[00:13:27] buying but as soon as we have a candle
+[00:13:28] that makes a new high like this green
+[00:13:31] I'm in on this candle and my Max loss is
+[00:13:33] right down here at the low and then
+[00:13:35] riding the momentum back up now it's
+[00:13:38] very important when you're trading this
+[00:13:39] pattern that you apply it to the right
+[00:13:42] stocks if you try to apply this pattern
+[00:13:44] to the wrong stock you're going to have
+[00:13:46] inconsistent results so part of my
+[00:13:48] strategy very clearly dictates what is
+[00:13:51] and what is not the right type of stock
+[00:13:53] to trade so GameStop for example
+[00:13:56] certainly it can be the right type of
+[00:13:57] stock to trade on most of the days that
+[00:13:59] has high relative volume that's
+[00:14:02] something that's really important for me
+[00:14:03] in my trading strategy to focus on on
+[00:14:06] stocks that have volume have liquidity
+[00:14:08] and typically they have a catalyst that
+[00:14:11] is creating all of that there's some
+[00:14:12] type of news event again as you go
+[00:14:15] through step one of practicing in a
+[00:14:17] simulator trading different stocks
+[00:14:20] you're going to notice that some stocks
+[00:14:21] move a lot faster than others and you're
+[00:14:24] going to sort of it may take a little
+[00:14:27] bit of time but you'll eventually
+[00:14:28] recognize there's a pattern and a
+[00:14:30] connection between the stocks that move
+[00:14:31] faster and the reason that they're
+[00:14:34] moving in the first place stocks that
+[00:14:36] have a catalyst move faster than stocks
+[00:14:38] that are just trending with the overall
+[00:14:41] Market if the overall Market is going up
+[00:14:43] we've got the S&P 500 moving up then
+[00:14:45] it's very common that a lot of stocks
+[00:14:47] will just sort of trend up with it but
+[00:14:50] that doesn't necessarily mean they're
+[00:14:51] good candidates to try to day trade
+[00:14:54] because if we're going to day trade
+[00:14:56] something we need the liquidity that
+[00:14:58] will will allow us to buy and sell
+[00:15:00] 10,000 shares relatively quickly now
+[00:15:03] it's true as a beginner you might only
+[00:15:05] be trading in the simulator with a 100
+[00:15:07] shares and then when you first
+[00:15:08] transition to real money you might only
+[00:15:10] trade with 50 shares but eventually the
+[00:15:12] goal is to be trading with 5 10 15
+[00:15:14] 20,000 shares and you're not going to be
+[00:15:16] able to do that trading stocks that
+[00:15:18] aren't liquid so the liquidity the
+[00:15:21] volume comes from news if you just think
+[00:15:24] about it why would a stock have high
+[00:15:26] volume why would people be super
+[00:15:28] interested trading it usually it's
+[00:15:30] because there's some type of fundamental
+[00:15:32] Catalyst earnings for instance new
+[00:15:35] contracts these types of things bring
+[00:15:38] investors off the sidelines to actively
+[00:15:40] trade that stock on that particular day
+[00:15:43] to try to capture a piece of that
+[00:15:45] opportunity so now the third step is to
+[00:15:48] practice the strategy that you learned
+[00:15:50] in step two either in a simulator or
+[00:15:53] with real money but with really small
+[00:15:54] size I'm an advocate of simulated
+[00:15:56] trading because I just think it's safer
+[00:15:58] step one learning the basic terminology
+[00:16:00] of the market the general concept step
+[00:16:01] two learning a strategy adopting it has
+[00:16:04] a set of rules has a track record gives
+[00:16:06] you confidence to practice trading it
+[00:16:08] step three practice trading that
+[00:16:10] strategy when you're practicing that
+[00:16:13] strategy you have to make sure you're
+[00:16:15] following all the rules that have been
+[00:16:17] laid out those rules will dictate the
+[00:16:19] time of day that you trade the stock
+[00:16:21] selection criteria so for me I only
+[00:16:23] trade stocks generally speaking between
+[00:16:26] $2 and $20 that have five times Rel to
+[00:16:29] volume are up at least 10% on the day
+[00:16:31] have a float of less than 20 million
+[00:16:33] shares and have a news Catalyst I know
+[00:16:36] those five criteria for me if I look
+[00:16:38] back at my historical data my biggest
+[00:16:40] winners will all meet those five
+[00:16:41] criteria and when I start looking at
+[00:16:43] some of the stocks that I'm not doing
+[00:16:44] well on well they're usually outside
+[00:16:46] that criteria so as a beginner it's
+[00:16:48] really important to hone in on the type
+[00:16:51] of stocks that other Traders are trading
+[00:16:54] the strategy you're learning with the
+[00:16:56] most success this is the thing with
+[00:16:58] Trading it doesn't really make sense to
+[00:17:00] try to reinvent the wheel and start from
+[00:17:02] scratch when there are other people out
+[00:17:05] there who have been doing this for a
+[00:17:06] long time and who are happy to share
+[00:17:09] with you what is actually working for
+[00:17:11] them in this market I'm just one of
+[00:17:13] these people but there are many others
+[00:17:15] out there the only thing I'd caution you
+[00:17:16] on is making sure the person you're
+[00:17:18] learning from is actually profitable I
+[00:17:21] have my broker statements on my website
+[00:17:23] and they're audited so you know beyond a
+[00:17:25] shadow of a doubt that my gains are real
+[00:17:27] I turn an account with less than $600
+[00:17:29] into more than $10 million and I
+[00:17:31] continue to trade in that account today
+[00:17:33] I'll tell you my results are not typical
+[00:17:35] I'll be very transparent there I've had
+[00:17:38] a very exceptional career in a lot of
+[00:17:40] ways certainly there's people that have
+[00:17:41] done far better than me but I want to
+[00:17:43] put that out there for you I think even
+[00:17:46] though you shouldn't assume that you'll
+[00:17:47] achieve a similar result as me that it
+[00:17:49] is important to learn from someone who
+[00:17:51] has proven profitable you know there are
+[00:17:53] some people who say well you know
+[00:17:54] there's a lot of professors in college
+[00:17:56] and this and that that are great at
+[00:17:58] teaching but they're not really you know
+[00:17:59] they're not actually practicing what
+[00:18:01] they're teaching every single day and I
+[00:18:03] think on the one hand that's okay when
+[00:18:05] you're learning general theory of the
+[00:18:07] financial markets but when it comes to
+[00:18:09] actually learning a strategy that you
+[00:18:12] can trade every single day I think you
+[00:18:15] want to learn that from someone who's
+[00:18:16] actually got their money where their
+[00:18:17] mouth is who's actually trading that
+[00:18:19] strategy as you know that's what I'm
+[00:18:21] doing okay so step one learning the
+[00:18:23] basic concepts step two learning a
+[00:18:25] trading strategy an actual strategy with
+[00:18:28] rules step three practicing that
+[00:18:30] strategy in a simulator now step four is
+[00:18:35] evaluating your metrics and this is a
+[00:18:37] super important step in fact evaluating
+[00:18:40] my metrics is the reason that I was able
+[00:18:43] to turn the corner because when I was
+[00:18:45] getting started I was really diligent
+[00:18:47] about tracking all of my trades in an
+[00:18:50] Excel doc I took my first trades it was
+[00:18:53] paper trading it was pretend money in
+[00:18:54] the late 1990s and I opened my first
+[00:18:57] real money account in 2001 so now 23
+[00:19:00] years ago the first thing that I did
+[00:19:03] when I took my first position was I
+[00:19:05] opened a ledger and I wrote the date the
+[00:19:08] name of the stock the price I got in at
+[00:19:10] the number of shares I bought and the
+[00:19:11] reason I was buying I essentially wrote
+[00:19:15] a little essay of all of the reasons
+[00:19:18] that I liked this stock and I was buying
+[00:19:20] stocks shares of companies that I knew
+[00:19:22] at that time which is not a day trading
+[00:19:24] strategy but nonetheless I then took
+[00:19:26] that same approach when I began day
+[00:19:28] trading of taking notes about every
+[00:19:30] single trade I took this was super
+[00:19:32] important because then I was able to go
+[00:19:34] back and analyze my trades and I was
+[00:19:36] able to categorize them by each of these
+[00:19:38] different data points now of course
+[00:19:40] thank goodness I started using Excel
+[00:19:42] because it's so much easier to sort the
+[00:19:44] data in those different columns so what
+[00:19:47] I would do is I would sort all of my
+[00:19:48] trades based on time a day and then I
+[00:19:50] would see huh interesting I'm noticing a
+[00:19:52] pattern based on the time of day that
+[00:19:54] I'm trading I make more money in the
+[00:19:56] morning than I make in the afternoon
+[00:19:59] maybe just maybe I should stop trading
+[00:20:01] in the afternoon and that was a
+[00:20:03] conclusion that I came to and so what I
+[00:20:04] did as a beginner is I would focus on
+[00:20:06] trading in the morning and then I had
+[00:20:08] other things I was doing in the
+[00:20:09] afternoon that was helping me save money
+[00:20:12] ultimately it wasn't making me a lot of
+[00:20:14] money but was helping me save money so
+[00:20:16] things I was doing I was splitting
+[00:20:17] firewood cutting down firewood from
+[00:20:18] trees in the woods at my house in
+[00:20:20] Vermont because I was going to use that
+[00:20:21] firewood to heat the house in the winter
+[00:20:23] instead of buying home heating oil that
+[00:20:25] was going to save me4 $5,000 right so I
+[00:20:27] did that I was painting the house just a
+[00:20:29] little bit each year so I could avoid
+[00:20:31] having to pay someone else to paint it
+[00:20:33] cuz I felt I was perfectly capable of
+[00:20:35] painting the house and it wasn't a
+[00:20:37] really tall house so it's an old
+[00:20:38] farmhouse but it was easy enough for me
+[00:20:39] to paint just with a regular ladder so
+[00:20:41] these were things that I was doing that
+[00:20:43] was helping me save a little bit of
+[00:20:45] money you know fixing my own car when it
+[00:20:46] would break that sort of stuff so I got
+[00:20:49] into this little habit of trading in the
+[00:20:51] mornings and then doing other things the
+[00:20:52] rest of the day I looked at my metrics
+[00:20:54] and I noticed I was making more money on
+[00:20:56] stocks between 2 and 20 in fact it it
+[00:20:58] was the higher pric stocks where
+[00:21:00] sometimes I had really big losses cuz
+[00:21:03] you know you might buy a stock at $35
+[00:21:04] $40 a share and then suddenly it drops
+[00:21:07] $5 a share you're down 10 grand on 2,000
+[00:21:10] shares and you think I I wasn't thinking
+[00:21:12] anything like that could happen but
+[00:21:13] there it is it just happened and it can
+[00:21:15] happen really quickly so you know
+[00:21:18] learned a lesson from that I learned
+[00:21:20] about the stocks that I made the most
+[00:21:22] money on were typically up at least 10%
+[00:21:24] on the day they typically had high
+[00:21:26] relative volume and so it was in my
+[00:21:29] metrics that I learned my strategy you
+[00:21:32] know I didn't sit down and sort of just
+[00:21:35] be like I think I should trade this this
+[00:21:37] this and this I traded everything I
+[00:21:40] looked at the data and then the data
+[00:21:42] told me where I was making money and
+[00:21:45] that's the strategy I continue to trade
+[00:21:46] today that's the strategy that I'm
+[00:21:48] sharing with you right now the reason I
+[00:21:50] want you to track your metrics is
+[00:21:52] because I want you to compare where
+[00:21:54] you're at versus where other Traders are
+[00:21:57] at who are also trading the strategy so
+[00:21:59] let's say you practiced the strategy you
+[00:22:01] learned in step three and you're
+[00:22:03] analyzing your metrics in step four and
+[00:22:05] you notice hm I'm only right 55% of the
+[00:22:09] time whereas Ross and these other
+[00:22:11] traders who are trading the same
+[00:22:12] strategy are right 68% of the time maybe
+[00:22:15] 70% of the time so you think hm why is
+[00:22:18] that what am I doing wrong and then
+[00:22:20] that's the opportunity to try to figure
+[00:22:23] out what you're doing differently so
+[00:22:25] what is the difference there are you
+[00:22:27] getting in too late you're buying too
+[00:22:29] high are you taking too many trades are
+[00:22:32] you trading some of the wrong stocks are
+[00:22:34] we trading the same stocks you trading
+[00:22:35] different stocks and this is a really
+[00:22:37] exciting process of almost being like a
+[00:22:40] little like like a scientist because you
+[00:22:43] sort of come in with a hypothesis you
+[00:22:45] then have data you Analyze This set of
+[00:22:47] data you compare it against other sets
+[00:22:49] of data that you see from other Traders
+[00:22:51] and you try to draw conclusions what
+[00:22:53] should I do differently then you create
+[00:22:55] a new hypothesis okay so for the next
+[00:22:57] week I'm going to focus on making this
+[00:22:59] slight revision you do that for a week
+[00:23:01] then you get another set of data and you
+[00:23:03] keep doing that you keep doing that you
+[00:23:04] keep doing that until you finally have a
+[00:23:06] set of data your own track record that
+[00:23:09] is showing consistency and profitability
+[00:23:12] you will not get it if you do not learn
+[00:23:14] discipline so like I said strategy you
+[00:23:17] have to have a strategy but secondly you
+[00:23:19] have to have discipline so something
+[00:23:22] that um I've struggled with through my
+[00:23:24] career are the emotions that come with
+[00:23:27] trading when I started TR trading I was
+[00:23:29] trading with money that I got from my
+[00:23:30] father after he died and that for me
+[00:23:33] created a real emotional attachment you
+[00:23:36] know it's almost like you know I mean if
+[00:23:38] your father left you an old leather
+[00:23:40] jacket and you know you you trade that
+[00:23:42] in for $500 and now this $500 suddenly
+[00:23:45] has such symbolic meaning you know this
+[00:23:48] was my father's you know it's all that I
+[00:23:50] have left of him uh and aside from the
+[00:23:53] memories and so for me when I started
+[00:23:56] trading it was very emotional um I ended
+[00:23:59] up um eventually finding out about this
+[00:24:02] book called uh trade mindfully I found
+[00:24:05] this helped me a lot when it comes to
+[00:24:07] the emotions um this was written in oh I
+[00:24:11] don't know the year let's see uh this
+[00:24:13] wasn't written in 2015 uh so I'd already
+[00:24:16] been traded for some time when this book
+[00:24:17] came out but I really did find it very
+[00:24:19] helpful um and I I recommend I recommend
+[00:24:22] it to a lot of beginner Traders
+[00:24:25] especially traders who do struggle with
+[00:24:26] emotion I think it's a really good read
+[00:24:29] um I I would also recommend um this book
+[00:24:32] right here quit by Annie Duke the power
+[00:24:35] of knowing when to walk away and a
+[00:24:37] second book by Annie Duke um called
+[00:24:39] thinking in bets uh Annie Duke is a
+[00:24:42] professional um millionaire poker player
+[00:24:45] and although she's not a day trader she
+[00:24:47] certainly understands uh the concepts
+[00:24:50] that we deal with and the emotions that
+[00:24:52] we deal with because you know being a
+[00:24:54] professional poker player it's no longer
+[00:24:56] gambling when it's not a game of chance
+[00:24:58] she's got a strategy she's got a set of
+[00:25:00] rules but if you don't follow them
+[00:25:03] you're going to have problems and so one
+[00:25:05] of the things that I learned for me was
+[00:25:08] that both a combination of exercise
+[00:25:10] meditation and reducing caffeine intake
+[00:25:13] made me a better Trader it made me a
+[00:25:16] more disciplined Trader it made me a
+[00:25:17] calmer Trader I slowed down a little bit
+[00:25:20] and you know I'll have caffeine when I'm
+[00:25:21] done trading but at this point I do not
+[00:25:24] have caffeine before I start trading and
+[00:25:26] I know that's hard for some people who
+[00:25:28] you know look I love caffeine as much as
+[00:25:29] the next person but I really found for
+[00:25:31] me in my trading it gets me too amped up
+[00:25:34] it gets me too fast to kind of spiral
+[00:25:37] when I start getting emotional and it's
+[00:25:39] better for me to be calm cool collected
+[00:25:41] and Zen while I'm trading and then when
+[00:25:44] I'm done I'm done so I encourage you to
+[00:25:47] practice meditation to practice exercise
+[00:25:51] and to really start to develop a sense
+[00:25:53] of emotional awareness about how trading
+[00:25:56] is making you feel because one once you
+[00:25:58] can understand what your triggers are
+[00:26:01] that's like half the battle cuz then you
+[00:26:03] know all right I just had a trigger I
+[00:26:05] need to walk away right now because the
+[00:26:07] thing with trading and emotions is that
+[00:26:09] once you cross that point of no return
+[00:26:12] it's like you're gone you're in a state
+[00:26:14] that I call emotional hijack and it
+[00:26:16] happens to a lot of beginner Traders but
+[00:26:17] it happens to season Traders as well you
+[00:26:19] go into emotional hijack and next thing
+[00:26:21] you know some really crazy stuff can
+[00:26:22] happen and you'll come back later and be
+[00:26:24] like what was I thinking and the reality
+[00:26:26] is you were not thinking because in this
+[00:26:28] in those moments you were completely
+[00:26:30] hijacked by your emotion it's a really
+[00:26:33] dangerous place to be in and to trade so
+[00:26:36] step number one learning the basic
+[00:26:37] knowledge basic concepts of of trading
+[00:26:39] in the financial markets in general step
+[00:26:41] number two learning a strategy ideally a
+[00:26:44] strategy is being traded by other people
+[00:26:46] profitably that's a great starting point
+[00:26:48] much better than starting uh from
+[00:26:50] basically nothing so make sure you
+[00:26:51] download my small count strategy pinned
+[00:26:53] in the top of the comments and Linked In
+[00:26:55] the description step number three
+[00:26:57] practicing uh strategy in simulator step
+[00:27:00] number four analyzing your
+[00:27:03] metrics step number five time to switch
+[00:27:07] to real money now here's my two cents
+[00:27:10] when it comes to when to switch to real
+[00:27:12] money ultimately your metrics are going
+[00:27:14] to tell you you need the metrics to
+[00:27:17] support trading with real money if you
+[00:27:19] can't make money a simulator you have no
+[00:27:21] business putting real money on the line
+[00:27:22] you just don't that's the reality so
+[00:27:25] look at your metrics once you have and
+[00:27:27] it's not just like a couple of days of
+[00:27:29] good metrics once you have weeks five
+[00:27:32] six weeks a couple months two months
+[00:27:35] maybe three months of good consistent
+[00:27:37] metrics in the simulator that's when
+[00:27:39] it's time to consider trading with real
+[00:27:42] money so one of the things that is
+[00:27:43] really important for me to see in uh a
+[00:27:46] Trader in the simulator is that they
+[00:27:48] have gone through uh one very important
+[00:27:51] process they've traded in the simulator
+[00:27:54] they've had several weeks of consistency
+[00:27:56] and then they had their first draw down
+[00:27:59] having your first draw down and
+[00:28:01] recovering from it is a huge emotional
+[00:28:06] achievement like it's just such a big
+[00:28:08] deal because now you know that the
+[00:28:11] strategy you're trading is really
+[00:28:13] working and you have that composure one
+[00:28:16] of the problems that some people have is
+[00:28:17] they'll have this nice streak here and
+[00:28:20] they'll go live you know right here
+[00:28:23] they've never had a draw down and maybe
+[00:28:24] it's just bad timing but they have a
+[00:28:26] draw down as soon as they trade with
+[00:28:27] real money and then they're like well oh
+[00:28:29] no was it the strategy was it this was
+[00:28:31] it that they don't know and then they
+[00:28:33] start to panic and then things start to
+[00:28:35] unwind and get really bad so it's
+[00:28:38] important to trade in a simulator until
+[00:28:40] you've had your first draw down and
+[00:28:42] recovered it the recovery is so key
+[00:28:46] because then when you start trading real
+[00:28:47] money if you have a draw down you'll say
+[00:28:49] this is no big deal I've done this
+[00:28:51] before I know what it's like to go
+[00:28:54] through a draw down I know as long as I
+[00:28:56] stay calm cool collected I can recover
+[00:28:59] those losses that is huge so big
+[00:29:02] advocate of not trading in the simulator
+[00:29:04] for too long the reason is when you
+[00:29:07] trade in the simulator for too long you
+[00:29:09] can use it as a crutch you begin to
+[00:29:11] think that you'll make millions of
+[00:29:12] dollars as soon as you flip the switch
+[00:29:14] live but there's one thing you can't
+[00:29:16] simulate in a simulator you can't
+[00:29:19] simulate the emotion that comes with
+[00:29:21] trading because when you start
+[00:29:23] experiencing real loss and real gains
+[00:29:27] things change a little bit so if you're
+[00:29:30] trading a simulator using 10,000 share
+[00:29:33] positions that's not realistic do not
+[00:29:35] start with real money with 10,000 shares
+[00:29:38] the euphoria that will come from hitting
+[00:29:40] five $8,000 winners will be huge and the
+[00:29:42] pain that comes from equally big losses
+[00:29:45] will be too much to bear so ultimately I
+[00:29:48] think a simulator is a tool that you
+[00:29:50] should use to learn how to trade to
+[00:29:53] master a strategy and to do it just with
+[00:29:55] 100 shares and focus on 10 15 $20 a day
+[00:29:59] and you could spend as you'll learn
+[00:30:01] months maybe Years Learning to
+[00:30:03] consistently make $10 to $15 $20 a day
+[00:30:07] with 100 shares but once you're doing it
+[00:30:10] switch to real money and then start to
+[00:30:12] scale up if you can do it in the Sim you
+[00:30:14] can do it with real money I'm a big
+[00:30:15] believer in that as long as you're
+[00:30:17] not you know as long as you're not doing
+[00:30:20] something that kind of like is like I
+[00:30:22] don't know hacking the system I mean you
+[00:30:24] can't really do that with like a 100
+[00:30:25] shares but sometimes people will find
+[00:30:28] little sort of things that they could do
+[00:30:30] maybe they're trading in and out of
+[00:30:31] halts and they're some some simulators
+[00:30:33] will let you buy shares even when a
+[00:30:35] stock is halted for instance you can't
+[00:30:37] do that with real money so as long as
+[00:30:38] the strategy you're trading translates
+[00:30:41] to real money then translate switch it
+[00:30:43] to real trade with 100 shares and slowly
+[00:30:45] increase 100 shares a week just slow and
+[00:30:47] steady slow increase slow increase slow
+[00:30:49] increase until you finally get up to
+[00:30:51] 1,000 2,000 4,000 shares once you get up
+[00:30:54] to there that's when things get really
+[00:30:57] excited now I have a few more rookie
+[00:30:59] mistakes that I want to caution you
+[00:31:00] against the first rookie mistake that
+[00:31:03] I've talked about extensively already is
+[00:31:05] trading with real money before you've
+[00:31:07] got a proven track record you set
+[00:31:09] yourself up for failure by doing that
+[00:31:11] you get emotional it's just a mistake
+[00:31:13] mistake number two is not tracking your
+[00:31:15] metrics if you don't track your metrics
+[00:31:16] you have no idea what your accuracy is
+[00:31:18] you don't know what your average winners
+[00:31:20] or your average losers are you don't
+[00:31:21] know what time a day you're making money
+[00:31:23] you don't know the price range stock
+[00:31:24] you're making money you know nothing
+[00:31:26] you're trading blind you're going to
+[00:31:27] lose money if you do that don't trade
+[00:31:29] with real money until first Improvement
+[00:31:30] consistently a simulator and track your
+[00:31:33] metrics you've got to track your metrics
+[00:31:35] now a third mistake I see a lot of
+[00:31:36] beginner Traders make is they invest in
+[00:31:38] really expensive tools now there are
+[00:31:40] some basic tools that you need in order
+[00:31:42] to trade you need good charts including
+[00:31:45] ideally 10sec charts you need stock
+[00:31:47] scanners but you do not need to spend
+[00:31:49] $2,000 a month on a Bloomberg terminal
+[00:31:52] you don't need to spend $10,000 on a
+[00:31:54] trading system now I've got kind of an
+[00:31:56] elaborate system here but I've been
+[00:31:57] doing this for a long time and of course
+[00:31:59] I'm making YouTube videos like this so
+[00:32:01] you know I've got my whole system set up
+[00:32:03] but you don't need something this
+[00:32:04] complex you could start with a simple
+[00:32:07] laptop a simple desktop computer one two
+[00:32:10] maybe three monitors at most you don't
+[00:32:12] need to spend a ton of money right now
+[00:32:14] it's all about proof of concept can you
+[00:32:17] prove that you're worth investing in and
+[00:32:19] then once you can then it makes sense to
+[00:32:21] begin investing a little bit more now
+[00:32:24] another rookie mistake that a lot of
+[00:32:26] people make is they'll feel this
+[00:32:28] desperation to make money quickly they
+[00:32:31] want to make money today they don't want
+[00:32:32] to wait and so they'll say well look hey
+[00:32:34] you know Jim Kramer I don't know some of
+[00:32:36] these guys on CNBC uh the Nigerian
+[00:32:39] Brothers whatever some of these guys I'm
+[00:32:40] not sure all of them but some of them
+[00:32:42] will have um alert services that you
+[00:32:44] could subscribe to and they'll send you
+[00:32:45] a text alert and they'll say I bought
+[00:32:47] this stock I bought that stock but th
+[00:32:50] this is not really a good way to learn
+[00:32:51] how to day trade one of the problems and
+[00:32:53] I tried using these Services myself and
+[00:32:55] I didn't find any success with them the
+[00:32:57] problem is on winners if they buy and
+[00:33:00] it's a good trade by the time you get
+[00:33:02] the alert Stock's already gone up you've
+[00:33:04] now missed the right entry and so your
+[00:33:06] winner is going to be smaller now if
+[00:33:07] it's a loser well ultimately they're
+[00:33:10] going to cut the loss first because
+[00:33:12] they're going to be smarter know exactly
+[00:33:13] when to get out so your losses are going
+[00:33:15] to end up being bigger small winners
+[00:33:17] bigger losers it's just not really a
+[00:33:19] recipe for Success I'm an advocate of
+[00:33:21] teaching you how to fish and not just
+[00:33:23] feeding you little fish fish fish here
+[00:33:25] just like that that's that's not what I
+[00:33:27] do now you know probably very well that
+[00:33:29] I do stream every day when I'm trading
+[00:33:31] and so you can watch over my shoulder
+[00:33:33] you can see me trading and I do share
+[00:33:34] with you what I'm doing but I'm doing it
+[00:33:36] in real time and I'm not doing it
+[00:33:37] because I want you to blindly follow me
+[00:33:39] I don't think that that's a good idea so
+[00:33:41] don't buy into those trade alerts don't
+[00:33:43] try to blindly follow me certainly but
+[00:33:45] anyone else because it's really not a
+[00:33:48] way to learn to become self-sufficient
+[00:33:50] and independent and isn't that why we
+[00:33:53] want to learn how to trade we want to be
+[00:33:55] our own boss right I think we love that
+[00:33:57] freedom and that Independence and so you
+[00:33:59] need to be able to learn a strategy for
+[00:34:01] yourself so that's really important it's
+[00:34:04] just something I've seen so many people
+[00:34:06] fall into that rabbit hole and there's a
+[00:34:08] lot of services out there that promote
+[00:34:10] alerts and text email etc etc but I
+[00:34:13] don't think it's a good idea another
+[00:34:14] mistake I'll occasionally see people
+[00:34:16] make is they'll think you know the
+[00:34:17] Market's not really hot enough right now
+[00:34:19] it's it's not you know we're not in the
+[00:34:21] pandemic I maybe I just wait until the
+[00:34:23] market gets a little bit a little bit
+[00:34:25] warmer a little bit hotter so something
+[00:34:27] that I'll say about that is the best
+[00:34:29] time to learn to trade was 5 years ago
+[00:34:31] before the pandemic you know so you
+[00:34:33] could have capitalized on that
+[00:34:34] incredible hot streak but the next best
+[00:34:37] time is now because here's the problem
+[00:34:39] if you learn how to trade in the middle
+[00:34:41] of a really hot Market you're not going
+[00:34:44] to be able to fully capitalize on it
+[00:34:45] because you don't have the skill you
+[00:34:46] don't have the intuition you haven't
+[00:34:48] been Trading long enough so people that
+[00:34:50] began during the pandemic when the
+[00:34:52] market was really hot well you know some
+[00:34:54] of them joined during a time and joined
+[00:34:56] the market when it was a little more
+[00:34:57] forgiving and maybe they could make
+[00:34:58] money a little bit more easily than
+[00:35:00] during a choppier market but I don't
+[00:35:04] think they were able to fully capitalize
+[00:35:05] on the opportunity that was in front of
+[00:35:07] them and I'm afraid they may have
+[00:35:08] learned some bad habits because you can
+[00:35:10] get away with holding a little too long
+[00:35:12] during that kind of Market in a colder
+[00:35:15] Market you have to learn discipline so
+[00:35:17] if you can learn to trade consistently
+[00:35:20] and profitable profitably during a cold
+[00:35:22] Market I think that that's going to set
+[00:35:24] a really strong foundation for you and
+[00:35:26] then when we have the next hot cycle
+[00:35:29] you're going to be able to capitalize on
+[00:35:30] it that much better because you've
+[00:35:32] already got all this time in the game
+[00:35:34] before the market heats up so I think
+[00:35:37] that really is the best time to learn I
+[00:35:39] learned during a time when the market
+[00:35:41] was still recovering from the Great
+[00:35:43] Recession we were dealing with
+[00:35:45] quantitative easing this Federal
+[00:35:47] stimulus program and then they were
+[00:35:48] tapering and it was just this crazy time
+[00:35:51] when it was really hard to trade if you
+[00:35:54] were up 10 15 20 cents a share and you
+[00:35:56] didn't take that profit off the
+[00:35:58] table you were making a mistake you
+[00:36:01] learned that you had to pay yourself and
+[00:36:03] so traders that made it during that time
+[00:36:05] were really disciplined they took their
+[00:36:08] profit and they they locked up base hits
+[00:36:10] and for a lot of us uh the pandemic was
+[00:36:12] a little bit hard because we were like
+[00:36:13] wow these stocks keep going higher it
+[00:36:15] feels like people you could just buy and
+[00:36:17] they just everything goes up it's it's
+[00:36:18] like not how we learned but many of us
+[00:36:21] did very well we had the best years of
+[00:36:23] our career during that window and we're
+[00:36:25] grateful that we were uh experienced
+[00:36:28] enough coming into that hot Market to
+[00:36:30] fully capitalize on it hot markets cold
+[00:36:33] markets it always goes and Es and flows
+[00:36:35] and even within a period of a hot Market
+[00:36:37] I had red months during the pandemic I
+[00:36:39] had months that were cold so you know
+[00:36:41] there were months that were crazy good
+[00:36:43] months that were cold and that was still
+[00:36:45] within the context of a hot market so
+[00:36:47] hot markets still have up and down cold
+[00:36:49] markets still have ups and downs so I
+[00:36:51] I'm really kind of a believer that you
+[00:36:53] can't time the market so the best time
+[00:36:56] to start learning is basically now if
+[00:36:59] you didn't already start just to begin
+[00:37:01] developing your financial literacy the
+[00:37:05] more you learn about the market the more
+[00:37:06] you're empowering yourself you'll be
+[00:37:08] able to take advantage of things like
+[00:37:09] IRAs 401ks maybe 529 plans you'll be
+[00:37:13] able to be a real participant in an
+[00:37:16] active way in this market it's a shame
+[00:37:19] that we don't learn more about the
+[00:37:22] financial Market in school because
+[00:37:24] ultimately everyone in the US has the
+[00:37:27] opportunity to benefit from it certainly
+[00:37:29] through employer sponsored plans like
+[00:37:31] 401ks and IRAs and stuff like that uh
+[00:37:34] Pension funds potentially and so the
+[00:37:36] fact that we're not taught this is crazy
+[00:37:39] to me it's just insane so I'm glad that
+[00:37:43] you're taking the time right now to
+[00:37:44] start to learn about the market and even
+[00:37:45] if you're focusing primarily on day
+[00:37:47] trading it's going to make you more
+[00:37:49] knowledgeable about the market at large
+[00:37:52] and that's going to educate the
+[00:37:53] decisions that you make when it comes to
+[00:37:55] long-term financial decisions you're
+[00:37:57] going to better understand the risk in
+[00:37:58] trading because let's be real trading
+[00:38:01] does carry risk when we think about the
+[00:38:04] type of risk involved in trading a lot
+[00:38:06] of beginner Traders confuse risk on each
+[00:38:10] trade with the total amount of money you
+[00:38:11] put into the trade and I like to think
+[00:38:13] of the money that I put into a trade as
+[00:38:15] a tool so if I have $25,000 in my
+[00:38:18] trading account just for instance that
+[00:38:20] money is a tool so when I buy a stock
+[00:38:23] and let's say I buy a full $25,000 worth
+[00:38:25] some people will say Ross you're risking
+[00:38:27] 25 Grand that's going to that could go
+[00:38:30] you know you could lose the whole 25
+[00:38:32] Grand and I would generally disagree
+[00:38:34] with you because the only way I would
+[00:38:36] lose 25 Grand is if the stock literally
+[00:38:38] went to
+[00:38:40] zero okay stocks are volatile but unless
+[00:38:43] I'm trading a stock that is in potential
+[00:38:46] bankruptcy proceedings or has the risk
+[00:38:48] of imminent bankruptcy I'm not worried
+[00:38:51] about it going to zero and even when
+[00:38:52] they do go into bankruptcy they still
+[00:38:54] don't go to zero because then there's
+[00:38:56] people that are buying the stock and
+[00:38:58] still trading it on specul speculation
+[00:39:00] that they'll recover from that so for me
+[00:39:04] the way I think about it is my risk is
+[00:39:08] uh let me let me kind of draw it here
+[00:39:10] for you so the way I think about risk is
+[00:39:13] let's say I buy a $25,000 position so
+[00:39:17] let's say I buy 10,000 shares of a stock
+[00:39:20] at
+[00:39:21] $250 so that's my entry okay now I'm not
+[00:39:24] going to hold it till zero so what is my
+[00:39:27] Max Max loss I could calculate my Max
+[00:39:30] loss based on dollars and I could say
+[00:39:32] the most I'm willing to lose on this is
+[00:39:34] 1,000 bucks all right now for me that's
+[00:39:37] a relatively moderate Max loss my max
+[00:39:40] daily loss is five grand so losing a
+[00:39:41] th000 is not a big deal for me so all
+[00:39:44] right well 10,000 shares that means I
+[00:39:46] could risk minus 10 cents so that means
+[00:39:49] my Max loss is $1,000 and it's at
+[00:39:53] $240 there we go so I'm I'm using
+[00:39:56] $25,000 of capital but my risk on this
+[00:39:59] trade I would consider to be
+[00:40:02] $11,000 so if it goes up to$ 275 let's
+[00:40:06] say and I sell it for plus
+[00:40:08] 2500 I would say I risked 1,000 to make
+[00:40:11] 2500 which means I had a 1 to 2.5 risk
+[00:40:16] to reward ratio which is terrific with
+[00:40:19] this I could actually be wrong 70% a
+[00:40:21] time and still make money your break
+[00:40:23] even is less than 30% so this would
+[00:40:25] position you really well if you trade
+[00:40:27] like like that and some people would say
+[00:40:29] wait you know you risk 25,000 to make
+[00:40:32] 2500 and that's that's not enough reward
+[00:40:35] and I think traders who are thinking
+[00:40:37] like that are wanting to buy the YOLO
+[00:40:40] options trades that have the potential
+[00:40:42] to give them a 300X you know a 3X return
+[00:40:44] where they're putting 25 in they're
+[00:40:46] taking $75,000 out but that's not
+[00:40:49] realistic and that's not what most day
+[00:40:50] Traders are doing you might get that
+[00:40:52] once in a blue moon on something like a
+[00:40:54] GameStop but you're not going to be able
+[00:40:56] to achieve that consistently there's
+[00:40:58] there's no way no one's able to do that
+[00:41:01] I mean really let's be honest so you
+[00:41:03] have to focus instead on what I think
+[00:41:05] are relatively small base hits and
+[00:41:08] thinking of trading and the risk you're
+[00:41:09] taking as really the difference between
+[00:41:11] your entry price and your max loss
+[00:41:14] that's how I think of risk and I think
+[00:41:16] of my account essentially as a tool so
+[00:41:18] for instance if I was thinking about
+[00:41:20] buying a you know a piece of real estate
+[00:41:22] or something like that and I'm thinking
+[00:41:24] about improving it and stuff like that
+[00:41:26] let's say I'm thinking about buying
+[00:41:26] for500 Grand I want to put $50,000 of
+[00:41:29] work into it and then resell it for 650
+[00:41:31] or 700,000 something like that so that
+[00:41:34] $500,000 really is a tool it's a tool
+[00:41:37] that I'm using that allows me to then
+[00:41:39] put some money in fix it up flip it and
+[00:41:42] then get all that money back out and use
+[00:41:44] that same money as a tool for the next
+[00:41:45] project and that's how it is with
+[00:41:47] trading so the equity because you now
+[00:41:49] own something of value right you own
+[00:41:52] something that other people will buy so
+[00:41:54] I can turn around and sell this at $240
+[00:41:56] or whatever the case is you know we look
+[00:41:58] at something like GameStop and sure it's
+[00:42:01] really volatile and this is a stock that
+[00:42:03] can go up and down you know 203% in one
+[00:42:06] day potentially so you have to be
+[00:42:08] thinking about the risk on this type of
+[00:42:09] stock as being uh wider and so whenever
+[00:42:13] I look at a stock like that I think okay
+[00:42:15] well I've got to adjust my position size
+[00:42:18] because realistically I might want to
+[00:42:20] take 10,000 shares and risk only 10
+[00:42:22] cents but then is that achievable on
+[00:42:25] this particular stock if it's not
+[00:42:26] achievable on this particular stock then
+[00:42:29] I have to make the decision to reduce my
+[00:42:31] share size right what's a realistic
+[00:42:33] stock stop on this stock maybe it's $1 a
+[00:42:36] share so maybe I'm going to go down just
+[00:42:38] to a th000 shares and that's fine I'll
+[00:42:40] go down to a th000 shares so that's sort
+[00:42:43] of the process of thinking about risk in
+[00:42:45] trading we know trading is risky but one
+[00:42:49] of the things that I think is that the
+[00:42:50] people who trading is the riskiest for
+[00:42:54] are the people who are not spending time
+[00:42:56] thinking about stress strategy and how
+[00:42:58] to develop an edge an edge gives you the
+[00:43:02] ability to pull profit out of the market
+[00:43:05] consistently now the thing that's a
+[00:43:06] shame is that if you have an edge uh in
+[00:43:09] Las Vegas and you're really good at
+[00:43:11] Blackjack whatever your Edge is maybe
+[00:43:14] you're counting cars they'll kick you
+[00:43:15] out of the casino they don't like that
+[00:43:18] that's not true on Wall Street if you
+[00:43:19] have an edge as long as it's not insider
+[00:43:21] trading but you have an edge you're
+[00:43:23] allowed to have that edge and that's
+[00:43:25] what gives you the ability to trade
+[00:43:26] consistently every single day you're not
+[00:43:28] going to get kicked off your broker your
+[00:43:30] broker wants you to make money the
+[00:43:32] casino doesn't want you to make money
+[00:43:33] but that's not the way Wall Street is so
+[00:43:36] on Wall Street we are rewarded and
+[00:43:38] encouraged for having an edge I want to
+[00:43:41] help you develop your Edge so you could
+[00:43:44] trade in the markets consistently every
+[00:43:46] single day now as always I'll remind you
+[00:43:48] that trading is risky and my results are
+[00:43:50] typical and I can't guarantee that
+[00:43:52] you'll find success I can't guarantee
+[00:43:54] that you'll have the discipline to
+[00:43:56] follow the rule
+[00:43:57] you need to have a strategy and I can
+[00:43:59] give you that but you need to come to
+[00:44:00] the table with discipline there are
+[00:44:02] certain aptitudes that make someone more
+[00:44:04] likely to succeed an ability to be
+[00:44:06] disciplined an ability to understand how
+[00:44:08] to use trading software how to trade how
+[00:44:10] to use a computer you know there are
+[00:44:12] some sort of peripheral skills that will
+[00:44:15] lend themselves to being a Trader and
+[00:44:17] certainly there's lifestyle
+[00:44:19] considerations trading is great for
+[00:44:21] people that are
+[00:44:22] Freelancers great for people that have
+[00:44:25] you know online businesses things like
+[00:44:27] that that have the flexibility to be
+[00:44:29] able to trade for a few hours in the
+[00:44:31] morning and then do the rest of the work
+[00:44:32] that they have to do later in the day
+[00:44:34] for people that are working a 9 to-5 job
+[00:44:36] on the East Coast it could be tough but
+[00:44:38] I'll tell you something that's really
+[00:44:40] nice beginning during the pandemic
+[00:44:42] people started trading earlier so now
+[00:44:44] the window really for most Traders is
+[00:44:46] between 7:00 a.m. and 11:00 a.m. and
+[00:44:48] even if you only trade from 7:00 to 8:
+[00:44:49] a.m. each day before you go to your 9
+[00:44:51] to-5 job that's an hour a day of gaining
+[00:44:53] experience think about where you could
+[00:44:55] be a year from now if you spend an hour
+[00:44:58] every day Monday through Friday learning
+[00:45:00] about trading focusing on trading
+[00:45:01] practicing the simulator you're going to
+[00:45:03] know a heck of a lot more than you know
+[00:45:05] today so let's keep the journey going
+[00:45:07] and if hey look if you want to check out
+[00:45:09] my strategy it's linked in the
+[00:45:10] description there's a PDF you can
+[00:45:12] download it printed out start practicing
+[00:45:14] that if you want to become a member of
+[00:45:15] warrior trading we've got a two-e trial
+[00:45:17] you could try it for 20 bucks see what
+[00:45:19] it's like I'll put a link for that in
+[00:45:20] the description as well and if you
+[00:45:22] enjoyed this episode I hope you hit that
+[00:45:23] thumbs up and I hope you subscribe the
+[00:45:25] channel for more episodes about trading
+[00:45:27] strategy and daily Recaps just like this
+[00:45:29] I'll see you for the next episode real
+[00:45:31] soon
+[00:45:32] [Music]

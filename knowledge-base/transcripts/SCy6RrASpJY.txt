@@ -1,0 +1,944 @@
+# The Pre-Market Break of VWAP Setup
+# https://www.youtube.com/watch?v=SCy6RrASpJY
+# duration_sec: 2353
+
+[00:00:01] all right everyone so in today's episode
+[00:00:03] I'm going to break down for you the
+[00:00:04] premarket break of vwap setup this was
+[00:00:07] the setup that uh today gave me my
+[00:00:08] biggest winner and it was on mg this is
+[00:00:12] a stock that is actually a continuation
+[00:00:15] setup from the move that began yesterday
+[00:00:18] squeezes up yesterday holds those levels
+[00:00:21] after hours pre-market we get that
+[00:00:24] continuation and we get that push higher
+[00:00:26] so today we hit a new high over the last
+[00:00:29] two days on mg which was certainly good
+[00:00:31] to see the float on this one uh 737,000
+[00:00:36] shares it's a very low float stock um
+[00:00:39] it's one that we have traded in the past
+[00:00:42] I'll pull up the chart so you can see um
+[00:00:44] this is my last day of trading on the
+[00:00:46] traveling trading station here I've been
+[00:00:48] um on an island off the coast of New
+[00:00:49] England for the last week and uh it's
+[00:00:52] it's been really nice but I'll be
+[00:00:53] looking forward to being back home on
+[00:00:55] Monday and I'll be back home for my uh
+[00:00:58] Weekly game plan episode that I'll
+[00:00:59] upload Sunday night so here's mg we'll
+[00:01:03] go 5 minute chart full screen and you
+[00:01:06] can see yesterday you you guys ended up
+[00:01:09] getting a really nice move on this
+[00:01:10] around it was like 10:30 111 it goes
+[00:01:13] from 3: all the way to 6 you got a 100%
+[00:01:17] move and I missed it completely I didn't
+[00:01:20] even trade it because yesterday was a
+[00:01:22] small green day for me and I locked it
+[00:01:24] up on the earlier side and then I didn't
+[00:01:25] want to overstay my welcome so ended up
+[00:01:28] completely missing um that move but
+[00:01:31] nonetheless good job for those of you
+[00:01:33] guys that hit it it pulls back it comes
+[00:01:35] back up and this is kind of interesting
+[00:01:37] price action right here because if you
+[00:01:39] recall from yesterday's episode I talked
+[00:01:42] about how sometimes towards the end of a
+[00:01:44] hot streak we'll start excuse me seeing
+[00:01:47] stocks are going up 50 or 100% and then
+[00:01:51] coming all the way back down so this
+[00:01:53] went from
+[00:01:54] $3 up to six and then all the way back
+[00:01:58] down to 350 which is a huge huge
+[00:02:00] retracement typically I I would I would
+[00:02:03] not be happy with that kind of pullback
+[00:02:06] because it's you know for me the way I
+[00:02:08] think about it is I like to see stocks
+[00:02:11] that are holding usually in the top 75
+[00:02:13] to 80% of their range so that would be
+[00:02:16] sort of up in this area here and if this
+[00:02:18] is the range from the beginning of the
+[00:02:20] move I want to see it holding in the top
+[00:02:22] you know kind of 20% here so when a
+[00:02:25] stock pulls back to the 50% retracement
+[00:02:27] that's kind of the bare minimum like or
+[00:02:29] not the bare that's the most that I'm
+[00:02:31] kind of comfortable with before I'm just
+[00:02:33] like it's too weak there's just too many
+[00:02:36] sellers now we actually have a new scan
+[00:02:38] um that we've just released today it's
+[00:02:41] top of trend right down here and this is
+[00:02:44] a scan that is um looking at stocks that
+[00:02:48] are currently positioned in the top 80%
+[00:02:51] of their range and that have also met
+[00:02:53] our criteria for uh volatility today so
+[00:02:56] these could be some interesting ideas
+[00:02:57] for watching um continuation
+[00:03:00] as it turns out today most of the stocks
+[00:03:01] are on this scan are a little bit higher
+[00:03:04] float so they're not really kind of what
+[00:03:06] I would go for on this particular day
+[00:03:09] but I think one of the issues we also
+[00:03:10] have today is that it's Friday it's the
+[00:03:13] end of the week and it's a Friday in
+[00:03:15] August this isn't usually a time where
+[00:03:17] we see really strong momentum so my
+[00:03:21] thought even yesterday was that my the
+[00:03:24] odds of me having a big winner today
+[00:03:25] were pretty low and that my next best
+[00:03:27] chance of having a really good trade is
+[00:03:29] probably not till Monday Tuesday
+[00:03:32] Wednesday next week so anyways um so
+[00:03:35] yesterday mg gives us this nice move but
+[00:03:38] then it retraces like 70% of the move
+[00:03:40] that's too much then it bounces all the
+[00:03:43] way back up to volume weight average
+[00:03:44] price but then it fades again going into
+[00:03:46] the close and then after hours kind of
+[00:03:49] out of nowhere on noticeably light
+[00:03:52] volume it pops back up to five pulls
+[00:03:55] back and goes all the way back up to 550
+[00:03:58] I thought I find the volume here very
+[00:04:00] interesting because it took only that
+[00:04:02] amount of volume to send this from $4
+[00:04:05] back to 550 whereas in this area you had
+[00:04:10] a lot more volume but the move was
+[00:04:12] smaller and that tells me during this
+[00:04:14] period of time there were a lot more
+[00:04:16] sellers selling into that move selling
+[00:04:19] into vwap and then of course it faded
+[00:04:21] off that level so this was not a
+[00:04:23] sustained move but then after hours on
+[00:04:25] light volume all of a sudden I don't
+[00:04:27] know shorts caught off guard or they
+[00:04:29] they were just not there selling the
+[00:04:31] stock and you get that nice move so it
+[00:04:33] pops up there pulls back squeezes up to
+[00:04:36] 550 so when I sat down this morning at
+[00:04:39] about 6:30 here I saw that mg already
+[00:04:44] had a couple levels in place so I drew
+[00:04:46] these two descending resistance lines
+[00:04:49] one that connected right here right here
+[00:04:52] and that kind of touched right about
+[00:04:54] here and another that touched the high
+[00:04:56] of this candle from after hours so there
+[00:04:59] were the two levels that I drew and
+[00:05:01] those have been drawn since like 6:30 in
+[00:05:03] the morning I sat down and when I first
+[00:05:06] sat down the scan had uh two other
+[00:05:10] stocks that were interesting the leading
+[00:05:12] percentage Gainer was ITI this is a
+[00:05:15] stock that I looked at it on my phone
+[00:05:16] and I was like well it's a 39 million
+[00:05:18] share float but it is up 63% let's take
+[00:05:21] a look and I quickly saw that it's a
+[00:05:23] buyout so the stock has been acquired by
+[00:05:25] another company it's going to trade
+[00:05:27] sideways its value has been determined
+[00:05:29] so that's out of play the next one down
+[00:05:32] was kit kit TT and kit has pulled back a
+[00:05:36] good bit here so it's not still at the
+[00:05:38] top of the scan but um but when I sat
+[00:05:41] down at about 7even Kit had made this
+[00:05:42] move pre-market it had pulled back and
+[00:05:45] then it's coming back up right here and
+[00:05:47] this was actually the stock I took my
+[00:05:49] first trade on so what I did on kit if
+[00:05:52] we pull this um back down to the one
+[00:05:54] minute chart I'll show you my first
+[00:05:56] trade of the day here because this was
+[00:05:58] also a break of vwap
+[00:06:00] setup so kit squeezes up here from 430
+[00:06:04] up to 5:30 that is front side of the
+[00:06:07] move that's when it was the cleanest
+[00:06:09] then it pulls back to vwap breaks vwap
+[00:06:12] comes back up sells off back to vwap
+[00:06:15] Fades off it then comes back up right
+[00:06:17] here and so as it broke back over vwap
+[00:06:20] right here we then sort of pull back and
+[00:06:23] retest it as you can see I got in right
+[00:06:26] there and I bought my first trade on
+[00:06:29] this one was let's
+[00:06:32] see um I bought at
+[00:06:34] 305 so we broke over three we held
+[00:06:38] support at three and I was like okay
+[00:06:40] here we go so I'm adding at 305 I add at
+[00:06:43] 310 and 311 and then you know what ends
+[00:06:45] up happening if we zoom in on this chart
+[00:06:47] you'll see that it hits a high here of
+[00:06:50] 314 and then it stalls out it drops back
+[00:06:54] down and it breaks three and I stopped
+[00:06:56] out first trade of the day a $600 loss
+[00:07:00] here's my p&l for the day by the way
+[00:07:02] $668 111 that was my first trade of the
+[00:07:05] day in the red all right so that's not
+[00:07:07] great but it's still early so not too
+[00:07:10] bad still lots of time to recover and of
+[00:07:13] course I did so it pulls back here to
+[00:07:15] about 290 it then comes back up but I
+[00:07:18] was like you know what this stock is I
+[00:07:21] don't think it's trustworthy it's too
+[00:07:23] choppy it's too thickly traded and I'm
+[00:07:25] glad I avoided it it pops up and then it
+[00:07:27] flushes again even more dramatically on
+[00:07:29] higher volume so at that point I was
+[00:07:31] like all right this was a break of vwap
+[00:07:34] setup and what I wanted to see happen is
+[00:07:37] that once we held over vwap I wanted to
+[00:07:40] see that we started squeezing back to
+[00:07:42] the pre-market High that's the Target
+[00:07:45] and my stop is if we go back below vwap
+[00:07:47] and I mooved the stop a little bit
+[00:07:49] tighter right at $3 because I thought if
+[00:07:50] we break below the whole dollar of
+[00:07:52] psychological support that's not going
+[00:07:53] to be good either so I kept a tight stop
+[00:07:55] on it but it just was not able to move
+[00:07:58] higher now
+[00:08:00] one challenge with the break of vwap
+[00:08:02] setup is that it inherently requires the
+[00:08:05] stock to have gone below vwap right so
+[00:08:10] here we're above vwap and then we come
+[00:08:12] down to it which isn't great and then we
+[00:08:13] break vwap that's bad then we sell off
+[00:08:16] even more that's not good now we do
+[00:08:18] sometimes see these breaks and this big
+[00:08:20] squeeze back up but the reason that
+[00:08:23] happens that you get the big squeeze is
+[00:08:25] because shorts usually get confident
+[00:08:28] when a stock is holding below vwap
+[00:08:30] they're holding it below vwap they're
+[00:08:32] selling against this level they're
+[00:08:33] looking for the fade and so they don't
+[00:08:35] expect it to rip back up this has
+[00:08:37] already shown early weakness and during
+[00:08:40] a time that it really shouldn't have
+[00:08:41] weakness also note the floats 1.3
+[00:08:43] million shares kit currently has let's
+[00:08:47] see 22 million shares of volume it's up
+[00:08:50] 22% so you know it it really shouldn't
+[00:08:54] have been so difficult to trade but it
+[00:08:57] was there was a headline out um I don't
+[00:09:00] know if it was a super significant
+[00:09:01] headline but there was some news out on
+[00:09:03] it um it's not a Chinese uh company you
+[00:09:06] know it's just something kind of pay
+[00:09:07] attention to so you know it's a robotics
+[00:09:11] developer ocean robots but also Cloud
+[00:09:14] software they make candy bars too this
+[00:09:16] company does everything um Services
+[00:09:18] delivered in uh modern business model to
+[00:09:22] the ocean industry okay so anyways um
+[00:09:26] you know so we had this headline but it
+[00:09:29] just didn't feel like um it it was Mo it
+[00:09:32] just wasn't moving cleanly it was just
+[00:09:33] too difficult to trade so pretty much
+[00:09:37] after that trade I was like kit is dead
+[00:09:41] to me this stock is not one that I'm
+[00:09:44] going to look at for the rest of the day
+[00:09:45] it's it's over this it's just two week
+[00:09:48] and so rather than overtrading it and
+[00:09:52] struggling to try to recoup my 600 I
+[00:09:54] just said you know what I'm not going to
+[00:09:56] throw good money after bad I'm going to
+[00:09:58] just cut my loss on kit move on to
+[00:10:00] something else so the second stock that
+[00:10:04] I had on watch on my side chart was
+[00:10:08] mg and mg I had seen they had made this
+[00:10:11] big move yesterday the only thing is it
+[00:10:14] wasn't gapping up a lot because if we
+[00:10:16] look at yesterday's close uh we closed
+[00:10:19] at about 380 and pre-market right in
+[00:10:23] this area we're at like 440 so we're
+[00:10:25] only up like 10% it's not a big gapper
+[00:10:28] so because it's not a big gap or I
+[00:10:30] didn't really notice it initially uh but
+[00:10:33] then you know I I did see it so I see of
+[00:10:35] course it's got this big move and right
+[00:10:37] here as it comes up I'm like okay break
+[00:10:41] a vwap setup and I thought this one as I
+[00:10:44] saw it squeezing up had more potential
+[00:10:47] to me and here's the reason number one
+[00:10:50] the price is a little higher than kit
+[00:10:53] which is good because um a lot of these
+[00:10:55] stocks will trade in you know they'll
+[00:10:57] kind of move in like 10 10% kind of
+[00:11:00] blocks like sort of jumps 10% then it
+[00:11:03] pulls back then another 10% 10% on a $5
+[00:11:06] stock is0 50 10% on a $2 stock is you
+[00:11:09] know 203 cents so um excuse me so for
+[00:11:13] that reason I thought it had potential
+[00:11:14] for a bigger cents per share move and I
+[00:11:18] knew I was still going to be taking the
+[00:11:19] same share size uh so as it starts to
+[00:11:23] pop up right here I jumped in right on
+[00:11:25] that micro pullback for the break of
+[00:11:27] vwap and it was like just perfect timing
+[00:11:29] jump in it breaks vwap squee and this is
+[00:11:32] also right at 7:00
+[00:11:33] a.m. 7:00 a.m. top of the hour this is
+[00:11:36] when a lot of retail Traders come online
+[00:11:38] so all of a sudden it's popping up I'm
+[00:11:39] adding and I'm riding this momentum it
+[00:11:42] goes from uh vwap here which was right
+[00:11:44] around 470 and it goes all the way up to
+[00:11:47] five it pulls back it goes up to 520 530
+[00:11:49] 540 another pull back up to 550 560
+[00:11:53] flushes back up
+[00:11:55] flushes struggles here and then it drops
+[00:11:58] this end ended up being the high of that
+[00:12:00] little area 560 now if I back this up
+[00:12:04] for one second I'll just draw on this um
+[00:12:07] chart so first of all we had um we sort
+[00:12:12] of had this level like right in here
+[00:12:15] right and we get we did kind of come
+[00:12:16] right into it around five and I was a
+[00:12:18] little worried about that and then we
+[00:12:20] also had the next level oops um sorry so
+[00:12:25] then the next level was I'll have to
+[00:12:28] remove this but
+[00:12:29] it's up here a little
+[00:12:32] higher it was right around here right so
+[00:12:34] I was like okay we're over it but we're
+[00:12:36] under it you know we're kind of
+[00:12:37] struggling right at this level it wasn't
+[00:12:39] super
+[00:12:40] clean so because we had this first
+[00:12:43] resistance level I was like I better
+[00:12:45] take profit so it took some profit and
+[00:12:47] then it holds that level and I'm like
+[00:12:48] okay I'm going to add back and it
+[00:12:50] squeezes up here and then it pulls back
+[00:12:52] and I'm like I don't know is this going
+[00:12:53] to work but we did get first pullback
+[00:12:55] and second pullback and I think the
+[00:12:57] reason this worked better in some ways
+[00:12:59] was because it had made this really big
+[00:13:02] move yesterday which now kind of proved
+[00:13:04] to us that this is a stock that has the
+[00:13:07] potential to squeeze this thing can go
+[00:13:10] up 100% in you know 20 30 minutes so
+[00:13:16] even though there wasn't a fresh
+[00:13:17] Catalyst driving the move I felt like it
+[00:13:20] was worth taking a stab especially at
+[00:13:21] that vwap spot because that's a spot
+[00:13:24] where momentum shifts from the Bears to
+[00:13:26] the Bulls right from bearish to bullish
+[00:13:29] again this did have some inherent
+[00:13:31] weakness the fact that it had dropped
+[00:13:33] after hours or not after hours in the
+[00:13:35] afternoon yesterday and then pre-market
+[00:13:38] was back below vwap
+[00:13:40] but uh even in spite of that I kind of
+[00:13:43] was looking at this and thinking you
+[00:13:44] know we sort of have some you know
+[00:13:45] support sort of right in this area and
+[00:13:48] depending on how you draw these lines it
+[00:13:50] feels like there could be some support
+[00:13:52] in here so for that reason I was
+[00:13:54] thinking it it's worth a stab and so I
+[00:13:57] took my first trade on that got in the
+[00:13:59] green right away on the first trade took
+[00:14:01] second trade third trade as it moves
+[00:14:03] higher but then notice how we got into
+[00:14:05] this area here of kind of struggling
+[00:14:07] we're right in between support at this
+[00:14:11] previous resistance line so we broke it
+[00:14:14] we're above it we come back down we test
+[00:14:16] it as support then we come back up and
+[00:14:17] we're at resistance we pull back and
+[00:14:19] then we pop through here and I did take
+[00:14:22] that trade but with small size and the
+[00:14:24] reason I took it with small size was
+[00:14:25] because I actually gave back a little
+[00:14:27] profit right in this area in this area I
+[00:14:30] thought we were going to push all the
+[00:14:31] way up to six and then we flushed so I
+[00:14:34] lost a little bit there and I tried it
+[00:14:36] again right here and I lost again so
+[00:14:39] when it came back up a third time I was
+[00:14:40] like I don't know and then all of a
+[00:14:41] sudden it's like boom 580 so I was like
+[00:14:44] gosh darn it all right well I'm buying
+[00:14:45] the dip here and we got that trade up to
+[00:14:47] about
+[00:14:48] 610 and I thought when it held over six
+[00:14:51] this is my concern 200 moving average so
+[00:14:53] I check the daily and I'm like our 200
+[00:14:55] is right here at six bucks can we break
+[00:14:58] this level critical resistance level and
+[00:15:00] I thought if if there's ever a chance
+[00:15:02] that we would break it it would be right
+[00:15:05] now with this kind of volume right
+[00:15:07] pre-market volume squeezing up so it was
+[00:15:09] worth a try but it wasn't able to hold
+[00:15:13] over
+[00:15:14] six so then it sells off a bit and I was
+[00:15:18] kind of like man this is this is tricky
+[00:15:20] this thing is not easy and right here it
+[00:15:23] does a jack knife so it pops up and jams
+[00:15:26] back down and then bare Flags low
+[00:15:29] and now I'm like all right this thing is
+[00:15:31] not trustworthy in the first 2 minutes
+[00:15:34] of the open it dips to 540 it rips to
+[00:15:38] 620 and that's right back down to 530
+[00:15:41] 540 so I was like you know what man this
+[00:15:43] thing is wild I just can't trust it as
+[00:15:48] we came up towards 10: a.m. 10:30 it
+[00:15:50] tries to break vwap and flushes back
+[00:15:53] down another rejection and right now you
+[00:15:55] can see it's back up above vwap and in
+[00:15:58] some ways you know we're not that far
+[00:16:00] off from breaking this pre-market high
+[00:16:03] so if we do our technical analysis right
+[00:16:05] now we're going to Mark out the the high
+[00:16:08] well you should Mark the high
+[00:16:11] but we can mark this pivot here now
+[00:16:16] sorry back to full screen
+[00:16:19] um descending resistance clearly we this
+[00:16:22] steep level we broke above that so we're
+[00:16:24] obviously above that level
+[00:16:27] um I don't don't know if that's a valid
+[00:16:31] level I don't usually love Crossing
+[00:16:33] price action like I have to cross it
+[00:16:35] here to connect these two dots but since
+[00:16:38] it popped but didn't hold that level it
+[00:16:40] might be valid we popped we were below
+[00:16:42] it I feel like that might be valid so
+[00:16:45] right now we're getting above it and
+[00:16:46] we're kind of we've got ascending
+[00:16:47] support potentially in here we've got a
+[00:16:50] pivot right here at 581 which we tap
+[00:16:53] that was the high of this candle here
+[00:16:55] and if we get above 581 then we're
+[00:16:57] looking at a move to 623
+[00:16:59] the only thing I would say is that this
+[00:17:01] is a stock that at this point has
+[00:17:04] already shown us it has a um it it it
+[00:17:08] has a desire to to break your heart it's
+[00:17:12] already given us this trap right here
+[00:17:15] that caused a big flush had this uh bull
+[00:17:18] trap right here that jack knife and of
+[00:17:21] course the one at the open so is this
+[00:17:23] going to be one that gives you an
+[00:17:25] afternoon kind of you know fireworks
+[00:17:28] display and goes goes
+[00:17:30] crazy it's possible it is
+[00:17:34] possible it it the fact that it's
+[00:17:36] holding vwap is good you could almost
+[00:17:38] visualize this as a head and shoulders
+[00:17:40] inverted which would lead towards the
+[00:17:43] move up the issue for me is that as I
+[00:17:46] look at this type of pattern I feel like
+[00:17:48] I don't have the risk tolerance to trade
+[00:17:50] it if I pull up a bookmap here you'll
+[00:17:54] see a 20,000 share seller at 6 another
+[00:17:56] one at 590 now you could see those
+[00:17:58] orders on your level two if you have
+[00:18:00] your level two open um far enough and
+[00:18:02] you and you could scroll down and see
+[00:18:04] them but this is also good displayed up
+[00:18:06] here so you've got 40,000 shares of sell
+[00:18:08] orders at 590 and6 and there's another
+[00:18:12] 12,000 shares there at 580 now at the
+[00:18:14] end of the day 60,000 shares of sell
+[00:18:16] orders compared to 43 million shares of
+[00:18:18] volume could probably get absorbed
+[00:18:20] fairly easily those orders have been
+[00:18:23] there pretty much all day if we break
+[00:18:26] that level then it seems like we do have
+[00:18:28] more room
+[00:18:29] up but I'm just a
+[00:18:32] little I mean honestly just for me at
+[00:18:34] this
+[00:18:35] point uh trading is is not this is kind
+[00:18:40] of going to sound counterintuitive but
+[00:18:42] it's not as much about
+[00:18:44] making money as it is about being
+[00:18:47] defensive and managing your risk you
+[00:18:49] have to manage your risk that has to be
+[00:18:51] the first thing you're thinking so if I
+[00:18:54] look at this right now and I'm thinking
+[00:18:55] from the perspective of just making
+[00:18:57] money I'm going to buy 10,000 shares
+[00:18:59] right here and look for the squeeze
+[00:19:01] through six and a possible halt up right
+[00:19:04] but if I'm thinking about this from the
+[00:19:06] perspective of risk risk first what I'm
+[00:19:09] going to say is this stock previous
+[00:19:12] price action has shown pops and drops
+[00:19:16] right now we're seeing up on the level
+[00:19:18] two we've got that seller up at 90 which
+[00:19:20] I just
+[00:19:21] saw the seller's now at see a 26,000
+[00:19:24] share seller at 80 that just came in
+[00:19:26] that's a new seller that just came up
+[00:19:29] so it's
+[00:19:31] heavy and you know just like that with
+[00:19:34] 10,000 shares I could be down 10 cents
+[00:19:38] and if I have to hit the bid I might get
+[00:19:39] a couple cents of slippage and I'm hey
+[00:19:42] back to break even on the day nice work
+[00:19:43] it's 1 in the afternoon and now I'm
+[00:19:46] going to feel like I don't want to walk
+[00:19:48] away
+[00:19:49] here Break Even after being sitting in
+[00:19:52] the green all morning so maybe I'll you
+[00:19:55] know what maybe I'll get back in and
+[00:19:57] then next thing you know I'm back in and
+[00:19:59] I get caught again now I'm down a th000
+[00:20:01] and all of a sudden things start to fall
+[00:20:04] apart and they can fall apart really
+[00:20:06] quickly so you know I it's not look if
+[00:20:10] you're an adult you guys can do as you'd
+[00:20:13] like if you like this setup if you have
+[00:20:14] the risk tolerance to trade it depending
+[00:20:16] on how much you're up today you know you
+[00:20:18] do as you'd like but for me the way I
+[00:20:20] look at it is how confident am I that
+[00:20:25] this is going to give me the move I'm
+[00:20:26] looking for and my confidence goes down
+[00:20:30] when I see these types of rejection
+[00:20:31] candles here and here and to be honest
+[00:20:34] my confidence is lower period trading in
+[00:20:37] the afternoon because that's not the
+[00:20:39] time of day I typically do well you know
+[00:20:42] that I know that about myself that's
+[00:20:43] just those are my metrics so it's you
+[00:20:46] know it it comes from um my cautiousness
+[00:20:51] on this comes from I think a a good a
+[00:20:54] good healthy place so if we look at
+[00:20:57] detailed and I mean this is going to be
+[00:20:59] all time but you know we look at um you
+[00:21:02] know days of the week and you can see
+[00:21:04] it's like I consistently screw up
+[00:21:06] trading in the
+[00:21:07] afternoon I do well trading in the
+[00:21:09] morning stocks that have breaking news
+[00:21:11] and the stocks have breaking news that
+[00:21:13] are really really strong are just super
+[00:21:16] strong in the morning and then in the
+[00:21:18] afternoon sometimes you'll have ones
+[00:21:20] that are holding up and if you've got a
+[00:21:22] cushion and the Market's really hot we
+[00:21:24] might get some parabolic momentum and
+[00:21:26] things get exciting but that's not has
+[00:21:28] common so what's more common is that any
+[00:21:31] afternoon things get choppy you get
+[00:21:34] faked out you jump in then you jump out
+[00:21:36] then you jump in and jump out you start
+[00:21:37] churning shares and getting yourself
+[00:21:39] frustrated next thing you know you've
+[00:21:41] given back your profit from the morning
+[00:21:43] and because you had that profit for a
+[00:21:45] few hours you grew somewhat attached to
+[00:21:47] it because you kept thinking oh good
+[00:21:49] I've had a nice day I've had a nice day
+[00:21:51] I I've been thinking for the last 5
+[00:21:54] hours that I've had a nice day well 4
+[00:21:56] Hour whatever it is doesn't matter you
+[00:21:57] know for the last several hours I've
+[00:21:59] been sitting here thinking I've had a
+[00:22:00] pretty nice day you know 7 a.m. made
+[00:22:02] some money
+[00:22:03] 7:38 and so to lose all of that in kind
+[00:22:07] of a moment
+[00:22:09] of you know just a maybe impulsive trade
+[00:22:12] where you got carried away and you know
+[00:22:15] next thing you know you've made a
+[00:22:16] mistake I just don't think that's worth
+[00:22:19] it so that's that's what I'm risking I'm
+[00:22:22] not risking just the money it's not just
+[00:22:24] the money it's risking the loss of
+[00:22:27] confidence it's it's risking the track
+[00:22:30] record you know it's risking that state
+[00:22:32] of mind that keeps me so healthy every
+[00:22:35] single day where I can come in trade
+[00:22:37] aggressively and do really well all of
+[00:22:40] that is is a lot more valuable than the
+[00:22:43] money because when you lose your
+[00:22:45] confidence then that carries over into
+[00:22:47] the next day right and and now you have
+[00:22:50] the opportunity cost of because you
+[00:22:53] weren't as confident now the next good
+[00:22:55] stock that pops up on Monday you're
+[00:22:58] going to be able hesitant on because you
+[00:22:59] just had a red day on Friday because you
+[00:23:01] did something stupid in the
+[00:23:03] afternoon and that's one of the things
+[00:23:05] that can be really frustrating with
+[00:23:06] trading
+[00:23:08] so to me being defensive means sort of
+[00:23:13] carefully um keeping myself in a state
+[00:23:17] where I'm always like very close to the
+[00:23:20] top of my game or always able to be like
+[00:23:23] almost right at the top of my game where
+[00:23:24] I can just be performing at like 100%
+[00:23:28] And I just knowe for myself that when
+[00:23:30] I'm in the middle of a deep draw down
+[00:23:32] you know and I haven't fortunately this
+[00:23:34] year I've done a pretty good job uh
+[00:23:37] keeping my draw Downs
+[00:23:40] minimal but I did have I I did have a
+[00:23:43] bigger red day in March
+[00:23:45] um let's see or maybe it was February
+[00:23:49] anyways it doesn't matter but I did have
+[00:23:50] a bigger red day you know the earlier
+[00:23:52] part of the year and and that took a you
+[00:23:55] know that took a second to recover from
+[00:23:56] and I was pretty disappointed about it
+[00:23:59] but you know since then that that also
+[00:24:04] kind of became a catalyst for a little
+[00:24:05] bit of tightening up my risk because I
+[00:24:08] was disappointed with myself that I had
+[00:24:10] made that mistake um you know I look I
+[00:24:13] can tell you a million times manage your
+[00:24:15] risk trading a Sim you know set your
+[00:24:17] stops don't bagle don't just you know
+[00:24:20] hope it'll go back up but ultimately
+[00:24:24] sometimes we have to make those mistakes
+[00:24:25] ourselves to feel that pain and it's
+[00:24:27] that pain
+[00:24:29] that becomes sort of the motivator to
+[00:24:31] not do that again uh and so I had some
+[00:24:35] pain earlier this year on um and I could
+[00:24:39] just go through let's see I'll just do a
+[00:24:41] custom range from January to March so
+[00:24:46] you could see when that draw down was
+[00:24:48] now I can't remember but I I thought it
+[00:24:50] was in the beginning of March
+[00:24:53] um so apply this all right so then we'll
+[00:24:57] click 90 days yeah there it is so these
+[00:25:00] were two back-to-back red days this is a
+[00:25:02] $119,000 red day that was the biggest
+[00:25:04] red day that I'd had in over a year was
+[00:25:08] not happy about that uh so you know that
+[00:25:12] was that happened on um March looks like
+[00:25:17] 11th and 12th I had two back-to-back red
+[00:25:19] days and you know so it took some time
+[00:25:21] to recover from that now if we go
+[00:25:22] forward here we go from March
+[00:25:25] to um May because I think we can only
+[00:25:29] show three months here in this little
+[00:25:31] view you'll see that I had the $30,000
+[00:25:35] loss and then it took me some time to
+[00:25:37] kind of get back and then finally
+[00:25:39] recovered with a nice hot streak here
+[00:25:42] couple big green days $20,000 day and
+[00:25:44] then I had two more red days 2,000 and
+[00:25:47] 6,000 not as bad tolerable oh and
+[00:25:50] another one right here this must have
+[00:25:51] been like 10,000 another one right here
+[00:25:54] so you know had a couple little draw
+[00:25:55] downs but was able to uh rally back up
+[00:25:59] and it's actually interesting cuz this
+[00:26:01] and this almost look the same so the
+[00:26:04] recovery the drop back up and then
+[00:26:06] pushing higher recovery sorry drop sort
+[00:26:09] of back up like that I think it's very
+[00:26:12] common so you know for where I'm at
+[00:26:15] right now I feel like it's really
+[00:26:18] important um for my trading that I keep
+[00:26:21] myself in a state where I'm kind of
+[00:26:22] always ready to step up to the plate um
+[00:26:25] and I'm not in a big emotional draw down
+[00:26:28] it makes me a better Trader it also
+[00:26:31] makes me a better teacher better
+[00:26:33] educator better Mentor for you guys I
+[00:26:34] try to lead by example as much as I can
+[00:26:37] so this is something that I'm thinking
+[00:26:39] about a lot and it might seem at times
+[00:26:42] like I'm under trading uh but I think
+[00:26:45] one of the things that gets a lot of
+[00:26:46] beginner Traders into trouble is
+[00:26:47] overtrading and learning to trade a
+[00:26:50] little bit less and take your profits
+[00:26:53] and not overstay your welcome is an
+[00:26:56] important skill and it's something that
+[00:26:58] takes takes time it's easy to punch
+[00:27:00] those buy and sell buttons especially
+[00:27:02] when it's commission free trading but
+[00:27:04] you know eventually I think you'll learn
+[00:27:06] that you may be better off with just a
+[00:27:09] few trades each day so let's see so I
+[00:27:11] had one trade on kit that was a loser
+[00:27:13] and then I had I guess I don't know how
+[00:27:15] many trades I took on mg uh I probably
+[00:27:18] took let's see looks like I've got
+[00:27:21] one 2 3 4 5 6 7 8 9 10 11 12
+[00:27:33] 13
+[00:27:35] 14 15
+[00:27:38] 16 17 18 looks like 17 or 18 trades on
+[00:27:42] it um you know and and so I traded it a
+[00:27:45] lot for all that I as much as I traded
+[00:27:47] it I did make as much as I feel like I
+[00:27:50] should have which was also part of my
+[00:27:52] reasoning for saying you know what this
+[00:27:54] is just not feeling like it's happening
+[00:27:58] and I got to kind of go with my gut
+[00:28:00] because when something is hot I I mean I
+[00:28:02] I'm dialed in and I know it I don't have
+[00:28:04] to second guess it I I know what's going
+[00:28:06] on but today was a day where it just
+[00:28:09] felt you know not quite strong enough so
+[00:28:11] you know that break of vwap setup um
+[00:28:14] especially pre-market can be really
+[00:28:16] powerful as short sellers kind of get
+[00:28:18] caught off guard and all of a sudden you
+[00:28:20] get that swing back up um you know got
+[00:28:23] it right here too this is the first one
+[00:28:24] I traded but because of the inherent
+[00:28:27] weak weakness you have to be careful and
+[00:28:30] usually it's that first swing that's the
+[00:28:32] strongest and that's where we want to
+[00:28:34] just see it like not let up we just want
+[00:28:36] to see it keep going so once it sort of
+[00:28:38] lets up the first time it's kind of like
+[00:28:42] now I
+[00:28:44] think the the element of surprise is
+[00:28:47] kind of gone shorts are going to be a
+[00:28:48] little bit more like oh this one's a
+[00:28:49] little tricky and Longs are going to be
+[00:28:51] thinking the same because it keeps going
+[00:28:52] above and below vwap so you sort of get
+[00:28:54] one shot at a nice break of vwap and we
+[00:28:57] got one on it today but it wasn't
+[00:29:00] perfect um I see rgc is halted right now
+[00:29:03] this one's a Chinese stock um very light
+[00:29:06] volume thinly
+[00:29:08] traded the problem with this is that um
+[00:29:11] although you you can certainly look at
+[00:29:13] it on the daily chart and think this is
+[00:29:16] interesting over 12 right it's got room
+[00:29:18] up to 13 14 maybe higher what's going to
+[00:29:21] send it to that level what's the
+[00:29:24] Catalyst what's the news I got nothing
+[00:29:28] right so purely technical well does it
+[00:29:31] have high short interest I sort of doubt
+[00:29:33] it I mean you could check but I sort of
+[00:29:35] doubt it so you know
+[00:29:39] unfortunately it's um it's hard to trust
+[00:29:44] and let's look at the volume
+[00:29:46] rgc yeah so you got 162,000 shares of
+[00:29:49] volume now if this had breaking news
+[00:29:52] that'd be different breaking news would
+[00:29:54] be like okay we've got a reason for this
+[00:29:56] thing to be going up right now but
+[00:29:58] without the breaking news it's hard to
+[00:29:59] trust um let's see so let me just
+[00:30:04] check
+[00:30:06] um so I could check on ortex just to see
+[00:30:08] what the short interest is but I I don't
+[00:30:12] I don't know I mean some of these
+[00:30:13] Chinese stocks can get heavily shorted
+[00:30:16] so it's not impossible it's a little
+[00:30:20] higher but no it's it's showing very
+[00:30:24] low
+[00:30:26] so looks like short interest
+[00:30:28] really it could just be that there's not
+[00:30:30] a lot of shares available to
+[00:30:35] short the cost to borrow is high the
+[00:30:38] utilization is
+[00:30:43] 64% zpp this is one that I think has
+[00:30:46] higher short
+[00:30:52] interest see but you know this one had a
+[00:30:55] move but now it's kind of come back down
+[00:30:58] a
+[00:30:59] bit go here let's see
+[00:31:05] screening to give you a list of stocks
+[00:31:07] with high short so abio is still on
+[00:31:10] there um that one right now has the
+[00:31:12] highest um short
+[00:31:14] score and but it's been on there for a
+[00:31:17] couple weeks and um you know the stock
+[00:31:21] hasn't really done much um in fact they
+[00:31:26] even have some headline today today but
+[00:31:28] you know it's just nothing's really
+[00:31:30] happening with
+[00:31:32] it rgc resuming
+[00:31:36] there so you can see that spread 25 cent
+[00:31:39] spread right now 26 Cents that tightens
+[00:31:42] up and then oh my gosh back to 1172 oh
+[00:31:45] now you've got 70 Cent spread that's
+[00:31:47] when things get scary
+[00:31:49] right just can't nothing you can do
+[00:31:52] really about that it's just not it's
+[00:31:54] just not
+[00:31:54] tradable so you know I think this is
+[00:31:57] kind of where we're at right now um for
+[00:31:59] those of you guys that are new I want to
+[00:32:01] sort of reiterate a couple things this
+[00:32:03] is a time of year when hey if we get a
+[00:32:06] couple wild card stocks and we get a
+[00:32:08] couple big moves you want to try to take
+[00:32:10] some of that profit lock it up and put
+[00:32:13] it aside to me trading is so much about
+[00:32:17] like preparing for a rainy day you know
+[00:32:19] take your profit be disciplined about
+[00:32:22] paying yourself put that profit aside
+[00:32:25] and then just remember that there's
+[00:32:27] going be a stretch maybe it's this week
+[00:32:29] maybe it's next week whatever where
+[00:32:30] things are going to get slow and you're
+[00:32:32] going to need that early profit to tide
+[00:32:34] you over so you feel like the wind is at
+[00:32:36] your back you feel like you're in the
+[00:32:38] driver's seat you don't need to get
+[00:32:39] desperate and I think that means um for
+[00:32:42] a lot of Traders it's always great if
+[00:32:45] you could trade in a retirement account
+[00:32:46] because that is taxfree you don't have
+[00:32:48] to be taking profit out for taxes you
+[00:32:50] could just be sort of chipping away
+[00:32:51] adding a little adding a little adding a
+[00:32:53] little and you want to avoid spending
+[00:32:56] too much of your profit if if you can
+[00:32:58] especially early on I've seen a lot of
+[00:33:00] Traders make this mistake where they'll
+[00:33:02] start making money they'll spend it as
+[00:33:05] soon as it comes in they're then come up
+[00:33:08] on a stretch where things get slow and
+[00:33:11] their account is going below you know
+[00:33:13] the PDT level or going below the minimum
+[00:33:16] of whatever their uh broker is and I
+[00:33:19] think that trading from that State of
+[00:33:21] Mind of being really tight
+[00:33:23] financially uh will
+[00:33:26] encourage poor Trad
+[00:33:28] habits and behaviors where you get
+[00:33:30] desperate you start focusing just on the
+[00:33:32] money you're not focusing on following
+[00:33:34] the process because the when the process
+[00:33:36] doesn't work it can be easy to just
+[00:33:37] abandon it but there are going to be
+[00:33:40] times where you follow the process like
+[00:33:42] I did every day this week and you know
+[00:33:45] you come up a little short and I don't
+[00:33:48] actually I don't have my total of where
+[00:33:49] I'm at um right now in the week but I'll
+[00:33:51] I'll log in and check so let's
+[00:33:54] see um I got to export my trades we have
+[00:33:57] my Trad R viiew report so we're going to
+[00:34:00] do
+[00:34:01] August um that's fine so we'll see where
+[00:34:05] I'm at for the month of August so far
+[00:34:08] not including yesterday so I've got to
+[00:34:10] got to grab those trades and import
+[00:34:13] them light speed
+[00:34:17] um is a little annoying because you have
+[00:34:19] to wait till the next day to import your
+[00:34:21] trades so I can't import um today's
+[00:34:26] trades until tomorrow
+[00:34:28] it's kind of annoying but anyways it's
+[00:34:30] fine so let's see so that's getting
+[00:34:33] ready so we'll go to
+[00:34:35] detailed so sitting at
+[00:34:38] 15,9 59 but that doesn't include the
+[00:34:42] last two days so let me just import
+[00:34:44] these trades here I just downloaded them
+[00:34:46] so I'm going to go import you always got
+[00:34:48] to tag your account make sure you tag it
+[00:34:50] with the right um tag that you want to
+[00:34:53] use for me I tag it as a IRA account
+[00:34:58] it's a retirement individual retirement
+[00:34:59] account import those trades refresh it
+[00:35:03] it'll refresh a couple times it get all
+[00:35:06] those trades in there and let's see
+[00:35:08] refresh one more
+[00:35:11] time one more time
+[00:35:13] maybe oh no is that where I finished
+[00:35:15] yesterday yeah maybe that
+[00:35:17] is yeah yesterday was a really small
+[00:35:19] green day uh that was yeah so anyways I
+[00:35:23] guess it didn't make that much of a
+[00:35:25] difference but okay so 16,000
+[00:35:28] 400 profit loss ratio not great so far
+[00:35:32] negative a couple of bigger losers golly
+[00:35:36] which loss was that
+[00:35:41] $7500 now
+[00:35:45] sometimes
+[00:35:47] bblg
+[00:35:49] see see I this I find this a little
+[00:35:51] annoying cuz this is grouping trades
+[00:35:54] together this is grouping that looks
+[00:35:56] like a trade that looks like a trade
+[00:35:57] that looks like a trade so it's grouped
+[00:36:00] together like four
+[00:36:01] trades um that's I find it annoying when
+[00:36:05] it does that I don't know why it'll do
+[00:36:07] that sometimes uh but if I see
+[00:36:10] that then let's see um you can do a
+[00:36:15] manual split to split up a
+[00:36:19] trade the only thing that's hard is
+[00:36:22] you've got to know where to split it
+[00:36:26] um so I'm not going to worry about it
+[00:36:29] right now it doesn't really matter but
+[00:36:31] anyways that's a little annoying cuz
+[00:36:32] that's going to sort of negatively
+[00:36:36] affect my um it's going to show as a big
+[00:36:40] Lo one big loser when it's not really
+[00:36:42] but you can see here 7even minute
+[00:36:43] average winners 16 minute average losers
+[00:36:46] that's because it's grouping all those
+[00:36:47] trades together wonder why it's doing
+[00:36:50] that I don't know I'll have to I'll have
+[00:36:52] to see if I can figure that out but
+[00:36:54] anyways doesn't doesn't matter that much
+[00:36:57] um that's where I'm at so far on the
+[00:36:59] month so if we look at the month in um
+[00:37:02] calendar
+[00:37:04] view excuse
+[00:37:06] me uh we're still at the very beginning
+[00:37:08] of August right so this is going to be a
+[00:37:11] $10,000 week when you add in uh today's
+[00:37:14] profit so that's good $110,000 week last
+[00:37:16] week was 77,000 but only a two-day week
+[00:37:19] for August so we still have three full
+[00:37:22] weeks for the for the rest of the month
+[00:37:24] right three full weeks so it's it's just
+[00:37:27] about hitting those base hits staying
+[00:37:30] grounded and being comfortable with
+[00:37:33] there might be some no trade days there
+[00:37:34] might be some days where there's nothing
+[00:37:35] that looks good and then the next day we
+[00:37:38] have a stock that goes up 200% 300% and
+[00:37:42] so I'm going to just be quick to ease
+[00:37:44] off the gas slow down and then put the
+[00:37:46] pedal right back to the metal and the
+[00:37:48] whole time try to keep myself where my
+[00:37:51] account is more or less near at all-time
+[00:37:56] highs so not in a deep draw down so
+[00:37:59] that's kind of what I'm thinking for
+[00:38:00] right now um and so again for those of
+[00:38:02] you guys that are new it's a good time
+[00:38:04] to be
+[00:38:05] studying don't expect to see
+[00:38:08] back-to-back home runs in August that's
+[00:38:10] not typically what we get but it's a
+[00:38:12] good time to study and I always say if
+[00:38:14] you can make it during a slow Market
+[00:38:15] that's going to set a really strong
+[00:38:17] foundation for when things pick back up
+[00:38:20] all right so make sure you study get
+[00:38:22] yourself ready and I would say um at
+[00:38:24] this point I'll do my game plan for the
+[00:38:27] week ahead on Sunday I'll upload that
+[00:38:29] probably Sunday morning somewhere around
+[00:38:31] Sunday morning so I'll look at how
+[00:38:34] everything finished today I'll go
+[00:38:36] through the stocks that I like the most
+[00:38:38] I'll see if I can put together a watch
+[00:38:39] list for Monday and a little bit of a
+[00:38:41] game plan for the week ahead and um and
+[00:38:44] then I also have an upload that I'll
+[00:38:47] publish on Saturday on YouTube so you
+[00:38:50] guys um make sure you are subscribed to
+[00:38:52] the channel so you get the notification
+[00:38:54] when those uploads go live and I want to
+[00:38:56] thank you as always for tuning in so
+[00:38:58] I'll remind you please take it slow
+[00:39:00] manage your risk don't overstay your
+[00:39:02] welcome practice in a Sim before you put
+[00:39:03] real money on the line and I'll see you
+[00:39:05] guys back here bright and early on
+[00:39:07] Monday morning okay see you Monday

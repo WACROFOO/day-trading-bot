@@ -1,0 +1,1400 @@
+# Day Trading & Taxes (Step by Step Guide)
+# https://www.youtube.com/watch?v=N6UK6XX9FH4
+# duration_sec: 3278
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to share
+[00:00:02] with you the Tax Strategies the top 1% a
+[00:00:05] day Traders are using to pay zero
+[00:00:07] capital gains taxes on their trading
+[00:00:10] profits I have implemented some of these
+[00:00:12] strategies in my own trading and I have
+[00:00:14] personally saved millions of dollars in
+[00:00:17] unnecessary tax payments as you may know
+[00:00:20] my name is Ross Cameron I'm a full-time
+[00:00:21] Trader and I funded my first account in
+[00:00:23] 2001 more than 20 years ago in 2017 I
+[00:00:28] challenged Myself by funding a tiny
+[00:00:30] account with
+[00:00:32] $583 15 I have since grown that account
+[00:00:35] to over $10 million in fully verified
+[00:00:39] and independently audited trading
+[00:00:41] profits so $10 million of profit in the
+[00:00:44] United States with federal income tax
+[00:00:46] and state income tax could be at least
+[00:00:51] 40% tax that's $4 million of tax gone
+[00:00:55] but I didn't pay that $4 million of tax
+[00:00:57] because I implemented some of the
+[00:00:59] strategies I'm going to share with you
+[00:01:00] today now it doesn't matter if you've
+[00:01:02] made $10 million of trading you're
+[00:01:04] making a million you're making $100,000
+[00:01:05] doesn't matter if you're making $10,000
+[00:01:07] trading some of these strategies you can
+[00:01:09] Implement today in your own trading but
+[00:01:12] they don't work retroactively they work
+[00:01:14] starting today and moving forward so
+[00:01:17] let's go ahead and jump into this class
+[00:01:20] I've got a lot to cover this is some
+[00:01:21] really important stuff so I'm going to
+[00:01:23] go full screen on this slide deck most
+[00:01:26] traders overpay in tax due to the
+[00:01:29] following reason reasons number one
+[00:01:31] paying short-term capital gains tax on
+[00:01:34] all their trading profits short-term
+[00:01:37] capital gains here in the United States
+[00:01:38] are taxed at your ordinary income level
+[00:01:41] your for your income bracket you don't
+[00:01:43] get the lower tax rate of long-term
+[00:01:46] capital gains when you're day trading so
+[00:01:48] your tax basically almost as if it's
+[00:01:52] regular income now if you were going to
+[00:01:54] compare and we'll jump on the Whiteboard
+[00:01:56] here $100,000 of profit from day trading
+[00:02:00] versus $100,000 of profit as a W2 you're
+[00:02:04] going to have more tax on the W2 because
+[00:02:07] of the employment taxes you're not going
+[00:02:09] to have any of those employment taxes
+[00:02:11] related to the 100K you may day trading
+[00:02:13] so it is you're going to pay less tax
+[00:02:15] making $100,000 day trading than 100,000
+[00:02:18] on W2 but most Traders are going to
+[00:02:20] overpay because all of that income is
+[00:02:23] going to be taxed as short-term capital
+[00:02:25] gains and there's other ways to
+[00:02:27] categorize that income and utilize
+[00:02:29] deductions to reduce your total taxable
+[00:02:31] income number two most Traders overpay
+[00:02:35] by facing higher income due to wash
+[00:02:39] sales that are disallowed in this
+[00:02:41] episode we're going to talk about what
+[00:02:42] that means but if you've gotten a$ 1099
+[00:02:44] already from one of your Brokers you may
+[00:02:46] see a little item that says wash sales
+[00:02:49] disallowed and a dollar amount so let's
+[00:02:51] say for instance you have $100,000 of
+[00:02:54] trading profits and then it says you've
+[00:02:56] got
+[00:02:57] $155,000 of wash sales disallowed you're
+[00:03:01] actually going to have
+[00:03:03] $115,000 of taxable income and what's
+[00:03:06] really ridiculous about this is that you
+[00:03:09] didn't make
+[00:03:11] $115,000 but this $ 15,000 those were
+[00:03:14] losses that you're not allowed to write
+[00:03:18] off against income it's this is kind of
+[00:03:21] a it's a rule in the tax code that dates
+[00:03:24] back to when people used to sell a
+[00:03:27] position in December and then buy back
+[00:03:30] basically the same position in January
+[00:03:32] and they did that so they could lock up
+[00:03:35] a a loss essentially so they would take
+[00:03:37] a loss by selling a position for a loss
+[00:03:39] and then just buy it back the next day
+[00:03:41] you know January 1st and the problem
+[00:03:43] with that was the IRS said well wait a
+[00:03:44] second you know they've bought back a
+[00:03:46] substantially similar position within 30
+[00:03:48] days we're not going to allow them to
+[00:03:50] write off that initial loss you can't do
+[00:03:52] that if you buy it back that's why you
+[00:03:53] don't get your $199 until February you
+[00:03:56] don't get it on January 1st because they
+[00:03:58] have to wait to see if you bought back a
+[00:04:00] substantially similar position so the
+[00:04:03] problem here for day Traders is that we
+[00:04:05] might trade the same stock 100 times in
+[00:04:08] one day and then all of a sudden we're
+[00:04:10] being told by our broker and the IRS
+[00:04:12] that we can't write off the losses let's
+[00:04:15] say I had a day where I made $10,000 but
+[00:04:18] I had 20,000 in profit and 10,000 in
+[00:04:20] losses so if I can't write off the
+[00:04:22] 10,000 in losses do I pay income tax on
+[00:04:25] $20,000 in profit and in theory that can
+[00:04:29] happen now this is something that is can
+[00:04:32] be avoided and I'll share with you the
+[00:04:33] strategy to avoid these wash sales
+[00:04:36] number three most Traders overpay tax
+[00:04:38] because they're limited to writing off
+[00:04:40] only $3,000 of losses against income so
+[00:04:44] let's say you're a beginner Trader you
+[00:04:45] jump into the market real money head
+[00:04:47] first in the deep end and you lose
+[00:04:50] $50,000 that's terrible it's not fun but
+[00:04:52] it's happened a lot of Traders I took
+[00:04:54] big losses when I was getting started
+[00:04:56] too but if you have big losses and youve
+[00:05:00] set yourself up correctly you can deduct
+[00:05:02] them against other income but most
+[00:05:06] Traders are going to only be able to
+[00:05:08] deduct $3,000 against other income so
+[00:05:10] let's do this scenario again let's say
+[00:05:12] for instance that you didn't make
+[00:05:13] $100,000 let's say let's say you lost
+[00:05:16] $100,000 and then you've also got wash
+[00:05:18] sales disallowed so it's actually going
+[00:05:20] to say you lost
+[00:05:21] $85,000 so you lost more but it's not
+[00:05:24] letting you write off as much as you
+[00:05:25] actually lost but anyways you're down
+[00:05:28] 85,000 but let's say you had
+[00:05:30] $200,000 of income from you know rentals
+[00:05:34] or W2 or long-term gains or whatever the
+[00:05:36] case is well that's nice what would be
+[00:05:40] awesome is that if you could have your
+[00:05:41] net income be down at 115 Grand right
+[00:05:45] 200 minus 85 but because you're only
+[00:05:48] allowed to write off
+[00:05:50] $3,000 of the 85 that you lost your
+[00:05:53] adjusted income is
+[00:05:55] 197,000 so you're paying tax on this
+[00:05:57] larger amount even though you lost money
+[00:05:59] that's a drag it's not fun to lose money
+[00:06:01] but if you can at least get a tax
+[00:06:03] benefit on it that makes sense now to
+[00:06:05] make matters worse let's imagine that
+[00:06:08] you spent you know $5,000 on the cost of
+[00:06:13] Education software you know computers uh
+[00:06:18] you know extra couple monitors things
+[00:06:20] like that well you know it' be nice to
+[00:06:23] offset that against the income as well
+[00:06:25] but most Traders don't know how to do it
+[00:06:27] and they're not going to do it and
+[00:06:29] therefore they're going to pay more in
+[00:06:30] tax they're overpaying versus what they
+[00:06:32] need to number four most Traders are
+[00:06:36] going to overpay in tax because they're
+[00:06:37] not going to use some of the profits to
+[00:06:40] contribute to retirement accounts even
+[00:06:42] though and and let me just say the
+[00:06:44] strategies that I'm going to share with
+[00:06:45] you today not only are they legal they
+[00:06:48] are encouraged these are strategies that
+[00:06:50] are available to encourage and help
+[00:06:52] Americans save money for retirement or
+[00:06:55] in some cases build a small business or
+[00:06:57] in other cases well get into all the
+[00:07:00] details but nonetheless these are
+[00:07:01] strategies that are not only legal they
+[00:07:03] are encouraged and so if you're not
+[00:07:05] taking advantage of them you're just
+[00:07:07] leaving money on the table and in fact
+[00:07:08] you're spending money that is totally
+[00:07:10] unnecessary in taxes number five most
+[00:07:14] Traders are unable to write off the
+[00:07:15] expenses related to trading and I know
+[00:07:17] it's easy to kind of disregard maybe how
+[00:07:20] much you're spending but you're
+[00:07:21] subscribing to scanners you go to a
+[00:07:24] seminar you pay for a course like well
+[00:07:26] we have at Warrior trading you have your
+[00:07:29] computer all this stuff all of that adds
+[00:07:31] up now at the end of the year if you
+[00:07:33] added all that up and it's a couple
+[00:07:34] thousand doar why wouldn't you deduct
+[00:07:37] that as expenses that was necessary and
+[00:07:40] reasonable in order to generate the
+[00:07:42] profit that you generated that's what
+[00:07:44] every other small business would do but
+[00:07:46] Traders often neglect to do it so this
+[00:07:49] is what where we've got to get a little
+[00:07:50] bit smarter so now I want to talk about
+[00:07:52] this is a concept of what's more
+[00:07:54] important being more profitable or being
+[00:07:57] more tax efficient
+[00:08:00] it's kind of a funny question because
+[00:08:02] when you think about it right now
+[00:08:04] because in my account I pay zero capital
+[00:08:07] gains taxes on my trading profits if I
+[00:08:10] make a million dollar I'm walking away
+[00:08:12] with a million dollar of profit at the
+[00:08:14] end of the year another Trader would
+[00:08:16] have to earn you know 1.5 million 1.6
+[00:08:19] million depending on what state they
+[00:08:20] lived in to net the same amount at the
+[00:08:23] end of the year that means I can make
+[00:08:25] less and actually walk away with more so
+[00:08:28] while it's always a good goal to make
+[00:08:30] more money to be more profitable and to
+[00:08:32] be more consistent it also makes a lot
+[00:08:34] of sense to do everything you can to be
+[00:08:37] more tax efficient because if you're
+[00:08:39] more tax efficient then well you you
+[00:08:41] have more money in your pocket at the
+[00:08:42] end of the year so 200 a day if it's
+[00:08:44] actually 200 a day that's $52,000 a year
+[00:08:47] right if it's 200 a day but then I'm not
+[00:08:50] doing any of these Tax Strategies your
+[00:08:53] net your take home's going to be less so
+[00:08:55] let's get smarter about how we're
+[00:08:56] managing our taxes and we've got a plan
+[00:08:59] ahead so for some of you who are
+[00:09:00] watching this video you might think
+[00:09:02] shoot I wish I had done this sooner I
+[00:09:04] wish I had done a lot of the strategies
+[00:09:06] I'm going to share with you sooner as
+[00:09:07] well it's better late than never so
+[00:09:09] don't lose hope because you can always
+[00:09:11] uh Implement these strategies today and
+[00:09:12] then they help you moving forward so how
+[00:09:16] would you like to pay zero capital gains
+[00:09:19] taxes on all your trading profits there
+[00:09:22] are two ways that you can do it I'm
+[00:09:24] using one of them now when I so and I'll
+[00:09:27] also let me just say that when I started
+[00:09:29] making good money trading I hired a
+[00:09:31] really good CPA so I've got I had a
+[00:09:33] couple different CPAs but I hired a
+[00:09:35] really good one this is a big New York
+[00:09:37] City Law Firm big CPA and they looked
+[00:09:40] over all my income and everything else
+[00:09:41] and they said they started asking me
+[00:09:42] questions like Ross this is crazy why
+[00:09:44] aren't you doing this why aren you doing
+[00:09:45] this why aren't you doing this now when
+[00:09:47] I previously had sort of a small town
+[00:09:49] local CPA he didn't ask any of those
+[00:09:52] questions he I mean you know they just I
+[00:09:55] don't think they think at that level
+[00:09:56] they're just like oh here's the 1099
+[00:09:58] punch it punch it punch it all right
+[00:09:59] boom here's the amount due next client
+[00:10:03] so I heard this expression at one point
+[00:10:05] that a good accountant is worth their
+[00:10:07] weight in gold and you know I don't know
+[00:10:10] how much my accountant weighs but based
+[00:10:12] on the current price of gold and the
+[00:10:14] millions of dollars that he's saved me
+[00:10:17] in unnecessary tax payments by
+[00:10:19] implementing some of these strategies
+[00:10:21] I'd wager he might actually be worth his
+[00:10:23] weight and gold so there are two
+[00:10:25] techniques that that work to pay zero
+[00:10:28] capital gains tax and so so the first
+[00:10:29] one was my accountant said Ross um let's
+[00:10:32] get real for a second you're paying a
+[00:10:33] lot of tax this is kind of crazy we got
+[00:10:36] to figure out a way to to to be more
+[00:10:38] efficient how do you feel about moving
+[00:10:40] to Puerto Rico and I said well wait a
+[00:10:43] second moving to Puerto Rico you know my
+[00:10:46] wife my my her family's all here my
+[00:10:50] family's here um gosh he said you know I
+[00:10:54] understand your family's here think
+[00:10:55] about how you could pay for their plane
+[00:10:58] tickets to come see you with the tax
+[00:10:59] you're saving I said huh well that is a
+[00:11:01] good point so I actually went to Puerto
+[00:11:03] Rico I went to Puerto Rico to check it
+[00:11:04] out tax strategy number one is act 60 in
+[00:11:08] Puerto Rico act 60 is a um is a is a
+[00:11:12] regulation in Puerto Rico that is an
+[00:11:14] incentive to encourage uh us residents
+[00:11:18] that live in the continental US well I
+[00:11:20] guess any United State um to move to
+[00:11:23] Puerto Rico and if you move to Puerto
+[00:11:26] Rico you will have zero capital gain G
+[00:11:29] taxes now there's a little bit of
+[00:11:32] controversy around this because this is
+[00:11:34] not something that Puerto Rican born and
+[00:11:36] raised residents are eligible to take
+[00:11:38] advantage of this is only for people
+[00:11:40] that move to Puerto Rico it's a
+[00:11:42] incentive designed to attract people to
+[00:11:44] move to Puerto Rico and help boost up
+[00:11:46] the economy there and it has it has been
+[00:11:49] effective but you know it also for some
+[00:11:51] people feels a bit unfair nonetheless
+[00:11:54] this is basically your number one
+[00:11:57] strategy because if you move to Puerto
+[00:12:00] Rico you have to live there for 6 months
+[00:12:02] and one day each year and if you do that
+[00:12:05] your gains are 100% exempt you have zero
+[00:12:08] capital gains taxes and now you know you
+[00:12:11] can't just fake it you've got to
+[00:12:13] actually be there for six months and the
+[00:12:14] IRS does residency audits because if
+[00:12:17] you're really not there you're only
+[00:12:19] there on appearances then that's not
+[00:12:20] going to fly anyone in the United States
+[00:12:22] can move to PTO Rico and you're not
+[00:12:24] giving up your US citizenship by the way
+[00:12:27] because Puerto Rico is part of the
+[00:12:28] United States so it's not really that
+[00:12:31] different than moving to a different
+[00:12:32] state within the US you're still US
+[00:12:34] citizen you are just now a Puerto Rican
+[00:12:37] resident like a New York resident or a
+[00:12:38] Florida resident except you get all the
+[00:12:40] tax benefits so you know if but if
+[00:12:43] you're in a position where you would
+[00:12:44] consider moving um it's an option so if
+[00:12:48] we Dorado Beach is where a lot of these
+[00:12:51] you know mega mega wealthy people live
+[00:12:55] and I think Jake Paul the guy who just
+[00:12:58] was fighting Mike Tyson he he's in
+[00:12:59] Dorado Beach and so Dorado Beach on
+[00:13:03] their website has all this information
+[00:13:04] about act 60 d d and let's just look at
+[00:13:07] the prices of homes at Dorado Beach you
+[00:13:09] want to see how much they are this one's
+[00:13:12] 42 million bucks 41 million 4 million 40
+[00:13:16] million 35 35 this is kind of insane
+[00:13:20] it's crazy how ex I mean these are like
+[00:13:23] Miami
+[00:13:25] prices but the thing is there's enough
+[00:13:27] people out there this is a three-bedroom
+[00:13:29] three bath for 10 million it's a it's
+[00:13:31] like a condo um
+[00:13:34] so what I'm saying here is that there's
+[00:13:37] a real high demand for this these types
+[00:13:41] of properties among people who are very
+[00:13:43] very wealthy and the people that are
+[00:13:44] very wealthy that moov to Puerto Rico
+[00:13:46] they want to be in these kind of gated
+[00:13:48] communities they're insulated they have
+[00:13:49] a lot of security they're super safe da
+[00:13:51] da da and so Dorado Beach is one of the
+[00:13:54] ones that's really popular this is the
+[00:13:56] um is it the the Four Seasons at Dorado
+[00:13:58] Beach I think it's the reserve Four
+[00:14:00] Seasons Reserve um anyways doesn't
+[00:14:02] matter so um so that's your first
+[00:14:05] strategy so if you're interested in
+[00:14:06] moving to Puerto Rico then uh you know
+[00:14:09] go take a trip there I took a trip there
+[00:14:11] you know I had no complaints really but
+[00:14:14] it's just not uh realistic for me to
+[00:14:16] move to Puerto Rico right now so uh tax
+[00:14:18] strategy number two and this is the
+[00:14:20] strategy that I've implemented day
+[00:14:22] trading in a Roth IRA so if Puerto Rico
+[00:14:26] is not going to work you can consider
+[00:14:27] day trading in a Roth IRA if you trade
+[00:14:29] in a Roth IRA all of the trading profits
+[00:14:32] and the distributions are 100% taxfree
+[00:14:36] the only hitch and there's a hitch with
+[00:14:38] the first strategy which is that you
+[00:14:40] have to move to Puerto Rico the hitch
+[00:14:41] with this strategy is that you have to
+[00:14:43] wait till you're 59 and a half years old
+[00:14:46] to take those distributions out so that
+[00:14:48] is a little bit of a it's a little bit
+[00:14:50] of a bummer if you're on the younger
+[00:14:52] side but all of the profit that you're
+[00:14:54] making in that Roth IRA you're giving
+[00:14:57] yourself as a huge gift for the future
+[00:14:59] and here's the way I kind of thought
+[00:15:00] about it if I take money out of the Roth
+[00:15:03] IRA I will pay income tax on it and I
+[00:15:06] will pay a penalty so you pay a penalty
+[00:15:08] for doing an early uh distribution but
+[00:15:11] what I thought was right now when I'm
+[00:15:13] making millions of dollars trading my
+[00:15:16] I'm in the top income bracket now this
+[00:15:19] is going to sound like kind of a very
+[00:15:22] silly problem but I think it's sort of
+[00:15:25] interesting that I'm in the top bracket
+[00:15:28] that I'd be in the same bracket as
+[00:15:29] someone like Elon Musk I feel like there
+[00:15:31] should be a little bit more a little bit
+[00:15:33] more in between here because it doesn't
+[00:15:36] feel quite equal that making like two or
+[00:15:39] three million a year is going to put you
+[00:15:41] at the same level as someone who's
+[00:15:42] making 500 million or a billion or more
+[00:15:45] anyways I digress nonetheless I figured
+[00:15:48] that because right now I'm at a higher
+[00:15:51] tax bracket I don't want to pay income
+[00:15:54] tax on this profit so I'd rather trade
+[00:15:56] in the Roth IRA but if in the future
+[00:15:59] trading slowed down or for whatever
+[00:16:01] reason you know I wasn't working I
+[00:16:03] became retired at an early age then I
+[00:16:05] would say you know I could take profit
+[00:16:07] out of that Roth IRA and yes I'll pay
+[00:16:10] tax on it but my income bracket will be
+[00:16:12] lower so that's the thing they don't tax
+[00:16:15] you at the bracket that you were at when
+[00:16:17] you made the money they tax you at the
+[00:16:19] bracket you're at when you take the
+[00:16:20] distribution when you do the withdrawal
+[00:16:22] so if I wait until I'm at a lower
+[00:16:25] bracket to do a withdrawal that would be
+[00:16:27] fine if I wait till 59 and half years
+[00:16:28] old then I'll have zero income tax and I
+[00:16:31] won't have a penalty so perfect world
+[00:16:33] would be waiting until 592 years old to
+[00:16:36] take a distribution but the next best
+[00:16:39] thing would be waiting until you're in a
+[00:16:41] lower income bracket setting up a Roth
+[00:16:44] IRA all right this is how you do it so
+[00:16:46] there's a couple things you need to know
+[00:16:48] if you want to set up a Roth IRA the
+[00:16:50] first issue is that there's a Max annual
+[00:16:53] contribution limit of
+[00:16:55] $7,000 that's current currently what
+[00:16:57] it's at $7,000 it that changes each year
+[00:17:00] every couple years it goes up a little
+[00:17:01] bit with cost of living inflation but
+[00:17:04] right now the most you can contribute is
+[00:17:06] $7,000 so it'll take you a couple of
+[00:17:09] years to contribute enough in order for
+[00:17:12] the account to be maybe big enough that
+[00:17:14] you can day trade in it because you
+[00:17:16] would still be subject to the
+[00:17:18] $25,000 PDT rule which is kind of a
+[00:17:21] bummer but it is what it is now there's
+[00:17:24] another issue with setting up a Roth IRA
+[00:17:26] there's two types of IAS there's a
+[00:17:28] traditional IRA and then there's the
+[00:17:31] Roth IRA so what's the difference
+[00:17:34] between these two uh Roth IRA with a
+[00:17:37] Roth IRA your um your the growth is
+[00:17:42] tax-free so no income tax on the growth
+[00:17:45] and no income tax on the
+[00:17:48] distributions however your
+[00:17:50] contributions are post tax so let's say
+[00:17:56] you make $100,000
+[00:17:59] you have $100,000 of income if you
+[00:18:01] contribute with a traditional IRA and
+[00:18:04] you do
+[00:18:05] $7,000 it that amount actually comes off
+[00:18:08] your tax so the government is
+[00:18:09] encouraging you to make this
+[00:18:11] contribution so your taxable income goes
+[00:18:13] down to 93,000 but that's not true with
+[00:18:15] a Roth IRA with a Roth IRA you you earn
+[00:18:18] 100K you pay income tax on it and it's
+[00:18:21] from your net after tax your your
+[00:18:23] take-home pay that you make your
+[00:18:25] contribution so the idea here is that
+[00:18:28] with a Roth IRA you pay tax on your
+[00:18:32] initial contribution but you don't have
+[00:18:35] any income tax on the growth or the
+[00:18:38] distributions whereas um on a
+[00:18:41] traditional IRA you actually have no tax
+[00:18:44] here you have no tax on the growth but
+[00:18:48] you do have tax on the distributions so
+[00:18:52] this is kind of a problem because let's
+[00:18:53] say you make initially you know
+[00:18:57] $70,000 in contributions over the course
+[00:19:00] of 10 years let's just say and let's
+[00:19:02] just say over the course of 30 years
+[00:19:03] this grows to like
+[00:19:05] $300,000 now you've got $300,000 and
+[00:19:08] every time you take a distribution
+[00:19:10] you're paying income tax on it it's kind
+[00:19:12] of a bummer but you did get the tax
+[00:19:13] benefit at the beginning of paying less
+[00:19:16] income tax on your salary because it
+[00:19:18] came off of your gross income so this is
+[00:19:24] this idea is tax the seed not the tree
+[00:19:27] so here we pay a tax on the seed the
+[00:19:29] contribution and then everything it
+[00:19:30] produces is taxfree here you have no tax
+[00:19:34] on the seed but then you have taxes on
+[00:19:36] all the distributions so this works a
+[00:19:38] little bit better for the government and
+[00:19:40] I think the reason that the Roth IRA was
+[00:19:42] created was because it's a better option
+[00:19:44] for people who don't make as much money
+[00:19:47] that's why they created the income
+[00:19:49] limits however they allow what's called
+[00:19:53] a backdoor conversion it's literally
+[00:19:56] called a backdoor conversion and it
+[00:19:58] allows you to create and contribute to a
+[00:20:01] traditional Roth IRA which is what I did
+[00:20:04] and then at any time you can convert a
+[00:20:07] traditional IRA to a Roth IRA you do a
+[00:20:10] conversion so what happens when you do
+[00:20:12] that conversion let's say you have
+[00:20:14] $10,000 in the traditional Roth in the
+[00:20:16] traditional IRA and you want to convert
+[00:20:18] it to a Roth you would pay income tax on
+[00:20:21] $110,000 so for that year your taxable
+[00:20:24] gain would be whatever you made plus
+[00:20:27] 10,000
+[00:20:29] which is related to the conversion so
+[00:20:31] you'd pay income tax on the sort of
+[00:20:33] initial contribution of that conversion
+[00:20:35] and then you're in the Roth and you have
+[00:20:37] no tax after that so if you can do
+[00:20:40] direct contribution to a Roth that's
+[00:20:42] ideal if you have to do the backdoor
+[00:20:44] conversion you can do the backd door
+[00:20:45] conversion there's a button on um in
+[00:20:47] Charles Schwab where you click on your
+[00:20:50] traditional IRA you click back do a
+[00:20:52] backdoor conversion and then they just
+[00:20:54] pull up the thing and it says you want
+[00:20:55] to convert this and then you pay the tax
+[00:20:58] it says this is how much you'll owe at
+[00:21:00] the end of the year and then you do it
+[00:21:02] and it's done so it's super easy now as
+[00:21:05] I already mentioned if you want to day
+[00:21:08] trade in a Roth IRA you are still
+[00:21:11] subject to the PDT rule so the pattern
+[00:21:14] day trader rule which states you need
+[00:21:16] $25,000 higher or more cash in the
+[00:21:19] account in order to day trade um but
+[00:21:22] what's also interesting is that some so
+[00:21:26] there's also a couple other things that
+[00:21:27] that are important to know with the Ira
+[00:21:29] so number one is you need the $25,000
+[00:21:32] PDT rule number two there's no
+[00:21:36] leverage number three no
+[00:21:40] shorting and I'll tell you why if you
+[00:21:43] short a stock let's say you short a
+[00:21:45] stock at 10 and it goes all the way to
+[00:21:47] $1,000 a share that would be pretty
+[00:21:49] crazy but if that happened you would
+[00:21:51] have a margin call what's a margin call
+[00:21:53] a margin call is when you have to add
+[00:21:56] more money into your account because
+[00:21:58] because you lost more than the balance
+[00:22:00] of your account but we already have a
+[00:22:03] $7,000 contribution Max each year so
+[00:22:06] you're prohibited from adding more money
+[00:22:08] to the account so since you wouldn't be
+[00:22:11] able to meet the margin call the rule is
+[00:22:14] that you're not allowed to short any
+[00:22:16] stocks because you can't put yourself in
+[00:22:18] a position where you could lose more
+[00:22:21] than what is in your account so there's
+[00:22:23] no shorting and there's no leverage so
+[00:22:25] you can't trade on four times leverage
+[00:22:27] in a retirement account because again if
+[00:22:29] you took that big loss you'd have a
+[00:22:31] margin call but some Brokers like Weeble
+[00:22:35] allow you to trade in a IRA account but
+[00:22:39] it's treated as a cash account so that
+[00:22:41] means if you have $25,000 you could
+[00:22:43] trade you know 10 times in that day a
+[00:22:46] $2,500 position but then when you run
+[00:22:48] out of cash you can't take any more
+[00:22:50] trades till the next day but other
+[00:22:52] Brokers allow what's called settlement
+[00:22:55] margin settlement margin means you can
+[00:22:57] day trade as much as you want so you
+[00:23:00] take a trade you close it it settles
+[00:23:02] basically instantly you take another
+[00:23:04] instant instant instant so you can dat
+[00:23:06] trade as much as you want but you don't
+[00:23:08] get leverage so it's like Mo usually
+[00:23:10] margin when you get margin you also get
+[00:23:12] four times leverage and in the Roth IRA
+[00:23:14] or a traditional IRA you get margin but
+[00:23:17] you don't get leverage so you can day
+[00:23:19] trade as much as you want but with no
+[00:23:20] leverage so that's that's okay with me
+[00:23:22] um and there's these three Brokers allow
+[00:23:25] day trading in a Roth IRA or individual
+[00:23:28] um traditional IRA and they offer
+[00:23:31] settlement margin so light speed trading
+[00:23:34] Charles Schwab and interactive brokers
+[00:23:35] there may be others I'll say that I
+[00:23:37] personally don't like interactive
+[00:23:38] brokers at all that's not a broker that
+[00:23:40] I like Charles Schwab don't love them
+[00:23:43] but I know a lot of Traders use them I
+[00:23:44] have an account there too light speed
+[00:23:46] that's the account that I use every day
+[00:23:48] it makes no difference to me what broker
+[00:23:49] you sign up with I don't have any
+[00:23:50] affiliate relationships with any of them
+[00:23:52] I've used all three this was my worst
+[00:23:55] experience I I just had problems
+[00:23:57] constantly uh sometimes I couldn't sell
+[00:23:59] positions they would flag it and not let
+[00:24:01] you sell so they have rules on trading
+[00:24:04] stocks I think it's under $5 where
+[00:24:07] they'll block you from being able to
+[00:24:08] sell if your Shares are more than the
+[00:24:13] average volume of that stock over a set
+[00:24:15] period of time and the problem is what
+[00:24:17] we know about a lot of small cap stocks
+[00:24:19] and I'll just give you an example of one
+[00:24:21] from uh just the other day so this stock
+[00:24:24] here just as an example traded on 68
+[00:24:27] million shares of volume uh or no 75
+[00:24:30] million shares of volume yesterday and
+[00:24:32] then you know 2 days before that or 3
+[00:24:34] days before that it traded on like
+[00:24:36] 30,000 shares so the average daily
+[00:24:38] volume of this stock over this stretch
+[00:24:41] was like 10,000 20,000 shares a day so
+[00:24:44] if you trade to 10,000 shares you would
+[00:24:45] have been 100% of the daily volume based
+[00:24:48] on the daily average which is these past
+[00:24:50] like 30 days uh and so they would say
+[00:24:53] you can't sell your position without
+[00:24:55] first compliance doing a review so then
+[00:24:57] your account is kind of Frozen and then
+[00:25:00] they let it through it's very strange so
+[00:25:01] anyways um so that's something that um
+[00:25:05] interactive brokers is the only broker I
+[00:25:06] know of that does that but in any case
+[00:25:08] so I wouldn't use them if you're trading
+[00:25:10] small caps but if you're trading large
+[00:25:11] caps it doesn't matter Tri Schwab and
+[00:25:13] light speed are both fine for small caps
+[00:25:16] so setting up a Roth IRA fairly
+[00:25:18] straightforward you make your
+[00:25:19] contribution and the way I did it is I
+[00:25:22] did three years of contributions so one
+[00:25:25] of the things that's kind of interesting
+[00:25:26] is at any time you can do two years of
+[00:25:28] contribution so like right now you can
+[00:25:31] contribute for this year and you can
+[00:25:33] contribute for next year and then in
+[00:25:36] April you'll be able to contribute for
+[00:25:38] the following year so you can always do
+[00:25:41] basically two years to catch up at the
+[00:25:43] same time and then you'd have to wait a
+[00:25:45] year to do the third year so that's kind
+[00:25:48] of the way I did it and that gave me uh
+[00:25:51] $188,000 so I had
+[00:25:53] $118,000 in contributions and I then
+[00:25:56] grew that account so what is now let's
+[00:25:59] see I've got um about a million right
+[00:26:02] now in my active account and then I have
+[00:26:04] about 7 million that I put away into a
+[00:26:06] long-term Roth IRA so about $8 million
+[00:26:09] zero income tax that's huge and that's
+[00:26:12] all back from that $583 small account
+[00:26:14] challenge so of all that profit I paid
+[00:26:17] tax on the first couple years of trading
+[00:26:20] profit before I knew about these
+[00:26:21] strategies and then I set up the Roth
+[00:26:23] IRA and I've been trading in that ever
+[00:26:25] since so you know one of the things that
+[00:26:28] I think is pretty amazing is that you
+[00:26:30] can show up and work every single day
+[00:26:32] trading in the market and all of that
+[00:26:34] profit you make can go right into a
+[00:26:36] retirement account if you were doing
+[00:26:38] anything else you can't do that if you
+[00:26:40] doing real estate investing I mean and I
+[00:26:43] mean you could buy real real estate in a
+[00:26:46] retirement account but it takes a lot of
+[00:26:48] money you you to to get it to the level
+[00:26:50] where you can make that deposit there's
+[00:26:51] nothing really that you could do to grow
+[00:26:54] a retirement account from 500 to you
+[00:26:57] know 10,000 or 20 ,000 in as short of a
+[00:27:00] period of time as a successful Trader
+[00:27:02] could but of course that hinges on your
+[00:27:03] ability to trade profitably so first
+[00:27:06] things first focus on your strategy but
+[00:27:08] once you've got the strategy dialed in
+[00:27:09] setting up a Roth IRA makes a ton of
+[00:27:12] sense all right so strategies number one
+[00:27:15] and number two will completely eliminate
+[00:27:20] any capital gains tax you move to Puerto
+[00:27:22] Rico or you set up a Roth IRA you'll
+[00:27:24] have zero capital gains tax so now let's
+[00:27:27] talk about strategy number three
+[00:27:29] strategy number three is going to be
+[00:27:31] probably more um more popular for a lot
+[00:27:34] of you guys who are saying well Ross I
+[00:27:36] can't move to Puerto Rico and setting up
+[00:27:38] a Roth IRA is nice but I need the money
+[00:27:40] that I'm making from Trading to pay my
+[00:27:42] bills today so strategy number three
+[00:27:47] Trader tax status and Mark tomarket MTM
+[00:27:50] accounting this allows you to maximize
+[00:27:53] your deductions and it allows wash sales
+[00:27:57] so rather than wash sales being
+[00:27:58] disallowed and therefore sort of
+[00:28:00] artificially increasing your taxable
+[00:28:02] gain your wash sales are are allowed you
+[00:28:05] essentially you don't have to deal with
+[00:28:07] wash sales anymore so how does this work
+[00:28:10] well we have in the in the federal tax
+[00:28:13] code um a Trader tax status this is
+[00:28:18] topic um section 429 Traders and
+[00:28:21] securities and what they say is that if
+[00:28:24] you are an if you are an eligible Trader
+[00:28:27] and I'll tell you what that looks like
+[00:28:29] then you can be cons you get a special
+[00:28:33] there's special rules that apply to you
+[00:28:35] and the trader tax status means that you
+[00:28:38] can now deduct reasonable and necessary
+[00:28:42] expenses related to producing that
+[00:28:45] trading profit and that is a big deal
+[00:28:47] because when you produce um capital
+[00:28:50] gains and when you're just trading and
+[00:28:52] you're getting a1099 from your broker if
+[00:28:54] you are not considered uh to have Trader
+[00:28:58] tax status then you can't write off any
+[00:29:00] of the expenses related to producing
+[00:29:03] that profit so when you have Trader tax
+[00:29:05] status you can now deduct all of the
+[00:29:08] reasonable and necessary expenses
+[00:29:10] related to producing that profit so that
+[00:29:12] could include your education cost so you
+[00:29:14] become a warrior Pro member you
+[00:29:15] subscribe to go to seminars you do
+[00:29:17] something else your software costs you
+[00:29:19] use scanners you use charts you use news
+[00:29:22] feed you've got a computer equipment I
+[00:29:24] mean let's start getting real here so
+[00:29:26] Education costs I mean I mean look they
+[00:29:29] can vary I've heard of places that
+[00:29:30] charge $30,000 for trading education but
+[00:29:33] let's just say you know
+[00:29:35] $3,000 so $3,000 for trading education
+[00:29:38] and then let's say software costs are
+[00:29:41] you know your scanners 197 per month so
+[00:29:44] times 12 so now you got $2,400 on the
+[00:29:47] year for scanners let's say you also
+[00:29:50] decide to subscribe to you know I don't
+[00:29:52] know um one of these news Services it's
+[00:29:54] $50 a month that's $600 a year let's say
+[00:29:57] you also add had um level two data from
+[00:29:59] your broker that's $100 a month so
+[00:30:01] that's $1,200 a year so now all of a
+[00:30:03] sudden you're totaling this out and
+[00:30:05] you're like oh my gosh so I've got three
+[00:30:07] I've got six s
+[00:30:09] $7,200 in in expenses that's just on on
+[00:30:13] that well what about you know your
+[00:30:14] computer you buy a $1,500 computer so
+[00:30:17] now you got $1,500 here on the computer
+[00:30:20] you get a couple extra monitors that's
+[00:30:22] 400 bucks all right so now you're coming
+[00:30:24] up to what is this um
+[00:30:26] 8700 um let's see 9100 $99,100 so I mean
+[00:30:31] it's not a crazy amount of money but if
+[00:30:34] you were in any other line of work if
+[00:30:36] you are a plumber if you're a carpenter
+[00:30:38] you would be itemizing every single one
+[00:30:40] of those items that you purchased that
+[00:30:43] are necessary and reasonable for
+[00:30:45] conducting your business and you would
+[00:30:46] deduct them against your total income
+[00:30:49] that's what any other business owner
+[00:30:51] would do trading is a business you have
+[00:30:54] to treat it as such and that's where you
+[00:30:55] become tax efficient you start thinking
+[00:30:57] about this and realizing well wait a
+[00:30:59] second what about my internet now for me
+[00:31:01] I have the house that I have I there is
+[00:31:04] actually s of two properties on one two
+[00:31:06] houses on one so there's the house and
+[00:31:08] then this is my office my office is
+[00:31:10] separate from the house so all of the
+[00:31:12] expenses related to maintaining this
+[00:31:15] office that's deduction that these are
+[00:31:17] my office expenses so I've got my heat
+[00:31:19] over here I've got my electric over here
+[00:31:21] now if you have one meter you've got to
+[00:31:23] separate it with sort of square footage
+[00:31:25] and stuff like that if you've got two
+[00:31:26] meters and that makes it super easyy
+[00:31:28] easy so you know you got to kind of work
+[00:31:29] with your individual situation maybe you
+[00:31:31] have a a a guest bedroom and that's your
+[00:31:34] office now some people will do the
+[00:31:36] standardized home office deduction based
+[00:31:38] on um the the maximum allowed dollar per
+[00:31:42] square foot other people will create a
+[00:31:44] rental agreement where you essentially
+[00:31:47] are you create a business that's renting
+[00:31:50] space from you personally doesn't matter
+[00:31:53] how you do it you should always talk
+[00:31:54] with a CPA in case you didn't know I'm a
+[00:31:57] day trader I'm not a CPA I'm sharing
+[00:31:59] things with you that I've learned over
+[00:32:00] the years but you should always consult
+[00:32:03] with a CPA they're worth their weight in
+[00:32:05] gold so it's it's definitely worth your
+[00:32:06] time nonetheless you've got all these
+[00:32:08] deductions that you can come up with
+[00:32:10] you've got your internet provider office
+[00:32:12] Rental Professional fees accounting fees
+[00:32:14] you've got to hire a different
+[00:32:15] accountant to you know review your
+[00:32:17] trades but you should get a better
+[00:32:19] accountant than what you might have just
+[00:32:20] used otherwise and so all of this adds
+[00:32:23] up so you know let's say right now we're
+[00:32:25] at 9,000 but we didn't add the
+[00:32:27] accounting fees the internet provider so
+[00:32:29] let's just let's just say
+[00:32:30] $122,000 a year just for the sake of you
+[00:32:33] know keeping the numbers round now some
+[00:32:35] of these um you may have to capitalize
+[00:32:38] you know your furniture your desk stuff
+[00:32:40] like that but nonetheless you have an
+[00:32:42] account and they can kind of review it
+[00:32:43] for you and so now you've got $112,000
+[00:32:46] in expenses so let's say you made
+[00:32:49] $100,000 right now you deduct that off
+[00:32:51] of what you made so now you're at 88,000
+[00:32:54] well let's say it goes the other way
+[00:32:55] let's say you're read $100,000 that's
+[00:32:58] not what I want to hear but let's just
+[00:32:59] say that's what happens well you still
+[00:33:01] have these costs of business so now
+[00:33:02] you've got
+[00:33:04] $112,000 that you're um in the red that
+[00:33:06] year so you might as well make the most
+[00:33:08] of the loss and make sure you're you're
+[00:33:10] factoring it in right why not so in
+[00:33:14] order to be eligible for trade or tax
+[00:33:16] status you have to meet all of the
+[00:33:17] following conditions you must seek to
+[00:33:20] profit from daily Market movements in
+[00:33:22] price of Securities and not from
+[00:33:23] dividends interest or capital
+[00:33:24] appreciation done we're day Traders
+[00:33:27] you're activity must be substantial I'm
+[00:33:30] day trading every day it is you must
+[00:33:32] carry on the activity with continuity
+[00:33:34] and regularity I am I think if you are
+[00:33:37] showing up every day you are too the
+[00:33:39] following facts and circumstances should
+[00:33:40] be considered in determining if your
+[00:33:42] activity um is a Securities trading
+[00:33:44] business typical holding periods for
+[00:33:46] Securities bought and sold is it less
+[00:33:49] than is it day trading essentially are
+[00:33:50] you day trading the frequency and dollar
+[00:33:53] amount of your trades during the year
+[00:33:54] the extent to which you pursu the
+[00:33:55] activity to produce income for your
+[00:33:57] livelihood and the amount of time you
+[00:33:58] devote to the activity so you know these
+[00:34:01] are the facts and circumstances so look
+[00:34:04] there's going to be people that try to
+[00:34:07] use the tax Trader status to take a
+[00:34:10] bunch of deductions when they're really
+[00:34:12] not active Traders so they create this
+[00:34:15] um you know the this documentation or
+[00:34:18] these rules and um everything to give
+[00:34:22] you guidance to help you understand as a
+[00:34:24] taxpayer the types of things an IRS
+[00:34:27] agent might look at if you came under
+[00:34:29] audit so while you can write off
+[00:34:32] expenses related to trading you will
+[00:34:34] continue to Face Wash sales if you only
+[00:34:37] do the trader tax status so the only
+[00:34:40] thing Trader tax status does is it it's
+[00:34:43] you telling the IRS I trade Securities
+[00:34:47] as a business and therefore I'm going to
+[00:34:50] go ahead and deduct all of my necessary
+[00:34:52] and reasonable expenses related to
+[00:34:54] producing that income and that's great
+[00:34:56] but you still have wash sales wash sales
+[00:34:59] require you to do the marketto market
+[00:35:01] change in accounting so the way this
+[00:35:04] works is at the beginning of this
+[00:35:05] episode I talked about the way wash
+[00:35:07] sales work so a wash sale uh wash sales
+[00:35:12] originated from investors who would sell
+[00:35:13] positions at a loss in dece in December
+[00:35:16] to take a tax loss against other gains
+[00:35:19] and then they would buy back the same
+[00:35:20] position in January so the IRS said no
+[00:35:23] no no that's that's not going to work so
+[00:35:24] if you buy back a substantially similar
+[00:35:26] position within days you're disallowed
+[00:35:29] from writing off the initial loss and
+[00:35:31] the problem is disallowed wash sales
+[00:35:34] have the result of increasing your
+[00:35:35] taxable gain beyond the amount that you
+[00:35:38] actually made which is crazy I mean in
+[00:35:42] this this wasn't thought of that it
+[00:35:44] would be an issue for day Traders but
+[00:35:46] that's it's just what has happened so if
+[00:35:49] you traded Apple every single day for an
+[00:35:51] entire year then the problem is because
+[00:35:55] you're trading the same stock again and
+[00:35:56] again and again you would have all of
+[00:35:58] these wash sale losses that are
+[00:36:00] disallowed and then all of a sudden you
+[00:36:02] get your $199 and it says you made a
+[00:36:04] whole lot more than you actually made
+[00:36:06] that's going to be a problem and like I
+[00:36:07] said you can't go retroactively change
+[00:36:10] this but you can change it moving
+[00:36:13] forward so let's talk about what that
+[00:36:15] looks like the Markt Market election
+[00:36:18] will exempt you from wash sales and it
+[00:36:21] does something else it allows you to
+[00:36:23] write off all of the losses related to
+[00:36:25] trading against other incomes in other
+[00:36:28] words you're no longer limited to $3,000
+[00:36:31] of capital loss so if you have
+[00:36:33] additional losses let so let's just say
+[00:36:35] for instance um that you know we go back
+[00:36:38] to this scenario over here where you
+[00:36:40] were down $100,000 and then you had a
+[00:36:43] 12,000 in expenses and let's say oops
+[00:36:46] wrong color um doesn't matter so let's
+[00:36:48] just say in this year um you're down
+[00:36:52] 112,000 okay but you let's just say you
+[00:36:55] made um 100,000 from other income all
+[00:36:59] right so you your 100,000 is of profit
+[00:37:02] off the 112 So this year you've got a
+[00:37:04] loss of
+[00:37:06] $12,000 so since you don't get you don't
+[00:37:09] get money you know you don't get paid if
+[00:37:11] you have a loss so your your taxable
+[00:37:14] gain goes to zero for the year and this
+[00:37:16] $112,000 you carry forward you get to
+[00:37:19] carry that forward to next year right so
+[00:37:23] many people talked about how Trump
+[00:37:25] didn't pay tax for like a super long
+[00:37:27] time and they said well it was because
+[00:37:29] he had this huge Casino in Atlantic City
+[00:37:31] or whatever it was that you know he
+[00:37:33] closed and lost hundreds of millions of
+[00:37:35] dollars on or whatever it was and he
+[00:37:37] used as a carry forward loss so he just
+[00:37:40] kept carrying it forward until he
+[00:37:41] eventually used it up so he had no tax
+[00:37:43] no tax no tax for years and years and
+[00:37:45] years and you know some people said
+[00:37:48] criticize that and he said I'm using the
+[00:37:50] tax code the way it's written what's
+[00:37:52] wrong with that this is a carry forward
+[00:37:54] loss I had a big loss and now I get the
+[00:37:56] other which was terrible but now I get
+[00:37:58] the other side of it and so that's the
+[00:38:00] same with with Markt Market accounting
+[00:38:02] that's what um would have allowed that
+[00:38:04] probably for him um but if because if
+[00:38:06] you didn't have the marketto market
+[00:38:07] accounting you'd be limited to only
+[00:38:09] writing off
+[00:38:11] $3,000 and this would be a problem
+[00:38:13] because if you limited to only writing
+[00:38:14] off 3,000 then you're 100,000 in income
+[00:38:17] you've got $112,000 in losses well
+[00:38:20] that's if you've got the trade or tax
+[00:38:22] status and you're allowed to do the
+[00:38:23] deduction here of your equipment um so
+[00:38:26] but let's just say you have
+[00:38:28] you would only be able to do $3,000 of
+[00:38:30] it per year it's going to take you it's
+[00:38:32] going to take you 30 years to to to
+[00:38:35] fully use all of this loss which is
+[00:38:39] crazy so what most day Traders are going
+[00:38:41] to do is uh file for marketto Market
+[00:38:45] accounting this is pretty logical so
+[00:38:47] what happens when you file for Mark to
+[00:38:49] Market accounting is that the trading
+[00:38:50] profits become classified as ordinary
+[00:38:53] income instead of capital gains and you
+[00:38:56] will no longer have washed sales so you
+[00:38:59] we apply for marketto Market accounting
+[00:39:01] by filing form uh 3115 and notifying the
+[00:39:05] IRS of our change in accounting method
+[00:39:08] which is under Section 475 F at the next
+[00:39:12] tax filing and here's the really
+[00:39:14] important thing is that there is a
+[00:39:16] deadline for filing your mark tomarket
+[00:39:19] election it has to be filed by the tax
+[00:39:23] due date April 15th but if that's on a
+[00:39:25] Sunday then it's you know the 16th which
+[00:39:27] is a Monday whatever um it's it's due by
+[00:39:30] the tax day of the tax year in question
+[00:39:33] so if you want to have Mark tomarket
+[00:39:36] accounting you can't let's just say it's
+[00:39:38] like October or whatever if you filed it
+[00:39:41] in October the IRS won't accept it for
+[00:39:44] that tax year it's too it's too late so
+[00:39:46] you can only do it for the next tax year
+[00:39:48] coming up but if you do it in December
+[00:39:51] that's fine then you could have it ready
+[00:39:52] to go for January because Mark to Market
+[00:39:55] accounting is not retroactive it begins
+[00:39:57] from the time you file so you file you
+[00:39:59] notify your broker that you have filed
+[00:40:02] and what the broker does is they change
+[00:40:05] your tax report on their back end so
+[00:40:07] they say oh this client is no longer
+[00:40:09] going to have wash sales that's exempt
+[00:40:11] they are now a mark tomarket taxpayer so
+[00:40:14] then your $199 at the end of the year
+[00:40:16] will be correct this is a problem
+[00:40:17] because there's people that file the
+[00:40:20] 3115 Mark to Market election uh with the
+[00:40:23] IRS but then they don't notify their
+[00:40:25] broker so the broker doesn't know you've
+[00:40:27] changed and they send you a $199 that's
+[00:40:30] going to show a gain that's higher
+[00:40:31] because it's has wash sales disallowed
+[00:40:33] so you've got to make sure that you file
+[00:40:36] this form you notify the IRS when you
+[00:40:39] file your next taxes you can file the
+[00:40:41] form and then file the taxes that's fine
+[00:40:44] but then you have to make sure you also
+[00:40:46] notify your broker and you should always
+[00:40:48] do this with a CPA so I'm just sharing
+[00:40:50] with I didn't do this myself I had the
+[00:40:51] CPA do it for me and you should do the
+[00:40:53] same you should consult a CPA on this
+[00:40:55] but this was what made sense for me now
+[00:40:56] there are are some downsides with being
+[00:40:58] on marketto Market um accounting which
+[00:41:00] is that if you're trading longterm in
+[00:41:03] that account it's going to mess up the
+[00:41:06] capital gains um so you're not going to
+[00:41:08] have long-term capital gains anymore in
+[00:41:11] that account because it's all treated as
+[00:41:13] ordinary income so you need to be able
+[00:41:15] to separate your day trading from your
+[00:41:17] long-term investing and you should
+[00:41:19] consult a CPA to see if there's any
+[00:41:20] other um downsides that you should be
+[00:41:22] aware of there weren't any others that I
+[00:41:25] recall so tax strategy number three was
+[00:41:29] to make sure you qualify for Trader tax
+[00:41:32] status which anyone who's an active
+[00:41:34] Trader should and then that allows you
+[00:41:36] to do all your deductions related to the
+[00:41:38] expenses for producing the income and
+[00:41:40] then number two is to file from Mark to
+[00:41:43] Market accounting so your wash sales are
+[00:41:45] exempt so by doing that right there
+[00:41:48] you're reducing your taxable income
+[00:41:50] you've reduced it by taking the
+[00:41:52] deductions for the expenses and your
+[00:41:54] income won't be artificially inflated
+[00:41:56] from wash sales are disallowed tax
+[00:41:58] strategy number four is day trading as a
+[00:42:01] business now day trading as a business
+[00:42:04] requires that you have already done
+[00:42:06] Trader tax status and that for the
+[00:42:08] business you do Markt Market accounting
+[00:42:10] so you could do Mark tomarket accounting
+[00:42:12] for you individually and you can also do
+[00:42:14] it for a um LLC or uh that's registered
+[00:42:20] um to be taxed as an sorp or as a C Corp
+[00:42:23] that's done an S corp election so and
+[00:42:26] that's what most people are going to do
+[00:42:27] is either an LLC with um es Corp status
+[00:42:30] or a C Corp with es Corp election the es
+[00:42:33] Corp well I'll tell you about that in a
+[00:42:35] second so when you're day trading as a
+[00:42:37] business um this gives you all the
+[00:42:39] benefits of the trader tax status that
+[00:42:41] we already because you should already do
+[00:42:42] that you're going to have no wash sales
+[00:42:44] and additionally it allows contributions
+[00:42:47] to a solo
+[00:42:48] 401K of up to $69,000 a year now when
+[00:42:51] you do the
+[00:42:52] $69,000 a year in
+[00:42:55] contributions those are it's a it's it's
+[00:42:58] a traditional 401K so those would come
+[00:43:01] off of your income so
+[00:43:04] $23,000 is you 23,000 23,000 is your
+[00:43:09] employer match so that brings you up to
+[00:43:12] $46,000 and then your employer can do
+[00:43:15] profit sharing of up to 25% of your
+[00:43:19] salary um to a cap
+[00:43:22] of well it would bring it up to
+[00:43:25] $69,000 so I guess it's a addition an
+[00:43:27] additional um
+[00:43:29] 2023 so yeah so so that's the um that's
+[00:43:33] the employee employer profit sharing so
+[00:43:36] your max contribution would be
+[00:43:38] $669,000 but it would require a slightly
+[00:43:41] higher salary uh Additionally you will
+[00:43:44] be able to deduct um health insurance
+[00:43:47] premiums through your business and if
+[00:43:49] you put yourself on a payroll at the
+[00:43:52] business then you can pay yourself a
+[00:43:54] reasonable salary and then you can also
+[00:43:57] take distributions from the business
+[00:43:59] which are at a lower tax rate than um
+[00:44:01] than a W2 wage so creating an LLC or a
+[00:44:05] corporation is kind of the final
+[00:44:07] stepping stone for a lot of Traders now
+[00:44:09] naturally you don't have to do any of
+[00:44:11] this if you just mooved to Puerto Rico
+[00:44:12] right make your life simple go to Puerto
+[00:44:13] Rico you don't have to do any of this if
+[00:44:15] you do a Roth IRA but with a Roth IRA
+[00:44:17] you can't touch the money till you're 59
+[00:44:19] and a half years old without a penalty
+[00:44:20] and paying tax so number three of course
+[00:44:23] Trader tax status and Mark to Market
+[00:44:25] accounting number four is going ahead
+[00:44:27] and creating a business for yourself so
+[00:44:29] taking it to that level saying this is a
+[00:44:31] business I'm running it like a business
+[00:44:33] so I'm going to
+[00:44:34] incorporate a business so creating an
+[00:44:37] LLC or Corporation now you want it you
+[00:44:40] want these to be an LLC is already a
+[00:44:43] pass through entity which means if you
+[00:44:45] create an LLC the LLC doesn't pay taxes
+[00:44:48] and then you pay additional taxes you
+[00:44:51] don't have double taxation with an LLC
+[00:44:54] uh all of the income of the LLC goes
+[00:44:57] goes straight onto your own tax return
+[00:44:59] as the member of the LLC so really the
+[00:45:02] only thing an LLC does is it provides
+[00:45:05] asset protection it protects the assets
+[00:45:08] that are inside the LLC so God forbid
+[00:45:11] you know you got into an accident and
+[00:45:13] you were considered at fault and you get
+[00:45:15] sued for like a million dollars or
+[00:45:16] something like that happens um then your
+[00:45:20] assets that are inside the LLC would be
+[00:45:21] protected and so that's they're limited
+[00:45:23] liability companies so they limit the
+[00:45:25] liability and and that's sort of the
+[00:45:27] benefit there where you've got some
+[00:45:29] protection over that uh so a lot of
+[00:45:31] people will create an LLC um for asset
+[00:45:35] protection purposes it it by itself
+[00:45:38] doesn't really change the the tax
+[00:45:41] because you know if all the income was
+[00:45:44] the same you're still take making the
+[00:45:46] same amount of money you're still taking
+[00:45:47] your same standard deductions um so it
+[00:45:50] doesn't do a lot for that but one thing
+[00:45:53] that is nice about an LLC or a
+[00:45:55] corporation and if you do a Corporation
+[00:45:57] you want to do an ESC Corp because an es
+[00:46:00] Corp means um all the income from the
+[00:46:02] corporation passes down to the
+[00:46:03] shareholders so again it's a pass
+[00:46:05] through entity so an LLC with an S
+[00:46:08] elction or a corporation with the S
+[00:46:10] elction by opening these corporations
+[00:46:13] and then opening a bank account and a
+[00:46:14] credit card for the business it's very
+[00:46:17] easy to segregate all of the income
+[00:46:18] related to the business into these
+[00:46:20] business accounts so anytime you're
+[00:46:22] subscribing to something like stock
+[00:46:24] scanners or charts you're using your
+[00:46:25] company credit card you know anytime
+[00:46:27] you're uh paying for an accountant
+[00:46:30] you're writing a check from the company
+[00:46:31] account and then at the end of the year
+[00:46:34] you've got all your statements from the
+[00:46:36] company account it's very easy to keep
+[00:46:38] track this is this is how it all totals
+[00:46:40] out right now you can a lot of banks um
+[00:46:43] and you know QuickBooks a lot of banks
+[00:46:45] and like American Express credit cards
+[00:46:47] allow you to directly import reports
+[00:46:49] into like a QuickBooks and then you just
+[00:46:51] do the import you print it out and now
+[00:46:53] it's not only got all of your expenses
+[00:46:56] there it's even grouped them based on
+[00:46:58] like dues and subscriptions and
+[00:47:00] professional fees and you know
+[00:47:02] everything else that's you know that's
+[00:47:03] kind of like in its category so it makes
+[00:47:06] it super super easy it's a lot easier
+[00:47:09] than putting everything on your personal
+[00:47:10] card and then having to keep copies of
+[00:47:12] every receipt you know and be like wait
+[00:47:14] where's it's just easier in my opinion
+[00:47:17] to have them separated so being able to
+[00:47:20] segregate and deduct all business
+[00:47:21] expenses on the separate card and bank
+[00:47:23] account to me is a big plus um and then
+[00:47:27] you one of the things that's nice is um
+[00:47:30] excess profits um tax excess profits and
+[00:47:35] you can contribute into a 401k so this
+[00:47:38] is where we've got that $69,000 limit
+[00:47:41] with the employer match so now you're
+[00:47:44] able to reduce your taxable gain by
+[00:47:47] contributing into a 401k so that again
+[00:47:49] is the government encouraging you to
+[00:47:51] save for retirement encouraging your
+[00:47:53] employer which is you in this case to
+[00:47:56] help employees save for retirement and
+[00:47:59] so now you've got the limit of $69,000 a
+[00:48:01] year that you can deduct against your
+[00:48:03] income now this is when you deduct let's
+[00:48:07] let's say you made
+[00:48:09] $500,000 and you're deducting
+[00:48:12] $69,000 for the 401K now if you're doing
+[00:48:15] that that is deducted against your
+[00:48:18] income but remember that $669,000 it's
+[00:48:21] deferring the income in a sense because
+[00:48:23] now it's in your 401k over here and it's
+[00:48:26] going to grow and eventually you know it
+[00:48:28] grows to a million dollars or whatever
+[00:48:30] and then when you take the distributions
+[00:48:31] you're going to have tax on it so it's
+[00:48:33] not as great as doing a Roth IRA but it
+[00:48:37] gives you the short-term benefit of
+[00:48:38] reducing your taxable gain so now let's
+[00:48:40] say here you've got um let let's just
+[00:48:43] move the number a little higher let's
+[00:48:44] say you've got
+[00:48:45] $21,000 in deductions from equipment and
+[00:48:48] everything else so now you're at 70 8090
+[00:48:52] so you've brought your income here from
+[00:48:54] 500 down to uh 410 right just by uh
+[00:48:59] doing the
+[00:49:00] 401K and the deductions and of course
+[00:49:04] not having wash sales so this right here
+[00:49:08] has saved you $90,000 that's awesome
+[00:49:11] right now that's just a start there's
+[00:49:12] more that you could do but this is a
+[00:49:14] great starting point so if you had
+[00:49:16] excess profit at the end of the year and
+[00:49:18] of course you're the company's going to
+[00:49:19] have to pay you a wage um which is very
+[00:49:22] easy to set up so it pays you a salary
+[00:49:24] you take that salary but let's just say
+[00:49:26] the company has um excess profit of
+[00:49:29] $100,000 at the very end of it you've
+[00:49:31] already covered your cost of living
+[00:49:32] you've got $100,000 you're like shoot if
+[00:49:35] I do this I'm I I've already maxed this
+[00:49:37] out I can't don't have any more
+[00:49:38] deductions I can take is there anything
+[00:49:40] I can spend $100,000 on that is a
+[00:49:43] deductible expense and that's where if
+[00:49:45] you get a good CPA they're going to
+[00:49:47] start giving you suggestions they're
+[00:49:48] going to say well wait a second you know
+[00:49:49] there's an investment tax credit if you
+[00:49:51] buy a solar farm you could buy a
+[00:49:53] $100,000 solar farm you get bonus
+[00:49:55] depreciation on the whole thing now you
+[00:49:57] just brought your income all the way
+[00:49:59] down to zero and you own a solar farm
+[00:50:01] and that solar farm is going to pay you
+[00:50:02] dividends of income every year for the
+[00:50:05] next 30 Years right so solar Farms are
+[00:50:09] really popular because the investment
+[00:50:10] tax credit there's other Investments
+[00:50:12] that people like for the bonus
+[00:50:15] depreciation gas stations um trailer
+[00:50:19] parks because it's um the the way the
+[00:50:21] Improvement is the Capital Improvements
+[00:50:23] you've got storage facilities so now you
+[00:50:26] start having people that are producing
+[00:50:28] profit and rather than just saying oh
+[00:50:31] I've got an extra $100,000 so I guess
+[00:50:33] I'm going to lose 40 of that or 30 of
+[00:50:35] that to tax they say well if I invest it
+[00:50:39] in these certain government approved and
+[00:50:41] sponsored investment classes I get an
+[00:50:45] additional benefit so this is the
+[00:50:46] government subsidizing regular investors
+[00:50:50] going and investing in solar or you know
+[00:50:52] these different things that are deemed
+[00:50:53] necessary and your your accountant is
+[00:50:55] going to know about all those things
+[00:50:57] because they're dealing with this every
+[00:50:58] year every every month they're dealing
+[00:50:59] with it they're trying to help their
+[00:51:01] clients make smart Investments that help
+[00:51:03] reduce their taxable gains so now all of
+[00:51:05] a sudden you do this for a few years and
+[00:51:08] you know one year you do a solar farm
+[00:51:10] another year you invest in you know an
+[00:51:13] RV park or something like that in your
+[00:51:14] area another year you invest in self
+[00:51:17] storage and you know by the end of five
+[00:51:19] years you've built up your 401k you've
+[00:51:22] built up some investments in things that
+[00:51:24] generate some passive income yes the
+[00:51:26] income that they produce will will
+[00:51:28] generate income on your returns but then
+[00:51:30] you keep taking that income seeing what
+[00:51:32] your balance is at the end of the year
+[00:51:33] after your W2 and everything else and
+[00:51:36] cost of living and you take it to keep
+[00:51:38] rolling it forward and this is how the
+[00:51:40] top 1% of Traders are growing their net
+[00:51:43] worth some of them are moving to Puerto
+[00:51:44] Rico some of them are trading in a Roth
+[00:51:46] IRA some of them are trading in a
+[00:51:48] business account and they're growing
+[00:51:49] their business now I'm a big Advocate
+[00:51:52] that at the end of the year if you've
+[00:51:53] got $100,000 in profits what you
+[00:51:56] probably should have done was at some
+[00:51:58] point in the year start trading in a
+[00:52:00] Roth IRA because if you're making more
+[00:52:02] money than you really need to need for
+[00:52:04] covering your cost of living then
+[00:52:05] anything above and beyond switch to the
+[00:52:07] Roth IRA so I think at a minimum even if
+[00:52:10] you say I need to really make profit to
+[00:52:12] cover cost of living you should open a
+[00:52:14] Roth IRA anyways make your max max
+[00:52:17] contribution that you can afford or that
+[00:52:19] is allowed whichever is the case and
+[00:52:21] just plan that maybe one day a week you
+[00:52:24] trade in it or you know maybe you one
+[00:52:26] once you get to that point of the Year
+[00:52:27] where you've covered your cost of living
+[00:52:29] for the rest of the year you trade in it
+[00:52:31] however you want to do it maybe it's
+[00:52:32] time of day your first three trades are
+[00:52:34] main account next trades are in the
+[00:52:35] retirement doesn't matter how you slice
+[00:52:37] it up it whatever works for you but it
+[00:52:39] makes a lot of sense to get that Roth
+[00:52:41] IRA growing because that is the most
+[00:52:44] logical answer for most us Traders set
+[00:52:47] up the Roth IRA and and just have it on
+[00:52:50] the side so you could be growing that
+[00:52:51] account tax-free but this really is how
+[00:52:54] Americans um are growing going from sixf
+[00:52:57] figure Traders growing their net worth
+[00:53:00] making smart Investments being more tax
+[00:53:03] efficient it's not all about being more
+[00:53:06] profitable if you're more tax efficient
+[00:53:08] than the next person I also am am a big
+[00:53:10] believer that if early on in your career
+[00:53:14] you can save as much of your profit as
+[00:53:17] possible I mean I know when I first got
+[00:53:19] started my goal of $200 a day wasn't
+[00:53:21] leaving a lot of room for saving but
+[00:53:23] then all of a sudden you know I scaled
+[00:53:25] up really quickly and was like whoa
+[00:53:27] $300,000 a year $400,000 year $500,000 a
+[00:53:31] million a year and I know the problem
+[00:53:33] for a lot of Traders at the end of that
+[00:53:35] year they make their first million
+[00:53:36] dollars and then they realize they owe
+[00:53:38] $300,000 in tax or 350 depending on what
+[00:53:41] state they're in right and it's like a
+[00:53:44] huge tax bill and the and what's worse
+[00:53:46] is that sometimes Traders by the time
+[00:53:49] they realize what their tax bill is come
+[00:53:51] April 15th they may have even lost some
+[00:53:54] of the money that they made but you know
+[00:53:56] by by December by you know those first
+[00:53:57] three months they took losses so it it
+[00:54:01] you have to be doing this tax planning
+[00:54:03] you've got to build a relationship with
+[00:54:04] a good CPA that understands trading and
+[00:54:08] you know you've just got to really treat
+[00:54:10] this like a business these are some of
+[00:54:12] the strategies I've learned from some of
+[00:54:13] the best CPAs in the country I've
+[00:54:15] implemented um all of them except for
+[00:54:17] moving to Puerto Rico moving to Puerto
+[00:54:18] Rico is the only one I haven't done yet
+[00:54:20] maybe I'll do that in the future but for
+[00:54:21] right now I kind of found the sweet spot
+[00:54:23] for me you've got to find the sweet spot
+[00:54:25] for yourself and I want to thank you as
+[00:54:27] always for tuning in this episode if you
+[00:54:28] enjoyed it I hope you hit that thumbs up
+[00:54:29] I hope you subscribe to the channel and
+[00:54:31] I'll see you for the next upload real
+[00:54:32] soon
+[00:54:33] [Music]

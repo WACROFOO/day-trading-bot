@@ -1,0 +1,673 @@
+# How to use Level 2 and Time & Sales as a Momentum Day Trader
+# https://www.youtube.com/watch?v=pJuG5YtVF84
+# duration_sec: 1734
+
+[00:00:01] all right guys so we're going to do a
+[00:00:03] little video Lesson here on level two so
+[00:00:07] what we're going to look at is uh I'm
+[00:00:10] just going to put up the one minute
+[00:00:11] chart here and we'll look at the level
+[00:00:13] two on direct access software this is
+[00:00:16] the D Trader demo this is where we're
+[00:00:18] watching all of our students
+[00:00:20] trading and this right here is the level
+[00:00:23] two so I'm going to make this a little
+[00:00:25] bit smaller
+[00:00:30] let's see um so we're looking at
+[00:00:33] paa and this has uh some news out on it
+[00:00:38] and it's selling off it just dropped
+[00:00:40] eight points in the last few minutes so
+[00:00:42] you know it's selling off with some
+[00:00:44] serious volume and now the reason this
+[00:00:48] is higher risk is
+[00:00:50] because this particular stock has big
+[00:00:53] spreads when you look at the level two
+[00:00:55] you see 4698 on the bid 4725 on the ask
+[00:01:00] there's a 27 Cent spread between the bid
+[00:01:03] and the ask and look at how quickly this
+[00:01:05] is moving 4790 by
+[00:01:09] 48 okay so the break over 48 there is
+[00:01:13] important that's this little flag
+[00:01:15] breaking to the upside and look at how
+[00:01:16] quickly we just went from
+[00:01:18] 48 to 49 to
+[00:01:22] 50 you know this is a lot of volatility
+[00:01:25] here and that's a nice bounce but the
+[00:01:28] risk is really high
+[00:01:30] so traders who got in this a little bit
+[00:01:32] early uh right under 48 and it dipped
+[00:01:35] down here on this candle wick to 46 25
+[00:01:39] it dipped down almost two
+[00:01:42] points we can take trades without having
+[00:01:47] to take really high levels of risk so
+[00:01:49] let's now saying that the FTC will be
+[00:01:54] discussing I'll turn that down that's
+[00:01:56] the benzinga pro radio um so look at a
+[00:02:00] trade we took earlier on
+[00:02:02] atvi
+[00:02:04] um this is a short here shorting the
+[00:02:07] first one minute candle to make a new
+[00:02:09] high okay so your stop is 3780 and your
+[00:02:13] short at
+[00:02:16] 3766 so you're risking 14 cents all
+[00:02:19] right you could take 2,000 shares and
+[00:02:22] you're risking 300 bucks all
+[00:02:25] right now the profit potential on this
+[00:02:28] with 2,000 shares from
+[00:02:30] 3766 this came all the way down really
+[00:02:34] without giving you an exit indicator to
+[00:02:36] 37 so that's 1,200 bucks based on $300
+[00:02:41] risk and then all the way here down to
+[00:02:44] 3650 3660
+[00:02:47] $2,000 based on a $300 risk so that is a
+[00:02:51] really good profit loss ratio you risk
+[00:02:54] 300 to make 1,200 right now when we flip
+[00:02:58] back over here to paa
+[00:03:00] we're looking at a chart where you had
+[00:03:02] to risk two
+[00:03:04] points right to make well two points
+[00:03:08] they popped up two points so if you took
+[00:03:10] a th000 shares you're risking you're
+[00:03:11] risking 2,000 to make 2,000 if you took
+[00:03:14] a 100 shares you're risking $200 to make
+[00:03:17] $200 so the risk reward ratio just isn't
+[00:03:20] really there now you could say well I
+[00:03:22] wouldn't have let it go that far I was
+[00:03:24] going to keep a tighter stop but then
+[00:03:27] look at how quickly this moves this
+[00:03:29] moves very very very
+[00:03:30] quickly all right so we're talking here
+[00:03:34] just to start about the chart patterns
+[00:03:37] okay so looking at setups that offer two
+[00:03:39] to1 profit loss ratios that's really
+[00:03:41] important with trading the critical keys
+[00:03:44] to success is a Trader number one risk
+[00:03:46] management learning how to manage your
+[00:03:48] risk on every single trade you take
+[00:03:51] number two proper stock selection this
+[00:03:53] is a high-risk stock to trade it's not
+[00:03:56] wouldn't be great stock selection to
+[00:03:58] take this trade versus one of the easier
+[00:04:00] ones right and then you also need to
+[00:04:03] understand chart patterns finding the
+[00:04:06] right entry now this is a decent entry
+[00:04:09] here it just happens that this is on a
+[00:04:11] stock where the spreads are really
+[00:04:13] brutal where the slippage would be
+[00:04:16] really bad and where your risk is higher
+[00:04:19] okay but this pattern itself is okay and
+[00:04:22] then lastly you have to understand uh
+[00:04:24] the nitty-gritty technicals of how to
+[00:04:26] trade and that means reading level two
+[00:04:29] so the the level two here your typical
+[00:04:31] stock is going to offer you a simple
+[00:04:34] level one that's the bid and the ask
+[00:04:37] every stock trades with a bid and ask
+[00:04:39] spread so right now the bid is 4903 and
+[00:04:42] the ask is 4942 got a 40 Cent spread
+[00:04:45] that's the bid in the ask all right you
+[00:04:48] can buy on the bid you can buy on the
+[00:04:50] ask you can sell on either side or you
+[00:04:52] can sell in the middle level two offers
+[00:04:55] you more depth it's also called Market
+[00:04:57] depth it shows you how many shares are
+[00:05:01] actually sitting on either side okay so
+[00:05:04] in this case the seven represents 700
+[00:05:07] and the two represents 200 the 10
+[00:05:09] represents a th000 so when you've got
+[00:05:12] this one here that's 100 shares sitting
+[00:05:14] on the bid and then on the ask you've
+[00:05:16] got another 100
+[00:05:18] shares okay so now we're getting a
+[00:05:20] little more depth we understand the
+[00:05:21] current price of the bid and ask but say
+[00:05:24] you wanted to buy 10,000 shares but you
+[00:05:26] only see one share here or one 100
+[00:05:29] shares there aren't enough people
+[00:05:31] selling at that price to allow you to
+[00:05:34] buy a th000 shares or 10,000
+[00:05:37] shares okay so by reading the market
+[00:05:40] depth we can get a better sense of the
+[00:05:42] strength or weakness of the market in
+[00:05:44] this particular
+[00:05:46] name I typically am going to look at
+[00:05:50] this first level this is the current
+[00:05:52] price Okay so we've got 4856 and you see
+[00:05:56] one two three market makers are all
+[00:05:59] sitting there offering shares uh to buy
+[00:06:03] okay so someone is a buyer sitting here
+[00:06:05] now remember the market is closed and
+[00:06:08] it's closed in the sense that when a
+[00:06:09] stock does its IPO its initial public
+[00:06:12] offering they release a fixed number of
+[00:06:15] shares onto the market so let's say just
+[00:06:17] for Simplicity they release 100 million
+[00:06:20] shares okay so every time you are buying
+[00:06:23] you're buying from someone who's selling
+[00:06:25] and every time you're selling you're
+[00:06:26] selling to someone who's buying we're
+[00:06:28] just rotating shares within that 100
+[00:06:31] million share
+[00:06:32] pool okay so stocks that have a bigger
+[00:06:36] pool of shares have a lot more trading
+[00:06:39] activity a lot more people are involved
+[00:06:41] in the stock and that means there's a
+[00:06:43] tremendous amount of Supply so we'll
+[00:06:46] look up here on our trade ideas
+[00:06:48] information
+[00:06:50] window Let's
+[00:06:52] see we look at um
+[00:06:56] paa this has a float of $47 million
+[00:06:59] shares that's how many shares are
+[00:07:01] available to trade on the open market 47
+[00:07:04] million sounds like a lot of shares
+[00:07:06] let's look at Bank of
+[00:07:07] America 10 billion shares and this is
+[00:07:11] important there's 10 billion shares a
+[00:07:13] Bank of America this is a huge level of
+[00:07:16] Supply Bank of America is up 1% today
+[00:07:20] when you have a huge level of Supply it
+[00:07:22] would take an equally large amount of
+[00:07:25] demand to create large uh moves in the
+[00:07:28] price of the stock so stocks that have
+[00:07:31] limited Supply will move a lot faster
+[00:07:34] than stocks that have really big Supply
+[00:07:36] that's why we look at the lower float
+[00:07:38] stocks now it's not the float is not
+[00:07:41] relative to the price of the stock
+[00:07:43] because here's a a a three4 stock with a
+[00:07:47] 600 million share float so you can have
+[00:07:50] high float stocks heavy float stocks
+[00:07:52] that are still low price and you can
+[00:07:54] have expensive stocks that have very low
+[00:07:57] floats so the float and the price are
+[00:07:59] not intertwin they're not related okay
+[00:08:02] but what you will notice is that when
+[00:08:04] you have a lot more Supply the spreads
+[00:08:07] tighten up so here we have a 30 Cent
+[00:08:10] spread you know that means if you buy if
+[00:08:13] you want to get in this right away
+[00:08:14] you've got to buy on the ask okay so
+[00:08:16] you're going to buy a th000 shares 48.92
+[00:08:19] 91 okay so you could buy that and then
+[00:08:22] as soon as you're in it you're already
+[00:08:23] down 30 cents because if you wanted to
+[00:08:25] sell you've got to sell to a buyer on
+[00:08:28] the bid right right they're down 30
+[00:08:30] cents that's that's a $300 loss
+[00:08:32] instantly so usually a Trader a day
+[00:08:35] trader doesn't want to trade stocks that
+[00:08:36] have huge spreads just because the risk
+[00:08:39] is so much higher as soon as you get in
+[00:08:41] you're down you know 30 cents it means
+[00:08:43] it needs to go up you know 60 cents on
+[00:08:46] the ask so you can sell for a 30 Cent
+[00:08:49] profit down on the bid you know and of
+[00:08:51] course you can try to sell on the ask
+[00:08:53] and you got to wait if you're going to
+[00:08:54] sell here you have to wait for a buyer
+[00:08:56] to come buy shares from you okay okay so
+[00:09:00] when you've got a lowf float stock it's
+[00:09:02] not uncommon to see bigger
+[00:09:04] spreads that's why I'm especially
+[00:09:07] cautious of trading low float stocks
+[00:09:09] that are high price because they can be
+[00:09:12] so volatile a low price stock uh a stock
+[00:09:16] under $10 that also has a low
+[00:09:18] float a big spread maybe 5 cents or8
+[00:09:22] cents which is big but it's much more
+[00:09:24] manageable than a big spread on A40 or
+[00:09:26] $50
+[00:09:28] stock okay okay so we look here um when
+[00:09:33] you look at the level two you've got the
+[00:09:35] first level of Market depth okay so this
+[00:09:38] is you've got the buyers here at 47 uh
+[00:09:41] 4907 4910 4919 18 all right so who's who
+[00:09:47] else is lined up here well we've also
+[00:09:49] got a buyer lined up at 4910 that's the
+[00:09:51] the red bar and you've got more buyers
+[00:09:54] lined up at 4902 and if somewhere in
+[00:09:57] here you end up seeing a buyer that has
+[00:10:00] a lot of size like a 20 or 30,000 share
+[00:10:04] buyer that indicates some level of
+[00:10:07] support there's a large buyer there he's
+[00:10:09] putting in a bid and he's propping up
+[00:10:11] the stock alternatively on the ask if
+[00:10:15] you see a large seller somewhere down
+[00:10:18] here whether it's at 49 or 54 56 57 that
+[00:10:22] could indicate someone that's holding
+[00:10:24] the price down a little bit and this is
+[00:10:26] all information that you wouldn't have
+[00:10:29] if you if you only look at level one you
+[00:10:31] have to look at level two to get this
+[00:10:32] Market
+[00:10:33] depth now just a moment though a moment
+[00:10:35] ago we saw this drop from 49 4890 down
+[00:10:39] to 4860 where it is now and you saw
+[00:10:42] there was a pretty big buyer there
+[00:10:44] holding it up right but all these red
+[00:10:47] sales went through we'll scroll back
+[00:10:49] here they all went through 4890 4890 all
+[00:10:52] these red sales were going through that
+[00:10:55] buyer got filled and the stock dropped
+[00:10:58] and it instantly dropped once that level
+[00:11:00] of support was gone it dropped very
+[00:11:01] quickly down to
+[00:11:04] 4865 so learning to anticipate those
+[00:11:08] types of moves can help you as an active
+[00:11:10] day trader because you can watch the
+[00:11:12] level two and kind of learn to
+[00:11:14] anticipate where you might get pops or
+[00:11:16] where you might get quick
+[00:11:18] drops but remember also that we don't
+[00:11:21] trade just on level two you know we
+[00:11:23] wouldn't trade level two and not trade
+[00:11:25] with a chart you can't do that you trade
+[00:11:28] the chart
+[00:11:30] first you look at the price where you
+[00:11:32] want to be buying say it's at
+[00:11:34] $48 or at $50 wherever it is you look at
+[00:11:37] the price you want to buy on the chart
+[00:11:39] based on the pattern and then you look
+[00:11:41] over at the level two you take a look at
+[00:11:44] the spreads right do we have a 10cent
+[00:11:48] spread or a 20 cent spread or is it a
+[00:11:50] tight spread so the stocks that we were
+[00:11:52] trading earlier um atvi could take a
+[00:11:56] look at that
+[00:11:58] one atvi this has a 1-cent
+[00:12:02] spread look at the
+[00:12:05] float 335 million share float okay so
+[00:12:08] the float's a little heavier but it's
+[00:12:11] still moving quite a lot today it's
+[00:12:13] moving because it has a catalyst so this
+[00:12:15] is the right type of stock to trade it's
+[00:12:18] a stock with news that has a respectable
+[00:12:22] flow of the float it's a little heavier
+[00:12:24] than I usually like uh but the news is
+[00:12:27] strong enough there's enough demand for
+[00:12:29] the stock to really make a big
+[00:12:31] move and you can see that there's a lot
+[00:12:33] of buyers and sellers so if you want to
+[00:12:36] take larger size you could get in with a
+[00:12:39] th shares or 2,000 shares because
+[00:12:42] there's a lot of people selling and
+[00:12:43] buying on both sides of the bid and
+[00:12:47] ask okay and this right here is you know
+[00:12:50] a fairly tight spread a 1-cent spread
+[00:12:53] but the stock is still moving quickly if
+[00:12:55] we got in a th000 shares we're first
+[00:12:57] looking we're already you know we've
+[00:12:59] already seen $100 down and and now back
+[00:13:02] up but then in contrast
+[00:13:05] P right now is a 50 Cent spread how do
+[00:13:09] you manage risk with a 50cent spread you
+[00:13:12] have to have a very very high level of
+[00:13:14] confidence because as soon as you get in
+[00:13:17] you're risking a
+[00:13:18] lot if you put out an order to buy if
+[00:13:21] you want to get in this you can get in
+[00:13:23] on the bid all right and you can just
+[00:13:25] sit here on the bid and wait you have to
+[00:13:27] wait for a seller to come through and
+[00:13:30] sell you shares so when you see these
+[00:13:32] orders going through remember how I said
+[00:13:34] this is a closed Market this is a pool
+[00:13:36] right we know we've got X number of
+[00:13:37] shares whether it's 100 million or 10
+[00:13:39] billion so what we see here is being
+[00:13:42] buys or sells well they're both at the
+[00:13:45] same time you're selling and someone's
+[00:13:48] buying what makes these red or green is
+[00:13:51] whether the price takes place at the bid
+[00:13:54] or at the ask when it takes place on the
+[00:13:57] ask it's a sign of weakness someone some
+[00:13:59] is unloading shares right at the bid
+[00:14:01] price and when it takes place at the ask
+[00:14:03] someone is buying right at the ask price
+[00:14:06] so that's more
+[00:14:08] bullish that's what that red and green
+[00:14:10] uh mean and then the white is when
+[00:14:12] transactions take place in between the
+[00:14:14] spread okay so anything in between the
+[00:14:16] spread is just going to be white so when
+[00:14:18] we see red we know that people are
+[00:14:19] hitting the bid they're bailing
+[00:14:21] out and you could see how quickly this
+[00:14:23] drops but look here you've got 10,000
+[00:14:25] share buyer at
+[00:14:28] 4825 so there's a little bit of support
+[00:14:30] down there at
+[00:14:33] 4825 this is typically something I would
+[00:14:35] look for this indicates that someone is
+[00:14:38] here holding this up a little bit
+[00:14:42] so and look at that look at how quickly
+[00:14:44] that got that got taken out all right so
+[00:14:47] what prob so there there's there's a
+[00:14:49] 7600 share order that went through
+[00:14:52] someone sold 7600 shares another person
+[00:14:54] sold 2,000 and then the 25 was gone and
+[00:14:58] we dropped from there
+[00:15:03] 50 and of course this the that type of
+[00:15:06] drop is consistent with the level of
+[00:15:08] volatility that you'll have on a stock
+[00:15:10] of this price range that has a low float
+[00:15:13] that's trading you know with
+[00:15:16] news so when a stock sells off from $55
+[00:15:19] down to $45 you might think well geez
+[00:15:22] there's going to be a lot of opportunity
+[00:15:23] here to profit and on the one hand there
+[00:15:26] is there's certainly opportunity if you
+[00:15:28] can capitalize on it but it carries a
+[00:15:31] lot more risk and you have to think of
+[00:15:34] every trade as being a certain level of
+[00:15:37] risk you're taking risk every time you
+[00:15:39] trade so you want to minimize that risk
+[00:15:41] you want to take trades where you can
+[00:15:43] really get the most profit with the
+[00:15:45] least amount of risk that way even if
+[00:15:46] you're wrong five times in a row you're
+[00:15:49] not going to destroy your account you're
+[00:15:51] just going to take small losses but with
+[00:15:53] this pra it would be almost impossible
+[00:15:56] to have small losses because of the
+[00:15:58] spreads
+[00:16:04] so it is certainly hard to watch the
+[00:16:06] level to when it's moving really fast
+[00:16:09] when I first get into a trade you know
+[00:16:11] the first thing I'm looking at is the
+[00:16:13] chart pattern do I like the chart
+[00:16:14] pattern do I like the stock can I manage
+[00:16:17] my risk right and that's just general I
+[00:16:20] know right away on this one it's going
+[00:16:21] to be hard to manage risk because of how
+[00:16:23] much it just dropped uh but you know I I
+[00:16:26] try to get a sense of what the risk will
+[00:16:27] be like I look at the level two and then
+[00:16:30] I can again do a little more risk
+[00:16:31] analysis what's the spread like you know
+[00:16:34] how thin or thick is the level two so
+[00:16:36] this is a very thin level two you've got
+[00:16:39] big spreads and each level is separated
+[00:16:43] by like 10 cents 20 cents so we've got
+[00:16:46] 4880 4886 49 49
+[00:16:50] 5190 got a lot of big spreads in those
+[00:16:53] levels Not Just Between the bid and ass
+[00:16:55] but between each level on either side
+[00:16:58] where's thick thickly traded stock like
+[00:17:01] Sprint for instance um you've got a ton
+[00:17:04] of people sitting on both sides with a
+[00:17:06] one cent
+[00:17:08] spread and it's it's so thick it's not
+[00:17:11] even showing the next level because it's
+[00:17:13] just it's so tight all right so this is
+[00:17:16] a very thick level too um something more
+[00:17:19] in between would be probably
+[00:17:21] atvi you know where it's fairly thick
+[00:17:24] and you can see you
+[00:17:26] know each level is 1 sent away so you've
+[00:17:30] got 29 28 25 you know they're pretty
+[00:17:34] tight I usually look for something
+[00:17:36] that's kind of a happy medium I would
+[00:17:38] never day trade something like Sprint or
+[00:17:41] Bank of America because they're just not
+[00:17:42] going to move right we're day Traders we
+[00:17:45] need stocks that are going to make big
+[00:17:47] moves but then on the other hand a stock
+[00:17:50] like pra is going to move so quickly and
+[00:17:54] make such rapid moves that it's going to
+[00:17:57] be really hard to manage r risk it'll
+[00:17:59] whip
+[00:18:04] around yeah so this might trade in a
+[00:18:07] tight spread momentarily the way it is
+[00:18:09] right here but generally it's a it's a
+[00:18:11] thinly traded
+[00:18:13] name and as soon as that 58 is gone
+[00:18:16] you'll have 26 up so you know you're
+[00:18:19] you'll be down 26 Cents as soon as that
+[00:18:21] 58's gone it's a little heavier on the
+[00:18:25] ask side was 73 75 78 and I know when
+[00:18:29] you're first looking at level two it
+[00:18:31] seems like a lot to read um and that's
+[00:18:34] why the first thing to study is not
+[00:18:36] level two it's not the most important
+[00:18:38] thing the first thing is studying Risk
+[00:18:41] Management stock selection and chart
+[00:18:44] patternss right learn how to recognize
+[00:18:46] those bull Flags like today we took a
+[00:18:48] trade on
+[00:18:49] avxl and this is a good example
+[00:18:52] avxl we are watching this long over
+[00:18:56] 1440 okay so let me pull this back here
+[00:19:00] okay so right here we we said we like
+[00:19:02] this long over
+[00:19:04] $14.40 so then okay the chart looks
+[00:19:07] great we've got consolidation we've got
+[00:19:09] one two tops and we're coming up for a
+[00:19:11] third tap so we've got a little bit of a
+[00:19:13] flat top level of resistance pretty
+[00:19:16] simple we look over at the level two and
+[00:19:19] we saw okay at
+[00:19:21] 1440 right here there were 20,000 shares
+[00:19:26] so someone was sitting there trying to
+[00:19:28] sell 20 20,000 shares at 1440 all right
+[00:19:31] so initially that person's kind of
+[00:19:32] putting up a little bit of a wall but
+[00:19:34] then once you start to see the orders
+[00:19:36] come through and they're all going to be
+[00:19:38] green you know 2,000 shares 5,000 6,000
+[00:19:41] 8,000 all at
+[00:19:43] 1440 right as that's about to break I
+[00:19:46] jumped in and instantly we popped up to
+[00:19:49] 1450 and again there was another little
+[00:19:51] wall there at 1450 we need buyers to
+[00:19:54] come in and buy up all the shares that
+[00:19:56] someone was selling 1450 broke and next
+[00:19:59] thing you know we were at
+[00:20:00] 1475 and that right there was $500
+[00:20:03] profit and the daily goal trading a
+[00:20:06] simple chart pattern right but also
+[00:20:09] understanding the importance of level
+[00:20:16] two so see right there this is a good
+[00:20:18] example again the 25,000 shares sitting
+[00:20:21] on the bid you've got support there and
+[00:20:23] how quickly it broke from 1450 and just
+[00:20:26] popped up not sure what this is doing
+[00:20:28] here so we're actually coming back up
+[00:20:30] here to a double top on the daily on the
+[00:20:33] intraday uh you've got a high of
+[00:20:39] 1484 so when we see double tops we know
+[00:20:43] that these are
+[00:20:44] typically um not the best pattern to buy
+[00:20:47] because look at all this empty space
+[00:20:48] here in the middle right the safe place
+[00:20:51] to enter this was like way down in this
+[00:20:54] area down at the bottom of this
+[00:20:57] circle okay now I'm not sure that I
+[00:20:59] would have entered it down here at 2:30
+[00:21:02] in the afternoon but um you know that
+[00:21:04] would have been the safer place to get
+[00:21:06] in now okay it's come back up but we
+[00:21:08] have this Big W shape down up down and
+[00:21:12] then back up so what we need to see this
+[00:21:14] do is consolidate so we've got this
+[00:21:16] double top the U shape typically these
+[00:21:19] pull back and then we want to see
+[00:21:21] consolidation right here so this is
+[00:21:23] going to be a cup and this area here
+[00:21:26] will be the handle
+[00:21:28] once we have the handle we'll have
+[00:21:31] consolidation underneath this 1475 level
+[00:21:35] and then we'll be looking at the level
+[00:21:36] two 1475 for the breakout and what may
+[00:21:40] happen is we look at 1475 and low and
+[00:21:42] behold there's a 20,000 share seller
+[00:21:45] someone is sitting there heavy at 1475
+[00:21:47] because that is a critical resistance
+[00:21:50] level and it's not going to break easily
+[00:21:54] when we see that big seller on the level
+[00:21:55] two it confirms what we suspect that
+[00:21:57] this is important important place on the
+[00:21:59] chart other people recognize it too
+[00:22:01] right it's not just
+[00:22:03] us so that's what I would look for
+[00:22:05] whether or not that happens on this
+[00:22:06] particular name you know at this time in
+[00:22:08] the afternoon I'm not sure it may just
+[00:22:10] come up here double top and sell off a
+[00:22:13] lot of people do like to short double
+[00:22:15] tops with a stop right over this level
+[00:22:18] simply because of the fact that it is
+[00:22:20] extended from this move down here from
+[00:22:22] 1240 it just made a big pop up
+[00:22:29] okay so now the software we're looking
+[00:22:32] at here is Dash Trader Pro so what we
+[00:22:35] have we've got the bid on the left the
+[00:22:37] ask on the right you see we've got a
+[00:22:39] short a cancel replace and a buy key all
+[00:22:43] right so if we want to get in this I
+[00:22:45] would click on the ask that'll change
+[00:22:48] the price to the current ask price and
+[00:22:50] then I can just press
+[00:22:52] buy alternatively I can go down here and
+[00:22:55] use Market order or I could route
+[00:22:57] directly uh to one of these market
+[00:22:59] makers this is called direct access
+[00:23:01] routing when you route directly to a
+[00:23:03] market maker so this right here is kind
+[00:23:07] of like a little Island right and
+[00:23:09] Traders from all around the world are
+[00:23:11] coming to meet right here and this is
+[00:23:13] the current bid and ask but you can come
+[00:23:15] into this island from a thousand
+[00:23:17] different directions and those different
+[00:23:18] directions would be NASDAQ ARA edx bats
+[00:23:22] byx n right these are all different
+[00:23:26] routes into the island okay but they're
+[00:23:29] all going to land at the same place and
+[00:23:30] we're looking at the same price this is
+[00:23:32] where we all come together and the the
+[00:23:35] great thing about trading online is that
+[00:23:37] we're all trading on the same Level
+[00:23:39] Playing Field because we're all meet
+[00:23:41] meeting at the same price okay so you
+[00:23:44] can choose which route you'll use
+[00:23:46] because some will be a little faster
+[00:23:48] than others right so some will match you
+[00:23:50] up with a buyer a little quicker than
+[00:23:52] others and that's why I like to use
+[00:23:54] direct access routing some of the Full
+[00:23:56] Service Brokers that uh you know are out
+[00:23:59] there some of the really big names they
+[00:24:01] don't offer direct access routing they
+[00:24:03] just offer limit or Market orders the
+[00:24:05] problem with that is the routing is
+[00:24:07] usually a little bit slower so a direct
+[00:24:10] access broker like speed Trader which
+[00:24:13] uses DH Trader Pro the platform is a
+[00:24:16] really good place to
+[00:24:17] trade okay so you choose your route
+[00:24:20] we'll say we'll use ARC a limit long
+[00:24:23] thousand shares 1449 all you got to do
+[00:24:25] is press the buy button and you're in
+[00:24:27] you okay cancel and then once you're in
+[00:24:29] this will change from saying short to
+[00:24:31] saying sell it'll give you the option to
+[00:24:33] sell those shares back on the market and
+[00:24:36] you can of course sell up here on the
+[00:24:38] ask you can be a seller up here at
+[00:24:40] 1449 but you'll have to wait for someone
+[00:24:42] to come and buy the shares from
+[00:24:44] you okay Every Time Shares are sold
+[00:24:47] there's a buyer so right here you've
+[00:24:50] already got someone saying they're
+[00:24:51] willing to buy a 100 shares at
+[00:24:54] 1435 so if you don't want to wait at 143
+[00:24:57] uh 144 9 you can just hit the bid press
+[00:25:01] that
+[00:25:02] 1435 click the sell button and you're
+[00:25:07] out right but this is all part of level
+[00:25:10] two you wouldn't be able to see any of
+[00:25:11] this when you're looking just at level
+[00:25:12] one level one looks more
+[00:25:16] like like that okay that's all you see
+[00:25:21] but that that leaves you almost
+[00:25:23] blindfold you can't see the depth of the
+[00:25:26] market right you you don't know well
+[00:25:28] who's below
+[00:25:30] 1437 is there someone sitting at 1436
+[00:25:34] with 100,000 shares providing a ton of
+[00:25:37] support or is there Nobody Until
+[00:25:40] 14 and who's above 1447 right is there
+[00:25:43] someone right above there providing
+[00:25:46] creating resistance or is there nothing
+[00:25:48] until
+[00:25:49] 15 so that's when we start to need to
+[00:25:51] look a little bit deeper see okay
+[00:25:54] there's someone at 1425 and someone at
+[00:25:56] 1455
+[00:25:58] or there's two buyers here at
+[00:26:01] 1431 when there's only one at 1440
+[00:26:04] that's
+[00:26:05] selling this helps us understand the
+[00:26:07] market a little bit
+[00:26:08] better when I started trading I didn't
+[00:26:10] know anything about level two you know
+[00:26:13] all I knew was level one when I logged
+[00:26:15] into my you know regular old E Trade
+[00:26:17] account you would just see you know this
+[00:26:20] kind of thing okay well I can buy
+[00:26:22] 1437 and just type in a th000 shares and
+[00:26:25] you click buy and you got to click
+[00:26:27] refresh a couple times times and it
+[00:26:28] comes back up and shows the new price
+[00:26:31] then you click sell right but that's I
+[00:26:35] mean that's not feasible for day trading
+[00:26:38] it's really not going to work you need
+[00:26:40] to be able to see everything else that's
+[00:26:42] going
+[00:26:43] on okay so this window here is called
+[00:26:46] the market depth the level two then this
+[00:26:48] window is the time and sales these are
+[00:26:50] each order going through in real time
+[00:26:54] the price the number of shares and then
+[00:26:56] the exchange right this was the route
+[00:26:59] used to get to this place right here
+[00:27:02] ARCA Ed X
+[00:27:04] fadf
+[00:27:08] Etc now some Traders instead of having
+[00:27:11] to click here and type here to buy
+[00:27:14] they'll use hotkeys now the advantage of
+[00:27:17] hotkeys is that you can go up here into
+[00:27:19] your um into your windows where is
+[00:27:26] it let's see
+[00:27:30] oops that's
+[00:27:37] fine okay so we've got all these hot
+[00:27:48] keys so what you can do is you can go
+[00:27:50] into the hotkey
+[00:27:52] configuration and you can map specific
+[00:27:54] keys to do specific things in this
+[00:27:57] window right here
+[00:27:58] so you can create a key to buy 1,000
+[00:28:01] shares at the ask price or to sell a
+[00:28:04] th000 shares at the bid
+[00:28:06] price or you could create a hotkey to
+[00:28:09] put out an automatic stop 20 cents away
+[00:28:12] so if the stock drops 20 cents it'll
+[00:28:14] sell your position for a loss so it
+[00:28:16] won't just keep going
+[00:28:18] down you can create hotkeys to change
+[00:28:21] which route you'll use down here how
+[00:28:23] many shares you want to buy how many
+[00:28:26] cents above the ask you want to put this
+[00:28:28] to give you a little extra room to get
+[00:28:30] filled right because at this moment here
+[00:28:33] we can see there's 600 shares the five
+[00:28:35] plus the one is 600 okay so say you want
+[00:28:38] to buy a th maybe you get filled 600 at
+[00:28:41] 35 and then it pops up to
+[00:28:43] 1440 right so by putting this up to 1442
+[00:28:46] or something like that we ensure we'll
+[00:28:48] get the first 600 and then also leave
+[00:28:50] room to fill the rest maybe a little bit
+[00:28:53] higher

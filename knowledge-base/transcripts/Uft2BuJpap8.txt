@@ -1,0 +1,227 @@
+# Buying the Break of VWAP Setup
+# https://www.youtube.com/watch?v=Uft2BuJpap8
+# duration_sec: 487
+
+[00:00:00] What's up, everyone? All right, so in
+[00:00:02] today's episode, I'm going to break down
+[00:00:03] my trades from the morning. It's
+[00:00:05] Tuesday. We've got a 4-day week, so I I
+[00:00:07] need to make up for some lost time, and
+[00:00:09] I was hoping today I would get a little
+[00:00:10] bit more, but well, it's still a green
+[00:00:13] day. I can't complain. I'm up just over
+[00:00:15] $20,000.
+[00:00:16] That's four times the cold market daily
+[00:00:18] goal of five grand, and exactly at my
+[00:00:21] hot market daily goal, which is $20,000.
+[00:00:24] So, 20,000 a day, that definitely keeps
+[00:00:27] the 9-to-5 job away. I can't complain.
+[00:00:29] Uh but what's interesting today is when
+[00:00:31] I looked at my scans this morning at
+[00:00:33] about 6:30, we already had one stock up
+[00:00:36] over 300%
+[00:00:38] and two others that were up with over 20
+[00:00:40] million shares of volume each. We had a
+[00:00:41] ton of volume this morning, and so that
+[00:00:44] gave me the confidence that there were
+[00:00:46] definitely live traders in the market,
+[00:00:48] and today had the potential to be a
+[00:00:50] really hot day. So, when we jump on the
+[00:00:52] screen share, you'll see the first stock
+[00:00:55] that I traded
+[00:00:56] actually had breaking news at about
+[00:00:58] 6:50, which is a little unusual. It's
+[00:01:01] just before 7:00 a.m., and that had the
+[00:01:04] effect of kind of pushing the stock up.
+[00:01:06] So, coming into 7:00 a.m., when most
+[00:01:08] traders are sitting down, it was
+[00:01:10] probably the I think it was the most
+[00:01:12] obvious stock at that moment. And I
+[00:01:14] didn't jump in it until after 7:00 a.m.
+[00:01:17] But, I got a couple nice trades on it,
+[00:01:18] which we'll break down. So, when we jump
+[00:01:21] on the screen share here, TWG was a
+[00:01:23] stock I traded, and you can see I'm up
+[00:01:25] uh a little over $20,000, which is
+[00:01:27] solid. Um the stock TWG is currently up
+[00:01:30] about 65%
+[00:01:32] on the day. IVF is still up uh just
+[00:01:35] about 300%. SEGG is up 164%.
+[00:01:40] We've got a couple other big gainers as
+[00:01:41] well, and look at the volume.
+[00:01:43] If we sort by volume, we've got three
+[00:01:46] stocks with over 100 million shares. IVF
+[00:01:48] is almost at 200 million shares, and
+[00:01:50] we've got several others between, you
+[00:01:52] know, 50 and 100. So, a lot of volume in
+[00:01:55] the market, a lot of liquidity. That's a
+[00:01:57] good thing. So, TWG, first of all, it's
+[00:02:00] a Hong Kong company. So, if you wanted
+[00:02:01] to trade it at Charles Schwab, you're
+[00:02:03] out of luck because they won't let you
+[00:02:05] trade it. So, if you're still using
+[00:02:06] Schwab as your primary broker, it's
+[00:02:09] definitely time to consider having a
+[00:02:10] backup for cases like this. So, TWG
+[00:02:14] initially pops up here at about 6:50 on
+[00:02:16] breaking news. I didn't see it. I was
+[00:02:19] still getting set up. It squeezes up
+[00:02:21] here, and now as it gets a little
+[00:02:23] higher, goes up to a high of 888 right
+[00:02:25] there. Dips down, pops back up, dips
+[00:02:28] down, and starts to pull back.
+[00:02:31] So, right around 7:00 a.m., it had
+[00:02:33] already pulled back so much. I was like,
+[00:02:35] I don't know. This is, you know, a high
+[00:02:37] of 888 is great, but all the way back
+[00:02:39] down to 480? I mean, that's a $4 a share
+[00:02:41] drawdown off the top. That's kind of
+[00:02:44] big. So, right here, all of a sudden, it
+[00:02:47] holds up, and this is just after 7:00
+[00:02:49] a.m. right here, and I took it this
+[00:02:51] trade right here for the break through
+[00:02:52] the volume weighted average price. I got
+[00:02:54] in, and I got out up around $7. Didn't
+[00:02:57] make a lot in the first trade, about
+[00:02:59] $1,000 of profit. It ends up squeezing a
+[00:03:01] little bit higher here, and I got back
+[00:03:03] in right there as it squeezed through
+[00:03:05] seven. Ends up going up to 740, and
+[00:03:07] through that move there, I made a total
+[00:03:09] of $2,500. I was breaking the ice with
+[00:03:12] smaller positions. I was nervous with it
+[00:03:14] being Chinese. I knew it was not a high
+[00:03:16] a day, so I was just being a little
+[00:03:18] cautious.
+[00:03:19] This ends up being an inverted head and
+[00:03:21] shoulders pattern right here. It then
+[00:03:23] dips down, and then right here as it
+[00:03:25] comes back up, I got back in here when
+[00:03:27] it broke over VWAP. And on this trade, I
+[00:03:29] took 10,000 shares, and then I added
+[00:03:31] into the squeeze. It ends up going all
+[00:03:33] the way up here to a high of eight uh
+[00:03:35] let's see, the the high there was like
+[00:03:37] $8.30, which is pretty solid. And I took
+[00:03:41] half off the table right up here over
+[00:03:42] eight, and that high was 828. It then
+[00:03:45] dips down, and then curls back up again,
+[00:03:48] and I was able to add back, and then
+[00:03:50] take more off the table up to 850, which
+[00:03:52] ended up being a resistance level. Then,
+[00:03:54] it breaks through 850 and pushes up to
+[00:03:57] 920 and dips down. So, I ended up uh
+[00:04:00] doing well there, getting myself up for
+[00:04:02] to $14,000 on the day. Then through this
+[00:04:04] area here, it comes back up to this 850
+[00:04:07] or this um 950 high, and it's able to
+[00:04:10] break through it, and I got a trade up
+[00:04:12] here, and I made another 7,000. So, now
+[00:04:15] I'm up 22,000 on the day. Got myself up
+[00:04:17] to 23. Got up to here, added back, and
+[00:04:21] gave back three grand off the top. And
+[00:04:24] so, I'm sitting at $20,790.97.
+[00:04:28] And, you know what? Today's one of those
+[00:04:30] days where
+[00:04:31] I feel like I really squeezed as much as
+[00:04:33] I could out of the market. I got this,
+[00:04:34] you know, kind of nice rally. Actually,
+[00:04:36] the P&L was more like this. It was small
+[00:04:38] gains, small gains, and then a big jump,
+[00:04:40] and then a smaller jump, and then a
+[00:04:42] small jump, and then a small draw down
+[00:04:45] like that. So, this was up to 2,500.
+[00:04:48] This was up to 14,000. This was up to 20
+[00:04:51] um
+[00:04:51] 21. This was up to 23, and then this was
+[00:04:54] back to 20. Pretty much Yeah, pretty
+[00:04:56] much exactly like that. Not perfectly to
+[00:04:57] scale, but um but I feel like this is an
+[00:05:00] acceptable way a
+[00:05:02] and time to walk away. This is okay to
+[00:05:04] give back a little profit off the top.
+[00:05:06] It means I pushed it. I tried to squeeze
+[00:05:08] as much as I could out.
+[00:05:10] Kind of got shut down there up at the
+[00:05:11] top. Didn't work, and then stopped
+[00:05:13] trading. I didn't keep going back for it
+[00:05:16] and end up giving back gains, which
+[00:05:17] would have been a mistake and is very
+[00:05:19] easy to do. I just said, oh, nope,
+[00:05:21] that's it. All right, so I'm going to
+[00:05:22] wait, and let's see if we get another
+[00:05:23] trade on that stock.
+[00:05:25] And we didn't. It goes sideways. It
+[00:05:27] pulls back, so no more trades on that
+[00:05:28] stock. Then I'm sitting here watching
+[00:05:30] the scans, and we had DRCT hit the
+[00:05:32] scans. This one pops up and immediately
+[00:05:34] reverses. No trades on it. I didn't like
+[00:05:37] it. I didn't trust it.
+[00:05:38] We had um SPHS or SP
+[00:05:43] SHPH pop up on the scans. And although
+[00:05:45] it made a pretty big move here, it felt,
+[00:05:48] even from the beginning, like a grinder.
+[00:05:50] It was very thickly traded. Has
+[00:05:53] currently 112 million shares of volume.
+[00:05:55] Despite a low float, I just wasn't
+[00:05:57] feeling it. So, I could have traded
+[00:05:59] there from four to five. I didn't. It
+[00:06:01] felt too thickly traded, like it was
+[00:06:03] just going to be too slow.
+[00:06:05] And then next thing you know, so this
+[00:06:08] breakout was at um 7:55.
+[00:06:11] Then next thing you know, we're coming
+[00:06:12] up to 8:00 a.m. Nothing at 8:00. Nothing
+[00:06:14] at 8:30. Nothing at 8:45. It's 9:00 a.m.
+[00:06:17] Nothing at 9:00. 9:15. It's 9:30. And I
+[00:06:19] said, all right, guys, I'm going to
+[00:06:21] switch gears. Let's jump into the
+[00:06:22] classes, and what we ended up doing
+[00:06:24] today is I taught um a really nice class
+[00:06:28] on parabolic momentum, which um I think
+[00:06:31] members um really enjoyed. This is I
+[00:06:34] mean, of course, you guys probably uh
+[00:06:36] recognize parabolic momentum is when we
+[00:06:38] have stocks basically going straight up
+[00:06:40] like this.
+[00:06:41] Um so, I talked about the history of
+[00:06:42] parabolic momentum from the Volkswagen
+[00:06:44] short squeeze, DRYS, and then GameStop.
+[00:06:47] Couple of the big moves in the last um
+[00:06:49] you know,
+[00:06:50] well, almost 20 years now. And then
+[00:06:53] showed a ton of examples of the type of
+[00:06:56] parabolic uh squeezes that we are seeing
+[00:06:58] on a very regular basis now. They're not
+[00:07:01] um stocks that you're necessarily going
+[00:07:03] to see headlines um about on the Wall
+[00:07:05] Street Journal, but, you know, these
+[00:07:07] moves like even what we just had today,
+[00:07:09] they have become my bread and butter.
+[00:07:11] And it feels like we are at least
+[00:07:13] several times a week getting, you know,
+[00:07:15] 100 to 300% squeezes. And then a couple
+[00:07:18] times a month, we get a bigger move up
+[00:07:20] to,
+[00:07:23] you know, 500, 700, or 1,000%. And we've
+[00:07:25] already had our first 1,000% squeeze
+[00:07:28] this year or So, you know, I'll be back
+[00:07:31] at it first thing tomorrow morning. My
+[00:07:33] goal right now is just to show up early,
+[00:07:36] capitalize as much as I can on each
+[00:07:38] opportunity that I see, and then not
+[00:07:40] overstay my welcome. So, today, mission
+[00:07:43] accomplished, and we'll do it again
+[00:07:44] tomorrow morning. Reminder for those of
+[00:07:46] you guys who are new, trading is risky,
+[00:07:47] and my results aren't typical, so please
+[00:07:49] manage your risk, and always practice a
+[00:07:51] simulator before putting real money on
+[00:07:52] the line. Now, if you want to watch over
+[00:07:54] my shoulder and use this platform here,
+[00:07:56] I'll put the link for the 2-week trial
+[00:07:58] at the top of the comments and in the
+[00:07:59] description, so you can check it out.
+[00:08:01] With that, I'll see you guys back at it
+[00:08:03] bright and early tomorrow morning.

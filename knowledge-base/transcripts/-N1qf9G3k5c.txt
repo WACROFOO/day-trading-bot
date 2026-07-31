@@ -1,0 +1,446 @@
+# Scaling a Strategy
+# https://www.youtube.com/watch?v=-N1qf9G3k5c
+# duration_sec: 1040
+
+[00:00:00] what's up everyone alright so in this
+[00:00:01] episode I'm gonna introduce you guys to
+[00:00:03] the newest member of the Hunger K club
+[00:00:05] at Warrior Training his name is Jess and
+[00:00:07] he's made over a hundred thousand
+[00:00:09] dollars in verified profits day trading
+[00:00:11] the momentum strategy that I trade every
+[00:00:14] single day I was able to meet with him
+[00:00:16] in Miami last month he came down for an
+[00:00:19] inner-circle seminar which was a lot of
+[00:00:21] fun and I spent some time chatting with
+[00:00:23] him we even did a little interview which
+[00:00:24] I'm going to show you some clips of
+[00:00:26] during this episode and we were talking
+[00:00:28] about the process of learning a strategy
+[00:00:32] the process of getting started trading
+[00:00:34] what's which for him was kind of a funny
+[00:00:37] roundabout way and he's a pretty big
+[00:00:41] seller on Amazon and eBay and he had a
+[00:00:46] little bit of a scam what happened to
+[00:00:47] him he had I think he said he had over a
+[00:00:50] million dollars in inventory and his
+[00:00:53] account got froze so they froze his
+[00:00:56] account I think this was an Amazon his
+[00:00:58] seller account and so all of a sudden
+[00:01:01] he's sitting there with all this
+[00:01:02] inventory his accounts log and you know
+[00:01:04] the inventories in his warehouse he has
+[00:01:06] it but he can't sell it and he realized
+[00:01:09] how vulnerable he was because he was
+[00:01:13] 100% dependent on that platform
+[00:01:16] primarily Amazon and so that's when he
+[00:01:18] got into trading started to think that
+[00:01:20] he needed to diversify his income a
+[00:01:22] little bit he's a really smart guy and
+[00:01:24] he picked up on trading pretty quickly
+[00:01:27] but he made a lot of rookie mistakes
+[00:01:29] including one that he shares with with
+[00:01:32] me during our interview where he
+[00:01:35] actually had a trade he bought a penny
+[00:01:36] stock and he was up over two hundred and
+[00:01:38] fifty thousand dollars and he didn't
+[00:01:40] take the money off the table he didn't
+[00:01:42] he didn't sell it he didn't take the
+[00:01:43] profit and it came all the way back down
+[00:01:46] he took one trade that he was hoping to
+[00:01:48] become this homerun trade and it totally
+[00:01:51] blew up he eventually realized that to
+[00:01:53] become a consistent trader long-term
+[00:01:56] it's not about swinging for homeruns
+[00:01:59] it's about consistently hitting base
+[00:02:01] hits and so last month he decided to do
+[00:02:04] his own small account challenge which is
+[00:02:07] awesome he was inspired by a small
+[00:02:09] account challenge that I did in this
+[00:02:11] number which I was in the middle of when
+[00:02:13] we were at our seminar in Miami and so
+[00:02:15] what he did was he set up an account
+[00:02:17] with the same broker that I've been
+[00:02:19] using the one the optional broker he set
+[00:02:23] up an account with a little less than
+[00:02:24] ten thousand dollars in it all right
+[00:02:26] and his goal was to see how quickly he
+[00:02:28] could grow it in ten days he grew the
+[00:02:31] account to over twenty four thousand
+[00:02:33] dollars
+[00:02:33] averaging $1400 per day so when I asked
+[00:02:38] him do when he shared that with me and I
+[00:02:40] was so impressed that I asked him if he
+[00:02:42] would do a recap of that ten day
+[00:02:45] challenge to take less than ten thousand
+[00:02:47] and turn it into almost twenty five
+[00:02:49] thousand and so he did it he recorded it
+[00:02:51] and there's a link right below in the
+[00:02:53] description that you guys can click to
+[00:02:55] watch his recount so he's gonna break
+[00:02:58] down the way he trades the small cap
+[00:03:01] stocks now this is something that's kind
+[00:03:03] of interesting and the reason I'm down
+[00:03:06] here with a pool table so I was thinking
+[00:03:08] about a little bit about how trading
+[00:03:12] relates to pool kind of in a couple
+[00:03:15] different ways
+[00:03:16] his small cap strategy is a variation of
+[00:03:20] mine he learned the strategy that I
+[00:03:23] teach in the classes he's of course
+[00:03:25] watched me trading it over the last
+[00:03:27] several years he's in the chat room but
+[00:03:29] he decided to put a little bit of his
+[00:03:32] own spin on it and he trades less than
+[00:03:34] me he doesn't trade every single day
+[00:03:36] he's got a very specific criteria for
+[00:03:40] what he's willing to trade but when he
+[00:03:42] takes those trades he does really well
+[00:03:43] and the results speak for themselves a
+[00:03:46] member of the hundred K Club which is
+[00:03:47] fantastic
+[00:03:48] and for those they're curious the way
+[00:03:50] we've set up the hundred K Club it's
+[00:03:51] this badge of honor so in the chat room
+[00:03:53] if you've made over a hundred thousand
+[00:03:55] dollars and you verify it with your
+[00:03:57] broker statements you get that little
+[00:03:58] hundred K Club badge next to your name
+[00:04:00] so every time you type people know that
+[00:04:02] you're someone in the room that's
+[00:04:03] actually made some money some over at
+[00:04:05] least over a hundred thousand dollars
+[00:04:06] and hopefully you know what you're doing
+[00:04:08] so when it comes to learning how to
+[00:04:12] trade I was thinking about playing pool
+[00:04:15] a little bit because you know you come
+[00:04:18] down here and every now and then it'll
+[00:04:20] be someone that comes over the house and
+[00:04:22] you know I set the whole table and and
+[00:04:24] they've never played pool once in their
+[00:04:25] life so you know the first thing is like
+[00:04:32] shoot it you know so sometimes people
+[00:04:35] lose so you need first you get a little
+[00:04:39] technique of how you wrap it keep it
+[00:04:41] tight
+[00:04:42] and then you know you'll have someone
+[00:04:43] who's like how do I start here wrong no
+[00:04:46] absolutely not that's not the way you
+[00:04:49] play pool but of course someone who's
+[00:04:51] never played once in their life they
+[00:04:53] don't know better just like someone
+[00:04:54] who's never traded once in their life
+[00:04:56] doesn't know better when they try to you
+[00:04:58] know trade a penny stock or you know TC
+[00:05:01] stock those are the mistakes that I made
+[00:05:03] so it's a process first of learning you
+[00:05:06] know kind of the rules of the game how
+[00:05:08] does this even work all right well you
+[00:05:10] know we start with day trading stocks of
+[00:05:13] real companies listed on NASDAQ nicey we
+[00:05:16] start by hitting this ball first into
+[00:05:18] another ball you never want to get the
+[00:05:20] eight ball in the pocket if that's what
+[00:05:21] you're playing until it's until last you
+[00:05:23] know that these are the things of course
+[00:05:25] you learn as you play pool and I would
+[00:05:27] say like trading and like playing pool
+[00:05:30] some people probably have a natural
+[00:05:32] aptitude and you babe maybe someone
+[00:05:34] watching this video who has a natural
+[00:05:37] aptitude for pool you know you've always
+[00:05:39] been good at maybe it's the the math
+[00:05:42] maybe it's the angles a little geometry
+[00:05:44] whatever it is it connects or maybe
+[00:05:47] you're the type of person who you
+[00:05:49] couldn't for the life for you win a game
+[00:05:51] of pool you don't get it it just doesn't
+[00:05:54] it doesn't feel right and trading is a
+[00:05:56] lot like that a lot of people pretty
+[00:05:58] quickly will recognize whether or not
+[00:06:00] they have that sort of natural aptitude
+[00:06:03] now if you have the natural aptitude and
+[00:06:05] you feel like it's working then it's a
+[00:06:09] process of getting good of practicing so
+[00:06:13] let's go ahead and let's see what
+[00:06:18] happens okay there we go all right we
+[00:06:23] got one in all right so what are we so
+[00:06:26] we're solids era so we got this guy in
+[00:06:30] the pocket
+[00:06:30] number four good ol number four now it
+[00:06:33] starts to get into a little bit of
+[00:06:34] strategy and so you know I have a
+[00:06:37] strategy for trading right I'll look for
+[00:06:39] stocks that are moving up quickly just
+[00:06:40] does the same thing we're looking for
+[00:06:42] the same type of stock with pool you
+[00:06:44] have a strategy so now of course it's
+[00:06:46] you know do you go for the easy ball do
+[00:06:47] you go for the more difficult one how do
+[00:06:49] you set yourself up for the next the
+[00:06:50] next turn these are the things that in
+[00:06:54] my mind really relate to trading because
+[00:06:56] it's strategy and no - no - pool players
+[00:07:00] are going to be identical in the way
+[00:07:02] they play probably just like chess no -
+[00:07:05] chess players are going to be identical
+[00:07:07] even if one learns from another so I
+[00:07:09] think you guys will really learn a lot
+[00:07:11] from Jess and get a sense of kind of his
+[00:07:14] spin on the momentum trading strategy
+[00:07:19] and when it comes to scaling up a
+[00:07:22] strategy of course for me I started in
+[00:07:26] January 2017 with my tiny account right
+[00:07:30] $583 I've grown it to over a million
+[00:07:33] dollars and I have proven that even with
+[00:07:37] a tiny account now although the results
+[00:07:41] are typical and I have a lot of
+[00:07:43] experience trading for me it was
+[00:07:45] possible to take $500 and grow at first
+[00:07:48] to five thousand and then to ten
+[00:07:50] thousand then to twenty five then to
+[00:07:52] fifty to a hundred and then from there
+[00:07:54] it was just a matter of time before I
+[00:07:56] crossed that million dollar level
+[00:07:57] sometimes traders will say Ross if
+[00:08:00] you're such a good trader why you know
+[00:08:03] why did you start with fifty eight
+[00:08:04] thousand and turn it into a hundred
+[00:08:06] million and so I'm gonna answer that
+[00:08:08] question and it's an issue of
+[00:08:10] scalability you can scale a strategy
+[00:08:14] from a five hundred dollar account to a
+[00:08:16] five thousand dollar account and even to
+[00:08:18] a fifty thousand dollar account but you
+[00:08:20] will not see the same exponential growth
+[00:08:22] so in other words from five hundred
+[00:08:25] eighty three dollars to a million bucks
+[00:08:27] I was trading with an average of eight
+[00:08:28] thousand shares so if I started with
+[00:08:31] five thousand with a goal of turning it
+[00:08:33] into ten million I would have needed to
+[00:08:35] have been trading with an average of a
+[00:08:37] multiple of ten eighty thousand shares
+[00:08:39] right not eight thousand eighty thousand
+[00:08:41] and if I'd started with fifty eight
+[00:08:43] thousand dollars
+[00:08:44] and I wanted to grow it to a hundred
+[00:08:45] million I would have needed to have been
+[00:08:47] trading with an average of 800,000
+[00:08:49] shares and as you scale up you start to
+[00:08:52] see diminishing returns
+[00:08:53] so I've proven that it's not very
+[00:08:56] difficult to scale from five hundred to
+[00:08:58] five thousand dollar accounts that's
+[00:08:59] fairly easy there's a lot of liquidity
+[00:09:01] in the market but when you get higher
+[00:09:03] and higher your returns get smaller and
+[00:09:06] smaller and smaller
+[00:09:06] in fact they can even get to a place
+[00:09:08] where they start to diminish because of
+[00:09:10] slippage so there is a sweet spot in the
+[00:09:14] market there's probably a sweet spot
+[00:09:16] with a lot of different things there's a
+[00:09:17] little bit of a sweet spot with how you
+[00:09:19] play pool with how you play chess and
+[00:09:23] for Jess he's been building his strategy
+[00:09:27] and kind of developing his own spin on
+[00:09:30] how to trade momentum there's definitely
+[00:09:33] been a sweet spot that he has really
+[00:09:35] found so what I'd love for you guys to
+[00:09:37] do and I'm gonna put in a clip right
+[00:09:40] here of me and Jess talking in Miami
+[00:09:43] about his journey and his strategy so
+[00:09:46] watch this and then we'll jump right
+[00:09:47] back over here um well I started a few
+[00:09:51] years ago with you guys I've been
+[00:09:53] trading for a while now and there's a
+[00:09:55] lot of hit and miss you know big gains
+[00:09:58] big losses yes and so my turning point
+[00:10:03] was when obviously I started with you
+[00:10:05] and my trades got just very refined
+[00:10:12] and once they're refined I could I could
+[00:10:15] take those huge losses it was huge bid
+[00:10:17] those big winners and really and shrink
+[00:10:19] them down and even my twinners got small
+[00:10:21] but with small losses yeah yeah no and
+[00:10:24] then from there I was able to focus on
+[00:10:26] okay now I'm gonna I know how to take
+[00:10:28] the small loss and if I start really
+[00:10:31] accelerating like my large gains yep yep
+[00:10:34] that's awesome yeah so you joined us
+[00:10:36] having three years of trial and error
+[00:10:38] and then how long did it take you after
+[00:10:40] joining before you start making money it
+[00:10:41] was systole it was about I was I would
+[00:10:44] make I would still make money but I
+[00:10:46] would still lose money and from there I
+[00:10:50] probably about a year maybe here in a
+[00:10:53] few months and then I started really
+[00:10:55] stacking on my profits
+[00:10:57] yeah and that again is you know we
+[00:11:00] talked about that blessing and curse in
+[00:11:01] the market that you know the the curse
+[00:11:03] is that you can spend three years
+[00:11:04] struggling to make even a hundred
+[00:11:06] dollars a day which feels like I'm not
+[00:11:08] trying to drive a Lamborghini I'm not
+[00:11:10] trying to aim crazy I'm gonna try to
+[00:11:11] make a hundred bucks why is it this hard
+[00:11:13] and it's that hard because you won't
+[00:11:15] make it consistently to that consistent
+[00:11:17] strategy and then once you have it the
+[00:11:19] only difference between a hundred a day
+[00:11:20] and two hundred or three hundred four
+[00:11:23] hundred is slowly increasing your share
+[00:11:25] size
+[00:11:26] you know cuz now you've got something
+[00:11:28] that's proven successful yeah and that's
+[00:11:30] a lock you like oh why only take you
+[00:11:32] know 100 shares but I make a little bit
+[00:11:35] like this you can you can take that and
+[00:11:38] run with it and that's how you get to
+[00:11:41] that nice neck so it just it's just
+[00:11:43] share size I think one of the reasons
+[00:11:45] that a lot of people end up failing is
+[00:11:47] because they think because they're
+[00:11:49] trading with a hundred shares that they
+[00:11:50] should be making a hundred dollars a day
+[00:11:52] really crazy when the reality is if
+[00:11:55] you're trading with a hundred shares and
+[00:11:56] you're making twenty bucks a day that's
+[00:11:59] 20 cents a day out of the market you
+[00:12:01] take a thousand shares that's 200 today
+[00:12:03] you take 10,000 shares that's 2,000
+[00:12:06] now you're making half yeah right you
+[00:12:08] don't need to be making $1 a share out
+[00:12:10] of every stock I mean it depends on
+[00:12:11] share size but if you're trained with
+[00:12:13] 100 shares and you make $20 a day at the
+[00:12:16] beginning it feels like you're not even
+[00:12:17] covering the Asians and that's why
+[00:12:19] people often adapt a strategy for
+[00:12:22] trading with a tiny account but it's I
+[00:12:24] mean essentially they're trying to
+[00:12:26] achieve something that even really
+[00:12:28] successful traders typically which would
+[00:12:30] be you know a full dollar share out of
+[00:12:32] market every yeah I'm such small size
+[00:12:35] yeah yeah so when we were in Miami all
+[00:12:38] right guys well this is the day that I
+[00:12:40] was really afraid of trading in small
+[00:12:43] accounts is really difficult everyone
+[00:12:44] knows that I started with five hundred
+[00:12:47] and twenty dollars in my account last
+[00:12:48] week a week ago
+[00:12:50] and today I had eleven hundred dollars
+[00:12:54] in the account I'd been making some good
+[00:12:56] progress the account was up over a
+[00:12:58] hundred percent we know what happened
+[00:13:00] today I blew up the account I got a
+[00:13:04] little aggressive that stock hadn't
+[00:13:06] watching for the last few days I jumped
+[00:13:08] into it and first I was up three hundred
+[00:13:12] dollars four hundred five hundred six
+[00:13:14] hundred dollars then those up seven
+[00:13:15] hundred has up eight hundred nine
+[00:13:17] hundred a thousand dollars eleven
+[00:13:19] hundred and I finished the day up $1300
+[00:13:22] oh I blew up my account you didn't think
+[00:13:25] I really blew it up right I blew it up a
+[00:13:28] BB account in one day I blew up my
+[00:13:33] account which was pretty crazy right you
+[00:13:38] guys who've been watching the videos for
+[00:13:40] a while you know what I'm talking about
+[00:13:42] in one day I doubled my account now
+[00:13:46] that's speaking of scalability in the
+[00:13:49] market I was able to double my account
+[00:13:51] in one day because the account was small
+[00:13:54] and the stocks that I was trading had
+[00:13:57] the potential to give me that that big
+[00:14:00] move so it was achievable
+[00:14:04] that's scalability with a fifty eight
+[00:14:07] thousand dollar account would I be able
+[00:14:09] to blow up my account in one day double
+[00:14:11] it in one day
+[00:14:12] probably not without taking a lot of
+[00:14:15] risk so if you want to consist
+[00:14:18] growing account over a long period of
+[00:14:20] time you're not gonna be thinking about
+[00:14:22] what kind of penny stock can i buy at
+[00:14:24] ten cents and sell at 20 cents to double
+[00:14:26] my money you're gonna be thinking about
+[00:14:28] lots of small base hits and it can be a
+[00:14:31] little bit hard at first to really
+[00:14:35] embrace that mindset but let me let me
+[00:14:39] put it to you another way how many
+[00:14:42] thousand dollar winners would you need
+[00:14:44] in order to make a million bucks do the
+[00:14:49] math right you make a thousand a hundred
+[00:14:52] times you've made a hundred grand you
+[00:14:55] make a thousand two hundred times you've
+[00:14:57] made two hundred grand
+[00:14:58] so it'll take you one thousand one
+[00:15:01] thousand dollar winners to make a
+[00:15:02] million dollars now of course in a
+[00:15:05] perfect world you would just have a
+[00:15:06] thousand winning trades in a row and
+[00:15:08] that would be yeah the reality is that
+[00:15:10] you might have four one thousand dollar
+[00:15:12] winners and then you might have two one
+[00:15:14] thousand dollar losses and then four
+[00:15:16] more one thousand dollar winners and a
+[00:15:17] few more losses it's always a few steps
+[00:15:20] forward a few steps back that's how it's
+[00:15:21] always been in my career but if you
+[00:15:25] focus on basis in you have the strategy
+[00:15:28] down you've proven that you're
+[00:15:29] profitable both in a trading sim and
+[00:15:31] we're training with small size with real
+[00:15:33] money then building a career as a trader
+[00:15:36] it's really a matter of time for all the
+[00:15:39] students that are part of the hundred K
+[00:15:40] Club it's to me not really a question of
+[00:15:43] will they you know make a million
+[00:15:44] dollars trading it's just when that
+[00:15:46] happens may take a couple years may take
+[00:15:49] five years maybe it takes ten years but
+[00:15:52] even if it takes ten years that's still
+[00:15:53] them making a hundred thousand dollars a
+[00:15:55] year trading the momentum in the markets
+[00:15:57] so I hope that justice story has
+[00:16:00] inspired you guys a little bit I've been
+[00:16:03] so impressed with him he's a really an
+[00:16:06] incredible trader in a lot of ways he's
+[00:16:08] he's better than me because he's more
+[00:16:10] discipline
+[00:16:11] I struggle with being disciplined that's
+[00:16:13] the thing that I struggle with the most
+[00:16:14] it's the emotions so I'm really
+[00:16:16] impressed with him I hope you guys do
+[00:16:17] click that link download and stream his
+[00:16:21] recap of turning an account less than
+[00:16:24] ten thousand dollars into twenty four
+[00:16:25] thousand in ten days fourteen hundred
+[00:16:28] dollars a day and he was trading small
+[00:16:30] size so again even if you had an account
+[00:16:32] with three thousand or five thousand
+[00:16:34] it's not to say you wouldn't be able to
+[00:16:35] take a lot of the same traits I mean I
+[00:16:38] train on leverage I'll have you guys
+[00:16:39] know that I don't think he was using
+[00:16:41] much leverage during this challenge so I
+[00:16:43] hope you guys enjoyed his breakdown of
+[00:16:45] his small account challenge and I will
+[00:16:49] see you guys for the next episode of
+[00:16:51] course we'll be back at it first thing
+[00:16:53] on Monday actually not Monday Tuesday
+[00:16:56] morning Presidents Day is on Monday
+[00:16:59] alright I'll see you guys on Tuesday bye
+[00:17:01] everyone hey did you know that I go live
+[00:17:04] every single morning between 9:00 and
+[00:17:06] 9:15 to stream my pre market watchlist
+[00:17:09] subscribe the channel press the bell for
+[00:17:11] the alert and you'll get the
+[00:17:12] notification
+[00:17:13] [Music]

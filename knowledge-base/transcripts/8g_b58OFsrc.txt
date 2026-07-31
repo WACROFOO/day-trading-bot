@@ -1,0 +1,429 @@
+# Stock Float Explained and Why it Matters
+# https://www.youtube.com/watch?v=8g_b58OFsrc
+# duration_sec: 1018
+
+[00:00:00] what's up everybody all right so today
+[00:00:02] we're going to talk a little bit about
+[00:00:04] day trading terminology and the term
+[00:00:06] we're going to talk about is float I get
+[00:00:08] a lot of people asking me questions
+[00:00:10] about float what is float why is it
+[00:00:13] important how does it affect the stocks
+[00:00:15] that you're going to trade so this is
+[00:00:17] going to require understanding u a few
+[00:00:20] other terms that are going to help you
+[00:00:22] um really get a sense of what float
+[00:00:25] means so we're going to go through a few
+[00:00:27] terms and I'm going to show you some
+[00:00:28] examples of low float stocks versus uh
+[00:00:33] thickly traded stocks or heavy float
+[00:00:35] stocks all right so when we talk about
+[00:00:38] day trading terminology uh float is
+[00:00:40] something that is going to come up a lot
+[00:00:42] now when a company does its initial
+[00:00:45] public offering that's the IPO what
+[00:00:48] they're doing is they're selling shares
+[00:00:51] onto the open market and those can be
+[00:00:53] bought uh by anyone interested in you
+[00:00:55] know taking a piece of the company when
+[00:00:57] a company does its IPO they're releasing
+[00:01:01] a fixed number of shares onto the market
+[00:01:04] and that becomes the float the number of
+[00:01:06] shares available to trade is the float
+[00:01:09] so let's just say for example a company
+[00:01:11] uh does a 10 million share IPO and those
+[00:01:15] Shares are priced at $10 a share they're
+[00:01:17] going to raise a $100 million from that
+[00:01:20] IPO now that money can go towards
+[00:01:23] investing into the company
+[00:01:24] infrastructure building factories
+[00:01:26] strategic Investments Etc and obviously
+[00:01:29] as an obligation of now being a publicly
+[00:01:32] traded company they have to uh show
+[00:01:34] their shareholders what they've done and
+[00:01:37] the profits they've made on a quarterly
+[00:01:39] and annual basis so um the important
+[00:01:43] thing to understand there is that every
+[00:01:45] single day we're all trading when we
+[00:01:48] trade a stock out of the same pool of
+[00:01:49] shares that 10 million share float that
+[00:01:52] is the amount of shares available to
+[00:01:54] trade now typically it's it's not going
+[00:01:57] to change on a day-to-day basis so when
+[00:01:59] you're buying shares you know you're
+[00:02:01] buying them from a seller when you're
+[00:02:03] selling shares you're selling them to a
+[00:02:05] buyer so we're just exchanging shares
+[00:02:08] within this same pool that pool is the
+[00:02:11] float so what supply and demand will
+[00:02:14] tell us is that stocks that have a low
+[00:02:18] float well they've got less Supply they
+[00:02:22] have a smaller amount of shares
+[00:02:23] available to trade so in an instance
+[00:02:26] where there is very very heavy demand we
+[00:02:29] get the imbalance between supply and
+[00:02:31] demand and that's when we can get
+[00:02:34] parabolic moves so as Traders one of the
+[00:02:37] things that we look for are stocks that
+[00:02:39] can be volatile so let's look just at
+[00:02:41] drys this is a recent example this is a
+[00:02:44] stock that literally this is not
+[00:02:46] exaggerating went uh from $4 a share to
+[00:02:49] over $100 a share in four trading
+[00:02:53] sessions right that's pretty crazy well
+[00:02:55] that's a relatively low float stock so I
+[00:02:58] can type in drys here and I can see that
+[00:03:00] the float is 21 million shares okay so
+[00:03:04] the float is fairly small now that's
+[00:03:06] relative so let's look at another
+[00:03:08] company let's look at Bank of America
+[00:03:10] Bank of America you can see uh has been
+[00:03:13] on a pretty big run here from 17 up to
+[00:03:15] 22 uh but generally speaking this is not
+[00:03:17] a stock that makes really big moves the
+[00:03:20] float is 10 billion shares all right so
+[00:03:24] for this you know this is like a 20%
+[00:03:26] move which is pretty massive considering
+[00:03:29] the you know the type of volatility the
+[00:03:31] stock usually sees it's you know pretty
+[00:03:33] much trades in range so the value here
+[00:03:36] for an investor is that this type of
+[00:03:38] stock is usually going to be safer
+[00:03:40] you're less likely to see huge moves
+[00:03:43] either to the upside or the downside so
+[00:03:44] it's a little bit more predictable let's
+[00:03:46] look at another stocks um we'll look at
+[00:03:48] Sprint this is another stock that trades
+[00:03:50] in a fairly narrow range on any given
+[00:03:53] day and especially in terms of day
+[00:03:55] trading this is what the intraday chart
+[00:03:56] looks like you know not a lot of range
+[00:03:59] let's look at
+[00:04:01] Siri this is another one that shows very
+[00:04:04] little range we're trading in a 10-cent
+[00:04:06] range here now when we look at the level
+[00:04:08] two this is the other thing we'll notice
+[00:04:11] a stock that has a very heavy float very
+[00:04:14] large float is going to be thickly
+[00:04:16] traded it's going to be more crowded you
+[00:04:18] have hundreds of thousands of shares of
+[00:04:21] buyers on the bid and sellers on the ask
+[00:04:25] right now if I was thinking about day
+[00:04:26] trading this stock I would look at it
+[00:04:27] and I'd be like well doesn't it look
+[00:04:29] like it's it's going to move very much
+[00:04:30] because there's so many sellers that
+[00:04:32] need to move out of the way before it's
+[00:04:34] going to move up even a penny and guess
+[00:04:36] what at the next Penny we're going to
+[00:04:38] see the same number of sellers sitting
+[00:04:40] at 54 or 55 56 57 so it's a stock that's
+[00:04:44] not very volatile again as an investor
+[00:04:46] long-term investor that's good that's
+[00:04:48] what you want right you want safe
+[00:04:50] relatively predictable but as a day
+[00:04:53] trader we want volatility so that means
+[00:04:56] we're going to focus on stocks with
+[00:04:58] lower floats and a threshold I focus on
+[00:05:01] stocks with a float of under 100 million
+[00:05:04] shares all right so you can see all of
+[00:05:07] these stocks here we're listing the
+[00:05:09] float in this column this is the float
+[00:05:11] column so this is an 11 million share
+[00:05:12] float this was 41 million 44 million
+[00:05:16] this one's very low only 940,000 share
+[00:05:19] float uh the yellow ones are marked
+[00:05:22] because they are definitely going to be
+[00:05:24] the stocks that have the potential to
+[00:05:25] make big moves let's look at uh glbs
+[00:05:29] this has a float well it's not listed
+[00:05:31] here this float is under a million
+[00:05:32] shares and this is a stock that um as
+[00:05:36] you can see here
+[00:05:39] glbs um let's see where where we looking
+[00:05:43] go forward there we go glbs this went
+[00:05:45] from
+[00:05:47] $335 up to
+[00:05:50] $23.60 okay that's a huge
+[00:05:53] move all all this uh really was was a
+[00:05:56] huge imbalance between buyers and
+[00:05:58] sellers between supply and demand demand
+[00:06:00] this is a day where we really didn't
+[00:06:01] have very many Sellers and the stock
+[00:06:03] just squeezed up limited Supply with
+[00:06:05] heavy demand can create an explosive
+[00:06:08] situation so the important thing first
+[00:06:11] and foremost is to look for stocks that
+[00:06:13] have lower floats and then the next
+[00:06:15] thing is to look for the Catalyst that
+[00:06:18] will drive demand so the way I do it is
+[00:06:22] every single day I open up my uh watch
+[00:06:24] list here my open up my scanners and I
+[00:06:26] start looking at the stocks that are
+[00:06:27] gapping up so if I move this out of the
+[00:06:30] way these are the stocks that are
+[00:06:31] gapping up now they're gapping up for a
+[00:06:34] reason a stock doesn't uh look like it's
+[00:06:36] going to open 40 or 50% higher than it
+[00:06:40] closed the day before without some type
+[00:06:42] of catalyst so I look through this list
+[00:06:45] of the top 10 biggest gappers and then I
+[00:06:48] simply go on market watch stock twits or
+[00:06:51] I ask in our chat room does anyone see
+[00:06:53] any news on this stock what's the
+[00:06:55] Catalyst what's going to drive this
+[00:06:56] higher and if I see that there's good
+[00:06:58] news like earning or there's you know
+[00:07:01] whatever it might be maybe they got a
+[00:07:03] new contract for a big order or
+[00:07:05] something like that that's going to tell
+[00:07:06] me this is a stock that has potential
+[00:07:09] and lots of Traders are going to want to
+[00:07:10] get a piece of the action now over the
+[00:07:13] years what I've done is I've been able
+[00:07:15] to put together a watch list of former
+[00:07:18] Runners which is right here these are
+[00:07:20] stocks that in the past have made big
+[00:07:22] moves just like glbs all right guess
+[00:07:25] what history repeats itself so these
+[00:07:27] stocks that have made big moves in the
+[00:07:28] past they often you know see these big
+[00:07:31] moves again because they have the right
+[00:07:35] criteria they have the low float and so
+[00:07:37] really all they need is the catalyst so
+[00:07:39] anytime we have news on these types of
+[00:07:41] stocks we can have explosive uh
+[00:07:44] breakouts you can see here Lake La this
+[00:07:48] is a company that makes biohazard suits
+[00:07:50] it's a lowf float stock and it's
+[00:07:52] squeezed here from about $78 up to $28
+[00:07:56] per share now the float right now is
+[00:07:59] Let's see Lake and I'm looking in trade
+[00:08:01] ideas 6.78 million shares so it's a very
+[00:08:04] low float what's another one dgly
+[00:08:07] digital Ally these guys make um body
+[00:08:10] cameras that police officers wear so
+[00:08:12] during the um some of the shootings and
+[00:08:15] violence and stuff that we've had over
+[00:08:17] the
+[00:08:17] years this comes into play as you know
+[00:08:20] people start to speculate maybe Congress
+[00:08:22] will make it a law that all police
+[00:08:25] officers need to wear body cameras well
+[00:08:27] that's certainly good for the maker of
+[00:08:28] the body camer and this stock squeezed
+[00:08:31] from $8 to
+[00:08:33] $32 now I can show you tons of examples
+[00:08:35] of stocks like these and what I've done
+[00:08:37] is I've gone through all of them and
+[00:08:39] really narrowed down the common
+[00:08:40] denominators what do these all have in
+[00:08:42] common and how can I find these before
+[00:08:45] they make the big move I know they all
+[00:08:47] share low floats and so I start Every
+[00:08:49] Morning by looking at the stocks that
+[00:08:51] have low floats and seeing if they have
+[00:08:53] a strong Catalyst now there are a few
+[00:08:57] ways a float can change all right right
+[00:08:59] so I want to talk about this here um
+[00:09:02] just so you understand these these three
+[00:09:05] scenarios the first way a float can
+[00:09:07] change is if a company performs a share
+[00:09:10] buyback all right now you guys have
+[00:09:12] probably heard about this before you
+[00:09:13] know Apple doing a massive you know
+[00:09:15] multi-billion dollar share buyback
+[00:09:17] program all right this is when the
+[00:09:19] company buys back some of the shares
+[00:09:21] that they sold during their IPO what
+[00:09:24] that does is it reduces the float and it
+[00:09:27] increases the value of the company so so
+[00:09:29] it's almost like um let's let's just say
+[00:09:32] for example when the company did IPO
+[00:09:35] it's like filling up a cup of coffee and
+[00:09:37] when you do a buyback you're decreasing
+[00:09:39] the coffee in there but you're
+[00:09:41] increasing the value it's like turning
+[00:09:43] coffee into espresso right it's stronger
+[00:09:46] it's good for shareholders the value
+[00:09:48] goes up everyone that's owning stock
+[00:09:50] they're going to see an increase in the
+[00:09:51] value all right value goes up the float
+[00:09:54] goes down now what a company can also do
+[00:09:58] and this is going to be adding water to
+[00:09:59] the coffee is they can do a secondary
+[00:10:02] offering a secondary offering is after
+[00:10:05] the initial public offering and even if
+[00:10:07] they do a third or fourth it's still
+[00:10:08] called a secondary offering and what it
+[00:10:10] is is it's selling more shares onto the
+[00:10:13] market it's selling more shares to raise
+[00:10:16] money and companies only really do this
+[00:10:18] when they need money so this is not
+[00:10:20] something that's really good news for a
+[00:10:22] stock and in fact it's probably no
+[00:10:24] surprise that drys did a secondary
+[00:10:27] offering um and I'll pull back back the
+[00:10:29] daily chart here they did this to raise
+[00:10:31] money and the stock promptly went from
+[00:10:36] on this day here $54 all the way down to
+[00:10:39] $10 a share that was a big drop they did
+[00:10:42] a secondary offering they raise money
+[00:10:44] they're diluting the value of the stock
+[00:10:46] they're releasing more shares onto the
+[00:10:48] market the float is going to increase so
+[00:10:51] if a company does uh secondary offerings
+[00:10:53] and things like that the float can go up
+[00:10:56] if they do a share buyback program the
+[00:10:58] float will go down now because I often
+[00:11:01] trade small caps stocks under $10 these
+[00:11:04] companies rarely do share buyback
+[00:11:05] programs they can rarely afford to these
+[00:11:07] are small caps they're low you know low
+[00:11:10] price stocks they're not usually the
+[00:11:12] most successful companies out there you
+[00:11:14] know they're emerging some of them have
+[00:11:16] the potential of moving their way from
+[00:11:18] small cap to midcap to large cap but a
+[00:11:21] lot of them will struggle in the small
+[00:11:22] cap price range for a long time so what
+[00:11:26] we see more often in this price range
+[00:11:28] are secondary offerings all right now uh
+[00:11:31] the Third Way the float can change is
+[00:11:34] with a stock split all right now we'll
+[00:11:36] bring back Apple again Apple recently
+[00:11:39] not super recently at this point but
+[00:11:41] they did a 7 to1 stock split so remember
+[00:11:43] the stock was trading at $700 a share
+[00:11:46] and I think the problem there was that
+[00:11:49] it was priced really high for retail
+[00:11:52] Traders you know retail traders that
+[00:11:53] wanted to buy it just simply couldn't
+[00:11:55] afford to it just you could buy a couple
+[00:11:57] shares but it just seemed like what's
+[00:11:58] the point point so what they did is they
+[00:12:00] did a 7:1 stock split so everyone uh
+[00:12:04] basically what this did is it it changed
+[00:12:07] the float so if you were holding a th000
+[00:12:09] shares as
+[00:12:11] $700 after the stock split you would now
+[00:12:14] be holding 7,000 shares at
+[00:12:18] $100 this is kind of like taking a $100
+[00:12:21] bill and turning it into 20s you know
+[00:12:23] it's it's not that you've really changed
+[00:12:26] the value of what you have you've just
+[00:12:28] changed theice price all right and
+[00:12:30] you've had to change the quantity of
+[00:12:31] bills you have you know to equal the
+[00:12:33] same price now when you do a stock split
+[00:12:36] now every you know thousand shares
+[00:12:39] turned into 7,000 and the float goes up
+[00:12:42] all right so that increases the float
+[00:12:45] now what some companies will do and
+[00:12:47] again this is something we see a lot
+[00:12:48] with the small caps is they'll perform a
+[00:12:51] reverse stock split so it it's it's
+[00:12:55] required that stocks uh on NYSC and
+[00:12:57] NASDAQ um exchange that they trade over
+[00:13:00] a dollar now stocks that are trading
+[00:13:02] below a dollar can risk getting delisted
+[00:13:05] and then they're going to move on to the
+[00:13:07] OTC exchange you know and and that's not
+[00:13:09] something that's that's not a good move
+[00:13:11] for a company they want to stay listed
+[00:13:13] if they are already listed so what they
+[00:13:16] sometimes will do is a reverse stock
+[00:13:17] split so that means if the current
+[00:13:20] trading price is let's say 90 cents or a
+[00:13:22] dollar it's just hovering just above
+[00:13:25] that minimum uh price they could say
+[00:13:28] well let's do a 10 to One reverse split
+[00:13:30] we're going to change the price from a
+[00:13:32] dollar to $10 a share all right and then
+[00:13:35] we'll be in good standing so if you're
+[00:13:37] previously holding a th000 shares at a
+[00:13:39] dollar now you'd only be holding a 100
+[00:13:41] shares at $10 again it's just like
+[00:13:44] changing in the 20s for the 100 I mean
+[00:13:46] the the value hasn't really changed in
+[00:13:48] that sense but um what does change is
+[00:13:51] the float because now you're making the
+[00:13:53] float smaller what used to be a th000
+[00:13:56] shares is now only 100 shares and when
+[00:13:58] that happens across the entire float
+[00:14:00] your your float is changing 10 to one
+[00:14:02] right in this case that has the effect
+[00:14:05] of um you know making some of these
+[00:14:07] stocks more volatile when you reduce the
+[00:14:10] float you reduce the supply the number
+[00:14:12] of shares available to trade and gbsn is
+[00:14:15] a classic example of this this is a
+[00:14:17] company that is now trading at one penny
+[00:14:20] they keep doing reverse splits so they
+[00:14:22] can stay listed on the exchange and when
+[00:14:24] we start to pull the chart back you can
+[00:14:27] see they've done so many reverse splits
+[00:14:29] when you go back to you know where this
+[00:14:31] was priced at let's say even just about
+[00:14:34] a year ago it'd be nearly a million
+[00:14:36] dollar a share because they keep doing
+[00:14:38] these reverse splits the stock keeps
+[00:14:40] selling off I mean you can see this it's
+[00:14:43] almost hard to even read this chart
+[00:14:45] because of how much it just continues to
+[00:14:47] drop so this is obviously you know not
+[00:14:50] it's not a very strong company right if
+[00:14:52] it was a strong company they wouldn't
+[00:14:53] have to keep doing these reverse stock
+[00:14:55] splits so this is the type of thing that
+[00:14:57] we see with small caps you know these
+[00:15:00] stocks that they you know they do
+[00:15:02] secondary offerings they do reverse
+[00:15:04] stock splits and sometimes these are
+[00:15:06] just a few steps away uh from bankruptcy
+[00:15:09] which is you know obviously the end of
+[00:15:11] the road for these for these stocks or
+[00:15:13] getting delisted which is uh certainly
+[00:15:15] close to the end of the road so the
+[00:15:18] important thing to know is that float is
+[00:15:20] a very important criteria when you're
+[00:15:23] looking at stocks it'll help you
+[00:15:26] understand the potential volatility as
+[00:15:29] day Traders we like volatility so we're
+[00:15:31] going to look naturally for stocks that
+[00:15:32] have a lower float but as a long-term
+[00:15:35] investor you're typically going to be
+[00:15:37] you know a little bit more cautious with
+[00:15:39] volatility and looking for more
+[00:15:41] stability right so it really depends on
+[00:15:43] the type of Trader you are um you know
+[00:15:46] and what's your your outlook is whether
+[00:15:47] you're looking for 10 minute 20 minute
+[00:15:49] hold times or like you know 10 week you
+[00:15:52] know 20 we type of long-term holds all
+[00:15:55] right so the way I do um you know my my
+[00:15:58] day every single morning starts by going
+[00:16:00] over the scanners looking at the top 10
+[00:16:03] gappers and then checking the float why
+[00:16:06] is the stock gapping up I can check
+[00:16:08] float right here in trade ideas I can
+[00:16:10] also just log into the chat room and ask
+[00:16:12] anyone in our room all right so today
+[00:16:15] we've talked about the definition of
+[00:16:17] float which also required talking a
+[00:16:19] little bit about uh the definition of an
+[00:16:21] IPO a share buyback program a secondary
+[00:16:24] offering and a stock split all right
+[00:16:27] guys so if you have any questions
+[00:16:28] questions please feel free to email me
+[00:16:30] Ross warriortrading.com or feel free to
+[00:16:33] put your comments in the video below all
+[00:16:35] right thanks
+[00:16:37] guys hey guys I also want to remind you
+[00:16:40] to subscribe to our YouTube channel you
+[00:16:42] can click by subscribing that way you
+[00:16:45] can get alerts when I upload new videos
+[00:16:47] like my teaching you how to day trade
+[00:16:49] video or the video right toward to
+[00:16:51] $1,000 into
+[00:16:53] $8,600 in one month thanks guys

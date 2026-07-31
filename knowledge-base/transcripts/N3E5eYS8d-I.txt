@@ -1,0 +1,267 @@
+# I asked ChatGPT to make a $750,000 Day Trading Strategy
+# https://www.youtube.com/watch?v=N3E5eYS8d-I
+# duration_sec: 648
+
+[00:00:00] what's up everyone all right so in this
+[00:00:02] episode we're gonna ask chat GPT to
+[00:00:04] develop a day trading strategy to make
+[00:00:07] 750 000 yes we're setting the bar high
+[00:00:10] I'll explain why in just a moment but
+[00:00:13] listen this is chat GPT everyone's all
+[00:00:15] hyped up about it everyone thinks it's
+[00:00:17] gonna take over search it's gonna take
+[00:00:18] over the world and if it can't develop a
+[00:00:20] strategy to make 750 000 trading then
+[00:00:23] what is it even worth anyways right
+[00:00:26] that's my question this all stems from a
+[00:00:30] student on YouTube a YouTube subscriber
+[00:00:32] who asked me during my live class last
+[00:00:35] week if he could use my strategy to make
+[00:00:38] 750 000 in the next three days and I
+[00:00:42] said no
+[00:00:44] that's an unrealistic goal
+[00:00:46] sounds like you owe somebody 750
+[00:00:51] 000 and you might want to spend the next
+[00:00:53] three or four days trying to figure out
+[00:00:55] how to get out of town so I don't think
+[00:00:57] day trading is a solution but you know
+[00:00:59] what let's just throw that as the first
+[00:01:00] question what's the fastest way to make
+[00:01:04] 750
+[00:01:06] 000 dollars Chad GPT open AI tell me
+[00:01:10] what is the what is the path
+[00:01:12] all right so it's it's reminding us
+[00:01:14] first that it does not want to encourage
+[00:01:16] any illegal or unethical methods of
+[00:01:20] making money
+[00:01:21] but it says one possible way to make 750
+[00:01:24] 000 would be to start a business
+[00:01:26] okay that's one uh another method could
+[00:01:30] be investing in the stock market ding
+[00:01:32] ding ding right okay real estate okay I
+[00:01:36] suppose uh that's gonna be too slow but
+[00:01:38] possible uh or other Financial assets
+[00:01:41] all right well let's just out of
+[00:01:43] curiosity what's the fastest way to make
+[00:01:46] 750 000 that's only a little bit illegal
+[00:01:51] now I'm thinking about this for our
+[00:01:53] friend on YouTube because he's really in
+[00:01:54] a jam so if it's only a little bit
+[00:01:56] illegal he might be okay with it I'm not
+[00:01:58] sure I don't want to speak out of turn
+[00:02:00] so again it really is harping on not
+[00:02:05] wanting to encourage unethical ways of
+[00:02:08] making money choose legal and ethical
+[00:02:10] ways to make money and build wealth okay
+[00:02:13] all right so for our friend on YouTube
+[00:02:14] this is not looking good for you but you
+[00:02:17] know what let's switch gears and let's
+[00:02:19] see whether or not we can actually
+[00:02:21] create or have ai create a day trading
+[00:02:24] strategy for us let's throw the 750 000
+[00:02:27] out the window for a second all right so
+[00:02:30] what's uh the best
+[00:02:33] day trading strategy
+[00:02:37] all right let's just start high level
+[00:02:39] here so we already know that it
+[00:02:41] encouraged uh or suggested investing in
+[00:02:43] the stock market so we're just going to
+[00:02:46] get into this a little bit with more
+[00:02:48] detail so here are some common day
+[00:02:50] trading strategies scalping
+[00:02:52] okay I've heard of that momentum trading
+[00:02:55] I've heard of that too I love this this
+[00:02:59] is
+[00:03:00] it's brilliant is what it is contrarian
+[00:03:03] trading okay that's that's when you're
+[00:03:06] trading reversals that's pretty
+[00:03:07] difficult I wouldn't try to do that as a
+[00:03:09] beginner news trading okay we could work
+[00:03:12] with that swing trading okay all right
+[00:03:15] so we have five
+[00:03:18] high level strategies here now you could
+[00:03:21] scalp trade on any of these strategies
+[00:03:23] you could be Scout well you can't scalp
+[00:03:25] swings but you can scalp news contrarian
+[00:03:27] or momentum that's more of a technique
+[00:03:29] to in my opinion uh and of course
+[00:03:31] momentum I'm already fairly familiar
+[00:03:33] with but they said scalping is number
+[00:03:34] one so let's ask more detail about that
+[00:03:36] so
+[00:03:39] um can you build me a scalp day trading
+[00:03:44] strategy that I can use
+[00:03:48] all right it's all riding on chat AI
+[00:03:51] open AI
+[00:03:55] so again it's giving its disclaimer and
+[00:03:57] it does save the bottom it may produce
+[00:03:59] inaccurate information about people
+[00:04:01] places or facts
+[00:04:03] so here's a general outline for scalp
+[00:04:05] trading all right so we're going to
+[00:04:06] switch over here I'm going to put the
+[00:04:08] Whiteboard up so no it said number one
+[00:04:12] number one it said was scalp
+[00:04:15] Trading
+[00:04:18] okay so scalp trading it said was number
+[00:04:20] one all right so it says this is our
+[00:04:23] scalp trading strategy
+[00:04:25] number one it says Identify highly
+[00:04:29] liquid stocks or currency
+[00:04:32] with high volatility that can provide
+[00:04:33] quick gains you can use technical
+[00:04:36] analysis such as Bollinger Bands
+[00:04:37] relative strength or moving averages
+[00:04:39] okay
+[00:04:41] so number one so this is more of like
+[00:04:45] this is more of an outline here so stock
+[00:04:49] selection
+[00:04:51] Okay so
+[00:04:53] hi
+[00:04:55] um high volume all right
+[00:04:58] and I would probably call that relative
+[00:05:00] volume number two it says set entry and
+[00:05:03] exit points
+[00:05:04] okay so entry exit
+[00:05:08] strategy we'll see if we can ask it a
+[00:05:11] little bit more info about that in a
+[00:05:12] second number three monitor the market
+[00:05:15] okay yeah use trading platform that
+[00:05:18] allows you to quickly execute trades yes
+[00:05:20] definitely so number four tools
+[00:05:25] fast broker okay so I'll write that down
+[00:05:28] number five stick to your plan so that's
+[00:05:31] discipline have the discipline to stick
+[00:05:33] to the plan
+[00:05:34] stick to plan and then number six
+[00:05:38] regularly review and adjust your trading
+[00:05:39] plan as needed based on your performance
+[00:05:41] and market conditions that's great so
+[00:05:43] monitor
+[00:05:45] and I'll just do a percentage sign for
+[00:05:47] monitoring your metrics and the third
+[00:05:49] one was monitor market news see I don't
+[00:05:52] think that that's super helpful
+[00:05:54] um
+[00:05:55] monitor
+[00:05:57] news
+[00:05:58] what does that even mean all right so
+[00:06:01] but we're starting to get somewhere here
+[00:06:03] so now I think what we need to do is we
+[00:06:05] need to hone in a little bit deeper on
+[00:06:08] some of these
+[00:06:09] so what would be a good question to ask
+[00:06:12] next
+[00:06:13] um so what's the best way to find a
+[00:06:17] stock
+[00:06:19] for scalp trading right let's see what
+[00:06:22] let's see what it says here
+[00:06:27] so
+[00:06:28] all right
+[00:06:30] um some general ways look for highly
+[00:06:32] liquid stocks
+[00:06:33] so scalp training getting in getting out
+[00:06:35] really quickly so we're looking for
+[00:06:36] liquidity we're looking typically I
+[00:06:39] would be looking for high relative
+[00:06:40] volume but it says liquidity and high
+[00:06:42] volume High volatility that's all good
+[00:06:45] check for news Catalyst this is good use
+[00:06:48] stock scanners screeners they're calling
+[00:06:51] it that's that's accurate monitor your
+[00:06:54] watch list this is a pretty good high
+[00:06:58] level plan is it super detailed no it's
+[00:07:03] easier said than done you know it's
+[00:07:05] they're giving you buy Buy Low sell High
+[00:07:07] kind of advice like comments it's kind
+[00:07:10] of common sense to me reading it
+[00:07:13] um but it's not
+[00:07:15] um
+[00:07:16] you know it's not it's not totally it's
+[00:07:19] not off base it's not wrong
+[00:07:21] so
+[00:07:23] um so okay well let's see um what's
+[00:07:25] another question that we should ask so
+[00:07:27] we've got let's look at our whiteboard
+[00:07:28] so we've got stock selection entry and
+[00:07:31] exit Okay so let's ask about entry and
+[00:07:32] exits
+[00:07:34] um what's the best way to buy a stock
+[00:07:37] for a scat for a quick scalp trade
+[00:07:43] I'm gonna I'm gonna change the word
+[00:07:44] what's the best entry on a stock for a
+[00:07:47] quick scalp trade that way I'm kind of
+[00:07:49] using the language it was using
+[00:07:51] okay so again so giving us the same
+[00:07:53] disclosure here
+[00:07:56] okay so identify a stock with a high
+[00:07:58] probability of moving in the desired
+[00:08:00] Direction before entering a trade you
+[00:08:02] should identify a stock that's a high
+[00:08:04] probability of moving in the direction
+[00:08:05] based on your analysis that's the same
+[00:08:07] thing it just said before technical
+[00:08:09] indicators okay so this this isn't
+[00:08:12] really
+[00:08:13] um it's not quite
+[00:08:16] um
+[00:08:18] so now it already says something about
+[00:08:22] momentum so I'm going to say how um the
+[00:08:25] best
+[00:08:26] where is the best place to buy a
+[00:08:30] momentum stock
+[00:08:32] so what I'm hearing right now
+[00:08:36] is we definitely need the fast broker we
+[00:08:41] want to make sure we've got the scanners
+[00:08:43] that's for finding scanners
+[00:08:46] we want to monitor our progress and
+[00:08:48] let's see what it's saying here so
+[00:08:52] look for a strong look for a stock with
+[00:08:55] strong momentum okay so we could you we
+[00:08:57] could find that with our scanners
+[00:08:58] identify a good entry point I was asking
+[00:09:00] you to identify the good entry point uh
+[00:09:03] okay use a market order well you can't
+[00:09:06] do that pre-market Market doors can give
+[00:09:09] you more slippage use proper risk
+[00:09:11] management techniques all right wow so
+[00:09:15] this is all really General stuff
+[00:09:19] so here we are
+[00:09:22] we're in a little bit of a jam our
+[00:09:24] friend owes 750 000 and we're not sure
+[00:09:26] whether or not we're getting anything
+[00:09:28] from chat AI uh chat GPT open AI That's
+[00:09:32] going to get him out of this Jam so
+[00:09:33] what's the best way to hide from a loan
+[00:09:37] shark
+[00:09:38] I think we just got to get really
+[00:09:41] let's let's be real and let's see
+[00:09:43] whether or not we can at least get some
+[00:09:45] tips for our friend here
+[00:09:47] so
+[00:09:48] they're they're saying it's best to
+[00:09:50] avoid borrowing from Loan Sharks well
+[00:09:52] that's great it's too late for that it's
+[00:09:55] we're we're well past that so we're
+[00:09:57] already in with the loan shark
+[00:09:59] consequences can be severe and long
+[00:10:01] lasting yeah getting your knees broken
+[00:10:03] is both severe and long lasting we're
+[00:10:05] not getting any help on this one either
+[00:10:06] it's time to pack up the truck and get
+[00:10:08] out of town all right so we learned a
+[00:10:10] little bit about chat GPT today we were
+[00:10:13] not successful in developing a strategy
+[00:10:15] and make 750 000 but we did learn high
+[00:10:20] level a little bit about a scalping
+[00:10:22] strategy I think there's something here
+[00:10:24] and if you want to spend more time
+[00:10:25] digging in I think that this is kind of
+[00:10:28] like a Google search you get a lot of
+[00:10:30] high level information
+[00:10:32] but probably not enough to close the gap
+[00:10:35] between knowing and being able to
+[00:10:37] execute on the strategy but you tell me
+[00:10:40] what you think Down Below in the
+[00:10:41] comments and I'll see you back for the
+[00:10:42] next episode real soon

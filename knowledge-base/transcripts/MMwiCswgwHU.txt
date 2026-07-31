@@ -1,0 +1,646 @@
+# Equity Swaps Explained (and How They're Used in GameStop & AMC)
+# https://www.youtube.com/watch?v=MMwiCswgwHU
+# duration_sec: 1478
+
+[00:00:00] in today's episode I'm going to walk you
+[00:00:02] through how an equity swap works now
+[00:00:04] Equity swaps have been a popular topic
+[00:00:06] of conversation as of late because of
+[00:00:08] the highend volatility in meme stocks
+[00:00:11] like AMC and GameStop one of the things
+[00:00:13] that's really unique about an equity
+[00:00:16] swap is that it can allow a hedge fund
+[00:00:18] or an Institutional Trader to take a
+[00:00:21] very large position whether long or
+[00:00:23] short without actually having to
+[00:00:26] purchase the Securities to back that
+[00:00:28] position which is kind of wild when you
+[00:00:30] think about it so as I walk you through
+[00:00:32] how these work you're going to learn
+[00:00:34] that Equity swaps are a very powerful
+[00:00:36] vehicle in the financial markets that
+[00:00:38] can allow hedge funds and institutional
+[00:00:40] traders to make a tremendous amount of
+[00:00:42] money but they also carry a lot of risk
+[00:00:46] now these Equity swaps allow the
+[00:00:49] purchase or shorting of stocks without
+[00:00:51] direct ownership they do not require or
+[00:00:54] subject the hedge fund or institutional
+[00:00:55] Trader to the regulatory requirements
+[00:00:58] that direct ownership would require
+[00:01:00] the positions if they're to the short
+[00:01:02] side do not increase short interest on
+[00:01:05] the stock and there's no market movement
+[00:01:08] from the purchase of these swaps an
+[00:01:10] equity swap is actually it's it's like a
+[00:01:13] Side Market bet between an investment
+[00:01:16] banker and hedge funer institutional
+[00:01:18] Trader and that side Side Market bet
+[00:01:20] it's a OTC contract it doesn't actually
+[00:01:24] move the underlying price of the asset
+[00:01:28] so essentially you could have a stock
+[00:01:29] that's trading with you know 10 20
+[00:01:32] million shares of volume a day and then
+[00:01:33] you can have a side bet on the
+[00:01:35] performance of that stock that is many
+[00:01:38] times larger than the entire volume of
+[00:01:40] that stock on that particular day which
+[00:01:42] is what's crazy about these swaps so
+[00:01:45] let's go ahead and jump into the slide
+[00:01:46] deck so you can better understand how
+[00:01:47] these work and I think what you're going
+[00:01:48] to discover is that by the end of this
+[00:01:50] episode there are certain types of
+[00:01:52] stocks that retail Traders like you and
+[00:01:54] I should probably just completely avoid
+[00:01:57] and Equity swaps are just one of the
+[00:01:59] reasons so Equity swaps by the way are
+[00:02:02] just one type of swap that exists the
+[00:02:05] swaps have been around for a long time
+[00:02:06] and they're very common interest rate
+[00:02:09] swaps are very popular currency swaps
+[00:02:11] are very popular commodity swaps credit
+[00:02:14] default swaps and of course Equity swaps
+[00:02:16] as we're going to talk today they all
+[00:02:18] share the same uh sort of General
+[00:02:21] concept of a trade between one thing and
+[00:02:24] another between an investment bank and
+[00:02:26] an Institutional Trader or a hedge fund
+[00:02:29] so when it comes to equity swaps an
+[00:02:32] equity swap is an exchange of cash flow
+[00:02:35] between two parties these two parties
+[00:02:37] are typically a hedge fund and an
+[00:02:40] investment Bank in a swap a hedge fund
+[00:02:44] can go to an investment bank and
+[00:02:46] purchase what's called a synthetic long
+[00:02:49] or a synthetic short Equity position
+[00:02:53] this is done through the equity swap so
+[00:02:55] you have these two parties the
+[00:02:56] investment banker in yellow and the
+[00:02:58] hedge fund here in blue now Equity swaps
+[00:03:01] are derivatives which means the price
+[00:03:04] and value of the equity Swap and the
+[00:03:07] cash that changes hands between Party 1
+[00:03:09] and party two is based on the value or
+[00:03:11] the price of an underlying asset which
+[00:03:14] in this example that I'm going to give
+[00:03:16] you is the stock which we'll we'll use
+[00:03:18] GameStop as the example So when you buy
+[00:03:21] positions in derivatives buying the
+[00:03:24] derivatives by themselves do not have an
+[00:03:27] impact on the price of the the market of
+[00:03:30] the price of the price is actually
+[00:03:31] trading so if we pull up a stock let's
+[00:03:33] say right here like GameStop if you
+[00:03:35] actually bought a million shares of
+[00:03:38] GameStop on the open market what do you
+[00:03:40] think would happen the volume would
+[00:03:42] spike up you would see a huge order
+[00:03:44] going through on the time in sales it
+[00:03:46] would go through the level two there'd
+[00:03:48] be a volume bar there'd be a giant green
+[00:03:50] candle right that's what happens when
+[00:03:52] you buy a really big position on the
+[00:03:54] open market but in the derivative Market
+[00:03:57] it's a little bit different with the
+[00:03:58] derivative Market when you purchase
+[00:04:01] these Equity swaps and you get into this
+[00:04:03] Equity swap contract it's completely
+[00:04:06] aside from the market so the total value
+[00:04:09] of that swap it could be $100 million it
+[00:04:11] could be 500 million whatever it is
+[00:04:13] that's not going through the time and
+[00:04:16] sales for the stock so these
+[00:04:18] transactions can create Market
+[00:04:21] volatility but they create Market
+[00:04:24] volatility when and if one of the
+[00:04:26] parties purchases stock on the the open
+[00:04:30] market to hedge their position but it's
+[00:04:33] only if they're hedging their position
+[00:04:34] that you're going to see actual changes
+[00:04:36] in market prices the contract by itself
+[00:04:38] of an equity swap does not move the
+[00:04:40] market so that's important to know when
+[00:04:43] it comes to gain GameStop so
+[00:04:46] derivatives uh are an alternative to
+[00:04:49] direct ownership so with an equity swap
+[00:04:52] for instance it requires less Capital
+[00:04:55] because you do not have to buy or short
+[00:04:57] the underlying stock so let's just say
+[00:05:00] for instance you know just for the sake
+[00:05:02] of argument that you want a short or buy
+[00:05:04] a stock you know we'll just say you want
+[00:05:06] a short
+[00:05:07] GameStop GameStop here at 20 $20 a share
+[00:05:12] you want to short at $20 a share doesn't
+[00:05:14] matter the price you want to short a
+[00:05:15] th000 shares a th000 shares well that's
+[00:05:18] $20,000 right 20 grand that's no big
+[00:05:21] deal to get you know $20,000 position on
+[00:05:24] the market you want to shore 100,000
+[00:05:27] shares okay that's a little bit of a
+[00:05:29] bigger order you want to short a million
+[00:05:32] shares okay now you're talking about a
+[00:05:35] position size that would move the market
+[00:05:38] and if you don't want to move the market
+[00:05:40] with your position size you could choose
+[00:05:42] to take that same trade but not take it
+[00:05:45] on the open market take it through an
+[00:05:47] equity Swap and this is why these are so
+[00:05:50] fascinating so now it's worth noting
+[00:05:53] that um that these Equity swaps do have
+[00:05:57] to be reported um to dtcc which is the
+[00:06:01] which is where all trades are cleared
+[00:06:04] but finding the details about the
+[00:06:06] individual swap agreements is difficult
+[00:06:09] and most most Traders and even research
+[00:06:13] analysts uh security analysts have a
+[00:06:15] hard time finding all the details of
+[00:06:17] these swaps so it's convoluted they're
+[00:06:20] hard to find and as a result the market
+[00:06:22] doesn't accurately price the extent to
+[00:06:26] which swaps exist in favor or against a
+[00:06:30] stock so for the sake of argument let's
+[00:06:31] just say that a hedge fund wants to
+[00:06:33] short $100 million of GameStop at $20 a
+[00:06:38] share so they want to shore what is it
+[00:06:39] five million shares all right so five
+[00:06:42] sorry five million shares to the short
+[00:06:44] side of gme at $20 all right now they
+[00:06:49] know if they tried to short five million
+[00:06:52] shares on the open market what would
+[00:06:53] happen to the price it would tank it
+[00:06:55] would drop the price now today for
+[00:06:57] instance GameStop has 12 million shares
+[00:07:00] of volume so if you wanted to short 5
+[00:07:02] million shares you would be half the
+[00:07:05] volume of GameStop for this entire day
+[00:07:08] if you subjected the stock to that much
+[00:07:10] selling it would drop it and then the
+[00:07:13] result is that instead of shorting at
+[00:07:15] $20 a share by the time you know you've
+[00:07:18] taken your full position the prices
+[00:07:20] maybe drop to let's just say you know
+[00:07:22] $15 a share so now you're getting it a
+[00:07:24] substantially lower price $25 million
+[00:07:27] worse of a fill versus if you you
+[00:07:29] instead did an equity swap so let's say
+[00:07:32] you are sitting there at the hedge fund
+[00:07:35] and the fund has $100 million and it
+[00:07:37] says hey we want to short GameStop all
+[00:07:40] right so they don't want to short on the
+[00:07:42] open market maybe because of the market
+[00:07:44] the the risk of moving the market with
+[00:07:45] that big of an order maybe because of
+[00:07:47] the short interest or the requirement to
+[00:07:49] do disclosures if it's a very large
+[00:07:51] position so they instead go to the
+[00:07:52] investment banker and the banker agrees
+[00:07:54] to write a swap agreement so the hedge
+[00:07:57] fund in Blue Goes to the investment
+[00:07:58] banker in yellow now investment bankers
+[00:08:02] will customize these swap agreements to
+[00:08:05] suit the fund the hedge fund the
+[00:08:06] institutional Trader that's coming to
+[00:08:08] them these are very they're very
+[00:08:10] customizable they have a standard format
+[00:08:12] but they can be customized based on what
+[00:08:15] the fund is looking for and the
+[00:08:16] investment bankers they want the
+[00:08:18] business right they want to make the
+[00:08:19] business because they're going to make
+[00:08:20] money on this deal when you're going to
+[00:08:22] learn how that's going to work at just a
+[00:08:23] second so this is an example of an
+[00:08:26] equity Swap and the terms for what would
+[00:08:28] be called a synthetic Shore it's called
+[00:08:31] a synthetic position because you have
+[00:08:34] you essentially pay profit and loss as
+[00:08:38] if it's a real position but it's not a
+[00:08:40] real position so it's synthetic okay so
+[00:08:44] the underlying asset in this case is
+[00:08:46] GameStop short position the notional
+[00:08:49] amount which is the amount of money that
+[00:08:51] you're putting in the position is $100
+[00:08:53] million so you're putting in $100
+[00:08:55] million in this case it's at $20 a share
+[00:08:57] which is 5 million shares now now um
+[00:09:00] this is going to be a uh Total return
+[00:09:02] swap so the if you had a swap that did
+[00:09:08] not include uh dividends then it's a
+[00:09:11] price return Equity swap if it doesn't
+[00:09:13] include the dividends but if it includes
+[00:09:15] the dividends then it would be a total
+[00:09:17] return Equity swap now GameStop doesn't
+[00:09:19] pay a dividend so in this case it
+[00:09:21] doesn't really matter but the way this
+[00:09:23] uh term sheet works is that you've got
+[00:09:26] the asset you've got the notional amount
+[00:09:28] you've got the terms here so this a
+[00:09:29] total return equity which means um the
+[00:09:32] hedge fund is going to earn the profit
+[00:09:35] or pay out the loss on this position and
+[00:09:38] in exchange for this swap they have to
+[00:09:41] pay the Investment Bank The Benchmark
+[00:09:44] interest rate which let's just say it's
+[00:09:45] about 5% right now plus 1% all right so
+[00:09:49] in other words the Investment Bank is
+[00:09:52] making money writing this swap based on
+[00:09:54] the fact that they're going to receive
+[00:09:56] interest payments the frequency of these
+[00:09:58] payments will be 3 months and they can
+[00:10:00] choose different durations but this will
+[00:10:02] be every 3 months and the maturity for
+[00:10:04] this swap is one year so this is a
+[00:10:06] relationship between the hedge fund and
+[00:10:08] the investment bank now some of this
+[00:10:10] might be a little confusing so let me
+[00:10:11] show you an example of what a payout
+[00:10:13] would look like so let's say for
+[00:10:15] instance that a GameStop goes down 10%
+[00:10:19] so if it goes down 10% on a 100 million
+[00:10:23] uh dollar position they're up 10 million
+[00:10:25] right the hedge fund is now up 10
+[00:10:27] million on the swap
+[00:10:29] in this
+[00:10:31] Arrangement the stock goes down the
+[00:10:33] hedge fund is up 10 million because they
+[00:10:35] effectively agreed with the Investment
+[00:10:38] Bank that they're short $100 million of
+[00:10:41] stock so when the stock goes down 10%
+[00:10:45] they're up right 10% if the stock goes
+[00:10:48] up 10% then the hedge fund is down so
+[00:10:51] with a position purchased on the open
+[00:10:53] market your p&l is going to adjust in
+[00:10:56] real time as the stock is going up and
+[00:10:58] down right and of course if you were
+[00:11:00] taking a position in the open market you
+[00:11:01] also would need the capital to take that
+[00:11:03] entire position but with these swaps
+[00:11:05] it's a side bet I call it a side bet
+[00:11:07] because it's easy way for me to think of
+[00:11:09] it but it's an OTC uh derivative
+[00:11:11] agreement that's a contract and so in
+[00:11:14] the case where the stock goes down 10%
+[00:11:17] the hedge fund is up 10 million but
+[00:11:19] remember they have to pay out interest
+[00:11:22] so this is going to be at the end of a
+[00:11:23] 3-month period end of the 3-month period
+[00:11:25] stock's down 10% so they're up 10
+[00:11:28] million but
+[00:11:30] they pay 6% interest which is the
+[00:11:32] Benchmark 5% plus 1% for the year so
+[00:11:36] that's $6 million of interest that
+[00:11:37] they're paying on 100 million bucks so 6
+[00:11:40] million divided 4 qu is 1.5 million a
+[00:11:44] quarter so they have to pay that to the
+[00:11:46] Investment Bank no matter what so
+[00:11:48] basically the Investment Bank owes them
+[00:11:50] 10 million and they own the owe the
+[00:11:53] investment beg 1.5 million which means
+[00:11:55] the hedge fund gets a net of 11 of sorry
+[00:11:58] 8.5 m million from the Investment Bank
+[00:12:01] to the hedge fund now if the stock goes
+[00:12:04] up 10% the hedge fund is now down 10
+[00:12:06] million they still have $1.5 million of
+[00:12:09] Interest they have to pay which means
+[00:12:11] the net from the hedge fund to the
+[00:12:13] Investment Bank is 11.5 million so the
+[00:12:17] hedge fund uh it loses plus the interest
+[00:12:20] that they have to pay so you might think
+[00:12:23] well the benefits of the hedge fund
+[00:12:26] here seem somewhat clear I suppose they
+[00:12:29] get to profit from the directional bias
+[00:12:31] on the stock without putting up Capital
+[00:12:34] to invest in the stock right so they
+[00:12:37] effectively have a $100 million position
+[00:12:40] without actually having $100 million in
+[00:12:43] the stock that's amazing now the
+[00:12:46] Investment Bank most likely has a a
+[00:12:48] collateral requirement so there's some
+[00:12:50] essentially like a margin requirement
+[00:12:52] but it's not $100 million so the benefit
+[00:12:55] for the hedge fund is that they can take
+[00:12:56] a really large position in a stock
+[00:12:59] without having to either liquidate their
+[00:13:01] portfolio or borrow money so in other
+[00:13:05] words they can use leverage and it gives
+[00:13:08] the hedge fund control over a much
+[00:13:10] larger amount of shares and money than
+[00:13:12] they would otherwise be able to afford
+[00:13:15] additionally they don't have the
+[00:13:17] requirements the regul they're not
+[00:13:18] subject to the regulatory reporting
+[00:13:20] requirements if they take a very large
+[00:13:22] percentage stake because it's not an
+[00:13:24] actual ownership on the market it's a
+[00:13:27] it's through a derivative and unlike
+[00:13:30] options trading which do correspond if
+[00:13:33] you exercise to stock with these swaps
+[00:13:36] it's it's it's completely disconnected
+[00:13:38] from actually owning outright stock or
+[00:13:41] shorting stock and additionally the
+[00:13:43] short positions are not reported towards
+[00:13:45] short interest so when we've been
+[00:13:47] looking at GameStop and we're saying
+[00:13:48] well geez the short interest is showing
+[00:13:50] 15 20% right now that's true but we also
+[00:13:54] have to recognize that we have no idea
+[00:13:57] how how many Hedge funds are shorting
+[00:14:00] GameStop through these Equity swaps
+[00:14:03] right we could you know you could look
+[00:14:04] through some of the filings you could
+[00:14:05] try to figure it out through dtcc but
+[00:14:08] realistically people have tried and it's
+[00:14:09] very difficult to tie that down so the
+[00:14:11] benefits to the hedge fund right here
+[00:14:14] seem pretty clear it's naturally risky
+[00:14:17] because if the stock goes up a lot they
+[00:14:20] could lose a lot of money and they need
+[00:14:21] to have the capital to be able to cover
+[00:14:24] their losses and so the Investment Bank
+[00:14:26] it seems like in this scenario is the
+[00:14:28] one who's really taking on the risk
+[00:14:30] right so what are the benefits for the
+[00:14:32] Investment Bank why are they doing this
+[00:14:34] well number one they get guaranteed
+[00:14:36] interest payments they could be either
+[00:14:38] fixed or variable depending on what the
+[00:14:39] terms are and what they can do is they
+[00:14:42] can turn around and they can hedge that
+[00:14:44] position with the purchase of stock or
+[00:14:46] options they can do that if they want to
+[00:14:49] so they can hedge with existing
+[00:14:51] positions if they already have existing
+[00:14:52] positions on the book on their portfolio
+[00:14:55] and if they do then for them this is
+[00:14:57] like free money they're getting guant
+[00:14:59] guaranteed interest payments and they
+[00:15:00] have a hedge so essentially for them the
+[00:15:03] profit is the Delta
+[00:15:05] between the interest payment which is
+[00:15:08] income that they're getting guaranteed
+[00:15:10] and the cost to hedge which is
+[00:15:13] essentially insurance right so if they
+[00:15:16] hedge with options for instance or they
+[00:15:18] hedge with stock they're hedging their
+[00:15:20] position but either way they're getting
+[00:15:23] the benefit of the interest so even if
+[00:15:26] they hedge the whole position with stock
+[00:15:29] their only risk at that point is well
+[00:15:32] the biggest risk is counterparty risk
+[00:15:34] the biggest risk for them is the hedge
+[00:15:35] fund goes under so they have to
+[00:15:37] carefully vet the hedge funds that they
+[00:15:39] offer these swaps to but that's really
+[00:15:41] their biggest risk so they're in a
+[00:15:43] position where they have so much money
+[00:15:45] they could afford to buy the the the
+[00:15:48] underlying asset if they want to for
+[00:15:49] their hedge or they could use options to
+[00:15:51] hedge so they can hedge their position
+[00:15:54] right so for them this is where the
+[00:15:56] investment Banks it's a win-win all they
+[00:15:59] have to do is make sure that the uh
+[00:16:01] hedge fund that they're selling the swap
+[00:16:02] to is not at risk of
+[00:16:06] defaulting but here's something that I
+[00:16:09] find really
+[00:16:10] interesting so with these Equity swaps a
+[00:16:15] lot of these swaps as we look at our
+[00:16:16] term sheet here um or just to give you
+[00:16:19] kind of this basic idea a lot of these
+[00:16:22] are going to be based around a very
+[00:16:23] specific price and so and they're based
+[00:16:26] on the frequency of the um when they
+[00:16:29] make the payouts so if the pay payouts
+[00:16:32] are every month or they're every three
+[00:16:34] months or they're once a year around the
+[00:16:37] time that we get to a payout period
+[00:16:40] there's going to be a little bit of a
+[00:16:41] battle the hedge fund wants to see the
+[00:16:44] stock above or below a certain level and
+[00:16:47] the in Investment Bank is going to want
+[00:16:48] the exact opposite so now they're
+[00:16:50] playing a little bit of a tug-of-war and
+[00:16:52] what's funny here is there the tug OFW
+[00:16:55] is over the OTC Equity source up and the
+[00:16:59] amount of money it's going to change
+[00:17:01] hands but they're fighting over the
+[00:17:03] actual Market change the actual market
+[00:17:05] price and so I'm going to jump forward
+[00:17:08] here um to this slide where we can see
+[00:17:13] this is a um this is a view of actual
+[00:17:17] orders in the market and when you view
+[00:17:20] the market like this what you can see is
+[00:17:21] that you have these uh sort of tranches
+[00:17:23] of orders right in these very specific
+[00:17:26] spots and this is where we have a battle
+[00:17:28] we're having a battle between the buyers
+[00:17:30] and the sellers and in this case the
+[00:17:32] sellers are keeping the price below
+[00:17:35] these key levels because these are sell
+[00:17:37] orders and so they're creating
+[00:17:38] resistance so whether a fund has a large
+[00:17:41] opt options position or an equity swap
+[00:17:43] or a stock position there's an incentive
+[00:17:45] for the price of the stock to move up or
+[00:17:46] down as payout dates approach and they
+[00:17:49] will defend the price to keep it where
+[00:17:51] they want it and this often creates a
+[00:17:52] battle around certain prices as option
+[00:17:56] expirations approach quadruple witching
+[00:17:58] for for instance right so when we have
+[00:18:00] quad witching which is when four
+[00:18:02] different option terms dates expire on
+[00:18:04] the same day you have a huge battle
+[00:18:07] that's occurring with these stocks and
+[00:18:09] so if you're a retail Trader just you
+[00:18:11] know easy gol lucky looking for a couple
+[00:18:12] of Trades and you don't realize you're
+[00:18:14] trading on a quad witching day you're
+[00:18:17] going to be subject to a ridiculous
+[00:18:19] tug-of-war that the whales are having
+[00:18:21] that you want no pardon because they're
+[00:18:24] going to just chew you up and spit you
+[00:18:26] out you're going to get chopped up in
+[00:18:27] that price action anything you think is
+[00:18:29] going to happen is probably not going to
+[00:18:31] happen and so what's a way to avoid this
+[00:18:33] pay attention to the options that a
+[00:18:35] stock has if a stock has options and it
+[00:18:37] has a lot of open interest and a lot of
+[00:18:39] volume in the options chain then there's
+[00:18:41] going to be a bigger battle between
+[00:18:42] these areas and also pay attention to
+[00:18:44] the level of institutional ownership
+[00:18:47] that a stock has when a stock has higher
+[00:18:49] levels of institutional ownership this
+[00:18:51] is also when those big guns come out and
+[00:18:53] it becomes a bigger battle this is what
+[00:18:55] I've seen in all of my years of trading
+[00:18:57] so I've learned to leave those types of
+[00:18:58] stocks alone now if you want to hear
+[00:19:00] from a a former hedge fund manager I I
+[00:19:03] thought this was pretty interesting this
+[00:19:04] is Jim Kramer from 2006 this is an
+[00:19:07] interview he did on the street in this
+[00:19:10] interview he talked about moving the
+[00:19:11] markets he said when I was positioned
+[00:19:13] short at my hedge fund so I'm reading
+[00:19:15] his quote I was positioned short meaning
+[00:19:18] I needed it down I would create a level
+[00:19:20] level of activity beforehand that would
+[00:19:22] drive the Futures it doesn't take much
+[00:19:24] money similarly if I were long and I
+[00:19:26] wanted to make things a little bit
+[00:19:27] Rosier I would go in and I would take a
+[00:19:30] bunch of stocks and I would make sure
+[00:19:32] that they are higher right so that makes
+[00:19:34] sense you want things to look Rosier you
+[00:19:35] go in you buy a bunch of stocks up you
+[00:19:36] bid them up they move moves it higher
+[00:19:38] commit maybe five million in capital to
+[00:19:40] do in capital to do it and I could
+[00:19:42] affect it but it's a fun game it's a
+[00:19:44] lucrative game and you can move it up
+[00:19:46] and then you can fade it and that often
+[00:19:47] creates a very negative feel and I would
+[00:19:49] encourage anyone who's in the hedge fund
+[00:19:51] game to do it because it's legal and
+[00:19:53] it's a very quick way to make money and
+[00:19:55] it's very satisfying and by the way no
+[00:19:57] one else in the world would ever admit
+[00:19:58] that but I don't care this is Jim Kramer
+[00:19:59] on the street in 2006 now a lot of
+[00:20:02] people have debated the ethics of this
+[00:20:04] practice but what we know is that the
+[00:20:07] motivation for a lot of these firms is
+[00:20:09] to make money in the market so there's
+[00:20:11] the black and white what you can do what
+[00:20:13] you can't do and even in the black and
+[00:20:15] white areas a lot of these firms as we
+[00:20:18] know from naked Short Selling um choose
+[00:20:21] to make money over following the the
+[00:20:23] letter of the the law there uh one thing
+[00:20:26] that uh Jim Kramer talked about was the
+[00:20:27] practice of the hit and offer he said I
+[00:20:29] used to do what was called U he said if
+[00:20:31] I wanted to go higher I would take and
+[00:20:33] bid take and bid and if I wanted to go
+[00:20:35] lower I'd hit and offer hit and offer
+[00:20:38] hit and offer it'd be fabulous because
+[00:20:40] it would bager all the Longs and
+[00:20:42] this is painful to read Because I'm a
+[00:20:43] long and I'm feel like I'm maybe I'm the
+[00:20:46] but the way this works is that um
+[00:20:49] you would hit the bid so sell on the bid
+[00:20:51] and then throw a huge order on the offer
+[00:20:53] like this one here 27,000 share order
+[00:20:56] and then you'd hit the bid again and put
+[00:20:58] another big offer here and move it down
+[00:20:59] a few cents and You' keep doing that
+[00:21:01] you'd hit and bid hit and hit and offer
+[00:21:03] hit and offer hit and offer and by doing
+[00:21:05] that essentially what you're doing is
+[00:21:07] you're walking the price down and so
+[00:21:11] this is um this is what was sort of
+[00:21:12] referred to uh during the GameStop
+[00:21:16] period as short walls so we see it a lot
+[00:21:19] when we look at the market depth like
+[00:21:21] this we'll see um all of a sudden the
+[00:21:23] price will drop and then you've got a
+[00:21:24] big seller that comes right up the price
+[00:21:26] drops a big seller comes right up or or
+[00:21:28] sometimes you'll see the price moving up
+[00:21:30] and a big buyer is propping it up it
+[00:21:31] moves up and they're stair it's like
+[00:21:33] they're stair stepping the price up and
+[00:21:35] down with their orders so these are the
+[00:21:37] things that happen in the institutional
+[00:21:39] world so I'm not in the institutional
+[00:21:42] world I'm a retail Trader so you know
+[00:21:44] I've done relatively well modestly well
+[00:21:46] as a retail Trader I'm proud of the
+[00:21:48] success I've had but let's get real I'm
+[00:21:50] a baby fish when it comes to these big
+[00:21:52] whales so I try steer clear of the
+[00:21:55] institutional Traders I try steer clear
+[00:21:57] of the stocks that they're trading I
+[00:21:59] just want to leave them alone I don't
+[00:22:01] want to be trading those stocks because
+[00:22:03] that's where we're going to have this
+[00:22:04] big tug-of-war so it's like when you
+[00:22:06] have these big huge Equity swaps that
+[00:22:08] are a kind of sideb deal on what happens
+[00:22:12] to the price of the stock then suddenly
+[00:22:14] these firms could take5 million $10
+[00:22:16] million to push the price up and down so
+[00:22:19] it better suits their big swap that they
+[00:22:21] have on the side and these are things
+[00:22:23] that we just don't know so a lot of it
+[00:22:25] is speculation we know without a doubt
+[00:22:27] that there's a big battle that occurs
+[00:22:29] around certain prices when it comes to
+[00:22:31] options expiration but the equity the
+[00:22:33] equity swap expirations or when they
+[00:22:36] when they mature or when they
+[00:22:38] potentially renew and roll over to the
+[00:22:40] next year to the next cycle or the
+[00:22:42] frequency of when they have their
+[00:22:43] payouts these are more obscured so you
+[00:22:46] may not be aware of them but then you're
+[00:22:47] trading a stock and you're seeing this
+[00:22:49] major tug-of-war and this major battle
+[00:22:51] and it's like what is happening behind
+[00:22:53] the scenes and we just these are only
+[00:22:56] sort of little bits of us sort of
+[00:22:57] pulling back the current seeing like a
+[00:22:59] little bit but we really don't know what
+[00:23:01] goes on back there and and to be honest
+[00:23:04] I'm not sure how many people do the
+[00:23:05] financial system is incredibly layered
+[00:23:09] and complex and there's no doubt that
+[00:23:11] there's a tremendous amount of
+[00:23:12] Regulation but a lot of that regulation
+[00:23:14] has been created to kind of close up
+[00:23:16] little loopholes but you know it's like
+[00:23:19] the these big institutional deep pocket
+[00:23:22] investors find a new way to kind of get
+[00:23:25] what they're looking for so I hope this
+[00:23:27] has been an informative episode when it
+[00:23:29] comes to how Equity swaps work uh to the
+[00:23:32] extent that you're a meme Trader again I
+[00:23:34] think that is sort of irrelevant to
+[00:23:37] gaining value from understanding how
+[00:23:39] these work in the market and the biggest
+[00:23:41] takeaway for me is being really cautious
+[00:23:44] when it comes to trying to actively
+[00:23:46] trade institutional stocks stocks with
+[00:23:49] high percentage of institutional
+[00:23:50] ownership now if you're going to buy and
+[00:23:52] sell buy or Buy and Hold you're going to
+[00:23:54] buy and hold at Nvidia an apple or Tesla
+[00:23:57] then you know all this stuff is going on
+[00:23:58] in the background it doesn't really
+[00:23:59] matter cuz you're a long-term investor
+[00:24:01] but if you're trying to actively trade
+[00:24:03] the price action man you're going to get
+[00:24:05] chopped up so you got to be really
+[00:24:06] careful I hope you found this episode
+[00:24:08] interesting if you do hit that thumbs up
+[00:24:10] I hope you subscribe to the channel and
+[00:24:11] I'll see you for the next episode real
+[00:24:12] soon and hey if you want to learn a
+[00:24:14] little bit more about my stock selection
+[00:24:15] criteria I will put a link as pinned in
+[00:24:18] the top of the comments and the
+[00:24:19] description where you can download my
+[00:24:20] stock selection PDF so you can get a
+[00:24:22] better sense of the type of stocks I do
+[00:24:25] want to trade every single day thanks as
+[00:24:27] always for tuning in remind you trading
+[00:24:29] is risky my results aren't typical so
+[00:24:31] manage your risk take it slow and I'll
+[00:24:32] see you here for the next episode real
+[00:24:34] soon

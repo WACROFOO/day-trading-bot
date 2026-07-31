@@ -1,0 +1,387 @@
+# I asked ChatGPT to make me a Day Trading Strategy, and it did! Sort of..
+# https://www.youtube.com/watch?v=y3USmdoXKt8
+# duration_sec: 954
+
+[00:00:00] what's up everyone all right so we're
+[00:00:02] gonna see if we can use chat GPT to
+[00:00:05] develop a trading strategy so let's
+[00:00:09] start here by asking some basic
+[00:00:11] questions about day trading and see what
+[00:00:15] chat GPT knows so explain day trading to
+[00:00:20] me like I'm five years old
+[00:00:24] day trading is when you buy something
+[00:00:27] like a toy or candy in the morning and
+[00:00:29] then sell it later in the day for more
+[00:00:30] money than you paid for it
+[00:00:32] brilliant it's like when you trade your
+[00:00:35] toy car with a friend for his toy
+[00:00:37] airplane
+[00:00:38] sort of but instead of playing with it
+[00:00:40] you sell it back to the store for more
+[00:00:42] toys
+[00:00:44] not really
+[00:00:46] day Traders do this
+[00:00:48] with things like stocks or
+[00:00:50] cryptocurrency instead of toys but just
+[00:00:54] like when you trade toys with your
+[00:00:55] friends it's important to know when to
+[00:00:57] sell so you can make a profit
+[00:01:00] that doesn't seem like a great answer
+[00:01:02] let's try to up it a little bit explain
+[00:01:04] day trading to me
+[00:01:08] like I'm 38 years old let's see if we
+[00:01:12] get a more real answer
+[00:01:14] okay day trading is a type of investment
+[00:01:16] strategy where traders buy and sell
+[00:01:18] Financial assets okay okay
+[00:01:21] so to be a successful day trader you
+[00:01:23] have to have a solid understanding of
+[00:01:25] Market fundamentals and technical
+[00:01:27] analysis as well as a discipline
+[00:01:28] approach to risk management and capital
+[00:01:30] allocation okay this all seems this is
+[00:01:34] like a good kind of Wikipedia you know
+[00:01:36] Google search of what is day trading
+[00:01:37] let's see if we can ask it a
+[00:01:39] hard-hitting question
+[00:01:40] how do I tell my parents I'm a day
+[00:01:43] trader
+[00:01:46] telling your parents that your day
+[00:01:48] trader can be challenging especially if
+[00:01:50] they're not familiar with the concept
+[00:01:51] here's some tips to help you have an
+[00:01:54] open and honest conversation with them
+[00:01:56] explain what it is show your commitment
+[00:01:59] be honest about the risks share your
+[00:02:01] goals listen to their concerns
+[00:02:04] you know to be honest this isn't that
+[00:02:07] bad
+[00:02:09] Okay so we've gotten through the hard
+[00:02:11] things telling our parents and knowing
+[00:02:14] the basics about day trading so now why
+[00:02:18] don't we see if maybe chat GPT can help
+[00:02:23] us come up with a strategy
+[00:02:26] so what is a good day trading strategy
+[00:02:34] there are many day trading strategies
+[00:02:36] and the best one for you will depend on
+[00:02:39] your style risk tolerance and market
+[00:02:40] conditions
+[00:02:42] here are a few strategies that are
+[00:02:44] commonly used by successful day Traders
+[00:02:47] okay so scalping involves making lots of
+[00:02:50] small trades throughout the day momentum
+[00:02:52] trading which is also usually scalping
+[00:02:54] or you usually if you're scalping you're
+[00:02:56] looking for momentum breakout trading
+[00:02:58] which is buying for breakouts that's
+[00:03:00] also kind of momentum and scalp trading
+[00:03:02] news trading that's momentum trading and
+[00:03:05] swing trading buying and holding
+[00:03:07] overnight okay all right so chat GPT has
+[00:03:11] given us five different possible day
+[00:03:14] trading strategies
+[00:03:17] let's see if I ask it about well let's
+[00:03:21] see
+[00:03:22] um so I asked it the best it seems to
+[00:03:24] think scalping is number one I mean in
+[00:03:27] no particular order but it doesn't say
+[00:03:28] in no particular order so is this
+[00:03:31] ordered based on which one is best well
+[00:03:33] I would say swing trading is the least
+[00:03:35] interesting to me news trading is
+[00:03:38] difficult in terms of actual breaking
+[00:03:40] news so I'd say this might be pretty
+[00:03:41] close okay so
+[00:03:43] um
+[00:03:44] how do I
+[00:03:47] um
+[00:03:48] how do I scalp trade
+[00:03:50] let's see if that's too General
+[00:03:53] okay so it's giving me this very okay
+[00:03:55] well no this is helpful all right so
+[00:03:56] let's start taking some notes Here
+[00:03:58] all right so we're gonna start taking
+[00:04:01] some notes we know we want a strategy
+[00:04:03] that gives us a daily goal of 15 cents a
+[00:04:05] day with a thousand shares that's 150
+[00:04:08] per day all right that's a high level
+[00:04:10] strategy
+[00:04:11] so we've got to start figuring out what
+[00:04:13] can we do here so chatgpt says choose a
+[00:04:17] highly liquid Market to scalp trade
+[00:04:19] effectively you need to choose a highly
+[00:04:21] liquid Market that has a tight bid ask
+[00:04:22] spread and high trading volumes
+[00:04:25] see now I don't think that that's
+[00:04:29] correct
+[00:04:31] because if you're just trying to scalp
+[00:04:34] one penny you know back and forth
+[00:04:37] I I don't think that that's going to be
+[00:04:39] enough profit to justify the risk of
+[00:04:41] catching a flush so as a seasoned Trader
+[00:04:44] I I agree that you want High liquidity
+[00:04:47] but I don't know that you want a one
+[00:04:49] cent spread so I think there's a little
+[00:04:51] bit of a confusion there but we can
+[00:04:54] forgive chat GTP
+[00:04:56] so let's see use a short-term chart
+[00:04:59] that's true okay so now we know we want
+[00:05:02] to be using a one minute chart
+[00:05:06] Okay one minute chart to in to identify
+[00:05:10] short-term price movements identify key
+[00:05:13] levels identify key support or
+[00:05:14] resistance levels using technical
+[00:05:16] analysis these levels can help you
+[00:05:17] identify potential entry and exit points
+[00:05:19] okay that's great in theory but you know
+[00:05:22] how do I actually do it use a trading
+[00:05:24] plan develop a trading plan that
+[00:05:26] includes entry exit stop loss so to be
+[00:05:30] honest I should say
+[00:05:32] can you write me a day trading plan for
+[00:05:36] scalp Trading
+[00:05:40] sure here's an example of a day trading
+[00:05:42] plan for scalp Trading okay so it's kind
+[00:05:45] of doing this okay marketing time frame
+[00:05:48] she's a highly liquid Market such as the
+[00:05:49] S P 500 or NASDAQ in a short-term time
+[00:05:51] frame such as a five minute chart entry
+[00:05:54] and exit rules it's using the same
+[00:05:55] general stuff use a two to one risk one
+[00:05:58] to two risk to reward ratio two to one
+[00:06:00] profit to loss ratio position sizing use
+[00:06:03] proper position sizing okay risk
+[00:06:05] management use proper risk management
+[00:06:07] trading hours determine the best time to
+[00:06:09] trade
+[00:06:10] okay so this is definitely a template
+[00:06:13] kind of it's good stuff keep a trading
+[00:06:17] journal
+[00:06:18] but it doesn't have the meat so it's
+[00:06:21] like it's a skeleton of what you need
+[00:06:24] which is helpful you know everyone needs
+[00:06:26] a good skeleton but you also need
+[00:06:29] something to put on the skeleton like
+[00:06:30] you know the meat and stuff
+[00:06:32] uh so this doesn't have a lot of meat to
+[00:06:35] it
+[00:06:36] all right
+[00:06:37] um how do I find or what's a good let's
+[00:06:42] see if we could do this what's a good
+[00:06:43] momentum stock today
+[00:06:48] um okay so they don't have real-time
+[00:06:49] Market data okay
+[00:06:51] all right okay so let's see
+[00:07:00] to identify potential momentum stocks
+[00:07:02] you can look for stocks that have shown
+[00:07:03] strong movements in price RSI yeah all
+[00:07:06] right well we know that
+[00:07:07] um so
+[00:07:09] let's see
+[00:07:11] um all right and they're recommending a
+[00:07:12] couple of these free scans but they
+[00:07:14] don't always
+[00:07:15] um they're not always good for intraday
+[00:07:17] stuff that's more for swing trading
+[00:07:18] daily watchless
+[00:07:20] okay so well what we certainly know here
+[00:07:24] is we want to use a one minute chart we
+[00:07:26] want to look for liquidity
+[00:07:31] um and I think we understand
+[00:07:34] well I don't know if we do understand
+[00:07:36] about looking for something that's
+[00:07:37] moving quickly uh that's that's more on
+[00:07:40] the momentum trading side of things okay
+[00:07:43] well let's see what about can you design
+[00:07:47] a momentum
+[00:07:49] day trading plan for me
+[00:07:55] oops there we go
+[00:07:58] okay so it's giving me almost the same
+[00:08:00] exact answer as the scalp trading plan
+[00:08:04] so
+[00:08:06] um
+[00:08:08] hmm
+[00:08:09] that's that's tough so we'll stop
+[00:08:12] generating that
+[00:08:13] how do I tell my boss I want to quit and
+[00:08:18] start day trading
+[00:08:23] potential risks so okay so now it's
+[00:08:25] giving us a little bit of advice here
+[00:08:27] it's saying hey remember day trading can
+[00:08:29] be challenging don't be too stupid here
+[00:08:31] you know success isn't guaranteed so you
+[00:08:33] probably shouldn't quit because that was
+[00:08:34] a stupid question that you just asked
+[00:08:35] but if you're thinking about it you're
+[00:08:38] stupid but also you know be professional
+[00:08:40] give notice make sure you could probably
+[00:08:43] get that job back because you're
+[00:08:44] probably going to need it back because
+[00:08:45] you're probably going to lose money and
+[00:08:48] um yeah that's about it okay so that was
+[00:08:50] a positive answer
+[00:08:51] let's see
+[00:08:53] um
+[00:08:54] how do I know if a stock
+[00:08:59] has momentum
+[00:09:06] okay
+[00:09:09] so relative strength they're
+[00:09:11] recommending some indicators above 70
+[00:09:13] overbought below 30 oversold so just
+[00:09:16] defining moving averages here uh okay
+[00:09:19] you know this is
+[00:09:22] it it's I mean Google should be scared
+[00:09:25] because this is a better Google in a lot
+[00:09:27] of ways I mean it's giving you answers
+[00:09:29] which the I'd say if I was going to
+[00:09:31] compare Google the nice thing with
+[00:09:34] Google is that you can really vet a lot
+[00:09:36] of different potential search results
+[00:09:38] and different answers and this is just
+[00:09:40] kind of giving you one which you know
+[00:09:42] May produce inaccurate information right
+[00:09:45] it may not be
+[00:09:48] um
+[00:09:49] it may not be accurate but that's that's
+[00:09:52] the risk
+[00:09:53] um that's the risk about it so
+[00:09:57] well I think that if we were going to
+[00:09:59] ask chat GPT to design a strategy it's
+[00:10:03] not gonna be able to do that it's just
+[00:10:04] going to give us high level things which
+[00:10:06] is interesting and helpful but there's
+[00:10:09] just not a lot of detail there
+[00:10:11] um
+[00:10:12] you know what's a bull flag for day
+[00:10:15] trading
+[00:10:18] a bull flag is a common chart pattern
+[00:10:20] used by technical analysis day Traders
+[00:10:22] so you know
+[00:10:26] what are the most popular
+[00:10:30] chart patterns for day Traders let's ask
+[00:10:34] it this way
+[00:10:37] so Traders often look at a breakout
+[00:10:39] pattern from the bull flag is a
+[00:10:41] potential trading opportunity
+[00:10:43] yup Traders may enter a long position
+[00:10:45] when the breakout occurs what are the
+[00:10:47] most popular chart patterns bullish and
+[00:10:49] bearish flags Head and Shoulders yep
+[00:10:53] double top and double bottom
+[00:10:56] yep
+[00:10:58] cup and handle yep that's a good one
+[00:11:01] wedge pattern
+[00:11:04] okay
+[00:11:07] um
+[00:11:07] so you know I mean certainly if you were
+[00:11:11] focusing on you want to focus on scalp
+[00:11:13] and momentum trading and you wanted to
+[00:11:15] dial more into these patterns it just is
+[00:11:18] all really good like kind of top of the
+[00:11:21] just sort of scratching the surface
+[00:11:25] foreign
+[00:11:32] word article about
+[00:11:36] how to start day trading
+[00:11:41] okay this is like it just like took a
+[00:11:43] deep breath it's like really
+[00:11:45] okay here we go so understanding the
+[00:11:48] risks and rewards of day trading
+[00:11:52] my guess is that you know it's just it's
+[00:11:55] so General it's it's super general which
+[00:11:58] is helpful if you're Googling how to
+[00:12:02] start day trading but
+[00:12:05] you know if you're if you've done more
+[00:12:07] than Googling and you want to start
+[00:12:09] really getting into it
+[00:12:11] then that's when
+[00:12:13] you're going to kind of come up short
+[00:12:15] here
+[00:12:16] so there's a little bit seems like
+[00:12:18] there's a little bit of a limit to to
+[00:12:20] what this can do right now
+[00:12:24] do you think that this could design a
+[00:12:25] strategy that would make seven hundred
+[00:12:27] fifty thousand dollars in three days
+[00:12:29] because there was someone on YouTube
+[00:12:30] that was asking about that he seemed
+[00:12:32] like he maybe owed somebody some money
+[00:12:36] um and well why don't we ask it can you
+[00:12:39] design a trading strategy oops
+[00:12:43] that can make me 750
+[00:12:46] 000 and let's just clarify USD
+[00:12:49] in three to four days
+[00:12:56] nope
+[00:13:00] so it's giving it's giving a good answer
+[00:13:02] that it's very unlikely that that would
+[00:13:04] be possible
+[00:13:05] okay
+[00:13:08] so yeah so that's bad news for the
+[00:13:11] fellow that made that comment on YouTube
+[00:13:12] but but it is
+[00:13:15] um it is good and and this is true it's
+[00:13:16] not recommended to pursue day trading
+[00:13:18] with the sole goal of making a large
+[00:13:20] profit within a short period of time
+[00:13:21] that's that is 100 True rather go slow
+[00:13:24] long-term strategy focus on risk
+[00:13:27] management
+[00:13:28] is day trading a marathon or a Sprint
+[00:13:35] oh day trading is often like into a
+[00:13:38] marathon rather than a Sprint
+[00:13:43] um
+[00:13:46] you know I'm starting to really like
+[00:13:48] this chat GPT stuff I feel like it kind
+[00:13:50] of knows what it's talking about
+[00:13:54] is Ross
+[00:13:56] Cameron from Warrior trading pretty
+[00:13:59] handsome
+[00:14:02] now let's just get real here for a
+[00:14:03] second come on
+[00:14:05] come on
+[00:14:06] that's not an answer it's important to
+[00:14:09] focus on individuals knowledge and
+[00:14:10] expertise and track record when
+[00:14:12] evaluating their abilities as a Trader
+[00:14:15] or an educator
+[00:14:16] well they're not wrong about that part
+[00:14:18] and I do have quite a track record so
+[00:14:21] 583 dollars to 10 million 1 million in
+[00:14:24] three years and then 10 million in about
+[00:14:26] five years
+[00:14:28] of course you guys can check that out
+[00:14:29] over at the bottom of the website uh
+[00:14:32] this is an interview I just did with Max
+[00:14:34] one million dollar badge holder
+[00:14:36] so well I guess at this point I think we
+[00:14:40] probably know what we need to know about
+[00:14:42] chat GPT it doesn't seem to be able to
+[00:14:47] recognize
+[00:14:48] you know Beauty when it sees it
+[00:14:51] does a lot of surface level chit chat
+[00:14:56] um but
+[00:14:57] you know
+[00:14:59] how do I tell my wife I lost money
+[00:15:02] trading GameStop
+[00:15:06] remember
+[00:15:08] yeah it can be
+[00:15:10] says it can be a hard conversation no
+[00:15:12] they're not wrong about that it's true
+[00:15:15] that can be a hard conversation
+[00:15:17] explain what happened
+[00:15:20] mm-hmm
+[00:15:21] yeah I know this is this is all good
+[00:15:23] stuff
+[00:15:25] um
+[00:15:25] I yeah you know it may be worth checking
+[00:15:28] out but it can't help tell me what
+[00:15:30] stocks I should look at today because it
+[00:15:33] doesn't have the data of you know Market
+[00:15:34] data so
+[00:15:36] is it going to be the next Google is it
+[00:15:38] going to take over Google
+[00:15:40] I don't know these are pretty good
+[00:15:42] answers it just might
+[00:15:45] hope you guys enjoyed this short episode
+[00:15:47] make sure you tune in for another one
+[00:15:48] real soon and I'll see you guys for the
+[00:15:51] next episode

@@ -1,0 +1,1243 @@
+# How Read PRICE ACTION on Candlestick Charts (with ZERO experience)
+# https://www.youtube.com/watch?v=nfCqhdfyLKo
+# duration_sec: 2866
+
+[00:00:00] in today's episode I'm going to teach a
+[00:00:01] lesson on price action strategies and
+[00:00:04] I'm going to use my trades from today as
+[00:00:06] an example of what terrible price action
+[00:00:08] looks like because today was not a great
+[00:00:10] day for me but this is important because
+[00:00:12] I want you to be able to understand the
+[00:00:14] difference between a day where we've got
+[00:00:15] really clean price action and a day
+[00:00:18] where we have terrible price action so
+[00:00:20] I'll be able to show you some of the
+[00:00:21] trades that I took earlier in the week
+[00:00:22] where the price action was much better
+[00:00:24] so what is a price action strategy what
+[00:00:26] does this refer to price action refers
+[00:00:29] to the way the price is moving up or
+[00:00:31] down so when we have good price action
+[00:00:34] this is when we're seeing really nice
+[00:00:36] big moves we're seeing clean breakouts
+[00:00:39] we're seeing traditional patterns that
+[00:00:41] we're familiar with such as oh let's
+[00:00:43] just say a nice bull flag forming like
+[00:00:46] this we get a very nice clean orderly
+[00:00:50] pullback like this and then we squeeze
+[00:00:53] higher as it breaks out this is nice
+[00:00:55] clean price action when we start to get
+[00:00:57] into I would say poor price action
+[00:01:00] that's when we would see you know this
+[00:01:02] candle squeezes up and then Rejects and
+[00:01:06] ends up closing as a big shooting star
+[00:01:08] rejection we would call that a false
+[00:01:10] breakout and the reason is because
+[00:01:12] initially the price broke and it
+[00:01:13] squeezed up and we had a green candle
+[00:01:15] and so people bought here thinking it
+[00:01:17] was going to go higher and then
+[00:01:18] immediately it rejects now price action
+[00:01:21] Traders typically rely on Candlestick
+[00:01:23] charts these are Candlestick charts this
+[00:01:25] is what I'm using in my trading this is
+[00:01:27] just a quick sketch of a Candlestick
+[00:01:28] chart so when we're looking at the chart
+[00:01:31] what we generally want to see are nice
+[00:01:34] clean clear patterns now as you know the
+[00:01:37] market and the financial Market
+[00:01:39] specifically stocks Futures Forex we
+[00:01:42] rely on these Candlestick charts because
+[00:01:44] they're Universal everyone seems to use
+[00:01:47] these charts and so the patterns that
+[00:01:49] form become easily recognizable and we
+[00:01:52] develop this pattern recognition that oh
+[00:01:55] here we go we're getting our traditional
+[00:01:57] bull flag again so if we have something
+[00:01:59] just for instance that um pops up at you
+[00:02:02] know let's just say we've got a news
+[00:02:05] headline at like 8:00 a.m. right here
+[00:02:07] and all of a sudden boom this thing
+[00:02:09] starts to squeeze up it goes from 3 to
+[00:02:12] 350 um up to 4 450 ETA up to five
+[00:02:16] whatever let's say it tops out of five
+[00:02:17] we get this little pullback what we're
+[00:02:19] expecting from clean price action is a
+[00:02:21] nice squeeze back up on the first
+[00:02:23] pullback and then we look for the second
+[00:02:25] pullback right here and then we look for
+[00:02:27] another move higher but what we had
+[00:02:30] today well that was quite the opposite
+[00:02:33] so let me show you this chart to help
+[00:02:35] you better understand a a really good
+[00:02:37] example of terrible price action the
+[00:02:40] chart that we're looking at uh this is a
+[00:02:42] stock and it's got a float of 4 million
+[00:02:44] shares now by the way some of you guys
+[00:02:46] tuning in you may trade Forex Futures
+[00:02:49] Commodities and that's fine because
+[00:02:50] price action strategies apply uh to all
+[00:02:53] of these uh financial instruments you
+[00:02:54] can apply it to anything anything that
+[00:02:56] has a Candlestick chart that is okay so
+[00:02:59] ini initially uh on this chart we got
+[00:03:03] this move as you can see back here that
+[00:03:06] started at like 700 a.m. and so
+[00:03:08] typically you would think all right look
+[00:03:09] at this you know we got a squeeze here
+[00:03:12] uh first we got a little like sort of
+[00:03:13] like pop and drop and then sort of rally
+[00:03:15] back up to 425 up to 450 up to 550 right
+[00:03:19] and then it starts to pull back now
+[00:03:22] something that's really important to
+[00:03:23] note about this move volume looks good
+[00:03:27] light volume red candles high volume
+[00:03:29] green candles as it moves up and light
+[00:03:31] volume red candles so everything checks
+[00:03:33] out here but there's one thing that does
+[00:03:36] not check out the one thing that doesn't
+[00:03:39] check out on this was that there was no
+[00:03:42] Catalyst there was no news there wasn't
+[00:03:45] a reason for it to be moving higher so
+[00:03:47] you look at this and you think well
+[00:03:50] that's weird why did it move higher I
+[00:03:52] can't really tell you I don't really
+[00:03:54] know the answer to that in fact today we
+[00:03:56] have uh 16 million shares of volume and
+[00:03:59] we really don't know why it went up
+[00:04:01] however when we look at this chart what
+[00:04:03] we know is that this is a recent special
+[00:04:05] acquisition company AA is a a special
+[00:04:08] special purpose acquisition company
+[00:04:10] these are uh companies that are created
+[00:04:13] with the sole oop sorry with the sole
+[00:04:15] intention of merging with a privately
+[00:04:18] held company so let's say my software
+[00:04:20] company day trade Dash uh was approached
+[00:04:23] by a spa and they said oh we want to buy
+[00:04:25] you and we're going to merge we're going
+[00:04:27] to merge the spa with your private
+[00:04:29] company
+[00:04:30] and then we're going to make you a
+[00:04:32] publicly traded company and we're going
+[00:04:33] to change the ticker so when you invest
+[00:04:36] in a spack all investors Buy in at $10 a
+[00:04:39] share and then if they raise $50 million
+[00:04:42] or $100 million that's how much money is
+[00:04:45] in this special acquisition company and
+[00:04:48] that's the money that's used to go so
+[00:04:50] let's say it's 110 million whatever
+[00:04:51] that's the money that's used to go buy
+[00:04:53] and you know find find a private company
+[00:04:55] to bring to the public market and the
+[00:04:57] people who create these spcs make a ton
+[00:04:58] of money on these merg
+[00:05:00] so anyways this is a company that was a
+[00:05:02] special purpose acquisition they merged
+[00:05:04] with
+[00:05:05] TVGN and then once they did the merger
+[00:05:07] the price dropped from $10 all the way
+[00:05:09] down to like four bucks now it did
+[00:05:11] Squeeze back up on this day right here
+[00:05:13] which was pretty impressive and then it
+[00:05:16] came quite a bit lower so to be honest
+[00:05:19] it's possible that this pop what could
+[00:05:22] it have been caused by well that first
+[00:05:25] pop could have been caused by some short
+[00:05:27] sellers covering a position maybe they
+[00:05:29] been holding for a while and they
+[00:05:30] covered it probably not because it' be
+[00:05:33] sort of weird to do that at 7: a.m.
+[00:05:34] pre-market but it's possible it could
+[00:05:37] have been caused by a long bias Trader
+[00:05:40] who said I'm going to buy this stock
+[00:05:41] because I like it it could have been
+[00:05:43] caused by an Insider who said hey I'm
+[00:05:45] going to add more shares because the
+[00:05:47] price is so low that's certainly
+[00:05:49] possible now if an Insider bought shares
+[00:05:52] we will see a filing with the SEC but
+[00:05:55] they have I think they have like up to 5
+[00:05:56] days or something like that to do the
+[00:05:58] filing so we may not see it for couple
+[00:05:59] of days and look if that Insider bought
+[00:06:02] 50,000 shares that could be enough to
+[00:06:05] create that initial pop and then once
+[00:06:07] you have the initial pop then from there
+[00:06:10] well now people are watching it because
+[00:06:12] it's hitting the scanners but the fact
+[00:06:14] that this didn't have a proper news
+[00:06:16] Catalyst I think was a problem so we get
+[00:06:19] this initial move higher we sell off and
+[00:06:22] we actually sell off quite a bit so from
+[00:06:24] a technical perspective this broke below
+[00:06:27] the volume weighted average price that's
+[00:06:29] indicator of poor price action a
+[00:06:32] positive and a good chart would not
+[00:06:34] break all the way below volume weighted
+[00:06:36] average price it would pull back but it
+[00:06:38] wouldn't pull back that much so it pulls
+[00:06:40] back below the volume weight average
+[00:06:42] price it is below the average price of
+[00:06:44] the stock for the whole day it tries to
+[00:06:46] get above it here it fails it tries here
+[00:06:49] and it does it breaks 450 it goes up to
+[00:06:51] 475 up to 5 and then notice these two
+[00:06:54] candles on high volume this was sort of
+[00:06:58] the confirmation that this was it's
+[00:06:59] going to be a really difficult stock to
+[00:07:01] trade and I actually took my first trade
+[00:07:03] on this um buying at
+[00:07:06] $5 and it pops up here to a high of 529
+[00:07:10] it drops back down it pops back up to
+[00:07:11] 529 and ended up stopping out more or
+[00:07:14] less break even I I lost 63 cents on
+[00:07:17] that first trade okay so that's a break
+[00:07:19] even trade doesn't matter um but it it
+[00:07:21] was clearly not strong now it ends up
+[00:07:24] going sideways for a little bit right
+[00:07:25] here and when it starts to come back up
+[00:07:27] again I was like okay well you know what
+[00:07:30] I'm going to take a stab at this for the
+[00:07:32] break of this pivot right here so I got
+[00:07:34] back in as it broke through 30 what
+[00:07:36] happens it rejects it doesn't hold it
+[00:07:39] drops back down so on that trade I ended
+[00:07:42] up losing 250 bucks I go into the red it
+[00:07:45] comes back up again I try to get back in
+[00:07:47] for the break through this flat top and
+[00:07:49] look what happens once again it pops and
+[00:07:52] it rejects so at this point we have a
+[00:07:56] chart that is not giving clean price
+[00:07:58] action now it's true that the macd on
+[00:08:00] this was sort of you know flat against
+[00:08:02] the trade unfortunately I didn't lose a
+[00:08:05] lot my total um profit on the day is
+[00:08:08] $639 and I lost 680 on TVGN so the loss
+[00:08:12] is small and today I didn't get even
+[00:08:14] close to my daily goal 5,000 but it's a
+[00:08:16] Green Day nonetheless I'll talk a little
+[00:08:19] bit more about that in a second so we
+[00:08:21] had this these two rejection candles
+[00:08:23] here which are sometimes called a
+[00:08:24] tweezer um they sort of look like
+[00:08:26] Chopsticks see how they're kind of these
+[00:08:28] you know well I don't have to explain
+[00:08:29] what those look like you know so um
+[00:08:31] anyways looks like tweezers or
+[00:08:32] Chopsticks and typically um you know you
+[00:08:35] don't want to get poked uh in the eye
+[00:08:37] with chopsticks or with tweezers uh but
+[00:08:40] if you buy the top of this kind of move
+[00:08:43] um right here you're probably going to
+[00:08:45] get poked it's going to hurt and that's
+[00:08:47] what ended up happening to me because it
+[00:08:48] already has shown this weakness so this
+[00:08:50] is not a good a good thing to see uh I I
+[00:08:53] did give it another stab cuz I thought
+[00:08:55] well let's just see it's definitely
+[00:08:56] rallying back up volume is coming back
+[00:08:59] in in and my target is a retest of the
+[00:09:01] pre-market Highs but boy it could not do
+[00:09:03] it here it just sold off and it went
+[00:09:05] lower and lower and lower as we got a
+[00:09:08] little closer to the open we tried to
+[00:09:09] kind of come back up again I'll show you
+[00:09:11] the chart here and again another
+[00:09:14] rejection and a drop back down so this
+[00:09:18] is a great example of terrible price
+[00:09:21] action the patterns did not resolve all
+[00:09:24] right so you know if we're going to sort
+[00:09:26] of quantify what you know what poor
+[00:09:29] price action entails um so no
+[00:09:33] resolution no resolution on the patterns
+[00:09:35] we'll just abbreviate that um topping
+[00:09:39] Tails which in this case we got a
+[00:09:41] tweezer top um huge
+[00:09:45] sellers so big sellers on the level two
+[00:09:49] and we see it on the level two in
+[00:09:50] parenthesis um we also
+[00:09:54] saw um these nasty
+[00:09:57] flushes nasty flushes uh SL flush SL
+[00:10:02] drops we saw quite a few of those
+[00:10:05] unable to hold
+[00:10:09] vwb right so it's like just this is just
+[00:10:13] bad bad bad bad bad now this is this is
+[00:10:16] poor now if we said what is a good what
+[00:10:19] is good price action look like well it's
+[00:10:21] really just the inverse you've got um
+[00:10:24] great resolution great resolution you
+[00:10:27] don't have topping Tails no topping
+[00:10:29] tails you don't have huge sellers no you
+[00:10:33] know huge sellers right I don't have to
+[00:10:36] write the whole thing no nasty flushes
+[00:10:37] and drops so it's it's literally all of
+[00:10:40] this but you don't have it sometimes it
+[00:10:42] helps to sort of inverse because if you
+[00:10:45] realize well these are all the things
+[00:10:46] that make it bad then just the inverse
+[00:10:48] is what in this case would make it uh
+[00:10:50] positive and that is that is the case
+[00:10:52] here so so TVGN without a doubt was
+[00:10:56] terrible I mean the price action on this
+[00:10:58] was just awful and the day went on it
+[00:11:00] just got more difficult and it just sold
+[00:11:01] off and I'm glad that I stopped trading
+[00:11:03] it so one of the strategies that I'm
+[00:11:06] implementing in my own trading is each
+[00:11:09] day I I I focus to give you a little
+[00:11:13] context on trading for income when I
+[00:11:16] first started trading I didn't have any
+[00:11:18] other source of income so I was 100%
+[00:11:21] dependent on producing profit every
+[00:11:24] single day as a Trader I had a goal of
+[00:11:26] making $50,000 a year as a Trader so
+[00:11:29] that meant $1,000 a week roughly $200 a
+[00:11:32] month now some of you uh might be
+[00:11:34] thinking that's that's kind of a low
+[00:11:36] goal I don't know I think you should set
+[00:11:38] it a little higher than that but hey you
+[00:11:40] know uh give me a break I set it at 200
+[00:11:42] a day I was happy with that okay and I
+[00:11:44] was also pretty young I was in my 20s so
+[00:11:46] my goal was 200 per day and I knew that
+[00:11:49] I need to be very consistent with that
+[00:11:51] because the profit that I was making
+[00:11:52] from Trading was going towards paying my
+[00:11:55] bills so I was living off of my trading
+[00:11:58] income what that meant was that I
+[00:12:00] couldn't afford to take a lot of risk I
+[00:12:03] had to be very conservative and there
+[00:12:05] were times where I saw other people who
+[00:12:07] were able to afford to take risk taking
+[00:12:09] some high-risk trades and getting paid
+[00:12:10] for it and you know getting rewarded but
+[00:12:13] I also saw certainly my fair share of
+[00:12:15] people who took high-risk trades and got
+[00:12:17] wiped out and got destroyed and their
+[00:12:19] account was gone and now their
+[00:12:20] livelihood would be gone well if that
+[00:12:22] were me because this was what I was
+[00:12:23] depending on so I knew for myself I had
+[00:12:28] to keep my head down I had to be like
+[00:12:30] the turtle not worry about people racing
+[00:12:32] past me racing past me just focus on me
+[00:12:35] hitting my consistent 00200 a day goal
+[00:12:38] and some days I would hit 300 I'd hit
+[00:12:40] 400 some days would be better some days
+[00:12:42] it' be worse and I had to be really good
+[00:12:44] at being able to recognize is today a
+[00:12:46] day with clean price action or is today
+[00:12:49] a day that's choppy because when it's
+[00:12:52] choppy sometimes the safest thing to do
+[00:12:54] is just to kind of hunker down and seek
+[00:12:56] Shelter From The Storm and not try to
+[00:12:58] put your hand out there and get you know
+[00:12:59] get slapped when it's hot on the other
+[00:13:02] hand that's when it's time to take a
+[00:13:04] little bit more risk within reason and
+[00:13:06] be a little more aggressive and so for
+[00:13:08] me you know my spectrum of you know
+[00:13:11] taking risk like going from like hot to
+[00:13:14] cold in terms of how much share size I'm
+[00:13:17] going to take all of this is probably a
+[00:13:19] lot smaller than someone who is
+[00:13:22] comfortable taking more risk than me and
+[00:13:24] you know that's fine because we all
+[00:13:26] adjust our trading strategies to our
+[00:13:28] risk tolerance so for me today I sat
+[00:13:32] down on my first trade on TVGN and I
+[00:13:35] went red so I'm starting the day and now
+[00:13:38] now by the way I've scaled my goal all
+[00:13:40] the way up to $5,000 okay so my daily
+[00:13:42] goal is now 5,000 I've moved it up a
+[00:13:44] little bit uh which is great I've been
+[00:13:46] doing this for more than a decade so the
+[00:13:48] daily goal has gotten bigger uh but I'm
+[00:13:50] still very focused on being consistent
+[00:13:52] and on my first trade I went red uh
+[00:13:57] $250 something like that and then I
+[00:14:00] actually think I was green for a second
+[00:14:02] uh like by 100 and then I was back to
+[00:14:04] Red um about
+[00:14:07] $500 all right I took another trade and
+[00:14:10] that was the trade that I took on let's
+[00:14:12] see vvpr where I made
+[00:14:14] $26 so I was still down 300 on the day I
+[00:14:18] still wasn't making much progress and
+[00:14:19] then I took my first trade on tcbp which
+[00:14:22] I'll show you in a minute and I lost um
+[00:14:25] 400 on that so I was down 700 on the day
+[00:14:28] and at this point
+[00:14:29] I started the day with a maximum
+[00:14:32] position of 5,000 and one share because
+[00:14:35] I said I don't want to take big size
+[00:14:37] until I first given myself a cushion of
+[00:14:39] profit and the profit level that I was
+[00:14:41] targeting was $11,000 once I've got
+[00:14:44] $1,000 of profit then at that point I'm
+[00:14:46] going to take this cap off and I'm going
+[00:14:48] to start trading aggressively but until
+[00:14:50] I can get first that cushion I'm not
+[00:14:51] going to be aggressive and so I traded
+[00:14:53] with small size 2,000 to 5,000 share
+[00:14:56] positions started this whole way down
+[00:14:58] to- 700 00 and it's a good thing because
+[00:15:00] if I had traded with full size with this
+[00:15:02] type of price action I could have easily
+[00:15:04] lost 2500 3500 or even
+[00:15:07] $5,000 this did not warrant trading with
+[00:15:10] big size now when we finally had tcbp
+[00:15:15] pop up
+[00:15:17] tcbp to be honest was not very clean
+[00:15:20] price action either it put in a nice
+[00:15:22] move but it wasn't super clean so when
+[00:15:25] tcbp first popped up right here I
+[00:15:29] actually bought it at um 183 for the
+[00:15:32] break of Two And it flushed down here
+[00:15:35] and stopped me out for a $500 loss or
+[00:15:38] $400 loss and that was the point where I
+[00:15:40] was down 700 on the day that was my
+[00:15:43] lowest point and I took that trade with
+[00:15:45] 5,000 shares when it came back up I got
+[00:15:48] back in with 2500 shares because I had
+[00:15:50] was getting close I was just was like
+[00:15:52] I'm not feeling it you know I'm
+[00:15:53] struggling today so I got back in 2500
+[00:15:56] it ends up going higher I take a little
+[00:15:58] bit of profit out I take a little bit
+[00:15:59] more profit out a little bit more profit
+[00:16:01] out and then look at this do you
+[00:16:04] remember that candle that we talked
+[00:16:05] about before you get that nice move up
+[00:16:07] the pullback and then rejection that is
+[00:16:10] a rejection candle right there that's
+[00:16:12] nasty and you know what this one I took
+[00:16:16] this trade right here I was getting in I
+[00:16:18] was looking for the move to the high and
+[00:16:19] it reject and I got out immediately so I
+[00:16:22] didn't lose on this trade but this was
+[00:16:25] sort of the the caution flag at this
+[00:16:27] point I was like this is going to be me
+[00:16:29] with a sad face all right so I was like
+[00:16:31] no this is not good gosh darn it you
+[00:16:34] know we didn't have clean price action
+[00:16:35] on TVGN and now here's tcbp showing this
+[00:16:39] similar chop choppy to start the move it
+[00:16:42] it quickly pulls away and this one did
+[00:16:44] have news but anyways then you get this
+[00:16:47] rejection candle on high volume red now
+[00:16:50] the macd crosses over and we go into
+[00:16:52] this period of chop chop chop chop so
+[00:16:56] now there's no trades on it I can't do
+[00:16:58] anything with it now at the
+[00:17:00] open honestly I was surprised I did not
+[00:17:03] expect it to squeeze up here at the open
+[00:17:06] given the price action pre-market this
+[00:17:08] choppy price action this rejection at
+[00:17:11] vwap I just didn't think it was going to
+[00:17:13] happen but it did it squeezed up the
+[00:17:15] next thing you know it's hitting a high
+[00:17:16] of um 292 but it Consolidated in this
+[00:17:19] area for quite a while in fact I was a
+[00:17:23] little concerned that we were going to
+[00:17:24] have one of those jack knife candles but
+[00:17:27] if you watched my episode on avoiding
+[00:17:29] false breakouts what you would notice
+[00:17:32] was that I commented on how important it
+[00:17:34] is to look at the macd the macd was in
+[00:17:37] favor of this trade and so my final
+[00:17:39] trade on it I got in here at 290 and I
+[00:17:43] sold as it squeezed up to 317 and that
+[00:17:46] you know put me up and again I only took
+[00:17:48] that trade with 3,000 shares but that
+[00:17:51] put me up $600 on the day so and and
+[00:17:54] then it it kind of pulls back it's not
+[00:17:56] able to hold up so this was
+[00:17:58] unfortunately just a day where we did
+[00:17:59] not have really clean price action you
+[00:18:02] know this move it's okay but it it
+[00:18:04] wasn't great a bunch of topping tail
+[00:18:06] candles a bunch of bottoming tail
+[00:18:08] candles it was popping it was dropping
+[00:18:10] it was very thickly traded it felt like
+[00:18:12] playing tug-of-war now if we look at
+[00:18:14] vvpr just for instance vvpr um I did get
+[00:18:20] a trade on it today but um and and that
+[00:18:22] by the way was uh right here as we came
+[00:18:24] up to seven i' had been watching it for
+[00:18:27] this break of this consolidation here so
+[00:18:29] I took a little trade in that area
+[00:18:31] anyways only $200 of profit small trade
+[00:18:33] but if we look at yesterday on vvpr
+[00:18:36] yesterday vvpr uh had news that came out
+[00:18:39] right at 8 a.m. it squeezes up pull back
+[00:18:42] pop higher pull back pop up higher pull
+[00:18:44] back pull back nice move higher you know
+[00:18:47] it was a little choppy but it was pretty
+[00:18:50] clean now the reason this was a little
+[00:18:52] choppy yesterday was because the first
+[00:18:55] day of price action was the previous day
+[00:18:58] so day one is typically the cleanest and
+[00:19:01] this right here was one of our cleanest
+[00:19:02] moves that we've had all week this went
+[00:19:04] from $150 up to 550 it pops up it pulls
+[00:19:08] back it rallies higher I got in there
+[00:19:10] for the break of three it squeezes up to
+[00:19:13] a high here we got a micro pullback and
+[00:19:15] then it pushes higher again those of you
+[00:19:17] guys that haven't already downloaded my
+[00:19:19] micro pullback strategy PDF I'm going to
+[00:19:21] pin it to the top of the comments it'll
+[00:19:22] be in the description so you can
+[00:19:23] download that and that's going to give
+[00:19:25] you a guide of really how I'm getting in
+[00:19:28] and out when I'm seeing this pattern
+[00:19:29] forming because this is my favorite
+[00:19:31] pattern to trade so as a price action
+[00:19:33] Trader I like focusing on micro
+[00:19:35] pullbacks when something is moving very
+[00:19:37] quickly and then once we get into these
+[00:19:39] periods of consolidation it gets so much
+[00:19:42] more difficult for me the cleanest
+[00:19:44] trades always tend to be at the
+[00:19:46] beginning of the move and then you know
+[00:19:47] this second leg higher is okay it it
+[00:19:49] definitely pulled away on some high
+[00:19:51] volume but that first leg was was the
+[00:19:54] fastest and that's almost always the
+[00:19:56] case this was the fastest move and it
+[00:19:57] was on relatively volume they move
+[00:19:59] quickly when they first start when the
+[00:20:01] news first comes out so this was an
+[00:20:03] example of you know what I would
+[00:20:05] consider to be pretty clean price action
+[00:20:08] I mean you know it we had we had a nice
+[00:20:10] move we had news that supported the move
+[00:20:13] the macd was open which was in favor of
+[00:20:15] the trade we only had one red candle and
+[00:20:18] it was on lighter volume we didn't have
+[00:20:20] any nasty rejections but we ended up
+[00:20:23] getting one later and that was right
+[00:20:25] here so see that candle right there so
+[00:20:28] look what was happening in this area now
+[00:20:30] in this area we got this move higher and
+[00:20:33] then a big rejection and then it comes
+[00:20:35] back up another rejection back up
+[00:20:37] rejection up rejection rejection
+[00:20:39] rejection and it finally breaks and does
+[00:20:42] an even more dramatic rejection the macd
+[00:20:45] at that point was against the trade the
+[00:20:47] volume was showing high volume on red
+[00:20:49] candles and this unfortunately was just
+[00:20:52] it was too weak now the fact
+[00:20:55] is we don't know why there was so much
+[00:20:58] sell in on those candles we don't know
+[00:21:00] if there were insiders taking profit we
+[00:21:03] don't know if the company was selling
+[00:21:04] more shares onto the open market and you
+[00:21:06] know a direct offering was part of a
+[00:21:08] secondary offering we don't know if it
+[00:21:10] was a market maker you know a big hedge
+[00:21:12] fund shorting we really don't know but
+[00:21:16] what is clear is that there was way more
+[00:21:19] selling volume than there was buying
+[00:21:21] volume and when that happens the price
+[00:21:24] action becomes choppy and so this had
+[00:21:27] nice price action at the beginning of
+[00:21:28] the move it continue a little higher and
+[00:21:31] then it started to get choppy and what I
+[00:21:33] noticed here also was that um it was
+[00:21:35] getting somewhat
+[00:21:36] crowded and when we talk about a stock
+[00:21:39] being crowded what we're really
+[00:21:41] referring to is that there's so many
+[00:21:43] people trading it that you're seeing a
+[00:21:45] lot of big orders flowing through and
+[00:21:48] and it's a mix of buying and selling
+[00:21:50] like it's it starts to become a tug of
+[00:21:52] wars some people are like I think it's
+[00:21:54] going to go higher and others are like
+[00:21:55] it's going to go lower and when that
+[00:21:57] starts happening
+[00:21:59] all of those orders sort of compress the
+[00:22:01] range it gets Tighter and Tighter and
+[00:22:03] Tighter until it just sort of stops
+[00:22:05] moving and then people give up and they
+[00:22:07] kind of stop trading now when they give
+[00:22:09] up it's kind of like an arm wrestle it's
+[00:22:10] like a you know tug of war it's a battle
+[00:22:12] and then when you give up it's either to
+[00:22:14] the long side and it pulls away or it's
+[00:22:16] to the short side and it breaks down but
+[00:22:18] what's more often is that it's to the
+[00:22:20] short side and it breaks down and the
+[00:22:22] reason that happens is because the very
+[00:22:25] nature of tug
+[00:22:26] of-war indicates that the momentum and
+[00:22:29] trend has stopped especially after a
+[00:22:31] really nice move higher we had a really
+[00:22:33] nice move higher and then the momentum
+[00:22:35] just sort of died it was gone right all
+[00:22:39] of a sudden we're just going sideways so
+[00:22:41] buyers are no longer interested in
+[00:22:43] buying this and shorts are starting to
+[00:22:45] think well this is up quite a lot with a
+[00:22:47] stop at the highs this might work for a
+[00:22:49] reversal back down now I guess it might
+[00:22:52] have stopped them out before it dropped
+[00:22:54] which is sort of adding insult to injury
+[00:22:57] but but nonetheless it did pull back as
+[00:22:59] the day went on at least until sort of
+[00:23:02] in the afternoon so I would say this was
+[00:23:05] a pretty good example of clean price
+[00:23:07] action where we got nice clean
+[00:23:09] resolution we had some good patterns
+[00:23:11] they resolved the way I would expect
+[00:23:13] them to and and I was happy with that
+[00:23:15] but yeah once we got further in the day
+[00:23:17] the price action changed and that can
+[00:23:19] happen you can have a day where the
+[00:23:20] price action is really clean at the
+[00:23:22] beginning of the day you have nice
+[00:23:24] resolution you have clean patterns
+[00:23:25] everything that we've already discussed
+[00:23:27] and then it shifts you know for whatever
+[00:23:30] reason the stock becomes
+[00:23:33] crowded it's too many people kind of
+[00:23:35] fighting for the same little sliver of
+[00:23:37] profit and it's just it stops being
+[00:23:40] clean and if the news catalyst is really
+[00:23:42] really strong that will be enough to
+[00:23:45] keep people buying and to force shorts
+[00:23:47] to cover but if the news Catalyst isn't
+[00:23:49] strong or just the sentiment in the
+[00:23:51] market isn't strong we're not going to
+[00:23:54] see that and we're going to end up most
+[00:23:56] likely becoming choppy and and then
+[00:23:58] rolling over as the day goes on So This
+[00:24:01] was vvpr um let's see CX was another one
+[00:24:05] that we had uh this week this one uh
+[00:24:09] let's see if we have some good
+[00:24:12] candles so let's see this price action
+[00:24:16] yesterday was not particularly clean to
+[00:24:18] me it's sort of very whippy it comes all
+[00:24:22] the way below vwap it comes back up back
+[00:24:24] below vwap back up back below vwap that
+[00:24:27] a lot of lot of topping Tails that's not
+[00:24:30] clean didn't like that there on um on
+[00:24:34] that day if we go back a little bit
+[00:24:36] further though this one's been in play
+[00:24:37] for a couple of days another word to the
+[00:24:40] wise is sometimes when you have
+[00:24:41] something that's in play for several
+[00:24:42] days uh as the days goes on as the days
+[00:24:46] you know continue on of momentum it
+[00:24:48] starts to get choppier and choppier uh
+[00:24:50] this one even at the beginning of the
+[00:24:51] move was a little tricky and the reason
+[00:24:54] it was a little tricky was because um it
+[00:24:57] kind of started by making this quick
+[00:24:59] move on breaking news so it squeezes up
+[00:25:03] okay so that's nice micro pull back here
+[00:25:05] at about 330 then it pushes higher 350
+[00:25:08] 360 kind of stalls out dips down two
+[00:25:12] light volume red candles that's fine it
+[00:25:14] pushes higher and then this candle here
+[00:25:17] shooting star on high volume red first
+[00:25:20] warning sign it grinds higher on light
+[00:25:22] volume and then boom second warning sign
+[00:25:25] another high volume red candle coming to
+[00:25:27] the open we pull back all the way to
+[00:25:29] vwap we pop up we drop down and I really
+[00:25:32] think that shorts felt they were in
+[00:25:33] control on this one with those high
+[00:25:35] volume rejections pre-market and pretty
+[00:25:37] high volume selling at the open it
+[00:25:39] wasn't looking good uh and this is
+[00:25:42] something that can be very
+[00:25:44] frustrating is when a stock just starts
+[00:25:46] grinding now are these candles super
+[00:25:49] clean they're not you know we get a
+[00:25:51] little grind higher and then a selloff
+[00:25:53] right high volume red candle and then it
+[00:25:56] kind of grinds a little higher and then
+[00:25:58] dumps again right so this is not clean
+[00:26:01] price action but it's also not dying it
+[00:26:04] kind of keeps going just like a little
+[00:26:05] higher and this can be really hard to
+[00:26:07] trade both to the long side and the
+[00:26:09] short side people who short kind of keep
+[00:26:11] adding but they're just not getting the
+[00:26:13] resolution they're looking for people
+[00:26:14] who buy keep buying and they're not
+[00:26:16] getting the resolution they're looking
+[00:26:17] for either and you just start to be like
+[00:26:19] what is going on with this thing but
+[00:26:20] next thing you know it's at six 605 618
+[00:26:23] uhoh 660 okay now it's moving away a
+[00:26:26] little bit but this is as the day goes
+[00:26:28] on and then look at this rejection
+[00:26:30] candle right another big rejection
+[00:26:32] candle right there so it feels like once
+[00:26:35] you've had a couple of those rejection
+[00:26:38] candles there's a high likelihood
+[00:26:40] they'll keep happening again in my
+[00:26:41] episode where I talked about how to
+[00:26:43] avoid false breakouts I said they are
+[00:26:45] more often to happen when the macd is
+[00:26:47] crossed over against the trade so just
+[00:26:49] using macd right here can help you avoid
+[00:26:51] getting caught in false breakouts like
+[00:26:54] this false breakouts like some of these
+[00:26:56] ones back here well this one was a
+[00:26:57] little bit bit funny this one right here
+[00:27:00] uh this one right here this one um would
+[00:27:05] you wouldn't have missed that one was a
+[00:27:06] little bit different but the really
+[00:27:08] dramatic ones are when you have got that
+[00:27:10] period of consolidation and it breaks
+[00:27:12] out and does that those are just awful
+[00:27:14] that was another nasty rejection there
+[00:27:16] that's not clean price action that's the
+[00:27:18] type of stuff that's going to get you
+[00:27:19] caught it's going to get you in trouble
+[00:27:20] and you're going to lose money so for me
+[00:27:25] today as I started Trading I had my Max
+[00:27:29] at 5,000 shares and unfortunately on my
+[00:27:32] first um you know whoops back to the
+[00:27:35] Whiteboard on my first couple trades I
+[00:27:37] ended up um you know going down jumped
+[00:27:40] back up for a second went back down went
+[00:27:42] up for a second went back lower and I
+[00:27:44] was like I am definitely moving in the
+[00:27:46] wrong direction now I could be doing
+[00:27:48] this with 20,000 shares you know or I
+[00:27:51] could be doing it with small size 5,000
+[00:27:53] and is much better I do it with 5,000
+[00:27:56] once I got myself up to 600 I started
+[00:27:59] thinking okay maybe I'm starting to move
+[00:28:01] in the right direction if I can get
+[00:28:02] myself up a th000 then at that point I'm
+[00:28:05] going to take off my cap I'm going to
+[00:28:06] trade aggressively and that's how I
+[00:28:08] usually make my way up to the $5,000
+[00:28:10] daily goal but what ended up happening
+[00:28:12] today was I got up to 600 and then I
+[00:28:15] started just looking around at the price
+[00:28:16] action and I was like I don't see
+[00:28:18] anything to trade you know the leading
+[00:28:20] gainers are choppy we have some stocks
+[00:28:22] that are popping up but they're not
+[00:28:24] obvious I think I'm I think I'm playing
+[00:28:26] with fire here I think this is going to
+[00:28:28] going to be a day where I'm better off
+[00:28:30] just walking away with small profits and
+[00:28:33] this is this is a conscientious choice
+[00:28:35] to be more conservative and say you know
+[00:28:37] what a small green day is good I'm going
+[00:28:39] to lock that up because hey if we look
+[00:28:41] back on the week how have I finished
+[00:28:43] this week you know Monday Tuesday
+[00:28:45] Wednesday yesterday was
+[00:28:47] 4,300 Tuesday was 3,200 I think Monday
+[00:28:51] was 4,000 something like that so we're
+[00:28:53] already at like 11 12,000 on the week
+[00:28:55] this is a good week right 12,000 a week
+[00:28:58] 15,000 a week you're talking about 50
+[00:28:59] $60,000 a month that's $600 $700,000 a
+[00:29:03] year now is it all a little short of my
+[00:29:05] $5,000 daily goal it it is these last
+[00:29:08] few days but look I'm not going to be
+[00:29:10] too picky about that this is a little
+[00:29:12] aspirational it's what I'd like to hit
+[00:29:14] each day but I'm totally fine with
+[00:29:15] locking up you know 3 4,000 and calling
+[00:29:18] it a day if that's when the market
+[00:29:20] starts to cool off so when it comes to
+[00:29:23] my position sizing I'm starting each day
+[00:29:26] with small size cap of 5,000 shares
+[00:29:29] until I break $11,000 of profit and if I
+[00:29:32] never break a th000 I will not increase
+[00:29:35] my size now this is something new it's
+[00:29:37] not something I used to do it's
+[00:29:38] something I've just started doing in an
+[00:29:40] attempt to mitigate my draw down because
+[00:29:43] what I have found is in the last oh gosh
+[00:29:45] I don't know the last month or so I've
+[00:29:48] had a number of days where I came in on
+[00:29:49] that first trade with 155,000 shares and
+[00:29:53] I went red you know1 or
+[00:29:55] $15,000 and now I'm so deep in in the
+[00:29:58] red I'm emotional and once you get
+[00:30:01] emotionally triggered you get
+[00:30:02] emotionally fueled things can start to
+[00:30:04] unravel really quickly and that's what
+[00:30:06] happened to me several days last month I
+[00:30:08] had four days where the cumulative loss
+[00:30:11] of those four days was nearly
+[00:30:12] $40,000 that that really hurt my month
+[00:30:14] it was not good and I said I can't let
+[00:30:16] that happen I I really don't want to let
+[00:30:18] that happen ever again but certainly not
+[00:30:20] for a long time so I said let's in let's
+[00:30:23] let's put this let's test out this new
+[00:30:26] strategy Max share size of 5,000 until I
+[00:30:29] hit my first th000 of profit once I
+[00:30:31] cross that level take off the cap trade
+[00:30:35] aggressively right Market's on my side
+[00:30:37] and then once I give back you know
+[00:30:40] approximately 15 to 20% of my profit
+[00:30:42] walk away there before I give back more
+[00:30:46] alternatively if things just start to
+[00:30:48] get slow price action starts to get
+[00:30:50] choppy walk away there if I have three
+[00:30:52] losses one two three in a row three
+[00:30:55] strikes you're out walk away there so I
+[00:30:57] have couple different rules that I
+[00:30:59] follow for when to walk away and I also
+[00:31:02] am recognizing that my window begins at
+[00:31:03] about 7:00 a.m. and ends at about 11:
+[00:31:06] a.m. so if I'm right here at 11:00 a.m.
+[00:31:09] well to be honest if the market was
+[00:31:11] really really strong I might that'll be
+[00:31:13] a day where I'll continue trading but
+[00:31:15] most days the window closes around 11:00
+[00:31:17] a.m. so coming into 10:30 what I should
+[00:31:20] probably do is put the cap back on my
+[00:31:23] account at you know 5,000 shares so if I
+[00:31:25] take a couple more trades I can make a
+[00:31:27] little bit more but I'm not going to
+[00:31:28] risk you know doing one of those right
+[00:31:31] before my windows closing so this is u a
+[00:31:34] strategy that I'm implementing right now
+[00:31:37] with the goal of producing more
+[00:31:41] consistency and it means that on days
+[00:31:43] like today I have to be very cognizant
+[00:31:46] of the quality of the market is this a
+[00:31:48] day where we've got great price action
+[00:31:50] where I am in the zone or is it a day
+[00:31:54] where we're seeing a lot of chop because
+[00:31:56] today we didn't have good resolution
+[00:31:57] ution we had a bunch of topping taals we
+[00:32:00] had huge sellers we had nasty flushes
+[00:32:02] and drops we were unable to hold the
+[00:32:03] vwap and that was just on the specific
+[00:32:05] stocks I was trading now if we talk sort
+[00:32:07] of big picture we didn't have today an
+[00:32:11] obvious gapper that everyone is excited
+[00:32:13] about the leading gappers in the market
+[00:32:15] the leading percentage gainers uh they
+[00:32:18] were only so so people weren't really
+[00:32:19] enthusiastic about them this is
+[00:32:21] something that's interesting on a day
+[00:32:23] where you have sort of five
+[00:32:25] stocks that are moving up let's just say
+[00:32:28] for instance you've got five stocks that
+[00:32:29] are moving up you've got all the Traders
+[00:32:32] out there and now their attention is
+[00:32:35] dispersed you know some people are on
+[00:32:37] this stock here because it's you know
+[00:32:40] under it's it's like a 50 Cent P per
+[00:32:43] share 50 Cent stock something like that
+[00:32:44] so some people like cheap stocks then
+[00:32:46] there's could be some other people who
+[00:32:48] are like oh I really like you know the
+[00:32:50] Donald Trump stock djt that one's
+[00:32:52] volatile then they'll because that one's
+[00:32:54] in play on that day then someone else is
+[00:32:55] like oh I really like um Nvidia right in
+[00:32:58] Nvidia whatever it is um and then
+[00:33:00] someone else is like oh well we've got a
+[00:33:02] couple of small cap stocks you know
+[00:33:04] between five and 10 but then some of
+[00:33:07] them are easy to borrow right so now
+[00:33:10] you've got shorts so this creates
+[00:33:12] divided attention when you have divided
+[00:33:14] attention each of these are going to get
+[00:33:17] you know one fifth of the volume one
+[00:33:18] fifth of the attention one fifth of the
+[00:33:20] eyes that you would get if you had a day
+[00:33:23] where you had one really obvious stock
+[00:33:28] you have one really obvious stock like
+[00:33:30] we had um vvpr just for instance earlier
+[00:33:33] on the week everyone is focusing on this
+[00:33:37] it's the leading percentage Gainer it's
+[00:33:39] got a news Catalyst it's obvious and
+[00:33:43] this is when we're going to see the
+[00:33:45] cleanest patterns this is where we're
+[00:33:46] going to see really super high relative
+[00:33:50] volume really high relative volume now
+[00:33:52] let's use let's actually check that just
+[00:33:53] for a moment today so um the relative
+[00:33:57] volume on on
+[00:33:58] tcbp is 247 that's not bad it's a little
+[00:34:03] low compared to what we've seen on other
+[00:34:05] days the relative volume on TVGN is very
+[00:34:08] high in fact this might be the highest
+[00:34:10] volume Day tvn's Ever Had um so tcbp you
+[00:34:15] can see volume's a little lower than
+[00:34:16] this day back here if we're looking at
+[00:34:17] the daily chart volume is a little
+[00:34:20] lighter it's not nothing but it's a
+[00:34:22] little lighter TVGN because it's a
+[00:34:24] recent IPO probably very very high
+[00:34:27] volume volum candle yes very high volume
+[00:34:30] relative to what it's had in the past
+[00:34:32] however without a true Catalyst I think
+[00:34:35] too many people were happy to sell into
+[00:34:36] this move maybe even insiders at the
+[00:34:38] company I don't know we're not sure but
+[00:34:40] um so relative volume I think the the
+[00:34:44] issue here was that we didn't have a
+[00:34:45] clear news Catalyst and then some of
+[00:34:47] these others that are on the scan you
+[00:34:49] know Al it's a 31 million share float
+[00:34:52] it's got 27 million shares of volume so
+[00:34:55] it's much more thickly traded this is
+[00:34:56] going to be ch cier the imbalance
+[00:34:59] between supply and demand is not as
+[00:35:01] significant you've got supply of 31
+[00:35:04] demand of 27 million it's equal right so
+[00:35:08] it's moving higher but it's not a strong
+[00:35:10] imbalance now tcbp has a strong
+[00:35:13] imbalance it's up 81% but again
+[00:35:15] unfortunately on this one for whatever
+[00:35:17] reason it just got really choppy got
+[00:35:20] really crowded and the thing that we
+[00:35:22] that we don't know you know you can have
+[00:35:25] all the technical characteristics of a
+[00:35:27] stock you can have the price the
+[00:35:28] percentage change the float the relative
+[00:35:31] volume but those alone aren't what
+[00:35:34] create the big moves those are important
+[00:35:38] but there's something else it's what's
+[00:35:41] the quality of the Catalyst what's the
+[00:35:43] historical chart look like what's the
+[00:35:45] historical price action looked like for
+[00:35:47] the stock that you're looking at and
+[00:35:50] what's the condition of that company is
+[00:35:52] that a company that needs to raise money
+[00:35:54] because then they may sell shares on the
+[00:35:57] market is that a company has a lot of
+[00:35:59] insiders who are able to freely sell
+[00:36:01] shares into a big move because they
+[00:36:04] might right so those are the Dynamics
+[00:36:06] that are different from company to
+[00:36:07] company and you know in a really hot
+[00:36:10] Market you could see a company that
+[00:36:11] doesn't even have the best
+[00:36:13] characteristics or the best Dynamics and
+[00:36:15] still it makes a big move uh and in a
+[00:36:17] cold Market you can have a stock that
+[00:36:18] everything looks great but you have a
+[00:36:21] lot of people who have a short bias the
+[00:36:23] Longs are more conservative and as a
+[00:36:24] result you just see more selling selling
+[00:36:27] selling in selling and when that's the
+[00:36:29] case there's nothing you could do about
+[00:36:30] it so one of the things I said to myself
+[00:36:32] today as I was sitting down I said look
+[00:36:36] you know let's think about rather than
+[00:36:39] think about where I'm at on the day
+[00:36:41] because on the day today I was down you
+[00:36:43] know minus 250 at one point and part of
+[00:36:47] me was like oh that's annoying and I
+[00:36:48] said no it's not annoying look you're up
+[00:36:50] 12,000 on the week and you're down 250
+[00:36:53] right now off of that Top This is a
+[00:36:56] perfectly respectable spot to walk away
+[00:36:58] and to call it you do not need to
+[00:37:01] overtrade you do not need to make this a
+[00:37:03] Green Day there is such a thing as a
+[00:37:06] successful red day a successful red day
+[00:37:08] is a small red day that's well within
+[00:37:10] your risk tolerance that doesn't exceed
+[00:37:12] where you know your max loss you don't
+[00:37:14] go Revenge trading you don't go crazy
+[00:37:17] you just have a small loss and that's
+[00:37:18] totally okay in fact the better you get
+[00:37:20] at having small losses like that
+[00:37:22] ultimately the more successful you'll be
+[00:37:24] in your career because it's days like
+[00:37:26] today where you know you're down 250 and
+[00:37:30] then you're like shoot I really want to
+[00:37:32] be green today and then next thing you
+[00:37:34] know you're down 700 and then you're
+[00:37:35] down a th000 and then you're down 5,000
+[00:37:37] all of a sudden it starts to get bigger
+[00:37:38] and bigger and one day you've given back
+[00:37:41] everything you've made on the whole week
+[00:37:42] and you did it on a day when the price
+[00:37:44] action was terrible so being able to
+[00:37:47] capitalize on price action requires a
+[00:37:50] very honest assessment of the condition
+[00:37:52] of the market today and if the market is
+[00:37:55] not hot the best thing you could do is
+[00:37:57] just step back slow down and be patient
+[00:37:59] and that's exactly what I did today now
+[00:38:01] I I'm I'm saying all this I'm trying to
+[00:38:03] really emphasize it because it's
+[00:38:05] something that I'm working on in my own
+[00:38:07] trading I have a tendency to be really
+[00:38:10] aggressive and that's what allowed me to
+[00:38:12] make millions and millions of dollars of
+[00:38:13] profit when the market was super hot
+[00:38:16] during 2020 2021 2022 Etc during that
+[00:38:20] sort of window but that's not the market
+[00:38:22] we're in right now and I have to remind
+[00:38:24] myself that I still have the goal of
+[00:38:26] producing consistency every single day
+[00:38:28] just like when I got started and so kind
+[00:38:30] of going back to my roots a little bit
+[00:38:32] with that instead of coming out of the
+[00:38:34] gates swinging hard I'm trying to be a
+[00:38:36] little bit more conservative on those
+[00:38:38] first couple trades I'm trying to kind
+[00:38:39] of test the water and see how does the
+[00:38:41] price action feel is it clean are we
+[00:38:45] getting nice breakouts or the second I'm
+[00:38:47] getting in am I buying from a hidden
+[00:38:49] seller someone asked me today you know H
+[00:38:51] how do you identify a hidden seller and
+[00:38:54] I said well the way you identify a
+[00:38:55] hidden seller is when you see a lot of
+[00:38:58] green on the tape and the price doesn't
+[00:39:01] break so right there you're seeing green
+[00:39:02] and the price isn't breaking now you can
+[00:39:04] also see in this case you've got a huge
+[00:39:07] stack of sellers this is now very
+[00:39:10] thickly traded this is indicative of a
+[00:39:13] very crowded stock 74 million shares of
+[00:39:17] volume and you know because of free
+[00:39:20] commissions I think this has changed how
+[00:39:22] some stocks behave because with free
+[00:39:24] commissions you have people that buy
+[00:39:26] sell Buy sell buy sell
+[00:39:28] inside every candle they're like you
+[00:39:31] know just hyper Super Active Traders
+[00:39:34] trading maybe a thousand times a day and
+[00:39:37] just trying to scalp like half a penny
+[00:39:39] half a penny half a penny and you know
+[00:39:41] you do that enough times it can add up
+[00:39:43] and I think all of that has sort of
+[00:39:45] filled in a lot of liquidity which is
+[00:39:48] good if you want to get in out of a huge
+[00:39:50] position and hold it for a long time but
+[00:39:52] it's also brought the ranges in and kind
+[00:39:55] of slowed everything down and made
+[00:39:56] everything a lot more
+[00:39:57] congested and that may be one of the
+[00:39:59] reasons that I find I'm having the most
+[00:40:02] success at the very beginning of a move
+[00:40:05] regardless of what time the move occurs
+[00:40:07] um the move could occur later in the day
+[00:40:09] but just the beginning of that move that
+[00:40:11] first leg seems to be the cleanest and
+[00:40:15] then I think as more Traders start
+[00:40:17] seeing what's going on that this stock
+[00:40:20] is up a lot they start filling in with
+[00:40:22] all of their orders and and what also
+[00:40:25] probably happens is there's a certain
+[00:40:26] degree of high frequency trading
+[00:40:28] algorithms that join on as well once you
+[00:40:30] cross certain volume thresholds and now
+[00:40:33] it just starts to become a tug-of-war so
+[00:40:36] one of the things that that means is
+[00:40:38] that there's a window each day for me of
+[00:40:40] when I make the most but there's also
+[00:40:43] kind of a window on each stock of when I
+[00:40:46] make the most and what I want to try to
+[00:40:47] do is be aggressive in that window on
+[00:40:50] that stock so break the ice if I can get
+[00:40:52] myself in the green I'm up more than a
+[00:40:54] th on the day scale up real quick so I
+[00:40:56] can capitalize on that move now I don't
+[00:40:58] want to go into that first trade with
+[00:40:59] huge size because I don't always know
+[00:41:01] for sure if it's going to hold or if
+[00:41:02] it's going to you know flush and reject
+[00:41:04] on me and show poor price action so if
+[00:41:06] the price action is good I want to lean
+[00:41:08] in be aggressive and trade as much as I
+[00:41:10] can in that first leg of the move kind
+[00:41:11] of before the macd crosses over before
+[00:41:14] it starts to get congested and there are
+[00:41:16] times where we'll have something uh
+[00:41:19] let's see gxi or gcts you know I could
+[00:41:23] show you a bunch of different charts but
+[00:41:24] you know some of these moves like on
+[00:41:26] this day here here this ended up going
+[00:41:28] from the previous day's low of $250 all
+[00:41:31] the way up to nearly $20 a share it it
+[00:41:33] rolled over eventually but it still went
+[00:41:35] up you know over a th% that's huge then
+[00:41:39] we had uh
+[00:41:40] gcts this one I mean these are some
+[00:41:44] serious
+[00:41:46] moves this went from less than $10 a
+[00:41:49] share to over $50 a share and that was
+[00:41:51] all basically the front side of the move
+[00:41:53] before it rolled over so vvpr that chart
+[00:41:56] I was showing you uh before that one
+[00:41:58] went from you know whatever it was $2 to
+[00:42:01] to $5 that was good but it wasn't
+[00:42:04] anything outrageous it wasn't anything
+[00:42:06] I'll you know remember for for weeks and
+[00:42:08] weeks to come or or years to come it was
+[00:42:10] no GameStop you know it was a nice move
+[00:42:12] but it wasn't anything crazy so the
+[00:42:14] thing is these are the base hits you
+[00:42:17] lock up the base hits you lock it up you
+[00:42:19] get disciplined you don't over say
+[00:42:21] you're welcome and then every now and
+[00:42:23] then you're going to see something like
+[00:42:25] a gcts or a GameStop and those are the
+[00:42:29] ones that just add icing to the cake but
+[00:42:31] here's the mistake a lot of Traders make
+[00:42:33] a lot of Traders will overtrade setups
+[00:42:37] once the price action becomes poor once
+[00:42:39] they start to become choppy and they're
+[00:42:41] going sideways they're still overtrading
+[00:42:42] them and what do they do they're giving
+[00:42:45] back profit they might be up you know
+[00:42:47] whatever it is and then they have one
+[00:42:48] big loss and then they're trying
+[00:42:50] mentally to get back to here and so they
+[00:42:52] take a little more risk to try to swing
+[00:42:54] back up and take another big loss and
+[00:42:56] now they're down here and they're like
+[00:42:57] well shoot to make back this much in one
+[00:43:00] trade I'm going to need to take a lot of
+[00:43:02] risk right so I take a lot of risk it
+[00:43:04] goes the wrong way and next thing you
+[00:43:05] know they're down here with another big
+[00:43:08] loss and I have seen that happen a
+[00:43:10] million times and i' I've done it myself
+[00:43:13] it happens when you're too emotional at
+[00:43:15] the top and this is the crazy thing
+[00:43:17] is by this point for some people the
+[00:43:22] very fact of having given back that much
+[00:43:25] you're going to be past the point of no
+[00:43:27] return emotionally you're going to be
+[00:43:30] fully
+[00:43:33] just Tunnel Vision on recouping this
+[00:43:36] loss right now and when that happens
+[00:43:39] that's when you spiral because now
+[00:43:41] you've allowed emotions to take over so
+[00:43:44] one of the things that I've been doing
+[00:43:45] that I found really helpful is I'm
+[00:43:47] journaling um each day so I've got my
+[00:43:49] journal up here oh maybe it's a little
+[00:43:51] hard to see anyways I've got my journal
+[00:43:52] up on this monitor here and I'm
+[00:43:54] journaling um the days and noting sort
+[00:43:57] of um my p&l my biggest retracement
+[00:44:00] intraday did I have high emotions did I
+[00:44:03] lose emotional composure I'm trying to
+[00:44:05] put together as many days as possible
+[00:44:06] without losing emotional composure and
+[00:44:08] I'm talking uh noting my best trade my
+[00:44:10] worst trade and then taking notes on the
+[00:44:12] day because I want to develop the
+[00:44:14] highest level of awareness possible to
+[00:44:17] how I'm feeling each day to my emotions
+[00:44:20] and to the condition of the overall
+[00:44:22] Market the better I can get at that the
+[00:44:25] better I'll be at easing off the
+[00:44:27] throttle when things get cold and then
+[00:44:29] leaning back on when things start to
+[00:44:31] heat up and ultimately my own p&l is
+[00:44:35] somewhat of a reflection of how
+[00:44:37] certainly I'm doing in the market as
+[00:44:39] long as I'm trading calm cool and
+[00:44:41] collected if I'm trading emotionally
+[00:44:44] then I'm trading erratically I'm
+[00:44:46] recklessly even and my p&l will not
+[00:44:49] necessarily be a good reflection I could
+[00:44:51] be read on a day that there was a lot of
+[00:44:52] opportunities because I mismanaged risk
+[00:44:54] got emotional and made mistakes but as
+[00:44:56] long as I'm calm cool and collected my
+[00:44:58] p&l is going to be a good reflection of
+[00:45:00] the quality of the market for my
+[00:45:02] strategy so when the price action is
+[00:45:04] strong that's when I'm going to lean in
+[00:45:06] I'm going to be aggressive and I'm going
+[00:45:07] to try to add icing to the cake so what
+[00:45:09] a lot of Traders do they overtrade
+[00:45:11] during these choppy periods they dig
+[00:45:13] themselves a ho so you know they end up
+[00:45:16] H you know maybe having a little bit of
+[00:45:17] profit and then going red and then
+[00:45:19] losing a little bit more and then
+[00:45:20] dipping down more and more and then we
+[00:45:22] finally have you know that GameStop or
+[00:45:25] we finally have something like gcts that
+[00:45:27] from $10 to 5050 in one day and you know
+[00:45:30] maybe they trade it really well but all
+[00:45:32] it's doing is bailing them out from all
+[00:45:34] these losses you know they're still
+[00:45:36] they're just back getting back to flat
+[00:45:39] so what I want to see you guys doing is
+[00:45:42] focusing on your small base hits so
+[00:45:44] maybe you have some days where you're
+[00:45:46] you know sideways you know maybe you
+[00:45:47] have small losses you're like this is
+[00:45:49] going to be a successful red day there's
+[00:45:51] not much happening today and then you
+[00:45:53] and then you're sort of sideways like
+[00:45:54] this and then we have you know that nice
+[00:45:57] trade on gcts and then you go back into
+[00:46:00] trading sideways right so it doesn't
+[00:46:03] have to be like you know a perfect
+[00:46:05] straight up Equity curve it could be a
+[00:46:07] little choppy but what I want to see is
+[00:46:09] that generally you're making progress
+[00:46:11] you're not having big draw Downs you're
+[00:46:13] keeping your losses super super small
+[00:46:16] the smaller you're able to keep your
+[00:46:17] losses the more emotionally composed
+[00:46:20] you're going to be and the fact is the
+[00:46:22] smaller your losses the easier they are
+[00:46:25] to recover from when you have a red like
+[00:46:27] today if today had been a red day and
+[00:46:28] I'm down 300 bucks
+[00:46:30] $700 I can recover that so so easily in
+[00:46:35] one trade like it's so easy when the
+[00:46:37] Market's hot when the price action is
+[00:46:39] strong so learn to recognize the
+[00:46:42] difference between good price action and
+[00:46:45] bad price action take your own p&l
+[00:46:48] starting each day with a small sort of
+[00:46:50] small share size once you get yourself
+[00:46:52] up to a quarter of your daily goal and
+[00:46:54] the Market's hot lean in aggressive if
+[00:46:58] you never get to even a quarter of your
+[00:46:59] daily goal with small size today it's
+[00:47:02] not going to happen try again doesn't
+[00:47:03] matter you can't force it right if the
+[00:47:06] Market's not if the opportunities aren't
+[00:47:07] there they're not there your best bet is
+[00:47:10] to wait until tomorrow and if you're
+[00:47:11] having a hard time being patient and
+[00:47:13] having the discipline to sit here and
+[00:47:14] not trade get up and walk away from the
+[00:47:17] computer and don't come back until
+[00:47:19] tomorrow do whatever you have to do
+[00:47:21] discipline is key so I hope you guys
+[00:47:23] found this episode helpful I hope you
+[00:47:24] hit the thumbs up I hope you subscribe
+[00:47:25] to the channel if you want download my
+[00:47:27] micro pullback strategy PDF it will be
+[00:47:29] pinned at the top of the comments and in
+[00:47:30] the description so you can download it
+[00:47:32] print it out and you can utilize that
+[00:47:33] and start implementing it in your own
+[00:47:35] trading but remind you as always trading
+[00:47:37] is risky my results aren't typical so
+[00:47:39] manage your risk take it slow and I'll
+[00:47:41] see you back here for my next upload
+[00:47:42] real
+[00:47:44] soon

@@ -1,0 +1,397 @@
+# How to Use Trade-Ideas Stock Scanners for Day Trading
+# https://www.youtube.com/watch?v=eCSzHYl8apo
+# duration_sec: 934
+
+[00:00:02] all right everyone so we've had some
+[00:00:03] questions about how to use stock
+[00:00:05] scanners now all the scanners that I
+[00:00:08] have which you can see here on the left
+[00:00:10] side of the screen and the Gap scanner
+[00:00:12] here in the center these are all powered
+[00:00:14] by trade ideas so you need an active
+[00:00:17] subscription with trade ideas in order
+[00:00:19] to use this software and to use these
+[00:00:21] scanners now I've written the code for
+[00:00:23] these scanners so when you're in trade
+[00:00:26] ideas here uh you can go and click new
+[00:00:31] alert
+[00:00:32] window and then you can go and take one
+[00:00:35] of their pre-built alerts or you can
+[00:00:37] write your own or you can simply install
+[00:00:40] one of the ones that we've already
+[00:00:42] developed and the way we do this is we
+[00:00:44] save the layout and then you'll go into
+[00:00:48] file load
+[00:00:51] layout and you'll load the layout right
+[00:00:53] here just like that or you'll go to your
+[00:00:56] desktop wherever wherever it is you'll
+[00:00:58] just load the layout so we give you the
+[00:01:00] layout and it'll include all of these
+[00:01:02] scanners right here all right so let's
+[00:01:04] walk through the scanners and how I use
+[00:01:07] them so each morning starts with a
+[00:01:09] review of the gappers the stocks gapping
+[00:01:12] up all right a big part of my trading
+[00:01:14] strategy is trading momentum and that
+[00:01:17] includes trading the gappers right out
+[00:01:19] of the gates in the first 3 to five
+[00:01:21] minutes of the market open so Market
+[00:01:23] opens at 9:30 I'm often taking trades in
+[00:01:25] the first 5 minutes and booking profits
+[00:01:28] usually 400 to $6 $700 in that first
+[00:01:32] five minute window that gives me a
+[00:01:34] cushion that I can trade off of for the
+[00:01:36] rest of the day but you have to be able
+[00:01:39] to scan and create a watch list before
+[00:01:41] the Bell even rings so these scanners
+[00:01:44] start running pre-market so if I come
+[00:01:46] here and uh turn on my computer at 8:45
+[00:01:49] or 9:00 a.m. this scanner will already
+[00:01:51] be telling me the Stock's gapping up in
+[00:01:53] green or gapping down in red of course I
+[00:01:57] look for the stocks gapping up being a
+[00:01:58] long biased Trader
+[00:02:00] and as you know I just look at each of
+[00:02:02] the stocks on here I review uh the price
+[00:02:05] in this column the float the percentage
+[00:02:08] of the float that's short the percentage
+[00:02:10] of the Gap up the amount of pre-market
+[00:02:13] volume how many days we are from the
+[00:02:15] earnings date so anything within one day
+[00:02:18] is basically a stock gapping on
+[00:02:20] earnings the five minute volume Spike
+[00:02:24] the relative stock twits mentions so
+[00:02:27] this tells us if they're socially
+[00:02:28] trending
+[00:02:30] this will tell us the relative volume
+[00:02:31] but it doesn't start uh populating until
+[00:02:33] the Market's open and this is the
+[00:02:35] company
+[00:02:36] name so as you know I look at all of
+[00:02:39] these stocks and I just start going
+[00:02:41] through in E signal this is my charting
+[00:02:43] platform and I just start looking at uh
+[00:02:46] the gappers MN KD I'll take a peek see
+[00:02:50] what the chart looks like I'm looking
+[00:02:52] for that nice bull flag that nice flat
+[00:02:54] top breakout setup I want to see stocks
+[00:02:56] that already have a lot of price action
+[00:02:58] pre-market that's going to give me
+[00:03:00] confidence to potentially take a trade
+[00:03:02] all right because you can already gauge
+[00:03:04] well we've got some resistance up here
+[00:03:07] at 750 and we know half dollars are
+[00:03:09] often levels of resistance so that's
+[00:03:11] interesting over
+[00:03:13] 750 all right now um if a stock like
+[00:03:17] let's say lpth doesn't have much of any
+[00:03:20] pre-market uh price action it's very
+[00:03:23] hard to take a trade in the first couple
+[00:03:25] minutes all right so this type of price
+[00:03:27] action there's only two Candles there
+[00:03:29] there's just not a lot of volume so if
+[00:03:31] you look back at the scanner here we'll
+[00:03:33] see the lpth only had 300 shares of
+[00:03:36] volume at
+[00:03:37] 915 right that's just there's nothing
+[00:03:39] there we can't base a trade off that but
+[00:03:41] something like AXN that has 1.1 million
+[00:03:44] shares of volume
+[00:03:45] premarket that's something that we can
+[00:03:48] really develop u a a game plan for we
+[00:03:51] could say all right we have a very clear
+[00:03:53] chart both after hours trading and
+[00:03:56] pre-market trading we were trending up
+[00:03:58] nicely here and and then we had a bit of
+[00:04:01] a reversal and now we're trending down
+[00:04:03] so you could say I like this to the
+[00:04:04] short side uh or I like it to the long
+[00:04:07] side above this resistance line but you
+[00:04:09] can create a game plan for how you're
+[00:04:11] going to trade this in the first five
+[00:04:13] minutes of the day as you guys know the
+[00:04:16] market is the most volatile at the open
+[00:04:19] you look at almost any stock and you're
+[00:04:21] going to see Peak
+[00:04:23] volume in the first 30 minutes right in
+[00:04:26] here that window and then decreasing
+[00:04:28] volume as the day goes on okay this high
+[00:04:31] volume is also correlated with high
+[00:04:33] levels of volatility so lots of volume
+[00:04:36] lots of volatility big potential windows
+[00:04:40] for profit but it's potential window you
+[00:04:42] need to know how to trade these setups
+[00:04:45] okay so these are the tools that I use
+[00:04:47] to find the stocks but then I have to
+[00:04:49] apply the trading strategies that of
+[00:04:51] course we teach in the classes and uh we
+[00:04:54] also have some free videos and free blog
+[00:04:55] posts about them as well all right but
+[00:04:58] for the most part we're looking at the
+[00:04:59] gaping go strategy and the momentum
+[00:05:01] trading strategy for these types of
+[00:05:03] stocks all right so big volume there
+[00:05:05] right at the open and then KD this will
+[00:05:08] be the same
+[00:05:10] thing big volume at the open right and
+[00:05:13] decreasing so this is the easiest time
+[00:05:15] to trade this is how almost every single
+[00:05:19] stock looks high volume at the open
+[00:05:21] decrease in going into lunch and then
+[00:05:23] sometimes we get an increase coming out
+[00:05:25] of lunch and going into the afternoon
+[00:05:26] but rarely do we uh do we exceed the
+[00:05:29] amount of volume we had at the open so
+[00:05:32] knowing that is just a trend or just a
+[00:05:35] pattern in the market almost every
+[00:05:36] single day we focused our strategy on
+[00:05:39] trading during the time where there's
+[00:05:40] the most liquidity the most volume and
+[00:05:43] where it's easiest to get big
+[00:05:45] moves all right so pre-market we're
+[00:05:48] looking at the Gap
+[00:05:50] scan now 9:30 Gap scan is basically of
+[00:05:54] no use because now we already know the
+[00:05:56] gappers now we're trading so we can
+[00:05:58] forget about the Gap scan
+[00:06:00] now we're going to focus on the scanners
+[00:06:02] here which are telling us stocks in real
+[00:06:04] time right now at 931 what is moving so
+[00:06:07] I look at the high a day Momo scanner
+[00:06:09] momentum scanner this runs until 11:30
+[00:06:12] a.m. right trying to take advantage of
+[00:06:14] momentum in the first two hours of
+[00:06:15] trading this will tell us stocks that
+[00:06:18] are catching a bid okay this is right
+[00:06:20] here again the F minute volume Spike
+[00:06:23] having a big F minute volume Spike tells
+[00:06:25] us lots of people are trading lpth at
+[00:06:28] 931
+[00:06:30] I saw lpth today on the scanner 931 I
+[00:06:33] jumped in at $2 and made 1,000 bucks
+[00:06:37] right here on this candle in the first
+[00:06:38] five minutes of trading and again you
+[00:06:41] look at the volume on this over the
+[00:06:42] course of the day in this one candle we
+[00:06:45] went from 153 up to
+[00:06:47] 249 that is a massive
+[00:06:50] move right in here and now it's out of
+[00:06:53] play all right so we're always looking
+[00:06:55] for the stock that has the potential to
+[00:06:58] do this kind of move as of the gates and
+[00:07:00] almost every single day there's a stock
+[00:07:02] doing this so if you don't find it on
+[00:07:05] the Gap scan then right out of the gates
+[00:07:07] you're watching your high aay scanner
+[00:07:10] all right the Stock's surging up now
+[00:07:12] right below that we've got a multi
+[00:07:13] strategy window and this similarly will
+[00:07:16] give you stocks that are surging up
+[00:07:17] volume spikes top reversals bottom
+[00:07:21] reversals you're going to have a number
+[00:07:22] of different alerts on this scanner I
+[00:07:25] personally don't use this scanner at all
+[00:07:28] but some of our students like it so we
+[00:07:30] leave it up here just for them I don't
+[00:07:32] use the scanner at all though so you
+[00:07:33] could take that away if you are not one
+[00:07:35] of the students that likes it all right
+[00:07:38] now to the left we have our surging up
+[00:07:41] Scanner this tells us at this moment
+[00:07:44] right now where we have the most volume
+[00:07:47] on the 5 minute the last 5 minute period
+[00:07:49] in the Market at any given time so right
+[00:07:52] now it's on
+[00:07:54] MXL all right now this at this time
+[00:07:56] right now has the most volume relative
+[00:07:59] in the ENT ire
+[00:08:00] Market okay now this is this scan is
+[00:08:03] filtered for price range and it's
+[00:08:04] filtered to be within uh the range of
+[00:08:07] stocks that we like so that means lower
+[00:08:08] float uh lower price uh and higher
+[00:08:12] average true range and you can see that
+[00:08:15] again relative to this morning its
+[00:08:16] volume is still light but at this point
+[00:08:19] right now there just might not be a lot
+[00:08:20] that has high volume then we've got seed
+[00:08:24] SE D that's up there as
+[00:08:27] well okay so volume very High out of the
+[00:08:30] gates and it's increasing a little bit
+[00:08:33] 52,000 shares in the last 5
+[00:08:35] minutes that's pretty good volume you
+[00:08:39] know relative to this morning it's still
+[00:08:40] pretty light so I wouldn't take a trade
+[00:08:42] on it but it tells us this scanner tells
+[00:08:44] us where there's volume in the market
+[00:08:45] right now as day Traders we're Hunters
+[00:08:48] of volume and managers of risk we're
+[00:08:50] always looking for volume in the market
+[00:08:53] we trade stocks with volume a stock will
+[00:08:55] not have a breakout without volume you
+[00:08:58] need that buying volume so we look for
+[00:09:00] the volume we Chase it around the market
+[00:09:02] every single day okay but of course we
+[00:09:04] need to manage risk on every single
+[00:09:06] trade and if we can't get that 2:1
+[00:09:08] profit loss ratio we don't take a trade
+[00:09:11] again coming back to the fact that these
+[00:09:12] are tools but you need to know how to
+[00:09:14] use them these will show you stocks that
+[00:09:16] are moving but you need to know whether
+[00:09:17] or not it's a trade worth taking can you
+[00:09:20] manage risk do you have a good chart
+[00:09:22] pattern right what is the setup and
+[00:09:25] that's what comes together into a a
+[00:09:28] complete trading Strate
+[00:09:29] stry all right so at this point in the
+[00:09:32] day you've got your surging up your high
+[00:09:34] a day on momentum now uh behind that
+[00:09:37] scan there is momentum all day long so
+[00:09:39] about 11:30 I could switch over and look
+[00:09:42] at this uh for Midday and afternoon but
+[00:09:44] I don't usually do that because of the
+[00:09:47] volume profile of most stocks it's just
+[00:09:50] easier for me to trade in the morning so
+[00:09:52] I just trade until 11:30 most
+[00:09:55] days okay now if we go down here we've
+[00:09:57] got our reversal scanners we've got a
+[00:09:59] reversal scanner right here and we've
+[00:10:00] got another one right here these two
+[00:10:03] scanners look for stocks with
+[00:10:05] consecutive green or consecutive red
+[00:10:07] candles all right so in this case we've
+[00:10:10] got let's look at LC lendon club that
+[00:10:13] popped up at 1112 and it had six
+[00:10:16] consecutive green
+[00:10:18] candles anytime a stock has that many
+[00:10:20] consecutive green candles there's a good
+[00:10:22] chance of a potential
+[00:10:24] reversal okay so we would watch that for
+[00:10:26] a potential
+[00:10:28] reversal you have to apply the reversal
+[00:10:30] trading strategy which is to short the
+[00:10:32] first candle that makes the new low with
+[00:10:34] your stop at the
+[00:10:36] high in this case you would have shorted
+[00:10:39] here at 1727 stop would have been
+[00:10:43] 1742 and you could have covered here at
+[00:10:45] 1715 not a very big profit but that was
+[00:10:49] a potential
+[00:10:50] trade okay so that's the reversal
+[00:10:53] scanner giving you some ideas lululu
+[00:10:55] it's all about idea generation trying to
+[00:10:57] find stocks in real time But ultimately
+[00:11:00] that's what makes you a successful
+[00:11:01] Trader you can know a lot about Theory
+[00:11:04] but you need to be able to put that
+[00:11:07] theory into practice and find trades in
+[00:11:09] real time find the chart patterns and
+[00:11:12] apply your
+[00:11:13] strategy okay Lulu this one's one that's
+[00:11:16] kind of grinding up as you guys know
+[00:11:17] when I do reversals I look for stocks
+[00:11:19] that have a candle up and outside the
+[00:11:21] Binger
+[00:11:22] bands Mike took a trade on ambo this
+[00:11:25] morning look at that one candle up
+[00:11:28] outside the Ballinger band right here
+[00:11:31] shorted it off the 114 level with a stop
+[00:11:34] over 114 and covered on the move down to
+[00:11:37] 109 all right it's higher price stock
+[00:11:40] but these strategies are not exclusive
+[00:11:42] to lower price stocks that that's just
+[00:11:44] my trading
+[00:11:46] preference okay so that's the V8 scanner
+[00:11:49] uh that shows only uh stocks that have
+[00:11:52] consecutive candles of four or more now
+[00:11:56] you have the V5 scanner version five
+[00:11:59] Jeff scanner this shows uh three
+[00:12:02] consecutive candles so the filter is a
+[00:12:04] little bit lower there are some days
+[00:12:06] where we'll have so many alerts on this
+[00:12:08] uh you can't follow them all so you go
+[00:12:10] to the V8 there's other days where there
+[00:12:12] are so few alerts on the V8 you want
+[00:12:14] more ideas so you look at the V5 okay so
+[00:12:17] I go back and forth between these
+[00:12:18] different
+[00:12:21] scanners now to the right you've got the
+[00:12:23] pullback scanner all right this is
+[00:12:25] looking for stocks that have recently
+[00:12:27] made a big move up like seed this
+[00:12:29] morning and are now consolidating and
+[00:12:32] experiencing a little bit of a
+[00:12:34] pullback so seed at
+[00:12:37] 10:48 let's see right in this level here
+[00:12:40] from a technical perspective is on a
+[00:12:43] pullback now we may look at this and say
+[00:12:45] we don't like it and that's fine but
+[00:12:47] this will give us some ideas of stocks
+[00:12:49] that are potentially on a pullback so
+[00:12:52] from a technical perspective what we'd
+[00:12:54] be looking for is a stock that recently
+[00:12:56] made a big move up is now consolidating
+[00:13:00] in the top 25% of the range so we're
+[00:13:02] still in the top of the range but we
+[00:13:04] have Consolidated so we have pulled back
+[00:13:06] a little bit off the highs so we might
+[00:13:09] want to say for instance that we're at
+[00:13:10] least 20 cents off the high or we're at
+[00:13:13] least 2% off the high depending on uh
+[00:13:16] the price range and that sort of
+[00:13:18] thing below here is another variation of
+[00:13:21] the pullback scanner this one like the
+[00:13:24] surging up Scanner will always show
+[00:13:26] stocks meeting current criteria so so
+[00:13:29] this currently meets the criteria for a
+[00:13:31] pullback now I may not like oops let's
+[00:13:33] see I'm already on it I may not like
+[00:13:35] seed at this spot for a pullback but we
+[00:13:38] are flagging okay so it's worth watching
+[00:13:42] now rcpt that's higher price I wouldn't
+[00:13:44] trade that one um but again from a
+[00:13:47] technical perspective it meets pullback
+[00:13:50] criteria being a little bit below the
+[00:13:52] highs okay and then back to the left
+[00:13:55] here we have SIMPLE relative volume
+[00:13:57] leaders so is Hunters of volume we're
+[00:13:59] always going to look at the stocks each
+[00:14:01] day that have the highest volume look
+[00:14:03] lpth and Seed those are the two stocks
+[00:14:05] we traded today and they both are
+[00:14:07] leading the relative volume scan so that
+[00:14:09] tells us once again that we're trading
+[00:14:12] the right stocks that's really really
+[00:14:14] important now it's easy to uh develop so
+[00:14:19] many scanners you could fill your whole
+[00:14:20] screen with scanners and I'm always big
+[00:14:23] advocate of keeping things simple all
+[00:14:25] right you don't want to over complicate
+[00:14:26] your charts with too many indicators you
+[00:14:29] want to over complicate your stock idea
+[00:14:31] generation system by having too many uh
+[00:14:34] stock scanners so keep it simple focus
+[00:14:37] on the Gap scanner out of the Gates
+[00:14:39] Right these scanners are customized for
+[00:14:42] specific trading strategies so this Gap
+[00:14:44] scanner we use for The Gap and go
+[00:14:47] strategy highay momentum scanner is used
+[00:14:50] for The Gap and go strategy and the
+[00:14:52] momentum trading strategy right same
+[00:14:55] with surging up and the pullback scanner
+[00:14:57] is also a momentum strategy we're
+[00:14:59] looking for strong stocks that are on a
+[00:15:01] pullback and the reversal scanners right
+[00:15:04] as suggested are for trading reversals
+[00:15:07] and this one just gives us an idea of
+[00:15:09] stocks that are strong all right so keep
+[00:15:12] it simple um any students that want this
+[00:15:15] layout all of our trading course
+[00:15:17] students have access to it you can just
+[00:15:18] go to the dashboard and go into uh your
+[00:15:21] trading course and download a copy of
+[00:15:23] the scanner you're welcome to do that
+[00:15:25] anytime uh and of course you can email
+[00:15:27] me if you have any questions Ross atw
+[00:15:29] warriortrading.com

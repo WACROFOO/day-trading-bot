@@ -1,0 +1,554 @@
+# Trading the Break of VWAP Setup
+# https://www.youtube.com/watch?v=aIqF9OvWYZ4
+# duration_sec: 1385
+
+[00:00:00] what's up everyone all right so I've got
+[00:00:01] a great recap for you today this was
+[00:00:03] another roller coaster of a day we had
+[00:00:06] some huge volatility this morning when I
+[00:00:09] first looked at my scanners I saw at
+[00:00:11] about 6:30 a.m. eastern standard time
+[00:00:13] that we had three stocks up over 100% so
+[00:00:17] I was like okay today's going to be
+[00:00:19] another big day just like yesterday but
+[00:00:21] I wanted to learn from my mistake from
+[00:00:23] yesterday so what did I do wrong
+[00:00:25] yesterday yesterday if you didn't see on
+[00:00:27] my recap I went in on my first trade
+[00:00:30] with full size and I didn't scale and I
+[00:00:32] was just boom instantly in and then when
+[00:00:35] the stock reversed quickly I was at my
+[00:00:37] Max loss in the first trade at 7 a.m.
+[00:00:42] that's not good so I said today start
+[00:00:45] slow and also acknowledge the fact that
+[00:00:48] I'm not feeling very well I have a
+[00:00:50] headache I've got the sinus congestion
+[00:00:52] sinus pressure you know I'm I'm under
+[00:00:55] the weather I'm not feeling great so
+[00:00:57] give yourself you know just a little
+[00:00:58] room remember that your fuse might be a
+[00:01:01] little shorter today you might be more
+[00:01:03] prone to get a little stubborn and let's
+[00:01:05] just start with smaller size so my
+[00:01:07] normal share size is 3,000 shares I said
+[00:01:09] let's even bring that down 2,000 shares
+[00:01:11] First Trade just break the ice and on my
+[00:01:13] first trade at 7 a.m. I broke the ice
+[00:01:16] and I lost about 150 bucks and I was
+[00:01:18] like okay no problem doesn't matter I go
+[00:01:21] in for trade number two I lost another
+[00:01:24] 150 bucks now I'm down 3 350 roughly I
+[00:01:27] was like okay well you know two losses
+[00:01:29] whatever third trade I make maybe 200
+[00:01:32] bucks so I'm down I think it was $182 if
+[00:01:35] I remember correctly so after the third
+[00:01:37] trade I'm down $182 and I'm thinking all
+[00:01:40] right you know what okay not great it's
+[00:01:42] 7 a.m. first trade down 300 or50 down
+[00:01:46] another 150 and then back to you know
+[00:01:49] this area something like that so I was
+[00:01:51] like all right look I'm breaking the ice
+[00:01:53] I now have taken my first couple trades
+[00:01:55] I'm getting a feel for the market yes
+[00:01:57] I'm going into the red but I'm managing
+[00:01:59] my risk the first stock that I traded
+[00:02:01] today was
+[00:02:03] lyt lyt is also the stock that I made
+[00:02:06] the most money on and that is going to
+[00:02:08] be our case study for today on lyt I'm
+[00:02:11] up just under
+[00:02:12] $10,000 finishing uh
+[00:02:15] 9,859 12 on the day I'm green a little
+[00:02:19] over $8,000 so had a couple other stocks
+[00:02:21] I traded not green on all of them but um
+[00:02:24] but we'll go over all of these trades
+[00:02:26] we're going to begin however with our
+[00:02:28] case study on LY T so I'm going to put
+[00:02:31] this into um I'll just go to slideshow
+[00:02:33] full screen and let's jump in all right
+[00:02:37] so how did I find lyt I found it bright
+[00:02:40] and early at you know 6:30 in the
+[00:02:42] morning because it was our leading
+[00:02:44] gapper ly2 sorry lyt was the second
+[00:02:48] leading percentage gapper in the entire
+[00:02:50] Market this morning and at about 6:30 it
+[00:02:53] was the number one lead and Gaper up
+[00:02:54] over 200% okay so that's fairly
+[00:02:57] straightforward these are stock scanners
+[00:02:59] that I have on my phone we offer these
+[00:03:01] scanners for warrior Pro members here at
+[00:03:04] Warrior trading but you could I mean you
+[00:03:06] can use delayed scanners with some
+[00:03:08] Market data vendors that are free but
+[00:03:10] they're delayed these are real time you
+[00:03:12] have to pay for real-time Market data
+[00:03:13] it's just the exchanges make us pay for
+[00:03:16] it and then you have to pay for it it's
+[00:03:17] just the way it is so uh and by the way
+[00:03:19] we have to pay for each individual
+[00:03:20] person using that data they're very
+[00:03:22] strict about it they're they're like
+[00:03:25] super intense about the data data data
+[00:03:27] data okay so step one find the stock so
+[00:03:30] found lyt and then identify the Catalyst
+[00:03:33] step two so I saw that I had news here
+[00:03:36] rallies more than 200% after launch of
+[00:03:38] cloud infrastructure services so I was
+[00:03:40] like okay interesting Next Step let's
+[00:03:43] pull up the chart all right so I pull up
+[00:03:46] the chart and what I see on this stock
+[00:03:48] is that it's a beaten up daily chart a
+[00:03:50] stock that has been you know beaten into
+[00:03:52] submission from way way up up here all
+[00:03:55] the way down to $2 and I also noticed
+[00:03:58] that on the S right here it's a recent
+[00:04:00] reverse split so recent reverse splits
+[00:04:03] are stocks that have potential to make
+[00:04:05] really big moves because suddenly the
+[00:04:07] float is significantly lower in fact
+[00:04:09] when I was looking on the scanner and
+[00:04:11] checking the float the float said it was
+[00:04:13] um gosh what was it it said 100,000
+[00:04:16] shares which I think is I I don't know I
+[00:04:19] I checked on the SEC filings and it
+[00:04:21] looked like 300,000 shares after the
+[00:04:25] reverse split uh but different Market
+[00:04:27] data vendors have slightly different
+[00:04:29] numbers for it nonetheless the float is
+[00:04:31] super low okay so what do we know about
+[00:04:34] a low float stock float represents what
+[00:04:38] Supply so here we've got Supply that's a
+[00:04:41] u and we've got float and on this stock
+[00:04:44] it was you know approximately 100 to 200
+[00:04:47] maybe 300,000 shares which is an
+[00:04:50] extremely low float a very limited level
+[00:04:53] of Supply okay so now on the other side
+[00:04:55] of this equation we have demand all
+[00:04:59] right so demand is up
+[00:05:01] here now demand initially is caused by a
+[00:05:06] news Catalyst in a way so we've got news
+[00:05:08] that comes out but news itself doesn't
+[00:05:13] exactly make a stock go up news comes
+[00:05:15] out all the time what makes the stock go
+[00:05:17] up initially is when high frequency
+[00:05:19] trading algorithms see the news headline
+[00:05:22] and begin responding by actively trading
+[00:05:25] in the market so because trading
+[00:05:27] breaking news is such a profit Prof able
+[00:05:30] strategy these institutional Traders
+[00:05:32] have created highfrequency trading
+[00:05:33] algorithms they're searching news
+[00:05:35] headlines in real time and are so smart
+[00:05:39] they can execute trades
+[00:05:41] instantaneously when the news comes out
+[00:05:43] and these guys are competing against
+[00:05:44] each other for like you know micro Mill
+[00:05:47] milliseconds like just the tiniest
+[00:05:49] little fraction of a second a millionth
+[00:05:51] of a second they're trying to get in
+[00:05:52] Faster it's so competitive that
+[00:05:56] Regulators have actually made it so each
+[00:05:59] one of these market makers have to have
+[00:06:01] the same amount of
+[00:06:02] ethernet between their Market data uh
+[00:06:06] server and the server coming off the
+[00:06:08] exchange like even if one is closer by a
+[00:06:12] foot it has to have an extra coil of
+[00:06:14] ethernet so it's even they're really um
+[00:06:17] crazy about this so okay so so number
+[00:06:20] one news comes out and that triggers the
+[00:06:23] trigger is then you know high frequency
+[00:06:25] trading algorithms you know buy the
+[00:06:27] stock up that's the first thing that
+[00:06:29] happen
+[00:06:30] and then what happens is we see the
+[00:06:32] stock on our scans because now the stock
+[00:06:34] is up you know at 10% when I see a stock
+[00:06:37] up at least 10% I now know it has
+[00:06:39] potential to do something exciting
+[00:06:41] because it's breaking out of sort of the
+[00:06:43] the standard deviation range that most
+[00:06:44] stocks trade
+[00:06:46] within and then what I also noticed
+[00:06:48] corresponds with this higher demand is
+[00:06:51] High um relative volume relative volume
+[00:06:54] is the ratio of volume today versus
+[00:06:56] what's normal on a stock so we see it's
+[00:06:58] up 10% % it's got high relative volume
+[00:07:01] and this is typically going to be the
+[00:07:02] most extreme when it's on a stock under
+[00:07:05] uh $20 the lower price stocks seem just
+[00:07:08] get more attention so all of this is
+[00:07:10] demand with this one we had such a small
+[00:07:13] level of Supply that it created a
+[00:07:16] massive imbalance and the stock started
+[00:07:19] squeezing so when I pulled up the level
+[00:07:21] two so and I guess I could add um I
+[00:07:25] analyze the daily chart and then I do
+[00:07:27] check the intraday chart and I check
+[00:07:29] level two at the same time my process is
+[00:07:31] that I type in the level two to pull it
+[00:07:34] up while the chart is loading because
+[00:07:36] the chart sometimes takes a second so I
+[00:07:39] looked at the level two and I noticed
+[00:07:40] generally we were having like 5 Cent
+[00:07:43] spreads 10 x 10:5 you know 1028 by 1033
+[00:07:48] so you know 5 Cent spreads so a little
+[00:07:50] bit of a spread but not bad nothing too
+[00:07:53] intense so I was like this is this is
+[00:07:55] all right okay so now I'm looking for my
+[00:07:58] first entry
+[00:08:00] now the stock at 4:00 a.m. squeezed up
+[00:08:02] it had started its move after hours uh
+[00:08:05] yesterday it continued and squeeze up to
+[00:08:06] a high of 1150 then it pulled back here
+[00:08:09] pops back up pulls back pops up pulls
+[00:08:12] back so here's 7: a.m. so 7 a.m. I did
+[00:08:16] not Chase it right here my first trade
+[00:08:18] was a dip I tried to buy a dip at nine
+[00:08:21] and it went lower I was like son of a
+[00:08:23] gun I tried to buy a dip I think at 850
+[00:08:25] at the half dollar it went lower and
+[00:08:26] then I got a dip you know down around
+[00:08:28] here and it bounced back up so the dips
+[00:08:32] didn't really pay off that well uh it's
+[00:08:35] not usually my first my first trade is
+[00:08:38] not usually a dip the reason is that
+[00:08:41] dips they are higher risk because you're
+[00:08:44] buying something that's selling off
+[00:08:46] you're buying something that's weak now
+[00:08:48] I like dip trades because in the context
+[00:08:51] of something that generally is strong
+[00:08:53] but it's having a
+[00:08:54] momentary moment of weakness that can be
+[00:08:57] a spot to get in and then it rips back
+[00:08:59] back up but in this case the stock was
+[00:09:02] kind of rolling over it was below the
+[00:09:04] volume weight average price and there
+[00:09:06] just weren't a lot of buyers on these
+[00:09:07] dips so it ends up going lower whatever
+[00:09:09] I was only down 180 bucks on it but then
+[00:09:13] at 9:00 a.m. it rips up here and I
+[00:09:16] traded it on this move up for about $500
+[00:09:19] of profit I don't usually take trades on
+[00:09:22] stocks below volume weight average price
+[00:09:25] but as a dip trade or
+[00:09:27] reversal I'll consider it
+[00:09:29] okay and then right here I got in this
+[00:09:34] with um a starter of 3,000 shares I
+[00:09:36] scaled in until I had 12,000 share full
+[00:09:39] position adding as it broke N9 adding as
+[00:09:42] it broke 950 and adding as it broke 10
+[00:09:44] and on this trade right here I made
+[00:09:47] basically all of my profit on the stock
+[00:09:50] so I was only up you know maybe $500
+[00:09:53] before this trade on it and then on that
+[00:09:55] break of volume weight average price I
+[00:09:57] made almost 10 grand
+[00:09:59] that was a phenomenal trade now
+[00:10:01] currently it's sitting at
+[00:10:03] $11.27 so it's still holding up it's up
+[00:10:05] 400% right now and you know the stock is
+[00:10:09] the stock is doing well in fact I would
+[00:10:11] keep it on watch for potential moves uh
+[00:10:13] later in the day to get zoomed in on my
+[00:10:16] trade we had the squeeze up the pullback
+[00:10:19] and then I was taking the break of vwap
+[00:10:21] and this trade had high volume these
+[00:10:25] super high volume candles I mean the
+[00:10:27] volume was going so this thing was
+[00:10:29] moving and that's what gave me the
+[00:10:31] conviction to take as much share size as
+[00:10:33] I did so it rips up here now when the
+[00:10:36] macd crossed over I was like okay we
+[00:10:38] might be coming to the back side of the
+[00:10:40] move let's not overstay our welcome by
+[00:10:43] the way real time um example here so I'm
+[00:10:46] just going to pull up um lyt lyt just in
+[00:10:49] the last um couple of
+[00:10:52] seconds popped up here to 12 and then
+[00:10:55] drops back down to 11 so you could see
+[00:10:59] see it's starting to come back up it's
+[00:11:01] trying to reclaim uh these areas it's
+[00:11:04] above vwap right now but it has a high a
+[00:11:07] day of 14 you know way up here at 14 so
+[00:11:12] it's it it does have some room now by
+[00:11:15] the way um so then at the
+[00:11:17] open it squeezes up here into a halt and
+[00:11:20] I bought a thousand shares going into
+[00:11:23] the Hall but it was small size anyways
+[00:11:27] it it opens higher dips down I did make
+[00:11:30] a little bit on this move here um so I
+[00:11:32] guess I didn't make the full
+[00:11:34] 10,000 on that break of vwap but or
+[00:11:38] where was it uh yeah right in here sorry
+[00:11:41] but in any case um nonetheless I did
+[00:11:43] fairly well on it um through those two
+[00:11:45] moves we did Peak at a high of 14 I
+[00:11:49] recall having a nice dip down here off
+[00:11:51] this double bottom so double low here
+[00:11:54] double bottom bought that dip and we got
+[00:11:57] to squeeze all the way up to 14 but I
+[00:11:59] was trading with smaller size at that
+[00:12:00] point because I didn't want to risk um
+[00:12:02] screwing up and and doing something
+[00:12:04] silly so I would also note that on the
+[00:12:08] daily chart we've got a good amount of
+[00:12:11] room up to our 200 moving average which
+[00:12:12] is at 20 almost $27 a share so that's
+[00:12:15] the 200 moving average we've got a good
+[00:12:16] amount of room there I was aware of this
+[00:12:19] resistance here at 1338 high volume red
+[00:12:22] candle super high volume right now even
+[00:12:25] though we have 29 million shares of
+[00:12:26] volume on the day today's a small green
+[00:12:28] candle relative to the volume of that
+[00:12:30] candle now that was prior to the split
+[00:12:32] so the volume's been adjusted this split
+[00:12:35] um was a ratio of 60 to one so the
+[00:12:38] volume that happened here is 60 time
+[00:12:41] showing 60 times higher than it actually
+[00:12:43] was but you know it's all adjusted
+[00:12:46] because of the
+[00:12:47] split so going back to our slide deck um
+[00:12:51] so slowed down once the macd crossed
+[00:12:53] over got a couple more trades on it but
+[00:12:55] locked up uh just about just under
+[00:12:57] $10,000 a profit and in
+[00:13:01] hindsight I'm happy with how I traded
+[00:13:03] this I I
+[00:13:05] really there's not much I would do
+[00:13:07] differently uh this was a pretty solid
+[00:13:09] trade of course could have bought more
+[00:13:12] shares as always and therefore maybe
+[00:13:14] made more money but for my risk
+[00:13:15] tolerance today where I was at I was
+[00:13:17] happy with this okay so that was my uh
+[00:13:22] so that's the case study of my trades on
+[00:13:24] lyt so we'll put that aside for a moment
+[00:13:27] and now we'll look at uh the other
+[00:13:29] stocks I traded so lyt was the first
+[00:13:32] stock I traded and the last stock I
+[00:13:34] traded but I traded a lot in between and
+[00:13:36] we actually had this morning a a kind of
+[00:13:39] unbelievable move on
+[00:13:42] C but you'll notice that I'm only up
+[00:13:44] $300 on it so
+[00:13:48] C
+[00:13:50] does almost like the unthinkable I I
+[00:13:53] actually it did something I've never
+[00:13:54] seen a stock do before so it starts
+[00:13:57] squeezing up here and this stock goes uh
+[00:14:02] up to six and right here on this micro
+[00:14:04] pullback I tried to buy at $6 and I
+[00:14:07] filled at my or on my order at $6 just
+[00:14:11] this also it's not a big deal I'm not I
+[00:14:14] don't have you know there's nothing you
+[00:14:16] could do about it it just is what it is
+[00:14:17] but I'm going back to that first trade
+[00:14:20] um so on my first
+[00:14:22] trade let's see um I
+[00:14:26] filled right here uh 300 78 shares of a
+[00:14:30] 2,000 share
+[00:14:31] order and then I filled 205 shares of a
+[00:14:36] uh 2,000 share order or a thousand share
+[00:14:38] order at
+[00:14:39] 955 so I wanted to be in and if I had
+[00:14:42] bought the full 2,000 shares of this at
+[00:14:44] six well holy smokes this thing went
+[00:14:46] from six to 10 so that's $4 a share
+[00:14:50] that's eight grand and then it went up
+[00:14:52] to 15 then it went up to 20 this thing
+[00:14:54] actually literally went up to $28 a
+[00:14:56] share it went up over $22 a share
+[00:14:59] now you know even if I had filled the
+[00:15:02] full 2,000 share order I wouldn't have
+[00:15:03] bought here and sold here at the very
+[00:15:05] top I certainly would have been scaling
+[00:15:06] out on the move up but it's still
+[00:15:08] annoying so I made about $5,000 on this
+[00:15:12] move uh and then it sold off here it
+[00:15:16] comes back up uh sells off again goes
+[00:15:19] sideways and I right in here it was
+[00:15:23] consolidating right here and I was like
+[00:15:26] okay I want to get in this here here's
+[00:15:28] the problem though
+[00:15:31] um if so if I press the buy button on
+[00:15:35] this right here I'll just show you as an
+[00:15:37] example so I'm going to put this um up
+[00:15:39] here right here so if I put a buy button
+[00:15:42] if I press the buy button on this at put
+[00:15:45] an order at $20 what's going to happen
+[00:15:46] if I press that buy button I'm G to get
+[00:15:49] filled right wrong risk check failed see
+[00:15:52] risk check failed it is not going to let
+[00:15:54] me get filled I can press it as many
+[00:15:57] times as I want I will not fill
+[00:15:59] shares so that's what kept happening and
+[00:16:02] it's because uh even though the stock
+[00:16:04] was um it was trading at like 18 and I
+[00:16:09] had my order at 20 so I was like all
+[00:16:12] right I'm looking for you know a squeeze
+[00:16:15] through uh a squeeze through 20 so I had
+[00:16:17] my limit order at 20 right here at $20
+[00:16:21] but it just it kept rejecting so finally
+[00:16:25] I said you know what I'm just going to
+[00:16:26] punch it with my hotkey shift one
+[00:16:29] and I bought 2,000 shares right here and
+[00:16:32] I was looking for that break of 20 24 26
+[00:16:35] and on this candle it dropped to $15 and
+[00:16:38] I lost 4,500 bucks so I didn't really
+[00:16:43] want that many shares but I just got
+[00:16:45] impatient and anyways it is what it is
+[00:16:48] um so so that was disappointing on um C
+[00:16:53] and it ended up selling off well it sort
+[00:16:55] of held up and then it rolled over here
+[00:16:58] and and it rolled over here almost
+[00:17:00] exactly when lyt started to squeeze
+[00:17:03] Traders gave up and switched to
+[00:17:05] something else so oh and look at this
+[00:17:08] lyt son of a gun all right so this is
+[00:17:10] squeezed up to 14 so let's watch
+[00:17:13] this interesting it's showing a 1350
+[00:17:16] resumption right
+[00:17:18] now so a lower resumption maybe well 14
+[00:17:23] it's jumping around a little bit that's
+[00:17:25] going to be something to watch the the
+[00:17:27] the challenge always is when to walk
+[00:17:29] away to avoid giving back
+[00:17:31] profit so on so I started the day with
+[00:17:35] my first trades going you know down in
+[00:17:38] the first three trades minus um
+[00:17:42] $182 and then I let's see um I had a
+[00:17:47] loss on I think it was
+[00:17:50] msai and that brought me down to minus
+[00:17:53] about 800 I was down a little bit more
+[00:17:55] than that and then um I had this trade
+[00:17:59] on
+[00:18:00] apvo and I was down 3,500 on the day
+[00:18:04] just about so I was down 3500 on the day
+[00:18:08] and from that point that was about when
+[00:18:11] um lyt started and I got the move on lyt
+[00:18:14] which put me in the green so and so this
+[00:18:17] is also not to mention that for a moment
+[00:18:19] I was up 5,000 on CEO and then I gave it
+[00:18:23] right back and on msai I was also for a
+[00:18:26] moment up about 3,000 000 and then I
+[00:18:29] gave that back so today was a day where
+[00:18:31] my p&l was jumping around a little bit
+[00:18:33] and the reason that was happening was
+[00:18:35] because I was trading stocks that were
+[00:18:37] really volatile obviously lyt is very
+[00:18:41] volatile M uh
+[00:18:45] msai let's see so msai right now I'm
+[00:18:48] down $130 on it uh this one sort of
+[00:18:51] similarly it popped up it started to
+[00:18:54] squeeze I jumped in it um at about I
+[00:18:57] think I can't remember remember it was
+[00:18:58] about five it goes up to six I take my
+[00:19:01] profit and then I got back in for the
+[00:19:04] break of six I stop out and then I end
+[00:19:06] up buying like right here moment after I
+[00:19:09] stop out I get out here and then you
+[00:19:12] know I I do another dip and I'm and I'm
+[00:19:14] red on it like I was just all over the
+[00:19:15] place on this stock so made 2700 and
+[00:19:19] then back to flat and then made 3,000
+[00:19:21] and then was back to Flat C same thing
+[00:19:25] made 5,000 then was back to flat om8
+[00:19:28] only made $14 on that doesn't matter CZ
+[00:19:32] this one I traded closer to the open and
+[00:19:34] made, 15500 on um we got this uh squeeze
+[00:19:38] into a halul and then a little dip and
+[00:19:40] rip up to a high of 1050 but to be
+[00:19:42] honest um this was the best setup on
+[00:19:44] that none of this was super super clean
+[00:19:47] today we we really had a lot of chop and
+[00:19:51] so it wouldn't have been difficult for
+[00:19:52] this to have been a red day for me I
+[00:19:54] could have easily had a big red day I'm
+[00:19:56] grateful to be green
+[00:19:58] I don't want to overstay my welcome
+[00:20:00] especially when I'm not feeling well I
+[00:20:03] definitely have a headache I'm probably
+[00:20:04] going to take something forward in a
+[00:20:05] little bit so today I'm just going to
+[00:20:08] try to be consistent lock it up be green
+[00:20:11] I I I could have been red I could have
+[00:20:12] been red 3500 APV by the way I didn't
+[00:20:15] show you that one The Biggest Loser of
+[00:20:17] the day apvo just trash I mean this
+[00:20:21] thing was garbage I got in here on the
+[00:20:25] first pop I get out basically break even
+[00:20:29] and then I got back in as it squeezes up
+[00:20:31] here and then it you know flushes right
+[00:20:33] there it's just really difficult price
+[00:20:36] action the challenge is when you have
+[00:20:38] something like C you're trying to find
+[00:20:40] the next one and that's where I was
+[00:20:42] having a little bit of a hard time
+[00:20:43] figuring out which one's going to be
+[00:20:44] next and it kind of surprised me that
+[00:20:47] lyt uh ended up breaking vwap because it
+[00:20:51] seemed really bearish earlier but the
+[00:20:53] float super low and it broke and and off
+[00:20:56] it goes so now you've got a high of 14
+[00:20:58] 20 but a bid right now of 1358 and this
+[00:21:01] is what I'm talking about with the risk
+[00:21:02] of the
+[00:21:03] spread so this is a dip so right there
+[00:21:06] was a dip and could I have punched it
+[00:21:09] you know yes but you could see how just
+[00:21:11] in moments if you if you time that
+[00:21:14] wrong it's a difference between being up
+[00:21:16] or down a dollar a share
+[00:21:19] and I sort of feel like there's a time
+[00:21:22] where I like to push it and lean in and
+[00:21:24] then I also want to be careful about
+[00:21:25] overstaying my welcome because it's just
+[00:21:27] so easy next thing you know you know you
+[00:21:29] break the ice with one more trade and
+[00:21:32] then you catch whoa look at that right I
+[00:21:34] I look away for a second it's back at
+[00:21:36] 1380 so you know you catch a flush like
+[00:21:39] that and now you're regretting it you're
+[00:21:41] like I took 2,000 shares I just gave
+[00:21:43] back four grand I gave back half my day
+[00:21:45] in one
+[00:21:47] trade why did I do that so we've all
+[00:21:51] been there you you have that happen
+[00:21:53] enough times you're going to start to
+[00:21:55] teach yourself to walk away
+[00:21:58] and uh the the word of wisdom is that
+[00:22:01] nobody thinks about where a taxi goes
+[00:22:03] after you get out it doesn't matter
+[00:22:06] don't worry about where a stock goes
+[00:22:07] after you get out if you walked away
+[00:22:09] with some profit I'd say you did pretty
+[00:22:11] well so I'm going to lock it up here
+[00:22:13] $8,000 it's another Green Day right now
+[00:22:16] on a nice hot streak I've got three what
+[00:22:19] is it four red four days into um today's
+[00:22:22] five fifth day of March so have been
+[00:22:25] above the daily go just about every day
+[00:22:27] some days I'll be a little below it but
+[00:22:28] I've been just really smooth and steady
+[00:22:30] here super consistent and I've had a
+[00:22:32] couple close calls yesterday and today
+[00:22:34] both of them could have been red days
+[00:22:35] but we had enough opportunity that I was
+[00:22:37] able to keep trading I was able to get
+[00:22:38] myself in the green and so that means as
+[00:22:41] long as I don't go too deep in the red
+[00:22:43] as long as we've got good opportunities
+[00:22:44] I should have a chance at Redemption so
+[00:22:47] thanks as always for tuning into this
+[00:22:48] recap I hope you hit the thumbs up I
+[00:22:50] hope you're subscribed to the channel if
+[00:22:51] you're not make sure you smash that
+[00:22:52] subscribe button and I'll see you for
+[00:22:54] the next episode first thing tomorrow
+[00:22:56] all right have a great day reminder
+[00:22:58] always trading's risky my results aren't
+[00:22:59] typical so take it slow and manage your
+[00:23:03] risk

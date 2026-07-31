@@ -1,0 +1,389 @@
+# Flat Top Breakout Pattern: Day Trading Strategy for Beginners #stockmarket #daytrading
+# https://www.youtube.com/watch?v=4jes2_N3m2I
+# duration_sec: 843
+
+[00:00:00] in this episode we're going to talk
+[00:00:01] about the flat top breakout this is a
+[00:00:03] multi-candlestick pattern like a bull
+[00:00:05] flag or an abcd breakout pattern
+[00:00:08] but this is a little different from a
+[00:00:10] bull flag in that it is holding strong
+[00:00:13] right underneath a flat top area of
+[00:00:17] resistance
+[00:00:18] as you might already know this is
+[00:00:19] another episode in a multi-part series
+[00:00:21] on technical analysis and candlestick
+[00:00:24] charts where we're talking about how to
+[00:00:25] read stock charts for day trading
+[00:00:27] specifically but you can apply this to
+[00:00:29] swing trading or investing as much as
+[00:00:31] you'd like so let's jump onto the screen
+[00:00:34] share and i'll show you an example of
+[00:00:36] the flat top breakout this is a pretty
+[00:00:39] standard flat top breakout you've got
+[00:00:41] this sideways consolidation
+[00:00:44] underneath the critical level it is very
+[00:00:46] common that these resistance levels
+[00:00:48] right here correspond with
+[00:00:51] you probably already know what i'm going
+[00:00:52] to say half dollars and
+[00:00:55] whole dollars now let me switch over to
+[00:00:57] the white board and let's draw a flat
+[00:01:00] top breakout pattern i'm just going to
+[00:01:02] use purple here my
+[00:01:03] red and green we're getting a little low
+[00:01:05] so this is the stock squeezing up here
+[00:01:08] so this initially could look like the
+[00:01:11] beginning of a bull flag we're going to
+[00:01:13] get a little pullback here and a little
+[00:01:15] bit more right here and then first
+[00:01:18] candle makes a new high
+[00:01:20] and right up we go to
+[00:01:22] the double top
+[00:01:24] okay now in some instances of a flat top
+[00:01:28] breakout you may actually go ahead and
+[00:01:30] take this entry right here of course
+[00:01:34] questions you would be asking yourself
+[00:01:35] would be based on the bull flag pattern
+[00:01:37] is this a nice pullback down towards the
+[00:01:39] nine moving average are we on a one
+[00:01:42] minute time frame is it a five minute
+[00:01:44] chart
+[00:01:45] what's the volume profile do we have
+[00:01:47] high volume on the move up and then
+[00:01:50] light volume on the pull back candles
+[00:01:53] is are one of these candles a like big
+[00:01:57] shooting star or topping tail
+[00:01:59] sometimes
+[00:02:01] the reason we get this flat top is
+[00:02:03] because and of course it wouldn't be a
+[00:02:05] flat top if we broke through that but
+[00:02:06] sometimes it's because of a problem with
+[00:02:09] the pattern that made it not appealing
+[00:02:12] enough for traders to buy it as a bull
+[00:02:14] flag breakout which could be because of
+[00:02:16] the candle
+[00:02:17] shape formation or a volume profile
+[00:02:20] issue or it could simply be the position
+[00:02:23] relative to the nine moving average or
+[00:02:25] the fact that the stock maybe doesn't
+[00:02:26] have a strong enough catalyst on the day
+[00:02:29] which is ultimately what's getting the
+[00:02:30] stock up as much as it already is so
+[00:02:33] what's very common as i already
+[00:02:34] mentioned is that this would occur
+[00:02:36] around half dollars like 750 or whole
+[00:02:38] dollars like seven i mean any any half
+[00:02:40] dollar whole dollar but just 750 for
+[00:02:42] instance
+[00:02:43] so on the flat top breakout
+[00:02:47] this can pull back again and continue to
+[00:02:50] consolidate under this level
+[00:02:52] this can happen for
+[00:02:54] five minutes it can happen for an hour
+[00:02:56] it can happen for three hours it can
+[00:02:57] happen all day long until finally it
+[00:03:00] snaps
+[00:03:01] through that level
+[00:03:03] and that snap right there that's the
+[00:03:05] false that's the breakout what you have
+[00:03:07] to be careful of
+[00:03:08] is a false breakout and so for this
+[00:03:11] reason i honestly haven't been trading
+[00:03:14] flat top breakouts as frequently in this
+[00:03:16] market as i used to we used to find that
+[00:03:19] they resolved pretty well but more
+[00:03:20] recently what we've been seeing is that
+[00:03:22] you have this long period of
+[00:03:23] consolidation
+[00:03:24] it breaks through
+[00:03:26] on the candle wick and then immediately
+[00:03:29] reverses and does this like jackknife
+[00:03:32] where it ends up being a red shooting
+[00:03:34] star candle with
+[00:03:36] false breakout
+[00:03:38] and here's why i think that this has
+[00:03:40] been happening more i think that if the
+[00:03:42] stock was really strong it would have
+[00:03:44] gone here if it was pretty strong it
+[00:03:46] would have gone here the fact that it
+[00:03:48] hasn't now when it finally breaks this
+[00:03:50] is a bull trap so what happens is you
+[00:03:53] get a little surge of buying here the
+[00:03:55] algo moves the the offers out of the way
+[00:03:58] you get that initial spike and then
+[00:04:00] immediately a wave of sell orders comes
+[00:04:03] in as short sellers are going short
+[00:04:06] against this false breakout and now the
+[00:04:08] bid clears out and you get this nasty
+[00:04:10] flush as you have both the short sellers
+[00:04:13] going short and long traders who bought
+[00:04:15] for the breakout getting stopped out
+[00:04:18] that's not to say that we don't
+[00:04:19] sometimes see this pattern work but more
+[00:04:21] often than not recently the flat top
+[00:04:23] breakout pattern has not been one that
+[00:04:24] i've been really a big fan of what we
+[00:04:27] see more often that's been a little bit
+[00:04:28] better
+[00:04:30] has been actually more of a clean uh
+[00:04:32] double top pattern where we come back up
+[00:04:36] we double top like this sort of you know
+[00:04:38] right against this level and then it
+[00:04:40] pulls back
+[00:04:41] down here and then rallies back up but
+[00:04:44] you know honestly you probably already
+[00:04:45] recognize that pattern is really an abcd
+[00:04:50] pattern right a b c breakout point is d
+[00:04:54] that's an abcd pattern yes you could it
+[00:04:57] does sometimes correspond with a double
+[00:04:58] top uh at point uh this this point b
+[00:05:01] right here and the initial high not
+[00:05:04] always but it often does so and this is
+[00:05:06] a pattern i'd be more inclined to trade
+[00:05:09] but only on the second attempt through
+[00:05:10] this level now let's go back to the
+[00:05:12] screen share for a second and let me
+[00:05:14] show you a couple of examples of the
+[00:05:17] flat top and we'll just talk for a
+[00:05:19] second here that
+[00:05:21] when it comes to the characteristics of
+[00:05:24] a flat top breakout typically like a
+[00:05:26] bull flag you have three plus green
+[00:05:28] candles moving up followed by a quick
+[00:05:30] pullback one two three red candles in a
+[00:05:33] row and then
+[00:05:35] a false breakout on the bull flag it
+[00:05:38] tries to make a new high it doesn't work
+[00:05:40] it pulls back again
+[00:05:42] it but it is creating this flat top
+[00:05:45] where it keeps hitting its head on a
+[00:05:47] particular level
+[00:05:48] and i want to show you this example here
+[00:05:51] this is a stock that was experiencing a
+[00:05:53] flat top for hours
+[00:05:56] right i mean this was just under this
+[00:05:58] 572 level from like 10 a.m until like
+[00:06:02] three in the afternoon and when it broke
+[00:06:05] this thing ripped so what you had going
+[00:06:07] for you here was a lot of coiling it was
+[00:06:10] getting coiled up tighter and tighter
+[00:06:12] and tighter and tighter then finally it
+[00:06:14] broke away
+[00:06:15] now it's still possible that this could
+[00:06:17] have created a false breakout where it
+[00:06:20] popped up to 75 and then flushed down
+[00:06:23] but notice on this
+[00:06:24] initially you have the as it's starting
+[00:06:26] to pull away volume is increasing
+[00:06:29] so you have the volume sort of
+[00:06:30] increasing right here moving higher
+[00:06:33] moving higher and peaking as it pulls
+[00:06:35] away and that's really what you want to
+[00:06:37] see on a strong breakout not just a
+[00:06:39] initial pop but sustained volume as it's
+[00:06:43] moving higher and pulling away faster
+[00:06:46] and certainly in this case as it broke
+[00:06:48] over six and was able to hold over that
+[00:06:50] level that was a pretty big deal it
+[00:06:52] broke six it came back down for a second
+[00:06:54] and immediately got back above it and
+[00:06:56] then pulled away up to six thirty
+[00:06:59] this is another example on a higher
+[00:07:00] price stock long period of consolidation
+[00:07:03] right underneath 55
+[00:07:05] psychological resistance the whole
+[00:07:07] dollar it's a higher price stock and you
+[00:07:09] know at this particular time that kind
+[00:07:12] of ascending wedge
+[00:07:14] that is a really nice looking chart it
+[00:07:16] really is we just don't see them very
+[00:07:19] often because usually like i said a
+[00:07:21] strong stock is just gonna break out
+[00:07:23] it's not gonna wait but if you're lucky
+[00:07:25] enough to see this long pattern
+[00:07:28] the apex level is so obvious right the
+[00:07:31] entry there is a breakthrough high of
+[00:07:33] day 55. now the problem and this is
+[00:07:36] where it gets challenging is
+[00:07:38] where do you get in you know if you get
+[00:07:40] in a little too early clearly this
+[00:07:42] consolidated for hours so you could be
+[00:07:44] in way too early and then you just stop
+[00:07:47] out so what i generally will try to do
+[00:07:50] on this
+[00:07:52] is i'll wait for it to break and i'll
+[00:07:54] show you on the whiteboard this is what
+[00:07:55] this is what i like to do
+[00:07:57] to avoid the false breakout risk so
+[00:07:59] we've got this um candle that's moved up
+[00:08:01] we've got the pull back and i'll just
+[00:08:03] draw lines just let's just say it's kind
+[00:08:05] of like this it's getting smaller and
+[00:08:06] smaller this is our flat top so we've
+[00:08:09] got this wedge formation happening right
+[00:08:10] here and what i'll do is on the candle
+[00:08:13] that breaks
+[00:08:14] i won't take that tray i'll let it break
+[00:08:16] because what it might do is it might
+[00:08:18] jackknife and drop right back down but
+[00:08:20] what it'll almost always do is it'll
+[00:08:22] come back down and re-test
+[00:08:25] this psychological level and if it
+[00:08:28] proves that it can hold it then i buy
+[00:08:31] the dip right there for the rip back
+[00:08:34] through this level and so this is
+[00:08:36] actually a micro pullback following a
+[00:08:39] fresh breakout
+[00:08:40] so down in the description you can see
+[00:08:43] my link to download the micro pullback
+[00:08:46] pdf
+[00:08:47] that's my strategy that i use for
+[00:08:50] trading micro pullbacks on stocks that
+[00:08:51] start to break out so if i miss this
+[00:08:54] initial breakout right here which it
+[00:08:56] would be easy to do when this is
+[00:08:58] occurring over the course of hours what
+[00:09:00] i do is i have a scanner of course my
+[00:09:02] high a day momo scanner that's going to
+[00:09:05] say boom boom boom boom boom this stock
+[00:09:07] is hitting new highs new highs new highs
+[00:09:09] right here as it's hitting new high of
+[00:09:11] day so now my eyes these are my eyes
+[00:09:14] right here they're like oop scanner
+[00:09:16] alert so i see it i pull up the chart if
+[00:09:18] i didn't still have it up or because the
+[00:09:20] scanners are audio alert i hear it i
+[00:09:23] look at the chart and now i'm looking at
+[00:09:25] the retest so if this is 55 right here
+[00:09:28] i'm looking for the retest of 55 and
+[00:09:30] then buy with a stop right around 55
+[00:09:33] or um 55 54 90 just underneath that
+[00:09:37] level and then that's my entry right
+[00:09:39] there for the move back up
+[00:09:42] so that's really it right now at this
+[00:09:44] point the safer way to trade a flat top
+[00:09:47] breakout
+[00:09:48] uh it's probably it was probably the
+[00:09:49] safer way to trade it even when at the
+[00:09:51] time of that screenshot
+[00:09:53] so here is another one that's really
+[00:09:55] interesting this is a little bit more of
+[00:09:58] a
+[00:09:59] double top in a way you've got this
+[00:10:02] double top here it drops down it comes
+[00:10:03] back up for a triple tap at this level
+[00:10:06] of about 503 it pulls back and then look
+[00:10:08] at this rip
+[00:10:09] when it breaks that level it just takes
+[00:10:11] off now remember this is a five minute
+[00:10:13] chart so within this five minute chart
+[00:10:16] you would have had the opportunity for
+[00:10:18] 10 second micro pullbacks as it started
+[00:10:21] to pull away but it's also possible some
+[00:10:24] of these moves so fast that you really
+[00:10:26] don't have the opportunity to get in for
+[00:10:28] the micro pullback and it just ends up
+[00:10:30] that either you were lucky enough that
+[00:10:31] you were still watching it at the time
+[00:10:33] that it finally broke out or you end up
+[00:10:35] missing it as i said the strongest
+[00:10:38] stocks are the ones that break out right
+[00:10:40] away they don't wait they don't form a
+[00:10:42] five-minute pullback they they don't
+[00:10:44] form a flat top breakout i mean on the
+[00:10:45] five minute they pop up they do a micro
+[00:10:47] pullback on the bull flag and then they
+[00:10:49] just rip and keep going because the
+[00:10:51] catalyst is so strong
+[00:10:53] all right now let's look at another
+[00:10:55] example here
+[00:10:56] this is a classic double top that comes
+[00:10:59] up for the third attempt and on the
+[00:11:00] third attempt it's able to break through
+[00:11:02] the whole dollar of six and you get
+[00:11:04] about a five percent break on a pretty
+[00:11:05] high volume on that candle so this is a
+[00:11:08] pattern that we see fairly often this is
+[00:11:10] one that i'm comfortable with when it
+[00:11:12] came back up here for the second attempt
+[00:11:15] because the first attempt was on a high
+[00:11:17] red volume doji bar doji candle that's
+[00:11:20] risk that's a red flag so i would not
+[00:11:22] have been a buyer right there but i'll
+[00:11:24] come back up for the third attempt as
+[00:11:26] it's proving that it's holding this
+[00:11:27] level
+[00:11:28] all right next example here almost the
+[00:11:30] same pattern double top right here you
+[00:11:33] have to be very careful buying into this
+[00:11:35] double top
+[00:11:36] this is where we get that cup and handle
+[00:11:39] formation which we'll talk about a
+[00:11:41] little bit more well i'll just talk
+[00:11:42] about it right now so
+[00:11:44] the cup and handle formation
+[00:11:46] what we're looking for
+[00:11:48] here is
+[00:11:50] the stock initially
+[00:11:52] squeezes up so we'll just
+[00:11:54] do lines like this it pulls back
+[00:11:57] and then it comes back up sharply and
+[00:11:59] that creates
+[00:12:01] a cup
+[00:12:02] right now so the problem is if you buy
+[00:12:05] right here you're buying right into a
+[00:12:08] double top we don't like to do that what
+[00:12:10] we want to do is we want to let it pull
+[00:12:12] back here and then come back up and that
+[00:12:15] right there is the cup and this is the
+[00:12:18] handle all right so this is sort of the
+[00:12:20] picture perfect is that you have to come
+[00:12:23] back up you let it pull back and then
+[00:12:26] you take the break so that's called a
+[00:12:27] cup and handle
+[00:12:30] formation
+[00:12:31] all right so let's go back to the
+[00:12:33] whiteboard or the screen
+[00:12:34] so that's our cupping handle on this one
+[00:12:36] and you can see that when it broke out
+[00:12:38] it then on the five minute gave you a
+[00:12:40] micro pullback right in here
+[00:12:43] we know this is a five minute chart
+[00:12:44] because of the time frame up here and so
+[00:12:46] we can see that hit a high with the top
+[00:12:48] of that doji right around 550 half
+[00:12:51] dollar it then pulled back and then
+[00:12:53] continued higher and then formed a five
+[00:12:56] minute bull flag right here it did go
+[00:12:59] higher it did make new highs but it
+[00:13:01] didn't sustain that level and continue
+[00:13:04] it still should have been a winner for
+[00:13:05] any trader that bought the first five
+[00:13:07] minute cable to make a new high for that
+[00:13:10] uh flag breakout
+[00:13:11] all right so i hope this has been
+[00:13:13] helpful this has been a breakdown of the
+[00:13:15] flat top breakout pattern again a
+[00:13:17] multi-candlestick pattern like the
+[00:13:19] bullet flag like the abcd pattern but
+[00:13:22] not quite as powerful as either but you
+[00:13:25] know ultimately you could have a flat
+[00:13:27] top breakout that you could interpret as
+[00:13:30] being stronger than a bull flag because
+[00:13:32] it wasn't even weak enough to pull back
+[00:13:34] it just went sideways but that's only
+[00:13:36] when it goes really quick and then keeps
+[00:13:38] going
+[00:13:39] and what we more often see is this kind
+[00:13:41] of continued resistance at that level
+[00:13:43] and so really the healthiest pullback is
+[00:13:46] when you have a moderate bull flag
+[00:13:47] pullback and then it rallies
+[00:13:50] right through the new high so if you
+[00:13:52] didn't already check out the episode on
+[00:13:53] the bull flag you could check that out
+[00:13:55] up there or you could check out the next
+[00:13:57] episode in this multi-part series on
+[00:13:59] technical analysis and candlestick
+[00:14:01] charts

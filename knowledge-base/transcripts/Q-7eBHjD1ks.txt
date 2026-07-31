@@ -1,0 +1,1827 @@
+# How to Day Trade with Lightspeed (Platform Demo & Honest Review)
+# https://www.youtube.com/watch?v=Q-7eBHjD1ks
+# duration_sec: 4335
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to teach
+[00:00:02] you how to day trade using light speed
+[00:00:04] trading as your broker and this will be
+[00:00:06] a platform demo where I'm going to show
+[00:00:08] you how to use their desktop trading
+[00:00:10] software called Lightspeed Trader now
+[00:00:12] Lightspeed is one of the few Boutique
+[00:00:14] broker dealers that have proprietary
+[00:00:16] software they have their very own
+[00:00:18] platform that they've custom built a lot
+[00:00:21] of the boutique Brokers they license
+[00:00:24] software from thirdparty software
+[00:00:26] companies like Dash Trader or Sterling
+[00:00:28] Trader which is nice in a way because
+[00:00:31] once you're used to das or Sterling you
+[00:00:33] could easily switch Brokers but be using
+[00:00:36] the same software now as a matter of
+[00:00:38] fact light speed will allow you to use
+[00:00:40] Dash Trader or Sterling but you have to
+[00:00:43] pay a fee or you could use their light
+[00:00:44] speed Trader for free so this episode
+[00:00:46] will be a platform demo where I'm going
+[00:00:48] to walk you through how I use light
+[00:00:49] speed Trader how I optimized the windows
+[00:00:52] kind of customize the settings a little
+[00:00:53] bit to get the most out of the platform
+[00:00:55] for my style of trading at the end of
+[00:00:57] this episode I'm going to give lights
+[00:00:58] speed trading a Ross score where I'll
+[00:01:00] share with you on a scale of 0 to 10 how
+[00:01:03] I rank this platform now you probably
+[00:01:05] already know that I'm going to rank it
+[00:01:06] well this is the platform that I use as
+[00:01:08] my day-to-day broker but there are some
+[00:01:10] room for improvements as with any broker
+[00:01:12] so we'll do a full broker comparison and
+[00:01:15] I think by the end of this episode
+[00:01:16] you're going to be able to make a
+[00:01:17] decision of whether or not light speed
+[00:01:19] trading is going to be a good broker for
+[00:01:21] you it makes a lot of sense for me but
+[00:01:24] your circumstances may be different and
+[00:01:25] it may not make sense for you at the
+[00:01:27] beginning of this episode let me just
+[00:01:28] tell you I have no affiliate
+[00:01:29] relationship ship with light speed
+[00:01:30] trading or with any other broker dealer
+[00:01:33] for that matter so my opinions it's just
+[00:01:35] my own experience they're not colored by
+[00:01:37] the fact that I'll get paid if you sign
+[00:01:39] up for one broker or another and I think
+[00:01:40] you guys appreciate that so if you do I
+[00:01:42] hope you hit the thumbs up and I hope
+[00:01:43] you subscribe to the channel and let's
+[00:01:45] go ahead and Dive Right In now we'll do
+[00:01:47] the full broker comparison comparing
+[00:01:49] light speed trading with almost a dozen
+[00:01:52] other Brokers here but before we do
+[00:01:55] let's pull up the light speed Trader
+[00:01:57] desktop software so this is it right
+[00:01:59] here it's uh lightweight it's simple
+[00:02:03] it's relatively easy to use um I will
+[00:02:06] say when I first installed it many years
+[00:02:08] ago I found it a little a little hard to
+[00:02:12] understand but now I've kind of figured
+[00:02:15] out its Quirk so I think I'll be able to
+[00:02:17] get you up to speed pretty quickly now
+[00:02:19] what I'm going to do for you guys is I'm
+[00:02:20] actually going to give you a link um
+[00:02:23] it's going to be Pinn to the top of the
+[00:02:24] comments and post in the description
+[00:02:26] where you can download my layout
+[00:02:28] including my hotkeys and then boom you
+[00:02:30] can just install it on your own machine
+[00:02:31] right away so if you want to do that you
+[00:02:33] can go to layout you'll go to load saved
+[00:02:35] layout and then you'll just grab it from
+[00:02:37] your downloads folder and boom you'll
+[00:02:39] have my layout it'll look just like this
+[00:02:41] but it's still important to know how to
+[00:02:42] use the software so let's go ahead and
+[00:02:44] start diving in now one thing that I
+[00:02:46] just want to say is that when I'm
+[00:02:48] ranking uh the quality of a broker the
+[00:02:50] things that I'm thinking about for my
+[00:02:52] purposes reliability and speed I need a
+[00:02:55] broker that's reliable I can't have the
+[00:02:57] platform crashing or not working well on
+[00:02:59] me that's not acceptable and I need
+[00:03:01] speed I need fast order execution
+[00:03:03] there's no question about it and these
+[00:03:05] are two areas that light speed shines
+[00:03:07] having used this software uh for all the
+[00:03:10] years I've been using it it has been a
+[00:03:13] top performing platform I don't have to
+[00:03:15] worry about this software crashing and
+[00:03:17] Order execution speed is fantastic so
+[00:03:20] that I just want to say kind of at the
+[00:03:21] beginning because that's that's really
+[00:03:23] one of the those are like the most
+[00:03:24] important things cuz if if it's not fast
+[00:03:26] it's not going to work doesn't matter
+[00:03:28] anything else is not relevant if it's
+[00:03:29] not a fast broker doesn't matter and
+[00:03:32] number two if it's not reliable if the
+[00:03:33] platform's crashing it's not going to
+[00:03:35] work you can't use that either now as I
+[00:03:37] was editing this episode I realized that
+[00:03:40] maybe it' be helpful to illustrate the
+[00:03:42] speed advantage that you get with light
+[00:03:44] speed and so this is what I ended up
+[00:03:46] doing now on our broker comparison sheet
+[00:03:48] you'll actually see um the time speeds
+[00:03:51] of all these different Brokers uh we've
+[00:03:54] got I think 13 of them on this sheet and
+[00:03:57] light speed it is among the fastest um
+[00:04:01] and and this is based on the data that's
+[00:04:04] readily available from these Brokers so
+[00:04:06] they actually disclose their order
+[00:04:08] execution speed on uh their websites as
+[00:04:10] part of their regulatory filings so you
+[00:04:12] could see which Brokers are the fastest
+[00:04:14] now speed for some people is not the
+[00:04:17] primary um goal of their broker some
+[00:04:20] people would prioritize a commission
+[00:04:21] free broker over speed but I'll tell you
+[00:04:24] that you you generally don't get both
+[00:04:25] you either get really fast speed and you
+[00:04:27] pay a commission for it or you get free
+[00:04:29] Commission trading and it's a little
+[00:04:31] slower so it's one or the other so now
+[00:04:33] let's put this into into perspective so
+[00:04:35] I actually funded accounts with um 10 of
+[00:04:38] these Brokers that are on our list 10 of
+[00:04:40] the ones that are sort of the most
+[00:04:41] popular most common and I actually went
+[00:04:43] ahead and timed the order execution this
+[00:04:46] right here is the slowest um and the way
+[00:04:48] I timed it this was my
+[00:04:50] methodology I timed it from the second I
+[00:04:53] clicked the buy button until the
+[00:04:55] position appeared in my position window
+[00:04:59] so that to me was the execution time um
+[00:05:02] this one right down here is Fidelity
+[00:05:05] Fidelity active Trader desktop software
+[00:05:08] this was how long it took right here for
+[00:05:11] it to say the order filled but then this
+[00:05:14] was how long it took for the order to
+[00:05:15] actually show up in my positions window
+[00:05:19] okay so Fidelity set the bar pretty low
+[00:05:23] the second slowest broker was Robin Hood
+[00:05:26] not surprising Robin Hood commission
+[00:05:28] free broker it's not going to be the
+[00:05:30] fastest the third uh was Weeble and
+[00:05:34] third from last third from slowest you
+[00:05:36] know in my experience um it really
+[00:05:39] wasn't that bad it's only in fact
+[00:05:41] marginally slower than thinker swim
+[00:05:44] interactive brokers is right here this
+[00:05:46] is trade
+[00:05:47] station this is ocean one Securities
+[00:05:50] which is an offshore broker dealer this
+[00:05:52] is
+[00:05:53] CME and that's light
+[00:05:56] speed that that is my time trade on
+[00:05:58] light speed so now let's put that in
+[00:05:59] perspective compared to
+[00:06:01] Fidelity wow that's the execution time
+[00:06:04] for just one trade and so when I'm
+[00:06:06] talking about speed being important this
+[00:06:08] is really what I'm saying when I see a
+[00:06:10] stock squeezing up and I want to get in
+[00:06:13] I want that order to go to the market
+[00:06:14] and get me shares immediately and when I
+[00:06:16] see one of my exit indicators and I want
+[00:06:17] to get out I want to be at that position
+[00:06:20] like that and that is what I get at
+[00:06:23] light speed and I do pay a fee for it I
+[00:06:25] pay the fee through the commission but
+[00:06:27] in my opinion that is money well spend
+[00:06:30] so top level this is a high- performing
+[00:06:34] fast platform with great order execution
+[00:06:38] so really fast order routing all right
+[00:06:40] so when I first laid this out or got
+[00:06:43] this platform set up um I learned that
+[00:06:45] they have a dock so basically everything
+[00:06:47] kind of docks off this top menu bar here
+[00:06:50] which is kind of a clunky bar but um but
+[00:06:54] it is just sort of the way it is um so I
+[00:06:57] set up my positions window in the top
+[00:06:58] left corner right here as you can see
+[00:07:01] and so just walking you through window
+[00:07:03] by window the way I set up my positions
+[00:07:05] window you can go into settings right
+[00:07:06] here and you can change which columns
+[00:07:09] are displayed so these are the columns
+[00:07:11] that are available and there's a lot of
+[00:07:13] them and then these are the columns that
+[00:07:14] are displayed right here so you can add
+[00:07:17] I mean you can add a lot of data if you
+[00:07:20] want to it's just a question of what's
+[00:07:21] helpful what's necessary and you know
+[00:07:24] then you go from there so if you decide
+[00:07:27] you want to add the 52e high you click
+[00:07:30] the the item you click add and then you
+[00:07:33] go down here and then you can move it up
+[00:07:36] or down so see how I move this up like
+[00:07:39] this so now I'm going to click on this
+[00:07:40] and that's the 52 we high right there so
+[00:07:43] now we could just right click and remove
+[00:07:45] that column entirely if we want to we
+[00:07:48] can also click and drag the column to
+[00:07:49] put it in a different spot uh so it's
+[00:07:52] it's fairly easy to do that and of
+[00:07:53] course by clicking on it you're sorting
+[00:07:55] the all of the data in this table by
+[00:07:58] that column so I'm going to remove that
+[00:08:00] column and as you can see I have
+[00:08:02] everything sorted by position by how
+[00:08:05] much I'm up on the stock so that's kind
+[00:08:07] of how I've always done it and that for
+[00:08:09] me just feels most intuitive I mean you
+[00:08:11] could do it alphabetically if you wanted
+[00:08:14] to but that doesn't I don't know this is
+[00:08:15] just what makes sense to me so I've got
+[00:08:18] the symbol I've got my position size
+[00:08:21] which is zero for these positions that I
+[00:08:23] was holding this is my cost basis so if
+[00:08:26] I take a trade on this I'll just do 250
+[00:08:28] shares with a hotkey you can see first
+[00:08:30] of all instantaneous execution and boom
+[00:08:32] that's a $5 a $2.50 winner so in and out
+[00:08:36] like that but you could see how my cost
+[00:08:38] basis changed to 365 right so um you'll
+[00:08:43] see your cost basis you'll see your open
+[00:08:46] p&l and then you'll see your realized
+[00:08:48] p&l your total profit and that for me is
+[00:08:51] all that I need um I really don't need
+[00:08:53] more than that now you can add uh well
+[00:08:55] like I said you can go in you can add
+[00:08:57] more columns as you'd like um because
+[00:08:59] this is a broker where you pay fees and
+[00:09:02] commissions you may decide you want to
+[00:09:04] see how many uh shares you've been
+[00:09:06] trading and so this kind of gets into a
+[00:09:09] little bit more Nuance of uh the
+[00:09:11] commission structure on these Brokers
+[00:09:13] which we'll we'll come back to but uh
+[00:09:17] but I have as you can see I've added
+[00:09:20] columns for buy shares the number of
+[00:09:23] shares I've bought the number of shares
+[00:09:25] I've added liquidity on the total uh
+[00:09:28] number of shares I've traded
+[00:09:30] and the total number of Trades I've
+[00:09:32] taken so these are all added here and
+[00:09:34] we'll come back and we'll touch on how I
+[00:09:37] use those later I don't use them for for
+[00:09:40] my trading I use them later at the end
+[00:09:42] of the day for calculating or getting a
+[00:09:44] rough idea of what my fees and
+[00:09:46] commissions would be so they're there
+[00:09:48] but I have them just hidden so I don't I
+[00:09:50] don't look at them while I'm trading but
+[00:09:52] I can check it later all right so that's
+[00:09:53] my positions window now the window below
+[00:09:56] that is active orders so this is very
+[00:09:58] important for me um I've had times where
+[00:10:01] you know I just had orders that I left
+[00:10:04] here and I didn't see them and then I
+[00:10:07] left I I logged out of my platform not
+[00:10:09] realizing that I had open orders and I
+[00:10:12] come back the next day and uhoh holy
+[00:10:15] smokes those orders filled later in the
+[00:10:16] day that's a major problem so I always
+[00:10:19] like to have a separate window that
+[00:10:21] shows all of my active orders so those
+[00:10:24] are orders that are sitting live in the
+[00:10:25] market now I'm going to cancel them with
+[00:10:27] a hotkey so they're gone
+[00:10:30] but this is a very simple window um you
+[00:10:32] just go to new and you go down to orders
+[00:10:35] uh let's see so all of your all of these
+[00:10:37] items are available from the new and
+[00:10:40] then you've got your positions window
+[00:10:42] which was right here and your orders
+[00:10:43] window right here all right so when we
+[00:10:45] go on the settings
+[00:10:47] widget um on this one you can do display
+[00:10:50] and just show active orders now some
+[00:10:52] people will have all of them in one but
+[00:10:54] I don't want to do that I don't want to
+[00:10:56] do that I only want to have the active
+[00:10:58] orders in the window uh and then you
+[00:11:01] could change the colors if you wanted to
+[00:11:03] but um I don't think that I've changed
+[00:11:05] these I think these are all the same as
+[00:11:06] they've always been uh in any case if
+[00:11:08] you download my layout you'll have them
+[00:11:10] the same as I do but I don't think I've
+[00:11:12] ever changed those all right so we'll
+[00:11:14] cancel that so that's my active orders
+[00:11:16] window now we've got my executed canel
+[00:11:19] orders window so that makes sense now
+[00:11:22] that you've seen the active orders one
+[00:11:23] this is just um the same except I
+[00:11:26] uncheck the first one and I just check
+[00:11:28] the two bottom ones so executed orders
+[00:11:30] and canceled orders um and again I don't
+[00:11:34] think I changed the coloring on these I
+[00:11:36] think this is default um but it's
+[00:11:40] possible that I did at some point and I
+[00:11:41] find this to be helpful so green or buy
+[00:11:43] orders red or sell orders and then the
+[00:11:46] grayr orders that were cancelled now the
+[00:11:48] news window um this is not what I use
+[00:11:52] primarily for uh for for breaking news
+[00:11:56] uh I don't use it actually for breaking
+[00:11:58] news at all but I could pull up a stock
+[00:12:00] and it'll show me some headlines there
+[00:12:02] um I kind of have it just to have it I
+[00:12:05] mean every now and then if I'm not sure
+[00:12:08] what the headline is and I don't see it
+[00:12:10] on my primary platform that I use for
+[00:12:11] news then I could check here but you
+[00:12:15] know a lot of times I just don't I don't
+[00:12:16] use it so anyways you could take it or
+[00:12:18] leave it um the
+[00:12:20] settings um the way this is set up is um
+[00:12:26] date call date symbol and then the text
+[00:12:28] so and you've got some more that are
+[00:12:30] available uh days 30 days you could go
+[00:12:33] down to just like seven days that would
+[00:12:35] probably be fine or even just one day
+[00:12:36] but either way um whatever whatever you
+[00:12:39] want it would be fine there uh and then
+[00:12:41] the way this works um is whenever I type
+[00:12:43] in a new stock it links to that stock
+[00:12:46] right so it switches to whichever window
+[00:12:48] is active um which is the functionality
+[00:12:52] that I like now short request is uh its
+[00:12:55] own window right here you won't get this
+[00:12:58] by def fault you have to ask them to add
+[00:13:00] or enable short request and what you can
+[00:13:03] do is if you have a stock that you're
+[00:13:04] looking at let's say um
+[00:13:08] W uh so this stock has an L right here
+[00:13:13] and that l means it's not easy to borrow
+[00:13:16] but they can locate shares for you so
+[00:13:18] now you type in I want to locate shares
+[00:13:20] you click locate and they'll tell you
+[00:13:22] how much it would cost to borrow 100
+[00:13:25] shares so it's spinning its Wheels let's
+[00:13:28] see so there we go so it's four almost 5
+[00:13:32] cents for 100
+[00:13:34] shares
+[00:13:35] so you know so so it's not it's not
+[00:13:39] nothing um the problem here is while
+[00:13:43] light speed does have decent inventory
+[00:13:45] they usually have shares available to
+[00:13:46] borrow and they oh so they have a second
+[00:13:48] one here they have two different vendors
+[00:13:50] this one's cheaper oh they actually have
+[00:13:52] three so then you can choose which one's
+[00:13:54] the cheapest and and since obviously
+[00:13:56] there's a huge difference here this for
+[00:13:59] 10,000 shares is 50 bucks this for
+[00:14:02] 10,000 shares is
+[00:14:04] $500 so you get to shop around which
+[00:14:07] person do I want to borrow from the
+[00:14:08] person charging $50 for 10,000 shares or
+[00:14:10] the person charging 500 well probably
+[00:14:12] the one that's charging less this one's
+[00:14:14] charging 100 so that one's better but
+[00:14:16] you've got three options here um I'll
+[00:14:19] teach you more about the all the
+[00:14:21] different things and what this all means
+[00:14:23] here in the top Corner when we get onto
+[00:14:24] the level two window but uh if you are a
+[00:14:27] short seller you can use short locate
+[00:14:29] button and then you can borrow shares
+[00:14:31] and once you borrow shares those are
+[00:14:33] your shares to trade with for the rest
+[00:14:35] of the day so if you borrow a th000
+[00:14:37] shares you can short a th000 shares you
+[00:14:40] can cover then you can short again then
+[00:14:42] you cover then you short again you cover
+[00:14:43] you short again you cover but at the end
+[00:14:45] of the day those shares go back to the
+[00:14:47] person you borrowed from so that you can
+[00:14:49] only use them for day trading now if you
+[00:14:51] hold them overnight then you'll pay the
+[00:14:54] borrowing fee for a second day the next
+[00:14:57] day so you'll pay a second borrowing fee
+[00:14:59] sometimes people will do that um this
+[00:15:02] gets a little complicated but sometimes
+[00:15:04] people some stocks become very difficult
+[00:15:07] to borrow you can't get shares reserved
+[00:15:09] and so uh you know you'll come here to
+[00:15:12] try to short it and it'll just say
+[00:15:15] nothing's available so if you have
+[00:15:17] shares and then other people are telling
+[00:15:19] you I can't get any more shares they ran
+[00:15:21] out of shares and you think you want to
+[00:15:23] trade this the next day some people will
+[00:15:25] hold overnight just simply because they
+[00:15:28] want to make sure they can Trade It
+[00:15:29] Again the next day but it's forcing them
+[00:15:32] to hold overnight which carries its own
+[00:15:33] set of risks okay then down below that
+[00:15:36] we have a messages window and this just
+[00:15:38] tells you basically uh it gives you some
+[00:15:40] some messages about your trade so if I
+[00:15:42] tried to do a huge order on the S&P 500
+[00:15:45] it would give me a rejection can't buy I
+[00:15:47] don't have enough buying power um if I
+[00:15:50] try to trade when I'm below my Max loss
+[00:15:53] I'll get a rejection saying nope can't
+[00:15:55] trade below Max loss uh we'll come back
+[00:15:57] to how to set that up in
+[00:15:59] moment so now let's look at um our level
+[00:16:02] two window so at light speed trading
+[00:16:05] they call level two level two which is
+[00:16:07] what you would expect other platforms
+[00:16:09] call it uh
+[00:16:11] Montage um some have just funny names
+[00:16:14] for it so anyways they call it level two
+[00:16:16] that's nice that's appreciated so you
+[00:16:18] pop out your level two window and um by
+[00:16:21] default you could see mine have this
+[00:16:23] color uh scheme but that's not what it
+[00:16:25] comes with so the way I changed that you
+[00:16:28] can go go into settings here the
+[00:16:29] settings widget or you can right click
+[00:16:31] on the window and go to settings but if
+[00:16:34] you right click on the window you could
+[00:16:35] also go straight to design level two
+[00:16:38] design fonts and colors we'll go to
+[00:16:40] settings first and then when you're in
+[00:16:42] the settings window you can click on
+[00:16:44] design and then you can go to level two
+[00:16:46] design fonts and colors so two ways to
+[00:16:48] get to the same
+[00:16:49] place so now they give you a couple uh a
+[00:16:52] number of different settings here on
+[00:16:54] active level two windows here you can
+[00:16:57] change um what the colors are so by
+[00:17:00] default they use like a gradient kind of
+[00:17:02] like some of the other Brokers do which
+[00:17:04] I'm not a big fan of I I find it
+[00:17:06] difficult to distinguish um the tiers
+[00:17:09] when you have this gradient now this
+[00:17:11] one's not too bad um thinker swim which
+[00:17:14] I have up here is is a bit worse because
+[00:17:16] it's really like the sort of blue it
+[00:17:18] just it's just hard to tell the
+[00:17:20] difference between 84 and 85 yes the
+[00:17:23] price has changed but it's just not
+[00:17:25] clear I like to see a very distinguished
+[00:17:27] difference between the tiers of the
+[00:17:29] market um it just helps me visualize
+[00:17:31] when we have a big stack of buyers like
+[00:17:33] we do here at 83 um and or when we don't
+[00:17:37] have a big stack of buyers or sellers so
+[00:17:40] for me uh I went ahead and made my first
+[00:17:44] tier green so I just go in here to BG I
+[00:17:46] change it to Green um the font um is
+[00:17:50] black so no issue there leave it all
+[00:17:52] black and then I Chang the background on
+[00:17:54] this one here to this sort of salmon
+[00:17:56] color the background here to Yellow the
+[00:17:58] background ground here to blue and then
+[00:18:00] the background of all the rest are gray
+[00:18:03] and then for the inactive level twos
+[00:18:05] active would be the one that you clicked
+[00:18:07] on right now that has this yellow ring
+[00:18:09] around it and that means if I press my
+[00:18:11] hotkey hot keys will execute against
+[00:18:13] this window right here not this one not
+[00:18:16] this one not this one but this one so
+[00:18:20] every other one is inactive now you
+[00:18:22] could choose to have the exact same
+[00:18:24] colors on active and inactive level two
+[00:18:26] windows I mean that would be fine if
+[00:18:28] that's what you wanted to do nothing
+[00:18:30] wrong with that but for me I I prefer to
+[00:18:34] um have the inactive ones be just a more
+[00:18:36] pastel so I just visually can tell which
+[00:18:40] window I'm focusing on all right so
+[00:18:43] that's the first thing that I do my
+[00:18:45] decimal points I set it uh Point uh just
+[00:18:48] two decimal points but if I was trading
+[00:18:50] penny stocks I could switch to four um
+[00:18:52] you know that that would be fine if if
+[00:18:54] you wanted to although let's pull up a
+[00:18:56] penny stock here just real quick so
+[00:18:59] uh in the background here I've got this
+[00:19:01] um software day trade Dash which I use
+[00:19:03] for scanning and for
+[00:19:05] charting uh let's look for a penny stock
+[00:19:07] so m anddr m anddr so M anddr you can
+[00:19:11] see automatically switches the decimal
+[00:19:12] points because it's a penny stock down
+[00:19:14] to four places so this platform does it
+[00:19:17] for you automatically it drops them when
+[00:19:20] you're above a dollar and it adds them
+[00:19:21] back when you're below a dollar so you
+[00:19:23] don't actually have to change it you
+[00:19:25] could if you wanted to but you don't
+[00:19:27] have to all right so so then we'll go
+[00:19:29] back into settings we'll go to design
+[00:19:31] level
+[00:19:32] two um you can change the position of
+[00:19:37] the three data points which is the
+[00:19:39] market maker the price and the number of
+[00:19:41] shares available and this is how I have
+[00:19:44] it some people will mirror it so it is
+[00:19:47] sort of opposite but most people don't
+[00:19:50] so this is how I have it appear you can
+[00:19:53] show the column lines you could take
+[00:19:55] them away you could show the column
+[00:19:56] names you could take them away so you
+[00:19:58] know this gives you that flexibility to
+[00:20:00] really customize this to the way you
+[00:20:01] like and then of course in font you can
+[00:20:03] choose your font so if you're that
+[00:20:05] person that says I've got to do Papyrus
+[00:20:07] Papyrus is what my life is about I'm a
+[00:20:10] Papyrus person do Papyrus do you right
+[00:20:13] lights spe's not going to stand in your
+[00:20:14] way if this was what feels right to you
+[00:20:17] you can do it I love that so they give
+[00:20:20] you the freedom and I think that's
+[00:20:21] wonderful all right now I don't like
+[00:20:23] Papyrus uh in fact I despise it but
+[00:20:27] don't get me don't get me started all
+[00:20:29] right let's go back so we're going to go
+[00:20:30] move this to 11 all right so there we go
+[00:20:35] so that's what I like to see that looks
+[00:20:37] clean no issue there and then this
+[00:20:41] little button here for prints if you
+[00:20:42] unclick that you won't see the prints
+[00:20:45] there but I like to keep that on now you
+[00:20:48] know I'll acknowledge that you're not
+[00:20:51] seeing this you're not seeing as much
+[00:20:54] data as having this separate popped out
+[00:20:56] time and sales window so so if I go to
+[00:20:59] new and I go to time in sales you can
+[00:21:02] see that's what I've got popped out here
+[00:21:04] the reason I like to have one popped out
+[00:21:06] is because look at this xos is halted
+[00:21:09] right what time is it going to resume
+[00:21:12] well if you've watched my episode on
+[00:21:13] circuit breaker halt you know it'll be
+[00:21:14] exactly 5 minutes from the last print
+[00:21:16] which means we need to see the time
+[00:21:18] stamp of the last print is at 10:40 and
+[00:21:20] 28 seconds so resumption will be in
+[00:21:22] about a minute 10:45 and 28 seconds so I
+[00:21:26] keep one level two when or one time in
+[00:21:28] window out and it's just linked to
+[00:21:30] whichever stock is in focus and it's
+[00:21:33] kind of it's a little bit not perfect to
+[00:21:36] do it that way I could understand why
+[00:21:38] someone else might choose to go into um
+[00:21:41] the settings under design take the
+[00:21:44] prints off and then make this maybe just
+[00:21:47] like a little bit smaller here kind of
+[00:21:48] like this and then put this actual
+[00:21:51] proper one here and then if you go into
+[00:21:54] here you can go to settings um and you
+[00:21:57] can kind of you know change this around
+[00:21:59] get rid of what you don't want um scroll
+[00:22:01] bars you could say don't
+[00:22:03] show um let's see
+[00:22:06] vertical um don't
+[00:22:08] show so you could do that um and then
+[00:22:11] you just have to make it slightly bigger
+[00:22:13] when you need to see that data so you
+[00:22:16] could do that um and yet it just doesn't
+[00:22:20] quite to me look right when I try to do
+[00:22:22] that it it just everything is now
+[00:22:23] scrunched right it it looked better
+[00:22:25] before so we'll go back to display the
+[00:22:28] prints and yeah it just feels like it
+[00:22:31] looks better this way all right so
+[00:22:33] anyway so I just say you know what I'm
+[00:22:35] not going to mess around with that I'm
+[00:22:36] just going to leave it like this and
+[00:22:37] I'll just have one you know big time in
+[00:22:40] sales that's on the side and yeah it's a
+[00:22:42] little Annoying if this is the stock I'm
+[00:22:44] trading because I have to glance over
+[00:22:45] here but but it's really only like I
+[00:22:48] said if a stock is halted it's really
+[00:22:50] only in those circumstances that I
+[00:22:52] really feel like I need to look at it
+[00:22:53] the rest of the time I'm not I I don't
+[00:22:56] need to check the time that's the only
+[00:22:58] time I need to know the time is when
+[00:22:59] we're dealing with a halt so anyways so
+[00:23:02] that's for basically dealing with halts
+[00:23:04] all right so now this is a stock by the
+[00:23:06] way that is easy to borrow see how it
+[00:23:08] has the E right here so that means
+[00:23:10] anyone can short it and you don't have
+[00:23:12] to pay any borrowing fees there's no
+[00:23:14] borrowing fees you don't pay to locate
+[00:23:15] if you want to short it boom you press
+[00:23:17] the sell button you're going to short
+[00:23:18] the stock so e means easy to borrow l
+[00:23:22] means you have to locate shares now
+[00:23:24] every now and then there'll be a stock
+[00:23:27] um uh I don't know we might have a hard
+[00:23:29] time finding one right now that um some
+[00:23:32] will say t which means it's on the
+[00:23:34] threshold list which means nobody can
+[00:23:36] short it no one's allowed to short it
+[00:23:38] the stock is on the threshold list um
+[00:23:41] which is gets into meaning that shares
+[00:23:45] were shorted and they did not clear they
+[00:23:48] didn't settle so that uh potentially
+[00:23:52] could indicate naked Short Selling in
+[00:23:54] any case um when a company has that uh
+[00:23:56] they go on the threshold list and you
+[00:23:58] can't short until it's resolved so um
+[00:24:01] now the 100 in the top corner here of
+[00:24:04] our level two window refers to how much
+[00:24:06] buying power I need in order to trade
+[00:24:09] the stock so let's jump onto the
+[00:24:11] Whiteboard for a second all right so we
+[00:24:14] know that if you deposit $25,000 into a
+[00:24:17] trading account you have how much buying
+[00:24:19] power Time 4 equals 100K right so you
+[00:24:22] got $1,000 in buying power so that means
+[00:24:24] if you wanted to buy you know 10,000
+[00:24:26] shares of a $10 St stock you'd be
+[00:24:29] putting in the full 100K how much of
+[00:24:31] your own cash would that require 25%
+[00:24:34] oops sorry
+[00:24:36] 25% so if they allow four times leverage
+[00:24:40] then you only need to put down 25% for
+[00:24:43] that position now if the stock so if the
+[00:24:47] stock says um so we'll just flip over to
+[00:24:50] um GameStop oh no that's not a good one
+[00:24:53] let's let's go to Ford so Ford motor
+[00:24:55] compan is 25% you only need to put down
+[00:24:57] 25% you can use the full four times
+[00:25:00] leverage but here on um these this one
+[00:25:03] right here you've got it put down 100%
+[00:25:06] which means you cannot use leverage on
+[00:25:08] it yes by default your account has four
+[00:25:11] times leverage but the broker and the
+[00:25:14] clearing firm will choose to restrict
+[00:25:16] which stocks you can actually use
+[00:25:19] borrowed money on and for a lot of very
+[00:25:21] volatile low price stocks they'll say no
+[00:25:23] you can't use leverage at all and that's
+[00:25:24] true with pretty much every broker you
+[00:25:27] know certainly all the retail uh Brokers
+[00:25:30] but also commission free Brokers I mean
+[00:25:32] but also a lot of the boutique Brokers
+[00:25:33] they'll restrict leverage as well
+[00:25:35] because they don't want you to blow up
+[00:25:37] your account and certainly with borrowed
+[00:25:39] money it's a bad situation for
+[00:25:41] everybody so this Ford you have easy to
+[00:25:45] borrow status and you only have to put
+[00:25:47] down uh 25% which means you've got four
+[00:25:49] times leverage this stock is easy to
+[00:25:52] borrow but you have to put down um 100%
+[00:25:56] if you're going to go long if you're
+[00:25:58] going to go long you have to put down
+[00:26:00] 100% if you're going to go short you
+[00:26:02] have to put down
+[00:26:04] 300% whoa wait a second so if I want to
+[00:26:08] take a 25,000 share short position on
+[00:26:11] this $25,000 short position I would need
+[00:26:14] to have $75,000 in my account three
+[00:26:17] times my position size why because
+[00:26:19] remember well this is a stock that the
+[00:26:21] broker's thinking it could go up 3x it
+[00:26:25] could go up 300% it's already up 200%
+[00:26:27] who knows we've seen stocks go up a th%
+[00:26:30] so they're saying if you put your entire
+[00:26:32] account into this right now and you're
+[00:26:34] shorting you could F you could face a
+[00:26:37] unlimited loss but you could very
+[00:26:39] quickly have your account go to zero so
+[00:26:43] the reason that they have these
+[00:26:44] restrictions essentially is that on the
+[00:26:47] back end they have a platform that looks
+[00:26:50] like this but shows every single
+[00:26:52] customer account so they can see every
+[00:26:55] customer account and they can
+[00:26:56] automatically filter uh oh this is a
+[00:26:58] customer account who's using margin
+[00:27:01] which means they're using borrowed money
+[00:27:02] leverage and is down a lot on a position
+[00:27:06] so they can go in and manually look at
+[00:27:08] these accounts and say uhoh we got to do
+[00:27:10] something the broker will step in and
+[00:27:12] take over your account essentially autol
+[00:27:14] liquidate positions so essentially if
+[00:27:17] you're using four times leverage they
+[00:27:20] don't have a lot of time to make a
+[00:27:21] decision because they're going to start
+[00:27:22] losing their own money pretty quick
+[00:27:24] whereas if you're just using your own
+[00:27:25] cash you're not using leverage then the
+[00:27:27] worst that can happen if you bought is
+[00:27:29] it goes to zero you lose all of your own
+[00:27:31] money but you don't lose the broker's
+[00:27:32] money so the broker doesn't want you to
+[00:27:34] lose your money but at the same time
+[00:27:35] they really don't want to lose their own
+[00:27:36] money and if you're shorting that's the
+[00:27:38] biggest risk because now you short a
+[00:27:40] stock and it starts squeezing up so by
+[00:27:43] asking you to have three times whatever
+[00:27:45] um the position actually cost
+[00:27:47] essentially what they're doing is
+[00:27:48] they're giving themselves time to
+[00:27:51] liquidate your position if necessary all
+[00:27:54] right so um so that's what these mean
+[00:27:57] 100 300 means what you need for long and
+[00:28:01] what you need for short L is means you
+[00:28:04] can locate shares they might be
+[00:28:05] expensive but you can locate shares the
+[00:28:07] H right there means the stock is halted
+[00:28:10] this just got halted going back down so
+[00:28:12] that's the chart there coming back
+[00:28:14] down um and the CB right here they
+[00:28:18] should change this to SSR I'm going to
+[00:28:20] give that feedback right now they should
+[00:28:21] change it to SSR it's short sale
+[00:28:24] restriction no one calls it circuit
+[00:28:25] breaker nobody calls it circuit breaker
+[00:28:28] except for light speed it's SSR so just
+[00:28:31] call it SSR let's just get real short
+[00:28:33] sale restriction that's and I'm not
+[00:28:36] going to like there's no way I would
+[00:28:37] like leave Theo leave a broker for
+[00:28:39] something like that like it doesn't ma
+[00:28:40] it doesn't really matter but I hear
+[00:28:42] people all the time who are like Ross
+[00:28:44] what does this mean what does this mean
+[00:28:46] so let me show you let me pop this out
+[00:28:48] um for one second this is a dash Trader
+[00:28:51] Dash Trader Das Trader uh they're a
+[00:28:55] platform that a lot of Traders use
+[00:28:57] they're software company they're not a
+[00:28:58] broker dealer so you can actually use
+[00:29:00] Dash Trader with light speed if you want
+[00:29:03] this is just the level two window but
+[00:29:05] see how it says htb that means hard to
+[00:29:07] borrow htb is hard to borrow they say
+[00:29:11] htb instead of um L for locate and they
+[00:29:14] have SSR which means the stock is on
+[00:29:16] short sale restriction when a stock is
+[00:29:18] on short sale restriction you can't
+[00:29:20] short unless it's on an uptick so
+[00:29:23] anyways uh you know I mean that doesn't
+[00:29:25] really matter but um SSRS easier to
+[00:29:28] understand cuz most Traders today don't
+[00:29:31] know what CB means so and you can't
+[00:29:33] click on it it doesn't like hover and
+[00:29:35] tell you anything so anyways now you
+[00:29:37] know okay so we've got our level two
+[00:29:40] windows out here these all look good and
+[00:29:42] once you create one then you just save
+[00:29:45] the settings and then you can create you
+[00:29:46] know five more whatever so let's see
+[00:29:51] um now let's look at these order entry
+[00:29:53] Windows some platforms like what I was
+[00:29:56] just showing you um with d Trader have
+[00:29:59] the level two window and an order entry
+[00:30:01] window attached which is really nice
+[00:30:03] these are two separate windows and the
+[00:30:06] only reason that's a problem is because
+[00:30:08] when you pop out your order entry window
+[00:30:10] you go to order entry and you pop it out
+[00:30:13] now you have to link it okay so go to
+[00:30:16] okay so go to Windows go to order entry
+[00:30:18] and then link here um the order entry
+[00:30:21] to your quote
+[00:30:24] window all right so you do it like that
+[00:30:26] you link it to your quote window right
+[00:30:27] here
+[00:30:29] so that's how you do it um but it's a
+[00:30:32] little bit confusing so you know other
+[00:30:34] platforms for what it's worth um you
+[00:30:36] know light speed or um what am I talking
+[00:30:39] about um thinker swim here they give you
+[00:30:42] these um these little links so you see
+[00:30:45] how they link through colors so you link
+[00:30:47] all the all the windows together with
+[00:30:48] the colors and then they're they're tied
+[00:30:51] together we do something kind of similar
+[00:30:53] we link with the colors here so they're
+[00:30:55] tied together um Dash Traders actually
+[00:30:58] even a little bit worse there's this
+[00:31:00] confusing um Weeble doesn't allow you to
+[00:31:03] have multiple level two windows so
+[00:31:05] theirs is actually a little bit uh more
+[00:31:08] difficult as well um interactive brokers
+[00:31:11] has nice linking trade station there
+[00:31:14] feels a little clunky anyways uh linking
+[00:31:17] is can be a little bit of a pain uh so
+[00:31:20] yeah but once you've got it set then
+[00:31:21] it's set you just want to make sure
+[00:31:23] obviously when you change the symbol it
+[00:31:24] changes it for that stock and then once
+[00:31:26] you've got that set you're all set all
+[00:31:28] right so now your order entry window um
+[00:31:31] you want to go in and start changing
+[00:31:33] your settings so what I do is um I go to
+[00:31:37] command actually I go to I go to login
+[00:31:41] and
+[00:31:41] [Music]
+[00:31:43] I by default have the the order type set
+[00:31:46] to limit oops sorry I have the route set
+[00:31:49] to NASDAQ so go to login limit NASDAQ
+[00:31:54] 5,000 shares hidden and day
+[00:31:58] which is fine that's that this these are
+[00:32:00] the settings that I have and then when I
+[00:32:03] click go to Mouse I just say don't
+[00:32:05] update don't update don't update so
+[00:32:07] basically and then quotes I should
+[00:32:09] actually change that to don't
+[00:32:10] update so then what this does is
+[00:32:13] effectively it makes it so when you log
+[00:32:17] in it's going to automatically populate
+[00:32:20] this based on what you've got set right
+[00:32:22] here and then when you change to
+[00:32:24] different stock so if I change this to
+[00:32:26] 5,000 shares and then I switch back to
+[00:32:29] the Spy it's going to leave it unchanged
+[00:32:31] now if you want it to change if you want
+[00:32:34] to change when you uh pull up quotes for
+[00:32:36] a different setup or a different stock
+[00:32:38] then you want to change to um let's see
+[00:32:42] set two 25 200 shares so now watch this
+[00:32:46] so we're going to go to um Ford and it
+[00:32:49] switches to 2500 shares so if you want
+[00:32:51] it to reset then you can have it reset
+[00:32:54] um and on mousing I have it when I'm
+[00:32:56] clicking when I click in equity I have
+[00:32:58] it as don't update as well so this is
+[00:33:02] this it's personal preference I suppose
+[00:33:05] uh but this is where you would change
+[00:33:07] your default order sizes and you would
+[00:33:09] change your what happens when you log in
+[00:33:12] and what happens when you switch to a
+[00:33:14] different um symbol and then you know
+[00:33:17] the thing that's a little bit of a pain
+[00:33:18] is that you you then have to do this um
+[00:33:20] because you've got four order entry
+[00:33:21] Windows right so you got to do it for
+[00:33:23] each one and then save them all all
+[00:33:26] right so it's kind of a pain it first
+[00:33:28] but you just do it once and then you're
+[00:33:30] done with it all right so now the next
+[00:33:32] thing I want to do um and and I guess
+[00:33:36] I'll just two two other small items um
+[00:33:39] so under the stock right here if you go
+[00:33:42] to level one um let's see level one
+[00:33:47] colors no it's not that um we're going
+[00:33:49] to go into settings here and we're going
+[00:33:51] to go under design and layout so this
+[00:33:55] layout right here what you're seeing is
+[00:33:57] is um these data pieces of data here so
+[00:34:03] I have the high of day the volume the
+[00:34:05] shares outstanding which is sometimes
+[00:34:08] similar to the float but usually higher
+[00:34:11] but can give you a sense of what the
+[00:34:13] float is the listing exchange and the
+[00:34:16] percentage change on the day and that's
+[00:34:19] that's all I I add um there's other
+[00:34:20] stuff that you can add um you could add
+[00:34:23] short interest could throw that in there
+[00:34:25] I don't know how accurate it is um you
+[00:34:27] could add vwap I mean you this is stuff
+[00:34:29] you can add you can add more if you want
+[00:34:31] you can add a ton more but this is just
+[00:34:34] what I add and I find that this is
+[00:34:35] adequate and then down here on the order
+[00:34:38] entry
+[00:34:39] window um for the most part I don't ever
+[00:34:43] use the inside bit or inside ask buttons
+[00:34:45] clicking on them will change what's
+[00:34:46] right here so I never use those but what
+[00:34:50] I will do is I'll click the ask and then
+[00:34:53] sometimes I'll just with my arrow button
+[00:34:55] I'll move this up you know five or 10
+[00:34:57] Cents by pressing control and the arrow
+[00:35:00] button it's going to move it up 10 cents
+[00:35:02] so I might move it up a little bit and
+[00:35:03] then just hover my mouse here and then
+[00:35:06] click the buy button when I want to go
+[00:35:07] ahead and jump in so you know two shares
+[00:35:10] and then when I'm ready to get in boom
+[00:35:12] punch that click it and I'm in punch
+[00:35:14] that click it and I'm out and these this
+[00:35:16] is a limit order by default and that's
+[00:35:19] the NASDAQ route which I like to use so
+[00:35:21] I try to keep it pretty simple you can
+[00:35:23] go in here um let's see
+[00:35:28] [Music]
+[00:35:32] uh yeah no that's that that is that is
+[00:35:34] about it um yeah I think I think we
+[00:35:38] pretty much have I think we pretty much
+[00:35:39] covered everything there is to cover on
+[00:35:41] this um there's some ways you can add
+[00:35:42] more routes which should be available
+[00:35:44] from your drop down here but you really
+[00:35:46] only really do that if you've set it up
+[00:35:48] with light speed and they've walked you
+[00:35:50] through how to do that all right so now
+[00:35:52] the next thing we're going to cover are
+[00:35:54] how to set up your hot Keys now let me
+[00:35:56] just say for my strategy hot keys are
+[00:35:58] absolutely critical and it's one of the
+[00:36:00] reasons that uh a number of the other
+[00:36:02] platforms I've done platform demos on
+[00:36:04] I've just said nope wouldn't use it
+[00:36:06] because if you don't have hotkeys that's
+[00:36:09] not possible so Charles Schwab using the
+[00:36:11] Thinker swim platform technically they
+[00:36:13] have them but they're very limited
+[00:36:14] interactor Brokers light ibkr uh desktop
+[00:36:18] technically but they don't Auto send
+[00:36:19] Fidelity with active Trader no Robin
+[00:36:21] Hood Legend no so if a platform does not
+[00:36:24] have hotkeys I will not use it for
+[00:36:26] trading uh just wouldn't consider it all
+[00:36:28] right so the way you set up the hot keys
+[00:36:31] in uh light speed are is not as
+[00:36:34] intuitive as some of the other platforms
+[00:36:35] out there um over at on dash Trader if
+[00:36:39] you've watched my Dash Trader demo that
+[00:36:41] platform is is quite intuitive to set up
+[00:36:43] your hotkeys I can go um pull them up
+[00:36:46] here and just show you what it looks
+[00:36:47] like so um let's see this is what the
+[00:36:51] hot Keys um the hotkey menu looks like
+[00:36:53] over at Dash Trader so if you wanted to
+[00:36:56] add a new one you click add new item and
+[00:36:59] then you type in the name and then you
+[00:37:01] do this script wizard where you say I
+[00:37:03] want to do a buy order this number of
+[00:37:06] shares a th000 whatever and the symbol
+[00:37:09] the price you can fill everything out
+[00:37:11] here and it's all set really nice very
+[00:37:13] easy to understand easy to set up Weeble
+[00:37:17] similarly very easy to use Weeble you go
+[00:37:20] to hot Keys you go to trade or go to
+[00:37:23] settings and then you go to trade and
+[00:37:26] hotkey settings and and now create a new
+[00:37:28] hotkey and you can go in here it's a buy
+[00:37:31] order and then you have all of these
+[00:37:32] settings here that you can go through so
+[00:37:34] super easy to use as well all right
+[00:37:36] light speed a little bit more
+[00:37:38] complicated setup you go into the
+[00:37:40] settings widget and you have to go to
+[00:37:42] custom
+[00:37:43] orders and then you go to new commands
+[00:37:46] right here so let's create a new command
+[00:37:48] um buy uh 10 shares annoyingly you can't
+[00:37:53] put any spaces and you can't put dashes
+[00:37:56] so you just have to read as if there's
+[00:37:58] no there's no spaces not allowed it's
+[00:38:01] kind of annoying but it's fine it's not
+[00:38:04] the end of the world all right so now
+[00:38:06] this is our settings for this hotkey so
+[00:38:09] what Market do we want to use um I'm
+[00:38:11] going to do
+[00:38:12] NSD
+[00:38:14] nsdq uh the reason I'm going to do nsdq
+[00:38:17] is because it's probably arguably the
+[00:38:21] route that receives the most volume and
+[00:38:23] because it receives the most volume
+[00:38:25] you're most likely to have your order
+[00:38:27] matched very quickly to someone on the
+[00:38:30] other side when you're buying to a
+[00:38:31] seller when you're selling to a buyer so
+[00:38:33] I like to route through NASDAQ it is a
+[00:38:35] buy order by the way so we're routing to
+[00:38:38] NASDAQ it is a limit order so we're
+[00:38:41] going to do limit orders being visible
+[00:38:43] is fine but you could also do hidden
+[00:38:44] doesn't really matter we're buying and
+[00:38:47] we're going to do um we're going to buy
+[00:38:49] at the ask price so the price of this
+[00:38:51] order is going to be at the ask but I
+[00:38:53] could also do a 10cent offset where I
+[00:38:56] can make it go 10 cents above above the
+[00:38:57] ask they call it through instead of
+[00:39:00] calling it an offset they say through
+[00:39:02] the ask this is a little bit confusing
+[00:39:05] though because what if I want to do an
+[00:39:07] offset just under the ask I have to do
+[00:39:10] minus .01 so it's it's a little
+[00:39:14] confusing um so but we're going to do
+[00:39:17] positive here and we're going to do
+[00:39:19] quantity and quantity quantity with a
+[00:39:22] position to close will do 10 shares
+[00:39:25] quantity without a position to close
+[00:39:27] will also do 10 shares so now we're
+[00:39:29] going to map the key and you come to
+[00:39:31] this keyboard tab so this was our custom
+[00:39:33] orders tab here now we're on the
+[00:39:35] keyboard tab so we're going to go to the
+[00:39:38] B button and I'm going to do uh shift B
+[00:39:41] for buy so where was that key and I
+[00:39:44] click on it this is the custom commands
+[00:39:47] so I click on that key and then I click
+[00:39:49] on the key s is for shift C is for
+[00:39:52] control A is for alt so shift B and map
+[00:39:56] you see what I mean it's it's not this
+[00:39:59] would take you a while to figure this
+[00:40:00] out so now there you go all right so
+[00:40:04] we've got that hotkey and it's done now
+[00:40:07] we should probably make sure we have a
+[00:40:08] hotkey to cancel orders so under the
+[00:40:10] keyboard we can go to cancel order keys
+[00:40:14] and they already have cancel all or
+[00:40:18] cancel all for stock and so I like to
+[00:40:20] put it on my control Q button so contrl
+[00:40:23] C plus Q so click this and then map it
+[00:40:27] and it's going to be right there I'll
+[00:40:28] replace it it's the same one doesn't
+[00:40:30] matter and now it's good all right now
+[00:40:32] let's go back and create one more hotkey
+[00:40:34] custom orders so we're going to go um so
+[00:40:37] we're going to do a new hotkey for uh
+[00:40:41] cell um
+[00:40:43] half create new hotkey so this is going
+[00:40:47] to be a sell order we're going to do
+[00:40:49] nsdq oops
+[00:40:51] nsdq it's a limit order and we're going
+[00:40:54] to do um sell half as
+[00:40:57] let's just let's just do it at the ask
+[00:40:59] all right so we're going to put it at
+[00:41:00] the ask we'll make it a hidden order
+[00:41:03] it's going to be quantity uh sorry it's
+[00:41:05] going to be close out 50% half of
+[00:41:09] position
+[00:41:11] quantity uh let's see actually without
+[00:41:14] position to close I set it at zero so if
+[00:41:16] I press this button and I have no shares
+[00:41:21] it should do nothing so that's what
+[00:41:23] it'll do so we did shift B so we'll just
+[00:41:26] do
+[00:41:28] um H we'll just do contrl H for cell
+[00:41:31] half um so where did that button go so
+[00:41:34] we got to go down alphabetical
+[00:41:36] order
+[00:41:38] so sell half I think we put it on the
+[00:41:42] ask sell half ask that's it so map and
+[00:41:46] then click okay so now let's do on Ford
+[00:41:49] so we're going to do shift B so I'm
+[00:41:52] pressing the shift button and now I
+[00:41:53] press B once and I bought 10 shares do
+[00:41:56] you see how fast I went through that was
+[00:41:58] instantaneous that's what we like about
+[00:42:00] light speed it's fast there's shift two
+[00:42:02] again there's shift two again now we're
+[00:42:05] going to press contrl
+[00:42:07] h
+[00:42:09] okay so you see how my order is now
+[00:42:12] sitting right there on the ask my order
+[00:42:14] is to sit on the ask now do we like that
+[00:42:18] uh I mean I guess it's okay but we got
+[00:42:21] to wait now I got to sit and wait for
+[00:42:23] someone to buy my shares now in this
+[00:42:25] case because there's already so many
+[00:42:26] people at ask at that price I'm probably
+[00:42:29] going to have to wait for a while so if
+[00:42:30] I really want to get out I'm going to
+[00:42:32] need to change that hotkey to sell at
+[00:42:35] the bid now the good news is I already
+[00:42:37] have that hotkey in fact I have a number
+[00:42:39] of hotkeys that are already scripted
+[00:42:41] here uh some of these are very specific
+[00:42:44] and wouldn't be probably relevant to you
+[00:42:46] depending on the share size if you're
+[00:42:47] trading with smaller size uh but some of
+[00:42:49] them would be very helpful so those will
+[00:42:50] be in my the the basic ones that I think
+[00:42:52] are must have are in my layout I don't
+[00:42:55] want you to over complicate it at this
+[00:42:57] point if we pull up um my spare keyboard
+[00:43:00] so spare keyboard here so right now for
+[00:43:04] the way I have it set up shift one is a
+[00:43:06] buy order and I have it for bu 1 2 3 4 5
+[00:43:10] those are all byy orders and the way it
+[00:43:12] works is you press this and if you go 1
+[00:43:14] 2 3 4 5 you'll have sent that order five
+[00:43:17] times you don't have to lift your pinky
+[00:43:19] up you just press and hold and then 1 2
+[00:43:21] 3 4 5 send it and then to sell I do
+[00:43:25] control Z to sell my full position this
+[00:43:28] sells my full position at the bid so
+[00:43:31] let's pull up the hotkey for that cuz
+[00:43:33] that's what we're going to need right
+[00:43:34] now so we're going to go into settings
+[00:43:36] we're going to go to custom orders and
+[00:43:38] we're going to go down to sell bid uh
+[00:43:41] we'll just do full so sell NASDAQ limit
+[00:43:46] bid 10 cents now this is where I find it
+[00:43:50] confusing I actually want to sell 10
+[00:43:52] cents below the
+[00:43:54] bid
+[00:43:55] through is is referring to through
+[00:44:01] so if you have to explain how hotkey
+[00:44:04] works with this type of physical motion
+[00:44:06] they've over complicated it but that's
+[00:44:08] okay so they mean through the bid so
+[00:44:12] because I'm selling going through the
+[00:44:15] bid is going down so 10 cents through
+[00:44:18] the bid is 10 cents below the bid but if
+[00:44:21] you're buying and you're going through
+[00:44:23] the ask just like you're throwing
+[00:44:25] something you're going through the ask
+[00:44:27] 10 cents is going to be above the
+[00:44:30] ask so the problem here is that when
+[00:44:33] we're doing offsets with other platforms
+[00:44:36] this would say offset and you would
+[00:44:38] change it to -10 and it' be a 10cent
+[00:44:41] offset below the bid anyways doesn't
+[00:44:43] matter once you know it you know it so
+[00:44:47] this is 10 cents below the bid and then
+[00:44:49] that's done so if I did this as -10
+[00:44:52] right here if I change that to -10 and I
+[00:44:54] said done and Save uh let's make sure
+[00:44:58] that's saved it put my order at
+[00:45:00] 940 my sell orders 10 cents actually
+[00:45:03] above the bid because I did
+[00:45:06] -10 now that's not what you would that's
+[00:45:09] not how you would want to set up that
+[00:45:10] hotkey if you really wanted to sell your
+[00:45:12] your shares and put a profit Target up
+[00:45:15] there what I would do is I would say
+[00:45:17] sell profit like this and I would say go
+[00:45:20] 10 cents above the ask so it's a profit
+[00:45:23] Target 10 cents above the ask and so I
+[00:45:26] put that one on my button for contrl P
+[00:45:29] for profit Target um actually sorry it's
+[00:45:31] control semicolon that's 10 cents above
+[00:45:34] and that's 20 cents above so those are
+[00:45:37] profit Target hotkeys so you could set
+[00:45:39] those up as well if you wanted to um and
+[00:45:42] now we got to go back in and change that
+[00:45:43] one hotkey for selling on the bid so
+[00:45:45] we're going to go to sell full and we're
+[00:45:49] going to change it to bid take away the
+[00:45:50] minus and now when I press this button
+[00:45:53] what's going to happen instantly Shares
+[00:45:56] are gone
+[00:45:57] gone at
+[00:46:00] 3930 so for me this is how fast I can
+[00:46:05] trade so just jumping in like that and
+[00:46:07] then jumping out jumping in jumping out
+[00:46:09] jumping in jumping
+[00:46:11] out I mean that's only limited by how
+[00:46:14] fast I can type it's how fast it's going
+[00:46:16] through and those are orders that are
+[00:46:18] actually going through the market right
+[00:46:20] here now this is where we should now you
+[00:46:24] understand how to set up the hotkeys and
+[00:46:25] if you download my layout you you'll
+[00:46:27] have all my hotkeys here the hotkeys
+[00:46:28] that I have include um the buying
+[00:46:31] hotkeys the selling on the bid hotkeys
+[00:46:34] selling on the ask hot Keys those are
+[00:46:36] the ones that are most essential and
+[00:46:38] then once you've got those down you want
+[00:46:39] to add some fancy ones for profit
+[00:46:41] targets of course your cancel orders
+[00:46:43] you'll have you want to add stop orders
+[00:46:45] add stop it break even you can do that
+[00:46:48] but don't over complicate it memorize a
+[00:46:51] small set of hot Keys first and then add
+[00:46:53] more from there so now let's talk about
+[00:46:56] the commission structure at light speed
+[00:46:57] light speed is not a commission free
+[00:46:59] broker so this is where at the beginning
+[00:47:01] of this episode I said look at this
+[00:47:03] section over here so I've taken a total
+[00:47:05] of 286 trades today I took 14 of them
+[00:47:09] right there on Ford just for this
+[00:47:12] demonstration so how much do I pay in
+[00:47:14] fees and commissions well let's pull up
+[00:47:16] light speed's website so if you go to
+[00:47:18] light speed
+[00:47:19] trading and you go to pricing right down
+[00:47:22] here and you go to stocks and
+[00:47:24] ETFs you will see that uh price ing is
+[00:47:27] they have two pricing models they have
+[00:47:30] per share right here and they have per
+[00:47:33] trade right here so pricing they
+[00:47:37] advertise as low as $2 per trade which
+[00:47:41] means each time you press that buy
+[00:47:43] button or that sell button and an order
+[00:47:47] gets filled you don't get charged for
+[00:47:49] orders that you cancel but every time
+[00:47:51] you get a partial fill you pay $2 now
+[00:47:54] I've negotiated my rate lower because of
+[00:47:56] how how aggressively I trade and how
+[00:47:58] long I've been trading there but their
+[00:48:00] low rate here they advertise at $2 so
+[00:48:03] that means to take all of these trades
+[00:48:05] today would be almost 600 bucks in fees
+[00:48:09] and Comm in in commissions that is the
+[00:48:11] per Trade Commission so each time you
+[00:48:14] have a trade it counts as a ticket and
+[00:48:17] you pay your your rate which is per
+[00:48:19] trade now per trade for me is cheaper um
+[00:48:23] than per share so per share is 01
+[00:48:27] which means if you take 2,000 shares
+[00:48:30] you're going to pay um $10 let's see $20
+[00:48:33] sorry $20 so you'll pay
+[00:48:36] $20 I'm sorry what am I doing here so 01
+[00:48:40] a th000 shares is a dollar 2,000 shares
+[00:48:42] is $2 so you'll pay $2 so if you're
+[00:48:45] trading with more than 2,000 shares then
+[00:48:48] you might as well switch to per trade so
+[00:48:51] for me 10,000 shares is still only the
+[00:48:53] flat per trade rate 20,000 shares
+[00:48:56] 100,000 shares it's the same this is
+[00:48:59] really only good for people who are
+[00:49:00] trading large caps like Tesla or Netflix
+[00:49:04] who frequently just trade in 50 100 200
+[00:49:06] share blocks moving in moving out anyone
+[00:49:09] who trades more than 2,000 shares you're
+[00:49:11] going to want to be over on the per
+[00:49:12] trade pricing okay so then my fees and
+[00:49:14] commissions today were $286 or 28 well
+[00:49:19] for me it's a dollar per ticket that's
+[00:49:20] what I negotiated it down to so that's
+[00:49:22] you're not going to get that unless
+[00:49:23] you're trading as frequently as I am so
+[00:49:26] I wouldn't expect that but for me it's
+[00:49:28] $286 for all these trades I took today
+[00:49:31] that's it right wrong wrong not even
+[00:49:34] close all right so here's the deal with
+[00:49:37] a commission free broker you have no
+[00:49:40] commissions how does it work commission
+[00:49:42] free Brokers what do they do you send
+[00:49:44] your order this is you right here this
+[00:49:46] is you you say I want to buy this is the
+[00:49:49] broker in the middle and this is the
+[00:49:52] exchange here so this would be um nsdq
+[00:49:56] NASDAQ so the broker typically you take
+[00:50:00] your order it goes through the broker
+[00:50:03] and then the broker sends it to NASDAQ
+[00:50:05] it comes back and then you get your
+[00:50:07] shares filled right so the broker's the
+[00:50:09] inter
+[00:50:10] intermediary until uh they came up with
+[00:50:12] this little idea of payment for order
+[00:50:15] flow and payment for order flow is where
+[00:50:18] your order goes to instead a
+[00:50:22] institutional Market maker or a
+[00:50:24] wholesaler and they actually pay the
+[00:50:26] broker they say broker send all your
+[00:50:29] orders through us we're going to bypass
+[00:50:31] the exchange instead of the exchange
+[00:50:32] making money on this order flow we want
+[00:50:34] to make money on it so the the broker or
+[00:50:37] the market maker pays for the broker to
+[00:50:39] send all their orders through them here
+[00:50:42] and because they're paying for it the
+[00:50:45] broker is now able to give you free
+[00:50:48] trading the only problem is there's a
+[00:50:50] little conflict of interest here which
+[00:50:52] is that the market maker is not
+[00:50:54] incentivized to actually give you the
+[00:50:55] best price their incentive is to make
+[00:50:58] the most money but still they have to
+[00:51:00] give the broker some profit as well so
+[00:51:02] they need to make some money the broker
+[00:51:03] needs to make money and so they're going
+[00:51:05] to give you
+[00:51:07] essentially a good way to put it is
+[00:51:10] they're going to give you
+[00:51:12] the
+[00:51:14] lowest the the lowest price that's uh
+[00:51:17] required by
+[00:51:19] regulation essentially so they're going
+[00:51:21] to give you what some would say is price
+[00:51:25] Improvement but they're going to give
+[00:51:26] you the least price Improvement required
+[00:51:28] by
+[00:51:29] regulation and the rest of the profit
+[00:51:32] they keep for themselves and some of it
+[00:51:34] goes to the broker so in this
+[00:51:37] relationship here you have commission
+[00:51:38] free trading and while they say you get
+[00:51:41] price Improvement uh there's also um a
+[00:51:44] lot of flaws with the system and it's
+[00:51:47] created a deeply segregated Market where
+[00:51:50] these Brokers and all these market
+[00:51:51] makers and all the orders here are
+[00:51:54] completely disconnected from the actual
+[00:51:56] stock market exchange there it's
+[00:51:58] existing in a completely separate pool
+[00:52:01] so if I'm over here and I say I want to
+[00:52:02] buy 50,000 shares and I'm on NASDAQ and
+[00:52:05] you're here and you say you want to sell
+[00:52:07] 50,000 shares we might never see each
+[00:52:09] other because we're divided by this
+[00:52:12] payment for order flow relationship the
+[00:52:14] broker and the market makers are over
+[00:52:16] here and they won't send your order out
+[00:52:18] to the market so we don't get to have
+[00:52:20] our shares actually interact so the
+[00:52:23] problem here for well so for retail
+[00:52:26] Trader trading with small share size
+[00:52:28] commission free trading is great it's
+[00:52:31] cheap it it costs you nothing to trade
+[00:52:33] and do you possibly not as get as good
+[00:52:36] of fills as if you sent your order to
+[00:52:37] the market this is arguable because all
+[00:52:40] these Brokers file these these
+[00:52:42] disclosures that show that you do get
+[00:52:44] price Improvement but what we know is
+[00:52:46] that the order execution speed is slower
+[00:52:48] we know that beyond a shadow of a doubt
+[00:52:50] the execution speed is not as fast as
+[00:52:52] when you send your order directly to the
+[00:52:55] market so you're you're losing speed in
+[00:52:59] exchange for being free but speed is
+[00:53:02] important and so in my opinion it's it's
+[00:53:04] so important because I like to trade
+[00:53:06] breaking news so when news comes out I
+[00:53:08] want to trade and I want to make sure I
+[00:53:09] get in very quickly now obviously I've
+[00:53:12] taken so many trades today I mean I've
+[00:53:14] done a lot of trading but for a lot of
+[00:53:17] those trades certainly earlier in the
+[00:53:18] move execution speed was very
+[00:53:20] important so I pay the commission to my
+[00:53:23] broker but I have additional fees as
+[00:53:26] well
+[00:53:27] and the fees that I have are called the
+[00:53:28] order routing
+[00:53:30] fees so when you send your order to the
+[00:53:34] market this goes through a
+[00:53:37] route and these routes charge a fee it's
+[00:53:42] kind of like a toll booth and so you pay
+[00:53:44] a fee on a per share basis now the
+[00:53:49] broker and this relationship with
+[00:53:51] payment for order flow the reason that
+[00:53:53] you used to pay
+[00:53:55] $9.99 was because the broker was paying
+[00:53:57] this fee to NASDAQ so they were paying
+[00:54:00] the fee for all these orders that would
+[00:54:01] go through and then they would cover it
+[00:54:03] with the commission but in this
+[00:54:05] relationship here the market maker says
+[00:54:08] no no no just send all your orders
+[00:54:10] through us we'll fill the order there's
+[00:54:13] not going to be a routing fee we're
+[00:54:14] going to figure it out ourselves we'll
+[00:54:16] make money on it and so all of a sudden
+[00:54:19] you know the commissions go away and the
+[00:54:21] routing fee is gone so the broker has a
+[00:54:23] big smile and this guy's got a big smile
+[00:54:25] and in theory
+[00:54:27] they'd like us to think that we have a
+[00:54:28] big smile too because we've got free
+[00:54:29] trading but you're only going to be sad
+[00:54:32] if speed is really important to you um
+[00:54:36] and for me it is so I'm going to instead
+[00:54:39] continue going this path here and that
+[00:54:41] means these routes I'm going to continue
+[00:54:43] to use now not as many people use them
+[00:54:45] as in uh previous times but I have I
+[00:54:48] still have to use these routes I still
+[00:54:49] have to pay and the fee is
+[00:54:52] 0.003 per share which means a th000
+[00:54:55] shares equals how much three bucks
+[00:55:00] $3 okay so this is the table at light
+[00:55:03] speed that shows you the fees and they
+[00:55:05] vary depending on which route you use
+[00:55:08] these routes are kind of like different
+[00:55:09] Bridges to the island and the island
+[00:55:11] being the market um you there's
+[00:55:13] different reasons why Traders might
+[00:55:14] choose one route or another some of it
+[00:55:16] is the fees and the rebates that you get
+[00:55:19] um when you send an order to the
+[00:55:21] market and you send an order that's
+[00:55:24] marketable I'll show you an example so
+[00:55:26] this order right here that's marketable
+[00:55:29] so immediately I took liquidity out of
+[00:55:33] the market I took liquidity out of the
+[00:55:35] market because there was someone selling
+[00:55:37] and I took their shares but if I put my
+[00:55:39] order here and it sits and I have to
+[00:55:41] wait and wait and wait until I get
+[00:55:43] filled I'm actually adding liquidity to
+[00:55:46] the market my order is sitting right
+[00:55:48] there and now if someone else wants to
+[00:55:49] come and take that from me they can take
+[00:55:51] it in an instant and the order will be
+[00:55:53] gone so I would actually get get a
+[00:55:56] rebate for adding liquidity to the
+[00:55:59] market and someone else would pay the
+[00:56:01] fee this is called a maker taker fee
+[00:56:03] structure and so if I sell this now what
+[00:56:06] you'll see is that I bought 3700 shares
+[00:56:10] or sorry I bought that many I also sold
+[00:56:12] that manyy and I traded 7500 shares and
+[00:56:16] how much liquidity did I add to the
+[00:56:18] market zero I added zero liquidity to
+[00:56:21] the market so now we got to do the math
+[00:56:24] 7500 shares all right so I got 7500
+[00:56:26] shares there on that stock um we'll just
+[00:56:29] do it here doesn't matter so 7500
+[00:56:33] shares times
+[00:56:36] .3 so 7 * 3 is 21 so approximately $21
+[00:56:42] approximately that's $21 plus don't
+[00:56:45] forget I had to pay the commission now
+[00:56:47] this is the fee just to route right here
+[00:56:49] that goes to who NASDAQ nsdq that goes
+[00:56:53] to the exchange and then the one buy
+[00:56:55] order the one sell order at the standard
+[00:56:58] rate that' be $4 that goes to who light
+[00:57:01] speed cuz that's their commission so
+[00:57:03] that means this was a $25 order right
+[00:57:05] there that was 25 bucks for that
+[00:57:07] order so here's what I've learned um if
+[00:57:12] I'm trading a stock and I can only make
+[00:57:16] five well I don't know maybe three two
+[00:57:18] or three cents on it it's not worth it
+[00:57:21] because of fees and commissions so for
+[00:57:23] me my fees and commissions today because
+[00:57:26] I traded 700,000 shares would be
+[00:57:28] approximately
+[00:57:30] $2,100 well almost
+[00:57:32] $2,400 cuz we're close to $800,000
+[00:57:34] shares
+[00:57:36] 2,400 plus another 300 right here we'll
+[00:57:40] just round up so we're getting close to
+[00:57:42] 20
+[00:57:43] $2,700 but I got rebates for adding
+[00:57:47] liquidity on 200,000 shares and what's
+[00:57:50] the rebate well the rebate is just
+[00:57:51] slightly less but it's about the same so
+[00:57:54] now I'm actually going to pick up about
+[00:57:56] $600 in rebates so my net out of pocket
+[00:58:00] is around
+[00:58:01] $2,000 and typically it's about 10% of
+[00:58:04] my profit now today it's a little less
+[00:58:05] than that and I'm okay with that this to
+[00:58:08] me is the cost of doing business I have
+[00:58:11] done um small account challenges and
+[00:58:13] I've done um a a challenge where I
+[00:58:16] traded side by side with someone who was
+[00:58:17] using a commission free broker and we
+[00:58:19] just tested like how how do we do and I
+[00:58:22] outperformed them I did better I did
+[00:58:23] better because I was able to trade
+[00:58:25] faster when the stock had breaking news
+[00:58:27] and it was squeezing my order was filled
+[00:58:29] and it was filled instantly when a stock
+[00:58:31] was dropping I needed to get out boom I
+[00:58:32] was out it was gone instantly so that
+[00:58:35] fast execution to me is worth paying for
+[00:58:39] it helps me avoid outsize losses it
+[00:58:41] helps me get in sooner and in fact if
+[00:58:45] you really think about it 700,000 shares
+[00:58:48] traded total today so 700,000 shares I
+[00:58:51] mean that's obviously a a really a lot
+[00:58:53] of shares I I trade quite a lot today
+[00:58:56] but if my execution was improved by
+[00:59:01] let's just say even half a penny even if
+[00:59:05] I got just half a cent of better
+[00:59:08] execution because my execution was
+[00:59:10] faster and I was able to get in where I
+[00:59:13] wanted and get out where I wanted let's
+[00:59:15] just do the math so what's let's jump
+[00:59:17] back onto the Whiteboard okay so we're
+[00:59:19] going to do we'll just we'll we'll Round
+[00:59:20] Up to 800,000 shares just to make the
+[00:59:22] math easier so 800,000 shares and let's
+[00:59:25] just say I got got um price Improvement
+[00:59:28] time
+[00:59:30] 05 that's half of a penny if I got a
+[00:59:33] half penny of better execution how much
+[00:59:36] would that have uh saved me today
+[00:59:39] $4,000
+[00:59:40] $44,000 and that's just on half a penny
+[00:59:43] now it's and and we're talking about
+[00:59:46] averages right there could be a number
+[00:59:48] of Trades that I would have gotten the
+[00:59:49] same more or less executions anyone else
+[00:59:51] but it could be that there were a few
+[00:59:54] trades that were very critical where I
+[00:59:56] had big size and where I absolutely
+[00:59:58] needed to be in at that moment to
+[01:00:01] capitalize on a 50 Cent per share
+[01:00:03] breakout and if I hadn't gotten in I
+[01:00:05] would have missed the whole thing right
+[01:00:07] well all of a sudden that one trade
+[01:00:08] makes the whole difference it makes the
+[01:00:10] day now I'll just show you as an example
+[01:00:12] there was there were a couple trades
+[01:00:13] just like that today so here on um let's
+[01:00:17] see the stock that I made the most on
+[01:00:18] earlier was W so this has sold off quite
+[01:00:22] a bit but nonetheless earlier today when
+[01:00:23] it was squeezing up I had a couple of
+[01:00:26] really nice trades on it and this was
+[01:00:29] one that I got right here so right here
+[01:00:32] it popped up over five it pulled back
+[01:00:34] and then it pulled away and in that
+[01:00:36] moment right there I got in at 507 and
+[01:00:39] it squeezes up to about you know 540 so
+[01:00:42] that little trade right there the
+[01:00:43] difference of execution speed for me
+[01:00:45] getting in at 507 508 and someone else
+[01:00:49] because the second it broke out we just
+[01:00:51] zoom in on the 10-second chart you look
+[01:00:53] at how big some of these 10-second
+[01:00:55] candles are
+[01:00:56] and you realize that wow the difference
+[01:00:59] in execution speed um you know of
+[01:01:02] potentially seconds uh is scary right so
+[01:01:07] I'm in right down here at 507 two
+[01:01:10] seconds later 3 seconds later it's at
+[01:01:12] 518 then 528 530 540 right
+[01:01:17] so uh you know now you could be you
+[01:01:20] could say Ross you're just rationalizing
+[01:01:22] you're paying a lot in fees and
+[01:01:23] commissions and it's really not worth it
+[01:01:25] um but I I really I I I disagree I've
+[01:01:28] traded with commission free Brokers and
+[01:01:31] uh I think they're great for smaller
+[01:01:34] accounts but I think at a certain point
+[01:01:37] you're going to want the advanced order
+[01:01:40] routing that you get with these types of
+[01:01:42] Brokers so another type of order that
+[01:01:44] they offer um is what's called a super
+[01:01:47] smart order so a super smart order down
+[01:01:50] here I'll show you this one um we'll do
+[01:01:52] this for whatever 2,000 shares so with
+[01:01:55] this does is this sends your order to
+[01:01:58] four different markets at the exact same
+[01:02:00] second and what it does is it tries to
+[01:02:03] extract liquidity and pull your order
+[01:02:05] from the market before the market makers
+[01:02:07] have a chance to jump out of the way so
+[01:02:09] if I press this order this is going to
+[01:02:10] be a little expensive but I'll do it
+[01:02:12] anyways so that filled and that actually
+[01:02:15] went so both of these although they're
+[01:02:18] super smart orders they went through
+[01:02:21] instantaneously but you can see here the
+[01:02:23] way it filled in um sort of these clumps
+[01:02:26] right there and now I'm going to do a
+[01:02:29] super smart sell order so I'm going to
+[01:02:30] go like this but it's it's just it's so
+[01:02:34] fast it's instantaneous I mean it's you
+[01:02:36] can't even it's hard to even tell but
+[01:02:38] that's the type of routing that you can
+[01:02:40] use and over it um thinker
+[01:02:43] swim you get nothing you can't do
+[01:02:46] anything you get the buy button you want
+[01:02:48] to do, 1500 shares you know buy Market
+[01:02:51] all right you're in okay you want to
+[01:02:54] sell sell Market
+[01:02:56] you're out right in and out ends up
+[01:02:59] being a break even trade whatever but
+[01:03:03] it's you try doing that with 15,000
+[01:03:05] shares 25,000 shares 30,000 shares and
+[01:03:08] you're going to have some problems so
+[01:03:10] you just don't have the ability to
+[01:03:12] customize and one thing that you can do
+[01:03:13] at light speed which is nice is you can
+[01:03:16] hide your orders you can hide your
+[01:03:18] shares so this is something that you're
+[01:03:20] allowed to do uh you don't have to tip
+[01:03:22] your hat to the entire Market if you're
+[01:03:24] trying to sell half a millon ion shares
+[01:03:26] now I don't hold half million share
+[01:03:28] positions but just the very fact that
+[01:03:30] you can do that is nice so here's the
+[01:03:33] problem let's say you've got a 100,000
+[01:03:35] share position and you want to sell half
+[01:03:37] of it putting a 50,000 share sell order
+[01:03:40] inherently could hurt your own position
+[01:03:42] because other people will see oh
+[01:03:43] someone's trying to unload 50,000 shares
+[01:03:46] So to avoid you having to hurt yourself
+[01:03:48] by tipping your hand that you're trying
+[01:03:49] to unload you can hide your shares so
+[01:03:53] direct access Brokers and Brokers that
+[01:03:55] really cater to active Traders
+[01:03:57] institutional Traders they'll allow you
+[01:03:59] to hide your shares so now you're
+[01:04:02] putting your order out there and it's a
+[01:04:04] hidden order now we talk about that
+[01:04:06] quite a bit when we're talking about how
+[01:04:07] to read level two tape reading because
+[01:04:09] you'll you'll detect hidden orders on on
+[01:04:11] the book but it's really a small group
+[01:04:13] of traders that even have the ability to
+[01:04:15] do that because most people don't know
+[01:04:16] how to do it so I'm just thinking that
+[01:04:20] if you're really serious about this once
+[01:04:22] you get to the point of proving
+[01:04:24] consistency and profitability on a
+[01:04:26] platform like Weeble or thinker swim
+[01:04:28] which again you know the half penny that
+[01:04:30] you're saving it doesn't really matter
+[01:04:32] when you're trading 8,000 shares a day
+[01:04:34] right so you're trading 880,000 shares a
+[01:04:36] day all right maybe that's 400 bucks you
+[01:04:39] know you're trading 8,000 shares a day
+[01:04:41] maybe it's 40 bucks right you start to
+[01:04:43] get to a point where H is it really
+[01:04:45] worth it for the fees and commissions
+[01:04:47] where's the line now you have to decide
+[01:04:49] for yourself but for a smaller account
+[01:04:52] this isn't going to be the difference
+[01:04:53] between break even and profit Prof it's
+[01:04:56] not going to be the difference between
+[01:04:57] winning and losing but it can be the
+[01:04:59] difference between uh someone who's
+[01:05:01] making money making quite a bit more in
+[01:05:04] my opinion that's that's the way I look
+[01:05:06] at it so now let's pull up our broker
+[01:05:07] comparison sheet so we've certainly
+[01:05:09] talked about the fees and commissions
+[01:05:11] and that's going to be no doubt the
+[01:05:13] biggest um the biggest drawback so
+[01:05:16] here's light speed trading and we've got
+[01:05:18] the two platforms that you could that
+[01:05:20] well you could use Sterling as well they
+[01:05:21] have a couple different platforms that
+[01:05:22] they offer U I don't know if we still
+[01:05:24] have their their page up but but it
+[01:05:26] doesn't matter so um I the two that I've
+[01:05:30] really considered seriously is Light
+[01:05:31] Speed Trader and dash Trader so let's go
+[01:05:34] to the top I give light speed trading a
+[01:05:36] Ross score of a nine the execution speed
+[01:05:39] is second to none they're so fast I
+[01:05:42] absolutely love it now I've used Center
+[01:05:44] Point um they felt pretty much as fast
+[01:05:47] but they didn't have some of the
+[01:05:49] advanced routing and proprietary
+[01:05:51] technology that light speeded has um
+[01:05:53] cmeg is definitely slower Center ocean
+[01:05:56] one haven't used it with real money
+[01:05:57] myself so I've only watched people and
+[01:06:00] so I can't say for certain trade zero
+[01:06:02] these ones are disclosed and these are
+[01:06:03] their speeds and they're all the
+[01:06:05] commission free Brokers that offer
+[01:06:07] commission free trading I mean the the
+[01:06:09] fastest ones trade station 04
+[01:06:13] seconds I mean it's it's longer look for
+[01:06:17] a lot of Traders it might not make the
+[01:06:18] difference but if you're trying to trade
+[01:06:20] breaking news and something that's
+[01:06:21] moving fast it does so here execution
+[01:06:25] speed boom we got it do we have
+[01:06:27] reliability we've got that too but we
+[01:06:29] have the cost so it's actually um I'm G
+[01:06:32] to reduce this $2 per trade they
+[01:06:34] recently reduced it it was 295 now it's
+[01:06:36] two so $2 per trade now one thing I'll
+[01:06:39] say is that light speed is $2 per trade
+[01:06:42] guardian and Centerpoint are per share
+[01:06:45] so if you go over to Centerpoint
+[01:06:48] Securities um which is another um
+[01:06:51] popular broker and it is popular also
+[01:06:55] because they accept Canadians um you go
+[01:06:57] to
+[01:06:58] pricing and their pricing is um is per
+[01:07:01] share equities as low as
+[01:07:03] 01 so that means if you do a 50,000
+[01:07:06] share buy order it's 50 bucks if I do a
+[01:07:10] 50,000 share buy order how much am I
+[01:07:11] paying the flat rate right yes you still
+[01:07:15] pay the routing fee but this is where
+[01:07:17] the fees are split between routing fees
+[01:07:19] and the commission to the broker so
+[01:07:21] centerp Point uh and guardian are both
+[01:07:23] more expensive and CMG is Al I mean
+[01:07:26] these are all so as far as uh this type
+[01:07:28] of broker goes I think light speed is
+[01:07:30] the least expensive uh do you get direct
+[01:07:32] routing yes and you get a lot of
+[01:07:34] customized routing as well that's true
+[01:07:36] with all of these platforms um do you
+[01:07:38] get price Improvement no you don't get
+[01:07:40] price Improvement because you're not
+[01:07:41] part of the payment for orderflow system
+[01:07:43] do you pay routing fees yes you do so
+[01:07:46] this is where you know and maybe I
+[01:07:49] should make this red because this is
+[01:07:50] this is where things get expensive it's
+[01:07:52] really the routing fees that cost a lot
+[01:07:53] of money it's not the it's not not
+[01:07:55] really the per ticket the PDT rule yes
+[01:07:58] they enforce the PDT rule they're a US
+[01:08:00] broker dealer the only ones that don't
+[01:08:02] would be CM ocean one trade zero but not
+[01:08:07] they don't accept us residents uh and
+[01:08:09] then Weeble if you're at one of the
+[01:08:11] international branches four times
+[01:08:13] leverage that's standard the only ones
+[01:08:15] that offer six times leverage are these
+[01:08:16] three that are international paper
+[01:08:19] trading yes they offer it minimum
+[01:08:20] account size 10,000 but they require the
+[01:08:23] PDT rule so they really require 25,000
+[01:08:26] to day trade short inventory inventory
+[01:08:29] is good it's not as good uh as guardian
+[01:08:32] or Center Point those two are a little
+[01:08:34] bit better extended hours 4:00 a.m. to
+[01:08:36] 8:00 p.m. excellent desktop experience
+[01:08:39] level two fantastic works great hot Keys
+[01:08:42] offsets selling by percentage of
+[01:08:44] position halt levels and halt
+[01:08:46] resumptions yes so on our level two we
+[01:08:49] can see where a stock is going to be
+[01:08:50] halted let's see um is it this one so
+[01:08:53] 694 is the halt level lld in Red so 568
+[01:08:59] going down so the way we see that is we
+[01:09:01] go into um let's see highlights and we
+[01:09:06] add for all and we add
+[01:09:09] lld and then you just change the color
+[01:09:11] to what you want it to be you say okay
+[01:09:14] and then you click add and it's done
+[01:09:16] well I already added it but that's the
+[01:09:17] way you do it so you can see the halt
+[01:09:20] levels and when a stock is halted you
+[01:09:21] can see resumption prices you do get
+[01:09:23] Advanced order routing the super smart
+[01:09:25] fan orders you can do pegged orders at
+[01:09:27] light speed you can hide your shares as
+[01:09:29] well you'd be able to do that with
+[01:09:31] guardian and Centerpoint as well um not
+[01:09:33] sure about hiding shares with these ones
+[01:09:36] not sure charting so you may have
+[01:09:39] noticed where are the charts light
+[01:09:42] speeds charts aren't very good um in the
+[01:09:45] past you know we saved so much money
+[01:09:48] with a discount broker versus a retail
+[01:09:50] broker that we didn't mind just paying
+[01:09:52] for a third party charting vendor uh
+[01:09:55] today a lot of platforms like Weeble um
+[01:09:58] have pretty nice charts but I'm
+[01:10:01] accustomed to using a third-party
+[01:10:02] platform we've built out day trade Dash
+[01:10:04] which is for charting scanning news feed
+[01:10:07] and of course the um my live audio video
+[01:10:10] broadcast so um this is this is what I
+[01:10:13] use for charting and scanning and it's
+[01:10:15] separate from U from light speed so they
+[01:10:19] don't they don't perform well in my
+[01:10:20] opinion on charting uh and that's a
+[01:10:23] concession they don't have have sub one
+[01:10:25] minute time frames they don't accept
+[01:10:27] Canadians they do accept International
+[01:10:29] accounts but just not from Canadians
+[01:10:31] Market data costs about $67 a month and
+[01:10:35] then yes they allow retirement accounts
+[01:10:36] and OTC stocks they do have a new crypto
+[01:10:39] division but it's separate and they have
+[01:10:41] some Forex and Futures so they get a
+[01:10:43] nine this is the highest um platform the
+[01:10:46] only thing that I've ranked and reviewed
+[01:10:49] the only things that would make it
+[01:10:51] better would be if um the routing fees
+[01:10:55] were able to go lower which they don't
+[01:10:56] really have any control over and you
+[01:10:58] would pay the same thing with all these
+[01:10:59] other Brokers um I think their platform
+[01:11:02] could use some improvements um you know
+[01:11:05] some things could be a little bit more
+[01:11:06] intuitive setting up hot Keys linking um
+[01:11:10] you know easy to borrow hard to borrow
+[01:11:12] but at the same time if it's not broken
+[01:11:14] like don't mess with it and it works
+[01:11:16] really well and I would hate to see them
+[01:11:18] do something like what you know
+[01:11:19] interactive brokers or Fidelity or Robin
+[01:11:22] Hood you know have done where they say
+[01:11:24] oh we're going to launch a brand new
+[01:11:26] platform you know and all of a sudden
+[01:11:28] they're like here it is Robin Hood
+[01:11:31] Legend where's the level two ah we don't
+[01:11:33] have that where are the hot Keys ah we
+[01:11:35] don't have that either wait a second
+[01:11:36] what are we doing here this is not a
+[01:11:37] serious platform this is not for serious
+[01:11:39] Traders so that's the last thing we
+[01:11:42] would want so small enhancements small
+[01:11:44] improvements would be great but don't I
+[01:11:46] I certainly hope they don't do anything
+[01:11:48] too big because I wouldn't want to lose
+[01:11:50] all the great functionality that they
+[01:11:51] have so that's the platform demo that's
+[01:11:54] my h review and I would be um thrilled
+[01:11:57] if you guys leave me comments of other
+[01:11:59] Brokers that you'd like me to do
+[01:12:00] Platform demos of you can leave those in
+[01:12:02] the comments down below any questions
+[01:12:03] feel free to throw them down there as
+[01:12:05] well and I want to thank you as always
+[01:12:06] for tuning in to the special episode so
+[01:12:08] I will see you for the next upload real
+[01:12:09] soon
+[01:12:11] [Music]

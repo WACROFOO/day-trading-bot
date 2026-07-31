@@ -1,0 +1,1897 @@
+# How Danny Scaled his Day Trading Strategy from $10/day to $350k/Year
+# https://www.youtube.com/watch?v=M07xElrhVYM
+# duration_sec: 4861
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to sit down
+[00:00:03] with one of my students his name is
+[00:00:04] Danny he's earned his profitability
+[00:00:06] badge here at Warrior trading and I want
+[00:00:07] you to hear his story from going from a
+[00:00:10] Trader who knew nothing about the market
+[00:00:12] all the way up to what is now a
+[00:00:13] six-figure Trader sitting on his best
+[00:00:15] year of his entire career right now I'll
+[00:00:19] remind you as always my results aren't
+[00:00:20] typical and neither are Danny's we don't
+[00:00:22] track the typical result of every Trader
+[00:00:24] who's in our community using our
+[00:00:26] software or in the classes but we do
+[00:00:28] have a program where we will verify
+[00:00:31] traders who want to share with us their
+[00:00:32] broker statements and prove that they
+[00:00:34] are profitable and Danny has done that
+[00:00:36] he's earned his profitability badge and
+[00:00:38] let's sit down and hear from him about
+[00:00:41] his experience learning to trade he's
+[00:00:43] got some big ups and some big Downs as
+[00:00:46] many Traders do and I think he's going
+[00:00:48] to share with you some words of wisdom
+[00:00:50] and some tips and tricks that you can
+[00:00:52] Implement in your own trading today so
+[00:00:54] let's go ahead and dive in with this
+[00:00:56] interview with Danny all right first
+[00:00:58] question so we're going to start at the
+[00:00:59] top I want you to tell us what your life
+[00:01:02] was like before you started trading so
+[00:01:05] we can kind of understand this
+[00:01:07] transformation that has happened since
+[00:01:09] you began so what was life like for you
+[00:01:11] before you started
+[00:01:12] trading um I think my life looked very
+[00:01:16] similar to probably most people's life I
+[00:01:19] had a 9 to-5 job which I eventually left
+[00:01:23] and this is probably where my life
+[00:01:26] starts to look a little bit different
+[00:01:27] than most people's I started working
+[00:01:29] with my dad doing supply chain
+[00:01:32] Consulting and software sales and um it
+[00:01:36] was fairly part-time was definitely
+[00:01:39] keeping me afloat but I was also looking
+[00:01:41] for other things for income so I started
+[00:01:43] coaching a swim team I started doing
+[00:01:46] some photo and video
+[00:01:48] work um and at some point probably after
+[00:01:52] about two years of that I just kind of I
+[00:01:55] was looking at my accounts and they
+[00:01:58] weren't growing um I was just kind of
+[00:02:00] keeping myself afloat which was good but
+[00:02:02] I was like I need to figure something
+[00:02:04] else out cuz I'm just not like I want to
+[00:02:06] be I want to be stacking for retirement
+[00:02:09] you know when you say accounts do you
+[00:02:11] mean like retirement accounts or like
+[00:02:13] just bank accounts just like bank
+[00:02:15] accounts yeah I wasn't really saving at
+[00:02:18] all I was kind of just like getting by
+[00:02:20] doing okay but um didn't have much
+[00:02:23] wiggle room and and I just needed to
+[00:02:26] figure something out to actually give
+[00:02:28] myself like a potential
+[00:02:30] retirement um and so back in college my
+[00:02:35] one of my housemates had done some swing
+[00:02:37] trading and so I kind of had an
+[00:02:38] introduction to it at that point and I
+[00:02:40] was interested in it always knew that I
+[00:02:42] had some interest in it um and then it
+[00:02:46] was like December of 2019 I would say is
+[00:02:51] when I think the story that I uh I have
+[00:02:55] in my mind is that YouTube recommended
+[00:02:57] some some trading guide to me I took a
+[00:03:00] look at some of his videos it was
+[00:03:02] interesting still and um and I got into
+[00:03:06] it um I was definitely scared of trading
+[00:03:10] at first there's a lot of misconceptions
+[00:03:12] or not even misconceptions just bad
+[00:03:14] reputation about losing your money you
+[00:03:17] know many people make it out and
+[00:03:20] actually become profitable so I was
+[00:03:23] definitely tentative and scared um but I
+[00:03:26] dove in and I just started trying to
+[00:03:28] learn as much as I possibly could and
+[00:03:29] then um so that was like January of 2020
+[00:03:33] and and here we are about 5 years later
+[00:03:37] right so you you basically you came in
+[00:03:39] at such an interesting time because it
+[00:03:41] was like coming right into the beginning
+[00:03:43] of the pandemic and then the lockdown
+[00:03:45] did you start with real money right away
+[00:03:48] or how did you approach that I did yeah
+[00:03:52] and I I had no idea I didn't even start
+[00:03:54] trading because of the pandemic or
+[00:03:56] anything like that it just happened to
+[00:03:58] happen um yeah
+[00:04:00] I did start trading with real money I
+[00:04:02] opened an account with TDM trade with
+[00:04:03] $500 in it um because like I said I was
+[00:04:07] afraid of losing that money and and I
+[00:04:09] again I didn't have much money that I
+[00:04:12] could afford to lose um so I was trading
+[00:04:15] really really small size I was trading
+[00:04:17] like 10 to 25 shares and I remember
+[00:04:21] like10 to
+[00:04:23] $20 on a day green or red was um like a
+[00:04:29] normal amount I remember if I made that
+[00:04:31] was a good day yeah totally my yeah
+[00:04:34] that's a really good day I let me just
+[00:04:36] jump on the Whiteboard here so um I just
+[00:04:39] want to show people because this is kind
+[00:04:40] of this is kind of incredible this is
+[00:04:42] something I talk about all the time so
+[00:04:44] if you're trading with an average of 10
+[00:04:46] shares and you're making $10 a day let's
+[00:04:50] just scale that up you go to a 100
+[00:04:52] shares you're making a $100 a day you go
+[00:04:55] to a th000 shares you're making $1,000 a
+[00:04:58] day if you go you know I mean you go
+[00:05:00] 10,000 shares but you could see where
+[00:05:02] we're going here this is like incredible
+[00:05:05] for proof of concept I'm kind of blown
+[00:05:08] away because to be honest pulling a
+[00:05:10] dollar a share out of the market you
+[00:05:13] know usually I say like 10 cents 20
+[00:05:15] cents a share so how what were you
+[00:05:17] trading to pull a dollar a share out of
+[00:05:18] the market well and so we we trade a
+[00:05:21] little bit different you trade less than
+[00:05:22] I do and so I've always kind of had um a
+[00:05:27] correlation in my mind of the share size
+[00:05:30] that I'm using if I'm on a good day my
+[00:05:33] p&l is going to look kind of like my
+[00:05:35] typical share size that I'm using that
+[00:05:37] day so if I'm if I worked up to using
+[00:05:41] like a regular average of a thousand
+[00:05:43] shares across all of my trades for the
+[00:05:46] day I would think that $1,000 for the
+[00:05:48] day is like I did okay I did pretty well
+[00:05:52] um but that's not to say that there
+[00:05:54] weren't all of those days that were like
+[00:05:57] $3 or $5 and then some of the red days
+[00:06:00] too so I started with $500 in my account
+[00:06:04] quickly realized two things number one
+[00:06:07] that wasn't really going to get me
+[00:06:08] anywhere and number two was that I
+[00:06:11] probably wasn't going to lose all of my
+[00:06:13] money right away so I added you know a
+[00:06:16] couple hundred here and there couple
+[00:06:18] thousand here and there taking from
+[00:06:21] pretty much all that I had saved from
+[00:06:23] retirement or you know from my last
+[00:06:26] full-time job which was like pretty much
+[00:06:28] 25,000 that I had okay um keeping me
+[00:06:32] afloat in my checking account yeah um so
+[00:06:35] I I got myself to the point of having
+[00:06:37] like 5,000 or so in my TD account um but
+[00:06:41] there were definitely days that like I
+[00:06:43] remember in um I think it was like March
+[00:06:46] and April of 2020 just a few months
+[00:06:48] after I had
+[00:06:49] started I averaged down into a bad trade
+[00:06:54] or just held too long got caught in an
+[00:06:56] offering I think I remember all three of
+[00:06:59] those things happening and there were
+[00:07:01] two two or three days within like a week
+[00:07:04] or two of each other that were like
+[00:07:06] negative 300 days and they those days
+[00:07:10] were crushing um I remember I almost
+[00:07:13] quit and um so there were those days too
+[00:07:17] but I was determined and I was just
+[00:07:21] looking at like how can I make those
+[00:07:23] days further apart and less bad when
+[00:07:26] they do happen cuz at the same time I
+[00:07:28] hadn't joined Warrior yet but you were
+[00:07:32] like my entire focus of content of what
+[00:07:35] I was watching on YouTube at that point
+[00:07:36] I was watching every single daily recap
+[00:07:39] I was watching like pretty much every
+[00:07:41] video that you had posted on your
+[00:07:43] channel previously and so I knew that
+[00:07:46] that was kind of normal and typical um
+[00:07:49] but I also knew that the way to get
+[00:07:52] through that and to get into
+[00:07:54] profitability was to figure out how to
+[00:07:56] make those red days hopefully less big
+[00:07:59] less hurtful and also further apart and
+[00:08:02] that's that's pretty much what I started
+[00:08:05] doing and started kind of making some
+[00:08:07] progress from there so then what would
+[00:08:08] you say in the first couple of months
+[00:08:12] was your
+[00:08:13] primary like what was your go-to setup
+[00:08:16] what what was your like this is the
+[00:08:18] setup I'm trading to you know make money
+[00:08:22] um so when I started trading like right
+[00:08:25] at the beginning I you were still
+[00:08:29] brought casting on YouTube at that point
+[00:08:31] and so I would watch a lot of your
+[00:08:33] videos and or I'd be following along I
+[00:08:36] wasn't trading with you or I wasn't
+[00:08:38] trying to like mirror trade you but I
+[00:08:40] started realizing that a lot of the
+[00:08:43] trades I was getting into I was buying
+[00:08:44] the tops and selling the bottoms and
+[00:08:47] okay I was like doing the inverse of you
+[00:08:49] at that time yeah and I think basically
+[00:08:53] I just had the
+[00:08:54] realization if I do the opposite if I
+[00:08:57] buy the bottom even though it feels
+[00:08:59] scary and I'm a beginner and I don't
+[00:09:01] know exactly where the bottom ends yet
+[00:09:04] if I buy down at the bottom on a stock
+[00:09:07] that is in a strong pattern um I have a
+[00:09:10] much better chance of having a green
+[00:09:13] trade and so that's kind of where I
+[00:09:15] initially started to find a little bit
+[00:09:17] of Edge and some profitability or at
+[00:09:20] least that my stats were improving so
+[00:09:22] was were were those like dip trades
+[00:09:24] would you say or just buying on
+[00:09:26] pullbacks like as it was curling back up
+[00:09:29] yeah more so dip trades so like fast
+[00:09:32] fast types of like it dropped yeah I
+[00:09:34] don't totally know where the bottom is
+[00:09:36] yet I'm not even good at reading level
+[00:09:37] two or the tape yet but I know that it's
+[00:09:41] not going to go probably a whole lot
+[00:09:42] lower if I buy here and there's a good
+[00:09:44] chance that it might bounce so um
+[00:09:47] interesting so then were you using like
+[00:09:50] I I mean I love that strategy and that
+[00:09:52] is a strategy that at the beginning of
+[00:09:55] the pandemic when I was running that
+[00:09:58] live stream on YouTube that was like
+[00:10:00] we're all in lockdown I'm just going to
+[00:10:02] run this live stream we're going to
+[00:10:03] trade you know together whatever so that
+[00:10:05] was during that period And I I remember
+[00:10:08] that was when I kind of developed that
+[00:10:11] setup or that strategy because I mean I
+[00:10:14] was trading the breakouts you know i' bu
+[00:10:16] into the breakout but then you know we
+[00:10:18] would see these flushes and some of them
+[00:10:20] were kind of dramatic you would see like
+[00:10:23] a 50 Cent flush and I just started
+[00:10:27] noticing this pattern that they kept
+[00:10:29] bouncing back up yeah yeah totally so I
+[00:10:33] was like if I buy this dip then I mean
+[00:10:36] look they can go lower but I'm going to
+[00:10:38] buy the dip so essentially what I was
+[00:10:39] looking for was anytime something
+[00:10:42] dropped it like a 10-cent drop not
+[00:10:45] really enough it needs to well what was
+[00:10:47] it for you what did you feel like you
+[00:10:48] needed to say like I'll buy this dip
+[00:10:50] what did I need to see to buy the dip um
+[00:10:54] yeah I agree not not like a 10cent drop
+[00:10:56] but I think I would probably describe it
+[00:10:59] more as like maybe even a false breakout
+[00:11:03] or a quick pop above a psychological or
+[00:11:08] technical level like half dollar whole
+[00:11:10] dollar um or some sort of daily level
+[00:11:15] and if it if it's the first time in the
+[00:11:18] day that it pops over that level usually
+[00:11:20] it's going to pop over it for just a
+[00:11:22] second and then people are going to sell
+[00:11:23] because we don't know if it's going to
+[00:11:24] hold yet right and so you'll see the
+[00:11:27] selling and um for me I would usually
+[00:11:31] like
+[00:11:32] visually I I wouldn't go by cents like
+[00:11:35] 10 cents 20 cents or whatever I would
+[00:11:37] like to see the red candle come down
+[00:11:41] probably like a third to half of the
+[00:11:44] previous green
+[00:11:45] candle a quick amount of profit taking
+[00:11:49] okay it still maintained the chart
+[00:11:52] looking uh bullish overall or it could
+[00:11:56] even be a little bit more than that um a
+[00:11:58] little bit more of a drop as long as it
+[00:12:01] kind of like stopped and we saw that
+[00:12:03] there were people buying it at that
+[00:12:05] point so let me whiteboard this because
+[00:12:07] this is another one of those kind of um
+[00:12:10] things I think is help helpful to
+[00:12:11] visualize so when you get let's say you
+[00:12:13] know three green candles in a row and
+[00:12:15] then maybe you get two small candles you
+[00:12:16] get the formation of a bull flag it pops
+[00:12:19] back up you surge back higher you pull
+[00:12:22] back and let's say this next pullback is
+[00:12:24] right underneath a critical level like
+[00:12:27] $6 right and maybe that's that's a daily
+[00:12:30] level or sort of resistance we see that
+[00:12:32] kind of pop up and then that jack knife
+[00:12:35] candle where it ends up flushing back
+[00:12:38] down so initially it's green and then it
+[00:12:40] goes red that dip there if you get a B
+[00:12:44] if you get a drop and it drops down 203
+[00:12:47] cents but you're still generally you
+[00:12:50] know trending up you're still above your
+[00:12:51] 9 EMA you're still above your 20 EMA
+[00:12:54] you're still above your vwap then even
+[00:12:57] though you get that short-term Lush the
+[00:13:00] trend is still bullish so if you stepped
+[00:13:02] back and you looked at this on a 5minute
+[00:13:04] chart maybe a 5minute pattern would I
+[00:13:06] mean it's it would still look really
+[00:13:07] bullish yeah very different from buying
+[00:13:10] something that's like at low of day or
+[00:13:13] is below vwap right yeah so we're so
+[00:13:17] then so you're primarily trading stocks
+[00:13:19] that they have to have some momentum but
+[00:13:21] give give me kind of like the breakdown
+[00:13:23] of your go-to in terms of maybe price
+[00:13:26] and flow and news or not news so at that
+[00:13:29] point I really didn't have a a great
+[00:13:35] understanding of what I traded best so
+[00:13:37] we're talking like 2020
+[00:13:40] 2021 when most things were going up and
+[00:13:45] so you could get into a position and the
+[00:13:47] market would be very forgiving and so
+[00:13:49] what what happened was um I became
+[00:13:52] profitable pretty quickly but I didn't
+[00:13:54] develop a great understanding of my best
+[00:13:57] price range and best like float and how
+[00:14:01] stocks um move differently depending on
+[00:14:05] their float or okay the different
+[00:14:07] fundamentals behind them like how much
+[00:14:09] dilution do they have is the company
+[00:14:11] potentially selling in this move and
+[00:14:13] right stuff like that if you saw
+[00:14:15] something moving you were trading it it
+[00:14:17] might be AMC or GameStop or it could it
+[00:14:21] Flo Tesla it could be anything but if it
+[00:14:23] was you were interested yeah exactly and
+[00:14:26] it's it's funny you mention Tesla
+[00:14:27] actually because um that is where I
+[00:14:30] pretty much initially found
+[00:14:31] profitability was um this was like
+[00:14:34] probably five or six splits ago at this
+[00:14:37] point so that it trades very differently
+[00:14:39] now but um I was dip trading Tesla
+[00:14:42] because it it bounced well um and I got
+[00:14:46] pretty good at reading it so every stock
+[00:14:49] is like its own Little Snowflake and so
+[00:14:51] especially for large caps there's people
+[00:14:53] who trade just like the same couple
+[00:14:56] large cap tickers every day or not so
+[00:14:58] like generally I would say that um
+[00:15:01] pretty much any of the stocks I was
+[00:15:02] trading wore like under 30 million float
+[00:15:06] except for Tesla okay because I was
+[00:15:10] trading stuff that was popping up on the
+[00:15:12] momentum scanner and things that were um
+[00:15:16] moving well showing strength and and
+[00:15:20] generally that means having a a bit of a
+[00:15:23] lower float um like 20 30 million we saw
+[00:15:27] a lot between like 10 to 20 million at
+[00:15:30] that point too that moved really well
+[00:15:32] yeah um so like 10 to 20 million and
+[00:15:36] probably like the the three to $20 range
+[00:15:42] which actually is pretty much the same
+[00:15:44] for me now as far as price range and
+[00:15:47] with a re relatively small account those
+[00:15:49] are all more affordable but what about
+[00:15:52] uh Tesla did that force you to have to
+[00:15:55] add more money into your account or were
+[00:15:57] you at a point there where you know your
+[00:15:59] account was sort of slowly growing and
+[00:16:01] so it was yeah so that's a good question
+[00:16:05] um I started trading January 2020 with a
+[00:16:08] $500 account
+[00:16:10] by June of 2020 or so I had I had had
+[00:16:16] like I think May April maybe was tiny
+[00:16:19] tiny green um May was a little bit more
+[00:16:24] green June was even more green and so by
+[00:16:27] the end of July I
+[00:16:29] took the remainder basically out of my
+[00:16:32] savings and went from 10 10 or 12 in my
+[00:16:35] TD account to 25 over PDT wow um and
+[00:16:40] then August I had a $10,000 month wow
+[00:16:44] because I was it felt like superpowers I
+[00:16:46] was just able to take as many trades as
+[00:16:48] I wanted all of a but that's so good
+[00:16:51] though that you throttled you you kept
+[00:16:53] yourself rained in for those first
+[00:16:56] certainly six months trading with a
+[00:16:58] small account so it was a cash account
+[00:17:00] so when you ran out of cash you'd wait
+[00:17:02] for it to settle
+[00:17:04] right the account every other day got it
+[00:17:07] right right because now because it was
+[00:17:09] T2 at that time right y okay so take two
+[00:17:13] days to settle so you trade on Monday
+[00:17:15] that F those funds would be back on
+[00:17:16] Wednesday so you trade half the account
+[00:17:18] Monday half the account Tuesday the
+[00:17:20] other half is Back available Wednesday
+[00:17:22] then the other half's there Thursday and
+[00:17:24] then so it's just half the account every
+[00:17:26] day yeah so now someone's starting
+[00:17:28] because it change to T1 settlement you
+[00:17:30] could trade the full account every day
+[00:17:33] yeah lucky lucky people and I was
+[00:17:35] actually I was interested to see how the
+[00:17:37] market would respond to that if at all
+[00:17:39] when it changed back in like what was
+[00:17:41] that just may or so yeah yeah I was
+[00:17:45] curious to see how the market would
+[00:17:46] respond because all of a sudden you have
+[00:17:48] some number of accounts under 25,000
+[00:17:51] that are cash accounts that now have
+[00:17:52] double the buying power which are small
+[00:17:55] accounts but I you know who knows how
+[00:17:57] many of them there are I don't know um
+[00:18:00] yeah yeah I was curious to see I don't I
+[00:18:02] don't feel like I really noticed much of
+[00:18:04] anything in particular but well now that
+[00:18:07] you say that I I would say that things
+[00:18:10] really did pick up um following that
+[00:18:14] because of course now part of that was
+[00:18:15] because June we had a GameStop back in
+[00:18:18] play but that's that of course is a
+[00:18:20] stock that's popular with people with
+[00:18:22] smaller accounts often M stocks and then
+[00:18:24] we went right into July where we had all
+[00:18:26] those Chinese stocks and then August was
+[00:18:28] tough
+[00:18:29] but then September and now October
+[00:18:31] bounced back so I would say these last
+[00:18:33] few months um have been stronger than
+[00:18:36] prior to may I don't know if T1
+[00:18:37] settlement is a factor though there's a
+[00:18:39] number of factors that you could yeah I
+[00:18:41] would I would totally agree with you may
+[00:18:44] before before October May was my my
+[00:18:46] newest record month
+[00:18:49] um yeah who knows what to attribute it
+[00:18:52] to I I just traded well and we had some
+[00:18:55] good moves and June was good too July
+[00:18:58] was good August slowed down quite a bit
+[00:19:01] September was actually a record red
+[00:19:03] month career red month for me but then
+[00:19:05] October was um pretty much triple that
+[00:19:08] in the green so yeah yeah yeah and was
+[00:19:11] October a record green month for you it
+[00:19:14] was Yeah by by quite a bit yeah right so
+[00:19:18] so now you're at a place where let's
+[00:19:21] talk about kind of your trajectory over
+[00:19:23] these last few years so year one you
+[00:19:26] start you really start relatively ly
+[00:19:29] slow with small account trading cash by
+[00:19:32] the end of year 1 end of
+[00:19:35] 2020 you'd made some progress was it in
+[00:19:39] 2021 I remember you you told me
+[00:19:42] previously you had like something like a
+[00:19:44] $4,000 month and then you gave it back
+[00:19:48] the next month or something when was
+[00:19:50] that yeah so um 2020 all of 2020 I think
+[00:19:56] that I made like 2 3,000 profit which
+[00:20:00] was accounted for between like the last
+[00:20:03] five months of the year which was
+[00:20:05] incredible for a first year Trader yeah
+[00:20:10] that's huge it was the fact that you
+[00:20:12] didn't go negative is huge I mean that's
+[00:20:14] a lot of people start and and go deep
+[00:20:16] negative right so I did go negative I my
+[00:20:20] the de of course I went negative but the
+[00:20:23] deepest part of my draw down was like
+[00:20:24] negative 800 okay which um you know
+[00:20:29] generally is not that bad at all but but
+[00:20:31] at the time for me that was pretty much
+[00:20:33] max pain I didn't really have much more
+[00:20:35] to give right because and that's when
+[00:20:37] you're thinking about maybe throwing in
+[00:20:38] the towel you'd had a couple of really
+[00:20:40] big losses and you're like okay I got to
+[00:20:43] is this going to and you know that that
+[00:20:45] kind of makes me think about the fact
+[00:20:47] that the pain of the loss like it
+[00:20:49] doesn't matter if it's 300 or if it's
+[00:20:51] 3,000 or if it's 30,000 or 300,000 the
+[00:20:54] the pain pain is pain you know what I
+[00:20:56] mean like if when you're feeling that
+[00:20:58] pain and you're in that place where
+[00:20:59] you're like okay is is is this for
+[00:21:02] nothing is all this time I've put into
+[00:21:04] this even worth it when you're
+[00:21:06] questioning should I keep going like I
+[00:21:10] think it's so good to start with a small
+[00:21:13] account so when you experience that okay
+[00:21:16] it's $800 but it it is a lot easier in
+[00:21:20] time to recover from I tried this thing
+[00:21:23] I lost 800 bucks and then I moved on cuz
+[00:21:25] you hear about people who will lose
+[00:21:28] eight ,000 80,000 I mean a crazy amount
+[00:21:30] of money before they have that wakeup
+[00:21:33] call that either this isn't for me or
+[00:21:35] you know that they have to follow
+[00:21:37] certain rules and a strategy and this
+[00:21:39] and that so you're fortunate in a lot of
+[00:21:41] ways oh yeah absolutely um yeah it it
+[00:21:45] hurt for sure but you know relatively
+[00:21:49] was a very manageable amount of money U
+[00:21:52] yeah just like you I've heard plenty of
+[00:21:53] stories of people who have been down
+[00:21:54] tens of thousands of dollars before they
+[00:21:57] either turn it around and start to get
+[00:21:58] it or they just don't and then it's like
+[00:22:01] well you know that's too bad um but year
+[00:22:05] won 23,000 so then so then it was it was
+[00:22:08] it in year two that you you kind of had
+[00:22:10] some really big months but yeah did you
+[00:22:12] fly too close to the Sun um a little bit
+[00:22:16] so I can't remember how I did in January
+[00:22:20] of 2021 but February of
+[00:22:23] 2021 was a big month for me I was up
+[00:22:26] 40,000 on the month I wow I remember
+[00:22:30] this and this is towards the end of the
+[00:22:31] month it was the last couple days and I
+[00:22:34] had started the day at um like maybe
+[00:22:38] 35,000 or so on on the month and um I
+[00:22:43] was trading my p&l I had just broken
+[00:22:46] 40,000 for the month and just took like
+[00:22:50] a couple paper cuts a couple couple
+[00:22:53] thousand some dollar losses and I was
+[00:22:56] back
+[00:22:57] to uh
+[00:22:59] I can't remember exactly but it was
+[00:23:02] close to the end of the day close to the
+[00:23:04] close and I got stuck short on a stock
+[00:23:09] with like 4,000 shares and it started
+[00:23:12] spiking because the market closed it
+[00:23:14] started spiking I was stuck and I was
+[00:23:17] like why can't I get out and I realized
+[00:23:21] eventually that I hadn't changed my time
+[00:23:23] and force so the orders that I was
+[00:23:26] sending to the market were going to
+[00:23:27] nothing and uh yeah I took a $20,000 red
+[00:23:31] day wow so I went from points so went up
+[00:23:36] like share on 4,000 shares wow yeah
+[00:23:39] something like that it was cdxc which
+[00:23:42] actually was just in play last week and
+[00:23:45] I lost like 600 bucks on it I was like
+[00:23:48] finally we get a chance to because to
+[00:23:51] this day cdxc is still my all-time
+[00:23:54] biggest red ticker um and I was like I
+[00:23:57] finally get a chance to make it a little
+[00:23:59] bit better and I still was read on it
+[00:24:02] yeah um but uh yeah so I went from up 40
+[00:24:06] on the month to giving some back and
+[00:24:10] then taking a $20,000 loss and finishing
+[00:24:12] the month at like
+[00:24:14] $18,000 okay which was still a record
+[00:24:16] month for me um and you know you can't
+[00:24:20] complain too much about 18,000 but not
+[00:24:23] in one month no you can't I mean you
+[00:24:25] know the thing of course with trading is
+[00:24:28] is you know I mean you could have an
+[00:24:29] $118,000 month and then the next month
+[00:24:32] you make nothing or or even a red month
+[00:24:34] so $2,000 red trade too sure it's easy
+[00:24:39] to kind of get in this mindset of 18,000
+[00:24:41] a month that's 180 that's two 220 a year
+[00:24:43] you know you start I'm now a sixf figure
+[00:24:46] Trader I can and then you get a it
+[00:24:50] doesn't really work like that right
+[00:24:53] exactly yeah every day is a new day and
+[00:24:57] just cuz I made1 18,00 this month
+[00:24:59] doesn't at all mean that I'm going to
+[00:25:00] make 18,000 the rest of the months of
+[00:25:02] the year how did you recover from that
+[00:25:04] so luckily we were in such a hot Market
+[00:25:06] that I recovered it in like two weeks so
+[00:25:09] actually I remember February of 2021 I
+[00:25:13] was pretty stressed out like most of the
+[00:25:14] time because things were just moving and
+[00:25:18] um I was such a new Trader that it was
+[00:25:21] just a little
+[00:25:22] overwhelming and so I remember March of
+[00:25:25] 2021 I didn't have any record days like
+[00:25:28] February 2021 was like new record day 3
+[00:25:32] Days Later new record day next week
+[00:25:35] another new record yeah it was so hot
+[00:25:38] yeah and so I remember March of 2021 I
+[00:25:41] didn't have any new record days but a
+[00:25:43] lot more consistency and I actually
+[00:25:44] finished the month at like
+[00:25:46] 27,000 wow new
+[00:25:49] record and then the rest of the year uh
+[00:25:53] became more difficult slowed down and um
+[00:25:58] I think April was like a $20,000 red
+[00:26:02] month which okay just like we were
+[00:26:05] saying just because you make 18 or 27
+[00:26:07] one month doesn't mean anything really
+[00:26:10] yeah um especially when you're that new
+[00:26:13] and don't have like the consistent
+[00:26:14] record um so that $20,000 loss and then
+[00:26:19] that big red month were both just like
+[00:26:23] that those $300 red days hurt just the
+[00:26:27] same felt the same
+[00:26:28] y um but I was like really the only way
+[00:26:33] for me is forward I and and a huge part
+[00:26:37] of that thought process for me was
+[00:26:39] seeing you do it and seeing your results
+[00:26:41] and that you've been doing it for like
+[00:26:43] 15
+[00:26:44] years um and I was just you also got to
+[00:26:47] see on February 4th
+[00:26:50] 2021 I had the biggest red day of my
+[00:26:52] career I was down
+[00:26:54] $275,000 in one day yeah I remember I
+[00:26:57] recover I know it was my birthday and I
+[00:26:59] did recover it a few weeks later I
+[00:27:01] finished February at about 400,000 it
+[00:27:03] was you know I was taking a lot of risk
+[00:27:05] at that time we had GameStop and all
+[00:27:07] these other stocks but yeah um but you
+[00:27:10] you sort of Saw on display and and I
+[00:27:12] remember at that red day there was a
+[00:27:15] part of me that was like I can't I don't
+[00:27:16] even know I can't I don't even want to
+[00:27:19] show up tomorrow like how do I even
+[00:27:20] begin to chip away at this size loss and
+[00:27:23] then I just realized you know I just
+[00:27:26] need to keep my head down just keep
+[00:27:28] taken one step forward one step forward
+[00:27:30] and next thing you know I'm going to put
+[00:27:31] my head up and I'm going to be you know
+[00:27:34] I'm going to be there and it might take
+[00:27:35] six weeks might take six months but I'll
+[00:27:37] I'll get there but but I had I had the
+[00:27:41] benefit of all of these years of
+[00:27:44] consistency under my belt where I knew
+[00:27:46] that as long as I went back to basics
+[00:27:50] you know as long as I stuck with the
+[00:27:51] core of my strategy I would survive and
+[00:27:54] I I told myself I said Ross all the
+[00:27:56] money to recover your loss is in the
+[00:27:58] market but there's one rule you have to
+[00:28:01] follow every point of your strategy
+[00:28:05] stock selection price float news
+[00:28:07] relative volume everything if you
+[00:28:09] deviate from that you're just going to
+[00:28:10] lose more money so the question really
+[00:28:12] is are you willing to be disciplined
+[00:28:14] right now and and the obvious answer was
+[00:28:18] in exchange to recover those losses
+[00:28:21] absolutely yeah so with you being a
+[00:28:23] little bit newer and not quite having as
+[00:28:26] I mean you know a year of track record
+[00:28:28] is not nothing but it also is at that
+[00:28:30] point where you can kind of question
+[00:28:31] like was it a fluke was it just good
+[00:28:33] luck was it beginners
+[00:28:35] luck how did you deal with that during
+[00:28:38] you know following that draw down um
+[00:28:41] well yeah totally that's that's that's a
+[00:28:43] huge point I I also didn't know but I
+[00:28:46] was determined to have it not be luck
+[00:28:50] and just the market and um when I was
+[00:28:55] trying to figure out a new source of
+[00:28:57] income I was looking into a couple
+[00:28:59] things actually I was I was doing online
+[00:29:03] courses uh that were available for free
+[00:29:05] on web development I learned how to
+[00:29:08] build my own website I was I was
+[00:29:09] interested potentially in becoming a
+[00:29:11] programmer or a web
+[00:29:13] developer um what I really wanted was to
+[00:29:16] find something that I could do on my own
+[00:29:20] with an internet connection and provide
+[00:29:22] for myself and what I really really
+[00:29:26] wanted was to not have to rely on
+[00:29:28] anybody else to do that I didn't have
+[00:29:31] want to have to work with anybody else
+[00:29:33] um like in a in a co-worker type
+[00:29:37] capacity I didn't want to have to like
+[00:29:39] sell anything to somebody or have to
+[00:29:41] rely on somebody buying things or
+[00:29:44] employing me and that kind of thing um
+[00:29:48] so I had such a such a big motivator to
+[00:29:52] figure out how to do this and I didn't
+[00:29:55] have the track record yet um but I saw
+[00:29:58] you doing it and I saw and I had joined
+[00:30:01] Warrior at this point so we have the
+[00:30:03] room and we have all these verified um
+[00:30:05] badge
+[00:30:06] holding profitable people and I'm like
+[00:30:09] so it's like one or one of two things is
+[00:30:11] happening all of it is fake and it's all
+[00:30:13] made up or these people actually exist
+[00:30:16] and if they exist and they're doing it
+[00:30:19] then why can't I and kind of similar to
+[00:30:22] you I was like I just have
+[00:30:26] to figure out
+[00:30:28] what my discipline and what my main
+[00:30:30] strategy is and dial into it and you've
+[00:30:35] always said um especially in some of
+[00:30:38] your um stuff from a little bit further
+[00:30:41] back you used to give uh this
+[00:30:45] presentation where you were talking
+[00:30:46] about how you hadn't found success yet
+[00:30:49] in trading but you dug into all of your
+[00:30:51] stats and you were figuring out where
+[00:30:53] were you taking the biggest losses where
+[00:30:55] were you actually making wins and um and
+[00:30:59] that was prettyy much it for me too and
+[00:31:01] and one of the other mentors who we talk
+[00:31:03] about Jess I've always thought it's so
+[00:31:05] funny any any people who ask him like
+[00:31:08] what's his aha moment yeah uh he's he
+[00:31:12] says the same thing and it's it's always
+[00:31:14] been my answer too which is I haven't
+[00:31:16] really had an aha moment it's just
+[00:31:19] overtime figuring out how to make less
+[00:31:22] mistakes and how to lean into what I'm
+[00:31:25] good at and so that's all I tried to do
+[00:31:27] after I had had those losses and yeah
+[00:31:30] and again luckily we were in a market
+[00:31:32] that supported it um I totally agree
+[00:31:35] with what you had said about you know I
+[00:31:37] don't know if it's going to take six
+[00:31:38] days six weeks or six months to make it
+[00:31:40] back but honestly it doesn't matter you
+[00:31:43] know you put your head down you you look
+[00:31:46] for whatever that next good trade is and
+[00:31:49] you wait for it you take it when it
+[00:31:50] comes up and one at a time eventually
+[00:31:54] you look up and you're back where you
+[00:31:56] wanted to be yeah yeah that's and that I
+[00:31:58] kind of realized that too I the reason
+[00:32:01] that I think I had more of an aha moment
+[00:32:04] which I recognize more in hindsight than
+[00:32:06] in the moment I mean I didn't know it
+[00:32:07] was an aha moment in the moment but um
+[00:32:09] it was because I hit rock bottom and I
+[00:32:11] had to F I had to fund my account with
+[00:32:13] more money and so during the downtime it
+[00:32:15] was like okay what are you going to do
+[00:32:16] differently when you fund this account
+[00:32:18] the next time yeah and then I did things
+[00:32:20] differently and that was my turning
+[00:32:22] point so it's like well all right I
+[00:32:23] guess that was my turning point then but
+[00:32:26] you know I I think the
+[00:32:28] um the the challenge um for I suppose
+[00:32:33] for a lot of Traders probably you
+[00:32:36] experienced this and um and Jess as as
+[00:32:39] well is when you're at that place of you
+[00:32:44] know I'm still building my track record
+[00:32:47] I've had a big loss um you know do
+[00:32:52] emotions blind me from being able to see
+[00:32:56] what's really in front of me me MH you
+[00:32:58] know because sometimes you end up
+[00:33:00] getting this it's I guess it's emotional
+[00:33:02] hijack where your emotions get so big
+[00:33:06] that you just start trading your p&l
+[00:33:08] you're just trading the numbers and you
+[00:33:11] know I I remember telling myself at one
+[00:33:13] point that it doesn't matter how much
+[00:33:15] you've lost in the past and I had a real
+[00:33:16] emotional attachment to the money I've
+[00:33:18] lost because it was money I got from my
+[00:33:20] father when he passed away so I I felt
+[00:33:23] so guilty and so upset and I said you
+[00:33:25] know what just put that aside for a
+[00:33:27] second because if you follow this
+[00:33:29] strategy and you're consistently making
+[00:33:31] $200 a day and you can do that for the
+[00:33:34] rest of your life yeah doesn't matter
+[00:33:36] what it cost you to learn this you've
+[00:33:39] got it now so just follow the rules
+[00:33:42] today and and that was like it's it's
+[00:33:44] it's a really hard it was hard for me to
+[00:33:46] kind of forgive myself and and let go of
+[00:33:49] you know the baggage of th those
+[00:33:50] mistakes but it was really important to
+[00:33:54] separate myself from that emotion
+[00:33:55] because I I just kept being
+[00:33:58] like trading that p&l where you're just
+[00:34:00] staring at the number and trying to make
+[00:34:04] it half as red as it is you know when
+[00:34:06] you're red you're trying to recover and
+[00:34:08] it just it just often becomes this
+[00:34:10] spiral and because the reality is the
+[00:34:12] market doesn't care about your number
+[00:34:14] yeah right totally it'll either give you
+[00:34:16] good opportunities or it won't and so if
+[00:34:18] it's giving you good opportunities
+[00:34:19] you'll trade well and hopefully you'll
+[00:34:20] make money and if it's not then trading
+[00:34:22] more isn't going to change that yeah if
+[00:34:25] it's a cold day it's a cold day yeah
+[00:34:28] have you uh now as sort of like an
+[00:34:30] observer of your strategy over these
+[00:34:32] years um so we go back to year so year
+[00:34:35] one 23,000 then year 2
+[00:34:38] 2021 um you had a tough stretch through
+[00:34:41] the summer um and I remember at some
+[00:34:43] point then I think was that the year you
+[00:34:45] got your 100K badge yeah I had a 50k
+[00:34:49] badge pretty early on um after I had
+[00:34:53] joined cuz I had had like 23 from the
+[00:34:55] year before and then I think think it
+[00:34:57] was like January and February combined
+[00:35:01] or something like that put me over 50
+[00:35:03] nice which is when you interviewed me
+[00:35:05] for the first time yeah um so almost
+[00:35:08] four years ago
+[00:35:10] and um it took me a long time to go from
+[00:35:14] 50 to 100 actually um the rest of the
+[00:35:19] year was okay I finished 2021 at like
+[00:35:24] 53,000 or something like that and then
+[00:35:28] um the market cooled off in
+[00:35:31] 2022 and it did the whole year was a a
+[00:35:35] huge struggle for me I think that the
+[00:35:38] entire year I made like 6,000 wow that a
+[00:35:42] lot of dedication to show up every
+[00:35:43] single day but not be pulling away and
+[00:35:48] 2022 was a tough year for me and then
+[00:35:50] 2023 was actually
+[00:35:52] worse for me but I remember that yeah
+[00:35:55] 2023 was a good year for you wasn't your
+[00:35:57] best year you'd ever had 2023 was my was
+[00:36:00] a record year by like two and a half
+[00:36:03] times 2021 so that was last year um I
+[00:36:07] finished at about 125,000 I think with
+[00:36:10] like 10,000 in fees last year so yeah
+[00:36:12] very good year for me last year but uh
+[00:36:15] 2022 was a big struggle um it took me
+[00:36:20] until the end or like August of 2022 I
+[00:36:25] think to get my 100K badge I remember
+[00:36:28] that um and then uh and then from there
+[00:36:33] things happened pretty quickly um well
+[00:36:35] not not after getting my 100K badge but
+[00:36:39] um so that was in like August of 2022
+[00:36:42] still kind of slow still kind of slow
+[00:36:44] through the end of the year and then I
+[00:36:46] think like November December started
+[00:36:48] picking up we had had the the allstar
+[00:36:51] Summit October of
+[00:36:53] 2022 um and I picked up a lot from that
+[00:36:56] with manoli and Chris and Jess and Max
+[00:37:00] Hong yep and um for one thing they were
+[00:37:04] all using Windows and dos so dos the
+[00:37:09] software linked with TD y so I got home
+[00:37:13] I bought a Windows laptop I put dos on
+[00:37:16] it linked it to TD and that was
+[00:37:19] definitely a change and kind of a a
+[00:37:22] turning point for me yeah um I think
+[00:37:26] that it wasn't necessarily
+[00:37:29] groundbreaking as much as it gave me a
+[00:37:33] boost to the edge that I already had at
+[00:37:35] that point which it's almost like you
+[00:37:38] were you were kind of like I I I
+[00:37:41] sometimes would say like if you're not
+[00:37:42] profitable already on thicker swim
+[00:37:44] switching platforms probably not going
+[00:37:45] to make a difference yeah but it was
+[00:37:47] almost like you were carrying like dead
+[00:37:50] weight or you were just like being there
+[00:37:51] was a ceiling and I was I was a little
+[00:37:54] constrained yeah yeah constrained and
+[00:37:56] then once you took that off
+[00:37:58] you could trade so much faster you could
+[00:38:00] move in and out you're like you're just
+[00:38:02] your ability because of of the offsets
+[00:38:05] and the way the ORS work and the hot
+[00:38:06] Keys you're just it's like a little baby
+[00:38:08] bird leaving the nest pretty much yeah
+[00:38:11] actually um I love do I still use it and
+[00:38:15] so we were talking earlier about like
+[00:38:16] how did my trading strategy change and
+[00:38:19] that that kind of stuff and it was at
+[00:38:21] that point when I got dos that I
+[00:38:23] actually was able to adapt my strategy a
+[00:38:26] bit to the fact that now I have hotkeys
+[00:38:29] and I can sell a third of my position or
+[00:38:32] half or sell on the ask or a few cents
+[00:38:35] under the ask or whatever I wanted to do
+[00:38:38] and so it made it so that I was able to
+[00:38:40] be a lot more Dynamic with how much
+[00:38:43] position I was holding do I Want To Buy
+[00:38:46] Here Sell some here add back more here
+[00:38:50] do that um yeah which you can do with
+[00:38:53] thinker swim it's just not as easy no
+[00:38:56] it's that's exactly right
+[00:38:58] it it feels I I you know I've just
+[00:39:00] finished this thinker swim challenge
+[00:39:01] with small account Challenge and and you
+[00:39:03] know I mean I I did well during the
+[00:39:05] challenge I achieved my goal but yeah my
+[00:39:07] gut feeling through it was I don't know
+[00:39:10] it just I don't know the best analogy
+[00:39:12] but it just feels like um I can't be
+[00:39:16] nimble I I I I just feel like I'm I'm
+[00:39:19] just moving a little slower I'm just
+[00:39:21] like a little clumsier everything just
+[00:39:23] takes a little longer and in a
+[00:39:26] fast-moving Market you know that can be
+[00:39:28] tough now look I mean I know a lot of
+[00:39:29] people use the platform and like it
+[00:39:33] but you know holds you back I always
+[00:39:35] recommend thinker swim um TD Schwab to
+[00:39:40] any Trader who's learning um I think
+[00:39:43] that the the lack of commissions is a
+[00:39:46] great thing for a new Trader I think
+[00:39:49] more than that they should start in a
+[00:39:50] Sim um because why lose real money like
+[00:39:55] I did you did now
+[00:39:58] we know that there are better options
+[00:40:00] yeah but then past that I think it's a
+[00:40:02] great option for Traders who are
+[00:40:03] learning and um you know you don't have
+[00:40:06] to pay $2 each time you execute a trade
+[00:40:09] uh you don't have to pay ecn fees and I
+[00:40:12] did I did go from TD and thinker swim to
+[00:40:16] light speed and back twice and then um I
+[00:40:21] I basically just figured light speed and
+[00:40:23] direct access uh commissioned Brokers
+[00:40:26] just aren't right for my style of
+[00:40:28] trading which is um sometimes more
+[00:40:32] involved or just like more screen time
+[00:40:34] more trades and and shares than you'll
+[00:40:36] put through so yeah for me it would just
+[00:40:38] eat up a lot more of my profit yeah um
+[00:40:42] yeah I would say that is a a little bit
+[00:40:43] of a difference between our strategies
+[00:40:45] because you know one of the re I mean
+[00:40:47] I've although I've used the commission
+[00:40:49] free brokers in challenges and stuff
+[00:40:51] like that since once you get used to you
+[00:40:55] know the the ability to be so nimble
+[00:40:57] have such fast executions it it's hard
+[00:40:59] to go from I don't know I'm thinking of
+[00:41:02] doing something like and then trying to
+[00:41:04] do the same thing with like snow gloves
+[00:41:05] on I know like some delicate like watch
+[00:41:08] fixing a watch You' just be like this is
+[00:41:10] ridiculous now of course if you learned
+[00:41:12] with a snow gloves you'd be like I guess
+[00:41:13] this is how it
+[00:41:14] works but when you've you've gotten good
+[00:41:17] at it with the software that lets you be
+[00:41:19] so dnamic and you know what that feels
+[00:41:21] like yeah it for me it's it's hard to go
+[00:41:24] back but I am restrained in the sense
+[00:41:27] that if I want to trade 100 or 200 times
+[00:41:29] a day I'm paying commissions on those
+[00:41:31] trades I'm GNA spend I could spend
+[00:41:33] thousands in commissions we've had days
+[00:41:36] where we've looked at your trades and we
+[00:41:37] looked at mine and I remember a couple
+[00:41:40] days where you were up like 1,600 bucks
+[00:41:42] or something and I was like well based
+[00:41:44] on the number of shares you traded and
+[00:41:45] the number of Trades you took I'd
+[00:41:47] actually be
+[00:41:48] r600 if I took those same exact trades
+[00:41:50] because of fees and commissions it's
+[00:41:53] like $32 in fees and 3,200 in fees and
+[00:41:55] commissions which is not realistic so
+[00:41:59] you without that um
+[00:42:01] constraint have been able to trade much
+[00:42:04] more actively and really like I mean
+[00:42:08] that's where you're able to get with a
+[00:42:10] thousand shares the full dollar out of
+[00:42:11] the market across or whatever just in
+[00:42:14] and out in and out buying the dip
+[00:42:16] selling the pop buying the dip selling
+[00:42:17] the pop yeah which I think it's hard
+[00:42:20] maybe for a beginner to learn that
+[00:42:22] because it requires at least in my view
+[00:42:25] a pretty high heightened degree of
+[00:42:27] intuition you know to know when to punch
+[00:42:30] those orders when to buy that dip um you
+[00:42:34] know I agree with that and it it took me
+[00:42:35] a while to develop that like I said and
+[00:42:38] as I was starting to learn that strategy
+[00:42:42] I I basically had realized that if I'm
+[00:42:45] buying when it's going down after it has
+[00:42:48] been strong I have a better chance to
+[00:42:50] get out somewhere green but it wasn't
+[00:42:53] refined at all yet now I'm really in
+[00:42:56] tune with level two and like watching a
+[00:42:59] seller walking the price down and I'll
+[00:43:01] buy the the moment it starts thinning
+[00:43:03] out totally and I'll be in at the dead
+[00:43:05] bottom and I'll get yeah the most of the
+[00:43:09] pop but yeah it it took a while to
+[00:43:12] refine that and it's also because it's
+[00:43:14] scary and as I'm a newer Trader trying
+[00:43:17] to learn this strategy and I'm just
+[00:43:18] buying as it's going down yeah um so
+[00:43:21] yeah it it can be challenging so
+[00:43:25] 2023 125,00 ,000 best roughly before
+[00:43:29] fees and commissions which were 10 grand
+[00:43:31] best year you'd ever had and now I know
+[00:43:35] you're putting in your paperwork for the
+[00:43:37] um the 500k badge you've got um you I
+[00:43:40] know you've crossed over that so you're
+[00:43:41] get you're going to be earning that
+[00:43:42] badge next so where are you at on 2024
+[00:43:46] year to date um that is a good question
+[00:43:50] um I can pull it up here
+[00:43:55] uh let's see I think I'm somewhere just
+[00:43:58] under
+[00:43:59] 400
+[00:44:01] wow so a little bit different wow pull
+[00:44:05] that up 354 yeah okay 354 that's
+[00:44:09] phenomenal that's I mean and you still
+[00:44:12] have time left so you're you're in such
+[00:44:15] a strong position yeah so like back of
+[00:44:19] Mind stretch goal at this point it's uh
+[00:44:23] not hard to think that I could hit 500
+[00:44:26] this year we have three weeks left of
+[00:44:29] November um if we have one or two hot
+[00:44:33] weeks in there and easily get to Mid
+[00:44:36] 400s and then we'll see um but like we
+[00:44:39] were talking about earlier it could be
+[00:44:40] dead you we never know so yeah just one
+[00:44:43] day at a time we'll see what the market
+[00:44:45] gives us and yeah um but yeah it's been
+[00:44:47] a good
+[00:44:49] year last year after 2022 was so hard
+[00:44:54] and slow um I think really what I
+[00:44:57] started to understand and realize was
+[00:45:01] that I uh I was just buying too high
+[00:45:04] every time I'm having a hard time in the
+[00:45:06] market it's because I'm buying too high
+[00:45:08] I'm chasing things as they're going up
+[00:45:10] either because of fomo or whatever yeah
+[00:45:13] and then I'll take losses or I'll barely
+[00:45:15] get anything out of the trade and um so
+[00:45:19] like like you were talking about with
+[00:45:21] that huge red day anytime that I'm just
+[00:45:24] struggling or in a draw down or whatever
+[00:45:27] I always try to go back to basics and
+[00:45:29] almost always the answer is I'm buying
+[00:45:31] too high yeah I mean honestly I I think
+[00:45:35] I could say the same for myself the
+[00:45:37] thing is it's tough because in a hot
+[00:45:39] Market when it's really hot you can get
+[00:45:42] away to a certain extent with chasing
+[00:45:44] you know what I mean like you buy High
+[00:45:45] and the things just keep going but when
+[00:45:47] the market cools off that strategy it
+[00:45:50] doesn't work as well anymore Y and so so
+[00:45:52] it's like sometimes it's like what what
+[00:45:54] did what am I doing different it's
+[00:45:55] nothing you're doing different it's
+[00:45:57] Market is shift you didn't shift fast
+[00:45:59] enough you've got to adapt to that
+[00:46:01] change in the market and I I would say
+[00:46:03] that's the one thing that I've observed
+[00:46:04] in you from sort of the outside
+[00:46:06] perspective I remember especially in
+[00:46:08] August when you were struggling is I was
+[00:46:10] thinking you know I've been through this
+[00:46:13] before and you know where you you go on
+[00:46:16] these sort of like draw downs and it's
+[00:46:18] like the right thing to do is to step
+[00:46:21] back and kind of really restrict
+[00:46:23] yourself into trade a rehab you know
+[00:46:25] like scale down down size down cuz the
+[00:46:29] deeper you dig that hole when you start
+[00:46:31] spiraling the bigger the emotions get
+[00:46:34] and it's like you know in hindsight it's
+[00:46:35] like yeah I wish I had slowed down
+[00:46:37] sooner so I could have dug the hole half
+[00:46:39] as deep you know but in the moment you
+[00:46:41] keep thinking maybe today's the day it's
+[00:46:42] going to turn yeah exactly and like I
+[00:46:44] might make 5,000 today and but then
+[00:46:46] you're down another 2500 another 2500
+[00:46:49] and next thing you know it's like oh my
+[00:46:50] gosh this is unreal and I think my
+[00:46:54] feeling is that as much as I as much as
+[00:46:57] I say and I you know it'd be like you
+[00:46:59] got to slow down this and that there's a
+[00:47:01] certain extent that we have to learn
+[00:47:03] these things kind of ourselves and and
+[00:47:05] go through the experience of like wow
+[00:47:08] that was painful I thought you know this
+[00:47:10] was going to work but it didn't so that
+[00:47:12] pain is what's going to remind me the
+[00:47:14] next time I start a draw down to get my
+[00:47:17] foot off the gas real quick yeah and and
+[00:47:20] that's something I've been doing this
+[00:47:21] for a really long time and when I do
+[00:47:24] these sessions with Ted it's like he's
+[00:47:26] like Ross you have no problem putting
+[00:47:27] the foot your foot on the gas you know
+[00:47:29] the Market's hot next thing you know
+[00:47:31] you're having big green days your
+[00:47:32] problem is slowing down because all of a
+[00:47:36] sudden you know I'll have that final
+[00:47:39] trade where I'm in way too high and then
+[00:47:41] I get stubborn I add more I add more
+[00:47:43] it's a huge loss and then I have a huge
+[00:47:45] red day max lost red day I come back day
+[00:47:48] two to swing hard to make it all back
+[00:47:50] second red day in a row come back day
+[00:47:52] three third red day in a row I I
+[00:47:55] remember once having six red days in a
+[00:47:56] row and each one of them were been
+[00:48:00] yeah crazy it's awful yeah and you feel
+[00:48:04] like again you feel that way that's the
+[00:48:07] thing you feel when you're down like
+[00:48:08] that you feel like it's never going to
+[00:48:09] come back and it's it is incredible how
+[00:48:12] in those moments the market really does
+[00:48:14] feel different oh to it's not like
+[00:48:17] you're not wrong in being like wow what
+[00:48:19] is wrong this isn't working like it's
+[00:48:21] it's not working because the the you
+[00:48:23] know
+[00:48:24] strategies depending on market
+[00:48:26] conditions yeah you know have different
+[00:48:28] performance and part of the problem I
+[00:48:30] think is as as a Trader um at least in
+[00:48:33] my opinion it kind of forces you to be
+[00:48:35] an internal Optimist um yeah yeah if
+[00:48:39] you're if you're pessimistic or you're
+[00:48:40] down on yourself or just negative it's
+[00:48:43] not going to help you trade better
+[00:48:44] that's right um and so you have to come
+[00:48:47] in every day thinking you know today's
+[00:48:50] going to be better or I'm going to trade
+[00:48:51] better today or the Market's going to
+[00:48:53] give us something different today yeah
+[00:48:56] and some times that's just not the case
+[00:48:58] and I kind of went through that um just
+[00:49:01] this September I had mentioned was a
+[00:49:03] record red
+[00:49:04] month let me think I had uh I think I
+[00:49:08] was at like
+[00:49:10] 150,000 in my account took like
+[00:49:14] a 15 or $188,000 red day
+[00:49:19] withdrew 50 to protect myself and just
+[00:49:22] take profit out um cuz I was like and
+[00:49:26] it's usually that time of year too like
+[00:49:27] end of August September is that I'll
+[00:49:30] take like a big red day and then that's
+[00:49:31] the start of the draw down um so I this
+[00:49:34] time I took out a big chunk of profit
+[00:49:36] that I would just you know not lose and
+[00:49:40] then maybe a good thing I did that
+[00:49:42] because I went from like I think I was
+[00:49:44] probably at about 880,000 in the account
+[00:49:47] and the bottom of my draw down was when
+[00:49:50] I had 25,000 in the account um so I was
+[00:49:54] in like yeah I was in like a $5,000 draw
+[00:49:58] down um which was like 15% of my profit
+[00:50:06] for the year which is like still
+[00:50:08] manageable but like not good yeah need
+[00:50:12] to fix it at that point and so finally
+[00:50:16] what I did was I was literally
+[00:50:20] physically restricted in my share size
+[00:50:22] because I just didn't have the buying
+[00:50:23] power or The Leverage anymore right um I
+[00:50:27] had two of my buddies um check in on my
+[00:50:32] p&l every 5 minutes past the market open
+[00:50:36] wow and I had a strict Max loss of a
+[00:50:38] thousand and and this was for the first
+[00:50:41] week or two weeks or so and they would
+[00:50:43] be checking in with me and if I didn't
+[00:50:45] respond they would just start spamming
+[00:50:46] me and calling me that's Traer rehab
+[00:50:49] that that's really good you had you had
+[00:50:51] a a sponsor in a way exactly yeah I had
+[00:50:54] some sponsors and if I hit Max loss uh I
+[00:50:57] had to send a picture of my stuff shut
+[00:50:59] down and I wasn't able to trade the rest
+[00:51:01] of the day and one thing that that did
+[00:51:03] for me was I really didn't want to hit
+[00:51:05] Max loss and have to shut everything
+[00:51:08] down so I was as selective as I could be
+[00:51:11] with the trades I was taking I did hit
+[00:51:13] Max loss two days I hit a $1300 red day
+[00:51:18] just because I think it was just a bad
+[00:51:20] day um one day and then the next week I
+[00:51:25] had like a $3,000 r day cuz I got caught
+[00:51:27] in haltown and an offering at the same
+[00:51:29] time on two different stocks and that
+[00:51:32] really sucked and it hurt um because I
+[00:51:35] had gone from like 25 to 30 that week
+[00:51:38] and then just another knock back down
+[00:51:40] right um but I kept going with that with
+[00:51:43] the accountability and um and then the
+[00:51:46] next week the market got better and I
+[00:51:50] had a $6,000 green week I went from like
+[00:51:53] 27 to 33 in the account and then the
+[00:51:56] next week was a record green week 38,000
+[00:52:00] and then the following was
+[00:52:02] 37,000 so in two weeks over 100 yeah
+[00:52:05] it's crazy yeah two weeks went from 34
+[00:52:07] to
+[00:52:08] like um over a 100 in the account so wow
+[00:52:13] it's and that's all you that's all I've
+[00:52:15] found that you really have to do is just
+[00:52:17] like we were talking about keep your
+[00:52:18] head down just take one at a time one
+[00:52:21] trade at a time and yeah all of a sudden
+[00:52:24] things can change um or then you get
+[00:52:27] that confidence because then all of a
+[00:52:29] sudden it's like it's crazy how suddenly
+[00:52:32] you get a couple nice trades now your
+[00:52:35] confidence is coming back so now you
+[00:52:37] feel confident taking a few more trades
+[00:52:39] taking bigger size and now you're on
+[00:52:41] this positive feedback loop that's like
+[00:52:43] just reaffirming like I know what I'm
+[00:52:44] doing and it can pick up quick but the
+[00:52:47] exact opposite can happen with the
+[00:52:49] negative feedback loop where you have a
+[00:52:52] loss of confidence and and either what
+[00:52:55] should happen is l confidence you trade
+[00:52:57] less but what ends up often happening is
+[00:52:59] desperation you trade more you increase
+[00:53:02] size emotions get bigger now you trade
+[00:53:04] even more and now it's like yeah it's
+[00:53:08] and that that that is the that's the
+[00:53:10] aspect of trading where you
+[00:53:13] know it's it's it's psychological it's
+[00:53:16] mental and and to a certain extent
+[00:53:18] there's certain aptitudes that you have
+[00:53:20] to bring to the table that no amount of
+[00:53:23] strategy can overcome and one of yours
+[00:53:26] is that you're capable of being very
+[00:53:30] disciplined you're super disciplined
+[00:53:31] with going to the gym you're super
+[00:53:33] disciplined with swimming you're discipl
+[00:53:36] you know like you youve you exhibit all
+[00:53:39] the characteristics of someone who's
+[00:53:41] able to hold a lot of discipline and you
+[00:53:43] need that for trading totally yeah and
+[00:53:46] actually what I've discovered recently
+[00:53:49] maybe was talking with Ted but what I've
+[00:53:51] discovered recently is the type of
+[00:53:53] discipline that you need for trading can
+[00:53:55] be a little bit different than the type
+[00:53:57] of discipline that I need to be going to
+[00:53:59] the gym six days a week um uh and that's
+[00:54:02] that's a really interesting point that I
+[00:54:05] had never really thought about I was
+[00:54:06] like and and this is like during
+[00:54:10] September when I was having such a hard
+[00:54:13] time I was like I'm so disciplined in
+[00:54:17] everything I do in my life basically why
+[00:54:20] is it so hard for me sometimes to do the
+[00:54:24] right thing trading when I'm having hard
+[00:54:26] time and that was kind of one aha type
+[00:54:30] of moment that we had had was um the
+[00:54:33] type of discipline that you need to be
+[00:54:35] good at trading isn't necessarily
+[00:54:37] showing up and doing it every day if
+[00:54:41] there's nothing to do um it's different
+[00:54:44] than going to the gym every day or it's
+[00:54:47] it's just a different type of discipline
+[00:54:49] the discipline might be watching and
+[00:54:51] sitting and not doing anything because
+[00:54:54] the things that you're best at trading
+[00:54:55] aren't in front of you um and actually
+[00:54:58] at this point I have a little sticky
+[00:55:00] note with my three best things right in
+[00:55:04] front of me on my desk yeah um just I
+[00:55:08] usually keep a couple on my desk as well
+[00:55:11] mine was mine my recent one was size
+[00:55:15] down and discipline yourself and it size
+[00:55:18] down specifically at the open because I
+[00:55:20] noticed these metrics where it was a it
+[00:55:22] was a period of time but it was like you
+[00:55:24] got to adjust you got to adapt you know
+[00:55:26] we all set goals of where we want to be
+[00:55:27] you've got kind of a goal where you want
+[00:55:29] to be at the end of the year uh assuming
+[00:55:31] the market stays hot what do you think
+[00:55:34] you need to do in order to be able to
+[00:55:37] like what are the steps that you want to
+[00:55:39] take to like improve your trading over
+[00:55:41] the next few weeks few months really
+[00:55:43] clear to me and I've actually been doing
+[00:55:46] a lot of work and thought on this just
+[00:55:48] in the last week or so um because I had
+[00:55:51] had $100,000 green month last month and
+[00:55:55] on the last day
+[00:55:58] made some bad decisions had a $177,000
+[00:56:01] red day yeah um so I'm like okay for one
+[00:56:05] thing I was over 100,000 on the month
+[00:56:08] and obviously that's a goal that I want
+[00:56:10] to do again and I think that I can do
+[00:56:12] that again um how am I going to get
+[00:56:15] there the biggest two points for me I
+[00:56:18] think are a combination of patience and
+[00:56:21] willingness to be
+[00:56:23] aggressive and by patience I mean not
+[00:56:27] necessarily like when I have a position
+[00:56:29] or I'm in a trade but um in waiting for
+[00:56:33] the things that I'm best at
+[00:56:35] trading um and that's pretty much three
+[00:56:39] or four things number one is like
+[00:56:40] parabolic action I'm really good at
+[00:56:42] trading stuff that's squeezing number
+[00:56:44] two is halts which is basically similar
+[00:56:47] idea yeah D and rip or uh false halt
+[00:56:51] stuff yep yeah false halts stuff like
+[00:56:53] that um and then the third one is just
+[00:56:56] price action that is um easy enough for
+[00:57:00] me to read which is not going to be like
+[00:57:02] my outlier green days but it's going to
+[00:57:04] be my base hit type of days and
+[00:57:07] sometimes kind of like today I'm I'm
+[00:57:09] sitting up over
+[00:57:11] 11,000 it started off slow and I was
+[00:57:14] just patient and doing base hits and
+[00:57:17] base hits and base hits and then all of
+[00:57:18] a sudden something goes parabolic and
+[00:57:20] squeezes into halts and then makes up
+[00:57:23] the rest of my day so just having the
+[00:57:26] patience to wait for those type that
+[00:57:29] type of action that I know I'm really
+[00:57:31] good at trading and not getting caught
+[00:57:34] up in um one of the drawbacks of being
+[00:57:39] in a room where there are a lot of good
+[00:57:40] Traders is there are a lot of different
+[00:57:42] strategies and just because somebody's
+[00:57:44] making money on this different strategy
+[00:57:46] that they trade doesn't mean that I
+[00:57:48] should be trading it and um I struggle
+[00:57:50] with that too I get a little fomo seeing
+[00:57:52] other people like oh darn it maybe I
+[00:57:54] should have could have would have yeah
+[00:57:55] totally and just realizing that maybe
+[00:57:57] it's not worth the mental Capital you
+[00:58:00] know maybe I could try to learn that
+[00:58:01] strategy better but why I could just
+[00:58:03] focus more on doing better at the stuff
+[00:58:06] I am I already know how to trade well
+[00:58:08] yeah um so having the patience to wait
+[00:58:11] for that and then just being willing to
+[00:58:13] be as aggressive as I know I need to be
+[00:58:16] yeah um meaning by the end of the year I
+[00:58:19] have a goal of doubling the share size
+[00:58:21] that I'm currently using or I love that
+[00:58:24] yeah or at least like that I was using a
+[00:58:26] couple of weeks ago because I'm already
+[00:58:28] making progress on that good and then
+[00:58:31] next year I have a goal of doubling the
+[00:58:34] size that I'm using by the end of the
+[00:58:36] year so for me at this point I'm like
+[00:58:39] yeah every now and then I have a solid
+[00:58:42] red day but generally as long as I'm
+[00:58:44] kind of following what I know I do well
+[00:58:47] I'm going up quite well over time and so
+[00:58:50] the only two things that I really need
+[00:58:51] to focus on are being patient to wait
+[00:58:53] for those things and being willing to be
+[00:58:57] as aggressive as I know that I need to
+[00:58:59] be on the front side in the action that
+[00:59:01] I recognize you're saying the front side
+[00:59:04] that's that's one that I think about a
+[00:59:06] lot because I tend
+[00:59:08] to I I'll I I I feel like I tend to
+[00:59:13] sometimes under Trade the front side and
+[00:59:15] then overcompensate for it by
+[00:59:16] overtrading the back side and I'm like
+[00:59:20] yeah know why didn't and I sometimes
+[00:59:21] will end up it happened today I had
+[00:59:23] $111,000 of profit on this one stock and
+[00:59:26] I gave back 4,000 off the top so I
+[00:59:28] finished up only 7,000 on that stock and
+[00:59:31] it was like why didn't you just stop you
+[00:59:34] know when we had the macd crossover when
+[00:59:36] when it was so obvious that we were on
+[00:59:37] the backside I mean yeah sometimes I can
+[00:59:39] scr a couple of dips and this and that
+[00:59:42] but I'm overtrading the backside and and
+[00:59:44] what if I just wait for the next stock
+[00:59:47] on the front side and hit that one
+[00:59:49] really hard and just only do front side
+[00:59:52] and stop goosing around I say gooing
+[00:59:55] around cuz but you know stop goosing
+[00:59:57] around with trading the backside of
+[00:59:59] these you know because it's just it's
+[01:00:01] like it feels like clockwork that I get
+[01:00:04] back 25% of my profit on every stock I
+[01:00:07] trade which on the one hand I do often
+[01:00:10] say that if you don't start giving back
+[01:00:13] profit you don't know that you peaked so
+[01:00:14] you got to push it until you give back a
+[01:00:16] little off the top but I often seem to
+[01:00:18] give back a little more than I'd like I
+[01:00:20] totally agree yeah and the other thing
+[01:00:22] is
+[01:00:23] like sometimes and it depends on the
+[01:00:26] Market you're in but you don't always
+[01:00:27] know that it is the front side of what
+[01:00:30] is going to be a really good
+[01:00:32] move eventually sometimes that becomes
+[01:00:34] clear and you're like okay I can
+[01:00:36] actually be really aggressive here if I
+[01:00:37] want to um but sometimes you only know
+[01:00:40] it's the backside because it's like
+[01:00:41] clearly the backside and sometimes you
+[01:00:44] only know that because hopefully you
+[01:00:46] avoided the big red candle um I'm
+[01:00:48] looking at celu right in front of me
+[01:00:50] here where halted up gapped up opened
+[01:00:53] higher went straight up into another h
+[01:00:56] that halt resumed lower big red candle
+[01:01:00] um so yeah it's like sometimes you only
+[01:01:03] know it's backside because you just got
+[01:01:05] hurt pretty bad or um like it's really
+[01:01:09] clearly backside
+[01:01:11] but um yeah and it can be kind of scary
+[01:01:13] to be that aggressive on the front side
+[01:01:16] because you're
+[01:01:17] like it is the start of a move you don't
+[01:01:20] know how high it's going to go yet you
+[01:01:22] don't know how strong it's going to be
+[01:01:24] and like a a lot of the shorts in the
+[01:01:27] market sometimes have it way easier
+[01:01:29] because you know we have momentum
+[01:01:31] scanners but that doesn't tell us how
+[01:01:33] high it's going to go or how strong it's
+[01:01:35] going to be whereas if you're short you
+[01:01:38] already know how high it went and how
+[01:01:41] much potential range there is to the
+[01:01:43] downside that you can work with right
+[01:01:46] uming against the previous high is like
+[01:01:49] as long as doesn't make a new high in
+[01:01:51] the driver's seat the only problem is
+[01:01:54] when they break the new high up and then
+[01:01:56] do like in a row yeah which is really
+[01:01:59] fun for us yeah but as I look at that
+[01:02:02] chart on C luu I see what you mean where
+[01:02:05] you had that ramp up little pull back
+[01:02:07] ramp up pull back halt up open higher
+[01:02:09] into a second halt drops down on high
+[01:02:12] volume red macd crosses over and then it
+[01:02:16] tries to come up again but MCD is
+[01:02:20] negative on that second attempt and it
+[01:02:21] doesn't go and that's a spot where you
+[01:02:24] could have gotten caught up there around
+[01:02:26] 480 thinking it's going to rip and halt
+[01:02:28] up and then next thing you know you're
+[01:02:30] stopping out at four bucks and you're
+[01:02:32] right on the stock you go from green on
+[01:02:34] it to red and that's you're upset and
+[01:02:38] that and that's the type of thing that
+[01:02:40] could put you on a bad red day right
+[01:02:42] it's a spiral do you try to build a
+[01:02:45] cushion on the day before you size up or
+[01:02:47] do you not really think about that no
+[01:02:49] not not really I'm not necessarily
+[01:02:52] looking to build a cushion um
+[01:02:56] I do like if we're talking about when
+[01:02:59] the Market opens um I will observe like
+[01:03:03] volume and range and Direction but
+[01:03:06] pretty much like when I have a feel of
+[01:03:08] how it's moving I'll just pretty much be
+[01:03:11] getting in there um not necessarily with
+[01:03:14] like third size or half size it's like
+[01:03:17] you go full size right away if you see
+[01:03:19] the setup you like pretty much yeah but
+[01:03:22] like at the open my full size isn't
+[01:03:24] going to be that big um relatively I'm
+[01:03:28] I'm willing to do like two to three
+[01:03:30] times what that size is later in the day
+[01:03:35] I guess so yeah I mean I don't
+[01:03:37] necessarily think of it as building a
+[01:03:39] cushion as much as just getting in tune
+[01:03:42] with how things are moving that day do
+[01:03:44] you think about daily goal or do you not
+[01:03:46] have a daily goal you work with yeah
+[01:03:48] that's a good question and I I get that
+[01:03:50] question a lot in the mentor sessions
+[01:03:52] that I do I don't have a daily goal at
+[01:03:54] all um and I honestly don't totally know
+[01:04:01] how to think about a daily goal in terms
+[01:04:03] of like is it good or bad I think that
+[01:04:05] for a very experienced Trader like you
+[01:04:08] or or like me like you have a daily goal
+[01:04:11] I have numbers in my mind that I'm like
+[01:04:14] okay that's a respectable day and it
+[01:04:16] also depends on what the Market's giving
+[01:04:18] us yeah um but with the experience that
+[01:04:22] we have we also know like like things
+[01:04:26] are slowing down it's time to back off
+[01:04:27] doesn't really matter what number I hit
+[01:04:29] or if I stick around and like today this
+[01:04:31] thing pops up and doubles my day it's
+[01:04:34] like well what if I had shut down just
+[01:04:36] because I had hit this arbitrary number
+[01:04:38] yep we were talking about earlier the
+[01:04:40] market doesn't care about you and your
+[01:04:43] profit and your numbers um I don't
+[01:04:45] necessarily have a daily goal I have
+[01:04:48] like I'll I'll look at the moves that we
+[01:04:50] had the opportunity that we had and like
+[01:04:52] does it match up with how I trade um How
+[01:04:55] do I feel like I did on that what
+[01:04:57] mistakes did I make that day what can I
+[01:04:59] try to do better the next day um but uh
+[01:05:05] it's it's all just a process over time
+[01:05:08] trying to do better um do you use a Max
+[01:05:12] loss I never have yeah for me it just
+[01:05:16] hasn't historically been the right thing
+[01:05:18] like yesterday I went from up 2000
+[01:05:22] pre-market to taking some bad hits on
+[01:05:24] djt as it halted down at the open I was
+[01:05:29] up two to down five and finished the day
+[01:05:31] up six so yeah a b yeah and I I I don't
+[01:05:36] like days like that I don't like one of
+[01:05:38] my trading looks like that which is yeah
+[01:05:40] I think a big reason why my trading
+[01:05:42] today was much smoother and just up
+[01:05:44] you're such an active Trader I'm you
+[01:05:46] know I'm kind of sometimes I think that
+[01:05:49] in theory if I had enough trades every
+[01:05:52] day I would never have a red day cuz my
+[01:05:54] accuracy is almost 70%
+[01:05:56] so if I always had 10 more trades seven
+[01:06:00] of them would be
+[01:06:02] winners but so part of me is like even
+[01:06:04] if I had The Misfortune of going deeper
+[01:06:06] out in the first three you know keep
+[01:06:08] trading but in reality and I think
+[01:06:12] that's more so for you because you trade
+[01:06:14] even more than me because in reality
+[01:06:16] Pacific time so the Market opens at 6:30
+[01:06:18] and I can sit here for two to three
+[01:06:20] hours and it's still early yeah right
+[01:06:24] exactly um yeah I feel like for me I um
+[01:06:28] I often will feel like I'm running out
+[01:06:29] of time and I'm like you know if I
+[01:06:32] haven't if I'm this red at this point in
+[01:06:34] the day and because I'm always sort of
+[01:06:36] thinking about preserving that optimal
+[01:06:39] mental state yeah never really want to
+[01:06:41] let myself draw down more than x amount
+[01:06:44] that I could recover in one day so my
+[01:06:46] daily Max loss is the same as my daily
+[01:06:48] goal and and I do keep those numbers in
+[01:06:51] my mind so I'm like if I have a Max loss
+[01:06:54] day I can recover it in the next day
+[01:06:56] without a challenge and I and and I
+[01:06:58] don't go into like you know the type of
+[01:07:01] draw down that's going to take you know
+[01:07:03] 15 20 days to recover from yeah not that
+[01:07:07] I couldn't do it in one day if the
+[01:07:08] market was crazy hot but that
+[01:07:09] realistically it wouldn't happen yeah so
+[01:07:12] like I I keep myself a lot more I have a
+[01:07:15] lot I have guard rails on but sometimes
+[01:07:18] and I know Jess said this that he trades
+[01:07:21] with zero rules whatsoever because he's
+[01:07:23] like you know I have that rule I have
+[01:07:24] that guard rail the next thing you know
+[01:07:26] we have a stock like celu that goes up
+[01:07:29] 200% in the afternoon and I miss it
+[01:07:31] because I hit my Max loss well now I
+[01:07:33] just stopped myself from taking a great
+[01:07:35] trade could have been back to green so
+[01:07:37] who's that done now and frequently we're
+[01:07:40] we say to ourselves the best opportunity
+[01:07:42] probably is tomorrow and frequently
+[01:07:45] that's true but just like you said
+[01:07:47] Sometimes the best opportunity might be
+[01:07:49] later in the day when you've hit your
+[01:07:50] max loss but something's going parabolic
+[01:07:52] and you're like well what do I do then
+[01:07:55] um I do really agree with you with what
+[01:07:58] you said about preserving your mental
+[01:08:00] state your mental capacity um I think
+[01:08:03] that's like the most important thing and
+[01:08:06] just like I have couple of notes on my
+[01:08:08] desk about the things that I should be
+[01:08:10] trading I have in my notes the things
+[01:08:13] that I know tend to trigger me and tend
+[01:08:16] to set me off in a bad spiral either
+[01:08:19] into Revenge trading because I'm like I
+[01:08:21] see Nvidia doing something I take a loss
+[01:08:24] on it it's like a $200 loss whatever
+[01:08:26] I'll make that back on the next one that
+[01:08:28] I take okay now I'm down 800 on it now
+[01:08:32] I'm kind of pissed and right um so just
+[01:08:35] avoiding that kind of stuff in general
+[01:08:38] yep from the start is the best way for
+[01:08:41] me to keep myself in a good mental state
+[01:08:43] and hopefully that like positive spiral
+[01:08:46] that we were talking about but yeah as
+[01:08:48] far as like an actual Max loss I think I
+[01:08:51] think um my opinion is that it kind of
+[01:08:54] depends on the individual for me it's
+[01:08:56] never been quite the right thing I have
+[01:08:57] countless days going from like down
+[01:09:01] thousands to um well into the green
+[01:09:05] thousands and sure they're definitely
+[01:09:08] not my favorite types of days but you
+[01:09:10] know what if I had stopped at lows so
+[01:09:12] yeah yeah it just depends yeah yeah no
+[01:09:16] that's I I think that I think for a
+[01:09:18] beginner
+[01:09:19] Trader I mean I think the right way to
+[01:09:22] learn and not everyone has the
+[01:09:23] opportunity most people don't have the
+[01:09:24] opportunity to learn the right way they
+[01:09:26] learn they're self-taught they make a
+[01:09:27] lot of mistakes but I think the right
+[01:09:29] way to learn is to learn with some real
+[01:09:32] guard rails on because those those help
+[01:09:36] you avoid making a huge mistake at the
+[01:09:39] beginning yeah and then spending the
+[01:09:41] whole first part of your career in the
+[01:09:45] shadow of this big loss yeah I totally
+[01:09:48] agree with that it's like keeping
+[01:09:50] yourself just as safe as possible and
+[01:09:52] and you did that in a lot of ways by
+[01:09:53] trading with really small size at the
+[01:09:55] beginning
+[01:09:55] which was a which you know was a factor
+[01:09:58] of starting when you're younger and just
+[01:09:59] not having as much money that's one of
+[01:10:01] theages with starting when you're
+[01:10:03] younger that people some sometimes think
+[01:10:05] is not an advantage oh I need more money
+[01:10:07] I actually think there's a lot to be
+[01:10:08] said for starting with less Rock ball is
+[01:10:11] closer you make big mistakes you have
+[01:10:12] big wakeup calls the total cost of your
+[01:10:15] education was a lot lower than someone
+[01:10:17] who might have been in their 40s or 50s
+[01:10:19] with a sixf fig Ira that they start
+[01:10:22] trading in yeah and start just holding
+[01:10:25] position overnight hoping they'll turn
+[01:10:26] around next thing you know they're down
+[01:10:28] 70%
+[01:10:30] yeah yeah totally the total cost of my
+[01:10:33] tuition was extremely low all things
+[01:10:36] considered I paid a lot more to go to
+[01:10:38] college than I paid to learn how to
+[01:10:40] trade the markets and yeah um yeah I
+[01:10:44] totally agree with that especially for a
+[01:10:45] beginner I think the most important
+[01:10:48] thing that you can do is just keep
+[01:10:49] yourself in the market learning and
+[01:10:51] losing as little as possible and
+[01:10:53] hopefully making some gains while you're
+[01:10:54] learning too but that's not necessarily
+[01:10:57] the main point at that time what does
+[01:11:00] your life look like now that you know
+[01:11:03] you're you've had this incredible year I
+[01:11:06] mean how has your life changed from four
+[01:11:09] years ago especially through this year
+[01:11:11] where now you've really got a bit of a
+[01:11:13] Tailwind I mean financially my life has
+[01:11:16] changed quite a bit
+[01:11:19] um I think probably the biggest thing
+[01:11:22] that has changed is my mindset in
+[01:11:25] General um my personality is the same I
+[01:11:29] think that my personality hasn't really
+[01:11:31] changed at all um which I'm kind of
+[01:11:35] proud of you know a lot of people maybe
+[01:11:37] make a lot of money not necessarily that
+[01:11:41] I've made a lot of money I've made good
+[01:11:43] money but but you seem I do recall that
+[01:11:45] you drive a car that starts with a p and
+[01:11:47] ends with a
+[01:11:49] orche yeah that did change um okay yeah
+[01:11:54] I I've always been interested in borches
+[01:11:57] and finally this year had the
+[01:12:00] opportunity financially to afford one of
+[01:12:04] my dream cars which is not necessarily
+[01:12:06] an 88 but the one I bought is a 1988 um
+[01:12:10] Porche 911 which is a lot of fun a lot
+[01:12:14] of fun owning in general but
+[01:12:18] um sometimes for me it's nice to have
+[01:12:22] physical reminders of this is what my
+[01:12:25] hard work and dedication and focus and
+[01:12:28] study for years and years has gotten meh
+[01:12:31] and I know that there can be more too if
+[01:12:34] I keep keep up with it and so that's
+[01:12:37] yeah that's one thing of course but uh
+[01:12:40] uh I have a lot more freedom and
+[01:12:41] flexibility um in just what I do
+[01:12:44] day-to-day what my life looks like what
+[01:12:46] I get to imagine my life can look like
+[01:12:48] and some things that make me really
+[01:12:51] happy like being able to take care of
+[01:12:53] people around me that has never changed
+[01:12:56] um it has gotten better since making
+[01:13:00] profit in the market um like I I I can
+[01:13:05] pay for a nice dinner for everybody and
+[01:13:08] in one good day of profit um yeah so
+[01:13:11] like I like to have dinner parties with
+[01:13:13] friends and stuff like that where I'll
+[01:13:15] cook for them and um that makes me feel
+[01:13:17] really good or I mean it's it's amazing
+[01:13:20] I think about this often sometimes when
+[01:13:22] I'll have a nice day trading so today
+[01:13:24] I'm up 13
+[01:13:27] $1,366 if I go to the grocery store
+[01:13:29] today there's nothing in the grocery
+[01:13:31] store that I could possibly put in my
+[01:13:33] car that's going to move the like it
+[01:13:35] doesn't matter and and just that and and
+[01:13:38] if I if you want to shop for friends or
+[01:13:40] you want to take dinner for friends out
+[01:13:41] to dinner yeah it's the the ability to
+[01:13:43] make that kind of
+[01:13:45] money period even if you were doing it
+[01:13:48] in for eight hours a day working but
+[01:13:50] then the additional fact that
+[01:13:52] realistically I I today I traded for
+[01:13:55] like two and a half hours it's yeah I
+[01:13:57] think so forunate I think that I was in
+[01:14:00] the market for like four hours today I
+[01:14:02] stayed a little bit longer because I
+[01:14:05] things were slow I ate some breakfast I
+[01:14:08] was about to go to the gym then seeu
+[01:14:10] started moving so I was here for a
+[01:14:11] little bit longer but yeah I totally
+[01:14:14] agree and I feel like almost there's
+[01:14:17] somewhat of a responsibility to to do
+[01:14:20] that and be good to the people around
+[01:14:23] you that um just
+[01:14:25] not that they're not as fortunate
+[01:14:28] because a lot of my friends have good
+[01:14:29] jobs but sure um it's just really nice
+[01:14:32] when people take care of you and um it
+[01:14:36] feels really good for me to be able to
+[01:14:38] do that and I know that they appreciate
+[01:14:39] it so like that's a huge part of it but
+[01:14:42] then just
+[01:14:43] mentally financially I don't have to
+[01:14:46] worry about anything um and especially
+[01:14:48] with like inflation and the cost of
+[01:14:51] groceries and stuff like this and I was
+[01:14:54] on the phone with my my dad the other
+[01:14:55] week my flight to go visit my family for
+[01:14:58] Thanksgiving was like triple what it
+[01:15:00] normally would be and I was talking with
+[01:15:02] him and I was
+[01:15:03] like thank God I do what I do and that I
+[01:15:06] have gotten good at it because you know
+[01:15:09] most people just wouldn't be able to go
+[01:15:11] see their family for Thanksgiving
+[01:15:13] because of that um yeah so it's stuff
+[01:15:15] like that it it has just allowed me to
+[01:15:18] have a lot more freedom and flexibility
+[01:15:20] in how I live my life and also just the
+[01:15:22] opportunities and things that I
+[01:15:25] consider doing or um yeah it's it's it's
+[01:15:30] much different
+[01:15:32] it's you know you've traveled quite a
+[01:15:34] bit in these last few years which is
+[01:15:36] yeah something do ordinarily when I
+[01:15:39] started trading in 2020 I had had a
+[01:15:41] dream of moving to Italy and trading
+[01:15:45] which has changed a little bit now I
+[01:15:46] don't necessarily want to live in Italy
+[01:15:49] um and trade and and uh have my life
+[01:15:53] centered there but I do get to visit
+[01:15:56] whenever I want really I think Japan
+[01:15:58] might be up next on the list but yeah
+[01:16:02] early late nights I know yeah that's one
+[01:16:05] thing that I have to consider because my
+[01:16:06] girlfriend is like we could go to Hawaii
+[01:16:08] I'm like yeah it's a pretty easy flight
+[01:16:11] but the Market opens at 3:30 in the
+[01:16:13] morning there so uh when I'm in Europe
+[01:16:17] trading is really easy The Market opens
+[01:16:19] at 3:30 in the afternoon so super easy
+[01:16:23] um
+[01:16:25] yeah that's that's definitely a first
+[01:16:27] world problem but what what would you
+[01:16:29] say um would be your biggest words of
+[01:16:33] wisdom for someone who's at the
+[01:16:36] beginning of their learning curve who's
+[01:16:37] you know kind of back where you were
+[01:16:39] when you were getting started what do
+[01:16:40] you wish maybe you had done differently
+[01:16:42] You' encourage someone to do I don't
+[01:16:44] think that I wish or would have wished
+[01:16:46] that I did anything differently um I
+[01:16:49] think that there were probably a few
+[01:16:51] things that I did really well number one
+[01:16:56] probably being that I kept myself in the
+[01:16:58] market I kept myself in the game I
+[01:17:00] didn't have an opportunity really to be
+[01:17:02] completely knocked out and um not that
+[01:17:07] it is going to work for 100% of people
+[01:17:09] but I think you know if you can rack up
+[01:17:12] a year or two years or three years of
+[01:17:15] experience um I think at that point just
+[01:17:17] your likelihood of getting it finding an
+[01:17:20] edge somewhere survive to you thrive
+[01:17:23] yeah just has such a better chance if
+[01:17:24] you're able to do that yeah um you g a
+[01:17:28] lot of experience showing up every day
+[01:17:30] yeah that's probably the first thing is
+[01:17:32] just don't let yourself get knocked out
+[01:17:35] um and then probably the second is why
+[01:17:37] are you doing it um for me it was really
+[01:17:40] really clear that I wanted to have
+[01:17:44] something that I could earn an income on
+[01:17:46] my own um a big part of that being a
+[01:17:49] former highlevel athlete was and and um
+[01:17:54] sales right out of college was that I I
+[01:17:56] really enjoyed seeing the output of
+[01:18:00] whatever I was putting in directly I
+[01:18:02] really didn't like the idea of like this
+[01:18:04] is my salary maybe next year it gets
+[01:18:07] bumped 3% and that's my life um yeah
+[01:18:11] that was a big part for me just like
+[01:18:14] financially and like what am I going to
+[01:18:16] do the rest of my life I had a an
+[01:18:18] existential crisis one time driving into
+[01:18:21] San Francisco across the bay bridge I
+[01:18:24] was just in traffic with everybody else
+[01:18:26] and uh welcome to the Machine by Pink
+[01:18:29] Floyd came on yeah on my Shuffle and I
+[01:18:32] was like this is a nightmare yeah yeah
+[01:18:36] and so for me I desperately wanted to
+[01:18:40] find a way out of that I didn't want my
+[01:18:42] life to look like that and and like I
+[01:18:44] said earlier seeing you having found the
+[01:18:48] way out and seeing that other people had
+[01:18:51] too I was like I have to I have to
+[01:18:53] figure it out I can't like myself get
+[01:18:55] knocked out um and I have to figure out
+[01:18:59] how to make those big losses smaller and
+[01:19:02] further apart and figure out how to make
+[01:19:05] some more in the meantime and you know
+[01:19:08] for you guys that are watching this
+[01:19:09] you're you're you're learning about what
+[01:19:12] the path out looks like I I think there
+[01:19:14] is um the path most traveled when it
+[01:19:18] comes to how to approach trading and
+[01:19:20] what we know is that most people that
+[01:19:22] take that path well the statistic is the
+[01:19:24] path most travel is people lose money so
+[01:19:27] you've got to really think about what is
+[01:19:29] it that most people are doing that's
+[01:19:31] resulting in them losing and I my
+[01:19:32] opinion is they come into the market
+[01:19:34] really without strategy kind of shooting
+[01:19:36] from the hip taking too much risk and
+[01:19:37] then they just sort spiral out and then
+[01:19:40] what's the path that people are taking
+[01:19:43] where they're finding success yeah and
+[01:19:46] you know we're we're always going to say
+[01:19:49] that you know of course my results
+[01:19:50] aren't typical and neither are Danny's
+[01:19:51] we've we know that trading is risky but
+[01:19:55] I if you want to emulate anyone or look
+[01:19:57] up to anyone it's someone that's found
+[01:20:00] the path and I think that's a really
+[01:20:03] good starting point so this has been
+[01:20:05] this has been really interesting and I
+[01:20:06] hope that everyone watching this really
+[01:20:07] enjoyed it and thank you for um for
+[01:20:10] spending some time telling people about
+[01:20:12] your story I I love hearing it you've
+[01:20:14] you've done great and I'm so excited to
+[01:20:15] see you know what the next six months
+[01:20:17] what the next 12 months look like for
+[01:20:19] you just you know head down and keep
+[01:20:21] chipping away me too I have big plans um
+[01:20:25] obviously some SL a lot of that depends
+[01:20:27] on what the market gives us but y um if
+[01:20:31] the Market's there for it I'm really
+[01:20:33] excited for what we can do and then uh
+[01:20:35] and then I hear maybe there's another
+[01:20:37] Summit coming up sometime yeah there
+[01:20:39] will be yeah so that's going to be fun
+[01:20:42] having a get together where we can all
+[01:20:43] be in person and trade together is going
+[01:20:44] to be awesome so I think yeah right now
+[01:20:47] we're looking at um uh spring so late
+[01:20:50] winter spring all right cool cool all
+[01:20:53] right well thank you guys for for uh
+[01:20:54] tuning into this episode and we'll see
+[01:20:56] you for the next one real soon
+[01:20:58] [Music]

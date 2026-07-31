@@ -1,0 +1,661 @@
+# Pattern Day Trader Rule EXPLAINED (And How to Get Around it)
+# https://www.youtube.com/watch?v=ryOcGLJNOJU
+# duration_sec: 1487
+
+[00:00:00] [Music]
+[00:00:01] welcome to today's Deep dive into
+[00:00:03] everything you need to know about the
+[00:00:05] pattern day trader rule also known as
+[00:00:08] the PDT rule in today's episode I'm
+[00:00:10] going to walk you through the nuances of
+[00:00:12] how this rule Works who it applies to
+[00:00:15] cuz it's not everyone and it may not be
+[00:00:17] you and the steps that Traders are
+[00:00:19] taking today to get around the PDT rule
+[00:00:22] if it does in fact apply to that we've
+[00:00:24] got a lot to cover so let's go ahead and
+[00:00:26] jump into the slide deck now what is the
+[00:00:29] PDT rule it's a pesky rule that was
+[00:00:31] enacted on February 27th 2001 just after
+[00:00:36] the bubble this rule states that any
+[00:00:40] Trader with a margin account who
+[00:00:42] executes more than three- day trades
+[00:00:44] within a five business day period which
+[00:00:46] would basically be anyone who's trying
+[00:00:48] to day trade be labeled as a pattern day
+[00:00:51] trader now pattern day Traders must
+[00:00:54] maintain a minimum account balance of
+[00:00:58] $25,000 now that can be a combination of
+[00:01:01] stock Holdings and cash but still
+[00:01:04] $25,000 that's a lot of money but here's
+[00:01:07] the key word it only applies to margin
+[00:01:11] accounts margin accounts are an
+[00:01:14] interesting type of account in the
+[00:01:15] United States in that they allow Short
+[00:01:18] Selling which means you can short a
+[00:01:19] stock and profit as the stock declines
+[00:01:22] in value it allows you to trade with
+[00:01:25] unsettled cash and it allows you to
+[00:01:27] trade on Leverage so the trading on
+[00:01:30] unsettled cash is interesting because
+[00:01:32] when you take a trade it actually takes
+[00:01:35] time for that trade to settle but in a
+[00:01:38] margin account they know the trade is
+[00:01:40] going to settle so they just let you
+[00:01:42] continue to trade however in a cash
+[00:01:45] account you have to wait for that trade
+[00:01:47] to actually settle and clear before you
+[00:01:50] can proceed to take another trade so
+[00:01:53] that's a big differentiator between cash
+[00:01:56] accounts and margin accounts margin
+[00:01:58] accounts you can short stocks you can
+[00:02:00] trade with a limited amount of time
+[00:02:02] because you can trade on unsell cash and
+[00:02:04] you could trade on Leverage you can't do
+[00:02:06] any of those things in a cash account so
+[00:02:10] let's talk for a second about the
+[00:02:12] leverage because this is something
+[00:02:13] that's really interesting during the
+[00:02:15] dotcom bubble there were a lot of people
+[00:02:17] who were trading and investing buying
+[00:02:20] stocks and holding them overnight using
+[00:02:22] leverage in fact this was also true
+[00:02:24] during the 1920s at the turn of the
+[00:02:27] century there was this big wave of all
+[00:02:30] these new inventions the car the
+[00:02:32] dishwasher the washing machine and these
+[00:02:34] were really expensive items and so the
+[00:02:36] way people bought them was through the
+[00:02:38] use of credit or layaway you put some
+[00:02:41] money down now maybe 10% down and then
+[00:02:43] you pay the rest on a monthly payment
+[00:02:46] and so in the 1920s the bankers came up
+[00:02:48] with this great idea to let people buy
+[00:02:51] stock on layaway why not buy a
+[00:02:54] percentage of General Electric and now
+[00:02:56] you're in the stock as the stock goes up
+[00:02:59] in value you get to benefit from that
+[00:03:01] and you just have to pay it off a little
+[00:03:02] bit each month and so the way it would
+[00:03:04] work is if you want to buy General
+[00:03:06] Electric let's say you want to buy
+[00:03:08] $1,000 worth you could put $100 down as
+[00:03:12] a down payment and the broker would
+[00:03:14] actually buy the $1,000 of stock for you
+[00:03:17] and now you just pay the broker a little
+[00:03:19] bit each month until you've eventually
+[00:03:21] paid up the total balance of the stock
+[00:03:24] now that's all well and fine when the
+[00:03:26] market is going up and in fact what this
+[00:03:29] did was it allowed a tremendous amount
+[00:03:32] of buying on borrowed money so what it
+[00:03:35] really did was it created a bubble an
+[00:03:38] asset bubble in the market where people
+[00:03:40] were buying and buying and buying far
+[00:03:42] more than the actual cash that they
+[00:03:44] could afford so what happens when the
+[00:03:46] stock goes down well let's jump on to
+[00:03:49] the screen share and I'll give you this
+[00:03:50] example so let's say it was 1998 and it
+[00:03:54] was the.com bubble and you had an
+[00:03:56] account with four times leverage and it
+[00:03:58] had $1,000 in it so with $11,000 that
+[00:04:02] meant with four times leverage you could
+[00:04:04] buy $4,000 worth of stock so let's say
+[00:04:07] you proceeded to buy 10,000 shares of a
+[00:04:09] DOT stock at 40 cents a share well if
+[00:04:14] the position suddenly dropped to
+[00:04:17] 15 that's a big drop you would be down
+[00:04:21] $2500 on that trade now since you only
+[00:04:24] put a deposit of $11,000 in the account
+[00:04:28] the cushion of equity in your your
+[00:04:29] account is gone and now the broker is at
+[00:04:33] risk of losing the money that they let
+[00:04:35] you borrow for the trade the result is a
+[00:04:38] margin call the broker issues you a
+[00:04:40] margin call and this occurs when you
+[00:04:42] lose money that you borrowed from your
+[00:04:44] broker so while the broker will attempt
+[00:04:47] to collect this money that you are now
+[00:04:49] in debt to them for if they're not able
+[00:04:52] to the broker is the one that's on the
+[00:04:54] hook so what happened during the Doom
+[00:04:56] bubble it and just this is exactly what
+[00:04:58] happened during the 1929 stock market
+[00:05:01] crash is all of a sudden you had the
+[00:05:03] banks that were going out of business
+[00:05:04] you had Brokers that were blowing up I
+[00:05:07] mean yes they had individual people who
+[00:05:09] owed them money but their ability to
+[00:05:11] collect that money was non-existent
+[00:05:14] which means they were the ones who were
+[00:05:15] stuck and so when the banks go under
+[00:05:18] that's a major problem and so what we
+[00:05:19] know and this happened again in 20072
+[00:05:22] 2008 in the financial crisis of um
+[00:05:25] subprime mortgages right so we had this
+[00:05:28] big burst again and following these big
+[00:05:31] Financial meltdowns regulations come in
+[00:05:35] to try to tighten things up to secure
+[00:05:37] the industry and so in 2001 the PDT rule
+[00:05:40] was one of the steps that were taken by
+[00:05:42] Regulators to try to prevent Brokers
+[00:05:45] from blow blowing up it's not to be
+[00:05:47] honest it's not about retail Traders
+[00:05:49] losing their money retail Traders lose
+[00:05:50] their money so what we're we're idiots
+[00:05:52] we're retail Traders it's when the banks
+[00:05:55] lose money that's when there's a problem
+[00:05:57] you look back at all of the big economic
+[00:06:00] declines the recessions the depressions
+[00:06:02] when the banks are at risk that's when
+[00:06:05] the whole system is at risk so that's
+[00:06:08] the thing is these are regulations
+[00:06:10] designed to protect the broker they may
+[00:06:12] say they're designed to protect retail
+[00:06:14] Traders like you and I but I don't
+[00:06:15] really buy that I really think it's
+[00:06:17] about protecting the broker so now with
+[00:06:20] a $25,000 minimum in the account you've
+[00:06:22] got $25,000 minimum yes you still have
+[00:06:26] four times leverage which G which gives
+[00:06:28] you up to $100,000 in buying power but
+[00:06:30] your cushion is a lot bigger so here you
+[00:06:33] could still if you wanted to you could
+[00:06:35] still buy a huge position on a 40 C
+[00:06:38] stock but as that price starts to
+[00:06:40] decline all the Brokers have
+[00:06:43] sophisticated riskmanagement software
+[00:06:45] running where in real time they're
+[00:06:48] flagging accounts that are at risk of of
+[00:06:51] having a margin call and what they can
+[00:06:53] do is they can autol liquidate the
+[00:06:55] positions that that account is holding
+[00:06:57] to try to reduce the risk of the broker
+[00:07:00] now further steps that a lot of these
+[00:07:01] Brokers will end up taking is they
+[00:07:03] actually will restrict trading on stocks
+[00:07:07] that they think have higher likelihood
+[00:07:09] of causing these types of losses so this
+[00:07:12] rule of the PDT rule is really about um
+[00:07:15] yes it prevents investors from trading
+[00:07:17] on Leverage unless they have $25,000 but
+[00:07:19] it gives them the bigger cushion so
+[00:07:20] ultimately who's really safe is the
+[00:07:23] broker and so we often see that Brokers
+[00:07:26] will put these margin restrictions on a
+[00:07:29] number of different different stocks for
+[00:07:30] instance they might say there's no
+[00:07:32] margin and you can't use any leverage on
+[00:07:34] a stock under $3 a share right so when I
+[00:07:38] actually pull up the level two window
+[00:07:40] right here on on a stock I can see how
+[00:07:43] much leverage I can use so on Nvidia I
+[00:07:46] can use four times leverage 25% means
+[00:07:49] that's how much cash you have to put
+[00:07:51] down this still is like uh almost like
+[00:07:55] you know it it it is res a residual from
+[00:07:59] the how much you have to put down to buy
+[00:08:01] the whole thing you only have to put
+[00:08:02] down 25% to buy the whole thing here on
+[00:08:05] Nvidia so you get four times leverage on
+[00:08:07] this stock you have to put down 60% and
+[00:08:10] on this stock you have to put down the
+[00:08:12] full 100% so here you can't use your
+[00:08:16] leverage now if you were trading in a
+[00:08:18] margin account you could still day trade
+[00:08:20] this as much as you want right because
+[00:08:22] you can trade on unsettled cash so you
+[00:08:24] can buy you could sell Buy sell you
+[00:08:26] could do that a million times in one day
+[00:08:27] but you can't use any leverage so what's
+[00:08:31] interesting here is that you have a PDT
+[00:08:33] rule which requires traders to have a
+[00:08:36] minimum of
+[00:08:37] $25,000 which is really so when they're
+[00:08:40] trading on Leverage there's a bigger
+[00:08:42] cushion and then the Brokers turn around
+[00:08:44] and restrict leverage so if you're going
+[00:08:46] to restrict leverage then why don't you
+[00:08:48] just let us trade on unsettled cash even
+[00:08:51] if we only have $1,000 in the account so
+[00:08:54] here's here's what I think what I think
+[00:08:56] they should have done and of course no
+[00:08:57] one asked me my opinion doesn't matter
+[00:08:59] but what I think they should have done
+[00:09:00] is rather than creating a new rule that
+[00:09:03] stated you need to have $25,000 to trade
+[00:09:06] with four times leverage they should
+[00:09:08] have instead created a new account type
+[00:09:12] which is a margin account with no
+[00:09:15] leverage just give people margin
+[00:09:18] accounts with no leverage then they can
+[00:09:20] day trade but they're not trading on
+[00:09:21] borrowed money but no they wouldn't want
+[00:09:23] to do that why not because they want you
+[00:09:26] trading on borrowed money they want you
+[00:09:28] trading on borrowed money because that
+[00:09:29] means you're trading bigger positions
+[00:09:31] and they get paid the more you trade and
+[00:09:35] the bigger the positions are the more
+[00:09:36] money the exchanges make so you know the
+[00:09:38] the system is all sort of reinforcing
+[00:09:40] itself like yes they come in and they
+[00:09:42] add some of these regulations to help
+[00:09:44] prevent the banks from blowing up but at
+[00:09:46] the same time they're still just
+[00:09:47] reaffirming what they really want which
+[00:09:49] is you to trade so now what a lot of
+[00:09:51] Traders do is they say well jeez I want
+[00:09:54] a day trade and I don't want to trade in
+[00:09:57] a cash account so now I've got to go
+[00:09:59] borrow
+[00:10:00] $25,000 to put it into my account and
+[00:10:02] the Brokers are like chick Ching that's
+[00:10:04] exactly what we wanted a bigger deposit
+[00:10:06] yes please go borrow that money from
+[00:10:08] whoever you need to now that's not the
+[00:10:10] best way to get around the PDT Rule and
+[00:10:12] that's not really getting around it
+[00:10:13] that's meeting the PDT rule by borrowing
+[00:10:16] money and I've heard of people that have
+[00:10:17] done things like take out a a loan on
+[00:10:19] their car do something really
+[00:10:20] irresponsible just to come up with the
+[00:10:22] money so they could trade that's not a
+[00:10:24] good idea there's better ways to deal
+[00:10:26] with this all right so the margin
+[00:10:28] restrictions are are a major problem and
+[00:10:30] your number one best way to get around
+[00:10:32] the PDT rule if we're going to be honest
+[00:10:34] is to Simply use a cash account so if
+[00:10:37] you're using a cash account you can
+[00:10:38] trade an unlimited amount of times until
+[00:10:41] you run out of cash right there's no
+[00:10:43] restriction of the number of Trades you
+[00:10:44] could take it's just you trade until you
+[00:10:46] run out of cash so the best way to get
+[00:10:48] around the PDT rule is to use a cash
+[00:10:50] account and focus on building
+[00:10:53] consistency and your account value
+[00:10:56] slowly and steadily once the account
+[00:10:58] cross cost is over 25,000 at that time
+[00:11:02] convert it to a margin account that's
+[00:11:04] exactly what I did on my recent small
+[00:11:06] account challenge using Charles Schwab
+[00:11:08] and The Thinker swim platform took me
+[00:11:10] about 16 days to slowly grow the account
+[00:11:13] now it wasn't that slow but I grew it up
+[00:11:14] to a little over $25,000 and then I knew
+[00:11:17] at that point I could switch it to a
+[00:11:19] margin account so is it ideal no but in
+[00:11:22] a lot of ways I think it's good because
+[00:11:24] it forces you to be disciplined you're
+[00:11:26] going to trade less because you know
+[00:11:27] you're going to run out of cash so
+[00:11:29] you're going to focus on higher quality
+[00:11:30] setups you've only got a few trades each
+[00:11:32] day you want them to be the most
+[00:11:34] impactful so you can grow the account
+[00:11:35] you don't want to take losses so it's
+[00:11:37] going to force you to focus on quality
+[00:11:39] over quantity so I think it's a good way
+[00:11:41] to to grow an account and it's a good
+[00:11:42] way for a beginner Trader to get started
+[00:11:44] but I understand that not everyone is
+[00:11:46] going to want to do that so it's worth
+[00:11:47] noting that it is only us residents that
+[00:11:50] the PDT rule applies to so does it apply
+[00:11:54] to you so look in the mirror and say am
+[00:11:56] I a US resident if the answer is yes
+[00:11:58] then it applies to you if the answer is
+[00:12:00] no then it does not apply to you okay so
+[00:12:03] here's the thing that's really
+[00:12:04] interesting it's actually us Brokers
+[00:12:08] that are required to enforce it as us
+[00:12:10] resident we're not prohibited from day
+[00:12:13] trading with less than
+[00:12:15] $25,000 if we want to go open an
+[00:12:18] international account we can go do that
+[00:12:20] that's our choice we're allowed to do
+[00:12:22] that but us broker dealers are not
+[00:12:25] allowed to have anyone day trading
+[00:12:27] unless they have a minimum of 25 ,000 so
+[00:12:30] this is what this essentially means if
+[00:12:32] you open an account with ER trade if you
+[00:12:33] open an account with Charles Schwab any
+[00:12:35] of these brokers in the United States
+[00:12:37] Robin Hood whatever they're going to
+[00:12:39] enforce this minimum on you even if
+[00:12:41] you're an international customer so if
+[00:12:44] you're from Ireland and you say oh I
+[00:12:46] want to open an account with uh with
+[00:12:49] Weeble and I'm going to spare you by
+[00:12:50] doing an Irish accent here now that was
+[00:12:52] that was forgiven because I didn't have
+[00:12:54] to spare you but I spared you then you
+[00:12:57] you could open an account here in the US
+[00:12:58] but you would subject yourself to the
+[00:13:01] PDT rule so now you'd have to fund an
+[00:13:03] account with a minimum of
+[00:13:04] $25,000 why would you do that well there
+[00:13:07] are Brokers here in the US that you
+[00:13:09] might really like they have features
+[00:13:11] that you really want maybe a direct
+[00:13:13] access broker maybe a broker that has
+[00:13:15] great availability of shares to borrow
+[00:13:17] um you know a broker that just has
+[00:13:20] really good routing whatever the case is
+[00:13:22] you may be interested opening an account
+[00:13:24] here with a US broker but you would
+[00:13:26] subject yourself to the PDT rule so as
+[00:13:28] long as you can afford it it's no big
+[00:13:30] deal it's not it's not an issue but if
+[00:13:32] you can't afford it then you might say
+[00:13:35] well uh maybe I shouldn't so non- us
+[00:13:38] residents don't have a PDT rule so for
+[00:13:41] instance if you're in uh let's say
+[00:13:43] you're in Australia you're in Australia
+[00:13:45] and you have two choices you could open
+[00:13:47] an account in the US $225,000 minimum or
+[00:13:50] you could go to Weeble in Australia so
+[00:13:53] Weeble has dozens of different branches
+[00:13:56] they have a a branch in Canada they have
+[00:13:58] one in me meico they have one in Japan
+[00:14:00] they have one in Australia they have one
+[00:14:01] in Singapore so they have all these
+[00:14:02] different branches so if you're in
+[00:14:05] Australia you could just open a Weeble
+[00:14:08] account in Australia same with
+[00:14:10] interactive brokers yes interactive
+[00:14:12] brokers has us offices but they also
+[00:14:15] have international offices so you can
+[00:14:17] open with the branch that's in your
+[00:14:20] jurisdiction or your nearest
+[00:14:21] jurisdiction if it's they don't have one
+[00:14:23] right in your country and they'll
+[00:14:25] usually accept you and then you don't
+[00:14:27] have to face the PDT rule because it's
+[00:14:29] an international branch and you're an
+[00:14:31] international customer so now you're
+[00:14:33] thinking oh let's all just go open
+[00:14:35] accounts with Australia's you know
+[00:14:37] Branch broker dealer whatever it is
+[00:14:39] Weeble or interactive brokers not so
+[00:14:41] fast see they're going to check to see
+[00:14:43] what is your residency and they're going
+[00:14:44] to see your residency and your address
+[00:14:46] they're going to look at your passport
+[00:14:48] just like they have to to open a bank
+[00:14:49] account and they're going to say no
+[00:14:50] sorry we're not allowed to do that we're
+[00:14:52] going to get in trouble so they don't
+[00:14:54] want to skirt the help you Skirt the
+[00:14:56] Rules so they're just going to say nope
+[00:14:58] sorry but if you're International Trader
+[00:15:00] if you're not located in the United
+[00:15:02] States then you don't have to subject
+[00:15:04] yourself to the PDT rule so there's a
+[00:15:07] little bit of a question here of what
+[00:15:09] actually constitutes a day trade and
+[00:15:11] just to be entirely clear one buy order
+[00:15:14] and one sell order is a trade that's one
+[00:15:17] trade if you buy twice and sell once
+[00:15:20] that's also one trade if you buy twice
+[00:15:23] and sell twice that's also only
+[00:15:26] considered one trade a trade is a round
+[00:15:29] trip so you only change directions once
+[00:15:31] boom and boom so if you buy you sell and
+[00:15:36] then you buy back and sell that's
+[00:15:38] actually two trades if you buy buy sell
+[00:15:41] sell Buy Buy sell sell that's two trades
+[00:15:44] if you buy sell Buy sell Buy sell that's
+[00:15:46] three trades each time you change
+[00:15:49] directions it's considered a trade so if
+[00:15:51] you do more than three of those in five
+[00:15:54] days business days then you'll get
+[00:15:56] flagged so if you're on your thinker
+[00:15:58] swim account and you have a um you have
+[00:16:01] a regular account with thinker swim I'm
+[00:16:03] going to try to bring my account down
+[00:16:04] here to show you um it'll actually give
+[00:16:06] you a warning up here it's not going to
+[00:16:08] on mine because it's I'm above the PDT
+[00:16:09] level now but it would give you a
+[00:16:11] warning and it would tell you the number
+[00:16:12] of day trades that you have left because
+[00:16:15] they don't want you to go over the
+[00:16:16] number that you have left now if you do
+[00:16:18] go over you get one free pass the
+[00:16:21] Brokers basically they give you one free
+[00:16:23] pass so you say I'm sorry I didn't know
+[00:16:25] what I was doing I I I didn't realize
+[00:16:27] this rule existed whatever and they'll
+[00:16:29] say Okay that was your one free pass but
+[00:16:31] do it again and we're going to we're
+[00:16:33] going to restrict your account to not
+[00:16:35] allow you to trade unless you add the
+[00:16:38] money to get to $25,000 or you switch it
+[00:16:40] to a cash account so then you either
+[00:16:42] have to switch Brokers or switch to a
+[00:16:44] cash account so you don't want to you
+[00:16:46] know you don't want to have this happen
+[00:16:47] where you're you're kind of getting in
+[00:16:49] trouble with your broker so the best
+[00:16:52] ways around the PT rule uh really at
+[00:16:54] this point would be if you're e if
+[00:16:57] you're a US resident to trade in a cash
+[00:16:59] account or to trade in a margin account
+[00:17:02] using an international broker dealer and
+[00:17:03] this is really going to work the best if
+[00:17:05] you're an international resident
+[00:17:07] interactive brokers Weeble trade zero
+[00:17:10] these will only accept non- us customers
+[00:17:13] they don't accept us customers CME is
+[00:17:16] the exception and there's a couple other
+[00:17:18] International Brokers that are also
+[00:17:21] exceptions I'm not going to list them
+[00:17:22] all but ceg is one that I've personally
+[00:17:24] used and I didn't have any issue with it
+[00:17:27] so CME will accept International
+[00:17:30] customers but they're not allowed to
+[00:17:33] advertise to us residents so they'll
+[00:17:36] accept us resident in addition to
+[00:17:37] International customers but they can't
+[00:17:39] advertise to us so if you if you do
+[00:17:42] their account application you have to
+[00:17:44] affirmatively declare that they did not
+[00:17:47] solicit you they didn't advertise to you
+[00:17:50] you're just coming on your own accord
+[00:17:52] because you heard about them and so in
+[00:17:53] that case they they'll service your
+[00:17:55] account they'll let you open it and they
+[00:17:57] will not enforce the PDT rule on you
+[00:17:59] they're one of the few Brokers that are
+[00:18:01] in this sort of gray area of they're an
+[00:18:04] offshore broker dealer they're located
+[00:18:06] in the cariban they don't enforce the
+[00:18:08] PDT Rule and they also are willing to
+[00:18:10] take on the risk of accepting us
+[00:18:13] customers why do they take on the risk
+[00:18:14] of doing that they charge commission
+[00:18:17] they make money they get paid so they
+[00:18:19] get paid on the commissions and they get
+[00:18:21] paid on the platform fees whereas
+[00:18:23] thinker swim is free interactive brokers
+[00:18:26] using the light version is free Weeble
+[00:18:28] well it's depends on where you are with
+[00:18:29] jurisdiction Weeble is not free in all
+[00:18:31] jurisdictions and actually neither is
+[00:18:33] interactive brokers uh and trade zero is
+[00:18:35] free uh but is only only works for non-
+[00:18:38] us residents so I would say at this
+[00:18:41] point if you're a US resident your best
+[00:18:45] bet really is to focus on trading in a
+[00:18:47] cash account to build a track record of
+[00:18:49] consistency prove that you can be
+[00:18:51] profitable in a cash account with those
+[00:18:53] restrictions and if you can then you
+[00:18:56] make a decision okay I've grown my
+[00:18:58] account from $1,000 to 2,000 or 3,000
+[00:19:02] but it took 6 months or a year to do it
+[00:19:04] now I've got a track record I know what
+[00:19:05] I'm doing am I willing to take the risk
+[00:19:08] of using an international broker dealer
+[00:19:11] for a period of six months I'm going to
+[00:19:12] pay more money for it if there's ever an
+[00:19:15] issue with my account I'm not going to
+[00:19:16] have the same resources or you know I
+[00:19:19] I'm not going to know exactly what to do
+[00:19:21] like look if a bank here in the US
+[00:19:23] didn't let you get your account you know
+[00:19:24] what to do you've got there's us
+[00:19:26] attorneys there's things you could do if
+[00:19:28] that happened and you're dealing with a
+[00:19:29] bank in Australia or a bank in the
+[00:19:31] Cayman Islands your your remedy is is
+[00:19:35] limited if you're going to be honest
+[00:19:37] right so I would never put more money in
+[00:19:39] an offshore account than I would be
+[00:19:41] ultimately comfortable losing if worst
+[00:19:43] case scenario happened however having
+[00:19:46] said that I've used a number of offshore
+[00:19:49] Brokers over the years and it is
+[00:19:51] something that I think of as a tool it
+[00:19:53] will allow me to trade I could trade far
+[00:19:55] more quickly and therefore for me given
+[00:19:57] my skill set I can grow an account far
+[00:20:00] faster than when I'm trading cash only
+[00:20:04] but there is a cost to using that tool
+[00:20:07] both in the commission and the platform
+[00:20:09] fee and there is a risk to using that
+[00:20:11] type of tool you don't have US Federal
+[00:20:13] Deposit Insurance and all that stuff you
+[00:20:16] don't have the same recourses if
+[00:20:17] something does happen to your account so
+[00:20:19] it's a risk that you have to take so
+[00:20:21] again at this point given T1 settlement
+[00:20:24] trade settling overnight as long as you
+[00:20:27] can fund your account with at least
+[00:20:29] $1,000 you could trade every day and you
+[00:20:32] know what for me this has always been my
+[00:20:34] goal when I'm looking for stocks to day
+[00:20:36] trade I'm looking for a stock that I
+[00:20:38] think has the potential to go up 10% so
+[00:20:41] now let's think about this for a second
+[00:20:43] let's jump back onto the Whiteboard
+[00:20:44] we're looking at a stock right here
+[00:20:46] that's let's just say $3 a share all
+[00:20:49] right so we got a stock that's $3 a
+[00:20:50] share you've got $1,000 in your account
+[00:20:53] all right so now on this stock how much
+[00:20:55] can you buy approximately 300 shares
+[00:20:57] right so you're buying about 300 shares
+[00:21:00] if you did if you did 1,000 shares
+[00:21:01] that'd be 3,000 bucks so 300 shares
+[00:21:04] you're going to be at 900 whatever so go
+[00:21:07] up to 333 shares go go all the way to
+[00:21:09] the Max uh or whatever it is
+[00:21:11] approximately so max it out you're
+[00:21:13] you're buying the full ,000 worth and if
+[00:21:15] this goes up to what 330 that's 10% so
+[00:21:20] now all of a sudden I'm growing my
+[00:21:21] account I'm selling up here at 330 and
+[00:21:25] I'm up about you know $99 right so it's
+[00:21:28] about $ in one day for me my goal on a
+[00:21:31] good day with a small account is to grow
+[00:21:34] my account by 10% now I know there's
+[00:21:36] options Traders out there that are doing
+[00:21:38] YOLO trades with you know zero days to
+[00:21:41] expiration and they're looking to buy
+[00:21:42] something at 10 cents and it goes to
+[00:21:44] like $2 you know a contract 20x return
+[00:21:49] I'm not buying lot of tickets that's not
+[00:21:51] my strategy my strategy is to focus on
+[00:21:54] stocks every single day that are on the
+[00:21:56] scanners with news that I think have the
+[00:21:58] potential to go up you know from my
+[00:22:00] entry 5 to 10% now that means the stock
+[00:22:03] has the potential to go up higher than
+[00:22:05] that CU I never capture the full move
+[00:22:07] but if you're focusing on the right
+[00:22:08] stocks of trade each day I don't think
+[00:22:10] it's unreasonable that you can grow a
+[00:22:12] small account is it going to be slower
+[00:22:14] than if you're unrestricted and can
+[00:22:16] trade on Leverage and trade all day long
+[00:22:19] sure but if you're a beginner Trader
+[00:22:22] let's be realistic about your skill set
+[00:22:25] and the more likely thing of trading on
+[00:22:27] Leverage as a beginner is that you could
+[00:22:29] lose money and the Brokers don't want
+[00:22:31] you to lose money so even those offshore
+[00:22:32] Brokers like trade zero and CME they're
+[00:22:36] still going to restrict you so if you
+[00:22:38] fund an account with one of those
+[00:22:39] Brokers even though you could get four
+[00:22:41] times leverage or in the case of trade
+[00:22:43] zero or cmeg you can get six times
+[00:22:45] leverage they're not going to allow
+[00:22:47] leverage most likely on stocks under $3
+[00:22:50] so now you see those cheaper stocks it's
+[00:22:52] not going to be option or you see a
+[00:22:54] stock that's $5 a share but because the
+[00:22:56] stock is already squeezed up let's say
+[00:22:58] 50% or 100% on the day the broker is
+[00:23:01] going to flag that as being a high-risk
+[00:23:03] stock and they're going to immediately
+[00:23:04] take away your use of Leverage on it so
+[00:23:07] this gets super frustrating because you
+[00:23:09] spend the time and money to open an
+[00:23:11] offshore account and now they're doing
+[00:23:13] the same thing the US Brokers do they're
+[00:23:15] restricting leverage and now you've got
+[00:23:17] your hands tied you can't trade the
+[00:23:19] stock the way you want you're back to
+[00:23:20] having a cash account I mean again it's
+[00:23:23] not exactly a cash account because it
+[00:23:25] settles but you're back to having an
+[00:23:26] account with no leverage so so if you're
+[00:23:29] really banking on using
+[00:23:31] leverage I'll I'm just going to tell you
+[00:23:33] right now full disclosure you're
+[00:23:35] probably going to struggle it's going to
+[00:23:36] be hard if you are banking on using
+[00:23:38] leverage to grow in your account that's
+[00:23:40] not the right way to learn it's a better
+[00:23:42] way to learn by focusing on growing
+[00:23:43] using your cash balance I know it's nice
+[00:23:46] to have the leverage and to buy 4,000
+[00:23:48] shares of a stock using four five times
+[00:23:50] leverage but you're taking a lot of risk
+[00:23:52] doing that and the types of stocks that
+[00:23:54] we really want to trade most likely
+[00:23:57] Leverage is going to get restricted from
+[00:23:58] you anyways and then you're not going to
+[00:24:00] be able to take the trades the way you
+[00:24:01] want to so it it's it's going to
+[00:24:03] backfire on you and you're going to be
+[00:24:04] disappointed you're going to be paying
+[00:24:05] extra fees so now you've got a really
+[00:24:07] good understanding of the patter day
+[00:24:08] trader rule who it applies to and the
+[00:24:11] nuances of it especially with cash and
+[00:24:12] margin accounts if you want to learn
+[00:24:14] more about trading perhaps you're
+[00:24:15] interested in trying to find the best
+[00:24:17] stocks to trade on any given day I've
+[00:24:19] got a couple more episodes you might
+[00:24:20] want to check out here and here and as
+[00:24:22] always if you enjoyed this episode I
+[00:24:23] hope you hit that thumbs up and I hope
+[00:24:25] you subscribe the channel for more
+[00:24:26] episodes about trading strategy just
+[00:24:28] like this thank you as always for tuning
+[00:24:30] in and reminder trading is risky my
+[00:24:32] results aren't typical so please manage
+[00:24:33] your risk and take it slow and always
+[00:24:35] practice in a simulator before putting
+[00:24:38] real money on the line I'll see you for
+[00:24:40] the next episode real soon
+[00:24:42] [Music]

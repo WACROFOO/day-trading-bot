@@ -1,0 +1,578 @@
+# How I Nailed Trading with the MACD Indicator (Step-by-Step Guide)
+# https://www.youtube.com/watch?v=mfGQr2tHoX0
+# duration_sec: 1318
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to walk you
+[00:00:03] through how to use macd in your trading
+[00:00:06] to help you number one avoid false
+[00:00:08] breakouts number two focus on trading on
+[00:00:11] the front side of the move and not
+[00:00:14] overtrade the back side when the price
+[00:00:16] action becomes congested this is an
+[00:00:19] indicator you can use whether you're
+[00:00:20] trading stocks Forex Futures
+[00:00:23] cryptocurrency doesn't matter because
+[00:00:25] macd is a well-respected indicator this
+[00:00:28] is part of the universal language of the
+[00:00:31] financial markets that is technical
+[00:00:33] analysis so let's go ahead and jump onto
+[00:00:35] the charts I'm going to use a case study
+[00:00:37] here this is a stock that I traded uh
+[00:00:40] just yesterday I locked up about $5,000
+[00:00:42] of profit on it and macd was a big
+[00:00:45] contributor to being able to to lock up
+[00:00:48] that profit and most importantly not
+[00:00:50] overstay my welcome overstaying your
+[00:00:53] welcome how many of you struggle with
+[00:00:56] not knowing when to walk away each day
+[00:00:59] I'm going to give you some tips during
+[00:01:00] this episode to help you with that
+[00:01:01] problem I'll even give you some
+[00:01:02] recommended readings so you can really
+[00:01:04] dive in now let's look at the one minute
+[00:01:06] chart as an active day trader I'm using
+[00:01:08] the 1 minute and the 5 minute time
+[00:01:10] frames for finding my entries and exits
+[00:01:12] if you're trading a swing trading
+[00:01:14] strategy or you're using different time
+[00:01:15] frames then you can use the macd on the
+[00:01:18] time frame that's relevant for you it
+[00:01:19] doesn't really matter because it's valid
+[00:01:21] on all time frames now Mac d stands for
+[00:01:24] it's an acronym that stands for moving
+[00:01:27] average convergence Divergence so what
+[00:01:29] is it's measuring is when moving
+[00:01:31] averages are either diverging and moving
+[00:01:34] apart or when they're converging and
+[00:01:36] moving together in classic long-term
+[00:01:39] investing there are significant moving
+[00:01:42] average crossovers that investors look
+[00:01:45] at as uh indicating a very significant
+[00:01:48] change in Trend so if the price for
+[00:01:50] instance has been selling off for a long
+[00:01:52] time and then starts to come back up
+[00:01:55] what you may see is let's just say this
+[00:01:57] is a long-term chart this is the under
+[00:02:00] moving average which has been selling
+[00:02:01] off like this the the price has been you
+[00:02:04] know sort of down here like this but
+[00:02:06] it's begun to turn around here what you
+[00:02:08] would notice would be uh the 200 moving
+[00:02:11] averages here and then let's just say
+[00:02:13] your 100 100 moving average crosses over
+[00:02:16] right here so this is a moving average
+[00:02:18] crossover moving average crossovers can
+[00:02:20] be very significant for uh for Traders
+[00:02:23] and investors because it signals a
+[00:02:25] significant change in Trend and it's
+[00:02:28] valid uh both on uh daily charts but
+[00:02:31] also on short-term time frames so I
+[00:02:34] think to help you better understand how
+[00:02:36] macd works and why it's so important
+[00:02:39] it's helpful to First give you a
+[00:02:41] foundation in moving averages because
+[00:02:44] after all macd uh is taking moving
+[00:02:46] averages as part of its calculation so
+[00:02:48] let's say for instance we have um uh it
+[00:02:51] could be a stock it could be anything
+[00:02:52] doesn't matter it could be an indic uh
+[00:02:54] let's just say the price is kind of
+[00:02:55] slowly starting to move up and starts to
+[00:02:58] pull away here before dipping down a
+[00:03:00] little bit and then pushing a little bit
+[00:03:03] higher so we would call this a
+[00:03:04] traditional pullback pattern that
+[00:03:06] generally I would enjoy trading
+[00:03:08] something like this but let's say it
+[00:03:10] starts to move up here and then it kind
+[00:03:11] of stalls out and the price kind of goes
+[00:03:13] sideways through this area let's just
+[00:03:15] say for instance so the way this would
+[00:03:18] look on our chart is we would see our
+[00:03:20] moving averages moving right behind the
+[00:03:23] price when the price is moving up your
+[00:03:26] moving average is always going to be a
+[00:03:28] little bit below because this is plotted
+[00:03:31] based on the average price over the last
+[00:03:34] X number of periods now this is a moving
+[00:03:37] average that I use which is the nine
+[00:03:39] period moving average so that means each
+[00:03:42] one of these dots is the average price
+[00:03:45] over the last nine Candles now if the
+[00:03:47] price is moving up the average isn't way
+[00:03:49] up here because you got to factor in the
+[00:03:51] prices were lower back here so it always
+[00:03:53] Trails slightly behind now I personally
+[00:03:56] use exponential moving averages in my
+[00:03:58] trading and exponential moving average
+[00:04:00] is different from a simple moving
+[00:04:02] average you have an SMA or an EMA s SMA
+[00:04:07] is a simple moving average EMA is an
+[00:04:09] exponential moving average a simple
+[00:04:11] moving average is simple because it just
+[00:04:13] takes the average price over these last
+[00:04:15] candles whereas an exponential moving
+[00:04:17] average takes the more recent price
+[00:04:20] action and weights it more heavily and
+[00:04:23] what that means is that a 9 SMA versus a
+[00:04:26] 9 EMA will look like this this right
+[00:04:28] here is going to be the em
+[00:04:31] Ma and this is going to be the SMA so
+[00:04:36] the SMA will always be lower than the
+[00:04:39] EMA because it takes longer for the
+[00:04:42] averages to move up when you're waiting
+[00:04:43] more recent price action heavier then
+[00:04:46] the price moves faster so what we look
+[00:04:49] at generally when the price is moving up
+[00:04:51] quickly you've got your short-term
+[00:04:52] moving averages are going that are going
+[00:04:54] to move quickly and then you've got
+[00:04:56] longer moving averages like this the 20
+[00:04:58] EMA
+[00:05:00] they're going to move a little bit
+[00:05:02] slower so the 20 EMA moves slower
+[00:05:04] because it's taking the average price
+[00:05:05] over the last 20 candles so it's going
+[00:05:07] further back and then you'd have an
+[00:05:09] indicator a moving average that's even
+[00:05:11] lower than that for instance the 200
+[00:05:14] EMA so these popular indicators can form
+[00:05:18] this uh ribbon here in a sense and when
+[00:05:20] they're all stacked above each other
+[00:05:22] like this then this is a time that we
+[00:05:24] would be very bullish on a trade however
+[00:05:27] what can happen naturally is if the
+[00:05:28] price suddenly Clines you could have a
+[00:05:31] moving average crossover when you have a
+[00:05:33] moving average crossover it's indicating
+[00:05:35] a change in Trend and the macd is
+[00:05:37] helping us visualize that in a way
+[00:05:39] that's much more obvious than having it
+[00:05:41] plotted on your chart with just the
+[00:05:43] indicators alone so if we look at our
+[00:05:45] one minute chart again here what you'll
+[00:05:47] notice is that I have macd plotted at
+[00:05:50] the bottom so this bottom section right
+[00:05:52] here is the macd now I always get
+[00:05:55] Traders asking me Ross what are your
+[00:05:57] macd settings so I I make this extremely
+[00:06:00] simple my macd settings are standard
+[00:06:04] they are default I do not change them
+[00:06:07] from the default setting that comes when
+[00:06:09] you initially put macd on your chart now
+[00:06:12] most platforms are going to put on the
+[00:06:13] same settings but I'll double click this
+[00:06:15] and show you the inputs so you can just
+[00:06:17] make 100% sure that you're using the
+[00:06:19] same settings so our fast length is 12
+[00:06:23] our slow length is 26 and our signal
+[00:06:27] length is N9 and the source is
+[00:06:30] close this is the standard macd setting
+[00:06:33] essentially what this is is it's using a
+[00:06:36] fast length moving average as 12 which
+[00:06:40] if we look here instead of N9 it's using
+[00:06:42] 12 instead of 20 it's using 26 and then
+[00:06:45] the signal length the signal is nine so
+[00:06:50] it's a little different than the moving
+[00:06:51] averages that I use here but these work
+[00:06:53] really well on my chart and this is the
+[00:06:55] standard setting for macd the reason
+[00:06:58] that you want to use the standard
+[00:06:59] settings for macd is because you want to
+[00:07:01] see the same signals that everyone else
+[00:07:03] is seeing if you start fiddling with
+[00:07:05] this and changing it it's going to
+[00:07:07] significantly change the buy and sell
+[00:07:09] signals and then you're seeing something
+[00:07:12] that you might be the only person in the
+[00:07:13] world that is using these settings so
+[00:07:16] traffic signals as an example work
+[00:07:19] because everyone respects them everyone
+[00:07:21] knows what a green light an orange light
+[00:07:22] and a red light means but if you say you
+[00:07:25] know what I'm going to be a little crazy
+[00:07:26] I'm going to use a magenta light I'm
+[00:07:28] going to use a blue light all of a
+[00:07:30] sudden you're going to be off on another
+[00:07:33] planet because no one else is using that
+[00:07:36] you're going to crash your car and just
+[00:07:37] like doing that in trading you're going
+[00:07:39] to start losing money because you're not
+[00:07:41] going to get the obvious signals so just
+[00:07:44] as an example I'll I don't mind here um
+[00:07:47] I'll just copy this let's see so we'll
+[00:07:48] just copy and we'll paste so we have it
+[00:07:50] on here twice and I'll just show you
+[00:07:52] we'll just change this to like a 9 and a
+[00:07:55] 20 and we'll change the signal length to
+[00:07:57] like a five right so all a sudden it
+[00:07:59] looks similar but it is going to be
+[00:08:01] different now you speed it up even more
+[00:08:03] you change it to a three or a 26 or
+[00:08:06] let's see make this like a 52 you're
+[00:08:08] starting to really change the way it
+[00:08:10] looks so it may not seem super dramatic
+[00:08:14] to you but it is the difference between
+[00:08:17] getting the signal at the right time and
+[00:08:18] at the same time as everyone else or
+[00:08:20] being just off so you want to make sure
+[00:08:23] you're timing the market with other
+[00:08:24] people the reason here is that the
+[00:08:28] market is
+[00:08:30] moving because other Traders have a
+[00:08:33] belief that the price is either going to
+[00:08:34] go up or go down they're seeing signals
+[00:08:38] when they see a Buy Signal they execute
+[00:08:40] buy orders so you kind of want to make
+[00:08:42] sure you're seeing the same signal as
+[00:08:45] other Traders because that's going to
+[00:08:47] help you anticipate where we're going to
+[00:08:48] see a move up or where we might see
+[00:08:50] resistance or where we're going to see a
+[00:08:51] move back down this is what's going to
+[00:08:53] help you avoid those false breakouts
+[00:08:55] beginner traders who don't yet use the
+[00:08:57] macd are going to be more suscep to
+[00:09:00] falling into the traps of false
+[00:09:01] breakouts so this is uh again let's see
+[00:09:05] sgbx this is a chart one minute chart of
+[00:09:07] a stock that I traded uh just yesterday
+[00:09:09] I actually made $5,000 on it this was a
+[00:09:11] pretty nice move and it began right here
+[00:09:14] at 9:00 a.m. with breaking news that
+[00:09:16] came out okay so we have breaking news
+[00:09:18] that comes out top of the hour and so
+[00:09:21] initially I see the stock on my scanners
+[00:09:25] so I'm using these uh stock scanners
+[00:09:27] right here so I'm getting an audio alert
+[00:09:29] Bing Bing boom stocks on the scans I
+[00:09:31] pull it up on the one minute chart and
+[00:09:34] of course I pull up the level too now
+[00:09:36] when I first take a trade on something
+[00:09:38] like this I'm not really looking at the
+[00:09:40] macd in those first few minutes because
+[00:09:43] the thing is this is a stock that has
+[00:09:45] been going basically sideways and then
+[00:09:47] suddenly has news that comes out so I
+[00:09:50] know that the moving averages are going
+[00:09:52] to be spiking up that's what they're
+[00:09:53] always going to look like when you have
+[00:09:55] breaking news so if we make this really
+[00:09:57] really big here which you're going to
+[00:09:59] see is all of a sudden you've got your
+[00:10:02] nine moving average moving up you've got
+[00:10:04] your 20 moving up and your 200 is down
+[00:10:06] here moving very slowly so what we have
+[00:10:08] what's happening with these indicators
+[00:10:10] they are diverging right they're
+[00:10:13] diverging that in that that's because
+[00:10:16] the price is moving quickly and so
+[00:10:17] what's happening with the macd this blue
+[00:10:20] line is moving way above the signal Line
+[00:10:23] This Is Our signal line and it it'll
+[00:10:26] continue to move up until the price
+[00:10:29] price begins to sort of stall out so
+[00:10:32] right here the price started to stall
+[00:10:34] out it started the price rolled over a
+[00:10:36] little bit we came down to the support
+[00:10:38] of the nine moving average but what
+[00:10:39] began happening was our moving averages
+[00:10:41] began to converge they began to come
+[00:10:44] back together and that was especially
+[00:10:46] noticeable right here when the price
+[00:10:48] broke down because when the price broke
+[00:10:50] down right there that dragged the N9
+[00:10:53] moving average back down that dragged
+[00:10:55] the macd back down and right here we
+[00:10:58] have a Mac
+[00:11:00] crossover we have the cross where uh the
+[00:11:03] the fast line here the actual moving
+[00:11:06] average convergence Divergence line
+[00:11:08] moves against the signal line coming
+[00:11:10] back down this for me is a critical
+[00:11:12] indicator When I See This crossover I am
+[00:11:15] no longer a
+[00:11:16] buyer now I'm going to hedge saying that
+[00:11:21] by saying that as a beginner Trader
+[00:11:24] you'll find more accuracy if you're only
+[00:11:27] trading when the macd is open
+[00:11:30] there are times where I will take a
+[00:11:32] trade when the macd is against the
+[00:11:33] position uh and that's because I've got
+[00:11:35] more experience there are going to be
+[00:11:37] more advanced setups and they're going
+[00:11:38] to have lower probability of success but
+[00:11:40] when they work they can work well so as
+[00:11:42] a beginner it's best to focus on setups
+[00:11:44] that have the highest probability of
+[00:11:46] success so let's watch what happens
+[00:11:49] right here macd is against the trade
+[00:11:51] right here so no nothing in here you
+[00:11:53] should be trading no trade no trade no
+[00:11:55] trade and then right here we can get
+[00:11:58] back in now I'm going to do some
+[00:11:59] something kind of cool and I'm going to
+[00:12:00] actually drag this and drop it over this
+[00:12:05] chart right like this I'm going to go
+[00:12:07] into settings I'm going to turn off um
+[00:12:10] the histogram so the histogram is turned
+[00:12:12] off we've got the signal line turned on
+[00:12:14] right here and um we could make this
+[00:12:18] let's see sometimes this isn't the way
+[00:12:21] to do it um so every now and then I will
+[00:12:25] do something kind of like this but I'm
+[00:12:27] going to let's see I'm going to keep it
+[00:12:29] like this for right now this is this is
+[00:12:32] what I was looking for um I'm going to
+[00:12:34] make it a little bit Bolder here and
+[00:12:37] then I'm going to do the same thing on
+[00:12:38] this one okay so now we we basically
+[00:12:43] just have it plotted right here just as
+[00:12:45] a reminder okay so this as soon as I see
+[00:12:49] this and as soon as I see it curling
+[00:12:51] here I know what's happening I know this
+[00:12:53] is getting ready to cross over sometimes
+[00:12:55] putting it right in front of you makes
+[00:12:56] it hard to miss right if it's down here
+[00:12:59] sometimes you might just stop kind of
+[00:13:00] looking at it so I I'll do this
+[00:13:02] occasionally and I really encourage this
+[00:13:03] for beginner Traders okay so we're going
+[00:13:06] sideways
+[00:13:07] here and then what happens as we come
+[00:13:10] into the open we get the crossover do
+[00:13:12] you see this crossover right here boom
+[00:13:14] We cross over so we cross back over and
+[00:13:16] we cross over with strength and look at
+[00:13:18] this move that we end up getting so we
+[00:13:20] end up getting a squeeze on this all the
+[00:13:22] way up here and we stay open the macd
+[00:13:24] stays open it stays open and we push
+[00:13:26] higher and higher right so we come up
+[00:13:29] all the way to this level up here about
+[00:13:31] 620 we start to pull back and then here
+[00:13:34] we go that's another crossover so if you
+[00:13:37] imagine focusing on trading this only in
+[00:13:40] this area here and only in this area
+[00:13:43] here how do you think you would have
+[00:13:45] done probably pretty well trading it in
+[00:13:48] this area here it was sideways this is
+[00:13:51] not going to pay you we don't make money
+[00:13:53] buying at five and selling at five or
+[00:13:55] buying at 380 and selling at 380 we want
+[00:13:57] to buy at four and sell $5 and we would
+[00:14:00] love to do that inside of 5 minutes
+[00:14:01] which is exactly what happened here this
+[00:14:03] went up over 200% it's about 250% move
+[00:14:06] this was phenomenal now my feeling is
+[00:14:10] that if I focus on trading the front
+[00:14:13] side of the move breaking news first
+[00:14:14] Spike up that's fine we pull back macd
+[00:14:17] crosses over again trading this next leg
+[00:14:19] up that's fine I'm happy to trade the
+[00:14:22] the beginning the front side of the move
+[00:14:23] and I want to avoid overtrading when the
+[00:14:26] macd is against the position so right
+[00:14:28] here macd is against a position we're
+[00:14:30] not interested what happens right here
+[00:14:34] right here the macd begins to cross over
+[00:14:37] the price starts to pop back up the
+[00:14:40] price moves above the 9 of the 20 moving
+[00:14:42] average and then it comes back up to six
+[00:14:45] now right here when the price popped
+[00:14:47] back up the macd was still negative
+[00:14:49] there was nothing to trade right here
+[00:14:50] when it popped up macd was still
+[00:14:52] negative right so by this time we had
+[00:14:54] started to Rally off the low this was
+[00:14:57] our low point and we'd actually come
+[00:14:58] back up this much and because we come
+[00:15:00] back up that much our moving averages
+[00:15:02] were starting to get back to the
+[00:15:04] crossover point so now what do you
+[00:15:06] think's going to happen are we going to
+[00:15:06] get a false breakout or we going to get
+[00:15:08] a real breakout based on the position of
+[00:15:09] the macd we should get a real breakout
+[00:15:11] and there we go up to seven now we pull
+[00:15:14] back again we don't cross over we go a
+[00:15:16] little bit higher this is an area where
+[00:15:18] oh there we go there's another crossover
+[00:15:21] now this was I'll admit this was a
+[00:15:23] bigger pullback here and we almost
+[00:15:25] crossed over but we didn't quite and
+[00:15:27] then we came back up so I would forgive
+[00:15:28] you if you maybe didn't take this trade
+[00:15:30] here because at this point it was
+[00:15:32] showing quite a lot of range but then
+[00:15:34] back you get to this spot here and this
+[00:15:36] is where in this spot I'd be done I'd
+[00:15:39] say nope I'm not going to trade that and
+[00:15:41] when it pops right back Above This is a
+[00:15:43] high-risk spot and you've got a higher
+[00:15:44] likelihood of seeing a false breakout
+[00:15:47] now this did push a little bit higher
+[00:15:49] but you're always going to do best
+[00:15:51] focusing on the front side of the move
+[00:15:53] the beginning of the move so that's
+[00:15:55] going to be when the news first comes
+[00:15:57] out and then during the first pullback
+[00:15:59] now let's look at BNF so this basically
+[00:16:04] out of nowhere squeezes up and it's kind
+[00:16:08] of like an example where we have
+[00:16:10] breaking news except that um this didn't
+[00:16:13] actually have news it just started to
+[00:16:15] squeeze up and all of a sudden it
+[00:16:16] punches higher to 260 the macd is
+[00:16:19] crossed over uh is positive and is in
+[00:16:22] favor of the trade so now we watch we
+[00:16:24] squeeze up to 290 up to three let's see
+[00:16:28] I'll put this on
+[00:16:29] Auto we squeeze up to 340 up to 350 we
+[00:16:33] pull back macd is still open first
+[00:16:35] pullback do we buy this dip the answer
+[00:16:38] is yes because the macd is open the macd
+[00:16:40] is in favor of the trade so those are
+[00:16:41] dips that we're buying okay we keep
+[00:16:44] moving forward here we push even higher
+[00:16:47] right now this is just very strong now
+[00:16:49] we dip down here and this is a
+[00:16:51] significant dip and you can see the macd
+[00:16:53] is starting to come in against the
+[00:16:55] trade okay now we push a little bit
+[00:16:57] higher but right there the crossover so
+[00:17:00] imagine if you stopped trading it right
+[00:17:01] there and you didn't trade it again for
+[00:17:02] the rest of the day or at least until
+[00:17:05] you got another
+[00:17:07] crossover you would be in good position
+[00:17:09] for doing that that would have been the
+[00:17:10] right move right now it start it starts
+[00:17:13] to come back up but it doesn't cross
+[00:17:15] over right now right down here you get a
+[00:17:17] little crossover this at this point this
+[00:17:20] is later in the day probably wouldn't
+[00:17:22] have trade of this I like to focus on
+[00:17:24] trading the front side of the move the
+[00:17:26] beginning of the move the first pullback
+[00:17:29] the second pullback now I don't leave
+[00:17:31] this plotted on here like that I'm just
+[00:17:33] putting that on there for your benefit
+[00:17:34] just so you can't miss it just so it's
+[00:17:36] very obvious this is how I have macd
+[00:17:38] plotted on my chart so I've got it
+[00:17:40] plotted right down here and you can see
+[00:17:42] the way it's moving up like this there
+[00:17:44] are times where I've changed the
+[00:17:45] coloring on this and kind of tried to
+[00:17:47] make it pop a little bit more and that's
+[00:17:48] fine you could do that but the settings
+[00:17:50] always stay the same you don't want to
+[00:17:52] change the settings you start fiddling
+[00:17:54] with the settings and now you're going
+[00:17:56] to get different signals from what
+[00:17:58] everyone else is getting getting now the
+[00:18:00] people that are using macd will do
+[00:18:03] better as a result if if they use it
+[00:18:07] consistently this is one of the biggest
+[00:18:08] challenges with indicators if you end up
+[00:18:11] putting 30 indicators on your chart and
+[00:18:13] you don't check them all before you take
+[00:18:15] a trade then they're not helpful
+[00:18:17] checking them periodically or or
+[00:18:19] checking them intermittently does not
+[00:18:21] work they work when you follow them on
+[00:18:23] every single trade you take that's what
+[00:18:26] you have to do so if you're going to use
+[00:18:28] macd you got to use it on every trade
+[00:18:30] and what I would encourage you to do is
+[00:18:31] use it for a period of a few weeks and
+[00:18:33] just see does this help me is it helping
+[00:18:35] me avoid false breakouts is it helping
+[00:18:37] me remember when to walk away and if it
+[00:18:40] is you should keep it on your chart now
+[00:18:42] I've been trading for a long time and
+[00:18:43] when I first started trading I used macd
+[00:18:46] I used RSI I used stastics I used a
+[00:18:48] couple different indicators but I never
+[00:18:49] really figured out the right way to use
+[00:18:51] them and So eventually I dropped them
+[00:18:53] off my chart and for a long time my
+[00:18:55] charts were very simple because I didn't
+[00:18:56] have macd on it was just very you know
+[00:19:00] very pure chart just the candlesticks
+[00:19:02] and the volume bars and these moving
+[00:19:03] averages but during the bare Market of
+[00:19:07] 2022 uh when the market pulled back
+[00:19:09] nearly 30% uh I found that macd was
+[00:19:13] really helping me avoid false breakouts
+[00:19:15] because we were seeing a lot of false
+[00:19:16] breakouts we had a real headwind in the
+[00:19:18] market it was difficult and I needed to
+[00:19:20] focus on improving my accuracy so when I
+[00:19:22] popped macd on I really found it helped
+[00:19:24] me and I've now kept it on since that
+[00:19:27] time and I really believe that it helps
+[00:19:29] me in my trading avoid these false
+[00:19:31] breakouts now if you want to know a
+[00:19:33] little bit more about technical analysis
+[00:19:35] I'll put a link in the uh description
+[00:19:36] I'll pin it to the top of the comments
+[00:19:38] that you can download my technical
+[00:19:40] analysis PDF it's the ultimate technical
+[00:19:42] analysis guide so it's got chart
+[00:19:44] patterns indicators stuff all the things
+[00:19:46] that you need to know if you're
+[00:19:47] interested in trading the strategy that
+[00:19:48] I trade so check that out pinned in the
+[00:19:50] top of the comments and you can download
+[00:19:52] now when it comes to learning when to
+[00:19:54] walk away this right here is a book
+[00:19:56] called quit the power of no Knowing When
+[00:19:59] to Walk Away by Annie Duke this is
+[00:20:01] something that helped me quite a bit
+[00:20:03] this helped me understand that the best
+[00:20:07] Traders will trade longer and dig deeper
+[00:20:11] when the Market's hot and will walk away
+[00:20:14] even if they don't hit their daily goal
+[00:20:17] when the market is cold so in a sense
+[00:20:19] daily goals are almost Irrelevant for
+[00:20:23] really good Traders because they'll they
+[00:20:25] know that yeah when the Market's hot I'm
+[00:20:27] going to probably far exceed my daily
+[00:20:29] goal but when the Market's cold it's
+[00:20:31] going to be hard to get there and it
+[00:20:32] wouldn't make sense to try to push
+[00:20:34] really hard to get that daily goal when
+[00:20:36] the Market's cold it's just not worth it
+[00:20:38] it's not worth putting in the fight so I
+[00:20:41] really encourage you to try to detach
+[00:20:43] yourself from an amount of money you
+[00:20:46] need to make every day I think it can be
+[00:20:49] very dangerous and instead try to shift
+[00:20:52] your focus to optimizing your efficiency
+[00:20:56] as a Trader when you're making money at
+[00:20:58] a high rate per hour those are the days
+[00:21:02] you should trade more hours on the days
+[00:21:04] when it's not happening those are the
+[00:21:06] days it's not worth sticking it out so
+[00:21:09] learn to walk away sooner and instead of
+[00:21:11] trying to have as many consecutive green
+[00:21:13] days in a row as you can which is a
+[00:21:15] stupid thing to worry about but we often
+[00:21:17] get very obsessed with it focus on how
+[00:21:20] many consecutive days in a row you can
+[00:21:23] maintain discipline because if you can
+[00:21:25] maintain discipline for 30 40 50 days in
+[00:21:28] a row without falling victim to
+[00:21:30] emotional hijack without spiraling you
+[00:21:33] are going to do very well this is about
+[00:21:35] focusing on the process the profits are
+[00:21:38] a byproduct if you enjoyed this episode
+[00:21:40] I hope you hit the thumbs up I hope you
+[00:21:42] subscribe the channel make sure you
+[00:21:43] download My ultimate technical analysis
+[00:21:45] guide and I'll see you for the next
+[00:21:47] episode on trading strategy right here
+[00:21:50] [Music]

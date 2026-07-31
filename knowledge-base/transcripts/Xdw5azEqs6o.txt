@@ -1,0 +1,445 @@
+# How to Day Trade Bull Flag Pattern
+# https://www.youtube.com/watch?v=Xdw5azEqs6o
+# duration_sec: 1041
+
+[00:00:01] okay guys so we're going to do a little
+[00:00:03] video Lesson here uh earlier we were
+[00:00:05] talking about the uh the patterns the
+[00:00:07] first pullback second pullback pattern
+[00:00:09] on cool and also on
+[00:00:12] prgn and you know we just kind of uh
+[00:00:14] briefed over it but it it is actually
+[00:00:17] really important stuff um and it's
+[00:00:20] something that we talk about in depth in
+[00:00:22] the trading course but just you know
+[00:00:25] let's do a little video Lesson on this
+[00:00:27] pattern because it is a really solid
+[00:00:28] setup so so cool today you know popped
+[00:00:32] up out of the gates and then pulled back
+[00:00:34] now you could say right here well you
+[00:00:36] know we got this first pop out of the
+[00:00:38] gates and then the pullback this right
+[00:00:40] here is is your first pullback so you've
+[00:00:42] got a potential entry on this you know
+[00:00:44] right here over
+[00:00:46] 280 with a stop at the low of the
+[00:00:48] pullback which was
+[00:00:49] 254 now this one wasn't actually on my
+[00:00:52] radar this morning and it looked like it
+[00:00:55] only had maybe 100,000 shares of volume
+[00:00:58] or so through this little consolidation
+[00:01:01] so it definitely wasn't on any of my
+[00:01:03] scanners I'm not sure if other people
+[00:01:04] were looking at it but one of the things
+[00:01:07] that you need in order for a breakout uh
+[00:01:10] to resolve in the direction that we want
+[00:01:12] which is up is volume and that means we
+[00:01:14] need people looking at it and trading it
+[00:01:16] so stocks that have very light volume or
+[00:01:19] aren't uh closely watched are usually
+[00:01:22] not going to respond well so the stocks
+[00:01:24] that work best for patterns in general
+[00:01:27] are going to be stocks trading on high
+[00:01:28] relative volume High relative volume
+[00:01:31] means lots of people are watching it the
+[00:01:33] more eyes on these patterns the more
+[00:01:35] likely they are to resolve in the
+[00:01:37] anticipated Direction so you know if
+[00:01:40] you're trading a stock even a stock
+[00:01:42] that's trading on heavy volume on a
+[00:01:44] regular day like apple or Facebook the
+[00:01:47] patterns that you see forming may not
+[00:01:49] really be the result of uh you know
+[00:01:52] strong moves up and and then
+[00:01:53] consolidation this is a strong move up
+[00:01:56] and then you get a little bit of profit
+[00:01:57] taking and then you get ready for the
+[00:01:59] next move up now on a bigger stock like
+[00:02:02] Facebook or apple these moves may be
+[00:02:05] very closely tied to what's happening
+[00:02:07] with the overall Market typically that's
+[00:02:10] the case it's not a specific stock
+[00:02:13] Catalyst that's driving it it's what's
+[00:02:14] going on with the overall market with
+[00:02:16] the small caps it's usually a specific
+[00:02:19] Catalyst or a technical breakout in the
+[00:02:21] case of cool I think there was some news
+[00:02:24] on it this morning and then it was kind
+[00:02:25] of a combination of that news plus the
+[00:02:28] catalyst so that news plus the technical
+[00:02:30] breakout so what we have here is the
+[00:02:32] first pop sells off pops up a little bit
+[00:02:35] and then back down so this is not you
+[00:02:39] know a setup that really worked out if
+[00:02:41] you did take the trade here you probably
+[00:02:43] would have stopped at the first candle
+[00:02:45] on the five minute to make a new low
+[00:02:47] which would have been right here at 66
+[00:02:50] so you know you might have taken a small
+[00:02:52] loss on it but probably wouldn't have
+[00:02:54] been too bad now I personally wouldn't
+[00:02:58] be taking entries through this period
+[00:02:59] here we're consolidating we're at the
+[00:03:01] moving average but I just I don't see
+[00:03:03] any reason necessarily this is going to
+[00:03:05] go one way or the other so I let the
+[00:03:07] breakout happen I let the volume happen
+[00:03:10] we get that pop and when we get a pop
+[00:03:12] like this the stock will show up on our
+[00:03:14] high day scanner and it'll tell us the
+[00:03:16] amount of volume the float the volume
+[00:03:19] relative to what's normal U you know
+[00:03:22] it'll give us these various data points
+[00:03:24] will help us understand how much
+[00:03:26] potential this particular stock has so
+[00:03:29] we let the first pop happen now this is
+[00:03:30] on the 5 minute sometimes if the pop
+[00:03:33] starts uh on the 5 minute I'll look at
+[00:03:36] the one minute chart and say you know
+[00:03:38] what there might be an opportunity for
+[00:03:40] me to get in before we even get the F
+[00:03:43] minute pullback CU look this went from
+[00:03:45] 280 to 320 so you know there's 40 cents
+[00:03:49] there so is there an opportunity to
+[00:03:51] scalp on the one minute chart somewhere
+[00:03:54] inside this 5minute candle you know now
+[00:03:57] for me I don't actually see a clean back
+[00:04:00] but I often do take entries right around
+[00:04:02] the whole dollar so there might have
+[00:04:03] been a a possible entry here at like 298
+[00:04:07] with a stop at 290 for the break of
+[00:04:09] three I actually didn't trade this one
+[00:04:12] this one wasn't on any of my scanners
+[00:04:14] because it didn't have the float column
+[00:04:17] there was no data and all these scanners
+[00:04:19] require a a minimum and a maximum float
+[00:04:22] so because this one for whatever reason
+[00:04:24] just didn't have the data couldn't pull
+[00:04:26] the data it didn't meet the criteria for
+[00:04:28] my scanner so well it's not my scanners
+[00:04:31] but in any case I would often take a one
+[00:04:34] minute pullback just a brief one minute
+[00:04:36] pullback inside a strong five minute
+[00:04:37] candle as long as we're not too
+[00:04:39] overextended and now here you get the
+[00:04:41] move up towards 320 and then you're
+[00:04:43] starting to get this sideways
+[00:04:45] consolidation ret turning back towards
+[00:04:47] this moving average right here this is
+[00:04:49] the 20 exponential moving average all
+[00:04:52] right and on the five minute we're
+[00:04:53] consolidating just above this gray
+[00:04:55] moving average here so where's the entry
+[00:04:58] well we look for the Flag Pole right
+[00:05:00] this is the strong move up and then one
+[00:05:03] candle two candles three candles of
+[00:05:05] sideways consolidation and then our
+[00:05:07] entry is going to be the first 5 minute
+[00:05:10] candle to make a new high so the high of
+[00:05:12] this green candle is 314 that means as
+[00:05:15] soon as we break over 314 we've got our
+[00:05:17] entry and you can see here on the one
+[00:05:20] minute that there was some consolidation
+[00:05:22] of One Tap two TAPS at 314 so we dip
+[00:05:25] back down come back up and look at the
+[00:05:28] volume that follows so that tells you
+[00:05:31] other Traders were watching that pattern
+[00:05:33] right the reason there's volume is
+[00:05:34] because other people bought or shorts
+[00:05:36] covered they saw this as a breakout they
+[00:05:38] got in or got out okay so you get that
+[00:05:42] move up to 337 so right here that's that
+[00:05:44] candle there up to 337 now in this case
+[00:05:47] I probably would have sold at least half
+[00:05:49] my position from 314 up to 337 adjust my
+[00:05:52] stop to break even in this case we
+[00:05:55] retest the breakout spot not uncommon to
+[00:05:58] retest it on the one minute chart and
+[00:06:01] then you've got this next entry along
+[00:06:03] over
+[00:06:04] 337 all right so you've got 337 so this
+[00:06:07] is the first right here the first one
+[00:06:09] minute pullback after the fresh breakout
+[00:06:12] on the F minute chart so once again
+[00:06:14] we're back in play Trading long over 337
+[00:06:17] the 5 minute is just still starting to
+[00:06:19] break out so we're clean all right and
+[00:06:21] then we get that move here up to 360
+[00:06:24] which is nice 370 a little bit of a dip
+[00:06:27] back down retesting the breakout spot
+[00:06:30] again not uncommon then a little bit of
+[00:06:32] a grind sideways all right so we've got
+[00:06:34] the first pull back there the second
+[00:06:37] move went up to a high of 370 and then
+[00:06:39] we pulled back and then the high of that
+[00:06:42] last uh candle was 354 all right so we
+[00:06:46] watched the sideways consolidation here
+[00:06:49] and we're waiting for the first F minute
+[00:06:50] candle to make a new high now you can
+[00:06:53] see here you get that pullback the
+[00:06:55] consolidation at the moving average then
+[00:06:57] the first candle to break over the high
+[00:06:59] here high was 57 so the high here was 54
+[00:07:02] so we actually broke the high right here
+[00:07:06] did like a little bit of false break we
+[00:07:08] went up to 54 and then we actually
+[00:07:10] dropped back down to 37 that's kind of
+[00:07:12] like a little bit of a scary moment
+[00:07:14] because if you were in on the 5 minute
+[00:07:15] chart you definitely would have been
+[00:07:16] down there for a second
+[00:07:19] stop well I would always have my stop at
+[00:07:21] the low of the pullback which is right
+[00:07:23] here so you wouldn't have gotten stopped
+[00:07:24] out but it would have been a little you
+[00:07:26] know a nerve-wracking for a second there
+[00:07:29] and then then we pop up we break over
+[00:07:31] the high of that level which is
+[00:07:33] important and now we're breaking out
+[00:07:35] again on the 5 minute chart okay so now
+[00:07:38] up to $4
+[00:07:40] 380 and up to four and notice the volume
+[00:07:43] how right through here you get this pop
+[00:07:46] and then you get this second pop of
+[00:07:47] volume right here that's the people
+[00:07:49] buying the one minute chart right this
+[00:07:51] is now a fresh breakout on the five
+[00:07:53] minute so people buy that one minute
+[00:07:55] candle right
+[00:07:56] there all right now again continue going
+[00:07:59] sideways now we're consolidating just
+[00:08:02] sort of at the $4 spot and then we get
+[00:08:04] the break over $4 which people love to
+[00:08:06] trade the problem with that entry is
+[00:08:09] that we didn't actually have a very good
+[00:08:10] pullback on the F minute we didn't pull
+[00:08:12] back to the moving average here we
+[00:08:15] didn't pull back for several candles we
+[00:08:16] just sort of went sideways and then
+[00:08:18] popped
+[00:08:19] up okay so we popped up and then we sort
+[00:08:22] of are doing this grinding action now
+[00:08:25] this is where I start to get a little uh
+[00:08:28] nervous because we're not seeing the
+[00:08:31] clean you know push sideways
+[00:08:34] consolidation and then push sideways
+[00:08:36] consolidation we're seeing this push and
+[00:08:39] then just sort of grinding a little bit
+[00:08:41] higher all right now we have the first
+[00:08:44] pullback the second pullback now the
+[00:08:47] third pullback isn't really forming
+[00:08:48] because we're just sort of grinding
+[00:08:49] higher and that for me is is a potential
+[00:08:53] uh red flag and an exit indicator all
+[00:08:55] right exiting in the 31 three or 410
+[00:08:58] 420s high was
+[00:09:01] 4225 and we saw something very similar
+[00:09:03] yesterday with gbsn but we'll stay on
+[00:09:05] this one for right now all right so we
+[00:09:07] we sort of try to retest and you see the
+[00:09:10] volume is still increasing but even with
+[00:09:12] this peak volume we have a dogee at the
+[00:09:14] top this candle of indecision right the
+[00:09:17] topping tail and it comes back down and
+[00:09:19] then as soon as we break below and close
+[00:09:22] below this uh Blue Line This is like
+[00:09:25] lights out right here all right now this
+[00:09:28] is a possible short
+[00:09:30] below the whole dollar $4 with a stop at
+[00:09:33] 410 I always keep tight stops when I
+[00:09:35] short whole
+[00:09:37] dollars and this one's good because
+[00:09:39] we're breaking below this 20 moving
+[00:09:40] average the first time we've actually
+[00:09:42] broken below it since all the way back
+[00:09:44] here and it'll be the first time we Clos
+[00:09:46] below it and now your new stop is just
+[00:09:49] above the moving average so look what
+[00:09:51] happens you come over here and you start
+[00:09:53] tapping that moving average and down and
+[00:09:55] tapping it and down and we go all the
+[00:09:57] way down to 370 before we start to get
+[00:09:59] back up above
+[00:10:00] it all right so that right in there
+[00:10:03] presented a decent little short on the
+[00:10:06] pullback but what's important to
+[00:10:07] recognize is that you have two really
+[00:10:09] good U entry opportunities here the
+[00:10:12] first pullback and the second pullback
+[00:10:15] right and obviously these are good five
+[00:10:18] minute setups that do need to correlate
+[00:10:21] with clean one minute setups so the
+[00:10:23] clean one minute setup being
+[00:10:26] um let's see being right here right in
+[00:10:29] in this area right in that area and then
+[00:10:33] again um right in this area here and
+[00:10:36] then this is your possible one minute
+[00:10:38] scalp over the whole dollar of four but
+[00:10:41] now we're starting to get a little too
+[00:10:43] extended so you know you want to
+[00:10:46] understand what is a risky setup and
+[00:10:48] what is a high probability
+[00:10:50] setup so you might think well this is
+[00:10:53] just one one chart how often do we see
+[00:10:55] this happen we see it happen all the
+[00:10:58] time so let's look at
+[00:11:00] rgm this has a very similar chart today
+[00:11:04] okay look at this we get this Spike up
+[00:11:06] out of the gates you know we don't we
+[00:11:08] may not know what caused the move from
+[00:11:10] A110 up to
+[00:11:11] a160 right and there's certainly
+[00:11:14] potential to scalp the one minute chart
+[00:11:17] inside of that move all right so let's
+[00:11:19] look at let's start with the one minute
+[00:11:21] chart so the one minute chart this thing
+[00:11:23] spiking up and it's on our scanners is
+[00:11:25] there an entry somewhere in here you
+[00:11:27] know in this casee you had a possible
+[00:11:30] entry over the half
+[00:11:32] dollar 150 and we went up to a high of
+[00:11:35] 163 and then we dipped back down all
+[00:11:38] right I actually jumped in this at 150
+[00:11:40] for that half dooll break when I do this
+[00:11:42] I have a 10-cent stop the same as when
+[00:11:44] I'm long or short at a whole dollar so
+[00:11:46] long here at 150 we get to move up to
+[00:11:49] 160 sell half stop out break even on the
+[00:11:51] rest that's fine now we're going
+[00:11:53] sideways sideways sideways at this
+[00:11:56] moving average on the one minute
+[00:11:59] tipping down just a little bit but still
+[00:12:02] holding up fairly well and now we're
+[00:12:03] starting to curl up volume coming in on
+[00:12:06] this candle and then coming in again on
+[00:12:08] this candle so the first five minute
+[00:12:11] candle to make a new high is right here
+[00:12:14] which was over 48 and then from 48 we
+[00:12:18] went from 48 all the way up to a high of
+[00:12:21] about
+[00:12:22] 73 so this is the first pullback getting
+[00:12:25] bought up the volume here indicating
+[00:12:27] that lots of people are watching this
+[00:12:29] stock we've got the first pullback now
+[00:12:31] let's look for the second pullback all
+[00:12:33] right we got that first move up to 70
+[00:12:35] second
+[00:12:36] move consolidation
+[00:12:38] sideways okay the one minute is fine
+[00:12:41] what's the first five minute candle to
+[00:12:43] make a new high it'll be over 65 so your
+[00:12:45] entry is 65 your stop is the low at 60
+[00:12:48] and now you've got an entry at 65 that
+[00:12:50] you can ride all the way up towards
+[00:12:53] $2 doesn't mean you don't take profit
+[00:12:55] along the way I always do but this is a
+[00:12:59] really good uh F minute setup the first
+[00:13:01] pullback the second pullback and now
+[00:13:03] what's happening up here along the third
+[00:13:05] we're getting a little too extended off
+[00:13:06] of our moving average we're seeing high
+[00:13:09] volume but not as much price action
+[00:13:11] we're starting to get that tug
+[00:13:13] of-war all right and then that tug
+[00:13:15] of-war is what often times um for a
+[00:13:19] strong momentum stock ends up marking
+[00:13:21] the top and then we get that move back
+[00:13:24] down this pattern is so
+[00:13:27] similar all right we can look at a a
+[00:13:29] couple others these are um excerpts from
+[00:13:32] the trading course my 515 page um PDF
+[00:13:39] PowerPoint okay the first move up
+[00:13:42] sideways
+[00:13:44] consolidation first pullback second
+[00:13:46] pullback a little bit of a momentary and
+[00:13:48] then this rolls over here so this is
+[00:13:51] what we look for and we find this setup
+[00:13:54] using our scanners the Stock's hitting
+[00:13:56] new highs we'll trade it on the one
+[00:13:58] minute going up then we wait for the
+[00:14:00] first pullback usually for the second
+[00:14:02] entry second entry here and then third
+[00:14:04] entry the last trade will be through
+[00:14:06] here and a possible scalp over the whole
+[00:14:08] dollar or the half dollar if we happen
+[00:14:09] to be at this
+[00:14:11] area all right so this one is
+[00:14:15] um AO let's see
+[00:14:21] um
+[00:14:25] one another one here this one's not
+[00:14:28] quite is clear and this one's uh this is
+[00:14:31] one that had a strong Catalyst now and
+[00:14:33] here's the difference also stocks uh
+[00:14:36] that don't have a catalyst are going to
+[00:14:38] be much more likely to roll over sooner
+[00:14:40] than a stock running with a really good
+[00:14:42] Catalyst the really good Catalyst can
+[00:14:44] continue to form additional Flags so you
+[00:14:47] can get the third pullback the fourth
+[00:14:48] pullback and they can keep running this
+[00:14:50] was fxcm that went from $11 to $20 a
+[00:14:54] 100% move in one day so with this one if
+[00:14:57] you're using the 5 minute chart is your
+[00:14:59] guide you've got an entry here an entry
+[00:15:01] here an entry here and of course
+[00:15:03] multiple entries on the one minute
+[00:15:06] chart here's your pop your first
+[00:15:08] pullback and then your next move there
+[00:15:10] on
+[00:15:12] Zaza that was
+[00:15:15] AO another one here a little bit
+[00:15:17] sideways this is more of a flat top than
+[00:15:19] a real clean uh flat top breakout or
+[00:15:23] more of a flat top breakout than a um a
+[00:15:26] clean bull
+[00:15:27] flag but still those are good A little
+[00:15:29] bit of a higher price
+[00:15:32] stock let's see um and then you know you
+[00:15:37] again some of these other ones that just
+[00:15:38] sort of grind and grind these are a
+[00:15:40] little bit different they don't give you
+[00:15:42] that clean pullback so you have to
+[00:15:44] recognize some stocks are going to give
+[00:15:45] you really clean entry opportunities
+[00:15:47] first pullback second pullback and those
+[00:15:49] are the ones that you attack with size
+[00:15:51] the ones that are going to be a little
+[00:15:52] bit tricky and they run but they don't
+[00:15:54] give you a good setup well you can't you
+[00:15:57] can't win them all right we we do as
+[00:15:59] much as we can but we simply can't win
+[00:16:00] them all so you go for the ones that
+[00:16:02] have the best opportunities you learn to
+[00:16:05] recognize those patterns in real time
+[00:16:07] and that allows you to be more
+[00:16:08] aggressive on what you would consider an
+[00:16:10] a quality setup and then reduce your
+[00:16:12] size on you know kind of subpar quality
+[00:16:17] setups all right so uh hopefully that's
+[00:16:20] helpful for you guys again this is an
+[00:16:22] overview of really bull Flags uh Flatt
+[00:16:26] top breakouts and some of the examples
+[00:16:28] and trading the first and second
+[00:16:29] pullback the first and second pullback
+[00:16:31] are almost always the strongest you know
+[00:16:33] the first pullback for people that
+[00:16:35] missed that first push the second
+[00:16:36] pullback for people that Miss a second
+[00:16:38] one the third one is where you're
+[00:16:39] getting greedy and that's when it
+[00:16:41] usually rolls over and this is
+[00:16:43] especially true with stocks that are
+[00:16:45] running on kind of like not very good
+[00:16:47] news or maybe just a technical breakout
+[00:16:50] stocks like um you know NDM or fxcm that
+[00:16:55] are running on a really strong Catalyst
+[00:16:58] and that have the potential to go 100%
+[00:17:00] in one day you'll just keep seeing this
+[00:17:02] pattern the the move the pullback the
+[00:17:04] move the pullback and it'll just keep
+[00:17:05] happening again and again so you want to
+[00:17:07] study it so the next time you see this
+[00:17:09] pattern forming in real time you know
+[00:17:11] how to
+[00:17:13] react all right I hope that's helpful
+[00:17:16] email me if you have any questions

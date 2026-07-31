@@ -1,0 +1,1137 @@
+# The #1 Day Trading Strategy for Beginners | Backtested With 24,234 Trades
+# https://www.youtube.com/watch?v=qlhkAdaOg_Q
+# duration_sec: 2790
+
+[00:00:00] in this episode we're going to do a
+[00:00:01] complete breakdown of the Gap and go
+[00:00:03] strategy a gap occurs when the stock
+[00:00:06] opens significantly higher or lower than
+[00:00:09] the previous day and this usually
+[00:00:11] happens because of breaking news when we
+[00:00:13] are trading stocks that are gapping
+[00:00:15] generally what we're expecting is some
+[00:00:18] type of volatility if a stock is gapping
+[00:00:20] up depending on the quality of the
+[00:00:22] headline what I'm typically looking for
+[00:00:25] is continuation which is why this
+[00:00:26] strategy is called Gap and go today we
+[00:00:30] had a perfect case study that I'm going
+[00:00:32] to use to teach you how I trade this
+[00:00:35] strategy now I'll say a few years ago
+[00:00:38] something happened that changed the way
+[00:00:41] this strategy works and it does not work
+[00:00:43] the same as it did before this event and
+[00:00:46] I can pinpoint it to the specific day I
+[00:00:49] will be sharing that event with you
+[00:00:51] during this episode so let's go ahead
+[00:00:53] and jump in all right so we're on screen
+[00:00:55] share and you probably see a lot going
+[00:00:57] on so let me start by getting you a
+[00:00:59] little excited here and showing you my
+[00:01:00] p&l for the day I finished the morning
+[00:01:03] up
+[00:01:04] $665
+[00:01:06] 41 trading the Gap Ando strategy of
+[00:01:10] course I'll say as always my results are
+[00:01:12] not typical but this is a strategy that
+[00:01:15] I have been trading for years and that
+[00:01:16] Traders all around the world have been
+[00:01:18] trading for long before I even started
+[00:01:21] trading this is a universal pattern that
+[00:01:24] works in probably every Market it works
+[00:01:27] in crypto in Forex in Futures and can
+[00:01:30] certainly trade it in stock as I do if
+[00:01:32] we zoom in right here we're looking at
+[00:01:34] oops I'm over on this side we're looking
+[00:01:36] at the stock chart so this is the actual
+[00:01:39] stock chart of the stock I traded this
+[00:01:41] morning and this will be the case study
+[00:01:43] that we use now you'll have some
+[00:01:45] questions naturally about where I got in
+[00:01:47] where I got out how I found this stock
+[00:01:50] how I knew it was worth trading where I
+[00:01:52] traded it and I'm going to answer all of
+[00:01:54] those questions and more as we go
+[00:01:56] through this episode but I think high
+[00:01:58] level let's talk about
+[00:02:00] what a gap is so to understand a gap
+[00:02:03] we've got to look at the daily chart so
+[00:02:06] what we're looking at here on this stock
+[00:02:08] is a daily chart which means each one of
+[00:02:11] these candlesticks represents one day of
+[00:02:14] time if you're not familiar with
+[00:02:16] candlestick charts I have another
+[00:02:17] episode that you're welcome to check out
+[00:02:19] that breaks them down in a lot of detail
+[00:02:21] but in summary a Candlestick will
+[00:02:24] communicate four pieces of information
+[00:02:26] so if we look at the Whiteboard right
+[00:02:27] here I'll draw a candlestick for you
+[00:02:31] we've got the open the
+[00:02:34] close the high and the low so these are
+[00:02:38] the four pieces of information every
+[00:02:40] Candlestick communicates and based on
+[00:02:42] the shape of the Candlestick we
+[00:02:45] understand Market sentiment so the shape
+[00:02:47] of a Candlestick is in fact a signal for
+[00:02:50] instance if you saw a Candlestick that
+[00:02:52] looked like this you would know this is
+[00:02:55] a red Candlestick because of the color
+[00:02:57] that something bad has happened this
+[00:03:00] stock has dropped very quickly so that
+[00:03:02] communicates Market sentiment what about
+[00:03:04] a candle perhaps like this that's kind
+[00:03:08] of interesting that communicates
+[00:03:10] something else it shows that the low was
+[00:03:12] way down here but the stock ended up
+[00:03:14] closing way up here so sometime during
+[00:03:17] the candle it sold off and then came all
+[00:03:20] the way back up to close at the top that
+[00:03:22] shows a good degree of strength and
+[00:03:25] resilience all right so now that you've
+[00:03:27] looked at just basic candlesticks when I
+[00:03:29] look at a Candlestick chart and I look
+[00:03:31] at the daily chart this is where we'll
+[00:03:34] find the gaps and so on this particular
+[00:03:36] stock today this one's actually got
+[00:03:39] quite a story to it because as you can
+[00:03:41] see it has been selling off for a very
+[00:03:44] long time and if we go back on the chart
+[00:03:47] we may even see uh some other gaps that
+[00:03:49] might be a little bit easier to
+[00:03:51] visualize let's see there's a couple
+[00:03:53] gaps over here that we can visualize
+[00:03:55] this is when the stock was a bit more
+[00:03:56] expensive so I predict on this this day
+[00:04:00] here something happened all right you
+[00:04:02] see this day here with the big red
+[00:04:04] candle the big red candle and the big
+[00:04:06] red volume bar well on the previous day
+[00:04:09] right here the stock was trading at
+[00:04:12] let's see let's get zoomed in right here
+[00:04:15] we were trading at uh well let's see
+[00:04:18] this was pretty expensive on this day it
+[00:04:20] was like $3,000 a share all right so in
+[00:04:24] any case it's $3,000 a share and then
+[00:04:27] the next day it opens way up here at
+[00:04:32] $5,600 a
+[00:04:34] share that is a gap all right the stock
+[00:04:37] closed here and opens way up there and
+[00:04:40] so this creates a gigantic Gap overnight
+[00:04:44] the stock went up nearly 100% And so you
+[00:04:47] might say how in the world does that
+[00:04:52] happen the reason and the way a stock is
+[00:04:54] able to M make a move like that is
+[00:04:56] because of almost always there's some
+[00:05:00] type of catalyst so what I look for in
+[00:05:03] order to trade the Gap and go strategy
+[00:05:07] number one is
+[00:05:09] news I love seeing news because news is
+[00:05:14] what creates this momentum if it were
+[00:05:17] not for the news most likely this stock
+[00:05:19] wouldn't have done anything special so
+[00:05:22] all these other days nothing nothing
+[00:05:23] nothing nothing happens overnight and
+[00:05:25] then on this particular day most likely
+[00:05:28] after the market closed closed and
+[00:05:30] before it opened the next morning at
+[00:05:31] 9:30 there was a news headline the news
+[00:05:34] headline was strong strong enough the
+[00:05:36] stock went up nearly 100% but as the day
+[00:05:39] went on the candle closed red and the
+[00:05:42] stock sold off a little bit so today we
+[00:05:44] had a similar um a similar situation so
+[00:05:47] we'll get reoriented down here so today
+[00:05:52] we look at this we get zoomed in here
+[00:05:54] and what you'll notice is that yesterday
+[00:05:56] this stock was trading at let's see it
+[00:05:59] closed cled at
+[00:06:02] $2.79 all right $2.79 and today it hit a
+[00:06:06] high of
+[00:06:09] $881 holy smokes that's like 300% that
+[00:06:12] is a huge move overnight from the close
+[00:06:16] all the way to the high now it ended up
+[00:06:19] opening as you can see the bottom of the
+[00:06:21] green candle the open so today we opened
+[00:06:24] at 482 and then when the market opened
+[00:06:27] we got this nice move and that's what we
+[00:06:29] call the Gap and the go so it gapped up
+[00:06:34] and then it went it squeezed now
+[00:06:37] something interesting happened uh with
+[00:06:39] these Gap Ando stocks uh it was around
+[00:06:42] uh covid during the pandemic these
+[00:06:45] stocks used to have news that would come
+[00:06:48] out pre-market and really the news might
+[00:06:51] come out at 8:00 a.m 8:30 9:00 a.m.
+[00:06:55] could be clinical trial results FDA
+[00:06:58] announcements could any kind quarterly
+[00:07:00] earnings things like that we would have
+[00:07:01] some type of news headline that would
+[00:07:03] come out and then no one would really
+[00:07:06] trade it until the market opened at 9:30
+[00:07:10] so if you've been actively trading for a
+[00:07:11] while you're probably aware of the fact
+[00:07:13] that we have pre-market regular trading
+[00:07:16] hours and then after hours so if you
+[00:07:18] look at the Whiteboard the way this is
+[00:07:20] split is 400 a.m. to
+[00:07:23] 930 is pre-market so that's pre-market
+[00:07:28] and then you have 9:30 to 4 p.m. which
+[00:07:31] is regular trading hours and then you
+[00:07:34] have 400 P.M to 8:00 p.m. which is after
+[00:07:38] hours trading it's kind of funny because
+[00:07:42] really the Market's open at 400 am and
+[00:07:45] it closes at 88m I don't know exactly
+[00:07:48] why it's distinguished in these sort of
+[00:07:50] pre-market and after hours and then
+[00:07:52] regular is just in this window because
+[00:07:55] effectively when I'm trading uh there's
+[00:07:57] no difference when I'm executing my
+[00:07:59] order I can trade premarket I could
+[00:08:00] trade after hours or I could trade
+[00:08:01] during regular hours but I suppose this
+[00:08:04] is kind of Legacy stuff from the old
+[00:08:06] days when you know they would ring the
+[00:08:08] bell and that was the official open of
+[00:08:10] the market and even prior to co what
+[00:08:13] would happen with a lot of these stocks
+[00:08:14] is that they might have news that came
+[00:08:16] out pre-market but nobody really traded
+[00:08:19] pre-market there wasn't a lot of volume
+[00:08:22] there wasn't a lot of liquidity because
+[00:08:24] there wasn't volume it was hard to get
+[00:08:25] in it was hard to get out and so people
+[00:08:27] would just wait for the opening
+[00:08:30] and so what would happen is basically
+[00:08:32] the Bell would ring and at that moment
+[00:08:34] there' be a clamor and everyone would be
+[00:08:36] trying to jump in these stocks at the
+[00:08:37] same time and so we would have these
+[00:08:39] stocks that would be quoting higher
+[00:08:42] prices than the previous day so if the
+[00:08:45] previous day like the case of this stock
+[00:08:47] here was
+[00:08:49] 279 we might be showing a quote on the
+[00:08:52] market of
+[00:08:54] $4 but even though there's a quote of $4
+[00:08:57] there wasn't really a lot of volume so
+[00:08:58] no one really buys and then the bell
+[00:09:00] rings and all of a sudden everyone
+[00:09:02] starts buying and it goes right away 4
+[00:09:04] to 425 435 445 450 460 470 $480 $5 and
+[00:09:09] it just keep it just squeezes right up
+[00:09:11] at the
+[00:09:12] open that was the classic Gap and go
+[00:09:17] pattern because the Gap would start
+[00:09:19] pre-market but there was no trading the
+[00:09:21] trading would really be the go would be
+[00:09:23] at the open and then during Co things
+[00:09:26] changed so what CH what and I I I
+[00:09:29] distinctively I I actually remember the
+[00:09:32] day it changed all right so come with me
+[00:09:35] back in time and let me share with you
+[00:09:36] the story all right so we have a stock
+[00:09:39] and we could look at the screen share
+[00:09:40] again it's a stock um M much like this
+[00:09:43] it's a stock that's on our scans um
+[00:09:45] we'll back this out here so I'm using
+[00:09:48] these scanners as you can see over on um
+[00:09:51] the left side of my screen so let's see
+[00:09:53] on the left side of my screen I've got
+[00:09:54] these uh scanners up and these are
+[00:09:57] searching for the stocks in the market
+[00:09:58] that are moving higher right now all
+[00:10:01] right so I'm looking for oops I'm
+[00:10:02] looking for these stocks that are moving
+[00:10:03] higher and I've got this list and so
+[00:10:07] usually what I'm doing is I'm looking at
+[00:10:09] each one of these stocks I'm asking
+[00:10:11] myself okay do I like this stock do I
+[00:10:13] like the setup uh is this something I
+[00:10:15] would be interested in trading so I'm
+[00:10:18] looking specifically at this top gappers
+[00:10:20] window the one in the bottom corner and
+[00:10:22] this is listing all of the stocks that
+[00:10:24] are gapping up pre-market and what I
+[00:10:26] essentially do is I go through a
+[00:10:28] checklist ask myself whether or not I
+[00:10:30] think this stock has the potential to be
+[00:10:32] good for trading so if we go back here
+[00:10:35] we already said we're looking for
+[00:10:37] gapping stocks that number one have news
+[00:10:40] number two I'm GNA generally be looking
+[00:10:42] at the top two to three leading
+[00:10:46] percentage gappers each day the two
+[00:10:50] leading gappers each day are what I'm
+[00:10:52] going to focus on the top two or three
+[00:10:54] because I want to be trading a stock
+[00:10:55] that is super obvious that lots of other
+[00:10:57] people are watching too now number three
+[00:10:59] I generally find that stocks uh priced
+[00:11:02] between 2 and 20 perform the best so
+[00:11:06] you'll notice today just for instance
+[00:11:08] that uh two of the stocks on the top of
+[00:11:11] the scanner are really cheap so this one
+[00:11:13] was 4 cents a share right here all right
+[00:11:16] so I'm not interested in that and the
+[00:11:18] second one is a18 so it's a little too
+[00:11:21] cheap the third one is the one that I
+[00:11:23] end up trading it gapped up 72% the
+[00:11:26] stock ticker was bdrx the price is $5 a
+[00:11:29] share the float is quite low it has news
+[00:11:32] and and this was the one that I ended up
+[00:11:33] trading so on this particular day back
+[00:11:37] in uh probably it would have been 2020
+[00:11:39] it was probably um March uh no February
+[00:11:43] I would say February of 2020 I have the
+[00:11:45] stock that I'm watching I know that I I
+[00:11:48] like the setup I like the news
+[00:11:50] everything else and I have my order
+[00:11:51] ready to go and it's about 928 so I'm
+[00:11:55] waiting for the market to open to press
+[00:11:57] the buy button and all of a sudden
+[00:12:00] volume starts coming in and starts
+[00:12:03] moving it starts squeezing and I'm like
+[00:12:06] what's going on people aren't waiting
+[00:12:09] and I I clicked the buy button and all
+[00:12:11] of a sudden I was in the trade and I'm
+[00:12:13] in pre-market and I'm I'm like I'm I'm
+[00:12:16] you know I'm in this trade at
+[00:12:18] 929 The Market hasn't officially opened
+[00:12:20] yet but it didn't really matter so all
+[00:12:23] of a sudden I'm in the trade and then
+[00:12:24] the bell rings and it keeps going higher
+[00:12:27] and the rest of that week that kept
+[00:12:28] happen happing and it was like 9927 926
+[00:12:31] 925 920 915 910 it basically what was
+[00:12:37] happening was as essentially Traders
+[00:12:40] were trying to jump in before the Gap
+[00:12:43] and the go they they knew of this
+[00:12:45] pattern that was happening and so rather
+[00:12:47] than wait for the market to open Traders
+[00:12:50] were just jumping in early to try to get
+[00:12:52] ahead of that squeeze and so I started
+[00:12:55] doing the same because I realized I'm
+[00:12:56] missing the move so I started getting in
+[00:12:58] a little earlier a little earlier a
+[00:12:59] little earlier and then what ended up
+[00:13:01] happening is basically the second news
+[00:13:04] came out the stock start squeezing
+[00:13:06] Traders aren't waiting and so now it's
+[00:13:09] it's and this is the way it is now today
+[00:13:11] years later is the moment the news comes
+[00:13:13] out the stock starts spiking and there's
+[00:13:16] even algorithms and the these algorithms
+[00:13:18] run by highfrequency Traders uh
+[00:13:21] institutional Traders they co-locate
+[00:13:23] servers at the exchanges so when they
+[00:13:26] get the news they can execute orders
+[00:13:30] instantaneously I mean they are trading
+[00:13:32] the news like the moment it comes out so
+[00:13:35] if we look back on the screen share what
+[00:13:37] you'll see is that on this stock
+[00:13:39] bdrx there's this scanner at the uh the
+[00:13:43] top left of my of my window here and
+[00:13:46] this produces alerts in real time so
+[00:13:48] each time I get this alert the scanner
+[00:13:51] um makes a beeping a sound and it's like
+[00:13:54] a radar it's telling me that a stock is
+[00:13:56] moving right now in real time so bdrx
+[00:14:00] well the news came out here this morning
+[00:14:02] at uh it was at 9:00 a.m. so it was at
+[00:14:05] the top of the hour 9:00 a.m. there's
+[00:14:06] been a couple headlines that replace the
+[00:14:07] top three but right at 9:00 A.M news
+[00:14:10] came out and so by 9:01 and 202s this
+[00:14:14] was hitting a scanner at
+[00:14:16] $355 a share and from there it went from
+[00:14:20] 350 to 380 to 399 to 407 to 415 to 419
+[00:14:24] to 420 426 439 440 460 and now it's
+[00:14:29] hitting a second scanner and a third
+[00:14:31] scanner 477 479 480 488 490 okay this
+[00:14:37] stock is moving quickly and now it's
+[00:14:39] game time right the stock is moving
+[00:14:42] we've got a candidate for a gap and go
+[00:14:44] and and in fact what's kind of funny
+[00:14:46] about this is that Gap and go trading
+[00:14:50] used to give you more time to prepare
+[00:14:52] your watch list because you would look
+[00:14:54] at a list of the top five or six stocks
+[00:14:56] that were gapping up you'd focus in on
+[00:14:58] the top three three the ones that you
+[00:14:59] liked based on the price range and you
+[00:15:02] had time to plan out what you're going
+[00:15:03] to trade before the bell rang at
+[00:15:05] 9:30 now when we look at our um
+[00:15:08] whiteboard here I'll add a couple more
+[00:15:10] items um to this so number one is for
+[00:15:14] The Gap and go strategy we like to see
+[00:15:18] that the stock has news breaking news I
+[00:15:20] like to trade stocks in the top two to
+[00:15:22] 3% leading gappers and and I would also
+[00:15:25] add here as a note um minimum is 10% if
+[00:15:30] a Stock's not up at least 10% I don't
+[00:15:32] care about it so it's got to be up at
+[00:15:34] least 10% all right uh then we like to
+[00:15:37] see stocks pric between 2 and 20 that's
+[00:15:39] ideal I like to see that the stock has
+[00:15:42] um let's see relative
+[00:15:46] volume relative volume oops that's five
+[00:15:50] times above average and so what that
+[00:15:53] means is that when we're looking at the
+[00:15:55] daily chart of this stock uh well
+[00:15:57] there's a couple different things we
+[00:15:58] could do so number one this is going to
+[00:16:00] calculate the relative volume it's going
+[00:16:01] to tell me right here the relative
+[00:16:03] volume is 900 so it's super high so it
+[00:16:08] calculates it for me automatically
+[00:16:10] however what I can also do is I can look
+[00:16:13] at the chart and I can just look at
+[00:16:14] yesterday's volume yesterday's volume on
+[00:16:17] this stock literally was 12,000 shares
+[00:16:20] you know how many shares it traded today
+[00:16:23] over 30 million shares over 30 million
+[00:16:27] shares today that's over $150 Million
+[00:16:31] worth of stock that trade at hands today
+[00:16:34] and yesterday it was basically nothing
+[00:16:36] it was like
+[00:16:37] $25,000 so how does it go and do that
+[00:16:40] overnight obviously well it wasn't
+[00:16:42] really overnight but it was as soon as
+[00:16:43] the news broke at the top of the hour at
+[00:16:45] 9:00 am. okay so uh so I can see very
+[00:16:49] clearly that the volume today is
+[00:16:50] substantially higher a word of caution
+[00:16:53] if you try to apply Gap and go trading
+[00:16:56] to a stock that's only up two 2 or 3%
+[00:16:59] maybe like I don't
+[00:17:01] know Facebook meta or Google or Netflix
+[00:17:05] you will most likely be disappointed and
+[00:17:07] you will not see that big go at the open
+[00:17:11] what we ultimately are looking at is an
+[00:17:12] imbalance between supply and demand so
+[00:17:15] number five is a
+[00:17:17] float of under 20 million shares that's
+[00:17:21] ideal and this this really is my my list
+[00:17:24] of what would qualify as a good Gap and
+[00:17:27] go setup so if if it's a float of under
+[00:17:29] 20 million shares this right here
+[00:17:31] excludes your Netflix um your your
+[00:17:35] Google your apples all of these big
+[00:17:38] stocks The Meta these are going to be
+[00:17:40] excluded right in here because they all
+[00:17:42] have much much larger floats so the
+[00:17:45] float is the number of shares available
+[00:17:48] to trade when the company does its
+[00:17:49] initial public offering they're selling
+[00:17:52] shares onto the open market and from
+[00:17:54] that point forward that's the number of
+[00:17:55] shares available to trade but what a lot
+[00:17:57] of companies do over over time is
+[00:17:59] they'll sell more shares to raise more
+[00:18:00] money and while that dilutes the value
+[00:18:03] of the company a little bit it also
+[00:18:04] allows the company to reinvest that
+[00:18:07] money so the company can grow so if we
+[00:18:09] look at a stock just for instance like
+[00:18:12] um oh we well I'm not going to switch
+[00:18:14] around right now I'll just check down
+[00:18:16] here so like Amazon has a float of like
+[00:18:18] 10 billion shares uh I can see that on
+[00:18:20] this other window meta has a float of
+[00:18:22] two billion shares Google has a float of
+[00:18:25] six billion shares billion these are
+[00:18:28] huge huge number numbers of shares so
+[00:18:31] this stock has a float of
+[00:18:34] 6 uh 693 th000 shares and what I
+[00:18:38] actually did was I went over to this
+[00:18:41] website uh which you don't need to go to
+[00:18:43] but I I I I will usually check this and
+[00:18:47] um I typed in
+[00:18:49] bdrx which is the stock ticker and I
+[00:18:52] looked at their last um quarterly
+[00:18:54] earnings um and then I checked let's see
+[00:18:58] was it this one I'm sure it was this one
+[00:19:04] um let me just check I think it I'm
+[00:19:07] pretty sure it was this one so then I
+[00:19:08] looked for
+[00:19:10] shares and I saw okay they had um 5
+[00:19:14] million shares right here all right so
+[00:19:17] as of December 31st uh 2022 they had 5
+[00:19:20] million shares 5.4 million shares
+[00:19:22] available to trade so that's that
+[00:19:24] confirms what the float is of this
+[00:19:26] company now this stock recently did
+[00:19:30] what's called a reverse split the
+[00:19:34] reverse stock split is um it's a pattern
+[00:19:37] that we notice a lot of these companies
+[00:19:39] will do if you see this s right here
+[00:19:42] this is the stock split so this was a 25
+[00:19:45] no an 80 to1 stock split okay so they
+[00:19:47] did a big stock split right here they
+[00:19:49] did a stock split back here of 4:1 and
+[00:19:53] they've had a history of doing these
+[00:19:54] stock splits why are they doing these
+[00:19:56] stock splits what is this about
+[00:19:58] well there's a rule that these companies
+[00:20:00] have to keep their stock price above $1
+[00:20:03] a share and they can do that really one
+[00:20:06] of two ways they can either be a great
+[00:20:08] stock that people want to buy or they
+[00:20:10] can do a reverse split and so if the
+[00:20:12] stock goes down to 10 cents a share they
+[00:20:15] could do a 20 to1 reverse split and the
+[00:20:18] next day it'll go to $2 a share but then
+[00:20:20] what happens to those 10 million shares
+[00:20:22] well if you own 10 million shares at 10
+[00:20:24] cents and then the stock goes to $2 you
+[00:20:27] know it's a to one you're up you're up a
+[00:20:30] ton so that doesn't work so what they
+[00:20:31] end up doing is they divide the float by
+[00:20:35] the ratio of the split and now the stock
+[00:20:39] is at $2 a share and you own 500,000
+[00:20:43] shares instead 10 million right so now
+[00:20:46] your value your cost basis would be
+[00:20:48] unchanged the amount of money you have
+[00:20:50] is unchanged but the price has gone up
+[00:20:53] and the shares have gone down so it's
+[00:20:54] like a it's like a trade um but what the
+[00:20:57] effect is that it reduces the number of
+[00:20:59] shares available to trade so now back
+[00:21:02] here this is what ends up pushing the
+[00:21:04] float down and in order to see a really
+[00:21:07] dramatic short squeeze what has often
+[00:21:10] happened uh is a stock like this has
+[00:21:13] sold off for a long time it's been
+[00:21:16] selling off selling off selling off and
+[00:21:18] the float gets smaller and smaller and
+[00:21:20] smaller and smaller because they do
+[00:21:22] these reverse splits and then all of a
+[00:21:25] sudden they come out with great news and
+[00:21:28] the stock explodes it goes from $2 to
+[00:21:30] eight to 10 and I I have seen stocks
+[00:21:33] like this that are re recent reverse
+[00:21:35] splits go from $2 to over $100 basically
+[00:21:39] like that now that P that window closed
+[00:21:42] I wasn't expecting it to close but um
+[00:21:44] hey uh in case you haven't noticed this
+[00:21:46] is um my new book it's titled how to day
+[00:21:49] trade the plain truth and in this book I
+[00:21:51] break down for you the 20 guard rails
+[00:21:54] that I have implemented in my trading
+[00:21:56] that have kept me from blowing up my
+[00:21:58] account I've been trading for a long
+[00:22:00] time and this is a book for those of you
+[00:22:03] guys that been wanting to learn a little
+[00:22:04] bit more about the market I really think
+[00:22:06] that you'll enjoy it so I encourage you
+[00:22:08] to check it out all right now I wasn't
+[00:22:09] planning on showing you this but anyways
+[00:22:12] that page popped up and uh let me go and
+[00:22:14] switch back to the main screen all right
+[00:22:16] so I've got this window back up okay so
+[00:22:18] at bdrx this morning uh so again gapping
+[00:22:22] up it's got a float of less than a
+[00:22:25] million shares which is a very low float
+[00:22:28] and as soon as this stock hit the
+[00:22:30] scanners I pull it up I saw that there
+[00:22:33] was breaking news on it I saw it's a
+[00:22:35] pharmaceutical company this is a sector
+[00:22:37] that is very popular for Gap Ando
+[00:22:39] Traders because pharmaceutical companies
+[00:22:42] uh they can just be really volatile they
+[00:22:44] come out with great news they're they've
+[00:22:45] got a new treatment a new drug and all
+[00:22:48] of a sudden the stock can really explode
+[00:22:50] and this is especially true with these
+[00:22:52] lower price stocks so um so even though
+[00:22:55] bdrx is didn't go to 50 or $100 a share
+[00:22:59] the fact that it was a recent reverse
+[00:23:01] split made this even more interesting as
+[00:23:03] a gap and go candidate all right so the
+[00:23:07] first thing that happens
+[00:23:09] here the stock squeezes up right here
+[00:23:13] and it hits a high of $4 a share so one
+[00:23:16] of the challenges that a lot of Traders
+[00:23:19] face today with gap and go trading is
+[00:23:21] that it's a race to get in that's what
+[00:23:24] that's the really the big change that
+[00:23:26] happened a few years ago we used to have
+[00:23:28] a lot of time to kind of build our watch
+[00:23:29] list and now when we're taking that Gap
+[00:23:33] and go trade it's like if the stock has
+[00:23:36] just come out with breaking news the
+[00:23:37] moment that news comes out it's not even
+[00:23:39] gapping right it's like the news comes
+[00:23:42] out and then what ends up happening is
+[00:23:44] those first algorithms end up executing
+[00:23:46] orders and the stock starts moving
+[00:23:49] higher as it starts moving higher it's
+[00:23:51] going to hit those High a day momentum
+[00:23:53] scanners so boom boom boom it's hitting
+[00:23:55] those scanners and that's how Traders
+[00:23:56] like me are going to see it
+[00:23:58] and now we pull up the charts and now
+[00:24:00] we're looking for that first entry so
+[00:24:03] where do I get in on a gap and go trade
+[00:24:06] so today is a great case study of a gap
+[00:24:09] and go and it shows us a number of
+[00:24:10] different patterns that we can focus on
+[00:24:12] one of my favorite patterns that I'll
+[00:24:14] show you here on the Whiteboard is um
+[00:24:17] buying the first pullback so what I look
+[00:24:20] for in this pattern is the stock is
+[00:24:23] going to start squeezing up right here
+[00:24:25] just like this basically so these are
+[00:24:27] just candlesticks and each time it it
+[00:24:31] makes a new high of day it's going to be
+[00:24:34] triggering an alert on my highay
+[00:24:37] momentum scanners all right so if we go
+[00:24:39] back over here to the Whiteboard or to
+[00:24:41] the screen share um our highay momentum
+[00:24:43] scanner right here each time a stock
+[00:24:45] hits a new high it's going to trigger
+[00:24:47] this alert however this scanner is not
+[00:24:51] just looking for any old stock that's
+[00:24:53] hitting a new high this is looking
+[00:24:55] specifically for stocks that already
+[00:24:58] meet my criteria for being worth trading
+[00:25:01] I don't need to get a notification every
+[00:25:03] time a stock in the market makes a new
+[00:25:05] high only if it meets these criteria
+[00:25:08] which of course this stock did so it
+[00:25:10] starts squeezing up it's hitting these
+[00:25:12] new highs it's moving up here and then
+[00:25:15] what I like to do is I like to give it a
+[00:25:17] chance to have a pullback so the stock
+[00:25:20] is first going to squeeze up it's going
+[00:25:21] to make these new highs and then it's
+[00:25:24] going to pull back and what's Happening
+[00:25:27] Here is Traders who maybe were in lower
+[00:25:31] in this area are taking a little bit of
+[00:25:33] profit buying in this area honestly is
+[00:25:37] very difficult not a lot of Traders are
+[00:25:38] going to be fast enough to buy in this
+[00:25:40] area I will sometimes do it but even for
+[00:25:43] me you know there there's just not a lot
+[00:25:45] of time to take trades when it's moving
+[00:25:47] this quickly now if we look at this
+[00:25:49] chart we could see exactly that
+[00:25:50] happening so we see that the initial
+[00:25:53] initial move the stock squeezes up here
+[00:25:56] from like 279 right so the news came out
+[00:25:59] and when the news came out right down
+[00:26:01] here you know the stock wasn't even
+[00:26:03] gapping up so it squeezes first up to
+[00:26:05] about uh $3 a share and then up to about
+[00:26:08] 350 so it hits the half dollar it does a
+[00:26:11] little micro pullback just for a second
+[00:26:14] it pops through 350 and goes up to $4 a
+[00:26:17] share all right so that's a a full
+[00:26:19] dollar a share and there are some
+[00:26:21] traders who probably jumped on that very
+[00:26:22] quickly as it was hitting the high dis
+[00:26:24] scanners and took some profit there are
+[00:26:27] also probably some shorts who took a
+[00:26:29] short something's popping up and you
+[00:26:31] know they're shorting stocks popping up
+[00:26:33] trying to catch a reversal all right so
+[00:26:35] then you get a little profit taking and
+[00:26:36] you get that red candle you get another
+[00:26:38] candle here and then we get this move
+[00:26:40] higher and this pattern right here is
+[00:26:43] called the first pullback so if you look
+[00:26:46] back on the Whiteboard typically what
+[00:26:48] I'm looking for this is like this is my
+[00:26:50] favorite pattern to trade so what I'm
+[00:26:52] looking for on this pattern and I'm just
+[00:26:54] going to make this just a little smaller
+[00:26:55] here this green candle um
+[00:26:58] so what I like to see is high volume on
+[00:27:02] the green candle so this is actually the
+[00:27:04] volume bar down here so these are the
+[00:27:07] volume bars high volume on the green
+[00:27:08] candle and then I like to see lighter
+[00:27:11] volume here on the red candles all right
+[00:27:15] so each one of these green candles would
+[00:27:17] have had volume so I'll just do one
+[00:27:19] right here um another right here and
+[00:27:22] another right there all right and then
+[00:27:25] these two red candles we like to see
+[00:27:27] that they have lighter volume now if we
+[00:27:29] look at the chart for this stock this
+[00:27:31] morning our case study um I'll back out
+[00:27:34] what you'll notice is that this didn't
+[00:27:37] um this didn't have the perfect profile
+[00:27:40] and that was partly
+[00:27:43] because um right here this candle so
+[00:27:49] this candle right
+[00:27:51] here let's see let me zoom in on it
+[00:27:54] there's a problem with that candle all
+[00:27:56] right so we're looking at this candle
+[00:27:57] right down here let me get a drawing
+[00:27:59] tool so that candle right there there's
+[00:28:01] a problem with that candle the problem
+[00:28:04] with that candle is the
+[00:28:07] shape all right so when we have a
+[00:28:11] candle that doesn't matter if it's green
+[00:28:14] or red in this case it was green it
+[00:28:17] opens it's squeezed up and then it
+[00:28:21] dropped back down and close basically
+[00:28:23] flat that's called a grave
+[00:28:28] Stone dogey an OM an OM ominous name an
+[00:28:33] ominous name for a Candlestick here that
+[00:28:36] is indicative of a battle going on
+[00:28:40] behind the scenes so what's happening
+[00:28:42] here is the stock squeezed up but then
+[00:28:46] flushed back down so I don't like seeing
+[00:28:50] that type of candle now typically what
+[00:28:53] I'm going to do is I'm going to buy the
+[00:28:55] first candle that makes a new high on
+[00:28:57] this pattern so the second this candle
+[00:29:00] breaks the high of this red candle I'm a
+[00:29:02] buyer but in this case what ended up
+[00:29:05] happening is we had this uh this first
+[00:29:08] candle that squeezes up right here then
+[00:29:10] we have the pullback candle and then we
+[00:29:13] have this gravestone dogee and then this
+[00:29:15] next
+[00:29:16] candle after that gravestone dogee I
+[00:29:19] wasn't comfortable buying it right here
+[00:29:21] I just said no I don't think I can and
+[00:29:23] it comes up here to about 3.95 39 9 6
+[00:29:28] and then it drops back down so it ends
+[00:29:31] up dropping back down just for a moment
+[00:29:34] and then it pushes through so what I'm
+[00:29:37] going to do is I'm going to actually
+[00:29:38] change this time frame to a 10-second
+[00:29:41] chart and so what we're going to do is
+[00:29:44] we're going to break down that one
+[00:29:45] minute candle into 10c candles so we can
+[00:29:48] get even more zoomed in this kind of
+[00:29:50] like a magnifying glass so we're going
+[00:29:52] to get zoomed in on this price action so
+[00:29:54] you can better see what was happening in
+[00:29:57] inside that little sort of two-minute
+[00:30:00] pullback just before it squeezed higher
+[00:30:04] all right so now these are a lot of
+[00:30:05] 10-second candles here so we got to go
+[00:30:07] all the way back here all right so now
+[00:30:09] we're going to get a bit a little bit of
+[00:30:10] a better
+[00:30:12] picture okay so what we're going to look
+[00:30:15] at right
+[00:30:17] here so what we have is the stock
+[00:30:20] squeezes up right here to 350 right
+[00:30:23] consolidation right under the half
+[00:30:25] dollar that is very common we often see
+[00:30:28] stocks uh struggle and find resistance
+[00:30:31] around half dollars and around whole
+[00:30:33] dollars so it went right from 350 up to
+[00:30:36] 4 it pulls back right here and you can
+[00:30:40] see a number of these candles have this
+[00:30:43] topping tail these two candles sort of
+[00:30:46] these two candles and then this popped
+[00:30:49] up here to a high of 97 and then it
+[00:30:53] drops back down to a low of 3
+[00:30:57] 74 so about a 20 cent drop now one thing
+[00:31:02] that we could say is that the stock did
+[00:31:04] appear to be holding this ascending
+[00:31:07] support trend line all right so even
+[00:31:09] though oops even though it did pull back
+[00:31:12] uh it was holding this level of
+[00:31:15] support what it then does is it bursts
+[00:31:18] through that $4 spot right here and it
+[00:31:21] does it with some strength it goes from
+[00:31:22] 4 to
+[00:31:24] 425 to 430 to 440 40 to 460 it hits a
+[00:31:29] high of
+[00:31:30] 463 it dips it comes back up and now
+[00:31:34] double top resistance it tries to dip
+[00:31:37] and come back up again resistance it
+[00:31:39] dips it tries to come back up again
+[00:31:41] resistance so now we're getting a very
+[00:31:44] clearly established level of resistance
+[00:31:46] on this chart up here around
+[00:31:49] 463 what often happens is if the stock
+[00:31:52] is able to break through that resistance
+[00:31:54] it's going to come back down and retest
+[00:31:56] it can it hold and let's see what
+[00:32:01] happens so let's go
+[00:32:03] forward it breaks it breaks and it sells
+[00:32:07] off all the way back down to this orange
+[00:32:09] line if you see this orange line here
+[00:32:11] this is the volume weighted average
+[00:32:13] price it's a technical indicator that a
+[00:32:15] lot of day Traders use we'll also notice
+[00:32:17] that it came down nearly to the yellow
+[00:32:20] ascending support trend line but it was
+[00:32:24] able to Rally back up and now we're
+[00:32:26] getting closer to the open going into
+[00:32:28] the open we see it squeeze up to a high
+[00:32:30] of
+[00:32:32] $558 it pulls back it comes back up it
+[00:32:35] pulls back it comes back up and then you
+[00:32:37] can see watch this at the open look at
+[00:32:39] that move so it came back up to this
+[00:32:42] level at about 530 and right here it
+[00:32:45] squeezes up and it halts up at
+[00:32:49] $5.90 it then resumes it dips and it
+[00:32:52] rips up into a second halt at
+[00:32:55] 7:44 and then it resumes and halt
+[00:32:57] straight down so this is where we're
+[00:32:59] getting into some serious volatility you
+[00:33:02] know this ended up definitely being a
+[00:33:04] bit more volatile than I expected it it
+[00:33:07] was dramatic these are some really big
+[00:33:09] moves so the fact is I in a way sort of
+[00:33:14] feel like these trades back here um some
+[00:33:19] of them were sort of the easiest to me
+[00:33:21] they were kind of the cleanest once we
+[00:33:24] got into the open we got this sell off
+[00:33:26] here
+[00:33:27] this was definitely a nice trade uh that
+[00:33:30] break over
+[00:33:31] $530 but then to have this really big
+[00:33:34] rejection candle was not great so here
+[00:33:39] was a problem with this stock this stock
+[00:33:42] showed a history of doing some false
+[00:33:44] breakouts we had a false breakout right
+[00:33:47] there we had a false breakout right here
+[00:33:50] we had some false breakouts right up
+[00:33:51] here in this area so all of these false
+[00:33:54] breakouts were showing me that this
+[00:33:56] stock couldn't be TR trusted and you
+[00:33:57] know what also
+[00:33:59] happened and it happened right in this
+[00:34:01] area as well there um what we were
+[00:34:05] seeing on the level two on the tape were
+[00:34:08] 50,000 share sell orders so we saw a
+[00:34:11] 50,000 share sell order at
+[00:34:13] $55 this morning so the stock at $5 I
+[00:34:17] think it was $55 right around there so
+[00:34:20] we have this big big sell order now this
+[00:34:22] the shares got bought up and the stock
+[00:34:24] did end up going higher but it left me
+[00:34:26] scratch ing my head thinking who's
+[00:34:28] selling 50,000 shares of the stock is it
+[00:34:31] someone who's shorting it or is it
+[00:34:33] someone who's been holding for a while
+[00:34:34] and if they've got 50,000 shares what if
+[00:34:37] they have 500,000 shares and as the day
+[00:34:39] went on we kept seeing these big sell
+[00:34:41] orders so what I suspect on this is that
+[00:34:45] there was probably someone that had a
+[00:34:47] really big position that was taking the
+[00:34:49] 100% Gap as an opportunity to unload
+[00:34:53] some shares maybe it was an Insider
+[00:34:54] who's been holding for a long time maybe
+[00:34:57] an investor I don't really know the
+[00:34:59] stock on the daily chart has shown this
+[00:35:00] long history of declining so you know
+[00:35:03] today for it to bounce up that much it
+[00:35:05] may have been an opportunity for someone
+[00:35:07] to take some profit now it could have
+[00:35:08] also been someone looking to accumulate
+[00:35:11] a short position but they shorted 50,000
+[00:35:13] shares then at five and it goes up to
+[00:35:16] six seven to eight almost to $9 a share
+[00:35:19] I mean they're down like 200 Grand and
+[00:35:22] then they kept adding so at what point
+[00:35:24] would they have stopped adding and
+[00:35:26] started covering
+[00:35:27] you know or did they cover I and I don't
+[00:35:29] I'm not really sure of course ultimately
+[00:35:32] it's impossible to know we can speculate
+[00:35:36] but nonetheless the fact that I was
+[00:35:38] seeing those big sale orders and the
+[00:35:40] fact that we were seeing the stock had a
+[00:35:41] history of showing these gravestone dois
+[00:35:44] and these candles with big topping Tails
+[00:35:46] it showed weakness to me and so for that
+[00:35:49] reason I didn't get as aggressive on the
+[00:35:51] stock as I would have on a stock that
+[00:35:53] didn't show those warning signs those
+[00:35:56] warning signs for me were like a red
+[00:35:58] flag now when I'm trading you know I I
+[00:36:01] love trading this pullback setup I love
+[00:36:03] having a stock that makes two you know
+[00:36:05] three green candles a couple candles
+[00:36:07] pullback then buying the first candle to
+[00:36:09] make a new high looking for a move up
+[00:36:11] and then I'll do a second pullback on it
+[00:36:14] second pullback comes back down and then
+[00:36:16] again we're getting back in for the next
+[00:36:18] leg up you know that would be some nice
+[00:36:20] clean price action but unfortunately on
+[00:36:23] this particular stock the uh the market
+[00:36:26] on it was pretty thin uh it you know it
+[00:36:29] was whipping around quite a bit we were
+[00:36:30] seeing these sort of dramatic pops and
+[00:36:33] then flushes we were seeing some big
+[00:36:35] sellers coming out and that to me felt
+[00:36:40] that it was going to be more difficult
+[00:36:41] to manage risk and and ultimately it it
+[00:36:44] was more difficult to manage risk and I
+[00:36:46] think for me it was the right move to
+[00:36:47] trade it a little bit more
+[00:36:48] conservatively the fact is I can have a
+[00:36:50] stock that perfectly meets all of my
+[00:36:52] criteria here it has news it's is one of
+[00:36:55] the top two three two to three leading
+[00:36:57] gappers it's priced between 2 and 20
+[00:36:59] it's got five times relative volume and
+[00:37:00] the floats under 20 million I mean I I
+[00:37:02] would say literally uh bdrx met all of
+[00:37:06] those criteria and considering my
+[00:37:09] biggest Green Day was nearly half a
+[00:37:11] million dollars you know you might think
+[00:37:13] gosh why didn't I make more on this than
+[00:37:15] than I did today and the fact was uh and
+[00:37:18] the fact remains that just because a
+[00:37:21] stock meets all of the criteria for
+[00:37:23] being worth trading does not mean that
+[00:37:25] particular stock
+[00:37:27] will um display Perfect Price action for
+[00:37:31] any number of reasons it could be due to
+[00:37:32] short interest it could be due to the
+[00:37:34] number of insiders that are holding and
+[00:37:35] wanting to sell it could be due to the
+[00:37:39] Quality the fundamental quality of the
+[00:37:41] news headline especially with
+[00:37:42] pharmaceutical companies you know I'm
+[00:37:44] not a pharmacist I'm not a doctor so I
+[00:37:47] don't fully understand all of the
+[00:37:49] headlines I trade the price action and
+[00:37:52] that's it's important to keep that sort
+[00:37:54] of separate fundamentals and price
+[00:37:56] action fundamentals and technical
+[00:37:58] analysis as a day trader I'm trading the
+[00:38:01] chart pattern so if the Stock's moving
+[00:38:03] up I'm interested but at a certain point
+[00:38:06] there will be investors and Traders and
+[00:38:08] these big institutions that say wait a
+[00:38:10] second this headline is no good I'm
+[00:38:13] going to start shorting a couple hundred
+[00:38:14] thousand shares of the stock because I
+[00:38:16] know this is going to go lower in a
+[00:38:18] couple days when people realize that the
+[00:38:20] underlying fundamentals of the news just
+[00:38:22] isn't strong and I'm not in a position
+[00:38:24] to really know that so uh uh and the
+[00:38:27] fact is as a as a Trader you you can't
+[00:38:30] be a master of everything you know you
+[00:38:32] get good at trading stocks and trading
+[00:38:34] charts but you're not going to be able
+[00:38:36] to be a master at understanding
+[00:38:37] fundamental analysis for every different
+[00:38:40] sector of stock that there that we might
+[00:38:42] trade I'll trade stocks from all sectors
+[00:38:45] you know we'll trade oil stocks we
+[00:38:47] traded a lot of those during the big
+[00:38:49] covid boom uh the market boom because
+[00:38:51] the oil prices went up so much there
+[00:38:52] were the the Carn the Carnival Cruise
+[00:38:55] Line Norwegian Cruise Line the Cruise
+[00:38:56] Line stocks you know to to be a master
+[00:38:59] of every single industry and to be able
+[00:39:01] to really understand the fundamentals of
+[00:39:02] every news headline it's impossible so
+[00:39:05] you've got to stay in your lane and know
+[00:39:06] what you're good at and so for me
+[00:39:08] focusing on trading the charts and
+[00:39:09] unfortunately the chart on this
+[00:39:11] particular case study that we're looking
+[00:39:12] at for today just displayed a few of
+[00:39:15] these warning signs and I think right
+[00:39:17] now we are we're still in that market
+[00:39:20] where uh you know it's it's been over a
+[00:39:23] year since the S&P 500 made a new high
+[00:39:27] so the Market's been a little bit more
+[00:39:29] subdued we haven't s seen quite as many
+[00:39:31] really extreme moves so if you get a
+[00:39:34] stock that goes up 100% you know you're
+[00:39:36] kind of like all right this might be
+[00:39:38] kind of getting exhausted this might be
+[00:39:39] the end of the move so you may wonder
+[00:39:43] how do I manage when to keep trading and
+[00:39:47] when to walk away so when it comes to
+[00:39:50] the Gap and go strategy My Philosophy on
+[00:39:52] this for a long time was that I'd be
+[00:39:54] done trading by like 10:30 in the
+[00:39:56] morning
+[00:39:56] basically what I'm trading is the the
+[00:39:59] news that came out overnight as the
+[00:40:01] market responds to it in that first hour
+[00:40:04] of regular trading from 9:30 to 10:30
+[00:40:07] and then for the rest of the day I'm not
+[00:40:08] interested in anything unless something
+[00:40:11] has breaking news in the middle of the
+[00:40:12] day now sticking around to wait for
+[00:40:14] something to have breaking news in the
+[00:40:15] middle of the day is tricky you know
+[00:40:17] what ends up happening is you're you're
+[00:40:19] sitting here in the middle of the day
+[00:40:20] then all of a sudden you know you see
+[00:40:21] something hitting the scanners and boom
+[00:40:23] you're jumping in but I've never found
+[00:40:25] that the middle of the day is a time
+[00:40:27] when I do particularly well I think a
+[00:40:30] lot of successful Traders and a lot of
+[00:40:32] traders that have Deep Pockets and big
+[00:40:34] accounts they make their money early in
+[00:40:37] the day and then they leave and they're
+[00:40:38] gone and so effectively there's fewer
+[00:40:41] Market participants in the middle of the
+[00:40:43] day and with fewer Market participants
+[00:40:45] there's less people buying a stock and
+[00:40:48] with less people buying well nothing
+[00:40:50] really happens you know ultimately a
+[00:40:52] stock goes up because people see it they
+[00:40:54] see it using scanners social social
+[00:40:56] media this and that and they buy it
+[00:40:58] because they like the news they like the
+[00:40:59] setup they like the chart pattern so if
+[00:41:02] a stock starts squeezing up it you know
+[00:41:04] 7:45 p.m. or 15 minutes before after
+[00:41:08] hours closes there's not many Market
+[00:41:10] participants there to trade or to see it
+[00:41:12] so it's just at that window of time
+[00:41:14] doesn't really even make sense to focus
+[00:41:17] so I still remain focused on the morning
+[00:41:20] but because now stocks start squeezing
+[00:41:23] the second news comes out I sit down
+[00:41:26] earlier so usually news comes out at the
+[00:41:29] top of the hour and the bottom of the
+[00:41:31] hour so 700 a.m. 7:30 8 a.m. 8:30 9:00
+[00:41:35] a.m. 9:30 and even 9:30 not so much so
+[00:41:39] really the last window is like 9:00 a.m.
+[00:41:41] the last kind of potential time for news
+[00:41:43] to come out now trading before 7 a.m. is
+[00:41:47] a little tricky as well because there's
+[00:41:49] not as many Market participants because
+[00:41:50] a lot of Brokers aren't even open before
+[00:41:54] 700 a.m. so you can't even execute
+[00:41:56] trades now the broker that I use does
+[00:41:58] allow trading as early as 4 a.m. but I'm
+[00:42:00] not waking up at 4 a.m. to do that even
+[00:42:02] when I've been in Europe and in a time
+[00:42:05] zone where it was easy to do that
+[00:42:08] there's just not a lot of volume so
+[00:42:09] there's really nothing to trade so my
+[00:42:11] window right now for trading is between
+[00:42:13] about 7 a.m. and 10: a.m. that's kind of
+[00:42:16] the window 11:00 a.m. at the most where
+[00:42:18] I where I do the best and my rule of
+[00:42:21] thumb of when to stop trading so I've
+[00:42:23] had days where there's news at 8 a. and
+[00:42:26] by $815 I'm already up $5,000 that's my
+[00:42:29] daily goal so you could say all right
+[00:42:30] you hit five grand it's time to walk
+[00:42:32] away and on the one hand I could do that
+[00:42:35] I could just lock up that 5,000 and walk
+[00:42:38] away on the other hand what I think is
+[00:42:41] if I have a day where I make five grand
+[00:42:43] in 15 minutes the market is hot this is
+[00:42:45] the day if any that I should dig deep
+[00:42:48] and trade a little longer but we've all
+[00:42:50] known Traders maybe we've done this
+[00:42:52] ourselves I certainly have who have
+[00:42:54] traded madebe x amount and then given
+[00:42:57] all of it back and finish the day red
+[00:42:59] and it's like man why didn't you just
+[00:43:00] walk away when you were green all right
+[00:43:02] well of course if you walk away every
+[00:43:04] time you get green you're capping your
+[00:43:06] profits because you're not making the
+[00:43:08] most out of the best days in the market
+[00:43:10] so where's the balance this is what I
+[00:43:12] think let's look at the Whiteboard so
+[00:43:14] what I like to do in my own trading kind
+[00:43:17] of like this actually
+[00:43:19] so I see a stock that goes up makes a
+[00:43:22] move up it pulls back a little bit and I
+[00:43:24] want to buy it for the next leg higher
+[00:43:27] so a little bit of pullback is okay in
+[00:43:29] fact it's healthy how much is not
+[00:43:32] healthy actually this is really funny
+[00:43:34] because my cut off for a stock is if it
+[00:43:37] gives back 50% of the move my cut off
+[00:43:40] for when I stop trading is if I give
+[00:43:42] back 50% of my profit psychologically
+[00:43:45] there is something about giving back
+[00:43:46] half that's just like at that point you
+[00:43:48] know it's it's kind of done so if this
+[00:43:51] thing drops like that I'm done now if it
+[00:43:53] pulls back to
+[00:43:54] 50% you know you know maybe it could
+[00:43:58] recover but probably not realistically
+[00:44:01] if it pulls back more than 75 you know
+[00:44:04] more than 25% to the 75% retracement
+[00:44:06] mark it it this is not really looking
+[00:44:09] that great so we want to see it holding
+[00:44:11] about 75% of its move and I feel that
+[00:44:13] way with my my profits so oftentimes
+[00:44:16] when I'm trading I'll think okay I'm up
+[00:44:18] $2,500 and if I lose you know 500 bucks
+[00:44:22] I'm like okay I gave back 500 off the
+[00:44:24] top it's like 20% that's not too bad but
+[00:44:27] I got to be careful here I don't want to
+[00:44:29] give back too much more and half is my
+[00:44:31] cut off and then if I have a trade and
+[00:44:33] next thing you know I'm up 3,000 3500
+[00:44:35] 4,000 and I'm like okay now if I give
+[00:44:38] back 800 again it's like all right I'm
+[00:44:39] getting back 20% off the top but let's
+[00:44:42] not get back too much more so that's the
+[00:44:44] way I do it and so essentially the way
+[00:44:47] I'm trading if we look at the Whiteboard
+[00:44:48] again
+[00:44:49] is uh my p&l can go like this I can have
+[00:44:53] little
+[00:44:54] pullbacks you know that's not that's
+[00:44:57] terrible it doesn't look like that but
+[00:44:58] anyways I you know that I could have
+[00:45:00] little pullbacks but if I start um we'll
+[00:45:03] draw this a little bit better but so if
+[00:45:05] I start um stair stepping down like this
+[00:45:10] basically that's when I have to stop so
+[00:45:12] certainly at the 50% Mark and if I you
+[00:45:15] know kind of recognize that I'm kind of
+[00:45:18] moving in the wrong direction a little
+[00:45:20] earlier around the 75% Mark that's fine
+[00:45:23] too so that for me is my cue to walk
+[00:45:25] away and by doing that it allows me to
+[00:45:28] stay in the market as long as possible
+[00:45:30] to try to capture as much as I can on a
+[00:45:32] day when the Market's hot but make sure
+[00:45:35] I walk away with profit in my pocket and
+[00:45:37] I don't overstay my welcome too much now
+[00:45:40] if you want to learn a little bit more
+[00:45:41] about my strategy you can check out my
+[00:45:43] book how to day trade the plain truth
+[00:45:45] it's on Amazon it made it to the best
+[00:45:47] seller list within the first week of
+[00:45:49] being on sale there and this is a book
+[00:45:51] that really does lay out the guard rails
+[00:45:53] that I use in my own trading and
+[00:45:55] explains very plainly very simply and
+[00:45:58] very honestly the truth of what it is to
+[00:46:00] be a Trader trading is hard I'm not
+[00:46:02] going to sugarcoat it but for those to
+[00:46:04] find success it can be incredibly
+[00:46:06] rewarding and I want to help those of
+[00:46:08] you who are at the beginning of your
+[00:46:10] learning curve make sure you avoid some
+[00:46:12] of the rookie mistakes that I made as I
+[00:46:14] was getting started because I made a lot
+[00:46:15] of them and it cost me a lot of money a
+[00:46:17] lot of heartache and a lot of
+[00:46:18] frustration so do yourself a favor
+[00:46:20] practiceing a simulator before you put
+[00:46:21] real money on the line check out this
+[00:46:22] episode check out this book and check
+[00:46:24] out this episode right here that YouTube
+[00:46:26] thinks you're going to love and I'll see
+[00:46:28] you for the next upload real soon

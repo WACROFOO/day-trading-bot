@@ -1,0 +1,348 @@
+# Learn how to Day Trade Gappers and Gaps (Beginner Momentum Trading Strategies)
+# https://www.youtube.com/watch?v=VNsh-8cS2Tg
+# duration_sec: 894
+
+[00:00:00] all right so I want to talk for a few
+[00:00:02] minutes about the fundamental concepts
+[00:00:06] of day trading and how they relate to my
+[00:00:10] favorite trading strategy so first of
+[00:00:13] all what are we looking for when we're
+[00:00:15] day trading we're looking for stocks
+[00:00:17] that are going to move quickly in the
+[00:00:20] direction that we anticipate so we can
+[00:00:22] lock in quick profits with big
+[00:00:24] percentage gains I mean that's the ideal
+[00:00:26] scenario so how do we find that sort of
+[00:00:29] setup what I look for each day in the
+[00:00:33] morning I scan for the Gabor's stocks
+[00:00:36] that are gapping up or down from news
+[00:00:38] overnight those are almost always going
+[00:00:42] to be trading on above-average volume
+[00:00:44] when they open so typically they're
+[00:00:47] gonna set up for some really big moves
+[00:00:50] and they're not all gonna move but
+[00:00:52] usually within that list of Gabor's we
+[00:00:55] have a few big movers so those are the
+[00:00:57] stocks that I'm instantly gonna focus on
+[00:01:00] in the morning in the afternoon I'll
+[00:01:03] focus on the big percentage gainers of
+[00:01:06] the morning and see if they set up for
+[00:01:07] an afternoon breakout or break down and
+[00:01:11] I'll also focus on any breaking news
+[00:01:13] that that breaks out in the middle of
+[00:01:15] the day because that can send a stock
+[00:01:17] you know into heavy volume so the setups
+[00:01:21] that I look for I'm gonna start with gap
+[00:01:26] errs then big percentage movers and then
+[00:01:29] news and PR okay so I know that that's
+[00:01:32] I'm looking for stocks there within
+[00:01:34] those categories okay so I can scan for
+[00:01:37] the gap err it's a big percentage movers
+[00:01:39] and I can scan for news but how do I
+[00:01:41] find an entry especially on something
+[00:01:44] that's gapping up 20% or more okay so
+[00:01:47] this is where the chart patterns come
+[00:01:50] into play so for the gap errs trading
+[00:01:54] trading really in the first hour to two
+[00:01:56] hours of the day I'm gonna look to get
+[00:01:59] in on the first pullback what I really
+[00:02:03] want to see is a nice bull flag
+[00:02:05] formation so we've got s GMO here
+[00:02:09] and this is a really nice pattern and
+[00:02:14] they're not always gonna be picture
+[00:02:15] perfect so I'll go over a few others but
+[00:02:17] let's start with this one because it is
+[00:02:19] a really nice pattern okay so we've got
+[00:02:21] the gap up so instantly this is gonna be
+[00:02:25] something that I watched on my scanner
+[00:02:26] you know I've only got a few items on
+[00:02:28] here and I'm gonna sort by the heaviest
+[00:02:29] volume and this was gapping with pretty
+[00:02:32] heavy volume first thing all right so
+[00:02:35] I'm not going to chase it right out of
+[00:02:37] the gate so I'm gonna give it a few
+[00:02:38] minutes to just sort of figure out
+[00:02:41] what's happening so we get a few candles
+[00:02:43] here moving up very quickly and then we
+[00:02:47] start to get a little bit of pullback we
+[00:02:49] get that that doji here and then we get
+[00:02:53] two red candles and we're back on the V
+[00:02:55] web so this is where I'm gonna think
+[00:02:59] okay we've got heavy volume on the
+[00:03:02] ramp-up heavy volume here here and here
+[00:03:05] lighter volume on the sell off so this
+[00:03:09] to me indicates profit-taking versus
+[00:03:11] shorts piling in now if you see the the
+[00:03:16] selling volume here much heavier than
+[00:03:18] the buying volume then that's going to
+[00:03:20] indicate that this is gonna go down so
+[00:03:23] volume is also very key in determining
+[00:03:25] how this chart pattern is gonna play out
+[00:03:29] so what I do when I'm entering a bull
+[00:03:32] flag what I usually am going to do is
+[00:03:35] enter when a green candle breaks the
+[00:03:39] high of the previous red candle now in
+[00:03:43] this particular setup we're right on the
+[00:03:45] view app support so this also has a
+[00:03:49] really nice support right here but
+[00:03:51] that's not always gonna happen sometimes
+[00:03:53] we're gonna get this pullback and we'll
+[00:03:55] still be way above the view app but in
+[00:03:57] this case we're right here at the view
+[00:03:59] app so I'm gonna buy on this green
+[00:04:02] candle here as it breaks the high of the
+[00:04:04] red candle so the high was 1620 so an
+[00:04:07] entry here would be 1621 it needs to
+[00:04:10] break the high that's your entry now
+[00:04:13] immediately my stop it's the low of the
+[00:04:17] red candle it's still this is a trigger
+[00:04:19] candle this is the candle that I entered
+[00:04:20] on and as the candle I'm going to use is
+[00:04:22] my egg
+[00:04:23] I'm gonna stop out at 1606 1605 if the
+[00:04:27] Lowe breaks now because this is the way
+[00:04:32] I enter and this is the way a lot of
+[00:04:33] traders enter breaking the high of the
+[00:04:35] previous candle or breaking the low of
+[00:04:37] the previous candle this is also a
+[00:04:39] critical area where anyone that did
+[00:04:41] decide to short this coming down here
+[00:04:43] it's gonna say okay if this green candle
+[00:04:46] breaks the high of the previous one I'm
+[00:04:48] out and then you start getting some
+[00:04:50] short cover so what you'd like to see
+[00:04:53] ideally is these green candles here to
+[00:04:56] be higher volume than the red candles
+[00:04:58] during the pullback now in this case we
+[00:05:01] don't have that we do however have
+[00:05:04] steady upward momentum so we come up to
+[00:05:08] the high of the day and we break it now
+[00:05:11] at this point once I'm once I'm a few
+[00:05:14] minutes into a position and I have
+[00:05:15] profit I'm gonna adjust my stop I may
+[00:05:18] sell some of my shares as I'm in profit
+[00:05:21] and start scaling out but I'm gonna
+[00:05:23] adjust my stop now my stop if I'm gonna
+[00:05:26] trade with a tight stop I'm gonna sell
+[00:05:29] when this green candle when a red candle
+[00:05:33] breaks the low of the previous green
+[00:05:35] candle so I would sell right here and
+[00:05:38] the low of this candle is 1665 so 1664
+[00:05:43] that's the exit so right there you've
+[00:05:45] got over 40 cents of profit right in
+[00:05:48] that movement and these are trays that
+[00:05:50] are very very consistent and I'm gonna
+[00:05:53] go in and I'm gonna hit them hard these
+[00:05:55] are these are traits that I want to take
+[00:05:56] five ten thousand fifteen thousand
+[00:05:58] shares because more often than not the
+[00:06:01] bull flag is gonna break in the
+[00:06:03] direction of the trend especially when
+[00:06:05] you have this nice volume pattern you've
+[00:06:07] got big volume on the ramp up light
+[00:06:09] volume on the pullback or down and
+[00:06:11] support I've got a relatively tight stop
+[00:06:14] on this you know fifteen cents that's
+[00:06:17] pretty tight so I'm gonna risk 1,500
+[00:06:21] bucks on this my target for this is
+[00:06:23] gonna be a not only high hitting high of
+[00:06:26] day it's going to be breaking to new
+[00:06:27] highs and that's exactly what we got so
+[00:06:30] this could have been a really nice trade
+[00:06:34] now as the day progresses and you move
+[00:06:38] forward in the trade or as the stock is
+[00:06:40] moving forward in the day the bull flags
+[00:06:43] are not always as powerful I like to get
+[00:06:46] in on the first or the second bull flag
+[00:06:50] now this doesn't really have a second
+[00:06:51] bull flag not before noon time really we
+[00:06:55] get some pullback but it's not it's not
+[00:06:57] exactly the the perfect flag pattern so
+[00:07:00] I'm not sure that I would have really
+[00:07:04] seen the best entry on this I mean you
+[00:07:07] do have some patterns here but now we're
+[00:07:09] getting into different timeframes so
+[00:07:11] we're just gonna focus on what I think
+[00:07:14] works best which is trading the bull
+[00:07:16] flags trading the first flag of the day
+[00:07:19] in the first hour of trading okay so
+[00:07:22] that's sgm oh that was a really solid
+[00:07:24] trade that's one I would go really heavy
+[00:07:26] on and try to get a nice nice quick
+[00:07:28] profit and I'm gonna focus this on the
+[00:07:31] one minute chart when we're trading in
+[00:07:33] the first half hour in the first hours a
+[00:07:35] day I'm gonna focus on the one minute
+[00:07:37] chart
+[00:07:37] yes I have the five minute chart here
+[00:07:40] but my focus is the one minute chart
+[00:07:42] okay so let's take a look at another one
+[00:07:48] let's see see now I want to zoom ahead
+[00:07:57] to Friday
+[00:08:02] okay so this is a flag that's not quite
+[00:08:06] as pretty which is why it's good to look
+[00:08:09] over these because they're not always
+[00:08:11] gonna be picture-perfect
+[00:08:12] okay so on this one our first candle
+[00:08:14] here is we've got a red candle so
+[00:08:17] instantly we know we've got
+[00:08:18] profit-taking
+[00:08:19] we pop-up and then we get some sell-off
+[00:08:22] and the sell-off here on this candle is
+[00:08:24] actually pretty pretty heavy compared to
+[00:08:26] the buying so this to me even though
+[00:08:30] it's a gap or even though it's a nice
+[00:08:31] setup this would make me very hesitant
+[00:08:34] on this first flag to get in and this
+[00:08:37] green candle here does not break the
+[00:08:40] high of the previous candle because this
+[00:08:42] red candle is so big this one can't
+[00:08:44] break that high so this one I would keep
+[00:08:46] watching but I wouldn't enter it here
+[00:08:49] okay so you let it play out again we get
+[00:08:53] a little bit of a pop a little bit of
+[00:08:55] pullback right now this this isn't just
+[00:08:57] not setting up quite yet okay so I'm
+[00:09:00] gonna keep this on watch and what I'm
+[00:09:01] gonna look for is ultimately a new break
+[00:09:04] a break to new highs so this my
+[00:09:07] trendline resistance here is right like
+[00:09:11] that
+[00:09:11] but then we've got draw this trendline
+[00:09:15] here this is resistance on the morning
+[00:09:19] and then we've got support on the
+[00:09:21] morning so what I'm gonna look for
+[00:09:25] ultimately is a potential entry off good
+[00:09:30] support so as we start getting closer to
+[00:09:32] the vo app and we start getting above
+[00:09:34] aviva the view app we can see that we're
+[00:09:36] testing the new highs so we come up here
+[00:09:38] the highest thirteen thirty and forty
+[00:09:39] nine here hi here is thirteen fifty one
+[00:09:43] so we're starting to test the new highs
+[00:09:46] and what we ultimately want to look for
+[00:09:48] is heavy volume to come in so I want to
+[00:09:51] trade like this when we don't have the
+[00:09:53] really clear flag pattern what I would
+[00:09:56] instead wait for is I would wait to see
+[00:09:59] new highs on heavy buying volume and
+[00:10:02] high on this is thirteen seventy high on
+[00:10:06] this is fourteen so this is where I
+[00:10:08] would start to look we've got now we do
+[00:10:10] have some heavy volume here but we're
+[00:10:11] not hitting new highs
+[00:10:13] I want to see 1371 print so not 1370 I
+[00:10:19] need to see 71 I need to see a new high
+[00:10:22] of de print now this is the type of flag
+[00:10:25] pattern now with a bull flag we get that
+[00:10:27] the nice pop a little bit of pullback
+[00:10:29] and then we go again so on a bull flag
+[00:10:31] we can buy on the resistance of the flag
+[00:10:35] trendline so that would be that would be
+[00:10:40] buying basically when this trendline
+[00:10:41] here is broken this didn't form a good
+[00:10:44] setup because we had heavier volume here
+[00:10:46] on the sell side so what we instead
+[00:10:48] focus on is okay this is still on our
+[00:10:51] gapper list so we'll do the flat top
+[00:10:54] that's where I'm going to look for a
+[00:10:57] potential volume to come in so if we
+[00:11:00] draw our trendline down just a little
+[00:11:01] bit I know that the the break of the
+[00:11:04] trendline is significant but what I
+[00:11:05] really want to see is a new high of de
+[00:11:07] 1371 that print and that's my entry it's
+[00:11:12] a new high of de we've got this
+[00:11:13] ascending support it's a little bit of
+[00:11:15] an ascending wedge here that's your
+[00:11:18] entry and you can see clearly a lot of
+[00:11:21] other people are watching this because
+[00:11:22] boom look at that follow-through so this
+[00:11:27] is what I'm talking about
+[00:11:28] trading stocks that are trading on heavy
+[00:11:31] volume a lot of traders are watching it
+[00:11:33] a lot of professional traders that know
+[00:11:35] what they're doing and this is where the
+[00:11:37] buying comes in so if you can get to
+[00:11:39] know these chart patterns you can start
+[00:11:42] to join in on some of these big moves
+[00:11:44] and again this is one that I would trade
+[00:11:46] heavy it with a heavy position but I
+[00:11:48] would be a little bit more conservative
+[00:11:49] because my stop is gonna be a little
+[00:11:52] further away so the flat top it's a good
+[00:11:56] setup it's not quite as good as a tight
+[00:11:58] bull flag the way we saw in SG mo but
+[00:12:00] this is also a really good setup okay so
+[00:12:04] let's look at a few others okay Fran
+[00:12:07] this was a gap around Friday got the
+[00:12:09] nice bull flag here okay so we've got
+[00:12:13] our trendline that's support so first
+[00:12:16] thing we got in the morning we get this
+[00:12:18] nice pop alright and we start to get a
+[00:12:21] little bit of sell-off but look the
+[00:12:23] volume is light it's not heavy volume
+[00:12:25] the way we saw it
+[00:12:26] not see how we got this head these
+[00:12:28] heavier volume bars this is not as
+[00:12:30] pretty looking Fran this looks nice
+[00:12:32] we're still green on the day we haven't
+[00:12:34] we haven't broken the open price okay so
+[00:12:38] we got a little bit of pullback it's
+[00:12:40] light volume this is nice and clean this
+[00:12:42] is orderly this green candle here
+[00:12:45] breaking the high of the previous candle
+[00:12:47] the high was 20 98 2099 that's the entry
+[00:12:51] heavy volume coming in you can see that
+[00:12:53] you can see other people are watching
+[00:12:55] this heavy volume comes in and you blast
+[00:12:58] up to almost 20 150 again my exit
+[00:13:04] indicator is a red candle breaking the
+[00:13:06] low of the previous green candle that's
+[00:13:09] gonna be right here now the low of this
+[00:13:11] candle was 21 30 so 21 29 is that 30
+[00:13:16] breaks that's my exit so even if that's
+[00:13:18] only 30 cents on this particular setup
+[00:13:21] in most cases I'm gonna sell into profit
+[00:13:24] so I'm gonna take profit along the way
+[00:13:26] and I'm gonna bail in my final position
+[00:13:28] when that level of support breaks now
+[00:13:32] this is using a one-minute stop because
+[00:13:34] I'm using the one well this is actually
+[00:13:36] a two-minute chart but what I would
+[00:13:37] typically use is a one-minute chart I'm
+[00:13:39] using two minute on this so I can scroll
+[00:13:41] back a little bit further but but let's
+[00:13:44] so let's say okay this is a two minute
+[00:13:46] stop now if you want to be more
+[00:13:48] aggressive in your position you can
+[00:13:49] start using a 5-minute stop and you
+[00:13:53] won't stop until a candle breaks the low
+[00:13:55] of the 5-minute candle the problem with
+[00:13:57] that is that you have to go a little bit
+[00:13:59] lighter because you've got a bigger
+[00:14:01] range on the 5-minute chart these
+[00:14:03] 5-minute candles have big range so
+[00:14:06] taking five thousand shares it's gonna
+[00:14:07] be too much swing so this I'm gonna go
+[00:14:10] in heavy and I'm gonna probably jump
+[00:14:12] right out most of my trades are quick so
+[00:14:15] this right here is a really good one and
+[00:14:17] this is the type of setup that I look
+[00:14:18] for again and again and again so each
+[00:14:21] morning I'm going to call these out in
+[00:14:23] the chat room I'm gonna say that I'm
+[00:14:24] looking at the gap errs is the gap errs
+[00:14:26] I'm looking at we've got Fran we've got
+[00:14:27] C now we've got s GMO and I'm just gonna
+[00:14:30] watch all of them I usually keep three
+[00:14:33] or four on a separate chart and I just
+[00:14:34] watch them really closely and as soon as
+[00:14:37] I start to see that flag pattern
+[00:14:39] I'm gonna go in I'm gonna go in heavy
+[00:14:40] and I'm gonna let you guys know you're
+[00:14:42] gonna know in the chatroom that I'm
+[00:14:44] watching this I'm watching it closely
+[00:14:45] and this is the entry I'm looking for so
+[00:14:48] hopefully that helps send me a message
+[00:14:50] if you have any questions

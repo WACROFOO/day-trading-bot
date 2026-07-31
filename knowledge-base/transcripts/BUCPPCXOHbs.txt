@@ -1,0 +1,2673 @@
+# The ONLY Technical Analysis Guide You'll Ever Need! (Beginner to Advanced)
+# https://www.youtube.com/watch?v=BUCPPCXOHbs
+# duration_sec: 6090
+
+[00:00:01] welcome to today's Deep dive into the
+[00:00:03] world of technical analysis in today's
+[00:00:05] episode I'm going to teach you how to
+[00:00:06] read Candlestick charts so you can make
+[00:00:09] accurate predictions about which
+[00:00:11] direction the price is going to go in
+[00:00:13] and I'm going to use some of my trades
+[00:00:14] today as a case study of the strategies
+[00:00:17] and the techniques that I use personally
+[00:00:19] in my own trading I am sitting up right
+[00:00:22] now
+[00:00:23] $34,000 on the day and I'm telling you
+[00:00:26] this would not be possible if I had not
+[00:00:28] become a m at performing technical
+[00:00:31] analysis so for those of you who are
+[00:00:33] already subscribed to the channel
+[00:00:34] welcome back you know that we're about
+[00:00:36] to jump into a fulllength episode for
+[00:00:38] those of you guys who are brand new do
+[00:00:40] me a favor hit that thumbs up subscribe
+[00:00:42] to the channel for more episodes just
+[00:00:44] like this and let's go ahead and dive
+[00:00:45] into the screen share I've got a
+[00:00:47] whiteboard for today we've got a slide
+[00:00:49] deck and we have a lot to cover this
+[00:00:51] will be the ultimate guide to performing
+[00:00:55] technical analysis the right way let's
+[00:00:58] begin this episode with with a quiz
+[00:01:01] let's level set and see where we're all
+[00:01:03] at at the very beginning of this class I
+[00:01:05] think by the end of this class you're
+[00:01:06] going to know a whole lot more about how
+[00:01:08] to perform technical analysis than you
+[00:01:10] do right now so let me ask you this
+[00:01:12] question is this right here a safe entry
+[00:01:16] now you're probably looking at this
+[00:01:17] chart and you're thinking look this
+[00:01:18] stock clearly has been moving up it's
+[00:01:19] pulled back it's moved up it's pulled
+[00:01:21] back it's moved up it's pulled back it's
+[00:01:23] moved up it's pulled back right here
+[00:01:24] it's probably going to move up the
+[00:01:26] answer is yes this is definitely a safe
+[00:01:28] entry wrong wow not even close but
+[00:01:31] that's okay that's why you're here this
+[00:01:34] failed right here why did it fail it was
+[00:01:36] doing so well and then all of a sudden
+[00:01:38] we finally get in and it rolls over well
+[00:01:41] technical analysis would tell us that
+[00:01:43] there was an indicator right down here
+[00:01:45] telling us and indicating this was
+[00:01:47] likely to fail the macd this indicator
+[00:01:50] had crossed over that crossover is a
+[00:01:53] strong indicator that the trend is
+[00:01:55] beginning to reverse so let's look at
+[00:01:57] another one right here okay so now the
+[00:01:59] first thing you're probably noticing is
+[00:02:01] the macd has crossed over so even though
+[00:02:04] this has made a nice move up and it's on
+[00:02:06] a pullback you're probably thinking it's
+[00:02:08] not going to work and you would be
+[00:02:10] correct although it popped up just for a
+[00:02:12] moment ultimately the trend is coming
+[00:02:15] back down look at that macd before you
+[00:02:17] take a trade that's one of our technical
+[00:02:19] indicators now you're going to look at
+[00:02:21] this chart and you're probably going to
+[00:02:21] think okay macd is open this is easy I'm
+[00:02:25] going to be a millionaire before the end
+[00:02:26] of the week no wrong again macd is open
+[00:02:30] you're right about that but there was
+[00:02:32] another problem here which is that the
+[00:02:34] volume Bars were higher on the selling
+[00:02:37] so we had more selling than we had
+[00:02:39] buying let's go back and look at that
+[00:02:41] again for a second so high volume on the
+[00:02:43] buying candle but just as high equally
+[00:02:45] high on the selling and there was more
+[00:02:48] red volume bars which means in total
+[00:02:50] there was more selling than buying so
+[00:02:52] that overrides a positive macd that
+[00:02:55] tells us not to take the trade okay we
+[00:02:58] can do this next one all right here we
+[00:03:00] go we've got a macd that's open we've
+[00:03:02] got a good volume profile this surely is
+[00:03:05] a good setup am I right buy the dip yes
+[00:03:09] we are right we've got light volume
+[00:03:11] selling a positive macd and the entry is
+[00:03:14] right here as this first candle makes a
+[00:03:16] new high now some of you guys are saying
+[00:03:18] Ross I don't even understand the anatomy
+[00:03:20] of candlesticks you're at the very
+[00:03:22] beginning of your learning curve and
+[00:03:23] that's no problem I've been doing this
+[00:03:24] for a long time and my job here is to
+[00:03:27] send the ladder back down to you and to
+[00:03:29] help you better on understand how to
+[00:03:30] perform technical analysis so you're
+[00:03:32] going to understand what all of this is
+[00:03:34] on these charts by the end of today's
+[00:03:36] episode let's look at another one all
+[00:03:38] right here we go looking good nice
+[00:03:40] volume coming up little pullback another
+[00:03:42] squeeze back up macd is open no issue
+[00:03:45] with the volume this should work just
+[00:03:47] fine and in fact it does a nice squeeze
+[00:03:49] higher now a little bit later it rolls
+[00:03:52] over but we're not in the trade over
+[00:03:54] here the macds crossed over it's coming
+[00:03:56] back down so we're not taking that trade
+[00:03:58] we're trading it right in this area
+[00:04:00] these are the small little places that
+[00:04:01] we want to trade so when it comes to the
+[00:04:03] financial markets there are really two
+[00:04:05] forms of analysis on the one hand you
+[00:04:07] have fundamental analysis which is what
+[00:04:10] long-term value investors use to try to
+[00:04:14] understand the fundamentals of a company
+[00:04:16] how much is the company worth how much
+[00:04:18] money do they make what are their assets
+[00:04:20] what are their liabilities you can learn
+[00:04:22] all this information in the quarterly
+[00:04:24] filings that all publicly trade
+[00:04:26] companies produce to shareholders
+[00:04:28] through the SEC database
+[00:04:30] now active Traders like myself we don't
+[00:04:33] really rely on fundamental analysis
+[00:04:35] because in the short term the price can
+[00:04:38] get extremely disconnected from the
+[00:04:41] fundamentals due to the emotions in the
+[00:04:43] market of fear and greed as active
+[00:04:46] Traders our job is to capitalize on
+[00:04:49] those emotions without falling victim to
+[00:04:51] them ourselves we do this by performing
+[00:04:55] technical analysis so technical analysis
+[00:04:57] is the universal language of the
+[00:04:59] financial markets and it's displayed in
+[00:05:03] the actual Candlestick charts that we
+[00:05:05] use every single day now it doesn't
+[00:05:07] matter if you're trading Futures Forex
+[00:05:09] if you're trading a different Financial
+[00:05:11] Market or you're trading the US Stock
+[00:05:12] Market like I do this truly is a
+[00:05:15] universal language that you're about to
+[00:05:17] learn now I didn't introduce myself yet
+[00:05:19] my name is Ross Cameron I'm a full-time
+[00:05:21] Trader I funded my first account in 2011
+[00:05:24] more than 20 years ago so I've been
+[00:05:26] doing this for a long time in 2017 I set
+[00:05:28] out on a challenge actually you guys
+[00:05:31] right here on YouTube challenged me you
+[00:05:33] said Ross I don't think you would make
+[00:05:34] money if you traded in a small account I
+[00:05:36] said you know what I'm going to put my
+[00:05:38] money where my mouth is and I'm going to
+[00:05:39] try it I funded an account with
+[00:05:42] $583 in January of 2017 I have now grown
+[00:05:45] that account to over
+[00:05:47] $12.5 million in gross profit so not
+[00:05:51] only do I post my broker statements at
+[00:05:53] the end of each month right here on my
+[00:05:54] website you can see them going all the
+[00:05:56] way back to January 1st 2017 I actually
+[00:05:59] have a thirdparty independent
+[00:06:01] accountants audit their report of my
+[00:06:03] trading performance and they verify that
+[00:06:06] on January 1st 2017 I started with $583
+[00:06:09] in my account and as of December 2023 I
+[00:06:13] produced $10.7 million of profit after
+[00:06:16] my 2024 year which that audit will be
+[00:06:19] available the updated audit in q1 of
+[00:06:21] 2025 I'm at uh just over 12.5 million in
+[00:06:25] gross profit now I say this not to brag
+[00:06:27] but so you know beyond a shadow of a
+[00:06:29] doubt that the person that you're
+[00:06:30] learning from today that you're going to
+[00:06:32] spend time consuming information from is
+[00:06:35] credible is qualified and is actually
+[00:06:37] putting the techniques that you're going
+[00:06:39] to learn into practice every single day
+[00:06:42] I'm not an armchair quarterback just
+[00:06:44] teaching general theory of the market
+[00:06:46] but not putting my money where my mouth
+[00:06:47] is I trade every day of course you could
+[00:06:50] see today's trades as an example of that
+[00:06:52] we will recap those trades later on in
+[00:06:54] this class but let's go ahead and start
+[00:06:56] here with chapter one which is the
+[00:06:58] anatomy of candlesticks by the way don't
+[00:07:01] let me forget to tell you trading is
+[00:07:03] risky and my results are not typical so
+[00:07:05] please manage your risk and practice
+[00:07:08] these new strategies that you're about
+[00:07:09] to learn today in a safe simulated
+[00:07:12] environment before putting real money on
+[00:07:14] the line all right so let's get back
+[00:07:16] into the anatomy of a Candlestick uh
+[00:07:19] candlesticks are actually the most
+[00:07:21] popular type of chart that is available
+[00:07:23] there are other types of charts that
+[00:07:25] some people use but to a much lesser
+[00:07:27] extent the reason Candlestick chart
+[00:07:29] charts are so popular is because the
+[00:07:32] individual shape the individual
+[00:07:34] Candlestick provides more information
+[00:07:37] about the price action of that stock or
+[00:07:39] that Financial instrument and that
+[00:07:42] information is used to help Traders
+[00:07:45] interpret Market strength or Market
+[00:07:48] weakness Market sentiment so this chart
+[00:07:52] right here is a one minute chart and
+[00:07:54] what that means is that every single one
+[00:07:56] of these candlesticks right down here
+[00:07:58] these are all candlesticks represent 1
+[00:08:00] minute of time so the Market opens at
+[00:08:03] 4:00 a.m. eastern standard time for
+[00:08:05] pre-market trading so starting at 4:00
+[00:08:08] a.m. exactly on the dot that first
+[00:08:11] candle opens so it's 4:00 a.m. we're
+[00:08:13] going to say 4:00 a.m. right here and
+[00:08:15] the first candle of the day begins it
+[00:08:17] has its opening price and that right
+[00:08:20] there creates a line so that's our first
+[00:08:22] piece of information the open let's just
+[00:08:25] say for a moment that the price dips
+[00:08:27] down for a second and then it squeezes
+[00:08:30] up and then it closes right here so now
+[00:08:34] we have the close we have the high and
+[00:08:36] we have the low those are the four
+[00:08:38] pieces of information we have the open
+[00:08:41] and the close are connected to create
+[00:08:44] the body of the candle and the high and
+[00:08:47] the low stay just as candle wicks just
+[00:08:50] as these lines right here so this would
+[00:08:53] be the first candle now this candle with
+[00:08:56] these four pieces of information happen
+[00:08:58] to take this shape
+[00:09:00] this is a shape that communicates
+[00:09:01] sentiment so other Traders would look at
+[00:09:04] this candle and draw a conclusion what
+[00:09:06] conclusion would you draw if you saw
+[00:09:07] this candle on a chart H the stock seems
+[00:09:10] strong it's moving up it looks really
+[00:09:11] good but what if let's say it had taken
+[00:09:13] a different shape let's say for instance
+[00:09:15] that we had the open it dipped down here
+[00:09:20] for a
+[00:09:21] second it squeezed up just for a moment
+[00:09:24] goes higher and then comes all the way
+[00:09:26] back down and closes right here so now
+[00:09:29] we connect the open and the close that's
+[00:09:32] our high that's our low now this sends a
+[00:09:35] little bit of a different signal than
+[00:09:36] the previous candle we just looked at
+[00:09:38] right this tells us that yes the price
+[00:09:40] did Squeeze up but obviously it came all
+[00:09:43] the way back down so the individual
+[00:09:45] shapes of these candles are sending
+[00:09:48] signals to Market participants so a
+[00:09:51] green candle opens at the bottom and
+[00:09:54] closes at the top so this is a green
+[00:09:56] candle open at the bottom closes at is
+[00:09:59] at the top uh of the body this is the
+[00:10:01] body of the candle these are the candle
+[00:10:04] wicks also called the Shadows so lower
+[00:10:07] Shadow upper Shadow lower candle wick
+[00:10:09] upper candle wick and a red candle opens
+[00:10:11] at the top and closes at the bottom
+[00:10:14] which signifies that it's red that the
+[00:10:16] price had declined so it is important
+[00:10:19] that the color of the candle is
+[00:10:20] distinguished between candles that are
+[00:10:22] green and going up and candles that are
+[00:10:24] red and going down some people who have
+[00:10:25] color blindness uh will use colors will
+[00:10:28] use colors that are easier to see like a
+[00:10:30] a hollow or a solid fill so it's one of
+[00:10:34] the other or even like a hatched fill
+[00:10:36] just to create a better um easier to
+[00:10:38] distinguish but whatever however you do
+[00:10:40] it it is important to be able to
+[00:10:41] distinguish between a green candle and a
+[00:10:44] red candle because the they actually
+[00:10:46] mean different things based on the
+[00:10:48] position of the open and the close so
+[00:10:52] when it comes to the candle body size
+[00:10:54] the size of the candle body communicates
+[00:10:58] sentiment the larger the candle body the
+[00:11:01] stronger the sentiment so again back
+[00:11:03] here on the Whiteboard let's just say we
+[00:11:06] had 4 a.m. we open we don't drop at all
+[00:11:09] we just go straight up here and we close
+[00:11:12] at the very top so that's our big candle
+[00:11:15] it's a longbody candle that's very
+[00:11:17] bullish on the other hand let's say we
+[00:11:20] opened and we just go straight down
+[00:11:23] right we open here we close here this is
+[00:11:26] also the high this is also the low we
+[00:11:28] opened at the high we closed at the low
+[00:11:30] this is very bearish this is very weak
+[00:11:32] so these are longbody candles longbody
+[00:11:36] communicates strong sentiment in the
+[00:11:38] market so if we look at the stock that I
+[00:11:41] traded today just as an example we're
+[00:11:42] going to use this as a case study we're
+[00:11:44] going to keep coming back to it um if we
+[00:11:46] pull up the one minute chart this right
+[00:11:48] here is a one minute chart and there's
+[00:11:49] some things on here that you may not
+[00:11:51] understand yet because we haven't gotten
+[00:11:52] to it like technical indicators and um
+[00:11:54] some of these different uh lines uh but
+[00:11:56] what you can see here are longbody
+[00:11:58] candles so see how you have those two
+[00:12:01] longbody candles right there those
+[00:12:03] communicate a lot of strength in the
+[00:12:05] market in fact we're seeing a lot more
+[00:12:08] longbody green candles than we are
+[00:12:10] seeing longbody red candles so what
+[00:12:13] that's telling us is that the sentiment
+[00:12:15] and the momentum is really to the buy
+[00:12:18] side there's more buying strength than
+[00:12:21] selling strength and we can see that in
+[00:12:22] the volume profile as well the volume is
+[00:12:25] actually an an indicator that tells us
+[00:12:28] the number number of shares that traded
+[00:12:30] hands during each one of these
+[00:12:32] Candlestick periods so again this is a
+[00:12:34] one minute chart which means each one of
+[00:12:36] these candlesticks represents one minute
+[00:12:39] of time so from 4:00 a.m. to 4:01 401 to
+[00:12:42] 402 now we could look at a different
+[00:12:44] time frame and then each Candlestick
+[00:12:46] would represent a different period of
+[00:12:48] time in fact a a long-term investor
+[00:12:51] might instead just use a DA chart like
+[00:12:54] this right here where each one of these
+[00:12:56] candlesticks represents one whole day of
+[00:12:59] time which is fine and useful and it has
+[00:13:02] its purpose even for active Traders like
+[00:13:03] ourselves but when it comes to jumping
+[00:13:06] in and out of positions we're not going
+[00:13:08] to use daily charts we're going to use
+[00:13:10] primarily our one minute time frame all
+[00:13:13] right so I'll move this up here for a
+[00:13:14] second now what the Candlewick tells us
+[00:13:17] so if the body tells us sentiment the
+[00:13:20] candle wick also communicates a message
+[00:13:22] and it communicates a bit of a battle a
+[00:13:26] large upper candle wick is bearish
+[00:13:29] it's bearish because it shows that the
+[00:13:32] sellers were stronger they pulled the
+[00:13:35] price back down right although we had
+[00:13:38] the squeeze up so let's say we've got
+[00:13:40] the open right here we get the squeeze
+[00:13:42] up all the way to here to the high but
+[00:13:45] then the sellers came in and pulled the
+[00:13:48] price all the way back down imagine if
+[00:13:51] it came all the way to Red so that means
+[00:13:54] this was the open this was the close
+[00:13:56] this was the low and this was the high
+[00:13:59] what does that what kind of message does
+[00:14:01] that send that candle is like an
+[00:14:03] exclamation point and and I do want to
+[00:14:06] think about this in a way that each one
+[00:14:08] of these individual candlesticks are
+[00:14:10] like letters in the alphabet and as they
+[00:14:13] combine they form sentences and some of
+[00:14:15] the sentences are going to say buy me
+[00:14:18] right now and some are going to say sell
+[00:14:20] me don't get near me don't touch me the
+[00:14:23] shorts are in control so you got to be
+[00:14:25] able to read those signals which are
+[00:14:27] right here on the charts now I'm telling
+[00:14:28] you that I've gotten to a point where I
+[00:14:30] can read them very well no I'm not right
+[00:14:32] 100% of the time I have my losses just
+[00:14:34] like anyone else but I'm right more
+[00:14:36] often than I'm not and it's thanks to
+[00:14:38] this um this ability to really fully
+[00:14:40] understand the language of the markets
+[00:14:43] so the large upper candle wicks are
+[00:14:45] bearish just take note of that they show
+[00:14:48] that the sellers were stronger and
+[00:14:49] pulled the price back down so then
+[00:14:52] inversely the lower candle wicks are
+[00:14:54] bullish because they show that the
+[00:14:56] buyers were stronger and they pulled the
+[00:14:58] price back up so let's say for instance
+[00:15:02] we have a stock that has been selling
+[00:15:04] off so let's just say it moved up for a
+[00:15:06] little bit and let's just pretend those
+[00:15:08] are full longbody candles and then the
+[00:15:10] price pulls back and then right here we
+[00:15:13] have this candle wick all right see how
+[00:15:15] we have that lower candle wick what that
+[00:15:17] tells us is that although the price
+[00:15:18] dropped the buyers came in and bought it
+[00:15:21] back up so this could indicate the
+[00:15:23] beginning of a reversal and maybe the
+[00:15:25] next candle makes a new high which
+[00:15:27] confirms it so the early signal right
+[00:15:30] here that this may be about to change
+[00:15:32] directions would in fact be this
+[00:15:34] Candlestick shape in this context
+[00:15:37] context is incredibly important in fact
+[00:15:40] charts essentially are giving us
+[00:15:42] historical context that's really what
+[00:15:44] they're doing they're not telling us
+[00:15:45] with certainty what's going to happen
+[00:15:47] next but they're telling us everything
+[00:15:49] that has already happened now when we
+[00:15:51] really understand the context of what's
+[00:15:53] happened we're going to recognize
+[00:15:54] certain patterns so being a successful
+[00:15:57] Trader means being pretty good at patter
+[00:15:59] recognition we start to realize this
+[00:16:00] relationship that when this happens a
+[00:16:03] bottoming tail candle like this this
+[00:16:05] green three bar candle follows these
+[00:16:08] these three bar candles so you start to
+[00:16:11] recognize that okay right now in real
+[00:16:13] time I see this and now I'm predicting
+[00:16:16] that this is what's going to happen and
+[00:16:18] this is how we're actually able to see
+[00:16:21] into the future and maybe we're only
+[00:16:22] doing it with 65 70% accuracy but that
+[00:16:25] can be enough to make millions of
+[00:16:27] dollars in the market
+[00:16:29] okay so the candle wicks uh do
+[00:16:31] communicate incision they tell us that
+[00:16:33] although the price dropped or spiked
+[00:16:35] there was a battle and it brought it
+[00:16:37] back in so the larger the candle wick
+[00:16:40] the bigger the battle now what I want to
+[00:16:42] get into now is analyzing the individual
+[00:16:47] Candlestick shapes so now that you
+[00:16:50] understand the anatomy of a single
+[00:16:52] Candlestick the body with the candle
+[00:16:54] wick we're going to look at the
+[00:16:56] different Candlestick shapes that are
+[00:16:58] the most common in the market because
+[00:17:00] the shape of the Candlestick sends a
+[00:17:02] signal that communicates a message about
+[00:17:05] sentiment right so here's a Candlestick
+[00:17:07] chart this is just for snti a stock um
+[00:17:10] from a couple weeks ago and every single
+[00:17:13] one of those candles you could read into
+[00:17:15] them about the sentiment that they
+[00:17:16] create the high volume green candle the
+[00:17:19] red candle with a large topping tail up
+[00:17:22] here so some people will over complicate
+[00:17:25] their trading by adding a lot of
+[00:17:27] technical indicators and unfortunately
+[00:17:30] by doing that sometimes you muddy the
+[00:17:31] water to the point where you can barely
+[00:17:34] even see the actual Candlestick
+[00:17:37] themselves you're not even seeing the
+[00:17:38] candlesticks because now you're just
+[00:17:39] looking at all of these different
+[00:17:41] indicators that are overlaid on top of
+[00:17:43] it and so I'm a big advocate of keeping
+[00:17:46] it simple I like to use level two in my
+[00:17:49] trading we'll talk about that a little
+[00:17:50] bit more later in this class but level
+[00:17:52] two shows us the depth of the market so
+[00:17:54] this is showing us all of the orders
+[00:17:56] that are currently live in the market
+[00:17:59] for this stock people that want to buy
+[00:18:01] it and people that want to sell it so
+[00:18:03] this is very important in a in order for
+[00:18:06] me to be able to make a prediction about
+[00:18:07] which direction the stock is going to go
+[00:18:09] if I see a really big seller that's
+[00:18:11] going to be a problem if I think the
+[00:18:12] Stock's going to go higher if I see a
+[00:18:14] really big buyer then that's probably
+[00:18:16] supporting the stock at this level and
+[00:18:19] indicates that we may go higher so level
+[00:18:21] two is very important that's sort of
+[00:18:23] looking forward but the chart is equally
+[00:18:26] important for understanding cont context
+[00:18:29] and and the price action is what creates
+[00:18:32] each one of these Candlestick shapes so
+[00:18:34] if you're missing out on the
+[00:18:35] candlesticks because you've had so many
+[00:18:37] indicators you're sort of losing your
+[00:18:39] true um your source of Truth the data
+[00:18:43] the actual price action is the source of
+[00:18:46] Truth indicators are just complex
+[00:18:49] formulas that can be used as kind of an
+[00:18:53] aid to help you interpret price action
+[00:18:56] but they shouldn't be used to replace
+[00:18:58] looking at the Candlestick
+[00:19:00] charts so if we look at the individual
+[00:19:03] Candlestick
+[00:19:04] shapes there are a few that are very
+[00:19:07] important now you've already learned one
+[00:19:09] of them so far a longbody Candlestick so
+[00:19:13] longbody candlesticks are exactly as
+[00:19:15] they sound a candle that has a long body
+[00:19:17] these are candles that communicate very
+[00:19:20] powerful emotion in the market strong
+[00:19:23] sentiment big green candles super
+[00:19:26] bullish big red candles super bearish so
+[00:19:29] we've got our long Body candles those
+[00:19:31] are important and then we have our short
+[00:19:33] Body candles so short Body candles
+[00:19:36] communicate obviously less strength but
+[00:19:39] let's imagine something what if we had a
+[00:19:42] stock that started to squeeze up you had
+[00:19:45] a nice green candle like this and it's a
+[00:19:48] long body candle then you have another
+[00:19:49] one that's a little shorter another one
+[00:19:51] that's a little shorter another one
+[00:19:53] that's a little shorter and another one
+[00:19:54] that's a little shorter what is this me
+[00:19:56] what is the message that we're receiving
+[00:19:58] now of course if you just saw one candle
+[00:20:00] by itself it's out of context so you
+[00:20:03] wouldn't have any real context and in
+[00:20:05] fact maybe I'm getting ahead of myself
+[00:20:06] because this would be considered a multi
+[00:20:09] Candlestick pattern but nonetheless
+[00:20:11] these smaller Body candles in the
+[00:20:13] context of having just been next to
+[00:20:16] large Body candles or long Body candles
+[00:20:18] indicate that the trend is exhausting
+[00:20:21] and what's likely to happen is a
+[00:20:23] reversal coming back down and often
+[00:20:26] those will be formed by longbody candles
+[00:20:29] now what if on the flip side the move
+[00:20:31] started with small Body
+[00:20:33] candles but the candles start getting
+[00:20:35] bigger and bigger now that indicates
+[00:20:38] some real strength in the market now of
+[00:20:40] course that's not going to last forever
+[00:20:42] and so how do we know when this is going
+[00:20:44] to reverse well we look at the actual
+[00:20:46] shape of the candle so once we start to
+[00:20:48] get that topping tail candle with uh
+[00:20:51] sort of the open and close around the
+[00:20:53] same price or maybe we get a candle that
+[00:20:55] looks kind of like uh kind of like this
+[00:20:58] with little body and that topping tail
+[00:21:00] that's when we start to notice okay
+[00:21:02] we're starting to have a little battle
+[00:21:03] that's forming up here so that's the
+[00:21:05] place to get out before this happens so
+[00:21:10] generally speaking these big red candles
+[00:21:12] are usually somewhat
+[00:21:14] predictable the problem is most beginner
+[00:21:16] Traders don't see them coming because
+[00:21:18] they haven't learned to pick up on the
+[00:21:20] subtle cues that they're about to happen
+[00:21:23] and so they wait for them to actually
+[00:21:24] start to happen and then you're Panic
+[00:21:26] selling in the middle of the red candle
+[00:21:27] when no one is buying
+[00:21:29] and so then you get a bad fill in your
+[00:21:30] order you get filled as the price is
+[00:21:32] dropping and you might even take a loss
+[00:21:34] on the trade or you give back profit
+[00:21:36] that was unnecessary if you had been
+[00:21:38] better at picking up on these subtle
+[00:21:40] hints right here that a trend shift was
+[00:21:42] about to take
+[00:21:43] place so it so short Body candles are
+[00:21:47] important and they're most important
+[00:21:50] when they take place or form in the
+[00:21:53] context of a trending price this this is
+[00:21:58] an important thing to
+[00:22:00] understand context is critical so if you
+[00:22:03] have the price going sideways then
+[00:22:06] you're not typically going to see a
+[00:22:07] longbody candle but a short body candle
+[00:22:10] when the price is already going sideways
+[00:22:12] doesn't really carry as much weight the
+[00:22:14] fact that the price is going sideways
+[00:22:15] already communicates that there's some
+[00:22:17] indecision there's sort of a battle
+[00:22:19] between buyers and sellers or is there's
+[00:22:20] just indifference no one really cares
+[00:22:22] about the stock so the small Body
+[00:22:24] candles don't mean much but a small body
+[00:22:27] candle means a lot if you've just had 10
+[00:22:29] longbody candles in a row so context
+[00:22:31] really is important to be able to sort
+[00:22:33] of read into is this significant in the
+[00:22:36] current position um so now the next type
+[00:22:39] of candle is called a dogee candle now
+[00:22:42] Candlestick charts are Japanese and so
+[00:22:44] some of the names uh for some of these
+[00:22:46] uh chart these Candlestick patterns are
+[00:22:49] Japanese and origin so the dogee is a
+[00:22:53] candle that opens and closes at the same
+[00:22:56] price so this is the open and it's also
+[00:22:59] the close however it's very rare that
+[00:23:02] you have a candle that looks like that
+[00:23:03] in fact the only time you really have a
+[00:23:04] candle that looks like that is if nobody
+[00:23:07] is trading the stock so just kind of
+[00:23:09] like a minute passes where the price
+[00:23:11] didn't change because there was no
+[00:23:13] trading volume if there's actual volume
+[00:23:15] in the stock then you're not usually
+[00:23:17] going to see that but what you might see
+[00:23:18] is that it opens the price pops up to a
+[00:23:21] high drops down to a low and then comes
+[00:23:24] back up and closes more or less at the
+[00:23:26] same price and this is is called a dogee
+[00:23:30] now there's a couple different types of
+[00:23:31] dogee this is a typical dogee this would
+[00:23:35] be a long legged dogee what's different
+[00:23:38] between these two is that the upper and
+[00:23:39] the lower candle wicks are longer and
+[00:23:41] this communicates a real battle between
+[00:23:44] buyers and
+[00:23:45] sellers this is called a gravestone
+[00:23:48] dogee the open and the Clos are the same
+[00:23:50] more or less and it could be a small
+[00:23:52] body but it's more or less the same and
+[00:23:54] it has a larger upper candle wick and no
+[00:23:56] lower candle wick so again context is
+[00:23:59] everything so in the context of a stock
+[00:24:02] that's been squeezing up here right so
+[00:24:05] just imagine the Stock's been squeezing
+[00:24:06] up and then this candle forms this is
+[00:24:09] indicating a reversal is coming the
+[00:24:11] price squeezed up got pulled back down
+[00:24:13] the reversal is already starting in fact
+[00:24:16] as the price dropped back down the
+[00:24:17] reversal began and Confirmation will be
+[00:24:20] the next candle making a new low so
+[00:24:22] that's a gravestone dogee now there's
+[00:24:24] also a dragonfly dogee a dragonfly Doge
+[00:24:28] looks like this so a dragonfly dogee has
+[00:24:32] the lower candle wick or the lower
+[00:24:34] Shadow but no upper Shadow so these are
+[00:24:37] the different types of dois that we see
+[00:24:39] and typically this is what we see the
+[00:24:41] most often and it definitely
+[00:24:43] communicates a battle so remember if the
+[00:24:46] price is going sideways seeing dois not
+[00:24:49] really that significant the price going
+[00:24:51] sideways already indicates indecision
+[00:24:53] the dogee is a candle of indecision it's
+[00:24:56] up it's down it opens and closes to the
+[00:24:58] same it's a battle but when this price
+[00:25:00] is already going sideways the battle is
+[00:25:01] not surprising it's significant when at
+[00:25:04] the at the top of an uptrend you see a
+[00:25:07] battle because that's when it's like
+[00:25:09] uhoh the people that were really bullish
+[00:25:11] on this suddenly are not in as much of
+[00:25:14] control as they were before because now
+[00:25:16] rather than seeing another longbody
+[00:25:18] green candle we're seeing a dogee form
+[00:25:20] we're seeing the whip so some sellers
+[00:25:23] are getting stronger the long biased
+[00:25:24] Traders are getting a little more
+[00:25:25] cautious and that's being communicated
+[00:25:28] right on the chart now the actual orders
+[00:25:32] that are going through the market that
+[00:25:34] create these shapes are visible on your
+[00:25:37] level two data so it's actually in your
+[00:25:40] trading data uh right here on your time
+[00:25:43] and sales on your level two where you
+[00:25:45] can actually see each individual order
+[00:25:48] that goes through that ultimately create
+[00:25:51] these Candlestick shapes so the
+[00:25:54] Candlestick shapes in a sense are
+[00:25:57] historical because they're documenting
+[00:26:00] price action that has just occurred and
+[00:26:03] this is documenting the actual orders
+[00:26:06] that are taking place which create the
+[00:26:09] candles and it's displaying the orders
+[00:26:12] that are currently on the on the book to
+[00:26:15] buy or sell which is potentially going
+[00:26:17] to create future candles so a
+[00:26:20] combination of so most day Traders use a
+[00:26:23] combination of level two and time in
+[00:26:25] sales and looking back at charts
+[00:26:29] now the next type of candle I want to
+[00:26:30] show you we've got the longbody candle
+[00:26:32] the short body candle the dogee candle
+[00:26:34] and now we're going to look at the
+[00:26:35] hammer candle so a hammer candle again
+[00:26:38] I'm going to say it again all about
+[00:26:39] context it's a hammer in the right
+[00:26:42] context so we're going to we're going to
+[00:26:44] have a stock that's been um selling off
+[00:26:47] a little bit and it's it's fine if this
+[00:26:50] is a stock that's at low of day it's
+[00:26:52] also okay if this is a stock that you
+[00:26:54] know just made a big move up but is
+[00:26:56] currently on a pullback a hammer is a
+[00:26:59] candle with a small body and a large
+[00:27:02] lower candle wick that larger lower
+[00:27:04] candle wick shows that although the
+[00:27:06] price sold off it rallied back up before
+[00:27:09] the close of that candle and this is
+[00:27:11] called a hammer because we're hammering
+[00:27:13] out a base this is considered the low
+[00:27:17] and potentially support the
+[00:27:19] confirmation is when the next candle
+[00:27:22] opens so if we actually get kind of
+[00:27:24] really zoomed in here and I'll I'll just
+[00:27:27] make this even bigger so we can get
+[00:27:29] zoomed in on this Hammer so we've got a
+[00:27:31] red candle another red candle and then
+[00:27:35] right here we have our Hammer so the
+[00:27:38] next
+[00:27:39] candle the close of this candle so this
+[00:27:42] was the open and this was the close so
+[00:27:44] typically the next candle and actually I
+[00:27:46] should draw just a little bit lower like
+[00:27:48] well actually I'll leave that like that
+[00:27:50] I'm going to make this one like this so
+[00:27:52] remember that each one of these candles
+[00:27:54] are one minute of price action if we're
+[00:27:56] doing a one minute chart and we are so
+[00:27:58] let's just say this is 4 a this is 401
+[00:28:02] this is 4:02 a.m. just for example all
+[00:28:05] right so when this candle closes at
+[00:28:08] exactly 401 this new candle opens and so
+[00:28:13] the close in the open will generally be
+[00:28:15] at about the same price right it's only
+[00:28:17] 1 second so it's possible that you could
+[00:28:20] open just a smidge higher or a smidge
+[00:28:22] lower but generally this is the way it
+[00:28:24] is you have a candle that closes and
+[00:28:26] then the next candle opens about the
+[00:28:28] same price and then it closes and the
+[00:28:31] next candle opens at about the same
+[00:28:32] price as the previous close and so in
+[00:28:35] this case it opens it sells off down
+[00:28:38] here has the body and then we have our
+[00:28:41] lower candle wick all right so right
+[00:28:44] here is our lower candle wi so now this
+[00:28:45] candle opens right here at about the
+[00:28:48] close of the previous one and let's just
+[00:28:49] say it starts to move up so now the
+[00:28:52] candle is green it's beginning to form
+[00:28:55] right there's no low it just opened
+[00:28:56] right here and it's moving up now the
+[00:28:58] high of this candle let's just say just
+[00:29:00] for the sake of argument the high of
+[00:29:02] this candle is uh I said three but I
+[00:29:05] wrote a five so we'll just call it 550
+[00:29:08] so the high is
+[00:29:09] 550 so if this candle breaks over 550
+[00:29:13] something important has happened we have
+[00:29:16] a shift in Trend we have now just had
+[00:29:18] our first candle that made a new high
+[00:29:21] and that is the confirmation that this
+[00:29:24] is a reversal pattern and then the next
+[00:29:26] candle is going to open and likely
+[00:29:28] continue that moving up and then the
+[00:29:31] next candle opens and likely continues
+[00:29:33] moving up until you have a first candle
+[00:29:35] that does the trend the opposite way
+[00:29:37] where it breaks the low of this previous
+[00:29:39] candle so we often move in waves in the
+[00:29:43] market so a hammer candle is a candle
+[00:29:46] with a small body and a bottoming tail
+[00:29:49] and it occurs at the bottom of a
+[00:29:51] pullback now it doesn't have to be a
+[00:29:54] stock that's at low of day it's okay if
+[00:29:56] it's a on a stock where we had let's
+[00:30:00] just say for example we had a nice move
+[00:30:02] up 3 four five green candles we had a
+[00:30:05] little bit of a pullback and then right
+[00:30:06] here we have a little hammer and then
+[00:30:09] boom that's the reversal for a move back
+[00:30:11] up that would be fine that's still a
+[00:30:13] hammer candle it's at the bottom of a
+[00:30:15] little bit of a pullback doesn't have to
+[00:30:16] be at low of day it can just be a little
+[00:30:18] dip like that but this communicates with
+[00:30:20] that lower Wick remember what those
+[00:30:22] lower Wicks communicate that buyers are
+[00:30:24] coming in buyers are stepping in so the
+[00:30:26] places that I want you to get really
+[00:30:28] focused are on these PL these points
+[00:30:31] where price is changing so we're wanting
+[00:30:35] to buy basically at these uh wave points
+[00:30:39] this is where we want to be buying and
+[00:30:40] selling we want to sell here we want to
+[00:30:43] buy here we want to sell you know up
+[00:30:45] here if let's just say this was you know
+[00:30:47] about to be another pullback and then we
+[00:30:49] want to buy you know down here for the
+[00:30:51] next leg up that's what we're trying to
+[00:30:53] do we're trying to make accurate
+[00:30:54] predictions about where to buy and where
+[00:30:55] to sell so the next Candlestick shape is
+[00:30:58] called a shooting star a shooting star
+[00:31:02] again context being everything takes
+[00:31:04] place at the top of a squeeze up a
+[00:31:07] shooting star is essentially an inverted
+[00:31:10] Hammer it's a small body candle but
+[00:31:12] instead of a lower Wick it's inverted so
+[00:31:15] it has an upper Wick and what this
+[00:31:17] candle is telling us is that long body
+[00:31:19] nice squeeze up and then all of a sudden
+[00:31:21] we're seeing this reversal so we've got
+[00:31:23] the topping tail here and it's pushing
+[00:31:25] the price back down so now this candle
+[00:31:28] closed right here it's a small green
+[00:31:30] candle this candle opens right here and
+[00:31:32] goes lower that's your spot definitely
+[00:31:35] to be out if you're not already out
+[00:31:38] right then we let it pull back we get
+[00:31:40] maybe the same exact shape except
+[00:31:42] inverted and then this is where we buy
+[00:31:44] right here we're back in and then we're
+[00:31:46] looking for that move back up so these
+[00:31:49] are our important places that we're
+[00:31:50] watching when we have these changes in
+[00:31:53] Trend so this is an inverted Hammer but
+[00:31:56] it's called a shooting
+[00:31:58] star the next candle is called a hanging
+[00:32:01] man candle now a hanging man candle um
+[00:32:04] is is a bit ominous and this also occurs
+[00:32:08] at the top of an uptrend so a hanging
+[00:32:11] man uh is also the same shape as a
+[00:32:14] dragonfly dogee so remember we said this
+[00:32:17] is a gravestone dogee a hanging man
+[00:32:21] dogee looks like this that's a hanging
+[00:32:24] man candle so we've got a hanging man
+[00:32:26] right there and and and in fact you can
+[00:32:30] even put a small body on it and that's
+[00:32:32] still valid so this is a bearish
+[00:32:36] indicator it even though the problem
+[00:32:39] here with this it's not as bearish as a
+[00:32:40] gravestone dogee but it's also not great
+[00:32:43] a gravestone dogee is worse that's worse
+[00:32:46] but the bottoming tail while typically
+[00:32:49] bullish unfortunately at the top of this
+[00:32:52] uh position here still indicates that
+[00:32:54] there were sellers that came in now it's
+[00:32:56] good the buyers came back up but this is
+[00:32:58] this is a little ominous so we have to
+[00:33:01] be careful because now we've got a
+[00:33:03] little bit of a battle that has coming
+[00:33:05] into play here the last two candles are
+[00:33:08] bullish and bearish engulfing candles so
+[00:33:12] a bearish engulfing candle would look
+[00:33:14] like this uh you've got this small green
+[00:33:17] candle the next one opens just a little
+[00:33:19] higher it gaps just a smidge higher and
+[00:33:22] then fully engulfs it going red so the
+[00:33:25] open is slightly higher and the close is
+[00:33:27] lower it pulls back and then you get a
+[00:33:29] small candle here and then this candle
+[00:33:32] opens down here it has to Gap just
+[00:33:34] slightly lower and then it completely
+[00:33:37] engulfs it going back up so engulfing
+[00:33:39] candles are not as common because they
+[00:33:43] do require a a slight gap down to fully
+[00:33:46] engulf the previous candle but they can
+[00:33:48] happen and they're quite strong in
+[00:33:50] sentiment uh whether it's bearish or
+[00:33:53] bullish depends on whether it's green or
+[00:33:54] red but they are a pretty powerful
+[00:33:56] candles okay so now you understand these
+[00:34:00] uh individual Candlestick shapes we've
+[00:34:01] got 2 four six eight of them but of
+[00:34:04] course we had a couple of different
+[00:34:05] dogee candles as well so each of these
+[00:34:08] individual Candlestick shapes form of
+[00:34:11] course our our individual letters in the
+[00:34:14] alphabet so to speak that help form our
+[00:34:16] signals in the market so as we look at
+[00:34:18] this chart right here we can see that
+[00:34:19] there's a few longbody candles right
+[00:34:22] very big long Body candles that
+[00:34:24] communicates really strong sentiment
+[00:34:26] that's something that we can get excited
+[00:34:28] about this right here look at that top
+[00:34:31] so this is when you see it now it's like
+[00:34:33] wow that makes sense so I would have
+[00:34:36] sold as soon as this red dogee was
+[00:34:38] forming and that would have saved me a
+[00:34:41] lot because look at how far this came
+[00:34:43] down following that candle so as this
+[00:34:46] was squeezing up right here it moved
+[00:34:47] higher and then we had a little pullback
+[00:34:50] right here just a brief one now that was
+[00:34:52] acceptable a small pullback and it
+[00:34:54] pushes higher you do have a small dogee
+[00:34:57] right here
+[00:34:58] and in spite of that it pushes higher
+[00:35:00] you have another small dogee right here
+[00:35:02] but in spite of that it pushes higher
+[00:35:04] but after these really big huge longbody
+[00:35:08] candles we know that a reversal is
+[00:35:10] coming they don't just go up like this
+[00:35:12] forever so when you start getting
+[00:35:14] longbody candles on the one hand you
+[00:35:16] want to ride that momentum as long as
+[00:35:18] possible but on the other hand you've
+[00:35:20] got to keep your eyes open for potential
+[00:35:21] reversal indicators and that dogee is a
+[00:35:24] picture perfect one dogee at the top of
+[00:35:26] a move this right here is a shooting
+[00:35:28] oops that right there is a shooting star
+[00:35:30] candle at the top of a move so you've
+[00:35:32] got this nice squeeze up long Body
+[00:35:34] candles trend is starting to get a
+[00:35:36] little exhausted you've got a dogee it
+[00:35:38] pushes a little higher anyways and then
+[00:35:41] squeezes up and reverses because it's a
+[00:35:44] red candle it indicates the reversal has
+[00:35:46] actually already begun because this
+[00:35:48] candle closed red so at this point you
+[00:35:52] would I would be getting out as soon as
+[00:35:54] we had this top and this dogee is
+[00:35:57] forming so the kind of cool thing is
+[00:35:59] that you can watch candlesticks forming
+[00:36:02] in real time so if I pull up um a chart
+[00:36:05] here I don't know if there's anything
+[00:36:07] really um moving a whole heck of a lot
+[00:36:10] right now it's in after hours but um but
+[00:36:12] we'll just pull this up this is a
+[00:36:13] 10-second chart so every 10 seconds a
+[00:36:16] new candle's going to open so do you see
+[00:36:19] how right now this candle is sort of
+[00:36:21] changing shapes it's changing shapes
+[00:36:23] because of actual orders that are going
+[00:36:25] through so there it became a long body
+[00:36:27] candle now it this is a 10-second chart
+[00:36:30] which I really use more as a teaching
+[00:36:32] tool than actually for executing trades
+[00:36:34] because the candle's open and close so
+[00:36:36] quickly uh sometimes I'll use this to go
+[00:36:38] back and show someone like a very small
+[00:36:42] pullback that I noticed in the middle of
+[00:36:43] a move but nonetheless this is a good
+[00:36:46] opportunity for you to kind of see how
+[00:36:48] you can watch candlesticks as they're
+[00:36:50] forming so this is your 10c chart now if
+[00:36:52] we jump back over here to the one minute
+[00:36:54] chart right we have a little bit of
+[00:36:56] what's this C stick shape right here a
+[00:36:58] little bit of a gravestone dogee and
+[00:37:00] then what followed was a small uh
+[00:37:02] standard
+[00:37:03] dogee so you could see you got a couple
+[00:37:05] long Body candles here then a little
+[00:37:07] pullback sort of gradual rise back up a
+[00:37:10] little bit of a battle anytime we see
+[00:37:12] these topping Tails it shows that
+[00:37:15] although the price squeezes up it gets
+[00:37:16] pushed back down I do not like seeing
+[00:37:19] topping Tails sounds like a Doctor Seuss
+[00:37:22] book but I really don't uh I do not like
+[00:37:24] them not one bit uh it's nice to see
+[00:37:26] this is rallying back up but generally
+[00:37:28] speaking topping tails are are not a
+[00:37:30] good signal um it it just communicates
+[00:37:33] that there's too much of a struggle as
+[00:37:34] you could see sort of back here so but
+[00:37:37] in real time you can kind of see how
+[00:37:38] these candles are moving around so all
+[00:37:40] of a sudden it's like okay there's
+[00:37:42] another topping tail forming and how
+[00:37:44] much time is left on this candle let's
+[00:37:46] look at our time stamp right down here
+[00:37:48] so 6 5 4 3 2 1 and you know what so it
+[00:37:56] actually my clock might be slightly out
+[00:37:58] of sync something that you can do um and
+[00:38:00] this is actually just as a this is
+[00:38:02] totally a side note but I'll just share
+[00:38:03] it with you anyways so you can go into
+[00:38:06] your clock and um if you go click on
+[00:38:09] your settings you can click right here
+[00:38:11] so it's actually been about a day since
+[00:38:13] my clock last synced so I'm going to
+[00:38:15] click sync
+[00:38:17] now and it sometimes will adjust your
+[00:38:20] clock just by like a even just a second
+[00:38:22] but that'll make a difference so make
+[00:38:24] sure you're syncing your your clock from
+[00:38:25] time to time uh anyways okay so that was
+[00:38:28] just a good little tip in the as a side
+[00:38:30] note all right so now we're going to
+[00:38:31] jump back out of here um now our Hammer
+[00:38:34] Candlestick there we've got a good
+[00:38:35] example of that a squeeze up then
+[00:38:37] dipping down bottoming tail what's the
+[00:38:39] bottoming tail it's bullish the buyers
+[00:38:41] bought it back up so then we get a a big
+[00:38:44] rally look at those big long Body
+[00:38:46] candles from 660 to 760 to 860 it's
+[00:38:49] amazing but candle sticks are only
+[00:38:53] significant on the right financial
+[00:38:55] instruments so when you're looking at
+[00:38:57] candlesticks you should only be looking
+[00:38:59] at the right financial instruments to
+[00:39:00] trade candlesticks form on every stock
+[00:39:03] ETF mutual fund currency cryptocurrency
+[00:39:06] commodity but the patterns that we look
+[00:39:08] for are only valid when we have high
+[00:39:12] relative volume the high relative volume
+[00:39:14] indicates that many Traders are actively
+[00:39:17] watching the stock and that the patterns
+[00:39:20] that are forming are not just kind of
+[00:39:22] like you know look I mean everyone is
+[00:39:24] seeing you know a grilled cheese
+[00:39:25] sandwich that looks like the mo you know
+[00:39:27] the
+[00:39:28] Mother Teresa or Jerry Garcia right that
+[00:39:31] you while you might genuinely believe
+[00:39:34] that that's a message um from somewhere
+[00:39:37] else it's just sort of a coincidence you
+[00:39:39] know it just sort of happens and so you
+[00:39:42] can have patterns at form on charts that
+[00:39:44] just sort of happen just through the
+[00:39:46] randomness of a couple people placed
+[00:39:47] orders and you know all of a sudden
+[00:39:49] you've got a pattern but do other people
+[00:39:51] see that pattern do other people respect
+[00:39:53] that pattern and the answer is yes when
+[00:39:55] the stock is obvious the answer is no
+[00:39:57] when it's a stock that doesn't have high
+[00:39:59] relative volume so it's very important
+[00:40:01] that we're focusing on the right types
+[00:40:03] of stocks to trade and again it doesn't
+[00:40:04] have to be stocks it could be a
+[00:40:05] cryptocurrency it could be a Futures uh
+[00:40:08] a Forex pair or a Futures commodity but
+[00:40:11] if you're trading the wrong type of
+[00:40:12] stocks you're going to see charts like
+[00:40:14] this they don't make sense and the
+[00:40:16] signals they're they're going to be
+[00:40:17] essentially meaningless so what I'm
+[00:40:19] going to do for you guys um is I'm
+[00:40:21] actually going to put a link in the
+[00:40:22] description where you can download a set
+[00:40:24] of PDF resources these are totally free
+[00:40:27] you can download them and one of the
+[00:40:29] ones in this um in this Suite of
+[00:40:31] resources that you'll have access to is
+[00:40:33] my stock selection PDF this will share
+[00:40:37] with you my five criteria for how I
+[00:40:40] evaluate every single day whether or not
+[00:40:42] a stock is worth trading now if we look
+[00:40:44] at my trades from today you'll see that
+[00:40:46] I traded how many different stocks 2
+[00:40:49] four six 7 now I have a couple that I'm
+[00:40:52] red on no big deal they're relatively
+[00:40:54] small losses and I have a number of
+[00:40:55] stocks that I'm green pretty nicely on
+[00:40:57] all of these stocks share the five
+[00:41:00] common denominators that you'll be able
+[00:41:02] to learn in the stock selection PDF it's
+[00:41:05] it's really important one of the best
+[00:41:07] things you can do to mitigate your risk
+[00:41:09] is to make sure you're trading the right
+[00:41:11] type of stocks each day okay so part
+[00:41:14] three or chapter three multi Candlestick
+[00:41:17] patterns so think of individual
+[00:41:19] candlesticks as letters of the alphabet
+[00:41:21] combined they form sentences these multi
+[00:41:24] Candlestick patterns communicate buy and
+[00:41:26] sell signals I see them plain as day on
+[00:41:30] the charts and I want you to be able to
+[00:41:32] see them just the same so the simple and
+[00:41:35] by the way for warrior Pro members these
+[00:41:37] are for my students at Warrior trading
+[00:41:39] you'll learn all of my favorite
+[00:41:40] Candlestick patterns in detail with live
+[00:41:43] trading archives and each of these
+[00:41:45] patterns will include your entry your
+[00:41:47] exit your max risk your profit targets
+[00:41:50] and how to find the setup in real time
+[00:41:52] so there are more than a dozen different
+[00:41:54] patterns that I trade on well I don't
+[00:41:56] trade all of them every single day but
+[00:41:58] but on you know basically a daily basis
+[00:42:00] I'm pulling out any one of these
+[00:42:02] patterns when I see it in fact more
+[00:42:04] important than the perfect pattern is
+[00:42:06] making sure you're trading the perfect
+[00:42:08] stock but naturally a pattern is what
+[00:42:11] gives us the conviction to take the
+[00:42:12] trade because the pattern is what
+[00:42:15] stipulating this is how much we're
+[00:42:17] willing to risk and this is how much we
+[00:42:19] stand to gain so this is really the
+[00:42:21] basis of uh of trading in terms of
+[00:42:24] technical analysis so the simplest
+[00:42:26] pattern
+[00:42:27] is called candle over candle what is
+[00:42:30] candle over candle candle over candle is
+[00:42:33] when you have a candle that makes a new
+[00:42:35] High versus the previous candle so I'm
+[00:42:38] just going to demonstrate this for you I
+[00:42:39] I'll do it right here on the
+[00:42:41] Whiteboard super simple candle the
+[00:42:43] simplest the simplest pattern that
+[00:42:45] exists you have one candle right
+[00:42:49] here and well actually let's do it the
+[00:42:51] other way around so we've got this
+[00:42:53] candle right here red candle that's your
+[00:42:55] first candle and then this right here is
+[00:42:59] your candle over candle so what happened
+[00:43:02] here is this candle closed and actually
+[00:43:05] this isn't the the absolute best example
+[00:43:07] so it opens here it closes here this
+[00:43:09] candle opens around the same price and
+[00:43:11] breaks the previous high so right here
+[00:43:14] as it breaks the previous high this is
+[00:43:17] what we call a candle over candle
+[00:43:19] formation this candle broke the previous
+[00:43:21] high so inversely candle under candle is
+[00:43:26] going to happen when you have a stock
+[00:43:27] that squeezes up like this this opens at
+[00:43:30] about that same price and then drops
+[00:43:32] back down candle under candle this is
+[00:43:34] the simplest pattern but what these
+[00:43:36] patterns are communicating is the change
+[00:43:38] in Trend so remember if we look at a
+[00:43:40] chart pattern and some of them are going
+[00:43:42] to be uh a little bit more clear than
+[00:43:44] others but we'll just pull up um I mean
+[00:43:47] we could we could pull this one up here
+[00:43:48] so this one's the one we were just
+[00:43:50] looking at before that had these couple
+[00:43:51] of dois at the top or topping Tails so
+[00:43:54] what are areas that we get interested in
+[00:43:56] the reverse veral points so the highs
+[00:43:59] the lows the highs the lows the highs
+[00:44:02] and the lows so C A Curr the stock I
+[00:44:06] traded this morning this one we could
+[00:44:09] look back at this and ultimately the
+[00:44:12] places that you want to buy if possible
+[00:44:14] are on the lows and the places you want
+[00:44:16] to sell are at the tops so these are the
+[00:44:18] areas we're paying extra close attention
+[00:44:20] what are the Candlestick shapes that are
+[00:44:21] forming on these dips or at these Peaks
+[00:44:24] that indicate that the trend is going to
+[00:44:26] shift
+[00:44:27] so if we go back here Candlestick shape
+[00:44:30] there what was that that's a shooting
+[00:44:31] star see that topping tail with the
+[00:44:33] small body that's a shooting star
+[00:44:34] Candlestick and then what happened
+[00:44:36] following that well the price reversed
+[00:44:38] the price came back down now I knew that
+[00:44:40] was going to happen it's pretty obvious
+[00:44:41] when you see that Candlestick shape but
+[00:44:43] not all beginner Traders did what about
+[00:44:45] here you've got nice pullback right
+[00:44:47] there and a squeeze higher and in fact
+[00:44:49] on this stock I took my first entry on
+[00:44:51] this one this was Curr and I bought my
+[00:44:54] first position on this at
+[00:44:57] um let's see this
+[00:45:00] morning let me just go back to this um
+[00:45:04] so this is actually my trades are out of
+[00:45:06] order
+[00:45:07] here uh so first trade on this was at
+[00:45:11] $261 so that was on this micro pullback
+[00:45:14] that occurred um no sorry it was just a
+[00:45:16] little bit higher it was must have been
+[00:45:18] on this pullback right here so as this
+[00:45:21] squeezed up we got a little bit of a dip
+[00:45:22] down to the bottom of those tails and
+[00:45:24] then we got this squeeze back up so I
+[00:45:26] was actually buying this dip now on the
+[00:45:28] 10-second chart it'd be a little bit
+[00:45:30] more clear because on that 10-second
+[00:45:32] chart you'd be able to see oh yeah this
+[00:45:34] did pull back right in that
+[00:45:36] area so right here get zoomed in so that
+[00:45:41] right in this area you get this little
+[00:45:43] dip right here so I like to buy these
+[00:45:45] dips these little dips right here so I
+[00:45:47] actually took a couple trades on this I
+[00:45:49] had a trade in this area I had trades in
+[00:45:51] this area right here for the break
+[00:45:53] through the high I had trades on this
+[00:45:54] pullback this pullback I had trades this
+[00:45:57] pullback looking for the squeeze through
+[00:45:58] the high these topping Tails did give me
+[00:46:01] cause um for being a little bit more
+[00:46:03] cautious and the price did pull back but
+[00:46:06] then we put in another rally micro pull
+[00:46:08] back and a squeeze up to 460 and then we
+[00:46:11] kind of rolled back over a little bit
+[00:46:13] all right so let's jump back onto our
+[00:46:15] slide deck so candle over candle is the
+[00:46:17] simplest pattern this is the next one
+[00:46:19] that I want to teach you this is a
+[00:46:21] multi- Candlestick pattern and it's one
+[00:46:22] that I use in my trading pretty much
+[00:46:24] every day stock is squeezing up so when
+[00:46:26] the stock is squeezing up like this I'm
+[00:46:28] going to see it on my scanners so I use
+[00:46:31] these scanners right here to search the
+[00:46:33] market in real time for stocks that are
+[00:46:35] moving so FP just hit the scanner uh
+[00:46:38] just a moment ago laes was the one that
+[00:46:40] hit the scanner a few minutes before
+[00:46:42] that when we were looking so as the
+[00:46:44] stock is squeezing up I'm looking for
+[00:46:47] that pullback which is going to be my
+[00:46:48] first entry so right here this squeeze
+[00:46:51] up a nice little pullback that takes the
+[00:46:54] form for my first entry so what we look
+[00:46:56] for in this context right here is
+[00:46:59] pullback base first candle to make a new
+[00:47:02] high right there is your entry your max
+[00:47:04] loss is the low of the pullback your
+[00:47:06] profit Target is a move back to the high
+[00:47:08] of
+[00:47:08] day so we'll go back onto our slide deck
+[00:47:11] here we got the red candle forming
+[00:47:13] pulling back and right here we're
+[00:47:16] bottoming out we're looking for what
+[00:47:18] first candle to make a new high so the
+[00:47:20] next candle makes a new high right here
+[00:47:22] boom squeezes up and that would be I
+[00:47:24] mean of course it's awesome when it goes
+[00:47:25] all the way back to the high one candle
+[00:47:27] sometimes it does that sometimes it's a
+[00:47:29] little more gradual but nonetheless
+[00:47:31] that's the setup that we're looking for
+[00:47:32] so the squeeze up the pull back the
+[00:47:34] first candle to make a new high now I
+[00:47:36] hear some of you guys saying wait a
+[00:47:37] second Ross do what time frame do I
+[00:47:39] trade this on should I be trading this
+[00:47:42] look and look at your charts you've got
+[00:47:43] one minute you've got five minute what
+[00:47:44] is all this so when I see a stock moving
+[00:47:47] quickly as an active day trader I'm
+[00:47:50] primarily using the one minute time
+[00:47:51] frame yes I have others up that I look
+[00:47:53] at and I have the screen real estate
+[00:47:55] space to do that but I'm primarily
+[00:47:57] executing my trades on the one minute
+[00:47:59] time frame the one minute chart so it's
+[00:48:01] the one minute chart where I'm looking
+[00:48:03] for that pattern right there now
+[00:48:05] sometimes we'll have a stock that's
+[00:48:06] moving really really fast and it might
+[00:48:09] not even give us a proper one minute
+[00:48:10] pullback all we get is what's called a
+[00:48:13] micro pullback and that occurs on the
+[00:48:15] 10-second chart and I'm okay with
+[00:48:17] trading that and of course every time
+[00:48:19] when I'm trading in the morning I'm
+[00:48:21] giving you guys my live commentary so
+[00:48:22] members at Warrior trading you already
+[00:48:23] know that but those of you guys who
+[00:48:25] haven't joined or haven't done a twoe
+[00:48:28] trial before uh when you do the twoe
+[00:48:30] trial you could listen over my shoulder
+[00:48:31] while I'm trading so you get to benefit
+[00:48:34] and piggyback off all of my years of
+[00:48:36] educated intuition you get to hear that
+[00:48:38] real-time commentary as I'm saying okay
+[00:48:40] this is the pullback I'm looking for the
+[00:48:41] first C to make a new high I'm in
+[00:48:43] looking for the break of five or
+[00:48:44] whatever the case may
+[00:48:46] be so oop so we'll go back into the
+[00:48:48] slide deck here all right so so now next
+[00:48:51] slide oh we go through this again that's
+[00:48:54] fine so that's that pattern and it it
+[00:48:57] this is the thing where right here you
+[00:48:59] have to be able to kind of make the
+[00:49:00] prediction of visualizing what's going
+[00:49:02] to happen next now if this candle went
+[00:49:04] red we wouldn't take the trade because
+[00:49:06] it didn't break the high so in fact this
+[00:49:09] candle right here becomes a trigger
+[00:49:11] candle if the price breaks the high it's
+[00:49:15] confirming a a candle over candle
+[00:49:18] reversal right we're getting that two
+[00:49:20] candle reversal pattern so that's what
+[00:49:21] we're looking for and if we don't get it
+[00:49:23] we don't take the trade we just keep
+[00:49:24] waiting so maybe another candle pulls
+[00:49:26] back and then it goes and then we take
+[00:49:28] the trade there so a lot of the time I'm
+[00:49:31] just sitting here waiting sort of
+[00:49:33] sitting waiting for that setup and then
+[00:49:35] as soon as I see it boom I strike I jump
+[00:49:38] in and I I jump in with conviction now
+[00:49:41] the psychology behind this pattern the
+[00:49:43] reason why it works is that a rapid move
+[00:49:46] up attracts Traders so we got the rapid
+[00:49:49] move up in the first place right here
+[00:49:51] that attracted Traders right that got
+[00:49:52] Traders excited then you get uh that's
+[00:49:56] AAL true when the move is driven by a
+[00:49:58] breaking news catalyst so it's 8: a.m.
+[00:50:01] we've got breaking news coming out of
+[00:50:02] the company that you know all of a
+[00:50:04] sudden whatever the case may be they've
+[00:50:06] got some new drug they've just released
+[00:50:08] or clinical trials now we often like
+[00:50:11] trading pharmaceutical and biotech
+[00:50:12] stocks because these are stocks that can
+[00:50:14] go up 200% in a single day with good
+[00:50:17] news I mean they can even go up higher
+[00:50:19] than that it's really incredible so for
+[00:50:21] Traders with relatively small accounts
+[00:50:24] that's the type of stuff that we really
+[00:50:25] like to trade and even for Traders with
+[00:50:27] slightly larger accounts like mine I
+[00:50:29] still like those stocks because I can
+[00:50:30] get such great risk to reward ratios on
+[00:50:33] them where I can get really nice winners
+[00:50:36] so the first pullback is formed by
+[00:50:39] profit taking from people that were
+[00:50:41] holding before the news came out and
+[00:50:43] possibly some early short selling some
+[00:50:45] early short sellers who are like you
+[00:50:46] know what I think this is up more than
+[00:50:48] it should be I'm going to short it but
+[00:50:50] if the stock holds at least 50% of that
+[00:50:54] first leg up so that first leg up is
+[00:50:57] created so right here we've got the
+[00:50:59] first leg up boom right there so when
+[00:51:03] this pulls back our 50% line is right
+[00:51:05] down here so it's okay if it pulls back
+[00:51:07] a little bit it's okay if it pulls back
+[00:51:09] a little bit we don't want to see it go
+[00:51:11] like that that's not good it can pull
+[00:51:13] back to about the 50% line and then
+[00:51:15] about there I say I'd really like to see
+[00:51:18] this thing bottoming out so green candle
+[00:51:20] and then that first candle make a new
+[00:51:22] High second candle pushes higher right
+[00:51:25] now again you got to make sure the open
+[00:51:26] and the close are about the same but you
+[00:51:28] get you get the idea so that's the spot
+[00:51:30] we're looking for now maybe it doesn't
+[00:51:32] pull back three candles it just pulls
+[00:51:34] back two candles that's fine when it's
+[00:51:36] ready to move higher we'll watch the
+[00:51:38] price coming up to this level and when I
+[00:51:40] see other Traders buying and I see that
+[00:51:42] the price is about to break this high
+[00:51:44] and we're going to get that candle over
+[00:51:46] candle formation that's when I'm jumping
+[00:51:48] in and pressing the buy button that's
+[00:51:49] when I'm executing the trade now it
+[00:51:51] doesn't matter if you trade with Weeble
+[00:51:52] you trade with thick or Swim trade with
+[00:51:54] Robin Hood it makes sense if you're
+[00:51:55] using a desktop platform for executing
+[00:51:57] these trades and the reason is because
+[00:51:59] you want to be able to look at your
+[00:52:00] level two data and really see the stock
+[00:52:03] kind of moving in real time but but
+[00:52:04] nonetheless um it it's as long as you're
+[00:52:07] able to see it right in front of you and
+[00:52:11] and you've got the buttons to click that
+[00:52:13] buy button the the actual broker doesn't
+[00:52:15] make a huge difference so I will
+[00:52:17] typically buy the first pullback and the
+[00:52:20] second pullback so a stock squeezes up I
+[00:52:23] buy the first pullback squeezes up and I
+[00:52:25] buy the second pullback by the time
+[00:52:27] we're getting the third pullback I
+[00:52:29] usually don't like to trade up there I
+[00:52:31] feel like it's too extended so first and
+[00:52:34] second pullback and then I don't want to
+[00:52:36] overstay my welcome I continue to trade
+[00:52:38] first and second pullback on the one
+[00:52:39] minute chart and then I'll also consider
+[00:52:41] the first and second pullback on the
+[00:52:43] five minute
+[00:52:45] chart now we'll talk more about that in
+[00:52:48] a second I don't want to get ahead of
+[00:52:49] myself all right so let's look at this
+[00:52:51] pattern all right so is this something
+[00:52:53] that we should be buying right here what
+[00:52:55] do you think yay or nay well the volume
+[00:52:57] profile looks pretty good to me we've
+[00:52:59] got green volume bars lighter volume red
+[00:53:01] macd is open so I would say this looks
+[00:53:02] like a yes and you've got that nice
+[00:53:04] bottoming tail right there and the rally
+[00:53:06] back up I want you to get to the point
+[00:53:08] where you could see this in real time
+[00:53:11] and you could look at this and say this
+[00:53:13] is a no-brainer I if I'm not buying this
+[00:53:16] I've got to be some kind of really some
+[00:53:18] kind of special stupid because this is a
+[00:53:21] clear as day setup now I sometimes say
+[00:53:24] that to myself I'm like Ross you've got
+[00:53:25] to be kidding me you if you didn't just
+[00:53:27] buy that you're an idiot this is it
+[00:53:29] doesn't get simpler than that so what I
+[00:53:31] did early on is I would print out charts
+[00:53:34] like this so for those of you guys who
+[00:53:35] download my PDF resources you'll be able
+[00:53:38] to have PDFs that you can just print so
+[00:53:40] print out those PDFs put them around
+[00:53:42] your desk and I want you to surround
+[00:53:44] yourself with just like you want to
+[00:53:46] surround yourself with the type of
+[00:53:47] people you want to become that's good
+[00:53:49] you you want to surround yourself with
+[00:53:50] the type of people you want to become
+[00:53:51] they they rub off on you surround
+[00:53:53] yourself with the type of charts you
+[00:53:55] want to trade because when you're
+[00:53:56] looking around your desk and you're
+[00:53:57] seeing that then when you start to see
+[00:53:59] it forming in real time you know what
+[00:54:01] you're looking at it's really cool when
+[00:54:04] that kind of transformation happens of
+[00:54:06] I've got all these charts printed out
+[00:54:08] and now I'm seeing this right here now
+[00:54:10] this hasn't happened yet but I can tell
+[00:54:12] the stock meets all five criteria of
+[00:54:14] stock selection the pattern is there
+[00:54:16] it's time it's game time here we go and
+[00:54:19] boom you get the trade what about this
+[00:54:22] nice rally up pullback rally up pullback
+[00:54:25] high volume we move in the right
+[00:54:26] direction that looks like a nice setup
+[00:54:28] so we take that trade what about this
+[00:54:31] nice rally up light volume pullback yes
+[00:54:34] that's a nice entry so I want you to
+[00:54:36] print out these charts put them around
+[00:54:38] your desk and in real time as you start
+[00:54:40] seeing these setups forming test
+[00:54:42] yourself practice in the simulator and
+[00:54:44] see if you can have the courage to
+[00:54:45] actually press the buy button all right
+[00:54:48] number four popular charting time frames
+[00:54:50] so I why I didn't want to get ahead of
+[00:54:52] myself before because now we're going to
+[00:54:53] show you these different time frames so
+[00:54:55] most a Traders most active Traders are
+[00:54:57] going to use one minute time frames we
+[00:54:59] use one minute time frames because these
+[00:55:01] stocks are moving so quickly that if we
+[00:55:03] wait for a 5 minute setup we're going to
+[00:55:06] end up just completely missing it and
+[00:55:07] and that's not we don't want to miss
+[00:55:09] setups so the way I have my charts laid
+[00:55:12] out is I have four charts for one stock
+[00:55:16] but each of them are a different time
+[00:55:17] frame so I've got my one minute I've got
+[00:55:19] my five minute I've got my daily chart
+[00:55:22] and I've got my 10-second chart I'm
+[00:55:24] primarily using this one right here and
+[00:55:26] sometimes I'll adjust these to kind of
+[00:55:27] make this one smaller and you know to
+[00:55:29] make the the one minute the biggest one
+[00:55:31] since the one I'm focusing on so on my
+[00:55:33] one minute chart this is where I'm
+[00:55:35] primarily looking for trades but if I've
+[00:55:37] already gotten the first pullback and
+[00:55:39] the second pullback on the one minute
+[00:55:41] chart and the one minute's getting
+[00:55:43] extended I may say all right now I've
+[00:55:44] got to wait for a 5 minute setup to form
+[00:55:47] so what I'm looking for there is for
+[00:55:49] that same pattern to form on the 5-
+[00:55:50] minute chart where you've got a big
+[00:55:52] green candle and then a couple of red
+[00:55:54] candles so think about this for second
+[00:55:57] so each each 5minute candle like this
+[00:56:02] that contains five one minute candles so
+[00:56:05] if we actually broke it down it would
+[00:56:07] probably look something like
+[00:56:09] this right so that 5minute candle has
+[00:56:12] five one minute candles that obviously
+[00:56:14] opened and closed to create this shape
+[00:56:16] now it's possible that you could have
+[00:56:18] had a huge green one and then a red one
+[00:56:20] and then it goes back to green but at
+[00:56:21] the end of the day this 5 minute is
+[00:56:23] telling us we opened here and we closed
+[00:56:25] here so now the next candle pushes
+[00:56:27] higher so again you get five more green
+[00:56:30] candles so 1 2 3 four five and then you
+[00:56:34] finally get a red candle that forms so
+[00:56:37] now you get your red candle that forms
+[00:56:38] so you got 1 2 3 four five so now maybe
+[00:56:43] in all of this let's just say let's just
+[00:56:45] say for the sake of argument that it
+[00:56:47] actually popped up nicely here and then
+[00:56:50] it pulled back right here for two
+[00:56:52] candles and then it pushed higher so we
+[00:56:55] were actually able to get get our first
+[00:56:56] trade right there and then it squeezed
+[00:56:58] up again and then it pulled back for
+[00:57:02] Just Two candles and then it squeezed up
+[00:57:04] one more time so we actually let's just
+[00:57:06] say we already got our first pullback
+[00:57:09] right here and our second pullback right
+[00:57:11] here so we've already trade it twice on
+[00:57:13] the one minute chart but this is what
+[00:57:14] the five minute chart is now looking
+[00:57:15] like so now it pops up here but the five
+[00:57:19] minutes a little extended it drops back
+[00:57:21] down and it pulls back so is the is the
+[00:57:23] stock dead well now in the 5 minutes
+[00:57:26] it's pulled back for two red candles in
+[00:57:28] a row but then all of a sudden we start
+[00:57:30] to Rally back up here we pull back again
+[00:57:33] let's just say and now we get our first
+[00:57:37] candle on the five minute that goes
+[00:57:38] green so sort of hide that for a second
+[00:57:41] so now all of a sudden your five minute
+[00:57:43] is giving you that same pattern so it's
+[00:57:46] like this pattern that we just traded
+[00:57:48] right down here this pattern is now
+[00:57:50] repeating on the 5 minute chart and yes
+[00:57:53] there is a corresponding one minute
+[00:57:54] pattern that's occurring inside it but a
+[00:57:56] lot of Traders will trade 5 minute
+[00:57:59] patterns so it's kind of interesting
+[00:58:01] here because you can trade the same
+[00:58:03] stock multiple times trading even the
+[00:58:06] same pattern you're just trading it on
+[00:58:08] different time frames so how do you
+[00:58:10] decide between the one minute the 5
+[00:58:11] minute how do you flip back and forth I
+[00:58:13] primarily use the one minute in fact I
+[00:58:16] could live without the 5 minute I use
+[00:58:17] the one minute so much but I don't want
+[00:58:20] to completely disregard the 5-minute
+[00:58:21] because sometimes there are nice setups
+[00:58:23] that occur on the 5-minute chart so if
+[00:58:26] if I see a 5-minute pattern forming and
+[00:58:27] it's a nice pullback I'll look at the
+[00:58:29] chart I'll consider it and if the one
+[00:58:31] minute isn't giving me a big red flag
+[00:58:34] I'll take the trade but if the one
+[00:58:36] minute has a negative macd which we'll
+[00:58:39] talk about in a second or a really high
+[00:58:41] volume red candle that could be a
+[00:58:43] warning sign that's telling me don't
+[00:58:45] trust it the F minute looks good but
+[00:58:48] buried inside the 5 minute is a red flag
+[00:58:51] Don't trade it so I always pretty much
+[00:58:54] always need the one minute to look good
+[00:58:56] and if the one minute doesn't look good
+[00:58:58] it pretty much negates the trade but if
+[00:59:00] the one minute looks good and the 5
+[00:59:01] minute looks good then I may get another
+[00:59:03] opportunity so I usually end up trading
+[00:59:06] on the one minute and then taking maybe
+[00:59:08] a couple of final trades on the five
+[00:59:09] minute before being done trading that
+[00:59:12] stock for the day number five let's talk
+[00:59:15] about those technical indicators I'm a
+[00:59:17] big advocate of keeping it simple
+[00:59:18] therefore I only use a small handful of
+[00:59:21] technical indicators on my chart the
+[00:59:23] first indicator I use on my charts are
+[00:59:25] moving averages moving averages are a uh
+[00:59:29] are a technical indicator they're a
+[00:59:30] mathematical formula that give you
+[00:59:33] context so what they do is they just
+[00:59:36] tell you the average price of a stock so
+[00:59:39] over the course of a period of time so
+[00:59:41] let's just say you've got this stock
+[00:59:43] right here and we're using a nine moving
+[00:59:47] average so I'll just do this so a nine
+[00:59:51] moving average right here nine EMA it's
+[00:59:54] an exponential moving average
+[00:59:56] is going to be the right now on at this
+[00:59:59] candle right here it's the average price
+[01:00:02] of the last nine candles so add all nine
+[01:00:05] candles together add all those prices
+[01:00:07] divide by nine and boom that's your
+[01:00:09] average so your 9 EMA exponential moving
+[01:00:12] average is always going to Trail a
+[01:00:14] little bit behind the price it's you
+[01:00:16] can't have the 9 em be right at the
+[01:00:18] current price unless of course the price
+[01:00:21] has been just going sideways so if the
+[01:00:23] price has been moving up then the 90 ma
+[01:00:25] is going to be slightly below the price
+[01:00:27] because it Trails based on the average
+[01:00:29] of the last nine Candles now the
+[01:00:31] significance of the 9 EMA is that it's a
+[01:00:34] well-respected technical indicator and
+[01:00:36] so as the price comes down we often
+[01:00:39] expect that we'll find support at the 9
+[01:00:42] EMA before making another move up so if
+[01:00:45] we have the 9 EMA on our charts then
+[01:00:48] when we see it coming down if we notice
+[01:00:50] that bottoming tail corresponding with
+[01:00:53] this well-respected level of support
+[01:00:55] that's going to give us additional
+[01:00:58] confirmation that we should be taking
+[01:01:00] this trade so the 9 EMA is an indicator
+[01:01:03] that's helping support and help us
+[01:01:05] basically decide whether or not this is
+[01:01:07] a pattern and in a current position
+[01:01:10] where we should take the trade so I use
+[01:01:13] three moving averages I use the nine
+[01:01:15] exponential moving average and then I
+[01:01:17] use the 20 exponential moving average so
+[01:01:21] the 20 is always going to be a little
+[01:01:22] further down from the nine CU it's
+[01:01:24] averaging the last 20 candles so it goes
+[01:01:26] further back and then I use the 200 way
+[01:01:30] down here now the 200 EMA truthfully is
+[01:01:33] almost like not applicable on intraday
+[01:01:37] charts like one minute and five minute
+[01:01:39] you you almost the stock is always going
+[01:01:41] to be so far above it it doesn't matter
+[01:01:43] however I leave it on all my time frames
+[01:01:46] but it's really significant on the daily
+[01:01:48] chart and I'll show you that in the
+[01:01:49] second so these are the the three moving
+[01:01:52] averages I use the nine the 20 and the
+[01:01:55] 200 I color them where my nine is gray
+[01:01:58] my 20 is blue and my uh 200 is in
+[01:02:03] magenta so these are uh very easy to set
+[01:02:06] up on your charts doesn't really matter
+[01:02:08] what platform you offer or you're using
+[01:02:10] uh all platforms will have a little area
+[01:02:14] where you can add indicators uh they'll
+[01:02:16] sometimes be like thinker swims platform
+[01:02:19] um on their charts shows a little
+[01:02:22] picture of a um little like um I don't
+[01:02:26] know Beaker like like a science Beaker
+[01:02:28] something chemistry lab and you can go
+[01:02:31] to the studies here and you can add a
+[01:02:34] moving
+[01:02:36] average and then you just scroll down to
+[01:02:38] exponential moving average um where is
+[01:02:40] it right down here so you can add that
+[01:02:42] to your chart and then when you add it
+[01:02:44] you could choose your color and your
+[01:02:45] time frame so I set the S the length as
+[01:02:48] uh 20 and the source as close now over
+[01:02:52] on day trade Dash which is the software
+[01:02:54] that I use FX there just go moving
+[01:02:58] average and then add exponential and
+[01:03:00] then once it's added you can change the
+[01:03:03] the settings so change the color ch
+[01:03:05] change the style Etc all right so that
+[01:03:09] um so the the moving averages are are
+[01:03:11] really very simple um they're they're
+[01:03:14] not complicated it's easy to set up and
+[01:03:16] now it gives you context in fact when I
+[01:03:19] look at charts without moving averages I
+[01:03:22] sometimes feel like it's it's kind of
+[01:03:24] incredible so let me show you what this
+[01:03:26] looks like so we're going to turn off
+[01:03:27] all the moving averages here I'm going
+[01:03:30] to turn them all off I look at this and
+[01:03:32] I I I feel like it's floating I don't
+[01:03:35] have context I'm like whoa what
+[01:03:38] something is wrong with this chart and
+[01:03:41] what's wrong is all of a sudden I put on
+[01:03:42] that that 20 EMA and it's like
+[01:03:46] oh okay now I get that there's the 200
+[01:03:49] EMA okay yep I get that there's the nine
+[01:03:52] okay yep and then there's the volume
+[01:03:54] weight average price which I'm going to
+[01:03:55] teach you about in just a moment all
+[01:03:57] right so uh the 200 EMA is very well
+[01:04:01] respected on the daily chart stocks
+[01:04:04] below the 200 EMA when they come up to
+[01:04:06] it almost always have resistance at that
+[01:04:08] level so 200 EMA is a level of
+[01:04:10] resistance when the stock is below it
+[01:04:13] when the stock is above it it can be a
+[01:04:14] level of support the volume weighted
+[01:04:17] average price is vwap is the acronym so
+[01:04:21] we say vwap volume weight average price
+[01:04:24] it's like a moving average average
+[01:04:26] except that it includes the amount of
+[01:04:29] volume that traded at these different
+[01:04:31] prices so it's a more detailed type of
+[01:04:34] moving average in that sense now um I
+[01:04:38] really like it because it actually shows
+[01:04:39] us the equilibrium price of the stock
+[01:04:42] over the course of the day the exact
+[01:04:45] average price over the whole day so the
+[01:04:48] vwap is an intraday indicator it doesn't
+[01:04:50] work on daily charts and it's factoring
+[01:04:52] in all of the volume starting at 400
+[01:04:55] a.m. so it's a running average of the
+[01:04:57] price so it is showing you the exact
+[01:05:00] average price of the stock why is that
+[01:05:01] important well if the stock is below
+[01:05:04] that it's bearish if it's above it it's
+[01:05:07] bullish and often we'll see that if the
+[01:05:10] stock is above it and comes down to it
+[01:05:12] it'll hold that level as support so we
+[01:05:14] could take an entry off support
+[01:05:16] potentially we also notice that when we
+[01:05:18] have a break over a crossover where the
+[01:05:21] price was below vwap and then suddenly
+[01:05:23] crosses above it it signals a shift in
+[01:05:27] control from sellers to buyers and
+[01:05:30] likewise or inversely when the stock
+[01:05:32] shifts from above vwap to below it's a
+[01:05:34] shifting control from the buyers back to
+[01:05:36] the sellers so I keep the vwap on all my
+[01:05:39] charts intraday and I find it very
+[01:05:42] helpful the next indicator is macd again
+[01:05:45] this is an acronym for moving average
+[01:05:47] convergence Divergence indicator and
+[01:05:50] it's an oscillating indicator right down
+[01:05:52] here it oscillates between positive and
+[01:05:54] negative and and what it does is it
+[01:05:56] actually is comparing the relationship
+[01:05:58] to these of these moving averages so
+[01:06:02] moving average convergence means the
+[01:06:04] moving averages are converging they're
+[01:06:06] moving together and Divergence is when
+[01:06:08] they're moving apart so when a stock is
+[01:06:10] moving up quickly the 9 EMA Trails the
+[01:06:14] price closer than the 20 so now these
+[01:06:16] moving averages are actually moving
+[01:06:18] apart the price is moving away and so
+[01:06:21] we're having this Divergence that's when
+[01:06:24] we're usually going to have the best
+[01:06:25] trades and then you'll have a point
+[01:06:27] where the price starts to consolidate
+[01:06:29] and when it consolidates the 90 ma
+[01:06:31] starts going sideways but the 20
+[01:06:33] continues moving higher and so now you
+[01:06:35] get this convergence so it's okay to
+[01:06:38] have the oscillations of diverging
+[01:06:40] converging moving apart moving together
+[01:06:43] but when we notice the
+[01:06:45] crossover where the moving averages have
+[01:06:47] actually come so close together right
+[01:06:49] here that this um signifies a cross that
+[01:06:53] indicates the front side of the move may
+[01:06:56] be over and now we're going to see a
+[01:06:59] more sustained selloff coming back down
+[01:07:02] so this is an indicator that I do use in
+[01:07:04] my trading but I only use it on the one
+[01:07:06] minute time frame I find that the
+[01:07:08] signals that it produces on the 5 minute
+[01:07:10] are too slow and the signals it produces
+[01:07:13] on the 10sec are too fast so I'm only
+[01:07:16] using it on the one minute time frame
+[01:07:18] number six support and resistance so in
+[01:07:21] addition to technical indicators which
+[01:07:24] help us understand potential areas of
+[01:07:26] support and resistance the 9em the vwap
+[01:07:28] I also draw support and resistance trend
+[01:07:31] lines based on historical price action
+[01:07:34] this helps me understand potential
+[01:07:36] future price action and areas where we
+[01:07:38] might see resistance so notice here how
+[01:07:41] we have this ascending trend line so
+[01:07:43] this trend line was drawn by connecting
+[01:07:45] these lows and I just draw it and it
+[01:07:48] extends both to the left and the right
+[01:07:50] so it goes both ways so then the price
+[01:07:52] breaks below it but then it comes back
+[01:07:54] up and now this actually what was
+[01:07:56] previously support has now become
+[01:07:59] resistance and that is a common theme so
+[01:08:02] previous support becomes resistance
+[01:08:05] horizontal support and resistance trend
+[01:08:07] lines are the easiest to visualize and
+[01:08:09] therefore the most popular and the most
+[01:08:11] well respected and what's very
+[01:08:13] interesting is that these typically
+[01:08:14] occur around half dollars and whole
+[01:08:17] dollars why is that well in fact if you
+[01:08:21] looked at a chart if you looked at the
+[01:08:23] the order the order book of a stock
+[01:08:25] what you would notice is that we'll draw
+[01:08:28] lines here around half dollars and whole
+[01:08:30] dollars so we're going to do right here
+[01:08:34] we're going to do right here I'm going
+[01:08:36] to do right here and we'll do one more
+[01:08:38] right up here all right so let's say
+[01:08:41] this is three this is 350 this is 4 and
+[01:08:45] this is 450 all right so what we would
+[01:08:49] typically see is as a stock starts
+[01:08:51] squeezing up here we squeeze up we
+[01:08:53] squeeze up we're going to hit resistance
+[01:08:55] at the whole dollar and pull back and
+[01:08:57] then we rally back up boom rally back up
+[01:09:00] right here we hit resistance at the half
+[01:09:02] dollar we pull back we rally back up
+[01:09:05] here we break through that level we come
+[01:09:07] up to the whole dollar and we pull back
+[01:09:10] why does this happen this happens
+[01:09:11] because a lot of people put their orders
+[01:09:14] right around these levels so people put
+[01:09:16] orders to take profit around half
+[01:09:19] dollars in whole dollars so if you
+[01:09:20] looked at all the orders on the book you
+[01:09:22] would notice that the orders are
+[01:09:24] clustered around half dollars and whole
+[01:09:26] dollars and there are fewer orders in
+[01:09:28] between so these are sell orders that
+[01:09:29] are already on the book for people to
+[01:09:31] take profit so as we approach these
+[01:09:33] areas with a high degree of selling
+[01:09:35] we're going to see resistance it's going
+[01:09:37] to pull back and then if it can break
+[01:09:38] through that level if it can hold over
+[01:09:40] it then we've got the breakout so we
+[01:09:42] often see at these half dollars and
+[01:09:44] whole dollars that we tap it a couple of
+[01:09:46] times before breaking that is very
+[01:09:49] common so here you could see we tap 650
+[01:09:52] we tap 650 we tap 650 and then finally
+[01:09:56] we break 650 now this can also be in the
+[01:09:59] form of a daily resistance so a double
+[01:10:02] top here just under $15 very common so a
+[01:10:06] high here now when the stock comes back
+[01:10:08] up a lot of Traders are looking to the
+[01:10:10] left and up to ask themselves where's
+[01:10:13] nearby resistance how high can this
+[01:10:15] stock go before it runs into resistance
+[01:10:17] and so naturally you end up looking at a
+[01:10:19] candle just like this now this candle
+[01:10:23] was a high volume day where the stock
+[01:10:25] squeezed up and sold off some people
+[01:10:27] would say well if the stock is squeezing
+[01:10:29] up what about this area here wouldn't
+[01:10:31] this be resistance no this would not be
+[01:10:34] resistance because the resistance that
+[01:10:36] was created here was broken on this day
+[01:10:39] anyone who is still holding here who
+[01:10:41] wanted to sell would have been able to
+[01:10:42] sell on this day so they're not going to
+[01:10:45] be creating resistance as the price
+[01:10:47] moves up here all right so this is a
+[01:10:49] basically a a clear window on the chart
+[01:10:52] where there's no resistance till the top
+[01:10:54] of that candle so this uh then casts
+[01:10:57] sort of a shadow backwards right here
+[01:11:00] and then it moves up to the next candle
+[01:11:02] so you got a little high there and then
+[01:11:04] you move up to the next candle and then
+[01:11:05] a little high there and you move up to
+[01:11:06] the next candle and a little high here
+[01:11:08] and then you move up and so forth so
+[01:11:10] this double top right here right around
+[01:11:13] half dollar and now if it comes back up
+[01:11:15] to this level again a third time it's
+[01:11:17] going to be resistance because now it's
+[01:11:18] been tested twice it's going to be an
+[01:11:20] issue again in the future so this is
+[01:11:22] very common now the way I draw trend
+[01:11:25] lines on my chart is um is pretty
+[01:11:28] straightforward I can pull this uh right
+[01:11:31] here from the toolbar I could just grab
+[01:11:33] a trend line like this and I could just
+[01:11:35] click it just like that and boom I've
+[01:11:36] got a trend line on the chart so that's
+[01:11:38] how I usually do it um we can see see RR
+[01:11:41] from today so this one I drew this trend
+[01:11:44] line right at the top the high of this
+[01:11:46] candle so that was the pre-market High
+[01:11:48] we came down we came back up 450
+[01:11:50] retested it pulled back came back up
+[01:11:52] broke through that level came down
+[01:11:54] retested it previous resistance became
+[01:11:56] support and then we got to squeeze up to
+[01:11:58] seven right up to the whole dollar lots
+[01:12:00] of sellers up there couldn't break that
+[01:12:02] level and it sold off and so you know we
+[01:12:05] ended up getting this nice squeeze but
+[01:12:06] then it pulled back and dropped back
+[01:12:08] down all right so now ascending and
+[01:12:11] descending resistance levels these can
+[01:12:13] be a little bit more abstract because
+[01:12:16] different Traders will draw them
+[01:12:17] differently so and they can this is a
+[01:12:20] daily chart for Tesla these lines can be
+[01:12:22] well respected over the course of years
+[01:12:25] so this is a descending resistance line
+[01:12:28] so when the price comes up to it you
+[01:12:29] know you've got that very well-respected
+[01:12:31] level on the chart so this is where we
+[01:12:34] see uh the stock holding holding holding
+[01:12:38] and then resistance as it comes back up
+[01:12:40] right here that is very common so I'll
+[01:12:44] just uh just before we jump on to number
+[01:12:46] seven I'll just jump over here for one
+[01:12:47] more second I'll just demonstrate
+[01:12:50] drawing some trend lines for a second
+[01:12:51] here so let's do a trend line right here
+[01:12:55] let's connect these two right
+[01:12:56] there interesting right that's probably
+[01:12:59] not a coincidence right you end up
+[01:13:01] having this ascending resistance line
+[01:13:03] that's very common so I usually connect
+[01:13:05] the highs of candles the high of candle
+[01:13:08] wicks um when I'm doing an ascending
+[01:13:10] support line down here I'll connect the
+[01:13:12] lows to the candle wicks now sometimes
+[01:13:15] you'll you'll draw it and you'll be like
+[01:13:16] yeah that seems valid other times you'll
+[01:13:18] draw you'll be like hm well I don't know
+[01:13:20] if that is valid that doesn't seem like
+[01:13:21] too many people really cared about that
+[01:13:23] level and you realize okay you know
+[01:13:25] maybe I'm not maybe I'm the only one
+[01:13:26] that Drew the the trend line in that
+[01:13:28] area and that's why the ascending and
+[01:13:30] descending lines are a little bit
+[01:13:31] trickier because another Trader that
+[01:13:33] Drew it just slightly differently see
+[01:13:35] how how dramatically it could it could
+[01:13:37] change the line so I try to always
+[01:13:41] connect the highs of candles but also
+[01:13:43] just ask myself does this feel valid
+[01:13:45] trend lines that have been tested
+[01:13:46] multiple times are going to gain
+[01:13:48] validity just by the fact that they've
+[01:13:50] been tested and now it's given other
+[01:13:52] Traders the opportunity to draw what is
+[01:13:55] is now probably a similar trend
+[01:13:57] line number seven daily charts versus
+[01:14:01] intraday charts so part of my process of
+[01:14:04] due diligence each day is EV is
+[01:14:06] evaluation of both daily and intraday
+[01:14:08] charts for a stock so yes I'm a day
+[01:14:11] trader so I'm focusing primarily on
+[01:14:12] intraday time frames but I don't want to
+[01:14:14] completely disregard daily levels so
+[01:14:17] daily resistance areas what's a good
+[01:14:20] daily chart look like the 200 EMA is
+[01:14:23] such a significant area of support and
+[01:14:25] resistance on a daily chart I want to
+[01:14:27] see that the stock has a lot of room to
+[01:14:29] squeeze up to the 200 if it's below it
+[01:14:32] or if it's above it then that's fine but
+[01:14:34] if it's below it it needs a lot of room
+[01:14:36] to get up to it before it hits that
+[01:14:38] resistance level I also look at gaps and
+[01:14:41] windows on daily charts to create areas
+[01:14:43] of support and resistance which I'll
+[01:14:45] show you in a second and I draw
+[01:14:47] ascending and descending trend lines
+[01:14:48] that can also create support and
+[01:14:50] resistance so this is an example of a
+[01:14:53] gap on a chart you see how this stock
+[01:14:55] all of a sudden this day is way up here
+[01:14:58] the previous day was down here so
+[01:14:59] overnight it jumps up like 200% or no
+[01:15:03] not quite that much but no nonetheless
+[01:15:04] it has this big gap this is the result
+[01:15:07] of the company putting out breaking news
+[01:15:09] overnight and by the next morning people
+[01:15:12] are already bidding the stock higher and
+[01:15:14] then it opens higher and it continues so
+[01:15:17] this is a gap on the chart when you have
+[01:15:19] this big gap on the chart what can
+[01:15:22] happen is as the stock starts to dip
+[01:15:24] back down if it gets into this Gap where
+[01:15:26] do you find support there's kind of no
+[01:15:29] support so you can run into a little bit
+[01:15:30] of a freef fall coming back down and
+[01:15:33] that can be that can create what's
+[01:15:35] called Gap fill where the Gap gets
+[01:15:38] filled by the price action selling off
+[01:15:41] um this is an example of a gap down so
+[01:15:43] this stock you know doing fine and the
+[01:15:46] next day it's at a dollar a share so bad
+[01:15:48] news comes out and now in the future as
+[01:15:51] it starts to come back up you can get
+[01:15:53] Gap fill going back up cuz there's
+[01:15:55] really no resistance in this huge area
+[01:15:58] so you've got this big gap on the chart
+[01:16:00] where if the price starts to come back
+[01:16:01] up you're not going to run into
+[01:16:03] resistance until way back up here now
+[01:16:05] could you look to the left and over
+[01:16:07] right here you could but most people are
+[01:16:09] going to look at the bottom of this Gap
+[01:16:10] right here most people are going to look
+[01:16:12] at that area there now windows are a
+[01:16:15] little bit different a window is not
+[01:16:18] created by a gap but it's created by a
+[01:16:20] large Candlestick so this large red
+[01:16:23] Candlestick here creates this this
+[01:16:25] window where now is the stock is coming
+[01:16:27] back up if we break over the high of
+[01:16:29] this level here we look to the left and
+[01:16:32] we look up and the next resistance is at
+[01:16:34] 1950 so we have room from 877 all the
+[01:16:37] way to 1950 with no resistance because
+[01:16:41] that candle kind of sweeped down broke
+[01:16:43] it all down and now as it comes back up
+[01:16:45] we've got a clean shot coming back up so
+[01:16:47] that is a window on the chart and
+[01:16:49] anything that happened prior to that
+[01:16:51] window is negated because this broke
+[01:16:54] through all of those levels so they've
+[01:16:56] already been broken so now this is a
+[01:16:58] chart where we've got a big window and I
+[01:17:01] would say there's a trigger at
+[01:17:03] 8.77 if we can break that price we've
+[01:17:06] got a clear shot up to 1950 now in order
+[01:17:08] for us to go from 877 all the way to
+[01:17:11] 1950 we would need some pretty serious
+[01:17:14] volume and a pretty strong catalyst so
+[01:17:16] it might not happen but it's always
+[01:17:18] better to have a chart that has no
+[01:17:20] resistance than to have one that has a
+[01:17:22] lot of resistance now let's look at
+[01:17:24] another example here we have a stock
+[01:17:27] that had a gap so it it closed here and
+[01:17:30] it opened way lower but on this on right
+[01:17:32] here it opened here and then it sold off
+[01:17:34] even more so it actually created a
+[01:17:36] window now it sold off more and then
+[01:17:38] suddenly has good news it opens right
+[01:17:40] here at about 249 on this day with high
+[01:17:43] volume and it squeezes up first to the
+[01:17:45] top of the window which was 381 and then
+[01:17:48] that began the beginning of a gap that
+[01:17:50] led us up to 655 and this filled the Gap
+[01:17:54] it broke the window and filled the Gap
+[01:17:56] that is picture perfect that's what you
+[01:17:58] like to see so on a nice daily chart
+[01:18:01] we're going to have a lot of room up to
+[01:18:03] the 200 moving average which is that
+[01:18:04] magenta line so this is fine this can
+[01:18:07] this is at 241 has room to 750 no
+[01:18:10] problem if this goes to 750 we'll be
+[01:18:12] thrilled so that's no problem but if the
+[01:18:14] 200 moving average was at three that
+[01:18:16] would be too close 50 cents away 10%
+[01:18:19] away 20% away that's too close that's
+[01:18:21] not going to work so we need that the
+[01:18:22] stock can make a big move now if there
+[01:18:24] was ever a Time the stock could break
+[01:18:26] the 200 it would be on a day that it has
+[01:18:29] news that something exciting is
+[01:18:31] happening so it's not impossible that
+[01:18:33] you could break the 200 and if you can
+[01:18:35] break it and hold above it then that's
+[01:18:38] game time for the next leg up and so
+[01:18:40] that is something that we definitely
+[01:18:41] will pay attention to um here's another
+[01:18:44] strong daily chart in this case we're
+[01:18:46] above the 200 so we're above that level
+[01:18:48] so we're all good it's not an issue
+[01:18:50] we're above the 200 it's all set now
+[01:18:53] number eight finding strong stocks to
+[01:18:56] trade so everything we've gone over so
+[01:18:58] far is about technical analysis
+[01:19:01] understanding the language of the
+[01:19:02] financial markets but in order to have
+[01:19:04] technical analysis work for you you've
+[01:19:07] got to make sure you're focusing on the
+[01:19:09] right stocks to trade so as I already
+[01:19:11] mentioned in the PD in the PDF resources
+[01:19:13] you can download my five uh my five
+[01:19:16] criteria for stock selection and I'm
+[01:19:18] going to break down these in summary for
+[01:19:20] you here today you should download the
+[01:19:22] PDF that way you can have it as a
+[01:19:23] resource and it also EXP expans upon
+[01:19:25] these criteria in short right now in
+[01:19:27] this market we need to have an imbalance
+[01:19:30] between supply and demand the imbalance
+[01:19:33] between supply and demand is what allows
+[01:19:34] a stock to make a big move so every
+[01:19:37] stock has a fixed level of Supply that
+[01:19:40] Supply is known as the float it's the
+[01:19:42] number of shares available to trade and
+[01:19:44] a float was created when a company did
+[01:19:46] its initial public offering so if we
+[01:19:49] jump onto the Whiteboard here let's do a
+[01:19:51] little scenario so a company decides to
+[01:19:54] do do an IPO and they decide to sell
+[01:19:57] let's just say 10 million shares and
+[01:20:01] they pric the IPO at $7 a share so that
+[01:20:04] means they raise 7 time 10 $70 million
+[01:20:09] now don't forget they're going to have
+[01:20:10] to pay the underwriter which is the bank
+[01:20:12] could be Goldman Sachs one of these big
+[01:20:14] Banks they're going to have to pay that
+[01:20:16] bank the fee for bringing their stock to
+[01:20:19] the public markets so they pay a fee but
+[01:20:22] the company gets to keep the rest of
+[01:20:23] that money that money goes onto the
+[01:20:26] balance sheet of the company and the
+[01:20:27] company now takes that money and
+[01:20:29] typically invests in growing the company
+[01:20:32] so something like McDonald's doing an
+[01:20:35] IPO they take that money and they go buy
+[01:20:37] more land so they can build more
+[01:20:39] McDonald's expand the company then the
+[01:20:41] company makes more money because they've
+[01:20:42] got more uh you know more more
+[01:20:44] restaurants right so that's the idea and
+[01:20:47] all the investors that bought into the
+[01:20:48] company get to share in the profit so
+[01:20:51] from this point forward there are 10
+[01:20:54] million million shares available to
+[01:20:56] trade now let's just say for the sake of
+[01:20:58] argument that this is a stock that ipoed
+[01:21:02] at $7 a share and as soon as it ipoed it
+[01:21:06] it kind of went sideways for about 90
+[01:21:09] days and then starts to sell off quickly
+[01:21:12] why would that happen insiders usually
+[01:21:15] have a 90-day lockout period where they
+[01:21:16] cannot sell shares so after the lockout
+[01:21:19] period is ended these people sell and I
+[01:21:21] mean think about people early investors
+[01:21:23] in Twitter or Facebook they are just at
+[01:21:25] a certain point happy to get out they're
+[01:21:28] in at such a great price they just sell
+[01:21:30] they just they just get out so you have
+[01:21:32] this period of selling off and this is
+[01:21:34] true with a lot of IPOs so it sells off
+[01:21:36] let's say it goes down to $3.50 a share
+[01:21:40] so now a couple things could happen here
+[01:21:43] if the company is not doing very well
+[01:21:45] they may say you know this is not good
+[01:21:48] um investors are not happy with our
+[01:21:51] price and we're because we're not
+[01:21:55] performing well we're in a position
+[01:21:57] where we need to raise more money so
+[01:22:00] what will happen is the company will
+[01:22:02] sell more shares now they don't want to
+[01:22:04] sell more shares at a lower price but
+[01:22:05] they have no choice so they sell another
+[01:22:07] 5 million shares and they sell them at
+[01:22:10] three $3 a share so now they raised 15
+[01:22:12] million so they'd already raised 70
+[01:22:14] million on the 10 million shares they
+[01:22:15] sold another what was it 5 million we
+[01:22:17] did they sold another 5 million at 3
+[01:22:19] million so or $3 so they raised another
+[01:22:22] 15 million so now they're at $85 million
+[01:22:24] total raise and they've sold 15 million
+[01:22:27] shares on the open market now people
+[01:22:29] here they're selling more shares and
+[01:22:32] they're like well this isn't good
+[01:22:34] because imagine if you bought all 10
+[01:22:36] million shares and then you find out
+[01:22:38] that the company has just sold another 5
+[01:22:39] million shares they've now diluted your
+[01:22:42] ownership you owned the whole Pi now you
+[01:22:45] own only 2third of the pi diluting the
+[01:22:48] value of a company is not good it's a
+[01:22:49] good decrease the price now the price
+[01:22:51] goes down let's say all the way to 50
+[01:22:53] cents a share this is catastrophic this
+[01:22:55] is not good at all now in fact the
+[01:22:57] company gets a letter from NASDAQ and
+[01:22:59] NASDAQ says hey we're not a penny stock
+[01:23:02] exchange you got to get your stock price
+[01:23:04] above a dollar and you've got 90 days to
+[01:23:06] do it or we're going to delist you and
+[01:23:08] move you to the OTC market with all the
+[01:23:10] other penny stocks now the company files
+[01:23:12] an appeal they get an extra 90 days and
+[01:23:14] so over the period of several months the
+[01:23:16] company realizes shoot we're in a real
+[01:23:19] situation here our stock is below 50
+[01:23:21] cents a share or below a dollar a share
+[01:23:23] and we need to turn things around but
+[01:23:24] we're doing everything we can and we're
+[01:23:26] not making more money what do we do so
+[01:23:28] there's a mechanism called a stock split
+[01:23:31] now you may have heard of this before
+[01:23:32] Apple has historically done stock splits
+[01:23:35] so as the price has gone up it got too
+[01:23:37] expensive at 1. $700 a share so then
+[01:23:40] Apple did a 7 to1 stock split the next
+[01:23:42] day the stock price opened at $100 a
+[01:23:44] share and if you owned 1,000 shares here
+[01:23:47] at 700 the next day you logged in and
+[01:23:49] you own 7,000 shares at 100 so the
+[01:23:52] market cap doesn't change but theice
+[01:23:54] price does and the float does so what's
+[01:23:57] very common is right now we've got a 15
+[01:24:02] million share float stock it's at 50
+[01:24:04] cents a share they do a 10 to One
+[01:24:06] reverse split the next day the stock is
+[01:24:09] at $5 a share so now all of a sudden
+[01:24:12] it's at $5 a share now the chart still
+[01:24:14] looks the same but it now looks like it
+[01:24:16] ipoed at 70 so all of a sudden
+[01:24:18] everything kind of backs up and the
+[01:24:20] float went down by the ratio of the
+[01:24:22] split so if you're holding in a th000
+[01:24:25] shares of this uh or sorry if you were
+[01:24:27] holding 10,000 shares of this at 50 the
+[01:24:30] next day you log in it's at $5 a share
+[01:24:32] you're like oh my gosh I'm up you know a
+[01:24:34] ton but now you realize you're only
+[01:24:36] holding a thousand shares so the float
+[01:24:38] has just gone from 15 million shares
+[01:24:40] divid by 10 1.5 million shares and then
+[01:24:45] the stock is at $5 now what often
+[01:24:48] happens is the stock will be at $5 for a
+[01:24:50] period of time and the company will put
+[01:24:52] out some good news so it goes from
+[01:24:55] here and it actually spikes up maybe to
+[01:24:56] seven or eight or n gives maybe even to
+[01:24:59] 10 gives you a nice squeeze but then
+[01:25:00] eventually it kind of comes back down
+[01:25:02] makes its way back down to 50 cents and
+[01:25:05] they have to do another secondary
+[01:25:07] another reverse split so now they do
+[01:25:09] another 10 to One reverse split and boom
+[01:25:12] the stock is back to a $5 stock so it's
+[01:25:15] back to $5 and the float is now gone
+[01:25:17] from uh 1.5 million down to like 150,000
+[01:25:21] shares just for example uh and then they
+[01:25:24] do another offering and they sell more
+[01:25:25] shares so this is the cycle that we see
+[01:25:28] a lot of companies uh go
+[01:25:31] through it sounds kind of depressing
+[01:25:34] because essentially they make it so the
+[01:25:35] stock can never reach zero it just keeps
+[01:25:37] going lower but what is important here
+[01:25:40] is that these stocks can become uh a
+[01:25:43] target for short Sellers as Gamestop did
+[01:25:46] and when short sellers get heavy short
+[01:25:49] these types of stocks and all of a
+[01:25:50] sudden the company does put out good
+[01:25:52] news these stocks can squeeze up 100 200
+[01:25:56] 300% or more in a matter of hours as
+[01:25:59] short sellers are forced to cover in the
+[01:26:01] case of GameStop that resulted in some
+[01:26:03] short sellers losing billions of dollars
+[01:26:06] and every single day I'm trading small
+[01:26:09] cap stocks they're squeezing up on
+[01:26:11] breaking news and these are typically
+[01:26:12] stocks have been beating up for a long
+[01:26:14] time and so what's great about these
+[01:26:16] stocks is that they're it's kind of like
+[01:26:18] buying something off the low I mean
+[01:26:20] they're so low that I'm buying off these
+[01:26:22] lows and then we catch this nice squeeze
+[01:26:25] back up so a critical component to these
+[01:26:28] five criteria is that the level of
+[01:26:31] Supply is generally less than 10 million
+[01:26:34] shares lower is better so that's the
+[01:26:37] float that's the supply we need that
+[01:26:40] part of the equation for an imbalance
+[01:26:41] between supply and demand but where's
+[01:26:43] the demand come in the demand is that
+[01:26:46] the stock is already up 30% on the day
+[01:26:48] at least why is it up 30% on the day
+[01:26:51] it's because there's news breaking news
+[01:26:54] now if there was news but the stock
+[01:26:55] wasn't moving it wouldn't be worth
+[01:26:57] trading the stock has to be up if there
+[01:26:59] was news and the stock is down it's not
+[01:27:01] worth trading either so first the stock
+[01:27:03] has to be up 30% but what happens if
+[01:27:05] we're thinking about the chicken or the
+[01:27:06] egg it doesn't go up 30% and then news
+[01:27:08] comes out the first thing that happens
+[01:27:10] is there's a news event so if we
+[01:27:11] actually want to really get serious
+[01:27:13] about this let's back this up for a
+[01:27:14] second so let's just let's just put this
+[01:27:16] in order so the first thing that happens
+[01:27:18] is we get the breaking news event and if
+[01:27:21] the price is between 3 and 20 then
+[01:27:24] what's most likely to happen is Traders
+[01:27:26] like the news and all of a sudden the
+[01:27:29] price starts to squeeze up as the price
+[01:27:31] squeezes up 230% it experiences five
+[01:27:34] times relative volume which is much
+[01:27:36] higher volume than is average for that
+[01:27:37] stock on high relative volume that that
+[01:27:41] essentially attracts even more Traders
+[01:27:44] and this is where you get these really
+[01:27:46] epic moves so if you look at crr today
+[01:27:49] the stock that I made the most on this
+[01:27:52] had a float of 4.8 million shares the
+[01:27:55] relative volume was 157 times higher
+[01:27:58] than normal relative volume is a
+[01:28:00] measurement of the volume today relative
+[01:28:03] to what's normal or average for that
+[01:28:05] stock so when a stock trades on five
+[01:28:07] times higher volume why would a stock
+[01:28:10] trade on five times higher volume it's
+[01:28:11] because there's breaking news there's a
+[01:28:12] catalyst there's something happening so
+[01:28:15] that's critical and in fact this traded
+[01:28:18] nearly 300 million shares of volume
+[01:28:21] that's insane it gapped up 94 4% so that
+[01:28:25] was the Gap from the previous day's
+[01:28:26] close and it peaked at gosh it must have
+[01:28:29] been 350% or something like that it
+[01:28:31] closed right now at 144% and it had
+[01:28:35] breaking news that was driving this move
+[01:28:38] if it weren't for the breaking news we
+[01:28:39] wouldn't have had this squeeze so now
+[01:28:41] your job is to find stocks that meet
+[01:28:43] these five criteria in real time it's
+[01:28:47] not enough to see it after the fact
+[01:28:48] you've got to find it in real time and
+[01:28:50] that's where scanners come into play so
+[01:28:53] I have a development team team that I
+[01:28:54] hired in 2017 to build out these
+[01:28:57] scanners that I still use and every
+[01:28:58] single day we've been building them out
+[01:29:00] and Contin to expand them and they get
+[01:29:01] better and better so these scanners are
+[01:29:04] actually searching the market in real
+[01:29:06] time for stocks that meet my criteria
+[01:29:08] for stock selection it filters it and in
+[01:29:10] this scan we're just looking at the top
+[01:29:13] leading percentage gainers in the market
+[01:29:15] this is sort of the first filter where
+[01:29:17] we just look big picture what is moving
+[01:29:20] in the market today generally I like to
+[01:29:22] be trading the stock that is the number
+[01:29:24] one leading gainer in the entire Market
+[01:29:27] because that's the stock that's the most
+[01:29:28] obvious so that's what I'm always paying
+[01:29:30] close attention to so these are the
+[01:29:32] scanners that you see in the background
+[01:29:33] right here and these these scanners by
+[01:29:36] the way I used all of my his my own
+[01:29:40] personal historical trading data to give
+[01:29:43] me the insight about the type of stocks
+[01:29:45] that I should be looking for so if I
+[01:29:46] pull up my data right here when we talk
+[01:29:49] about the five criteria we talk about
+[01:29:52] price and we'll just search for for a
+[01:29:54] larger uh set of data so this is $12.8
+[01:29:57] million of profit right here that we're
+[01:29:59] looking at and this is my performance by
+[01:30:01] price so I know that I do the best on
+[01:30:04] stocks between 2 and 20 I just know that
+[01:30:07] now generally 5 and 10 is the place I
+[01:30:09] make the most but this is sort of my
+[01:30:11] sweet spot right so now I know that now
+[01:30:14] what else what else can I learn if I
+[01:30:15] look at the volume of the stocks I trade
+[01:30:17] I could scroll down on this tab and then
+[01:30:19] I can sort by how much relative volume
+[01:30:22] these stocks have so I do better on
+[01:30:24] stocks with high volume I do better on
+[01:30:25] stocks that have um 500 times relative
+[01:30:28] volume which is five times higher than
+[01:30:30] average so it's not just opinion that
+[01:30:33] created these five criteria it's
+[01:30:34] actually uh derived from my historical
+[01:30:38] trading data so I I think if that's
+[01:30:40] important to understand because to me at
+[01:30:42] least to me it adds a lot of validity to
+[01:30:45] what these scanners are looking for all
+[01:30:47] right so now so your job each day is to
+[01:30:50] find these types of stocks in real time
+[01:30:53] and then of course you've got to execute
+[01:30:55] on your trading plan so here's what I'm
+[01:30:57] going to do I'm going to give you as
+[01:30:59] part of the links in the resources a
+[01:31:01] link to download a simple trading plan
+[01:31:04] this trading plan and my small account
+[01:31:07] worksheet is going to walk you through
+[01:31:09] not only the type of stocks I like to
+[01:31:11] trade but the strategy that I use of
+[01:31:14] where to buy where to sell and it's also
+[01:31:16] going to dictate the time a day the
+[01:31:18] share size and the strategy of how to
+[01:31:20] scale in and how to start trading my
+[01:31:23] goal for you is that you're able to
+[01:31:25] start practicing following this trading
+[01:31:27] plan in a safe simulated environment so
+[01:31:30] I'm going to give you the rules all you
+[01:31:32] have to do is follow the rules but I'm
+[01:31:34] going to tell you it takes time to build
+[01:31:37] educated intuition that's what requires
+[01:31:39] you to come to the table and and spend
+[01:31:42] the time gaining that experience so you
+[01:31:44] could do that in a simulated environment
+[01:31:45] you can do it trading real money with
+[01:31:47] one share if you're with a commission
+[01:31:48] free broker like thinker swim or Weeble
+[01:31:50] if you're a member at Warrior trading of
+[01:31:51] course you can use our simulator that we
+[01:31:53] make available for warrior Pro members
+[01:31:55] but however you want to do it I want you
+[01:31:56] to practice following this plan in a
+[01:31:59] safe environment the goal is that during
+[01:32:02] phase one of following this plan that
+[01:32:03] you're going to download phase one looks
+[01:32:06] like this so phase one is about gaining
+[01:32:09] a lot of experience so when you're
+[01:32:11] gaining a lot of experience you will
+[01:32:13] lose money and that is totally okay
+[01:32:15] because this is just about trading as
+[01:32:17] much as possible all of the stocks are
+[01:32:19] on the top 10 list of the biggest
+[01:32:21] gainers you want to pull up the level
+[01:32:23] two you want to be actively trading them
+[01:32:24] you just want to get a feel for how
+[01:32:26] these stocks are moving and then what
+[01:32:28] you're going to notice is through this
+[01:32:29] phase you're going to realize oh now I'm
+[01:32:31] starting to get the hang of like this is
+[01:32:33] how I make money so you're going to
+[01:32:34] start catching a couple winners phase
+[01:32:36] two is when you implement the rules of
+[01:32:38] the trading plan and actually make a
+[01:32:40] concerted effort to try to make money on
+[01:32:44] every single trade you take now I I just
+[01:32:46] did an interview it was actually earlier
+[01:32:47] today with a student at Warrior trading
+[01:32:49] his name is Justin he's our penny stock
+[01:32:51] uh veteran penny stock Trader in the
+[01:32:53] community Comm many of you guys know him
+[01:32:54] as Jor so Justin is uh he's a Trader
+[01:32:58] from Minnesota and his focus is trading
+[01:33:00] penny stocks he started with a daily
+[01:33:02] goal of $5 a day back in 2022 this last
+[01:33:05] year he had his best year he's ever had
+[01:33:07] over $200,000 in trading profits he
+[01:33:10] scaled his way up so he started with
+[01:33:13] this simple goal of following the plan
+[01:33:16] $5 per day all right so he was
+[01:33:19] consistently making money slow and
+[01:33:21] steady and then what did he do phase so
+[01:33:23] this is all this is all Sim and this is
+[01:33:26] Sim until you've proven you can have 10
+[01:33:29] days where you're maintaining the
+[01:33:30] metrics that I'll lay out for you that
+[01:33:32] verify that you're ready to go live so
+[01:33:34] then phase three is continuing with real
+[01:33:37] money with this $5 daily goal really
+[01:33:39] small size phase four is now scaling up
+[01:33:43] your share size so going from $5 a day
+[01:33:46] daily goal to 10 to 20 to 40 to 80 to
+[01:33:50] 160 next thing you know you've got $300
+[01:33:52] $400 daily goal you got $1,000 daily
+[01:33:55] goal $1,000 a day that's $250,000 a year
+[01:33:58] quar million dollar so Justin just
+[01:34:00] earned his $250,000 badge and he did it
+[01:34:03] as a warrior Pro member following this
+[01:34:05] trading plan now I'll tell you I'm going
+[01:34:07] to put it on the table I'm going to give
+[01:34:08] you the strategy I'm going give you the
+[01:34:09] set the rules but it is on you to have
+[01:34:12] the discipline to follow the rules
+[01:34:13] because here are the two leading causes
+[01:34:15] of failure and it's why I'm always going
+[01:34:16] to tell you the trading is risky my
+[01:34:18] results aren't typical and there's no
+[01:34:19] guarantee you'll find success the number
+[01:34:21] one leading cause of failure is Traders
+[01:34:23] that come in and don't even have a
+[01:34:25] strategy they're shooting from the hip
+[01:34:26] they're doing a little of this a little
+[01:34:27] of that and they lose money that was me
+[01:34:29] when I was got when I was getting
+[01:34:30] started may maybe you as well so I
+[01:34:32] understand that that's not going to be
+[01:34:34] you after today's episode because now
+[01:34:37] you learn you've learned at least the
+[01:34:38] outline of technical analysis and you
+[01:34:40] have the resources available to learn
+[01:34:42] the outline of a strategy that I'm
+[01:34:44] trading with real money every single day
+[01:34:46] now the second group of traders who fail
+[01:34:49] they've got the strategy but they still
+[01:34:51] fail so why is this and this is because
+[01:34:54] they lack the discipline to follow the
+[01:34:56] rules of the strategy this one's on you
+[01:35:00] all right so we're going to get in real
+[01:35:01] tight I'm going to give you the rules
+[01:35:03] but you have to follow them that's it
+[01:35:05] it's as simple as that so can you commit
+[01:35:07] to me that you will be disciplined in
+[01:35:09] following these rules now maybe you're
+[01:35:11] going to say yes but what I'm going to
+[01:35:12] do is I'm going to hold you to it and
+[01:35:14] I'm going to tell you that every single
+[01:35:15] day when you're trading I want you to
+[01:35:17] look at the rules that I've laid out
+[01:35:18] these are your guard rails now listen
+[01:35:21] you're not going to win the torto France
+[01:35:22] with guard rails with training wheels
+[01:35:24] but you need them as you're getting
+[01:35:26] started so you can pre prevent having a
+[01:35:28] big blowup mistake that ends your career
+[01:35:32] because you know what happens to most
+[01:35:33] beginner Traders I'm going to be real
+[01:35:34] with you I'm going to break it down
+[01:35:35] right now this is what happens to most
+[01:35:37] beginner Traders when they're getting
+[01:35:39] started they fund their account real
+[01:35:41] money I need a new new pen they fund
+[01:35:44] their account with real money and they
+[01:35:46] take a loss they lose money doesn't
+[01:35:48] matter if it's 10,000 if it's 50,000 a
+[01:35:50] th000 they take a loss and what does
+[01:35:52] that trigger immed immediately it
+[01:35:54] triggers emotion sad face the tears are
+[01:35:58] streaming down I'm not too much of a man
+[01:36:01] despite my obvious physical advantages
+[01:36:04] and physique to admit that trading has
+[01:36:07] led me to shed a couple of tears from my
+[01:36:10] eye from this area right here that area
+[01:36:12] and it wasn't just dust it can be very
+[01:36:14] frustrating you take a big loss and it
+[01:36:17] can be disheartening and that feeling is
+[01:36:20] so bad that it'll lead you to do
+[01:36:23] anything thing to feel better so if
+[01:36:25] you're down $10,000 what's the best way
+[01:36:27] to feel better is to make 10 grand right
+[01:36:30] now make that loss go away that's a
+[01:36:32] problem because that's going to result
+[01:36:35] in Emotion seeking Behavior so now
+[01:36:37] you're emotion seeking you're seeking to
+[01:36:40] feel better and the action you take is
+[01:36:43] reckless trading so now you're trading
+[01:36:45] basically we're going to draw a little
+[01:36:46] football you're doing a Hail Mary pass
+[01:36:49] so you're swinging for the fences you
+[01:36:51] with with poor accuracy emotionally
+[01:36:53] fueled and what's that going to what's
+[01:36:54] that going to do let's be real it's
+[01:36:56] going to result in more losses which
+[01:36:58] makes you more emotionally impulsive
+[01:37:00] which leads to more trading and uhoh you
+[01:37:02] see where we're going with this this is
+[01:37:03] a downward spiral this is a fate that
+[01:37:05] many Traders before you have experienced
+[01:37:08] I want you to learn from those mistakes
+[01:37:11] now the the the failure here is that a
+[01:37:14] lot of Traders are uneducated they come
+[01:37:15] into the market with real money they
+[01:37:17] lose money they got emotionally fueled
+[01:37:18] they don't even realize how emotional
+[01:37:20] trading can be and then they're gone
+[01:37:22] before they hardly even got started in
+[01:37:23] fact they might have actually had the
+[01:37:25] chance to become successful Traders had
+[01:37:27] they slowed down and laid a solid
+[01:37:29] foundation first so this is how we lay a
+[01:37:31] solid
+[01:37:32] foundation even if this has already
+[01:37:34] happened to you we can break this cycle
+[01:37:36] right here and I'm going to show you how
+[01:37:38] so whether this has happened to you or
+[01:37:39] not this is how we start a positive
+[01:37:41] feedback loop we start by focusing on a
+[01:37:44] plus quality stocks these are stocks
+[01:37:46] that meet all five criteria 1 2 3 4 five
+[01:37:50] of stock selection we only trade those
+[01:37:52] stocks by only trading those stocks and
+[01:37:54] only doing it in a simulator if on your
+[01:37:57] first trades you lose money sadness
+[01:38:00] minimal tear not there because you
+[01:38:03] didn't lose real money so you might feel
+[01:38:05] a little like man this is a little
+[01:38:06] harder than I thought but it's not a big
+[01:38:09] emotional experience that's important
+[01:38:11] because now you can continue to focus on
+[01:38:12] trading a quality setups you continue to
+[01:38:15] gain experience and then you realize oh
+[01:38:17] actually I can have some winners I just
+[01:38:19] have to figure out a little bit better
+[01:38:21] how to you know get in and get out so
+[01:38:22] now you start building some track record
+[01:38:24] and this is where you're now building in
+[01:38:27] the simulator a track record of
+[01:38:30] consistency so now you're like okay I'm
+[01:38:32] starting to build some momentum when you
+[01:38:35] build
+[01:38:36] momentum this increases your
+[01:38:38] self-confidence so now you're feeling
+[01:38:40] better about yourself and you feel
+[01:38:42] confident trading more and now you're
+[01:38:45] you you have this track record you're
+[01:38:46] like okay I'm ready to fund my account
+[01:38:47] with real money so now you fund the
+[01:38:49] account with real money you continue
+[01:38:50] doing exactly what you're doing you have
+[01:38:52] even if it's not a great start you have
+[01:38:54] a decent start because what you know is
+[01:38:56] that you've got this track record of
+[01:38:57] consistency you've already proven that
+[01:38:59] you know what you're doing so even if
+[01:39:01] you have a little setback you go back to
+[01:39:03] this is your source of truth I know what
+[01:39:04] I'm doing and I can rally back up so
+[01:39:07] this is how we create a positive
+[01:39:08] feedback loop the positive feedback loop
+[01:39:10] Begins by focusing on high quality
+[01:39:13] setups right there I don't want to see
+[01:39:16] you on this negative feedback loop that
+[01:39:18] results in blowups I want to see you on
+[01:39:21] the positive feedback loop that means
+[01:39:23] you understand how to manage your risk
+[01:39:25] how to never take trades where you don't
+[01:39:27] have the potential to double whatever
+[01:39:28] you're risking you risk a th000 to make
+[01:39:30] 2,000 you risk $10 to make $20 the ratio
+[01:39:33] is the same it's always 2 to1 because
+[01:39:36] here's the deal if you can trade with a
+[01:39:38] 2:1 profit to loss ratio if you're one:
+[01:39:41] one right here your winners and losers
+[01:39:43] are equal 50% is your break even if
+[01:39:45] you're 2 to one your break even is only
+[01:39:47] 30 uh 33% 33% right there if you're 1 to
+[01:39:51] two where your losers are twice the size
+[01:39:53] of your winners you need to be right 66%
+[01:39:56] of the time in order just to break even
+[01:39:58] and that's not sustainable for a
+[01:39:59] beginner Trader so you can set the bar
+[01:40:01] Lower and make it easier for you to be
+[01:40:03] successful by focusing on the strongest
+[01:40:05] stocks and only trading when you have
+[01:40:07] the potential to double whatever you're
+[01:40:10] risking that's how you create the
+[01:40:12] positive feedback loop in your trading
+[01:40:15] The Three core components of
+[01:40:16] profitability are accuracy your profit
+[01:40:18] to loss ratio which your average winners
+[01:40:21] compared to your average losers and then
+[01:40:23] your consistency so the first element in
+[01:40:26] risk management is trading a quality
+[01:40:29] setups and that's how you create a
+[01:40:31] positive feedback loop now I'll tell you
+[01:40:33] guys there is a lot to learn when it
+[01:40:35] comes to trading you have now learned
+[01:40:37] and gone through the Ultimate Guide to
+[01:40:39] technical analysis but now you got to
+[01:40:42] learn how to read level two data and how
+[01:40:44] to execute your trades so if you want to
+[01:40:46] continue learning I'm going to put some
+[01:40:47] links in the description you can do twoe
+[01:40:49] trial over at Warrior trading watch over
+[01:40:51] my shoulder for two weeks you can use
+[01:40:52] our software our scanners our charts our
+[01:40:55] news feed the chat room and you begin to
+[01:40:57] go through some of the more advanced
+[01:40:58] classes that are part of my warrior Pro
+[01:41:00] curriculum so if you're ready to take
+[01:41:02] the leap we'd love to have you guys join
+[01:41:03] and hey if you want to keep learning
+[01:41:04] here on YouTube please check out more
+[01:41:06] episodes I'll put some links to some
+[01:41:07] right here that I think you'll enjoy and
+[01:41:09] I look forward to seeing you for the
+[01:41:10] next one real soon if you've enjoyed
+[01:41:12] this deep dive into the world of
+[01:41:14] technical analysis please hit that
+[01:41:16] thumbs up and I hope you subscribe to
+[01:41:17] the channel for more episodes about
+[01:41:19] trading strategy just like this thank
+[01:41:21] you guys as always for tuning in and
+[01:41:22] reminder trading is risky my results
+[01:41:24] aren't typical so please manage your
+[01:41:26] risk take it slow and I'll see you guys
+[01:41:27] back here for the next upload real soon

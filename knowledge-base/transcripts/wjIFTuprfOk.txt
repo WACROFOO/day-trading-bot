@@ -1,0 +1,1044 @@
+# How to Day Trade using Trade Station (Platform Demo & Honest Review)
+# https://www.youtube.com/watch?v=wjIFTuprfOk
+# duration_sec: 2463
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to teach
+[00:00:02] you how to day trade using trade station
+[00:00:05] this episode will be a platform demo
+[00:00:06] where I'm going to walk you through how
+[00:00:08] I was able to create my layout and how I
+[00:00:10] adjusted the visual appearance of
+[00:00:11] different windows and even changed some
+[00:00:13] of the system settings in order to
+[00:00:15] optimize trade station for my day
+[00:00:17] trading strategy so as you watch me go
+[00:00:19] through this you're going to learn how
+[00:00:20] to use the software and you're going to
+[00:00:22] get a sense of whether or not trade
+[00:00:24] station would be a good fit for your
+[00:00:26] trading at the end of this episode I'm
+[00:00:27] going to give trade station a raw score
+[00:00:29] comparing it with 11 other Brokers that
+[00:00:31] active Traders like myself have to
+[00:00:33] choose from and I'm going to share with
+[00:00:35] you whether or not I would use trade
+[00:00:36] station for a small account challenge or
+[00:00:38] if I would consider using them as my
+[00:00:40] primary account for day-to-day trading
+[00:00:42] my name is Ross Cameron I'm a full-time
+[00:00:44] Trader and I funded my first account
+[00:00:45] back in 2001 more than 20 years ago in
+[00:00:48] 2017 I funded a small account challenge
+[00:00:51] with less than $600 and I have since
+[00:00:53] grown that account into more than $10
+[00:00:55] million of verified and independently
+[00:00:57] audited trading profits I share that
+[00:00:59] with you not because I want you to
+[00:01:00] assume my results are typical but
+[00:01:02] because I want you to understand that
+[00:01:03] I'm in unique vantage point to be able
+[00:01:05] to tell you after more than two decades
+[00:01:07] of trading the market the type of
+[00:01:09] software and the type of features that
+[00:01:10] you really need in order to perform well
+[00:01:13] CU here's the deal trading is difficult
+[00:01:15] why make it harder on yourself by using
+[00:01:17] poor performing low quality or
+[00:01:20] unreliable software right it doesn't
+[00:01:22] make sense it's not working so let's go
+[00:01:24] ahead and jump into this episode when we
+[00:01:26] talk about trade station I want to start
+[00:01:28] by saying that this is a platform that
+[00:01:30] is tried and true they've been around
+[00:01:32] for a long time in fact uh I think it
+[00:01:35] was in 1991 that they unveiled their
+[00:01:37] electronic trading software and so they
+[00:01:39] were out there during the dot bubble and
+[00:01:42] they're not a broker that's just for
+[00:01:44] your casual retail Trader placing one or
+[00:01:47] two trades maybe a month they've really
+[00:01:49] designed themselves to be for active
+[00:01:52] Traders in the market and institutional
+[00:01:55] Traders now we are going to do a broker
+[00:01:57] comparison on a number of different
+[00:01:58] points that I think are critical to look
+[00:02:00] at but first when you go to
+[00:02:02] tradestation.com you have a choice of
+[00:02:04] which platform you can use and what
+[00:02:07] we're going to be analyzing here and
+[00:02:08] doing the platform demo on is their
+[00:02:10] desktop trading software so that's what
+[00:02:13] I want to say at the very beginning they
+[00:02:14] do have a web platform they also have a
+[00:02:16] mobile platform and I could do separate
+[00:02:18] episodes for those but this is really
+[00:02:20] focusing on their desktop trading
+[00:02:23] software so one of the first things that
+[00:02:25] you'll do once you open an account with
+[00:02:27] trade station is you can of course
+[00:02:28] download their desktop Trading software
+[00:02:30] which is very easy to do from their
+[00:02:31] website and then when you log in you can
+[00:02:34] choose to log in either to live trading
+[00:02:37] or simulated trading which I love so
+[00:02:40] trade station makes it super easy to
+[00:02:42] practice in a simulator which is what I
+[00:02:44] always encourage beginner traders to do
+[00:02:46] because if you can't make money in a Sim
+[00:02:47] you've got no business putting real
+[00:02:49] money on the line so trade station wants
+[00:02:50] to encourage you to practice and they
+[00:02:52] gave you that option to log in the
+[00:02:54] simulator right away now when I first
+[00:02:56] got logged in this is my first kind of
+[00:02:58] Hiccup is uh when I tried to get Market
+[00:03:01] data it said data request failed account
+[00:03:03] not enabled for this data now when I've
+[00:03:06] seen a message like this uh at other
+[00:03:08] broker dealers like interactive brokers
+[00:03:10] or Weeble usually they have a link right
+[00:03:12] here that says click here to enable
+[00:03:14] Market data that would have saved me a
+[00:03:18] lot of time because what ended up
+[00:03:19] happening is I had to go onto their
+[00:03:21] website and I had to just try to figure
+[00:03:23] out where to find the place to add level
+[00:03:27] two Market data it shouldn't be this
+[00:03:29] complicated at but it it really took
+[00:03:31] some time so finally I was able to get
+[00:03:34] connected to Market data get the level
+[00:03:36] two data turned on and you do pay for it
+[00:03:38] it's a monthly charge was maybe $6 $10
+[00:03:41] it wasn't too expensive in fact if you
+[00:03:43] go over to your profile on your
+[00:03:45] dashboard you can go to profile here you
+[00:03:48] click on that you go down to manage
+[00:03:50] account and this is where you manage
+[00:03:52] software and data subscription so if you
+[00:03:53] click on this it'll open this window
+[00:03:56] here where you can see your fees so yeah
+[00:03:58] $11 a month so it's it's not that
+[00:04:00] expensive but anyway so that that was
+[00:04:03] needlessly complicated for me uh maybe
+[00:04:05] it was just not intuitive to me but
+[00:04:07] anyways um that's something that
+[00:04:09] probably could be smoothed out a little
+[00:04:11] bit just by adding that little button
+[00:04:13] right under the data showing you click
+[00:04:15] here to add your data all right so now
+[00:04:17] the moment you've all been waiting for
+[00:04:19] this is trade station all right now this
+[00:04:23] looks pretty good I like the look of it
+[00:04:26] just to compare it quickly with a couple
+[00:04:28] other platforms that I use
+[00:04:30] um this right here is Light Speed
+[00:04:32] trading this is the broker that I use on
+[00:04:34] a day-to-day basis this is the one for
+[00:04:36] me that I would say sets the standard of
+[00:04:39] what I think is right now the best
+[00:04:40] software for active trading and you'll
+[00:04:42] see that when we look at my um uh do the
+[00:04:45] broker comparison here and I'll tell you
+[00:04:48] right now look guys I don't have any
+[00:04:49] affiliate relationship with trade
+[00:04:51] station with light speed with any broker
+[00:04:53] so what I'm sharing with you is just my
+[00:04:55] honest opinion it's not colored by the
+[00:04:57] fact that I'll get paid if you sign up
+[00:04:58] you know one place or another so it's
+[00:05:00] just you know what I think is the best
+[00:05:02] but um anyway so this is how I have my
+[00:05:05] light speed account set up and in the
+[00:05:08] top corner on the left I've got my
+[00:05:10] positions window I've got active orders
+[00:05:12] here so if I place an order to buy this
+[00:05:14] down here the active order would sit
+[00:05:16] there I'll cancel it and then these are
+[00:05:19] my canceled and executed orders right
+[00:05:21] here and then this is a level two window
+[00:05:23] level two window and an order entry
+[00:05:25] window associated with each level two
+[00:05:27] window and then this is a big time in
+[00:05:30] sales that is just linked to whatever
+[00:05:31] stock is in Focus now you'll notice when
+[00:05:34] I'm using light speed I have no charts
+[00:05:36] here it doesn't mean I trade without
+[00:05:38] charts of course I use charts it's just
+[00:05:40] that
+[00:05:42] historically so I learned to trade
+[00:05:44] during a Time by the way just as a
+[00:05:45] tangent when broker dealers like um Amit
+[00:05:48] trade or E Trade charge $10 per trade
+[00:05:52] and although some of them had developed
+[00:05:53] a really nice trading software with
+[00:05:55] decent charts they were so expensive
+[00:05:57] that if you were day trading you took 10
+[00:05:59] trades in a day 10 buy orders 10 sell
+[00:06:02] orders you could have $200 in fees and
+[00:06:04] commissions I say $50,000 a year to your
+[00:06:07] broker that's crazy so in those days
+[00:06:10] there were a lot of discount brokers
+[00:06:12] that opened that catered to more active
+[00:06:14] Traders and trade station was one of the
+[00:06:16] less expensive ones so those Brokers
+[00:06:18] tend to not have as sophisticated
+[00:06:22] software they don't spend millions and
+[00:06:24] millions of dollars building like think
+[00:06:27] or Swim type of software and so what
+[00:06:29] most of us ended up doing was using a
+[00:06:32] third-party platform for charting and
+[00:06:34] for stock scanning and so I actually
+[00:06:37] built this software here day trade Dash
+[00:06:39] which is specifically for scanning for
+[00:06:41] charting and then this has our chat
+[00:06:43] rooms my broadcast and everything at
+[00:06:45] Warrior trading so I continue to use
+[00:06:47] this for charting and scanning and I
+[00:06:49] don't rely on my broker for that stuff
+[00:06:53] so this is what my platform looks like
+[00:06:55] here at light speed now I'll minimize
+[00:06:56] that this is what my platform looks like
+[00:06:59] with Das Trader this is a dash Trader
+[00:07:01] platform connected to Charles Schwab so
+[00:07:04] that's my Dash Trader very similar level
+[00:07:06] two window time in sales order entry
+[00:07:08] window and then positions in the top
+[00:07:10] Corner we get rid of that we'll pop up
+[00:07:12] interactive brokers here so that's my
+[00:07:14] interactive brokers account so they're
+[00:07:16] all very similar and for not for for
+[00:07:18] basically all of them I don't use their
+[00:07:21] charts so now let's pull and just for
+[00:07:24] the sake of it we'll throw Fidelity up
+[00:07:25] there as well so that's the Fidelity
+[00:07:27] account very similar all right so I
+[00:07:30] usually say that if you know how to use
+[00:07:33] one broker you can switch to another
+[00:07:34] it's like driving a Honda or a Toyota I
+[00:07:37] mean for the most part if you could
+[00:07:39] drive one you could drive the other yeah
+[00:07:40] there's little kind of like little
+[00:07:42] nuances they're different but for the
+[00:07:44] most part they're the same now uh when
+[00:07:46] it comes to broker dealers I sort of
+[00:07:48] rank broker dealers or put them in two
+[00:07:51] groups you've got commission free
+[00:07:53] Brokers and then you have Brokers that
+[00:07:55] charge a commission now in this day and
+[00:07:57] age you'd be like why pay a commission
+[00:08:00] when you don't have to they have free
+[00:08:01] everyone should just use free but
+[00:08:04] remember there is a difference here the
+[00:08:06] reason some are free is because they
+[00:08:09] sell your order flow to institutional
+[00:08:12] traders who essentially scalp your trade
+[00:08:16] for a fraction of a penny and you get a
+[00:08:19] little bit of that price Improvement the
+[00:08:22] broker gets paid a little bit of that as
+[00:08:24] a payment for the order flow and then
+[00:08:26] the institutional Trader keeps some as a
+[00:08:28] profit so the result is that when orders
+[00:08:32] go through payment for order flow there
+[00:08:33] can be a conflict of interest that the
+[00:08:36] broker is incentivized just to make as
+[00:08:38] much money as possible and not give you
+[00:08:41] the best order execution in terms of
+[00:08:43] speed or price and so as part of payment
+[00:08:47] for order flow all Brokers that engage
+[00:08:49] in it are required to file disclosures
+[00:08:52] where they State order execution and
+[00:08:55] price Improvement and so here in Q3 of
+[00:08:58] 2024
+[00:08:59] um trade station says $10.6 million of
+[00:09:03] price Improvement that's great and they
+[00:09:05] say their average uh order execution
+[00:09:07] speed is 044 seconds which is really
+[00:09:11] fast so if we pull up this broker
+[00:09:13] comparison sheet right here we're going
+[00:09:15] to just look um first at um let's see
+[00:09:19] we'll look at execution speed uh where
+[00:09:21] was that oh execution speed is right
+[00:09:22] here on this column so light speed and
+[00:09:26] other direct access Brokers are fast and
+[00:09:29] these are are them uh but trade station
+[00:09:32] right here at
+[00:09:33] 044 is not slow that's pretty darn quick
+[00:09:37] in terms of commission free Brokers
+[00:09:39] they're only beat by Fidelity and
+[00:09:42] although Fidelity is faster their actual
+[00:09:44] trading software is so poor the only one
+[00:09:47] that scored worse was Robin Hood Legend
+[00:09:49] So trade station is very fast and so
+[00:09:52] let's just take a look let's just test
+[00:09:54] an order so here we've got trade station
+[00:09:57] and I'm just going to do a test order
+[00:09:58] here to buy Ford and I'm this is where
+[00:10:00] it's going to show up so I'm going to
+[00:10:01] press the buy button right now instant I
+[00:10:05] mean that was so fast I'm in 100 shares
+[00:10:08] I'm going to press the sell button right
+[00:10:10] now gone I mean you can see how fast
+[00:10:13] that goes in and out I mean that is a
+[00:10:14] really fast execution I'll do the same
+[00:10:16] order here on Ford with light speed 250
+[00:10:20] in 250 out I do think light speeds a
+[00:10:23] little faster but trade stations not
+[00:10:25] slow they're really not slow at all and
+[00:10:28] just for you know why don't we just do
+[00:10:29] the full comparison we'll throw up um
+[00:10:32] Ford here on Charles Schwab and this is
+[00:10:36] going to be the Charles Schwab platform
+[00:10:38] is a little um you know I mean this is
+[00:10:40] not platform that I absolutely love for
+[00:10:43] trading but we'll just click uh buy
+[00:10:44] Market Ford oops well we'll do it
+[00:10:46] doesn't matter so buy market so it goes
+[00:10:50] through there sell Market let's see sell
+[00:10:54] Market pretty fast you know not bad not
+[00:10:58] bad interactive brokers we'll pull this
+[00:11:01] one up here we'll do shift one pretty
+[00:11:04] fast 10 shares back out pretty fast
+[00:11:08] can't really complain so you know you
+[00:11:10] could see I mean they they feel
+[00:11:13] comparable when you actually look at
+[00:11:14] them and sort of time them out you'll
+[00:11:16] see that some are a little faster than
+[00:11:18] others Fidelity here um let's see ask
+[00:11:21] plus 10
+[00:11:24] place so this
+[00:11:26] one this one we sit here and we're like
+[00:11:30] wait oh there it is
+[00:11:33] wow okay so that's a little bit of a
+[00:11:36] wakeup call with Fidelity right that is
+[00:11:39] slow really
+[00:11:41] slow okay so that's not good but trade
+[00:11:44] station's pretty solid okay so now let's
+[00:11:46] talk about how I create this layout so
+[00:11:49] when you first log in um what I'm
+[00:11:52] looking for is a layout where I can have
+[00:11:54] my level two windows right I can have my
+[00:11:56] time in sales and then I threw the chart
+[00:11:58] up just so it would be there I mean I
+[00:12:00] don't really use it and I could just get
+[00:12:02] rid of it but I just threw it there for
+[00:12:04] right now so if you click on the apps
+[00:12:06] button here this will give you this
+[00:12:08] little drop down um autohide and you can
+[00:12:11] hide it so this will show you the
+[00:12:14] different uh windows that you can pop
+[00:12:16] out so Market depth is going to be level
+[00:12:19] two chart time and sales time and sales
+[00:12:22] um where was the chart um chart analysis
+[00:12:25] is right here so you can po pop these
+[00:12:27] out and then this is your trade manager
+[00:12:30] and your trade manager has tabs so
+[00:12:32] orders average price positions so I have
+[00:12:35] one trade manager set to positions and
+[00:12:38] one trade manager set to orders and then
+[00:12:42] down here I have my news window now like
+[00:12:45] as is typical with most platforms you
+[00:12:47] can link your windows together so if you
+[00:12:49] pop out time and sales window and you
+[00:12:50] want to link it together you click on
+[00:12:52] this little s in the top and you can
+[00:12:54] link it this is like a little design
+[00:12:58] critique I think feels clumsy and sort
+[00:13:00] of like a like an afterthought it's such
+[00:13:03] a big bubble up there um I like how
+[00:13:06] interactive brokers makes it just this
+[00:13:07] nice little linking right here that
+[00:13:10] feels much more subtle it achieves the
+[00:13:12] same thing it's just like you know it's
+[00:13:14] a little more subtle look no one's going
+[00:13:16] to switch Brokers for something like
+[00:13:18] that but just you know just my two cents
+[00:13:21] now I don't know why there's all those
+[00:13:24] minus um orders right there that's very
+[00:13:26] unusual what what stock do we have up
+[00:13:28] here
+[00:13:29] um I don't know anyways that was a
+[00:13:31] little weird with interactive brokers so
+[00:13:33] we'll close that back down anyways you
+[00:13:35] can link your windows together like that
+[00:13:37] and then um this window the way I have
+[00:13:39] the charts is and and I do this for the
+[00:13:42] news feed as well is I link it to um the
+[00:13:46] local listener so what that means is
+[00:13:48] that if I type in um the S&P 500 here
+[00:13:52] it'll automatically update this to that
+[00:13:55] so this I should do um local listener as
+[00:13:58] well local listener and then updates to
+[00:14:01] whatever is sort of in Focus so you can
+[00:14:05] click on your level two and then just
+[00:14:07] start typing and it'll update I was a
+[00:14:10] little confused at first because I was
+[00:14:12] like where do I click to get it to start
+[00:14:14] updating but that's how you do it so
+[00:14:16] then we switch this back to Ford so see
+[00:14:18] these switch the only thing is when you
+[00:14:20] click here it doesn't switch it back it
+[00:14:24] only switches it back if you change the
+[00:14:26] symbol so now you've got to enter the
+[00:14:28] symbol again
+[00:14:29] um which is and then you change to a
+[00:14:32] different symbol and then back to this
+[00:14:33] one so it's not perfect for that but as
+[00:14:37] I said if you're not going to use this
+[00:14:38] for charting then it doesn't really
+[00:14:40] matter so when I popped out my level two
+[00:14:45] window right here and by the way um I I
+[00:14:48] don't like so this is a little kind of
+[00:14:51] clumsy here the way it's sort of like um
+[00:14:54] Auto hides and sometimes you click on it
+[00:14:56] and it sort of Pops down sort of a pain
+[00:14:58] and you're like go away so I think
+[00:15:00] there's a way to make it just stay
+[00:15:01] hidden but anyways um maybe send some
+[00:15:05] feedback on that one so when I first
+[00:15:07] opened my market depth I was listen guys
+[00:15:12] I don't get insulted often but when I
+[00:15:14] saw this blue gradient this was an
+[00:15:16] insult to my eyes I said I can't even I
+[00:15:19] can't possibly look at this for a moment
+[00:15:22] uh longer I need to change this
+[00:15:24] immediately this is not how I visualize
+[00:15:26] level two I like to see level two data
+[00:15:29] with each tier colored the way it is
+[00:15:32] just above so the way to change that is
+[00:15:34] we can rightclick we can go to settings
+[00:15:36] right here we then go to um let's see
+[00:15:40] window settings so click on window and
+[00:15:43] then you can go down to color and
+[00:15:45] style ah and immediately we can start
+[00:15:48] getting oh go to levels and now we can
+[00:15:50] start changing this around so now we can
+[00:15:53] get this looking the way we like it we
+[00:15:54] like green on the top and then we do the
+[00:15:57] sort of salmon color and d da you change
+[00:15:59] at all and then you can set it as your
+[00:16:00] default boom you're done so I did that
+[00:16:03] with one window and then I learned you
+[00:16:05] can go right click copy and then you can
+[00:16:08] paste that window you could paste the
+[00:16:10] whole window and it copies all the
+[00:16:11] settings over so I thought that was
+[00:16:13] pretty cool too so now I know some of
+[00:16:16] you guys I've been hearing a lot of
+[00:16:18] people that really like and you guys are
+[00:16:21] crazy I don't know what you're thinking
+[00:16:22] but you really like the font Papyrus so
+[00:16:26] if look if you want to change your font
+[00:16:29] here to Papyrus you could do Papyrus 12
+[00:16:31] right here and boom if that it look if
+[00:16:35] you want to teach ra raike and you also
+[00:16:37] want to day trade you can do that right
+[00:16:39] here now if you want to be a little bit
+[00:16:41] more traditional about it and you want
+[00:16:43] to leave it as
+[00:16:44] aerial that would be okay too so you
+[00:16:47] could switch it back to aiel however you
+[00:16:49] get to change this as you'd like and I
+[00:16:51] think that's fantastic it's as simple as
+[00:16:54] that but it's something that a lot of
+[00:16:56] platforms even in this day and age don't
+[00:16:58] allow to do which is crazy so being able
+[00:17:01] to adjust the settings adjust adjust the
+[00:17:03] font size Etc I think that's really
+[00:17:05] important now something that you can
+[00:17:07] also do um with this window is you can
+[00:17:09] double click on a on a market maker and
+[00:17:12] then it keeps it highlighted in
+[00:17:14] blue I actually find that to be a little
+[00:17:16] annoying so I don't do it but you can do
+[00:17:19] it if you want to okay so now we've got
+[00:17:21] our level two kind of laid out if we go
+[00:17:23] to settings we can also go to columns we
+[00:17:26] can go to um is it the detail pane let
+[00:17:30] me just pull this back up um yeah and we
+[00:17:32] can choose to select um the ID the ask
+[00:17:35] the size and the time so let's say
+[00:17:37] you're like I don't need to see the time
+[00:17:39] I already know what time it is so take
+[00:17:41] it off get rid of it boom so now you get
+[00:17:43] to see this a little bit more like that
+[00:17:46] and that's just fine so you can kind of
+[00:17:48] adjust this the way you like to have it
+[00:17:50] and this for me is is pretty close to
+[00:17:52] the way I have it on mine so on my other
+[00:17:54] platform so we'll go like that and then
+[00:17:57] again once you have this set up the way
+[00:17:58] you like you could just do a copy close
+[00:18:01] that one do a paste just like that and
+[00:18:04] then all you got to do is change your
+[00:18:05] color linking to make sure it's linked
+[00:18:07] with your other windows all right so now
+[00:18:10] you've got your level two all
+[00:18:12] configured uh you want to take another
+[00:18:14] trade you can do order entry right down
+[00:18:17] here so I could say you know 1,500
+[00:18:19] shares or 150 or 15 whatever you click
+[00:18:22] here it's going to update the limit
+[00:18:24] price you click it's going to update the
+[00:18:25] limit price now you can also um change
+[00:18:29] your route if you'd like or you can do
+[00:18:31] smart routing now here's the thing
+[00:18:33] that's kind of interesting and I
+[00:18:34] actually really like this with trade
+[00:18:36] station you could choose what you prefer
+[00:18:38] so let's go over to their trade station
+[00:18:40] website and let's go to pricing it's a
+[00:18:42] commission free broker so if you do
+[00:18:45] their intelligent routing it's free
+[00:18:47] totally free but if you want to direct
+[00:18:50] route this order if you want to choose
+[00:18:52] to say you know what it's pre-market I
+[00:18:54] really want to do direct at routing you
+[00:18:56] could send it to ARCA or to Edge or
+[00:18:58] whatever the case is so edex let's just
+[00:19:00] send it to that so I'm going to do a 15
+[00:19:02] share order and I'm going to click um
+[00:19:05] buy right here so let's see so there we
+[00:19:07] go I'm in 15 shares now remember let's
+[00:19:10] scroll over that's going to cost me a
+[00:19:12] little bit of money the commission on
+[00:19:13] that 8 cents okay it's 15 shares doesn't
+[00:19:16] really matter so let's go ahead and just
+[00:19:18] um we'll flip we'll turn around and
+[00:19:20] we'll sell that but let's let's just you
+[00:19:23] know go to 100 shares so it's going to
+[00:19:25] be a little easier to calculate uh the
+[00:19:27] cost on it and I'm going to click
+[00:19:29] buy so what is the cost per 100 shares
+[00:19:34] 50 all right so now you do a th000
+[00:19:37] shares that's five bucks right you do
+[00:19:40] 10,000 shares that's 50 bucks $50 so
+[00:19:44] that's not nothing in fact it's it's uh
+[00:19:48] it's almost it's like 80% more than I
+[00:19:51] pay for direct access routing at light
+[00:19:53] speed so it's not nothing it's actually
+[00:19:56] a little expensive if we're going to be
+[00:19:58] honest
+[00:19:59] um you know however it's um you know
+[00:20:02] look it's an option and it's nice that
+[00:20:04] you have that option there now I
+[00:20:06] personally don't love the buy sell
+[00:20:08] buttons being over here um you know you
+[00:20:11] compare that to um DH Trader buy and
+[00:20:15] sell that feels more intuitive the
+[00:20:17] coloring of those buttons feels more
+[00:20:19] logical light speed buy and sell feels
+[00:20:22] more
+[00:20:23] logical so I'm not a huge fan of that
+[00:20:26] but I could get used to it now as I was
+[00:20:28] editing this video I realized some of
+[00:20:30] you might be interested in learning more
+[00:20:32] about my day trading strategy so I've
+[00:20:34] put together a small account worksheet
+[00:20:36] PDF I'm going to put a link to it pinned
+[00:20:37] at the top comment and in the
+[00:20:39] description you can click that link you
+[00:20:40] can download the PDF and it's going to
+[00:20:42] walk you through the following number
+[00:20:43] one how I manage my risk risk management
+[00:20:45] is super important in trading in general
+[00:20:47] and even more important when you're
+[00:20:49] trading a smaller account number two I'm
+[00:20:51] going to share with you my stock
+[00:20:52] selection criteria I have five specific
+[00:20:55] criteria that I use to help me
+[00:20:57] understand whether or not stock has the
+[00:20:58] potential to make a big move or not and
+[00:21:00] then number three I'm going to walk you
+[00:21:01] through my precise entries and exits so
+[00:21:03] if you want to learn more about my
+[00:21:05] strategy I encourage you to download the
+[00:21:06] PDF and you can Implement some of those
+[00:21:08] tips and tricks in your own trading
+[00:21:09] starting today so all right now um let's
+[00:21:14] talk about those hot Keys uh and and
+[00:21:17] well maybe before we do so we've got our
+[00:21:19] level two window uh right here we've
+[00:21:21] gone through the all of this now we have
+[00:21:23] our time and sales window right here
+[00:21:25] which is pretty simple there's not a lot
+[00:21:27] to look at
+[00:21:29] um I do keep the time on here as a
+[00:21:31] column because remember if a stock gets
+[00:21:33] halted on a circuit breaker it'll resume
+[00:21:35] in exactly 5 minutes so you need to see
+[00:21:37] the time of the last quote to the P to
+[00:21:40] to the second and then if this halted
+[00:21:42] right here it would resume at 247 and 6
+[00:21:45] seconds exactly 5 minutes later so
+[00:21:47] seeing the the time is important at that
+[00:21:50] moment but then the rest of the time it
+[00:21:52] doesn't really matter um if we go in
+[00:21:55] here we can also go into the settings we
+[00:21:57] can go to Windows settings and we can go
+[00:22:00] into the color of orders so above ask at
+[00:22:03] ask at bid below Bid And so you can sort
+[00:22:06] of have these colored as well for for
+[00:22:08] the trades um I think that that's fine I
+[00:22:12] don't have any um there's nothing I
+[00:22:14] would really change about that you're
+[00:22:15] seeing right now a lot of orders that
+[00:22:17] are going through between the spread and
+[00:22:20] between the spread is obviously a little
+[00:22:22] bit bearish compared to being bright
+[00:22:24] green or bright red so like a stock like
+[00:22:27] Ford if I do my hot key on this so my
+[00:22:30] orders probably went through between the
+[00:22:32] spread cuz what did I fill what was my
+[00:22:34] execution um now that was a free order
+[00:22:36] because I did the smart routing but Ford
+[00:22:39] filled at um 925
+[00:22:44] 970 and the spread is 25 by 26 so if I
+[00:22:48] turn around and sell it it'll probably
+[00:22:51] oops go here it'll probably sell you
+[00:22:53] know slightly between the spread so
+[00:22:56] that's fine um anyways orders that go
+[00:22:59] between the spread are going to be gray
+[00:23:01] or uh kind of right here in the middle
+[00:23:04] and then the charts you can set them up
+[00:23:05] as you'd like but I don't love them what
+[00:23:08] I don't like is that I can't zoom the
+[00:23:10] way I'm accustomed to um and I can't
+[00:23:12] click and drag on the time axis to make
+[00:23:14] it bigger you can do this to make it
+[00:23:17] bigger but then you're kind of dealing
+[00:23:19] with this stuff uh but it is nice that
+[00:23:21] your ORD display here but I I do a lot
+[00:23:24] of making my windows sort of bigger and
+[00:23:26] smaller I I noticed it usually when I
+[00:23:29] use software like that because I'm like
+[00:23:31] ah why is it um why is it so hard for me
+[00:23:34] to kind of you know zoom in and out but
+[00:23:36] I realized I actually spend a lot of
+[00:23:38] time zooming and doing this kind of like
+[00:23:40] pointing and grabbing and kind of just
+[00:23:42] getting it like exactly just so I can
+[00:23:45] see what I'm looking at I don't know I
+[00:23:46] just find that to be helpful for me so
+[00:23:49] this is that's what I'm accustomed to so
+[00:23:52] anyways personal preference but it is
+[00:23:54] what it is um and then on the positions
+[00:23:58] window
+[00:23:59] here you could take away the columns I
+[00:24:01] mean you well the column of position is
+[00:24:03] important you could adjust these as
+[00:24:05] you'd like this is how I adjusted mine
+[00:24:07] symbol position um so let's do it here
+[00:24:10] back in here so long or short is what
+[00:24:13] that is could probably take that column
+[00:24:16] out if you wanted to move it um over
+[00:24:20] here but this is this is basically the
+[00:24:23] way I look at it um when I'm trading I
+[00:24:25] like to see how many shares I'm holding
+[00:24:28] my average price my open p&l and then my
+[00:24:31] closed p&l uh and this is real money
+[00:24:34] right now so you know I don't mind
+[00:24:35] taking a couple trades lose a couple
+[00:24:37] bucks doesn't matter but um you know so
+[00:24:39] anyway so I have that there and then
+[00:24:42] down here are um are the trades I've
+[00:24:45] taken one thing that is important to me
+[00:24:48] um I need to be able to see um zero
+[00:24:52] positions so some Brokers it's
+[00:24:55] incredibly obnoxious but when you close
+[00:24:59] a position let's see we're in are we
+[00:25:00] still in this no uh but some Brokers
+[00:25:02] when you close a position they take it
+[00:25:05] away so you can't see it anymore so now
+[00:25:07] you're like well wait what what happened
+[00:25:10] how much am I up or down and it's gone
+[00:25:12] it's gone so you can't see it so I I I
+[00:25:14] just think that they this is an area
+[00:25:16] where they're catering to active Traders
+[00:25:18] you know like you and I who want to know
+[00:25:21] this is the stock I traded and this is
+[00:25:23] how much I'm up or down okay so now
+[00:25:25] let's talk about hot Keys all right so
+[00:25:28] how does set up your hot keys in trade
+[00:25:29] station so you can uh do this a couple
+[00:25:32] ways first we're going to go to view and
+[00:25:36] it's you go to shortcuts I know the the
+[00:25:40] common def the common you know phrase is
+[00:25:42] hot keys but they call it shortcuts and
+[00:25:44] then you've got hot keys and macros this
+[00:25:47] is a little confusing so under hot Keys
+[00:25:51] you can see all the different hot keys
+[00:25:52] that are available based on category so
+[00:25:55] order entry macros so buy improve by
+[00:25:59] join by shave what in the world first of
+[00:26:02] all if you're trying to tell me to shave
+[00:26:04] that's not going to happen I've had this
+[00:26:05] beard for more than 10 years it's not
+[00:26:06] going anywhere so I get a little
+[00:26:08] insulted I'm I'm a little you know
+[00:26:10] little sensitive to it but all of a
+[00:26:11] sudden I'm like what is this
+[00:26:14] so these are some of the standard ones
+[00:26:16] they have and if you click on
+[00:26:18] it it it doesn't it doesn't give you the
+[00:26:21] chance to right click and understand
+[00:26:23] exactly what it means it just gives you
+[00:26:25] the chance to script it to a key which
+[00:26:27] is not ideal so I sort of felt confused
+[00:26:29] about what these are so we're going to
+[00:26:31] close that we're going to go to view go
+[00:26:33] to shortcuts and go to
+[00:26:35] macros so now let's look at buy shave so
+[00:26:40] place a limit order to buy 500 shares at
+[00:26:43] inside the ask minus 1 cent oh
+[00:26:48] interesting so instead of buying at the
+[00:26:50] ask of $12.97 we're going to buy at
+[00:26:53] $12.96 1 cent inside the ask huh that's
+[00:26:57] interesting
+[00:26:58] now I don't find that to be the type of
+[00:27:00] order that I've ever used but okay buy
+[00:27:04] uh let's see those are buy to cover um
+[00:27:06] so let's do so that was buy join buy
+[00:27:09] join place a limit order to buy at the
+[00:27:13] inside bid H so at the inside bid so
+[00:27:17] that would be placing a buy order to buy
+[00:27:18] on the
+[00:27:19] bid all right buy market so this would
+[00:27:22] be buy Market order all right um and
+[00:27:25] then sell orders sell we've got sell
+[00:27:27] shade which is to place a sell where to
+[00:27:30] sell on the inside of the bid so these
+[00:27:31] are kind of funny I don't really use any
+[00:27:33] of them so I was like all right well you
+[00:27:35] know what I guess I got to create my own
+[00:27:36] hotkey all right so let's go create and
+[00:27:40] let's do it together so we're going to
+[00:27:41] create a hotkey order entry macro we're
+[00:27:44] going to go uh this is going to be a
+[00:27:46] macro that will not just customize and
+[00:27:49] fill in pre-fill an order it's going to
+[00:27:51] actually send the order it's for
+[00:27:53] equities not futures or options and
+[00:27:56] we're going to go next for the active
+[00:27:58] symbol that makes sense and the quantity
+[00:28:01] okay well let's choose um you know sure
+[00:28:04] 100 shares that's fine so this is a buy
+[00:28:07] order so now now we're going to go next
+[00:28:09] it's going to be the specified account
+[00:28:11] uh we're going to go next you can click
+[00:28:13] Advance you get some more options here
+[00:28:15] it's going to be a buy order to buy and
+[00:28:16] we're going to buy at the ask but you
+[00:28:19] know what we're going to do a little
+[00:28:20] offset on this we're going to do the ask
+[00:28:23] um so let's see um so this is where I
+[00:28:27] want to do an off offet and it's not
+[00:28:29] letting me click the
+[00:28:30] increment that's a little funny why it
+[00:28:34] wants me to click improve and if I do
+[00:28:36] improve +
+[00:28:39] five it's going to be ask + five that's
+[00:28:42] not going to be logical or that might
+[00:28:44] not be common what you would assume but
+[00:28:46] that's what it is and then this I'm just
+[00:28:49] going to leave unchanged and then we go
+[00:28:51] next we go buy ask + 5 cents and then
+[00:28:57] buy ask um plus 5 cents 100 shares next
+[00:29:02] oh doesn't want me to do the plus sign
+[00:29:04] so plus there we go all right don't show
+[00:29:09] don't display a confirmation window
+[00:29:11] because that's going to throw me off and
+[00:29:13] please do not play a beep that's the
+[00:29:14] last thing I want all right so now we're
+[00:29:16] going to say okay now well wait a second
+[00:29:20] we didn't choose what key that's going
+[00:29:22] to go on so now you got to go over to
+[00:29:24] hot Keys you got to go down to that key
+[00:29:26] you just made uh what did we call it now
+[00:29:29] you got to remember what you called it
+[00:29:31] um buy ask plus 5 and now we're going to
+[00:29:33] set to a hotkey of shift B and we're
+[00:29:36] going to click
+[00:29:37] assign all right okay okay and now you
+[00:29:40] click shift B and we're in 100
+[00:29:43] shares all right cool shift B one more
+[00:29:47] time and we're in 200 shares all right
+[00:29:50] cool now how do we get out of this
+[00:29:51] position uh oh we got to get out so we
+[00:29:53] got to create our cell keys so let's go
+[00:29:55] ahead go ahead back into your view
+[00:29:58] shortcuts and macros and what we're
+[00:30:00] going to do um is I'm going to actually
+[00:30:02] edit this and just so it's easier for me
+[00:30:04] to find in the future I'm going to
+[00:30:06] change the name of it to
+[00:30:09] Ross okay so finish so now we're going
+[00:30:12] to create a new one create and this is
+[00:30:14] going to be a sell hotkey so we're going
+[00:30:17] to do active symbol and now how many
+[00:30:19] shares do I want to sell well I would
+[00:30:22] like to use my position let's say bail
+[00:30:24] out the whole thing so let's just bail
+[00:30:26] out of the whole position sell and what
+[00:30:28] are we going to do it's going to be a
+[00:30:29] sell order and we're going to sell at
+[00:30:33] the the bid but again we want to wait a
+[00:30:37] second so now improve again plus five is
+[00:30:41] going to be an offset below the bid so
+[00:30:44] now cell
+[00:30:45] bid minus 5 even though it's plus it's
+[00:30:49] actually minus whole position and
+[00:30:52] wouldn't it be nice if you could put a
+[00:30:53] space in there and you can't so just get
+[00:30:57] used to it so now we go to hotkey we do
+[00:31:00] this and we're going to assign this to
+[00:31:02] control C we'll just put that there
+[00:31:04] click assign uh yeah we'll just assign
+[00:31:07] it anyways and then we'll do a quick
+[00:31:10] position here on Ford shift one and then
+[00:31:13] control C so it
+[00:31:16] works um but it's just not super
+[00:31:19] intuitive most other platforms call it
+[00:31:21] an offset not improve or you know with
+[00:31:25] so anyways just get used to it but here
+[00:31:28] is going to be my first big critique on
+[00:31:30] this platform my first big critique is
+[00:31:33] that I want to create a hotkey to sell
+[00:31:36] not my whole position but to sell half
+[00:31:37] my position you can't do it so you go
+[00:31:41] over to light speed you go over to uh
+[00:31:44] Weeble you go over to a lot of different
+[00:31:46] platforms you can create your your
+[00:31:47] custom order to sell half so sell ask
+[00:31:51] half here I can do quarter half 3/4
+[00:31:55] position or full position okay okay at
+[00:31:58] Dash Trader you can type in 33 you know
+[00:32:02] or 71 you could do whatever odd position
+[00:32:05] percentage you want at Weeble you can do
+[00:32:08] um percentages as well so over on Weeble
+[00:32:12] you go to hot Keys you go to settings
+[00:32:15] you go to trade hotkey settings and then
+[00:32:18] you could start doing sell half
+[00:32:20] percentage
+[00:32:22] 52% doesn't matter whatever you want
+[00:32:24] right who cares it's whatever you want
+[00:32:26] so you can't do that at trade state
+[00:32:28] that to me is a problem because one of
+[00:32:30] the hot keys that I really like using is
+[00:32:32] sell half so if I'm taking a trade on
+[00:32:35] something and I buy 100 shares and I buy
+[00:32:37] 200 I buy 300 I buy 400 I buy 500 I want
+[00:32:41] to sell half so now I only have two
+[00:32:44] choices I can either do control you know
+[00:32:46] C to sell well you put on whatever key
+[00:32:49] you want but to sell 100 shares or I
+[00:32:51] could sell the full position those are
+[00:32:54] the two options I mean you could choose
+[00:32:56] to sell 200 shares or 300
+[00:32:58] but what if sometimes you trade penny
+[00:32:59] stocks and you trade 10,000 shares and
+[00:33:01] sometimes you trade you know $30 stocks
+[00:33:04] you're only trading 800 shares a sell by
+[00:33:07] percentage would be a
+[00:33:08] GameChanger okay so let's pull up our
+[00:33:10] broker comparison sheet because this is
+[00:33:13] this is the first um big issue for me on
+[00:33:15] trade station so we already said the
+[00:33:17] execution speed is good um but
+[00:33:20] unfortunately we cannot sell based on
+[00:33:22] percentage right there so that is a
+[00:33:25] bummer and we don't see halt resumption
+[00:33:28] quotes So when us or halt levels so we
+[00:33:31] can't tell what price this stock is
+[00:33:33] going to get halted at right now it's
+[00:33:35] trading at 1286 and it will halt but uh
+[00:33:39] we don't know we we can't see that so
+[00:33:41] here it'll halt at 1433 the L level the
+[00:33:45] red level is showing where it'll halt
+[00:33:47] 1433 up 12 1172 down you can see it on
+[00:33:51] Weeble you can see it here on light
+[00:33:53] speed uh you can't see it on trade
+[00:33:56] station and when halted you won't see a
+[00:33:58] resumption quote either so those are
+[00:34:01] your two from a functional perspective
+[00:34:03] these are the two biggest functional
+[00:34:05] problems with trade
+[00:34:07] station in my opinion um and now one
+[00:34:11] other thing that I'll add with trade
+[00:34:12] station and this see I'm a little
+[00:34:14] nervous about doing this because it's
+[00:34:15] going to cost me a little bit of money
+[00:34:16] but um but I'll do it I'll just do a
+[00:34:19] couple quick orders so I'm going to do
+[00:34:21] 2500 shares of this and the reason I'm
+[00:34:23] going to do it is because I want you to
+[00:34:24] see kind of how this order executes so
+[00:34:27] I'm going to click Buy bu right here
+[00:34:29] rejected so it rejected the order um oh
+[00:34:32] it was a little bit too much money so
+[00:34:34] because I've got 30,000 in the account
+[00:34:35] so we'll just do see let's see if you
+[00:34:37] can find a cheaper stock um I want to do
+[00:34:40] a little bit of a larger position and
+[00:34:41] the reason I want to do that is because
+[00:34:44] um I've noticed that some of these
+[00:34:46] positions that are a little larger
+[00:34:48] execute a little bit in a funny way so
+[00:34:51] KDL let's see what this one's looking
+[00:34:53] like all right so KDL let's just try
+[00:34:56] that so we'll switch this
+[00:35:00] to uh
+[00:35:01] KDL so I'm going to put the order here
+[00:35:04] to buy uh 25 200 shares so I'm going to
+[00:35:07] click buy right here and H that wasn't
+[00:35:11] too bad you kind of saw how it sort of
+[00:35:13] like does like a little like it doesn't
+[00:35:16] it sort of does it as like a slow sort
+[00:35:18] of fill now I'm going to exit and watch
+[00:35:20] it
+[00:35:22] exit so see how it kind of did that
+[00:35:24] countdown sort of like you know what I
+[00:35:27] mean you you saw that right so so let's
+[00:35:30] go over to light speed just for a second
+[00:35:32] so K and Dy or kdny what was it
+[00:35:36] um
+[00:35:38] KDL so now I'll do the same order here
+[00:35:40] and just what you're going to see is I'm
+[00:35:42] going to press it here and it fills
+[00:35:44] instantly 2500 shares in out gone 42
+[00:35:48] bucks there we go so just it's so fast
+[00:35:53] whereas here it feels like it it's sort
+[00:35:56] of and then
+[00:35:58] sort of does this like slowly filling
+[00:36:00] and if if I did like 10,000 shares it's
+[00:36:02] even it's even more so that's the only
+[00:36:05] thing I was a little bit like H see I
+[00:36:07] don't love love that
+[00:36:10] um which just to me tells me that you
+[00:36:14] know with bigger size it might be a
+[00:36:16] little harder maybe to move in and out
+[00:36:18] of certain stocks however with smaller
+[00:36:21] size you know a th000 2,000 shares it's
+[00:36:24] probably not going to be too noticeable
+[00:36:26] or too much of an issue you know I I
+[00:36:28] really don't think so so so now let's
+[00:36:30] look at trade station and kind of do
+[00:36:32] this broker comparison and let's go up
+[00:36:34] to the top and let's reveal the score so
+[00:36:36] I'm going to give trade station a 5.5 I
+[00:36:39] would trade there with real money I
+[00:36:40] could trade there with real money the
+[00:36:42] order execution is fast enough it's
+[00:36:44] commission free you can also choose to
+[00:36:46] do direct access routing which is great
+[00:36:49] but it's not quite as fast as light
+[00:36:51] speed and you don't have the the ability
+[00:36:53] to sell based on positions down here so
+[00:36:56] for me
+[00:36:58] realistically Weeble is going to be
+[00:37:00] better software their execution speed is
+[00:37:03] a little slower uh you don't get as much
+[00:37:05] price Improvement but the software is
+[00:37:07] better Charles Schwab with d Trader
+[00:37:10] that's going to be better for better
+[00:37:12] software and it's probably going to be a
+[00:37:14] better experience for most people most
+[00:37:16] people are probably going to prefer to
+[00:37:17] do this versus this trade
+[00:37:19] station it let me tell you it these are
+[00:37:22] things they could do to make it a 7.5 if
+[00:37:26] they want to make it a 7.5
+[00:37:28] adding the ability to sell based on
+[00:37:30] percentage and adding the ability to um
+[00:37:33] have halt levels that would make it a
+[00:37:35] 7.5 and you know what I'll even move it
+[00:37:37] up a little bit higher I'll move it
+[00:37:40] to so here's the thing you get good
+[00:37:43] price Improvement that price Improvement
+[00:37:46] is pretty
+[00:37:48] good I'm going to move it up to a 6.5 I
+[00:37:51] it's pretty good it really is pretty
+[00:37:53] good um but it could be better if I was
+[00:37:56] going to choose between trade station or
+[00:37:59] think or Swim I would definitely use
+[00:38:01] trade station trade station versus E
+[00:38:03] Trade definitely trade station trade
+[00:38:05] station versus interactive brokers
+[00:38:07] definitely would use trade station like
+[00:38:10] I definitely would so it's it's good
+[00:38:13] software um now you get four times
+[00:38:16] leverage they do enforce the PDT rule um
+[00:38:20] so that's that's standard uh so those
+[00:38:24] you know this is kind of where it's at
+[00:38:25] they do offer paper trading minimum
+[00:38:27] account size it's sort of Na not
+[00:38:30] applicable these retail Brokers will let
+[00:38:32] you do whatever short inventory from
+[00:38:35] what I understand is not impressive but
+[00:38:37] that's not surprising with retail
+[00:38:39] Brokers they are 6:00 a.m. to 8:00 p.m.
+[00:38:41] which is better than others uh some
+[00:38:44] don't start till 7: a.m. but others
+[00:38:46] start at 4:00 a.m. the desktop
+[00:38:48] experience it's me it's medium but it's
+[00:38:50] pretty close to being excellent if it
+[00:38:52] was just for those last two features
+[00:38:54] these two right here so they've got
+[00:38:56] level two they've got the hotkeys
+[00:38:58] they've got the offsets they're not
+[00:39:00] logical how they name them but it's okay
+[00:39:02] it's more industry titling but retail
+[00:39:05] Traders don't understand it usually
+[00:39:07] positions they need to add that
+[00:39:09] percentage of positions and then Hal
+[00:39:11] resumptions they do have pegged orders
+[00:39:13] um they do have some things you can do
+[00:39:15] but it's not super super Advanced
+[00:39:17] charting n a little basic but no big
+[00:39:19] deal they do have sub one minute time
+[00:39:21] frames uh they don't accept Canadians
+[00:39:24] sorry guys International accounts I
+[00:39:26] believe they accept some um but it this
+[00:39:29] depends a lot of the retail Brokers are
+[00:39:30] kind of like this um
+[00:39:33] so it's um I wish it was a little bit
+[00:39:35] easier um but it depends on what country
+[00:39:38] you're from uh so but they've been
+[00:39:41] around for a long time um you know
+[00:39:43] they've been um you know they're they're
+[00:39:46] not a new broker they're well
+[00:39:47] established they've been they've been in
+[00:39:49] the industry for a long time Market data
+[00:39:51] $11 a month could be higher depending on
+[00:39:53] what you do and then Forex futures um
+[00:39:56] crypto you know some people are into
+[00:39:58] that not for me and I have a retirement
+[00:40:00] account there so you can do the
+[00:40:01] retirement account so I would say that
+[00:40:04] trade station's not a bad platform for
+[00:40:06] trading real money certainly with a
+[00:40:09] small account uh wouldn't be bad for a
+[00:40:11] mediumsized account for a larger account
+[00:40:15] you know might have some orders with
+[00:40:17] execu issues with execution speed um
+[00:40:19] that could slow things down a little bit
+[00:40:21] so that's that's the only area where I
+[00:40:23] might get a little bit like um you know
+[00:40:25] we're kind of having a little issue but
+[00:40:28] overall I I would say this is a really
+[00:40:30] good platform and something that you
+[00:40:32] could probably be really happy with so
+[00:40:36] I'd like to hear what you guys think of
+[00:40:38] trade station and if you have requests
+[00:40:40] of other platforms that you'd like me to
+[00:40:41] do a platform demo of or give my honest
+[00:40:44] review of please let me know just leave
+[00:40:46] the um leave it down in the comments
+[00:40:47] below and I'll also um put an episode a
+[00:40:50] link to an episode right here that I
+[00:40:51] think you guys will enjoy if you want to
+[00:40:53] check out more platform demos just like
+[00:40:54] this thank you guys as always for tuning
+[00:40:56] in I'll see you for the next up lo real
+[00:40:57] soon
+[00:40:59] [Music]

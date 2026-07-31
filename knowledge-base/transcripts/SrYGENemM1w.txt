@@ -1,0 +1,557 @@
+# How to Choose the RIGHT Market Data for Day Trading
+# https://www.youtube.com/watch?v=SrYGENemM1w
+# duration_sec: 1359
+
+[00:00:00] In today's class, I'm going to walk you
+[00:00:01] through how to choose the correct market
+[00:00:03] data subscription for your live trading
+[00:00:06] platform. Because in case you didn't
+[00:00:07] know, market data subscriptions are not
+[00:00:10] standardized. They can be very different
+[00:00:12] across different platforms, which means
+[00:00:14] what you may be using by default could
+[00:00:16] give you a very different view of the
+[00:00:19] market from other traders. Now, that's
+[00:00:21] going to be a problem because we're
+[00:00:23] looking at this market data to get our
+[00:00:25] signals of when to buy and when to sell.
+[00:00:28] So, if you are missing some of these
+[00:00:30] signals, well, clearly that's going to
+[00:00:32] cost you a lot of money. So, let's jump
+[00:00:34] onto the whiteboard and begin breaking
+[00:00:35] down the different types of market data.
+[00:00:37] We're going to begin with level one
+[00:00:38] data, which includes the bid, the offer,
+[00:00:43] the last price that went through, the
+[00:00:46] last trade price, and the current volume
+[00:00:48] today.
+[00:00:50] So uh level one data is used for
+[00:00:53] creating stock charts traditionally
+[00:00:55] because as you could see here the stock
+[00:00:57] chart what this is communicating right
+[00:01:00] here is the last price that went through
+[00:01:02] that number eight is referring to the
+[00:01:05] last price the last order that went
+[00:01:06] through. So each one of these candles of
+[00:01:08] course is created as actual orders are
+[00:01:11] going through the market and when the
+[00:01:13] stock is moving up during this
+[00:01:15] candlestick period of course we have a
+[00:01:16] green candle. When the price is moving
+[00:01:17] down, we have a red candle. So to create
+[00:01:20] these charts, you would need to be
+[00:01:22] subscribed to level one data. That'll
+[00:01:25] give you the bid, the offer, the last
+[00:01:27] price, and the volume. And that is fine
+[00:01:29] for stock charts. It's also fine for
+[00:01:33] stock scanners because stock scanners
+[00:01:36] are searching the market using level one
+[00:01:38] data to see which stocks are making new
+[00:01:40] highs. The new high would be uh based on
+[00:01:43] the last price. the last price and then
+[00:01:45] of course you could use the volume and
+[00:01:47] other things like that to uh create
+[00:01:49] calculations to look specifically for
+[00:01:51] certain types of stocks. So when it
+[00:01:53] comes to level one data,
+[00:01:57] most platforms
+[00:01:59] have it standardized where you subscribe
+[00:02:02] to level one data based on uh which
+[00:02:06] exchange you want the data from. So this
+[00:02:09] is all the level one data that you'd
+[00:02:11] get. And then you can subscribe to
+[00:02:13] receive level one data from well we'll
+[00:02:16] say NSDQ
+[00:02:18] as the abbreviation for NASDAQ,
+[00:02:21] NYSE
+[00:02:23] as the abbreviation for the New York
+[00:02:24] Stock Exchange and MX for the
+[00:02:28] abbreviation for the American Stock
+[00:02:30] Exchange. Now, each of these exchanges
+[00:02:33] typically will charge $1 for level one
+[00:02:36] data, which means your total cost for
+[00:02:38] level one data is $3 per month from
+[00:02:41] these three vendors. Okay? So, and when
+[00:02:44] you subscribe to market data through
+[00:02:46] your trading platform, some brokers that
+[00:02:49] make a ton of money include this market
+[00:02:51] data for free. They just eat the cost on
+[00:02:53] it. Other bro and they have different
+[00:02:55] thresholds when they have such a huge
+[00:02:57] quantity of customers where they get
+[00:02:58] breaks from the exchanges. But smaller
+[00:03:00] brokers and smaller platform providers
+[00:03:02] who don't get that break, they end up
+[00:03:04] passing the $3 per user directly onto
+[00:03:08] their customer or perhaps they, you
+[00:03:10] know, bake it into the platform fee. But
+[00:03:11] in any case, this is going to be
+[00:03:13] included. Now, this is pretty much
+[00:03:14] required a required subscription to pull
+[00:03:18] up charts for any stock listed on
+[00:03:20] NASDAQ, NY or AMX. Now, if you're
+[00:03:23] interested in trading OTC stocks, stocks
+[00:03:25] that trade on the over-the-counter
+[00:03:27] exchange, then you would have to
+[00:03:28] subscribe to level one quotes for OTC
+[00:03:31] markets in order to pull up the stock
+[00:03:33] charts, in order to see scanners, and in
+[00:03:35] order to see just that first depth of
+[00:03:37] the market. So, what I want to talk
+[00:03:40] about now is the difference between
+[00:03:41] level one and level two. Level one
+[00:03:45] provides the first depth of the market.
+[00:03:47] So, we have a stock that has a bid and
+[00:03:50] an ask or the offer depending on which
+[00:03:53] term you prefer. So, let's say it's $1
+[00:03:56] by1.
+[00:03:59] And this would be uh the level one data.
+[00:04:02] This is level one, the top of the
+[00:04:04] market. It's the current best price of
+[00:04:06] the buyer, the lowest price of the
+[00:04:08] seller or the best price seller in this
+[00:04:10] in this example. All right. So, this is
+[00:04:12] level one data. Now, most active traders
+[00:04:15] are actually going to want level two
+[00:04:17] data. And what level two data shows us
+[00:04:19] is not just the bid and the offer on the
+[00:04:22] first level, but it also shows us all
+[00:04:25] the people that are lined up a little
+[00:04:27] bit lower in the case of the the buyers.
+[00:04:30] So, this would show us all the buyers
+[00:04:32] down here, and we would see how many
+[00:04:34] shares each one of them wants to buy.
+[00:04:36] And it would be the same on the sell
+[00:04:38] side. we would see all the sellers going
+[00:04:39] up 102, 103, 104, you know, 105, etc.,
+[00:04:44] etc., etc. And if we saw, for instance,
+[00:04:47] on the level two depth of market that
+[00:04:49] there was a 1 million share seller right
+[00:04:52] here at 102, then we would be able to
+[00:04:54] perceive just looking at the level two
+[00:04:56] data that there's going to be a lot of
+[00:04:58] resistance at this current price.
+[00:05:00] Without even looking at the chart, we
+[00:05:01] would know that. Now, if let's just say
+[00:05:05] this seller was listed um well, so first
+[00:05:09] of all, if you only subscribe to level
+[00:05:11] one data, you wouldn't even see this
+[00:05:12] seller here. And therefore, you would be
+[00:05:14] trading at a disadvantage. You wouldn't
+[00:05:16] see all the buyers and all the sellers
+[00:05:18] that are on the book. By not seeing
+[00:05:20] them, you wouldn't understand where
+[00:05:22] potentially there are those big orders
+[00:05:24] out there that could provide support on
+[00:05:26] the buy side or resistance on the sell
+[00:05:28] side. But even if you do subscribe to
+[00:05:32] level two data, it's possible that this
+[00:05:35] big sell order is on a it could be on an
+[00:05:40] unusual book or what's we call it a book
+[00:05:44] um an order book,
+[00:05:46] but it could it's also known as a route
+[00:05:50] or an ECM.
+[00:05:52] All right, so this would be the way the
+[00:05:56] order is sent to the market. So, when
+[00:05:58] we're looking at level one data, we can
+[00:06:00] see, oh, this order to sell at 101 is um
+[00:06:04] is going through NSDQ, sorry, NSDQ, the
+[00:06:07] NASDAQ exchange. So, it' be like, oh,
+[00:06:09] that order is going through NASDAQ. Or
+[00:06:11] we would see, oh, this order is on ARCA.
+[00:06:14] So, we would see which exchange that
+[00:06:16] order is routed through. So naturally,
+[00:06:18] if you're subscribing to uh NASDAQ, NY
+[00:06:23] New York Stock Exchange and AMX, you
+[00:06:25] would have all of uh the market data
+[00:06:28] here. You would have market data for
+[00:06:30] EdEx. You would have market data for uh
+[00:06:33] ARCA, you have market data for New York
+[00:06:35] Stock Exchange, of course, American
+[00:06:36] Stock Exchange, and NASDAQ. However,
+[00:06:39] there are some order books that you may
+[00:06:40] not have access to. So if we look at
+[00:06:43] actual um market data here, what you'll
+[00:06:46] see is in this case right now
+[00:06:50] we I have three different platforms on
+[00:06:52] the screen. So you could see three
+[00:06:53] different platforms and we can see the
+[00:06:55] same price ARCA seller. Oh, sorry, Arca
+[00:06:58] buyer right here at a dollar and the
+[00:07:00] order shows 67. That refers to 6,700
+[00:07:04] shares. You always add two zeros to
+[00:07:07] whatever number you see. They just
+[00:07:09] abbreviate it to make it easier to read.
+[00:07:11] So this is a different um trading
+[00:07:13] platform and we see Arca right there and
+[00:07:16] this is another trading platform thinker
+[00:07:18] swim and we see Arca right there. Okay,
+[00:07:20] that makes sense. All of these platforms
+[00:07:22] are all subscribing to Arca. But what
+[00:07:24] you might notice is over here we don't
+[00:07:28] have MX
+[00:07:30] or MIX.
+[00:07:32] Currently Thinker Swim is not providing
+[00:07:34] me quotes from this book. So there are
+[00:07:38] orders that are sitting on this book to
+[00:07:40] buy at a dollar that are not visible on
+[00:07:43] Think or Swim because Thinkorswim does
+[00:07:44] not subscribe or give the option to
+[00:07:46] subscribe to these market um to these
+[00:07:49] books of market data. So you simply do
+[00:07:52] not see it. Now this isn't a case of you
+[00:07:55] know what you don't see won't hurt you.
+[00:07:58] It could actually be a problem because
+[00:08:00] you could have a really big buyer here
+[00:08:02] on this route and you can't even see it.
+[00:08:05] So what you can see on Thinker Swim is
+[00:08:07] ARCA. You can see NASDAQ, BATS, edge X,
+[00:08:10] NIC, edge A, and PH um LX. Now I have
+[00:08:16] PHLX uh right here as well. You could
+[00:08:18] see it right there. I have edge A. I
+[00:08:21] have bat Y. Uh which
+[00:08:24] because bats bats S and bats Y are the
+[00:08:27] same. Uh it would probably show up.
+[00:08:30] That's probably what the Y is right
+[00:08:32] here. Um but as you can see we are
+[00:08:36] missing um MEMX and now on this platform
+[00:08:40] you see TLSA
+[00:08:42] and TLSA is not appearing on either of
+[00:08:46] these two platforms.
+[00:08:48] Okay. So this is where we start to see a
+[00:08:51] little bit of divergence between the
+[00:08:54] subtleties of market data. So what I
+[00:08:57] subscribe to here is called NASDAQ total
+[00:09:01] view.
+[00:09:02] So, I'll write that down for you so you
+[00:09:04] can see it. So, I subscribe to NASDAQ
+[00:09:08] total view.
+[00:09:11] And by subscribing to NASDAQ total view
+[00:09:13] and all order books,
+[00:09:18] I will see all the individual
+[00:09:21] uh different market makers that could be
+[00:09:23] sitting on a particular stock. So, this
+[00:09:25] is going to be the most robust level of
+[00:09:28] market data. This is also the most
+[00:09:31] expensive level of market data. In fact,
+[00:09:33] this platform costs about $200 a month
+[00:09:36] for all of this data. It is not
+[00:09:38] insignificant. Whereas, Thinkorswim is
+[00:09:41] free as long as you have an account
+[00:09:42] there. It's free. That's $2,400 a year
+[00:09:44] that you're saving. Now, does it really
+[00:09:47] matter if you're missing MEMX and MIAX
+[00:09:51] or TLSA?
+[00:09:53] Pro to be honest, probably not. It
+[00:09:56] probably doesn't make a difference. The
+[00:09:58] thing for me is that I don't use those
+[00:10:01] more obscure markets for executing
+[00:10:04] orders. When I'm actually placing my
+[00:10:06] trades, I'm going to use the the routes
+[00:10:08] that have the most volume. Because when
+[00:10:12] you send your order to the market, when
+[00:10:14] you send your order to the market, I'm
+[00:10:16] going to draw a little picture to help
+[00:10:17] you kind of better understand how this
+[00:10:19] works. The market is an island right
+[00:10:22] here. So, if you send your order through
+[00:10:26] NASDAQ, NSDQ right here, and you want to
+[00:10:30] buy the stock, but the stock is um let's
+[00:10:33] just say you want to buy on NASDAQ, and
+[00:10:36] there's also someone that is um selling
+[00:10:39] on NASDAQ, a seller right here. Then by
+[00:10:43] routing through NASDAQ and buying from
+[00:10:45] the seller on NASDAQ, your order gets
+[00:10:47] matched immediately. And this is going
+[00:10:50] to be the most common because NASDAQ has
+[00:10:52] the most volume of the market makers
+[00:10:54] that I use. It has more volume than
+[00:10:56] ARCA, then edge X, then NY. So NASDAQ
+[00:11:00] has the highest likelihood of having a
+[00:11:02] direct match for my order. Now, if I was
+[00:11:06] routing through, let's just say I was
+[00:11:09] routing through
+[00:11:12] PHLX down here. If I'm routing through
+[00:11:15] PHLX
+[00:11:17] and the seller is on uh NASDAQ, then my
+[00:11:22] order has to actually get rerouted over
+[00:11:25] to NASDAQ. This process of rerouting an
+[00:11:28] order takes time. It takes some latency.
+[00:11:31] And here's something that you may not
+[00:11:33] know, but the highfrequency trading
+[00:11:35] algorithms take advantage of that little
+[00:11:37] bit of latency because they subscribe to
+[00:11:40] a level of market data that us retail
+[00:11:42] traders don't have access to. So they
+[00:11:44] actually see every single order that
+[00:11:46] people are placing coming into the
+[00:11:48] market before those orders get rerouted.
+[00:11:52] So they see let's say a perhaps you are
+[00:11:56] swinging big and you put a 10,000 share
+[00:11:57] order to buy through PHLX. It comes in,
+[00:12:01] it gets rerouted to to NASDAQ. They've
+[00:12:03] already seen your order come through and
+[00:12:05] perhaps this high frequency trading
+[00:12:07] algorithm was on the order book here to
+[00:12:10] sell. They see your order come through.
+[00:12:12] they're like, "You know what? Um, we're
+[00:12:14] going to pull our order out. We don't
+[00:12:15] want to sell to this person." And all of
+[00:12:17] a sudden, they can move their order
+[00:12:18] before you can buy their shares. Cuz
+[00:12:20] they might think, "Oh, this person wants
+[00:12:22] to buy. There's something happening
+[00:12:24] here. There's a reason. So, we're going
+[00:12:26] to take our order away." And so, this
+[00:12:28] process of cutting in front of and sort
+[00:12:31] of moving around retail traders is like,
+[00:12:34] it's something that happens every single
+[00:12:36] day. So to avoid that, rather than
+[00:12:38] routing my orders and sending them
+[00:12:41] through obscure routes, I'm going to
+[00:12:44] choose to send through the most common
+[00:12:46] routes available. Now this is also the
+[00:12:48] process of direct routing. If you are
+[00:12:51] using Think or Swim, you don't even have
+[00:12:54] the option to choose. Well, I guess
+[00:12:56] technically you could choose, but nobody
+[00:12:59] really does. Everyone lets Think or Swim
+[00:13:02] uh use what's called their smart route.
+[00:13:04] So, I'm not going to draw the whole
+[00:13:06] thing. I could do it right here. So, the
+[00:13:08] smart route will route the order that is
+[00:13:12] best for the broker because remember,
+[00:13:15] you are the commodity. It's a free
+[00:13:17] commission broker. You pay zero
+[00:13:19] commissions. They get paid by sending
+[00:13:21] your order through these wholesalers.
+[00:13:23] And so, that's that's the relationship
+[00:13:26] that these brokers have. You're the
+[00:13:27] commodity and um they get paid every
+[00:13:30] time you place an order. So, for me, I'm
+[00:13:34] not using uh Thinker Swim for my order
+[00:13:36] routing because I know that that's not
+[00:13:38] going to work well for my strategy. I'm
+[00:13:40] going to use um a broker that allows me
+[00:13:42] to direct route to the to the market.
+[00:13:44] And if right now I wanted to sell 6,700
+[00:13:48] shares, it would make a lot more sense
+[00:13:50] for me to sell them directly on the Arca
+[00:13:53] exchange to this buyer on ARCA than to
+[00:13:56] send them through NASDAQ where they then
+[00:13:59] would have to get rerouted to Arca. And
+[00:14:01] during that time, this order could
+[00:14:03] disappear and then all of a sudden I'm
+[00:14:06] selling my shares down at 99 cents or 98
+[00:14:09] cents or 96 cents. The reason that these
+[00:14:12] orders um do this is because of the
+[00:14:16] obligation that the exchange has created
+[00:14:19] to give people fills at current market
+[00:14:21] price. Because if you were filling if
+[00:14:24] you were sending your order through Arca
+[00:14:26] and let's just say we've got Arca
+[00:14:30] here on the bid at a dollar and ARCA
+[00:14:33] will also probably be on the offer at
+[00:14:35] you know a dollar one or something like
+[00:14:37] that because they're usually on both
+[00:14:38] sides of the of the tape or of the
+[00:14:40] market. You can see it's actually at a
+[00:14:42] dollar two. ARCA is right here at a
+[00:14:43] dollar two. So, if you um only if you
+[00:14:47] send your order through ARCA and they
+[00:14:48] have an order at a dollar, but then
+[00:14:50] their next best order is at 96, it would
+[00:14:53] be unfair for you to press the sell
+[00:14:55] button and get filled at 96 if there was
+[00:14:58] a better buyer out there. You know,
+[00:15:01] let's say Arca's down here at 96 cents.
+[00:15:05] This one's ARCA. Well, ARCA actually if
+[00:15:07] they can't give you the fill at a
+[00:15:10] dollar, you know, then they have to
+[00:15:12] reroute you to NASDAQ. So then they
+[00:15:14] reroute you to NASDAQ who's at, you
+[00:15:16] know, 99 cents. So let's just say in
+[00:15:18] this case, you route to ARCA, but ARCA
+[00:15:20] is not on the tape until on the book
+[00:15:22] until 96 cents. They send your order to
+[00:15:24] NASDAQ and you get filled there. Now, if
+[00:15:26] you pulled up your level two window in
+[00:15:28] your trading platform, for instance, and
+[00:15:30] every single order here was edex, you
+[00:15:33] didn't see any bats, NASDAQ, you didn't
+[00:15:34] see anything other than edex. Everything
+[00:15:36] here all the way down is edex. then most
+[00:15:40] likely you are only subscribing to
+[00:15:43] market data from that one order book and
+[00:15:46] that's obviously going to be a problem
+[00:15:47] because you're going to have a very
+[00:15:49] highly filtered view of the market.
+[00:15:51] You're not going to see any of the
+[00:15:52] orders on any of the other routes. So
+[00:15:54] that's not going to work. Now I have
+[00:15:55] seen traders who have traded that way
+[00:15:58] without realizing it. So all their
+[00:16:00] quotes were like NYSC or NASDAQ or
+[00:16:03] something like that. They didn't see
+[00:16:04] anything else and they were like, I
+[00:16:05] guess this is just the way market data
+[00:16:06] looks. But that's not the way it's
+[00:16:08] supposed to look. What you're seeing
+[00:16:09] here is is pretty much how it's supposed
+[00:16:11] to look. Although, I'll say in this
+[00:16:13] moment um right now,
+[00:16:17] because this particular stock is trading
+[00:16:20] under $1 a share, you see several tiers
+[00:16:24] at 97 on this particular stock. If I
+[00:16:27] went in here and I changed the
+[00:16:29] configuration of this window, I could
+[00:16:32] change to four decimal points and you
+[00:16:34] would actually see that these are at
+[00:16:37] different prices. This platform here
+[00:16:40] groups all the orders together that are
+[00:16:42] at 97 cents even if some of them are at
+[00:16:45] 971 972 etc etc. So there can be an
+[00:16:50] issue with you are subscribed to the to
+[00:16:54] the correct and full depth of the market
+[00:16:57] but because of the display settings on
+[00:17:00] your platform you're also seeing it
+[00:17:03] differently and this is certainly true
+[00:17:05] with a platform like thinker swim which
+[00:17:08] these two platforms also are very
+[00:17:10] similar to Erade green is the first uh
+[00:17:14] tier of the market this is the best
+[00:17:16] offer this is the best buyer
+[00:17:19] and red is the second best and then
+[00:17:20] yellow is the second best. Now there
+[00:17:22] happen to be four orders all at 97
+[00:17:25] cents. So there's four orders that are
+[00:17:27] yellow because that happens to be the
+[00:17:28] third one out over on a trade or thinker
+[00:17:31] swim with Charles Schwab. They're
+[00:17:33] showing this um gradient. Now this to me
+[00:17:36] is is not a helpful way to visualize
+[00:17:40] level two. I really like seeing each of
+[00:17:43] the levels of the market. level one, you
+[00:17:45] know, the second one, the third one, the
+[00:17:47] fourth one. Another thing that I could
+[00:17:49] point out is um LD right here and LULD.
+[00:17:55] This is displayed on uh mo traditionally
+[00:18:00] on direct access uh platforms. And what
+[00:18:03] this shows is the limit down price and
+[00:18:06] the limit up price. So this shows where
+[00:18:09] a stock would halt on circuit breakers.
+[00:18:11] you don't have uh any of that displayed
+[00:18:14] on Thinker Swim. They don't display it.
+[00:18:16] They don't show it to you. So, they are
+[00:18:17] not subscribing to this um this must be
+[00:18:22] a a market data subscription that these
+[00:18:25] uh folks have and just include and it's
+[00:18:27] not included here. So, that could be a
+[00:18:29] little bit of a problem if you're
+[00:18:31] trading a very volatile stock that has
+[00:18:33] the risk of being halted up or down. If
+[00:18:35] you don't know where those halt levels
+[00:18:37] are, you could inadvertently get stuck
+[00:18:40] in a halt and now the stock is halted
+[00:18:42] for five minutes and then it could be 10
+[00:18:44] minutes and you're just waiting there
+[00:18:46] unable to sell your shares. So again,
+[00:18:48] subscribing to more market data will
+[00:18:51] give you access to um this kind of uh
+[00:18:54] this kind of information which is really
+[00:18:55] important to know. So here's something
+[00:18:57] interesting. You can change the settings
+[00:18:58] to see how much level two you're
+[00:19:01] displaying on your trading platform. So,
+[00:19:05] right now we can see this stock has uh
+[00:19:08] you know there's there's a chunk of
+[00:19:09] orders here, but they they just sort of
+[00:19:11] stop at a$110, right? Do you see how
+[00:19:13] they just sort of stop there at a$110?
+[00:19:15] Well, what what do you mean they don't
+[00:19:16] go to $119? So, if we go into level two
+[00:19:20] configuration, we can scroll down here
+[00:19:23] and we can go down to choose how many
+[00:19:26] orders we want to see. So we could
+[00:19:28] change this to 50 to 50 to 50 and we
+[00:19:32] could change this to 500. And now look
+[00:19:35] at this. Whoa. Now that's different. So
+[00:19:38] now this is showing us a lot more data.
+[00:19:41] Now
+[00:19:42] how much is how much can you consume?
+[00:19:44] How much is too much? You know what
+[00:19:46] what's enough? This is going to be
+[00:19:48] different for different traders. For me,
+[00:19:50] as a pretty fast trader, it's not
+[00:19:54] usually helpful for me to see or
+[00:19:56] necessary that amount of data. And it
+[00:19:59] slows down, it can slow down how quickly
+[00:20:01] the level two can load because you're
+[00:20:03] just loading more data constantly. It's
+[00:20:05] constantly updating this much more data.
+[00:20:07] So, for me, I've left it at the settings
+[00:20:10] that you can see um below, which are uh
+[00:20:13] or were 100, five, and five. and that's
+[00:20:16] the default setting when you use um this
+[00:20:19] platform. So, I mean, I honestly think
+[00:20:21] that that's just fine. It's enough for
+[00:20:23] me. I can easily see the halt levels,
+[00:20:25] which is which is definitely helpful. Um
+[00:20:27] sometimes, you know, there could be a
+[00:20:29] stock where
+[00:20:31] the problem is maybe there's a big order
+[00:20:34] somewhere in here that's not being
+[00:20:36] displayed because it's just outside the
+[00:20:38] filter range. And there have been times
+[00:20:40] where I I think other people probably
+[00:20:43] see that order and maybe it's a$11 and
+[00:20:46] I'm like I don't see it. So I sort of
+[00:20:50] might think the stock is better than it
+[00:20:52] is because I'm missing out the view of
+[00:20:54] that one order. But if I show all of
+[00:20:58] this depth, there's not a guarantee that
+[00:21:00] I'll see everything because it could
+[00:21:02] just cross the the line of too much data
+[00:21:06] for a person to fully consume. So, you
+[00:21:09] know, you pull up different stocks and,
+[00:21:12] you know, you'll start seeing all these
+[00:21:13] orders going up. And obviously, a lot of
+[00:21:15] them are are relatively small, but it's
+[00:21:18] also possible that someone has what's
+[00:21:20] called a iceberg order. So, this could
+[00:21:23] be an iceberg of a larger order where
+[00:21:25] they're just showing 3,000 shares, but
+[00:21:27] there's really another 27,000 behind it.
+[00:21:30] So, it's like a they're just showing 10%
+[00:21:32] of their size. That can happen on on
+[00:21:35] level two market data. So, you have to
+[00:21:37] be a little bit careful when you're
+[00:21:39] looking at the data. Um, I talk about
+[00:21:42] this in more detail in my episode where
+[00:21:44] I specifically get into how I use level
+[00:21:47] two to read the market. So, if you found
+[00:21:50] this interesting, I'd encourage you to
+[00:21:51] check out this that next episode on
+[00:21:53] reading level two. The goal of this
+[00:21:55] episode was just to help you better
+[00:21:56] understand the different levels of
+[00:21:59] market data that you could choose to
+[00:22:01] subscribe to and to make sure you're
+[00:22:04] aware that this is really what full data
+[00:22:07] would look like. So, if you have
+[00:22:08] something that is much more scaled back
+[00:22:11] than that or doesn't have all of these
+[00:22:13] quotes, you could be missing um a
+[00:22:15] substantial view of the market. You're
+[00:22:16] looking at a filtered view and that
+[00:22:18] could be hurting you in your trading.
+[00:22:20] So, I hope you have found this to be a
+[00:22:21] super helpful episode. it is kind of um
+[00:22:24] pretty specific to something that's
+[00:22:26] relevant to active traders. So, do me a
+[00:22:28] favor, hit the thumbs up if you found
+[00:22:29] this helpful. I hope you subscribe to
+[00:22:31] the channel and go ahead and check out
+[00:22:32] the episode on how to read level two,
+[00:22:34] which I'll post right here. Okay, I'll
+[00:22:36] see you for the next upload real soon.

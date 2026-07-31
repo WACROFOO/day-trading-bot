@@ -1,0 +1,687 @@
+# The Ultimate Relative Strength Index (RSI) Trading Strategy
+# https://www.youtube.com/watch?v=iS5lvJGMM8E
+# duration_sec: 1665
+
+[00:00:00] [Music]
+[00:00:01] in today's episode we're going to talk
+[00:00:03] about the relative strength index and
+[00:00:04] how you can use RSI in your trade to
+[00:00:08] help you get better at predicting
+[00:00:10] reversals this is a well-established
+[00:00:12] trading strategy that can help increase
+[00:00:14] your accuracy by only trading reversals
+[00:00:17] when you see both the Candlestick
+[00:00:18] pattern and the RSI align this is where
+[00:00:23] an indicator is helping confirm or deny
+[00:00:26] what you think is going to happen now
+[00:00:29] I'm going to take it a step further and
+[00:00:31] introduce using the combination of RSI
+[00:00:35] and Binger bands on reversals so let's
+[00:00:38] go ahead and jump into the chart here
+[00:00:40] what we're looking at initially is a
+[00:00:42] Candlestick chart for a stock that I
+[00:00:44] happened to trade um just a few days ago
+[00:00:47] now you can apply this uh strategy and
+[00:00:49] these indicators I'm going to share with
+[00:00:51] you whether you're trading stocks like I
+[00:00:53] am or you're trading Futures Forex
+[00:00:55] cryptocurrency it doesn't matter because
+[00:00:57] this is Again part of the universal
+[00:00:59] language of the financial markets so
+[00:01:02] what we have here on my chart initially
+[00:01:04] are very few indicators this is a five
+[00:01:07] minute time frame on the left and this
+[00:01:09] is a one minute time frame on the right
+[00:01:11] these are both for the same stock and
+[00:01:13] this is something that I very commonly
+[00:01:14] do when I'm trading I have the five
+[00:01:16] minutes so I can kind of be zoomed out
+[00:01:18] and then I have the one minute so I can
+[00:01:20] be really zoomed in on the current
+[00:01:23] candle the indicators that I have on
+[00:01:25] here include the nine moving average
+[00:01:28] right here in Gray exponential the 20
+[00:01:31] exponential moving average and the 200
+[00:01:34] exponential moving average you'll see
+[00:01:36] those on both time frames the orange
+[00:01:38] line is the volume weighted average
+[00:01:40] price down below we have volume bars on
+[00:01:44] the one minute we have the Mac D and on
+[00:01:46] both time frames down below you can see
+[00:01:49] RSI so let's go ahead and double click
+[00:01:51] RSI and look at it RSI is plotted with
+[00:01:55] this purple line and it has an upper
+[00:01:57] limit a middle limit and lower limit now
+[00:02:01] the upper limit is at 70 the lower limit
+[00:02:04] is at 30 and the middle is at 50 the 50%
+[00:02:07] Mark now RSI is an oscillator which
+[00:02:10] means it oscillates between a range of
+[00:02:13] 100 on the top and zero on the low
+[00:02:16] although it is um at times possible
+[00:02:19] you'll see something go above and below
+[00:02:21] it's it's pretty rare So 99% of the time
+[00:02:25] RSI is going between 0 and 100 if the
+[00:02:30] relative strength is 100 on the one hand
+[00:02:34] you have something that is incredibly
+[00:02:36] strong but on the other hand it can't
+[00:02:39] get really any stronger and so what that
+[00:02:42] means is that more likely than not at
+[00:02:45] some point pretty soon we're going to
+[00:02:47] see a correction and if we're all the
+[00:02:50] way up at 100 a correction even down to
+[00:02:53] just the midpoint of 50% here would be a
+[00:02:56] a very sizable correction most likely in
+[00:03:00] price uh inversely if the RSI was way
+[00:03:03] down here at zero or one that tells us
+[00:03:06] that the price has been incredibly weak
+[00:03:08] and could remain weak for a bit longer
+[00:03:10] especially if there's bad news but when
+[00:03:12] it reverses it again has lots of room to
+[00:03:14] reverse back up and that's when we can
+[00:03:17] see a big swing in price so if we focus
+[00:03:19] on using this to time reversals the
+[00:03:22] areas that we're going to be interested
+[00:03:24] is when we're near extremes and so
+[00:03:27] that's why we have these limits at 30
+[00:03:29] and at 70 so above 70 or below 30 is
+[00:03:33] when we're going to be at more extreme
+[00:03:35] ranges and we really only want to
+[00:03:37] consider reversals in these areas so if
+[00:03:39] the RSI just for instance is kind of
+[00:03:43] oscillating like this this is not in in
+[00:03:47] the pink here or purple this is not an
+[00:03:49] extreme enough range and most likely
+[00:03:51] trying to time reversals here we're not
+[00:03:54] going to get enough volatility to make
+[00:03:56] profit as you probably already know as
+[00:03:58] an active Trader we volatility but of
+[00:04:01] course we need to manage risk and our
+[00:04:03] job is to try to make an accurate
+[00:04:05] prediction about what the price is going
+[00:04:07] to do next so we don't want to get in
+[00:04:10] and just have very small moves we'll
+[00:04:12] lose money on the spread and on slippage
+[00:04:14] we need to see sizable moves and so only
+[00:04:18] focusing on trading reversals when the
+[00:04:20] RSI is up at these extreme levels can
+[00:04:22] help with that strategy however we can
+[00:04:25] also use this when we're trading
+[00:04:26] momentum so uh in terms of the these um
+[00:04:30] indicators both on the one minute and
+[00:04:32] the time and the 5 minute time frames I
+[00:04:34] have them set the exact same way so this
+[00:04:37] is a 14 length period using the SMA 14
+[00:04:41] period here and the style has um just
+[00:04:45] these upper lower uh limits and then the
+[00:04:48] one in the middle this is the standard
+[00:04:50] RSI setting that most Traders will use
+[00:04:53] and is default when you add RSI to your
+[00:04:56] charts I'm a big fan of using indicators
+[00:04:59] in their default setting because I want
+[00:05:02] to make sure that I'm viewing the market
+[00:05:04] in more or less the same way that 90% of
+[00:05:06] other active Traders are viewing it the
+[00:05:09] reason is the signals when they're seen
+[00:05:11] by more people will be sort of responded
+[00:05:14] to accordingly so if everyone's seeing a
+[00:05:17] red light then everyone's going to stop
+[00:05:19] if everyone's seeing a green light
+[00:05:20] everyone's going to go more more or less
+[00:05:22] so being one of the first to see the red
+[00:05:25] light or green light or predict it will
+[00:05:27] come with intuition and that is the
+[00:05:29] result of experience but ultimately I
+[00:05:31] want to use standard indicator settings
+[00:05:33] and I'm using the same thing on my
+[00:05:35] macdon um on the the one minute here now
+[00:05:39] I'm primarily personally a One Minute
+[00:05:41] Trader so I usually am using my
+[00:05:43] indicators on the one minute chart more
+[00:05:46] closely than on the 5 minute but if
+[00:05:48] you're primarily a 5-minute Trader or a
+[00:05:49] 15-minute Trader or a daily Trader you
+[00:05:52] want to use your indicators on that time
+[00:05:54] frame okay so we're going to start by
+[00:05:55] looking at this momentum stock so this
+[00:05:57] is a stock that went up 100% in just a
+[00:06:00] few hours this is really some impressive
+[00:06:01] price action so if we look at this on
+[00:06:04] both the one minute and the 5 minute
+[00:06:06] I'll zoom out the one minute just a
+[00:06:08] little bit more let's take note of
+[00:06:10] things that we see on the RSI especially
+[00:06:13] so first the move begins here after
+[00:06:16] hours and as the stock squeezes from 4
+[00:06:18] to 450 up to 5 you notice that the RSI
+[00:06:21] goes all the way up here to a peak of
+[00:06:24] let's see it's just about 87 it really
+[00:06:27] gets super extended right up here uh 83
+[00:06:30] sorry goes up to 83 so we're certainly
+[00:06:32] well above our uh upper limit however we
+[00:06:36] know that we only stay at these upper
+[00:06:38] limits for a limited period of time and
+[00:06:40] this ends up dropping back down and
+[00:06:43] coming back up right here now this I
+[00:06:45] find really interesting so let's
+[00:06:47] actually zoom in to this um this first
+[00:06:50] beginning of the move right
+[00:06:52] here so some Traders might have looked
+[00:06:56] at this as an opportunity to buy right
+[00:06:58] up here at 550
+[00:07:00] which was this candle here you might
+[00:07:02] have thought well look we've just had
+[00:07:03] this big move up we've pulled back and
+[00:07:05] now we're coming back up to break
+[00:07:07] through this level now I I'll note a
+[00:07:10] couple different things that make me
+[00:07:12] think twice about this setup but
+[00:07:14] focusing first on RSI we have the RSI
+[00:07:17] that moved up and now the RSI is moving
+[00:07:20] down which means you actually have a
+[00:07:22] Divergence because the RSI is moving
+[00:07:24] down here while the price moves back up
+[00:07:28] whenever that happens I pay extra close
+[00:07:30] attention and I take the signal from the
+[00:07:33] RSI that this is more likely to be a
+[00:07:35] false breakout the second indicator that
+[00:07:39] is helping reaffirm that position is the
+[00:07:41] fact that the macad D the moving average
+[00:07:43] convergence Divergence indicator has
+[00:07:45] crossed over right here at this line I
+[00:07:48] usually focus on trading the front side
+[00:07:50] of the move before the macd crosses over
+[00:07:52] and once it crosses over I'm very
+[00:07:54] hesitant to take these uh second
+[00:07:56] attempts for move higher now from a um a
+[00:07:59] charting perspective this is showing a
+[00:08:02] double top a double top is created when
+[00:08:05] you have a move higher and a pullback
+[00:08:07] that's a little bigger than you would
+[00:08:09] like to see this is a bigger pullback
+[00:08:11] than we would like to see and it's noted
+[00:08:12] by the fact that we broke below the nine
+[00:08:14] moving average and we came all the way
+[00:08:15] down to the 20 so it's a steeper
+[00:08:17] pullback as a result of the steeper
+[00:08:19] pullback the macd crosses over because
+[00:08:21] the moving averages are converging macd
+[00:08:24] is the moving average convergence
+[00:08:26] Divergence indicator so the macd is
+[00:08:28] converging moving averages are
+[00:08:30] converging RSI is trending down and
+[00:08:33] that's a Divergence from the price
+[00:08:35] moving back higher this is a highl of
+[00:08:37] being a false breakout here at this
+[00:08:39] double Top This is a no trade now if you
+[00:08:42] did not look at either of these
+[00:08:44] indicators we'll just hide it for a
+[00:08:46] second you only looked at the chart the
+[00:08:48] only thing you would have to go on is
+[00:08:49] the fact that this is a possible double
+[00:08:51] top but we did pull up here we did sort
+[00:08:54] of a little micro pullback which could
+[00:08:56] almost be viewed as a cup and handle
+[00:08:59] formation
+[00:09:00] and clearly there was some volume here
+[00:09:02] there were some people that bought into
+[00:09:03] that breakout but it didn't end up
+[00:09:05] working and I think the result um on
+[00:09:07] this is because the pullback was a
+[00:09:09] little bit too Steep and when you have a
+[00:09:10] steeper pullback that's when you're
+[00:09:12] going to have the macd crossover and the
+[00:09:13] RSI is going to pull down and those
+[00:09:15] indicators should have helped keep you
+[00:09:17] out of this
+[00:09:18] trade okay so then we pull back the RSI
+[00:09:22] dips back down here we go to a low um of
+[00:09:25] about 35 so we do come pretty low but
+[00:09:29] not low enough that this would trigger a
+[00:09:32] purchase based on the RSI being in the
+[00:09:35] oversold territory the price then comes
+[00:09:38] back up to 550 here as you can see and
+[00:09:42] right in this area we now see that the
+[00:09:44] RSI is stair stepping up right little
+[00:09:47] pullback stair stepping up the macd has
+[00:09:50] crossed back over in the positive right
+[00:09:51] here so at this point right here we now
+[00:09:55] have a green light this actually looks
+[00:09:57] okay and acceptable for a trade right
+[00:10:00] here at 550 so we back this up right
+[00:10:03] here at this moment you would look at
+[00:10:05] this and you might think well I don't
+[00:10:06] know look it did this false breakout
+[00:10:08] right here but remember right there we
+[00:10:11] were getting a Divergence in the Mac in
+[00:10:13] the RSI and we were having a negative
+[00:10:15] macd because we had this big pullback
+[00:10:18] now we've pulled back and we've had the
+[00:10:20] opportunity to reset and we're starting
+[00:10:22] to pull away so this is a spot right
+[00:10:24] here where the macd is Check Yes and the
+[00:10:27] RSI is Check Yes it's okay okay that the
+[00:10:29] RSI is near the overbought area because
+[00:10:33] it's trending up we're not looking for I
+[00:10:35] mean so number one this is not a
+[00:10:39] reversal pattern on the chart it's not
+[00:10:41] extended enough to be a reversal this is
+[00:10:44] a pattern that is a flat top breakout
+[00:10:46] pattern for a break of resistance and so
+[00:10:49] let's fast forward so what we get here
+[00:10:51] is this break through 550 all the way up
+[00:10:53] to 650 right here up to about uh 6 624
+[00:10:58] which is still a really nice move we
+[00:11:00] then pull back just a little bit and
+[00:11:01] then into the next pre-market session we
+[00:11:04] push higher now this starts to get a
+[00:11:06] little interesting because right here
+[00:11:08] notice now we're starting to see a
+[00:11:10] Divergence again and that was caused by
+[00:11:14] this initial candle that dropped down
+[00:11:16] now the macd dipped below for a second
+[00:11:19] is back in positive but the RSI is now
+[00:11:22] as it makes as the price makes a new
+[00:11:24] high right here the RSI does not make a
+[00:11:27] new high and that's what I pay close
+[00:11:29] attention to when price is making new
+[00:11:31] Highs but RSI is not we're having a
+[00:11:33] Divergence that indicates more likely
+[00:11:36] than not the price is not going to
+[00:11:37] sustain this level now this is a spot
+[00:11:41] where you could consider a reversal
+[00:11:43] trade because the RSI is above and we're
+[00:11:45] having this Divergence so now we get a
+[00:11:46] pull back here we dip back down we start
+[00:11:49] to go
+[00:11:51] sideways and right here watch this the
+[00:11:54] macd crosses over so now we have a macd
+[00:11:57] crossover the RSI is starting to stair
+[00:11:59] step back
+[00:12:02] up we pull back a little bit so right
+[00:12:05] now another diver well actually we're
+[00:12:07] not really in a Divergence we're pretty
+[00:12:08] well matched here now one thing that
+[00:12:11] I'll say is I don't typically like to
+[00:12:12] take trades below volume weight average
+[00:12:14] price so although we have a cross over
+[00:12:15] here I'm typically not going to take
+[00:12:17] that trade unless the price is a little
+[00:12:19] higher so we're going sideways we're
+[00:12:21] going
+[00:12:22] sideways and then yeah right so right
+[00:12:24] here we end up getting a surge of
+[00:12:26] momentum now this surge of momentum was
+[00:12:29] right at 7:00 a.m. and you can see all
+[00:12:31] of a sudden a ton of volume came in so
+[00:12:33] that's because 7: a.m. is when a lot of
+[00:12:35] retail Brokers come online so what ends
+[00:12:37] up happening is you get a a massive
+[00:12:39] boost of volume price surges up and
+[00:12:41] immediately the RSI goes into the over
+[00:12:44] um overbought territory okay so now we
+[00:12:47] hit this big peak here and this is where
+[00:12:49] some people are going to start looking
+[00:12:50] for a reversal RSI is extended the price
+[00:12:53] is extended we don't have a
+[00:12:56] Divergence but we have it right here
+[00:13:00] right here we have a Divergence the
+[00:13:01] price goes higher the RSI does not go
+[00:13:04] higher so this is now an indicator that
+[00:13:07] we're still in the overbought territory
+[00:13:09] this is a spot to watch for a
+[00:13:11] short if the price was really strong
+[00:13:14] first of all it wouldn't have pulled
+[00:13:16] back as much as it did right here
+[00:13:17] causing the macd to start to converge
+[00:13:20] and starting to cause the RSI to dip so
+[00:13:22] we get this sort of we push higher but
+[00:13:25] we stall out the RSI shows it's making
+[00:13:28] AOW lower
+[00:13:30] high and now you get this sort of slower
+[00:13:32] flat and then
+[00:13:34] unwind it's just not able to push
+[00:13:38] higher now in my own trading I find that
+[00:13:44] using RSI to help me time entries to the
+[00:13:48] long side for momentum is not
+[00:13:51] particularly helpful I find macd is more
+[00:13:54] than enough for my trading however when
+[00:13:58] I am unal trading which is a strategy I
+[00:14:01] focused on as a beginner I really liked
+[00:14:04] RSI and I really liked Binger bands so
+[00:14:07] now let's pull up one of the scans that
+[00:14:09] I've developed here which is the RSI
+[00:14:12] Trend so this RSI Trend scanner is
+[00:14:15] actually actually searching the whole
+[00:14:17] market for stocks that have highest and
+[00:14:20] lowest rsis in the whole Market okay so
+[00:14:24] what's the idea behind this scan I'm
+[00:14:26] trying to search for these extremes I'm
+[00:14:29] searching for these data points right
+[00:14:31] here now we know that we can search for
+[00:14:33] a stock that has a 99 or 100 RSI or a
+[00:14:36] zero RSI if we find it we know that the
+[00:14:39] stock is currently in this extreme area
+[00:14:41] right here so it may be worth
+[00:14:44] considering a trade now it's not a
+[00:14:46] guarantee that this is going to give us
+[00:14:48] an opportunity because there can be
+[00:14:50] stocks that have a 100 RSI but they have
+[00:14:53] no volume and they're not liquid so this
+[00:14:55] stock for instance let's just look at
+[00:14:56] the top one okay so this for instance
+[00:14:59] has a 100 RSI all right so this is based
+[00:15:02] on the 15minute it's very extended the
+[00:15:05] price has just been moving higher moving
+[00:15:07] higher but the volume is a little light
+[00:15:11] 1.3 million shares we may not at this
+[00:15:15] current moment see an opportunity so
+[00:15:17] let's go ahead and add one more
+[00:15:19] indicator here we're going to add the
+[00:15:20] Binger bands all right so Binger bands
+[00:15:23] we're popping them on and what we're
+[00:15:25] going to look for are are spots where
+[00:15:28] the price price is outside the top
+[00:15:30] Binger band and the RSI is extremely
+[00:15:33] extended because the price being outside
+[00:15:37] the Ballinger bands indicates extreme
+[00:15:40] price action for those that aren't
+[00:15:42] familiar with how Ballinger bands work
+[00:15:44] they create a band around the current
+[00:15:47] price so you can see it's sort of this
+[00:15:48] channel here the blue lines the top the
+[00:15:51] and the bottom so it creates this
+[00:15:53] channel 99% of price action occurs
+[00:15:56] within the channel at the Binger bands
+[00:15:59] ever in the unusual case that the price
+[00:16:02] is outside the Binger bands as it is
+[00:16:04] here it almost always leads to at least
+[00:16:06] a shortterm correction back within the
+[00:16:09] Binger bands so let's see um we'll just
+[00:16:12] we'll scan through some of these charts
+[00:16:14] here um and see what we see okay so CVS
+[00:16:18] is another one and you'll notice that
+[00:16:20] these charts are actually um between
+[00:16:22] these two were were somewhat similar
+[00:16:25] which is common and more likely that
+[00:16:28] this ties in with overall Market
+[00:16:31] strength so when the overall Market is
+[00:16:33] strong a lot of these stocks will just
+[00:16:35] Trend with the market this however is is
+[00:16:37] a really interesting example so look at
+[00:16:39] this so if we were scanning we saw this
+[00:16:42] stock and this was uh Friday going to
+[00:16:44] the Clos so we had 1 2 3 four five green
+[00:16:47] candles in a row one small red candle
+[00:16:49] right here and then four more green
+[00:16:51] candles followed by what Candlestick
+[00:16:52] shape that is a shooting star okay so a
+[00:16:56] shooting star candle we'll pull up the
+[00:16:58] whiteb here this is a candle that is
+[00:17:02] created as the price squeezes higher let
+[00:17:04] me just grab my marker here so I'll do
+[00:17:08] I'll do this in BR that's fine so just
+[00:17:11] going to erase
+[00:17:12] this so the price has been moving higher
+[00:17:16] one two three four five let's just say
+[00:17:18] those are long body green candles the
+[00:17:20] price opens here and then it squeezes up
+[00:17:24] and immediately sellers push it back
+[00:17:26] down and it closes like this this is
+[00:17:29] called a shooting star because shooting
+[00:17:31] stars come back down and this is already
+[00:17:34] showing the reversal is beginning
+[00:17:36] because buyers pushed it up and then
+[00:17:37] sellers pulled it right back down and it
+[00:17:40] closed red because it closed at the low
+[00:17:43] the next candle opens here and almost
+[00:17:45] always pulls back and there we have the
+[00:17:47] reversal so when I'm seeing this candle
+[00:17:50] forming I'll often take my position
+[00:17:53] before the candle even closes because I
+[00:17:55] can see what's going to happen on the
+[00:17:56] next candle just like this so in this
+[00:17:59] case unfortunately this was going right
+[00:18:01] into the closing bowel so there wasn't a
+[00:18:03] lot of time to take this trade but
+[00:18:05] nonetheless this is a a a really nice
+[00:18:08] classic shooting star candle and it's a
+[00:18:11] candle up outside the Binger bands so
+[00:18:13] that that's really a nice one um so
+[00:18:16] here's another one MAA this one strength
+[00:18:20] candles are up outside the Ballinger
+[00:18:22] bands but not showing a reversal candle
+[00:18:25] just yet so something we would keep
+[00:18:26] watching CVS we already looked at that
+[00:18:30] CYCC this one okay so there you go
+[00:18:35] classic big red candle high volume red
+[00:18:38] that's reversal indicator candles
+[00:18:40] outside the Ballinger bands RSI above um
+[00:18:43] our upper limit so this candle right
+[00:18:46] here is the one really confirming that
+[00:18:48] we're too extended and we start to pull
+[00:18:50] back all right so that was a good one
+[00:18:52] candles up outside the Binger bands
+[00:18:54] sometimes as a beginner Trader it can be
+[00:18:56] hard to time moment momentum and you'll
+[00:18:59] feel like you're just chronically
+[00:19:01] chasing um now you can avoid that by
+[00:19:05] learning some of these traditional
+[00:19:06] Candlestick patterns that momentum
+[00:19:08] Traders use for instance we have green
+[00:19:12] candles getting bigger in size followed
+[00:19:14] by two small red candles and then the
+[00:19:17] next candle that makes a new high right
+[00:19:19] here a squeeze back up let's say on this
+[00:19:21] candle you saw a bottoming tail just
+[00:19:24] like that we know that the bottoming
+[00:19:26] tails are bullish because the buyers
+[00:19:28] push it back up whereas the topping
+[00:19:31] tails are bearish because the sellers
+[00:19:32] pull it back down so a pattern like this
+[00:19:36] is a momentum pattern that I would feel
+[00:19:37] very comfortable trading but sometimes
+[00:19:39] as a beginner it could be hard to kind
+[00:19:41] of see this and to act in real time and
+[00:19:43] some beginners like looking at um
+[00:19:45] reversal charts and reversal setups
+[00:19:48] because when you have a setup let's just
+[00:19:51] say for instance um where you've got I
+[00:19:54] don't know like 15 to 20 consecutive
+[00:19:57] candles like we're getting really really
+[00:19:59] really extended this is where it starts
+[00:20:03] to feel like this is a no-brainer that
+[00:20:05] this thing is going to reverse so this
+[00:20:07] reversal scanner right here has two
+[00:20:09] columns for consecutive candles so
+[00:20:12] here's one that this had 14 consecutive
+[00:20:14] candles all right let's match up chart
+[00:20:17] okay so in 14 consecutive candles okay
+[00:20:22] you see something like this with 14
+[00:20:24] consecutive candles and you're just
+[00:20:27] thinking it's only a matter of time
+[00:20:28] before we reverse and the first red
+[00:20:31] candle likely will lead to a series of
+[00:20:34] several more red candles of pullback so
+[00:20:36] in this case we're outside the Ballinger
+[00:20:38] bands RSI is extended you know volume is
+[00:20:41] peaking so everything looks good on this
+[00:20:43] except that this happened to be at 4m.
+[00:20:46] right into the closing bell and it also
+[00:20:48] just so happened that um the S&P 500 was
+[00:20:52] squeezing up really strongly here into
+[00:20:54] the close as well which is what led a
+[00:20:56] lot of these stocks to move higher uh
+[00:20:58] but but nonetheless while the rising
+[00:21:00] tide of the S&P 500 will will can lift
+[00:21:02] All Ships the ones that are the most
+[00:21:04] extremely positioned would be the ones
+[00:21:07] that are the best for the reversal and
+[00:21:09] we measure that positioning based on
+[00:21:10] looking at technical indicators like the
+[00:21:13] RSI macd is not something that I scan
+[00:21:16] for but RSI is something I will scan for
+[00:21:19] so let's see we had um Autodesk here
+[00:21:23] ads so again extended here might have
+[00:21:25] been some news on that uh after hours
+[00:21:28] um Hodes there's some there's definitely
+[00:21:32] some headlines on that let's see um go
+[00:21:35] back a little further ffiv this is
+[00:21:37] another one going into the close so all
+[00:21:40] those consecutive green candles though
+[00:21:42] that's something that I really like to
+[00:21:43] get focused on so I think for some
+[00:21:46] Traders it makes more sense to be
+[00:21:49] shorting something that's extended like
+[00:21:51] this and it's harder for them to
+[00:21:53] understand buying even though this right
+[00:21:55] here is a perfectly reasonable momentum
+[00:21:58] pattern and to be honest this has a lot
+[00:22:00] more profit potential than shorting this
+[00:22:03] because if you short up here your
+[00:22:04] correction point is really just down to
+[00:22:06] the 9 EMA that's your first profit
+[00:22:08] Target maybe vwap so there's more profit
+[00:22:12] opportunity I think momentum trading
+[00:22:14] than reversal trading but sometimes for
+[00:22:16] a beginner Trader learning to trade
+[00:22:20] reversals and just scalp 10 or 15 cents
+[00:22:23] off of them can be kind of a um an
+[00:22:26] easier strategy to kind of break the ice
+[00:22:28] way with so anyway so now let's look at
+[00:22:30] some rsis to the downside so
+[00:22:33] loot um Lotus
+[00:22:35] technology this is one where although
+[00:22:37] the RSI is two you can see that it it's
+[00:22:41] not really a pattern that we would work
+[00:22:43] with Ln RSI is six again on this one um
+[00:22:48] it previously has shown a couple of
+[00:22:50] spots where you've had lower RSI and
+[00:22:52] candle's been outside the Binger bands
+[00:22:55] low RSI candle outside sorry low RSI
+[00:22:58] candle outside the Binger bands inverted
+[00:23:00] um but that's not the current position
+[00:23:02] right here the candle's not outside the
+[00:23:04] Binger bands these also um it's worth
+[00:23:07] noting are going inverse to the overall
+[00:23:10] Market overall Market's really strong so
+[00:23:12] none of these are really looking like
+[00:23:15] you know super strong
+[00:23:17] patterns a big drop there but hard to
+[00:23:21] say so these don't happen to be set up
+[00:23:24] right now this is this scan right here
+[00:23:26] is just searching for the RSI extremes
+[00:23:29] this scanner adds in a ton more criteria
+[00:23:32] so this is the one where we've got the
+[00:23:34] consecutive candles and we're kind of
+[00:23:36] we're taking this and then we're
+[00:23:37] filtering it even more to look for some
+[00:23:40] of those you know really strong setups
+[00:23:42] you can see this is a scanner that's
+[00:23:44] running you know pretty much all day
+[00:23:45] long there was a long one there
+[00:23:47] plnt so yep so that long stretch of
+[00:23:50] consecutive
+[00:23:52] candles I I just have always really
+[00:23:54] liked um that kind of setup of looking
+[00:23:57] for 10 15 20 green or red candles in a
+[00:24:01] row and then looking for that first
+[00:24:03] candle to reverse and go the other
+[00:24:05] direction and get that spring back up
+[00:24:08] when you take that kind of trade for me
+[00:24:10] my stop is always at the high or the low
+[00:24:12] of the move so my stop is very well
+[00:24:15] defined and then using these additional
+[00:24:17] indicators like RSI and Binger bands can
+[00:24:21] really help with that trade so I I would
+[00:24:24] say as a beginner Trader if you're
+[00:24:26] watching this episode you want to learn
+[00:24:28] more about technical analysis and
+[00:24:30] Candlestick patterns I'm going to put a
+[00:24:32] link to a PDF that you can download it's
+[00:24:34] a 112 page PDF that's going to break
+[00:24:37] down my favorite Candlestick chart
+[00:24:40] patterns these are multi Candlestick
+[00:24:42] chart patterns for those of you guys
+[00:24:43] that haven't already downloaded make
+[00:24:45] sure you click the link below download
+[00:24:46] you print it out you can put them next
+[00:24:47] to your desk and what I want you to do
+[00:24:49] is I want you to put the ones that you
+[00:24:51] are most in favor of that you love that
+[00:24:54] you want to really focus on right next
+[00:24:56] to your monitor and then when you're
+[00:24:57] watching your charts like this I want
+[00:25:00] you to compare the pattern of the ones
+[00:25:03] that were resolved correctly to what
+[00:25:05] you're looking at so if you're focusing
+[00:25:07] on doing um reversal trades just for
+[00:25:10] instance then what I think you should do
+[00:25:12] is you should have an ex a few examples
+[00:25:14] of some of the best reversal setups that
+[00:25:16] actually worked out because when we're
+[00:25:18] looking at these patterns we're looking
+[00:25:20] at the beginning of the pattern we don't
+[00:25:21] see the whole thing yet right we won't
+[00:25:24] see the full pattern until it's over so
+[00:25:28] we you have to be able to visualize
+[00:25:30] what's going to happen next and by
+[00:25:32] seeing this many green candles in a row
+[00:25:34] you'll start to get good at recognizing
+[00:25:36] okay what's going to happen next on this
+[00:25:39] is you know we're going to see this
+[00:25:40] reversal correction right so um you know
+[00:25:44] this kind of move candle outside the
+[00:25:45] Ballinger bands or really extended this
+[00:25:48] is what you're looking for those
+[00:25:49] extensions and the move back down so the
+[00:25:52] more of those patterns you have printed
+[00:25:54] out they'll help you in real time with
+[00:25:56] that pattern recognition then you'll see
+[00:25:58] this and you'll know all right all I'm
+[00:26:01] waiting for is that first candle to
+[00:26:02] close red right and then boom that's
+[00:26:05] your short stop is at the high or if
+[00:26:07] you're in the case of looking at
+[00:26:08] somebody that's been selling off for a
+[00:26:09] long time it's that first candle to go
+[00:26:10] green use RSI use your Ballinger bands
+[00:26:14] to help you time these reversals for
+[00:26:16] those of you that are focusing on
+[00:26:17] momentum trading like me you're going to
+[00:26:20] find most likely that RSI is not going
+[00:26:24] to be super
+[00:26:25] necessary when you're trading with the
+[00:26:27] trend the only only area it's going to
+[00:26:29] be helpful is when you're looking at the
+[00:26:31] the um when they when they deviate when
+[00:26:34] you have a Divergence so when the RSI is
+[00:26:37] when the price is making a new high and
+[00:26:39] the RSI begins moving down that's the
+[00:26:41] only time it can be helpful but what
+[00:26:43] I'll remind you is that with technical
+[00:26:44] indicators they only work if you're
+[00:26:46] using them on every single trade so if
+[00:26:48] you have ADD 50 indicators You' got to
+[00:26:51] check it on every single trade otherwise
+[00:26:53] you're going to get inconsistent results
+[00:26:55] so for me I want to sort of avoid
+[00:26:58] analysis paralysis of having too many
+[00:27:00] technical indicators on my chart and try
+[00:27:02] to keep it relatively simple for that
+[00:27:04] reason RSI doesn't currently make the
+[00:27:06] cut for my momentum trading strategy but
+[00:27:09] as a beginner Trader if you feel like
+[00:27:11] watching it is doable and helpful for
+[00:27:14] you then there's no reason not to use it
+[00:27:17] because ultimately as a beginner you
+[00:27:19] need a few extra checks to make up for
+[00:27:21] the fact that your experience and
+[00:27:24] educated intuition are not yet refined
+[00:27:27] so lean on some of those indicators
+[00:27:29] early on as you're getting started and
+[00:27:31] hey as always if you found this episode
+[00:27:32] helpful I hope you hit the thumbs up and
+[00:27:34] I hope you subscribe to the channel for
+[00:27:35] more episodes about trading strategy
+[00:27:38] just like this I'll see you for the next
+[00:27:40] upload real soon

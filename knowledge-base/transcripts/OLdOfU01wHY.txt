@@ -1,0 +1,1481 @@
+# 13 Day Trading Rules and Regulations You NEED to Know About
+# https://www.youtube.com/watch?v=OLdOfU01wHY
+# duration_sec: 3551
+
+[00:00:01] welcome to today's Deep dive into
+[00:00:03] everything you need to know about day
+[00:00:05] trading rules and regulations whether
+[00:00:07] you're a beginner Trader or you've been
+[00:00:09] doing this for some time whether you're
+[00:00:10] an international Trader or you're a US
+[00:00:13] resident it's very important that you're
+[00:00:14] familiar with the rules and regulations
+[00:00:17] that govern trading because if you make
+[00:00:19] a mistake you can get your account
+[00:00:21] locked it can be locked for 90 days it
+[00:00:23] can even be locked for 12 months and it
+[00:00:25] could force you to either have to switch
+[00:00:26] Brokers or it could put you out of the
+[00:00:28] game completely so I want to make sure
+[00:00:30] you're on the same page and you
+[00:00:32] understand the rules and regulations as
+[00:00:33] it pertains to active trading my name is
+[00:00:35] Ross Cameron I am a full-time day trader
+[00:00:37] I funded my first account in 2001 nearly
+[00:00:40] 20 years ago so I've been around for
+[00:00:42] quite some time and I have had to deal
+[00:00:44] with a number of the rules and
+[00:00:45] regulations around trading especially as
+[00:00:47] it pertains to minimum account size the
+[00:00:49] number of Trades you can take in a 5-day
+[00:00:51] rolling period whether or not you can
+[00:00:53] short a stock and I've gotten some of
+[00:00:55] those violations on my account that
+[00:00:57] force me to either add more money or
+[00:00:59] have my account locked for 90 days which
+[00:01:01] is a major pain in the butt so let's go
+[00:01:04] ahead and Dive Right In here I've got my
+[00:01:06] screen share we've got a slide deck and
+[00:01:08] we do have quite a lot to cover so I'm
+[00:01:11] going to begin with one of the simplest
+[00:01:13] uh explanations a simple regulation
+[00:01:15] about professional versus
+[00:01:16] nonprofessional status anytime you open
+[00:01:19] a brokerage account in the forms for
+[00:01:22] opening account they will ask you if
+[00:01:23] you're a professional or a
+[00:01:25] nonprofessional Trader and this throws a
+[00:01:27] a lot of people and a lot of people will
+[00:01:29] think wait a second do I need to have
+[00:01:30] some kind of license in order to trade
+[00:01:33] what is a professional Trader okay so
+[00:01:36] you do not require a license to trade in
+[00:01:39] the stock market as long as you're
+[00:01:40] trading with your own money however if
+[00:01:43] you're trading with someone else's money
+[00:01:45] you are required to get a license finra
+[00:01:47] gives these licenses if you pass the
+[00:01:49] exams and the license includes well
+[00:01:52] there's a number of them but the most
+[00:01:53] popular most common one so I shouldn't
+[00:01:55] say popular but the most common is a
+[00:01:57] series 63 or a series 7 now if you
+[00:02:00] wanted to get a job as a Trader let's
+[00:02:03] say you wanted to get a job working at
+[00:02:05] Charles Schwab and you want to be one of
+[00:02:06] the people when you call up you you talk
+[00:02:08] to a rep usually those account reps at
+[00:02:11] Charles Schwab have to have their Series
+[00:02:14] 7 or series 63 license because that
+[00:02:16] allows them to trade someone else's
+[00:02:19] money if you call them you say hey can
+[00:02:20] you buy shares of Apple well you can't
+[00:02:23] just talk to and just anyone about that
+[00:02:25] the people that execute those trades for
+[00:02:27] someone else have to be licensed which
+[00:02:29] means have to know a certain amount
+[00:02:31] about the market they have to understand
+[00:02:33] bid and ask spread order types liquidity
+[00:02:36] volume all these different things I mean
+[00:02:38] they're not it's not incredibly
+[00:02:39] complicated stuff but it is stuff you
+[00:02:41] need to know so if you want to get a job
+[00:02:44] at a bank if you want to get a job at a
+[00:02:46] hedge fund or anything like that you
+[00:02:48] most likely would need to get your
+[00:02:50] license but the employer would typically
+[00:02:53] sponsor you and help you get your
+[00:02:55] license and pay for it now one of the
+[00:02:57] things that's interesting is some
+[00:02:59] Traders will hear about prop firms a
+[00:03:02] proprietary trading desk a prop firm is
+[00:03:05] a company that has its own money and it
+[00:03:08] hires traders to trade with that money
+[00:03:11] and the Traders get a profit split but
+[00:03:14] in order to work at a prop firm and get
+[00:03:16] a profit split from the profits you
+[00:03:18] generate you would have to get your
+[00:03:20] license now these prop firms would
+[00:03:21] sponsor you in getting your license but
+[00:03:23] you got to pass the exams you got to
+[00:03:25] study for them and everything else so it
+[00:03:27] does add a bit of a hurdle and a lot of
+[00:03:29] these prop firms also make you pay a
+[00:03:32] decent amount of money basically as a
+[00:03:34] application fee and a training fee and
+[00:03:37] sort of your exam fee so it's kind of a
+[00:03:40] funny operation it's not the way I trade
+[00:03:43] it's not the way I recommend really any
+[00:03:44] beginner trade because ultimately giving
+[00:03:47] a profit split to the fund uh the the
+[00:03:50] the prop firm doesn't really make sense
+[00:03:53] for most Traders so if for 99% of you
+[00:03:58] you're not going to be a professional
+[00:03:59] Trader probably ever and if you are a
+[00:04:01] professional Trader you certainly
+[00:04:02] already know that because you you you
+[00:04:04] remember taking your exams so now the
+[00:04:08] second area that professional versus
+[00:04:10] nonprofessional status touches is Market
+[00:04:13] data the market data vendors through the
+[00:04:16] exchanges there have a monopoly on this
+[00:04:19] data this data market data is so
+[00:04:23] carefully protected and here's why it's
+[00:04:26] expensive and that the exchanges want to
+[00:04:28] make sure that the firms that are using
+[00:04:31] the data for professional business
+[00:04:33] purposes are paying the big money for it
+[00:04:37] so if you're a hedge fund then every
+[00:04:39] hedge fund Trader who's getting access
+[00:04:41] to this Market data is going to pay way
+[00:04:44] more money than your average joeo retail
+[00:04:47] Trader who's sitting here in their house
+[00:04:49] you know trading on eade or whatever it
+[00:04:51] is so when you when you declare
+[00:04:54] professional versus nonprofessional what
+[00:04:55] you may not realize is something happens
+[00:04:57] behind the scene and it changes is how
+[00:05:00] much money you're going to pay for
+[00:05:02] Market data so if you're a
+[00:05:04] nonprofessional Trader you pay a lot
+[00:05:06] less if you're a professional Trader the
+[00:05:08] exchanges say give us more money give us
+[00:05:11] that money so this is something again
+[00:05:13] that most of you wouldn't have to worry
+[00:05:15] about but if you did at one time get
+[00:05:18] your license and you do still have your
+[00:05:20] license then unfortunately you're kind
+[00:05:22] of stuck with paying the professional
+[00:05:25] data fees so until your license expires
+[00:05:27] and you're no longer considered a
+[00:05:29] professional Trader so for the rest of
+[00:05:31] you guys you get the discounted
+[00:05:34] nonprofessional rate and in fact there's
+[00:05:36] a lot of Brokers out there like Robin
+[00:05:38] Hood um thinker swim that actually don't
+[00:05:42] even charge you Market data they just
+[00:05:44] they pay for it kind of on your behalf
+[00:05:46] I'm sure they tuck it in somewhere I
+[00:05:48] mean they make enough money they're able
+[00:05:49] to um some of the smaller firms can't do
+[00:05:52] that so they do make you pay for your
+[00:05:53] data whether it's professional or
+[00:05:55] nonprofessional but they make you pay
+[00:05:57] either way but some of the big firms
+[00:05:58] will um will won't charge you as long as
+[00:06:01] you're nonprofessional if you are
+[00:06:02] professional then they'd make you pay
+[00:06:04] now the next rule that many of you are
+[00:06:06] familiar with is the PDT rule the it's
+[00:06:09] called the PDT rule the pattern day
+[00:06:11] trader rule PDT is an acronym uh and the
+[00:06:14] PDT rule was enacted established in on
+[00:06:16] February 27th
+[00:06:19] 2001 this rule states that any Trader
+[00:06:22] with a margin account who executes three
+[00:06:25] uh sorry more than three trades so four
+[00:06:27] or more trades within a five business
+[00:06:29] day period will be labeled as a pattern
+[00:06:32] day trader and pattern day Traders must
+[00:06:35] maintain a minimum account balance of
+[00:06:39] $25,000 that's a lot of money but here's
+[00:06:42] well some good news and this isn't great
+[00:06:44] news but here's some good news this rule
+[00:06:47] only applies to us residents so if you
+[00:06:50] are an international Trader this rule
+[00:06:52] doesn't apply to you as long as you
+[00:06:54] don't open an account with a US broker
+[00:06:56] dealer all us broker dealers enforc this
+[00:07:00] rule but if you're a US Trader there are
+[00:07:02] a few ways you can get around it but you
+[00:07:03] got to make sure you do it the right way
+[00:07:05] because if you do it the wrong way and
+[00:07:06] you don't understand how this works you
+[00:07:08] end up getting your account locked and
+[00:07:09] that's going to be a major problem so
+[00:07:12] the pattern day trader rule um it it
+[00:07:16] dictates how much you can trade if you
+[00:07:19] have a smaller account and this is again
+[00:07:21] specific to margin accounts so let's
+[00:07:24] first um Define what constitutes a day
+[00:07:27] trade so a day trade is um if you do one
+[00:07:31] buy and one sell that equals one trade
+[00:07:35] so you buy and then you sell that's one
+[00:07:37] trade if you do that inside of one day
+[00:07:40] if you buy twice and sell once that's
+[00:07:43] still only one trade hm it's a it's a
+[00:07:45] round trip if you buy buy and then sell
+[00:07:49] sell that's still just one trade but if
+[00:07:52] you buy sell then buy back and sell it's
+[00:07:56] two trades so what constitutes a trade
+[00:07:58] is how many times you change directions
+[00:08:01] so if you buy buy sell sell Buy Buy sell
+[00:08:05] sell it's still only two trades but if
+[00:08:08] you buy sell Buy sell Buy sell is three
+[00:08:11] trades or if you decide to buy buy buy
+[00:08:17] buy buy buy buy and then sell how many
+[00:08:21] trades is that it's just one trade you
+[00:08:24] could add 10 more sells here and it's
+[00:08:27] still only one trade because you only
+[00:08:29] change directions once but when you buy
+[00:08:32] you sell you buy you sell and then you
+[00:08:35] buy and sell that would be three changes
+[00:08:38] of directions therefore three trades so
+[00:08:41] if you had a margin account you could
+[00:08:43] end up using up all of your trades in
+[00:08:45] one day and then you can't trade again
+[00:08:48] until next week that until for five days
+[00:08:52] which is I mean it basically makes it
+[00:08:55] very hard to trade in your account if
+[00:08:57] you have a margin account and it's under
+[00:09:00] $225,000 so why do we even have this PDT
+[00:09:03] rule well it's about protecting Traders
+[00:09:06] and also protecting Brokers the PDT rule
+[00:09:09] again only applies to margin accounts
+[00:09:11] the other type of account is a called a
+[00:09:12] cash account which we'll talk about in a
+[00:09:14] minute now there's a couple of different
+[00:09:15] violations you can get in a cash account
+[00:09:17] so you got to be careful with that but
+[00:09:19] the PDT rule only applies to margin
+[00:09:21] accounts in the United States so us
+[00:09:24] margin accounts allow trading with four
+[00:09:26] times leverage okay so you have borrowed
+[00:09:29] money
+[00:09:29] so by enforcing this PDT rule they
+[00:09:32] essentially are helping
+[00:09:35] protect well retail Traders with less
+[00:09:38] money from potentially getting a margin
+[00:09:41] call so the way a margin call would work
+[00:09:44] is let's say you have a $10,000 account
+[00:09:47] and you have four times leverage so
+[00:09:49] you've got $40,000 of buying power so
+[00:09:52] let's say you buy 10,000 shares of a
+[00:09:54] $400 stock which would be
+[00:09:56] $40,000 and let's say that stock drops
+[00:09:59] to $2 a share 10,000 shares that equals
+[00:10:02] 20,000 so you're down 20 grand on this
+[00:10:05] trade wait a second you only had $10,000
+[00:10:07] in your account which means now your
+[00:10:09] account is negative $10,000 and you have
+[00:10:11] a $10,000 Margin Call so what what
+[00:10:15] happens with this Margin Call well when
+[00:10:17] you first opened your account and it was
+[00:10:19] a margin account you would have signed a
+[00:10:21] margin agreement and that margin
+[00:10:24] agreement would have said that if you
+[00:10:25] lose money you owe it back to the broker
+[00:10:28] so if you are in the negative you now
+[00:10:31] owe the broker that money so in the
+[00:10:33] short term you're on the hook but in the
+[00:10:36] long term let's say you're broke you
+[00:10:38] don't have that $10,000 then the broker
+[00:10:41] is the one who's stuck and they're going
+[00:10:43] to have to you know make up the
+[00:10:44] difference and eat the loss so to
+[00:10:47] protect the broker they don't want to
+[00:10:49] have leverage offered to relatively
+[00:10:52] small accounts because there's the risk
+[00:10:53] of blowing up a big mistake and then the
+[00:10:56] client owes the money which the broker
+[00:10:58] may never see and so they don't want to
+[00:11:00] take that risk so on February 27 2001
+[00:11:03] the PDT rule was enacted and again it's
+[00:11:06] only for margin accounts and only
+[00:11:08] because margin accounts have leverage so
+[00:11:12] in theory it should protect uh small
+[00:11:15] account Traders from potentially getting
+[00:11:16] a margin call and blowing up their
+[00:11:18] account now uh prior to May 31st 2024
+[00:11:22] we'll talk about something a rule that
+[00:11:24] changed on May 31st but prior to that um
+[00:11:28] so this is foreshadowing something
+[00:11:29] happened on May 31st but prior to May
+[00:11:31] 31st what Traders had to do in order to
+[00:11:35] get around the pattern day trader rule
+[00:11:37] for the most part was open an account
+[00:11:40] with an international broker because the
+[00:11:43] pattern day trader rule is only inforced
+[00:11:45] by us broker dealers so therefore if you
+[00:11:49] opened an account with a broker in
+[00:11:52] Ireland or in the Bahamas or really
+[00:11:55] anywhere that's not the United States
+[00:11:57] you would not be subject to the pattern
+[00:12:00] day trader rule the only problem is that
+[00:12:03] unfortunately or fortunately a lot of
+[00:12:06] countries won't just let a US resident
+[00:12:08] come and open an account they'll say
+[00:12:10] well wait who wait wait a second you got
+[00:12:12] to prove proof of residency we maybe in
+[00:12:15] Ireland they open only open accounts for
+[00:12:18] residents that are in the EU or that are
+[00:12:20] in Ireland specifically or the UK or
+[00:12:22] whatever the case is so you know they
+[00:12:23] have these very specific rules for these
+[00:12:26] you know for the Brokers and so what a
+[00:12:28] lot of us Traders ended up doing was
+[00:12:30] opening accounts with these small
+[00:12:32] boutique brokers in the Bahamas or in
+[00:12:34] the Caribbean that catered to us
+[00:12:37] residents I mean really they were
+[00:12:39] probably mostly bringing on us residents
+[00:12:42] who wanted to trade and day trade and
+[00:12:44] wanted to have that leverage but didn't
+[00:12:46] want to have the minimum
+[00:12:48] $25,000 so for years and years we would
+[00:12:50] open accounts with these International
+[00:12:52] Brokers and uh many of you may even
+[00:12:55] still have accounts with these Brokers
+[00:12:56] because they're still around so the pros
+[00:12:59] and cons these International Brokers
+[00:13:01] don't enforce the PDT Rule and instead
+[00:13:03] of giving you four times leverage they
+[00:13:05] actually will give you six times
+[00:13:07] leverage so they give you more leverage
+[00:13:09] those are Pros but the cons are that
+[00:13:12] these Brokers have higher platform fees
+[00:13:14] and commissions they've got wiring fees
+[00:13:16] they've got maintenance fees they don't
+[00:13:17] have Deposit Insurance you know they're
+[00:13:19] not us regulated uh companies and they
+[00:13:22] can create tax issues for you because
+[00:13:24] now you've got foreign income so for me
+[00:13:27] I funded an account in January of 20
+[00:13:29] 2017 with one of these offshore Brokers
+[00:13:31] and I funded it with
+[00:13:33] $583 and some change and by the end of
+[00:13:37] the first week trading on six times
+[00:13:38] leverage I had doubled the account 618
+[00:13:41] bucks by the end of the second week I
+[00:13:43] made 3,300 by the end of the third week
+[00:13:46] I made another 4,400 by the end of that
+[00:13:48] first month I had grown the account from
+[00:13:50] five $583 to 16 over 16,000 bucks and
+[00:13:55] there's no way I would have been able to
+[00:13:56] trade that quickly if I was trading in a
+[00:14:00] US uh account that was under the PDT
+[00:14:03] rule because I would have been
+[00:14:04] restricted to three trades every 5 days
+[00:14:08] so instead I was able to take well as
+[00:14:09] many trades as I wanted and I think I
+[00:14:11] took something like 45 trades that first
+[00:14:13] month so in theory I was I traded like
+[00:14:16] 10 times more than I would have been
+[00:14:18] able to or something like that at least
+[00:14:20] five times more than I would have been
+[00:14:21] able to had I been trading with a US
+[00:14:24] broker and I had more leverage so I
+[00:14:28] traded $49 times there was 49 trades
+[00:14:30] there uh and I maintained 85% accuracy
+[00:14:34] so this was during that 2017 small
+[00:14:36] account Challenge and then what changed
+[00:14:38] on May 31st
+[00:14:39] 2024 the settlement time changed on cash
+[00:14:43] accounts so it used to be that we had to
+[00:14:47] wait three days for a trade to settle if
+[00:14:49] you took a trade on Monday you couldn't
+[00:14:51] trade with that that money on Tuesday
+[00:14:53] you couldn't trade with it on Wednesday
+[00:14:54] you had to wait till Thursday so I mean
+[00:14:56] it was like waiting 3 days for a check
+[00:14:58] to clear it was ridiculous and then they
+[00:15:00] changed it to T2 so you only had to wait
+[00:15:03] 2 days and when it was T2 settlement
+[00:15:05] what a lot of Traders would do is they
+[00:15:07] would fund an account let's say with you
+[00:15:09] know $5,000 for example and on Monday
+[00:15:13] they would trade with
+[00:15:14] $2,500 now they would buy and sell a
+[00:15:16] stock $2,500 worth and then that money
+[00:15:19] wouldn't be available till day one day
+[00:15:22] two so which is Wednesday so then on
+[00:15:24] Tuesday they would trade with 2500 the
+[00:15:26] other half of the account and then that
+[00:15:28] money would be avail aable on Thursday
+[00:15:30] and then on Wednesday the money from
+[00:15:32] oops the money from Monday is available
+[00:15:34] so they trade with that and then that's
+[00:15:35] available on Friday so you'd be trading
+[00:15:38] basically half your account balance
+[00:15:41] every other day and then on May 31st
+[00:15:44] they change the settlement time to T1 so
+[00:15:46] now with a T1 settlement this gets a
+[00:15:49] whole lot easier you put $5,000 in and
+[00:15:52] with T1 you could trade $5,000 on Monday
+[00:15:55] Tuesday Wednesday Thursday and Friday
+[00:15:57] you could trade that money every single
+[00:15:58] day so you could trade the full $5,000
+[00:16:00] on Monday at the end of the day you've
+[00:16:02] traded all the money so you can't take
+[00:16:04] any more trades because you ran out of
+[00:16:05] available cash for buying power and then
+[00:16:07] the cash resets overnight so then you
+[00:16:09] could trade again on Tuesday so T the
+[00:16:12] change from T2 to T1 increased the
+[00:16:15] amount that you could trade by by double
+[00:16:18] it doubled the amount that you could
+[00:16:19] trade on any given day in a cash account
+[00:16:21] which is great and in fact it's actually
+[00:16:23] generated more volume in the market
+[00:16:24] because there's a lot of small account
+[00:16:25] traders that were held back and now they
+[00:16:27] can trade more so we've seen since May
+[00:16:30] more trading volume in the markets which
+[00:16:33] is generally a good thing and it's good
+[00:16:34] for the Brokers they want more trading
+[00:16:36] in fact the more trading there is the
+[00:16:38] more money they make on the fees so now
+[00:16:42] you sort of have a difference in the
+[00:16:43] pros and cons if you set up a cash
+[00:16:45] account and just to Define what a cash
+[00:16:48] account is uh you really have two
+[00:16:51] account types which I'm going to talk
+[00:16:52] about a little bit more in a second
+[00:16:53] because the of the rules and regulations
+[00:16:55] surrounding the two but just to Define
+[00:16:57] them in in sum
+[00:16:59] a cash account is just the money you put
+[00:17:02] in and you're tied to
+[00:17:04] settlement so you have no leverage no
+[00:17:08] leverage here um and you can't you can't
+[00:17:10] borrow money you can't short stocks you
+[00:17:13] have to wait for T1 settlement and then
+[00:17:15] in a margin account you can trade an
+[00:17:17] infinite amount of times but you've got
+[00:17:19] the PDT rule of course and um and
+[00:17:23] unfortunately in a margin account not
+[00:17:25] only do you have the PDT rule you have
+[00:17:28] um
+[00:17:29] uh you you have well you have a couple
+[00:17:31] of there there's a couple other things
+[00:17:32] we we'll get into this more in a second
+[00:17:34] so so now with a cash account you've got
+[00:17:37] uh T1 settlement you've got no
+[00:17:39] commissions no platform fees if you're
+[00:17:41] using like Robin Hood or think or Swim
+[00:17:43] and you've got insured deposits yes you
+[00:17:46] still have to do deal with the PDT Rule
+[00:17:47] and you've got cash only but it's a more
+[00:17:49] compelling um proposition if you have a
+[00:17:52] small account to just use a cash account
+[00:17:55] and so I sometimes will ask the question
+[00:17:57] of what's better for a small account
+[00:17:59] Trader is it better to use use a cash
+[00:18:01] account today to start trading or is it
+[00:18:04] better to use an international broker
+[00:18:05] dealer so I think for a skilled Trader
+[00:18:08] with a track record of success an
+[00:18:10] international broker dealer will be a
+[00:18:13] tool that you use to maximize returns in
+[00:18:16] a shorter period of time in spite of the
+[00:18:17] fees but for a beginner Trader using
+[00:18:20] real money for the first time a cash
+[00:18:23] account will force discipline because
+[00:18:25] it's going to force you to focus on
+[00:18:27] quality over quantity because you're
+[00:18:29] limited in how much you can trade every
+[00:18:31] single day progress will be slower but I
+[00:18:34] think it's a more sustainable way to
+[00:18:36] start your career as a beginner so you
+[00:18:38] know as a beginner five years ago that
+[00:18:41] wasn't the case because a cash account
+[00:18:43] only allowed you to trade really a
+[00:18:45] couple times a week but now with T1
+[00:18:47] settlement you you really can trade a
+[00:18:49] lot more so now let's get into these
+[00:18:52] account types in a little bit more
+[00:18:53] detail all right so we really have two
+[00:18:55] primary types of accounts and this is
+[00:18:57] regardless of whether you're a US
+[00:18:58] resident or you're an international
+[00:19:00] Trader if you open an account with um
+[00:19:03] interactive brokers in Europe or your
+[00:19:05] Weeble and um in Mexico or Canada
+[00:19:08] wherever you've got cash accounts and
+[00:19:10] you have margin accounts so with a cash
+[00:19:13] account you have no leverage which means
+[00:19:15] your cash at balance is that's the
+[00:19:17] amount of money you can trade with
+[00:19:19] whereas with a margin account you can
+[00:19:21] have up to four times leverage well
+[00:19:22] actually it's up to six times leverage
+[00:19:25] if you use some of these International
+[00:19:26] Brokers so and in most cases it's four
+[00:19:29] times leverage even in Brokers that are
+[00:19:31] uh that are international it's only a
+[00:19:33] couple that offer six times uh but there
+[00:19:35] should be actually an asterisk here
+[00:19:37] because some Brokers will require higher
+[00:19:41] minimum account sizes in order to trade
+[00:19:44] on
+[00:19:44] Leverage um trade zero is a broker in
+[00:19:48] the Bahamas that uh accepts
+[00:19:50] International Traders they require I
+[00:19:52] think $500 minimum account size I think
+[00:19:55] it might be $2,500 to have six times
+[00:19:57] Leverage uh interactive brokers I think
+[00:20:00] requires 2500 for leverage as well but
+[00:20:03] they only offer four times leverage uh a
+[00:20:05] margin account you don't have to wait
+[00:20:06] for settlement so you can trade as much
+[00:20:09] as you want you do have margin which
+[00:20:11] means you can short stocks if you want
+[00:20:14] to and there are no limits on day
+[00:20:16] trading asteris except for the PDT rule
+[00:20:20] the PDT rule is really your only limit
+[00:20:23] uh and that is a significant limiting
+[00:20:25] factor that's definitely a rule that's
+[00:20:26] going to hold back a lot of Traders
+[00:20:29] now you also have in the United States
+[00:20:32] and in other countries as well um cash
+[00:20:34] accounts and margin accounts that are
+[00:20:37] designated specifically as Retirement
+[00:20:40] accounts so a retirement account is a
+[00:20:44] tax deferred or potentially taxfree
+[00:20:48] account depending on how you set it up
+[00:20:50] and what country you live in so here in
+[00:20:53] the United States we have IRAs which are
+[00:20:55] individual retirement accounts um in uh
+[00:20:58] in I know in Japan you've got the Nissa
+[00:21:01] accounts um so you know so a lot of
+[00:21:03] different countries offer these
+[00:21:05] different types of retirement incentives
+[00:21:07] the government wants you to save for
+[00:21:09] retirement the more you save for
+[00:21:11] retirement the less you'll have to
+[00:21:12] depend on social services and things
+[00:21:14] like that so you're able to set up these
+[00:21:16] accounts which are tax-free now the Roth
+[00:21:19] IRA in the United States is one of the
+[00:21:21] most popular retirement accounts because
+[00:21:23] the growth is tax-free and the
+[00:21:26] distributions are tax free so with a
+[00:21:31] cash account retirement account a cash
+[00:21:35] Roth IRA for instance you have no
+[00:21:37] leverage because it's a cash account you
+[00:21:39] still have to wait on T1 settlement you
+[00:21:41] have no margin and there's no limits on
+[00:21:43] day trading but you know of course
+[00:21:45] you'll run out of money when you run out
+[00:21:46] of cash and so most traders who are
+[00:21:49] under $25,000 in the United States will
+[00:21:52] set up a Roth IRA as a cash account once
+[00:21:55] you switch once you're over 25,000 you
+[00:21:58] you could change that account from a a
+[00:22:00] margin from a cash account to a margin
+[00:22:02] account and at that point you can trade
+[00:22:05] as much as you want but even in a uh
+[00:22:08] Roth IRA uh margin account you still
+[00:22:11] have the PDT rule so a Roth IRA account
+[00:22:16] that's margin that's under 25k you're
+[00:22:18] going to be back to the same
+[00:22:19] restrictions as a margin account it's
+[00:22:21] going to be a pain in the butt you're
+[00:22:23] going to you're you're not going to be
+[00:22:24] able to trade as much as you want so um
+[00:22:27] when you go to open an account opening
+[00:22:30] an account whether it's a cash account
+[00:22:31] or margin account or retirement account
+[00:22:33] it's very similar to opening a bank
+[00:22:35] account you'll have to generally provide
+[00:22:38] identification and proof of residency
+[00:22:41] with a mailing address so you usually
+[00:22:43] have to provide like a utility bill or
+[00:22:45] something like that to prove your
+[00:22:47] physical address this is true in the
+[00:22:49] United States uh for all Brokers as part
+[00:22:51] of their um they have this com Bank
+[00:22:54] compliance stuff where they've you know
+[00:22:57] after September 11th they had all these
+[00:23:00] new rules that came into effect with
+[00:23:02] Banking and then of course they
+[00:23:03] Amplified during the um the Great
+[00:23:06] Recession and the banking crisis of
+[00:23:08] 20072 2008 so now there's a lot of
+[00:23:11] restrictions on who can open accounts
+[00:23:12] and what country you can be in and this
+[00:23:14] and that and and it's true that you know
+[00:23:16] there's a lot of us Brokers that are
+[00:23:19] happy to accept International Traders so
+[00:23:22] the broker that I use which is called
+[00:23:24] light speed trading they accept
+[00:23:26] International Traders but if you're an
+[00:23:29] international Trader you're then going
+[00:23:30] to subject yourself to the pattern day
+[00:23:32] trader rule because even though you're
+[00:23:35] International as a US broker dealer
+[00:23:37] they're still required to enforce this
+[00:23:39] $225,000 minimum on you so most
+[00:23:42] International Traders aren't going to
+[00:23:44] use a US broker they'll use uh maybe
+[00:23:47] Weeble depending on what country they're
+[00:23:48] in they'll use interactive brokers or
+[00:23:51] maybe trade zero cmeg one of these
+[00:23:53] International Brokers that um that don't
+[00:23:56] enforce the PDT rule so now once you've
+[00:24:00] got your account open you've got to be
+[00:24:01] aware of certain account violations and
+[00:24:03] I've seen this happen for a number of
+[00:24:05] beginner Traders and it can be super
+[00:24:07] frustrating the first is called a free
+[00:24:10] riding
+[00:24:11] violation so a free riding violation
+[00:24:14] occurs if you deposit money into your
+[00:24:17] trading account you trade with that
+[00:24:19] money before the funds have settled and
+[00:24:21] some Brokers will let you do this on
+[00:24:23] good faith essentially uh and then the
+[00:24:25] funds don't settle all right so now you
+[00:24:28] traded with money that was actually
+[00:24:30] never there and you will have a free
+[00:24:32] riding violation the rules on free
+[00:24:34] riding violations are strict if this
+[00:24:36] happens just once during a 12-month
+[00:24:39] period a client could be restricted to
+[00:24:40] using settled cash only for 90 days and
+[00:24:44] profits from the trade could be seized
+[00:24:46] and any losses incurred by the trade
+[00:24:48] would be the client's responsibility if
+[00:24:49] they're forced to liquidate the position
+[00:24:51] at a loss because your check didn't
+[00:24:54] clear for funding the account so it's
+[00:24:57] always mean that hopefully this wouldn't
+[00:25:00] happen as long as you're not writing a
+[00:25:02] bad check but it has happened before to
+[00:25:04] people just by mistake and so it's
+[00:25:07] something to be aware of now a good
+[00:25:09] faith violation um this one's a little
+[00:25:11] bit different so if you sell a position
+[00:25:13] in a cash account and then you buy a new
+[00:25:16] position and sell it before the original
+[00:25:18] trade cleared your account can get
+[00:25:20] restricted to trading with sell cash
+[00:25:22] only for 90 days and this actually just
+[00:25:23] happened to me recently during my small
+[00:25:26] account challenge so what happened was
+[00:25:29] I I was I had my small account Challenge
+[00:25:31] and I had a cash account set up and what
+[00:25:34] I didn't realize was that uh thinker
+[00:25:37] swim and Charles Schwab don't
+[00:25:40] automatically restrict you to only
+[00:25:43] trading the amount of cash you have so
+[00:25:47] what I thought was oh I funded the
+[00:25:49] account and whatever let's just say at
+[00:25:51] one point I had $15,000 in it so I just
+[00:25:53] figured all right if I take um $155,000
+[00:25:56] worth of Trades my available buying
+[00:25:58] power each trade I take will go lower
+[00:26:01] and lower and lower until eventually
+[00:26:03] it's zero and my order will get rejected
+[00:26:06] but in fact that's not true you take a
+[00:26:09] trade you sell the trade and they add
+[00:26:11] the money back into your account and
+[00:26:13] it's your responsibility not to day
+[00:26:16] trade with that money again and if you
+[00:26:19] do your account gets restricted and so
+[00:26:22] my account got actually restricted for
+[00:26:25] 90 days however the Restriction was that
+[00:26:28] I could only trade with settled cash
+[00:26:31] which is actually what I kind of wanted
+[00:26:33] in the first place so the restriction
+[00:26:35] for me wasn't a big deal but a
+[00:26:38] restriction that can be a big deal for
+[00:26:40] people is if you get in trouble for
+[00:26:42] violating the PDT rule so if you have an
+[00:26:46] account that is a margin account and
+[00:26:49] it's under
+[00:26:50] $25,000 and you take more than the four
+[00:26:54] trades you take four or more trades
+[00:26:57] within that 5 days period then you will
+[00:27:00] be issued a margin call so let's say
+[00:27:02] your account has well first of all let's
+[00:27:05] say you have $27,500 in your account and
+[00:27:08] you've been day trading the account for
+[00:27:09] months and months and months so you're
+[00:27:12] already flagged as a pattern day trader
+[00:27:14] now the problem
+[00:27:16] here is that since you've been flagged
+[00:27:18] as a pattern day trader they're going to
+[00:27:21] say let's say you take a loss and your
+[00:27:22] account goes down to
+[00:27:25] 24950 they're going to say you need to
+[00:27:27] add add $50 to your account to get it
+[00:27:31] back up to 25,000 because you've already
+[00:27:33] been flagged as a pattern day trader so
+[00:27:36] you're going to get a margin call of 50
+[00:27:39] bucks and unfortunately until you add
+[00:27:42] that money you cannot trade in your
+[00:27:45] account at all which is obviously a drag
+[00:27:49] and this is exactly what used to happen
+[00:27:51] to me I would trade I would have my
+[00:27:53] account right above 25,000 then I would
+[00:27:55] take a loss I'd have to add more money
+[00:27:57] into the account account would be
+[00:27:58] restricted then eventually I'd get it
+[00:28:01] back up now the other scenario where you
+[00:28:04] can get a margin call is let's say you
+[00:28:05] have like $8,000 account it doesn't
+[00:28:07] matter it's just any amount under
+[00:28:10] 25k but it's still a margin account so
+[00:28:13] it could be 8,000 doesn't matter and you
+[00:28:16] take four trades well when you take that
+[00:28:19] fourth trade now the nice thing by the
+[00:28:22] way with Charles Schwab is they'll
+[00:28:24] actually tell you they'll say uh wait a
+[00:28:27] second if you take this next trade if
+[00:28:30] you buy a stock right now you cannot
+[00:28:33] sell it today or you're going to trigger
+[00:28:34] the fourth day trade within a 5-day
+[00:28:37] period so they warn you which is nice
+[00:28:39] but not all Brokers do warn you so if
+[00:28:41] they don't warn you and you go ahead and
+[00:28:43] take that fourth trade then your account
+[00:28:46] is locked they'll say you have to put in
+[00:28:50] $116,000 to get your account to 25 Grand
+[00:28:53] and you'll be thinking um impossible I
+[00:28:56] can't do that so what do I I do at this
+[00:28:59] point you've got a couple choices choice
+[00:29:02] number one is you close your account and
+[00:29:04] you switch to a different broker and the
+[00:29:06] different broker will be you'll be a net
+[00:29:08] new account and you won't have that it
+[00:29:10] that that violation doesn't carry from
+[00:29:12] broker to broker so you could do that
+[00:29:15] and I did that in the past when I was a
+[00:29:17] beginner Trader what you can also do is
+[00:29:19] you can call the broker and say you got
+[00:29:22] to beg you got to say I'm so sorry this
+[00:29:24] was a mistake I don't know what I was
+[00:29:26] thinking you know I was got I had a bad
+[00:29:28] day and I was had just it was an awful
+[00:29:31] morning and I had terrible diarrhea I
+[00:29:33] don't know what I was thinking and
+[00:29:34] they'll say I've heard enough I I've
+[00:29:36] heard enough just I'll press the reset
+[00:29:38] button that's all they have to do all
+[00:29:40] you have to do is convince them to press
+[00:29:41] the reset button they press that reset
+[00:29:44] button and you're good but they'll only
+[00:29:47] do that for you a couple times so you
+[00:29:49] got to make sure you think about your
+[00:29:51] excuses very carefully because they'll
+[00:29:53] only give you that reset a couple times
+[00:29:55] so you've got to be really
+[00:29:56] careful okay so that's an option uh and
+[00:30:00] many people will do it but you'll you'll
+[00:30:03] learn quickly that you can only use that
+[00:30:05] uh so many times before it stops working
+[00:30:09] so those are three very specific account
+[00:30:11] violations that you have to be aware of
+[00:30:14] now something else you've got to know
+[00:30:15] about when it comes to day trading and
+[00:30:17] this is especially in the United States
+[00:30:19] is uh wash sales wash sales are a tax
+[00:30:24] implication so a wash sale occurs when
+[00:30:28] you sell a position for a loss and then
+[00:30:30] you buy back a what's called quote
+[00:30:34] substantially similar position within 30
+[00:30:38] days when you do this you're not allowed
+[00:30:40] to write off the initial loss so now
+[00:30:43] let's think about this for a second so
+[00:30:45] let's say you took a trade on you know
+[00:30:47] whatever it was May 1st and you took a
+[00:30:50] trade and you lost
+[00:30:51] $3,000 all right so now you've got a
+[00:30:53] $33,000 loss that you'll be able to
+[00:30:56] apply against any profit that you have
+[00:30:59] but then on May 10th you buy back the
+[00:31:02] same stock and you make let's just say
+[00:31:05] $1,000 so now you got $1,000 of profit
+[00:31:09] well because you bought back the stock
+[00:31:11] you now can't write off the initial loss
+[00:31:14] so now you're in a situation where you
+[00:31:16] show $1,000 of gain even though in net
+[00:31:20] you're actually down $2,000 still this
+[00:31:23] is a problem and so when you get your
+[00:31:26] $199 from your broker all us residents
+[00:31:29] get 1099s from the broker they will have
+[00:31:32] you know your net uh profit law profit
+[00:31:35] loss um and then they'll they'll say
+[00:31:38] wash sales exempt and they'll have an
+[00:31:42] amount of money where these were the
+[00:31:44] wash sales that you had where you had
+[00:31:46] the loss you bought back a position so
+[00:31:48] you can't write off more than this
+[00:31:50] amount and so what it effectively does
+[00:31:52] is it increases your net profit on the
+[00:31:55] year now I've heard of traders who who
+[00:31:58] trade the same stock every day like
+[00:32:00] something like apple or Netflix and
+[00:32:03] Amazon doesn't matter they trade the
+[00:32:04] same stock every single day and then at
+[00:32:06] the end of the year they're like whoa
+[00:32:08] wait a second it's showing that I made a
+[00:32:10] lot more money than I actually made
+[00:32:12] because it's taking away my losses right
+[00:32:15] I mean if you made 100,000 but you lost
+[00:32:17] 90,000 and you're only up Net 10 grand
+[00:32:20] of course it shouldn't show that you're
+[00:32:22] up
+[00:32:24] $100,000 and you have to pay $50,000 in
+[00:32:26] income tax that doesn't make any sense
+[00:32:28] and obviously if you hire a good account
+[00:32:29] and in a CPA they can they can help
+[00:32:32] resolve that for you because this wash
+[00:32:34] sale rule was actually designed because
+[00:32:38] what investors used to do is if they
+[00:32:41] were holding a losing position a a
+[00:32:44] position that they were read on uh let's
+[00:32:47] say December 20th they would sell the
+[00:32:50] position for a loss so their 1099 at the
+[00:32:52] end of the year would show a loss and
+[00:32:54] then they would buy back the position on
+[00:32:55] January 1st now that's why they don't
+[00:32:57] issue 1099 until February because they
+[00:33:00] got to make sure you didn't buy back a
+[00:33:02] December loss in January to to try to
+[00:33:05] book the loss it's tax loss harvesting
+[00:33:08] is a more modern phrase but you still
+[00:33:11] can't buy back the position if you're
+[00:33:12] going to take that loss so because so
+[00:33:15] many people were doing that for so long
+[00:33:16] the IRS came up with this wash sale rule
+[00:33:19] so then how to active Traders like
+[00:33:21] myself avoid wash sales there's really
+[00:33:23] there's really two ways you can avoid
+[00:33:25] them um so the first is is um Mark
+[00:33:28] tomarket accounting Mark tomarket
+[00:33:31] accounting um actually change is it's a
+[00:33:33] account it's an you mark tomarket
+[00:33:36] accounting is uh a change in accounting
+[00:33:39] status that you file with the IRS via
+[00:33:42] form 3115 not to get into the weeds but
+[00:33:46] uh it's an option for full-time Traders
+[00:33:48] and you have to notify your broker after
+[00:33:50] the IRS accepts this election and from
+[00:33:53] this point forward you're exempt from
+[00:33:54] wash sales um so you can do Mark to
+[00:33:57] Market accounting and then you're exempt
+[00:33:59] from wash sales the only problem is it
+[00:34:02] doesn't work retroactively it only works
+[00:34:04] from this day forward and in fact it's
+[00:34:07] actually for the tax year so in order
+[00:34:10] for the current tax year so you've got
+[00:34:14] current tax year right here in order to
+[00:34:17] have Mark to Market accounting for this
+[00:34:19] year you actually have to file your form
+[00:34:22] 3115 by April
+[00:34:25] 15th so you've actually got to get it by
+[00:34:27] by April 15th for it to apply for this
+[00:34:29] tax year so if you get it on you know
+[00:34:33] November 5th or whatever it is doesn't
+[00:34:35] matter um unfortunately it won't apply
+[00:34:39] until January 1 of the following Year
+[00:34:42] Jan one um whatever so that's a little
+[00:34:45] bit of a a Nuance there and anyways once
+[00:34:48] you get the um the mark to Market
+[00:34:51] election accepted by the IRS you do have
+[00:34:53] to notify your broker and they change on
+[00:34:56] their back end um your tax status so
+[00:34:59] you'll no longer have any wash sales so
+[00:35:02] that's something that I did and many
+[00:35:04] Traders will do alternatively for what
+[00:35:07] it's worth trading in a retirement
+[00:35:09] account will exempt you from wash sales
+[00:35:11] as well because the account is tax
+[00:35:13] protected there's already no tax on it
+[00:35:15] so this is also a good option um for for
+[00:35:19] you if you'd be interested I mean it
+[00:35:21] depends on your individual situation
+[00:35:23] because if you're trying to generate
+[00:35:24] profit from the market to cover cost of
+[00:35:26] living then of course uh you need to be
+[00:35:28] able to take the profit out so you'll
+[00:35:29] have to trade in a taxable account so
+[00:35:31] either mark to Market election uh via
+[00:35:33] form 3115 or I think it's section 429 of
+[00:35:38] the IRS um code where you can read more
+[00:35:41] about it or you trade in a Roth
+[00:35:43] IRA uh or an individual Ira now the next
+[00:35:47] uh Rule and regulation we're going to
+[00:35:49] talk about is the short sale restriction
+[00:35:52] so first of all um in order to short a
+[00:35:55] stock if you want to Short a stock you
+[00:35:59] must um
+[00:36:01] trade in a margin account so you have to
+[00:36:07] have a margin account that's a rule in
+[00:36:09] order to short this is a requirement and
+[00:36:11] the reason is because when you short
+[00:36:13] you're borrowing a position from someone
+[00:36:15] else to create that negative short
+[00:36:17] position and that means you've borrowed
+[00:36:20] something so you have to have the margin
+[00:36:22] agreement on file which means you
+[00:36:25] promise to pay back if you lose
+[00:36:28] if you in a cash account you don't have
+[00:36:30] a margin agreement because the most you
+[00:36:31] can lose is your own money but in a
+[00:36:34] margin account because you can trade
+[00:36:36] with leverage and you can short stocks
+[00:36:38] which means you're borrowing a stock
+[00:36:40] from someone else to sell in the market
+[00:36:42] you have to have the margin agreement
+[00:36:44] which states that you'll repay any
+[00:36:45] losses you have so number one to short
+[00:36:48] you need to have a margin account and
+[00:36:50] number two you'll find that many stocks
+[00:36:52] will have SSR enabled which is the short
+[00:36:56] sale restriction so if a stock has a
+[00:36:59] short sale restriction you can only
+[00:37:02] short it on an up Tick the short sale
+[00:37:05] restriction is a rule that was created
+[00:37:07] um a long time ago to prevent um bare
+[00:37:11] raids or Flash crashes where the price
+[00:37:14] of a stock is driven down by short
+[00:37:17] sellers uh which is you know not good
+[00:37:20] for the stock market the stock markets
+[00:37:21] designed for creation of wealth and for
+[00:37:24] stocks to go up not for them to get
+[00:37:25] pummeled into the ground so so
+[00:37:28] Regulators created the short sale
+[00:37:30] restriction if a stock drops 10% from
+[00:37:32] the previous day's close the short sale
+[00:37:35] restriction is activated for the rest of
+[00:37:37] the day and in that case the only way to
+[00:37:39] short the stock will be on an up Tick so
+[00:37:42] I'll give you an example what this looks
+[00:37:44] like so this is a stock for instance um
+[00:37:47] that has the short sale restriction on
+[00:37:49] so if I press the sell button right now
+[00:37:52] to to go short and to sell to this
+[00:37:55] person buying at $691 my order would get
+[00:37:58] it it wouldn't execute it would just sit
+[00:38:00] there I would not be able to get filled
+[00:38:03] until my or until someone buy shares
+[00:38:06] from me so let me switch to my other
+[00:38:08] account this is a retirement account but
+[00:38:10] I'll switch to my my margin account so
+[00:38:12] this account is a taxable account which
+[00:38:14] means I can short stocks so Bank of
+[00:38:16] America um and I'll just drag this whole
+[00:38:18] thing up so you could see it better all
+[00:38:19] right I'm going to move this up here so
+[00:38:21] we could look at the whole account all
+[00:38:23] right so Bank of America right here
+[00:38:24] let's say I want a short uh one share of
+[00:38:26] it and I a short at 4512 I put the sell
+[00:38:30] button out that's in order to sell one
+[00:38:33] share at
+[00:38:35] 4512 now this stock is not on short sale
+[00:38:37] restriction which means if I want to
+[00:38:39] short it right now I can short at 4510
+[00:38:43] boom just like that I'm short one share
+[00:38:45] of the stock because this is not on
+[00:38:47] short sale restriction so I there's no
+[00:38:49] issue with shorting it now unfortunately
+[00:38:52] um so this stock I I'll explain that in
+[00:38:54] a second so with a short sale
+[00:38:56] restriction you cannot short on the bid
+[00:38:59] you can only short by having your order
+[00:39:01] sit on the ask so now I'm going to buy
+[00:39:03] back this one share I shorted and I'm
+[00:39:05] going to show you this is how you short
+[00:39:08] if you have a stock with short sale
+[00:39:10] restriction you have to put your order
+[00:39:12] here on the offer and wait for someone
+[00:39:15] to come buy the shares that you're
+[00:39:17] selling so the effect that this has is
+[00:39:21] you can't clear out all the people here
+[00:39:24] that are buying by just selling and
+[00:39:26] selling and selling to them you can only
+[00:39:29] sell when someone comes and buys your
+[00:39:31] shares so in a very weak Market when
+[00:39:34] there's not a lot of buyers it's
+[00:39:35] actually going to be harder to short a
+[00:39:37] stock because of this short sale
+[00:39:39] restriction regulation and in fact um
+[00:39:42] there's a number of reasons why shorting
+[00:39:44] is more difficult than trading to the
+[00:39:46] long side the first is because of the
+[00:39:48] short sale
+[00:39:49] restriction the second is because a lot
+[00:39:52] of Brokers will restrict your your
+[00:39:55] ability to even borrow shares in the
+[00:39:57] first place they don't want you to
+[00:39:59] borrow shares because they're afraid
+[00:40:00] that you're going to blow up your
+[00:40:02] account and you're going to owe the
+[00:40:03] broker money just like the reason that
+[00:40:06] they created the PDT rule in the first
+[00:40:08] place and so what a lot of Brokers will
+[00:40:10] do is they'll simply say you know what
+[00:40:11] you no you cannot short this penny stock
+[00:40:14] this stock is 15 cents a share which
+[00:40:16] means if you short it the most you can
+[00:40:18] make is if it goes to zero what if it
+[00:40:19] goes to $10 a share you're going to lose
+[00:40:21] a million bucks no way you're not
+[00:40:23] shorting the stock so now all penny
+[00:40:25] stocks for the most part are hard to
+[00:40:27] borrow or hard to short so even if you
+[00:40:30] have a great idea because of the
+[00:40:32] restrictions around Short Selling it's
+[00:40:34] going to be harder to short the stock so
+[00:40:35] number one short sale restriction number
+[00:40:37] two availability of shares to borrow
+[00:40:40] number three borrowing fees so borrowing
+[00:40:42] fees are the fees you have to pay your
+[00:40:44] broker to borrow shares of a stock that
+[00:40:47] is difficult to borrow and you're going
+[00:40:48] to pay those fees every single day that
+[00:40:51] you're holding a stock short that has a
+[00:40:53] borrowing fee and so you end up spending
+[00:40:56] sometimes more money in borrowing fees
+[00:40:58] than you could even make in profit which
+[00:41:01] of course doesn't make sense so as a
+[00:41:03] result um Short Selling is going to be
+[00:41:06] more difficult now this stock has a t
+[00:41:08] which means it's on the threshold list a
+[00:41:10] stock that's on the threshold list if
+[00:41:12] you go down here to try to borrow shares
+[00:41:14] it's going to say um not eligible you
+[00:41:16] are not no one is allowed to short a
+[00:41:18] stock that is on the threshold list so
+[00:41:21] some companies end up going on the
+[00:41:23] threshold list because of failures to
+[00:41:25] deliver which is something times tied to
+[00:41:28] naked Short Selling and when that
+[00:41:30] happens nobody can short the stock even
+[00:41:32] if you want to so there are some
+[00:41:36] elaborate Equity swaps that
+[00:41:39] institutional Traders will do to
+[00:41:42] effectively create a synthetic short
+[00:41:44] position even though they're not
+[00:41:45] actually shorting the stock that's not
+[00:41:47] something that any retail Trader like
+[00:41:49] you or I would be able to do so it's
+[00:41:50] almost not even worth mentioning but
+[00:41:52] anyways so these so there are a number
+[00:41:54] of restrictions that govern uh Short
+[00:41:56] Selling and will make it more difficult
+[00:41:58] now the next rule that I want to talk
+[00:42:00] about um pertains to circuit breaker
+[00:42:02] halts there's a lot of misinformation
+[00:42:04] about circuit breaker halts so um I
+[00:42:08] would say circuit breaker halts are
+[00:42:09] actually our favorite types of halts as
+[00:42:11] day Traders uh the The Exchange
+[00:42:15] exchanges plural NASDAQ the New York
+[00:42:18] Stock Exchange American Stock Exchange
+[00:42:20] they can halt trading of stocks on their
+[00:42:23] exchange at any time if they feel it's
+[00:42:25] appropriate why would they halt trading
+[00:42:27] and shares they can halt trading and
+[00:42:30] shares if they are going to conduct an
+[00:42:31] investigation into the company if
+[00:42:33] they're worried about fraud or something
+[00:42:35] like that they'll halt the shares while
+[00:42:36] they do their investigation if the
+[00:42:38] company asks the exchange to Halt shares
+[00:42:42] uh trading in their stock then the
+[00:42:43] exchange will do it on the request of
+[00:42:45] the company usually a company will do
+[00:42:47] this and it'll say halted pending news
+[00:42:49] and it means the company is going to put
+[00:42:51] out some news and they don't want anyone
+[00:42:53] to trade the stock while the news comes
+[00:42:55] out until the news has been released
+[00:42:57] it's been read by everyone everyone can
+[00:42:59] think about it and then trading can
+[00:43:01] begin usually that happens when bad news
+[00:43:03] comes out they want to give people like
+[00:43:05] a moment to not be able to trade the
+[00:43:07] stock so they can't Panic sell although
+[00:43:10] sometimes when it begins trading they
+[00:43:11] still Panic sell and then the other type
+[00:43:13] of halt is a circuit breaker halt it's
+[00:43:17] Al also called a limit up limit down
+[00:43:19] halt so Limit Up limit down um yeah
+[00:43:23] Limit Up limit down l l d so this halt
+[00:43:27] uh occurs uh all the time we see this
+[00:43:29] all the time and this is not something
+[00:43:31] that concerns me but during the GameStop
+[00:43:33] era a lot of people were saying the you
+[00:43:36] know the exchange is they're they're
+[00:43:39] suspending trading they're cheating the
+[00:43:41] system they're trying to you know this
+[00:43:44] and that when it's actually just a
+[00:43:45] mechanism like if you overload a circuit
+[00:43:49] at your house and you flip the circuit
+[00:43:50] breaker it's a mechanism that's
+[00:43:52] completely automated that the exchange
+[00:43:54] has really no um active control of over
+[00:43:58] it's just uh a rule that was created so
+[00:44:02] the way this works um is circuit breaker
+[00:44:05] halts will occur if a stock moves more
+[00:44:09] than a certain amount within a certain
+[00:44:11] period of time so a tier one security
+[00:44:15] with the previous close above $3 a share
+[00:44:18] will halt if it goes up more than 5%
+[00:44:23] within a 5 minute period and a tier one
+[00:44:25] security is like an S&P 500 uh company
+[00:44:29] tier 2 Securities are all the other
+[00:44:31] stocks in the market and tier 2
+[00:44:34] Securities priced above $3 will halt if
+[00:44:36] they go up more than 10% within a period
+[00:44:39] of about 5 minutes now what's
+[00:44:42] interesting is that these circuit
+[00:44:43] breaker halts only occur from 9:30 a.m.
+[00:44:47] until 400 p.m. so pre-market from 4:00
+[00:44:50] a.m. until 9:30 and after hours from 400
+[00:44:53] p.m. till 8:00 p.m. there are no circuit
+[00:44:56] breaker halts so a stock could go up
+[00:44:58] 900% 1,000% without getting halted and
+[00:45:01] we've seen it and I've traded it and
+[00:45:02] I've made a lot of money on them but
+[00:45:04] during regular trading hours if a stock
+[00:45:06] goes up uh again a stock that fits into
+[00:45:09] this uh category above $3 tier 2
+[00:45:12] security if it goes up more than 10% in
+[00:45:14] a 5 minute period it'll be halted for a
+[00:45:16] period of 5 minutes now what's kind of
+[00:45:20] interesting about these halts is that um
+[00:45:23] if it goes up uh 10% so up
+[00:45:28] 10% in 5 minutes 5 minutes
+[00:45:33] from reference price so what's the
+[00:45:37] reference price the reference price is
+[00:45:39] the average price over five minutes so
+[00:45:45] this gets a little bit confusing because
+[00:45:47] let's say for instance a stock goes from
+[00:45:50] this will be $3 goes from three to 350
+[00:45:54] to 4 to 450 to 5 so it actually went up
+[00:45:58] from $3 to $5 over the course of five
+[00:46:02] candles so in this scenario it went up
+[00:46:05] $2 a share now let's say it was going
+[00:46:10] sideways for five minutes before it went
+[00:46:12] up so then its average price over the
+[00:46:14] last 5 minutes is resetting
+[00:46:16] approximately every 30 seconds and it's
+[00:46:19] what is the average price over the last
+[00:46:22] 5 minutes updating every 30 seconds so
+[00:46:24] now the average price over these last
+[00:46:26] five C candles is going to be like here
+[00:46:28] the average price over these last five
+[00:46:30] candles is going to be like here so the
+[00:46:32] average price is actually continually
+[00:46:34] moving up and then the halt band is
+[00:46:38] exactly 10% above that level depending
+[00:46:41] again on the on the um the category the
+[00:46:44] stock Falls within so stocks that were
+[00:46:46] priced between 75 and $3 based on the
+[00:46:50] previous day's close will halt every
+[00:46:54] 20% stocks pric below 7 5 cents will
+[00:46:57] halt either every
+[00:46:59] 75% or every 15 cents and in practice it
+[00:47:02] happens every 15 cents and so what's
+[00:47:05] kind of interesting here as an example
+[00:47:08] is you could have a stock that closed
+[00:47:10] yesterday at 74 cents so that means it's
+[00:47:13] going to Halt every 15 cents and let's
+[00:47:16] say today right now it has squeezed all
+[00:47:18] the way up to
+[00:47:19] $325 cents a share what's the halt band
+[00:47:23] plus 15 cents approximately 34
+[00:47:27] the Hal bands are going to be very tight
+[00:47:29] on this stock and you could have a stock
+[00:47:32] that uh on the flip side yesterday uh
+[00:47:35] closed at uh let's say
+[00:47:39] $22.99 and therefore the Hal bands are
+[00:47:42] what every 20% so that's going to Halt
+[00:47:45] at
+[00:47:46] $360 holy smokes or you have a stock
+[00:47:49] that closed at 301 and the halts are
+[00:47:51] going to be at every 10% and therefore
+[00:47:53] it's going to Halt at 3:30 approximately
+[00:47:57] so it's very interesting and this is why
+[00:48:00] a lot of Traders during the GameStop era
+[00:48:03] were like wow you know that the
+[00:48:05] exchanges are doing something Shady you
+[00:48:07] know they're halting these stocks
+[00:48:08] willy-nilly but in fact there there are
+[00:48:13] a set of guidelines that dictate how
+[00:48:16] these work they're just not very
+[00:48:18] straightforward for most people to
+[00:48:20] understand and let's throw another
+[00:48:21] wrench in it from um
+[00:48:24] 3:35 to 400 pm all of these bands are
+[00:48:29] doubled in size so they go to 30 cents
+[00:48:32] to 40% and to 20% and it used to be that
+[00:48:36] from 930 to
+[00:48:38] 9:45 the bands were also doubled and
+[00:48:41] then they took that away so they did
+[00:48:43] change that rule at one point so and
+[00:48:46] they may change this rule as well and
+[00:48:47] with the markets moving to you know 22h
+[00:48:49] hour 24hour day Market it's possible
+[00:48:52] that we'll see even more changes so all
+[00:48:54] of that is subject to change um but
+[00:48:57] these things change very slowly when it
+[00:49:00] comes to the rules and regulations of
+[00:49:02] the market I mean the PDT rule has been
+[00:49:03] around for over 20 years the short sale
+[00:49:06] restriction rule has been around for
+[00:49:07] forever the threshold rule with reg nms
+[00:49:10] and uh nbbo these have been around for a
+[00:49:13] long time so you know these rules get
+[00:49:15] enacted and the market is very complex
+[00:49:19] because what ends up happening is you
+[00:49:22] know there at some point a rule gets
+[00:49:25] enacted and then as a result of that
+[00:49:29] rule Market Behavior changes a little
+[00:49:31] bit so then they create a new rule to
+[00:49:34] address these changes in Market Behavior
+[00:49:36] so then that's layered on top of the
+[00:49:38] first rule and then they realize even
+[00:49:40] more rule things change and then they've
+[00:49:42] got to add another rule onto this so
+[00:49:44] it's a lot of Patchwork and sometimes
+[00:49:47] it's like well if you just gone back and
+[00:49:48] looked at this first rule in the in the
+[00:49:50] beginning maybe that should have gotten
+[00:49:52] changed but like old rules don't often
+[00:49:55] change but new rules get kind of layered
+[00:49:57] in and so the plumbing of the market and
+[00:49:59] the rules that that dictate how it all
+[00:50:02] works can be fairly confusing especially
+[00:50:05] for a beginner Trader now some rules
+[00:50:08] however uh are more straightforward and
+[00:50:09] we'll talk about some of those in a
+[00:50:10] moment now um when it comes to the halt
+[00:50:13] levels when you're looking at a stock um
+[00:50:16] I can see lld on my level two window
+[00:50:20] this is level two data right here and it
+[00:50:22] shows me the limit up and the limit down
+[00:50:24] so that's the limit down that's the
+[00:50:25] Limit Up and in this case it's going to
+[00:50:27] be 10% above the current price
+[00:50:30] approximately 10% above the average
+[00:50:32] price this is a stock here where the
+[00:50:35] halt um also is 10% above and below the
+[00:50:38] current price both these stocks must
+[00:50:40] have closed the previous day above uh $3
+[00:50:43] a share this stock is easy to borrow
+[00:50:45] this stock is harder to borrow neither
+[00:50:47] stock is on short sale restriction so a
+[00:50:50] lot of broker dealers however do not
+[00:50:52] show you the limit up limit down levels
+[00:50:54] including thinker swim so if you're with
+[00:50:57] one of those Brokers you don't actually
+[00:50:59] know what that level is without doing
+[00:51:02] the manual calculation which is kind of
+[00:51:04] a pain in the butt the simulator that um
+[00:51:07] a lot of our members at Warrior trading
+[00:51:09] use that we offer for them as part of
+[00:51:11] their Warrior Pro membership uh does
+[00:51:13] include Limit Up limit down levels so
+[00:51:15] you can see that on the level two and
+[00:51:18] and that's good because I I do think
+[00:51:19] it's important to understand how it
+[00:51:20] works um when a stock is halted you
+[00:51:23] cannot trade you'll see the H for halt
+[00:51:25] code which which means the stock is
+[00:51:27] halted and you can see the quotes which
+[00:51:30] is showing you the current auction which
+[00:51:33] will tell you approximately where the
+[00:51:35] stock will resume trading when it
+[00:51:37] resumes all circuit breaker halts take
+[00:51:40] place for a minimum of a 5 minute pause
+[00:51:43] the stock is halted for 5 minutes and
+[00:51:46] then after 5 minutes it will resume
+[00:51:48] trading unless the resumption price is
+[00:51:53] actually higher than the reference point
+[00:51:56] of theage average price going into the
+[00:51:57] halt in which case the stock will be
+[00:52:00] halted basically immediately for another
+[00:52:02] 5 minutes and it can stay halted for 10
+[00:52:04] minutes 15 minutes 20 minutes sometimes
+[00:52:06] we'll see a stock where for instance it
+[00:52:09] halts up at you know $6 and then showing
+[00:52:13] a resumption of seven now that's more
+[00:52:15] than uh 10% above six so all of a sudden
+[00:52:19] here and again this would be assuming
+[00:52:20] the stock closed above $3 on the
+[00:52:22] previous day so now it's showing seven
+[00:52:24] so it's going to be halted most likely
+[00:52:25] for 10 minutes
+[00:52:27] so but if it was showing uh let's say
+[00:52:30] like a $15 resumption it could
+[00:52:33] potentially be halted for 30 minutes or
+[00:52:34] more it's not uncommon to see that um
+[00:52:38] but the length of the resumption is
+[00:52:40] something where there does seem to be an
+[00:52:43] ability for institutional Traders uh to
+[00:52:46] a certain extent control how long a
+[00:52:48] stock is halted by adjusting the uh
+[00:52:52] their bids and offers during the halt
+[00:52:54] which changes the resumption price so
+[00:52:57] again that gets a little complicated but
+[00:52:59] you can see the resumption price on your
+[00:53:01] level two well again depending on who
+[00:53:03] you use the simulator that we offer does
+[00:53:05] show resumption prices so you'd be able
+[00:53:06] to see that now a more clearcut um order
+[00:53:10] uh a rule or regulation in the market is
+[00:53:13] called order spoofing order spoofing is
+[00:53:16] the practice of placing orders with no
+[00:53:19] intention of those orders being filled
+[00:53:22] uh so the problem here is and I got this
+[00:53:25] a typo
+[00:53:27] um so the problem here with these orders
+[00:53:29] is the only intention is that the order
+[00:53:32] will influence the way other Traders
+[00:53:34] think about support or resistance on a
+[00:53:36] stock so I'll give you an example of
+[00:53:38] what that would look like so um without
+[00:53:40] actually doing an order spoof myself
+[00:53:42] I'll just show you essentially what it
+[00:53:43] is so let's say that Bank of America
+[00:53:48] 459 is this is the price and let's just
+[00:53:52] say that you really don't want to see
+[00:53:54] the stock break that price what if you
+[00:53:57] put out an order to buy 100,000 shares
+[00:54:00] and you throw that order at
+[00:54:02] $45 on the bid or
+[00:54:05] 451 Now by making that order visible you
+[00:54:08] would be tipping your hand to the entire
+[00:54:10] Market that I really like this stock and
+[00:54:13] I think it's going to hold this level
+[00:54:16] but if you place that order with the
+[00:54:18] pure intention of getting other people
+[00:54:21] to think someone likes this stock but if
+[00:54:25] it actually came down to 4 you would
+[00:54:27] cancel your order immediately so it
+[00:54:28] doesn't get filled and you don't buy
+[00:54:30] 100,000 shares then that's called order
+[00:54:32] spoofing so order spoofing is a
+[00:54:34] manipulative practice now it's something
+[00:54:37] that you've probably heard about hedge
+[00:54:39] funds doing and they sometimes brag
+[00:54:42] about doing it it's something that has
+[00:54:45] happened we've seen investment banks
+[00:54:47] that have gotten in trouble for it that
+[00:54:49] have been doing it in the Commodities
+[00:54:50] markets and currency markets so it does
+[00:54:53] happen in the market but brok ERS are uh
+[00:54:57] required as part of their compliance
+[00:54:59] programs to uh basically to search for
+[00:55:04] that type of behavior so they have
+[00:55:06] probably algorithms that look for that
+[00:55:08] that type of behavior and if they uh
+[00:55:10] catch their clients doing it they'll
+[00:55:12] just close their account so that they're
+[00:55:14] kind of um finra is the regulatory body
+[00:55:20] but they tell the Brokers hey you got to
+[00:55:22] make sure people in your firm aren't
+[00:55:24] breaking the rules so now the broker
+[00:55:26] becomes liable to make sure they don't
+[00:55:28] have a bunch of traders in their you
+[00:55:30] know under their umbrella that are
+[00:55:32] engaging in this Behavior so if you were
+[00:55:35] doing order spoofing you could get a
+[00:55:38] letter from your broker and they're
+[00:55:39] saying they they could ask you a
+[00:55:40] question I suppose like why are you
+[00:55:42] doing this or they could just shut down
+[00:55:43] your account completely they say we
+[00:55:45] don't want you and we're going to
+[00:55:45] Blacklist you and I don't know if they
+[00:55:47] share those names with other um with
+[00:55:49] other Brokers I'm not sure how that
+[00:55:51] works but it's obviously it goes without
+[00:55:54] saying that's not something you should
+[00:55:55] do now most Traders with relatively
+[00:55:58] small accounts wouldn't really even be
+[00:56:00] able to do order spoofing even if they
+[00:56:01] wanted to cuz you don't have the ability
+[00:56:04] to buy a 100,000 shares of a stock at
+[00:56:08] $45 a share I don't even leave that kind
+[00:56:10] of money in my account I mean those are
+[00:56:12] million doll orders so realistically the
+[00:56:15] people that are doing that kind of
+[00:56:17] spoofing most likely are uh
+[00:56:19] institutional Traders they may even be
+[00:56:21] professional Traders or licensed traders
+[00:56:23] who just simply don't care or think that
+[00:56:25] they'll get away with it and the bank
+[00:56:26] will cover their butt these are people
+[00:56:28] who work under a big bank and the bank
+[00:56:30] says make the money and we'll figure out
+[00:56:32] the rest and you've probably heard uh
+[00:56:35] that if you watched uh the Wall Street
+[00:56:37] documentary or the HBO documentary
+[00:56:39] called gaming Wall Street so uh
+[00:56:42] unfortunately it does happen in the
+[00:56:44] market however I have noticed that uh it
+[00:56:47] happens more on um stocks that are more
+[00:56:52] popular among institutional Traders than
+[00:56:54] on small cap stocks so you're more
+[00:56:55] likely to actually see it on bigname
+[00:56:57] companies than uh than small companies
+[00:57:00] and I suppose another um another rule to
+[00:57:04] be aware of would be um insider trading
+[00:57:08] I mean this is kind of goes without
+[00:57:09] saying uh but insider trading obviously
+[00:57:13] is uh is against the rules insider
+[00:57:15] trading is when you're trading on
+[00:57:17] information that you receive that's
+[00:57:19] non-public
+[00:57:20] so realistically 99% of you guys
+[00:57:24] watching this including me don't know
+[00:57:26] anyone who's a CEO of a publicly Trade
+[00:57:29] Company who could go and Whisper to you
+[00:57:31] at a party in the Hampton hey you know
+[00:57:33] my Stock's going to do really great next
+[00:57:35] quarter hint hint but in some of those
+[00:57:38] affluent circles people do get that kind
+[00:57:41] of information and maybe they don't get
+[00:57:43] it with the intention of you know maybe
+[00:57:45] they're just at a cocktail party and
+[00:57:47] someone works or as a CEO at a company
+[00:57:49] and says something but now if you know
+[00:57:52] that
+[00:57:53] information uh you actually have an
+[00:57:55] obligation not to tell other people what
+[00:57:57] you know uh and not to act on it not to
+[00:58:01] trade on it because if you trade on it
+[00:58:03] then any money you make was at an unfair
+[00:58:05] advantage and that's called insider
+[00:58:06] trading and that is against the law so
+[00:58:09] there there are a number of rules and
+[00:58:10] regulations in the market and C
+[00:58:12] certainly order spoofing and insider
+[00:58:14] trading would be uh very black and white
+[00:58:16] but the violations around the PDT Rule
+[00:58:19] and um you know all all of the different
+[00:58:21] you know the good faith violation the
+[00:58:22] free riding violation um the uh you know
+[00:58:26] these 90day violations these are
+[00:58:28] significant and these can have a real
+[00:58:29] impact for a beginner Trader who's
+[00:58:31] trying to get themselves started and
+[00:58:32] then all of a sudden it's hit with you
+[00:58:34] know boom I'm locked out of my account
+[00:58:36] so if you guys enjoyed this episode I
+[00:58:39] sure hope you hit that thumbs up you
+[00:58:41] subscribe to this Channel and if you
+[00:58:42] want to learn more about the strategy
+[00:58:44] that I trade every single day I'll put a
+[00:58:46] link it pin to the top of the comments
+[00:58:47] and I'll put in the description where
+[00:58:49] you can get started I have a free day
+[00:58:51] trading course that you guys could watch
+[00:58:52] or you could do a two-e trial at Warrior
+[00:58:54] trading and you can use a software that
+[00:58:56] I'm using every single day and see what
+[00:58:58] it's like so I want to thank you guys as
+[00:58:59] always for joining I'll remind you
+[00:59:01] trading is risky and my results aren't
+[00:59:03] typical so manage your risk and always
+[00:59:04] practice in a simulator before you put
+[00:59:07] real money on the line I'll see you for
+[00:59:08] the next episode real soon

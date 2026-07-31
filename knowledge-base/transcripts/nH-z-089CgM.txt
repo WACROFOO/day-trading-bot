@@ -1,0 +1,737 @@
+# Indicators for Avoiding False Breakouts 🔪😭
+# https://www.youtube.com/watch?v=nH-z-089CgM
+# duration_sec: 1663
+
+[00:00:00] foreign
+[00:00:01] [Music]
+[00:00:02] what's up everyone Ross here from
+[00:00:04] Warrior trading in this episode I'm
+[00:00:06] going to walk you through how to avoid
+[00:00:07] false breakouts in the last five days of
+[00:00:10] trading just in the last five days we
+[00:00:12] have had a couple of huge momentum
+[00:00:14] stocks and I've been doing well I've
+[00:00:16] been averaging over 13 000 a day for
+[00:00:19] these last five days I'm at 68
+[00:00:23] 198.97 just in the last five days of
+[00:00:26] trading almost seventy thousand dollars
+[00:00:28] in one week now some of the stocks that
+[00:00:31] we traded we saw some impressive range
+[00:00:35] and some absolutely horrendous false
+[00:00:39] breakouts bull traps and bear traps and
+[00:00:43] I saw a lot of Traders do really well
+[00:00:44] but I also saw a lot of Traders fall
+[00:00:47] into the traps so I wanted to make this
+[00:00:50] special episode and review with you the
+[00:00:52] three steps that I'm taking before
+[00:00:54] jumping into a trade this is especially
+[00:00:57] important right now in this market where
+[00:00:58] we've got a lot of volatility we've got
+[00:01:00] a lot of opportunity but we have this
+[00:01:03] inherent choppiness and it's been more
+[00:01:05] prevalent in the last six months than
+[00:01:07] maybe than I've ever seen in my trading
+[00:01:10] career some of these whips and if you're
+[00:01:12] watching this episode you've probably
+[00:01:13] seen them where a stock you know pops up
+[00:01:15] it starts to break out and maybe it
+[00:01:16] looks like it's about to Halt up and
+[00:01:18] then all of a sudden it whips back down
+[00:01:21] now there's a couple of contributors to
+[00:01:23] this and then I suppose it doesn't
+[00:01:24] really matter too much to look into all
+[00:01:27] of the details or speculate as to why
+[00:01:29] this is happening most importantly is
+[00:01:31] taking some steps to avoid getting
+[00:01:33] caught in the traps so you can trade
+[00:01:36] better the goal of any beginner Trader
+[00:01:39] naturally is to try to find a couple of
+[00:01:42] opportunities each day and so I'm going
+[00:01:44] to show you a couple of the indicators
+[00:01:45] that I'm using to help me focus on
+[00:01:47] trading a stock where it has the most
+[00:01:49] potential and then therefore avoid
+[00:01:52] trading the stock in the areas where it
+[00:01:54] has less potential for profit and then
+[00:01:57] invariably higher likelihood of these
+[00:02:01] bull traps that can catch you as a
+[00:02:03] beginner Trader when you fall in it is
+[00:02:05] nasty alright so let's go ahead and jump
+[00:02:08] in I'm going to switch over to the
+[00:02:09] screen and we can start actually diving
+[00:02:11] into the charts I'm gonna go through the
+[00:02:12] three steps I'm taking right now before
+[00:02:14] jumping into a trade all right let's do
+[00:02:16] it so one of the first things that I've
+[00:02:17] done is I've added an oscillating
+[00:02:19] indicator to my charts so typically when
+[00:02:22] you look at my charts you wouldn't see
+[00:02:24] this indicator at the bottom typically
+[00:02:25] you would see the candlesticks and and
+[00:02:27] then the volume right here and you
+[00:02:29] wouldn't see an additional indicator but
+[00:02:31] one of the things that I've kind of
+[00:02:33] struggled with over the last few months
+[00:02:34] with these a really nasty false
+[00:02:36] breakouts is in the past I would find
+[00:02:39] myself trading a stock in this area here
+[00:02:42] when it's sort of pulling back and I'd
+[00:02:44] be looking for that next move higher the
+[00:02:47] oscillator is helpful here because it
+[00:02:49] reminds me that the stock is now sort of
+[00:02:52] on the back side of this move it was
+[00:02:54] moving up trending up very quickly and
+[00:02:57] now we're kind of reversing and so
+[00:02:59] really at this point one of the biggest
+[00:03:01] steps that I'm I'm trying to focus on
+[00:03:03] and then I asked myself before I'm
+[00:03:05] taking a trade is is this stock on the
+[00:03:07] front side of the move or is it on the
+[00:03:09] back side of the move and so the front
+[00:03:11] side for me on this stock is everything
+[00:03:13] before
+[00:03:14] this candle right about here
+[00:03:18] so in this area the stock is trending up
+[00:03:21] and this is one that we traded uh last
+[00:03:23] week and did quite well on and so you
+[00:03:25] had a little uptrend here a little
+[00:03:27] sideways another nice uptrend here a
+[00:03:29] little more sideways more uptrend and
+[00:03:32] then it just started to pull away even
+[00:03:34] faster so these are the areas naturally
+[00:03:36] where we had the most opportunity I mean
+[00:03:39] and this is a stock that went up 100 in
+[00:03:42] like an hour this was this is exactly
+[00:03:44] what I want to be looking at now
+[00:03:46] remember as a beginner Trader you're
+[00:03:48] never going to capture the top and
+[00:03:49] bottom of every move but you know when
+[00:03:52] you have a stock that goes up 100 even
+[00:03:53] if you only capture a fraction of that a
+[00:03:56] fraction of 100 is still a really nice
+[00:03:58] move if you're trading a stock that's
+[00:04:00] just going sideways you know a fraction
+[00:04:02] of nothing is nothing so you want to
+[00:04:04] focus on stocks that are moving quickly
+[00:04:06] and so for me this oscillating indicator
+[00:04:09] gives me that added confirmation that
+[00:04:12] this is a stock that's trending up so
+[00:04:14] what you see here this kind of looks
+[00:04:16] like a mountain range
+[00:04:18] and I like to see that the mountain
+[00:04:19] ranges are getting bigger and I like to
+[00:04:22] only trade when this green line right
+[00:04:24] here is above the red so basically based
+[00:04:27] on the oscillator the only areas that we
+[00:04:30] would really want to focus would be
+[00:04:31] right in here
+[00:04:33] and then right in here and so if we we
+[00:04:36] bring that up to the the chart it's
+[00:04:38] basically this area here and this area
+[00:04:42] here right right in right in here and so
+[00:04:45] if you focus on these areas right here
+[00:04:47] and then in the areas where the green is
+[00:04:50] no longer visible you're sitting out
+[00:04:52] completely you're not even trading it
+[00:04:54] and here's the problem look at this
+[00:04:57] false breakout this is Case in point see
+[00:04:59] this false breakout right here so if you
+[00:05:02] had been using this indicator and by the
+[00:05:03] way this is this is just simply macd the
+[00:05:05] moving average convergence Divergence
+[00:05:07] indicator it's just macd and I just
+[00:05:09] colored it in this way so it's just
+[00:05:12] easier to see basically you you could do
+[00:05:15] different settings on this some people
+[00:05:16] will use it as a histogram and the
+[00:05:19] histogram works the same it's um you
+[00:05:22] would only be looking at it when it's
+[00:05:23] green and not when it's red but I
+[00:05:26] actually leave the macd line on and then
+[00:05:28] I put the signal line over it so macd
+[00:05:32] just for what it's worth
+[00:05:34] um it's that's what we call it macd
+[00:05:37] it's that so I'll just give you a quick
+[00:05:39] example so
+[00:05:40] um
+[00:05:41] so macd it stands for moving average
+[00:05:44] convergence Divergence indicator and so
+[00:05:48] when a stock is moving up quickly
+[00:05:51] it's short moving averages like for
+[00:05:53] example your nine moving average as you
+[00:05:55] probably know will move up really
+[00:05:56] quickly with the stock as it's going
+[00:05:59] higher right
+[00:06:01] your slower moving average is like your
+[00:06:03] 20 they're a little they're not as fast
+[00:06:06] to pick up and so what ends up happening
+[00:06:08] is in this period right here your moving
+[00:06:11] averages and so this is a measure of the
+[00:06:15] relationship between two moving averages
+[00:06:17] a fast one
+[00:06:19] and a slow one
+[00:06:22] and so what we're measuring is if
+[00:06:24] they're diverging which means they're
+[00:06:26] moving apart the space between them is
+[00:06:28] getting bigger
+[00:06:30] or they're converging which is what
+[00:06:32] would be happening uh right through here
+[00:06:34] they would be converging so when they're
+[00:06:37] converging this is a very easy
+[00:06:39] representation that the stock if it's
+[00:06:41] converging and the space is getting
+[00:06:43] Tighter and Tighter and Tighter then the
+[00:06:45] stock clearly is coming into a
+[00:06:47] range-bound area now the reality is you
+[00:06:51] can you can recognize this by looking at
+[00:06:53] the chart and yet so many Traders will
+[00:06:56] still end up falling into traps in a way
+[00:06:58] because we sort of get this tunnel
+[00:07:00] vision
+[00:07:01] and so one of the things that could be
+[00:07:02] helpful with indicators is that they can
+[00:07:04] add a little bit of a red light or green
+[00:07:06] light you know it's a it's a cross check
+[00:07:09] so you're looking at a setup and you're
+[00:07:12] thinking this looks good but let me just
+[00:07:14] cross check my other indicator now I
+[00:07:16] want to be uh warning you that if you
+[00:07:19] add too many indicators you can get this
+[00:07:22] analysis paralysis where you've got so
+[00:07:24] many indicators you've begun uh
+[00:07:27] confusing yourself and it's not really
+[00:07:30] possible in a very short time frame of
+[00:07:33] taking a day trade to review you know 15
+[00:07:37] different indicators to see that they're
+[00:07:39] all positive or that they're all
+[00:07:41] confirming so I do urge caution I think
+[00:07:45] it can be helpful to add one or maybe
+[00:07:47] two additional indicators but you don't
+[00:07:49] want to put on too many because then you
+[00:07:50] can get yourself into a little bit of
+[00:07:51] this analysis paralysis
+[00:07:53] um and and by the way at the very
+[00:07:55] beginning of the episode I talked about
+[00:07:56] uh the trading over the last couple
+[00:07:58] weeks that I've been doing
+[00:08:00] um so I just wanted to throw this uh
+[00:08:02] right down here this is the sixty eight
+[00:08:04] thousand dollars I've made in the last
+[00:08:06] week of trading so this is uh just in
+[00:08:08] one week of trading and I want to remind
+[00:08:10] you guys as always in case you didn't
+[00:08:12] know that my results are not typical
+[00:08:14] this is real money I trade with real
+[00:08:16] money this is a retirement account that
+[00:08:18] I'm trading in but you shouldn't assume
+[00:08:20] that you're going to be able to do the
+[00:08:21] same as me I've been doing this for a
+[00:08:23] really long time all right so I just
+[00:08:25] wanted to to say that before we go any
+[00:08:27] further
+[00:08:28] okay so on uh amtd
+[00:08:31] one of the things that happened was
+[00:08:33] right at the open we had this really
+[00:08:36] nasty false breakout right so the stock
+[00:08:39] squeezes up here from 11 up to 12 up to
+[00:08:42] almost 13. it drops then all the way to
+[00:08:46] 9.45 and it gets halted going down and I
+[00:08:52] hate seeing Traders you know type oh my
+[00:08:55] God I just got caught in the Trap and
+[00:08:57] I'm red on the day because to me
+[00:09:01] the the and I don't want to I I hesitate
+[00:09:04] to say easy money but
+[00:09:07] all you know relatively speaking trading
+[00:09:09] is not easy but there are naturally
+[00:09:11] going to be times where a stock is
+[00:09:13] easier to trade than other times and I
+[00:09:18] find right now that the easier times to
+[00:09:20] trade is when the momentum is the
+[00:09:22] strongest which means the stock is on
+[00:09:24] the front side of the move macd is
+[00:09:26] positive here you've got your fast line
+[00:09:29] your signal um is a your your macd line
+[00:09:32] is above the signal you've got this
+[00:09:35] Divergence and when it starts to cross
+[00:09:37] back over this is where we're seeing
+[00:09:39] this inherent weakness and when it's
+[00:09:41] negative and the stock pops up a lot of
+[00:09:45] those pops are getting rejected really
+[00:09:47] hard so yes you're getting a swing you
+[00:09:50] are getting a pop and I suppose if
+[00:09:52] you're really quick you could have
+[00:09:53] gotten in and gotten out of this and
+[00:09:55] made money but this is high risk and as
+[00:09:58] a beginner Trader you want to be
+[00:10:00] focusing on the areas where you're more
+[00:10:02] likely to have the wind at your back
+[00:10:03] momentum is on your side you can get in
+[00:10:05] you can set your position and you can
+[00:10:06] let it work and perhaps if you get in a
+[00:10:09] little too high you have the benefit
+[00:10:10] that you're still on the front side and
+[00:10:12] there's a really good chance the first
+[00:10:14] dip is gonna get bought up that's not
+[00:10:16] going to be the case when you're trading
+[00:10:18] it on the back side of the move
+[00:10:20] so this is this is just one example and
+[00:10:22] I'll go through a couple of examples
+[00:10:24] during this episode now
+[00:10:26] um the second indicator that I'm using
+[00:10:28] to help me avoid false breakouts and
+[00:10:31] getting caught in Bolt traps is to avoid
+[00:10:33] trading stocks below the volume weighted
+[00:10:36] average price this probably goes without
+[00:10:38] saying but you know you you've got all
+[00:10:41] this price action right here and I see a
+[00:10:43] lot of traders who will say hey Ross you
+[00:10:45] know does this look like a
+[00:10:48] um you know does this look like a good
+[00:10:50] setup right in here and I'm looking at
+[00:10:52] this and I'm thinking no it doesn't it's
+[00:10:54] below
+[00:10:55] the volume weight average price it's
+[00:10:57] basically at low of day and while it's
+[00:10:59] good to buy on support you're buying
+[00:11:01] something that is inherently shown a lot
+[00:11:03] of weakness and what happens is it
+[00:11:05] starts to pop up a little bit you get
+[00:11:07] that topping tail and then that hard
+[00:11:09] rejection and on a stock like this where
+[00:11:13] the volume weighted average price
+[00:11:15] um where it tests it look at this this
+[00:11:17] was a test and a massive rejection so
+[00:11:20] that's a false breakout we had this
+[00:11:21] false breakout right here you've got
+[00:11:23] another one right here the whole time
+[00:11:25] your macd is negative right so your
+[00:11:27] moving average convergence Divergence
+[00:11:29] indicator is negative so the stock is
+[00:11:32] moving is not in a this is not
+[00:11:34] positioned positively for a trade and
+[00:11:37] this is regardless of the float the
+[00:11:38] float here could be 900 000 shares it
+[00:11:40] could be 9 million it could be 90
+[00:11:41] million on this type of stock
+[00:11:44] you have the technical characteristics
+[00:11:46] working against you it's on the back
+[00:11:48] side of the move it's clearly coming
+[00:11:50] down
+[00:11:51] are there going to be exceptions at
+[00:11:53] times where you'll see something that
+[00:11:54] you know blows your mind and just does
+[00:11:56] the exact opposite of what you expected
+[00:11:58] sure but my my sort of opinion on this
+[00:12:02] and my preference is while I might miss
+[00:12:05] a couple of Trades that surprise us if I
+[00:12:08] can avoid getting caught in you know
+[00:12:10] eight out of 10 false breakouts I'm
+[00:12:12] gonna be in a much better place as a
+[00:12:14] result and so that means focusing on
+[00:12:16] trading in these areas right here
+[00:12:19] so now let's look at another example
+[00:12:22] um oh and then so we've got our three
+[00:12:25] the three indicator or the three steps
+[00:12:27] I'm taking right now before I'm I'm
+[00:12:29] buying a position I'm checking the macd
+[00:12:31] and I'm wanting to confirm that the
+[00:12:33] oscillator is positive and that we're
+[00:12:35] moving away we're diverging right that
+[00:12:38] tells me this that's just a very quick
+[00:12:40] Red Light Green Light the Stock's moving
+[00:12:42] away this is a safer place to be trading
+[00:12:44] it because sometimes you'll sit down and
+[00:12:46] you'll look at it in this area where
+[00:12:47] it's sort of pulling back and you're
+[00:12:48] like okay maybe it's going to go back to
+[00:12:50] the high and right now that's not a
+[00:12:52] setup that is trustworthy there's too
+[00:12:54] many false breakouts when you're trading
+[00:12:56] when you're in this convergence uh type
+[00:12:59] of positioning so then the second is
+[00:13:01] making sure I'm focusing on trading
+[00:13:02] above volume weight average price which
+[00:13:04] you certainly were your above volume
+[00:13:06] weight average price you know all the
+[00:13:08] way until this breakout right here so
+[00:13:11] that just trading above V web would not
+[00:13:13] have kept you out of this false breakout
+[00:13:14] that's where you needed the macdeep and
+[00:13:17] then the third uh sort of check that I'm
+[00:13:19] doing before taking a trade is I'm
+[00:13:21] asking myself is this a stock that has a
+[00:13:23] history already today of doing some
+[00:13:27] nasty false breakouts or perhaps from
+[00:13:28] yesterday if I recall from yesterday and
+[00:13:31] so once a stock has a reputation of
+[00:13:33] being untrustworthy and doing these
+[00:13:36] types of false breakouts I'm much more
+[00:13:38] likely to avoid it in the class that I
+[00:13:40] recently taught on algo scalping and how
+[00:13:43] market makers and institutional trading
+[00:13:45] algorithms work we talked about the the
+[00:13:48] whips that these algorithms are fueling
+[00:13:51] they they provide liquidity to the
+[00:13:54] market with high frequency trading and
+[00:13:55] the high frequency trading algorithms
+[00:13:57] but they also amplify volatility the way
+[00:14:00] these um algorithms process orders that
+[00:14:02] go into the market so a big marketable
+[00:14:05] uh sell order for instance on a stock
+[00:14:07] like this can all of a sudden trigger
+[00:14:09] the algorithm to pull the bids and it
+[00:14:11] can result in a dump and so when you
+[00:14:13] start seeing a stock showing this type
+[00:14:16] of tendency it tells me a couple things
+[00:14:18] number one it tells me that you've got
+[00:14:21] some high frequency trading algorithms
+[00:14:23] or market makers that are abusing retail
+[00:14:25] Traders on this particular stock and
+[00:14:28] I've got to put like a caution flag at
+[00:14:30] it that that's not trustworthy number
+[00:14:32] two there's the possible risk that
+[00:14:33] there's insiders or somebody selling
+[00:14:37] really big chunks of stock as marketable
+[00:14:40] orders because it's creating those big
+[00:14:42] flushes and those big rejections and
+[00:14:44] they don't care that they're getting 50
+[00:14:47] cents or a dollar of slippage on their
+[00:14:49] exit because they're in from such a good
+[00:14:51] price it doesn't matter so that's a red
+[00:14:53] flag so if we see a stock that's shown a
+[00:14:56] history of false breakouts like for the
+[00:14:58] rest of the day on this one I would say
+[00:15:00] it's not trustworthy so it tries to get
+[00:15:02] back over the v-wap right here
+[00:15:04] and you know it makes an effort but now
+[00:15:07] this is our third check while your macd
+[00:15:10] is coming back up into positive
+[00:15:12] territory and you are back above the
+[00:15:13] v-wap now this is a stock that already
+[00:15:16] has that red flag caution flag on it
+[00:15:19] it's had a history of false breakouts
+[00:15:21] therefore it's not trustworthy and so it
+[00:15:24] shouldn't have surprised you when you
+[00:15:25] got this rejection right here from ten
+[00:15:28] dollars straight down to 868 in one
+[00:15:32] candle so you know if you bought this
+[00:15:34] and you're like oh it's holding above
+[00:15:36] VAP this looks like a nice clean trade
+[00:15:38] I'll buy this pullback you know right
+[00:15:40] here well you know you've got topping
+[00:15:43] tail here so the Candlestick by itself
+[00:15:45] is already showing indecision this was a
+[00:15:47] bit of a topping tail and then right
+[00:15:49] here basically out of nowhere you get
+[00:15:51] this dollar and a half per share drop on
+[00:15:55] a million three shares of volume so that
+[00:15:58] again to me is someone is dumping a huge
+[00:16:01] position and now anyone who bought this
+[00:16:04] above the v-wap right in this area is
+[00:16:07] trapped they fell into the Trap so when
+[00:16:10] a stock is proving it's not trustworthy
+[00:16:12] I leave it alone again here see it tries
+[00:16:14] again it comes up you get that big
+[00:16:16] topping tail it's still not trustworthy
+[00:16:19] and I've I know so many traders who will
+[00:16:22] just keep trading these stocks they will
+[00:16:24] trade them all day long they'll get in
+[00:16:26] they'll get out they'll get in they'll
+[00:16:27] get out and listen guys I'm gonna be
+[00:16:30] honest this stock was only clean right
+[00:16:33] back here at this part of the move this
+[00:16:35] is the only time it was clean and if you
+[00:16:37] missed it you missed it wait for the
+[00:16:39] next one if you're over trading this
+[00:16:42] it's a stock where you've got the macd
+[00:16:44] against you you've got this history of
+[00:16:45] false breakouts and at this point you're
+[00:16:47] below the view app okay let's look at
+[00:16:49] another one qnrx all right so this is
+[00:16:51] another stock from
+[00:16:53] um just a couple days ago we had a epic
+[00:16:57] move on it and this right here is going
+[00:16:59] to show you again let's just use the
+[00:17:02] macd to highlight the areas that we
+[00:17:03] would want to trade it so macd is
+[00:17:05] positive from here to here it goes
+[00:17:08] negative and then it comes back up to
+[00:17:10] positive right through here through here
+[00:17:12] all right so these are the areas where
+[00:17:14] we're interested and sorry we've also
+[00:17:16] got it back here but this is at the very
+[00:17:17] beginning of the move so it's very
+[00:17:19] possible you would have missed that
+[00:17:20] early move
+[00:17:22] um okay so these are the areas and we
+[00:17:25] can make we can pull this down a little
+[00:17:27] bit um so you can see it better sorry
+[00:17:31] so these are the areas right in here
+[00:17:33] where we're focusing all right and we
+[00:17:35] can pull this down a little bit all
+[00:17:37] right
+[00:17:38] so this is the gut check this is the red
+[00:17:40] light green light the indicator here is
+[00:17:42] saying yes this is worth looking at it's
+[00:17:43] worth considering it doesn't mean
+[00:17:45] blindly buy it just because your macd's
+[00:17:47] positive but you can see these this nice
+[00:17:49] mountain range formation the really
+[00:17:52] steep move up now obviously in this
+[00:17:54] section where it goes from 13 to 28 a
+[00:17:57] share extremely volatile it also comes
+[00:18:00] all the way back down to like 17 before
+[00:18:02] you have that actual crossover where you
+[00:18:05] the note the macd is goes below that
+[00:18:07] this red area so it's not like you would
+[00:18:11] just hold it until it goes negative
+[00:18:12] that's not the strategy at all the
+[00:18:15] strategy of course for those that aren't
+[00:18:17] familiar is to buy micro pullbacks so if
+[00:18:21] you're if you don't know about the micro
+[00:18:22] pullback strategy I'll put a link right
+[00:18:24] down in the description I'll pin in the
+[00:18:26] comments if you want to download my
+[00:18:28] microstrategy PDF you're welcome to
+[00:18:30] download it I've made that available for
+[00:18:32] um Traders on YouTube for a long time so
+[00:18:34] check that out and that's going to walk
+[00:18:36] you through the actual strategy so right
+[00:18:38] now we're not talking really
+[00:18:40] specifically about entries like the
+[00:18:43] precise entry we're not talking about
+[00:18:45] the precise type of stock at the end of
+[00:18:48] this episode I'll put a a recommendation
+[00:18:51] to a couple other videos that I have
+[00:18:52] that go into those aspects of strategy
+[00:18:56] in more detail stock selection and
+[00:18:58] entries and exits right now I'm just
+[00:19:00] talking about what can we do to avoid
+[00:19:02] false breakouts so number one here focus
+[00:19:06] on trading when the macd is moving up
+[00:19:08] you've got this nice mountain range this
+[00:19:10] nice acceleration the stock is moving
+[00:19:12] quickly this is all the front side of
+[00:19:14] the move
+[00:19:15] and at this point right here when it
+[00:19:17] went negative you would have been like
+[00:19:19] okay is the front is the move over and
+[00:19:22] here's what I would say
+[00:19:24] the fact is the stock was holding up
+[00:19:26] very well you've got a fairly big range
+[00:19:29] here but it's holding up quite well
+[00:19:32] okay so that indicates that the move is
+[00:19:34] not over yet yes your your moving
+[00:19:37] averages have converged because you're
+[00:19:39] in consolidation but it hasn't like
+[00:19:42] dropped hard in this area here
+[00:19:45] this area here I thought the move might
+[00:19:47] have been done I was like okay that
+[00:19:49] might be it but it rallied back up right
+[00:19:52] here and then as it rallied back up this
+[00:19:54] right here first pullback was an
+[00:19:56] opportunity now you know truth be told
+[00:19:59] you would have had to take
+[00:20:01] um you know be a little bit Brave to
+[00:20:03] take that trade because the stock had
+[00:20:05] just squeezed up pretty quickly but at
+[00:20:07] this point it didn't have any strong
+[00:20:09] history of false breakouts at this point
+[00:20:12] for the most part it was fairly clean
+[00:20:15] it breaks out here it pops up squeezes
+[00:20:17] to a high of 13 it pulls back it does
+[00:20:20] hold down then it rips back up again in
+[00:20:25] this area this is all bullish the dips
+[00:20:28] are getting bought up and the dips are
+[00:20:30] coming to the moving average yeah sure
+[00:20:32] it's a big red candle but it's coming
+[00:20:33] right to the moving average predictable
+[00:20:35] support and it's rallying back up so
+[00:20:38] micro pullback entry right here you've
+[00:20:40] got a micro pullback right here you've
+[00:20:42] got another one right in this area here
+[00:20:44] then we go into a longer period of
+[00:20:46] consolidation which also ends up turning
+[00:20:48] into a five minute chart I am on the one
+[00:20:50] minute chart right now which for active
+[00:20:52] day trading I find just to be faster and
+[00:20:54] and therefore more helpful so this right
+[00:20:57] here ends up marking the top okay so
+[00:21:00] when the stock comes back down probably
+[00:21:03] about at this candle here when you have
+[00:21:06] that bigger breakdown it indicates that
+[00:21:09] okay we're not rallying back up and you
+[00:21:12] can see at this point you did hold
+[00:21:14] consolid Foundation through this area
+[00:21:16] but now you've got a real decline in
+[00:21:18] volume we definitely rejected off the
+[00:21:20] top we had that topping tail candle and
+[00:21:23] the next day it just you know it tried a
+[00:21:26] little bit but it wasn't able to reclaim
+[00:21:28] those levels and at this area here while
+[00:21:31] you certainly could have taken this type
+[00:21:33] of trade right through here this would
+[00:21:35] certainly have been higher risk on day
+[00:21:38] two than trading it on day one day one
+[00:21:40] is usually when we're going to see the
+[00:21:42] cleanest action that's the type of area
+[00:21:43] you want to focus on so amtd that was a
+[00:21:46] good example qnrx that was a pretty good
+[00:21:49] example envb this was another one oh
+[00:21:52] apdn this is another one also
+[00:21:55] uh apdn this one had a really dramatic
+[00:21:59] false breakout and here was the red flag
+[00:22:02] on this one
+[00:22:03] so right in this area
+[00:22:06] um your mountain range is here are not
+[00:22:09] growing they're not getting bigger the
+[00:22:11] mountain range is smaller right through
+[00:22:13] here this is a smaller increase back up
+[00:22:16] so you're not seeing this nice big
+[00:22:18] expanding mountain range and then you
+[00:22:20] come in right here and look at this
+[00:22:22] Rejection it goes to seven up to a high
+[00:22:25] of 7 25 735 halts down instantly flush
+[00:22:29] but it had already done something very
+[00:22:32] similar right here not quite as big and
+[00:22:34] it also rejected really hard right here
+[00:22:36] and both of these rejections pulled back
+[00:22:38] well below nine moving average support I
+[00:22:41] mean these came down hard so this one
+[00:22:44] while it was above the view app and
+[00:22:46] while the macd was positive what this
+[00:22:48] one had was the history of false
+[00:22:51] breakouts already before the big one and
+[00:22:54] the macd wasn't as good of a profile as
+[00:22:56] I would have preferred and then envb
+[00:22:59] this is one that I was squeezing up the
+[00:23:01] same day as qnrx
+[00:23:03] and on this one again the area to focus
+[00:23:06] is front side of the move so you've got
+[00:23:09] this nice acceleration here you've got
+[00:23:11] your mountain ranges getting bigger I
+[00:23:13] will say that this one had quite a lot
+[00:23:15] of range it would pop up to a high of
+[00:23:18] 857 drop down to 750 came back up
+[00:23:22] dropped back down so very kind of jerky
+[00:23:25] price action and then it kind of pulls
+[00:23:28] away but this really was sympathy
+[00:23:31] momentum to the move happening on qnrx
+[00:23:33] it was happening at the same time the q1
+[00:23:35] RX was going to 28. so the sympathy
+[00:23:38] momentum there the the important thing
+[00:23:41] if you're using if you're trading
+[00:23:42] sympathy momentum and you're kind of
+[00:23:44] taking that approach is that when the
+[00:23:46] stock that this has sympathy to starts
+[00:23:49] to roll over and is dying this one
+[00:23:52] probably will as well and don't expect
+[00:23:54] it to go a lot higher especially when it
+[00:23:56] doesn't have any of its own real
+[00:23:58] Standalone catalyst so here you have the
+[00:24:00] moving average crossover or sorry the
+[00:24:02] macd crossover and so we were kind of
+[00:24:05] clean to keep trading it through this
+[00:24:07] area but right there on that break that
+[00:24:10] was game over right there when it broke
+[00:24:12] and so it wouldn't have been worth
+[00:24:14] trading it down here trying to buy it
+[00:24:16] down here this is where it's high risk
+[00:24:18] so what I would focus on if I were a
+[00:24:21] beginner Trader right now
+[00:24:23] his trading stocks on the front side of
+[00:24:25] the move when the macd mountain range is
+[00:24:26] moving higher the macd the moving
+[00:24:28] averages are diverging they're moving
+[00:24:30] away you're having this rapid rate of
+[00:24:33] change that's classic momentum now there
+[00:24:36] may be days where we don't have
+[00:24:38] something that's really really strong
+[00:24:39] like that and that means as a beginner
+[00:24:41] Trader you're probably better off
+[00:24:42] trading in a simulator on that day and
+[00:24:44] waiting for the next one that's really
+[00:24:46] strong you want to focus on trading
+[00:24:47] stocks that are above the volume weight
+[00:24:49] average price of course more bullish
+[00:24:51] therefore and you want to focus on
+[00:24:53] avoiding stocks that have a history
+[00:24:54] already of showing false breakouts or
+[00:24:58] bull traps because if they've done it
+[00:25:00] once they will do it again right there's
+[00:25:01] a reason that they've done it once
+[00:25:03] whether it was a big seller and the
+[00:25:05] market makers abusing retail Traders
+[00:25:07] whatever the the real cause is the price
+[00:25:10] action speaks for itself so when a stock
+[00:25:12] is no longer trustworthy you gotta let
+[00:25:14] it go break up and say I'm done with you
+[00:25:16] I can't trust you and I'm not going back
+[00:25:19] I'm waiting for the next one you don't
+[00:25:21] have to take trades on every stock
+[00:25:24] that's moving and you don't need to
+[00:25:25] trade for eight hours a day if I'm going
+[00:25:27] to be honest let's just switch back to
+[00:25:29] the Whiteboard this is the reality of
+[00:25:31] trading if you can make 20 cents uh
+[00:25:35] sorry
+[00:25:36] um if you can make 20 cents a day
+[00:25:39] 20 cents a day
+[00:25:42] per share
+[00:25:43] right you do that with 100 shares
+[00:25:46] you're up 20 bucks all right you've got
+[00:25:48] 20 bucks at 20 cents if you do it with a
+[00:25:50] thousand shares you've got 200 bucks
+[00:25:53] now if you could do it with 5 000 shares
+[00:25:56] you've got a thousand bucks
+[00:25:59] all right
+[00:26:01] so I want to encourage you
+[00:26:04] to keep this goal at the center of what
+[00:26:07] you're thinking about 20 cents a day
+[00:26:09] 20 cents a day and so where can I find
+[00:26:13] my 20 cents a day
+[00:26:15] with the least amount of risk possible
+[00:26:18] and I want you to go back and look at
+[00:26:20] some of these charts it's going to be
+[00:26:21] trade in the front side of the move and
+[00:26:23] using these oscillating indicators like
+[00:26:25] macd if you chose to use something else
+[00:26:27] that's fine this is what I happen to
+[00:26:29] like right now you're going to find
+[00:26:31] these are the areas where the price
+[00:26:32] action is the cleanest so this is where
+[00:26:35] you want to trade it that's when you've
+[00:26:36] got the green light to trade to be
+[00:26:38] aggressive to try to find your 20 cents
+[00:26:40] and when the macd has gone against is
+[00:26:42] gone has crossed over the signal and
+[00:26:44] it's negative leave it alone when you're
+[00:26:46] on the back side of the move leave it
+[00:26:48] alone wait for the next one the less is
+[00:26:51] more if this episode was helpful I hope
+[00:26:54] you hit the thumbs up I hope you're
+[00:26:56] subscribed to the channel and I want to
+[00:26:58] put a couple episodes right here that
+[00:26:59] you can check out I'll put them right up
+[00:27:01] here and right there we're going to talk
+[00:27:03] more about strategy in those two
+[00:27:05] episodes and remember down below I
+[00:27:07] pinned to the comments and the
+[00:27:08] description the link to download my
+[00:27:10] micro pullback PDF so check out this
+[00:27:12] episode on the beginner strategy my the
+[00:27:15] best strategy for beginner Traders you
+[00:27:17] can check out this one right down here
+[00:27:18] for scalp trading all right check out
+[00:27:20] those two episodes and I hope you keep
+[00:27:22] learning keep studying it's a lot of fun
+[00:27:24] but as always trading is risky so make
+[00:27:27] sure you take it slow all right
+[00:27:30] practices simulator before you put real
+[00:27:31] money on the line and remember there is
+[00:27:33] no guarantee that you'll find success
+[00:27:34] whether you trade on your own or you'll
+[00:27:36] learn from me so just take it slow and
+[00:27:38] practice this all right thanks for
+[00:27:40] tuning in and I'll see you for the next
+[00:27:41] episode

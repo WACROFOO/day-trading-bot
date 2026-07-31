@@ -1,0 +1,857 @@
+# The Simple MACD Strategy to Spot Big Winners Early (5,712% Example)
+# https://www.youtube.com/watch?v=vvXX2ycveuw
+# duration_sec: 1911
+
+[00:00:00] In today's episode, I'm going to teach
+[00:00:02] you how to use one of my favorite
+[00:00:03] technical indicators. It's called MACD,
+[00:00:06] which is an acronym that stands for
+[00:00:08] moving average convergence divergence.
+[00:00:11] This is an indicator that compares the
+[00:00:13] relationship of two moving averages, a
+[00:00:16] fast moving average and a slower moving
+[00:00:19] average. So, when the price begins
+[00:00:20] moving up very quickly, these moving
+[00:00:22] averages will diverge. They'll move
+[00:00:24] apart. And when the price begins to go
+[00:00:26] sideways or even pull back, these moving
+[00:00:29] averages will come closer together. Now,
+[00:00:31] the really cool thing about using MACD
+[00:00:33] is that this is an indicator that can
+[00:00:35] number one help you avoid false
+[00:00:38] breakouts, which is very important, and
+[00:00:40] number two, help you focus on trading
+[00:00:42] during the time when the momentum is the
+[00:00:45] strongest and therefore the resolution
+[00:00:47] or the breakouts will be the biggest.
+[00:00:49] The other thing that's really cool about
+[00:00:51] the MACD is that you can use it on any
+[00:00:53] financial instrument whether it's
+[00:00:55] stocks, cryptocurrency, forex, futures,
+[00:00:58] large caps, small caps, it doesn't
+[00:00:59] matter because this is part of the
+[00:01:02] universal language of technical
+[00:01:04] analysis. Now, let's go ahead and jump
+[00:01:06] onto the whiteboard and start breaking
+[00:01:07] down what the MACD really is. So, this
+[00:01:10] is a candlestick chart as you can see
+[00:01:11] right here. And I'm just going to plot
+[00:01:13] out two different moving averages just
+[00:01:15] for example. We're going to do a faster
+[00:01:17] moving average, which is going to stay
+[00:01:19] closer to the price action. And then
+[00:01:21] we'll plot out a slower moving average
+[00:01:24] down a little bit lower. So, what you
+[00:01:26] can see here is as the price moves up,
+[00:01:29] these moving averages are diverging.
+[00:01:31] They're moving apart, but as the price
+[00:01:34] comes back down, they move back
+[00:01:35] together. They don't cross over, but
+[00:01:37] they move back together. And the price
+[00:01:39] begins to move up again. They begin to
+[00:01:41] again diverge. And so when we actually
+[00:01:44] look at the MACD on a chart, when it's
+[00:01:47] plotted on the chart, it is an
+[00:01:49] oscillating indicator that moves apart
+[00:01:51] and then comes back together. And when
+[00:01:53] it does that, we get crossover signals.
+[00:01:56] Those signals are part of the strategy
+[00:01:59] that I'm going to teach you today. So
+[00:02:01] I'm going to begin this class with a
+[00:02:03] little pop quiz just to help level set
+[00:02:06] where we're all at. So, I'm going to ask
+[00:02:08] you when you look at this chart if this
+[00:02:10] to you looks like a safe entry. So,
+[00:02:13] right now we obviously, as you can see,
+[00:02:15] have the price that's moved up quite
+[00:02:17] quickly. We've got rapid rate of change.
+[00:02:19] Now, the MACD is not yet displayed on
+[00:02:21] this chart. I've covered it up down
+[00:02:22] here. So, you can see our moving
+[00:02:25] averages. They're right down here. The
+[00:02:26] price has moved up quickly and right now
+[00:02:28] we're on a little bit of a pullback.
+[00:02:30] Now, you might astutely say that this is
+[00:02:32] not a good place to be a buyer because
+[00:02:34] it's pulled back visually just a little
+[00:02:36] bit too much. And you would be correct
+[00:02:38] on that. And if we looked at the MACD
+[00:02:40] right down here on this panel, these
+[00:02:42] lines right here show us when the MACD
+[00:02:44] is positive. And when it goes negative,
+[00:02:47] you cross over right there. The
+[00:02:48] histogram also goes red to visually help
+[00:02:51] you understand that we're now in a
+[00:02:53] period that's going to be more uh have
+[00:02:55] more consolidation, more congestion, and
+[00:02:58] more likely to have upside resistance.
+[00:03:00] Now, when the MACD crosses right here
+[00:03:02] and goes back to positive and goes back
+[00:03:04] to green, we basically open up for the
+[00:03:07] next leg higher, which gives us this
+[00:03:09] nice squeeze here, this little pullback,
+[00:03:10] and then this nice squeeze. But right in
+[00:03:13] this area right here where we're
+[00:03:14] thinking about buying the MACD has
+[00:03:17] crossed back into the negative. The
+[00:03:19] volume as you can see is red here during
+[00:03:20] this pullback. But because that MACD is
+[00:03:23] negative that is telling us that the
+[00:03:25] trend has shifted. It is a very visual
+[00:03:27] indicator and for me it's pretty much
+[00:03:30] red light green light. When the MACD is
+[00:03:32] negative I will not take this trade. And
+[00:03:35] so if I had taken the trade, although it
+[00:03:37] gave a short-lived burst of momentum
+[00:03:39] here, overall it continued to sell off,
+[00:03:42] go lower, and it would not have been a
+[00:03:44] good trade. All right, let's look at
+[00:03:45] another example. This is another pop
+[00:03:47] quiz. So here we have the price that's
+[00:03:49] popped up, gone sideways, popped up,
+[00:03:51] gone sideways, popped up a little bit
+[00:03:53] more, and now pulled back. We have great
+[00:03:55] buying volume. It's clearly very strong
+[00:03:58] and if this was perhaps one of our
+[00:04:00] leading gainers in the market, I think
+[00:04:02] we'd be very tempted to take a position
+[00:04:04] down in this area. Now, let's look at
+[00:04:05] the MACD. When we open up the MACD, we
+[00:04:08] can see the same thing as the previous
+[00:04:10] that the MACD had crossed over right
+[00:04:12] there. So, simply using the MACD as our
+[00:04:14] final checklist, is it positive or
+[00:04:16] negative? It's negative, which means we
+[00:04:18] do not take the trade. What ends up
+[00:04:20] happening on this trade again? It pops
+[00:04:22] up just for a moment before going quite
+[00:04:24] a bit lower. In other words, this could
+[00:04:27] be perceived as what's called a bull
+[00:04:29] trap where buyers jump into it thinking
+[00:04:31] it's going to go higher and then get
+[00:04:33] faked out and end up losing money. And I
+[00:04:35] want to help you avoid those types of
+[00:04:37] false breakouts. So now in this example
+[00:04:39] right here, you can see again nice
+[00:04:41] steady momentum moving higher, a nice
+[00:04:43] big green candle here, a little
+[00:04:45] pullback, a little bottoming tail on
+[00:04:48] this candlestick. And if we pull up the
+[00:04:50] MACD, it's going to show us that the
+[00:04:52] MACD is currently wide open. So in this
+[00:04:55] case right here, I would be a buyer
+[00:04:58] right down here looking for that first
+[00:05:00] candle to make a new high and a retest
+[00:05:02] to the high of the day. So would this
+[00:05:04] have worked? And the answer is yes, it
+[00:05:06] would have worked. We had a nice volume
+[00:05:08] profile. There was more accumulation,
+[00:05:10] more buying than there was selling. The
+[00:05:12] MACD was positive. And this entry would
+[00:05:15] have worked very nicely. Here's another
+[00:05:17] example. So right here once again you
+[00:05:20] can see with the MACD open you can see
+[00:05:23] that this would have been a good setup.
+[00:05:24] Now if that MACD had been negative I
+[00:05:26] wouldn't have taken the trade but the
+[00:05:27] MACD is positive. Although this dipped
+[00:05:30] down here and did uh cross into the
+[00:05:32] negative it crossed over again went
+[00:05:34] positive. And so this little area right
+[00:05:36] here represents a potential pullback for
+[00:05:39] an entry for the next leg up. So what
+[00:05:42] I'm looking for whenever I see something
+[00:05:44] that's moving quickly. I don't really
+[00:05:46] want to buy just in the middle of the
+[00:05:48] move. I want to wait for a pullback. But
+[00:05:51] sometimes the pullback, as was the case
+[00:05:53] here, comes back a bit too much. The
+[00:05:55] MACD goes negative and it's not a good
+[00:05:57] place to be a buyer. Or in this area up
+[00:05:59] here where the MACD also went negative,
+[00:06:01] right? We cross over, we go negative.
+[00:06:03] And although it's going sideways, now
+[00:06:05] it's pulled back for a little bit too
+[00:06:06] long. So in order to improve my
+[00:06:09] accuracy, I want to focus on trading
+[00:06:12] during the times when I have the highest
+[00:06:14] likelihood that the price will continue
+[00:06:16] going higher. So in this example here,
+[00:06:19] you can see the MACD was positive at the
+[00:06:22] beginning of the move right through
+[00:06:23] here. We got our first pullback and the
+[00:06:26] MACD was still positive, which would
+[00:06:28] have made that a good potential entry.
+[00:06:30] It then dipped down and right around
+[00:06:32] here, the MACD went negative. So any of
+[00:06:34] the traders buying in this area or in
+[00:06:36] this area were ultimately trading
+[00:06:39] against the trend. It's like swimming
+[00:06:40] against the current. You would have been
+[00:06:42] fighting an uphill battle because the
+[00:06:43] momentum was against you. Now right here
+[00:06:46] something interesting happens. The MACD
+[00:06:48] begins to shift very quickly. We get
+[00:06:51] this crossover. And so in this moment
+[00:06:54] the price has been going sideways for
+[00:06:56] long enough that the moving averages
+[00:06:57] have gotten very close together. And
+[00:07:00] when the price pushes higher right here,
+[00:07:02] the MACD actually crosses back in favor
+[00:07:05] of the trade and you get an immediate
+[00:07:08] swing back to the upside. A really
+[00:07:10] powerful one. If you were using the
+[00:07:13] MACD, you would have felt more confident
+[00:07:15] taking that trade knowing that the MACD
+[00:07:16] was so close to going positive. And you
+[00:07:19] would have felt more confident buying
+[00:07:20] this dip here for this rally back up.
+[00:07:22] Even though this rally didn't continue a
+[00:07:24] lot higher, it still would have been
+[00:07:26] more than enough range to pull out a
+[00:07:28] nice profit. And in this case for me
+[00:07:30] about 53 $56,000 total and $53,000 just
+[00:07:35] on that stock right there. Now as I
+[00:07:38] speak today we have a stock that's up
+[00:07:40] over 4,500%
+[00:07:44] and it's still going higher. And so that
+[00:07:47] is going to be a great case study that
+[00:07:49] I'm going to use to demonstrate how the
+[00:07:51] MACD would have helped you time your
+[00:07:52] entries and avoid what ultimately were
+[00:07:55] some pretty dramatic false breakouts.
+[00:07:58] So, this is the simple MACD strategy. I
+[00:08:01] only trade when the MACD is positive or
+[00:08:04] crossing from negative to positive. I'm
+[00:08:07] going to share my MACD settings with you
+[00:08:09] during today's class. Number two, this
+[00:08:12] is only a strategy that works for day
+[00:08:14] trading on stocks, and it doesn't have
+[00:08:16] to be stocks. It could be a currency or
+[00:08:17] a forex pair, something like that. Uh,
+[00:08:19] but it has to be on an instrument that
+[00:08:22] has at least five times relative volume.
+[00:08:25] What does that mean? It means that the
+[00:08:27] volume needs to be five times higher
+[00:08:30] than its average volume over the course
+[00:08:33] of the last 50 days. What is important
+[00:08:35] here is that high average volume above
+[00:08:37] average volume today means that
+[00:08:39] something significant is happening and
+[00:08:41] most likely there's going to be a lot of
+[00:08:43] eyes on this stock which means when you
+[00:08:45] get those MACD crossovers there's a lot
+[00:08:47] of traders watching those signals.
+[00:08:49] shorts are going to cover, long traders
+[00:08:51] are going to buy, and you're going to
+[00:08:52] see better uh resolution, bigger uh
+[00:08:55] breakouts essentially at these apex
+[00:08:57] points. Number three, micro pullbacks,
+[00:09:01] bull flags, and ABCD patterns are going
+[00:09:04] to be the strongest candlestick patterns
+[00:09:06] for the initial entry. And then number
+[00:09:09] four, I do not want to trade the
+[00:09:12] backside when the MACD is negative. This
+[00:09:14] is really important to avoid. Okay, so
+[00:09:18] this is a simple MACD strategy and
+[00:09:20] you're going to learn the ins and outs
+[00:09:21] of it here today. The settings that I
+[00:09:24] use for my MACD, for the fast length, I
+[00:09:27] use a setting period of 12. For the slow
+[00:09:29] length, I use a setting period of 26.
+[00:09:32] The source for both is the close, the
+[00:09:34] close, and the signal length is nine.
+[00:09:38] Those are the MACD settings that are
+[00:09:39] standard. Those are the MACD settings
+[00:09:41] that I use. To me, it's really important
+[00:09:43] to use the standard settings because if
+[00:09:46] you try to create custom settings, what
+[00:09:48] can end up happening is you get false
+[00:09:51] signals that other people won't see. And
+[00:09:54] so, in a way, I sort of think of
+[00:09:56] technical indicators as being somewhat
+[00:09:58] akin to traffic lights. And traffic
+[00:10:01] lights work because they're well
+[00:10:03] respected. So, if you just start
+[00:10:04] changing the color of traffic lights or
+[00:10:06] changing the settings of how they work,
+[00:10:08] all of a sudden you're going to get
+[00:10:09] unpredictable responses. People are
+[00:10:10] going to be blowing through. they're not
+[00:10:11] going to know what to do and it's not
+[00:10:13] going to be it's not going to be
+[00:10:14] successful. So, it's very important with
+[00:10:16] technical indicators that you use the
+[00:10:18] same indicators everyone else uses. So,
+[00:10:20] when there are obvious signals, you're
+[00:10:22] seeing them as well because sometimes
+[00:10:24] there's a very obvious signal that's
+[00:10:26] saying don't buy, sell. You know, this
+[00:10:29] stay out. And if you don't see that and
+[00:10:31] you end up buying, you're just going to
+[00:10:32] lose money. It's an unnecessary loss.
+[00:10:35] So, these are the standard settings that
+[00:10:37] I'm going to use uh for this strategy.
+[00:10:39] Now, this is an example of a chart where
+[00:10:41] the MACD would not work at all. So,
+[00:10:44] remember when I said it's very important
+[00:10:45] that the instrument that you're trading
+[00:10:47] has high relative volume. This is an
+[00:10:50] example of Ford Motor Company. And on
+[00:10:52] this particular day, it does not have
+[00:10:54] high relative volume. There's nothing
+[00:10:55] happening. The price is going sideways.
+[00:10:58] And although you could look at the MACD
+[00:11:00] right down here, this panel, and see
+[00:11:02] that you're getting crossovers, these
+[00:11:04] crossovers are meaningless. So, MACD
+[00:11:07] signals are meaningless. When a stock is
+[00:11:09] consolidating sideways, and when it has
+[00:11:12] no momentum, this has no momentum. It
+[00:11:14] has very low relative volume. There's
+[00:11:17] nobody watching this stock. So, it's not
+[00:11:19] going to work. Now, on the other hand,
+[00:11:22] this is where things get interesting.
+[00:11:24] This is a stock that went from about $2
+[00:11:26] a share all the way up to over $11 a
+[00:11:29] share, as you could see, rallying higher
+[00:11:31] and higher and higher and higher. So the
+[00:11:33] MACD crossovers here are very
+[00:11:36] significant. Now at the very beginning
+[00:11:37] of the move here there was a catalyst
+[00:11:40] and that catalyst that event that
+[00:11:42] sparked this move was that the company
+[00:11:44] put out breaking news. So when that
+[00:11:46] breaking news came out the stock
+[00:11:48] immediately began surging up and move
+[00:11:50] immediately those moving averages
+[00:11:52] diverged. They moved apart, right? So
+[00:11:54] they're moving apart right here. And so
+[00:11:57] from the very beginning of the move, the
+[00:11:58] MACD is wide open which is fine. So this
+[00:12:01] pullback right here would have been a
+[00:12:02] great place to be a buyer. It goes a
+[00:12:04] little bit higher. This pullback here
+[00:12:06] would have also been acceptable. And
+[00:12:08] then right here we get a crossover. The
+[00:12:10] MACD goes negative. And so for any
+[00:12:12] traders that bought there or bought in
+[00:12:14] here, you're trading against the trend.
+[00:12:17] The tide is going out so to speak on
+[00:12:19] this. And then suddenly the tide flips.
+[00:12:22] We break out right here. The MACD goes
+[00:12:24] back to positive. And then this first
+[00:12:26] pullback right here is a great place to
+[00:12:28] be a buyer. So, this is the type of
+[00:12:30] instrument that we want to be focusing
+[00:12:32] on. And in my case, I'm trading stocks.
+[00:12:34] Now, I'll show you a bunch of examples
+[00:12:37] from uh from today's price action, which
+[00:12:39] was uh truly incredible. This is the
+[00:12:42] current chart that we've got going right
+[00:12:43] now. This is a stock that's currently up
+[00:12:46] uh as of this moment, let's see, we're
+[00:12:48] up uh over 5,000%. 5,000% in a single
+[00:12:54] day. So, this is a case this is a stock
+[00:12:56] worthy of doing a case study on. I've
+[00:12:59] got some great profit on it today that
+[00:13:00] you'll see at towards the end of this
+[00:13:02] episode. I'll I'll show you how much I
+[00:13:04] made on it, but this was really
+[00:13:06] impressive. This is what we love to see.
+[00:13:08] And if you were trading this without the
+[00:13:09] MACD, you were at a disadvantage. So,
+[00:13:12] adding the MACD is going to be really
+[00:13:13] helpful for you in your trading. Okay.
+[00:13:16] So, step one is trading the right
+[00:13:18] stocks. Now, what I'm going to do for
+[00:13:20] you guys is I'm going to put a link
+[00:13:21] where you can download my stock
+[00:13:22] selection PDF where I outline my five
+[00:13:25] pillars or the five criteria that I use
+[00:13:28] in setting my scanners. This is how I
+[00:13:31] find the right stocks in real time. So,
+[00:13:35] this PDF is a document that you guys can
+[00:13:37] download. You can print it out. You can
+[00:13:38] utilize it in your own trading. And I'm
+[00:13:40] going to go over the highlights of what
+[00:13:42] I cover in detail in that PDF here in
+[00:13:45] this class. All right. So, make sure you
+[00:13:47] download this PDF. The link will be
+[00:13:48] pinned at the top of the comments and in
+[00:13:50] the description. So, stocks that make
+[00:13:53] the biggest percentage gains, like
+[00:13:55] 5,000% in one day, they always share
+[00:13:58] similar characteristics of price, float,
+[00:14:02] sector, and news. So, price, I'm sure
+[00:14:05] you understand what that is. That's the
+[00:14:07] price of the instrument that you're
+[00:14:08] looking at. The float is the number of
+[00:14:10] shares available to trade. And so in the
+[00:14:14] case today of this big move we have the
+[00:14:16] total float on OCTO is 2.68 million
+[00:14:21] shares. 2.68 million shares. That's it.
+[00:14:24] That's that's all the shares that
+[00:14:25] they've issued and that are available to
+[00:14:27] trade. So right now it's traded with 169
+[00:14:32] million shares of volume. So I want to
+[00:14:34] do a little demonstration for you here.
+[00:14:35] Uh we'll just erase this for right now.
+[00:14:38] So right now um we're going to we're
+[00:14:41] going to kind of compare the
+[00:14:42] relationship here of demand
+[00:14:45] uh and supply. So on the supply side in
+[00:14:49] this example we've got 2.68 million
+[00:14:52] shares. And on the demand side we've got
+[00:14:56] 170 million shares of volume. And right
+[00:14:59] now we've got our rate of change. And
+[00:15:01] the rate of change is plus 5,000%.
+[00:15:04] That's quite astonishing. So, I'll just
+[00:15:08] move this over so it's easier to read.
+[00:15:09] So, I want to just pose a idea to you
+[00:15:12] that what if, for instance, um 5,000.
+[00:15:17] What if, for example, this had had a
+[00:15:20] instead of a 2.6 million share float,
+[00:15:23] what if the supply was uh 10 times as
+[00:15:26] big? What if it was a 26 million share
+[00:15:29] float instead 2.6? And what if it still
+[00:15:32] had the same 170 million shares? I would
+[00:15:35] wager that it would not be up 5,000%. In
+[00:15:38] fact, it might only be up onetenth of
+[00:15:40] that, which is 500%. Still significant,
+[00:15:43] but not 5,000%. Or what if it had the
+[00:15:46] 2.68 million share float, but the volume
+[00:15:49] was only 17 million shares? Once again,
+[00:15:52] I think we would only be up about 500%.
+[00:15:55] And so, what we're looking at here is
+[00:15:58] the relationship between supply and
+[00:16:00] demand. And if any of these change then
+[00:16:03] the result of how much the price can go
+[00:16:05] up will change. So typically what I find
+[00:16:09] and supply is also known as float. So
+[00:16:12] the number of shares available to trade.
+[00:16:14] If you start with a lower float than
+[00:16:16] initially you're going to have a better
+[00:16:18] chance at getting a big percentage move
+[00:16:20] because a 2.68 68 million share float
+[00:16:22] with even just 17 million shares of
+[00:16:25] volume or even just let's say 1.7
+[00:16:28] million shares of volume could still
+[00:16:30] potentially go up 50%. Now if a stock or
+[00:16:33] any instrument goes up 50% in one day,
+[00:16:36] it's going to start gaining some
+[00:16:37] attention. People are going to start
+[00:16:38] looking at and asking, you know, what's
+[00:16:40] the catalyst? Why is this thing going
+[00:16:42] up? And how much higher is it going to
+[00:16:43] go? Is there an opportunity for me to
+[00:16:45] get in and ride some of this momentum?
+[00:16:47] Next thing you know, it's got 3.2
+[00:16:49] million shares of volume. It's up 100%.
+[00:16:51] Then it's got six million shares of
+[00:16:52] volume. It's up 200%, etc., etc. It just
+[00:16:54] keeps going higher. And now it's going
+[00:16:57] higher because at the very beginning,
+[00:16:59] sort of the chicken or the egg. What was
+[00:17:01] first, the float or the volume? Now
+[00:17:02] ultimately, what was first was a
+[00:17:05] catalyst. There was breaking news. That
+[00:17:07] breaking news was a spark. But because
+[00:17:10] the float was so low, that initial spark
+[00:17:12] where the first first shares of volume
+[00:17:14] came in were enough to create an
+[00:17:16] imbalance where the price moved up
+[00:17:18] rapidly. So if at the time that that
+[00:17:20] news came out the float had been 50
+[00:17:22] million shares or 100 million shares, it
+[00:17:25] wouldn't have moved up enough
+[00:17:26] percentage-wise to get those first
+[00:17:28] traders interested and nothing would
+[00:17:30] have happened. So float is a very
+[00:17:33] important component in this relationship
+[00:17:35] of supply and demand. And ultimately
+[00:17:37] these are what create these big
+[00:17:38] imbalances and these are what create
+[00:17:40] these big percentage gains. So price
+[00:17:43] float sector and a news event. Now
+[00:17:45] sector one of the things that I know
+[00:17:47] right now is that in today's market
+[00:17:49] there's a couple of sectors that are
+[00:17:50] really hot. One of them is biotech and
+[00:17:53] this has been true for decades. Biotech
+[00:17:56] stocks can be very hot. When a biotech
+[00:17:58] stock comes out with a really good
+[00:18:00] headline, those things can fly. But
+[00:18:02] what's also really popular right now are
+[00:18:05] AI catalyst, AI sector stocks and crypto
+[00:18:09] sector stocks. And this stock today that
+[00:18:12] we're going to do the case study on
+[00:18:13] happens to be in the crypto sector and
+[00:18:16] it of course has a news event. So this
+[00:18:19] is basically what creates the perfect
+[00:18:23] storm for a big move. And I want you to
+[00:18:25] understand that everything that I'm
+[00:18:27] going to go through here is not
+[00:18:28] arbitrary. This is actually based on
+[00:18:30] years of historical data from my own
+[00:18:33] trading. So, this right here is $19.5
+[00:18:36] million of fully verified, independently
+[00:18:38] audited trading profits. And if we look
+[00:18:40] at this and we look at just for
+[00:18:42] instance, my performance by price,
+[00:18:44] you'll see that I don't make a lot when
+[00:18:46] the price is under $2. I do the best
+[00:18:48] when the price is between two and 10.
+[00:18:51] Really two and 10, two and 20 is kind of
+[00:18:53] my sweet spot. Now, there's a couple
+[00:18:55] anomalies where, you know, GameStop and
+[00:18:57] a few others that were higher priced
+[00:18:58] that I did really well on. this one
+[00:19:00] today which has gotten a little higher
+[00:19:01] price which I've done well on but
+[00:19:03] generally it's between two and 20 that I
+[00:19:05] do the best. So then when we back up
+[00:19:07] here what I say generally for price is
+[00:19:11] between 5 and 10 is like the real sweet
+[00:19:13] spot. Now between 2 and 20 is fair but 5
+[00:19:17] to 10 is where I can really crush it.
+[00:19:20] All right. So then uh and everything
+[00:19:22] that else that's on there comes from uh
+[00:19:24] from from this historical data right
+[00:19:26] here. So this is where we better
+[00:19:27] understand uh for instance that five
+[00:19:30] times relative volume makes a
+[00:19:32] significant difference. So if we go
+[00:19:34] right down here performance by
+[00:19:36] instruments relative volume right here
+[00:19:38] this is this is the table that shows you
+[00:19:40] that almost all of my profit right here
+[00:19:43] is when we have 500 times or five times
+[00:19:46] above average volume. So why would
+[00:19:49] something have five times above average
+[00:19:51] volume? It's because of that news
+[00:19:53] catalyst. Right? So, this all ties into
+[00:19:55] that relationship between supply and
+[00:19:57] demand. So, here are six criteria for
+[00:20:00] high demand. Number one, if the price is
+[00:20:03] already up 30%. Just the very fact that
+[00:20:05] the price is up is now going to um it's
+[00:20:08] going to pick up more attention. So,
+[00:20:09] more people are going to notice it,
+[00:20:10] they're going to see it, and they're
+[00:20:11] more likely to trade it. Number two, a
+[00:20:14] breaking news headline. That's the
+[00:20:15] headline that gets everything started.
+[00:20:17] There are times when we have big moves
+[00:20:19] without news, although it's not as
+[00:20:21] common. Number three, when the price is
+[00:20:23] between 5 and 10, that's a sweet spot.
+[00:20:25] Between 2 and 20 is acceptable. Number
+[00:20:27] four, when we have five times relative
+[00:20:29] volume, that's a good reflection of
+[00:20:31] demand. Number five, it's in a hot
+[00:20:33] sector like crypto, biotech, or AI. And
+[00:20:36] number six, when the time is between 7
+[00:20:38] a.m. and 10:00 a.m. Eastern, that is a
+[00:20:41] window where we see the biggest moves
+[00:20:43] historically. And then the criteria for
+[00:20:46] low level of supply is that the demand
+[00:20:48] or the fl sorry, uh, I got to just fix
+[00:20:50] that typo. that the float is under uh 10
+[00:20:53] million shares. So, when you've got a
+[00:20:55] float of less than 10 million shares,
+[00:20:57] change that to supply, that's when
+[00:20:59] exciting things happen. And it's not to
+[00:21:01] say that you can't have a float of uh 15
+[00:21:03] million shares or 11 million shares.
+[00:21:05] That's that's probably fine. 25 35, it
+[00:21:09] starts to be less likely that you're
+[00:21:11] going to see a big percentage move. And
+[00:21:13] so, when I look at my scanners each day,
+[00:21:15] what I'll typically see is that the
+[00:21:17] stocks that are on the scans, they have
+[00:21:19] floats that are lower. So, a 600,000
+[00:21:22] share float, 22 million share float, 6
+[00:21:25] million, 2.6 million, 1.7 million. Now,
+[00:21:28] this is a little bit of an outlier with
+[00:21:29] 283 million shares. Uh, but you also see
+[00:21:32] that it's only got 11,000 shares of
+[00:21:33] volume and it's at 6 cents a share. So,
+[00:21:35] probably it's a little bit of an anomaly
+[00:21:36] that it's even on the scanner. 25
+[00:21:39] million shares, again, light volume. 80
+[00:21:41] million shares. Okay, so that's a little
+[00:21:44] bit higher. It's up 37%. 37% is cool.
+[00:21:47] 5,000% is a lot cooler. So then this
+[00:21:50] next one 2.9 11 59 1.7. So the majority
+[00:21:55] of these that have volume and that we
+[00:21:57] would consider trading are going to have
+[00:21:59] lower floats, fewer shares available to
+[00:22:02] trade. So this is how the MACD strategy
+[00:22:05] works. I'm going to look each day for
+[00:22:08] one of the leading most obvious stocks
+[00:22:10] in the market, the leading gainer, the
+[00:22:13] biggest percentage gainer. So on this
+[00:22:14] particular day it was LCFY 294% gain on
+[00:22:19] the day as you can see right here 21
+[00:22:21] million shares of volume with a 1
+[00:22:22] million share float and it's up you know
+[00:22:24] 300%. So right here as you can see it's
+[00:22:28] already rallied up. It's pulled back.
+[00:22:30] Could you have bought this dip right
+[00:22:31] here? MACD was open. Absolutely. Maybe
+[00:22:33] you did. Maybe you didn't. It goes up.
+[00:22:35] It pulls back again. Should you buy this
+[00:22:37] dip? MACD is still open. Looks pretty
+[00:22:39] good. And it goes higher. Pull back.
+[00:22:41] Should I buy the dip? MD is still open.
+[00:22:43] and it goes higher. So, right here, it's
+[00:22:46] pulling back. The MACD is open. Should
+[00:22:47] we buy the dip? Well, it looks pretty
+[00:22:50] good, and it continues going higher. So,
+[00:22:53] what we're looking for is an obvious
+[00:22:55] stock number one that meets all of the
+[00:22:57] criteria that I've already laid out for
+[00:22:59] you for being an Aquality stock. And we
+[00:23:02] want to be buying a dip. The reality is
+[00:23:05] if you buy the top of a candle like this
+[00:23:07] one right here, it might keep going
+[00:23:09] higher, but you don't have a lot of
+[00:23:12] basis for getting in right there.
+[00:23:13] Whereas if it pulls back, you get a
+[00:23:15] level of support. Now, I'm going to show
+[00:23:16] you this entry in a bit more detail in a
+[00:23:18] moment, but right there, that's $77,000
+[00:23:21] in profit on the on this day. Now,
+[00:23:23] 51,000 of it came from LCFY. So, I'm
+[00:23:26] focusing on trading obvious stocks. BBLG
+[00:23:29] was one of the others I traded. That's
+[00:23:31] the second leading gainer. GCTK, CYN,
+[00:23:34] HCWB. Most likely at the times that I
+[00:23:37] was trading them, they were both up
+[00:23:38] quite a bit, which made them pretty
+[00:23:40] obvious. So now, this is that uh setup
+[00:23:42] on PRTG that I showed you before.
+[00:23:45] There's that big dramatic MACD
+[00:23:46] crossover, but look at PRTG. What I'm
+[00:23:49] trying to show you here is that this was
+[00:23:50] the most obvious stock in the entire
+[00:23:53] market on this day. It was up 178%. Now,
+[00:23:57] what about this day? Oh, and so there
+[00:23:58] you go. There's the $53,000 of profit.
+[00:24:00] Now, what about this day? BTCM, this was
+[00:24:03] up 300%. Now, some days the most obvious
+[00:24:06] stock, like the case is today, will be
+[00:24:08] up 5,000%. Other days, it's up 100% or
+[00:24:11] 75%. In this case, it was BTCM up 314%.
+[00:24:16] And every time this thing pulled up when
+[00:24:18] the MACD was open, which was from here
+[00:24:20] to here, and again, from here to here,
+[00:24:23] it kept moving higher. And so, this is a
+[00:24:26] day where I locked up $79,000 in profit.
+[00:24:29] And I wouldn't have been able to do it
+[00:24:30] if I hadn't been using the MACD. Now,
+[00:24:33] this was today's trade, and this was
+[00:24:34] just in the morning. So, just in the
+[00:24:36] first part of the day when this thing
+[00:24:38] topped out at $54, I locked up over
+[00:24:41] $30,000 in profit on it. Now, at that
+[00:24:43] time, it was up well, let's see, I guess
+[00:24:45] it peaked at about 3,500%
+[00:24:48] right up here, $3,800%.
+[00:24:50] So, that was the peak right there. And
+[00:24:53] if again you look back at this at the
+[00:24:54] MACD and every time the MACD was open
+[00:24:57] and it had a pullback, this thing kept
+[00:24:59] rallying higher. So how do we execute on
+[00:25:02] this strategy? Number one, if you
+[00:25:04] haven't already traded with real money
+[00:25:06] before, you should set up a simulator.
+[00:25:07] Do not trade with real money till you've
+[00:25:09] proven you can make money in the sim
+[00:25:11] because trading is risky. And I should
+[00:25:12] tell you, my results are not typical.
+[00:25:14] I've been doing this for a really long
+[00:25:16] time. So make sure you set up a SIM
+[00:25:18] account first. If you're trading with
+[00:25:20] real money already, that's fine. But as
+[00:25:22] you're learning a new strategy, I still
+[00:25:23] encourage you to use uh a simulator.
+[00:25:25] Number two, set up your scanners using
+[00:25:27] the criteria of stock selection that I
+[00:25:29] already shared with you. If you want to
+[00:25:30] download the PDF, the link is pinned at
+[00:25:32] the top of the comments and in the
+[00:25:33] description. You can download that PDF
+[00:25:35] and then you can program your scanner
+[00:25:36] with those settings. Now, if you use the
+[00:25:38] software that I'm using every single
+[00:25:40] day, which is uh right here, then the
+[00:25:43] scanners are already programmed for you
+[00:25:44] because they're using my settings. So,
+[00:25:46] that would be fine as well. All right.
+[00:25:48] So now number uh four, we take entries
+[00:25:52] with a 2:1 profit to loss ratio. And
+[00:25:55] number five, we take profit at an exit
+[00:25:56] indicator. I'm going to share with you
+[00:25:58] my top four indicators in just a moment.
+[00:26:00] So step one, stocks hitting the scanner.
+[00:26:03] This morning, OCTTO starts hitting the
+[00:26:05] scanner. Boom, boom, boom. This is at
+[00:26:07] 658 in the morning. It was already up
+[00:26:09] 200%. So I knew this thing was worth
+[00:26:12] watching. So I'm going to back this up
+[00:26:14] to that first trade that I took, which
+[00:26:15] was way back at 658. So 658 this
+[00:26:19] morning. Let's see. It's right in here.
+[00:26:22] And what you can see, and we'll go full
+[00:26:24] screen on this, was that the price had
+[00:26:25] already made a big move. We'd had this
+[00:26:27] first rally. And so the MACD was open
+[00:26:30] right there. It pulled back. It popped
+[00:26:32] higher, pulled back, and then it pushed
+[00:26:34] a little higher and then started to roll
+[00:26:36] over and the MACD went negative. So no
+[00:26:38] trades in this area right here. And then
+[00:26:40] right there, the MACD crosses over. It
+[00:26:44] pops up. It pulls back right here. And
+[00:26:47] then it pops up to a high of about $4.
+[00:26:50] So the MACD is positive. The MACD then
+[00:26:53] momentarily goes negative as you can see
+[00:26:55] right here as we get this is it from 4
+[00:26:57] in the morning. So it pulls back, it
+[00:26:59] goes sideways. This is 4:30. This is 5.
+[00:27:02] And then let's see right here at about
+[00:27:04] 6:49
+[00:27:06] it drops and then it pops back up and
+[00:27:09] the MACD swings to positive. So, as it
+[00:27:12] swings back up right here, I bought this
+[00:27:14] dip right here going into 7 a.m. So,
+[00:27:18] first dip, second dip, and it pops up
+[00:27:21] here to a high of 480. So, those are my
+[00:27:23] first few trades on it. Now, when it
+[00:27:25] pulls back right here, I sell the whole
+[00:27:26] position. I didn't know this was going
+[00:27:28] to go to $80 a share today. There's no
+[00:27:30] way I could have known how much it would
+[00:27:32] go up, but what I could control is how
+[00:27:33] much I was willing to risk. And so, when
+[00:27:35] the price dropped below my entry, I
+[00:27:38] said, "All right, I'm going to sell the
+[00:27:39] rest of it." It pulls back. MACD kind of
+[00:27:41] goes negative for a second. Then it goes
+[00:27:43] back to positive. And right there we get
+[00:27:45] another micro pullback and a squeeze up
+[00:27:47] to 520. Then it dips down, a little
+[00:27:49] false breakout, and then it rips here up
+[00:27:51] to a high of six. And it keeps going
+[00:27:54] higher. It goes up to six. It goes up to
+[00:27:56] seven. Then it pulls back again. MACD
+[00:27:58] flips to the negative. So now the MACD
+[00:28:01] is negative. We're going sideways. And
+[00:28:02] we got to wait for it to cross back to
+[00:28:04] positive. It crosses back to positive
+[00:28:06] right here. So now I'm back willing to
+[00:28:08] consider trading it. It pops up. it
+[00:28:09] pulls back. And so now you've got more
+[00:28:11] trades right here on each one of these
+[00:28:13] pullbacks. So I'm buying pullbacks when
+[00:28:15] the MACD is positive. When the MACD goes
+[00:28:18] negative right here, I'm not trading any
+[00:28:20] of this. Don't want to touch it. Don't
+[00:28:21] want to touch it. MACD goes positive
+[00:28:23] right here. I'm back interested and
+[00:28:26] buying this pullback right here. And
+[00:28:28] that was my best trade of the day right
+[00:28:30] there at $9 and the squeeze up to 12.88.
+[00:28:33] I mean, that was right. That was a
+[00:28:35] fantastic setup because at that time,
+[00:28:37] how much was I risking?
+[00:28:40] So, my risk on this setup is the low of
+[00:28:43] the pullback. So, the low of this red
+[00:28:45] candle right here was $8.66, which means
+[00:28:48] my entry at about $8.90,
+[00:28:51] I was only risking about 25 per share.
+[00:28:54] So, with 10,000 shares, I was willing to
+[00:28:57] risk $2,500. How much did I need to
+[00:29:00] make? I was looking for a squeeze up to
+[00:29:01] $950. That's $5,000 of profit. Ended up
+[00:29:04] going not just to 950. It went to 10. It
+[00:29:06] pulls back. Goes to 1050 to 11 all the
+[00:29:08] way to 1288. And I got out right there.
+[00:29:10] And that was where I booked $31,000 of
+[00:29:13] profit on the day. It pulled back a
+[00:29:15] little bit more. It came back up right
+[00:29:16] here. It pushed even higher. And I
+[00:29:19] actually did not take that trade. And
+[00:29:21] the reason was because I didn't like
+[00:29:22] this topping tail right here. Anytime
+[00:29:25] you have a topping tail like that, it is
+[00:29:27] bearish. It's very impressive this was
+[00:29:29] able to rally in spite of that candle.
+[00:29:31] But for me it was better to be safe than
+[00:29:33] sorry. So the so in terms of how to
+[00:29:37] approach this strategy, the stock hits
+[00:29:39] the scanner. I then am thinking about
+[00:29:41] risk. Can I get a 2:1 profit to loss
+[00:29:44] ratio? So I'm going to risk a dollar to
+[00:29:47] make $2. And as long as I'm risking a
+[00:29:49] dollar to make $2, I only need to be
+[00:29:52] right 33% of the time to be break even.
+[00:29:55] Now, if we look at my metrics today or
+[00:29:57] this is metrics year-to- date, my
+[00:29:59] average winners are 17 cents per share.
+[00:30:02] So, we're not talking about huge wins. I
+[00:30:04] get in, I get green, I get out. My
+[00:30:06] average losers are about 13 cents a
+[00:30:08] share. So, the winners are bigger than
+[00:30:10] the losers. And the accuracy this year
+[00:30:12] is greater than 70%. I've maintained
+[00:30:15] really good accuracy. So, how do I know
+[00:30:18] whether or not I can get that 2:1 profit
+[00:30:20] to loss ratio? It's by waiting for the
+[00:30:22] first pullback. So if you miss the first
+[00:30:24] move, just wait for the first pullback.
+[00:30:27] And this is what it looks like. You get
+[00:30:28] the squeeze up and then one candle of
+[00:30:30] pullback. And so right now, if I was
+[00:30:33] going to get in, this would be my max
+[00:30:34] loss. I would buy right here, looking
+[00:30:37] for a squeeze through the high and a
+[00:30:39] continuation higher. Of course, the MACD
+[00:30:41] would have to be open and positive. Now,
+[00:30:43] we get another red candle. That's fine.
+[00:30:45] What's my new entry? Potentially right
+[00:30:47] here. If this next candle goes green, my
+[00:30:50] max loss is the low of the pullback.
+[00:30:52] Right there, I'm in the trade. All
+[00:30:54] right, I've got my max loss set set
+[00:30:56] right down here. Target's still a
+[00:30:58] squeeze through the high. And that's the
+[00:30:59] type of resolution that we want to see.
+[00:31:01] So, when do I sell? Number one, if we
+[00:31:04] see a high volume red candle, I've got
+[00:31:06] to get out. Number two, if I see a large
+[00:31:08] topping tail like I just showed you,
+[00:31:10] I've got to get out. Number three, if
+[00:31:11] the stock is no longer obvious, or
+[00:31:14] number four, if I see a large seller on
+[00:31:16] the level two. Those are my exit
+[00:31:18] indicators. And this is the MACD
+[00:31:20] strategy that you guys are going to see
+[00:31:21] me trading every single day. But I'll
+[00:31:23] tell you something, trading is
+[00:31:24] difficult, and you don't have to do it
+[00:31:26] alone. So, if you want to watch me
+[00:31:28] trading stocks just like OCTO in real
+[00:31:31] time, make sure you check out a two-eek
+[00:31:33] trial here at Warrior Trading. There'll
+[00:31:35] be a link as well pinned to the top of
+[00:31:37] the comments and in the description. And
+[00:31:38] I look forward to seeing you in the chat
+[00:31:40] room. Reminder, as always, trading is
+[00:31:42] risky. My results aren't typical. So,
+[00:31:43] please manage your risk, take it slow,
+[00:31:45] and I'll see you guys live streaming
+[00:31:47] tomorrow morning at 7 a.m. Eastern
+[00:31:49] Standard Time.

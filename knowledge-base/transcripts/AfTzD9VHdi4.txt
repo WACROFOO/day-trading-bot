@@ -1,0 +1,496 @@
+# Stock Market for Beginners | How to Become a Trader
+# https://www.youtube.com/watch?v=AfTzD9VHdi4
+# duration_sec: 1059
+
+[00:00:01] what's up everyone thanks for checking
+[00:00:03] out this video this is going to be a
+[00:00:04] concise beginner's guide to the stock
+[00:00:06] market when i checked out some of the
+[00:00:08] other videos on the stock market while
+[00:00:10] some of them said they were for
+[00:00:11] beginners they were an hour hour and a
+[00:00:12] half long and they very quickly got into
+[00:00:15] some fairly advanced concepts different
+[00:00:17] scc filings 10k 10q 8k s3 forms pe
+[00:00:23] ratios acronyms things like that and i
+[00:00:25] feel like that's not really beginner
+[00:00:26] stuff that stuff is important and if
+[00:00:28] you're really inspired and excited after
+[00:00:30] watching this concise beginner's guide
+[00:00:32] by all means dig into that more advanced
+[00:00:34] stuff but let's keep this high level so
+[00:00:37] this is going to be a beginner's guide
+[00:00:39] to the stock market and i want to talk a
+[00:00:41] little bit about becoming a trader
+[00:00:43] so high level what is the stock market
+[00:00:46] well the stock market is a place where
+[00:00:48] individual investors like you and me can
+[00:00:50] buy shares of what are sometimes huge
+[00:00:54] companies like apple facebook netflix
+[00:00:57] tesla etc
+[00:00:58] and when we buy a share even just one
+[00:01:00] share we become a fractional little tiny
+[00:01:04] owner of this huge company and of course
+[00:01:06] when we buy the price of the company at
+[00:01:09] the time that we buy it is based on a
+[00:01:11] number of factors
+[00:01:12] one factor certainly is their
+[00:01:14] profitability but a big factor is their
+[00:01:17] perceived future potential and future
+[00:01:20] profitability that's why sometimes
+[00:01:21] you'll see companies that actually
+[00:01:23] aren't really profitable or aren't
+[00:01:25] profitable at all but still trade at a
+[00:01:27] very high price because people believe
+[00:01:29] in the company's future earnings
+[00:01:31] potential their growth their future
+[00:01:33] value so there's a lot of speculation in
+[00:01:35] the market but in any case when you buy
+[00:01:38] a stock at the time that you buy it the
+[00:01:40] prices whatever it is if this the
+[00:01:42] company is successful in achieving that
+[00:01:44] future growth over time the company will
+[00:01:48] increase in value the total market cap
+[00:01:50] will grow the value will go up and
+[00:01:52] therefore your fractional ownership your
+[00:01:54] tiny your one share whatever it is will
+[00:01:56] increase in value and so the reason
+[00:01:58] people have been attracted to the market
+[00:02:00] for so long is because historically the
+[00:02:03] market has been producing seven and a
+[00:02:05] half percent per year return
+[00:02:07] and that means a hundred dollars put in
+[00:02:09] the market
+[00:02:11] 20 years ago would be worth about 450
+[00:02:14] today
+[00:02:15] a thousand dollars put in the market
+[00:02:17] would be worth 4 500.
+[00:02:18] 10 000 would be worth 45
+[00:02:21] a hundred thousand would be worth four
+[00:02:23] hundred fifty thousand
+[00:02:24] a hundred million would be worth four
+[00:02:26] hundred fifty million
+[00:02:28] a billion
+[00:02:29] four point five billion right because
+[00:02:31] there's no limit really to scalability
+[00:02:33] in the market you have seen the amount
+[00:02:35] of money that some of these big hedge
+[00:02:36] funds have and so the market has a very
+[00:02:39] low barrier to entry even with 10 or 100
+[00:02:42] you can be invested but there's also
+[00:02:44] really no limit and that's why people
+[00:02:46] always have been trying to master the
+[00:02:49] market but let's talk for a second about
+[00:02:52] why do these companies these huge
+[00:02:53] companies share in the profit with
+[00:02:57] little retail traders or investors like
+[00:02:59] you and me
+[00:03:00] well think about it like this uh
+[00:03:03] the whole origin of the market
+[00:03:05] uh if you go way way way back
+[00:03:08] the idea was someone had an idea they
+[00:03:11] said i want to do this thing and let's
+[00:03:13] just say
+[00:03:14] i tell you i want to buy this apartment
+[00:03:15] building it's 10 million dollars it
+[00:03:18] produces
+[00:03:19] a million dollars a year in revenue so
+[00:03:21] that's a 10 roi that's after expenses
+[00:03:25] and we should buy it but i don't have
+[00:03:27] the 10 million but i find 10 investors
+[00:03:30] and so let's go to the whiteboard here
+[00:03:32] so let's say and this is going to be
+[00:03:33] like a company so we have this stock
+[00:03:36] here well in this case it's our building
+[00:03:38] and so let's say this is a pie with 10
+[00:03:40] slices the building is 10 million
+[00:03:42] dollars that we buy and it produces a
+[00:03:44] profit so each year these investors
+[00:03:46] receive a dividend okay
+[00:03:49] and then at the end of maybe 10 years or
+[00:03:52] 15 years the property is actually
+[00:03:53] increasing value to let's say 20 million
+[00:03:55] and so each of these investors when they
+[00:03:57] go and sell their shares they cash out
+[00:03:59] they make you know a hundred percent on
+[00:04:01] their money plus they got the dividends
+[00:04:03] for all that time they were invested
+[00:04:05] well that's the same with a stock
+[00:04:07] the reason that these big companies sell
+[00:04:09] shares onto the market when they do an
+[00:04:11] initial public offering let's say they
+[00:04:14] sell 10
+[00:04:15] million shares at 20 a share
+[00:04:19] they're gonna raise 200 million dollars
+[00:04:22] and what are they going to do with that
+[00:04:23] 200 million that 200 million goes back
+[00:04:26] into the company to fund the initiatives
+[00:04:28] that the company has laid out as part of
+[00:04:30] their appeal to ipo right as part of
+[00:04:34] their appeal to shareholders to buy the
+[00:04:35] shares this is what we're going to do
+[00:04:37] with the 200 million we're going to get
+[00:04:38] that's going to let us grow
+[00:04:40] and if they are successful in achieving
+[00:04:43] that growth it'll be reflected as the
+[00:04:45] share price increases over time if
+[00:04:47] they're not successful price goes down
+[00:04:49] the shareholders are unhappy right i
+[00:04:52] mean that's as simple as that
+[00:04:53] but one of the things that's kind of
+[00:04:55] interesting here you have to think about
+[00:04:57] why people are are so excited to be in
+[00:04:59] the market
+[00:05:01] and there's a couple reasons and one is
+[00:05:03] inflation so if you put and let's go
+[00:05:06] back to the whiteboard if you put a
+[00:05:08] hundred dollars in a checking account 20
+[00:05:11] years ago it would still be worth about
+[00:05:13] a hundred dollars today a checking
+[00:05:14] account some don't even earn any
+[00:05:15] interest at all so over the course of 20
+[00:05:17] years that hundred dollars doesn't grow
+[00:05:19] at all
+[00:05:20] in contrast if you put a hundred dollars
+[00:05:23] in the market right growing at 7.5
+[00:05:26] percent you've got 450 bucks so not only
+[00:05:29] have you actually produced growth you
+[00:05:32] have beat inflation and if you're in
+[00:05:35] control of a lot of money which a lot of
+[00:05:36] these big pension funds institutional
+[00:05:38] traders these hedge funds are they not
+[00:05:40] only are trying to beat inflation which
+[00:05:43] is right now high but has averaged about
+[00:05:45] two percent they need to get at least
+[00:05:47] two percent just for the money to still
+[00:05:48] be able to buy as much as it was the
+[00:05:50] year before they also want to beat the
+[00:05:53] market and they want to outperform they
+[00:05:55] want to try to do better and better and
+[00:05:57] better and those that do are rewarded as
+[00:06:00] investors want to give them their money
+[00:06:02] so they can go into the market and
+[00:06:04] invest it
+[00:06:05] but one of the things about the stock
+[00:06:06] market that is certainly um important to
+[00:06:08] know well two things so so one
+[00:06:11] in order for companies to list their
+[00:06:13] shares on the exchange they have to
+[00:06:15] provide financial disclosures they have
+[00:06:18] to share with investors how they are
+[00:06:21] performing and that's where they file
+[00:06:23] with the sec they file their 10k and
+[00:06:25] their 10q their quarterly earnings and
+[00:06:27] their annual earnings so you can see
+[00:06:29] their cash flow you can see their
+[00:06:31] balance sheet and it's it's fully
+[00:06:33] transparent so you as a potential
+[00:06:35] investor can do your due diligence and
+[00:06:38] make sure that this is a company that
+[00:06:40] you feel comfortable investing in right
+[00:06:42] you wouldn't want to invest in something
+[00:06:43] that doesn't provide any financial
+[00:06:45] transparency how would you possibly know
+[00:06:48] whether or not it's safe
+[00:06:49] but at the same time we know that the
+[00:06:52] price of a stock and its ultimate value
+[00:06:55] is based not just on the earnings they
+[00:06:57] report
+[00:06:58] but market sentiment how people feel
+[00:07:02] about the company how people feel it's
+[00:07:04] going to perform over the long haul and
+[00:07:07] that can be very difficult to gauge and
+[00:07:10] so one of the risks for investors is
+[00:07:12] what's called single stock exposure if
+[00:07:15] you take that hundred dollars and you
+[00:07:16] put all of it into one stock and leave
+[00:07:19] it there for 20 years it's possible that
+[00:07:21] you could
+[00:07:22] far outperform seven and a half percent
+[00:07:25] per year you could have a stock that
+[00:07:26] goes up 400 percent
+[00:07:28] or you could have a stock that goes
+[00:07:30] bankrupt it goes bust
+[00:07:32] and so what a lot of savvy investors
+[00:07:34] will do there's a couple different
+[00:07:35] things with some investors who feel very
+[00:07:38] confident selecting their own stocks
+[00:07:41] which
+[00:07:41] is fairly rare because you have to have
+[00:07:44] some training some expertise that
+[00:07:46] actually gives you an edge but some
+[00:07:48] people do feel confident choosing their
+[00:07:50] own stocks they'll invest in tesla
+[00:07:51] they'll invest in netflix because they
+[00:07:53] drive a tesla they watch netflix and
+[00:07:54] they invest in amazon because they shop
+[00:07:56] there they buy what they know that's
+[00:07:58] what warren buffett always says buy what
+[00:07:59] you know
+[00:08:00] okay but to reduce the pressure and the
+[00:08:03] risk of single stock exposure what a lot
+[00:08:05] of people will do is they'll invest into
+[00:08:08] an index and these indexes indices are a
+[00:08:11] fund and so let's go back to the
+[00:08:12] whiteboard so one of the popular funds
+[00:08:15] and we'll just reuse this here is the s
+[00:08:18] p 500 so the s p 500 is a fund of that
+[00:08:23] is a measure of the 500 companies that
+[00:08:26] make up the s p 500 the dow jones
+[00:08:28] industrial average is an index that
+[00:08:31] includes 30 companies and so by
+[00:08:34] investing in the s p 500 or by investing
+[00:08:37] in the dow jones industrial average you
+[00:08:39] are reducing your single stock exposure
+[00:08:42] right now if one of those stocks go
+[00:08:44] bankrupt if one of 500 stocks go
+[00:08:46] bankrupt is it gonna hurt your your the
+[00:08:49] performance of the fund sure
+[00:08:51] but it'll probably be offset by the one
+[00:08:53] or two that do really well and so you
+[00:08:55] get to just benefit from a nice average
+[00:08:58] and you also are rewarded for the risk
+[00:09:00] you take by buying into these funds with
+[00:09:03] dividends so you get these dividends
+[00:09:06] coming in which is really great for cash
+[00:09:08] flow and really great for people that
+[00:09:09] are looking for
+[00:09:10] fixed income so that's a concise very
+[00:09:14] high level beginner's guide to the stock
+[00:09:16] market and now let's talk about what it
+[00:09:18] takes to become a trader
+[00:09:20] so becoming a trader means you're
+[00:09:22] someone that is actively buying and
+[00:09:25] selling shares of stock and so i'm a
+[00:09:27] trader and this is something i've been
+[00:09:28] doing for a long time and i do it every
+[00:09:30] single day i actually day trade but you
+[00:09:33] don't have to be a day trader you could
+[00:09:34] still trade you know and buy something
+[00:09:36] and hold it for a week and then sell it
+[00:09:37] later
+[00:09:38] and what the idea is here is that you're
+[00:09:41] profiting from short term fluctuations
+[00:09:44] in price
+[00:09:45] certain events can happen for a company
+[00:09:48] a company can have good news that comes
+[00:09:50] out or bad news that comes out and
+[00:09:52] following the release of that news we
+[00:09:54] would call that news to be a catalyst
+[00:09:56] the stock can make moves and we've
+[00:09:58] developed with some degree of
+[00:10:00] predictability and understanding that
+[00:10:02] certain catalysts result in certain
+[00:10:04] types of moves and certain chart
+[00:10:06] patterns which are the technical
+[00:10:08] analysis that active traders use can be
+[00:10:10] indicative of price action that is yet
+[00:10:12] to come we're trying to predict the
+[00:10:14] future no one can do it with 100
+[00:10:17] accuracy but
+[00:10:18] as a trader if you're right 65 70 of the
+[00:10:22] time
+[00:10:22] you would be considered to be doing
+[00:10:24] pretty well which means you can also be
+[00:10:26] wrong 30 of the time and that's totally
+[00:10:28] okay
+[00:10:29] so being a trader means you're buying
+[00:10:32] and then turning around and selling the
+[00:10:33] shares within a fairly short period of
+[00:10:35] time and looking to capitalize on short
+[00:10:38] periods of volatility and change in
+[00:10:40] price now one of the things that a lot
+[00:10:42] of traders will do
+[00:10:44] is they'll use a larger position
+[00:10:46] that way if the stock goes up let's say
+[00:10:49] 15 or something like that with a larger
+[00:10:51] position they can actually really
+[00:10:52] capitalize on that very nicely now you
+[00:10:55] might think jesus stock would never go
+[00:10:57] up 15 in one or two days or one or two
+[00:10:59] weeks but it actually happens all the
+[00:11:02] time in the market now these are the
+[00:11:04] outliers but these are the types of
+[00:11:06] stocks that active traders like myself
+[00:11:08] are looking at so every morning i do a
+[00:11:10] morning show right here on youtube and
+[00:11:12] if you're subscribed to the channel or
+[00:11:13] you hit the thumbs up you can get
+[00:11:15] recommended the um the morning show
+[00:11:17] you'll see it as soon as i pop up and
+[00:11:18] start broadcasting it'll it'll show
+[00:11:20] and so during that broadcast each
+[00:11:22] morning i'm walking you through what i
+[00:11:24] think are the leading stocks each day
+[00:11:27] they have the potential to make a big
+[00:11:28] move and these are always going to be
+[00:11:29] stocks that are already moving up and
+[00:11:32] generally have some type of news
+[00:11:34] catalyst and so my job as a trader is to
+[00:11:37] try to buy the stock and then sell it a
+[00:11:40] few minutes or you know 15 20 minutes or
+[00:11:42] maybe an hour later for a profit
+[00:11:45] one of the things that's interesting is
+[00:11:47] that if you want to buy the stocks you
+[00:11:49] might think how do i even buy
+[00:11:51] shares of a stock do i call my bank do i
+[00:11:54] you know go to
+[00:11:56] what website do i go to how do i do this
+[00:11:58] and so in each country the stock market
+[00:12:01] is fairly regulated and so here in the
+[00:12:03] u.s if you want to buy
+[00:12:06] stocks if you want to buy shares of a
+[00:12:07] company you have to go through what's
+[00:12:09] called a broker dealer they're an
+[00:12:11] intermediary between you and the market
+[00:12:14] and if we go back to the whiteboard
+[00:12:16] the way it used to work um old
+[00:12:18] old-fashioned old school
+[00:12:20] and my my great grandfather was actually
+[00:12:22] working on the exchange in 1929 so let's
+[00:12:26] i'll draw a little picture of my great
+[00:12:28] grandfather here so he's working on the
+[00:12:29] exchange and he's got one of those like
+[00:12:30] big top hats because they probably did
+[00:12:32] in 1929 and so he's down there on the
+[00:12:35] exchange and i'm over here and i pick up
+[00:12:38] so this is me i'm over here and let's
+[00:12:40] just pretend that i'm like i'm like a
+[00:12:41] farmer so i've got a pair of overalls on
+[00:12:43] or whatever so i pick up the phone i say
+[00:12:46] hey i'd like to buy some shares of
+[00:12:50] general electric and so who who i have
+[00:12:53] to call is my broker right here he's a
+[00:12:56] fancy guy in the middle and he says okay
+[00:12:59] i can get you shares of general electric
+[00:13:01] they're currently trading at you know
+[00:13:03] whatever 12 a share and so he says okay
+[00:13:07] and then he calls his man down on the
+[00:13:09] floor of the exchange and this guy walks
+[00:13:11] over to the general electric desk and
+[00:13:13] says i want to buy this number of shares
+[00:13:15] and then he calls him back and says i
+[00:13:17] got the shares hey good news we got him
+[00:13:19] for 11
+[00:13:20] and you know 50 cents whatever and then
+[00:13:23] i get the word passed on to me and all
+[00:13:25] of that takes maybe five minutes 10
+[00:13:26] minutes uh maybe longer you know
+[00:13:29] depending on the number of factors
+[00:13:31] today
+[00:13:32] it's
+[00:13:33] essentially entirely electronic and this
+[00:13:36] is this is what the market looks like so
+[00:13:38] right here you can see these charts and
+[00:13:41] literally from your phone
+[00:13:45] from your computer you can access the
+[00:13:48] market and you can start trading and so
+[00:13:50] i'll show you let's see this is um this
+[00:13:52] is what this kind of looks like right
+[00:13:54] here
+[00:13:56] this is it's a hundred percent digital
+[00:13:58] so i can go in here and just as an
+[00:14:00] example i'll just do a test stock with
+[00:14:02] the press of a button watch this i just
+[00:14:04] bought 1500 shares like that instantly
+[00:14:07] instantly i own them like that and i
+[00:14:10] press one more button and i sold them
+[00:14:11] just like that
+[00:14:13] and that is the power of the market
+[00:14:15] today from your phone from your computer
+[00:14:17] with an internet connection you can
+[00:14:19] access the market and you can become a
+[00:14:20] trader
+[00:14:22] but just because you can become a trader
+[00:14:23] very easily doesn't mean you can become
+[00:14:26] profitable very easily i've been doing
+[00:14:29] this for a long time i have over 10
+[00:14:31] million dollars of gross profit to my
+[00:14:32] name i'm a pretty good trader and my
+[00:14:35] results are not even close to typical
+[00:14:37] most traders lose money so if you're
+[00:14:40] thinking about learning more about the
+[00:14:42] market and you want to become a trader
+[00:14:44] what i encourage you to do next is to
+[00:14:46] start research
+[00:14:48] about different strategies now whether
+[00:14:50] you want to learn one of the strategies
+[00:14:51] that i trade that's fine i put some
+[00:14:53] links at the end of the video you want
+[00:14:54] to learn other strategies that's fine
+[00:14:56] but i would encourage looking at trend
+[00:14:58] based trading which is called momentum
+[00:15:01] trading momentum trading is when you're
+[00:15:03] looking for a stock like this that's
+[00:15:05] moving up strongly the stock that i
+[00:15:07] traded the most on today rvsn
+[00:15:10] this one this morning experienced strong
+[00:15:12] momentum going from about a dollar sixty
+[00:15:14] up to two dollars and fifty cents so
+[00:15:17] this is a stock that uh let's see let's
+[00:15:19] just check the percentage gain it's
+[00:15:21] still up 53
+[00:15:23] in one day
+[00:15:25] right so that and i'll just put that
+[00:15:27] back on screen share so you can see real
+[00:15:28] quick that's the type of stock that you
+[00:15:30] want to be looking at now again
+[00:15:33] it's your it's totally your choice how
+[00:15:35] you approach the market you may be
+[00:15:36] someone who says well gosh i'm not going
+[00:15:38] to be a day trader i don't have the time
+[00:15:40] for that i'd rather just you know buy my
+[00:15:43] one share of tesla or whatever it is and
+[00:15:46] that's fine too
+[00:15:47] but you still have to go through your
+[00:15:49] intermediary so my intermediary is this
+[00:15:52] broker here
+[00:15:53] you may use td ameritrade you may use uh
+[00:15:56] e-trade you may use interactive brokers
+[00:15:58] and that's fine and in some countries
+[00:16:01] you can even use your bank although the
+[00:16:03] platforms that banks provide are usually
+[00:16:06] not very sophisticated compared to the
+[00:16:08] platforms that really professional
+[00:16:10] broker dealers who cater to traders
+[00:16:13] every single day they have really good
+[00:16:15] software the software that allows you
+[00:16:16] with the press of a button to get in and
+[00:16:18] out the software that provides really
+[00:16:20] great charts so you can see what a stock
+[00:16:22] is doing in real time it's kind of it's
+[00:16:25] it's crazy to think about the fact that
+[00:16:27] 30 40 years ago
+[00:16:30] you know this whole thing of being able
+[00:16:32] to actively trade on the computer from
+[00:16:34] home like this was not a thing if you
+[00:16:37] wanted to be a trader
+[00:16:38] you had to be down on wall street and
+[00:16:41] most likely you had to have gone to a
+[00:16:42] school a really good school gotten you a
+[00:16:45] business degree master majored in
+[00:16:47] finance you know all that stuff it's so
+[00:16:50] different today so i hope you're
+[00:16:52] inspired i hope you're excited i hope
+[00:16:54] that for you this was indeed a concise
+[00:16:57] beginner's guide to the stock market and
+[00:17:00] gave you a bit of a sense of what it's
+[00:17:02] like to become a trader so if you want
+[00:17:04] to learn more i'm going to put two
+[00:17:05] videos one right here on my simplest day
+[00:17:08] trading strategy you can check that out
+[00:17:10] if you're interested and i'll put
+[00:17:11] another right here that might get you
+[00:17:13] inspired it's the story of a janitor and
+[00:17:15] this is someone that i actually knew who
+[00:17:17] amassed a fortune of eight million
+[00:17:20] dollars he worked as a janitor how did
+[00:17:22] he do it he a penny saved is a dollar
+[00:17:24] earned he kept putting money away and it
+[00:17:26] grew exponentially so check out those
+[00:17:28] two videos my simplest day trading
+[00:17:30] strategy and
+[00:17:31] the jander who made 8 million bucks all
+[00:17:33] right thanks for tuning in for this
+[00:17:34] episode and i hope you did hit the
+[00:17:35] thumbs up and subscribe to the channel

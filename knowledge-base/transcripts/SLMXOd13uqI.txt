@@ -1,0 +1,1482 @@
+# How to Day Trade BREAKING NEWS with a Scalping Strategy (Step-by-Step Guide)
+# https://www.youtube.com/watch?v=SLMXOd13uqI
+# duration_sec: 3592
+
+[00:00:01] in today's episode I'm going to teach
+[00:00:02] you a variation of my scalp trading
+[00:00:04] strategy where I focus on using the 10c
+[00:00:08] chart in order to capitalize on the fast
+[00:00:11] price action that occurs when a stock
+[00:00:14] has breaking news now today I am more
+[00:00:17] than double my daily goal which means
+[00:00:19] I'm going to teach a fulllength class
+[00:00:22] where we will use today's trades as a
+[00:00:24] case study for how to use the 10-second
+[00:00:27] chart and how to scalp breaking news now
+[00:00:30] let's go ahead and jump onto the screen
+[00:00:31] share you're going to see that I'm
+[00:00:32] currently up $
+[00:00:36] 24,829 2 the topic of today's class is
+[00:00:41] scalp trading breaking news and we're
+[00:00:42] going to do it using the 10c chart now
+[00:00:46] for those of you who have never traded
+[00:00:48] with a 10-second chart you can still
+[00:00:50] scalp trade by all means with a 1 minute
+[00:00:53] 5 minute chart combination and of course
+[00:00:56] using level two however I want to show
+[00:00:59] you how you can use the 10-second chart
+[00:01:01] to get a little bit of a jump on other
+[00:01:04] traders who are focusing only on one
+[00:01:07] minute or 5 minute time frames now there
+[00:01:09] are a lot of advantages to scalping
+[00:01:12] using a 10-second time frame but you
+[00:01:14] have to have the right tools and the
+[00:01:16] tools are not just charts there's a
+[00:01:18] number of other tools that you need in
+[00:01:20] order to scalp in this way correctly I'm
+[00:01:23] going to share those with you as we go
+[00:01:24] into this episode so let's go ahead and
+[00:01:26] put this up on full screen here so let's
+[00:01:29] let's go ahead there we go all right so
+[00:01:31] we got full screen now this is today's
+[00:01:34] trade this was absolutely incredible
+[00:01:38] this stock had 13 consecutive green
+[00:01:42] candles on the one minute time frame
+[00:01:44] this is a one minute chart 13 green
+[00:01:46] candles in in a row it goes from
+[00:01:48] $2.50 up to a high today of 1080 nearly
+[00:01:52] 300% return I'm up $24,000 on the day
+[00:01:56] 21,000 is thanks to this stock and for
+[00:01:59] those of you guys who tuned in to my
+[00:02:01] weekly game plan episode which I upload
+[00:02:03] every Sunday and this is for those of
+[00:02:04] you guys tuning in on YouTube but also
+[00:02:06] for warrior Pro members I said this is
+[00:02:09] why I'm going to show up every single
+[00:02:11] day because you never know when we're
+[00:02:12] going to have breaking news but last
+[00:02:14] week was relatively slow we had some
+[00:02:17] stocks that gave us some moves but none
+[00:02:19] of them were big in fact we're early in
+[00:02:21] the month right now it's the it's the
+[00:02:23] 12th and I've only had one day this
+[00:02:25] month where I broke my daily goal and
+[00:02:27] we're like you know well it's the 12th
+[00:02:29] but we're we must be seven tra seven
+[00:02:31] trading days into the month today is the
+[00:02:33] eth trading day so only one out of those
+[00:02:35] seven days I broke my daily goal now the
+[00:02:39] other six days were all small green days
+[00:02:42] these were base hit days and for those
+[00:02:44] of you guys who were tuning in I was
+[00:02:45] trading on my traveling trading station
+[00:02:48] from a small little boat house on an
+[00:02:50] island off the coast of New England and
+[00:02:52] some people are like why are you even
+[00:02:53] showing up to trade you know you're
+[00:02:55] traveling you're on vacation you're only
+[00:02:57] making $400 or $1,500 and I said well I
+[00:03:01] you're right but you just never know
+[00:03:04] when there's going to be a stock that
+[00:03:05] has big news and puts in this you know
+[00:03:08] Monster Squeeze and that's exactly what
+[00:03:11] happened today so this 15minute window
+[00:03:14] right here from the beginning of the
+[00:03:16] move well 13-minute window this these 13
+[00:03:18] green candles in a row this right here
+[00:03:22] added more than doubled my profit on the
+[00:03:24] month right this was a huge Green Day
+[00:03:26] for me so the topic of today's class is
+[00:03:29] I'm going to talk about the definition
+[00:03:31] of scalp trading how to scalp I'm going
+[00:03:33] to talk about how to use the 10-second
+[00:03:34] chart as a scalp Trader I'm going to
+[00:03:36] share with you my scalping strategy I'm
+[00:03:39] going to share with you the tools
+[00:03:40] required to scalp because you got to
+[00:03:42] make sure you've got the right tools and
+[00:03:43] I'm going to give you my recommended
+[00:03:44] reading list for those of you that want
+[00:03:46] to continue learning through this
+[00:03:48] episode I'm also going to share links to
+[00:03:50] a number of other videos that you guys
+[00:03:52] can check out that are related or sort
+[00:03:54] of a tangent to uh the the specific
+[00:03:57] topic Okay so
+[00:04:00] number one what is scalping so I I think
+[00:04:03] most of you probably understand this but
+[00:04:05] for those that perhaps don't scalping is
+[00:04:08] a fast trading strategy that involves
+[00:04:10] quickly buying and selling shares in
+[00:04:13] order to profit from relatively small
+[00:04:16] variations in price in order to generate
+[00:04:19] substantial profits from small
+[00:04:22] variations in price Traders generally
+[00:04:25] use larger positions so let's say for
+[00:04:28] instance we got the Whiteboard here
+[00:04:30] let's say you're looking at a stock
+[00:04:31] that's trading at you know
+[00:04:34] $485 and this was the first PR this is
+[00:04:36] where I got in um uh gnln today that was
+[00:04:40] my first entry is right around 485 so if
+[00:04:43] I'm in this hit 485 and let's say I take
+[00:04:46] profit you know that's that's my buy and
+[00:04:48] my sell let's just say is
+[00:04:50] $5 that's 15 cents a share so 15 cents a
+[00:04:54] share so you know H how much money is
+[00:04:57] that well if you're trading with shares
+[00:05:00] it's
+[00:05:01] $15 if you're trading with a th000
+[00:05:04] shares it's $150 if you're trading with
+[00:05:07] 10,000 shares it's
+[00:05:09] $1,500 right ,500 something like that
+[00:05:13] there's the comma so it's this is the
+[00:05:16] sort of idea with scalp trading is that
+[00:05:19] these small gains yes with small size
+[00:05:22] they're relatively small but most
+[00:05:25] traders who are scalping will increase
+[00:05:27] share size up towards maybe not 10,000
+[00:05:30] right away for most Traders but up in
+[00:05:32] the 2,000 to 5,000 share range that's
+[00:05:35] where a lot of people kind of get
+[00:05:36] comfortable and then when they see
+[00:05:37] something that looks good maybe they'll
+[00:05:38] scale up to 15 25,000 shares so one of
+[00:05:43] the things um that is interesting is
+[00:05:45] that the exposure risk of scalping is
+[00:05:48] reduced in part due to the limited
+[00:05:51] period of time a Trader is holding a
+[00:05:53] position right you're yes you're holding
+[00:05:56] 10,000 shares but how long is this trade
+[00:05:59] less than a minute maybe maybe two
+[00:06:01] minutes it's such a short period of time
+[00:06:03] that your risk one factor when you're
+[00:06:06] thinking about risk in trading is how
+[00:06:08] long you're holding a stock right if
+[00:06:09] you're going to hold a stock for a week
+[00:06:11] you're taking a lot more risk than
+[00:06:13] someone who who's holding it only for an
+[00:06:14] hour even with the same amount of money
+[00:06:17] and that might be hard to kind of
+[00:06:18] understand because it's like $10,000 of
+[00:06:20] risk is $10,000 of risk but taking that
+[00:06:22] risk over the course of seven days the
+[00:06:25] whole day all night that something could
+[00:06:26] happen news could come out in total that
+[00:06:28] is a lot more risk that you're taking
+[00:06:30] than someone who's buying and selling
+[00:06:31] getting in quickly and jumping back out
+[00:06:34] and so one of the reasons that scalp
+[00:06:35] trading was really a well I'll I I'm
+[00:06:38] going to tell you why it was appealing
+[00:06:39] to me in just a second so I'll just stay
+[00:06:41] on track here okay so most scalp Traders
+[00:06:45] will aim for high accuracy most scalp
+[00:06:48] Traders will take dozens if not 100 plus
+[00:06:51] trades in a day but you need the right
+[00:06:54] tools to scalp trade and scalp Traders
+[00:06:56] must enforce strict stops on their
+[00:06:59] trades a stop is your max loss you have
+[00:07:02] to have a Max loss on your trade because
+[00:07:05] if you let your losers get too big it's
+[00:07:07] going to be a problem so when we talk
+[00:07:09] about what makes scalp trading risky it
+[00:07:11] comes right back to the same point that
+[00:07:13] you have to use larger positions and so
+[00:07:16] if you're in a 10,000 share position and
+[00:07:18] you have The Misfortune that in that
+[00:07:21] moment the stock drops 50 cents a share
+[00:07:24] you're down five grand like that so
+[00:07:26] scalp Traders have to enforce really
+[00:07:28] strict stops on their trades otherwise
+[00:07:30] the losers will be larger on average
+[00:07:32] than the winners and this is very common
+[00:07:35] negative profit loss ratios are not
+[00:07:36] uncommon for Traders that are scalp
+[00:07:38] trading a negative profit loss ratio is
+[00:07:41] when your average losers let's say are
+[00:07:44] you know 500 and your average winners
+[00:07:46] are you know 450 something like that
+[00:07:49] here your losers are bigger than your
+[00:07:50] winners so you've got a negative profit
+[00:07:52] to loss ratio this is very common now a
+[00:07:55] slightly negative is okay something like
+[00:07:57] this where your winners are 250 and your
+[00:07:59] losers are 500 that's most likely not
+[00:08:02] going to be sustainable or a profitable
+[00:08:04] strategy for most beginner Traders it's
+[00:08:06] just too inverted in fact with this you
+[00:08:09] would actually need to be right 66% of
+[00:08:12] the time before commissions just to be
+[00:08:14] break even now to give you some context
+[00:08:17] of you know where I'm at in terms of my
+[00:08:20] um metrics I'll show you right now let's
+[00:08:23] see um so I'm going to this is the
+[00:08:26] software that I use right here and as I
+[00:08:29] mentioned you can see the last few days
+[00:08:30] which the trades um the profits were
+[00:08:32] relatively
+[00:08:34] small so we can just look at um we'll
+[00:08:37] just look at the last 30 days right here
+[00:08:40] just to sort of pull some metrics so
+[00:08:43] last 30 days profit loss ratio so
+[00:08:45] average losing trades
+[00:08:47] $323 average winning trades 574 so
+[00:08:51] that's a positive profit to loss ratio
+[00:08:53] right and the accuracy is
+[00:08:55] 67% average hold Time 5 minutes for
+[00:08:58] winners 4 minutes for losers losers this
+[00:09:00] these are really nice metrics now the
+[00:09:03] reason this all accumulates to
+[00:09:06] $196,000 of profit over the last 30 days
+[00:09:10] is because of the number of Trades I'm
+[00:09:12] taking
+[00:09:14] 692 right now if I was only taking let's
+[00:09:16] say 10 trades then no doubt 10 you know
+[00:09:21] I would only be up a very small fraction
+[00:09:23] I mean 10 you know if I traded 70 trades
+[00:09:26] I'd be up $199,000 just based on 10%
+[00:09:30] so one of the things that makes scalp
+[00:09:32] trading really appealing is the fact
+[00:09:36] that it's a lot easier to earn 10 cents
+[00:09:40] per share on a trade than to earn a
+[00:09:42] dollar per share on a trade and there
+[00:09:44] are a lot more opportunities each day to
+[00:09:47] make 10 cents per share than a dollar
+[00:09:50] per share and that's how in 30 days I
+[00:09:54] was able to come up with 692 trades 692
+[00:09:59] in individual trades over the last 30
+[00:10:01] days that's a lot of Trades but the fact
+[00:10:03] is when you're setting your goal at only
+[00:10:05] 10 or 15 cents per share it's a lot
+[00:10:08] easier to hit that now if we actually
+[00:10:10] look here um we can compare over the
+[00:10:12] same period of time just for the sake of
+[00:10:14] looking at these metrics in a little bit
+[00:10:15] more depth we're going to look at
+[00:10:17] winners versus losers but um the date
+[00:10:20] range will be just last 30 days so we'll
+[00:10:22] just do the last 30 days here winners
+[00:10:24] and losers generate report and what
+[00:10:26] you're going to see here is my average
+[00:10:28] winners are about 8 cents per share my
+[00:10:30] average losers are about 7 cents per
+[00:10:31] share which gives you know approximately
+[00:10:34] one:1 ratio on the average winner to
+[00:10:35] average loser but 8 cents a share how
+[00:10:39] can 8 cents a share give a total gain
+[00:10:42] here of
+[00:10:43] $267,000 this is before taking away the
+[00:10:46] losses how is that possible well think
+[00:10:49] about it well so what is the average um
+[00:10:51] the average winning trade the average
+[00:10:53] winning trade is
+[00:10:55] $574 so so where's my phone so just this
+[00:10:59] is just really quick math it's I could
+[00:11:01] probably more more or less do it in my
+[00:11:03] head but just to give you the exact
+[00:11:04] number so we're trading um let's see so
+[00:11:10] $574 average winners divided by 8 cents
+[00:11:14] so that means my average position size
+[00:11:16] is
+[00:11:17] 7,175 shares for the last 30
+[00:11:20] days okay so right kind of in this zone
+[00:11:23] right so we'll we'll make a new we'll
+[00:11:25] make a new one here just custom for me
+[00:11:28] so 7,000 175 shares equals
+[00:11:32] $574 okay so now you do that 650 times
+[00:11:38] within the last 30 days and boom that's
+[00:11:42] $267,000 of profit minus the losses
+[00:11:46] still up 196,000 over the last 30 days
+[00:11:49] okay so I think the the big uh takeaway
+[00:11:53] here is that there are a lot more
+[00:11:56] opportunities each day when you set
+[00:12:00] when you set your standards lower and
+[00:12:02] I'm saying standards it's a little
+[00:12:04] demeaning uh to the trades I don't mean
+[00:12:06] off fence but a scalp Trader is going to
+[00:12:09] be willing to trade setups that someone
+[00:12:12] who's trading on the 5 minute or
+[00:12:14] 15minute chart would never consider and
+[00:12:17] to be honest let's look at the five
+[00:12:19] minute or 15minute chart on uh gnln all
+[00:12:23] right so this is the FIV minute chart
+[00:12:25] where would you have taken a trade if
+[00:12:26] you only used the FIV minute time frame
+[00:12:31] maybe right here that's the first five
+[00:12:32] minute pullback but you're really
+[00:12:34] extended off of your moving averages
+[00:12:36] let's switch to the 15-minute chart it's
+[00:12:38] just going to be the same the 15-minute
+[00:12:39] chart is going to show you zero
+[00:12:41] potential entry basically a giant Spike
+[00:12:43] up and a pullback now maybe we curl
+[00:12:46] later but a 15minute or a 5 minute
+[00:12:48] Trader would have missed this entire
+[00:12:51] 300% move now is that okay listen if
+[00:12:56] that's your strategy by all means trade
+[00:12:58] what works for for you for me I don't
+[00:13:01] want to miss a 300% move if a stock goes
+[00:13:05] up 300% in one day I if I'm not
+[00:13:10] capitalizing on that I feel like I'm
+[00:13:13] messing up I'm doing something wrong
+[00:13:15] that's just me so then the question now
+[00:13:18] is if you're interested in
+[00:13:20] scalping and you want to trade these
+[00:13:22] types of big percentage movers how do
+[00:13:25] you do it how do we approach it so um so
+[00:13:29] I'm going to add a couple more things
+[00:13:30] for the pros of scalping um number three
+[00:13:34] I would say it's the only way to trade a
+[00:13:36] stock that has already extended Beyond a
+[00:13:39] safe entry for someone trading on a
+[00:13:41] longer time frame like the 5 minute or
+[00:13:43] the or the 15 minute time frame and it's
+[00:13:45] one of the only ways to trade breaking
+[00:13:47] news if you're not scalping trading
+[00:13:49] breaking news is going to be almost
+[00:13:50] impossible and it provides for me almost
+[00:13:53] instant resolution when it works and
+[00:13:55] this is what I like so now let me tell
+[00:13:57] you why I found scalp trading so
+[00:14:01] appealing when I was getting started so
+[00:14:03] when I got started spam call whatever so
+[00:14:07] when I got started I had a relatively
+[00:14:09] small account and I was trading with
+[00:14:10] money that I had gotten from my father
+[00:14:12] when he passed away now some people
+[00:14:14] occasionally are a little bit confused
+[00:14:16] about sort of my my history of trading
+[00:14:18] so I took my first trades in the late
+[00:14:20] 1990s during the do com bubble during a
+[00:14:22] school uh semester that we had that was
+[00:14:25] dedicated to the stock market now those
+[00:14:26] were paper trades I was practicing but I
+[00:14:29] started as a teenager I opened my first
+[00:14:31] account when I was 17 years old 16 years
+[00:14:34] old this was in um while I was in high
+[00:14:37] school that was my first real money
+[00:14:39] account and then I didn't trade for a
+[00:14:41] few years I took a break and my father
+[00:14:44] got sick he had cancer and he passed
+[00:14:46] away and then I when my youngest sister
+[00:14:49] turned 21 which was a few years later we
+[00:14:52] each received $100,000 which was at that
+[00:14:55] time an incredible amount of money I
+[00:14:57] didn't know what I was going to do with
+[00:14:58] it initially
+[00:14:59] so I ended up not doing anything with it
+[00:15:03] at first I just put it in a money market
+[00:15:05] account and that was uh that was at a
+[00:15:08] time when the the overall Market was
+[00:15:11] terrible so over the course of about two
+[00:15:13] years in a money market account it lost
+[00:15:16] value it lost money at that point I kind
+[00:15:19] of thought to myself maybe and this is
+[00:15:22] very naive but I thought maybe if I
+[00:15:25] manage that myself I could earn enough
+[00:15:29] money on growth each year that it would
+[00:15:31] cover my cost of living and since I had
+[00:15:34] this friend in high school who had made
+[00:15:36] $16,000 on a penny stock I thought if I
+[00:15:39] could just do this three times a year I
+[00:15:41] would be golden so initially I set up an
+[00:15:43] account with E Trade and I put in like
+[00:15:45] 5,000 bucks and right away I got flagged
+[00:15:48] PDT pattern day trader rule I took too
+[00:15:51] many trades and so I was like all right
+[00:15:53] well shoot so I added more money to
+[00:15:55] 25,000 so I had enough money to day
+[00:15:57] trade now I later learned about the
+[00:15:59] offshore Brokers that a lot of people
+[00:16:01] use but at that time I didn't know about
+[00:16:03] them so I put in 25,000 had you know
+[00:16:05] just above that level and I just kept
+[00:16:07] trading and you know what ended up
+[00:16:09] happening for me was every couple of
+[00:16:11] weeks my account would drop below 25,000
+[00:16:13] and have to add more money and I'd make
+[00:16:15] a little money make a little money and
+[00:16:16] then I'd lose it I'd make a little money
+[00:16:18] make a little money I'd maybe spend some
+[00:16:20] of it to pay bills and then I would lose
+[00:16:22] it so at the end of my first year I had
+[00:16:24] made some profit but I had spent
+[00:16:26] everything I made and then I had some
+[00:16:27] taxes the next year I went net negative
+[00:16:31] and my cost of living I was putting on
+[00:16:34] credit cards so I wouldn't have to take
+[00:16:36] money out of that trading account to pay
+[00:16:38] my bills so I ended up depleting
+[00:16:40] everything that I had gotten from my
+[00:16:42] father down to the $25,000 account but I
+[00:16:45] had $30,000 in credit card debt I then
+[00:16:48] took a $5,000 loss on the first week of
+[00:16:51] a new month it brought my account down
+[00:16:53] to about
+[00:16:54] 19,500 and I couldn't day trade and at
+[00:16:57] that point I was like oh my God what am
+[00:17:00] I going to do so that for
+[00:17:03] me I had to kind of Hit That Rock Bottom
+[00:17:06] in order to have my Catalyst my turning
+[00:17:08] point which I'm grateful for the sad
+[00:17:11] thing for some Traders is that they'll
+[00:17:14] start with 200
+[00:17:16] $300,000 and they'll lose all of it
+[00:17:19] before they hit rock bottom and it's not
+[00:17:21] until sometimes you hit rock bottom
+[00:17:24] where you feel forced to make a change
+[00:17:28] it's kind of like the pressure of those
+[00:17:29] circumstances forces you to really
+[00:17:32] analyze what you're doing and so at that
+[00:17:33] time I analyzed what I was doing I was
+[00:17:35] looking at my strategy I was trying to
+[00:17:37] figure out what was working and I
+[00:17:39] discovered that the stocks I was making
+[00:17:40] the most money on were in this sort of
+[00:17:42] very specific uh price range very
+[00:17:45] specific range of float which I'll talk
+[00:17:46] about in a second when I talk about
+[00:17:48] stock selection because I continue to
+[00:17:49] trade those types of stocks today but
+[00:17:52] because my account was basically now on
+[00:17:55] its last legs I I thought to myself if I
+[00:17:58] could just focus on sort of snipe entry
+[00:18:02] like get in get out get in get out like
+[00:18:04] don't hold don't hold anything overnight
+[00:18:08] because I cannot afford to lose more of
+[00:18:10] my account I actually sold things that I
+[00:18:12] had in my barn to raise money I sold
+[00:18:15] things on Craigslist to get my account
+[00:18:17] back to 25,000 so I got it back to 25k
+[00:18:20] by selling stuff in my garage in my barn
+[00:18:22] and I was like okay this is my last shot
+[00:18:24] so I have to be a sniper get in get out
+[00:18:27] and so that kind of brought me to the
+[00:18:28] approach of just taking quick entry
+[00:18:30] quick exit quick entry quick exit and if
+[00:18:32] I could just take one or two trades a
+[00:18:35] day and I was small green that would be
+[00:18:37] building a track
+[00:18:39] record so in those days I wasn't using
+[00:18:41] the 10-second chart that wasn't even an
+[00:18:43] option so again if you don't have access
+[00:18:45] to the 10-second chart I don't want you
+[00:18:47] to feel that um this is not applicable
+[00:18:50] to you because you can still scalp trade
+[00:18:52] breaking news without it but um but
+[00:18:55] let's talk about how to use that
+[00:18:56] 10-second time frame so when
+[00:18:59] it was about gosh I don't know how many
+[00:19:01] years ago it was now that I started
+[00:19:03] using the 10-second chart um I never
+[00:19:06] used it never used it and then I don't
+[00:19:09] know maybe it was three four years ago
+[00:19:12] uh I I noticed it was even an option and
+[00:19:15] I was like that's that's crazy and I
+[00:19:17] heard about a couple other traders who
+[00:19:19] were using um short time frames and sort
+[00:19:22] of unusual time frames I heard of some
+[00:19:25] people using like a two-minute chart or
+[00:19:26] a three minute chart and I had never
+[00:19:28] used those either and then I heard some
+[00:19:30] people using like a 30 second chart and
+[00:19:32] a 24 second chart and then I just
+[00:19:34] noticed that um if I clicked on time
+[00:19:37] frame I could go down to it a 10-second
+[00:19:39] chart so 10-second chart here we've got
+[00:19:41] 10 15 24 seconds here so when we built
+[00:19:44] day trade Dash which is the software
+[00:19:46] that you see on my screen I said for our
+[00:19:49] charts we've got to have 10-second
+[00:19:50] charts because I I at that point been
+[00:19:52] using them with e signal now e signal is
+[00:19:56] um is a platform that I used for many
+[00:19:58] years almost probably 10 years um it
+[00:20:02] it's a it's a popular piece of software
+[00:20:05] but it's also a bit um I guess I'd say
+[00:20:09] it's a bit old at this point uh a bit
+[00:20:12] dated and they charge
+[00:20:15] $172 a month for it which is a lot of
+[00:20:19] money just for charts because their
+[00:20:21] scans aren't that great um they do have
+[00:20:23] a news feed in there but anyways it's
+[00:20:25] mostly just charts so so when we bu out
+[00:20:29] day trade Dash we included a 10-second
+[00:20:31] time frame and you can get uh 10-second
+[00:20:34] charts on trading view I think it's $75
+[00:20:37] a month because you have to have the
+[00:20:39] highest um subscription to get those
+[00:20:42] charts if you subscribe to day trade
+[00:20:44] Dash uh you could get them as well but
+[00:20:46] anyways wherever you get them it doesn't
+[00:20:48] matter but the 10-second time frame I
+[00:20:50] find uh to be helpful so the way I have
+[00:20:52] my charts laid out is I've got my 1
+[00:20:54] minute my 5 minute my daily and then
+[00:20:57] I've got my 10c chart right down here in
+[00:20:59] the corner and for some trades I don't
+[00:21:01] even look at the 10-second chart I'm not
+[00:21:03] even thinking about it I'm not even not
+[00:21:05] using it at all but there are other
+[00:21:09] trades where I'm using it um quite a lot
+[00:21:12] so let's sort of zoom in on what this
+[00:21:14] looks like if we look at let's start so
+[00:21:18] let's start with um GL gnln looking at
+[00:21:22] the one minute chart so this is the one
+[00:21:24] minute chart if you're trading just on
+[00:21:25] the one minute chart where would you
+[00:21:27] have taken your first trade maybe right
+[00:21:29] here right maybe that sort of micro
+[00:21:32] pullback there at about 750 I took my
+[00:21:34] first trade at 485 right down here okay
+[00:21:38] so no doubt that was $2 a share earlier
+[00:21:41] than someone who just uses a one minute
+[00:21:43] chart right so how did I know to buy
+[00:21:47] right here it's kind of a funny spot to
+[00:21:48] buy it is a funny spot if you look at
+[00:21:50] the one minute chart but let's look at
+[00:21:52] that on the 10-second chart so on the
+[00:21:54] 10-second chart we get zoomed in here
+[00:21:57] and what you're going to see is right at
+[00:21:59] four about 485 we had this little
+[00:22:02] pattern what does that look like this to
+[00:22:05] me is sort of a primitive imperfect ABCD
+[00:22:10] pattern pop up pull back back up back
+[00:22:14] down right through that level okay so
+[00:22:18] that right there that entry right there
+[00:22:21] is actually an ABCD pattern and now it's
+[00:22:24] incredible because you wouldn't see that
+[00:22:25] on a one minute chart but now you can
+[00:22:27] see it here on the 10c second time frame
+[00:22:29] it pops up to $6 it pulls back and then
+[00:22:32] this is a flat top breakout it's even a
+[00:22:34] first pullback right here off of 550 and
+[00:22:36] then we go up to seven and then we have
+[00:22:38] this pullback at seven which was fine
+[00:22:41] goes up to 750 another pullback right
+[00:22:43] here and you're continuing to trade all
+[00:22:45] these pullbacks as it squeezes higher so
+[00:22:47] each of these pullbacks represent
+[00:22:50] opportunities to trade this and we'll go
+[00:22:51] we'll actually dive into the trades in a
+[00:22:53] little bit more detail in just a moment
+[00:22:55] but that's the reason to use the
+[00:22:57] 10-second chart
+[00:22:59] now having said that if you're scalp
+[00:23:01] trading breaking news what you're really
+[00:23:04] looking at most of the time is your
+[00:23:06] level two window right here this is what
+[00:23:09] you're watching your level two window
+[00:23:11] and your time in sales because this is
+[00:23:13] going to show you all of the buyers on
+[00:23:16] the bid all the sellers on the ask and
+[00:23:18] the flow of orders that are going
+[00:23:20] through so even if you weren't looking
+[00:23:22] at candlesticks at all you were just
+[00:23:25] looking at the level two and the time in
+[00:23:26] sales you could start to create a a a
+[00:23:30] mental image of what the chart looks
+[00:23:33] like so right now as I look at this I
+[00:23:36] know we've got a high of about 790 798 a
+[00:23:39] low of about 787 so I can already start
+[00:23:42] picturing kind of a single candle here
+[00:23:45] and the longer we watch it the more I'll
+[00:23:47] kind of remember oh we just popped up to
+[00:23:49] 8 or to 810 or to 815 that's the recent
+[00:23:51] high or oh the recent low was 770 and
+[00:23:55] you start getting a mental picture now
+[00:23:56] if you think back at some of the the
+[00:23:58] Traders uh in the older days who were
+[00:24:01] tape readers they were they didn't have
+[00:24:04] charts when you're talking I mean you're
+[00:24:06] talking about a hundred years ago
+[00:24:09] traders who were trying to actively
+[00:24:10] trade on the market didn't have access
+[00:24:13] to computers in these stock charts that
+[00:24:14] we have today but what they could do is
+[00:24:17] they could read the tape there was a
+[00:24:19] Consolidated ticker tape and that would
+[00:24:21] produce a flow of all the orders going
+[00:24:24] through so they would they could
+[00:24:25] subscribe to it and it would come
+[00:24:27] through almost through like the
+[00:24:29] telephone lines and they would get this
+[00:24:32] print out on a piece of it almost looks
+[00:24:34] like Scotch tape a roll of paper that
+[00:24:36] comes out and it's just printing the
+[00:24:37] symbol and the price symbol and the
+[00:24:39] price so it's it's making this kind of
+[00:24:42] print it like a almost like a typewriter
+[00:24:44] sound but it's a little bit more um
+[00:24:47] anyway so uh so I I have one I don't
+[00:24:49] have it in my office but it's an old one
+[00:24:51] from I think uh I don't remember the
+[00:24:54] year early 1900s nonetheless so those
+[00:24:58] those people were trading and creating a
+[00:25:00] chart based on just what they were
+[00:25:02] seeing so they were visualizing this was
+[00:25:04] the recent high this is the recent low
+[00:25:07] okay we're mapping out if we break new
+[00:25:09] highs we're breaking resistance we
+[00:25:11] should get a move higher right so in a
+[00:25:14] way as a breaking news Trader that's
+[00:25:17] exactly what I'm doing and and even to
+[00:25:19] further emphasize this when I trade an
+[00:25:22] initial public offering when we're
+[00:25:25] trading an IPO you know what the chart
+[00:25:27] looks like let's pull it up so when
+[00:25:30] we're trading an initial public offering
+[00:25:32] let's say it's you know doesn't matter
+[00:25:34] which one it is it's initial public
+[00:25:36] offering the chart looks like that so it
+[00:25:39] looks like there's absolutely nothing
+[00:25:41] and I got to close this because this
+[00:25:42] isn't here either so just hide that
+[00:25:45] you've got nothing and then it starts
+[00:25:48] with just one candle and so you're
+[00:25:51] working with basically nothing and at
+[00:25:53] times when I've traded initial public
+[00:25:55] offerings and this was a few years ago
+[00:25:58] many years ago now uh the software I was
+[00:26:00] using before E signal which was
+[00:26:03] tc2000 um sometimes didn't load the IPOs
+[00:26:06] correctly so I would actually trade the
+[00:26:08] IPO without any charts at all I was
+[00:26:11] trading it just using level two time in
+[00:26:15] sales and I was just visualizing what
+[00:26:17] was the high what was the low so it is
+[00:26:20] possible to trade without charts I
+[00:26:22] wouldn't recommend it but it is possible
+[00:26:25] the problem of course is that you'll
+[00:26:27] have no idea what daily support or
+[00:26:29] resistance looks like right and now with
+[00:26:32] an IPO it doesn't matter because there's
+[00:26:33] none but with a stock that has breaking
+[00:26:35] news that that would be a problem okay
+[00:26:37] so now let's get back into um gnln and
+[00:26:41] we're going to start to do this case
+[00:26:42] study so my scalp trading strategy could
+[00:26:45] be broken down into five steps like all
+[00:26:48] of the other strategies that I have
+[00:26:50] these are the five fundamental steps and
+[00:26:52] we're going to analyze exactly how I
+[00:26:55] proceeded through each of these steps
+[00:26:57] before I took my first trades on gnln so
+[00:27:00] Step One is finding the stock so how did
+[00:27:04] I even find gnln that's step one you've
+[00:27:08] got to find the stock that's moving so
+[00:27:10] the way I found this was right in this
+[00:27:12] software right here but you could I mean
+[00:27:15] you could use other scanners or whatever
+[00:27:17] some people might have found it on
+[00:27:19] social media but you would have been a
+[00:27:20] little slow to find it there because
+[00:27:22] someone first has to see it on a scanner
+[00:27:24] and then post it uh but what ended up
+[00:27:26] happening was right at
+[00:27:29] 8:30 this started hitting my high day
+[00:27:31] scanner now it would take a while to
+[00:27:32] scroll all the way back but you see when
+[00:27:34] these stocks hit the scanner it looks
+[00:27:35] like this you get this alert and
+[00:27:38] depending on which scanner it's it's
+[00:27:40] hitting the color will be different so
+[00:27:43] we get these different scanner alerts
+[00:27:45] these are these scanners are searching
+[00:27:47] for different things in the market that
+[00:27:48] I've told them to look for and they're
+[00:27:50] very obedient they look for just what I
+[00:27:52] asked for um you could turn on your
+[00:27:54] audio alerts on these you set your alert
+[00:27:56] to whatever you want you save it I set
+[00:27:59] audio alerts only for some of the
+[00:28:00] scanners not for all of them so low
+[00:28:02] float High relative volume low float
+[00:28:05] former Momo stock squeeze alert up 10%
+[00:28:08] in 10 minutes right so you go back and
+[00:28:10] if we went all the way back you would
+[00:28:12] see right at 830 exactly at 8:30 gnln
+[00:28:18] started hitting the scanner at about
+[00:28:21] $256 or 58 cents okay now at that point
+[00:28:26] gnln was at the very beginning of this
+[00:28:29] move so let's go back to kind of what
+[00:28:31] we're going to do here is we're going to
+[00:28:33] dissect these 13 candles the beginning
+[00:28:35] of this move and go kind of candle by
+[00:28:38] candle I'm going to show you my trades
+[00:28:39] and what was happening in each of those
+[00:28:41] moments okay so this is going to get us
+[00:28:44] zoomed in here on the first candle all
+[00:28:47] right so we'll go Auto like that auto
+[00:28:50] like that auto like that and this at the
+[00:28:54] time was our daily chart so I pulled up
+[00:28:57] the daily chart looks like I
+[00:28:59] accidentally put text there so the first
+[00:29:01] thing that I noticed on this gnln hits
+[00:29:04] my scanners all right so step one we've
+[00:29:07] now found a stock okay now it's not a
+[00:29:11] 220% Gainer yet at the time that it
+[00:29:15] first fires off it's up about let's see
+[00:29:19] when it was hitting at 285 so right here
+[00:29:22] it starts popping up at this point it
+[00:29:24] closed yesterday at or Friday at 240 so
+[00:29:28] by the time it's up to 260 it's up 10%
+[00:29:31] you know 280 290 it's up about 25% and
+[00:29:34] this morning we had um a bigger mover
+[00:29:38] PSIG up 20 uh sorry $215 up 100% I
+[00:29:43] actually lost on that that was my first
+[00:29:44] trade of the day so I went red on PSIG
+[00:29:48] and I can talk about that trade uh in a
+[00:29:50] moment at the end of this um case study
+[00:29:53] if if there's time and then uh I made
+[00:29:56] back that loss on trnr so ended up by
+[00:29:59] the time GL gnln came up I was up about
+[00:30:03] $3,000 on the day between these um four
+[00:30:07] trades four stocks I had traded so I was
+[00:30:09] in the green but we didn't have anything
+[00:30:11] that was really at that moment looking
+[00:30:13] phenomenal and then all of a sudden gnln
+[00:30:16] hits the scanner so step one I see it
+[00:30:18] hitting the scanner and I know that it's
+[00:30:21] the right type of stock to trade now how
+[00:30:23] do I know it's the right type of stock
+[00:30:25] to trade I know because I have a very
+[00:30:28] specific set of criteria that I search
+[00:30:30] for every single day so the skills
+[00:30:33] required to complete Step One is an
+[00:30:36] ability to know how to use stock
+[00:30:38] scanners and and an ability to
+[00:30:40] understand what type of stocks have the
+[00:30:42] potential to make big moves now for
+[00:30:44] warrior Pro members you're going to find
+[00:30:46] more about this in chapter three of the
+[00:30:48] warrior pro day trading strategies and
+[00:30:50] scaling course uh for those of you guys
+[00:30:53] checking out free content on YouTube
+[00:30:54] You'll see this class has more info
+[00:30:56] about it as well uh number three you
+[00:30:59] need to know the type of stocks to avoid
+[00:31:02] so when this first hits my scanner I'm
+[00:31:04] looking at gnln and I'm thinking does
+[00:31:08] this meet my criteria so I'm looking at
+[00:31:10] the percentage change I'm looking at the
+[00:31:12] symbol do I recognize it I don't
+[00:31:14] recognize it I'm looking at the price
+[00:31:16] the price is fine and by fine I mean it
+[00:31:18] fits within my uh my criteria so my
+[00:31:22] criteria here is going to be generally
+[00:31:25] speaking I want to be Trading
+[00:31:28] price between 2 and 20 I want to trade
+[00:31:33] percentage up at least 10% on the day
+[00:31:36] relative volume at least five I like to
+[00:31:39] see that there's news so that should
+[00:31:42] just be positive and I like to see the
+[00:31:44] float is under 20 million shares and I
+[00:31:48] know that lower is of course better for
+[00:31:50] the imbalance between supply and demand
+[00:31:53] so in this case these are my sort of
+[00:31:55] preferences and our actual
+[00:31:58] was float something like 500,000 shares
+[00:32:01] news yes relative volume met the
+[00:32:04] criteria the percent was already about
+[00:32:06] 25% when I was first looking at it and
+[00:32:09] the price at that point was about
+[00:32:12] $3 so check check check check check
+[00:32:14] check check we met all of the criteria
+[00:32:17] that I felt for uh basic stock selection
+[00:32:21] okay so so that's good so that checks
+[00:32:24] out so then the next
+[00:32:26] step is trying to understand why the
+[00:32:29] stock is actually moving up and so step
+[00:32:32] number two is to check to see what the
+[00:32:34] news catalyst is now gnln has a news
+[00:32:37] announc this non-binding letter of
+[00:32:39] intent to be the exclusive distributor
+[00:32:41] in the US of safety strips Incorporated
+[00:32:45] Fentanyl and whatever this is and drink
+[00:32:48] Spike detection test strips so you know
+[00:32:53] that's that's interesting I mean it's a
+[00:32:55] it's obviously a headline I didn't
+[00:32:58] really when I first saw it I was like
+[00:33:00] well at least there's news here at 8:30
+[00:33:03] right at least there's fresh news that's
+[00:33:04] better than we can say for some stocks
+[00:33:06] and you have to have an ability to
+[00:33:09] understand the different types of news
+[00:33:10] headlines that come out because some
+[00:33:12] don't move the market at all and others
+[00:33:14] have very significant um impact on on
+[00:33:17] price so you also have to have an
+[00:33:19] ability to separate logic of the news
+[00:33:20] from the price action your logic might
+[00:33:22] tell you I don't know about this news
+[00:33:24] headline it's it I don't really like
+[00:33:27] that but the price action is the Stock's
+[00:33:29] going up 200% focus on the price action
+[00:33:32] stay away from trying to overthink it
+[00:33:34] and you have to have an ability to
+[00:33:35] understand fundamental analysis and SEC
+[00:33:37] filings so you can go in you can try to
+[00:33:40] understand you know is this a stock that
+[00:33:41] has a high likelihood of doing a
+[00:33:43] secondary offering are they going to
+[00:33:44] raise money on the market are they going
+[00:33:46] to sell shares uh you know what's their
+[00:33:48] balance sheet are they losing money
+[00:33:50] right now what's their cash position so
+[00:33:53] you know this is all an important uh
+[00:33:55] Factor especially when you're thinking
+[00:33:56] about uh taking a trade for day two of
+[00:33:59] continuation so then um so so we did our
+[00:34:03] sort of initial due diligence here and
+[00:34:05] we identified there is a catalyst there
+[00:34:07] is a headline and that's why it's
+[00:34:08] spiking up right here at 8:30 which
+[00:34:10] makes sense and it goes immediately uh
+[00:34:12] in 2 minutes from 250 to 350 to 4 and
+[00:34:15] 450 I was like holy smokes that is crazy
+[00:34:19] so it hits 259 and then you have this
+[00:34:22] red candle that drops back down to four
+[00:34:24] now as I pulled it up right here I
+[00:34:25] started watching it and what I noticed
+[00:34:28] was that the spreads were a little bit
+[00:34:29] bigger so now I'm starting to do a
+[00:34:32] little bit of um step three uh technical
+[00:34:35] analysis all right so we'll I guess we
+[00:34:37] don't have to be full screen so
+[00:34:38] technical analysis is the process of
+[00:34:41] analyzing dissecting the charts looking
+[00:34:43] at the volatility looking at the
+[00:34:44] position of the moving averages the
+[00:34:46] skills required to perform technical
+[00:34:48] analysis is an ability to understand
+[00:34:50] Candlestick shapes patterns your
+[00:34:52] technical indicator support resistance
+[00:34:54] and buy and sell signals that's an
+[00:34:56] episode with 1 Point 7 million views
+[00:34:58] that's been pretty popular on how to
+[00:35:00] read Candlestick charts with zero
+[00:35:02] experience for warrior Pro members where
+[00:35:05] you're going to want to go here is into
+[00:35:09] your members dashboard right here and
+[00:35:12] then into um Education portal and by the
+[00:35:16] way I have nine new uh sections that are
+[00:35:19] getting uploaded right now which you
+[00:35:21] guys will be excited to see and then you
+[00:35:23] can go into uh day training the basics
+[00:35:25] but for those of you that have access to
+[00:35:27] strategy and scaling you'll want to go
+[00:35:29] into strategies and scaling launch the
+[00:35:32] course and the intraday chart patterns
+[00:35:35] is where we're really going to get
+[00:35:36] focused these are all the intraday chart
+[00:35:38] patterns we're going to look at then we
+[00:35:40] course get into uh chapter 6 level two
+[00:35:41] tape reading chapter 7 Gap and go
+[00:35:44] chapter eight momentum trading and we've
+[00:35:47] got some new setups that are coming here
+[00:35:49] and then that continues into day trading
+[00:35:51] strategies and scaling part two so
+[00:35:53] that's where you guys want to go all
+[00:35:55] right so so back here so so we start
+[00:35:58] doing the technical analysis and I and I
+[00:36:02] also at this point pull up the level two
+[00:36:04] so I'm beginning to look at the depth of
+[00:36:07] the market I'm trying to visualize the
+[00:36:09] price action and the first thing I look
+[00:36:12] at when I pull up level two is I look at
+[00:36:14] the bid in the ask I look at the spread
+[00:36:16] we've got a 5cent spread right here 780
+[00:36:18] to 785 so now when I look at something
+[00:36:22] like that and I pull up my uh my
+[00:36:25] whiteboard here I'm thinking all right
+[00:36:27] can I take 7,000 shares of this right
+[00:36:30] well if we have a 70 Cent spread right 7
+[00:36:33] time 7 I'm going to be risking 5,000
+[00:36:36] bucks on the spread with 7,000 shares so
+[00:36:39] I can't take 7,000 shares if we have a
+[00:36:41] huge spread but you know if the spread
+[00:36:43] tightens up then I might be able to so
+[00:36:45] I'm starting to kind of make the
+[00:36:46] decision of how much am I risking how
+[00:36:49] much is my profit potential and what
+[00:36:51] kind of share size can I take okay so on
+[00:36:55] this I'm starting to get in here and I
+[00:36:59] see it popped up to 484 it dips down it
+[00:37:02] goes back it dips down quite a bit to
+[00:37:04] four so that's the 70 Cent drop then it
+[00:37:06] comes back up to 474 and then it dips
+[00:37:09] down again and right here as it broke
+[00:37:11] through that level I said all right I
+[00:37:12] got to jump in so I bought 1,500 shares
+[00:37:16] as it broke this level right here I took
+[00:37:19] a starter at
+[00:37:21] 473 and I added at
+[00:37:25] 483 and 490 which gave me about a 483
+[00:37:29] average on this first trade it ends up
+[00:37:33] going up to 515 so we Zoom this in here
+[00:37:36] so at this point I'm I'm really just
+[00:37:38] looking at the 10-second chart and I'm
+[00:37:40] watching the level too we hit 516 and I
+[00:37:43] add at 516 and this thing spikes to $6
+[00:37:48] on the offer
+[00:37:50] $6 now remember my average is about well
+[00:37:53] now cuz I added at 516 it's come up a
+[00:37:56] little bit but it's I still have a great
+[00:37:58] average at under $5 a share okay so now
+[00:38:01] let's see so now that was my first entry
+[00:38:05] I end up taking profit the best exit I
+[00:38:08] filled was 460 shares at
+[00:38:12] 586 which was pretty good I sold a
+[00:38:15] little bit more at
+[00:38:17] 547 and then it starts to dip down here
+[00:38:20] you can see it dips down and I take some
+[00:38:23] more profit at 534 and at this point I'm
+[00:38:26] up a couple thousand on it I'm you know
+[00:38:28] I'm kind of like I'm a little bit unsure
+[00:38:30] what to think because it's a big topping
+[00:38:32] tail and we sort of dropped back down to
+[00:38:35] 520 but at the same time the trend is
+[00:38:39] still clearly positive so at that point
+[00:38:42] I glanced at my one minute chart I
+[00:38:45] glance at the one minute chart and I see
+[00:38:46] that we've got this Spike up to six
+[00:38:49] right but the one minute is now just
+[00:38:51] showing four green candles in a row we
+[00:38:53] haven't even had a pullback yet so I'm
+[00:38:55] thinking all right this thing is just
+[00:38:57] just very very strong this is really
+[00:38:59] impressive so we go sideways um a little
+[00:39:02] bit more right here and I end up adding
+[00:39:05] back we have this dip down
+[00:39:07] here so I added back 1500 shares uh
+[00:39:10] right about here at
+[00:39:13] 557 and I add at 565 and 571 and 580 so
+[00:39:19] now I'm scaling in and I'm looking for
+[00:39:21] that break through
+[00:39:23] $6 it comes up I take some profit up
+[00:39:27] around six it dips down it pops over six
+[00:39:31] and right here we squeeze up I'm going
+[00:39:33] to go Auto we squeeze up to 620
+[00:39:37] 655 all the way to $7 a share
+[00:39:41] unbelievable as it starts to pull away
+[00:39:44] right there I had taken some profit
+[00:39:46] around six and then I added back as it
+[00:39:49] pulled as it pulled away so adding back
+[00:39:52] as it pulled away uh basically what I do
+[00:39:55] is I watch to see if it can hold this
+[00:39:57] whole dollar and it did and so I added
+[00:40:01] with a stop right under six so if we
+[00:40:03] talk for a moment about stops the entry
+[00:40:06] right here the stop was the low of this
+[00:40:08] candle here so 1500 share starter stop
+[00:40:11] is 440 so I'm risking about $500 not
+[00:40:15] quite on that entry then when I'm adding
+[00:40:18] up here I'm moving my stop up a little
+[00:40:20] bit and then I add more and now my stop
+[00:40:22] is break even so I start moving my stop
+[00:40:25] order up now a beginner trade trer is
+[00:40:28] not going to be as likely to want to get
+[00:40:30] into adding to positions most beginners
+[00:40:33] are going to want to take one entry one
+[00:40:35] exit get in get green get out once
+[00:40:39] you've done that for six weeks eight
+[00:40:41] weeks just a one trade a day just you
+[00:40:43] know one entry one exit you've built a
+[00:40:45] track record of success now you can
+[00:40:48] start doing two trades a day three
+[00:40:49] trades a day four trades a day and
+[00:40:50] increasing and truly you can make a re
+[00:40:54] you can make a living on just 15 cents a
+[00:40:57] day out of the market you don't need to
+[00:40:58] be getting a dollar a share 15 cents a
+[00:41:01] day with a th shares is making a great
+[00:41:03] living now I'll say as always my results
+[00:41:05] are not typical and of course trading is
+[00:41:06] risky I think you already know that it
+[00:41:08] goes should go without saying uh but
+[00:41:10] I'll just reiterate it here I have been
+[00:41:12] doing this for a long time and we're
+[00:41:13] going to talk about some of the skills
+[00:41:15] uh required here at this sort of next
+[00:41:17] phase because now what we're getting
+[00:41:19] into is step four which is actually
+[00:41:21] executing your orders taking your trades
+[00:41:23] buying and selling all right so in order
+[00:41:26] to buy and sell you need to clearly know
+[00:41:28] how to use trading software with hot
+[00:41:31] Keys hot Keys allow you to to rapidly
+[00:41:34] enter and exit positions just by
+[00:41:36] pressing the keys on your keyboard let's
+[00:41:38] see I can pull this forward here so just
+[00:41:40] by pressing shift one I could be buying
+[00:41:43] crl x contrl z is selling so one button
+[00:41:46] to buy one button to sell well it's two
+[00:41:49] but it's one hotkey shift one to buy
+[00:41:52] control Z to sell two hot keys to start
+[00:41:55] is all you need then you can start
+[00:41:56] adding more as you gain more
+[00:41:58] experience uh you need to be really good
+[00:42:01] at reading level two and tape reading
+[00:42:03] this is um a a large section of the
+[00:42:06] warrior Pro curriculum um is dedicated
+[00:42:09] to tape reading because it's so
+[00:42:10] important that's chapter six so chapter
+[00:42:13] six here is where we get into tape
+[00:42:14] reading level two um and you need to be
+[00:42:17] able to read of course um the tape and
+[00:42:20] you need to have fast reaction speed you
+[00:42:23] see something you press the buy button
+[00:42:24] you see something you press the sell
+[00:42:25] button so that that's really required
+[00:42:28] and I think efficient order execution is
+[00:42:31] important as well you wouldn't want to
+[00:42:32] trade try to trade this strategy at
+[00:42:34] least on a mobile app on your phone
+[00:42:38] there's there's just no way you're going
+[00:42:39] to be able to keep up with Traders using
+[00:42:41] better tools than you and to that extent
+[00:42:44] you know you are sort of competing with
+[00:42:45] traders who have better tools now it's
+[00:42:47] not it's important to say that it's it's
+[00:42:50] not like there's a Rolls-Royce of
+[00:42:52] trading tools where oh that guy's got
+[00:42:54] the best tool and he's got such an edge
+[00:42:56] over everyone else it's fairly Level
+[00:42:58] Playing Field when it comes to tools
+[00:43:00] because there's only a few tools you can
+[00:43:01] choose from when it comes to trading a
+[00:43:04] lot of the members here at Warrior
+[00:43:05] trading are using thinker swim and are
+[00:43:07] really happy with that I think the
+[00:43:09] majority of our million-dollar badge
+[00:43:11] holders achieved it with thinker swim
+[00:43:14] which is great I use light speed which
+[00:43:16] is a broker I've been using for many
+[00:43:18] years I'm happy with them I think
+[00:43:20] they're a great broker but I do pay
+[00:43:23] commissions on my orders so that's not
+[00:43:25] ideal but the the execution speed is is
+[00:43:27] very fast anyways efficient execution
+[00:43:30] speed is important but if you're scalp
+[00:43:31] trading commissions are also something
+[00:43:33] to consider because if you're taking a
+[00:43:35] 100 or 200 trades in a day yeah you've
+[00:43:38] got to be thinking about
+[00:43:40] commissions okay so we'll move this back
+[00:43:42] up here so um so when I'm so so at this
+[00:43:47] point um we get our first couple trades
+[00:43:50] on gnln and we get this pop up to seven
+[00:43:54] right
+[00:43:54] here so I end up adding um for the
+[00:43:57] squeeze to seven I take some profit at
+[00:44:00] 675 it dips down um so we're going to
+[00:44:03] start getting dialed in here so the so
+[00:44:05] initially that was the stop added back
+[00:44:07] here when it was at 547 stop was about
+[00:44:10] 520 lower that pullback added up around
+[00:44:13] six and I was using level two to
+[00:44:15] visualize that there was support at six
+[00:44:18] then it goes up to 640 650 all the way
+[00:44:20] up to 7 it pulls back micro pullback
+[00:44:23] here we get this false break over seven
+[00:44:25] and we dip back down so that was the
+[00:44:28] first kind of like oo are we going to
+[00:44:29] have a red candle form and at that point
+[00:44:32] we still didn't have a red Candle on the
+[00:44:34] one minute chart the one minute was just
+[00:44:36] green candles it was ridiculous I I was
+[00:44:39] like I don't know the last time I saw
+[00:44:41] this many green candles in a row so when
+[00:44:43] it got back above seven and held retest
+[00:44:46] there that's the spot to be adding back
+[00:44:48] for the squeeze higher now a lot of this
+[00:44:51] um for those of you guys who are
+[00:44:53] listening on YouTube uh a lot of these
+[00:44:56] pullbacks are are part of my micro
+[00:44:59] pullback strategy which you can trade
+[00:45:02] both on one minute but also 10-second
+[00:45:04] time frames so I would encourage you to
+[00:45:06] download my micro pullback strategy as a
+[00:45:09] PDF so so
+[00:45:12] micro
+[00:45:14] pullback
+[00:45:17] strategy PDF that will be linked so
+[00:45:21] there'll be a link here um that sort of
+[00:45:23] Link symbol whatever that'll be linked
+[00:45:25] in the description
+[00:45:27] and it'll be linked in the top of um the
+[00:45:32] comments so top pin to the top comment
+[00:45:34] and Link in the description all right so
+[00:45:37] check out the micro pullback strategy
+[00:45:38] PDF if you haven't
+[00:45:39] already so then we get another little
+[00:45:41] dip right here that's micro pullback off
+[00:45:43] of seven and it goes up um to 750 now it
+[00:45:46] does dip back down to seven here and
+[00:45:48] then it pops up 750 pulls back a little
+[00:45:51] bit more and then all of a sudden it
+[00:45:52] rips through this level 756 up to 8 now
+[00:45:56] at about about this point where was
+[00:46:00] it
+[00:46:02] so about this point here I started
+[00:46:05] thinking this thing is really due for a
+[00:46:07] pullback yeah it was around 760 so I was
+[00:46:09] like this thing is really due for a
+[00:46:11] pullback um this candle actually dipped
+[00:46:13] down and it went red and then ripped
+[00:46:16] back up which sort of had the effect I
+[00:46:19] think of trapping some early short
+[00:46:21] sellers because it looked like it was it
+[00:46:25] was rolling over it looked like we were
+[00:46:27] done um where was that it was must have
+[00:46:30] been right must have been right here so
+[00:46:33] it looked like we were kind of done and
+[00:46:35] then we pop back up let me just check so
+[00:46:37] that was the time here was
+[00:46:41] 8:39 okay
+[00:46:43] 8:39 so 838 839 okay so it must have
+[00:46:48] been right here we dip down and then we
+[00:46:50] rip back up here we break through this
+[00:46:53] 770 level and once again I'm like okay
+[00:46:56] it's game time so I'm adding at 728 732
+[00:47:00] 738
+[00:47:01] 748 essentially adding every 10 cents as
+[00:47:04] it's pushing higher and each time I add
+[00:47:07] I move my stop a little closer a little
+[00:47:08] closer and I'm trying to accumulate a
+[00:47:10] larger position to try to get that 1520
+[00:47:13] C move and we ended up getting it we got
+[00:47:15] this beautiful move right here all the
+[00:47:18] way up to eight up to a high right here
+[00:47:20] of 870 pulls back micro pullback gets
+[00:47:24] bought up pops up to 9 and this is where
+[00:47:27] we s a top out right about $10 a share
+[00:47:30] right here now at that point and I
+[00:47:33] continued trading that whole leg up I I
+[00:47:35] was trading at 850 I was trading up at 9
+[00:47:38] I was this is the way I trade these fast
+[00:47:40] moving stocks and again to kind of
+[00:47:42] reiterate why scalp trading in my
+[00:47:45] opinion can be a great strategy is it's
+[00:47:47] the only way you would have been able to
+[00:47:49] trade up in this area when something is
+[00:47:51] this extended your macd is open of
+[00:47:54] course macd is confirming the trade
+[00:47:56] volume great volume profile great those
+[00:47:58] indicators aren't going to really tell
+[00:48:00] you no they're just going to say it's
+[00:48:02] extended and so the only way to manage
+[00:48:04] your risk is to take quick entries and
+[00:48:06] quick exits quick entries quick exits so
+[00:48:10] we finally get this squeeze up to 10 and
+[00:48:13] we hit a high right here of
+[00:48:16] 1028 and this was my uh so right here I
+[00:48:19] was up uh
+[00:48:21] 24,000 and I took this trade right here
+[00:48:23] I bought this dip was looking for the
+[00:48:25] break through this level
+[00:48:27] and I stopped out and I lost 2200 I gave
+[00:48:30] back 10% of my profit and I was sitting
+[00:48:32] up 22,000 on the day and I was like okay
+[00:48:34] I just gave back 10% of my profit right
+[00:48:36] here let's slow down for a minute that
+[00:48:38] was my first big loss on it and at that
+[00:48:41] point we had our first um this was
+[00:48:45] actually where was this
+[00:48:48] um this was at 10 or 850 so it was right
+[00:48:53] yeah it was right here um that I had
+[00:48:56] that trade 850 so we had the one minute
+[00:48:59] pullback but the macd was starting to go
+[00:49:02] a little negative I was taking a little
+[00:49:03] bit more risk there and then that was
+[00:49:06] all right now macd crossed over so that
+[00:49:09] right there marked kind of the end of
+[00:49:11] that first leg up we end up pulling back
+[00:49:14] here and we get this kind of dramatic
+[00:49:16] price price action we ended up curling
+[00:49:18] back up we had a support level here we
+[00:49:21] did curl back up I got this trade right
+[00:49:23] here and a moment later it dumps all the
+[00:49:25] way down here and I was like that's it
+[00:49:27] I'm going to be hands off I did not
+[00:49:29] trade it in this area and I did not
+[00:49:31] trade it at the open I just was waiting
+[00:49:33] for it to break through these levels and
+[00:49:34] what I said was that you know yesterday
+[00:49:37] when I did my game plan for the week
+[00:49:38] ahead I was thinking the Market's been
+[00:49:41] slow for these last few sessions what we
+[00:49:43] need is a stock that has breaking news
+[00:49:45] and ends up going crazy because what
+[00:49:48] that's going to do is it's going to get
+[00:49:49] a lot of Traders off the sidelines small
+[00:49:51] cap momentum traders who trade to the
+[00:49:53] long side they're going to feel some
+[00:49:54] fomo they're going to want to
+[00:49:55] participate in the next move short
+[00:49:57] sellers who have been feeling confident
+[00:50:00] in the last few days might have started
+[00:50:01] shorting this you know in here in here
+[00:50:04] in here and certainly in this area when
+[00:50:06] when this candle went red boom squeezed
+[00:50:08] out more volume comes in here as there
+[00:50:11] short covering and Longs buying that's
+[00:50:14] why I think there was more volume here
+[00:50:15] because you have both Longs and shorts
+[00:50:17] buying get that extra squeeze up to 10
+[00:50:20] pull back pop up little rejection goes a
+[00:50:23] little higher drops down again a little
+[00:50:26] higher big rejection and now another big
+[00:50:29] one here now you're starting to get a a
+[00:50:31] pattern of
+[00:50:32] rejecting and so after that macd crossed
+[00:50:35] over if you watch my episode I recorded
+[00:50:37] just a couple weeks ago on using the
+[00:50:39] macd you'll know that the safest time to
+[00:50:42] be trading these is when the macd is
+[00:50:43] open right above the signal line and
+[00:50:45] that was that ended right here and it
+[00:50:48] actually never came back positive maybe
+[00:50:50] for a fraction of a second here but not
+[00:50:52] really let's not count that because it
+[00:50:53] was it was clearly coming down so
+[00:50:57] you know the big question now for me is
+[00:51:00] how well does this hold up over the
+[00:51:02] course of the day because if it if it
+[00:51:06] holds it's below vwap right now if it
+[00:51:08] holds up relatively well if we get back
+[00:51:10] above vwap or make new highs then
+[00:51:12] continuation to tomorrow that's a
+[00:51:14] victory and that's strong sentiment if
+[00:51:16] it continues to fade and just makes its
+[00:51:18] way all the way back down that's more
+[00:51:20] bearish and shorts will sort of
+[00:51:23] ultimately feel like well maybe I would
+[00:51:24] have been red but if I just held long
+[00:51:26] enough the trade ended up coming back
+[00:51:28] down so where this closes today I think
+[00:51:32] will to a certain extent determine uh
+[00:51:34] how much momentum we can expect in the
+[00:51:36] days ahead now of course it's true that
+[00:51:39] PSIG uh is up 126% this one end end up
+[00:51:43] putting in a nice move trnr however that
+[00:51:46] one's come back down quite a bit right
+[00:51:49] SXP this one squeezed up came back down
+[00:51:54] whlr this one squeezed up came back down
+[00:51:58] Real Estate Investment Trust a reat
+[00:52:00] usually but the float's so low recent
+[00:52:02] reverse split so you know I'm not sure
+[00:52:06] what's really realistic on some of these
+[00:52:08] but gnln is still our leading Gainer but
+[00:52:12] if you sat down right now well there's
+[00:52:14] nothing to trade right you would see boy
+[00:52:17] that put in a huge move earlier and darn
+[00:52:19] it I I guess I missed it so I think
+[00:52:23] something that's an important reminder
+[00:52:24] is the fact there will always be another
+[00:52:26] one around the corner I didn't know
+[00:52:27] today was going to be a $24,000 Green
+[00:52:29] Day there's no way that I had any
+[00:52:31] inkling that that was going to happen
+[00:52:33] today but it ended up happening I show
+[00:52:35] up every single day and you know I trade
+[00:52:37] what's in front of me so now let's talk
+[00:52:39] about um a step five step five is
+[00:52:41] reviewing your analytics it's very
+[00:52:43] important to review your analytics and
+[00:52:45] you need an ability to understand how to
+[00:52:46] read your metrics how to highlight your
+[00:52:48] weaknesses how to highlight your
+[00:52:50] strengths and to analyze where the
+[00:52:51] majority of your profit is coming from
+[00:52:53] because that's when you can double down
+[00:52:55] that's when you lean in to what's
+[00:52:57] working and that's so important as a
+[00:52:59] Trader now I also want to share with you
+[00:53:01] the tools required to be scalping
+[00:53:04] because if you want to scalp certainly
+[00:53:06] at the level that successful Traders are
+[00:53:09] scalping at you do need access to your
+[00:53:11] own scanners so you can find those
+[00:53:13] stocks in real time when they start
+[00:53:15] popping up you ideally will want
+[00:53:18] 10-second charts so you can visualize
+[00:53:20] those micro pullbacks as they're
+[00:53:22] happening you're going to want
+[00:53:24] customizable level two so you can change
+[00:53:27] the colors here so you can very clearly
+[00:53:29] visualize the top tier of the level two
+[00:53:32] which is the the best um best bid in the
+[00:53:34] best offer best buyer best seller you
+[00:53:37] need to be able to see the halt levels I
+[00:53:38] think that's really important now
+[00:53:39] pre-market there's no halt levels but
+[00:53:41] during regular trading hours there are
+[00:53:43] you'll need hot keys at least to buy and
+[00:53:46] sell but better hotkeys are always great
+[00:53:49] and no doubt you'll want to have um some
+[00:53:52] some analytics for analyzing your
+[00:53:54] metrics now I want to share my reading
+[00:53:56] list and I also want to give you guys a
+[00:53:58] link to a two-e trial at Warrior trading
+[00:54:00] those of you guys who are streaming on
+[00:54:01] YouTube here that will also be pinned at
+[00:54:04] the top of the comments and Linked In
+[00:54:05] the description side by side with a
+[00:54:07] micro pullback strategy PDF so you guys
+[00:54:10] can check out both of those because you
+[00:54:12] know what over the next two weeks who
+[00:54:14] knows it's possible that the next two
+[00:54:15] weeks will be slow and I'll have you
+[00:54:18] know a two week stretch where there's
+[00:54:20] not a lot going on in which case you'll
+[00:54:21] learn uh hopefully uh through my lead
+[00:54:25] that discipline and patience our
+[00:54:26] critical skill for long-term success in
+[00:54:28] trading or you know we may end up seeing
+[00:54:31] another little hot streak here so when
+[00:54:33] we look at my p&l over the last 90 days
+[00:54:35] you'll see sort of slow steady big gain
+[00:54:39] and then kind of slow down again well
+[00:54:41] today is going to be a nice $244,000
+[00:54:43] jump so that curve that curve is going
+[00:54:45] to squeeze right back up and I would
+[00:54:47] love to see another you know couple days
+[00:54:49] like this what we often see is that the
+[00:54:51] Big Green days are clustered together
+[00:54:54] right so the reason the big green days
+[00:54:56] are clustered together is because when
+[00:54:58] the market is hot it amplifies momentum
+[00:55:02] there's a lot of fomo Traders don't want
+[00:55:04] to miss the move and me included so
+[00:55:06] everyone starts trading with bigger size
+[00:55:08] more aggressively there's more liquidity
+[00:55:09] there's more volatility and next thing
+[00:55:12] you know you're seeing back-to-back Big
+[00:55:13] Winners that's almost always the case
+[00:55:15] for me now it doesn't mean that tomorrow
+[00:55:17] is guaranteed to be a big winning trade
+[00:55:19] it's not it depends on how gnln closes
+[00:55:22] today that's certainly a factor and if
+[00:55:24] there's other stocks that pop up but but
+[00:55:27] statistically the odds are higher that
+[00:55:29] there's going to be some good volatility
+[00:55:31] tomorrow so I encourage you guys to do a
+[00:55:32] twoe trial so you can uh trade over my
+[00:55:34] shoulder and watch during the next two
+[00:55:35] weeks to see what kind of action we have
+[00:55:37] now when it comes to a reading list I
+[00:55:39] want to share some books with you that I
+[00:55:41] always recommend for beginner
+[00:55:43] Traders um the first one that I'll share
+[00:55:47] with you is trade mindfully this is by
+[00:55:49] Gary Dayton and it's achieve your
+[00:55:51] Optimum trading performance with
+[00:55:52] mindfulness and Cutting Edge psychology
+[00:55:55] this book was written
+[00:55:56] uh many years ago it's not a new book
+[00:55:59] but it is a great book and um this is
+[00:56:01] published by John Wy and Sons which is a
+[00:56:04] the publisher that um offered me my book
+[00:56:06] deal right here they offered me a two-
+[00:56:09] book deal uh I didn't end up taking it
+[00:56:11] because I didn't like the terms of their
+[00:56:12] contract so I said you know what I
+[00:56:14] already wrote the book anyway so I'm
+[00:56:15] just going to publish it myself so
+[00:56:17] anyways you guys could check out a copy
+[00:56:19] of my book trade mindfully how did day
+[00:56:21] trade the plain truth quit the power of
+[00:56:23] Knowing When to Walk Away by Annie Duke
+[00:56:26] this is a book I've read uh several
+[00:56:27] times I really find it to be fantastic I
+[00:56:30] I really enjoy it thinking in bets
+[00:56:33] another book by Annie Duke um The
+[00:56:35] Happiness Advantage this is important to
+[00:56:38] be a Trader you have to be eternally
+[00:56:39] optimistic and you have to have
+[00:56:41] incredible resilience you got to be able
+[00:56:43] to brush the losses right off your
+[00:56:45] shoulders and bounce back and I think
+[00:56:47] that this is a book that'll help give
+[00:56:48] you that perspective so these are the I
+[00:56:51] would say these are four no one that's
+[00:56:53] actually five um five of my favorite
+[00:56:58] books now there's a couple of other
+[00:57:00] interesting books just for
+[00:57:02] entertainment's sake uh that you could
+[00:57:04] check out the little book of Market
+[00:57:06] Wizards right here this is a popular
+[00:57:08] book that a lot of people like um and
+[00:57:11] dark pools right here is another very
+[00:57:14] interesting book about the rise of
+[00:57:15] machine Traders and the rigging of the
+[00:57:17] US Stock Market uh very interesting
+[00:57:20] stuff here and these are all pretty sure
+[00:57:23] all of these are available on audiobook
+[00:57:26] I know I'm I'm sure all of them at least
+[00:57:29] except for this this one I I don't
+[00:57:31] remember if this is available on
+[00:57:32] audiobook it I didn't listen to it on
+[00:57:35] audiobook it might be um anyway so some
+[00:57:37] recommended reading for those of you
+[00:57:39] guys that want to continue your
+[00:57:40] education because the fact is learning
+[00:57:42] to trade is a marathon it's not a Sprint
+[00:57:45] it's not going to happen overnight for
+[00:57:46] anyone it didn't happen overnight for me
+[00:57:49] My Success for with trading it was a
+[00:57:52] rocky road it took a long time to get to
+[00:57:54] where I'm at which is why I always
+[00:57:55] remind people that my results aren't
+[00:57:57] typical but I know that many of you are
+[00:57:59] learning from me because my experience
+[00:58:01] has been so unusual and I feel
+[00:58:04] incredibly grateful for that and I'm
+[00:58:06] always happy to share with you the
+[00:58:07] things I'm learning I was just having um
+[00:58:10] over the weekend I was visiting with my
+[00:58:12] uncle who in the spring will celebrate
+[00:58:15] his 50th year as a college professor 50
+[00:58:20] years 5 he started teaching in 1974 I
+[00:58:24] think it was 1974 yeah 1975 spring of
+[00:58:27] 1975 January of 1975 um and I gave him a
+[00:58:32] copy of U my my latest book here which I
+[00:58:34] hadn't given him yet um and I said that
+[00:58:38] you know I wanted to thank him because
+[00:58:42] he was has always been an inspiration to
+[00:58:47] me uh because of his commitment to
+[00:58:50] learning you know he was he was an uncle
+[00:58:52] who always bought me books you know
+[00:58:54] around Christmas time and it was was
+[00:58:56] like oh my God another pile of books but
+[00:58:58] um he's so academic I mean he likes
+[00:59:01] learning so much he's been a teacher for
+[00:59:02] 50 years um he's in his 80s and he's
+[00:59:05] still still still
+[00:59:06] teaching uh and you know once you have
+[00:59:09] tenure um at a college you can continue
+[00:59:11] teaching you I don't think they can
+[00:59:13] force you to quit I don't know maybe at
+[00:59:15] some point but uh but anyways um I
+[00:59:18] really enjoy teaching and what I've what
+[00:59:20] I've learned through my own experience
+[00:59:21] teaching is that some people don't
+[00:59:23] understand this um but it's it's really
+[00:59:26] a pleasure to share something you're
+[00:59:28] passionate about with other people who
+[00:59:30] have a similar interest so thank you
+[00:59:32] guys as always for tuning in those you
+[00:59:33] guys watching on YouTube I hope you hit
+[00:59:35] that thumbs up I hope you're subscribed
+[00:59:36] to the channel for more episodes about
+[00:59:38] trading strategy just like this I'll see
+[00:59:40] you guys for the next upload real soon
+[00:59:41] and I'll remind you once again that
+[00:59:43] trading is risky so manage your risk
+[00:59:44] take it slow and I'll see you back here
+[00:59:46] I'll be live streaming bright and early
+[00:59:48] tomorrow morning so I'll see you in the
+[00:59:49] morning

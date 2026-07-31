@@ -1,0 +1,662 @@
+# ChatGPT Open AI Trading Strategy RESULTS: +35% in 2 DAYS 🤖 $1,000 Small Account Challenge Ep. 8
+# https://www.youtube.com/watch?v=RoAVk--vljU
+# duration_sec: 1644
+
+[00:00:00] in today's episode of my small account
+[00:00:01] challenge I'm going to give up the
+[00:00:03] Reigns and I'm going to let AI give me
+[00:00:05] the strategy that I will use in an
+[00:00:08] attempt to grow my small account now my
+[00:00:11] account has been reset back to 1,000
+[00:00:13] bucks because we crossed over 10,000 new
+[00:00:16] subscribers on this channel so I want to
+[00:00:18] thank you for hitting that subscribe
+[00:00:19] button and hitting the thumbs up and now
+[00:00:21] we are going to jump in to trade number
+[00:00:23] one of my small account challenge with
+[00:00:25] 1,000 bucks controlled by AI so I've
+[00:00:29] already set up my script so that each
+[00:00:30] trade will use 90% of my available
+[00:00:33] buying power this AI strategy only calls
+[00:00:36] for taking one trade at a time now I
+[00:00:38] want you to understand just because I'm
+[00:00:40] using 90% of my account in one trade
+[00:00:43] doesn't mean I'm risking 90% of my
+[00:00:45] account in that trade that would only be
+[00:00:47] true if I was going to hold a stock
+[00:00:48] until it went to zero but this AI
+[00:00:51] strategy has a predetermined Max draw
+[00:00:54] down for each trade which I'll share
+[00:00:56] with you in a minute so qrx is the stock
+[00:00:59] that I'm looking at it's currently up
+[00:01:01] over 100% it has news and the AI
+[00:01:05] strategy says that this is the right
+[00:01:06] stock to trade so you can see right now
+[00:01:09] I am in at
+[00:01:11] $65 this is my first trade the chart
+[00:01:14] looks good the stock is moving up I'm
+[00:01:17] currently up on the position it hit a
+[00:01:19] high there of about
+[00:01:21] $630 which is almost 5% in less than 2
+[00:01:26] minutes less than a minute even as I
+[00:01:28] look at this stock right now my gut was
+[00:01:30] that I should have already sold but the
+[00:01:32] AI strategy said no don't sell it yet so
+[00:01:35] I'm like okay well I I got to put my got
+[00:01:37] to put my faith in this and let's see
+[00:01:39] what happens with this trade this is the
+[00:01:41] first trade this is proof of concept the
+[00:01:43] stock has over 5 million shares of
+[00:01:44] volume now there's 28 there's
+[00:01:47] 29 and now my position is out it looks
+[00:01:51] like I'm still holding 223 shares which
+[00:01:55] means I sold about 600 shares at 628 and
+[00:01:59] 62 2 locking up a realized profit of
+[00:02:03] $140
+[00:02:06] 126 interesting it looks like the rest
+[00:02:08] of the trade is now coming back towards
+[00:02:11] break even as it comes back down to 610
+[00:02:13] on the bid 605 on the bid that's break
+[00:02:18] even and I'm out the rest First Trade
+[00:02:22] $140 126 in the bank now I'm sure you've
+[00:02:25] got a million questions you're thinking
+[00:02:26] Ross what is the AI strategy what's the
+[00:02:29] trigger to buy the trigger to sell how
+[00:02:31] did qrx become the stock that was worth
+[00:02:33] trading so today was day one of letting
+[00:02:36] AI take the Reigns but before day one I
+[00:02:39] had to actually go and do the research
+[00:02:41] of putting together the strategy so now
+[00:02:43] let's take a step back and let's go
+[00:02:45] through the process of me showing you
+[00:02:47] how I developed this AI strategy so I'm
+[00:02:50] going to use the artificial intelligence
+[00:02:52] of chat GPT to help me develop a
+[00:02:54] strategy that I can use for this
+[00:02:56] challenge but before we do that let's
+[00:02:58] ask chat GPT a couple of really simple
+[00:03:01] questions just to make sure it even
+[00:03:03] knows a thing or two about trading who
+[00:03:06] is the most handsome day trader whose
+[00:03:09] name rhymes with hos or maybe
+[00:03:15] boss yes that is correct I am referring
+[00:03:19] to Ross Cameron all right all right chat
+[00:03:22] GPT seems to know what it's talking
+[00:03:24] about I think I can trust it to develop
+[00:03:27] a trading strategy for me please write a
+[00:03:30] DAT trading strategy with rules to
+[00:03:32] capitalize on fast moving
+[00:03:39] stocks okay so this looks like a good
+[00:03:42] starting point it's simple but um it
+[00:03:45] does leave room for
+[00:03:47] interpretation but the idea is um in
+[00:03:50] let's see five steps Five Steps step one
+[00:03:54] pre-market preps so analyze pre-market
+[00:03:56] conditions to identify potential fast
+[00:03:58] moving stocks look for stock with
+[00:04:00] significant pre-market volume and news
+[00:04:01] that could drive the price movements
+[00:04:03] such as earnings reports mergers
+[00:04:05] Acquisitions or other corporate events
+[00:04:07] that's fine that that I can do that
+[00:04:09] makes sense create a watch list of three
+[00:04:11] to five stocks that show potential for
+[00:04:13] significant intraday movements okay so I
+[00:04:15] could do that each morning
+[00:04:17] pre-market then entry rules right this
+[00:04:19] is what I really need where am I going
+[00:04:20] to buy and sell breakout breakdown on
+[00:04:24] volume enter a trade when a stock breaks
+[00:04:26] out above a resistance level or breaks
+[00:04:30] below a support level on higher than
+[00:04:32] average
+[00:04:34] volume this indicates a strong buying or
+[00:04:37] selling interest okay moving averages
+[00:04:40] used in moving averages of the 9 and the
+[00:04:42] 20 EMA which I already use for Trend
+[00:04:44] confirmation consider entering a trade
+[00:04:46] when the price moves above a shortterm
+[00:04:48] moving average in an uptrend or below in
+[00:04:51] a downtrend okay so I can understand
+[00:04:54] that relative strength index look for
+[00:04:56] stocks that are not oversold or
+[00:04:57] overbought RSI should be above 80 or 70
+[00:05:01] or below 30 to avoid false signals
+[00:05:05] okay exit rules set a profit Target for
+[00:05:09] each trade based on the Stock's
+[00:05:11] volatility and recent price range see
+[00:05:13] this leaves a lot of room for
+[00:05:14] interpretation a common approach is to
+[00:05:15] aim for a profit of 1 to 2% for highly
+[00:05:19] volatile
+[00:05:20] stocks H what does it say about risk
+[00:05:23] management position size and determine
+[00:05:26] your position size based on your account
+[00:05:28] tolerance a common rule is to risk no
+[00:05:29] more than 1 to 2% of your trading
+[00:05:31] account on a single trade all right so
+[00:05:35] 2% of my trading account would be 20
+[00:05:38] bucks so for the small account challenge
+[00:05:41] this is telling me not to risk more than
+[00:05:42] $20 on any trade okay so I've condensed
+[00:05:45] this down into the AI breakout strategy
+[00:05:48] number one I'm going to trade the most
+[00:05:51] volatile and liquid stocks each day I'm
+[00:05:53] going to make a watch list each day of
+[00:05:55] three to five stocks I'm going to sort
+[00:05:57] it by most volatile and most liquid
+[00:05:59] first at the top and I'm going to try to
+[00:06:01] find Opportunities on those stocks first
+[00:06:03] all right number two for my actual
+[00:06:05] entries I'm going to be buying break of
+[00:06:08] resistance since this is a breakout
+[00:06:10] strategy the break of resistance has to
+[00:06:12] have high volume and I'm supposed to use
+[00:06:16] RSI to avoid uh trades when the RSI is
+[00:06:19] above 70 I don't typically use RSI in my
+[00:06:22] trading but uh we'll use it for this
+[00:06:24] challenge in terms of risk I'm going to
+[00:06:26] take positions that risk not more than
+[00:06:28] 2% of my account in any one trade which
+[00:06:31] means starting with $1,000 I'm risking
+[00:06:33] 20 bucks I'm going to use live stop
+[00:06:35] orders when possible not I can't use
+[00:06:37] them pre-market but during regular
+[00:06:38] trading hours and my daily Max loss is
+[00:06:41] 6% which is $60 on day one with 1,000
+[00:06:45] bucks now this is not an AI strategy
+[00:06:48] that I could automate to a trading
+[00:06:50] algorithm buying a break of resistance
+[00:06:52] is not a very clear uh signal buying a
+[00:06:56] moving average crossover or buying when
+[00:06:58] RSI crosses over a certain number
+[00:07:00] numerical that would be easier to
+[00:07:02] program but this is a AI strategy that
+[00:07:06] really is going to require the trader to
+[00:07:08] do the executing of the strategy but I'm
+[00:07:11] going to follow the rules that have been
+[00:07:12] given to me and let's see how I'm able
+[00:07:14] to grow this account using the AI
+[00:07:17] breakout strategy so as I sat down for
+[00:07:19] day one I knew that I was looking for
+[00:07:20] the stock with the most volatility that
+[00:07:22] was also the most liquid and it had to
+[00:07:25] be a stock that I could afford to buy
+[00:07:27] given my account only has 1,000 bucks
+[00:07:30] qrx hit my scanners and was actually the
+[00:07:33] leading percentage gainer in the Market
+[00:07:36] at
+[00:07:37] 101% this is had a huge move now there
+[00:07:41] was a second leading Gainer but it was a
+[00:07:43] 94 Cent stock and although you could say
+[00:07:45] it's cheaper because certainly it is
+[00:07:48] this one actually had more volume which
+[00:07:49] meant it had more liquidity so I focused
+[00:07:51] on the obvious one and this one also to
+[00:07:54] note had a float of 600,000 shares this
+[00:07:58] is an important relationship ship so
+[00:08:00] you've got 6 million shares of volume
+[00:08:02] but a 900,000 share float versus 1.5
+[00:08:06] million shares of volume and an 11 11
+[00:08:08] million share float what you have
+[00:08:11] between these two different stocks is
+[00:08:13] actually a much more significant
+[00:08:15] difference and I think some Traders
+[00:08:16] would uh would realize so I'm going to
+[00:08:19] describe in a bit more detail how this
+[00:08:21] works so we've got our
+[00:08:23] float on the left here and then we've
+[00:08:26] got our characteristics of Demand on the
+[00:08:28] right so when we have a stock has high
+[00:08:29] demand it usually has is is triggered by
+[00:08:32] news and usually the stock is going to
+[00:08:34] be up uh 10% or higher it's usually got
+[00:08:37] high relative volume now the relative
+[00:08:39] volume on qrx is
+[00:08:44] 14,000 time higher than normal that is a
+[00:08:47] huge number the relative volume on Y gmz
+[00:08:50] is only 528 not to say that that's not
+[00:08:53] big cuz it is but this is obviously
+[00:08:56] significantly larger relative volume
+[00:08:59] tells us how much more volume the stock
+[00:09:01] has today versus what is normal for that
+[00:09:04] stock and when a stock has like way
+[00:09:06] above average volume that's when we
+[00:09:09] usually see the biggest moves and not
+[00:09:11] just going from you know 50% to 100% but
+[00:09:13] maybe from 100 to 200 400 or 800% or
+[00:09:17] higher so these are stocks I really get
+[00:09:19] excited about now when we think about
+[00:09:22] the relationship between demand and
+[00:09:24] Float the more demand you have the
+[00:09:28] bigger the imbalance will when you have
+[00:09:30] a small float so if you have a float of
+[00:09:31] 1 million shares and you have you know 1
+[00:09:35] million shares of volume uh let's just
+[00:09:37] say for instance and the stock goes up
+[00:09:40] 100% if you had a 10 million share float
+[00:09:44] and you had the same 1 million shares of
+[00:09:46] volume I would wager that the stock
+[00:09:48] might only go up a tenth of that it
+[00:09:50] might only go up 10% because that's how
+[00:09:53] the shift has occurred because there's
+[00:09:54] 10 times more Supply same amount of
+[00:09:57] demand but less but more Supply so when
+[00:10:01] we look at y gmz y gmz has more Supply
+[00:10:06] and it also happens to have less volume
+[00:10:08] now there are times like for instance a
+[00:10:11] case of aimd where you have 8 million
+[00:10:14] shares of volume and a 1 million share
+[00:10:16] float so that you could say that the
+[00:10:18] demand and balance could be even higher
+[00:10:20] on this one at the moment than on
+[00:10:22] qrx but the relative volume ratio is
+[00:10:25] higher on qrx and that just speaks to
+[00:10:28] the way these stocks have been trading
+[00:10:29] in the last few weeks and qrx is the
+[00:10:32] more obvious stock to trade because it
+[00:10:33] is the leading percentage
+[00:10:35] Gainer okay so qrx was easy to select as
+[00:10:39] the most obvious stock to apply the
+[00:10:40] strategy to uh it then hits my high of
+[00:10:43] day momentum scanner and it squeezes up
+[00:10:45] it first hits the scanner at 8:04 a.m.
+[00:10:48] and that was when the price was at
+[00:10:50] $4.75 even at this time with light
+[00:10:52] volume it's still had relative volume of
+[00:10:54] 134 which is really strong it was up
+[00:10:57] 71% in the 3 minutes it goes up 133%
+[00:11:02] which is incredible so 475 5 523 525 567
+[00:11:06] 630 634 647 holy smokes and volume is
+[00:11:10] coming in so I actually traded this in
+[00:11:13] my big account and locked up $6,000 of
+[00:11:16] profit in those first 12 minutes this
+[00:11:18] was a phenomenal trade but that first
+[00:11:21] move there wasn't really a break of
+[00:11:24] resistance the stock was pretty much
+[00:11:26] just squeezing higher so I didn't feel
+[00:11:30] like it made sense to trade it in the
+[00:11:32] small account at that time because there
+[00:11:35] hadn't an obvious level of resistance
+[00:11:37] hadn't quite formed yet so I was
+[00:11:40] focusing on trading in my big account
+[00:11:42] and then I was waiting for it to hold up
+[00:11:45] and give me that opportunity to take a
+[00:11:47] trade on a break of resistance and this
+[00:11:49] was the trade right here that I ended up
+[00:11:50] taking in the small account so you know
+[00:11:53] as it turns out the biggest move was
+[00:11:55] right here and this was really on
+[00:11:58] response from the breaking news that
+[00:12:00] came out at the top of the hour at 8:00
+[00:12:01] a.m. news comes out and the stock rips
+[00:12:04] and squeezes up it then pulls back holds
+[00:12:07] and I was looking for that second leg
+[00:12:08] higher and it's just unfortunate in this
+[00:12:10] case that the stock didn't squeeze all
+[00:12:12] the way back up to 750 and and make new
+[00:12:14] Highs but nonetheless it did move up
+[00:12:17] enough for me to book some profit so I
+[00:12:20] really can't complain so day one is in
+[00:12:22] the books $140 is that the biggest day
+[00:12:25] one I've ever had of a small count
+[00:12:26] challenge no but it's not bad it's
+[00:12:29] respectable a 14% gain that's pretty
+[00:12:32] solid so I felt pretty good at the end
+[00:12:35] of day one going into day two that this
+[00:12:38] strategy that had been given to me was
+[00:12:40] going to work my biggest challenge was
+[00:12:43] the feeling that I still had too much
+[00:12:46] discretion and I really wanted just to
+[00:12:49] let AI run this whole thing for me but
+[00:12:52] that just wasn't feasible with the
+[00:12:54] account and the broker that I'm using so
+[00:12:58] you know to be honest I I think even
+[00:13:00] though AI controlled the strategy I'm
+[00:13:02] still the operator who's pressing the
+[00:13:04] buttons and it's still requiring my
+[00:13:06] intuition we're going to see that come
+[00:13:08] into play more in day two so let's go
+[00:13:11] ahead and start with my first trade of
+[00:13:13] day two so we're on day two and on my
+[00:13:16] first trade I lost
+[00:13:18] $778 basically a break even trade I took
+[00:13:22] a breakout setup and I'm going to draw
+[00:13:25] this yellow arrow so you can see where I
+[00:13:27] bought I bought right here for the break
+[00:13:30] through this Flat Top This is the AI
+[00:13:33] breakout strategy the RSI was below 70
+[00:13:36] so everything checked out on this this
+[00:13:38] was at the time the most obvious stock
+[00:13:41] to trade and you can see that it popped
+[00:13:43] up but it didn't hold also even though I
+[00:13:48] wanted to get in at
+[00:13:51] $769 I got filled at
+[00:13:55] $7.77 that's called slippage the
+[00:13:58] difference between where you want to be
+[00:14:00] in at and where you actually get filled
+[00:14:02] at and this is actually one of the
+[00:14:04] biggest problems with doing back testing
+[00:14:07] when you do back testing against a
+[00:14:09] strategy it's really hard to know in
+[00:14:12] reality how many shares you would have
+[00:14:13] filled because when you back test you're
+[00:14:15] saying okay well at this exact time my
+[00:14:19] alert would have triggered me to buy the
+[00:14:22] stock and so you look at the price at
+[00:14:24] that exact time and then you just figure
+[00:14:26] I would have gotten in at that price you
+[00:14:28] could give yourself some slippage you
+[00:14:30] could say well maybe I got in at that
+[00:14:31] price plus 10 cents a little bit higher
+[00:14:34] as was the case here but sometimes even
+[00:14:37] that is not realistic and this was the
+[00:14:39] biggest problem that I had with trying
+[00:14:40] to do back testing was that the back
+[00:14:42] test results would look great but then
+[00:14:44] when I would run that algorithm moving
+[00:14:46] forward the results were completely
+[00:14:49] different it was almost as if I solved
+[00:14:52] the puzzle of the algorithm to fit the
+[00:14:56] historical data that I was back testing
+[00:14:58] again against so I could create an
+[00:15:00] algorithm that made a lot of money based
+[00:15:03] on this set of historical data but then
+[00:15:06] with a new set of data moving forward
+[00:15:08] that same algorithm didn't perform well
+[00:15:10] and the one of the biggest differences
+[00:15:11] was because of slippage the difference
+[00:15:13] between getting in at
+[00:15:15] $767 versus getting in at
+[00:15:18] $7.77 in this case was the difference
+[00:15:21] between an $80 winner and a $7 loser now
+[00:15:25] a $7 loser is not a big deal but I did
+[00:15:28] feel a little disappointed because I
+[00:15:30] broke the ice with that first trade and
+[00:15:32] it was a loser so in addition to having
+[00:15:35] a
+[00:15:36] $778 c loss on the first trade when I
+[00:15:39] logged in this morning My Equity balance
+[00:15:42] was
+[00:15:44] $1,129 35 which means my fees and
+[00:15:47] commissions from the one trade I took
+[00:15:49] yesterday was about $11 all right not
+[00:15:52] the end of the world it's not that big
+[00:15:54] of a deal but you know fees and
+[00:15:57] commissions do add up and that's the
+[00:15:59] price you pay for this type of broker so
+[00:16:02] for those that are not familiar the
+[00:16:04] broker that I chose for my small account
+[00:16:06] challenge is an offshore broker it's an
+[00:16:08] international broker and the reason is
+[00:16:11] because they do not enforce the $25,000
+[00:16:14] PDT minimum for me when I've tried
+[00:16:17] trading using cash only accounts with a
+[00:16:20] US broker the fact is I'm I'm greatly
+[00:16:23] limited to how frequently I can trade I
+[00:16:26] run out of cash and then I can't take
+[00:16:27] any more trades so what what I decided
+[00:16:29] to do for this small account challenge
+[00:16:31] is use an international broker that will
+[00:16:33] allow me to trade as much as I'd like
+[00:16:36] but the tradeoff is that I'm paying a
+[00:16:38] fee and a commission now if we jump onto
+[00:16:40] the Whiteboard real quick the broker
+[00:16:42] that I'm using offers six times leverage
+[00:16:45] and I don't I'm not an affiliate so and
+[00:16:47] I'm not even going to share the name of
+[00:16:48] the broker so use it if you'd like don't
+[00:16:49] use it if you don't want uh you guys can
+[00:16:51] talk about it in the comments but that
+[00:16:53] means with a $1,000 deposit times 6 I
+[00:16:56] actually can use up to $6,000 in Max
+[00:16:59] buying power which means if I find a
+[00:17:01] stock priced at $6 a share I could buy a
+[00:17:04] th000 shares which would equal a $6,000
+[00:17:07] total position and if the stock goes up
+[00:17:09] 10% and I sell it at 660 well I my
+[00:17:12] account's up 60% right 10% return on the
+[00:17:16] underlying asset but I'm using six times
+[00:17:18] leverage so I'm getting a 60% return now
+[00:17:21] I don't have to tell you that Leverage
+[00:17:23] is a sword that cuts both ways you can
+[00:17:28] absolutely lose 60% of your account in
+[00:17:31] one day using leverage so you have to be
+[00:17:34] incredibly responsible one of the things
+[00:17:36] that this AI strategy dictates is tight
+[00:17:39] risk management so I really can't take a
+[00:17:42] lot of risk but that's all right so with
+[00:17:43] this first trade losing
+[00:17:46] $778 really not a big deal totally
+[00:17:49] within my risk parameters and I'm I feel
+[00:17:52] okay with that trade number two of day
+[00:17:54] two is a winner it's about a $21 winner
+[00:17:57] all right so again nothing that's really
+[00:17:59] moving the needle in a big way I bought
+[00:18:01] this stock uh 350 shares at 796 added at
+[00:18:04] 7 at 808 and then sold at 805 you can
+[00:18:08] see at the yellow arrow where I entered
+[00:18:10] I was looking for a breakout this is the
+[00:18:12] AI breakout strategy RSI was not over 70
+[00:18:15] looking for that curl and that move up
+[00:18:17] to 820 830 840
+[00:18:19] 850 but it just sort of stalled out so I
+[00:18:23] would more or less call the first two
+[00:18:25] trades of day two to be break even
+[00:18:27] trades a $7 loser a $21 winner these
+[00:18:31] these aren't going to grow the account
+[00:18:32] very quickly so let's jump into trade
+[00:18:34] number three okay so still watching aisp
+[00:18:37] stock is up 65% it is moving it's the
+[00:18:41] stock that's in focus it has just broken
+[00:18:44] through this resistance level so now
+[00:18:46] what I'm looking for is it going to hold
+[00:18:49] this level and if it does can I take a
+[00:18:52] breakout up to $ 850 $875 and then $9 a
+[00:18:57] share obviously back of M Target that's
+[00:19:00] what I'd love to see so the entry right
+[00:19:02] here is at 851 765 shares this is a
+[00:19:06] breakout strategy looking for the
+[00:19:08] squeeze through the high of day there's
+[00:19:10] 866
+[00:19:12] 863 863 on the offer
+[00:19:15] 866
+[00:19:17] 868 868 on the offer 866 on the bid 865
+[00:19:22] on the bid now there's 870
+[00:19:27] 871
+[00:19:29] back to 865 holding 192 shares took a
+[00:19:32] little off the table at 869 and
+[00:19:35] 865 trying to manage risk lock up small
+[00:19:39] winners now I'm up $108 realized and
+[00:19:42] still holding 192 shares it pops up I
+[00:19:44] sell the rest locking up now total on
+[00:19:47] the day
+[00:19:49] $16.40 now let's go ahead and jump into
+[00:19:51] trade number four meds popped up on the
+[00:19:54] scanner it's priced at about $13 a share
+[00:19:56] it's up 54% and it has a float of less
+[00:20:00] than 500,000 shares this is a stock that
+[00:20:03] was moving very quickly I jumped in and
+[00:20:05] on my first trade I took a small loss on
+[00:20:07] my second trade I have a small profit
+[00:20:09] I'm up $12 on it again this doesn't
+[00:20:12] really move the needle but now I'm up $1
+[00:20:15] 12840 on the day on the next trade I
+[00:20:18] take a $2.50 loss on APM very quick
+[00:20:22] entry and exit it at this time is the
+[00:20:24] second leading gainer in the market up
+[00:20:27] 186% it was the stock to trade but I
+[00:20:29] didn't get a a good win on it and then I
+[00:20:32] got one more trade on aisp buying at
+[00:20:35] $8.7 for the breakout this is as it was
+[00:20:39] squeezing through the high and selling
+[00:20:40] at
+[00:20:41] $881 now I'm up
+[00:20:44] $169.90 on the day in the final trade of
+[00:20:47] the day I take one more position on aisp
+[00:20:50] and lock up $56 of profit on it bringing
+[00:20:54] my total on the day to
+[00:20:57] $225. sense this is a really solid day
+[00:21:00] now this AI strategy didn't specifically
+[00:21:04] dictate a maximum number of Trades I
+[00:21:06] could take I had a maximum draw down I
+[00:21:09] had a daily goal which I exceeded but I
+[00:21:12] I wasn't really Limited in how
+[00:21:13] frequently I could trade typically when
+[00:21:15] I do a small account challenge you
+[00:21:17] following my own strategy I only take
+[00:21:19] one trade a day I try to get in get
+[00:21:21] green and get out and for me I do that
+[00:21:24] because I know the more trades I take
+[00:21:26] the more I'm exposing myself to the risk
+[00:21:28] of catching an unnecessary loss a flush
+[00:21:31] and get going into a draw down and when
+[00:21:33] your account is so small you don't have
+[00:21:35] any cushion whatsoever to make those
+[00:21:38] kinds of mistakes so that makes it even
+[00:21:40] more important that your quality
+[00:21:42] standard of being willing to take a
+[00:21:44] trade is super high but this AI strategy
+[00:21:47] didn't really call for that it was uh a
+[00:21:49] bit more open-ended and I think by now
+[00:21:52] you can also see the fact that this AI
+[00:21:54] strategy gave me some guidelines but
+[00:21:59] I don't don't fool yourself into
+[00:22:00] thinking that anyone could have picked
+[00:22:02] up that AI strategy from Chad GPT and
+[00:22:05] made $ 220 $25 or whatever it is on day
+[00:22:08] one of a small account challenge that's
+[00:22:10] just not realistic it it it wouldn't
+[00:22:12] have happened like that because the fact
+[00:22:15] is this strategy still required me as
+[00:22:18] the trader to be very actively involved
+[00:22:22] with executing getting in getting out
+[00:22:25] choosing the stocks now I was using the
+[00:22:27] parameters given to me by open Ai and
+[00:22:30] chat GPT which was great but they were
+[00:22:33] just too vague now are there some
+[00:22:37] algorithmic trading Bots that are sold
+[00:22:40] out there that you could trade with your
+[00:22:41] own money yes there are but I would look
+[00:22:46] at them very skeptically here's the
+[00:22:48] thing if you've made an AI bot and it's
+[00:22:52] printing money you're not going to share
+[00:22:54] it with other people because these types
+[00:22:55] of things are so elusive the Market is
+[00:22:58] always changing it'll work for a little
+[00:23:00] while and then it'll stop working you
+[00:23:02] have to change it you have to adapt it
+[00:23:04] that's why these big highfrequency
+[00:23:06] trading firms employ the best
+[00:23:09] mathematicians in the world to work on
+[00:23:12] these money printing machines now a lot
+[00:23:14] of people are sort of cynical about this
+[00:23:16] and say you know the best minds of our
+[00:23:18] generation are being squandered by just
+[00:23:21] trying to make money in the stock market
+[00:23:23] and they could be doing things like
+[00:23:25] trying to I don't know do something you
+[00:23:28] know like make it so men don't lose
+[00:23:30] their hair when they start getting older
+[00:23:33] Something That Matters to people but
+[00:23:35] nonetheless um this is the world that we
+[00:23:38] live in so if you're thinking about oh I
+[00:23:41] really want to trade and I want to just
+[00:23:43] have an AI bot that does it for me there
+[00:23:46] will people there are people that will
+[00:23:48] sell you that dream but it is not
+[00:23:50] reality I have not once in my entire
+[00:23:53] career of being a full-time Trader
+[00:23:55] seeing something available to retail
+[00:23:57] Traders that's cons consistently
+[00:23:58] profitable over the long term maybe
+[00:24:00] someone will prove me wrong but as of
+[00:24:02] right now I just haven't seen it I think
+[00:24:04] that what is available from open Ai and
+[00:24:06] chat GPT is a lot of really great
+[00:24:09] General guidelines about trading similar
+[00:24:11] to what you find here on YouTube but
+[00:24:14] when it comes to being an expert and
+[00:24:16] being able to actually execute on on any
+[00:24:19] of that general knowledge you need to
+[00:24:21] develop a skill set so the process of
+[00:24:22] turning that knowledge into an actual
+[00:24:25] skill is done through practice now I'm a
+[00:24:28] very Hands-On learner I learn by setting
+[00:24:30] up my account starting to press the
+[00:24:32] buttons and just getting myself in there
+[00:24:34] that's why I never went to any uh you
+[00:24:37] know like trading day trading school or
+[00:24:40] any Academy or anything like that that
+[00:24:41] would have trained me I learned all on
+[00:24:43] my own now that's the school of hardock
+[00:24:45] it's not always the best path because
+[00:24:48] you end up making a lot of rookie
+[00:24:50] mistakes that people who came before you
+[00:24:52] could have easily told you about if you
+[00:24:54] had been surrounded with you know by
+[00:24:56] them in an academic or in a community
+[00:24:59] like what we have now at Warrior trading
+[00:25:01] so my hope is that I'm able to send the
+[00:25:03] ladder back down to make it easier for
+[00:25:05] beginner traders to gain the financial
+[00:25:08] literacy needed just to have like their
+[00:25:10] prere prerequisite level in order to
+[00:25:13] start trading day one sim there's no
+[00:25:15] guarantee that you'll be profitable I
+[00:25:17] know you everyone wants a guarantee
+[00:25:19] nobody wants to take a risk everyone
+[00:25:20] wants a sure thing and it's not like
+[00:25:23] that it's not like that in life and it's
+[00:25:25] not like that in trading even if you try
+[00:25:27] to find one of these AI Bots it's not
+[00:25:30] going to be like that there so
+[00:25:32] ultimately I think the best thing you
+[00:25:34] can do is gain the skill of learning how
+[00:25:37] to read the financial markets learning
+[00:25:39] how to read stock charts learning how to
+[00:25:41] understand which stocks have the
+[00:25:42] potential to make big moves learning to
+[00:25:45] understand human behavior because human
+[00:25:47] behavior is what moves the markets when
+[00:25:50] you think of stocks like Nidia and Tesla
+[00:25:52] that have made these incredible moves
+[00:25:54] those are driven by human behavior so if
+[00:25:57] you become an exp exp ERT at Psychology
+[00:25:59] an expert at fomo the fear of missing
+[00:26:01] out an expert at greed an expert at
+[00:26:04] understanding the type of stocks that
+[00:26:05] under the right circumstances can make
+[00:26:07] 20 30 50 100% 200% 500% 800% moves in
+[00:26:12] one single day that's when we can start
+[00:26:16] converting all of that knowledge into
+[00:26:18] some actual tangible profit I do think
+[00:26:21] that AI can be a tool that'll help you
+[00:26:23] in that Journey but it will not at this
+[00:26:26] time replace the human intuition that is
+[00:26:29] required to truly profit in a meaningful
+[00:26:32] way from the stock market so now that
+[00:26:34] you know about the AI strategy if you
+[00:26:36] want to learn about my small account
+[00:26:38] strategy the one that I've used every
+[00:26:40] single time I've done a small account I
+[00:26:42] will put a link pinned to the top of the
+[00:26:44] description and in the comments where
+[00:26:46] you can download the PDF of my small
+[00:26:48] account strategy that will outline how I
+[00:26:50] choose the strongest stocks each day
+[00:26:52] where I buy and sell in order to
+[00:26:54] minimize my risk and maximize my upside
+[00:26:56] potential I encourage you you download
+[00:26:58] it print it out study it and start
+[00:27:01] practicing it in a simulator in a safe
+[00:27:03] environment because as always I'll
+[00:27:05] remind you trading is risky my results
+[00:27:07] aren't typical so manage your risk take
+[00:27:08] it slow practice in a simulator cuz the
+[00:27:10] stock market it's going to be here for
+[00:27:12] you spend your time right now studying
+[00:27:14] and honing those skills if you enjoyed
+[00:27:17] this episode I hope you hit that thumbs
+[00:27:18] up I hope you subscribe and help me
+[00:27:20] reset that account back to 1,000 bucks

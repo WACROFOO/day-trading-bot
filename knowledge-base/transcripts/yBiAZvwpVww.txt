@@ -1,0 +1,256 @@
+# $CFRX Recent Reverse Split Gap and Go Setup
+# https://www.youtube.com/watch?v=yBiAZvwpVww
+# duration_sec: 559
+
+[00:00:00] All right, everyone. So, I'm going to do
+[00:00:01] my recap here for this morning.
+[00:00:04] Go over the trades that I took,
+[00:00:06] finishing the day at $3,851.77,
+[00:00:10] which is not not bad at all.
+[00:00:13] CFRX was the only stock that I traded.
+[00:00:17] Uh first couple trades were small
+[00:00:20] winners. $67 on my first trade. Like
+[00:00:23] another 70 on the second.
+[00:00:25] Uh so, I was up like 130 after my first
+[00:00:27] two trades, and then was able to add a
+[00:00:29] little bit more, a little bit more, and
+[00:00:30] then got a couple trades.
+[00:00:32] So,
+[00:00:33] I'll kind of break it down for you from
+[00:00:34] the first trade to the last trade.
+[00:00:37] Uh I did trade it quite a bit, but I'll
+[00:00:40] I'll break down at least the high level.
+[00:00:43] For those uh tuning in for the recap on
+[00:00:46] YouTube, I want to remind you guys that
+[00:00:49] um we've got a special going on right
+[00:00:51] now for Ross's Ultimate Day Trading
+[00:00:53] Bundle. And for anyone here tuning in,
+[00:00:56] Warrior um Warrior members,
+[00:00:58] if you know someone who you think is
+[00:01:00] interested in becoming a uh Warrior Pro
+[00:01:03] student, this is a great time to get
+[00:01:06] started. So, this ultimate bundle that
+[00:01:08] we've put together, and the hair. The
+[00:01:10] hair is really the best part of it. And
+[00:01:12] And that uh
+[00:01:14] I don't even charge you for that. The
+[00:01:15] hair, you just get to enjoy looking at
+[00:01:17] that majestic hair and beard um all day
+[00:01:21] long while I'm live streaming and with
+[00:01:22] the ultra low latency feed. So, which is
+[00:01:24] good. Uh you want to see and with some
+[00:01:27] high-resolution um
+[00:01:28] this beard, cuz it's
+[00:01:31] it it's uh
+[00:01:32] And that actually reminds me um
+[00:01:35] Well, I guess it's okay. I can still
+[00:01:36] stream here. I was going to stream uh
+[00:01:39] I was going to do it record this recap
+[00:01:40] with my other software, but it's fine.
+[00:01:42] I'll just do it here.
+[00:01:43] So, the other one is higher resolution,
+[00:01:45] but it's fine. It's fine. So, anyways,
+[00:01:47] um it check So, check this out or if you
+[00:01:49] have any friends that are interested, um
+[00:01:51] you can send this along to them. So,
+[00:01:52] this is your Warrior Pro one-time
+[00:01:54] membership fee, uh plus it includes
+[00:01:57] your tools prepaid for a full year.
+[00:02:00] So, check that out if you're interested
+[00:02:02] in learning more. Um I'm
+[00:02:06] uh I I finished last week with a uh
+[00:02:09] pretty nice green day, as you may
+[00:02:10] recall, on Friday.
+[00:02:13] So, that sent my P&L,
+[00:02:15] um you know, right back up to now
+[00:02:18] $142,000
+[00:02:19] in the last 60 days, sort of rolling
+[00:02:21] period here.
+[00:02:23] Uh which is phenomenal. And so, I was
+[00:02:26] grateful to be able to have that fairly
+[00:02:28] quick recovery. Last week, as you know,
+[00:02:30] or the week before, I had four
+[00:02:31] consecutive red days that were big, max
+[00:02:34] loss, a fifth small red day, and then
+[00:02:37] two small green days. And at that point,
+[00:02:38] I was like,
+[00:02:40] "So, that was after um
+[00:02:42] the 22nd, so 2/22/2023.
+[00:02:46] So, at that point, I was like, you know,
+[00:02:48] guys, I've had
+[00:02:50] five big red five red days,
+[00:02:52] two tiny small green days.
+[00:02:55] I'm afraid of stair-stepping down, you
+[00:02:57] know, having a three, four, five
+[00:02:58] thousand dollar loss."
+[00:03:01] So, what I ended up doing, um
+[00:03:04] you know, I tried to trade pretty
+[00:03:05] conservatively, uh
+[00:03:07] as I was kind of getting back in the
+[00:03:08] groove on uh Tuesday, or I guess it was
+[00:03:11] uh Wednesday or Thursday.
+[00:03:13] Because I was concerned about that
+[00:03:15] possibility of having a big loss.
+[00:03:17] So, I was in Trader Rehab, and I said,
+[00:03:19] you know, I'm focusing right now on
+[00:03:22] trying to just hit um
+[00:03:24] a couple of good trades each day,
+[00:03:26] keeping the the kind of
+[00:03:28] guardrails on, in the sense, so to
+[00:03:30] speak, for those that uh have already
+[00:03:33] tuned in to Trader Rehab, you know what
+[00:03:34] I'm talking about, but by guardrails on,
+[00:03:36] I mean,
+[00:03:37] uh restricting my share size, not being
+[00:03:40] too aggressive, and restricting the type
+[00:03:42] of stocks I'm willing to trade. So,
+[00:03:44] anyways,
+[00:03:45] Thursday ended up being
+[00:03:48] a pretty good day.
+[00:03:50] And then Friday uh was even better.
+[00:03:54] Which was terrific. So, a great day on
+[00:03:56] Friday, nice recovery.
+[00:03:59] And so now I feel grateful because this
+[00:04:01] um you know, put me back to all-time
+[00:04:04] highs in my account, certainly at the
+[00:04:06] all-time highs for the month of
+[00:04:08] February.
+[00:04:10] And tomorrow's the last day of the
+[00:04:11] month. So, now I just have to hold it
+[00:04:13] together.
+[00:04:14] Okay, so today 3,800 is certainly
+[00:04:17] holding it together. That's good.
+[00:04:20] First trade was on CFRX. I rolled over
+[00:04:22] this morning in bed not feeling very
+[00:04:24] well. Obviously, I'm still sick. Um
+[00:04:27] and I pulled up my gap scanner, which I
+[00:04:30] had on my phone here, but I guess I
+[00:04:31] closed that. Anyways, I pulled up my gap
+[00:04:33] scanner and um
+[00:04:35] saw that the leading gapper was
+[00:04:38] LHDX,
+[00:04:39] 50-cent stock.
+[00:04:41] It's too cheap.
+[00:04:44] So, I thought, "Nah, that's no good for
+[00:04:46] me."
+[00:04:47] I saw CFRX.
+[00:04:49] Uh but this was at like 7:00 a.m.
+[00:04:52] So, I thought, "Nah, yeah, I don't know.
+[00:04:54] Maybe. It has that pre-market high up
+[00:04:55] here from 4:30 at like $5.30."
+[00:05:00] So, not sure about it. But the float's
+[00:05:02] pretty low. BLRX, I don't know. Didn't
+[00:05:04] see that or BLBX. These other ones,
+[00:05:06] didn't see anything interesting. So, I
+[00:05:08] was like, "Ah, I don't know."
+[00:05:09] Anyway, so um
+[00:05:12] I sat down here at my in my chair at
+[00:05:14] about 8:00 a.m.
+[00:05:16] And I saw
+[00:05:18] these similar gappers, pretty much the
+[00:05:20] same. Maybe a couple new ones popped up.
+[00:05:22] But CFRX caught my eye a little bit
+[00:05:25] because it was gaining its uh ground
+[00:05:27] here back over VWAP right there.
+[00:05:30] Got back up to VWAP at about 8:22.
+[00:05:33] Pulls back, comes back up.
+[00:05:36] Hits a high of 8:47 right in this area.
+[00:05:39] I was uh tempted to trade it. I was
+[00:05:41] thinking about it. I almost pulled the
+[00:05:43] trigger and then I was like, "Nah, I
+[00:05:44] don't know. Not sure."
+[00:05:46] Uh so, I ended up taking my first entry
+[00:05:49] on it at $4.46.
+[00:05:52] Which was right here.
+[00:05:54] That was my first entry.
+[00:05:56] Ended up going up to a high of 457.
+[00:05:59] And then we So, what convinced me to
+[00:06:00] pull the trigger was it was holding
+[00:06:03] VWAP. It was coming back up again. It
+[00:06:06] had just dropped down to 419 and then
+[00:06:08] bounced back pretty nicely.
+[00:06:10] And I was like, I like this for the
+[00:06:11] break of 450. So, I got in at 446 and
+[00:06:15] then added at 450.
+[00:06:18] Uh, it had a seller hidden seller at
+[00:06:20] 450.
+[00:06:21] And I sold that first trade for $67 of
+[00:06:24] profit, basically break even.
+[00:06:26] And then it comes back up again and I
+[00:06:28] got back in at uh, 453.
+[00:06:31] It goes up to 455, 458. And I got out of
+[00:06:36] it uh, for some small profit.
+[00:06:40] And then I got back in at 460. So, I was
+[00:06:43] just doing really small trades here. I
+[00:06:44] was like feeling all timid because of
+[00:06:46] the false or the uh, hidden sellers. I
+[00:06:49] was just like, I don't know. I'm not
+[00:06:51] sure.
+[00:06:52] So, anyways, it starts to pull away and
+[00:06:54] I sized up at 60 for my first kind of
+[00:06:57] bigger trade with 7,000 shares and added
+[00:07:00] at 75 and we got a move here up to 80.
+[00:07:03] That was a good trade. Put me up about
+[00:07:05] 800 on the day or so.
+[00:07:07] Not a huge winner, but it was good. Uh,
+[00:07:09] added back at 85.
+[00:07:11] Ends up going up to 87 and stalling out.
+[00:07:15] Started to pull back here. Comes back
+[00:07:17] up, goes up to 95, dips down, goes up to
+[00:07:20] 504. So, it's sort of choppy in this
+[00:07:22] area. Actually gave back 200 on this red
+[00:07:25] candle right here at uh, 907.
+[00:07:28] It drops down and then it came back up.
+[00:07:30] I got back in at 910.
+[00:07:33] Added at 925. We got a rip up to 960 and
+[00:07:36] then a period of sideways consolidation.
+[00:07:39] So, right around here I got up to go
+[00:07:41] grab some tea. I missed this break up to
+[00:07:43] 580.
+[00:07:45] I got back in at 595. We got a break of
+[00:07:48] six, go up to 620, and at the open we
+[00:07:50] got a squeeze up to 650.
+[00:07:52] Uh, actually we had a high here of uh
+[00:07:54] 685. Halted up.
+[00:07:58] I took profit going into that halt and
+[00:08:00] held small size on resumption, which I
+[00:08:02] sold as it came back down. And that was
+[00:08:04] it.
+[00:08:05] $3,851.77.
+[00:08:07] Not bad.
+[00:08:08] Feel like I could have made more on it,
+[00:08:10] but the thing that was challenging um
+[00:08:13] was that this had a couple of areas
+[00:08:16] where
+[00:08:17] it was sort of choppy. It was choppy
+[00:08:19] like in this area here at 560.
+[00:08:22] It was choppy in this area here at about
+[00:08:24] five.
+[00:08:25] It was choppy right here around 450. And
+[00:08:28] then again 460. So, it was just kind of
+[00:08:29] choppy.
+[00:08:31] Uh, but it did have some nice breakout
+[00:08:32] candles, and I'm I'm glad that I was
+[00:08:34] able to do well on it.
+[00:08:36] But, I'm not going to overstay my
+[00:08:37] welcome today. I don't I really don't
+[00:08:38] feel that great. So,
+[00:08:41] I'm happy with where I'm at, and uh I'm
+[00:08:43] going to try again tomorrow. So, you
+[00:08:46] know, we'll see what the market has in
+[00:08:47] store for us tomorrow. Good luck for
+[00:08:49] those that keep trading, and for those
+[00:08:51] that want to learn more, make sure you
+[00:08:52] check out Ross's Ultimate Day Trading
+[00:08:54] Bundle. And I'll see you first thing
+[00:08:55] tomorrow morning.
+[00:08:57] All right, thanks everyone. See you in
+[00:08:58] the morning.
+[00:08:59] Hey, and reminder as always trading is
+[00:09:00] risky. My results aren't typical, and
+[00:09:02] there's no guarantee you'll find success
+[00:09:03] with your trading or your own you learn
+[00:09:05] from me. So, make sure you take it slow,
+[00:09:06] and you practice in a simulator before
+[00:09:08] you put real money on the line. I'll see
+[00:09:10] you guys tomorrow morning.

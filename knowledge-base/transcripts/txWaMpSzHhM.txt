@@ -1,0 +1,1308 @@
+# Ultimate Day Trading Strategy Guide 📚🍏for Beginners
+# https://www.youtube.com/watch?v=txWaMpSzHhM
+# duration_sec: 3318
+
+[00:00:00] all right everyone welcome to class one
+[00:00:02] of our day trading course so as you guys
+[00:00:06] know my name is Ross Cameron and this is
+[00:00:09] our eight week long course in day
+[00:00:12] trading alright so first chapter here
+[00:00:15] we're gonna cover a lot of the basics
+[00:00:17] and we will get into more detail as we
+[00:00:19] go so you may have some questions today
+[00:00:22] that will be answered in the coming days
+[00:00:25] but you can of course feel free to call
+[00:00:27] out your answers in the chat room and
+[00:00:29] anyone watching on the recording you can
+[00:00:31] feel free to email me Ross at date red
+[00:00:33] warrior comm alright so first question
+[00:00:38] here how does day trading work okay so
+[00:00:40] and another another thing to ask here is
+[00:00:43] what are we looking for as day traders
+[00:00:46] all right we talked about this a little
+[00:00:48] bit today it's a very simple concept but
+[00:00:50] we're looking for stocks that are moving
+[00:00:52] ok as day traders we profit from
+[00:00:55] volatility in the market so if the
+[00:00:58] markets are flat we're not going to make
+[00:00:59] money we need to find stocks that are
+[00:01:01] gonna make quick moves to the upside or
+[00:01:04] the downside in a relatively predictable
+[00:01:07] manner
+[00:01:08] okay so we profit from volatility when
+[00:01:11] is the market the most volatile it's in
+[00:01:14] the morning okay it's in the morning at
+[00:01:16] the open 9:30 to 10:30 in the morning
+[00:01:18] the first hour is when we have the most
+[00:01:21] volume in the market okay so we have a
+[00:01:25] lot of volatility and we have a lot of
+[00:01:27] volume now the advantage of having that
+[00:01:28] volume is it provides liquidity when we
+[00:01:32] have a lot of volume it means there's a
+[00:01:33] lot of buyers and a lot of sellers so we
+[00:01:36] can easily get in and out of trades and
+[00:01:39] now on the flip side mid day we can have
+[00:01:42] volatile markets but we don't have the
+[00:01:44] volume which means we lack liquidity
+[00:01:47] which means it'll be harder to get in
+[00:01:49] and out of stocks okay especially if we
+[00:01:52] want to take large size so my focus has
+[00:01:56] always been trading at the open and
+[00:01:58] trading in the morning I find that the
+[00:02:01] first one to two day trades usually four
+[00:02:04] out of five days I can hit my goal in
+[00:02:06] the first thirty minutes with one to two
+[00:02:08] trades I keep it simple I try to hit my
+[00:02:11] daily goal and then
+[00:02:13] ease up right we know how quick it is to
+[00:02:16] lose money so once we have some money in
+[00:02:19] our pocket we want to hold on to that
+[00:02:21] alright so we know we want to find
+[00:02:24] stocks that are moving but finding
+[00:02:26] stocks are gonna move in a relatively
+[00:02:28] predictable way is the struggle right
+[00:02:30] that's the struggle for every trader how
+[00:02:32] do we find a stock that's gonna make a
+[00:02:34] move and get in with a low risk entry
+[00:02:37] and that's the name of the game finding
+[00:02:39] low-risk entries every time we trade we
+[00:02:42] know we're exposing ourselves to risk so
+[00:02:44] how do we minimize that risk that's what
+[00:02:48] we call finding a good set up any good
+[00:02:50] set up is an opportunity for us to get
+[00:02:53] into a trade with this little risk as
+[00:02:55] possible so a good set up means we might
+[00:02:58] be risking $100 but we have the
+[00:03:00] potential to make 300 okay so we would
+[00:03:04] call that a three-to-one profit loss
+[00:03:05] ratio risking 100 to make 300 is 3 to 1
+[00:03:09] all right now on the flip side if you
+[00:03:12] get in a setup where you're risking $100
+[00:03:15] to make 10 you have a negative risk
+[00:03:17] reward ratio and that's going to be a
+[00:03:19] trade that you should not take all right
+[00:03:22] so we're always looking for
+[00:03:23] opportunities to get low-risk entries
+[00:03:25] with big wind potential but being able
+[00:03:29] to identify setups that have big wind
+[00:03:32] potential is also part of the learning
+[00:03:34] process right as a beginner trader you
+[00:03:36] may not be able to differentiate
+[00:03:38] different setups and recognize what is a
+[00:03:41] homerun potential flag and what is a
+[00:03:44] most likely failing flag that's
+[00:03:48] something that comes with experience but
+[00:03:50] also with training okay so our job as
+[00:03:54] day traders is to always hunt for volume
+[00:03:58] and volatility
+[00:04:00] okay so we're searching the market all
+[00:04:02] day long looking for that volatility so
+[00:04:07] we look for earnings releases we look
+[00:04:09] for press releases any type of catalysts
+[00:04:14] that can cause big movement in the stock
+[00:04:16] we're gonna be interested in it all
+[00:04:18] right and it comes in many forms and
+[00:04:20] we'll review those in more detail later
+[00:04:21] in the course
+[00:04:24] so here's another question why do most
+[00:04:27] traders fail right day trading requires
+[00:04:31] you to make quick decisions and at the
+[00:04:34] same time it requires you to be very
+[00:04:36] disciplined right now when we hear
+[00:04:39] breaking news that activist investor has
+[00:04:42] just taken a stake in Amazon okay the
+[00:04:45] initial reaction might be to load the
+[00:04:47] boat let's buy 5,000 shares of Amazon
+[00:04:50] right put put on a big order that's like
+[00:04:52] a 1.5 million dollar order right but you
+[00:04:57] need to be able to make a quick decision
+[00:04:58] whether you should buy or sell or short
+[00:05:01] that stock and make it with discipline
+[00:05:04] does this fit into my trading strategy
+[00:05:06] what strategy would this fit into if
+[00:05:08] this trade goes the wrong way what is my
+[00:05:11] stop how much my risking in this trade
+[00:05:14] and what is the reward potential right
+[00:05:16] being able to make all those decisions
+[00:05:18] and making sure those decisions fit into
+[00:05:21] our risk tolerance and our strategy
+[00:05:24] parameters is what for a lot of traders
+[00:05:27] is very difficult it's multitasking but
+[00:05:30] it's multitasking when you're under
+[00:05:32] stress you know there's times where I've
+[00:05:35] been in a trade where I had too much
+[00:05:37] sighs maybe I had 10,000 15,000 shares
+[00:05:40] and all I need to do is sell and I'm
+[00:05:44] looking at my keys and it becomes hard
+[00:05:47] to even figure out how to punch the
+[00:05:50] right keys you just sort of get this
+[00:05:52] moment of paralysis where you're
+[00:05:54] overwhelmed and any time that happens
+[00:05:57] you realize that you pushed yourself a
+[00:05:59] little too far out of your comfort zone
+[00:06:01] and that will happen to every one of us
+[00:06:03] I mean it happened it's happened to me
+[00:06:05] it'll happen to all of you from time to
+[00:06:07] time right it's it's good to work on the
+[00:06:09] edge of our comfort levels so we're
+[00:06:11] always pushing our boundaries but if we
+[00:06:13] find ourselves far outside our comfort
+[00:06:15] level and outside our risk tolerance we
+[00:06:18] can really end up making some big
+[00:06:20] mistakes so it's always good to be in
+[00:06:22] touch with ourselves both of our sort of
+[00:06:24] emotional state of you know are you
+[00:06:26] focused are you calm are you making good
+[00:06:29] decisions you know and also be in touch
+[00:06:32] with
+[00:06:33] the result of your decisions are you
+[00:06:36] trading profitably have you had five
+[00:06:38] winners in a row or if you had five
+[00:06:40] losers in a row right because inevitably
+[00:06:42] when we get on the losing streak it's
+[00:06:44] going to start to impair our judgment so
+[00:06:47] being able to be in touch with your own
+[00:06:49] emotions and maintain composure even
+[00:06:52] through a losing streak is really really
+[00:06:54] critical
+[00:06:55] okay so skill and discipline these are
+[00:06:58] like muscles they require exercise to
+[00:07:01] grow and it's not something that once
+[00:07:03] you grow them you have them forever and
+[00:07:05] you don't have to work on them anymore
+[00:07:06] you still have to exercise them right
+[00:07:09] and that that's what I experience every
+[00:07:11] day I'm still exercising my ability to
+[00:07:14] have self-control to have discipline
+[00:07:16] right now the skill is something that
+[00:07:19] I've built up so you can't take away the
+[00:07:22] skill to ride a bicycle and you can't
+[00:07:24] take away the skill to identify good
+[00:07:26] stock charts right those are skills but
+[00:07:29] the discipline is something that we
+[00:07:31] always have to work on and the skills
+[00:07:33] you know in truth or something that
+[00:07:36] we're always developing and refining
+[00:07:39] it's this is a job where we're always
+[00:07:42] learning which is great it's very
+[00:07:45] stimulating but it's important to
+[00:07:49] remember that if you start to get
+[00:07:51] complacent and think oh I know
+[00:07:52] everything you know I don't need to you
+[00:07:55] know I don't need to study anymore
+[00:07:57] oftentimes you'll get a quick correction
+[00:07:59] and you'll lose money so that's the
+[00:08:01] market correcting you all right so being
+[00:08:06] able to make quick decisions and follow
+[00:08:09] your trading rules that is critical for
+[00:08:12] success in the market as we go on with
+[00:08:16] this course we're gonna talk a lot about
+[00:08:18] risk management everything that we do is
+[00:08:21] gonna come back to how are you managing
+[00:08:24] risk because ultimately that is the most
+[00:08:27] important concept for a trader to
+[00:08:29] understand all day long I'm managing
+[00:08:33] risk that's what I'm doing I'm trading
+[00:08:35] stocks but I'm managing risk okay so
+[00:08:38] we're gonna teach you how to manage risk
+[00:08:39] so you can make good decisions all right
+[00:08:43] now next how do you find trades
+[00:08:46] okay this is really hard for line new
+[00:08:48] traders you may understand the theory of
+[00:08:50] trading but when it comes down to
+[00:08:52] actually finding setups in real time it
+[00:08:56] can be really difficult
+[00:08:57] I certainly experienced this as a new
+[00:08:59] trader I might be able to see setups in
+[00:09:01] hindsight when I looked back on charts
+[00:09:03] during the day but to find them while
+[00:09:06] the day was unfolding was really
+[00:09:08] difficult for me so we're gonna go over
+[00:09:11] how to find the trades right so first
+[00:09:14] we'll start with scanning how do we scan
+[00:09:16] the market to find stocks that are set
+[00:09:19] up in a good way so first we have to
+[00:09:21] find the stocks and then once we've
+[00:09:23] found the stocks we'll start to look for
+[00:09:25] the individual setups okay now we are
+[00:09:29] going to be very specific about what
+[00:09:31] types of stocks and what type of setups
+[00:09:34] were willing to trade alright and I
+[00:09:37] focus a lot on quality versus quantity
+[00:09:39] now there are millions of traders out
+[00:09:42] there and there are millions of
+[00:09:43] strategies out there I'm trading a
+[00:09:46] strategy that works for me right and
+[00:09:49] that's what we're teaching and we're
+[00:09:50] finding that it works really well for
+[00:09:52] our students as well so it's a strategy
+[00:09:53] that's easy to implement easy to learn
+[00:09:56] and for a lot of our students and
+[00:09:59] certainly for me has been very
+[00:10:01] profitable okay so that means only
+[00:10:03] taking the best setups and waiting on
+[00:10:06] the sidelines until we see something
+[00:10:08] worth trading and this gets into the
+[00:10:11] value of patience learning to be patient
+[00:10:13] is extremely important there are a lot
+[00:10:16] of traders out there that are over
+[00:10:17] traders if you over trade that's where
+[00:10:20] you're gonna see yourself trading 20 30
+[00:10:23] 40 times a day that's over trading over
+[00:10:27] trading results in very high commissions
+[00:10:30] your broker will love you but you're
+[00:10:33] paying him a lot in commissions to do
+[00:10:35] all those trades okay so you're gonna
+[00:10:37] lose money in commissions you're also
+[00:10:40] gonna lose money on trades that go south
+[00:10:42] because of slippage slippage is an
+[00:10:44] inevitable factor in the market slippage
+[00:10:47] is when you go to sell and you thought
+[00:10:49] you're selling at $5 but the market
+[00:10:51] filled at 490 so you lost an extra 10
+[00:10:54] cents and so what it's an extra ten
+[00:10:57] cents it's not that big a deal but when
+[00:10:59] you
+[00:10:59] an over trader and you're trading 20 30
+[00:11:02] 40 times a day that slippage starts to
+[00:11:05] really add up right 10 cents with a
+[00:11:08] thousand shares is $100 if you do that
+[00:11:10] ten times in a day with slippage you
+[00:11:12] just lost a thousand bucks right so you
+[00:11:15] can see how if you're going to put
+[00:11:17] yourself into the market and take a
+[00:11:18] trade you're you know you're immediately
+[00:11:21] exposing yourself to the potential of
+[00:11:23] slippage and the potential of other
+[00:11:26] forms of risk that we'll review later in
+[00:11:27] the course okay so as soon as you're in
+[00:11:29] a trade you're exposed to risk so we
+[00:11:32] don't want to expose ourselves to risk
+[00:11:33] unless we have proven that this is a
+[00:11:36] setup and a strategy worth trading okay
+[00:11:41] so my strategy is a pattern based
+[00:11:44] strategy I don't care about companies I
+[00:11:47] don't care about what they do I don't
+[00:11:49] care about their earnings I just care
+[00:11:52] about the patterns I focus on charts
+[00:11:55] okay and I focus on the symbols I know
+[00:11:58] more stock symbols than I know the names
+[00:12:00] of companies I've trained myself to just
+[00:12:04] focus on the patterns the candlesticks
+[00:12:06] and the symbols I don't mingle
+[00:12:08] fundamental analysis with technical
+[00:12:11] analysis I focus just on the technicals
+[00:12:14] now with that said I do hunt for a
+[00:12:17] fundamental catalyst a reason why a
+[00:12:20] stock is running up if we have a stock
+[00:12:22] that's running up 80% I want to know
+[00:12:25] what the catalyst is oh it's a
+[00:12:26] biopharmaceutical stock they just got
+[00:12:28] FDA approval or they just passed through
+[00:12:31] clinical trials okay there's a catalyst
+[00:12:33] there I can understand that right but
+[00:12:37] beyond that I'm not gonna be sifting
+[00:12:38] through the conference cup I'm not gonna
+[00:12:41] be able to sitting in on conference
+[00:12:42] calls and I could be sifting through
+[00:12:43] their earnings papers I don't care about
+[00:12:45] that stuff I'm not a long-term investor
+[00:12:48] I'm a day trader we trade very very
+[00:12:51] quickly sometimes we trade as quickly as
+[00:12:54] 10 second to 30 second long trades and I
+[00:12:59] can tell you from experience that in ten
+[00:13:01] seconds you can make thousands of
+[00:13:03] dollars I've done it in ten seconds you
+[00:13:07] can also lose thousands of dollars I've
+[00:13:09] done that too so both ways the market
+[00:13:12] moves quickly we need to make
+[00:13:13] sure we're positioned in the right place
+[00:13:15] to take advantage of the profits and
+[00:13:17] reduce our risk exposure all right and
+[00:13:23] it's really important to recognize that
+[00:13:24] like I said millions of traders out
+[00:13:26] there millions of strategies but every
+[00:13:29] trader needs an edge okay
+[00:13:31] and you need to find your spot in the
+[00:13:32] market where you feel comfortable my
+[00:13:35] edge is focusing on patterns okay I
+[00:13:38] focused on patterns because this is just
+[00:13:40] what worked for me
+[00:13:41] now before I was a day trader I worked
+[00:13:43] as an architect in New York City
+[00:13:45] patterns have always been something that
+[00:13:48] fascinate me I'm drawn to patterns I
+[00:13:51] pick them out everywhere I see them on
+[00:13:54] charts and I recognized early on in my
+[00:13:56] trading career that the best setups or
+[00:13:59] breakouts of patterns very simple
+[00:14:02] patterns a breakout of resistance a
+[00:14:04] breakdown of support these patterns work
+[00:14:07] really well and the reason they work
+[00:14:09] really well is because so many people
+[00:14:10] are watching them okay now using this
+[00:14:15] strategy I can be wrong forty percent of
+[00:14:19] the time and still make money that's
+[00:14:22] because I'm using proper risk management
+[00:14:25] so we'll talk about the risk management
+[00:14:28] parameters that I use later in the
+[00:14:30] course but just at this point remember
+[00:14:32] that we don't have to be right a hundred
+[00:14:34] percent of the time to make money we can
+[00:14:36] be right even just fifty percent of time
+[00:14:39] and you can still book a profit okay now
+[00:14:43] another thing to remember is that in
+[00:14:44] this market right now over sixty percent
+[00:14:47] of the volume is algorithmic
+[00:14:50] high-frequency trading
+[00:14:51] that means we're trading against
+[00:14:53] computers so if you've ever tried to
+[00:14:55] play chess against a computer you know
+[00:14:57] you're always gonna lose you will always
+[00:15:00] lose we're trading stocks against
+[00:15:03] computer systems okay sixty percent of
+[00:15:06] the volume is algorithmic trading that
+[00:15:09] for us on the one hand represents a
+[00:15:12] problem it means that the majority of
+[00:15:14] stocks that we're looking at the the
+[00:15:16] price action that we're seeing is simply
+[00:15:19] the result of computers and moving
+[00:15:21] shares around okay now on the other hand
+[00:15:24] it means that there's a small
+[00:15:27] handful of stocks each day that are
+[00:15:29] gonna be trading on such heavy retail
+[00:15:31] volume okay retail as opposed to
+[00:15:35] institutional algorithmic trading we'll
+[00:15:37] be trading on such high retail volume
+[00:15:39] that we will overpower the algorithmic
+[00:15:43] trading and we will as retail traders
+[00:15:44] control that stock we focus on trading
+[00:15:48] those stocks each day those are stocks
+[00:15:51] typically that are gapping up on
+[00:15:53] earnings a PR of some type they have a
+[00:15:57] ton of retail interest and a ton of
+[00:16:01] retail volume so regular traders like
+[00:16:04] myself and all of you are going to be
+[00:16:06] buying these stocks and we're
+[00:16:07] overpowering the computer systems okay
+[00:16:10] so these are the stocks that are gonna
+[00:16:12] run up 20 30 40 % intraday we've even
+[00:16:15] seen stocks around 200% intraday you get
+[00:16:19] a big catalyst like FDA approval on a
+[00:16:21] new drug and all the retail traders see
+[00:16:24] it and they buy that stock is going up
+[00:16:27] okay so we focus on that handful of
+[00:16:30] stocks now if we try to trade the stocks
+[00:16:32] that are trading on very light volume
+[00:16:35] and if you think that 60% of the volume
+[00:16:38] in the market is high-frequency trading
+[00:16:40] 60 percent on average so it's going to
+[00:16:42] be much higher on some stocks and much
+[00:16:44] lower on others so if we trade the
+[00:16:47] stocks that are dominated and much
+[00:16:49] higher in high-frequency trading
+[00:16:50] we're gonna lose money hands down every
+[00:16:52] time it's very hard to make money when
+[00:16:55] you're trading against a computer okay
+[00:16:58] so instead we should try to focus on the
+[00:17:00] stocks that are gonna have a very low
+[00:17:02] level of institutional high frequency
+[00:17:04] trading okay so those are gonna be the
+[00:17:07] stock that have therefore a high level
+[00:17:09] of retail interest and what creates a
+[00:17:11] high level of retail interest or buzz
+[00:17:13] around the name it's going to be news
+[00:17:17] okay so every single day I'm looking for
+[00:17:20] the catalyst that's gonna drive the
+[00:17:21] small handful of stocks up
+[00:17:28] all right so pattern trading when price
+[00:17:31] action is plotted on a chart patterns
+[00:17:33] are formed I personally use candlestick
+[00:17:36] charts so each candlestick represents a
+[00:17:39] period of time and you can choose the
+[00:17:41] timeframe of the chart that you're
+[00:17:42] looking at you can choose daily charts
+[00:17:45] hourly charts 5-minute charts 1 minute
+[00:17:48] charts etc I prefer one minute and
+[00:17:51] 5-minute candlestick charts okay here's
+[00:17:56] an example of what a candlestick looks
+[00:17:57] like you have the low which is the
+[00:18:00] bottom of the candle wick you have the
+[00:18:02] high which is the high of the candle
+[00:18:04] wick you have the open which is the
+[00:18:07] bottom of the body right here in the
+[00:18:10] case of a green candle and you have the
+[00:18:11] close which is the top of the body in
+[00:18:13] the case of a green candle okay this
+[00:18:17] upper area here this is the upper candle
+[00:18:19] wick this lower area is the lower candle
+[00:18:20] wick okay so these are candlesticks
+[00:18:24] candlesticks can tell us a great deal
+[00:18:26] about the general trend of a stock okay
+[00:18:33] large body candles like this one right
+[00:18:35] here are very bullish candles like this
+[00:18:39] that have a high wick and a low wick are
+[00:18:41] usually going to be a little bit more
+[00:18:43] indecisive candles of indecision okay in
+[00:18:47] red candles that have this big red body
+[00:18:49] means that open was at the high and the
+[00:18:51] closes at the low this is a pretty good
+[00:18:53] indication of bearishness in the market
+[00:18:55] right so just by learning to read
+[00:18:59] candlesticks we can begin to generate
+[00:19:01] some opinion on what's the general
+[00:19:04] attitude for the stock okay and we'll
+[00:19:11] review more of these later these
+[00:19:12] candlesticks how they form patterns this
+[00:19:15] pattern right here is called a flag you
+[00:19:17] have three big candles going up it can
+[00:19:20] be anywhere from 3 to 10 or whatever you
+[00:19:22] have a series of candles shooting up and
+[00:19:25] then you have a series of candles
+[00:19:26] consolidating this is a move a stair
+[00:19:30] step consolidation resting another move
+[00:19:34] up this is a very common pattern that we
+[00:19:36] see
+[00:19:39] here's another one
+[00:19:41] a pop-up consolidation and then another
+[00:19:46] move up stair stepping very common
+[00:19:49] patterns
+[00:19:50] I love trading patterns because everyone
+[00:19:55] can see this everyone is watching this
+[00:19:58] stock because this stock is a hot name
+[00:20:00] today it's a hot stock right it's a
+[00:20:03] gapper it has everyone's attention so
+[00:20:06] we're all watching it we see this
+[00:20:08] pattern unfolding it has resistance at
+[00:20:11] 37 50 that's a very clear visually it's
+[00:20:15] very clear as soon as we break 3750
+[00:20:18] buyers come in and anyone that is short
+[00:20:21] covers and you get that spike up okay
+[00:20:25] then it consolidates again here you guys
+[00:20:29] that have followed me for a while you
+[00:20:30] know that I trade the first and the
+[00:20:32] second pullback okay so here's the first
+[00:20:34] flag the first pullback here's the
+[00:20:36] second pullback
+[00:20:37] I never trade almost never trade the
+[00:20:39] third I trade the first and second
+[00:20:42] pullback we'll review that more when we
+[00:20:45] review my actual trading strategies and
+[00:20:48] setups but just for now recognize that
+[00:20:51] these patterns are very well respected
+[00:20:54] in the market but remember they're only
+[00:20:56] well respected on that small handful of
+[00:20:59] stocks that have a lot of volume this is
+[00:21:01] not going to be well respected on a
+[00:21:03] stock that's dominated by the computers
+[00:21:06] because these patterns are meaningless
+[00:21:09] okay this is only a value because lots
+[00:21:14] of people are watching these names okay
+[00:21:17] so my routine every morning is finding
+[00:21:19] these names that we should be trading ok
+[00:21:27] so what do other traders do right
+[00:21:29] there's millions of traders out there
+[00:21:31] will some focus on technical indicators
+[00:21:33] like the relative strength index moving
+[00:21:35] average Convergence divergence moving
+[00:21:38] average crossovers okay there's a lot of
+[00:21:40] technical indicators out there there's
+[00:21:42] thousands right and some traders think
+[00:21:46] they have the holy grail of technical
+[00:21:48] indicators you know
+[00:21:50] combination of the relative strength
+[00:21:53] index or the moving average crossover is
+[00:21:55] a 90% successful you know buy set up but
+[00:22:00] I don't believe in any of that stuff
+[00:22:02] I don't believe that stuff works
+[00:22:04] especially over the long term I tried
+[00:22:09] for a long time I did write algorithmic
+[00:22:12] scanners I did some black box trading
+[00:22:14] and what I found was that I would write
+[00:22:17] a set of conditions I would write a
+[00:22:19] formula I would back test it and I would
+[00:22:22] see when I back tested that formula that
+[00:22:24] I would have a you know an 80% chance of
+[00:22:28] being right an 80% success rate okay I
+[00:22:31] would run that formula live for 60 days
+[00:22:34] and what at one time when I first back
+[00:22:38] tested it was an 80% success rate would
+[00:22:41] drop to 40%
+[00:22:43] okay at the end of that 60-day period I
+[00:22:45] would review that formula I would tweak
+[00:22:47] it I would fix it I would bring it back
+[00:22:50] up to 80% so when I back tested it it
+[00:22:52] would say it was 80% successful I'd run
+[00:22:55] it again and the profit curve would drop
+[00:22:58] off again so what was happening well
+[00:23:01] what I was doing was I was writing a
+[00:23:03] formula to match inadvertently I was
+[00:23:07] writing a formula to match a certain set
+[00:23:09] of back test results so every time we
+[00:23:12] change those back test results there was
+[00:23:13] the result of the scanner would change
+[00:23:16] so the scanner was great backward
+[00:23:18] testing but was impossible for were
+[00:23:21] testing it would never run positively
+[00:23:23] forward because the market is always
+[00:23:25] changing okay so that for me I don't
+[00:23:29] think is a sustainable way to trade I
+[00:23:31] think pattern based trading is much much
+[00:23:34] better because these patterns will
+[00:23:35] always be here and retail traders will
+[00:23:37] always be watching them okay now yes we
+[00:23:41] do use the relative strength index for
+[00:23:43] some of our trading in particular
+[00:23:45] reversal trading we have scanners that
+[00:23:48] do rely on a high-low RSI but that is
+[00:23:52] that is more condition to find stocks at
+[00:23:55] extremes it's not by any means a buy or
+[00:23:58] sell indicator
+[00:23:59] it's just something that we use in
+[00:24:01] addition to the pattern based scale
+[00:24:05] that's a great question about the
+[00:24:07] Fibonacci retracement and that's not a
+[00:24:09] tool that I use or an indicator that I
+[00:24:11] use okay so some day traders scalp
+[00:24:16] volume spikes and hi a day moves so they
+[00:24:18] have high of days scanners and anything
+[00:24:21] hitting that high of a scanner with high
+[00:24:22] relative volume they're gonna be
+[00:24:24] watching okay I personally I have high a
+[00:24:28] day scanners but I don't find it to be a
+[00:24:31] successful strategy just to buy a stock
+[00:24:33] because it's hitting high a day I'm
+[00:24:35] usually chasing when I do that and it
+[00:24:37] doesn't work okay and some day traders
+[00:24:43] focus exclusively on counter trend
+[00:24:45] trading now I do it myself some counter
+[00:24:47] trend trading but it's not the
+[00:24:49] cornerstone of my trading strategy okay
+[00:24:56] so with pattern trading the more traders
+[00:24:59] using these patterns the better they
+[00:25:01] work right the more people that
+[00:25:02] recognize that this is the line in the
+[00:25:05] sand or we should be a buyer that means
+[00:25:07] more people are going to buy at that
+[00:25:09] point which means the stock is going to
+[00:25:11] move up faster right the more buyers the
+[00:25:14] quicker it'll move so this is the type
+[00:25:16] of thing where I'm so happy to share
+[00:25:20] pattern based trading not only to help
+[00:25:23] other traders become more profitable but
+[00:25:25] in truth the more people that are
+[00:25:27] trading this strategy the better it'll
+[00:25:29] work and the reason it works is because
+[00:25:31] these small handful of stocks each day
+[00:25:34] are being very well watched so lots of
+[00:25:37] people are watching them for that simple
+[00:25:39] breakout right that flag breakout that
+[00:25:41] wedge breakout the sending wedge that
+[00:25:45] breakout so many people are watching it
+[00:25:47] it comes true
+[00:25:49] okay so pattern trading you have to
+[00:25:52] remember does not work on all stocks and
+[00:25:55] we'll go into the details in our stock
+[00:25:57] selection chapter but it only works on
+[00:26:00] the stocks that have high relative
+[00:26:02] volume okay so volume is relative right
+[00:26:06] some stocks like Apple are going to
+[00:26:08] trade millions and millions of shares a
+[00:26:10] day on average
+[00:26:11] other stocks on average might only trade
+[00:26:14] 500,000 shares a day so what is high
+[00:26:17] volume is going to be relative from one
+[00:26:19] stock to another so we actually look for
+[00:26:22] high relative volume okay if we just
+[00:26:25] look for a high total volume that's
+[00:26:27] gonna really throw us off right because
+[00:26:30] there's some stocks that trade on
+[00:26:31] average with a lot of volume so we just
+[00:26:33] look for what's above average for that
+[00:26:35] stock okay now in particular for pattern
+[00:26:40] trading I am a breakout trader I love
+[00:26:43] buying breakout this is also called
+[00:26:45] momentum trading okay I want to buy when
+[00:26:48] we're having a stock that's running I
+[00:26:50] don't like to buy during consolidation
+[00:26:53] during that waiting and holding phase
+[00:26:55] okay so some of those charts we looked
+[00:26:57] at a few minutes ago we saw that quick
+[00:26:59] pop up followed by that period of
+[00:27:02] consolidation I don't like to buy during
+[00:27:05] that period of consolidation I wait for
+[00:27:07] us to break the top of that resistance
+[00:27:10] area that's gonna be the apex point
+[00:27:13] that's the breakout if I buy there
+[00:27:15] that's where everyone else should be
+[00:27:17] buying who's looking at taking this for
+[00:27:19] the breakout so it's it's just instant
+[00:27:22] it either works instantly or it doesn't
+[00:27:24] so one of the risk factors that we'll
+[00:27:26] talk about later in this course is your
+[00:27:29] exposure time the longer you're in the
+[00:27:31] market the more you're sitting exposed
+[00:27:34] right so I reduce my exposure time by
+[00:27:37] only buying at the breakout instead of
+[00:27:40] buying and holding and waiting which
+[00:27:42] would have increased exposure time I
+[00:27:44] just wait for the breakout and then I
+[00:27:46] punch my order I get in and I get out
+[00:27:49] quickly right I take my money and I run
+[00:27:52] that's been my philosophy trading
+[00:27:55] getting the breakout get your profit and
+[00:27:58] get out of the way right and that's why
+[00:28:01] I only trade the first and second
+[00:28:02] pullback I don't want to overstay my
+[00:28:05] welcome with these setups I know they
+[00:28:08] run quickly but I don't want to stay too
+[00:28:10] long I don't want to be caught in the
+[00:28:13] people in the flood of people selling
+[00:28:15] because they chased it
+[00:28:20] all right so yeah we'll review the apex
+[00:28:24] point on a few trades but we'll do that
+[00:28:27] at the end of the lesson okay now with
+[00:28:34] reversal patterns in contrast to the
+[00:28:36] breakout patterns with reversal patterns
+[00:28:38] we're looking for our clear confirmation
+[00:28:41] that the pattern is beginning to reverse
+[00:28:45] okay so for me this is usually going to
+[00:28:47] be the first candle to make a new high
+[00:28:49] I'm gonna be looking for the first one
+[00:28:51] minute or the first 5-minute candle to
+[00:28:54] make a new high when we review reversal
+[00:28:57] strategies we'll be talking about the
+[00:28:59] rubber band snap back so we think of
+[00:29:01] stocks trading we think of them as a
+[00:29:03] rubber band and when they get really
+[00:29:05] stretched out to the downside inevitably
+[00:29:07] they're due for a correction okay so
+[00:29:10] when a stock is really squeezing down we
+[00:29:13] know at some point it's gonna make a
+[00:29:16] bounce and we want to be in that for the
+[00:29:18] bounce but we don't want to buy it when
+[00:29:20] it's still sell it okay if you buy a
+[00:29:22] stock when it's still selling it's
+[00:29:24] called catching a falling knife right it
+[00:29:27] doesn't sound like a good idea in life
+[00:29:29] and it's not a good idea in trading okay
+[00:29:32] so stocks dropping we want to wait for
+[00:29:34] the confirmation of the reversal that's
+[00:29:36] gonna be the first candle to start
+[00:29:38] making a new high that's the place where
+[00:29:41] I look to jump in all right
+[00:29:44] I set my stop at the lows very important
+[00:29:49] in day trading is setting a stop whether
+[00:29:51] it's mental or alive stop you have to
+[00:29:54] have a line in the sand where you get
+[00:29:56] out okay this is the place where you
+[00:29:59] admit defeat
+[00:29:59] and you say I was wrong I'm getting out
+[00:30:02] of the way now let's be honest I'm a
+[00:30:06] successful trader but I still lose all
+[00:30:08] the time so that means I must have found
+[00:30:10] out a way to be a really good loser and
+[00:30:13] it's true I lose all the time but I lose
+[00:30:16] gracefully I take the losses and I walk
+[00:30:18] away you have to be a good loser if
+[00:30:22] you're not a good loser it's gonna be
+[00:30:23] really hard to be a good trader you just
+[00:30:25] have to be able to walk away when it's
+[00:30:27] the time to step back so you can ask
+[00:30:30] yourself a few questions
+[00:30:31] is the stock still moving up
+[00:30:33] are we still trending up right what is
+[00:30:37] the low of the last five minute candle
+[00:30:39] and have we broken that low because if
+[00:30:41] we broke the low of the last five-minute
+[00:30:43] candle in an uptrend then the trend may
+[00:30:45] be starting to change we have to follow
+[00:30:49] the charts and this is one of the issues
+[00:30:51] where if you combine the fundamental
+[00:30:55] analysis you can start getting yourself
+[00:30:58] into the pattern of justifying staying
+[00:31:02] in a bad trade simply because of the
+[00:31:05] fundamentals well you know it's nice and
+[00:31:08] they make really great sneakers they're
+[00:31:10] definitely not going out of business
+[00:31:11] I'll just hold this longer okay you
+[00:31:14] don't want to do that you want to follow
+[00:31:16] the chart if the chart is telling you to
+[00:31:18] get out you get out you can always get
+[00:31:21] back in but it's really hard to recover
+[00:31:25] from a big loss right you don't want to
+[00:31:28] take a $50 loss well you certainly don't
+[00:31:30] want to take a $200 loss by the time you
+[00:31:33] finally take the you know $800 loss it's
+[00:31:37] really hard to get back from that so
+[00:31:40] it's much better just to take the quick
+[00:31:42] losses get out come back when the timing
+[00:31:45] is better
+[00:31:52] all right now it's also good to keep in
+[00:31:54] mind that stocks will trend with the
+[00:31:56] overall market unless they have a reason
+[00:31:59] not to so this is part of the
+[00:32:02] algorithmic trading this is part of what
+[00:32:04] the computer systems do they're trending
+[00:32:06] stocks with the market ok so the markets
+[00:32:08] moving up stocks are moving up but
+[00:32:10] they're gonna be a handful of stocks
+[00:32:12] that will buck the trend of the market
+[00:32:14] because they have a catalyst again this
+[00:32:16] is what we're looking for that small
+[00:32:18] handful of stocks that are going to be
+[00:32:20] running when the markets tanking are
+[00:32:21] there gonna be tanking when the markets
+[00:32:23] running because they have a reason to
+[00:32:25] make that move that's what we want now
+[00:32:29] if the markets running and these stocks
+[00:32:30] are running too that's fine I have no
+[00:32:32] problem with that we just want to make
+[00:32:34] sure we're trading stocks that are
+[00:32:35] moving because they have a reason to
+[00:32:37] move so when I do reversal trades my
+[00:32:41] favorite reversal trades are on stocks
+[00:32:43] that are selling off because there's bad
+[00:32:46] news out ok a quick sell off because of
+[00:32:49] bad news lots of people are gonna notice
+[00:32:51] it and start watching it for a bottom
+[00:32:53] bounce those are my favorite bottom
+[00:32:55] bounces they can be really really quick
+[00:32:57] really solid
+[00:32:59] okay now stocks are just trending down
+[00:33:01] with the overall market the way oil was
+[00:33:03] a few a few weeks ago you try to do a
+[00:33:07] bottom bounce they pop up 10 cents and
+[00:33:09] then they sell off another 50 cents try
+[00:33:11] to another bottom bounce they pop up 15
+[00:33:13] cents and the miss sell off another 60
+[00:33:14] cents they're selling off because
+[00:33:16] they're trending with the market and
+[00:33:18] it's a weak sector so that's where we
+[00:33:21] have to differentiate is this moving
+[00:33:23] because the market is moving or is this
+[00:33:25] moving because it has a unique catalyst
+[00:33:27] okay so that's where we have to do a
+[00:33:29] little bit of research and as you have
+[00:33:32] more experience as a trader you'll be
+[00:33:34] able to differentiate what is
+[00:33:37] catalyst based price action and what is
+[00:33:39] just you know market general market
+[00:33:42] trending alright so retail traders
+[00:33:47] versus institutional traders okay so
+[00:33:50] retail traders that's all of us regular
+[00:33:52] traders part-time traders full-time
+[00:33:54] traders but we're not working for a firm
+[00:33:56] and we're not managing other people's
+[00:33:59] money okay retail traders we are a small
+[00:34:04] percentage
+[00:34:05] of the volume in the market the majority
+[00:34:07] of the volume of the market is
+[00:34:08] institutional traders these are traders
+[00:34:10] that represent large amounts of capital
+[00:34:13] okay they may be trading with banks
+[00:34:16] hedge funds mutual funds they have a lot
+[00:34:19] of money behind them and they can be
+[00:34:21] very aggressive and we have to be
+[00:34:23] careful that we're not on the wrong side
+[00:34:25] of institutional traders okay but how do
+[00:34:30] we identify where the institutional
+[00:34:33] traders are in the market okay now we'll
+[00:34:37] go over this a little bit later in the
+[00:34:38] class but for right now just recognize
+[00:34:41] that what we want to do is instead of
+[00:34:44] trying to find institutional traders
+[00:34:46] they're everywhere
+[00:34:47] so what we want to try to do is find
+[00:34:49] where are the retail traders hanging out
+[00:34:51] today and let's trade with them okay so
+[00:34:54] think of all the kids on the playground
+[00:34:56] and everyone's hanging out at the slides
+[00:34:58] because that's what's fun okay but
+[00:35:00] you're over fiddling around you know in
+[00:35:03] the sandbox just doing your own thing
+[00:35:06] well you're off on your own in the
+[00:35:08] sandbox trading a stock that no one's
+[00:35:09] paying attention to you're in the wrong
+[00:35:11] place
+[00:35:12] focus where everyone else is focused
+[00:35:15] that is gonna be the stock that's moving
+[00:35:17] okay and there's usually a stock every
+[00:35:19] single day that's getting a ton of
+[00:35:21] action that's what day traders are going
+[00:35:23] to be looking at so can we date trade a
+[00:35:26] stock like apple or Priceline or
+[00:35:28] coca-cola or IBM sure we could but these
+[00:35:34] are slow-moving stocks they're dominated
+[00:35:36] by institutional traders algorithmic
+[00:35:38] traders and in general they're going to
+[00:35:40] be very hard to day trade okay so how do
+[00:35:48] we find what retail traders are focused
+[00:35:50] on how do we find the cool place in the
+[00:35:52] playground there's a couple weights one
+[00:35:54] is watching our scanners okay the stocks
+[00:35:57] that are gapping up the most those are
+[00:36:00] gonna be the stocks that retail traders
+[00:36:01] are watching okay so first watching the
+[00:36:04] gap errs secondly it's good to be in
+[00:36:06] touch with social media stock twits
+[00:36:09] Twitter and see what is trending okay
+[00:36:12] what stocks are trending and this is a
+[00:36:14] especially helpful on stock twits
+[00:36:16] Twitter it's got someone
+[00:36:18] other stuff going on but if you follow a
+[00:36:20] handful of traders then you'll be able
+[00:36:22] to see what everyone's talking about and
+[00:36:24] this is another huge advantage of being
+[00:36:26] in a track a chatroom
+[00:36:27] like the one that we have at warrior
+[00:36:28] trading right you've got hundreds of
+[00:36:30] traders and we're all talking about
+[00:36:32] what's hot today okay so if you're
+[00:36:35] trading completely on your own you know
+[00:36:37] you're off in the corner of the
+[00:36:38] playground you're not in touch with
+[00:36:40] other people are doing inevitably it's
+[00:36:43] gonna make it really hard on yourself
+[00:36:45] you just don't know where the activity
+[00:36:47] is I tried doing that you know I tried
+[00:36:51] trading in a bubble I tried blocking out
+[00:36:53] social media and blocking out you know
+[00:36:55] all these things and just doing my own
+[00:36:56] thing it didn't work it did not work so
+[00:36:59] you can try it if you want my experience
+[00:37:02] was that it didn't work at all okay so
+[00:37:07] what do I do well I don't trade
+[00:37:10] fundamentals right I'm not a value
+[00:37:13] investor I'm not a long-term investor I
+[00:37:15] don't trade Forex I don't trade futures
+[00:37:18] right I don't trade commodities I'm an
+[00:37:21] equities day trader okay and I focus on
+[00:37:25] real stocks we don't trade penny stocks
+[00:37:28] we don't trade the OTC markets we don't
+[00:37:31] trade that junk we trade real stocks and
+[00:37:34] sometimes we are trading coca-cola and
+[00:37:37] sometimes we are trading Apple but we'll
+[00:37:39] be trading the stocks that are having a
+[00:37:40] big day every single day in the market
+[00:37:42] there's a stock having a big day because
+[00:37:44] they released earnings
+[00:37:46] maybe it's Expedia right maybe it's
+[00:37:48] fireEye maybe it's first solar but these
+[00:37:51] are big companies okay these are the
+[00:37:54] companies we're gonna be trading this is
+[00:37:56] how I've made my living it's what works
+[00:37:58] for me this is the strategy that we'll
+[00:38:00] be sharing with you all right so a day
+[00:38:04] in the life for me
+[00:38:05] typically starts around 8:00 a.m. 8:30
+[00:38:08] with pre market scanning okay so pre
+[00:38:11] market I'm scanning to see where is
+[00:38:13] their volume in the market right now
+[00:38:15] as early as 8:30 9:00 a.m. we'll know
+[00:38:18] what stocks are gapping up okay I look
+[00:38:22] at the top 10 Gabor's and I start
+[00:38:24] sorting through the news okay
+[00:38:26] what's the catalyst causing the gap
+[00:38:28] right
+[00:38:30] I put together a watch list I start
+[00:38:31] ruling some out I start picking and
+[00:38:34] choosing which ones do I like which do I
+[00:38:36] not like by 9:00 a.m. we're in the
+[00:38:38] chatroom warrior trading going over our
+[00:38:41] watch list alright going over the watch
+[00:38:43] list with all of our students and all of
+[00:38:44] our traders by 9:30 when the bell rings
+[00:38:48] my orders are ready I've placed orders
+[00:38:51] as early as 9:30 and one second okay and
+[00:38:55] I've been up to thousand dollars in the
+[00:38:57] first five minutes more times than I can
+[00:38:59] count I trade aggressively at the open
+[00:39:02] trading these Gabor's trading these
+[00:39:04] momentum stocks right 9:30 to 12:00
+[00:39:08] that's when I'm the most aggressive
+[00:39:10] that's when we have the most volume and
+[00:39:12] momentum in the market from noon to 4:00
+[00:39:15] I really ease up on the throttle I don't
+[00:39:17] want to go overboard midday and
+[00:39:20] afternoon because that's when we have
+[00:39:22] lower volume in the market lower volume
+[00:39:25] means lower liquidity less liquidity and
+[00:39:27] higher risk okay so after noon I really
+[00:39:30] go easy with the exception of trading
+[00:39:33] breaking news if we have breaking news
+[00:39:36] that's an instant catalyst that's gonna
+[00:39:38] cause a tremendous amount of volume in
+[00:39:43] terms of trading pre-market I avoid
+[00:39:45] pre-market trading because there's very
+[00:39:47] low liquidity there's a very few traders
+[00:39:50] trading pre market which means stocks
+[00:39:53] can pop up a dollar drop a dollar you
+[00:39:56] can't get in and out with large size so
+[00:40:00] I can't go heavy with thousands of
+[00:40:01] shares you have to go really small and
+[00:40:03] you have to use such small positions
+[00:40:05] that for me it's not even worth it if
+[00:40:09] you don't mind trading a couple hundred
+[00:40:10] shares you could trade pre market you
+[00:40:12] know you can size up a little bit pre
+[00:40:14] market maybe a thousand two thousand but
+[00:40:17] you don't have good liquidity and that's
+[00:40:19] why I avoid pre-market trading okay so
+[00:40:23] on a good day I have my goal by 10:00
+[00:40:26] a.m. and I'm easing out lightening up
+[00:40:30] trading and by four o'clock I'm done
+[00:40:32] right but oftentimes by lunchtime I've
+[00:40:36] already hit my goal and I'm gonna be
+[00:40:37] sitting on my hands
+[00:40:39] unless there is that perfect setup from
+[00:40:43] 4:00 to 6:00 p.m. we've got our trading
+[00:40:45] courses and we're reviewing our trades
+[00:40:47] from the day now let's think a little
+[00:40:50] bit about the market okay if you make
+[00:40:53] $1,000 by 10:00 a.m. what do you think
+[00:40:57] you're gonna do are you gonna walk away
+[00:40:58] take the profit some well many will okay
+[00:41:02] so a lot of people if they make their
+[00:41:04] thousand dollars by 10:00 a.m. they're
+[00:41:07] done for the day they're gonna go
+[00:41:08] golfing they're gonna go do whatever
+[00:41:09] they want but if you lost a thousand
+[00:41:13] dollars by 10:00 a.m. most traders are
+[00:41:16] gonna keep fighting it out okay they're
+[00:41:19] gonna stay in the market they're gonna
+[00:41:21] keep trading and they're gonna try to
+[00:41:23] make back what they lost
+[00:41:24] so that means midday trading is
+[00:41:28] dominated by traders that have lost in
+[00:41:30] the morning and they're aggressively
+[00:41:32] trying to make it back that causes a lot
+[00:41:35] of volatility but not in the good way
+[00:41:38] that causes stocks to shoot up and then
+[00:41:41] shoot down because people are going in
+[00:41:42] and out with market orders it's a time
+[00:41:44] that I consider dominated by more
+[00:41:47] amateur trading okay so I go really easy
+[00:41:51] mid day the only trades I take mid day
+[00:41:54] would be breaking news or swing trades
+[00:41:58] trades that were giving a lot of space
+[00:42:00] and that we don't need to micromanage on
+[00:42:02] the 1 minute or 5 minute chart I would
+[00:42:05] not trade the 1 minute or 5 minute
+[00:42:07] midday unless we have a stock that's
+[00:42:09] really running on big momentum in order
+[00:42:15] to get started trading you need a few
+[00:42:17] things you need charts you need a broker
+[00:42:20] you need stock scanners and you're gonna
+[00:42:23] want news okay I use these signal for my
+[00:42:27] charts
+[00:42:27] these signal is a terrific platform for
+[00:42:30] charting now I personally have so many
+[00:42:32] monitors that I have e signal running on
+[00:42:35] one two three four five six different
+[00:42:38] monitors and it's running on six
+[00:42:40] monitors with no lack okay now there are
+[00:42:43] other charting platforms you can use but
+[00:42:45] my problem has been that they result in
+[00:42:48] lab
+[00:42:49] when you try to run them on multiple
+[00:42:50] monitors so East signals very low
+[00:42:52] latency very quick charting software
+[00:42:56] alright in combination with East signal
+[00:42:58] I used has market profile indicators
+[00:43:01] alright these are a custom suite of
+[00:43:03] indicators used by over 15,000 traders
+[00:43:06] on the Bloomberg Bloomberg terminals ok
+[00:43:08] Bloomberg terminals that's what hedge
+[00:43:10] fund traders are using right and I like
+[00:43:13] to see what the big guys are seeing I
+[00:43:14] don't want to be going against them
+[00:43:17] alright so we'll go over those Taz
+[00:43:20] market profile indicators later in the
+[00:43:22] course but for right now right now just
+[00:43:24] know the East signal is the charting
+[00:43:25] platform that I use alright best brokers
+[00:43:31] you need hot keys you need to be able to
+[00:43:34] move in and out of trades quickly ok now
+[00:43:37] I personally use speed trader I love
+[00:43:39] speed trader we've got the direct access
+[00:43:41] routing we have high speed executions
+[00:43:43] and we have hot keys alright so this and
+[00:43:48] we have aggressive pricing so these are
+[00:43:49] some of the real fundamental things to
+[00:43:52] look for in a broker if your broker
+[00:43:54] doesn't have hot keys you're not gonna
+[00:43:55] be able to get internet of trades
+[00:43:56] quickly ok that's critical you need to
+[00:44:01] be able to get in that trades quickly I
+[00:44:02] can't tell you how many times I've been
+[00:44:04] up a thousand dollars in a matter of
+[00:44:08] seconds because all of a Sode
+[00:44:10] all of a sudden the stock spikes right
+[00:44:13] when you see a stock spike like that you
+[00:44:15] want to be able to put money in your
+[00:44:16] pocket and profit from it you don't want
+[00:44:18] to be fumbling with your orders and
+[00:44:20] trying to enter your order window and
+[00:44:22] then confirm it and then send it again
+[00:44:24] it doesn't work you need quick
+[00:44:27] executions all right so I highly
+[00:44:30] recommend a broker such a speech trader
+[00:44:32] it's gonna give you the technology to be
+[00:44:35] the fast day trader you need to be to
+[00:44:37] make money there's a lot of full-service
+[00:44:40] brokers out there each raid Ameritrade
+[00:44:42] those are terrific if you're trading a
+[00:44:44] couple times a month you know a little
+[00:44:47] bit of day trading here and there but
+[00:44:48] mostly you know investing but when
+[00:44:51] you're an active trader meaning 10
+[00:44:53] trades a day or more yeah you need
+[00:44:56] better software ok
+[00:45:00] so remember that brokers will give you
+[00:45:03] four times leverage so if you put in
+[00:45:05] $30,000 you're gonna have a twenty one
+[00:45:07] hundred and twenty thousand dollars of
+[00:45:09] buying power okay so that leverage is
+[00:45:12] Marge you're allowed to trade on margin
+[00:45:14] but you have to be responsible if you're
+[00:45:18] gonna trade on margin you have to be
+[00:45:19] responsible we'll review that in the
+[00:45:21] risk management section of the class
+[00:45:26] scanning tools I use trade ideas and I
+[00:45:29] can't say enough good things about them
+[00:45:31] I love trade ideas 90% of my trades I
+[00:45:34] find on the scanners but I built in
+[00:45:36] trade ideas so you need a way to find
+[00:45:40] stocks I mean this is just part of the
+[00:45:41] deal we need a way to find stocks trade
+[00:45:43] ideas for me that's how I do it all
+[00:45:46] right so when you're in the chat room
+[00:45:47] you can see my screen while I'm screen
+[00:45:50] sharing you can see all my scanners are
+[00:45:52] running you can watch the scanners that
+[00:45:54] I'm watching so if you're in chat you
+[00:45:56] don't need to separately have a
+[00:45:58] subscription to trade ideas you can just
+[00:46:00] watch my scanners and benefit from it
+[00:46:02] but you know if you do go out on your
+[00:46:04] own you want those tools you're gonna
+[00:46:07] need it okay now something I've talked
+[00:46:10] about and I'll say again is that tools
+[00:46:13] are of no value if you don't know how to
+[00:46:15] use them so this course is gonna be
+[00:46:17] focused on teaching you how to use these
+[00:46:20] tools all right and streaming news I use
+[00:46:25] the been Zynga pro for the Squawk Box
+[00:46:27] this is basically a radio that's
+[00:46:30] constantly talking about stock news
+[00:46:33] right breaking news on stocks options
+[00:46:36] activity takeover chat or anything you
+[00:46:40] can think of it's coming out on the
+[00:46:42] radio this is really terrific
+[00:46:44] I love been Zynga for the news alright
+[00:46:48] so I generally when I'm trading news I'm
+[00:46:51] gonna wait for the dust to settle we
+[00:46:53] will go into more detail about news
+[00:46:54] based trading strategies but for right
+[00:46:57] now remember you don't want to be an
+[00:46:59] impulsive trader right we know we have
+[00:47:01] to make quick decisions but we also need
+[00:47:03] to maintain discipline and composure and
+[00:47:06] make sure all of our trades fit within
+[00:47:08] one of the strategies that were
+[00:47:10] there were live training all right now
+[00:47:16] on another note we have to think a
+[00:47:18] little bit about the ebb and flow of the
+[00:47:19] market okay now there are times when the
+[00:47:22] market the overall market is very choppy
+[00:47:25] we it is okay for us and it's advisable
+[00:47:30] for us to adjust our risk based on
+[00:47:32] market conditions
+[00:47:34] if we're gonna period where the market
+[00:47:36] is choppy we're having a hard time
+[00:47:37] generating profits it's a good idea to
+[00:47:40] scale back taper back the risk a little
+[00:47:42] bit right reduce the exposure so our
+[00:47:45] losses aren't so bad then when the
+[00:47:47] market starts picking back up and we get
+[00:47:49] on a hot streak we can start to lean
+[00:47:51] into it a little bit and go heavier so
+[00:47:54] knowing when to lean into trades and
+[00:47:57] when to ease up a little bit is
+[00:47:59] important it's something that will come
+[00:48:01] with experience and we will review that
+[00:48:02] again more in the course okay and you
+[00:48:07] can look at the macro channels on the SP
+[00:48:10] Y and draw trend lines and if you can
+[00:48:12] see that we're trading at the top or a
+[00:48:13] bottom of a macro channel you can expect
+[00:48:16] a little bit of choppiness so it's kind
+[00:48:18] of like a pinball you're bouncing up and
+[00:48:19] down between these channels okay when
+[00:48:22] we're moving between them we often have
+[00:48:24] nice clean moves but we're consolidating
+[00:48:27] along the highs all along the lows we
+[00:48:29] can get a little bit choppiness so
+[00:48:36] something that is absolutely critical
+[00:48:37] for every trader is that you're trading
+[00:48:40] a strategy I wish someone had told me
+[00:48:43] this when I was first starting trading
+[00:48:45] bross you need to trade a strategy if
+[00:48:47] you're trading with real money
+[00:48:48] you must be trading a written strategy
+[00:48:51] it must have historical data to prove to
+[00:48:55] verify that it's worth trading with real
+[00:48:57] money
+[00:48:58] we must justify to ourselves that were
+[00:49:00] worth investing it otherwise we might as
+[00:49:03] well put the money somewhere else in a
+[00:49:05] mutual fund or in a CD because at least
+[00:49:07] there we won't probably lose half of it
+[00:49:09] right but the experience for a lot of
+[00:49:12] traders is that they fail they lose
+[00:49:15] money okay and a large a large
+[00:49:19] percentage of those traders they're not
+[00:49:20] getting the education that all
+[00:49:22] are getting here they're going to be
+[00:49:24] live trading strategies that are not
+[00:49:28] even they're not even hammered out right
+[00:49:31] they're just haphazardly trading a
+[00:49:33] little of this a little bit of that
+[00:49:34] until their accounts gone and then they
+[00:49:36] wonder what happened
+[00:49:37] so everyone here in this class you have
+[00:49:40] the big advantage of working with me and
+[00:49:43] the other traders in our chat room to
+[00:49:46] help develop a strategy worth trading
+[00:49:50] okay so remember the market is gonna be
+[00:49:52] here we don't need to rush this is a
+[00:49:55] marathon not a sprint it's not about
+[00:49:58] making fifty thousand dollars by the end
+[00:50:00] of next week it's about developing a set
+[00:50:02] of skills that can last for a lifetime
+[00:50:06] okay so we don't want to live trade a
+[00:50:09] new strategy until we've proven that
+[00:50:11] it's worth investing in and we don't
+[00:50:13] want to be impulsive and this is part of
+[00:50:16] going back to having patience and it's
+[00:50:19] also a big part of managing risk we all
+[00:50:24] have our place in the market all right
+[00:50:26] trading is not for everyone but for
+[00:50:29] everyone that feels like trading is a
+[00:50:30] good fit for them we still have our own
+[00:50:33] place in the market I may be a 1 minute
+[00:50:36] 5 minute trader you may be a 60 minute
+[00:50:38] 120 minute trader right maybe a 60
+[00:50:42] minute for our trailer he may be a daily
+[00:50:43] trader weekly trader there's a place in
+[00:50:47] the market for everyone okay so you have
+[00:50:49] to find your place what time frame works
+[00:50:52] for you what strategies work for you
+[00:50:53] inevitably what you're learning here are
+[00:50:56] gonna be pieces of the puzzle learning
+[00:50:58] to trade it's like a big puzzle you're
+[00:51:00] gonna look you're gonna get some pieces
+[00:51:01] here in our trading course you're gonna
+[00:51:03] pick up pieces on your own from your own
+[00:51:05] reading your own research inevitably
+[00:51:07] you're gonna create the puzzle it's
+[00:51:09] going to be your own unique trading
+[00:51:11] strategy it's going to be unique to you
+[00:51:13] it'll have a little bit of what Ross
+[00:51:15] does it'll have a little bit of what
+[00:51:16] someone else does you know have a little
+[00:51:19] bit of your own thing you're gonna take
+[00:51:20] what works for you I don't expect
+[00:51:22] everything I do to work exactly for you
+[00:51:25] right we're all individuals we all have
+[00:51:27] our unique approach that's fine that's
+[00:51:29] okay and I'm happy to help you develop
+[00:51:30] the strategy that's going to work
+[00:51:32] you the important thing is that you need
+[00:51:35] to be good at one strategy right one
+[00:51:39] strategy once you can tread water in the
+[00:51:41] market if you can just tread water you
+[00:51:44] can get by right the longer you sit in
+[00:51:48] the market the longer you can be a
+[00:51:51] trader but without blowing up your
+[00:51:53] account the better your odds are this is
+[00:51:57] just a matter of having time in the
+[00:51:59] chair right the more time you see
+[00:52:01] watching these charts the more you learn
+[00:52:03] so this is a job where you survive until
+[00:52:08] you can make it so if you can just
+[00:52:10] survive if you can just break even just
+[00:52:12] tread water until you learn to swim
+[00:52:14] that's what you do and with one set up
+[00:52:16] with one strategy you could be
+[00:52:19] successful and you can tread water and
+[00:52:20] you can just sit and wait for that one
+[00:52:22] setup to come to you right it's like
+[00:52:25] having a very very narrow diet
+[00:52:27] you only eat apples well you just have
+[00:52:29] to wait for apples to come all right and
+[00:52:31] sometimes you're gonna sit and there's
+[00:52:33] not gonna be any apples for a while you
+[00:52:34] just have to wait for them to come to
+[00:52:35] you all right and then eventually you
+[00:52:37] start eating pears and peaches and
+[00:52:39] oranges stuff like that so you start
+[00:52:41] branching out but first you need to get
+[00:52:43] down one strategy okay all right so that
+[00:52:47] can be the gap and go that can be the
+[00:52:48] momentum strategy that can be the
+[00:52:50] reversal strategy or it can be one of
+[00:52:52] your own okay but those are the three
+[00:52:55] that I trade most actively my favorite
+[00:52:57] is the gap ago all right so this was
+[00:53:02] what works for me focusing first on what
+[00:53:05] I was good at and then narrowing down
+[00:53:09] narrowing it down developing that area
+[00:53:12] of strength into a workable strategy and
+[00:53:14] then using that strategy to survive
+[00:53:16] until I could develop others right one
+[00:53:21] of the first things I did as a trader
+[00:53:23] was create an Excel Doc I wanted to
+[00:53:25] trick I want to track all my trades and
+[00:53:27] I actually did this when I was younger
+[00:53:29] when I was I don't know maybe 14 or 15 I
+[00:53:33] had some some stocks that I was buying I
+[00:53:36] was buying Caterpillar and some computer
+[00:53:40] companies and some bicycle companies car
+[00:53:42] companies I was buying stuff that I
+[00:53:44] like with like a hundred shares just a
+[00:53:46] little of this and a little of that
+[00:53:48] and I had it all on a yellow legal pad
+[00:53:50] and I was so pumped to make that kind of
+[00:53:53] spreadsheet on you know legal yellow
+[00:53:54] paperwork I love doing that and as soon
+[00:53:58] as I started trading when I got into it
+[00:54:02] to day trade full-time I opened up my
+[00:54:04] Excel doc and started making a
+[00:54:06] spreadsheet and it was one of the best
+[00:54:07] things I did because I was able to track
+[00:54:11] my performance so I would track ok these
+[00:54:14] trades are this strategy this strategy
+[00:54:16] in this strategy I'll be able to
+[00:54:18] categorize them and then sort that data
+[00:54:21] and I was able to find ok
+[00:54:24] look Ross you're doing a great job
+[00:54:26] buying breakouts of resistance that's
+[00:54:30] where you have the biggest winners
+[00:54:31] that's we have the most consistency
+[00:54:33] focus on that so I highly recommend
+[00:54:36] tracking your trades get to know your
+[00:54:40] statistics you're gonna learn a lot from
+[00:54:42] those all right so homework for today's
+[00:54:46] class start tracking your trades all
+[00:54:50] right and if you're already tracking
+[00:54:52] them and start going through that data
+[00:54:53] and email me Ross the day trade warrior
+[00:54:57] comm with some some of the info that
+[00:55:00] you're picking up I'm gonna be excited
+[00:55:01] to to hear about it okay so that wraps
+[00:55:07] up class for tonight class one of the
+[00:55:10] warrior trading course again any
+[00:55:12] questions please feel free to email me
+[00:55:14] Ross today trig warrior calm

@@ -1,0 +1,554 @@
+# Understanding the Pattern Day Trader Rule (PDT) for Day Traders
+# https://www.youtube.com/watch?v=y_Qp_ev2js8
+# duration_sec: 1314
+
+[00:00:00] What's up everybody? All right, so today
+[00:00:02] we're going to talk about trading
+[00:00:03] terminology and the term of the day is
+[00:00:06] the PDT rule, also known as the pattern
+[00:00:09] day trader rule. Now whether or not you
+[00:00:11] realize it, every single day trader is
+[00:00:13] affected by this rule, including myself.
+[00:00:16] So if you're a beginner trader, you need
+[00:00:18] to understand what the PDT rule is and
+[00:00:21] how it works. Now, as a beginner trader,
+[00:00:24] I personally didn't know what it was,
+[00:00:26] and as a result, I violated the rule and
+[00:00:28] I got flagged by my broker and it was a
+[00:00:30] problem. I want to help you avoid having
+[00:00:33] to go through that same experience, that
+[00:00:35] same frustration. So, that means you
+[00:00:37] need to understand how the rule works,
+[00:00:39] what the thresholds are, what the
+[00:00:41] requirements are, what it means to break
+[00:00:43] it, and what happens when you break it.
+[00:00:46] Now, when we talk about the PDT rule,
+[00:00:48] we're also going to talk about a couple
+[00:00:49] of other terms. And we're going to start
+[00:00:51] by just talking about the definition of
+[00:00:53] day trading. You guys probably all
+[00:00:55] realize this, so we'll just kind of
+[00:00:56] breeze through these, but day trading is
+[00:00:58] defined as buying and selling a stock in
+[00:01:00] the same day. Whether you buy
+[00:01:02] pre-market, during market hours, or
+[00:01:04] after hours, if you buy and sell in the
+[00:01:07] same day, you have executed a day trade,
+[00:01:09] and therefore it's a trade that counts
+[00:01:11] towards this PDT requirement and the PDT
+[00:01:14] threshold. If you're swing trading,
+[00:01:16] you're holding positions overnight, the
+[00:01:18] PDT rule doesn't apply to you. All
+[00:01:20] right? So, some traders with smaller
+[00:01:23] accounts, and you'll understand why in a
+[00:01:24] moment, uh, will swing trade, buying
+[00:01:26] stocks, you know, at the end of the day
+[00:01:28] and then selling them in the morning
+[00:01:29] because they know they can do that
+[00:01:31] without getting flagged. Of course,
+[00:01:33] there's a lot of risk with holding
+[00:01:34] stocks overnight, and I prefer to be a
+[00:01:37] day trader, but that means I need to
+[00:01:39] work within the confines of the rule.
+[00:01:42] Now, whenever you open a brokerage
+[00:01:43] account, you have to declare yourself as
+[00:01:45] either being a professional trader or a
+[00:01:47] non-professional trader. So, who draws
+[00:01:50] the line? I kind of consider myself a
+[00:01:53] professional trader. I've made $200,000
+[00:01:55] in the last 12 months, and I do this
+[00:01:57] full-time, but in the eyes of my broker,
+[00:02:00] I'm a non-pro trader. Why is that? Well,
+[00:02:03] professional traders are traders who
+[00:02:05] have a license. They've been licensed by
+[00:02:07] a broker either with their series 6,
+[00:02:09] series 7, series 63, 65, or 66. And that
+[00:02:13] means they're either a licensed stock
+[00:02:14] broker or a registered financial advisor
+[00:02:17] or something like that. Uh if you are
+[00:02:19] one, you know that you are one, right? I
+[00:02:22] don't have to tell you that you have
+[00:02:23] your license. And if you're not one,
+[00:02:25] then now you know that you would put
+[00:02:26] down non-professional uh under all of
+[00:02:29] those uh questions and boxes. All right?
+[00:02:32] So, when you open an account, uh they
+[00:02:34] want to ask you if you're a professional
+[00:02:36] trader for one very specific reason. NYC
+[00:02:39] and NASDAQ charge professional traders a
+[00:02:43] higher fee for accessing market data.
+[00:02:46] All right, so retail traders, this is we
+[00:02:48] get a discount. We we get a reduced fee.
+[00:02:50] Uh which is awesome. All right, so uh
+[00:02:53] when you're opening your account, they
+[00:02:54] need to know how much to charge you and
+[00:02:56] that's why they're asking you that
+[00:02:58] question. All right. Now, day traders
+[00:03:00] are not required to be licensed. There's
+[00:03:02] no rule that says we have to be
+[00:03:04] licensed. uh as long as we're trading
+[00:03:06] our own money, that's not a requirement.
+[00:03:09] Now, once you open your account, you
+[00:03:12] have two types of accounts that you can
+[00:03:14] open. One is a cash account and the
+[00:03:16] other is a margin account. A cash
+[00:03:18] account is exactly as it sounds. You put
+[00:03:20] in $10,000 and that's the balance of
+[00:03:23] your account. Every time you take a
+[00:03:25] trade, if you buy a stock for $3,000 and
+[00:03:28] then sell it, you have to wait three
+[00:03:30] days before that $3,000 is available to
+[00:03:34] trade with again. So that means your
+[00:03:36] effective tradable balance is only
+[00:03:38] $7,000.
+[00:03:39] This is um the reality of it's almost
+[00:03:42] like waiting for a check to clear. It's
+[00:03:44] just the reality of trading with a cash
+[00:03:46] account. You've got to wait for the
+[00:03:48] settlement period. So, if you have a
+[00:03:50] small account, it really limits the
+[00:03:52] amount that you can trade because you
+[00:03:54] continually have to wait for trades to
+[00:03:57] settle. You can't buy a stock for
+[00:03:59] $10,000 and then sell it the same day
+[00:04:01] and go buy another stock for $10,000.
+[00:04:04] Your money is going to be completely
+[00:04:05] tied up in that position, you know, now
+[00:04:07] for the next three days. So, margin
+[00:04:10] accounts are the solution to that
+[00:04:12] problem. A margin account requires a
+[00:04:15] margin agreement. And what it means is
+[00:04:17] that your broker is basically giving you
+[00:04:20] a line of credit. So they're saying,
+[00:04:22] "Look, you know what? This is going to
+[00:04:23] take 3 days to settle, but don't worry.
+[00:04:26] I know you're good for it. I'm going to
+[00:04:28] go ahead and let you keep trading." So
+[00:04:30] you take the trade for $10,000. You sell
+[00:04:32] it. That trade has to wait 3 days to
+[00:04:34] settle, but you can go ahead and buy
+[00:04:37] another trade for $10,000. In fact, you
+[00:04:39] can do it 10 times and trade with
+[00:04:41] $100,000 in one day. All right? But when
+[00:04:46] you have a margin account, you fall
+[00:04:48] under the PDT rules. So the PDT rule is
+[00:04:51] specifically around trading on margin.
+[00:04:55] And we're going to talk more about that
+[00:04:56] in a second so you understand uh why
+[00:04:59] they created this rule. But trading on
+[00:05:02] margin is what allows day traders to
+[00:05:04] take up to 10, 15, 20 trades a day. And
+[00:05:07] in a single day, we could trade a
+[00:05:09] million dollars worth of stock, even if
+[00:05:11] we only had, you know, a $30,000 uh
+[00:05:14] account balance. So, that allows traders
+[00:05:17] to leverage their money to potentially
+[00:05:19] generate uh some really large gains.
+[00:05:22] Although, of course, you also have the
+[00:05:24] potential to generate uh some large
+[00:05:26] losses. Now, when you get a margin
+[00:05:28] account, you're also given leverage.
+[00:05:31] leverage is uh they take the current
+[00:05:33] balance of your account, if you put in
+[00:05:35] $30,000, and they multiply it by four
+[00:05:38] for intraday trading, which would give
+[00:05:40] you $120,000
+[00:05:42] uh of of cash that you could trade with.
+[00:05:44] And at night, they multiply it by two,
+[00:05:46] which would give you $60,000.
+[00:05:48] So, if you put in $100,000, you've got
+[00:05:50] $400,000 that you can day trade with.
+[00:05:53] And if you put in uh $50,000, you have
+[00:05:56] $200,000. So, uh that's for day trading.
+[00:05:59] the current cash balance multiplied by
+[00:06:02] four. Uh this is, you know, kind of an
+[00:06:05] interesting thing because it allows you
+[00:06:06] to be extremely aggressive. You can
+[00:06:09] trade on borrowed money and so there are
+[00:06:13] traders who have done this and then when
+[00:06:15] you lose borrowed money, you now owe
+[00:06:18] that back to your broker. So you have to
+[00:06:21] be very very careful about trading uh
+[00:06:23] with leverage and trading on borrowed
+[00:06:25] money because the risk is that you can
+[00:06:27] lose money that you don't even have. All
+[00:06:29] right. Now because trading on margin
+[00:06:32] carries risk, uh FINRA and the SEC have
+[00:06:35] created the pattern day trader rule and
+[00:06:38] this is a way of um flagging different
+[00:06:41] types of traders. And if you are
+[00:06:43] considered a day trader, a pattern day
+[00:06:45] trader, uh you will be required to
+[00:06:47] maintain a minimum account balance of
+[00:06:50] $25,000.
+[00:06:52] All right? So, uh the PDT rule says that
+[00:06:55] if you trade more than three times in a
+[00:06:58] fiveday period, uh that then you are uh
+[00:07:01] going to be flagged as a pattern day
+[00:07:03] trader. So, uh, a broker needs to flag
+[00:07:07] you as a pattern day trader, and they
+[00:07:09] need to make sure all accounts flagged,
+[00:07:11] uh, as being pattern day traders
+[00:07:13] maintain a minimum of a $25,000 balance.
+[00:07:17] Now, this is obviously going to be hard
+[00:07:19] for a lot of traders, but if you have
+[00:07:22] less than $25,000 in your account, you
+[00:07:24] are limited to three day trades every
+[00:07:27] five days. And that's that's just the
+[00:07:30] the rule. It's black and white if you're
+[00:07:32] using a margin account. If you're using
+[00:07:34] a cash account, you could day trade
+[00:07:36] more, but you would have to wait 3 days
+[00:07:40] for every trade to settle.
+[00:07:42] Alternatively, you could trade options,
+[00:07:44] which settle overnight. So, some traders
+[00:07:47] with small accounts in the $5 to $10,000
+[00:07:50] range will either swing trade or they
+[00:07:53] will trade options because of the
+[00:07:54] shorter settlement period. uh other
+[00:07:56] traders uh will open accounts
+[00:07:58] internationally that don't uh that don't
+[00:08:01] enforce the PDT rule. And Insure Trader
+[00:08:03] is one of the accounts that I know a lot
+[00:08:05] of traders use. It's located in the
+[00:08:07] Bahamas and they don't enforce the PDT
+[00:08:10] rule. So you can go in there and you can
+[00:08:12] open a margin account with $1,000 and
+[00:08:15] you can buy and sell and buy and sell a
+[00:08:17] 100 times a day. So that's something
+[00:08:20] that a lot of traders have done. I've
+[00:08:22] done it. I've had an account there. Uh,
+[00:08:23] I'll probably have an account there
+[00:08:24] again um shortly as I test out trading
+[00:08:28] with a small account. So, you know,
+[00:08:30] that's an option, but you obviously have
+[00:08:32] the slightly increased risk of putting
+[00:08:35] your money abroad and, you know,
+[00:08:37] offshore and and not knowing, you know,
+[00:08:40] that it has the same level of security
+[00:08:43] as a domestic uh broker.
+[00:08:47] So, I would never put my life savings in
+[00:08:49] an international trading account,
+[00:08:50] whether it was SH Trader or somewhere
+[00:08:52] else. But would I put $1,000 there and
+[00:08:55] see what I could do with it? Yes, I
+[00:08:56] would. And I have before. And when I did
+[00:08:58] that, I took $1,000 and day traded it up
+[00:09:02] to an $8,600 balance in one month.
+[00:09:05] That'd be over $90,000 a year from
+[00:09:07] $1,000 starting balance. So that's the
+[00:09:10] potential of trading uh with a margin
+[00:09:12] account, with a small account, and using
+[00:09:15] leverage. So, you know, to be a
+[00:09:17] successful trader, just sort of as a um
+[00:09:19] as a tangent here, to be a successful
+[00:09:21] trader does not require you uh to have a
+[00:09:24] lot of money. It requires you really
+[00:09:26] just to have skill, to have a strategy.
+[00:09:28] And so, the strategy that I was trading
+[00:09:29] during that month was my momentum day
+[00:09:31] trading strategy, buying stocks that
+[00:09:33] were squeezing up, uh getting in as
+[00:09:35] early as I could, and riding the
+[00:09:37] momentum. So, you can learn more about
+[00:09:39] that in some of my other videos. But uh
+[00:09:41] when it comes to the PDT rule, uh let's
+[00:09:44] talk a little bit about the history
+[00:09:45] behind this rule. So, as you know, if
+[00:09:48] you execute more than three trades in a
+[00:09:51] 5day period, you'll get flagged as a
+[00:09:53] pattern day trader, requiring you to
+[00:09:55] have a minimum of $25,000.
+[00:09:58] Now, uh if you get flagged as a day
+[00:10:00] trader, you can have one free pass. Your
+[00:10:05] you can say to your broker, "Look, I'm
+[00:10:06] sorry. It was a mistake. I didn't know
+[00:10:09] about it." and they can give you one
+[00:10:11] free pass, but only one. If you do it a
+[00:10:13] second time, you will get flagged and
+[00:10:15] your account will get frozen, meaning
+[00:10:17] that you can't execute new trades,
+[00:10:20] unless you increase your account balance
+[00:10:22] to more than $25,000. And if you don't
+[00:10:24] have the money, then essentially you're
+[00:10:27] probably going to end up closing that
+[00:10:28] account and going to open your account,
+[00:10:30] a new account at a different firm and
+[00:10:32] hope that you don't get flagged there,
+[00:10:34] you know, and don't make the same
+[00:10:35] mistake twice. Or maybe you go and open
+[00:10:37] an account with SH Trader. But to give
+[00:10:39] you some history behind the PDT rule,
+[00:10:41] um, as many of you know, day trading
+[00:10:43] became pretty popular in the late 90s,
+[00:10:47] you know, with the the um the.com bubble
+[00:10:50] and all of that stuff. And it really
+[00:10:52] peaked in 1999 and in 2000. Um, the the
+[00:10:57] tech stocks, all the dot stocks, there
+[00:10:59] were just crazy moves. The market was um
+[00:11:03] extremely volatile. there were uh huge
+[00:11:07] short squeezes and you know this rep
+[00:11:11] represented huge opportunities. Traders
+[00:11:13] would get into these stocks the IPOs the
+[00:11:15] dotcom stocks and they would make you
+[00:11:17] know 100% overnight. I mean it was it
+[00:11:20] was crazy how much people were making.
+[00:11:22] And so retail traders you know they
+[00:11:25] followed their dreams they quit their
+[00:11:26] jobs. They just put all their money into
+[00:11:28] the market. They were trading with
+[00:11:30] borrowed money. And then, as many of you
+[00:11:33] know, we had the bubble burst, right? We
+[00:11:37] had the the collapse and uh NASDAQ
+[00:11:40] collapsed 78% off of its highs in the
+[00:11:43] mid200s. So, when that happened, um, a
+[00:11:48] lot of retail traders got crushed. They
+[00:11:50] got completely destroyed. And so as a
+[00:11:54] result of those losses, the SEC wanted
+[00:11:56] to implement some rules um really to
+[00:11:59] help prevent um unsophisticated
+[00:12:02] investors or traders from making those
+[00:12:05] mistakes again. All right. So, uh, SEC
+[00:12:09] worked with NYSC and NASDAQ and they
+[00:12:11] created the pattern day trader rule and
+[00:12:13] they said anyone who executes more than
+[00:12:15] three trades in a 5-day period is a day
+[00:12:18] trader and they need a $25,000 minimum
+[00:12:20] balance. And that would help prevent
+[00:12:23] traders with small accounts being
+[00:12:24] speculative from trading with borrowed
+[00:12:27] money and then ending up ending up
+[00:12:28] losing their shirt. So, you know, this
+[00:12:31] is this is a good thing, I suppose, in
+[00:12:34] theory, but as it turns out, having
+[00:12:38] $25,000
+[00:12:39] does not make you any more qualified to
+[00:12:42] trade stocks. And I know this having
+[00:12:44] worked with thousands of students um
+[00:12:47] over the, you know, the last several
+[00:12:49] years, a lot of students come in with
+[00:12:51] $25,000 accounts and because they have
+[00:12:54] 4:1 margin, they've got $100,000 in
+[00:12:57] buying power. And we've seen traders
+[00:13:00] come into the market and blow up their
+[00:13:02] entire account. Not only lose the
+[00:13:04] $25,000 they initially put in, but now
+[00:13:07] have a margin call and be in debt to
+[00:13:09] their broker $50,000, $60,000, or even
+[00:13:12] the full $75,000.
+[00:13:15] And this is especially true for traders
+[00:13:18] who are shorting stocks. So, let's just
+[00:13:20] look for a second here at DRYS.
+[00:13:23] Now, let's just imagine um
+[00:13:26] let's just imagine, for example, that
+[00:13:28] you got in DRYS and uh I'm going to pull
+[00:13:31] up the chart here that you got in this
+[00:13:33] and you shorted it at uh let's say you
+[00:13:36] shorted DRYS at $5 with 10,000 shares.
+[00:13:41] All right, so we've got $5 right around
+[00:13:44] here. So, you short 10,000 shares at $5.
+[00:13:47] When it goes up to $6, you're down
+[00:13:49] $10,000. All right, so that's not a good
+[00:13:52] trade. you're a little bummed out. Goes
+[00:13:54] up to 674, you're down uh $17,000.
+[00:13:58] All right. It pulls back a little bit,
+[00:14:00] consolidates, whatever. It goes up here
+[00:14:03] through seven, you're down $20,000. Goes
+[00:14:06] up to eight, $30,000. 940,000.
+[00:14:09] $10, you're down $50,000.
+[00:14:12] Right? Pulls back a little bit. You're
+[00:14:14] thinking, "Oh, that's not too bad. Maybe
+[00:14:16] it'll come back." Now, up to 11, you're
+[00:14:19] down 60,000. 12 13 14 15 you're down
+[00:14:24] $100,000. Now imagine if you had a a
+[00:14:27] $50,000 account and you had $200,000 in
+[00:14:30] buying power. Well, maybe you could hold
+[00:14:32] through this pullback. Well, next day it
+[00:14:34] goes to $18 and let's just scale this a
+[00:14:37] little bit. The next day it goes to 24
+[00:14:39] and then it goes to 32 and then it goes
+[00:14:42] to 45 and then it goes to 56 and then 68
+[00:14:47] and then all the way up. This is
+[00:14:48] absolutely insane to $120.
+[00:14:53] I mean, if you can wrap your mind around
+[00:14:55] that, this right here is a a potential
+[00:15:00] catastrophe. You could lose hundreds of
+[00:15:02] thousands of dollars, even millions of
+[00:15:05] dollars on this type of trade. Now,
+[00:15:07] eventually, this stock did come all the
+[00:15:09] way back down. Came all the way back
+[00:15:11] down to $11 almost in just as quickly as
+[00:15:14] it went back up. But if you couldn't
+[00:15:16] afford to hold through that squeeze and
+[00:15:19] you got uh called out of the trade by
+[00:15:21] your broker. If you if you hit your max
+[00:15:23] loss, your broker will close out your
+[00:15:24] account and and you're done. So let's
+[00:15:27] say you know I'm sure there's someone
+[00:15:29] who hit their max loss like right here.
+[00:15:31] If only they could have held through a
+[00:15:33] little bit further, but how do you know
+[00:15:34] when the top is, right? To you don't
+[00:15:37] hold down a million dollars just to come
+[00:15:39] back to break even. That's not risk
+[00:15:40] management. And so the PDT rule uh in a
+[00:15:44] lot of ways is an effort to try to
+[00:15:45] prevent um you know unskilled traders
+[00:15:48] from making really big mistakes. But as
+[00:15:51] I said the amount of money you have does
+[00:15:54] not equal education. So the most
+[00:15:57] important thing uh for all traders to
+[00:15:59] know is that uh being successful is not
+[00:16:01] about having money. It's about having uh
+[00:16:03] training. It's about having skill. It's
+[00:16:05] about learning a strategy. And this is a
+[00:16:07] strategy that can last you a lifetime.
+[00:16:09] So, even today, the PDT rule uh is
+[00:16:12] something that uh I'm affected by. Now,
+[00:16:14] with my account balance being above
+[00:16:16] $25,000,
+[00:16:18] I don't have to worry about it, but I am
+[00:16:20] flagged as being a pattern day trader.
+[00:16:23] All right? So, if you're a new trader,
+[00:16:25] you've got a smaller account, this is
+[00:16:27] something that you're going to have to
+[00:16:28] think about. So, uh let me jump back in
+[00:16:30] here. Um something you'll hear about a
+[00:16:33] little bit is the round trip. All right?
+[00:16:36] So, a round trip in reference to the PET
+[00:16:38] rule uh is when you buy and sell in the
+[00:16:41] in the same day. All right? So, if you
+[00:16:43] buy 10,000 shares today and you sell 10
+[00:16:46] of those shares today, you've made a
+[00:16:48] round trip on 10 of those shares. Yes,
+[00:16:50] you're still holding, you know, 990, but
+[00:16:53] you still executed a day trade. All
+[00:16:55] right? So, if you buy a thousand shares
+[00:16:57] today and you sell a th00and tomorrow,
+[00:16:59] then you didn't execute a day trade.
+[00:17:01] you're not it's not going to count
+[00:17:03] against your max of three if you're
+[00:17:05] under the PDT rule. And as I said, the
+[00:17:07] penalty for breaking the PDT rule, uh
+[00:17:10] you get one free pass, one get out of
+[00:17:12] jail free card and your broker can give
+[00:17:14] you a warning and then if you break the
+[00:17:16] rule a second time, your account will be
+[00:17:18] frozen for 90 days and you can't trade
+[00:17:20] unless you get the balance above
+[00:17:23] $25,000. But as soon as you get the
+[00:17:25] balance above $25,000,
+[00:17:27] uh you can trade before the 90 days are
+[00:17:29] up. So, the solution to the PDT rule,
+[00:17:32] well, swing trading is certainly one.
+[00:17:35] Trading options is another. Uh, the
+[00:17:37] option that um the choice that for me
+[00:17:39] always made the most sense was uh I
+[00:17:41] wanted to day trade. So, I just went and
+[00:17:44] found a broker where I could do it and
+[00:17:46] that was looking for uh brokers that are
+[00:17:48] offshore um you know, or international
+[00:17:50] brokers. If you're already
+[00:17:52] international, well, that makes things
+[00:17:53] pretty easy. for a US resident though it
+[00:17:56] doesn't mean we have to go look for uh
+[00:17:58] you know a place to trade outside the
+[00:18:00] United States which certainly not ideal
+[00:18:03] but we've got to work within the system
+[00:18:04] and this is the system as it stands
+[00:18:06] right now the PDT rule is here it's been
+[00:18:09] here for um a long time I don't see it
+[00:18:11] going anywhere anytime soon so if you
+[00:18:14] are below $25,000
+[00:18:16] uh you don't have a lot of choices and
+[00:18:18] you know there are some traders who will
+[00:18:20] opt to trade at a prop firm now a prop
+[00:18:24] firm will uh ask you to get a license.
+[00:18:27] You have to get licensed to trade there.
+[00:18:28] Uh kind of like trading at a hedge fund.
+[00:18:31] So going through the process of
+[00:18:33] studying, getting licensed, and then uh
+[00:18:36] oftent times you're going to have a
+[00:18:37] profit split where they share some of
+[00:18:39] the profits. You're also going to have a
+[00:18:41] lot of restrictions on your account
+[00:18:42] because you're trading the firm's
+[00:18:43] capital. Um you know, that's going to be
+[00:18:46] a less than ideal scenario. prop firms
+[00:18:49] that allow you to trade without getting
+[00:18:50] licensed are usually kind of like
+[00:18:52] unregulated and um we've heard stories
+[00:18:55] about people putting their money into
+[00:18:57] those kind of prop firms and then them
+[00:18:59] closing their doors and not people don't
+[00:19:01] see that money again. So definitely uh
+[00:19:04] we've never had a prop firm that we
+[00:19:06] would you know stand behind. So your
+[00:19:09] options are somewhat limited if you're
+[00:19:11] below 25,000. I was at one point and I
+[00:19:14] traded with SH Trader for the most part
+[00:19:17] when I was getting started. I was able
+[00:19:18] to maintain that $25,000 minimum. Uh and
+[00:19:21] that's why when I trade in SH my SH
+[00:19:24] trader account now I'm doing it not out
+[00:19:26] of necessity but as out of uh just you
+[00:19:29] know for the sake of it for the sake of
+[00:19:30] practicing trading with a small account
+[00:19:33] because uh I enjoy doing it and I like
+[00:19:35] showing our students the potential uh
+[00:19:37] what you can potentially make when you
+[00:19:39] trade with a small account. So, you
+[00:19:41] know, for me to turn $1,000 into $8,600,
+[00:19:45] that was because I was able to get
+[00:19:47] around the PDT rule and because I was
+[00:19:49] able to actively day trade. Now, with my
+[00:19:52] larger account, once I'm trading above
+[00:19:54] 25,000, I can certainly be pretty
+[00:19:57] aggressive. But, as a beginner trader
+[00:19:59] trading with that size account, I did
+[00:20:02] some really risky stuff. You know, there
+[00:20:05] were times where I took positions that
+[00:20:06] were way too big. you know, I have a
+[00:20:09] $30,000 account and have a hundred
+[00:20:12] $10,000 worth of stock. I mean, that's a
+[00:20:15] crazy amount. Like, you know, 40,000
+[00:20:17] shares of a two $2 stock or something
+[00:20:20] like that. And, you know, I mean, that
+[00:20:23] we see how fast some of these cheap
+[00:20:24] stocks move. Um, we can look, we saw
+[00:20:27] DRYS uh over the last few days, EC
+[00:20:31] today, this stock ran from A$140 to
+[00:20:34] almost $3. That's a 100% intraday move.
+[00:20:37] Granted, with 40,000 shares, could have
+[00:20:39] made $40,000, but at the same time, if
+[00:20:43] you were short, you could have lost that
+[00:20:44] much. Or if, you know, in one of these
+[00:20:46] candles that suddenly drops, you could
+[00:20:48] lose thousands of dollars. So, everyone
+[00:20:52] that's coming into the market, you know,
+[00:20:53] we're all coming in looking for the same
+[00:20:54] thing. We're looking for financial
+[00:20:55] freedom. We're looking for the
+[00:20:57] opportunity to make a full-time living
+[00:20:59] working from home and and that's really
+[00:21:01] the dream, but we have to work within
+[00:21:03] the regulations and, you know, kind of
+[00:21:05] make sure that uh we understand the
+[00:21:07] rules and that we trade safe and we
+[00:21:09] trade smart. So, I hope this video uh
+[00:21:12] has helped you understand the PDT rule,
+[00:21:15] how it's going to affect you, and um
+[00:21:18] what you need to do to uh be mindful of
+[00:21:20] it and and to avoid getting flagged by
+[00:21:22] your broker. So, if you have any
+[00:21:24] questions, please feel free to leave
+[00:21:26] comments below. Uh, I'll definitely
+[00:21:28] answer them or you can email
+[00:21:29] rosswarriortrading.com.
+[00:21:32] All right, thanks guys.
+[00:21:34] Let's be honest. If you made it this
+[00:21:36] far, you must have really enjoyed that
+[00:21:38] video. So, what's stopping you?
+[00:21:40] Subscribe right here and get email
+[00:21:42] alerts anytime I upload new content.
+[00:21:46] Until then, happy surfing.

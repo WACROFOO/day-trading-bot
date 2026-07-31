@@ -1,0 +1,369 @@
+# Case Study of a 113% Gap and Go Day Trading Setup
+# https://www.youtube.com/watch?v=ivuVYHlE_Ow
+# duration_sec: 866
+
+[00:00:00] all right so here we are Tuesday morning
+[00:00:01] and I'm finishing in the green green on
+[00:00:03] two stocks red on two stocks I traded
+[00:00:05] four in total and I took probably about
+[00:00:08] a dozen trades as these stocks were
+[00:00:10] moving up now I started the day in the
+[00:00:12] red which is always tricky I I don't
+[00:00:15] like it when my first trade is a loser
+[00:00:17] and I don't like it when my second
+[00:00:18] trades a loser and if my third trade's a
+[00:00:19] loser I'm starting to feel like three
+[00:00:21] strikes you're out especially depending
+[00:00:23] on the size of the losses if each of the
+[00:00:25] losses are really tiny I may continue
+[00:00:27] but in any case today I started the day
+[00:00:30] with two losers and they were just like
+[00:00:31] backtack rejections and I was like man
+[00:00:33] all right I'm feeling a little nervous
+[00:00:35] so then when that third stock came along
+[00:00:37] I traded it a little more conservatively
+[00:00:39] but it ended up being the winner but I
+[00:00:41] didn't make as much on it as I could
+[00:00:42] have because I was already a little bit
+[00:00:44] cautious from those first two trades so
+[00:00:47] had some gains on that one but it got
+[00:00:50] really choppy and did a nasty false
+[00:00:53] breakout which I'll show you during this
+[00:00:55] recap where I gave back a bunch of
+[00:00:56] profit so we got that drop and then it
+[00:00:59] rallied back up made all the way up to
+[00:01:01] new highs so overall not a super clean
+[00:01:04] day but there were some good
+[00:01:06] opportunities and I did get myself into
+[00:01:08] the green and I'm finishing in the green
+[00:01:09] so let's go ahead and dive into today's
+[00:01:12] trades all right so let's get into it
+[00:01:14] you can see my p&l here on the top of
+[00:01:15] the screen top left corner this is
+[00:01:17] what's streaming while I'm trading so
+[00:01:19] while I'm trading at Warrior trading in
+[00:01:21] the chat room you can see my p&l in real
+[00:01:24] time so you can see when I'm getting in
+[00:01:25] you can see when I'm getting out when
+[00:01:26] I'm up or when I'm down so this morning
+[00:01:28] my first trade was on
+[00:01:30] uh
+[00:01:31] cadl
+[00:01:32] cadl uh this one you can see was on the
+[00:01:36] scanners right down here and it popped
+[00:01:38] up um with some news pre-market and if
+[00:01:42] we look at this chart you'll see this
+[00:01:45] was kind of wild so I got in in the
+[00:01:49] middle of this candle which spiked all
+[00:01:52] the way to a high of
+[00:01:54] 350 um and I ended up losing how much
+[00:01:57] was it
+[00:01:58] 567
+[00:02:01] so it was really wild because basically
+[00:02:03] what happened was I was watching news at
+[00:02:05] the top of the hour 8 a.m. 8 a comes the
+[00:02:08] stock gets the scan I pull it up on the
+[00:02:10] level two I'm like okay I this looks
+[00:02:13] good I'm getting in for the break of two
+[00:02:15] so I got in at it was like 187 or
+[00:02:18] something all of a sudden it zips up to
+[00:02:20] 350 and I was like whoa what is
+[00:02:22] happening and then it flushes back down
+[00:02:25] here on this candle to
+[00:02:26] a120 and I just kind of held through
+[00:02:29] that move cuz I was like what is going
+[00:02:31] on is this something I should be adding
+[00:02:33] to is how good is the news but it just
+[00:02:36] rejected so I would say this was more or
+[00:02:38] less an algo Spike an algorithmic
+[00:02:40] trading Spike where some orders came in
+[00:02:43] all of a sudden the bids and the offers
+[00:02:45] the offers specifically get pulled so
+[00:02:48] the reason this happens is because these
+[00:02:51] highfrequency trading algorithms let me
+[00:02:52] get the Whiteboard out they do not want
+[00:02:54] to become buried in a stock that's
+[00:02:56] ripping up with news so just push this
+[00:02:59] out of the way so what you have here is
+[00:03:02] um so let's just imagine for instance um
+[00:03:06] the level level two on a stock so this
+[00:03:08] stock was at like
+[00:03:10] a120 and we're going to do it sort of
+[00:03:12] like a um a a I don't know what You'
+[00:03:16] call it like we're going to look at it
+[00:03:17] like this so this is a $120 uh$
+[00:03:21] do25 you know
+[00:03:23] $130
+[00:03:24] $150 $2 Etc down here is you know A110
+[00:03:29] a1.
+[00:03:31] 90
+[00:03:33] 80 so when a stock initially starts
+[00:03:38] popping up initially the market makers
+[00:03:40] their job is to make the market so they
+[00:03:42] have orders to buy on the bid down here
+[00:03:44] and they have orders to sell on the ask
+[00:03:47] but if all of a sudden so they're
+[00:03:49] subscribing to Market data and they
+[00:03:50] subscribe to a different level of Market
+[00:03:51] data than you and I would have so if all
+[00:03:54] of a sudden they see a surge of orders
+[00:03:56] come through for you know 50,000 shares
+[00:03:59] or something something like that they
+[00:04:00] see those orders come through and they
+[00:04:03] can begin to pull back on the orders
+[00:04:06] they have and start moving them up in
+[00:04:08] price because otherwise they're going to
+[00:04:10] sell 50,000 shares of this stock to
+[00:04:12] someone at a125 next thing you know it's
+[00:04:15] at$ 250 and they're down over $50,000 so
+[00:04:18] to manage their risk they're
+[00:04:20] automatically adjusting orders based on
+[00:04:22] the market but when we have news in this
+[00:04:24] case you know 8: a.m. top of the hour we
+[00:04:26] have news that comes in all of a sudden
+[00:04:27] these orders come in and then the buy
+[00:04:29] orders just I mean buy orders that might
+[00:04:31] have been otherwise out here all of a
+[00:04:33] sudden they just get pulled off this
+[00:04:35] one's gone this one's gone now there's
+[00:04:36] only a few left and they just start
+[00:04:39] disappearing and that creates a
+[00:04:41] situation where people that are buying
+[00:04:43] or are covering a short are now have no
+[00:04:46] choice but to buy at you know $50 or $2
+[00:04:49] or higher and so all of a sudden you
+[00:04:52] have these stocks that can rip up super
+[00:04:55] super fast and we call it an algo Spike
+[00:04:58] and the reason we call it an Alo spike
+[00:05:00] is because it it really it wouldn't
+[00:05:03] happen if it were not for the behavior
+[00:05:06] of the market makers and essentially
+[00:05:09] they're making the market by being on
+[00:05:11] both the bid and the offer at the same
+[00:05:12] time but they also have to manage their
+[00:05:15] own risk and so they'll pull those
+[00:05:17] orders so they don't become short a
+[00:05:19] stock that's ripping up on great news uh
+[00:05:22] you know or long a stock that's dropping
+[00:05:23] on bad news so they're constantly moving
+[00:05:26] their orders around and in a way you can
+[00:05:28] capitalize on these algo spikes if
+[00:05:30] you're really quick and you're jumping
+[00:05:32] in because some sometimes these make
+[00:05:34] huge moves and they they actually hold
+[00:05:36] up but what can also happen is it makes
+[00:05:41] this initial Spike and then the volume
+[00:05:43] slows down and then all of a sudden they
+[00:05:46] fill their orders back in and now the
+[00:05:49] stock starts dropping because there's
+[00:05:51] not enough buyers so you can get these
+[00:05:53] sort of whips of volatility and that's
+[00:05:55] what we got on cadl so my first trade on
+[00:05:57] it I was in going for for the break of
+[00:05:59] $2 it did break too went all the way up
+[00:06:02] to 330 whatever uh but I stopped out
+[00:06:04] with a loss of
+[00:06:05] $567 all right so that was a news trade
+[00:06:08] uh at 8 a.m. top of the hour next trade
+[00:06:10] was m o Mo also had was a stock that had
+[00:06:14] news this morning this one um also did
+[00:06:17] this Spike right here and this one I was
+[00:06:21] read on again so I jumped in as it was
+[00:06:23] squeezing up to $2 for the break of the
+[00:06:26] whole dollar it goes up to 226 and then
+[00:06:28] it flushes back down and I lost on that
+[00:06:30] one 400 bucks okay fool me once shame on
+[00:06:34] you fool me twice shame on me fool me
+[00:06:36] three times you're not going to fool me
+[00:06:37] three times so that's why when adtx
+[00:06:41] popped up I was like you know what I I
+[00:06:44] don't I I don't know you know this one
+[00:06:47] yeah okay well the other two had news
+[00:06:49] also so so this one has news you know
+[00:06:52] big big deal it didn't matter on those
+[00:06:53] previous two but this one's the one that
+[00:06:57] held all right of course isn't that the
+[00:06:59] way it always goes so I don't take big
+[00:07:02] size on it I trade it much more
+[00:07:04] conservatively I think I bought maybe oh
+[00:07:08] I can't remember was like a th 2,000
+[00:07:09] share starter small size I end up making
+[00:07:12] a little bit of money and then right in
+[00:07:14] this area here so in this area we were
+[00:07:17] getting an ABCD pattern the popup the
+[00:07:20] pullback the popup the pullback and
+[00:07:22] right through there we got a nice
+[00:07:24] squeeze through the highs all the way up
+[00:07:26] to a high of day of about 7 50 so
+[00:07:30] through that move there I got myself up
+[00:07:33] just under $5,000 on adtx now you'll see
+[00:07:37] right now I'm only up 1,400 bucks on it
+[00:07:40] that's right so on adtx I got myself up
+[00:07:43] 5,000 in this part of the move rather
+[00:07:45] than trying to jump in as it was
+[00:07:46] squeezing I was like you know I think I
+[00:07:48] took a small trade in here but I really
+[00:07:49] waited for it to prove itself and got
+[00:07:51] more aggressive in this area here so
+[00:07:53] that was the right move now it drops
+[00:07:55] down I think I took a couple dip trades
+[00:07:57] nothing big but on this
+[00:07:59] right here I got back in anticipating
+[00:08:04] this as an ABCD pattern that we were
+[00:08:06] going to break through this
+[00:08:08] high that was um a fine
+[00:08:14] idea but it did not work in this candle
+[00:08:17] we went all the way up to about 740 and
+[00:08:20] then dropped all the way down to
+[00:08:24] 625 and I was in at about 7 7:30 725
+[00:08:29] with 8,000 shares I was stepping up to
+[00:08:31] the plate I stopped out at about 680 690
+[00:08:36] some 680 something like that I lost four
+[00:08:39] grand so I went from up 4,000 on the day
+[00:08:43] net because even though I was up 5,000
+[00:08:45] on adtx I was still down a th000 from
+[00:08:48] these trades so I went to up uh basic I
+[00:08:51] went from up 4,000 to down about $600 um
+[00:08:55] it was about $500 no it was 600 it was
+[00:08:58] 600 so all of a sudden I'm like wow easy
+[00:09:02] come easy go right and that is trading
+[00:09:05] Easy Come Easy Go I was up 4,000 bucks I
+[00:09:08] I could have taken that off the table
+[00:09:10] but um you know I had a $133,000 day on
+[00:09:13] Friday I've been having some nice green
+[00:09:15] days I thought this setup if we broke
+[00:09:18] through this level we were going to
+[00:09:20] eight well I guess we did uh but not
+[00:09:23] when I thought it would these topping
+[00:09:26] Tails were a warning indicator
+[00:09:30] uh but with this recovery here I sort of
+[00:09:33] thought that we were going to we were
+[00:09:35] going to make an attempt at it what
+[00:09:37] really happened was and this was like
+[00:09:40] instantaneous so it's going up and then
+[00:09:43] instantly drops how's that happen I
+[00:09:45] think someone pressed the sell button
+[00:09:47] for probably a 50,000 share order or
+[00:09:49] more and just sold it basically at you
+[00:09:52] know market price and that caused a
+[00:09:54] flush 50,000 shares going through caused
+[00:09:57] a flush and then more people panicked
+[00:09:58] out and stopped out which caused the
+[00:10:00] volume to go up now maybe the volume on
+[00:10:02] maybe that was a 100,000 share sell
+[00:10:03] order I don't know but it was a big one
+[00:10:05] so a big order goes through it
+[00:10:06] immediately flushes and then people are
+[00:10:08] Panic selling after that could have been
+[00:10:10] a short seller maybe could have been
+[00:10:12] someone who's holding long I'll never
+[00:10:14] really know so speculating I guess
+[00:10:16] doesn't matter but um it was a nasty
+[00:10:19] rejection so then I was like all right
+[00:10:21] I'm going to hold tight for a second so
+[00:10:23] it curls back up here I was like all
+[00:10:25] right well that's a nice curl it comes
+[00:10:28] back up here
+[00:10:29] and at the open I took small size on
+[00:10:32] this trade right here only bought a
+[00:10:34] th000 shares now had I not taken this
+[00:10:37] loss here I might have bought 5,000 or
+[00:10:39] 8,000 shares like I was in on this one
+[00:10:42] but I was down at this point I took a
+[00:10:45] couple scalps in this area so I was down
+[00:10:47] still about 300 on the day and I was
+[00:10:49] like you know think about this Ross
+[00:10:51] you're down $300 on the day it's 9:30 um
+[00:10:54] just you could just call it a red day
+[00:10:56] and it's a small red day it's tolerable
+[00:10:57] it's not that bad uh but I I did like
+[00:11:00] this setup I thought it was going to go
+[00:11:01] so I bought small size if I had gone red
+[00:11:04] and gone to down thousand I think I
+[00:11:05] would have cut it at that point um now I
+[00:11:09] was darn close to my daily goal and I
+[00:11:10] gave back more than half in one trade
+[00:11:12] that's definitely an emotional trigger I
+[00:11:15] was able to keep myself pretty calm um
+[00:11:20] surprisingly but I was I was able to
+[00:11:22] keep myself pretty calm and uh anyways
+[00:11:24] got a little trade here uh and then a
+[00:11:27] little dip and rip on resum up here and
+[00:11:30] I got myself back to up 1,200 bucks and
+[00:11:33] then I gave back 400 of it on I don't
+[00:11:36] know might have been this trade here or
+[00:11:38] something like that anyways I got to a
+[00:11:40] point where I was like you know what
+[00:11:41] let's just take the $800 off the table
+[00:11:43] it's nothing to write home about for me
+[00:11:45] but it's a green day and green is good
+[00:11:48] live to trade another day it's
+[00:11:49] unfortunate that I got caught in that
+[00:11:52] jack knife right there but that's
+[00:11:54] trading you know easy come easy go this
+[00:11:56] is just the way it is and the fact is if
+[00:11:59] it wasn't that one I could have gotten
+[00:12:00] caught in others there was another one
+[00:12:02] right here you know drops and then goes
+[00:12:04] into a halt down there was another one
+[00:12:06] right here there were these two up here
+[00:12:08] so being aggressive on this one today um
+[00:12:11] probably for most Traders didn't pay off
+[00:12:14] super well uh because it was quite
+[00:12:17] choppy I'm not sure why some stocks just
+[00:12:19] are they could be choppy because there's
+[00:12:22] people who have been holding it for a
+[00:12:24] long time who are bag holders who are
+[00:12:26] pressing the sell button it could be
+[00:12:28] choppy because of some degree of
+[00:12:30] institutional trading that's going on
+[00:12:32] you know Big Money traders trying to do
+[00:12:34] something with the stock we saw that
+[00:12:35] with obviously
+[00:12:36] GameStop um you know it's it's just kind
+[00:12:39] of it's kind of hard to say why but when
+[00:12:42] some when a stock shows that it's got
+[00:12:44] this tendency in this Behavior to be
+[00:12:46] choppy um you know at that point I I
+[00:12:49] sort of say all right you know I just
+[00:12:51] probably can't trust this one uh could
+[00:12:54] it go higher today sure I mean there's a
+[00:12:57] lot of time left in the day but there'd
+[00:12:59] be a tradeoff for me continuing to trade
+[00:13:01] and sit here until 4 pm while I might
+[00:13:04] make more money you know time is the
+[00:13:06] thing that um you know you can't get
+[00:13:08] more of so I like to moderate how much
+[00:13:12] time I'm willing to spend sitting in
+[00:13:14] front of the computer staring at these
+[00:13:15] screens and try to live a healthy life
+[00:13:18] so I got in this morning got a couple
+[00:13:20] hours of trading from 7ish until well
+[00:13:23] 10:00 a.m. and that's going to lock it
+[00:13:26] up for me I'm going to I'm going to call
+[00:13:27] it a day so yeah 800 bucks Green Day
+[00:13:30] nothing to be super excited about this
+[00:13:32] month uh I'll have to upload my metrics
+[00:13:34] and I can go over them maybe in
+[00:13:36] tomorrow's recap to see where I'm at on
+[00:13:38] the month I did have one red day last it
+[00:13:42] was actually last Tuesday I'm pretty
+[00:13:43] sure I was red um so I I think I had one
+[00:13:47] red day this month today was pretty
+[00:13:48] close to being a red day but ended up
+[00:13:51] recovering It Anyways being red 500
+[00:13:54] being green 500 doesn't really matter I
+[00:13:56] just try to remind myself these it's
+[00:13:59] neither my best day nor my worst day
+[00:14:01] it's just a regular day so you know who
+[00:14:05] cares it's water under the bridge did
+[00:14:07] the best I could today we'll try again
+[00:14:09] tomorrow and you got just have that
+[00:14:10] attitude trading is risky easy come easy
+[00:14:12] go so life is good I'll be back at first
+[00:14:15] thing tomorrow and I hope you guys enjoy
+[00:14:17] this recap and uh I'll put a link to
+[00:14:19] another episode right here in the top
+[00:14:21] Corner that YouTube thinks you're going
+[00:14:22] to love and I'll see you for tomorrow's
+[00:14:24] recap

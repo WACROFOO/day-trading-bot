@@ -1,0 +1,1395 @@
+# I Want to Improve My Trading Over The Next 4 Weeks…Here’s How I’d Do It
+# https://www.youtube.com/watch?v=tR-tyjV1WQ0
+# duration_sec: 3211
+
+[00:00:00] What's up everyone? All right, so in
+[00:00:02] today's episode, I'm going to teach a
+[00:00:03] class based on a question that was
+[00:00:06] recently asked of me. I had a student
+[00:00:08] who came to me and said, "Ross, I want
+[00:00:10] to improve my trading over the next four
+[00:00:12] weeks. What what are the top things that
+[00:00:14] you think I should focus on?" And I
+[00:00:17] thought about that a little bit. Uh it
+[00:00:18] just happens to be that we're getting
+[00:00:20] ready for the new month. And so it was
+[00:00:22] sort of like, all right, I'm coming to
+[00:00:24] the end of the month and now I'm getting
+[00:00:25] ready to reset. So what can I commit
+[00:00:26] myself to focus on over the next month?
+[00:00:29] But I think that traders uh have this
+[00:00:32] feeling at a lot of different times
+[00:00:34] throughout the year that you know you
+[00:00:36] have a loss or you feel frustrated,
+[00:00:38] you're not happy with your performance
+[00:00:40] and it's like okay, what can I do here
+[00:00:42] over the next few weeks? What what are
+[00:00:45] the top three things that I could focus
+[00:00:47] on that could actually move the needle
+[00:00:50] in improving my trading? And I'm going
+[00:00:53] to share with you honestly what I really
+[00:00:55] think is going to make the biggest
+[00:00:56] difference. Not all of you guys are
+[00:00:57] going to like what I'm going to share,
+[00:00:59] but it's what you need to hear. All
+[00:01:01] right? Might not be what you want to
+[00:01:02] hear, but it's what you need to hear.
+[00:01:03] So, let's go ahead and jump onto the
+[00:01:06] screen share. I want to improve my
+[00:01:08] trading. This is how it's done. For
+[00:01:12] those of you guys tuning in for the
+[00:01:13] first time, I'll introduce myself
+[00:01:15] briefly. My name is Ross Cameron. I am a
+[00:01:18] full-time trader. I funded my first
+[00:01:20] account in 2001.
+[00:01:22] And the strategy that I trade is all
+[00:01:25] about momentum trading. So everything I
+[00:01:28] share with you is really based on the
+[00:01:31] insights I've learned over all of my
+[00:01:32] years of trading and all my years uh at
+[00:01:34] Warrior Trading, teaching beginner
+[00:01:36] traders the strategy that I still trade
+[00:01:38] even to this day. So the first thing
+[00:01:41] that I would ask you if you came to me
+[00:01:44] with the same question of I need to
+[00:01:45] improve my trading and I want to do it
+[00:01:46] over the next few weeks, I would say,
+[00:01:48] well let's set the stage. I need some
+[00:01:50] context here. What are we working with?
+[00:01:52] how bad is the situation? Just like a
+[00:01:54] medic getting out there in the field and
+[00:01:55] assessing uh your patient, you know, I I
+[00:01:59] have to assess the situation. So, what I
+[00:02:02] want to know is what is your current
+[00:02:04] level of accuracy? What is your current
+[00:02:06] profit loss ratio? And what are your
+[00:02:08] total gains or losses? This is your
+[00:02:11] baseline. How much you making or losing?
+[00:02:14] What are your strengths and what are
+[00:02:16] your weaknesses? And have you proven
+[00:02:18] that you can produce profits? Even if
+[00:02:22] you're not consistently producing
+[00:02:23] profits on, you know, every single week
+[00:02:26] or every single month, have you had
+[00:02:28] periods where you have made some money?
+[00:02:31] This is helpful. This is a good starting
+[00:02:32] point. If you haven't, then that's also
+[00:02:34] really helpful information for me. So
+[00:02:36] the first thing that I'll say is that if
+[00:02:39] you're in a place right now where you do
+[00:02:42] not have good accuracy, you do not have
+[00:02:44] a good profit to loss ratio and where
+[00:02:47] you are currently sitting with total
+[00:02:48] losses, not total gains, that speaks to
+[00:02:52] me for the need to further develop the
+[00:02:56] strategy that you're going to be
+[00:02:57] trading. Now what I do for myself is I
+[00:03:01] import all of my metrics to this
+[00:03:02] software right here. I have no affiliate
+[00:03:04] relationship with them. So if you want
+[00:03:05] to use someone else, use someone else.
+[00:03:07] But the nice thing here is you can go
+[00:03:08] and you can import your trades from, you
+[00:03:10] know, dozens and dozens of different
+[00:03:12] platforms. And when you do that, you can
+[00:03:14] go to the reports view here and you can
+[00:03:17] now see all the details behind your
+[00:03:19] trading history. And this is really
+[00:03:21] important because you can now data mine
+[00:03:24] all of these trades to understand
+[00:03:26] patterns in your performance. This could
+[00:03:28] shed light on something you could lean
+[00:03:31] into that's a strength that you may have
+[00:03:32] overlooked or potentially a weakness
+[00:03:34] that you haven't really recognized um is
+[00:03:36] so prominent in your trading. So for me,
+[00:03:39] for instance, when I have all these
+[00:03:41] trades imported, uh you can see my
+[00:03:44] accuracy over the last 10 years is about
+[00:03:47] 68.5%.
+[00:03:49] My average winners are $1,500. My
+[00:03:52] average losers are $1,400.
+[00:03:54] and I've got $21 million in trading
+[00:03:57] profits. That's pretty crazy. Now, the
+[00:04:00] thing that some of you might be
+[00:04:02] surprised at is that if we looked at my
+[00:04:05] average winners, my average winners
+[00:04:08] actually are not that big. In fact,
+[00:04:10] right now they're only about 15 cents
+[00:04:12] per share. Now, if you haven't already
+[00:04:15] watched one of my fulllength classes on
+[00:04:17] how to start day trading where I walk
+[00:04:20] you through the ins and outs of my
+[00:04:21] strategy, I'll put a link to that at the
+[00:04:23] end of today's episode because that's
+[00:04:25] what I would use as your starting point
+[00:04:28] if you're looking for a strategy to
+[00:04:30] begin implementing today. My focus is a
+[00:04:33] small account growth strategy where I'm
+[00:04:34] trading momentum stocks typically that
+[00:04:37] have breaking news between 7 a.m. and
+[00:04:39] 10:00 a.m. Eastern Standard Time. I risk
+[00:04:41] 10% in order to make 10% 1:1 profit to
+[00:04:45] loss ratio. Target accuracy 75% even if
+[00:04:48] I come in a little shy of that that's
+[00:04:50] okay. And target growth for a small
+[00:04:52] account challenge for me is to grow my
+[00:04:54] account by 25% per week. I focus on only
+[00:04:57] trading stocks that meet all five
+[00:04:59] pillars of stock selection right here.
+[00:05:01] Meaning they are uh really an Aquality
+[00:05:04] setup. And these five pillars
+[00:05:06] essentially search for stocks that have
+[00:05:08] a high likelihood of experiencing an
+[00:05:11] imbalance between supply and demand. And
+[00:05:14] then once I found that type of stock, I
+[00:05:16] trade this specific pattern. That's one
+[00:05:18] of my favorite patterns to trade. So if
+[00:05:20] you're at a place right now where your
+[00:05:22] accuracy is struggling, your profit loss
+[00:05:25] ratio is struggling, and you have total
+[00:05:27] losses, that to me speaks to the need to
+[00:05:30] become a master of one strategy. just
+[00:05:33] focus on mastering one. This becomes
+[00:05:36] your bread and butter while developing
+[00:05:38] more advanced strategies and setups
+[00:05:39] later on. My strategy for high accuracy
+[00:05:43] is focusing on 15 to 20 cent base hit
+[00:05:46] winners on momentum stocks. These base
+[00:05:48] hits give me about 72% accuracy versus a
+[00:05:52] home run trader who's going to end up
+[00:05:54] having far lower accuracy. So I share
+[00:05:57] this with you at the beginning of this
+[00:05:59] class because I think for some of you
+[00:06:01] watching you may be thinking I want to
+[00:06:03] improve my trading. In other words, I
+[00:06:06] want to start making money or I want to
+[00:06:08] stop losing money. And that's the the
+[00:06:11] the problem with that is there's a
+[00:06:14] there's a huge gap between I'm losing
+[00:06:17] money and I want to be making money. I
+[00:06:20] mean, it's like, okay, this is
+[00:06:22] wonderful. I it's great to have this
+[00:06:25] goal, but having that goal alone and
+[00:06:28] saying I want to make money next month,
+[00:06:31] that doesn't clearly outline the very
+[00:06:33] specific steps that you need to take in
+[00:06:36] order to move in that direction. So if
+[00:06:39] we start breaking these down step by
+[00:06:41] step, the first step is adopting
+[00:06:45] a strategy, right? Okay. So, you need a
+[00:06:47] strategy number one. And number two, you
+[00:06:50] have to prove that you can be consistent
+[00:06:53] trading that strategy. So, some of you
+[00:06:56] may have already adopted a strategy. You
+[00:06:58] may be kind of, you know, testing out my
+[00:07:00] strategy or or another strategy,
+[00:07:02] whatever the case may be, but you
+[00:07:04] haven't yet proved consistency with it.
+[00:07:06] But that's okay. So, I'm also going to
+[00:07:07] share with you in today's episode the
+[00:07:09] steps I would take to work on this
+[00:07:11] consistency. But if you haven't already
+[00:07:13] adapted a strategy or adopted a
+[00:07:15] strategy, then that's your first step.
+[00:07:17] All right? So depending on where you're
+[00:07:18] at, just be aware that it's critical to
+[00:07:22] become a master of one strategy in the
+[00:07:25] market. And that was for me my turning
+[00:07:28] point. Someone asked me, you know, Ross,
+[00:07:29] what were you trading ju just before
+[00:07:31] your turning point? And I said, well,
+[00:07:33] just before my turning point, I, you
+[00:07:36] know, I I had this sort of long extended
+[00:07:38] learning curve where I initially, you
+[00:07:41] know, from day one ended up making a
+[00:07:43] little bit of money and then I ended up
+[00:07:45] giving it back. This was, this was
+[00:07:48] actually year one. From day one, I was
+[00:07:50] doing well and then year two, I was
+[00:07:52] losing. And going into year three, I
+[00:07:54] continued to lose until I kind of hit
+[00:07:57] this rock bottom period and I started to
+[00:07:59] turn things around. And when I started
+[00:08:01] to turn things around, it wasn't like
+[00:08:03] things all of a sudden um you know just
+[00:08:05] start going straight up. What ended up
+[00:08:07] happening is I started to make a little
+[00:08:08] bit of progress and I give it back and I
+[00:08:10] make a little bit of progress and I give
+[00:08:12] it back. A little bit of progress and I
+[00:08:13] give it back. So I had this long period
+[00:08:15] of being more or less break even. And in
+[00:08:17] this period right here, what was I doing
+[00:08:19] that was working? I was focusing on
+[00:08:22] trading news. I was focusing on breaking
+[00:08:26] news catalyst. However, I was focusing
+[00:08:28] on price range of any any price range
+[00:08:32] float uh or market cap any. So, I was
+[00:08:37] trading high price stocks. I was trading
+[00:08:39] low price stocks. I was trading the S&P
+[00:08:41] 500. Anything that essentially had news,
+[00:08:44] I was trading. So, I was I was in the
+[00:08:48] right direction with looking for news
+[00:08:50] catalyst because news catalysts create
+[00:08:52] volatility. But what I needed to analyze
+[00:08:55] in my metrics was what was happening on
+[00:08:58] these days right here, right? Because if
+[00:09:01] I could take out all of those days, then
+[00:09:03] my account instead would have just been
+[00:09:05] building, right? And so what I
+[00:09:07] discovered was that most of these losses
+[00:09:09] were coming from trading higherriced
+[00:09:12] stocks and most of them were uh also
+[00:09:15] large cap stocks. And so that's what got
+[00:09:17] me focused on adding this new criteria
+[00:09:19] of price between two and 20. Now by
+[00:09:24] implementing uh the price between 2 and
+[00:09:26] 20 I did naturally end up trading less.
+[00:09:30] There were fewer trades but these were
+[00:09:32] the trades that I was already showing
+[00:09:34] that I was trading better and do had
+[00:09:36] higher accuracy on and so when I cut out
+[00:09:38] the other stuff my accuracy improved in
+[00:09:41] total. Now one thing that I would say to
+[00:09:43] beginner traders is to lower your
+[00:09:46] expectations. So I want you to think
+[00:09:48] about two different traders. One trader
+[00:09:51] is up $100,000 on the year and they are
+[00:09:54] miserable. Their goal was 500 grand.
+[00:09:57] Another trader is up $100,000 on the
+[00:10:00] year and is thrilled. Their goal was 50
+[00:10:04] grand. Same amount of money, different
+[00:10:06] perspective. One is quote failing, the
+[00:10:10] other is quote successful, but in fact
+[00:10:13] they've made the exact same amount of
+[00:10:16] money. And so I would encourage you to
+[00:10:19] redefine what success means to you
+[00:10:22] because adjusting your perspective can
+[00:10:25] be a gamecher. In other words, yes, we
+[00:10:29] all have internal benchmarks that we set
+[00:10:32] for ourselves in order to justify the
+[00:10:35] time you spend learning how to trade,
+[00:10:37] getting up early, sitting down here
+[00:10:39] every day. You might think making
+[00:10:41] $25,000 a year is just simply not worth
+[00:10:44] it.
+[00:10:45] And here's what I would caution against.
+[00:10:49] Imagine in your first year, you sat down
+[00:10:52] every single day. You even traded in a
+[00:10:54] simulator. So you made for six months
+[00:10:57] nothing, nothing in terms of real money.
+[00:10:59] But then at the second half of the year,
+[00:11:01] you started trading with real money, but
+[00:11:03] you're trading with just a hundred
+[00:11:04] shares. You're making 15 $20 a day. So
+[00:11:07] by the end of the year, you're up
+[00:11:08] $8,000.
+[00:11:10] It's probably not enough to justify a
+[00:11:11] full year of time. you would have made
+[00:11:13] more doing anything else. But what if
+[00:11:16] you looked at this as this is setting my
+[00:11:18] foundation? Because if I can make $20 a
+[00:11:21] day with 100 shares, what if I increase
+[00:11:24] my share size to a,000 shares? All of a
+[00:11:27] sudden, I'm making 200 a day. What if I
+[00:11:30] increase my share size to 5,000 shares?
+[00:11:32] Now I'm making $1,000 a day. That's
+[00:11:34] $250,000 a year, right? So this is the
+[00:11:38] scalability of trading. And it's not
+[00:11:39] perfectly linear. There is some curve as
+[00:11:42] you scale up. Loss of efficiency, a
+[00:11:44] little bit of slippage on your orders,
+[00:11:46] things like that. But there's no
+[00:11:47] question that if you're consistently
+[00:11:49] making money with a 100 shares, there's
+[00:11:51] a lot of room to scale up your trading.
+[00:11:54] And so it's easy for a trader to be
+[00:11:56] dismissive of the fact that they're only
+[00:11:58] making $25,000 a year. They're only
+[00:12:01] making $50,000 a year when in fact that
+[00:12:05] trader is laying a foundation that they
+[00:12:07] could build from. But they'd be much
+[00:12:09] better set to build on that foundation
+[00:12:12] if they looked at the success that
+[00:12:14] they've already had with a degree of
+[00:12:17] appreciation.
+[00:12:18] You know that they were looking at that
+[00:12:20] $25,000 as an achievement, not as an
+[00:12:24] embarrassment or as a failure. When you
+[00:12:26] change your perspective, all of a sudden
+[00:12:28] now you look at the success you've had
+[00:12:32] and you're grateful for it. And that
+[00:12:34] gives you the sort of emotional strength
+[00:12:38] and confidence to dig deeper, to keep
+[00:12:41] trading and to be, you know, e even more
+[00:12:44] committed to following your rules.
+[00:12:46] Whereas a trader who feels like they're
+[00:12:47] constantly, you know, a a day late and a
+[00:12:50] dollar short is going to start to trade
+[00:12:53] from a place not of abundance, but of
+[00:12:56] desperation and scarcity. So now they're
+[00:12:59] grasping at straws. I really wanted to
+[00:13:01] make 500k on the year. So now in this
+[00:13:04] last, you know, couple weeks of the
+[00:13:06] year, whatever the case may be, they
+[00:13:08] start taking obscene levels of risk to
+[00:13:10] try to get, you know, closer to that
+[00:13:12] goal because anything less than that
+[00:13:14] goal is failure.
+[00:13:16] Redefine what success means to you.
+[00:13:19] Profits are a byproduct of a system. Is
+[00:13:23] it possible for you to focus entirely on
+[00:13:26] the process instead of the desired
+[00:13:28] outcome? And so if we jump back here
+[00:13:30] onto the whiteboard, step one is
+[00:13:32] adopting a strategy. Step two is proving
+[00:13:35] consistency in that strategy. And we're
+[00:13:37] going to talk about some of the um
+[00:13:38] subtips for improving consistency here
+[00:13:41] as we continue on into the class.
+[00:13:43] There's no doubt about that. But number
+[00:13:45] three, focus
+[00:13:48] on process,
+[00:13:51] not profits. The problem with focusing
+[00:13:55] on the profits is it becomes like a
+[00:13:57] mirage. You're constantly chasing the
+[00:13:59] profit and you sacrifice the focus on
+[00:14:02] the process. It's just the same as
+[00:14:04] saying, "Next month I want to make
+[00:14:05] $50,000, but without laying out what's
+[00:14:08] the actual system and process that
+[00:14:10] you're going to follow to achieve that
+[00:14:12] result." So, of course, yes, results are
+[00:14:15] are helpful. You want to have some
+[00:14:16] benchmarks, but you can see in this
+[00:14:18] conversation that we're having these
+[00:14:21] benchmarks when set too aggressively can
+[00:14:25] actually be detrimental to your ability
+[00:14:28] to grow as a trader. That's very
+[00:14:31] interesting to me and I've seen it in so
+[00:14:33] many traders over the years. So, one of
+[00:14:36] the things that I want to encourage you
+[00:14:37] to do right now is an honest assessment
+[00:14:41] both internally and externally. We're
+[00:14:43] gonna do this high level, but it's also
+[00:14:45] something we're going to do every single
+[00:14:47] day when we sit down to trade. So, right
+[00:14:50] now, your internal assessment is an
+[00:14:53] assessment of the strategy that you're
+[00:14:55] currently trading. So, that's when
+[00:14:56] you're looking at your actual profit
+[00:14:58] loss ratio. You're looking at your
+[00:14:59] accuracy, and you're asking yourself and
+[00:15:01] looking at how much you've made and
+[00:15:02] loss, and you're asking yourself what
+[00:15:04] what here is working. So, for me, and
+[00:15:06] I'll just give you an example of a month
+[00:15:08] here that I thought was kind of
+[00:15:09] interesting. So, this was um I'll just
+[00:15:12] switch this here. So, this was um this
+[00:15:15] was a while back, but I had this month
+[00:15:17] where I underperformed my um well, you
+[00:15:21] know, you could say my my goal that I
+[00:15:22] had set for myself. I was kind of
+[00:15:24] frustrated.
+[00:15:25] And so, at the end of the month, I
+[00:15:27] looked at my metrics and there were a
+[00:15:29] couple things I wanted to look at. Uh
+[00:15:31] number one, I wanted to look at my
+[00:15:33] performance by price. And I noticed on
+[00:15:35] this month that I was really uh
+[00:15:37] underperforming on my trades on stocks
+[00:15:39] above $10, but I was doing quite well
+[00:15:42] between two and five or two and 10. And
+[00:15:44] I also noticed that I was
+[00:15:46] underperforming when I was trading
+[00:15:47] earlier and underperforming when I was
+[00:15:49] trading later. And so based on this
+[00:15:53] data, I was able to make a pretty, you
+[00:15:56] know, concrete determination that for
+[00:15:58] the next month, I should focus in on
+[00:16:00] these hours here and stop trading early
+[00:16:03] and stop trading later and I should
+[00:16:05] double down on trading in this price
+[00:16:07] range. It it's not only that I should
+[00:16:09] stop doing this, it's that I should
+[00:16:12] focus on this even more. And so the
+[00:16:15] result was I made 100% more in the
+[00:16:19] following month. I doubled my profit in
+[00:16:21] the following month because I not only
+[00:16:23] eliminated these unnecessary losses, but
+[00:16:25] I was able to increase and extract more
+[00:16:27] profit from the window where I was doing
+[00:16:30] well. So, an honest assessment allows
+[00:16:33] you to understand your current strengths
+[00:16:35] and weaknesses.
+[00:16:36] So, the internal assessment here and
+[00:16:39] we'll just jump back onto the
+[00:16:40] whiteboard.
+[00:16:41] So, we're going to start with the
+[00:16:43] internal. And the things that I'm
+[00:16:45] curious about is your current um
+[00:16:50] strength
+[00:16:52] and weakness
+[00:16:55] when it comes to strategy. This is very
+[00:16:57] specific to the strategy. So, what are
+[00:16:58] your current strengths? You should list
+[00:17:00] them out. And what are your current
+[00:17:01] weaknesses? And you should list them
+[00:17:02] out. And is this are there insights here
+[00:17:05] that you can draw that will tell you
+[00:17:08] actionable steps that you could
+[00:17:09] implement in the next three to four
+[00:17:11] weeks based on my current weaknesses. I
+[00:17:13] should for instance avoid you know price
+[00:17:16] XYZ time XYZ right or um you know it
+[00:17:21] could be large capsu caps whatever the
+[00:17:23] case is but use your data to help you
+[00:17:25] draw those determinations. They
+[00:17:26] shouldn't be based just on opinion. It
+[00:17:28] should be based on some concrete data.
+[00:17:30] And then what are the strengths? where
+[00:17:32] areas that you could double down, right,
+[00:17:33] and be more aggressive. So that's number
+[00:17:36] one. And then number two, uh well, this
+[00:17:38] is sort of in large part number one. And
+[00:17:40] then number two is your aptitude. Now, I
+[00:17:43] think with this here, what I'm thinking
+[00:17:45] about when I say aptitude is that
+[00:17:48] everyone comes to the table to trade in
+[00:17:50] the market with a different set of um of
+[00:17:53] of skills and experience that you're
+[00:17:55] bringing with you. And I think some
+[00:17:57] people have skills and experiences that
+[00:17:59] naturally lend themselves very well to
+[00:18:02] the style of trading that I use, which
+[00:18:04] is fastm moving breaking news momentum
+[00:18:06] trading. But you may find that your
+[00:18:08] aptitudes don't lend themselves as well
+[00:18:10] to this strategy. In which case, you've
+[00:18:13] got two choices. You either try to build
+[00:18:14] up your skill set so you can trade the
+[00:18:18] strategy or you say I need to adapt this
+[00:18:21] strategy to to accommodate where I'm
+[00:18:24] coming to the table, you know, at with
+[00:18:27] in terms of skills. So that has to be a
+[00:18:30] decision that you make yourself based on
+[00:18:32] whether you feel that you can learn the
+[00:18:34] things you need to learn or you feel
+[00:18:36] it's better to adapt the strategy. So
+[00:18:38] the the types of skills that I think are
+[00:18:41] really critical here include um computer
+[00:18:45] skills,
+[00:18:47] um typing,
+[00:18:49] fast, um
+[00:18:52] fast response, uh and reaction time,
+[00:18:55] hand eye coordination.
+[00:18:58] Um, this also requires a a a pretty high
+[00:19:01] level of emotional
+[00:19:04] uh awareness, situational awareness, an
+[00:19:07] ability to ident the the writing here,
+[00:19:10] an ability to identify um when you're
+[00:19:13] becoming emotionally hijacked in order
+[00:19:16] in or an ability to identify the
+[00:19:18] emotions that other traders collectively
+[00:19:20] are experiencing and how those emotions
+[00:19:22] are um being reflected in the actual
+[00:19:26] charts of these stocks. you know, when
+[00:19:28] you see a chart for instance, um, of a
+[00:19:31] stock that's done something, you know,
+[00:19:33] just unbelievable. I'll just show you an
+[00:19:35] example here. Um, so this stock, for
+[00:19:38] instance,
+[00:19:40] switch to like the hour chart. Um, this
+[00:19:44] one made this just insane move from
+[00:19:47] about $60 a share here to $480, but the
+[00:19:52] the couple days earlier it was down to
+[00:19:53] like $15. So 15 1015 to 60 by itself was
+[00:19:57] huge and then it just exploded and went
+[00:20:00] higher. There was a lot of emotion
+[00:20:02] behind this move. There was fear, there
+[00:20:04] was greed, there was exuberance and
+[00:20:06] there were traders that made a lot of
+[00:20:07] money and there were traders who lost a
+[00:20:09] lot of money. And so that's a stock that
+[00:20:11] was exemplifying a lot of emotion in the
+[00:20:14] market. When there's a lot of emotion in
+[00:20:15] the market, there's also more
+[00:20:17] opportunity because there's more
+[00:20:18] volatility. So an ability to identify
+[00:20:23] your own emotion at on any given day and
+[00:20:26] also the emotion in the market uh is
+[00:20:29] really key. So these are some of the
+[00:20:32] internal aptitudes. Now you also have um
+[00:20:36] your budget right and your account size.
+[00:20:40] So account which is to say account size
+[00:20:42] you know how much how well funded are
+[00:20:44] you? Number four your tech you know what
+[00:20:46] platform are you using? What broker are
+[00:20:48] you using? what kind of trading tools,
+[00:20:50] what's your internet speed? So, these
+[00:20:52] are all of your internal assessments and
+[00:20:55] and there's probably more on here that
+[00:20:56] we could list, but just to sort of
+[00:20:58] summarize it um high level. So, you've
+[00:21:00] got to do an internal assessment and
+[00:21:03] this is you as a trader today. How well
+[00:21:07] equipped are you to compete in the
+[00:21:09] market? And some of you are going to be
+[00:21:11] very well equipped and you're still
+[00:21:12] struggling. Others are not as well
+[00:21:14] equipped and you may even be doing well
+[00:21:15] for reasons that we're going to
+[00:21:17] elaborate on as we continue through this
+[00:21:19] class. So first you do your internal
+[00:21:22] assessment and then we do the external
+[00:21:25] assessment. Okay. So what is the
+[00:21:27] external assessment look like? So
+[00:21:29] external assessment is where I'm looking
+[00:21:34] at things that I have absolutely no
+[00:21:35] control over but certainly affect my
+[00:21:38] ability to be a successful trader. And
+[00:21:40] so the biggest one here is condition um
+[00:21:44] of the market, right? So we know that
+[00:21:48] the market is is cyclical, right? And we
+[00:21:51] have hot cycles, we have cold cycles.
+[00:21:53] And so what cycle are we in? If we're in
+[00:21:55] a hot cycle, then there's an opportunity
+[00:21:57] to extract a lot more profit from the
+[00:21:59] heightened volatility. If we're in a
+[00:22:01] colder cycle with more compressed
+[00:22:03] ranges, there's not going to be as much
+[00:22:04] volatility. There's not going to be as
+[00:22:05] much opportunity to make money. And
+[00:22:07] there's nothing we can do about that. It
+[00:22:09] is 100% out of our control. And yet, if
+[00:22:12] you came in every single day saying, "I
+[00:22:15] want to make $50,000 today or this week
+[00:22:17] or this month or whatever you said,
+[00:22:19] there's a big number." But the markets,
+[00:22:22] the external factors that the market is
+[00:22:25] not giving those opportunities, it
+[00:22:27] doesn't matter how badly you want it,
+[00:22:28] it's not going to happen. If you keep
+[00:22:30] stretching for it, if you keep trying to
+[00:22:32] get it, you're only going to end up
+[00:22:33] losing and getting incredibly
+[00:22:35] frustrated. So the condition of the
+[00:22:37] market is the biggest external factor.
+[00:22:39] Number two is um you know we we have
+[00:22:43] things like um you know intermittent
+[00:22:47] intermittent um like tech issues. You
+[00:22:51] know there could be um data issues, a
+[00:22:54] data outage. There could be a widespread
+[00:22:57] internet outage. Uh there could be a big
+[00:22:59] storm and it's affecting data centers,
+[00:23:02] things like that. there's nothing you
+[00:23:03] could do about it and the market could
+[00:23:05] overall be strong but we're having you
+[00:23:08] know some tech issue and this is just
+[00:23:09] the reality of you know a digital very
+[00:23:11] digital market that these things will
+[00:23:13] happen and when they happen you just
+[00:23:16] sort of have to recognize well there's
+[00:23:18] nothing I could do about it doesn't
+[00:23:20] matter that I was hoping to have a great
+[00:23:21] day today I just got to hunker down and
+[00:23:23] wait it out right there's a hurricane
+[00:23:25] and uh everyone's on generators and
+[00:23:27] there's lighter there's lighter
+[00:23:29] volatility in the market um and volume
+[00:23:31] number Three, um I suppose certainly
+[00:23:34] things like market um market holidays.
+[00:23:38] Um and number four, um at least for
+[00:23:43] small caps, small cap, um cycles,
+[00:23:47] although I suppose that ties in a bit
+[00:23:48] with the condition of the overall
+[00:23:49] market, more generally speaking, you
+[00:23:51] could generally have a really strong
+[00:23:52] market, but the small cap cycle is not
+[00:23:54] aligned with that right now. So there
+[00:23:56] could be a little bit of a divergence
+[00:23:57] there. Um the small cap cycle is really
+[00:24:00] specifically thinking about what's the
+[00:24:02] theme that is giving us the biggest
+[00:24:04] moves in the small cap market because
+[00:24:06] that's where most of um retail traders
+[00:24:08] end up focusing. Um I suppose to some
+[00:24:11] degree, you know, crypto um has has some
+[00:24:15] effect. When the crypto markets are
+[00:24:16] really strong, that seems to roll over
+[00:24:18] into the stock market a bit. When
+[00:24:20] they're really weak, that seems to pull
+[00:24:22] down the market a little bit. So there's
+[00:24:24] a few other external um factors. So high
+[00:24:28] level, you could be someone who's really
+[00:24:31] well situated with all your internal um
+[00:24:35] uh sort of uh skills, aptitudes and and
+[00:24:39] elements, but externally the market's
+[00:24:41] really weak and there's nothing you can
+[00:24:42] do about it. This was actually the case,
+[00:24:44] I would say, for me in a lot of ways
+[00:24:46] during 2022 and 2023. I was in good
+[00:24:49] shape internally. I I felt but we were
+[00:24:51] in a bare market that the Federal
+[00:24:53] Reserve essentially, you know, created
+[00:24:55] by increasing the interest rates to cool
+[00:24:57] down inflation. So that reduced volume,
+[00:25:00] it reduced volatility and there was less
+[00:25:01] opportunity. And there was nothing I
+[00:25:03] could do about that. I just had to trade
+[00:25:04] through it. Well, I suppose I say
+[00:25:07] there's nothing that I could do about
+[00:25:08] it. But in fact, that's not totally
+[00:25:10] true. what I could control was how I
+[00:25:14] responded to the external factors that
+[00:25:17] I'm that I can't control. So, I could
+[00:25:19] respond by either accepting my lack of
+[00:25:23] control and adjusting my strategy to
+[00:25:26] accommodate the changes that are
+[00:25:28] happening in the overall market. Or I
+[00:25:30] could choose to be stubborn and keep
+[00:25:32] trading aggressively every single day in
+[00:25:35] spite of all the writing on the wall
+[00:25:36] telling me I shouldn't. And most likely
+[00:25:38] the result is that I would lose money
+[00:25:40] and I wouldn't do very well. So that is
+[00:25:42] that is the extent that I have control I
+[00:25:45] have control over how I respond to these
+[00:25:48] external factors. So while we should do
+[00:25:52] this on a sort of on on a grand scale in
+[00:25:57] terms of my internal um capacities as a
+[00:26:01] trader and the external market limits
+[00:26:03] right now I also do it on more of a um
+[00:26:08] kind of micro scale each morning. So,
+[00:26:11] what does it look like each morning when
+[00:26:12] I do this honest assessment? Internal,
+[00:26:15] did I eat well? Did I sleep well? And do
+[00:26:18] I have a couple stocks on watch that I
+[00:26:20] like today for my strategy?
+[00:26:24] That's internal, right? External, what's
+[00:26:28] the condition of the overall market is
+[00:26:30] the market, has it been giving really
+[00:26:32] good opportunities over the last several
+[00:26:34] days or several weeks? Are we in a hot
+[00:26:36] market or are we in a cold market? And
+[00:26:39] then based on that assessment of
+[00:26:41] internal and external strengths and
+[00:26:43] weaknesses on each day, I can adapt my
+[00:26:47] risk tolerance.
+[00:26:49] So
+[00:26:51] the question is, is this really a day
+[00:26:54] when I should be aggressive?
+[00:26:57] You've got to be honest with yourself
+[00:26:58] here. The truth will be revealed after
+[00:27:01] the fact, but can we predict it now?
+[00:27:05] In other words, what if you knew that
+[00:27:08] today was going to be a red day? What
+[00:27:11] would you do? If you knew with 100%
+[00:27:14] certainty that today would be a red day,
+[00:27:16] you would not trade. That's what any
+[00:27:19] logical person would conclude. If it's
+[00:27:22] going to be a red day, I will not trade.
+[00:27:25] Fair enough. If it's going to be a green
+[00:27:27] day, I'm going to be very aggressive. So
+[00:27:30] the fact is we really can't know ahead
+[00:27:35] of time. But surely there is a point in
+[00:27:39] the day where it becomes obvious that it
+[00:27:43] will be a red day or it will be a green
+[00:27:45] day. And now it's a question of how big
+[00:27:47] of a green day it'll be or how big of a
+[00:27:49] red day it'll be, right? And so that's
+[00:27:53] where we really need to be paying
+[00:27:55] attention. By doing the honest
+[00:27:57] assessment each morning, we can sort of
+[00:27:59] take the temperature of the market early
+[00:28:01] on. Is the market hotter? Is it colder?
+[00:28:03] Right? Does this feel like the type of
+[00:28:06] market where things are working well?
+[00:28:07] And internally, am I in a good position
+[00:28:10] to be trading today at peak performance?
+[00:28:12] And if I am, then I should be really
+[00:28:14] aggressive. Or if or if the market's not
+[00:28:16] set up and not giving good
+[00:28:17] opportunities, then I've got to be more
+[00:28:18] conservative. So one of the techniques
+[00:28:21] that I would encourage you guys uh to
+[00:28:24] utilize certainly we want to adopt a
+[00:28:26] strategy want to prove consistency we
+[00:28:28] want to focus on a process and one of
+[00:28:31] the techniques that I really like using
+[00:28:34] is um is taking the temperature. So,
+[00:28:38] taking
+[00:28:40] the temp of the market. Um, and I guess
+[00:28:43] I would say, let me just add, let me
+[00:28:45] just do number four, honest
+[00:28:48] assessment.
+[00:28:51] And then number five, taking the temp.
+[00:28:55] This is a daily sort of daily uh
+[00:28:58] routine. I take the temperature of the
+[00:28:59] market. And how do I do that? I do that
+[00:29:02] with my first trade being a starter. And
+[00:29:06] so for me right now, max position, I
+[00:29:10] mean, it kind of depends on the dollar
+[00:29:11] amount, but let's just say for right
+[00:29:12] now, uh, the the the price of the stock,
+[00:29:14] but let's just say for right now, it's
+[00:29:15] 50,000 shares. So 50,000 shares, max
+[00:29:18] position. So on my starter,
+[00:29:22] what I want to do is I want to trade
+[00:29:23] with about a quarter or a fifth of that
+[00:29:25] position. So I'll take a starter of
+[00:29:27] 10,000 shares. On my first trade, I find
+[00:29:29] a $3 stock. My stop is 290. So I'm
+[00:29:32] risking a,000 bucks. My profit target is
+[00:29:35] 320. right? 15 to 20. It goes up to 315.
+[00:29:39] So, I end up taking the profit off the
+[00:29:41] table and I'm up $1,500.
+[00:29:45] So, now on my first trade, I've broken
+[00:29:47] the ice with a starter. I've built a
+[00:29:49] little bit of a cushion on the day. Now,
+[00:29:51] had I gone red, I'd be down a,000 bucks,
+[00:29:54] a loss that while disappointing, is very
+[00:29:57] tolerable. And would I increase my share
+[00:29:59] size on trade number two? And the answer
+[00:30:02] is no. I don't increase my share size
+[00:30:06] until I first crossed over about $1,000
+[00:30:10] of profit. Now, my daily goal right now
+[00:30:12] is $5,000 in a cold market and $20,000
+[00:30:15] in a hot market. So, in a cold market,
+[00:30:17] the daily goal is, you know, a fifth of
+[00:30:19] that or a quarter, that's about a,000
+[00:30:21] bucks, $1,500. In a hot in a hotter
+[00:30:23] market, the first cushion is $5,000
+[00:30:26] before I'm going to step up and be more
+[00:30:27] aggressive. So this technique here of
+[00:30:30] using smaller size of about one quarter
+[00:30:32] to 1/5if of full position on my first
+[00:30:35] few trades allows me if I go red on the
+[00:30:38] first trade to recognize uhoh being red
+[00:30:41] on the first trade is a precursor for
+[00:30:43] potentially having a red day. So now I
+[00:30:46] need to take my foot off the gas and
+[00:30:47] stay with small size until I have
+[00:30:49] recovered that loss and potentially gone
+[00:30:51] green. If I don't recover the loss and
+[00:30:53] on trade two I'm also red. Another
+[00:30:54] thousand. And then on trade three I'm
+[00:30:57] also red, then I can say at that point
+[00:30:59] I've had three losses in a row. Three
+[00:31:02] strikes, you're out. That's baseball,
+[00:31:04] right? So it works in baseball, it works
+[00:31:06] in trading. So then I say I'm done and
+[00:31:08] I'm down $3,000. Now my daily goal in a
+[00:31:11] cold market is five grand. So being down
+[00:31:14] $3,000 is not even losing more than I
+[00:31:16] make in one good day. the $20,000 hot
+[00:31:19] market goal. Now, certainly in a hot
+[00:31:21] market, I might be a little more
+[00:31:22] aggressive. So, maybe I'll be down more
+[00:31:23] like 5,000 on these first three trades,
+[00:31:26] but nonetheless, it's still not more
+[00:31:27] than I would make in a really good day.
+[00:31:30] So, this has been the best technique
+[00:31:33] that I have discovered for being able to
+[00:31:36] determine whether today will be a red
+[00:31:37] day or a green day and to make that
+[00:31:39] determination with smaller share size.
+[00:31:42] The best green days, I'm green on the
+[00:31:44] first trade and I just keep adding
+[00:31:46] profit. That's the best the the worst
+[00:31:48] red days. I go red on my first trade and
+[00:31:51] I just keep having losses. So that first
+[00:31:53] trade for me makes a big difference. Now
+[00:31:56] I'm not a high frequency trading
+[00:31:57] algorithm. I'm not taking a thousand
+[00:31:59] trades a day. I'm taking a small number
+[00:32:00] of trades each day. Even on my best
+[00:32:02] days, I might only take 15 or 20 trades.
+[00:32:05] So it doesn't really So in other words,
+[00:32:09] th that first trade really does matter.
+[00:32:12] With an algorithm that's taking a
+[00:32:13] thousand trades a day, the first trade
+[00:32:14] doesn't matter. But for me, the first
+[00:32:16] trade really matters. So I trade with
+[00:32:19] smaller size. I break the ice. And now I
+[00:32:22] can get a really good sense of whether
+[00:32:23] or not today is going to be a red day or
+[00:32:26] a green day. And so I want to remind you
+[00:32:29] that you do not need to trade every day.
+[00:32:33] A lot of traders over complicate this.
+[00:32:36] You don't need to trade every day. You
+[00:32:38] don't need to trade every stock that's
+[00:32:40] moving. Your goal here is to have the
+[00:32:43] highest accuracy possible. High accuracy
+[00:32:46] breeds self-confidence. And when you
+[00:32:49] have higher levels of confidence, you
+[00:32:50] trade with bigger share size. And that
+[00:32:52] creates a positive feedback loop where
+[00:32:54] you start making more money. So you
+[00:32:55] don't need to trade every single day. In
+[00:32:57] fact, you should not trade unless
+[00:32:59] there's a setup that you like. And this
+[00:33:02] all comes back to that sort of initial
+[00:33:05] concept here of adopting a strategy,
+[00:33:08] proving consistency, focusing on being a
+[00:33:10] master of one strategy. Be a master of
+[00:33:13] one. That's what it's all about. So
+[00:33:16] adopt the strategy, prove the
+[00:33:18] consistency, focus on the process, not
+[00:33:20] the profits, the honest assessment, and
+[00:33:22] take the temperature of the market every
+[00:33:23] single day. So, if you take that
+[00:33:26] approach, you're going to realize that
+[00:33:28] it's better to wait it out than to trade
+[00:33:31] a lowquality setup. You trade a
+[00:33:32] lowquality setup, you're going to get
+[00:33:33] inconsistent results. It's going to draw
+[00:33:35] down your accuracy. You're going to get
+[00:33:37] frustrated. Trade less and walk away
+[00:33:40] sooner when it's not happening. This is
+[00:33:43] really hard for a lot of traders to do.
+[00:33:45] It's really hard for traders to walk
+[00:33:47] away at the right time. In fact, there's
+[00:33:49] a book here. Oops. Here, knock something
+[00:33:52] off my desk. This book is by Annie Duke.
+[00:33:54] It's called Quit: The Power of Knowing
+[00:33:56] When to Walk Away. I couldn't imagine a
+[00:33:58] better book title for active traders.
+[00:34:02] This is really a fantastic book. I've
+[00:34:04] listened to it on audiobook. I have the
+[00:34:06] physical copy and I only got it so I can
+[00:34:07] show you guys the physical copy when I
+[00:34:09] do these episodes, but it's really a
+[00:34:11] terrific book and it speaks not it's not
+[00:34:14] about trading, but it just speaks so
+[00:34:17] much to the experience that traders have
+[00:34:20] because I will say that the one thing
+[00:34:24] that you could do that would really
+[00:34:27] improve your trading over the next four
+[00:34:29] to six weeks is if you can learn to walk
+[00:34:32] away at the right time each day. That's
+[00:34:36] it. That is it. Walking away at the
+[00:34:39] right time. Think about it. Every day
+[00:34:41] you're doing one of two things. You're
+[00:34:43] either leaving money on the table
+[00:34:44] because you walked away too soon, or
+[00:34:46] you're giving back profit because you
+[00:34:48] stayed too long. How do you find that
+[00:34:50] sweet spot? So, I'm going to jump back
+[00:34:53] on the whiteboard. So, number six, walk
+[00:34:58] away. I'm going to say sooner. Learn to
+[00:35:02] walk away sooner. And so the way I
+[00:35:05] approach this is that given that every
+[00:35:08] day I'm doing one of two things, I
+[00:35:10] either am giving back profit or I'm
+[00:35:11] leaving money on the table. What I would
+[00:35:13] like to do is I would like to as a
+[00:35:15] beginner encourage you to sit down and
+[00:35:18] focus on trading
+[00:35:20] until and this is shouldn't even be a
+[00:35:23] dip. This is just like trade one, trade
+[00:35:25] two, trade three. Trade until your first
+[00:35:28] loss. And at the first loss right there,
+[00:35:31] walk away.
+[00:35:33] If you right now are a beginner trader
+[00:35:36] and you don't yet have a track record of
+[00:35:39] six weeks in a row of profitability,
+[00:35:41] then you need to be so disciplined about
+[00:35:44] taking the profit when you have it and
+[00:35:47] not overstaying your welcome. That can
+[00:35:50] mean just doing one trade a day. Just
+[00:35:53] one trade a day. Now, in my recent um
+[00:35:56] episode that I just taught, and I'll put
+[00:35:57] a link to this at the end of today's
+[00:35:59] class as well, I broke down how to start
+[00:36:01] trading in nine steps. And I shared with
+[00:36:03] you guys a trading plan that I encourage
+[00:36:05] all beginner traders to utilize. It
+[00:36:07] includes phase one of taking one trade a
+[00:36:10] day. That's it. Get in, get green, get
+[00:36:12] out. For the sake of continuing to gain
+[00:36:14] experience, you trade the rest of the
+[00:36:17] day in the simulator or you may even
+[00:36:18] trade the beginning of the day in the
+[00:36:19] simulator until you see that one really
+[00:36:22] good opportunity. You take that with
+[00:36:23] real money and then the rest of the day
+[00:36:25] is back in the simulator. The the
+[00:36:27] advantage of doing one trade a day is
+[00:36:29] that it's very black and white. It's one
+[00:36:31] trade. There's no breaking the rules,
+[00:36:32] just one trade. And if it's green,
+[00:36:34] great. And if it's red, bummer. Now,
+[00:36:37] over the course of 10 days, that'd be
+[00:36:38] two weeks. If you're red 70% of the
+[00:36:41] time, that speaks to accuracy being
+[00:36:43] poor, and you need to work on improving
+[00:36:45] your accuracy. But if you're green 70 or
+[00:36:47] 80% of the time, then I would say, "Holy
+[00:36:50] smokes, we've got something right now
+[00:36:52] that's working." So, and you're making
+[00:36:54] money, right? So, now what it's time to
+[00:36:57] do is begin increasing your share size.
+[00:36:59] Don't increase the number of trades.
+[00:37:01] Increase the share size. You start with
+[00:37:04] 100 shares, then you go to 200, 300,
+[00:37:06] 400. You just keep increasing a little
+[00:37:07] bit each week. And then next thing you
+[00:37:09] know, over the course of 8 weeks, 12
+[00:37:11] weeks, 16 weeks, you're now getting into
+[00:37:13] four, five, six months of trading.
+[00:37:14] You're still doing one trade a day, but
+[00:37:16] you've worked your way up to a,000
+[00:37:18] shares, 2,000 shares, 2,000 shares, 15
+[00:37:21] cents, 300 bucks. You're talking about
+[00:37:23] $75,000 a year. And again, setting the
+[00:37:27] bar low. Now you're thrilled. You're
+[00:37:29] like, "Wow, I'm setting the foundation.
+[00:37:31] I'm taking one trade a day. I'm getting
+[00:37:32] in. I'm getting green. I'm getting out.
+[00:37:34] I'm not overstaying my welcome." Now,
+[00:37:37] when you've got a track record with that
+[00:37:39] kind of uh when you've got that kind of
+[00:37:41] track record, it's going to build
+[00:37:43] confidence in in yourself. And so now
+[00:37:45] you're going to start taking bigger size
+[00:37:46] and you're also going to start feeling
+[00:37:48] comfortable taking more trades. And
+[00:37:50] that's where we get into this concept,
+[00:37:51] which is trade until your first loss.
+[00:37:54] And once you have your first loss, then
+[00:37:56] at that point you walk away. So beginner
+[00:37:59] trader phase one. So phase one is one
+[00:38:03] trade per day. Phase two is one trade
+[00:38:07] per day but with bigger size. Phase
+[00:38:10] three is increasing to multiple trades
+[00:38:13] per day and continue with bigger size.
+[00:38:16] Phase four is scaling in. Phase five is
+[00:38:20] scaling out. These are the five phases
+[00:38:23] that I teach in for warrior pro members
+[00:38:25] in our classes. This is the way I would
+[00:38:27] approach it. And so I would encourage
+[00:38:29] you if there was one thing that I would
+[00:38:31] focus on over the next four to six
+[00:38:33] weeks, it's walking away sooner.
+[00:38:37] And I don't want to be dismissive of
+[00:38:38] what I've already shared with you
+[00:38:39] because the fact is that requires an
+[00:38:42] honest assessment. Walking away sooner
+[00:38:44] means requiring an honest assessment of
+[00:38:46] how strong is the market today? Should I
+[00:38:48] continue to be aggressive? Is this a hot
+[00:38:51] market? Is the window open for
+[00:38:52] opportunity to capitalize on the
+[00:38:54] volatility or has the window closed and
+[00:38:56] I have to walk away? So, what I find in
+[00:38:59] my trading that I typically do is I
+[00:39:02] don't want to walk away while I'm still
+[00:39:04] making money. So, I walk away after I've
+[00:39:06] given back a little bit off the top.
+[00:39:08] But, you know what's really important?
+[00:39:10] It's very important that on the days
+[00:39:14] when the market is hot that you get to
+[00:39:16] the point, and this isn't going to be
+[00:39:17] when you're still taking one trade a day
+[00:39:19] and you're a beginner and you're just
+[00:39:20] trying to build proof of concept, but
+[00:39:22] once you've been trading for a little
+[00:39:23] bit of time, you want to get to the
+[00:39:25] point where you're more aggressive on
+[00:39:26] the best trades and on the best days.
+[00:39:29] And this is this is tough because this
+[00:39:32] requires that very
+[00:39:35] strong connection to the strength of the
+[00:39:38] market. That very honest assessment of
+[00:39:40] how strong is the market external and
+[00:39:42] how strong am I internally, right? If
+[00:39:44] you've just gotten off a redeye flight,
+[00:39:46] you know, an overnight flight from, you
+[00:39:48] know, eight hours, whatever, you're not
+[00:39:50] at 100%. You didn't eat well, you didn't
+[00:39:52] sleep well, doesn't matter that there's
+[00:39:53] a couple stocks that you like, you're
+[00:39:55] not going to be in a place to trade
+[00:39:56] well. So to be able to really capitalize
+[00:40:00] on this type of uh these trends in the
+[00:40:02] market, what I what I'm doing is I try
+[00:40:05] to keep my environment pretty
+[00:40:06] consistent. So I you know I sitting down
+[00:40:09] each morning, same time, etc. And what
+[00:40:12] I'm doing is I try to be really
+[00:40:14] aggressive when it's hot and then cool
+[00:40:16] off and then really aggressive and then
+[00:40:17] cool off. So I have the cool off periods
+[00:40:20] where I give back a little bit of
+[00:40:21] profit, but how much I give back is
+[00:40:24] limited because that's the thing. I just
+[00:40:26] I I only want to give back so much,
+[00:40:29] right? So that means being super super
+[00:40:31] aggressive when it's hot and then
+[00:40:33] trading a lot less when it's cold and
+[00:40:35] then really aggressive and then back to,
+[00:40:38] you know, foot off the gas. And it feels
+[00:40:40] like trading is a marathon. And so on
+[00:40:44] the these little periods here, like this
+[00:40:46] is these are the moments in the marathon
+[00:40:48] where I can really gain some ground. And
+[00:40:50] these are the moments in the marathon
+[00:40:52] where it's raining or it's muddy. It's
+[00:40:56] slippery and I'm just trying to stay
+[00:40:58] alive. I'm just trying to keep my head
+[00:41:00] above water. And if I can just keep my
+[00:41:01] head above water, I know I'll get to the
+[00:41:03] other side of this where I can put pedal
+[00:41:05] to the metal again and get aggressive.
+[00:41:06] And that's where I'm going to make up,
+[00:41:07] you know, some ground. So, trading is
+[00:41:10] definitely about uh leaning in when it's
+[00:41:12] hot and taking your foot off the gas
+[00:41:14] when it's cold. But when you begin to
+[00:41:16] trade your Aquality uh setups and you've
+[00:41:20] got that strong DRA track record, that's
+[00:41:21] where you're going to have the higher
+[00:41:22] levels of self-confidence, higher levels
+[00:41:25] of accuracy, and then you're going to
+[00:41:26] start being on that positive feedback
+[00:41:28] back loop where you're taking bigger
+[00:41:29] size and being more aggressive. So
+[00:41:31] consistency, confidence increases
+[00:41:34] profitability with a higher accuracy,
+[00:41:36] high profit loss ratio. This is just the
+[00:41:38] positive feedback loop that I want to
+[00:41:40] see you on. It all begins right here
+[00:41:43] with accuracy. So, if we were going to
+[00:41:45] go back for a beginner trader right
+[00:41:48] here, adopt a strategy, prove
+[00:41:50] consistency, focus on high accuracy. So,
+[00:41:54] if you're struggling right now with
+[00:41:56] accuracy, I have two things that I'll
+[00:41:58] share. Number one, accuracy improves
+[00:42:01] with experience. Doesn't m it doesn't
+[00:42:03] matter what you're learning to do. If
+[00:42:04] you're learning to kick a soccer ball,
+[00:42:05] if you're learning to play basketball,
+[00:42:07] shoot free throws, whatever. The more
+[00:42:09] you practice, the better you will get.
+[00:42:11] So if you're new, it's to be expected
+[00:42:13] that you're not going to be tra you're
+[00:42:15] not going to be performing at the level
+[00:42:16] of someone who's been doing it for a
+[00:42:17] decade or whatever the case is. You've
+[00:42:19] got to build you've got to build
+[00:42:20] experience. You've got to practice in
+[00:42:21] order to get better. So that's number
+[00:42:23] one. Number two, for those of you guys
+[00:42:26] that are Warrior Pro members or who have
+[00:42:28] been learning the strategy that I trade
+[00:42:29] every single day, what I set out for you
+[00:42:32] guys is a road map. I give you a very
+[00:42:35] specific set of criteria. the type of
+[00:42:37] stocks that I'm willing to trade. Those
+[00:42:39] are the five pillars of stock selection
+[00:42:41] and then the very specific entries that
+[00:42:43] I'm willing to buy on, right? Those very
+[00:42:45] specific chart patterns. So, by focusing
+[00:42:48] on trading within the rules, basically
+[00:42:49] what I'm giving you is a road map. I'm
+[00:42:52] giving you the road map to follow. It's
+[00:42:54] your journey to take that road map and
+[00:42:56] to follow it. And you have to bring
+[00:42:59] discipline to the table. And you've got
+[00:43:00] to bring dedication and drive to the
+[00:43:02] table. You've got to be motivated. But I
+[00:43:04] really think that if you come to the
+[00:43:06] table with low expectations,
+[00:43:10] you come to the table focusing on the
+[00:43:12] process and understanding that profits
+[00:43:16] are a byproduct, then what you're doing
+[00:43:19] is you're setting yourself up to
+[00:43:21] succeed. And sadly, what a lot of
+[00:43:24] traders end up doing is they set
+[00:43:26] themselves up to fail because they come
+[00:43:28] in and they're saying, "I want to make
+[00:43:29] $20,000 this month." And I say, 'Guys,
+[00:43:32] you're you're doing this all wrong.
+[00:43:35] You've got to focus on the process. The
+[00:43:37] profits are secondary. But people come
+[00:43:39] in focusing on profit, profit, profit.
+[00:43:41] And they end up getting themselves into
+[00:43:43] what ultimately is a negative feedback
+[00:43:45] loop. So what does the negative feedback
+[00:43:47] loop look like? The negative feedback
+[00:43:50] loop is when you come in on day one or
+[00:43:53] your first week, your first month, and
+[00:43:54] you lose money. And then you feel angry.
+[00:43:58] So now you're dealing with emotional
+[00:43:59] reaction because you're angry and
+[00:44:01] frustrated. You don't want to feel this
+[00:44:03] way anymore. The quickest way to not
+[00:44:05] feel angry and frustrated would be to
+[00:44:06] make back what you lost. So you're
+[00:44:08] encouraging yourself to take more
+[00:44:10] trades. And yet you still don't have a
+[00:44:12] strategy. So what ends up happening is
+[00:44:14] you end up losing even more. And now
+[00:44:16] you're even and you see what's
+[00:44:18] happening. So even if this has already
+[00:44:20] happened to you, we can cut this
+[00:44:22] negative feedback loop right now by
+[00:44:25] focusing on percentage. Focus on high
+[00:44:29] accuracy. Don't focus on profit. Focus
+[00:44:32] on maintaining as high of accuracy as
+[00:44:35] you can. Higher accuracy means you're
+[00:44:37] trading better quality stocks, which
+[00:44:38] means your profit loss ratio is going to
+[00:44:40] improve. That's going to improve your
+[00:44:41] consistency. That's going to give you
+[00:44:43] more confidence to be more aggressive.
+[00:44:45] And this is the beginning of the
+[00:44:46] positive feedback loop. So accuracy
+[00:44:49] right here is what you have to focus on.
+[00:44:51] And if you're trading and you've been
+[00:44:53] you you follow everything that I'm
+[00:44:54] sharing with you and for the next month
+[00:44:56] your accuracy is still 30% or 40%. All
+[00:44:59] that says to me is that you need to get
+[00:45:01] better and you need to gain more
+[00:45:02] experience at understanding the type of
+[00:45:04] stock to have the potential to make a
+[00:45:05] big move. You've got to re sort of
+[00:45:08] orient yourself with those five pillars
+[00:45:10] of stock selection and look at your
+[00:45:11] patterns that you're trading. And all of
+[00:45:13] that data can be revealed to you when
+[00:45:16] you export your trading history because
+[00:45:18] then you can see exactly what you're
+[00:45:20] doing right and what you're doing wrong.
+[00:45:21] Especially when you have a trader like
+[00:45:23] myself that puts everything on the table
+[00:45:24] so you can kind of compare what what is
+[00:45:26] the difference between the way we're
+[00:45:28] implementing the strategy if we're
+[00:45:30] trading the same strategy.
+[00:45:32] The goal here is to trade without being
+[00:45:36] influenced by emotion. This is far
+[00:45:38] easier said than done. But emotions are
+[00:45:40] generally the result of experiencing big
+[00:45:42] gains and big losses or the feeling that
+[00:45:45] you miss an opportunity. So, it all ties
+[00:45:48] back to seeking to make as much as
+[00:45:50] possible and not being satisfied with
+[00:45:52] hitting your base hits. Now, I shared uh
+[00:45:55] an example of this not that long ago
+[00:45:57] where I had a day where I I don't even
+[00:46:00] remember the details of how much I was
+[00:46:01] up on the day, but uh let's just say I
+[00:46:03] was up $100,000 on the day and I gave
+[00:46:05] back 70% of it. So, I was up quote only
+[00:46:09] $30,000 on the day. And it was very easy
+[00:46:11] in that moment to feel disappointment
+[00:46:14] and to feel shame and frustration. And
+[00:46:17] while there were some good reason to
+[00:46:20] feel frustrated myself that I didn't
+[00:46:22] follow my rules of walking away when I'd
+[00:46:25] given back only a little bit, right? So,
+[00:46:28] it's okay to be frustrated about that.
+[00:46:30] If I kept trading,
+[00:46:33] that would have been me seeking to no
+[00:46:35] longer feel bad about losing that amount
+[00:46:37] of money. And suddenly, I've lost
+[00:46:39] perspective of the fact that, you know
+[00:46:41] what, life is good. I've still got more
+[00:46:43] in my pocket than I had a few hours ago.
+[00:46:45] So, if your daily goal is 40 bucks and
+[00:46:47] you make 40 and you don't walk away and
+[00:46:49] then you give it back and you're up only
+[00:46:50] $12, it's easy to say, "This is nothing.
+[00:46:53] I I'm going to keep trading." And in
+[00:46:55] that moment when you're no longer
+[00:46:56] grateful for what you have, it's very
+[00:46:58] easy to sacrifice it and let it go.
+[00:47:00] Small base hit days are so important.
+[00:47:04] That is how I've built my career. It is
+[00:47:06] small base hit days. So this is over $20
+[00:47:09] million of profit right here. Well, that
+[00:47:11] was the close view. We'll back this up.
+[00:47:13] So $20 million of profit here over the
+[00:47:15] last 10 years. 21 million. And it's not
+[00:47:18] from hitting home runs. It's not to say
+[00:47:19] there haven't been a few big winners
+[00:47:20] here and there. There have been a few
+[00:47:22] big winners and there have been a few
+[00:47:23] big losers. But if we just look year to
+[00:47:25] date here, winning, and then we look at
+[00:47:27] uh year-to date, and then we look at
+[00:47:29] losing, and we look at year-to- date, I
+[00:47:31] want you to look at the size of my
+[00:47:32] average winners and cents per share, and
+[00:47:34] the size of my average losers. Average
+[00:47:35] winners are 18 cents. Average losers are
+[00:47:38] 15 cents. And this is $6.5 million of
+[00:47:42] profit. So, you do not need to trade
+[00:47:45] every single day. You only should trade
+[00:47:48] setups that you really have very high
+[00:47:50] conviction in and you really believe
+[00:47:52] will work. So this year sitting right
+[00:47:54] now just under let's see no we got to go
+[00:47:56] back to year to date. So year to date
+[00:47:58] here sitting just uh just under 72%
+[00:48:01] accuracy 71% accuracy and I think that's
+[00:48:04] really solid. There are certainly
+[00:48:05] traders out there who traded a lot more
+[00:48:06] than me and may have even made less. So
+[00:48:10] it's not about trading everything that
+[00:48:11] moves. Now this also means one of the
+[00:48:14] things that's really important is to get
+[00:48:16] to know your triggers. So number seven,
+[00:48:20] know your triggers.
+[00:48:25] This means you you begin to develop an
+[00:48:27] awareness of the things that can happen
+[00:48:30] in the market that cause you to become
+[00:48:32] emotionally compromised or emotionally
+[00:48:34] hijacked. So giving back half your
+[00:48:36] profit or giving back all your profit,
+[00:48:38] going from green to red, going from
+[00:48:40] green on the day to red is definitely a
+[00:48:41] trigger for a lot of people, but going
+[00:48:43] from green to giving back half or having
+[00:48:46] missed a really big opportunity. The
+[00:48:48] more you journal while you're trading,
+[00:48:51] the better you'll get at recognizing,
+[00:48:53] oh, this was the thing that happened
+[00:48:55] just before I started to spiral. So,
+[00:48:58] unfortunately, all traders are going to
+[00:49:00] have moments where you spiral and you
+[00:49:01] end up having back-to-back losses and it
+[00:49:03] just gets bigger and bigger and bigger
+[00:49:05] and then you realize, okay, I I've got
+[00:49:07] to, you know, take my foot off the gas
+[00:49:08] here. And it's in hindsight that you
+[00:49:10] realize, I should have walked away
+[00:49:12] sooner. And so, by journaling while
+[00:49:14] you're trading, you begin to collect
+[00:49:18] data about your emotional state of mind
+[00:49:20] as you're going through the trading day.
+[00:49:23] And then when you look back at that, you
+[00:49:24] realize, okay, this is the moment where
+[00:49:26] I wrote, I'm really frustrated. The
+[00:49:29] second I wrote that, that has to be my
+[00:49:31] cue to get up and walk away from the
+[00:49:33] computer before I keep trading. Because
+[00:49:35] when I trade from a point of being
+[00:49:37] frustrated and angry, I don't make more
+[00:49:39] money. I lose what I've already got. And
+[00:49:43] so if I was to boil this all down into
+[00:49:48] the simplest suggestions of what you can
+[00:49:52] do to improve your trading over the next
+[00:49:55] four weeks, I would say number one, all
+[00:49:59] of this ties in to being a more
+[00:50:01] disciplined trader to bring discipline
+[00:50:03] into your trading. If you've already got
+[00:50:05] a strategy, you're good. If not, you
+[00:50:07] need to adopt a strategy that's proven
+[00:50:09] profitable by other people. You need to
+[00:50:11] practice trading in a simulator. You
+[00:50:13] focus on the process, not the profit.
+[00:50:16] You do honest assessments at the
+[00:50:19] beginning of your trading and then
+[00:50:20] certainly each day. You take the
+[00:50:22] temperature with small size, you walk
+[00:50:24] away sooner, and you know your triggers.
+[00:50:28] If you could do all of this, you're
+[00:50:30] going to put yourself in a position
+[00:50:32] where you're taking small base hits,
+[00:50:34] you're getting in, you're getting green,
+[00:50:35] and you're getting out, and you're not
+[00:50:36] overstaying your welcome. This all comes
+[00:50:39] down to discipline. It takes a lot of
+[00:50:42] discipline
+[00:50:43] to be able to follow all of these steps.
+[00:50:46] But that's what it takes.
+[00:50:48] Now, for me, the small account growth
+[00:50:50] strategy,
+[00:50:52] it's a type of trading that's very fast.
+[00:50:56] It's very quick. Uh, you know, it's it's
+[00:50:59] risk and reward like anything else. I
+[00:51:01] take the risk and when these setups
+[00:51:03] work, they work really well and they
+[00:51:05] work really quickly. And so for me, it's
+[00:51:07] pretty much instant resolution. It's
+[00:51:09] like breakout or bailout. I get into
+[00:51:11] these trades and when we've got a stock
+[00:51:12] that's got breaking news between 7 a.m.
+[00:51:14] and 10 a.m. and it's the leading gainer
+[00:51:16] in the entire market, these things work
+[00:51:18] really well. It's my job just to be
+[00:51:21] patient and to wait for these
+[00:51:23] opportunities to come to be able to do
+[00:51:25] that honest assessment of is today the
+[00:51:28] is this the market where I'm going to
+[00:51:29] see those types of gains. We've had
+[00:51:32] periods in the last year where I come in
+[00:51:34] each day and I I I'm very very
+[00:51:36] confident, 90% conviction that I'll be
+[00:51:39] up more than $50,000 on the day. So, I'm
+[00:51:41] already coming in tuned to be
+[00:51:43] aggressive. And then there's other days
+[00:51:44] where I'm like, I expect to make nothing
+[00:51:47] today and I'll be pleasantly surprised,
+[00:51:50] but everything is just tuned down. And
+[00:51:52] one of the things that I do is I
+[00:51:54] actually will take money out of my
+[00:51:56] account when things start to cool off.
+[00:51:58] So, I don't even I don't even have the
+[00:52:00] ability to be aggressive, even if in the
+[00:52:01] moment I thought I could because the
+[00:52:04] fact is when it gets cold, it takes a
+[00:52:06] while for it to heat back up. And
+[00:52:08] there's just no sense in being super
+[00:52:09] aggressive when it's cold. So, I limit
+[00:52:12] my ability to do that. And I think
+[00:52:14] that's really key to my long-term
+[00:52:15] success. When it's hot, those first few
+[00:52:18] weeks of a hot market, I build profit
+[00:52:20] very quickly. Then, I can keep adding to
+[00:52:22] that profit with the gains I've already
+[00:52:24] made because I can take bigger
+[00:52:25] positions. And then once I have a couple
+[00:52:26] losses and it starts to cool off, I
+[00:52:28] clear out all the profit I've made. I
+[00:52:30] reset my account and we're back to kind
+[00:52:32] of laying in the tall grass and waiting
+[00:52:34] for things to pick up again. For those
+[00:52:36] of you guys that are tuning in on
+[00:52:38] YouTube, I'm going to put a link to the
+[00:52:39] small account growth strategy. I'm also
+[00:52:41] going to put a link to the nine steps of
+[00:52:42] how to start day trading. And for those
+[00:52:44] of you guys that want to check out a
+[00:52:45] two-eek trial at Warrior Trading, it's
+[00:52:47] two weeks for $20. You get to watch over
+[00:52:49] my shoulder while I'm trading. You also
+[00:52:51] get access to a selection of classes
+[00:52:53] from my Warrior Pro curriculum. And you
+[00:52:55] get to use the same software that I'm
+[00:52:57] using every single day for charting,
+[00:52:58] scanning, and for finding breaking news.
+[00:53:00] So, we'd love to have you guys come over
+[00:53:02] and become a member. I'll remind you as
+[00:53:04] always that trading is risky and my
+[00:53:06] results aren't typical. So, I want you
+[00:53:07] to manage your risk by practicing in a
+[00:53:09] simulator before you put real money on
+[00:53:11] the line. And I'll just remind you as
+[00:53:12] always that there's no guarantee you'll
+[00:53:14] find success whether you trade with me
+[00:53:15] or you learn on your own. So, it really
+[00:53:17] makes a lot of sense to use a simulator
+[00:53:18] before going live. Thank you guys for
+[00:53:20] tuning in. If you've enjoyed this
+[00:53:21] episode, I hope you hit the thumbs up. I
+[00:53:23] hope you subscribe to the channel. And I
+[00:53:24] will see you for the next upload real
+[00:53:26] soon.

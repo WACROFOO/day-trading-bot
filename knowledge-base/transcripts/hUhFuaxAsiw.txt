@@ -1,0 +1,990 @@
+# How to Draw Trend Lines the RIGHT Way on CANDLESTICK Charts
+# https://www.youtube.com/watch?v=hUhFuaxAsiw
+# duration_sec: 2360
+
+[00:00:00] [Music]
+[00:00:01] when most beginner Traders draw support
+[00:00:03] or resistance trend lines on Candlestick
+[00:00:06] charts they're actually doing it wrong
+[00:00:08] and I was no exception I was drawing my
+[00:00:10] trend lines completely backwards for a
+[00:00:13] long time and here's the problem with
+[00:00:15] drawing them the wrong way you will
+[00:00:16] perceive areas to have support or
+[00:00:19] potentially to be resistance but because
+[00:00:22] you drew your trend lines wrong in the
+[00:00:23] first place these areas that you're
+[00:00:25] visualizing they're not even accurate
+[00:00:27] the result is inconsistency in your
+[00:00:29] trading and getting caught in a lot more
+[00:00:32] false breakdowns and false breakouts so
+[00:00:35] how do we avoid that well let's go back
+[00:00:37] to basics and in this class I'm going to
+[00:00:39] teach you the right way to draw your
+[00:00:41] trend lines for support and resistance
+[00:00:44] now I want to start by showing you an
+[00:00:45] example so let's go ahead and get zoomed
+[00:00:47] in here this is a 5minute Candlestick
+[00:00:49] chart 5 minute time frame right here and
+[00:00:51] I happen to be looking at a stock but I
+[00:00:52] want you to know that this is a
+[00:00:54] universal language of the financial
+[00:00:55] markets and learning how to draw support
+[00:00:58] and resistance correctly you apply to
+[00:01:00] any Financial instrument whether you're
+[00:01:02] trading Futures crypto Forex you're
+[00:01:04] trading stocks like me it doesn't matter
+[00:01:06] because these are respected universally
+[00:01:08] by Traders who apply technical analysis
+[00:01:10] in their trading which is let's be
+[00:01:12] honest pretty much every Trader out
+[00:01:14] there so what we have here is a chart
+[00:01:17] where the price made a pretty nice move
+[00:01:19] up we started down here around $4 we
+[00:01:21] squeezed up to 567 we pulled back we
+[00:01:23] went up to 89 we pulled back and then
+[00:01:26] the next morning we squeezed from $8 all
+[00:01:29] the way up to nearly 16 a 100% move and
+[00:01:32] that happened very quickly but let's
+[00:01:34] talk about this area right up here now
+[00:01:37] for the people who drew their resistance
+[00:01:40] lines correctly it was predictable that
+[00:01:42] we were going to stall out in this area
+[00:01:45] so let me go ahead and show you what
+[00:01:46] this means all right so we've got our
+[00:01:48] trend line right here now there's
+[00:01:50] different ways to draw trend lines but
+[00:01:51] I'm just going to show you an example of
+[00:01:53] how I would draw this so if we drew this
+[00:01:56] let's say like this right there you
+[00:01:59] don't really get much information this
+[00:02:01] shows resistance being way up high it's
+[00:02:03] far away it's not really dialed in and
+[00:02:06] clearly this isn't been tested this
+[00:02:08] level was not tested here it wasn't
+[00:02:10] tested here it wasn't tested here so
+[00:02:13] what if we adjust this trend line we
+[00:02:15] pull it down just a little bit and we
+[00:02:17] draw it in a way where we make sure it
+[00:02:19] ties in with this price action here now
+[00:02:22] that looks right I would say this is a
+[00:02:25] valid trend line let's look forward holy
+[00:02:28] smokes there we go that is showing us
+[00:02:30] resistance and you can see how the price
+[00:02:32] pierced above it but it was not able to
+[00:02:35] hold and it came back down similar to
+[00:02:37] what happened here we pierced above it
+[00:02:38] we came back down we pierced above it we
+[00:02:41] came back down now I'm going to show you
+[00:02:43] how I knew that that was the right way
+[00:02:45] to draw the trendline through this
+[00:02:46] episode what I want you to understand is
+[00:02:49] that it is not uncommon for areas of
+[00:02:52] support or resistance to be tested or
+[00:02:54] for them them even to break just a
+[00:02:57] little bit and then for the price to
+[00:02:59] reverse quick
+[00:03:00] that is only reaffirming how strong that
+[00:03:04] particular level is but let's talk kind
+[00:03:06] of high Lev here about what's happening
+[00:03:09] with support and resistance these
+[00:03:11] theories tie in with the General market
+[00:03:14] theory of supply and demand when there's
+[00:03:17] a tremendous amount of demand and a
+[00:03:19] limited level of Supply we see really
+[00:03:22] big moves let's jump on to the
+[00:03:23] Whiteboard and let me show you what I
+[00:03:24] mean so let's imagine we have the price
+[00:03:27] moving up very quickly like this and
+[00:03:29] then we start to get a little bit of a
+[00:03:31] pullback the price declines down to this
+[00:03:33] area but then it sort of bases out we
+[00:03:36] come back up right so I would say that
+[00:03:39] this area right here has represented a
+[00:03:42] degree of support the price has bounced
+[00:03:45] off this area so if this is a support
+[00:03:48] trend line This is an area where there
+[00:03:51] is a lot of what is it Supply or demand
+[00:03:54] it's demand there's a level of demand
+[00:03:57] against this price because when the
+[00:03:59] price comes down to it you have buyers
+[00:04:01] that are coming in and are saying I want
+[00:04:03] to get in this stock I want to buy it
+[00:04:06] here so this level of support is also
+[00:04:09] demand when you have a high level of
+[00:04:11] demand the price will not drop however
+[00:04:14] as we squeeze up let's say we push a
+[00:04:16] little bit higher we push a little bit
+[00:04:17] higher we come up to this level here and
+[00:04:20] then we pull back again we dip back down
+[00:04:23] what's very common up here is that we
+[00:04:25] would then say well this area right here
+[00:04:28] clearly is what
+[00:04:30] resistance so I'm just do an R for
+[00:04:33] resistance so up here is resistance
+[00:04:35] where we have a surplus of Supply we
+[00:04:38] have shares for sale so resistance up
+[00:04:42] against this level this is Supply so
+[00:04:44] when we're trading ultimately we're
+[00:04:46] often trading between areas of support
+[00:04:48] or resistance and between areas of
+[00:04:51] supply and demand however something that
+[00:04:54] is really interesting is let's say right
+[00:04:57] in this area when the stock first came
+[00:04:59] up to this High let's just say that was
+[00:05:03] our first little area of resistance so
+[00:05:06] we'll just do an R for resistance and
+[00:05:07] we're going to erase this and I'm going
+[00:05:08] to show you something else here so what
+[00:05:11] will often happen when we come back up
+[00:05:13] to this level is we'll do one of two
+[00:05:14] things if you drew this correctly then
+[00:05:17] as we come up to this level it is very
+[00:05:19] likely that you will see a degree of
+[00:05:22] Supply how will that appear the supply
+[00:05:25] in this case will be in the form of
+[00:05:28] people selling
+[00:05:31] shares so you will see sell orders as
+[00:05:34] the price comes back up to this level
+[00:05:36] now if there's enough demand we can
+[00:05:39] break through resistance we break
+[00:05:42] through resistance right here but
+[00:05:44] because this was a well respected area
+[00:05:46] of resistance what's often common is
+[00:05:48] that the price comes back down just for
+[00:05:50] a moment right here this is when we are
+[00:05:54] retesting the resistance trend line so
+[00:05:56] the price breaks above it comes back
+[00:05:59] down now and if it can hold this price
+[00:06:02] then this area that was previously
+[00:06:04] resistance becomes our new support level
+[00:06:08] it becomes support and now there's
+[00:06:11] demand off of this price because now
+[00:06:13] Traders are saying well hold up this was
+[00:06:15] resistance but we're holding right here
+[00:06:18] and there are buyers that are propping
+[00:06:19] it up so now if we hold this level we
+[00:06:22] look as this at being support and we
+[00:06:25] look for the move up here towards
+[00:06:27] resistance now when we're looking at a
+[00:06:29] chart like this typically what I notice
+[00:06:32] is that these levels are at horizontal
+[00:06:35] prices these are at very specific prices
+[00:06:38] which I would consider to be half and
+[00:06:40] whole dollars so let's say that's s this
+[00:06:43] is 650 and then this would be 750 and
+[00:06:47] this would be
+[00:06:48] 8 why is it that so many financial
+[00:06:52] instruments trade with respect to half
+[00:06:55] dollars and whole dollars why do we see
+[00:06:57] resistance at seven a little pull back
+[00:06:59] and then if we can break above it and
+[00:07:01] hold above it seven becomes support
+[00:07:03] these are psychological areas the reason
+[00:07:06] they act as resistance is because a lot
+[00:07:09] of times when people will make a
+[00:07:10] purchase they get in they'll set a
+[00:07:12] profit Target and they'll say you know
+[00:07:13] what I want to hold this until it goes
+[00:07:15] to $8 and what do they do they put their
+[00:07:17] sell order out there at eight so when
+[00:07:20] you've got their your sell order placed
+[00:07:22] out there now all of a sudden this
+[00:07:24] creates a level of resistance and it's a
+[00:07:28] supply there now shares for sale up
+[00:07:31] against eight so in order to overcome
+[00:07:33] all of those sellers you're going to
+[00:07:34] need even more buyers to break through
+[00:07:36] that level but if the price is already
+[00:07:38] extended coming up into it then what's
+[00:07:41] likely going to happen is you're going
+[00:07:42] to just have resistance here buyers are
+[00:07:45] not going to feel confident chasing and
+[00:07:46] getting in this high and that's when
+[00:07:48] you're going to see a momentary pullback
+[00:07:51] now if the price is strong if the
+[00:07:53] momentum is strong you've got a good
+[00:07:55] Catalyst then we may see support around
+[00:07:58] 750 the most recent psychological level
+[00:08:01] we bounce off of that level and then we
+[00:08:04] look for a move back up and on the
+[00:08:06] second attempt we look for a break
+[00:08:08] through that high so this is the
+[00:08:10] standard kind of stair stepping pattern
+[00:08:13] Step Up Step Up Step Up step up that
+[00:08:16] occurs in the markets there's no such
+[00:08:18] thing as something that goes straight up
+[00:08:21] there's always waves but these waves
+[00:08:24] correspond to prices where people find
+[00:08:27] lots of buy and sell orders lined up so
+[00:08:30] if you looked at an actual um order book
+[00:08:33] what you would notice let's I'm just
+[00:08:36] going to draw an order book for you and
+[00:08:37] this will be um we're going to do it in
+[00:08:39] ladder form so this will be
+[00:08:41] $7 this will be$ 750 this will be8 right
+[00:08:45] here this will be 650 and this will be 6
+[00:08:49] all right so what you would notice if
+[00:08:50] you're looking at all the orders is that
+[00:08:52] orders are
+[00:08:54] clustered around these levels
+[00:08:59] so what that means is that once the
+[00:09:02] price breaks through one of these levels
+[00:09:05] it moves very quickly up to the next one
+[00:09:07] once it breaks through these all these
+[00:09:09] cell orders here it's going to move very
+[00:09:11] quickly to this one it'll move very
+[00:09:13] quickly to this one very quickly to the
+[00:09:14] next one and once it's over those levels
+[00:09:18] these uh all these orders will now
+[00:09:20] switch from sell orders to buy orders
+[00:09:22] now people are buying against these
+[00:09:25] levels of psychological support they're
+[00:09:27] saying oh well if it comes back down to
+[00:09:29] 6 or 650 or whatever the case is that's
+[00:09:31] where I'm going to buy so it's very
+[00:09:34] common that we see these kind of
+[00:09:35] trenches where all the orders are
+[00:09:37] stacked right around half dollars and
+[00:09:40] whole dollars so if we knew that this is
+[00:09:42] our order book and it is the order book
+[00:09:44] for most stocks then it would be sort of
+[00:09:46] to be expected that as we approach a
+[00:09:48] level like this we would pull back and
+[00:09:50] have a little bit of resistance right
+[00:09:53] and if we can buy through break through
+[00:09:54] that level we would expect a move up to
+[00:09:57] here and this is going to be the typical
+[00:09:59] kind of wave that most stocks will trade
+[00:10:01] in they'll have this nice burst higher a
+[00:10:04] little pullback another push higher
+[00:10:07] until at some point Well it can't break
+[00:10:10] through that wall at 750 and then one of
+[00:10:13] two things happens it either
+[00:10:14] consolidates until it can break or you
+[00:10:17] start to have a breakdown and a change
+[00:10:19] in Trend coming back down now what many
+[00:10:21] of you know about me is that I like to
+[00:10:22] trade U the first pullback right here I
+[00:10:25] like to trade the second pullback I'm
+[00:10:27] usually a little bit more cautious on
+[00:10:28] third and fourth pullbacks because once
+[00:10:30] the pattern becomes sort of I don't know
+[00:10:33] it's it it just starts to get too
+[00:10:34] extended and we get to a point where uh
+[00:10:36] where buyers are no longer confident
+[00:10:38] jumping in so we recognize without
+[00:10:41] question that most stocks are going to
+[00:10:43] have resistance at half dollars and
+[00:10:46] whole dollars as the price is going all
+[00:10:48] right so this is very well respected and
+[00:10:51] once you understand that sort of
+[00:10:53] fundamental concept of supply and demand
+[00:10:56] and support and resistance it's going to
+[00:10:58] help you in your trading because you're
+[00:10:59] going to learn to expect that these
+[00:11:01] stocks will have a degree of resistance
+[00:11:03] around these levels so it's not
+[00:11:05] surprising that one of the earliest
+[00:11:08] forms of trend lines are going to be
+[00:11:10] horizontal trend lines so a horizontal
+[00:11:13] trend line is essentially it's already
+[00:11:15] in a way drawn on these charts you can
+[00:11:17] see it at the whole dollar there's a
+[00:11:19] white grid that goes from Seven AC all
+[00:11:22] the way across and eight all the way
+[00:11:23] across so in this particular example
+[00:11:26] here you could certainly see that we had
+[00:11:28] some resistance up around
+[00:11:31] $9 this is an example where the price
+[00:11:33] moved up to about 9 right here and it
+[00:11:36] didn't get all the way to nine so you
+[00:11:38] know In fairness sometimes we'll go
+[00:11:40] straight to that level sometimes we we
+[00:11:42] don't quite make it all the way so I'm
+[00:11:44] going to zoom in on this for you so so
+[00:11:46] right here we get this move up we dip
+[00:11:49] down we push up this is 894 right here
+[00:11:53] so we're just below the psychological
+[00:11:56] resistance of nine we drop back down we
+[00:11:58] come back back up we drop back down we
+[00:12:01] come back up we're we're sort of holding
+[00:12:04] over it you can see we're jumping over
+[00:12:05] and under this level and kind of holding
+[00:12:07] a support now I want you to watch this
+[00:12:10] right
+[00:12:11] here look at how we break through nine
+[00:12:15] and this is a perfect example of coming
+[00:12:16] down and retesting that level this would
+[00:12:19] have been a fantastic entry right here
+[00:12:22] buying the retest because if you got in
+[00:12:26] right there you know that $9 is support
+[00:12:30] So if you're buying this candle right
+[00:12:31] here at
+[00:12:33] $910 you've got 10 cents of risk and
+[00:12:35] then look at this upside this goes all
+[00:12:37] the way to $16 a share nearly now if we
+[00:12:41] back out of this for one second we'll
+[00:12:43] back out of the
+[00:12:44] zoom uh what we'll notice here is that
+[00:12:47] as we come up to each of these levels
+[00:12:49] each of them becomes a little battle so
+[00:12:51] there's a little battle that was
+[00:12:52] happening here around $6 there's a
+[00:12:54] little battle that's happening here
+[00:12:56] around 7 there's another little battle
+[00:12:58] that happens around eight this is very
+[00:13:00] common now as this pushed higher here we
+[00:13:03] saw the same thing we had resistance uh
+[00:13:06] right here at 10 so if we zoom in on
+[00:13:09] this candle right here what you'll see
+[00:13:12] is right around
+[00:13:14] $10 we squeeze up right here we pop over
+[00:13:18] we dip down so that shows us just in
+[00:13:20] those little candle wicks how we kind of
+[00:13:22] struggled in that area and then it
+[00:13:25] pushes up to 11 goes straight through
+[00:13:27] goes up to 12 dips below 12 and once it
+[00:13:30] can reclaim and prove it can hold over
+[00:13:32] 12 12 becomes support and then it goes
+[00:13:34] up even higher now this became
+[00:13:36] borderline parabolic when the price is
+[00:13:38] going 50 cents or a dollar a share at at
+[00:13:41] a time that's when I say it's parabolic
+[00:13:44] we're seeing really incredible M
+[00:13:46] momentum but that's not as common
+[00:13:47] usually what's more common is that we
+[00:13:49] move more in 50 Cent kind of blocks or
+[00:13:53] maybe a dollar a share at most where
+[00:13:55] we'll break the half dollar as we did
+[00:13:57] right here at 550 and we push up to 6
+[00:14:00] and then up to 650 and we dip back down
+[00:14:03] that's more common so support and
+[00:14:05] resistance at half dollar and hold
+[00:14:07] dollars will create horizontal support
+[00:14:11] and resistance trend lines these are
+[00:14:13] very easy to snap on your chart most
+[00:14:16] charts will allow you to draw a
+[00:14:17] horizontal trend line This is called a
+[00:14:19] horizontal line right here I have it as
+[00:14:21] one of my favorite tools so it's always
+[00:14:23] on my chart and then I can just pop them
+[00:14:25] on if I press the control button the
+[00:14:28] trend line will snap to the top of a
+[00:14:30] candle however I'm not always going to
+[00:14:34] draw these at the top and bottom of a
+[00:14:36] candle because in an area like this you
+[00:14:39] can see the support really is about 750
+[00:14:42] we're dealing with support at the half
+[00:14:44] dollar but oops sorry but if we zoom in
+[00:14:47] here you could see that we do dip down
+[00:14:50] just below that level we'll dip and then
+[00:14:51] we'll come back up we dip and then we
+[00:14:53] come back up we dip and then we come
+[00:14:55] back up and this shows that the price is
+[00:14:57] definitely being tested but in fact the
+[00:15:00] more times it's tested and the longer it
+[00:15:03] holds the more it gains validity that
+[00:15:05] this is a very clear level of support
+[00:15:08] where we have demand there are buyers
+[00:15:10] that are buying off of this level it's
+[00:15:13] also true however that the more times a
+[00:15:15] level is tested eventually usually it's
+[00:15:18] going to break if it's if it just keeps
+[00:15:21] getting kind of sold into pushed into
+[00:15:23] pushed into pushed into and that's the
+[00:15:25] same with a resistance level if you have
+[00:15:27] a resistance level like right here and
+[00:15:29] the price comes up once and twice three
+[00:15:32] times four times five times we get into
+[00:15:33] a really tight wedge and then these
+[00:15:36] usually break to the upside so this is
+[00:15:38] more of a flat bottom consolidation
+[00:15:41] pattern a wedge that usually would
+[00:15:43] resolve to the downside but in this
+[00:15:44] particular case the price did hold up at
+[00:15:47] 750 so this horizontal line is going to
+[00:15:50] be drawn really at the half and whole
+[00:15:52] dollar um when we're looking at an
+[00:15:54] example of a double top for instance so
+[00:15:58] I'm gonna type in
+[00:16:00] ctnt and we're going to switch to daily
+[00:16:03] chart on this one I observed an area of
+[00:16:09] resistance that was right this is the
+[00:16:12] all-time high so you see the all-time
+[00:16:14] high is at 690 now we might as well say
+[00:16:17] resistance is at 7 but the price to the
+[00:16:20] penny is 690 so what happens when we
+[00:16:23] come up to it right here what you'll see
+[00:16:25] is on the first day we came up to that
+[00:16:27] level resistance
+[00:16:29] right now in this case we did go to
+[00:16:31] seven we went up to $7 but it was Heavy
+[00:16:34] with sellers at seven so there was a
+[00:16:36] high level of Supply at that area the
+[00:16:38] second day we opened a little lower and
+[00:16:40] it curls up again it tries to come up to
+[00:16:43] seven and it actually broke seven but
+[00:16:45] only like by 5 cents and it drops again
+[00:16:49] what I said about this pattern at the
+[00:16:50] time is that this is a classic double
+[00:16:53] top so you have this big cup shape here
+[00:16:56] where basically you have a high and then
+[00:16:58] the came all the way back up sometimes
+[00:17:00] you could draw like a little um a little
+[00:17:03] kitty cat or a little devil right those
+[00:17:05] are the devil horns that's his little
+[00:17:06] tail there's you can't see a tail in the
+[00:17:08] chart but you got to visualize it so
+[00:17:11] this type of formation usually results
+[00:17:14] in a pullback and typically we get the
+[00:17:17] formation of a handle so we have the cup
+[00:17:20] right here the big cup and then we have
+[00:17:22] the handle right here now actually just
+[00:17:24] as a um as a matter of coincidence I
+[00:17:27] have an example of a cup and handle
+[00:17:30] right here that I was working on for um
+[00:17:33] for one of my classes so yeah the cup
+[00:17:35] and handle is right here where we've got
+[00:17:36] this pullback the move back up and then
+[00:17:39] we broke through this level and then we
+[00:17:40] push higher so cup and handle is very
+[00:17:43] common all right now if we switch back
+[00:17:46] to our um our other chart over here I
+[00:17:50] want to start talking about ascending
+[00:17:53] and descending trend lines cuz these are
+[00:17:55] the ones that are a little bit more
+[00:17:57] complicated so so this is the trend line
+[00:18:00] that I showed you on the first example
+[00:18:02] where I connected it right here and
+[00:18:04] right here and it goes all the way to
+[00:18:06] here so a really common question that
+[00:18:09] people ask me is Ross should I connect
+[00:18:12] the top of the candles the top of the
+[00:18:14] upper Shadow whenever I'm drawing a
+[00:18:16] trend line so let's just go ahead and
+[00:18:18] actually clear out all of my drawings so
+[00:18:20] I'm going to clear it out start fresh so
+[00:18:22] if we were connecting the top of trend
+[00:18:24] lines we would be connecting like this
+[00:18:26] sorry the top of candle wicks that's the
+[00:18:29] top of a candle wick that's the top of a
+[00:18:30] candle
+[00:18:31] wick um here's my rule of thumb it's not
+[00:18:36] important to connect the top of candle
+[00:18:38] wicks in fact it's not important that
+[00:18:41] every time you draw you do it in the
+[00:18:43] exact same way what is most important is
+[00:18:46] when you recognize that the level has
+[00:18:49] been tested multiple times so in fact if
+[00:18:51] I bring this down more like this this
+[00:18:54] looks more valid even though if we're
+[00:18:56] going to be totally honest this does
+[00:18:58] doesn't actually connect when I
+[00:19:01] connected it right here it goes through
+[00:19:02] the middle of a candle I connected it
+[00:19:04] right here it's also going through the
+[00:19:05] middle of a candle however it feels like
+[00:19:07] this is closer to what's accurate the
+[00:19:10] way the price is kind of hitting it so
+[00:19:12] usually what I'll do is I'll adjust the
+[00:19:15] trend line connecting highs and lows
+[00:19:17] because I don't want to just cross it in
+[00:19:19] the middle I do want to at least connect
+[00:19:21] to somewhere on a candle it could be the
+[00:19:23] top of a body it could be the bottom of
+[00:19:25] a body it could be the bottom or top of
+[00:19:26] the candle but it can't just be sort of
+[00:19:29] I I don't like trend lines that are just
+[00:19:31] totally floating in space like this
+[00:19:32] where I don't connect it to anything I
+[00:19:35] do like to connect it at least to
+[00:19:36] something so in this case maybe you know
+[00:19:39] I I tested a couple different ways and
+[00:19:42] usually this is almost like putting
+[00:19:45] together the pieces of a puzzle where
+[00:19:47] suddenly it just sort of snaps into
+[00:19:49] place and you're like yep that's the one
+[00:19:52] that's the one that feels the most right
+[00:19:54] so in this case here what I like about
+[00:19:56] this trend line is that it connects this
+[00:20:00] dot here naturally between the
+[00:20:02] connection here and the connection here
+[00:20:04] and you see up in this area there's sort
+[00:20:05] of some validity there as well now
+[00:20:08] something that a lot of Traders like to
+[00:20:11] do is look for channels so the way I
+[00:20:13] would look for a channels you would
+[00:20:15] actually copy and paste this trend line
+[00:20:17] and you would bring it down something
+[00:20:19] like this now if you bring it down like
+[00:20:21] that you would see okay interesting it
+[00:20:24] seems like it's sort of support breaks
+[00:20:27] below back above sort of support maybe
+[00:20:30] trying to be support it's not really
+[00:20:32] clear that it's really valid over here
+[00:20:35] but it is very common that stocks will
+[00:20:37] trade in these kinds of channels so just
+[00:20:40] by copying the trend line and
+[00:20:42] duplicating it and pasting it you could
+[00:20:44] start to move around the duplicate and
+[00:20:46] see you know does this does this feel
+[00:20:48] valid one of the things that I've always
+[00:20:51] found really fascinating is that when
+[00:20:53] you draw a trend line the right way it
+[00:20:56] can be in play for week weeks months
+[00:21:00] even years so if we look just for
+[00:21:02] example at Tesla we're not going to look
+[00:21:03] at the five minute chart but we're going
+[00:21:05] to look at the daily chart we're going
+[00:21:07] to step back we're going to look at this
+[00:21:08] daily chart and we're going to start to
+[00:21:10] draw a little trend line in here so you
+[00:21:12] start to connect this trend line in this
+[00:21:15] area right and now it's like whoa look
+[00:21:18] at that this is over the course of years
+[00:21:21] it keeps coming up to this level right
+[00:21:23] here it broke above it and then it's
+[00:21:25] below it it broke above it but remember
+[00:21:28] it tests it but it's not able to hold
+[00:21:30] above it that's the really critical spot
+[00:21:33] is when something breaks above is below
+[00:21:36] holds it and then moves higher that's
+[00:21:39] when things get exciting but it couldn't
+[00:21:41] do it in this case now this is a
+[00:21:43] descending resistance line in this
+[00:21:45] particular case if we copy this copy and
+[00:21:49] paste uh what some people will do is
+[00:21:51] they'll start to try to look for uh it's
+[00:21:53] partner on the low side now on in this
+[00:21:56] particular case I don't really see a
+[00:22:00] super
+[00:22:01] valid support I don't see a super valid
+[00:22:05] spot for this um you know
+[00:22:09] perhaps if we dialed this in in this
+[00:22:12] sort of area here there's something you
+[00:22:15] know starting to form here let's see
+[00:22:18] connecting these
+[00:22:20] lows a lot of times when we have a
+[00:22:22] candle where the price drops way down
+[00:22:25] like this I consider this to be an
+[00:22:28] attempt at breaking support that didn't
+[00:22:30] hold and that's also noticed um when you
+[00:22:32] look at the position of the 200 moving
+[00:22:34] average it dips below and then is right
+[00:22:36] back above so I'd be more inclined
+[00:22:38] typically to draw the trend line just
+[00:22:40] slightly above that candle and let that
+[00:22:43] candle be the one that's just sort of
+[00:22:44] outside breaking the trend uh and and
+[00:22:47] this starts to look you know a little
+[00:22:49] bit more reasonable in this area you've
+[00:22:52] got support support support support
+[00:22:56] tried to break below it got back above
+[00:22:58] it so that's something maybe to keep an
+[00:23:00] eye on now you could also try this copy
+[00:23:04] a paste and then put it on the upside
+[00:23:06] here and see does this line up any
+[00:23:08] better but in this case not
+[00:23:13] really I I think that it's just really
+[00:23:16] fascinating though when you see these uh
+[00:23:18] charts where a stock has been holding a
+[00:23:20] support level for really long time so
+[00:23:23] we've had these on the S&P 500 as well
+[00:23:26] you could you could find them on on
+[00:23:27] really just about any stock or or indic
+[00:23:30] you can see these areas where uh clearly
+[00:23:33] there is Demand right because that's
+[00:23:36] what we're talking about this creates
+[00:23:37] demand so you have a really steep line
+[00:23:40] like this that we were holding for quite
+[00:23:41] some
+[00:23:42] time so this is also something that
+[00:23:45] often happens where the price will be
+[00:23:47] above it here it seems to be respected
+[00:23:50] once twice three times four times just
+[00:23:52] because it breaks doesn't mean I should
+[00:23:54] get rid of the trend line because watch
+[00:23:56] this when it comes back up this can now
+[00:23:59] form as resistance and we could be
+[00:24:01] riding right underneath the bottom of it
+[00:24:03] so now that line which was once support
+[00:24:06] and was very valid becomes resistance so
+[00:24:09] a lot of Traders will save their trend
+[00:24:11] lines they'll keep them on their charts
+[00:24:13] and for years you'll see a trend line on
+[00:24:16] the daily chart now I'll say that when
+[00:24:18] it comes to a lot of small cap stocks a
+[00:24:22] lot of lower price stocks like something
+[00:24:24] like this that's just on the
+[00:24:26] scans this these are going to be less
+[00:24:29] proven they're going to be less
+[00:24:31] established you know having said that
+[00:24:34] though I mean boom right into that level
+[00:24:37] there so and this was kind of a logical
+[00:24:38] place to connect these two and just sort
+[00:24:40] of see what what happens moving forward
+[00:24:42] but it really is only two places it
+[00:24:45] connected so it happened to run into
+[00:24:47] that resistance right there one thing
+[00:24:50] that you can do is you could draw the
+[00:24:52] resistance on your um on your daily
+[00:24:56] chart and then you switch the time frame
+[00:24:59] so you can switch your time frame down
+[00:25:00] to a 5 minute and then when you do that
+[00:25:02] what you'll see is the area where that
+[00:25:05] daily level crosses on the 5 minute
+[00:25:07] chart or the one minute chart whatever
+[00:25:09] your intraday time frame is so then
+[00:25:11] you're like oh here we are we're right
+[00:25:13] at this level however when we're trading
+[00:25:16] something like a I don't know ctnt which
+[00:25:19] was the one that made a really big move
+[00:25:21] um but ended up reversing pretty much
+[00:25:23] the whole thing um this one we look on
+[00:25:26] the daily chart because it was a blue
+[00:25:29] sky setup there really wasn't anything
+[00:25:32] to look at for resistance but that's
+[00:25:34] part of what made it a pretty special
+[00:25:36] pattern and gave it the ability to go up
+[00:25:38] as high as it did because there was no
+[00:25:40] resistance there was no resistance in
+[00:25:42] the form of ascending or descending
+[00:25:45] resistance lines and the horizontal
+[00:25:47] resistance was just at half dollars and
+[00:25:49] whole dollars so anytime I'm pulling up
+[00:25:52] a chart one of the first things I'm
+[00:25:54] checking is the daily chart I pull up a
+[00:25:56] stock and I check the daily chart now in
+[00:25:58] this case I can see that there's a large
+[00:26:00] gap right here that was formed when the
+[00:26:03] stock uh dropped right here so now if we
+[00:26:07] come back up we know that we're going to
+[00:26:09] have a little bit of resistance here in
+[00:26:11] the form of it being the bottom of the
+[00:26:12] Gap and coincidence right there moving
+[00:26:16] average so the 200 moving average is
+[00:26:18] right here so 1528 for sure would be a
+[00:26:21] horizontal level of resistance on this
+[00:26:23] one I I don't think very many people on
+[00:26:26] this would try to draw a support
+[00:26:29] resistance line trend line you know in
+[00:26:32] this kind of area I think this would be
+[00:26:34] probably too obscure it's only too
+[00:26:36] candles the stock has gone through
+[00:26:38] reverse splits it's it's really not very
+[00:26:41] valid anymore uh it's always worth
+[00:26:43] taking a look at but it's really it's in
+[00:26:45] that case it's probably not a line
+[00:26:47] that's going to work so if we go back to
+[00:26:49] ctnt on the intraday this is uh one of
+[00:26:53] these Chinese stocks that had an
+[00:26:56] incredible move and then liquid
+[00:26:58] the Insiders started just selling
+[00:27:00] selling selling but if we look at this
+[00:27:03] we could dial it in a little bit so
+[00:27:07] right here as the price began moving up
+[00:27:10] we would say all right what what are
+[00:27:12] areas of potential support so I would
+[00:27:16] say kind of in here but that's not the
+[00:27:19] right spot probably something a little
+[00:27:22] bit more like this now when you're
+[00:27:24] drawing a support line it's important to
+[00:27:27] know that uh um you're not you want to
+[00:27:30] connect lows lower candles you wouldn't
+[00:27:33] want to connect it to like this candle
+[00:27:35] here that that would be connecting a a
+[00:27:38] resistance point with a support point
+[00:27:40] that that's not a correct way to draw it
+[00:27:43] you can connect resistance and
+[00:27:44] resistance and you can connect support
+[00:27:46] and support oops just like this but you
+[00:27:49] don't want to cross through price action
+[00:27:52] the only time it's okay for the price
+[00:27:53] action to cross through it is in a case
+[00:27:56] like this where you've got support
+[00:27:58] clearly it then comes down it breaks
+[00:28:01] that support level and is below it right
+[00:28:03] that's fine now maybe in the case of a
+[00:28:06] stronger stock it would come back up and
+[00:28:08] try to get back above it but that wasn't
+[00:28:10] the case uh
+[00:28:11] here coming back down on the Downs side
+[00:28:15] we start maybe a little bit higher let's
+[00:28:18] see I'm just going to move this around a
+[00:28:20] little bit um I also try to be a little
+[00:28:24] careful drawing super super steep trend
+[00:28:27] lines because they rarely can hold for
+[00:28:30] very long the price ends up just it's
+[00:28:33] not possible for the price to kind of
+[00:28:35] drop that fast or go up that fast so in
+[00:28:38] this area here I wouldn't say we have
+[00:28:42] any real like this is not you no one
+[00:28:45] should draw a trend line like that it's
+[00:28:47] not going to be supported for long at
+[00:28:49] all you're going to end up deleting that
+[00:28:50] off your chart this type of support line
+[00:28:52] or resistance line I wouldn't do that in
+[00:28:55] this area all you have is horizontal
+[00:28:59] resistance $19 whole dollar coming up to
+[00:29:02] 20 right this one up here at 24 makes
+[00:29:06] sense this one up here around 25 or 30
+[00:29:09] right around
+[00:29:10] $30 those are psychological levels that
+[00:29:13] make a lot of sense and that's one of
+[00:29:14] the reasons we love these parabolic
+[00:29:16] stocks because when they start to get
+[00:29:18] really juicy like this and move fast
+[00:29:20] you're not you don't have descending
+[00:29:23] resistance from an intraday
+[00:29:25] perspective you could have in you could
+[00:29:28] have descending resistance that's coming
+[00:29:31] from uh the daily chart but in this
+[00:29:34] particular case there was none so we
+[00:29:37] didn't have any descending resistance
+[00:29:38] from the daily chart now in this case we
+[00:29:41] also really didn't have any ascending
+[00:29:44] resistance either so an ascending
+[00:29:45] resistance line would be when the price
+[00:29:47] is moving up and you know this is this
+[00:29:50] is less common to see because in order
+[00:29:53] to have ascending resistance you need
+[00:29:56] the price to have been making higher
+[00:29:59] highs so like right here you know you
+[00:30:02] could you could kind of I mean that's
+[00:30:03] really flat that's not even ascending
+[00:30:05] that's just flat um most of these lower
+[00:30:08] price stocks I end up trading you're
+[00:30:10] dealing with descending resistance the
+[00:30:12] price is coming down that's what's much
+[00:30:14] more common so an area like this yes the
+[00:30:19] price broke it it comes back down but
+[00:30:22] it's still you know may still be worth
+[00:30:24] keeping an eye on one thing that I'll
+[00:30:26] caution is that some sometimes you'll
+[00:30:28] see someone whose chart looks like a
+[00:30:30] spiderweb it's just absolutely insane
+[00:30:34] and unfortunately when it gets like that
+[00:30:36] it's going to be really hard to to focus
+[00:30:39] on what you're looking at so I would
+[00:30:41] encourage you to try to keep it
+[00:30:43] relatively simple looking at half
+[00:30:45] dollars and whole dollars horizontal
+[00:30:48] areas of support or resistance and then
+[00:30:50] when you pull up a chart like this for
+[00:30:53] me when I pull it up my eye naturally is
+[00:30:56] kind of connecting the tops so I'm like
+[00:30:58] oh we've got a top right here from there
+[00:31:01] to there you know I just sort of like I
+[00:31:03] just sort of see it that way or I look
+[00:31:05] at this area and I'm like okay well you
+[00:31:07] know that that's a little too steep so
+[00:31:08] that's not so valid this one again it's
+[00:31:11] okay to cross here these tops um you
+[00:31:14] know that's not a problem but it came up
+[00:31:17] a little higher than that there so maybe
+[00:31:20] down on the support side sort of saying
+[00:31:23] all right do we have support level
+[00:31:24] here you know maybe not if again if you
+[00:31:28] see the price is breaking with no regard
+[00:31:31] breaking the trend line with absolutely
+[00:31:33] no issue then it's like yeah huh all
+[00:31:36] right I guess that's not a super valid
+[00:31:38] level the the levels that work the best
+[00:31:41] will be the ones that the most Traders
+[00:31:43] are seeing ultimately so it has to be
+[00:31:45] pretty obvious and for a long time in my
+[00:31:48] trading I really only used these
+[00:31:51] horizontal levels of support and
+[00:31:52] resistance because I felt like the
+[00:31:54] ascending ones like this were just a
+[00:31:57] little too
+[00:31:59] abstract like I just I was like I can
+[00:32:01] get it but um at the same time I don't
+[00:32:05] know if another enough other people are
+[00:32:07] seeing this and if they're not seeing it
+[00:32:09] then you know
+[00:32:11] realistically these aren't going to
+[00:32:12] these aren't going to work um this is a
+[00:32:15] nice example here where you've got
+[00:32:17] support support support it turns into
+[00:32:23] resistance again here another example
+[00:32:25] support support resistance resistance
+[00:32:28] so that's a really good
+[00:32:30] one this is another decent one here
+[00:32:33] support support oh maybe we just already
+[00:32:34] looked at that but anyways um I no I
+[00:32:37] think we looked at that one they're just
+[00:32:38] similar but once you start to recognize
+[00:32:40] that it it's it's going to help you when
+[00:32:42] you're trading because it's going to
+[00:32:44] prevent you from buying into these
+[00:32:46] levels that are clearly resistance and
+[00:32:49] that that's ultimately what you want to
+[00:32:51] avoid right if you see a trend line and
+[00:32:53] you're like okay I I already know that
+[00:32:56] we're right around the half dollar 150
+[00:32:59] that's going to be potential resistance
+[00:33:00] and then I see this ascending resistance
+[00:33:02] line right here that trend line it's
+[00:33:04] like yeah this is a spot to hold off
+[00:33:06] there's a red light here now traders who
+[00:33:09] get good at recognizing these won't even
+[00:33:12] have to draw the trend lines you'll get
+[00:33:14] to a point where you can visualize it in
+[00:33:17] your mind you'll just sort of know oh
+[00:33:20] yeah I can see that I um I had this um I
+[00:33:24] there there was this day that I was at
+[00:33:26] the um I was at the beach
+[00:33:28] and I had my phone and I was looking at
+[00:33:31] a at at a chart and I was kind of I was
+[00:33:34] kind of going like this I was like now I
+[00:33:36] think I see yep there it is it was like
+[00:33:39] sort of projecting to the penny like
+[00:33:41] where it was going to run into
+[00:33:43] resistance and you know it's just
+[00:33:44] something that once you learn to
+[00:33:46] recognize these patterns once you see it
+[00:33:49] it's like they just pop out of the
+[00:33:50] woodwork it's like a Magic Eye poster if
+[00:33:53] if you've ever done one of those where
+[00:33:54] you see nothing nothing nothing and then
+[00:33:56] whoa there's everything now I see it I
+[00:34:00] see the support I see the resistance I
+[00:34:03] see the ascending I see the descending
+[00:34:05] and then we add other indicators like
+[00:34:07] macd moving average convergence
+[00:34:09] Divergence indicator and now things are
+[00:34:11] really coming together now the stock
+[00:34:13] that I traded uh just today for instance
+[00:34:15] this one syta this one had news this
+[00:34:18] morning so it went up about 75% on news
+[00:34:22] but to be honest this is not one where I
+[00:34:25] really had a strong ability to draw draw
+[00:34:28] any um ascending or descending levels we
+[00:34:31] had a double top uh right around this
+[00:34:33] area here on this particular one you
+[00:34:36] know we kind of came up here double
+[00:34:38] topped little cup and handle formation
+[00:34:39] we pushed higher we did struggle around
+[00:34:42] $4 the whole dollar uh and what was
+[00:34:45] interesting on this one was that there
+[00:34:46] was a lot of sellers against four so we
+[00:34:48] kind of struggled there dipped down we
+[00:34:51] got above it came back held a support
+[00:34:53] bounced up broke below it back above it
+[00:34:55] back below it struggling
+[00:34:58] kind of pulling away back up back down
+[00:35:01] you know this is one that just it kind
+[00:35:03] of struggled a little bit there was
+[00:35:05] another one today that was similar where
+[00:35:07] the price was sort of struggling around
+[00:35:09] I think it was $ four or5 dollar a share
+[00:35:11] this is uh
+[00:35:12] BuzzFeed he was up around four and I
+[00:35:15] just kind of you know I could just sort
+[00:35:17] of visualize like all right yes we're
+[00:35:19] not coming right up to uh 4 here on
+[00:35:22] these candles we're at 394 but I knew
+[00:35:25] that the issue was that right up here
+[00:35:27] around before we had all of these
+[00:35:29] sellers that were just stacked up there
+[00:35:32] were just tons and tons of people who
+[00:35:35] maybe they gotten it two or $3 and they
+[00:35:38] just said in order to sell it at four so
+[00:35:40] that create a lot of resistance there we
+[00:35:43] got above it we kind of got back below
+[00:35:45] it back above it and it was an area that
+[00:35:47] was a real battle it wasn't convincingly
+[00:35:50] broken the best the best examples will
+[00:35:53] be you know when we're watching a stock
+[00:35:56] and it breaks one of these levels and so
+[00:36:00] there's sort of two scenarios one is you
+[00:36:02] have breaking news that comes out and
+[00:36:05] boom the price just goes straight up
+[00:36:07] okay so that's awesome when that happens
+[00:36:09] but that's that's more the exception not
+[00:36:11] the norm I mean it might happen a couple
+[00:36:13] times a week but but even still what's
+[00:36:15] more common with with most stocks is
+[00:36:18] that they're going to trade in these
+[00:36:19] areas where they're just going to be
+[00:36:21] kind of steadily stair stepping higher
+[00:36:24] so we have news that comes out we push
+[00:36:27] up to six and the best case scenario is
+[00:36:30] that we pull back right here and this is
+[00:36:34] the place to buy yes on the one hand
+[00:36:36] you're buying right under resistance on
+[00:36:38] the other hand it's proving it's holding
+[00:36:40] this level and you know that if it can
+[00:36:42] break this level then it's probably
+[00:36:44] going to hold above it it might even
+[00:36:46] come back down and retest it and when it
+[00:36:48] retests it and it doesn't break below
+[00:36:50] that's just even more uh confirmation so
+[00:36:54] and for what it's worth this pattern
+[00:36:56] right here if we got zoomed in on that
+[00:36:59] particular pattern that's where we're
+[00:37:01] watching the first pullback so we have
+[00:37:04] the two three four green candles and
+[00:37:06] then one two candles of pullback looking
+[00:37:08] for first candle to make a new high and
+[00:37:10] this bottom right here that's always
+[00:37:12] your max loss so even if you're getting
+[00:37:15] in right here and you're getting in
+[00:37:16] underneath resistance for that move
+[00:37:18] higher you're still getting in
+[00:37:20] relatively close to your max loss which
+[00:37:22] is the low of that candle so these are
+[00:37:24] the patterns that I'm trading for the
+[00:37:25] most part every day now those of you
+[00:37:27] guys if you want to learn a little bit
+[00:37:28] more about technical analysis I have a
+[00:37:31] 112 page Deep dive study guide that goes
+[00:37:36] over all of my favorite chart patterns
+[00:37:39] so one of the things we've been talking
+[00:37:40] about today certainly is chart patterns
+[00:37:42] horizontal support resistance lines and
+[00:37:45] the ascending and descending resistance
+[00:37:47] and support lines so I encourage you to
+[00:37:49] download my 112 page PDF you can print
+[00:37:52] it out you can start put putting some of
+[00:37:54] those charts up on you know around your
+[00:37:56] desk because one of the things you want
+[00:37:58] to get really good at is recognizing
+[00:38:00] those patterns as active Traders we're
+[00:38:03] in the business of trying to predict the
+[00:38:05] future what's going to happen next and
+[00:38:08] the way we get really good at that is by
+[00:38:10] visualizing the full pattern so we only
+[00:38:13] see half of it when we're watching the
+[00:38:16] chart forming we see the first green
+[00:38:17] candle the second green candle first red
+[00:38:19] candle second red candle we have to be
+[00:38:21] able to visualize what's going to happen
+[00:38:24] next the traders who get really good at
+[00:38:26] recognizing the patterns you can see
+[00:38:29] exactly how you want to resolve and so
+[00:38:32] then you get in you've got your max loss
+[00:38:34] you understand your risk and you expect
+[00:38:36] to see that resolution and of course
+[00:38:38] when you choose the right stocks that
+[00:38:39] have a catalyst that have news that have
+[00:38:41] that volatility that's where you usually
+[00:38:43] you're going to find success you see the
+[00:38:45] positive resolution and in the times
+[00:38:47] where it doesn't resolve the right way
+[00:38:49] you know the place to exit and to get
+[00:38:51] out if you found this episode helpful I
+[00:38:54] hope you hit that thumbs up I hope
+[00:38:55] you're subscribed the channel for more
+[00:38:57] episodes episodes about trading strategy
+[00:38:58] just like this and I want to encourage
+[00:39:00] you to go ahead and download my 112 page
+[00:39:03] Deep dive on technical analysis and my
+[00:39:06] favorite Candlestick chart patterns
+[00:39:08] thanks as always for tuning in I'll
+[00:39:09] remind you as always trading is risky
+[00:39:11] and my results aren't typical so manage
+[00:39:13] your risk take it slow and we'll see you
+[00:39:15] back here for the next episode real soon

@@ -1,0 +1,512 @@
+# How to Cut Losers Faster
+# https://www.youtube.com/watch?v=1axXKjgCe84
+# duration_sec: 1103
+
+[00:00:00] [Music]
+[00:00:02] what's up everyone all right so the
+[00:00:04] topic of this episode is how to cut your
+[00:00:06] losers faster and so we're going to ask
+[00:00:08] the question and try to find the answer
+[00:00:11] to why so many of us including me from
+[00:00:14] time to time fall into the habit of
+[00:00:16] holding our losers way too long and
+[00:00:19] making losses much bigger than they need
+[00:00:22] to be and then the inverse to this
+[00:00:24] question is also how can we hold our
+[00:00:27] winners longer right cut losses short
+[00:00:31] and hold winners longer that's the
+[00:00:32] ultimate goal because the fact is
+[00:00:35] trading to a large extent is it's a game
+[00:00:38] of statistics and so you either have the
+[00:00:40] numbers in your favor or they're against
+[00:00:43] you so given the fact that we know most
+[00:00:44] traders lose money most traders must
+[00:00:47] have the odds against them and let's
+[00:00:49] jump onto the whiteboard and actually
+[00:00:50] look at these numbers here for a second
+[00:00:52] so
+[00:00:53] this is um
+[00:00:55] just from a statistical
+[00:00:56] analysis standpoint if your profit
+[00:01:00] and loss ratio is one
+[00:01:03] to one which means your your winners are
+[00:01:05] a hundred your losers are 100 or
+[00:01:07] whatever it is they're they're equal
+[00:01:08] then you would need to be right 50 of
+[00:01:11] the time in order to be break even right
+[00:01:14] now now that makes sense that makes
+[00:01:16] perfect sense
+[00:01:17] now if your winners are two
+[00:01:20] to one
+[00:01:21] you actually only need to be right 33 of
+[00:01:24] the time in order to break even
+[00:01:27] but if your winners are one
+[00:01:29] to two meaning your losses are twice as
+[00:01:31] big you actually need to be right 66
+[00:01:34] percent of the time just to break even
+[00:01:37] and what i'll tell you is that most
+[00:01:40] beginner traders me included when i got
+[00:01:42] started have negative profit loss ratios
+[00:01:45] so my average losers were about 20 cents
+[00:01:48] per share and i was calculating it in
+[00:01:50] cents per share rather than dollars you
+[00:01:53] can calculate it either way if we
+[00:01:55] actually look at my metrics here just
+[00:01:56] for a second this is for the last two
+[00:01:58] weeks of trading and my average winners
+[00:02:00] are 761 dollars while my average losers
+[00:02:03] are
+[00:02:04] 593 dollars so that's in dollars now we
+[00:02:07] can also do a comparison on
+[00:02:10] this data looking at cents per share so
+[00:02:14] we're going to compare all the winners
+[00:02:16] to all of the losers all right so during
+[00:02:19] the same period of time let's generate
+[00:02:21] the report and what you're going to see
+[00:02:22] is that the average winners are 16 cents
+[00:02:25] per share and the average losers are 15
+[00:02:27] cents per share now believe it or not
+[00:02:29] this is actually a really big
+[00:02:30] achievement for me because when i got
+[00:02:32] started my average winners were only
+[00:02:34] about eight to ten cents a share they
+[00:02:36] were small my average losers were 20
+[00:02:38] cents a share which meant i fell into
+[00:02:41] this camp right here of having a
+[00:02:43] negative profit to loss ratio which
+[00:02:46] means i needed to be right 66 of the
+[00:02:49] time just to break even let's jump back
+[00:02:52] over here and look at my accuracy over
+[00:02:54] the last couple weeks and what you'll
+[00:02:56] see is that my accuracy is literally
+[00:02:58] right on the nose of 66
+[00:03:01] and yet it's produced 99 000 in profit
+[00:03:05] and that is because i've gotten so much
+[00:03:08] better at cutting my losses quickly this
+[00:03:11] is so important so how do you cut losses
+[00:03:14] quickly well and and we'll also talk
+[00:03:16] about how to how to hold winners longer
+[00:03:18] because there's sort of two sides to
+[00:03:20] this topic on the one hand um some
+[00:03:23] people would say well
+[00:03:25] you set a hard stop and if you're
+[00:03:26] setting a hard stop on your trade and
+[00:03:28] you get stopped out then that's that
+[00:03:30] there's nothing that really else you can
+[00:03:32] do to cut your losses faster but we know
+[00:03:35] number one most people don't set hard
+[00:03:37] stops on their trades me included and
+[00:03:40] the reason that i don't do that is
+[00:03:42] because my trades are very short my
+[00:03:44] average hold time is only a few minutes
+[00:03:45] long i think my average hold time right
+[00:03:47] now is four minutes for winning trades
+[00:03:50] and two minutes for losing trades but
+[00:03:52] that also means on the two minute side
+[00:03:54] of the losing trades that i am cutting
+[00:03:55] my losers fast but because the trade is
+[00:03:59] so short
+[00:04:00] the mechanics as you probably understand
+[00:04:02] of setting a stop order
+[00:04:05] means that if you have a stop order out
+[00:04:07] let's say it's minus 10 cents from your
+[00:04:09] entry
+[00:04:10] you can't press the button to sell half
+[00:04:13] without first cancelling that sell order
+[00:04:15] now that's going to be true with most
+[00:04:16] brokers some brokers will actually allow
+[00:04:19] you to do that and it will automatically
+[00:04:21] change the size of your previous order
+[00:04:23] which is awesome but that's not most
+[00:04:25] brokers so for most brokers it would
+[00:04:27] cancel it would
+[00:04:28] it would reject your second order
+[00:04:30] because it would say no you're going to
+[00:04:32] cross your position you already have one
+[00:04:34] sell order out you're going to go short
+[00:04:36] the stock if you put out too many sell
+[00:04:37] orders and then you end up with this
+[00:04:39] issue of overselling and putting
+[00:04:42] yourself short the position if they all
+[00:04:43] fire at the same time
+[00:04:45] so i don't use live stop orders but you
+[00:04:48] know what i do is i keep my hand
+[00:04:50] hovering over two buttons control and z
+[00:04:54] all right so it's the
+[00:04:56] control button
+[00:04:57] control and then the z button right here
+[00:05:01] and so i always have my hand just like
+[00:05:03] this so um actually let's see it's um
+[00:05:06] yep so it's like this and like this
+[00:05:09] that's the way my my hand is when i'm in
+[00:05:11] a trade pinky on control middle finger
+[00:05:14] on the z button right hit the z and then
+[00:05:17] um if i have to real quick move up to
+[00:05:19] press control q to cancel an open order
+[00:05:21] i would press control q so control q
+[00:05:24] control z so
+[00:05:25] for me
+[00:05:27] i have what's called the bailout hotkey
+[00:05:30] ready to go
+[00:05:32] now it's very easy to press that button
+[00:05:34] and with the press of that button
+[00:05:35] instantly i'm out of a trade and i'll
+[00:05:37] show you here
+[00:05:39] i'll just show you a real example well
+[00:05:41] it'll be a simulated trading example
+[00:05:43] i'll use the
+[00:05:45] nasdaq test stock here so with the
+[00:05:48] nasdaq test stock right here
+[00:05:50] i can jump in this um
+[00:05:53] with a thousand shares by pressing shift
+[00:05:54] one boom i'm in a thousand shares shift
+[00:05:57] one now i can press control z and just
+[00:05:59] like that i'm out
+[00:06:00] so by getting into the trade and having
+[00:06:02] my hand over the control z button if the
+[00:06:05] stock starts to squeeze up i can of
+[00:06:07] course put a profit target order out
+[00:06:09] with control p and if it doesn't hit i
+[00:06:11] can press control q and i can sell and
+[00:06:13] then i'm out of the trade flat the
+[00:06:16] easiest way to be ruthless about cutting
+[00:06:19] your losses is by making it just a habit
+[00:06:22] that the way your workflow is you get
+[00:06:25] into a trade you're looking for a
+[00:06:26] certain thing if you're buying a micro
+[00:06:28] pullback looking for the break through a
+[00:06:29] half dollar or a whole dollar you're
+[00:06:31] expecting immediate resolution and if it
+[00:06:34] doesn't resolve then as soon as you see
+[00:06:36] that hesitation on the tape the pause it
+[00:06:40] slows down you see that big seller you
+[00:06:42] just ruthless cut it you hit the bid you
+[00:06:44] bail out you just get out
+[00:06:46] and maybe you're getting out flat maybe
+[00:06:48] you're up two cents you're down two
+[00:06:49] cents but the second the trade doesn't
+[00:06:51] look good anymore you just get out
+[00:06:53] because if you wait
+[00:06:55] for
+[00:06:56] the clear sign that it's failing well by
+[00:06:58] that time you're going to be read on the
+[00:07:00] position versus wherever it was when you
+[00:07:02] had that first moment of hesitation
+[00:07:05] so one of the things that i have found
+[00:07:07] is that it's much easier to be ruthless
+[00:07:09] about cutting losses when you trade with
+[00:07:12] smaller share size when you start
+[00:07:14] trading with bigger size 10 000 shares
+[00:07:17] 15 20 000 shares when you press control
+[00:07:20] z you know you're gonna get some
+[00:07:22] slippage you know the way market makers
+[00:07:23] will see your order coming to the book
+[00:07:25] and the way they'll pull their bids and
+[00:07:26] you get that
+[00:07:27] that slippage down to the bottom of a
+[00:07:29] candle wick and then it pops right back
+[00:07:31] up
+[00:07:32] so
+[00:07:33] when you start trading with that type of
+[00:07:35] share size you can no longer really just
+[00:07:37] hit the bid you sort of have to scale
+[00:07:39] into a trade and you have to sort of
+[00:07:41] unwind the trade
+[00:07:43] but with smaller share size starting
+[00:07:45] with a hundred shares going up to a
+[00:07:47] thousand i have zero issues hitting the
+[00:07:50] bid and getting slippage when i'm
+[00:07:52] trading with a thousand shares on ninety
+[00:07:54] percent of the stocks i trade maybe on
+[00:07:56] something that's priced at like 25 or 30
+[00:07:58] or more a share where you have 20 30
+[00:08:01] spreads you'll get a little slippage but
+[00:08:03] for the most part on stocks under 10 15
+[00:08:05] a share i can hit the bid with a
+[00:08:07] thousand shares no issue now 2 000
+[00:08:10] shares generally the same three thousand
+[00:08:12] typically the same you start getting up
+[00:08:14] to five thousand seven thousand and ten
+[00:08:16] thousand and up you can start to run
+[00:08:18] into slippage depending on the liquidity
+[00:08:20] of the stock you're trading so to
+[00:08:22] condition yourself to be ruthless about
+[00:08:25] cutting losses and to identify the right
+[00:08:27] place to exit you want to trade with
+[00:08:29] smaller share size because that way you
+[00:08:32] can just follow your gut and you don't
+[00:08:33] get that negative kind of
+[00:08:36] reinforcement from the market of getting
+[00:08:38] stopped out with a bunch of slippage
+[00:08:39] only to watch it rip back up you stop
+[00:08:41] out flat or small loss it's no big deal
+[00:08:44] and then when it sets up again you can
+[00:08:46] easily get back in
+[00:08:48] now you know the whole thing that's
+[00:08:49] interesting here is
+[00:08:51] that a big factor in preventing people
+[00:08:54] from hitting the bid
+[00:08:55] is the way orders are routed and just
+[00:08:58] the knowledge that when i finally bail
+[00:09:00] i'm gonna get a ton of slippage and that
+[00:09:02] can cause that hesitation
+[00:09:04] to not press the sell button so one of
+[00:09:06] the reasons that many of us will hold
+[00:09:09] losers too long is because of a fear of
+[00:09:12] loss if you get into a trade whether
+[00:09:14] it's a thousand shares or 10 000 or 100
+[00:09:16] 000 and the trade suddenly starts not
+[00:09:18] working and it starts going down you
+[00:09:21] start feeling this inside feeling this
+[00:09:23] fear of uh oh i'm gonna lock up a big
+[00:09:25] loss here on this this is gonna be a big
+[00:09:27] loser so it starts going down and you're
+[00:09:29] in the red and now you get in this
+[00:09:31] position of justifying holding it
+[00:09:32] because you're thinking well
+[00:09:34] yes i'm read on it but the setup is
+[00:09:36] still good it could still turn around
+[00:09:39] and so you get into holding and hoping
+[00:09:41] holding and hoping that it's going to
+[00:09:42] turn around and if it doesn't then you
+[00:09:44] finally sell at this like capitulation
+[00:09:47] point where it's like
+[00:09:49] selling off it's just everyone's
+[00:09:51] throwing in the towel and oftentimes
+[00:09:53] that's the low and then you get a bounce
+[00:09:55] back up maybe it's only a temporary
+[00:09:56] bounce but you never
+[00:09:58] want to be finally bailing out
+[00:10:01] when you're getting those sell-offs
+[00:10:02] because you're just going to get the
+[00:10:03] worst fill possible
+[00:10:05] so one of the things that
+[00:10:07] i'm a big advocate of is being able to
+[00:10:09] recognize that you that we all have that
+[00:10:12] sort of fear in us you know at the very
+[00:10:14] beginning of this episode i talked about
+[00:10:15] how this is a game in a lot of ways of
+[00:10:17] statistics and yet most people lose and
+[00:10:20] it's because most traders fall into this
+[00:10:22] habit of holding winners uh sorry
+[00:10:24] holding losers too long and selling
+[00:10:26] winners way too quickly they create a
+[00:10:29] negative profit loss ratio for
+[00:10:30] themselves you know their average losers
+[00:10:32] maybe 200 bucks their average winners
+[00:10:34] are a hundred you know it's it's
+[00:10:35] negative profit loss ratio therefore
+[00:10:37] they would need to be right 66 percent
+[00:10:39] of the time just to break even and
+[00:10:41] unlike a trader like me who's making 100
+[00:10:44] grand in two weeks at 66 success now
+[00:10:46] obviously disclaimer my results are not
+[00:10:48] typical that's no guarantee that you're
+[00:10:50] going to find a similar result if you
+[00:10:52] trade with me there's no guarantee so be
+[00:10:54] cautious but the fact is it the reason
+[00:10:57] that i'm making that money in that same
+[00:10:59] period of time is because i'm at least
+[00:11:01] maintaining a one-to-one ratio i'm not
+[00:11:04] even up here at two to one to get a two
+[00:11:06] to one ratio you need to have really
+[00:11:08] tight stops and you need to have bigger
+[00:11:10] winners and you know what usually
+[00:11:12] happens in order to get two to one you
+[00:11:14] start sacrificing small base hits for
+[00:11:16] bigger winners that extend your profit
+[00:11:18] ratio side and the result is your
+[00:11:20] accuracy starts to decline
+[00:11:23] so you kind of have to choose a certain
+[00:11:24] point do i want to be more of a scalp
+[00:11:27] trader where i take really quick entries
+[00:11:29] and exits and therefore i have high
+[00:11:32] accuracy but slightly lower average
+[00:11:34] winners or do i want to be a little bit
+[00:11:36] more of a trader looking for home runs
+[00:11:38] where i take a trade and i may be up 20
+[00:11:41] cents or 30 cents a share but i'm not
+[00:11:43] going to take any off the table i'm
+[00:11:44] going to sacrifice that small base hit
+[00:11:46] for the bigger move because sometimes
+[00:11:49] that trade is going to end up going back
+[00:11:50] and stopping you out red which brings
+[00:11:52] your accuracy back down right so at the
+[00:11:55] end of this episode i'll put a link to
+[00:11:56] um scalp trading because i think many of
+[00:11:58] you guys will find that interesting and
+[00:12:00] um i'll put a i'll put a link to another
+[00:12:02] episode on holding your winners longer
+[00:12:05] where i sort of talked a little bit in
+[00:12:07] more detail about the winning side of
+[00:12:09] sort of this question now one of the
+[00:12:11] next steps that you can do to cut your
+[00:12:14] losers faster and this is this is so
+[00:12:17] important
+[00:12:19] right here um when i hosted this is a
+[00:12:22] little um uh messy here because i was
+[00:12:25] drawing on the other side so these are
+[00:12:27] these are four steps that you can take
+[00:12:29] to try to cut losers faster
+[00:12:31] focus on highest quality trades if you
+[00:12:34] are focusing on the highest quality
+[00:12:36] trades you're focusing on trading the
+[00:12:38] front side of the move when the macd is
+[00:12:42] pulling away your moving averages are
+[00:12:43] moving up the stock is just beginning to
+[00:12:44] open up you're gonna find that these
+[00:12:46] stocks are much more forgiving you're
+[00:12:48] gonna find that dips get bought up
+[00:12:50] because the stock is stair stepping up
+[00:12:53] so when it has like a little dip it
+[00:12:54] still goes up the problem with trading
+[00:12:56] stocks on the back side of the move is
+[00:12:58] that when their stairs stepping down the
+[00:13:00] pops they don't go up high enough to get
+[00:13:03] you back out with profit and then it
+[00:13:05] dumps down further
+[00:13:06] so being able to identify and
+[00:13:08] differentiate the front side of the move
+[00:13:11] and the back side of the move is going
+[00:13:13] to be super important focus on trading
+[00:13:15] high quality setups on the front side of
+[00:13:17] the move number one number two trade
+[00:13:20] with smaller share size as you're
+[00:13:22] getting more comfortable and as you're
+[00:13:24] trying to condition yourself to hit the
+[00:13:26] bid bail out and cut losses and be
+[00:13:28] ruthless about it
+[00:13:30] number three you can try using stop
+[00:13:32] orders if you want to try just having
+[00:13:34] like eight cent stops on small size
+[00:13:37] you're not going to have much slippage
+[00:13:39] on it you will have an issue when you
+[00:13:41] trade stocks that have bigger spreads
+[00:13:42] but it can get you in the habit of just
+[00:13:44] quick stop loss quick stop loss and it's
+[00:13:47] no big deal you can bounce back from
+[00:13:48] small losses
+[00:13:49] i also like to use stop at break even
+[00:13:53] so when i get into a trade and i'm up 5
+[00:13:55] or 10 cents i can set my stop at break
+[00:13:57] even now again i i want to make sure i
+[00:14:01] take some profit not just hold it break
+[00:14:02] even and let it come back down but stop
+[00:14:05] it break even means at that that point
+[00:14:07] i'm risking basically zero or maybe like
+[00:14:09] 10 or 15
+[00:14:11] with a stop right at my entry the only
+[00:14:13] risk would be a little bit of slippage
+[00:14:15] and then number four
+[00:14:17] start looking at scaling you can both
+[00:14:20] scale in and scale out of trades
+[00:14:24] so a scaling strategy means let's say
+[00:14:26] you're looking at a stock for the break
+[00:14:28] of five dollars so you get in
+[00:14:30] a thousand let's say 500 shares at 4.95
+[00:14:33] if it immediately rips through 5 and
+[00:14:35] goes to 510 you can add another 500 on
+[00:14:38] the confirmation at 510 with a new
+[00:14:40] target of 525 then up to 550. if you get
+[00:14:43] that move your cost basis has gone from
+[00:14:45] 495 adding at 510 your cost basis is now
+[00:14:49] like 503 or whatever 504 right so you
+[00:14:51] moved your average up but then you've
+[00:14:53] got a bigger position and you can now
+[00:14:54] start to sell half as it goes higher
+[00:14:57] adjust stops to break even
+[00:14:59] inversely if you get in a trade and you
+[00:15:02] buy at 495 it hits 501 and then drops
+[00:15:06] down to 490 you could sell half for a
+[00:15:09] loss and say you know what if this was a
+[00:15:12] really good quality trade it would
+[00:15:14] already be at 510. so on the one hand
+[00:15:16] you could just bail on the whole thing
+[00:15:18] if you still think maybe it has some
+[00:15:19] potential you could scale out of half
+[00:15:22] for a loss thereby reducing your risk on
+[00:15:24] the trade because the trade has already
+[00:15:26] proven that maybe it's not as clean as
+[00:15:28] you thought it was going to be and then
+[00:15:30] if it does go back up to 510 515 you
+[00:15:33] could always add back
+[00:15:35] i usually whenever i like if i take a
+[00:15:37] trade and i get in at 495 for instance
+[00:15:40] and it drops to 575. if i've taken a
+[00:15:43] starter i can add at 575 look for the
+[00:15:46] pot back up to 585 and then get out flat
+[00:15:49] so
+[00:15:50] being able to begin a trade with a
+[00:15:52] smaller position gives you the ability
+[00:15:54] to scale in whether it's a little higher
+[00:15:57] or a little lower and it's a little
+[00:15:59] easier to manage a trade right so if i
+[00:16:01] get in something and it immediately
+[00:16:02] drops 50 cents a share i could just cut
+[00:16:04] the loss on the whole thing
+[00:16:06] but usually if something drops 50 cents
+[00:16:07] a share it's gonna bounce back up so
+[00:16:10] then if i add if i start with half size
+[00:16:12] i add another half now it only needs to
+[00:16:14] bounce halfway back up for me to get out
+[00:16:16] flat and that's sort of a risk
+[00:16:18] management technique where
+[00:16:20] i change my focus on the trade from this
+[00:16:22] being a big winner to just getting out
+[00:16:24] flat
+[00:16:26] getting out flat that means my losses
+[00:16:27] are going to be small it's a little more
+[00:16:29] advanced to get into that type of
+[00:16:31] scaling where you're averaging into a
+[00:16:33] trade or averaging down on your position
+[00:16:36] so as a beginner you're going to want to
+[00:16:38] stick with scaling out of winners and
+[00:16:40] just cutting your loss and hard stop on
+[00:16:43] trades because that way what you're
+[00:16:44] doing is you're capping your downside so
+[00:16:47] if you can start capping your downside
+[00:16:49] at 10 cents and of course my average
+[00:16:51] losses right now are uh we had it at
+[00:16:53] about 16 cents so capping my downside
+[00:16:56] loss right now at you know a 16 cent
+[00:16:58] stop wherever that was
+[00:17:00] that's good you cap your downside and
+[00:17:02] then on the profit side on your winners
+[00:17:05] you want to try to scale out so you can
+[00:17:07] hold your winners longer so if you
+[00:17:09] really enjoyed this episode and this
+[00:17:10] topic really connects with you it
+[00:17:12] resonates with you you understand that
+[00:17:14] this is an area where your trading can
+[00:17:16] stand to really see some improvements i
+[00:17:18] want you to check out the link that will
+[00:17:19] be in the description it's to an
+[00:17:20] hour-long trading psychology session
+[00:17:23] where the topic was on cutting losers
+[00:17:26] faster and holding winners longer and it
+[00:17:29] was led by the head of our trading
+[00:17:30] psychology team so it was led by a
+[00:17:32] couple of people who know a lot about
+[00:17:34] psychology and traitor mindset they know
+[00:17:37] a whole lot more about it than i do so i
+[00:17:39] hope you'll check out that episode i
+[00:17:41] think if you're someone out there that
+[00:17:42] is going through the journey you're
+[00:17:44] hitting these bumps in the road you may
+[00:17:46] be running into these mental walls where
+[00:17:49] it's holding back your trading so if you
+[00:17:52] can break through those mental walls and
+[00:17:54] that that way break through those old
+[00:17:57] habits of holding losers way too long
+[00:18:00] and selling winners way too soon then
+[00:18:02] that for you could be a pivot that could
+[00:18:04] be a turning point so i hope you really
+[00:18:07] focus on this topic it's a big one for
+[00:18:09] all beginner traders out there all right
+[00:18:11] so there'll be a link right down the
+[00:18:12] description to the comments you can
+[00:18:13] check out and i'll put a link here for a
+[00:18:15] couple more episodes on youtube that i
+[00:18:17] think you'll enjoy and i look forward to
+[00:18:19] seeing you right back at it for the next
+[00:18:21] episode right here

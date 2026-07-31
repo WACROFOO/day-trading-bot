@@ -1,0 +1,528 @@
+# The Simplest Day Trading Strategy for Beginners (with ZERO experience)
+# https://www.youtube.com/watch?v=5X_ZcifasBg
+# duration_sec: 1106
+
+[00:00:01] [Music]
+[00:00:05] what's up everyone ross here from
+[00:00:06] warrior trading so in this episode i'm
+[00:00:08] going to walk you through the simplest
+[00:00:09] day trading strategy for beginner
+[00:00:11] traders now as a beginner trader what's
+[00:00:13] your goal
+[00:00:14] hopefully your goal is to take one or
+[00:00:17] maybe two trades a day where you're
+[00:00:19] minimizing your risk while maximizing
+[00:00:21] your potential for gain that way even if
+[00:00:24] you're only right 50 of the time
+[00:00:26] hopefully you can still walk away with a
+[00:00:27] little bit of profit now we know that
+[00:00:29] trading is risky and we know the
+[00:00:30] statistics that most traders lose money
+[00:00:32] and of course my results are not typical
+[00:00:34] i have to say that but as a beginner
+[00:00:36] trader i think you could do yourself a
+[00:00:38] really big favor by focusing on keeping
+[00:00:40] it simple so the simplest strategy is to
+[00:00:43] focus on the leading percentage gainers
+[00:00:46] each day and this is a big deal so the
+[00:00:48] stock that i traded today and this is a
+[00:00:50] great case study and i'll show you
+[00:00:52] examples of it as we get into the video
+[00:00:54] it went up 200 percent 200 is a huge
+[00:00:58] move now i didn't capture the whole move
+[00:01:01] but i captured small pieces of it and
+[00:01:03] small pieces of 200 percent that's five
+[00:01:06] percent here seven percent there three
+[00:01:08] percent there ten percent there those
+[00:01:10] are big pieces of profit
+[00:01:13] if you're like most beginner traders and
+[00:01:15] you're trading stocks that are in a
+[00:01:16] relatively narrow range getting a small
+[00:01:19] sliver of a five percent move
+[00:01:22] you're not even getting enough profit to
+[00:01:23] justify the risk and so you're going to
+[00:01:25] have most likely an inverted profit loss
+[00:01:28] ratio where your average losers are
+[00:01:29] bigger than your winners your accuracy
+[00:01:31] is going to be poor because those types
+[00:01:32] of stocks are choppy and you're not
+[00:01:34] going to do well so the best thing you
+[00:01:36] can do is start by focusing on the right
+[00:01:38] type of stocks to trade and those are
+[00:01:40] percentage gainers and gappers so this
+[00:01:42] is a gap strategy focusing on the
+[00:01:44] leading gappers and gainers each day and
+[00:01:46] as we get in the video i'm going to show
+[00:01:48] you not just how to find those stocks
+[00:01:50] each day and how to understand whether
+[00:01:51] or not they have the potential to make a
+[00:01:52] big move but also i'm going to talk a
+[00:01:55] little bit about my entries now this is
+[00:01:57] a short video i'm not going to have time
+[00:01:58] to go through
+[00:01:59] the entire strategy and all of its
+[00:02:01] nuances i do that of course for students
+[00:02:03] who are part of our curriculum over at
+[00:02:05] warrior trading but if you're testing
+[00:02:07] the water you want to just learn more
+[00:02:08] about my strategy the way i trade i
+[00:02:10] encourage you to hit the thumbs up and
+[00:02:12] subscribe to the channel every morning i
+[00:02:14] do a live audio video broadcast it's
+[00:02:16] called the morning show and i share with
+[00:02:18] you my watch list for the day and a
+[00:02:19] couple of the stocks that i'm thinking
+[00:02:20] about trading and sometimes i even take
+[00:02:22] some live trades during the morning show
+[00:02:25] it's a great opportunity for you to
+[00:02:26] learn a little bit more about the way i
+[00:02:28] trade and to see whether or not you want
+[00:02:29] to learn from me in our classes so make
+[00:02:31] sure you subscribe the channel hit the
+[00:02:33] notifications button that way you'll get
+[00:02:35] the alert when i go live each morning
+[00:02:37] it's usually between sometime between 8
+[00:02:38] and 9 a.m that i go live all right so um
+[00:02:41] with that let's jump in i'm going to get
+[00:02:43] screen share going i'm going to show you
+[00:02:45] my scanners i'm going to show you the
+[00:02:46] tools i use to find these types of
+[00:02:47] stocks i'm going to break them down in
+[00:02:48] more detail and we're gonna go over this
+[00:02:50] case study today of our 200 mover all
+[00:02:52] right let's get into it
+[00:02:54] all right so here we go we're going to
+[00:02:55] jump in and this is a perfect case study
+[00:02:57] today you can see that i'm up uh over 12
+[00:03:00] thousand dollars i'm up 13
+[00:03:02] 700 on pik which is the stock that you
+[00:03:06] can see on my charts right here and this
+[00:03:09] is a perfect example of the strategy
+[00:03:11] that i'm going to share with you today
+[00:03:14] now i want to remind you as always that
+[00:03:16] my results are not typical i have been
+[00:03:18] doing this for a very long time i have
+[00:03:20] over 10 million dollars in gross profit
+[00:03:22] that stands behind me as a trader this
+[00:03:25] is something that i'm really passionate
+[00:03:27] about i love trading but i want to just
+[00:03:29] remind you that most beginner traders do
+[00:03:31] lose money so please take it slow trade
+[00:03:33] a simulator before you put real money on
+[00:03:35] the line and um as always don't try to
+[00:03:38] blindly follow me or anyone else you
+[00:03:40] have to learn to to hunt for yourself
+[00:03:42] but i'm going to try to empower you i'm
+[00:03:44] going to try to teach you this strategy
+[00:03:46] and this is actually um something that i
+[00:03:48] cover extensively as part of our warrior
+[00:03:51] pro curriculum this is going to be a
+[00:03:53] relatively short video so i'm going to
+[00:03:54] give you the cliff notes of it if you
+[00:03:56] want to learn more come over to
+[00:03:57] warriortrading.com
+[00:03:59] slash strategy check out that page and
+[00:04:02] you can learn a little bit more about
+[00:04:03] the way i trade and if you decide you'd
+[00:04:05] like to join us we'd love to have you
+[00:04:07] you'd be able to watch over my shoulder
+[00:04:08] while i trade every single day and if
+[00:04:10] you find that helpful then that'd be
+[00:04:12] awesome so okay um so pik what's up with
+[00:04:16] this stock it's up uh a staggering
+[00:04:19] 180 percent there's not the percentage
+[00:04:22] change on the day
+[00:04:24] impressive right
+[00:04:26] it is indeed impressive
+[00:04:28] this stock uh there's something special
+[00:04:30] about it now what is it well there is
+[00:04:33] news
+[00:04:35] stock is up 75 on partnership deal with
+[00:04:38] walt disney okay so that's a pretty big
+[00:04:40] deal and this news was out early this
+[00:04:43] morning and i've been trading it since
+[00:04:45] early this morning so
+[00:04:47] this strategy
+[00:04:49] i call it the gap and go strategy that's
+[00:04:53] that's kind of um
+[00:04:54] that's the name of the strategist the
+[00:04:56] gap and go strategy and gap and go means
+[00:04:58] the stock needs to be gapping up
+[00:05:01] gapping up means it's opening higher
+[00:05:03] than it closed the previous day
+[00:05:05] why would a stock be opening higher
+[00:05:07] today than it closed yesterday there's
+[00:05:09] only a handful of reasons
+[00:05:11] but generally it's because there's some
+[00:05:12] type of breaking news so yesterday
+[00:05:16] this stock
+[00:05:17] was trading at approximately a dollar 84
+[00:05:21] and today it hit a high of over six
+[00:05:23] dollars
+[00:05:24] i mean that's remarkable that's an
+[00:05:26] incredible percentage gain
+[00:05:30] so if you're a beginner trader
+[00:05:32] it's my opinion that these are the type
+[00:05:34] of stocks that you want to be trading if
+[00:05:36] a stock is going up 100 or 200 percent
+[00:05:39] in a day
+[00:05:40] even if you only get a sliver of that
+[00:05:43] move that could still be a five percent
+[00:05:45] or ten percent gain
+[00:05:46] now if you trade something like facebook
+[00:05:49] here's a day where facebook is going to
+[00:05:51] be green let's see how much it's up uh
+[00:05:53] facebook right now is up 2.2.4
+[00:05:58] you know i mean if you catch a sliver of
+[00:06:00] 2.24
+[00:06:02] it's a a sliver of a sliver is nothing
+[00:06:05] right you're eve
+[00:06:06] sorry that's s fb 1.5 even worse so it's
+[00:06:11] just not enough all right there's not
+[00:06:13] enough meat on the bone to get good
+[00:06:15] profit and to make money so as a
+[00:06:17] beginner trader you want to be focusing
+[00:06:19] in my opinion on volatile stocks
+[00:06:22] now you're trading them you're not
+[00:06:23] investing in them for the long haul
+[00:06:25] you're buying them you're selling them
+[00:06:28] you're a trader so if you're a trader
+[00:06:30] you want to be trading things that are
+[00:06:32] moving quickly
+[00:06:33] what are stocks are going to be moving
+[00:06:35] quickly typically stocks that have some
+[00:06:36] type of fundamental news it can be an
+[00:06:38] earnings announcement it can be a
+[00:06:39] partnership deal it can be a clinical
+[00:06:41] trial there's a million different types
+[00:06:43] of catalysts that we can um go over and
+[00:06:45] we do go over all of those as part of
+[00:06:47] chapter four of the warrior pro courses
+[00:06:49] when we're talking about fundamental
+[00:06:50] analysis but for right now
+[00:06:53] we'll sort of gloss over
+[00:06:55] all the different types of catalysts and
+[00:06:56] just say this is a stock that clearly
+[00:06:58] had a catalyst
+[00:07:00] okay great well how do you find it how
+[00:07:03] do you find this stock in real time how
+[00:07:05] do you find stocks moving like this
+[00:07:07] did you hear that did you hear that
+[00:07:09] little that little alert
+[00:07:11] so that's this stock right here hitting
+[00:07:13] my scanner
+[00:07:15] this is like radar
+[00:07:18] this is searching the entire market for
+[00:07:20] stocks that are moving so we can pull up
+[00:07:21] the stock hour
+[00:07:23] and let's see what the chart looks like
+[00:07:25] you'll see that this is just squeezed
+[00:07:26] from 440 all the way up to just under
+[00:07:28] five dollars so this is the type of
+[00:07:30] stock that may be worth watching now
+[00:07:33] it's a little later in the day i'm not
+[00:07:35] going to take a trade on it
+[00:07:36] tcat was also on the scanner right here
+[00:07:39] and pik was on it as well
+[00:07:41] so this is a tool that i'm using to help
+[00:07:44] me find stocks to trade
+[00:07:47] i programmed this tool i have a
+[00:07:48] development team that built it out i
+[00:07:50] specced it and they built it and i
+[00:07:52] programmed it to look for stocks that
+[00:07:54] are moving up quickly right now and i
+[00:07:57] like to find stocks that have a catalyst
+[00:07:59] but that's that's not exactly everything
+[00:08:02] in order for stocks to make a big move
+[00:08:04] there needs to be an imbalance between
+[00:08:05] supply and demand all right so this is
+[00:08:08] very very basic stuff but it's important
+[00:08:10] to understand
+[00:08:11] and so that imbalance comes from a
+[00:08:12] couple places
+[00:08:13] number one the demand let's talk about
+[00:08:16] demand
+[00:08:17] partnership with walt disney that
+[00:08:19] creates demand right a stock that is
+[00:08:22] under ten dollars or under twenty
+[00:08:24] dollars a share inherently is going to
+[00:08:26] have a higher level of demand among
+[00:08:29] retail traders because it's affordable
+[00:08:31] and there's an army of retail traders
+[00:08:33] out there that are willing to buy up
+[00:08:35] stocks up 25 30 percent in hopes that
+[00:08:38] they go up another 15 20 30 percent and
+[00:08:41] they can capture you know half of the 50
+[00:08:43] move and we see these types of moves
+[00:08:45] again and again and again so just
+[00:08:47] because the stock was extended at you
+[00:08:49] know two dollars and fifty cents by no
+[00:08:51] means meant that that was going to be
+[00:08:53] the top you know it's probably not so
+[00:08:55] much institutional traders at goldman
+[00:08:58] sachs or whatever that are buying stocks
+[00:09:00] like this for you know pension funds and
+[00:09:02] things like that it's more going to be
+[00:09:04] retail traders that are saying this is a
+[00:09:05] stock moving quickly that has the
+[00:09:07] potential to make a big move and every
+[00:09:09] now and then you'll see a stock like
+[00:09:10] this and you know a week later you'll
+[00:09:13] see that they got they got bought out
+[00:09:14] and they got bought out for a hundred
+[00:09:16] percent premium
+[00:09:17] so there's a lot of speculation in the
+[00:09:20] small cap market and that speculation
+[00:09:22] can fuel demand so news fuels demand the
+[00:09:25] price being lower fuels demand the
+[00:09:28] market cap also being lower fuels demand
+[00:09:31] and that's represented by the float the
+[00:09:34] number of shares available to trade so a
+[00:09:36] stock like this has a particularly low
+[00:09:38] float
+[00:09:39] now we can
+[00:09:41] go in here to the sec filings on pik
+[00:09:44] and if we go in here we will see that um
+[00:09:47] let's see as of the last filing december
+[00:09:49] 22nd the float was
+[00:09:52] 7.6 million shares
+[00:09:56] now this is the type of research that i
+[00:09:59] do in the morning every single day as
+[00:10:01] i'm building my watch list so those you
+[00:10:03] guys who already tuned into the morning
+[00:10:04] show
+[00:10:05] one of the things that's nice is you get
+[00:10:07] my market commentary and you get it
+[00:10:09] filtered with all of the knowledge that
+[00:10:11] i have of trading and my ability to do
+[00:10:14] quick research and figure out some of
+[00:10:16] these important metrics so here 7.6
+[00:10:18] million share float
+[00:10:20] all of a sudden this is a stock that has
+[00:10:22] a very low level of supply
+[00:10:24] the number of shares available is low
+[00:10:27] the demand is high and that can create
+[00:10:29] an explosive opportunity and that's
+[00:10:30] exactly what we got today
+[00:10:33] so
+[00:10:34] the way i actually find these stocks
+[00:10:36] is through the scanners so this stock
+[00:10:39] right here pik it was gapping up 84 this
+[00:10:42] morning and in the entire u.s market the
+[00:10:45] entire u.s market this was the leading
+[00:10:48] gapper it was the leading gainer in the
+[00:10:50] entire market today and you know that's
+[00:10:52] a pretty big deal and actually we can
+[00:10:53] scan um
+[00:10:55] top gainers
+[00:10:56] it's it's up 177 right now which makes
+[00:10:59] it officially and it's quarter of four
+[00:11:02] the biggest gainer on wall street today
+[00:11:05] and so i made 13 700
+[00:11:07] well it's the biggest gainer yeah
+[00:11:10] you're darn right i did it's up 200
+[00:11:12] percent and you know what i only got a
+[00:11:14] sliver but i got a sliver of a two
+[00:11:16] hundred percent move and that was enough
+[00:11:18] for me to pull about thirteen thousand
+[00:11:19] dollars of profit out of the stock
+[00:11:22] so your first step is understanding the
+[00:11:25] right type of stock to trade and in my
+[00:11:27] opinion it's gonna be a lower price
+[00:11:29] stock generally between two dollars and
+[00:11:32] twenty dollars it's going to have an
+[00:11:34] outstanding number of shares or a float
+[00:11:36] typically less than 20 million shares so
+[00:11:39] you can use 2020 as sort of a rule 20
+[00:11:41] million share float 20 million dollar
+[00:11:44] 20 price 2020. all right now
+[00:11:47] again if there's a stock that's a little
+[00:11:48] higher that's okay game stop was a
+[00:11:51] little higher the float on gamestop is
+[00:11:53] in uh oops gme 76 million shares that's
+[00:11:56] a little higher but that was okay
+[00:11:58] because it had a very unique very
+[00:11:59] special catalyst and that was so strong
+[00:12:02] that it was it was certainly fine
+[00:12:05] but generally under 20 under 20 in price
+[00:12:08] and in flow and i look at this scan each
+[00:12:11] morning so when i
+[00:12:13] log in over at warrior trading i log
+[00:12:16] into my dashboard and i load the
+[00:12:19] dashboard agree to the disclaimer and
+[00:12:21] reminder that trading is risky and i can
+[00:12:23] see right here
+[00:12:25] as early as seven well you can
+[00:12:27] log in as early as 4am pre-market starts
+[00:12:30] at 4am but i usually sit down between 7
+[00:12:32] and 8 and so i'll sit down and i'll see
+[00:12:34] that here we go pik leading gapper up 84
+[00:12:38] this is the stock that i want to be
+[00:12:40] focusing on now i generally will look at
+[00:12:43] the top five gappers so i'll look at the
+[00:12:45] top five and see which of these
+[00:12:48] do i think presents the best opportunity
+[00:12:50] so which of these has the best
+[00:12:52] combination of the imbalance between
+[00:12:53] supply and demand and there is some
+[00:12:56] consideration for the daily chart
+[00:12:59] the daily chart tells me the history of
+[00:13:01] the stock
+[00:13:02] how high it's gone the all-time high how
+[00:13:04] high it could potentially go
+[00:13:06] where it might find some resistance
+[00:13:08] so i look at the daily chart and i do
+[00:13:10] that for the top gappers and then i
+[00:13:12] start looking at the intraday
+[00:13:13] opportunity and on this one right here
+[00:13:16] there were several
+[00:13:17] so you can see my time frame i've got a
+[00:13:19] daily a five minute a one minute and
+[00:13:21] then even a 10 second chart right here
+[00:13:24] so when i'm ready to start trading
+[00:13:26] that's when i'm going to start looking
+[00:13:27] for the setup so my opinion is that one
+[00:13:31] of the simplest strategies is to focus
+[00:13:34] on the leading percentage gainer each
+[00:13:37] day
+[00:13:38] either the top two or three and you can
+[00:13:41] look at which one thing you think is the
+[00:13:42] most obvious now
+[00:13:44] which one is also the most popular which
+[00:13:46] one's trending on social media which one
+[00:13:48] is the one that all the traders out
+[00:13:50] there are saying this is the one that's
+[00:13:52] going to go and so one of the things
+[00:13:53] that's nice about being part of a
+[00:13:55] community is you can get kind of a sense
+[00:13:56] you can take the temperature of what
+[00:13:58] other people are saying you know are
+[00:13:59] people bullish on this or are they
+[00:14:01] bearish what's that social sentiment on
+[00:14:03] the stock
+[00:14:05] so once you've decided on the stock then
+[00:14:08] it's time to start looking for
+[00:14:09] opportunities and you know you could i'm
+[00:14:12] sure there's people that lost money on
+[00:14:14] this today you know that bought it uh on
+[00:14:16] one of these red candles up here and
+[00:14:19] then you know sold as it broke down and
+[00:14:22] you know they ended up being red on it
+[00:14:24] and only to see it go all the way to six
+[00:14:26] dollars at the end of the day so it's
+[00:14:28] not enough just to find the right stock
+[00:14:30] to trade you do have to dial in your
+[00:14:33] entries
+[00:14:34] as a beginner trader one of the safest
+[00:14:37] entries is to find the first pullback so
+[00:14:40] in this case this is a five minute
+[00:14:42] pullback right here
+[00:14:44] we have a five minute pullback and this
+[00:14:46] is a pullback that is right at the
+[00:14:48] volume weighted average price which is
+[00:14:50] our dotted line and it's right at the
+[00:14:52] nine moving average which is this grade
+[00:14:54] line this is a nice moving average
+[00:14:56] pullback that prevent presents a really
+[00:14:58] good opportunity for the first five
+[00:15:00] minute candle to make a new high
+[00:15:03] now over in this area this is also the
+[00:15:06] first pullback the first pullback
+[00:15:08] following a fresh breakout
+[00:15:10] right it pulls back down to that moving
+[00:15:12] average first candle to make a new high
+[00:15:14] as the entry and that went from four all
+[00:15:16] the way up to six bucks this was the
+[00:15:18] second pullback and it was it gave you a
+[00:15:20] little continuation but it was a bit
+[00:15:21] extended and this area here is now
+[00:15:23] getting into sort of third pullback and
+[00:15:26] it's getting uh pretty risky in that
+[00:15:27] area
+[00:15:28] uh similarly this was a second pullback
+[00:15:31] right there but you got a topping tail
+[00:15:34] on this candle that's a little bit risky
+[00:15:36] to be along following a topping tail so
+[00:15:38] there are some nuances here
+[00:15:41] but if you're focusing on the leading
+[00:15:43] percentage gainers each day you have
+[00:15:45] done yourself a really big favor because
+[00:15:47] you are focusing on the right type of
+[00:15:49] stock to trade now it's about dialing in
+[00:15:52] the exact entries you could trade on the
+[00:15:54] five minute chart you could trade on the
+[00:15:56] one minute chart
+[00:15:58] i typically trade on the one minute and
+[00:16:00] use the five minute for reference points
+[00:16:02] i'll add on five minute setups
+[00:16:05] this was obviously the five minute
+[00:16:06] breakout right there these were
+[00:16:08] one-minute trades in this area you had a
+[00:16:10] pullback right here around 260. you had
+[00:16:12] another one in this area another one in
+[00:16:14] this area these are all opportunities
+[00:16:17] and there are some traders who might
+[00:16:18] trade a stock like this
+[00:16:20] you know 50 times in a day
+[00:16:22] just actively trading it getting in
+[00:16:24] getting out getting in getting out and
+[00:16:25] you could trade it all day long
+[00:16:27] but one of the things that is important
+[00:16:30] as a beginner trader is recognizing that
+[00:16:32] less is more it's not a good idea to
+[00:16:35] over trade it's not a good idea to take
+[00:16:37] 100 trades a day
+[00:16:39] it's a better idea to try to get one
+[00:16:41] good trade a day because if you can get
+[00:16:42] one trade a thousand shares in and out
+[00:16:46] 20 cents a share that's 200 bucks
+[00:16:49] you know if you could just build that
+[00:16:50] track record of consistency getting in
+[00:16:53] get green and get out
+[00:16:54] and just do that for 10 15 20 30 days in
+[00:16:57] a row start to build
+[00:16:59] some confidence start to build a cushion
+[00:17:02] then you can start trading more actively
+[00:17:04] but until you've built that confidence
+[00:17:06] and cushion
+[00:17:08] you want to focus on trading less once a
+[00:17:09] day maybe twice a day so and of course
+[00:17:12] you should start in a simulator before
+[00:17:13] you put real money on the line but this
+[00:17:15] is a perfect example of a gap and go
+[00:17:18] trade gap up go up and this one held up
+[00:17:20] all day long and then gave that
+[00:17:22] afternoon squeeze as it broke through
+[00:17:24] the high of 4.30 which was right around
+[00:17:28] here
+[00:17:29] so again this is just a really quick
+[00:17:32] summary of what i think is one of the
+[00:17:33] simplest strategies it's not to say that
+[00:17:35] it's easy it's not to say that trading
+[00:17:37] is easy but as far as trading goes i
+[00:17:39] think that focusing on the leading
+[00:17:40] gainer every single day is going to
+[00:17:42] point you in the direction of the right
+[00:17:44] type of stock to trade and then the
+[00:17:45] question is finding your exact entries
+[00:17:47] so if you want to see what my entries
+[00:17:49] are tune in for the morning show make
+[00:17:51] sure you subscribe to the channel and
+[00:17:53] you can always join us over at
+[00:17:54] warriortrain.com if you want to be able
+[00:17:55] to watch my live trading archives and
+[00:17:58] tune in every day for my full trading
+[00:18:01] session
+[00:18:01] all right i hope you guys have enjoyed
+[00:18:03] the video make sure you hit the thumbs
+[00:18:04] up and i'll see you for the next one and
+[00:18:05] that right there was an entire video
+[00:18:07] with no ads i don't monetize my youtube
+[00:18:09] channel with video ads which means you
+[00:18:10] guys get to enjoy the content but do me
+[00:18:12] a favor please hit that subscribe button
+[00:18:15] and give me a thumbs up and let youtube
+[00:18:16] know that this channel is the channel to
+[00:18:18] watch if you want to learn about day
+[00:18:19] trade
+[00:18:21] [Music]

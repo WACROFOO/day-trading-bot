@@ -1,0 +1,753 @@
+# How to use Level 2 data in your Day Trading Strategy (WITH LIVE MARKET EXAMPLES)
+# https://www.youtube.com/watch?v=BaZ4R2ovI9k
+# duration_sec: 1651
+
+[00:00:00] What's up, everyone? All right, so today
+[00:00:01] I'm going to talk about how I used level
+[00:00:03] two to predict a breakout on a stock
+[00:00:05] that is currently up over 220%
+[00:00:09] on the morning. In less than 30 minutes,
+[00:00:11] the stock squeezed from $30 a share up
+[00:00:14] to over $65
+[00:00:16] per share, and I used level two to
+[00:00:18] predict that during the first pullback,
+[00:00:20] it would break to the upside. We were
+[00:00:22] watching it as it consolidated between
+[00:00:24] its support level and resistance level,
+[00:00:26] and there was something very specific
+[00:00:28] that I noticed on the level two that
+[00:00:31] made me really think that it was going
+[00:00:32] to break to the upside. So, that's what
+[00:00:34] we're going to talk about during today's
+[00:00:35] video. This is a little bit different
+[00:00:36] from my typical midday market recap, and
+[00:00:38] that's because, as many of you guys
+[00:00:40] know, in 2 weeks, I'm starting over with
+[00:00:42] a new small account, 500 bucks. And
+[00:00:45] because I'm starting over with a $500
+[00:00:46] account, I've got to be really careful
+[00:00:48] about what I'm going to trade. And so,
+[00:00:49] during these next 2 weeks, I'm I'm, of
+[00:00:51] course, training to go into this new
+[00:00:53] small account challenge. And so, as a
+[00:00:54] result, I did not end up trading the
+[00:00:56] stock that we're going to talk about
+[00:00:57] today because it opened at $30 a share.
+[00:00:59] It's just simply too expensive for small
+[00:01:02] accounts. But,
+[00:01:03] what we're going to talk about on level
+[00:01:05] two can be applied to stocks of any
+[00:01:07] price range, and it's just the latest
+[00:01:09] example of a very clear indicator of
+[00:01:12] support. All right, so let's get into
+[00:01:14] the video, and let me break down for you
+[00:01:16] what I saw that made me believe that
+[00:01:17] this stock would break to the upside.
+[00:01:27] All right, you guys. So, this is what
+[00:01:28] we're working with. KRTX currently
+[00:01:31] uh up 255%
+[00:01:34] as of right now, this moment, on the
+[00:01:36] day. I mean, this stock is This is
+[00:01:38] incredible. This is a huge move. It was
+[00:01:41] on the top of the gap scanner this
+[00:01:42] morning. If I run the gap scanner um for
+[00:01:44] 9:15 a.m., every morning when I run this
+[00:01:47] scan, it shows me at 9:10, 9:15 a.m.,
+[00:01:50] which stocks are opening uh or trading
+[00:01:53] at higher prices than uh had previous
+[00:01:55] day. And so, you can see this was
+[00:01:57] already uh creating this essential gap
+[00:02:00] higher from the previous day. And this
+[00:02:02] was all based on news as you can see
+[00:02:05] here in this window. So this is all the
+[00:02:07] news that came out overnight on the
+[00:02:09] stock that was driving the price higher.
+[00:02:12] Of course, I focus on trading in the
+[00:02:13] first hour of the day because the first
+[00:02:15] hour of the day is when the market
+[00:02:18] reacts to news overnight and when we
+[00:02:19] usually get the best
+[00:02:21] breakouts with the cleanest resolution.
+[00:02:23] And we certainly got that today on KRTX.
+[00:02:26] Of course, I immediately was like, well,
+[00:02:29] you know, trading with a $500 account,
+[00:02:31] this stock is just going to be so
+[00:02:33] expensive that
+[00:02:35] you know, at most I would be able to buy
+[00:02:39] I just wouldn't be able to take any
+[00:02:40] share size, you know, that's the
+[00:02:41] problem. With a $500 account without
+[00:02:44] leverage, I'd be talking about like 10,
+[00:02:46] 15, 20 shares. With leverage, maybe 100
+[00:02:50] shares, but you know, this is this just
+[00:02:52] is would be a risky stock to trade. So
+[00:02:55] in any case,
+[00:02:57] for those of you trading with larger
+[00:02:58] accounts, this would have been something
+[00:02:59] you could have traded. And what I'm
+[00:03:01] going to show you on the level two, I've
+[00:03:03] seen a stock on stocks of all price
+[00:03:05] ranges. So this is really a just a
+[00:03:07] strong indicator of something that you
+[00:03:09] want to be looking for. And it occurred
+[00:03:11] during this period of consolidation
+[00:03:14] right through here. All right, so this
+[00:03:16] is where
+[00:03:17] we saw this is where I identified this
+[00:03:20] pullback.
+[00:03:21] So what I'm going to do for you guys
+[00:03:23] is I'm going to show you the recording
+[00:03:25] here of this stock as I was kind of
+[00:03:29] breaking it down and watching it. And
+[00:03:32] my main issue with it sort of early on
+[00:03:35] like in this in this area, I was
+[00:03:37] thinking about trading it, you know, I
+[00:03:38] was sort of interested, but I was like,
+[00:03:40] man, this this stock is so extended. And
+[00:03:42] at this point right here, just from a
+[00:03:44] charting perspective, what I saw as a
+[00:03:47] sign of weakness was
+[00:03:48] this candle, and let me just back this
+[00:03:51] out here. So this candle right here
+[00:03:53] being a red doji, All all right? A red
+[00:03:55] doji on high volume, that's a clear
+[00:03:58] candle of indecision. And what often
+[00:04:01] happens is it's a reversal indicator,
+[00:04:03] and then confirmation of the reversal
+[00:04:05] would be the first candle to make a new
+[00:04:06] low. Now, what ended up happening was
+[00:04:09] the stock just kept grinding higher and
+[00:04:11] higher despite this this clear, you
+[00:04:15] know, potential reversal indicator. So,
+[00:04:17] I was like, all right, well, now I'm a
+[00:04:18] little bit confused because the stock is
+[00:04:20] not really respecting
+[00:04:23] the the technical analysis. And that was
+[00:04:26] actually one of the first indicators
+[00:04:28] that something a little bit different
+[00:04:30] was going to happen with the stock. When
+[00:04:33] a stock from a technical perspective is
+[00:04:35] looking weak, like has a a red doji with
+[00:04:38] high day volume, but surges up anyways,
+[00:04:42] what that indicates to me
+[00:04:44] is that there are people that are buying
+[00:04:46] this stock that are not using
+[00:04:48] traditional technical analysis used by
+[00:04:50] day traders.
+[00:04:52] Now, some stocks on a regular day are
+[00:04:54] primarily being traded by day traders,
+[00:04:56] whereas others are being purchased by
+[00:04:58] long-term investors who truly believe in
+[00:05:02] the news catalyst that's been released
+[00:05:04] and the potential of the company and are
+[00:05:06] taking a long-term position. When you
+[00:05:09] have that, you have people that are
+[00:05:10] buying that aren't looking at charts
+[00:05:12] necessarily, that are buying because
+[00:05:13] they simply want to get in the stock,
+[00:05:15] and sometimes with very large orders,
+[00:05:18] which will kind of throw off analysis
+[00:05:22] because they'll just all of a sudden
+[00:05:23] send a buy order at what technically we
+[00:05:26] would consider as day traders to be a
+[00:05:27] random spot. And so, that's where we
+[00:05:30] sort of get thrown off when you have
+[00:05:32] long-term investors or hedge funds or
+[00:05:34] whatever it is investing in some of
+[00:05:36] these companies. And you're going to see
+[00:05:37] that a lot more in the higher price
+[00:05:39] range, but
+[00:05:41] you do see it on some of the lower price
+[00:05:42] stocks as well. So, during this period
+[00:05:44] of time right now, this is the level two
+[00:05:46] here. So, we've got the bid on the left,
+[00:05:48] we've got the ask on the on the right.
+[00:05:50] So, the buyers on the left, the sellers
+[00:05:51] on the right. Stock's currently up 156%.
+[00:05:54] We're on what is a little bit of a
+[00:05:56] 1-minute pullback right here on the
+[00:05:58] 1-minute chart. So, I'm going to jump
+[00:06:00] forward.
+[00:06:01] I'm glanced at a couple other charts.
+[00:06:02] And And initially, I was kind of
+[00:06:04] watching this first candle on the
+[00:06:06] 1-minute to make a new high.
+[00:06:08] So, first 1-minute candle to make a new
+[00:06:10] high is is typically something we would
+[00:06:12] look at. Now,
+[00:06:13] what I want you to recognize here, this
+[00:06:15] candle just closed at 9:43
+[00:06:19] exactly. That's when the the 1-minute
+[00:06:21] candle closes. And it has a high of It
+[00:06:24] looks like about 44
+[00:06:27] Oh, no, maybe that's 4550. I'm not My
+[00:06:30] mouse isn't over the the candle at the
+[00:06:32] time.
+[00:06:34] But, what we'd be looking for is the
+[00:06:35] first 1-minute candle to make a new
+[00:06:36] high. That's a technical setup. And so,
+[00:06:38] when I know the technical setup, what I
+[00:06:40] generally will do is I'll say, "Okay, if
+[00:06:42] the price is And let me just go on the
+[00:06:45] chart. I'll just pull up the actual
+[00:06:46] chart and and tell you what the price
+[00:06:47] was." Um
+[00:06:49] So, the price of that candle at that
+[00:06:51] time was, let's see, it was
+[00:06:55] um
+[00:07:00] It was the high was
+[00:07:02] 45.
+[00:07:05] So, the challenge there, of course, is
+[00:07:06] that this
+[00:07:07] is 75 cent spread. And so, it's actually
+[00:07:10] above 45 on the ask. All right. So,
+[00:07:13] let's just back this up for 1 second.
+[00:07:15] So, we'll go just back to here. All
+[00:07:17] right. So, we're looking for the first
+[00:07:19] candle to make a new high, which is
+[00:07:20] going to be a break of 45. So, there's
+[00:07:22] 45 on the ask. No prints have actually
+[00:07:25] gone through above 45. And so, as a
+[00:07:28] result, the candle closes.
+[00:07:30] There it closes. And now, this candle is
+[00:07:33] almost gapping slightly higher and
+[00:07:35] surging up. So, generally on the level
+[00:07:37] two, I would have been saying, "Okay,
+[00:07:38] I'm I'm long biased above $45." That's
+[00:07:42] the spot that I'd be watching.
+[00:07:44] Uh and I'll just put this up cuz I'll I
+[00:07:46] will use the volume on this in in a
+[00:07:48] second. Um
+[00:07:51] All right. So, let's see. So, we'll keep
+[00:07:53] going here.
+[00:07:58] And basically, you see the stock squeeze
+[00:08:01] back up. We got a double top. We know
+[00:08:03] high of day is always uh a spot that has
+[00:08:05] a risk of double topping.
+[00:08:08] So, we get a little bit of a double top.
+[00:08:10] A little bit of a fade. All right. So,
+[00:08:12] this is the whole area where it's just
+[00:08:14] basically grinding higher. I'm
+[00:08:15] interested,
+[00:08:17] um but I don't feel like there's a
+[00:08:19] low-risk opportunity to take a trade on
+[00:08:21] it. Through this area, it's sort of
+[00:08:23] chasing the circuit breaker halt. So,
+[00:08:25] this is the halt level, LULD. Those of
+[00:08:28] you guys are interested in learning how
+[00:08:29] to set this up on uh your charts is
+[00:08:31] something we cover in the classes. And
+[00:08:33] And really, this video is kind of like a
+[00:08:35] little tidbit of the type of stuff that
+[00:08:37] I go over in our classes. So, 54.57 is a
+[00:08:39] circuit breaker halt level. That means
+[00:08:41] the stock is squeezed up more than 10%
+[00:08:43] in the last 5 minutes and is about to
+[00:08:45] get halted, but the bid price
+[00:08:48] 54.57 has to stay above that 54.57 mark
+[00:08:52] for a minimum of 15 seconds. And so,
+[00:08:55] there it dips down below.
+[00:08:57] And look at that drop. I mean, that just
+[00:08:59] dropped a $1.70 per share or $1.50 per
+[00:09:03] share. And that's why, of course, the
+[00:09:05] risk of this type of stock is um
+[00:09:08] of trading it is on uh certainly on the
+[00:09:09] higher side.
+[00:09:11] All right. So, it ends up continuing
+[00:09:12] higher. It keeps chasing these sort of
+[00:09:14] circuit breakers, moving up to the
+[00:09:15] circuit breaker level, pulling back,
+[00:09:17] moving up to the circuit breaker level,
+[00:09:19] pulling that then this time it gets
+[00:09:20] halted.
+[00:09:22] It ends up resuming
+[00:09:24] a little bit lower. And here, I said,
+[00:09:27] "Okay, guys, this
+[00:09:29] is something very interesting. Highest
+[00:09:31] second highest candle of the day is on
+[00:09:33] red volume. Okay, so this is technical.
+[00:09:35] This is a technical characteristic of
+[00:09:36] the chart. Second highest day is on red
+[00:09:38] Second highest candle of the day is on
+[00:09:39] red volume. We're getting a little bit
+[00:09:41] of a pullback here.
+[00:09:43] So my question is, is this going to be a
+[00:09:45] pullback where the first 1-minute candle
+[00:09:47] to make a new high is going to give us
+[00:09:49] resolution and then move back up towards
+[00:09:51] 60? And so I'm watching the level two
+[00:09:54] and I noticed that the spread continues
+[00:09:56] to be, as you can see, quite large. This
+[00:09:59] again is uh a characteristic of higher
+[00:10:02] priced stocks.
+[00:10:04] So the first candle to make a new high
+[00:10:05] is currently over $56. All right, so 56
+[00:10:09] is our uh kind of line in the sand here.
+[00:10:12] And there it breaks 56, rips up to
+[00:10:14] 57.98.
+[00:10:16] But we continue to have now an even
+[00:10:18] larger spread of a dollar and 90 cents
+[00:10:20] per share. So not able to take a trade
+[00:10:23] on it, just kind of watching um from the
+[00:10:25] sidelines.
+[00:10:27] But what this is going to do is it's
+[00:10:28] going to end up forming
+[00:10:30] uh it's going to reject this level up
+[00:10:32] here and end up forming uh what's called
+[00:10:34] a uh gravestone doji, which is a
+[00:10:37] technical
+[00:10:38] um
+[00:10:39] uh candle formation that's going to
+[00:10:41] occur right here. And so it's going to
+[00:10:43] occur because the stock squeezes up to
+[00:10:45] this level,
+[00:10:46] is unable to really break it in a in a
+[00:10:49] strong way, and then when the candle
+[00:10:50] closes, remember that candles close
+[00:10:53] every 5 minutes. So at the end of this
+[00:10:55] 5-minute period, which will be 10:05,
+[00:10:57] this is going to close back down towards
+[00:10:59] the low.
+[00:11:01] So here we've got 10:04 and 35 seconds.
+[00:11:04] This is a red candle
+[00:11:06] with a bottom and this little top and
+[00:11:08] that's called a gravestone doji. It it
+[00:11:10] maybe somewhat
+[00:11:12] looks like a gravestone to some people,
+[00:11:14] I don't know. But in any case, what we
+[00:11:15] have here is high red volume and
+[00:11:17] pullback. So during this area, I'm
+[00:11:19] thinking, okay, it just now double
+[00:11:21] bottomed at 53.
+[00:11:23] I was actually watching it for a short
+[00:11:25] below 53 because I'm thinking that this
+[00:11:28] is a gravestone doji. This is a a
+[00:11:30] technical indicator of reversal. We've
+[00:11:32] got high red volume here. So, I'm
+[00:11:35] looking at it short below 53 and my stop
+[00:11:37] is going to be 55. So, now through this
+[00:11:40] area is where it kind of starts to get
+[00:11:41] interesting and this is where I'm going
+[00:11:44] to play some of the audio of what I was
+[00:11:46] talking about during um
+[00:11:49] uh during this period of consolidation.
+[00:11:51] So,
+[00:11:52] let me just jump a little bit further
+[00:11:54] forward. So, that's where I'm analyzing
+[00:11:55] the gravestone doji. I'm talking about
+[00:11:57] that candle.
+[00:11:59] I'm just going to move a little bit
+[00:12:00] further forward here. Just going to see
+[00:12:02] cuz it it kind of consolidates in this
+[00:12:04] range for a little period of time.
+[00:12:08] Okay, so
+[00:12:09] let's see.
+[00:12:12] Let me turn on my audio and hear what
+[00:12:13] I'm saying. It's
+[00:12:15] Looks like there's a hidden buyer. So, I
+[00:12:17] mean there may be someone buying this
+[00:12:19] off support despite that. All right, so
+[00:12:21] let me just back this up for you real
+[00:12:22] quick.
+[00:12:23] If it breaks 53.
+[00:12:35] So, notice
+[00:12:35] there at 54 and it's looks like there's
+[00:12:39] a hidden buyer.
+[00:12:40] A hidden buyer.
+[00:12:41] be someone buying this off support
+[00:12:43] despite that.
+[00:12:44] Now, let's look at that again.
+[00:12:46] Realistically.
+[00:12:48] So, I'd be waiting for anything else to
+[00:12:50] hit the high day momo scanner.
+[00:12:53] So, the selling there at 54,
+[00:12:55] selling at 53,
+[00:12:58] 50.
+[00:13:02] So, of course, I'm watching the level
+[00:13:03] two and I'm thinking below 53 is a
+[00:13:05] short.
+[00:13:10] Let me just zoom forward here.
+[00:13:13] So, this is where
+[00:13:14] like to short
+[00:13:15] See all So, that right there, that burst
+[00:13:18] of selling at 54, this is only
+[00:13:21] displaying 500 shares available to buy.
+[00:13:24] And all of that selling, what that tells
+[00:13:26] me is that there's a hidden a hidden
+[00:13:28] buyer accumulating shares at $54 per
+[00:13:33] share.
+[00:13:34] The stock currently right now, just for
+[00:13:35] reference, is at
+[00:13:37] uh a gain of 270% on the day.
+[00:13:41] And is at 64.70 by 65.23.
+[00:13:45] All right, so the stock is continuing to
+[00:13:47] surge up.
+[00:13:49] So, what what I saw here was this hidden
+[00:13:50] buyer. So, let me play what I was
+[00:13:52] analyzing.
+[00:13:55] We're sort of near these support levels.
+[00:13:57] Just the risk there is on the higher
+[00:13:59] side, but
+[00:14:01] realistically, it it looks
+[00:14:03] more trustworthy to the short side if it
+[00:14:06] breaks 53. If it breaks 53, it's a
+[00:14:08] short.
+[00:14:10] But, watch again this continued support
+[00:14:13] around 54.
+[00:14:16] So, there again, all of that selling at
+[00:14:18] 54, only showing 400 shares, there's a
+[00:14:21] hidden buyer. Someone is accumulating. A
+[00:14:23] lot of selling there at 54.
+[00:14:25] And it's looks like there's a hidden
+[00:14:27] buyer. So, I mean, there may be someone
+[00:14:29] buying this off support despite that.
+[00:14:33] 5-minute uh gravestone doji. So, why
+[00:14:36] would someone be buying this off of
+[00:14:37] support here despite a gravestone doji?
+[00:14:47] You can clearly tell there's a hidden
+[00:14:49] buyer here at 54.
+[00:14:51] Clearly. All this selling is going
+[00:14:54] through
+[00:14:55] and the price is not breaking.
+[00:14:59] Right?
+[00:15:03] So, let's keep watching this.
+[00:15:06] More selling. That's a ton of selling.
+[00:15:09] You've got 33,000 shares of selling that
+[00:15:11] just went through there.
+[00:15:15] So, think about the position size
+[00:15:16] someone might be accumulating.
+[00:15:22] So, I'm really thinking I look at this
+[00:15:23] and I think, "Okay, if it breaks below
+[00:15:26] 53,
+[00:15:27] it's going to crack. It's going to break
+[00:15:29] hard." And And we see this in the same
+[00:15:31] way um when there's a lot of
+[00:15:33] accumulation underneath a level that's
+[00:15:35] moving to the upside, and when it
+[00:15:36] finally breaks, it's like a snap. It
+[00:15:39] just rips really quickly. And I still
+[00:15:41] look at this at this moment and I'm
+[00:15:42] thinking
+[00:15:44] that it's got a double bottom here at
+[00:15:47] 53. If it breaks 53, we've got a
+[00:15:49] potential move back down towards the
+[00:15:51] VWAP of 44. And I felt the risk was much
+[00:15:54] lower to the short side than to the long
+[00:15:56] side, given the fact that we had high of
+[00:15:58] day volume here on a red candle, or
+[00:16:00] second highest volume candle was red.
+[00:16:02] We have two red candles in a row, and
+[00:16:04] the second one's a gravestone doji. From
+[00:16:05] a technical perspective, everything is
+[00:16:08] saying this stock is not trustworthy.
+[00:16:11] But on the level two,
+[00:16:13] we have this hidden buyer.
+[00:16:15] So, let's keep watching this.
+[00:16:21] Let me fast forward a little bit. 405 by
+[00:16:24] 54 50
+[00:16:28] short would be
+[00:16:30] in the past,
+[00:16:34] you know, it's been a
+[00:16:36] um
+[00:16:38] I You're not going to have someone I
+[00:16:39] don't think you're going to have someone
+[00:16:40] covering a short position right here.
+[00:16:42] Why Why would you?
+[00:16:43] Look at all that There's a hidden buyer
+[00:16:45] at 54. Look at all that accumulation.
+[00:16:48] So, someone's buying this stock at 54.
+[00:16:51] If you're short and you're covering
+[00:16:53] here,
+[00:16:54] you either are way underwater, in which
+[00:16:57] case why cover here when it's finally
+[00:16:59] looking weak, or you shorted up here at
+[00:17:01] 58, but you're only up $4 a share, and
+[00:17:04] it's looking really weak.
+[00:17:06] So, that tells me that someone
+[00:17:08] is buying this stock.
+[00:17:10] That's how I interpret it. And my
+[00:17:12] interpretation could be wrong,
+[00:17:14] but
+[00:17:18] you know, that makes me wonder if we are
+[00:17:19] going to see this um
+[00:17:23] make a move higher.
+[00:17:25] Right.
+[00:17:25] So, I don't really feel comfortable
+[00:17:26] shorting it.
+[00:17:27] So, now I'm thinking it's not safe to
+[00:17:29] short.
+[00:17:30] All right? It's not safe to short
+[00:17:32] because there's clearly a hidden buyer.
+[00:17:34] And so, let me articulate again
+[00:17:36] s-
+[00:17:37] why I thought that.
+[00:17:39] So,
+[00:17:41] if someone had shorted this stock up
+[00:17:43] here at 57 or 58, let's just say. Let's
+[00:17:46] say someone took a huge short. And we've
+[00:17:48] seen already over 100,000 shares go
+[00:17:50] through. So, let's just say someone took
+[00:17:52] a 100,000 share short position, which is
+[00:17:57] I mean, it doesn't even make sense, but
+[00:17:59] that's like a $5 million short position.
+[00:18:02] All right? So, they took a a massive
+[00:18:04] short position up here at 57, and
+[00:18:06] they're covering down here at 54 for
+[00:18:08] only $3 a share. So, okay, that's a
+[00:18:11] $300,000 gain,
+[00:18:13] but it's finally looking weak. It looks
+[00:18:17] like And remember, as a short as when
+[00:18:19] you're short, you cover by buying your
+[00:18:21] shares. So, that would You could be a
+[00:18:22] hidden buyer buying to cover.
+[00:18:25] But, why would you cover right here when
+[00:18:26] it is finally looking like with a
+[00:18:28] gravestone doji that's going to fall
+[00:18:30] over?
+[00:18:31] So, if you were a day trader, and you
+[00:18:32] were actually short this thing up at 57,
+[00:18:35] you would be holding for a move back
+[00:18:37] down towards 44, back down towards the
+[00:18:39] VWAP. Absolutely.
+[00:18:41] So, that made me think that this is not
+[00:18:43] a short sell seller covering a position.
+[00:18:47] Now, of course, if a short seller was
+[00:18:48] underwater from way down here, they
+[00:18:50] could cover right here, but why would
+[00:18:53] you cover here again when it's finally
+[00:18:55] starting to look weak? What you're doing
+[00:18:57] with that hidden order is you're
+[00:18:59] creating a pretty darn well support.
+[00:19:02] So, why would you want to create that
+[00:19:03] level of support? And so, now watch
+[00:19:04] this.
+[00:19:05] Now, all of a sudden,
+[00:19:07] it's going to rip.
+[00:19:08] And now we're off to the races.
+[00:19:11] All right?
+[00:19:12] So, I was able to predict that this
+[00:19:14] would happen over $55 a share because of
+[00:19:18] that hidden buyer that was at 54. And
+[00:19:21] so, the reason I chose or the reason I
+[00:19:22] said 55 is because this consolidation
+[00:19:26] here was right between for the most part
+[00:19:29] it was right between $55 and 53. So, I
+[00:19:31] said below 53 is a short.
+[00:19:34] Above 55 is a hard stop or a long.
+[00:19:38] And once we saw that hidden buyer become
+[00:19:41] more and more kind of um you know, very
+[00:19:45] clear, I started feeling stronger that
+[00:19:47] this was
+[00:19:49] that there's someone here that was
+[00:19:50] buying this up.
+[00:19:51] And so, um Goldman Sachs put out a buy
+[00:19:54] or put out a price target rating on this
+[00:19:56] of over $100 a share.
+[00:19:58] All right? So, you know, now I'm
+[00:20:00] thinking is there a hedge fund? Is there
+[00:20:03] a big investor that's coming in here and
+[00:20:05] is just buying this stock up?
+[00:20:08] Because this can't be a day trader.
+[00:20:10] You're talking about millions of dollars
+[00:20:12] in in terms of a long position. That's
+[00:20:15] what it looks like to me.
+[00:20:16] That's not a day trader. That's someone
+[00:20:17] that is accumulating a massive position,
+[00:20:19] 100,000 shares, 200,000 shares, maybe
+[00:20:22] more.
+[00:20:23] And let's think about how much that
+[00:20:25] person is up right now.
+[00:20:26] They accumulated a lot of that position
+[00:20:28] it looks like around 53.
+[00:20:30] Well,
+[00:20:31] if they took 300,000 shares,
+[00:20:34] they're up 3 million bucks.
+[00:20:35] All right? $10 a share just about. So,
+[00:20:39] this
+[00:20:40] you know, for for big money traders
+[00:20:42] could have been a huge home run. Of
+[00:20:44] course, for a small account trader
+[00:20:47] like me and like many of you guys, this
+[00:20:49] would be one that would be more
+[00:20:50] difficult to take a large position on.
+[00:20:52] And And no doubt a move from 55 up to 59
+[00:20:55] was a is a a really solid breakout and a
+[00:20:58] nice move, but it's just not something
+[00:21:00] that I would trust. The risk there is
+[00:21:02] just for me too high. So, you know, of
+[00:21:05] course leave that alone.
+[00:21:07] And then we get this breakout here.
+[00:21:10] Big spreads.
+[00:21:13] And this is one of those days where I
+[00:21:14] said, you know what? I would feel better
+[00:21:16] at the end of the day knowing that I
+[00:21:18] maintained the discipline to not jump
+[00:21:21] into a $55 stock since my wheelhouse is
+[00:21:24] between three and and and $10, three and
+[00:21:27] $8 for a small account, that I would be
+[00:21:30] much better off if I focus on
+[00:21:34] staying within my my wheelhouse. So,
+[00:21:36] staying within the wheelhouse, stay
+[00:21:39] focused, trade the best, leave the rest.
+[00:21:41] Even though this would be great for a
+[00:21:42] large account, for most of my students
+[00:21:44] with a small account, this this one
+[00:21:45] doesn't happen to be one that would be
+[00:21:47] easy to trade. And so, what we end up
+[00:21:49] getting here is this squeeze and this
+[00:21:51] move as you can see, it just continues
+[00:21:53] higher and higher.
+[00:21:55] So, an awesome opportunity and even
+[00:21:57] right there,
+[00:21:59] you know, a big move. And so, it
+[00:22:00] wouldn't surprise me if this stock does
+[00:22:03] continue higher today
+[00:22:04] because I I really don't know that
+[00:22:07] there's someone out there
+[00:22:09] that is day trading
+[00:22:11] you know, a five 10 million dollar
+[00:22:12] position.
+[00:22:14] This seems more like something that
+[00:22:16] someone is has just accumulated
+[00:22:20] along this move and certainly in this
+[00:22:23] area here 53 to 54.
+[00:22:25] And that makes me wonder if we are going
+[00:22:28] to see this squeeze up towards 75, 80,
+[00:22:31] or even $100 over the next few days. I,
+[00:22:33] you know, we'll we'll be very interested
+[00:22:35] to see what happens
+[00:22:36] because this could be a position that
+[00:22:39] someone with, you know, 500,000 shares
+[00:22:43] every every dollar a share is 500,000
+[00:22:45] bucks. So, $10 a share is 5 million.
+[00:22:49] $30 a share is 15 million. You know, I
+[00:22:52] mean, you're talking about some some big
+[00:22:55] money potentially being made by
+[00:22:57] whoever is has accumulated that
+[00:22:59] position.
+[00:23:00] Um so, you know, in any case, we've seen
+[00:23:03] this exact same pattern on lower-priced
+[00:23:07] stocks.
+[00:23:08] Um,
+[00:23:09] I'm trying to remember the the one that
+[00:23:10] we saw most recently.
+[00:23:12] Um, I'm blanking on the symbol, but in
+[00:23:15] any case, uh, it was a stock that
+[00:23:17] squeezed up from about $18 to $50, $60 a
+[00:23:20] share. A similarly really impressive
+[00:23:23] move. And one of the first things that I
+[00:23:25] noticed about it was that, guys,
+[00:23:27] there's a lot of selling, but someone is
+[00:23:29] buying up shares. And so, when you've
+[00:23:31] got like basically a big whale buying up
+[00:23:34] shares, that's when you just kind of
+[00:23:37] want to see what's happening in the
+[00:23:38] market, and you don't want to get in
+[00:23:40] that person's way. You don't want to be
+[00:23:41] shorting into that. You want to just be
+[00:23:44] riding that momentum that that person
+[00:23:47] effectively is creating, or that firm,
+[00:23:49] or that fund, or whatever it happens to
+[00:23:51] be. So, great opportunities here. Um,
+[00:23:54] and those of you guys who have gotten
+[00:23:55] really good at reading level two, you
+[00:23:57] were seeing the same thing that I saw,
+[00:23:59] that hidden buyer right back down there
+[00:24:01] at 53, 54. So, let's look at that, uh,
+[00:24:04] again just for, uh, a quick refresher.
+[00:24:08] So, it's sort of right through Where was
+[00:24:10] this? Um,
+[00:24:13] looking for,
+[00:24:15] I've lost my place.
+[00:24:17] So, it was right through this area here.
+[00:24:20] All right, we get a little pullback, dip
+[00:24:22] down, bounce off 40, 53,
+[00:24:24] and then right in here is where we
+[00:24:26] started seeing that hidden buyer in the
+[00:24:29] 54. And what's interesting is that even
+[00:24:31] when it finally broke 54, cuz it it did
+[00:24:34] end up finally breaking $54, right? It
+[00:24:36] broke 54 and dropped down to like 53.80,
+[00:24:40] but it didn't go lower than that. So,
+[00:24:42] you know, again, it's just showing you
+[00:24:44] that someone here was buying up a huge
+[00:24:47] position, and I can only speculate how
+[00:24:48] many shares they bought, and how long
+[00:24:51] they're going to hold it, but
+[00:24:53] I can't imagine that that wasn't an
+[00:24:55] awesome win. And, you know, again, it
+[00:24:57] could it have been someone who has been
+[00:24:58] short this stock for the last 6 months
+[00:25:01] and,
+[00:25:02] you know, was just covering a huge loss
+[00:25:04] on the short side.
+[00:25:06] It certainly could have been. Um there's
+[00:25:08] a story about a trader who lost,
+[00:25:10] um I believe it was like
+[00:25:12] 13 million or 15 million dollars on RKDA
+[00:25:17] during this spike right here. And, um
+[00:25:20] the clearing firm, I think it was the
+[00:25:21] clearing firm, was basically marketing
+[00:25:24] him out of the trade.
+[00:25:26] And,
+[00:25:27] that's as you look at the chart, is it
+[00:25:29] was just like spiking up. It was as the
+[00:25:32] firm was closing his, I think it was
+[00:25:34] like an
+[00:25:35] I don't know,
+[00:25:35] 700,000, 800,000 share position. Like a
+[00:25:38] massive position. You know what happens
+[00:25:40] when you do like a market order on
+[00:25:42] 50,000 share blocks or 100,000 share
+[00:25:45] blocks on a low float stock?
+[00:25:49] They rip up. So, you'll see that type of
+[00:25:52] stuff on level two, and RKDA is one that
+[00:25:53] we did really well on. But, um KRTX,
+[00:25:56] very interesting patterns here, and I'm
+[00:25:59] going to be um really interested to see
+[00:26:00] what it does over the next couple days.
+[00:26:02] Unfortunately, again, being in a small
+[00:26:04] account, sometimes these ones you just
+[00:26:06] end up not being able to trade. And,
+[00:26:08] even though I, of course, you know,
+[00:26:11] could open up my account and use my
+[00:26:12] buying power, I'm really trying to trade
+[00:26:15] the exact same way that many of you guys
+[00:26:17] are trading. That's why I'm doing the
+[00:26:18] small account challenge.
+[00:26:20] So, those of you guys who are feeling a
+[00:26:21] little bit of FOMO today, who are like,
+[00:26:23] "Man, you know, this stock is up 270%
+[00:26:26] and I wasn't able to trade it cuz I
+[00:26:27] couldn't afford it."
+[00:26:29] That's something that you'll simply have
+[00:26:30] to deal with in the market, and um you
+[00:26:33] need to have a level of acceptance
+[00:26:34] around it that sometimes you're going to
+[00:26:37] miss opportunities for one reason or
+[00:26:38] another. And, that's okay. Cuz the good
+[00:26:41] news is there will always be another
+[00:26:42] stock around the corner.
+[00:26:44] So, I hope this video has been helpful.
+[00:26:46] If you guys have any questions, please
+[00:26:48] leave them below in the comments. I will
+[00:26:50] come back through and answer them uh
+[00:26:52] later today and uh in the in the future
+[00:26:55] as you guys continue to watch this video
+[00:26:57] and when we have another good example of
+[00:26:59] something like this, I will be recording
+[00:27:01] it and I will make another video on it.
+[00:27:04] All right, so that's it for me. Again,
+[00:27:06] give me a thumbs up, subscribe to the
+[00:27:07] channel if you haven't already and I
+[00:27:08] will see you guys in the next video.
+[00:27:10] Hey, did you know every morning I go
+[00:27:12] live to stream my pre-market watch list?
+[00:27:14] Subscribe to the channel, press the
+[00:27:15] alert button and you'll get the
+[00:27:17] notifications. And if you want to learn
+[00:27:18] more about trading, check out the links
+[00:27:20] in the description and if you have
+[00:27:21] questions, post them in the comments
+[00:27:23] because I personally respond to every
+[00:27:25] comment posted on my channel.

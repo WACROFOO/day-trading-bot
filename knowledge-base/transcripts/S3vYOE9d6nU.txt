@@ -1,0 +1,379 @@
+# The "Stair Step" Day Trading Strategy | Full Breakdown
+# https://www.youtube.com/watch?v=S3vYOE9d6nU
+# duration_sec: 910
+
+[00:00:00] So let's start by looking at the charts
+[00:00:02] on this. The stock here is SPRC.
+[00:00:05] It had news earlier this morning. The
+[00:00:08] news comes out and what initially
+[00:00:10] happens on breaking news. You have to
+[00:00:12] realize that a a high percentage of the
+[00:00:15] market is driven by algorithmic
+[00:00:17] highfrequency trading. So these are
+[00:00:20] actually uh computer bots, computer
+[00:00:22] programs that execute trades and they
+[00:00:24] use different triggers to execute. So
+[00:00:26] one of the ones that they use are
+[00:00:28] breaking news headlines. So, when the
+[00:00:30] news hits the wire before retail traders
+[00:00:33] like us get it, the institutional
+[00:00:35] traders with their super super, you
+[00:00:37] know, high-speed fiber line that's
+[00:00:39] connected like, you know, within three
+[00:00:41] feet to the main server that puts out
+[00:00:43] the news, they get it and boom, they
+[00:00:45] execute the first trades. That's what we
+[00:00:48] call the Algo spike. So, the stock
+[00:00:50] starts spiking up. And when it starts
+[00:00:53] spiking up now, all of a sudden, it
+[00:00:55] starts hitting the radar of traders like
+[00:00:57] myself. So there's this interesting
+[00:01:00] level of efficiency in the market where
+[00:01:02] all of the retail traders like us, we're
+[00:01:04] using tools to find stocks moving. So
+[00:01:07] it's like beep beep beep beep beep. All
+[00:01:10] of a sudden we've got we've got a live
+[00:01:12] one and we've got a stock that's
+[00:01:13] starting to squeeze. And that's what
+[00:01:14] happened on SPRC. So the institutional
+[00:01:17] traders, they get the first crack at it.
+[00:01:19] They're in. But once it starts moving,
+[00:01:21] what I'm looking for is that first
+[00:01:24] pullback right here. So, let me show you
+[00:01:27] SPRC
+[00:01:29] and let's talk about why this was a good
+[00:01:31] stock to trade. Because, of course,
+[00:01:33] there's stocks all day long that hit the
+[00:01:34] newswire that have headlines and might
+[00:01:36] pop up a little or drop a little, but
+[00:01:39] this one did something kind of special
+[00:01:41] when I start my day. And my day starts
+[00:01:44] um not too early uh right now. There
+[00:01:47] were times where it started at like 4:00
+[00:01:48] a.m., but it doesn't start too early. I
+[00:01:50] start right now at about 7 a.m. And the
+[00:01:53] first thing I do is I pull up my my
+[00:01:55] scanners on my phone. These are my stock
+[00:01:58] scanners. And this tells me what's
+[00:02:00] moving in the market right now. And so I
+[00:02:03] noticed the stock was already squeezing
+[00:02:04] up over 100%. And I looked at the chart
+[00:02:07] and I thought, you know what? I think I
+[00:02:10] missed the move. It had already kind of
+[00:02:12] made this squeeze up and it was in this
+[00:02:15] area here, which I would say is the
+[00:02:17] backside of the move. I want to trade
+[00:02:19] stocks on the front side of the move
+[00:02:20] when they're still accelerating, not on
+[00:02:23] the back side when they're kind of, you
+[00:02:24] know, sort of fading off. So, I thought,
+[00:02:27] all right, I missed that one, but we
+[00:02:30] clearly have some action today. Let's
+[00:02:31] see what's next. And when I sat down at
+[00:02:34] my computer at about 7:30, 7:45, I saw
+[00:02:38] SPRC squeeze up right here.
+[00:02:41] So, this and and these yellow arrows are
+[00:02:44] my um this is actually my first trade
+[00:02:46] right here at about $5.71. And this is
+[00:02:49] my best exit up here at about $7.71.
+[00:02:53] We'll break those uh entries down in a
+[00:02:55] second, but when I first pulled up SPRC,
+[00:02:58] I saw it about like this. All right.
+[00:03:01] Now, let me show you what the scanner
+[00:03:03] looks like on my computer. So, this is
+[00:03:05] my top gapper scanner. And I actually I
+[00:03:08] hired a development team to build out
+[00:03:10] these scanners for me, but they're now
+[00:03:12] used by thousands and thousands of
+[00:03:14] traders all around the world who are
+[00:03:16] using Warriors uh stock scanners. So
+[00:03:19] this morning, what I do on any given day
+[00:03:22] generally is I'm looking at the top
+[00:03:25] three to five gappers. The reason I do
+[00:03:28] that is I like to trade the stocks that
+[00:03:31] I think are going to be the most obvious
+[00:03:34] that everyone's going to be looking at.
+[00:03:36] If a stock is more obvious, what does
+[00:03:37] that mean? So, if it's obvious, it's
+[00:03:40] going to have most likely one, higher
+[00:03:45] volume, right? There's going to be more
+[00:03:47] people trading it. Higher volume, if it
+[00:03:50] has good news, is going to lead to
+[00:03:53] bigger
+[00:03:54] percentage changes. So, bigger
+[00:03:57] percentage change to the upside. And
+[00:03:58] what I usually find is that this these
+[00:04:01] are the types of stocks that start to
+[00:04:03] give the cleanest patterns and start to
+[00:04:06] give the biggest moves. Because here's
+[00:04:08] the deal, as a retail trader, if I can
+[00:04:10] capture five or 10% per day, I'm doing
+[00:04:14] pretty well. So if a stock is going
+[00:04:16] from, you know, let's just say $2 to $4,
+[00:04:20] it's going up 100%. It's a lot easier to
+[00:04:23] capture 10% of a 100% move than to
+[00:04:27] capture 10% of a stock that's only going
+[00:04:29] from 225
+[00:04:31] to, you know, 260 or something like
+[00:04:33] that. So, bigger moves make it easier to
+[00:04:36] capture your little slice of the pie
+[00:04:39] because ultimately that's that's our
+[00:04:41] goal. That that was always my goal as a
+[00:04:43] trader is to sit down and just try to
+[00:04:45] make my little slice. I was never
+[00:04:48] sitting down to trade to try to get
+[00:04:49] rich. I've made far more than I ever
+[00:04:51] would have guessed. I was just sitting
+[00:04:53] down to try to make a couple hundred
+[00:04:54] dollars a day. That's it. And so this is
+[00:04:57] the pattern. This is the strategy that
+[00:04:58] I've been using for all these years. And
+[00:04:59] it just turns out that on some days like
+[00:05:01] today, I can far exceed the couple
+[00:05:03] hundred that I really set as my minimum
+[00:05:05] goal. So SPRC was our third leading
+[00:05:10] gapper in the market today. The leading
+[00:05:12] gapper has basically no volume, only
+[00:05:15] 100,000 shares. So I disregard that. The
+[00:05:18] second leading gapper, if we pull up the
+[00:05:20] chart on it, we'll notice that it's
+[00:05:23] trading more or less sideways. And
+[00:05:25] that's because this company has been
+[00:05:26] bought out. So, oh, I've got to pull up
+[00:05:29] my um my stock quote window here. So,
+[00:05:31] here's my stock quote window. And we're
+[00:05:33] going to just uh type in PNT. So, PNT is
+[00:05:37] a acquisition. All right. So, um doubles
+[00:05:40] on Eli Liy deal. All right. So, this is
+[00:05:44] what I've been talking about with these
+[00:05:45] pharmaceutical companies. This happens
+[00:05:47] all the time. They get picked up and
+[00:05:48] bought out by the bigger uh the bigger
+[00:05:50] the bigger companies. So SPRC was our
+[00:05:53] third leading gapper uh 82% at the open,
+[00:05:57] but it was up uh more than that a bit
+[00:05:59] earlier. And this is our one minute
+[00:06:01] chart. Now the stock itself had news of
+[00:06:04] a European patent. Didn't feel to me
+[00:06:07] like a super significant headline, but
+[00:06:10] it did pop up pretty nicely right here
+[00:06:12] at 7:30, 7:38 when the news came out. It
+[00:06:15] then pulled back and as it came up right
+[00:06:18] here, I was watching it for a possible
+[00:06:20] trade. Uh, however, what I noticed was
+[00:06:23] that there was something funny happening
+[00:06:26] with the spread. So, it sold off. It
+[00:06:29] came back up to about five $5. It then
+[00:06:33] pulls back. It then pops here up to 550.
+[00:06:36] And right in this area, we had a large
+[00:06:39] spread. The spread is the difference
+[00:06:41] between the bid and the ask. So when
+[00:06:44] we've got a bigger spread, and in that
+[00:06:46] case it was about a 20 cent spread, that
+[00:06:49] creates more risk for taking the trade.
+[00:06:51] This stock right now has a 6 cent
+[00:06:53] spread. That means you could buy 10,000
+[00:06:55] shares at five and sell them at $4.94
+[00:06:58] and you'd be losing $600 from the
+[00:07:01] spread. So, you know, manageable risk. I
+[00:07:04] think 6 cents is is an acceptable risk
+[00:07:07] uh for a spread. But 20 cents, 30 cents,
+[00:07:09] 40 cents, that starts to get a little
+[00:07:10] bigger. So, I didn't take it on this
+[00:07:12] first trade. It pulls back and then it
+[00:07:15] comes back up again right about here.
+[00:07:19] And I actually want to switch this to a
+[00:07:21] 10-second chart because this window was
+[00:07:23] only 12 minutes long. So, if we look at
+[00:07:25] a 10-second chart, we can actually get a
+[00:07:27] little bit more dialed in and better
+[00:07:29] visualize the stairstepping pattern. So,
+[00:07:32] this stairstepping pattern happens
+[00:07:36] uh essentially when a stock usually
+[00:07:38] comes out, it has breaking news. Oops.
+[00:07:41] So, we've got the news headline right
+[00:07:42] here. We get that first leg up. And then
+[00:07:45] what happens? There's a little bit of
+[00:07:47] profit taking right here. Some people
+[00:07:49] take profit who were in at the beginning
+[00:07:51] of the move. And then right here, this
+[00:07:54] is sort of the moment of truth. More
+[00:07:56] buyers come in right in this area here.
+[00:07:59] And it gets bought up. Now, it squeezes
+[00:08:02] up for a second stair step up. So, first
+[00:08:06] step, second step, and then naturally it
+[00:08:10] pulls back a little bit more. And then
+[00:08:11] more traders come in right here. And
+[00:08:13] what we love to see on this is a volume
+[00:08:16] profile where we've got high volume on
+[00:08:19] the green candles, light volume on the
+[00:08:21] red candles, and where we see volume
+[00:08:24] increasing as it's going higher. So, the
+[00:08:27] higher it goes, the more the volume
+[00:08:29] increases.
+[00:08:31] That ascending volume profile right
+[00:08:33] there goes handinhand with stocks that
+[00:08:36] make big moves. And this one obviously
+[00:08:38] went up over 100%. Which is a great
+[00:08:40] move. So my goal with this is to buy on
+[00:08:45] the pullbacks. But you might say, well
+[00:08:47] Ross, how do you know it's not going to
+[00:08:48] just do this? So there's a couple
+[00:08:51] different things that I can do. One of
+[00:08:53] those things is to draw out a trend
+[00:08:55] line.
+[00:08:57] So in the case of this stock here, we'll
+[00:08:59] draw a trend line from about here to
+[00:09:01] here. Uh we'll click snap it in. So this
+[00:09:03] is a trend line. So for instance,
+[00:09:06] because we know the stock pulled back in
+[00:09:08] these areas, kind of like this, you
+[00:09:10] know, this area here, right in this area
+[00:09:12] as it starts to pull back, I know that
+[00:09:14] we have support at this blue line, this
+[00:09:18] blue ascending support line. So I like
+[00:09:20] the idea of buying off of this line,
+[00:09:22] buying off of that support level right
+[00:09:24] there. All right. All right. So, I can
+[00:09:26] get in off of support. I can also buy
+[00:09:28] the first candle to make a new high,
+[00:09:29] which in this case is a break through a
+[00:09:31] psychological area, $7. We know that
+[00:09:35] stocks trade um they they generally have
+[00:09:38] resistance around half dollars and whole
+[00:09:41] dollars. So, if this is $6 here, the
+[00:09:44] stock will come up to it. It'll pull
+[00:09:46] back, breaks through, it comes back,
+[00:09:49] retests it, shows it can hold, and then
+[00:09:51] we're going up to the next level, which
+[00:09:52] is 650. We again pull back, we break
+[00:09:56] through it, we hold over it, and then
+[00:09:58] we're going up to seven. So these stocks
+[00:10:00] really trade in increments of about 50
+[00:10:02] cents. 6 650 758.
+[00:10:06] So on this one right here, my very first
+[00:10:09] trade on it was um let me just back this
+[00:10:12] up. So the stock had squeezed up right
+[00:10:15] here to a high of 607. And as it pulls
+[00:10:18] back, it bottomed at this candle at
+[00:10:21] about 563.
+[00:10:24] $563
+[00:10:25] right there. And I actually bought this
+[00:10:27] dip at about 571.
+[00:10:31] Now, the nice thing with that was I was
+[00:10:33] getting in about 30 cents below the high
+[00:10:37] and I was getting in only about 8 cents
+[00:10:40] above the low, which means on that
+[00:10:42] trade, what was my max loss? What was I
+[00:10:45] risking?
+[00:10:47] So on 3,000 shares,
+[00:10:50] 3,000 shares at 571.
+[00:10:54] So 3* 6 is about $18,000
+[00:10:58] in the trade in total. That was the
+[00:11:00] total amount of money I had in the
+[00:11:01] trade. But that's not how much I was
+[00:11:02] risking. My max loss on this was about
+[00:11:06] $563.
+[00:11:08] All right. So on this trade, I was
+[00:11:10] risking about $240.
+[00:11:15] $240 the difference between 571 and 563
+[00:11:19] add a little slippage approximately $300
+[00:11:23] of risk. So I'm risking 300. This
+[00:11:26] $18,000 is just a tool. This is a tool
+[00:11:29] that I'm using because now I own value.
+[00:11:31] I own an actual stock. My risk is the
+[00:11:34] difference between my entry price and my
+[00:11:37] max loss. All right? So granted, in
+[00:11:40] order to take a $3,000 trade, you would
+[00:11:42] need the buying power to take that
+[00:11:43] trade. And whenever I've done small
+[00:11:45] account challenges, I've used leverage
+[00:11:48] to allow me to take bigger positions.
+[00:11:50] But other traders will use their cash
+[00:11:51] balance, and that's fine, too. It
+[00:11:53] depends on your risk tolerance. All
+[00:11:54] right, so we got that pullback, we got
+[00:11:56] the popup, and then my next trade was
+[00:11:58] right here, getting in for the break of
+[00:12:01] $6. So I I added here for the break of
+[00:12:05] six. this stair step. I was looking for
+[00:12:08] it to break through that level and we
+[00:12:10] broke and we squeezed up to 638 just
+[00:12:13] underneath 650 half-doll psychological
+[00:12:16] resistance. We pull back and what do I
+[00:12:18] do? I add right here at about 637 and we
+[00:12:21] get a squeeze up through 650 all the way
+[00:12:23] up over $7 a share and I took my profit
+[00:12:26] as it went up higher right into this
+[00:12:28] area. It then dips down again right here
+[00:12:31] and squeezes up to 750. Pulls back and
+[00:12:35] then it breaks below this blue ascending
+[00:12:37] support trend line. But look at what
+[00:12:39] happens right here.
+[00:12:41] It comes back up and tries to break back
+[00:12:43] above it. But it was not able to do it.
+[00:12:47] That shows that this was a valid trend
+[00:12:49] line. It was being respected both on the
+[00:12:51] top and on the bottom. What you can even
+[00:12:54] do with these types of trend lines, you
+[00:12:56] can uh you can copy them to create a
+[00:12:58] channel. So now I can create a channel
+[00:13:01] connecting approximately the tops. And
+[00:13:04] this could be helpful because then it
+[00:13:05] helps you better understand where you
+[00:13:07] may have resistance resistance and then
+[00:13:10] buy. So we want to buy off of support
+[00:13:12] and take profit into resistance. And
+[00:13:15] this is a stock that's trading in these
+[00:13:17] waves moving higher. And they can
+[00:13:20] continue to move higher and they can
+[00:13:22] even break out of this channel to the
+[00:13:23] upside. But in this case, it pulled
+[00:13:25] back. This was our first warning sign.
+[00:13:29] As it came back up here, it tried to
+[00:13:31] squeeze back up again, but it had broken
+[00:13:33] out of the channel. It wasn't able to
+[00:13:35] hold. And although I did take a trade
+[00:13:37] down here for this squeeze back up,
+[00:13:39] thinking maybe we would get up to the
+[00:13:41] bottom of this trend line, we weren't
+[00:13:43] able to do it and we sold off. So that
+[00:13:45] marked my best exit right up here at
+[00:13:48] about $7.71,
+[00:13:50] which was $2 a share from 571 up to 771.
+[00:13:54] So in all, this was a this was a really
+[00:13:56] solid trade. But again, this is the type
+[00:13:59] of stock that we have a small window.
+[00:14:01] And your job is to be able to capitalize
+[00:14:04] on this opportunity, which means a good
+[00:14:06] amount of time is sitting and being
+[00:14:07] patient. So if you're someone who sat
+[00:14:09] down right here, you do not want to be
+[00:14:11] trading the backside of the move. This
+[00:14:14] is not the clean area. This is choppy on
+[00:14:17] this particular stock. It does come back
+[00:14:19] up towards seven. It tries to curl, but
+[00:14:21] really we had the front side of the move
+[00:14:23] right after the news and then that was
+[00:14:25] it. The window on this stock was smaller
+[00:14:28] than on the window we had last week on a
+[00:14:31] couple of the others. You know, last
+[00:14:32] week we had a stock that went up 600%.
+[00:14:35] We had another one that went up 400%. We
+[00:14:37] never know exactly how high they're
+[00:14:39] going to go. Our job is just to trade
+[00:14:41] the price action that is right in front
+[00:14:43] of us. So, if you found this deep dive
+[00:14:45] interesting, make sure you check out
+[00:14:46] this stock right here that went up 600%
+[00:14:48] last week. I locked up nearly $23,000 of
+[00:14:52] profit on it, and I broke it down just
+[00:14:54] like I did in this episode, walking you
+[00:14:56] through how I managed my risk, where I
+[00:14:58] got in, where I got out. And on that
+[00:15:00] one, I even included some live trading
+[00:15:02] examples, which I think you guys will
+[00:15:04] really enjoy. So, check out that
+[00:15:05] episode. I hope you hit the thumbs up,
+[00:15:06] subscribe to the channel. I'll see you
+[00:15:07] for the next upload real

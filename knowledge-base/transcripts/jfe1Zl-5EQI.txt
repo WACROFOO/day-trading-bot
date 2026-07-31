@@ -1,0 +1,697 @@
+# Day Trading Strategy (reversals) for Beginners: Class 4 of 12 by Ross Cameron
+# https://www.youtube.com/watch?v=jfe1Zl-5EQI
+# duration_sec: 1886
+
+[00:00:00] hey guys ross here from warrior trading
+[00:00:02] we're going to go over my reversal day
+[00:00:04] trading strategy this video is a two
+[00:00:06] part video we're going to look first at
+[00:00:09] a live trade that i took today on ABY
+[00:00:12] where i got long at 2142 with a 20 cent
+[00:00:16] stop and scaled out for over a dollar of
+[00:00:19] profit after we look at that trade we're
+[00:00:22] going to go into an actual webinar where
+[00:00:25] I talk about the reversal trading
+[00:00:27] strategy and all of the details I'm
+[00:00:29] going to explain how I find the setups
+[00:00:32] what I look for my entry requirements my
+[00:00:35] eggs are requirements and give you all
+[00:00:37] of the nitty gritty details that you
+[00:00:39] need to know in order to trade this
+[00:00:41] strategy with me
+[00:00:42] alright so anyone that's interested in
+[00:00:44] joining us you can find us over at
+[00:00:46] warrior trading com our chat room is
+[00:00:49] live every day Monday through Friday
+[00:00:51] starting at 8:30 9:00 a.m. and running
+[00:00:54] until the close all right anyone who
+[00:00:57] questions feel free to email me Ross at
+[00:00:59] warrior trading comm and now we're going
+[00:01:01] to jump in to the live trade that I did
+[00:01:04] today on ABY this was the setup the big
+[00:01:08] sell-off bottoming out $21 support got
+[00:01:13] long 21:42
+[00:01:15] for the move here this moved all the way
+[00:01:18] back up to 23:28 and one of the things
+[00:01:22] I'll tell you a little later in this
+[00:01:23] class is that we can't always anticipate
+[00:01:25] when stocks are going to make big moves
+[00:01:27] but we know that most moves will get
+[00:01:30] reversed there will be a correction and
+[00:01:33] so we look to jump in as the tide is
+[00:01:36] beginning to change and ride that
+[00:01:38] momentum back up alright so we're going
+[00:01:42] to go in here to the live trade again
+[00:01:44] anyone questions feel free to email me
+[00:01:48] hey guys alright so I'm watching this
+[00:01:50] ABY here for a possible bottom bounce
+[00:01:55] we've got daily support you can see down
+[00:01:58] at $21 this looks to me like a good
+[00:02:03] potential reversal you can see it on the
+[00:02:06] v5 the v8 reversal we've got the low RSI
+[00:02:10] candles right now are riding the bottom
+[00:02:12] Bollinger Bands I would like to see a
+[00:02:15] doji at the bottom we have that little
+[00:02:19] pop right there but it didn't quite hold
+[00:02:22] I wish we had more consecutive red
+[00:02:24] candles on the one-minute chart so we
+[00:02:26] could take a possible 1 minute entry but
+[00:02:29] I'm going to watch this around the 21
+[00:02:32] dollar price area just to see if we get
+[00:02:35] a little bit of a bounce there generally
+[00:02:38] with these reversals you know we're
+[00:02:40] looking for the action around the whole
+[00:02:43] dollar for an over/under type of thing
+[00:02:45] so I'm thinking maybe a flush down to 21
+[00:02:48] and then maybe a dip down below it and
+[00:02:51] catch the move back up over 21 we'll see
+[00:02:54] how it looks I'm going to keep watching
+[00:02:55] this here
+[00:02:57] let's see if anything else shapes up but
+[00:03:00] this is a I think this will be a good
+[00:03:04] one so let's keep watching it I'm
+[00:03:08] watching this ABY high if the last
+[00:03:11] candle right now is 2142 I'm watching
+[00:03:16] this to take a thousand shares along at
+[00:03:19] 2142 with a 20 cent stop so 21 22 will
+[00:03:24] be my stop profit target is 2250 that's
+[00:03:28] the view app I think this actually has
+[00:03:30] the potential to even get further than
+[00:03:33] that but that'll be the first profit
+[00:03:34] target so let's see if this if this goes
+[00:03:39] we need this one-minute candle to make a
+[00:03:40] new high that'll be my entry ok I'm long
+[00:03:44] at 42 needs to get over 2150
+[00:03:50] there we go I'm going to put my stop at
+[00:03:55] breakeven don't want to get stopped out
+[00:03:58] I really want to try to hold this and
+[00:03:59] let it work so I'm long ABY 2142 or
+[00:04:08] bottom bounds hive the last five minute
+[00:04:11] candle is 2178 now we knew that this had
+[00:04:17] support at 21 and it wouldn't have been
+[00:04:20] a bad idea to try to take a hundred
+[00:04:22] shares or two hundred shares down here
+[00:04:24] 21:11 2115 with a stop down 27 so you
+[00:04:31] could get in with a stop like twenty
+[00:04:33] dollars and ninety cents so you you're
+[00:04:37] kind of scaling in expecting that it may
+[00:04:39] continue to drop you'll add another
+[00:04:41] hundred below the figure and hope it
+[00:04:43] comes back up hard stop would be at
+[00:04:45] twenty dollars and 85 cents or something
+[00:04:48] like that so we're up 23 cents on ABY
+[00:04:53] right here alright come on let's see if
+[00:04:56] we can get a nice move on this there we
+[00:05:01] go okay I just sold half at 2183
+[00:05:07] forty cents profit just my stop to
+[00:05:11] definitely break even the low of the
+[00:05:15] last one minute candle is 2157 and if I
+[00:05:19] likes Netflix hitting an all-time high
+[00:05:21] one in 1896 34 gain of 5 a.m. percent
+[00:05:27] break Netflix NFLX so we've got the nine
+[00:05:31] moving average here coming down at 22
+[00:05:33] dollars and 20 cents that's the first
+[00:05:36] target the 9 second target will be the
+[00:05:38] twenty third target would be the volume
+[00:05:40] weighted average price so right here
+[00:05:44] we've got to break over this moving
+[00:05:46] average on the one-minute twenty two
+[00:05:48] dollars we know we might run into little
+[00:05:50] resistance at that whole dollar there we
+[00:05:53] go
+[00:05:56] SH PJ
+[00:06:06] we're not too far off here from getting
+[00:06:09] a getting a 1-point winter 22:42 is the
+[00:06:13] spot we would need to see so the whole
+[00:06:17] idea on these is that we're trading
+[00:06:19] stocks that are at extremes whether
+[00:06:22] we're trading momentum stocks in the
+[00:06:23] morning the gap and goes you know
+[00:06:26] breaking news or reversals we're looking
+[00:06:29] for stocks they're trading at extremes
+[00:06:31] now this is trading at an extreme
+[00:06:32] because it's really really weak it's
+[00:06:34] been selling all day long and we look to
+[00:06:37] try to find the bottom now you know this
+[00:06:40] can sell five points and then bounce 50
+[00:06:42] cents even though that bounce is
+[00:06:44] relatively small compared to the
+[00:06:46] sell-off it's still an opportunity for
+[00:06:48] profit and you can see that right in
+[00:06:50] here this is a very clean set up alerted
+[00:06:53] to us on the scanners right here the v5v
+[00:06:56] a reversal hybrid scanner and also
+[00:07:00] showing here as a stock with a low RSI
+[00:07:02] so we think about that rubber band
+[00:07:04] getting stretched out the weaker and
+[00:07:05] weaker and weaker they get the more
+[00:07:07] stretched out against until finally it
+[00:07:10] needs to pop it needs to bounce back a
+[00:07:13] little bit and we look to get into the
+[00:07:15] bottom of that you know extension and
+[00:07:17] just catch the momentum right back up
+[00:07:20] 22:09 right here is the high of this
+[00:07:23] this move back up and we are running
+[00:07:26] into as you can see the nine moving
+[00:07:28] average coming down here so this is one
+[00:07:32] where we do have to be a little cautious
+[00:07:34] but it looks good with the one-minute
+[00:07:37] chart consolidating above it's moving
+[00:07:39] averages we'll see maybe if we can
+[00:07:44] we get this to continue on the move back
+[00:07:48] up some traders might think about
+[00:07:52] flipping short here selling the long
+[00:07:54] position and then getting short with the
+[00:07:57] target of moving back down to the low
+[00:07:58] now we're not that far off the low you
+[00:08:02] know but you could get a nice little
+[00:08:03] sell-off the problem though is that we
+[00:08:04] were bouncing off a pretty significant
+[00:08:06] daily support level of $21 if we didn't
+[00:08:10] have any nearby support I would be more
+[00:08:13] inclined to go ahead and flip short if
+[00:08:16] this breaks down but because we've
+[00:08:18] bounced off a really really solid
+[00:08:20] support level I'm thinking that this is
+[00:08:23] a better chance of trending up maybe
+[00:08:25] even for the rest of the day so 20 to 15
+[00:08:28] here on the ask I want to try to get one
+[00:08:31] point out of it that would be selling at
+[00:08:33] 22 42 so generally the way I size is
+[00:08:37] going to be based on the stop and how
+[00:08:39] much I'm willing to risk so I'm going to
+[00:08:42] risk generally not more than 500 dollars
+[00:08:45] per trade sometimes as little as 200 if
+[00:08:48] I'm not really confident and of course
+[00:08:51] if I can sell for a loss sooner because
+[00:08:54] it's not working I'll do that but you
+[00:08:56] know worst case scenario the loss on
+[00:08:57] this was looking like you know maybe
+[00:08:59] $300 and that meant that I could take
+[00:09:03] well
+[00:09:04] $300 loss meant I could take a thousand
+[00:09:06] shares if I was willing to risk 600 or
+[00:09:09] 700 I could have taken more sighs so I
+[00:09:11] make sure that all of my risk on any
+[00:09:15] trade is capped at about $500 with the
+[00:09:19] profit potential to make 500 to a
+[00:09:21] thousand
+[00:09:24] depending on the strength of the setup
+[00:09:26] but something we talked about earlier
+[00:09:29] today is the importance of building your
+[00:09:31] cushion each day you know the cushion is
+[00:09:34] your profit from the first few trades so
+[00:09:36] if you do three or four trades in the
+[00:09:39] morning and you can get yourself up
+[00:09:41] three four hundred dollars now you have
+[00:09:43] a cushion on the day it's a backstop
+[00:09:45] worst-case scenario you adjust your stop
+[00:09:48] on the day to 100 dollars daily profit
+[00:09:51] so if you're up 400 and you give back
+[00:09:53] 301 dollar you say alright I'm done for
+[00:09:57] the day I'm going to walk away with
+[00:09:58] ninety nine dollars a little bit of
+[00:09:59] profit I'm not going to risk letting
+[00:10:01] this day go red you don't want to go
+[00:10:03] from green to red so getting that
+[00:10:05] cushion is really important it's a
+[00:10:07] confidence builder but it's also you
+[00:10:10] know it's an account building technique
+[00:10:12] once I have the cushion right if I'm
+[00:10:15] already up four hundred five hundred
+[00:10:16] dollars or even a thousand dollars I
+[00:10:18] will sometimes allow myself to take a
+[00:10:20] little bit of a larger risk because now
+[00:10:24] I'm working with you know basically this
+[00:10:26] big cushion and I can leverage that to
+[00:10:29] take some bigger trades and yeah
+[00:10:30] worst-case scenario I end up closing the
+[00:10:32] day only up a hundred or two hundred
+[00:10:34] dollars which is still profit but I had
+[00:10:36] the potential to you know roll a good
+[00:10:39] three four hundred dollar morning into a
+[00:10:41] $1,500 $2,000 winning day which is you
+[00:10:45] know that those types of days will cover
+[00:10:47] lots of slow days
+[00:10:52] so I'm really looking for that one point
+[00:10:54] here see we broke over the nine moving
+[00:10:59] average the next resistance is the 20
+[00:11:02] moving average at 22 66 so we really
+[00:11:04] don't have we shouldn't have any issue
+[00:11:07] continuing to trend up I'm going to set
+[00:11:13] a profit stop on this at $22 so as long
+[00:11:17] as it holds above $22 I'll stay in the
+[00:11:20] trade and let it ride if it comes down
+[00:11:22] to 22 I'm going to stop out of the rest
+[00:11:24] and the idea there is trying to keep
+[00:11:28] that final piece as long as possible
+[00:11:31] alright I don't want to sell that last
+[00:11:33] piece until I get stopped out by getting
+[00:11:35] stopped out I'm proving that I've taken
+[00:11:37] this trade from start to finish the
+[00:11:40] right way it's very frustrating when
+[00:11:42] you're in the habit of selling your
+[00:11:44] winners too soon and holding your losers
+[00:11:46] too long and a lot of traders do that
+[00:11:48] you know there's a fear of loss and that
+[00:11:52] fear of loss makes you sell trades
+[00:11:55] really quickly because you're up $100 in
+[00:11:58] your 1880 Center second you know how
+[00:12:00] quickly it can go against you so you
+[00:12:02] just take the hundred dollars profit and
+[00:12:04] maybe it would have been a $500 winner
+[00:12:06] but you're just happy to take the
+[00:12:07] hundred dollar profit and then on the
+[00:12:09] flip side when you're down 100 or 200
+[00:12:11] you're afraid to take the loss so you
+[00:12:13] don't want to make that loss real and so
+[00:12:15] you just hold it thinking that maybe
+[00:12:17] it'll bounce back you know maybe this
+[00:12:19] will recover and it just gets worse and
+[00:12:21] worse and worse until finally you're
+[00:12:23] faced with having to take the loss and
+[00:12:25] it ends up being much worse than before
+[00:12:27] and you say I'm never going to do that
+[00:12:29] again but you end up doing it again it's
+[00:12:31] something that new traders do all the
+[00:12:32] time and a lot of the students in our
+[00:12:35] course are working through those
+[00:12:37] emotions and the best strategy is a
+[00:12:41] strategy for emotional conditioning we
+[00:12:44] teach our traders on a three-month
+[00:12:45] trading plan to increase their risk
+[00:12:48] slowly starting with a small a small
+[00:12:52] share size so by starting small you can
+[00:12:55] begin to experience the emotional
+[00:12:57] frustration of
+[00:12:59] of loss and you know the frustration of
+[00:13:03] seeing a winner turn into a loser but
+[00:13:05] you train yourself to just take the loss
+[00:13:08] and bail out because you know that's the
+[00:13:09] right thing to do and you know when
+[00:13:11] you're trading 100 shares that the
+[00:13:12] profits really don't matter as a new
+[00:13:15] trader it's not about being profitable
+[00:13:17] it's about building a foundation for a
+[00:13:19] career as a trader a foundation for your
+[00:13:21] future success so that's going to be
+[00:13:24] focusing on your statistics what's your
+[00:13:26] percentage of success what are your
+[00:13:28] average profits versus your average
+[00:13:30] losses you know those are the type of
+[00:13:32] things that we really want to focus on
+[00:13:34] with with all of our new students all
+[00:13:39] right so we've got a high here 22 42
+[00:13:41] cents off getting one point of profit
+[00:13:46] there's 40 come on 42 and we really
+[00:13:50] don't have any resistance on this up
+[00:13:52] until 66 so or 64 now so this should
+[00:13:56] just continue to grind up my stop my
+[00:13:59] life stop is still at $22 but at this
+[00:14:02] point it makes sense to probably tighten
+[00:14:05] that up to something like 20 to 19 just
+[00:14:09] below this moving average which is
+[00:14:10] holding a support
+[00:14:15] okay guys so let's get started with the
+[00:14:18] webinar portion of this video we're
+[00:14:20] going to go over the reversal trading
+[00:14:23] strategy in all of its details
+[00:14:25] I talked to new traders almost every
+[00:14:28] single day I've talked to hundreds of
+[00:14:30] traders this month alone and one of the
+[00:14:33] common themes among new traders is I
+[00:14:35] don't know what to trade there are
+[00:14:38] thousands of stocks moving in the market
+[00:14:40] every single day but finding a setup
+[00:14:42] that is consistent and that is a good
+[00:14:45] fit for you is really hard and so I'm
+[00:14:48] going to introduce the reversal trading
+[00:14:50] strategy it's really hard to catch
+[00:14:54] stocks before they make a big move and
+[00:14:56] this is an example here of a stock
+[00:14:59] that's sold off really hard right out of
+[00:15:01] the gates now it would be really hard to
+[00:15:03] catch this type of move to the short
+[00:15:05] side but we know what what goes up must
+[00:15:08] come down and what goes down must come
+[00:15:11] up eventually
+[00:15:12] so it's easier instead of trying to
+[00:15:14] chase these moves to wait for either a
+[00:15:17] good opportunity to get in a pullback
+[00:15:19] which is a momentum trade or instead to
+[00:15:24] wait for a reversal opportunity alright
+[00:15:27] and this right here shows a
+[00:15:29] picture-perfect reversal a pin bar at
+[00:15:32] the bottom signifying a potential
+[00:15:35] reversal and then that big swing back up
+[00:15:38] this v-shape alright and we took this
+[00:15:40] long right off the bottom with a tight
+[00:15:43] stop at the low of day and trail that
+[00:15:46] stopped up for a really nice 6 to 1
+[00:15:49] profit loss ratio right and you can see
+[00:15:51] we found this stock right here on one of
+[00:15:53] our stock scanners now the advantage of
+[00:15:57] reversals the big one is that like I
+[00:16:00] said it's difficult to anticipate when
+[00:16:02] stocks are going to make big moves but
+[00:16:04] we know that almost all of the big moves
+[00:16:05] will eventually be corrected so one of
+[00:16:09] the big advantages is the opportunity to
+[00:16:11] watch stocks that are running up while
+[00:16:14] slowly calculating possible resistance
+[00:16:17] points possible areas that could provide
+[00:16:20] a good reversal opportunity and it
+[00:16:24] allows you to instead of feeling like
+[00:16:26] you need to be impulsive or rush into
+[00:16:27] the trade to
+[00:16:29] watch the trade develop and wait for the
+[00:16:31] momentum to begin to shift alright so
+[00:16:35] when you're looking at reversals you
+[00:16:37] want to make sure that you only trade
+[00:16:39] extreme so the example we just saw was a
+[00:16:42] stock that made an extreme move to the
+[00:16:44] downside and then that move got reversed
+[00:16:46] now a stock that's just been slowly
+[00:16:48] selling off all day long usually isn't
+[00:16:51] suitable for a reversal instead we want
+[00:16:55] to think of stocks the way we think of
+[00:16:57] rubber band we want to get them really
+[00:16:58] stretched out to the downside that mean
+[00:17:01] or the upside for a shorty that means we
+[00:17:04] want to see the big extension a lot of
+[00:17:07] volume alright and then we look for a
+[00:17:09] couple of key indicators that are going
+[00:17:12] to suggest the tide may be about to turn
+[00:17:15] and that's when we take the position all
+[00:17:18] right what goes up must come down here's
+[00:17:21] a trade that we took on VA a nice big
+[00:17:24] move up from $34 the open up to 36 50
+[00:17:29] and then that quick pullback right
+[00:17:31] oftentimes these stocks will give up
+[00:17:33] hours worth of progress in a matter of
+[00:17:36] minutes so being able to time the the
+[00:17:40] reversal is really critical
+[00:17:42] all right now the key to success with
+[00:17:44] top and bottom reversals is trading the
+[00:17:48] extremes so there are a few things that
+[00:17:50] I look at in order to quantify and
+[00:17:52] extreme one is going to be a high or low
+[00:17:55] RSI that's the relative strength index
+[00:17:57] so an RSI above 90 or below 10 are going
+[00:18:01] to peak my interest a candle outside the
+[00:18:05] bounzer bands is going to peak my
+[00:18:07] interest alright and also five to ten
+[00:18:10] consecutive candles ending with a pin
+[00:18:13] bar or a doji is definitely going to
+[00:18:15] strike my interest now there are times
+[00:18:18] where we'll have five to ten consecutive
+[00:18:20] candles and they may not have had a lot
+[00:18:25] of price action so they may be drifting
+[00:18:27] down slowly but not quickly enough to
+[00:18:31] give us the feeling that it's a good
+[00:18:33] reversal so we kind of look for a
+[00:18:35] combination of these indicators all
+[00:18:37] occurring at the same time
+[00:18:39] so what I'm going to teach you here is
+[00:18:42] how to find reversal setups using stock
+[00:18:45] scanners how to read the Bollinger Bands
+[00:18:48] to find extremes how to use pinbar
+[00:18:51] candlesticks to take an entry how to
+[00:18:55] understand where to set your stops and
+[00:18:57] your profit targets and how to trail
+[00:19:00] your winners this is important this is a
+[00:19:03] strategy that is really successful for
+[00:19:06] me and has one of the best profit loss
+[00:19:09] ratios your profit loss ratio is your
+[00:19:12] average winners versus your average
+[00:19:14] losers and a lot of new traders end up
+[00:19:16] trading with a very poor profit loss
+[00:19:19] ratio because they sell their winners
+[00:19:20] too soon and they hold their losers too
+[00:19:23] long
+[00:19:23] it's a very common habit among new
+[00:19:26] traders but the reversal trading
+[00:19:27] strategy really lends itself to having
+[00:19:30] bigger profit loss ratios because you
+[00:19:32] always get in stocks when that rubber
+[00:19:34] band is super stretched out and when you
+[00:19:36] time it right you're in is the rubber
+[00:19:39] band snaps back and you just get to ride
+[00:19:41] that momentum right back up alright so
+[00:19:45] we find these setups using stock
+[00:19:49] scanners powered by trade ideas all of
+[00:19:52] the scanners that we use we share with
+[00:19:54] our students in our trading courses all
+[00:19:57] right now this is a proprietary scanner
+[00:19:59] that I've developed over the last few
+[00:20:01] years the v5v eight hybrid and this is a
+[00:20:04] scanner looking simply for RSI extremes
+[00:20:07] you can see looking for RSI below 20 and
+[00:20:10] then down here you can just barely see
+[00:20:13] the green above 80 all right so what
+[00:20:16] we're looking for are stocks that are
+[00:20:19] really stretched out and we give the
+[00:20:22] filters all of those data points so we
+[00:20:25] need a certain RSI level we need a
+[00:20:28] certain number of consecutive candles
+[00:20:30] the position within the Bollinger Bands
+[00:20:32] and so on and so forth here's a candle
+[00:20:36] outside the Bollinger Bands
+[00:20:39] okay now the Bollinger Bands they're
+[00:20:41] right here in pink this is just your
+[00:20:43] standard 20 period with a two standard
+[00:20:45] deviation most of the price action on
+[00:20:48] any given day will occur inside the
+[00:20:51] Bollinger Bands
+[00:20:52] so it's very rare to see a candle fully
+[00:20:55] outside the Bollinger Bands it indicates
+[00:20:57] an extreme situation for the stock all
+[00:21:00] right and that's what we're looking for
+[00:21:01] stocks trading at extremes the stock
+[00:21:04] here pepsi made a big move up from 96 up
+[00:21:08] to 97 60 topped out here we got short
+[00:21:12] recognising this stock had a high RSI it
+[00:21:16] had a candle outside the Bollinger Bands
+[00:21:19] it had six plus consecutive green
+[00:21:21] candles and the final candle was taking
+[00:21:25] the form of a pin bar we short up here
+[00:21:29] with a stop at the hive day a profit
+[00:21:33] target of a return back down to our
+[00:21:35] moving averages and potentially back
+[00:21:38] down to the V web the volume weighted
+[00:21:39] average price and here's an example the
+[00:21:43] bottom bounce again with a candle
+[00:21:45] outside the Bollinger Bands low RSI one
+[00:21:49] two three four five consecutive red
+[00:21:52] candles with a final candle showing as a
+[00:21:54] pin bar doji hammer kind of you know in
+[00:21:58] between candle but definitely a candle
+[00:22:01] of indecision at the bottom of a
+[00:22:02] sell-off that peaked in pretty high
+[00:22:05] volume all right so on this one we got
+[00:22:08] long here at 75 77 75 for the bottom
+[00:22:11] bounce and we got this nice move here up
+[00:22:14] to looks like a high of 78 50 stop was
+[00:22:18] 77 20 now a pin bar is a candle that has
+[00:22:24] a longer wick than the body of the
+[00:22:26] candle so you can see this top example
+[00:22:28] you've got that long upper wick some
+[00:22:31] would call it a topping tail that little
+[00:22:33] shadow someone called this candle a
+[00:22:35] shooting star in the context of a big
+[00:22:38] move up this candle we call it a pin bar
+[00:22:40] this is the same thing here on the
+[00:22:42] downside move down the candle with a
+[00:22:45] long bottoming tail that's a pin bar
+[00:22:48] it's a candle of indecision we know that
+[00:22:51] the candle tells us four things the open
+[00:22:53] price the close price the high of that
+[00:22:56] period in the low of that period so when
+[00:22:58] you have a candle with a big bottoming
+[00:23:00] tail or
+[00:23:01] and tail it tells you that at some point
+[00:23:03] during that candle period the price
+[00:23:05] moved up and was unable to hold those
+[00:23:07] levels and sold off indicating a little
+[00:23:11] bit of a battle between the buyers and
+[00:23:12] the sellers so when we're looking at
+[00:23:15] reversals we write down the list of our
+[00:23:18] entry requirements we look for the
+[00:23:20] strong extension the rubber band that
+[00:23:23] strong move on high volume preferably
+[00:23:26] half a million in shares or higher I
+[00:23:29] prefer a million but we know don't
+[00:23:31] always get that perfect set up the best
+[00:23:35] reversals will have volume peaking at
+[00:23:37] the bottom of the sell up so they'll
+[00:23:39] have literally high of day volume the
+[00:23:42] most volume out of any of the five
+[00:23:44] minute candles at the bottom of the sell
+[00:23:46] off or at the top of the run up the RSI
+[00:23:50] should be at extremes above 90 below 10
+[00:23:53] and that final candle should be outside
+[00:23:55] the Bollinger Bands so once we have our
+[00:23:59] entry requirements listed we have to
+[00:24:02] look for an actual entry an entry for me
+[00:24:05] is going to be the first one minute or
+[00:24:07] the first five minute candle to make a
+[00:24:09] new high so when we've had a big run of
+[00:24:12] consecutive candles making new lows
+[00:24:15] candle after candle the first candle it
+[00:24:17] makes the new high is really significant
+[00:24:20] that's my entry point now there are
+[00:24:23] times where I'll use the 1-minute chart
+[00:24:25] if we have five consecutive red candles
+[00:24:28] on the five-minute chart and we have 20
+[00:24:30] consecutive red candles on the
+[00:24:32] one-minute chart
+[00:24:33] I'll use the one-minute to time my entry
+[00:24:35] but typically I'll wait for the 5 minute
+[00:24:37] because it's better confirmation the 5
+[00:24:40] minute chart is cleaner
+[00:24:41] so the first 5-minute candle to make a
+[00:24:44] new high is where I get in the reversal
+[00:24:47] with a stop either at the low of day or
+[00:24:50] simply down twenty thirty cents usually
+[00:24:54] if a stock goes thirty cents against me
+[00:24:56] I sort of admit defeat I think that I
+[00:24:58] miss time my entry and I might as well
+[00:25:00] just try again rather than continue to
+[00:25:03] hold so there are times where I'll
+[00:25:04] simply use a twenty or thirty cent
+[00:25:06] arbitrary stop if the load day is too
+[00:25:09] far away and that may be the case on
+[00:25:11] stocks that are more expensive or that
+[00:25:13] are just simply more
+[00:25:15] now once you're in one of these trades
+[00:25:19] your exit indicators are pretty simple
+[00:25:22] if the stock pops up and then suddenly
+[00:25:27] moves back down on a bottom bounce you
+[00:25:30] stop out for a loss all right if you
+[00:25:34] jump in the stock and it ends up just
+[00:25:36] going sideways it's a good indicator
+[00:25:38] that we're probably getting a flag a
+[00:25:41] bear flag and that's an indication that
+[00:25:44] the price is probably going to continue
+[00:25:45] to drop so if I get in I hold for a few
+[00:25:48] minutes and the price stays flat I get
+[00:25:50] out if I get into the profit zone I can
+[00:25:55] start adjusting my stop first to break
+[00:25:58] even and then to the low of the last
+[00:26:00] 5-minute candle once I'm in the profit
+[00:26:03] zone and I'll keep adjusting my stop as
+[00:26:06] I move up all right now I'll give you a
+[00:26:10] couple examples here and then we'll go
+[00:26:13] over a trade that I did in real time all
+[00:26:16] right here's a bottom bounce alerted on
+[00:26:18] the scanners a big sell-off followed by
+[00:26:22] that long bottoming tail at the bottom
+[00:26:25] and that nice reversal another sell-off
+[00:26:29] here strong sell-off bottoming out we
+[00:26:32] don't get the perfect doji at the bottom
+[00:26:34] but we do have high volume and then the
+[00:26:36] move back up to the V web this orange
+[00:26:39] dotted line this example that we had on
+[00:26:43] the first page the big sell-off doji
+[00:26:47] pinbar at the bottom and the big return
+[00:26:49] back up again we found this on our
+[00:26:51] scanners okay right here a sell-off
+[00:26:57] out of the gates a gap down sell-off
+[00:26:59] catching the bottom $85 and 68 cents was
+[00:27:03] our long entry we got to move up to
+[00:27:05] eighty six dollars and fifty cents for
+[00:27:07] one point twenty cents top $1 profit
+[00:27:11] that's a really good profit loss ratio
+[00:27:16] another quick sell off that final candle
+[00:27:20] at the bottom doesn't take the form of
+[00:27:22] the perfect doji they're not always a
+[00:27:23] perfect setup but when we line up the
+[00:27:26] other indicators the low RSI the
+[00:27:29] consecutive 5-minute candles and
+[00:27:31] potentially resistance or support areas
+[00:27:33] on the daily chart we can help build a
+[00:27:35] case for taking the trade even if not
+[00:27:38] all of the indicators are lined up
+[00:27:40] exactly right now the same as bottom
+[00:27:44] reversals top reversals we're going to
+[00:27:47] look for that big rubber band the big
+[00:27:49] move to the upside and then the quick
+[00:27:51] pullback now I'm along biased trader I
+[00:27:54] like to be long most most of the time
+[00:27:57] when I'm trading and I feel that a lot
+[00:27:59] of retail traders are like that and it
+[00:28:02] means that stocks can be irrationally
+[00:28:04] strong people continue to buy them up
+[00:28:06] buy them up and they just run much
+[00:28:07] further than seems logical
+[00:28:10] so I allow the stocks to be irrationally
+[00:28:12] strong but once they start to show the
+[00:28:14] weakness indicated by the doji's I'll
+[00:28:18] look to take a short position with a
+[00:28:21] stop at the high a day and trail that
+[00:28:23] stop coming back in and like I said the
+[00:28:27] move up that may have taken hours can
+[00:28:29] get give can the move up that may have
+[00:28:34] taken hours can be all given back in a
+[00:28:37] matter of minutes on the good top
+[00:28:39] reversal right the Bulls take the stairs
+[00:28:44] and the Bears take the window so the
+[00:28:46] sell offs can be very quick this was a
+[00:28:49] really nice reversal with the doji up at
+[00:28:52] the top indicated again on our scanners
+[00:28:55] another top reversal with the doji at
+[00:28:58] the top the pin bar easy two-to-one
+[00:29:01] profit loss ratio and here's a top
+[00:29:06] reversal that wasn't as obvious we
+[00:29:08] didn't have that really clean pin bar
+[00:29:10] but we were hitting a level of
+[00:29:13] resistance that was notable on the daily
+[00:29:15] chart along with the whole dollar $43
+[00:29:18] and that made sense for a potential
+[00:29:21] short take a stab we took the stab we
+[00:29:24] ended up making over two points really
+[00:29:27] nice return
+[00:29:29] another candle here up outside the
+[00:29:32] Bollinger Bands these Bollinger Bands
+[00:29:34] are bold to make it easier to see really
+[00:29:36] nice reversal here
+[00:29:38] a grinding stock all morning and into
+[00:29:41] lunch finally peaking around 1:15 and
+[00:29:44] then a big sell-off coming from 1:15 to
+[00:29:47] 2 p.m. right so we can't always time
+[00:29:52] when the momentum will strike when these
+[00:29:54] stocks will suddenly make a big burst up
+[00:29:56] why it happened here and it didn't
+[00:29:58] happen an hour earlier impossible to
+[00:30:01] know but once it starts to happen
+[00:30:03] I start thinking when will this reverse
+[00:30:05] and when can i short it now I also trade
+[00:30:08] momentum and that's one of our other
+[00:30:10] strategies and this is a good example of
+[00:30:13] a stock that was excellent for a top
+[00:30:15] reversal and then once it started
+[00:30:18] consolidating here along the moving
+[00:30:20] average it's a good opportunity to sell
+[00:30:22] or cover the short position and flip
+[00:30:25] long get back in because now it's
+[00:30:27] actually showing strength consolidating
+[00:30:30] and flagging along the moving average
+[00:30:31] and now flip long for a move back up to
+[00:30:34] the highs and we do that a lot we'll get
+[00:30:36] into stock that is a great reversal
+[00:30:38] trade and then it ends up turning into a
+[00:30:40] momentum trade once the reversal gets
+[00:30:44] rejected but other times you'll see
+[00:30:46] stocks that end up really breaking those
+[00:30:49] moving average support lines and
+[00:30:51] sometimes selling off for the rest of
+[00:30:53] the day alright so the goal of reversal
+[00:30:59] trading is to get an entry with a tight
+[00:31:02] stop as tight of a stop as possible set
+[00:31:06] the stop let it ride adjust your stop as
+[00:31:10] you're in the profit zone rinse and
+[00:31:14] repeat
+[00:31:15] do it again and again we do it every
+[00:31:17] single day in our live chat room anyone
+[00:31:20] with questions please feel free to email
+[00:31:21] me Ross at warrior trading com

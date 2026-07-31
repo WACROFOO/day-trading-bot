@@ -1,0 +1,459 @@
+# NEW 💥 How to Setup ThinkorSwim for Day Trading
+# https://www.youtube.com/watch?v=xn_Nxa_0JBU
+# duration_sec: 966
+
+[00:00:02] what's up everyone ross here from
+[00:00:03] warrior trading in today's episode i'm
+[00:00:04] going to walk you through how to use tv
+[00:00:06] ameritrade's thinkorswim platform for
+[00:00:08] active trading if you are thinking about
+[00:00:11] day trading or you're already a day
+[00:00:13] trader it's important for you to know
+[00:00:15] that while td ameritrade is one of the
+[00:00:16] most popular brokers out there and
+[00:00:18] thinkorswim is one of the most popular
+[00:00:20] platforms when you install it out of the
+[00:00:22] box it is not customized for day trading
+[00:00:25] and that's because of course think about
+[00:00:27] their demographic the majority of people
+[00:00:29] using thinkorswim and using td
+[00:00:31] ameritrade are not active traders so the
+[00:00:34] platform out of the box when you first
+[00:00:36] install it is really customized for
+[00:00:38] someone who's taking a couple of trades
+[00:00:39] here and there at the end of this video
+[00:00:41] i'm going to share with you a few of the
+[00:00:43] critical settings that you need to
+[00:00:45] enable on your account in order to
+[00:00:47] maximize the performance of the platform
+[00:00:50] because out of the box it is not tuned
+[00:00:52] for active trading this is very
+[00:00:54] important if you're going to be an
+[00:00:55] active trader using td ameritrade and i
+[00:00:57] know a number of traders who are using
+[00:00:59] it i know traders who have made seven
+[00:01:00] figures on td ameritrade so it's not to
+[00:01:03] say that it's a platform only for
+[00:01:06] beginner or retail traders that are you
+[00:01:08] know kind of novice you can totally be a
+[00:01:11] successful trader on td ameritrade but
+[00:01:13] you've got to make sure you tweak those
+[00:01:15] settings to get the most out of it so
+[00:01:17] the topics today i'm going to walk you
+[00:01:19] through in brief installing the
+[00:01:21] thinkorswim platform i'm going to show
+[00:01:23] you how to import a layout and i'm
+[00:01:25] actually going to give you a link where
+[00:01:27] you can download the layout that i use
+[00:01:30] when i trade with thinkorswim so you can
+[00:01:31] download my layout i'll put that link
+[00:01:33] down in the description i'll pin it in
+[00:01:35] the comments the link will be hosted
+[00:01:37] over on my website warriortrading.com so
+[00:01:39] you can jump over there and you can
+[00:01:40] download that link and then i'll show
+[00:01:42] you how to import my layout right away
+[00:01:45] now the next thing is setting up your
+[00:01:48] thinkorswim platform as an active trader
+[00:01:50] so there's a couple settings that i'm
+[00:01:51] going to walk you through i'm also going
+[00:01:52] to show you the active trader section
+[00:01:55] and kind of how i have that laid out i'm
+[00:01:57] going to walk you through number four
+[00:01:58] setting up hotkeys so you can take very
+[00:02:01] quick trades getting in getting out and
+[00:02:03] this just for instance
+[00:02:05] this is
+[00:02:06] a keypad that i use now i use this for
+[00:02:09] making videos and broadcasting on
+[00:02:10] youtube but a lot of traders will use
+[00:02:12] something just like this for pressing
+[00:02:14] the buttons boom see i press that button
+[00:02:16] something happens but you can do that
+[00:02:18] just for trading as well so for getting
+[00:02:20] in and out of trades and things like
+[00:02:21] that all right so back to the whiteboard
+[00:02:24] and then i will end with the critical
+[00:02:26] settings that you need to make sure you
+[00:02:28] enable to get the most out of the td
+[00:02:30] ameritrade platform sound good okay
+[00:02:32] let's go ahead and jump in let's get
+[00:02:34] over to the screen so you can see here
+[00:02:36] on my screen we've got thinkorswim
+[00:02:39] download very easy very easy google and
+[00:02:42] you can click on this link from td
+[00:02:44] ameritrade of course always make sure
+[00:02:45] you you know which site you're clicking
+[00:02:47] on this is td ameritrade and right here
+[00:02:49] you can go down here as a windows user
+[00:02:51] and you can install
+[00:02:52] 32-bit or 64-bit so i've already done
+[00:02:55] this so this has been installed and now
+[00:02:59] i'm going to go
+[00:03:00] and launch the platform
+[00:03:02] okay so before you enter your username
+[00:03:04] and your password you can actually click
+[00:03:05] on this settings widget right here and
+[00:03:07] you can increase the memory usage on the
+[00:03:10] thinkorswim platform now you're going to
+[00:03:12] want to think about the type of computer
+[00:03:14] you have you don't want to overload your
+[00:03:15] computer but i usually bump mine up to
+[00:03:18] sort of in the middle of the range just
+[00:03:19] to give it a little bit more uh memory
+[00:03:22] allocated to the platform because one of
+[00:03:24] the things with thinkorswim is that it's
+[00:03:26] um it's kind of a heavy platform it's
+[00:03:28] not super super lightweight there's
+[00:03:31] other platforms that
+[00:03:32] other folks use for for active trading
+[00:03:35] including myself that are much more
+[00:03:37] lightweight that are really run very
+[00:03:39] very quick but td ameritrade's not one
+[00:03:41] of them so
+[00:03:42] i'm going to go ahead and log in here
+[00:03:44] and then i'll show you the screen as
+[00:03:46] soon as i'm logged in okay so once
+[00:03:48] you've got the platform installed you
+[00:03:50] can log in using your username and
+[00:03:53] password and then it's time to install
+[00:03:57] your first layout so if you have a
+[00:03:59] layout from a friend that's fine if you
+[00:04:01] want to use my layout that works too so
+[00:04:04] what you're going to do is you're going
+[00:04:05] to go to setup and then you're going to
+[00:04:07] go to open shared item right here
+[00:04:10] and this is where you'll paste the url
+[00:04:13] of my layout so down the description or
+[00:04:16] in the pinned comment you can go over to
+[00:04:17] warriortrain.com where i have the layout
+[00:04:20] that i share with warrior trading
+[00:04:22] members and you can go ahead and paste
+[00:04:24] that there you paste it you click
+[00:04:25] preview you click import
+[00:04:28] and then you go to setup and that new
+[00:04:32] layout is right here so you can then
+[00:04:35] click on that then when you click on
+[00:04:36] that it's going to switch over to this
+[00:04:39] active trader window
+[00:04:41] so
+[00:04:42] this active trader window actually looks
+[00:04:44] just a smidge different when you install
+[00:04:46] it it's going to look like this
+[00:04:48] this is how it is when um when when you
+[00:04:51] install it's going to be
+[00:04:53] for a grid of four windows so you've got
+[00:04:55] one two three four
+[00:04:57] so with this active trader area this is
+[00:05:00] where we're going to get into talking
+[00:05:01] about
+[00:05:02] the active trader this is
+[00:05:05] gives you the ability to open a number
+[00:05:08] of different grids as much as many as
+[00:05:10] you'd like and then when you click on
+[00:05:13] this little link click the number two
+[00:05:16] notice that this is a two this is a two
+[00:05:18] so these are all lined up on the same
+[00:05:21] the same stock right
+[00:05:23] so by doing that now if we switch this
+[00:05:25] to time and sales
+[00:05:27] if you pull this stock up or whatever
+[00:05:29] stock it is all three will update
+[00:05:31] so lg vn
+[00:05:33] and my workflow generally i use
+[00:05:37] scanners to find stocks to trade so lgbn
+[00:05:41] popped up a little while ago so i wanted
+[00:05:42] to use it kind of as an example so the
+[00:05:44] stock pops up
+[00:05:46] i can either click to buy just by
+[00:05:48] clicking right here anywhere on here is
+[00:05:50] an instant order to buy the stock
+[00:05:54] or i can type in here and click the
+[00:05:56] number of shares i want to buy and then
+[00:05:58] click buy ask or buy market when i'm
+[00:06:02] ready to get out i can sell market or
+[00:06:04] join the ask
+[00:06:05] i always try to sell the ask that's what
+[00:06:08] i always want to do i always want to try
+[00:06:10] to sell the ask if i have open orders
+[00:06:12] that haven't filled i can cancel all and
+[00:06:14] i can flatten the position which is i
+[00:06:17] only have 100 shares right now you can
+[00:06:19] see the quantity right there but if you
+[00:06:21] had like 1122
+[00:06:23] shares
+[00:06:25] rather than having to type in you know
+[00:06:28] 1122 and then oh my god i typed it wrong
+[00:06:30] you just click flatten and that'll close
+[00:06:33] the position for you
+[00:06:35] so
+[00:06:36] i know i always have auto send turned on
+[00:06:38] so it won't bring up the confirmation
+[00:06:40] window otherwise it'll bring up this
+[00:06:41] confirmation window which would slow you
+[00:06:43] down so let's just say um if i did this
+[00:06:46] see it's going to bring up the
+[00:06:47] confirmation window
+[00:06:49] and then you're like oh my god okay yeah
+[00:06:51] yeah yeah send the order send the order
+[00:06:52] and it's just
+[00:06:54] that's not
+[00:06:55] it just slows me down too much
+[00:06:58] so i turn on auto send
+[00:07:01] but when it comes to
+[00:07:03] the pointing and clicking
+[00:07:05] note that that just did it for 100
+[00:07:07] shares
+[00:07:08] well wait one second why did it send it
+[00:07:11] for 100 shares when i have 10 shares
+[00:07:13] typed in right here
+[00:07:15] maybe it didn't maybe it was confused
+[00:07:17] what if i do 25 shares
+[00:07:19] it sent it for 100 shares again
+[00:07:21] okay we've got to go into the settings
+[00:07:23] so we're going to jump forward here and
+[00:07:25] i'm going to show you one of the
+[00:07:26] settings that you need to change you're
+[00:07:28] going to go to order defaults
+[00:07:30] and you're going to change this to
+[00:07:31] whatever you want your order default to
+[00:07:33] be
+[00:07:34] so if you want to be a thousand shares
+[00:07:37] a thousand shares if you want it to go
+[00:07:38] up and down by increments of a thousand
+[00:07:40] you change it right there and then just
+[00:07:42] like that apply
+[00:07:44] this is now going to try to send it for
+[00:07:46] a thousand shares
+[00:07:48] so that can be a little bit confusing
+[00:07:50] because the level two
+[00:07:52] works differently from what you have
+[00:07:54] typed in right here
+[00:07:56] this is actually the active trader right
+[00:07:59] at the top and i had the level two
+[00:08:02] sort of so close to it that it looks
+[00:08:04] like it's the same but it's not the same
+[00:08:08] so
+[00:08:09] the number you type in here doesn't
+[00:08:11] correspond to what happens here it's a
+[00:08:13] little a little confusing but you get
+[00:08:16] used to it
+[00:08:17] so
+[00:08:18] but the reason that i like to have this
+[00:08:20] on here is because i can point and click
+[00:08:22] and if i turn on the auto send then i
+[00:08:24] can point and click very quickly now
+[00:08:26] these orders are going to reject because
+[00:08:28] i don't have enough buying power in this
+[00:08:29] account to buy a thousand shares which
+[00:08:32] is fine um so you could go over here and
+[00:08:34] you would see under the monitor you
+[00:08:36] could go to canceled orders and you
+[00:08:37] would see your orders that filled and
+[00:08:39] you would see your orders that
+[00:08:40] are working and you would see the orders
+[00:08:42] that didn't fill because not enough
+[00:08:44] buying power
+[00:08:45] so that's fine all right so now go back
+[00:08:47] to trade back to active trader
+[00:08:50] and if i wanted to so let's say um
+[00:08:54] i want to sell 100 shares now this is
+[00:08:56] where it could be a little bit confusing
+[00:08:58] because i can't click here to sell 100
+[00:09:01] shares
+[00:09:02] because this is for buying
+[00:09:04] this is where i'd have to go like this
+[00:09:06] i'd have to go ahead and type a hundred
+[00:09:08] and then i can go up here
+[00:09:10] and i can actually scroll up and then i
+[00:09:13] could click let's see i'm in at 78. so i
+[00:09:16] could click sell you know up here and i
+[00:09:18] could put the limit cell at what's like
+[00:09:20] 12.45 so you see the line of
+[00:09:23] approximately where that sell order is
+[00:09:25] you could do that for setting profit
+[00:09:27] targets i honestly don't do that very
+[00:09:29] often usually i just when i'm ready to
+[00:09:32] get out i click join the ask like that
+[00:09:34] and my order's going to be sitting at
+[00:09:36] the ask at 28 and it'll get filled and
+[00:09:39] you know whatever
+[00:09:41] it'll it'll get filled if it goes over
+[00:09:43] 28 or i'll have to keep waiting
+[00:09:46] so and over here on the time and sales
+[00:09:48] the layout that i have i just kept it
+[00:09:50] simple like this
+[00:09:51] but if you want to do to do a grid of
+[00:09:53] six you certainly could and you could
+[00:09:55] have another set of charts here or
+[00:09:57] whatever the case is
+[00:09:58] so now let's talk for a second about
+[00:10:01] hot keys
+[00:10:03] all right so hotkeys are important for
+[00:10:06] the way i trade and you do have some
+[00:10:08] hotkey
+[00:10:09] options with td ameritrade thinkorswim
+[00:10:12] all right so we're going to go in back
+[00:10:13] to settings application settings and
+[00:10:15] you'll see the hotkeys are right here
+[00:10:19] okay so now what we want to do is we're
+[00:10:21] going to
+[00:10:22] minimize general and we have active
+[00:10:25] trader enabled and notice i have bar by
+[00:10:28] market as shift one
+[00:10:30] okay so my layout when you install it is
+[00:10:33] gonna have buy market as shift one
+[00:10:36] so if i press shift one it's gonna buy
+[00:10:37] market to whatever i have right here
+[00:10:40] whatever i already have typed in this
+[00:10:42] again is for the active trader window
+[00:10:46] we've got cell market which is control z
+[00:10:49] we've got cell ask which is control k
+[00:10:53] and i usually would put little stickers
+[00:10:55] on my keyboard if i was a beginner
+[00:10:57] trader i would do that and that's what i
+[00:10:59] did just to help me remember what keys
+[00:11:00] do what and then cancel all is uh
+[00:11:03] control q
+[00:11:04] so cancel all and just like that that
+[00:11:06] gives me the hot keys that i feel like i
+[00:11:08] absolutely need
+[00:11:10] so apply settings so let's see um
+[00:11:15] so i could do control q
+[00:11:18] and i cancel that open order now i'm
+[00:11:19] going to do control k
+[00:11:21] and my order is on the ask right now at
+[00:11:24] 24
+[00:11:26] right i'm going to control q and cancel
+[00:11:28] it
+[00:11:29] and i'll show you here um
+[00:11:31] let me just move this over a little bit
+[00:11:33] more
+[00:11:34] okay so you'll be able to see down here
+[00:11:35] so control k there's a sell order out
+[00:11:38] right there
+[00:11:40] so my sell order is at 24 and then i
+[00:11:42] press ctrl q the sell order is canceled
+[00:11:45] so you can go into here and you could
+[00:11:46] see that the orders that go out and then
+[00:11:48] get cancelled and then go out and get
+[00:11:50] cancelled and then if i just decide i
+[00:11:51] want to get out i'll press ctrl z and
+[00:11:53] i'm out of the trade boom flat this
+[00:11:56] video costs me 57 and 28 cents to make
+[00:12:00] that's real money
+[00:12:01] but it's fine so
+[00:12:03] now i have to go and make sure let's see
+[00:12:05] oh see there was still a sell order
+[00:12:07] there so i just go double check that but
+[00:12:10] i always like to check to make sure
+[00:12:12] there's no working orders
+[00:12:14] because sometimes what a trader will do
+[00:12:16] when they're using active trader they
+[00:12:18] might not realize it but you know they
+[00:12:20] might accidentally put you know a buy
+[00:12:23] order like that
+[00:12:24] and then they're like okay good night
+[00:12:26] i'll see you tomorrow they leave and
+[00:12:29] uh oh
+[00:12:30] an order was left working that's an open
+[00:12:33] order
+[00:12:34] and if that stock drops it will fill at
+[00:12:36] 12 bucks and you're going to be
+[00:12:37] surprised the next morning when you log
+[00:12:39] in so you want to make sure you cancel
+[00:12:41] those open orders cancel order
+[00:12:44] and you check this before you leave at
+[00:12:45] the end of the day just to make sure you
+[00:12:47] don't have any open orders that are
+[00:12:48] sitting out there
+[00:12:50] all right so now let's go to setup and
+[00:12:53] let me show you a couple of tricks that
+[00:12:56] um will help you get the most out of tv
+[00:12:58] ameritrade
+[00:13:00] okay so you looked at hotkeys we've
+[00:13:02] looked at order defaults um
+[00:13:05] now we're going to go
+[00:13:07] notifications i turn off these
+[00:13:09] notifications the order fills i turn off
+[00:13:12] because i find them distracting so i
+[00:13:14] turn this stuff off
+[00:13:17] i don't use it the problem is uh
+[00:13:20] especially when it's down in these areas
+[00:13:21] when it pops up it covers important
+[00:13:23] information so i have that turned off
+[00:13:25] always
+[00:13:27] and then we're gonna go into general
+[00:13:28] we've got account here we're gonna go to
+[00:13:29] orders
+[00:13:31] uh positions let's see we're gonna go to
+[00:13:33] active trader
+[00:13:34] and so uh i always make sure this is uh
+[00:13:37] set at zero and i move this one until to
+[00:13:40] recenter faster
+[00:13:42] auto send at order on down click yes
+[00:13:45] reset at order template after setting
+[00:13:48] this is something you may want to turn
+[00:13:49] off it depends
+[00:13:51] i usually turn that off because after i
+[00:13:54] send an order like let's say i
+[00:13:56] specifically type in an order here for
+[00:13:58] 2500 shares i send it i might want to
+[00:14:01] click it twice i don't want it to reset
+[00:14:03] to default of 100 shares so i i turn
+[00:14:07] that off on active trader
+[00:14:10] and then under system i always want to
+[00:14:12] change the quote speed to real time no
+[00:14:14] delay i want to be real time no delay
+[00:14:18] all right so make sure that's on real
+[00:14:19] time no delay uh sound on trading start
+[00:14:22] stop i leave that off and then all of
+[00:14:25] this stuff
+[00:14:26] none of this
+[00:14:28] i have changed so the most important one
+[00:14:31] uh has been
+[00:14:33] real-time quotes
+[00:14:34] and turning off the reset and making
+[00:14:37] sure your order submission rate uh
+[00:14:39] doesn't have a limit because one of the
+[00:14:41] things that
+[00:14:42] you might want to do
+[00:14:44] if you were you know i'll just
+[00:14:47] pull up um
+[00:14:49] well see i'm trying to think of a
+[00:14:51] a cheap stock
+[00:14:53] let's see so serious so um
+[00:14:57] so watch this so i'm going to click this
+[00:14:58] once and i'm going to buy 10 shares
+[00:15:02] and that time i just clicked it four
+[00:15:03] times and now i've got 40 shares
+[00:15:06] so the thing here is that i want to be
+[00:15:08] able sometimes to double click right if
+[00:15:12] i want to do that
+[00:15:14] i want it to let me do it and if you
+[00:15:16] turn the auto submission on this from
+[00:15:17] active trader if you move it up it's
+[00:15:19] going to block you from doing those
+[00:15:22] really quick trades because it's going
+[00:15:23] to think that you know mate you're like
+[00:15:25] double clicking because you're wanting
+[00:15:26] to click it once not send two orders so
+[00:15:29] i understand why they have it but you
+[00:15:31] wanna for me i wanna make sure that's at
+[00:15:34] zero all right so make sure that's at
+[00:15:36] zero make sure your system is on real
+[00:15:38] time no delay and i hope you like the
+[00:15:41] layout if you install the layout that i
+[00:15:43] have
+[00:15:44] you know let me know what you think of
+[00:15:45] it if you have some things that you
+[00:15:46] think i could add to it to make it a
+[00:15:48] little bit better let me know i'll keep
+[00:15:50] working on it and if you want to check
+[00:15:51] out a video on how to start uh trading
+[00:15:54] in terms of strategy one of the simplest
+[00:15:56] strategies that i focus on is leading
+[00:15:59] gainers you can check out a video i'm
+[00:16:00] going to put right in the top corner
+[00:16:01] there i hope you enjoy it and i'll see
+[00:16:03] you for the next episode right here

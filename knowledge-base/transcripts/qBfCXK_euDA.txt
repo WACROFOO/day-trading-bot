@@ -1,0 +1,487 @@
+# The Ultimate Short Selling Guide - Everything You Need to Know About Shorting
+# https://www.youtube.com/watch?v=qBfCXK_euDA
+# duration_sec: 1124
+
+[00:00:00] [Music]
+[00:00:01] in today's episode I'm going to give you
+[00:00:02] the step-by-step guide of how to short
+[00:00:05] as a beginner now it doesn't matter if
+[00:00:06] you're trading stocks Forex
+[00:00:08] cryptocurrency or Futures with most
+[00:00:10] financial instruments you can create a
+[00:00:12] short position if you'd like and when
+[00:00:14] you are short you will profit as the
+[00:00:17] price declines now Short Selling Is Not
+[00:00:19] A New Concept in the market it's
+[00:00:21] actually been around for over 400 years
+[00:00:23] and it's allowed investors and Traders
+[00:00:25] alike to speculate and profit when they
+[00:00:28] think the price of a financial
+[00:00:30] instrument is going to drop so let's go
+[00:00:32] ahead and jump into the slide deck and
+[00:00:33] I'm going to walk you through how this
+[00:00:35] works when you create a short position
+[00:00:38] you essentially have a negative position
+[00:00:41] on whatever instrument that you're
+[00:00:42] trading as you can see right here on
+[00:00:44] Tesla I have negative 800 shares this is
+[00:00:48] the exact opposite of what long-term
+[00:00:50] investors like Warren Buffett would do
+[00:00:52] they buy and then they have a positive
+[00:00:55] position and they'll profit as the price
+[00:00:57] goes up but when you have a negative
+[00:00:58] position you profit when the price goes
+[00:01:00] down so how does that work well it it
+[00:01:02] requires understanding a bit of the
+[00:01:04] terminology of Short Selling and the
+[00:01:07] first is the concept of borrowing all
+[00:01:10] right so what you have to do to create
+[00:01:12] this negative 1,000 share position just
+[00:01:15] as an example is you have to borrow
+[00:01:17] these shares from someone who owns them
+[00:01:21] so you've got your broker here this is
+[00:01:23] the broker where you're trading and your
+[00:01:25] broker of course has you know Millions
+[00:01:27] potentially of clients now one of their
+[00:01:29] their clients most likely is holding
+[00:01:32] shares of whatever you're wanting to
+[00:01:34] short so this is client number one over
+[00:01:37] here and let's just say they're holding
+[00:01:39] 1,000 shares of let's say GameStop all
+[00:01:42] right they're holding a th000 shares of
+[00:01:43] GameStop so what the broker does is
+[00:01:46] because the client is holding those
+[00:01:48] shares with that firm the broker borrows
+[00:01:51] these shares from that client and lends
+[00:01:55] them to you you then take those shares
+[00:01:58] and you sell them on the open Market
+[00:02:00] when you press the sell button you
+[00:02:02] create a negative position so to create
+[00:02:04] a short position you can actually just
+[00:02:06] simply press the sell button when you
+[00:02:09] sell you sell and since you don't
+[00:02:11] already have a position your position
+[00:02:13] goes into the negative now this is
+[00:02:15] something that when I was first trading
+[00:02:16] I had a hard time getting my head around
+[00:02:18] because sometimes I would buy a stock
+[00:02:19] let's say 800 shares and then I'd press
+[00:02:22] the sell order to sell a th000 shares by
+[00:02:24] accident and all of a sudden I'd be like
+[00:02:26] wait I'm short 200 shares and it's
+[00:02:28] possible to flip from long to short so
+[00:02:30] it is something to be careful of because
+[00:02:32] many people will accidentally begin
+[00:02:35] shorting just because of this ability to
+[00:02:37] flip from long to short so nonetheless
+[00:02:40] back to our whiteboard here you've
+[00:02:42] borrowed the shares from this client now
+[00:02:45] of course you don't know who that client
+[00:02:46] is or who that uh customer is the broker
+[00:02:49] handles all this on the back end and
+[00:02:51] what the broker will do is they'll
+[00:02:52] actually give this client a little bit
+[00:02:54] of interest in their account for letting
+[00:02:57] the broker borrow those shares and lend
+[00:02:59] them out to other people and what you
+[00:03:01] end up paying is a fee it's called a
+[00:03:05] borrowing fee and the borrowing fee is
+[00:03:08] what the broker charges you and of
+[00:03:10] course they keep a percentage of that
+[00:03:12] for themselves and then the rest goes to
+[00:03:14] this client right here so let's say you
+[00:03:16] short a stock at we'll use Easy numbers
+[00:03:19] let's just say you short a stock at $10
+[00:03:21] a share and you short a th000 shares you
+[00:03:24] now have a position that is valued at
+[00:03:28] $10,000 right it's 10, ,000 position so
+[00:03:31] if the price goes down to let's say $5 a
+[00:03:35] share what you have to do is you have to
+[00:03:37] buy back a th000 shares to give them
+[00:03:40] back to your broker who's then going to
+[00:03:41] give them back to their client so you
+[00:03:43] have to buy back a th000 shares at some
+[00:03:45] point because you've borrowed these and
+[00:03:47] you can't borrow them indefinitely so
+[00:03:50] you buy back a th000 shares and when you
+[00:03:51] buy a th000 shares a th000 shares time
+[00:03:54] $5 a share is $5,000 so you buy back for
+[00:03:57] $5,000 you give them to your broker he
+[00:03:59] gives back to the client or she gives
+[00:04:00] them back to the client and you get the
+[00:04:02] Prof the profit of the difference so the
+[00:04:04] profit of the difference in this example
+[00:04:06] is $5,000 you've made a 50% return in
+[00:04:10] this case this is a great return on the
+[00:04:12] $10,000 initial position but let me be
+[00:04:16] perhaps the first to warn you that short
+[00:04:19] selling is a sword that cuts both ways
+[00:04:21] because let's just say for instance that
+[00:04:24] the price does not go down and in fact
+[00:04:27] let's say the price goes up let's say
+[00:04:28] the price goes up to to $40 a share
+[00:04:32] let's say this company whatever it is
+[00:04:34] has great news the price goes up to $40
+[00:04:36] a share you're in at 10 so you still
+[00:04:39] have to buy back those shares you buy
+[00:04:41] them back at 40 that costs you
+[00:04:45] $40,000 $40,000 and you now have lost on
+[00:04:49] this position and for what it's worth
+[00:04:51] you've lost more than you could have
+[00:04:53] ever made because the most you could
+[00:04:55] have ever made is if the stock went to
+[00:04:56] zero you would have made $10,000 but
+[00:04:58] instead you turned a$1 ,000 position
+[00:05:00] into having to buy back 40,000 shares
+[00:05:03] you've lost 30 grand that's obviously
+[00:05:05] bad so this is one of the biggest risks
+[00:05:08] with short selling you can actually lose
+[00:05:10] an infinite amount of money and this
+[00:05:12] probably helps you understand why a
+[00:05:14] stock like GameStop cost some of the
+[00:05:16] hedge funds like Melvin Capital billions
+[00:05:19] of dollars in losses because they
+[00:05:21] created these negative positions to the
+[00:05:23] tune of hundreds of thousands maybe
+[00:05:25] millions of shares and then when they
+[00:05:27] had to buy them back at incredibly
+[00:05:29] inflated prices they locked up massive
+[00:05:32] losses now big firms like that can use
+[00:05:35] different strategies to hedge their bets
+[00:05:38] and when they hedge they reduce their
+[00:05:40] downside risk but for most retail
+[00:05:42] Traders like you and I we're not going
+[00:05:44] to be holding positions long enough to
+[00:05:46] create a hedge especially if you're day
+[00:05:48] trading you're just getting in you're
+[00:05:50] getting out you're getting in you're
+[00:05:51] getting out but it's definitely
+[00:05:52] important to be aware of the fact that
+[00:05:53] with short selling you do have the
+[00:05:55] potential to lose far more than you can
+[00:05:57] gain so it is a risky strategy far risky
+[00:05:59] iier than buying to the long side let's
+[00:06:02] talk about a few of the other terms
+[00:06:04] around Short Selling okay so we already
+[00:06:06] talked about borrowing borrowing is when
+[00:06:08] you borrow and we talked about the
+[00:06:10] borrowing fee that your broker will
+[00:06:11] charge you these fees by the way are
+[00:06:14] charged on a perday basis so each day
+[00:06:18] that you continue to hold this position
+[00:06:20] you're going to have to pay your broker
+[00:06:21] that fee now a common fee is uh 10 cents
+[00:06:25] per share so 10 cents per share with 1
+[00:06:28] th000 shares you're going to be paying
+[00:06:29] $100 per day to borrow this stock let's
+[00:06:33] just say and so you know if you if
+[00:06:35] you're holding it for 10 days 15 days 20
+[00:06:37] days all of a sudden you're spending
+[00:06:39] $2,000 $3,000 on borrowing fees well how
+[00:06:43] much do you really stand to gain if you
+[00:06:45] spend 20% of the potential profit on
+[00:06:47] borrowing fees then that starts to not
+[00:06:50] work but for active day trading if you
+[00:06:52] borrow and it's just for one day then
+[00:06:54] you'd pay a 100 bucks and if you get
+[00:06:56] this kind of move here from 10 down to
+[00:06:58] five in one day then $5,000 of profit
+[00:07:01] versus $100 in borrowing fees that's an
+[00:07:03] equation that most people are going to
+[00:07:04] be pretty comfortable with but something
+[00:07:06] that's interesting to know is that there
+[00:07:08] are some stocks where you actually don't
+[00:07:10] have to pay a borrowing fee those stocks
+[00:07:13] are called easy to borrow now an easy to
+[00:07:16] borrow stock will'll typically have an E
+[00:07:19] with a green on it's a it's an e that's
+[00:07:21] in green right here um well that
+[00:07:24] marker's gone that's okay or it says e
+[00:07:28] uh t
+[00:07:30] B easy to borrow either of these two
+[00:07:33] phrases indicate that the stock is easy
+[00:07:36] to borrow and when a stock is easy to
+[00:07:38] borrow your broker has so many clients
+[00:07:41] that have shares of it they can get
+[00:07:43] shares and lend them out to you and they
+[00:07:46] don't make you pay a borrowing fee now
+[00:07:48] why would they not make you pay a
+[00:07:49] borrowing fee remember your broker makes
+[00:07:51] money when you trade they want to
+[00:07:52] encourage you to trade a lot so they're
+[00:07:55] only going to charge you a fee the
+[00:07:56] borrowing fee when the shares are
+[00:07:58] particularly hard to come by when
+[00:08:00] they're hard to borrow they're going to
+[00:08:02] start charging people fees but when
+[00:08:04] they're easy to borrow and there's lots
+[00:08:05] of shares available they'll make them
+[00:08:07] easy for you to trade no fees so stocks
+[00:08:10] typically that are easy to borrow will
+[00:08:12] be large cap stocks certainly an index
+[00:08:15] like the S&P 500 easy to borrow stocks
+[00:08:18] like Ford Bank of America General
+[00:08:20] Electric these are easy to borrow Tesla
+[00:08:23] Netflix easy to borrow they're big
+[00:08:25] companies meta Facebook easy to borrow
+[00:08:28] stocks that are going to be harder to
+[00:08:29] borrow are going to be usually small cap
+[00:08:32] stocks um GameStop during the initial
+[00:08:35] move in 2021 was hard to borrow uh it
+[00:08:38] became easy to borrow in 2024 a lot of
+[00:08:40] small cap stocks that have the potential
+[00:08:42] to go up 200 300 400% in one day are
+[00:08:45] very hard to borrow and you could end up
+[00:08:48] paying as much as a dollar per share
+[00:08:50] which means if you want to borrow a th
+[00:08:52] shares you actually have to pay ,000 in
+[00:08:54] uh borrowing fees which is kind of
+[00:08:56] absurd at a certain point so the the
+[00:08:59] cost to borrow um is definitely a
+[00:09:02] challenge now we've got the the term of
+[00:09:05] borrowing and we've got easy to borrow
+[00:09:08] and then we have what's called hard to
+[00:09:09] borrow so if a stock is hard to borrow
+[00:09:13] then what it means is that your broker
+[00:09:16] has to go look for shares and so on my
+[00:09:19] platform hard to borrow is going to have
+[00:09:21] an L which stands for locate um sorry
+[00:09:27] locate sometimes it's hard to write
+[00:09:28] while I'm talking all right so locate L
+[00:09:31] for locate that's going to show that
+[00:09:33] this is a stock that is hard to borrow
+[00:09:35] so the broker at that point can then go
+[00:09:38] try to locate shares for you and in my
+[00:09:41] platform I actually have a window that
+[00:09:43] is a uh it's a locate window so you type
+[00:09:45] in the stock you press search and the
+[00:09:48] broker will search digitally and then
+[00:09:50] comes back and tells you yep I can find
+[00:09:52] the shares and this is how much they
+[00:09:54] cost do you want them and you can click
+[00:09:57] yes I accept I'll pay that borrowing fee
+[00:09:59] or no I don't want it so let's say you
+[00:10:03] accept the borrowing fee and you create
+[00:10:05] this negative position all right so
+[00:10:07] we'll go back to our example here you've
+[00:10:09] created a negative position all right so
+[00:10:11] you borrow the stock you created a
+[00:10:13] negative position of 1,000 shares you
+[00:10:15] hold it whatever it is you're in at $10
+[00:10:18] a share you buy back at let's say $7 a
+[00:10:22] share we do seven right there that's
+[00:10:23] fine um so in this case right here when
+[00:10:27] you buy back this is is called covering
+[00:10:31] so you're covering your short position
+[00:10:36] right so you're buying back the shares
+[00:10:38] so the concept of covering is just to
+[00:10:42] replace uh the shares that you already
+[00:10:43] borrowed so in the case of the
+[00:10:46] relationship with the broker here when
+[00:10:48] you cover they then give the shares back
+[00:10:51] to the original person that they lent it
+[00:10:52] from and you know although this is all
+[00:10:55] in a very digital Market they do have to
+[00:10:57] be able to account for what happens to
+[00:11:00] these shares we during 2021 uh heard a
+[00:11:04] lot about the concept of naked Short
+[00:11:07] Selling and naked Short Selling refers
+[00:11:10] to the practice where the broker gives
+[00:11:13] you shares to short without first
+[00:11:15] borrowing them from anyone and then
+[00:11:18] there's um apparently there was an
+[00:11:20] override ride key they would press F1
+[00:11:24] and they would say um re you know they
+[00:11:27] couldn't find shares but they had reason
+[00:11:29] to believe they were available so
+[00:11:33] basically someone would say I want to
+[00:11:34] borrow shares and they couldn't find the
+[00:11:36] shares in the moment but they had reason
+[00:11:40] to believe they were available so they'
+[00:11:41] press the F1 key they'd give that client
+[00:11:44] the shares that they wanted so they
+[00:11:45] could short it and then they'd go find
+[00:11:47] the shares later but what we ended up
+[00:11:49] finding out was that in fact a lot of
+[00:11:52] times they don't end up finding the
+[00:11:54] shares later so they just let you
+[00:11:57] basically short a stock and the problem
+[00:11:59] problem with this is that if you let a
+[00:12:02] lot of people sell and it's not based on
+[00:12:05] another person's position you could
+[00:12:07] actually have more selling volume than
+[00:12:10] there is buyers in the market and what
+[00:12:12] that can do is it can create a stock to
+[00:12:15] drop significantly because it creates an
+[00:12:17] imbalance to the cell side that's
+[00:12:20] unnatural so this practice of naked
+[00:12:23] Short Selling is illegal Brokers are not
+[00:12:26] allowed to do it but as We Know brok ERS
+[00:12:29] some of them motivated by money and
+[00:12:31] encouraging U their clients to just
+[00:12:33] trade actively and their traders to be
+[00:12:35] very active created this override button
+[00:12:37] so there have been another a number of
+[00:12:39] fines related to this practice it's
+[00:12:42] supposedly cleaned up but it may still
+[00:12:45] continue to happen now for you as a
+[00:12:48] regular retail Trader you're not in the
+[00:12:50] loop of what your broker is doing to get
+[00:12:52] these shares available to you so you
+[00:12:55] don't have to worry you know if your
+[00:12:57] broker's doing something it's the broker
+[00:12:58] that would get fined it wouldn't be you
+[00:13:00] individually because we as retail
+[00:13:02] Traders when we press the locate button
+[00:13:04] to borrow shares we don't know where
+[00:13:06] they come from right we just assume that
+[00:13:08] the broker is doing it the right way and
+[00:13:10] and most likely they are but I just
+[00:13:12] thought I'd mention it since it's sort
+[00:13:14] of on the topic so the concept of Short
+[00:13:17] Selling in this scenario here really is
+[00:13:20] quite simple the areas where it gets
+[00:13:23] risky is when you're shorting something
+[00:13:26] that has the potential to go well we
+[00:13:29] would say parabolic and so I'm going to
+[00:13:31] show you um an example here of a couple
+[00:13:34] of charts that I think will just help
+[00:13:36] highlight the risk of Short Selling now
+[00:13:38] hey by the way if you want to learn more
+[00:13:39] about the strategy that I do trade every
+[00:13:41] single day you can download my small
+[00:13:43] account strategy PDF it's going to be
+[00:13:45] pinned at the top of the comments Linked
+[00:13:46] In the description and this is something
+[00:13:48] you can Implement in your own trading as
+[00:13:50] always I encourage you to practice in a
+[00:13:52] simulator before you trade real money
+[00:13:54] but you can learn more about the
+[00:13:55] strategy that I'm trading every single
+[00:13:56] day something that a lot of short
+[00:13:58] sellers will do is they will short
+[00:14:00] stocks as they are moving higher so
+[00:14:02] essentially if you have something that
+[00:14:04] is moving up very quickly which is
+[00:14:06] common in volatile markets you'll see
+[00:14:09] the candles are squeezing up higher and
+[00:14:11] higher and higher we know that we're
+[00:14:13] getting really extended and so what
+[00:14:15] short sellers will often do is they'll
+[00:14:17] take a starter into these positions into
+[00:14:19] this move higher so they'll short a
+[00:14:21] little here a little bit more here a
+[00:14:23] little bit more here a little bit more
+[00:14:25] here and the reason they're doing that
+[00:14:26] is because they know that when stocks
+[00:14:28] get really extended like this often
+[00:14:30] they'll sort of have this final top and
+[00:14:33] then they'll have a big drop and if you
+[00:14:35] wait for this moment to take your
+[00:14:37] position you might not get filled to
+[00:14:39] like down here down here and then you
+[00:14:41] end up missing a lot of the profit
+[00:14:43] because these are the spots where they
+[00:14:44] want to be buying to cover some of the
+[00:14:47] position for a profit so the practice of
+[00:14:50] shorting into strength is very common
+[00:14:53] now inversely there are people uh who
+[00:14:55] trade to the long side who will buy into
+[00:14:58] week weakness so either buying down here
+[00:15:01] or the sort of exactly inverse chart of
+[00:15:04] something that's been declining for a
+[00:15:05] long time and they're buying for the
+[00:15:06] reversal now I'm not personally a big
+[00:15:09] fan of reversal trading because I find
+[00:15:11] it a lot easier to trade with a uh
+[00:15:14] existing Trend buying pullbacks and
+[00:15:16] riding momentum higher than to try to
+[00:15:18] predict a reversal but nonetheless this
+[00:15:20] is a popular strategy that a lot of
+[00:15:21] short sellers engage in and it works and
+[00:15:23] works and works until it doesn't so this
+[00:15:27] is an example of a stock that literally
+[00:15:29] went from $20 a share to over
+[00:15:32] $2,500 a share which is an insane move a
+[00:15:36] 5,000 share short position would have
+[00:15:38] produced a loss of $ 122.5 million a
+[00:15:41] just a 10,000 share short position could
+[00:15:43] have produced a loss of $25 million so
+[00:15:47] one of the things that I am a firm
+[00:15:49] believer in is that I never want to
+[00:15:51] empower one trade to end my career ever
+[00:15:55] and so for that reason I do not short
+[00:15:58] stock that's not my practice it's not my
+[00:16:00] strategy because I feel like the risk is
+[00:16:02] simply too high now you can argue well
+[00:16:04] look you can use a stop loss you can
+[00:16:06] control your losses with stops and while
+[00:16:09] that's true what we also know is that
+[00:16:11] Brokers will autol liquidate you if your
+[00:16:13] account exceeds loss the amount that's
+[00:16:16] in your uh balance and they can also
+[00:16:18] autol liquidate you if the original
+[00:16:20] client asks to redeem their shares which
+[00:16:24] means you can get pulled out of position
+[00:16:25] and forced to close it now as we know
+[00:16:28] GameStop resulted in Melvin Capital
+[00:16:30] losing
+[00:16:31] $6.8
+[00:16:33] billion this is an incredible amount of
+[00:16:36] money to lose so just because there's
+[00:16:38] institutional traders that have a lot of
+[00:16:40] experience they are not immune to this
+[00:16:42] happening to them so waiting for the
+[00:16:44] reverse to begin to me feels safer but
+[00:16:46] that does mean chasing a little bit of a
+[00:16:48] drop and potentially dealing with what's
+[00:16:50] called short sale restriction now I'll
+[00:16:52] talk about short sale restriction in
+[00:16:53] just a moment but I want to show you
+[00:16:55] another example here of a stock that was
+[00:16:58] declining ing selling off it dropped
+[00:17:01] from $30 a share all the way down to 12
+[00:17:04] which was really incredible and so if
+[00:17:05] you were shorting this and you had a a
+[00:17:08] position on this to the short side you
+[00:17:10] would have been up potentially with
+[00:17:11] 5,000 shares 50 Grand 60 Grand maybe 75
+[00:17:15] grand depending on what your average was
+[00:17:17] could have been a huge winner and then
+[00:17:18] all of a sudden the stock bounces up to
+[00:17:21] 1250 and opens at 25 and is halted up a
+[00:17:25] halt up occurs when there's more buyers
+[00:17:28] than sellers well what ended up
+[00:17:30] happening on this stock was it resumed
+[00:17:32] at
+[00:17:33] $500 a share this is Unthinkable almost
+[00:17:36] a glitch in the market but in the stock
+[00:17:39] market there are no refunds and if you
+[00:17:41] took a 5,000 share position you could
+[00:17:43] have had an instant 22.4 million loss
+[00:17:47] 10,000 shares $4.8 million loss so the
+[00:17:51] realization I share this with you
+[00:17:53] because I want you to understand the
+[00:17:55] very real risk of shorting stocks now
+[00:17:57] you can try to short safely and there's
+[00:17:58] certain stocks are going to be safer
+[00:17:59] than others but just don't lose sight of
+[00:18:02] the fact that shorting is a risky
+[00:18:04] strategy in fact it requires you to have
+[00:18:07] a margin agreement with your broker a
+[00:18:09] margin agreement states that if you lose
+[00:18:11] money you will pay the broker back and
+[00:18:14] so if you lose $2.5 million you're now
+[00:18:17] on the hook to your broker and that's a
+[00:18:19] really scary thing and I would never
+[00:18:20] want to see that happen to any Trader so
+[00:18:23] short selling it's a practice that's
+[00:18:24] been around for a long time but it's
+[00:18:26] also led to the demise of many Traders
+[00:18:28] far bigger than yourself far bigger than
+[00:18:30] me in fact the demise of large hedge
+[00:18:32] funds so trade cautiously manage your
+[00:18:35] risk and as always if you enjoyed this
+[00:18:37] episode I hope you hit that thumbs up
+[00:18:38] and I hope you subscribe and I'll see
+[00:18:39] you for the next one real soon
