@@ -6,9 +6,46 @@ the sequence you actually execute it in.
 Read this once before the open, not during. During the session you should be
 running the checklist, not reading the reasoning.
 
+**All times below are France time (Paris).** New York time is in brackets,
+because that is what every chart, scanner and broker platform will show you.
+
 ---
 
-## Before the open — 07:00 to 09:30
+## Your trading day, in France time
+
+| Paris | New York | What happens |
+|---|---|---|
+| 13:00 | 07:00 | Pre-market opens. Build the watchlist. |
+| **15:30** | 09:30 | **Market opens.** Watch only. |
+| 15:35 | 09:35 | Trading starts. |
+| 16:30 | 10:30 | Prime window ends. Most of the edge is gone. |
+| **17:30** | 11:30 | **Hard stop. Close the laptop.** |
+| 22:00 | 16:00 | US market closes. Not your problem. |
+
+Your working session is **15:35 to 17:30 Paris** — two hours, in the evening.
+That is genuinely convenient for a European: it does not collide with a normal
+working day, and the highest-edge hour (15:35–16:30) is the one you are most
+likely to be free for.
+
+### The twice-a-year trap
+
+Europe and the US change their clocks on **different dates**. For roughly three
+weeks in late March, and one week around the end of October, the gap is **5
+hours instead of 6** — and the market opens at **14:30 Paris**, not 15:30.
+
+| Period | Gap | Open in Paris |
+|---|---|---|
+| Normal (most of the year) | 6 h | 15:30 |
+| ~mid-March → end of March | 5 h | **14:30** |
+| ~end of Oct → first Sunday of Nov | 5 h | **14:30** |
+
+If you show up at 15:30 during those weeks, the open is already an hour old and
+the entire prime window has passed. Set your calendar reminders from the
+New York time, not the Paris time, and let the calendar do the conversion.
+
+---
+
+## Before the open — 13:00 to 15:30 Paris (07:00–09:30 NY)
 
 **Set your numbers first, while you are calm.** These do not change during the
 session under any circumstances.
@@ -40,16 +77,17 @@ If you have zero, today is a no-trade day and that is a normal outcome.
 
 ---
 
-## At the open — 09:30 to 09:35
+## At the open — 15:30 to 15:35 Paris (09:30–09:35 NY)
 
 **Do nothing.** Watch. The first five minutes are the widest spreads and the
 worst fills of the day. You are letting the stock show you where it wants to go.
 
 ---
 
-## Finding the entry — 09:35 to 10:30
+## Finding the entry — 15:35 to 16:30 Paris (09:35–10:30 NY)
 
-This is the whole window. Almost all of the edge is here.
+This is the whole window. Almost all of the edge is here. One hour, your
+evening, and if nothing sets up in it you are done for the day.
 
 ### Step 1 — Wait for a pullback
 
@@ -172,7 +210,7 @@ more trade to get it back."
 - You were green and the day has gone red
 - Three losses in a row
 - You have taken 2 trades
-- It is 11:30
+- **It is 17:30 Paris** (11:30 NY)
 
 The claim attached to that first rule is that breaking it leads to *doubling*
 that loss about 80% of the time. That number is unverified — but the rule costs
@@ -186,9 +224,11 @@ $600 becomes $0.
 ## The whole thing on one card
 
 ```
-Pre-market  →  5 of 5 filters  →  3-5 names
-09:30-09:35 →  watch, don't trade
-09:35+      →  wait for pullback 1 or 2, on lower volume
+PARIS TIME                    (New York)
+
+13:00       →  5 of 5 filters  →  3-5 names        (07:00)
+15:30-15:35 →  watch, don't trade                  (09:30-09:35)
+15:35+      →  wait for pullback 1 or 2, on lower volume
             →  did it stop at 2 overlapping levels?     no → pass
             →  above VWAP + above 9EMA + MACD positive? no → pass
             →  candle breaks prior candle high?         no → wait
@@ -197,7 +237,12 @@ Pre-market  →  5 of 5 filters  →  3-5 names
             →  sell 50% at target, stop to breakeven
             →  sell 25%, trail 25%
             →  any break signal = out, all of it
-Stop at:    2 trades │ -6% │ +goal │ 3 losses │ green-to-red │ 11:30
+16:30       →  prime window over, edge thins        (10:30)
+17:30       →  hard stop, close the laptop          (11:30)
+
+Stop at: 2 trades │ -6% │ +goal │ 3 losses │ green-to-red │ 17:30
+
+Clock warning: late March and late Oct, open is 14:30 Paris, not 15:30.
 ```
 
 ---
