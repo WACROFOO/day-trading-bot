@@ -26,10 +26,37 @@ Applied before the chart is looked at. All must pass.
 | `float_max` | <= | 20 | M shares | 72 | 10M preferred, 5M ideal |
 | `has_catalyst` | == | true | bool | 83 | — |
 | `volume_min` | >= | 500,000 | shares cum. | 102 | — |
+| `rate_of_change_min` | > | 0 | % gain per minute, rising | — | not numerically stated |
 
 Rejects: `price < 1`, `float > 100M`, no catalyst, faded from pre-market high.
 
 Funnel: ~8,000 equities → ~50 scanner hits → 3–5 watchlist → 1–2 trades.
+
+### `setup_grade` — the five pillars
+
+"A-quality" was previously listed as unquantifiable. It is not. He states the
+decomposition directly: *"trading the five pillars which would constitute an
+A-quality setup"* (`3ovOiVIJ_aM` [00:16:07]), and names them as *"price, float,
+news, relative volume, and rate of change"* (`0Zh105lq9Rk` [00:06:49]).
+
+```
+pillars_passed = price_ok + float_ok + catalyst_ok + rvol_ok + roc_ok
+setup_grade    = 'A' if pillars_passed == 5 else 'B'
+```
+
+| Parameter | Value | n |
+|---|---|---|
+| `min_pillars_to_trade` | 5 | 384 mentions / 91 videos |
+| `trade_b_quality` | false | — |
+
+He self-reports 72% accuracy in a month where he *was* trading B-quality, and
+frames that as the mistake — so the grade split is a testable hypothesis, not
+just a slogan. Split backtest results by `pillars_passed` and the claim either
+shows up as a monotonic edge gradient or it does not.
+
+Caveat: 61% of actionable "quality setup" mentions name no pillar at all. The
+five-pillar reading is what he says when he is explicit; most of the time he is
+not. See §10.
 
 ---
 
@@ -62,6 +89,50 @@ Boolean. All must be true at entry.
 | `pullback_index <= 2` | 1st or 2nd pullback only, never 3rd | 39 |
 | `tape_green` | buyers hitting the ask | 47 |
 | `no_seller_wall` | Level 2 clear above | 47 |
+
+### `at_support(p)` — confluence, not a single level
+
+"Buy at support" (n=157) was previously listed as unquantifiable. Scanning all
+1,834 uses of `support` / `resistance` across 158 videos shows he almost never
+means one line — he names two reasons for the same price. Pair co-occurrence is
+the evidence: daily level + moving average 54, trend line + whole dollar 54,
+former resistance + trend line 53, moving average + whole dollar 31.
+
+```
+at_support(p) = count([
+    abs(p - round(p * 2) / 2) <= tol,     # whole or half dollar
+    abs(p - ema9)             <= tol,
+    abs(p - ema20)            <= tol,
+    abs(p - ma200)            <= tol,
+    abs(p - vwap)             <= tol,
+    abs(p - flipped_level)    <= tol,     # broken earlier, retested from other side
+]) >= 2
+```
+
+| Component | mentions | videos |
+|---|---|---|
+| moving average (9 / 20 / 200) | 295 | 64 |
+| whole / half dollar | 299 | 57 |
+| daily / weekly chart level | 157 | 42 |
+| former resistance, flipped | 142 | 28 |
+| VWAP | 77 | 25 |
+
+Supporting mechanics, both computable from OHLCV alone:
+
+| Parameter | Value | Support |
+|---|---|---|
+| `confluence_min` | 2 | pair counts above |
+| `touch_count` | 3 | 23 of 41 explicit counts say "third"; 4 → 9, 2 → 8 |
+| `flip_after_break` | true | 133 hits / 30 videos |
+| `level_tolerance` (`tol`) | **unstated** | sweep 0.1–0.5% of price, floor at spread width |
+
+Every term is arithmetic on bars. `tol` is the one genuinely free parameter and
+is the place this definition can still go wrong — sweep it and report the spread
+of results, do not tune it.
+
+Citation: *"500 shares right off the 20 moving average this is psychological
+support"* (`2kMgCjsmFzY` [00:41:52]) — one price, two independent reasons, which
+is the whole rule in a sentence.
 
 ---
 
@@ -193,21 +264,52 @@ slippage eating the 0.10 stop, and no fills at scale.
 
 ## 10. What does not quantify
 
-These carry high `n` but no measurable definition. They are where a backtest and
-a live result will diverge.
+An earlier version of this section listed support/resistance and "A-quality" as
+unquantifiable. Both were wrong, and the way they were wrong is worth keeping:
+the definition was in the transcripts the whole time, and the instinct to invent
+a proxy instead of going to look was the actual error. Both now live in §1 and
+§3 respectively. The method is `scripts/pipeline/08_define_support.py` and
+`10_define_discretionary.py` — tag every mention with the concrete things named
+alongside it, then count.
 
-| Concept | n | Why it resists encoding |
+What survives that treatment:
+
+| Concept | Unresolved | Why it resists encoding |
 |---|---|---|
-| support and resistance | 157 | level selection is discretionary |
-| emotional control | 65 | not observable in price data |
-| "A-quality setup only" | 22 | no stated discriminator vs B-quality |
-| reversal timing | 102 | "10–15 candles one direction" is loose |
-| halt behaviour | 46 | halt-resume fills are unmodellable from OHLCV |
-| news quality | 83 | requires NLP on the catalyst itself |
-| Level 2 / tape reading | 47 | needs full order-book data, not bars |
+| trend lines | — | he says so himself: *"more abstract because different traders will draw them differently"* (`BUCPPCXOHbs` [01:12:11]) |
+| support, residual | 424 / 963 (44%) | mentions carrying an instruction that name no level at all |
+| "quality setup", residual | 72 / 118 (61%) | mentions asserting quality that name no pillar |
+| Level 2 / tape reading | 339 / 542 (63%) | see below |
+| emotional control | 462 / 602 (77%) | not observable in price data |
+| reversal timing | — | "10–15 candles one direction" is loose |
+| halt behaviour | — | halt-resume fills are unmodellable from OHLCV |
+| news quality | — | requires NLP on the catalyst itself |
 
-Anything above needs a proxy before it can be tested, and the proxy is the
-biggest source of backtest error.
+**Tape reading is two separate problems, not one.** Roughly half its resolved
+uses restate rules already encoded elsewhere: `confirmation to act` (43) is the
+§4 entry trigger, `whole-dollar orders` (29) is a §3 confluence component,
+`spread width` (66) is a liquidity gate that quote data gives you. What actually
+requires depth-of-book is `large seller / buyer` (104 mentions, 31 videos) and
+`refresh / reload` (29). So the data question is narrower than "needs Level 2" —
+tick and quote data cover most of it, and only seller-wall detection needs the
+book.
+
+**Emotional control is the control case.** It was run through the same procedure
+expecting it to resist, and it did: 77% unresolved, the highest in the set, and
+the resolvers that do fire are not states but rules — `rules as the fix` (214),
+`walk away` (107). That is the useful result. He does not treat discipline as a
+feeling to manage; he treats it as §8 being enforced by something other than
+the trader. §8 is already coded. A bot has no emotions to control, which means
+this row costs nothing in a backtest and everything in live discretionary
+trading — the one asymmetry that favours automation.
+
+Anything still on this list needs a proxy before it can be tested, and the proxy
+is the biggest source of backtest error. Freeze it before running, test three to
+five reasonable versions, and if the sign of the result flips between them,
+discard the finding rather than picking the one that worked.
+
+Full workings: `../data/support_definition.md`,
+`../data/discretionary_definitions.md`.
 
 ---
 
@@ -222,6 +324,15 @@ universe:
   float_max_shares: 20_000_000
   volume_min_shares: 500_000
   require_catalyst: true
+  min_pillars: 5            # price, float, news, rvol, rate_of_change
+
+support:
+  confluence_min: 2
+  tolerance_pct: 0.25       # UNSTATED in corpus - sweep 0.10-0.50
+  tolerance_floor: spread
+  components: [whole_half_dollar, ema9, ema20, ma200, vwap, flipped_level]
+  touch_count: 3
+  flip_after_break: true
 
 session:
   timezone: America/New_York
@@ -272,7 +383,8 @@ Cheapest falsification first. Stop when one fails.
 
 1. **Universe** — how many US equities per day pass §1? If <1/day the strategy is untradeable regardless of edge.
 2. **Trigger** — on those names, does `first_candle_new_high` reach 2R before the pullback low, more than 33.3% of the time?
-3. **Sensitivity** — sweep `rvol_min`, `float_max`, `price_max`. Does the edge survive, or does it sit on one lucky cell?
+3. **Sensitivity** — sweep `rvol_min`, `float_max`, `price_max`, and `support.tolerance_pct`. Does the edge survive, or does it sit on one lucky cell? Tolerance is the one number nowhere in the corpus, so it is the most likely place to fool yourself.
+   Also split by `pillars_passed` (3, 4, 5). If A-quality is real, the gradient is monotonic. If it is flat, §1's five-pillar gate is costing trades for nothing.
 4. **Costs** — re-run with realistic spread and slippage on sub-20M float. This is where most momentum edges die.
 5. **Regime** — split by year. 2017 / 2021 / now. An edge in one regime only is not an edge.
 
