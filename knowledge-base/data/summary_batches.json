@@ -1,0 +1,2129 @@
+{
+  "budget_kb": 220,
+  "batch_count": 54,
+  "batches": [
+    {
+      "items": [
+        {
+          "id": "W6BnX1T3KZ0",
+          "bytes": 368355,
+          "title": "How to Day Trade: The Plain Truth by Ross Cameron (Full Audiobook)",
+          "duration_sec": 16281,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 368355,
+      "batch": 1
+    },
+    {
+      "items": [
+        {
+          "id": "oxob0x0Xz7s",
+          "bytes": 243684,
+          "title": "The Ultimate Day Trading Guide (Full Training Chapters 1 - 10)",
+          "duration_sec": 11172,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 243684,
+      "batch": 2
+    },
+    {
+      "items": [
+        {
+          "id": "6Yszkb7ZZoY",
+          "bytes": 163407,
+          "title": "How I'd Retire from the 9-5 Job in 3 Years (Starting from ZERO)",
+          "duration_sec": 7384,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "2O1r_ICOnTI",
+          "bytes": 61740,
+          "title": "3 FACTS on Why Beginner Traders LOSE MONEY 🫠",
+          "duration_sec": 2889,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225147,
+      "batch": 3
+    },
+    {
+      "items": [
+        {
+          "id": "js25lIZMUSY",
+          "bytes": 152040,
+          "title": "The Simplest Day Trading Strategy for Beginners (with ZERO experience)",
+          "duration_sec": 6899,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "_RRClNoHamw",
+          "bytes": 73142,
+          "title": "Day Trading the 3-Day Squeeze Setup (Step-by-Step Guide)",
+          "duration_sec": 3524,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225182,
+      "batch": 4
+    },
+    {
+      "items": [
+        {
+          "id": "w97KlUrVDk0",
+          "bytes": 148064,
+          "title": "How to Grow a Small Account with ZERO Experience (Full Training)",
+          "duration_sec": 6517,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "7PVpVDHYF2E",
+          "bytes": 77122,
+          "title": "+$56,789.66 Day Trading the MACD Crossover Setup",
+          "duration_sec": 3388,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225186,
+      "batch": 5
+    },
+    {
+      "items": [
+        {
+          "id": "m5zu_X-_51I",
+          "bytes": 135209,
+          "title": "How I Made $1,000,000 in 51 Days of Day Trading (Full Training)",
+          "duration_sec": 5971,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "y-sFO1ouTX4",
+          "bytes": 88859,
+          "title": "How I Made $175,767.72 in 3 Hours of Day Trading (Full Training)",
+          "duration_sec": 3963,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224068,
+      "batch": 6
+    },
+    {
+      "items": [
+        {
+          "id": "BUCPPCXOHbs",
+          "bytes": 134058,
+          "title": "The ONLY Technical Analysis Guide You'll Ever Need! (Beginner to Advanced)",
+          "duration_sec": 6090,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "myUKta-wicQ",
+          "bytes": 91011,
+          "title": "How to Read Candlestick Shapes & Charts (with ZERO experience)",
+          "duration_sec": 4271,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225069,
+      "batch": 7
+    },
+    {
+      "items": [
+        {
+          "id": "_0wygrb5pPs",
+          "bytes": 110445,
+          "title": "My Bear Market 🐻 Day Trading Strategy",
+          "duration_sec": 5088,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "aqTXoV923OE",
+          "bytes": 109477,
+          "title": "7 Candlestick Patterns I'M ACTUALLY USING Every Day",
+          "duration_sec": 5125,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 219922,
+      "batch": 8
+    },
+    {
+      "items": [
+        {
+          "id": "Wsq8zdtCcis",
+          "bytes": 101642,
+          "title": "How I Made $500,000 in 7 Days of Day Trading (Full Training)",
+          "duration_sec": 4633,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "LNDd7rf-9FU",
+          "bytes": 101607,
+          "title": "How to Read Technical Indicators on Candlestick Charts",
+          "duration_sec": 4445,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "-N1qf9G3k5c",
+          "bytes": 21959,
+          "title": "Scaling a Strategy",
+          "duration_sec": 1040,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225208,
+      "batch": 9
+    },
+    {
+      "items": [
+        {
+          "id": "oKlhUSSHe2Q",
+          "bytes": 100734,
+          "title": "How To Start Day Trading in 2026 (full training)",
+          "duration_sec": 4477,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "M07xElrhVYM",
+          "bytes": 93990,
+          "title": "How Danny Scaled his Day Trading Strategy from $10/day to $350k/Year",
+          "duration_sec": 4861,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "C2bb5mQ0wSs",
+          "bytes": 30462,
+          "title": "How I'd Replace My 9-5 Income & Quit My Job (Starting from Zero)",
+          "duration_sec": 1354,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225186,
+      "batch": 10
+    },
+    {
+      "items": [
+        {
+          "id": "Q-7eBHjD1ks",
+          "bytes": 90341,
+          "title": "How to Day Trade with Lightspeed (Platform Demo & Honest Review)",
+          "duration_sec": 4335,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "d0wt45LbvWo",
+          "bytes": 86370,
+          "title": "How to WIN at Day Trading as a BEGINNER (Step by Step Guide)",
+          "duration_sec": 3869,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "JSqI99gL_KA",
+          "bytes": 47087,
+          "title": "How To Recover From A Massive Loss Day Trading",
+          "duration_sec": 2553,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 223798,
+      "batch": 11
+    },
+    {
+      "items": [
+        {
+          "id": "YiMItz4fgFk",
+          "bytes": 85533,
+          "title": "You're Probably Reading Candlestick Charts WRONG 💥 DAY 3 | Small Account Challenge",
+          "duration_sec": 3967,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "EzHEGVb_9-c",
+          "bytes": 85296,
+          "title": "Year in Review: 2016 +$222,244.91 Day Trading Momentum Strategies",
+          "duration_sec": 4335,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "lkNRTWLroqY",
+          "bytes": 54405,
+          "title": "How I’m Trading the mpox Catalyst",
+          "duration_sec": 2759,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225234,
+      "batch": 12
+    },
+    {
+      "items": [
+        {
+          "id": "RLGDwe2m70E",
+          "bytes": 80036,
+          "title": "I Day Traded This ONE Strategy For 21 days...Here Are The Results",
+          "duration_sec": 3596,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "IwDORxvXAAs",
+          "bytes": 78456,
+          "title": "How to BUY THE DIP the RIGHT WAY",
+          "duration_sec": 3540,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "dvetF0H3pNo",
+          "bytes": 65537,
+          "title": "How to Read Candlestick Patterns (Step-by-Step Guide)",
+          "duration_sec": 3296,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224029,
+      "batch": 13
+    },
+    {
+      "items": [
+        {
+          "id": "iIC62xnblLc",
+          "bytes": 78144,
+          "title": "The ONLY Pattern I’m Trading for BIG Winners 💥 Day 2 | Small Account Challenge",
+          "duration_sec": 3583,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "mgUoZPlGGas",
+          "bytes": 78085,
+          "title": "How to Start Dividend Investing for Beginners (Full Course)",
+          "duration_sec": 3550,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "a2xlibTeVO4",
+          "bytes": 68730,
+          "title": "How to use Level 2 market data for Day Trading",
+          "duration_sec": 3310,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224959,
+      "batch": 14
+    },
+    {
+      "items": [
+        {
+          "id": "_4Q0hlNFn-A",
+          "bytes": 77902,
+          "title": "Top 3 MOST Profitable Candlestick Chart Patterns (Full Training)",
+          "duration_sec": 3542,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ORWJzImSTdE",
+          "bytes": 77617,
+          "title": "Master the Dip Trading Strategy (Step-by-Step Guide)",
+          "duration_sec": 3905,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "N6UK6XX9FH4",
+          "bytes": 69677,
+          "title": "Day Trading & Taxes (Step by Step Guide)",
+          "duration_sec": 3278,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225196,
+      "batch": 15
+    },
+    {
+      "items": [
+        {
+          "id": "A3sbJBOLGuI",
+          "bytes": 76742,
+          "title": "PROVEN 3hr Day Trading Strategy (Highest Win Rate) 💥 DAY 8 & 9 Small Account Challenge",
+          "duration_sec": 3508,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "d1CRtDuUARQ",
+          "bytes": 76595,
+          "title": "The Simple Trading Strategy I'd Use If I Had To Start Over... 💥 DAY 1 | Small Account Challenge",
+          "duration_sec": 3546,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "t9G3SKzmuh4",
+          "bytes": 71927,
+          "title": "How I turned $514.22 to $4,000 in 7 Days | Small Account Challenge Ep 9",
+          "duration_sec": 3566,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225264,
+      "batch": 16
+    },
+    {
+      "items": [
+        {
+          "id": "_DU2SFWei2c",
+          "bytes": 76148,
+          "title": "A HUGE Mistake Becomes a Turning Point (Finding Your EDGE in the Market)",
+          "duration_sec": 3461,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "w2owyBNunDQ",
+          "bytes": 76094,
+          "title": "The Moving Average Trading Strategy You Need! (Full Training)",
+          "duration_sec": 3598,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "p1W8Mjl4kWs",
+          "bytes": 72923,
+          "title": "High Accuracy 1 Minute Scalping Strategy (Full Training)",
+          "duration_sec": 3442,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225165,
+      "batch": 17
+    },
+    {
+      "items": [
+        {
+          "id": "G4uTdr_zx1I",
+          "bytes": 75610,
+          "title": "How to Find Stocks BEFORE The Make A Big Move! (Step-by-Step Guide)",
+          "duration_sec": 3529,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "E2SYZEF5AEs",
+          "bytes": 75421,
+          "title": "Proven Formula for Finding BEST Stocks to Day Trade (Step-by-Step Guide)",
+          "duration_sec": 3569,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "l7M03OXCIdA",
+          "bytes": 74144,
+          "title": "How I Grew My Small Day Trading Account to $28,093.54 in 16 Days 💥 (Full Training)",
+          "duration_sec": 3495,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225175,
+      "batch": 18
+    },
+    {
+      "items": [
+        {
+          "id": "OHe6_FpxO0g",
+          "bytes": 75283,
+          "title": "How to Start Day Trading as a Business (Step-by-Step Guide)",
+          "duration_sec": 3595,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "8SWCCRLg1p0",
+          "bytes": 75179,
+          "title": "Ultimate Guide to Trading in a Small Account ",
+          "duration_sec": 3250,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "_pdkPhuTjuE",
+          "bytes": 74585,
+          "title": "GameStop EXPLAINED 🍏 The Roaring Kitty Thesis 2020-2024",
+          "duration_sec": 3597,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225047,
+      "batch": 19
+    },
+    {
+      "items": [
+        {
+          "id": "Bqo2XGDZtVU",
+          "bytes": 74964,
+          "title": "Day Trading: How To Start From ZERO (Beginner's Guide)",
+          "duration_sec": 3470,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "aAmmKTLbAts",
+          "bytes": 74583,
+          "title": "+$100,176.35 TODAY Using This SIMPLE Day Trading Strategy",
+          "duration_sec": 3421,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "_9za7jNDPQc",
+          "bytes": 74436,
+          "title": "Don't Use Candlestick Charts Without THIS",
+          "duration_sec": 3435,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 223983,
+      "batch": 20
+    },
+    {
+      "items": [
+        {
+          "id": "OLdOfU01wHY",
+          "bytes": 73785,
+          "title": "13 Day Trading Rules and Regulations You NEED to Know About",
+          "duration_sec": 3551,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "SmSOboqGPgs",
+          "bytes": 73742,
+          "title": "These Candlestick Tricks Will Change How You Trade",
+          "duration_sec": 3243,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "-CqME4wlzVs",
+          "bytes": 73720,
+          "title": "How to Start Day Trading (THE RIGHT WAY)",
+          "duration_sec": 3313,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 221247,
+      "batch": 21
+    },
+    {
+      "items": [
+        {
+          "id": "SLMXOd13uqI",
+          "bytes": 73708,
+          "title": "How to Day Trade BREAKING NEWS with a Scalping Strategy (Step-by-Step Guide)",
+          "duration_sec": 3592,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "2n2Jt0PEPss",
+          "bytes": 73636,
+          "title": "+$45,546.52 TODAY with the 30 Minute MACD Scalping Strategy",
+          "duration_sec": 3595,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "1JOg8wZoeBI",
+          "bytes": 73485,
+          "title": "How to Trade Penny Stocks 💥 DAY 6 | Small Account Challenge",
+          "duration_sec": 3578,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 220829,
+      "batch": 22
+    },
+    {
+      "items": [
+        {
+          "id": "_fsRWw0VbS4",
+          "bytes": 72876,
+          "title": "Ultimate Step-by-Step Guide to Technical Analysis (with ZERO experience)",
+          "duration_sec": 3499,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "DP4ayEWhmvM",
+          "bytes": 72849,
+          "title": "Master the Bull Flag Trading Pattern TODAY (Step-by-Step Guide)",
+          "duration_sec": 3482,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "4syXgXshgsc",
+          "bytes": 72822,
+          "title": "What Beginners Get Wrong About Level 2 💥 Day 4 | Small Account Challenge",
+          "duration_sec": 3451,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 218547,
+      "batch": 23
+    },
+    {
+      "items": [
+        {
+          "id": "XeSey4nSyh4",
+          "bytes": 72571,
+          "title": "How to Start Investing for Beginners (Full Course)",
+          "duration_sec": 3339,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Is9TTagKKjI",
+          "bytes": 72565,
+          "title": "5 Rules For Selling Losers Faster!",
+          "duration_sec": 3405,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "xgnqOu_fchA",
+          "bytes": 72503,
+          "title": "High Probability Candlestick Chart Patterns",
+          "duration_sec": 3577,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 217639,
+      "batch": 24
+    },
+    {
+      "items": [
+        {
+          "id": "QzBogJmcl-c",
+          "bytes": 72290,
+          "title": "🫠 THIS is Why Beginner Traders are Losing (Even on Big Short Squeezes)",
+          "duration_sec": 3495,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "5aWoZdbXJrA",
+          "bytes": 71798,
+          "title": "The BEST Stock Market Simulators (Step-by-Step Guide)",
+          "duration_sec": 3473,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "WQi0KvdLnwM",
+          "bytes": 71474,
+          "title": "When to BUY & SELL using Candlestick Charts (with ZERO experience)",
+          "duration_sec": 3331,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "i1shm3ATwJI",
+          "bytes": 9254,
+          "title": "How to Travel Europe Living off of Trading",
+          "duration_sec": 862,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224816,
+      "batch": 25
+    },
+    {
+      "items": [
+        {
+          "id": "PjVivCcM1B0",
+          "bytes": 70308,
+          "title": "How to Trade Pre-Market & After Hours (Step-by-Step Guide)",
+          "duration_sec": 3418,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "EHnIFKnJiXA",
+          "bytes": 70202,
+          "title": "The TREND TRADING Day Trading Strategy (Millionaire Traders LOVE This)",
+          "duration_sec": 3406,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "vPMyjSCgf58",
+          "bytes": 69778,
+          "title": "I risked $2,500 to make $76,112.42. Here’s how I did it.",
+          "duration_sec": 3161,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "nm-rhysU96k",
+          "bytes": 14720,
+          "title": "$SQL +261% Gap and Go Setup!",
+          "duration_sec": 761,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225008,
+      "batch": 26
+    },
+    {
+      "items": [
+        {
+          "id": "4t3GDiAXW18",
+          "bytes": 69767,
+          "title": "Year in Review: 2023 +$306,548.41 Day Trading Momentum Strategies",
+          "duration_sec": 3276,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "wC2Bbf6OMFQ",
+          "bytes": 69625,
+          "title": "The RIGHT WAY to use Volume on Candlestick Charts (with ZERO experience)",
+          "duration_sec": 3383,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "iBNcF_lPBIg",
+          "bytes": 69596,
+          "title": "How to Start Trading with $1,000 💥 Small Account Challenge Ep. 1",
+          "duration_sec": 3352,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "dtAnMp8siUY",
+          "bytes": 15664,
+          "title": "171% Short Squeeze on an EASY-TO-BORROW Continuation Setup!",
+          "duration_sec": 738,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 224652,
+      "batch": 27
+    },
+    {
+      "items": [
+        {
+          "id": "tR-tyjV1WQ0",
+          "bytes": 69311,
+          "title": "I Want to Improve My Trading Over The Next 4 Weeks…Here’s How I’d Do It",
+          "duration_sec": 3211,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "zPJ4oemntmU",
+          "bytes": 67956,
+          "title": "3 Lessons I Learned Making $60k in 1 Month : Behind The Trades Ep. 04",
+          "duration_sec": 3503,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "QstdS67Iyv0",
+          "bytes": 67943,
+          "title": "How to Start Day Trading (with ZERO experience)",
+          "duration_sec": 3235,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "2higxJXgl6o",
+          "bytes": 20007,
+          "title": "How I Deal With FOMO",
+          "duration_sec": 1028,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225217,
+      "batch": 28
+    },
+    {
+      "items": [
+        {
+          "id": "HYoQYCBW4sw",
+          "bytes": 67581,
+          "title": "Master This ONE Candlestick Pattern TODAY (Full Training)",
+          "duration_sec": 3311,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ul34Jfh-LOk",
+          "bytes": 67486,
+          "title": "How to Read Candlestick Charts (with ZERO experience)",
+          "duration_sec": 3318,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "wlH8zKZ8vXA",
+          "bytes": 67457,
+          "title": "How to Pick the BEST Stocks for Trading (with ZERO experience)",
+          "duration_sec": 3321,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "NE0IxWksuqo",
+          "bytes": 22428,
+          "title": "Alligator Indicator Definition | Trading Terminology",
+          "duration_sec": 1042,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 224952,
+      "batch": 29
+    },
+    {
+      "items": [
+        {
+          "id": "8eLtork_M50",
+          "bytes": 65396,
+          "title": "How to Deal with FOMO | Behind the Trades Ep. #2",
+          "duration_sec": 3288,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "txWaMpSzHhM",
+          "bytes": 64833,
+          "title": "Ultimate Day Trading Strategy Guide 📚🍏for Beginners",
+          "duration_sec": 3318,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "QBXlHOCIl8U",
+          "bytes": 64360,
+          "title": "How I turned $600 into $335,181 in 1 Year (Trading 2hrs/Day)",
+          "duration_sec": 2968,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "3ovOiVIJ_aM",
+          "bytes": 30680,
+          "title": "I made a mistake today…",
+          "duration_sec": 1482,
+          "teaching_class": "mistakes"
+        }
+      ],
+      "bytes": 225269,
+      "batch": 30
+    },
+    {
+      "items": [
+        {
+          "id": "OQLfHuO8KlI",
+          "bytes": 64178,
+          "title": "STOP Using Basic Candlestick Charts! These NEW Charts Are 10x Better",
+          "duration_sec": 3176,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "DoO4YnbPOPA",
+          "bytes": 63299,
+          "title": "Behind The Trades: How to get out of a Trading Rut | Ep. 7",
+          "duration_sec": 3272,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "YZ5nvP7DnQQ",
+          "bytes": 63073,
+          "title": "TOP 5 Day Trading Mistakes YOU NEED TO KNOW!!",
+          "duration_sec": 2988,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "jfe1Zl-5EQI",
+          "bytes": 34458,
+          "title": "Day Trading Strategy (reversals) for Beginners: Class 4 of 12 by Ross Cameron",
+          "duration_sec": 1886,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225008,
+      "batch": 31
+    },
+    {
+      "items": [
+        {
+          "id": "m7pV69LTYDw",
+          "bytes": 62959,
+          "title": "How to Start Day Trading (Step-by-Step Guide)",
+          "duration_sec": 2736,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "nfCqhdfyLKo",
+          "bytes": 62135,
+          "title": "How Read PRICE ACTION on Candlestick Charts (with ZERO experience)",
+          "duration_sec": 2866,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "3rEakODkiEg",
+          "bytes": 62009,
+          "title": "The ULTIMATE Beginners Guide to Trading (with ZERO experience)",
+          "duration_sec": 2942,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "5qu6YfbC7tM",
+          "bytes": 38134,
+          "title": "$PCSA +175% on the Reverse Split Setup",
+          "duration_sec": 1723,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225237,
+      "batch": 32
+    },
+    {
+      "items": [
+        {
+          "id": "ZpiWEMTpvoo",
+          "bytes": 60961,
+          "title": "Top 3 Candlestick Chart Mistakes Beginners Don’t Know They’re Making 😬",
+          "duration_sec": 2932,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "4Pc_von1wS4",
+          "bytes": 60614,
+          "title": "Reading Candlestick Charts Was HARD Until I Learned This 3 Step Trick",
+          "duration_sec": 2895,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "GMRmMf-RsfE",
+          "bytes": 60497,
+          "title": "How I turned $600 into $16,013.06 in 20 days | SMALL ACCOUNT CHALLENGE",
+          "duration_sec": 2888,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "vvXX2ycveuw",
+          "bytes": 42957,
+          "title": "The Simple MACD Strategy to Spot Big Winners Early (5,712% Example)",
+          "duration_sec": 1911,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225029,
+      "batch": 33
+    },
+    {
+      "items": [
+        {
+          "id": "sv6U1nAO8BI",
+          "bytes": 60013,
+          "title": "Step-by-Step Guide to Beginner Day Trading Strategies (Full Training)",
+          "duration_sec": 2883,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Gf791LDEsQI",
+          "bytes": 58579,
+          "title": "Ultimate Beginners Guide to Candlestick Patterns, Support/Resistance & Technical Indicators | Ep. 4",
+          "duration_sec": 2849,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "xTPcI7HHu5w",
+          "bytes": 56402,
+          "title": "How I turned $583 into $335,027.71 in 1 YEAR Trading | Small Account Challenge",
+          "duration_sec": 2958,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "dGhN8uCaMIk",
+          "bytes": 49470,
+          "title": "How to Predict A False Breakout",
+          "duration_sec": 2183,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224464,
+      "batch": 34
+    },
+    {
+      "items": [
+        {
+          "id": "qlhkAdaOg_Q",
+          "bytes": 56389,
+          "title": "The #1 Day Trading Strategy for Beginners | Backtested With 24,234 Trades",
+          "duration_sec": 2790,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "N3iqOuF8wQU",
+          "bytes": 55686,
+          "title": "How I Find Stocks as a Retail Trader",
+          "duration_sec": 2643,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "2kMgCjsmFzY",
+          "bytes": 54378,
+          "title": "How I'm Making $286/Day| Day Trading with $1,000",
+          "duration_sec": 2745,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "s7kEHvd0TJk",
+          "bytes": 53666,
+          "title": "The Story of How I Lost $20k in 90 Seconds Day Trading 🫣😰🤬",
+          "duration_sec": 2536,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 220119,
+      "batch": 35
+    },
+    {
+      "items": [
+        {
+          "id": "q5DRctM5C-Q",
+          "bytes": 53592,
+          "title": "How to use Level 2 (with ZERO experience)",
+          "duration_sec": 2640,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "eTUYXkAr6Pc",
+          "bytes": 53438,
+          "title": "The Ultimate Step-by-Step Moving Average Trading Guide (Full Training)",
+          "duration_sec": 2470,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "yKV3C2DoaFg",
+          "bytes": 51741,
+          "title": "How to RESET after a bad month | Behind The Trades | Ep #10",
+          "duration_sec": 2900,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "wjIFTuprfOk",
+          "bytes": 51621,
+          "title": "How to Day Trade using Trade Station (Platform Demo & Honest Review)",
+          "duration_sec": 2463,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "MTbYDUswdbM",
+          "bytes": 14477,
+          "title": "+$10,790.64 Trading off the High of Day Momentum Scanner",
+          "duration_sec": 656,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 224869,
+      "batch": 36
+    },
+    {
+      "items": [
+        {
+          "id": "pYx756KSvR4",
+          "bytes": 51132,
+          "title": "How to Trade Penny Stocks for Beginners (with ZERO experience)",
+          "duration_sec": 2611,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "yFoBnM0iSlc",
+          "bytes": 49400,
+          "title": "How to use the Relative Volume Trading Strategy (with ZERO experience)",
+          "duration_sec": 2374,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "hUhFuaxAsiw",
+          "bytes": 49355,
+          "title": "How to Draw Trend Lines the RIGHT Way on CANDLESTICK Charts",
+          "duration_sec": 2360,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "1FKu4LH0Xss",
+          "bytes": 46101,
+          "title": "How to AVOID False Breakouts (Use This Technical Indicator)",
+          "duration_sec": 2141,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "oWeCrBYBrG8",
+          "bytes": 29051,
+          "title": "Support and Resistance",
+          "duration_sec": 1341,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225039,
+      "batch": 37
+    },
+    {
+      "items": [
+        {
+          "id": "SCy6RrASpJY",
+          "bytes": 45976,
+          "title": "The Pre-Market Break of VWAP Setup",
+          "duration_sec": 2353,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "EIULmW7UCq8",
+          "bytes": 44492,
+          "title": "How to Day Trade using TradeZero (Platform Demo & Honest Review)",
+          "duration_sec": 2143,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "StpXbe3Ga3Y",
+          "bytes": 42205,
+          "title": "Circuit Breaker Halt Explained (With Examples)",
+          "duration_sec": 2239,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "5AV2OLWD1gc",
+          "bytes": 41629,
+          "title": "Top 5 Reasons Why Traders Lose Money 💰Don’t Make These Mistakes!!!",
+          "duration_sec": 1793,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "hLn6LrlXgAE",
+          "bytes": 41326,
+          "title": "The Only Candlestick Pattern You’ll Ever Need (full training)",
+          "duration_sec": 1858,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 215628,
+      "batch": 38
+    },
+    {
+      "items": [
+        {
+          "id": "fJcWMZ0YZGY",
+          "bytes": 41284,
+          "title": "How I Became a Day Trader (from BROKE to Millionaire)",
+          "duration_sec": 1852,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "cgIghGaQtY4",
+          "bytes": 38471,
+          "title": "I Grew 3 Small Accounts with 3 Different Brokers...Here's What I Learned (And Exciting PDT News)",
+          "duration_sec": 1728,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "VSs11mUjdFg",
+          "bytes": 38303,
+          "title": "A Major Turning Point in My Day Trading Strategy",
+          "duration_sec": 1988,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "HkCzaGuSJ1g",
+          "bytes": 37953,
+          "title": "How I Recovered from Yesterday's MAX LOSS Red Day",
+          "duration_sec": 1789,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "W3jXQlgGbBc",
+          "bytes": 37607,
+          "title": "The \"Sub VWAP Trap\" Trading Strategy 🍏 (Big Breakout Setup)",
+          "duration_sec": 1793,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "DgWn3egDGb0",
+          "bytes": 31391,
+          "title": "Bollinger Bands: Why Millionaire Traders Are Using This Technical Indicator",
+          "duration_sec": 1494,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225009,
+      "batch": 39
+    },
+    {
+      "items": [
+        {
+          "id": "ICbPz3iXbG0",
+          "bytes": 37604,
+          "title": "PROVEN Bear Market Trading & Investing Strategies (From Beginner to Advanced)",
+          "duration_sec": 1613,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "XqLj6VYzN5c",
+          "bytes": 37440,
+          "title": "How to Find the Best Stocks to Day Trade | Deep Dive into my Favorite Trading Pattern",
+          "duration_sec": 1834,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "FN-uqfbEVKw",
+          "bytes": 37375,
+          "title": "Trading Halts Explained (Common Halt Reasons & Resumption Times)",
+          "duration_sec": 1801,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "hLtPtEVBBBQ",
+          "bytes": 37099,
+          "title": "How to BLOW UP Your Trading Account (Don't Do This)",
+          "duration_sec": 1833,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Xy3SeJcUYew",
+          "bytes": 36941,
+          "title": "HUGE Announcement on the PDT Rule...",
+          "duration_sec": 1665,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "jvC5GUHPl1I",
+          "bytes": 36697,
+          "title": "I'm a Broken Man and Here's How I'm Fixing It",
+          "duration_sec": 1800,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 223156,
+      "batch": 40
+    },
+    {
+      "items": [
+        {
+          "id": "yI_a4pJj_go",
+          "bytes": 36607,
+          "title": "Candlestick Charts DIDN’T WORK Until I Learned This Easy ONE (1) STEP TRICK",
+          "duration_sec": 1669,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "fOvtzvA923U",
+          "bytes": 36554,
+          "title": "The Simplest Strategy for Trading Penny Stocks #stockmarket",
+          "duration_sec": 1641,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "mBT72-bFlPM",
+          "bytes": 36389,
+          "title": "Trading was HARD Until I Learned this BASE HIT Strategy",
+          "duration_sec": 1757,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "xCsTmqzBIco",
+          "bytes": 36301,
+          "title": "5 Cent Tick Pilot Program Explained",
+          "duration_sec": 1787,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "BFH-0N8S-IA",
+          "bytes": 36197,
+          "title": "Master Supply & Demand Trading (Ultimate Beginners Guide)",
+          "duration_sec": 1766,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "nH-z-089CgM",
+          "bytes": 36090,
+          "title": "Indicators for Avoiding False Breakouts 🔪😭",
+          "duration_sec": 1663,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 218138,
+      "batch": 41
+    },
+    {
+      "items": [
+        {
+          "id": "mbIwWiLY4DQ",
+          "bytes": 35514,
+          "title": "Day Trading For Beginners in 3 Steps ✅ Pick a Strategy,  Practice SIM Trading, then Go Live!",
+          "duration_sec": 1657,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Ai6r6xjk8Uk",
+          "bytes": 35383,
+          "title": "My #1 Indicator for HOLDING WINNERS LONGER",
+          "duration_sec": 1648,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "SpnidshD8Zk",
+          "bytes": 35331,
+          "title": "Day Trading this ONE Scalping Strategy",
+          "duration_sec": 1673,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "C4XZ_67c0Fo",
+          "bytes": 34994,
+          "title": "How I use Thinkorswim Platform for Day Trading (Settings, Charts, Hot keys)",
+          "duration_sec": 1717,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "BaZ4R2ovI9k",
+          "bytes": 34263,
+          "title": "How to use Level 2 data in your Day Trading Strategy (WITH LIVE MARKET EXAMPLES)",
+          "duration_sec": 1651,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "iS5lvJGMM8E",
+          "bytes": 34142,
+          "title": "The Ultimate Relative Strength Index (RSI) Trading Strategy",
+          "duration_sec": 1665,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "yFKCn5e1ERc",
+          "bytes": 15596,
+          "title": "How To Manage Position Sizing",
+          "duration_sec": 809,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225223,
+      "batch": 42
+    },
+    {
+      "items": [
+        {
+          "id": "KKoApu04ZF8",
+          "bytes": 33443,
+          "title": "How I made $22,654 in LESS THAN 90 min of Day Trading | Deep Dive",
+          "duration_sec": 1652,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "9hgpZMvCY08",
+          "bytes": 33381,
+          "title": "How to use Hotkeys for Day Trading",
+          "duration_sec": 1510,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "bnnEm_DKwXE",
+          "bytes": 33184,
+          "title": "How to Day Trade while working full time and NOT get fired 👨‍💻🙄🚀",
+          "duration_sec": 1530,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "CSzDAEAoYqk",
+          "bytes": 33134,
+          "title": "How to Read BUY and SELL Signals on Candlestick Charts (Beginner to Advanced)",
+          "duration_sec": 1514,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "SWPCn0ZDPU0",
+          "bytes": 33073,
+          "title": "Income Taxes for Traders (Step by Step Guide)",
+          "duration_sec": 1554,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ryOcGLJNOJU",
+          "bytes": 33060,
+          "title": "Pattern Day Trader Rule EXPLAINED (And How to Get Around it)",
+          "duration_sec": 1487,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "SfkJNbFUg0c",
+          "bytes": 25972,
+          "title": "$EVAX +130% on the Beaten Up Bottom Bounce Day Trading Setup",
+          "duration_sec": 1180,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 225247,
+      "batch": 43
+    },
+    {
+      "items": [
+        {
+          "id": "aC7jCwYYHxY",
+          "bytes": 32908,
+          "title": "How to use Moving Averages (Beginners)",
+          "duration_sec": 1561,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "OLvNqb3-xnY",
+          "bytes": 32751,
+          "title": "How to Day Trade Stocks with Big Spreads #stockmarket #daytrading",
+          "duration_sec": 1525,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "RoAVk--vljU",
+          "bytes": 32727,
+          "title": "ChatGPT Open AI Trading Strategy RESULTS: +35% in 2 DAYS 🤖 $1,000 Small Account Challenge Ep. 8",
+          "duration_sec": 1644,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "MMwiCswgwHU",
+          "bytes": 32311,
+          "title": "Equity Swaps Explained (and How They're Used in GameStop & AMC)",
+          "duration_sec": 1478,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "nwVRxQuAPi0",
+          "bytes": 32264,
+          "title": "Full Disclosure...I Blew Up My Account Today 💣 - Small Account Challenge Ep 14",
+          "duration_sec": 1620,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "pJuG5YtVF84",
+          "bytes": 32194,
+          "title": "How to use Level 2 and Time & Sales as a Momentum Day Trader",
+          "duration_sec": 1734,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "dl1MtlsMoZw",
+          "bytes": 30106,
+          "title": "What is Day Trading and How to Start Day Trading as a Beginner 🍏",
+          "duration_sec": 1396,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225261,
+      "batch": 44
+    },
+    {
+      "items": [
+        {
+          "id": "3hmDWJfZ0_0",
+          "bytes": 31805,
+          "title": "The Secret Nobody Tells You About Reading Candlestick Charts...",
+          "duration_sec": 1508,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "L16yPlr8jyM",
+          "bytes": 31804,
+          "title": "The Ultimate Beginners Candlestick Trading Strategy (Step-by-Step Guide)",
+          "duration_sec": 1493,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "eY7JdVjg0kw",
+          "bytes": 30757,
+          "title": "How to use Level 2 for Beginner Day Traders 🍏 #daytrading #stockmarket #learntotrade",
+          "duration_sec": 1496,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "taHYs-v3hBQ",
+          "bytes": 30622,
+          "title": "Top 5 Reasons Why Traders Lose Money 💰Don’t Make These Mistakes!!!",
+          "duration_sec": 1335,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "HY7i78bOJFA",
+          "bytes": 30194,
+          "title": "How to Make Money Trading in a COLD Market",
+          "duration_sec": 1314,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "tdjOKh5Jf9w",
+          "bytes": 30179,
+          "title": "How to GET PAID to Trade with a Market Liquidity Strategy",
+          "duration_sec": 1474,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "HMaTY5-x2N0",
+          "bytes": 29821,
+          "title": "$18k in 30 minutes with this Day Trading Strategy",
+          "duration_sec": 1471,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 215182,
+      "batch": 45
+    },
+    {
+      "items": [
+        {
+          "id": "Oz3sOXkAb6s",
+          "bytes": 29582,
+          "title": "How to Trade in an LLC or a Corp",
+          "duration_sec": 1365,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ZRRCyIoZnHE",
+          "bytes": 29452,
+          "title": "I blew up my small account… 🤯 Small Account Challenge Day 6",
+          "duration_sec": 1354,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "My6K_W2e-pw",
+          "bytes": 28923,
+          "title": "How to Day Trade with Robinhood Legend (Platform Demo & Honest Review)",
+          "duration_sec": 1302,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "mfGQr2tHoX0",
+          "bytes": 28854,
+          "title": "How I Nailed Trading with the MACD Indicator (Step-by-Step Guide)",
+          "duration_sec": 1318,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "7RbjGk9eNJU",
+          "bytes": 28828,
+          "title": "The Simplest Day Trading Strategy: Gap and Go ↗️📈 #stockmarket #daytrading",
+          "duration_sec": 1353,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "yg5E_mqGFGg",
+          "bytes": 28625,
+          "title": "Stock Scanners for Beginner Day Trading Strategies",
+          "duration_sec": 1377,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "2stp2cJ9b8A",
+          "bytes": 28313,
+          "title": "Learn from my mistakes!  Swinging for the fences DOESN'T always work",
+          "duration_sec": 1538,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "LdLtyeZHbPU",
+          "bytes": 22394,
+          "title": "How to Travel & Trade the RIGHT WAY (Don't make the same mistakes as me)",
+          "duration_sec": 946,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 224971,
+      "batch": 46
+    },
+    {
+      "items": [
+        {
+          "id": "V9za4wt9ONo",
+          "bytes": 28210,
+          "title": "How to Hold Winners Longer",
+          "duration_sec": 1276,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "bUAYYcgvvy8",
+          "bytes": 28124,
+          "title": "How to Setup Your Day Trading LLC",
+          "duration_sec": 1240,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "anuxv488waA",
+          "bytes": 27897,
+          "title": "How I lost $5,000 in 2-minutes Day Trading 🫢🤯",
+          "duration_sec": 1416,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "_NAM_oTYUQM",
+          "bytes": 27651,
+          "title": "Ross's Day Trading Strategy for a $500 Account 💥Small Account Challenge Episode 2",
+          "duration_sec": 1390,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "nDMX11XmYF0",
+          "bytes": 27593,
+          "title": "The 7 WORST Financial Mistakes You Can Make...",
+          "duration_sec": 1320,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "y_Qp_ev2js8",
+          "bytes": 27509,
+          "title": "Understanding the Pattern Day Trader Rule (PDT) for Day Traders",
+          "duration_sec": 1314,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "SrYGENemM1w",
+          "bytes": 27438,
+          "title": "How to Choose the RIGHT Market Data for Day Trading",
+          "duration_sec": 1359,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "_O0AEVPar7k",
+          "bytes": 27181,
+          "title": "7 Day Traders discuss Managing Risk & Golden Rules",
+          "duration_sec": 1236,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 221603,
+      "batch": 47
+    },
+    {
+      "items": [
+        {
+          "id": "aIqF9OvWYZ4",
+          "bytes": 27129,
+          "title": "Trading the Break of VWAP Setup",
+          "duration_sec": 1385,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "xauLV_WHXgc",
+          "bytes": 27088,
+          "title": "Coping with Setbacks as a Beginner Day Trader",
+          "duration_sec": 1428,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "vOZGdT9nYbc",
+          "bytes": 27066,
+          "title": "i just blew up my small account... for real this time 😰 Small Account Challenge Ep 17",
+          "duration_sec": 1301,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "H9BRF4xynQA",
+          "bytes": 27018,
+          "title": "I made a big mistake…",
+          "duration_sec": 1339,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "016ibIK58t0",
+          "bytes": 26875,
+          "title": "A Lesson on Short Selling +$31,076.62 in 2hrs",
+          "duration_sec": 1266,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "RUuJzmz5jCg",
+          "bytes": 26802,
+          "title": "How I'm RED on a stock up 300%...",
+          "duration_sec": 1390,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Hq3sZh5B_l8",
+          "bytes": 26219,
+          "title": "Did I follow the 6 Rules of Trader Rehab?",
+          "duration_sec": 1275,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "trcKOZnoPPs",
+          "bytes": 25871,
+          "title": "The Bear Market Strategy Episode You NEED To Watch",
+          "duration_sec": 1147,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "yKXtPgsTXCk",
+          "bytes": 11189,
+          "title": "4 Lessons from Surviving a Stock Market Crash",
+          "duration_sec": 504,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 225257,
+      "batch": 48
+    },
+    {
+      "items": [
+        {
+          "id": "uoig-Z6qtV0",
+          "bytes": 25788,
+          "title": "How to Trade IPOs (for Beginners)",
+          "duration_sec": 1345,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "TTvaXCmtVbI",
+          "bytes": 25780,
+          "title": "Short Selling Stocks Explained",
+          "duration_sec": 1237,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "c5HU_4ukSw8",
+          "bytes": 25388,
+          "title": "How To Short Stocks 📉",
+          "duration_sec": 1306,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "5X_ZcifasBg",
+          "bytes": 24937,
+          "title": "The Simplest Day Trading Strategy for Beginners (with ZERO experience)",
+          "duration_sec": 1106,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "1axXKjgCe84",
+          "bytes": 24439,
+          "title": "How to Cut Losers Faster",
+          "duration_sec": 1103,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "qBfCXK_euDA",
+          "bytes": 24358,
+          "title": "The Ultimate Short Selling Guide - Everything You Need to Know About Shorting",
+          "duration_sec": 1124,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "UNoPqBWuLC0",
+          "bytes": 24292,
+          "title": "Bull Flag Pattern 🐮 The #1 Beginner Day Trading Strategy 🍏",
+          "duration_sec": 1127,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "AfTzD9VHdi4",
+          "bytes": 23568,
+          "title": "Stock Market for Beginners | How to Become a Trader",
+          "duration_sec": 1059,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "qPb8LF1k8vU",
+          "bytes": 23233,
+          "title": "How to Control Emotions as a Beginner Day Trader #stockmarket #daytrading",
+          "duration_sec": 1093,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 221783,
+      "batch": 49
+    },
+    {
+      "items": [
+        {
+          "id": "ZtljL2kvh5I",
+          "bytes": 23204,
+          "title": "How I’d Retire in 5 Years Starting from ZERO",
+          "duration_sec": 1126,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "bvy1pyzTrG4",
+          "bytes": 22978,
+          "title": "How to Crush Monday: Game Plan for 4/22/2024",
+          "duration_sec": 1111,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ag5JoiOlUy4",
+          "bytes": 22052,
+          "title": "Surprise Daily Breakout Setup at 9:30am ET",
+          "duration_sec": 1031,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "MMIUGlmiIqU",
+          "bytes": 21928,
+          "title": "Stock Scanning Software - How to find Stocks to Trade",
+          "duration_sec": 1097,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "Xdw5azEqs6o",
+          "bytes": 21627,
+          "title": "How to Day Trade Bull Flag Pattern",
+          "duration_sec": 1041,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "WJHgMDyNXKo",
+          "bytes": 21448,
+          "title": "Don't Make These Mistakes! Taxes for Day Traders",
+          "duration_sec": 972,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "8g_b58OFsrc",
+          "bytes": 21317,
+          "title": "Stock Float Explained and Why it Matters",
+          "duration_sec": 1018,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ne75GMwzGD4",
+          "bytes": 21013,
+          "title": "5 Beginner Mistakes to Avoid",
+          "duration_sec": 938,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "xn_Nxa_0JBU",
+          "bytes": 20963,
+          "title": "NEW 💥 How to Setup ThinkorSwim for Day Trading",
+          "duration_sec": 966,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "DywXmtXsG1Q",
+          "bytes": 20833,
+          "title": "The Ultimate SCALP TRADING Indicator for Active Traders",
+          "duration_sec": 972,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 217363,
+      "batch": 50
+    },
+    {
+      "items": [
+        {
+          "id": "6w-7geIsq1A",
+          "bytes": 20820,
+          "title": "Day Trading the 1-Minute Dip & Rip Strategy",
+          "duration_sec": 1020,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "DAnpW98ZCSg",
+          "bytes": 20633,
+          "title": "I'm looking for this setup tomorrow!",
+          "duration_sec": 930,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "0Zh105lq9Rk",
+          "bytes": 20282,
+          "title": "Day 11: Scanner Alert Sends My Account +220% 🥳",
+          "duration_sec": 939,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "OnPTodRZl7o",
+          "bytes": 20265,
+          "title": "Trading Multi-Day Continuation Setups",
+          "duration_sec": 887,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "nxelwVBl0iA",
+          "bytes": 20159,
+          "title": "Does this count as breaking a rule? 🤷‍♂️",
+          "duration_sec": 1162,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "gA8r-ZoN49Q",
+          "bytes": 20120,
+          "title": "$GFAI +72% on a Daily Breakout Setup",
+          "duration_sec": 992,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "DJ9QEMbTdfA",
+          "bytes": 19617,
+          "title": "$AURC +200% on a SPAC Setup",
+          "duration_sec": 997,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "JMcaRfFThmg",
+          "bytes": 19582,
+          "title": "How to Trade Breaking News 📰",
+          "duration_sec": 951,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "P5Sn_mWJdy0",
+          "bytes": 19320,
+          "title": "Day Trading the Break of VWAP Setup",
+          "duration_sec": 853,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "IlEr-oGT_T4",
+          "bytes": 19304,
+          "title": "How to Read CANDLESTICK Charts (Step-by-Step Beginners Guide)",
+          "duration_sec": 989,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "eCSzHYl8apo",
+          "bytes": 19256,
+          "title": "How to Use Trade-Ideas Stock Scanners for Day Trading",
+          "duration_sec": 934,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 219358,
+      "batch": 51
+    },
+    {
+      "items": [
+        {
+          "id": "HfkIM2MYBHg",
+          "bytes": 19228,
+          "title": "How to use E*TRADE for Day Trading",
+          "duration_sec": 1052,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "vcfpJWEqaTU",
+          "bytes": 19203,
+          "title": "A Lesson on How to Manage Risk in a HOT Market...",
+          "duration_sec": 883,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "uJy9XIJq1cQ",
+          "bytes": 19120,
+          "title": "Avoiding the False Breakout & Algo Flush 💣 Beginner Day Trading Strategies 🍏",
+          "duration_sec": 892,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "D8Guwf84eAA",
+          "bytes": 19002,
+          "title": "The \"Blue Sky\" Day Trading Pattern",
+          "duration_sec": 872,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "IHeJROuEzRU",
+          "bytes": 18808,
+          "title": "ABCD Pattern: A Beginners Day Trading Strategy  #daytrading #stockmarket",
+          "duration_sec": 893,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "qfReXP_lpQE",
+          "bytes": 18744,
+          "title": "The Discipline NOT to Trade Low Quality Setups",
+          "duration_sec": 884,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "S3vYOE9d6nU",
+          "bytes": 18621,
+          "title": "The \"Stair Step\" Day Trading Strategy | Full Breakdown",
+          "duration_sec": 910,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "cnoJ9DkWPVM",
+          "bytes": 18348,
+          "title": "Big PDT Rule Change and What it Means for You",
+          "duration_sec": 818,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "4jes2_N3m2I",
+          "bytes": 18130,
+          "title": "Flat Top Breakout Pattern: Day Trading Strategy for Beginners #stockmarket #daytrading",
+          "duration_sec": 843,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "ivuVYHlE_Ow",
+          "bytes": 18102,
+          "title": "Case Study of a 113% Gap and Go Day Trading Setup",
+          "duration_sec": 866,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "Hxjla5IZYbA",
+          "bytes": 17681,
+          "title": "Daily Breakout Setups",
+          "duration_sec": 825,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "nrrH3eISme0",
+          "bytes": 17560,
+          "title": "Small Account Pre-Trading Checklist",
+          "duration_sec": 742,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 222547,
+      "batch": 52
+    },
+    {
+      "items": [
+        {
+          "id": "-qxkS9Y2zUU",
+          "bytes": 17550,
+          "title": "7 Rules of Day Trader",
+          "duration_sec": 847,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "VNsh-8cS2Tg",
+          "bytes": 17318,
+          "title": "Learn how to Day Trade Gappers and Gaps (Beginner Momentum Trading Strategies)",
+          "duration_sec": 894,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "nM2MxYk6Eo0",
+          "bytes": 17093,
+          "title": "Day Trading a \"Continuation\" Setup",
+          "duration_sec": 763,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "q_ZliMvD8yc",
+          "bytes": 16719,
+          "title": "Today I made a rookie mistake…",
+          "duration_sec": 782,
+          "teaching_class": "mistakes"
+        },
+        {
+          "id": "y3USmdoXKt8",
+          "bytes": 16669,
+          "title": "I asked ChatGPT to make me a Day Trading Strategy, and it did! Sort of..",
+          "duration_sec": 954,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "m12FrF4rrOg",
+          "bytes": 16570,
+          "title": "How to Read Candlestick Charts 📓📈 Beginner Trading Strategies 🍏",
+          "duration_sec": 754,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "_N5LQgR9wfE",
+          "bytes": 15202,
+          "title": "How To Catch A Scammer",
+          "duration_sec": 810,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "glDujVuXiiI",
+          "bytes": 15075,
+          "title": "How to Avoid Red Days...there is a trick...",
+          "duration_sec": 717,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "xyZ2UrYiUEw",
+          "bytes": 15065,
+          "title": "Traveling Day Trading Station Setup #Daytrading",
+          "duration_sec": 696,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "qRirYfM4XiY",
+          "bytes": 14339,
+          "title": "Best Day Trading Indicators For Beginner Day Traders (VWAP, EMA'S, Vol Bars, Candlesticks Patterns)",
+          "duration_sec": 661,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "jpPgEAAVMxY",
+          "bytes": 14055,
+          "title": "+$15,113.96 Day Trading a SPAC and a Recent Reverse Split Setup",
+          "duration_sec": 637,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "7_U5bDa3T1g",
+          "bytes": 13949,
+          "title": "How to set up a Traveling Trading Station",
+          "duration_sec": 699,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "45PHATChEJU",
+          "bytes": 13589,
+          "title": "Lessons on being Outside Your Comfort Zone!  Goodbye California!  Hello East Coast!",
+          "duration_sec": 631,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "8h1xWOkgrpI",
+          "bytes": 13557,
+          "title": "Day Trading Tips: How To Build A Watch List",
+          "duration_sec": 861,
+          "teaching_class": "howto"
+        }
+      ],
+      "bytes": 216750,
+      "batch": 53
+    },
+    {
+      "items": [
+        {
+          "id": "9VAKgj1Px3s",
+          "bytes": 12553,
+          "title": "$TCBP $OTRK Day Trading from Gap & Momentum Scanners",
+          "duration_sec": 601,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "IKwm-KdCqpg",
+          "bytes": 12536,
+          "title": "One Trade / Day (Holiday Trading Strategy)",
+          "duration_sec": 557,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "N3E5eYS8d-I",
+          "bytes": 11959,
+          "title": "I asked ChatGPT to make a $750,000 Day Trading Strategy",
+          "duration_sec": 648,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "Ymzyd9fbsmI",
+          "bytes": 11555,
+          "title": "3 Doji Candlesticks Patterns That are Buy/Sell Indicators #daytrading #stockmarket",
+          "duration_sec": 539,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "ZY_GJSl4nWk",
+          "bytes": 11529,
+          "title": "How I Went from RED on the Day to GREEN!",
+          "duration_sec": 501,
+          "teaching_class": "howto"
+        },
+        {
+          "id": "yBiAZvwpVww",
+          "bytes": 11238,
+          "title": "$CFRX Recent Reverse Split Gap and Go Setup",
+          "duration_sec": 559,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "Uft2BuJpap8",
+          "bytes": 10967,
+          "title": "Buying the Break of VWAP Setup",
+          "duration_sec": 487,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "Fe4BaF8gCOQ",
+          "bytes": 10886,
+          "title": "My Day Trading Strategy for 2023 $LIPO +100%",
+          "duration_sec": 515,
+          "teaching_class": "rules"
+        },
+        {
+          "id": "kQ93wnMCMWQ",
+          "bytes": 10849,
+          "title": "Shooting Star & Hammer Candlesticks - Reversal Candlestick Strategy",
+          "duration_sec": 538,
+          "teaching_class": "rules"
+        }
+      ],
+      "bytes": 104072,
+      "batch": 54
+    }
+  ]
+}
