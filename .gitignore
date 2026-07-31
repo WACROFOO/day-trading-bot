@@ -22,9 +22,13 @@ config.local.py
 Thumbs.db
 .DS_Store
 
-# Scraped research material (local only, not redistributed)
+# Raw scrape working directory. The cleaned transcripts under
+# knowledge-base/transcripts/ are published; these staging copies are not.
 data/subtitles/
 data/subtitles_raw/
 
 # Fetch logs
 data/*.log
+
+# Runtime artifacts
+data/*.db
