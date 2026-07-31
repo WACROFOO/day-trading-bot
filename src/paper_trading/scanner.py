@@ -145,6 +145,11 @@ def apply_filters(stats: pd.DataFrame,
     Pure function.
     """
     df = stats.copy()
+    cols = ["symbol", "price", "change_pct", "volume", "rvol", "avg_volume_50d",
+            "pass_price", "pass_gain", "pass_rvol", "pass_volume",
+            "float_shares", "catalyst"]
+    if df.empty:
+        return pd.DataFrame(columns=cols)
     df["pass_price"] = (df["price"] >= price_min) & (df["price"] <= price_max)
     df["pass_gain"] = df["change_pct"] >= gain_pct_min
     df["pass_rvol"] = df["rvol"] >= rvol_min

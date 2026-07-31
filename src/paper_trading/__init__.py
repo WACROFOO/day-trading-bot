@@ -1,1 +1,1 @@
-"""Local paper-trading dashboard package (manual simulated trading)."""
+"""Local paper-trading platform package (manual simulated trading)."""

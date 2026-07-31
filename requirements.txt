@@ -1,6 +1,7 @@
 pandas
 numpy
 yfinance
-streamlit
+streamlit>=1.37
 plotly
 pytest
+tzdata; platform_system == "Windows"

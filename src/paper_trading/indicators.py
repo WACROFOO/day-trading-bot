@@ -15,6 +15,11 @@ def ema9(close: pd.Series) -> pd.Series:
     return ema(close, 9)
 
 
+def ema20(close: pd.Series) -> pd.Series:
+    """20-period EMA of close (Charts tab)."""
+    return ema(close, 20)
+
+
 def vwap(df: pd.DataFrame) -> pd.Series:
     """Intraday VWAP, reset each calendar day of the index.
 

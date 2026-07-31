@@ -42,9 +42,9 @@ def main() -> int:
     if args.limit:
         symbols = symbols[:args.limit]
     print(f"Scanning {len(symbols)} symbols "
-          f"(filter: ${scanner.PRICE_MIN:.2f}–${scanner.PRICE_MAX:.2f}, "
-          f"gain ≥{scanner.GAIN_PCT_MIN:.0f}%, rvol ≥{scanner.RVOL_MIN:.1f}x, "
-          f"vol ≥{scanner.VOLUME_MIN:,})...")
+          f"(filter: ${scanner.PRICE_MIN:.2f}-${scanner.PRICE_MAX:.2f}, "
+          f"gain >= {scanner.GAIN_PCT_MIN:.0f}%, rvol >= {scanner.RVOL_MIN:.1f}x, "
+          f"vol >= {scanner.VOLUME_MIN:,})...")
 
     def progress(done: int, total: int, message: str) -> None:
         print(f"\r  {message}   ", end="", flush=True)

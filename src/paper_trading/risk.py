@@ -12,6 +12,7 @@ MAX_DAILY_LOSS_PCT = 6.0
 GIVEBACK_PCT = 50.0
 CONSECUTIVE_LOSS_STOP = 3
 MIN_REWARD_RISK = 2.0
+DRAWDOWN_WALKAWAY_PCT = 20.0
 
 
 @dataclass
@@ -99,13 +100,30 @@ def check_reward_risk(entry: float, stop: float, target: float,
     return RuleStatus(f"Reward:risk >= {min_rr:.1f}", ok, f"R:R = {rr:.2f}")
 
 
+def check_drawdown(equity: float, high_watermark: float,
+                   max_dd_pct: float = DRAWDOWN_WALKAWAY_PCT) -> RuleStatus:
+    """Walk away if equity is down more than max_dd_pct from the high-water mark."""
+    floor = high_watermark * (1.0 - max_dd_pct / 100.0)
+    ok = equity > floor
+    dd_pct = (1.0 - equity / high_watermark) * 100.0 if high_watermark > 0 else 0.0
+    return RuleStatus(
+        f"Drawdown walkaway {max_dd_pct:.0f}%", ok,
+        f"equity ${equity:,.2f} vs floor ${floor:,.2f}"
+        f" (HWM ${high_watermark:,.2f}, drawdown {dd_pct:.1f}%)",
+    )
+
+
 def daily_report(day_pnl: float, day_peak_pnl: float, equity: float,
-                 round_trips: list[float]) -> RiskReport:
-    """All §8 daily rules in one report."""
+                 round_trips: list[float], *,
+                 high_watermark: float | None = None) -> RiskReport:
+    """All §8 daily rules in one report; drawdown appended when HWM is given."""
     was_green = day_peak_pnl > 0
-    return RiskReport(rules=[
+    rules = [
         check_max_daily_loss(day_pnl, equity),
         check_giveback(day_pnl, day_peak_pnl),
         check_green_to_red(day_pnl, was_green),
         check_consecutive_losses(round_trips),
-    ])
+    ]
+    if high_watermark is not None:
+        rules.append(check_drawdown(equity, high_watermark))
+    return RiskReport(rules=rules)
