@@ -11,6 +11,7 @@ which matches the playbook - each session starts from the same limits.
 """
 import datetime as dt
 
+import sim
 from sim import (Indicators, PullbackTracker, evaluate, RISK_PER_TRADE,
                  MAX_DAILY_LOSS, PROFIT_GOAL, STOP_MAX, SLIPPAGE,
                  BUYING_POWER, LIQUIDITY_CAP, TRADE_START, HARD_STOP,
@@ -128,6 +129,13 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
             if pb and position is None and halted is None and TRADE_START <= tm < HARD_STOP:
                 setups += 1
                 ok, checks = evaluate(pb, bar, ind, s['flipped'])
+                # PARAMETERS.md sec.12 step 3: score the pillars instead of
+                # requiring all of them, and check whether the gradient is
+                # monotonic. Requiring 9 independent booleans simultaneously
+                # gates out ~9,999 of every 10,000 setups; a human applies them
+                # approximately and together.
+                score = sum(1 for v in checks.values() if v[0])
+                ok = score >= sim.MIN_PILLARS
                 entry = min(pb['trigger_level'] + SLIPPAGE, bar['h'])
                 stop = pb['low']
                 risk_ps = entry - stop
@@ -140,7 +148,14 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 rngs = sorted(x['h'] - x['l'] for x in ind.bars[-30:]
                               if x['h'] > x['l'])
                 spread_est = rngs[len(rngs) // 4] if rngs else 0.01
-                sized_ok = spread_est <= risk_ps <= STOP_MAX
+                # PLAYBOOK.md:166 - "cut your size OR skip the trade". The
+                # sizing formula already cuts size when the stop is wider, so a
+                # wide stop is not a rejection; it is simply fewer shares. Only
+                # a stop that is absurd relative to price, or tighter than the
+                # spread, is a genuine skip.
+                sized_ok = (spread_est <= risk_ps
+                            and risk_ps <= sim.STOP_MAX_PCT * entry)
+                wide = risk_ps > STOP_MAX
 
                 # The first target is a retest of the high of day (n=5 videos),
                 # or a measured move equal to the impulse height when entry is
@@ -159,7 +174,7 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                     if not passed:
                         rejects[k] = rejects.get(k, 0) + 1
                 if not sized_ok:
-                    key = ('stop > $0.20' if risk_ps > STOP_MAX
+                    key = ('stop > 6% of price' if risk_ps > sim.STOP_MAX_PCT * entry
                            else 'stop tighter than spread')
                     rejects[key] = rejects.get(key, 0) + 1
                 if not rr_ok:

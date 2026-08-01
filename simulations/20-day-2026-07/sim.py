@@ -33,12 +33,14 @@ MAX_LOSSES_STREAK = 3
 BUYING_POWER = 4 * ACCOUNT             # standard 4x day-trade margin
 
 # --- strategy constants -----------------------------------------------------
-STOP_MAX = 0.20                        # $/share; wider than this = skip
+STOP_MAX = 0.20                        # $/share; beyond this, CUT SIZE
+STOP_MAX_PCT = 0.06                    # outer sanity bound, % of price
 SLIPPAGE = 0.02                        # $/share paid on entry beyond the trigger
 MAX_SLIPPAGE_ALLOWED = 0.15            # playbook: limit at ask + 0.15
 LEVEL_TOL_PCT = 0.0025                 # 0.25% - the one free parameter
 PULLBACK_RESET = 'vwap'                # 'vwap' | 'newhod' - see sweep.py
 CONFLUENCE_MIN = 2
+MIN_PILLARS = 9        # how many of the 9 entry conditions must hold
 MAX_PULLBACK_INDEX = 2
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
@@ -96,105 +98,186 @@ class Indicators:
         return sum(self.closes[-200:]) / 200
 
 
-def confluence(price, ind, flipped_levels):
-    """How many independent reasons this price has to matter. Needs >= 2.
+def confluence(price, ind, flipped_levels, wick=0.002):
+    """Levels the dip came down to AND HELD. Not levels it sliced through.
 
-    Mirrors at_support(p) in PARAMETERS.md sec.3: whole/half dollar, the three
-    moving averages, VWAP, and a level that was resistance earlier.
+    The previous version tested abs(price - level) <= tol, so a pullback low
+    1.2% BELOW the 9 EMA counted as "at the 9 EMA". Measured across 300 real
+    setups the dip low was below the 9 EMA 87% of the time, median -1.23% - so
+    that test was systematically approving dips that had already broken the
+    level and were bouncing underneath it. That is a different trade from the
+    one the playbook describes, and a much worse one.
+
+    A level counts as support when the dip reached it (within tol) and held it
+    (no more than `wick` below, allowing for the wick that makes the touch).
     """
     tol = max(price * LEVEL_TOL_PCT, 0.01)
+    wick_room = price * wick
     reasons = []
+
+    def held(level):
+        d = price - level                      # signed: + means dip stayed above
+        return -wick_room <= d <= tol
+
     if abs(price - round(price * 2) / 2) <= tol:
         reasons.append('whole/half dollar')
     for name, level in (('9 EMA', ind.ema9), ('20 EMA', ind.ema20),
                         ('200 MA', ind.ma200), ('VWAP', ind.vwap)):
-        if level is not None and abs(price - level) <= tol:
+        if level is not None and held(level):
             reasons.append(name)
     for lvl in flipped_levels:
-        if abs(price - lvl) <= tol:
+        if held(lvl):
             reasons.append(f'flipped ${lvl:.2f}')
             break
     return reasons
 
 
 class PullbackTracker:
-    """Finds the impulse -> pullback -> break structure, bar by bar.
+    """Swing structure, bar by bar: leg low -> leg high -> pullback -> trigger.
 
-    A pullback is a run of bars making lower highs after a push up. It ends the
-    moment a bar trades above the previous bar's high, which is the trigger.
+    The previous version tracked "impulse bars" as whatever run of higher highs
+    immediately preceded a dip, so the leg it measured was often one or two
+    bars. Everything downstream inherited that: the leg height used for the 50%
+    retracement rule was meaningless, and any two-bar wiggle registered as a
+    setup - 481 of them in 17 days, where a human sees a handful.
 
-    The index counts pullbacks inside the current up-leg. The leg resets when
-    price loses VWAP, which is also when the playbook says the setup is dead -
-    so "third pullback" means the third since the stock was last reclaimed.
+    Here a leg runs from a real swing low to the highest high since, and a
+    pullback is measured against THAT. Legs chain the way they do on a chart:
+    when a pullback resolves upward, the next leg starts from the pullback low.
+
+    Front side only: the leg high must be at or near the high of day. Buying
+    dips in a stock that is no longer making highs is a different trade, and
+    not the one the playbook describes.
     """
 
+    FRONT_SIDE = 0.98        # leg high must be within 2% of the high of day
+
     def __init__(self):
-        self.state = 'idle'          # idle | impulse | pullback
-        self.impulse_bars = []
-        self.pullback_bars = []
+        self.leg_low = None          # where the current up-leg started
+        self.leg_high = None         # highest high since leg_low
+        self.pullback = []           # bars pulling back from leg_high
         self.index = 0
-        self.last_pullback = None
+        self.armed = False           # a leg high has been established
+
+    def _reset(self, bar):
+        self.leg_low = bar['l']
+        self.leg_high = bar['h']
+        self.pullback = []
+        self.index = 0
+        self.armed = False
 
     def update(self, bar, prev, ind):
-        if prev is None:
+        if prev is None or self.leg_low is None:
+            self._reset(bar)
             return None
+
+        # Losing VWAP resets the leg only if it also breaks the leg low. The
+        # unconditional reset was my invention, not a playbook rule - there
+        # `price > VWAP` is an ENTRY GATE, which is enforced separately in
+        # evaluate(). Using it to wipe swing structure destroyed the leg every
+        # time a stock wobbled around VWAP, which on these names is most of the
+        # session (57-68% of bars below VWAP).
         vwap = ind.vwap
-        if vwap is not None and bar['c'] < vwap:
-            # lost VWAP: the leg is over, counting starts again
-            self.state, self.index = 'idle', 0
-            self.impulse_bars, self.pullback_bars = [], []
+        if vwap is not None and bar['c'] < vwap and bar['l'] < self.leg_low:
+            self._reset(bar)
             return None
-        if (PULLBACK_RESET == 'newhod' and ind.session_high is not None
-                and bar['h'] >= ind.session_high):
-            # a fresh high of day starts a new move, so the pullback counter
-            # restarts - the alternative reading of "first or second pullback"
+
+        if PULLBACK_RESET == 'newhod' and (ind.session_high is None
+                                           or bar['h'] >= ind.session_high):
             self.index = 0
 
-        up = bar['h'] > prev['h'] and bar['c'] >= prev['c']
-        down = bar['h'] <= prev['h']
+        # ORDER MATTERS. The trigger has to be tested before leg extension.
+        #
+        # On a strong mover the bar that ends the pullback usually takes out the
+        # leg high as well as the previous bar's high. Testing leg extension
+        # first meant that bar was filed as "leg continues", the accumulated
+        # pullback was discarded, and the setup vanished - so the faster a stock
+        # ran, the fewer signals it produced. VEEE went from $11.51 to $29.19 on
+        # 2026-07-13 and yielded five setups all morning, the first at 10:37.
+        # This is the entry the playbook actually describes: the first candle to
+        # trade above the previous candle's high, after a 2-3 candle dip.
+        if self.armed and self.pullback and bar['h'] > prev['h']:
+            pb_low = min(x['l'] for x in self.pullback)
+            pole = self.leg_high - self.leg_low
+            front = (ind.session_high is None
+                     or self.leg_high >= self.FRONT_SIDE * ind.session_high)
+            self.index += 1
+            out = dict(bars=list(self.pullback), low=pb_low, index=self.index,
+                       trigger_level=prev['h'], leg_low=self.leg_low,
+                       leg_high=self.leg_high, pole=pole, front_side=front,
+                       impulse=[dict(h=self.leg_high, l=self.leg_low,
+                                     v=self.impulse_volume(ind))])
+            self.leg_low = pb_low
+            self.leg_high = max(self.leg_high, bar['h'])
+            self.pullback = []
+            return out
 
-        if self.state in ('idle', 'impulse'):
-            if up:
-                if self.state == 'idle':
-                    self.impulse_bars = []
-                self.state = 'impulse'
-                self.impulse_bars.append(bar)
-            elif down and self.state == 'impulse' and self.impulse_bars:
-                self.state = 'pullback'
-                self.pullback_bars = [bar]
+        # extending the leg
+        if bar['h'] > self.leg_high:
+            self.leg_high = bar['h']
+            self.pullback = []
+            self.armed = True
             return None
 
-        # in a pullback
-        if bar['h'] > prev['h']:
-            # trigger bar: the pullback just ended
-            self.index += 1
-            pb = dict(bars=list(self.pullback_bars),
-                      impulse=list(self.impulse_bars),
-                      low=min(x['l'] for x in self.pullback_bars),
-                      index=self.index,
-                      trigger_level=prev['h'])
-            self.last_pullback = pb
-            self.state = 'impulse'
-            self.impulse_bars = [bar]
-            self.pullback_bars = []
-            return pb
+        if not self.armed:
+            self.leg_low = min(self.leg_low, bar['l'])
+            return None
 
-        self.pullback_bars.append(bar)
-        if len(self.pullback_bars) > 6:
-            # too long to be a pause; treat it as a new base
-            self.state, self.index = 'idle', 0
-            self.impulse_bars, self.pullback_bars = [], []
-        return None
+        # a bar that fails to take out the previous bar's high is part of the dip
+        if bar['h'] <= prev['h']:
+            self.pullback.append(bar)
+            if len(self.pullback) > 6:
+                self._reset(bar)          # too long to be a pause; new base
+            return None
+
+        # bar took out the previous bar's high: the pullback just ended
+        if not self.pullback:
+            return None
+
+        pb_low = min(x['l'] for x in self.pullback)
+        pole = self.leg_high - self.leg_low
+        front = (ind.session_high is None
+                 or self.leg_high >= self.FRONT_SIDE * ind.session_high)
+        self.index += 1
+        out = dict(bars=list(self.pullback), low=pb_low, index=self.index,
+                   trigger_level=prev['h'], leg_low=self.leg_low,
+                   leg_high=self.leg_high, pole=pole, front_side=front,
+                   impulse=[dict(h=self.leg_high, l=self.leg_low,
+                                 v=self.impulse_volume(ind))])
+        # the next leg starts from this pullback low
+        self.leg_low = pb_low
+        self.leg_high = bar['h']
+        self.pullback = []
+        return out
+
+    def impulse_volume(self, ind):
+        """Average bar volume over the leg, for the lighter-volume-dip check."""
+        bars = [b for b in ind.bars[-12:] if b['h'] <= self.leg_high]
+        return (sum(b['v'] for b in bars) / len(bars)) if bars else 0
 
 
 def evaluate(pb, bar, ind, flipped):
     """The entry gate. Returns (passed, reasons_dict) - every check recorded."""
     checks = {}
-    imp_v = sum(x['v'] for x in pb['impulse']) / max(1, len(pb['impulse']))
+    imp_v = pb['impulse'][0]['v'] if pb['impulse'] else 0
     pb_v = sum(x['v'] for x in pb['bars']) / max(1, len(pb['bars']))
     checks['pullback_volume < impulse_volume'] = (pb_v < imp_v, f'{pb_v:,.0f} vs {imp_v:,.0f}')
     checks['pullback index <= 2'] = (pb['index'] <= MAX_PULLBACK_INDEX, f"#{pb['index']}")
     checks['pullback 2-4 candles'] = (2 <= len(pb['bars']) <= 4, f"{len(pb['bars'])} bars")
+
+    # "a strong push up (the impulse)" - one green bar is not a push. Without
+    # this the tracker calls any two-bar wiggle a setup and fires ~28 times a
+    # day per watchlist where a human sees a handful.
+    checks['front side of the move'] = (pb['front_side'],
+                                        f"leg high {pb['leg_high']:.2f}")
+
+    # "first pullback should hold at least 50% of initial leg up"
+    # (BUCPPCXOHbs 00:50:34). A dip that gives back most of the push is a
+    # failed move, not a flag.
+    pole = pb['pole']
+    held = ((pb['low'] - pb['leg_low']) / pole) if pole > 0 else 0
+    checks['pullback holds 50% of leg'] = (pole > 0 and held >= 0.5,
+                                           f'{held*100:.0f}% of a {pole:.2f} leg')
 
     reasons = confluence(pb['low'], ind, flipped)
     checks['support confluence >= 2'] = (len(reasons) >= CONFLUENCE_MIN,
