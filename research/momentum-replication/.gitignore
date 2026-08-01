@@ -1,0 +1,3 @@
+# Unpacked caches - regenerate with `gunzip -kf data/*.json.gz`
+data/scan20_stats.json
+data/daily20.json

@@ -1,0 +1,555 @@
+{
+ "max_trades": 2,
+ "results": [
+  {
+   "day": "2026-07-09",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 49,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback holds 50% of leg": 7,
+    "target < 2:1": 12,
+    "pullback_volume < impulse_volume": 9,
+    "pullback 2-4 candles": 26,
+    "support confluence >= 2": 21,
+    "price > VWAP": 27,
+    "price > 9 EMA": 12,
+    "MACD histogram > 0": 15,
+    "pullback index <= 2": 24,
+    "stop tighter than spread": 7,
+    "front side of the move": 36
+   },
+   "watch": [
+    "RPGL",
+    "IOTR",
+    "SUNE"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-10",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 30,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback holds 50% of leg": 9,
+    "target < 2:1": 6,
+    "support confluence >= 2": 13,
+    "price > VWAP": 18,
+    "pullback 2-4 candles": 20,
+    "front side of the move": 17,
+    "stop tighter than spread": 8,
+    "pullback_volume < impulse_volume": 6,
+    "MACD histogram > 0": 7,
+    "pullback index <= 2": 7,
+    "price > 9 EMA": 8
+   },
+   "watch": [
+    "WNW",
+    "WOK",
+    "CRE"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-13",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 71,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 33,
+    "support confluence >= 2": 20,
+    "pullback_volume < impulse_volume": 13,
+    "target < 2:1": 17,
+    "pullback holds 50% of leg": 5,
+    "price > VWAP": 12,
+    "MACD histogram > 0": 29,
+    "front side of the move": 29,
+    "pullback index <= 2": 50,
+    "price > 9 EMA": 16,
+    "stop tighter than spread": 9,
+    "stop > 6% of price": 3
+   },
+   "watch": [
+    "VEEE",
+    "MIMI",
+    "PLSM",
+    "EHGO",
+    "SKYQ"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-14",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 27,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 14,
+    "support confluence >= 2": 13,
+    "target < 2:1": 4,
+    "pullback index <= 2": 10,
+    "price > 9 EMA": 6,
+    "MACD histogram > 0": 7,
+    "pullback holds 50% of leg": 4,
+    "price > VWAP": 18,
+    "stop tighter than spread": 8,
+    "front side of the move": 15,
+    "pullback_volume < impulse_volume": 7
+   },
+   "watch": [
+    "SHPH",
+    "LVLU",
+    "PLRZ"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-15",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 21,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "target < 2:1": 4,
+    "pullback 2-4 candles": 12,
+    "pullback index <= 2": 4,
+    "support confluence >= 2": 9,
+    "front side of the move": 16,
+    "pullback holds 50% of leg": 4,
+    "price > VWAP": 14,
+    "MACD histogram > 0": 3,
+    "stop tighter than spread": 7,
+    "price > 9 EMA": 3,
+    "pullback_volume < impulse_volume": 1
+   },
+   "watch": [
+    "ERNA",
+    "TRT"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-16",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 62,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 29,
+    "price > 9 EMA": 15,
+    "target < 2:1": 14,
+    "price > VWAP": 18,
+    "MACD histogram > 0": 26,
+    "pullback holds 50% of leg": 7,
+    "pullback index <= 2": 30,
+    "front side of the move": 24,
+    "stop tighter than spread": 12,
+    "pullback_volume < impulse_volume": 10,
+    "support confluence >= 2": 18
+   },
+   "watch": [
+    "RUBI",
+    "ATPC",
+    "DXST",
+    "EHGO"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-17",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 25,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 17,
+    "MACD histogram > 0": 13,
+    "target < 2:1": 11,
+    "pullback index <= 2": 16,
+    "price > 9 EMA": 8,
+    "front side of the move": 8,
+    "support confluence >= 2": 3,
+    "pullback_volume < impulse_volume": 5,
+    "stop tighter than spread": 4,
+    "price > VWAP": 6,
+    "pullback holds 50% of leg": 1
+   },
+   "watch": [
+    "BIYA",
+    "PMAX"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-20",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 48,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 14,
+    "support confluence >= 2": 7,
+    "pullback 2-4 candles": 25,
+    "target < 2:1": 14,
+    "pullback holds 50% of leg": 1,
+    "price > VWAP": 7,
+    "price > 9 EMA": 10,
+    "MACD histogram > 0": 16,
+    "pullback index <= 2": 27,
+    "front side of the move": 18,
+    "stop tighter than spread": 11
+   },
+   "watch": [
+    "BIYA",
+    "ADVB",
+    "SKYQ"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-21",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 13,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 8,
+    "support confluence >= 2": 10,
+    "MACD histogram > 0": 5,
+    "target < 2:1": 6,
+    "pullback index <= 2": 9,
+    "pullback_volume < impulse_volume": 3,
+    "stop tighter than spread": 3,
+    "price > 9 EMA": 3,
+    "pullback holds 50% of leg": 1,
+    "price > VWAP": 2,
+    "front side of the move": 1
+   },
+   "watch": [
+    "RPT"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-22",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 81,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback holds 50% of leg": 5,
+    "support confluence >= 2": 22,
+    "price > 9 EMA": 26,
+    "MACD histogram > 0": 36,
+    "stop > 6% of price": 19,
+    "target < 2:1": 20,
+    "pullback 2-4 candles": 41,
+    "front side of the move": 23,
+    "price > VWAP": 11,
+    "stop tighter than spread": 17,
+    "pullback_volume < impulse_volume": 17,
+    "pullback index <= 2": 58
+   },
+   "watch": [
+    "ZCMD",
+    "INLF",
+    "INM",
+    "ADVB",
+    "SNTG"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-23",
+   "pnl": 169.74,
+   "trades": [
+    {
+     "sym": "NEUP",
+     "entry": 3.7799999713897705,
+     "stop": 3.7799999713897705,
+     "risk_ps": 0.029999971389770508,
+     "shares": 891,
+     "full": 1782,
+     "pnl": 169.73530626296997,
+     "scaled": 1,
+     "entry_time": "09:40",
+     "t1": 3.880499839782715,
+     "t2": 3.980999708175659,
+     "avg_rng": 0.03971998163223267,
+     "pb_bars": 4,
+     "spread_est": 0.019,
+     "impulse_v": 427484.5,
+     "window": "prime",
+     "exit": 3.869999885559082,
+     "exit_time": "09:51",
+     "reason": "trailing stop"
+    }
+   ],
+   "setups": 73,
+   "passes": 1,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 40,
+    "support confluence >= 2": 22,
+    "pullback_volume < impulse_volume": 13,
+    "stop > 6% of price": 2,
+    "target < 2:1": 10,
+    "pullback holds 50% of leg": 6,
+    "MACD histogram > 0": 25,
+    "pullback index <= 2": 41,
+    "front side of the move": 34,
+    "price > VWAP": 28,
+    "stop tighter than spread": 18,
+    "price > 9 EMA": 18
+   },
+   "watch": [
+    "EHGO",
+    "JEM",
+    "ADVB",
+    "NEUP",
+    "SKYQ"
+   ],
+   "log": [
+    "09:40 NEUP: BUY 1782 @ 3.78 stop 3.75 ($0.03/sh)",
+    "09:45 NEUP: T1 3.88 hit, sold 891, stop to breakeven",
+    "09:51 NEUP: OUT @ 3.87 (trailing stop) $+170 | day $+170"
+   ]
+  },
+  {
+   "day": "2026-07-24",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 71,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 40,
+    "support confluence >= 2": 18,
+    "pullback index <= 2": 35,
+    "target < 2:1": 13,
+    "stop > 6% of price": 5,
+    "stop tighter than spread": 38,
+    "pullback_volume < impulse_volume": 20,
+    "price > 9 EMA": 20,
+    "MACD histogram > 0": 23,
+    "price > VWAP": 33,
+    "front side of the move": 38,
+    "pullback holds 50% of leg": 10
+   },
+   "watch": [
+    "VIVK",
+    "JEM",
+    "NDLS",
+    "AKAN",
+    "CJMB"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-27",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 51,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback holds 50% of leg": 7,
+    "support confluence >= 2": 17,
+    "price > 9 EMA": 23,
+    "MACD histogram > 0": 26,
+    "stop > 6% of price": 4,
+    "target < 2:1": 6,
+    "price > VWAP": 16,
+    "pullback 2-4 candles": 24,
+    "pullback index <= 2": 23,
+    "pullback_volume < impulse_volume": 8,
+    "front side of the move": 25,
+    "stop tighter than spread": 15
+   },
+   "watch": [
+    "EDBL",
+    "LGHL",
+    "DFNS",
+    "BIYA",
+    "WYHG"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-28",
+   "pnl": -41.04,
+   "trades": [
+    {
+     "sym": "EHGO",
+     "entry": 2.444999952316284,
+     "stop": 2.3840999603271484,
+     "risk_ps": 0.06089999198913576,
+     "shares": 668,
+     "full": 668,
+     "pnl": -40.68119464874269,
+     "scaled": 0,
+     "entry_time": "10:12",
+     "t1": 2.614000082015991,
+     "t2": 2.7830002117156982,
+     "avg_rng": 0.0471349835395813,
+     "pb_bars": 2,
+     "spread_est": 0.025,
+     "impulse_v": 23680.25,
+     "window": "prime",
+     "exit": 2.3840999603271484,
+     "exit_time": "10:13",
+     "reason": "stop hit"
+    },
+    {
+     "sym": "EHGO",
+     "entry": 2.4600000381469727,
+     "stop": 2.4200000762939453,
+     "risk_ps": 0.039999961853027344,
+     "shares": 362,
+     "full": 362,
+     "pnl": -0.36197376251220703,
+     "scaled": 0,
+     "entry_time": "10:22",
+     "t1": 2.6100001335144043,
+     "t2": 2.760000228881836,
+     "avg_rng": 0.05138000249862671,
+     "pb_bars": 4,
+     "spread_est": 0.0279,
+     "impulse_v": 11369.0,
+     "window": "prime",
+     "exit": 2.4590001106262207,
+     "exit_time": "10:26",
+     "reason": "MACD negative"
+    }
+   ],
+   "setups": 27,
+   "passes": 2,
+   "halted": "2 trades taken",
+   "rejects": {
+    "pullback_volume < impulse_volume": 5,
+    "pullback holds 50% of leg": 4,
+    "price > VWAP": 21,
+    "price > 9 EMA": 6,
+    "support confluence >= 2": 10,
+    "MACD histogram > 0": 8,
+    "pullback 2-4 candles": 19,
+    "stop tighter than spread": 13,
+    "target < 2:1": 3,
+    "pullback index <= 2": 7,
+    "front side of the move": 13,
+    "stop > 6% of price": 1
+   },
+   "watch": [
+    "FIRY",
+    "INLF",
+    "BIYA",
+    "PMN",
+    "EHGO"
+   ],
+   "log": [
+    "10:12 EHGO: BUY 668 @ 2.44 stop 2.38 ($0.06/sh)",
+    "10:13 EHGO: OUT @ 2.38 (stop hit) $-41 | day $-41",
+    "10:22 EHGO: BUY 362 @ 2.46 stop 2.42 ($0.04/sh)",
+    "10:26 EHGO: OUT @ 2.46 (MACD negative) $-0 | day $-41",
+    "10:26 --- STOP: 2 trades taken ---"
+   ]
+  },
+  {
+   "day": "2026-07-29",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 61,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 31,
+    "pullback holds 50% of leg": 13,
+    "support confluence >= 2": 22,
+    "price > VWAP": 37,
+    "MACD histogram > 0": 20,
+    "target < 2:1": 6,
+    "front side of the move": 45,
+    "price > 9 EMA": 22,
+    "stop tighter than spread": 17,
+    "stop > 6% of price": 4,
+    "pullback index <= 2": 18,
+    "pullback_volume < impulse_volume": 15
+   },
+   "watch": [
+    "NCRA",
+    "AMIX",
+    "VIVK",
+    "GMM",
+    "STFS"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-30",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 29,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "support confluence >= 2": 11,
+    "pullback 2-4 candles": 18,
+    "target < 2:1": 1,
+    "front side of the move": 27,
+    "pullback holds 50% of leg": 6,
+    "price > VWAP": 25,
+    "price > 9 EMA": 6,
+    "MACD histogram > 0": 9,
+    "stop tighter than spread": 5,
+    "pullback index <= 2": 3,
+    "pullback_volume < impulse_volume": 7
+   },
+   "watch": [
+    "NUWE",
+    "STAK"
+   ],
+   "log": []
+  },
+  {
+   "day": "2026-07-31",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 38,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback 2-4 candles": 23,
+    "support confluence >= 2": 16,
+    "stop tighter than spread": 21,
+    "pullback_volume < impulse_volume": 10,
+    "pullback holds 50% of leg": 5,
+    "target < 2:1": 7,
+    "pullback index <= 2": 23,
+    "price > VWAP": 7,
+    "MACD histogram > 0": 22,
+    "front side of the move": 8,
+    "price > 9 EMA": 7
+   },
+   "watch": [
+    "CUPR",
+    "TCX"
+   ],
+   "log": []
+  }
+ ]
+}
