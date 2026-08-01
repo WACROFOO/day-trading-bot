@@ -203,3 +203,27 @@ python simulations/2026-07-31/fetch_day.py          # session bars
 python simulations/2026-07-31/run_sim.py            # the day
 python simulations/2026-07-31/audit_lookahead.py    # prove no look-ahead
 ```
+
+---
+
+## CORRECTION (added after the 17-day run)
+
+The watchlist in this report is **contaminated by reverse splits** and the
+result below should not be trusted.
+
+Yahoo serves 1-minute data in 7-day windows, each adjusted independently. The
+gaps here were computed by comparing a previous close and a pre-market price
+that came from differently adjusted responses. FCUV, reported above as a +423%
+gapper, was a **1:5 reverse split**; NEXR was 1:10 and was already rejected for
+other reasons.
+
+Recomputed from a single consistently-adjusted daily series, Friday
+2026-07-31's qualifying watchlist is **CUPR and TCX only** — JFB's gap falls
+below the +10% threshold and FCUV is excluded as split-affected. Neither
+produced a valid setup, so the corrected day is **flat, not −$160.96**.
+
+The look-ahead audit in this report was and remains valid: the engine never
+read future bars. The defect was in data preparation, not execution.
+
+See `simulations/20-day-2026-07/REPORT.md` for the corrected method and the
+17-day result.
