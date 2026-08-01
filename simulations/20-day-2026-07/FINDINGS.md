@@ -102,3 +102,69 @@ opposite direction, as the one that produced the bogus findings above.
   where the timestamps in `claims.db` give the entry moments. That is a
   different and much larger piece of work than a rule translation, and it is
   the honest next step.
+
+---
+
+# Rerun after fixing the conditions (not the count)
+
+The architectural problem was that nine approximate conditions ANDed together
+are exponentially stricter than the judgement they approximate. There are two
+ways to respond. Lowering `MIN_PILLARS` until trades appear is curve-fitting.
+Fixing the *specifications* so each condition means what the source means is
+not. Only the second was done; `MIN_PILLARS` stays at 9.
+
+## Four further specification errors
+
+| # | Error | Correction | Effect on that condition |
+|---|---|---|---|
+| 10 | Structure tested against the pullback's **wick low** | Bodies define structure; the wick is what the stop sits under | 50%-retracement pass rate 24% → 36% |
+| 11 | Confluence tolerance floored at a hardcoded **1 cent** | `PARAMETERS.md:127` floors it at **spread width** | confluence 9% → **60%** |
+| 12 | "Front side" as a flat 2% of the high of day | Expressed in leg-heights, so it scales with the stock | 42% → 52% |
+| 13 | 50% rule applied to **every** pullback | `BUCPPCXOHbs 50:34` states it about the **first** pullback after the catalyst | scoped to `index == 1` |
+
+Bug 11 was the dominant one. Demanding the dip stop within a penny of two
+independent levels is not what the document says, and it alone was gating out
+~90% of setups.
+
+## Result
+
+| | max_trades = 2 | max_trades = 5 |
+|---|---:|---:|
+| Trades (17 days) | 3 | 3 |
+| Total P&L | **+$128.70** | +$128.70 |
+| Expectancy | +0.717R | +0.717R |
+
+Look-ahead audit passes at every cut-off (10:00, 10:30, 11:00, 11:30, full).
+
+| Day | Sym | In | Out | Hold | Entry | Stop | R | Exit reason |
+|---|---|---|---|---:|---:|---:|---:|---|
+| 07-23 | NEUP | 09:40 | 09:51 | 11m | 3.78 | 3.75 | **+3.17** | trailing stop |
+| 07-28 | EHGO | 10:12 | 10:13 | 1m | 2.44 | 2.38 | −1.00 | stop hit |
+| 07-28 | EHGO | 10:22 | 10:26 | 4m | 2.46 | 2.42 | −0.02 | MACD negative |
+
+## This is still not a validation, and here is the number that says so
+
+**0.18 trades per day. Ross takes about 2.** The implementation is still roughly
+**11x too selective**, so it is not yet running his strategy.
+
+- n=3. A single trade (NEUP, +3.17R) exceeds the whole P&L. Remove it and the
+  result is negative. No conclusion survives that.
+- Individual condition pass rates are now 46–79%. Their product is ~0.6%, which
+  is exactly the 0.18/day observed. To reach 2 trades/day every condition would
+  need to be ~92% faithful.
+- The raised trade limit is irrelevant at this frequency: max 2 and max 5 give
+  identical results, because the limit never binds.
+
+The direction of travel is right — the same setups that used to be discarded now
+survive, the +1R artificial cap is gone, and a trade was finally allowed to run
+to +3.17R. But the honest reading is that thirteen fixed defects moved this from
+"measuring my own bugs" to "under-triggering by an order of magnitude". It is
+not yet measuring the strategy.
+
+**What would finish it:** the remaining gap is concentrated in the conditions
+still passing under 55% — `pullback 2-4 candles` (46%), `pullback index <= 2`
+(50%), `front side` (52%). Each encodes a visual judgement as a hard threshold.
+Calibrating them needs labelled examples of setups he demonstrably took; the
+entry timestamps in `claims.db` supply exactly those labels. Guessing new
+thresholds and re-running until the trade count looks right would produce a
+number, not a finding.

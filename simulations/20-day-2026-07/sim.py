@@ -40,7 +40,7 @@ MAX_SLIPPAGE_ALLOWED = 0.15            # playbook: limit at ask + 0.15
 LEVEL_TOL_PCT = 0.0025                 # 0.25% - the one free parameter
 PULLBACK_RESET = 'vwap'                # 'vwap' | 'newhod' - see sweep.py
 CONFLUENCE_MIN = 2
-MIN_PILLARS = 9        # how many of the 9 entry conditions must hold
+MIN_PILLARS = 9        # ALL conditions. Fix the conditions, not the count.
 MAX_PULLBACK_INDEX = 2
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
@@ -98,7 +98,7 @@ class Indicators:
         return sum(self.closes[-200:]) / 200
 
 
-def confluence(price, ind, flipped_levels, wick=0.002):
+def confluence(price, ind, flipped_levels, wick=0.002, spread=None):
     """Levels the dip came down to AND HELD. Not levels it sliced through.
 
     The previous version tested abs(price - level) <= tol, so a pullback low
@@ -111,8 +111,12 @@ def confluence(price, ind, flipped_levels, wick=0.002):
     A level counts as support when the dip reached it (within tol) and held it
     (no more than `wick` below, allowing for the wick that makes the touch).
     """
-    tol = max(price * LEVEL_TOL_PCT, 0.01)
-    wick_room = price * wick
+    # PARAMETERS.md:127 - tolerance is a % of price with a FLOOR AT SPREAD
+    # WIDTH. A hardcoded 1-cent floor was far tighter than these names
+    # actually quote, which is why the confluence test passed only 9% of
+    # setups: it demanded the dip stop within a penny of two levels.
+    tol = max(price * LEVEL_TOL_PCT, spread if spread else 0.01)
+    wick_room = max(price * wick, tol)
     reasons = []
 
     def held(level):
@@ -150,7 +154,10 @@ class PullbackTracker:
     not the one the playbook describes.
     """
 
-    FRONT_SIDE = 0.98        # leg high must be within 2% of the high of day
+    # Front side = the leg still reaches up to the day's highs. Expressed
+    # in leg-heights rather than a flat percentage, so it scales with the
+    # stock instead of excluding everything that has run hard.
+    FRONT_SIDE_LEGS = 1.0
 
     def __init__(self):
         self.leg_low = None          # where the current up-leg started
@@ -199,10 +206,12 @@ class PullbackTracker:
         if self.armed and self.pullback and bar['h'] > prev['h']:
             pb_low = min(x['l'] for x in self.pullback)
             pole = self.leg_high - self.leg_low
-            front = (ind.session_high is None
-                     or self.leg_high >= self.FRONT_SIDE * ind.session_high)
+            front = (ind.session_high is None or pole <= 0
+                     or self.leg_high >= ind.session_high - self.FRONT_SIDE_LEGS * pole)
             self.index += 1
-            out = dict(bars=list(self.pullback), low=pb_low, index=self.index,
+            out = dict(bars=list(self.pullback), low=pb_low,
+                       body_low=min(min(x['o'], x['c']) for x in self.pullback),
+                       index=self.index,
                        trigger_level=prev['h'], leg_low=self.leg_low,
                        leg_high=self.leg_high, pole=pole, front_side=front,
                        impulse=[dict(h=self.leg_high, l=self.leg_low,
@@ -236,10 +245,12 @@ class PullbackTracker:
 
         pb_low = min(x['l'] for x in self.pullback)
         pole = self.leg_high - self.leg_low
-        front = (ind.session_high is None
-                 or self.leg_high >= self.FRONT_SIDE * ind.session_high)
+        front = (ind.session_high is None or pole <= 0
+                 or self.leg_high >= ind.session_high - self.FRONT_SIDE_LEGS * pole)
         self.index += 1
-        out = dict(bars=list(self.pullback), low=pb_low, index=self.index,
+        out = dict(bars=list(self.pullback), low=pb_low,
+                   body_low=min(min(x['o'], x['c']) for x in self.pullback),
+                   index=self.index,
                    trigger_level=prev['h'], leg_low=self.leg_low,
                    leg_high=self.leg_high, pole=pole, front_side=front,
                    impulse=[dict(h=self.leg_high, l=self.leg_low,
@@ -254,6 +265,12 @@ class PullbackTracker:
         """Average bar volume over the leg, for the lighter-volume-dip check."""
         bars = [b for b in ind.bars[-12:] if b['h'] <= self.leg_high]
         return (sum(b['v'] for b in bars) / len(bars)) if bars else 0
+
+
+def spread_estimate(ind):
+    """Tightest quartile of recent 1-minute ranges: a floor on the spread."""
+    rngs = sorted(x['h'] - x['l'] for x in ind.bars[-30:] if x['h'] > x['l'])
+    return rngs[len(rngs) // 4] if rngs else 0.01
 
 
 def evaluate(pb, bar, ind, flipped):
@@ -274,12 +291,24 @@ def evaluate(pb, bar, ind, flipped):
     # "first pullback should hold at least 50% of initial leg up"
     # (BUCPPCXOHbs 00:50:34). A dip that gives back most of the push is a
     # failed move, not a flag.
+    # Structure is read from candle BODIES. The wick extreme is what the
+    # stop is placed under; it is not where the dip 'stopped'. Measuring
+    # the retracement from the wick low made this reject 76% of setups.
     pole = pb['pole']
-    held = ((pb['low'] - pb['leg_low']) / pole) if pole > 0 else 0
-    checks['pullback holds 50% of leg'] = (pole > 0 and held >= 0.5,
-                                           f'{held*100:.0f}% of a {pole:.2f} leg')
+    body_low = pb['body_low']
+    held = ((body_low - pb['leg_low']) / pole) if pole > 0 else 0
+    # The 50% rule is stated about the FIRST pullback after the catalyst
+    # ("After breaking news catalyst, first pullback should hold at least 50%
+    # of initial leg up", BUCPPCXOHbs 00:50:34). Applying it to every pullback
+    # in the session over-extends a narrower claim.
+    if pb['index'] <= 1:
+        checks['pullback holds 50% of leg'] = (pole > 0 and held >= 0.5,
+                                               f'{held*100:.0f}% of a {pole:.2f} leg')
+    else:
+        checks['pullback holds 50% of leg'] = (True, 'n/a after 1st pullback')
 
-    reasons = confluence(pb['low'], ind, flipped)
+    reasons = confluence(pb['body_low'], ind, flipped,
+                         spread=spread_estimate(ind))
     checks['support confluence >= 2'] = (len(reasons) >= CONFLUENCE_MIN,
                                          ', '.join(reasons) or 'none')
     checks['price > VWAP'] = (ind.vwap is not None and bar['c'] > ind.vwap,
