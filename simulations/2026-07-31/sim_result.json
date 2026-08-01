@@ -1,0 +1,53 @@
+{
+ "log": [
+  "09:35  JFB: pullback #1 low 4.22, trigger 4.39 -> ALL CHECKS PASS",
+  "09:35  JFB: >>> BUY 1038 @ 4.41  stop 4.22 ($0.19/sh, risk $200)  T1 4.80",
+  "09:36  JFB: OUT 1038 @ 4.36 (candle made a new low).  Trade P&L $-51  | day $-51",
+  "09:38  JFB: pullback #2 low 4.28, trigger 4.39 -> ALL CHECKS PASS",
+  "09:38  JFB: >>> BUY 914 @ 4.40  stop 4.28 ($0.12/sh, risk $110)  T1 4.64  [size capped by liquidity]",
+  "09:40  JFB: OUT 914 @ 4.28 (stop 4.28 hit).  Trade P&L $-110  | day $-161",
+  "09:40  --- STOP FOR THE DAY: 2 trades taken ---"
+ ],
+ "day_pnl": -160.95696235656695,
+ "trades": [
+  {
+   "sym": "JFB",
+   "entry": 4.412600059509277,
+   "stop": 4.220099925994873,
+   "init_stop": 4.220099925994873,
+   "risk_ps": 0.19250013351440387,
+   "shares": 1038,
+   "full": 1038,
+   "pnl": -51.277066955565964,
+   "scaled": 0,
+   "entry_time": "09:35",
+   "t1": 4.797600326538085,
+   "t2": 4.9901004600524885,
+   "cap": null,
+   "window": "prime",
+   "exit": 4.3632001876831055,
+   "exit_time": "09:36",
+   "reason": "candle made a new low"
+  },
+  {
+   "sym": "JFB",
+   "entry": 4.400000095367432,
+   "stop": 4.28000020980835,
+   "init_stop": 4.28000020980835,
+   "risk_ps": 0.11999988555908203,
+   "shares": 914,
+   "full": 914,
+   "pnl": -109.67989540100098,
+   "scaled": 0,
+   "entry_time": "09:38",
+   "t1": 4.639999866485596,
+   "t2": 4.759999752044678,
+   "cap": "liquidity",
+   "window": "prime",
+   "exit": 4.28000020980835,
+   "exit_time": "09:40",
+   "reason": "stop 4.28 hit"
+  }
+ ],
+ "halted": "2 trades taken"
+}
