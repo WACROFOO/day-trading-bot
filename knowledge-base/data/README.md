@@ -27,3 +27,33 @@ Do not join these dates against market sessions or price data. Exact dates requi
 python scripts/scrape_youtube_index.py
 python scripts/summarize_video_index.py
 ```
+
+## `daytradewarrior_streams.json` — the tab the corpus missed
+
+`daytradewarrior_videos.json` was scraped from `@DaytradeWarrior/videos`. YouTube
+files live broadcasts under a **separate `/streams` tab**, and none of them were
+in it: **480 streams, 0 of which appear among the 2,211 indexed videos.**
+
+| | |
+|---|---|
+| streams | 480 |
+| of those, "Day Trading Morning Show" episodes | 325 (~214 hours) |
+| an hour or longer | 84 |
+| two hours or longer | 18 |
+| longest | 4h32m, `YuNvqwJftVY` |
+
+This matters beyond completeness. `../../research/momentum-replication/NEXT-STEPS.md`
+§5 concludes the replication fails on entry **timing**, and says the corpus
+cannot settle it because the teaching videos explain setups after the fact. The
+Morning Show is the missing register: he is narrating decisions in real time,
+before the outcome is known, which is the only place the corpus contains
+unhindsighted entries.
+
+Fetched with:
+
+```bash
+yt-dlp --flat-playlist -J https://www.youtube.com/@DaytradeWarrior/streams
+```
+
+Fields are `id`, `title`, `duration`, `views`. Upload dates need a per-video
+metadata call, as with `july_meta.json` — the flat listing does not carry them.
