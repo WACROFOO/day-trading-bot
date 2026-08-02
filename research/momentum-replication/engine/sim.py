@@ -37,7 +37,6 @@ BUYING_POWER = 4 * ACCOUNT             # standard 4x day-trade margin
 
 # --- strategy constants -----------------------------------------------------
 STOP_MAX = 0.20                        # $/share; beyond this, CUT SIZE
-STOP_MAX_PCT = 0.06                    # outer sanity bound, % of price
 SLIPPAGE = 0.02                        # $/share paid on entry beyond the trigger
 MAX_SLIPPAGE_ALLOWED = 0.15            # playbook: limit at ask + 0.15
 LEVEL_TOL_PCT = 0.0025                 # 0.25% - the one free parameter
@@ -207,6 +206,24 @@ class PullbackTracker:
         # This is the entry the playbook actually describes: the first candle to
         # trade above the previous candle's high, after a 2-3 candle dip.
         if self.armed and self.pullback and bar['h'] > prev['h']:
+            # Only a dip the source would CALL a pullback counts as one.
+            # PLAYBOOK.md:99 "pulls back 2-3 candles"; the bull-flag document
+            # allows 2-4. The candle-count test used to live only in evaluate(),
+            # so a 1-bar pause was rejected as an entry but had already
+            # incremented the index and rebased leg_low. Phantom dips therefore
+            # consumed the "first or second pullback" budget (PARAMETERS.md:89)
+            # and pushed the first real flag to #3+, and they moved the leg
+            # origin used by the 50%-of-leg test.
+            n = len(self.pullback)
+            if n < 2:
+                # a single pause bar is part of the impulse, not a pullback
+                self.leg_high = max(self.leg_high, bar['h'])
+                self.pullback = []
+                return None
+            if n > 4:
+                # a 5-6 bar consolidation is a base, not a flag
+                self._reset(bar)
+                return None
             pb_low = min(x['l'] for x in self.pullback)
             pole = self.leg_high - self.leg_low
             front = (ind.session_high is None or pole <= 0

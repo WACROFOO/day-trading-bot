@@ -190,3 +190,81 @@ Values the corpus does not state, which therefore cannot be set from evidence:
 | spread | No quote data; estimated from bar ranges |
 
 `diagnostics/sweep.py` sweeps the first two together.
+
+---
+
+## Update — two further defects (independent review)
+
+Found by an independent review of this package, verified here against the code
+and reproduced on the cached data.
+
+**14. The pullback index counted things the source does not call pullbacks.**
+`PullbackTracker.update` incremented `self.index` (sim.py:214, 253) on *any*
+dip that resolved upward, while the 2–4 candle test lived in `evaluate()`
+(sim.py:286). A 1-bar pause was therefore rejected as an entry but had already
+consumed one of the two pullbacks allowed by `PARAMETERS.md:89`, and had
+rebased `leg_low` — moving the leg origin used by the 50%-of-leg test. The
+first genuine flag of a move was routinely numbered #3+ and rejected.
+*Fix:* only 2–4 candle dips emit a setup, advance the index, or rebase the leg.
+A single pause bar is part of the impulse; a 5–6 bar consolidation is a base.
+
+**15. A 6%-of-price stop cap that appears in no source document.**
+`sized_ok` required `risk_per_share <= 0.06 * entry`. The corpus bound is
+absolute — `stop_max_distance <= $0.20` (`PARAMETERS.md:159`) — and
+`PLAYBOOK.md:166` says a wider stop is sized down, not skipped, which the
+sizing formula already does. The only 6% in the source is the **daily account
+loss limit** (`PLAYBOOK.md:56`), a different quantity. Being relative it cut
+both ways: on a $2.44 stock it skipped stops past $0.15, tighter than the $0.20
+the source allows. *Fix:* removed. The spread floor (`PARAMETERS.md:161`)
+remains as the only sizing rejection.
+
+### Measured effect
+
+| | Before | After |
+|---|---:|---:|
+| Setups detected | 835 | 416 |
+| Passing all 9 conditions | 6 | 14 |
+| Trades (17 days) | 3 | 10 |
+| Trades per day | 0.18 | 0.59 |
+| P&L | +$128.70 | −$541.58 |
+
+Look-ahead audit passes at every cut-off after the change.
+
+The leave-one-out profile is now flat — dropping any single condition yields
+14–27 passing out of 416, with no choke point:
+
+| Condition | Pass % |
+|---|---:|
+| pullback 2–4 candles | 100% |
+| pullback volume < impulse | 78% |
+| pullback holds 50% of leg | 77% |
+| pullback index ≤ 2 | 71% |
+| price > 9 EMA | 65% |
+| MACD histogram > 0 | 62% |
+| support confluence ≥ 2 | 61% |
+| price > VWAP | 54% |
+| front side of the move | 52% |
+
+`pullback 2–4 candles` is now 100% by construction — the tracker cannot emit
+anything else — so it is a redundant check rather than a filter.
+
+### Correction to §3 above
+
+§3's statement that "dropping any single condition still leaves under 10
+passing out of 835" was **stale**. Re-measured on the pre-fix engine it was 24
+for the index rule, not ≤9 — that rule was already the identifiable choke
+point, and §3 understated it. The figures in §3 were recorded before defects
+12–13 landed; the 1-minute source window also rolls, so setup counts drift a
+little between runs.
+
+### Status
+
+Frequency is now 0.59 trades/day against ~2 in the source. The order-of-
+magnitude selectivity is gone; the residual difference includes scope the
+harness does not cover — it trades 09:35–11:30 only, while the source also
+trades 07:00–09:30 pre-market (`PARAMETERS.md:71`), and it scans the top-5
+gappers rather than the whole market.
+
+P&L is −$541.58 on 10 trades. Per the ground rules in `README.md` this is not
+a result: n=10, and the sign has now flipped three times across implementation
+changes on identical data.

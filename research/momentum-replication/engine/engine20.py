@@ -156,8 +156,17 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 # wide stop is not a rejection; it is simply fewer shares. Only
                 # a stop that is absurd relative to price, or tighter than the
                 # spread, is a genuine skip.
-                sized_ok = (spread_est <= risk_ps
-                            and risk_ps <= sim.STOP_MAX_PCT * entry)
+                # The only per-share stop bound in the corpus is
+                # stop_max_distance <= $0.20 (PARAMETERS.md:159), and
+                # PLAYBOOK.md:166 says a wider stop is sized down, not skipped -
+                # which the sizing formula already does. A 6%-of-price ceiling
+                # was invented here; the only 6% in the source is the DAILY
+                # ACCOUNT loss limit (PLAYBOOK.md:56), a different quantity.
+                # Being relative it also cut both ways: on a $2.44 stock it
+                # skipped stops past $0.15, tighter than the $0.20 allowed.
+                # The one genuine floor stays: a stop cannot be tighter than
+                # the spread (PARAMETERS.md:161).
+                sized_ok = spread_est <= risk_ps
                 wide = risk_ps > STOP_MAX
 
                 # The first target is a retest of the high of day (n=5 videos),
@@ -177,8 +186,7 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                     if not passed:
                         rejects[k] = rejects.get(k, 0) + 1
                 if not sized_ok:
-                    key = ('stop > 6% of price' if risk_ps > sim.STOP_MAX_PCT * entry
-                           else 'stop tighter than spread')
+                    key = 'stop tighter than spread'
                     rejects[key] = rejects.get(key, 0) + 1
                 if not rr_ok:
                     rejects['target < 2:1'] = rejects.get('target < 2:1', 0) + 1
