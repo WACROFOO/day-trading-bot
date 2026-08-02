@@ -31,7 +31,6 @@
    "passes": 1,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 6,
     "target < 2:1": 13,
     "support confluence >= 2": 9,
     "price > VWAP": 14,
@@ -39,7 +38,6 @@
     "pullback index <= 2": 5,
     "price > 9 EMA": 7,
     "stop tighter than spread": 5,
-    "front side of the move (not gating)": 14,
     "pullback_volume < impulse_volume": 5
    },
    "watch": [
@@ -60,13 +58,11 @@
    "passes": 0,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 4,
     "target < 2:1": 4,
     "support confluence >= 2": 5,
     "price > VWAP": 9,
     "price > 9 EMA": 6,
     "stop tighter than spread": 5,
-    "front side of the move (not gating)": 8,
     "MACD histogram > 0": 4,
     "pullback index <= 2": 1
    },
@@ -85,7 +81,6 @@
    "passes": 0,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 8,
     "support confluence >= 2": 14,
     "price > VWAP": 7,
     "price > 9 EMA": 10,
@@ -93,7 +88,6 @@
     "pullback_volume < impulse_volume": 9,
     "target < 2:1": 27,
     "pullback index <= 2": 18,
-    "front side of the move (not gating)": 16,
     "stop tighter than spread": 1
    },
    "watch": [
@@ -118,10 +112,8 @@
     "support confluence >= 2": 8,
     "price > 9 EMA": 4,
     "MACD histogram > 0": 5,
-    "pullback holds 50% of leg (not gating)": 4,
     "price > VWAP": 10,
     "stop tighter than spread": 5,
-    "front side of the move (not gating)": 7,
     "pullback_volume < impulse_volume": 5,
     "pullback index <= 2": 2
    },
@@ -142,10 +134,8 @@
    "rejects": {
     "target < 2:1": 8,
     "pullback_volume < impulse_volume": 1,
-    "pullback holds 50% of leg (not gating)": 6,
     "price > 9 EMA": 7,
     "MACD histogram > 0": 4,
-    "front side of the move (not gating)": 10,
     "support confluence >= 2": 6,
     "price > VWAP": 11,
     "stop tighter than spread": 3
@@ -169,11 +159,9 @@
     "MACD histogram > 0": 13,
     "target < 2:1": 18,
     "pullback_volume < impulse_volume": 5,
-    "pullback holds 50% of leg (not gating)": 6,
     "support confluence >= 2": 11,
     "stop tighter than spread": 4,
-    "pullback index <= 2": 13,
-    "front side of the move (not gating)": 12
+    "pullback index <= 2": 13
    },
    "watch": [
     "RUBI",
@@ -197,10 +185,8 @@
     "pullback index <= 2": 5,
     "support confluence >= 2": 2,
     "MACD histogram > 0": 5,
-    "front side of the move (not gating)": 2,
     "price > VWAP": 2,
-    "stop tighter than spread": 1,
-    "pullback holds 50% of leg (not gating)": 1
+    "stop tighter than spread": 1
    },
    "watch": [
     "BIYA",
@@ -219,12 +205,10 @@
     "pullback_volume < impulse_volume": 8,
     "support confluence >= 2": 2,
     "target < 2:1": 15,
-    "pullback holds 50% of leg (not gating)": 1,
     "price > VWAP": 3,
     "price > 9 EMA": 8,
     "MACD histogram > 0": 9,
     "pullback index <= 2": 8,
-    "front side of the move (not gating)": 5,
     "stop tighter than spread": 4
    },
    "watch": [
@@ -242,7 +226,6 @@
    "passes": 0,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 2,
     "support confluence >= 2": 3,
     "target < 2:1": 1,
     "pullback_volume < impulse_volume": 2,
@@ -250,8 +233,7 @@
     "price > 9 EMA": 2,
     "MACD histogram > 0": 2,
     "stop tighter than spread": 2,
-    "price > VWAP": 2,
-    "front side of the move (not gating)": 1
+    "price > VWAP": 2
    },
    "watch": [
     "RPT"
@@ -288,7 +270,6 @@
    "passes": 1,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 8,
     "support confluence >= 2": 13,
     "price > 9 EMA": 16,
     "MACD histogram > 0": 21,
@@ -296,8 +277,7 @@
     "pullback_volume < impulse_volume": 9,
     "pullback index <= 2": 19,
     "stop tighter than spread": 6,
-    "price > VWAP": 5,
-    "front side of the move (not gating)": 10
+    "price > VWAP": 5
    },
    "watch": [
     "ZCMD",
@@ -324,11 +304,9 @@
     "support confluence >= 2": 13,
     "pullback_volume < impulse_volume": 9,
     "pullback index <= 2": 9,
-    "pullback holds 50% of leg (not gating)": 5,
     "price > VWAP": 19,
     "price > 9 EMA": 10,
     "MACD histogram > 0": 6,
-    "front side of the move (not gating)": 17,
     "stop tighter than spread": 5
    },
    "watch": [
@@ -370,8 +348,6 @@
    "passes": 1,
    "halted": null,
    "rejects": {
-    "front side of the move (not gating)": 39,
-    "pullback holds 50% of leg (not gating)": 14,
     "support confluence >= 2": 17,
     "price > VWAP": 36,
     "MACD histogram > 0": 21,
@@ -447,13 +423,11 @@
    "passes": 2,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 8,
     "support confluence >= 2": 15,
     "price > 9 EMA": 19,
     "MACD histogram > 0": 16,
     "target < 2:1": 21,
     "price > VWAP": 19,
-    "front side of the move (not gating)": 21,
     "stop tighter than spread": 12,
     "pullback_volume < impulse_volume": 7,
     "pullback index <= 2": 9
@@ -506,13 +480,11 @@
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 7,
-    "pullback holds 50% of leg (not gating)": 9,
     "price > VWAP": 19,
     "price > 9 EMA": 11,
     "support confluence >= 2": 9,
     "MACD histogram > 0": 12,
     "target < 2:1": 9,
-    "front side of the move (not gating)": 16,
     "stop tighter than spread": 8,
     "pullback index <= 2": 11
    },
@@ -537,10 +509,8 @@
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 15,
-    "pullback holds 50% of leg (not gating)": 13,
     "support confluence >= 2": 13,
     "target < 2:1": 24,
-    "front side of the move (not gating)": 33,
     "price > VWAP": 30,
     "price > 9 EMA": 11,
     "MACD histogram > 0": 12,
@@ -570,8 +540,6 @@
    "rejects": {
     "support confluence >= 2": 3,
     "target < 2:1": 7,
-    "front side of the move (not gating)": 10,
-    "pullback holds 50% of leg (not gating)": 6,
     "price > VWAP": 11,
     "price > 9 EMA": 4,
     "MACD histogram > 0": 5,
@@ -593,15 +561,13 @@
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 4,
-    "pullback holds 50% of leg (not gating)": 2,
     "target < 2:1": 4,
     "price > VWAP": 3,
     "MACD histogram > 0": 10,
     "stop tighter than spread": 8,
     "support confluence >= 2": 4,
     "pullback index <= 2": 6,
-    "price > 9 EMA": 1,
-    "front side of the move (not gating)": 2
+    "price > 9 EMA": 1
    },
    "watch": [
     "CUPR",

@@ -328,13 +328,14 @@ def evaluate(pb, bar, ind, flipped):
     pb_v = sum(x['v'] for x in pb['bars']) / max(1, len(pb['bars']))
     checks['pullback_volume < impulse_volume'] = (pb_v < imp_v, f'{pb_v:,.0f} vs {imp_v:,.0f}')
     checks['pullback index <= 2'] = (pb['index'] <= MAX_PULLBACK_INDEX, f"#{pb['index']}")
-    checks['pullback 2-4 candles'] = (2 <= len(pb['bars']) <= 4, f"{len(pb['bars'])} bars")
 
     # "a strong push up (the impulse)" - one green bar is not a push. Without
     # this the tracker calls any two-bar wiggle a setup and fires ~28 times a
     # day per watchlist where a human sees a handful.
-    checks['front side of the move'] = (pb['front_side'],
-                                        f"leg high {pb['leg_high']:.2f}")
+    # 'Front side of the move' is not a separate test: iIC62xnblLc 26:20
+    # defines it AS the MACD condition - "only trade when MACD is positive
+    # and above the signal line (front side of move)". Checking it
+    # separately duplicated a gate condition with an invented threshold.
 
     # "first pullback should hold at least 50% of initial leg up"
     # (BUCPPCXOHbs 00:50:34). A dip that gives back most of the push is a
@@ -342,18 +343,6 @@ def evaluate(pb, bar, ind, flipped):
     # Structure is read from candle BODIES. The wick extreme is what the
     # stop is placed under; it is not where the dip 'stopped'. Measuring
     # the retracement from the wick low made this reject 76% of setups.
-    pole = pb['pole']
-    body_low = pb['body_low']
-    held = ((body_low - pb['leg_low']) / pole) if pole > 0 else 0
-    # The 50% rule is stated about the FIRST pullback after the catalyst
-    # ("After breaking news catalyst, first pullback should hold at least 50%
-    # of initial leg up", BUCPPCXOHbs 00:50:34). Applying it to every pullback
-    # in the session over-extends a narrower claim.
-    if pb['index'] <= 1:
-        checks['pullback holds 50% of leg'] = (pole > 0 and held >= 0.5,
-                                               f'{held*100:.0f}% of a {pole:.2f} leg')
-    else:
-        checks['pullback holds 50% of leg'] = (True, 'n/a after 1st pullback')
 
     reasons = confluence(pb['body_low'], ind, flipped,
                          spread=spread_estimate(ind))
