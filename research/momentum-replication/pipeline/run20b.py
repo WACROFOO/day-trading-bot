@@ -79,6 +79,7 @@ def build(stats, daily, shares_out):
             rvol5 = v5 / (avg * 5 / 390)
             if rvol5 < 5.0:
                 continue
+
             byday[day].append(dict(sym=sym, day=day, gap_pct=round(gap, 2),
                                    open_px=r['o'], rvol5=round(rvol5, 1)))
 
@@ -105,13 +106,38 @@ def main():
         s = ', '.join(f"{r['sym']}(+{r['gap_pct']:.0f}%,{r['rvol5']:.0f}x)"
                       for r in rows)
         print(f'  {day}  {s or "-- no qualifying names --"}')
-    json.dump(lists, open(os.path.join(OUT, 'watchlists20.json'), 'w'), indent=1)
 
     bars = {}
     with ThreadPoolExecutor(max_workers=5) as ex:
         for sym, d in ex.map(fetch_symbol, need):
             bars[sym] = d
-    print(f'\nfetched {len(bars)} symbols\n', flush=True)
+    # rate_of_change_min > 0 - "% gain per minute, rising" (PARAMETERS.md sec.1).
+    # The corpus gives the SIGN but no magnitude, so this is expressed without a
+    # threshold: at 09:35, is the stock higher than it opened? A name that has
+    # broken from its pre-market high is falling by then, not rising, which is
+    # what "faded from pre-market high" (PARAMETERS.md:31, a documented REJECT)
+    # describes. Uses only 09:30-09:34 bars, so it is known when trading starts.
+    dropped = 0
+    for day in list(lists):
+        keep = []
+        for r in lists[day]:
+            d = bars.get(r['sym'], {}).get(day)
+            first5 = [b for b in (d or {}).get('session', [])
+                      if b['dt'].time() < dt.time(9, 35)]
+            if not first5:
+                continue
+            if first5[-1]['c'] > first5[0]['o']:      # rising
+                keep.append(r)
+            else:
+                dropped += 1
+        lists[day] = keep
+    print(f'\nfetched {len(bars)} symbols; rate-of-change <= 0 dropped '
+          f'{dropped} name-days\n', flush=True)
+
+    # Persist AFTER every selection rule has been applied, so the audit and
+    # the diagnostics replay exactly the watchlist the run traded.
+    json.dump(lists, open(os.path.join(OUT, 'watchlists20.json'), 'w'), indent=1)
+
 
     for mt in limits:
         results = []

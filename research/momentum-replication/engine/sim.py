@@ -57,6 +57,7 @@ CONFLUENCE_MIN = 2
 # They are still computed and reported, so the evidence stays visible, but they
 # no longer gate.
 GATE_CONDITIONS = {
+    'cumulative volume >= 500k',
     'pullback_volume < impulse_volume',
     'pullback index <= 2',
     'support confluence >= 2',
@@ -72,6 +73,12 @@ MAX_PULLBACK_INDEX = 2
 # chart, where a 1-minute pause IS a 2-3 candle pullback. Exposed so the
 # assumption can be tested rather than baked in.
 MIN_DIP_BARS = 2
+
+# volume_min >= 500,000 shares CUMULATIVE (PARAMETERS.md sec.1, n=102).
+# Cumulative over the session, so it is checked at the setup rather than in the
+# first five minutes - applying it to a 5-minute window excluded TCX on
+# 2026-07-31, which then ran +36%.
+MIN_CUM_VOLUME = 500_000
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
 SESSION_OPEN = dt.time(9, 30)
@@ -100,6 +107,7 @@ class Indicators:
     def update(self, bar, in_session):
         c = bar['c']
         self.closes.append(c)
+        bar = dict(bar, in_session=in_session)
         self.bars.append(bar)
         self.ema9 = self._ema(self.ema9, c, 9)
         self.ema20 = self._ema(self.ema20, c, 20)
@@ -327,6 +335,8 @@ def evaluate(pb, bar, ind, flipped):
     imp_v = pb['impulse'][0]['v'] if pb['impulse'] else 0
     pb_v = sum(x['v'] for x in pb['bars']) / max(1, len(pb['bars']))
     checks['pullback_volume < impulse_volume'] = (pb_v < imp_v, f'{pb_v:,.0f} vs {imp_v:,.0f}')
+    cum = sum(b['v'] for b in ind.bars if b.get('in_session'))
+    checks['cumulative volume >= 500k'] = (cum >= MIN_CUM_VOLUME, f'{cum:,.0f}')
     checks['pullback index <= 2'] = (pb['index'] <= MAX_PULLBACK_INDEX, f"#{pb['index']}")
 
     # "a strong push up (the impulse)" - one green bar is not a push. Without

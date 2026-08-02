@@ -112,6 +112,7 @@
     "pullback_volume < impulse_volume": 7,
     "price > VWAP": 19,
     "price > 9 EMA": 11,
+    "cumulative volume >= 500k": 2,
     "support confluence >= 2": 9,
     "MACD histogram > 0": 12,
     "target < 2:1": 9,
@@ -135,6 +136,7 @@
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 15,
+    "cumulative volume >= 500k": 6,
     "support confluence >= 2": 13,
     "target < 2:1": 24,
     "price > VWAP": 30,
@@ -185,6 +187,7 @@
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 4,
+    "cumulative volume >= 500k": 13,
     "target < 2:1": 4,
     "price > VWAP": 3,
     "MACD histogram > 0": 10,

@@ -115,6 +115,9 @@ def analyse(sym):
                 prior_avg_vol=int(avg),
                 open_px=round(first5[0][0], 4) if first5 else None,
                 v5=int(v5),
+                # last price of the 5-minute confirmation window,
+                # so rate-of-change can be measured at 09:35
+                px5=round(first5[-1][3], 4) if first5 else None,
                 # like-for-like: 5 minutes vs the average 5-minute slice of a
                 # 390-minute session
                 rvol5=round(v5 / (avg * 5 / 390), 2) if avg else 0,
