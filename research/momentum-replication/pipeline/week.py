@@ -40,8 +40,31 @@ def main():
         for sym, d in ex.map(fetch_symbol, need):
             bars[sym] = d
 
+    # Same rate_of_change > 0 confirmation run20b applies after fetching
+    # (PARAMETERS.md sec.1). Without it this runner silently traded a wider
+    # watchlist than the pipeline, and reported 3 trades where the audited
+    # 17-day run reported 2.
+    # ROC_ONCE=0 disables this. §1 is the UNIVERSE FILTER - a scanner
+    # criterion, and a scanner runs continuously through the session rather
+    # than once at 09:35. Applying it as a one-shot exclusion kills a name for
+    # the whole day because it was soft in its first five minutes, which is a
+    # different rule from the one stated. Both readings are run below.
+    dropped = 0
+    for day in ([] if os.environ.get('ROC_ONCE') == '0' else list(lists)):
+        keep = []
+        for r in lists[day]:
+            d = bars.get(r['sym'], {}).get(day)
+            first5 = [b for b in (d or {}).get('session', [])
+                      if b['dt'].time() < dt.time(9, 35)]
+            if first5 and first5[-1]['c'] > first5[0]['o']:
+                keep.append(r)
+            else:
+                dropped += 1
+        lists[day] = keep
+
     print(f'=== week of 2026-07-27, max {max_trades} trades/day, '
-          f'${ACCOUNT:,.0f} account ===\n')
+          f'${ACCOUNT:,.0f} account ===')
+    print(f'(rate-of-change <= 0 dropped {dropped} name-days)\n')
     print(f'{"day":<12}{"watchlist":<44}{"setups":>7}{"pass":>5}{"trades":>7}{"P&L":>10}')
     results, equity = [], 0.0
     for day in WEEK:

@@ -67,7 +67,8 @@
     "price > VWAP": 6,
     "stop tighter than spread": 4,
     "pullback_volume < impulse_volume": 2,
-    "pullback index <= 2": 1
+    "pullback index <= 2": 1,
+    "not resumed lower after a halt": 2
    },
    "watch": [
     "EDBL",
@@ -105,15 +106,15 @@
      "reason": "stop hit"
     }
    ],
-   "setups": 32,
+   "setups": 31,
    "passes": 1,
    "halted": null,
    "rejects": {
-    "pullback_volume < impulse_volume": 7,
+    "pullback_volume < impulse_volume": 6,
     "price > VWAP": 19,
     "price > 9 EMA": 11,
     "cumulative volume >= 500k": 2,
-    "support confluence >= 2": 9,
+    "support confluence >= 2": 8,
     "MACD histogram > 0": 12,
     "target < 2:1": 9,
     "stop tighter than spread": 8,
@@ -131,19 +132,20 @@
    "day": "2026-07-29",
    "pnl": 0.0,
    "trades": [],
-   "setups": 46,
+   "setups": 43,
    "passes": 0,
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 15,
-    "cumulative volume >= 500k": 6,
-    "support confluence >= 2": 13,
+    "cumulative volume >= 500k": 4,
+    "support confluence >= 2": 12,
     "target < 2:1": 24,
-    "price > VWAP": 30,
+    "price > VWAP": 28,
     "price > 9 EMA": 11,
-    "MACD histogram > 0": 12,
-    "stop tighter than spread": 11,
-    "pullback index <= 2": 7
+    "not resumed lower after a halt": 13,
+    "MACD histogram > 0": 11,
+    "stop tighter than spread": 9,
+    "pullback index <= 2": 6
    },
    "watch": [
     "NCRA",
@@ -182,19 +184,20 @@
    "day": "2026-07-31",
    "pnl": 0.0,
    "trades": [],
-   "setups": 15,
+   "setups": 14,
    "passes": 0,
    "halted": null,
    "rejects": {
     "pullback_volume < impulse_volume": 4,
-    "cumulative volume >= 500k": 13,
+    "cumulative volume >= 500k": 12,
     "target < 2:1": 4,
     "price > VWAP": 3,
-    "MACD histogram > 0": 10,
-    "stop tighter than spread": 8,
+    "MACD histogram > 0": 9,
+    "stop tighter than spread": 7,
     "support confluence >= 2": 4,
     "pullback index <= 2": 6,
-    "price > 9 EMA": 1
+    "price > 9 EMA": 1,
+    "not resumed lower after a halt": 2
    },
    "watch": [
     "CUPR",

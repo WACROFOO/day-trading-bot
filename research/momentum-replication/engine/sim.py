@@ -58,6 +58,7 @@ CONFLUENCE_MIN = 2
 # no longer gate.
 GATE_CONDITIONS = {
     'cumulative volume >= 500k',
+    'not resumed lower after a halt',
     'pullback_volume < impulse_volume',
     'pullback index <= 2',
     'support confluence >= 2',
@@ -79,6 +80,12 @@ MIN_DIP_BARS = 2
 # first five minutes - applying it to a 5-minute window excluded TCX on
 # 2026-07-31, which then ran +36%.
 MIN_CUM_VOLUME = 500_000
+
+# A halt is invisible in OHLCV except as a gap in an otherwise continuous
+# minute series. An LULD/volatility halt lasts a 5-minute minimum
+# (FN-uqfbEVKw 01:24), so 5 consecutive missing minutes inside regular hours is
+# the detection threshold - the shortest gap a real halt can produce.
+HALT_GAP_MIN = 5
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
 SESSION_OPEN = dt.time(9, 30)
@@ -210,10 +217,23 @@ class PullbackTracker:
         self.pullback = []
         self.index = 0
         self.armed = False
+        self.halted_down = getattr(self, 'halted_down', False)
 
     def update(self, bar, prev, ind):
         if prev is None or self.leg_low is None:
             self._reset(bar)
+            return None
+
+        # A halt breaks the structure. Price does not travel from the pre-halt
+        # bar to the resumption bar - it is re-auctioned, and the corpus treats
+        # the resumption as its own setup ("dip and rip", 2kMgCjsmFzY 02:06).
+        # Carrying leg_low, leg_high and the pullback count across the gap
+        # invents a move that never traded, and makes the resumption print look
+        # like an ordinary bar-to-bar advance.
+        gap = (bar['dt'] - prev['dt']).total_seconds() / 60.0
+        if gap >= HALT_GAP_MIN:
+            self._reset(bar)
+            self.halted_down = bar['c'] < prev['c']
             return None
 
         # Losing VWAP resets the leg only if it also breaks the leg low. The
@@ -267,7 +287,7 @@ class PullbackTracker:
             self.index += 1
             out = dict(bars=list(self.pullback), low=pb_low,
                        body_low=min(min(x['o'], x['c']) for x in self.pullback),
-                       index=self.index,
+                       index=self.index, halted_down=self.halted_down,
                        trigger_level=prev['h'], leg_low=self.leg_low,
                        leg_high=self.leg_high, pole=pole, front_side=front,
                        impulse=[dict(h=self.leg_high, l=self.leg_low,
@@ -337,6 +357,9 @@ def evaluate(pb, bar, ind, flipped):
     checks['pullback_volume < impulse_volume'] = (pb_v < imp_v, f'{pb_v:,.0f} vs {imp_v:,.0f}')
     cum = sum(b['v'] for b in ind.bars if b.get('in_session'))
     checks['cumulative volume >= 500k'] = (cum >= MIN_CUM_VOLUME, f'{cum:,.0f}')
+    # "Stock halted going down typically resumes lower" (FN-uqfbEVKw 19:03).
+    checks['not resumed lower after a halt'] = (not pb.get('halted_down'),
+                                                'resumed lower' if pb.get('halted_down') else 'ok')
     checks['pullback index <= 2'] = (pb['index'] <= MAX_PULLBACK_INDEX, f"#{pb['index']}")
 
     # "a strong push up (the impulse)" - one green bar is not a push. Without
