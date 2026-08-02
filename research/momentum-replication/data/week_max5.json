@@ -1,0 +1,202 @@
+{
+ "week": [
+  "2026-07-27",
+  "2026-07-28",
+  "2026-07-29",
+  "2026-07-30",
+  "2026-07-31"
+ ],
+ "max_trades": 5,
+ "total": 49.97,
+ "results": [
+  {
+   "day": "2026-07-27",
+   "pnl": 114.69,
+   "trades": [
+    {
+     "sym": "AGPU",
+     "entry": 7.459899921417236,
+     "stop": 7.459899921417236,
+     "risk_ps": 0.11989976882934528,
+     "shares": 594,
+     "full": 1187,
+     "pnl": 314.6686799621587,
+     "scaled": 1,
+     "entry_time": "10:04",
+     "t1": 7.730000019073486,
+     "t2": 8.000100116729737,
+     "avg_rng": 0.14494495391845702,
+     "pb_bars": 2,
+     "spread_est": 0.1,
+     "impulse_v": 7084.909090909091,
+     "window": "prime",
+     "exit": 7.71999979019165,
+     "exit_time": "10:16",
+     "reason": "big red candle on heavy volume, trailing stop"
+    },
+    {
+     "sym": "BIYA",
+     "entry": 3.9200000953674317,
+     "stop": 3.740000009536743,
+     "risk_ps": 0.1800000858306885,
+     "shares": 1111,
+     "full": 1111,
+     "pnl": -199.98009535789492,
+     "scaled": 0,
+     "entry_time": "10:24",
+     "t1": 4.509999990463257,
+     "t2": 5.0999998855590825,
+     "avg_rng": 0.22296006679534913,
+     "pb_bars": 2,
+     "spread_est": 0.09,
+     "impulse_v": 635879.3333333334,
+     "window": "prime",
+     "exit": 3.740000009536743,
+     "exit_time": "10:26",
+     "reason": "stop hit"
+    }
+   ],
+   "setups": 37,
+   "passes": 2,
+   "halted": null,
+   "rejects": {
+    "support confluence >= 2": 15,
+    "price > 9 EMA": 19,
+    "MACD histogram > 0": 16,
+    "target < 2:1": 21,
+    "price > VWAP": 19,
+    "stop tighter than spread": 12,
+    "pullback_volume < impulse_volume": 7,
+    "pullback index <= 2": 9
+   },
+   "watch": [
+    "EDBL",
+    "LGHL",
+    "DFNS",
+    "BIYA",
+    "WYHG",
+    "AGPU",
+    "PLRZ"
+   ]
+  },
+  {
+   "day": "2026-07-28",
+   "pnl": -64.72,
+   "trades": [
+    {
+     "sym": "EHGO",
+     "entry": 2.4498999309539795,
+     "stop": 2.4100000858306885,
+     "risk_ps": 0.03989984512329103,
+     "shares": 1622,
+     "full": 1622,
+     "pnl": -64.71754878997805,
+     "scaled": 0,
+     "entry_time": "11:08",
+     "t1": 2.56000018119812,
+     "t2": 2.6701004314422607,
+     "avg_rng": 0.03901000022888183,
+     "pb_bars": 2,
+     "spread_est": 0.03,
+     "impulse_v": 20028.666666666668,
+     "window": "late",
+     "exit": 2.4100000858306885,
+     "exit_time": "11:11",
+     "reason": "stop hit"
+    }
+   ],
+   "setups": 32,
+   "passes": 1,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 7,
+    "price > VWAP": 19,
+    "price > 9 EMA": 11,
+    "support confluence >= 2": 9,
+    "MACD histogram > 0": 12,
+    "target < 2:1": 9,
+    "stop tighter than spread": 8,
+    "pullback index <= 2": 11
+   },
+   "watch": [
+    "FIRY",
+    "INLF",
+    "BIYA",
+    "PMN",
+    "EHGO"
+   ]
+  },
+  {
+   "day": "2026-07-29",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 46,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 15,
+    "support confluence >= 2": 13,
+    "target < 2:1": 24,
+    "price > VWAP": 30,
+    "price > 9 EMA": 11,
+    "MACD histogram > 0": 12,
+    "stop tighter than spread": 11,
+    "pullback index <= 2": 7
+   },
+   "watch": [
+    "NCRA",
+    "AMIX",
+    "VIVK",
+    "GMM",
+    "STFS",
+    "SKYQ",
+    "SPRC",
+    "ANIK",
+    "PYPD"
+   ]
+  },
+  {
+   "day": "2026-07-30",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 13,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "support confluence >= 2": 3,
+    "target < 2:1": 7,
+    "price > VWAP": 11,
+    "price > 9 EMA": 4,
+    "MACD histogram > 0": 5,
+    "stop tighter than spread": 2,
+    "pullback_volume < impulse_volume": 2
+   },
+   "watch": [
+    "NUWE",
+    "STAK"
+   ]
+  },
+  {
+   "day": "2026-07-31",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 15,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 4,
+    "target < 2:1": 4,
+    "price > VWAP": 3,
+    "MACD histogram > 0": 10,
+    "stop tighter than spread": 8,
+    "support confluence >= 2": 4,
+    "pullback index <= 2": 6,
+    "price > 9 EMA": 1
+   },
+   "watch": [
+    "CUPR",
+    "TCX"
+   ]
+  }
+ ]
+}
