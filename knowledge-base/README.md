@@ -6,8 +6,19 @@ Reference material for building the day trading bot: traders studied, strategies
 
 ```
 sources/      Profiles of traders/educators whose methods we study
-strategies/   Mechanical rule sets extracted from those sources
+strategies/   The CANONICAL strategy documents (the only copy — see its README)
+transcripts/  Raw captions for the 257-video teaching shortlist
+summaries/    Per-video rule/threshold summaries (the claims DB is built from these)
+recaps/       Daily recap transcripts, June–July 2026, real upload dates (the calibration set)
+streams/      Live-stream transcripts, 2021–2023 (~1.3M words — decisions before the outcome)
+data/         Channel indexes, digests, and derived reference files
 ```
+
+The three transcript registers differ in what they can prove: teaching videos
+explain setups after the fact, recaps narrate a finished day, and only the
+live streams record decisions before the outcome is known. Claims about *how
+he trades* need the streams; claims about *what he traded on a given 2026
+day* need the recaps.
 
 ## How to use this
 

@@ -32,11 +32,14 @@ The strategy is defined by these documents, in this order of authority:
 
 | File | What it is |
 |---|---|
-| `strategy/PARAMETERS.md` | Numeric specification, with `n=` evidence counts per rule |
-| `strategy/PLAYBOOK.md` | The same rules as an execution sequence |
-| `strategy/PLAYBOOK_V2.md` | Generated from the evidence database, with citations |
-| `strategy/STRATEGY_V2.md` | Generated parameter distributions, disputed values flagged |
-| `strategy/small-cap-momentum-bull-flag.md` | The pattern in isolation |
+| `../../knowledge-base/strategies/PARAMETERS.md` | Numeric specification, with `n=` evidence counts per rule — §13 lists the misreading traps |
+| `../../knowledge-base/strategies/PLAYBOOK.md` | The same rules as an execution sequence |
+| `../../knowledge-base/strategies/PLAYBOOK_V2.md` | Generated from the evidence database, with citations |
+| `../../knowledge-base/strategies/STRATEGY_V2.md` | Generated parameter distributions, disputed values flagged |
+| `../../knowledge-base/strategies/small-cap-momentum-bull-flag.md` | The pattern in isolation |
+
+(`strategy/` here used to hold copies; they drifted from the originals and were
+removed — see `strategy/README.md`.)
 
 Behind those sits the primary evidence: 257 video transcripts and per-video
 summaries under `../../knowledge-base/`, indexed into a queryable database.
@@ -142,7 +145,7 @@ wrong, not because they are the only defensible choices.
 - `../../knowledge-base/` — 257 transcripts, per-video summaries, rules digest
 - `../../scripts/pipeline/12_build_claims_db.py` — builds the queryable evidence database
 - `../../scripts/search.py` — queries it; `--explain` describes the two layers
-- `../../simulations/` — the earlier single-day and 17-day write-ups this package supersedes
+- `../../archive/simulations/` — the earlier single-day and 17-day write-ups this package supersedes
 
-The `simulations/` reports are kept for the record but contain conclusions that
+The archived reports are kept for the record but contain conclusions that
 were later withdrawn; `HISTORY.md` here lists which ones and why.
