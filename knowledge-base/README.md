@@ -20,6 +20,14 @@ live streams record decisions before the outcome is known. Claims about *how
 he trades* need the streams; claims about *what he traded on a given 2026
 day* need the recaps.
 
+## Start here
+
+**`STUDY-PLAN.md`** — the full curriculum: everything Ross Cameron teaches,
+ordered by dependency rather than by his publishing order, with the canonical
+video for each module and a gate to pass before moving on. Built from the
+concept-frequency map in `data/rules_digest.md`, so it covers what he actually
+emphasises.
+
 ## How to use this
 
 Every strategy document is written as a set of mechanical rules so it can be translated into code and backtested. **Documenting a strategy here does not mean it works.** Each document carries a "Verification Status" section stating what evidence exists.
