@@ -246,6 +246,39 @@ a gate condition we currently evaluate from price action after the fact.
 
 ---
 
+## 9. What he says at the moment of entry is mostly about the **tape**
+
+With 1.1M words there are enough live entries to ask what he mentions *while
+buying*. 1,405 utterances match "bought the dip / buying the dip / added at /
+adding at / I'm a buyer / took the entry". Against a 4,000-sample random
+baseline from the same text, so the numbers are enrichment and not word
+frequency:
+
+| said within ~120 chars of an entry | near entry | random text | enrichment |
+|---|---:|---:|---:|
+| **Level 2 / the tape** (bid, ask, seller) | **17%** | 7% | **2.4×** |
+| "curl" / "curling up" | 7% | 2% | 4.1× |
+| 1-minute chart | 8% | 3% | 2.8× |
+| 10-second chart | 2% | 1% | 4.0× |
+
+Two things follow.
+
+**He does not verbalise the gate.** No condition appears near even a fifth of
+entries. Most are terse — *"added at 68"*, *"bought the dip"*. The eight
+booleans our engine requires simultaneously are not what he is checking out
+loud in the moment.
+
+**The most frequent companion of a live entry is the order book** — and it is
+the one input the engine structurally does not have. `PARAMETERS.md` §3 lists
+`tape_green` and `no_seller_wall` as gate conditions, and `sim.py` records both
+as *unverifiable* because OHLCV contains no depth. So the thing he cites most
+at the moment of entry is the thing we cannot see at all.
+
+That is a second, independent reason the timing is off, and it points at the
+same purchase as §1: sub-minute bars and Level 2 come from the same feed.
+
+---
+
 ## What to change, in order
 
 | | change | cost | confidence |
@@ -255,7 +288,7 @@ a gate condition we currently evaluate from price action after the fact.
 | 3 | keep float 20M | none | high — §6 |
 | 4 | stop treating low trade frequency as a bug | none | high — §7 |
 | 5 | model re-entry: allow adding back into a name after a scale-out, and count *positions* not *entries* against `max_trades` | substantial | high — §2 |
-| 6 | sub-minute bars for the entry trigger | paid data | **this is the timing answer** — §1 |
+| 6 | sub-minute bars for the entry trigger, and Level 2 depth | paid data | **this is the timing answer** — §1 and §9, same feed |
 
 Items 1–4 are free and are done. Together they moved the 17-session run from
 11 trades / −$601.65 to 13 / −$588.90 — which is the point: the free changes
