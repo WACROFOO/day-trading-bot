@@ -3,29 +3,8 @@
  "results": [
   {
    "day": "2026-07-09",
-   "pnl": -160.39,
+   "pnl": 39.6,
    "trades": [
-    {
-     "sym": "RPGL",
-     "entry": 2.3789999675750733,
-     "stop": 2.3399999141693115,
-     "risk_ps": 0.039000053405761737,
-     "shares": 5128,
-     "full": 5128,
-     "pnl": -199.99227386474618,
-     "scaled": 0,
-     "entry_time": "10:05",
-     "t1": 2.5799999237060547,
-     "t2": 2.780999879837036,
-     "avg_rng": 0.04385501146316528,
-     "pb_bars": 2,
-     "spread_est": 0.03,
-     "impulse_v": 43939.181818181816,
-     "window": "prime",
-     "exit": 2.3399999141693115,
-     "exit_time": "10:10",
-     "reason": "stop hit"
-    },
     {
      "sym": "SUNE",
      "entry": 2.5399999809265137,
@@ -36,8 +15,8 @@
      "pnl": 39.60029602050774,
      "scaled": 0,
      "entry_time": "10:29",
-     "t1": 2.8299999237060547,
-     "t2": 3.1199998664855957,
+     "t1": 2.7100000381469727,
+     "t2": 2.8800000953674316,
      "avg_rng": 0.08107998371124267,
      "pb_bars": 2,
      "spread_est": 0.0395,
@@ -48,20 +27,20 @@
      "reason": "MACD negative"
     }
    ],
-   "setups": 14,
-   "passes": 2,
-   "halted": "2 trades taken",
+   "setups": 23,
+   "passes": 1,
+   "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 5,
-    "target < 2:1": 6,
-    "support confluence >= 2": 5,
-    "price > VWAP": 10,
-    "MACD histogram > 0": 3,
-    "pullback index <= 2": 3,
-    "price > 9 EMA": 5,
-    "stop tighter than spread": 4,
-    "front side of the move (not gating)": 6,
-    "pullback_volume < impulse_volume": 1
+    "pullback holds 50% of leg (not gating)": 6,
+    "target < 2:1": 13,
+    "support confluence >= 2": 9,
+    "price > VWAP": 14,
+    "MACD histogram > 0": 7,
+    "pullback index <= 2": 5,
+    "price > 9 EMA": 7,
+    "stop tighter than spread": 5,
+    "front side of the move (not gating)": 14,
+    "pullback_volume < impulse_volume": 5
    },
    "watch": [
     "RPGL",
@@ -69,11 +48,8 @@
     "SUNE"
    ],
    "log": [
-    "10:05 RPGL: BUY 5128 @ 2.38 stop 2.34 ($0.04/sh)",
-    "10:10 RPGL: OUT @ 2.34 (stop hit) $-200 | day $-200",
     "10:29 SUNE: BUY 4000 @ 2.54 stop 2.49 ($0.05/sh)",
-    "10:37 SUNE: OUT @ 2.55 (MACD negative) $+40 | day $-160",
-    "10:37 --- STOP: 2 trades taken ---"
+    "10:37 SUNE: OUT @ 2.55 (MACD negative) $+40 | day $+40"
    ]
   },
   {
@@ -85,7 +61,7 @@
    "halted": null,
    "rejects": {
     "pullback holds 50% of leg (not gating)": 4,
-    "target < 2:1": 2,
+    "target < 2:1": 4,
     "support confluence >= 2": 5,
     "price > VWAP": 9,
     "price > 9 EMA": 6,
@@ -103,64 +79,21 @@
   },
   {
    "day": "2026-07-13",
-   "pnl": -1186.24,
-   "trades": [
-    {
-     "sym": "VEEE",
-     "entry": 16.259999771118164,
-     "stop": 15.100000381469727,
-     "risk_ps": 1.159999389648437,
-     "shares": 172,
-     "full": 172,
-     "pnl": 89.4401574707032,
-     "scaled": 0,
-     "entry_time": "10:37",
-     "t1": 22.839999198913574,
-     "t2": 29.419998626708985,
-     "avg_rng": 1.0853549480438232,
-     "pb_bars": 4,
-     "spread_est": 0.6,
-     "impulse_v": 413408.5,
-     "window": "late",
-     "exit": 16.780000686645508,
-     "exit_time": "10:47",
-     "reason": "big red candle on heavy volume"
-    },
-    {
-     "sym": "EHGO",
-     "entry": 2.2901001167297363,
-     "stop": 2.265000104904175,
-     "risk_ps": 0.02510001182556154,
-     "shares": 7968,
-     "full": 7968,
-     "pnl": -1275.6768182373048,
-     "scaled": 0,
-     "entry_time": "11:25",
-     "t1": 2.359999895095825,
-     "t2": 2.429899673461914,
-     "avg_rng": 0.020604991912841798,
-     "pb_bars": 2,
-     "spread_est": 0.011,
-     "impulse_v": 11523.181818181818,
-     "window": "late",
-     "exit": 2.130000114440918,
-     "exit_time": "11:29",
-     "reason": "hard stop"
-    }
-   ],
-   "setups": 33,
-   "passes": 2,
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 39,
+   "passes": 0,
    "halted": null,
    "rejects": {
-    "pullback holds 50% of leg (not gating)": 7,
-    "support confluence >= 2": 11,
-    "price > VWAP": 6,
-    "price > 9 EMA": 8,
-    "MACD histogram > 0": 15,
+    "pullback holds 50% of leg (not gating)": 8,
+    "support confluence >= 2": 14,
+    "price > VWAP": 7,
+    "price > 9 EMA": 10,
+    "MACD histogram > 0": 18,
     "pullback_volume < impulse_volume": 9,
-    "target < 2:1": 12,
-    "pullback index <= 2": 14,
-    "front side of the move (not gating)": 12,
+    "target < 2:1": 27,
+    "pullback index <= 2": 18,
+    "front side of the move (not gating)": 16,
     "stop tighter than spread": 1
    },
    "watch": [
@@ -171,48 +104,22 @@
     "SKYQ",
     "VSA"
    ],
-   "log": [
-    "10:37 VEEE: BUY 172 @ 16.26 stop 15.10 ($1.16/sh)",
-    "10:47 VEEE: OUT @ 16.78 (big red candle on heavy volume) $+89 | day $+89",
-    "11:25 EHGO: BUY 7968 @ 2.29 stop 2.27 ($0.03/sh)"
-   ]
+   "log": []
   },
   {
    "day": "2026-07-14",
-   "pnl": -199.81,
-   "trades": [
-    {
-     "sym": "SHPH",
-     "entry": 4.940000076293945,
-     "stop": 4.650000095367432,
-     "risk_ps": 0.28999998092651325,
-     "shares": 689,
-     "full": 689,
-     "pnl": -199.80998685836764,
-     "scaled": 0,
-     "entry_time": "09:38",
-     "t1": 5.6299004554748535,
-     "t2": 6.319800834655762,
-     "avg_rng": 0.1503899717712402,
-     "pb_bars": 2,
-     "spread_est": 0.05,
-     "impulse_v": 2978200.25,
-     "window": "prime",
-     "exit": 4.650000095367432,
-     "exit_time": "09:41",
-     "reason": "stop hit"
-    }
-   ],
+   "pnl": 0.0,
+   "trades": [],
    "setups": 15,
-   "passes": 1,
+   "passes": 0,
    "halted": null,
    "rejects": {
+    "target < 2:1": 7,
     "support confluence >= 2": 8,
     "price > 9 EMA": 4,
     "MACD histogram > 0": 5,
     "pullback holds 50% of leg (not gating)": 4,
     "price > VWAP": 10,
-    "target < 2:1": 2,
     "stop tighter than spread": 5,
     "front side of the move (not gating)": 7,
     "pullback_volume < impulse_volume": 5,
@@ -223,46 +130,21 @@
     "LVLU",
     "PLRZ"
    ],
-   "log": [
-    "09:38 SHPH: BUY 689 @ 4.94 stop 4.65 ($0.29/sh)",
-    "09:41 SHPH: OUT @ 4.65 (stop hit) $-200 | day $-200"
-   ]
+   "log": []
   },
   {
    "day": "2026-07-15",
-   "pnl": -199.93,
-   "trades": [
-    {
-     "sym": "ERNA",
-     "entry": 9.577499885559082,
-     "stop": 9.119999885559082,
-     "risk_ps": 0.4574999999999996,
-     "shares": 437,
-     "full": 437,
-     "pnl": -199.9274999999998,
-     "scaled": 0,
-     "entry_time": "09:37",
-     "t1": 10.789999961853027,
-     "t2": 12.002500038146973,
-     "avg_rng": 0.43722005462646474,
-     "pb_bars": 2,
-     "spread_est": 0.17,
-     "impulse_v": 1582979.8333333333,
-     "window": "prime",
-     "exit": 9.119999885559082,
-     "exit_time": "09:38",
-     "reason": "stop hit"
-    }
-   ],
+   "pnl": 0.0,
+   "trades": [],
    "setups": 14,
-   "passes": 1,
+   "passes": 0,
    "halted": null,
    "rejects": {
+    "target < 2:1": 8,
     "pullback_volume < impulse_volume": 1,
     "pullback holds 50% of leg (not gating)": 6,
     "price > 9 EMA": 7,
     "MACD histogram > 0": 4,
-    "target < 2:1": 1,
     "front side of the move (not gating)": 10,
     "support confluence >= 2": 6,
     "price > VWAP": 11,
@@ -272,45 +154,20 @@
     "ERNA",
     "TRT"
    ],
-   "log": [
-    "09:37 ERNA: BUY 437 @ 9.58 stop 9.12 ($0.46/sh)",
-    "09:38 ERNA: OUT @ 9.12 (stop hit) $-200 | day $-200"
-   ]
+   "log": []
   },
   {
    "day": "2026-07-16",
-   "pnl": 18.18,
-   "trades": [
-    {
-     "sym": "ATPC",
-     "entry": 3.5599999618530274,
-     "stop": 3.450000047683716,
-     "risk_ps": 0.10999991416931154,
-     "shares": 1818,
-     "full": 1818,
-     "pnl": 18.179947986602752,
-     "scaled": 0,
-     "entry_time": "11:11",
-     "t1": 3.7899999618530273,
-     "t2": 4.019999961853028,
-     "avg_rng": 0.0669100284576416,
-     "pb_bars": 3,
-     "spread_est": 0.0251,
-     "impulse_v": 47799.916666666664,
-     "window": "late",
-     "exit": 3.569999933242798,
-     "exit_time": "11:13",
-     "reason": "MACD negative"
-    }
-   ],
+   "pnl": 0.0,
+   "trades": [],
    "setups": 34,
-   "passes": 1,
+   "passes": 0,
    "halted": null,
    "rejects": {
     "price > VWAP": 13,
     "price > 9 EMA": 10,
     "MACD histogram > 0": 13,
-    "target < 2:1": 7,
+    "target < 2:1": 18,
     "pullback_volume < impulse_volume": 5,
     "pullback holds 50% of leg (not gating)": 6,
     "support confluence >= 2": 11,
@@ -324,10 +181,7 @@
     "DXST",
     "EHGO"
    ],
-   "log": [
-    "11:11 ATPC: BUY 1818 @ 3.56 stop 3.45 ($0.11/sh)",
-    "11:13 ATPC: OUT @ 3.57 (MACD negative) $+18 | day $+18"
-   ]
+   "log": []
   },
   {
    "day": "2026-07-17",
@@ -338,10 +192,10 @@
    "halted": null,
    "rejects": {
     "price > 9 EMA": 5,
+    "target < 2:1": 5,
     "pullback_volume < impulse_volume": 3,
     "pullback index <= 2": 5,
     "support confluence >= 2": 2,
-    "target < 2:1": 4,
     "MACD histogram > 0": 5,
     "front side of the move (not gating)": 2,
     "price > VWAP": 2,
@@ -364,11 +218,11 @@
    "rejects": {
     "pullback_volume < impulse_volume": 8,
     "support confluence >= 2": 2,
+    "target < 2:1": 15,
     "pullback holds 50% of leg (not gating)": 1,
     "price > VWAP": 3,
     "price > 9 EMA": 8,
     "MACD histogram > 0": 9,
-    "target < 2:1": 6,
     "pullback index <= 2": 8,
     "front side of the move (not gating)": 5,
     "stop tighter than spread": 4
@@ -406,41 +260,20 @@
   },
   {
    "day": "2026-07-22",
-   "pnl": 955.52,
+   "pnl": 833.28,
    "trades": [
-    {
-     "sym": "INLF",
-     "entry": 3.8694999408721924,
-     "stop": 3.7200000286102295,
-     "risk_ps": 0.1494999122619629,
-     "shares": 1337,
-     "full": 1337,
-     "pnl": -92.92148469924929,
-     "scaled": 0,
-     "entry_time": "11:04",
-     "t1": 4.859899997711182,
-     "t2": 5.850300054550171,
-     "avg_rng": 0.1763349652290344,
-     "pb_bars": 2,
-     "spread_est": 0.1295,
-     "impulse_v": 129976.58333333333,
-     "window": "late",
-     "exit": 3.799999952316284,
-     "exit_time": "11:15",
-     "reason": "MACD negative"
-    },
     {
      "sym": "ADVB",
      "entry": 10.379999656677246,
-     "stop": 10.050100326538086,
+     "stop": 10.379999656677246,
      "risk_ps": 0.32989933013915973,
-     "shares": 606,
+     "shares": 303,
      "full": 606,
-     "pnl": 1048.4406822967533,
-     "scaled": 0,
+     "pnl": 833.2803295898441,
+     "scaled": 1,
      "entry_time": "11:22",
-     "t1": 13.170000076293945,
-     "t2": 15.960000495910645,
+     "t1": 11.399999618530273,
+     "t2": 12.419999580383301,
      "avg_rng": 0.3614248752593994,
      "pb_bars": 2,
      "spread_est": 0.21,
@@ -451,20 +284,20 @@
      "reason": "hard stop"
     }
    ],
-   "setups": 39,
-   "passes": 2,
+   "setups": 41,
+   "passes": 1,
    "halted": null,
    "rejects": {
     "pullback holds 50% of leg (not gating)": 8,
-    "support confluence >= 2": 11,
-    "price > 9 EMA": 14,
+    "support confluence >= 2": 13,
+    "price > 9 EMA": 16,
     "MACD histogram > 0": 21,
-    "target < 2:1": 10,
-    "pullback_volume < impulse_volume": 8,
-    "pullback index <= 2": 17,
-    "stop tighter than spread": 5,
+    "target < 2:1": 21,
+    "pullback_volume < impulse_volume": 9,
+    "pullback index <= 2": 19,
+    "stop tighter than spread": 6,
     "price > VWAP": 5,
-    "front side of the move (not gating)": 8
+    "front side of the move (not gating)": 10
    },
    "watch": [
     "ZCMD",
@@ -475,70 +308,28 @@
     "CRIS"
    ],
    "log": [
-    "11:04 INLF: BUY 1337 @ 3.87 stop 3.72 ($0.15/sh)",
-    "11:15 INLF: OUT @ 3.80 (MACD negative) $-93 | day $-93",
-    "11:22 ADVB: BUY 606 @ 10.38 stop 10.05 ($0.33/sh)"
+    "11:22 ADVB: BUY 606 @ 10.38 stop 10.05 ($0.33/sh)",
+    "11:25 ADVB: T1 11.40 hit, sold 303, stop to breakeven"
    ]
   },
   {
    "day": "2026-07-23",
-   "pnl": -29.89,
-   "trades": [
-    {
-     "sym": "NEUP",
-     "entry": 3.7799999713897705,
-     "stop": 3.7799999713897705,
-     "risk_ps": 0.029999971389770508,
-     "shares": 891,
-     "full": 1782,
-     "pnl": 169.73530626296997,
-     "scaled": 1,
-     "entry_time": "09:40",
-     "t1": 3.880499839782715,
-     "t2": 3.980999708175659,
-     "avg_rng": 0.03971998163223267,
-     "pb_bars": 4,
-     "spread_est": 0.019,
-     "impulse_v": 427484.5,
-     "window": "prime",
-     "exit": 3.869999885559082,
-     "exit_time": "09:51",
-     "reason": "trailing stop"
-    },
-    {
-     "sym": "ADVB",
-     "entry": 19.23999931335449,
-     "stop": 18.570100784301758,
-     "risk_ps": 0.669898529052734,
-     "shares": 298,
-     "full": 298,
-     "pnl": -199.6297616577147,
-     "scaled": 0,
-     "entry_time": "10:07",
-     "t1": 21.390100479125977,
-     "t2": 23.54020164489746,
-     "avg_rng": 0.8880497932434082,
-     "pb_bars": 2,
-     "spread_est": 0.604,
-     "impulse_v": 115317.63636363637,
-     "window": "prime",
-     "exit": 18.570100784301758,
-     "exit_time": "10:08",
-     "reason": "stop hit"
-    }
-   ],
-   "setups": 8,
-   "passes": 2,
-   "halted": "2 trades taken",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 34,
+   "passes": 0,
+   "halted": null,
    "rejects": {
-    "pullback index <= 2": 3,
-    "support confluence >= 2": 2,
-    "target < 2:1": 3,
-    "pullback_volume < impulse_volume": 2,
-    "front side of the move (not gating)": 2,
-    "price > VWAP": 2,
-    "stop tighter than spread": 1,
-    "MACD histogram > 0": 1
+    "target < 2:1": 25,
+    "support confluence >= 2": 13,
+    "pullback_volume < impulse_volume": 9,
+    "pullback index <= 2": 9,
+    "pullback holds 50% of leg (not gating)": 5,
+    "price > VWAP": 19,
+    "price > 9 EMA": 10,
+    "MACD histogram > 0": 6,
+    "front side of the move (not gating)": 17,
+    "stop tighter than spread": 5
    },
    "watch": [
     "EHGO",
@@ -547,74 +338,48 @@
     "NEUP",
     "SKYQ"
    ],
-   "log": [
-    "09:40 NEUP: BUY 1782 @ 3.78 stop 3.75 ($0.03/sh)",
-    "09:45 NEUP: T1 3.88 hit, sold 891, stop to breakeven",
-    "09:51 NEUP: OUT @ 3.87 (trailing stop) $+170 | day $+170",
-    "10:07 ADVB: BUY 298 @ 19.24 stop 18.57 ($0.67/sh)",
-    "10:08 ADVB: OUT @ 18.57 (stop hit) $-200 | day $-30",
-    "10:08 --- STOP: 2 trades taken ---"
-   ]
+   "log": []
   },
   {
    "day": "2026-07-24",
-   "pnl": -178.54,
+   "pnl": -104.9,
    "trades": [
     {
-     "sym": "NDLS",
-     "entry": 15.870000381469726,
-     "stop": 15.40410041809082,
-     "risk_ps": 0.4658999633789058,
-     "shares": 429,
-     "full": 429,
-     "pnl": 21.449869079590027,
-     "scaled": 0,
-     "entry_time": "09:49",
-     "t1": 17.004000663757324,
-     "t2": 18.138000946044922,
-     "avg_rng": 0.4171748275756836,
-     "pb_bars": 2,
-     "spread_est": 0.22,
-     "impulse_v": 2703.0,
-     "window": "prime",
-     "exit": 15.920000076293945,
-     "exit_time": "09:56",
-     "reason": "MACD negative"
-    },
-    {
      "sym": "WLDS",
-     "entry": 2.799900074005127,
-     "stop": 2.7200000286102295,
-     "risk_ps": 0.07990004539489748,
-     "shares": 2503,
-     "full": 2503,
-     "pnl": -199.98981362342838,
+     "entry": 2.778699893951416,
+     "stop": 2.7300000190734863,
+     "risk_ps": 0.048699874877929705,
+     "shares": 2154,
+     "full": 2154,
+     "pnl": -104.89953048706059,
      "scaled": 0,
-     "entry_time": "10:04",
-     "t1": 3.200000047683716,
-     "t2": 3.6001000213623047,
-     "avg_rng": 0.07478500604629516,
-     "pb_bars": 2,
+     "entry_time": "10:08",
+     "t1": 2.9200000762939453,
+     "t2": 3.0613002586364746,
+     "avg_rng": 0.07822998762130737,
+     "pb_bars": 3,
      "spread_est": 0.0399,
-     "impulse_v": 117450.25,
+     "impulse_v": 119965.66666666667,
      "window": "prime",
-     "exit": 2.7200000286102295,
-     "exit_time": "10:11",
+     "exit": 2.7300000190734863,
+     "exit_time": "10:10",
      "reason": "stop hit"
     }
    ],
-   "setups": 7,
-   "passes": 2,
-   "halted": "2 trades taken",
+   "setups": 59,
+   "passes": 1,
+   "halted": null,
    "rejects": {
-    "front side of the move (not gating)": 2,
-    "pullback holds 50% of leg (not gating)": 2,
-    "support confluence >= 2": 2,
-    "price > VWAP": 2,
-    "MACD histogram > 0": 1,
-    "target < 2:1": 2,
-    "pullback_volume < impulse_volume": 2,
-    "price > 9 EMA": 1
+    "front side of the move (not gating)": 39,
+    "pullback holds 50% of leg (not gating)": 14,
+    "support confluence >= 2": 17,
+    "price > VWAP": 36,
+    "MACD histogram > 0": 21,
+    "target < 2:1": 29,
+    "pullback_volume < impulse_volume": 11,
+    "price > 9 EMA": 23,
+    "stop tighter than spread": 22,
+    "pullback index <= 2": 14
    },
    "watch": [
     "VIVK",
@@ -627,16 +392,13 @@
     "WLDS"
    ],
    "log": [
-    "09:49 NDLS: BUY 429 @ 15.87 stop 15.40 ($0.47/sh)",
-    "09:56 NDLS: OUT @ 15.92 (MACD negative) $+21 | day $+21",
-    "10:04 WLDS: BUY 2503 @ 2.80 stop 2.72 ($0.08/sh)",
-    "10:11 WLDS: OUT @ 2.72 (stop hit) $-200 | day $-179",
-    "10:11 --- STOP: 2 trades taken ---"
+    "10:08 WLDS: BUY 2154 @ 2.78 stop 2.73 ($0.05/sh)",
+    "10:10 WLDS: OUT @ 2.73 (stop hit) $-105 | day $-105"
    ]
   },
   {
    "day": "2026-07-27",
-   "pnl": 209.57,
+   "pnl": 114.69,
    "trades": [
     {
      "sym": "AGPU",
@@ -645,11 +407,11 @@
      "risk_ps": 0.11989976882934528,
      "shares": 594,
      "full": 1187,
-     "pnl": 409.54858947753956,
+     "pnl": 314.6686799621587,
      "scaled": 1,
      "entry_time": "10:04",
-     "t1": 7.889999866485596,
-     "t2": 8.320099811553956,
+     "t1": 7.730000019073486,
+     "t2": 8.000100116729737,
      "avg_rng": 0.14494495391845702,
      "pb_bars": 2,
      "spread_est": 0.1,
@@ -669,8 +431,8 @@
      "pnl": -199.98009535789492,
      "scaled": 0,
      "entry_time": "10:24",
-     "t1": 4.599999904632568,
-     "t2": 5.2799997138977055,
+     "t1": 4.509999990463257,
+     "t2": 5.0999998855590825,
      "avg_rng": 0.22296006679534913,
      "pb_bars": 2,
      "spread_est": 0.09,
@@ -689,7 +451,7 @@
     "support confluence >= 2": 5,
     "price > 9 EMA": 8,
     "MACD histogram > 0": 7,
-    "target < 2:1": 2,
+    "target < 2:1": 8,
     "price > VWAP": 6,
     "front side of the move (not gating)": 5,
     "stop tighter than spread": 4,
@@ -707,73 +469,53 @@
    ],
    "log": [
     "10:04 AGPU: BUY 1187 @ 7.46 stop 7.34 ($0.12/sh)",
-    "10:15 AGPU: T1 7.89 hit, sold 593, stop to breakeven",
-    "10:16 AGPU: OUT @ 7.72 (big red candle on heavy volume, trailing stop) $+410 | day $+410",
+    "10:12 AGPU: T1 7.73 hit, sold 593, stop to breakeven",
+    "10:16 AGPU: OUT @ 7.72 (big red candle on heavy volume, trailing stop) $+315 | day $+315",
     "10:24 BIYA: BUY 1111 @ 3.92 stop 3.74 ($0.18/sh)",
-    "10:26 BIYA: OUT @ 3.74 (stop hit) $-200 | day $+210",
+    "10:26 BIYA: OUT @ 3.74 (stop hit) $-200 | day $+115",
     "10:26 --- STOP: 2 trades taken ---"
    ]
   },
   {
    "day": "2026-07-28",
-   "pnl": -41.04,
+   "pnl": -64.72,
    "trades": [
     {
      "sym": "EHGO",
-     "entry": 2.444999952316284,
-     "stop": 2.3840999603271484,
-     "risk_ps": 0.06089999198913576,
-     "shares": 668,
-     "full": 668,
-     "pnl": -40.68119464874269,
+     "entry": 2.4498999309539795,
+     "stop": 2.4100000858306885,
+     "risk_ps": 0.03989984512329103,
+     "shares": 1622,
+     "full": 1622,
+     "pnl": -64.71754878997805,
      "scaled": 0,
-     "entry_time": "10:12",
-     "t1": 2.6619999408721924,
-     "t2": 2.8789999294281006,
-     "avg_rng": 0.0471349835395813,
+     "entry_time": "11:08",
+     "t1": 2.56000018119812,
+     "t2": 2.6701004314422607,
+     "avg_rng": 0.03901000022888183,
      "pb_bars": 2,
-     "spread_est": 0.025,
-     "impulse_v": 23680.25,
-     "window": "prime",
-     "exit": 2.3840999603271484,
-     "exit_time": "10:13",
+     "spread_est": 0.03,
+     "impulse_v": 20028.666666666668,
+     "window": "late",
+     "exit": 2.4100000858306885,
+     "exit_time": "11:11",
      "reason": "stop hit"
-    },
-    {
-     "sym": "EHGO",
-     "entry": 2.4600000381469727,
-     "stop": 2.4200000762939453,
-     "risk_ps": 0.039999961853027344,
-     "shares": 362,
-     "full": 362,
-     "pnl": -0.36197376251220703,
-     "scaled": 0,
-     "entry_time": "10:22",
-     "t1": 2.6100001335144043,
-     "t2": 2.760000228881836,
-     "avg_rng": 0.05138000249862671,
-     "pb_bars": 4,
-     "spread_est": 0.0279,
-     "impulse_v": 11369.0,
-     "window": "prime",
-     "exit": 2.4590001106262207,
-     "exit_time": "10:26",
-     "reason": "MACD negative"
     }
    ],
-   "setups": 9,
-   "passes": 2,
-   "halted": "2 trades taken",
+   "setups": 32,
+   "passes": 1,
+   "halted": null,
    "rejects": {
-    "pullback_volume < impulse_volume": 3,
-    "pullback holds 50% of leg (not gating)": 4,
-    "price > VWAP": 6,
-    "price > 9 EMA": 3,
-    "support confluence >= 2": 2,
-    "MACD histogram > 0": 1,
-    "target < 2:1": 1,
-    "front side of the move (not gating)": 3,
-    "stop tighter than spread": 1
+    "pullback_volume < impulse_volume": 7,
+    "pullback holds 50% of leg (not gating)": 9,
+    "price > VWAP": 19,
+    "price > 9 EMA": 11,
+    "support confluence >= 2": 9,
+    "MACD histogram > 0": 12,
+    "target < 2:1": 9,
+    "front side of the move (not gating)": 16,
+    "stop tighter than spread": 8,
+    "pullback index <= 2": 11
    },
    "watch": [
     "FIRY",
@@ -783,11 +525,8 @@
     "EHGO"
    ],
    "log": [
-    "10:12 EHGO: BUY 668 @ 2.44 stop 2.38 ($0.06/sh)",
-    "10:13 EHGO: OUT @ 2.38 (stop hit) $-41 | day $-41",
-    "10:22 EHGO: BUY 362 @ 2.46 stop 2.42 ($0.04/sh)",
-    "10:26 EHGO: OUT @ 2.46 (MACD negative) $-0 | day $-41",
-    "10:26 --- STOP: 2 trades taken ---"
+    "11:08 EHGO: BUY 1622 @ 2.45 stop 2.41 ($0.04/sh)",
+    "11:11 EHGO: OUT @ 2.41 (stop hit) $-65 | day $-65"
    ]
   },
   {
@@ -801,7 +540,7 @@
     "pullback_volume < impulse_volume": 15,
     "pullback holds 50% of leg (not gating)": 13,
     "support confluence >= 2": 13,
-    "target < 2:1": 4,
+    "target < 2:1": 24,
     "front side of the move (not gating)": 33,
     "price > VWAP": 30,
     "price > 9 EMA": 11,
@@ -831,6 +570,7 @@
    "halted": null,
    "rejects": {
     "support confluence >= 2": 3,
+    "target < 2:1": 7,
     "front side of the move (not gating)": 10,
     "pullback holds 50% of leg (not gating)": 6,
     "price > VWAP": 11,
@@ -855,7 +595,7 @@
    "rejects": {
     "pullback_volume < impulse_volume": 4,
     "pullback holds 50% of leg (not gating)": 2,
-    "target < 2:1": 3,
+    "target < 2:1": 4,
     "price > VWAP": 3,
     "MACD histogram > 0": 10,
     "stop tighter than spread": 8,

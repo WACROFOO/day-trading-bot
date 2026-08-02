@@ -28,7 +28,7 @@ from sim import (Indicators, PullbackTracker, evaluate, GATE_CONDITIONS,
                  LIQUIDITY_CAP, spread_estimate)
 
 OUT = _DATA
-SYM = 'CUPR'
+SYM = (sys.argv[1] if len(sys.argv) > 1 else 'CUPR').upper()  # SYMBOL_ARG
 DAY = dt.date(2026, 7, 31)
 ET = dt.timezone(dt.timedelta(hours=-4))
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -179,7 +179,7 @@ def main():
                                 sized=s['sized'],
                                 fails=[k for k, v in s['gating'].items() if not v[0]])
                            for s in setups]),
-              open(os.path.join(OUT, 'cupr_setups.json'), 'w'), indent=1)
+              open(os.path.join(OUT, f'{SYM.lower()}_setups.json'), 'w'), indent=1)
     print(f'\nwrote data/cupr_setups.json')
     return setups, b1, b5
 

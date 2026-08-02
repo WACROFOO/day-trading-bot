@@ -181,10 +181,21 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 hod = s['hod_prev']
                 imp = pb['impulse']
                 pole = (max(x['h'] for x in imp) - min(x['l'] for x in imp)) if imp else 0
-                # Structure alone sets the target. Putting entry+2R inside
-                # this max() would make rr_ok always true and silently
-                # disable the 2:1 filter it is supposed to feed.
-                t1 = max(hod or 0, pb['low'] + pole)
+                # FIRST target, so the NEAREST structural objective above the
+                # entry - not the furthest. The documented target is a "retest
+                # of the high of day" (5 videos) or "a measured move equal to
+                # the pole height" (small-cap-momentum-bull-flag.md), typically
+                # 15-20 cents away.
+                #
+                # Taking max() of those made the target the high of day even
+                # after the stock had collapsed away from it. On CUPR
+                # 2026-07-31 every trade after 10:55 carried a $5.77 target
+                # while price sat in the $2.80s: unreachable, yet it satisfied
+                # the 2:1 filter *trivially because it was so far away*. The
+                # reward:risk check was being passed by an impossible target.
+                objectives = [x for x in (hod, pb['low'] + pole)
+                              if x and x > entry]
+                t1 = min(objectives) if objectives else 0
                 rr_ok = (t1 - entry) >= 2 * risk_ps
                 for k, (passed, _) in checks.items():
                     if not passed:

@@ -70,9 +70,13 @@ def mock_trade(s, bars):
     risk = entry - stop
     if risk <= 0:
         return None
-    t1 = max(s['hod'], s['leg_low'] + (s['leg_high'] - s['leg_low']))
-    if t1 - entry < 2 * risk:
-        t1 = entry + 2 * risk                      # documented minimum
+    # FIRST target = the NEAREST structural objective above entry, matching the
+    # engine fix. max() made it the high of day even after the stock had
+    # collapsed away from it, so an unreachable target satisfied 2:1 trivially.
+    objectives = [x for x in (s['hod'], s['leg_low'] + (s['leg_high'] - s['leg_low']))
+                  if x and x > entry]
+    t1 = min(objectives) if objectives else entry + 2 * risk
+    reachable = (t1 - entry) >= 2 * risk           # the documented 2:1 filter
     shares = max(1, min(int(RISK_PER_TRADE / risk),
                         int(BUYING_POWER / entry),
                         int(bars[s['i']]['v'] * LIQUIDITY_CAP) or 1))
@@ -81,7 +85,7 @@ def mock_trade(s, bars):
         held += 1
         if bar['l'] <= cur_stop:
             pnl += (cur_stop - entry) * shares
-            return dict(**s, shares=shares, t1=t1, pnl=pnl, held=held,
+            return dict(**s, shares=shares, t1=t1, rr_ok=reachable, pnl=pnl, held=held,
                         exit=cur_stop, why='stop' if scaled == 0 else 'breakeven',
                         R=pnl / (risk * (shares or 1)))
         if scaled == 0 and bar['h'] >= t1:
@@ -91,16 +95,17 @@ def mock_trade(s, bars):
             scaled, cur_stop = 1, entry
         if scaled and bar['c'] < bar['o'] and bar['l'] < bars[s['i']]['l']:
             pnl += (bar['c'] - entry) * shares
-            return dict(**s, shares=shares, t1=t1, pnl=pnl, held=held,
+            return dict(**s, shares=shares, t1=t1, rr_ok=reachable, pnl=pnl, held=held,
                         exit=bar['c'], why='trail', R=pnl / (risk * (shares or 1)))
     last = bars[-1]
     pnl += (last['c'] - entry) * shares
-    return dict(**s, shares=shares, t1=t1, pnl=pnl, held=held, exit=last['c'],
+    return dict(**s, shares=shares, t1=t1, rr_ok=reachable, pnl=pnl, held=held, exit=last['c'],
                 why='end of session', R=pnl / (risk * (shares or 1)))
 
 
 def main():
-    d = json.load(open(os.path.join(OUT, 'cupr_friday.json')))
+    SYM = (sys.argv[1] if len(sys.argv) > 1 else 'CUPR').upper()  # SYMBOL_ARG
+    d = json.load(open(os.path.join(OUT, f'{SYM.lower()}_friday.json')))
     b1 = hyd(d['1m'])
     reg = [x for x in b1 if dt.time(9, 30) <= x['dt'].time() < dt.time(16, 0)]
     pre = [x for x in b1 if x['dt'].time() < dt.time(9, 30)]
@@ -132,6 +137,14 @@ def main():
     print(f'\ntaken {len(rows)}   winners {len(wins)}   '
           f'total ${sum(r["pnl"] for r in rows):+.2f}')
 
+    print(f'\n=== the 2:1 filter, now that the target is reachable ===')
+    for ok in (True, False):
+        g = [r for r in rows if r['rr_ok'] is ok]
+        if g:
+            w = sum(1 for r in g if r['pnl'] > 0)
+            print(f'  target {"reachable at 2:1" if ok else "NOT 2:1 - skip"}: '
+                  f'n={len(g):<3} winners {w}  total ${sum(r["pnl"] for r in g):+8.2f}')
+
     print(f'\n=== did the gate help? ===')
     for lo, hi, label in ((6, 6, 'passed all 6'), (5, 5, '5 of 6'),
                           (4, 4, '4 of 6'), (0, 3, '3 or fewer')):
@@ -160,7 +173,7 @@ def main():
         print(f'  {r["t"]}  ${r["pnl"]:>8.2f} ({r["R"]:+.2f}R)  ' +
               (' | '.join(why) if why else 'clean setup, market simply reversed'))
 
-    json.dump(rows, open(os.path.join(OUT, 'cupr_mock.json'), 'w'),
+    json.dump(rows, open(os.path.join(OUT, f'{SYM.lower()}_mock.json'), 'w'),
               indent=1, default=str)
     print(f'\nwrote data/cupr_mock.json')
 
