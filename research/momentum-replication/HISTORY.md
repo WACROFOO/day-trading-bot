@@ -1,6 +1,6 @@
 # What has already been found and corrected
 
-Fifteen defects, recorded so the same ground is not covered twice. Each cites
+Sixteen defects, recorded so the same ground is not covered twice. Each cites
 the document or video timestamp it violated. All are fixed in the current code.
 
 Also recorded: four conclusions that were reported and later withdrawn, because
@@ -117,6 +117,17 @@ measurement tool defined "would the engine trade this" as "every
 applies on top. It reported 14 tradeable pairs where the engine trades 3. It
 now calls `run_day`. Anything that restates the engine drifts from it.
 
+**16. `min_reward_risk` applied as a pre-entry veto.** Not a coding error — a
+reading, and the largest single rejection reason in the engine (66). The spec's
+own numbers rule it out: `target_typical` $0.15–0.20 against `stop_typical`
+$0.08–0.10 is a target 1–2R away, not one at "2× the stop". Measured, setups
+passing all 8 gate conditions have a *median* target 1 of 1.14R against 1.79R
+for setups that fail — the gate selects names pressed against their high of
+day, so the veto was anti-correlated with the gate behind it and killed 74% of
+gate-passing setups.
+*Fix:* `RR_FILTER` defaults off; 2:1 is measured as a realised ratio over
+trades, which is how every citation states it. `reports/2026-08-target-and-entries.md`.
+
 ---
 
 ## Withdrawn conclusions
@@ -133,7 +144,12 @@ large winner."** Artifact of defect 7. The source says to cut size, not skip.
 
 **"The entries have no edge — no trade reaches its target under any exit
 regime."** Measured before defects 8–13 were fixed, when the detector was
-discarding breakouts on the strongest names.
+discarding breakouts on the strongest names. It stays withdrawn: across 406
+setups, target 1 is reached **56%** of the time. The well-powered replacement
+is narrower and survives — 37% of those reach it only after dipping past the
+stop, so the documented setup gets to its documented target cleanly on **35%**
+of its own signals against a 40% breakeven
+(`reports/2026-08-target-and-entries.md`).
 
 **"Raising the trade limit from 2 to 5 costs money."** Measured when the limit
 was binding for the wrong reason. It currently never binds.
@@ -153,7 +169,7 @@ implementation.
 | After 12, 13 and scoping fixed | 3 | +$128.70 |
 | 17 sessions, halts + §1 confirmation, max 5 | 2 | +$633.30 |
 | After defect 14 (the exit look-ahead) | 2 | **+$357.54** |
-| Same, with the 2:1 entry veto removed | 11 | −$601.65 |
+| After defect 16 — 2:1 veto removed, now the default | 11 | −$601.65 |
 
 The trajectory is the reason no P&L from this harness should be treated as a
 result until the frequency discrepancy in `OBSERVATIONS.md` §3 is understood.

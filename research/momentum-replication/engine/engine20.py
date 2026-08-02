@@ -40,8 +40,18 @@ ET = dt.timezone(dt.timedelta(hours=-4))
 # strategy is built on. It is the single largest rejection reason in the
 # 17-day run.
 #
-# RR_FILTER=0 treats 2:1 as an outcome to be measured instead of a gate.
-RR_FILTER = os.environ.get('RR_FILTER', '1') != '0'
+# Measured, the veto is anti-correlated with the gate it sits behind. Across
+# 406 setups the median distance to target 1 is $0.160/share - the middle of
+# the documented `target_typical` $0.15-0.20 - and among setups passing all
+# eight gate conditions the median is 1.14R, with only 26% reaching 2R. The
+# gate selects names pushed up against their own high of day, which is exactly
+# where the nearest objective is closest. The stronger the setup by the
+# documented criteria, the more certainly the veto killed it.
+#
+# So it is OFF by default. 2:1 is measured as a realised ratio over trades
+# (diagnostics/trades.py prints it), which is how every citation states it.
+# RR_FILTER=1 restores the veto for comparison.
+RR_FILTER = os.environ.get('RR_FILTER', '0') != '0'
 
 
 def run_day(day, watch, bars_by_sym, max_trades, log=None):

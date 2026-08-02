@@ -40,46 +40,72 @@ doubles recall of the names the pillars would accept — 23% → 46% — but pro
 
 ---
 
-## 4. Make the exit plan deliver the 2:1 — the live question
+## ~~4. Make the exit plan deliver the 2:1~~ — done, and it was not the exit
 
-`min_reward_risk >= 2.0` is implemented as a pre-entry veto and it is the
-single largest rejection reason (66). The corpus does not support that reading:
-every citation is retrospective and aggregate (`achieved`, `this week`, `for
-month`, `$500 average winners`), and `PARAMETERS.md` §9 uses it as
-`avg_win`/`avg_loss` inside an expectancy formula. A ratio of averages comes
-from the exit plan.
+`reports/2026-08-target-and-entries.md`. `min_reward_risk >= 2.0` was
+implemented as a pre-entry veto; the spec's own numbers rule that out
+(`target_typical` $0.15–0.20 against `stop_typical` $0.08–0.10 is 1–2R, not
+"the nearest objective at 2x the stop"), and the measurement is worse than
+that: setups passing all 8 gate conditions have a median target 1 of **1.14R**
+against 1.79R for setups that fail it. The gate selects names pressed against
+their high of day, which is where the nearest objective is closest. The veto
+was anti-correlated with the gate behind it and killed 74% of gate-passing
+setups. `RR_FILTER` now defaults off.
 
-Removing the veto is **not** the fix on its own:
+The realised ratio with the veto gone is **1.52:1** — what the corpus asks for.
+Every exit parameter is now implemented as stated and there is no exit-side
+explanation left.
 
-| | trades | winners | total | expectancy | realised P/L ratio |
-|---|---:|---:|---:|---:|---:|
-| veto ON | 2 | 50% | +$357.54 | +0.89R | 2.79:1 |
-| veto OFF | 11 | 27% | −$601.65 | −0.27R | 1.52:1 |
+## ~~5. The entries~~ — measured: it is timing, not selection
 
-Target 1 is the *nearest* structural objective. When that sits under 2R, half
-the position books a sub-1R gain and the remainder goes to breakeven — the
-same capping defect as `HISTORY.md` #3, arriving by a different route. The
-question is what target 1 should be when the high of day is only cents away:
-skip the scale-out, use the measured move, or trail from the start. Three
-readings, all testable against the same 61 pairs.
+Win rate is **27%** against a claimed 65–75%. At 1.52:1 breakeven is 40%, so
+this is an accuracy problem, not a reward:risk one.
 
-## 5. Sample size
+It is not the stops. `diagnostics/mae.py`: of the 7 trades stopped at −1R,
+**5 never reached target 1 at all**, running −2.50R to −6.70R against the
+entry. A wider stop loses more on every one. Median risk is $0.080/share, on
+the documented `stop_typical` $0.08–0.10.
+
+It is not the selection either. `diagnostics/excursion.py` replays every setup
+forward on both pools:
+
+| pool | setups | reach T1 | median excursion | past −2R |
+|---|---:|---:|---:|---:|
+| engine watchlist | 406 | 56% | −1.56R | 43% |
+| his recap names | 363 | 53% | −1.75R | 46% |
+
+**The same distribution.** Pointing the detector at the stocks he actually
+traded produces the same drawdowns. So the scanner fixes from §3 — the price
+floor, the gap threshold — change which names it sees and cannot change this.
+
+Stated exactly: target 1 is reached on 56% of setups, but 37% of those dip
+past −1R first — the stop — so the documented setup reaches its documented
+target without being stopped out on **35%** of its own signals. Breakeven at
+the realised 1.52:1 is 40%. The 27% observed over 11 trades is a small sample
+landing where the 406-setup measurement says it should.
+
+Both documented distances are implemented correctly ($0.080 stop, $0.160
+target, medians). What is wrong is what price does between them. That points at
+the trigger: it matches the shape of a micro-pullback at points in a move where
+he would not take it. `reports/2026-08-target-and-entries.md`.
+
+## 6. Sample size
 
 2 trades over 17 sessions cannot support any conclusion, and neither can 11.
 At this frequency a full month of free data yields under 20. Distinguishing an
 edge from noise needs a few hundred.
 
-This is the paid-data decision in `DATA-SOURCES.md`. **Step 4 first** — the
+This is the paid-data decision in `DATA-SOURCES.md`. **Step 5 first** — the
 calibration set now exists, so a subscription would be buying more of a
 measurable thing rather than more of an unmeasured one.
 
-## 6. Unresolved rule readings
+## 7. Unresolved rule readings
 
 Recorded rather than guessed. Each needs evidence, not a decision.
 
 | Question | Where | Status |
 |---|---|---|
-| `min_reward_risk` — entry veto or realised ratio? | §4 above | evidence says realised; the replacement exit rule is open |
+| ~~`min_reward_risk` — entry veto or realised ratio?~~ | §4 above | **settled: realised.** Veto off by default; realised ratio 1.52:1 |
 | `price_min` — $2.00 or $1.00? | `PARAMETERS.md:20` | $1.00 nearly doubles recall of his names; no P&L effect yet |
 | `rate_of_change` — one-shot at 09:35, or continuous? | `reports/2026-07-27-week.md` | still open; costs 10 of 61 pairs as a one-shot |
 | `MIN_DIP_BARS` on a 1-minute chart | `PARAMETERS.md` §13 | still open |
