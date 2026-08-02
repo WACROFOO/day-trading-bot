@@ -268,3 +268,84 @@ gappers rather than the whole market.
 P&L is −$541.58 on 10 trades. Per the ground rules in `README.md` this is not
 a result: n=10, and the sign has now flipped three times across implementation
 changes on identical data.
+
+---
+
+## Update — pre-flight before deciding on paid data
+
+Two scope gaps were named in §"Status" as the difference between the harness
+(0.59 trades/day) and the source (~2/day). Both were tested.
+
+### Pre-market window: blocked by the data, not by the code
+
+`PARAMETERS.md:71` puts the session start at 07:00 ET with limit orders only,
+and 38 corpus claims reference pre-market activity. Measured across the
+watchlist symbols:
+
+```
+symbol-days with pre-market bars: 198
+pre-market bars total: 20,848   with non-zero volume: 0 (0%)
+bars at/after 07:00 ET: 11,108  (56 per symbol-day)
+```
+
+**Not one pre-market bar in 20,848 carries volume.** Price data exists; volume
+does not. That makes three of the nine entry conditions unevaluable before
+09:30 — VWAP cannot be computed without volume, the
+`pullback_volume < impulse_volume` filter has no inputs, and relative volume
+cannot be measured.
+
+Trading the window anyway would mean running a 6-condition gate pre-market and
+a 9-condition gate after the open, then adding the two trade counts together.
+That produces a higher number with no defensible meaning, so it was not done.
+The window remains unimplemented, blocked on a data source that carries
+pre-market volume.
+
+### Watchlist width: already saturated
+
+`MAX_NAMES` (now `WATCH_NAMES`) capped each day's watchlist at 5. Raising it:
+
+| Cap | Distinct symbols | Trades | P&L |
+|---:|---:|---:|---:|
+| 5 | 47 | 10 | −$541.58 |
+| 10 | 55 | 12 | −$332.02 |
+| 20 | 55 | 12 | −$332.02 |
+
+10 and 20 are identical, because the cap was never the binding constraint —
+the five-pillar filter is. Names qualifying per day across the 17 sessions:
+
+```
+9, 8, 7, 6, 6, 5, 5, 4, 3, 3, 3, 3, 2, 2, 2, 2, 1   (mean 4.2/day)
+```
+
+Only 7 of 17 days ever reached the old cap of 5. The market did not offer more
+qualifying names in this window; widening recovers 8 extra symbol-days and 2
+extra trades, and there is nothing further to recover.
+
+Look-ahead audit passes at every cut-off with the wider watchlist.
+
+### Where that leaves the frequency gap
+
+| | Trades/day |
+|---|---:|
+| Before the last two defect fixes | 0.18 |
+| After them | 0.59 |
+| After widening the watchlist | **0.71** |
+| Source | ~2 |
+
+The order-of-magnitude selectivity is gone. The remaining ~3x is not reachable
+on this data: the largest single component is the pre-market session, which is
+unusable for want of volume, and the rest would need a market-wide scanner
+rather than a 2,486-symbol pool.
+
+**This was the pre-flight test for whether paid data is worth buying.** It
+answers yes on the specific ground that the missing frequency is a data
+limitation rather than a detector defect — the widening experiment shows the
+detector is no longer the constraint on candidate supply.
+
+### Efficiency note
+
+1-minute bars are now cached to `data/bars_cache/` (one file per symbol, ISO
+timestamps, atomic writes). A run went from 20.3s to 1.4s with identical
+output. `NO_CACHE=1` bypasses it. Yahoo's 1-minute history is a rolling ~30-day
+window, so the cache will age out of usefulness once these dates fall outside
+it — it is a run-to-run accelerator, not an archive.

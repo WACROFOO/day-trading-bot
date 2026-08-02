@@ -34,7 +34,12 @@ WINDOWS = [(dt.datetime(2026, 7, 1), dt.datetime(2026, 7, 8)),
            (dt.datetime(2026, 7, 22), dt.datetime(2026, 7, 29)),
            (dt.datetime(2026, 7, 29), dt.datetime(2026, 8, 1, 12))]
 
-MAX_NAMES = 5          # playbook: end pre-market with 3-5 names
+MAX_NAMES = int(os.environ.get('WATCH_NAMES', 5))
+
+# On-disk cache for 1-minute bars. Each run refetched every watchlist symbol
+# across five 7-day windows; with a wider watchlist that is hundreds of
+# requests per run for data that does not change. NO_CACHE=1 bypasses it.
+BARS_CACHE = os.path.join(OUT, 'bars_cache')
 
 
 def get(url, tries=3):
@@ -52,7 +57,37 @@ def get(url, tries=3):
     return None
 
 
+def _load_cache(sym):
+    p = os.path.join(BARS_CACHE, f'{sym}.json')
+    if os.environ.get('NO_CACHE') or not os.path.exists(p):
+        return None
+    try:
+        with open(p) as f:
+            raw = json.load(f)
+    except (json.JSONDecodeError, OSError):
+        return None
+    return {day: {k: [dict(dt=dt.datetime.fromisoformat(b['t']), o=b['o'],
+                           h=b['h'], l=b['l'], c=b['c'], v=b['v'])
+                      for b in sides[k]] for k in ('pre', 'session')}
+            for day, sides in raw.items()}
+
+
+def _save_cache(sym, data):
+    os.makedirs(BARS_CACHE, exist_ok=True)
+    slim = {day: {k: [dict(t=b['dt'].isoformat(), o=b['o'], h=b['h'], l=b['l'],
+                           c=b['c'], v=b['v']) for b in sides[k]]
+                  for k in ('pre', 'session')} for day, sides in data.items()}
+    tmp = os.path.join(BARS_CACHE, f'{sym}.json.tmp')
+    with open(tmp, 'w') as f:
+        json.dump(slim, f, separators=(',', ':'))
+    os.replace(tmp, os.path.join(BARS_CACHE, f'{sym}.json'))   # atomic
+    return data
+
+
 def fetch_symbol(sym):
+    cached = _load_cache(sym)
+    if cached is not None:
+        return sym, cached
     out = defaultdict(lambda: dict(pre=[], session=[]))
     for a, b in WINDOWS:
         url = (f'https://query1.finance.yahoo.com/v8/finance/chart/{sym}'
@@ -76,7 +111,7 @@ def fetch_symbol(sym):
                 out[key]['pre'].append(bar)
             elif d_.time() < dt.time(16, 0):
                 out[key]['session'].append(bar)
-    return sym, dict(out)
+    return sym, _save_cache(sym, dict(out))
 
 
 def build_watchlists(stats, shares_out):

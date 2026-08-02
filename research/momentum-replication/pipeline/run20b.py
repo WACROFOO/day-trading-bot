@@ -30,7 +30,10 @@ from run20 import fetch_symbol
 from concurrent.futures import ThreadPoolExecutor
 
 OUT = _DATA
-MAX_NAMES = 5
+# The playbook's "3-5 names" is what one person can watch; the source scans the
+# whole market to find them. Widening changes how many candidates the engine
+# SEES, not how many trades it may take - the trade limit still binds.
+MAX_NAMES = int(os.environ.get('WATCH_NAMES', 5))
 GAP_SANITY_CAP = 200.0        # above this it is an adjustment artifact, not news
 SPLIT_BUFFER = 3              # trading days either side of a split
 
