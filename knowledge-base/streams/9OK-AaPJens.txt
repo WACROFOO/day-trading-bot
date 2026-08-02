@@ -1,0 +1,1169 @@
+# Red to Green from -4k to +4k during the LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=9OK-AaPJens
+# upload_date: 20211118
+# duration_sec: 5603
+
+[00:00:51] foreign
+[00:01:04] [Music]
+[00:01:07] everyone well let's see we've got
+[00:01:11] um about an hour to the Bell I've got to
+[00:01:14] figure out why my camera's
+[00:01:16] not working here over on uh there we go
+[00:01:21] fix this
+[00:01:24] uh there we go
+[00:01:27] okay
+[00:01:30] so Auto focusing
+[00:01:37] doesn't seem like it hello
+[00:01:42] yeah all right
+[00:01:46] good morning here I am
+[00:01:49] so before we start uh before we get
+[00:01:52] started let me
+[00:01:53] um
+[00:01:54] break down a couple things
+[00:01:56] number one for those tuning in for the
+[00:01:58] first time on YouTube for The Morning
+[00:02:00] Show I hope you hit the thumbs up I hope
+[00:02:02] you're subscribed to the channel I have
+[00:02:03] a goal of 1 million subscribers by the
+[00:02:05] end of the year we are now over 920
+[00:02:09] 000 subscribers so we are making our way
+[00:02:11] towards the million subscriber goal and
+[00:02:14] if we hit a million January 1st I'm
+[00:02:16] gonna do a new small count challenge so
+[00:02:18] thank you guys for hitting the Subscribe
+[00:02:19] thank you for sharing the video with
+[00:02:21] some of your friends really appreciate
+[00:02:23] it number two I want to remind you as
+[00:02:26] always my disclaimer that was at the
+[00:02:28] very beginning of the broadcast is a
+[00:02:30] reminder that trading is risky
+[00:02:34] most beginner Traders lose money you
+[00:02:37] should assume as a beginner that you
+[00:02:38] will lose money and with that assumption
+[00:02:40] number one don't trade money you can't
+[00:02:42] afford to lose number two creating a
+[00:02:44] simulator before you put real money on
+[00:02:46] the line number three don't try to
+[00:02:49] blindly follow me or anyone else I've
+[00:02:51] been doing this for a long time and my
+[00:02:53] results are not typical
+[00:02:57] all right now I share my results with
+[00:02:59] you because it is important that you
+[00:03:01] know the person you're learning from is
+[00:03:03] credible that is protecting you as a
+[00:03:06] student or as a potential student
+[00:03:07] because there are so many people out
+[00:03:09] there that lie about the money they make
+[00:03:11] they show you only the green days they
+[00:03:13] don't show you the red days and if
+[00:03:15] you're curious you could go to their
+[00:03:16] website and if they have a website and
+[00:03:18] you could say where are their broker
+[00:03:19] statements and most likely you won't
+[00:03:20] find them
+[00:03:21] you will find them on my website right
+[00:03:24] here let's see there are my 2021
+[00:03:27] earnings broker statements there's 20
+[00:03:29] 20. there's 2019 there's 2018 there's
+[00:03:31] 2017 if you want to see it all right
+[00:03:33] keeping rolling five years here because
+[00:03:36] I started a small account Challenge on
+[00:03:38] January 1st of 2017.
+[00:03:41] so my trades are real the profit is real
+[00:03:45] and that is important for you to know so
+[00:03:47] I share my result with you so you know
+[00:03:49] the person you're learning from is
+[00:03:50] credible but I don't want you to assume
+[00:03:52] that my results are typical all right so
+[00:03:55] with that said uh and thank you for
+[00:03:57] bearing with me on that I'll probably
+[00:03:59] mention it a couple of times as we go
+[00:04:01] through this morning show
+[00:04:04] and there's a link right here to the um
+[00:04:06] Black Friday sale which is going on
+[00:04:08] right now where you're trading if you
+[00:04:10] haven't checked it out we'd love to have
+[00:04:11] you check it out this is especially for
+[00:04:13] those on YouTube and Facebook but
+[00:04:16] existing students can email uh Team
+[00:04:18] Warrior trading.com if you want to
+[00:04:20] upgrade your membership from a starter
+[00:04:22] to a pro or you want to add renew your
+[00:04:25] membership for another year or something
+[00:04:27] like that you're welcome to do that as a
+[00:04:28] current student we certainly are happy
+[00:04:32] to help you do that and we have a member
+[00:04:34] of loyalty program so you guys uh you
+[00:04:36] know you don't it's not like you pay pay
+[00:04:38] for the whole thing again you have a
+[00:04:39] renewal discounted rate
+[00:04:41] okay so with that all said
+[00:04:44] um I will
+[00:04:45] let's see
+[00:04:47] just leave this down in the corner so
+[00:04:49] folks remember that we've got it going
+[00:04:50] on who are just getting tuned in on
+[00:04:52] YouTube
+[00:04:53] I'll make it kind of small
+[00:04:57] there we go all right so I'll put that
+[00:04:59] right over there
+[00:05:00] uh like that now our Gap scanner this
+[00:05:04] morning is
+[00:05:06] um kind of like yesterday it's looking a
+[00:05:09] little on the weak side I don't see
+[00:05:10] anything that I'm super excited about
+[00:05:12] yet
+[00:05:13] so this is going to be probably another
+[00:05:16] kind of wait and see take it slow type
+[00:05:19] of day I don't want to push my luck I
+[00:05:22] don't want to overstay my welcome if I
+[00:05:25] can get green and shut it down I'll be
+[00:05:26] grateful for that if I don't get
+[00:05:28] anything that pops up that looks good
+[00:05:29] and then I won't take any trades
+[00:05:31] yesterday I was up ten thousand or
+[00:05:33] eleven thousand and then gave back 70 of
+[00:05:36] it I finished the day up three grand
+[00:05:39] three grand is still more than I had at
+[00:05:41] the beginning of the morning but it was
+[00:05:43] I felt a bit defeated you know giving
+[00:05:46] back 70 of my profit so at that point
+[00:05:49] once I had that last loss which was a
+[00:05:52] five almost five thousand dollar loss I
+[00:05:53] went from up eight grand up only three
+[00:05:55] grand I said that's it I gotta walk away
+[00:05:57] I gotta cut my losses I gotta at least
+[00:05:59] walk away with profit on the day and and
+[00:06:02] I did but that meant that I missed Sev
+[00:06:06] now had it kept sticking around to keep
+[00:06:07] trading and I had taken this trade and
+[00:06:10] it had gone the wrong way I could have
+[00:06:12] gone from up 3000 to Red by a thousand
+[00:06:14] or two thousand or five thousand so I
+[00:06:16] had to draw the line somewhere in the
+[00:06:19] sand and I drew it once I gave back more
+[00:06:20] than half of my gains for the day and
+[00:06:23] unfortunately this ipo'd and it went
+[00:06:26] from 20 all the way to 32 and I missed
+[00:06:28] it completely halted uh four three times
+[00:06:30] going up once coming back down a bounce
+[00:06:32] on a dip another drop back down
+[00:06:34] consolidation through the afternoon and
+[00:06:37] then a breakout after hours especially
+[00:06:39] up from 40 up to 47 continuation this
+[00:06:42] morning up to over 50 and then a sharp
+[00:06:45] pullback right here which makes me
+[00:06:48] wonder if uh the bulk of the move is now
+[00:06:52] over you have that kind of sharp drop
+[00:06:54] you know sometimes it can recover from
+[00:06:56] that but that's a pretty sharp drop the
+[00:06:59] float's 31 million shares of course
+[00:07:01] being an IPO it's
+[00:07:04] um probably not going to trade super
+[00:07:06] super thickly it shouldn't be too too
+[00:07:08] bad but
+[00:07:10] I don't know that I'm gonna trade this
+[00:07:12] one today it's a maybe but right now I'm
+[00:07:15] not totally sure the reason because of
+[00:07:19] this pullback right here so this
+[00:07:21] pullback and what's currently sort of a
+[00:07:23] Bear Flag under view app
+[00:07:25] is giving me reason to be a little
+[00:07:27] cautious if it were consolidating right
+[00:07:30] here I would very likely be a buyer for
+[00:07:32] the break back over 50 retest of the
+[00:07:35] highs but even even this little red drop
+[00:07:38] here wasn't great and then it dropped
+[00:07:40] even more yesterday
+[00:07:42] uh blze
+[00:07:45] the son of a gun look at that volatility
+[00:07:48] geez Louise down to 29 rips up to 36
+[00:07:53] halt going up
+[00:07:54] yeah I traded it and took a small loss
+[00:07:57] on it I don't remember how much it was
+[00:07:58] now but yeah that's it's annoying to see
+[00:08:01] uh so yeah just a blue sky setup but now
+[00:08:04] today uh it's pulled back a bit too much
+[00:08:06] although back to that yellow line that I
+[00:08:09] had drawn from the other day so see how
+[00:08:10] that trend line is still valid right
+[00:08:12] down there it is still valid
+[00:08:14] ionq
+[00:08:16] so another one on the scans
+[00:08:19] uh this one continuation possibly is it
+[00:08:23] blue sky
+[00:08:25] it is
+[00:08:28] ionq floats 30 million shares
+[00:08:32] yeah
+[00:08:34] so interesting but uh not sure about it
+[00:08:40] so we'll leave it alone for right now
+[00:08:41] drna
+[00:08:47] no interest in this it's clearly a
+[00:08:49] buyout
+[00:08:52] crdf
+[00:08:57] nice move up to 680 but then pulled back
+[00:08:59] 50 cents
+[00:09:48] t-h-r-y light volume
+[00:09:52] up to 42 light volume and expensive that
+[00:09:55] likely means big spreads
+[00:09:58] actually the spreads aren't that bad but
+[00:10:01] I'm still not going to trade it
+[00:10:13] so what are you guys looking at is there
+[00:10:14] anything I'm missing here
+[00:10:24] nothing
+[00:10:32] sopa continuation
+[00:10:40] yeah the volume is uh died down quite a
+[00:10:43] bit the range
+[00:10:44] low is 35 breakout is 53.81
+[00:10:57] sopa's float is a third of Sev
+[00:11:02] you know I I guess I'll say that you
+[00:11:05] know you did have a pretty big drop
+[00:11:06] there on sopa popped back up and then
+[00:11:09] going into the Bell was Stronger so yeah
+[00:11:12] maybe that gives you some hope for Sev
+[00:11:14] but
+[00:11:16] we'll see
+[00:11:30] yeah so wouldn't trade a buyout
+[00:11:38] sure if SUV gets over 50 bucks then it
+[00:11:40] might be something uh more interesting
+[00:11:42] worthwhile
+[00:11:54] agtc
+[00:12:00] crawling off the lows below the 200 but
+[00:12:04] starting to move up
+[00:12:07] it's
+[00:12:09] well it's 42 million shares
+[00:12:17] bmtx
+[00:12:25] pretty big range all-time high is up
+[00:12:28] here around 18.
+[00:12:31] let's be on the Gap scanner just a
+[00:12:33] little further down the scan
+[00:12:35] yeah it's up 11 Amex and I see stock
+[00:12:42] continuation I don't know was there news
+[00:12:45] on it even yesterday
+[00:12:48] well let's see Monday the 15th news
+[00:12:51] about acquiring first Sound Bank for 23
+[00:12:54] million in cash
+[00:13:09] my son
+[00:13:11] so yeah there's news but there's not
+[00:13:14] enough volume yet
+[00:13:16] it's currently up 10 percent
+[00:13:20] it's not a blue sky setup for a while
+[00:13:26] Revenue guidance 165 million
+[00:14:07] reading the earnings and forecast
+[00:14:16] so see how it's jumping up there
+[00:14:24] so you know the question will is how
+[00:14:26] will it hold
+[00:14:31] volume is coming in a little bit more
+[00:14:33] here
+[00:14:34] probably small size starter there for me
+[00:14:36] at 83 for the Breakthrough 11 and then
+[00:14:39] add 11.25
+[00:14:42] added 11 25 now looking for 11.50 and
+[00:14:46] let's look for The Squeeze up towards
+[00:14:47] 12.
+[00:14:49] there's 12 on the ask
+[00:14:52] if we break 12 then looking for 12.50 it
+[00:14:55] only takes one this is now at 44 making
+[00:14:57] it our leading gapper so I'm going to
+[00:14:59] hold my position on this and look to add
+[00:15:03] watching here for an ad through 75
+[00:15:09] right now just holding full size of some
+[00:15:11] micro pullback under 12.
+[00:15:13] and looking for the Breakthrough 12.
+[00:15:15] watching diptrade added at 46 bought the
+[00:15:19] dip there now we're going to look for
+[00:15:21] that squeeze through twelve dollars see
+[00:15:23] how this is a micro pullback
+[00:15:26] watch over 75 and then 80.
+[00:15:31] 1250 13 next Target
+[00:15:37] watching for dips to add
+[00:15:39] the advantage here is that this is our
+[00:15:41] leading Gap or behind the buyout
+[00:15:44] so I'm going to be buying dips for the
+[00:15:47] move through 12.
+[00:15:50] watching down here for an ad first one
+[00:15:52] minute candle to make a new high is the
+[00:15:54] spot
+[00:15:59] putting an order at 11.95
+[00:16:08] b-wap is 11 13.
+[00:16:12] so let's give this a moment to base out
+[00:16:15] double bottom off of 12 and then an add
+[00:16:19] over 11 45 1150.
+[00:16:30] looking for the curl back through 1150
+[00:16:32] 1175 and 12.
+[00:16:34] good job for those that jumped on in the
+[00:16:36] nine area
+[00:16:38] added on the dip at 1105. so buying the
+[00:16:40] dip
+[00:16:42] still waiting for the first one minute
+[00:16:43] candle to make a new high
+[00:16:48] I'm going to stay focused on this one
+[00:16:49] because that rate of change there from 8
+[00:16:52] all the way to 12.
+[00:17:03] hi this last one minute candle is 11 50.
+[00:17:11] so right now in the 10 second chart
+[00:17:13] looking for the curling through 11 48.
+[00:17:22] it was 11 15.
+[00:17:36] once we get a little closer to the bowel
+[00:17:40] this may get more volume
+[00:17:43] added it 1104
+[00:17:46] buying the dip there
+[00:17:48] trying to buy the dip to anticipate the
+[00:17:50] first one minute candle making a new
+[00:17:52] high
+[00:17:56] watch now for the break through 11.50
+[00:18:03] see right there
+[00:18:05] I was starting to dial in this is that
+[00:18:07] pull back high is 35.
+[00:18:13] so add spot is 35
+[00:18:24] yeah we want to see this back over 11 50
+[00:18:26] 11.75 and that rip up to 12.
+[00:18:43] I'll help you fix it in a moment that
+[00:18:45] does at his workstation
+[00:18:49] watch over 11 35 for an ad
+[00:18:56] so there's 11 35 looking for that curl
+[00:18:58] first one minute candle to make a new
+[00:19:09] waiting for the momentum to pick back up
+[00:19:11] through 35 and 45.
+[00:19:23] got ascending support
+[00:19:26] through here
+[00:19:42] so we're up 40 here on the guidance
+[00:19:56] watching for a dip now off this yellow
+[00:19:58] line
+[00:20:05] Avid 99 so buying the dips on it
+[00:20:09] bottoming tail looking for the curl back
+[00:20:12] through 28 and 30.
+[00:20:16] so we're looking for the break through
+[00:20:18] 11 35.
+[00:20:21] and as long as it bases out here and
+[00:20:24] still holds up
+[00:20:26] above 11 which it is right now I'm
+[00:20:28] looking for that curl back through 1150.
+[00:20:30] so watch 35 and 40.
+[00:20:36] got 25 on the ask there 35 is our
+[00:20:39] breakout spot that's the pivot right
+[00:20:52] so let's see if we get that first
+[00:20:55] break over 35 for a retest of 11.50 we
+[00:20:59] get over 11.50 11.75 and move back to 12
+[00:21:02] would look good so there's 30 on the ask
+[00:21:06] starting a base and curl here
+[00:21:17] the dips off 11 have been good
+[00:21:25] the spot that we want to see break is 11
+[00:21:27] 35.
+[00:21:38] I don't know
+[00:21:42] I'm just going to cut the loss now
+[00:21:44] um I'll I'll come back to it
+[00:21:46] it's breaking down below 11.
+[00:24:05] I could do dip trades but being below V
+[00:24:08] web so good job for those that jumped on
+[00:24:09] it early at 9 16.
+[00:24:12] I was in too high I guess
+[00:24:17] we were holding right there and needed
+[00:24:19] to break back through 11 35 and then it
+[00:24:21] didn't
+[00:25:00] so I'll keep this one on watch
+[00:25:04] I don't like the the volume on these
+[00:25:06] candles is fairly high on uh on these
+[00:25:09] red candles
+[00:25:20] so I should have jumped faster I was too
+[00:25:22] slow
+[00:25:24] and that cost me four grand but it also
+[00:25:27] cost me what could have been a winner
+[00:25:30] I finally added at 11 but then added
+[00:25:32] 11.50 and I added for the break of 12
+[00:25:34] and then stopped out when it came back
+[00:25:36] to 11.
+[00:26:09] so yeah as we sit here we've got about
+[00:26:12] 10 minutes until nine A.M
+[00:26:16] so we'll see if uh we have some
+[00:26:19] headlines that come out around nine
+[00:26:21] maybe something that gives a move like
+[00:26:24] isun but holds a little bit better that
+[00:26:26] would be nice
+[00:26:30] let's see if we get it
+[00:26:52] I'm not sure which one that is
+[00:27:09] so students uh Warrior Pro students in
+[00:27:12] the live trading archives can see share
+[00:27:13] size
+[00:27:19] that's part of strategy of scaling in
+[00:27:21] and scaling out
+[00:27:31] well Sev is currently below the volume
+[00:27:34] weight average price so it would need to
+[00:27:36] break that level
+[00:27:39] which is about 45.29
+[00:28:06] that halt up and then resumption and
+[00:28:09] then a sharp pullback back to 13.50
+[00:28:12] yesterday's high was about 14 27.
+[00:28:16] maybe worth keeping an eye on I'm not
+[00:28:18] sure
+[00:29:02] so if you spam the chat you go in
+[00:29:04] timeout
+[00:29:06] and I answered your question
+[00:29:13] I said that it's available for warrior
+[00:29:15] Pro students
+[00:29:17] who watch live trading archives
+[00:29:44] yeah uh starter size there at 3415 let's
+[00:29:47] see if it holds through 35.45
+[00:29:51] starting to open up there a nice move
+[00:29:52] from 33 up to 34.
+[00:29:57] these are going to keep opening up
+[00:29:59] through 34.25 30 34 45 and then 50.
+[00:30:06] that doesn't really seem like it
+[00:30:10] so it's just about finding the one
+[00:30:12] that's starting to move
+[00:30:14] right now you know small trade on that
+[00:30:17] down 200 bucks is no big deal but
+[00:30:20] just waiting for something to show some
+[00:30:22] more strength
+[00:30:31] it's a continuation setup
+[00:30:33] so we've got about five minutes till 9
+[00:30:35] A.M
+[00:32:31] all right so let's see if we get uh any
+[00:32:35] headlines here coming into 9 A.M
+[00:32:43] so I'm down forty six hundred dollars in
+[00:32:46] my main account I'm gonna switch over to
+[00:32:47] my retirement
+[00:32:49] see if maybe the next one is green make
+[00:32:51] a little money in the retirement account
+[00:33:12] it's right over there
+[00:33:22] because I want you to be careful with it
+[00:33:24] be very careful please
+[00:33:51] breaking your dish
+[00:34:00] know what
+[00:34:03] no there's no Pantry here
+[00:34:51] all right so about five seconds till 9
+[00:35:16] what's the question James is that on the
+[00:35:19] quiz
+[00:35:21] and see it
+[00:35:36] uh drna is a buyout so that one's going
+[00:35:40] to trade sideways at the buyout price
+[00:35:47] thank you
+[00:36:02] or well it's not valued the market
+[00:36:06] doesn't like it very much certainly
+[00:36:07] compared to Tesla
+[00:36:13] ibio that news is from earlier and it's
+[00:36:17] too cheap
+[00:36:18] ibrx covid-19 catalyst
+[00:36:27] I can't I pulled up that stock it must
+[00:36:28] be an OTC stock because I can't even get
+[00:36:30] quotes on it
+[00:36:41] ravian yeah well you know
+[00:36:45] that's more of a swing trade type of
+[00:36:47] stock than a day trade stock
+[00:36:49] so I'm not really focusing on that one
+[00:36:51] too much
+[00:36:56] lgvn uh I see it
+[00:37:00] it's hard to know you know it's hard to
+[00:37:02] know if this one's going to be one that
+[00:37:03] really opens up
+[00:37:12] something I'm not trusting just yet
+[00:37:20] I think girls in her house I think she's
+[00:37:23] having a sleep
+[00:37:29] no I didn't hear her barking she's
+[00:37:31] sleeping she's in her house
+[00:37:34] she's in her little puppy house
+[00:37:37] sellers at four dollars on lgvn
+[00:37:45] okay now I hear her
+[00:38:20] isun yep I still have that one up oops
+[00:38:36] needs to get back over volume weighted
+[00:38:38] average price
+[00:38:53] well I have the cardboard yeah I have
+[00:38:55] the um the food truck that I made still
+[00:38:58] downstairs
+[00:39:11] one minute pullback on lgbn surprised
+[00:39:13] that it popped up
+[00:39:18] reminder for those just tuning in for
+[00:39:19] the first time especially on YouTube I
+[00:39:21] hope you hit the thumbs up I hope you
+[00:39:23] subscribe to the channel
+[00:39:25] as a reminder as always trading is risky
+[00:39:26] I'm down forty six hundred dollars uh on
+[00:39:29] the morning right now so I've gone into
+[00:39:30] the red and I've got uh some work to do
+[00:39:33] to get back into the green
+[00:39:34] my daily goal is about twenty thousand
+[00:39:37] dollars so
+[00:39:39] have some work to do but I am not sure
+[00:39:43] uh it's gonna happen today because I
+[00:39:46] need something giving me some momentum
+[00:39:48] and we're things are definitely a little
+[00:39:51] cooler right now it's a little colder
+[00:39:55] scanners are showing us stocks they're
+[00:39:57] moving but waiting to find the right one
+[00:39:59] to jump on I was a little slow on isun
+[00:40:02] had I jumped on it sooner
+[00:40:04] well
+[00:40:05] would have been green so good job for
+[00:40:07] those of you guys that uh got on it
+[00:40:09] before me it was on the scanners as it
+[00:40:12] started squeezing up so
+[00:40:14] you can see right here on the scans
+[00:40:16] 988 1054 96 1066.
+[00:41:08] mm-hmm
+[00:41:14] you'll have to wait you have to we'll
+[00:41:15] have to go next door to get more a
+[00:41:17] little bit you want some water
+[00:41:27] that's silly
+[00:41:41] it's two for now here you go
+[00:41:42] all right that's for you and go back to
+[00:41:45] my workstation now
+[00:41:48] okay you're gonna go to your workstation
+[00:42:05] problem with isun is about the volume
+[00:42:08] the high volumes on reg five minute
+[00:42:10] candles
+[00:42:11] so it needs to get back over the volume
+[00:42:13] weight average price pretty darn quick
+[00:42:17] 10 50 11. we'll see
+[00:43:05] m m r a n t
+[00:43:09] I have invalid symbol
+[00:43:13] I don't know what to tell you
+[00:43:15] I can't pull up the quotes on it either
+[00:43:22] I got nothing on that on that ticker
+[00:43:42] M is for Macy's
+[00:43:48] yeah so Macy's
+[00:43:51] um department store not not one that I
+[00:43:53] would be really interested in actively
+[00:43:54] trying to day trade
+[00:44:18] yeah okay
+[00:44:22] thank you for clarifying that
+[00:44:36] yeah I heard her she was barking at the
+[00:44:39] garage door opening what a silly girl
+[00:45:06] it's correct my results are not typical
+[00:45:39] so let's see if this LG VN breaks
+[00:45:42] through 410
+[00:45:44] I'm in a four
+[00:45:49] away
+[00:45:55] watching for an ad at 408
+[00:45:59] it's definitely moving up a little bit
+[00:46:07] so support it for
+[00:46:10] there's 408 nice 500 trade
+[00:46:15] gets things started
+[00:46:20] I'm going to switch over to my
+[00:46:21] retirement account
+[00:46:22] again high is 413.
+[00:46:33] I'm not sure where it might start to
+[00:46:35] open up a bit more
+[00:46:39] if that's a realistic expectation at
+[00:46:41] this point
+[00:46:44] but nice job from the entry at 380
+[00:46:46] through the high pull back at 4 3.95
+[00:46:49] then a break through the high
+[00:46:52] so if it pulls back to 395 we want to
+[00:46:54] see it hold that level
+[00:47:05] added back there 12.
+[00:47:08] still looking for the Breakthrough 15 16
+[00:47:11] 17.
+[00:47:14] got about 15 minutes to the bell and
+[00:47:17] this one does seem to be the most
+[00:47:18] obvious right now
+[00:47:20] so high that candle is 17.
+[00:47:27] holding right now at 12. looking for an
+[00:47:29] ad through 17.
+[00:47:31] they're 16.
+[00:47:34] if this starts to pull away a little
+[00:47:36] more maybe we start to get a little bit
+[00:47:38] of a
+[00:47:38] momentum trade out of it
+[00:47:41] that'd be nice
+[00:47:44] so we've got 15 on the ask there's 15.
+[00:47:49] they're 16 they're 17 added at 17. now
+[00:47:52] looking for the squeeze up to 21.
+[00:47:54] 750 dollars
+[00:47:58] high that candle's 20 New Order 21.
+[00:48:03] probably let it pull back a little bit
+[00:48:11] think about where would short start to
+[00:48:13] cover
+[00:48:15] it is easy to borrow
+[00:48:20] daily resistance
+[00:48:25] okay can I hold it here yeah we'll have
+[00:48:28] to get some tape to put it back on
+[00:48:30] that's okay
+[00:48:42] so we want to break through 432
+[00:48:50] SCV breaking through v-wap I see that
+[00:48:53] the high there is uh 46.44 this one of
+[00:48:57] course is a bit higher priced
+[00:48:59] which makes the risk a little higher
+[00:49:04] see if it can hold over the v-wap lgvn
+[00:49:07] side chart
+[00:49:09] hey
+[00:49:11] hey you need to be quiet
+[00:49:22] so Sev I got a partial fill on an order
+[00:49:26] but only a partial fill
+[00:49:31] see how much higher it goes
+[00:49:35] 85 bucks
+[00:50:03] LG via and pulling back a little bit
+[00:50:14] I mean all in all it's really pretty
+[00:50:17] slow this morning you know a little
+[00:50:19] something on lgbn a little something on
+[00:50:21] SUV
+[00:50:51] yeah I don't know on that one there's a
+[00:50:54] headline mymd Investment Company
+[00:50:57] announces joint venture
+[00:50:59] commercialized oral covid-19 vaccine in
+[00:51:02] Mexico Drive business development in
+[00:51:04] Latin America
+[00:51:06] big spreads not a lot of volume
+[00:51:09] I from uh last week was 10.
+[00:51:28] so lgbn broke back below 95 but then got
+[00:51:32] right back above that level
+[00:51:34] so a retest of the previous breakout
+[00:51:38] we may get some more opportunities on it
+[00:51:40] but all things considered it's moved
+[00:51:41] pretty slowly not not anything too
+[00:51:44] exciting
+[00:51:46] so sitting on the morning down about 3
+[00:51:49] 500 between my two accounts
+[00:51:53] it was up 3 000 yesterday so kind of
+[00:51:55] giving back yesterday's profit today
+[00:51:59] which is not a big deal
+[00:52:13] in any case we haven't had a really nice
+[00:52:15] big momentum stock this week that I've
+[00:52:18] been able to catch
+[00:52:20] so quick trade there on SCV for the
+[00:52:23] squeeze up to 48.
+[00:52:25] Now look for 48.50 so you see how it's
+[00:52:28] opening up pulling away from view app
+[00:52:31] so watching uh for an ad up here on Sev
+[00:52:35] 4810
+[00:52:40] let's see if we get the curl added 4810
+[00:52:43] next adds 48.50 on SCV
+[00:52:47] see how it's pulling away here
+[00:52:49] watching 48
+[00:52:51] uh 50 for the next ad
+[00:52:53] at 48.50 now look for 49.
+[00:52:57] let's see if we get that curl up to 49
+[00:52:59] and then up to 50. now we've got some
+[00:53:01] action
+[00:53:03] this is up 26 of course just ipo'd uh
+[00:53:07] yesterday
+[00:53:10] holding 5 000 shares looking for a dip
+[00:53:13] to add back added at 13 bought the dip
+[00:53:16] Now look for the pot back up to 48.50
+[00:53:19] 48 65 4870 and just like that we've got
+[00:53:22] some action watching 48.75 to break for
+[00:53:25] a move back to 49.
+[00:53:29] 49 Target then 50.
+[00:53:34] so looking for the break back over 48.50
+[00:53:36] holding smaller size right now high this
+[00:53:39] candle is
+[00:53:41] 48.78 New Order goes at 49.
+[00:53:48] so finally a nice trade there
+[00:53:51] on the break of that uh consolidation
+[00:53:57] it's not perfect needs to get over the
+[00:53:59] top of 49.30
+[00:54:03] right here but if we could break through
+[00:54:05] that level then we might start to get
+[00:54:08] um a bigger move over 50. I like it a
+[00:54:11] lot more
+[00:54:13] so watch this one minute pullback here
+[00:54:15] the high is 48.78 still holding small
+[00:54:18] size orders ready to add back
+[00:54:24] added there for the squeeze up to 49.
+[00:54:29] watch 48 65 and 75.
+[00:54:34] this is a 10 second pullback
+[00:54:42] and then trades at the open on this from
+[00:54:44] up to 49 and 50 dollars
+[00:54:49] watching to add down here off of the 20
+[00:54:53] moving average
+[00:54:57] looking for the dip
+[00:54:59] added at 17 bought the dip
+[00:55:04] now looking for the break back through
+[00:55:05] 45 and 50.
+[00:55:08] this is a 10 second pullback one minute
+[00:55:10] pullback
+[00:55:14] so looking for 48 65 4870
+[00:55:22] holding 300 shares for right now
+[00:55:33] 10 minutes to the Bell
+[00:55:39] looking for another dip entry
+[00:55:53] Sava that one's tricky
+[00:56:09] so I sold the rest I'm going to look for
+[00:56:10] a dip below 40.
+[00:56:13] uh 48.
+[00:56:15] watching the level two
+[00:56:17] orders at 48
+[00:56:19] 05.
+[00:56:37] look at that so
+[00:56:43] look at that pop man
+[00:56:45] that was a wild candle up to 48.68 back
+[00:56:48] down to 48.
+[00:56:52] eight minutes to the Bell
+[00:56:57] so now I'm green on the day of 5700 in
+[00:57:00] my retirement but down 4 100 in my main
+[00:57:02] account so up 1700 on the day
+[00:57:18] so all it takes is one and I kind of
+[00:57:21] missed isun that one I screwed up a bit
+[00:57:25] and this one it looks like I left some
+[00:57:26] money on the table on it
+[00:57:30] but 4930 is our resistance level
+[00:57:33] right in here
+[00:57:35] so
+[00:57:36] I'm going to put my new order at 50 and
+[00:57:38] we'll see if it can get over that level
+[00:57:40] then we're looking for a retest of
+[00:57:41] yesterday's eyes
+[00:57:42] this one's coming you know back up quite
+[00:57:45] a bit
+[00:57:50] price is a little higher so risk is a
+[00:57:53] little a little higher there
+[00:57:57] so micro pull back there and then 49.36
+[00:58:01] but resistance some sell orders going
+[00:58:03] through
+[00:58:26] no no I don't want you to press that
+[00:58:28] button
+[00:58:30] yeah I don't want you to press that
+[00:58:32] button this button no that wouldn't
+[00:58:34] either no no certainly not don't even
+[00:58:37] think about it
+[00:58:38] definitely not
+[00:58:41] yeah those are my buttons for work
+[00:58:46] because what because I work because I'm
+[00:58:48] at my workstation where where's your
+[00:58:50] Workstation
+[00:58:52] I want to see you work on that farm
+[00:58:54] let's see we've got four minutes to the
+[00:58:57] Bell
+[00:59:30] you know the rules
+[00:59:32] you know those go on I set up your barn
+[00:59:34] it's fixed
+[00:59:46] so we've got a little bit of a topping
+[00:59:48] tail candle there up to 49.38 right into
+[00:59:51] that resistance level not surprising
+[00:59:54] back down here
+[00:59:56] pulled back to just under 40
+[01:00:00] 756 that's a that's a good pullback
+[01:00:09] forty eight
+[01:00:12] I'm gonna do a dip trade there at 46.40
+[01:00:16] that's a nice candle to buy a dip on
+[01:00:19] and then let's dip right off the v-wap
+[01:00:21] so now watching over 46.75
+[01:00:25] to add
+[01:00:27] for the pop back up through 47. see what
+[01:00:29] I think is going to happen we're gonna
+[01:00:30] have a bottoming tail here on this and
+[01:00:32] then a pop back up over 48.
+[01:00:35] so the lower that candle is 46. watch
+[01:00:37] for the ad over 46.75
+[01:00:43] and then let's see if we pop back up
+[01:00:45] over 47 nice dip trade off the V web
+[01:00:48] so watching 46.75
+[01:00:56] holding 2 800 shares right now
+[01:01:03] at them for now is it's breaking a new
+[01:01:06] low one of the rules of thumb here below
+[01:01:08] 46 if it's coming back to that level I
+[01:01:13] gotta cut it and then I can always add
+[01:01:14] back so added back at 45.88 1500 shares
+[01:01:19] 45.88 that's a nice dip entry now let's
+[01:01:22] see if it holds this level and then I
+[01:01:24] can add over 46.25 for a move back to
+[01:01:26] 46.50
+[01:01:29] so I like that 88 entry now let's see if
+[01:01:32] it there's 25 added at 25. now looking
+[01:01:35] for it to reclaim 46.50 as a bounce off
+[01:01:37] the view app
+[01:01:43] so we're sitting up 20 here with three
+[01:01:45] minutes to the Bell
+[01:01:48] looking for 46.25 46.50
+[01:01:56] still watching this area here we're
+[01:01:59] right at the volume weighted average
+[01:02:00] price
+[01:02:01] this is a support level
+[01:02:05] add more at 90.
+[01:02:07] trying to catch the bounce off of V web
+[01:02:10] back up to 46.25
+[01:02:23] there you go so there's that green
+[01:02:25] candle
+[01:02:26] forming on the one minute
+[01:02:28] there's 20
+[01:02:30] can we get back to 25 and 30
+[01:02:39] no I'm surprised I'm really surprised I
+[01:02:42] would have thought for sure that would
+[01:02:43] bounce there
+[01:02:44] so back to red on the day uh up 3600 in
+[01:02:48] my retirement but down 4 100 so down 500
+[01:02:52] on the day here with two minutes to the
+[01:02:53] Bell that really does surprise me I
+[01:02:55] would have thought for sure it would
+[01:02:56] hold that v-wap
+[01:02:59] I have the view app at 45.78
+[01:03:06] so you know this is this is tough when
+[01:03:08] you get those big red candles
+[01:03:38] all the way back down here so where
+[01:03:41] might we find some support
+[01:03:43] golly
+[01:03:49] the low down there was 42.84
+[01:03:55] .
+[01:03:57] 4235 maybe support
+[01:04:00] I mean look at that red kit though you
+[01:04:01] know this is from 49 all the way back to
+[01:04:03] 42 43. it's pretty gross
+[01:04:07] so we've got one minute to the Bell
+[01:04:27] though got green on it which is good but
+[01:04:31] didn't end up getting a big trade
+[01:05:01] all right so there's the opening bell
+[01:05:02] let's see what we get
+[01:05:15] for those that maybe did dip on SUV but
+[01:05:19] take some guts to do it after that drop
+[01:05:30] look at that bounce 43 up to 45 70.
+[01:05:39] can't get in up here it's too high if it
+[01:05:42] broke over the high back here I'd have
+[01:05:45] more of a long bias on it right now it's
+[01:05:47] too risky
+[01:05:51] so 49.38 that's the spot to watch
+[01:05:55] anything up here would be just have to
+[01:05:57] be very quick trades get in get out
+[01:06:05] alt up is 49.76
+[01:06:09] there you get the big move up let's see
+[01:06:11] if it drops back down or holds I is
+[01:06:14] 47.22
+[01:06:17] then flashes to 46.50 so a bid a seller
+[01:06:21] comes in and it drops 50 cents just like
+[01:06:23] that
+[01:06:25] really gotta find something cheaper to
+[01:06:27] focus on
+[01:07:05] so in any case first day of the IPO
+[01:07:08] really strong second day you know good
+[01:07:10] continuation after hours it's not
+[01:07:12] holding
+[01:07:14] um super super well here but
+[01:07:18] LG VM
+[01:07:21] oh I don't know gave it a fair try
+[01:07:23] earlier
+[01:07:30] right let's see so it's sort of popped
+[01:07:32] up here a couple times to four and then
+[01:07:34] drops back down
+[01:07:36] it makes it hard to trust
+[01:07:46] we'll see it is a green candle at the
+[01:07:48] open which is good
+[01:07:50] still have a little bit of time left so
+[01:07:54] right now
+[01:07:56] you probably say
+[01:07:59] you know this is sort of its range if it
+[01:08:01] breaks below 72 then that's no good
+[01:08:13] I'll take an LG VN starter there for the
+[01:08:15] break of four because it's doing a flat
+[01:08:17] top here
+[01:08:19] so we should rip through four there's
+[01:08:21] four can we get to 405 410
+[01:08:28] no small trade
+[01:08:33] hit a high only of uh 401 New Order
+[01:08:36] would be 410. just got a lot of sellers
+[01:08:39] up there
+[01:08:45] if it can break that level you know it's
+[01:08:47] good that it's green here uh on this
+[01:08:49] candle on the five big green volume
+[01:08:52] candle at the open
+[01:08:56] which is getting a good entry on it
+[01:09:07] there you go
+[01:09:08] okay so now the question is does it hold
+[01:09:10] right
+[01:09:12] so starter there 418 and we're going to
+[01:09:15] look for this to squeeze through 425
+[01:09:17] we've got a big green candle there
+[01:09:19] right so 420.
+[01:09:21] adding at 420. there's 425 there's 430.
+[01:09:27] there's 435.
+[01:09:29] okay so now I'm going to watch for an
+[01:09:32] entry over 435.
+[01:09:34] added 435 now looking for 445 and 450.
+[01:09:39] over 445 is an ad for the break of 450.
+[01:09:42] now we've got something squeezing we're
+[01:09:44] up 50 this looks good
+[01:09:46] so the next trade on this is 445.
+[01:09:49] finally we've got something moving
+[01:09:52] added 441 for the break of 445 looking
+[01:09:55] for a squeeze to 450.
+[01:09:59] watch on the first dip on this
+[01:10:01] for pullback entries
+[01:10:04] average is 33 right now watching for a
+[01:10:07] dip ad
+[01:10:10] MIT 32
+[01:10:14] if we start to get something that opens
+[01:10:16] up and holds
+[01:10:18] I'm going to try to be aggressive
+[01:10:20] so let's watch over 45
+[01:10:24] there's 36 adding at 37 adding at 38
+[01:10:28] taking some profit 45
+[01:10:31] puts me up 6 000. hi this candle is 45
+[01:10:34] New Order goes at 50.
+[01:10:40] unwinding flat
+[01:10:43] orders at 50 to add back
+[01:10:45] so what do we have a big green candle at
+[01:10:47] the open that's good we broke through
+[01:10:49] 432 our daily resistance we now have
+[01:10:51] room to 5 38.
+[01:10:55] does it go that high I don't know
+[01:10:59] we've been struggling to see
+[01:11:00] continuation
+[01:11:02] so we know the level that needs to break
+[01:11:03] it's 45.
+[01:11:07] it is easy to borrow so Traders I'm sure
+[01:11:09] will be happy to short it
+[01:11:25] not a buyer right here it's a little
+[01:11:27] extended
+[01:11:40] dip down there was to 23.
+[01:12:05] so right now it's holding
+[01:12:07] at back at 37 there for the break of 45.
+[01:12:13] next ad is 45
+[01:12:16] holding at 37 right now
+[01:12:21] flat
+[01:12:23] at 30.
+[01:12:25] false breakout but double top here so
+[01:12:28] still the level in play
+[01:12:39] Sev I just don't have that much interest
+[01:12:41] in it at this point it pulled back too
+[01:12:43] much
+[01:12:56] so it's still early
+[01:13:02] so gains in my retirement losses in the
+[01:13:05] main account but green 1600 on the day
+[01:13:15] looking for the break of 45 this is a
+[01:13:17] flat top breakout setup
+[01:13:19] added at 45 next adds 55.
+[01:13:23] and then 65.
+[01:13:25] added at 55. now we're looking for 65
+[01:13:27] and 75 for this to pull away
+[01:13:31] there's 59 there's 61.
+[01:13:34] taking a little profit only small gains
+[01:13:37] right now on it new ad is 65.
+[01:13:45] 46 average
+[01:13:51] so nice flat top breakout high is 65.
+[01:13:54] New Order 69.
+[01:14:02] dip trade at 55 buying the dip as it's
+[01:14:05] holding that level
+[01:14:07] right so it's holding the 50s now
+[01:14:09] looking for the ad through 60 and 65.
+[01:14:19] 10 000 share buyer there added 57.
+[01:14:24] so we're looking for the break of 65.
+[01:14:30] average is 53.
+[01:14:39] what happened
+[01:14:42] unwinding
+[01:14:50] oh I know how to fix this you you do I
+[01:14:54] do
+[01:14:59] we have to be very careful
+[01:15:06] I want you to be very careful with this
+[01:15:17] still holding 45.
+[01:15:25] 48 holding support there looking for
+[01:15:29] 55.65
+[01:15:32] took it at 52.
+[01:15:35] New Order 60.
+[01:15:39] prove you can hold these levels that's
+[01:15:41] what I want to do
+[01:15:43] I is 65.
+[01:15:46] add it back at 60. now we're starting to
+[01:15:49] get ready for that break of 65 and then
+[01:15:51] 75.
+[01:15:53] added 65 now for 70. see how we're
+[01:15:56] pulling away this is what we want to see
+[01:16:00] there's 75.
+[01:16:03] there's 76.
+[01:16:06] so finally we're getting something where
+[01:16:08] despite being easy to borrow we're
+[01:16:10] seeing some good staying power the high
+[01:16:13] is 77.
+[01:16:16] holding a thousand shares
+[01:16:27] dip trade at 49
+[01:16:33] there's 57
+[01:16:38] average is 52 and I sold the rest for
+[01:16:41] now uh not quite there we go
+[01:16:45] so 9400 in the retirement down 4100 in
+[01:16:49] the main so that's four thousand dollar
+[01:16:51] a day right now
+[01:17:10] I tried it earlier it's a blue sky setup
+[01:17:15] but I don't want to get distracted
+[01:17:19] um because I'm not sure that this one's
+[01:17:21] going to be strong enough
+[01:17:26] it broke again you got to be so careful
+[01:17:29] with it
+[01:17:30] what's going on over there
+[01:17:32] what in the world
+[01:17:44] I think it's I think you got to be a
+[01:17:46] little bit more careful with it I think
+[01:17:47] that's what's going on
+[01:17:50] so let's see what this does on the five
+[01:17:52] minute uh chart for the next few minutes
+[01:18:03] binder is always that trading is risky
+[01:18:06] my results are not typical
+[01:18:08] encourage you to take it slow don't
+[01:18:10] trade money you can't afford to lose
+[01:18:16] IO and Q is tempting but I
+[01:18:19] I just don't know if it's gonna work
+[01:18:23] 28 million shares on lgbn is better
+[01:18:25] volume for sure
+[01:18:40] look at that a dollar a share from 35 up
+[01:18:44] to 36.
+[01:18:51] right so you got that break there 35 all
+[01:18:54] the way up to 36 that was nice
+[01:19:05] so see the edges yeah
+[01:19:07] it goes in here
+[01:19:10] that's
+[01:19:14] but it's fragile so you got to be really
+[01:19:16] careful otherwise it's going to fall out
+[01:19:17] again
+[01:19:18] okay go back to your workstation
+[01:19:24] bird
+[01:19:26] another one I'm not super familiar with
+[01:19:29] although it's a recent
+[01:19:31] um somewhat recent IPO Blue Skies 3244.
+[01:19:37] leave it alone for right now
+[01:20:05] so lgbn
+[01:20:08] added back 67.
+[01:20:11] this is having good staying power next
+[01:20:14] ad is going to be over 70.
+[01:20:18] so the high a day right now is 77 so I'm
+[01:20:21] looking for the break of 70.
+[01:20:24] added at 70. there's 73 there's 74.
+[01:20:30] holding 1300 shares
+[01:20:39] watch for a dip
+[01:20:44] so having a stock that's easy to borrow
+[01:20:47] that starts to
+[01:20:50] show some irrational strength can be
+[01:20:52] good
+[01:20:53] nice job for those that bought the dip
+[01:20:56] watching 74.75 of course we are coming
+[01:20:59] up to a double top
+[01:21:08] flat looking for a dip
+[01:21:11] we know the five minutes a bit extended
+[01:21:17] of course if it breaks it breaks right
+[01:21:47] well that's a good question
+[01:21:49] um question there of do I have a chapter
+[01:21:51] on patience
+[01:21:53] um we do talk about that quite a lot
+[01:21:54] because it is very important seller big
+[01:21:56] seller at 75
+[01:21:59] probably a false break here but let's
+[01:22:01] see what it does
+[01:22:04] so Pop's just a little higher
+[01:22:07] up to 85 and then pulls back
+[01:22:10] so you could have done a high day break
+[01:22:11] there over 75 if you were quick
+[01:22:16] new high is 85.
+[01:22:19] let's go on the dailies 5 38. we're
+[01:22:22] making our way there but it's a bit slow
+[01:22:30] so red candle high is 85 New Order goes
+[01:22:33] at 90.
+[01:22:36] that way I'm ready to press the buy
+[01:22:44] so can I hold 75 back to 74.
+[01:22:55] thing on the five is that we've gone
+[01:22:57] from 380 to 480 you know a dollar a
+[01:23:00] share and it hasn't really pulled back
+[01:23:01] on the five minute chart
+[01:23:04] so now we're just kind of getting into
+[01:23:05] all right well do we
+[01:23:07] do high day breaks on it is there enough
+[01:23:11] profit
+[01:23:12] enough profit potential to justify the
+[01:23:14] risk and
+[01:23:16] not sure yet
+[01:23:21] but let's watch 85.
+[01:23:26] so starter there now looking for 85 and
+[01:23:30] then 90. there's a big bid there
+[01:23:33] at 85 there's 87.
+[01:23:43] so a couple like 100 bucks on that trade
+[01:23:51] I know we'll we'll switch them out a
+[01:23:53] little bit later hey I'm at my
+[01:23:54] workstation back to work
+[01:24:02] okay hold on let me send let me send a
+[01:24:04] message hold on
+[01:24:25] you gotta wait two minutes bud
+[01:24:36] eye on this candle's 87
+[01:24:38] New Order still at 90.
+[01:24:45] it's very rare to see Macy's on the
+[01:24:46] scanner yeah I sent her a message
+[01:24:51] no not yet we gotta wait
+[01:24:53] we gotta wait for her to reply
+[01:24:56] send a message back
+[01:25:00] hi there is 87.
+[01:25:09] so volume pulling back a little bit
+[01:25:12] like we're topping out probably up here
+[01:25:15] do for a five minute pullback
+[01:25:20] we'll see what it does
+[01:25:49] so dip trades on this would probably be
+[01:25:52] around the 20 moving average we'll see
+[01:25:56] if it comes down to 450.
+[01:26:06] so lower that candle there was 62.
+[01:26:11] it would start at 67. I just want to see
+[01:26:14] if it bounces back up to 75 here
+[01:26:17] five minutes still a little early but
+[01:26:20] even back up to 75 would be okay
+[01:26:30] low on this candle is 62 so 62 is a
+[01:26:35] possible ad spot
+[01:26:45] watching for ads
+[01:27:01] added at 63.
+[01:27:09] looking for the curl back up to 70 and
+[01:27:12] looking to add closer to 50.
+[01:27:19] what's a mystery
+[01:27:23] I'm not working some lights are not
+[01:27:26] working no oh no
+[01:27:30] that seems like a mystery to me
+[01:27:32] what should we do
+[01:27:39] no no don't put that down there no don't
+[01:27:41] do that because I'll lose it it'll be
+[01:27:43] gone forever
+[01:27:45] looking for the break back over 75
+[01:27:48] as it starts to base out here
+[01:28:00] first one minute count will make a new
+[01:28:01] high 72 New Order goes at 73.
+[01:28:11] watching support around half dollar
+[01:28:21] so 20 moving average is around 53.
+[01:28:26] add 58
+[01:28:28] so I'm trying to accumulate off the 20
+[01:28:31] on the one minute chart
+[01:28:37] supports at the half dollar
+[01:28:46] okay bottoming tail hi this candle 68
+[01:28:48] new order at 65.
+[01:28:54] got 41 million shares of volume up 56
+[01:28:56] percent
+[01:29:03] added 60. now we're curling looking for
+[01:29:08] 65 and 70.
+[01:29:23] this five minute candle is getting ready
+[01:29:24] to close the high is 84. so certainly
+[01:29:28] over 84 would be the spot to look for a
+[01:29:30] break back through the highs
+[01:29:40] still looking for the first one minute
+[01:29:45] dip trades off the half dollar
+[01:29:58] nice good job green is good that's great
+[01:30:14] hi that candle is 64.
+[01:30:25] so what I'd like to see is the
+[01:30:26] Breakthrough 65 and then 70.
+[01:30:32] but I'm just going to cut it for now
+[01:30:33] lost 2 000 on that trade
+[01:30:37] it just feels like we're not having that
+[01:30:39] staying power you know we'll have
+[01:30:41] something that moves up and then it
+[01:30:42] doesn't hold up and
+[01:31:11] it's all Annoying back to 65 there
+[01:31:15] but you know all things considered
+[01:31:17] it's not going to be a good day for me
+[01:31:18] it's not going to be a home run day it's
+[01:31:20] not going to be a big Green Day down 4
+[01:31:22] 000 the main account up 7 800 so up like
+[01:31:25] 3 500 on the day basically the same as
+[01:31:27] yesterday yesterday I was up three grand
+[01:31:29] we're in a slow market right now you
+[01:31:31] know if I can claw a little bit of
+[01:31:33] profit out of the day
+[01:31:34] that's good that's better than nothing
+[01:31:36] so I'm walking away with a little more
+[01:31:39] than I had two hours ago at the
+[01:31:41] beginning of the day
+[01:31:43] up three thousand dollars three thousand
+[01:31:45] five hundred
+[01:31:47] haven't given back a lot off the top but
+[01:31:49] haven't really made a lot either so it
+[01:31:52] was kind of a slow day
+[01:31:55] grateful to be green
+[01:32:00] waiting still for the next one that
+[01:32:02] starts to open up so for warrior Pro
+[01:32:04] students we'll keep hanging out here
+[01:32:05] we'll see if we get another opportunity
+[01:32:07] on lgbn maybe something else
+[01:32:10] uh and I'll be of course back at the
+[01:32:13] morning show first thing tomorrow
+[01:32:14] morning
+[01:32:16] and hopefully we have some uh good
+[01:32:18] opportunities tomorrow
+[01:32:22] the fact is some weeks are better than
+[01:32:24] others and this has been a pretty slow
+[01:32:25] week but that's part of trading so if
+[01:32:27] you can keep your head above water
+[01:32:29] that's important and wait for the next
+[01:32:31] round of momentum

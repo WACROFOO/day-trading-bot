@@ -1,0 +1,1426 @@
+# 3/12/2021 - LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=0zXUMrYyTx0
+# upload_date: 20210312
+# duration_sec: 4384
+
+[00:00:47] All right, good morning everyone.
+[00:00:48] Okay, so um we're just sitting down here
+[00:00:51] a little past 9:00
+[00:00:53] and
+[00:00:55] um
+[00:00:56] I have a screenshot here of uh Chopper's
+[00:00:59] trading station. He's a member in the
+[00:01:01] room. And I just wanted to show it off
+[00:01:05] because it's awesome. And I was telling
+[00:01:08] him I'm kind of jealous because it's
+[00:01:10] perfectly symmetrical. He's got the
+[00:01:12] monitor stacked sort of the computer the
+[00:01:14] laptop the two monitors one on either
+[00:01:16] side and then those nice
+[00:01:19] um USB
+[00:01:21] uh portables or travel monitors and it's
+[00:01:23] just like such an awesome setup. So,
+[00:01:26] someone asked how how do you set up how
+[00:01:27] do you connect what is 1 2 3 4 5 6 lap
+[00:01:31] six monitors to one laptop? And so, we
+[00:01:34] usually what um what you would do
+[00:01:36] there's a couple different ways you can
+[00:01:37] do it, but um that laptop it looks like
+[00:01:40] a Lenovo. I I I don't know um if it has
+[00:01:43] or maybe it's a Falcon. Uh maybe a
+[00:01:45] Falcon. But, it looks like it has um
+[00:01:49] probably at least two HDMI it's a
+[00:01:53] Falcon. It has two HDMI ports.
+[00:01:56] Uh no, sorry. It's got three. It's got
+[00:01:58] an HDMI and then it's got two mini HDMI
+[00:02:01] ports.
+[00:02:03] And then you can use your your USB
+[00:02:06] monitor your USB port to plug in USB
+[00:02:10] sort of
+[00:02:12] I don't know what they call it but hub
+[00:02:14] and then the two at the bottom are USB
+[00:02:17] and maybe one of them is using an HDMI
+[00:02:19] adapter. So all right, looks like we've
+[00:02:21] got a couple other people sharing their
+[00:02:22] monitors. So let's check this out. All
+[00:02:24] right, so Josh
+[00:02:26] Let me
+[00:02:28] Let me copy this. Let's see.
+[00:02:32] All right, whoa dude. Look at you.
+[00:02:35] You're going professional. That's
+[00:02:36] awesome.
+[00:02:40] And we'll look at some of these cuz
+[00:02:42] they're not really much moving that's
+[00:02:43] interesting. The leading gapper is NLSP
+[00:02:46] and the second is ENTX. And both of them
+[00:02:48] don't look good. So that's awesome.
+[00:02:51] Robert,
+[00:02:53] let's see. Let me paste this.
+[00:02:56] Wow.
+[00:02:57] That's you're so dialed in there.
+[00:03:01] You've got the window.
+[00:03:04] That's a great looking setup. That's
+[00:03:05] clean. You're using a a desktop
+[00:03:07] computer. Nice old table.
+[00:03:10] Lots of reminders. That's good.
+[00:03:13] Keeps you centered. Keeps you grounded.
+[00:03:14] That's great.
+[00:03:17] Couple candlesticks. I I might go one
+[00:03:19] step further and throw a couple of your
+[00:03:22] favorite chart patterns on there.
+[00:03:26] All right, let's see. So we've got
+[00:03:28] another one.
+[00:03:29] Um
+[00:03:31] So these are students posting. Hey,
+[00:03:33] okay, there we go. Hey, there's me with
+[00:03:34] my neon. You looks like you got that
+[00:03:36] shirt that that picture the other day.
+[00:03:39] Nice. What is this like nasal spray?
+[00:03:41] Okay.
+[00:03:44] So you've got laptop 1 2 3. You've
+[00:03:47] basically got the same setup as Chopper.
+[00:03:49] You have the same setup except without
+[00:03:51] that top screen which honestly like we
+[00:03:53] were saying a chopper is going to hurt
+[00:03:55] your neck
+[00:03:56] you know looking up there
+[00:03:58] all the time but you know I mean
+[00:04:00] I've been have had these upper
+[00:04:03] monitors for forever and it's really not
+[00:04:05] not that big of a deal so
+[00:04:07] that's awesome all right let's see what
+[00:04:10] else
+[00:04:12] what else do we have
+[00:04:13] so we got
+[00:04:16] okay so wait that was Robert and then we
+[00:04:17] got Gazo right and then Muhammad okay
+[00:04:20] let's look at this this one
+[00:04:24] nice nice clean setup there you've got
+[00:04:26] the stream deck right there you've got a
+[00:04:28] bottle of water was that a pack of
+[00:04:31] Virginia Slims okay
+[00:04:33] nice set of glasses good good good Fendi
+[00:04:36] nice
+[00:04:37] you're stylish
+[00:04:39] guitar in the background okay nice nice
+[00:04:43] is that a brazier what is what is that
+[00:04:44] no that's just a tangle of
+[00:04:46] cords you guys better be careful I'm
+[00:04:48] going to I'm going to catch something
+[00:04:50] all right copy image let's see
+[00:04:54] hey that's look at that that clock
+[00:04:58] that is so cool
+[00:05:00] that's awesome and you've got this your
+[00:05:03] hot keys
+[00:05:05] your your speakers your notepad
+[00:05:09] the TV there so that's interesting
+[00:05:11] though
+[00:05:12] cuz that's a huge screen but I mean I
+[00:05:15] guess if that works it seems kind of
+[00:05:17] funny the way it's positioned but hey if
+[00:05:18] it works
+[00:05:21] cool okay let's see that's Roy
+[00:05:25] all right Manuel let's see what do we
+[00:05:26] got here
+[00:05:30] wow a lot of vitamins a lot of vitamins
+[00:05:32] all right he's got a regimen okay that's
+[00:05:34] good
+[00:05:35] some toy trucks cool cool
+[00:05:39] nice some chart patterns there
+[00:05:43] it's a clean setup I it's a little more
+[00:05:45] like what some of my earlier ones were
+[00:05:47] like, kind of piecing it together.
+[00:05:52] Nice. Perspective's a little high. I'm
+[00:05:53] guessing you must be like 7 or 8 ft
+[00:05:55] tall.
+[00:05:56] It's definitely looking down at the at
+[00:05:58] the system.
+[00:06:00] Mike, let's take a look.
+[00:06:05] Clean, Monster, couple other
+[00:06:07] supplements. You got your regiment.
+[00:06:09] Wait, is this the same You took a
+[00:06:11] picture the same day as
+[00:06:13] with my neon. Don't you guys think
+[00:06:14] that's just so funny, don't you?
+[00:06:16] Well, I'm taking this shirt off. I'm
+[00:06:17] going to throw you off here.
+[00:06:19] All right.
+[00:06:23] Maybe what I I'll do, I'm going to see
+[00:06:25] I'm going to see if our um
+[00:06:27] I'm going to try to save these and see
+[00:06:28] if we can put this together into like a
+[00:06:29] collage. Maybe we'll make a blog post of
+[00:06:31] just like every one of these.
+[00:06:33] Um that'd be super cool.
+[00:06:36] All right. Um well, now let me keep half
+[00:06:38] an eye on the scanners. Hold on. We're
+[00:06:39] we'll we'll we'll we'll we'll go back to
+[00:06:41] those, but let's just see. So, leading
+[00:06:43] gapper NLSP doesn't look good. Second
+[00:06:46] leader is ENTX. That doesn't look good.
+[00:06:49] So, we got nothing right now.
+[00:06:50] All right. So, we're we we're good to
+[00:06:53] keep looking at some some cool trading
+[00:06:55] stations.
+[00:06:56] If you see something pop up, just let me
+[00:06:58] know.
+[00:07:00] All right. So, let's see. All right. So,
+[00:07:02] we got some of these.
+[00:07:04] All right. So, let's go back. We got
+[00:07:05] chopper. We got
+[00:07:07] All right. I'm going to keep each one of
+[00:07:08] these tabs open. I'm going to have 100
+[00:07:09] tabs open. That way I can just save the
+[00:07:11] images. All right. So, we got Mike.
+[00:07:13] Nice. Uh Hiren, okay. Kumar, let's check
+[00:07:17] let's check it out.
+[00:07:19] Woah, look at that. Oh my god. That
+[00:07:21] looks like a laptop that like a
+[00:07:24] an a US Postal Service. What what is
+[00:07:26] this?
+[00:07:27] You Do you work for UPS on the side?
+[00:07:30] Wow, this is super professional. You
+[00:07:33] definitely seem like you're into what
+[00:07:36] cyber forensics. You know what you're
+[00:07:38] doing. Wow, good for you.
+[00:07:41] Good for you. This is a cool This is a
+[00:07:43] really cool setup. Is this like a put
+[00:07:45] together? It's like a
+[00:07:47] some kind of kit?
+[00:07:49] That's awesome. I don't even know how
+[00:07:50] you do that. I've never seen something
+[00:07:52] like this.
+[00:07:54] Cool. All right, let's see. Um
+[00:07:57] Kenneth
+[00:07:59] Let's look at Kenneth.
+[00:08:02] Okay, he's got to zoom in. My God. Well,
+[00:08:04] you're trading in a simulator. That's a
+[00:08:06] good thing you're in the sim. I'm seeing
+[00:08:07] a lot of red.
+[00:08:09] That's why we practice.
+[00:08:11] Nice. Okay, cool.
+[00:08:14] Rob, let's take a look.
+[00:08:18] That's a cool setup. That's
+[00:08:19] professional.
+[00:08:21] Is that a curved monitor?
+[00:08:23] Super wide.
+[00:08:25] That looks great.
+[00:08:28] That's awesome.
+[00:08:31] All right, let's see. No,
+[00:08:33] that's sweet.
+[00:08:35] That's cool.
+[00:08:36] I have a couple of those with my kids,
+[00:08:37] too.
+[00:08:39] Nice.
+[00:08:43] Cool. I love it. And you've got those
+[00:08:45] LED strips.
+[00:08:47] Perfect.
+[00:08:48] That lighting is awesome.
+[00:08:55] Okay. I like to look at that.
+[00:08:58] Yep, you've got the three two and then
+[00:08:59] this Yep, that's good.
+[00:09:02] That's a nice one.
+[00:09:04] Okay, let's see what else we've got
+[00:09:05] here.
+[00:09:07] That's so cool. That is so cool. That
+[00:09:10] monitor Look at that thing. That curved
+[00:09:12] monitor.
+[00:09:16] That's a cool setup.
+[00:09:19] That's really cool.
+[00:09:22] You're all in. I love it.
+[00:09:24] That's awesome, man.
+[00:09:26] Victor, you you I don't know. I'm
+[00:09:29] thinking you might be in first place.
+[00:09:30] You're You and Chopper are tied for
+[00:09:32] first. I mean, we we go through these,
+[00:09:34] but you you guys are above and beyond.
+[00:09:38] Let's see.
+[00:09:39] Jessica, let's see.
+[00:09:42] Nice. Day trade, surf, I love it.
+[00:09:47] Buy computer chair, awesome. You got
+[00:09:50] your green tea, it looks like.
+[00:09:53] That's so cool.
+[00:09:57] I know and when you have it right in
+[00:09:58] front of a window, it's hard cuz the
+[00:10:00] window's right there.
+[00:10:07] Okay, let's see.
+[00:10:11] We are the missing piece. All right.
+[00:10:13] Seems like a little
+[00:10:14] shameless self-promotion there. That's
+[00:10:16] okay.
+[00:10:17] Uh
+[00:10:17] let's see. Seth?
+[00:10:25] Yeah, look at those little guys. I You
+[00:10:27] know,
+[00:10:28] that's very interesting. Those are
+[00:10:30] collectible, right? People collect
+[00:10:31] those.
+[00:10:36] Still don't see anything. I still have
+[00:10:38] my eye on uh ENTX, by the way. So,
+[00:10:42] you know, ENTX um as a continuation
+[00:10:45] setup, if it gets back over So, the
+[00:10:48] levels that I was kind of drawing from
+[00:10:49] yesterday,
+[00:10:52] uh let's see.
+[00:10:56] Kind of coming down there.
+[00:10:58] And then kind of coming down here.
+[00:11:05] And then we've also got all the way back
+[00:11:07] to here.
+[00:11:08] So, we've got some descending resistance
+[00:11:11] lines that we're kind of coming we're
+[00:11:12] going to come run into if it does come
+[00:11:14] back up.
+[00:11:17] it's I don't know, but it did make a
+[00:11:18] nice move.
+[00:11:25] METX, I see that popped up. NLSP, I have
+[00:11:28] no trades yet today. I I just I missed
+[00:11:31] this move on NLST, you know, this went
+[00:11:33] without me as they sometimes do and
+[00:11:36] so now I don't know I I saw it come up
+[00:11:38] here to the 20s, the 30s and then it
+[00:11:40] just that huge rejection.
+[00:11:43] So I don't know I don't really like the
+[00:11:45] look of it right now. I'm kind of
+[00:11:46] waiting to see if anything else pops up
+[00:11:47] that looks better.
+[00:11:51] So let's see that was Seth's setup.
+[00:11:56] Hey, cool.
+[00:12:01] That's very cool.
+[00:12:03] So that was Jim.
+[00:12:05] The awesome monitor. You've got that
+[00:12:06] same one, the curved display.
+[00:12:10] Okay, a little bit of a a smaller
+[00:12:11] station, little kind of light, nimble.
+[00:12:13] You can move it around. I like that. You
+[00:12:15] can bring it out on the porch even.
+[00:12:17] And wait a second, what's that what's
+[00:12:19] that wall switch? Are we European?
+[00:12:22] Looks well, maybe not, but that's nice.
+[00:12:27] Cool. I love those colors. Another big
+[00:12:30] curved monitor.
+[00:12:31] You guys are going all out with those.
+[00:12:33] Good for you.
+[00:12:35] All right, well I'm going to I'm going
+[00:12:36] to put these all together and do
+[00:12:37] something cool with them. Thank you
+[00:12:38] guys. I wasn't
+[00:12:40] you know, Chopper got it started, but
+[00:12:46] So uh Warrior Pro students, we have
+[00:12:49] class today at uh well, it'll be when we
+[00:12:52] finish trading. So we'll see when the
+[00:12:55] trading day comes to an end. I'm not
+[00:12:56] really sure. That's cool. You got the
+[00:12:58] LEDs turned on.
+[00:13:00] Nice, Jonathan.
+[00:13:03] Now that's a cozy Yeah, a little little
+[00:13:05] tight against the wall there, a little
+[00:13:07] little claustrophobic, but it's good.
+[00:13:08] It's good.
+[00:13:09] You got to kind of wedge yourself in
+[00:13:11] there, but I like that.
+[00:13:15] Makes it work.
+[00:13:23] Luca.
+[00:13:27] Hey, that's cool.
+[00:13:28] Got a lot going on. It's a little busy,
+[00:13:30] but if it works and then you've got
+[00:13:32] these guys.
+[00:13:34] Yeah, that's your keeping you focused.
+[00:13:37] Game time. Oh, and you got some lady
+[00:13:39] right there. Who's that?
+[00:13:40] Or is that a fellow?
+[00:13:42] That's a man, Derek.
+[00:13:45] All right, let's see.
+[00:13:57] All right, did we get this one?
+[00:14:03] Nice, that's awesome.
+[00:14:06] Pickle.
+[00:14:07] All right, let's see what Pickle's got.
+[00:14:09] Just the bull, okay. Nice and a couple
+[00:14:12] dollar $2 bills. Good luck. Good luck.
+[00:14:13] Good luck. Good luck. Good luck. Good
+[00:14:14] luck. Good luck.
+[00:14:17] Uh-oh, we got a problem. Someone's
+[00:14:19] logging in with an AOL account. This is
+[00:14:20] not good. This is not good at all.
+[00:14:24] Oh, boy.
+[00:14:28] Someone send the rescue squad. Josh
+[00:14:30] needs help.
+[00:14:33] Uh-oh, Brandon's got it worse.
+[00:14:42] Now back to some real stations. Nice.
+[00:14:49] It's so cool.
+[00:14:51] Craig.
+[00:14:54] You know, I mean, this is it's Hey, this
+[00:14:55] is cool, too.
+[00:14:57] The We We just We all Every single one
+[00:14:59] of us, we love sitting down here in the
+[00:15:02] morning.
+[00:15:04] And this This is our zone. This is our
+[00:15:06] work station. Now, it's Friday. We've
+[00:15:08] got about 12 minutes to the bell. I'm a
+[00:15:10] little
+[00:15:11] disappointed that we don't have any
+[00:15:12] good-looking gappers. Uh but some days
+[00:15:15] are like this and this is a reminder
+[00:15:17] just to be grateful for the privilege to
+[00:15:19] be able to maybe have a day where
+[00:15:21] uh we don't trade much and that's all
+[00:15:24] right. Trade the best leave the rest.
+[00:15:28] I'll import my trades but
+[00:15:30] where I'm sitting right now on the week
+[00:15:31] let's see I was up 20,000 yesterday.
+[00:15:36] Let's see Monday was like 6,000 Tuesday
+[00:15:39] was 47,000.
+[00:15:41] So I'm sitting at 67
+[00:15:44] 75,000.
+[00:15:46] Roughly not quite 70,000
+[00:15:50] on the week.
+[00:15:51] Even if I don't trade today.
+[00:15:54] Can't complain about that.
+[00:15:57] I'm much better off waiting for a
+[00:15:58] quality setups than overstaying my
+[00:16:00] welcome on the junkie stuff. Nice Elvis.
+[00:16:05] This is a great station.
+[00:16:09] Look at that drop ceiling.
+[00:16:14] That office phone.
+[00:16:16] Someone's someone's working.
+[00:16:23] Oh we got one with a selfie.
+[00:16:26] Someone first one first one out of so
+[00:16:28] everyone's all focused on the trading
+[00:16:29] station and then here comes Jason. He's
+[00:16:32] like hey here I am.
+[00:16:36] Nice man. That's cool. So I don't know
+[00:16:39] you're so you're in Hawaii?
+[00:16:41] Or you're just wanting to be in Hawaii.
+[00:16:51] He likes long walks on the beach.
+[00:16:55] Definitely.
+[00:16:57] Definitely looking for a partner there.
+[00:16:58] All right Vernon nice very cool Western
+[00:17:01] Canada.
+[00:17:04] Michael love it.
+[00:17:09] You guys have some amazing setups.
+[00:17:12] I have no idea what this is.
+[00:17:17] It doesn't really look super trading.
+[00:17:20] Jacob just threw threw one in there. He
+[00:17:22] threw me off.
+[00:17:24] We've got 10 minutes to the bell.
+[00:17:26] Nice. Lots of notes. Keeping yourself
+[00:17:29] focused. Got to keep yourself on track.
+[00:17:31] That's the way. JB, let's take a look.
+[00:17:33] JB's got his 100K club badge.
+[00:17:38] Look at that.
+[00:17:41] So,
+[00:17:42] two of those monitors.
+[00:17:46] Apples, apples. Those are those are
+[00:17:49] That's some money on those apples.
+[00:17:54] Cord management. Not not the most
+[00:17:56] impressive. I think you have some room
+[00:17:58] for improvement there. What is this? A
+[00:18:00] little socket wrench? Okay.
+[00:18:04] What kind of car keys do we have here?
+[00:18:05] What is that?
+[00:18:08] can't tell.
+[00:18:09] Is that alcohol? What's that?
+[00:18:11] What do we have? Hmm, interesting.
+[00:18:15] Andrew's got a cool setup here. Look at
+[00:18:17] the window.
+[00:18:20] Is that rosemary?
+[00:18:22] Sure is.
+[00:18:24] So, I'll get a nice sprig of rosemary
+[00:18:29] That's great. Aromatherapy?
+[00:18:33] Ooh, here we got another cool one.
+[00:18:36] And by the way, that view is fantastic.
+[00:18:40] That view out the window is beautiful.
+[00:18:43] Really, that's
+[00:18:44] that's awesome.
+[00:18:52] I like that one.
+[00:18:56] Well, this is the morning show today.
+[00:18:58] We're just checking out some awesome
+[00:19:00] trading stations.
+[00:19:03] Let's refer back to the gap scanner real
+[00:19:04] quick. Nothing else other than FRSX. So,
+[00:19:08] NLSP right now is still
+[00:19:12] sitting kind of the same. We've got this
+[00:19:14] high
+[00:19:15] pull back right there.
+[00:19:19] So, the ones that I have on watch
+[00:19:22] NLSP and ENTX, those are the two that
+[00:19:26] are lead the leading gappers, but
+[00:19:27] neither of them look really good right
+[00:19:28] now. Of course, that's fine. At this
+[00:19:30] point, I probably wouldn't take a trade
+[00:19:32] given that we're
+[00:19:35] only 10 minutes to the bell.
+[00:19:38] AMPG popping up a little bit. News at
+[00:19:41] 9:15 receives a $500,000 order.
+[00:19:47] Yeah. So, how much is it up? Only 8%.
+[00:19:51] I mean, it's it's moving up there, but
+[00:19:53] it's it's not up a lot. It's not up high
+[00:19:56] enough on the gap scan.
+[00:19:58] So, I'm I'm not going to jump on that
+[00:20:01] just yet.
+[00:20:05] Let's see. What was the last one we got?
+[00:20:09] So, was that Who was that?
+[00:20:11] Was that Kevin? No, wait. Where Where
+[00:20:13] was this one? I don't even remember.
+[00:20:15] All right. Well, we'll put a new one
+[00:20:16] out. Let's see. New tab.
+[00:20:19] So, Kevin?
+[00:20:24] Cool. Yeah, okay. We did look at that
+[00:20:26] one.
+[00:20:27] I thought. Maybe not. Wait.
+[00:20:30] Hm, now I'm confused.
+[00:20:35] All right. Well, I'll leave it up so I
+[00:20:37] can go back and check.
+[00:20:39] All right. Nice.
+[00:20:42] Nice. Got some toast, some Is that
+[00:20:44] grapefruit? That's a great way to start
+[00:20:45] the day.
+[00:20:46] It's very healthy.
+[00:20:53] I like that green lamp, the glass lamp
+[00:20:55] in the back. Nice nice tier. This is
+[00:20:57] cool.
+[00:20:59] Awesome setup. I love that.
+[00:21:02] Brian
+[00:21:03] Let's take a look. Awesome.
+[00:21:08] Very nice.
+[00:21:16] It's very cool.
+[00:21:21] There you go. Look at that. Look at
+[00:21:23] those light bars.
+[00:21:26] I love that.
+[00:21:31] Ooh, this one this one this this next
+[00:21:33] one coming up, this I love the pegboard.
+[00:21:37] This is just so me. I love it.
+[00:21:43] That's so awesome.
+[00:21:46] Michael, that's so cool.
+[00:21:49] Not to not to dismiss the one right
+[00:21:51] before it cuz this was cool, too. This
+[00:21:53] is cool. I and I do I do like this. This
+[00:21:56] is very organized.
+[00:21:58] It's very clean, but this this speaks to
+[00:22:00] me.
+[00:22:08] Okay, that's cool one.
+[00:22:14] Nice. Huge monitors.
+[00:22:17] Guys are stepping up with those.
+[00:22:27] Interesting. Interesting. If it works,
+[00:22:30] uh it's a little unusual, but
+[00:22:32] that's cool.
+[00:22:34] Looks like we got another vertical setup
+[00:22:35] here. Vertical verticals. Yep.
+[00:22:40] It's a nice clean clean station. All
+[00:22:43] right. Well, why don't I um why don't we
+[00:22:45] switch gears? Thank you for those who
+[00:22:47] have shared these. These are cool.
+[00:22:48] Um why don't we get kind of We've got 5
+[00:22:51] minutes to the bell, so Oh, we already
+[00:22:52] saw this one.
+[00:22:54] so, we'll get kind of And we saw that
+[00:22:56] one, too. Um
+[00:22:59] maybe some of you guys posted twice, I
+[00:23:00] don't know, but
+[00:23:03] yeah, we'll kind of get dialed in here
+[00:23:08] see whether or not we can find anything
+[00:23:10] to trade. Uh and I I I just don't know.
+[00:23:12] It doesn't look like there's a lot.
+[00:23:14] Um there's a lot moving, so it might be
+[00:23:17] kind of a
+[00:23:18] a slow day, like I said, a a no trade is
+[00:23:24] no trade day is is certainly better than
+[00:23:27] red trades.
+[00:23:31] ENTX, NLSP, neither of those are looking
+[00:23:34] great right now.
+[00:23:37] Nice, you've got a couple of the bull
+[00:23:38] flag patterns. Perfect, real smart.
+[00:23:41] Breakout or bailout, green is good.
+[00:23:47] We've got that one already.
+[00:23:48] Bruce, let's take a look, man.
+[00:23:55] Ooh, Tyler.
+[00:24:03] GameStop, nah, I didn't even really I
+[00:24:05] didn't even look at it. I just don't
+[00:24:09] I don't know. I just don't really care
+[00:24:11] to look at it. I'm just that's just too
+[00:24:14] risky for me at this point, I think. I
+[00:24:16] just got to let it go.
+[00:24:18] I I made made some money on it, lost
+[00:24:20] some money on it, but
+[00:24:23] can always come back another day.
+[00:24:31] This looks like the Lenovo background.
+[00:24:34] Or is that Windows background?
+[00:24:40] So, we're going to do I continue the
+[00:24:41] student interviews today for Warrior Pro
+[00:24:43] students.
+[00:24:45] So, you guys can stay tuned for that.
+[00:24:47] We'll basically as soon as I finish
+[00:24:49] trading, which may be on the early side,
+[00:24:52] unless we see something
+[00:24:54] all of a sudden pop up and look really
+[00:24:56] good, which is possible, you know? It
+[00:24:57] sometimes happens. Obviously, the best
+[00:25:00] days are days where I already have a
+[00:25:01] nice start pre-market. Uh the worst days
+[00:25:04] would be a day like today where I've got
+[00:25:06] nothing pre-market and then coming into
+[00:25:08] the open, you know, still
+[00:25:13] Uh still nothing looking great. Let's
+[00:25:16] see.
+[00:25:18] That I love as well.
+[00:25:21] Oh my god, I love it.
+[00:25:24] Out in the out in the shed?
+[00:25:36] So, those on YouTube, do you see
+[00:25:37] anything anything interesting? Anything
+[00:25:39] moving? Anything I should be looking at?
+[00:25:49] All right, so don't post any more. We've
+[00:25:51] We've got We've got more than enough
+[00:25:53] here for an epic collage.
+[00:26:06] NLSP is coming back up. I see that. So,
+[00:26:09] it's running into its descending
+[00:26:10] resistance line right here.
+[00:26:13] So, can it get back above the volume
+[00:26:14] weighted average price and hold above
+[00:26:16] it? We'll see.
+[00:26:18] 2 minutes to the bell.
+[00:26:30] Someone's still got a Christmas tree up.
+[00:26:32] My god, it's March.
+[00:26:35] Let's pull it together.
+[00:26:43] Nice. And the lighting, on point.
+[00:26:48] Copy. So, some of you guys are probably,
+[00:26:49] you know, doing a little bit of your
+[00:26:50] kind of freelance stuff, maybe doing a
+[00:26:52] couple YouTube videos, maybe you got a
+[00:26:54] little side hustle going.
+[00:27:01] Very nice little joystick there.
+[00:27:06] So, I suppose I'll keep an eye on NLSP
+[00:27:09] at the open and we'll see whether or not
+[00:27:13] you know, it does pop up. It's right
+[00:27:15] underneath the volume weight average
+[00:27:16] price and if you recall, there was a
+[00:27:18] 200,000 share seller
+[00:27:20] that was sitting at uh
+[00:27:24] six.
+[00:27:27] So.
+[00:27:31] I don't know. Where is girl? She was
+[00:27:33] around here somewhere.
+[00:27:36] By the way, I wanted to show you guys my
+[00:27:37] maple syrup from uh
+[00:27:40] those some of you guys saw on Facebook I
+[00:27:43] uploaded a video of me boiling
+[00:27:45] yesterday, so cooking down the maple
+[00:27:47] syrup and this this batch came out
+[00:27:48] really nicely.
+[00:27:50] This is good stuff right here.
+[00:27:56] Okay, so we're right underneath the
+[00:27:57] volume weight average price. Let's see.
+[00:27:59] I'm going to close this, close this.
+[00:28:02] So, see that surge?
+[00:28:05] So, the first pop, question is does it
+[00:28:07] hold?
+[00:28:10] Wait for a dip. So, let's just see.
+[00:28:15] I'm I'm taking a long here just to ride
+[00:28:17] this momentum.
+[00:28:20] as you saw in my orders, I was adding
+[00:28:22] into that pop. The high is 57 and now
+[00:28:26] the question is does it hold?
+[00:28:28] I'm how how is it possible that I'm only
+[00:28:30] up $160? It's ridiculous.
+[00:28:32] So, I'm going to do I'll probably going
+[00:28:34] to do a dip trade on this. I'm going to
+[00:28:35] add here at 26. So, I'm going to buy the
+[00:28:37] dip for the break over 650. This is the
+[00:28:40] only one that looks good. So, this is
+[00:28:42] this is kind of all we got here.
+[00:28:44] So, look for the break of 650 and then
+[00:28:47] we're looking for that curl up to 7.
+[00:28:51] Adding there at 650.
+[00:28:53] Then 665 is my next add, then looking
+[00:28:55] for 7.
+[00:28:57] Holding.
+[00:28:58] Looking to add over 660.
+[00:29:02] So this right now is a 1-minute micro
+[00:29:04] pullback. The high is 59. My new order
+[00:29:07] goes at 61.
+[00:29:10] Adding there.
+[00:29:11] And taking a little off the table into
+[00:29:12] that breakout.
+[00:29:14] 5 grand.
+[00:29:16] New order 675. So you guys can see my
+[00:29:18] position window right there. That was a
+[00:29:20] little micro pullback right here. The
+[00:29:22] high is 70. New order goes at 70.
+[00:29:25] Adding there 70.
+[00:29:27] I'm not sure if I got anything filled.
+[00:29:29] Oh, I did. I got filled at 78. I got
+[00:29:31] filled high.
+[00:29:33] Uh so I lost a little bit on that cuz I
+[00:29:35] sold it at 70.
+[00:29:37] I'm going to watch for a long over 80.
+[00:29:39] Watch a dip.
+[00:29:41] Starter at 62. Buying the dip.
+[00:29:45] So trying to accumulate here.
+[00:29:48] And now through 75.
+[00:29:52] And 80 is an add.
+[00:29:55] Watching over 75.
+[00:29:57] Cutting it before I uh give back too
+[00:29:59] much at 51. I'll let it dip.
+[00:30:05] So up 2,900.
+[00:30:07] It's not bad.
+[00:30:09] I could do a dip trade on this again. So
+[00:30:10] we kind of have a double top at the high
+[00:30:13] right here. The low of this candle was
+[00:30:15] 13.
+[00:30:20] So right now it feels like my quotes are
+[00:30:22] kind of stalling a little bit. Like
+[00:30:24] they're just not as fast as they should
+[00:30:25] be.
+[00:30:34] Added back at 37. Trying to do a dip
+[00:30:36] trade.
+[00:30:38] Trying to anticipate the first 1-minute
+[00:30:39] candle making a new high, which would be
+[00:30:41] over 57.
+[00:30:42] Adding there, 50.
+[00:30:45] So, taking some of that off the table,
+[00:30:46] new order at 70.
+[00:30:51] Added 70.
+[00:30:53] Looking for the break through 80.
+[00:30:59] So, I've 6,000 shares starter here.
+[00:31:02] Taking that off the table at 5,600. So,
+[00:31:04] all I did really is make back the loss.
+[00:31:07] New orders at seven. Hey, as a reminder,
+[00:31:09] I didn't put this up uh a second ago.
+[00:31:11] For those streaming on YouTube and
+[00:31:12] Facebook, I just want to put that put
+[00:31:14] out that reminder that day trading is
+[00:31:15] risky. Most beginner traders lose money,
+[00:31:18] in case you didn't already know that.
+[00:31:20] Please, please, don't try to blindly
+[00:31:22] follow me or anyone else for that
+[00:31:24] matter. I bought back at 38.
+[00:31:26] I'm trying to do a dip trade on this.
+[00:31:30] You've got to recognize the inherent
+[00:31:31] risk with trying to do something like
+[00:31:32] this. Most people lose money. So, trade
+[00:31:35] in a simulator, do yourself a favor.
+[00:31:40] That way, if you lose, well, it's not
+[00:31:42] real money.
+[00:31:43] Not yet.
+[00:31:44] ENTX is also popping up.
+[00:31:48] I'm going to hold on that for a second.
+[00:31:52] Keeping my kind of eye a little bit more
+[00:31:55] on
+[00:31:59] NLSP maybe, but ENTX over 50.
+[00:32:05] So, the thing with the ENTX, um I'm
+[00:32:07] adding there at 50. I'm buying that.
+[00:32:10] So, the thing on this is that um
+[00:32:12] where
+[00:32:14] I think that we've got uh
+[00:32:16] room here.
+[00:32:17] We've got room up to this descending
+[00:32:19] level.
+[00:32:20] And it's going into a halt. So, the
+[00:32:21] question now is
+[00:32:23] does it halt?
+[00:32:25] I'm going to take the profit off cuz see
+[00:32:27] how it thins out there? There's only one
+[00:32:29] bid at 65. So, from 52 or 50 to 62 is a
+[00:32:34] first trade, and I can always get back
+[00:32:36] in.
+[00:32:37] These were our two leading gappers, so
+[00:32:38] these were the two most obvious stocks
+[00:32:39] to be watching.
+[00:32:41] So, looks like ENTX is halting. I was
+[00:32:43] afraid it was going to do a false halt.
+[00:32:44] I'll put a new order at seven. I can
+[00:32:46] always get back in.
+[00:32:51] Now, NLSP, we do have a very clear
+[00:32:53] double top at the high, but this is a
+[00:32:56] blue sky setup, no resistance because
+[00:32:59] it's a recent IPO.
+[00:33:02] So, I'm going to watch here.
+[00:33:05] I'm taking the long back in. I feel like
+[00:33:08] this 10-second chart is starting to curl
+[00:33:10] right here.
+[00:33:11] And if we can get the break over 90,
+[00:33:13] then we're going to be looking really
+[00:33:14] good.
+[00:33:15] So, the high there is 75.
+[00:33:18] I'm watching for an add through 75 and
+[00:33:21] 85 for the break of 90. But, you know,
+[00:33:24] as I as I'm looking at it, it's
+[00:33:26] certainly a bit choppy. So, let's see,
+[00:33:28] can we get that break of 70?
+[00:33:31] We've got an ascending support trend
+[00:33:33] line right through here.
+[00:33:39] So, should I add here? I'm going to add
+[00:33:41] right there cuz I think it's basing, and
+[00:33:44] I'm looking for that break through 70.
+[00:33:49] So, there's 68.
+[00:33:53] There's 70. There's 75. I took a little
+[00:33:55] off the table at 72.
+[00:33:59] There's 74. There's 80. Taking a little
+[00:34:01] more off the table at 80.
+[00:34:03] New order at 90.
+[00:34:06] I can add back at 90. If we break
+[00:34:08] through the high, I'd be okay with doing
+[00:34:09] a high-day break uh for the long through
+[00:34:11] seven.
+[00:34:16] I want to see it hold 60.
+[00:34:20] Definitely feels a little choppy.
+[00:34:23] Feels a little thick, like there's some
+[00:34:24] sellers stacked up here.
+[00:34:27] Selling off. I'm buying the dip there at
+[00:34:28] 50.
+[00:34:29] So, just bought the dip at 56.
+[00:34:32] That was a dip trade off of whole dollar
+[00:34:34] support.
+[00:34:37] Now over 75.
+[00:34:39] Adding at 70.
+[00:34:41] Trying to kind of accumulate here for a
+[00:34:43] trade through high of day over 85 adding
+[00:34:46] at 80. So now I'm sizing up for the
+[00:34:48] break through
+[00:34:49] $7.
+[00:34:51] Added right there at 89. Looking for the
+[00:34:53] squeeze through seven. There we go.
+[00:34:56] Boom. Out of that. That was a nice
+[00:35:06] Okay. So our high 7 12. New order 7 10.
+[00:35:11] Watching for back over seven.
+[00:35:14] Buying the dip there at 93.
+[00:35:16] In on the dip for the break back over
+[00:35:19] Then 705 715. I want to see the break of
+[00:35:21] 712. Adding there 715. Now looking for
+[00:35:24] 720. We're breaking through the highs.
+[00:35:27] That's what I like to see. We got 707.
+[00:35:30] 710. I Well, now can I hold seven? Let's
+[00:35:33] just see cuz I took a little off the
+[00:35:34] table there having it broken that level
+[00:35:37] and then pulled back. I don't love that
+[00:35:39] that was a topping tail up to 20. And I
+[00:35:41] added a little high on it. I actually
+[00:35:42] added at 719.
+[00:35:45] I I top tick added at the high of day.
+[00:35:47] So I had to sell that for I don't know
+[00:35:49] if it was a loss or whatever, but let's
+[00:35:51] see if it can hold seven. Can it hold
+[00:35:53] above seven?
+[00:35:59] N T X
+[00:36:01] Now, I'm seeing $12 on the bid.
+[00:36:05] And if it opens at 12, I am going to cry
+[00:36:08] that I sold my position at 62. I'm
+[00:36:11] showing 11 on the bid right now.
+[00:36:13] We
+[00:36:14] Come on. This
+[00:36:17] Oh, boy. All right. Well, let's just see
+[00:36:19] what it does. We'll see what it does and
+[00:36:21] we'll just we'll see what it does. I I
+[00:36:23] don't know what to say. We've got about
+[00:36:24] a minute to resumption.
+[00:36:27] It's probably going to be a 10-minute
+[00:36:28] long halt. I I I can't imagine it's
+[00:36:30] going to open that high, but
+[00:36:33] I mean
+[00:36:37] That could have been I mean
+[00:36:39] I put
+[00:36:41] Oh, man. I don't know. I don't know.
+[00:36:43] We'll see.
+[00:36:44] All right. So, NLSP I'm still dialed in
+[00:36:47] on this one back over seven next trade.
+[00:36:52] 722 is the high. Trading with a little
+[00:36:53] smaller size up here.
+[00:36:57] Buying the dip at 95.
+[00:36:59] Looking for the break over 10.
+[00:37:01] First 1-minute candle to make a new high
+[00:37:02] is 11. So, over 10 I can add.
+[00:37:08] Little chop there.
+[00:37:13] There's a 30,000 I'm I'm selling it. I'm
+[00:37:15] taking a loss. Lost 3 grand on two two 3
+[00:37:17] grand on that trade.
+[00:37:20] ENTX
+[00:37:22] I'm showing 1040. So, on this one I'm
+[00:37:24] going to put in order. I'm going to
+[00:37:25] watch for a dip and a rip.
+[00:37:28] I'm showing $10. Let it dip. It maybe it
+[00:37:31] halts going down. People take profit,
+[00:37:33] but then look for the rip if it gets
+[00:37:34] some short squeeze some short covering.
+[00:37:41] Order is at 11 right now.
+[00:37:45] So, I'm up 14,000 on the day. I've got a
+[00:37:47] bit of a cushion. It's still halted.
+[00:37:53] Just giving it a second.
+[00:37:55] Still showing a $10 resumption.
+[00:37:58] NLSP
+[00:37:59] The high was 720. Look at that drop.
+[00:38:03] Ooh, I don't like that. But, that's what
+[00:38:05] happens when you have a false breakout.
+[00:38:08] You had a false breakout on it. And now
+[00:38:10] it kind of ruins the 5-minute chart with
+[00:38:11] that big red candle.
+[00:38:16] Hmm. All right.
+[00:38:21] Rob says if it opens at 11:00 he's
+[00:38:23] buying everyone lunch.
+[00:38:38] So, someone just said pro tip short if I
+[00:38:40] exit. Well, then you're short ENTX at
+[00:38:45] 662 cuz that's where I sold.
+[00:38:47] I thought it was a false halt.
+[00:39:00] We'll see what happens.
+[00:39:15] I I thought it was a false halt because
+[00:39:17] it hit 65 but then there was only uh
+[00:39:20] like one order there. We were talking
+[00:39:22] about this with during Jason's um
+[00:39:24] interview
+[00:39:25] uh
+[00:39:26] and when there was only one order I was
+[00:39:28] kind of like I don't know. I think it
+[00:39:29] might be a false halt.
+[00:39:33] I don't know. I I was wrong. It It ended
+[00:39:36] up halting.
+[00:39:42] Raj says he's uh short ENTX in the
+[00:39:45] simulator at 654.
+[00:39:47] All right. So, we'll see what happens on
+[00:39:49] that.
+[00:39:56] But, you know, part of
+[00:39:58] trading is
+[00:39:59] you know, taking profit off the table.
+[00:40:01] They'll go They'll go without you.
+[00:40:03] Sometimes they go without me and if
+[00:40:04] that's the case here, I can always get
+[00:40:06] back in if there's a new setup, but
+[00:40:09] it's just the way it the way it goes.
+[00:40:33] So, I really got like one good trade on
+[00:40:36] NLSP.
+[00:40:42] And then a few kind of smaller trades
+[00:40:45] when it was a little choppier.
+[00:40:48] So, some of you guys know we just
+[00:40:50] crossed over 750,000 subscribers last
+[00:40:53] month
+[00:40:55] YouTube and we put together a coupon
+[00:40:58] code YouTube 750.
+[00:41:01] So, I'll give you guys the link for this
+[00:41:04] but we're going to end this coupon code.
+[00:41:10] there's there's the link just as a
+[00:41:12] reminder if you want to use it to use it
+[00:41:13] before we
+[00:41:14] uh we deactivate it.
+[00:41:25] All right. So, ENT X I'm showing 997
+[00:41:27] resumption and my kind of thought on
+[00:41:30] this is that if it really opens this
+[00:41:33] anyone that maybe was swing trading it
+[00:41:34] short from yesterday
+[00:41:37] maybe there's some people that were
+[00:41:38] swing trading it short with some big
+[00:41:40] size that are getting squeezed. That's I
+[00:41:43] that's the only thing that I can figure
+[00:41:45] would result in this kind of gap.
+[00:41:47] So, if that's the case, I'm going to try
+[00:41:49] to ride the momentum. You know, I mean I
+[00:41:51] I think that that's the right move.
+[00:41:55] Resumption is going to be in about 40
+[00:41:57] seconds on ENT X. We'll see where it
+[00:41:59] resumes, but
+[00:42:16] I'm showing 989.
+[00:42:18] Um maybe that's wrong. Maybe it just may
+[00:42:20] Who knows, but that's what I'm showing
+[00:42:21] right now, 989.
+[00:42:24] So, order for me, I'm going to put it at
+[00:42:26] 1050 and I'm going to do dip and then
+[00:42:31] look for a dip and then a rip.
+[00:42:36] Showing 975, 971, so it's coming down a
+[00:42:39] little bit. You may have some profit
+[00:42:40] taking,
+[00:42:41] but I'm thinking dip and rip.
+[00:42:44] Still halted.
+[00:42:46] So, we're coming up on a 15-minute halt.
+[00:42:48] I'll just give it a few few more seconds
+[00:42:50] to see if it resumes,
+[00:42:52] but it is still halted.
+[00:43:01] got to keep waiting.
+[00:43:02] GameStop? Mm,
+[00:43:04] yeah.
+[00:43:05] Costs?
+[00:43:09] Yeah, just not really into either of
+[00:43:10] those uh right now. I just think they
+[00:43:12] carry too much risk for me.
+[00:43:22] Nice there. Hey, you've got your
+[00:43:23] kombucha, your synergy. I like that. You
+[00:43:25] know, the thing is it
+[00:43:27] kind of gives me heartburn.
+[00:43:49] SEEL hit the scanners.
+[00:43:58] And NLSP is coming back up. I'm back in
+[00:44:00] NLSP for the break of seven. I'm looking
+[00:44:02] for 720.
+[00:44:04] This thing, I'm looking for a squeeze
+[00:44:06] through the highs.
+[00:44:09] I try to jump on this when it starts to
+[00:44:10] turn around. This is what I usually
+[00:44:12] expect would squeeze some early short
+[00:44:14] sellers.
+[00:44:15] And interestingly, on
+[00:44:18] um ENTX, it opened at an odd time
+[00:44:21] and at 7:50. So, now I'm not really sure
+[00:44:24] what to think about it. So, I'm kind of
+[00:44:26] like I just sold NLSP to focus on ENTX
+[00:44:29] and I'm confused.
+[00:44:31] I'm confused why it was showing 11 and
+[00:44:33] then opened at an odd time.
+[00:44:36] All right, NLSP, let me pull this one
+[00:44:37] back up to focus. Um I I don't know. I
+[00:44:40] don't know. I'm not sure what to think
+[00:44:41] about that, but
+[00:44:44] NLSP, can I get a dip trade? I'll do a
+[00:44:47] dip here at 72,
+[00:44:49] 74.
+[00:44:51] Just to try to ride that momentum back
+[00:44:53] to seven.
+[00:44:59] No, I got to cut the loss. So, now I've
+[00:45:01] given back almost 5 grand. I was up
+[00:45:02] 17,000. I'm up only 12,000 now.
+[00:45:08] This is
+[00:45:09] giving these big rejections.
+[00:45:11] I'm dip trading it one more time there
+[00:45:13] at 25, but I'm not really expecting that
+[00:45:15] that's going to be a a huge win, but
+[00:45:18] I think it'll pop back up.
+[00:45:23] Only 6,000 shares.
+[00:45:31] I'm selling it flat.
+[00:45:34] Huh. All right. Well, I don't know. I'm
+[00:45:36] not really sure what to think here.
+[00:45:39] NLSP rejecting that seven level. I
+[00:45:42] thought I thought it would if it broke
+[00:45:43] that level seven, we'd rip right to
+[00:45:45] 7:15, 7:20.
+[00:45:48] ENTX is showing $10 again, but I I was
+[00:45:51] just thrown off by the open so low
+[00:45:55] compared to what it was looking like.
+[00:45:57] So, I didn't trade it. I didn't didn't
+[00:45:59] or didn't add to it.
+[00:46:02] So, I don't know what Now, if I trade
+[00:46:04] it, I'd be coming in after the second
+[00:46:06] halt.
+[00:46:22] So, I don't know. We'll keep NLS P on
+[00:46:24] watch. If it does come back up to seven,
+[00:46:28] but it's not a pretty-looking chart. And
+[00:46:30] ENT X does look better comparatively,
+[00:46:32] but
+[00:46:34] I kind of
+[00:46:36] I don't know.
+[00:46:45] Don't want to give back too much,
+[00:46:48] you know?
+[00:46:50] Nice. Some more setups here.
+[00:46:56] Girl boss. Cool.
+[00:47:01] I like that.
+[00:47:09] Woah. Hello.
+[00:47:13] That's That's like a full office.
+[00:47:17] You've got a
+[00:47:18] three trading stations down there. I
+[00:47:20] don't know what's going on there, but
+[00:47:21] interesting.
+[00:47:23] Big huge TV. Thing is humongous.
+[00:47:31] Healthy diet of Cheez-Its and whatever
+[00:47:34] that is.
+[00:47:40] Cool. All right. Um
+[00:47:53] Ooh, look at this one.
+[00:48:09] Look at that ceiling. Is that cedar?
+[00:48:11] Must smell great in there.
+[00:48:13] No mothballs. It's the It's the fur coat
+[00:48:15] closet.
+[00:48:29] Nice. That's fantastic. That's great.
+[00:48:32] The way you have those charts set up
+[00:48:33] there.
+[00:48:35] That's a good student.
+[00:48:39] That's interesting.
+[00:48:43] Never seen one like that before.
+[00:48:45] Would you lay on the floor?
+[00:48:54] Either that or he's like a foot and a
+[00:48:55] half tall.
+[00:49:09] Someone mentioning Seal. Yeah, I see it,
+[00:49:12] but I don't know.
+[00:49:13] ENTX. So, the halt time is 46:41. So,
+[00:49:17] resumption should be in about 20
+[00:49:18] seconds. Showing 9:25.
+[00:49:21] I'll see if we get a little dip and rip.
+[00:49:22] It's obviously It's obviously strong.
+[00:49:25] But, I got to go with smaller size cuz I
+[00:49:27] I'm chasing it a little bit.
+[00:49:31] putting in order at 9:50. Watching for a
+[00:49:33] possible dip and rip.
+[00:49:38] It seems like it's must be catching some
+[00:49:40] short sellers off guard.
+[00:49:43] But, halt down is not impossible.
+[00:49:49] It also opened at in irregular time.
+[00:49:53] Which is always a risk factor when that
+[00:49:56] happens.
+[00:49:57] So, still halted.
+[00:50:01] I mean, they're usually exactly 5-minute
+[00:50:03] long halts. That's cool. I like the
+[00:50:05] brick outside.
+[00:50:07] Coca-Cola
+[00:50:28] So, you have these very these two clear
+[00:50:30] topping tails on this one.
+[00:50:33] Up here and right there.
+[00:50:36] Big rejection candles below the VWAP.
+[00:50:40] Risky stuff.
+[00:50:52] All right. All right. Come on. That's
+[00:50:54] not real.
+[00:51:08] Nice built-ins.
+[00:51:10] It's a good-looking setup.
+[00:51:12] Oh, here we go. Now, we got one with
+[00:51:14] some big windows.
+[00:51:17] Love those windows.
+[00:51:29] don't just don't roll it. Don't press
+[00:51:31] the button to open the garage door.
+[00:51:32] You're going to lose those paintings.
+[00:51:34] And the whiteboard.
+[00:51:40] Otherwise, that's awesome.
+[00:51:45] Crazy. Those monitors are so big.
+[00:51:50] That's a cool map, Appalachian Trail.
+[00:51:52] There you go.
+[00:51:59] Still watching NLPS on another monitor
+[00:52:02] just in case.
+[00:52:03] It would be
+[00:52:05] kind of strange if it does
+[00:52:08] do something really crazy, but
+[00:52:15] you never know.
+[00:52:21] ENTX showing $8 resumption right now.
+[00:52:32] Hi, the VWAP here is 40.
+[00:52:36] It breaks through VWAP and breaks
+[00:52:38] through the half dollar.
+[00:52:40] Maybe there's some quick trades.
+[00:52:45] I just I see sort of this resistance
+[00:52:47] there at the half dollar.
+[00:52:57] But it is technically breaking through
+[00:53:00] the VWAP there, so let's see if we can
+[00:53:01] get over the half dollar. I'll even
+[00:53:03] order so it's ready.
+[00:53:17] So right now is a pullback back
+[00:53:18] underneath
+[00:53:20] VWAP.
+[00:53:23] Scott, looking good.
+[00:53:25] This guy's coat on.
+[00:53:27] He's sacrificing on Wyoming. He's
+[00:53:29] sacrificing on paying for heat so he can
+[00:53:32] keep trading. This guy's priorities in
+[00:53:34] line, same as me. I would do the same
+[00:53:36] thing.
+[00:53:40] That's interesting. Someone's into
+[00:53:41] music. Very cool.
+[00:53:49] back through 40 could be a possible
+[00:53:53] It's a little risky cuz it's right at
+[00:53:55] the VWAP.
+[00:53:59] Quick trade there.
+[00:54:01] Can we get the break? Is it going to
+[00:54:02] break the half dollar?
+[00:54:04] No, I don't think so. I'm backing out.
+[00:54:06] I'll get back in if it breaks the half
+[00:54:07] dollar. That was the first 1-minute
+[00:54:09] candle to make a new high.
+[00:54:11] New orders at 53 in case we can get over
+[00:54:13] the half dollar.
+[00:54:15] So, you see that was a 1-minute setup
+[00:54:16] right there.
+[00:54:18] A 1-minute uh false breakout right at
+[00:54:20] the volume weighted average price.
+[00:54:23] It's not uncommon. That's why you got to
+[00:54:25] be so quick to pivot on those.
+[00:54:31] Very cool.
+[00:54:35] David.
+[00:54:37] Nice. Nice decorations.
+[00:54:41] ENTX resumed.
+[00:54:45] Oh, man. I just I can't chase it up
+[00:54:50] I just can't chase it up here. I'm
+[00:54:52] sorry. I wish I could. I just
+[00:54:55] I'm afraid of a halt down.
+[00:54:57] The risk.
+[00:54:58] So, now it's getting it's kind of first
+[00:55:01] little area of pullback. The high is 80.
+[00:55:04] Uh-oh, here we go. So, now you're
+[00:55:06] getting a drop. Halt level still 80.
+[00:55:13] So, there's something happening there.
+[00:55:17] Halt level moved up to 35.
+[00:55:21] Boy.
+[00:55:23] Maybe this is a good time to put up my
+[00:55:24] disclaimer. In case you didn't know,
+[00:55:25] trading is risky. Most beginner traders
+[00:55:28] lose money. This is high risk stuff and
+[00:55:30] it's going without me and I'm getting
+[00:55:32] the FOMO, but now we've got third halt
+[00:55:34] going up.
+[00:55:36] So, there could have been a quick a
+[00:55:37] quick trade there at the
+[00:55:40] $9 spot.
+[00:55:42] I put two orders at 81 and I didn't fill
+[00:55:45] or 90 sorry, 91 right there. 91 91
+[00:55:48] didn't fill, jumped without me. So.
+[00:55:55] Maybe
+[00:55:56] some of that momentum on ENTX brushes
+[00:55:59] off onto NLPS. Maybe that's optimistic,
+[00:56:08] See if it can break through the half
+[00:56:09] dollar.
+[00:56:11] Adding right there 49 for the break
+[00:56:16] I'm kind of thinking because of what we
+[00:56:18] have on ENTX that it's going to carry
+[00:56:20] over. So, taking a little off the table,
+[00:56:22] pay myself new order at 75 to add back.
+[00:56:27] Adding at 68 right there.
+[00:56:30] Now looking for the rip through seven.
+[00:56:33] Adding at 88, scaling into this. Adding
+[00:56:36] at seven, now looking for the squeeze.
+[00:56:39] There we go. Very happy with that trade.
+[00:56:41] Very happy. We finally got the break of
+[00:56:43] VWAP. New order at 710. I'm going to let
+[00:56:46] it dip.
+[00:56:47] Adding at 92, buying the dip right
+[00:56:51] Can we get the break of 20? The high of
+[00:56:52] day, 720.
+[00:56:56] It's a double top. I'm adding at 705.
+[00:56:58] I'm buying that dip for the break
+[00:56:59] through 720 and I'm thinking if we break
+[00:57:01] 20, we're going to get a move to 750.
+[00:57:03] I'm holding right now.
+[00:57:05] This is a micro pullback.
+[00:57:07] And I'm looking to add for the break of
+[00:57:08] 720 and a move up to 750. I think
+[00:57:10] because of the momentum on ENTX,
+[00:57:13] this is going to carry us a little
+[00:57:14] higher.
+[00:57:16] There you go. There's 18, there's 19,
+[00:57:17] there's 20. Looking for the add at 20
+[00:57:20] and then a target 35 40.
+[00:57:23] Holding right now.
+[00:57:26] Dip trade adding at 06.
+[00:57:28] Buying at 06 for the break through 20,
+[00:57:30] quick target at 2830.
+[00:57:33] Watch here.
+[00:57:35] Adding at 702, scaling in. This is a
+[00:57:37] dip. Now we look for the rip through 18.
+[00:57:40] Adding at 19. Adding at 18 actually.
+[00:57:43] Filling at 18. Looking for the break
+[00:57:44] through this level over 20.
+[00:57:49] This is the spot where we're going to
+[00:57:50] get the 1-minute micro pullback, the
+[00:57:51] break through 20.
+[00:57:53] Here we go. There's 15.
+[00:57:55] I'm going to look to add for the break
+[00:57:57] through 20.
+[00:57:58] There's 12. Adding there at 19. There's
+[00:58:00] 30. There's 40. Taking it off the table.
+[00:58:07] I think that's it for me.
+[00:58:08] I think I'm going to say I'm I'm happy
+[00:58:10] with that.
+[00:58:14] Maybe maybe a dip trade. I'll do a dip
+[00:58:16] trade at 70. Maybe a dip trade.
+[00:58:20] If it pops back up to 90.
+[00:58:22] The problem is I wanted to rip to 750.
+[00:58:26] I took it off at 81 on the dip trade.
+[00:58:30] It's always one more.
+[00:58:33] So, now I'm going to be in the cool off.
+[00:58:35] So, I'm going to reduce my share size
+[00:58:37] for the rest of the morning.
+[00:58:39] Bring it down a little bit. That way I
+[00:58:41] don't do what I did yesterday, which is
+[00:58:43] give back.
+[00:58:45] You know, a third or two-thirds or half
+[00:58:47] of my gains, whatever.
+[00:58:55] Look at this. That's cool. I like those
+[00:58:57] wooden panels. We by the way have 78
+[00:59:00] million shares of volume on NLSP.
+[00:59:04] Up 140%.
+[00:59:06] And ENTX is only 29 million shares of
+[00:59:09] volume, but boy, that move from 6 to
+[00:59:11] 950. I'm up 1800 bucks on it. I left so
+[00:59:15] much money on the table.
+[00:59:17] But I think I traded NLSP fairly well.
+[00:59:19] So, uh we do have to be cautious because
+[00:59:21] we keep having these false breakout
+[00:59:23] candles there, there, and there.
+[00:59:25] But if it can get over now, 35, I'll put
+[00:59:29] my new order at 7:35, 7:40. I was hoping
+[00:59:31] for a quick squeeze right up to 7:50,
+[00:59:33] but it it did struggle a little bit
+[00:59:35] there at that 7:20 spot, and I was sized
+[00:59:37] up a little bit heavy, so
+[00:59:39] I I was like, this either rips right to
+[00:59:42] 7:50 or I need to start taking it off
+[00:59:45] the table.
+[00:59:47] Josh, this looks like a nice setup.
+[00:59:50] This is my happy place.
+[00:59:52] I couldn't agree with you more. I look
+[00:59:54] forward every day to sitting right here.
+[00:59:56] I love my trading station, and
+[00:59:59] the worst news I have for you guys is
+[01:00:00] that tomorrow is Saturday.
+[01:00:03] No trading.
+[01:00:04] We got to wait till Monday.
+[01:00:08] Those on Facebook and YouTube,
+[01:00:11] uh if you haven't uh already hit the
+[01:00:12] thumbs up, please hit that thumbs up.
+[01:00:15] Kind of just I didn't think really
+[01:00:16] anything was going to happen today, so I
+[01:00:17] was like, I'll just keep running this,
+[01:00:19] and we'll do the
+[01:00:21] we'll check out all these cool trading
+[01:00:24] But,
+[01:00:25] this is cool. I I'll be honest, I don't
+[01:00:28] love the ceiling, but uh love those
+[01:00:30] panels.
+[01:00:32] You've got these walls, you've got a
+[01:00:33] bunker.
+[01:00:35] It's a plaster.
+[01:00:37] INTX resumed, hit a high of 10.
+[01:00:42] So, 10:45 is the next hot level.
+[01:00:46] So, watch here for break of 10. I bought
+[01:00:48] 1,000 shares. I'll just throw a little
+[01:00:50] little something out there, why not?
+[01:00:53] I've got a cushion.
+[01:00:55] So, this is a pullback.
+[01:00:58] I'll add at 51.
+[01:00:59] So, looking for that curl back up there
+[01:01:01] through 10.
+[01:01:03] Average is 65.
+[01:01:06] Get the break of 10.
+[01:01:08] And then you have your first 1-minute
+[01:01:09] micro pullback.
+[01:01:12] Watching for an add over 85, 95, adding
+[01:01:15] at 86 there for break of 10.
+[01:01:17] No, it's not breaking.
+[01:01:19] I'm in at 78. Let's give it another try
+[01:01:22] to come back up to 10.
+[01:01:28] Nah, lost some money on it.
+[01:01:30] 1,800 bucks.
+[01:01:33] It's all right. Life is good.
+[01:01:35] Green.
+[01:01:37] I'll come back come back tomorrow.
+[01:01:39] It was a risky trade. I went with small
+[01:01:41] size, but
+[01:01:43] I thought I'd just Yeah, just give it a
+[01:01:44] little taste, but you know, it's it's
+[01:01:46] just a challenge. Three halts in a row
+[01:01:48] going up and
+[01:01:49] so
+[01:01:51] it's kind of a stupid trade, but
+[01:01:53] you never know. So, the high was says
+[01:01:55] 10.16. I didn't see it break 10.
+[01:01:59] It didn't look like it broke 10 to me,
+[01:02:03] Okay, so here the thing is for what it's
+[01:02:05] worth, we did just have a false halt
+[01:02:07] going down.
+[01:02:09] So, now you might have in this area,
+[01:02:11] this is the logical place where someone
+[01:02:12] would probably be thinking this is a
+[01:02:14] short.
+[01:02:15] Right? It's a big move. So, if it broke
+[01:02:18] over the high, back over 10, that could
+[01:02:20] produce a short squeeze. That could. It
+[01:02:22] might not, but that's that's what how I
+[01:02:24] would look at it now.
+[01:02:27] NLSP, man.
+[01:02:30] I don't know what to say on that one.
+[01:02:32] It just keeps having those big red
+[01:02:33] candles.
+[01:02:35] I'll do a dip trade at six just for a
+[01:02:37] bounce back up to 6.10.
+[01:02:39] It's a to me a bit of an irrational
+[01:02:41] sell-off, that much of a a flush.
+[01:02:44] So, I'd look for 6.10.
+[01:02:47] Whoops. Let's see. Order at 6.15 to take
+[01:02:49] a little profit off the table.
+[01:02:52] No, it's not coming up that far.
+[01:02:54] And ENTX
+[01:02:57] is hanging out down here. What a move
+[01:02:59] though. That's incredible. I mean, that
+[01:03:00] was a huge move.
+[01:03:02] I didn't really I kind of
+[01:03:04] screwed the whole thing up, but
+[01:03:07] still impressive.
+[01:03:10] So, you broke the low there of 62 down
+[01:03:13] to 39. It pulled back a little bit more.
+[01:03:19] What happens on the first 1-minute
+[01:03:20] candle to make a new high on something
+[01:03:21] like this?
+[01:03:23] You know,
+[01:03:24] is it given the fact that it's already
+[01:03:26] so extended, is it just a false
+[01:03:27] breakout?
+[01:03:29] The high of this current candle is nine.
+[01:03:34] Or does it
+[01:03:36] does it make a bigger move? I don't
+[01:03:37] know. So, the high of that candle is
+[01:03:39] nine.
+[01:03:46] Feels like it's kind of basing out a
+[01:03:47] little bit here.
+[01:03:52] I put an order maybe the high of that
+[01:03:54] candle was 939 940.
+[01:03:58] So, hold nine.
+[01:04:00] I'll take a starter there at 927.
+[01:04:03] I'm kind of looking at the first candle
+[01:04:05] to make a new high over 939.
+[01:04:08] I could be wrong on this, but
+[01:04:10] the first candle to make a new high
+[01:04:11] break over 939
+[01:04:13] and then a curl back up to 10, that
+[01:04:15] would be a pretty big deal.
+[01:04:18] So, I'm in at 924.
+[01:04:21] I'll put an order at 950.
+[01:04:24] Over 950 would be my add spot. And then
+[01:04:27] 975 985 995. So, I'd start scaling in
+[01:04:32] to that first candle to make a new high,
+[01:04:33] which is going to be 39 38 39.
+[01:04:38] And see if it does want to rip through
+[01:04:41] So, right now just holding this. I want
+[01:04:43] to see if it wants to break through 950.
+[01:04:47] 939 is our first 1-minute candle to make
+[01:04:49] a new high.
+[01:04:53] We're definitely curling back up. It's a
+[01:04:55] 5-minute setup here.
+[01:04:57] Over 950, like I said, is my add.
+[01:05:00] Adding at 950. Next add is 975.
+[01:05:04] Adding right there. Now, I'm going to
+[01:05:05] add for the break of 10.
+[01:05:08] I'm looking for this to squeeze back to
+[01:05:09] $10.
+[01:05:10] I mean, when you get this kind of
+[01:05:11] action,
+[01:05:13] you usually don't want to run away from
+[01:05:14] it.
+[01:05:15] High that candle is 980.
+[01:05:19] So, let's see what this does here.
+[01:05:21] It's a bit of a drop on that.
+[01:05:24] I got to cut it.
+[01:05:25] Okay, back half my gains and I'm done.
+[01:05:27] I'm done. I'm walking away up 13,000,
+[01:05:29] lost 18 grand on ENTX.
+[01:05:32] Uh, I overstayed my welcome.
+[01:05:34] But, you know what? Green is good. Green
+[01:05:36] is good. Hands off the throttle.
+[01:05:39] Putting it down. Putting it down.
+[01:05:42] I thought it looked good. I thought it
+[01:05:43] looked good. As it was curling there,
+[01:05:45] first candle to make a new high.
+[01:05:48] Uh, what can you do?
+[01:05:49] 13 grand. It's a green day.
+[01:05:52] Better walk away. I've given back half.
+[01:05:54] So, now this is what I have to do. I've
+[01:05:56] got to shut everything down. I can't
+[01:05:57] look at charts for the rest of the day.
+[01:06:00] I have to remind myself that I've got
+[01:06:01] $13,000 more in my pocket than I started
+[01:06:04] this morning. Yes, I gave back more than
+[01:06:06] half.
+[01:06:08] Easy come, easy go. That's the way
+[01:06:10] trading is. Trading is risky. So,
+[01:06:13] you know, I I overstayed my welcome. Had
+[01:06:16] a couple of really nice trades and I I
+[01:06:17] pushed my luck.
+[01:06:19] So, there's my disclaimers, a reminder
+[01:06:21] of what you just saw. Easy come, easy
+[01:06:23] go.
+[01:06:25] Gosh, that was nasty, that drop. I
+[01:06:26] thought I thought that was looking like
+[01:06:28] for the squeeze right through 10. I
+[01:06:29] really did. I really thought it was
+[01:06:31] looking for the move through 10.
+[01:06:33] Oh, well. I'll be back on Monday. And
+[01:06:35] students, we're going to keep keep
+[01:06:37] rolling with class. So, 13,000 green
+[01:06:40] day.
+[01:06:41] Funny end to the week, but
+[01:06:44] at least it's a green day.
+[01:06:46] So, I'll see you guys tomorrow or on
+[01:06:48] Monday.
+[01:12:54] Mhm.
+[01:13:03] Hey.

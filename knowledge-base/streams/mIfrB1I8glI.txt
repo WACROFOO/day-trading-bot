@@ -1,0 +1,1470 @@
+# LIVE STREAM (brought to you by Cloudflare)
+# https://www.youtube.com/watch?v=mIfrB1I8glI
+# upload_date: 20251118
+# duration_sec: 4720
+
+[00:00:06] All right. Well, this is highly
+[00:00:08] unexpected. Uh, today's broadcast live
+[00:00:12] on YouTube brought to you by Cloudflare.
+[00:00:16] Some of you guys know this already, but
+[00:00:18] there is currently a global Cloudflare
+[00:00:21] outage and it's affecting um, of course
+[00:00:24] um, ser [music] websites all over the
+[00:00:27] world. Uh Twitter was offline this
+[00:00:29] morning. Uh Down Detector was offline.
+[00:00:31] Cloudflare of course is offline. Uh and
+[00:00:33] and Warrior Trading has been offline for
+[00:00:36] a good portion of the morning. This is
+[00:00:38] this is actually the longest outage that
+[00:00:39] I think we've ever had. Uh so well being
+[00:00:42] a little bit unsure of uh when things
+[00:00:45] would come back up, I kept thinking we
+[00:00:47] kept kind of getting reconnected and
+[00:00:49] then it would drop back off and then
+[00:00:51] reconnected then it would drop back off.
+[00:00:52] So, I thought, well, I'll I'll take the
+[00:00:55] suggestion that some of you guys um sent
+[00:00:57] over to me and and stream today on
+[00:00:59] YouTube. Very unusual. Uh special thanks
+[00:01:02] to Cloudflare for making this possible.
+[00:01:05] So, uh as you know, today uh I have my
+[00:01:10] small account challenge set up. It's
+[00:01:12] ready to go. Um however, uh you know, I
+[00:01:16] I haven't uh taken any trades yet. I've
+[00:01:18] been kind of um just sitting here
+[00:01:20] fumbling around trying to figure out,
+[00:01:23] you know, how to how to get everyone
+[00:01:25] back in the back in the chat room. Uh
+[00:01:28] you know, Warrior Trading, we've got our
+[00:01:30] servers up and running, but um but the
+[00:01:33] issue is uh is with Cloudflare. So, you
+[00:01:36] could see right here, if you come to our
+[00:01:38] website, um your browser's working uh
+[00:01:42] Cloudflare is not working and our host
+[00:01:43] is working. So, this is the problem in
+[00:01:45] the middle, the cloud CloudFlare.
+[00:01:48] Okay, so let's see. Um,
+[00:01:52] uh, it'll probably take folks a few
+[00:01:54] minutes, um, to get, uh, logged in here.
+[00:01:58] Um, I'm just going to copy this.
+[00:02:05] Uh, and I I I apologize on behalf of
+[00:02:08] Cloudflare. uh the you know myself uh
+[00:02:13] I'm I'm I'm embarrassed. Now, of course,
+[00:02:15] I am uh in no position to really know
+[00:02:20] what they're doing over there. Um but
+[00:02:23] I'd like to extend an apology on their
+[00:02:25] behalf. They they screwed up today and I
+[00:02:28] think they know it. Um I'm sure heads
+[00:02:30] will roll, but uh in the meantime,
+[00:02:34] thank you guys for tuning in. Apologies
+[00:02:36] for today. Um, and let's kind of get
+[00:02:41] oriented with what we've got. Um, so as
+[00:02:44] we sit right now, um,
+[00:02:48] you know, I'm I'm waiting for something
+[00:02:51] that meets my five pillars of stock
+[00:02:52] selection. Um, I was able to get logged
+[00:02:54] in earlier and I did not log out. So I
+[00:02:58] still have scanners up here, which is
+[00:03:00] good. Um, so I have some data, but it's
+[00:03:03] it is limited. Uh, which is, you know,
+[00:03:06] not not ideal.
+[00:03:08] Let's see. I'm just going to leave this
+[00:03:10] up here for right now. Um
+[00:03:15] I don't know. I I'm It's been a while
+[00:03:17] since I did a a broadcast here on
+[00:03:21] YouTube, so um hopefully
+[00:03:24] you guys are able to see things well
+[00:03:26] enough. I don't have my bandwidth
+[00:03:29] settings on particularly high, but um
+[00:03:35] I just didn't want to tax um my trading
+[00:03:38] machine here. I wasn't really set up to
+[00:03:40] to run this broadcast today on YouTube,
+[00:03:42] but
+[00:03:44] uh
+[00:03:46] yeah. So, all right. Well,
+[00:03:51] yeah. I I suppose my feeling right now
+[00:03:54] um you know as I'm sitting here is that
+[00:04:00] it's 10 of nine. So you know we've
+[00:04:03] already kind of missed um top and bottom
+[00:04:05] of the hour. U if we look at uh OMA
+[00:04:11] OMA um is one of the biggest movers
+[00:04:14] today. um up currently about 200%.
+[00:04:18] Really impressive move. Um so this is a
+[00:04:22] biotech stock and they've got phase 3
+[00:04:26] breast cancer trial data. It's good news
+[00:04:29] and the company, you know, the shares
+[00:04:31] squeezed up from, you know, lower than
+[00:04:34] about $10 a share all the way up here uh
+[00:04:37] to the peak of 3869. Incredible. So, we
+[00:04:41] know that biotech stocks can give us
+[00:04:44] great headlines, they can work really
+[00:04:46] well, but we also know that um when it's
+[00:04:52] patent approval or you know maybe
+[00:04:56] fasttrack designation
+[00:04:58] or maybe even phase one that h they're
+[00:05:02] kind of hit or miss. So, you know, now
+[00:05:05] we're coming a little bit um this one to
+[00:05:07] a phase three uh with positive results.
+[00:05:10] And that's where things get a little bit
+[00:05:11] more promising for potentially going
+[00:05:13] into um you know, you know, actually
+[00:05:17] being able to to be used. Uh and that
+[00:05:20] now could position the company to be
+[00:05:22] attractive to um other pharmaceutical
+[00:05:26] companies either for licensing deals or,
+[00:05:28] you know, even a buyout. You just never
+[00:05:30] know. So anyway, so big move on OMA.
+[00:05:34] Great to see that. Uh but obviously it's
+[00:05:36] pulled back um a bit here. So at this
+[00:05:39] point, you sort of have this um pattern
+[00:05:41] that I would say is basically a head and
+[00:05:44] shoulders pattern. So this sort of rally
+[00:05:47] up and then back down on the other side.
+[00:05:50] All right. So that one's out of play for
+[00:05:51] the time being. Um onfo just hit the
+[00:05:54] scanner.
+[00:05:57] Um, one thing I don't like about
+[00:06:00] um, Weeble is that you can't Sometimes
+[00:06:02] it's like a little funny with the way
+[00:06:04] you type in orders. Um, so this has a
+[00:06:08] float of only 4 million shares, but
+[00:06:11] there's a 200,000 100,000, you know, so
+[00:06:14] big sellers on the ask. So when I see
+[00:06:17] that, you know, I kind of think, golly,
+[00:06:20] you know, this thing is thick as
+[00:06:21] molasses. It's not going to move. you
+[00:06:23] know, it's got just so much resistance
+[00:06:26] there from these big sellers.
+[00:06:28] So, I I don't have high expectations
+[00:06:30] that is going to give us um you know, a
+[00:06:34] big squeeze. Of course, I could always
+[00:06:36] be wrong, but uh just as I look at it
+[00:06:38] here, it was interesting a little while
+[00:06:40] ago uh we had uh GLMD hit the scanner.
+[00:06:45] This one popped up yesterday and we had
+[00:06:47] AMIX hit the scanner as well. So, AMIX,
+[00:06:50] both of these ones hit the scans, which
+[00:06:52] I I really wasn't expecting, but um
+[00:06:55] yeah, a couple stocks hitting the
+[00:06:57] scanners there uh that also had hit
+[00:07:00] yesterday. So, kind of um
+[00:07:04] kind of a surprise,
+[00:07:07] let's see.
+[00:07:11] Uh for those of you guys just getting
+[00:07:12] tuned in, this is a special broadcast
+[00:07:14] brought to you by Cloudflare,
+[00:07:16] experiencing a global network issue. uh
+[00:07:19] which is affecting uh websites all
+[00:07:22] around the world. So um users in London
+[00:07:27] unable to connect to the internet. It's
+[00:07:29] very it's tough times in London today.
+[00:07:32] Um tough times here in America as well.
+[00:07:36] Cloudflare experiencing global network
+[00:07:39] issues. So uh that extends to warrior
+[00:07:43] trading as well because we rely on
+[00:07:44] Cloudflare. So, I'm running this special
+[00:07:47] broadcast here uh to give you some
+[00:07:49] market commentary. Uh, and since I'm
+[00:07:51] broadcasting on YouTube, let me remind
+[00:07:53] you guys as always of my disclaimer.
+[00:07:56] Trading is what do I usually say? It's
+[00:07:59] risky.
+[00:08:01] It's risky. Trading is risky. My results
+[00:08:04] are not typical. You should always
+[00:08:06] practice in a simulator before you put
+[00:08:08] real money on the line. And remember,
+[00:08:10] there's no guarantee you'll find success
+[00:08:12] whether you trade with me or you learn
+[00:08:13] on your own. Now, I am a very fastmoving
+[00:08:15] trader. So, if you end up seeing me take
+[00:08:17] a trade, there's a good chance that
+[00:08:19] it'll be a quick trade. My trades
+[00:08:22] average about 5 minutes long, but some
+[00:08:24] can be as short as seconds. If we have a
+[00:08:27] really nice breakout setup, I'll jump
+[00:08:29] in, jump back out, quick profit, and
+[00:08:32] that's it. So, if you're trading, do not
+[00:08:35] try to blindly follow me. Make sure you
+[00:08:38] understand the strategy and practice
+[00:08:40] these new strategies you're learning in
+[00:08:41] a simulator before putting real money on
+[00:08:44] the line. All right, so um 16 minutes
+[00:08:49] ago we had news AMIX raises $5 million
+[00:08:52] in a private placement. So that was a
+[00:08:54] headline there on AMIX.
+[00:08:58] Interesting. That came at 834. Uh
+[00:09:02] private placement price of 111 a share.
+[00:09:06] All right. So, it spiked up to A1.25,
+[00:09:09] then dropped back down, and now going
+[00:09:11] back to um you know, more or less
+[00:09:14] sideways.
+[00:09:17] Let me see.
+[00:09:20] So,
+[00:09:22] currently we've got um well, I guess
+[00:09:24] it's about 6 and a half minutes to the
+[00:09:26] top of the hour. Move this back up here.
+[00:09:32] I think it is interesting that we had
+[00:09:35] such a big move earlier today. OMA
+[00:09:38] uh because the float on this stock, the
+[00:09:40] float is actually 50 million shares.
+[00:09:44] It's a 50 million share float. Uh and
+[00:09:46] the stock is easy to borrow. So, you
+[00:09:49] know, 50 million share float, easy to
+[00:09:51] borrow, not typically the type of stock
+[00:09:54] that we would see go up 300%.
+[00:09:57] Uh but the news was strong. Now imagine
+[00:09:59] for a moment if it had a float half as
+[00:10:03] big, a 25 million share float with that
+[00:10:06] same amount of volume and the current
+[00:10:08] volume is 32 million shares. So with 32
+[00:10:11] million shares, if the float had been
+[00:10:12] half as big, what you basically have is
+[00:10:15] double the demand or well half the
+[00:10:17] supply, right? Either way you want to
+[00:10:18] calculate it. Same float, double the
+[00:10:21] volume, you'd have double the demand.
+[00:10:23] Same volume, half the float, double uh
+[00:10:26] half the supply. and you would most
+[00:10:28] likely have gotten a much much bigger
+[00:10:30] move. Imagine if it had been a 12
+[00:10:33] million share float with that same 32
+[00:10:35] million shares of volume. Holy smokes,
+[00:10:37] we could be looking at a stock up over
+[00:10:39] a,000% today. So, we know that the
+[00:10:43] relationship that we look for is of
+[00:10:46] course an imbalance between supply and
+[00:10:48] demand. So since supply is more or less
+[00:10:52] fixed, one of the easiest things that we
+[00:10:54] can search for when we're looking for uh
+[00:10:56] potential trades uh is just to look for
+[00:10:59] stocks that have lower levels of supply.
+[00:11:01] So lower levels of supply and then
+[00:11:04] search which one of those stocks with
+[00:11:06] floats of less than 20 million shares
+[00:11:08] are moving up today. So I have a couple
+[00:11:10] different scanners that I use uh for
+[00:11:12] this purpose and I'll put them right
+[00:11:14] here. Now I was able to get logged in a
+[00:11:17] little earlier this morning. So, I still
+[00:11:18] have my scanners up even though um many
+[00:11:20] people are not able to log in just yet.
+[00:11:33] Okay. So,
+[00:11:36] if Oh, I'm going to have to switch that.
+[00:11:43] So, if we're looking for an imbalance
+[00:11:46] between supply and demand, one of the
+[00:11:48] scans that I like, of course, is our top
+[00:11:50] gainer scanner, but also like this
+[00:11:52] lowflat scan that you see down here at
+[00:11:54] the bottom of the window. This lowflat
+[00:11:57] scan, and I'm scrolling down and up on
+[00:11:59] it. This is searching for stocks have a
+[00:12:01] float of uh less than I think our cutoff
+[00:12:03] is 10 million shares on this scan.
+[00:12:07] Um, actually, it might be five million
+[00:12:09] shares. Well, let's see. I'll just sort
+[00:12:11] the highest. Yeah, it's 5 million
+[00:12:13] shares. So, these are floats of less
+[00:12:14] than 5 million shares. Um, now if I sort
+[00:12:18] by a percentage change on the day, this
+[00:12:21] is showing me all the stocks in the
+[00:12:22] entire market with a float of less than
+[00:12:24] 5 million shares, and it's ranking them
+[00:12:26] by their percentage gain. So, now I can
+[00:12:28] look at these stocks and ask myself, do
+[00:12:30] any of these, you know, have the
+[00:12:31] potential to make a a decent move today?
+[00:12:34] Given that the total supply is extremely
+[00:12:37] low, if these stocks have a good
+[00:12:40] catalyst, they have a news headline that
+[00:12:43] is what's most likely generating the
+[00:12:45] demand, uh they could make a pretty big
+[00:12:47] move. So, I look at five pillars of
+[00:12:50] stock selection. I talked about this
+[00:12:51] yesterday in my recap. So, five pillars.
+[00:12:55] Number one is price. Most traders prefer
+[00:12:58] lower price stocks. So certainly under
+[00:13:02] $20 a share is preferable. I found that
+[00:13:05] I do the best uh between $5 and $8
+[00:13:09] roughly. Um but for a small account
+[00:13:11] challenge like what I'm doing now with
+[00:13:12] Weeble um you know doing uh you know
+[00:13:16] potentially a dollar to $2 is possible.
+[00:13:20] Uh number two uh relative volume. So, a
+[00:13:24] relative volume of five times and up
+[00:13:27] means that volume today is five times
+[00:13:29] higher than average. Number three, the
+[00:13:31] stock should already be up 10 to 15%
+[00:13:34] showing that it's beginning to move.
+[00:13:36] Number four, we like to see that there's
+[00:13:38] news. If it has news, then we understand
+[00:13:41] very clearly that's why it's up. That's
+[00:13:43] why the volume's coming in. Now, the
+[00:13:45] price is just going to make all of this
+[00:13:47] more attractive. And then number five,
+[00:13:49] we've got the float, which is the number
+[00:13:51] of shares available to trade under 20
+[00:13:53] million, definitely under 5 million.
+[00:13:56] This is where things, you know, can be
+[00:13:58] like A++
+[00:13:59] for potentially a big move. So this
+[00:14:03] morning,
+[00:14:04] uh, it's interesting because, uh,
+[00:14:08] you know, it's up 29%. Um, this one's
+[00:14:11] got a 3.97 million share float. Uh, 14
+[00:14:15] million shares of volume. It's got quite
+[00:14:16] a bit of volume, but um you know, you
+[00:14:19] can tell that it's
+[00:14:22] you know, it's kind of it's it's not I
+[00:14:25] don't know. It's it's up 30%. It's it's
+[00:14:27] not doing anything really exceptional.
+[00:14:30] That that was on. Um so lowerflow, but
+[00:14:34] it's just I don't know, you know, it's
+[00:14:35] not really working. So what's the
+[00:14:37] headline? Secures $300 million in
+[00:14:39] funding through a con convertible note
+[00:14:41] facility. So they got a $300 million
+[00:14:44] loan.
+[00:14:45] All right, that's cool. They got
+[00:14:46] approved for the loan, but
+[00:14:49] you know, getting approved for a loan, I
+[00:14:51] mean, it's that's that's a lot of money
+[00:14:52] they're on the hook for. So, that's
+[00:14:55] ONFO. Now, if we go back to the scan
+[00:14:57] here,
+[00:14:59] um, that's our leader on floats of under
+[00:15:01] 5 million shares. GLMD is the second
+[00:15:04] leader down here, $118.
+[00:15:07] Uh, CLK, now this one's kind of
+[00:15:10] interesting because the price is $7. So,
+[00:15:13] it's within that 5 to8 price that I do
+[00:15:15] well with. Floats less than a million
+[00:15:16] shares. But if we pull up CLK here real
+[00:15:20] quick, we pull up CLK.
+[00:15:24] CLK. There we go. Um, you'll see that
+[00:15:27] this is a stock that um made a move
+[00:15:31] uh but is now kind of it's it's well, in
+[00:15:35] total, it's only up like 14%.
+[00:15:38] So, it's just not really moving all that
+[00:15:41] much. uh had maybe some potential, but
+[00:15:45] you know, wasn't able to really pull
+[00:15:46] away. Now, I didn't actually check the
+[00:15:48] catalyst on this one. It wasn't really
+[00:15:50] up very much, so I just sort of ignored
+[00:15:51] it. But,
+[00:15:53] um, let's see.
+[00:15:57] So now let me just
+[00:16:03] Hong Kong based HR specialists to ignite
+[00:16:06] synergies and accelerate market
+[00:16:08] leadership and human resources solution.
+[00:16:12] Well, yeah. Anything that um
+[00:16:18] when so this is a company tied in with
+[00:16:20] Hong Kong. So, you know, that by itself
+[00:16:23] um you know gives me pause.
+[00:16:27] All right. So, there was that. Let's
+[00:16:30] see. Um
+[00:16:37] and then B, right? So, not much else.
+[00:16:39] So, and by the way, it's 9:00 a.m. right
+[00:16:40] now, top of the hour. So, this is where
+[00:16:43] um you know, sometimes we would be
+[00:16:45] watching scans to see if we have any
+[00:16:46] fresh breaking news. Um I'm not seeing
+[00:16:50] anything just yet.
+[00:16:54] Not seeing anything hitting the scanner.
+[00:16:58] It would be sort of our our last hope to
+[00:17:00] have a headline at 9:00 a.m. And it
+[00:17:02] would be a little I I wouldn't really
+[00:17:04] Well, it happens. I I guess I shouldn't
+[00:17:06] say that. We we do get news at 9:00 a.m.
+[00:17:09] But because today's already been I think
+[00:17:12] I mean the fact is this issue with the
+[00:17:14] internet um will have an effect on
+[00:17:16] trading volume you know if you've got um
+[00:17:20] hundreds of websites that are offline
+[00:17:22] and people are struggling to get access
+[00:17:24] to things access to news access to data
+[00:17:27] access to scanners you know then it's
+[00:17:30] going to some people are just going to
+[00:17:31] say I'm taking the day off right so less
+[00:17:34] volume in the market um perhaps as a
+[00:17:36] result of this Cloudflare outage
+[00:18:15] And welcome to those of you guys tuning
+[00:18:17] in who perhaps have been uh longtime
+[00:18:20] subscribers on YouTube uh but have never
+[00:18:22] been able to watch a broadcast.
+[00:18:25] I don't uh typically broadcast on
+[00:18:27] YouTube, but um because we have a
+[00:18:30] Cloudflare outage, I decided to go ahead
+[00:18:33] and run this stream today.
+[00:18:57] Okay. So 9:02 right now.
+[00:19:15] The scan is interesting. You've got one
+[00:19:17] stock up 209% right now and then, you
+[00:19:21] know, the rest are just kind of like
+[00:19:22] nothing. Um, in terms of volume, CF has
+[00:19:26] the most volume, 51 cents a share. 10
+[00:19:29] million share float, 135 million shares
+[00:19:31] of volume, but it's only up 39%. And
+[00:19:34] it's a penny stock. So, usually you
+[00:19:35] would expect penny stocks to be up quite
+[00:19:37] a bit, but this one's not up that much.
+[00:19:39] Um,
+[00:19:41] so OLMA leader CFO
+[00:19:47] U ARVN pull up that one for a second.
+[00:19:56] So this one popped up earlier today. As
+[00:19:59] you could see, it would be too expensive
+[00:20:01] for the small account challenge, I
+[00:20:03] think.
+[00:20:05] Um, I noticed that the float is higher.
+[00:20:07] It's also easy to borrow. So, uh, most
+[00:20:12] likely if you do get any pops on it,
+[00:20:14] traders will be quick to short them
+[00:20:15] coming back down.
+[00:20:34] If you guys have any other tickers you
+[00:20:35] want me to look at, I can see the chat
+[00:20:37] feed, so let me know.
+[00:20:40] GLMD.
+[00:20:44] Yeah, I don't like So, I don't like the
+[00:20:46] pop that it had right there. Um, and
+[00:20:48] this one also had a pretty nasty um jack
+[00:20:53] knife yesterday. It was right here on
+[00:20:55] this candle. So, see how it popped up
+[00:20:58] there and then did that nasty reversal.
+[00:21:00] We don't like seeing that.
+[00:21:04] So, I feel like it's not trustworthy,
+[00:21:07] unfortunately.
+[00:21:09] I mean, the fact is yesterday it went up
+[00:21:11] to like a$160 70 and we're well below
+[00:21:14] those levels. So, kind of what's the
+[00:21:16] point of really trading it here.
+[00:21:21] So, CF, yep. Um, looked at that one.
+[00:21:26] kind of thought that for 153 million
+[00:21:29] shares of volume it would be up more
+[00:21:31] than 39%.
+[00:21:36] CMND
+[00:21:39] 33 cents a share.
+[00:21:41] Yep. By ND.
+[00:21:44] Yeah, it's a tough stock. It's gotten
+[00:21:48] beaten up pretty badly.
+[00:22:06] So why no trades on um what was it? OLA
+[00:22:12] or whatever it is. Um the float being
+[00:22:15] higher um was one uh factor uh higher
+[00:22:20] float. What was the stock you just SGBX?
+[00:22:23] Um the float being higher was one
+[00:22:24] factor. Um you know, the higher float
+[00:22:27] stocks I I don't typically um think of
+[00:22:31] as being worth trading because they're
+[00:22:32] unlikely to experience a big imbalance
+[00:22:34] between supply and demand. I mean, it
+[00:22:36] can happen, but it's not as common. So,
+[00:22:38] the exception, how did that occur? Well,
+[00:22:40] particularly strong news um on a biotech
+[00:22:44] stock and that that worked,
+[00:22:47] but um I was tempted to trade it around
+[00:22:50] $32 a share. Um I had my order and I was
+[00:22:53] like, uh should I do it? Should I not do
+[00:22:55] it? And I talked myself out of it. I was
+[00:22:58] feeling at the mo at that moment a
+[00:22:59] little bit overwhelmed with um kind of
+[00:23:02] the um you know, internet issues we were
+[00:23:05] having. So I was like, uh I don't know.
+[00:23:07] Uh OMA, right?
+[00:23:10] I just thought, you know, if I take a
+[00:23:12] trade on this here and I lose, I'm going
+[00:23:13] to be I rateate. So, I'm already pretty
+[00:23:16] annoyed and I I don't need to make it
+[00:23:18] worse. But this is the area where I was
+[00:23:20] watching right here around 32. So, first
+[00:23:22] it pops up to that level, 3130, you
+[00:23:27] know, four three, four big green candles
+[00:23:29] in a row, then it pulls back, then it
+[00:23:31] pops up to 3150, and then it tops at
+[00:23:34] 31.86. And I was like, man, it keeps
+[00:23:36] having these topping tails. And then it
+[00:23:38] popped up to 3277. And I kind of
+[00:23:40] thought, you know, it feels like this
+[00:23:43] one like it's creeping a little bit
+[00:23:45] higher. And I got my order ready at 3250
+[00:23:48] and then before I knew it, it was at 36.
+[00:23:50] And I was like, okay, well, I don't
+[00:23:52] think I should chase it up here. That
+[00:23:54] would probably be too risky. And then it
+[00:23:56] kept going up to 38. But that was the
+[00:23:59] high. So, you know, that was the one
+[00:24:02] trade that I I missed out on that I was
+[00:24:04] watching and talked myself out of it. Uh
+[00:24:07] but you know I was thinking as a trader
+[00:24:09] should about downside risk and the
+[00:24:11] downside risk wasn't just losing money
+[00:24:13] you know maybe h taking a loss on that
+[00:24:15] trade. The downside risk um was also the
+[00:24:19] emotion of I'm already frustrated. you
+[00:24:23] know, we're having an internet issue
+[00:24:24] today and my day is not going according
+[00:24:27] to plan and I'm just going to get even
+[00:24:29] more agitated if I take a big loss
+[00:24:32] because this stock is not a stock that
+[00:24:36] meets all five pillars of stock
+[00:24:37] selection.
+[00:24:39] So, if I trade it and I lose, I'm going
+[00:24:40] to feel like an idiot. The price, you
+[00:24:43] know, $30 a share, it's expensive.
+[00:24:46] Relative volume is fine. Percentage
+[00:24:48] change is fine. News is fine. float 50
+[00:24:51] million shares. So these two create an
+[00:24:55] issue and then there's a note that it
+[00:24:57] was easy to borrow. Right? So for that
+[00:25:01] reason,
+[00:25:02] these two are really really big. So you
+[00:25:06] can have news, you can have percentage
+[00:25:08] change, you can have relative volume,
+[00:25:09] but if the price is too high or too low,
+[00:25:12] because I don't usually like, you know,
+[00:25:14] penny stocks. So if the price is too
+[00:25:16] high or it's too low, that's a problem.
+[00:25:18] If the float is way too high, that's a
+[00:25:21] problem. And when it's easy to borrow,
+[00:25:23] especially in this market, shorts are
+[00:25:25] going to be so much more confident to
+[00:25:26] take positions because they can trade it
+[00:25:28] for free. They don't have to locate
+[00:25:29] shares. They could short a million
+[00:25:31] shares of it. No borrowing fees. Now,
+[00:25:34] think about that. Sometimes these um
+[00:25:36] stocks that make, you know, 3 400% moves
+[00:25:39] to borrow a million shares would cost
+[00:25:40] you like 30 grand, maybe more, 50 grand.
+[00:25:43] Who knows? I mean, some of them could be
+[00:25:46] $100,000, a couple hundred,000 to
+[00:25:48] borrow. So, to be able to have a stock
+[00:25:51] that goes up 300% and is easy to borrow,
+[00:25:54] totally free, that's amazing for an
+[00:25:57] aggressive short seller and a 50 million
+[00:25:59] share float. So, very, you know, quite
+[00:26:02] liquid. So, unfortunately, that's going
+[00:26:04] to bring out some of the big short
+[00:26:05] sellers just because it's an attractive
+[00:26:07] opportunity. And so, that creates more
+[00:26:11] overhead resistance. because they're
+[00:26:14] going to be selling.
+[00:26:20] So, let's see. Um, so right now it's 10
+[00:26:23] past 9 and um I'm sitting tight right
+[00:26:27] now. I did not take a trade yesterday in
+[00:26:30] my Weeble account. So, you can see my
+[00:26:31] Weeble account is set up right here.
+[00:26:34] It's good to go. I'm I'm ready, right?
+[00:26:36] No trades yet. I'm ready to take a trade
+[00:26:38] in it. Um I would love to take a trade.
+[00:26:41] I would love to see an opportunity that
+[00:26:42] was strong enough to take a trade.
+[00:26:46] You know, it was not my uh plan
+[00:26:49] or intention that I would start this
+[00:26:52] small account challenge and then uh you
+[00:26:54] know, we'd have this cloud flare outage
+[00:26:56] or,
+[00:26:58] you know, things would be kind of on the
+[00:27:00] slower side. So I am caught a little bit
+[00:27:04] um by surprise.
+[00:27:09] But, you know, right now at this point,
+[00:27:13] what I would do on a typical day here,
+[00:27:16] uh, if I was just streaming for members
+[00:27:17] at Warrior Trading, um, you know, at
+[00:27:20] this point, um, I would, this is
+[00:27:23] typically is 10 past, you know, 9
+[00:27:25] quarter past. This is usually where I'd
+[00:27:26] ask everyone to compliment me on my
+[00:27:28] outfit, right? Um, I usually do that,
+[00:27:31] you know, every 15, 20 minutes, and you
+[00:27:33] guys haven't done it yet. So, I'm going
+[00:27:34] to give you a chance. Now, I I'm going
+[00:27:36] to forgive you that you missed it. Um,
+[00:27:40] but you know, here we go. All right. So,
+[00:27:43] now I'm ready to receive your
+[00:27:45] compliments. Okay. So, that always, um,
+[00:27:48] you know, hypes me up a little bit, uh,
+[00:27:50] as we get ready for, you know, the at
+[00:27:54] this point the opening bell. So, at 9:30
+[00:27:59] when the market opens, there will be a
+[00:28:01] surge of volume, right? Traders, many of
+[00:28:04] whom don't even know how to trade
+[00:28:06] pre-market, will begin trading. And what
+[00:28:07] will they begin trading? They'll
+[00:28:09] probably begin trading the leading
+[00:28:11] gainer, whatever is up the most. Uh, you
+[00:28:14] know, those are the stocks they'll be
+[00:28:15] focused on. OMA, maybe, you know,
+[00:28:19] that'll be something that some people
+[00:28:20] are watching. Now, because I know how to
+[00:28:22] trade pre-market, I know how to set up
+[00:28:24] my orders to do that. Um, you know, for
+[00:28:26] me, I look at this as the the the good
+[00:28:29] opportunities have already passed us by.
+[00:28:31] Uh, but what's also possible is that at
+[00:28:34] 9:30, well, it's not impossible that
+[00:28:37] another stock could have um breaking
+[00:28:40] news. It's not super likely, but you
+[00:28:43] know, breaking news, maybe 9:30 or that
+[00:28:46] for lack of anything else, something
+[00:28:49] kind of starts to creep up on the scans,
+[00:28:51] starts to move a little bit higher. Uh,
+[00:28:54] next thing you know, traders are jumping
+[00:28:56] in it and we get a squeeze. I'm not
+[00:29:00] saying that's going to happen, but you
+[00:29:01] know, that's what we would look for
+[00:29:03] after the opening belt. Typically,
+[00:29:06] uh, I'm coming into a window where I
+[00:29:09] wouldn't take any trades. 9:15 is kind
+[00:29:12] of the last chance for breaking news.
+[00:29:14] And it's a little bit of a hailmary.
+[00:29:16] Could we get breaking news?
+[00:29:18] We could. I don't really expect it, but
+[00:29:22] every now and then you'll get a headline
+[00:29:24] that drops at 9:15. You know, these
+[00:29:26] companies schedule out their headlines
+[00:29:28] pre-market and most of them are at, you
+[00:29:31] know, a lot of them seem to be at 8 and
+[00:29:33] 8:30. Those are really popular times. 8
+[00:29:35] and 8:30. 7 a.m. is a little early. We
+[00:29:37] do sometimes see it. Um 7:30 we see it.
+[00:29:40] In fact, actually, what I could do uh
+[00:29:42] for you here, um I'm going to pull up my
+[00:29:45] trades just for the year. And we'll
+[00:29:47] divide them the distribution of trades
+[00:29:49] by time of day. And what you'll notice
+[00:29:51] is that um I take more trades right
+[00:29:54] around the times of the morning when uh
+[00:29:58] breaking news comes out. So let me just
+[00:30:00] pull this up here and then I'll show it
+[00:30:02] to you. All right. So this is that. So
+[00:30:05] I'll do by 15 minute increment.
+[00:30:08] Okay. All right. Um
+[00:30:12] Okay. So So here you can see this is the
+[00:30:16] distribution of the trades right here.
+[00:30:18] So, um, and the it's kind of similar,
+[00:30:21] but so 7 a.m. I take a lot of trades
+[00:30:23] right there at 7 a.m. and I'm taking
+[00:30:25] trades at 7 a.m., you know, which makes
+[00:30:27] sense because it's the it's the top of
+[00:30:29] the hour. And that's when a lot of
+[00:30:30] retail traders are able to begin
+[00:30:32] trading. So, um, I'm sitting here
+[00:30:35] starting at 7 a.m. And any news that
+[00:30:38] came out prior overnight, prior to 7
+[00:30:40] a.m., boom, we're taking our first
+[00:30:42] trades right there at 7:00. And then
+[00:30:44] 7:15, me 7:30, n 7:45, me 8 a.m., boom,
+[00:30:49] that's a window. 8:15, a little less.
+[00:30:52] 8:30, boom, that's a window. 8:45, a
+[00:30:55] little less. 9:00 a.m. Boom. 9:15, boom.
+[00:30:58] 9:30, here we go. It's the opening bell.
+[00:31:01] 9:45, 10, and then kind of tapering as
+[00:31:04] we go further into the day. So, and
+[00:31:07] that's that's because I trade generally
+[00:31:10] breaking news. Now, if I'm not trading
+[00:31:12] breaking news, the the what I would
+[00:31:14] trade would be continuation on something
+[00:31:17] that's already moving, which is, you
+[00:31:19] know, just trading momentum. My whole
+[00:31:21] focus is trading volatility. So, I'm
+[00:31:24] looking for things that are moving
+[00:31:25] quickly. And typically, it is news that
+[00:31:27] creates that move. But, um, you know,
+[00:31:30] some sometimes we will sometimes see
+[00:31:33] stocks that go up 100% 200% and there is
+[00:31:36] no news. And it's kind of confusing
+[00:31:38] because you're like, I don't really
+[00:31:39] understand um you know why, but um you
+[00:31:45] know, it's going higher. So, you sort of
+[00:31:47] figure, well, I guess I better I can
+[00:31:49] either jump on and ride the momentum or
+[00:31:51] I can sit this one out. Um one of the
+[00:31:54] things that I often mention is that when
+[00:31:57] we have something that's grinding, uh
+[00:31:59] kind of moving higher sort of I'll I'll
+[00:32:01] draw the grinding pattern for you. So
+[00:32:04] grinding um is And
+[00:32:37] So, uh, sorry about that. I don't know.
+[00:32:46] I think we reconnected.
+[00:33:25] Okay.
+[00:33:27] All right. I'm going to switch back to
+[00:33:28] here.
+[00:33:30] All right. So, um, right. So, what was I
+[00:33:32] saying? Um, so with these types of
+[00:33:35] grinders, you know, you get this kind of
+[00:33:37] slow move higher and sometimes they'll
+[00:33:40] finally pull away and you get this
+[00:33:42] really big move. Um,
+[00:33:44] sometimes that can happen when they keep
+[00:33:47] holding up longer and longer and longer.
+[00:33:49] We call this capitulation, which is
+[00:33:52] where anyone maybe who's been holding it
+[00:33:54] short just finally is like, "All right,
+[00:33:56] I'm I give up. I can't keep doing this."
+[00:33:58] And you get that squeeze and then more
+[00:34:00] shorts cover and then that fuels the
+[00:34:02] squeeze even more. And then next thing
+[00:34:05] you know, you get a big move. Um, so the
+[00:34:08] the thing is waiting for this to occur.
+[00:34:11] If I don't make a lot of good money in
+[00:34:13] this area, it's how can I be patient and
+[00:34:15] wait for this to occur? And when this
+[00:34:18] starts to occur, how do I know it's
+[00:34:20] different from what's going on here? So,
+[00:34:22] usually what will be happening is, you
+[00:34:23] know, the volume will be kind of
+[00:34:25] consistent, higher volume on some of the
+[00:34:26] spikes, whatever. Um, and then you start
+[00:34:29] seeing multiple high volume candles, and
+[00:34:31] that's when, you know, things are really
+[00:34:33] starting to take off. And so what we
+[00:34:35] look at sort of right in this area here,
+[00:34:39] if we zoom that in, so we're going to
+[00:34:41] zoom in to right here on a 10-second
+[00:34:45] chart. So what this is going to look
+[00:34:48] like is first candle pops up like this.
+[00:34:51] Second candle pops up like this. And
+[00:34:53] then you're going to see
+[00:34:56] a little micro pullback here just for a
+[00:34:58] moment.
+[00:35:01] What I look at there is for that next
+[00:35:03] leg higher and I only do it when these
+[00:35:05] first two candles are really big because
+[00:35:07] that tells me that, you know, we've
+[00:35:09] really got something going. So anyway,
+[00:35:13] so uh so what I often find is that it is
+[00:35:16] those last couple candles where we can
+[00:35:19] tend to get some of the biggest moves.
+[00:35:21] Um which you did end up having happen
+[00:35:23] here on OMA. It was the last, you know,
+[00:35:25] four or five candles where you got that
+[00:35:27] final, you know, squeeze higher and then
+[00:35:31] it um, you know, then it dipped back
+[00:35:33] down.
+[00:35:35] All right, so let's see. Um,
+[00:35:46] so current time is 9:20. So we didn't
+[00:35:48] get any news there at 9:15 or I didn't
+[00:35:50] see hear anything hit the scanner. Um,
+[00:35:54] doesn't look like anything hit the
+[00:35:55] scanner there at 9:15. So, our 9:15
+[00:35:58] window um has sadly come and gone.
+[00:36:19] Just going to pull this up for a second.
+[00:36:38] I just wanted to check my GPU, but
+[00:36:42] seems okay.
+[00:36:44] All right. Well, that's good. Okay. So
+[00:36:52] is there anything um why no CN CMND?
+[00:36:56] Okay. Well, um so
+[00:37:00] couple things. Um CMND
+[00:37:04] uh 4.8 million share float.
+[00:37:09] Um not a um
+[00:37:12] not a huge fan of you know lower um
+[00:37:15] price stocks. We've got this high of 38
+[00:37:17] cents. It's a nice curl from 30 cents up
+[00:37:20] to 38. I mean, I can't disagree with
+[00:37:22] that. Um,
+[00:37:27] we've traded this one before.
+[00:37:30] Look at the daily chart.
+[00:37:34] You can see it's a stock that's been
+[00:37:35] really beaten up pretty badly.
+[00:37:38] Um, it'll pop up, but whenever it pops
+[00:37:41] up, it ends up being like a high volume
+[00:37:42] red day. So, it doesn't hold those
+[00:37:44] levels very well.
+[00:37:51] It just seems like it's got a real
+[00:37:53] headwind, unfortunately.
+[00:38:17] OMA. Yes, I do see that curling up a
+[00:38:21] little bit. I don't think that it's
+[00:38:22] suitable for my small account at this
+[00:38:25] price. Um, I'm usually a little cautious
+[00:38:28] trading this area on a chart. I feel
+[00:38:31] like this is kind of the backside. This
+[00:38:33] is the front side. You've got momentum.
+[00:38:36] You know, it's buying pullbacks. Keeps
+[00:38:38] going higher. I usually feel pretty good
+[00:38:41] there. Trading this area. It feels like
+[00:38:43] we're trending down, you know? I mean,
+[00:38:46] obviously pulled back quite a bit,
+[00:38:48] popped up there for a moment, pulled
+[00:38:49] back more, popped up. Is there a line
+[00:38:51] where this could cross that it goes all
+[00:38:54] the way back to the high a day?
+[00:38:57] If there were, where would it be? Maybe
+[00:38:59] up here like at the halfway point, like
+[00:39:02] $32 maybe, but we're well off that
+[00:39:05] level. So, um, you know, for me, I just
+[00:39:11] I just don't think it would work. Um,
+[00:39:13] it's too weak down here. So, we can't
+[00:39:17] help the fact that we missed it. Uh, but
+[00:39:19] we can control whether we trade the
+[00:39:20] backside or wait for the next one. So,
+[00:39:23] I'd rather wait for the next one at this
+[00:39:25] point. I think that would make more
+[00:39:27] sense.
+[00:39:36] So, we've got about five minutes to the
+[00:39:38] opening bell here.
+[00:39:56] Uh the news today on Cloudflare. Um,
+[00:40:00] Cloudflare outage taking down parts of
+[00:40:02] the internet. Here's what we know so
+[00:40:04] far. Cloudflare outage outgo outage
+[00:40:08] ongoing as widespread internet outages
+[00:40:10] spread. Widespread outages spread. Yeah.
+[00:40:14] Company blames unusual spike in traffic
+[00:40:16] before errors.
+[00:40:21] Cloud flare down. Chat GPTX among sites
+[00:40:25] affected by global network issues. They
+[00:40:26] forgot about Warrior Trading.
+[00:40:39] Yes, you can have leverage at Weeble.
+[00:40:42] Um, however, you can't day trade there
+[00:40:46] unless you're in a cash account. Um, and
+[00:40:48] you're if you're below 25,000. So, this
+[00:40:50] is a $2,000 account and it is a cash
+[00:40:53] account. So that means I can trade um I
+[00:40:56] I can day trade as much as I want, but
+[00:40:58] when I run out of buying power, I'm done
+[00:40:59] for the rest of the day. So that's
+[00:41:01] that's the only thing about um you know,
+[00:41:05] a cash account. If you've watched if
+[00:41:08] you've tuned into my previous small
+[00:41:09] account challenges this year, um I've
+[00:41:12] done this is my third one. The first one
+[00:41:15] I used a
+[00:41:17] uh offshore broker with $2,000
+[00:41:21] and they allowed me a day trade as much
+[00:41:23] as I wanted and they offered six times
+[00:41:25] leverage. So I was able to trade pretty
+[00:41:28] aggressively there. Um that small
+[00:41:31] account challenge I grew the account to
+[00:41:32] $58,000
+[00:41:34] and I donated all of that to charity. Uh
+[00:41:36] 30,000 to the Boston Children's Hospital
+[00:41:39] and 30,000 to St. Jude's Children's
+[00:41:41] Hospital. I reset the account back down
+[00:41:43] to 2,000 and I did it again. The second
+[00:41:45] challenge, I did not use any leverage.
+[00:41:48] Okay, so taking the same number of
+[00:41:50] trades, I grew the account to like
+[00:41:52] 5,000, something like that. So, you
+[00:41:55] know, I was my uh performance was
+[00:41:58] certainly a ratio of six less because I
+[00:42:01] didn't have six times leverage, but it
+[00:42:03] was even a little bit less than that
+[00:42:04] because the market was a little cooler.
+[00:42:07] And uh now for this third small account
+[00:42:09] challenge, I've reset again to $2,000.
+[00:42:12] Um but this time I'm using a cash
+[00:42:15] account, which means I can day trade as
+[00:42:19] much as I want, but when I run out of
+[00:42:21] the $2,000 of cash, I can't take any
+[00:42:23] more trades. And the challenge here is
+[00:42:26] that, you know, I could either divide
+[00:42:29] this $2,000 up into 10 blocks of 200,
+[00:42:34] take 10 trades, each worth $200, and,
+[00:42:37] you know, try to have 10 good trades,
+[00:42:39] and finish the the day, you know, the
+[00:42:41] pro the proceeds of those 10 trades. My
+[00:42:43] accuracy right now is about 70%
+[00:42:47] this year. Uh, my average winners are
+[00:42:49] bigger than my average losers. So, if I
+[00:42:52] took 10 trades, I would hope that seven
+[00:42:53] of them would be winners, three would be
+[00:42:55] losers, and you know, I'd have a a green
+[00:42:57] day. Uh, another way to do it is, uh,
+[00:43:01] especially on a day like today where I
+[00:43:03] don't see a lot of opportunities, would
+[00:43:05] be to wait, uh, and take maybe just one
+[00:43:09] trade or two. If I did one trade and I
+[00:43:11] did the whole $2,000, you know, that's
+[00:43:14] taking more risk. Uh, but if I saw one
+[00:43:17] really good setup, I I could do that.
+[00:43:19] You know, I could take one trade, one
+[00:43:20] entry, like a $2 a share stock. I could
+[00:43:23] buy a thousand shares and if it goes to
+[00:43:25] 215,$225,
+[00:43:27] you know, I could sell for a $250 winner
+[00:43:29] and that'd be a um a nice gain on the
+[00:43:32] account today. Uh or, you know, I could
+[00:43:34] take 500 shares of a $4 stock, you know,
+[00:43:36] so on and so forth. Um, I I've I've kind
+[00:43:41] of planned that I would focus on taking
+[00:43:43] one trade a day. Uh, because, you know,
+[00:43:46] the market's been a little cooler and I
+[00:43:49] thought focusing on just one really good
+[00:43:51] setup would probably be what would make
+[00:43:53] the most sense. So, focusing on one good
+[00:43:56] trade a day and using the full $2,000 on
+[00:43:59] it. That's that's been my thought. But,
+[00:44:01] of course, I haven't taken a trade yet.
+[00:44:02] Today is day one. Well, yesterday was
+[00:44:05] day one and it was a no trade day. So
+[00:44:06] today is day two, but I so I still
+[00:44:08] haven't had that first trade yet. Um
+[00:44:11] yesterday we didn't have anything that
+[00:44:12] really looked very good. And then today
+[00:44:15] um I didn't have scanners for part of
+[00:44:16] the morning and this cloud flare issue
+[00:44:18] and I was just trying to figure out, you
+[00:44:20] know, how to deal with that. And in any
+[00:44:22] case, OMA has been our biggest move, but
+[00:44:26] I felt like it was too expensive. Now,
+[00:44:28] you could argue what does it matter? I
+[00:44:29] mean, the stock went up 300%. 300% is
+[00:44:32] 300%. Okay, so you can't buy a,000
+[00:44:34] shares. It's not $2 a share. you could
+[00:44:35] buy, you know, 100 shares or whatever.
+[00:44:37] Um, and that's true. Um, and and in
+[00:44:40] hindsight,
+[00:44:42] you know, yep, that that would have
+[00:44:44] worked. But, um, if we go back to here
+[00:44:50] and look at the five pillars of stock
+[00:44:51] selection, I know that this is where
+[00:44:54] historically I've made the most money.
+[00:44:57] And when I venture outside of these
+[00:44:59] five, you know, core criteria,
+[00:45:02] that can be where I make mistakes.
+[00:45:05] And I really don't want to make a big
+[00:45:07] mistake on day one, you know, of a small
+[00:45:10] account challenge. So, better to be safe
+[00:45:13] than sorry, but um yeah, as as I'm
+[00:45:16] sitting right now, and by the way, ding
+[00:45:17] ding ding, there's the opening bell. So,
+[00:45:20] um I'm just going to, you know, try to
+[00:45:23] exercise some patience and wait for
+[00:45:24] something that looks a little bit
+[00:45:25] better.
+[00:45:27] Now, one of the challenges that we face
+[00:45:29] at this moment is now that the bell has
+[00:45:30] rung, we will have halt levels. So you
+[00:45:33] can see that we've got a limit up at
+[00:45:36] 2915 on OM OMA.
+[00:45:40] That's the halt up level. And we've got
+[00:45:42] the halt down level at 2385. But if we
+[00:45:44] pulled up a cheaper stock um like AMIX
+[00:45:48] for instance,
+[00:45:50] AMIX has halt levels that are um you
+[00:45:53] know somewhat close.
+[00:45:55] 13 is the current price right now and
+[00:45:57] the halt level is a $137.
+[00:45:59] So, it's not very far away, you know,
+[00:46:01] which means it wouldn't it wouldn't take
+[00:46:04] um, you know, much for this to halt up.
+[00:46:06] But it also means that if I get caught
+[00:46:08] in a halt, I can't do anything. I can't
+[00:46:11] buy, I can't sell. I'm totally stuck.
+[00:46:13] So, now I'm completely stuck until a
+[00:46:16] resumption. And that creates a little
+[00:46:18] bit more risk than I'd prefer.
+[00:46:21] SGBX
+[00:46:23] um someone saying that it's got
+[00:46:26] um 430% borrowing. So there are some
+[00:46:30] tools that you can look at that will
+[00:46:32] tell you about short interest um on some
+[00:46:36] of these stocks.
+[00:46:38] I you know one of the things is uh some
+[00:46:41] of these companies that have high levels
+[00:46:43] of short interest have it because it's
+[00:46:45] just not a very good company. And
+[00:46:47] there's people out there that know a
+[00:46:48] heck of a lot more than we do about
+[00:46:50] these companies. They believe they're
+[00:46:52] not very good and they put their money
+[00:46:54] where their mouth is and they short the
+[00:46:56] heck out of them. And um you know this
+[00:46:59] is just look at the chart. Look at the
+[00:47:01] you know the daily chart. It kind of
+[00:47:04] just keeps going lower, right? So you
+[00:47:08] know could we pick off a little winner,
+[00:47:10] you know, on a little bounce off the
+[00:47:12] low? Maybe, you know, could you could
+[00:47:15] sometimes you'll get that sometimes a
+[00:47:17] little squeeze shorts, you know, it's at
+[00:47:21] $3. I mean, how much can it go down to
+[00:47:23] zero, you know, so if it start to bounce
+[00:47:26] in a way has
+[00:47:28] the downside is limited to zero, which
+[00:47:31] would be losing 100% of your investment
+[00:47:32] if you bought it. Um, but the upside on
+[00:47:35] something like this, you know, if it
+[00:47:36] really started to move, you might
+[00:47:38] wonder, could it go to 6, 8, 10? you
+[00:47:41] know, there might be more upside the
+[00:47:42] downside, but um but I look at it and I
+[00:47:46] see higher volume red candle u back
+[00:47:48] there on the 13th. So, you know, last
+[00:47:51] week we had a higher volume red candle,
+[00:47:53] hit a high on that day of uh 398, it
+[00:47:57] says. So, um I kind of want to see us
+[00:48:00] get over that level and then if we were
+[00:48:02] over that level, then 56, you know, up
+[00:48:05] to 740
+[00:48:07] by the way. Um,
+[00:48:09] so OMLA is halting down right now. Gosh,
+[00:48:14] OMA. Sorry, this one's hard for me to
+[00:48:15] remember. I can't I usually do better
+[00:48:17] when I can say the ticker, like I can
+[00:48:19] speak it like a word. Um, so halted down
+[00:48:23] right now. 2250
+[00:48:25] is the current quote.
+[00:48:31] Like I said, easy to borrow. and on the
+[00:48:33] back side of the move shorts short into
+[00:48:36] the pop and then you know you get that
+[00:48:38] fade. Now I'm not a big fan of short
+[00:48:41] selling um because I think it's for for
+[00:48:44] beginner traders and certainly for me
+[00:48:47] when I was getting started it just
+[00:48:48] carries too much risk that one mistake
+[00:48:51] um could potentially end your career and
+[00:48:54] I don't want to see that happen to
+[00:48:56] anyone of course it's just not worth it.
+[00:48:58] Um, so you know, it's it's bad enough to
+[00:49:00] buy a stock and have it potentially go
+[00:49:02] to zero or something. I mean, that's
+[00:49:03] bad, but buying a stock or shorting a
+[00:49:06] stock at three and having it go up to
+[00:49:07] like 20 bucks is a margin call. You're
+[00:49:12] it's devastating. You could be in debt
+[00:49:14] to your broker, and that's just a risk
+[00:49:17] nobody wants to take.
+[00:49:20] All right, so 9:34 here. Market's been
+[00:49:23] open for four minutes. We already have a
+[00:49:24] halt. Um,
+[00:49:30] I'm going to hide this for right now.
+[00:49:32] Cloudflare. Um,
+[00:49:36] still offline there. And this is a this
+[00:49:38] is a sign. I mean, people will
+[00:49:39] definitely be talking about this outage
+[00:49:40] because this is very significant. Um,
+[00:49:42] this is a very long outage.
+[00:49:50] [snorts]
+[00:50:06] If you guys see something that looks
+[00:50:07] good, you just, you know, call it out.
+[00:50:09] I'll I'll pull it up on my chart. So, we
+[00:50:12] looked at SGBX. Um,
+[00:50:18] and you know, I see that it's getting a
+[00:50:19] little attention there at the open, but
+[00:50:22] um, 66 366 was the high from yesterday.
+[00:50:26] So, um,
+[00:50:30] you know, like I said, I'm just I I, you
+[00:50:32] know, I just approach it with a little
+[00:50:34] bit of skepticism. Um, when you have
+[00:50:38] stocks like this that are
+[00:50:40] having a bit of a hard time. So, room on
+[00:50:42] the daily chart. you'd want to see it up
+[00:50:44] to 398. So, um, you know, 398 and then
+[00:50:49] it's only up 11% on the day. So, it's
+[00:50:51] not, you know, like it's really up a
+[00:50:54] ton.
+[00:50:56] I'll check the short interest on it. Um,
+[00:51:05] Close that for a second. Um,
+[00:51:09] what was I looking for?
+[00:51:24] Okay. So, short interest.
+[00:51:33] Yeah. Uh, Ortex has a short score on it
+[00:51:36] of 70 out of 100. the cost to borrow is
+[00:51:39] up 472%. So, you're right about that.
+[00:51:43] And the short interest versus the free
+[00:51:44] float is pretty high. Um, you know, but
+[00:51:52] you know, it's just it's hard to know.
+[00:51:56] I don't know that it's obvious enough
+[00:51:59] being that it's only up 17%.
+[00:52:07] Keep it on. Keep it on watch. We'll see.
+[00:52:09] CGTL.
+[00:52:11] All right, I'll pull that one up. So, CG
+[00:52:14] uh CGTL. See, this is why Weeble's a
+[00:52:16] little annoying. Pulls up the wrong
+[00:52:18] stock a lot. Um,
+[00:52:22] yeah. Okay. So,
+[00:52:43] what's the float on that one?
+[00:52:46] Working without all of my tools here
+[00:52:48] this morning. It's kind of a pain. The
+[00:52:50] halt level is 124.
+[00:54:01] All right, hang on one second.
+[00:55:37] All right, there we go.
+[00:55:43] So, I'm just going to run uh both of
+[00:55:45] these broadcasts for right now. So
+[00:55:50] streaming uh the warrior stream is now
+[00:55:52] up and running as well.
+[00:56:12] So I'll move these charts over here
+[00:56:16] that window.
+[00:56:18] So, this is super helpful for me because
+[00:56:21] um when I'm trading and I don't have my
+[00:56:27] um I don't have my scans, I'm I'm really
+[00:56:31] kind of a disadvantage because I just
+[00:56:32] can't see what I'm what I'm looking at.
+[00:56:34] I just don't know what's moving.
+[00:56:37] So, now I've got my scans back on here.
+[00:56:43] I'm going to close um
+[00:56:50] going to close this these charts
+[00:56:55] chart.
+[00:56:58] So now slide this back over here.
+[00:57:02] Okay. So now we're in good shape. All
+[00:57:05] right. So now I'll move this back over
+[00:57:11] All right. So WK SP hitting scans.
+[00:57:21] So, this one uh let's see
+[00:57:54] LPCN.
+[00:58:08] Yeah. So
+[00:58:10] h
+[00:58:20] yeah, the thinker swim scanners
+[00:58:22] unfortunately don't work super well. Um
+[00:58:25] I've tried using them before. I tried I
+[00:58:27] tried setting them up this morning and I
+[00:58:28] just got frustrated because they just
+[00:58:29] were not working correctly.
+[00:58:58] Okay. So, 9:43. I mean, the fact is, you
+[00:59:02] know, we're at a time of day where um we
+[00:59:06] don't we're not as likely to get
+[00:59:07] breaking news headlines. Things are
+[00:59:08] slowing down.
+[00:59:47] So CGTL Yeah, it's up 40%.
+[00:59:59] Float on its 1.4 4 million shares. It's
+[01:00:02] It's not a high float stock
+[01:00:06] right there. I can detect a hidden
+[01:00:08] seller at 114. So, do you see how
+[01:00:10] there's all that buying? Uh there was
+[01:00:12] far more buying than there were sellers
+[01:00:14] on the ask, but it didn't go higher. It
+[01:00:17] then broke through. Then it hit 15. And
+[01:00:20] again, it seems like another kind of
+[01:00:22] wall of sellers. So,
+[01:00:25] um this one's
+[01:00:28] this one's got a lot of sellers on it.
+[01:00:42] not available on Schwab.
+[01:00:45] Yeah, Schwab is interesting. It might I
+[01:00:47] mean I don't know might not be available
+[01:00:49] on Weeble either. U but Schwab uh blocks
+[01:00:52] some of these
+[01:01:18] Okay, so this one dipping back down a
+[01:01:20] little bit.
+[01:01:24] Higher volume on that candle.
+[01:01:36] I don't know of a good free version for
+[01:01:38] seeing if a stock is hard to borrow or
+[01:01:40] easy to borrow because the thing is um
+[01:01:44] every every broker is different in terms
+[01:01:46] of which stocks they'll allow you to
+[01:01:49] borrow and and not. So, I've been using
+[01:01:52] Lightseed for long enough that I have a
+[01:01:54] good feel for it. When I pull up Think
+[01:01:56] or Swim, it doesn't really mean anything
+[01:01:58] to me when I see hard to borrow because
+[01:01:59] I just it seems most things are hard to
+[01:02:02] borrow with Think or Swim. And Weeble, I
+[01:02:04] don't know Weeble well enough either to
+[01:02:05] know um you know how significant it mean
+[01:02:08] it is when something is easy to borrow
+[01:02:10] or hard to borrow. So, not not only does
+[01:02:12] it take time um you know, you've got to
+[01:02:16] recognize that every broker is a little
+[01:02:17] different. They have different
+[01:02:19] thresholds.
+[01:02:50] What's the biggest spread that I'd be
+[01:02:52] willing to trade? Um, well,
+[01:02:56] the answer is different depending on
+[01:02:58] whether I'm trading my small account or
+[01:02:59] I'm trading in my big account. If I'm
+[01:03:01] trading in my big account,
+[01:03:04] um I'm comfortable taking a little bit
+[01:03:05] more risk, but typically
+[01:03:12] I I really wouldn't want to see a spread
+[01:03:14] more than 50 cents. I mean, that's not
+[01:03:17] good. And we do sometimes see them 60 70
+[01:03:19] cents a share, especially when they get
+[01:03:21] up above $20 a share. They start getting
+[01:03:23] more expensive and those spreads start
+[01:03:25] to get bigger. And that can be really
+[01:03:27] tricky because in an instant, you know,
+[01:03:29] you could be up 30 cents and then it
+[01:03:31] flushes and you're down 50 cents. We
+[01:03:34] were talking about that yesterday with
+[01:03:35] um CMTM or No, Ctmt.
+[01:03:40] What? What? What was it yesterday? CM.
+[01:03:45] No, it wasn't that. Um
+[01:03:51] CMCT. Thank you. CMCT. So, this one
+[01:03:54] yesterday
+[01:03:55] squeezed up, but it had like a 60 cent
+[01:03:58] spread at one point. It was just not
+[01:04:01] tradable.
+[01:04:04] SGBX.
+[01:04:06] Yeah, it no surprise. It's choppy. No
+[01:04:09] trades there on that for me.
+[01:04:31] >> [snorts]
+[01:04:32] >> So, the news on CLK after hours was that
+[01:04:35] HR headline, but um it's a Hong Kong
+[01:04:39] based company.
+[01:05:42] So why are so many traders going to
+[01:05:44] Weeble instead of IBKR.
+[01:05:46] Um, I have a a broker comparison sheet.
+[01:05:51] Um, I've done I've funded accounts with
+[01:05:54] all these different brokers and and
+[01:05:56] really tested them out to see which ones
+[01:05:58] I think are the best. And um, in my
+[01:06:02] experience, uh, Weeble is Weeble is not
+[01:06:07] bad. Um, it's right here. I got give it
+[01:06:11] a raw score of 7.5
+[01:06:13] out of 10. Um, Interactive Brokers is is
+[01:06:16] way down here. So, Interactive Brokers
+[01:06:19] has um an interesting thing they do. Um,
+[01:06:23] they consider all clients, all customers
+[01:06:27] to be affiliates of companies. They
+[01:06:31] reference rule 144 and it prevents
+[01:06:34] selling shares that exceed 1% of the
+[01:06:37] daily volume over the last four weeks as
+[01:06:41] as an affiliate. So if you're an
+[01:06:42] affiliate of a company, you have a a
+[01:06:44] relationship with the company, you you
+[01:06:46] know, then then there's some
+[01:06:49] restrictions that that are set upon you.
+[01:06:51] Um, and so they heer on the side of
+[01:06:54] caution by assuming everyone is an
+[01:06:57] affiliate. And if you try to sell more
+[01:06:59] than 1% of the daily volume over the
+[01:07:02] last four weeks, the average, uh, then
+[01:07:04] they will block your order and they'll
+[01:07:08] tell you you cannot do that because
+[01:07:10] you're an affiliate. So, you need to go
+[01:07:13] um go through the compliance program or
+[01:07:15] the compliance department and declare,
+[01:07:19] you know, that you're not an affiliate.
+[01:07:22] And that can take hours if if you're
+[01:07:25] lucky. And so, in the meanwhile, you're
+[01:07:28] holding the stock and you can't sell,
+[01:07:30] which is awful. So, I've seen this
+[01:07:35] happen to people on positions of less
+[01:07:37] than a thousand shares. Now, how could
+[01:07:40] that happen? less than a thousand
+[01:07:41] shares. It's 1%. Well, it would it could
+[01:07:43] happen if you have a stock where the
+[01:07:45] average daily volume over the last four
+[01:07:47] weeks is like, you know, a couple
+[01:07:50] thousand shares a day. It has no volume.
+[01:07:52] And then today, for instance, it has
+[01:07:54] breaking news. So, it's the breaking
+[01:07:57] news that um you know gave it the volume
+[01:08:01] today. So, today it's got volume. It's
+[01:08:03] perfectly liquid, but because of the
+[01:08:05] four-week threshold, you know, you're
+[01:08:06] you're still above it. So, and so for
+[01:08:09] small cap traders, small cap traders
+[01:08:12] don't like interactive brokers. Um,
+[01:08:15] large cap traders, they may like
+[01:08:16] interactive brokers. I don't know. But,
+[01:08:18] uh, if you trade small caps, that rule
+[01:08:21] 144 is a is a consideration.
+[01:08:28] All right, so 953 here. We've got about
+[01:08:31] uh 6 and a half minutes to the top of
+[01:08:33] the hour just about.
+[01:08:35] CF. Uh yeah, a cheaper stock. Um have
+[01:08:39] traded it I think maybe in the past when
+[01:08:41] it was higher priced, but um yeah, I
+[01:08:45] definitely have. I recall this. Um
+[01:08:47] Israeli company listed on the nice nice
+[01:08:50] New York Stock Exchange. Biotech.
+[01:08:52] Yeah, I just don't think that's going to
+[01:08:54] work. Um EPSM. this one um you know the
+[01:09:00] price uh is a little cheaper and I don't
+[01:09:03] see a catalyst and it's a Chinese
+[01:09:05] company so you know this creates a
+[01:09:07] little bit more risk as well
+[01:09:11] you know but this is what we do all day
+[01:09:12] long we're thinking about risk and
+[01:09:14] reward upside what's my downside is it
+[01:09:16] worth taking the trade
+[01:09:42] Um, no. A dip on OMA. Um, not really
+[01:09:45] interested on dip trading the back side
+[01:09:47] of the move. I prefer dip trading on the
+[01:09:49] front side because when you're dip
+[01:09:51] trading on the front side, you've got
+[01:09:53] these nice pullback areas. You buy the
+[01:09:56] dip here. You buy the dip here. You buy
+[01:09:57] the dip here, here, here, here. That
+[01:09:59] works great. Buying the dip on the
+[01:10:01] backside, you get shortlive pops and
+[01:10:04] then it goes lower. A shortlived pop and
+[01:10:06] it goes lower. So, dip trading the
+[01:10:07] backside of the move is not a very
+[01:10:10] successful strategy for me.
+[01:10:15] Now, I'm not saying Weeble is the best
+[01:10:17] broker out there. It's not the best in
+[01:10:19] my opinion. There's others that I prefer
+[01:10:21] and those are the ones that I use on a
+[01:10:23] dayto-day basis, but for the sake of a
+[01:10:26] small account challenge and for the sake
+[01:10:27] of commission free trading, which many
+[01:10:29] US traders appreciate, I thought Weeble
+[01:10:32] was um was a good fit. Now, I did a
+[01:10:35] small account challenge last year using
+[01:10:38] Think or Swim. So, I can give you guys
+[01:10:41] the link to that. Um, and so this is
+[01:10:44] kind of a repeat of that challenge
+[01:10:46] except um I'm just trying a different
+[01:10:48] broker essentially and seeing you know
+[01:10:51] how does how does Weeble compare uh to
+[01:10:54] Thinker Swim.
+[01:10:56] Let's see. So where was this? Um
+[01:11:00] I'll back up.
+[01:11:04] But um another thing that's worth noting
+[01:11:06] is that commission free trading is only
+[01:11:09] something available here in uh the US um
+[01:11:13] in terms of payment for order flow
+[01:11:15] because payment for order flow is not
+[01:11:17] allowed in other countries.
+[01:11:20] Thinker swim
+[01:11:22] list.
+[01:11:24] So that's the thinker swim playlist for
+[01:11:26] you.
+[01:11:31] So this is from last year. my small
+[01:11:34] account challenge last year, day one
+[01:11:36] through day 16.
+[01:11:46] How do I stay confident and calm
+[01:11:48] whenever you are on a long green streak?
+[01:11:51] Staying confident and calm when I'm on a
+[01:11:52] green streak is easy because I'm making
+[01:11:54] money every day. Staying confident and
+[01:11:57] calm when I'm on a red streak is what's
+[01:12:00] challenging. Um because during the red
+[01:12:04] streak I feel more emotional, you know,
+[01:12:07] I feel frustrated, the stakes are
+[01:12:09] higher. Um you know, I I
+[01:12:13] feeling anxious, how long is it going to
+[01:12:15] be cold for if I'm in a draw down, how
+[01:12:18] long is it going to take me to recover?
+[01:12:21] D. So really, those are the areas that
+[01:12:24] are hard. And one of the things that
+[01:12:26] does help me quite a bit is reducing my
+[01:12:29] position sizes, sizing back down. So I
+[01:12:33] won't make as much with smaller size,
+[01:12:35] but it's not about making a lot when
+[01:12:37] things are going poorly. It's about not
+[01:12:39] losing more. It's about stopping the
+[01:12:41] bleeding. So, you know, I've got to get
+[01:12:43] it kind of rained in. And so, uh, the
+[01:12:47] thing that's helped me the most during a
+[01:12:48] cold streak
+[01:12:50] is, uh, reducing my share size. So I
+[01:12:54] start trading with small positions. With
+[01:12:56] small positions I start picking up, you
+[01:12:58] know, couple hundred winners here and
+[01:13:01] there. It's nothing huge, but you know,
+[01:13:04] slowly my confidence starts to build
+[01:13:06] back up and then I start to take a
+[01:13:08] little bit bigger size and then next
+[01:13:10] thing you know, you know, we we've
+[01:13:12] scaled up a bit. So, you know, that's
+[01:13:15] kind of um
+[01:13:18] you know, that's kind of
+[01:13:20] what I found is is helpful. If I'm if
+[01:13:23] I'm struggling to be calm, sizing down
+[01:13:26] is usually the ticket.
+[01:13:30] So, the only reason IBKR got that low
+[01:13:33] score was because of their um their
+[01:13:36] stance on all customers having to um
+[01:13:41] affirmatively declare they are not
+[01:13:43] affiliates of a company
+[01:13:46] uh in order to sell or trade more than
+[01:13:49] 1% of the volume over the 4-week average
+[01:13:52] or whatever it is. Um you'd have to look
+[01:13:55] at their website to see exactly what the
+[01:13:57] threshold is, but uh it's a problem for
+[01:13:59] small cap traders, uh traders of stocks,
+[01:14:03] you know, with smaller market caps that
+[01:14:05] are usually priced under $10.
+[01:14:13] Yeah, Quest Trade. Um over the years,
+[01:14:15] some people have used and enjoyed Quest
+[01:14:17] Trade. Um,
+[01:14:20] it's it's a little harder to do a review
+[01:14:22] of them as I'm not Canadian. Um, which
+[01:14:27] would be certainly easy to identify
+[01:14:28] because I'm not wearing all denim. Um,
+[01:14:31] but the thing that some Canadians um go
+[01:14:37] for is Trade Zero Canada,
+[01:14:42] uh, Centerpoint Canada, and Weeble
+[01:14:45] Canada. Those are three brokers that um
+[01:14:50] some Canadians have tried and and have
+[01:14:52] liked and those are a little easier for
+[01:14:53] me to do comparisons on because they
+[01:14:55] have US counterparts.
+[01:15:06] Yeah. You So you're a retail trader. you
+[01:15:08] don't have any affiliation, but they are
+[01:15:10] going to make you affirmatively
+[01:15:12] um declare that
+[01:15:15] to allow you to trade. And so what's
+[01:15:17] going to happen is you're going to get
+[01:15:18] blocked. You're not going to be able to
+[01:15:20] sell. And you know how volatile these
+[01:15:22] are. Imagine if that happened on OMA. So
+[01:15:25] the average volume on this one yesterday
+[01:15:26] was like 700,000 shares. So you know
+[01:15:30] it's got 50 million share float. Let's
+[01:15:31] just say you own 70,000 shares of it. I
+[01:15:34] mean, that's a huge position, but let's
+[01:15:36] just say, um,
+[01:15:39] they probably wouldn't have let you sell
+[01:15:41] that if I had to guess. Now, I can't
+[01:15:44] confirm it because I didn't trade the
+[01:15:45] specific stock there, but just based on
+[01:15:47] what I'm looking at as the average daily
+[01:15:48] volume,
+[01:15:51] that probably would have exceeded their
+[01:15:53] 1% threshold.
+[01:16:01] All right, 10 a.m., top of the hour
+[01:16:05] So, um, you know, the window for me each
+[01:16:08] day begins at 7 a.m. You know, that's
+[01:16:11] when it really starts and and it's it
+[01:16:13] ends at 10 a.m. Um, so what I'm going to
+[01:16:16] do now is I'm going to switch gears for
+[01:16:20] Warrior uh Pro members. And for those of
+[01:16:22] you guys doing the twoe trial, I will um
+[01:16:26] I'll do a uh a Q&A session for you guys.
+[01:16:29] So, I'll go into the Warrior Pro mentor
+[01:16:31] room. We'll do a Q&A session. Um,
+[01:16:35] and those of you guys that are have been
+[01:16:36] watching here on YouTube today, uh,
+[01:16:38] thank you guys for tuning in. This gives
+[01:16:40] you a little glimpse of what it's like,
+[01:16:42] uh, to be a member at Warrior Trading.
+[01:16:44] And if you would like to check out our
+[01:16:46] twoe trial, you're welcome to do that.
+[01:16:49] Uh, the link here, you can join us for
+[01:16:52] the next two weeks. Give it a try. We
+[01:16:54] are running our uh, Black Friday sales
+[01:16:58] uh, right now.
+[01:16:59] Some of you have done twoe trials in the
+[01:17:01] past and we limit them to doing it once
+[01:17:04] per person. Um, so you know, if you
+[01:17:07] wanted to take the leap and become a
+[01:17:08] member, either a Warrior Starter member,
+[01:17:10] that would give you access to my
+[01:17:12] broadcast and to day trade dash, or if
+[01:17:15] you want to become a Warrior Pro member
+[01:17:16] and go all in, uh, we'd love to have
+[01:17:18] you. So, uh, make sure you guys check it
+[01:17:20] out. Warrior Pro members, um
+[01:17:23] th those you guys who join um using that
+[01:17:26] Black Friday coupon code, you get a
+[01:17:28] 7-day uh money back guarantee. So,
+[01:17:30] you've got 7 days to jump into the
+[01:17:32] community, try it out, see if it's a
+[01:17:34] good fit, and then just email us on or
+[01:17:37] before the seventh day if it's not for
+[01:17:38] you. So, um and by the way, YouTube, the
+[01:17:43] stream is always going to be a little
+[01:17:45] bit delayed because, you know, you're
+[01:17:47] using YouTube streaming servers. uh
+[01:17:49] Warrior Trading people that first logged
+[01:17:51] in, they said, "Whoa, war the Warrior
+[01:17:53] stream is coming through before the
+[01:17:54] YouTube stream." And that's because we
+[01:17:56] use ultra low latency streaming servers
+[01:17:58] at Warrior Trading. So, you guys can
+[01:18:01] have real-time market commentary. Um
+[01:18:04] YouTube is is not bad, and it's
+[01:18:06] certainly not bad if you're watching a
+[01:18:08] concert or something like that, but um
+[01:18:11] when it comes to trading, the the delay
+[01:18:13] can be um can be a problem. So, uh, so
+[01:18:17] for those of you guys noticing that
+[01:18:18] delay here, rest assured that that's not
+[01:18:20] a problem when you're a member at
+[01:18:22] Warrior Trading. Okay. So, um, I'll
+[01:18:26] leave you guys with that. And reminder
+[01:18:27] for those of you guys on YouTube,
+[01:18:29] trading is risky. My results aren't
+[01:18:30] typical. So, manage your risk, take it
+[01:18:32] slow, always practice in a simulator
+[01:18:34] before you put real money on the line.
+[01:18:36] And I will see you back here um again
+[01:18:39] sometime
