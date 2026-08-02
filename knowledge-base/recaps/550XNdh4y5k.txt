@@ -1,0 +1,299 @@
+# It's All About Your Profit/Loss Ratio!!
+# https://www.youtube.com/watch?v=550XNdh4y5k
+# upload_date: 20260707
+# duration_sec: 649
+
+[00:00:00] What's up everyone? Welcome to day 16 of
+[00:00:02] my small account challenge of growing a
+[00:00:04] $2,000 account using Charles Schwab as
+[00:00:07] my broker. Today was nearly a red day. I
+[00:00:11] took two trades, accuracy 50%, one
+[00:00:14] winner, one loser. All right, but here's
+[00:00:17] the good news. Because I had a positive
+[00:00:20] profit to loss ratio, I'm able to finish
+[00:00:22] the day in the green. Your profit to
+[00:00:24] loss ratio is the comparison of your
+[00:00:26] average winners versus your average
+[00:00:28] losers. So, as long as you win more on
+[00:00:31] average than you lose, then even at 50%
+[00:00:34] accuracy, you're a profitable trader.
+[00:00:37] That is how you set the bar low and make
+[00:00:39] it easier to achieve profitability.
+[00:00:42] However, what happens for a lot of
+[00:00:43] beginner traders is that they don't cut
+[00:00:45] their losers quickly the way I typically
+[00:00:47] do. They end up holding them and hoping
+[00:00:49] it turns around, maybe even adding to
+[00:00:51] the loser. And then what ends up
+[00:00:53] happening is when you finally stop out,
+[00:00:54] your average losers are big. Your
+[00:00:56] average winners, well, you take your
+[00:00:58] profit kind of quickly cuz you want to
+[00:00:59] lock it up, are small. And now you've
+[00:01:02] got an inverted profit to loss ratio,
+[00:01:04] which means you need to be right greater
+[00:01:05] than 50% just to break even. And now,
+[00:01:08] without knowing it, you've set the bar
+[00:01:10] higher and higher and higher to achieve
+[00:01:12] profitability. Your profit to loss ratio
+[00:01:15] is one of the most important metrics.
+[00:01:16] Yes, accuracy is important, and of
+[00:01:19] course we all strive to have high levels
+[00:01:21] of accuracy where you're right more than
+[00:01:22] you're wrong. But at the end of the day,
+[00:01:24] even a trader with low accuracy can be
+[00:01:27] profitable if you've got a positive
+[00:01:29] profit to loss ratio. So, let's go ahead
+[00:01:31] and jump on the screen share and start
+[00:01:32] breaking down today's trades. All right,
+[00:01:34] so it is day 16 and as a reminder, all
+[00:01:37] of the profits from these small account
+[00:01:39] challenges gets donated to charity.
+[00:01:41] You guys have the opportunity to help me
+[00:01:43] increase that donation because I add an
+[00:01:45] extra dollar every time you hit the
+[00:01:47] thumbs up on the episodes in this
+[00:01:48] series. We're now at over $353,000
+[00:01:51] of money raised, and this is part of the
+[00:01:53] 50 state children's hospital goal, a
+[00:01:55] goal of donating money to a children's
+[00:01:57] hospital in every state here in the
+[00:01:59] United States. So, we've done pretty
+[00:02:00] well so far. I think we're at 28 or 29
+[00:02:03] hospitals, but we're not finished. We've
+[00:02:05] got more to do. So, we'll keep up with
+[00:02:07] that. Thank you guys for the thumbs up.
+[00:02:08] Today, day 16, we had nothing obvious
+[00:02:11] yet. Now, we did have a stock that was
+[00:02:12] up 98% as you can see right here, CRNX,
+[00:02:17] but it's $83 a share and it's a 100
+[00:02:19] million share flow. Now, you might be
+[00:02:21] curious at how a stock is able to go up
+[00:02:24] that much you know, with a float that
+[00:02:26] high and with a price that high. So, if
+[00:02:27] I back this up here and just go full
+[00:02:29] screen, you're going to notice something
+[00:02:31] interesting about the chart. Whoa, what
+[00:02:33] kind of chart is that? So, all of a
+[00:02:35] sudden it's trading
+[00:02:37] right sideways here at like $83.50 a
+[00:02:41] share. That's because the company has
+[00:02:44] been bought out. They've been acquired.
+[00:02:47] Now, I didn't actually look at the
+[00:02:49] the headline of the the exact buyout
+[00:02:51] price. The buyout price is almost
+[00:02:53] certainly a little bit higher. Um let's
+[00:02:56] see, $10 billion. All right, well, what
+[00:02:58] does that equal per share?
+[00:02:59] Um $85 a share. So, you may wonder,
+[00:03:02] well, wait a second. If they were bought
+[00:03:04] Now, number one, if they were bought out
+[00:03:06] by by Vertex um Vertex Pharmaceuticals
+[00:03:09] at $85 a share,
+[00:03:11] why isn't it trading at exactly $85 a
+[00:03:14] share? And so, the issue here is that if
+[00:03:18] you bought it right now at $83.50
+[00:03:22] a share and the buyout goes through, you
+[00:03:25] will receive $85 a share at the time of
+[00:03:28] the buyout, which is $1.50 a share of
+[00:03:31] profit per share. That's great. 10,000
+[00:03:33] shares would be $15,000, right? That
+[00:03:35] seems like a no-brainer. But, the market
+[00:03:37] is pricing in a little bit of risk.
+[00:03:40] There is some risk that the deal doesn't
+[00:03:42] go through. Could be, you know,
+[00:03:43] regulator, antitrust, monopoly stuff.
+[00:03:46] Could be during due diligence, whatever,
+[00:03:48] whatever, something happens, the deal
+[00:03:49] doesn't go through. If the deal does not
+[00:03:51] go through, where's the price going?
+[00:03:53] All the way back down here to $41 a
+[00:03:56] share. So, with a 10,000 share position,
+[00:03:59] your $15,000 of profit is against like
+[00:04:02] $400,000 of risk. It's not a good
+[00:04:05] profit-to-loss ratio. Now, there will be
+[00:04:06] some people that may take the trade.
+[00:04:08] They may use options to hedge against
+[00:04:10] the risk of it going down by buying
+[00:04:12] puts, but all said and done, it's really
+[00:04:14] not a great risk-to-reward ratio.
+[00:04:17] And so, it doesn't trade at exactly the
+[00:04:18] buyout price, but it trades darn close
+[00:04:20] to it. And so, there's no real
+[00:04:23] opportunity to trade that at this point
+[00:04:25] because the value of the company has
+[00:04:28] been
+[00:04:29] really effectively determined by this
+[00:04:31] buyout. So, CRNX was our leading gapper,
+[00:04:34] but that's a no-go because the price,
+[00:04:35] the float, and it's not going to move in
+[00:04:37] price because it's a buyout. The next
+[00:04:39] one down was TDTH. Now, it's $2.86, 2
+[00:04:44] million share float. All of that is
+[00:04:45] fine, so we'll take a peek at that chart
+[00:04:47] really quickly. So, TDTH, TDTH right
+[00:04:50] here. This one, as you can see, made a
+[00:04:53] move that started in after hours and
+[00:04:56] then double tops pre-market and starts
+[00:04:58] to come back down. So, when I'm sitting
+[00:05:00] down, which is at about 7:00 a.m.,
+[00:05:02] it's right about here.
+[00:05:06] This had already peaked. So,
+[00:05:08] unfortunately, I missed the move. It was
+[00:05:11] early and mostly after hours. So, that
+[00:05:14] one was out of play. Then the next one
+[00:05:15] we had was TNMG. Well, you can see from
+[00:05:18] that, it's a little too cheap for me. My
+[00:05:20] minimum cutoff is generally around $2 a
+[00:05:22] share. Then we've got SUGP here at
+[00:05:25] $1.13, little cheap. BJDX, $1.40. TDIC,
+[00:05:30] that's the next one that's at a price
+[00:05:31] that we could maybe consider. So, let's
+[00:05:34] see. Let me just grab this, drag it back
+[00:05:36] up. TDIC, unfortunately, you'll see here
+[00:05:39] again a big pop at like 4:00 a.m. and
+[00:05:41] then it's been unwinding and coming back
+[00:05:43] down. So, kind of a bummer. So, we
+[00:05:45] didn't have anything that was obvious.
+[00:05:46] And on the one hand, that's
+[00:05:47] disappointing. And on the other hand,
+[00:05:49] it's actually okay because it means that
+[00:05:50] as soon as something pops up it looks
+[00:05:52] good, it gets front and center
+[00:05:54] spotlight. So, everyone pays attention
+[00:05:55] to it. And today, we had Silo. Silo pops
+[00:05:59] up and immediately starts squeezing. It
+[00:06:01] goes from 7:30 to 8:30 to 9:00 all the
+[00:06:04] way up to 9:50. So, as it starts moving
+[00:06:06] up the scans, I'm looking at Silo and
+[00:06:08] I'm thinking, all right, this is one
+[00:06:09] that's worth taking a stab on. It's a
+[00:06:11] relatively low float here with very high
+[00:06:14] relative volume started to peak up or
+[00:06:17] perk up right there. It had breaking
+[00:06:19] news right here that tied in AI and
+[00:06:21] Nvidia. However,
+[00:06:23] >> [sighs]
+[00:06:24] >> the Nvidia developer program, I'm not
+[00:06:26] sure how substantial this news is. It's
+[00:06:28] not like a partnership with Nvidia
+[00:06:30] corporate, you know, it's just enrolling
+[00:06:32] and using one of their tools. But
+[00:06:34] nonetheless, that was a catalyst.
+[00:06:36] So, the stock starts to pop up here. It
+[00:06:38] pulls back, it pops up again, it dips
+[00:06:40] down, and I punch my order right here
+[00:06:42] looking for the break through nine. We
+[00:06:43] got the break of nine, we got all the
+[00:06:45] way up to 9:50, and I took the profit.
+[00:06:47] It ends up selling off right here, then
+[00:06:49] it comes back up, looks like it's going
+[00:06:51] to break VWAP, and it rejects, and then
+[00:06:53] that kind of spelled the end of the day
+[00:06:54] for this. It didn't continue higher in
+[00:06:56] spite of that news headline, which was a
+[00:06:58] little disappointing. So, total profits
+[00:07:01] on one trade, entry at 8:81 looking for
+[00:07:04] the break of nine, exit at 9:03 after it
+[00:07:06] hit 9:50 but wasn't able to go higher,
+[00:07:09] and I locked up about $476 of profit.
+[00:07:12] Okay, not bad. And then we had trade
+[00:07:15] two. And that was on CLRO. Now,
+[00:07:17] arguably, CLRO actually is held up far
+[00:07:21] better than um than the first trade, but
+[00:07:25] was not easier to trade for me. So,
+[00:07:27] we'll look at the chart on this one.
+[00:07:29] CLRO pops up, pulls back, it pops up,
+[00:07:32] and I uh took my starter here and I
+[00:07:34] filled 36 shares.
+[00:07:37] Uh, it's so disappointing when that
+[00:07:40] happens. I was looking for the break
+[00:07:41] through 8:50, it ends up going up to
+[00:07:43] nine, but I only got a partial fill. It
+[00:07:45] dips down, I don't sell, I add to the
+[00:07:47] position here, it comes back up, it
+[00:07:49] double tops, and then flushes, and right
+[00:07:52] here I end up stopping out. And so I
+[00:07:54] lost I was $259
+[00:07:56] on it. All right, but at the end of the
+[00:07:58] day I'm sitting up $216 and 80 cents.
+[00:08:01] 50% accuracy, but the winners are bigger
+[00:08:04] than the losers. And so right now my
+[00:08:06] accuracy has declined to about 76% on
+[00:08:09] this challenge. 39 trades in total with
+[00:08:11] 30 winners and nine losers. The account
+[00:08:14] is up 930%
+[00:08:16] from the original starting balance of
+[00:08:17] 2,000, that's $18,605
+[00:08:19] of profit.
+[00:08:21] So I'm doing well in all regards, but
+[00:08:23] today was definitely a small green day.
+[00:08:26] Thank goodness I cut my losses. Now,
+[00:08:28] um although on the other hand you could
+[00:08:30] you could argue that had I just held
+[00:08:33] CLRO, uh maybe I would have been better
+[00:08:36] off for it because it did end up
+[00:08:38] squeezing all the way to a high of $10 a
+[00:08:40] share.
+[00:08:41] So that's a little bit annoying. It sort
+[00:08:42] of had this first pop, it rejected, and
+[00:08:45] then it ends up rallying. Now because
+[00:08:47] this is a day trading account, I
+[00:08:49] certainly could have gotten back in. So
+[00:08:51] this was the rejection right here, then
+[00:08:53] it kind of goes sideways, it ends up
+[00:08:55] curling back up, tries, it rejects,
+[00:08:58] tries, rejects, then it kind of pulls
+[00:09:00] away, and then it kind of finally got a
+[00:09:02] move higher. I ended up trading in my
+[00:09:04] main account, we'll talk about that in
+[00:09:05] my main account recap later, but then
+[00:09:07] you get a double top here, a rejection,
+[00:09:10] and and it really was not easy to trade
+[00:09:12] either in the big account or the small
+[00:09:14] account. The stock was difficult. And so
+[00:09:16] at the end of the day, I did the right
+[00:09:18] thing by cutting the loss and jumping
+[00:09:19] out, and you know, look, survival. I'll
+[00:09:22] survive and live to trade another day.
+[00:09:25] So whether this goes to 10, 11, 12
+[00:09:26] dollars or higher,
+[00:09:28] without me, it doesn't really matter.
+[00:09:30] Taking a small loss makes it less
+[00:09:32] emotional to see what it does later.
+[00:09:35] It's if you take a big loss and you get
+[00:09:37] smoked that what it does later starts to
+[00:09:39] matter more. So, that means first and
+[00:09:42] foremost, your job is to manage your
+[00:09:45] risk. Be a hunter of volatility and a
+[00:09:47] manager of risk. That's the name of the
+[00:09:49] game as a trader. So, I remind you guys
+[00:09:51] as always that my results are not
+[00:09:53] typical and trading is risky. Have you
+[00:09:55] not already checked out a 2-week trial?
+[00:09:57] You can come on over and check it out
+[00:09:58] here at Warrior Trading. We also have
+[00:10:00] right now our 4th of July sales going
+[00:10:02] on, but they end tonight. So, if you
+[00:10:04] want to check out the 4th of July sale
+[00:10:06] on our Warrior Starter and Warrior Pro
+[00:10:08] membership, you're welcome to do that.
+[00:10:10] You can click the join now button and
+[00:10:11] you'll see our memberships right here.
+[00:10:13] Or you can check out the 2-week trial as
+[00:10:15] always and join us for 2 weeks for 20
+[00:10:17] bucks and see what it's like to be a
+[00:10:18] member of the community. When you do the
+[00:10:20] trial or you become a member, you'll
+[00:10:22] have access to these classes. Now, trial
+[00:10:24] members only get access to the first six
+[00:10:26] chapters. So, pro members get access to
+[00:10:29] everything. And uh you get access to the
+[00:10:31] software that I'm using every single day
+[00:10:33] for trading, for scanning, for looking
+[00:10:35] for breaking news, and of course, for
+[00:10:37] the chat room. So, thank you guys as
+[00:10:39] always for tuning in. Thank you for
+[00:10:40] hitting the thumbs up on day 16 of this
+[00:10:42] challenge, and I'll be back at it bright
+[00:10:44] and early tomorrow morning for day 17.

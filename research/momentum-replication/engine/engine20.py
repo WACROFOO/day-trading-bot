@@ -22,6 +22,27 @@ from sim import (Indicators, PullbackTracker, evaluate, RISK_PER_TRADE,
 
 ET = dt.timezone(dt.timedelta(hours=-4))
 
+# min_reward_risk (PARAMETERS.md:177, n=37) as a PRE-ENTRY VETO: skip any setup
+# whose nearest structural objective sits closer than 2x the stop distance.
+#
+# That reading is doubtful. Every citation in the corpus is retrospective and
+# aggregate - "~2:1 profit-to-loss ratio achieved", "profit-loss ratio this
+# week", "$500 average winners, 61% accuracy" - and the one stated as a rule
+# ties it to accuracy over a sample: "Trade 2:1 minimum. If accuracy around
+# 65%, this ratio ensures profitability" (4t3GDiAXW18 [40:07]). PARAMETERS.md
+# section 9 uses it the same way, as avg_win/avg_loss inside an expectancy
+# formula. A ratio of averages is produced by the EXIT plan - scale at target
+# 1, trail the rest - not by refusing entries.
+#
+# It also collides with the setup it is filtering: a micro-pullback enters just
+# under the high of day, so the nearest objective is a few cents away while the
+# stop is the depth of the dip. Requiring 2x of that rejects the entry the
+# strategy is built on. It is the single largest rejection reason in the
+# 17-day run.
+#
+# RR_FILTER=0 treats 2:1 as an outcome to be measured instead of a gate.
+RR_FILTER = os.environ.get('RR_FILTER', '1') != '0'
+
 
 def run_day(day, watch, bars_by_sym, max_trades, log=None):
     """bars_by_sym: {sym: {'pre': [bar], 'session': [bar]}} with dt/o/h/l/c/v."""
@@ -196,7 +217,7 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 objectives = [x for x in (hod, pb['low'] + pole)
                               if x and x > entry]
                 t1 = min(objectives) if objectives else 0
-                rr_ok = (t1 - entry) >= 2 * risk_ps
+                rr_ok = (not RR_FILTER) or (t1 - entry) >= 2 * risk_ps
                 for k, (passed, _) in checks.items():
                     if not passed:
                         tag = k if k in sim.GATE_CONDITIONS else f'{k} (not gating)'
@@ -234,12 +255,25 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 s['flipped'] = (s['flipped'] + [round(bar['h'], 2)])[-6:]
 
     if position:
+        # A position still open when the trading window closes is flattened at
+        # the cutoff. This took sorted(bars)[-1] - the LAST BAR OF THE SESSION,
+        # 15:59 - and stamped it '11:29', so the exit price came from four and a
+        # half hours after the engine was allowed to look. It was not a small
+        # effect: EHGO 2026-07-13 was flat at 11:30 and booked -6.38R against
+        # the 15:59 close, and ADVB 2026-07-22, the largest winner in the study
+        # at +4.17R, was the same path in the favourable direction.
         p = position
-        last = sorted(state[p['sym']]['bars'].items())[-1][1]
-        p['pnl'] += (last['c'] - p['entry']) * p['shares']
-        p['exit'], p['exit_time'], p['reason'] = last['c'], '11:29', 'hard stop'
-        day_pnl += p['pnl']
-        trades.append(p)
+        cutoff = max((hm for hm in state[p['sym']]['bars']
+                      if dt.time(int(hm[:2]), int(hm[3:])) < HARD_STOP),
+                     default=None)
+        if cutoff is not None:
+            last = state[p['sym']]['bars'][cutoff]
+            # never worse than the resting stop - it would have filled first
+            fill = max(last['c'], p['stop'])
+            p['pnl'] += (fill - p['entry']) * p['shares']
+            p['exit'], p['exit_time'], p['reason'] = fill, cutoff, 'window closed'
+            day_pnl += p['pnl']
+            trades.append(p)
 
     return dict(day=str(day), pnl=round(day_pnl, 2), trades=trades,
                 setups=setups, passes=passes, halted=halted, rejects=rejects,

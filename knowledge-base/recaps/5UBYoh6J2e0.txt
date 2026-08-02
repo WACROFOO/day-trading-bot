@@ -1,0 +1,317 @@
+# Trading a Chinese Short Squeeze! ThinkorSwim Small Account Challenge Day 4
+# https://www.youtube.com/watch?v=5UBYoh6J2e0
+# upload_date: 20260611
+# duration_sec: 700
+
+[00:00:00] What's up everyone? Welcome to day four
+[00:00:02] of my brand new small account challenge.
+[00:00:05] Today is the biggest day so far in this
+[00:00:08] series and that kind of makes sense. On
+[00:00:11] day one, I had $2,000 in my account. We
+[00:00:13] had a couple of stocks that made a nice
+[00:00:15] move. I found one really good setup and
+[00:00:17] I made $416.
+[00:00:19] Awesome trade, 20% growth on day one,
+[00:00:22] solid. So, I took that profit, boosted
+[00:00:25] up my balance and the next day for day
+[00:00:27] two. So, day two I've got $2,400 in my
+[00:00:30] account. We have another stock that pops
+[00:00:32] up. I like it. I jump in. I end up
+[00:00:34] making $800. Awesome. So, now going into
+[00:00:37] day three, I've got $3,200 in my
+[00:00:39] account. Sweet. I take another trade,
+[00:00:41] end up making over $1,000. Today, I had
+[00:00:44] about $4,200 going into the day and that
+[00:00:47] meant higher balance, ability to take a
+[00:00:49] bigger position, locked it up today
+[00:00:52] taking two trades. Interestingly, today
+[00:00:55] each of those trades was a little bit
+[00:00:57] smaller. So, although it's the biggest
+[00:00:59] green day, I only made about $100 more
+[00:01:01] than yesterday. So, the profit is not
+[00:01:03] scaling kind of directly straight up.
+[00:01:06] There will be some days where in spite
+[00:01:07] of having a bigger balance, the trade
+[00:01:10] that I pick and the setup that I take
+[00:01:12] doesn't end up giving me a really big
+[00:01:15] move. Some days I'll get it, some days I
+[00:01:17] won't. So, this is the thing with
+[00:01:18] trading. We can control how much we're
+[00:01:20] willing to risk, but we never really
+[00:01:22] know exactly how much we'll make. We can
+[00:01:24] recognize the potential for profit and
+[00:01:27] we use that to give us the justification
+[00:01:29] to take the risk cuz you don't risk a
+[00:01:31] thousand dollars if you can only make 15
+[00:01:33] or 20 dollars. So, you look at the
+[00:01:34] potential for profit, but you don't
+[00:01:36] ultimately know how much you'll capture.
+[00:01:39] So, I'll break down the two trades that
+[00:01:41] I took today and walk you through
+[00:01:43] essentially how I was looking at risk,
+[00:01:45] what I was thinking was the reward
+[00:01:47] potential and then kind of explain why
+[00:01:49] they fell a little bit short of what I
+[00:01:51] was hoping I would get from them. As
+[00:01:53] always, all of the profit from these
+[00:01:55] small account challenges gets donated to
+[00:01:57] charity, and every time you guys hit the
+[00:01:59] thumbs up on the episodes in this
+[00:02:01] series, I add an extra dollar to the
+[00:02:04] amount that I'm donating. We have
+[00:02:05] already raised over $300,000
+[00:02:08] with the goal right now of donating
+[00:02:10] money to a children's hospital in every
+[00:02:13] single state in the United States. So,
+[00:02:15] thank you guys for helping make this
+[00:02:17] possible. I've now donated as of right
+[00:02:20] now over $319,000.
+[00:02:22] So, we're a little bit shy uh on you
+[00:02:26] guys hitting the thumbs up. So,
+[00:02:27] hopefully you guys are able to play a
+[00:02:28] little catch-up and hit the thumbs up on
+[00:02:30] the episode uh today. All right. So, day
+[00:02:33] four, let's start with context. Big
+[00:02:35] picture,
+[00:02:36] we're in a very volatile market market.
+[00:02:38] There's no question about it. We had a
+[00:02:39] 5,000% move on Monday, a 2,000% move on
+[00:02:42] Tuesday, a 950% move on Wednesday, and
+[00:02:46] today we already have several stocks
+[00:02:47] that have squeezed up over 2, 3, 400%.
+[00:02:50] However, it does feel like the ranges
+[00:02:53] are getting a little bit compressed.
+[00:02:54] They're not as big as they were at the
+[00:02:56] beginning of the week. Shorts are maybe
+[00:02:59] feeling a little bit more confident.
+[00:03:01] Longs are starting to get a little bit
+[00:03:03] more cautious, especially as a number of
+[00:03:06] these stocks are squeezing up with
+[00:03:07] seemingly no underlying news catalyst.
+[00:03:11] And that is a little confusing. We'll
+[00:03:13] get into that in a moment. So, day four,
+[00:03:16] the leading gainer once again was a
+[00:03:19] Chinese stock with no news. The ticker
+[00:03:21] was GLXG as you could see right here, up
+[00:03:24] 243%,
+[00:03:26] $3.35, 36 million shares of volume, and
+[00:03:29] a float of 3.21 million shares. We had
+[00:03:32] this squeeze here from 90 cents all the
+[00:03:34] way up to a high of 573,
+[00:03:37] and then by 7:00 a.m., which is about
+[00:03:39] the time that I sit down to begin
+[00:03:40] trading, it had already pulled back.
+[00:03:42] Now, you might say, "Ross, why don't you
+[00:03:44] sit down at 4:00 a.m. so you could
+[00:03:45] capitalize on these kind of moves?"
+[00:03:48] Well, although it's true that we are
+[00:03:50] seeing some momentum periodically
+[00:03:51] between 4:00 a.m. and 7:00 a.m. Most
+[00:03:55] retail traders are blocked out from
+[00:03:57] trading during this window because most
+[00:03:59] brokers don't want to offer customer
+[00:04:00] support starting at 4:00 a.m. Eastern
+[00:04:03] Standard Time. They probably would have
+[00:04:04] a hard time finding um enough US
+[00:04:07] residents to staff and then they'd have
+[00:04:08] to get into having a European office, da
+[00:04:10] da da da da. So, the result is most
+[00:04:12] brokers start at 7:00 a.m.
+[00:04:15] Now, uh given that cur- current
+[00:04:18] constraint, um the volume that we see
+[00:04:21] between 4:00 a.m. and 7:00 a.m. is
+[00:04:23] typically a little bit lighter. Um
+[00:04:25] however, there are exceptions and this
+[00:04:27] market that we're in right now is pretty
+[00:04:29] hot. So, we are seeing more volume.
+[00:04:30] Nonetheless, didn't get up at 4:00 a.m.,
+[00:04:32] didn't take this trade, didn't take this
+[00:04:34] first pullback even though it was nice.
+[00:04:37] It just is what it is. So, this however
+[00:04:39] set the tone for today. This is the
+[00:04:42] context big picture.
+[00:04:43] So, on our high-day momentum scanner
+[00:04:47] this morning at about 7:18,
+[00:04:49] we had the ticker EDHL hit the scanner
+[00:04:51] at $4.17.
+[00:04:54] It's got a half million share float. It
+[00:04:56] is Chinese. It has no news. It was also
+[00:04:59] on my five-pillar scanner as it started
+[00:05:02] to move up a little bit in price as the
+[00:05:04] relative volume increased cuz I need
+[00:05:05] higher relative volume for it to hit
+[00:05:07] that scanner.
+[00:05:08] So, this is how I traded it. Initially,
+[00:05:11] it pops up here from 350 to 450, no
+[00:05:13] trades. It pulls back, it rips up to
+[00:05:15] 550, up to six, up to seven as you can
+[00:05:18] see right here, hits a high of 750. It
+[00:05:20] then dips down and right down here, I'm
+[00:05:23] a buyer on that dip right there looking
+[00:05:26] for the first candle to make a new high.
+[00:05:28] It's the micro pullback strategy that I
+[00:05:30] shared with you in episode one where I
+[00:05:32] revealed that I'd be resetting my
+[00:05:33] account to $2,000 using Charles Schwab
+[00:05:35] as my broker. I'll have a link to that
+[00:05:37] episode at the end of today's uh recap.
+[00:05:40] All right. So, anyways, I get in down
+[00:05:42] here and we get this curl up to 850.
+[00:05:45] Boom, that's the trade. I'm in and I'm
+[00:05:48] out.
+[00:05:49] So, something that's kind of interesting
+[00:05:51] is that
+[00:05:52] the way I trade in my small account is
+[00:05:53] different from the way I trade in my big
+[00:05:55] account. In my big account, I have a big
+[00:05:58] cushion. I've already made a lot of
+[00:05:59] money this year and I can afford to take
+[00:06:02] some risk. I can afford to hold through
+[00:06:04] a drawdown, 15, 20,000 dollar drawdown
+[00:06:08] and that doesn't kill me. In the small
+[00:06:10] account, I can't do that. The small
+[00:06:13] account, I've got to get in and then the
+[00:06:15] second I see an exit indicator in that
+[00:06:18] account, I sell. In my big account, I
+[00:06:20] might hold through a couple of those
+[00:06:22] initial exit indicators because
+[00:06:24] sometimes they're wrong and the stock
+[00:06:26] will continue higher. And again, in the
+[00:06:28] big account, I can afford to give it a
+[00:06:29] little bit more room. But in the small
+[00:06:31] account, I've got to be a lot more
+[00:06:32] disciplined about locking up profit
+[00:06:34] because what I don't want to have happen
+[00:06:37] is that it pops up and then I don't take
+[00:06:40] profit, it reverses all the way back
+[00:06:42] down and I end up selling it for a loss.
+[00:06:45] And actually, I would say this is a
+[00:06:46] market that's been kind of frustrating
+[00:06:48] because it would have been very easy to
+[00:06:50] get in, you know, potentially whatever,
+[00:06:53] get out or or even get in up here
+[00:06:56] thinking it's going to go higher, stop
+[00:06:58] out for a loss and then 5 minutes later,
+[00:07:00] it's ripping back through the high. And
+[00:07:03] you might think, you know what, next
+[00:07:04] time I'm just going to hold this. I'm
+[00:07:06] not going to I'm not going to stop out
+[00:07:08] down here. And that's all, you know,
+[00:07:10] fine and dandy until you get one like
+[00:07:13] this which does a big reversal. So, this
+[00:07:17] is the other stock that I traded today
+[00:07:19] and this is actually a perfect example
+[00:07:21] because as you're going to see, these
+[00:07:23] are the two stocks I traded and I made
+[00:07:25] money on both of them. Now, this one
+[00:07:27] ended up going from like, you know, my
+[00:07:29] 250 entry which we'll talk about in a
+[00:07:31] moment or 350 entry all the way up to
+[00:07:33] four, but then comes all the way back
+[00:07:35] down to a dollar eighty. So, if I hadn't
+[00:07:37] taken my profit on that, absolutely
+[00:07:39] would have been a loss. In fact, it was
+[00:07:42] a loss in my big account because I took
+[00:07:44] a similar trade. We'll cover that when I
+[00:07:45] do my main account recap. EDHL, this one
+[00:07:49] was a winner right here, but I got out
+[00:07:51] at $8 and it ends up going to a high of
+[00:07:54] $17 a share as the day goes on.
+[00:07:58] So, you could say, "Geez, Ross, why
+[00:08:00] didn't you just buy it, walk away from
+[00:08:02] your computer for 10 minutes, and sell
+[00:08:04] it up at 18 over here?"
+[00:08:07] Well, as you could see, I would have had
+[00:08:08] to be up, you know, $500, whatever, back
+[00:08:12] to break even, potentially red, still
+[00:08:14] not sell. That's not good risk
+[00:08:16] management. So, this is how I traded it.
+[00:08:19] I took my starter at 683 and I exited at
+[00:08:22] 814, locking up a profit of $782.55,
+[00:08:27] which is a pretty decent trade. And so,
+[00:08:29] this is the trade right here, getting in
+[00:08:30] right under seven, right there, 683, and
+[00:08:33] then exiting as it broke over eight.
+[00:08:36] Now, it did go higher,
+[00:08:38] you know, again, all the way up to a
+[00:08:39] high of about nine, but I locked up my
+[00:08:42] profit. It's a good trade. It's a green
+[00:08:44] trade. That's solid. However, yesterday
+[00:08:46] I was up about 1,100. So, today is a
+[00:08:49] smaller green day as of the first trade.
+[00:08:52] But, I ended up taking a second trade
+[00:08:53] and it was on FGL. So, what ended up
+[00:08:56] happening was EDHL sort of rolled over
+[00:08:59] for a little bit. It sells off and then
+[00:09:01] all of a sudden FGL starts popping up
+[00:09:03] and I thought, just like yesterday, that
+[00:09:05] attention might shift. So, all of a
+[00:09:07] sudden the attention is shifting and
+[00:09:09] boom, we've got this stock that squeezes
+[00:09:11] up. It goes from $2 all the way up to
+[00:09:13] 250, to 260, 270, 280, up to three, up
+[00:09:16] to 350. It pulls back and right through
+[00:09:19] here, I say, "You know what? I'm going
+[00:09:21] to punch it." I got in right there for
+[00:09:23] the break of 350 and I was looking for
+[00:09:24] the squeeze up to four and I was hoping
+[00:09:27] this would continue higher up to 455 and
+[00:09:30] we would have another big move on our
+[00:09:31] hands. That didn't happen. So, you can
+[00:09:34] see my starter down here at 345, my exit
+[00:09:36] at 3:84 gave me $500 of profit, putting
+[00:09:39] me up 1,200 on the day, but it was a
+[00:09:41] smaller winner.
+[00:09:43] So, as of right now, my account is up
+[00:09:44] 176% in 4 days. I've taken a total of
+[00:09:48] five trades, but my average winners has
+[00:09:51] decreased from yesterday. My average
+[00:09:53] winners yesterday were $733 per trade.
+[00:09:56] Now, I'm down to 706 per trade, and
+[00:09:59] that's mostly because that second trade
+[00:10:01] was a little smaller. So, from 2,000 up
+[00:10:03] to 5,500, great progress. I'm grateful
+[00:10:06] the account's growing, but yes, FGL
+[00:10:08] today, this is a great example of why if
+[00:10:10] I hadn't taken the profit, it would have
+[00:10:12] been gone, right? And being more
+[00:10:15] aggressive in my big account, as you'll
+[00:10:16] see if you watch that recap later,
+[00:10:18] didn't pay off. Now, fortunately,
+[00:10:20] continuing to be aggressive in my big
+[00:10:21] account on ED
+[00:10:24] EDHL paid off nicely, and so it is
+[00:10:27] another big green day in the main
+[00:10:28] account, but this is what EDHL continued
+[00:10:30] to do. So, we ended up that I had my
+[00:10:33] first trade right down here in the small
+[00:10:36] account, and then it sells off, comes
+[00:10:38] back up, and I didn't trade it again. At
+[00:10:41] this point, it started getting too
+[00:10:42] expensive, but man, it kept going. So, I
+[00:10:46] kind of switched gears and said, "All
+[00:10:47] right, I'm trading in the big account.
+[00:10:48] Let's see what I can do." And when you
+[00:10:51] tune into that recap later, you'll see I
+[00:10:52] did pretty well. All right. So, this is
+[00:10:54] where I sit as of the end of day four.
+[00:10:57] Tomorrow will be day five. If you guys
+[00:11:00] have not already checked out our
+[00:11:01] two-week trial, we've got two-week trial
+[00:11:03] at Warrior Trading where you can use
+[00:11:05] this same software that I'm using every
+[00:11:06] single day, the scanners, the charts,
+[00:11:09] the newsfeed, and you can even be in our
+[00:11:11] chatroom and tune into my live
+[00:11:13] audio-video broadcast, so you can listen
+[00:11:15] over my shoulder and see my profit-loss
+[00:11:17] statement in real time as I'm getting
+[00:11:19] in, as I'm getting out. Everything is
+[00:11:21] there. You see the gains, you see the
+[00:11:23] losses, full transparency. So, check it
+[00:11:25] out if you haven't already, and I'll
+[00:11:26] remind you that trading is risky. My
+[00:11:28] results aren't typical, so please manage
+[00:11:30] your risk, take it slow, and always
+[00:11:32] practice in a simulator before putting
+[00:11:35] real money on the line.

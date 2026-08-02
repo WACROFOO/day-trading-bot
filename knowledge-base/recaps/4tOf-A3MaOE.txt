@@ -1,0 +1,1125 @@
+# SpaceX IPO: My Complete Trading Plan With 30-Day and 6-Month Price Targets
+# https://www.youtube.com/watch?v=4tOf-A3MaOE
+# upload_date: 20260608
+# duration_sec: 3444
+
+[00:00:00] What's up everyone? All right, in today's episode,
+[00:00:00] I'm going to break down everything that you need
+[00:00:05] to know to prepare for the SpaceX IPO this Friday,
+[00:00:05] June 12th. We've got a lot to cover in today's
+[00:00:12] class. This will be a deep dive, parallel stories
+[00:00:12] here. We're going to talk about the fundamentals
+[00:00:17] of SpaceX, and we're also going to talk about the
+[00:00:17] technicals. As many of you already know, I am a
+[00:00:22] trader, and I don't have any skin in the game. I
+[00:00:22] don't really care long term if SpaceX goes up or
+[00:00:27] it goes down. Everything that I share with you is
+[00:00:27] through the lens of this creates volatility. And
+[00:00:33] as a trader, I crave volatility. I make money
+[00:00:33] when things are moving. So whether it goes up
+[00:00:38] or goes down, I'll find an opportunity. But I do
+[00:00:38] have a thesis that I'll share with you of what I
+[00:00:44] think it's going to do after the IPO. In fact, I
+[00:00:44] have a pretty confident sense of what's going to
+[00:00:49] happen over the next two weeks from the day of
+[00:00:49] the IPO and then going into the next 180 days.
+[00:00:54] So 6 months out, I have a good sense of what this
+[00:00:54] is going to look like and I'm going to share that
+[00:00:59] with you. So would I be a trader of SpaceX on the
+[00:00:59] day of the IPO? Would I be an investor of SpaceX
+[00:01:06] on the day of the IPO? Those are questions that
+[00:01:06] I'm going to answer in today's class. Everything
+[00:01:10] that I share with you comes straight from primary
+[00:01:10] sources, including the perspectives filed with
+[00:01:16] the Securities and Exchange Commission
+[00:01:16] by SpaceX. It's called an S1 filing. So,
+[00:01:20] I'm not sharing with you fluff and icing of
+[00:01:20] opinion of all the things I think SpaceX could
+[00:01:25] do. I'm just sharing with you what they actually
+[00:01:25] are saying they're going to do. Some of which
+[00:01:29] does seem like hyperbole, but nonetheless, it's
+[00:01:29] what I'm going to share with you here today. So,
+[00:01:33] let's go ahead and jump on the screen share. I
+[00:01:33] do have a slide deck. We've got a lot to cover,
+[00:01:38] but maybe I'll begin by just jumping on the
+[00:01:38] whiteboard for a second. So, let's sort of talk
+[00:01:42] about the outline of today's class. Um, number
+[00:01:42] one, it's important for us to talk about the
+[00:01:46] fundamentals of SpaceX. And when we're talking
+[00:01:46] about the fundamentals, we're talking about
+[00:01:51] uh the company, uh what they do, who they are.
+[00:01:51] We're talking about um how much money they make.
+[00:01:56] We're talking about the valuation methodology
+[00:01:56] for this IPO, which is currently valued at
+[00:02:02] just under $2 trillion, which is incredible. Um
+[00:02:02] we're going to talk about potential headwinds
+[00:02:08] um that they face as a company. Um but we're also
+[00:02:08] going to talk about the um the Elon Musk factor,
+[00:02:14] right? This is uh no doubt a huge part of the
+[00:02:14] story. And when you're investing in SpaceX,
+[00:02:20] you're you're really investing in Elon Musk
+[00:02:20] here. It's this is about investing or backing
+[00:02:26] um the jockey, not the horse. That regardless of
+[00:02:26] what Elon Musk is doing, if you're an investor
+[00:02:32] long-term in SpaceX, you believe in him. And
+[00:02:32] so we'll get into that in a little bit more
+[00:02:36] detail. So that's the story of the fundamentals,
+[00:02:36] which is important. And then we have the story of
+[00:02:42] um number two, the technicals. So, the technicals
+[00:02:42] for SpaceX are very interesting. We're going to
+[00:02:48] talk about how um how a hyped up IPO uh typically
+[00:02:48] trades. So, I'll give you examples from other IPOs
+[00:02:55] I've traded in the past. Um, and that gives me a I
+[00:02:55] I already have a good sense of how a hyped up IPO
+[00:03:01] will trade. But then we're going to talk about
+[00:03:01] why Space X is different from those other hyped
+[00:03:06] up IPOs because there are some very significant
+[00:03:06] differences that come down to a um structural um
+[00:03:13] component. Essentially, the way the company has
+[00:03:13] been structured just based on this initial public
+[00:03:19] offering has actually really set it up to succeed,
+[00:03:19] which is very interesting just structurally. So,
+[00:03:25] we'll talk about that. Um, and then we're going
+[00:03:25] to get into um a little bit of historical context
+[00:03:30] about uh the trend that we've seen in the past
+[00:03:30] um number of years when it comes to these big
+[00:03:34] IPOs and what that means for retail uh traders
+[00:03:34] and investors like you and me. Uh I will also
+[00:03:41] touch on some adjacent investments or trades that
+[00:03:41] I think actually have um that are perhaps more
+[00:03:49] interesting. In the past couple weeks, I've had
+[00:03:49] a couple of huge trades on stocks that were space
+[00:03:54] theme. So, these are small cap companies that put
+[00:03:54] out news of getting into the space sector. So,
+[00:04:01] whether it was space um data centers or um doing
+[00:04:01] something to do with space right now, that theme
+[00:04:08] is very hot. And so we may actually see more ROI
+[00:04:08] on some of these um almost sympathy stocks that
+[00:04:17] are piggybacking on the SpaceX momentum, but that
+[00:04:17] have such lower valuations that they could much
+[00:04:22] uh more easily go up 10x or more. Whereas for
+[00:04:22] SpaceX to go up 10x, well, gez, I mean, it would
+[00:04:27] have to be a a 20 nearly 20 trillion market
+[00:04:27] cap for that to happen. So that's going to be
+[00:04:33] um uh that's going to take a while. All right, so
+[00:04:33] let's go ahead and jump on the slide deck here and
+[00:04:37] we'll begin with the fundamentals story. So when
+[00:04:37] we're talking about the fundamentals um of SpaceX,
+[00:04:45] number one, you have to recognize that what
+[00:04:45] we currently have are um the the fiscal year
+[00:04:52] 2025 financials. This is from the S1. So this is
+[00:04:52] directly from the filings that um SpaceX has made,
+[00:05:00] which is u good. This is a primary source. So what
+[00:05:00] we know is last year they brought in total revenue
+[00:05:05] of $18.7 billion. That's a lot of money on the one
+[00:05:05] hand. Um on the other hand context is important.
+[00:05:14] Uh we will put this into context. This is about
+[00:05:14] 80% less money than Nvidia brought in. And yet
+[00:05:23] uh SpaceX is being valued uh very high relative
+[00:05:23] to Nvidia. Nvidia is profitable. SpaceX is not.
+[00:05:32] This is very interesting. Again, SpaceX has the
+[00:05:32] benefit of Elon Musk and the whole story around
+[00:05:37] him. And so that um it's it's not really an apples
+[00:05:37] to apples comparison, but um but many people do
+[00:05:43] try to look at comps to understand um what should
+[00:05:43] be the market cap for a company doing 18.7 billion
+[00:05:49] in total revenue and yet losing 4.9 billion. So
+[00:05:49] they had a net loss last year of 4.9 billion. But
+[00:05:56] when you break down uh the financials, there are
+[00:05:56] three segments of SpaceX. You have connectivity,
+[00:06:03] space and AI. So connectivity is the Starlink
+[00:06:03] system. And I will say full disclosure that I use
+[00:06:12] Starlink. I have three subscriptions right now. So
+[00:06:12] I have three Starlinks. I have them on mounted on
+[00:06:17] my cars. I don't use them at home. Um but I love
+[00:06:17] SpaceX. I love um Starlink and SpaceX um I guess
+[00:06:24] uh through that it's been really good over
+[00:06:24] the past uh four years. So and it has been
+[00:06:30] getting better and better. So this is the
+[00:06:30] interesting thing is that uh the Starlink
+[00:06:36] has such a competitive advantage in connectivity.
+[00:06:36] They have at this point about 10,000 satellites,
+[00:06:44] the these constellations of satellites providing
+[00:06:44] the internet connectivity for the Starlink
+[00:06:50] um system. It it's really really great
+[00:06:50] internet. Now, if you were in New York City,
+[00:06:56] you're in a very congested area or you're inside
+[00:06:56] a building and things like that, you don't have a
+[00:07:01] view of the sky, then it's not very good for you.
+[00:07:01] But the fact is, uh connectivity represented about
+[00:07:06] 61% of their revenue in 2025. and it actually
+[00:07:06] produced a profit. It is a profitable segment
+[00:07:13] of the business. Now, if you were going to invest
+[00:07:13] in SpaceX purely for Starlink, you're essentially
+[00:07:20] investing in a telecom company. And telecom is
+[00:07:20] not a sexy investment. People don't invest big in,
+[00:07:25] you know, Verizon and T-Mobile and whatever,
+[00:07:25] whatever, because it's not that sexy. Why not?
+[00:07:32] Because they're regulated monopolies. Essentially,
+[00:07:32] that's they are a monopoly, but they're regulated
+[00:07:37] by the government. And so Starlink, because
+[00:07:37] they are dominating in satellite internet,
+[00:07:44] I unfortunately think that a potential headwind
+[00:07:44] is that they're going to become a target for
+[00:07:48] uh regulatory action. And now probably not under
+[00:07:48] the current administration, but in the future,
+[00:07:54] probably. Nonetheless, right now, it's their
+[00:07:54] most profitable segment for 2025. Space produced
+[00:07:59] $4 billion of revenue, but it operated at a
+[00:07:59] loss, as you can see right here. And AI produced
+[00:08:05] uh $3.2 2 billion in revenue but had a substantial
+[00:08:05] loss in uh 2025. So that kind of sets the stage
+[00:08:13] there. Now to dive a little bit deeper on the
+[00:08:13] connectivity side. So Starlink is the most
+[00:08:18] successful division of SpaceX with 11.4 billion in
+[00:08:18] revenue and a profit of 4.42 billion. They've got
+[00:08:23] 10 million subscribers and they've got a a fairly
+[00:08:23] substantial total available market. In fact,
+[00:08:30] there's huge areas of the world where um Starlink
+[00:08:30] would be your only source of internet. You don't
+[00:08:37] have fiber, you don't have cable, and so they have
+[00:08:37] a huge total available market. But there is some
+[00:08:43] question about how many people really are going
+[00:08:43] to become a subscriber. It's not cheap. Uh it is
+[00:08:49] fairly expensive. I probably pay like $700 a month
+[00:08:49] between my three subscriptions that I have. Um,
+[00:08:55] the actual satellites, one of them I paid $5,000
+[00:08:55] for, the premium or the performance in motion one,
+[00:09:02] the one that's like the size of a pizza box.
+[00:09:02] So, you know, it's it's not something that
+[00:09:07] just anyone's going to buy. And nonetheless, uh,
+[00:09:07] you still have this anti- monopoly um, risk. Then
+[00:09:13] you've got the space division of SpaceX. SpaceX
+[00:09:13] is the leader in space. They're also the leader,
+[00:09:18] of course, in connectivity for satellite. Their
+[00:09:18] engineering far exceeds any nearby competitors.
+[00:09:24] And if competitors such as Amazon wanted to
+[00:09:24] launch their own space connectivity surf services
+[00:09:30] services to compete with Starlink, they would need
+[00:09:30] to launch using SpaceX rockets. So you know that
+[00:09:36] creates a real stronghold on this entire sector
+[00:09:36] and that's one of the benefits of having a company
+[00:09:43] that can do so many different things. One segment
+[00:09:43] can support the other segment. So the space
+[00:09:50] segment is supporting the connectivity segment,
+[00:09:50] right? And now the AI segment is going to be
+[00:09:56] supporting both of the other two segments. So that
+[00:09:56] creates a huge economic moat using the expression
+[00:10:03] of um Benjamin Graham or um Warren Buffett. So
+[00:10:03] while space operated a loss in 2025, it's given
+[00:10:11] SpaceX a significant strategic advantage. Now we
+[00:10:11] have AI, the third segment of uh the business.
+[00:10:17] And this is again just diving first into the
+[00:10:17] fundamentals. AI includes their data center,
+[00:10:22] Grock and Twitter X. So SpaceX owns Twitter X. All
+[00:10:22] right. So that's important to take it to take note
+[00:10:29] of. All of the investors that helped Elon Musk
+[00:10:29] buy Twitter and take it private got shares of
+[00:10:36] SpaceX. So they're now shareholders of SpaceX.
+[00:10:36] The profit, generally speaking, of Starlink is
+[00:10:42] being spent on space and AI. And in 2025, AI was
+[00:10:42] the biggest loser. However, earlier this year,
+[00:10:49] SpaceX ann SpaceX announced they would be earning
+[00:10:49] approximately 15 billion a year, 1.25 billion per
+[00:10:56] month in their contract from Anthropic. That by
+[00:10:56] itself substantially increases AI segment earnings
+[00:11:04] for 2026. And just this week, 3 days ago, SpaceX
+[00:11:04] ins space X inked a 32-month deal with Google for,
+[00:11:14] I think, 920 million, nearly a billion, rounding
+[00:11:14] up, per month. This now secures a total of about
+[00:11:22] 27 billion per year in these lease agreements,
+[00:11:22] making their AI division potentially the most
+[00:11:29] profitable. Well, potent, it's going to have
+[00:11:29] the it appears that it'll have the highest in
+[00:11:33] gross revenue at the very least. if it's not
+[00:11:33] the most profitable. That part we don't know
+[00:11:37] yet. So Q1 2026 um this was before announcing um
+[00:11:37] some of these new um agreements. Connectivity uh
+[00:11:46] represented 68% of their profit. Space continue to
+[00:11:46] operate a loss. AI continued to operate at a loss.
+[00:11:53] The problem with the Q1 2026 is that it shows that
+[00:11:53] operating losses were actually increasing versus
+[00:11:59] 2025. Um and and since inception right now this
+[00:11:59] 25-year-old company which SpaceX is has lost about
+[00:12:07] $37 billion. So in total they have lost a lot of
+[00:12:07] money. So you could say lost but the they've been
+[00:12:15] investing it strategically reinvesting it in uh
+[00:12:15] research and development. So now just to do the
+[00:12:20] comparison a lot of people are doing right now
+[00:12:20] fiscal year 2025 Nvidia brought in $130 billion
+[00:12:27] of total revenue. So more than 5x the the revenue
+[00:12:27] of uh 6x the revenue of SpaceX, but they produced
+[00:12:36] $72 billion in net profit. Nvidia is a cash
+[00:12:36] cow. They are spending off so much profit it
+[00:12:44] is unbelievable. And they have a $5.3 trillion
+[00:12:44] market cap. A PE ratio of 33. Shares outstanding
+[00:12:53] are 24 billion. The float is about 23.24 billion.
+[00:12:53] The price is around $220 a share. So big picture,
+[00:13:00] SpaceX does 22% as much revenue as Nvidia. All
+[00:13:00] right. So if SpaceX were just a mini Nvidia,
+[00:13:07] then the market cap would be about 22%. So you
+[00:13:07] know, if all things were the same except that
+[00:13:14] SpaceX is not profitable. It's not operating with
+[00:13:14] the same profit margin. So if all things were the
+[00:13:19] same except that SpaceX is losing money, then not
+[00:13:19] only would it be priced with a market cap of 22%,
+[00:13:26] it would be much lower than that. So you're
+[00:13:26] talking just on that kind of comparison that
+[00:13:32] SpaceX would easily be trading only at like $50
+[00:13:32] a share, but the IPO price is $135 a share. So
+[00:13:41] there's a big premium here. Where's that premium
+[00:13:41] coming from? People are buying SpaceX not because
+[00:13:46] of the current business model alone. Yes, Starlink
+[00:13:46] is awesome. Starlink is a good business model.
+[00:13:52] How big can it get? I don't know, but it's pretty
+[00:13:52] big and it doesn't have anyone close to competing
+[00:13:56] with them. So, it's it's it's working. Space,
+[00:13:56] well, it supports space. It supports Starlink,
+[00:14:02] so it's an important part of the business. Um, and
+[00:14:02] it has future potential as well. whether or not
+[00:14:07] we're gonna have data centers floating in outer
+[00:14:07] space, you know, that that I don't know that that
+[00:14:14] type of thing seems like it's um it's it's a far
+[00:14:14] wish list and it's very far removed from where we
+[00:14:20] are right now today. So to value the company
+[00:14:20] based on that happening seems like a little
+[00:14:26] bit of a stretch. equally to value it based on
+[00:14:26] colonizing Mars. That's so far away to be expected
+[00:14:33] to pay that multiple in value today seems a little
+[00:14:33] unrealistic. But again, if you're if you're basing
+[00:14:39] this investment on uh Elon Musk that you believe
+[00:14:39] that this person is inc is capable of incredible
+[00:14:46] things, then you want to be a part of SpaceX. So
+[00:14:46] the valuation problems right now um they said in
+[00:14:52] their filings that the total available market
+[00:14:52] for AI segment is $26.5 trillion. That's just
+[00:14:59] that's for the AI segment. But there's a little
+[00:14:59] bit of a problem with that that a lot of people
+[00:15:03] are pointing out. Grock does not dominate in the
+[00:15:03] AI segment and even the companies that do dominate
+[00:15:10] are losing money. So think about it this way.
+[00:15:10] Starlink is dominating in space and that gives
+[00:15:18] them a huge strategic advantage. They're the most
+[00:15:18] successful. They're big. How would someone else
+[00:15:23] compete? It would be really hard at this point to
+[00:15:23] to even get an edge in on that that market, right?
+[00:15:30] Because it's so well dominated by Starlink. Well,
+[00:15:30] AI has been dominated by Chat GPT and Anthropic,
+[00:15:39] you know, Perplexity. There's these other um
+[00:15:39] there's these other companies that are that are
+[00:15:43] doing a arguably well look they're a lot more
+[00:15:43] popular. So whether or not you like rock is I
+[00:15:50] suppose another question because the market is
+[00:15:50] speaking for itself or what the market is saying
+[00:15:54] is that it's not that popular. So if it's not that
+[00:15:54] popular, how would it become more popular? Well,
+[00:16:01] this is kind of an issue right now because a
+[00:16:01] lot of these um AI companies that are really
+[00:16:07] popular are also losing money. So this has been
+[00:16:07] a a topic with the Anthropic IPO that people are,
+[00:16:15] you know, speculating will be uh later this year
+[00:16:15] and then OpenAI uh a little bit after that that
+[00:16:21] uh Anthropic moved to um a different type of
+[00:16:21] billing for their enterprise customers and all
+[00:16:29] of a sudden you've got these enterprise customers
+[00:16:29] that have blown through their entire budget of
+[00:16:34] what they thought they would need for uh for their
+[00:16:34] AI systems in a matter of months. and they're
+[00:16:40] spending an unbelievable amount of money. I I I
+[00:16:40] mean I've it's truly staggering when you read how
+[00:16:49] much money some employees are spending using their
+[00:16:49] AI um tools. It's it's more than the employee
+[00:16:57] makes as their salary. Now, you could argue
+[00:16:57] that it could make the employee that much more
+[00:17:02] efficient, but then you've got to fire a bunch
+[00:17:02] of people for that math to add up. So the I I
+[00:17:07] think that at this point aside from the fact that
+[00:17:07] um Open AI and some of the others are beginning
+[00:17:13] to bring in advertising, Google makes money on
+[00:17:13] advertising, right? So sponsored um links at the
+[00:17:19] top of each search. So you start to get that in um
+[00:17:19] AI and that in theory should help pay for it. But
+[00:17:26] nonetheless, there's a there's a big question here
+[00:17:26] at how to make money. And so you could make money
+[00:17:33] by charging more money, but then if you charge
+[00:17:33] more money, your total available market goes down.
+[00:17:39] Your total available market right now is high and
+[00:17:39] the total amount of people that are interested in
+[00:17:43] using these AI agents and assistants and tools and
+[00:17:43] everything else is high because the price has been
+[00:17:48] artificially kept low because the companies are
+[00:17:48] trying to get people hooked on it and then sort of
+[00:17:52] figure out how they'll make money with it later,
+[00:17:52] which is a nice idea as long as they figure out
+[00:17:56] how to make money on it. So when it comes to the
+[00:17:56] valuation, there's the price to sales ratio. And
+[00:18:05] what this is basically doing is it's looking at
+[00:18:05] last year's total revenue and um then it's using
+[00:18:11] that as the as the the ratio or as the multiple to
+[00:18:11] figure what the market cap should be. And so when
+[00:18:19] we look back at some historic IPOs and I I took
+[00:18:19] a you know a se selection of a few of the bigger
+[00:18:26] ones, you can see what their current revenue in
+[00:18:26] the previous year was compared to the market cap
+[00:18:34] at the IPO. So right now SpaceX um they're trying
+[00:18:34] to raise $75 billion. They've got 18.7 billion in
+[00:18:43] revenue and they're at a IPO uh market cap right
+[00:18:43] now of about 1.77 trillion. That's 95x. That's a
+[00:18:54] ext that's an extremely high ratio. You look back
+[00:18:54] at some of these other ratios, Robin Hood 30x,
+[00:19:00] Coinbase 50x, Door Dash, Airbnb, Facebook, Meta,
+[00:19:00] Google. You go back to Amazon back here. Amazon
+[00:19:10] in 1997 when they IPOed their market cap was $438
+[00:19:10] million and they raised only 54 million in their
+[00:19:19] IPO. They raised $54 million in their IPO. The
+[00:19:19] previous year they'd had $16 million in revenue
+[00:19:26] which is kind of crazy numbers when you think
+[00:19:26] about 54 million all the way here to 75 billion.
+[00:19:35] That's a lot. 75 billion. Now raising 75 billion
+[00:19:35] by itself is one big number to get your head
+[00:19:43] around and okay so compared to the preIPO revenue$
+[00:19:43] 18 billion to 75 billion you know that's not too
+[00:19:51] uh dissimilar from 16 million here to 54 million
+[00:19:51] right I mean in terms of a ratio but what is very
+[00:19:59] different is the market cap right here these are
+[00:19:59] ext these are very different market caps so today
+[00:20:07] What we're seeing is that um investors evidently
+[00:20:07] are putting a exceptional premium on all the
+[00:20:16] things that SpaceX could do or may do. And so
+[00:20:16] I think that this creates a little bit of a
+[00:20:23] challenge if you're thinking about buying SpaceX
+[00:20:23] at the IPO and holding it for the next 10 years,
+[00:20:29] which I'm sure many people are thinking about
+[00:20:29] doing. But at its current valuations, investors
+[00:20:34] essentially are being asked to value SpaceX
+[00:20:34] today as if it were the leader in AI and it were
+[00:20:39] profitable. But it's not because AI represents
+[00:20:39] the majority of the total available market for
+[00:20:46] that's that is um created that is sort of the
+[00:20:46] substantiation for why the market cap is as
+[00:20:52] high as it is. And so I think you know this is
+[00:20:52] something that again I'm just I'm not I have no
+[00:20:59] position in SpaceX right now. So, I'm just sharing
+[00:20:59] with you my interpretation of what I'm reading in
+[00:21:05] the filings and what I've read in news articles
+[00:21:05] and, you know, watching interviews and things
+[00:21:08] like that. So, in my my gut feeling is that uh
+[00:21:08] well, I'm going to hold off on that because we're
+[00:21:16] going to get into that in a second. All right. So,
+[00:21:16] now let's talk about the innovation argument. So,
+[00:21:21] you don't want to underestimate Elon Musk. These
+[00:21:21] were solar electric cars of the 1990s. And I don't
+[00:21:25] know if any of you guys went to school in the 90s,
+[00:21:25] but I did. And I remember these solar powered cars
+[00:21:32] coming to the school and they would show them off
+[00:21:32] and they looked absolutely ridiculous. This looks
+[00:21:37] like a horseshoe crab. These are the silliest
+[00:21:37] looking cars. It's a bicycle on wheels with you
+[00:21:42] know a giant array of solar panels and they're
+[00:21:42] like this is going to be the future electric
+[00:21:46] cars and everyone laughed at them. [laughter]
+[00:21:46] You know they couldn't drive uphill on their
+[00:21:51] way out and they would get stuck in the snow or
+[00:21:51] whatever. So this was the 1990s and as we know
+[00:21:58] Elon Musk has been certainly um responsible in a
+[00:21:58] large part for making electric cars as popular as
+[00:22:06] they are hybrids and pure electric cars now are
+[00:22:06] nearly one in four cars in the United States. So
+[00:22:12] something that at one time was unimaginable has
+[00:22:12] now become commonplace. And I say that because
+[00:22:18] he's already doing that with SpaceX in the space
+[00:22:18] division, right? the space segment has done the
+[00:22:25] unimaginable. They figured out how to reuse these
+[00:22:25] rockets and they're they're innovating at a level
+[00:22:31] that NASA and you know other countries haven't
+[00:22:31] been able to innovate and these countries you know
+[00:22:38] I mean it's it's kind of it's kind of unbelievable
+[00:22:38] how much they've been able to do and so this is an
+[00:22:44] argument for the private sector over um you know
+[00:22:44] the the government trying to do this stuff but I
+[00:22:50] don't want to underestimate the Elon Musk factor
+[00:22:50] so you're betting on the jockey not the horse here
+[00:22:56] but uh SpaceX is not without as I said potential
+[00:22:56] headwinds. So the first is that the company is not
+[00:23:01] yet profitable as a whole. The AI segment um yet
+[00:23:01] it does have profitable contracts but with short
+[00:23:08] notice um cancellation clauses. So those short
+[00:23:08] notice cancellation clauses mean that what is
+[00:23:14] currently an extra$ 27 billion roughly of annual
+[00:23:14] gross revenue uh could fluctuate fairly quickly
+[00:23:21] inside of a quarter within 90 days. They do have
+[00:23:21] the telecom style regulatory risk for Starlink
+[00:23:27] ongoing and heavy heavy R&D and capex. That's just
+[00:23:27] part of the business because launching satellites
+[00:23:33] into space and you have to maintain them and
+[00:23:33] everything else. And then they've got the insider
+[00:23:37] lockup expirations that will increase the float
+[00:23:37] and the supply and we're going to get into that
+[00:23:41] when we get into the technicals because that
+[00:23:41] is a it's a more nuanced component of this IPO
+[00:23:48] but it is very important. So, let's go ahead and
+[00:23:48] transition to talking about the technical elements
+[00:23:54] of the SpaceX IPO. I am a technical trader. This
+[00:23:54] is the area where I really shine. And I'm going to
+[00:24:01] give you a bunch of examples of other IPOs that
+[00:24:01] have been hyped up. Um, generally when it comes
+[00:24:06] to fundamentals, I I look at them enough to have a
+[00:24:06] kind of big picture understanding of the company.
+[00:24:14] And and this is specific in the case of a hyped
+[00:24:14] up IPO. I wouldn't do this on any old stock I
+[00:24:19] might be trading for a matter of five minutes. But
+[00:24:19] for a hyped up IPO, I I try to look into it and
+[00:24:24] understand it as best as I can. Um, but at the end
+[00:24:24] of the day, my job will be to trade the volatility
+[00:24:31] and to trade the price action that's right in
+[00:24:31] front of me. My trades can be as short as minutes
+[00:24:35] long, even seconds long on a really fast trade.
+[00:24:35] So, at that point, I sort of put the fundamentals
+[00:24:41] aside. But looking at the fundamentals is
+[00:24:41] important because it helps kind of um it gives me
+[00:24:49] insight into what I can expect to see in the price
+[00:24:49] action. Sometimes when I don't understand the
+[00:24:55] price action, I go into the fundamentals and then
+[00:24:55] I see something and I'm like, "Oh, that's it. Why
+[00:25:01] is there so much selling on this stock? Oh, they
+[00:25:01] they're doing an offering with this, you know,
+[00:25:05] underwriter and that underwriter is known to
+[00:25:05] be very aggressive selling direct on the open
+[00:25:09] market." Okay, that all of a sudden adds context.
+[00:25:09] Or why is there an incredible amount of support
+[00:25:14] for this company? Oh, it's getting included into a
+[00:25:14] giant ETF like the NASDAQ 100. That's an important
+[00:25:21] thing to be aware of. So, first let's talk about
+[00:25:21] how hi hyped IPOs typically trade. This is Airbnb.
+[00:25:29] It went down 50% versus the IPO day. All right.
+[00:25:29] Now, not immediately, but as you can see here,
+[00:25:34] we IPOed on Airbnb and that day was a red candle.
+[00:25:34] The price dropped down. It spiked up and then it
+[00:25:41] closed a little bit lower. I traded it. I made
+[00:25:41] money on it and I was in and out of it within less
+[00:25:46] than 15 minutes. The next couple days it sells
+[00:25:46] off. It rallies back up. It dips down. Rallies up
+[00:25:52] even more. Pulls back and then kind of stabilizes
+[00:25:52] here before selling off. Comes back up a little
+[00:25:58] bit later uh in the in the year. And then, you
+[00:25:58] know, two years later, it's down about 50% versus
+[00:26:04] the IPO high. So this is a fairly uh significant
+[00:26:04] draw down. Now I share this with you just as one
+[00:26:11] example. Here's a second example. Door Dash down
+[00:26:11] 68% versus the IPO day between the high here and
+[00:26:17] the low down here. So this one I also traded and
+[00:26:17] made money on on the initial IPO day which as
+[00:26:23] you can see here had about 180 million shares of
+[00:26:23] volume. If we look at the volume just go back real
+[00:26:28] quick. Um Airbnb did about 70 million shares
+[00:26:28] of volume. So oh sorry this is the Uber. Um,
+[00:26:35] sorry. This is this is Dash. So, let me just uh
+[00:26:35] you know what? Yep, that's right. So, we're going
+[00:26:43] to look at um Uber. Forgot to just update the
+[00:26:43] name. Sorry. On that slide. So, this one's Uber.
+[00:26:48] This one is Dash. So, we'll do Dash first, then
+[00:26:48] we'll go back to Uber. So, Door Dash. So, this
+[00:26:53] was and I did trade Door Dash and I also traded
+[00:26:53] Uber. So, all of these I trade on day one. So,
+[00:27:00] uh, Dash did about 32 million shares on day one,
+[00:27:00] sold off, came back up, sold off, but within, you
+[00:27:09] know, as it turned out, a year, year and a half,
+[00:27:09] it was down 80% here. Way, way down, $40 a share
+[00:27:16] versus these highs up here, which were 260 bucks.
+[00:27:16] That's not good. Going back to Uber, this one,
+[00:27:23] um, down 68%. So, the IPO day, it never really got
+[00:27:23] higher than that. took a long time, but it sold
+[00:27:29] off all the way down to about $15 a share before
+[00:27:29] coming back up to 60. So, when you look at some of
+[00:27:36] these previous IPOs, I want you to think about
+[00:27:36] your bias or what you think might be the right
+[00:27:40] thing to do if you want to invest in SpaceX. So,
+[00:27:40] if you wanted to invest in Airbnb, for instance,
+[00:27:46] where would be a good time to be a buyer? Well,
+[00:27:46] certainly not up at the very top and probably not
+[00:27:50] on the IPO day because it dropped down and then
+[00:27:50] came back up. Maybe down in these areas after we
+[00:27:55] double bottom support down here, back up here, you
+[00:27:55] know, maybe down in this area after that level of
+[00:28:00] support or maybe just in this area when it started
+[00:28:00] trending back up. What about Uber? Well, again,
+[00:28:06] not on the IPO day. Um, after it found some degree
+[00:28:06] of support and was trending back up, you know,
+[00:28:12] maybe through this area here it starts to get more
+[00:28:12] interesting, but even then comes back down a bit.
+[00:28:17] Um, Door Dash, you know, initial IPO day
+[00:28:17] sells off, rallies up strong, then sells off,
+[00:28:23] comes back up again. Now, it's been beaten up
+[00:28:23] for a long time, down 80% versus the IPO day.
+[00:28:28] What about Robin Hood? Robin Hood's interesting.
+[00:28:28] A very strong IPO. Look at that. It IPOs and in
+[00:28:35] three days goes from $32 a share to 88 bucks.
+[00:28:35] Now, they IPOed at just the right time. In a way,
+[00:28:41] in a way they did because it was tied right in um
+[00:28:41] with, you know, all the momentum of the pandemic.
+[00:28:46] But on the other hand, they were also many people
+[00:28:46] felt responsible for the GameStop short squeeze
+[00:28:51] not working out the way it was should have. So I
+[00:28:51] don't know. But in any case, um the price came all
+[00:28:56] the way down here down to 78 a share before you
+[00:28:56] know it's rallied up since. But just for context,
+[00:29:04] Coinbase IPOs and just tanks. All right. So this
+[00:29:04] one not very good. Dropped 93% versus the IPO high
+[00:29:11] from there down to here. Rivian 90% versus the IPO
+[00:29:11] day. Did move up for a couple days and then it's
+[00:29:18] just been coming back down since. Circle IPO.
+[00:29:18] Um, now this one's a little bit different. So,
+[00:29:24] um, the Circle IPO is, uh, was very strong. This
+[00:29:24] one was last year and it IPOed at like $40 a
+[00:29:32] share. I traded it on that day, made some good
+[00:29:32] money on it. I think it was around $30,000 and
+[00:29:37] then over the course of the next few days, it ends
+[00:29:37] up going up 300%. Which was crazy. Uh however,
+[00:29:43] it had a relatively low float for IPO this big,
+[00:29:43] subject to a lockup period where insiders couldn't
+[00:29:49] sell. Uh but then eventually reality sets back
+[00:29:49] in and now the price is back down around the IPO
+[00:29:55] level. So what's different about SpaceX from these
+[00:29:55] other IPOs? On the one hand, you might think,
+[00:30:01] well, geez, it seems that IPOs are kind of risky.
+[00:30:01] they IPO and some of them go up a little bit for
+[00:30:09] a week or two, but more often than not they
+[00:30:09] seem to drop quite a bit. Um, so number one,
+[00:30:15] we've got the float. SpaceX is selling a very
+[00:30:15] limited number of shares versus the number of
+[00:30:21] shares outstanding. So to raise 75 billion,
+[00:30:21] they have to sell about 555 million shares at
+[00:30:28] $135 a share. But that represents less than
+[00:30:28] 5% of the shares that are outstanding. So if
+[00:30:35] we jump onto the whiteboard here, we've
+[00:30:35] got 5% right here, which is the float,
+[00:30:41] and we've got 555 million shares. And then we've
+[00:30:41] got the whole rest of the pie, which is SpaceX.
+[00:30:49] So, what's really interesting here is that these
+[00:30:49] 555 million shares when we're trading it on the
+[00:30:56] open market are essentially determining the
+[00:30:56] valuation for all of these shares. And there's
+[00:31:03] something like 12 or 13 billion shares. So, all
+[00:31:03] of these shares get their valuation from the
+[00:31:09] supply and demand of just this little tiny piece,
+[00:31:09] which is 555 million. that that seems a little
+[00:31:17] um it seems like that could present a problem
+[00:31:17] at a certain point and and I think it will,
+[00:31:22] but the remaining shares are restricted by
+[00:31:22] a lockout period or a lockup period. So,
+[00:31:26] they can't be sold at least immediately on the
+[00:31:26] open market. So the early lockup release period is
+[00:31:32] going to potentially increase the supply from 555
+[00:31:32] million shares to closer potentially um to about
+[00:31:43] 7.5 billion shares. So that is substantial.
+[00:31:43] approximately 7.5 billion shares are going
+[00:31:54] to be eligible to be coming onto the market and
+[00:31:54] become part of the float within the next 6 months
+[00:31:59] approximately and that's based on this lockout
+[00:31:59] schedule or lockup period schedule which is from
+[00:32:05] um the S1 filing that um SpaceX filed and so the
+[00:32:05] release is in these um kind of tanches so it's
+[00:32:14] staggered so they're not all hitting the market
+[00:32:14] at once but over the next 70 90 120 between 135
+[00:32:21] and 180 days, these shares are going to be uh
+[00:32:21] eligible to be sold on the open market. So,
+[00:32:29] who owns all of these shares? Well, these shares
+[00:32:29] that are going to be eligible are shares tied to
+[00:32:38] some of them are going to be tied to Twitter,
+[00:32:38] people that uh investors that bought Twitter,
+[00:32:41] and others are tied to people that were early
+[00:32:41] investors in SpaceX. SpaceX is not a young
+[00:32:46] company. They've been around for 25 plus years.
+[00:32:46] So there have been investors, I think there's
+[00:32:51] been 20 rounds of investing over the past 25
+[00:32:51] years. In other words, if you were wealthy,
+[00:33:01] you have had every opportunity to buy into SpaceX
+[00:33:01] long before the IPO. In fact, the only people that
+[00:33:09] really are getting access to the IPO to SpaceX now
+[00:33:09] for the first time in this IPO are, dare I say,
+[00:33:16] dumb money retail traders like you and me. It's
+[00:33:16] not sophisticated investors. They've already had
+[00:33:22] so many opportunities to get into SpaceX. And so,
+[00:33:22] in fact, the day of the IPO, the day of the IPO,
+[00:33:28] when this is publicly trading at $135 a share,
+[00:33:28] it will be the highest valuation that all of
+[00:33:36] these shareholders and 42% approximately 42% is
+[00:33:36] Elon Musk and his shares are also restricted. Um,
+[00:33:43] but uh it'll be the highest valuation they've
+[00:33:43] ever had, which is what's going to make Elon
+[00:33:48] Musk the world's first trillionaire. Incredible.
+[00:33:48] Incredible. Um, uh, and again, it's it's on paper
+[00:33:56] because if he wanted to sell his approximately
+[00:33:56] 5.5 billion shares, which he's not eligible to
+[00:34:02] sell them, but if he wanted to sell them all, the
+[00:34:02] market wouldn't be able to sustain that selling.
+[00:34:08] There won't be enough buying to buy 5.5 billion
+[00:34:08] shares in one day. Even if he wanted to sell them,
+[00:34:13] it would be impossible. Right now, could he do a
+[00:34:13] swap with some institutional investors who want to
+[00:34:18] take a big chunk and maybe at a discount, blah
+[00:34:18] blah blah, whatever. But he would not be able
+[00:34:22] to sell them on the open market. But you can see
+[00:34:22] that with his staggered release schedule, insiders
+[00:34:27] who have held shares for a number of years, some
+[00:34:27] maybe more than a decade, will be able to start
+[00:34:32] selling on the open market. This is an important
+[00:34:32] dynamic to understand in the relationship between
+[00:34:38] supply and demand because this has the potential
+[00:34:38] to drastically increase the supply. So now will
+[00:34:45] there be enough demand to absorb all of these
+[00:34:45] shares without the price tanking? Will there
+[00:34:52] be enough confidence from insiders to agree not
+[00:34:52] to sell their shares because of what they know
+[00:34:57] it would do to the stock price? Maybe. Maybe
+[00:34:57] a lot of these insiders are along for the ride
+[00:35:02] and they're not going to sell any shares. But if
+[00:35:02] they represent investors underneath them, it's a
+[00:35:08] hedge fund or something like that, you know, they
+[00:35:08] will likely have to begin selling some shares at a
+[00:35:12] certain point. However, SpaceX negotiated with
+[00:35:12] NASDAQ when they got their listing and NASDAQ
+[00:35:21] changed their rules to allow SpaceX to become part
+[00:35:21] of the NASDAQ 100 as of day 15 after the IPO. and
+[00:35:30] SpaceX will be waiting the waiting is estimated to
+[00:35:30] be between47 and 7% of the total fund and that's
+[00:35:37] uh what that's essentially going to mean so
+[00:35:37] number one a lot of people are finding this to
+[00:35:42] be controversial that NASDAQ changed its rules
+[00:35:42] uh essentially to get the listing from SpaceX
+[00:35:48] and other people are saying well look if you're
+[00:35:48] investing in a fund an ETF you want a piece of
+[00:35:53] the entire market and SpaceX is part of the market
+[00:35:53] granted its waiting is less than 1% of the total
+[00:35:59] fund. So if you want some exposure to SpaceX being
+[00:35:59] one of the largest companies in the world, then
+[00:36:05] you want it in the fund. But what it means is that
+[00:36:05] all peop everyone who's invested in the NASDAQ 100
+[00:36:12] uh and the funds that are investing in the NASDAQ
+[00:36:12] 100 will be rebalanced to include SpaceX. This
+[00:36:18] will result in a one-time event that will create
+[00:36:18] significant buying support for SpaceX because
+[00:36:24] the fund will have to purchase SpaceX shares
+[00:36:24] on the open market. And then moving forward,
+[00:36:29] anytime someone buys part of that ETF, they'll be
+[00:36:29] getting a small sliver of SpaceX. So that's going
+[00:36:36] to create a degree of long-term support, which is
+[00:36:36] naturally probably one of the reasons that it was
+[00:36:43] uh something that was so important for the SpaceX
+[00:36:43] listing. Now, SpaceX also was petitioning the S&P
+[00:36:48] 500 to include SpaceX, but they did not get that
+[00:36:48] request approved. So, currently the S&P 500 has
+[00:36:56] a 12-month seasoning period for an IPO, and it
+[00:36:56] requires profitability over the four most recent
+[00:37:01] quarters, which SpaceX doesn't currently meet
+[00:37:01] because they're losing money. So, as of right now,
+[00:37:06] uh the inclusion to the S&P 500 is on, you know,
+[00:37:06] back burner. It's not going to happen this year,
+[00:37:12] next year maybe, or 2028, uh at best. But that
+[00:37:12] would create additional buying support when it
+[00:37:18] happens. It'll probably happen, but but we
+[00:37:18] don't know. Um, now number five, uh, are the
+[00:37:25] Twitter and X investors. Investors of Twitter
+[00:37:25] and X became shareholders of SpaceX. And these
+[00:37:30] investors may end up selling shares when their
+[00:37:30] lock up lock up period expires. They may want to
+[00:37:34] cash out. They've gotten most likely a fantastic
+[00:37:34] return on their investment. So, you know, that's
+[00:37:40] that's another variable. Now, something else that
+[00:37:40] um I haven't mentioned, but is the discussion of
+[00:37:47] SpaceX doing some type of merger with Tesla and
+[00:37:47] creating a gigantic company. The motivation to
+[00:37:56] do that potentially would be that Elon Musk is
+[00:37:56] in complete 100% control of SpaceX. He's in he's
+[00:38:04] he his voting rights give him complete control
+[00:38:04] over all decisions. He can never be fired. And
+[00:38:10] so he could take this current opportunity with
+[00:38:10] the amount of hype around SpaceX to do some type
+[00:38:16] of merger with Tesla and roll Tesla into SpaceX,
+[00:38:16] which would create a, you know, ultra big company.
+[00:38:24] But the details of how that would work and what
+[00:38:24] that would mean for current Tesla shareholders
+[00:38:29] um and and SpaceX shareholders is, you know, all
+[00:38:29] speculation. Number six, this is very important.
+[00:38:35] Retail allocation. typically hyped up IPOs, uh,
+[00:38:35] retail traders like you and I, we could request
+[00:38:43] shares through our broker. If you use Erade or
+[00:38:43] Schwab or Robin Hood, you could request to get
+[00:38:48] access to shares and you almost never get them.
+[00:38:48] But with SpaceX, Elon Musk has allocated 30% of
+[00:38:57] the shares in the IPO to go to retail traders. On
+[00:38:57] the one hand, you think this is awesome. you know,
+[00:39:03] this guy's looking out for the the little guy,
+[00:39:03] the retail trader. On the other hand, you know,
+[00:39:07] we're uh known as the dumb money. And so what I'm
+[00:39:07] noticing here is, and I'm just kind of doing the
+[00:39:14] math here, 30% of the IPO for retail. It's over
+[00:39:14] 20 billion for retail. I mean, we've we've got,
+[00:39:20] you know, none of us have that much money in
+[00:39:20] our pockets individually. Um it's more than
+[00:39:25] 150 million shares. So, what I'm seeing right now
+[00:39:25] is that brokers are coaching their customers on
+[00:39:31] how to request access to shares. I'm seeing it
+[00:39:31] all over the place, all over social media. Uh,
+[00:39:36] it's unbelievable. The CEO of JP Morgan um is
+[00:39:36] hosting a special meeting for high- netw worth
+[00:39:41] clients to discuss SpaceX. So, there's a it
+[00:39:41] seems like there's really big broker support
+[00:39:48] to encourage sort of your typical investor to
+[00:39:48] buy into SpaceX. Um, I've been seeing a lot of
+[00:39:55] that. And so, Robin Hood, just to break down the
+[00:39:55] numbers, has about 26 million accounts. Of them,
+[00:40:02] 3.48 million or about 13% are gold users. I am
+[00:40:02] a gold user at Robin Hood for my account. A gold
+[00:40:09] user means you have access to margin. And um, so
+[00:40:09] almost any active trader would be a gold user,
+[00:40:15] which means only about 13% of their users would
+[00:40:15] be what at least I would consider to be an active
+[00:40:20] trader. And Robin Hood seems to be like that would
+[00:40:20] be the most one of the more active brokers because
+[00:40:27] you don't invest you don't put money in Robin
+[00:40:27] Hood, you know, as a grandmother who's doing like
+[00:40:32] wealth management, you know, that's not what Robin
+[00:40:32] Hood's for. So arguably Robin Hood probably has
+[00:40:38] more than three and a half million accounts that
+[00:40:38] are interested in the SpaceX IPO. But right now,
+[00:40:44] if we just thought about the number of their
+[00:40:44] accounts they have that are active gold users
+[00:40:48] and active traders by default, in my opinion, it's
+[00:40:48] about 13%. Schwab has 46 and a half million client
+[00:40:55] accounts. But there's no doubt the vast majority
+[00:40:55] are retirement and wealth management accounts. How
+[00:41:00] many of their accounts are actually active traders
+[00:41:00] in the market? Active discretionary investors,
+[00:41:07] you know, buying and selling stocks in their
+[00:41:07] own account. Interactive Brokers has 4.4
+[00:41:11] four million accounts, but it's a more
+[00:41:11] sophisticated broker, right? So, more
+[00:41:14] sophisticated investors and traders are there.
+[00:41:14] Fidelity has 50 million accounts, but again,
+[00:41:19] dominated by wealth management and long-term
+[00:41:19] investors. So, what I was trying to figure out
+[00:41:24] is how many retail investors do we really have out
+[00:41:24] there that are interested in buying SpaceX? And
+[00:41:29] just looking at these top four brokers, um, using
+[00:41:29] the 13% uh, kind of ratio that Robin Hood has, I
+[00:41:37] figured if Schwab had 13% that are pretty active,
+[00:41:37] that would be like 6 million accounts. You know,
+[00:41:42] for interactive brokers, I said maybe 75% are
+[00:41:42] active because that by itself is a more active
+[00:41:46] broker, but I don't know that. And then Fidelity,
+[00:41:46] maybe only 13% again. So that's a rough number
+[00:41:52] of let's say 25 20 million accounts. Now, I
+[00:41:52] could be way off right there. I I don't know.
+[00:41:58] I don't know how many are active and we don't have
+[00:41:58] this information. So the information that I got
+[00:42:02] from Robin Hood is straight from their filings
+[00:42:02] and I'm getting this information from filings
+[00:42:07] but I'm having to extrapolate uh what might be
+[00:42:07] the amount of active accounts because they don't
+[00:42:12] share that exact metric and they probably keep it
+[00:42:12] I don't know they just don't want to share it. So,
+[00:42:17] if we just had 20 million active accounts, well,
+[00:42:17] now I'm thinking if 20 million active accounts all
+[00:42:22] requested shares and you know I there's I don't
+[00:42:22] know I I I can't really imagine that there are
+[00:42:29] 20 million well but I don't know maybe there
+[00:42:29] are let's just say 20 million um maybe there
+[00:42:34] are maybe 20 million active accounts have all reg
+[00:42:34] have all asked for shares. Each account would get
+[00:42:39] eight shares that's $1,000 worth of stock at $135
+[00:42:39] each and that would use up the 160 million shares
+[00:42:45] allocated for retail. eight shares each. So, you
+[00:42:45] know, I don't know is the is so what does that
+[00:42:52] mean for demand? Is there going to be such a
+[00:42:52] high level of demand? Now, one thing I would
+[00:42:58] say is what you could do is you could request
+[00:42:58] shares and then the day before the IPO, they'll
+[00:43:04] tell you whether or not they can get them for you
+[00:43:04] and how many they can get and then you confirm it.
+[00:43:09] I'd be curious if everyone puts in a request and
+[00:43:09] we all get the like all the shares we ask for,
+[00:43:16] that tells me they've got a lot more supply. If
+[00:43:16] we only get a few of the shares, let's say you
+[00:43:21] ask for 100 and you only get two, then it's like,
+[00:43:21] wow, demand is really high on this thing. We won't
+[00:43:26] know till Thursday before the IPO. But if we only
+[00:43:26] get a small number, then we know that the demand
+[00:43:31] is really high. And that means people didn't get
+[00:43:31] the number of shares they wanted. And that means
+[00:43:36] when will they buy it? the day of the IPO. But
+[00:43:36] if you get all the shares you want ahead of time,
+[00:43:42] then you don't really need to buy it on the day
+[00:43:42] of the IPO. So, what about retail flippers? How
+[00:43:49] much less buying will we see on the IPO day since
+[00:43:49] retail traders will likely have access to possibly
+[00:43:54] as many shares as they want prior to the IPO?
+[00:43:54] Now, this is again speculation because we don't
+[00:43:58] know yet. But will retail traders just flip out of
+[00:43:58] those shares for a quick profit if the IPO opens
+[00:44:04] above 135? Because what typically happens with
+[00:44:04] a hyped up IPO is the IPO price is $135 a share,
+[00:44:13] but it opens for trading on the day of the IPO
+[00:44:13] already up 15 20%. That's not uncommon at all. So
+[00:44:21] the IPO price of $135 opening at 1451 150 even 160
+[00:44:21] or 175 wouldn't be insane. If it opened at 175,
+[00:44:31] you would have a natural price target of $200
+[00:44:31] a share on day one. You would logically think
+[00:44:35] that way. Even though this is a huge company,
+[00:44:35] that's the way traders think in these big round
+[00:44:41] numbers. If we open below 150, 150 is the first
+[00:44:41] target. We open above 150, 175, 175, up to 200.
+[00:44:48] So that has the effect potentially of increasing
+[00:44:48] the market cap on SpaceX from 1.77 trillion to
+[00:44:56] upwards of two a.5 trillion on day one. And yet,
+[00:44:56] who could sell on day one? Well, maybe some of
+[00:45:04] these retail traders who are flipping. Now, some
+[00:45:04] brokers will restrict you from flipping shares,
+[00:45:08] they'll make you say that if you're going to take
+[00:45:08] the shares, you've got to hold them for a minimum
+[00:45:12] of 45 days. So, you've got to make sure you read
+[00:45:12] the fine print when you accept the shares. They'll
+[00:45:17] tell you if you have that that restriction. So,
+[00:45:17] some brokers frown upon flipping the shares,
+[00:45:22] getting them at the IPO price, and selling them
+[00:45:22] on like day one or day two. They don't want you
+[00:45:25] to do that. Others don't care. So, look into that.
+[00:45:25] But given that there will there may there may be
+[00:45:31] some flipping, there probably will be. Some people
+[00:45:31] will say, "I don't care. I'm going to flip anyways
+[00:45:34] and so what? I don't get any future IPOs with this
+[00:45:34] broker. Big deal." You know, I made $10 a share on
+[00:45:41] a thousand shares. I made $10,000. It was worth
+[00:45:41] it. So, what typically happens on the IPO day is
+[00:45:47] it opens quite a bit higher. And so, I expect that
+[00:45:47] with SpaceX because that's what typically happens.
+[00:45:53] But part of the reason that typically happens is
+[00:45:53] because day one is the very first opportunity for
+[00:46:00] retail traders to get a piece. It's the very first
+[00:46:00] chance and there's so much FOMO. In this case, it
+[00:46:08] may not be the first chance if retail traders have
+[00:46:08] already gotten all their shares allocated. So,
+[00:46:13] please leave in the comments below if you request
+[00:46:13] shares, if you got them, and how many you got.
+[00:46:18] This is going to help everyone else who watches
+[00:46:18] this episode better understand what the supply
+[00:46:23] demand is looking like going into Friday. So, you
+[00:46:23] can help everyone else here on this channel by
+[00:46:29] just posting that and telling us kind of what you
+[00:46:29] experienced. And I'm going to do it myself. I'm
+[00:46:33] going to try to request it in my uh Schwab account
+[00:46:33] and I'll see if I can get any. I I guess I could
+[00:46:38] try my Robin Hood account, too, but it doesn't
+[00:46:38] really have any money in it right now because my
+[00:46:41] small account challenge is only got a couple
+[00:46:41] thousand dollars. So I don't I I don't think
+[00:46:45] that would be a very useful indication. So will
+[00:46:45] I trade SpaceX on day one? The answer is let's go
+[00:46:53] back. Let me run that one more time. Will I trade
+[00:46:53] SpaceX on day one? The answer is yes. Cautiously
+[00:46:59] long bias. I think realistically an investor would
+[00:46:59] have to be outside of their mind to short SpaceX
+[00:47:05] on day one knowing that the NASDAQ rebalancing
+[00:47:05] is coming on day 15. You'd have to be out of your
+[00:47:11] mind to short into this retail mania. I'm going
+[00:47:11] to say something. You might not like Elon Musk.
+[00:47:18] You might not agree with him and what he's done
+[00:47:18] and politics and whatever, whatever, but when
+[00:47:23] you stand in front of a moving train, you get run
+[00:47:23] over. The valuation, the the fundamental valuation
+[00:47:30] doesn't always make sense. The stock can keep
+[00:47:30] going higher. We've seen this across the board
+[00:47:35] in all different markets. And so SpaceX, if it's
+[00:47:35] the type of stock that's structurally set up to
+[00:47:42] succeed because of the limited float, the lockout
+[00:47:42] period, and the inclusion in the NASDAQ 100, I'm
+[00:47:48] not going to stand in the way of it succeeding.
+[00:47:48] Now, if it doesn't succeed, I'll be surprised,
+[00:47:52] but I would not be shorting it on day one. That
+[00:47:52] would to me be insane. I also don't know that I
+[00:47:58] want to buy it and hold it for 15 days because
+[00:47:58] it could be highly volatile. So, I am cautiously
+[00:48:04] long biased, but I am recognizing that what's
+[00:48:04] different with SpaceX is the retail allocation.
+[00:48:10] That is the biggest difference to me because
+[00:48:10] it could affect the amount of demand on day one
+[00:48:16] and it could create selling that we wouldn't
+[00:48:16] typically see on day one. But realistically,
+[00:48:21] I think we're going to have strong buying support
+[00:48:21] through at least the first three weeks of trading
+[00:48:26] until the lock up lockout periods begin and then
+[00:48:26] until the lockout periods begin to expire. So,
+[00:48:31] the first lockout periods are coming in um I
+[00:48:31] think it was August, if you just jump back to that
+[00:48:36] slide. And I wouldn't it wouldn't be surprising to
+[00:48:36] me if going in to that kind of cliff where we're
+[00:48:44] going to start seeing insiders have the ability
+[00:48:44] to sell if there will be people that are shorting
+[00:48:48] into that expecting this increase in supply to
+[00:48:48] potentially come onto the market because I don't
+[00:48:55] know if there will be enough daily buying volume
+[00:48:55] to support when they decide to start selling and
+[00:49:02] we don't know when they're going to start selling
+[00:49:02] but it wouldn't surprise me if the chart ends up
+[00:49:06] looking something like this IPO day right here and
+[00:49:06] we move up steadily for 15 days and this is I'm
+[00:49:14] not investment advice I'm just making you know my
+[00:49:14] my educated prediction based on educated intuition
+[00:49:21] so we move up for 15 days maybe we move up for a
+[00:49:21] month one month and then what's going to happen
+[00:49:27] is as we approach Q2 earnings if the stock is up
+[00:49:27] 30% then 7% of the shares are going to be unlocked
+[00:49:35] based on this achieve achievement right here
+[00:49:35] and that's where we begin the cliff of unlocking
+[00:49:40] shares right here. And so as soon well it's it's
+[00:49:40] going to it would start you know right about here.
+[00:49:46] So once we're coming to that spot that's where I
+[00:49:46] would expect some more institutional level short
+[00:49:52] selling to occur as they're betting that these
+[00:49:52] insiders are going to take profit and that's
+[00:49:57] where I would worry about a sort of steady stair
+[00:49:57] stepping down and it wouldn't shock me at all if
+[00:50:03] we go below the original IPO price. It wouldn't
+[00:50:03] shock me. I would not be surprised considering
+[00:50:09] what we have for historical data that supports
+[00:50:09] that the majority of big IPOs end up going
+[00:50:17] uh let's see where was that slide. The majority
+[00:50:17] of big IPOs end up going down versus their IPO
+[00:50:22] price. Where was that? Um so this was the slide
+[00:50:22] where I was saying um would I trade it and then
+[00:50:29] would I invest in it? So here um what we know from
+[00:50:29] historical IPOs is that typically typically you
+[00:50:37] have the IPO at best you have this is this is the
+[00:50:37] more typical IPO you you IPO the price goes up and
+[00:50:45] then it begins a downward decline and we have seen
+[00:50:45] declines as much as 90% before they rally back up.
+[00:50:52] Now if we pull up the the chart on Robin Hood here
+[00:50:52] just for a second you want to be a trader here
+[00:50:57] that's fine but look at the selloff. where was the
+[00:50:57] right time to be a buyer on this? And it's after
+[00:51:02] it's stabilized at some point and then you get
+[00:51:02] this nice recovery. So, what we know about these
+[00:51:07] big IPOs is that they're usually priced high.
+[00:51:07] They're really they're really hyped up. They
+[00:51:12] open high and then they have a period of selling
+[00:51:12] off. So, this has been true with pretty much every
+[00:51:18] single one of these IPOs right here. Um, and I
+[00:51:18] guess let's see, let's check Airbnb because I
+[00:51:23] actually think that we did go below the IPO um
+[00:51:23] price, but let's just double check that. So,
+[00:51:29] Airbnb. Um, so Airbnb, let's see. No, maybe not.
+[00:51:29] So, you know what? Yeah. So, this is the thing.
+[00:51:38] Airbnb was super hyped up. Even though their
+[00:51:38] price was like was low, they ended up opening
+[00:51:42] super high and then pushing higher, but it still
+[00:51:42] ended up dropping sub substantially before it's
+[00:51:48] come back up. So, none nonetheless, buying on the
+[00:51:48] day of the IPO uh wouldn't have been necessarily
+[00:51:54] a good idea. And I think this right here speaks
+[00:51:54] to um a little bit of a bigger question in the
+[00:52:00] market which is why is it that companies are
+[00:52:00] waiting later and later to IPO? The answer is
+[00:52:11] because they're raising money with venture
+[00:52:11] capital. They're raising money with private
+[00:52:16] equity and they're coming to the market later and
+[00:52:16] later. So the problem here is who's missing out?
+[00:52:24] Who's losing? Well, let's look at some of these
+[00:52:24] companies. So, Apple uh IPO price is $22 a share
+[00:52:32] and um the market cap um at the IPO 1.8 billion
+[00:52:32] which is not insignificant 122 million shares or
+[00:52:40] million dollars capital raised and the return
+[00:52:40] is 2500x Microsoft 4,000x Amazon 6,000x. These
+[00:52:49] are huge returns on the public markets if you are
+[00:52:49] a buyer basically um at the IPO price. Google a
+[00:52:56] little less. Facebook 15x a 15x return. IPOed at
+[00:52:56] 38 valued at 104 billion dropped to $17 a share
+[00:53:06] and then rallies back up 15x. Airbnb right now
+[00:53:06] not a big return you know mar marginal. Door Dash
+[00:53:15] not a not a big return. Coinbase, I mean, no, not
+[00:53:15] at all. Robin Hood, okay, now it's doing better.
+[00:53:21] Rivian, you know, again, it's the problem. And so
+[00:53:21] SpaceX is to be determined. So how would you get
+[00:53:28] a big multiple on SpaceX? So the the issue here
+[00:53:28] is that these venture capital, private equity,
+[00:53:36] um, investors are getting in before the public
+[00:53:36] markets. And in my opinion, it's unfair for retail
+[00:53:43] traders because, you know, retail traders, we're
+[00:53:43] just getting the final scraps. In other words, the
+[00:53:48] day of the IPO will be a huge payout for venture
+[00:53:48] capital, private equity, for the people that were
+[00:53:55] in early, and we're just getting the scraps. We're
+[00:53:55] just getting the very end. So, in order for retail
+[00:54:01] traders to get a 10x return on SpaceX, it needs
+[00:54:01] to go to a nearly 20 trillion market cap. Come on,
+[00:54:07] that's outrageous. We've missed the boat.
+[00:54:07] We've completely missed it. All the big money,
+[00:54:13] all the wealthy people, they already got their
+[00:54:13] piece of it. And are we just exit liquidity so
+[00:54:18] they can sell? I hate to think that way, but
+[00:54:18] it feels that way. It feels like SpaceX ran out
+[00:54:24] of money in the private sector and had to IPO.
+[00:54:24] Maybe p maybe insiders were ready to cash out.
+[00:54:31] So higher ROI for active traders, at least in
+[00:54:31] my feeling, in my experience right now would be
+[00:54:38] um sympathy stocks, space theme stocks. So this is
+[00:54:38] a space theme stock. Just last week, I made about
+[00:54:46] $75,000 on this stock. It went up a,000% in three
+[00:54:46] days, 10x in three days. They put out a headline,
+[00:54:54] and this headline was juicy. They knew what they
+[00:54:54] they knew absolutely knew what they're doing.
+[00:54:58] SpaceX synergies, satellite and AI data centers.
+[00:54:58] They put everything into this headline. I mean,
+[00:55:03] they word smith this thing like crazy. The stock
+[00:55:03] went up a,000%. This is another one last week,
+[00:55:09] the week before. ASTC went up 3,500% in one
+[00:55:09] week. They put out a headline once again.
+[00:55:16] Boom. Infrastructure initiative to advance future
+[00:55:16] moonbased quantum computing manufacturing. What?
+[00:55:21] But this to me feels like where there might be a
+[00:55:21] lot of opportunity. So, I'm going to let SpaceX
+[00:55:28] be the whale. I'm going to let that be the big
+[00:55:28] boat that's rocking all the ships in the harbor,
+[00:55:33] and I'm just going to be the little fish riding
+[00:55:33] in its wake. And maybe I get a little piece of
+[00:55:37] SpaceX on the day of the IPO. Maybe I get a trade
+[00:55:37] on it. That I don't know. We ultimately, you know,
+[00:55:42] we'll see. I might, maybe I'll buy it and hold it
+[00:55:42] for a couple days. I don't know. But what is most
+[00:55:50] likely is that I make a lot more money on sympathy
+[00:55:50] stocks that are sort of riding the coattails of
+[00:55:56] SpaceX. And I think that's where there's a lot
+[00:55:56] more opportunity. None of this is without risk.
+[00:56:00] You guys know that I'm sharing everything with
+[00:56:00] you just for educational purposes. I'm a trader.
+[00:56:05] I'm actively trading every day. This is my weekly
+[00:56:05] watch list. This is the game plan. I'm going to be
+[00:56:09] watching SpaceX, but I'm really watching any stock
+[00:56:09] that comes out with a headline that's space theme.
+[00:56:15] This is the new headline right now and it's it's
+[00:56:15] something to pay attention to. So, for those of
+[00:56:20] you guys that enjoyed this deep dive into SpaceX,
+[00:56:20] I hope you number one hit the thumbs up. Number
+[00:56:25] two, subscribe to the channel and if you want
+[00:56:25] to watch me trade, including watch me trade the
+[00:56:29] SpaceX IPO this Friday, June 12th, you could check
+[00:56:29] out a two-eek trial at Warrior Trading. That'll
+[00:56:34] give you access to the software that you've been
+[00:56:34] watching me use here in the background. Um, we,
+[00:56:39] uh, this is software that I've built out over the
+[00:56:39] last, uh, well, since 2017, so nearly 10 years,
+[00:56:44] rounding up a little bit. Uh, it's software
+[00:56:44] for charting, for scanning, breaking news,
+[00:56:48] and we have chat rooms in here, and I have a live
+[00:56:48] audio video broadcast where you can hear my daily
+[00:56:53] market commentary as I share with you all of my
+[00:56:53] years of educated intuition about what's happening
+[00:56:59] in the market. And I show you my P&L in real time,
+[00:56:59] so you can see if I'm getting in or if I'm getting
+[00:57:03] out, and what I'm doing with my positions. So,
+[00:57:03] hope you guys check out the twoe trial. Hope
+[00:57:08] you enjoyed this episode and I'll see you for the
+[00:57:08] next upload real soon. If you haven't, by the way,
+[00:57:12] checked out my brand new small account challenge.
+[00:57:12] I'll put a link to that episode right up here. So,
+[00:57:18] check that out and I'll see you guys. I'll
+[00:57:18] be streaming tomorrow morning at 7:00 a.m.

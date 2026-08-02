@@ -1,0 +1,303 @@
+# Day Trading the Break of VWAP Setup
+# https://www.youtube.com/watch?v=P5Sn_mWJdy0
+# upload_date: 20260625
+# duration_sec: 852
+
+[00:00:01] What's up everyone? Welcome to day 10 of my small
+[00:00:01] account challenge of growing a $2,000 account
+[00:00:07] using Charles Schwab as my broker. As we look back
+[00:00:07] on the last 10 days, I've got now two weeks under
+[00:00:13] my belt. Well, I guess that's not exactly true.
+[00:00:13] I think there were a couple of no trade days in
+[00:00:18] there. So, this challenge has probably spread
+[00:00:18] over closer to three weeks. And so in any case,
+[00:00:25] over the last 3 weeks and over the course of the
+[00:00:25] last 10 trading days, I've managed to grow the
+[00:00:30] account from $2,000 up to over $11,000. Today's
+[00:00:30] another green day. And I want to pose a question
+[00:00:36] to you guys here uh that you can answer in the
+[00:00:36] comments. Would you like to see me keep growing
+[00:00:41] this account? And if yes, to how much money would
+[00:00:41] you like to see me grow it to? Or would you like
+[00:00:45] to see me reset the account back down to $2,000
+[00:00:45] and do another small account challenge? And if
+[00:00:51] yes to that, what broker would you like to see
+[00:00:51] me use? Now, you guys can vote in the comments.
+[00:00:56] Whoever has the most thumbs up on a broker, I'll,
+[00:00:56] you know, view that as the community vote of which
+[00:01:02] broker you're most most interested in seeing me
+[00:01:02] use. Using Charles Schwab um made sense for a lot
+[00:01:08] of reasons. When I began the challenge, some of
+[00:01:08] the other brokers that I do like a lot, including
+[00:01:13] Weeble, um they were restricting trading on a lot
+[00:01:13] of small cap stocks. And so I felt that if I used
+[00:01:18] Weeble, I wouldn't be able to take trades on some
+[00:01:18] of these stocks that were moving. Whereas Charles
+[00:01:23] Schwab, they were restricting the stocks, but
+[00:01:23] they allowed you to sign a waiver where you said,
+[00:01:29] "I know it's risky, but I want to trade them
+[00:01:29] anyways." And then they let you trade them.
+[00:01:32] I mean, for what it's worth, it's your money.
+[00:01:32] You should be able to do what you want. But,
+[00:01:36] you know, I digress. So, let me know what you guys
+[00:01:36] think. Um my one issue that I've had over the past
+[00:01:43] um few weeks using Think or Swim is that it's a
+[00:01:43] little bit of a hog of resources on my computer.
+[00:01:49] These last two weeks I've been on my traveling
+[00:01:49] trading station which means I'm trading on a
+[00:01:54] laptop uh right here using these sort of dinky
+[00:01:54] little um external monitors. Here's one of them
+[00:02:01] right there. They're super skinny. I like them a
+[00:02:01] lot. Um you know, but it's not an ideal system.
+[00:02:06] And regardless of the monitors, what's not
+[00:02:06] ideal is that a laptop running uh Think or Swim,
+[00:02:14] you know, that's one thing, but then I've got the
+[00:02:14] third party software I'm using to API to Think
+[00:02:20] or Swim. And I'm using that software because it
+[00:02:20] allows me to create customized hotkeys. You can't
+[00:02:27] do that with Thinkorswim, which is very annoying.
+[00:02:27] So because Thinker Swim hasn't added this one
+[00:02:34] very basic feature that nearly every other trading
+[00:02:34] platform includes which is the ability to create a
+[00:02:42] customized hotkey. I have to go spend extra money
+[00:02:42] each month using a third party platform to API.
+[00:02:49] So the third party platform executes the orders
+[00:02:49] and then I watch them and think or swim as they
+[00:02:53] get filled. But this means now I'm running two
+[00:02:53] pieces of software and spending extra money. Plus,
+[00:02:58] I'm still trading my regular account. So, now I've
+[00:02:58] got three trading platforms running at the same
+[00:03:02] time. Plus, I've got, you know, the the charts and
+[00:03:02] the scanners and screen recording and everything
+[00:03:07] else. And the result is that I'm having moments
+[00:03:07] where my computer just locks up. And this is a
+[00:03:12] nice computer. It's it's heavy as can be. It's
+[00:03:12] got a huge fan in it. It's got a nice graphics
+[00:03:18] card. It's got a ton of memory. So, you know, it's
+[00:03:18] just you can only expect so much. And so I think
+[00:03:25] there's an argument for using brokers that are a
+[00:03:25] little bit simpler and that you don't have to kind
+[00:03:30] of um you know do this like shoehorn situation
+[00:03:30] to make it work. On the other hand, um Thinker
+[00:03:38] Swim has been really good for a number of reasons.
+[00:03:38] Was able to get shares of the SpaceX IPO. They get
+[00:03:44] pretty good order execution, price improvement,
+[00:03:44] you know. So anyways, you guys let me know what
+[00:03:50] you think in terms of where to go from here. But
+[00:03:50] let's go ahead and jump into the um breakdown. So,
+[00:03:55] as always, the profits from these small account
+[00:03:55] challenges that gets donated to charity,
+[00:03:59] but because I keep resetting the account back down
+[00:03:59] to $2,000, it's limiting how much I can make. So,
+[00:04:04] I'm giving you guys the chance to help me increase
+[00:04:04] the amount I'm donating and every time you guys
+[00:04:09] hit the thumbs up, I'm adding an extra dollar
+[00:04:09] to charity. So, thank you guys who have hit the
+[00:04:13] thumbs up in the episodes in this series. You've
+[00:04:13] made a huge difference in raising money. Um, well,
+[00:04:18] it's it's I'm donating the money, but you've
+[00:04:18] made a huge difference here nonetheless. So,
+[00:04:22] this is the 50 state children's hospital goal.
+[00:04:22] A goal of donating to a children's hospital in
+[00:04:28] every state in the United States. And as of right
+[00:04:28] now, we're at 25 states that we've donated to. So,
+[00:04:33] we're about halfway through um or halfway towards
+[00:04:33] this big goal. Arkansas, Alaska, and Alabama were
+[00:04:39] the three that we got um just yesterday. I just
+[00:04:39] hadn't gotten I wasn't doing it alphabetically,
+[00:04:45] but I just thought I'd knock them out because
+[00:04:45] someone in the comments um mentioned Arkansas and
+[00:04:50] so I said, "All right, I'll do that." And then as
+[00:04:50] I was looking at my spreadsheet, I had Alaska and
+[00:04:55] uh Alabama there as well. All right, so today's
+[00:04:55] day 10 of the small account challenge. And
+[00:05:01] um as I sat down at about 7 a.m. this morning,
+[00:05:01] and even at 8:41, the GAP scanner was pretty dull.
+[00:05:08] Um, I was a little bit concerned about this
+[00:05:08] on the one hand, but on the other hand,
+[00:05:14] when you don't have much moving, it can open um
+[00:05:14] sort of open the door that anything that moves up
+[00:05:21] even a little bit becomes the most obvious stock
+[00:05:21] very quickly. And so that ended up happening to
+[00:05:27] KSU or sorry, KUS, custom entertainment with
+[00:05:27] a K. This is very important. It's not custom,
+[00:05:33] it's custom entertainment. That means they're
+[00:05:33] edgy, they're cool, and more profitable. No.
+[00:05:39] No. Well, certainly not more profitable. Don't
+[00:05:39] be ridiculous. Um, this is a company that has a
+[00:05:44] history of selling off. And to be honest,
+[00:05:44] I didn't think it was going to do much,
+[00:05:50] but I didn't think NXTR or NXTs would would do
+[00:05:50] much on Monday or Tuesday when that one popped up.
+[00:05:56] um you know, but because nothing else was moving
+[00:05:56] up, it had its day in the spotlight and ended up
+[00:06:02] going from about $4 a share to $24, which was
+[00:06:02] incredible. So, KUS Custom, this one popped up
+[00:06:10] this morning and because nothing else was really
+[00:06:10] looking good, um it it ended up doing quite well.
+[00:06:16] I was surprised. I didn't take any trades on it.
+[00:06:16] I I just sat on the sidelines kind of rolling my
+[00:06:22] eyes and feeling a little bit annoyed. Um, you
+[00:06:22] know, I I the issue was down here at $2, it was
+[00:06:29] too cheap. And then by the time it was up here at
+[00:06:29] three, I saw with this topping tail candle, I felt
+[00:06:34] that it was too extended. It drops down. First
+[00:06:34] candle makes a new high, it goes back to 340,
+[00:06:39] but I just said, "Nah, I just can't." And then
+[00:06:39] look at this high volume rejection right here. So,
+[00:06:46] this is a spot where some, you know, obviously
+[00:06:46] some traders fell into that rejection. Would
+[00:06:51] you have gotten caught in that? But let's
+[00:06:51] back that up for a second. Right here,
+[00:06:56] we had already had a first pullback and a second
+[00:06:56] pullback. And the second pullback didn't go very
+[00:07:01] high relative to the first one. So that tells
+[00:07:01] us the stock had kind of a big boost here,
+[00:07:06] it pulls back and then not as many people jumped
+[00:07:06] in for the continuation higher. It then pulls back
+[00:07:12] and during this pullback because it rejected from
+[00:07:12] 340 all the way down to 280, which is fairly big
+[00:07:17] on a low price stock. um the volume was higher on
+[00:07:17] the sell side there and then the MACD, the moving
+[00:07:23] average convergence divergence indicator went
+[00:07:23] red. So I sort of have a rule that I'm pretty
+[00:07:28] good about following that I won't trade once
+[00:07:28] the MACD goes red. And so once the MACD is red,
+[00:07:34] I'm not interested. So I would not have gotten
+[00:07:34] into that trade because the MACD was red. And
+[00:07:39] the MACD didn't flip to positive until right here.
+[00:07:39] But by that time, we were below the volume weight
+[00:07:44] average price and it was not really a good setup.
+[00:07:44] So, there were no trades on that one for me. Now,
+[00:07:49] we did have Azi on the scans earlier. This one
+[00:07:49] had continued to move from pre-market uh or sorry,
+[00:07:55] after hours and continued a little bit higher into
+[00:07:55] pre-market, but there was no trades on that for
+[00:08:00] me. IQST was also on the scans. This one I looked
+[00:08:00] at as being too cheap, similar to custom, I didn't
+[00:08:07] take any trades on it. Um, and then we had Mimi
+[00:08:07] that hit the scanners. Mimi ended up coming out
+[00:08:13] with news. Uh, so the news comes out and the stock
+[00:08:13] pops from about 280 up to a high of $5 a share. In
+[00:08:20] that first spike right there, I put out my order
+[00:08:20] to buy and I did not get filled. I was a little
+[00:08:28] annoyed um because man, that thing ripped and it
+[00:08:28] went, as you could see here, all the way up to
+[00:08:34] the high of five and that could have been a really
+[00:08:34] nice trade, but my order got skipped, so I didn't
+[00:08:40] get filled in in the small account. Uh so that was
+[00:08:40] disappointing. Now I got trades on it in my big
+[00:08:45] account but that I wanted to trade in the small
+[00:08:45] account and I didn't get it. But then it has high
+[00:08:50] volume selling. The MACD goes negative as you can
+[00:08:50] see here and it starts pulling back. But the MACD
+[00:08:56] is negative from about right here. Oops, sorry. Uh
+[00:08:56] put that on the other uh time frame. So the MACD
+[00:09:03] was negative from about right here to about right
+[00:09:03] here. And so as it curled up right through here,
+[00:09:11] that's where I started to get interested. So let's
+[00:09:11] look at the um this curling trade. So Mimi hit the
+[00:09:18] running up scanner at about 826 as it started to
+[00:09:18] curl back up. This scanner is specifically looking
+[00:09:24] for stocks that are running up but are not at the
+[00:09:24] high of day. And so as it was starting to squeeze
+[00:09:30] up right here, I took um a total of three trades
+[00:09:30] on it. The first trade was right here for the
+[00:09:37] break of the volume weight average price. This is
+[00:09:37] a 10-second chart, but the MACD at that point was
+[00:09:42] green, positive. So, that was the first trade
+[00:09:42] right there, and that was good for about $300.
+[00:09:47] Then, I took a second trade right here as it came
+[00:09:47] over VWAP a second time. Sort of an inverted head
+[00:09:52] and shoulders pattern. And I took the third trade
+[00:09:52] right here, looking for the squeeze back through
+[00:09:57] five. Unfortunately, we didn't get the break of
+[00:09:57] five that I was hoping for. Um, but nonetheless,
+[00:10:04] those were the three trades I took. So, two
+[00:10:04] were a break a VWAP setup and one was a high
+[00:10:09] day breakout pattern. Then we had FCUV on the
+[00:10:09] running up scanner a few minutes later. And FCUV
+[00:10:16] had had this big move earlier and then started to
+[00:10:16] curl up right here. And so, as it did this little
+[00:10:22] pullback, I jumped in right there for the trade
+[00:10:22] through VWAP. This one ended up piercing VWAP and
+[00:10:28] then coming back down below it. I wasn't able to
+[00:10:28] turn that into a bigger trade, but it was green
+[00:10:33] nonetheless. So, over the course of four trades
+[00:10:33] today, I have $341 of profit on FCUV, $97849
+[00:10:42] of profit on Mimi for a total of a little over
+[00:10:42] $1,300, which means the account now has $11,47049.
+[00:10:51] I'm up $473% over the last 10 days. 20
+[00:10:51] trades in total, 17 winners, three losers,
+[00:10:58] 85% accuracy. I would say the last two weeks, the
+[00:10:58] market or the last three weeks, the last month,
+[00:11:03] the market's been pretty strong. We had the SpaceX
+[00:11:03] IPO that gave us a nice boost. We've had a number
+[00:11:08] of small cap stocks making big moves. So, as
+[00:11:08] it's turned out, it's been a great time to do
+[00:11:13] a small account challenge because the underlying
+[00:11:13] moves have been so big. I'm limited in how many
+[00:11:18] shares I can buy, but when you the move is as big
+[00:11:18] as it as they've been, I've been able to grow the
+[00:11:23] account very quickly. small account challenges.
+[00:11:23] When the market is colder, the returns are slower.
+[00:11:28] And you guys have seen that in some of the other
+[00:11:28] challenges I've done. And so, if I do end up
+[00:11:32] resetting my account back down to $2,000, it's
+[00:11:32] possible the next two or three weeks won't be as
+[00:11:36] hot as the previous. And as a result, the growth
+[00:11:36] will be a little bit slower. Now, even though I'm
+[00:11:43] not restricted by the pattern day trader rule,
+[00:11:43] I could take a 100 trades a day if I wanted to,
+[00:11:48] I've been focusing for the most part, except for
+[00:11:48] my one red day, on quality over quantity. And
+[00:11:54] so I've only taken an average of two trades per
+[00:11:54] day. Uh today was more. I took four, but it was
+[00:12:01] not my most profitable day. Trading more doesn't
+[00:12:01] necessarily mean I'll make more, but you know,
+[00:12:07] it it just I could trade more and I did see some
+[00:12:07] decent setups today, but nothing really opened up
+[00:12:12] in a big way, which is kind of disappointing.
+[00:12:12] So, in any case, this is where I sit now as of
+[00:12:16] the end of day 10. I'm looking forward to seeing
+[00:12:16] your comments down below about what you'd like to
+[00:12:21] see me do with this account. Continuing growing,
+[00:12:21] continue growing it, if so, to what amount or
+[00:12:26] resetting? And if so, using which broker, which
+[00:12:26] platform. So, share your comments down below. And
+[00:12:32] uh if you haven't already joined our twoe trial,
+[00:12:32] you're welcome to join. There's uh a link pinned
+[00:12:37] to the top of the comments and in the top of
+[00:12:37] the description. The twoe trial is $20. And
+[00:12:42] during that uh twoe uh trial you'll have access to
+[00:12:42] this software right here which is web based so it
+[00:12:48] works on um any platform and you can uh use it for
+[00:12:48] charting scanning. You can log into the chat room
+[00:12:53] so you can listen over my shoulder as I'm trading.
+[00:12:53] So let's see right now you go into the small cap
+[00:12:57] room and you can see traders that are in here. So
+[00:12:57] let's see Michael he's posting a screenshot from
+[00:13:04] today which is pretty nice looking. He's got his
+[00:13:04] $100,000 badge. So some nice trades there for him.
+[00:13:11] And when the stream is running, uh, this right
+[00:13:11] here will be lit up and it'll say stream on.
+[00:13:16] And right here it'll say stream on, uh, right
+[00:13:16] there. So, no streams available because I'm not
+[00:13:22] streaming right now. I'm just recording this for,
+[00:13:22] uh, for YouTube. But, oh, over um down here, the
+[00:13:27] newsroom is streaming. So, if you click on that,
+[00:13:27] then you could open that stream, you click play,
+[00:13:32] and then you could start listening as it comes
+[00:13:32] through. So, that is a uh is a news feed that
+[00:13:38] gives you squawk. So they read the news headlines
+[00:13:38] out loud to you. All right. So anyways, uh oh,
+[00:13:43] and by the way, during your uh two-eek trial, you
+[00:13:43] guys also get access to the first six classes of
+[00:13:50] Day Trading the Basics, which is part of my um
+[00:13:50] Warrior Pro curriculum. So, I hope you guys check
+[00:13:56] out the trial and I will see you streaming bright
+[00:13:56] and early tomorrow morning at 7 a.m. And I'll give
+[00:14:00] you a reminder as always that trading is risky.
+[00:14:00] My results aren't typical. So, please manage
+[00:14:05] your risk, take it slow, and always practice in a
+[00:14:05] simulator before putting real money on the line.

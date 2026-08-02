@@ -1,0 +1,484 @@
+# The REAL Reason Pre-Market Trading Is Better…
+# https://www.youtube.com/watch?v=BZwJFPk3cBM
+# upload_date: 20260703
+# duration_sec: 1070
+
+[00:00:00] What up, everyone? All right, so in
+[00:00:01] today's episode, I'm going to teach the
+[00:00:03] importance of pre-market and after-hours
+[00:00:06] trading. I'm seeing a lot of traders
+[00:00:09] that are only trading during the
+[00:00:10] traditional market session, which begins
+[00:00:13] at 9:30 a.m. and closes at 4:00 p.m. And
+[00:00:16] as a result, you're missing some of
+[00:00:17] these huge moves we're seeing either
+[00:00:19] pre-market or after hours. Now, there's
+[00:00:22] a historical purpose behind why we see a
+[00:00:25] lot of companies put out these headlines
+[00:00:27] during the pre-market or after-hours
+[00:00:29] session. And there's also some history
+[00:00:31] around my own trading and reasons why I
+[00:00:33] didn't trade pre-market up until 2020.
+[00:00:38] Something changed in 2020 and after
+[00:00:41] that, my entire strategy shifted from
+[00:00:44] beginning at 9:30 to beginning at 7:00
+[00:00:47] a.m., which is when I currently sit down
+[00:00:49] and start trading. Now, to complicate
+[00:00:51] [snorts]
+[00:00:51] things, a lot of brokers don't make it
+[00:00:54] easy to trade pre-market. By default,
+[00:00:57] only set you up to trade during regular
+[00:00:59] hours. So, when you try to execute a
+[00:01:01] trade in the pre-market or after-hours
+[00:01:02] session, it gets rejected, doesn't give
+[00:01:04] you any messages to why it's rejected,
+[00:01:06] and so you're just sitting there
+[00:01:07] confused and unable to place a trade
+[00:01:09] thinking that, you know, you're not
+[00:01:11] allowed to. Well, you are allowed to.
+[00:01:13] You just have to learn how to adjust
+[00:01:15] your settings in your account to enable
+[00:01:18] you to trade pre-market. So, we've got a
+[00:01:20] lot to cover today. We're going to jump
+[00:01:22] on the whiteboard and get right into it.
+[00:01:24] Companies are more likely to put out
+[00:01:26] news either pre-market or after-hours.
+[00:01:30] Why is that? So, let's sort of map out
+[00:01:33] uh the trading hours. So, 4:00 a.m. is
+[00:01:35] the beginning of pre-market, which goes
+[00:01:37] to um 9:30 a.m. And then this is regular
+[00:01:42] hours here until 4:00 p.m.
+[00:01:45] And then we've got after-hours till 8:00
+[00:01:46] p.m. And then overnight is the 24-hour
+[00:01:50] market, which has fairly light volume.
+[00:01:52] So, between the hours of 9:30 a.m. and
+[00:01:56] 4:00 p.m., we have what are known as
+[00:01:59] halt levels. And these are limit up
+[00:02:02] limit down halts. They're volatility
+[00:02:04] trading pauses. And so, if a stock goes
+[00:02:08] up, and this is generally a tier one S&P
+[00:02:12] 500 stock more than 5%
+[00:02:15] in less than 5 minutes, the stock will
+[00:02:17] get paused on a trading halt for a
+[00:02:19] minimum of 5 minutes. And it gives
+[00:02:21] traders a chance to kind of figure out
+[00:02:23] what's going on with this stock and, you
+[00:02:24] know, sort of get oriented. Now, uh
+[00:02:27] tier two securities, the threshold's a
+[00:02:30] little higher. It's at 10%, and lower
+[00:02:32] price securities can be um as much as
+[00:02:34] 20%, but nonetheless, because of this um
+[00:02:38] this mechanism in the market to control
+[00:02:41] volatility, and this is really specific
+[00:02:43] to regular trading hours, and it's
+[00:02:45] designed to prevent flash crashes. It's
+[00:02:49] not about preventing a stock from going
+[00:02:52] up 300%. It's about preventing a stock
+[00:02:54] from dropping 70%. So, we have these
+[00:02:58] this mechanism for halts. But here's the
+[00:03:00] problem. You have companies, um you
+[00:03:02] know, big S&P 500 companies, Nasdaq
+[00:03:04] companies. You've got Just think about
+[00:03:06] all these tech companies, Apple,
+[00:03:07] Netflix, you know, Google, etc. They put
+[00:03:10] out news like quarterly earnings, and
+[00:03:12] suddenly the stock can have a big
+[00:03:15] reaction. Now, they don't want trading
+[00:03:17] to be paused in the middle of that big
+[00:03:19] reaction because it puts a damper on the
+[00:03:21] momentum. So, what do they do? They
+[00:03:23] release the news during the time of day
+[00:03:26] when there are no halt levels. So, these
+[00:03:28] halt levels are between 9:30 a.m. and
+[00:03:30] 4:00 p.m. So, a lot of those big
+[00:03:32] California tech companies, when do they
+[00:03:34] release news? It's right after the
+[00:03:36] closing bell. So, after 4:00 p.m., which
+[00:03:38] means the stock in this window, all of a
+[00:03:40] sudden has news, and it could squeeze up
+[00:03:42] 15 or 20% in 10 minutes, and it's not
+[00:03:45] going to get halted. So, you get the big
+[00:03:47] volatility, and then going into the next
+[00:03:50] trading day, it's opening higher, and
+[00:03:52] then just continues to trend higher, but
+[00:03:54] doesn't have that knee-jerk reaction.
+[00:03:57] Now, the a lot of these big tech
+[00:03:58] companies release their news in
+[00:04:00] after-hours trading, but a lot of
+[00:04:02] small-cap companies actually release
+[00:04:03] their news during the pre-market
+[00:04:05] session, where there's also no halt
+[00:04:07] levels. So, between 4:00 a.m. and 9:30
+[00:04:10] a.m., this is when we see a lot of
+[00:04:11] small-cap companies putting out breaking
+[00:04:13] news. And so, a stock price at $2 a
+[00:04:16] share puts out breaking news, and
+[00:04:17] suddenly squeezes up to 250 to 3, 350 to
+[00:04:20] 4, 450 to 5, and all of a sudden it's up
+[00:04:22] 3, 4, 500%. If that same headline had
+[00:04:25] come out at 9:30 or 10:00 a.m., then you
+[00:04:29] wouldn't have gotten that type of price
+[00:04:31] action because of the halt levels.
+[00:04:33] Okay. So, now if we look at my trading
+[00:04:35] here, and I'm going to jump onto the
+[00:04:37] screen share, if we looked at my
+[00:04:39] metrics, we just take a look at my
+[00:04:40] metrics 7 years ago, 10 years ago, this
+[00:04:43] is from 2017 right here. And I was up
+[00:04:46] $89,000 in this month, and let's look at
+[00:04:49] the time of day that I was trading.
+[00:04:51] I was trading beginning at It says 9:00
+[00:04:53] a.m., but if we broke this down to a
+[00:04:55] 30-minute
+[00:04:57] segment,
+[00:04:58] I began trading at 9:30 in the morning,
+[00:05:00] and I trade from 9:30 to 10:00. Isn't
+[00:05:03] that interesting? So, why was I trading
+[00:05:04] from 9:30 to 10:00? Because prior to
+[00:05:08] commission-free trading, prior to the
+[00:05:10] pandemic, we didn't have enough volume
+[00:05:14] for the market to really react that much
+[00:05:16] to small-cap stocks with news between
+[00:05:19] 4:00 a.m. and 9:30. And so, essentially,
+[00:05:22] what would happen is at the 9:30 opening
+[00:05:25] bell, that's when people would begin
+[00:05:28] trading the stocks that had these
+[00:05:30] headlines from pre-market. So, we would
+[00:05:33] have basically we would sit down, and
+[00:05:36] at,
+[00:05:37] you know, 8:45,
+[00:05:39] so, you know, or even just 9:15, 9:15
+[00:05:42] a.m., we'd have a list of, you you
+[00:05:45] number stock 1, 2, 3, four, and each of
+[00:05:48] these stocks had news, and so we would
+[00:05:51] check the headline, and they might be up
+[00:05:53] like, you know, 15% or, you know, 18%,
+[00:05:58] 20
+[00:05:59] you know,
+[00:06:00] well, this I
+[00:06:01] 20 22%, let's just say, 27%, I guess
+[00:06:04] that's what that looks like, um and 31%.
+[00:06:07] So, they'd be up a little bit, but not a
+[00:06:09] lot, and the volume would be very light.
+[00:06:12] But, then as soon as the opening bell
+[00:06:13] would ring, traders would be jumping on
+[00:06:16] the one that was the most obvious,
+[00:06:17] whichever one this would be. And so, I
+[00:06:19] would start trading right at 9:30. And
+[00:06:21] then, as you may recall, in the fall of
+[00:06:24] 2019, all brokers
+[00:06:27] uh switched to commission-free trading,
+[00:06:29] and suddenly the volume in the market
+[00:06:31] increased. And then during the pandemic,
+[00:06:33] during the lockdown and everything else,
+[00:06:35] people were on furlough and, you know,
+[00:06:37] work from home, whatever, um
+[00:06:39] unemployment, and people started
+[00:06:40] trading. They got these stimulus checks,
+[00:06:42] and so now people are trading in the
+[00:06:44] market, and this is incredible. All of a
+[00:06:48] sudden, we had this day where we were
+[00:06:50] looking at a stock that was on the list,
+[00:06:53] just like what I just showed you, uh
+[00:06:55] but it started moving before the opening
+[00:06:57] bell. And I was like, "Oh my gosh, it's
+[00:06:59] starting to break this pivot. The the
+[00:07:02] price that I wanted to get in at is
+[00:07:03] about to break." And so, I just pressed
+[00:07:05] the buy button. And it was like 9:29,
+[00:07:08] and my order filled. And I was like, "Oh
+[00:07:09] my gosh, I'm in pre-market. The bell
+[00:07:12] hasn't even rung yet." And the stock
+[00:07:14] ripped. The next day, same exact thing
+[00:07:16] happened. The stock that was the most
+[00:07:17] obvious started to pull away just before
+[00:07:19] the opening bell, and within a week, all
+[00:07:22] of a sudden, traders were buying the
+[00:07:25] second these stocks had breaking news.
+[00:07:27] The second the news came out, all of a
+[00:07:29] sudden we had a shift in the market, and
+[00:07:30] now it's been, you know, 7 years, 6
+[00:07:32] years since that occurred, and at this
+[00:07:35] point, my trading has changed
+[00:07:37] dramatically. In not in terms of
+[00:07:40] So, this is like 7 years ago. Not in
+[00:07:42] terms of the price of the stocks I
+[00:07:43] trade, but just in terms of the time of
+[00:07:46] day. So if we just look at um, the last
+[00:07:49] 30 days just for instance.
+[00:07:51] So last 30 days, the price of the stocks
+[00:07:53] mostly the same. This was SpaceX, so
+[00:07:55] that's a little bit of an exception. Um,
+[00:07:57] but we look at the time right here and
+[00:07:59] all of a sudden, you know, we we see a
+[00:08:01] bit of a different picture. By 30-minute
+[00:08:03] increment, I'm actually doing really
+[00:08:05] well before the 9:30 opening bell. I'm
+[00:08:09] adding a little at 9:30 and lost a
+[00:08:11] little there. That's probably just one
+[00:08:12] bad trade. Um, but my trading has
+[00:08:14] shifted to be earlier in the day. So now
+[00:08:17] I want to walk you through how to
+[00:08:19] actually trade during this pre-market
+[00:08:22] session because a lot of platforms,
+[00:08:24] including Schwab right here, don't make
+[00:08:26] it easy. So right now at this moment,
+[00:08:28] it's pre-market. So if I click buy
+[00:08:30] market,
+[00:08:31] that order's just going to sit there.
+[00:08:32] It's a live order and it's not
+[00:08:34] executing. It's not getting filled. It's
+[00:08:36] just sitting there. I can press it 100
+[00:08:37] times and nothing will happen. I just
+[00:08:40] have to sit here, you know, like a like
+[00:08:42] an idiot waiting and then all of a
+[00:08:44] sudden at the 9:30 opening bell, the
+[00:08:46] orders will go through.
+[00:08:48] So there's two issues here. Number one,
+[00:08:50] you can't use market orders pre-market.
+[00:08:52] So this is a market order and you cannot
+[00:08:55] use that order type during pre-market
+[00:08:56] trading.
+[00:08:58] The second problem is that even if you
+[00:08:59] click buy ask, which is the limit order,
+[00:09:03] which is an order that does work
+[00:09:04] pre-market, they still won't place it
+[00:09:06] because you have your time in force set
+[00:09:09] to day. You need to change it to
+[00:09:12] extended hours. So all of a sudden I'm
+[00:09:15] going to cancel this. I'm going to click
+[00:09:16] it again. We'll just do for 10 shares,
+[00:09:18] whatever. And we're going to click buy
+[00:09:20] ask. Now I'm in. Awesome. But I can't
+[00:09:24] press sell market. I have to press sell
+[00:09:27] bid, right? Because market orders, buy
+[00:09:29] market, doesn't work for this time of
+[00:09:32] day. So thinkorswim is the least
+[00:09:35] intuitive platform that I've ever seen,
+[00:09:38] to be honest. And it's they created a
+[00:09:41] little bit of a monster here. Uh there's
+[00:09:42] people that love it, and that's awesome,
+[00:09:45] but once you learn how to use
+[00:09:46] thinkorswim, that those skills don't
+[00:09:48] translate to any other platform. It's so
+[00:09:50] unique to thinkorswim. But then you have
+[00:09:53] platforms like WeBull,
+[00:09:55] and WeBull's fairly straightforward.
+[00:09:56] This is a little bit more typical. So,
+[00:09:58] this is the WeBull platform. So, right
+[00:09:59] here we've also got Ford, right? So, if
+[00:10:01] I want to trade this, I got to go change
+[00:10:04] my trading hours
+[00:10:05] from regular to include extended hours.
+[00:10:08] Because if I send this order right here,
+[00:10:10] well, we'll do it for like one share,
+[00:10:12] whatever. So, if I send this order right
+[00:10:13] here, I got to enter my um
+[00:10:16] code, and there we go. All right. So,
+[00:10:17] this is
+[00:10:18] uh oh, so we we were we had it just for
+[00:10:20] the sake of argument. I put it like
+[00:10:22] this, and that order's just going to sit
+[00:10:23] there. It's just going to sit there and
+[00:10:25] sit there and sit there, and nothing's
+[00:10:26] going to happen. So, I have to change
+[00:10:28] that from regular hours to include
+[00:10:31] extended hours, and then my order can go
+[00:10:34] through. Now, the nice thing with uh
+[00:10:37] using WeBull, and this is the same with
+[00:10:40] um Lightspeed. So, Lightspeed's the
+[00:10:42] software that I use for trading right
+[00:10:43] here. And with this software,
+[00:10:47] it's kind of interesting because their
+[00:10:48] day order works during pre-market. So,
+[00:10:51] if I put in Ford, and I want to do, you
+[00:10:53] know, one share, it's a day order, and
+[00:10:55] it works pre-market, which is why back
+[00:10:58] in 2019
+[00:11:00] or 2020, when I clicked the buy button,
+[00:11:02] it went through. Because their time in
+[00:11:04] force for day isn't it is the default.
+[00:11:07] Market day would be the one that doesn't
+[00:11:09] work until the bell rings. But that's
+[00:11:12] not the default. So, so Lightspeed makes
+[00:11:15] it very easy because the default works
+[00:11:18] uh starting at 4:00 a.m. and all the way
+[00:11:20] to 8:00 p.m. Now, on WeBull, if you went
+[00:11:23] into your hot keys, you want to set up
+[00:11:24] your hot keys for trading, which you
+[00:11:26] certainly should if you're actively
+[00:11:27] trading, um then what you can do is you
+[00:11:30] can actually set your hot key, We'll
+[00:11:32] just do um
+[00:11:34] we'll do this one for buying 2,000
+[00:11:35] shares. So, as you set it, hot key shift
+[00:11:39] two, you know, the number of shares you
+[00:11:41] want to buy, 2,200, whatever it is, ask
+[00:11:44] price, a 10 cent offset.
+[00:11:47] So, this is a limit order. It's not a
+[00:11:49] market order cuz they don't work
+[00:11:50] pre-market. It's a limit order. So,
+[00:11:53] limit to buy, and I use an offset 10
+[00:11:55] cents above the current price because
+[00:11:57] when the market's moving quickly, it'll
+[00:11:59] give me a little bit of room to get
+[00:12:00] filled. The difference like when you
+[00:12:02] send your order, it sometimes takes a
+[00:12:05] second for the order to fill. And if the
+[00:12:07] price of the stock changes during that
+[00:12:09] second, then you won't get filled on
+[00:12:11] your order. So, giving yourself a 10
+[00:12:13] cent offset means you've got an extra 10
+[00:12:15] cents of wiggle room for your order to
+[00:12:17] get filled. Then your time in force, you
+[00:12:19] change it to day instead of good till
+[00:12:22] canceled, that's important. And then you
+[00:12:24] change it to extended, yes. And now all
+[00:12:26] of a sudden you've got a hot a hot key,
+[00:12:28] and all you have to do is press shift
+[00:12:29] one, and boom, you're sending an order.
+[00:12:31] It's easy. That simplicity is what
+[00:12:34] traders look for. And over on
+[00:12:37] thinkorswim here,
+[00:12:39] you don't have it. The only thing you
+[00:12:41] could do with your hot keys is have a
+[00:12:42] hot key to buy ask or to sell bid. And
+[00:12:46] yes, you have to manually change this
+[00:12:48] from day to extended each day. So, every
+[00:12:51] time you're changing time of day, you've
+[00:12:53] got to adjust this. So, change it to
+[00:12:55] extended, and you can't create the
+[00:12:57] offset. So, if you had a stock that was
+[00:12:59] moving quickly, and you clicked buy ask,
+[00:13:02] but the price kept going higher,
+[00:13:04] every single one of your orders might
+[00:13:06] not fill.
+[00:13:07] In which case, you just had the right
+[00:13:09] idea on a stock, it made the move, and
+[00:13:12] you didn't get filled because the
+[00:13:13] software
+[00:13:14] is holding you back.
+[00:13:16] This software isn't empowering you to
+[00:13:18] get in and get out quickly. The
+[00:13:20] software, to be honest, is only
+[00:13:22] optimized for regular trading hours,
+[00:13:24] which, yes, that worked, you know, 8
+[00:13:27] years ago, but now we're at a point
+[00:13:29] where so much trading is occurring
+[00:13:30] pre-market for logical reasons that by
+[00:13:33] the time the bell rings at this point,
+[00:13:35] the big move has already happened. The
+[00:13:38] breaking news comes out here. Now, if
+[00:13:40] companies decide for whatever reason
+[00:13:42] that they're only going to put out news
+[00:13:44] at 11:00 a.m.,
+[00:13:47] then you better believe I'm going to
+[00:13:48] start trading at 10:45. That'll be the
+[00:13:50] window I start trading.
+[00:13:52] But that's not going to happen. At least
+[00:13:53] I don't see any reason why it would
+[00:13:55] happen because of these halt codes right
+[00:13:57] here. So, they're going to continue to
+[00:13:58] put out news in the pre-market
+[00:14:00] after-hours session. And yes, sometimes
+[00:14:02] we will have stocks that make a nice
+[00:14:04] move pre-market, then they pull back a
+[00:14:05] little bit, and then they rally up later
+[00:14:07] in the day and squeeze into the close,
+[00:14:09] and that's all fine. There's, you know,
+[00:14:11] you could trade that if you'd like, but
+[00:14:13] typically right now what we're seeing
+[00:14:14] are that the big moves are occurring
+[00:14:16] when the companies are putting out those
+[00:14:18] breaking news headlines, and that's in
+[00:14:20] the pre-market session and the
+[00:14:21] after-hours session. So, if you're not
+[00:14:23] trading in those sessions, either
+[00:14:25] because you didn't know how to, which
+[00:14:27] you can't say after listening to to
+[00:14:30] this,
+[00:14:31] uh or because the software you're using
+[00:14:33] doesn't empower you to be able to do it,
+[00:14:36] then that's something you got to go back
+[00:14:38] and and really think about. Now, so what
+[00:14:40] I've been doing for um my small account
+[00:14:42] challenge with
+[00:14:45] uh with Charles Schwab is I don't
+[00:14:47] actually execute my orders using the
+[00:14:49] thinkorswim platform. I use thinkorswim
+[00:14:52] just for monitoring my trades, so I can
+[00:14:55] monitor the progress that I've made, but
+[00:14:57] I'm not actually executing my orders
+[00:14:59] there. So, what am I doing to execute
+[00:15:01] the orders? Well, we go back down here.
+[00:15:04] Where was it?
+[00:15:05] Um
+[00:15:06] So,
+[00:15:07] let's see. Let me scroll back up. I had
+[00:15:09] a couple different episodes that I
+[00:15:10] taught you guys on this. So, I'm using a
+[00:15:12] third-party platform called DAS Trader.
+[00:15:15] Where was that? Uh here it is. So, this
+[00:15:18] is what DAS Trader looks like.
+[00:15:20] DAS Trader looks actually a lot more
+[00:15:23] similar to Lightspeed. It looks fairly
+[00:15:27] similar
+[00:15:28] to Webull. A little bit different, but
+[00:15:29] pretty similar. And this allows you to
+[00:15:33] actually set up your hot keys, to set up
+[00:15:35] limit orders, to set up your offsets.
+[00:15:38] And so you can play you can create the
+[00:15:40] type the exact type of orders you need
+[00:15:42] for trading pre-market. So if you wanted
+[00:15:45] to use DAS Trader with
+[00:15:48] uh Charles Schwab, the only downside is
+[00:15:51] it costs an extra $150 a month because
+[00:15:53] you have to go over to dastrader.com
+[00:15:56] and sign up uh directly with them. Now,
+[00:15:58] this episode, this um class right here,
+[00:16:02] this is not an endorsement, um you know,
+[00:16:04] I'm not an affiliate of any broker or
+[00:16:07] any um of these trading platforms. But
+[00:16:09] this is the software that um that a lot
+[00:16:11] active traders are using if you're kind
+[00:16:14] of hung up on sticking with Charles
+[00:16:16] Schwab. So you come on over here and
+[00:16:18] then you choose which subscription level
+[00:16:21] you want. $200 a month is their most
+[00:16:24] expensive. They've got $175, $150, $120,
+[00:16:26] $100. I'm using the one that's $150.
+[00:16:30] And so you pay for it, it's a monthly
+[00:16:32] subscription. And you know what? At the
+[00:16:35] end of the day, you still benefit from
+[00:16:37] commission-free trading with Schwab, but
+[00:16:39] now you've unlocked the ability to
+[00:16:42] actually consistently and aggressively
+[00:16:44] trade during the pre-market session,
+[00:16:47] which is, you know, kind of what you
+[00:16:48] want to be able to do, right? So now you
+[00:16:50] can get in and get out quickly. So my
+[00:16:52] trades here from today, this is day 15
+[00:16:55] of my small account challenge with
+[00:16:56] Schwab, and I'm up $2,943.22
+[00:17:02] as you can see right there. So a solid
+[00:17:04] green day, and that brings my total
+[00:17:06] equity in this account to over $20,000
+[00:17:09] from a $2,000 starting balance. I
+[00:17:11] wouldn't have been able to trade like
+[00:17:12] this if I wasn't number one trading
+[00:17:13] pre-market, and I wouldn't have been
+[00:17:14] able to trade if I wasn't using the
+[00:17:17] software here on the front end to
+[00:17:18] execute those trades that allows me to
+[00:17:21] trade using
+[00:17:22] more sophisticated hot keys, limit
+[00:17:25] orders with offsets. So, I hope this has
+[00:17:28] been an eye-opening episode for you guys
+[00:17:31] about pre-market trading and I'll put
+[00:17:34] links to a couple other episodes I think
+[00:17:35] you might enjoy right here and right
+[00:17:37] here. And I'll remind you guys as always
+[00:17:39] that trading is risky and my results
+[00:17:41] aren't typical. So, please take it slow
+[00:17:43] and always practice in the simulator
+[00:17:45] before putting real money on the line.

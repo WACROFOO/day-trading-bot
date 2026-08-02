@@ -1,0 +1,384 @@
+# Biggest Loss of The Month...
+# https://www.youtube.com/watch?v=RZbM0qXOFbc
+# upload_date: 20260713
+# duration_sec: 828
+
+[00:00:00] What's up everyone? All right, in
+[00:00:02] today's episode, I'm going to break down
+[00:00:03] my trades from the morning. Today was
+[00:00:05] awful. I mean, it was simply awful. I
+[00:00:09] fumbled. I missed a huge move, gave into
+[00:00:12] FOMO, traded the backside of the move,
+[00:00:14] went deep into the red, thought there
+[00:00:16] was not a chance that I would recover,
+[00:00:18] and then miraculously, we had a stock
+[00:00:20] that actually started moving pretty
+[00:00:21] nicely later in the trading session,
+[00:00:23] beginning at about 10 of 9. And on that
+[00:00:26] stock, I was able to not only chip away
+[00:00:28] at the loss, but actually go all the way
+[00:00:31] from red to green. So now I'm finishing
+[00:00:34] the day in the green. And I'm beside
+[00:00:36] myself. I'm grateful that I'm green, but
+[00:00:38] also disappointed that I went as deep
+[00:00:41] red as I had because if I had done
+[00:00:43] things just a little bit differently,
+[00:00:44] today would have been a $50,000 green
+[00:00:48] day instead of what it is, which is a
+[00:00:51] $8,400 green day. Hey, green is good. I
+[00:00:54] shouldn't complain, but these types of
+[00:00:56] unforced errors at the end of the month,
+[00:00:58] at the end of the year, they add up. So,
+[00:01:01] this is where being a trader full-time,
+[00:01:04] you've got to constantly look at your
+[00:01:05] performance and see where can I
+[00:01:07] optimize, where can I be more efficient
+[00:01:09] at capturing profit and cutting losses.
+[00:01:11] Where can I do better? And today, there
+[00:01:13] was a lot of room for improvement. So,
+[00:01:15] we're going to go ahead and jump on the
+[00:01:17] screen share and start breaking it down.
+[00:01:19] There's the P&L. You can see it green.
+[00:01:22] 34,000 on Vee E red $26,000 on PLSM.
+[00:01:30] $26,000 and that was one trade. Just one
+[00:01:33] trade and I lost 26 grand. What happened
+[00:01:36] to breaking the ice with a small
+[00:01:38] position? Well, that was out the window.
+[00:01:40] And I'll explain why. So, in my small
+[00:01:43] account, I had a couple different
+[00:01:45] trades. Uh my first trade in my small
+[00:01:47] account was an entry on PLSM down here.
+[00:01:50] This was at 2,000 shares at $6.52.
+[00:01:53] Prioritize the small account this
+[00:01:55] morning over the big account. So, this
+[00:01:58] is the current chart on PLSM. It's doing
+[00:02:01] basically a round trip, which you don't
+[00:02:03] like to see. Um, but when I first sat
+[00:02:05] down this morning, so a little context,
+[00:02:07] when I first sat down this morning, we
+[00:02:08] had QTTB that was gapping up. This is
+[00:02:11] the stock that I mentioned um from uh
+[00:02:13] the the watch list yesterday. So, it
+[00:02:15] squeezed up after hours Friday, pulled
+[00:02:17] back a little bit pre-market, and then
+[00:02:19] all of a sudden at 7 a.m., goes from 16
+[00:02:22] straight up to 21, pulls back, then goes
+[00:02:25] back to 23, and I said, "Nope, I'm not
+[00:02:28] touching it." First of all, when it
+[00:02:30] started popping right at 6:59, I didn't
+[00:02:32] realize it actually had a fresh
+[00:02:34] headline. So, it actually had news that
+[00:02:36] came out at 6:59 a.m. I'll click on
+[00:02:38] this. And that headline was what caused
+[00:02:41] that spike. So announces 659 positive
+[00:02:44] 36-w week topline results from part B
+[00:02:47] blah blah blah blah. So their previous
+[00:02:50] headlines on Friday was that they were
+[00:02:51] going to report these results and then
+[00:02:53] they reported them here today. So all
+[00:02:56] right, all of a sudden the stock
+[00:02:58] squeezes up and you get this big move.
+[00:03:00] However, I looked at the level two on it
+[00:03:02] and I observed a couple things. number
+[00:03:04] one because it's $167 a share and then
+[00:03:08] eventually $20 a share. It had bigger
+[00:03:11] spreads. I also noticed that it was easy
+[00:03:14] to borrow. So, if I pull up the level
+[00:03:15] two on this QTB
+[00:03:18] and I drag this window up right here,
+[00:03:20] you can see that it's easy to borrow.
+[00:03:22] The green E right there is easy to
+[00:03:24] borrow. The CB means it's on short sale
+[00:03:26] restriction, which I don't have a
+[00:03:27] problem with. Um, but being easy to
+[00:03:30] borrow is a concern and having slightly
+[00:03:32] bigger spreads is a concern. I don't
+[00:03:34] typically do well on these higher price
+[00:03:36] stocks. Now, I can sometimes have a
+[00:03:38] grand slam on them, but I can also have
+[00:03:40] a big strikeout. And so, I just said,
+[00:03:42] "This is not the one. I'm not going to
+[00:03:44] I'm not going to touch it because it's
+[00:03:46] easy to borrow." If it hadn't been easy
+[00:03:48] to borrow, I might have been more
+[00:03:49] interested in considering it, but
+[00:03:50] because of the easy to borrow status, I
+[00:03:52] said, "Nope, I'm going to leave that one
+[00:03:53] alone." So, didn't touch that one. Just
+[00:03:55] left it alone completely. All right. So,
+[00:03:57] that was QTTB.
+[00:03:59] The second leading gapper we had um
+[00:04:02] FTRK,
+[00:04:04] cheaper stock, not interested in it. We
+[00:04:07] also had Mimi moving up from after
+[00:04:09] hours. MIMI, not interested in that.
+[00:04:12] Yes, it pushed higher pre-market but
+[00:04:14] then sold off. So, we were left after
+[00:04:16] QTB with really nothing to trade until
+[00:04:20] uh PLMS hits the scanners uh PLSM. So
+[00:04:24] PLSM hits the scanners and starts
+[00:04:26] popping up. And I look at it and I
+[00:04:28] think, you know, this stock has this big
+[00:04:30] red day from back here on June 24th. Hit
+[00:04:34] a high of 1297. So this kind of feels
+[00:04:36] like just a bounce in the shadow of that
+[00:04:39] big move. I don't know if I can trust
+[00:04:40] that. That was my gut feeling initially.
+[00:04:42] I said, I don't know if I can trust it.
+[00:04:44] But it started squeezing. And I also
+[00:04:46] thought at the same time, you know what?
+[00:04:48] A lot of traders right now, I think,
+[00:04:49] have kind of short-term memory where
+[00:04:51] they're just like, if this thing's
+[00:04:52] moving, I'm jumping in it. So, as it
+[00:04:54] squeezes up here, it goes to five, 550,
+[00:04:57] up to six, up to 650. It dips down here,
+[00:05:00] and that's where I punched it right
+[00:05:01] there at 650 in my small account. Now,
+[00:05:04] the small account recap I uploaded
+[00:05:06] separately, but I'm just going to kind
+[00:05:07] of mention it because these two trades
+[00:05:09] sort of overlapped. So, I got that entry
+[00:05:12] at 652 and then was taking profit off
+[00:05:14] the table up here as it squeezed higher.
+[00:05:16] So, I don't know why those orders kind
+[00:05:19] of filled that way. But in any case, got
+[00:05:20] out at 770. So, it ends up squeezing up
+[00:05:23] here all the way to a high of eight. It
+[00:05:25] dips down, pops up over eight, then dips
+[00:05:27] down. I was thinking about getting back
+[00:05:29] in, but I was a little too slow. Pops up
+[00:05:31] to nine. I was like, "Wow." Okay. Well,
+[00:05:33] now we've already had first pullback,
+[00:05:34] second pullback, breaks nine, I miss it,
+[00:05:36] ends up going up to 10, up to 11, all
+[00:05:38] the way up to 12. And all of that right
+[00:05:42] there was without me in both the small
+[00:05:45] account and the big account. I just had
+[00:05:46] this initial chip here and in my big
+[00:05:48] account I was like, I don't know if I
+[00:05:49] can break the ice. It's too extended. In
+[00:05:51] the small account, I was like, I don't
+[00:05:52] know if I should get back in. And then
+[00:05:54] it sells off and drops back down. So, it
+[00:05:57] dips back down here. It comes back up.
+[00:05:59] And I drew this line at 959, the high of
+[00:06:01] that candle. And as it went sideways, it
+[00:06:03] dipped down and it came back up. And I
+[00:06:05] just kept thinking that 959 levels in
+[00:06:07] play. And so, what ended up happening
+[00:06:09] was when it came back up right here, I
+[00:06:11] punched it. and I punched it in my big
+[00:06:13] account uh at about 930 and I got in in
+[00:06:16] my small account as well for the break
+[00:06:18] of 950. Now, it ends up, as you can see,
+[00:06:20] hitting a high of 985 and then flushing
+[00:06:23] back to 9. What I should have done is I
+[00:06:26] should have just stopped out right
+[00:06:27] there, but I decided to wait. And the
+[00:06:29] reason that I waited was because in my
+[00:06:30] big account, I was holding 30,000 shares
+[00:06:33] and I thought, you know, I can't just
+[00:06:34] jump in and out of this thing. I'm going
+[00:06:35] to get slippage. So, I thought this
+[00:06:37] thing was going to rip right here all
+[00:06:38] the way back to the high. Now it's
+[00:06:40] pulling back, but if it can hold it
+[00:06:42] above VWAP, then maybe I'll give it a
+[00:06:44] chance to do a one minute pullback and
+[00:06:45] then we get that next candle higher and
+[00:06:47] we continue on. So, wasn't planning on
+[00:06:50] holding, but I'm adjusting my risk sort
+[00:06:52] of mid trade to accommodate the fact
+[00:06:54] that I probably bought too many shares
+[00:06:55] on my first trade of the day because
+[00:06:57] I've got a little FOMO and frustration
+[00:06:59] that I missed this move. So, I'm in it
+[00:07:01] with 30,000 shares right here and I
+[00:07:02] finally cut it right here as it flushes.
+[00:07:05] And on that trade, I lost almost a
+[00:07:06] dollar a share in my big account right
+[00:07:08] there. And in the small account, I'm in
+[00:07:10] at 957 and I'm out at eight. So, was
+[00:07:14] sloppy there as well. Very sloppy. Not
+[00:07:17] good. You do not like to see a trade
+[00:07:19] like that. That's just ugly. I could
+[00:07:21] have should should have sold it way way
+[00:07:23] sooner and I just held and went down
+[00:07:26] with the ship. I got stubborn. That's
+[00:07:28] not a good habit to be in. So, now my
+[00:07:31] small account has gone from green 2,300
+[00:07:33] to red 500 on the day. And um my big
+[00:07:37] account is down 26 grand. This day has
+[00:07:41] just fallen apart. You know, it was one
+[00:07:43] thing to be green, you know, red in the
+[00:07:45] well, it was one thing to have no trades
+[00:07:47] in the big account, but I at least have
+[00:07:48] a good day in the small account. You
+[00:07:49] know, at least I got the small account.
+[00:07:51] But then I had neither. So, at that
+[00:07:54] point, I thought it was sort of
+[00:07:55] hopeless. We had CMND that popped up.
+[00:07:58] This stock always pops up in reverses.
+[00:08:00] There was another stock that popped up
+[00:08:01] in reverse. I don't remember the ticker
+[00:08:03] right now. and AEN was grinding higher
+[00:08:06] but also easy to borrow so I wasn't
+[00:08:08] interested in that. And then VE, this is
+[00:08:11] a stock that historically has popped up
+[00:08:13] and sold off a bunch of times. However,
+[00:08:15] they put out news this morning that
+[00:08:16] they're divesting part of their company
+[00:08:19] and doing a merger, which is very
+[00:08:21] interesting. So, all of a sudden, it
+[00:08:23] starts squeezing up and it goes from six
+[00:08:25] up to 7 up to 8 to 9 to 10, etc., etc.
+[00:08:28] And so, on this one, I broke the ice in
+[00:08:30] the main account and the small account.
+[00:08:32] I was like, "You're down 500 bucks
+[00:08:33] today. Whatever. I'm just going to put
+[00:08:34] you on the side for right now." Focused
+[00:08:36] on the main account. And I took my first
+[00:08:39] trade actually very early on. Um, as
+[00:08:41] soon as it started popping up right
+[00:08:42] here, we got this initial pop, this
+[00:08:44] pullback, and right away we're getting a
+[00:08:46] curl back through seven all the way up
+[00:08:48] to eight. First trade right there, made
+[00:08:51] $6,000. All right, decent. Pulls back. I
+[00:08:54] got back in here for the break of VWAP.
+[00:08:56] This time, got out, took the profit,
+[00:08:58] made another 2 or 3,000 bucks. So now
+[00:09:00] I'm down 15,000 on the day. Squeezes
+[00:09:03] back up. I get back in here. Adding
+[00:09:05] right here. We get this push up to 950.
+[00:09:08] Now I'm down 8,000 on the day. Pulls
+[00:09:11] back. Consolidation. Little dip right
+[00:09:13] there. Take that trade. Down 11,000 on
+[00:09:16] the day. 8,000 on the day. Whatever.
+[00:09:17] It's kind of chipping away. Then I had a
+[00:09:20] couple losses. Gave back a little profit
+[00:09:22] here. Was back to a little deeper red,
+[00:09:24] but not too bad. It pulls back. And then
+[00:09:26] coming into the open, we rally back up
+[00:09:28] and I punched it right here. Or no, it
+[00:09:30] was a little lower than that, but I
+[00:09:31] punched it kind of right in this area.
+[00:09:33] Similar trade except this was above VWAP
+[00:09:35] the whole time. And then a micro
+[00:09:37] pullback right here. And with that, I
+[00:09:39] went from red on the day back to green.
+[00:09:41] We extend a little bit higher. And I
+[00:09:43] take my final trade at the open, buying
+[00:09:45] the dip off 12 and selling into 13 and
+[00:09:48] finishing at $8,430
+[00:09:52] of profit on the day. 34,000 in the
+[00:09:54] green on V and 26,000 in the red on
+[00:09:58] PLSM. PLSM was not a good trade and V I
+[00:10:01] had to trade fairly aggressively. Thank
+[00:10:03] thankfully it was moving nicely, but um
+[00:10:06] you know if I had traded if I had traded
+[00:10:08] PLSM that aggressively in my main
+[00:10:11] account on the front side of the move,
+[00:10:13] I'm sure I would have made 25,000 on it
+[00:10:14] and I'd be up 50 grand on the day. It
+[00:10:16] could have easily happened. But instead,
+[00:10:18] you know, I'm trading the small account,
+[00:10:20] kind of have a good trade on it, but I'm
+[00:10:23] unsatisfied because my big account was
+[00:10:25] left sort of, you know, with nothing. So
+[00:10:27] then I try to compensate for it by being
+[00:10:29] really aggressive in my main account.
+[00:10:31] Well, that fails. And I also add in my
+[00:10:34] small account because I was so sort of
+[00:10:35] biased that this thing was going to
+[00:10:37] definitely work. So then I lose in both
+[00:10:39] of them. And then finally V is the
+[00:10:42] recovery. So what's the the moral of the
+[00:10:44] story? Well, I suppose the moral of the
+[00:10:46] story is that trading in multiple
+[00:10:48] accounts at the same time creates a real
+[00:10:50] challenge. One could be green, the other
+[00:10:52] can be red and you don't know how to
+[00:10:53] feel. You know, one's green and the
+[00:10:55] other's got nothing and you feel
+[00:10:56] disappointment. You know, especially
+[00:10:58] when you know if you traded in the
+[00:11:00] bigger account, you would have done
+[00:11:01] really well. Many of you guys trade in
+[00:11:03] multiple accounts because of the way you
+[00:11:04] can sync them using brokers like Schwab
+[00:11:06] where you execute an order and executes
+[00:11:08] in two accounts at the same time. So,
+[00:11:10] for that reason, you know, this is a
+[00:11:12] challenge. It's not really the intention
+[00:11:16] that the small account challenge will be
+[00:11:17] a challenge of dividing my attention.
+[00:11:21] But the reality is if I focused
+[00:11:22] exclusively on the small account, I
+[00:11:25] would make far less than I would make if
+[00:11:27] I just traded my big account, right? So
+[00:11:30] like last month, my big account was up
+[00:11:32] $570,000.
+[00:11:34] The small account was up like 18 grand.
+[00:11:36] So would I have been willing to
+[00:11:38] sacrifice nearly $600,000
+[00:11:40] to do a small account challenge? And the
+[00:11:42] answer is no. I I I'm not in a position
+[00:11:44] where I can do that. That's not the
+[00:11:46] right decision. So, I try to spread my
+[00:11:49] attention and do both. I want to do
+[00:11:51] small account challenges because I
+[00:11:52] understand that you guys enjoy watching
+[00:11:54] them. And so, I do them, but I'm trying
+[00:11:57] to juggle and it's not easy. And
+[00:11:59] sometimes you drop the ball. And today,
+[00:12:01] I dropped the ball. And so, I could try
+[00:12:03] to forgive myself and be a little bit
+[00:12:05] more gentle with myself and say, "Look,
+[00:12:07] this is just part of the deal. And it's
+[00:12:09] the cost of doing the small account
+[00:12:10] challenge. And I know I just lost more
+[00:12:12] in one trade than I've made during the
+[00:12:14] entire small account challenge, which
+[00:12:16] also calls into question whether I
+[00:12:17] should even be doing it. Um, but at the
+[00:12:20] same time, um, you know, there's things
+[00:12:22] that you guys are learning during this
+[00:12:24] challenge. And so I've kept up with it.
+[00:12:26] How long should I keep trading in it? I
+[00:12:28] I really don't know the answer to that
+[00:12:29] question. I've been thinking about it.
+[00:12:30] This is not the first time I've had this
+[00:12:32] kind of fumble. I've had a couple in the
+[00:12:34] last month uh that have resulted in
+[00:12:36] bigger red days or bigger losses in my
+[00:12:38] main account. So, it's not a sustainable
+[00:12:41] practice to trade this way, you know,
+[00:12:44] forever. But for right now, um, you
+[00:12:48] know, I I'm I'm continuing. So, today's
+[00:12:50] day 18 of the small account challenge.
+[00:12:52] The big account suffered and got the
+[00:12:54] short end of the stick. In fact, both of
+[00:12:56] them ended up suffering today because
+[00:12:57] the small account's only up 200 bucks um
+[00:13:00] you know, after um after all is said and
+[00:13:03] done. So, this was a this was a tricky
+[00:13:06] day, a tricky start to the week. The
+[00:13:08] good news is that we had two stocks that
+[00:13:10] made big moves. VE nice big move there
+[00:13:13] and PLSM made a nice move. Even though
+[00:13:16] it gave it back, we still had a couple
+[00:13:17] candles of really clean price action and
+[00:13:19] that's good to see as well. So, with
+[00:13:21] that, I'm going to live to trade another
+[00:13:23] day. I will be back at it first thing
+[00:13:25] tomorrow morning streaming as always at
+[00:13:28] 7 a.m. And if you guys have any
+[00:13:29] questions, please don't hesitate to
+[00:13:31] throw them in the comments down below. I
+[00:13:33] love answering questions. And I'll
+[00:13:34] remind you that trading is risky. My
+[00:13:36] results aren't typical. So, please
+[00:13:37] manage your risk, take it slow, and I'll
+[00:13:39] see you first thing tomorrow morning.

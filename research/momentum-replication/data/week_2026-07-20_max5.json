@@ -1,0 +1,129 @@
+{
+ "week": [
+  "2026-07-20",
+  "2026-07-21",
+  "2026-07-22",
+  "2026-07-23",
+  "2026-07-24"
+ ],
+ "max_trades": 5,
+ "total": 557.52,
+ "results": [
+  {
+   "day": "2026-07-20",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 4,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "MACD histogram > 0": 2,
+    "target < 2:1": 3,
+    "stop tighter than spread": 1,
+    "pullback_volume < impulse_volume": 2
+   },
+   "watch": [
+    "SKYQ"
+   ]
+  },
+  {
+   "day": "2026-07-21",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 0,
+   "passes": 0
+  },
+  {
+   "day": "2026-07-22",
+   "pnl": 557.52,
+   "trades": [
+    {
+     "sym": "ADVB",
+     "entry": 10.379999656677246,
+     "stop": 10.379999656677246,
+     "risk_ps": 0.32989933013915973,
+     "shares": 303,
+     "full": 606,
+     "pnl": 557.5200346755984,
+     "scaled": 1,
+     "entry_time": "11:22",
+     "t1": 11.399999618530273,
+     "t2": 12.419999580383301,
+     "avg_rng": 0.3614248752593994,
+     "pb_bars": 2,
+     "spread_est": 0.21,
+     "impulse_v": 46625.545454545456,
+     "window": "late",
+     "exit": 11.199999809265137,
+     "exit_time": "11:29",
+     "reason": "window closed"
+    }
+   ],
+   "setups": 14,
+   "passes": 1,
+   "halted": null,
+   "rejects": {
+    "price > VWAP": 3,
+    "target < 2:1": 10,
+    "not resumed lower after a halt": 6,
+    "support confluence >= 2": 4,
+    "MACD histogram > 0": 7,
+    "pullback_volume < impulse_volume": 1,
+    "price > 9 EMA": 3,
+    "pullback index <= 2": 2,
+    "stop tighter than spread": 1
+   },
+   "watch": [
+    "ZCMD",
+    "INM",
+    "ADVB"
+   ]
+  },
+  {
+   "day": "2026-07-23",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 15,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "support confluence >= 2": 4,
+    "target < 2:1": 12,
+    "pullback_volume < impulse_volume": 3,
+    "not resumed lower after a halt": 7,
+    "price > 9 EMA": 4,
+    "MACD histogram > 0": 2,
+    "stop tighter than spread": 1,
+    "price > VWAP": 9,
+    "pullback index <= 2": 2
+   },
+   "watch": [
+    "EHGO",
+    "ADVB",
+    "SKYQ"
+   ]
+  },
+  {
+   "day": "2026-07-24",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 10,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 3,
+    "support confluence >= 2": 5,
+    "target < 2:1": 7,
+    "not resumed lower after a halt": 9,
+    "price > VWAP": 9,
+    "price > 9 EMA": 4,
+    "pullback index <= 2": 1,
+    "stop tighter than spread": 1,
+    "MACD histogram > 0": 2
+   },
+   "watch": [
+    "CJMB"
+   ]
+  }
+ ]
+}

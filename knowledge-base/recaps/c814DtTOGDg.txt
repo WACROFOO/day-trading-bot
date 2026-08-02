@@ -1,0 +1,255 @@
+# I Grew My Account +50% in 10 Minutes
+# https://www.youtube.com/watch?v=c814DtTOGDg
+# upload_date: 20260616
+# duration_sec: 735
+
+[00:00:01] What's up everyone? Welcome to day five of my
+[00:00:01] brand new small account challenge of trading
+[00:00:06] in a $2,000 account using Charles Schwab as my
+[00:00:06] broker. You'll notice that the background and
+[00:00:12] scenery looks a little bit different this
+[00:00:12] week. That's because I'm traveling. Now,
+[00:00:15] you might think I'm time traveling back to the
+[00:00:15] 1970s with these curtains, but that's not the
+[00:00:19] case. I am still in present day and I'm on
+[00:00:19] my traveling trading station. I've got my
+[00:00:24] laptop. I've got my USB monitor right here, super
+[00:00:24] skinny. And I've got my Starling. all the things
+[00:00:29] we've come to expect in 2026. And this morning, I
+[00:00:29] locked up another green day. Biggest green day so
+[00:00:37] far in the challenge. This is not a surprise
+[00:00:37] again because I'm trading with more capital
+[00:00:42] each day as I grow the account. So, the goal of
+[00:00:42] this small account challenge, as you guys know,
+[00:00:47] is to demonstrate what it looks like for a
+[00:00:47] seasoned trader like myself to trade under
+[00:00:52] the constraints of a small account, which means
+[00:00:52] I'm going to be focusing on quality over quantity,
+[00:00:57] trading the best setups because I can't afford
+[00:00:57] risk. And all of the profit from these challenges
+[00:01:02] gets donated to charity. As you guys know, every
+[00:01:02] time you hit the thumbs up in the episodes in this
+[00:01:08] series, I'm adding an extra dollar to how much I'm
+[00:01:08] donating. We've already raised over $313,000. I've
+[00:01:15] already donated $319,000, which means I'm a little
+[00:01:15] bit ahead on you guys. So, I hope you all hit the
+[00:01:21] thumbs up on today's episode. Now, let's go ahead
+[00:01:21] and dive right in. Day five context. Big picture.
+[00:01:28] Yesterday, we had a stock that squeezed up after
+[00:01:28] the opening bell over a,000% from a low of under
+[00:01:36] $2 all the way up to about $167 a share. That's
+[00:01:36] a very impressive move. We love to see that. So
+[00:01:43] clearly we're still in a hot and very volatile
+[00:01:43] market. There's attention on Chinese stocks,
+[00:01:49] foreign listed securities including Singapore,
+[00:01:49] Malaysia, and Israel. We're also seeing some
+[00:01:54] momentum in space AI data center names. So the
+[00:01:54] theme right now is generally it feels like if a
+[00:02:02] stock is a leading gainer in the market, it gets
+[00:02:02] a lot of attention very quickly. But traders are
+[00:02:09] also fickle. They're jumping from stock to stock.
+[00:02:09] So when one stock starts to look a little weak,
+[00:02:14] if another one pops up, boom, that other stock is
+[00:02:14] old yesterday's news. And now traders are jumping
+[00:02:20] on the new one. And so it feels like a little bit
+[00:02:20] of musical chairs. And that can be a little bit
+[00:02:24] tricky because you left feeling like your head
+[00:02:24] is spinning. We're going from stock to stock to
+[00:02:28] stock to stock. So for me, it makes me feel that
+[00:02:28] it's important to jump in pretty quickly when
+[00:02:34] something starts to pop up so I can capitalize on
+[00:02:34] that very first part of the move because if I wait
+[00:02:40] until it's already made a big move, I'm concerned
+[00:02:40] that my risk-to-reward isn't as good. I'm getting
+[00:02:45] in too high and if it fails that it's got a lot
+[00:02:45] farther to drop. So this morning we had a stock
+[00:02:52] that um well first of all part of the context is
+[00:02:52] big picture right now. We have a stock um which is
+[00:02:59] our leading gainer. It's SUGP. Uh when I grabbed
+[00:02:59] this screenshot, it was up 100. It was up 57%.
+[00:03:05] As of right now, it's actually up 140%. So, this
+[00:03:05] one's continued to gain more and more attention.
+[00:03:11] Uh which has been good. It's a little bit cheap
+[00:03:11] for my liking. Uh but that can be arguably good
+[00:03:17] for the small account because of course you
+[00:03:17] could buy more shares. But in any case, SUGP
+[00:03:22] was the stock that was squeezing up this morning.
+[00:03:22] And again, Chinese stock. Um, now it actually did
+[00:03:28] have technically it had a headline at 8 am, but I
+[00:03:28] think that one of the arguments here is that these
+[00:03:34] moves, even on the stocks that do have headlines,
+[00:03:34] are far in excess of what you would typically see
+[00:03:38] from a headline. So, it's almost as if it's a the
+[00:03:38] news is almost irrelevant in in a certain way,
+[00:03:46] which is a little unusual right now. So, that's
+[00:03:46] day five, big picture. So, then at 7:18 a.m.,
+[00:03:52] we have this ticker UPC that hits the high
+[00:03:52] of day momentum scanner. It hits the scanner,
+[00:03:57] it pops up right here to about 450. It dips down
+[00:03:57] and this is the due diligence that I did. Okay,
+[00:04:03] number one, it's a Chinese stock. Number two, it's
+[00:04:03] got a float of less than a million shares. It's a
+[00:04:09] very low float. Now, lowflat stocks um certainly
+[00:04:09] can be more volatile and they can be risky because
+[00:04:14] they can flush just as easily as they can spike.
+[00:04:14] But given the theme right now is on Chinese stocks
+[00:04:20] popping up for enlisted securities popping up,
+[00:04:20] I felt like this one was the most obvious one
+[00:04:26] that attention would shift to. So it pops up on
+[00:04:26] the scanner. It does a micro pullback and I'm
+[00:04:33] jumping in right there at the bottom of that micro
+[00:04:33] pullback right around there for the break back
+[00:04:39] over $4. And I'm looking for a squeeze back up to
+[00:04:39] $450. we end up getting this squeeze up to 450,
+[00:04:45] up to five, up to 550, up to six, up to 650. At
+[00:04:45] that point, I was starting to think about some
+[00:04:51] of the other stocks that had made big moves
+[00:04:51] this morning, like TDIC. This is a stock that
+[00:04:57] um we'll get zoomed in on here for a second. So,
+[00:04:57] TDIC earlier in the day had a squeeze from $5 up
+[00:05:05] to 15. That's impressive. CRA popped up earlier
+[00:05:05] today. This one put in a squeeze from, let's see,
+[00:05:12] it was about 350 up to $8. So, these are the
+[00:05:12] types of moves that you can do really well on,
+[00:05:19] no doubt, if you can get positioned in the right
+[00:05:19] way. If you can get in early and not overstay,
+[00:05:24] you're welcome. Now, both CRA and
+[00:05:24] TDIC ended up coming back down. So,
+[00:05:30] neither of them held up super well over the
+[00:05:30] course of hours of trading. And so this was
+[00:05:35] a concern, but it's also why I wanted to be
+[00:05:35] aggressive at the beginning. So it pops up,
+[00:05:41] it does a micro pullback, and while it's doing
+[00:05:41] the micro pullback, I'm now moving off of the
+[00:05:46] uh charts and I'm looking at the level two. The
+[00:05:46] level two is our feed of market data where I can
+[00:05:53] see all the buyers and I can see all the sellers.
+[00:05:53] And so it dips down. And when it dips down,
+[00:05:57] I see that there's some buyers on the bid creating
+[00:05:57] support. Then I see some green going through the
+[00:06:03] time in sales indicating there's other buyers that
+[00:06:03] are stepping in. I see those as strong indicators
+[00:06:10] of positive sentiment, bullish sentiment.
+[00:06:10] And so then I'm looking for that resolution,
+[00:06:14] that continu continuation higher. And that's
+[00:06:14] exactly what we got. So on this one here,
+[00:06:19] I was in using my hotkey to buy with basically
+[00:06:19] 95% of my available buying power. So, based on
+[00:06:27] my available buying power this morning, which is
+[00:06:27] all the profit from days 1 through 4, I was able
+[00:06:33] to buy 1,289 shares exactly. Now, I didn't type in
+[00:06:33] 1 2 8 9. I typed in I pressed shift 1 and my order
+[00:06:44] executed using that percentage of my buying power.
+[00:06:44] I walked you guys through this hotkey during
+[00:06:50] um episode one when I shared with you that I was
+[00:06:50] resetting my account back down to $2,000. So you
+[00:06:55] can go back and rewatch that if you need to brush
+[00:06:55] up on the hotkeys. So as it rallies up, I end up
+[00:07:01] um basically holding as long as I can until I
+[00:07:01] start to see a little bit of weakness and then
+[00:07:07] I just press the eject button and I was out.
+[00:07:07] Ctrl Z exiting the full position. That's it.
+[00:07:14] And I'm out at 584. Why not 595? Why not 575?
+[00:07:14] It was just the moment I saw an exit indicator,
+[00:07:22] which was that the buying paused and there was
+[00:07:22] a little bit of a seller up there on the ask
+[00:07:26] and I said, "All right, I got to get out of this
+[00:07:26] thing." Now, it doesn't mean it's not going to
+[00:07:30] continue higher. It just means that for my small
+[00:07:30] account, that's the goal. Get in, get green,
+[00:07:36] get out. And right now, we have this benefit that
+[00:07:36] we're in such a volatile market, the underlying
+[00:07:41] moves are much bigger than they were when the
+[00:07:41] market was a bit cooler. So instead of getting,
+[00:07:47] you know, 50 moves, we're getting $1, $2 a
+[00:07:47] share moves. So I ended up locking up $2,3747,
+[00:07:56] my best day by far, which brings
+[00:07:56] my account now up to $7,96.88.
+[00:08:04] So the account is now up 295%. I have only taken
+[00:08:04] six trades. I'm undertrading and I'm doing this
+[00:08:12] out of a fear of loss. I'm afraid of having a
+[00:08:12] losing trade. And so I'm focusing on the highest
+[00:08:17] quality trades and the type of stocks I think
+[00:08:17] had the potential to make really big moves. If
+[00:08:22] I focused on stocks that had the potential to go
+[00:08:22] up only 10 or 15 cents, they might go up 8 cents,
+[00:08:28] which isn't really enough for me to lock up
+[00:08:28] profit, then it rolls over and flushes and I end
+[00:08:32] up taking a loss. So one of the ways I'm avoiding
+[00:08:32] loss is by having a very high quality standard.
+[00:08:38] And one of the requirements is that I'm looking at
+[00:08:38] a stock and I'm thinking this has the potential to
+[00:08:43] go up 50 cents to a dollar a share. And if it
+[00:08:43] doesn't have the potential to go 50 cents to a
+[00:08:48] dollar a share right now, I'm not taking it. Now,
+[00:08:48] if the market was colder, I wouldn't have had any
+[00:08:53] of these trades over the last 5 days because
+[00:08:53] we wouldn't we haven't in a colder market seen
+[00:08:58] $1,2 or $2 a share type of potential. So if the
+[00:08:58] market was cooler, I would have to, you know,
+[00:09:06] essentially accept the lower gains and the
+[00:09:06] slower growth in the account, uh, which I've
+[00:09:13] done in other periods of time. You guys can tune
+[00:09:13] into previous small account challenges I've done,
+[00:09:16] which were in markets that were a little bit
+[00:09:16] cooler. So this challenge so far is going pretty
+[00:09:21] quickly, going faster than others. If I was day
+[00:09:21] trading, taking like 5, 10, 15 trades in a day,
+[00:09:30] could I grow the account faster, I would certainly
+[00:09:30] subject myself to more losses. I haven't felt that
+[00:09:36] there's 10 plus opportunities for a 50 cent
+[00:09:36] to dollar a share type of move. So maybe,
+[00:09:45] you know, on 10 trades, seven of them being
+[00:09:45] winners, if I was trading that frequently,
+[00:09:50] my accuracy would go down to 68 70%. That's where
+[00:09:50] I typically fall. Um, you know, seven seven base
+[00:09:56] hit trades of 15 20 cents each and then three
+[00:09:56] losses of 15 cents each. You know, I I I guess
+[00:10:03] you'd be talking about $140 a share minus 40 cents
+[00:10:03] a share. So maybe a dollar a share of profit. Um,
+[00:10:12] and then you know you and that's over the course
+[00:10:12] of 10 trades with lower accuracy. So you know you
+[00:10:16] could end up having the misfortune of a couple
+[00:10:16] bigger losses or you know whatever. And then here
+[00:10:22] on this trade, I got a $184 cents a share in just
+[00:10:22] one execution. So, it's not to say I couldn't do
+[00:10:28] both. I suppose I could, but um but right now,
+[00:10:28] early in the challenge, it's really important
+[00:10:34] to just have consistent green days, lock them up,
+[00:10:34] and then come back again tomorrow. So, tomorrow
+[00:10:40] I'll have this much more buying power. Now, my
+[00:10:40] buying power is coming up towards $8,000. So,
+[00:10:45] all of a sudden, you know, I could buy 2,000
+[00:10:45] shares of a $4 stock and if that goes up two
+[00:10:49] points, I'm going to be up four grand. and then
+[00:10:49] the accounts at 12,000 and then you know a $6
+[00:10:54] stock comes along I could buy 2,000 shares if that
+[00:10:54] goes up three or four dollars a share because we
+[00:10:58] get a big move you know then things are really
+[00:10:58] starting to pick up pretty quickly so you know
+[00:11:04] today just alone the account is up nearly 50% in
+[00:11:04] one day uh I think I finished um well yeah must
+[00:11:12] have been $2400 today roughly um so that's what
+[00:11:12] put me at 7900 so um yeah I'm in I'm in a great
+[00:11:20] spot right here today. Um, being up nearly 50% in
+[00:11:20] one day. So, those of you guys that want to keep
+[00:11:26] watching the small account challenge and see um,
+[00:11:26] how quickly I can continue to grow this account,
+[00:11:31] make sure you check out the twoe trial here at
+[00:11:31] Warrior Trading. We'd love to have you guys join
+[00:11:34] us. It's two weeks for $20. It gives you a chance
+[00:11:34] to watch me as I'm trading both in my big account
+[00:11:40] and my small account. I'm trading both of them
+[00:11:40] well sort of sometimes at the same time, some one
+[00:11:44] and then the other. Depends on the day, depends
+[00:11:44] on the stock. But in any case, you get to watch
+[00:11:49] over my shoulder and you get to see it all. So, I
+[00:11:49] hope you guys check out the trial and I'll remind
+[00:11:52] you as always that trading is risky. My results
+[00:11:52] aren't typical and there's no guarantee you'll
+[00:11:57] find success whether you trade with me or you
+[00:11:57] learn on your own. So, please manage your risk,
+[00:12:03] take it slow, and always practice in a simulator
+[00:12:03] before putting real money on the line. All right,
+[00:12:08] with that, I will see you guys back at
+[00:12:08] it streaming at 7 a.m. tomorrow morning.

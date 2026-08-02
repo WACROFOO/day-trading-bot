@@ -1,0 +1,361 @@
+# This Is Crazy! We Just Had ANOTHER 2,000% Short Squeeze!
+# https://www.youtube.com/watch?v=znf0QIW8KRE
+# upload_date: 20260609
+# duration_sec: 1058
+
+[00:00:00] What's up everyone? Welcome to day two of my
+[00:00:00] brand new small account challenge of trading
+[00:00:05] in a $2,000 account using Charles Schwab as
+[00:00:05] my broker. Today is the second green day in a
+[00:00:11] row and now the account is up 61% since I began
+[00:00:11] the challenge. This is phenomenal. My accuracy
+[00:00:20] 100%. Well, I've only taken two trades. So,
+[00:00:20] here's the interesting thing. As you know,
+[00:00:25] the pattern day trader rule, which was in effect
+[00:00:25] from February 27th, 2001 until June 4th, 2026,
+[00:00:32] is gone. So, I can day trade as much as I want
+[00:00:32] in this account. But my quality standard is very
+[00:00:38] high because it's a small account. I really can't
+[00:00:38] afford to lose. Now, some of you guys might think,
+[00:00:44] Ross, doing a small account challenge should be
+[00:00:44] no big deal for you. You've got so much money. If
+[00:00:48] you lose in it, you could always just reset the
+[00:00:48] account and start over. I suppose that's fair.
+[00:00:54] And you're right. This is not really my back up
+[00:00:54] against the wall the way it was when I was first
+[00:00:58] learning how to trade. But I'm pretty competitive.
+[00:00:58] And so when I'm doing a challenge like this,
+[00:01:03] I hold myself to a high standard. I want to
+[00:01:03] succeed. I want to grow this account. And so
+[00:01:08] even though you might argue that I could be a
+[00:01:08] little sloppy with it, I'm not. I'm being very
+[00:01:14] precise. And so in total, I've taken two trades.
+[00:01:14] Now, interestingly, today there were two setups
+[00:01:20] that I liked. And on the second one, I didn't get
+[00:01:20] filled. My order got rejected. And you want to
+[00:01:26] know why? It's because I put in the wrong number
+[00:01:26] of shares. And the rejection was I didn't have
+[00:01:31] sufficient buying power. I put in too many shares.
+[00:01:31] I did the math wrong in my head real quick. So,
+[00:01:36] this was a shame. I'm disappointed that that
+[00:01:36] happened. ended up missing a great opportunity
+[00:01:41] because I got in at the exact apex point and that
+[00:01:41] stock ripped right after I tried to get in, but I
+[00:01:49] sat on the sidelines. However, it was the right
+[00:01:49] move not to chase it and instead remind myself
+[00:01:54] that there'll always be another opportunity around
+[00:01:54] the corner perhaps tomorrow on day three. So,
+[00:01:59] for those of you guys who have been watching from
+[00:01:59] the sidelines, if you have not already checked
+[00:02:03] out a two-eek trial where you can watch over my
+[00:02:03] shoulder as I'm doing this challenge, the link is
+[00:02:07] posted to at the top of the comments and in the
+[00:02:07] description so you guys can start the twoe trial
+[00:02:13] today. All right, so make sure you guys check that
+[00:02:13] out. Let's go ahead and jump on the screen share
+[00:02:17] because we've got a lot to cover. As you know, all
+[00:02:17] of the profits from these small account challenges
+[00:02:22] gets donated to charity. And every time you guys
+[00:02:22] hit the thumbs up, I add an extra dollar to how
+[00:02:29] much I'm donating. We have now raised over
+[00:02:29] $297,000. Thank you guys so much. I donated
+[00:02:37] um in the last um week. We did donations to four
+[00:02:37] hospitals that are serving people that live on the
+[00:02:44] Navajo reservation down in um the southwest of the
+[00:02:44] United States. And I donated another $30,000 to
+[00:02:52] Dig deep and this was specifically for the Navajo
+[00:02:52] project. And they're working on bridging the gap
+[00:02:58] to provide clean drinking water to everyone
+[00:02:58] in the United States. In fact, there are still
+[00:03:04] millions of people in the United States that don't
+[00:03:04] have access to clean drinking water. Now, we've
+[00:03:08] probably all heard of Flint, Michigan, and some of
+[00:03:08] these other places, but on the Navajo reservation,
+[00:03:13] in fact, from 1952 up until, I think it was 2003
+[00:03:13] or 2004, uranium mining uh ended up contaminating
+[00:03:21] a lot of the local groundwater. And so, people
+[00:03:21] have been drinking this contaminated water and as
+[00:03:26] a result have higher rates of cancer. So making
+[00:03:26] donations to the hospitals that serve people on
+[00:03:31] the reservation was great, but and I'm grateful
+[00:03:31] that I was able to do that. But making a donation
+[00:03:37] to dig deep, who is providing access to clean
+[00:03:37] drinking water is sort of rather than putting a
+[00:03:44] band-aid over the problem is actually getting to
+[00:03:44] the root of why so many people are getting sick.
+[00:03:50] So as of right now, I've donated $319,000 as part
+[00:03:50] of these small account challenges that we began.
+[00:03:56] Um, let's see. It was back in was it August of
+[00:03:56] last year? September of last year. All right. So,
+[00:04:01] anyways, thank you guys for your um thumbs up and
+[00:04:01] helping raise this money. This has been really
+[00:04:07] wonderful. Today is day two. And let's start
+[00:04:07] with a little context. Big picture. Yesterday,
+[00:04:14] we had a stock that went up over 5,000%. I'm not
+[00:04:14] kidding. 5,000%. Yeah, that's a pretty big move
+[00:04:24] from a dollar a share. $111 up to a high of $66
+[00:04:24] and I'm sitting here right now and telling you I
+[00:04:33] did not take a single trade on it. Why? I didn't
+[00:04:33] feel I could manage my risk. However, there were
+[00:04:41] other stocks that were moving on sympathy to this
+[00:04:41] underlying move right here. And this brings me to
+[00:04:47] an interesting subject. Many of you guys know that
+[00:04:47] I had the best week of my career when GameStop
+[00:04:52] squeezed up to over $500 a share in pre-market
+[00:04:52] trading in at the end of January in 2001. And
+[00:04:58] although I made a lot of money on GameStop,
+[00:04:58] GameStop was not the stock I made the most on. I
+[00:05:03] actually made more money on other stocks that were
+[00:05:03] going up with high short interest on sympathy to
+[00:05:10] the move that GameStop GameStop was experiencing.
+[00:05:10] And the reason was those other stocks were lower
+[00:05:16] priced, so I was able to afford more shares. And
+[00:05:16] because they were lower priced, they got a better
+[00:05:20] ROI or total percentage return. A $2 stock going
+[00:05:20] to eight is better than a TW. Well, I mean, it's
+[00:05:26] the same as a $20 stock going to 80, but usually
+[00:05:26] $20 stocks go don't go to 80. A $20 stock goes up
+[00:05:32] to 25 or 30 maybe. So, you get a nice trade there.
+[00:05:32] That's fine. But two to eight to 14 to 16, that's
+[00:05:39] where things get exciting. And so when we had that
+[00:05:39] big move on GameStop, I did really well trading
+[00:05:45] sympathy momentum. And that's the same as what's
+[00:05:45] going on right now with the SpaceX IPO is looking
+[00:05:50] for sympathy momentum. SpaceX is expensive. All
+[00:05:50] these other stocks that are moving on sympathy are
+[00:05:56] more affordable. And the AI sector is also very
+[00:05:56] strong. And of course, SpaceX is one of the big
+[00:06:01] segments of their business is AI. So naturally,
+[00:06:01] any stock with an AI catalyst headline right
+[00:06:07] now is doing well. This one had an AI headline
+[00:06:07] yesterday. Goes up over 5,000%. This morning,
+[00:06:13] we had a couple other stocks that made um quite
+[00:06:13] large moves as well. Now, before I jump in here to
+[00:06:21] um the charts, let's just look for a moment at um
+[00:06:21] a few of the stocks that made big moves today. So,
+[00:06:28] as of right now, we've got um CCTG. Now, this
+[00:06:28] is very interesting. Look at this volatility.
+[00:06:36] Yesterday it was at less I don't know about 80
+[00:06:36] cents a share goes up to a high of $6 is back
+[00:06:42] down at a $147. That's on the one minute chart.
+[00:06:42] We don't need to look at the 10-second I don't
+[00:06:46] think. So this is CCTG MSW this one today. Look
+[00:06:46] at this move from a $1.50 up to $5. Wow. Then
+[00:06:56] we have CHAI. This one earlier today. Back this
+[00:06:56] up. Look at this move from about a dollar up to
+[00:07:03] $6 a share. We had AZI, which you'll see uh
+[00:07:03] we're going to get into this one in a moment.
+[00:07:08] This one went from about a dollar a share down
+[00:07:08] here all the way up to $13. And then yesterday,
+[00:07:16] uh we had was it NPT? No. Um uh was this it?
+[00:07:16] Yeah, this was it was NPT yesterday. Uh yeah,
+[00:07:23] this was the one that I traded yesterday. And um
+[00:07:23] this one unbelievable move from about a dollar a
+[00:07:28] share all the way up to $12. So, it's safe to
+[00:07:28] say that right now in this market, we've been
+[00:07:35] seeing some pretty extreme moves. In fact, I mean,
+[00:07:35] it's it's really been unbelievable. AMHA or ah
+[00:07:43] um what was what was it? I'll scroll back on
+[00:07:43] the scanners. We'll look at it from earlier. So,
+[00:07:47] we had a couple of stocks today that made these
+[00:07:47] just unbelievable moves. Backto back circuit
+[00:07:53] breaker halts. Um however, as you can see, a lot
+[00:07:53] of these moves didn't end up holding super well.
+[00:07:59] Uh, MTEN was another stock today that made this
+[00:07:59] big move. I mean, look at this. From $3 to $10,
+[00:08:05] then back down to three, then back up to eight,
+[00:08:05] back down to A140. Give me some Dramamine because
+[00:08:11] I'm getting motion sickness. This is too much.
+[00:08:11] Uh, call a chiropractor cuz I've got whiplash. Uh,
+[00:08:16] you come up with the next one. So, the issue
+[00:08:16] here is yes, we like volatility, but gosh,
+[00:08:22] this is hard to manage risk on PAVS. Look
+[00:08:22] at this one today. So, um, PAVS, uh, today,
+[00:08:31] this was insane. So, this is the one that went up
+[00:08:31] 2,000% today from a dollar a share up to $26 and
+[00:08:38] then it came back down. We've seen this type of
+[00:08:38] price action before. This is indicative of a very
+[00:08:44] frothy market, a very hot market where there's
+[00:08:44] a lot of exuberance. Traders are jumping in very
+[00:08:49] quickly. Shorts are scared. They don't want to
+[00:08:49] get in front of a moving freight train like this.
+[00:08:55] But inevitably they don't go up forever and when
+[00:08:55] they roll over no one wants to buy it as it starts
+[00:09:01] dropping and now shorts have the advantage. So,
+[00:09:01] this is actually an interesting market because
+[00:09:06] shorts are kind of sitting on the sidelines and
+[00:09:06] letting these things squeeze up and long traders
+[00:09:11] are doing really well on them and you just don't
+[00:09:11] want to be the last one in or the last one to the
+[00:09:16] exit before it starts dropping because then once
+[00:09:16] you get that first drop back down, that first red
+[00:09:21] candle, that's when short sellers are coming
+[00:09:21] in right in here for the drop and then the the
+[00:09:27] selloff back down. So basically today we were in
+[00:09:27] such a hot market from yesterday's frenzied move
+[00:09:37] uh with a 5,000% gain that I was expecting to
+[00:09:37] see continued momentum. However, I will tell
+[00:09:44] you that it's not uncommon that the day after a
+[00:09:44] big move I'll actually go red because, you know,
+[00:09:51] we're kind of thinking everything's going to keep
+[00:09:51] going higher. You mismanage risk and you screw up.
+[00:09:56] And although I didn't go red today in my main
+[00:09:56] account, um here's the P&L for my main account,
+[00:10:01] I did lose $27,000 on CCTG. Now, I finished the
+[00:10:01] day up 42 grand, so I can't complain. And this,
+[00:10:08] thank God, was not the first trade I took. Um
+[00:10:08] the first trade was um now I can't remember,
+[00:10:14] but I think it was D AIC. I was up 11,000. Then
+[00:10:14] I lost 8,000. Then I made 23,000. Then I lost
+[00:10:23] uh no, then I made uh 15,000. I was up about 50
+[00:10:23] grand before I took this loss. So in any case,
+[00:10:31] um it is what it is. But today it was very easy
+[00:10:31] to get on the wrong side of the some of these
+[00:10:37] moves. And so for those of you guys who are
+[00:10:37] new, I will share with you that as a beginner,
+[00:10:41] I found days like today to be some of the most
+[00:10:41] difficult because you have stocks that have huge
+[00:10:47] ranges going from three to nine and back to
+[00:10:47] three. I mean, it's insane when I felt like
+[00:10:53] I was just constantly chasing. And so, if you're
+[00:10:53] feeling that way, you're not alone. Remember that
+[00:10:59] a year from now, you will have more experience and
+[00:10:59] more intuition. you'll you'll be able to better
+[00:11:04] capitalize on this level of volatility than you
+[00:11:04] are today. So, the best thing to do during this
+[00:11:09] environment as a real beginner is to reduce share
+[00:11:09] size a little bit just to accommodate the fact
+[00:11:14] that you're likely going to see stocks that drop
+[00:11:14] more than you expected, but also could pop up more
+[00:11:19] than you expected. So, it can it can work to your
+[00:11:19] in your favor, but you've got to be careful. So,
+[00:11:24] AI, as you can see here, uh was the first stock
+[00:11:24] I traded. It hit our scanner 388, 413, 518, 552,
+[00:11:33] and it's squeezing up. It's got 12 million
+[00:11:33] shares of volume, a 4.5 million share float,
+[00:11:38] and relative volume of 1,500 times above average.
+[00:11:38] And the volume in the last 5 minutes was 3 million
+[00:11:45] times higher than average. The stock at that
+[00:11:45] point was up 388% on the day, which made it
+[00:11:52] our leading gainer. At this point here, it was up
+[00:11:52] 532%. the leading gainers typically perform well
+[00:11:59] because a lot of traders will notice them when
+[00:11:59] you have a stock that's a little bit lower and
+[00:12:03] um you know some of these down here they don't
+[00:12:03] often do as well because they just don't get as
+[00:12:07] much attention. So leading gainers typically
+[00:12:07] are better. So it was the leading gainer and
+[00:12:12] um it was on my Ross' fivepillar scanner right
+[00:12:12] here and it triggered this alert right down here
+[00:12:18] as it was continuing to move higher. So initially
+[00:12:18] it squeezes up here. I don't trade it. It pops up
+[00:12:25] here to about $1.70 and then has this high volume
+[00:12:25] red candle. That's a rejection. It drops back
+[00:12:30] down. Then it rallies way back up right here.
+[00:12:30] Now, when it rallies up here, I still didn't
+[00:12:37] trade it. The stock is a little cheaper. I wasn't
+[00:12:37] sure it was going to work. You had pretty high
+[00:12:41] volume buying, but at this point, we still had
+[00:12:41] a bunch of other stocks that were moving, and it
+[00:12:46] was hard to tell what was obvious. So, it ends up
+[00:12:46] selling off, coming back up, doing a double top,
+[00:12:52] which creates a cup form, a cup. This was a little
+[00:12:52] handle. I didn't trade this. It pushes higher
+[00:12:58] right here, and then it rejects and comes back
+[00:12:58] down. And at that point, I was like, "Yep, AI,
+[00:13:04] it's rejected. It's no good." I started switching
+[00:13:04] and looking at other stocks. In fact, it goes
+[00:13:08] all the way down below this orange trend line,
+[00:13:08] which is the volume weighted average price. And
+[00:13:12] this is where I think shorts um got I think shorts
+[00:13:12] probably added on this rejection right here, added
+[00:13:18] more as it stairstepped down and felt confident
+[00:13:18] as it was below VWAP for a selloff back down to
+[00:13:24] basically where it came from down here around
+[00:13:24] $150. Well, what ended up happening next was it
+[00:13:29] squeezed back over VWAP and we got the creation of
+[00:13:29] an inverted head and shoulders pattern. As you can
+[00:13:35] see right here, as it squeezed up here to a high
+[00:13:35] of 330, it pulls back, gives a micro pullback. I
+[00:13:42] still don't take that trade because at that point
+[00:13:42] I I wasn't really paying attention to it down
+[00:13:47] here if I'm going to be honest. And when it hit
+[00:13:47] the scanner right here, I was like, "Okay, this
+[00:13:51] is interesting. It's starting to move, but let's
+[00:13:51] see what it can do." So, it dips down. It rips up
+[00:13:55] here to $410. And so, I'm going to show you this
+[00:13:55] is the setup that we've been talking about. Um,
+[00:14:01] in the first episode where I shared with you that
+[00:14:01] I was resetting my account to $2,000, I showed you
+[00:14:06] this pullback. So, I let the stock squeeze up. I
+[00:14:06] let it pull back. And then I'm looking for that
+[00:14:11] first crossing candle, the candle that crosses the
+[00:14:11] high of the previous candle, candle over candle.
+[00:14:17] And that's what we look for. And we look for the
+[00:14:17] resolution through the new high of day. And so as
+[00:14:21] this rallied up right here, I missed the first
+[00:14:21] pullback. I wasn't watching it super closely.
+[00:14:27] By the way, this is a 10-second chart, but I show
+[00:14:27] it to you because it's helpful to see how quickly
+[00:14:33] these stocks move and sort of the zoomed in
+[00:14:33] patterns that were occurring. So micro pullback,
+[00:14:39] micro pullback. It goes up to 576. It dips down.
+[00:14:39] It pops back up and this is the formation of an
+[00:14:46] ABCD setup. It looks like a W for winner. And
+[00:14:46] so as that pattern was forming, it dipped back
+[00:14:53] down right here. As it dipped down to about $5 a
+[00:14:53] share, I looked at that and I said, I think I need
+[00:15:00] to take a starter. I'm going to take my starter.
+[00:15:00] Now, of course, in the small account, I'm all in
+[00:15:04] on my starter cuz I'm that's just it cuz it's a
+[00:15:04] small account. So, I added right down here and
+[00:15:10] we got this squeeze right there. Squeezing up
+[00:15:10] to seven. A little micro pullback right there
+[00:15:16] and then a push all the way up to $10 a share.
+[00:15:16] Nearly $10 a share. This was really solid. So,
+[00:15:23] on the one minute chart, um this is what that
+[00:15:23] micro pullback looked like right there. So you
+[00:15:29] had the pop up, three, four green candles in a
+[00:15:29] row. A little pullback there. Check the volume
+[00:15:34] profile. So we've got a nice volume profile. Yes,
+[00:15:34] higher volume on this candle, but nice volume on
+[00:15:39] this. MACD is open. So our indicators are giving
+[00:15:39] us a positive signal. I'm a buyer right down here.
+[00:15:46] We get that resolution. This is my trade in at
+[00:15:46] $4.98 on that dip. Buying as close to support
+[00:15:52] as possible. And I took my exit up at 682. So,
+[00:15:52] I didn't sell. I didn't get as much profit as
+[00:15:58] it turned out I could have, but nonetheless, $816
+[00:15:58] is phenomenal. So, now the account is up 61%. I'm
+[00:16:07] at $3,232.94 of equity in the account versus
+[00:16:07] the $2,000 starting balance. Two trades in,
+[00:16:15] 100% accuracy. Average winners now are about $616.
+[00:16:15] the account is growing and I encourage you guys
+[00:16:23] to tune in to day three which will be coming
+[00:16:23] tomorrow. So if you have not already checked
+[00:16:28] out the twoe trial again the link is posted in
+[00:16:28] the top of the comments and in the description
+[00:16:33] so you can come on over do the twoe trial. During
+[00:16:33] your trial you'll get access to the same software
+[00:16:38] that I'm using every single day while I'm trading.
+[00:16:38] This is Day Trade Dash. These are the scanners,
+[00:16:43] the charts, the news feed, plus my live audio
+[00:16:43] video broadcast with my market commentary where
+[00:16:49] you can see me trading in real time. So, you'll
+[00:16:49] see the gains, you'll see the losses, the ups and
+[00:16:54] the downs, you'll see the small account, you'll
+[00:16:54] also see the big account. So, make sure you guys
+[00:16:58] check it out. And reminder as always that trading
+[00:16:58] is risky and my results are not typical. So,
+[00:17:02] take it slow. Your best bet is to practice in a
+[00:17:02] simulator before you ever put real money on the
+[00:17:08] line. Now, if you haven't already checked out the
+[00:17:08] full length episode where I introduce you to my
+[00:17:13] strategy, I'll put a link to it here and the link
+[00:17:13] to day three will be right here. So, check those
+[00:17:18] out. Thank you guys as always for tuning in. Your
+[00:17:18] thumbs up are going to a good cause. So, I hope
+[00:17:23] you hit the thumbs up. I hope you're subscribed
+[00:17:23] to the channel and I'll see you for day three
+[00:17:27] tomorrow. I'll be streaming at 7 a.m. Eastern
+[00:17:27] Standard Time. All right, I'll see you then.

@@ -496,6 +496,37 @@ after price has collapsed away from it, and `min_reward_risk` is then satisfied
 by a target the stock cannot reach. **The 2:1 is a filter applied to the
 target, never the target itself.**
 
+### `min_reward_risk` is a realised ratio, not a pre-entry veto
+
+Fixing the entry above exposed the reading underneath it. `min_reward_risk >=
+2.0` (§8, n=37) was implemented as a veto: skip any setup whose nearest
+objective sits closer than twice the stop distance. Every citation behind the
+number is retrospective and aggregate —
+
+- *"~2:1 profit-to-loss ratio **achieved**"* — `Wsq8zdtCcis` [02:58]
+- *"Profit-loss ratio **this week**: 46:1"* — `8eLtork_M50` [04:26]
+- *"Profit/loss ratio **for month**"* — `hLtPtEVBBBQ` [14:34]
+- *"$500 **average** winners, 61% accuracy"* — `bvy1pyzTrG4` [00:56]
+- *"Trade 2:1 minimum. **If accuracy around 65%**, this ratio ensures
+  profitability"* — `4t3GDiAXW18` [40:07]
+
+— and §9 above uses it the same way, as `avg_win`/`avg_loss` inside an
+expectancy formula. A ratio of averages is produced by the **exit** plan, not
+by refusing entries.
+
+It also contradicts the setup it filters. A micro-pullback enters just under
+the high of day, so the nearest objective is cents away while the stop is the
+depth of the dip; requiring 2× of that rejects the entry this document is
+built around. Measured, it is the largest single rejection reason in the
+replication — 66 of them, more than any gate condition.
+
+**The consequence is a target question, not an entry question.** Removing the
+veto raises trade frequency 5× and turns expectancy negative (+0.89R → −0.27R),
+because target 1 then sits under 2R and half the position books a sub-1R gain
+before the stop moves to breakeven. What target 1 should be when the high of
+day is only cents above entry is open:
+`research/momentum-replication/NEXT-STEPS.md` §4.
+
 ### "First candle to make a new low" means below the flag
 
 *"first candle to make new low **below flag**"* — `Xdw5azEqs6o`. Below the

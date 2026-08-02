@@ -1,9 +1,9 @@
 # What has already been found and corrected
 
-Thirteen defects, recorded so the same ground is not covered twice. Each cites
+Fifteen defects, recorded so the same ground is not covered twice. Each cites
 the document or video timestamp it violated. All are fixed in the current code.
 
-Also recorded: three conclusions that were reported and later withdrawn, because
+Also recorded: four conclusions that were reported and later withdrawn, because
 they were artifacts of the defects below rather than properties of the strategy.
 
 ---
@@ -95,6 +95,30 @@ pullback after the catalyst; now scoped accordingly.
 
 ---
 
+## Exit accounting
+
+**14. The forced close at the trading-window cutoff read the last bar of the
+session.** A position still open at `HARD_STOP` (11:30) was flattened at
+`sorted(bars)[-1]` — the **15:59** bar — and stamped `11:29`. A four-and-a-half
+hour look-ahead on the exit price, in a harness whose whole contract is
+forward-only.
+
+It was load-bearing, not marginal. EHGO 2026-07-13 sat flat at the cutoff and
+booked −6.38R against the closing price; ADVB 2026-07-22, the largest winner
+anywhere in this project, was the same path in the favourable direction. The
+17-day total went from +$633.30 to **+$357.54** on the fix, and the
+previously reported *"week of 07-20: +8.33%"* is really +5.58%.
+*Found by:* `reports/2026-07-july-calibration.md`, while explaining a
+−6.38R loss on a position sized to risk 1R.
+
+**15. `calibrate.py` re-derived the entry gate instead of calling it.** The
+measurement tool defined "would the engine trade this" as "every
+`GATE_CONDITION` holds", silently dropping the 2:1 and spread tests `run_day`
+applies on top. It reported 14 tradeable pairs where the engine trades 3. It
+now calls `run_day`. Anything that restates the engine drifts from it.
+
+---
+
 ## Withdrawn conclusions
 
 Reported in earlier write-ups, then withdrawn. Listed so they are not rediscovered
@@ -127,6 +151,11 @@ implementation.
 | After defects 3, 4, 5, 6 fixed | 4 | −$560.33 |
 | After 7–11 fixed | 0 | $0.00 |
 | After 12, 13 and scoping fixed | 3 | +$128.70 |
+| 17 sessions, halts + §1 confirmation, max 5 | 2 | +$633.30 |
+| After defect 14 (the exit look-ahead) | 2 | **+$357.54** |
+| Same, with the 2:1 entry veto removed | 11 | −$601.65 |
 
 The trajectory is the reason no P&L from this harness should be treated as a
 result until the frequency discrepancy in `OBSERVATIONS.md` §3 is understood.
+As of `reports/2026-07-july-calibration.md` that discrepancy is localised: it
+is the scanner and the entry rules, not the universe and not the detector.

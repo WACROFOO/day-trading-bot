@@ -3,6 +3,18 @@
 Findings from the replication attempt, newest first. Each is reproducible with
 the command at its head.
 
+## Calibration against his real trades — start here
+
+| Report | What it establishes |
+|---|---|
+| `2026-07-july-calibration.md` | **The first external measurement.** Real upload dates turn 28 July recaps into labelled sessions; the engine is scored against 61 session-ticker pairs he named |
+
+Headline: of every ticker he named that resolves to a symbol, **100% were in
+the pool** and the detector found structure on **97%** — but only 31% pass the
+five pillars and **3 of 61** survive the entry rules. The universe and the
+detector are exonerated; the scanner and the entry gate are where the strategy
+is being lost. It also found the exit look-ahead below.
+
 ## Weekly runs
 
 | Report | Period | Trades | P&L | Note |
@@ -10,12 +22,16 @@ the command at its head.
 | `2026-07-27-week.md` | Mon–Fri 07-27 | 3 | +$49.97 | halts implemented; two readings of §1 compared |
 | `2026-07-20-week.md` | Mon–Fri 07-20 | 1 | +$833.28 | prior week, run second — engine unchanged after seeing it |
 
-**Combined: 4 trades over 10 sessions, +$883.25.** One trade is 94% of it.
+> **Both P&L figures above are superseded.** They were measured before defect
+> 14 (`HISTORY.md`), which priced the 11:30 forced exit off the 15:59 bar. The
+> 07-20 week is **+$557.52 (+5.58%)**, not +$833.28; the 07-27 week is
+> **−$199.98**. Over the full 17 sessions: 2 trades, **+$357.54**.
 
 ## Against his own recaps
 
 | Report | What it establishes |
 |---|---|
+| `2026-07-july-calibration.md` | Scored, not just overlapping — 61 labelled pairs across 14 sessions |
 | `2026-07-27-vs-recaps.md` | Ticker overlap confirmed; halts identified as unmodelled |
 | `2026-07-20-week.md` (§Comparison) | Overlap confirmed a third time (ZCMD, INM, CJMB) |
 

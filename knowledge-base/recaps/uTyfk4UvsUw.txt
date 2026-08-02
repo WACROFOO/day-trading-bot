@@ -1,0 +1,380 @@
+# ANOTHER 250% Short Squeeze
+# https://www.youtube.com/watch?v=uTyfk4UvsUw
+# upload_date: 20260710
+# duration_sec: 794
+
+[00:00:00] What's up, everyone? All right, in
+[00:00:01] today's episode, I'm going to break down
+[00:00:03] my trades from the morning. I'm sitting
+[00:00:04] in the green thanks to one stock that
+[00:00:07] put in a huge move. This is a day where
+[00:00:09] our scanners are actually really
+[00:00:10] interesting because just before I logged
+[00:00:13] off and finished the day, I noticed that
+[00:00:14] our leading gainer was up about 200% and
+[00:00:18] the second leading gainer in the market
+[00:00:20] above 50 cents a share was only up 30%.
+[00:00:23] So, it was like a very steep drop-off
+[00:00:25] from the one most obvious stock and then
+[00:00:28] everything else was just seconds. Nobody
+[00:00:30] cared about it at all. And that, I
+[00:00:32] think, worked in our advantage today in
+[00:00:34] our favor because all attention was
+[00:00:36] focused on this one stock that was so
+[00:00:38] obvious. But, when that stock rolled
+[00:00:41] over, and it has rolled over, then what
+[00:00:44] do traders do? So, traders ended up
+[00:00:46] basically jumping to the next stock
+[00:00:49] down, which has now moved its way up to
+[00:00:52] being the leading gainer. So, the two
+[00:00:53] swapped places and it So, we really saw
+[00:00:56] this kind of like musical chairs where
+[00:00:58] everyone was focused on this stock and
+[00:01:00] everyone switched to focus on that
+[00:01:01] stock. As I finished the day here, I'm
+[00:01:03] in the green, as you'll see. Now,
+[00:01:05] actually, this is the uh the simulator
+[00:01:07] here, which I was just um demonstrating
+[00:01:09] uh for members. So, $14 loss in the
+[00:01:12] simulator. Um but, this is all
+[00:01:15] integrated into the Day Trade Dash
+[00:01:16] software for charting, scanning, news,
+[00:01:18] simulated trading, so you can practice
+[00:01:20] trading these new strategies you're
+[00:01:22] learning. And the reason I want you to
+[00:01:23] do that is because I don't want you to
+[00:01:25] put real money on the line until you can
+[00:01:27] go in to your daily performance and your
+[00:01:29] aptitudes and see that you are
+[00:01:31] consistently profitable. So, you know,
+[00:01:33] in the simulator where I'm just kind of,
+[00:01:35] you know, messing around, I just punch a
+[00:01:36] bunch of buttons, basically, and just
+[00:01:38] show people execution. I'm not trading
+[00:01:40] in the simulator to make money. So, my
+[00:01:42] accuracy is pretty poor. I'm red quite a
+[00:01:44] lot, and I shouldn't be trading with
+[00:01:46] real money if that was my strategy.
+[00:01:48] However, as you know, that's just for
+[00:01:50] simulating. That's just for testing
+[00:01:52] things out. For me, this is where I keep
+[00:01:54] my metrics of real money trading. And
+[00:01:57] this is Trade Review, and this is a look
+[00:01:59] back at the last Well, we could just
+[00:02:01] look at the last week or so. So, if we
+[00:02:03] look back here, you can see
+[00:02:05] um
+[00:02:06] kind of a little slow period until
+[00:02:08] yesterday had a $24,000 green day, and
+[00:02:11] today I'm up 18,000, as you could see
+[00:02:14] right there. I peaked at 29,000 on the
+[00:02:17] day, same as yesterday, and I gave back
+[00:02:19] about 11,000 off the top. I think I had
+[00:02:21] total of about five trades today. Let's
+[00:02:24] see, the first trade was a winner,
+[00:02:25] second trade was a winner, third trade
+[00:02:27] was a big loss, fourth trade was a small
+[00:02:30] loss. So, actually it's four trades, and
+[00:02:33] 50% accuracy.
+[00:02:34] And yet, even with only 50% accuracy,
+[00:02:37] I'm doing really well because of my
+[00:02:39] profit to loss ratio. So, if we look at
+[00:02:42] detailed here, and we look just at
+[00:02:44] month-to-date, so this will be just this
+[00:02:47] month. So, we're just going to look at
+[00:02:49] the month of July. We're going to look
+[00:02:50] at our average winners and our average
+[00:02:51] losers. So, average winners are $6,200,
+[00:02:55] average losers are 1,300. So, even right
+[00:02:57] now, with dismally low 41% accuracy, I'm
+[00:03:01] up $50,000 on the month. Now, today,
+[00:03:05] with 50% accuracy, I have two more
+[00:03:06] trades, so it'll be a total of 14
+[00:03:08] winning trades, and
+[00:03:11] 19 losing trades. So, you know, the
+[00:03:13] metrics will change slightly, but still,
+[00:03:15] accuracy has been a little bit poor.
+[00:03:17] However,
+[00:03:19] I've been cutting my losses quickly. And
+[00:03:20] so, if you cut your losses quickly, even
+[00:03:22] with poor accuracy, you can do really
+[00:03:23] well. It's all about the relationship
+[00:03:25] between the average winners and the
+[00:03:26] average losers. But, if we look at a
+[00:03:28] calendar here for the month of
+[00:03:31] July,
+[00:03:33] you know, I was hoping to get a stronger
+[00:03:35] start. And the reason was because on
+[00:03:37] Tuesday, June 30th, I was up something
+[00:03:40] like 77, 80,000 dollars. It was a really
+[00:03:43] solid green day. It was a great way to
+[00:03:44] finish the month. And then I thought,
+[00:03:46] all right, here we go. This is great.
+[00:03:48] We're going to have a great week here.
+[00:03:49] And then it really cooled off on
+[00:03:50] Wednesday and Thursday, and then the
+[00:03:52] market was closed on uh Friday the 3rd
+[00:03:54] for the 4th of July holiday weekend.
+[00:03:57] Coming back, I thought, "All right, you
+[00:03:58] know what though? I had such a strong
+[00:04:00] finish to June. It's a holiday week, but
+[00:04:02] we're going to come back first full week
+[00:04:04] of July, and we're going to crush it."
+[00:04:05] That's what I was thinking. But, we came
+[00:04:07] back on Monday, it's crickets. Tuesday,
+[00:04:09] not much better. Wednesday, no trades.
+[00:04:12] And then finally, yesterday, Thursday,
+[00:04:14] we had a stock that was squeezing. So,
+[00:04:16] yesterday we had some action. But, if
+[00:04:18] you recall yesterday, it was all focused
+[00:04:20] on that one stock. And everything else
+[00:04:22] was just, you know, seconds. No one
+[00:04:24] traded it.
+[00:04:25] Today was very similar. We had GMMM
+[00:04:28] squeezing up pre-market. And GMMM was
+[00:04:31] our leading gainer. Right now, it's up
+[00:04:32] 115%,
+[00:04:34] but this morning, when it was first on
+[00:04:36] the scans, let's see, uh yesterday's
+[00:04:38] close, in this area we were up 170%. We
+[00:04:41] peaked at 250%
+[00:04:44] today. Uh and this was the leading
+[00:04:46] gainer by far, and the second leader,
+[00:04:49] the second leading gainer of stocks
+[00:04:50] above 50 cents, was only up 30%. So,
+[00:04:54] everyone was trading this one. I mean,
+[00:04:56] it currently has what? 100
+[00:04:58] 106 million shares of volume, and the
+[00:05:01] others, no one was focused on. Now,
+[00:05:04] once GMM rolled over, attention switched
+[00:05:08] to
+[00:05:09] So, it was only when they had this
+[00:05:11] switch. So, musical chairs, right?
+[00:05:13] Everyone gave up on GMM. Look at the
+[00:05:15] drop. People gave up on GMM, it sold it
+[00:05:17] sells off sold off, and then they
+[00:05:19] switched to JZ XN. This one picks up.
+[00:05:21] So, people did a little trade. The thing
+[00:05:23] with GMM is that it made such a big move
+[00:05:25] pre-market, but it um unfortunately,
+[00:05:30] this move was also marked by a couple of
+[00:05:32] big false breakouts. As you can see
+[00:05:34] here, this one, this one. And I caught I
+[00:05:38] caught one of them
+[00:05:39] um myself. So,
+[00:05:41] why don't we break down the trades that
+[00:05:42] I took on it? Now, as you'll see right
+[00:05:44] now, in my small account, there are no
+[00:05:46] trades. Um
+[00:05:48] and I'm not going to do a small cap
+[00:05:49] small account recap today. However,
+[00:05:51] you'll see three canceled orders because
+[00:05:53] I tried to buy. I tried to buy and my
+[00:05:56] order I don't know. They just got They
+[00:05:59] didn't fill. And so, I have no I just
+[00:06:01] ended up having to cancel it. It didn't
+[00:06:03] fill. I don't know why. But this was at
+[00:06:05] $4.14.
+[00:06:07] So, and it was for about 3,700 shares.
+[00:06:10] So, I'll show you that trade in just a
+[00:06:11] second. All right. So,
+[00:06:13] uh So, yeah. First sat down this morning
+[00:06:15] and GMM was the leading gainer. Um now
+[00:06:18] it's Friday and my schedule today was a
+[00:06:20] little funny. So, I was helping um my
+[00:06:23] kids getting ready for um summer camp
+[00:06:26] and uh So, I I ended was running a
+[00:06:28] couple minutes late and so I missed this
+[00:06:30] first trade right here at 7:00 a.m.
+[00:06:32] Bummer. Now, would I have taken it? I
+[00:06:34] don't know. I mean, it's kind of funny
+[00:06:36] like you had this big move after hours,
+[00:06:38] pre-market extends higher to four, pulls
+[00:06:40] back. It's below VWAP, below VWAP, below
+[00:06:43] VWAP, and then it rips through VWAP
+[00:06:45] here. I probably would have taken a
+[00:06:47] micro pullback right in there. Let's
+[00:06:49] look at the 10-second chart.
+[00:06:52] So,
+[00:06:53] I'm going to move this forward.
+[00:06:56] Yeah, I probably I probably would have
+[00:06:58] bought right in here for a little dip
+[00:07:00] from 390 up to 420 and then 440.
+[00:07:04] Uh it wouldn't have been obviously a
+[00:07:05] home run, but it would have been a
+[00:07:06] decent trade. So, I would have bought
+[00:07:08] that micro pullback right in there.
+[00:07:09] Anyways, I missed that and by the time I
+[00:07:11] was sitting down, it was consolidating
+[00:07:13] here. However, when I looked at it at
+[00:07:15] that time, it already had a lot of
+[00:07:17] volume and it looked very thickly
+[00:07:18] traded. When I first pulled up the level
+[00:07:20] two, I was looking at the spreads and
+[00:07:22] they were very tight, even tighter than
+[00:07:23] they are right now. They were like a
+[00:07:25] 1-cent spread. And and it was stacked on
+[00:07:28] the ask, stacked on the offer, stacked
+[00:07:29] on the bid. And so, I felt like, "Man, I
+[00:07:31] just don't know if this thing's really
+[00:07:32] going to be able to open up. I I kind of
+[00:07:34] feel like it it won't." So, I was
+[00:07:37] hesitating a bit. I was just watching it
+[00:07:40] um and it does end up breaking here from
+[00:07:41] 402 to 444 and five. And I was like,
+[00:07:44] "Gosh darn it."
+[00:07:45] Well,
+[00:07:46] I don't know. I I guess I missed it, you
+[00:07:48] know. We'll wait for the next one. Drew
+[00:07:50] a blue line connecting the top of those
+[00:07:51] two candles, just like that. Little
+[00:07:53] ascending resistance trend line. It
+[00:07:55] comes down here and it comes back up. Do
+[00:07:57] I take this trade for the squeeze
+[00:07:59] through five? I don't because look down,
+[00:08:01] the MACD had flipped into the negative.
+[00:08:04] And so I said, "No, it pulled back a
+[00:08:05] little too much. The MACD flipped
+[00:08:07] negative. I'm not going to take that
+[00:08:08] trade."
+[00:08:09] So I don't take it. It pulls back a
+[00:08:10] little bit more. It goes under volume
+[00:08:12] weighted average price and it curls back
+[00:08:14] up right here. And that was the trade
+[00:08:16] that I took. I was looking at the break
+[00:08:17] of 444 and then the break of 453, the
+[00:08:20] high here, for a retest of five. And so
+[00:08:23] I punched that order, as you can see,
+[00:08:26] and I'm
+[00:08:27] I have no idea why the order didn't
+[00:08:29] fill. I mean, it says this one was
+[00:08:30] rejected for buying power, but this was
+[00:08:33] this was the one that should have
+[00:08:34] filled. So this one I pressed, it didn't
+[00:08:36] fill. Then I pressed it two more times
+[00:08:37] and it still didn't fill. I don't know.
+[00:08:40] I I just don't know.
+[00:08:41] So, it's disappointing, but um,
+[00:08:45] they say that's what it feels like to
+[00:08:47] get Schwabbed.
+[00:08:48] Um, to watch a stock go and your order
+[00:08:50] gets jumped for whatever reason. It
+[00:08:52] happened uh, a couple It's happened a
+[00:08:54] few times, but anyways, that happened
+[00:08:55] there. So
+[00:08:57] So we get this nice pop right there, but
+[00:09:00] small account doesn't get to benefit
+[00:09:01] from it. All right, so that's a bummer.
+[00:09:03] So then it pulls back, consolidates, it
+[00:09:05] pushes a little higher, pulls back, goes
+[00:09:07] sideways. And then we end up squeezing
+[00:09:10] here, as you can see, up to the high of
+[00:09:12] 650.
+[00:09:13] So in this area here, I got interested
+[00:09:17] because what I was noticing, and I'll
+[00:09:19] show you on the 10-second chart, was
+[00:09:21] that we hit this high of five, then we
+[00:09:23] pull back, then we come back up. Uh,
+[00:09:25] then we Let's see, where is it? So
+[00:09:29] it was right here. We have this nice pop
+[00:09:31] right there. We come up to here and we
+[00:09:33] drop down. And I was wondering how low
+[00:09:36] it was going to drop. I wasn't really
+[00:09:38] sure. It ends up coming down here at
+[00:09:39] about 480, you know, pops up, pulls
+[00:09:42] back. And what ends up happening is we
+[00:09:44] kind of just have this
+[00:09:46] this sort of support level. Like it's
+[00:09:48] just kind of
+[00:09:49] it like it's not dying.
+[00:09:52] And so as I kind of watched it here
+[00:09:54] dipping down and then popping up and
+[00:09:56] dipping down, I was paying close
+[00:09:57] attention to the high of day, which was
+[00:10:00] right here around 538. So this tap broke
+[00:10:04] it, pulls back, tests it, pulls back.
+[00:10:06] And then when it curled up here, I
+[00:10:08] punched it right there in my big
+[00:10:10] account. And this gave us a squeeze from
+[00:10:12] 540 up to 610. It pulls back, and then
+[00:10:16] right here I'm getting back in. We get a
+[00:10:18] squeeze up to 640, and then right here
+[00:10:20] I'm adding back. So first winner,
+[00:10:22] second winner,
+[00:10:24] loser.
+[00:10:25] So winner, winner, loser. And then
+[00:10:28] bought the dip down here and lost again,
+[00:10:30] but only that was a small It was a small
+[00:10:32] loss. So this is where I started to step
+[00:10:35] up to the plate and get aggressive, and
+[00:10:36] then it just didn't come together. And
+[00:10:38] when it curled back up here,
+[00:10:40] let's switch that over to
+[00:10:43] let's see, the 1-minute chart. The MACD,
+[00:10:46] as you can see, again was negative. And
+[00:10:49] this was very similar to the rejection
+[00:10:50] we'd had at five, so I was like, "Nope,
+[00:10:52] I can't do that." Then as we came closer
+[00:10:54] to the open, it was just pulling back
+[00:10:55] too much, and so I didn't get any more
+[00:10:57] trades on it. I did see JZXN
+[00:11:00] um hit the scanners with news this
+[00:11:02] morning. Um signs AI signs agreement and
+[00:11:05] cooperation agreement with AI
+[00:11:06] intelligent imaging um data platform
+[00:11:08] company blah blah blah blah. And I was
+[00:11:10] like, "Ah, I don't know. It's a Chinese
+[00:11:12] stock. We've seen these pops on it
+[00:11:14] before. It's a little cheaper. Not
+[00:11:16] sure." You know, daily chart, nothing
+[00:11:18] super concerning, uh but wasn't really
+[00:11:20] sure. It popped up to two, it then sold
+[00:11:23] off, as you can see right here, and then
+[00:11:25] it kind of comes back up again. So
+[00:11:28] yeah, I don't know. I just um that one I
+[00:11:30] just wasn't too sure about, and so I
+[00:11:32] didn't end up taking the trade on it. Uh
+[00:11:34] I'm going to just switch this to the
+[00:11:35] extended line from the ray. So, if you
+[00:11:37] put a little star next to the tool that
+[00:11:39] you like using, you'll get this little
+[00:11:40] sticky menu that you can use when you're
+[00:11:43] in like full screen mode. So, full
+[00:11:45] screen mode, then you can grab the the
+[00:11:46] ones that you want.
+[00:11:48] So, anyways, JZXN moved a little bit
+[00:11:50] higher. Now, yesterday after the closing
+[00:11:52] bell or well, yeah, it was after the
+[00:11:53] closing bell, we had JLHL that ended up
+[00:11:56] putting in a unbelievable move. So, this
+[00:11:59] one was just kind of grinding. Uh
+[00:12:01] grinding, grinding, grinding, and then
+[00:12:03] all of a sudden it goes schwing from $15
+[00:12:07] to $25 a share all the way up here to a
+[00:12:09] high of What was it? 30 30 $2.70?
+[00:12:14] That's unbelievable. It's a huge move.
+[00:12:16] Really impressive. Uh but then it ends
+[00:12:18] up coming back down. So, my guess is
+[00:12:20] there are some shorts that got trapped
+[00:12:21] and got squeezed out. Um I wondered if
+[00:12:24] we would see a short squeeze on GMM
+[00:12:26] because of the way it sort of just kept
+[00:12:28] not dying. Um you know, but
+[00:12:31] on the daily chart, the areas I was kind
+[00:12:33] of watching was that we had this window
+[00:12:35] from about 475 up to about 1173, the top
+[00:12:39] of this candle back here on um
+[00:12:41] June 9th. And then back here, we had a
+[00:12:45] sort of this gap that began right there
+[00:12:47] and then goes all the way up to here.
+[00:12:49] And so, anyways, there were a couple
+[00:12:50] interesting windows, um but it wasn't
+[00:12:52] able to fill them. So, in any event, I'm
+[00:12:55] finishing the day in the green. I'm
+[00:12:57] grateful for that, and I will live to
+[00:12:59] trade another day. I'll be back at it on
+[00:13:01] Monday morning, and so I hope you guys
+[00:13:03] all have a great weekend, and reminder
+[00:13:05] as always to take it slow, manage your
+[00:13:07] risk, and practice in the simulator
+[00:13:09] before putting real money on the line.

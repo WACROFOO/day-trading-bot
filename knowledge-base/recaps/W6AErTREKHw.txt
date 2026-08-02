@@ -1,0 +1,315 @@
+# Short Sellers Didn't See This Coming...
+# https://www.youtube.com/watch?v=W6AErTREKHw
+# upload_date: 20260622
+# duration_sec: 906
+
+[00:00:01] What's up everyone? Welcome to day seven of my
+[00:00:01] brand new small account challenge of growing a
+[00:00:07] $2,000 account using Charles Schwab as my broker.
+[00:00:07] Today is a green day. Now, if you've been tuning
+[00:00:14] in to this series, you may know that yesterday,
+[00:00:14] day six, was a red day. But fortunately,
+[00:00:20] between yesterday, day six, and today, we had
+[00:00:20] a weekend. So, today's Monday morning. This
+[00:00:26] was an opportunity for me to kind of reset over
+[00:00:26] the weekend, bring the emotions down a little
+[00:00:31] bit and come back here Monday morning refreshed.
+[00:00:31] And so for me, oftent times the day after a red
+[00:00:39] day can be a fork in the road. I could do one of
+[00:00:39] two things. I can either come back swinging hard,
+[00:00:46] revenge trading, really frustrated, and have a
+[00:00:46] second red day in a row. And usually when that
+[00:00:52] happens, the second red day is even bigger than
+[00:00:52] the first because I'm taking bigger positions to
+[00:00:57] try to make back all of the previous day's loss
+[00:00:57] very quickly. But if the market's not strong,
+[00:01:02] I end up with a second big red day. It could
+[00:01:02] even go on for three, four, five, six red days
+[00:01:06] in a row. I mean, you never know. If you don't
+[00:01:06] want to stop, you just keep coming back with that
+[00:01:11] same mentality of I'm just going to make back the
+[00:01:11] loss. You get stubborn. When you trade like that,
+[00:01:16] you end up losing a lot of money. And so the
+[00:01:16] weekend was helpful. It was an opportunity to
+[00:01:22] kind of put some space between me and that red day
+[00:01:22] and come back this morning and be patient. And so
+[00:01:28] when I sat down this morning, I reminded myself
+[00:01:28] that, you know what, even though I had a red day
+[00:01:33] on day six, I've still made a lot of progress in
+[00:01:33] this challenge. And the best way for me to get
+[00:01:39] back on track is to go back to focusing on the
+[00:01:39] best quality setups. Because if you recall from
+[00:01:45] day six, one of the issues was that I was trading
+[00:01:45] a stock that didn't meet all five pillars of stock
+[00:01:50] selection. The price was too low. It just wasn't
+[00:01:50] quite right. So today, things turned around in a
+[00:01:56] pretty big way. We had a stock that squeezed up
+[00:01:56] over 250%. Now, this one was kind of interesting
+[00:02:03] because the stock has popped up a couple times
+[00:02:03] in the last few trading sessions, popped up
+[00:02:08] and reversed, popped up and reversed. Today was
+[00:02:08] different. It popped up. It held. It trapped early
+[00:02:14] short sellers and then it squeezed as they got
+[00:02:14] forced to cover. And so as we jump into the recap,
+[00:02:21] this will be an interesting discussion about
+[00:02:21] what was different today that allowed the
+[00:02:27] stock to continue moving higher instead of reject
+[00:02:27] like it had the previous trading sessions. Okay,
+[00:02:32] so as you guys know, all of the profit from these
+[00:02:32] small account challenges gets donated to charity.
+[00:02:37] And every time you guys hit the thumbs up, you
+[00:02:37] help add an extra dollar to how much I donate. So,
+[00:02:41] as of right now, we've raised over $321,000 for
+[00:02:41] charity. This is my fourth small account challenge
+[00:02:48] here in this series of trading with a $2,000
+[00:02:48] account. Now, these are the different charities
+[00:02:53] that we've donated to, and I've donated a total
+[00:02:53] of $319,500 so far. So, I'm waiting till we get
+[00:02:59] to the next $5,000 increment to do the next uh
+[00:02:59] donation. All right, so day seven. This morning,
+[00:03:06] um, we had a stock that popped up on the scanner,
+[00:03:06] as you can see right here. And the ticker is
+[00:03:11] NXTs. Price did $9.21 in this, um, when I grabbed
+[00:03:11] this screenshot. The float is less than 1 million
+[00:03:19] shares. We've got, uh, a percentage gain of 81%.
+[00:03:19] Now, at this moment, we had a couple other stocks
+[00:03:27] that were up more. This was not the number one
+[00:03:27] leading gainer. We had Getty, which was up 128%.
+[00:03:33] We had TN which was up 67 or sorry uh 90% 67
+[00:03:33] cent stock though a little too cheap. We had
+[00:03:40] SGT up 58%. We had NXTs here at about 57%. It sort
+[00:03:40] of dipped down when I grabbed the screenshot and
+[00:03:48] then it kind of rallied back up. So at this
+[00:03:48] point it wasn't the leading gainer. Now what
+[00:03:54] you may know is that I really like trading a stock
+[00:03:54] that is the leading gainer in the market because
+[00:03:58] that makes me feel that it is the most obvious
+[00:03:58] that everyone's going to be looking at it. So
+[00:04:03] when a stock is the fifth or sixth or seventh
+[00:04:03] leading gainer, kind of down lower on the scan,
+[00:04:08] I feel that it's not as obvious. Now today, this
+[00:04:08] is a challenge because Getty was already up 128%.
+[00:04:14] So in order for something to be more obvious,
+[00:04:14] it had to be up in theory more than 128%.
+[00:04:22] So, if I pull up um a chart here, we're just
+[00:04:22] going to look uh briefly at a couple of the
+[00:04:26] other stocks that were leading um the way and then
+[00:04:26] we'll get into uh my trade on NXTs. So, Getty,
+[00:04:34] oops, get TY. Um this one had popped up at about
+[00:04:34] 4 in the morning. There was some news out on it,
+[00:04:41] but then after that initial pop, it just kind
+[00:04:41] of started stairstepping down. So, this really
+[00:04:48] never presented an opportunity for a trade unless
+[00:04:48] you were sitting down at 4 in the morning. So,
+[00:04:54] although it was the leading gainer, I think
+[00:04:54] if anyone pulled it up, they would say, "This
+[00:04:58] isn't really that obvious. I probably shouldn't be
+[00:04:58] trading this." So, although again, leading gainer,
+[00:05:03] easy to dismiss that as not being the one that
+[00:05:03] people would focus on. TN second leading gainer.
+[00:05:09] Now, this one had made a big move in after
+[00:05:09] hours um in the previous session last week
+[00:05:14] and then popped up a little bit at 4:00 a.m. and
+[00:05:14] then sold off. So, for most of pre-market, I think
+[00:05:20] it was fair to say that this was also not super
+[00:05:20] obvious as it was trading in this area below this
+[00:05:25] orange line, which is the volume weighted average
+[00:05:25] price. When a stock is below the volume weighted
+[00:05:30] average price, it's inherently bearish. above it
+[00:05:30] is bullish and trade most of the morning below it
+[00:05:35] until at 8 a.m. it got above it then back below
+[00:05:35] it and then back above it here just after the
+[00:05:39] opening bell. So it's possible that TN did take a
+[00:05:39] little bit of attention uh because there were some
+[00:05:46] moments where it was a bit more bullish. The next
+[00:05:46] one down was SGT up 58% squeezed up in after hours
+[00:05:53] trading in the last session moved higher at 4
+[00:05:53] a.m. and then started just stairstepping down. So,
+[00:05:59] because that was stairstepping down, this one
+[00:05:59] was no good for all of pre-market. And so, I sat
+[00:06:04] here during the pre-market session just patiently
+[00:06:04] waiting to see if anything would hit our scanners
+[00:06:08] that looked good. And so, I'm using my small cap
+[00:06:08] highay momentum scanner right here. And what this
+[00:06:13] is doing is it's searching the entire market in
+[00:06:13] real time for stocks that meet my five pillars
+[00:06:18] of stock selection. Now, it casts a little bit
+[00:06:18] of a wider net and then it gives me a chance to
+[00:06:23] um sort of do a discretionary analysis of deciding
+[00:06:23] which one is uh really worth consideration. So,
+[00:06:31] at about 8:25 a.m. NXTs hits our scanner. So,
+[00:06:31] NXTs hits the scanner and I'll pull up my other
+[00:06:41] um chart here to show this to you. So, when NXTs
+[00:06:41] first hits my scanner, you can see this is the
+[00:06:46] move from $45 a share all the way up to just under
+[00:06:46] 20 bucks. It's phenomenal. When it first hit my
+[00:06:53] scanner, I pulled it up and I see, okay, this is a
+[00:06:53] um they've they've got an AI um you know, kind of
+[00:07:01] um mitochondrial drug discovery headline. So,
+[00:07:01] seems like you know, a biotech type of stock.
+[00:07:11] um the sector says materials and agriculture,
+[00:07:11] but that doesn't really uh ring true with um
+[00:07:17] what we're hearing, what we're seeing in these
+[00:07:17] headlines. So, when this first pop pops up,
+[00:07:24] I look at the chart. I've got it on full screen
+[00:07:24] like this. And I noticed that in the last couple
+[00:07:30] days here, these two days, it had um you
+[00:07:30] know, some volume. Now, this is something
+[00:07:36] I noticed. When a stock recently has had almost
+[00:07:36] no volume and then today has a ton of volume,
+[00:07:43] it creates a greater imbalance between supply and
+[00:07:43] demand. The relative volume ratio is higher. And
+[00:07:50] the relative volume measures the volume today
+[00:07:50] versus a typical day. And so when I saw that,
+[00:07:54] I remembered actually that yes, this stock had
+[00:07:54] popped up a couple times in the previous trading
+[00:07:59] sessions. And look at this. This is a day where it
+[00:07:59] popped from 7 all the way up to 12 and drops down,
+[00:08:05] ends up red on the day. Another day here,
+[00:08:05] goes from 5 to 9 all the way back to five. So,
+[00:08:11] when it first popped up, I was thinking, well, can
+[00:08:11] we can we really trust it? Um, and then I thought,
+[00:08:18] what was different about those days? And one of
+[00:08:18] the things that was different about these two
+[00:08:22] days is that we had a lot of other stocks popping
+[00:08:22] up on those days. And so this stock was fighting
+[00:08:29] for attention with a lot of other stocks that were
+[00:08:29] moving. Today, there really wasn't anything else
+[00:08:34] moving at the time that this popped up and I
+[00:08:34] think that was really to its advantage. Now,
+[00:08:40] it did have a a headline that came out, so it
+[00:08:40] had breaking news, which is good. And when it
+[00:08:44] first popped up right here, I let it pop up. It
+[00:08:44] goes up to, you know, from 480 to 5. Little micro
+[00:08:51] pullback here from six, goes up to 680, then goes
+[00:08:51] up to a high of 740. It dips down and I took my
+[00:08:57] first trade on this little pullback right there.
+[00:08:57] So, that was my first entry. It ends up squeezing
+[00:09:02] up to eight. I take my profit off the table as
+[00:09:02] it pushes higher. It dips down again. It goes
+[00:09:08] higher. I kind of regretting selling, but I'm
+[00:09:08] glad that I made money on it. It then goes down
+[00:09:14] and it goes below the volume weight average price,
+[00:09:14] that important trend line. And then it comes back
+[00:09:19] above it right here. And as it swings back above
+[00:09:19] it, we go right back to this high of nine. Now,
+[00:09:24] I didn't feel quite confident enough to punch it
+[00:09:24] right there because of the previous rejection on
+[00:09:29] the other days where it just kept going lower.
+[00:09:29] But once it started to base out here, I started to
+[00:09:34] buy right as it would break back over VWAP. And I
+[00:09:34] was looking for the squeeze through the high. So,
+[00:09:40] I took one trade here, green, second trade here,
+[00:09:40] green, and my third trade here was red. So, now
+[00:09:47] I've taken a total of three trades on the stock.
+[00:09:47] All right. So the three trades down here, down
+[00:09:53] here, and right in here. And this one resulted
+[00:09:53] in being red. So after those three trades,
+[00:09:59] I was green, but I was thinking, you know, maybe
+[00:09:59] I should take my foot off the gas. At that point,
+[00:10:05] I was up about I think it was $600. So I'd made
+[00:10:05] a little bit of profit. And then on on the loss,
+[00:10:12] it was not a big loss, maybe $50 loss, which is
+[00:10:12] fine, but I thought maybe this is, you know, as
+[00:10:17] good as it's going to get. And then it pulls back
+[00:10:17] again. It breaks below VWAP a second time or it in
+[00:10:24] more kind of earnest it really is below it. Then
+[00:10:24] it comes back up here and it rips all the way back
+[00:10:29] up to 950. Now I had previously said I thought we
+[00:10:29] would see resistance at around $ 939. So why did
+[00:10:35] I say $9.39? Well, if we look at this chart right
+[00:10:35] here and we look at this previous high back here,
+[00:10:43] I had my I Well, looks like I clicked it a little
+[00:10:43] bit off. So, the high there was actually 9:45. U
+[00:10:49] So, 9:45 was I I quickly drew a line there, and
+[00:10:49] it looks like I didn't snap it to the top of that
+[00:10:54] candle. So, I said 939, but it should have been
+[00:10:54] 945. That was the correct spot to the penny. So,
+[00:11:00] 945 was the high here. And then I said, if we can
+[00:11:00] break that level, we've got room up to the high of
+[00:11:05] this candle wick, which is 1075. And then we've
+[00:11:05] got room up to the high of this candle, which is
+[00:11:09] 11 or sorry, $12 a share. And then above that, we
+[00:11:09] have no resistance. So, if we can get above any,
+[00:11:14] at least not any nearby. So, if we can get above
+[00:11:14] 12, we're in great shape. Now, during pre-market,
+[00:11:19] we end up uh trading in this kind of area right
+[00:11:19] here. So, we dip back down. And I'm just going to
+[00:11:24] switch this to um the one minute time frame just
+[00:11:24] to make it easy. So, switch to the one minute. So,
+[00:11:32] we end up breaking um back over 950 right here.
+[00:11:32] And this is where I took my fourth trade. And
+[00:11:38] it squeezes up to 11, which was an awesome trade.
+[00:11:38] Although, because it's more expensive, I couldn't
+[00:11:44] afford very many shares. And so the total profit
+[00:11:44] that I made on it was somewhat limited. But at
+[00:11:48] that point, it put me up a little over $1,000.
+[00:11:48] Ends up dipping down, coming back up. I took a
+[00:11:53] few more trades in this area in my main account,
+[00:11:53] but not in the small account because I didn't feel
+[00:11:57] that I could really manage my risk. Then at
+[00:11:57] the open, we squeeze through this pre-market
+[00:12:01] high right here. We break 12. We go up to that
+[00:12:01] high, we do a micro pullback, and we squeeze up.
+[00:12:06] We halt for five minutes on a volatility circuit
+[00:12:06] breaker halt. We then resume. We go into a second
+[00:12:11] halt. Then we resume, we go up to almost a
+[00:12:11] third halt. We dip back down to 15. We rally
+[00:12:16] back up to 1950. And now we're sort of sitting
+[00:12:16] right here in between this range. An amazing
+[00:12:21] move. Some really strong momentum on this one.
+[00:12:21] Now, typically I'll say that when I'm trading,
+[00:12:28] I look for uh and this is a this is the one minute
+[00:12:28] chart, but if we look at the five-minute chart,
+[00:12:34] and I was paying attention to the five-minute
+[00:12:34] chart on this because it was giving me some
+[00:12:37] oops, sorry, got to switch the time frame
+[00:12:37] here. It was giving us some nice signals.
+[00:12:42] So typically I expect a nice pullback on the first
+[00:12:42] and second pullback. So this is our first pullback
+[00:12:48] right here and this is our second pullback. And I
+[00:12:48] was a little disappointed that the breakout on the
+[00:12:54] second pullback here was smaller than the breakout
+[00:12:54] on the first pullback. Sometimes when you see that
+[00:12:59] happen that the breakouts are getting smaller and
+[00:12:59] smaller and smaller and smaller eventually they
+[00:13:04] just roll over. So, it was unexpected that this
+[00:13:04] third breakout was so strong from 10 all the way
+[00:13:13] up to nearly $20 a share. An incredible move. But
+[00:13:13] I think it speaks to the fact that short sellers
+[00:13:19] got stuck on this one because they had a bias
+[00:13:19] based on the last couple trading sessions. But one
+[00:13:24] of the things that can be confusing is that while
+[00:13:24] the underlying catalyst on this stock may not have
+[00:13:29] been significantly stronger than the headlines
+[00:13:29] on the previous day, today this was the most
+[00:13:35] obvious stock in the market. And being the most
+[00:13:35] obvious stock in the market is what allowed it to
+[00:13:41] gain this amount of volume and continue squeezing
+[00:13:41] higher and now be up over 250% on the day. So some
+[00:13:49] really phenomenal price action on this one. Again,
+[00:13:49] my total positions were around 400 500 shares. So,
+[00:13:55] I wasn't really able to take big size on this. I
+[00:13:55] mean, I actually could have taken bigger size, but
+[00:13:59] slightly bigger, but not that much bigger. Um, so
+[00:13:59] in total, we end up getting this phenomenal move,
+[00:14:05] and I'm up $1,3724, putting my account now just
+[00:14:05] over $8,000 in total equity. I started with 2,000,
+[00:14:14] which means I've made $6,000 of profit. The
+[00:14:14] account's up 300% here in 7 days. 14 trades,
+[00:14:21] 11 winners, three losers, 78% accuracy,
+[00:14:21] and average winning trade or average uh
+[00:14:27] gain per trade is $430.38. Now, if you had
+[00:14:27] joined our twoe trial a couple weeks ago,
+[00:14:34] you would have been able to watch all of this
+[00:14:34] live in real time, seeing my positions window,
+[00:14:39] seeing as I'm getting in, as I'm getting out.
+[00:14:39] And so, if you haven't already, make sure you
+[00:14:42] check out the twoe trial with a link posted in the
+[00:14:42] top of the description and pinned to the top of
+[00:14:47] the comments. I'll remind you guys as always that
+[00:14:47] trading is risky. My results aren't typical. So,
+[00:14:51] please manage your risk, take it slow, and
+[00:14:51] always practice in a simulator before putting
+[00:14:56] real money on the line. I will see you guys for
+[00:14:56] day eight streaming at 7 a.m. tomorrow morning.
