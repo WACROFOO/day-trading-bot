@@ -21,7 +21,11 @@ from run20 import fetch_symbol
 from run20b import build
 
 OUT = _DATA
-WEEK = ['2026-07-27', '2026-07-28', '2026-07-29', '2026-07-30', '2026-07-31']
+WEEKS = {
+    '07-27': ['2026-07-27', '2026-07-28', '2026-07-29', '2026-07-30', '2026-07-31'],
+    '07-20': ['2026-07-20', '2026-07-21', '2026-07-22', '2026-07-23', '2026-07-24'],
+}
+WEEK = WEEKS[os.environ.get('WEEK', '07-27')]
 ACCOUNT = 10_000.0
 
 
@@ -62,7 +66,7 @@ def main():
                 dropped += 1
         lists[day] = keep
 
-    print(f'=== week of 2026-07-27, max {max_trades} trades/day, '
+    print(f'=== week of {WEEK[0]}, max {max_trades} trades/day, '
           f'${ACCOUNT:,.0f} account ===')
     print(f'(rate-of-change <= 0 dropped {dropped} name-days)\n')
     print(f'{"day":<12}{"watchlist":<44}{"setups":>7}{"pass":>5}{"trades":>7}{"P&L":>10}')
@@ -119,7 +123,7 @@ def main():
     json.dump(dict(week=WEEK, max_trades=max_trades, total=total,
                    results=[{k: v for k, v in r.items() if k != 'log'}
                             for r in results]),
-              open(os.path.join(OUT, f'week_max{max_trades}.json'), 'w'),
+              open(os.path.join(OUT, f'week_{WEEK[0]}_max{max_trades}.json'), 'w'),
               indent=1, default=str)
 
 

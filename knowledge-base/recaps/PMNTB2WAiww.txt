@@ -1,0 +1,596 @@
+# Reading Market Sentiment...
+# https://www.youtube.com/watch?v=PMNTB2WAiww
+# duration_sec: 0
+
+[00:00:01] What's up everyone? All right, so in
+[00:00:03] What's up everyone? All right, so in today's episode I'm going to walk you
+[00:00:04] today's episode I'm going to walk you
+[00:00:04] today's episode I'm going to walk you through what I was looking at in the
+[00:00:06] through what I was looking at in the
+[00:00:06] through what I was looking at in the market this morning. As you can see,
+[00:00:08] market this morning. As you can see,
+[00:00:08] market this morning. As you can see, it's a no trade day, so I didn't end up
+[00:00:10] it's a no trade day, so I didn't end up
+[00:00:10] it's a no trade day, so I didn't end up taking any trades and I kind of didn't
+[00:00:11] taking any trades and I kind of didn't
+[00:00:11] taking any trades and I kind of didn't think I would. I'm on my laptop here
+[00:00:13] think I would. I'm on my laptop here
+[00:00:13] think I would. I'm on my laptop here today.
+[00:00:14] today.
+[00:00:14] today. Um, you know, yesterday
+[00:00:16] Um, you know, yesterday
+[00:00:16] Um, you know, yesterday was tricky. In fact, Wednesday you know
+[00:00:18] was tricky. In fact, Wednesday you know
+[00:00:18] was tricky. In fact, Wednesday you know what, this whole week has been a little
+[00:00:19] what, this whole week has been a little
+[00:00:19] what, this whole week has been a little bit tricky. I had a difficult day on
+[00:00:21] bit tricky. I had a difficult day on
+[00:00:21] bit tricky. I had a difficult day on Monday, was red 26,000, recovered to
+[00:00:24] Monday, was red 26,000, recovered to
+[00:00:24] Monday, was red 26,000, recovered to being green 36,000 or whatever it was.
+[00:00:27] being green 36,000 or whatever it was.
+[00:00:27] being green 36,000 or whatever it was. Um, Tuesday was up 20 grand, then gave
+[00:00:29] Um, Tuesday was up 20 grand, then gave
+[00:00:29] Um, Tuesday was up 20 grand, then gave back six, finished at 13. Wednesday was
+[00:00:32] back six, finished at 13. Wednesday was
+[00:00:32] back six, finished at 13. Wednesday was up 20 grand, solid. Thursday, no trades
+[00:00:35] up 20 grand, solid. Thursday, no trades
+[00:00:35] up 20 grand, solid. Thursday, no trades in the big account, small account just a
+[00:00:37] in the big account, small account just a
+[00:00:37] in the big account, small account just a tiny winner, so not much was moving on
+[00:00:39] tiny winner, so not much was moving on
+[00:00:39] tiny winner, so not much was moving on Thursday. And I noticed on Wednesday and
+[00:00:42] Thursday. And I noticed on Wednesday and
+[00:00:42] Thursday. And I noticed on Wednesday and Thursday
+[00:00:43] Thursday
+[00:00:43] Thursday that a number of the stocks that popped
+[00:00:44] that a number of the stocks that popped
+[00:00:44] that a number of the stocks that popped up ended up reversing. So yesterday Ruby
+[00:00:47] up ended up reversing. So yesterday Ruby
+[00:00:47] up ended up reversing. So yesterday Ruby was the stock that I traded and I'll go
+[00:00:49] was the stock that I traded and I'll go
+[00:00:49] was the stock that I traded and I'll go full screen here and you can see that
+[00:00:51] full screen here and you can see that
+[00:00:51] full screen here and you can see that this obviously popped up. We had this
+[00:00:53] this obviously popped up. We had this
+[00:00:53] this obviously popped up. We had this sort of big move, but then it gave it
+[00:00:55] sort of big move, but then it gave it
+[00:00:55] sort of big move, but then it gave it all back, right? It didn't hold up. So
+[00:00:58] all back, right? It didn't hold up. So
+[00:00:58] all back, right? It didn't hold up. So yes, there was news, there was a
+[00:00:59] yes, there was news, there was a
+[00:00:59] yes, there was news, there was a catalyst, but it just couldn't sustain
+[00:01:01] catalyst, but it just couldn't sustain
+[00:01:01] catalyst, but it just couldn't sustain those gains. ERNA from Wednesday, this
+[00:01:04] those gains. ERNA from Wednesday, this
+[00:01:04] those gains. ERNA from Wednesday, this one kind of similar, popped up, ended up
+[00:01:06] one kind of similar, popped up, ended up
+[00:01:06] one kind of similar, popped up, ended up reversing. There was a couple others, I
+[00:01:08] reversing. There was a couple others, I
+[00:01:08] reversing. There was a couple others, I can't remember all the tickers now, but
+[00:01:10] can't remember all the tickers now, but
+[00:01:10] can't remember all the tickers now, but in any case, having noticed this trend
+[00:01:13] in any case, having noticed this trend
+[00:01:13] in any case, having noticed this trend that they're not holding, um, I was
+[00:01:16] that they're not holding, um, I was
+[00:01:16] that they're not holding, um, I was feeling a little nervous coming into
+[00:01:17] feeling a little nervous coming into
+[00:01:17] feeling a little nervous coming into Friday. End of the week, you know, I and
+[00:01:19] Friday. End of the week, you know, I and
+[00:01:19] Friday. End of the week, you know, I and I thought, let's just go easy. In fact,
+[00:01:22] I thought, let's just go easy. In fact,
+[00:01:22] I thought, let's just go easy. In fact, let's assume that it will be a no trade
+[00:01:25] let's assume that it will be a no trade
+[00:01:25] let's assume that it will be a no trade day and let the market really prove that
+[00:01:28] day and let the market really prove that
+[00:01:28] day and let the market really prove that there's something worth stepping up to
+[00:01:29] there's something worth stepping up to
+[00:01:29] there's something worth stepping up to the plate on. So that was my perspective
+[00:01:31] the plate on. So that was my perspective
+[00:01:31] the plate on. So that was my perspective coming into the day. I saw PSNY warrants
+[00:01:34] coming into the day. I saw PSNY warrants
+[00:01:34] coming into the day. I saw PSNY warrants were up quite a bit.
+[00:01:36] were up quite a bit.
+[00:01:36] were up quite a bit. This is a little unusual when you have
+[00:01:38] This is a little unusual when you have
+[00:01:38] This is a little unusual when you have warrants that go up big time. Um, the
+[00:01:40] warrants that go up big time. Um, the
+[00:01:40] warrants that go up big time. Um, the underlying stock PSNY,
+[00:01:43] underlying stock PSNY,
+[00:01:43] underlying stock PSNY, uh, let's see, sorry, PSNY. The actual
+[00:01:45] uh, let's see, sorry, PSNY. The actual
+[00:01:45] uh, let's see, sorry, PSNY. The actual underlying stock also popped a little
+[00:01:48] underlying stock also popped a little
+[00:01:48] underlying stock also popped a little bit at 4:00 a.m., but then ended up
+[00:01:50] bit at 4:00 a.m., but then ended up
+[00:01:50] bit at 4:00 a.m., but then ended up selling off, Polestar Automotive
+[00:01:52] selling off, Polestar Automotive
+[00:01:52] selling off, Polestar Automotive Holdings. So it was sort of strange to
+[00:01:55] Holdings. So it was sort of strange to
+[00:01:55] Holdings. So it was sort of strange to see the warrants are still up 288%
+[00:01:59] see the warrants are still up 288%
+[00:01:59] see the warrants are still up 288% um
+[00:01:59] um
+[00:01:59] um I I don't know. I don't really know what
+[00:02:01] I I don't know. I don't really know what
+[00:02:01] I I don't know. I don't really know what to think about that, but at the end of
+[00:02:03] to think about that, but at the end of
+[00:02:03] to think about that, but at the end of the day, I don't usually like trading
+[00:02:05] the day, I don't usually like trading
+[00:02:05] the day, I don't usually like trading warrants because they're a derivative of
+[00:02:07] warrants because they're a derivative of
+[00:02:07] warrants because they're a derivative of an underlying asset. And while there are
+[00:02:09] an underlying asset. And while there are
+[00:02:09] an underlying asset. And while there are times where they can become
+[00:02:11] times where they can become
+[00:02:11] times where they can become disconnected, it's very uncommon and
+[00:02:13] disconnected, it's very uncommon and
+[00:02:13] disconnected, it's very uncommon and they usually return back to being
+[00:02:15] they usually return back to being
+[00:02:15] they usually return back to being connected. So, I'm I'm not going to
+[00:02:17] connected. So, I'm I'm not going to
+[00:02:17] connected. So, I'm I'm not going to trade that. So, then the second leading
+[00:02:20] trade that. So, then the second leading
+[00:02:20] trade that. So, then the second leading gapper as of right now is SLND. It's
+[00:02:22] gapper as of right now is SLND. It's
+[00:02:22] gapper as of right now is SLND. It's only up 62%. Now, 62% by itself is not a
+[00:02:25] only up 62%. Now, 62% by itself is not a
+[00:02:25] only up 62%. Now, 62% by itself is not a terrible gap um but in the context of,
+[00:02:29] terrible gap um but in the context of,
+[00:02:29] terrible gap um but in the context of, you know, the the current market, we've
+[00:02:31] you know, the the current market, we've
+[00:02:31] you know, the the current market, we've been seeing bigger moves on pretty much
+[00:02:32] been seeing bigger moves on pretty much
+[00:02:32] been seeing bigger moves on pretty much a daily basis. So, this this does feel
+[00:02:35] a daily basis. So, this this does feel
+[00:02:35] a daily basis. So, this this does feel like it's not enough. And then we have
+[00:02:38] like it's not enough. And then we have
+[00:02:38] like it's not enough. And then we have S. dot but S. dot is tricky because, you
+[00:02:42] S. dot but S. dot is tricky because, you
+[00:02:42] S. dot but S. dot is tricky because, you know, it's up but it's this sort of
+[00:02:44] know, it's up but it's this sort of
+[00:02:44] know, it's up but it's this sort of weird continuation from from the last
+[00:02:47] weird continuation from from the last
+[00:02:47] weird continuation from from the last couple days, but sort of like a a
+[00:02:48] couple days, but sort of like a a
+[00:02:48] couple days, but sort of like a a bounce. You know, it's like had this big
+[00:02:51] bounce. You know, it's like had this big
+[00:02:51] bounce. You know, it's like had this big move, like a huge move, and then it sold
+[00:02:54] move, like a huge move, and then it sold
+[00:02:54] move, like a huge move, and then it sold off, and then it sort of bounced, and
+[00:02:55] off, and then it sort of bounced, and
+[00:02:55] off, and then it sort of bounced, and then, you know, it's kind of bounced
+[00:02:57] then, you know, it's kind of bounced
+[00:02:57] then, you know, it's kind of bounced here, and I just I feel like trading
+[00:03:00] here, and I just I feel like trading
+[00:03:00] here, and I just I feel like trading that
+[00:03:01] that
+[00:03:01] that the price is higher, the spreads are
+[00:03:03] the price is higher, the spreads are
+[00:03:03] the price is higher, the spreads are bigger, the risk is way too high for me.
+[00:03:05] bigger, the risk is way too high for me.
+[00:03:05] bigger, the risk is way too high for me. I just I can't I can't break the ice on
+[00:03:07] I just I can't I can't break the ice on
+[00:03:07] I just I can't I can't break the ice on it. I can't get comfortable with it. So,
+[00:03:09] it. I can't get comfortable with it. So,
+[00:03:09] it. I can't get comfortable with it. So, there's no trades on S. dot. CJMB, it's
+[00:03:13] there's no trades on S. dot. CJMB, it's
+[00:03:13] there's no trades on S. dot. CJMB, it's a dollar and 22 cents. It's cheaper.
+[00:03:16] a dollar and 22 cents. It's cheaper.
+[00:03:16] a dollar and 22 cents. It's cheaper. It's been pulling back for all of
+[00:03:17] It's been pulling back for all of
+[00:03:17] It's been pulling back for all of pre-market. And then, you know what's
+[00:03:19] pre-market. And then, you know what's
+[00:03:19] pre-market. And then, you know what's really interesting is um this morning we
+[00:03:22] really interesting is um this morning we
+[00:03:22] really interesting is um this morning we had STACK. And when I first pulled up
+[00:03:25] had STACK. And when I first pulled up
+[00:03:25] had STACK. And when I first pulled up STACK on the level two, I'll show you
+[00:03:27] STACK on the level two, I'll show you
+[00:03:27] STACK on the level two, I'll show you the level two on it. It is very thickly
+[00:03:29] the level two on it. It is very thickly
+[00:03:29] the level two on it. It is very thickly traded. You can see this big stack of
+[00:03:31] traded. You can see this big stack of
+[00:03:31] traded. You can see this big stack of buyers, big stack of sellers. It's now
+[00:03:33] buyers, big stack of sellers. It's now
+[00:03:33] buyers, big stack of sellers. It's now down 13% on the day. So, it popped up
+[00:03:36] down 13% on the day. So, it popped up
+[00:03:37] down 13% on the day. So, it popped up yesterday on about 60 million shares of
+[00:03:38] yesterday on about 60 million shares of
+[00:03:38] yesterday on about 60 million shares of volume. It goes from $2 to 450 right
+[00:03:41] volume. It goes from $2 to 450 right
+[00:03:41] volume. It goes from $2 to 450 right here on the 5-minute chart. Then sort of
+[00:03:43] here on the 5-minute chart. Then sort of
+[00:03:43] here on the 5-minute chart. Then sort of pulls back, it bounces, pulls back, it
+[00:03:45] pulls back, it bounces, pulls back, it
+[00:03:45] pulls back, it bounces, pulls back, it bounces, pulls back, and it squeezes up
+[00:03:47] bounces, pulls back, and it squeezes up
+[00:03:47] bounces, pulls back, and it squeezes up to 450 pre-market. And I said, "Clearly,
+[00:03:49] to 450 pre-market. And I said, "Clearly,
+[00:03:50] to 450 pre-market. And I said, "Clearly, there's a flat top at 450. Could we get
+[00:03:52] there's a flat top at 450. Could we get
+[00:03:52] there's a flat top at 450. Could we get a cup and handle formation where it
+[00:03:54] a cup and handle formation where it
+[00:03:54] a cup and handle formation where it double tops, then consolidates for a
+[00:03:56] double tops, then consolidates for a
+[00:03:56] double tops, then consolidates for a moment, and then breaks away? Maybe. And
+[00:03:59] moment, and then breaks away? Maybe. And
+[00:03:59] moment, and then breaks away? Maybe. And we did, but I just felt like it was so
+[00:04:02] we did, but I just felt like it was so
+[00:04:02] we did, but I just felt like it was so thickly traded, I couldn't get a good
+[00:04:04] thickly traded, I couldn't get a good
+[00:04:04] thickly traded, I couldn't get a good read on it. It I didn't see a catalyst,
+[00:04:06] read on it. It I didn't see a catalyst,
+[00:04:06] read on it. It I didn't see a catalyst, and I just said, "You know what? Chinese
+[00:04:07] and I just said, "You know what? Chinese
+[00:04:08] and I just said, "You know what? Chinese stock popping up like this, I'm going to
+[00:04:09] stock popping up like this, I'm going to
+[00:04:09] stock popping up like this, I'm going to leave it alone."
+[00:04:11] leave it alone."
+[00:04:11] leave it alone." So, it goes up to five. I saw some of
+[00:04:12] So, it goes up to five. I saw some of
+[00:04:12] So, it goes up to five. I saw some of you guys said, "Oh, I got my base hit
+[00:04:14] you guys said, "Oh, I got my base hit
+[00:04:14] you guys said, "Oh, I got my base hit here on, you know, stack, whatever."
+[00:04:17] here on, you know, stack, whatever."
+[00:04:17] here on, you know, stack, whatever." That's great. I'm Look, I'm good good
+[00:04:19] That's great. I'm Look, I'm good good
+[00:04:19] That's great. I'm Look, I'm good good job, but fine. I just For me, didn't
+[00:04:22] job, but fine. I just For me, didn't
+[00:04:22] job, but fine. I just For me, didn't really feel like there was enough uh
+[00:04:24] really feel like there was enough uh
+[00:04:25] really feel like there was enough uh profit potential on it to justify the
+[00:04:27] profit potential on it to justify the
+[00:04:28] profit potential on it to justify the risk. So, I didn't take the trade. And
+[00:04:30] risk. So, I didn't take the trade. And
+[00:04:30] risk. So, I didn't take the trade. And then it ends up rejecting off five and
+[00:04:31] then it ends up rejecting off five and
+[00:04:31] then it ends up rejecting off five and dropping all the way back down to $3 a
+[00:04:34] dropping all the way back down to $3 a
+[00:04:34] dropping all the way back down to $3 a share. What a drop. I mean, that is a
+[00:04:36] share. What a drop. I mean, that is a
+[00:04:36] share. What a drop. I mean, that is a really strong drop. So, then that scared
+[00:04:39] really strong drop. So, then that scared
+[00:04:39] really strong drop. So, then that scared off everyone, I think. And after that,
+[00:04:42] off everyone, I think. And after that,
+[00:04:42] off everyone, I think. And after that, and that was that was like 8:45, but I
+[00:04:44] and that was that was like 8:45, but I
+[00:04:44] and that was that was like 8:45, but I was like, "That's kind of the nail in
+[00:04:46] was like, "That's kind of the nail in
+[00:04:46] was like, "That's kind of the nail in the coffin for today." BIYA, this one,
+[00:04:50] the coffin for today." BIYA, this one,
+[00:04:50] the coffin for today." BIYA, this one, you know,
+[00:04:52] you know,
+[00:04:52] you know, up yesterday after hours, but then
+[00:04:54] up yesterday after hours, but then
+[00:04:54] up yesterday after hours, but then pulled back here. So, today just felt
+[00:04:57] pulled back here. So, today just felt
+[00:04:57] pulled back here. So, today just felt like a bit of a miss. And, you know,
+[00:05:00] like a bit of a miss. And, you know,
+[00:05:00] like a bit of a miss. And, you know, if we look at the overall market, um
+[00:05:02] if we look at the overall market, um
+[00:05:03] if we look at the overall market, um I don't usually get super focused on the
+[00:05:06] I don't usually get super focused on the
+[00:05:06] I don't usually get super focused on the overall market. Um
+[00:05:08] overall market. Um
+[00:05:08] overall market. Um you know, but it it obviously is
+[00:05:11] you know, but it it obviously is
+[00:05:11] you know, but it it obviously is something we should be aware of at least
+[00:05:13] something we should be aware of at least
+[00:05:13] something we should be aware of at least a little bit, and we can see it the
+[00:05:15] a little bit, and we can see it the
+[00:05:15] a little bit, and we can see it the overall market has gapped down quite a
+[00:05:17] overall market has gapped down quite a
+[00:05:17] overall market has gapped down quite a bit overnight and is at the low right
+[00:05:18] bit overnight and is at the low right
+[00:05:18] bit overnight and is at the low right now. So, we don't have
+[00:05:21] now. So, we don't have
+[00:05:21] now. So, we don't have uh a tailwind from the overall market.
+[00:05:23] uh a tailwind from the overall market.
+[00:05:23] uh a tailwind from the overall market. In fact, we have the opposite. We have a
+[00:05:24] In fact, we have the opposite. We have a
+[00:05:24] In fact, we have the opposite. We have a headwind. Right? The overall markets are
+[00:05:25] headwind. Right? The overall markets are
+[00:05:25] headwind. Right? The overall markets are selling off,
+[00:05:27] selling off,
+[00:05:27] selling off, um
+[00:05:28] um
+[00:05:28] um you know, so that how how
+[00:05:30] you know, so that how how
+[00:05:30] you know, so that how how You might say, "Well, what does that
+[00:05:31] You might say, "Well, what does that
+[00:05:31] You might say, "Well, what does that really matter?" And the truth is, if
+[00:05:33] really matter?" And the truth is, if
+[00:05:33] really matter?" And the truth is, if there was a small cap company that put
+[00:05:34] there was a small cap company that put
+[00:05:34] there was a small cap company that put out a great headline today, it would
+[00:05:36] out a great headline today, it would
+[00:05:36] out a great headline today, it would still go up. It would buck the trend of
+[00:05:38] still go up. It would buck the trend of
+[00:05:38] still go up. It would buck the trend of the overall market. But, you have to
+[00:05:41] the overall market. But, you have to
+[00:05:41] the overall market. But, you have to think about the mentality of other
+[00:05:44] think about the mentality of other
+[00:05:44] think about the mentality of other traders out there. And is the mentality
+[00:05:47] traders out there. And is the mentality
+[00:05:47] traders out there. And is the mentality right now sort of on a spectrum of being
+[00:05:50] right now sort of on a spectrum of being
+[00:05:50] right now sort of on a spectrum of being um very greedy and very aggressive or a
+[00:05:54] um very greedy and very aggressive or a
+[00:05:54] um very greedy and very aggressive or a little bit more fearful?
+[00:05:56] little bit more fearful?
+[00:05:56] little bit more fearful? And I think because we've seen a couple
+[00:05:58] And I think because we've seen a couple
+[00:05:58] And I think because we've seen a couple of false breakouts this week,
+[00:06:01] of false breakouts this week,
+[00:06:01] of false breakouts this week, uh we've seen a couple a few stocks that
+[00:06:03] uh we've seen a couple a few stocks that
+[00:06:03] uh we've seen a couple a few stocks that did like a full round trip that popped
+[00:06:04] did like a full round trip that popped
+[00:06:04] did like a full round trip that popped up, didn't hold up, and then came all
+[00:06:06] up, didn't hold up, and then came all
+[00:06:06] up, didn't hold up, and then came all the way back down, that the sentiment is
+[00:06:09] the way back down, that the sentiment is
+[00:06:09] the way back down, that the sentiment is a little bit more fearful. Traders are a
+[00:06:11] a little bit more fearful. Traders are a
+[00:06:11] a little bit more fearful. Traders are a little more nervous to jump in to
+[00:06:13] little more nervous to jump in to
+[00:06:13] little more nervous to jump in to something popping up. Short sellers are
+[00:06:15] something popping up. Short sellers are
+[00:06:15] something popping up. Short sellers are a little more aggressive. So, we've sort
+[00:06:17] a little more aggressive. So, we've sort
+[00:06:17] a little more aggressive. So, we've sort of are over on that side.
+[00:06:19] of are over on that side.
+[00:06:19] of are over on that side. And then to make matters worse, the
+[00:06:21] And then to make matters worse, the
+[00:06:21] And then to make matters worse, the overall market is not helping us, right?
+[00:06:23] overall market is not helping us, right?
+[00:06:24] overall market is not helping us, right? The overall market is gapping down and
+[00:06:25] The overall market is gapping down and
+[00:06:25] The overall market is gapping down and and is going lower. Now, I'm not, you
+[00:06:27] and is going lower. Now, I'm not, you
+[00:06:27] and is going lower. Now, I'm not, you know, concerned in in any serious way
+[00:06:30] know, concerned in in any serious way
+[00:06:30] know, concerned in in any serious way that, oh my gosh, the market's going to
+[00:06:31] that, oh my gosh, the market's going to
+[00:06:31] that, oh my gosh, the market's going to crash or anything like that. But, the
+[00:06:33] crash or anything like that. But, the
+[00:06:33] crash or anything like that. But, the fact remains that the market is uh
+[00:06:35] fact remains that the market is uh
+[00:06:35] fact remains that the market is uh pulling back right now. So, you know,
+[00:06:37] pulling back right now. So, you know,
+[00:06:37] pulling back right now. So, you know, then if you really wanted to dig deeper
+[00:06:39] then if you really wanted to dig deeper
+[00:06:39] then if you really wanted to dig deeper and you look at other speculative asset
+[00:06:41] and you look at other speculative asset
+[00:06:41] and you look at other speculative asset classes, well, you know, is the market
+[00:06:43] classes, well, you know, is the market
+[00:06:43] classes, well, you know, is the market being, you know, propped up by by
+[00:06:45] being, you know, propped up by by
+[00:06:45] being, you know, propped up by by Bitcoin or something like that? Not
+[00:06:47] Bitcoin or something like that? Not
+[00:06:47] Bitcoin or something like that? Not really. The price of Bitcoin is pretty
+[00:06:49] really. The price of Bitcoin is pretty
+[00:06:49] really. The price of Bitcoin is pretty much at its lows for the last 6 months
+[00:06:51] much at its lows for the last 6 months
+[00:06:51] much at its lows for the last 6 months around 62,000 um you know, per coin. So,
+[00:06:56] around 62,000 um you know, per coin. So,
+[00:06:56] around 62,000 um you know, per coin. So, breaking below 50 59,000 was sort of
+[00:06:58] breaking below 50 59,000 was sort of
+[00:06:58] breaking below 50 59,000 was sort of that critical spot. We broke it, and
+[00:06:59] that critical spot. We broke it, and
+[00:07:00] that critical spot. We broke it, and then we were back up above it.
+[00:07:02] then we were back up above it.
+[00:07:02] then we were back up above it. So, I think right now there are reasons
+[00:07:04] So, I think right now there are reasons
+[00:07:04] So, I think right now there are reasons why um
+[00:07:05] why um
+[00:07:05] why um traders are going to be a little bit
+[00:07:07] traders are going to be a little bit
+[00:07:07] traders are going to be a little bit more cautious, and that's not surprising
+[00:07:10] more cautious, and that's not surprising
+[00:07:10] more cautious, and that's not surprising to me. So, if we can be really in sync
+[00:07:15] to me. So, if we can be really in sync
+[00:07:15] to me. So, if we can be really in sync with what other traders are thinking,
+[00:07:18] with what other traders are thinking,
+[00:07:18] with what other traders are thinking, then we can sort of have a better
+[00:07:19] then we can sort of have a better
+[00:07:20] then we can sort of have a better likelihood of predicting that we're
+[00:07:21] likelihood of predicting that we're
+[00:07:21] likelihood of predicting that we're going to have some decent momentum today
+[00:07:23] going to have some decent momentum today
+[00:07:23] going to have some decent momentum today or,
+[00:07:24] or,
+[00:07:24] or, you know what, today might not be a day
+[00:07:27] you know what, today might not be a day
+[00:07:27] you know what, today might not be a day to get aggressive. So, right now I'm
+[00:07:29] to get aggressive. So, right now I'm
+[00:07:29] to get aggressive. So, right now I'm feeling like it's not a day to get
+[00:07:30] feeling like it's not a day to get
+[00:07:30] feeling like it's not a day to get aggressive. And so, you know, nothing
+[00:07:32] aggressive. And so, you know, nothing
+[00:07:32] aggressive. And so, you know, nothing popped up that looked good. A couple
+[00:07:33] popped up that looked good. A couple
+[00:07:33] popped up that looked good. A couple things popped up, they didn't follow
+[00:07:34] things popped up, they didn't follow
+[00:07:35] things popped up, they didn't follow through that much. Could I have had some
+[00:07:36] through that much. Could I have had some
+[00:07:36] through that much. Could I have had some small base hits? Yeah, I could have, but
+[00:07:38] small base hits? Yeah, I could have, but
+[00:07:38] small base hits? Yeah, I could have, but is it really worth it? And I felt like
+[00:07:40] is it really worth it? And I felt like
+[00:07:40] is it really worth it? And I felt like the answer was no. So,
+[00:07:43] the answer was no. So,
+[00:07:43] the answer was no. So, you know, this is my kind of last uh
+[00:07:45] you know, this is my kind of last uh
+[00:07:45] you know, this is my kind of last uh well, last 30-day look back here. Um
+[00:07:47] well, last 30-day look back here. Um
+[00:07:48] well, last 30-day look back here. Um these are smaller green days so far for
+[00:07:50] these are smaller green days so far for
+[00:07:50] these are smaller green days so far for July. Uh July hasn't given me any huge
+[00:07:53] July. Uh July hasn't given me any huge
+[00:07:53] July. Uh July hasn't given me any huge day. Biggest one was 24,000.
+[00:07:56] day. Biggest one was 24,000.
+[00:07:56] day. Biggest one was 24,000. So, as I sit on the month of July right
+[00:07:58] So, as I sit on the month of July right
+[00:07:58] So, as I sit on the month of July right now, we'll see where I'm at.
+[00:08:00] now, we'll see where I'm at.
+[00:08:00] now, we'll see where I'm at. Um
+[00:08:01] Um
+[00:08:01] Um you know, it might not be anything super
+[00:08:04] you know, it might not be anything super
+[00:08:04] you know, it might not be anything super impressive. $111,000
+[00:08:07] impressive. $111,000
+[00:08:07] impressive. $111,000 for me is below my average. Now, again,
+[00:08:09] for me is below my average. Now, again,
+[00:08:09] for me is below my average. Now, again, it's all relative. For another trader,
+[00:08:11] it's all relative. For another trader,
+[00:08:11] it's all relative. For another trader, this is a that would be the best month
+[00:08:13] this is a that would be the best month
+[00:08:13] this is a that would be the best month of your career. And for another trader,
+[00:08:15] of your career. And for another trader,
+[00:08:15] of your career. And for another trader, this would be like, I can't even, you
+[00:08:17] this would be like, I can't even, you
+[00:08:17] this would be like, I can't even, you know, for like some hedge fund, they'd
+[00:08:19] know, for like some hedge fund, they'd
+[00:08:19] know, for like some hedge fund, they'd be like, "We're up only $111,000. We're
+[00:08:21] be like, "We're up only $111,000. We're
+[00:08:21] be like, "We're up only $111,000. We're supposed to be up like $10 million a
+[00:08:23] supposed to be up like $10 million a
+[00:08:23] supposed to be up like $10 million a month. This is This is garbage." So, you
+[00:08:25] month. This is This is garbage." So, you
+[00:08:25] month. This is This is garbage." So, you know, there's a spectrum. And anyways,
+[00:08:27] know, there's a spectrum. And anyways,
+[00:08:27] know, there's a spectrum. And anyways, so not to compare yourself to others,
+[00:08:29] so not to compare yourself to others,
+[00:08:29] so not to compare yourself to others, but compare yourself to your own
+[00:08:30] but compare yourself to your own
+[00:08:30] but compare yourself to your own performance. I'm performing a little
+[00:08:32] performance. I'm performing a little
+[00:08:32] performance. I'm performing a little below average. Um nice to see that I
+[00:08:35] below average. Um nice to see that I
+[00:08:35] below average. Um nice to see that I don't have um
+[00:08:37] don't have um
+[00:08:37] don't have um you know, any red days here in the big
+[00:08:38] you know, any red days here in the big
+[00:08:39] you know, any red days here in the big account. Um I am glad for that. I don't
+[00:08:41] account. Um I am glad for that. I don't
+[00:08:41] account. Um I am glad for that. I don't remember this no trade day. Uh let me
+[00:08:44] remember this no trade day. Uh let me
+[00:08:44] remember this no trade day. Uh let me just confirm that I didn't
+[00:08:46] just confirm that I didn't
+[00:08:46] just confirm that I didn't forget to import trades from a single
+[00:08:48] forget to import trades from a single
+[00:08:48] forget to import trades from a single day.
+[00:08:49] day.
+[00:08:49] day. Every now and then that'll happen, but
+[00:08:50] Every now and then that'll happen, but
+[00:08:50] Every now and then that'll happen, but no, it looks like that was a no trade
+[00:08:52] no, it looks like that was a no trade
+[00:08:52] no, it looks like that was a no trade day. So, I don't know. Um
+[00:08:54] day. So, I don't know. Um
+[00:08:54] day. So, I don't know. Um couple no Well, that was Friday the 3rd.
+[00:08:56] couple no Well, that was Friday the 3rd.
+[00:08:56] couple no Well, that was Friday the 3rd. So, anyways, doesn't matter, but
+[00:08:58] So, anyways, doesn't matter, but
+[00:08:58] So, anyways, doesn't matter, but actually two no trade days in a row in
+[00:08:59] actually two no trade days in a row in
+[00:08:59] actually two no trade days in a row in the big account.
+[00:09:01] the big account.
+[00:09:01] the big account. And the small account, trading for
+[00:09:02] And the small account, trading for
+[00:09:02] And the small account, trading for charity,
+[00:09:03] charity,
+[00:09:03] charity, um you know, I really don't want to take
+[00:09:05] um you know, I really don't want to take
+[00:09:05] um you know, I really don't want to take um risk that's going to um
+[00:09:08] um risk that's going to um
+[00:09:08] um risk that's going to um you know,
+[00:09:09] you know,
+[00:09:09] you know, jeopardize um you know, the profits that
+[00:09:12] jeopardize um you know, the profits that
+[00:09:12] jeopardize um you know, the profits that I've been building there. And so, today
+[00:09:15] I've been building there. And so, today
+[00:09:15] I've been building there. And so, today was a day just to kind of, you know
+[00:09:17] was a day just to kind of, you know
+[00:09:17] was a day just to kind of, you know what, say, "Hey, it's a Friday in July.
+[00:09:20] what, say, "Hey, it's a Friday in July.
+[00:09:20] what, say, "Hey, it's a Friday in July. I'm going to close up shop a little
+[00:09:21] I'm going to close up shop a little
+[00:09:21] I'm going to close up shop a little early. I'll live to trade another day.
+[00:09:23] early. I'll live to trade another day.
+[00:09:23] early. I'll live to trade another day. I'll be back at it bright and early on
+[00:09:24] I'll be back at it bright and early on
+[00:09:24] I'll be back at it bright and early on Monday morning." So, I think the best
+[00:09:26] Monday morning." So, I think the best
+[00:09:26] Monday morning." So, I think the best use of time for most beginners today
+[00:09:28] use of time for most beginners today
+[00:09:28] use of time for most beginners today would be to study. Go through live
+[00:09:30] would be to study. Go through live
+[00:09:30] would be to study. Go through live archives if you're in my classes. Um you
+[00:09:33] archives if you're in my classes. Um you
+[00:09:33] archives if you're in my classes. Um you know, if you've been watching on the
+[00:09:34] know, if you've been watching on the
+[00:09:34] know, if you've been watching on the sidelines, check out the 2-week trial
+[00:09:35] sidelines, check out the 2-week trial
+[00:09:35] sidelines, check out the 2-week trial for 20 bucks. You can the amount of
+[00:09:37] for 20 bucks. You can the amount of
+[00:09:37] for 20 bucks. You can the amount of content you can go through for that $20,
+[00:09:40] content you can go through for that $20,
+[00:09:40] content you can go through for that $20, tons of classes, tons of stuff you can
+[00:09:42] tons of classes, tons of stuff you can
+[00:09:42] tons of classes, tons of stuff you can watch. You're going to get your money's
+[00:09:44] watch. You're going to get your money's
+[00:09:44] watch. You're going to get your money's worth. So, if you've got nothing to do
+[00:09:46] worth. So, if you've got nothing to do
+[00:09:46] worth. So, if you've got nothing to do for the rest of the day or the weekend,
+[00:09:47] for the rest of the day or the weekend,
+[00:09:47] for the rest of the day or the weekend, you know, or for the next 2 weeks,
+[00:09:49] you know, or for the next 2 weeks,
+[00:09:49] you know, or for the next 2 weeks, spend some time going through that
+[00:09:50] spend some time going through that
+[00:09:50] spend some time going through that content and, you know, being in the
+[00:09:52] content and, you know, being in the
+[00:09:52] content and, you know, being in the community. We'd love to have you. So,
+[00:09:54] community. We'd love to have you. So,
+[00:09:54] community. We'd love to have you. So, check it out. But, I'll remind you as
+[00:09:55] check it out. But, I'll remind you as
+[00:09:55] check it out. But, I'll remind you as always that of course trading is risky
+[00:09:56] always that of course trading is risky
+[00:09:56] always that of course trading is risky and my results aren't typical. So, the
+[00:09:58] and my results aren't typical. So, the
+[00:09:58] and my results aren't typical. So, the best way you can manage your risk is by
+[00:09:59] best way you can manage your risk is by
+[00:09:59] best way you can manage your risk is by practicing in the simulator before
+[00:10:01] practicing in the simulator before
+[00:10:01] practicing in the simulator before putting real money on the line. And
+[00:10:02] putting real money on the line. And
+[00:10:02] putting real money on the line. And guess what? We have a simulator right
+[00:10:04] guess what? We have a simulator right
+[00:10:04] guess what? We have a simulator right here at Warrior Trading. Go down to the
+[00:10:05] here at Warrior Trading. Go down to the
+[00:10:05] here at Warrior Trading. Go down to the toolbar to sim and boom, you can
+[00:10:07] toolbar to sim and boom, you can
+[00:10:07] toolbar to sim and boom, you can populate the simulator. So, now you can
+[00:10:09] populate the simulator. So, now you can
+[00:10:10] populate the simulator. So, now you can practice in a safe environment and
+[00:10:12] practice in a safe environment and
+[00:10:12] practice in a safe environment and you're still using the same scanners,
+[00:10:13] you're still using the same scanners,
+[00:10:13] you're still using the same scanners, the same charts, the same newsfeed and
+[00:10:15] the same charts, the same newsfeed and
+[00:10:15] the same charts, the same newsfeed and everything else. I'm on my laptop here,
+[00:10:17] everything else. I'm on my laptop here,
+[00:10:17] everything else. I'm on my laptop here, so things are a little the windows are a
+[00:10:18] so things are a little the windows are a
+[00:10:18] so things are a little the windows are a little crunched up, but
+[00:10:20] little crunched up, but
+[00:10:20] little crunched up, but uh anyways, so check it out and I will
+[00:10:22] uh anyways, so check it out and I will
+[00:10:22] uh anyways, so check it out and I will see you guys back at it bright and early
+[00:10:24] see you guys back at it bright and early
+[00:10:24] see you guys back at it bright and early on Monday morning. So, again, take it
+[00:10:26] on Monday morning. So, again, take it
+[00:10:26] on Monday morning. So, again, take it slow and remember, my results are not
+[00:10:29] slow and remember, my results are not
+[00:10:29] slow and remember, my results are not typical.
