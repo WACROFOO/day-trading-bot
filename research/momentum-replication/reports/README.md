@@ -11,6 +11,7 @@ the command at its head.
 | `2026-08-target-and-entries.md` | Settles the 2:1 veto against the spec's own numbers, then shows what it was hiding: the losses are bad entries, not tight stops |
 | `2026-08-streams-roundup.md` | **The 480 live streams the corpus never had.** Answers the timing question: the micro-pullback is often a 10-second pattern our 1-minute detector cannot see |
 | `2026-08-bughunt.md` | Four mechanical defects found by line-by-line re-read; the fake-halt veto alone moved agreement with his labelled trades 4% → 22% |
+| `2026-08-ispo-stream.md` | Case study of the 4½-hour ISPO live session: risk discipline matches the spec, four rules diverge (session window, halt-level targets, resumption entries, anticipation) |
 
 Headline: of every ticker he named that resolves to a symbol, **100% were in
 the pool** and the detector found structure on **97%** — but only 31% pass the
