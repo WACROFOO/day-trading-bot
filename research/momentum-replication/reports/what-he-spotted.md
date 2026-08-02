@@ -106,3 +106,63 @@ Re-run both weeks with `price_min = 1.00` (the corpus's other stated value) and
 the gap guard relaxed, and see whether ZYBT, LGHL and LABT appear. That is a
 parameter the source explicitly offers, not a tuning knob — and unlike a P&L
 comparison it has a falsifiable prediction: **those three names should show up.**
+
+---
+
+# Test result — prediction 2 of 3 confirmed
+
+Re-ran both weeks with `PRICE_MIN=1.00` (the corpus's other stated value) and
+the gap guard relaxed to 400%.
+
+```bash
+WEEK=07-22 PRICE_MIN=1.0 GAP_CAP=400 WATCH_NAMES=20 python pipeline/week.py 2
+```
+
+| Predicted | Result |
+|---|---|
+| **LABT** | **appears** — 07-22 at +249% |
+| **LGHL** | **appears** — 07-27 at +124%, 07-29 at +12% |
+| **ZYBT** | **still absent** — prediction wrong |
+
+**ZYBT is blocked by the float ceiling, not the price floor.** Its
+shares-outstanding proxy is 47.4M against a 20M ceiling. I listed float as a
+separate cause and should have predicted ZYBT would stay out; the prediction was
+sloppy, and the test caught it.
+
+## Everything else the lower floor recovers
+
+The $1 floor plus the relaxed guard widens the watchlists substantially — the
+07-22 list goes from 3 names to 10 (adding LABT +249%, INLF +46%, KUST +22%,
+SNTG, CRIS, HIHO, MGIH), and 07-30 adds YAAS at +390%, which the 200% guard had
+been discarding as a suspected split artifact.
+
+## But none of them trade
+
+Neither LGHL nor LABT survives to a trade, and both weeks return **exactly the
+same P&L as before** (+$833.28 and −$199.98). The one-shot rate-of-change check
+removes all three:
+
+| Name | Day | Open | 09:34 | Change |
+|---|---|---:|---:|---:|
+| LABT | 07-22 | 6.50 | 5.70 | **−12.3%** |
+| LGHL | 07-27 | 2.05 | 2.03 | −0.9% |
+| LGHL | 07-29 | 1.20 | 1.18 | −1.8% |
+
+All three were **below their opening price at 09:35**, so the filter drops them
+for the day.
+
+## What this actually settles
+
+The price floor and the gap guard were real exclusions and are now switchable
+with the corpus's own alternative value. But they were not the binding
+constraint — **the one-shot rate-of-change reading is**, and it is the same
+unsettled question flagged in `2026-07-27-week.md`.
+
+That reading now blocks two things at once: the faders it was added to remove,
+and the biggest movers he actually traded. LABT opened at $6.50, was down 12% by
+09:35, and he named it anyway. A continuously-running scanner would re-alert it
+when it turned; a one-shot 09:35 gate cannot.
+
+**This raises the priority of resolving that reading above the price floor.** It
+is now the single largest divergence between this engine and his behaviour, and
+`NEXT-STEPS.md` §5 lists it as unresolved rather than decided.

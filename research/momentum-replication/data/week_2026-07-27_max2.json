@@ -1,0 +1,154 @@
+{
+ "week": [
+  "2026-07-27",
+  "2026-07-28",
+  "2026-07-29",
+  "2026-07-30",
+  "2026-07-31"
+ ],
+ "max_trades": 2,
+ "total": -199.98,
+ "results": [
+  {
+   "day": "2026-07-27",
+   "pnl": -199.98,
+   "trades": [
+    {
+     "sym": "BIYA",
+     "entry": 3.9200000953674317,
+     "stop": 3.740000009536743,
+     "risk_ps": 0.1800000858306885,
+     "shares": 1111,
+     "full": 1111,
+     "pnl": -199.98009535789492,
+     "scaled": 0,
+     "entry_time": "10:24",
+     "t1": 4.509999990463257,
+     "t2": 5.0999998855590825,
+     "avg_rng": 0.22296006679534913,
+     "pb_bars": 2,
+     "spread_est": 0.09,
+     "impulse_v": 635879.3333333334,
+     "window": "prime",
+     "exit": 3.740000009536743,
+     "exit_time": "10:26",
+     "reason": "stop hit"
+    }
+   ],
+   "setups": 40,
+   "passes": 1,
+   "halted": null,
+   "rejects": {
+    "target < 2:1": 22,
+    "support confluence >= 2": 18,
+    "price > 9 EMA": 19,
+    "MACD histogram > 0": 23,
+    "pullback_volume < impulse_volume": 8,
+    "pullback index <= 2": 12,
+    "stop tighter than spread": 10,
+    "not resumed lower after a halt": 7,
+    "price > VWAP": 13
+   },
+   "watch": [
+    "EDBL",
+    "DFNS",
+    "BIYA",
+    "GMEX",
+    "HIHO"
+   ]
+  },
+  {
+   "day": "2026-07-28",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 27,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 7,
+    "price > VWAP": 16,
+    "price > 9 EMA": 8,
+    "support confluence >= 2": 3,
+    "target < 2:1": 14,
+    "pullback index <= 2": 11,
+    "MACD histogram > 0": 6,
+    "stop tighter than spread": 5
+   },
+   "watch": [
+    "FIRY",
+    "BIYA",
+    "POLA"
+   ]
+  },
+  {
+   "day": "2026-07-29",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 15,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "not resumed lower after a halt": 13,
+    "price > 9 EMA": 6,
+    "MACD histogram > 0": 5,
+    "stop tighter than spread": 5,
+    "target < 2:1": 9,
+    "cumulative volume >= 500k": 2,
+    "support confluence >= 2": 4,
+    "price > VWAP": 4,
+    "pullback_volume < impulse_volume": 1,
+    "pullback index <= 2": 4
+   },
+   "watch": [
+    "AMIX",
+    "STFS",
+    "PYPD"
+   ]
+  },
+  {
+   "day": "2026-07-30",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 6,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 2,
+    "not resumed lower after a halt": 6,
+    "price > VWAP": 6,
+    "price > 9 EMA": 4,
+    "stop tighter than spread": 4,
+    "target < 2:1": 2,
+    "support confluence >= 2": 4,
+    "MACD histogram > 0": 2
+   },
+   "watch": [
+    "YAAS"
+   ]
+  },
+  {
+   "day": "2026-07-31",
+   "pnl": 0.0,
+   "trades": [],
+   "setups": 14,
+   "passes": 0,
+   "halted": null,
+   "rejects": {
+    "pullback_volume < impulse_volume": 4,
+    "cumulative volume >= 500k": 12,
+    "target < 2:1": 4,
+    "price > VWAP": 3,
+    "MACD histogram > 0": 9,
+    "stop tighter than spread": 7,
+    "support confluence >= 2": 4,
+    "pullback index <= 2": 6,
+    "price > 9 EMA": 1,
+    "not resumed lower after a halt": 2
+   },
+   "watch": [
+    "CUPR",
+    "TCX"
+   ]
+  }
+ ]
+}

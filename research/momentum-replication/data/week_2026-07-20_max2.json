@@ -59,7 +59,7 @@
      "reason": "hard stop"
     }
    ],
-   "setups": 14,
+   "setups": 15,
    "passes": 1,
    "halted": null,
    "rejects": {
@@ -68,15 +68,17 @@
     "not resumed lower after a halt": 6,
     "support confluence >= 2": 4,
     "MACD histogram > 0": 7,
-    "pullback_volume < impulse_volume": 1,
+    "pullback_volume < impulse_volume": 2,
     "price > 9 EMA": 3,
+    "cumulative volume >= 500k": 1,
     "pullback index <= 2": 2,
     "stop tighter than spread": 1
    },
    "watch": [
     "ZCMD",
     "INM",
-    "ADVB"
+    "ADVB",
+    "MGIH"
    ]
   },
   {

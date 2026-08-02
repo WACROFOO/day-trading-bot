@@ -34,7 +34,13 @@ OUT = _DATA
 # whole market to find them. Widening changes how many candidates the engine
 # SEES, not how many trades it may take - the trade limit still binds.
 MAX_NAMES = int(os.environ.get('WATCH_NAMES', 5))
-GAP_SANITY_CAP = 200.0        # above this it is an adjustment artifact, not news
+# PARAMETERS.md:20 states price_min >= 2.00 (n=144) and records "1.00 also
+# stated" in the same row. PRICE_MIN switches between the corpus's two values.
+PRICE_MIN = float(os.environ.get('PRICE_MIN', 2.0))
+
+# Not a documented rule - a guard added to catch the reverse-split artifacts of
+# HISTORY defect 1. It also rejected LABT's real +249% move, so it is switchable.
+GAP_SANITY_CAP = float(os.environ.get('GAP_CAP', 200.0))
 SPLIT_BUFFER = 3              # trading days either side of a split
 
 
@@ -66,7 +72,7 @@ def build(stats, daily, shares_out):
             gap = (r['o'] / prev['c'] - 1) * 100
             if gap < 10.0 or gap > GAP_SANITY_CAP:
                 continue
-            if not (2.0 <= r['o'] <= 20.0):
+            if not (PRICE_MIN <= r['o'] <= 20.0):
                 continue
             so = shares_out.get(sym, 0)
             if not so or so > 20e6:
