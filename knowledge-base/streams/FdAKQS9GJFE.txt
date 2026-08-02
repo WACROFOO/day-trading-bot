@@ -1,0 +1,998 @@
+# Stuck in two HALTS DOWN | Live Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=FdAKQS9GJFE
+# upload_date: 20220315
+# duration_sec: 5951
+
+[00:01:03] All right, good morning everyone.
+[00:01:05] So, we've got about 30 minutes to the
+[00:01:07] bell. No trades for me so far, just
+[00:01:10] sitting tight.
+[00:01:12] Gap scanner this morning.
+[00:01:15] We've got a couple bigger gappers. HYMC
+[00:01:17] right now is up 94%, 96%.
+[00:01:21] Uh
+[00:01:22] but as you can see, it's below its high.
+[00:01:25] Its high is about uh three 297. And you
+[00:01:29] know, you look at this and you're like,
+[00:01:30] "Wait a second. I'm familiar with this
+[00:01:31] stock. What did it do last week?" Last
+[00:01:34] week it went from 60 cents all the way
+[00:01:37] up to 265
+[00:01:39] and then it pulled back to $1.39.
+[00:01:42] You know, now today it's popping back up
+[00:01:44] a little bit, which is which is good to
+[00:01:46] see, but
+[00:01:48] uh
+[00:01:49] the float is a little higher on it and
+[00:01:52] I'm just not sure that we're going to
+[00:01:53] see
+[00:01:54] I don't know. I I It's just hard to
+[00:01:55] tell. The thing that this has going for
+[00:01:58] it is that um
+[00:02:00] that sort of surprise move,
+[00:02:03] you know, it it does end up being a very
+[00:02:06] strong daily chart above 265
+[00:02:09] because it's all of a sudden gapping and
+[00:02:11] is above this level. So, then if we look
+[00:02:12] back on the daily chart,
+[00:02:15] we've got this high here.
+[00:02:17] We look back and over where next
+[00:02:19] resistance levels.
+[00:02:21] And you can see that there's not any big
+[00:02:22] gaps. There's not any big windows.
+[00:02:25] Um
+[00:02:27] you know, it's just
+[00:02:29] um
+[00:02:30] it's just kind of been grinding lower.
+[00:02:33] Now, I'd say they're starting to get
+[00:02:34] gaps and windows up here around 450.
+[00:02:37] 450 up to five,
+[00:02:39] you know, and then up to 648, but those
+[00:02:41] are also formed by red candles. So,
+[00:02:43] those are windows.
+[00:02:46] And and I did go and check the float. I
+[00:02:48] double-checked it cuz I thought um
+[00:02:52] what I saw
+[00:02:54] initially was that the float was pretty
+[00:02:56] low and I thought, "Okay, well, you
+[00:02:58] know, that's interesting." Um but in
+[00:03:01] fact, the float is um is a bit higher.
+[00:03:04] So, I have to double-check that figure.
+[00:03:08] the float here is
+[00:03:11] 60 million shares according to their
+[00:03:13] most recent filing. So, it is a higher
+[00:03:15] float. And that's all It's always good
+[00:03:17] to double-check it. Now, when you look
+[00:03:19] at a stock and it's trading like this,
+[00:03:22] this looks like a a higher float than a
+[00:03:25] million shares to me.
+[00:03:27] And so, if one market data provider is
+[00:03:30] saying it's a million shares, it's good
+[00:03:31] to double-check it because one of the
+[00:03:33] things you'll find with market data
+[00:03:34] vendors is that there are some
+[00:03:35] inconsistencies.
+[00:03:38] So, anyways, that's HYMC. That's our um
+[00:03:42] second leading gapper.
+[00:03:44] Uh our leading gapper is actually IXHL.
+[00:03:48] This one's up 100% right now. A solid
+[00:03:51] 100%. And you know, what's interesting
+[00:03:53] about it is
+[00:03:55] you know, you've got this pre-market
+[00:03:57] chart where you can see how it made this
+[00:03:58] big move. It's got risk and the risk is
+[00:04:01] that the volume is light, the spreads
+[00:04:03] are pretty large.
+[00:04:05] Uh so, I don't know that we're going to
+[00:04:07] be able to manage risk on it, but uh it
+[00:04:09] is a recent IPO.
+[00:04:13] You do have this gap uh this morning as
+[00:04:15] you can see, so
+[00:04:18] you know, just something to be aware of.
+[00:04:20] It is technically our leading gapper of
+[00:04:22] 100%.
+[00:04:23] Uh next one down we have GFAI. So, I'll
+[00:04:26] leave that on a side chart, HYMC on a
+[00:04:29] side chart.
+[00:04:30] Uh GFAI
+[00:04:33] this one uh the high here is $1.17. It's
+[00:04:38] a little cheap.
+[00:04:40] It's a little too cheap.
+[00:04:42] Next one down, EXN, 33 million share
+[00:04:45] float.
+[00:04:47] A little cheap as well.
+[00:04:50] Hey Trey, good morning.
+[00:04:53] Uh next gapper, MYNA.
+[00:04:58] Uh I don't know. Doesn't seem like it's
+[00:05:00] really gapping up all that much. Now
+[00:05:02] we're into like 10% gappers.
+[00:05:04] VRPX gapping up a little bit. These are
+[00:05:07] all light gappers.
+[00:05:11] So,
+[00:05:13] right now it's just kind of sitting
+[00:05:15] tight, being patient, waiting for
+[00:05:17] something to open up
+[00:05:20] and then jumping on when we see it. Uh
+[00:05:22] HYMC did give a little break of uh 376
+[00:05:26] back here and it squeezed up to a high
+[00:05:29] of uh 289
+[00:05:31] and then kind of pulled back.
+[00:05:35] dipped down to a low there of 263. So,
+[00:05:37] you know, it's it's just showing that
+[00:05:39] it's having a hard time really
+[00:05:43] opening up in a big way.
+[00:05:45] So, I'm not really sure.
+[00:05:48] IXHL,
+[00:05:50] I see it.
+[00:05:52] I'm going to try to take a starter on
+[00:05:53] it.
+[00:05:55] So, this is risky, but I'm just going to
+[00:05:57] go for it
+[00:05:59] and I'll add over uh 55.
+[00:06:03] So, putting my order at 55. You know,
+[00:06:05] this is the type of stock that when it
+[00:06:06] starts to move,
+[00:06:09] we could get a move up to 60. So, I got
+[00:06:11] a partial fill.
+[00:06:14] The volume is light, but you know, my
+[00:06:17] opinion on it is if it wants to rip,
+[00:06:19] let's give it a chance.
+[00:06:22] So, watching for an add at 56.
+[00:06:28] 5640 right there, added. Now looking for
+[00:06:31] 61.
+[00:06:32] Look at how fast I mean, and this is
+[00:06:34] this is the type you got to be careful
+[00:06:36] of.
+[00:06:37] I took a little profit. Now I'm going to
+[00:06:38] add back 200 shares at 65.
+[00:06:43] Watching 65 and then target would be uh
+[00:06:46] retest of the pre-market high.
+[00:06:49] Added 6440, 100 shares.
+[00:06:54] So, back of mind on this would be $75,
+[00:06:58] $85, the pre-market highs,
+[00:07:01] right?
+[00:07:03] You've got a bid at 59, 5950.
+[00:07:07] It takes a little bit of guts to step
+[00:07:08] into something like this.
+[00:07:11] I'm watching to add over 65 for the move
+[00:07:13] up to 70.
+[00:07:19] Holding 1,000 shares and looking to add
+[00:07:21] over 65.
+[00:07:25] So, a little bit of volume.
+[00:07:27] It's all it needs to get back to $85.
+[00:07:32] So, new orders at 65.
+[00:07:42] Holding 700 shares right now.
+[00:07:45] High this candle is 63. New order goes
+[00:07:48] at 64.
+[00:07:54] So, my entry is 5125. I bought in the
+[00:07:58] middle of that green candle as it was
+[00:07:59] spiking higher.
+[00:08:03] This is one where I'm going to try to
+[00:08:04] sell on the ask to get the best exit.
+[00:08:08] Looking to add over the high, 63.
+[00:08:12] So, added right there at 6289,
+[00:08:14] 300 shares.
+[00:08:18] Brings my average up to 54
+[00:08:21] 43.
+[00:08:24] And I want to see if this breaks through
+[00:08:25] 65.
+[00:08:27] If it does, then we're looking for 75.
+[00:08:36] This is our leading gapper right now.
+[00:08:38] It's up 162%.
+[00:08:40] Recent IPO.
+[00:08:44] So, high this candle right there, 6299.
+[00:08:47] Watch the break of 63 and then 64, 65.
+[00:08:51] Nothing wrong with watching from the
+[00:08:52] sidelines
+[00:08:54] on a high risk stock like this.
+[00:08:59] The target is 85.
+[00:09:02] That's the back of mind target. And if
+[00:09:03] we can break 85, then maybe we get a
+[00:09:05] move up to 100.
+[00:09:08] It's going to need to open up quite a
+[00:09:10] bit more, obviously, to get there, but
+[00:09:12] if it does, then it'll probably become
+[00:09:14] easier to trade as volume increases.
+[00:09:21] HYMC still on watch.
+[00:09:33] Waiting for the break of 63.
+[00:09:39] You've got a little bit of a bid at 59.
+[00:09:46] If 6312 breaks, then we should see 6583.
+[00:09:49] And if 6583 breaks, we should see 71.
+[00:09:56] So, that helps me position around 63.
+[00:10:00] Now, I wouldn't have uh found this stock
+[00:10:02] if it weren't for the gap scanner, if it
+[00:10:04] weren't for the fact that it was already
+[00:10:05] gapping up over 100%.
+[00:10:19] One of the things I like about recent
+[00:10:21] IPOs is that they're typically hard to
+[00:10:23] borrow.
+[00:10:25] So, hard to borrow, insiders not able to
+[00:10:28] sell shares, that can create the
+[00:10:30] imbalance to the buy side.
+[00:10:42] So, I have an order at 65 83.
+[00:10:47] Ready to add.
+[00:10:48] Let's see if we get that move back up to
+[00:10:50] 75 or 80.
+[00:10:59] I'd like to see some green on the tape
+[00:11:01] and see it surge through that level.
+[00:11:12] HYMC
+[00:11:14] still on watch, red candle there.
+[00:11:17] About 800,000 shares of volume.
+[00:11:41] We've got about 20 minutes to the
+[00:11:43] opening bell.
+[00:11:52] So, I'm looking for 62 and 63.
+[00:11:56] And then 65.
+[00:12:03] Has anyone seen if uh there's shares
+[00:12:06] available to borrow because I can't find
+[00:12:07] any?
+[00:12:26] Hard to borrow, no shares.
+[00:12:31] 2,000 share bid there at 59.
+[00:12:51] It'd be nice if we did get some sympathy
+[00:12:53] momentum.
+[00:13:12] So, I'm holding 117 shares.
+[00:13:18] We'll wait for the break over 63 to add
+[00:13:22] back.
+[00:13:25] New orders at 65.
+[00:13:29] If I give it a little bit of an offset,
+[00:13:34] then I can
+[00:13:36] get in with a little bit of slippage.
+[00:13:40] So, we'll keep that one on watch. New
+[00:13:41] orders at 64 65.
+[00:13:46] I'll put it for 500 shares.
+[00:14:02] I look for stocks with the potential to
+[00:14:04] be parabolic.
+[00:14:05] A recent IPO up 100%
+[00:14:08] at a critical pivot like the
+[00:14:10] psychological resistance, and it's, you
+[00:14:12] know,
+[00:14:14] worth it. I'll still hold small size on
+[00:14:16] it
+[00:14:17] through this consolidation and look for
+[00:14:19] a break over
+[00:14:21] 62 63
+[00:14:23] for the next trade up to 85.
+[00:14:26] What am I thinking of? ISPO.
+[00:14:30] ISPO in one day went from 14 to 108.
+[00:14:35] Right? So, that's the
+[00:14:38] this is sort of a similar pattern,
+[00:14:40] recent IPO.
+[00:14:45] And if you recall on this one, it
+[00:14:47] squeezed right at about 9:25 from $12 to
+[00:14:50] $29.
+[00:14:53] It opened and then opened at 14 and then
+[00:14:56] it squeezed up, start halting, gapping
+[00:14:59] higher, halted down, first halt down,
+[00:15:01] jumped lower, and then it kept going.
+[00:15:05] So, initially ISPO was very light
+[00:15:07] volume, very very similar. It was the
+[00:15:09] percentage gap was high, it was gapping
+[00:15:11] up a lot, but the volume was light.
+[00:15:17] So, that's the
+[00:15:19] pattern, recent IPO starting to open up.
+[00:15:22] Maybe this goes higher, maybe it
+[00:15:23] doesn't, but
+[00:15:26] uh if it weren't a recent IPO, I
+[00:15:27] wouldn't have taken the risk, but
+[00:15:28] because it's somewhat similar to ISPO,
+[00:15:33] I took the stab on the first trade. So,
+[00:15:39] but of course with small size, managing
+[00:15:41] risk um
+[00:15:42] appropriately.
+[00:15:47] Because as you know, trading is risky.
+[00:15:49] Most beginner traders lose money and
+[00:15:51] even seasoned traders like myself can
+[00:15:53] take big losses.
+[00:15:55] My biggest uh red day is $275,000.
+[00:15:59] So, I've taken some pretty big losses in
+[00:16:02] my career.
+[00:16:04] And
+[00:16:05] you know, I have a willingness to take
+[00:16:06] risk. So, I encourage traders to trade
+[00:16:09] in a simulator before you put real money
+[00:16:11] on the line.
+[00:16:13] Sometimes it is better to wait for these
+[00:16:15] to be obvious.
+[00:16:17] and obvious could be buying higher.
+[00:16:20] But, you know, if you buy higher and
+[00:16:22] then you get that
+[00:16:24] continuation,
+[00:16:25] you can do well.
+[00:16:36] So, we'll keep this one on watch over
+[00:16:39] 63.
+[00:16:44] right now,
+[00:16:46] not sure.
+[00:17:16] I think it was 475.
+[00:17:20] 475, I think it was the best day.
+[00:17:25] And probably wouldn't surprise you that
+[00:17:27] the best day and the worst day were
+[00:17:29] about a week apart.
+[00:17:33] Market was very volatile.
+[00:17:37] you know, I was stepping up to the plate
+[00:17:39] big time. I had the big green day and
+[00:17:41] then the red day followed
+[00:17:43] like a week later.
+[00:18:00] So, let's see overview.
+[00:18:04] So, the biggest red day was here, 478.
+[00:18:07] Biggest green day, biggest red day was
+[00:18:09] here, 268.
+[00:18:13] Biggest red day, biggest green day.
+[00:18:33] So, we've got about 12 minutes to the
+[00:18:35] open.
+[00:18:39] Nice, Kevin.
+[00:18:41] Made 200 bucks on 20 shares. Good for
+[00:18:44] you.
+[00:18:52] My average is 54 43. I'm still holding
+[00:18:56] uh 117 shares.
+[00:18:59] High this last candle was uh 60.
+[00:19:16] Reminder for those
+[00:19:18] tuning in,
+[00:19:23] make sure you hit the thumbs up. I hope
+[00:19:25] you're subscribed to the channel.
+[00:19:45] So, once we cross over 1 million
+[00:19:47] subscribers, I'm going to do another
+[00:19:48] small account challenge. So, uh those on
+[00:19:51] YouTube, appreciate you guys hitting the
+[00:19:53] thumbs up.
+[00:20:53] So, IXHL is up 153%.
+[00:20:56] It's our leading gapper.
+[00:20:58] My average is 5443.
+[00:21:02] HYMC is our second leading gapper up
+[00:21:05] 89%, but it has pulled back a little bit
+[00:21:08] down towards the 20 moving average.
+[00:21:54] So, it looks like IXHL is curling up
+[00:21:56] here again.
+[00:21:59] I added there at 6089.
+[00:22:03] And we'll add over
+[00:22:09] Orders at 6320.
+[00:22:12] This is a 5-minute bull flag breaking
+[00:22:14] out.
+[00:22:16] Added 6312.
+[00:22:18] We'll add again at 66.
+[00:22:21] Adding at 66 there. Now looking for the
+[00:22:23] squeeze up to 67 and 75.
+[00:22:28] Watching over 69 to add.
+[00:22:32] Added 68.
+[00:22:34] There's 70.
+[00:22:36] There's 73.
+[00:22:40] Now into the extension.
+[00:22:43] Let's see.
+[00:22:45] I'm going to put a new order at 73.
+[00:22:49] Let's see the high this candle is 71.
+[00:22:53] Watch over 71 for a retest of 75.
+[00:22:59] Adding at 70.
+[00:23:01] 100 shares trading in smaller blocks and
+[00:23:04] looking for the squeeze through 73, 74.
+[00:23:10] Back of mind target is still a test of
+[00:23:12] $85.
+[00:23:18] Watch over 73 for the next add and then
+[00:23:20] 75.
+[00:23:24] Looking to add smaller size at 73 and
+[00:23:27] 74.
+[00:23:29] We're up 212%. This is our leading
+[00:23:32] gapper.
+[00:23:38] So, we're getting close to our $85
+[00:23:40] pre-market high target.
+[00:23:48] Added at 72.
+[00:23:50] There's some green on the tape.
+[00:23:56] Looking for a move up to 75 and then 85.
+[00:24:05] Nice extension.
+[00:24:07] Let's see if we can get the break
+[00:24:08] through $75.
+[00:24:12] There's 7297. Spreads are getting a
+[00:24:14] little bit tighter, which is good.
+[00:24:17] This is very similar to ISPO. When ISPO
+[00:24:20] started, the volume was light.
+[00:24:23] Holding 400 shares.
+[00:24:25] Watching on a dip.
+[00:24:30] Our high
+[00:24:32] 72, 75.
+[00:24:38] New orders at 73.
+[00:25:09] 5 minutes to the opening bell.
+[00:25:24] Watching for dip entries.
+[00:25:37] Our high is 7275.
+[00:25:39] So, I have an order at 73.
+[00:25:43] Then looking for 76 and then 88.
+[00:25:52] Added at 7180 and 7238
+[00:25:56] for the break of
+[00:25:59] 73.
+[00:26:01] Then looking for $76 and 88.
+[00:26:07] Level two is showing
+[00:26:09] $88
+[00:26:11] right above 76.
+[00:26:14] So, I think if we break 76, we might see
+[00:26:15] 88.
+[00:26:26] So, this is our pullback. We had first
+[00:26:28] pullback, higher volume on the second.
+[00:26:30] I'll expect higher volume on the third.
+[00:26:33] The apex is 7285.
+[00:26:37] And then we're looking for a move up to
+[00:26:38] 75, 76, 77, and 80.
+[00:26:44] We're up 270%, 207%. So, this is our
+[00:26:47] leading gapper in the entire market.
+[00:27:06] Let's watch 7275 break.
+[00:27:38] HYMC a little slow right now.
+[00:27:50] Watch for the add here. Bid pops up.
+[00:27:53] 70 7182.
+[00:27:57] So, now we're looking for the break
+[00:27:59] through 75, 7275, and then $75.
+[00:28:07] 2 minutes to the bell.
+[00:28:19] Holding 126 shares.
+[00:28:22] New order add back 73.
+[00:28:25] Took some profit
+[00:28:26] at 70.
+[00:28:34] I still want to see the break of 7275.
+[00:28:42] HYMC needs to break over 89.
+[00:28:46] Order on HYMC would be right around $3.
+[00:29:19] So, I'll just keep trading breakouts on
+[00:29:21] this.
+[00:29:30] Float's 48 million shares.
+[00:29:41] But, target's 85. That's the pre-market
+[00:29:44] high.
+[00:29:47] Or after hours high.
+[00:29:57] So, expect volatility at the open.
+[00:30:00] Manage your risk accordingly. Reminder
+[00:30:02] as always that trading is risky.
+[00:30:18] Added right there for the break through
+[00:30:23] Now looking for a halt up at $80.
+[00:30:30] We're looking for the break through $75
+[00:30:32] and then a halt up.
+[00:30:38] Halt up is $80.08.
+[00:30:42] Watching 74 and $75.
+[00:30:48] Flat for now. Watch for the next dip.
+[00:30:51] High this candle was 74.78. New order at
+[00:30:59] Just trading with 250 share blocks on
+[00:31:09] Halt level 79.27.
+[00:31:13] HYMC is pulling back a little bit.
+[00:31:19] Added there.
+[00:31:22] Into the halt up.
+[00:31:25] Holding at 77.81.
+[00:31:29] We'll watch dip and rip on resumption.
+[00:31:41] New order will be at 85.
+[00:32:10] So, this is the tough thing with halts
+[00:32:11] is that you can't trade obviously during
+[00:32:14] the halt. So, you're just stuck.
+[00:32:17] It's showing a $100 resumption right
+[00:32:19] now. Which, you know, I mean that would
+[00:32:22] be awesome.
+[00:32:23] But, it's not going to give me a chance
+[00:32:24] to add at 85.
+[00:32:35] CTRN nice squeeze at the open up to a
+[00:32:38] high of 36.23.
+[00:32:47] This one has bigger spreads.
+[00:32:51] High is 26.23.
+[00:33:07] S&P 500 moving up.
+[00:33:21] HYMC pulled back too much.
+[00:33:52] So, we ended up uh getting pretty close
+[00:33:54] to that target.
+[00:33:58] You know, I'm
+[00:34:00] I'm only holding 100 shares. Small size.
+[00:34:05] Just didn't get good fills on my orders.
+[00:34:48] So, the halt was at 31.23.
+[00:35:17] About a minute to resumption.
+[00:35:21] So, if you end up uh getting a really
+[00:35:23] high resumption, which, you know, looks
+[00:35:26] like we might.
+[00:35:28] Then, I would look for a dip in a rip as
+[00:35:30] always. But, with smaller share size.
+[00:35:34] If I didn't already have a cushion, I
+[00:35:36] wouldn't take the risk. But, I have a
+[00:35:37] cushion. So, I could take a little bit
+[00:35:38] of risk with a dip and rip over 100.
+[00:35:41] Have to be a little bit careful of a
+[00:35:42] possible halt down after a big gap up.
+[00:35:47] Right now, it's showing $100
+[00:35:49] as resumption, which
+[00:35:51] you know, gives me some pretty big FOMO
+[00:35:53] that
+[00:35:54] I'm only holding 100 shares. But, I just
+[00:35:57] kept getting partial fills.
+[00:35:59] I tried to add as it broke through 75
+[00:36:02] and
+[00:36:03] I just only got partial fills.
+[00:36:11] So, potentially 20 seconds to resumption
+[00:36:14] if it's a
+[00:36:15] 5-minute long halt. But, it has a good
+[00:36:17] chance of being a 10-minute long halt
+[00:36:19] because it's showing such a big gap.
+[00:36:28] This is a good example of one where if I
+[00:36:30] had just said now I'm going to wait for
+[00:36:31] more volume to come in or I'm going to
+[00:36:33] wait for a better setup, I just would
+[00:36:35] have missed the whole thing.
+[00:36:38] So, right now is a 5-minute long halt.
+[00:36:41] My orders at 101.
+[00:36:49] So, it looks like a 10-minute long halt.
+[00:36:53] I see BTTX.
+[00:37:14] Showing 99.48, 98.48, 99.
+[00:37:22] You know, there's nothing Yeah, I agree.
+[00:37:23] There's nothing really else this
+[00:37:25] morning. We It's just our leading
+[00:37:27] But, you know, leading gapper 270
+[00:37:30] 17% I XHL.
+[00:37:34] 48 million share float, but it had the
+[00:37:36] rate of change and it showed us that
+[00:37:38] yesterday. On its chart.
+[00:39:12] Just sitting tight right now.
+[00:39:28] Resumption showing 97.28 right now.
+[00:39:41] HGRI, let's a look.
+[00:39:46] Needs to get back over five.
+[00:39:51] It's pulled back a little too much.
+[00:40:20] About a minute to resumption if it's
+[00:40:22] 10-minute long halt, but as I said, uh
+[00:40:25] big gaps can sometimes halt longer.
+[00:41:13] All right, so
+[00:41:15] I've got my order at 100 bucks.
+[00:41:19] Looking to see if we dip and then rip
+[00:41:21] through 100.
+[00:41:24] Trying to add some profit
+[00:41:26] while managing risk when it's extended
+[00:41:28] is a challenge
+[00:41:30] in a hot market.
+[00:41:32] I know sometimes we get multiple halts
+[00:41:33] in a row in a cold market, sometimes we
+[00:41:35] halt right back down, and
+[00:41:37] so let's see what it wants to do.
+[00:41:42] We're still halted right now.
+[00:41:53] INDO, let me take a look.
+[00:41:57] Mhm.
+[00:41:58] Yep, off the two off the 20 moving
+[00:42:00] average.
+[00:42:50] Yeah.
+[00:42:51] It's disappointing on HYMC.
+[00:42:54] Was not able to hold up.
+[00:43:06] Yeah, LTRPB is another one that's had a
+[00:43:09] history of making some big moves, some
+[00:43:10] huge candles. This is a day where it
+[00:43:12] went to 100 and
+[00:43:14] 34.
+[00:43:23] INDO got in the 80s. ISPO went up to
+[00:43:27] What was it? 108?
+[00:43:29] Yeah, 108 before it pulled back.
+[00:43:32] So, you know, that $100 level is pretty
+[00:43:33] important.
+[00:43:38] It's just tough when they gap.
+[00:43:40] So, if this gaps from 78 to 98, a
+[00:43:42] 20-point gap.
+[00:43:48] It's easier to trade when there's more
+[00:43:49] price action and less uh of these huge
+[00:43:52] gaps, but
+[00:43:54] what can you do?
+[00:44:13] You know, these ones are risky. That's
+[00:44:14] for sure.
+[00:44:21] Biggest gap I've ever seen on a halt.
+[00:44:23] Well, those would be gap downs. We've
+[00:44:25] seen 50%, 70% gap down on a halt. We've
+[00:44:28] seen some really nasty
+[00:44:30] uh gaps on a halt down. And it's
+[00:44:33] typically on something like ISPO. It
+[00:44:36] could happen on IX HL for sure. This is
+[00:44:39] a risk with these. They squeeze up, they
+[00:44:41] gap higher, they gap higher, and then
+[00:44:43] when they reverse,
+[00:44:44] the bottom falls out, and you don't have
+[00:44:46] buyers there that are willing to buy
+[00:44:48] that really hard uh drop. I mean, you do
+[00:44:51] have some dip traders, but look at this
+[00:44:52] gap down here.
+[00:44:54] You know, it halted down at 51 and
+[00:44:56] opened at 34. Now, that presented a dip.
+[00:44:58] It did. But, you know, the risk was
+[00:45:00] still there.
+[00:45:07] But, then a halt down and opening flat,
+[00:45:09] that's always bullish.
+[00:45:16] Yeah, DWAC had a pretty bad um halt
+[00:45:18] resumption.
+[00:45:20] Gap up at 110 up to 175, and then gap
+[00:45:23] back down.
+[00:45:27] Uh so, I'm I've got my order block for
+[00:45:31] 250 shares.
+[00:45:33] Just trading a little smaller up here.
+[00:45:35] Order's ready at 100 bucks.
+[00:45:50] So, the decision of adding and selling
+[00:45:53] is based always in that moment. Watching
+[00:45:56] the level two in the tape.
+[00:46:01] Since I'm only holding 105 shares,
+[00:46:05] you know, 20 20 points is $2,000. So,
+[00:46:08] you know, that would add some profit for
+[00:46:10] sure, but it's not
+[00:46:12] it's not super significant.
+[00:46:17] So, I'm hoping to get another really
+[00:46:19] good trade on it. I'm hoping that we
+[00:46:21] start to get into a zone where I can get
+[00:46:23] aggressive.
+[00:46:38] Watching.
+[00:46:40] Let's see if this false halts. I'm
+[00:46:42] holding 100 shares.
+[00:46:46] Watching for a false halt.
+[00:46:56] So, I'm going to try to buy the dip as
+[00:46:59] long as it holds this high back here of
+[00:47:01] 78. I think that looks pretty good. My
+[00:47:04] average is 77.81, so
+[00:47:07] you know.
+[00:47:12] If that had false halted, I would have
+[00:47:13] been a buyer, but that's profit taking,
+[00:47:16] and that that is to be expected.
+[00:47:19] So, the halt was uh down at 81.
+[00:47:23] So, if we resume anything above 81, I'm
+[00:47:25] a buyer.
+[00:47:29] And then we look for a break through 90.
+[00:47:34] Now, if we look at the ISPO chart, this
+[00:47:36] one opened up a lot more before that red
+[00:47:39] halt down.
+[00:47:40] So, I don't know where this one's going
+[00:47:42] to base out.
+[00:47:45] But, right now it's showing 79.48.
+[00:47:56] So, I'm going to put an order
+[00:48:00] at uh 82 just to kind of get it ready.
+[00:48:19] But, you know, this is the unfortunate
+[00:48:20] thing with these
+[00:48:23] with these halts is that you miss the
+[00:48:25] entire opportunity to trade it up to 90
+[00:48:28] and then the pullback.
+[00:48:30] You know, the trade got broken up by
+[00:48:32] these halts.
+[00:48:56] So, you got your $85 target.
+[00:49:55] HYMC, nice Rob. Nice step.
+[00:50:16] So, I I almost punched the order there
+[00:50:18] on the halt down thinking it was going
+[00:50:20] to do a false halt and then I just
+[00:50:22] hesitated for a second. I was waiting
+[00:50:24] for a little bit more green on the tape
+[00:50:26] and then we didn't see it. And that was
+[00:50:28] probably the right move cuz I'd be in
+[00:50:29] now at 81 at the halt down. It's showing
+[00:50:32] an $80 resumption which is
+[00:50:36] not bad.
+[00:50:38] I mean, we still have a few minutes to
+[00:50:40] resumption but
+[00:50:42] about 2 minutes.
+[00:50:43] But at the same time, it's always risky
+[00:50:46] because when you have something that's
+[00:50:47] extended, it can gap lower the way it
+[00:50:49] did here in this case.
+[00:50:52] KAVL, I see that one moving higher.
+[00:50:55] Uh your 200 moving average is at $4.
+[00:51:16] Okay. So, watching resumption here.
+[00:51:32] So, I'm going to watch here
+[00:51:35] for an add at 83.
+[00:51:37] 82 83.
+[00:51:55] So, added right there at $80. Halt up.
+[00:51:58] Now watching for add over 85.
+[00:52:06] Watching over
+[00:52:09] 73. Watch false halt down here.
+[00:52:14] Added at 72.90 for the false halt. Now
+[00:52:16] watching the pop back up over 80. This
+[00:52:19] is a pullback down towards support.
+[00:52:27] Watching for the pop back up.
+[00:52:30] Trying to buy support on this.
+[00:52:37] Average is 77.93.
+[00:52:39] So, waiting for that 10-second chart to
+[00:52:41] curl.
+[00:52:42] The high of this candle is 75.20.
+[00:52:46] So, watch over $75.20.
+[00:52:53] I'm not selling on support. This is a
+[00:52:55] support exit. I wouldn't do that. I'm
+[00:52:56] going to hold for the curl back up.
+[00:53:04] So, again looking for that first
+[00:53:06] 10-second candle to make a new high over
+[00:53:08] 75.20.
+[00:53:17] High of this candle back here.
+[00:53:25] Is 90.
+[00:53:34] My average is 77.
+[00:53:46] KAVL, I'll keep it on watch.
+[00:54:02] So, the halt down was 70.85. I want to
+[00:54:04] see it resume above that level.
+[00:54:07] Holding 500 shares.
+[00:54:16] I'm putting order to add 500 shares.
+[00:54:23] Put my order at 72.
+[00:54:55] So, we're showing a flat resumption
+[00:54:56] right now.
+[00:55:18] What's up on VIX?
+[00:56:21] Yeah, can watch VIX.
+[00:56:25] Let's see if it breaks through there 70.
+[00:56:30] VIX up to the halt level.
+[00:56:34] Small trade.
+[00:56:38] New order 37.
+[00:56:51] Watching resumption on IXHL.
+[00:56:56] Stop on VIX.
+[00:57:04] IXHL showing a flat resumption.
+[00:57:08] I'm surprised UVXY isn't
+[00:57:11] following the VIX.
+[00:57:21] Putting my order at 70 on IXHL, 500
+[00:57:26] shares.
+[00:57:54] Let's see where IXHL wants to bounce.
+[00:58:20] VWAP is around 67.94.
+[00:58:28] VIX will watch resumption.
+[00:58:35] S&P going up.
+[00:58:47] Watching IH I IXHL for a uh washout long
+[00:58:52] for a bounce. The high was 90.
+[00:58:56] It's got a lot of range.
+[00:59:30] VIX watching resumption.
+[00:59:34] Halt was 56.
+[00:59:38] 50
+[01:00:25] So, new order on VIX is going to be 37.
+[01:00:34] We'll start focusing on this a little
+[01:00:36] bit more.
+[01:00:46] 2 minutes to resumption on IXHL.
+[01:01:00] So, it actually looks like
+[01:01:06] Yeah, okay.
+[01:01:26] So, about 30 seconds to resumption on
+[01:01:28] VIX.
+[01:01:48] So, let's watch VIX resumption.
+[01:01:57] 3690 was the high.
+[01:01:59] Putting an order at 3750.
+[01:02:06] Looks like it's pulling back.
+[01:02:08] Let it pull back.
+[01:02:10] New order goes at 37.
+[01:02:16] Watch possible break over 37.
+[01:02:20] Uh that went too fast.
+[01:02:26] So, now watching the high 3775 added
+[01:02:29] right there for 38.
+[01:02:31] Now, look for 3850.
+[01:02:37] Watch for the add and then 3850.
+[01:02:42] I managed to be red on this. It's kind
+[01:02:44] of ridiculous. I got a terrible fill on
+[01:02:46] my entry.
+[01:02:59] Ridiculous.
+[01:03:09] Watching VIX again.
+[01:03:17] I got to change my hot keys so I can
+[01:03:19] trade this one.
+[01:03:36] Halt levels 3980 on VIX.
+[01:03:43] 3980 going into another halt there.
+[01:03:49] New order is at 39.
+[01:03:52] At 40.
+[01:04:05] Halted again.
+[01:04:09] So, now you're getting a bit of a short
+[01:04:11] squeeze on the VIX.
+[01:05:12] So, watching
+[01:05:14] IXHL for a bounce.
+[01:05:22] Yeah, I lost 1900. I got a bad fill and
+[01:05:25] then when it popped up I got out for a
+[01:05:28] small loss, so whatever. It's fine. I
+[01:05:31] I'll reposition and try to get back in.
+[01:05:37] I got in at 3825. I filled like way high
+[01:05:41] on this wick and then it dropped back
+[01:05:43] down to 38 3745 and I was like, "Oh my
+[01:05:46] god, come on." So, then I got out when
+[01:05:48] it started to come back up to 38. I knew
+[01:05:51] I was in high, so I had to manage my
+[01:05:53] risk on it.
+[01:05:55] I bought 10,000 shares and I was down
+[01:05:58] I don't know, $6,000.
+[01:06:01] So, manage the risk.
+[01:06:06] Watching in about 2 minutes for possible
+[01:06:08] resumption on IXHL.
+[01:06:53] Nice, Thomas. Good job. Good work.
+[01:07:01] All right, so we should have 1 minute to
+[01:07:34] Showing a $59 resumption. Let's see if
+[01:07:36] we pop into a halt up after two halts
+[01:07:39] down.
+[01:07:42] So, two halts down. Let's see if we halt
+[01:07:44] up.
+[01:07:47] So, putting an order at 60.
+[01:08:04] So, let's see if we bounce off this 53
+[01:08:06] level.
+[01:08:08] It's a weak resumption.
+[01:08:10] 5310 on the ask.
+[01:08:17] Another halt down.
+[01:08:19] So, that's unfortunate.
+[01:08:29] My average is uh 7793.
+[01:08:32] I'm down 12,000 on my position right
+[01:08:34] now.
+[01:08:37] So, we'll end up giving back some profit
+[01:08:39] on this one.
+[01:08:42] We'll watch VIX on resumption.
+[01:09:00] You know, I put my money where my mouth
+[01:09:02] is. I thought it was going to go higher.
+[01:09:11] So, look at VIX now halting almost
+[01:09:13] halting down.
+[01:09:25] Quick bounce long.
+[01:09:29] Watch for an add over 40.
+[01:09:39] That was a good trade.
+[01:09:44] So, our high right there was
+[01:09:47] 4084.
+[01:09:50] My average is 38.
+[01:09:54] Added right there up to the halt level.
+[01:10:01] Now looking for 41.
+[01:10:05] Watch over 4085.
+[01:10:15] So, some nice trades on VIX.
+[01:10:25] High this candle's 4125. Watching the
+[01:10:28] halt level to move up.
+[01:10:40] Watch now 4180.
+[01:10:46] Added 62. Looking for 75 and then 80.
+[01:10:55] Took the loss on that one.
+[01:10:58] 75. Look to add back on another dip.
+[01:11:01] Our high is 4163.
+[01:11:20] So, high was 4165. That's level to
+[01:11:24] watch.
+[01:12:18] So, our high was 4165.
+[01:12:30] Watching VIX.
+[01:12:46] So, still watching IXHL for a bounce and
+[01:12:49] a halt up. VIX I'm watching as well.
+[01:12:55] VIX seems like it's topping out up here
+[01:12:57] though. The high that candle's 4165.
+[01:13:01] So, unless that level breaks, I think
+[01:13:03] that's the top.
+[01:13:22] VIX needs to break over $41.
+[01:13:28] Watching around 41.
+[01:13:44] VIX kind of looks like it might be
+[01:13:45] curling, but I'm not sure.
+[01:13:48] Added there. Looking for 75 and 85.
+[01:13:52] Got a couple big bids popping up.
+[01:13:56] Next add is going to be 41.
+[01:14:19] Added there. Now looking for 4125
+[01:14:22] on VIX and 4150
+[01:14:24] as we start to open up.
+[01:14:31] Watch now. Got to cut it. Back to up
+[01:14:33] only 1800 on that one.
+[01:14:36] IXHL halt level's coming back up.
+[01:14:39] Watching VIX for another possible bounce
+[01:14:41] off the halt down.
+[01:15:01] Big spreads on VIX. Big whips. So, that
+[01:15:04] was a rejection there at 41.
+[01:15:30] So, now your 5-minute is a big red
+[01:15:31] candle.
+[01:15:33] I only made 2000 bucks on VIX in total.
+[01:15:36] Even though I had an awesome dip trade
+[01:15:38] right down there at 38. It was small
+[01:15:40] size, so I didn't make enough on it.
+[01:15:44] IXHL
+[01:15:46] watching resumption.
+[01:16:04] So, I was up 8000 on VIX, but gave back
+[01:16:08] six of it. Seven I think I was up 10,000
+[01:16:10] for a second.
+[01:16:35] Halt down is 3819.
+[01:17:40] So, still looking for that wash out long
+[01:17:42] in the first bounce. The first halt up.
+[01:18:03] VIX at the halt down.
+[01:18:06] I don't want to do a false halt attempt
+[01:18:08] on this one
+[01:18:11] because I think it's pulled back a
+[01:18:13] little too much.
+[01:18:37] VIX not halted yet.
+[01:18:41] Is it going to bounce?
+[01:18:43] There it goes.
+[01:19:03] Big range on VIX.
+[01:19:08] But, made a little money on it, so
+[01:19:11] that's good. All's well that ends well.
+[01:20:55] So, we'll see if IXHL
+[01:20:58] bounces.
+[01:20:59] Looking for a bounce on resumption.
+[01:21:02] We'll see if we get a halt up.
+[01:21:06] You know, this is the risk of trading
+[01:21:08] these light volume stocks.
+[01:21:24] Uh 41.
+[01:21:27] S&P high is
+[01:21:32] 421
+[01:21:34] 33.
+[01:21:57] I don't see anything else moving.
+[01:23:44] Vix
+[01:23:55] back at the VWAP.
+[01:24:57] What a move on Vix.
+[01:25:02] Pretty wild.
+[01:25:08] Another halt down is 3360 right there.
+[01:25:15] Watch for bounce, false halt. Back up to
+[01:25:23] 200 moving average is right here.
+[01:25:26] I added at 62 for false halt and it
+[01:25:28] moved back up to 34.
+[01:25:33] Looking for that pop back to 34.
+[01:25:43] 200 moving average is right here. 36 up
+[01:25:47] here is our VWAP. So, I'm looking for a
+[01:25:50] pop back to VWAP. Putting in order at 35
+[01:25:55] for profit.
+[01:26:09] Well, we did have one really nice false
+[01:26:10] halt on Vix.
+[01:26:31] So, we'll see.
+[01:26:33] It halted for real, but we'll see if we
+[01:26:35] get a curl back up to the VWAP.
+[01:26:42] My average is 3362. Looking for a bounce
+[01:26:45] back up to VWAP, which is at 3618.
+[01:26:50] Support is at the 200 moving average,
+[01:26:51] which is 3314. So, 50 cents of risk
+[01:26:54] versus a dollar 50 of profit potential.
+[01:27:02] 500.
+[01:28:03] So, watching resumption on IXHL.
+[01:28:20] Disappointing.
+[01:28:28] Halt up is 4510.
+[01:28:31] It's spread almost between the halt up
+[01:28:33] and the halt down.
+[01:28:45] up only 3800 on it.
+[01:28:48] Halt up is 4267.
+[01:28:59] So, resumption on Vix watching in about
+[01:29:04] a minute and 30 seconds.
+[01:29:23] So, I'm looking for a pop on this
+[01:29:25] support around 33.
+[01:29:28] Add around 33 and then curl back up to
+[01:29:31] 36.
+[01:29:33] 18. Halt up on IXHL is still at 42 67 42
+[01:30:06] IXHL halt up is
+[01:30:09] 43
+[01:30:10] 86.
+[01:30:12] So, it is approaching the halt up, but
+[01:30:14] whatever.
+[01:30:16] Watching Vix.
+[01:30:29] So, on Vix I can't see the resumption
+[01:30:30] price. Does anyone see a resumption
+[01:30:32] price?
+[01:30:38] Watching 33 support.
+[01:30:55] Interesting.
+[01:33:33] So, watching resumption in about 2
+[01:33:35] minutes on Vix. Still looking at the
+[01:33:37] volume weighted average price.
+[01:34:15] So, 3306
+[01:34:17] is possible support. That's also around
+[01:34:19] the 200 moving average 3314.
+[01:34:32] About 10 1 minute to resumption.
+[01:34:53] IXHL halt up is 45.
+[01:34:57] The problem with the chart is it's too
+[01:34:58] far below VWAP.
+[01:35:00] Just letting it be.
+[01:35:05] I tried that dip around 80 or 77 for the
+[01:35:08] curl back up. The false halt and then it
+[01:35:12] it just dropped, but I got one really I
+[01:35:14] mean it did pop, but I didn't take the
+[01:35:15] profit. I was looking for the move up to
+[01:35:16] 90 or maybe I took some. I don't
+[01:35:18] remember, but Vix watching this for a
+[01:35:21] pop back up to 3450 35.
+[01:35:34] So, watching Vix.
+[01:35:40] Watching support.
+[01:35:48] Unbelievable.
+[01:35:50] Lost $29,000
+[01:35:52] on Vix.
+[01:35:54] That sucks, man. That really sucks.
+[01:35:58] What a disaster.
+[01:36:00] Went from up 30,000 on the day to down
+[01:36:02] 25.
+[01:36:06] Boy, that sucks.
+[01:36:08] Well, that's the life of a trader. It's
+[01:36:11] ups and its downs.
+[01:36:14] That's just the way it goes, man.
+[01:36:16] You win some, you lose some.
+[01:36:20] Unreal.
+[01:36:25] Man.
+[01:36:27] Quick.
+[01:36:34] Well, what can you do? You know, that's
+[01:36:36] life.
+[01:36:37] There's nothing you can do. That's part
+[01:36:39] of trading.
+[01:36:40] You don't get winners if you can't
+[01:36:42] handle the losers.
+[01:36:45] I'm going to call today a a red day and
+[01:36:49] we'll make it a successful red day by
+[01:36:51] not taking any more trades at this point
+[01:36:53] and just let it be a 25k red day. It's
+[01:36:55] probably the biggest almost biggest red
+[01:36:57] day of the year.
+[01:36:59] But,
+[01:37:00] it's better to let it be a red day than
+[01:37:02] to dig the hole deeper. What a
+[01:37:04] turnaround.
+[01:37:05] Big swing today.
+[01:37:07] From up 25 30,000 to down 25,000.
+[01:37:13] Well, it's a reminder as always that
+[01:37:15] trading is risky.
+[01:37:17] It really is.
+[01:37:18] It's not easy even after years and years
+[01:37:20] of experience.
+[01:37:22] It's not easy. It's hard and it's very
+[01:37:25] very frustrating.
+[01:37:27] And that for me was a very frustrating
+[01:37:30] very frustrating swing that I just took.
+[01:37:37] you know, I can't feel too sorry for
+[01:37:38] myself. I've got over 10 million in
+[01:37:40] gross profit
+[01:37:41] trading momentum.
+[01:37:43] And in that
+[01:37:44] there's been a lot of big red days and
+[01:37:46] today's
+[01:37:47] not the biggest red day.
+[01:37:49] So, it's a small red day and small red
+[01:37:52] days are part of being a successful
+[01:37:54] trader. Keeping it small, keeping it
+[01:37:55] tight and then coming back to live
+[01:37:57] another day.
+[01:37:59] So, that's what I'll do. I'll shut it
+[01:38:01] down there down 25,000.
+[01:38:04] And I'll try again tomorrow.
+[01:38:06] See if tomorrow's a little bit better.

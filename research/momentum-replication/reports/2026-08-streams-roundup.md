@@ -7,8 +7,8 @@ register existed the entire time and was never touched: **480 live streams on
 the channel's `/streams` tab, none of them in the 2,211-video index**, which was
 scraped from `/videos` only.
 
-**266 of the 296 are transcribed (~1,096,000 words)** — the full selection bar a
-handful the bot check kept rejecting. This is what they change.
+**All 289 of the selection that YouTube would serve are transcribed —
+~1,336,000 words, 241 hours.** This is what they change.
 
 ---
 
@@ -25,17 +25,17 @@ The single most consequential finding. He narrates entries like this:
 > *"this is a 10 second pullback one minute pullback so looking for 48 65 4870"*
 > — [`9OK-AaPJens` 55:08](https://youtu.be/9OK-AaPJens?t=3308)
 
-Not an aside. Across 266 streams:
+Not an aside. Across 289 streams:
 
 | | mentions | streams |
 |---|---:|---:|
-| "10 second" | 174 | 97 of 266 |
-| "10 second" near pullback/dip/curl/candle | 121 | 76 of 266 |
-| "micro pullback" | 198 | 100 of 266 |
-| "tick chart" | 6 | 4 of 266 |
+| "10 second" | 250 | 117 of 289 |
+| "10 second" near pullback/dip/curl/candle | 173 | 93 of 289 |
+| "micro pullback" | 229 | 117 of 289 |
+| "tick chart" | 7 | 5 of 289 |
 
 And when a "micro pullback" is explicitly qualified by a timeframe: **1-minute
-51 times, 10-second 17 times**, 121 unqualified. Both charts are in live use;
+59 times, 10-second 19 times**, 141 unqualified. Both charts are in live use;
 the 10-second one is what he reaches for on the fastest movers.
 
 **It is not a 2021-era habit.** The streams are almost all 2021–2023 (see
@@ -44,7 +44,7 @@ run to July 2026:
 
 | register | "10 second" | files |
 |---|---:|---:|
-| streams (2021–23) | 174 | 97 of 266 |
+| streams (2021–23) | 250 | 117 of 289 |
 | **daily recaps (Jun–Jul 2026)** | **24** | **15 of 68** |
 | teaching videos (to 2026) | 233 | 80 of 257 |
 
@@ -92,7 +92,7 @@ And stated as a method, not a habit:
 > *"in phase five, we're also scaling into trades. Starter position, half size,
 > full size, then scaling out."* — [`-KcmoPm_skg` 57:50](https://youtu.be/-KcmoPm_skg?t=3470)
 
-"Add back" and "scaling in" appear **254 times, in 119 of 266 streams**. A single name in
+"Add back" and "scaling in" appear **328 times, in 138 of 289 streams**. A single name in
 a single morning absorbs eight or ten entries and exits.
 
 **What this does to our numbers.** `PARAMETERS.md` §6 has `scale_1_pct`,
@@ -226,8 +226,8 @@ rarely" as a standalone bug. Frequency is an output, not a target.
 
 ## 8. Halts: he reads a resumption price we do not have
 
-943 mentions across 140 of 266 streams, with operational detail absent from the
-teaching corpus:
+1,570 mentions across 162 of 289 streams, with operational detail absent from
+the teaching corpus:
 
 > *"BTMD, hitting our scans. **I can see the halt level is at 709.**"*
 > — [`0uunIYE_wVY` 1:09:43](https://youtu.be/0uunIYE_wVY?t=4183)
@@ -249,17 +249,17 @@ a gate condition we currently evaluate from price action after the fact.
 ## 9. What he says at the moment of entry is mostly about the **tape**
 
 With 1.1M words there are enough live entries to ask what he mentions *while
-buying*. 1,405 utterances match "bought the dip / buying the dip / added at /
+buying*. 1,803 utterances match "bought the dip / buying the dip / added at /
 adding at / I'm a buyer / took the entry". Against a 4,000-sample random
 baseline from the same text, so the numbers are enrichment and not word
 frequency:
 
 | said within ~120 chars of an entry | near entry | random text | enrichment |
 |---|---:|---:|---:|
-| **Level 2 / the tape** (bid, ask, seller) | **17%** | 7% | **2.4×** |
-| "curl" / "curling up" | 7% | 2% | 4.1× |
-| 1-minute chart | 8% | 3% | 2.8× |
-| 10-second chart | 2% | 1% | 4.0× |
+| **Level 2 / the tape** (bid, ask, seller) | **17%** | 7% | **2.5×** |
+| 1-minute chart | 9% | 3% | 2.8× |
+| "curl" / "curling up" | 7% | 3% | 2.8× |
+| 10-second chart | 3% | 1% | 4.3× |
 
 Two things follow.
 
@@ -307,9 +307,12 @@ the entry actually happens*.
 - **Selection bias.** Titles were filtered for live trading, and stream titles
   skew to good days ("+$28k", "Green Day"). Use these for *what he does*, never
   for *how often it works*.
-- **266 of 296**, the rest still blocked by YouTube's bot check. Every count
-  above was recomputed at 82, 154 and 266 streams and the ratios did not move —
-  "10 second" held at 36–41% of streams throughout.
+- **289 of 296.** The first pass lost 27 to YouTube's bot check, and because
+  the fetch list was sorted by duration those were the 27 *longest* streams —
+  losing exactly the long tail would have biased every per-stream count. A
+  slower sequential retry recovered all 27. Every count above was recomputed at
+  82, 154, 266 and 289 streams and the ratios did not move: "10 second" held at
+  36–41% of streams throughout.
 - **The streams are 2021–2023, not 2026.** Of 274 with a real upload date: 47
   from 2021, 174 from 2022, 45 from 2023, and **one** from 2026. The live
   Morning Show largely stopped after 2023. **None fall inside the

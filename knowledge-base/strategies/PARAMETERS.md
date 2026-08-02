@@ -538,9 +538,11 @@ minutes long. The live streams show that is far slower than what he trades:
 > *"This is a 10-second micro pullback. Looking for the break of 14 and 15."*
 > — `XIQUoLyUWuw` [33:32]
 
-Across 154 transcribed streams "10 second" appears 120 times in 63 of them, and
-of the "micro pullback" mentions carrying an explicit timeframe, 14 are
-10-second against 40 one-minute. On a 1-minute chart a 10-second pullback is
+Across 289 transcribed streams "10 second" appears 250 times in 117 of them,
+and of the "micro pullback" mentions carrying an explicit timeframe, 19 are
+10-second against 59 one-minute. The streams are 2021–2023, so it was checked
+forward: the June–July 2026 daily recaps use the phrase in 15 of 68 files and
+the teaching corpus in 80 of 257. Current practice, not a habit he dropped. On a 1-minute chart a 10-second pullback is
 not a candle — it is the wick of one.
 
 **This is not a parameter error, it is a resolution error.** No setting of

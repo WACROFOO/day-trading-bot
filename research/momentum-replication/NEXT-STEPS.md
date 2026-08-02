@@ -93,18 +93,18 @@ he would not take it. `reports/2026-08-target-and-entries.md`.
 
 `reports/2026-08-streams-roundup.md`. The channel's `/streams` tab holds **480
 live broadcasts, none of them in the 2,211-video index** (scraped from
-`/videos`). **266 of 296 are transcribed, ~1.1M words.** Unlike the teaching
+`/videos`). **289 of 296 are transcribed — ~1.34M words, 241 hours.** Unlike the teaching
 videos and the recaps, a live stream records a decision *before* the outcome.
 
-They are 2021–2023, though (174 of 274 dated files are 2022), and **none fall
+They are 2021–2023, though (180 of 296 dated files are 2022), and **none fall
 in the 2026-07 bar-data window** — so they are evidence about *method*, not a
 labelled set the engine can be scored against. The recaps remain the only
 calibration set.
 
 **§5 above asked what is wrong with the trigger. The streams answer it:
 the micro-pullback he trades is frequently a 10-SECOND pattern.** "10 second"
-appears 174 times across 97 of 266 streams; of the "micro pullback" mentions
-carrying an explicit timeframe, 17 are 10-second against 51 one-minute. Our
+appears 250 times across 117 of 289 streams; of the "micro pullback" mentions
+carrying an explicit timeframe, 19 are 10-second against 59 one-minute. Our
 detector runs on 1-minute bars with `MIN_DIP_BARS = 2`, so the shortest dip it
 can see is **two minutes**. On a 1-minute chart a 10-second pullback is the
 wick of a candle.
