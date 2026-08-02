@@ -66,6 +66,12 @@ GATE_CONDITIONS = {
 }
 MIN_PILLARS = len(GATE_CONDITIONS)
 MAX_PULLBACK_INDEX = 2
+# Shortest dip the detector will call a pullback. PLAYBOOK.md:99 says 2-3
+# candles, which is why this is 2 - but that reading assumes the 1-minute chart
+# is the finest one available. It is not: the source also reads a 10-second
+# chart, where a 1-minute pause IS a 2-3 candle pullback. Exposed so the
+# assumption can be tested rather than baked in.
+MIN_DIP_BARS = 2
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
 SESSION_OPEN = dt.time(9, 30)
@@ -237,7 +243,7 @@ class PullbackTracker:
             # and pushed the first real flag to #3+, and they moved the leg
             # origin used by the 50%-of-leg test.
             n = len(self.pullback)
-            if n < 2:
+            if n < MIN_DIP_BARS:
                 # a single pause bar is part of the impulse, not a pullback
                 self.leg_high = max(self.leg_high, bar['h'])
                 self.pullback = []

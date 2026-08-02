@@ -1,0 +1,243 @@
+{
+ "sym": "CUPR",
+ "day": "2026-07-31",
+ "setups": [
+  {
+   "t": "09:40",
+   "score": 5,
+   "entry": 3.498300075531006,
+   "stop": 3.3570001125335693,
+   "risk": 0.14129996299743652,
+   "spread": 0.06010007858276367,
+   "idx": 1,
+   "leg_low": 3.2699999809265137,
+   "leg_high": 3.569999933242798,
+   "hod": 3.569999933242798,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "pullback_volume < impulse_volume"
+   ]
+  },
+  {
+   "t": "09:48",
+   "score": 4,
+   "entry": 3.3808999252319336,
+   "stop": 3.3608999252319336,
+   "risk": 0.020000000000000018,
+   "spread": 0.04999995231628418,
+   "idx": 1,
+   "leg_low": 3.2016000747680664,
+   "leg_high": 3.4379000663757324,
+   "hod": 3.569999933242798,
+   "gate_ok": false,
+   "sized": false,
+   "fails": [
+    "price > VWAP",
+    "MACD histogram > 0"
+   ]
+  },
+  {
+   "t": "10:05",
+   "score": 5,
+   "entry": 3.404999990463257,
+   "stop": 3.384999990463257,
+   "risk": 0.020000000000000018,
+   "spread": 0.043399810791015625,
+   "idx": 2,
+   "leg_low": 3.3608999252319336,
+   "leg_high": 3.488300085067749,
+   "hod": 3.569999933242798,
+   "gate_ok": false,
+   "sized": false,
+   "fails": [
+    "MACD histogram > 0"
+   ]
+  },
+  {
+   "t": "10:55",
+   "score": 3,
+   "entry": 3.389999885559082,
+   "stop": 3.2500998973846436,
+   "risk": 0.1398999881744385,
+   "spread": 0.07989978790283203,
+   "idx": 1,
+   "leg_low": 3.0199999809265137,
+   "leg_high": 3.5899999141693115,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP",
+    "MACD histogram > 0"
+   ]
+  },
+  {
+   "t": "11:14",
+   "score": 4,
+   "entry": 3.220000047683716,
+   "stop": 3.193000078201294,
+   "risk": 0.026999969482421893,
+   "spread": 0.024899959564208984,
+   "idx": 1,
+   "leg_low": 3.0999999046325684,
+   "leg_high": 3.2600998878479004,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "11:57",
+   "score": 4,
+   "entry": 2.8331000995635987,
+   "stop": 2.77020001411438,
+   "risk": 0.06290008544921877,
+   "spread": 0.035199880599975586,
+   "idx": 1,
+   "leg_low": 2.5,
+   "leg_high": 2.9999001026153564,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "12:06",
+   "score": 4,
+   "entry": 2.950000047683716,
+   "stop": 2.930000066757202,
+   "risk": 0.019999980926513672,
+   "spread": 0.04999995231628418,
+   "idx": 2,
+   "leg_low": 2.77020001411438,
+   "leg_high": 3.0873000621795654,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": false,
+   "fails": [
+    "price > VWAP",
+    "price > 9 EMA"
+   ]
+  },
+  {
+   "t": "12:53",
+   "score": 3,
+   "entry": 2.8301999759674072,
+   "stop": 2.8101999759674072,
+   "risk": 0.020000000000000018,
+   "spread": 0.019899845123291016,
+   "idx": 1,
+   "leg_low": 2.7318999767303467,
+   "leg_high": 2.8550000190734863,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "pullback_volume < impulse_volume",
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "13:25",
+   "score": 4,
+   "entry": 2.8699999046325684,
+   "stop": 2.8499999046325684,
+   "risk": 0.020000000000000018,
+   "spread": 0.009999990463256836,
+   "idx": 1,
+   "leg_low": 2.809999942779541,
+   "leg_high": 2.9000000953674316,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "13:39",
+   "score": 3,
+   "entry": 2.8610000610351562,
+   "stop": 2.859999895095825,
+   "risk": 0.0010001659393310547,
+   "spread": 0.009999990463256836,
+   "idx": 2,
+   "leg_low": 2.8499999046325684,
+   "leg_high": 2.9000000953674316,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": false,
+   "fails": [
+    "pullback_volume < impulse_volume",
+    "price > VWAP",
+    "price > 9 EMA"
+   ]
+  },
+  {
+   "t": "14:02",
+   "score": 2,
+   "entry": 2.880100030899048,
+   "stop": 2.860100030899048,
+   "risk": 0.020000000000000018,
+   "spread": 0.009900093078613281,
+   "idx": 3,
+   "leg_low": 2.859999895095825,
+   "leg_high": 2.9000000953674316,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "pullback_volume < impulse_volume",
+    "pullback index <= 2",
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "15:47",
+   "score": 4,
+   "entry": 2.879999895095825,
+   "stop": 2.859999895095825,
+   "risk": 0.020000000000000018,
+   "spread": 0.0009000301361083984,
+   "idx": 1,
+   "leg_low": 2.799999952316284,
+   "leg_high": 2.875,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  },
+  {
+   "t": "15:58",
+   "score": 4,
+   "entry": 2.910000104904175,
+   "stop": 2.890000104904175,
+   "risk": 0.020000000000000018,
+   "spread": 0.0009000301361083984,
+   "idx": 1,
+   "leg_low": 2.809999942779541,
+   "leg_high": 2.930000066757202,
+   "hod": 5.769899845123291,
+   "gate_ok": false,
+   "sized": true,
+   "fails": [
+    "support confluence >= 2",
+    "price > VWAP"
+   ]
+  }
+ ]
+}
