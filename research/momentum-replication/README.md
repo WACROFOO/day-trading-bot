@@ -104,8 +104,10 @@ for the first; the second lives in `pipeline/run20b.py::build`.
   windows are not directly comparable — this previously produced fabricated
   gaps of +10,000% around reverse splits. Daily bars are fetched in a single
   window for anything that compares across days.
-- Pre-market volume is null for most of these symbols, so relative volume can
-  only be confirmed from 09:30 onward.
+- Pre-market volume is null on this endpoint for **every** symbol, including
+  AAPL/TSLA/NVDA/SPY — an API limitation, not a property of thin names. So
+  relative volume can only be confirmed from 09:30 onward, and the pre-market
+  session the source trades cannot be modelled at all. See `DATA-SOURCES.md`.
 - No quote data, therefore no true spread. A spread estimate is derived from
   the tightest quartile of recent 1-minute ranges.
 - Two entry conditions in the source (`no_seller_wall`, `tape_green`) require
