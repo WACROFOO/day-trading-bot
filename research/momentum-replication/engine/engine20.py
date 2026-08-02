@@ -53,6 +53,77 @@ ET = dt.timezone(dt.timedelta(hours=-4))
 # RR_FILTER=1 restores the veto for comparison.
 RR_FILTER = os.environ.get('RR_FILTER', '0') != '0'
 
+# --- what counts as "a trade" -----------------------------------------------
+# The engine took one entry per name, scaled out, and burned one of the day's
+# trade slots. The live streams show a different unit of activity: he works a
+# POSITION, entering and exiting the same name repeatedly through a move.
+#
+#   "Taking little profit and then looking to add back. Flat. Watching for
+#    another dip."                                        0uunIYE_wVY [15:19]
+#   "Add back 67. Now looking for the break of 70. Buying the dip off the flat
+#    bottom, 56. Going flat 51 for now. Add back at 51, bought the dip."
+#                                                         1NZS5CqCnj8 [42:13]
+#   "in phase five, we're also scaling into trades. Starter position, half
+#    size, full size, then scaling out."                   -KcmoPm_skg [57:50]
+#
+# "Add back" and "scaling in" occur 328 times across 138 of 289 streams. So
+# `max_trades` counts the wrong unit: PARAMETERS.md's funnel ends "3-5
+# watchlist -> 1-2 trades", which is 1-2 NAMES, while the engine spent a slot
+# on every entry.
+#
+# RE_ENTRY=0 restores one entry per name.
+# reports/2026-08-streams-roundup.md section 2.
+RE_ENTRY = os.environ.get('RE_ENTRY', '1') != '0'
+# Cap per name. He runs well past this on a strong mover; the cap exists so a
+# single symbol cannot consume the whole session through a detector quirk, not
+# because the corpus states a limit.
+MAX_ENTRIES_PER_NAME = int(os.environ.get('MAX_ENTRIES_PER_NAME', 4))
+
+# --- scaling IN --------------------------------------------------------------
+# The engine entered once, at full size, and never added. That is the real gap
+# the streams expose - re-entry after going flat already worked (ADVB 07-22
+# 10:24 and 11:22 are two entries on one name), but BUILDING a position did not.
+#
+#   "starter position, half size, full size, then scaling out"  -KcmoPm_skg [57:50]
+#   "watch add over 55" / "going to add for the break of 1445" / "add 1,000
+#    shares over 515"          - 341 such phrasings across the stream corpus
+#
+# PARAMETERS.md:209 already carries the ladder - `size_ladder 100 -> 200 -> 400
+# -> 800`, n=125. It was never implemented.
+#
+# The smallest model the evidence supports: open at half the risk-based size,
+# add the rest on the next trigger that still clears the gate, and never let
+# total risk exceed RISK_PER_TRADE. The stop may only move UP
+# (PARAMETERS.md:165, widen_stop_allowed == false), so an add whose structure
+# sits BELOW the current stop is refused rather than taken on a loosened stop.
+#
+# Adds stop once the first scale-out has happened: past that he is reducing,
+# and re-entering later is the separate path above.
+#
+# DEFAULT OFF, and the reason is the result. Over 17 sessions this fires ONE
+# add. Median hold on these positions is 2 minutes and only 5 of 13 last 3
+# minutes or more, so there is no room for a second pullback to form inside a
+# position that is already stopped out. Left on, it does nothing but halve
+# every position: -$588.90 -> -$299.58 with expectancy going -0.26R -> -0.33R,
+# which is smaller losses rather than better trading.
+#
+# That is not evidence against scaling in. It is the same finding as everything
+# else in reports/2026-08-streams-roundup.md: his positions survive long enough
+# to build, ours do not, because the entry is late. Turn this on once the entry
+# is fixed - the model is here and tested, waiting on the trigger.
+SCALE_IN = os.environ.get('SCALE_IN', '0') != '0'
+STARTER_FRACTION = float(os.environ.get('STARTER_FRACTION', 0.5))
+
+
+def _spread(ind):
+    """Cheapest plausible spread: the 25th-percentile 1-minute range.
+
+    The same estimate the entry path uses. Factored out because the add path
+    needs it too - see 'add: stop would sit inside the spread'.
+    """
+    rngs = sorted(x['h'] - x['l'] for x in ind.bars[-30:] if x['h'] > x['l'])
+    return rngs[len(rngs) // 4] if rngs else 0.01
+
 
 def run_day(day, watch, bars_by_sym, max_trades, log=None):
     """bars_by_sym: {sym: {'pre': [bar], 'session': [bar]}} with dt/o/h/l/c/v."""
@@ -80,6 +151,8 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
 
     position, trades, day_pnl, losses = None, [], 0.0, 0
     halted, setups, passes, rejects = None, 0, 0, {}
+    entries_by_sym = {}          # symbol -> entries taken; keys are the names
+                                 # traded, which is what max_trades now counts
 
     for hm in minutes:
         tm = dt.time(int(hm[:2]), int(hm[3:]))
@@ -145,8 +218,9 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 halted = 'profit goal'
             elif losses >= MAX_LOSSES_STREAK:
                 halted = '3 losses in a row'
-            elif len(trades) >= max_trades:
-                halted = f'{max_trades} trades taken'
+            elif len(entries_by_sym if RE_ENTRY else trades) >= max_trades:
+                halted = (f'{max_trades} names traded' if RE_ENTRY
+                          else f'{max_trades} trades taken')
             if halted:
                 log.append(f'{hm} --- STOP: {halted} ---')
 
@@ -160,7 +234,88 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
             ind.update(bar, in_session=True)
             pb = tr.update(bar, s['prev'], ind)
 
-            if pb and position is None and halted is None and TRADE_START <= tm < HARD_STOP:
+            # A name already worked today may be re-entered, but only up to its
+            # own cap; a NEW name is refused once the day's slots are spent.
+            # Expressed as a flag rather than a `continue`, because the tail of
+            # this loop still has to advance s['prev'] and s['flipped'] - the
+            # flipped levels feed support confluence, and skipping them would
+            # silently corrupt the gate for the rest of the session.
+            allowed = True
+            if RE_ENTRY and pb and position is None and halted is None:
+                n_taken = entries_by_sym.get(sym, 0)
+                if n_taken >= MAX_ENTRIES_PER_NAME:
+                    allowed = False
+                    rejects['name at its entry cap'] = rejects.get('name at its entry cap', 0) + 1
+                elif n_taken == 0 and len(entries_by_sym) >= max_trades:
+                    allowed = False
+                    rejects['day at its name limit'] = rejects.get('day at its name limit', 0) + 1
+
+            # --- add to a position already open in this name ----------------
+            if (SCALE_IN and pb and position is not None
+                    and position['sym'] == sym and position['scaled'] == 0
+                    and position['shares'] < position['target_size']
+                    and halted is None and TRADE_START <= tm < HARD_STOP):
+                ok_a, checks_a = evaluate(pb, bar, ind, s['flipped'])
+                gating_a = {k: v for k, v in checks_a.items()
+                            if k in sim.GATE_CONDITIONS}
+                add_px = min(pb['trigger_level'] + SLIPPAGE, bar['h'])
+                new_stop = pb['low']
+                p_ = position
+                if not all(v[0] for v in gating_a.values()):
+                    rejects['add: gate no longer clear'] = rejects.get('add: gate no longer clear', 0) + 1
+                elif new_stop < p_['stop']:
+                    # taking it would mean widening the stop on the whole
+                    # position, which PARAMETERS.md:165 forbids outright
+                    rejects['add: would widen the stop'] = rejects.get('add: would widen the stop', 0) + 1
+                elif add_px - new_stop < _spread(ind):
+                    # stop_min_distance >= spread width (PARAMETERS.md:163) is
+                    # tested on a fresh entry but was not on an add, and an add
+                    # ratchets the stop up toward the average price. EHGO
+                    # 2026-07-13 11:29 came out with $0.002/share of room -
+                    # inside the spread, so noise alone closes it, and the R
+                    # denominator goes to zero with it.
+                    rejects['add: stop would sit inside the spread'] = rejects.get('add: stop would sit inside the spread', 0) + 1
+                else:
+                    want = p_['target_size'] - p_['shares']
+                    qty = max(0, min(want, int(bar['v'] * LIQUIDITY_CAP),
+                                     int((BUYING_POWER - p_['shares'] * p_['entry'])
+                                         / add_px)))
+                    # total risk on the combined position, at the new stop
+                    if qty > 0:
+                        avg = ((p_['entry'] * p_['shares'] + add_px * qty)
+                               / (p_['shares'] + qty))
+                        risk_total = (avg - new_stop) * (p_['shares'] + qty)
+                        while qty > 0 and risk_total > RISK_PER_TRADE:
+                            qty -= max(1, qty // 20)
+                            if qty <= 0:
+                                break
+                            avg = ((p_['entry'] * p_['shares'] + add_px * qty)
+                                   / (p_['shares'] + qty))
+                            risk_total = (avg - new_stop) * (p_['shares'] + qty)
+                    if qty <= 0:
+                        rejects['add: no room inside the risk budget'] = rejects.get('add: no room inside the risk budget', 0) + 1
+                    else:
+                        p_['entry'] = avg
+                        p_['shares'] += qty
+                        p_['full'] += qty
+                        p_['stop'] = new_stop
+                        p_['risk_ps'] = avg - new_stop
+                        p_['adds'] = p_.get('adds', 0) + 1
+                        hod_a = s['hod_prev']
+                        imp_a = pb['impulse']
+                        pole_a = ((max(x['h'] for x in imp_a)
+                                   - min(x['l'] for x in imp_a)) if imp_a else 0)
+                        objs = [x for x in (hod_a, pb['low'] + pole_a)
+                                if x and x > avg]
+                        if objs:
+                            p_['t1'] = min(objs)
+                            p_['t2'] = avg + 2 * (p_['t1'] - avg)
+                        log.append(f'{hm} {sym}: ADD {qty} @ {add_px:.2f}, '
+                                   f'{p_["shares"]} total, avg {avg:.2f}, '
+                                   f'stop up to {new_stop:.2f}')
+
+            if (pb and allowed and position is None and halted is None
+                    and TRADE_START <= tm < HARD_STOP):
                 setups += 1
                 ok, checks = evaluate(pb, bar, ind, s['flipped'])
                 # PARAMETERS.md sec.12 step 3: score the pillars instead of
@@ -183,9 +338,7 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 # here, so spread is estimated from the bars themselves: the
                 # 25th-percentile 1-minute range is about as tight as this name
                 # trades, which is a floor on what the spread can be.
-                rngs = sorted(x['h'] - x['l'] for x in ind.bars[-30:]
-                              if x['h'] > x['l'])
-                spread_est = rngs[len(rngs) // 4] if rngs else 0.01
+                spread_est = _spread(ind)
                 # PLAYBOOK.md:166 - "cut your size OR skip the trade". The
                 # sizing formula already cuts size when the stop is wider, so a
                 # wide stop is not a rejection; it is simply fewer shares. Only
@@ -253,8 +406,12 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                         recent = ind.bars[-20:]
                         avg_rng = (sum(x['h'] - x['l'] for x in recent)
                                    / max(1, len(recent)))
+                        starter = (max(1, int(final * STARTER_FRACTION))
+                                   if SCALE_IN else final)
                         position = dict(sym=sym, entry=entry, stop=stop,
-                                        risk_ps=risk_ps, shares=final, full=final,
+                                        target_size=final, adds=0,
+                                        risk_ps=risk_ps, shares=starter,
+                                        full=starter,
                                         pnl=0.0, scaled=0, entry_time=hm,
                                         t1=t1, t2=entry + 2 * (t1 - entry),
                                         avg_rng=avg_rng, pb_bars=len(pb['bars']),
@@ -262,8 +419,12 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                                         impulse_v=max((x['v'] for x in imp),
                                                       default=0),
                                         window='prime' if tm < PRIME_END else 'late')
-                        log.append(f'{hm} {sym}: BUY {final} @ {entry:.2f} '
-                                   f'stop {stop:.2f} (${risk_ps:.2f}/sh)')
+                        entries_by_sym[sym] = entries_by_sym.get(sym, 0) + 1
+                        position['entry_n'] = entries_by_sym[sym]
+                        log.append(f'{hm} {sym}: BUY {starter} @ {entry:.2f} '
+                                   f'stop {stop:.2f} (${risk_ps:.2f}/sh)'
+                                   + (f'  [entry {entries_by_sym[sym]} on {sym}]'
+                                      if entries_by_sym[sym] > 1 else ''))
             s['prev'] = bar
             if ind.session_high and bar['h'] >= ind.session_high:
                 s['flipped'] = (s['flipped'] + [round(bar['h'], 2)])[-6:]
@@ -291,4 +452,5 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
 
     return dict(day=str(day), pnl=round(day_pnl, 2), trades=trades,
                 setups=setups, passes=passes, halted=halted, rejects=rejects,
-                watch=list(state))
+                watch=list(state), names=len(entries_by_sym),
+                entries_by_sym=dict(entries_by_sym))

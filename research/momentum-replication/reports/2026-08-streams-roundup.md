@@ -95,10 +95,16 @@ And stated as a method, not a habit:
 "Add back" and "scaling in" appear **328 times, in 138 of 289 streams**. A single name in
 a single morning absorbs eight or ten entries and exits.
 
+**Correction, on building this.** I wrote here that the engine has "no
+re-entry". That was wrong — it already re-enters: ADVB 07-22 at 10:24 *and*
+11:22, BIYA 07-27 at 10:24 *and* 11:22, RPGL 07-09 at 09:36 *and* 10:05. The
+only constraint was one open position at a time, which never blocked a second
+entry into a name it had exited. What was genuinely missing is **building** a
+position — adding to a winner. See §2b.
+
 **What this does to our numbers.** `PARAMETERS.md` §6 has `scale_1_pct`,
-`scale_2_pct` and `runner_pct`, so the exit ladder is modelled — but there is no
-re-entry, and `max_trades` counts what he would call one position. Two
-consequences:
+`scale_2_pct` and `runner_pct`, so the exit ladder is modelled, and
+`max_trades` counts entries where he counts names. Two consequences:
 
 - **The 65–75% accuracy is not comparable to our 27% win rate.** His is measured
   over many small scale-outs around a core, most of which are taken into
@@ -106,6 +112,46 @@ consequences:
 - **Our trade limit is binding on the wrong unit.** Five "trades" a day in his
   vocabulary is five *names*; in ours it is five entries, which he would spend
   on one stock before 10:00.
+
+---
+
+## 2b. Scaling in: implemented, and it cannot attach to our entries
+
+`PARAMETERS.md:209` already carried the ladder — `size_ladder 100 → 200 → 400 →
+800`, n=125 — and it had never been implemented. The streams show it as live
+practice: **341 phrasings** of the form *"watch add over 55"*, *"going to add
+for the break of 1445"*, *"add 1,000 shares over 515"*.
+
+Built the smallest model the evidence supports: open at half the risk-based
+size, add the rest on the next trigger that still clears the gate, cap total
+risk at `RISK_PER_TRADE`, and never widen the stop
+(`widen_stop_allowed == false`).
+
+**Over 17 sessions it fires one add.**
+
+| | value |
+|---|---|
+| adds taken | **1** |
+| median hold on a position | **2 minutes** |
+| positions lasting ≥ 3 minutes | 5 of 13 |
+
+There is no room for a second pullback to form inside a position that is
+already stopped out. Left on, scaling in does nothing but halve every position
+— −$588.90 → −$299.58, expectancy −0.26R → −0.33R. Smaller losses, not better
+trading. **`SCALE_IN` therefore defaults off**, with the model kept and tested,
+waiting on the entry.
+
+This is not evidence against scaling in. It is §1 again from a different angle:
+*his positions survive long enough to build, ours do not.* A trader who enters
+a 10-second pullback is in before the move; one who waits for a two-minute dip
+is in after it, and gets two minutes of life.
+
+Building it also surfaced a defect in the new code worth recording: an add
+ratchets the stop up toward the average price, and `stop_min_distance >= spread
+width` (`PARAMETERS.md:163`) was only ever tested on a fresh entry. EHGO
+2026-07-13 11:29 came out of an add with **$0.002/share** of stop room — inside
+the spread, so noise alone closes it, and the R denominator goes to zero with
+it. Now tested on both paths, from one shared helper so they cannot drift.
 
 ---
 
@@ -287,12 +333,13 @@ same purchase as §1: sub-minute bars and Level 2 come from the same feed.
 | 2 | keep `PRICE_MIN = 2.0`; drop the July calibration's $1.00 suggestion | one line | high — §5 |
 | 3 | keep float 20M | none | high — §6 |
 | 4 | stop treating low trade frequency as a bug | none | high — §7 |
-| 5 | model re-entry: allow adding back into a name after a scale-out, and count *positions* not *entries* against `max_trades` | substantial | high — §2 |
+| 5 | ~~model position building~~ **done, and it cannot run yet** — 1 add in 17 sessions, because positions live 2 minutes | substantial | high — §2b |
 | 6 | sub-minute bars for the entry trigger, and Level 2 depth | paid data | **this is the timing answer** — §1 and §9, same feed |
 
 Items 1–4 are free and are done. Together they moved the 17-session run from
 11 trades / −$601.65 to 13 / −$588.90 — which is the point: the free changes
 were never going to close a gap that §1 says is a resolution problem. Item 5
+is now also done, and returned the same verdict from the other direction. Item 5
 is the largest modelling gap in the engine. Item 6 cannot be done on free data,
 and it is now the clearest justification for the `DATA-SOURCES.md` decision
 that this project has produced: not "more sample", but *the resolution at which
