@@ -154,6 +154,10 @@ pairs. Change a rule, re-run `diagnostics/calibrate.py`, and see whether the
 engine gets closer to what he actually did — that number cannot be moved by an
 accounting bug in the exit.
 
+This is not hypothetical any more: the bug hunt (`reports/2026-08-bughunt.md`)
+moved that metric 4% → 22% in one fix (the fake-halt veto, defect 17) while
+making the P&L *worse* — both movements in the honest direction.
+
 ## A caveat that applies to all of the above
 
 **"Named in a recap" is not "traded that session."** Recaps review prior days

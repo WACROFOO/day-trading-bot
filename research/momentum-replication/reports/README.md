@@ -10,6 +10,7 @@ the command at its head.
 | `2026-07-july-calibration.md` | **The first external measurement.** Real upload dates turn 28 July recaps into labelled sessions; the engine is scored against 61 session-ticker pairs he named |
 | `2026-08-target-and-entries.md` | Settles the 2:1 veto against the spec's own numbers, then shows what it was hiding: the losses are bad entries, not tight stops |
 | `2026-08-streams-roundup.md` | **The 480 live streams the corpus never had.** Answers the timing question: the micro-pullback is often a 10-second pattern our 1-minute detector cannot see |
+| `2026-08-bughunt.md` | Four mechanical defects found by line-by-line re-read; the fake-halt veto alone moved agreement with his labelled trades 4% → 22% |
 
 Headline: of every ticker he named that resolves to a symbol, **100% were in
 the pool** and the detector found structure on **97%** — but only 31% pass the

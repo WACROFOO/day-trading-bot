@@ -109,6 +109,10 @@ MIN_CUM_VOLUME = 500_000
 # (FN-uqfbEVKw 01:24), so 5 consecutive missing minutes inside regular hours is
 # the detection threshold - the shortest gap a real halt can produce.
 HALT_GAP_MIN = 5
+# A >=5-min gap only counts as a halt when the bars around it show halt-scale
+# volume. Measured separation in the 17-session window: real halts 63k-3.1M
+# shares adjacent, no-print gaps 159-2,744. The threshold sits mid-band.
+HALT_MIN_ADJ_VOLUME = int(os.environ.get('HALT_MIN_ADJ_VOLUME', 25_000))
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 
 SESSION_OPEN = dt.time(9, 30)
@@ -253,11 +257,35 @@ class PullbackTracker:
         # Carrying leg_low, leg_high and the pullback count across the gap
         # invents a move that never traded, and makes the resumption print look
         # like an ordinary bar-to-bar advance.
+        #
+        # But a missing minute is not a halt. On a quiet name, minutes with no
+        # prints are routine - CUPR 2026-07-31 shows eighteen 5-minute-plus
+        # gaps through the afternoon with 159-2,744 shares trading around
+        # them, while the REAL halts in the same 17 sessions (ZCMD and ADVB on
+        # 07-22) have 63k-3.1M shares on the bars either side. Two orders of
+        # magnitude of clean separation. A volatility halt is triggered BY
+        # heavy one-directional trading, so volume around the gap is the
+        # discriminator OHLCV actually carries. Without it, every quiet
+        # afternoon stretch that drifted a cent set halted_down and vetoed
+        # the rest of the day.
         gap = (bar['dt'] - prev['dt']).total_seconds() / 60.0
         if gap >= HALT_GAP_MIN:
-            self._reset(bar)
-            self.halted_down = bar['c'] < prev['c']
-            return None
+            if max(prev['v'], bar['v']) >= HALT_MIN_ADJ_VOLUME:
+                self._reset(bar)
+                self.halted_down = bar['c'] < prev['c']
+                return None
+            # no-print stretch on a quiet tape: nothing was re-auctioned,
+            # structure simply continues across the missing minutes
+
+        # "Stock halted going down typically resumes lower" (FN-uqfbEVKw
+        # 19:03) is a caution about the RESUMPTION, not a verdict on the rest
+        # of the session. The flag used to persist until the next gap
+        # happened to close higher, vetoing every setup in between - hours of
+        # them. A new session high is the direct falsification of "resumed
+        # lower and heading lower": once it prints, the caution has expired.
+        if (self.halted_down and ind.session_high is not None
+                and bar['h'] >= ind.session_high):
+            self.halted_down = False
 
         # Losing VWAP resets the leg only if it also breaks the leg low. The
         # unconditional reset was my invention, not a playbook rule - there
@@ -338,31 +366,28 @@ class PullbackTracker:
                 self._reset(bar)          # too long to be a pause; new base
             return None
 
-        # bar took out the previous bar's high: the pullback just ended
-        if not self.pullback:
-            return None
-
-        pb_low = min(x['l'] for x in self.pullback)
-        pole = self.leg_high - self.leg_low
-        front = (ind.session_high is None or pole <= 0
-                 or self.leg_high >= ind.session_high - self.FRONT_SIDE_LEGS * pole)
-        self.index += 1
-        out = dict(bars=list(self.pullback), low=pb_low,
-                   body_low=min(min(x['o'], x['c']) for x in self.pullback),
-                   index=self.index,
-                   trigger_level=prev['h'], leg_low=self.leg_low,
-                   leg_high=self.leg_high, pole=pole, front_side=front,
-                   impulse=[dict(h=self.leg_high, l=self.leg_low,
-                                 v=self.impulse_volume(ind))])
-        # the next leg starts from this pullback low
-        self.leg_low = pb_low
-        self.leg_high = bar['h']
-        self.pullback = []
-        return out
+        # Nothing reaches here. A bar that takes out the previous high with a
+        # pullback accumulated is the trigger branch above (pullback non-empty
+        # implies armed - bars are only appended once a leg high exists), and
+        # without one it fell through the extension/append branches. A second
+        # copy of the trigger logic used to live here; it had drifted from the
+        # real one (no halted_down on the pb it built, different leg rebase)
+        # and 0 of 1,362 setups across the 17 sessions came from it. Dead code
+        # that can drift is a defect: removed.
+        return None
 
     def impulse_volume(self, ind):
-        """Average bar volume over the leg, for the lighter-volume-dip check."""
-        bars = [b for b in ind.bars[-12:] if b['h'] <= self.leg_high]
+        """Average bar volume over the leg, for the lighter-volume-dip check.
+
+        Called at trigger time, while self.pullback still holds the dip bars.
+        The previous version averaged ind.bars[-12:], which CONTAINS those dip
+        bars - so 'pullback volume < impulse volume' compared the dip partly
+        against itself and decided marginal cases by noise (ADVB 07-22 passed
+        by 481 shares). The dip is excluded now, and pre-market bars with it.
+        """
+        k = len(self.pullback)
+        window = ind.bars[-(12 + k):-k] if k else ind.bars[-12:]
+        bars = [b for b in window if b.get('in_session')]
         return (sum(b['v'] for b in bars) / len(bars)) if bars else 0
 
 
@@ -413,116 +438,8 @@ def evaluate(pb, bar, ind, flipped):
     return all(v[0] for v in checks.values()), checks
 
 
-def simulate(sym, fri_bars, pre_bars, log):
-    """One symbol, one day, strictly forward."""
-    ind = Indicators()
-    for b in pre_bars:                       # seed indicators, pre-market only
-        ind.update(b, in_session=False)
-
-    tracker = PullbackTracker()
-    flipped, prev = [], None
-    trades, position = [], None
-
-    for bar in fri_bars:
-        tm = bar['dt'].time()
-        in_sess = SESSION_OPEN <= tm < dt.time(16, 0)
-        if not in_sess:
-            continue
-        ind.update(bar, in_session=True)
-
-        # ---- manage an open position first, on this bar ----
-        if position:
-            p = position
-            exit_reason = None
-            fill = None
-            # conservative ordering: stop is checked before target
-            if bar['l'] <= p['stop']:
-                fill, exit_reason = p['stop'], 'stop hit'
-            elif p['scaled'] == 0 and bar['h'] >= p['t1']:
-                realised = (p['t1'] - p['entry']) * (p['shares'] // 2)
-                p['pnl'] += realised
-                p['shares'] -= p['shares'] // 2
-                p['scaled'] = 1
-                p['stop'] = p['entry']       # breakeven, playbook step 9
-                log.append(f"    {tm} scale 50% at {p['t1']:.2f} "
-                           f"(+${realised:.0f}), stop -> breakeven")
-            elif p['scaled'] == 1 and bar['h'] >= p['t2']:
-                q = p['shares'] // 2
-                realised = (p['t2'] - p['entry']) * q
-                p['pnl'] += realised
-                p['shares'] -= q
-                p['scaled'] = 2
-                log.append(f"    {tm} scale 25% at {p['t2']:.2f} (+${realised:.0f})")
-
-            if exit_reason is None and p['shares'] > 0:
-                broke = []
-                if ind.macd_hist is not None and ind.macd_hist < 0:
-                    broke.append('MACD negative')
-                if ind.vwap and bar['c'] < ind.vwap:
-                    broke.append('lost VWAP')
-                if prev and bar['l'] < prev['l'] and bar['c'] < bar['o']:
-                    broke.append('new low')
-                if broke and p['scaled'] >= 1:
-                    fill, exit_reason = bar['c'], ' + '.join(broke)
-                elif broke and p['scaled'] == 0:
-                    fill, exit_reason = bar['c'], ' + '.join(broke)
-
-            if exit_reason:
-                realised = (fill - p['entry']) * p['shares']
-                p['pnl'] += realised
-                p['exit_time'], p['exit'] = tm, fill
-                p['reason'] = exit_reason
-                log.append(f"    {tm} EXIT {p['shares']} @ {fill:.2f} "
-                           f"({exit_reason})  trade P&L ${p['pnl']:+.0f}")
-                trades.append(p)
-                position = None
-
-        # ---- look for a new setup ----
-        pb = tracker.update(bar, prev, ind)
-        if pb and position is None and TRADE_START <= tm < HARD_STOP:
-            ok, checks = evaluate(pb, bar, ind, flipped)
-            entry = min(pb['trigger_level'] + SLIPPAGE, bar['h'])
-            stop = pb['low']
-            risk_ps = entry - stop
-            sized_ok = 0 < risk_ps <= STOP_MAX
-            log.append(f"  {tm} pullback #{pb['index']} low {stop:.2f} "
-                       f"trigger {pb['trigger_level']:.2f}")
-            for k, (passed, detail) in checks.items():
-                log.append(f"      [{'PASS' if passed else 'FAIL'}] {k}: {detail}")
-            log.append(f"      [{'PASS' if sized_ok else 'FAIL'}] stop <= $0.20: "
-                       f"${risk_ps:.3f}/share")
-            log.append('      [N/A ] no seller wall / green tape: needs Level 2')
-
-            if ok and sized_ok:
-                shares = int(RISK_PER_TRADE / risk_ps)
-                cap_bp = int(BUYING_POWER / entry)
-                cap_liq = int(bar['v'] * LIQUIDITY_CAP)
-                shares = max(0, min(shares, cap_bp, cap_liq))
-                if shares > 0:
-                    position = dict(
-                        sym=sym, entry_time=tm, entry=entry, stop=stop,
-                        init_stop=stop, risk_ps=risk_ps, shares=shares,
-                        full_shares=shares, pnl=0.0, scaled=0,
-                        t1=entry + 2 * risk_ps, t2=entry + 3 * risk_ps,
-                        checks=checks,
-                        capped=('liquidity' if shares == cap_liq else
-                                'buying power' if shares == cap_bp else None))
-                    log.append(f"    >>> ENTRY {shares} @ {entry:.2f}, stop "
-                               f"{stop:.2f}, risk ${risk_ps * shares:.0f}, "
-                               f"T1 {position['t1']:.2f}")
-                else:
-                    log.append('      -> size rounds to 0 shares, skipped')
-
-        if ind.session_high and bar['h'] >= ind.session_high:
-            flipped.append(round(bar['h'], 2))
-            flipped[:] = flipped[-6:]
-        prev = bar
-
-    if position:                              # forced flat at the bell we stop at
-        p = position
-        last = fri_bars[-1]
-        p['pnl'] += (last['c'] - p['entry']) * p['shares']
-        p['exit_time'], p['exit'] = last['dt'].time(), last['c']
-        p['reason'] = 'end of window'
-        trades.append(p)
-    return trades
+# simulate() lived here: the original single-day runner. It was dead code -
+# nothing imported it - and it still carried two defects the live path had
+# already fixed (target at entry+2R, HISTORY #3; the any-lower-low exit,
+# HISTORY #4). A stale copy of the engine inside the engine's own module is
+# how fixed defects come back. engine20.run_day is the only execution path.

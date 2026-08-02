@@ -164,7 +164,11 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 ind, p = s['ind'], position
                 reason = fill = None
                 if bar['l'] <= p['stop']:
-                    fill, reason = p['stop'], 'stop hit'
+                    # if the bar OPENED below the stop, the resting order fills
+                    # near that open, not at the stop price - taking the stop
+                    # price on a gap-through understates the loss
+                    fill = min(p['stop'], bar['o'])
+                    reason = 'stop hit'
                 elif p['scaled'] == 0 and bar['h'] >= p['t1']:
                     q = p['shares'] // 2
                     p['pnl'] += (p['t1'] - p['entry']) * q
@@ -425,6 +429,24 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                                    f'stop {stop:.2f} (${risk_ps:.2f}/sh)'
                                    + (f'  [entry {entries_by_sym[sym]} on {sym}]'
                                       if entries_by_sym[sym] > 1 else ''))
+                        # The entry bar itself can touch the stop - its low is
+                        # the whole minute's low, and whether it printed before
+                        # or after the trigger is unknowable from OHLCV. The
+                        # module contract says intrabar ambiguity resolves
+                        # AGAINST the trader, and every later bar already does;
+                        # this bar was silently exempt because the position was
+                        # created after its management pass had run.
+                        if bar['l'] <= stop:
+                            p = position
+                            p['pnl'] += (stop - entry) * p['shares']
+                            p['exit'], p['exit_time'] = stop, hm
+                            p['reason'] = 'stop hit (entry bar)'
+                            day_pnl += p['pnl']
+                            losses += 1
+                            trades.append(p)
+                            log.append(f'{hm} {sym}: OUT @ {stop:.2f} (stop on '
+                                       f'the entry bar) ${p["pnl"]:+.0f}')
+                            position = None
             s['prev'] = bar
             if ind.session_high and bar['h'] >= ind.session_high:
                 s['flipped'] = (s['flipped'] + [round(bar['h'], 2)])[-6:]

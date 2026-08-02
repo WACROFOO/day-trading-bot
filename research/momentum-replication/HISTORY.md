@@ -1,6 +1,6 @@
 # What has already been found and corrected
 
-Sixteen defects, recorded so the same ground is not covered twice. Each cites
+Twenty defects, recorded so the same ground is not covered twice. Each cites
 the document or video timestamp it violated. All are fixed in the current code.
 
 Also recorded: four conclusions that were reported and later withdrawn, because
@@ -128,6 +128,32 @@ gate-passing setups.
 *Fix:* `RR_FILTER` defaults off; 2:1 is measured as a realised ratio over
 trades, which is how every citation states it. `reports/2026-08-target-and-entries.md`.
 
+## Found by the line-by-line re-read (reports/2026-08-bughunt.md)
+
+**17. A missing minute was treated as a halt, and the veto it armed was
+sticky.** Any >=5-min print gap set `halted_down` when the next bar closed
+lower, and the flag persisted until a later gap happened to close higher —
+vetoing every setup in between via 'not resumed lower after a halt'. On quiet
+names, no-print gaps are routine (CUPR 07-31: eighteen of them, 159-2,744
+shares adjacent) while real halts print 63k-3.1M. *Fix:* halt requires
+halt-scale adjacent volume; the flag clears on a new session high.
+*Effect:* engine agreement with his labelled July trades went **4% -> 22%** —
+the largest single movement of that metric in the project.
+
+**18. Impulse volume contained the pullback it was compared against.**
+`ind.bars[-12:]` includes the dip bars, so `pullback_volume < impulse_volume`
+partly compared the dip to itself; ADVB 07-22 10:24 passed by 481 shares.
+12 of 171 verdicts flip on the fix.
+
+**19. The entry bar was exempt from the stop.** A position opened at minute T
+was first evaluated at T+1, violating the stated resolve-against-the-trader
+contract. BIYA 07-27 11:22 entered $3.77, stop $3.70, on a bar with a $3.66
+low. Also: stop fills now take the bar's open when it gaps below the stop.
+
+**20. Dead code carrying fixed defects.** `sim.simulate()` (uncalled) still
+held defects 3 and 4; a drifted, unreachable second trigger path built setups
+without the halt flag (0 of 1,362 setups dynamically). Both deleted.
+
 ---
 
 ## Withdrawn conclusions
@@ -170,6 +196,12 @@ implementation.
 | 17 sessions, halts + §1 confirmation, max 5 | 2 | +$633.30 |
 | After defect 14 (the exit look-ahead) | 2 | **+$357.54** |
 | After defect 16 — 2:1 veto removed, now the default | 11 | −$601.65 |
+| After stream-derived corrections (third pullback sized, not vetoed) | 13 | −$588.90 |
+| After defects 17–19 (fake halts, impulse volume, entry-bar stop) | 15 | **−$852.85** |
+
+Defects 17–19 made the P&L *worse* — the correct direction, since 17 was
+suppressing real entries and 18–19 were flattering them. The metric that
+improved is agreement with his labelled trades: 4% → 22%.
 
 The trajectory is the reason no P&L from this harness should be treated as a
 result until the frequency discrepancy in `OBSERVATIONS.md` §3 is understood.
