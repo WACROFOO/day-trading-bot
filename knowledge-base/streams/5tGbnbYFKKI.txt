@@ -1,0 +1,996 @@
+# Chinese IPO $GCT +205% from 17.61 to 60.00 in 1 Day
+# https://www.youtube.com/watch?v=5tGbnbYFKKI
+# upload_date: 20220820
+# duration_sec: 2378
+
+[00:00:07] hey everyone good morning all right so
+[00:00:08] uh we're gonna go over
+[00:00:10] gct this is a stock that ipo'd two days
+[00:00:14] ago on thursday and
+[00:00:16] uh it ended up yesterday having a low of
+[00:00:19] about 1761 and a high of
+[00:00:22] 60 dollars a share which is like 300
+[00:00:25] percent but
+[00:00:26] uh from the open it was gapping up about
+[00:00:29] 68
+[00:00:31] and it closed the day at 205
+[00:00:34] gain
+[00:00:35] um it was a wild stock and it was not
+[00:00:39] easy to trade and so usually when i have
+[00:00:41] a stock like this where
+[00:00:43] i i don't trade it as well as i would
+[00:00:44] have liked to have
+[00:00:46] i sit down either later that same day or
+[00:00:49] maybe the next day like i am here today
+[00:00:52] and i go over this the chart and and
+[00:00:55] just try to dial in
+[00:00:56] what i did right on it
+[00:00:58] uh what i did wrong on it and what i
+[00:01:00] would maybe do uh differently or what i
+[00:01:03] could have done differently to have
+[00:01:04] traded it better so
+[00:01:06] the idea of this episode is we're going
+[00:01:09] to replay
+[00:01:10] the price action from yesterday sort of
+[00:01:12] going back on the early side and kind of
+[00:01:15] re-evaluate uh entries and exits and
+[00:01:18] what would have been good places to get
+[00:01:19] in and which of those trades would have
+[00:01:21] been winners and which of them would
+[00:01:22] have been
+[00:01:23] losers uh someone mentioned uh yesterday
+[00:01:27] on my recap that
+[00:01:29] you know someone was like ross i can't
+[00:01:31] believe you didn't crush this stock and
+[00:01:34] someone replied you know he's a breakout
+[00:01:37] trader and this isn't the type that
+[00:01:39] technical breakout traders do well on
+[00:01:41] the traders who do well on this are
+[00:01:43] going to be the ones that buy and hold
+[00:01:45] just set it and forget it because you
+[00:01:47] end up getting these really big moves
+[00:01:49] but the breakouts are choppy and there's
+[00:01:52] a lot of truth to that this is the same
+[00:01:54] issue with stocks like
+[00:01:56] gamestop
+[00:01:57] you know bed bath and beyond
+[00:01:59] some of these stocks that end up making
+[00:02:01] really big moves or some of the ones
+[00:02:02] that are meme stocks are not really
+[00:02:05] clean
+[00:02:06] for day trading especially if you're a
+[00:02:09] breakout trader but if you're a buy and
+[00:02:11] hold trader well when you get you know a
+[00:02:14] two three four hundred percent move
+[00:02:16] obviously you get rewarded for that
+[00:02:18] so you know yesterday was um the worst
+[00:02:21] day that i've had in
+[00:02:23] uh a couple of months of trading
+[00:02:26] i finished up uh
+[00:02:28] only
+[00:02:31] 1064. um
+[00:02:33] making it my 20
+[00:02:36] 6 consecutive green day but it was the
+[00:02:39] worst day that i've had in quite a while
+[00:02:41] if we look at the p l you could see that
+[00:02:43] i
+[00:02:44] went green and then in one trade flipped
+[00:02:47] from green to deep red 6 000 and then i
+[00:02:51] had to dig my way out of the hole
+[00:02:53] and you know i was kind of thinking
+[00:02:55] about this uh last night as i was
+[00:02:57] digging my way out of the hole how
+[00:03:00] uh i kind of um you know i i sort of it
+[00:03:04] was like a really
+[00:03:06] i was thinking of like this being like a
+[00:03:07] really rough flight this was some
+[00:03:09] serious turbulence here and
+[00:03:12] i was able to land it smoothly
+[00:03:15] but
+[00:03:16] only just barely so i did have a smooth
+[00:03:18] landing i finished in the green but this
+[00:03:21] was a rocky day uh so
+[00:03:24] you know i was not and the one that i
+[00:03:26] flipped um
+[00:03:28] and went red on was in fact um
+[00:03:31] gct so i'm one of the guys that's going
+[00:03:33] to be read on this stock that's up that
+[00:03:35] much um this has been my best month of
+[00:03:38] the year right here so here in august so
+[00:03:41] uh i think that you know being
+[00:03:43] consistent right now is um is definitely
+[00:03:46] paying off
+[00:03:47] but yesterday just didn't happen to be a
+[00:03:50] good day for me it was a pretty
+[00:03:51] difficult day so i want to dive into gct
+[00:03:54] and try to figure out what could i have
+[00:03:56] done better so i think one thing that's
+[00:03:58] helpful on this oh and by the way since
+[00:04:00] i was just showing you my my p l i'll
+[00:04:02] just remind you guys as always that my
+[00:04:04] results are not typical and that trading
+[00:04:06] is in fact risky and most beginner
+[00:04:08] traders lose money so i don't want you
+[00:04:10] to assume when you see my success that
+[00:04:12] you'll be able to do something similar
+[00:04:14] but i do hope that you see that and you
+[00:04:16] recognize that this is real money i do i
+[00:04:19] always keep my audit
+[00:04:21] statement right here next to my desk um
+[00:04:25] so
+[00:04:26] this is an audit of my broker statements
+[00:04:28] right here from 2017 through 2021
+[00:04:31] averaging 159 000 a month 9.5 million in
+[00:04:36] uh net profit at the end of december
+[00:04:38] 2021. i'm now over 10 million in that
+[00:04:41] profit
+[00:04:42] so i share that with you not because i
+[00:04:44] want you to think that my results are
+[00:04:45] typical that you'll do something similar
+[00:04:47] but because i want you to know the
+[00:04:48] person that you're learning from is
+[00:04:51] qualified to talk on this topic because
+[00:04:53] there's a lot of people out there that
+[00:04:55] talk a big game
+[00:04:57] they don't even make money trading
+[00:04:58] they're just armchair quarterbacks right
+[00:05:02] you know who would you rather learn from
+[00:05:03] someone who's just the armchair
+[00:05:04] quarterback or someone who's actually
+[00:05:05] got some skin in the game you can decide
+[00:05:09] okay so uh
+[00:05:10] all right
+[00:05:11] so gct all right so this is a chinese
+[00:05:14] ipo
+[00:05:15] uh and to sort of give you some context
+[00:05:18] earlier this month we had a
+[00:05:20] uh chinese ipo hkd and this
+[00:05:25] did
+[00:05:26] something i i mean i've i've never seen
+[00:05:28] something like this before this ipo'd
+[00:05:31] and ended up going all the way to a high
+[00:05:34] of
+[00:05:36] 2555. and 30 cents over the course of
+[00:05:39] like four days
+[00:05:41] i mean this was
+[00:05:42] this was really insane i've i've never
+[00:05:45] seen that big of a move
+[00:05:47] so naturally when meg l ipod also a
+[00:05:50] chinese ipo
+[00:05:52] uh traders were pretty excited it did
+[00:05:54] get hyped up and it squeezed up to 250 a
+[00:05:57] share but then it got wrecked it came
+[00:05:59] all the way back down to 10 bucks eight
+[00:06:01] bucks
+[00:06:02] you got a nice bounce here from eight
+[00:06:03] back up to 25. that was like a 300
+[00:06:06] bounce off the low so we did catch that
+[00:06:08] bounce and in fact on the bounce day
+[00:06:10] that was the highest volume day
+[00:06:13] uh so then when we had gct coming up for
+[00:06:16] an ipo
+[00:06:18] being that it was chinese and given what
+[00:06:20] we've had on these last two i i knew it
+[00:06:22] was worth watching but uh yes or on
+[00:06:25] thursday when it actually ipo'd
+[00:06:27] and they sold about 2.4 million shares
+[00:06:31] at about 12 a share so that was the ipo
+[00:06:35] price but when it opened for trading it
+[00:06:37] opened at 1920. so it opened up you know
+[00:06:40] like not quite 50 but like 30 30
+[00:06:43] off the ipo price which is
+[00:06:45] um
+[00:06:47] actually i mean
+[00:06:49] that's much lower than meg l and hkd but
+[00:06:53] it is still higher
+[00:06:55] but on thursday
+[00:06:57] uh it just sold off i mean it popped up
+[00:07:00] and then it just started to go and then
+[00:07:02] just sold off hard
+[00:07:04] and you ended up getting this
+[00:07:08] sort of wedge formation here
+[00:07:11] but this is below volume weighted
+[00:07:12] average price the orange dotted line
+[00:07:15] here this is a risky place to be a buyer
+[00:07:18] but it did end up going from 14 to 18.
+[00:07:20] then a big red candle it drops back down
+[00:07:23] it pops back up it pulls back
+[00:07:26] and so it closed the day uh red versus
+[00:07:29] the open price of the ipo
+[00:07:31] but not at the low right so a little bit
+[00:07:33] of a bottoming tail candle
+[00:07:35] and then pre-mark after hours it climbs
+[00:07:38] a little bit higher this is after hours
+[00:07:40] on thursday
+[00:07:42] and so it closes after hours
+[00:07:46] uh let's see
+[00:07:48] so we're gonna go to the end of after
+[00:07:49] hours which was right here oops sorry
+[00:07:53] so this was the last candle and after
+[00:07:55] hours right there so you know it did
+[00:07:57] close uh coming back up right
+[00:08:02] we would generally mark out the high
+[00:08:05] 21
+[00:08:06] 22 okay
+[00:08:08] and maybe we would mark out
+[00:08:11] this area here because this looks like a
+[00:08:13] double top around 1945 there
+[00:08:16] right
+[00:08:17] so now let's get on to the one minute
+[00:08:20] chart because
+[00:08:21] really as an active day trader we're
+[00:08:23] focusing on the one minute
+[00:08:26] okay so
+[00:08:28] you guys probably know that i i don't
+[00:08:30] trade uh
+[00:08:32] generally speaking at 4 a.m but
+[00:08:34] pre-market does open at 4 a.m and when
+[00:08:36] pre-market opened it immediately
+[00:08:38] squeezed through 19.45 cents
+[00:08:42] and it squeezed up to a high of
+[00:08:45] about 21.44
+[00:08:48] if we looked at our level from the
+[00:08:50] previous day that was just just over the
+[00:08:53] double top
+[00:08:54] right the double top was or well a
+[00:08:57] perfect double top would have been 2122
+[00:09:00] the high of this candle
+[00:09:02] but it did come up just a little bit
+[00:09:04] higher than that all right so it broke a
+[00:09:06] little higher so we kind of have a
+[00:09:07] double top right around this area which
+[00:09:09] is uh not too bad by the way uh those
+[00:09:11] tuning in uh to this live thank you guys
+[00:09:13] for tuning in i hope you hit the thumbs
+[00:09:14] up really do appreciate it you guys make
+[00:09:17] um you know a huge difference helping
+[00:09:19] this channel grow
+[00:09:20] so thanks for that
+[00:09:22] all right so uh and we've got macd
+[00:09:25] uh moving average convergence divergence
+[00:09:27] indicator here on the bottom volume bars
+[00:09:30] okay so that's 4 am all right so then as
+[00:09:33] you come up
+[00:09:35] to 4 30 and 5 a.m we pull back we're
+[00:09:38] coming back down towards the lows of the
+[00:09:41] after hours session from the previous
+[00:09:43] day
+[00:09:44] so kind of in here
+[00:09:46] the volume super super light no doubt um
+[00:09:50] so what levels are we watching well we
+[00:09:52] might still have the 1945 level
+[00:09:55] from the previous day that kind of
+[00:09:57] double top area
+[00:09:58] right that was sort of in here
+[00:10:01] we got above it for a second but now
+[00:10:02] we're you know kind of back below it
+[00:10:04] sort of right at this level
+[00:10:07] let's see
+[00:10:12] and
+[00:10:15] let me make this a little bit bigger so
+[00:10:17] we this pops up here to 1990
+[00:10:20] and then it pulls back
+[00:10:22] and then right here it comes back up
+[00:10:23] again to 2050. so you're seeing some
+[00:10:26] strength here but the volume is is
+[00:10:28] pretty light but you are seeing some
+[00:10:29] strength
+[00:10:30] this right here is a one minute micro
+[00:10:32] pullback
+[00:10:35] so i would say that's a possible entry
+[00:10:37] for the break of 2050 with a stop 50
+[00:10:39] cent stop around 20. target would be a
+[00:10:42] retest of 21.22
+[00:10:45] so you do end up getting that break
+[00:10:48] and it breaks that level
+[00:10:50] with some real
+[00:10:51] some really nice volume highest volume
+[00:10:53] of the day
+[00:10:54] hey larissa good morning and then it
+[00:10:56] pulls back a little bit
+[00:10:58] now we're getting a second pullback
+[00:11:00] new stop is the low of this candle here
+[00:11:02] which is 2163
+[00:11:07] so you could take a starter on the
+[00:11:08] pullback or you could add around 2050
+[00:11:10] first one minute kill and make a new
+[00:11:12] high our macd is pulling away that's
+[00:11:15] fine
+[00:11:17] there you go to move and holy moly this
+[00:11:19] really opens up to 23 to 24. it tops at
+[00:11:23] 25 naturally you'd be taking profit into
+[00:11:25] this move
+[00:11:26] now you've got a topping a shooting star
+[00:11:28] candle so shooting star is a
+[00:11:31] reversal indicator
+[00:11:35] so this is tricky because you've got a
+[00:11:36] shooting star candle
+[00:11:39] right here
+[00:11:41] but it's holding up
+[00:11:42] so do you trust buying it over 25
+[00:11:46] when you have a doji up there
+[00:11:48] maybe with small size but realistically
+[00:11:50] it's a pretty high risk trade
+[00:11:53] it comes up in a double tops at 25 it
+[00:11:55] can't break it
+[00:11:57] and then on the second attempt it does
+[00:11:59] break it up to 26 dollar a share
+[00:12:04] this is a
+[00:12:05] hanging man doji
+[00:12:08] so he's got that little head right up
+[00:12:10] there
+[00:12:11] and then
+[00:12:13] it blasts up here
+[00:12:17] volume is still pretty good
+[00:12:19] so to me
+[00:12:21] this trade right here
+[00:12:23] is a good one in 1950 and this trade
+[00:12:26] right here is a good one
+[00:12:28] and what i like about this these first
+[00:12:31] two if we go back is
+[00:12:34] this is light volume so that's a little
+[00:12:35] risky but the second pullback that's a
+[00:12:37] pretty clean one you do have doji's but
+[00:12:40] it's not a shooting star
+[00:12:42] it's it's not as bad and you've got a
+[00:12:44] little bit of consolidation there and
+[00:12:46] the stop is relatively tight and then
+[00:12:48] you get a nice move
+[00:12:52] and then this one i feel is a bit risky
+[00:12:55] because you've got the double top the
+[00:12:57] two dojis but then it does break
+[00:13:00] that would probably have to be just a
+[00:13:01] quick scalp in it 25 out at like 25.50
+[00:13:04] and then maybe here
+[00:13:07] i don't know that you see the thing now
+[00:13:08] is you've got your first your second
+[00:13:10] pullback now you're on your third this
+[00:13:12] is the fourth pullback on the one minute
+[00:13:13] chart
+[00:13:15] and now you're up in the fifth so this
+[00:13:17] one um
+[00:13:20] at this point you're just too extended
+[00:13:22] on the one minute and the five minute
+[00:13:23] naturally is going to be quite extended
+[00:13:25] it's not safe to trade up here probably
+[00:13:28] okay so then we pull back here um
+[00:13:32] now it's 8 a.m uh approaching 8 a.m
+[00:13:35] uh so that's 8 a.m right there on that
+[00:13:37] candle
+[00:13:38] we come down to the volume weight
+[00:13:40] average price and i recall that this is
+[00:13:42] where i took my first trade i bought
+[00:13:44] this at about 23
+[00:13:46] i think it was 2320 what was it yeah it
+[00:13:49] was maybe 23 30.
+[00:13:51] it looked to me like there was a um
+[00:13:55] there was a hidden buyer
+[00:13:57] so i saw
+[00:13:58] this was reading the tape so i saw a lot
+[00:14:00] of sell orders going through
+[00:14:02] but there was a buyer accumulating at
+[00:14:04] 23.20 and it wasn't breaking
+[00:14:07] even though it was only like 100 shares
+[00:14:08] it wasn't breaking now the macd has
+[00:14:10] crossed over here
+[00:14:11] naturally because we're in a sharper
+[00:14:13] pullback so this is a risky place to
+[00:14:16] take the first trade but i did jump in
+[00:14:19] down here at about
+[00:14:21] 23 30
+[00:14:23] and we did as you can see pop up to
+[00:14:25] about 24 16
+[00:14:29] made a little bit on it
+[00:14:31] uh hit a high of 24.20
+[00:14:34] and then i was like okay this isn't
+[00:14:36] bouncing enough made i made 500 on that
+[00:14:38] trade but it really didn't bounce enough
+[00:14:40] macd was crossed over it was below its
+[00:14:43] 20 moving average it was at the view app
+[00:14:45] it should have bounced to 10 pounds so
+[00:14:46] small winner it pulls back more
+[00:14:50] uh then it starts to
+[00:14:53] uh
+[00:14:54] sort of base out here
+[00:14:56] now this
+[00:14:57] yellow line 2122
+[00:14:59] i have that on my chart remember because
+[00:15:01] that was the high of the previous day
+[00:15:05] and it was sort of a double top from
+[00:15:07] pre-market so i did see a couple traders
+[00:15:10] who said i'm buying this off of 2122.
+[00:15:13] and i thought yeah that's a it's a good
+[00:15:16] trade it makes sense
+[00:15:19] it is an entry below v wap this thing is
+[00:15:23] really come almost all the way back down
+[00:15:26] i don't know if that's going to work but
+[00:15:28] it did end up working it did
+[00:15:31] and once it got back above the v-wap
+[00:15:32] here
+[00:15:33] now we're watching this area for
+[00:15:36] a re-test of v-app we got the retest
+[00:15:39] right there and now we're starting to
+[00:15:41] watch first one minute candle to make a
+[00:15:43] new high over about 24.
+[00:15:48] so first one minute candle to make a new
+[00:15:50] high
+[00:15:51] not very impressive there they made a
+[00:15:54] new high but only by
+[00:15:56] like 12 cents
+[00:15:58] and i took that trade
+[00:16:00] but it didn't break through the high up
+[00:16:02] here of 24.74 that's kind of weird
+[00:16:05] it drops back down again here
+[00:16:07] to 23.72
+[00:16:09] it pops back up again
+[00:16:11] and this is this kind of price action is
+[00:16:14] tricky because if it was really
+[00:16:16] strong it should have gone right here
+[00:16:20] the first one minute candle on the break
+[00:16:22] back over the v wep it should have gone
+[00:16:23] right away i'm really surprised that it
+[00:16:26] didn't right there
+[00:16:27] so this was a little choppy so i churned
+[00:16:29] some shares here getting in and then
+[00:16:31] getting back out
+[00:16:33] and then it breaks this level here 2474
+[00:16:37] which was the high and i was like okay
+[00:16:38] i'm in bought 2 000 shares
+[00:16:41] and we squeeze up to 26.
+[00:16:44] micro pull back at 26 it goes 26.59
+[00:16:48] okay so i got green on that i was up now
+[00:16:51] 3 000 made 2 500 on that trade
+[00:16:54] um but then son of a gun it starts to
+[00:16:56] pull back again it's overview app it's
+[00:16:58] holding the 20 but it's not going
+[00:17:00] parabolic
+[00:17:03] so now i'm watching again and i'm
+[00:17:05] thinking all right well
+[00:17:06] the level that that gave us the breakout
+[00:17:08] here was when we finally broke 24.74 so
+[00:17:10] now let's watch
+[00:17:12] 26.59
+[00:17:13] if we break 2659 where we headed
+[00:17:16] back to the pre-market high up here
+[00:17:18] 2870.
+[00:17:21] okay so our macd is uh
+[00:17:23] it's a little confusing here because we
+[00:17:25] had this nice uh mountain range that we
+[00:17:28] pulled back way way down we went
+[00:17:29] negative we're climbing back up
+[00:17:32] but the moving averages aren't pulling
+[00:17:34] away so we're not showing like a big
+[00:17:36] mountain range here we're just kind of
+[00:17:38] sort of flat
+[00:17:40] back down to volume weight average price
+[00:17:43] you could have taken another dip here
+[00:17:45] but this is just it's not really opening
+[00:17:47] up in a big way
+[00:17:50] okay now it pops back up to 26. so
+[00:17:53] that's that's a nice bounce off v-wap
+[00:17:55] it pulls back and now we're starting to
+[00:17:58] kind of form maybe
+[00:18:00] like an abcd pattern right here so i
+[00:18:03] would say this here
+[00:18:05] is probably a spot where i would have
+[00:18:06] been a buyer right there
+[00:18:10] but look at that it goes up 26 7 it's 26
+[00:18:14] 38 but it can't break that 59 level it
+[00:18:17] pulls back again
+[00:18:21] and then right there
+[00:18:23] i got back in now
+[00:18:25] and i lost on that trade that was the
+[00:18:27] trade that sent me into the red
+[00:18:30] i sized up there um
+[00:18:32] because i thought breaking back over 25
+[00:18:36] 50
+[00:18:37] was gonna send it back to 26 and it was
+[00:18:39] kind of doing what it did here like a
+[00:18:41] false start false start and then it's
+[00:18:42] going to go
+[00:18:44] in hindsight this trade didn't have
+[00:18:47] confirmation it was an anticip i was
+[00:18:50] anticipating a breakout and i did that
+[00:18:52] with
+[00:18:53] too large of a position
+[00:18:54] so a false breakout there
+[00:18:58] bounces back up to 26
+[00:19:02] drops down again
+[00:19:05] this is not breaking 26.59
+[00:19:08] so at this point this is just really
+[00:19:09] choppy okay so here's the spot where i
+[00:19:12] would add back 26.59
+[00:19:15] it's a breakout trade it's buying at the
+[00:19:17] highs
+[00:19:18] but buying off of the dips off of
+[00:19:20] support
+[00:19:21] while that could work it's also been
+[00:19:23] pulling back quite a bit
+[00:19:25] so add back for the break at 26.50 there
+[00:19:28] we go it squeezed up to 27 at the open
+[00:19:31] it double tops right up to 28.70
+[00:19:34] and i did take that trade
+[00:19:36] so i made back about half my loss on
+[00:19:38] that trade
+[00:19:39] and then look at this flush it reverses
+[00:19:41] off of a high of 28.93 it comes all the
+[00:19:44] way down to 2550
+[00:19:46] down to 25.50 and then holy smokes
+[00:19:50] it rips into a halt up
+[00:19:53] and on this one
+[00:19:56] didn't buy it off the v web
+[00:19:59] but i bought it as it broke 28 to
+[00:20:01] anticipate the retest of the high of day
+[00:20:06] if we looked at this a little
+[00:20:07] differently
+[00:20:08] where do we have support levels so this
+[00:20:10] is kind of interesting if you drew this
+[00:20:12] trend line here
+[00:20:13] you can see on that it actually broke
+[00:20:15] this ascending support there but then it
+[00:20:18] got back above it then it's below it and
+[00:20:19] then it gets back above it it's almost
+[00:20:21] as if this line is irrelevant it doesn't
+[00:20:24] seem to be respecting it so that line's
+[00:20:27] not really valid this line here
+[00:20:30] that seems maybe more valid
+[00:20:36] it you know you still broke it right
+[00:20:41] okay
+[00:20:42] so then we're into a halt
+[00:20:45] it's halted for five minutes it resumes
+[00:20:47] it dips for a moment it breaks through
+[00:20:49] 30 31 and goes up to 32.73 so for super
+[00:20:53] aggressive traders
+[00:20:55] this could have worked for a quick scalp
+[00:20:58] trade dip and rip on halt resumption dip
+[00:21:01] and rip on hot resumption is um
+[00:21:03] a strategy that i will trade and i did
+[00:21:05] trade on that one
+[00:21:06] so first halt
+[00:21:08] resumption second goes into second halt
+[00:21:10] resumption goes into a third hall at 38
+[00:21:13] resumes hits a high of 40 just about
+[00:21:16] 419842
+[00:21:17] then halts down at 36.90 resumes halts
+[00:21:20] down a second time
+[00:21:23] halts down right there so
+[00:21:25] resumes pops up i bought the dip first
+[00:21:28] one minute candle to make a new high
+[00:21:30] it doesn't hold
+[00:21:31] stopped out
+[00:21:33] with maybe 100 winner it was basically a
+[00:21:35] break even trade halts down on
+[00:21:37] resumption it pops and halts up
+[00:21:41] gaps higher
+[00:21:42] dips
+[00:21:43] and rips
+[00:21:45] up to 32 pulls back
+[00:21:47] this is a really tricky area to be
+[00:21:49] trading because you have this
+[00:21:51] huge move and then retracement of the
+[00:21:54] whole move
+[00:21:56] bounces back up huge range i i don't see
+[00:21:59] myself being able to trade that
+[00:22:00] comfortably
+[00:22:01] you've got little topping tails here
+[00:22:06] then it breaks 34 it goes up to 35 and
+[00:22:09] 36
+[00:22:11] into a halt it opens a little higher
+[00:22:18] dips then pops up this one minute candle
+[00:22:21] has almost a five point
+[00:22:24] range
+[00:22:25] that's a huge range
+[00:22:27] just in a one minute candle
+[00:22:29] pulls back to 34 rips back to 38 but
+[00:22:32] notice topping tail topping tail so
+[00:22:34] these candles keep having these topping
+[00:22:36] tails they're not holding
+[00:22:41] so that's really tricky for breakout
+[00:22:43] traders you buy for a breakout and it
+[00:22:45] just rejects
+[00:22:49] then you halt up
+[00:22:51] it breaks away and i guess
+[00:22:54] enough traders buy it and enough shorts
+[00:22:57] cover that it does go into a halt at 41
+[00:22:59] at 40 71. it opens and squeezes up to
+[00:23:02] 45.47 huge doji
+[00:23:05] this has a eight point range in one
+[00:23:08] candle one minute
+[00:23:10] massive
+[00:23:14] then
+[00:23:15] consolidation
+[00:23:16] this technically is a one minute
+[00:23:18] pullback but off of three doji's
+[00:23:20] it breaks up to another hall level
+[00:23:25] see that's a tricky one because i don't
+[00:23:27] think i would have felt super
+[00:23:28] comfortable buying right there after
+[00:23:30] three dojis it is a one minute pullback
+[00:23:33] i don't think i would have been super
+[00:23:34] comfortable there i don't think i would
+[00:23:35] have been super comfortable here
+[00:23:37] this is risky you know this kind of
+[00:23:39] entry with the two topping tails there
+[00:23:42] it's kind of similar to what we looked
+[00:23:44] at back here
+[00:23:46] at around 25
+[00:23:48] right those two topping tails and then
+[00:23:49] it broke sometimes i'll call those like
+[00:23:52] devil horns because it's like these two
+[00:23:54] sort of topping tails and that can be a
+[00:23:56] very risky place to be a buyer oops
+[00:23:59] sorry
+[00:24:02] all right so we gotta go back on this
+[00:24:04] ways
+[00:24:05] all right so it ends up halting up
+[00:24:08] right then you could have done a dip and
+[00:24:10] rip for the break of 50.
+[00:24:13] uh volume here is pretty good
+[00:24:16] i don't know what the spreads were like
+[00:24:17] at that time but it goes up to a high of
+[00:24:19] 58.37
+[00:24:24] sells off hard
+[00:24:26] back to 50
+[00:24:28] dips to 48 pops back up to 56.
+[00:24:32] dips again to 48 pops back up to 53
+[00:24:36] and then halts down
+[00:24:38] opens lower
+[00:24:40] rallies and halts up opens higher
+[00:24:43] consolidation choppy halts down
+[00:24:50] now we have a pretty clear descending
+[00:24:54] resistance line on this
+[00:24:56] around here
+[00:25:01] maybe a bit more like that
+[00:25:06] it breaks over it it retests it this is
+[00:25:09] a possible long here for the break of
+[00:25:10] 48.
+[00:25:12] even though
+[00:25:13] you've got
+[00:25:15] two dojis here
+[00:25:17] you are retesting and getting above this
+[00:25:18] descending resistance some people might
+[00:25:20] have even bought here at 45
+[00:25:24] false breakout
+[00:25:25] goes up to 49 and then is read back to
+[00:25:28] 46
+[00:25:29] retesting this yellow line
+[00:25:36] selling off more
+[00:25:38] you see how this yellow line previous
+[00:25:40] and now now we can kind of see how it's
+[00:25:42] trading we can remove this one this is
+[00:25:43] the one that's more valid
+[00:25:47] i would actually um
+[00:25:50] grab a screenshot of this here just
+[00:25:52] because this is a good example of um
+[00:25:57] descending support turning into or
+[00:26:00] descending resistance turning into
+[00:26:12] okay i'm just gonna save that that for
+[00:26:14] the classes uh thanks by the way for
+[00:26:16] those that hit the thumbs up really do
+[00:26:18] appreciate it
+[00:26:19] you guys make a huge difference helping
+[00:26:23] okay so then
+[00:26:25] it on the one minute through here
+[00:26:28] through noon lunch to 1 p.m this is just
+[00:26:31] i mean you've got range from 40 up to 46
+[00:26:33] but this is choppier your volume is much
+[00:26:35] lighter than earlier in the day spreads
+[00:26:38] from no doubt bigger
+[00:26:40] i would say an important pivot is
+[00:26:42] probably around 49.50
+[00:26:46] this is good that it's basing out here
+[00:26:48] off of this low of 40.
+[00:26:58] is there any way you could have
+[00:26:59] predicted that break there
+[00:27:03] not from not from this spot here no
+[00:27:07] as it broke 46.50 you could have taken
+[00:27:09] that trade for the retest of 48
+[00:27:11] it snaps through 50 hits 52 but then
+[00:27:14] drops back to 44. any point drop
+[00:27:19] so it's not holding the half dollar
+[00:27:21] comes back up again
+[00:27:23] now we're starting to get into
+[00:27:25] ascending
+[00:27:26] [Music]
+[00:27:27] um we've got this ascending line here
+[00:27:30] kind of in this area maybe something
+[00:27:32] like that
+[00:27:34] and we can look at the high back up here
+[00:27:37] around 52
+[00:27:39] the high here of 51.
+[00:27:41] if we could break 52
+[00:27:43] i would have expected more than that
+[00:27:45] that's only 53.35 and you know the way
+[00:27:47] the spreads are on this that
+[00:27:49] although it was up 80 cents i don't know
+[00:27:51] if you could have sold and then look at
+[00:27:53] this
+[00:27:56] this is where we get what i call the
+[00:27:58] pulling away
+[00:28:01] sometimes um
+[00:28:04] i don't know it's like
+[00:28:06] you kind of have this teetering
+[00:28:09] where it's kind of grinding higher pulls
+[00:28:11] back but it just it's not dropping
+[00:28:15] all of a sudden
+[00:28:17] it starts to pull away it starts to move
+[00:28:19] faster maybe some shorts start covering
+[00:28:22] some long start saying okay here we go
+[00:28:24] it's game time and next thing you know
+[00:28:27] it's starting to squeeze
+[00:28:29] so let's get back into this so
+[00:28:33] so your macd you know is moving moving
+[00:28:35] up that's fine
+[00:28:37] so it breaks 55 and then one candle goes
+[00:28:40] to 60 on 222 000 shares of volume so
+[00:28:44] that could be short selling uh covering
+[00:28:46] short sales short sellers covering it
+[00:28:48] could be longs jumping in
+[00:28:50] pull back here
+[00:28:52] all the way back down the bottom of that
+[00:28:53] candle to 53
+[00:28:56] so that's not a sustained move
+[00:29:00] you know
+[00:29:03] and that was only a one minute candle it
+[00:29:05] just that's it's not a five minute kill
+[00:29:06] it's a one minute candle it just wasn't
+[00:29:08] up there for very long
+[00:29:13] then it comes back up to 60 now you're
+[00:29:15] double topping but then drops back down
+[00:29:17] to 54.
+[00:29:20] man this is this thing is like it just
+[00:29:23] teases like it it looks like it's gonna
+[00:29:24] go and then it just like doesn't i mean
+[00:29:27] it's it has obviously moved higher but
+[00:29:31] man so then back down and then look at
+[00:29:33] that flush into a halt down
+[00:29:35] so that's going into the clothes
+[00:29:37] or close to it nice bounce i guess but
+[00:29:46] back up here but how how do you trust
+[00:29:48] this how do you trust this when it's
+[00:29:50] just shown it doesn't like to hold halts
+[00:29:53] down going into the close opens a little
+[00:29:55] higher
+[00:29:59] this is all late after hours
+[00:30:02] and that's where we closed 46 after
+[00:30:04] hours 46.50
+[00:30:10] for breakout traders yeah obviously for
+[00:30:12] a trader that just presses the buy
+[00:30:14] button and just holds it for
+[00:30:16] you know half an hour
+[00:30:18] there were a lot of places where 30
+[00:30:19] minutes later you would have had profit
+[00:30:21] but for traders using leverage being
+[00:30:24] aggressive trying to take this quick
+[00:30:25] break out um that's where
+[00:30:29] the struggle is
+[00:30:31] is definitely going to be there so
+[00:30:33] some interesting price action on it if
+[00:30:35] we look at um meg l for comparison you
+[00:30:39] know meg l was so light on volume on the
+[00:30:41] initial move
+[00:30:43] it wasn't super easy the dead cat bounce
+[00:30:45] was actually the cleanest day
+[00:30:47] hkd that one was super light volume so
+[00:30:50] like you know they kind of they were
+[00:30:52] kind of both better for traders that did
+[00:30:54] more of a yolo just to hold and you know
+[00:30:57] let it go to the moon then actually try
+[00:30:59] to
+[00:31:00] like
+[00:31:01] actively day trade it
+[00:31:03] so that was megal dnaa
+[00:31:07] this one uh you had a nice move here on
+[00:31:15] this was after hours
+[00:31:17] yesterday
+[00:31:22] so this is a business combination
+[00:31:28] so it would have been a special
+[00:31:30] acquisition company
+[00:31:34] merged
+[00:31:37] raised 163 million
+[00:31:51] leading digital medicine company
+[00:31:54] i'm not familiar with them but um
+[00:31:57] that obviously was received very well
+[00:32:01] floats
+[00:32:02] probably a little higher
+[00:32:05] we'll watch it on monday we'll see
+[00:32:08] so anyways um yeah i just kind of wanted
+[00:32:10] to break down that gct
+[00:32:13] the action on gct and look at it in a
+[00:32:15] little bit more detail so
+[00:32:17] you know as i look at it
+[00:32:19] i think
+[00:32:21] there were a couple of spots where if i
+[00:32:22] had traded it longer i probably could
+[00:32:24] have gotten a couple more quick scalp
+[00:32:26] trades on it but i'm not just a buy and
+[00:32:28] hold set it and forget it trader so
+[00:32:31] i i don't know that i would have really
+[00:32:33] crushed it on this we had some
+[00:32:34] short-lived moves but they were between
+[00:32:37] halt so it was really i mean if you
+[00:32:39] really think about it you probably
+[00:32:41] through the course of the day like this
+[00:32:43] is like going to be like you know one
+[00:32:45] two three
+[00:32:46] four five six seven eight nine i mean
+[00:32:49] you probably had 10 minutes
+[00:32:51] or maybe a little bit more of some
+[00:32:52] really clean action and then in between
+[00:32:55] all of that was a lot of choppiness and
+[00:32:56] a lot of false um
+[00:32:58] a lot of false breakouts so
+[00:33:02] i don't know i'm not really sure um
+[00:33:06] pgy you traded that one on friday you
+[00:33:09] even see that one
+[00:33:14] hmm
+[00:33:16] yeah
+[00:33:17] i don't know um
+[00:33:22] yeah interesting so anyways um
+[00:33:26] yeah i think
+[00:33:27] there's a couple of trades that i could
+[00:33:29] have
+[00:33:30] i think this trade you know that i lost
+[00:33:31] on was bad timing um but i didn't have
+[00:33:34] confirmation on it so
+[00:33:37] that there was a bit more risk on that
+[00:33:38] particular entry took too much size
+[00:33:41] given we were in this kind of sideways
+[00:33:43] chop
+[00:33:45] probably would have been better just to
+[00:33:46] wait until we broke through this level
+[00:33:48] you know sometimes when you step back
+[00:33:49] and look at this like bigger picture it
+[00:33:50] can be a little easier to say that
+[00:33:53] um which is you know perception is
+[00:33:55] important and if you're viewing the
+[00:33:57] charts
+[00:33:58] super super zoomed in
+[00:34:00] uh sometimes you know you sort of get
+[00:34:03] tunnel vision in a way where you're like
+[00:34:05] okay this is what we're working with
+[00:34:07] and you can lose a little sight of the
+[00:34:09] big picture
+[00:34:10] you know i stopped out like right on
+[00:34:14] which would have been clearer if i had
+[00:34:16] kind of been zoomed out a little bit
+[00:34:17] further
+[00:34:19] but in any case um
+[00:34:22] yeah that's that's gct for you so
+[00:34:26] some interesting some interesting action
+[00:34:28] um and i thought i would just go over it
+[00:34:30] for those that maybe didn't
+[00:34:32] i don't know didn't trade it as well as
+[00:34:34] they would have liked to have yesterday
+[00:34:36] me included and kind of come to some
+[00:34:38] conclusion about how we could have done
+[00:34:40] better
+[00:34:43] it's tough because i mean yeah you've
+[00:34:44] got a couple nice breakouts there the
+[00:34:46] breakthrough the high that was okay but
+[00:34:48] then reversed comes back through the
+[00:34:50] high rips pretty nicely
+[00:34:52] you know comes back up here through the
+[00:34:54] high you know each time it broke highs
+[00:34:56] you got clean moves like a clean
+[00:34:58] extension off of that level that was a
+[00:35:00] breakup high
+[00:35:02] so like if we just looked at let's just
+[00:35:03] remove all the drawing tools
+[00:35:06] you know if you're a breakout trader so
+[00:35:08] initially
+[00:35:10] you had a high of
+[00:35:12] 21 22.
+[00:35:15] right we broke that high
+[00:35:18] and you got a nice move right there
+[00:35:21] moves up to this new high here which was
+[00:35:23] 28
+[00:35:25] okay so the area
+[00:35:27] down in the chop was a little tricky
+[00:35:30] uh we did have a break over this
+[00:35:32] resistance right here of 2659
+[00:35:35] that gave us a move up to 28 at the open
+[00:35:38] so that was a little opportunity
+[00:35:41] so that was right there then you had the
+[00:35:43] break of 28 which was right here
+[00:35:46] and then you squeezed all the way up
+[00:35:48] here to a high of 41 42 then when you
+[00:35:51] broke that level you got another nice
+[00:35:52] move
+[00:35:54] up to about
+[00:35:56] 58
+[00:35:59] and then your new high was up here at 58
+[00:36:01] which it did eventually come back to
+[00:36:04] that level
+[00:36:05] but um
+[00:36:07] by the time it did
+[00:36:09] that's the only one that didn't end up
+[00:36:11] giving you a nice breakout
+[00:36:13] but you got nice breakouts on one two
+[00:36:17] three
+[00:36:18] or four of the other pretty significant
+[00:36:22] high of day or critical level
+[00:36:24] spots
+[00:36:26] so those could have been okay buying
+[00:36:29] you didn't have
+[00:36:30] you know it was choppy on a lot of those
+[00:36:32] and went into these long periods of
+[00:36:34] consolidation so those weren't always
+[00:36:37] on this one the cleanest
+[00:36:40] so you know the fact is some are going
+[00:36:42] to be uh cleaner and
+[00:36:45] some are going to feel easier to trade
+[00:36:47] and some are going to be more difficult
+[00:36:48] and there's a whole variety of
+[00:36:51] factors that contribute to that but if
+[00:36:52] you find one feels difficult
+[00:36:56] you know sometimes the right move is
+[00:36:57] just a step off of it and you know
+[00:36:59] that's what i ended up doing and i you
+[00:37:01] know i kind of focused on some other
+[00:37:03] stocks and i was able to get myself from
+[00:37:05] red 6000 back to in the green
+[00:37:09] so i traded uh gct a bit more
+[00:37:12] conservatively as it was moving higher i
+[00:37:14] was holding a position all the way to
+[00:37:16] the top of
+[00:37:18] this first spike here of 41
+[00:37:20] 898 but i just traded it with small size
+[00:37:24] because i had already found that the
+[00:37:25] stock was not really trading in a way
+[00:37:27] that i found was easy for me to read i
+[00:37:29] was getting chopped up in it so
+[00:37:32] you know i went back at the places i
+[00:37:33] thought it would go but with smaller
+[00:37:35] size i happen to be right on a couple of
+[00:37:36] those trades but
+[00:37:38] smaller share size meant smaller gains
+[00:37:40] so this is what i encourage you to do
+[00:37:42] when you have a stock that you didn't
+[00:37:43] trade as well as you might have liked to
+[00:37:45] have to go back to look it over
+[00:37:47] and then you know take that and apply it
+[00:37:50] to your next trading day try to keep
+[00:37:52] doing better and
+[00:37:53] that's that's the name of the game
+[00:37:54] that's the goal just try to keep
+[00:37:56] improving focus on consistency focus on
+[00:37:58] taking better quality setups i had a
+[00:38:01] couple that i took on friday that
+[00:38:02] weren't as high quality as they maybe
+[00:38:04] should have been that contributed to
+[00:38:07] some unnecessary losses so
+[00:38:09] overall market right now is pulling back
+[00:38:11] a little bit
+[00:38:13] um off of this descending resistance
+[00:38:15] line on the s p
+[00:38:17] so we may have another pullback on
+[00:38:18] monday tuesday early next week after you
+[00:38:21] know i don't know like five consecutive
+[00:38:23] green weeks in the market
+[00:38:24] so you know the market's been rallying
+[00:38:27] here even though it's a um
+[00:38:30] we're you know it's a bear market rally
+[00:38:32] the rally is still an opportunity where
+[00:38:34] the tide is kind of rolling up and we
+[00:38:36] get some nice opportunities and um
+[00:38:40] we certainly did so hopefully
+[00:38:42] we see those continue uh into next week
+[00:38:45] all right so um i think that's about it
+[00:38:47] thanks guys for tuning in i'll put a
+[00:38:49] link um right here to my bear market
+[00:38:52] strategy episode which i hope you guys
+[00:38:53] have checked out uh if you haven't
+[00:38:55] already checked it out please check it
+[00:38:56] out hit the thumbs up makes a huge
+[00:38:58] difference for the channel and i'll put
+[00:38:59] a link to another video right here and
+[00:39:01] i'll see you guys back at it monday
+[00:39:03] morning i'll do actually a video game
+[00:39:04] plan uh tomorrow so i'll see you then
+[00:39:06] reminders always trading is risky my
+[00:39:08] results are not typical so make sure you
+[00:39:10] take it slow all right see you back here
+[00:39:12] on
+[00:39:14] tomorrow for a weekly game plan
+[00:39:37] you

@@ -1,0 +1,959 @@
+# Identifying a Bull Trap 🍏 LIVE 10am ET
+# https://www.youtube.com/watch?v=t-_T5MTl1FI
+# upload_date: 20230206
+# duration_sec: 2151
+
+[00:00:01] all right so we're going to get started
+[00:00:03] here in just a moment thank you guys all
+[00:00:06] for tuning in to today's class the topic
+[00:00:10] is identifying bull traps and my goal is
+[00:00:14] that through watching this class I'm
+[00:00:16] gonna able to help you guys avoid
+[00:00:18] getting caught in some of those traps in
+[00:00:20] the market they're obviously we've got
+[00:00:22] bull traps we've got bear traps and so I
+[00:00:24] want to first show you how to identify
+[00:00:26] what a bull trap is and then once you've
+[00:00:29] been able to identify it what I'm going
+[00:00:31] to do is kind of work backwards from a
+[00:00:34] false breakout or a bull trap and try to
+[00:00:36] answer the question of how can we avoid
+[00:00:40] this how can we predict that this is
+[00:00:42] about to happen so we don't get caught
+[00:00:45] in the bull trap now listen there's no
+[00:00:48] such thing as never having a lost
+[00:00:50] trading losses are going to happen but
+[00:00:53] you know one of the goals of being a
+[00:00:54] successful Trader is minimizing your
+[00:00:56] drawdown and so if you can learn to
+[00:00:58] avoid false breakouts it's going to help
+[00:00:59] you a lot so I think you guys will enjoy
+[00:01:01] enjoy this class and for everyone who is
+[00:01:04] tuning in today I'm going to give you a
+[00:01:07] link where you can download my free
+[00:01:10] technical analysis Series this is a
+[00:01:13] pretty awesome piece of content that I
+[00:01:15] put together for you guys it's kind of
+[00:01:17] the ultimate resource for technical
+[00:01:19] analysis so please enjoy this use it it
+[00:01:24] will help you in your trading so you
+[00:01:27] know get into it keep studying you guys
+[00:01:28] are here because you want to learn so
+[00:01:29] this will help you and I've got a ton of
+[00:01:31] more free resources that are on my
+[00:01:34] website warriortrain.com and that are
+[00:01:37] throughout posted here on YouTube so
+[00:01:40] keep checking things out and I hope you
+[00:01:42] guys hit the thumbs up if you enjoy uh
+[00:01:44] this episode
+[00:01:45] okay so let's see um so why don't we go
+[00:01:48] ahead and Jump Right In I'll do a little
+[00:01:49] q a as we go along so as I see a good
+[00:01:51] question posted I'll
+[00:01:53] um you know I'll answer it and I might
+[00:01:55] jump in and out of my charts a little
+[00:01:57] bit so maybe I'll just full screen this
+[00:01:59] kind of like this for now
+[00:02:01] okay so
+[00:02:02] um let's see so we're gonna jump in here
+[00:02:06] um three topics that we're gonna cover
+[00:02:07] three three chapters to this class what
+[00:02:10] is a bull trap indicators of a possible
+[00:02:12] bull trap and then I'm going to share
+[00:02:13] with you my choppy Market strategy
+[00:02:16] because you're gonna know and realize
+[00:02:18] that there are some markets where man it
+[00:02:21] is extremely choppy and you have to be
+[00:02:24] able to Pivot and adapt to current
+[00:02:26] market conditions and that's something
+[00:02:28] that I haven't always been really good
+[00:02:31] at
+[00:02:32] um it's something I've really struggled
+[00:02:34] with is actually learning to sort of you
+[00:02:36] know he's off the throttle and things
+[00:02:37] are getting choppy because what I tend
+[00:02:39] to do is I stay like hard on the
+[00:02:41] throttle and I just like spin out have
+[00:02:43] this big loss and I look back and it's
+[00:02:45] like well you know the writing was on
+[00:02:48] the wall that I was in a choppy Market
+[00:02:49] things weren't clean and I kept fighting
+[00:02:52] and I ended up taking way too much risk
+[00:02:54] and it was really avoidable so when you
+[00:02:56] start making those mistakes that you
+[00:02:57] realize were avoidable you make enough
+[00:02:59] of those and that's when you realize
+[00:03:00] you've got to start to tighten up the
+[00:03:03] way you're trading and maybe you're
+[00:03:04] watching this episode because you've had
+[00:03:06] that experience yourself
+[00:03:08] all right so
+[00:03:10] um let's start with chapter one what is
+[00:03:12] a bull trap
+[00:03:13] so bull traps bear traps false breakouts
+[00:03:17] false breakdowns essentially this is
+[00:03:19] when we're expecting the market to do
+[00:03:21] one thing and it begins to do that one
+[00:03:24] thing that we're expecting
+[00:03:25] and then it's suddenly whips the
+[00:03:29] opposite direction and it fakes everyone
+[00:03:31] out these moves can be extremely violent
+[00:03:36] and can very quickly swing you from
+[00:03:39] green to red and if you're trading a
+[00:03:41] higher priced stock
+[00:03:42] these can be whips that are dollars a
+[00:03:46] share in size and actually just as an
+[00:03:47] example of it um I just noticed um on my
+[00:03:51] other chart Kal so Kal the stock
+[00:03:55] um you know has has put in a couple of
+[00:03:57] false breakouts um we had a false
+[00:04:00] breakout right here as it tried to
+[00:04:01] double break this double top through
+[00:04:03] resistance and we also on this
+[00:04:06] resumption here from a hall big sell-off
+[00:04:09] pops up drops back up and halted down
+[00:04:12] again
+[00:04:12] you know so these and and this is in
+[00:04:15] such a range where you're talking about
+[00:04:16] a high of 1250 and a low of 10 20.
+[00:04:19] that's a two-point range
+[00:04:21] you know you take trades on stock with a
+[00:04:24] range like that with 5 000 shares and
+[00:04:26] you're up and down ten thousand dollars
+[00:04:28] in a matter of not just minutes seconds
+[00:04:32] it can happen so fast and the problem is
+[00:04:35] once that reversal is confirmed we often
+[00:04:38] see continuation in the opposite
+[00:04:40] direction from the original move as
+[00:04:41] Traders bail out right because you have
+[00:04:43] traders that buy for the Breakout
+[00:04:46] and then it squeezes up and then does a
+[00:04:48] false breakout it drops down and so
+[00:04:51] while those Traders are bailing out
+[00:04:53] who's also getting in short sellers who
+[00:04:56] are seeing that false breakout as
+[00:04:58] confirmation that the stock is not
+[00:05:00] strong enough to keep going and so the
+[00:05:02] combination of Short Selling plus Longs
+[00:05:06] bailing out creates an imbalance to the
+[00:05:09] sell side and this sort of Supply demand
+[00:05:11] equation and that's where we often see
+[00:05:13] that continued sell-off after the
+[00:05:15] original
+[00:05:16] um a false breakout so you know I mean
+[00:05:19] one of the things here that's also
+[00:05:20] important is keeping that mentality of
+[00:05:22] breakout or bailout which means if you
+[00:05:25] get in for a breakout and it does not
+[00:05:27] work immediately you bail out of that
+[00:05:29] trade you don't just keep holding and
+[00:05:31] hoping because it usually is just going
+[00:05:33] to keep trending low
+[00:05:35] so this is an example of a clean
+[00:05:37] breakout right now this is a stock that
+[00:05:40] traded last week had some good trades on
+[00:05:42] it and I mean look this thing went
+[00:05:45] um it was really a phenomenal move so
+[00:05:48] consolidation here a little choppy here
+[00:05:50] and here for sure
+[00:05:53] but here's something just I'm gonna try
+[00:05:57] to give you these little tidbits because
+[00:05:59] some of these are so important so what's
+[00:06:01] the difference between this little
+[00:06:03] attempt here that was a false breakout
+[00:06:05] or this one here this one here and this
+[00:06:07] pullback right here
+[00:06:10] and what I would say was the big
+[00:06:11] difference is that during this pullback
+[00:06:13] the stock had just experienced a like 20
+[00:06:18] move it had just made a really big move
+[00:06:22] in the last like five minutes
+[00:06:25] so when you get these really big moves
+[00:06:27] these this is when you start to think of
+[00:06:31] these moves as being like a magnet it
+[00:06:33] just pulls traders in it pulls them and
+[00:06:36] it pulls them in Long bias Traders and
+[00:06:38] short sellers it pulls them in and so
+[00:06:40] you have a lot of people watching it in
+[00:06:42] this area that's also reflected in a
+[00:06:44] higher volume light volume red candle
+[00:06:46] and then boom it rips up now what you
+[00:06:49] have back here it started to pull away
+[00:06:51] but it was moving a bit more slowly at
+[00:06:54] this time
+[00:06:56] and highest volume was on a red candle
+[00:06:58] showing that sort of indecisiveness and
+[00:07:01] it went back into this kind of sideways
+[00:07:03] consolidation so this was a much more
+[00:07:06] bullish pattern on this pullback than
+[00:07:08] this one right here and that's one of
+[00:07:09] the reasons that you got really good
+[00:07:11] clean breakout and clean resolution on
+[00:07:13] this one minute chart
+[00:07:16] and then this is an example of a bull
+[00:07:18] trap on a one-minute chart right so this
+[00:07:21] is a stock that squeezes up all right
+[00:07:23] and it does make a big move including a
+[00:07:25] halt and it gaps higher goes High it
+[00:07:27] pulls back it drops down here
+[00:07:30] big bottoming candle wick and then it
+[00:07:32] rips up and it makes a new high by like
+[00:07:35] you know a couple of cents and then it
+[00:07:37] flushes all the way back down
+[00:07:41] so this would be an example of a bull
+[00:07:43] trap and there's a couple things that
+[00:07:44] we're going to talk about as we get into
+[00:07:45] this class about how to identify that
+[00:07:47] this was more likely to happen on this
+[00:07:50] chart than it was on this chart here
+[00:07:54] while both had some risk as any stock
+[00:07:57] does of having a false breakout the risk
+[00:07:58] was much higher on this stock in this
+[00:08:00] chart pattern than on this one right
+[00:08:02] here and if you're not able to identify
+[00:08:04] that just by your sort of cursory view
+[00:08:08] well it's good that you're tuned in for
+[00:08:10] this class because this is what I'm
+[00:08:11] going to help you with all right so this
+[00:08:13] is another example of a bull trap and
+[00:08:14] this is on a five minute chart and this
+[00:08:16] was a really nasty one so this stock
+[00:08:18] squeezes up it pulls back and then it
+[00:08:21] comes back up and then right here you
+[00:08:23] know some lawn buys traders buy it for
+[00:08:26] that move back higher and flush a big
+[00:08:29] sell-off right there
+[00:08:32] so you know give me those of you who are
+[00:08:35] tuning in give me a reason you think
+[00:08:37] that this maybe had a higher likelihood
+[00:08:39] of being a false breakout right here and
+[00:08:41] not going back up to the high
+[00:08:43] so while you guys are typing I'll give
+[00:08:45] you I'll give you two
+[00:08:47] two red flags that I see
+[00:08:49] the first
+[00:08:50] we have a tweezer top right here this is
+[00:08:52] a Candlestick pattern so you've got
+[00:08:55] these uh you know sort of like
+[00:08:56] Chopsticks right tweezer top you have
+[00:08:58] two uh topping tail candles in a row so
+[00:09:03] I think of the devil as having two horns
+[00:09:05] like this those two topping Tails that's
+[00:09:08] a red flag so if you see two of those
+[00:09:10] right next to each other you think about
+[00:09:12] this is a stock that is trying to
+[00:09:15] destroy me all right so we've got the
+[00:09:18] two the tweezer top the two topping
+[00:09:19] Tails back to back the second one has
+[00:09:22] high red volume
+[00:09:23] and that's a bit of a rejection right
+[00:09:27] and then it pulls back here from a high
+[00:09:29] of 28 all the way back down to 24. which
+[00:09:32] is a substantial pullback it's pulled
+[00:09:34] back all the way to the volume weight
+[00:09:35] average price and it's been over a five
+[00:09:38] minute long chart so this has had a long
+[00:09:40] time of pulling back in fact it was
+[00:09:42] breaking out for a very short period of
+[00:09:44] time it was pulling back for a much a
+[00:09:46] greater period of time so if we kind of
+[00:09:48] wait how much of the time is it breaking
+[00:09:50] out how much is it pulling back it's
+[00:09:51] pulling back a lot more and then coming
+[00:09:53] back up here
+[00:09:55] this to me look at how light the volume
+[00:09:59] is as it comes back up
+[00:10:01] those candles when it breaks out on
+[00:10:04] light volume that is a trap
+[00:10:07] that is a trap and it's funny because
+[00:10:09] what you'll see is you'll see and you
+[00:10:12] know we know that market makers and the
+[00:10:13] high frequency trading algorithms will
+[00:10:15] bait you I mean they bait you into
+[00:10:17] trading more and more and more the more
+[00:10:19] you trade the more money they take out
+[00:10:21] of your pocket and so you'll see the way
+[00:10:23] the price action changes the level two
+[00:10:25] will start to thin out it'll start to
+[00:10:27] squeeze up but the volume isn't there
+[00:10:30] right that's an indicator of a trap
+[00:10:34] so let's get into more detail here on
+[00:10:36] indicators of possible traps
+[00:10:39] so I found that there are a set of
+[00:10:41] conditions where bull traps are more
+[00:10:45] frequent this includes both intraday
+[00:10:48] price action
+[00:10:50] as well as General market conditions so
+[00:10:52] right now we're in a General market
+[00:10:54] where false breakouts have been more
+[00:10:57] prevalent than they were I don't know
+[00:10:59] maybe like a couple months ago all right
+[00:11:02] so if that just happens to be what's
+[00:11:03] happening in the market right now we're
+[00:11:05] seeing more of the false breakouts and
+[00:11:07] when you start to see more and more of
+[00:11:09] them they kind of um
+[00:11:11] they sort of breed in this sense that
+[00:11:13] when you have more false breakouts
+[00:11:15] Traders start to get more timid more
+[00:11:16] cautious more nervous short sellers get
+[00:11:19] a little more confident and so you sort
+[00:11:21] of see these waves of confidence
+[00:11:22] increasing increasing increasing until
+[00:11:25] you see something that maybe wasn't
+[00:11:27] really a perfect false breakout and
+[00:11:29] people short sellers get short too early
+[00:11:32] and then all of a sudden it rips higher
+[00:11:34] and now the tide starts to change as
+[00:11:37] long Traders are getting gaining their
+[00:11:39] confidence back they're like whoa hold
+[00:11:41] up this thing is squeezing and charts
+[00:11:43] are like uh oh time to you know button
+[00:11:45] down the hatches things are getting a
+[00:11:46] little wild again so we always see these
+[00:11:49] Ebbs and flows in the market so General
+[00:11:51] market conditions are definitely a
+[00:11:53] variable and right now they're making it
+[00:11:56] more likely that we're seeing some false
+[00:11:57] breakouts but the intraday price action
+[00:12:00] is important as well so if you can learn
+[00:12:02] some of the indicators and early warning
+[00:12:04] signs for traps you can avoid getting
+[00:12:07] caught now I say that you can't avoid it
+[00:12:09] a hundred percent of the time but if you
+[00:12:12] can reduce the amount of times you get
+[00:12:13] caught in a bold Trap by
+[00:12:15] I don't know I mean even if you could
+[00:12:16] reduce it by just 20 percent that would
+[00:12:18] save you unnecessary losses that's more
+[00:12:21] money in your pocket so I would like to
+[00:12:23] be able to help you guys with that
+[00:12:25] all right so here's a bull trap on a one
+[00:12:27] minute chart
+[00:12:28] so again what do we see here that's
+[00:12:30] going wrong
+[00:12:32] let's go back to the very beginning and
+[00:12:34] I want to say so many Traders I feel
+[00:12:37] like overlook
+[00:12:39] the Candlestick shape
+[00:12:41] and the volume profile and these are
+[00:12:45] like these are the most
+[00:12:49] pure reflections of the sentiment in the
+[00:12:52] market so this candle here where the
+[00:12:54] stock hit its high it's a big red candle
+[00:12:57] and it's got It's a doji it's got a huge
+[00:13:00] chopping tail a bit of a bottoming tail
+[00:13:04] it rallies back up but notice again and
+[00:13:07] let's see
+[00:13:09] um I'll turn on my laser pointer so
+[00:13:12] notice again right here you've got one
+[00:13:13] doji you've got a second one and then
+[00:13:15] you've got these two tiny little candles
+[00:13:17] this is like Prime for a flush
+[00:13:21] and that's exactly what you get right
+[00:13:23] there is that big flush and notice you
+[00:13:25] know it's just like it's trying but it
+[00:13:28] keeps
+[00:13:29] every time you see that pop and then
+[00:13:31] sell off pop and sell off that is
+[00:13:33] weakness and that's what this is doing
+[00:13:34] and that's how those dojis are created
+[00:13:36] now the fact is the stock does squeeze
+[00:13:39] up but sellers bring it back down before
+[00:13:42] the end of the candle it squeezes up and
+[00:13:44] sellers bring it back down
+[00:13:46] all right and then you have this
+[00:13:47] consolidation here the sell-off this is
+[00:13:50] a dip
+[00:13:51] and then it comes back up here and it
+[00:13:53] comes back up to the high but it's
+[00:13:55] coming back to this area of price where
+[00:13:58] we previously struggled
+[00:14:00] this is an area where we already had a
+[00:14:02] hard time so even though the volume is a
+[00:14:05] little bit higher on this candle it's
+[00:14:07] certainly not high of day volume I mean
+[00:14:10] it's a little bit higher but this stock
+[00:14:13] it's just shown this weakness
+[00:14:16] now I want to show you something else
+[00:14:18] the macd right here this is something
+[00:14:20] that I'll put on my charts during choppy
+[00:14:22] markets during really strong markets I
+[00:14:24] won't use it but during choppy markets I
+[00:14:26] put it on my charts to help me avoid
+[00:14:28] false breakouts because I noticed that
+[00:14:30] when the macd line here crosses below
+[00:14:33] the signal line
+[00:14:34] from that point forward we're in
+[00:14:37] consolidation so macd is it's a acronym
+[00:14:41] for moving average convergence
+[00:14:42] Divergence so moving averages are
+[00:14:45] diverging when a stock is moving up
+[00:14:47] quickly all right so if I look at a
+[00:14:50] chart here
+[00:14:52] um you know you look at Kal for instance
+[00:14:55] right here you've got your moving
+[00:14:58] averages of the 9 and the 20 which are
+[00:15:02] in Gray and cyan blue color and as the
+[00:15:05] stock moves up those moving averages are
+[00:15:07] moving apart
+[00:15:08] so they're diverging
+[00:15:10] and then right here they're converging
+[00:15:13] and they actually cross over against
+[00:15:14] each other right here so they pull away
+[00:15:17] and they come back together so it's an
+[00:15:19] oscillating indicator and what it shows
+[00:15:22] us is that when they're coming back
+[00:15:24] together when they're converging that's
+[00:15:27] a period of consolidation I usually find
+[00:15:31] that when moving averages are converging
+[00:15:33] we're going into this long period of
+[00:15:36] consolidation this is when stocks can be
+[00:15:39] very choppy I really do better when
+[00:15:42] stocks are in like a breakout mode when
+[00:15:45] they get into this
+[00:15:46] um
+[00:15:47] where they get into this
+[00:15:49] kind of choppy consolidation this is
+[00:15:52] when it can be really difficult and some
+[00:15:53] of you guys are mentioning Seco just did
+[00:15:55] a false breakout so let's take a look
+[00:15:58] all right so look at that thing okay all
+[00:16:01] right so let's look at this
+[00:16:05] all right so Seco
+[00:16:09] high volume red candle
+[00:16:13] mm-hmm
+[00:16:14] so our red flag on this is that high
+[00:16:17] volume false breakout at the open
+[00:16:19] right there we already had this stock
+[00:16:22] already has a history of doing this it
+[00:16:24] is not surprising to see it do it a
+[00:16:26] second time
+[00:16:28] you know this is a stock that already is
+[00:16:31] just willing to make those nasty
+[00:16:34] breakouts so false breakouts yep and so
+[00:16:37] that's very common
+[00:16:39] so when do traps happen so in the
+[00:16:41] previous examples we see some warning
+[00:16:43] signs now you may choose to ignore them
+[00:16:46] that's a choice you can make but I
+[00:16:48] encourage you to try to develop
+[00:16:50] awareness of them
+[00:16:51] number one is a history of several
+[00:16:53] topping tail candles where sellers are
+[00:16:56] pushing the stock price back down
+[00:16:58] number two is a history of nasty false
+[00:17:02] breakouts or nasty flushes which we just
+[00:17:04] saw on Seco number three the macd
+[00:17:07] negative Divergence prior to the false
+[00:17:10] breakout so the macd is against the
+[00:17:12] trade in that the macd is below the
+[00:17:14] signal line what that tells us is that
+[00:17:16] our moving averages are converging now
+[00:17:18] sometimes I'll say that we will have a
+[00:17:22] negative macd and we will still see a
+[00:17:24] false breakout so this isn't like it's
+[00:17:27] not like a red light green light like oh
+[00:17:29] if the macd is negative I should never
+[00:17:31] take the trade it's just another one of
+[00:17:33] the indicators that I look at to try to
+[00:17:34] evaluate whether or not I should take
+[00:17:36] the trade if the macd is negative but
+[00:17:38] the stock does not have a history of
+[00:17:40] topping Tails or history of false
+[00:17:42] breakouts
+[00:17:43] and perhaps the five minute
+[00:17:46] is forming a really nice bull flag I may
+[00:17:49] say you know what I'm willing to take
+[00:17:50] the trade I'm going to trade take it a
+[00:17:52] little bit more cautiously and with
+[00:17:53] smaller share size so I still use as a
+[00:17:56] factor for determining how much risk
+[00:17:57] I'll take but it's not necessarily and
+[00:18:01] you know this is trading I mean there
+[00:18:02] there isn't exactly just Red Light Green
+[00:18:04] Light
+[00:18:05] so
+[00:18:07] um macd negative Divergence prior to
+[00:18:09] false breakout number four stock is
+[00:18:11] moving into a period of consolidation on
+[00:18:13] declining volume
+[00:18:15] this declining volume is a problem
+[00:18:17] because in order for a stock to really
+[00:18:19] have a strong breakout you really do
+[00:18:21] need pretty high volume
+[00:18:24] so you know the volume can come back in
+[00:18:27] if the five minute chart looks good but
+[00:18:30] if you're trading on one minute chart
+[00:18:32] and there's no five minutes setup
+[00:18:34] and the macd is crossed over and it's
+[00:18:36] got this history of false breakouts
+[00:18:37] you're starting to really get yourself
+[00:18:38] in a position where you're exposing
+[00:18:40] yourself to a lot of unnecessary risk
+[00:18:42] I've also found that higher price stocks
+[00:18:44] can be more prone to these big swings
+[00:18:46] and this can be because often times with
+[00:18:49] a higher price stock that was parabolic
+[00:18:51] within the last maybe week it was a
+[00:18:54] lower price stock right a stock that
+[00:18:55] goes from seven to ten to 15 to 20 to 30
+[00:18:59] to 40. you might have someone that
+[00:19:01] bought 10 000 shares of it when it was
+[00:19:03] at seven bucks now that's a big position
+[00:19:05] but now when it's at forty dollars a ten
+[00:19:08] thousand share order is four hundred
+[00:19:10] thousand dollars and that's going to
+[00:19:12] make the stock dip a little bit so if
+[00:19:14] someone just presses that sell button
+[00:19:15] for 10 000 shares boom you can see a dip
+[00:19:18] and the type of Traders are going to
+[00:19:19] have the uh account size to do that are
+[00:19:22] going to be institutional Traders Big
+[00:19:23] Money traders and or market makers and
+[00:19:25] high frequency trading algorithms that's
+[00:19:27] where we're going to start to see some
+[00:19:28] big whips and Retail Traders going into
+[00:19:30] small size
+[00:19:32] you're going to get caught in these
+[00:19:33] traps where they start to break out and
+[00:19:35] then it flushes three points
+[00:19:38] and then comes back up
+[00:19:39] so these are liquidity traps they they
+[00:19:42] like they trap Traders and when Traders
+[00:19:46] are panicking when they're capitulating
+[00:19:47] they're selling so then bigger Traders
+[00:19:50] are on the bid absorbing those cells the
+[00:19:53] smarter Traders I guess or the Big Money
+[00:19:55] traders and then it comes back up and
+[00:19:58] then again you get that false breakout
+[00:19:59] where long traders buy it buy it buy it
+[00:20:02] and then a short is accumulating those
+[00:20:04] shares so it's a liquidity trap
+[00:20:08] so let's look at another one here this
+[00:20:10] is a bull trap where the stock had a
+[00:20:13] really nice move early on
+[00:20:15] um there was a one minute micro pullback
+[00:20:17] here another one right here it tops out
+[00:20:20] with a topping tail but
+[00:20:22] not particularly concerning really it's
+[00:20:25] it's a fine candle I mean it's just a
+[00:20:26] doji it's not huge you know so a little
+[00:20:29] bit of a red flag but not too bad it
+[00:20:31] pulls back and now it's stairs stepping
+[00:20:32] down so we're pulling back so of course
+[00:20:34] as we come back down here macd crosses
+[00:20:36] over against the trade it comes back up
+[00:20:38] and it does a false breakout right here
+[00:20:41] this false breakout on this candle the
+[00:20:43] macd was clearly against the trade right
+[00:20:46] so you know and as it turns out high
+[00:20:49] volume red candle
+[00:20:50] so now you've got a high volume red
+[00:20:52] candle so from this point forward in the
+[00:20:54] day the stock has a history of a false
+[00:20:56] breakout it does come back up but then
+[00:20:58] when it starts to set up another pattern
+[00:21:00] it tops out and drops back down forming
+[00:21:03] another false breakout so it's a stock
+[00:21:05] where you had a little bit of a history
+[00:21:06] of false breakouts the macd was not very
+[00:21:09] positive on the trade it had this nice
+[00:21:12] move but now it was getting into this
+[00:21:13] period where it was sort of struggling
+[00:21:15] to really pull away it wasn't able to do
+[00:21:17] it oh this is another example where macd
+[00:21:20] is against the trade you had a stock
+[00:21:22] that made a nice move early but it pulls
+[00:21:25] back a little bit too much here it
+[00:21:27] pulled back from a high of a little over
+[00:21:28] three all the way back down to just over
+[00:21:30] 250 it pulled all the way back down to
+[00:21:33] the V web so both of these examples here
+[00:21:36] this stock was below volume weight
+[00:21:38] average price which is a really big
+[00:21:40] pullback I don't usually like that pulls
+[00:21:43] back down to its 20 moving average now
+[00:21:45] this one here broke its 20 moving
+[00:21:48] average but came all the way down to V
+[00:21:50] web but when you're breaking these
+[00:21:51] averages this is not super strong a
+[00:21:54] really strong stock doesn't break these
+[00:21:56] averages all right and let's look just
+[00:21:58] for example on Seco
+[00:22:00] Seco so sico I mean clearly was
+[00:22:04] struggling even before it came up for
+[00:22:06] this false breakout here it had dipped
+[00:22:09] down below its moving averages it came
+[00:22:10] back up this whole period was grinding
+[00:22:12] it was not exciting and then it sells
+[00:22:15] off his back down this trade right here
+[00:22:18] the entry at 367. that's a break of
+[00:22:21] v-wap setup
+[00:22:24] you know it's not a setup I probably
+[00:22:26] would have taken on the stock because of
+[00:22:28] this red candle but that one is
+[00:22:30] certainly a little bit safer than the
+[00:22:31] high day break in any case this is a
+[00:22:33] first pullback following a break of
+[00:22:35] v-wap and although it went higher it
+[00:22:37] didn't hold alright so that early
+[00:22:40] weakness can be a little bit of a
+[00:22:42] problem but it is true that sometimes
+[00:22:44] early weakness where a stock is trading
+[00:22:46] below view app can trap short Sellers
+[00:22:49] and then you have an epic move it
+[00:22:52] certainly happened before but here's
+[00:22:55] another bull trap here where the stock
+[00:22:58] um oh this is actually I just got this
+[00:23:00] earlier today so this was consolidation
+[00:23:02] here and it pops up this was Seco it
+[00:23:05] pulls back it hits a high of 410 again
+[00:23:08] macd's really not in favor of the trade
+[00:23:10] it's really been struggling it's not
+[00:23:13] it's not really going parabolic it's
+[00:23:16] moving higher but it's like a grinder so
+[00:23:18] we contrast that with stocks like
+[00:23:21] I don't know well I'll show you a couple
+[00:23:23] more good examples so so let's talk now
+[00:23:26] for a second about my choppy Marcus
+[00:23:27] strategy and by the way if any of this
+[00:23:29] is helpful if you find this interesting
+[00:23:30] I hope you hit the thumbs up and I hope
+[00:23:32] you're subscribed to the channel and I
+[00:23:34] hope you check out
+[00:23:35] um the free technical analysis series
+[00:23:37] I've put together for you guys includes
+[00:23:39] Gap and go strategy micro pullback
+[00:23:41] strategy a Trader development worksheet
+[00:23:43] you should check this out all right so
+[00:23:45] I'm going to put this over to the side
+[00:23:47] there's a link where you can download
+[00:23:49] the technical analysis Series in the
+[00:23:52] description of this video and I think
+[00:23:54] pinned to the comments
+[00:23:55] so this is my choppy Market strategy
+[00:23:57] where we're seeing choppy price action
+[00:23:59] where we're seeing a lot of traps I have
+[00:24:01] to adjust my strategy this is me wanting
+[00:24:04] to ease off the throttle and not get
+[00:24:06] smoked when things are getting a little
+[00:24:07] bit more difficult
+[00:24:09] as always trading is risky and there's
+[00:24:11] no guarantee you'll find success whether
+[00:24:13] you trade with me or you'll earn on your
+[00:24:14] own so you should take it slow
+[00:24:16] it's also true that there are some
+[00:24:17] markets that are easier to trade in than
+[00:24:20] others and so if you're trading in a
+[00:24:21] market that's very difficult you have to
+[00:24:23] adapt your strategy it's even possible
+[00:24:25] that you could have a strategy that is
+[00:24:27] very profitable in a hot Market but is
+[00:24:30] actually not profitable at all in a cold
+[00:24:32] market and I've certainly seen Traders
+[00:24:34] over the last year who were net negative
+[00:24:37] over the last 12 months they've been
+[00:24:40] successful Traders they've made over a
+[00:24:41] million dollars in their career but the
+[00:24:43] bear Market that we've been in for the
+[00:24:45] last year their strategy doesn't perform
+[00:24:48] well and they did not adapt either at
+[00:24:52] all or quickly enough
+[00:24:54] so I try to adapt my strategy and I try
+[00:24:57] to see the writing on the wall pretty
+[00:24:58] quickly when things are going badly but
+[00:25:00] uh even then it still could be a little
+[00:25:01] bit better sometimes so number one I
+[00:25:04] aggressively trade the early part of the
+[00:25:05] move and I scale down
+[00:25:08] in size as price increases so if we look
+[00:25:11] back at some of those examples that I
+[00:25:12] showed you or you could even just scroll
+[00:25:14] back in the video you would see that a
+[00:25:16] lot of the clean moves were early and
+[00:25:18] then we got into these periods where
+[00:25:21] they just became very choppy as it
+[00:25:23] Consolidated and that's when you got the
+[00:25:25] false breakouts SO trading early trading
+[00:25:28] aggressively not early part of the day
+[00:25:30] specifically but in the early part of
+[00:25:32] the move when the stock is really
+[00:25:34] pulling away
+[00:25:35] and Robert is asking what I mean by uh
+[00:25:38] by trading a stock that's parabolic so
+[00:25:40] you know we could look at um you know an
+[00:25:43] early part of the move on msgm Just for
+[00:25:46] instance so this stock msgm last week
+[00:25:49] had
+[00:25:50] um a really epic couple of days and so
+[00:25:55] each day we had some sections where it
+[00:25:58] was moving really cleanly and we had
+[00:26:00] some great breakouts and then we had
+[00:26:02] some periods where it was a little
+[00:26:03] choppier this year choppy light volume
+[00:26:06] that was not so clean but if we go back
+[00:26:09] a little bit further
+[00:26:11] let's say
+[00:26:14] I'm on my traveling trading station here
+[00:26:16] today so my computer's running a little
+[00:26:19] slow while I'm trying to broadcast
+[00:26:21] so like so think about this
+[00:26:24] this area here right where it's going
+[00:26:27] straight up that's parabolic the stock
+[00:26:28] goes from like 12 15 to 50 bucks it's
+[00:26:32] like straight up that's an area where
+[00:26:36] obviously it's moving quickly there's a
+[00:26:37] lot of opportunity this area here of
+[00:26:39] consolidation that's going to be a
+[00:26:41] little tricky there's range you could
+[00:26:43] buy dips
+[00:26:45] but maybe wait for it to start to break
+[00:26:47] out again and there you go that's the
+[00:26:48] breakout and that's that clean move
+[00:26:50] higher so I want to I'd prefer to trade
+[00:26:53] when stocks are going parabolic there's
+[00:26:56] not always parabolic every single day
+[00:26:58] but to varying extents I mean on this
+[00:27:02] day even before that move we had these
+[00:27:05] candles here early
+[00:27:07] which was at the time you know those
+[00:27:09] were relatively strong candles you know
+[00:27:12] a dollar two dollars a share from six to
+[00:27:14] eight
+[00:27:15] so you know I I'm happy to trade those
+[00:27:17] those are areas where I would still be
+[00:27:19] trading because the stock is basically
+[00:27:20] moving you know pretty much straight up
+[00:27:23] all right and Seco right now is rallying
+[00:27:25] back up a little bit but
+[00:27:27] um but we'll stay we'll stay focused on
+[00:27:29] this
+[00:27:30] all right so number one aggressively
+[00:27:32] trade the early part of the move and I
+[00:27:34] scale down as price increases all right
+[00:27:36] and I scaled I certainly tried to avoid
+[00:27:39] trading during periods of consolidation
+[00:27:41] I try to focus on trading during periods
+[00:27:44] where the stock is moving quickly I like
+[00:27:46] to trade micro pullbacks taking profit
+[00:27:49] into the first breakout with stops at
+[00:27:50] break-even breakout or bailout if it
+[00:27:53] doesn't work I'm out of the trade and
+[00:27:56] I'm pretty ruthless about that I'll just
+[00:27:57] hit the bid I'll just bail out I'm out
+[00:27:59] that's it
+[00:28:00] number four don't over trade your
+[00:28:03] cleanest windows are early in the move
+[00:28:05] if you miss them you gotta wait for the
+[00:28:07] next one you don't want to over trade
+[00:28:08] when the Market's chopping and number
+[00:28:11] five I just focus on 15 20 Cent Winners
+[00:28:14] that's my goal just 15 20 cents if I
+[00:28:16] could do that with 5 000 shares it's 750
+[00:28:19] to a thousand dollars each trade and if
+[00:28:22] I do that three or four times in a day
+[00:28:23] I'm up you know a couple thousand
+[00:28:25] dollars and then maybe a couple losses
+[00:28:27] of 10 cents minus 500 you know so daily
+[00:28:31] goal twenty five hundred to five
+[00:28:32] thousand that's that's kind of what I
+[00:28:34] focus on
+[00:28:36] and this was a year of trading at a bear
+[00:28:38] Market so my average daily gain was four
+[00:28:41] thousand three hundred and eight dollars
+[00:28:44] so you know it was a million dollar a
+[00:28:47] year
+[00:28:48] average winners are smaller than in a
+[00:28:51] typical year and I did get caught in a
+[00:28:53] couple of false breakouts you know it
+[00:28:56] happened through the course of the year
+[00:28:57] but my accuracy was 69
+[00:29:00] and that's a level of accuracy that I've
+[00:29:04] been able to maintain pretty
+[00:29:05] consistently
+[00:29:07] for a lot for many many years five plus
+[00:29:10] years I've been maintaining about 69
+[00:29:12] percent
+[00:29:13] so the biggest difference between a
+[00:29:17] really strong Market in the bear Market
+[00:29:19] was that my average winners were smaller
+[00:29:21] because I got a little bit
+[00:29:23] um more aggressive at just taking quick
+[00:29:25] gains quick gains quick gains and not
+[00:29:27] pushing my luck
+[00:29:28] you start to push your luck and it's
+[00:29:31] very very easy to give back profit and
+[00:29:34] I'm sure every one of you guys know this
+[00:29:35] I'm sure every one of you have had days
+[00:29:37] where you were up nicely and you
+[00:29:40] overstayed your welcome and you gave
+[00:29:41] back your profit so I'll always say
+[00:29:44] you're doing one of two things you're
+[00:29:45] giving back profit or you're leaving
+[00:29:49] money on the table and I'd rather leave
+[00:29:51] money on the table and walk away sooner
+[00:29:54] than give back profit and today's a day
+[00:29:56] where certainly by not trading Seco
+[00:29:59] maybe I could have on that you know
+[00:30:02] break a v web or whatever maybe I could
+[00:30:04] have made a little bit more on it but I
+[00:30:06] try to remind myself especially when
+[00:30:08] I've crossed over 5000 on the day as I
+[00:30:10] did today
+[00:30:11] you know I've done my job I've made
+[00:30:14] enough today this is a good day I can
+[00:30:17] come back and try again tomorrow and
+[00:30:19] I'll also say just for context that
+[00:30:20] today we did have quite a bit of
+[00:30:23] choppiness early on and when we have
+[00:30:24] choppiness early on that for me is a red
+[00:30:27] flag to try to slow down I do want to
+[00:30:29] try to push harder when the Market's hot
+[00:30:31] but today didn't feel super hot it felt
+[00:30:34] volatile and volatility uh can create
+[00:30:37] opportunity but you do have to be very
+[00:30:40] cautious with that
+[00:30:42] so you know again uh you know you don't
+[00:30:44] want to be too greedy with traits you
+[00:30:46] want to try to just make enough and then
+[00:30:48] come back and try again
+[00:30:50] so micro pullbacks followed by breaking
+[00:30:52] it following breaking news so we had a
+[00:30:54] nice micro pullback on hscs right here a
+[00:30:58] little micro pull back there little
+[00:30:59] micro pull back there that was where it
+[00:31:01] was the cleanest right there that was
+[00:31:03] the cleanest of the whole day
+[00:31:05] this is another one micro pullbacks so
+[00:31:07] these are almost hard to see on a one
+[00:31:10] minute chart but the stock went from 550
+[00:31:12] to almost nine dollars a share so it
+[00:31:14] went up four dollars a share almost 100
+[00:31:16] percent and there were micro pullbacks
+[00:31:19] here where it hesitated like you can see
+[00:31:21] right here at about seven
+[00:31:23] and then it pulls higher it tries to
+[00:31:25] break down it can't you see some big
+[00:31:27] bids on the level two
+[00:31:29] green on the tape and then off it goes
+[00:31:31] so you know this is this is the type of
+[00:31:34] stuff that I'm gonna try to trade
+[00:31:35] aggressively I'm going to trade the
+[00:31:37] front side of the move when we first had
+[00:31:39] breaking news or when it's moving
+[00:31:40] quickly during periods of consolidation
+[00:31:43] I'm going to try to avoid it not
+[00:31:44] overstay my welcome but if it comes back
+[00:31:47] up and wants to make another you know
+[00:31:49] leg higher then I'm interested in
+[00:31:51] trading that as long as
+[00:31:54] the stock hasn't displayed one of the
+[00:31:57] characteristics of maybe being more
+[00:31:59] likely to do a really nasty false
+[00:32:00] Breakout
+[00:32:01] because the last thing you want to do is
+[00:32:03] give back that profit on a sort of
+[00:32:06] higher risk trade because once you get
+[00:32:08] further you know if I have a loss at 7
+[00:32:10] 15 in the morning I feel like I still
+[00:32:12] have a good amount of time to recoup
+[00:32:13] that loss but if I have a loss later in
+[00:32:16] the day I'm running out of time to
+[00:32:18] recoup the loss because traditionally
+[00:32:20] we've had the most opportunities in the
+[00:32:23] morning which is between I guess I mean
+[00:32:26] really probably between like 8 A.M and
+[00:32:28] 11 but even as early as seven until
+[00:32:31] maybe as late as noon but really it's
+[00:32:34] there's kind of a window there between
+[00:32:36] like 8 and 10 a.m where most of my
+[00:32:39] trading happens and if I start to get
+[00:32:41] later into that window
+[00:32:44] if I go red I may not have the
+[00:32:46] opportunity to recoup losses so just
+[00:32:48] based on that calculation
+[00:32:50] you know it's like if if my window is
+[00:32:52] closing I may want to stop trading uh
+[00:32:55] before it it closes because if I take
+[00:32:58] that last trade right before you know my
+[00:33:01] window closes and I go red on it that
+[00:33:03] could be a problem this had a nice micro
+[00:33:05] pullback right here at 8.50
+[00:33:07] all right so these are the micro
+[00:33:09] pullbacks that um I was talking about or
+[00:33:12] that are covered extensively in the
+[00:33:14] micro pullback strategy in the technical
+[00:33:16] analysis series
+[00:33:18] I'm a big fan of micro pullbacks because
+[00:33:21] here's the thing what's happening during
+[00:33:22] a micro pullback a stock has just
+[00:33:24] started to squeeze up it's pulling back
+[00:33:26] for a moment there's a little bit of
+[00:33:28] profit taking but it's not long because
+[00:33:31] Traders see this stock squeezing up they
+[00:33:34] see it hitting High a day scanners right
+[00:33:36] so of course I'm using scanners these
+[00:33:39] scanners are like radar they're
+[00:33:40] searching the market in real time for
+[00:33:42] stocks that are moving higher right so
+[00:33:43] when I see a stock hitting it as soon as
+[00:33:46] I get a pullback even a small one like
+[00:33:48] this I'm going to be jumping in I'm like
+[00:33:49] yup it's time to get in it's game time
+[00:33:53] you know you don't have a lot of time
+[00:33:55] when something is strong Traders are
+[00:33:57] going to jump on it quickly you have a
+[00:33:59] micro pullback and that may be it now
+[00:34:01] you can let it do its full five minute
+[00:34:03] breakout and wait for a brand new five
+[00:34:06] minute pattern but what sometimes
+[00:34:08] happens on parabolic stocks is they'll
+[00:34:09] go from you know 7 to 14 on without a
+[00:34:13] five minute pullback and then they don't
+[00:34:16] do a five minute pullback because even
+[00:34:17] five minute Traders are like it's too
+[00:34:18] extended to buy it up here at 12 and it
+[00:34:21] just Fades back down so if you're not
+[00:34:22] trading those one minute pullbacks
+[00:34:24] including micro pullbacks you're missing
+[00:34:27] the whole move and in a choppy Market
+[00:34:29] you want to try to capitalize on on
+[00:34:31] every move you can
+[00:34:34] did any of you guys find this
+[00:34:35] interesting
+[00:34:36] I hope you did and I hope that this
+[00:34:39] helps you in your trading again whether
+[00:34:40] you're trading on your own or you're
+[00:34:41] learning from me you're trading over
+[00:34:43] where you're trading a community I hope
+[00:34:44] you find it interesting I hope it's
+[00:34:46] helpful and I want to remind you that
+[00:34:47] you don't have to do this alone
+[00:34:49] we have a great Community Traders over
+[00:34:51] at Warrior trading I'm live streaming
+[00:34:53] every single morning while I'm trading
+[00:34:55] so you can get a sense of what I'm
+[00:34:56] looking at what my watch list is and you
+[00:34:59] can watch over my shoulder and you can
+[00:35:00] see my p l while I'm training so I hope
+[00:35:03] to see you guys over at Warrior trading
+[00:35:05] I hope you check out the free resources
+[00:35:07] that we've put together for you in this
+[00:35:09] free technical analysis series and if
+[00:35:11] you found this helpful please hit that
+[00:35:13] thumbs up and I'll put a couple videos
+[00:35:15] at the end of this episode that you guys
+[00:35:17] should watch if you want to keep
+[00:35:19] learning and there's lots of content
+[00:35:21] that I've put on YouTube so I I hope you
+[00:35:22] subscribe and hope you keep watching
+[00:35:24] alright thanks so much for tuning in and
+[00:35:26] I'll remind you as always with my
+[00:35:27] disclaimer that trading is risky and my
+[00:35:30] results are not typical so please take
+[00:35:32] it slow and practice in a simulator
+[00:35:34] before you put real money on the line
+[00:35:37] Thanks for tuning in and we'll see you
+[00:35:38] guys real soon
+[00:35:41] thank you

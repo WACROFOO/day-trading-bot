@@ -1,0 +1,657 @@
+# [LIVE] 20 seconds from being in a secondary offering Day Trading with Ross #stocks #daytrading
+# https://www.youtube.com/watch?v=EIGBhXge0cc
+# upload_date: 20220725
+# duration_sec: 2306
+
+[00:00:14] all right everyone well let's see it's
+[00:00:16] about uh
+[00:00:17] 10 of nine and
+[00:00:20] so far i've gotten a couple trades
+[00:00:22] already for those just
+[00:00:24] logging in but
+[00:00:26] it feels like kind of a slow morning
+[00:00:29] which surprises me a bit because we had
+[00:00:31] so much action on friday you know friday
+[00:00:35] was
+[00:00:35] phenomenal we had a really you know
+[00:00:38] great day and i left money on the table
+[00:00:41] i certainly could have traded more and i
+[00:00:43] i didn't
+[00:00:44] but even still it was a great day so
+[00:00:48] i kind of thought that would carry
+[00:00:49] through here to monday morning a little
+[00:00:51] bit more than it has so far but
+[00:00:55] you know it i suppose it's still
+[00:00:57] relatively early
+[00:00:59] so as i'm sitting down now
+[00:01:01] we'll go over the gap scan um we'll look
+[00:01:03] at a couple continuation ideas we'll see
+[00:01:05] if we can find something that looks good
+[00:01:07] i think that um you know i do have a
+[00:01:09] couple ideas of um
+[00:01:11] you know what what we can
+[00:01:13] what we can trade i think there'll be a
+[00:01:14] couple of uh good opportunities here
+[00:01:17] um today so um and then a couple
+[00:01:20] reminders this week we've got um sort of
+[00:01:23] a um
+[00:01:24] a busy schedule so today and tomorrow
+[00:01:27] for warrior members um warrior pro
+[00:01:31] members we've got class starting at 11
+[00:01:33] a.m
+[00:01:35] this is going to be i'm going to teach
+[00:01:36] you a five chapter class on
+[00:01:39] algo scalping strategy
+[00:01:42] this has been something a lot of you
+[00:01:44] guys have asked about so
+[00:01:46] the first couple chapters i'm going to
+[00:01:47] talk about exchanges
+[00:01:50] we're going to talk about sort of the
+[00:01:52] market structure to help you guys better
+[00:01:55] understand
+[00:01:56] how
+[00:01:57] these algos came to exist and how they
+[00:02:00] work and then we'll talk about a
+[00:02:02] strategy where we're looking to scalp
+[00:02:05] the moves that algos are
+[00:02:07] making all right so that's gonna be a
+[00:02:09] five chapter class taught uh today and
+[00:02:12] tomorrow
+[00:02:13] i'm gonna do a
+[00:02:15] condensed version that'll be like an
+[00:02:18] hour long
+[00:02:19] on youtube on wednesday
+[00:02:22] so all uh actually
+[00:02:25] for those um i'm gonna put a link um on
+[00:02:28] youtube for that in a second but um for
+[00:02:31] the morning show but but in any case so
+[00:02:33] that'll be um something i'll do on
+[00:02:34] wednesday for youtube people and then
+[00:02:36] uh also for warrior folks we're going to
+[00:02:40] have a software update this week so the
+[00:02:43] chat room that you're so familiar with
+[00:02:45] um
+[00:02:47] is going to be updated and that's going
+[00:02:49] to be exciting so that's coming this
+[00:02:51] week as well and i'll give you guys
+[00:02:53] maybe a sneak preview of that later
+[00:02:55] today or tomorrow
+[00:02:57] so uh
+[00:02:58] yeah so we've got a kind of a busy week
+[00:03:00] ahead uh with classes and software
+[00:03:03] update and
+[00:03:05] and then of course you know regular
+[00:03:07] trading as always
+[00:03:09] so
+[00:03:10] right now
+[00:03:13] let's see it's about five of nine i
+[00:03:15] think the plan will be
+[00:03:17] let's go over the watch list and see
+[00:03:20] what we can find that looks good so
+[00:03:22] leading gapper this morning is revb it's
+[00:03:24] up 87 which is good but right away i
+[00:03:28] looked at it when i sat down it was
+[00:03:30] below volume weight average price that
+[00:03:32] hasn't changed so
+[00:03:34] no interest and yes the algo scalping
+[00:03:36] strategy class will be recorded so it'll
+[00:03:38] be added into the learning management
+[00:03:40] software um for you guys so you'll be
+[00:03:42] able to watch that down the road it'll
+[00:03:44] probably take a week and a half or so to
+[00:03:46] turn it around and get it
+[00:03:48] built into the curriculum
+[00:03:49] but you know you'll be able to tune in
+[00:03:52] today and tomorrow to watch it live and
+[00:03:53] then you'll be able to watch it on the
+[00:03:55] replay in a
+[00:03:56] a week or so
+[00:03:58] maybe two all right so our evp it's
+[00:04:00] below volume weight average price unless
+[00:04:02] it can get back over a dollar 33
+[00:04:05] no interest in that right now
+[00:04:08] gov x
+[00:04:09] this one it's a cheaper stock so because
+[00:04:12] it's cheaper i'm not super interested in
+[00:04:14] it
+[00:04:16] you know it's moved a little higher but
+[00:04:18] this daily chart is tough because i mean
+[00:04:20] you can see this stock is just sold off
+[00:04:22] is just sold off and sold off and sold
+[00:04:24] it's it's kind of
+[00:04:26] this is
+[00:04:28] i mean this is pretty epic
+[00:04:31] uh diluting of the value of the stock if
+[00:04:34] you go back to 2000
+[00:04:36] i can't even there's not even commas on
+[00:04:39] this for me to see what the actual
+[00:04:41] number is it's i mean i'd have to it's
+[00:04:44] ridiculous because they've done so many
+[00:04:46] reverse splits
+[00:04:48] reverse split reverse split imagine if
+[00:04:50] you were bag holding this uh
+[00:04:52] at like 900 million dollars 950 million
+[00:04:56] dollars a share let's see if that was
+[00:04:58] 950 there'd be a comma there
+[00:05:00] there'd be a comma there
+[00:05:03] no so it's even higher than that it's
+[00:05:05] kind of insane anyways so i'm really not
+[00:05:08] interested in govex it's a pretty
+[00:05:11] i haven't seen a stock this beaten up in
+[00:05:13] a while
+[00:05:14] vs now on the one hand um
+[00:05:17] some might say just to take the other
+[00:05:20] side of it um
+[00:05:22] you know this is an obvious short it's
+[00:05:24] an obvious short come on this thing just
+[00:05:25] keeps it keeps selling keeps selling
+[00:05:27] keeps selling they it doesn't go
+[00:05:29] bankrupt they just do secondary
+[00:05:31] offerings they they dilute the value the
+[00:05:34] stock private placement et cetera et
+[00:05:35] cetera
+[00:05:37] could you at some point get an epic
+[00:05:40] short squeeze because that's what you
+[00:05:42] ended up happening having happen on drys
+[00:05:46] and it's not impossible um you know it's
+[00:05:49] certainly not but it has already done
+[00:05:52] this a couple of times where you had
+[00:05:53] these nice kind of two three hundred
+[00:05:55] percent pops
+[00:05:57] and
+[00:05:58] it just doesn't i don't know it just
+[00:06:00] feels very thickly traded it doesn't
+[00:06:02] feel like it's really got that potential
+[00:06:04] right now so i i sort of i i don't think
+[00:06:07] that that's gonna happen anyways just to
+[00:06:09] give you that
+[00:06:11] anyway so vs uh this one another one
+[00:06:14] that's been beaten up sold off for a
+[00:06:15] long time popping up but too cheap kavl
+[00:06:19] okay so i already traded this one um
+[00:06:22] we actually had
+[00:06:23] an algo spike right at 8 a.m and that
+[00:06:26] gave me about 500 of profit reminders
+[00:06:29] always my results are not typical and
+[00:06:30] trading is risky but that's how i did on
+[00:06:32] this
+[00:06:33] so the initial algo spike squeezed from
+[00:06:35] a dollar thirty up to about a dollar
+[00:06:37] eighty one nice move twenty thirty
+[00:06:40] percent pulls back it continues a little
+[00:06:42] higher right now it's below volume
+[00:06:43] weight average price so i'm not
+[00:06:45] interested in it at the moment
+[00:06:48] uh f-a-z-e
+[00:06:51] this one
+[00:06:53] you know it's kind of
+[00:06:55] i i don't really know it's
+[00:06:58] it's obviously up a bit the float shows
+[00:07:00] that it's a little higher but it looks
+[00:07:02] like it's a recent
+[00:07:04] ipo or a special acquisition company
+[00:07:06] that did a merger
+[00:07:09] you never know you could get a move on
+[00:07:11] it the way we did on pgy
+[00:07:13] it's probably worth keeping on a side
+[00:07:15] chart just in case
+[00:07:17] but you know the pre-market high is way
+[00:07:19] up there
+[00:07:20] oh actually that was after hours so
+[00:07:22] after hours it hit 18
+[00:07:24] uh yesterday or friday and then
+[00:07:27] pre-market it's really just been selling
+[00:07:28] off so i don't know
+[00:07:31] all right so that's that one
+[00:07:34] uh speaking of pgy
+[00:07:36] the pgy chart
+[00:07:39] is right now
+[00:07:41] back at this level which
+[00:07:44] could almost start to look like
+[00:07:47] it's going to do what it did before
+[00:07:48] which would be if it sells off here it's
+[00:07:50] kind of a head and shoulders pattern but
+[00:07:53] when it did that before when it started
+[00:07:54] to form that pattern and i thought okay
+[00:07:56] it's gonna sell off like right here back
+[00:07:58] to three
+[00:08:00] it ended up just holding up all day long
+[00:08:05] you know right here it feels like oh it
+[00:08:07] could start to sell off here
+[00:08:09] but what if it holds 10 like all day
+[00:08:11] long
+[00:08:12] then i think we would certainly be
+[00:08:13] watching it into tomorrow
+[00:08:16] if and the levels that we would watch
+[00:08:18] similarly to back here would be what was
+[00:08:20] this critical level it was about six
+[00:08:23] what's the critical level right here i i
+[00:08:25] would say it's around 12.
+[00:08:28] that's that's the line in the sand very
+[00:08:30] technical that's the technical level you
+[00:08:33] don't have a fundamental catalyst
+[00:08:35] supporting it today but
+[00:08:38] you know technical levels are worth
+[00:08:39] watching so pgy can keep that up on a um
+[00:08:45] another chart okay so and then we have a
+[00:08:48] couple other gappers on the scan that
+[00:08:50] are not as interesting
+[00:08:53] sorry ga i took a trade on this one
+[00:08:55] earlier today as well
+[00:08:58] uh
+[00:08:59] we got a break of uh 16 and then a
+[00:09:02] sell-off and a bounce off v i made more
+[00:09:04] on the bounce off v web but
+[00:09:06] whatever
+[00:09:07] tblt
+[00:09:10] yeah so i kind of you know had that
+[00:09:11] similar question about this um kind of
+[00:09:14] rolled over there but now starting to
+[00:09:15] get back up
+[00:09:17] because on friday we sort of thought
+[00:09:19] okay it's done this thing's dead
+[00:09:21] and then it ripped back up to its
+[00:09:23] pre-market high of 650 and then we were
+[00:09:25] back to new highs
+[00:09:27] but what's different today is that this
+[00:09:28] is sold off it sold off on friday going
+[00:09:31] into the close from 9.50 all the way
+[00:09:33] down to 7.50 close to 8.
+[00:09:35] sold off even more here down to 650 so
+[00:09:38] it's got
+[00:09:39] kind of a long ways to go
+[00:09:41] to get back up to these levels and i
+[00:09:43] don't think it will and i think that
+[00:09:44] today is probably going to be its first
+[00:09:46] red day
+[00:09:47] and i think that there's probably going
+[00:09:48] to be a high level of shorting on it i
+[00:09:51] could be wrong if it proves you know
+[00:09:53] that it's strong i'm happy to jump on
+[00:09:56] and trade it but right now i'm not
+[00:09:58] seeing um
+[00:10:00] i'm not seeing anything so
+[00:10:03] yeah that's kind of that's kind of the
+[00:10:05] way i'm looking at it right now
+[00:10:08] all right so let's see um
+[00:10:14] yep and a couple of headlines here at 9
+[00:10:16] 00 a.m so
+[00:10:18] 901
+[00:10:20] not seeing anything hitting the scans at
+[00:10:21] the moment
+[00:10:30] just watching
+[00:10:45] all right so nine o'clock
+[00:10:50] so for those on youtube uh thank you
+[00:10:52] guys for tuning in here for the morning
+[00:10:53] show i want to remind you that trading
+[00:10:55] is risky my result's not typical and you
+[00:10:57] should take it slow there's no
+[00:10:59] guarantees that you'll find success as a
+[00:11:00] trader so practice this simulator before
+[00:11:02] you put real money on the line don't try
+[00:11:03] to blindly follow me or anyone else
+[00:11:06] reminder that um members at warrior have
+[00:11:09] access to my ultra low latency broadcast
+[00:11:11] as close to real time as you can get
+[00:11:15] those on youtube you're going to be
+[00:11:16] slightly delayed we're
+[00:11:19] trying to make the the value for warrior
+[00:11:21] members a little bit higher happy to
+[00:11:23] broadcast out to youtube but the
+[00:11:25] broadcast to youtube is slightly delayed
+[00:11:28] and has ads on it so
+[00:11:31] just be aware of that
+[00:11:33] if you want real time
+[00:11:35] and ad free you're welcome to
+[00:11:38] join and
+[00:11:39] subscribe
+[00:11:43] i'm not seeing anything i'm super
+[00:11:45] excited
+[00:11:46] about right now
+[00:11:59] kvl
+[00:12:07] yeah i see
+[00:12:08] stacked on a level two though
+[00:12:43] mm-hmm
+[00:13:27] yeah you see that little flash there up
+[00:13:29] to 78 and you know that's nice little
+[00:13:31] action there
+[00:13:34] i'll take a starter at 70 on tblt
+[00:13:38] add
+[00:13:39] 80.
+[00:13:40] this is gonna be just kind of ride that
+[00:13:42] momentum up to eight dollars
+[00:13:45] my thought on tblt is that clearly
+[00:13:48] it's shown some interest in squeezing
+[00:13:51] out early short sellers
+[00:13:54] watching for the breakthrough 80
+[00:13:57] then 85 and 90.
+[00:14:02] there's 80 a little profit there
+[00:14:06] see how much higher it wants to go
+[00:14:27] hi this candle is 84 watching down here
+[00:14:31] for dips
+[00:14:48] watching added it uh bad fill added at
+[00:14:50] 75 to buy the dip
+[00:14:52] it's kind of a bad fill on that
+[00:14:58] see if it pops back up to 80.
+[00:15:12] i'd like to see a break over eight
+[00:15:13] dollars
+[00:15:49] so it's 907 right now
+[00:15:52] we've got about 23 minutes to the open
+[00:15:59] there we go back up to 80 82
+[00:16:02] 83
+[00:16:10] so only small gains on it flat on the
+[00:16:12] position for now taking profit into that
+[00:16:14] level thank goodness watching okay there
+[00:16:17] must be news
+[00:16:18] there's got to be news on this
+[00:16:22] it's got to be an offering right
+[00:16:26] dip at 601 just a thousand shares to
+[00:16:29] start i want to see what the price of
+[00:16:30] the offering is
+[00:16:39] what's the price
+[00:16:42] five
+[00:16:46] i'll take the loss on the thousand
+[00:16:48] shares
+[00:16:50] it's gonna go lower
+[00:16:52] so that's the victory there for short
+[00:16:54] sellers to finally get that
+[00:16:56] um that secondary offering
+[00:17:04] you know i think that that
+[00:17:06] boy that was close um
+[00:17:09] you know that was i sold that position
+[00:17:12] about
+[00:17:13] 20 seconds before that offering news
+[00:17:20] you don't like to see that eight million
+[00:17:22] shares five dollars
+[00:17:25] so glad to be green on it but
+[00:17:30] that chart's broken and you know it's
+[00:17:32] it's also tough for short sellers
+[00:17:34] because
+[00:17:35] you when you just get that immediate
+[00:17:36] drop
+[00:17:38] it's kind of hard you mean you can't
+[00:17:40] really size into it that that is an algo
+[00:17:44] it's immediate
+[00:17:49] no halt's pre-market remember
+[00:17:56] so that chart's broken
+[00:17:59] pretty much ruined
+[00:18:07] down 27 now
+[00:18:11] that was close
+[00:18:31] and you know there's no indicator that
+[00:18:32] that was going to happen there that's
+[00:18:34] just when the news dropped
+[00:18:43] this is what a lot of these companies do
+[00:18:46] right so
+[00:18:47] very similar to gov x
+[00:18:49] reverse split selling more shares
+[00:18:51] reverse splits selling more shares
+[00:18:54] you know a lot of companies have shelf
+[00:18:55] registrations but
+[00:18:57] you just never know when they're gonna
+[00:18:59] when they're gonna hit them
+[00:19:02] that's probably the closest that i've
+[00:19:03] ever been i was 20 seconds away from
+[00:19:05] being in uh
+[00:19:08] during that type of news event
+[00:19:12] so you know knock on wood i've been
+[00:19:13] trading for a long time that was that's
+[00:19:14] the closest that i've ever been to being
+[00:19:16] uh to holding during a secondary
+[00:19:18] offering
+[00:19:35] hmm
+[00:19:37] it's disappointing to see that but
+[00:19:39] it happens
+[00:19:51] so we'll be very grateful for the small
+[00:19:53] gains that i made on it
+[00:20:33] bye
+[00:21:24] the only halts pre-market are halt's
+[00:21:26] pending news
+[00:21:28] there aren't halts on circuit breakers
+[00:21:30] pre-market
+[00:21:55] nice bounce
+[00:22:02] so the high that candle was 623
+[00:22:13] we'll see how well it holds up
+[00:22:17] s p 500 is pulling back a little bit
+[00:22:21] just in the last few minutes sold off a
+[00:22:23] bit on friday bouncing back up
+[00:22:25] pre-market light volume bounce coming
+[00:22:28] back down just a little bit here
+[00:22:50] so as we get closer to the opening bell
+[00:23:02] i guess we kind of have to
+[00:23:04] make a decision of what looks best for
+[00:23:06] the open
+[00:23:09] tblt's down 26 percent so that one's
+[00:23:13] not great
+[00:23:16] back to the top of the gap scanner rev b
+[00:23:18] for those tuning in so warrior members
+[00:23:20] we have class at 11 a.m today and 11 a.m
+[00:23:24] we're going to be i'm going to be
+[00:23:25] teaching the algo scalping strategy
+[00:23:33] so that is going to be
+[00:23:36] five chapters
+[00:23:39] taught over the next
+[00:23:41] two days
+[00:23:51] and then so that'll be today at 11 and
+[00:23:53] tomorrow at 11
+[00:23:54] and then wednesday i'll do a uh concise
+[00:23:58] class on the i'll go scalping strategy
+[00:24:01] for those on
+[00:24:02] youtube
+[00:24:05] let's see um
+[00:24:10] all
+[00:24:12] let's see
+[00:24:17] here's the link there you go
+[00:24:20] so that's going to be for the algo
+[00:24:21] scalping class for those on
+[00:24:24] uh youtube
+[00:24:27] i just posted that link in the um
+[00:24:30] uh in the youtube chat
+[00:24:45] so that would be one o'clock on
+[00:24:46] wednesday
+[00:24:48] uh right now
+[00:24:50] it's one of the strategies that i've
+[00:24:51] been relying on to help get me through
+[00:24:54] this bear market looking for where i
+[00:24:57] expect to see an algo squeeze and taking
+[00:25:00] a quick scalp
+[00:25:01] at that spot
+[00:25:15] so this will be um
+[00:25:17] these are the five chapters for warrior
+[00:25:19] members
+[00:25:23] and i'll teach a con condensed version
+[00:25:26] uh at one o'clock on wednesday for those
+[00:25:28] on youtube that are interested
+[00:25:49] class is 11 a.m eastern
+[00:25:52] today and tomorrow
+[00:26:00] yep they will be
+[00:26:05] and then we've got a software update
+[00:26:07] coming for the chat room this week so
+[00:26:10] that'll be exciting
+[00:26:16] rev b
+[00:26:21] so right now trying to put together kind
+[00:26:23] of the game plan for what i'm going to
+[00:26:24] be watching
+[00:26:26] at
+[00:26:57] yeah the chat room updates is for the
+[00:26:58] whole the chat room software so it'll be
+[00:27:01] an update for all of the chat rooms
+[00:27:04] uh scanners
+[00:27:06] newsroom everything
+[00:27:31] saga
+[00:27:33] yeah
+[00:27:37] needs to get back over volume weight
+[00:27:39] average price
+[00:27:40] phase f-a-z-e
+[00:27:44] still holding up relatively well
+[00:27:48] worth watching
+[00:27:54] especially over 13.
+[00:28:01] the only way to know an offering um
+[00:28:04] could happen is by looking at um to see
+[00:28:07] if they have a shelf registration
+[00:28:09] the problem is
+[00:28:10] a lot of companies have shelf
+[00:28:12] registrations they're good for i think
+[00:28:14] it's
+[00:28:15] now i can't remember is it two years or
+[00:28:16] three years
+[00:28:28] they're good for three years so you know
+[00:28:30] a lot of small cap companies will have a
+[00:28:32] shelf registration which
+[00:28:34] is an s3 filing it gives them the right
+[00:28:36] to sell shares onto the market they have
+[00:28:38] to do this so they can it can be fully
+[00:28:40] disclosed to shareholders that they
+[00:28:42] could at any time dilute the value of
+[00:28:44] the company by selling more shares to
+[00:28:46] raise money and they can do that through
+[00:28:48] a number of different um
+[00:28:50] methods they could do private placements
+[00:28:52] they could do direct on the open market
+[00:28:55] um they could do it through warrants
+[00:28:57] they could there's a lot of different
+[00:28:58] ways that they can structure depending
+[00:29:01] on who they might find that is
+[00:29:03] interested in uh
+[00:29:05] investing in the company but anyways so
+[00:29:07] this um you know they had a max proposed
+[00:29:10] offering price of 100 million dollars
+[00:29:12] just as sort of like a you know just why
+[00:29:15] not just throw the number out there but
+[00:29:17] like i said a lot of companies have them
+[00:29:19] uh small cap stocks
+[00:29:22] if you said i'm never going to trade a
+[00:29:24] small cap stock that has a shelf
+[00:29:25] registration
+[00:29:27] that that doesn't even really
+[00:29:29] um totally protect you because you can
+[00:29:31] get news
+[00:29:33] uh you know on a day like today that
+[00:29:34] they are
+[00:29:35] uh filing a shelf registration and then
+[00:29:38] the news is received almost as badly as
+[00:29:40] the fact that they are
+[00:29:42] you know tapping a shelf registration
+[00:29:44] they already had
+[00:29:47] it's just part of the risk of trading
+[00:29:49] unfortunately you know certainly trading
+[00:29:51] stocks that have been up um multiple
+[00:29:54] days in a row
+[00:29:56] is going to be riskier than trading day
+[00:29:58] one of fresh momentum but
+[00:30:00] uh you know this was day four right here
+[00:30:02] and it was still
+[00:30:03] it was still going strong so it felt
+[00:30:06] like it made sense to try to ride that
+[00:30:08] momentum and all things considered the
+[00:30:10] the price of five while it's a discount
+[00:30:12] of current price relative to where the
+[00:30:14] stock has been in the last you know
+[00:30:16] month and a half it's still a bit of a
+[00:30:17] premium so
+[00:30:19] it needs to get back um you know it
+[00:30:22] needs to kind of shake out people that
+[00:30:25] are in too high maybe and then it'll
+[00:30:27] start to who knows maybe it'll start to
+[00:30:29] hold up
+[00:30:33] but usually they drop down to
+[00:30:35] approximately the
+[00:30:37] shelf um
+[00:30:39] the shelf price and i think the only
+[00:30:40] reason it was squeezing up here was just
+[00:30:42] because it had done something similar in
+[00:30:45] the previous day
+[00:30:46] had squeezed up pulled back so traders
+[00:30:48] were like okay maybe we're going to get
+[00:30:50] another little short squeeze like we did
+[00:30:51] yesterday and i thought the same so
+[00:30:54] jumping on and riding that momentum
+[00:30:58] all right so thank you guys as always
+[00:31:00] those on youtube who are tuned in
+[00:31:02] appreciate you hitting the thumbs up
+[00:31:03] appreciate you being tuned in i hope you
+[00:31:05] enjoyed these uh free broadcasts i know
+[00:31:08] that we've got
+[00:31:09] ads are running on the channel right now
+[00:31:11] the goal is that hopefully this helps
+[00:31:13] fuel the youtube algorithm to say that
+[00:31:15] this is a great channel to recommend for
+[00:31:17] people that are interested in trading
+[00:31:19] and so thank you guys for being here and
+[00:31:21] uh hitting that thumbs up really you're
+[00:31:23] doing your part to help the the youtube
+[00:31:25] algo as well those um
+[00:31:28] that are
+[00:31:29] in the chat room you guys obviously have
+[00:31:31] the ultra low latency broadcast
+[00:31:34] no ads and
+[00:31:36] hopefully we can have a a decent morning
+[00:31:38] here but it certainly feels slow
+[00:31:40] relative to the action that we had on
+[00:31:41] friday and with that offering on tblt
+[00:31:46] i don't know um
+[00:31:48] you know i mean that's just that one
+[00:31:50] stock but i'm just not seeing something
+[00:31:52] else right now that looks really um
+[00:31:57] that looks really obvious
+[00:32:03] so yeah i have to try to be patient
+[00:32:08] this has been a you know it's been a
+[00:32:09] slow month but summer is often a bit
+[00:32:12] slower
+[00:32:15] so none of that is really that
+[00:32:17] surprising
+[00:32:32] so i'm gonna trade here and then uh
+[00:32:36] as soon as i'm finished trading i'm
+[00:32:37] gonna load up with a little bit of
+[00:32:38] caffeine and then we're gonna start our
+[00:32:39] class at 11 a.m and um
+[00:32:43] we'll teach that as uh
+[00:32:45] we'll get through as much of the class
+[00:32:47] today as as we all have energy for and
+[00:32:49] then
+[00:32:50] we'll finish it tomorrow at 11.
+[00:33:27] uh i do have a hard stop today but i
+[00:33:29] just have to check um
+[00:33:31] i can't i just can't remember i had i
+[00:33:33] knew i had something in the afternoon
+[00:33:34] maybe around three but
+[00:33:36] i just can't remember exactly it might
+[00:33:38] have been two or might have been four so
+[00:33:40] we'll probably run for at least three
+[00:33:41] hours um class today but
+[00:33:44] you know we'll we'll stop obviously
+[00:33:46] we're not going to stop in the middle of
+[00:33:47] a chapter so we'll stop at a logical
+[00:33:49] breaking point it might be maybe we'll
+[00:33:51] get through chapter one
+[00:33:53] and all of chapter two or maybe we'll
+[00:33:55] maybe we'll get through also chapter
+[00:33:57] three and then we'll just do chapters
+[00:33:58] four and five tomorrow
+[00:34:00] we'll see
+[00:34:05] but class will start both today and
+[00:34:07] tomorrow at 11 a.m and then we'll
+[00:34:11] we'll run until
+[00:34:13] my heart stop
+[00:35:39] yes members have access to older classes
+[00:35:41] as well
+[00:35:47] we usually once a year every other year
+[00:35:50] something like that i'll uh re-record
+[00:35:52] classes
+[00:35:54] replace the old ones with the new ones
+[00:35:56] the old ones get archived we don't keep
+[00:35:59] the old ones but um
+[00:36:31] okay
+[00:36:42] all right um
+[00:36:43] hang on one second
+[00:37:27] all right so um i'll see you guys uh
+[00:37:30] those tuning in on youtube we'll see you
+[00:37:31] back at it tomorrow morning uh warrior
+[00:37:34] members we'll keep trading here we'll
+[00:37:35] see if we can find some opportunities
+[00:37:38] add a little more profit to the morning
+[00:37:42] for being here and we'll be back at it
+[00:37:44] first thing tomorrow morning
+[00:37:49] reminders always trading is risky my
+[00:37:51] result's not typical so make sure you
+[00:37:52] take it slow
+[00:38:25] you

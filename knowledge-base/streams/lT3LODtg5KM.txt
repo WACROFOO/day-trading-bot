@@ -1,0 +1,726 @@
+# LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=lT3LODtg5KM
+# upload_date: 20221027
+# duration_sec: 2390
+
+[00:00:01] all right so we've got about 10 minutes
+[00:00:04] until the top of the hour and you know
+[00:00:08] right now we're kind of in a little bit
+[00:00:09] of a a grind things are kind of moving
+[00:00:13] slowly we don't have a lot that's uh
+[00:00:15] super exciting although
+[00:00:18] um help you know hopefully that'll
+[00:00:20] change
+[00:00:21] yesterday you guys did get that move on
+[00:00:23] Epix and this morning you've got agfs
+[00:00:26] both of these are higher float
+[00:00:28] they're Grinders they're not like big
+[00:00:30] big breakout stocks but
+[00:00:33] you know they're they're obviously
+[00:00:34] moving so there is uh you know probably
+[00:00:37] some opportunity there to be watching a
+[00:00:40] few of these uh but again it just kind
+[00:00:44] of
+[00:00:45] I just find them a little bit difficult
+[00:00:47] so like egfs
+[00:00:49] you don't have a lot of range you know
+[00:00:51] it's grinding up you see it sort of pops
+[00:00:52] up it pulls back so could you do dips
+[00:00:54] off the 20 moving average you certainly
+[00:00:56] could you could do a dip off the 20 and
+[00:00:59] maybe it ends up you know rallying but
+[00:01:02] uh I don't know it's just a slow mover
+[00:01:04] Epix yesterday I get a little impatient
+[00:01:07] with these uh Epix yesterday you know
+[00:01:11] this one
+[00:01:12] nice move uh obviously a couple of nasty
+[00:01:15] false breakout candles where it dropped
+[00:01:17] but
+[00:01:19] um you know generally nice moves user
+[00:01:23] um this one
+[00:01:25] let's see
+[00:01:28] yeah I don't know
+[00:01:30] it's easy to borrow the floats higher
+[00:01:36] it's an acquisition okay I'm just trying
+[00:01:38] to understand that candle a single
+[00:01:41] candle that spikes up like that is a
+[00:01:44] little you know I'm just kind of like
+[00:01:46] wait a second what's going on there and
+[00:01:48] then it kind of flat lines so
+[00:01:50] yeah all right so acquisition I guess
+[00:01:52] okay so leaving that one alone
+[00:01:55] um but yeah Epix so you know you had a
+[00:01:57] couple of candles yesterday where
+[00:01:59] you know you got a couple nice breakouts
+[00:02:01] you got a nice break there through uh
+[00:02:04] like 350 halted up then it was grinding
+[00:02:07] higher so generally it was pretty strong
+[00:02:09] stronger than I think probably a lot of
+[00:02:11] us expected
+[00:02:13] um
+[00:02:13] I didn't expect it to be that strong I
+[00:02:15] really didn't it went all the way up to
+[00:02:17] the 200 moving average on The Daily
+[00:02:19] right there so that's solid
+[00:02:22] we've got about eight minutes to the top
+[00:02:24] of the hour 9 A.M we'll see if there's
+[00:02:26] any news at the top of the hour
+[00:02:28] right now kind of just
+[00:02:30] light volume
+[00:02:32] uh
+[00:02:34] zccct is it is a NASDAQ test stock so
+[00:02:38] that's not
+[00:02:40] um that's not something that we would be
+[00:02:41] trading tick pilot test stock I don't
+[00:02:44] even know
+[00:02:50] it's been around since 2016.
+[00:02:54] 2017
+[00:02:57] and then just happens that it has some
+[00:02:59] volume today I don't know anyways
+[00:03:02] user agfs
+[00:03:06] aimc
+[00:03:09] and rbo no news on nrbo
+[00:03:13] lighter on volume but
+[00:03:16] we'll see
+[00:03:18] it is a former Momo stock I you know I
+[00:03:21] would prefer to be trading the front
+[00:03:22] side of this kind of move right like day
+[00:03:24] one when it's squeezing up but we don't
+[00:03:27] we haven't had a lot of front side
+[00:03:29] action except for what we had on Epix I
+[00:03:31] guess yesterday uh will Epix give us day
+[00:03:34] two continuation I don't know sold off a
+[00:03:37] bit here pre-market
+[00:03:39] if it could get over five maybe your 200
+[00:03:42] moving average is at four age two and
+[00:03:44] five twenty nine depending on SMA or EMA
+[00:03:46] so they're kind of both like right at
+[00:03:48] the same spot and I'm not sure if I'm
+[00:03:50] seeing anything
+[00:03:51] um on that that's really super
+[00:03:53] trustworthy
+[00:04:03] so Epix yeah leaving that one for the
+[00:04:06] time being
+[00:04:21] kzia of course I saw you mentioned that
+[00:04:23] one earlier you got a couple of shorts
+[00:04:26] on it
+[00:04:33] nice okay
+[00:04:59] okay
+[00:05:05] foreign
+[00:05:20] so we'll see if we have any guests on
+[00:05:22] the morning show today
+[00:05:25] Danny and hamang and Chris and Max may
+[00:05:28] end up joining us
+[00:05:33] depending on how they feel
+[00:05:43] ER in case you didn't already know
+[00:05:45] trading is risky and my results are not
+[00:05:48] typical and there's no guarantee you'll
+[00:05:50] find success whether you trade with me
+[00:05:51] or you'll learn on your own so make sure
+[00:05:52] you take it slow practice in a simulator
+[00:05:54] before you put real money on the line
+[00:05:56] remember there is
+[00:05:58] um often a bit of a delay on this
+[00:06:00] broadcast versus the ultra we'll latency
+[00:06:02] streaming servers that Warrior Pro and
+[00:06:06] day trade Dash members have access to
+[00:06:10] nice Justin
+[00:06:18] no trade on that for me yet
+[00:06:24] I'm not gonna chase it up here
+[00:06:50] [Music]
+[00:07:01] apix
+[00:07:33] so that candle on nrbo right there from
+[00:07:38] 11 up to 12.
+[00:07:42] apply this candle is 12 15.
+[00:07:52] no news is
+[00:07:54] throwing me off a little bit on it
+[00:08:09] room on the daily to about 14.
+[00:08:13] 1430 1450
+[00:08:20] but I don't so there's another hidden
+[00:08:21] salary there at 12. I don't like seeing
+[00:08:24] those hidden sellers
+[00:08:39] cyto
+[00:08:43] cyto still Maybe
+[00:08:48] on The Daily but I'm not there yet
+[00:08:52] that one's on a side chart
+[00:10:39] mbly
+[00:10:45] I haven't noticed that
+[00:10:48] so I don't
+[00:10:50] what's the deal with this
+[00:12:13] yeah I mean it's probably worth keeping
+[00:12:14] an eye on
+[00:12:26] we'll see if it ends up
+[00:12:28] doing anything
+[00:12:51] all right let's see
+[00:13:06] okay so got about 30 minutes to the Bell
+[00:13:09] nothing really there at the top of the
+[00:13:11] hour uh
+[00:13:13] 9 A.M that I see yep
+[00:13:18] and it looks like we've got a guest on
+[00:13:20] the morning show good morning Chris
+[00:13:22] good morning Warriors how is everybody
+[00:13:23] come on Ross doing all right all right
+[00:13:26] have you gotten any trades yet today I
+[00:13:29] did I got a couple Scouts on kzia and uh
+[00:13:32] nrbo okay
+[00:13:35] um there is initially no locates on an
+[00:13:37] rbo
+[00:13:38] but they came on the market small size
+[00:13:41] okay okay the thousand shares okay all
+[00:13:44] right so short on Casey okay yeah cheap
+[00:13:48] one kzia was a good one for me as well
+[00:13:50] quick mean reversion spikes
+[00:13:54] agfs hard pass for me
+[00:13:57] because of the grinder status yep it's
+[00:14:00] also easy to borrow and I had you know
+[00:14:03] that's just been one of the warning
+[00:14:04] signs yeah as of late interesting as
+[00:14:06] well as a high institutional ownership
+[00:14:18] all these have been easy to borrow and
+[00:14:21] high institutional ownership that have
+[00:14:23] just kind of
+[00:14:24] had the same pattern let me turn that
+[00:14:27] off got it uh did you trade Epix much
+[00:14:30] yesterday
+[00:14:30] I did
+[00:14:32] um it's funny too because I traded it
+[00:14:34] pre-market okay I took a starter
+[00:14:36] position and I didn't like the price
+[00:14:38] action so I got that's right I remember
+[00:14:39] that got out for a small win it sold off
+[00:14:42] and then at the open I got in way too
+[00:14:45] prematurely in the twos okay and I built
+[00:14:48] the size on the position I should have
+[00:14:50] looked this I didn't do my due diligence
+[00:14:51] with this one before taking a starter
+[00:14:54] and uh I wound up being a loser for me
+[00:14:57] okay but
+[00:14:59] um you know another lesson yeah yeah I
+[00:15:02] gotta make sure I know what I'm trading
+[00:15:04] before I take a position yeah no that's
+[00:15:06] I mean that's that's good logic yeah for
+[00:15:09] sure makes sense
+[00:15:12] um all right so that was Epix I didn't
+[00:15:13] get and I didn't get anything on that
+[00:15:14] one uh I just thought it looked like too
+[00:15:16] much of a grinder early on so I was like
+[00:15:18] not interested
+[00:15:20] and it um
+[00:15:24] I got out in the low Threes And it wound
+[00:15:27] up going to the upper fives yeah it's
+[00:15:29] good you caught your locker you did yeah
+[00:15:33] uh dip trade for me there on an rbo at
+[00:15:36] 11. so trying to buy the dip off of
+[00:15:39] v-wat and then I want to see if I can
+[00:15:41] add over 11.35 for a break of 11.50
+[00:15:46] so added right there to anticipate the
+[00:15:48] Breakthrough 1135
+[00:15:51] there's 11 30 holding up the house and
+[00:15:53] shares a smaller trade on it break even
+[00:15:57] trade came right back down so only
+[00:16:00] 9.44 so the thing on that is I was
+[00:16:03] thinking we would hold support here at
+[00:16:05] v-wap buying the dip at 11 added 11.26
+[00:16:09] that increased my average and then it
+[00:16:12] came right back down so red candle stop
+[00:16:15] out flat now at the same time well it's
+[00:16:17] not a winner
+[00:16:19] um it it's also decent from risk
+[00:16:22] management perspective because it's a
+[00:16:24] break-even trade more or less and you
+[00:16:27] know it could have worked we could have
+[00:16:29] gotten a squeeze up to 11 35 1150 and
+[00:16:31] maybe we still do and I can get back in
+[00:16:32] so trying to keep myself really uh you
+[00:16:36] know really light and not overstay my
+[00:16:39] welcome on it just jump in take a quick
+[00:16:41] trade and then I can always get back in
+[00:16:44] so we'll keep it on watch around maybe
+[00:16:47] 11.
+[00:16:49] 35 11 40.
+[00:16:51] sure I like the idea though of buying in
+[00:16:54] this area
+[00:16:55] um if it can hold support here
+[00:16:58] you know near the view app because at
+[00:17:00] least I'm getting in mid-range getting
+[00:17:02] in something like this at the top of the
+[00:17:04] range when it gets extended I'm a little
+[00:17:06] concerned about the bid dropping and not
+[00:17:09] being able to get profit and that also
+[00:17:10] being the spot where you know short
+[00:17:12] sellers like Chris are going to be more
+[00:17:14] likely to be looking for a short on it
+[00:17:15] now if it ends up ripping I can always
+[00:17:18] add into the highs with smaller ads but
+[00:17:21] from a good base position you know a
+[00:17:24] good starter hey
+[00:17:26] good morning good morning Chris good
+[00:17:29] morning good morning come on good
+[00:17:31] morning you looking at anything today
+[00:17:33] uh I just got on and you know I took a
+[00:17:36] look uh as I was getting on I don't see
+[00:17:39] anything yeah
+[00:17:41] man it's frustrating did you see mbly
+[00:17:44] IPO yesterday mobile I I'm a little
+[00:17:47] confused because mobile I was a stock
+[00:17:49] like years ago and then I guess it went
+[00:17:52] private and then now let's pick her name
+[00:17:54] again uh m b l y m is in Mary m b l y oh
+[00:17:59] yeah I did read something about that I
+[00:18:01] think Kramer was saying don't buy it so
+[00:18:03] oh okay so I would buy it yeah yeah
+[00:18:05] exactly right okay that makes sense
+[00:18:08] inverse Kramer yeah yes okay so 9 29 all
+[00:18:13] right well
+[00:18:15] yeah no that's definitely a long then
+[00:18:17] 29.86 is the high okay
+[00:18:21] all right
+[00:18:23] so we can keep that on watch uh side
+[00:18:26] chart Maybe
+[00:18:28] and our Bo has had a little action today
+[00:18:30] but uh it's coming back to lokiwap right
+[00:18:34] now I took one trade on it and actually
+[00:18:37] gonna add back there at 60. that's a dip
+[00:18:40] off the half dollar
+[00:18:41] so added back at um 1061 1062 no 1060.
+[00:18:47] I'm sure it's trying to buy the bottom
+[00:18:49] of these bottoming tails off the half
+[00:18:50] dollar whole dollar level uh
+[00:18:53] I do want to see it back above the web
+[00:18:55] to get bullish on it to get like
+[00:18:56] aggressive but you know for some scalp
+[00:18:59] trades
+[00:19:00] let's see if this pops up 20 cents and
+[00:19:02] get out at 80 or 85.
+[00:19:06] so right there is 100 bucks profit all
+[00:19:08] right so
+[00:19:10] that puts me on the leaderboard not with
+[00:19:12] much nice but it's something hey I'll
+[00:19:15] take 100 bucks in this market yeah yeah
+[00:19:18] I'll take it that that'll buy me a cup
+[00:19:19] of coffee today right right oh I don't
+[00:19:22] know what you're drinking oh I don't
+[00:19:24] know
+[00:19:26] the prices anymore
+[00:19:30] um okay so we'll see it really it should
+[00:19:34] have held v-wap but maybe we'll get
+[00:19:36] subdue app trap
+[00:19:37] all right so that's nrbo
+[00:19:40] side chart
+[00:19:42] cyto I mentioned yesterday kind of wild
+[00:19:45] card stock
+[00:19:47] recent reverse split super low flow and
+[00:19:49] rbo I don't see news on it cyto same
+[00:19:53] thing no real news but super low float
+[00:19:57] maybe they go maybe they don't I don't
+[00:20:06] but the leading Gap or uscr user buyout
+[00:20:12] a GFS more of a grinder type of stock
+[00:20:15] easy to borrow it's just not one that I
+[00:20:18] think will be good for breakout trading
+[00:20:20] aimc 60 buy out and rbo so you know
+[00:20:25] we're looking at the top five here and
+[00:20:27] of the top fives
+[00:20:30] nrbo is the only one that seems
+[00:20:33] moderately interesting but only somewhat
+[00:20:38] it's like you have some upside to 14.
+[00:20:41] it'll be the first
+[00:20:43] on nrpo yeah look at that day it went
+[00:20:45] over 60. I mean well see I know see I
+[00:20:47] and then that's why that's why you know
+[00:20:49] Traders are going to watch it I think
+[00:20:51] yeah but
+[00:20:52] yeah 14.50
+[00:20:56] I sort of was looking at that as a daily
+[00:20:58] level
+[00:21:00] Epix went right into the 200 yesterday
+[00:21:05] nope there's Danny
+[00:21:16] can you hear me okay yeah yeah sounds
+[00:21:19] good to me cool thanks
+[00:21:27] overall Market S P 500 yesterday was a
+[00:21:31] gravestone doji on The Daily after you
+[00:21:34] know a little bit of a bear Market rally
+[00:21:37] but so far looks like we're holding up
+[00:21:40] hey good morning Danny how how's the
+[00:21:42] sunrise in California hey hey guys uh
+[00:21:46] sunrise in California is not happening
+[00:21:47] yet but okay
+[00:21:49] but uh we're doing well
+[00:21:52] a little pop in of view v-i-e-w hey you
+[00:21:56] guys good morning hey Max good morning
+[00:21:58] Max morning Danny
+[00:22:03] all right we got Jess
+[00:22:06] there he is
+[00:22:08] coming on two we got the whole gang good
+[00:22:11] morning
+[00:22:13] all right our netv
+[00:22:16] maybe a pass for me
+[00:22:18] yeah I was trying to sleep in a little
+[00:22:20] bit today but I woke up at like 5 30.
+[00:22:22] what's going on guys good morning I was
+[00:22:26] up at 3 30. bring in the energy yes yeah
+[00:22:29] it's all I don't know it was looking a
+[00:22:31] little slow in here a little uh yeah we
+[00:22:34] use this audio to put my kids to sleep
+[00:22:36] you know yeah
+[00:22:37] so I figured I'd come save everyone in
+[00:22:40] the chat room thank you thank you you're
+[00:22:42] our savior well you know we don't have
+[00:22:45] much going on here
+[00:22:46] um but we're just getting started it's
+[00:22:49] early
+[00:22:50] um and by the way uh you guys uh tuning
+[00:22:54] in on YouTube you can always
+[00:22:56] um check out uh Chris hamang Danny Max
+[00:22:59] and Jess they've got uh channels over on
+[00:23:02] Instagram they're on Twitter some of
+[00:23:05] them are on YouTube Chris what's your uh
+[00:23:08] you're on Twitter what's your Twitter
+[00:23:09] I'm on Twitter it's Trader Drysdale
+[00:23:11] Trader Drysdale that's gonna be hard one
+[00:23:13] to spell but you just try to figure it
+[00:23:15] out and maybe you'll get it come on
+[00:23:17] where where are you where come find you
+[00:23:19] it's Twitter HP underscore the trader
+[00:23:23] HP underscore the trader Danny what
+[00:23:25] about you are you on you're on uh
+[00:23:27] Instagram
+[00:23:28] yeah all my stuff is the same it's my
+[00:23:30] it's decomozo dicomozo well almost on
+[00:23:34] Instagram it's a red dot farmer Red Dot
+[00:23:37] farmer with a pH former with a pH yeah
+[00:23:39] it's my pharmacist yeah a resident
+[00:23:42] pharmacist yeah in case we need you know
+[00:23:44] it's actually I do have some questions
+[00:23:46] for you a little bit later uh Max
+[00:23:49] where are you on social we got Instagram
+[00:23:51] and Twitter so far but Tick Tock coming
+[00:23:54] soon
+[00:23:57] resident Tick Tock guy yeah eventually
+[00:24:00] he's gonna give us some of those dances
+[00:24:01] right oh you know it
+[00:24:03] how awesome am I supposed to get these
+[00:24:05] yeah I like that I like it
+[00:24:08] okay and Jess where are you at you're on
+[00:24:10] Twitter um sorry Instagram and I'm on
+[00:24:13] Twitter too but not that active uh it's
+[00:24:15] on Instagram it's just underscore trades
+[00:24:18] cool and be careful of how you spell it
+[00:24:21] because there are many many fakes yeah
+[00:24:23] see that's the thing none beware of
+[00:24:25] scammers on social media none of these
+[00:24:27] guys will invest for you none of them
+[00:24:30] are going to give you personalized
+[00:24:31] investment advice
+[00:24:33] so if you have someone that has their
+[00:24:36] profile picture and says hey uh send me
+[00:24:39] a thousand bucks I'll invest in my you
+[00:24:41] know manage account that's a scam so do
+[00:24:45] not fall for it unfortunately I mean
+[00:24:48] it's just these guys are Relentless with
+[00:24:51] the scams so just be aware of that
+[00:24:54] um be cautious but you can see they do
+[00:24:56] put some content out there on social and
+[00:25:00] um they'll remind you as always that
+[00:25:01] trading is risky and their results
+[00:25:02] aren't typical they've all been very
+[00:25:04] successful really proud of them but
+[00:25:05] results aren't typical so take it slow
+[00:25:07] learn what you can study study study and
+[00:25:11] um yeah we're here for you ampx
+[00:25:17] there we go some news on it I'll take a
+[00:25:20] starter there at 12 50.
+[00:25:22] um see the thing is it looks to me like
+[00:25:24] this might have news
+[00:25:27] watching for an ad over
+[00:25:29] what's the headline
+[00:25:34] watching for an ad over 12.75 on ampx
+[00:25:40] hi that candles 12.71.
+[00:25:46] added at 12 33 for the Breakthrough
+[00:25:48] 12.50
+[00:25:51] there's 12 45 on the ask
+[00:25:56] I'm cutting it taking the loss 2 800.
+[00:25:59] look at that rejection yeah the news was
+[00:26:02] just that they're announcing the date
+[00:26:04] for Q3 results that's a bummer okay
+[00:26:07] so that's funny I you know so that was
+[00:26:09] jumping on an algo Spike and it did not
+[00:26:12] hold the daily looks good though
+[00:26:14] especially over that 12. that's brutal
+[00:26:17] so taking the quick loss on it flat at
+[00:26:20] 12 50 Cent loss
+[00:26:23] yeah Daily doesn't look bad
+[00:26:25] that's that's what I liked about it over
+[00:26:27] 12.50 but
+[00:26:30] yeah daily looks daily looks pretty
+[00:26:32] great actually
+[00:26:34] I know tell me about it
+[00:26:36] yeah what can you do
+[00:26:38] yep
+[00:26:39] yeah I mean you take the trade and if it
+[00:26:41] doesn't work it doesn't work yep you let
+[00:26:44] it come
+[00:26:45] yeah I'll keep it on a side chart maybe
+[00:26:46] we'll have another day where it pops up
+[00:26:47] and looks better yeah
+[00:26:52] so yeah I was hoping that epics would
+[00:26:55] have held up a little bit better
+[00:26:57] for second day continuation
+[00:26:59] yeah I mean last night it
+[00:27:02] um it just kept squeezing you would
+[00:27:04] think I mean typically in the old days
+[00:27:07] maybe last year something like that
+[00:27:10] happens after hours and it's up 100 the
+[00:27:13] next day I know I I know you're right
+[00:27:18] but it's a good thing I didn't know it
+[00:27:21] still looks pretty good yeah it's it's
+[00:27:23] not gone
+[00:27:24] it's hanging in there somewhat
+[00:27:28] especially if it can pop back over Bop
+[00:27:30] start to trap or uh squeeze out trap
+[00:27:33] some shorts again yeah over there five I
+[00:27:36] mean if anyone's watching it I don't I
+[00:27:37] probably wouldn't trade it just because
+[00:27:39] I don't like the stock but over that
+[00:27:40] five you know 20s it's kind of like a
+[00:27:43] big trigger it looks like yeah I agree
+[00:27:45] if it can get over five that'd be
+[00:27:47] interesting 520. and you might I mean I
+[00:27:50] don't know you might see that it's not
+[00:27:51] it's gapping it's gapping down six
+[00:27:54] percent so it's more or less flat but
+[00:28:02] 504 High there
+[00:28:07] all right so
+[00:28:09] and then nrbo that one's coming back
+[00:28:11] down a bit
+[00:28:13] it looked like it was trying to do a sub
+[00:28:14] V web trap on that candle
+[00:28:17] and then It reversed
+[00:28:19] back down to 10.
+[00:28:31] by this one is 12. 6
+[00:28:36] we'll see if we can get back there
+[00:28:43] it's the overall Market
+[00:28:45] 384.
+[00:29:00] cpix higher flow institutional interest
+[00:29:04] Point control 450
+[00:29:06] Simone is saying that okay
+[00:29:16] Simone's got a profitability badge
+[00:29:26] I'm gonna try to take it easy again
+[00:29:28] today it was the same plan yesterday and
+[00:29:30] I I did well and then I gave it back and
+[00:29:33] I ended up basically completely flat on
+[00:29:35] the day
+[00:29:36] oh you did yeah yeah
+[00:29:42] Epix that was pretty nice yesterday I
+[00:29:45] was not expecting that out of it
+[00:29:48] nor was I yeah sorry cats sorry guys
+[00:29:54] looking back all the signs were there to
+[00:29:56] not touch it easy to borrow High
+[00:29:58] institutional ownership you know just
+[00:30:01] kind of jumped in it too quick and
+[00:30:02] that's my lesson for yesterday
+[00:30:06] no I get that and you know I jumped in
+[00:30:08] pretty quick on but I'll go spikes are a
+[00:30:11] little different they are different you
+[00:30:13] gotta jump in those pretty fast
+[00:30:15] but that was definitely not an algo
+[00:30:17] Spike
+[00:30:19] grinding up a little bit
+[00:30:26] so we've got about 10 minutes to the
+[00:30:27] opening bell uh coming into the open red
+[00:30:31] 2700
+[00:30:33] small winner and nrbo loss on the MPX
+[00:30:36] quick loss there
+[00:30:40] so on epics yesterday Chris I I was
+[00:30:42] looking at the short interest and it's
+[00:30:44] it wasn't that much I think I'm checking
+[00:30:46] it right now it's all it's still showing
+[00:30:48] 0.85 percent those are old numbers
+[00:30:50] Unfortunately they don't update it right
+[00:30:53] yeah so uh I can tell you that yesterday
+[00:30:56] it was easy to borrow and today it's not
+[00:30:58] so that's a huge indicator to me it's
+[00:31:00] easy to borrow on my on my platform
+[00:31:03] let me check it again
+[00:31:07] yeah there's no shares easy to borrow a
+[00:31:09] guardian anymore
+[00:31:10] that could be their risk Department as
+[00:31:12] well doing that yeah yeah when I saw the
+[00:31:15] short answer so I'm like uh 40 million
+[00:31:17] float and no short interest I don't know
+[00:31:20] how much but the thing is if it's you
+[00:31:22] know got an Institutional ownership of
+[00:31:24] 70 how much of that float is locked up
+[00:31:26] yeah
+[00:31:29] yeah well
+[00:31:33] that is what the float is right after
+[00:31:35] the I think it's after Insider ownership
+[00:31:38] not yeah hedge fund ownership oh really
+[00:31:40] yeah yeah I thought yeah that was a
+[00:31:41] shares outstanding and that would be
+[00:31:43] insiders yeah
+[00:31:45] okay yeah well all this time
+[00:31:48] [Laughter]
+[00:31:52] and you've only made over a million
+[00:31:54] dollars right
+[00:31:56] a million here we come that's right
+[00:31:59] the number that you really need is a
+[00:32:01] float right so yeah yeah that is a job
+[00:32:03] for you
+[00:32:04] that's true
+[00:32:11] any wild card stocks Jess I got nothing
+[00:32:14] nothing yeah nothing
+[00:32:20] minus another ghi I mean ghi is setting
+[00:32:24] up but what's interesting is we had edu
+[00:32:27] had a nice push
+[00:32:29] so I was wondering if because it's all
+[00:32:31] those
+[00:32:31] um you know those weird education stocks
+[00:32:34] yeah edu and G sun right yeah
+[00:32:38] um so I didn't know you know it is
+[00:32:40] setting up on it it's got a nice daily
+[00:32:41] curl it just needs news yeah
+[00:32:45] yeah that's I think that the news is
+[00:32:47] we'll send it
+[00:32:49] that's what you'd want to see is some
+[00:32:50] some solid news
+[00:32:56] I just had a fake manoli follow me oh
+[00:32:59] yeah that'll happen quick yeah
+[00:33:01] ridiculous
+[00:33:03] it was crazy the first day that I made
+[00:33:04] my account I already had like I think a
+[00:33:06] hundred followers on Instagram it's an
+[00:33:08] other account who made it had like 1500
+[00:33:10] followers yeah yeah
+[00:33:14] getting those followers so quickly I
+[00:33:17] think yeah exactly
+[00:33:18] spots just paying for Bots yeah
+[00:33:25] I think they are the Bots
+[00:33:29] I mean
+[00:33:31] they could just learn how to trade right
+[00:33:33] I know I know right yep they're putting
+[00:33:36] some serious work into them they really
+[00:33:37] are
+[00:33:43] at a fake Tire kickers account actually
+[00:33:46] messaged me yesterday okay yeah I forget
+[00:33:49] what they said but they were like so how
+[00:33:51] is trading going for you yeah totally
+[00:33:53] they were they were like supposed to be
+[00:33:54] you yeah yep yep that's how they start I
+[00:33:58] was like Ross
+[00:34:00] not me yeah I did that once too and then
+[00:34:02] I I just just for you know sponges I try
+[00:34:06] to reply back and they're like oh how's
+[00:34:08] trading going I'm like ah it's going
+[00:34:09] good and they're like yeah right now
+[00:34:11] it's slow but have you tried crypto
+[00:34:14] right yeah
+[00:34:17] maybe like two years ago
+[00:34:27] well we've got six missed the Bell so
+[00:34:31] I'm in the red pre-market Chris is green
+[00:34:34] Justice green Danny hamang Max no trades
+[00:34:37] yet no I took one trade on that uh
+[00:34:40] um what was it on ampx not 800 it's not
+[00:34:44] too bad but oh good good job so you
+[00:34:46] agreeing on that one good work no no
+[00:34:47] right oh you're red okay yeah yeah
+[00:34:52] I wish
+[00:34:55] how'd that housework go yesterday Max
+[00:34:58] it's great it's lovely awesome
+[00:35:02] probably a better way to spend time
+[00:35:05] oh anything is a better way to spend
+[00:35:06] time right now in my opinion unless
+[00:35:09] there's another Epix that comes along
+[00:35:12] yeah I mean we do seem to be getting
+[00:35:14] something almost every day
+[00:35:19] you just have to wait
+[00:35:21] yeah you got to be patient I didn't see
+[00:35:22] Epix coming that I mean you know yeah
+[00:35:26] that's how it goes but definitely didn't
+[00:35:27] see that coming yeah pre-market it gave
+[00:35:30] back almost the whole move right three
+[00:35:32] months it was like you wouldn't think it
+[00:35:34] would end up the stock would end up
+[00:35:36] going to five dollars
+[00:35:37] right
+[00:35:39] I sure did
+[00:35:41] was that like two 230 something wasn't
+[00:35:43] it
+[00:35:45] free market high was 227 dropped down to
+[00:35:48] 1.87 and then
+[00:35:51] frgt getting a nice pop right there
+[00:35:54] 20 stock frgt penny stock again yeah
+[00:35:58] just got some volume
+[00:36:03] but looks like it might have been
+[00:36:07] just a single
+[00:36:09] nothing
+[00:36:13] nrbo needs to get back above view app
+[00:36:17] I know about it down here I mean it's
+[00:36:20] definitely off of 10.
+[00:36:24] needs to get over 11. keep it on watch
+[00:36:29] oh there was news on frgt
+[00:36:32] what was the news I don't see uh
+[00:36:38] use it 925 enters enters into a
+[00:36:40] multi-year commitment yeah
+[00:36:43] you know like Clark Mexico
+[00:36:47] great Technologies
+[00:36:52] that's interesting
+[00:37:02] yeah with the lack of anything else
+[00:37:03] right now the only one that I really
+[00:37:05] have an eye honest nrbo in case you
+[00:37:07] can't get back above you up I like the
+[00:37:09] float on it but
+[00:37:11] I don't really see much else
+[00:37:29] gtss let's see this is interesting it's
+[00:37:33] got a lower flow and it's got news
+[00:37:36] when was the news out
+[00:37:38] uh like about a minute ago two minutes
+[00:37:41] ago
+[00:37:44] I'll take a starter at 89
+[00:37:47] .
+[00:37:49] only got filled starter position
+[00:37:56] let's see if it breaks through uh 205
+[00:37:58] again so it needs to get over 29 sales
+[00:38:02] yeah okay
+[00:38:04] that candle to 10.
+[00:38:08] 214
+[00:38:12] I'm flat at 94. 100 bucks it just feels
+[00:38:15] like it's uh
+[00:38:17] heavy back below two
+[00:38:19] not holding that two dollar spot very
+[00:38:21] well yeah right that's a cheap stock
+[00:38:23] kind of tricky it's a hard time I
+[00:38:25] couldn't even get filled on it you
+[00:38:26] didn't get filled no I only got partial
+[00:38:29] fill
+[00:38:30] like we see a lot a lot of these big
+[00:38:33] topping Tails being set in lately just
+[00:38:35] from like a single order being set way
+[00:38:37] up above yeah yeah
+[00:38:40] that was a big yeah all of a sudden you
+[00:38:42] get that order all the way up there 10 4
+[00:38:44] or 214 14.
+[00:38:47] what's the deal with that
+[00:38:50] I feel like we've been seeing a lot of
+[00:38:52] that lately
+[00:38:53] yeah like topping tail
+[00:39:00] all right well we've got 90 seconds to
+[00:39:02] Bell so uh we'll keep trading we'll keep
+[00:39:04] streaming for warrior Pro members we'll
+[00:39:05] see if we can find some opportunities
+[00:39:06] and
+[00:39:08] um those tuning in on YouTube thank you
+[00:39:10] guys for being here I hope you join us
+[00:39:12] again tomorrow and don't forget uh we
+[00:39:14] are ending our uh we are retiring our
+[00:39:17] Warrior Pro all-access membership in
+[00:39:19] November so coupon code spooky40 this is
+[00:39:22] final call to be a warrior Pro
+[00:39:24] all-access member so make sure you check
+[00:39:26] that out there's a link
+[00:39:28] um in this episode and I'll see you guys
+[00:39:30] back here first thing tomorrow all right
+[00:39:32] thanks for those on YouTube we'll see
+[00:39:33] you in the morning
+[00:39:42] so what are we watching going into the
+[00:39:44] open what do you think
+[00:39:48] I've got my eyes on nrbo

@@ -1,7 +1,7 @@
-# 
+# [LIVE] $SIDU +115% LIVE Stock Market Trading - DAY TRADING with Ross!
 # https://www.youtube.com/watch?v=3zkDpp1WrsQ
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20220506
+# duration_sec: 2589
 
 [00:00:13] all
 [00:00:14] right there we go

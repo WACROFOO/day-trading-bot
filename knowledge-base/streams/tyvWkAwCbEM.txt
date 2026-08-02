@@ -1,0 +1,785 @@
+# 3/16/2021 - LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=tyvWkAwCbEM
+# upload_date: 20210316
+# duration_sec: 2276
+
+[00:00:53] good morning everyone
+[00:00:54] all right let's see um so we're gonna
+[00:00:58] get started here in a few minutes coming
+[00:01:00] up at 9am
+[00:01:02] nothing really is happening so far today
+[00:01:05] um the gap scanner doesn't look that
+[00:01:08] great
+[00:01:09] i haven't taken any trades yet and of
+[00:01:11] course i was read yesterday i'm actually
+[00:01:13] just working right now on
+[00:01:15] let's see exporting my trades
+[00:01:18] from last few
+[00:01:21] trading sessions actually i didn't
+[00:01:25] import from last thursday and friday so
+[00:01:28] i'm going to do that right now
+[00:01:30] and then we'll kind of see where we sit
+[00:01:31] but you know yesterday was a red day for
+[00:01:33] me
+[00:01:33] um i'll put i'll go to full screen here
+[00:01:36] i was down well i was up 15 000
+[00:01:38] and uh pre-market and then
+[00:01:42] i lost 10 000 at the open
+[00:01:45] on uh i can't remember the stock now
+[00:01:49] uh well whatever it was yesterday and
+[00:01:51] then i took a second trade on it and
+[00:01:53] lost
+[00:01:54] 15 000 so i went from up 15 to down 10.
+[00:01:57] took one more trade was down 16. took
+[00:01:59] one more trade was down 21
+[00:02:01] took one more trade was down 26 and with
+[00:02:04] that i was below my max loss which is
+[00:02:06] set at 25 000
+[00:02:08] on the day so yeah that was kind of
+[00:02:12] discouraging
+[00:02:12] um i could have stopped sooner i mean
+[00:02:16] again you know that that rule and i said
+[00:02:18] this yesterday that rule of if you get
+[00:02:20] back half your profit just stop right
+[00:02:21] there i could have walked away up 5
+[00:02:23] 000. of course that would have been
+[00:02:25] walking away at 9
+[00:02:26] 32 which is a little early which is why
+[00:02:29] i said i'll get you know i'll give this
+[00:02:31] some time i kept trading and then i was
+[00:02:33] red and then i tried to
+[00:02:35] recoup the loss and went deeper into the
+[00:02:38] red
+[00:02:40] so you know that's part of trading
+[00:02:42] that's that's the way it goes i
+[00:02:43] will give myself a pat on the back for
+[00:02:45] having the discipline
+[00:02:47] to stop where i stopped i did not
+[00:02:49] continue trading once i i didn't you
+[00:02:51] know
+[00:02:52] i didn't call lightspeed and say hey can
+[00:02:53] you guys increase my max loss for today
+[00:02:55] so i can
+[00:02:56] you know keep trading when i was down uh
+[00:02:59] 26 000
+[00:03:01] which i've done in the past so i am
+[00:03:04] glad that i you know
+[00:03:07] stuck with that um you know the loss was
+[00:03:10] what it was
+[00:03:11] and for some reason it's giving me a
+[00:03:13] hard time on my import here what
+[00:03:15] was this ira account let's see
+[00:03:18] um it looks like
+[00:03:22] trey um trader view is like timing out
+[00:03:27] getting a browser error so
+[00:03:30] whatever um oh there it goes maybe that
+[00:03:33] was just an issue on my side
+[00:03:36] all right so let me refresh this and
+[00:03:38] we'll we'll see where we finished
+[00:03:40] so um
+[00:03:43] all right so this is where i sit on the
+[00:03:46] month
+[00:03:46] right now after yesterday
+[00:03:50] um two red days all things considered
+[00:03:54] you know glass is half full i had i had
+[00:03:57] a 268 thousand
+[00:03:59] red day in february i still finished the
+[00:04:01] month in the green
+[00:04:02] so and i had a 66 000
+[00:04:06] red day in january i was really proud of
+[00:04:09] the fact that my biggest red day was
+[00:04:10] only 5 000
+[00:04:11] but well now it's 26 but even still
+[00:04:14] that's that's not bad
+[00:04:15] so let's see where we sit on the month
+[00:04:16] this is gross profit
+[00:04:19] uh let's see so sitting on the month
+[00:04:23] right now um well 206 000 in gross
+[00:04:27] profit that's
+[00:04:29] good uh 233 then down to 206.
+[00:04:34] so my draw down here is 26 000 right so
+[00:04:37] we know that
+[00:04:38] uh profit loss ratio not great largest
+[00:04:41] loss 46
+[00:04:42] 000 god biggest winner
+[00:04:45] 63. well
+[00:04:49] i don't know this
+[00:04:52] you swing big and it's gonna happen
+[00:04:54] anyways still good so net profit after
+[00:04:56] fees and commissions is 175.
+[00:04:59] hey halfway through the month that's not
+[00:05:01] bad so i'll
+[00:05:03] i'll take it don't want to not be
+[00:05:05] grateful for what i've got there
+[00:05:07] and where that puts me on the year will
+[00:05:10] be
+[00:05:11] let's see we'll do net and gross 1.29
+[00:05:16] and 1.49 net and gross
+[00:05:20] so yeah biggest winner 141 biggest loser
+[00:05:23] 243
+[00:05:30] well yeah i'm still a little i'm still a
+[00:05:32] little
+[00:05:33] a little annoyed about this but let's
+[00:05:36] you know
+[00:05:38] let's just put that behind me for right
+[00:05:39] now okay so
+[00:05:41] all right so i'm going to close that
+[00:05:42] down let's see
+[00:05:49] thank you guys by the way tuning in on
+[00:05:51] youtube and facebook
+[00:05:52] um so we're coming right into
+[00:05:55] 9 a.m i am hoping that there'll be some
+[00:05:58] news maybe that comes out right at nine
+[00:06:01] uh i'll see maybe something pop up on
+[00:06:03] the high day momo scanner right here
+[00:06:05] but you know to be honest right now
+[00:06:08] canf is our leading gapper but it's
+[00:06:11] feels like a very
+[00:06:12] thickly traded stock it's
+[00:06:15] gosh i i i mean kind of like check was
+[00:06:18] it check from yesterday um
+[00:06:20] so the high a day is 407
+[00:06:23] but this feels even even bigger i mean
+[00:06:25] it feels like a big float
+[00:06:27] so let me just check on finvis just
+[00:06:30] do a double check on the float
+[00:06:34] ca f so
+[00:06:37] they're saying 15 million shares as well
+[00:06:39] so
+[00:06:41] but it doesn't feel like that so why is
+[00:06:43] that
+[00:06:44] higher levels of algorithmic trading on
+[00:06:47] this maybe
+[00:06:49] i i don't know i'm not sure what else
+[00:06:53] i would attribute it to um
+[00:06:58] i really don't i'm not sure it's got a
+[00:07:01] lot of volume
+[00:07:02] the volume is great that's not the
+[00:07:03] problem the problem is just that
+[00:07:05] um it's just very thickly traded and so
+[00:07:09] i can visualize that right on the level
+[00:07:11] too see all that huge stack of sellers
+[00:07:13] big stack of sellers big stack of
+[00:07:14] sellers in 97.
+[00:07:16] so the fact that it looks that stacked
+[00:07:18] up is what's telling me it
+[00:07:20] seems too thick
+[00:07:24] so the problem on stock like that and
+[00:07:26] this is a problem yesterday is that i
+[00:07:27] end up
+[00:07:28] generating a lot of commissions on my
+[00:07:31] trades
+[00:07:31] and so then that ends up making
+[00:07:33] potentially a red day
+[00:07:35] even redder of course it did yesterday
+[00:07:38] but also you know it sets your
+[00:07:41] kind of break even a bit higher because
+[00:07:45] realistically when you're just churning
+[00:07:47] shares for two cents it's not really
+[00:07:49] it's not really covering a lot of profit
+[00:07:54] gamestop yeah you know i didn't really
+[00:07:55] look at this one yesterday but
+[00:07:57] it does look like there was a sell-off
+[00:07:59] around noon time a pretty sharp one from
+[00:08:01] 270
+[00:08:02] down to 220 but then look at those
+[00:08:04] bounces you know
+[00:08:05] those bounces are nice you just don't
+[00:08:07] want to get in too early i guess
+[00:08:10] some of those bounces have been really
+[00:08:11] good but i've also
+[00:08:13] you know taken some good losses on
+[00:08:15] gamestop bounces so
+[00:08:17] i don't know i'm i'm
+[00:08:21] i'm not super interested in gamestop
+[00:08:23] right now
+[00:08:24] unless they're it's trading with some
+[00:08:26] type of fresh catalyst like news of some
+[00:08:28] type
+[00:08:29] i just don't know that i want to trade
+[00:08:30] it in this range
+[00:08:37] let's see
+[00:08:52] okay
+[00:08:54] so leading gapper ca f this morning
+[00:09:00] again like i said
+[00:09:03] signs 42 million out of licensing deal
+[00:09:14] it's an american stock exchange stock
+[00:09:18] but so that could have some issues
+[00:09:21] nicely and mx stocks have had some
+[00:09:24] issues with
+[00:09:24] the halts
+[00:09:28] but i i don't see this just yet being
+[00:09:30] quite
+[00:09:32] juicy enough for a trade but i'll keep
+[00:09:34] it on watch and and you know
+[00:09:36] well the high is 407 so you know if it
+[00:09:38] gets over that level
+[00:09:40] um
+[00:09:43] ssy is our second leading gapper with a
+[00:09:45] 3 million share
+[00:09:46] float this one is currently below the
+[00:09:48] volume weight average price
+[00:09:55] so i'd wait for it to get above that
+[00:10:02] level
+[00:10:04] see some breaking news at 9 00 a.m
+[00:10:08] aesc headline there esports
+[00:10:12] popping up a little bit but very light
+[00:10:14] [Music]
+[00:10:16] volume
+[00:10:19] 350 is really the spot it needs to break
+[00:10:24] can f up there to 407 so now it's a
+[00:10:27] double top
+[00:10:31] it's pulling back again if it breaks
+[00:10:34] below 4 then that
+[00:10:35] certainly looks weak there's 402 on the
+[00:10:37] bid
+[00:10:39] 403 404.
+[00:10:46] 402 401
+[00:10:50] 4. can i hold four no back to 97
+[00:10:54] it's you know it's a battle it's a
+[00:10:56] struggle
+[00:10:57] in these areas
+[00:11:04] there's not enough it's not moving
+[00:11:07] enough yet
+[00:11:08] to really i don't think generate a
+[00:11:10] substantial
+[00:11:12] profit i don't know for me at this point
+[00:11:15] i'm just kind of waiting
+[00:11:21] looking for something better uh ruby
+[00:11:24] yesterday
+[00:11:25] you know for what it's worth this made a
+[00:11:26] huge move was on the gap scanner
+[00:11:29] and look at that move from 22 all the
+[00:11:31] way up to 37.
+[00:11:33] pulled back quite a bit
+[00:11:36] uh but it's hanging out around 30 20
+[00:11:38] well 28 to 30. if it breaks over this
+[00:11:43] pivot here around
+[00:11:44] 30
+[00:11:47] 32 50 ish i don't know you might get a
+[00:11:51] second day of continuation but
+[00:11:54] it's risky stuff there you're gonna have
+[00:11:56] big spreads that price range enz
+[00:11:59] stair stepping down so we can see the
+[00:12:01] descending resistance
+[00:12:02] pretty visually here you know it's just
+[00:12:04] kind of stair stepping down
+[00:12:07] svra 53 million share float amvs
+[00:12:12] higher priced but has a look
+[00:12:15] similar to ruby yesterday right it kind
+[00:12:17] of has that
+[00:12:18] it's at all time highs look like ruby
+[00:12:20] had
+[00:12:23] it looks like so ruby's a therapeutics
+[00:12:25] company
+[00:12:26] uh let's see a nvs
+[00:12:31] announces positive phase two data
+[00:12:38] you know i i don't know it's lighter on
+[00:12:42] and higher price so right now it's not
+[00:12:44] something i
+[00:12:45] probably go for but you know we'll see
+[00:12:48] as we get closer
+[00:12:49] to the open or into regular trading
+[00:12:51] hours
+[00:13:00] i'll turn my audio up a little bit i
+[00:13:02] just don't want the gain too high
+[00:13:08] maybe i'll try to turn it up here
+[00:13:11] we'll see if that helps um
+[00:13:26] let's just move this piece of tape these
+[00:13:28] are just the audio settings i was using
+[00:13:30] for the class so i
+[00:13:31] i want to make sure i the classes are
+[00:13:34] consistent
+[00:13:42] hang on
+[00:13:59] a little more cowbell all right we'll
+[00:14:00] see we can do on that
+[00:14:05] so top of the gap scan hang on
+[00:14:13] top of the gap scan
+[00:14:16] is still ca f you can see the gap
+[00:14:18] scanner here in the corner this is the
+[00:14:20] gap scan
+[00:14:22] so top of the gap scan canf
+[00:14:26] up currently
+[00:14:29] 93
+[00:14:33] 94
+[00:14:38] eric
+[00:14:45] so we do have a double top on canf you
+[00:14:47] know we may start to get into an
+[00:14:49] area where if i can draw an ascending
+[00:14:52] support line
+[00:14:54] a safer trade that would give at least
+[00:14:56] for me a little bit more range would be
+[00:14:58] a probably tap of this level which would
+[00:15:01] be approximately
+[00:15:03] like 385 maybe 390 but we'll see
+[00:15:10] good morning rambo
+[00:15:32] girl come on
+[00:15:51] uh tc2000 bob would be pretty good
+[00:15:54] software for a beginner trader it's it's
+[00:15:56] good software
+[00:15:57] uh it it runs well they don't have 10
+[00:16:00] second charts
+[00:16:01] as far as i'm aware yet it wouldn't
+[00:16:02] surprise me if they add them but at some
+[00:16:04] point but they don't have them yet
+[00:16:12] so this is a little premature for me i'm
+[00:16:15] i'm not quite ready for that
+[00:16:16] trade still waiting for a better setup
+[00:16:28] yeah let's see
+[00:16:32] so the good thing about this with 40
+[00:16:34] million shares of volume
+[00:16:35] is that it'll certainly accommodate
+[00:16:37] larger positions for those that
+[00:16:39] have the risk tolerance for it it's just
+[00:16:42] a matter i think at this point of kind
+[00:16:43] of waiting for the setup to
+[00:16:45] form a little bit better
+[00:16:48] those tuning in on youtube and facebook
+[00:16:50] hit the thumbs up please if you haven't
+[00:16:52] already
+[00:16:52] i'm gonna put up my disclaimer uh in
+[00:16:54] case you haven't already seen it
+[00:16:56] as a reminder that day trading is risky
+[00:16:58] most beginner traders lose money
+[00:16:59] so you should assume as a beginner
+[00:17:01] trader out there on youtube facebook
+[00:17:02] wherever you will also lose
+[00:17:03] money with that assumption in mind do
+[00:17:06] yourself a favor
+[00:17:07] and trade in a simulator before you put
+[00:17:09] real money on the line prove that you
+[00:17:10] have what it takes to be profitable
+[00:17:13] if you can't make money in a simulator
+[00:17:15] then you know i don't know it
+[00:17:17] doesn't really make sense to trade live
+[00:17:19] now having said that
+[00:17:21] i know i i think i did of
+[00:17:24] out of all the um trader interviews i
+[00:17:26] did in the last
+[00:17:28] two weeks um
+[00:17:32] i think maybe only one or two of them
+[00:17:35] actually did use a simulator so i get
+[00:17:37] that a lot of people
+[00:17:38] jump in there with real money and i just
+[00:17:41] want to encourage you to be really
+[00:17:42] careful
+[00:17:43] because with trading it's easy come easy
+[00:17:46] go
+[00:17:48] all right so ca f kind of watching this
+[00:17:53] i'm going to take a starter there but i
+[00:17:55] i don't know it feels like it's kind of
+[00:17:56] ascending
+[00:17:58] it's a one minute pullback right there
+[00:18:01] so now on that one-minute pullback
+[00:18:04] i was wait i was hoping it would set up
+[00:18:06] a little bit more but i'm going to hold
+[00:18:08] this now
+[00:18:09] and let's see if i can get a trade over
+[00:18:11] like 415. let's let's see if this is the
+[00:18:13] place where it starts to open up a bit
+[00:18:15] more
+[00:18:17] so i'm in at 404. the high of this
+[00:18:19] candle is 412
+[00:18:21] so now over 412 i'll add there at 410.
+[00:18:24] so adding it 410 and then i'll put my
+[00:18:28] next order at 419.
+[00:18:31] so this is a breakout and the first one
+[00:18:33] minute pullback after a fresh breakout
+[00:18:35] i'll look to buy up the dip on
+[00:18:38] so this right now 414
+[00:18:42] 415 we'll see if this gives us another
+[00:18:46] opportunity
+[00:18:47] you can see my position right here i'm
+[00:18:49] in at 407 and i'm looking to add over
+[00:18:51] 414 415
+[00:18:55] this is sort of similar to ch ek was
+[00:18:57] that it yesterday
+[00:19:02] in in that as we're getting a little
+[00:19:05] closer to the open we're starting to see
+[00:19:09] the breakout here so this is the first
+[00:19:10] pullback
+[00:19:13] so i'm watching this for the ad
+[00:19:16] i'm adding at 12 right there
+[00:19:19] i'm trying to buy the dip for the first
+[00:19:21] candle to make a new high and let's see
+[00:19:23] if this wants to ascend
+[00:19:24] up to 425 430
+[00:19:29] it's a five minute breakout so now it's
+[00:19:31] just kind of just let it work
+[00:19:33] do we get 16 there's 16 do we get 17
+[00:19:37] and 18 you know as it goes higher
+[00:19:40] just keep riding that momentum
+[00:19:44] we've got 45 million shares of volume
+[00:19:46] which is good we've got
+[00:19:47] a lot of volume on it new order for me
+[00:19:49] is it 420.
+[00:19:52] so there's different ways to trade this
+[00:19:54] one way is to get in get out get in get
+[00:19:56] out and other ways to kind of
+[00:19:57] buy and hold and then there's the way
+[00:19:59] that i'm doing it right now which is to
+[00:20:00] get in
+[00:20:01] and then to add into the breakout so i'm
+[00:20:04] looking at continue
+[00:20:05] adding on this for 420 425
+[00:20:09] there's a big buyer see i'm going to add
+[00:20:10] right there so we just got a big buyer
+[00:20:12] on this
+[00:20:13] over 100 000 shares there was on the bid
+[00:20:16] at i think it was 15.
+[00:20:18] that's something i really like to see so
+[00:20:19] that tells me that someone is stepping
+[00:20:21] up to the plate with a big order
+[00:20:23] so now let's see if we squeeze up over
+[00:20:25] 20 22 23 24.
+[00:20:28] holding this right now looking for the
+[00:20:30] break of 25.
+[00:20:34] let it dip down on a dip i can always
+[00:20:37] add
+[00:20:44] so let's look for that break over 420
+[00:20:47] first pull back
+[00:20:49] back of my target on this would be up
+[00:20:50] towards 450.
+[00:20:55] so there's 19 on the ask
+[00:21:00] there's 20. i want to see 25. i haven't
+[00:21:02] taken any off the table yet i'm looking
+[00:21:04] for the break of 425.
+[00:21:11] so we've got a high of this candle of 22
+[00:21:13] over 22
+[00:21:15] potentially could be another ad but
+[00:21:16] let's just see what this does there's a
+[00:21:18] 200 000 share buyer at 18.
+[00:21:20] so now that buyer is moving up that's
+[00:21:23] awesome
+[00:21:24] that's what i like to see there's 23.
+[00:21:29] do we get 24 i'm going to size down a
+[00:21:31] little bit
+[00:21:32] take a little off the table at 20 and
+[00:21:34] 18. you can see 6 000 in profit there
+[00:21:37] and now let's see if we get the break
+[00:21:38] over 20. realistically
+[00:21:41] i'm taking a little more off the table
+[00:21:43] down to 4 000 shares
+[00:21:46] so let's see what happens at 18. does
+[00:21:48] that buy or hold
+[00:21:49] no so that buyer so someone did just buy
+[00:21:54] 200 000 shares at 418 because you saw
+[00:21:57] the sell order
+[00:21:58] and the buy order got filled so now
+[00:22:01] who's
+[00:22:01] buying 200 000 shares 200 000 shares of
+[00:22:05] this
+[00:22:06] at 4 18.
+[00:22:09] it's up 100 percent so someone's buying
+[00:22:13] that because
+[00:22:15] they believe it's gonna go higher or
+[00:22:18] someone's covering a short position at a
+[00:22:20] loss
+[00:22:21] maybe we don't know we we don't know
+[00:22:24] but ultimately you know that's certainly
+[00:22:27] something that
+[00:22:29] makes us scratch our heads so you've got
+[00:22:31] a high a day of 23.
+[00:22:33] because we didn't get that break at 25 i
+[00:22:35] took some profit on that off the table
+[00:22:38] and now i'm gonna let it do its pullback
+[00:22:40] so this is going to be
+[00:22:41] potentially the first proper one-minute
+[00:22:46] um if you were short you probably
+[00:22:50] wouldn't cover on
+[00:22:51] um without you probably wouldn't cover
+[00:22:54] 200 000 shares
+[00:22:56] without hiding your order but
+[00:22:59] maybe you would you might cover on the
+[00:23:01] bid just like i try to sell on the ask
+[00:23:04] even at a losing position i'd still try
+[00:23:05] selling the ass to get the best price so
+[00:23:08] you might still
+[00:23:09] cover on the bid but
+[00:23:15] anyway so watching here so adding back
+[00:23:19] there at 19.
+[00:23:20] so going back in here for the
+[00:23:21] breakthrough 23
+[00:23:24] i'm looking for this to break this uh
+[00:23:27] first one minute pullback and adding
+[00:23:30] there at 22. so looking for 23
+[00:23:32] 24 25 watching over 25
+[00:23:36] can we get the break of 25 then 26 27
+[00:23:39] and that ascension up towards the 30s
+[00:23:43] so there's 24 there's 25
+[00:23:47] there's 27 nice so taking a little off
+[00:23:50] the table there at 25
+[00:23:53] again realistically we're talking about
+[00:23:57] four or five cents a share but
+[00:24:03] you know that's that works
+[00:24:07] so i'm going to sell the rest of it
+[00:24:08] there 23. it it this is looking like a
+[00:24:11] false breakout i'll let it pull back
+[00:24:12] again for now so
+[00:24:16] was that put me 10 500 bucks
+[00:24:19] but my commissions are going to be
+[00:24:21] brutal i mean i'm going to get
+[00:24:23] my commissions on this are going to be
+[00:24:25] through the roof
+[00:24:26] there's no question about that it's
+[00:24:28] because it's cheap and
+[00:24:29] the only way to make ten thousand
+[00:24:31] dollars is to take bigger size
+[00:24:34] so let it pull back that is a false
+[00:24:37] breakout candle
+[00:24:38] it hit 27 but then sort of started to
+[00:24:44] falter up there so we've got a high of
+[00:24:46] 27 my new order will go at 28.
+[00:24:50] at this point this could pull back all
+[00:24:52] the way down to 407 but
+[00:24:54] it needs to hold 407.
+[00:24:57] so if it can hold 407 then the previous
+[00:25:01] resistance will be new support
+[00:25:04] okay so that's what we'd like to see the
+[00:25:06] new support at 407.
+[00:25:08] so if it comes down to 407 i could do a
+[00:25:10] dip trade off that level
+[00:25:13] so that would be right around here and i
+[00:25:15] might i mean you know let's
+[00:25:16] just watch it this this could be the
+[00:25:17] beginning of a five minute pullback
+[00:25:19] and it's also possible that it does um
+[00:25:32] uh it's also possible that it does pull
+[00:25:34] back a little bit longer
+[00:25:35] we have 13 minutes to the bell
+[00:26:36] do
+[00:27:00] all right so let's see
+[00:27:06] we've got 51 million shares of volume on
+[00:27:09] this which is good
+[00:27:23] by the way i thank you guys on youtube
+[00:27:25] who have subscribed to the channel we
+[00:27:27] have
+[00:27:28] 809 000 subscribers now which is
+[00:27:31] fantastic
+[00:27:32] so really appreciate you guys hitting
+[00:27:34] that subscribe button
+[00:27:37] the goal this year is one million
+[00:27:39] subscribers
+[00:27:40] so we've got 181 000 to go
+[00:27:46] we will not get there without you guys
+[00:27:48] hitting the thumbs up
+[00:27:50] subscribing and sharing with some
+[00:27:52] friends so thank you guys for doing that
+[00:28:13] i don't know about that jay he's i think
+[00:28:16] he's got a lot more subscribers than me
+[00:28:21] okay so we've got this red candle but
+[00:28:24] it's on lighter volume we've got 10
+[00:28:25] minutes to the bell
+[00:28:26] the low of this dip is 409
+[00:28:32] so this when we if you have warrior pro
+[00:28:35] students and i hope you do
+[00:28:37] printed out examples of perfect bull
+[00:28:39] flags
+[00:28:40] this is not how perfect bull flag starts
+[00:28:44] a perfect bull flag doesn't have a false
+[00:28:46] breakout on the one minute
+[00:28:49] and therefore doesn't have a high of day
+[00:28:52] that's a red candle
+[00:28:54] so the hive day candle on this is red
+[00:28:57] however
+[00:28:58] it is on lighter volume so if it was on
+[00:29:01] heavy volume that would indicate
+[00:29:03] a higher high well more selling whether
+[00:29:06] it's short selling or just selling in
+[00:29:07] general
+[00:29:08] if it was high a day volume and the high
+[00:29:10] day volume was a red candle then i would
+[00:29:12] be very cautious
+[00:29:13] the high day volume the high day candle
+[00:29:15] is red but it's not a high volume candle
+[00:29:18] it's it's a little tricky there um but
+[00:29:21] for that reason
+[00:29:22] like if this candle just goes up green
+[00:29:24] and breaks the high that would look very
+[00:29:26] strange
+[00:29:27] all of a sudden it would just be a green
+[00:29:29] candle that completely
+[00:29:32] recoups all of what that red candle was
+[00:29:34] that would be odd
+[00:29:36] so what is probably the next best setup
+[00:29:39] would be
+[00:29:40] that this candle closes so let's just
+[00:29:42] say it closes right here with a high of
+[00:29:44] 413 and that the next candle
+[00:29:46] that opens which will begin at 9 25
+[00:29:48] because it's every 5 minutes the candles
+[00:29:50] close
+[00:29:51] so at 9 25 the next candle opens and
+[00:29:53] then that first candle will make a new
+[00:29:54] high at that time
+[00:29:55] breaks over 413 and then we get to move
+[00:29:57] higher but it's still a tricky red
+[00:29:59] candle it's still right there
+[00:30:00] so then we may end up having to look
+[00:30:03] more at
+[00:30:04] like an abcd setup where the next candle
+[00:30:07] kind of moves up and not all the way up
+[00:30:09] then pulls back and then it goes up
+[00:30:10] higher you know and that's
+[00:30:13] that's fine but all that's gonna take
+[00:30:14] more time especially since we only have
+[00:30:16] eight minutes to the bell
+[00:30:19] so i'm not buying the first one minute
+[00:30:21] candle to make a new high on this
+[00:30:22] because
+[00:30:23] false breakout and at this point i feel
+[00:30:26] that i really need to wait for a five
+[00:30:27] minute setup
+[00:30:29] now as it turns out that first one
+[00:30:30] minute kill to make a new high of 413
+[00:30:32] right there
+[00:30:33] did pop up to 416 but
+[00:30:36] you know that's not the biggest move
+[00:31:02] thomas
+[00:31:06] there was a german exchange student
+[00:31:09] named tomas when i was in
+[00:31:10] uh high school
+[00:31:20] so uh tomas i
+[00:31:24] actually sent you an email um he just
+[00:31:26] got his
+[00:31:28] 50k club badge which is great and let's
+[00:31:32] see we have
+[00:31:32] let me go look at this we have two other
+[00:31:34] students
+[00:31:36] that um uh
+[00:31:39] he mang and gosh i don't know how to
+[00:31:42] pronounce your first name
+[00:31:47] is that a sign is that a silent t or a
+[00:31:49] silent z
+[00:31:55] either way uh i'm proud of you good job
+[00:31:58] so um nice work so you guys uh submitted
+[00:32:01] your broker statements
+[00:32:02] and you both so we now have three new
+[00:32:05] students two with 100k badges and one
+[00:32:07] with 50k badge
+[00:32:09] so good work as always when i talk about
+[00:32:11] my gains my results are not typical and
+[00:32:13] that's going to be the same for students
+[00:32:15] our members the 100k club it's a
+[00:32:16] voluntary club and we
+[00:32:18] are so happy for those that choose to
+[00:32:21] share with us your broker statements to
+[00:32:23] get that badge
+[00:32:24] i saw someone typed the other day said
+[00:32:26] out i'm i'm past 100k but i'm not going
+[00:32:28] to bother submitting
+[00:32:30] for a badge my membership ends next
+[00:32:33] month i just don't really care
+[00:32:35] well that's kind of you know i guess
+[00:32:37] he's going to move on and that's that's
+[00:32:38] fine
+[00:32:39] um i think it will maybe said that but
+[00:32:42] in any case um you know i know not
+[00:32:45] everyone's going to do it but
+[00:32:46] i i we love it we love seeing it and you
+[00:32:48] get that badge of honor so
+[00:32:50] good for you that's awesome
+[00:32:55] let's see um
+[00:33:06] yeah it looks like um tomas
+[00:33:09] has been a member since june
+[00:33:12] and herman's been a member also since
+[00:33:15] about june
+[00:33:17] and za has been or
+[00:33:20] ta has been a member um
+[00:33:23] for about a year and a half
+[00:33:39] so keep up the hard work keep your head
+[00:33:41] down it's a marathon
+[00:33:42] not a sprint
+[00:33:50] nice danny good work
+[00:33:57] let's see anyone uh that has not
+[00:34:01] that does have uh the statements and
+[00:34:03] would like to get a badge i'll just put
+[00:34:05] the link
+[00:34:05] there for the 50k or
+[00:34:08] the 100k badge those are the the two
+[00:34:12] well we also have the one million but uh
+[00:34:15] presumably you would have already had
+[00:34:16] one of the other ones
+[00:34:20] yep slow and steady nice sandra
+[00:34:23] you'll get there you'll get there just
+[00:34:24] keep it up keep your head down
+[00:34:26] good work you can have bumps in the road
+[00:34:30] we all do but
+[00:34:31] you're making some progress so that's
+[00:34:35] well we've got about four minutes to the
+[00:34:36] bell here it looks like this had a
+[00:34:38] first five minute candle kind of make a
+[00:34:40] new high and
+[00:34:41] is a false breakout so
+[00:34:46] we're i don't know looking a lot like
+[00:34:52] i certainly don't want to go red the way
+[00:34:54] i did yesterday
+[00:34:57] i could just take the ten thousand off
+[00:34:58] the table here and say hey i
+[00:35:01] you know made back some of what i lost
+[00:35:02] yesterday but of course it's only 9.26
+[00:35:06] let's let's see what the market is
+[00:35:08] willing to give us
+[00:35:09] we know at the open ch ek did fade
+[00:35:14] cinf may fade as well
+[00:35:19] but i'll i'll keep it up on my chart ssy
+[00:35:24] you know it's it's a setup that i'm not
+[00:35:26] really sure about because it's below the
+[00:35:41] nice joey thank you good work
+[00:35:48] five million shares of volume on ssy
+[00:35:59] all right so two and a half minutes to
+[00:36:00] the bell a few trades on
+[00:36:03] uh ca f we'll see if we can keep it up
+[00:36:07] and find a little momentum once the bell
+[00:36:09] rings
+[00:36:10] ruby for those who like the higher
+[00:36:12] priced stocks
+[00:36:14] maybe worth watching does kind of have a
+[00:36:18] a little bit of a look to it back over
+[00:36:20] 30 but
+[00:36:21] i just don't think i can trust it so i
+[00:36:24] got to stick with the
+[00:36:25] lower price stuff today that i'm a
+[00:36:28] little more familiar with and
+[00:36:30] try to just have a green day after being
+[00:36:31] read yesterday that's that's probably
+[00:36:33] what's most important right now
+[00:36:36] all right so that's the game
+[00:36:40] plan 100 let's see
+[00:36:43] uh 12 000 share seller at 54 on ssy
+[00:36:47] you can see so this is the break of the
+[00:36:48] v web sometimes we'll take that trade
+[00:36:51] um if i miss the break of the v whap
+[00:36:54] then i wait for the first pullback
+[00:36:56] because what will sometimes happen is
+[00:36:57] they'll break and then they'll
+[00:36:59] sort of violently reverse and go back
+[00:37:01] below the v
+[00:37:02] web so it needs to break and hold above
+[00:37:05] it so on a retest
+[00:37:07] like that dip right down there to 50 you
+[00:37:10] know now all of a sudden this looks like
+[00:37:11] it's got topping tail but you know let's
+[00:37:13] see how it closes
+[00:37:15] so i wait for it to retest and then
+[00:37:17] after the bell rings
+[00:37:18] maybe i'll put an order just at four
+[00:37:20] dollars and we'll see if that one gives
+[00:37:22] us another opportunity
+[00:37:23] all right um youtube facebook i'm gonna
+[00:37:25] put up my disclaimer as a reminder as
+[00:37:26] always
+[00:37:27] day trading is risky most beginner
+[00:37:29] traders lose money so
+[00:37:31] trade with caution and i will see you
+[00:37:33] guys first thing tomorrow morning again
+[00:37:35] for the morning show hit the thumbs up
+[00:37:37] if you haven't already
+[00:37:38] and tune in tomorrow if you subscribe to
+[00:37:41] the channel you should get a
+[00:37:42] notification when i go live
+[00:37:44] sometimes i go live early 8 8 30 other
+[00:37:46] times not till 8 45 or 9
+[00:37:48] so if you're subscribed you'll get the
+[00:37:50] notification either way
+[00:37:53] got about 30 seconds to the bell

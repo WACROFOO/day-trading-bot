@@ -1,0 +1,802 @@
+# [LIVE] +$1.4k on $SST Live Stock Trading - DAY TRADING with Ross!
+# https://www.youtube.com/watch?v=RdPUySF1gFY
+# upload_date: 20220408
+# duration_sec: 2112
+
+[00:00:24] all right good morning everyone
+[00:00:25] well it's about uh
+[00:00:27] 8
+[00:00:28] 54. and
+[00:00:30] i'm sitting down here looking at a
+[00:00:33] sort of slow gap scanner for friday
+[00:00:36] morning not a lot of breaking news thank
+[00:00:38] you folks who are tuning in on
+[00:00:40] youtube appreciate you joining us for
+[00:00:42] the morning show remember as soon as you
+[00:00:44] get logged in hit that thumbs up makes a
+[00:00:46] huge difference for the channel today
+[00:00:48] i'm going to break down the watch list
+[00:00:50] what i'm looking at i'm going to give
+[00:00:52] you a walkthrough of how i find stocks
+[00:00:54] to trade i may even take some live
+[00:00:56] trades during the broadcast i'm a
+[00:00:58] momentum day trader so anything i trade
+[00:01:00] will be quick trades and
+[00:01:03] we'll look to
+[00:01:04] get in
+[00:01:06] add ad profit at ad profit so assume
+[00:01:09] that i'm actively trading i'm not a
+[00:01:11] long-term investor i'm not going to be
+[00:01:12] holding anything for uh hours or days or
+[00:01:16] certainly weeks or months these are
+[00:01:18] quick trades
+[00:01:19] i encourage you to trade cautiously and
+[00:01:21] don't try to blindly follow me or anyone
+[00:01:22] else youtube by default uh the broadcast
+[00:01:25] is delayed we do run an ultra low
+[00:01:27] latency broadcast for
+[00:01:29] members over at warrior trading you're
+[00:01:31] welcome to join if you'd like if you
+[00:01:33] want to be on youtube that's fine too
+[00:01:34] but uh just be mindful that youtube
+[00:01:36] broadcast is a bit
+[00:01:39] a bit delayed
+[00:01:41] uh thanks um
+[00:01:43] so let me i'm just gonna give that to my
+[00:01:46] um
+[00:01:47] pass that on pass that message on
+[00:01:50] let's see
+[00:02:00] okay um
+[00:02:04] so let's see uh so this morning as i sit
+[00:02:06] down
+[00:02:07] again just to
+[00:02:09] let's just start with basics every day
+[00:02:11] there's a market here
+[00:02:13] the u.s stock market and there are
+[00:02:15] thousands of stocks to trade
+[00:02:17] how in the world do you find one or two
+[00:02:20] well what i'm going to do is i'm going
+[00:02:21] to look at my gap scanner
+[00:02:23] i had a development team build this for
+[00:02:24] me
+[00:02:26] so this is my own software
+[00:02:28] and
+[00:02:29] this scanner is searching the us market
+[00:02:32] and it's filtering all the stocks it
+[00:02:34] searches the entire market and it gives
+[00:02:36] me back this list here of stocks and the
+[00:02:39] top of the list it's sorted by gaap
+[00:02:41] so all
+[00:02:42] it's a little bit bigger stored by gaap
+[00:02:44] so i can go gap down or i can go gap up
+[00:02:47] and my biggest gap the leader this
+[00:02:49] morning is mdvl
+[00:02:52] so mdvl is a stock this morning up 37
+[00:02:56] now the move started it looks like uh
+[00:02:58] yesterday and continued after hours and
+[00:03:00] it's actually pulling back a little bit
+[00:03:02] right here so when i look at this chart
+[00:03:04] i can realize that
+[00:03:06] this isn't really probably my
+[00:03:08] favorite chart pattern it's
+[00:03:11] actually not that interesting to me so
+[00:03:13] i'm probably just gonna
+[00:03:14] not trade this one unless it gets over
+[00:03:17] the pre-market pivot which is right here
+[00:03:19] around
+[00:03:20] uh 220 and then up here around 240
+[00:03:24] but even so i'm not sure we'll see okay
+[00:03:26] so second leading gapper in the entire
+[00:03:28] market is bwv now this is what we call a
+[00:03:30] dead cat bounce sold off 80 yesterday
+[00:03:34] bouncing off the low not really a big
+[00:03:35] fan of that setup
+[00:03:37] i'll trade it occasionally i'd prefer to
+[00:03:39] trade front side of the move clean
+[00:03:40] momentum backside or
+[00:03:44] dead cat bounce not my favorite so i'm
+[00:03:46] going to leave this one here
+[00:03:49] and move to the next one ndra gapping up
+[00:03:52] 25
+[00:03:54] moving down the gap scanner just a
+[00:03:56] little bit 43 million share float so
+[00:03:58] that's the number of shares available to
+[00:04:00] trade that represents our supply
+[00:04:02] these everything in these columns
+[00:04:05] depending on where you're at in your
+[00:04:07] trading are worth looking at
+[00:04:09] so
+[00:04:10] we've got uh
+[00:04:14] so we've got float the float is uh the
+[00:04:16] number of shares available to trade
+[00:04:18] higher float stocks certainly really
+[00:04:20] high float stocks like tesla or facebook
+[00:04:23] bank of america they're pretty much
+[00:04:25] never going to be on this scanner
+[00:04:26] because they're never they're almost
+[00:04:27] never going to be gapping up seven eight
+[00:04:29] nine ten percent it's very very rare
+[00:04:32] the type of stocks that will be on the
+[00:04:33] scanner are usually small cap smaller
+[00:04:36] companies
+[00:04:37] uh moving up usually on some type of
+[00:04:39] news
+[00:04:41] so that's uh ndra but it's a little
+[00:04:43] cheap for me uh
+[00:04:45] 56 cents right now going down one more
+[00:04:48] bfri bfri is uh gapping up 23
+[00:04:53] priced at five
+[00:04:54] dollars and it's actually one that we've
+[00:04:57] traded before
+[00:04:58] it was a blue sky setup and that means
+[00:05:01] it had no resistance when it was
+[00:05:02] squeezing up there to a high of 14. this
+[00:05:04] is the back side of that move not as
+[00:05:06] interested in trading it on the back
+[00:05:08] side of the move would have to move up
+[00:05:09] quite a bit more
+[00:05:13] ater is a 60 million share float
+[00:05:17] i color coordinate this so lower floats
+[00:05:20] catch my eye a little bit more than the
+[00:05:22] higher floats
+[00:05:24] uh sst
+[00:05:26] this one i already have a trade on you
+[00:05:28] can see i'm up 1469.78
+[00:05:33] and on this one
+[00:05:34] my trade was the breakthrough
+[00:05:38] uh right here that started to curl up
+[00:05:40] and so you know we got a trade there but
+[00:05:42] it wasn't wasn't like a home run by any
+[00:05:44] means but
+[00:05:45] you know that's okay
+[00:05:47] the thing on this one
+[00:05:49] it's a little tricky because it had this
+[00:05:51] candle on
+[00:05:52] tuesday went all the way up to 37.10
+[00:05:56] it's a pretty pretty wild candle
+[00:05:59] so we'll step back and look at our chart
+[00:06:02] you can see the stock
+[00:06:03] pre-market this thing went from uh
+[00:06:07] 18
+[00:06:08] it went up over 100 in about 20 minutes
+[00:06:11] pretty pretty wild
+[00:06:14] this one
+[00:06:16] does have some attention on wall street
+[00:06:18] bets there is some uh
+[00:06:21] there's definitely some yolo trading on
+[00:06:23] it i've seen some posts about it so
+[00:06:26] there's some traders who made a lot of
+[00:06:27] money on this move came all the way back
+[00:06:30] down and now it's been kind of grinding
+[00:06:31] back up and i guess the question is
+[00:06:34] you know does it where does it find
+[00:06:36] resistance
+[00:06:38] right so we've got a little bit of
+[00:06:39] ascending support in this area perhaps
+[00:06:43] uh descending or ascending
+[00:06:46] resistance i might draw this line a
+[00:06:48] little differently on the back side here
+[00:06:56] maybe a little bit more like that so
+[00:06:58] we're kind of you can see we're sort of
+[00:06:59] just like in this channel
+[00:07:01] this is the channel that we've been uh
+[00:07:03] trading within and it did
+[00:07:05] it's been riding the top of that channel
+[00:07:06] and trying to break out
+[00:07:08] so if we do break out and we start to
+[00:07:11] pull away well what's our natural target
+[00:07:13] it's got to be the high of course this
+[00:07:15] is all-time high on it 37-10
+[00:07:18] so you know those are levels to watch
+[00:07:22] but
+[00:07:23] i just don't know if it actually is
+[00:07:24] gonna have the strength to do it
+[00:07:27] you know that's that's the big question
+[00:07:32] you know it's worth watching it's a bit
+[00:07:34] of a wild card stock because
+[00:07:37] it is a higher priced stock with big
+[00:07:40] spreads the risk is higher but if it
+[00:07:43] goes
+[00:07:44] and it becomes a winner it could be a
+[00:07:47] big winner
+[00:07:48] it'd also be a big loser so it's it's
+[00:07:50] gonna be a little bit of a tougher one
+[00:07:51] to manage risk on just because big
+[00:07:52] spreads means it's volatile
+[00:07:56] you know we're just not sure how clean
+[00:07:57] it'll be so that's sst so this is the
+[00:08:00] only one so far i've traded i'm keeping
+[00:08:02] this one on watch
+[00:08:06] we did have spfm from yesterday
+[00:08:09] which made a nice move into the close
+[00:08:11] from nine all the way up to twelve
+[00:08:14] now it's pulling back
+[00:08:16] all right so
+[00:08:17] yeah you know this one
+[00:08:20] finally got a big clean breakout
+[00:08:23] to a halt dip and rip into after hours
+[00:08:27] squeezing all the way up to 12 short
+[00:08:28] covering but now it's rolling over so i
+[00:08:31] don't really have too much interest in
+[00:08:32] spfm
+[00:08:34] it's on the gap scanner down a little
+[00:08:36] further gapping up eight percent
+[00:08:39] note was that not a halt it looked like
+[00:08:42] one on the
+[00:08:43] uh chart but maybe not
+[00:08:49] looked like a halt right there no okay
+[00:08:51] so it looked like it came up to a false
+[00:08:53] halt
+[00:08:54] pulled back
+[00:08:55] and then broke through was it a false
+[00:09:05] yeah
+[00:09:07] uh in any case
+[00:09:10] so that was spfm
+[00:09:17] yeah so that's our that's our leading
+[00:09:18] gapper those are our leading gappers i'm
+[00:09:20] really looking at the top five i mean
+[00:09:21] you can go further down
+[00:09:24] my goal is to be trading the most
+[00:09:26] obvious stocks each day i actually want
+[00:09:28] to be trading the same stocks that
+[00:09:29] everyone else is trading you know some
+[00:09:31] people might kind of
+[00:09:33] be the type of trader that's trying to
+[00:09:35] find the stock that no one knows about
+[00:09:37] trying to you know predict which one's
+[00:09:39] going to be next
+[00:09:40] i don't really try to do that i found
+[00:09:42] that to be pretty difficult
+[00:09:44] i just trade what's moving right now and
+[00:09:46] what everyone's focused on that means
+[00:09:48] going to have high volume generally good
+[00:09:50] liquidity above average relative volume
+[00:09:54] and those are the ones where
+[00:09:55] you can see where i've just seen in my
+[00:09:58] all my years of trading better action
+[00:10:00] so i'm going to focus on what i think is
+[00:10:02] obvious
+[00:10:03] today
+[00:10:05] that's a little bit of a challenge
+[00:10:06] because sst
+[00:10:07] if you're gonna say that's obvious well
+[00:10:09] it is the sixth leading gap or seventh
+[00:10:10] leading gapper
+[00:10:12] you know mdvl usually
+[00:10:15] i like to be trading the leading gapper
+[00:10:17] because i think the leading gap is the
+[00:10:18] one that is going to be the most obvious
+[00:10:22] but the leading gapper today i just
+[00:10:23] don't really like that chart i don't
+[00:10:25] like the float and it's only up 39
+[00:10:27] now it's 905 so it's certainly possible
+[00:10:30] that we'll have some breaking news or
+[00:10:32] something between now and
+[00:10:35] uh
+[00:10:36] you know whatever um
+[00:10:38] 9 30 or 10 or until i stopped trading
+[00:10:40] it's certainly possible
+[00:10:45] uh so the the second way that i'll find
+[00:10:47] stocks to trade is on this momentum
+[00:10:49] scanner
+[00:10:51] so this is a high day momentum scanner
+[00:10:53] and this is i like to call this kind of
+[00:10:55] like my radar because this is what's
+[00:10:57] searching the market in real time or
+[00:11:00] stocks moving now this is this is a list
+[00:11:03] and this is helpful but this is a little
+[00:11:05] bit more of a inventory of what's up
+[00:11:09] this is
+[00:11:10] what's moving right now
+[00:11:12] and this is usually you could see
+[00:11:15] sst was on this earlier this is usually
+[00:11:17] where i'm going to find
+[00:11:18] stocks to trade it's going to be once
+[00:11:20] the bell rings it's going to be stocks
+[00:11:22] that are hitting the scanner and moving
+[00:11:23] up quickly
+[00:11:24] in fact i think that's where i found sst
+[00:11:27] the other day because it was not
+[00:11:30] actually something i was watching very
+[00:11:32] closely
+[00:11:34] as a gapper
+[00:11:36] but then
+[00:11:37] at the open it started squeezing up so
+[00:11:39] as it was moving up right here it was
+[00:11:41] hitting my scanner for hitting new highs
+[00:11:47] yeah at this point um
+[00:11:49] you know it's possible i won't take any
+[00:11:51] more trades
+[00:11:52] it's possible that
+[00:11:56] you know we'll
+[00:11:57] have a ton more trades it's
+[00:12:00] one of the things with trading is it's
+[00:12:02] so much of it is just the whim of the
+[00:12:04] market whether or not we have news
+[00:12:06] whether or not something that does pop
+[00:12:08] up with news catches the attention of
+[00:12:10] other traders
+[00:12:12] and you know i'm just
+[00:12:14] riding the momentum when we have it and
+[00:12:16] when we don't have it well i've just got
+[00:12:18] to be got to be patient and that's not
+[00:12:20] easy for me
+[00:12:21] i like to trade i like to be trading
+[00:12:23] every day
+[00:12:24] i'm very aggressive trader typically
+[00:12:27] so days where i have to sit tight
+[00:12:30] are challenging for me that's for sure
+[00:12:37] a reminder monday at one o'clock i'm
+[00:12:39] gonna teach a class it'll be a live
+[00:12:42] broadcast on youtube same as last monday
+[00:12:44] uh where i will be teaching
+[00:12:46] uh a scalp trading strategy so scalp
+[00:12:50] trading is
+[00:12:51] when you take really quick profits quick
+[00:12:53] entries quick exits usually smaller
+[00:12:55] positions well
+[00:12:57] that it's smaller because it's harder to
+[00:12:59] scale in with really big size but larger
+[00:13:03] than maybe a trend trade in order to
+[00:13:05] profit from a small move anyways that'll
+[00:13:07] be on monday 1 pm eastern it will be
+[00:13:09] recorded it'll be
+[00:13:11] archived so yep
+[00:13:13] you can
+[00:13:14] plan for that
+[00:13:18] and yeah
+[00:13:21] [Music]
+[00:13:22] right now we're kind of just in a um
+[00:13:26] a little bit of a
+[00:13:27] little bit of a waiting game for
+[00:13:29] something to start to open up and and
+[00:13:32] look a little bit better
+[00:13:44] so thanks again for those uh tuning in
+[00:13:47] on youtube
+[00:13:49] appreciate you guys being tuned in and
+[00:13:51] hitting the thumbs up always appreciate
+[00:13:53] you sharing
+[00:13:55] the broadcast as well
+[00:14:01] rachel took a bounce off support 30 80
+[00:14:03] out at 31.28
+[00:14:05] hey that's 50 cents just about right
+[00:14:08] that's that's a good trade
+[00:14:11] so the dip off of volume weighted
+[00:14:13] average price
+[00:14:16] yep hit a low of 30.50
+[00:14:18] popped up there to 31.53
+[00:14:24] so that was probably like a you know
+[00:14:26] three minute long trade
+[00:14:28] entry exit probably not the type of
+[00:14:30] trade you'd be scaling into on a dip
+[00:14:32] just in and then back out
+[00:14:35] good job
+[00:14:45] let's see um
+[00:14:48] for those over on
+[00:14:49] youtube
+[00:14:51] i'm going to give you a link to
+[00:14:54] a video you should check out let's see
+[00:14:58] those who haven't uh checked out this
+[00:15:01] video
+[00:15:03] this is a a throwback video
+[00:15:12] v wap
+[00:15:16] volume weight average price
+[00:15:27] so this is a video of uh live broadcast
+[00:15:31] trading just like just like today except
+[00:15:33] i made over a hundred thousand dollars
+[00:15:38] trading im
+[00:15:40] rn dgly ent
+[00:15:43] m-i-s-t i-z-e-a
+[00:15:46] so that is a video you guys should check
+[00:15:48] out um i'll put the link in the
+[00:15:50] description for those that are watching
+[00:15:52] this a little bit later if you're
+[00:15:53] looking for a little bit of a
+[00:15:56] another video to watch
+[00:16:00] probably find that one interesting
+[00:16:05] i'll pin that to the top of the comments
+[00:16:07] for the live chat for a few minutes
+[00:16:10] i'll put that in here too
+[00:16:17] that was a
+[00:16:18] that was a cool video that was a nice
+[00:16:20] nice day
+[00:17:13] what is my net worth
+[00:17:15] well a
+[00:17:16] uh gentleman
+[00:17:18] never asks and a lady never tells my
+[00:17:21] goodness
+[00:17:28] just going straight forward today
+[00:17:39] well you know i turned 583 dollars into
+[00:17:42] over 10 million so
+[00:17:44] got to be at least 10 million
+[00:18:02] so i will do a uh video on taxes because
+[00:18:06] that is definitely a hot topic and this
+[00:18:10] time of year
+[00:18:11] i'm sure a lot of people are are
+[00:18:13] thinking about it
+[00:18:15] that tax day coming up here
+[00:18:18] there is
+[00:18:20] a lot that you can do
+[00:18:24] to mitigate your taxes
+[00:18:26] and one of the best things you can do is
+[00:18:28] by trading in a retirement account
+[00:18:32] create a retirement account and
+[00:18:36] you'll pay no tax
+[00:18:49] so that day
+[00:18:51] um let's see where i made a hundred
+[00:18:53] thousand dollars that was part of um
+[00:19:01] this month here in june so this was june
+[00:19:04] of 2020 i started the month with fifty
+[00:19:07] thousand dollars in my account
+[00:19:10] i had 50 000 in my account at the
+[00:19:11] beginning of june
+[00:19:14] well i sent in 50 000 but they took a 15
+[00:19:17] wiring fee
+[00:19:18] so 49
+[00:19:20] 985
+[00:19:22] at the end of the month i was sitting at
+[00:19:25] 792 000
+[00:19:29] right there
+[00:19:32] so that was um
+[00:19:34] that was the best month that i've ever
+[00:19:36] had
+[00:19:37] and that was uh 700 000 in this account
+[00:19:39] and then another
+[00:19:40] 250 000 in my other account it was a
+[00:19:42] million dollar month
+[00:19:45] i had a couple red days
+[00:19:47] but i had a couple of phenomenal green
+[00:19:50] days 225 224
+[00:19:52] 115
+[00:19:54] i mean it was
+[00:19:56] it was wild
+[00:19:59] so that was uh that was one month now
+[00:20:02] the best month i've ever had and so it's
+[00:20:03] a good opportunity for me to remind you
+[00:20:05] hey trading is risky
+[00:20:07] my results are not typical
+[00:20:09] most beginner traders lose money
+[00:20:12] all right so the story of how i learned
+[00:20:14] how to trade was
+[00:20:16] a long it was a long journey
+[00:20:19] and it was
+[00:20:20] extremely uh it was scary because i
+[00:20:23] didn't have someone that i was able to
+[00:20:25] learn from i didn't have a mentor i was
+[00:20:27] trying to piece together just everything
+[00:20:29] i could find piecing together things on
+[00:20:31] youtube you know blog posts on
+[00:20:34] just you know people writing blogs
+[00:20:37] it was for me
+[00:20:39] trying to reinvent the wheel in a way
+[00:20:40] there were obviously profitable
+[00:20:42] strategies that people were trading
+[00:20:44] in the world but i wasn't able to get
+[00:20:46] connected with them and so i was on my
+[00:20:48] own and it was really stressful
+[00:20:50] one of the first things that i did was
+[00:20:52] google
+[00:20:53] penny stocks i should buy
+[00:20:55] what are some penny stocks that i should
+[00:20:56] start trading because i thought well
+[00:20:58] i've got a small account you know i
+[00:21:00] can't afford
+[00:21:01] a company to buy shares of like ibm or
+[00:21:05] microsoft
+[00:21:06] and i didn't have these tools so i
+[00:21:09] didn't know how to find the right stocks
+[00:21:10] to trade each morning
+[00:21:12] and you look at ibm or a stock like that
+[00:21:14] on on any given day and you know they're
+[00:21:16] not really moving i mean their range how
+[00:21:19] much is ibm up or down today less than a
+[00:21:20] percent probably
+[00:21:22] right it doesn't really move
+[00:21:24] so you know you think well what am i
+[00:21:26] going to do by 5 000 worth of ibm
+[00:21:29] i mean it's
+[00:21:31] if it goes up 10
+[00:21:32] in six months i'd make 500 bucks that's
+[00:21:35] not going to work so that's why i
+[00:21:36] started focusing on penny stocks
+[00:21:39] and i was you know would google hot
+[00:21:41] penny stocks to to buy and i guarantee
+[00:21:43] you if you google that now you'll you
+[00:21:45] can see tons of pages and
+[00:21:48] you can sign up to tons of newsletters
+[00:21:49] they're gonna start emailing you
+[00:21:51] otc penny stocks that you should buy you
+[00:21:53] know these triple zero stocks point zero
+[00:21:56] zero zero three point zero zero zero
+[00:21:58] four whatever
+[00:21:59] these this is the next hot penny stock
+[00:22:02] i tried trading those and then i had a
+[00:22:04] couple of lucky winners
+[00:22:06] and then i had a couple of
+[00:22:08] really big losses
+[00:22:10] and that's when i realized okay this is
+[00:22:12] not consistent i i and i'm just
+[00:22:14] basically um every trade felt like a
+[00:22:17] gamble
+[00:22:18] and so what i started um learning
+[00:22:23] and this was through the period of about
+[00:22:25] 18 months two years i started learning
+[00:22:28] about charts
+[00:22:30] started learning about level two i
+[00:22:31] started getting dialed in at trying to
+[00:22:33] find
+[00:22:35] what was consistent but i first had to
+[00:22:36] try large caps i had to try options i
+[00:22:39] tried penny stocks
+[00:22:41] and then eventually
+[00:22:43] you know the kind of last place i found
+[00:22:45] were small cap stocks
+[00:22:47] it's not really at the you know top of
+[00:22:49] what you would probably naturally look
+[00:22:51] at
+[00:22:52] so they were one of the last ones i
+[00:22:54] found and it was as i started seeing
+[00:22:56] other people out there using these types
+[00:22:58] of scanners to look at leading
+[00:23:00] gainers and i started realizing wow
+[00:23:02] you know these stocks like you know an
+[00:23:04] sst i would look at them in hindsight
+[00:23:06] you know what was the big mover today
+[00:23:08] and i would be like whoa look ssst or
+[00:23:10] sst you know what what do these stocks
+[00:23:12] have in common
+[00:23:14] what's going on that allowed this to go
+[00:23:16] from 20 to 37 in one day
+[00:23:19] this is crazy
+[00:23:22] i started just trying to figure out what
+[00:23:24] was the common denominator on those
+[00:23:26] stocks and generally speaking they have
+[00:23:29] a float of less than 50 million shares
+[00:23:31] they generally have some type of
+[00:23:33] catalyst driving them higher they're
+[00:23:35] generally priced under twenty dollars
+[00:23:37] they usually have extremely high
+[00:23:39] relative volume on the day they're
+[00:23:40] moving up
+[00:23:41] and they become on that day
+[00:23:44] the one of the leading percentage
+[00:23:46] gainers in the entire market which means
+[00:23:48] traders with experience they're using
+[00:23:50] these tools are seeing them at the top
+[00:23:51] of their list
+[00:23:53] they have the highest relative volume in
+[00:23:55] the entire market and these become
+[00:23:57] obvious stocks so then the question is
+[00:23:59] where do you trade them
+[00:24:01] and the easiest way for me to trade them
+[00:24:03] was to look for bull flags flat top
+[00:24:05] breakouts and these types of patterns
+[00:24:06] that are instant resolution
+[00:24:09] so for instance like right here you know
+[00:24:11] a breakthrough the high of 771 gives you
+[00:24:13] an instant trade up to 8.44 and you know
+[00:24:17] that is like a scalp trade that's what
+[00:24:18] we'll be talking about in the scalp
+[00:24:20] class on on monday you know that's a
+[00:24:22] scalp trade you get in and you take a
+[00:24:24] quick profit 20 30 cents maybe it goes
+[00:24:26] further maybe not but you get in you get
+[00:24:28] out
+[00:24:29] and by focusing on one trade a day and
+[00:24:31] trying to be consistent one entry one
+[00:24:34] exit done okay a thousand shares 20
+[00:24:37] cents that's 200 bucks
+[00:24:38] you're done for today try it again
+[00:24:40] tomorrow
+[00:24:42] you know eventually
+[00:24:44] through doing that and becoming
+[00:24:46] disciplined at only trading the right
+[00:24:48] types of stocks to trade
+[00:24:50] i started to turn the corner but just as
+[00:24:52] easily i could have uh
+[00:24:54] kept losing money and i could have by
+[00:24:56] the time
+[00:24:58] i was turning the corner i had about
+[00:25:00] thirty thousand dollars of credit card
+[00:25:01] debt
+[00:25:02] i had gone from having a hundred
+[00:25:05] thousand dollars that my dad left me
+[00:25:07] when he passed away to
+[00:25:09] having thirty thousand dollars in credit
+[00:25:11] card debt and twenty five thousand
+[00:25:12] dollar trading account and then i lost 5
+[00:25:14] 000 from it so i took a big loss down 5
+[00:25:18] 000 and in order to get my account back
+[00:25:20] above pdt
+[00:25:21] 25 grand i had to sell things in my
+[00:25:23] garage sell things in my barn sold an
+[00:25:25] old car i sold
+[00:25:28] some mercedes old mercedes parts that
+[00:25:31] were in the barn and i raised enough
+[00:25:33] money to fund the account one more time
+[00:25:35] back above pdt 25 000 and i said i can't
+[00:25:39] afford
+[00:25:40] to
+[00:25:41] screw this up again i have to take it
+[00:25:42] seriously and
+[00:25:44] and i did and
+[00:25:47] you know for me my back was against the
+[00:25:48] wall before i started to turn around but
+[00:25:50] that was when i turned it around
+[00:25:53] and it was you know not everyone's
+[00:25:55] sometimes you're not going to turn
+[00:25:57] around until you've kind of hit rock
+[00:25:58] bottom because you will keep saying well
+[00:26:00] i can always add more money and you'll
+[00:26:02] have those days where you think oh i can
+[00:26:03] keep going and keep going
+[00:26:08] but part of my turning point was going
+[00:26:11] through this period of
+[00:26:13] having you know three four weeks of
+[00:26:14] profit and then giving it all back in
+[00:26:16] one day
+[00:26:17] and then another three four weeks of
+[00:26:18] profit and giving it all back in one day
+[00:26:20] the problem was
+[00:26:22] i was also taking profit out of that
+[00:26:24] account to pay my bills and to try to
+[00:26:26] keep up with those credit cards
+[00:26:28] so every time i would have a drop back
+[00:26:31] my account was going lower and lower
+[00:26:41] yeah i've i've hoped that
+[00:26:43] providing the educational content that i
+[00:26:45] have is a way of sending the latter down
+[00:26:47] to those of you that are trying to learn
+[00:26:49] and are trying to get you know off the
+[00:26:52] ground and figure this out it's not
+[00:26:54] going to happen for everyone trading is
+[00:26:55] risky we just know that
+[00:26:58] my credit score now bruno thank you
+[00:27:01] i actually did max at 8 50. i got a
+[00:27:04] perfect 850 credit score it's pulled
+[00:27:06] back a little bit but i did max at the
+[00:27:10] perfection
+[00:27:19] i do take pride in that
+[00:27:24] and that's important that allows you to
+[00:27:26] take low interest loans you could take a
+[00:27:28] low interest loan you could buy a piece
+[00:27:30] of real estate you can then get a tax
+[00:27:33] deduction on that
+[00:27:35] i mean it's it's part of positioning
+[00:27:37] yourself for long-term success
+[00:27:43] you get a loan to install solar you can
+[00:27:45] get a big tax credit on the solar i mean
+[00:27:48] there's all things all these things you
+[00:27:49] can do but you need to have good credit
+[00:27:56] and even when i had high
+[00:27:57] credit card debt my credit score didn't
+[00:28:00] really drop because i was paying the
+[00:28:01] minimum each month i wasn't missing
+[00:28:03] payments i did have a higher um
+[00:28:06] available credit to
+[00:28:08] you know revolving credit ratio so it
+[00:28:10] wasn't great
+[00:28:12] but it wasn't i mean it wasn't like i
+[00:28:14] had really bad credit i just needed to
+[00:28:16] pay the minimum balance at least each
+[00:28:18] month
+[00:28:22] so we've got eight minutes to the
+[00:28:23] opening bell and unfortunately this
+[00:28:26] morning
+[00:28:28] we don't uh
+[00:28:30] we don't have anything that's
+[00:28:34] really looking awesome
+[00:28:36] so that's a little disappointing
+[00:28:41] uh our gap scanner hasn't really changed
+[00:28:43] in the last 30 minutes i mean we've got
+[00:28:46] what l y r a moved up a little bit
+[00:28:50] so you know you have the stock is there
+[00:28:51] news on it what's the what's the
+[00:28:53] catalyst
+[00:28:55] i don't see the news showing up right
+[00:28:57] here
+[00:29:01] so a pl pro so is this a placement um
+[00:29:05] gross proceeds of approximately 100
+[00:29:07] million before deducting offering
+[00:29:08] expenses yeah so it's a private
+[00:29:10] placement um
+[00:29:13] 422. see i i'm not as bullish on that
+[00:29:16] type of catalyst
+[00:29:19] that's not a walmart
+[00:29:24] catalyst it is up 30 percent but
+[00:29:28] we'll see if it keeps going i'm not sure
+[00:29:32] you know and you can always be wrong i
+[00:29:34] i could be wrong and it could go higher
+[00:29:36] and i'm like ah shoot and if it goes
+[00:29:38] higher it can always jump on a pullback
+[00:29:39] if it's really strong but
+[00:29:41] that doesn't feel like
+[00:29:43] from all my years of trading like the
+[00:29:45] strongest catalyst so
+[00:29:48] well it's walmart it's amazon it's you
+[00:29:51] know netflix it's apple google i mean
+[00:29:53] it's it's partnerships small cap
+[00:29:55] companies and we focus on small cap
+[00:29:57] companies partnering with big companies
+[00:30:00] that's
+[00:30:02] that's what can be a game changer i mean
+[00:30:04] that can be a lifeline for these small
+[00:30:39] mnts is pulling back at this point
+[00:30:47] not liking that drop
+[00:30:52] so that one's done
+[00:31:16] tyler yeah i can make a note on that
+[00:31:53] thanks sean i appreciate that
+[00:31:55] those on youtube really appreciate you
+[00:31:57] hitting the thumbs up
+[00:32:03] thank you for being tuned in this
+[00:32:04] morning so yeah right now it's just kind
+[00:32:05] of sitting tight and waiting to see if
+[00:32:07] anything um
+[00:32:09] pops up here we've got five minutes of
+[00:32:11] the opening bell
+[00:32:12] so again reminder monday morning show as
+[00:32:16] as usual early and then one o'clock i'll
+[00:32:18] do a free class on
+[00:32:28] i thought i did an interview with uh
+[00:32:30] jorge
+[00:32:31] no is that not in the
+[00:32:39] no oh okay well uh i'm happy to do one
+[00:32:43] he was in the zoom calls so
+[00:32:46] yeah jorge just let me know if you want
+[00:32:47] to do it
+[00:32:54] well that's to the profitable traders
+[00:32:56] interview
+[00:33:10] well eric so one of the things you know
+[00:33:11] if you have someone making um big claims
+[00:33:13] we ask for them to verify profitability
+[00:33:16] if they choose not to then we say well
+[00:33:18] you can't be making these crazy claims
+[00:33:20] in the in the chat and that's the
+[00:33:21] problem
+[00:33:23] because all of a sudden everyone's like
+[00:33:24] oh my god this person's made a million
+[00:33:26] dollars in the last three months or
+[00:33:28] whatever it is
+[00:33:29] well have they really prove it
+[00:33:32] so that's all
+[00:33:33] and if they get their badge then they've
+[00:33:35] got their badge that's fine if they
+[00:33:36] don't then we say well all right
+[00:33:39] you can be in the community but you
+[00:33:40] can't chat or if they say well i don't
+[00:33:43] want to be here anymore then that's fine
+[00:33:44] too
+[00:34:02] so yes you can turn on audio alerts on
+[00:34:04] your high day momentum scanner
+[00:34:07] strategy right here and then you can
+[00:34:08] turn the audio alerts on as you'd like
+[00:34:16] all right we've got two minutes the
+[00:34:17] opening belt those you guys on youtube i
+[00:34:20] encourage you to check out that video
+[00:34:21] we'll put the link uh let's see probably
+[00:34:24] top corner up up over there
+[00:34:26] uh there'll be a little card to check
+[00:34:28] out the video of me making a hundred
+[00:34:31] thousand dollars in one day that was a
+[00:34:32] lot more exciting than today so check
+[00:34:34] out that video if you want to watch that
+[00:34:35] for the next hour so i don't think i'm
+[00:34:37] going to take any more trades today but
+[00:34:38] i'm going to sit here for the next hour
+[00:34:39] and a half with our warrior pro members
+[00:34:41] we'll see maybe maybe i will take more
+[00:34:43] trades or if not you know we'll do
+[00:34:45] something else and
+[00:34:46] give them some
+[00:34:48] some educational content and
+[00:34:50] cover a topic that they're interested in
+[00:34:52] so make sure you check out that video if
+[00:34:54] you haven't already and i'll see you
+[00:34:55] guys on youtube back here on monday
+[00:34:57] morning reminder as always trading is
+[00:34:58] risky most beginner traders lose money
+[00:35:00] so please take it slow don't trade money
+[00:35:02] you can't afford to lose writing a
+[00:35:04] simulator before you put real money on
+[00:35:06] the line i'll see you guys first thing
+[00:35:07] on monday morning

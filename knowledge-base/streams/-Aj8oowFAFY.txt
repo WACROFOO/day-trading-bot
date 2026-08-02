@@ -1,7 +1,7 @@
-# 
+# Ross's Live Day Trading Morning Show
 # https://www.youtube.com/watch?v=-Aj8oowFAFY
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20220401
+# duration_sec: 2573
 
 [00:00:56] All right, good morning everyone.
 [00:00:59] Well, it's about quarter of nine and uh

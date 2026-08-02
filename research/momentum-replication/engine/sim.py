@@ -66,16 +66,29 @@ CONFLUENCE_MIN = 2
 # source gate: 48% of legitimate setups rejected by rules the gate never had.
 # They are still computed and reported, so the evidence stays visible, but they
 # no longer gate.
+# 'pullback index <= 2' was here. PARAMETERS.md cites BUCPPCXOHbs [52:17] for
+# "third means stop", and it was implemented as a boolean that discards the
+# setup. The live streams show him counting pullbacks and then taking the third
+# anyway - "this is the third pullback... bought the dip at 68" (0uunIYE_wVY
+# [19:22]), "coming into third pullback range and you guys know my feeling
+# about that AND WHAT IT NEEDS TO DO in order for me" (RABUjMVS6pI [52:34]).
+# It is a caution with conditions attached, not a veto, so it moves out of the
+# gate and becomes a size reduction - the same correction already applied to
+# stop_max_distance (HISTORY.md defect 7) and to extension, which he also
+# handles with size: "I got to go with smaller size cuz I'm chasing it a little
+# bit" (0zXUMrYyTx0 [49:27]).
+# reports/2026-08-streams-roundup.md sections 3 and 4.
 GATE_CONDITIONS = {
     'cumulative volume >= 500k',
     'not resumed lower after a halt',
     'pullback_volume < impulse_volume',
-    'pullback index <= 2',
     'support confluence >= 2',
     'price > VWAP',
     'price > 9 EMA',
     'MACD histogram > 0',
 }
+# fraction of normal size taken on a pullback past the second
+LATE_PULLBACK_SIZE = float(os.environ.get('LATE_PULLBACK_SIZE', 0.5))
 MIN_PILLARS = len(GATE_CONDITIONS)
 MAX_PULLBACK_INDEX = 2
 # Shortest dip the detector will call a pullback. PLAYBOOK.md:99 says 2-3

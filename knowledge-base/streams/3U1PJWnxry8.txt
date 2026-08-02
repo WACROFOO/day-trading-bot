@@ -1,7 +1,7 @@
-# 
+# [LIVE] Live Day Trading Morning Show with Ross Cameron
 # https://www.youtube.com/watch?v=3U1PJWnxry8
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20220817
+# duration_sec: 2619
 
 [00:00:06] all right so um we've got about
 [00:00:09] 45 minutes to the opening bell

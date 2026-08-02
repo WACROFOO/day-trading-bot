@@ -1,7 +1,7 @@
-# 
+# LIVE Day Trading Morning Show with Ross Cameron
 # https://www.youtube.com/watch?v=-tCQyWh9jKU
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20221110
+# duration_sec: 2579
 
 [00:00:01] all right well we're coming up to I
 [00:00:05] guess the top of the hour I mean it's

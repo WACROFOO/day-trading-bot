@@ -1,0 +1,639 @@
+# LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=xyxGSiBQgcU
+# upload_date: 20221121
+# duration_sec: 2164
+
+[00:00:00] all right well let's see right now uh
+[00:00:02] we're coming up to the top of the hour
+[00:00:05] it's just about 9 A.M so I'm going to
+[00:00:06] start the morning show on YouTube
+[00:00:09] thank you for folks on YouTube who are
+[00:00:11] tuning in this morning I appreciate you
+[00:00:13] guys being here as always hope you hit
+[00:00:14] the thumbs up today at 1pm Eastern I'm
+[00:00:18] gonna host a study group where I will be
+[00:00:21] uh going over a couple different things
+[00:00:23] for you guys this will be um it's a free
+[00:00:25] study group so anyone that wants to
+[00:00:27] register to it is welcome to register
+[00:00:29] and then I'll be live streaming uh
+[00:00:32] starting at one o'clock
+[00:00:34] the topic I suppose the overarching
+[00:00:37] topic will be
+[00:00:38] how I was able to turn 583 dollars and
+[00:00:42] 15 cents into over 10 million dollars in
+[00:00:46] profit and as always I have my audit
+[00:00:50] results right here
+[00:00:51] this shows my average return of 100 in
+[00:00:54] was it 159 000 a month 9.5 million
+[00:00:59] um when I got the audit done at the end
+[00:01:01] of last year December 31st now I'm over
+[00:01:04] 10 million when you include this year's
+[00:01:06] profit
+[00:01:07] so uh that that'll be the overarching
+[00:01:10] topic and you can see the sign up page
+[00:01:13] right here to register to uh the study
+[00:01:17] group but in more detail what I'm going
+[00:01:21] to talk about is
+[00:01:23] how I was able to manage my downside
+[00:01:25] risk not just with a small account but
+[00:01:28] as the account continue to grow
+[00:01:31] number two how I find the stocks I trade
+[00:01:35] every single day and I'll go into a lot
+[00:01:38] of detail here about why I trade would I
+[00:01:41] trade why I avoid what I avoid
+[00:01:43] and then
+[00:01:45] um last but not least I'll share with
+[00:01:47] you my favorite setup that I'm using
+[00:01:50] right now in this market
+[00:01:52] and so that's going to be basically
+[00:01:56] going through how I'm timing my precise
+[00:01:58] entries and exits on momentum
+[00:02:03] so those are the three subtopics of how
+[00:02:07] I turn 583 dollars into over 10 million
+[00:02:09] I've got
+[00:02:11] um some stories that I'll be sharing
+[00:02:12] with you guys I'll share with you some
+[00:02:14] of the favorite setups that some of my
+[00:02:17] top performing students are trading
+[00:02:19] right now and we'll do q a at the end
+[00:02:22] all right so this is uh the first free
+[00:02:26] study group that I've hosted in
+[00:02:29] several months so I'm looking forward to
+[00:02:31] doing it for you guys and I hope a lot
+[00:02:34] of you end up deciding to register those
+[00:02:36] on YouTube and uh and join us I mean the
+[00:02:40] reality is if you're streaming on
+[00:02:42] YouTube it's because you're obviously
+[00:02:44] interested in learning more about
+[00:02:46] trading and I want to encourage you to
+[00:02:48] consume as much as you can because
+[00:02:50] there's a lot to learn so register to
+[00:02:53] the workshop I've got a couple different
+[00:02:55] handouts that I'll um that'll give you
+[00:02:57] guys to download a PDF outline of my
+[00:03:00] micro pullback strategy and a PDF
+[00:03:03] outline of my small account strategy
+[00:03:06] specifically for small accounts my
+[00:03:08] account really was only small
+[00:03:10] for like the first uh you know three
+[00:03:14] weeks when I started the small account
+[00:03:16] challenge this was day one when I had
+[00:03:18] 583 dollars in my account
+[00:03:21] day two day three day four day five day
+[00:03:24] six you know by the end of the the
+[00:03:26] second week the account was already
+[00:03:28] getting close to five thousand dollars
+[00:03:31] by the end of the month it was up until
+[00:03:32] like 20. right and then going into
+[00:03:35] February I just kept you know
+[00:03:37] pedal to the metal and fifteen thousand
+[00:03:40] dollar Green Day a month later
+[00:03:42] ten thousand dollar Green Day eight
+[00:03:44] thousand eight thousand right red days
+[00:03:47] for sure but the green days were were
+[00:03:49] bigger on average and more uh more
+[00:03:52] frequent so anyways
+[00:03:53] um so that's the topic uh that we'll
+[00:03:55] talk about
+[00:03:57] this is it's not a webinar where I'm
+[00:03:59] just gonna be bragging and talking about
+[00:04:01] you know everything I've achieved I'm
+[00:04:03] gonna actually try to give you some tips
+[00:04:07] and tricks that you can walk away from I
+[00:04:09] walk away from the study group with that
+[00:04:11] you can apply to your trading today
+[00:04:15] all right
+[00:04:17] of course as always it's true that my
+[00:04:19] results are not typical and that there
+[00:04:21] is no guarantee you'll find success
+[00:04:23] whether you trade with mirror you learn
+[00:04:24] on your own but if you're out there and
+[00:04:26] you want to learn more about trading to
+[00:04:28] me it makes a lot of sense to start by
+[00:04:31] learning a strategy that somebody else
+[00:04:34] is actually trading profitable if
+[00:04:35] they're willing to give you the full
+[00:04:37] blueprint of that strategy you should
+[00:04:38] try to learn the entire thing now if
+[00:04:40] you're not able to be profitable with it
+[00:04:42] you know then then okay that's fine
+[00:04:44] that's a you issue you've got to figure
+[00:04:46] out why is this not a good fit for me
+[00:04:48] but it makes a lot more sense to start
+[00:04:50] with something that works than to start
+[00:04:52] with something than just a I don't know
+[00:04:54] shoot from the hip and do a little of
+[00:04:56] this a little of that with really no
+[00:04:58] Direction
+[00:05:00] all right so uh so that's going to be
+[00:05:02] today at one o'clock so we're coming up
+[00:05:04] to the top of the hour here
+[00:05:06] um so I'm gonna let's see get myself
+[00:05:10] situated I have two stocks I've traded
+[00:05:13] already today I'm up 586 dollars so this
+[00:05:16] is a base hit day so far
+[00:05:21] I see you I got a dip trade on it I
+[00:05:24] didn't buy this initial Spike but I
+[00:05:26] bought a dip trade and I had a couple
+[00:05:27] nice bounces uh it's pulled back quite a
+[00:05:30] bit uh pretty pretty red on the five
+[00:05:34] minute chart a lot of selling so it pops
+[00:05:36] up and then it sort of walked right back
+[00:05:38] down I'm not sure that
+[00:05:41] um
+[00:05:42] we're going to get more opportunities on
+[00:05:43] that one but it's a maybe so if we look
+[00:05:45] at our Gap scan this morning a leading
+[00:05:48] gap for imgo this is a buyout it's an
+[00:05:51] acquisition it's going to trade sideways
+[00:05:52] at that level
+[00:05:53] second leading Gap or ICU up 46 percent
+[00:05:56] that was the one we were just looking at
+[00:06:00] um you know could it curl it certainly
+[00:06:02] could
+[00:06:06] let's see looking at this
+[00:06:11] chart here
+[00:06:19] yeah we've got we've got kind of the
+[00:06:22] most volume on this has been kind of in
+[00:06:25] this
+[00:06:26] tight range right in here
+[00:06:31] we're just we've kind of come into
+[00:06:33] consolidation in a way
+[00:06:36] uh if we can curl
+[00:06:39] that would obviously be great
+[00:06:42] but we're well below volume weight
+[00:06:44] average price so
+[00:06:47] I'm not sure that we're gonna get that
+[00:06:49] curl
+[00:06:53] all right so ICU is a maybe down here
+[00:06:59] d-u-d-a this one earlier kind of similar
+[00:07:03] it squeezes up and then gave back the
+[00:07:06] whole move
+[00:07:07] so I mean there's volatility there's
+[00:07:09] some opportunity but not holding
+[00:07:12] so that's a little bit uh a little bit
+[00:07:15] of a tricky one ELP
+[00:07:18] float way too big
+[00:07:20] shc floats a little higher and it's easy
+[00:07:23] to borrow it did pop up it pulled back
+[00:07:24] it's still holding up but I think I'm
+[00:07:27] going to leave it alone with a higher
+[00:07:28] float and being easy to borrow
+[00:07:40] yeah and look you know respecting V web
+[00:07:43] you got to respect V web I don't mind
+[00:07:45] occasionally trading stocks underneath
+[00:07:46] volume weight average price uh
+[00:07:49] having said that
+[00:07:52] it's going to carry more risk than
+[00:07:54] trading above view app so just something
+[00:07:57] to be aware of
+[00:08:09] let's see
+[00:08:32] I'm just looking at a couple of my
+[00:08:33] charts here I want to see if I got any
+[00:08:35] any juicy continuation setups
+[00:08:39] here
+[00:08:45] nice curl on ICU
+[00:08:57] so from 580 back up there
+[00:09:04] it's a little bit of an unusual pattern
+[00:09:06] because of how much it's sold off right
+[00:09:08] it's a little strange
+[00:09:11] and it's under V web so I think that
+[00:09:13] short sellers will probably short
+[00:09:15] against the volume weight average price
+[00:09:17] sorry girls barking a little bit
+[00:09:25] Friday we had satx
+[00:09:29] Big Move
+[00:09:31] pulled back quite a bit ended up closing
+[00:09:33] the day red grnd Big Move closed the day
+[00:09:37] green
+[00:09:45] levels to watch on grnd would be
+[00:09:59] 45.
+[00:10:02] 48.94
+[00:10:04] 54.
+[00:10:07] 71 all-time highs
+[00:10:29] I see you back down to
+[00:10:33] the load this is a classic rejection of
+[00:10:36] the volume weight average price
+[00:10:42] in fact uh such a good example of it
+[00:10:47] I'll do something a little crazy here
+[00:10:51] and I'll take a screenshot
+[00:10:59] and I'm gonna do something even crazier
+[00:11:01] I'm going to save that screenshot
+[00:11:06] rejection off view app
+[00:11:12] and I'll add that to the classes
+[00:11:17] so you know that's just such a good
+[00:11:19] example of no I'm gonna do it you can't
+[00:11:22] stop me I've it's already done it's
+[00:11:24] already over
+[00:11:25] the screenshot has been taken it will be
+[00:11:28] added to the classes
+[00:11:32] so it's just you know we see this all
+[00:11:35] the time
+[00:11:37] so it's just a good
+[00:11:39] you know it's a good indicator to have
+[00:11:41] if you didn't have it on your chart
+[00:11:45] and you'd be curious why did it reject
+[00:11:46] there Why didn't it hold up that's why
+[00:12:06] now sub view app traps
+[00:12:09] sub view app traps are valid that's a
+[00:12:12] little bit different this is a curling
+[00:12:13] pattern which means by the time it got
+[00:12:15] to v-wap it was already a little
+[00:12:17] extended coming into that level
+[00:12:19] um if we look at shc
+[00:12:22] you can see this one's a little bit more
+[00:12:24] of
+[00:12:25] a sub view app trap it got below v-wap
+[00:12:28] but only for a second now it's back
+[00:12:30] above it and it's holding above it
+[00:12:32] so I will take that trade from time to
+[00:12:35] time when I see it cautiously of course
+[00:12:37] but that's that's a valid one
+[00:12:42] grnd dipping down a little bit
+[00:12:48] had a 10 cent spread for a second there
+[00:12:49] and then the spread opened
+[00:12:56] so this one's below volume weight
+[00:12:58] average price as well
+[00:13:06] uh who am I talking with for those on
+[00:13:08] YouTube I was um talking to people that
+[00:13:11] are in the chat room
+[00:13:12] so we've got our chat room here this is
+[00:13:15] a members only Community uh which you
+[00:13:17] guys are probably aware of so these are
+[00:13:19] all members at Warrior Trading
+[00:13:21] so I chat with them I you know see what
+[00:13:24] they see what they're saying
+[00:13:27] there's Marcelo with his 50k badge
+[00:13:33] so one of the nice things about the
+[00:13:34] community is that we have this badging
+[00:13:36] system so you can tell you know whether
+[00:13:39] or not someone is actually a profitable
+[00:13:41] Trader that's something that on social
+[00:13:43] media in general you might have someone
+[00:13:45] that talks a big game on YouTube or
+[00:13:48] Twitter or wherever but
+[00:13:52] you know it's just talk they're not
+[00:13:54] actually a very successful Trader so we
+[00:13:57] have a compliance program that we run of
+[00:13:59] course my results are audited for our
+[00:14:02] traders that are interested in verifying
+[00:14:04] profitability obtaining a badge we have
+[00:14:06] a process where they can submit broker
+[00:14:08] statements to substantiate the amount
+[00:14:11] that they've made so we've got 12
+[00:14:13] Traders right now who have
+[00:14:15] a badge of 1 million or higher
+[00:14:19] we have uh several who have some really
+[00:14:22] large badges which is
+[00:14:24] awesome super proud of those guys
+[00:14:27] and I'm uh it's kind of nice because I
+[00:14:30] see traders who have 250k badges 500k
+[00:14:33] Badges and they keep you know upping the
+[00:14:35] badge like every three months or every
+[00:14:36] six months so I started thinking all
+[00:14:39] right this is this going to be the next
+[00:14:40] person that crosses over a million
+[00:14:50] okay so
+[00:14:51] grnd side chart satx uh this one I don't
+[00:14:56] think I am looking at too much
+[00:14:59] still volatile it's certainly possible
+[00:15:01] that we'll see some some moves on it but
+[00:15:05] I'm just going to leave it alone for the
+[00:15:06] time being nice Jess 4100 that's a great
+[00:15:10] morning
+[00:15:11] that is solid
+[00:15:13] I think he got a good trade on ICU
+[00:15:20] I was I I traded it but I I didn't get a
+[00:15:24] good trade on it
+[00:15:49] all right so
+[00:15:51] um again those tuning in on YouTube
+[00:15:53] hopefully you guys join us for uh the
+[00:15:56] study group at one o'clock
+[00:15:59] so study group at one o'clock there's a
+[00:16:01] link to register I'll be talking about
+[00:16:04] my favorite strategy that I'm trading
+[00:16:06] right now and I'll be sharing you some
+[00:16:09] tips and tricks some of the other
+[00:16:10] Traders at Warrior are using to make
+[00:16:13] money in this uh wild Market that we've
+[00:16:17] been in
+[00:16:24] so that's going to be coming up today at
+[00:16:26] 1 pm Eastern
+[00:16:32] our leading gapper has pulled back quite
+[00:16:35] a bit so unless it can get over volume
+[00:16:36] weight average price I'm leaving it
+[00:16:39] alone
+[00:17:21] foreign
+[00:17:58] nwtn
+[00:18:05] I'll take a starter of nwtn there why
+[00:18:08] it's a SPAC merger watching for an ad 45
+[00:18:12] on nwtn
+[00:18:15] so we've got 35 on the ask
+[00:18:17] added at 33 right there
+[00:18:21] anytime I'm seeing a SPAC merger popping
+[00:18:23] up in this market I want to try to catch
+[00:18:25] a trade on it so for right now
+[00:18:29] this one should have gone more so I'm
+[00:18:31] just gonna hold small size
+[00:18:34] thank you for bringing it to my
+[00:18:35] attention
+[00:18:36] SPAC mergers some of these have gone big
+[00:18:39] and made some awesome moves
+[00:18:42] even if the float's higher it hasn't
+[00:18:45] been a huge issue on a recent SPAC
+[00:18:48] merger but
+[00:18:50] you can see it's just kind of like
+[00:18:53] churning a little bit here
+[00:18:56] so
+[00:18:58] whatever I'm unwinding it for 88 of
+[00:19:03] sort of surprised that that didn't rip
+[00:19:07] from 550 up to six
+[00:19:10] high was 620 pull back then it broke
+[00:19:14] there to 6 45.
+[00:19:17] right exactly specs that have a lock up
+[00:19:19] period their free float is going to be
+[00:19:21] significantly lower
+[00:19:24] I'll keep it on watch
+[00:19:27] it's not a side chart
+[00:19:31] nice nice mic got 10 cents to share on
+[00:19:34] it
+[00:19:48] about 15 minutes to the opening bell
+[00:20:07] so a question said
+[00:20:08] um would love to learn from Ross but
+[00:20:10] outside my budget payment installments
+[00:20:13] Ross so we have a couple different
+[00:20:15] things we
+[00:20:18] so there's a couple different things
+[00:20:19] that we have
+[00:20:21] what I would encourage is if you
+[00:20:24] register to the study group I'll talk in
+[00:20:26] more detail about the sort of lowest
+[00:20:30] cost way to get started to become a
+[00:20:32] member of the community because I want
+[00:20:34] to give you guys the chance to get
+[00:20:36] started so we do have something that
+[00:20:38] we've put together and I'll be sharing
+[00:20:40] that with people that attend the study
+[00:20:42] group
+[00:20:43] it's not for everybody and I get that
+[00:20:45] it's you know it's not going to be for
+[00:20:47] everyone but
+[00:20:49] I think that for someone that's looking
+[00:20:51] for payment plans it might be we might
+[00:20:53] have something that'll work for you
+[00:21:06] so ICU rejected v-wap but then came back
+[00:21:09] up and tried it a second time not quite
+[00:21:11] but came up to 610.
+[00:21:13] so now you're in this almost looks like
+[00:21:16] an ABCD pattern on the one minute right
+[00:21:19] but it's a little funny position because
+[00:21:20] it's an ABC pattern under V web
+[00:21:23] view app is at 626.
+[00:21:27] it's you know taking the form of kind of
+[00:21:29] a curling pattern so I'm going to keep
+[00:21:31] it on watch the longer it holds up
+[00:21:34] uh the better it look looks
+[00:21:44] and yes
+[00:21:46] um so we do have for for anyone who's a
+[00:21:48] former pro member this is a good one so
+[00:21:51] someone said any discounts for former
+[00:21:52] pro members
+[00:21:53] yes Simon so if you're a former member
+[00:21:56] and you want to come back we can
+[00:21:58] reinstate your access to all the classes
+[00:22:02] and everything else the only thing that
+[00:22:04] you need to do is uh
+[00:22:06] it depends on when you join but the only
+[00:22:08] thing you would need to do is sign up
+[00:22:10] for one of the trading tools that we
+[00:22:11] offer
+[00:22:12] so if you come back and you do chat and
+[00:22:14] scans then we can restore your access to
+[00:22:17] the classes and then you could just
+[00:22:20] continue on a monthly basis to be a
+[00:22:21] member
+[00:22:25] ICU I'm taking a starter for the break
+[00:22:28] of v-wap
+[00:22:30] at 15 and I'll add it 25 and 35.
+[00:22:34] while this is below V web we're coming
+[00:22:36] up to volume weight average price here
+[00:22:39] so watch over 625
+[00:22:42] 8 000 share buyer on the bid high volume
+[00:22:45] coming in see the 55 000 shares of
+[00:22:47] volume
+[00:22:51] New Order is at 25 to add and if we can
+[00:22:55] break through 25 look for a curl up to
+[00:22:58] 650.
+[00:22:59] add it right there at 25 there's 23
+[00:23:04] I'm looking for that curl break a volume
+[00:23:06] weight average price and then a squeeze
+[00:23:09] up to 6 35 645
+[00:23:11] this is the type of pattern that when it
+[00:23:14] works we can get a nice move so next ad
+[00:23:17] spot is going to be 35 and 45.
+[00:23:20] there's 25 26 added at 30. nice so nice
+[00:23:24] conviction behind this trade
+[00:23:27] booking about fourteen hundred dollars
+[00:23:28] of profit initially
+[00:23:31] and the high this candle is 34. new
+[00:23:34] orders at 36.
+[00:23:40] so we're over volume weight average
+[00:23:42] price highest volume candle the day is
+[00:23:50] added 30 at 27 there 30 for the break
+[00:23:53] back through 35.
+[00:23:57] will we hold V web there's 32 a little
+[00:23:59] bit of profit
+[00:24:01] new orders 35.
+[00:24:12] I wish I'd gotten in this just a little
+[00:24:13] bit earlier
+[00:24:16] um but if I'd gotten in too early that
+[00:24:18] could have been a problem as well
+[00:24:28] same goes for a former Warrior starter
+[00:24:30] member if you're a former Warrior
+[00:24:32] starter member
+[00:24:33] we can um we can get you set up
+[00:24:36] you just have to subscribe to one of the
+[00:24:39] tools so what I would encourage if
+[00:24:41] you're a former student shoot us an
+[00:24:43] email team Warrior trading.com and we'll
+[00:24:47] get you set up
+[00:24:49] we want to encourage you to keep
+[00:24:51] learning we'd love to give you the
+[00:24:52] chance to be back in the community so
+[00:24:54] absolutely
+[00:25:04] so that's valid for Traders uh most
+[00:25:07] traders that joined within the last
+[00:25:08] couple of years but that let their
+[00:25:10] membership expire if there's someone out
+[00:25:12] there that was a member in
+[00:25:14] 2015 or 16 we had a different product
+[00:25:17] offering at that time so you would most
+[00:25:19] likely need to
+[00:25:22] enroll in the current membership but we
+[00:25:25] would look at your account and we always
+[00:25:27] try to do the right thing for
+[00:25:29] the former members
+[00:25:31] who want to come back so it doesn't hurt
+[00:25:34] to choose an email and see what we can
+[00:25:35] do for you
+[00:25:37] we don't have links like right on the
+[00:25:39] website specific for former you know
+[00:25:42] because there's so many different
+[00:25:43] scenarios so just shoot us an email
+[00:25:44] we'll we'll try to take care of it for
+[00:25:46] you
+[00:25:47] added at 33 right there now look for The
+[00:25:50] Squeeze up to 40. there you go there's
+[00:25:52] 48.
+[00:25:54] a little short cover there
+[00:25:56] we're holding volume weight average
+[00:25:57] price
+[00:25:59] added at 48 now looking for a squeeze up
+[00:26:02] to 60.
+[00:26:04] watch over 55 on ICU
+[00:26:08] added right there at 47 looking for the
+[00:26:10] Breakthrough
+[00:26:12] 655 660.
+[00:26:16] cost basis is 47.
+[00:26:24] added 40 to buy the dip
+[00:26:27] looking for the Breakthrough 50.
+[00:26:31] so now that we're curling
+[00:26:33] I'm starting to look at 675 and seven
+[00:26:36] dollars
+[00:26:38] right
+[00:26:41] so watch the break over 650 10 minutes
+[00:26:44] to the open
+[00:26:49] a lot of green on the tape there good A
+[00:26:51] little profit through that level
+[00:26:54] back to Flat for now
+[00:26:57] so we broke v-wap we then pulled back
+[00:27:00] below it down to 610. now that was a
+[00:27:02] little bit tricky because we pulled back
+[00:27:05] and then we rallied back up
+[00:27:11] so we were straddling the volume weight
+[00:27:12] average price for a second straddling a
+[00:27:15] critical level of support and resistance
+[00:27:18] that's that can be a challenge
+[00:27:58] so I'm sitting at 1800 on the day
+[00:28:31] there you go
+[00:28:35] added at 55 now looking for the
+[00:28:38] Breakthrough 65.
+[00:28:42] there's 64.
+[00:28:44] so I'm going to start looking for a move
+[00:28:45] up to seven dollars
+[00:28:47] next ad is 65.
+[00:28:51] I want to see if we get that squeeze up
+[00:28:53] to six uh sorry up to seven
+[00:28:59] we've got high volume coming in
+[00:29:02] hindsight I had such a great entry but
+[00:29:05] watching over 65
+[00:29:10] added right there there's 70 now next
+[00:29:12] add to 75.
+[00:29:15] and then we're going to look for a
+[00:29:17] squeeze up to seven dollars
+[00:29:21] so added at 63 right there now adding at
+[00:29:25] 73 next ad is going to be 83 and I'm
+[00:29:28] looking for that extension right here
+[00:29:30] for a move up to seven
+[00:29:33] so there's 72 on the ask
+[00:29:36] watch over 77.78
+[00:29:40] we're up 70 this is our leading gapper
+[00:29:43] that's not a buyout
+[00:29:50] there's 73 74
+[00:29:58] . so watch now over 75
+[00:30:06] bought the dip at 70 right there there's
+[00:30:08] 74.
+[00:30:09] 72 hidden buyer on the level two
+[00:30:12] went away a little bit of profit for me
+[00:30:15] another 400.
+[00:30:20] holding smaller position now
+[00:30:26] so we started to pull away there up to
+[00:30:28] 74 and then we kind of stalled out
+[00:30:34] watching for dips off the half dollar
+[00:31:18] dip at 32.
+[00:31:20] so doing a dip trade here off of volume
+[00:31:22] weight average price
+[00:31:33] watching for 45.
+[00:31:40] flat there 45
+[00:31:44] so we've got four myths to the opening
+[00:31:46] bell we've gotten some some action today
+[00:31:49] I'm up
+[00:31:52] 2283.77 so a little bit of profit coming
+[00:31:55] in a little slow but we got a little
+[00:31:57] action so game plan going into the open
+[00:32:00] I'll keep watching ICU and then I want
+[00:32:03] to keep an eye on uh Grindr grnd in case
+[00:32:08] that starts to open up that's still on a
+[00:32:10] side chart it looked good
+[00:32:13] there for possible continuation so we'll
+[00:32:16] see if we get that and then pixie
+[00:32:19] this one's still been a daily chart
+[00:32:21] watch list
+[00:32:23] first daily candle to make a new high
+[00:32:26] haven't gotten it yet but just keeping
+[00:32:27] it on watch
+[00:32:34] starter there on grinder 600 shares it
+[00:32:37] just broke um
+[00:32:39] adding for the break of 39
+[00:32:43] so watch grinder here over 39 dollars
+[00:32:48] putting an order at 40.
+[00:32:52] so the idea on this one it just popped
+[00:32:54] up would be to catch that squeeze
+[00:32:56] through 40.
+[00:33:00] added right there 38.83 now looking for
+[00:33:04] a squeeze through 39 and 40.
+[00:33:09] I think that grinder could give us a
+[00:33:11] nice move second day continuation the
+[00:33:14] same as what we got uh on satx so
+[00:33:17] watching over 39.50 for a squeeze up to
+[00:33:21] forty dollars if we can break through 45
+[00:33:23] then I'm looking for a squeeze up
+[00:33:26] towards 50.
+[00:33:29] so I'm gonna watch on grnd this one's a
+[00:33:33] wild card stock
+[00:33:35] New Order 39.50
+[00:33:37] adding right there at 38.97 for the
+[00:33:40] Breakthrough 39.
+[00:33:42] so you've got 39 on the ask
+[00:33:45] now watch 39.50
+[00:33:50] we're at five percent this is going two
+[00:33:52] minutes into the open
+[00:33:56] so let's see if we get the break of
+[00:33:57] 39.50
+[00:34:00] and then a squeeze through forty dollars
+[00:34:02] a share forty dollars is what I want to
+[00:34:04] see break
+[00:34:09] so Jess uh you have grinder on watch
+[00:34:11] you're looking for a trade on this one
+[00:34:18] new order for me 39.50
+[00:34:21] watching he's watching the curl good
+[00:34:24] there's 39 on the ass there's 39.50 good
+[00:34:28] watching for an ad there's 38 39.88
+[00:34:31] there's 40. very good New Order putting
+[00:34:34] it at forty dollars a share
+[00:34:36] added 39.81 for the break of 40 dollars
+[00:34:44] watching for the break of 40.
+[00:34:48] so we're starting to curl up this looks
+[00:34:51] good
+[00:34:51] let's see if we can break through forty
+[00:34:53] dollars and then 41.42.
+[00:34:57] so we've got 39.80 on the ask
+[00:35:04] holding 500 shares
+[00:35:11] mfh hitting the scans
+[00:35:20] all right so 30 seconds to the open
+[00:35:22] we'll be watching grinder at the open
+[00:35:24] and see if we get a little bit more
+[00:35:26] action on it
+[00:35:28] ask is 38.80 by bid is
+[00:35:32] 38.05 38.50 kind of jumping around a
+[00:35:35] little bit
+[00:35:36] holding smaller size going into the open
+[00:35:39] I was hoping for a squeeze through 40.
+[00:35:40] all right so that's the game plan those
+[00:35:42] on YouTube make sure you register for my
+[00:35:44] 1pm study group and I'll see you guys
+[00:35:46] back here
+[00:35:47] uh at one o'clock
+[00:35:51] reminders always trading is risky my
+[00:35:53] results are not typical so take it slow

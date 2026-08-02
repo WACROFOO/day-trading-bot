@@ -241,6 +241,10 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 if ok and sized_ok and rr_ok:
                     passes += 1
                     shares = int(RISK_PER_TRADE / risk_ps)
+                    # a pullback past the second is taken at reduced size rather
+                    # than skipped - reports/2026-08-streams-roundup.md sec.3
+                    if pb['index'] > sim.MAX_PULLBACK_INDEX:
+                        shares = int(shares * sim.LATE_PULLBACK_SIZE)
                     final = max(0, min(shares, int(BUYING_POWER / entry),
                                        int(bar['v'] * LIQUIDITY_CAP)))
                     if final <= 0:

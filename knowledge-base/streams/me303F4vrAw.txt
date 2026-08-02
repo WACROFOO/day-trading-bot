@@ -1,7 +1,7 @@
-# 
+# [LIVE] Day Trading Breaking News | Ross Cameron
 # https://www.youtube.com/watch?v=me303F4vrAw
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20220407
+# duration_sec: 2555
 
 [00:00:15] all right good morning everyone so
 [00:00:17] we're sitting here it's about 8 45 45

@@ -1,0 +1,770 @@
+# 4/6/2021 - LIVE Day Trading Morning Show - with Ross Cameron
+# https://www.youtube.com/watch?v=VybggfX6Fr8
+# upload_date: 20210406
+# duration_sec: 2248
+
+[00:00:27] all right good morning everyone
+[00:00:29] well um got my trash panda
+[00:00:33] shirt on i've got my cactus underneath
+[00:00:37] and this is a new cactus
+[00:00:39] i realize that my the og cactus is
+[00:00:41] getting a little faded maybe a little
+[00:00:43] hard to tell but
+[00:00:44] it's getting a little faded so i got a
+[00:00:45] new one so we've got two cactuses
+[00:00:54] well uh it's tuesday morning and
+[00:00:58] yesterday was okay it was a little
+[00:01:00] choppy
+[00:01:02] we had some action on acy
+[00:01:06] as you probably recall uh
+[00:01:09] it was good but i overstayed my welcome
+[00:01:12] on it and i ended up giving back half my
+[00:01:14] gains i went from up 23 000 to up only
+[00:01:17] 10
+[00:01:17] 000 shut it down and
+[00:01:21] yeah i was a little bit bummed but we
+[00:01:23] had three halts in a row going up one
+[00:01:24] halt going down then back to a halt
+[00:01:26] going up
+[00:01:27] then another drop bounce off the v-wap
+[00:01:29] that
+[00:01:30] was a great dip trade for me and then we
+[00:01:33] got that squeeze back up here towards 16
+[00:01:35] high with 16 17 25. so
+[00:01:40] that was um that was pretty
+[00:01:43] that was pretty awesome but then it just
+[00:01:46] kind of
+[00:01:47] faded and it had a really hard time
+[00:01:49] every time it kind of got above 16 it
+[00:01:51] was like a doji candle if you if you
+[00:01:52] notice it just
+[00:01:53] it couldn't hold that level so that was
+[00:01:56] that was kind of a bummer um and it
+[00:01:58] ended up fading a little bit but then
+[00:02:00] pre-market
+[00:02:01] rips from 11 up to 1644 so
+[00:02:06] you know i i don't know i'm going to
+[00:02:09] remove my drawings
+[00:02:11] uh lines here and kind of just
+[00:02:14] try to look at the big picture on this
+[00:02:16] so zoom out a little bit
+[00:02:18] sort of just general it seems that we
+[00:02:21] have some
+[00:02:22] ascending support it's not a perfect
+[00:02:25] trend line
+[00:02:26] um but
+[00:02:29] just kind of adjust it a little bit
+[00:02:32] now that's not bad you see how it's got
+[00:02:35] support along those
+[00:02:36] that line and then that line was also
+[00:02:38] resistance back in here
+[00:02:40] so not perfectly but that seems like a
+[00:02:43] pretty
+[00:02:44] pretty decent trend line
+[00:02:48] which it has bounced off of again down
+[00:02:50] here
+[00:02:51] on the upside you have the high
+[00:02:55] down to there that's not super valid
+[00:02:57] it's only tap
+[00:02:58] there's it's only connecting two lines
+[00:03:00] there's nothing really in between that
+[00:03:04] but it would be one that i would
+[00:03:06] probably
+[00:03:07] keep an eye on so i'll have acy over on
+[00:03:11] the side just in case it starts to pop
+[00:03:13] up again
+[00:03:14] you never know there could be an
+[00:03:17] opportunity there
+[00:03:19] um let's see
+[00:03:22] so that's the only one that i guess i
+[00:03:24] would look at for continuation
+[00:03:25] from yesterday um i don't think there's
+[00:03:29] anything else from yesterday unless
+[00:03:30] there's something that you guys
+[00:03:32] bring to my attention that i that i
+[00:03:35] missed
+[00:03:37] um hey joan that's great is that in the
+[00:03:40] is that
+[00:03:41] sim those some sim trades at lightspeed
+[00:03:44] got 290 so far
+[00:03:50] good work it's a great start
+[00:03:53] great start to the day so she's just
+[00:03:56] posting right there
+[00:03:57] not sure if it's in the sim or real
+[00:03:59] money but that's it's a nice start
+[00:04:03] very good all right well we'll we'll
+[00:04:05] stay on top of
+[00:04:06] those screenshots as they come in
+[00:04:13] morning gary
+[00:04:18] i want to congratulate manoli he
+[00:04:22] has verified his profits up to
+[00:04:26] 750 dollars seventy five percent of the
+[00:04:29] way
+[00:04:30] to the one million dollar badge good for
+[00:04:31] you that's awesome
+[00:04:34] uh so he asked if i could custom make a
+[00:04:36] 750k badge which we didn't have
+[00:04:39] and i said i would so um he sent over
+[00:04:42] his statements and he's verified up to
+[00:04:44] 750 000
+[00:04:45] in profit his interview
+[00:04:49] will be if it's not already on um
+[00:04:53] in chapter 17 they'll be getting added
+[00:04:55] there
+[00:04:57] shortly
+[00:05:00] so great job i don't see him typing i
+[00:05:03] don't know if he's not in yet
+[00:05:04] or if he came in earlier and then took a
+[00:05:08] break for a second
+[00:05:09] but anyways that's good to see and as a
+[00:05:12] reminder
+[00:05:13] some of you guys a number of you have
+[00:05:15] submitted
+[00:05:16] broker statements and stuff to get
+[00:05:18] either a 50k 100k badge whatever the
+[00:05:20] case is
+[00:05:21] um kate has emailed back a bunch of you
+[00:05:25] guys
+[00:05:25] in the secure portal that we use for
+[00:05:29] the broker statements because you know
+[00:05:30] confidential information you know for
+[00:05:32] you you don't want to just do regular
+[00:05:33] email for that stuff
+[00:05:35] um and she's waiting for you guys to
+[00:05:36] email her back so
+[00:05:38] if you are waiting on a badge double
+[00:05:41] check and make sure we're not waiting on
+[00:05:43] you because she might have emailed you
+[00:05:44] back it might have gotten your spam
+[00:05:45] folder or something like that so double
+[00:05:46] check on that
+[00:05:47] love to get you guys your badges i know
+[00:05:49] um as we finish the month of
+[00:05:52] march uh most likely
+[00:05:55] um there's several of you guys with
+[00:05:58] march broker statements that are trying
+[00:05:59] to get those
+[00:06:00] submitted so now try to get yourself to
+[00:06:02] the top of the list and get those
+[00:06:04] submitted as
+[00:06:04] as early as you can and stay on top of
+[00:06:06] it um
+[00:06:08] with responding those emails because
+[00:06:10] okay it's pretty quick to turn it around
+[00:06:12] so if you're waiting and you think
+[00:06:13] you're waiting on us
+[00:06:14] we you might have missed an email that
+[00:06:16] we had for
+[00:06:17] further uh clarification
+[00:06:20] uh what was i gonna do oh right um so
+[00:06:25] uh that this is my p l on the month in
+[00:06:27] net profit
+[00:06:28] so net profit after fees and commissions
+[00:06:32] so like 26 000 so far this month not bad
+[00:06:36] it's a good start a couple years ago i
+[00:06:38] would have said that could have even
+[00:06:39] been a
+[00:06:40] a decent month uh the
+[00:06:43] the bar has moved up quite a bit
+[00:06:46] uh i would like to
+[00:06:50] hit 100k this month i don't think that
+[00:06:53] that's
+[00:06:55] out of the question i'm 26 percent of
+[00:06:57] the way there but
+[00:06:58] a couple more good days i'll i'll cross
+[00:07:00] that line
+[00:07:01] uh last month was 300 and a little over
+[00:07:03] 350 000
+[00:07:04] so i also wouldn't mind getting up
+[00:07:08] at least maybe 200 or 250 on the month
+[00:07:11] but we'll see you know
+[00:07:12] it's it's hard to know in this market
+[00:07:15] right now what is
+[00:07:16] a realistic expectation to set i think a
+[00:07:18] lot of traders are struggling with that
+[00:07:20] it's just
+[00:07:21] is it going to be normal for a trader
+[00:07:24] at my level to be crossing 100 000 and
+[00:07:27] going higher
+[00:07:28] month after month after month for how
+[00:07:29] long is that going to be normal i don't
+[00:07:32] know
+[00:07:32] it's been the case now for just about a
+[00:07:35] year coming up on a year
+[00:07:37] i've been trading now in my home office
+[00:07:39] just for just about a year
+[00:07:41] um this was my a temporary kind of thing
+[00:07:44] and
+[00:07:44] it's just become well i'm i'm still here
+[00:07:48] so
+[00:07:49] i know you guys are all in probably
+[00:07:51] similar situations with
+[00:07:54] uh things being a little different
+[00:07:57] uh in the last year but we're hanging in
+[00:08:01] so let's see um we've got about 30
+[00:08:04] minutes to the bell
+[00:08:05] those streaming on youtube and facebook
+[00:08:06] thank you guys for tuning in thank you
+[00:08:08] for hitting that thumbs up if you
+[00:08:09] haven't already
+[00:08:10] hit the thumbs up um let's see
+[00:08:13] dave for day says he's having trouble
+[00:08:15] logging into the chat room
+[00:08:17] um you could email a team
+[00:08:19] warriortrading.com
+[00:08:21] and we can we can see if there's a
+[00:08:25] what the issue is uh it doesn't seem
+[00:08:28] like there's any
+[00:08:28] there's no problem with the website or
+[00:08:30] anything we're having a lot of people
+[00:08:31] are in the chat room right now
+[00:08:33] so i think that might be just a um
+[00:08:36] one-off issue but we're happy to help
+[00:08:38] you get squared away
+[00:08:41] so i normally well before covid um
+[00:08:45] for a period of about two years or so i
+[00:08:48] was trading
+[00:08:49] um in an office downtown so
+[00:08:52] i live just you know small town new
+[00:08:54] england
+[00:08:55] had an office downtown and that's where
+[00:08:57] i would work and then i also had my
+[00:08:59] my my team there so my team are
+[00:09:03] my trader support team um they're
+[00:09:06] some of my some of my tech people who
+[00:09:09] help with tech support
+[00:09:11] some of the folks that helped me with um
+[00:09:12] you know marketing and ads and things
+[00:09:14] like that so those are the people that
+[00:09:16] we would you know that would i was
+[00:09:18] working with every day
+[00:09:20] and then we would have events where i
+[00:09:22] would trade with students we would host
+[00:09:24] um those in different locations so we
+[00:09:27] did miami we did las vegas we did new
+[00:09:29] york
+[00:09:30] uh we did orlando we haven't done one of
+[00:09:32] those here
+[00:09:34] but the plan is that the next one that
+[00:09:36] we host will be
+[00:09:37] uh here we want to um that that was sort
+[00:09:40] of the reason that i bought this
+[00:09:42] um uh you know and we're renovating this
+[00:09:47] firehouse this uh 1900 fire station
+[00:09:51] so it's old brick fire station and
+[00:09:52] that's going to be where we'll
+[00:09:54] have in-person events
+[00:09:57] you know once it's safe to do it but
+[00:10:00] it'll be seasonal because of course in
+[00:10:01] new england
+[00:10:03] if we host an event in january and then
+[00:10:06] there's a snowstorm it's going to
+[00:10:07] screw everything up so it'll probably be
+[00:10:08] a spring summer fall type of thing
+[00:10:12] and the renovations i don't think
+[00:10:14] they'll be
+[00:10:15] done in time for us to commit to a fall
+[00:10:17] event this year
+[00:10:18] so that probably won't happen it
+[00:10:20] probably won't be till next
+[00:10:22] spring so maybe a year from now that
+[00:10:24] we're looking at hosting an in-person
+[00:10:25] event
+[00:10:28] so we'll keep you guys posted on all
+[00:10:30] that um
+[00:10:32] let's see
+[00:10:40] but we'll love having people come out
+[00:10:44] to the office and
+[00:10:48] uh be able to meet you guys in person
+[00:10:50] that'll be a lot of fun
+[00:10:54] and then you'll be able to get your own
+[00:10:55] cactus
+[00:10:58] sweatshirts
+[00:11:02] all right let's see
+[00:11:08] so looking at the scans this morning um
+[00:11:12] you know seems like kind of the typical
+[00:11:15] things moving sort of slowly
+[00:11:21] oh what's going on with that girl
+[00:11:25] come here girl
+[00:11:31] all right so acy
+[00:11:34] like i said that one's going to be over
+[00:11:36] on the side
+[00:11:42] btx is our leading gapper it's got 8.5
+[00:11:45] million shares of volume
+[00:11:47] uh what's kind of interesting about this
+[00:11:50] one
+[00:11:51] is that it's a reverse split you can see
+[00:11:53] the revert not today but it was a
+[00:11:55] reverse split from a few days ago
+[00:11:57] reverse splits have the effect of
+[00:11:58] reducing the float but it was only a
+[00:12:00] two to one reverse split so not the
+[00:12:02] biggest one that we've ever seen
+[00:12:05] um it's kind of got this little
+[00:12:09] resistance point there at 850 and then
+[00:12:11] above that the headroom would have room
+[00:12:12] up towards nine
+[00:12:15] um i would say
+[00:12:19] it may be worth watching uh and if it
+[00:12:22] looks like it's gonna break over 850 i'd
+[00:12:24] probably consider it but right now i
+[00:12:26] think i need to wait because we've
+[00:12:27] already got two
+[00:12:28] four five green candles in a row so the
+[00:12:31] first trade has to be pretty dialed in
+[00:12:33] so that one's not set up quite yet the
+[00:12:35] second leading gap is sj
+[00:12:38] this one has news a news headline that
+[00:12:40] seems perhaps a little bit stronger
+[00:12:43] to me than btx
+[00:12:46] it's at all-time highs which is a nice
+[00:12:49] chart so this is all-time highs
+[00:12:52] you can see it's starting to move up a
+[00:12:54] little bit here the
+[00:12:55] first five minute candle to make a new
+[00:12:57] high it's kind of like
+[00:12:59] i'll take a quick long there for the
+[00:13:00] break of 14.
+[00:13:02] this is a setup that i actually am okay
+[00:13:04] with for the breakthrough 14
+[00:13:07] 15 and then moving up towards 16. so the
+[00:13:11] target
+[00:13:12] first target is 14.87 so i'm going to
+[00:13:15] put an order at 14
+[00:13:18] 55. and i'm going to add as soon as it
+[00:13:21] breaks over 14
+[00:13:22] 25 i'll add and then i'll add again so
+[00:13:25] just add it 1425 and i'll add again at
+[00:13:27] 14.50
+[00:13:30] and the target on this is 15.
+[00:13:33] so right now just waiting adding there
+[00:13:35] for the breakthrough
+[00:13:36] for 1450 and now i want to let this
+[00:13:39] squeeze up
+[00:13:40] through the high a day and the next spot
+[00:13:43] i would add on this
+[00:13:44] i would add again at 15. if it squeezes
+[00:13:46] right to 15 i'll add again at 15
+[00:13:49] for the breakthrough 15
+[00:13:52] so let's watch this micro pullback right
+[00:13:54] here off of 1462.
+[00:13:57] this could present a dip trade
+[00:14:00] adding at 60 right there taking the dip
+[00:14:02] trade and now i'm going to look for the
+[00:14:04] break through
+[00:14:05] 15. so this is one that i'm just going
+[00:14:07] to hold let it work
+[00:14:09] break through 15 15 25 15
+[00:14:12] 50. we've got volume coming in we've got
+[00:14:14] a nice gap on it
+[00:14:16] so this is a good looking setup
+[00:14:19] what i'll continue to do is wait for
+[00:14:21] dips and if we can get some nice dips
+[00:14:23] i'll add on those dips
+[00:14:25] for the breakthrough 15.
+[00:14:29] so let's see
+[00:14:33] so holding it right now just letting it
+[00:14:34] work for a second this is sj it's the
+[00:14:36] second leading gap from the market
+[00:14:46] so looking for the breakthrough 15
+[00:14:48] orders at 1501
+[00:14:54] so there's 79 on the ask then there's 78
+[00:15:02] so we're going to watch the first dip to
+[00:15:03] get bought up and then i want to catch
+[00:15:06] that squeeze
+[00:15:07] there's 85 on the ask so we're looking
+[00:15:10] for the breakthrough 89.
+[00:15:14] so right now this is just a hold and
+[00:15:16] waiting for
+[00:15:18] a little bit of a dip to add
+[00:15:22] i want to see if we get that
+[00:15:23] breakthrough 15 there's 15 on the ask
+[00:15:34] so i'm going to watch this little flush
+[00:15:38] as a dip opportunity
+[00:15:43] what i'm going to wait for is the first
+[00:15:44] one minute candle to make a new high
+[00:15:49] and then the trade back through 15 up to
+[00:15:52] 15 10.
+[00:15:54] so this candle is red which is fine and
+[00:15:56] the high is 15.
+[00:15:59] so let's look for the break through
+[00:16:02] the breakthrough 15.
+[00:16:06] this candle has about 15 seconds left on
+[00:16:09] it
+[00:16:10] so we're starting to form a one minute
+[00:16:11] pullback right here
+[00:16:13] i'm adding at 85. so this is
+[00:16:17] uh this could be a brand new trade i'm
+[00:16:19] still holding but i'm adding there for
+[00:16:23] so let's see if we get the surge through
+[00:16:24] 15
+[00:16:26] first one minute candle to make a new
+[00:16:28] high is the setup
+[00:16:31] there's 86 88
+[00:16:36] so we what we want to see is uh first
+[00:16:38] one minute candle makes a new high
+[00:16:40] 95 96 97 98 surge through 15 up to 15 10
+[00:16:45] 15 25.
+[00:16:50] there's 88 on the ask
+[00:16:58] so we've got 18 there's 90 on the ask
+[00:17:01] we're just waiting for that first one
+[00:17:02] minute candle to make a new high and
+[00:17:03] that breakthrough
+[00:17:12] watching for green on the tape no
+[00:17:15] not really because this is a one minute
+[00:17:16] micro pullback after a fresh breakout
+[00:17:24] so i'm looking for 15 15 10 15 12.
+[00:17:29] so right there it should have broken it
+[00:17:31] hit a high of 15.
+[00:17:34] i'll take it off the table for now i'll
+[00:17:36] let it pull back and then i'll do a dip
+[00:17:37] trade
+[00:17:38] sold the balance at 14 uh 40 and i'm
+[00:17:41] going to look for a dip
+[00:17:42] off of 14. let's see is it going to hold
+[00:17:48] it should have broken 15 right on that
+[00:17:50] spot
+[00:17:54] partial fill at 55.
+[00:17:57] so buying the dip down there at 55 and
+[00:17:59] then i'll let it curl up for a second
+[00:18:01] attempt through 15.
+[00:18:20] so there's 69 on the ask
+[00:18:26] took the profit at 61. this if we dial
+[00:18:30] this in here
+[00:18:31] you can see that candles where it should
+[00:18:33] have broken add back at 51
+[00:18:35] or 61 got a little bit of slippage on
+[00:18:38] that but that's okay another dip trade
+[00:18:40] on the double bottom
+[00:18:42] you can see we've got a double bottom
+[00:18:43] right here these trades are a little bit
+[00:18:45] more aggressive
+[00:18:46] the better quality trade was the first
+[00:18:58] so first one minute candle to make a new
+[00:19:00] high would be over 14
+[00:19:01] 67 when this candle closes
+[00:19:15] add it at 53 trying to time the first
+[00:19:21] and then a retest of 15. now in this
+[00:19:23] case the target would be about 15
+[00:19:25] for a profit target if it breaks through
+[00:19:29] or looks like it's going to then that's
+[00:19:31] awesome but right now looking for the
+[00:19:32] first 1 minute candle to make a new high
+[00:19:34] and we'll see if it pops up to 15.
+[00:19:38] so i'm looking for a tap of 15.
+[00:19:43] there's 75 on the bed there's 80 on the
+[00:19:45] ask
+[00:19:48] so this is where i want to take some
+[00:19:49] profit off the table as it pops up there
+[00:19:51] a little bit
+[00:19:54] and then a double bottom off of 44
+[00:19:56] another dip trade
+[00:20:05] partial phillip 49 another dip trade
+[00:20:07] there on the double bottom
+[00:20:11] there's 63 on the ask
+[00:20:20] now we've reclaimed the half dollar
+[00:20:32] so a couple quick trades there
+[00:20:36] we'll take a break for right now this
+[00:20:38] needs to pull back on the five minute
+[00:20:43] so usually a one minute micro pullback
+[00:20:46] will give us a nice breakout in this
+[00:20:48] case it was unable to break through the
+[00:20:49] 15 spot
+[00:20:51] so that's kind of disappointing i held a
+[00:20:55] little longer looking for that
+[00:20:57] bigger move but the high 15
+[00:21:06] on the dot so i'll put my new order at
+[00:21:07] 15 dollars
+[00:21:31] i was looking at btx before
+[00:21:34] pulling up sj and
+[00:21:37] let's see so we had those
+[00:21:42] whoops we had the one two three four
+[00:21:46] five sort of green candles in a row
+[00:21:48] squeezing up and i said i need to wait
+[00:21:49] for a pullback
+[00:21:51] it did pull back but
+[00:21:54] really feels like it needs to break over
+[00:21:56] 850.
+[00:21:58] so if it broke over 850 i'd probably be
+[00:22:00] a buyer but right now i'm not interested
+[00:22:24] so again two things one reminder for
+[00:22:27] those on youtube and facebook in case
+[00:22:29] you didn't already know day trading is
+[00:22:30] risky most beginner traders lose money i
+[00:22:32] encourage you to trade in a simulator
+[00:22:34] before you put real money on the line
+[00:22:35] and don't try to blindly follow me or
+[00:22:37] anyone else i trade
+[00:22:38] very quickly of course most momentum
+[00:22:40] traders do we're trying to capitalize on
+[00:22:43] volatility and ride the momentum buy
+[00:22:45] high sell higher so you've really got to
+[00:22:47] practice it before you put real money on
+[00:22:48] the line
+[00:22:50] warrior pro students
+[00:22:53] i had mentioned earlier manoli just got
+[00:22:56] his
+[00:22:56] um verified up to 750 000
+[00:22:59] in profits which is fantastic
+[00:23:03] and we're gonna make him uh a 750k
+[00:23:06] badge because he'd asked for it so he is
+[00:23:09] 75
+[00:23:09] of the way to 1 million which will be
+[00:23:11] really uh pretty exciting when he gets
+[00:23:13] that badge
+[00:23:14] so hopefully he's able to uh get there
+[00:23:17] pretty quickly but he's going to have a
+[00:23:19] 750
+[00:23:20] k badge to mark his his current progress
+[00:23:24] um and i also want to remind you guys if
+[00:23:27] you're waiting on getting your badge
+[00:23:29] approved if you submitted
+[00:23:30] your paperwork for a 50k or 100k badge
+[00:23:33] and you're waiting for it to get
+[00:23:34] approved
+[00:23:35] make sure you go back and double check
+[00:23:36] in your email to make sure we're not
+[00:23:38] waiting on you because kate's been
+[00:23:40] responding
+[00:23:40] to people and some people have there's
+[00:23:42] things that she's asked for hey i need
+[00:23:44] you to send me this or that whatever it
+[00:23:45] is
+[00:23:46] so make sure you check those emails and
+[00:23:48] um
+[00:23:50] uh we'd love to give you your badge but
+[00:23:52] you know you've gotta um
+[00:23:54] send us what we need for that so um
+[00:23:58] you definitely should work on that
+[00:24:05] um the interview is i will just double
+[00:24:09] check
+[00:24:09] i think that it's going to get posted um
+[00:24:14] if it's not already get if it's not
+[00:24:16] already posted it's going to be posted
+[00:24:22] so i'll keep you posted on that
+[00:24:46] btx does seem a bit choppy i'm not sure
+[00:25:00] exactly why
+[00:26:16] so you can see a btx popping up so
+[00:26:20] like i said if it breaks through 850 i'm
+[00:26:23] i'm interested
+[00:26:26] right now it's popping up on
+[00:26:29] decent volume
+[00:26:33] let's see what it does here i'm just
+[00:26:34] going to give it a second to see if it
+[00:26:35] holds 850
+[00:26:37] and i'm going to let it dip and on a dip
+[00:26:47] no fill i tried to fill at 51 i didn't
+[00:26:49] get filled so i got to let it dip
+[00:26:51] for just a second the high back there
+[00:26:53] was 56
+[00:26:55] so let's see whether or not it can break
+[00:26:57] through 56
+[00:27:01] long 52 so i bought that dip right there
+[00:27:08] let this squeeze up the target on this
+[00:27:10] would would ultimately be nine dollars
+[00:27:13] so if it starts to move a little faster
+[00:27:15] over 65 and 75
+[00:27:16] i'll look to add into the squeeze
+[00:27:20] so added right there 65. let's see if we
+[00:27:23] get that
+[00:27:24] move on this up to 75
+[00:27:27] on btx over 70 i'd probably
+[00:27:31] over 75 i'll add again over 75 would be
+[00:27:34] giving me
+[00:27:35] that confirmation that we're breaking
+[00:27:37] that quarter and looking at a move
+[00:27:39] towards nine
+[00:27:41] so holding right now and looking to add
+[00:27:43] on a pullback
+[00:27:46] for the breakthrough 75 orders at 75.
+[00:27:53] so the high that candle is 71.
+[00:27:56] so let's let it dip for a second
+[00:28:01] this is our leading gapper it's up 85
+[00:28:04] high volume is coming in now which is
+[00:28:06] good to see
+[00:28:09] there's 69 on the ask 70.
+[00:28:12] so you're seeing a 10 second micro
+[00:28:14] pullback forming right here
+[00:28:18] there's 73 taking some off the table i'm
+[00:28:22] not sure
+[00:28:24] it didn't break 75 immediately that's
+[00:28:27] giving me a little bit of reason to
+[00:28:29] pause
+[00:28:29] i'm going to let it pull back
+[00:28:32] and then reestablish a lower entry my
+[00:28:34] average was 60
+[00:28:36] which is a little high
+[00:28:43] leave the order at 75 so it's ready to
+[00:28:45] go
+[00:28:49] sj is a double bottom so i just added on
+[00:28:53] sj long buying that double bottom
+[00:28:57] and i'm gonna look for this to squeeze
+[00:28:59] up to
+[00:29:00] uh the first five minute candle to make
+[00:29:04] a new high so what we have going for us
+[00:29:05] on sj is the pullback to the volume
+[00:29:07] weight average price
+[00:29:10] and now i'm looking for first five
+[00:29:12] minute candle to make a new high which
+[00:29:13] is going to be in 10 seconds
+[00:29:14] over 55 new orders at 70 on sj
+[00:29:20] so let's watch uh sj for the first five
+[00:29:24] is right there so added at 60.
+[00:29:26] now looking for the first candle here to
+[00:29:30] 87 watching 87 on sj
+[00:29:35] so we want to see this continuation 75
+[00:29:37] adding at 78 right there
+[00:29:39] looking for 85 95 and that squeeze
+[00:29:43] up through 15. so let's watch this is
+[00:29:44] the five minute setup on sj
+[00:29:48] so looking for the break through 88 98
+[00:29:52] through 15 and that's a perfect
+[00:29:54] five-minute bull flag
+[00:29:56] holding right now not selling looking
+[00:29:58] for the order at
+[00:29:59] um 80
+[00:30:02] let's see hi this candle is 80. so a
+[00:30:05] quick
+[00:30:06] dip and i'm adding there at 72.
+[00:30:10] so i'm doing the dip long for the break
+[00:30:12] through 80.
+[00:30:14] and the high this candle is 87 so i want
+[00:30:18] to see the breakthrough 87. so adding
+[00:30:22] right there
+[00:30:23] sizing up now looking for the squeeze
+[00:30:25] through 15.
+[00:30:32] i'm going to try to be aggressive on sj
+[00:30:35] because i think the
+[00:30:35] chart is really strong here
+[00:30:39] for this breakthrough 15. it's the first
+[00:30:41] five minute candle to make a new high
+[00:30:42] it's the first one minute pullback after
+[00:30:44] this fresh breakout
+[00:30:46] so i'm going to look to add on dips and
+[00:30:48] then catch that trade
+[00:30:57] so watch up here high was
+[00:31:00] 15 it flashed there for a second
+[00:31:06] there's 84 we're going to look for 88
+[00:31:09] 98 squeeze through 15.
+[00:31:14] so there's 84 on sj
+[00:31:21] high is going to be over
+[00:31:23] 84 and this 5 minute candle is about to
+[00:31:26] close
+[00:31:26] so there's 85 it should have broken
+[00:31:31] once again a false breakout on the first
+[00:31:33] one-minute candle to make a new high i'm
+[00:31:35] going to look to do a dip on the low
+[00:31:37] adding at 35 try to reposition on this
+[00:31:44] so i'm back in at 35.
+[00:31:52] i think at this point what time is it 9
+[00:31:54] 22 i'm probably gonna have to wait for
+[00:31:56] the open
+[00:31:56] but i do think it's going to break
+[00:31:58] through 15. now it's a
+[00:32:00] triple top
+[00:32:05] still holding at 35
+[00:32:10] btx i have on watch but i'm not sure
+[00:32:13] about that
+[00:32:16] 1409 is the volume weight average price
+[00:32:29] 4.2 million shares of volume
+[00:33:00] nice pam good job one trade of the day
+[00:33:02] she said in it
+[00:33:03] 1450 sold in the 1470s that's terrific
+[00:33:08] one good trade
+[00:33:22] added 14 1447 there
+[00:33:29] i want to try to just hold on this
+[00:33:31] pullback for the move back to
+[00:33:35] 14 75 and 1480
+[00:33:40] put the orders there at 77. btx
+[00:33:43] yeah and acy acy like i said
+[00:33:47] um is interesting but it's not moving
+[00:33:50] enough right now
+[00:33:54] i sold at 47 for now i'm gonna look for
+[00:33:56] another dip
+[00:33:58] this is starting to look too much like a
+[00:33:59] bear flag it's just sideways
+[00:34:01] consolidation
+[00:34:03] so i'm gonna see if i can get another
+[00:34:04] pullback entry so add it back at 30
+[00:34:07] bought the dip again
+[00:34:11] and then i'll put orders out there 54
+[00:34:13] 64. we'll see if it pops up
+[00:34:21] only five minutes to the bell
+[00:34:29] so back to 56 look at that that's nice
+[00:34:38] i'll take that profit at 50. so that was
+[00:34:40] a nice dip trade from 30 to 50 20 cents
+[00:34:46] i would say that this one to me i think
+[00:34:49] has more potential because it's a blue
+[00:34:50] sky daily setup
+[00:34:51] it's a somewhat recent uh ipo
+[00:34:56] and i think it has a better news
+[00:34:57] catalyst than
+[00:34:59] btx btx i didn't mind taking some trades
+[00:35:02] on
+[00:35:02] and if it can break over 75 then i would
+[00:35:05] be more interested in it so i still have
+[00:35:07] an
+[00:35:07] order at 75 but needs to break that
+[00:35:10] level
+[00:35:12] high volume as it was coming up through
+[00:35:14] the flat top of 854
+[00:35:17] sj unfortunately is a
+[00:35:20] bit higher volume on this candle that
+[00:35:21] was red as a false breakout so i don't
+[00:35:23] like that as much
+[00:35:28] and you know interestingly sj has a 30
+[00:35:30] million share flow so it is a
+[00:35:32] considerably higher float than btx
+[00:35:35] uh but bts they they're both trading in
+[00:35:39] a very similar way so
+[00:35:41] i don't know
+[00:35:52] okay so we've got three and a half
+[00:35:53] minutes to the bell um as a reminder for
+[00:35:55] those
+[00:35:55] on youtube and uh facebook
+[00:35:59] thank you guys for tuning in
+[00:36:02] i'm gonna put up my disclaimer uh again
+[00:36:05] as we come to the end of the morning
+[00:36:06] show as a reminder that trading is risky
+[00:36:07] i encourage you to trade in a simulator
+[00:36:09] before trading
+[00:36:09] real money and don't try to blindly
+[00:36:11] follow me or anyone else
+[00:36:13] i'm a breakout trader momentum trader
+[00:36:15] i'm very aggressive i'm quick
+[00:36:17] and i look to capitalize on uh by
+[00:36:20] trading some of the most volatile stocks
+[00:36:21] each day so
+[00:36:22] btx and sj are the two biggest gappers
+[00:36:24] in the entire market today
+[00:36:26] that's the reason i'm focusing on them
+[00:36:28] they will continue to be the two that
+[00:36:29] i'm focused on
+[00:36:30] as soon as the bell rings i'll keep
+[00:36:32] trading for warrior starter warrior pro
+[00:36:35] students for a little while and we'll
+[00:36:37] see if we get some continuation at the
+[00:36:39] open my
+[00:36:41] bias right now is long on sj
+[00:36:44] for a squeeze at the open through 15 and
+[00:36:46] then the target would be 15 50 and 16.
+[00:36:50] acy i'm somewhat interested in
+[00:36:53] but i think that i'm going to wait on it
+[00:36:56] unless it looks like it's going to halt
+[00:36:57] because i don't know that enough
+[00:36:59] people are watching it i don't know that
+[00:37:00] it's obvious enough that's my main
+[00:37:02] problem is that
+[00:37:03] i want to trade obvious stocks but i do
+[00:37:06] think that acy has a
+[00:37:08] pretty good following so if it does
+[00:37:11] break through 13 it might pop up a
+[00:37:13] little bit but
+[00:37:14] i would just be worried about getting
+[00:37:15] caught in a halt coming down
+[00:37:17] all right so youtube facebook we'll be
+[00:37:19] back at it first thing tomorrow morning
+[00:37:21] thank you guys for hitting the thumbs up
+[00:37:22] and for those who are subscribed
+[00:37:24] really appreciate it and we'll see you
+[00:37:25] guys tomorrow morning for tomorrow

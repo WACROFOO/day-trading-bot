@@ -15,7 +15,7 @@ about *timing*.
 | streams on the channel's `/streams` tab | 480 |
 | selected as live trading (>= 25 min, not seminars) | 296 |
 | transcribed here | see `ls *.txt \| wc -l` |
-| words | ~486,000 at 82 streams |
+| words | ~757,000 at 154 streams |
 
 None of these were in `../data/daytradewarrior_videos.json`, which was scraped
 from the `/videos` tab only. The full stream index is

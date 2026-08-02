@@ -1,0 +1,785 @@
+# Day 2 - LIVE Day Trading from the All Star Traders Summit 2022 #daytrading
+# https://www.youtube.com/watch?v=xtlKmN8G8wQ
+# upload_date: 20221018
+# duration_sec: 2169
+
+[00:00:01] can you send the link in the chat room
+[00:00:04] then too so I can
+[00:00:06] switch people yeah yeah let me give you
+[00:00:09] the link
+[00:00:10] um
+[00:00:12] let's see
+[00:00:13] all right so um good morning everyone
+[00:00:16] it's about 10 to 9 we've got about 40
+[00:00:19] minutes to the opening bell
+[00:00:21] uh this is day two of the All-Star
+[00:00:24] Traders Summit
+[00:00:26] we've got about 18 million dollars uh
+[00:00:30] sitting here at the table and trading
+[00:00:31] profits these are traders who have uh
+[00:00:35] graduated from the warrior Pro classes
+[00:00:37] earned their profitability badges some
+[00:00:39] of them have uh in fact far exceeded my
+[00:00:43] trajectory as they've gotten over a
+[00:00:46] million dollars of profit in their first
+[00:00:47] year of trading which is absolutely
+[00:00:49] incredible my results aren't typical my
+[00:00:51] results aren't even as good as them so
+[00:00:53] their results also are not typical so
+[00:00:55] those tuning in uh please bear that in
+[00:00:58] mind trade cautiously practice in the
+[00:01:00] simulator before you put real money on
+[00:01:01] the line manage your risk and thank you
+[00:01:04] as always for tuning in I hope you do
+[00:01:06] hit the thumbs up
+[00:01:07] so this morning
+[00:01:10] I'm feeling a little bit better my voice
+[00:01:12] is not perfect but it's um
+[00:01:15] it's getting better we've got a gap scan
+[00:01:17] that's a little weak overall Market
+[00:01:19] super straw big gap in the overall
+[00:01:22] Market which is good already taken a
+[00:01:24] couple trades on atxi it's our like
+[00:01:27] fifth leading gapper akus is the leading
+[00:01:30] gapper it's a buyout our Med is the
+[00:01:33] second leading gapper it's on watch but
+[00:01:37] I'm not sure that it's I don't know I
+[00:01:40] maybe if it gets under V web we get a
+[00:01:42] sub V web trap right now
+[00:01:45] I I don't know if I'm I'm interested it
+[00:01:47] just doesn't feel like it's super
+[00:01:48] exciting so leaving that one alone for
+[00:01:51] now
+[00:01:52] um uh Aveo I think that one might be a
+[00:01:55] buyout as well so
+[00:01:58] not super into that in any case Char
+[00:02:01] looks weird fnhc
+[00:02:05] manoli what were you saying and by the
+[00:02:07] way so around the table we've got
+[00:02:09] um Chris manoli hamang chess Max Danny
+[00:02:13] and me
+[00:02:15] um sort of down at the corner this
+[00:02:17] camera's looking over my shoulder but
+[00:02:19] you guys know what I look like so
+[00:02:23] manoli you were looking at fnhc right
+[00:02:25] yes so I'll look at this oh get close to
+[00:02:29] the mic oh
+[00:02:30] how's this better
+[00:02:32] so yeah I'm looking at fnhc
+[00:02:34] this one's just gapped above that 200
+[00:02:37] EMA so I'll take a look at this intraday
+[00:02:39] if it starts to look like it wants to
+[00:02:41] break through that 110 level but I won't
+[00:02:43] touch it for now but it hasn't uh it
+[00:02:45] hasn't gone anywhere that one and then
+[00:02:48] I haven't looked at agfy today did that
+[00:02:51] one do a reverse split
+[00:02:53] yeah yeah
+[00:02:55] and then made it move but I'm not seeing
+[00:02:58] too much on the stands today
+[00:02:59] okay
+[00:03:02] um I have two trades on atxi or maybe
+[00:03:05] three three small trades three small
+[00:03:07] winners 941 dollars nothing too exciting
+[00:03:11] yet Chris you traded ATX side of the
+[00:03:13] short side a couple times right yeah we
+[00:03:14] got a couple stops out of that
+[00:03:22] so its I was my biggest winner a couple
+[00:03:24] stops out of a little 200 bucks nvid I
+[00:03:27] thought that pop a drop
+[00:03:30] lace armed and I'm still in avct it's
+[00:03:34] really not moving starting to slowly
+[00:03:36] fade so I'm gonna hold on to that for a
+[00:03:38] little bit hopefully for a test to be
+[00:03:40] wack and go from there okay anything
+[00:03:43] else that has momentum I'm looking at
+[00:03:47] yeah a little hard to hear you got the
+[00:03:48] option closer to the mic but
+[00:03:50] um among uh so I took a
+[00:03:54] one trade on atxi up at the highs around
+[00:03:57] 420s and uh I'm sitting down 77 right
+[00:04:01] now uh that's the only trade I took uh
+[00:04:05] overall I'm watching uh lace lasc uh
+[00:04:10] that's on my uh charts I'm also watching
+[00:04:13] sh pH for a dead cat bounce uh also uh
+[00:04:17] bif
+[00:04:18] and uh I might keep ATX on my charts but
+[00:04:22] I'm not really too eager to take any
+[00:04:24] trades unless it proves itself yeah
+[00:04:29] yeah
+[00:04:30] I agree okay Jess what do you see I
+[00:04:34] really don't see much in terms of my
+[00:04:36] strategy so I just uh right now I'm just
+[00:04:37] sitting waiting uh for something fresh
+[00:04:40] something new
+[00:04:41] okay Max you got anything
+[00:04:43] um I don't see much either keeping my
+[00:04:45] eye on our Med and bif bif I like for
+[00:04:48] the daily setup there was that big red
+[00:04:50] candle with high volume on the 28th
+[00:04:52] though with a high of 423 if we can get
+[00:04:54] around that level
+[00:04:55] um break it I think it can be pretty
+[00:04:56] powerful
+[00:04:58] um I have a couple trades on atxi for
+[00:05:00] this morning sitting down about 250
+[00:05:01] bucks but not too bad we'll see what
+[00:05:03] happens at the open okay that's only
+[00:05:05] like two lobsters right manoli no not
+[00:05:07] even Lobster's for 35 a piece really
+[00:05:11] so those are kind of cheap and they're
+[00:05:14] like real cheap or a solid flowers
+[00:05:17] that's always a plus glad you got the
+[00:05:20] discount on wholesale Lobster
+[00:05:21] Danny do you have anything on watch uh
+[00:05:25] not really I'm looking at atxi and armed
+[00:05:27] but I'm not super likely to hop into any
+[00:05:30] of them quickly
+[00:05:32] um I want to see something start moving
+[00:05:34] to either direction uh
+[00:05:37] I think I'm going to try to stay out of
+[00:05:39] range range trading today and if
+[00:05:41] something wants to move towards extremes
+[00:05:43] I'll think about taking a position
+[00:05:46] okay all right that sounds good and now
+[00:05:50] back to me so
+[00:05:53] we've got three minutes to the top of
+[00:05:54] the hour and I guess I'm hoping for
+[00:05:57] maybe an algo Spike news top of the hour
+[00:06:00] it's Tuesday this is a perfectly
+[00:06:03] reasonable day to look for news here if
+[00:06:06] we get some news top of the hour popping
+[00:06:08] up I could jump in boom just like that
+[00:06:11] get a couple quick trades
+[00:06:13] if not
+[00:06:15] uh well I'd have to wait to see what
+[00:06:17] proves itself
+[00:06:19] uh take it a little bit slow
+[00:06:22] so while we wait those who are tuning in
+[00:06:25] on YouTube for the morning show thank
+[00:06:28] you guys for joining us I put a link uh
+[00:06:31] for a two-week trial at Warrior trading
+[00:06:34] yesterday afternoon we did a great q a
+[00:06:37] session where we were broadcasting just
+[00:06:39] a warrior members and so if you are
+[00:06:43] we're taking part in the Warrior Pro
+[00:06:44] preview you would have been able to
+[00:06:45] attend that we'll be doing something
+[00:06:47] again like that today so I would love to
+[00:06:49] have you guys uh do a two-week trial and
+[00:06:51] see whether or not
+[00:06:53] this is a good fit one of my goals is to
+[00:06:55] help as many Traders as possible learn
+[00:06:58] about day trading we're all day Traders
+[00:07:00] here we trade slightly different
+[00:07:02] variations of pretty much the same
+[00:07:04] strategy or my momentum Traders we're
+[00:07:07] looking for stuff moving quickly ideally
+[00:07:09] we'd like to see stocks going uh well
+[00:07:12] just about yeah straight up but anything
+[00:07:15] moving up relatively quickly is worth
+[00:07:19] watching
+[00:07:20] and of course I use the scans to help me
+[00:07:22] find that so
+[00:07:23] the scanners I've got my development
+[00:07:25] team that's built these out for me these
+[00:07:28] Traders are all using they all have
+[00:07:29] access to my scanner so
+[00:07:31] these are helping them find stocks to
+[00:07:33] trade and as you guys probably saw
+[00:07:35] several times last week you know stock
+[00:07:38] pops up on the scanner boom workflow
+[00:07:40] type it up so sgfy let's say that one
+[00:07:44] comes up
+[00:07:45] and by the way one of the next
+[00:07:47] development projects is building charts
+[00:07:50] into the same software instead of using
+[00:07:52] two different platforms but anyways sgfy
+[00:07:54] pull it up type in the level two check
+[00:07:56] the flow check the spread if I like it
+[00:07:59] shift one shift two I'm already in just
+[00:08:02] like that riding momentum so it's pretty
+[00:08:04] quick
+[00:08:06] uh you out oh so Chris covered avct nice
+[00:08:10] you were patient on that one
+[00:08:13] as short
+[00:08:20] uh okay so
+[00:08:23] 9am
+[00:08:28] optional scans
+[00:08:40] a couple higher float stocks
+[00:08:45] foreign
+[00:09:14] starting to break it's Trend a little
+[00:09:17] bit
+[00:09:24] so
+[00:09:25] see that
+[00:09:29] Morris was saying we're going to open at
+[00:09:31] 12 on our event today I believe he was
+[00:09:34] wrong I believe so yeah we're not there
+[00:09:37] yet
+[00:09:43] I lag for bounce today
+[00:09:48] I don't know
+[00:09:50] I lag um
+[00:09:59] I don't know if I trust ilag for a
+[00:10:01] bounce
+[00:10:09] I do think there's a lot of eyes on our
+[00:10:10] meds so anything's possible
+[00:10:13] yeah no I agree
+[00:10:15] um sub V web traps would be interesting
+[00:10:17] it's about to test view app again to the
+[00:10:19] upside
+[00:10:22] I just bought there at 83 for the subway
+[00:10:24] whack trap I'm watching for an ad over
+[00:10:27] eight added right there profit at 803
+[00:10:30] small profit holding 2600 shares at 86.
+[00:10:34] it's a nice move yeah sub V web trap
+[00:10:36] that's what we were talking about
+[00:10:37] earlier
+[00:10:40] now watching 805 new orders at 8 10.
+[00:10:45] yeah good volume on that candle
+[00:10:51] I wonder where that seller is
+[00:10:53] added at 806 now looking for squeeze up
+[00:10:57] to 8 15.
+[00:10:59] there's much closer to 8 40. nice
+[00:11:04] it's a breakout level obviously got a
+[00:11:06] little profit at 8 10.
+[00:11:13] clean candle
+[00:11:18] high is 8 10.
+[00:11:26] New Order 811.
+[00:11:28] 1500 shares kind of small size just
+[00:11:32] do little base hits in these areas
+[00:11:47] had to pack 807. now looking for the
+[00:11:51] squeeze through 810 and up to 8 15.
+[00:11:56] this is a micro pullback on the one
+[00:11:58] minute chart
+[00:12:01] there's eight nine
+[00:12:05] looking for 8 11 8 15.
+[00:12:11] so on the 10 second you can see this
+[00:12:13] little consolidation here under 810
+[00:12:22] flat 805 small loss
+[00:12:44] so view app is at 785
+[00:12:47] it could come down and re-test view app
+[00:12:51] but then that would be breaking below
+[00:12:53] eight
+[00:12:57] you know one of the goals each day is to
+[00:12:59] try to pull 20 cents out of the market
+[00:13:00] that was 20 cents a share from 85 to
+[00:13:03] 805.
+[00:13:06] so that's you know
+[00:13:09] kind of like
+[00:13:11] that's the job that's the goal that's
+[00:13:14] if I can get more that's great but that
+[00:13:16] was solid trade pretty
+[00:13:18] pretty sweet
+[00:13:21] let it pull back and then see if it
+[00:13:27] curls back up
+[00:13:29] it was a little choppy earlier some
+[00:13:30] topping tail candles
+[00:13:44] 10 000 shares seller at 801.
+[00:14:00] so typically I like a retest of view app
+[00:14:03] once it breaks
+[00:14:06] if they're really strong sometimes they
+[00:14:07] just do a micro pullback and keep going
+[00:14:09] as you get short covering
+[00:14:11] but a proper retest to v-wap is okay the
+[00:14:14] only problem in this case is that
+[00:14:16] that means firmly breaking under the
+[00:14:19] whole dollar of eight
+[00:14:22] which I wouldn't really want
+[00:14:24] yeah the big ask is constantly walking
+[00:14:26] the shirt down yeah I agree
+[00:14:38] it was at 801 then eight now it's at
+[00:14:40] 7.99
+[00:14:44] yeah so what's the deal with that
+[00:14:46] someone's just put in a big sell order
+[00:14:48] trying to unwind a position it's at 46
+[00:14:51] percent
+[00:14:52] is there a point where they those shares
+[00:14:56] get bought up and it breaks
+[00:15:01] it's hard to know
+[00:15:03] you've got 98 on the ask
+[00:15:05] 97 96 on the bid now there's a buyer on
+[00:15:09] 95 but it's still
+[00:15:17] right so good green on the tape now does
+[00:15:20] this flush and is it a false breakout or
+[00:15:23] does it hold
+[00:15:25] like to see it break through A10
+[00:15:27] there's eight six
+[00:15:31] took some profit yeah so it's only like
+[00:15:34] five cents I mean it's not bad but then
+[00:15:36] look at this candle it still has 30
+[00:15:38] seconds left and now it's a red candle
+[00:15:39] and it looks like a false Breakout it's
+[00:15:42] not quite strong enough
+[00:15:46] okay so this is a sort of an action that
+[00:15:47] I've seen uh you know when obviously
+[00:15:50] it's momentum Traders we uh focus on
+[00:15:53] stocks that are
+[00:15:56] moving quickly so the big ask walks it
+[00:15:59] down and then we say that we see this
+[00:16:01] quick pop and then you know in a better
+[00:16:04] Market that would keep going but you
+[00:16:06] know right now we just see that it comes
+[00:16:08] right back down yeah
+[00:16:19] twac news Kanye West to sign up
+[00:16:25] I'm going to take Along on twac there
+[00:16:29] um watching for an ad 1750 some news
+[00:16:32] that um
+[00:16:34] Kanye West's partnering up with Trump
+[00:16:37] twac of course I know it's like just
+[00:16:41] enough news that that could be
+[00:16:43] interesting it's like when Dennis Rodman
+[00:16:46] went to North Korea yeah so watching for
+[00:16:48] an ad here at 17.50 for a squeeze up to
+[00:16:51] 20 18 let that seller at 17.50 it could
+[00:16:55] yeah I think that'll get bought up I
+[00:16:57] think so volumes light and the snooze is
+[00:16:59] interesting
+[00:17:00] added there 56. I got in at 53. nice
+[00:17:04] holding a thousand shares with you at 53
+[00:17:07] Danny I saw some news about parlor
+[00:17:10] um yesterday watching over 65. nice
+[00:17:13] there's no there's 18.
+[00:17:18] added to 70. now looking for the break
+[00:17:20] of uh 85 and 90.
+[00:17:25] see if we can get over 18 thanks Mark
+[00:17:28] for posting that
+[00:17:30] nice headline
+[00:17:35] 450 shares
+[00:17:42] holding 113 reducing size a little bit
+[00:17:46] yeah I saw there was a headline that he
+[00:17:49] bought parlor
+[00:18:01] we had that the thing is I probably
+[00:18:02] wouldn't have jumped on this if it
+[00:18:03] weren't for the pig move the other day
+[00:18:05] up to 21.88
+[00:18:12] so we did get up to 18 oh well 1798
+[00:18:15] pretty close
+[00:18:27] added at 38 to buy the tip
+[00:18:29] now looking for the pot back up over
+[00:18:31] 17.50 41 on the ask 42.
+[00:18:38] flat at 39.
+[00:18:41] it seems like there's a seller at 40.
+[00:18:43] fnhc coming up to that 110 level here
+[00:18:45] fnhc
+[00:18:54] pwac side chart
+[00:18:58] [Music]
+[00:19:01] can you give me a link to that headline
+[00:19:02] on dwac
+[00:19:12] is what was that just give me the link
+[00:19:15] to that so I can see
+[00:19:22] so you know uh people copy paste
+[00:19:25] headlines and I'll see it if I'll pull
+[00:19:28] up the stock
+[00:19:29] and I see it moving then I'm like okay
+[00:19:31] here we go and you can see this was
+[00:19:34] moving right there on that candle
+[00:19:38] nice volume on that video did you get in
+[00:19:41] that manually no
+[00:19:43] which one fnhc NHC
+[00:19:46] man baby looks good
+[00:19:48] the next year
+[00:19:50] the shorts are yeah yeah she's gone
+[00:20:06] nice
+[00:20:08] now watch to see if I can hold that 110
+[00:20:09] level
+[00:20:14] still no position
+[00:20:17] but nice to see a pan out
+[00:20:19] yep very good
+[00:20:30] yes I did not hold up no
+[00:20:33] and we got one good trade on it I took
+[00:20:35] it with you Danny uh I took a small loss
+[00:20:37] on that it hesitated right around 1760
+[00:20:41] or wherever right yeah and I saw it I
+[00:20:45] sold it right into the 70s and 60s and
+[00:20:46] took it
+[00:20:51] took a five cent loss
+[00:21:06] we've got about 18 minutes to the
+[00:21:09] opening bell
+[00:21:10] chest anything you have on watch no
+[00:21:12] nothing nothing today nothing nothing's
+[00:21:15] going straight up well after sixty
+[00:21:17] thousand dollars last Friday looks good
+[00:21:19] I guess you're able to it's good for
+[00:21:20] them yeah I mean honestly yeah you're
+[00:21:24] good for the whole month you could just
+[00:21:25] back and do nothing it gets a little
+[00:21:26] boring but it does
+[00:21:30] you can get me a cup of coffee
+[00:21:32] you can get it yourself
+[00:21:38] just trying to help the state this
+[00:21:47] no just tea for me today
+[00:21:51] but yeah the boredom trades I mean that
+[00:21:53] that is um I mean there's a real thing
+[00:21:55] you start to get antsy you know it's
+[00:21:57] like 9 15 you're like uh oh we're coming
+[00:21:59] to the end of the pre-market session I
+[00:22:01] haven't gotten to trade yet uh
+[00:22:04] and between 9 30 10 30 are we going to
+[00:22:07] see anything open up
+[00:22:12] maybe we may have something good for you
+[00:22:19] he's drinking over there Jess this
+[00:22:21] doesn't concern him
+[00:22:25] uh okay
+[00:22:31] I said Adam uh-huh
+[00:22:37] hmm
+[00:22:47] and we've been in a little bit of a slow
+[00:22:49] patch week you know we had some really
+[00:22:51] good
+[00:22:52] really good moves back in August
+[00:22:55] September China's IPOs
+[00:22:58] Ed recent IPOs recent reverse splits
+[00:23:03] yeah it's not only it's not just because
+[00:23:05] you know if if someone hits like a big
+[00:23:07] winner or something like that then you
+[00:23:08] know they're not satisfied it's really
+[00:23:10] just
+[00:23:11] a lot of this stuff I will get just I
+[00:23:14] will get chopped up and I'll buy it sell
+[00:23:16] it buy it sell it buy it sell and then I
+[00:23:18] look back I'm like why were you even
+[00:23:19] trading that so it really just helps to
+[00:23:21] stick to my my initial rules
+[00:23:26] or just trade essentially what's in
+[00:23:28] front of me
+[00:23:31] yeah that makes sense not so good it's
+[00:23:34] smart I think something that
+[00:23:36] yesterday we were talking a little bit
+[00:23:38] about aha moments and
+[00:23:42] um so I I think if I was going to say
+[00:23:45] what my aha moment was
+[00:23:47] it was going it was well following a
+[00:23:51] loss like amongst that after a big loss
+[00:23:54] sometimes you go through your metrics so
+[00:23:55] following a big loss my account was
+[00:23:57] below PDT so I couldn't trade so I went
+[00:23:59] through my metrics and I was like what's
+[00:24:02] working what's not working I wasn't
+[00:24:04] using Trader view but I had an Excel Doc
+[00:24:06] and I noticed all my biggest winners
+[00:24:09] were on small cap stocks overflowed
+[00:24:13] stocks uh generally small trades with
+[00:24:16] bigger positions and generally like
+[00:24:18] these were stocks that had super high
+[00:24:20] relative volume they had some kind of
+[00:24:22] news they had some kind of some kind of
+[00:24:23] catalyst that was why they were popping
+[00:24:25] up at that moment usually it was like
+[00:24:27] pre-market news but there were other
+[00:24:28] catalysts too and so I sort of said to
+[00:24:31] myself okay
+[00:24:33] you know what if I took away all the
+[00:24:35] other trades except for those this that
+[00:24:37] last month even though some of them were
+[00:24:39] losers where would I finish and the
+[00:24:41] result was I would have been great
+[00:24:43] so I was like okay well let's try this
+[00:24:45] moving forward it wasn't go back to
+[00:24:47] simulator or anything like that I was
+[00:24:48] like going forward only trade those
+[00:24:52] and then a green month
+[00:24:55] and then a second grade month a third
+[00:24:56] grade month fourth grade month a fifth
+[00:24:58] green month the sixth green month and
+[00:24:59] then I had one day where I lost 30 grand
+[00:25:01] and I was like whoa that was what did I
+[00:25:05] do wrong impulse slam the buy button on
+[00:25:08] breaking news afternoon trade I was
+[00:25:10] already read it was like recipe for
+[00:25:12] disaster
+[00:25:14] and so reviewed my metrics I was like
+[00:25:16] look what you've done last six months
+[00:25:17] you've been really solid just tomorrow
+[00:25:19] go back and do that and to Chris's point
+[00:25:22] I said it's probably going to take me
+[00:25:25] a month two months three months it's
+[00:25:27] gonna take a while a couple you know
+[00:25:28] three months maybe to get that back 30
+[00:25:31] grand is a lot to lose we could be good
+[00:25:32] but I did that and uh so my account had
+[00:25:37] gone from twenty five thousand
+[00:25:39] to about 55 000 and then one day back to
+[00:25:43] like 25 000 and then over the next year
+[00:25:46] or so I built it up to a hundred and
+[00:25:49] once it got to 100 that was the first
+[00:25:50] time I took cash out of the account like
+[00:25:52] for profit yeah so at least in that
+[00:25:55] first time when you went to went up to
+[00:25:56] 50 and came back to 20 yeah but at least
+[00:25:59] you knew that you can you can kind of
+[00:26:02] replicate that right I mean yeah yeah it
+[00:26:04] was your first time
+[00:26:06] you still were somewhat confident and
+[00:26:08] you actually I think a lot of beginner
+[00:26:10] Traders as you what you did when you had
+[00:26:12] a red day I mean uh when you looked at
+[00:26:14] you looked at your metrics you analyzed
+[00:26:15] and you kind of went after what was
+[00:26:18] needed and what what you needed to
+[00:26:20] improve in order to be profitable I
+[00:26:22] think most beginner Traders and I mean
+[00:26:25] at a point a lot of us Traders we all
+[00:26:26] get attached to our P L's and we just
+[00:26:29] can't get over that red and all we want
+[00:26:31] to do is
+[00:26:32] get green and somehow we just start
+[00:26:35] shooting from our hips and taking trades
+[00:26:38] not realizing what we're doing just keep
+[00:26:40] digging that hole bigger right and
+[00:26:42] that's where desperation kicks in you
+[00:26:45] start spiraling and so you know what I
+[00:26:46] did
+[00:26:48] let's all take ourselves back Apollo 13.
+[00:26:50] we've all seen the movie they were in a
+[00:26:52] very serious situation
+[00:26:54] you know they they're running out of
+[00:26:56] oxygen and they could have gone the
+[00:26:58] route of just desperation just trying to
+[00:27:00] like breathe out of a paper towel roll
+[00:27:02] like is this working is this working
+[00:27:04] it's not doing anything I'm slowly dying
+[00:27:06] but they inventoried everything they had
+[00:27:09] everything they had on board that
+[00:27:10] spaceship and they said we got to figure
+[00:27:12] this out and it was through that that
+[00:27:15] they came they they were Innovative they
+[00:27:17] actually solved
+[00:27:18] situation what movie is this Apollo 13
+[00:27:21] and they made it back
+[00:27:22] they made it back I need to watch that
+[00:27:24] right sorry you haven't seen it you've
+[00:27:26] got to watch seen it so it all that is
+[00:27:28] to say
+[00:27:29] in that time of high pressure you can
+[00:27:31] either go to desperation panic and some
+[00:27:34] people under the under pressure they
+[00:27:36] don't handle well and you know this is
+[00:27:37] like people who who have jobs like you
+[00:27:41] know emergency responders things like
+[00:27:43] that
+[00:27:43] you just you have to be able to under
+[00:27:46] those very high pressure situations
+[00:27:49] stay calm and it's so easy with the
+[00:27:52] pressure of trading and the stress that
+[00:27:53] comes with the loss
+[00:27:55] to start to spiral and to start to get
+[00:27:57] the desperation and when you start
+[00:27:59] getting desperate you're trading you're
+[00:28:01] throwing 50 000 shares at anything that
+[00:28:03] moves in one day I mean you could be out
+[00:28:06] of this forever so
+[00:28:08] yeah I don't know that was my aha moment
+[00:28:10] Jess you had a comment since I know
+[00:28:13] you're not in a trade you want to
+[00:28:14] comment on what your kind of aha moment
+[00:28:16] was which I know is a yeah when we were
+[00:28:21] um talking yesterday it wasn't really
+[00:28:22] just uh it wasn't a moment it was just
+[00:28:25] like I said it was just doing less bad
+[00:28:27] every day you know it would make it I
+[00:28:29] would make a mistake and then okay
+[00:28:30] that's now that I made the mistake I can
+[00:28:32] correct that mistake let's make a new
+[00:28:34] mistake correct that mistake make
+[00:28:36] another and just keep going and
+[00:28:37] essentially what it was was it was
+[00:28:39] correct doing everything I could do
+[00:28:41] wrong so there was no more mistakes to
+[00:28:43] make and I just started doing the right
+[00:28:45] you know the opposite of those those
+[00:28:47] wrong moves and what it did was
+[00:28:49] essentially create a curl in my my p l
+[00:28:54] twac
+[00:28:56] scanner a little delayed there
+[00:28:59] dwic all the way back where it came from
+[00:29:01] oh no that was gfy catch that no I I uh
+[00:29:05] covered a few app
+[00:29:07] do I have a small piece of the move
+[00:29:10] yeah I can touch on my kind of aha
+[00:29:12] moment yeah I'd love to hear it this is
+[00:29:15] manoli talking right now yeah mine was
+[00:29:16] more
+[00:29:17] psychological so I feel like I realized
+[00:29:20] early on
+[00:29:21] that it's human nature especially for me
+[00:29:23] and most people to always want more
+[00:29:27] you know so when you're in a stock and
+[00:29:30] you're looking at it go up
+[00:29:32] um and you can think back to like meme
+[00:29:34] plays and how people kind of ride those
+[00:29:36] all the way to the top never sell
+[00:29:39] and then go all the way back down and
+[00:29:40] break even or lose money it's because at
+[00:29:43] each level in each price point you're
+[00:29:45] just like okay well there's my thousand
+[00:29:47] dollars what if it goes to two and then
+[00:29:49] it does and then you're like okay well
+[00:29:53] what if it goes to three and it does
+[00:29:55] what if it goes to four and it does and
+[00:29:56] it keeps going up it keeps going up and
+[00:29:58] you keep wanting more
+[00:30:00] and you never take profit right and
+[00:30:03] early on I realized that
+[00:30:05] I was going green to Red a lot doing
+[00:30:07] that holding too long wanting more and
+[00:30:10] as soon as I started taking Profit just
+[00:30:13] immediately and then shutting down my
+[00:30:15] screens early and just walking away day
+[00:30:17] the day green whether I was satisfied or
+[00:30:19] not because I knew I would never be
+[00:30:21] satisfied right and when you realize
+[00:30:23] that then you're just walking away and
+[00:30:25] you're not
+[00:30:27] um victim to fomo and thinking oh but if
+[00:30:29] I stay a little longer then there might
+[00:30:32] be a runner this one might keep going I
+[00:30:34] want more I want more and you get
+[00:30:36] satisfied with just taking
+[00:30:38] your profit on a regular basis and as
+[00:30:41] soon as you figure that out then you'll
+[00:30:45] become consistent you'll never go broke
+[00:30:47] taking profit and Mark Douglas talks
+[00:30:49] about this in his book trading in the
+[00:30:50] zone yep it's the most difficult skill
+[00:30:54] out of all the skills to become
+[00:30:55] consistently profitable to figure out
+[00:30:58] we always want more
+[00:31:00] so I think that was a big aha moment for
+[00:31:03] me early on just taking small days
+[00:31:05] however I could convince myself to do
+[00:31:07] that and then eventually you just become
+[00:31:09] confident because you're just
+[00:31:10] consistently green then and then you're
+[00:31:11] taking those same trades positive
+[00:31:13] feedback with yep positive feedback loop
+[00:31:16] so that was my aha moment and then
+[00:31:18] obviously there's a lot of other things
+[00:31:19] that go into it
+[00:31:21] but um that that's the big one I think
+[00:31:23] most Traders know what support is note
+[00:31:26] resistance is you've been trading for a
+[00:31:28] year or two you know what everybody else
+[00:31:30] knows and you're still looking for some
+[00:31:31] kind of secret when there is no secret
+[00:31:34] you're just not taking profit you just
+[00:31:37] want more just take it shut the screens
+[00:31:39] down stop trading and get away come back
+[00:31:42] tomorrow and falling victim to fomo
+[00:31:44] where you have a good trade you take
+[00:31:45] profit and then you get back in at the
+[00:31:47] top yeah
+[00:31:49] yeah I mean we've all done that but you
+[00:31:51] have to learn from those mistakes and
+[00:31:53] you know that's part of
+[00:31:54] being a Trader is being super resilient
+[00:31:57] getting knocked down and then turning
+[00:31:59] each of those losses as much as you can
+[00:32:01] into a less some losses there isn't much
+[00:32:03] of a lesson every strategy allocates for
+[00:32:06] probably being wrong 30 of the time and
+[00:32:07] you stop out where you're supposed to
+[00:32:09] it's fine it is what it is but when you
+[00:32:11] take those big losses that far exceed
+[00:32:13] your average those are the ones you have
+[00:32:15] to learn from because 10 of those
+[00:32:17] that can blow up an account I mean even
+[00:32:20] for someone with a big account like me
+[00:32:22] no one's immune to it at any point in
+[00:32:24] your career if you don't continue to
+[00:32:27] maintain discipline you can make really
+[00:32:29] catastrophic mistakes
+[00:32:32] we've got about five minutes to the
+[00:32:34] opening bell Gap scanners pretty much
+[00:32:35] unchanged at this point
+[00:32:38] um anyone else have something they're
+[00:32:39] watching other than what we've already
+[00:32:41] kind of mentioned
+[00:32:43] saw you Danny you said you got trade on
+[00:32:45] atxi a quick pop there yeah I got out of
+[00:32:48] it pretty quickly for pretty much just
+[00:32:50] completely break even there was a 50 000
+[00:32:53] bid that came in and it barely moved so
+[00:32:57] I just got out got it
+[00:33:01] ax you have anything you like no just
+[00:33:03] being patient until something's up oh my
+[00:33:05] gosh so something opens up okay proof
+[00:33:07] itself
+[00:33:08] so the first part of the morning has
+[00:33:10] always been choppy yesterday included
+[00:33:12] um so again I'm just gonna be patient
+[00:33:13] until something really shows itself good
+[00:33:20] any other comments on that aha moment
+[00:33:22] that anyone has no I think similarly to
+[00:33:25] manoli I think my aha moment more so
+[00:33:28] um was a mindset that included you know
+[00:33:31] learning how to cope with losses and
+[00:33:32] just knowing that the only way that
+[00:33:34] you're gonna get better is by moving
+[00:33:35] forward from them and not dwelling on
+[00:33:37] them yeah um and losses are part of
+[00:33:39] trading and everyone's going to take
+[00:33:41] them no matter what size account you
+[00:33:42] have no matter how good you are everyone
+[00:33:44] takes losses how you move forward from
+[00:33:46] them and learn
+[00:33:48] um so if you have if you have a bad day
+[00:33:50] and you still have profit or you know if
+[00:33:52] you're in the Sim and you know what
+[00:33:53] you're doing like manoli said everyone
+[00:33:55] knows the strategy everyone knows setups
+[00:33:57] um as long as you know that
+[00:33:59] all you can do is move forward from it
+[00:34:00] you can't dwell on it and
+[00:34:02] put yourself further backwards
+[00:34:04] yep good
+[00:34:07] yeah very good
+[00:34:10] okay uh well we've got four minutes to
+[00:34:12] the open so those tuning in for the
+[00:34:15] YouTube uh or for the Morning Show on
+[00:34:16] YouTube thank you guys for being here I
+[00:34:19] encourage you to join the two-week uh
+[00:34:21] Pro preview it's a two-week trial that
+[00:34:23] we're running right now I'm Gonna Keep
+[00:34:25] uh streaming of course for members of
+[00:34:27] day trade Dash and Warrior trading you
+[00:34:30] can sign up to day trade Dash as well if
+[00:34:31] you want to but you might as well do the
+[00:34:33] two-week trial it's uh cheaper and gives
+[00:34:36] you access to all of us
+[00:34:39] um who are going to be doing some more
+[00:34:40] content today and tomorrow for you guys
+[00:34:43] let me just give you the link again I
+[00:34:45] think it's pinned to the top of the
+[00:34:46] comments on YouTube but I'll just give
+[00:34:48] it to you again I'm sitting right now
+[00:34:50] with some small profits pre-market and
+[00:34:53] nothing super exciting but you know some
+[00:34:55] days are
+[00:34:56] better than others it's we've been in a
+[00:34:58] little bit of a low
+[00:35:01] all right there you go There's the link
+[00:35:02] so make sure you join that two-week um
+[00:35:04] Pro preview trial today so you can be in
+[00:35:08] the room like in five minutes as soon as
+[00:35:11] you join as soon as you sign up and
+[00:35:14] participate in this All-Star Trader
+[00:35:17] Summit which we're broadcasting to
+[00:35:20] Warrior members so I'll see you guys in
+[00:35:22] the chat room Warrior members we're
+[00:35:24] going to keep trading here we've got
+[00:35:25] three minutes to the opening bell small
+[00:35:27] gains a little bit of a slow Gap scanner
+[00:35:30] but let's see if something ends up uh
+[00:35:32] you know kind of rising up and showing
+[00:35:34] some strength green on right now on
+[00:35:36] three out of three stocks so
+[00:35:39] small gains
+[00:35:41] a reminder is always for those tuning in
+[00:35:43] that trading is risky my results are not
+[00:35:44] typical I could put a link here I'll put
+[00:35:48] it let's see right up there and right
+[00:35:51] there I'll put a link to a couple other
+[00:35:53] episodes you guys might like to check
+[00:35:54] out okay thanks for tuning in we'll see
+[00:35:56] you first thing uh tomorrow morning
+[00:35:57] those on YouTube
+[00:36:06] good stuff I'm not looking at

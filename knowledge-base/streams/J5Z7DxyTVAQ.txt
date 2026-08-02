@@ -1,7 +1,7 @@
-# 
+# 4/12/2021 - LIVE Day Trading Morning Show - with Ross Cameron
 # https://www.youtube.com/watch?v=J5Z7DxyTVAQ
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20210412
+# duration_sec: 2579
 
 [00:01:07] good morning everyone
 [00:01:08] all right well it's about 8 45 we've got

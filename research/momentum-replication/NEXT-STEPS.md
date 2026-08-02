@@ -89,6 +89,31 @@ target, medians). What is wrong is what price does between them. That points at
 the trigger: it matches the shape of a micro-pullback at points in a move where
 he would not take it. `reports/2026-08-target-and-entries.md`.
 
+## 5b. The streams — a third register, and the timing answer
+
+`reports/2026-08-streams-roundup.md`. The channel's `/streams` tab holds **480
+live broadcasts, none of them in the 2,211-video index** (scraped from
+`/videos`). 154 are transcribed, ~757k words. Unlike the teaching videos and
+the recaps, a live stream records a decision *before* the outcome.
+
+**§5 above asked what is wrong with the trigger. The streams answer it:
+the micro-pullback he trades is frequently a 10-SECOND pattern.** "10 second"
+appears 120 times across 63 of 154 streams; of the "micro pullback" mentions
+carrying an explicit timeframe, 14 are 10-second against 40 one-minute. Our
+detector runs on 1-minute bars with `MIN_DIP_BARS = 2`, so the shortest dip it
+can see is **two minutes**. On a 1-minute chart a 10-second pullback is the
+wick of a candle.
+
+That is a mechanical explanation for the −1.56R median excursion, and **it is
+not reachable by any parameter setting** — 1-minute bars cannot represent it.
+It converts the §6 data decision from "buy more sample" into "buy the
+resolution the entry happens at".
+
+Four free corrections were applied from the same source (third pullback → size
+reduction, `PRICE_MIN` stays $2.00, float stays 20M, low frequency is not a
+bug). Together: 11 trades → 13, −$601.65 → −$588.90. The point of that number
+is that it barely moved.
+
 ## 6. Sample size
 
 2 trades over 17 sessions cannot support any conclusion, and neither can 11.
@@ -106,10 +131,10 @@ Recorded rather than guessed. Each needs evidence, not a decision.
 | Question | Where | Status |
 |---|---|---|
 | ~~`min_reward_risk` — entry veto or realised ratio?~~ | §4 above | **settled: realised.** Veto off by default; realised ratio 1.52:1 |
-| `price_min` — $2.00 or $1.00? | `PARAMETERS.md:20` | $1.00 nearly doubles recall of his names; no P&L effect yet |
+| ~~`price_min` — $2.00 or $1.00?~~ | `PARAMETERS.md:20` | **settled: $2.00.** "cxdc 115 it's a little too cheap" — he rejects above $1 routinely (streams §5) |
 | `rate_of_change` — one-shot at 09:35, or continuous? | `reports/2026-07-27-week.md` | still open; costs 10 of 61 pairs as a one-shot |
-| `MIN_DIP_BARS` on a 1-minute chart | `PARAMETERS.md` §13 | still open |
-| Float 20M vs 10M | `PARAMETERS.md` §1 | 20M in use; blocks 9 of 61 unconditionally |
+| ~~`MIN_DIP_BARS` on a 1-minute chart~~ | `PARAMETERS.md` §13 | **settled, and unimplementable on 1-minute data** — he trades 10-second pullbacks (streams §1) |
+| ~~Float 20M vs 10M~~ | `PARAMETERS.md` §1 | **settled: 20M.** He traded a 23M float, called 35M "too high" (streams §6) |
 | `level_tolerance` | `PARAMETERS.md:127` | still open |
 
 ## Not next

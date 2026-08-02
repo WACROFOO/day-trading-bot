@@ -527,6 +527,46 @@ before the stop moves to breakeven. What target 1 should be when the high of
 day is only cents above entry is open:
 `research/momentum-replication/NEXT-STEPS.md` §4.
 
+### The micro-pullback is often a **10-second** pattern
+
+`MIN_DIP_BARS = 2` on 1-minute bars makes the shortest acceptable pullback two
+minutes long. The live streams show that is far slower than what he trades:
+
+> *"this is a 10 second micro pullback so let it pull back and then we'll get
+> that curl up through 20"* — `6xIr761eZj8` [41:38]
+
+> *"This is a 10-second micro pullback. Looking for the break of 14 and 15."*
+> — `XIQUoLyUWuw` [33:32]
+
+Across 154 transcribed streams "10 second" appears 120 times in 63 of them, and
+of the "micro pullback" mentions carrying an explicit timeframe, 14 are
+10-second against 40 one-minute. On a 1-minute chart a 10-second pullback is
+not a candle — it is the wick of one.
+
+**This is not a parameter error, it is a resolution error.** No setting of
+`MIN_DIP_BARS` on 1-minute data can represent it, and it is the mechanical
+explanation for why replicated entries sit in front of a median −1.56R
+excursion (`research/momentum-replication/reports/2026-08-streams-roundup.md`).
+
+### The third pullback is traded at reduced size, not skipped
+
+`BUCPPCXOHbs` [52:17] gives "third means stop", and it was implemented as a
+boolean that discards the setup. Live, he counts the pullbacks and takes the
+third anyway — *"this is the third pullback... bought the dip at 68"*
+(`0uunIYE_wVY` [19:22]); *"coming into third pullback range and you guys know
+my feeling about that **and what it needs to do** in order for me"*
+(`RABUjMVS6pI` [52:34]).
+
+A caution with conditions, not a veto — the same shape as `stop_max_distance`
+below, and as "too extended", which he also answers with size: *"I got to go
+with smaller size cuz I'm chasing it a little bit"* (`0zXUMrYyTx0` [49:27]).
+
+### `price_min` is $2.00, not $1.00
+
+§1 records "1.00 also stated". The live rejections settle it at $2.00: *"JOB is
+56 cents. So, that's too cheap for me"* (`1zBC9RKwfeU` [10:36]), and decisively
+*"cxdc 115 it's a little too cheap"* (`SwkXSGUHvHY` [04:20]) — $1.15 rejected.
+
 ### "First candle to make a new low" means below the flag
 
 *"first candle to make new low **below flag**"* — `Xdw5azEqs6o`. Below the
