@@ -15,7 +15,7 @@ about *timing*.
 | streams on the channel's `/streams` tab | 480 |
 | selected as live trading (>= 25 min, not seminars) | 296 |
 | transcribed here | see `ls *.txt \| wc -l` |
-| words | ~757,000 at 154 streams |
+| words | ~1,096,000 at 266 streams |
 
 None of these were in `../data/daytradewarrior_videos.json`, which was scraped
 from the `/videos` tab only. The full stream index is
@@ -41,6 +41,11 @@ read the context before believing it.
 - **No dates below the metadata call.** The flat listing carries no
   `upload_date`; `../../research/momentum-replication/data/stream_meta.json`
   has the real ones where the fetch succeeded.
+- **These are 2021–2023.** 47 from 2021, 174 from 2022, 45 from 2023, one from
+  2026 — the live Morning Show largely stopped after 2023. None overlap the
+  2026-07 bar-data window, so they are evidence about *method*, not a labelled
+  set to score the engine against. Check anything time-sensitive against
+  `../recaps/`, which is June–July 2026.
 - **Selection is not random.** Titles were filtered for live trading, and
   titles skew toward good days ("+$28k", "Green Day"). Anything counted across
   these files inherits that bias. Use them for *what he does*, not for *how

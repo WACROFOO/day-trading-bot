@@ -1,0 +1,648 @@
+# LIVE Day Trading Recap $RELI $LIXT $MYNZ $DTST
+# https://www.youtube.com/watch?v=60rF11Z_8mQ
+# upload_date: 20220105
+# duration_sec: 1563
+
+[00:00:33] [Music]
+[00:00:49] all right everyone good morning so it's
+[00:00:50] about 10 25 10 30 and i'm sitting down
+[00:00:54] here to do my recap go over the trades
+[00:00:56] from this morning finishing the day in
+[00:00:59] the green had a
+[00:01:01] another good day here today was a little
+[00:01:03] better than yesterday
+[00:01:04] so we're three days into the new year
+[00:01:07] focused my first trade on one good
+[00:01:11] quality setup um and that was actually
+[00:01:14] um the first trade this morning was on
+[00:01:16] my nz
+[00:01:18] and then the second was on
+[00:01:20] lixt so i sort of had two trades that
+[00:01:22] were both
+[00:01:24] high conviction good quality kind of
+[00:01:26] like one and done trades and then from
+[00:01:29] there moved on and started trading more
+[00:01:31] actively uh reli
+[00:01:33] uh you can see on my screen now this one
+[00:01:36] um was uh one of the last ones i got a
+[00:01:39] nice trade on hit a high of 10 32
+[00:01:43] and it's a daily breakout you know which
+[00:01:44] is why
+[00:01:46] you're obviously
+[00:01:47] seeing a volume spike right at that
+[00:01:50] level there up to 10 32 then a pullback
+[00:01:52] so
+[00:01:53] some interesting stuff there but uh so
+[00:01:55] let's go back well so two things so
+[00:01:57] number one uh tomorrow 1 pm eastern
+[00:02:00] those on youtube i'm going to host a
+[00:02:01] workshop it's going to be a small
+[00:02:03] account challenge workshop where i am
+[00:02:05] going to teach for you
+[00:02:08] uh direct from chapter 16 of the live
+[00:02:12] trade of um uh the small cap day trading
+[00:02:15] course so i'm looking at the live
+[00:02:16] trading archives so
+[00:02:18] um i'm going to go over
+[00:02:21] these live trading archives but we'll be
+[00:02:23] teaching from chapter 16. what is
+[00:02:24] chapter 16 of the small cap day trading
+[00:02:27] course
+[00:02:28] it is the small account challenge
+[00:02:31] initially i was planning on doing a
+[00:02:33] small account challenge starting the
+[00:02:35] first week of january
+[00:02:37] and that was if we crossed over a
+[00:02:39] million subscribers on the youtube
+[00:02:40] channel but we came up short so i'm
+[00:02:42] going to wait to start the official
+[00:02:44] small account challenge until we do
+[00:02:46] cross a million subscribers and in the
+[00:02:48] meantime tomorrow 1 pm eastern i'm going
+[00:02:51] to teach this free small account
+[00:02:53] challenge class so this is a little bit
+[00:02:55] of an excerpt from the warrior pro
+[00:02:56] curriculum for those on youtube that are
+[00:02:58] wanting to learn a little bit more and
+[00:03:01] maybe are not yet
+[00:03:03] students in the classes so
+[00:03:06] during this
+[00:03:07] workshop i'll go over my metrics from
+[00:03:10] the last three small account challenges
+[00:03:12] that i did including live trading
+[00:03:14] examples of uh some of the early trades
+[00:03:18] uh this was the the most recent small
+[00:03:21] count challenge i did and you can see
+[00:03:23] one trade a day
+[00:03:26] is the small account way one trade one
+[00:03:28] trade one trade one trade one trade and
+[00:03:30] so by the end of those first five six
+[00:03:32] days now my account has grown a little
+[00:03:34] bit i've built a little bit of a cushion
+[00:03:37] now i'm gonna say and put up my
+[00:03:38] disclaimer as always that my results are
+[00:03:40] not typical most beginner traders do
+[00:03:41] lose money so you shouldn't assume that
+[00:03:44] you'll make money as a beginner and
+[00:03:45] those with limited resources are
+[00:03:48] should be especially cautious trading so
+[00:03:50] we don't track the typical result of our
+[00:03:52] student and since we don't track the
+[00:03:54] typical result i can't say that our
+[00:03:55] students will be any more or less
+[00:03:57] successful than the typical trader but
+[00:04:00] what i can tell you is that if you do
+[00:04:01] want to learn about the financial
+[00:04:03] markets i am happy to teach you about
+[00:04:05] them and i'm qualified to speak on it
+[00:04:08] because i have been very successful even
+[00:04:10] if my results are not typical
+[00:04:12] my
+[00:04:13] experience has been
+[00:04:14] uh pretty impressive so if you wanna
+[00:04:16] learn from someone you typically wanna
+[00:04:18] learn from someone who's uh credible and
+[00:04:20] qualified
+[00:04:21] all right so uh with that said uh make
+[00:04:23] sure you guys register to that uh
+[00:04:25] workshop tomorrow 1 pm eastern though
+[00:04:27] that's especially for those on youtube
+[00:04:29] warrior pro students you already have
+[00:04:30] access to chapter 16
+[00:04:32] and i'm going to not teach the full
+[00:04:34] version of it anyways so you guys don't
+[00:04:36] have to worry about that
+[00:04:38] all right so um today
+[00:04:40] i sat down and i said
+[00:04:42] just like i said yesterday and the day
+[00:04:44] before i have it written down in front
+[00:04:45] of me
+[00:04:47] how can i make this
+[00:04:49] simple how can i slow it down that's the
+[00:04:51] motto of trader rehab that's also the
+[00:04:53] motto of a small account challenge how
+[00:04:56] can i just slow this down and focus on
+[00:04:58] the basics
+[00:04:59] well the basic goal during trader rehab
+[00:05:02] and during a small account challenge
+[00:05:04] 10 cents a day
+[00:05:06] i want to make 10 cents a day per share
+[00:05:09] now i know that oh gosh that doesn't
+[00:05:11] sound like much
+[00:05:12] you guys all sitting around here just
+[00:05:14] struggling to make 10 cents a day per
+[00:05:16] share
+[00:05:17] and the fact is
+[00:05:19] the statistics tell us and well there's
+[00:05:23] there's a survey that we have on the
+[00:05:24] footer of our website it's a survey of
+[00:05:26] about three point
+[00:05:28] gosh three point something billion
+[00:05:31] trades so a very large um study that was
+[00:05:34] done 3.7 billion trades found that only
+[00:05:37] 9.8 percent of trading volume was
+[00:05:40] generated but generated by predictably
+[00:05:42] profitable traders
+[00:05:44] and that those profitable traders uh
+[00:05:46] constitute less than three percent of
+[00:05:47] average day traders less than three
+[00:05:50] percent
+[00:05:51] so that means the remaining ninety
+[00:05:52] percent and ninety seven percent are
+[00:05:54] struggling to even capture just ten
+[00:05:56] cents a day
+[00:05:58] because the reason that i focus on
+[00:06:00] uh tencent today is because i i feel
+[00:06:04] from my experience that it's uh
+[00:06:08] easier to
+[00:06:09] predict when a stock is going to go up
+[00:06:11] 10 uh sorry 10 cents then when it's
+[00:06:13] going to go up well 10 or when it's
+[00:06:15] going to go up a dollar a share or five
+[00:06:18] dollars a share and so when you get into
+[00:06:20] longer time frames of swing trading and
+[00:06:22] uh trying to predict bigger moves
+[00:06:24] it can be very difficult whereas a level
+[00:06:27] like this ten dollars which was uh very
+[00:06:29] very clear pre-market high and high a
+[00:06:32] day
+[00:06:32] the fact that it would break 10 and go
+[00:06:34] up 10 cents was
+[00:06:36] for me a more predictable level now i
+[00:06:37] didn't end up taking that trade it went
+[00:06:38] without me but
+[00:06:40] that was the level that i had on watch i
+[00:06:42] just ended up um
+[00:06:44] missing that particular trade
+[00:06:47] so if the goal is 10 cents
+[00:06:50] a share
+[00:06:51] and we had a student earlier who said
+[00:06:53] russ you know i'm only trading with 50
+[00:06:55] shares
+[00:06:56] 10 cents is 5 bucks
+[00:06:58] that's not going to cut it
+[00:07:00] i hear you
+[00:07:01] it's not going to cut it you're right
+[00:07:03] well
+[00:07:04] if you're trying to make money to pay
+[00:07:06] bills with 50 share positions in the
+[00:07:09] market
+[00:07:10] it's not going to happen
+[00:07:12] it's not going to happen day trading not
+[00:07:13] with 50 share
+[00:07:14] positions and you're not going to pay
+[00:07:16] significant bills if you're even swing
+[00:07:18] trading or investing with 50 share
+[00:07:20] positions unless you're trading
+[00:07:21] something like tesla
+[00:07:22] that's higher priced or amazon if you're
+[00:07:24] trading small cap stocks you know 50
+[00:07:27] shares isn't going to pay the bill bills
+[00:07:29] but what 50 shares can do
+[00:07:31] is it can prove
+[00:07:33] uh
+[00:07:34] a proof of concept
+[00:07:36] prove
+[00:07:37] for
+[00:07:38] a week
+[00:07:39] commit yourself one week to trading one
+[00:07:41] trade a day and if you can make five
+[00:07:43] dollars a day
+[00:07:45] consistently
+[00:07:46] 10 cents a share with 50 shares
+[00:07:49] you would be doing something that 90
+[00:07:51] plus percent of traders haven't figured
+[00:07:53] out how to do
+[00:07:54] not overstay your welcome
+[00:07:56] book the profit you know one and done
+[00:07:58] shut it down
+[00:08:00] and that's significant
+[00:08:01] and the whole theory here is that
+[00:08:04] if you could do it with
+[00:08:05] 50 shares
+[00:08:07] why couldn't you do it with 500 and why
+[00:08:10] couldn't you do it with 5 000. and so i
+[00:08:12] share my trading metrics with you
+[00:08:16] just to show you the fact that my
+[00:08:19] average winners are only about 15 cents
+[00:08:21] per share
+[00:08:22] they're not big
+[00:08:24] but you do that uh well 18 000 times in
+[00:08:28] a row
+[00:08:29] uh my metrics here i've got uh 18
+[00:08:33] 549 trades
+[00:08:36] you do 15 cents average winner 15 000
+[00:08:39] times in a row
+[00:08:41] and you do it with an average
+[00:08:43] uh share size of 10 000 shares or
+[00:08:46] whatever it is
+[00:08:47] that's where it starts to add up
+[00:08:49] so small profits
+[00:08:52] there's nothing wrong with that if you
+[00:08:53] start saying well i'm only trading with
+[00:08:55] 50 shares therefore i can't sell and
+[00:08:58] take profit until i'm up 50 cents a
+[00:09:03] now you're trying to do something even
+[00:09:05] more difficult you're trying to capture
+[00:09:06] 50 share out of your out of every trade
+[00:09:10] i don't capture 50 cents a share out of
+[00:09:12] every trade sure i do sometimes but not
+[00:09:14] not typically not on average
+[00:09:17] all right so as i sat down this morning
+[00:09:19] again i said how can i make this simple
+[00:09:22] i need to focus on one trade i need to
+[00:09:24] pretend like i'm doing one trade a day
+[00:09:27] and so i sat down
+[00:09:29] and i started getting dialed in on mynz
+[00:09:33] all right so mynz
+[00:09:36] the first trade
+[00:09:38] uh there was a couple but uh so my first
+[00:09:42] trade on it
+[00:09:44] was actually the break of 20
+[00:09:47] right there the break of twenty dollars
+[00:09:49] and i got in and got out i didn't even
+[00:09:52] that i didn't call out that trade i just
+[00:09:53] got in and got out
+[00:09:55] instant trade so i was in at 20 out as
+[00:09:57] it popped up to 2067 and that was a
+[00:10:00] little bit impulsive i was like okay
+[00:10:01] slow down slow down
+[00:10:03] you need to look for that one really
+[00:10:04] good trade
+[00:10:06] and it was right here the first one
+[00:10:09] minute candle to make a new high
+[00:10:11] buying the dip around 2049 2050 2055
+[00:10:15] we got the squeeze there up to 21. now
+[00:10:18] that was
+[00:10:19] about 40 cents a share
+[00:10:21] so i got the 10 cents i got the 10 cents
+[00:10:24] i booked the profit on it
+[00:10:27] that was my first trade it was 3 000 in
+[00:10:29] profit
+[00:10:31] then i got back in
+[00:10:33] uh second trade on it back up to 21 14
+[00:10:36] and then the third trade was back up to
+[00:10:38] 21.41 so i ended up getting three trades
+[00:10:40] on it but the first trade
+[00:10:42] was the highest quality setup and then i
+[00:10:44] said okay let me switch gears uh li xt
+[00:10:46] is popping up and this one is a little
+[00:10:49] bit lower priced
+[00:10:50] so i want to focus on
+[00:10:52] something that's a little bit lower
+[00:10:53] price these ones are usually going to be
+[00:10:55] a little bit easier for me to
+[00:10:57] manage manage risk on and so li xt
+[00:11:01] starts popping up and i said okay where
+[00:11:02] can i be a buyer on this
+[00:11:04] two dollars 50 cents
+[00:11:06] 250 260.
+[00:11:08] this was a one minute pullback right
+[00:11:09] here
+[00:11:11] and so this is where i was dialing in
+[00:11:14] we got the trade right here
+[00:11:17] and once again i said okay this one a
+[00:11:19] full 10 cents might be a little harder
+[00:11:21] because it's a little cheaper
+[00:11:23] but let's see what we can get
+[00:11:25] so the first trade right here went up to
+[00:11:28] a high of 274
+[00:11:31] then it pulled back and gave us another
+[00:11:33] one minute pullback right here
+[00:11:39] at 274.
+[00:11:41] that trade oops
+[00:11:44] then gave
+[00:11:45] me the move up towards three
+[00:11:48] now why was i focusing on these two
+[00:11:50] stocks these were the two leading
+[00:11:52] gappers in the entire market
+[00:11:55] lixt gapped up 122
+[00:11:57] with news 6.13 million share float 80
+[00:12:01] million shares of volume today
+[00:12:03] my nz gapping up 75 on 13 million shares
+[00:12:07] of volume volume a little lower
+[00:12:09] price a bit higher nine million share
+[00:12:11] float focusing on the leading gappers
+[00:12:14] all right for for those early trades so
+[00:12:17] we got the move here up to three another
+[00:12:20] pullback a false breakout right here up
+[00:12:22] to
+[00:12:23] oh sorry 302
+[00:12:25] dips down and then
+[00:12:28] first five minute kill to make a new
+[00:12:29] high so then i started just actively
+[00:12:30] trading it
+[00:12:33] though the one and done trade the first
+[00:12:35] one was mynz the one minute pullback and
+[00:12:37] then the second one that i sort of was
+[00:12:40] like the most dialed in on was right in
+[00:12:42] this area here
+[00:12:44] and then i just start actively trading
+[00:12:45] these and you know it's tough because
+[00:12:47] i'm trying to be in the mindset
+[00:12:50] if i had a small account today if i was
+[00:12:53] in trade or rehab today is this the one
+[00:12:55] i would focus on
+[00:12:57] i'm trying as and this is this is really
+[00:12:59] hard because there are some days where
+[00:13:02] you know i end up trading stocks like
+[00:13:03] you know a game stop or something like
+[00:13:05] that and they're higher priced they're
+[00:13:07] extremely volatile and you know i might
+[00:13:10] i might totally crush it on a stock like
+[00:13:12] that but
+[00:13:14] it's for a lot of the beginner traders
+[00:13:16] that are
+[00:13:17] tuned in you're looking at and you're
+[00:13:18] like the spreads are huge i mean this is
+[00:13:20] just so risky
+[00:13:22] and
+[00:13:23] you know i might on a day like that take
+[00:13:25] 100 trades i mean i might just be so so
+[00:13:28] active and none of those trades are
+[00:13:30] necessarily so this um
+[00:13:33] so this was uh last year 122 trades 126
+[00:13:37] trades
+[00:13:38] 74 trades you know these were crazy days
+[00:13:43] so on these types of days
+[00:13:45] i wasn't really thinking a whole lot
+[00:13:48] about
+[00:13:50] you know trader rehab or small account
+[00:13:53] challenge that wasn't in my mind at all
+[00:13:55] what i was thinking about was
+[00:13:57] maximizing on this incredible
+[00:13:58] opportunity with big share size and
+[00:14:01] crushing it and you know that was the
+[00:14:03] right thing to do i traded the account
+[00:14:04] very well but you know as we're starting
+[00:14:07] the new year i'm trying to as much as
+[00:14:09] possible be in the mindset of
+[00:14:13] where we are for a lot of students which
+[00:14:15] is trader rehab we had the great class
+[00:14:17] last week that's available in the
+[00:14:18] warrior pro curriculum now
+[00:14:20] and just trying to kind of
+[00:14:22] think each day
+[00:14:24] slow it down and so the first couple
+[00:14:26] trades trying to be very dialed in a
+[00:14:28] quality setup as if i was in trader
+[00:14:30] rehab and then once i kind of lock those
+[00:14:33] two trades then getting more active
+[00:14:36] i did have a trade going into the open
+[00:14:38] on li xt
+[00:14:41] i held 30 000 shares going into the open
+[00:14:44] was looking for the rip through 311
+[00:14:46] squeeze into a halt up
+[00:14:48] it didn't happen it dropped and i took a
+[00:14:50] loss of 3 000 on that 10 cents a share
+[00:14:54] but then we had relie and was able to
+[00:14:58] recoup the losses with this trade on
+[00:15:00] reli and reli is still holding up pretty
+[00:15:02] nicely so
+[00:15:04] uh but i i would say one thing to note
+[00:15:07] today that was kind of interesting is a
+[00:15:09] momentum a little bit more dispersed
+[00:15:10] across the market uh
+[00:15:13] ewtx was another one that was that made
+[00:15:16] a nice red to green move through v wap
+[00:15:19] isig popped up i you know i didn't jump
+[00:15:22] on that so we were definitely seeing
+[00:15:24] um you know the gap scanner was solid we
+[00:15:26] had on the top five you know four of the
+[00:15:29] stocks floats under 10 million shares
+[00:15:31] former runners former momo stocks
+[00:15:34] so good looking scan
+[00:15:36] but
+[00:15:37] not
+[00:15:38] one super obvious stock and that can be
+[00:15:41] a little bit of a challenge i usually do
+[00:15:42] better when there's one that's super
+[00:15:44] obvious
+[00:15:44] when
+[00:15:46] momentum is kind of dispersed across
+[00:15:48] four or five stocks
+[00:15:50] it can just be a little bit harder
+[00:15:53] anyways
+[00:15:55] i'm happy with how i did today
+[00:15:57] i
+[00:15:59] traded well i hit my daily goal
+[00:16:02] and now i'm going to shut it down so i
+[00:16:03] hit my daily goal on monday
+[00:16:05] i came up short yesterday and i hit my
+[00:16:07] daily goal again today so two out of
+[00:16:09] three days this week at the daily goal
+[00:16:12] not really exceeding it much but just
+[00:16:13] hitting the daily goal
+[00:16:15] um
+[00:16:17] trying to kind of build a little bit of
+[00:16:20] a cushion on on the year and right now
+[00:16:22] trading in my retirement account uh not
+[00:16:24] wanting to
+[00:16:26] generate you know a big tax bill for
+[00:16:28] 2022 a year
+[00:16:31] so putting a little way a little away in
+[00:16:32] the retirement account trying to make a
+[00:16:34] good decision there
+[00:16:36] and um
+[00:16:38] you know we
+[00:16:39] one of the things we talked about in our
+[00:16:42] zoom session that we had two weeks ago
+[00:16:44] with uh profitable traders those who
+[00:16:46] have their profitability badges is you
+[00:16:48] know kind of how do you take trading to
+[00:16:49] the next level once you've kind of
+[00:16:51] gotten over the hump and you've started
+[00:16:52] making money how do you scale it
+[00:16:54] and um certainly one of the ways
+[00:16:58] uh to make more money is
+[00:17:00] to keep more in your pocket now if that
+[00:17:03] means trading in a tax-deferred account
+[00:17:06] then
+[00:17:08] you're paying less income tax which is
+[00:17:10] the effect of making more money i mean
+[00:17:12] yes you can't spend it right now but
+[00:17:16] your take home at the end of the year
+[00:17:18] could be
+[00:17:19] uh you know potentially
+[00:17:22] like
+[00:17:22] twice as much depending on what your tax
+[00:17:24] rate is your bracket so it is something
+[00:17:27] to be thoughtful about and
+[00:17:29] anyway so um nice to see reli here uh 12
+[00:17:32] 000 share seller at 20.
+[00:17:34] so that level of 20 for instance that's
+[00:17:37] a breakout you can see i mean it's just
+[00:17:39] so clear that that's a breakout spot and
+[00:17:42] then your next level is 30. so watch
+[00:17:43] this so there's a trade there entry at
+[00:17:45] 37 and let's see if we get the squeeze
+[00:17:47] up to 47.57
+[00:17:50] this is the spot where i would look for
+[00:17:51] that quick 10 cents as it starts to pull
+[00:17:53] away from this level
+[00:17:55] so you've got 40 on the ask
+[00:17:58] i'd like to see 45 and then 50. my fill
+[00:18:01] with the hotkey not perfect i would have
+[00:18:04] preferred a fill
+[00:18:06] probably closer to 30 but you know we'll
+[00:18:09] take what i can get
+[00:18:10] so let's see there's 40 on the ask
+[00:18:15] so on this type of trade i'd be looking
+[00:18:17] for the break through 10 45 and then 10
+[00:18:20] 50.
+[00:18:21] the thing on this because it's a
+[00:18:23] daily breakout setup
+[00:18:25] i'd be looking for a little bit more
+[00:18:28] volume here through 45 55 65 75 and then
+[00:18:31] move up towards 11.
+[00:18:33] so i take this
+[00:18:35] you know starter with 3 000 shares
+[00:18:38] volume on this one minute candle
+[00:18:40] is pretty good the high is 40.
+[00:18:43] new order goes at 50.
+[00:18:47] so let's see if we can break through
+[00:18:48] 10.45 10.50
+[00:18:53] got a seller at 40 and i want to see it
+[00:18:55] break that level
+[00:18:59] so let's see watching
+[00:19:02] through 40 and then 45 up to 10.50 and
+[00:19:05] then if we can clear 10.50 then i'd be
+[00:19:08] looking for 10 55 10 60.
+[00:19:11] so you can see on the one minute this is
+[00:19:12] sort of the beginning of a one minute
+[00:19:14] pullback here
+[00:19:17] the perfect entry on this would have
+[00:19:19] been right down here at 20. that was the
+[00:19:21] entry i'm in 17 cents higher and 17
+[00:19:25] cents that's the difference between you
+[00:19:26] know potentially a 17 cent winner or a
+[00:19:29] 17 cent loser if you're in that high
+[00:19:32] i don't mind chasing um a stock like
+[00:19:35] this that has what i would consider to
+[00:19:37] be a pretty strong daily setup
+[00:19:40] we'll see if we do get that break
+[00:19:41] through 10 40 10 45 10 50.
+[00:19:48] so there's 10 40 on the ask
+[00:19:51] so looking for the break through that
+[00:19:52] level
+[00:19:55] so you see how there's a hidden seller
+[00:19:57] this is one of those areas where
+[00:19:59] i want to see that hidden seller break
+[00:20:04] previous support was 1021
+[00:20:08] 1020 a previous resistance so we look
+[00:20:10] for the support off of that level
+[00:20:14] so let's see if i can fill off of
+[00:20:16] support
+[00:20:19] so filled there at 10 20.
+[00:20:22] so trying to buy that dip
+[00:20:25] and then i put the new order at 10 45
+[00:20:29] so if we can break through 1045
+[00:20:33] i can add as soon as i see that seller
+[00:20:35] starting to come down
+[00:20:38] so now watching over 38.39
+[00:20:41] let's see if that seller comes down here
+[00:20:43] first one minute candle that's a
+[00:20:44] bottoming tail there we go added right
+[00:20:46] there now looking for the break through
+[00:20:48] 50. so we broke through that high
+[00:20:52] there's 47
+[00:20:54] looking for the break through 10.50
+[00:20:57] then 10.55 1060.
+[00:21:01] so that was a pretty nice bottoming tail
+[00:21:02] candle there right up through 10 46 10
+[00:21:05] 47.
+[00:21:08] i'm gonna flat at 10 39 it should have
+[00:21:10] broken 50 right away but you know in any
+[00:21:12] case uh
+[00:21:14] the entry the ad off of 1020 which was
+[00:21:17] psychological support that previous
+[00:21:20] then the pop back up bottoming tail the
+[00:21:22] high is 49. i would really like to have
+[00:21:25] seen it rip through 50 then go to 55 but
+[00:21:28] so that wasn't the easiest 10 cent trade
+[00:21:30] that i've ever had but
+[00:21:32] in any case it's a little later in the
+[00:21:33] day 10 45 so i guess that's not too
+[00:21:36] shocking
+[00:21:38] i hope that it does open up a little bit
+[00:21:40] more i like that daily chart uh so um
+[00:21:45] those on youtube also remind you guys
+[00:21:47] we're not doing the morning show right
+[00:21:48] now uh this week i want to focus on our
+[00:21:52] warrior pro students the students that
+[00:21:53] are
+[00:21:54] tuned in in the chat room and not have
+[00:21:56] the distraction of trying to kind of
+[00:21:58] manage
+[00:21:59] keep my eye on youtube so
+[00:22:02] just wanted to let you guys know and i
+[00:22:04] told you that towards the end of last
+[00:22:05] week so um this week coming on and doing
+[00:22:11] and well as we turned as it turned out
+[00:22:13] one trade there on reli but uh yeah
+[00:22:16] focusing on students that are part of
+[00:22:18] the community
+[00:22:20] all right so uh thank you guys for
+[00:22:22] tuning in
+[00:22:24] uh to the recap here hopefully you had a
+[00:22:27] decent day uh if you're wanting to learn
+[00:22:29] a little bit more about my strategy make
+[00:22:31] sure you register to the workshop
+[00:22:32] tomorrow 1 p.m eastern that will be a
+[00:22:34] live event so i'm excited to teach it
+[00:22:37] and feel free to bring your questions
+[00:22:39] the first
+[00:22:41] uh i think it's
+[00:22:43] 1 000 people that log into the webinar
+[00:22:46] platform will be
+[00:22:48] able to type and ask questions
+[00:22:50] and then everyone beyond that is in
+[00:22:52] listen only mode so make sure you um
+[00:22:56] if you want to be able to type and ask
+[00:22:58] questions you log in a little early i'm
+[00:23:00] pretty sure we already have over a
+[00:23:01] thousand people that have registered for
+[00:23:03] tomorrow's workshop
+[00:23:07] okay so uh i hope you guys have a great
+[00:23:09] rest of the day remember don't overstay
+[00:23:11] your welcome try to get green shut it
+[00:23:13] down come back do it again tomorrow all
+[00:23:16] right and this trade on reli the starter
+[00:23:18] was 3 000 shares i added another 3 000
+[00:23:20] off of 10 21 so 6 000 share position for
+[00:23:24] me that's small size i think my biggest
+[00:23:26] position today on anything was maybe oh
+[00:23:28] well no i traded um
+[00:23:30] uh lixt with a larger size that one was
+[00:23:34] lower priced a large size being 45 000
+[00:23:37] shares maybe 50 on a lower price stock
+[00:23:39] like this but
+[00:23:41] in any case 6000 shares is still
+[00:23:42] definitely a starter which is the right
+[00:23:44] share size for
+[00:23:45] a 1045 late morning trade
+[00:23:49] if it works and you get a little profit
+[00:23:50] that's great if it doesn't you don't
+[00:23:52] ruin your day
+[00:23:54] remember 11 a.m jess will be doing a qa
+[00:23:56] session so if you have some questions
+[00:23:58] about order routing or hot keys or level
+[00:24:01] 2 or anything that you may have
+[00:24:03] questions about as you're going through
+[00:24:04] the class
+[00:24:05] bring those questions to justice session
+[00:24:08] at 11 am and i will see you guys first
+[00:24:11] thing tomorrow morning remember for
+[00:24:12] warrior pro students 7 30 a.m guided
+[00:24:15] meditation ted is doing that this week
+[00:24:17] to help you guys
+[00:24:18] get centered if you
+[00:24:20] go off course on your trader rehab or
+[00:24:22] small account trading plan or whatever
+[00:24:25] just even your traditional strategy and
+[00:24:27] you need to self-correct re-correct do
+[00:24:30] it quick cut the losses let them be what
+[00:24:32] they are and come back tomorrow
+[00:24:34] tomorrow's a new day all right i'll see
+[00:24:36] you guys first thing tomorrow morning
+[00:26:02] you

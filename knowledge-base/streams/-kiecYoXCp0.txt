@@ -1,0 +1,512 @@
+# LIVE Day Trading Morning Show with Ross Cameron
+# https://www.youtube.com/watch?v=-kiecYoXCp0
+# upload_date: 20221114
+# duration_sec: 1640
+
+[00:00:01] all right so we are at the top of the
+[00:00:04] hour and I'm gonna start breaking down
+[00:00:07] my watch list for today so for those you
+[00:00:10] guys tuning in on YouTube for the
+[00:00:12] morning show thank you guys for being
+[00:00:13] here routine each morning is pretty much
+[00:00:15] the same come over to the warrior
+[00:00:17] trading website and log in to your
+[00:00:19] members dashboard now you can do this on
+[00:00:21] your phone as well and I did that
+[00:00:23] earlier today you know typically I I
+[00:00:26] will I log in on my phone and I check
+[00:00:29] just to see what the scans look like
+[00:00:31] right so I just want to see whether or
+[00:00:33] not we have anything that's moving that
+[00:00:35] looks interesting and when I refreshed
+[00:00:37] my phone this morning I noticed opnt was
+[00:00:40] up 120 and G sun was up 25 so I was like
+[00:00:45] okay we've got something
+[00:00:46] um you know that that maybe I can work
+[00:00:48] with
+[00:00:49] all right so I come over I sit down and
+[00:00:53] I log into the members dashboard I log
+[00:00:55] into the chat room you can see the chat
+[00:00:57] rooms uh right here we've got um
+[00:01:00] a number of different chat rooms I'm in
+[00:01:01] the small cap room and the large cap
+[00:01:03] room right now but we also have a
+[00:01:04] support room a lounge a mentor session
+[00:01:07] room live classes room and then there's
+[00:01:09] a testing room that I use for uh testing
+[00:01:11] different things that we're working on
+[00:01:12] in development
+[00:01:14] so let's see where's Nathan at 37 pdsb
+[00:01:17] all right so he's on the leaderboard
+[00:01:19] he's in the green Chris with his 100K
+[00:01:22] badge is it 1100 in the green good good
+[00:01:24] all right and Jorge let's see I don't
+[00:01:28] know where he's at on oh he says he's up
+[00:01:30] 3 500 on the deck all right not bad so
+[00:01:32] some Traders have gotten into the green
+[00:01:34] uh but Chris is in the red there on pdsb
+[00:01:37] but green on tblt all right uh I'm in uh
+[00:01:42] a staging environment here where I'm
+[00:01:44] testing out the new charts that we're
+[00:01:46] going to be adding into
+[00:01:49] um the day trade Dash software this is
+[00:01:51] the same software that members over at
+[00:01:53] Warrior trading use but of course you
+[00:01:55] can also use it over if you go directly
+[00:01:57] to daytradash.com you can subscribe just
+[00:02:00] to the tools
+[00:02:02] will you get over where you're trading
+[00:02:03] in addition to the tools
+[00:02:05] are the classes but not everyone wants
+[00:02:07] classes of course A lot of people do but
+[00:02:09] not everyone does so anyways um so this
+[00:02:12] morning sitting down and looking at the
+[00:02:14] scans our leading gappers opnt it's up
+[00:02:17] 121 percent
+[00:02:19] uh but
+[00:02:21] um it's not something that I'm going to
+[00:02:23] be able to trade so we could see opnt
+[00:02:26] basically
+[00:02:28] trading sideways and you can see that
+[00:02:31] there's a headline that it is a buyout
+[00:02:34] all right so
+[00:02:36] um so that's that it's a buyout it's
+[00:02:38] going to trade sideways next one down G
+[00:02:40] Sun up 26 percent
+[00:02:42] so Json is interesting it's got some
+[00:02:46] range it had a big green candle that
+[00:02:48] went from six dollars to 850. whoa okay
+[00:02:51] so buckle up this is one that can make
+[00:02:53] some big moves it's certainly worth
+[00:02:55] watching if it starts to open up again
+[00:02:57] uh needs to get back over volume weight
+[00:02:59] average price but I would say on this
+[00:03:01] one
+[00:03:03] see let's get my drawing tool here
+[00:03:07] draw like this so if we notice I don't
+[00:03:12] know if this is the best spot to draw it
+[00:03:14] from there to about
+[00:03:17] Maybe
+[00:03:18] there
+[00:03:20] you can see we're kind of at ascending
+[00:03:22] support here
+[00:03:24] and you know you can see just on that
+[00:03:25] candle look at that look at that candle
+[00:03:28] right there it goes up 80 cents a share
+[00:03:31] so it shows you this one can move
+[00:03:36] let's see are shares available to borrow
+[00:03:38] on it one of the things I was a little
+[00:03:40] bit concerned about
+[00:03:41] um was the possibility
+[00:03:43] uh
+[00:03:45] because it's a dead cap bounce we may
+[00:03:47] not see the best follow-through but I'll
+[00:03:49] take a starter there at 82 for the break
+[00:03:51] of eight
+[00:03:53] so there's a little bit of profit for me
+[00:03:55] as it breaks through eight holding the
+[00:03:57] rest
+[00:03:59] let's see if we break over 850. That's a
+[00:04:02] classic scalp trade break of a half
+[00:04:04] dollar whole dollar
+[00:04:05] it was a quick trade I jumped in at 80.
+[00:04:08] it pops up to 815 took a little profit
+[00:04:11] holding 500 shares now already sized
+[00:04:14] down
+[00:04:16] so
+[00:04:17] there's a sign of strength there in the
+[00:04:20] fact that it broke and I'm unwinding a
+[00:04:21] little bit more and then there's a sign
+[00:04:23] of weakness in the fact that it went to
+[00:04:24] 8 30 and then dropped back down to 775
+[00:04:28] on the bid
+[00:04:30] pre-market high is 8.75 that's the level
+[00:04:33] that we want to see break
+[00:04:35] so because I didn't get in down here off
+[00:04:38] of this blue ascending support the only
+[00:04:40] thing I could do was a quick scalp trade
+[00:04:43] so I took a quick scalp trade on the
+[00:04:45] Breakthrough a small profit we'll take
+[00:04:49] that and be grateful for it for the time
+[00:04:51] being I might go back to it if it can
+[00:04:53] hold if it can move higher then I can
+[00:04:56] always add back holding just small size
+[00:04:58] right now at 782.
+[00:05:01] so hi this candle is
+[00:05:04] um 8 30.
+[00:05:07] so shares available to borrow light
+[00:05:08] speed are 11 cents a share
+[00:05:10] seven cents at trade zero
+[00:05:14] the uh the entry on this was based on
+[00:05:17] the break of that pivot right there
+[00:05:20] right so breaking through this line
+[00:05:23] was what I was looking at the high of
+[00:05:25] this candle 782.
+[00:05:29] so now we'll see if it consolidates goes
+[00:05:31] back in another five minute or if it's
+[00:05:33] able to break through seven through 8
+[00:05:35] 30. new order for me is going to go at
+[00:05:37] eight dollars and 30 cents
+[00:05:44] let's see
+[00:05:47] my average is 82.
+[00:05:51] it's about 907
+[00:05:54] um
+[00:05:55] I'm flat on the rest of that trade for
+[00:05:57] now so we'll let it pull back I might
+[00:05:59] watch I mean honestly
+[00:06:01] I could set a stop lower at the blue
+[00:06:03] ascending support line but I'm just
+[00:06:06] gonna go fly it on it so I can keep
+[00:06:08] focusing on the watch list
+[00:06:09] all right so gsun second leading gapper
+[00:06:12] it's interesting
+[00:06:14] um it's certainly
+[00:06:16] certainly has the potential like I said
+[00:06:18] a little bit of a dead cat bounce not
+[00:06:20] totally in love with it but you have
+[00:06:22] room on the daily up to 12 that's the 9
+[00:06:24] EMA so there's
+[00:06:27] a bit of room all right so next one down
+[00:06:30] pdsb
+[00:06:33] and I'm keeping G7 on a side chart so I
+[00:06:36] can try to do dip trades on it we'll see
+[00:06:38] if I get a dip opportunity keeping it on
+[00:06:40] watch
+[00:06:41] note that it's had some pretty big
+[00:06:44] candles already
+[00:06:46] all right so fly on everything for right
+[00:06:48] now
+[00:06:48] pdsb needs to get over
+[00:06:54] well I guess I would say it needs to get
+[00:06:56] over seven
+[00:06:59] this kind of level right here
+[00:07:06] that consolidation in this area
+[00:07:13] so we'll see if it can break through
+[00:07:15] that 698 seven dollar level I noticed
+[00:07:18] um on this one just a little bit of
+[00:07:20] choppiness
+[00:07:21] not sure exactly why
+[00:07:30] something like that descending
+[00:07:32] resistance
+[00:07:34] okay so that's pdsb let's say maybe
+[00:07:37] mndy 115 stock that's going to be too
+[00:07:40] expensive
+[00:07:42] uh Pixie some Traders are mentioning
+[00:07:44] this from yesterday and I didn't cover
+[00:07:46] pixie during my game plan for the week
+[00:07:49] ahead yesterday
+[00:07:51] the thing with Pixie I did see it
+[00:07:54] yes or I saw it on Friday that it made
+[00:07:57] this move the problem is that the volume
+[00:07:58] is light liquidity is poor it's hard to
+[00:08:01] get in it's hard to get out
+[00:08:03] um I understand they have a shelf
+[00:08:05] registration let me just look
+[00:08:10] active shelf registration that they just
+[00:08:12] filed
+[00:08:14] uh you know this reminds me of hudi to
+[00:08:17] be honest I I'm having a little bit of a
+[00:08:19] hard time trusting it it could go higher
+[00:08:21] it it certainly could and maybe it does
+[00:08:25] but I think maybe on this one
+[00:08:28] I'd avoid trading it pre-market for
+[00:08:31] right now I don't know we'll I'm just
+[00:08:32] gonna leave it on side chart I'm just
+[00:08:34] gonna put on side chart for now I'm just
+[00:08:35] not sure we've got the secondary
+[00:08:36] offering risk
+[00:08:38] um atat this one ipo'd on Friday
+[00:08:43] uh interesting on atat is that it's a
+[00:08:46] Chinese stock all right so uh this one
+[00:08:50] got through as an IPO we kind of heard
+[00:08:53] there weren't going to be any more
+[00:08:54] Chinese IPOs but then this one IPO
+[00:08:57] so I already did trade it earlier it's a
+[00:08:59] broke out squeezed up to 14.50 pulled
+[00:09:02] back got in squeezes up to 16 pulled
+[00:09:05] back just here now I'd watch it over 16
+[00:09:08] for a break through the all-time high
+[00:09:10] which is 17 and then you're 1705 then
+[00:09:13] you're a blue sky setup
+[00:09:17] so I would say uh right now it needs to
+[00:09:20] curl up a little bit more but
+[00:09:23] it's moving in the right direction
+[00:09:25] so pixie on a side chart atat on a side
+[00:09:29] chart gsun on a side chart so three uh
+[00:09:33] you know sort of juicier stocks they all
+[00:09:36] have some potential
+[00:09:38] whether two of them are Chinese whether
+[00:09:41] or not we get the big moves I'm not sure
+[00:09:43] but
+[00:09:45] I think these are the right ones to look
+[00:09:46] at
+[00:09:48] picks these up eight percent she sends
+[00:09:51] up 27 So based on leading gain or gapper
+[00:09:54] G7 is going to be more obvious but it
+[00:09:57] should have broken through and held
+[00:09:58] eight it went up to 8 30 and is retraced
+[00:10:01] now back down to 7 30. so it's pulled
+[00:10:03] back a little bit too much
+[00:10:11] dwac I'm not as interested in that one
+[00:10:13] for right now
+[00:10:19] uh if anyone else has anything they like
+[00:10:22] let me know maybe I've missed something
+[00:10:27] tblt yeah so
+[00:10:32] tblt
+[00:10:34] some weird level two action on it some
+[00:10:37] 100 000 share 200 000 share buyers
+[00:10:39] coming out big sellers so it's already
+[00:10:42] gotten a little crowded I'm leaving it
+[00:10:44] alone for the time being
+[00:10:47] atat I just took a starter of
+[00:10:50] um I'm gonna look to add at 15.85 for
+[00:10:53] the break of 16.
+[00:10:54] so I added theirs it broke through the
+[00:10:56] half dollar on atat
+[00:10:59] and then just added right there now
+[00:11:01] looking for the Breakthrough 16. so
+[00:11:04] there's 16 a little bit of profit New
+[00:11:06] Order is 16 15. watching for extension
+[00:11:10] through the earlier High
+[00:11:12] so new order 16. I'll put it at 16 20 on
+[00:11:16] atat
+[00:11:18] so let's see if atat is able to squeeze
+[00:11:21] through 16
+[00:11:23] . there you go there's 16 on the ask
+[00:11:27] watching 16 10.
+[00:11:39] this is going to be looking like a
+[00:11:41] pullback right under 16 added at 15 65
+[00:11:44] right there buying the dip now looking
+[00:11:47] for the Breakthrough 16.
+[00:11:50] and a squeeze up to 16 25 16 50. I would
+[00:11:54] certainly like to see a move to 17.
+[00:11:57] that would be nice
+[00:12:00] so we know Chinese momentum stocks are
+[00:12:03] the type that can give us big moves so
+[00:12:05] the got the right idea on it my mom's
+[00:12:07] got a starter on atat nice
+[00:12:10] or his watching for 16.50 they're 16 26
+[00:12:14] so we're moving the right direction a
+[00:12:16] little profit for me at 16 20. holding
+[00:12:19] 800 shares
+[00:12:22] New Order is 16.25
+[00:12:31] volume profile looks good
+[00:12:36] add great there 1625 now looking for a
+[00:12:39] squeeze up to 16.50 right you see that
+[00:12:42] volume coming in that's exactly what we
+[00:12:44] want to see next order 1645.
+[00:12:48] so watching 1645 for the break of 1650
+[00:12:51] wrote 26 percent
+[00:12:57] so let's watch 1645 and then see if we
+[00:12:59] get a squeeze up to 17.
+[00:13:04] so this is pulling away you've got high
+[00:13:06] volume which is good
+[00:13:09] added on a dip right there 16 30 there's
+[00:13:12] 16 38
+[00:13:15] holding 1200 shares
+[00:13:19] average is 16 13. I'm a little high on
+[00:13:22] my average
+[00:13:23] I added higher
+[00:13:27] unwinding the position and watching for
+[00:13:29] a dip
+[00:13:30] now the one minute needs a pullback we
+[00:13:33] did break new Highs but only by
+[00:13:37] let's see the high back here was 16 14
+[00:13:39] so we went up to 16 38 New Order 1640
+[00:13:43] for 1500 shares
+[00:13:51] now our third leading Gap
+[00:13:55] still holding small size at 16.13
+[00:14:06] macd is opening up that's good
+[00:14:19] we've got 14 minutes to the opening bow
+[00:14:57] green on the tape there at 16.
+[00:15:00] higher this last one minute candle 1608
+[00:15:03] so first one minute candle to make a new
+[00:15:04] high
+[00:15:06] watching
+[00:15:07] added there for first one minute candle
+[00:15:10] to make a new high
+[00:15:11] now looking for the pot back up to 16.25
+[00:15:16] I'm anticipating that candle they're 16
+[00:15:18] 13.
+[00:15:19] it should have broken faster
+[00:15:22] let's see flat uh small loss on that
+[00:15:25] trade
+[00:15:26] at 15.79
+[00:15:30] watching for uh I tried no fill there
+[00:15:34] um at 58 off the half dollar for a dip
+[00:15:43] so I was looking for a first one minute
+[00:15:45] candle to make a new high and then a
+[00:15:47] retest of 1640 but we pulled back
+[00:15:58] about 13 minutes to the opening bell so
+[00:16:00] keeping a tat on watch
+[00:16:04] pixion watch
+[00:16:07] NG Sun side chart
+[00:16:17] so that's the watch list for today
+[00:16:20] uh the trade so far on atat
+[00:16:24] these would essentially be trades
+[00:16:27] um that I cover in the day trading
+[00:16:28] strategies and scaling course
+[00:16:31] so this is a gap and go set up watching
+[00:16:35] first and second pullbacks break of
+[00:16:38] pre-market highs and we may watch at
+[00:16:42] half dollars and whole dollars at the
+[00:16:44] open we could get opening range breakout
+[00:16:46] trades that's a possibility as well
+[00:16:49] so for members you guys know you can go
+[00:16:51] into your members dashboard view courses
+[00:16:54] in the Education portal
+[00:16:58] and actually today
+[00:17:00] I have them up right here
+[00:17:03] with Justin
+[00:17:34] so Gap and go first pull back
+[00:17:44] so for those of you guys tuning in on
+[00:17:46] YouTube if you want to watch me trading
+[00:17:48] from early in the morning until I finish
+[00:17:50] my stream you're welcome to join us as a
+[00:17:52] member either at Warrior trading where
+[00:17:55] you'll have access to trading tools
+[00:17:58] and the classes or if you just want the
+[00:18:02] tools and you want my audio video
+[00:18:03] broadcast you can join us over at
+[00:18:05] daytrade Dash so daytrade Dash is tools
+[00:18:08] only and where you're trading tools and
+[00:18:10] education and mentoring
+[00:18:17] foreign
+[00:18:32] closer to the 20 moving average on the
+[00:18:35] one minute pdsb pop we look at that
+[00:18:40] is it through seven no 692 but coming
+[00:18:42] back up
+[00:18:46] pdsb is one you could take bigger size
+[00:18:49] on but it certainly needs to break
+[00:18:51] through seven
+[00:19:21] 91 on the bid on PDS
+[00:19:24] yep see it dips down there back to 87.
+[00:19:41] a t-a-t will be on a side chart
+[00:19:51] uh so day trade Dash is a chat room
+[00:19:55] scanners news and charts which are
+[00:19:58] coming soon I've got the charts that I'm
+[00:20:00] working on right now our plans to
+[00:20:01] release these to customers later this
+[00:20:03] year
+[00:20:04] so these are coming soon for day trade
+[00:20:07] Dash members of course Warrior members
+[00:20:09] who know this as well
+[00:20:10] I've already discussed it but um
+[00:20:13] this is not a broker so this isn't a
+[00:20:16] place where you're executing orders this
+[00:20:18] is the a tool that you use which for me
+[00:20:20] is going to replace the tool
+[00:20:22] um that I've used for a long time which
+[00:20:23] is e-signal
+[00:20:25] right so this is 100 e-signals 175
+[00:20:28] dollars a month for these charts
+[00:20:32] so my goal was
+[00:20:35] because I just don't think it's I mean I
+[00:20:37] think it's too much for beginner traders
+[00:20:39] to pay 175 dollars just for charts per
+[00:20:43] month I think that's too much so I
+[00:20:45] wanted to try to build charts into our
+[00:20:46] platform to make it easier for beginner
+[00:20:50] Traders so in this platform you have
+[00:20:52] essentially everything you need except
+[00:20:57] the broker for executing trades
+[00:21:06] so we may build simulated trading into
+[00:21:09] this for students to practice on the
+[00:21:11] simulator that may be something that we
+[00:21:12] work on next year
+[00:21:16] so we may add level two you know and
+[00:21:18] things like that
+[00:21:20] but adding the connectivity to execute
+[00:21:23] trades with your broker through it I
+[00:21:25] don't know about that I know some
+[00:21:26] platforms do it
+[00:21:30] certainly more liability when you start
+[00:21:33] doing those Integrations
+[00:21:38] although I'm sure all the platforms that
+[00:21:40] do them say they bear no responsibility
+[00:21:42] whatsoever if their platform goes down
+[00:21:44] because that's usually what they say
+[00:21:48] so you take the risk
+[00:21:53] so I don't know maybe it doesn't
+[00:21:55] increase liability I don't know
+[00:22:01] so pdsb watching that one if you can get
+[00:22:04] uh over seven
+[00:22:08] yep you can use this on Mac or Windows
+[00:22:19] ETA TSC that side chart dipped back to
+[00:22:22] the v-wap it's had big range but I don't
+[00:22:25] like that the highest volume candle of
+[00:22:26] the day is red
+[00:23:35] so yep uh so we're building out sub one
+[00:23:39] minute time frames so 10 second charts
+[00:23:42] and for me my goal is that these charts
+[00:23:45] are good enough for my trading that I
+[00:23:48] will be happy to no longer use e-signal
+[00:23:51] so that that is setting a fairly high
+[00:23:53] standard they have to be good enough for
+[00:23:55] me there might be some you know there
+[00:23:57] might be some differences with different
+[00:23:58] features or things like that but
+[00:24:00] generally speaking they have to be good
+[00:24:01] enough that I am content to not use key
+[00:24:04] signal
+[00:24:06] um you know e-signal has been around for
+[00:24:09] a long time so they're very well
+[00:24:11] established
+[00:24:13] uh but at the same time
+[00:24:15] the charts have kind of been the same in
+[00:24:18] all the years I've used them nothing has
+[00:24:19] really changed so they kind of ascended
+[00:24:21] to this level and then have kind of
+[00:24:22] stayed there
+[00:24:30] I've probably been using the signal for
+[00:24:33] like maybe
+[00:24:34] eight years
+[00:24:38] seven years
+[00:24:43] and like I said that as far as I can
+[00:24:46] tell
+[00:24:47] they're kind of the same
+[00:24:53] one thing that's nice about e-signal is
+[00:24:55] that you can go back a pretty long way
+[00:24:57] as you can see here
+[00:25:00] 95
+[00:25:08] so General Electric has charts back to
+[00:25:10] 1968.
+[00:25:13] which is cool but from a practical sense
+[00:25:17] it's not like that doesn't really serve
+[00:25:21] so chart history is
+[00:25:24] maybe one advantage that they'll have I
+[00:25:26] don't know how far back we'll be able to
+[00:25:28] go but
+[00:25:36] certainly at this point going far enough
+[00:25:37] back
+[00:25:38] as far as I need something like
+[00:25:42] um of course recent IPOs are
+[00:25:50] not much chart at all
+[00:25:53] hudi
+[00:25:56] so two and a half minutes to the Bell
+[00:25:58] thank you for those who have tuned in
+[00:25:59] for the Morning Show on YouTube uh as
+[00:26:01] always we'll be back at it first thing
+[00:26:03] uh tomorrow morning
+[00:26:18] hopefully uh we continue to see some
+[00:26:20] action today I'm sitting at 6 355.46
+[00:26:26] so I'm over my five thousand dollar
+[00:26:27] daily goal and looking to add to that uh
+[00:26:31] and see if I can make my way up towards
+[00:26:33] seventy five hundred or ten thousand
+[00:26:34] since I already have a cushion on the
+[00:26:36] day I'm gonna try to keep trading and
+[00:26:37] see if I can build that cushion so
+[00:26:39] that's the game plan here with 90
+[00:26:40] seconds to the opening Bill all right
+[00:26:42] we'll be back at it uh folks on YouTube
+[00:26:43] first thing tomorrow reminders always
+[00:26:45] trading is risky my results are not
+[00:26:46] typical and you should practice this
+[00:26:48] simulator before you put real money on
+[00:26:49] the line and don't try to blindly follow
+[00:26:51] me or anyone else because trading is
+[00:26:53] risky practicing a simulator take it
+[00:26:55] slow and see you back here first thing
+[00:26:57] tomorrow morning around 9 A.M for the
+[00:26:58] morning show

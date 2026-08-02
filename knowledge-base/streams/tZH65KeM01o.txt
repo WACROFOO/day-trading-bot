@@ -1,0 +1,498 @@
+# Ross's Live Day Trading Morning Show
+# https://www.youtube.com/watch?v=tZH65KeM01o
+# upload_date: 20220328
+# duration_sec: 1927
+
+[00:01:18] [Music]
+[00:01:33] all right good morning everyone well
+[00:01:35] it's uh
+[00:01:37] almost nine a.m we've got two minutes
+[00:01:39] till 9am
+[00:01:40] uh which is important because
+[00:01:42] oftentimes news headlines come out at
+[00:01:44] the top and bottom of the hour so 8 a.m
+[00:01:47] 8 30 9 a.m 9 30.
+[00:01:50] and then once market opens 9 30 10 10 30
+[00:01:53] am not as not as much but pre-market
+[00:01:56] often top and bottom of the hour and you
+[00:01:58] know so
+[00:01:59] we'll be watching for 9 a.m news as i
+[00:02:01] sit down right now
+[00:02:03] thank you to those tuning in for the
+[00:02:04] morning show on youtube we just started
+[00:02:06] the just launched the broadcast i hope
+[00:02:08] you guys enjoyed the weekend i hope you
+[00:02:10] were able to check out
+[00:02:12] uh the newest uh video that i uploaded
+[00:02:15] uh just yesterday it's um
+[00:02:18] right here i'll put a link to this in
+[00:02:21] the youtube broadcast in case you didn't
+[00:02:23] already see it but this is on
+[00:02:25] uh what i would say it's a case study on
+[00:02:28] a trade from
+[00:02:29] i believe it was last week
+[00:02:32] and it's a summary of what i think is
+[00:02:34] the simplest trading strategy and it's a
+[00:02:37] strategy that i will most likely be
+[00:02:39] demonstrating for you again today
+[00:02:42] so if you haven't already checked out
+[00:02:44] that video make sure you check it out
+[00:02:46] and do me a favor and hit the thumbs up
+[00:02:47] and leave it a couple comments because
+[00:02:50] that all helps the youtube algorithm
+[00:02:52] know that this is a video to recommend
+[00:02:54] to other people
+[00:02:56] so let's see the simplest
+[00:02:58] a trading strategy
+[00:03:06] okay there you go there's a what
+[00:03:09] a there's a ghost in the house folks
+[00:03:11] there's a ghost in the house i've
+[00:03:13] just gotten uh gotten word
+[00:03:19] so
+[00:03:20] i am working from home today
+[00:03:23] and
+[00:03:24] uh
+[00:03:25] that's fine i happy to have my home
+[00:03:27] office and my office uh
+[00:03:30] my work office i don't know what you
+[00:03:31] call it they're both in office but uh my
+[00:03:33] home office and my office down at um
+[00:03:36] the office
+[00:03:39] and this is a video of me down at my my
+[00:03:42] work office
+[00:03:43] which is great i i have now two trading
+[00:03:45] stations i have one set up here and one
+[00:03:47] set up there we've got five seconds till
+[00:03:49] nine am so let's just watch real quick
+[00:03:52] to see if there's any
+[00:03:53] headlines at nine a.m that give us an
+[00:03:55] opportunity
+[00:03:56] so scans are running and chat feed is
+[00:04:01] open and news broadcast
+[00:04:04] is ready so
+[00:04:05] let's see if we get anything here
+[00:04:10] a reminder for those tuning in that
+[00:04:11] trading is risky and most beginner
+[00:04:14] traders do lose money and my results are
+[00:04:16] not typical so
+[00:04:18] please take it slow trade in a simulator
+[00:04:20] before you put real money on the line
+[00:04:22] don't try to blindly follow me or anyone
+[00:04:24] else
+[00:04:25] my goal is to
+[00:04:27] teach you guys the strategies that i
+[00:04:28] trade every single day and i hope that
+[00:04:30] it does help you
+[00:04:33] if you've been wanting to learn more
+[00:04:34] about the market this is the right place
+[00:04:36] to be
+[00:04:44] the ghost of rambo yeah
+[00:04:46] i haven't seen rambo in a while
+[00:04:49] only rambo's only come out twice this
+[00:04:51] year
+[00:04:56] i'm sure he'll be back
+[00:04:57] there we go
+[00:05:00] it says on air that means we have to be
+[00:05:02] a little quiet
+[00:05:08] why well because
+[00:05:11] through this microphone
+[00:05:12] all the people can hear me so i want to
+[00:05:15] make sure we don't give them any really
+[00:05:16] loud noises or
+[00:05:18] scary noises
+[00:05:21] but
+[00:05:22] you did say something about a ghost what
+[00:05:24] was that about
+[00:05:25] where was the ghost
+[00:05:27] have you ever seen a ghost
+[00:05:39] it's too cold outside for them
+[00:05:44] yeah so there you'll see them more in
+[00:05:46] the summer
+[00:05:47] that makes sense
+[00:05:53] okay
+[00:05:54] you go to your workstation
+[00:05:57] all right so
+[00:05:58] let's see
+[00:05:59] thank you for the cactus jeff appreciate
+[00:06:01] that
+[00:06:03] i approve
+[00:06:08] uh by the way um
+[00:06:10] it's almost our anniversary for all of
+[00:06:13] uh the day trade warriors out there it's
+[00:06:16] been uh
+[00:06:18] seven six eight years uh since i
+[00:06:22] opened warrior trading uh as chat room
+[00:06:26] it's been uh i believe 10 years
+[00:06:29] since i created the blog and the youtube
+[00:06:32] channel
+[00:06:34] so it's been a good run and i'm excited
+[00:06:37] uh this month coming up in april to
+[00:06:40] celebrate our anniversary month with
+[00:06:42] some new content i'll be putting out on
+[00:06:44] youtube some special things and
+[00:06:47] traders that are on our newsletter you
+[00:06:50] will get
+[00:06:51] the first opportunity
+[00:06:55] to give some suggestions of classes
+[00:06:57] you'd like me to teach
+[00:06:58] for free on youtube live
+[00:07:02] no not yet no because we're doing
+[00:07:04] homeschool
+[00:07:06] we're gonna stay over here
+[00:07:08] you can use this if you'd like do you
+[00:07:10] wanna take a little break and do some of
+[00:07:11] this
+[00:07:14] not right now
+[00:07:19] for a few minutes
+[00:07:24] you gotta wait until
+[00:07:29] so anyways i encourage you guys to
+[00:07:31] register to the newsletter uh if you
+[00:07:33] haven't already everyone who registers
+[00:07:34] will uh
+[00:07:37] sounds a little better
+[00:07:39] we'll get a free copy of my book how to
+[00:07:41] day trade
+[00:07:42] and you'll get daily updates uh recaps
+[00:07:47] watch lists
+[00:07:48] and special videos like the one that i
+[00:07:50] uploaded yesterday as soon as i uh as
+[00:07:52] soon as i post those
+[00:07:58] right so
+[00:07:59] it's 904
+[00:08:00] and at the moment our gap scanner is a
+[00:08:03] little on the thin side the leading gap
+[00:08:06] is kxin at a 50 gap but it's a lower
+[00:08:10] price stock and it has a higher float
+[00:08:13] that's not my favorite combination
+[00:08:15] next one down is poly
+[00:08:18] uh poly
+[00:08:19] poly which is a
+[00:08:22] buy out so that's not something that we
+[00:08:25] would trade next one down is hymc
+[00:08:28] again a cheap stock 47 million share
+[00:08:30] float it's up 32 percent
+[00:08:35] you know it's a cheaper stock so and it
+[00:08:37] had this high back here of 272 so it
+[00:08:40] sort of feels like a maybe a dead cat
+[00:08:42] bounce
+[00:08:43] so i don't really like that
+[00:08:46] all that much
+[00:08:49] dats dats
+[00:08:51] you know i saw this one starting to pop
+[00:08:53] up
+[00:08:54] earlier
+[00:08:56] a
+[00:08:57] nice volume profile in a way high volume
+[00:09:00] green candles
+[00:09:01] but now it's just sort of been steadily
+[00:09:03] pulling back
+[00:09:04] so it does need to get back above
+[00:09:07] uh the high up here of
+[00:09:09] 22 to
+[00:09:11] 33.
+[00:09:13] so we're a little ways away from
+[00:09:16] that level at the moment um
+[00:09:20] yeah so
+[00:09:23] i don't know
+[00:09:24] um
+[00:09:28] i'm not quite sure
+[00:09:33] that's the ats nile 82 million share
+[00:09:37] float
+[00:09:38] obsv
+[00:09:40] 66 million share float so you know
+[00:09:43] sometimes you win them and sometimes you
+[00:09:46] lose and
+[00:09:47] some days there's just not much to trade
+[00:09:49] and today feels like a morning where
+[00:09:51] there's not much to trade
+[00:09:52] so for those that did check out um
+[00:09:55] this uh this episode right here the
+[00:09:58] simplest trading strategy that was a day
+[00:10:01] where i was trading
+[00:10:03] pick pik which was the leading gapper
+[00:10:07] and if i just full screen this for you
+[00:10:11] it was the leading gapper top of the gap
+[00:10:14] scan it was gapping up 84 with a 2
+[00:10:16] million share flow price was five
+[00:10:18] dollars had news
+[00:10:21] right so i had everything we were
+[00:10:22] looking for
+[00:10:23] and we got some great trades on it and
+[00:10:25] there were more opportunities in the
+[00:10:27] afternoon
+[00:10:28] it was strong all day long
+[00:10:31] now we could look at it um you know
+[00:10:33] today for instance if you pulled up pik
+[00:10:36] it probably is on the continuation
+[00:10:38] scanner right here
+[00:10:40] so the continuation scanner is a scan
+[00:10:42] that's looking for
+[00:10:44] stocks that have made big moves in the
+[00:10:45] last week to see if any of them
+[00:10:48] may be setting up for
+[00:10:51] you know a bull flag breakout or
+[00:10:53] something like that
+[00:10:55] this one pik
+[00:10:57] isn't really quite there
+[00:10:59] i don't think yet and it pulled back a
+[00:11:01] little bit this morning
+[00:11:03] ixhl
+[00:11:05] it's the one that's well so this is a
+[00:11:07] little deceiving it's because of the
+[00:11:10] recent ipo
+[00:11:12] the charts pretty rough nrsn
+[00:11:18] you know over eight bucks but it's at
+[00:11:20] 422 right now
+[00:11:23] eik is the third one
+[00:11:26] akan
+[00:11:28] cannabis stock i believe recent ipo
+[00:11:32] clvr
+[00:11:37] curling up a little bit um
+[00:11:42] but pulled back after hours lll
+[00:11:46] we got some nice trades on this last
+[00:11:47] week
+[00:11:50] but remember how super choppy it was on
+[00:11:52] thursday i mean it was like
+[00:11:55] crazy it gave us some a little dead cat
+[00:11:58] bounce but it was like up and down and
+[00:12:00] back up and back down
+[00:12:02] c-e-l-z from last week
+[00:12:06] yeah this one over
+[00:12:08] 390.
+[00:12:10] is interesting
+[00:12:12] i don't know where it is on the
+[00:12:13] continuation scan let me just check the
+[00:12:15] float on that
+[00:12:18] yeah well it's fine five six million
+[00:12:20] shares
+[00:12:34] so for uh warrior pro students in the
+[00:12:36] live trading archives
+[00:12:39] in the live trading archives you can see
+[00:12:40] this screen right here so this is the
+[00:12:42] view that you see in live trading
+[00:12:44] archives you see the chart next right
+[00:12:47] here on the side
+[00:12:49] you see the level two the positions
+[00:12:52] window the active order the executed
+[00:12:54] words you see everything right in here
+[00:12:56] in the live trading archives that's
+[00:12:58] where those
+[00:12:59] um that's where those videos are
+[00:13:12] so yeah cellz um
+[00:13:15] i i don't know if the high back here was
+[00:13:20] so it's a continuation setup i don't see
+[00:13:23] fresh news on it
+[00:13:26] you can have a bite of that yeah
+[00:13:28] looks good
+[00:13:31] i have one more bite
+[00:13:34] okay now you can have that
+[00:13:40] is there news on celc why is it moving
+[00:13:43] up here
+[00:13:50] i didn't see any news on it but now it's
+[00:13:53] opening up a little bit
+[00:13:56] you see it on the scan there
+[00:14:01] so i'll take a starter there at 403
+[00:14:04] and i'm going to add it 425.
+[00:14:08] let's see if we get a squeeze on this
+[00:14:09] added right there 443.
+[00:14:13] let's try to ride the momentum on this
+[00:14:14] up to 450.
+[00:14:17] so watching the first dip
+[00:14:20] to add
+[00:14:22] added 29
+[00:14:24] now looking for the squeeze up to 34 and
+[00:14:26] 44.
+[00:14:29] add it at 21 to buy the dip again
+[00:14:37] so on something like this i mean its
+[00:14:40] high was 44.
+[00:14:42] where is it on our gap scanner now 23
+[00:14:54] reducing size a bit
+[00:14:56] you know honestly didn't make that much
+[00:14:58] because i added pretty high
+[00:15:00] my average is 417.
+[00:15:09] i just don't really
+[00:15:12] i don't know i thought it was going to
+[00:15:13] continue there through 450 and we i
+[00:15:15] would get a like move up to five and
+[00:15:17] then it kind of stalled out right where
+[00:15:19] i was adding which was 344. i added it
+[00:15:24] i mean i added like 5 000 shares of 344.
+[00:15:35] well once they start moving quickly
+[00:15:37] that's momentum trading right
+[00:15:47] so high is 444
+[00:16:01] so size down
+[00:16:03] so it ended up being 2500 of profit
+[00:16:06] which
+[00:16:06] is okay
+[00:16:17] but yeah i added high i thought this was
+[00:16:19] going to keep going
+[00:16:22] i thought maybe there was news on it
+[00:16:23] that i just wasn't seeing
+[00:16:42] so high this candle is 44. i think it's
+[00:16:44] worth keeping an eye on for sure
+[00:16:48] i'll leave my new order at 40 45 50.
+[00:16:53] volcanoes they are real
+[00:17:03] just thinking yep
+[00:17:26] maybe
+[00:17:38] hmm that'd be a pretty big jump
+[00:18:02] so you can see the 10 second chart how
+[00:18:04] it's curling the question is is it going
+[00:18:05] to break out and get through 45 versus
+[00:18:08] just going to run into a wall here i'm
+[00:18:10] not sure
+[00:18:20] yeah we only have about 15 minutes to
+[00:18:22] the bell
+[00:18:29] anyways i don't know i
+[00:18:31] didn't really trade that as well as i
+[00:18:33] could have but
+[00:18:34] i thought it would keep going
+[00:18:42] so we'll keep an eye on um cel-z we'll
+[00:18:44] see if it opens up some more
+[00:18:48] we'll watch high day momentum scanners
+[00:18:51] but with only 15 minutes to the bell i
+[00:18:54] don't know if there's anything else on
+[00:18:55] the gap scanner
+[00:18:57] that i should be
+[00:18:58] really looking at too closely
+[00:19:43] are what real
+[00:19:45] pigs pigs are real
+[00:20:44] yeah your high there was 1290
+[00:20:50] i got a partial fill at 13.85
+[00:20:54] you could see how it's starting to open
+[00:20:56] up let's see if it goes through 14.
+[00:21:02] add it at 14
+[00:21:04] next adds 14.50
+[00:21:08] this is llap
+[00:21:10] it's a recent ipo
+[00:21:12] new order at 14.50
+[00:21:17] so all-time high here is 11 53 so it's a
+[00:21:20] blue sky set up
+[00:21:24] so watching for the break through 14 and
+[00:21:26] 14.50
+[00:21:28] let's see if we get to move up towards
+[00:21:30] 16 17.
+[00:21:33] i that candle there's 14.39
+[00:21:37] so i'm going to watch in this area to
+[00:21:38] buy the dip
+[00:21:40] added at 13.55 to buy the dip for the
+[00:21:44] curl back through 14.
+[00:21:48] so now looking for 14 25 and then 14.50
+[00:21:56] cutting the loss on it so
+[00:22:00] bought too high
+[00:22:03] so it puts me about flat on the day here
+[00:22:05] coming into the open sometimes these
+[00:22:07] will open up a little bit more this hit
+[00:22:09] a high of 14.39
+[00:22:13] so up 2500 on cel-z down 2300 on ll ap
+[00:22:17] which i bought for the break of 14
+[00:22:20] and then i added at 13.50 off support
+[00:22:23] and then stopped it
+[00:22:25] 13 25 or so
+[00:22:34] so coming into the open flat more or
+[00:22:36] less
+[00:22:40] a rejection candle like that makes it
+[00:22:42] hard to trust for additional trades
+[00:22:46] cel-z
+[00:22:48] still on watch it's a daily breakout
+[00:22:54] llap i'll keep on watch see if it comes
+[00:22:57] up again
+[00:22:59] later in the day
+[00:23:12] so monday morning
+[00:23:13] up 189 dollars
+[00:23:15] green on one red on the other
+[00:24:02] so easy come easy go that's part of
+[00:24:04] trading
+[00:24:12] asts daily setup
+[00:24:19] i don't think i really like that one too
+[00:24:21] much
+[00:24:59] lcfy i didn't check that one
+[00:25:10] so an ipo from friday
+[00:25:14] i was 380.
+[00:25:19] frge
+[00:25:21] yeah i mean i i don't disagree that
+[00:25:23] you had you have a pivot there but
+[00:25:26] so let's see if it wants to go i have a
+[00:25:29] starter
+[00:25:30] my ad spot would be 2050
+[00:25:33] and then 2065.
+[00:25:36] so watching the break of 2050 2065 this
+[00:25:39] one has a pivot here
+[00:25:41] at 20 36
+[00:25:45] watching the ad
+[00:25:47] added at 20 30 uh 20 for the break of
+[00:25:50] 21.
+[00:25:53] so now looking for
+[00:25:58] hi this candle is 21.15 new orders 2125
+[00:26:07] bought the dip right there at 81.
+[00:26:10] i see it
+[00:26:11] bought the dip at 81 looking for the
+[00:26:13] breakthrough 21
+[00:26:15] and then up to 22.50
+[00:26:20] so this is one that is a former momo
+[00:26:22] stock
+[00:26:24] about four hundred dollars of profit on
+[00:26:26] it so far
+[00:26:28] the high is 21.13 new order goes to
+[00:26:30] 21.13
+[00:26:34] watching um
+[00:26:36] to buy a dip
+[00:26:43] our daily level is 24.62
+[00:26:46] for what it's worth
+[00:27:10] added it 20 27 to buy the dip for the
+[00:27:13] curl back through 21
+[00:27:19] so watch there's 70 on the ask watch
+[00:27:22] over 75 and 85.
+[00:27:26] next ad is at 21 and then 21 15.
+[00:27:33] watching 65 75 85 there you go
+[00:27:36] now watch 2115
+[00:27:44] first candle to make a new high is what
+[00:27:45] i'm watching
+[00:27:58] flat for now up 400 on it
+[00:28:02] no we can leave those
+[00:28:04] yes
+[00:28:23] so this one i'll watch back over 2113.
+[00:28:28] bought the dip at 19.05 250 shares
+[00:28:35] we've got about five minutes to the
+[00:28:36] opening bell
+[00:28:39] so diptrade at 19.05
+[00:28:44] what do you see
+[00:29:00] about 500 a profit on frge just small
+[00:29:02] gains
+[00:29:10] about five minutes the opening bell
+[00:29:13] i'm hoping that we'll see something that
+[00:29:14] holds up and keeps going so far it's
+[00:29:17] been
+[00:29:18] slow
+[00:29:19] choppy
+[00:29:24] but it only takes one to open up and had
+[00:29:26] frge broken through 21.15 there then
+[00:29:29] you're looking at 2150 22 an impossible
+[00:29:32] retest of 2462.
+[00:29:36] if we can break through that level our
+[00:29:37] daily high is
+[00:29:39] you know so
+[00:29:41] you're not that far away if you get up
+[00:29:43] towards 24.
+[00:30:35] revb another one hitting the scan
+[00:30:40] house
+[00:30:42] so a couple delayed prints there on the
+[00:30:44] scan
+[00:31:18] all right so uh warrior pro students
+[00:31:21] we're gonna hold on
+[00:31:23] hold on one second
+[00:31:26] okay so we're pro students we're gonna
+[00:31:27] keep trading here at the opening bell
+[00:31:28] we've got two and a half minutes to the
+[00:31:30] bell
+[00:31:30] was up uh 2500 sitting up 700 right now
+[00:31:34] so kind of just things are going a
+[00:31:36] little slow this morning but we'll keep
+[00:31:37] an eye on the momo scanner and we'll see
+[00:31:40] if something starts to uh stick and hold
+[00:31:44] and then i'll be on that pretty quick
+[00:31:45] all right so that's the game plan today
+[00:31:47] reminders always trading is risky easy
+[00:31:49] come easy go
+[00:31:51] so we'll be back at it for the morning
+[00:31:53] show tomorrow morning
+[00:32:06] you

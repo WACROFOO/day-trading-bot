@@ -1,0 +1,625 @@
+# [LIVE] DAY TRADING Morning Show with Ross Cameron!
+# https://www.youtube.com/watch?v=IUCNH5Vjnng
+# upload_date: 20230522
+# duration_sec: 1744
+
+[00:01:09] all right good morning everyone so we've
+[00:01:12] got about 30 minutes to the opening bell
+[00:01:14] and uh today is the first day the
+[00:01:18] morning show is back streaming on
+[00:01:20] YouTube so thank you guys for tuning in
+[00:01:22] and we're also streaming this morning on
+[00:01:25] uh Facebook as well so you guys can uh
+[00:01:28] tune in there for those that are on
+[00:01:30] Facebook
+[00:01:32] so before we get started um maybe what
+[00:01:34] I'll do is sort of set level
+[00:01:37] expectations in terms of what I'm
+[00:01:39] looking for what the goal is so I'm
+[00:01:42] saying down here I've already been
+[00:01:44] sitting in front of the computer for a
+[00:01:46] little a little while I have already
+[00:01:47] taken one trade which is a 27 loss
+[00:01:50] you'll always see in the top corner
+[00:01:52] right here when I'm trading my p l so
+[00:01:55] that'll show you if I'm in a position if
+[00:01:57] I'm out of a position and what my profit
+[00:01:59] or loss is so that's transparency right
+[00:02:01] there you can see when I'm in or out of
+[00:02:03] a trade
+[00:02:05] um so right now I have no trade just it
+[00:02:06] says close position all right so my goal
+[00:02:10] each day as a day trader and I'm a
+[00:02:13] Trader who's trading for income so I'm
+[00:02:16] not speculating on you know trading and
+[00:02:18] hoping to make a million dollars or do
+[00:02:20] something crazy I have a goal of trying
+[00:02:22] to make a little bit of money each day
+[00:02:23] and my daily goal is five thousand so
+[00:02:26] I've been doing this for a long time
+[00:02:27] I've got a high daily goal I've earned
+[00:02:29] the right to put it there your daily
+[00:02:31] goal most like will be a fraction of
+[00:02:33] that maybe it's
+[00:02:35] uh you know fifty dollars a hundred two
+[00:02:38] hundred maybe five hundred most likely
+[00:02:40] it's a fraction of my daily goal but in
+[00:02:42] any case for me what I found to be the
+[00:02:45] most consistent way of hitting that goal
+[00:02:47] is try to find one or two opportunities
+[00:02:49] where I can capture 15 or 20 cents per
+[00:02:52] share out of the market and if I could
+[00:02:53] do that with ten thousand fifteen
+[00:02:55] thousand shares
+[00:02:56] I can make my way up to my daily goal
+[00:02:59] and of course there's times where I end
+[00:03:00] up having a trade that ends up going 30
+[00:03:01] 40 50 cents or even a dollar a share and
+[00:03:04] those put me well over the daily goal so
+[00:03:07] if I'm looking for an opportunity to hit
+[00:03:10] a 15 20 cent winner
+[00:03:12] I'm sitting down each day and I'm
+[00:03:15] looking for something number one that's
+[00:03:17] moving all right so I need a stock
+[00:03:19] that's moving I need the rate of change
+[00:03:20] so at a minimum I'm not going to look at
+[00:03:22] something generally speaking if it's not
+[00:03:24] up at least 10 percent so I'm looking
+[00:03:26] for a 10 mover typically I'm going to
+[00:03:29] look for a stock that's priced between
+[00:03:30] 2.20 because I can buy more shares and I
+[00:03:34] can get a bigger percentage move on a
+[00:03:36] lower price stock I like to see stocks
+[00:03:38] that have news or some type of catalyst
+[00:03:40] a catalyst can be a strong daily chart
+[00:03:42] that's okay too news is preferred I
+[00:03:46] would also like to see that the stock
+[00:03:47] has high relative volume so whatever is
+[00:03:50] normal for the stock over the last 30 40
+[00:03:53] 50 days today it should be many times
+[00:03:56] higher than average that higher average
+[00:04:00] volume is a really strong indicator
+[00:04:03] that people are interested in the stock
+[00:04:04] and that's usually when we see really
+[00:04:06] good follow-through and then lastly I
+[00:04:08] want to see the number of shares
+[00:04:10] available to trade or less than ideally
+[00:04:11] less than 20 million shares so a float
+[00:04:13] of less than 20 million so that's what
+[00:04:15] I'm looking for just to set your sort of
+[00:04:17] level expectation uh I'll remind
+[00:04:20] everyone right now and as we go through
+[00:04:22] this morning's show that of course my
+[00:04:23] results are typical and you should
+[00:04:25] always train a simulator before you put
+[00:04:27] real money online okay so practice this
+[00:04:29] simulator and then once you've proven
+[00:04:31] profitability simulator then you could
+[00:04:33] step up a trade real money all right now
+[00:04:35] some of you guys might be using a free
+[00:04:36] commission broker where you could trade
+[00:04:39] uh with no commissions whatsoever and
+[00:04:42] that would allow you to kind of treat it
+[00:04:44] like a simulator by trading with like
+[00:04:46] you know 10 shares and that that's fine
+[00:04:49] if that's what you prefer but don't put
+[00:04:51] real money on the line until you first
+[00:04:53] established metrics consistency and you
+[00:04:57] could support trading with real money
+[00:04:59] all right so let's get into the first
+[00:05:01] step of the day which is breaking down
+[00:05:03] the watch list and seeing if I can find
+[00:05:05] some stocks that I think have the
+[00:05:07] potential to give me that 15 to 20 cent
+[00:05:09] winner and I see on um Facebook it
+[00:05:12] didn't take long we've already got
+[00:05:14] um a 40 Bitcoin bonus uh Bitcoin
+[00:05:19] scammers have come out quick
+[00:05:21] unfortunately this is prevalent in all
+[00:05:24] social media YouTube Facebook everywhere
+[00:05:28] it's just part of the deal so uh ignore
+[00:05:31] the cryptocurrency spammers that are
+[00:05:34] going to be uh in the room
+[00:05:36] all right so let's see
+[00:05:39] so to and again just to get you guys
+[00:05:41] oriented it's been a while since the
+[00:05:43] last Morning Show so uh as we sit down
+[00:05:46] this is the screen that I'm usually
+[00:05:47] looking at this is my uh a scanner and a
+[00:05:51] chart and this is all integrated into
+[00:05:52] the day trade dashboard uh which is uh
+[00:05:55] what Warrior trading is using for all of
+[00:05:57] our students day trade Dash all right so
+[00:06:02] um let's see so our leading gapper this
+[00:06:04] morning is actually reverse split stock
+[00:06:06] so I'm gonna disregard that because it
+[00:06:08] doesn't have any volume x one down is
+[00:06:10] ghl ghl is our leading percentage gainer
+[00:06:13] in the entire Market at 115 percent but
+[00:06:16] you see how it's trading like this
+[00:06:17] trading sideways because it's buyout the
+[00:06:20] Stock's been bought out and it's not
+[00:06:23] going to trade uh with much range
+[00:06:24] anymore it's just going sideways
+[00:06:28] all right so that's ghl uh next one down
+[00:06:31] is Avro Avro the first thing that I
+[00:06:35] noticed is that the price is a dollar
+[00:06:36] forty three which means it's a little on
+[00:06:38] the cheaper side I prefer stocks between
+[00:06:40] 2 and 20 So Below two you know it's a
+[00:06:43] little below my cut off but then the
+[00:06:45] float is also 43 million shares so now
+[00:06:47] we kind of have two problems with it the
+[00:06:48] float's a little high uh the price is a
+[00:06:51] little low that's not that's not really
+[00:06:54] preferable for me all right so I'm gonna
+[00:06:56] leave that one alone for right now vert
+[00:06:59] sorry v e c t
+[00:07:02] v e c t Victor Echo charlie tango
+[00:07:06] b-e-c-t uh we're at 16 a share with a
+[00:07:12] slightly higher float as well 54 million
+[00:07:14] share float so again I could pretty much
+[00:07:18] disregard the top five gappers because
+[00:07:20] of float or buyout one one or the other
+[00:07:22] and now we have mbot mbot and this one's
+[00:07:26] up 30 so this one's already put in a
+[00:07:29] little bit of a move this morning uh my
+[00:07:32] problem with it is that it's on the
+[00:07:34] cheaper side the float is fine so no
+[00:07:36] issue with the flow
+[00:07:37] but it's on the cheaper side now despite
+[00:07:40] being cheaper it did put in a nice move
+[00:07:42] here from about a dollar twenty up to a
+[00:07:44] dollar eighty there was news on this
+[00:07:47] um a little bit earlier this morning
+[00:07:48] let's see
+[00:07:51] was it 8 30 bottom of the hour was it 8
+[00:07:54] 30 yeah mbot um achieved 100 success
+[00:07:57] rate for Liberty and extensive
+[00:07:59] pre-clinical animal study performed by
+[00:08:01] Leading European Physicians okay so that
+[00:08:04] was the news bottom of the hour at 8 30
+[00:08:06] and that sent it pretty much immediately
+[00:08:09] um moving up one of the tricky things
+[00:08:11] with news is that there's news headlines
+[00:08:12] that and we have a news feed here that's
+[00:08:14] putting these into the um the the room
+[00:08:17] or this platform the problem is you
+[00:08:20] never know for sure whether or not a
+[00:08:22] news headline will be received
+[00:08:24] positively or negatively you know so I
+[00:08:28] kind of really wait to see something
+[00:08:30] moving and this one got going on the
+[00:08:33] scan so uh mbot you know started uh
+[00:08:37] pretty early here right around 8 32 is
+[00:08:40] when it first hit and then it kept going
+[00:08:42] from there
+[00:08:43] so mbot has been the one that's been in
+[00:08:45] Focus right now a couple others have hit
+[00:08:48] the scanners here in the meantime but
+[00:08:51] I'm not sure that mbot is going to be
+[00:08:54] the safest one for me because of
+[00:08:58] um price
+[00:09:00] so right now I'm gonna say it to maybe
+[00:09:04] so we'll type it in My Level 2 window
+[00:09:06] mbot so I have my trading platform on my
+[00:09:11] lower window so I can type in mbot and
+[00:09:14] then I can just kind of keep the level
+[00:09:15] two up and have it on watch ready to go
+[00:09:17] all right so volume profile highest
+[00:09:21] volumes on a green candle volume on that
+[00:09:24] red candle pretty high as well it's
+[00:09:27] pulled back now
+[00:09:28] so a question there why not HEPA all
+[00:09:31] right so HEPA so HEPA a couple problems
+[00:09:34] with it
+[00:09:35] uh right now the main problem is that we
+[00:09:40] had about a double top up here around 16
+[00:09:42] and it pulled back so I was actually
+[00:09:45] checking the filings on this so I
+[00:09:48] checked the 10q they just did a reverse
+[00:09:51] split so the float has been adjusted on
+[00:09:57] light speed here it shows a 76 million
+[00:10:00] shares outstanding we show the same
+[00:10:01] thing in day trade Dash here 76 but they
+[00:10:07] just had a reverse split so that's just
+[00:10:09] been updated so that needs to get
+[00:10:10] reflected through the market data
+[00:10:11] vendors but in any case so while the
+[00:10:14] float is now tolerable and okay the
+[00:10:18] price
+[00:10:19] it's back below volume weight average
+[00:10:21] price so it's just not holding up super
+[00:10:23] well you know kind of a it is what it is
+[00:10:26] but yeah it's just not holding up super
+[00:10:28] well so right now it looks too weak
+[00:10:31] and there are times where I'll buy
+[00:10:33] something below view app
+[00:10:36] but
+[00:10:37] that's not my favorite setup and
+[00:10:39] certainly not an easy setup for
+[00:10:40] beginners and even if I was going to I'd
+[00:10:42] probably want to see that it held this
+[00:10:44] previous level and it's broken that
+[00:10:45] level so this one's no good right now
+[00:10:49] to me I don't like the chart
+[00:10:52] uh we can look at the overall market for
+[00:10:54] a second so S P 500
+[00:10:56] um to get up into
+[00:11:00] um well I mean on Friday we we hit the
+[00:11:03] highest uh highest price on the S P that
+[00:11:06] we've hit since uh back in August which
+[00:11:08] was great so we have uh some a pivot on
+[00:11:12] August 16th with a high of uh 426.37
+[00:11:17] so that's a level that I would look at
+[00:11:20] for possible resistance up here
+[00:11:22] 436 for sorry 426.37 and then above that
+[00:11:27] we've got a fair amount of room to the
+[00:11:29] next level
+[00:11:31] so the market you know is uh starting to
+[00:11:36] get up into this area
+[00:11:38] certainly some people think that it's
+[00:11:39] extended and we're due for a pullback
+[00:11:41] and that may well be the case but
+[00:11:44] in any case we're above the 200 moving
+[00:11:46] average so overall Market looks uh looks
+[00:11:49] decent no concern there
+[00:11:52] I don't think it's gonna
+[00:11:54] there's really no concern there so
+[00:11:56] Market's doing its thing looks fine
+[00:12:01] um so we've got about
+[00:12:03] a little over 15 minutes to the Bell
+[00:12:07] frln
+[00:12:10] let's see so this one's up 23 percent
+[00:12:12] you see this chart is kind of wild right
+[00:12:15] it kind of pops up sells off pops up
+[00:12:17] sells off I don't really like that when
+[00:12:20] I see these two topping tails
+[00:12:23] I'll show you
+[00:12:25] um let's see
+[00:12:31] so I see these topping Tails like that
+[00:12:34] like that
+[00:12:35] I don't like it I just think that that's
+[00:12:37] that's indicating too much weakness it
+[00:12:40] pops up it reverses pops up reverses and
+[00:12:43] even right here and right here it keeps
+[00:12:45] doing that I mean it's not to say you
+[00:12:47] haven't had some nice moves but
+[00:12:50] how can you really trust it
+[00:12:52] I think it's going to be a little bit of
+[00:12:54] a hard one to trust
+[00:12:58] probably leaving that alone for right
+[00:12:59] now mbot mbot coming back up here
+[00:13:03] pre-market high is 184.
+[00:13:06] so that one's coming back towards that
+[00:13:09] level right now the one minute sort of
+[00:13:11] looks like an inverted Head and
+[00:13:13] Shoulders pattern
+[00:13:16] so you've got the shoulder the head the
+[00:13:19] shoulder and then that would be sort of
+[00:13:22] the beginning of the arm but
+[00:13:24] realistically you'd come back to a
+[00:13:26] double top at 185 and that's not that
+[00:13:29] far away I mean it's only nine cents
+[00:13:31] away
+[00:13:32] so our upside potential feels sort of
+[00:13:34] limited which is one of the challenges
+[00:13:36] with these lower priced
+[00:13:37] um lower price stocks
+[00:13:39] this doesn't feel like there's a lot of
+[00:13:40] upside potential we had a nice channel
+[00:13:42] here uh a bit earlier and now it's
+[00:13:46] broken out of that and sold off
+[00:13:49] so
+[00:13:50] right now
+[00:13:52] I don't know maybe you know maybe if it
+[00:13:54] holds this level we could get an ABCD
+[00:13:56] pattern or something like that
+[00:14:00] it just doesn't seem
+[00:14:03] seems super obvious at the moment
+[00:14:09] okay so
+[00:14:10] um if there's something that you want me
+[00:14:12] to look at that I might be missing let
+[00:14:14] me know
+[00:14:22] got about 15 minutes to the opening bell
+[00:14:24] cnsp sure
+[00:14:27] so cnsp
+[00:14:29] below V web the Orange Lines view app so
+[00:14:33] it's below that level right now so that
+[00:14:35] doesn't look that great pre-market high
+[00:14:37] is 253
+[00:14:39] uh float is 2.16 million shares so the
+[00:14:42] float's fine
+[00:14:44] the price is you know a little low but
+[00:14:47] really it's the chart pre-market
+[00:14:49] it's not strong enough selling off
+[00:14:53] now you know there's some types of
+[00:14:55] people some types of Traders who'll say
+[00:14:56] oh you know I could buy it down here and
+[00:14:59] you know maybe it curls back up maybe
+[00:15:01] you know but but I don't like to trade
+[00:15:03] to try to speculate what something's
+[00:15:05] going to do really I like to I mean I
+[00:15:07] guess trading is that to a certain
+[00:15:08] extent but I like to trade something
+[00:15:10] that's already moving nicely buy the
+[00:15:13] pullback and then ride the next wave up
+[00:15:14] buy the red candle buy the next wave up
+[00:15:16] so I'm looking for something that's
+[00:15:18] moving nicely something that's not
+[00:15:20] moving cleanly I I have no interest in
+[00:15:22] it right now
+[00:15:23] all right so
+[00:15:25] um so that was that one ncpl Josh all
+[00:15:28] right so let's look at this one
+[00:15:31] uh yeah I know again this is a this
+[00:15:33] chart is not a clean chart it's just
+[00:15:35] selling off right
+[00:15:37] it's just not a clean chart
+[00:15:38] unfortunately avir
+[00:15:41] I can look at that bio C I'll look at
+[00:15:43] that next
+[00:15:46] so avir
+[00:15:48] that's not bad uh but the float all
+[00:15:52] right so you've got an 82 million share
+[00:15:53] float it's not a recent reverse split so
+[00:15:56] I could just double check
+[00:15:58] um
+[00:16:00] filings on this
+[00:16:03] let's see yep it's 84 million right
+[00:16:05] there so
+[00:16:09] it that that was a nice move but I don't
+[00:16:11] think it's gonna I don't know if it'll
+[00:16:12] sustain bio C
+[00:16:20] right so this one put in a big move on
+[00:16:22] Friday you know I mean that was awesome
+[00:16:24] from 6 to 12. yeah but then right back
+[00:16:28] down to six
+[00:16:29] then I went to 565.
+[00:16:34] what is it doing here
+[00:16:36] well uh you could call this a possible
+[00:16:39] dead cat bounce right so sells off
+[00:16:44] a little bit of a bounce back up very
+[00:16:46] unlikely it goes back to 12.
+[00:16:48] could it go back you know to 7 758 maybe
+[00:16:53] you know the thing is you've got a big
+[00:16:54] range so it's not impossible that you
+[00:16:57] get a little move like that and and then
+[00:16:59] it goes back but I think that that's
+[00:17:01] probably all it would be it's just a
+[00:17:02] little move and then a sell-off so
+[00:17:05] that's I'd kind of prefer to be trading
+[00:17:08] the front side of the move like here
+[00:17:11] where you still have upside potential
+[00:17:13] that who knows it could go to 18 to 20.
+[00:17:16] up here or in this area your upside
+[00:17:18] potential I think is really fairly
+[00:17:19] Limited
+[00:17:22] uh so that's bio C
+[00:17:25] uh frln yep I can look at that one again
+[00:17:30] okay so frln right so back below V web
+[00:17:33] too weak right now Avro
+[00:17:44] Avro is at least above V web so right it
+[00:17:48] that it at least has that going for it
+[00:17:51] uh the float's 43 million shares though
+[00:17:54] so you've got a higher float
+[00:17:57] I don't know I'm not seeing someone as
+[00:17:59] being something that's going to give me
+[00:18:01] 15 or 20 cents a share 15 or 20 cents
+[00:18:03] would be a huge move on this one
+[00:18:05] so you know I could adjust my
+[00:18:06] expectation I I could say I'm probably
+[00:18:08] not gonna get 15 20 cents but maybe I
+[00:18:10] could get
+[00:18:11] eight
+[00:18:12] take bigger share size it's got a lot of
+[00:18:15] volume but
+[00:18:17] you know then what if I end up catching
+[00:18:20] that flush and getting stopped out as it
+[00:18:23] drops I don't know I just I'm not
+[00:18:25] feeling it I don't think it's worth it
+[00:18:35] okay let's see
+[00:18:44] about 10 minutes to the open here
+[00:19:21] foreign
+[00:19:38] so you know so yeah I am going to be a
+[00:19:41] little bit picky uh but you know at the
+[00:19:44] same time that's what keeps me green
+[00:19:46] that's why my account's growing it's
+[00:19:49] because I'm I am picky you know I know
+[00:19:51] kind of generally speaking what I like
+[00:19:53] to trade and if I don't see something
+[00:19:54] that quite fits within that then it's
+[00:19:57] better uh it's better to not overstay my
+[00:20:00] welcome
+[00:20:01] so unlike a lot of Traders I'm I'm green
+[00:20:04] on the year
+[00:20:06] so you know
+[00:20:07] this is
+[00:20:09] it's just about making making
+[00:20:11] progress and making profit
+[00:20:16] there's no sense in punching the keys if
+[00:20:18] I don't think that I'm gonna make money
+[00:20:22] so you know that's kind of where I'm at
+[00:20:24] right now and
+[00:20:26] um detailed gross profit
+[00:20:31] say
+[00:20:36] I mean it's over 12 million so
+[00:20:45] just trying to keep myself from having
+[00:20:47] unnecessary drawdowns
+[00:21:08] so I'm a little over 12 million in gross
+[00:21:10] profit and I do everything possible to
+[00:21:14] avoid drawdowns so if I have a drawdown
+[00:21:18] of five thousand or ten thousand dollars
+[00:21:20] you know that's about as far as I want
+[00:21:22] to let it go I don't want to draw down
+[00:21:25] um you know
+[00:21:27] 100 Grand 200 Grand 300 Grand a million
+[00:21:30] dollars and I've seen people do it
+[00:21:34] those of you guys who are tuning in if
+[00:21:36] you want to download a copy of my book
+[00:21:39] uh I'll post the link there for you
+[00:21:50] there you go
+[00:22:11] so those you guys that download
+[00:22:13] um a copy of my book you'll get a couple
+[00:22:16] other things as well my micro pullback
+[00:22:19] strategy lesson my pre-trading checklist
+[00:22:22] my small account strategy worksheet
+[00:22:25] you'll be able to download these PDFs I
+[00:22:27] had a day trade ebook and my technical
+[00:22:29] analysis Series so I'm hoping that these
+[00:22:33] all Empower you guys to make good
+[00:22:35] decisions as you're learning how to
+[00:22:36] trade I hope it helps you avoid the
+[00:22:38] rookie mistakes that I made I want you
+[00:22:41] to take it slow practice and assimilate
+[00:22:43] before you put real money on the line
+[00:22:45] there's no reason to Chase and get you
+[00:22:48] know get overly excited the market will
+[00:22:50] be here for you so don't let fomo take
+[00:22:53] over be calm cool collected and when you
+[00:22:57] see good quality setups you're going to
+[00:22:59] know them and you're going to want to
+[00:23:00] step up to the plate right now for me
+[00:23:02] I'm just being patient
+[00:23:05] and today I don't see anything that I
+[00:23:08] really love
+[00:23:14] you know unfortunately it seems like
+[00:23:16] kind of a slow a slow Monday I was
+[00:23:18] hoping that we would start this week off
+[00:23:19] with uh you know some really nice trades
+[00:23:22] but well leading gapper it's 115 that's
+[00:23:26] fine but it's a buyout second leader is
+[00:23:28] 88 Avro that's a 44 million share float
+[00:23:33] Peppa this one is below view app
+[00:23:37] mbot
+[00:23:39] that one's at 168 right now
+[00:23:44] so none of these look awesome
+[00:23:48] we've got some continuation ideas that I
+[00:23:51] was looking at earlier so there may be
+[00:23:53] some uh continuation opportunities we
+[00:23:55] have the recent IPO movers those both
+[00:23:58] provided some fantastic opportunities
+[00:24:00] had a great day on Thursday great day of
+[00:24:04] Friday but
+[00:24:06] um I'm not sure that either of those are
+[00:24:07] set up for an opportunity this morning
+[00:24:15] so someone on YouTube says I struggle
+[00:24:17] with averaging down it comes from a fear
+[00:24:19] of loss hitting the sell button when I'm
+[00:24:21] wrong how can I get rid of it so I mean
+[00:24:23] I I I I I hear that all the time there
+[00:24:26] are so many traders that struggle with
+[00:24:27] pressing that sell button bailing out
+[00:24:29] when something's not working
+[00:24:32] uh it's it requires emotional
+[00:24:34] conditioning so if you need a period of
+[00:24:37] emotional conditioning you may need to
+[00:24:38] trade with smaller size for a little bit
+[00:24:40] just to get yourself in the habit of
+[00:24:42] cutting those losses quickly and you
+[00:24:44] know with small size it just doesn't
+[00:24:46] matter that much right who cares it's a
+[00:24:48] small size position just cut it let it
+[00:24:50] go and move on
+[00:24:53] so there's a nice breakout there up to a
+[00:24:56] high of 87 on mbot
+[00:25:02] again this to me is it's a nice breakout
+[00:25:06] relatively speaking for a cheap stock
+[00:25:11] to me it's it's still not really it's
+[00:25:14] not that big of a move I mean it's eight
+[00:25:16] cents 10 cents it's it's not really
+[00:25:18] enough to get me that excited but
+[00:25:20] um but it is a break out there the high
+[00:25:22] was 84 so it broke the high by four
+[00:25:24] cents up to 88. now it's pulling back a
+[00:25:26] little bit
+[00:25:37] yep you can subscribe just to daytrade
+[00:25:38] dash just the scanners if you want
+[00:25:42] okay
+[00:25:51] all right so the high there is 188.
+[00:26:00] so if there's no gappers and I'm not
+[00:26:03] taking any there's no clean trades
+[00:26:04] pre-market so today for instance there's
+[00:26:06] no clean trades pre-market so I have two
+[00:26:09] options the first option it is just to
+[00:26:11] say you know what I'm going to shut it
+[00:26:13] down because I know that my best days
+[00:26:16] start with hitting the daily goal
+[00:26:19] pre-market and then just adding profit
+[00:26:21] on top of that as the day goes on those
+[00:26:23] are my best days so today already isn't
+[00:26:25] going to be one of my best days because
+[00:26:27] I'm sitting down 27 coming into the open
+[00:26:30] well okay so plan B on the one hand I
+[00:26:34] could just walk away and I could enjoy
+[00:26:35] the rest of the day and come back and do
+[00:26:37] it again tomorrow and that's that's
+[00:26:38] great for Capital preservation for those
+[00:26:40] of us that you know have to go to a
+[00:26:43] regular job after trading or you know
+[00:26:46] have just really only want to sit here
+[00:26:48] for two hours a day you're kind of in
+[00:26:50] retirement mode just trade two hours a
+[00:26:52] day and then get out and enjoy life
+[00:26:54] today's the day we're not gonna have a
+[00:26:55] lot and that's fine you don't want to
+[00:26:57] spend all day here that's not the goal
+[00:26:58] of being a Trader you want freedom so
+[00:27:00] you shut it down you walk away the other
+[00:27:02] goal for Traders that
+[00:27:04] um are have the time and the interest to
+[00:27:06] stay sit here longer and the metrics
+[00:27:09] that prove sitting here longer does pay
+[00:27:11] you sit and you wait to see what comes
+[00:27:14] out of the opening range so we'll have
+[00:27:16] our opening range between 9 30 9 45 10
+[00:27:19] a.m and then what comes out of that
+[00:27:21] range do we end up having some stocks
+[00:27:22] that show strength through the morning
+[00:27:24] 10 30 11 30 12. do we have we then we
+[00:27:28] kind of have a lunch break a little bit
+[00:27:29] of a lull sometimes there's momentum
+[00:27:31] during a lunch break even you know the
+[00:27:33] Market's not actually closed but it's
+[00:27:34] just lower volume and then you know into
+[00:27:37] the afternoon between 2 p.m and 4 P.M so
+[00:27:40] depending on your time zone and when you
+[00:27:42] want to sit down you can sit down almost
+[00:27:43] any time of the day and you can see
+[00:27:45] stocks moving you could try to find
+[00:27:46] Opportunities it's just a question of
+[00:27:48] your own metrics your own consistency
+[00:27:51] your track record and when you perform
+[00:27:53] the best
+[00:27:54] so I'm going to be here for at least
+[00:27:56] another hour I'll probably be here till
+[00:27:58] 11 uh for warrior members so I'm Gonna
+[00:28:01] Keep streaming I'll be um looking for
+[00:28:03] opportunities and seeing as still
+[00:28:05] whether or not I have a chance at
+[00:28:06] hitting the daily goal today we'll need
+[00:28:08] to see something that squeezes up and
+[00:28:10] gives us a nice move but that's
+[00:28:12] certainly possible it's uh it's still
+[00:28:14] relatively early all right so that's the
+[00:28:16] game plan I will be
+[00:28:18] um ending this broadcast here on uh
+[00:28:21] YouTube thank you guys for tuning in for
+[00:28:24] the morning show we've got one minute to
+[00:28:26] the open and we've got a leading gapper
+[00:28:28] this morning it's a buyout second leader
+[00:28:31] is up 83 percent not not a picture
+[00:28:34] perfect Gap scan but I'll be back at it
+[00:28:37] tomorrow and let's see if we have
+[00:28:39] something that looks better tomorrow so
+[00:28:40] for those of you streaming for the
+[00:28:41] morning show we'll see you tomorrow
+[00:28:42] Warrior students we're gonna keep
+[00:28:44] trading here going into the open
+[00:28:46] reminders always for those who have
+[00:28:48] tuned in trading is risky my results
+[00:28:50] aren't typical there's no guarantee
+[00:28:51] you'll find success so make sure you're
+[00:28:53] trading the simulator before you put
+[00:28:54] real money on the line and I'll see you
+[00:28:56] guys back at it tomorrow

@@ -1,0 +1,731 @@
+# Day 3 - LIVE Day Trading from the All Star Traders Summit 2022 #daytrading
+# https://www.youtube.com/watch?v=w5xBE9oFs80
+# upload_date: 20221019
+# duration_sec: 1776
+
+[00:00:01] All right, good morning everyone.
+[00:00:02] Welcome to day three of the All-Star
+[00:00:06] Traders Summit.
+[00:00:08] We are sitting here with a couple of
+[00:00:11] interesting gappers.
+[00:00:13] RDHL
+[00:00:15] 76 cent stock. It's grinding a little
+[00:00:17] higher. I've got some great traders
+[00:00:22] sitting around the table with me here
+[00:00:23] today. We've as I've said about 18
+[00:00:26] million dollars in trading profits
+[00:00:27] between all of us.
+[00:00:29] We've got Chris, resident short seller,
+[00:00:32] currently in a short position getting
+[00:00:34] squeezed just a little bit.
+[00:00:36] at 74. Yeah, that's my average price.
+[00:00:38] Not too bad. Pretty close. Then you've
+[00:00:40] got Manoli right there. Now This This
+[00:00:44] guy yesterday he was wearing $1,800
+[00:00:47] shoes.
+[00:00:49] You know
+[00:00:50] They they were $1,200.
+[00:00:51] So you know what I did?
+[00:00:53] I came in with these big shoes. You see
+[00:00:56] this? Now Manoli I'm wearing them for
+[00:00:57] anybody who can't see. They're yellow.
+[00:00:59] just about the money.
+[00:01:02] It's about what these shoes communicate.
+[00:01:04] They communicate a man who has class. A
+[00:01:07] man who knows style.
+[00:01:09] A man who's into fuzzing who's a winner.
+[00:01:13] So then we've got Hamong
+[00:01:15] doing very well over there. And you're
+[00:01:17] green on the day already, right? Oh
+[00:01:19] yeah, I'm up about a thousand. Thousand
+[00:01:21] bucks, not bad. Jess, how are you doing
+[00:01:23] today? I went red, but
+[00:01:25] I'll be back. How deep? A thousand
+[00:01:28] bucks.
+[00:01:28] A thousand bucks, not bad.
+[00:01:30] Okay. And Max, no trades yet? Chris, I
+[00:01:32] got nothing today.
+[00:01:34] Nothing yet. Okay, Danny? I'm up five
+[00:01:36] bucks on RDHL. He's already trading.
+[00:01:38] Okay.
+[00:01:39] Okay,
+[00:01:41] well and I'm up $335
+[00:01:44] on two small trades a little bit
+[00:01:45] earlier. Both small cap stocks.
+[00:01:49] Not much to go over there. Just kind of
+[00:01:50] a slow
+[00:01:52] slow slow morning so far. But as we know
+[00:01:54] it only takes one. Although we already
+[00:01:57] had 8:00 a.m. No real news that was
+[00:01:59] exciting. 8:30, nothing really there.
+[00:02:02] 9:00 a.m.
+[00:02:04] Well, it's just it's just past 9:00 so
+[00:02:06] kind of still waiting to see if
+[00:02:07] something maybe had news at 9:00 and
+[00:02:09] then starts hitting the scanners.
+[00:02:11] But
+[00:02:13] it's a little bit uh
+[00:02:15] uh a little bit slow right now for small
+[00:02:18] cap traders
+[00:02:20] that don't love penny stocks.
+[00:02:23] RDHL, you know, it's getting that volume
+[00:02:25] here. Guardian just ran out of locates.
+[00:02:28] They ran out of locates?
+[00:02:30] Yeah. How many shares do you have?
+[00:02:33] How many shares do you locate?
+[00:02:34] I have 13,000 shares. Okay, already in
+[00:02:36] the position? Okay. Okay. Well, lucky
+[00:02:39] for you this is the third. Oh, now it's
+[00:02:41] starting to squeeze, sorry.
+[00:02:43] Wow. Okay, well but it is this could be
+[00:02:45] the topping tail right here. Cuz see how
+[00:02:47] it's popping up and it's not holding
+[00:02:49] that level. So that to me looks like
+[00:02:51] maybe a little capitulation short. And
+[00:02:54] then let's see. But right now it's
+[00:02:55] closing strong.
+[00:02:56] out three quarters of my position. Now
+[00:02:58] how many shares did you buy? I just took
+[00:03:00] 2,000. I'm still kind of dialing in on
+[00:03:03] these pennies. Yeah. Um I could have
+[00:03:06] taken a whole lot more, but
+[00:03:09] that gives me a nice little win to start
+[00:03:11] with, so. Mhm. Mhm. And that $1 is
+[00:03:15] probably going to be a magnet today. I
+[00:03:16] think it'll
+[00:03:18] likely want to keep going, but here it
+[00:03:20] goes. It needs to uh Now big seller just
+[00:03:23] came in right there. She's moving thin
+[00:03:25] though.
+[00:03:27] So we've got 9.8 million shares of
+[00:03:29] volume. Of course it's
+[00:03:31] Total capital, total dollars trading
+[00:03:34] hands. It's it's only not even 9 million
+[00:03:36] dollars of
+[00:03:38] transaction value. I've got 100 shares
+[00:03:40] left.
+[00:03:40] That's your topping tail right there. So
+[00:03:43] you got that topping tail up to 89.
+[00:03:45] Guardian just had more locates come to
+[00:03:47] market. Yeah.
+[00:03:49] Average price You just got more locates?
+[00:03:51] Reminder as always trading is risky. My
+[00:03:53] results are not typical. You should
+[00:03:55] trade cautiously and practice in a
+[00:03:57] simulator before you put real money on
+[00:03:59] the line.
+[00:04:00] The results of these traders aren't
+[00:04:01] typical either.
+[00:04:03] There's no guarantee you'll find success
+[00:04:05] whether you trade on your own or you
+[00:04:06] learn from me, so please take it slow.
+[00:04:10] So there you've got that topping tail.
+[00:04:12] High is 89 cents.
+[00:04:16] Blush It says 74. Was that just like a
+[00:04:19] market order? Yeah, yeah. I don't know
+[00:04:21] about that. I think like a single order
+[00:04:23] must have gone through there.
+[00:04:25] It looks like AREB's trying to follow
+[00:04:28] it.
+[00:04:29] And all of a sudden Chris is in the
+[00:04:30] driver's seat.
+[00:04:33] AREB 31 cents.
+[00:04:35] Yeah, it doesn't have enough volume yet.
+[00:04:37] I'm out. That was a nice little trade.
+[00:04:40] Nice. Good.
+[00:04:44] Want to let it It's definitely on watch
+[00:04:46] today.
+[00:04:51] Okay. Um
+[00:04:54] LMAO had two sort of pops earlier.
+[00:04:57] Popped up, dropped down, popped back up,
+[00:04:59] dropped back down.
+[00:05:01] Pretty choppy.
+[00:05:04] S&P
+[00:05:05] back down towards yesterday's lows.
+[00:05:16] SOBR that one pulled back a bit.
+[00:05:23] Chris, you got to think that other
+[00:05:24] shorts probably like that candle, huh?
+[00:05:26] Yeah.
+[00:05:29] We had uh I don't know, we'll see what
+[00:05:30] happens on the five. We're seeing
+[00:05:31] declining volume on the one minute. On
+[00:05:33] that topping tail five minute candle I
+[00:05:35] see half and half buying and selling.
+[00:05:40] Mhm.
+[00:05:44] Was there news on it or is it just
+[00:05:46] faking?
+[00:05:46] Yeah, there was news. They got a
+[00:05:48] uh granted new COVID treatment patent.
+[00:05:52] Broad acting antiviral. Mhm. Oral
+[00:05:56] antiviral.
+[00:05:58] Still COVID catalyst. I know.
+[00:06:02] Well
+[00:06:04] It's good news at least.
+[00:06:09] Bids are getting sold into pretty hard.
+[00:06:13] Jess, we're all going to learn from you
+[00:06:14] class, huh? Mhm.
+[00:06:19] So just watching right now.
+[00:06:40] So you know, I kind of know my
+[00:06:41] wheelhouse. I I don't really
+[00:06:44] go too much in the penny stocks.
+[00:06:45] Sometimes I'll trade one right as it
+[00:06:47] breaks over a dollar a share.
+[00:06:51] I usually trade them down in this area.
+[00:06:53] I I'll watch it, but
+[00:06:55] just hasn't been where I really I want
+[00:06:57] to see it consolidate and at some point
+[00:07:00] break that 88 89 high. Mhm.
+[00:07:03] if it does that goes over 90 we should
+[00:07:05] see a dollar. Mhm.
+[00:07:07] You're going to have a lot of shorts
+[00:07:08] with stops over that level like me.
+[00:07:10] Yeah. Yeah.
+[00:07:12] That's a really clear
+[00:07:13] really clear level to stop out if you're
+[00:07:15] short.
+[00:07:17] Here it comes.
+[00:07:19] If it went now that'd be interesting.
+[00:07:21] It'd be a little premature if it went
+[00:07:22] now. It could it could end up knifing,
+[00:07:24] you know.
+[00:07:25] It could be violent in one direction.
+[00:07:31] Sellers stacked at 85.
+[00:07:38] This to me feels like risk of double
+[00:07:40] top.
+[00:07:43] Usually like on a normal price that I
+[00:07:46] trade I'd be pretty cautious on this
+[00:07:48] setup. What about you Jess? What what
+[00:07:49] would you think on this setup if this
+[00:07:50] was like an $8 stock?
+[00:07:53] If it was an $8 stock, you know, I would
+[00:07:54] probably wait for that blow through that
+[00:07:56] level, the highs. Yeah. Watch it test
+[00:08:00] the pull back and then take that
+[00:08:01] continuation. Yeah.
+[00:08:06] Looking like a double top right now.
+[00:08:29] This guy's scanners are weak. Yeah.
+[00:08:32] Yeah, it is.
+[00:08:41] Are there any pennies under 50 cents
+[00:08:43] that anybody can see moving?
+[00:08:45] Uh let me check.
+[00:08:47] Uh you got Coms still, but that's not
+[00:08:51] uh
+[00:08:53] It's not really holding up from
+[00:08:54] yesterday at all. KTRA 16 cents. Yeah.
+[00:08:58] SNES
+[00:09:00] 35 cents.
+[00:09:02] KTRA
+[00:09:04] could be interesting
+[00:09:05] bad at all.
+[00:09:07] Not enough volume, but not right there,
+[00:09:09] yeah.
+[00:09:10] But you see that flat top there right
+[00:09:11] around 19 cents? Yeah. They might come
+[00:09:14] back for that.
+[00:09:15] If it can hold up.
+[00:09:18] Just under VWAP, that'd be nice.
+[00:09:37] SPY is hovering just a little bit below
+[00:09:39] yesterday.
+[00:09:52] Man, RDHL is not letting me off the
+[00:09:55] hook, huh? Nope. But coming into the
+[00:09:57] open I like.
+[00:10:01] Cuz I have a defined risk level and then
+[00:10:04] say I would like to see a flush at the
+[00:10:06] open. Yeah.
+[00:10:09] Squeeze them.
+[00:10:16] Right at the open just start slashing 10
+[00:10:18] bucks right at the market at the open.
+[00:10:23] Feels a little top heavy in the entire
+[00:10:24] room.
+[00:10:26] Nah, we're rooting for you.
+[00:10:28] It's extended. It's extended. My average
+[00:10:30] price is 78 cents.
+[00:10:37] Yeah, so there's a bigger red candle.
+[00:10:41] The funny thing is we've been talking
+[00:10:43] about how our strategies don't really
+[00:10:45] overlap too much. We're not usually in
+[00:10:47] each other's way at all.
+[00:10:49] You're usually looking to take an entry
+[00:10:50] when we're usually looking to scale out
+[00:10:53] and I'm usually covering when you're
+[00:10:54] looking to buy on a dip.
+[00:10:57] Yeah, the only exception there is is
+[00:11:00] like a breakout trade like right through
+[00:11:02] the highs which usually for a long trade
+[00:11:04] it's only a small scalp. Yeah, sometimes
+[00:11:07] I mean sometimes they end up going
+[00:11:08] parabolic from there and like halting
+[00:11:10] and stuff, but that hasn't been as much
+[00:11:13] of the case lately.
+[00:11:15] Lately it's been more of just like a
+[00:11:17] quick break through and then
+[00:11:19] knife jackknife candle back down.
+[00:11:24] Okay, so anything else anyone's seeing?
+[00:11:28] Chas, anything?
+[00:11:29] Not really, no. No. Not much.
+[00:11:32] Got something set up. See if we can get
+[00:11:34] another ERNA, KPRX. All right, it's
+[00:11:37] going to be testing the EMA here on the
+[00:11:40] 1 minute and it'll be interesting to see
+[00:11:42] what it does. Okay. If it can crack it
+[00:11:44] here it'd be look looking pretty good
+[00:11:46] for you. It hasn't cracked it down in a
+[00:11:48] while.
+[00:11:56] I'm going to be watching KPRX today.
+[00:11:59] Let me look at the chart.
+[00:12:02] I do like the chart.
+[00:12:03] Continuation.
+[00:12:04] Yeah, continuation. Mhm.
+[00:12:07] Yep, so we had that nice move up to
+[00:12:08] 1050.
+[00:12:12] What levels do you like? So for me the
+[00:12:15] way I have been studying the action I'm
+[00:12:17] expecting
+[00:12:19] you know, at first $9 then 950, 10
+[00:12:25] and then I think it might just break the
+[00:12:27] highs and I see this
+[00:12:31] 100 EMA. I have this 100 EMA on my daily
+[00:12:33] chart. I I I think it's just going to
+[00:12:34] break
+[00:12:35] yesterday's high and then come down.
+[00:12:39] What are you looking at? KPRX? Uh yes.
+[00:12:42] It might go near it, but you know, I'm
+[00:12:44] obviously going to stay I stay very safe
+[00:12:48] and try to manage my risk as much as
+[00:12:50] possible. Mhm. But if it keeps going up
+[00:12:53] I think I might I might
+[00:12:56] I might look to trade until it reaches
+[00:12:58] the high or breaks the high of
+[00:13:01] I really like this ascending triangle on
+[00:13:04] RDHL right now, but it's so extended on
+[00:13:06] the 5 minute. I don't know if I can take
+[00:13:12] QNRX
+[00:13:13] started there for me at 90.
+[00:13:16] I'm long too. Yeah, good for you. I
+[00:13:18] already took a little off the table. I'm
+[00:13:20] going to look to add back at 308.
+[00:13:24] So thank you um Mark and Bruno who
+[00:13:27] called that out in the chat room.
+[00:13:30] I might add above 310. Yeah, I'm
+[00:13:33] watching 305. I added right there 301.
+[00:13:36] Now looking for the break through 315.
+[00:13:38] So hitting the scanners a little bit.
+[00:13:41] This is small stuff for me still.
+[00:13:43] I I'm not in a place where I'm confident
+[00:13:45] enough just to like add add add and not
+[00:13:47] take any profit. So I add, take a little
+[00:13:50] profit, add back, take a little profit.
+[00:13:52] Cost basis is 97.
+[00:13:57] It's moving pretty It had a strong close
+[00:14:00] yesterday up to 328.
+[00:14:04] Still holding a 97 average right now.
+[00:14:11] It's a big wick.
+[00:14:15] Don't like that. Flat.
+[00:14:18] $423.
+[00:14:20] Here comes the full round trip.
+[00:14:22] Yeah. Yeah, back well 72.
+[00:14:27] I don't like those big candle wicks.
+[00:14:30] Man.
+[00:14:31] RDHL's tight.
+[00:14:33] The thing on QNRX is that
+[00:14:36] you know, when you have something that's
+[00:14:36] been holding up for a few days
+[00:14:38] and starting to creep higher sometimes
+[00:14:40] those continuations can start to really
+[00:14:42] blow up and and open up.
+[00:14:45] KPRX is or similar.
+[00:14:51] I'm long RDHL.
+[00:14:56] I took a long there on RDHL too. Yeah.
+[00:14:59] I'm just going to give it a shot here.
+[00:15:02] I know. It's I I hate to do it Chris,
+[00:15:04] but it does look like a good long here.
+[00:15:06] Let's just see how much it goes.
+[00:15:09] There's 87.
+[00:15:12] There's 88.
+[00:15:14] I was scaling out just a little bit, but
+[00:15:16] It did I mean this is only this is like
+[00:15:18] such small profit for me.
+[00:15:24] 195
+[00:15:27] It's still a double top. See the thing
+[00:15:29] is that was a trade to anticipate that
+[00:15:31] it was going to break 89 and it didn't.
+[00:15:34] So I'm back out. So I don't know. You
+[00:15:36] probably didn't get stopped out there
+[00:15:37] because it didn't break the high.
+[00:15:40] It tried, but it didn't.
+[00:15:45] And that that in that in fact makes the
+[00:15:47] short even stronger at this point. I
+[00:15:49] only made like 10 bucks on that.
+[00:15:52] I didn't scale out too much at the top
+[00:15:54] of that candle. I was waiting to see if
+[00:15:56] it wanted to blast through it. Yeah,
+[00:15:58] that's fine.
+[00:16:00] One of my problems is that my hot keys
+[00:16:02] don't work very well on penny stocks
+[00:16:04] because my offsets to sell the bid 20
+[00:16:06] cents below risk check failed. I can't
+[00:16:08] sell the bid. I can sell the ask, but
+[00:16:11] then if it you know, if
+[00:16:14] if it starts dropping if there's a big
+[00:16:16] oh yeah, or if there's a huge 50,000
+[00:16:18] share seller on the ask I'm just in
+[00:16:19] line.
+[00:16:20] So
+[00:16:22] not being able to sell the bid if I need
+[00:16:24] to
+[00:16:25] makes me a little nervous. They said to
+[00:16:27] take it easy on Chris. Yeah.
+[00:16:30] No, one one
+[00:16:32] one person said that. One person.
+[00:16:36] I feel like I felt like it was like
+[00:16:38] five. Yeah.
+[00:16:43] Yeah, I might look for an entry closer
+[00:16:45] to 77.
+[00:16:46] 76
+[00:16:47] Make it like 74. 74
+[00:16:51] Let me get out, please.
+[00:16:56] My average price is 79. That's pretty
+[00:16:59] good. Yeah, I mean you're I think you're
+[00:17:01] in
+[00:17:01] decent shape.
+[00:17:02] I'm not going to look for a big move cuz
+[00:17:04] I'm pretty sized up now.
+[00:17:06] Yeah. In that case
+[00:17:09] How many shares do you have?
+[00:17:12] It's you know, the thing is like it is
+[00:17:14] now perfect double top. But that entry
+[00:17:17] there
+[00:17:18] was what Max was saying he likes in a in
+[00:17:21] a way that ABCD,
+[00:17:24] right? It's
+[00:17:26] It's that like consolidation and then
+[00:17:28] like coming up for that break. Just get
+[00:17:30] that bid. If it cracks this I think it's
+[00:17:32] going to So the break of 87. 60,000 bid,
+[00:17:36] At 83.
+[00:17:37] Yeah, I prefer for that that CD pattern
+[00:17:39] for that bottoming tail to come down a
+[00:17:40] little further so it can prove it's
+[00:17:41] going to hold.
+[00:17:44] What I liked was it
+[00:17:46] it just couldn't break down through the
+[00:17:48] 9 EMA on the 1 minute.
+[00:17:50] And then it started I started seeing
+[00:17:51] some buying coming in on that candle.
+[00:17:58] It's about 13 minutes to the opening
+[00:18:00] bell here.
+[00:18:06] It is uh being sold into. Yep.
+[00:18:09] So this is the spot right here. You
+[00:18:11] could see this is like a little bear
+[00:18:12] flag cuz you have that strong red
+[00:18:14] candle.
+[00:18:15] The 20 moving average is at 81.
+[00:18:19] That could be a spot where you could see
+[00:18:20] some support. Under 82 you'd think it
+[00:18:23] might
+[00:18:24] give you a bit of a dip down. It's
+[00:18:26] holding really well here though.
+[00:18:27] It is.
+[00:18:30] So I guess I
+[00:18:31] It'll crack really well. Yeah. It could
+[00:18:33] it could. I hope it does for you Chris.
+[00:18:36] At what point though like let's just
+[00:18:40] At what point does this continue to
+[00:18:42] consolidate cuz it's forming an
+[00:18:43] ascending wedge here, right? And those
+[00:18:46] seem to lately be knifing where you get
+[00:18:48] that break and then the flush. So which
+[00:18:51] I mean it kind of is what just happened.
+[00:18:52] It popped up there and then it didn't
+[00:18:54] hold big red candle. So that sort of
+[00:18:57] negates any strength that was on the
+[00:18:58] previous, but it's not breaking below
+[00:19:02] like 82. Nope. So like if it keeps
+[00:19:04] holding in this area is there a point
+[00:19:06] where it makes more sense if you're
+[00:19:08] short to say, you know what? It's not
+[00:19:11] breaking. It it kind of should have
+[00:19:12] broken already.
+[00:19:14] I could unwind it here down like three
+[00:19:17] or four or five cents.
+[00:19:20] Is it worth still holding? Does your
+[00:19:22] bias change? Like does the thesis kind
+[00:19:24] of change as time passes and it's like
+[00:19:26] wait, it's not breaking down. It's
+[00:19:28] really flagging. Normally yes, but I
+[00:19:31] really enjoy holding positions that are
+[00:19:33] strong into the open
+[00:19:35] expecting a nice at least little flush
+[00:19:37] to the downside giving me the
+[00:19:39] opportunity to get out even or with a
+[00:19:40] little profit. So now let's think about
+[00:19:42] this. How much volume has this had over
+[00:19:44] the last couple weeks? Are there people
+[00:19:45] that are in this that don't know how to
+[00:19:47] trade premarket? They're going to hit
+[00:19:48] the sell button as soon as the bell
+[00:19:50] rings.
+[00:19:51] Seems like Mhm, so you had back on
+[00:19:55] September 26th, 14 million shares of
+[00:19:57] volume. Today you already have 15.
+[00:20:00] You're on a 100% gap up.
+[00:20:03] I have it at
+[00:20:04] 78 78% but but yeah it's
+[00:20:08] No okay yeah but yeah it's
+[00:20:10] it is a good gap.
+[00:20:12] And if there were bag holders from that
+[00:20:14] part of the September
+[00:20:16] but it came back up on October 6th
+[00:20:20] volume there was only 4.2 million
+[00:20:22] shares.
+[00:20:24] So you might have some people that have
+[00:20:26] orders you know good till cancel just to
+[00:20:28] sell this thing at 60 70 cents that as
+[00:20:31] soon as the bell rings now TD Ameritrade
+[00:20:33] starting to execute it. Now something
+[00:20:35] that I would wonder is
+[00:20:38] how do this is an interesting question.
+[00:20:41] So how do the institutions who have the
+[00:20:45] insight into where everyone has those
+[00:20:47] orders
+[00:20:49] how do their algos react or anticipate
+[00:20:52] that at the open
+[00:20:54] there's someone out there that's going
+[00:20:56] to be selling a lot of shares because
+[00:20:58] they can already see it on the book.
+[00:20:59] Mhm. They already see the order we don't
+[00:21:00] see that but they already see that
+[00:21:02] order. So what are they going to do? Are
+[00:21:03] they going to drop it down so that
+[00:21:05] person gets filled low
+[00:21:08] are they going to let it dry ride
+[00:21:09] higher?
+[00:21:11] I mean it's if there's an imbalance that
+[00:21:12] there's going to be all this selling at
+[00:21:13] the open. Yeah I do. Now inversely if
+[00:21:16] there was a big short and they were
+[00:21:17] going to be covering at the open
+[00:21:20] does the market maker somehow factor
+[00:21:22] that in
+[00:21:23] to their algo and how they're filling
+[00:21:25] orders?
+[00:21:27] And and how much they're going to sell
+[00:21:28] you know at the current price thinking
+[00:21:31] that they'll be able to cover on all
+[00:21:32] that selling that comes through at the
+[00:21:34] open. Right? Because you know the market
+[00:21:36] maker sits on both the bid and the ask
+[00:21:38] so on the ask they're just selling
+[00:21:40] selling selling selling selling. They
+[00:21:42] can't sell an unlimited number of shares
+[00:21:44] which is when more buying comes in
+[00:21:45] they're going to move their orders up a
+[00:21:47] little more a little more a little more.
+[00:21:49] At the end of the day they want to be
+[00:21:50] balanced they sold and bought equal
+[00:21:52] number profiting from the spread.
+[00:21:54] But they have insight that's much deeper
+[00:21:56] than ours into what's happening behind
+[00:21:58] the scenes with order flow. So I'm
+[00:22:01] wondering if they are able to use that
+[00:22:04] to you know their advantage to say oh I
+[00:22:07] could oversell this stock I could put a
+[00:22:10] big wall up here at 88 because I know at
+[00:22:13] the open sell a lot of shares at 88
+[00:22:15] because I know at the open there's going
+[00:22:16] to be a lot of people selling and then
+[00:22:18] they're going to be on the bid
+[00:22:19] accumulating all those sell orders as
+[00:22:21] buy orders. I mean I'm speculating
+[00:22:23] because I have no idea I don't know but
+[00:22:26] it's just that data is out there. Yeah I
+[00:22:28] agree. I agree. I I can definitely see
+[00:22:30] the market makers do that and I don't
+[00:22:32] think there's any laws that are against
+[00:22:34] it right cuz I mean
+[00:22:37] I think front running in in when it
+[00:22:39] comes to institutions I think
+[00:22:41] uh it differs a little bit I think. Well
+[00:22:44] that's the whole thing with you know the
+[00:22:46] argument about payment for order flow
+[00:22:48] that that's that's allowed even though
+[00:22:50] they're cutting in front of your order
+[00:22:52] and they're getting like a piece of it.
+[00:22:54] Yep. Or even the high frequency
+[00:22:56] algorithms that do cut in front of
+[00:22:59] they don't have a fiduciary obligation
+[00:23:01] it's com competition who does the best
+[00:23:04] with the knowledge that is readily
+[00:23:05] available to those institutions so
+[00:23:07] there's nothing as far as I know That's
+[00:23:10] why they have traders and that's what
+[00:23:12] they're looking for these opportunities
+[00:23:13] Right.
+[00:23:16] You had a nice 5 minute red candle
+[00:23:18] there. Yeah. It's holding what at this
+[00:23:20] level? What at this level? 82 83 It's
+[00:23:22] still holding up for now. I'm curious to
+[00:23:24] see how this next candle closes here.
+[00:23:27] Oh and not to mention whether or not
+[00:23:29] there's firms that already are planning
+[00:23:31] a secondary offering as we've seen a
+[00:23:33] couple of those recently. Oh yeah.
+[00:23:36] Yes we have.
+[00:23:38] So that brings that brings us to a point
+[00:23:41] where for a beginner they might be
+[00:23:43] thinking that oh man all these factors
+[00:23:45] working against me how can I
+[00:23:47] how can I you know even think about
+[00:23:49] being profitable or
+[00:23:50] uh honestly I mean I've I'm sure I
+[00:23:52] definitely have struggled through that
+[00:23:54] with this that in the beginning I'm like
+[00:23:56] I start going into these theories like
+[00:23:59] oh man the market the market makers are
+[00:24:01] just selling against me or I lost out
+[00:24:04] because of you know all these factors
+[00:24:05] that I can't control
+[00:24:07] uh so I think it's really important to
+[00:24:08] think that
+[00:24:10] and still believe that it's still
+[00:24:11] possible we're doing it it's still you
+[00:24:14] could still be rationally
+[00:24:16] able to make money and make money out of
+[00:24:19] the market.
+[00:24:20] Uh they they're just like us they're
+[00:24:22] just humans they're they're going to
+[00:24:23] make mistakes they are they're not
+[00:24:25] always perfect you see all these big
+[00:24:27] squeezes usually because of you know a
+[00:24:29] big institutions kind of dropping the
+[00:24:31] ball. Right. And if you go back just to
+[00:24:34] the simple goal of hitting base hits
+[00:24:36] you know 15 20 cents a day
+[00:24:39] it
+[00:24:40] all the stuff that's going to happen
+[00:24:41] behind the scenes is irrelevant.
+[00:24:44] Yep. You can still find base hit
+[00:24:46] opportunities but
+[00:24:48] you know thinking about a little bit
+[00:24:49] when you're looking at something like
+[00:24:52] it's kind of just flat here. Did Chris
+[00:24:54] just leave his position? Went so so
+[00:24:57] Chris just got up from his computer. He
+[00:24:59] left he's not currently at the computer.
+[00:25:02] And
+[00:25:03] I think I'm
+[00:25:05] I think I'm going to cover that position
+[00:25:06] for him.
+[00:25:07] short sellers. Typical short sellers.
+[00:25:09] Are you still holding that position?
+[00:25:11] You're savage. I can't I can't get away
+[00:25:13] walk away from the computer when
+[00:25:15] Sometimes I don't want to watch.
+[00:25:17] I just want to
+[00:25:18] See now whenever I do that and I've done
+[00:25:20] that before I've been like you know what
+[00:25:21] I'm just setting a stop and I'm walking
+[00:25:22] away. That's always like when I'm at max
+[00:25:25] emotion that's when I'm holding a
+[00:25:27] massive position and I'm either going to
+[00:25:29] get stopped out on like 50k shares and
+[00:25:32] it's going to flush another 25 cents or
+[00:25:34] whatever going to get terrible filled.
+[00:25:35] It's really not moving much. No it's uh
+[00:25:38] That's why I'm hoping for It's extended
+[00:25:40] on the five though 78 is the nine moving
+[00:25:42] average.
+[00:25:44] But that but see the problem I think
+[00:25:46] here is that your break even is at like
+[00:25:49] almost right at support
+[00:25:51] cuz it just squeezed a little higher.
+[00:25:57] So I don't know going into the open if I
+[00:25:59] would set my stop immediately above this
+[00:26:01] because
+[00:26:04] we have seen some
+[00:26:06] false breaks and then it nights. Yeah.
+[00:26:10] Honestly I I kind of like this here.
+[00:26:15] I'm taking I'm taking a little bit. You
+[00:26:18] are? Yeah I'm taking a little bit of
+[00:26:19] RDHL here it's a little bit just a
+[00:26:22] little bit.
+[00:26:25] I'm I'm adding. I'm in with you.
+[00:26:27] I'm just watching right now. I'm looking
+[00:26:29] for 89 break.
+[00:26:31] I agree.
+[00:26:34] And then after the open I'd like to see
+[00:26:36] a move towards that $1 mark.
+[00:26:38] Feels a little heavy here. It does. 8715
+[00:26:42] on the bid.
+[00:26:44] 86 87 I just got out.
+[00:26:49] It's a double top. Yeah I'm still here
+[00:26:51] on this one.
+[00:26:52] You're holding off on it Hamong.
+[00:26:56] Yeah I'm just a little nervous cuz it
+[00:26:57] still looks standing on the five. I'm in
+[00:26:59] with you Manoli I think he's been
+[00:27:00] running into the open pretty lately.
+[00:27:05] I'm about ready to get out.
+[00:27:08] Mhm. Yeah here we go. Now I want to see
+[00:27:10] this hold I want to see this 89 level
+[00:27:12] start to hold build support and then I
+[00:27:14] want to see a move towards this $1 mark.
+[00:27:17] Start squeezing some shorts here. Sorry
+[00:27:19] Chris.
+[00:27:22] You're not the short we're talking
+[00:27:23] about.
+[00:27:24] Other shorts. Other shorts not Chris.
+[00:27:26] Shorts that are not Chris. Yeah.
+[00:27:28] I'm still going to see what happens at
+[00:27:29] the open. Yep look at this battle here
+[00:27:31] you can see shorts trying to hold it
+[00:27:32] down and then big bids coming in. Yeah
+[00:27:35] I'm in I just got back in a little bit
+[00:27:37] with that wick right there.
+[00:27:41] See I'm sitting on the sidelines cuz I
+[00:27:42] don't feel like there's enough profit
+[00:27:43] potential Go. for me.
+[00:27:46] I'd have to take more size I don't know.
+[00:27:49] What about you Jess? You trading this
+[00:27:51] Yeah it looks like you guys traded
+[00:27:52] without me. Yeah.
+[00:27:55] Well you know why did it go on this
+[00:27:57] Why did it go on this one and it didn't
+[00:27:59] go on that first attempt right?
+[00:28:01] It was just needing more time. Mhm.
+[00:28:04] It did the same thing down there in the
+[00:28:06] 65
+[00:28:07] Shares are gone in Guardian again.
+[00:28:10] No shares are gone.
+[00:28:12] I want to see if it can pop back.
+[00:28:14] Yeah you want it to hold that 89 cent
+[00:28:15] mark.
+[00:28:17] That's a tricky candle on the one
+[00:28:19] minute. Yeah tricky And I have not
+[00:28:21] stopped out I'm still holding. I just
+[00:28:23] stopped out I took a few few bucks on
+[00:28:25] that. Yeah I'm out for now. Yep.
+[00:28:28] Yeah same. Let's see who won that
+[00:28:29] battle.
+[00:28:34] Takes a lot of patience a lot of
+[00:28:35] conviction. Wow so this is what's going
+[00:28:37] on today.
+[00:28:39] So you know that those were some quick
+[00:28:41] breakout trades there.
+[00:28:43] Keep that level on watch here though.
+[00:28:55] It's a battle for sure.
+[00:28:57] We've only got about 90 seconds to the
+[00:28:58] opening bell. Mhm.
+[00:29:00] Yeah Chris is still holding he's still
+[00:29:01] in averages I think at like 79 80. 79 79
+[00:29:08] So all right well
+[00:29:10] I'm sitting with small gains so far
+[00:29:12] premarket $892.84.
+[00:29:15] Uh thank you those who have been tuning
+[00:29:17] in on YouTube for the morning show
+[00:29:19] warrior members day trade dash members
+[00:29:21] we're going to keep trading here as we
+[00:29:22] go into the open and keep looking for
+[00:29:24] some more opportunities.
+[00:29:29] And still have There's a lot of buying
+[00:29:30] in there. Yeah no it's

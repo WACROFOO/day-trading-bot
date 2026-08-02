@@ -1,7 +1,7 @@
-# 
+# Live Day Trading Morning Show with Ross Cameron
 # https://www.youtube.com/watch?v=13B7gvnYTyY
-# upload_date: 
-# duration_sec: 0
+# upload_date: 20220223
+# duration_sec: 1996
 
 [00:02:30] [Music]
 [00:02:35] all right good morning everyone so it's

@@ -7,7 +7,8 @@ register existed the entire time and was never touched: **480 live streams on
 the channel's `/streams` tab, none of them in the 2,211-video index**, which was
 scraped from `/videos` only.
 
-154 are transcribed so far (~757,000 words). This is what they change.
+**266 of the 296 are transcribed (~1,096,000 words)** — the full selection bar a
+handful the bot check kept rejecting. This is what they change.
 
 ---
 
@@ -24,18 +25,31 @@ The single most consequential finding. He narrates entries like this:
 > *"this is a 10 second pullback one minute pullback so looking for 48 65 4870"*
 > — [`9OK-AaPJens` 55:08](https://youtu.be/9OK-AaPJens?t=3308)
 
-Not an aside. Across 154 streams:
+Not an aside. Across 266 streams:
 
 | | mentions | streams |
 |---|---:|---:|
-| "10 second" | 120 | 63 of 154 |
-| "10 second" near pullback/dip/curl/candle | 84 | 50 of 154 |
-| "micro pullback" | 142 | 72 of 154 |
-| "tick chart" | 6 | 4 of 154 |
+| "10 second" | 174 | 97 of 266 |
+| "10 second" near pullback/dip/curl/candle | 121 | 76 of 266 |
+| "micro pullback" | 198 | 100 of 266 |
+| "tick chart" | 6 | 4 of 266 |
 
 And when a "micro pullback" is explicitly qualified by a timeframe: **1-minute
-40 times, 10-second 14 times**, 84 unqualified. Both charts are in live use;
+51 times, 10-second 17 times**, 121 unqualified. Both charts are in live use;
 the 10-second one is what he reaches for on the fastest movers.
+
+**It is not a 2021-era habit.** The streams are almost all 2021–2023 (see
+Caveats), so the practice was checked against the other two registers, which
+run to July 2026:
+
+| register | "10 second" | files |
+|---|---:|---:|
+| streams (2021–23) | 174 | 97 of 266 |
+| **daily recaps (Jun–Jul 2026)** | **24** | **15 of 68** |
+| teaching videos (to 2026) | 233 | 80 of 257 |
+
+All three agree. The 10-second chart is current practice, not something he
+stopped doing.
 
 **Why this matters more than any parameter we have argued about.** The engine
 runs on 1-minute bars with `MIN_DIP_BARS = 2`, so the shortest thing it will
@@ -78,7 +92,7 @@ And stated as a method, not a habit:
 > *"in phase five, we're also scaling into trades. Starter position, half size,
 > full size, then scaling out."* — [`-KcmoPm_skg` 57:50](https://youtu.be/-KcmoPm_skg?t=3470)
 
-"Add back" and "scaling in" appear **203 times, in 88 of 154 streams**. A single name in
+"Add back" and "scaling in" appear **254 times, in 119 of 266 streams**. A single name in
 a single morning absorbs eight or ten entries and exits.
 
 **What this does to our numbers.** `PARAMETERS.md` §6 has `scale_1_pct`,
@@ -212,7 +226,7 @@ rarely" as a standalone bug. Frequency is an output, not a target.
 
 ## 8. Halts: he reads a resumption price we do not have
 
-681 mentions across 98 of 154 streams, with operational detail absent from the
+943 mentions across 140 of 266 streams, with operational detail absent from the
 teaching corpus:
 
 > *"BTMD, hitting our scans. **I can see the halt level is at 709.**"*
@@ -260,10 +274,16 @@ the entry actually happens*.
 - **Selection bias.** Titles were filtered for live trading, and stream titles
   skew to good days ("+$28k", "Green Day"). Use these for *what he does*, never
   for *how often it works*.
-- **154 of 296.** The fetch is incomplete; YouTube bot-checks rejected a share
-  of requests. Counts here will move as more arrive — they already grew once,
-  from 82 streams, without changing any conclusion. Each qualitative finding
-  rests on multiple independent streams.
+- **266 of 296**, the rest still blocked by YouTube's bot check. Every count
+  above was recomputed at 82, 154 and 266 streams and the ratios did not move —
+  "10 second" held at 36–41% of streams throughout.
+- **The streams are 2021–2023, not 2026.** Of 274 with a real upload date: 47
+  from 2021, 174 from 2022, 45 from 2023, and **one** from 2026. The live
+  Morning Show largely stopped after 2023. **None fall inside the
+  2026-07-09..07-31 bar-data window**, so — contrary to what I suggested when I
+  found the tab — they cannot be used as a labelled set against our minute
+  bars. The recaps remain the only calibration set. What the streams give is
+  *method*, checked against 2026 in §1.
 - **No dates on most.** The flat listing carries no `upload_date`, so these are
   not yet mapped to sessions. Several are visibly from 2021 (`4/15/2021` in a
   title), so this is not a July-specific picture — it is how he trades.
