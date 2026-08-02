@@ -9,6 +9,8 @@ does not mean it works.
 
 **Conflict** = the corpus states more than one value. Backtest the range.
 
+> **Read §13 before implementing any of this.** A full implementation attempt produced ~18 defects and not one was a wrong number here — every one was a misreading of a rule that was already stated correctly. §13 lists each trap with the citation that settles it.
+
 ---
 
 ## 1. Universe filter
@@ -460,3 +462,105 @@ strategy does not clear that, the rules are noise.
 
 *Derived from `../data/rules_digest.md` — 2,040 rules, 2,903 numeric figures,
 257 videos. Values are stated, not validated. See `STRATEGY.md` §12.*
+
+---
+
+## 13. Clarifications — where this spec has been misread
+
+Every parameter in this document was already correct. A full implementation
+attempt (`research/momentum-replication/`) nevertheless produced ~18 defects,
+and **not one was a wrong number** — all were wrong readings. They are recorded
+here with the citation that settles each, because the same traps will catch the
+next implementation.
+
+### The entry gate is §3, and only §3
+
+Six evaluable conditions plus two that need Level 2. Rules that describe the
+*pattern* (`PLAYBOOK.md:99`'s "2–3 candles") or appear elsewhere in the corpus
+are **not** gate conditions. Adding three such extras cut the pass rate from
+6.7% to 3.5% — nearly half of all legitimate setups rejected by rules the gate
+never had.
+
+### "Front side of the move" is the MACD condition
+
+Not a separate test. *"Only trade when MACD is positive and above the signal
+line (front side of move)"* — `iIC62xnblLc` [26:20]. Implementing it separately
+duplicates a gate condition with an invented threshold.
+
+### `target_1` is the NEAREST objective, not the furthest
+
+`target_1` = retest of high of day, **or** a measured move equal to the pole
+(`small-cap-momentum-bull-flag.md`), and `target_typical` is 15–20 cents — i.e.
+*near*. Taking the furthest of the two makes the high of day the target even
+after price has collapsed away from it, and `min_reward_risk` is then satisfied
+by a target the stock cannot reach. **The 2:1 is a filter applied to the
+target, never the target itself.**
+
+### "First candle to make a new low" means below the flag
+
+*"first candle to make new low **below flag**"* — `Xdw5azEqs6o`. Below the
+pullback structure, which is the stop. Fired bar-locally on any lower low with
+a red close, it exits on ordinary noise: median hold drops to 2 minutes.
+
+### `stop_max_distance` means cut size, not skip
+
+"If `stop_distance > stop_max_distance`: reduce size or skip" (§5), and
+`PLAYBOOK.md:166` is explicit — *"cut your size **or** skip"*. The sizing
+formula already reduces shares as the stop widens, so a wide stop is not a
+rejection. Treating it as one excludes every strong mover and leaves the engine
+trading whichever watchlist name is moving least.
+
+### `stop_min_distance` is not optional
+
+A stop tighter than the spread cannot survive noise. Unimplemented, it admitted
+a 2-cent stop on a $15 stock. It accounted for 5 of 16 losses in one
+symbol-day study.
+
+### `pullback_index` counts pullbacks, not dips
+
+The count runs within a continuous advance — squeeze, first pullback, squeeze,
+second pullback, third means stop (`BUCPPCXOHbs` [52:17]), starting when the
+stock first moves up on the catalyst (`m5zu_X-_51I` [46:43]), with
+*"careful not to overstay my welcome"* (`aqTXoV923OE` [58:59]). A 1-candle
+pause is **not** a pullback and must not consume the count, or the first real
+flag arrives numbered #3 and is rejected.
+
+### The 2–3 candle pullback is chart-relative
+
+`PLAYBOOK.md:99` says 2–3 candles, but the source reads a **10-second** chart
+as well as the 1-minute — *"the first pullbacks on the lower time frames, like
+10-second, one minute"* (`m5zu_X-_51I` [46:43]). On a 1-minute chart a fast
+mover's dips are frequently a single bar. Requiring two 1-minute bars therefore
+removes setups exactly where the move is fastest; a 1-minute pause **is** a 2–3
+candle pullback at 10-second resolution. Unresolved without sub-minute data.
+
+### §1's rejects are rules, not commentary
+
+`faded from pre-market high`, `rate_of_change_min > 0` and
+`volume_min >= 500,000` are as binding as the five pillars. Omitting them
+produced watchlists where 13 of 19 names had already broken from their
+pre-market high before the bell, on a week where the median name spent 16% of
+the session above VWAP.
+
+### `volume_min` is cumulative, not a window
+
+"500,000 shares **cum.**" — accumulated over the session, checked at the setup.
+Applied to the first five minutes it excludes names that later run hard.
+
+---
+
+## 14. Recaps as an evidence layer
+
+`knowledge-base/transcripts/` holds a **teaching** shortlist, which by
+construction excludes the daily recaps — so the corpus documented the strategy
+as taught and nothing about the trades actually taken.
+
+`knowledge-base/recaps/` now holds recap transcripts. They name the tickers
+traded and walk the entries, which makes them the labelled examples any
+calibration needs. A first comparison
+(`research/momentum-replication/RECAP-COMPARISON.md`) found every ticker he
+named was independently on a watchlist the five pillars produced — the first
+external confirmation of any part of the pipeline.
+
+Their dates cannot be taken from the index (see `data/README.md`); they are a
+numbered series and should be ordered by their own sequence.

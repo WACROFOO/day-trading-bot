@@ -227,7 +227,7 @@ Watch it being said:
 
 ## Step 9 — Know all three exits before you are filled
 
-**Do this:** Stop at the pullback low (it never moves down). Sell half at the first target, then move the stop to breakeven. Sell 25% at the next level, trail the last 25%. Exit everything immediately on any break signal.
+**Do this:** Stop at the pullback low (it never moves down). Sell half at the first target, then move the stop to breakeven. Sell 25% at the next level, trail the last 25%. Exit everything immediately on any break signal. The first target is whichever comes FIRST above your entry — a retest of the day's high, or a move the size of the push that just happened. Typically 15-20 cents.
 
 **Why:** Deciding an exit while holding a losing position is how a small loss becomes a large one — you will find reasons. Selling half and moving the stop to your entry price is the key move: from that point the trade cannot lose money, which is what lets you hold the rest calmly. The break signals are things like a new low, a big red candle on heavy volume, MACD going negative, or losing VWAP. You do not need to know why. You just leave.
 
@@ -246,9 +246,9 @@ Watch it being said:
 
 ## Step 10 — Minimum 2:1 — the arithmetic that makes the whole thing work
 
-**Do this:** Target must be at least twice the distance of your stop. 20 cents up against 10 cents down is fine. 20 against 20 is not — skip it.
+**Do this:** Target must be at least twice the distance of your stop. 20 cents up against 10 cents down is fine. 20 against 20 is not — skip it. Measure it against the target you actually expect to reach.
 
-**Why:** At 1:1 you need to win more than half your trades just to break even. At 2:1 you only need to win about a third. That is the entire reason a tight stop matters: it is not about losing less per trade, it is about lowering the win rate you need in order to be profitable at all.
+**Why:** At 1:1 you need to win more than half your trades just to break even. At 2:1 you only need to win about a third. That is the entire reason a tight stop matters: it is not about losing less per trade, it is about lowering the win rate you need in order to be profitable at all. One trap: apply the 2:1 test to a target you can genuinely reach. Measured against the high of the day after the stock has already collapsed away from it, every trade passes and the rule protects nothing.
 
 **Evidence:** 74 rule statements across 48 videos.
 
