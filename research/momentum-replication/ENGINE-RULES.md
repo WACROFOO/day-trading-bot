@@ -45,6 +45,41 @@ Six conditions, all must hold:
 Two further gate conditions exist in the source and **cannot be evaluated**:
 `tape_green` and `no_seller_wall` (n=47 each) need Level 2.
 
+## Halts — documented, NOT implemented
+
+`PARAMETERS.md` §8b, 46 claims across 20 videos, two dedicated
+(`FN-uqfbEVKw`, `StpXbe3Ga3Y`).
+
+| Rule | Source | In engine |
+|---|---|---|
+| LULD halt lasts 5 minutes minimum | `FN-uqfbEVKw` [01:24] | no |
+| Bands: 10% (Tier 2 >$3), 20% ($0.75–$3), doubled at the open | `StpXbe3Ga3Y` [08:37] | no |
+| Halted up usually resumes higher; halted down resumes lower | `FN-uqfbEVKw` [19:03] | no |
+| T1 (pending news) — usually bad, reopens near 50% | `FN-uqfbEVKw` [24:29] | no |
+| Dip and rip on resumption: flush, then buy the dip | `2kMgCjsmFzY` [02:06] | no |
+| Exit on halt-down / large whipsaw | corpus, exit rules | no |
+
+**What the engine does today: nothing.** A halt appears in a minute series as a
+gap in the bars, and the engine treats that gap as if no time passed — the
+pullback tracker carries state straight across it, indicators skip the missing
+period, and a resumption gap can read as an ordinary bar-to-bar move.
+
+This is not hypothetical. On 2026-07-29 — the session the source finished up
+~$22,000 and the engine took zero trades — two of five watchlist names halted in
+the first ten minutes:
+
+| Symbol | Missing minutes (09:30–11:30) | Longest gap |
+|---|---:|---|
+| STFS | 18 | 9 min from 09:38 |
+| AMIX | 4 | 4 min from 09:36 |
+
+Detecting a halt from OHLCV alone is possible — it is a gap in an otherwise
+continuous minute series — but the *direction* of the halt, the band levels and
+the resumption quote are not derivable without quote data. Implementing the
+dip-and-rip setup properly needs a feed that carries halt status.
+
+---
+
 ## Sizing and risk
 
 | Rule | Source |

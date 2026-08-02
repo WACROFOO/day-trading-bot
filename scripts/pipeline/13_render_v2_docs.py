@@ -191,6 +191,26 @@ STEPS = [
         params=['profit-loss ratio', 'win rate (%)'],
     ),
     dict(
+        n=10.5, title='Halts — what to do when trading stops',
+        do='If the stock halts going UP: wait for the resumption, expect a '
+           'brief flush as panicked sellers get out, then buy that dip and '
+           'sell the rip. If it halts going DOWN, or the halt is for pending '
+           'news (T1), stay out.',
+        why='Low-float stocks that move this fast hit circuit breakers all the '
+            'time, so this is normal, not an emergency. A "LULD" or volatility '
+            'halt lasts at least 5 minutes and fires when price moves outside '
+            'a band - 10% for most small caps over $3, 20% between $0.75 and '
+            '$3, doubled at the open. A halt going up usually resumes higher; '
+            'one going down usually resumes lower. The one to avoid entirely '
+            'is a "T1" news halt: the company asked for it, that almost always '
+            'means bad news, and it often reopens near half the price it '
+            'stopped at. While halted you cannot place an order past the band, '
+            'and the reopening price keeps moving as orders pile up - so you '
+            'are not missing anything by waiting for the resumption.',
+        concepts=['halts', 'dip and rip'],
+        prefer=[r'halt', r'resum', r'circuit breaker', r'dip and rip'],
+    ),
+    dict(
         n=11, title='Stop for the day — the rules that work even if the entry does not',
         do='Stop on ANY of: max daily loss hit, gave back half your peak profit, '
            'green day turned red, three losses in a row, two trades taken, or '

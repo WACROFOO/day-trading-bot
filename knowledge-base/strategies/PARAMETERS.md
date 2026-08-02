@@ -237,6 +237,71 @@ Unverified, and the single highest-leverage rule in the set if true.
 
 ---
 
+## 8b. Halts
+
+46 claims across the corpus, with two dedicated videos: `FN-uqfbEVKw`
+("Trading Halts Explained", 38 claims) and `StpXbe3Ga3Y` ("Circuit Breaker Halt
+Explained", 12). Low-float momentum names halt constantly, so this is a
+first-class part of the strategy rather than an edge case.
+
+### Halt types
+
+| Code | Meaning | Duration |
+|---|---|---|
+| LULD / volatility | price moved outside the band | **5 minutes minimum** |
+| T1 | pending news, company-requested | until news is released |
+| T12 | SEC / exchange suspension | weeks to months |
+
+`T1` usually means the news is **bad** — the company asked for it — and the
+stock commonly resumes near **50% of the pre-halt price**. `T12` is
+untradeable.
+
+### LULD bands, measured from a rolling reference price
+
+| Tier | Previous close | Band |
+|---|---|---|
+| 1 (S&P 500 / Dow) | > $3 | 5% |
+| 2 (most small caps) | > $3 | 10% |
+| 2 | $0.75 – $3 | 20% |
+| 3 | < $0.75 | 15¢ or 75%, whichever is **lesser** |
+
+Bands are **doubled in the opening and closing auctions** (`StpXbe3Ga3Y`
+[08:37]). The move must be outside the band **within 5 minutes**.
+
+### Trigger and order mechanics
+
+| Parameter | Value |
+|---|---|
+| `halt_trigger_dwell` | price must sit at the band **15 seconds** |
+| `orders_beyond_band` | rejected — no order may be placed past the limit |
+| `resumption_quote` | moves during the halt as orders accumulate |
+
+### Direction
+
+`halted_up → usually resumes higher`; `halted_down → usually resumes lower`.
+
+### The tradeable setup — dip and rip on resumption
+
+The named pattern (`2kMgCjsmFzY` [02:06], `ORWJzImSTdE`): on resumption,
+beginners' stacked sell orders flush the price first; the dip is bought and the
+stock squeezes to a new high. A second halt on the continuation is common.
+
+```
+halt (up) -> resumption -> brief flush -> buy the dip -> sell the rip
+```
+
+Rejects: `T12`, and halt-down scenarios. On a halt-down or a $2–3 whipsaw the
+documented action is to **exit**, not to manage.
+
+### Data requirement
+
+Halt levels are not shown by every platform — Thinkorswim does not display
+them, Webull does on funded accounts, and a third-party addon costs
+$150–175/month. Programmatically, a halt appears in a minute series as a **gap
+in the bars**, which is the only signal available from OHLCV alone.
+
+---
+
 ## 9. Expectancy model
 
 This is the arithmetic that decides whether any of the above matters.

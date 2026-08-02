@@ -266,6 +266,25 @@ Watch it being said:
 
 ---
 
+## Step 10.5 — Halts — what to do when trading stops
+
+**Do this:** If the stock halts going UP: wait for the resumption, expect a brief flush as panicked sellers get out, then buy that dip and sell the rip. If it halts going DOWN, or the halt is for pending news (T1), stay out.
+
+**Why:** Low-float stocks that move this fast hit circuit breakers all the time, so this is normal, not an emergency. A "LULD" or volatility halt lasts at least 5 minutes and fires when price moves outside a band - 10% for most small caps over $3, 20% between $0.75 and $3, doubled at the open. A halt going up usually resumes higher; one going down usually resumes lower. The one to avoid entirely is a "T1" news halt: the company asked for it, that almost always means bad news, and it often reopens near half the price it stopped at. While halted you cannot place an order past the band, and the reopening price keeps moving as orders pile up - so you are not missing anything by waiting for the resumption.
+
+**Evidence:** 46 rule statements across 20 videos.
+
+Watch it being said:
+
+- [23:24](https://www.youtube.com/watch?v=FN-uqfbEVKw&t=1404s) — Dip and rip strategy: anticipate panic sellers on halt resumption, then squeeze higher  
+  <sub>Trading Halts Explained (Common Halt Reasons & Resumption Times)</sub>
+- [5:52](https://www.youtube.com/watch?v=nm-rhysU96k&t=352s) — Dip and rip timing: enter on resumption after halt down, betting on bounce back above previous levels  
+  <sub>$SQL +261% Gap and Go Setup!</sub>
+- [1:32](https://www.youtube.com/watch?v=ag5JoiOlUy4&t=92s) — Entry on resume from halt if stock breaks halt high with volume  
+  <sub>Surprise Daily Breakout Setup at 9:30am ET</sub>
+
+---
+
 ## Step 11 — Stop for the day — the rules that work even if the entry does not
 
 **Do this:** Stop on ANY of: max daily loss hit, gave back half your peak profit, green day turned red, three losses in a row, two trades taken, or the clock hits your hard stop. Also stop when you hit your goal.
