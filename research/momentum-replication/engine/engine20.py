@@ -137,7 +137,11 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 # monotonic. Requiring 9 independent booleans simultaneously
                 # gates out ~9,999 of every 10,000 setups; a human applies them
                 # approximately and together.
-                score = sum(1 for v in checks.values() if v[0])
+                # Only the conditions PARAMETERS.md section 3 actually lists
+                # gate the trade. The rest are observations carried alongside.
+                gating = {k: v for k, v in checks.items()
+                          if k in sim.GATE_CONDITIONS}
+                score = sum(1 for v in gating.values() if v[0])
                 ok = score >= sim.MIN_PILLARS
                 entry = min(pb['trigger_level'] + SLIPPAGE, bar['h'])
                 stop = pb['low']
@@ -184,7 +188,8 @@ def run_day(day, watch, bars_by_sym, max_trades, log=None):
                 rr_ok = (t1 - entry) >= 2 * risk_ps
                 for k, (passed, _) in checks.items():
                     if not passed:
-                        rejects[k] = rejects.get(k, 0) + 1
+                        tag = k if k in sim.GATE_CONDITIONS else f'{k} (not gating)'
+                        rejects[tag] = rejects.get(tag, 0) + 1
                 if not sized_ok:
                     key = 'stop tighter than spread'
                     rejects[key] = rejects.get(key, 0) + 1

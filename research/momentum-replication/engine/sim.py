@@ -42,7 +42,29 @@ MAX_SLIPPAGE_ALLOWED = 0.15            # playbook: limit at ask + 0.15
 LEVEL_TOL_PCT = 0.0025                 # 0.25% - the one free parameter
 PULLBACK_RESET = 'vwap'                # 'vwap' | 'newhod' - see sweep.py
 CONFLUENCE_MIN = 2
-MIN_PILLARS = 9        # ALL conditions. Fix the conditions, not the count.
+# PARAMETERS.md section 3 defines the entry gate as 7 booleans plus at_support.
+# Two of them - tape_green and no_seller_wall - need Level 2 and cannot be
+# evaluated here, leaving SIX evaluable conditions. These are they.
+#
+# Three further conditions were previously gated on and are NOT in that gate:
+#   pullback 2-4 candles     PLAYBOOK.md:99 describes the PATTERN; it belongs in
+#                            the detector, where it now lives, not in the gate
+#   pullback holds 50% of leg  one claim (BUCPPCXOHbs 50:34) about first pullbacks
+#   front side of the move   never quantified anywhere in the corpus - invented
+#
+# Measured over 460 setups, those three blocked 15 of the 31 that satisfied the
+# source gate: 48% of legitimate setups rejected by rules the gate never had.
+# They are still computed and reported, so the evidence stays visible, but they
+# no longer gate.
+GATE_CONDITIONS = {
+    'pullback_volume < impulse_volume',
+    'pullback index <= 2',
+    'support confluence >= 2',
+    'price > VWAP',
+    'price > 9 EMA',
+    'MACD histogram > 0',
+}
+MIN_PILLARS = len(GATE_CONDITIONS)
 MAX_PULLBACK_INDEX = 2
 LIQUIDITY_CAP = 0.10                   # never take more than 10% of a bar's volume
 

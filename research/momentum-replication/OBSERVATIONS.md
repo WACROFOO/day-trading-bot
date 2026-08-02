@@ -349,3 +349,77 @@ timestamps, atomic writes). A run went from 20.3s to 1.4s with identical
 output. `NO_CACHE=1` bypasses it. Yahoo's 1-minute history is a rolling ~30-day
 window, so the cache will age out of usefulness once these dates fall outside
 it — it is a run-to-run accelerator, not an archive.
+
+---
+
+## Correction — the entry gate is 6 conditions, not 9
+
+Prompted by a challenge to the gate size. `PARAMETERS.md` §3 defines the entry
+gate as **7 booleans plus `at_support`** — eight conditions. Two of them,
+`tape_green` and `no_seller_wall` (n=47 each), need Level 2 and cannot be
+evaluated here, leaving **six evaluable conditions**:
+
+| Source gate condition | n |
+|---|---:|
+| `pullback_volume < impulse_volume` | 168 |
+| `at_support(p) >= 2` (support confluence) | 157 |
+| `macd_hist > 0` | 66 |
+| `price > vwap` | 45 |
+| `pullback_index <= 2` | 39 |
+| `price > ema9` | 30 |
+
+The implementation gated on **nine**. Three were never in the gate:
+
+| Extra condition | Where it really came from |
+|---|---|
+| `pullback 2-4 candles` | `PLAYBOOK.md:99` describes the *pattern*. It belongs in the detector — where it now lives — not in the gate |
+| `pullback holds 50% of leg` | a single claim (`BUCPPCXOHbs` 50:34) about first pullbacks after a catalyst |
+| `front side of the move` | **invented**. Already recorded in "Open parameters" above as never quantified in the corpus, then gated on anyway |
+
+### Measured cost
+
+Over 460 setups on the 17-day window:
+
+| Gate | Passes | Rate |
+|---|---:|---:|
+| The 9 conditions actually used | 16 | 3.48% |
+| The 6 the source specifies | 31 | 6.74% |
+| **Blocked only by the three extras** | **15** | **48% of source-gate passes** |
+
+Nearly half of all setups satisfying the documented gate were being rejected by
+conditions the documented gate does not contain.
+
+### After restoring the gate
+
+The three extras are still computed and reported — marked `(not gating)` in
+rejection tables — so the evidence stays visible without filtering.
+
+| | 9 conditions | 6 (source) |
+|---|---:|---:|
+| Trades, max 2 | 10 | **17** |
+| Trades, max 5 | 12 | **20** |
+| Trades/day (max 5) | 0.71 | **1.18** |
+| P&L, max 5 | −$332.02 | −$1,104.94 |
+
+Look-ahead audit passes at every cut-off. Friday 2026-07-31 is unchanged at
+0 trades — its two near-misses on the non-gating rules were already failing
+gating conditions as well.
+
+### What this does to the frequency argument
+
+| | Trades/day |
+|---|---:|
+| Three defects ago | 0.18 |
+| After those fixes | 0.59 |
+| After widening the watchlist | 0.71 |
+| **After restoring the documented gate** | **1.18** |
+| Source | ~2 |
+
+The gap is now under 2×, and the remaining difference is mostly the pre-market
+session this feed cannot supply. The earlier claim that "the detector is no
+longer the constraint on candidate supply" was made while the gate still
+carried three conditions the source does not have — it was true about the
+detector and wrong about the gate.
+
+P&L is more negative with more trades. n=20 and the sign has now moved with
+every structural change, so this remains a frequency measurement, not a result.
