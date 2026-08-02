@@ -27,13 +27,23 @@ OUT = _DATA
 ET = dt.timezone(dt.timedelta(hours=-4))
 
 # --- account rules, fixed before the session (playbook: decide while calm) ---
-ACCOUNT = 10_000.0
-RISK_PER_TRADE = 0.02 * ACCOUNT        # $200
-MAX_DAILY_LOSS = 0.06 * ACCOUNT        # $600
-PROFIT_GOAL = 0.06 * ACCOUNT           # $600
+# ACCOUNT is settable so the same run can be priced for a small account. Every
+# limit below is a percentage of it, so they scale together the way the playbook
+# intends - what does NOT scale is share counts, which are integers, and the
+# margin multiple, which depends on the account size in law rather than in the
+# playbook (see MARGIN).
+ACCOUNT = float(os.environ.get('ACCOUNT', 10_000.0))
+RISK_PER_TRADE = 0.02 * ACCOUNT        # 2% of the account
+MAX_DAILY_LOSS = 0.06 * ACCOUNT        # 6%
+PROFIT_GOAL = 0.06 * ACCOUNT           # 6%
 MAX_TRADES = 2
 MAX_LOSSES_STREAK = 3
-BUYING_POWER = 4 * ACCOUNT             # standard 4x day-trade margin
+# 4x intraday buying power is a pattern-day-trader privilege and FINRA grants it
+# only at $25,000 and above. Below that an account gets Reg T 2x at best, and a
+# cash account 1x with settlement delays. Defaulting to 4x for a $500 account
+# would silently assume a margin line that broker cannot extend.
+MARGIN = float(os.environ.get('MARGIN', 4 if ACCOUNT >= 25_000 else 1))
+BUYING_POWER = MARGIN * ACCOUNT
 
 # --- strategy constants -----------------------------------------------------
 STOP_MAX = 0.20                        # $/share; beyond this, CUT SIZE
