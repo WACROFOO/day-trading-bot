@@ -1,0 +1,36 @@
+{
+ "day": "2026-07-31",
+ "watch": [
+  {
+   "sym": "CUPR",
+   "day": "2026-07-31",
+   "gap_pct": 23.31,
+   "open_px": 3.2799999713897705,
+   "rvol5": 45.2
+  },
+  {
+   "sym": "TCX",
+   "day": "2026-07-31",
+   "gap_pct": 14.43,
+   "open_px": 11.100000381469727,
+   "rvol5": 17.6
+  }
+ ],
+ "trades": [],
+ "setups": 15,
+ "passes": 0,
+ "pnl": 0.0,
+ "rejects": {
+  "pullback_volume < impulse_volume": 4,
+  "pullback holds 50% of leg": 2,
+  "target < 2:1": 3,
+  "price > VWAP": 3,
+  "MACD histogram > 0": 10,
+  "stop tighter than spread": 8,
+  "support confluence >= 2": 4,
+  "pullback index <= 2": 6,
+  "price > 9 EMA": 1,
+  "front side of the move": 2
+ },
+ "log": []
+}
