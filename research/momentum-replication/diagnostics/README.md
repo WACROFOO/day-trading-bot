@@ -18,6 +18,7 @@ demonstrably took — not P&L.
 | `excursion.py` | The same, every setup, both pools — the selection-vs-timing test |
 | `small_account.py` | The run priced for a small account (PDT cap, 1x margin) |
 | `exercise.py` | Deals one real setup as a decision with the future withheld (training) |
+| `vwap.py` | How binding is `price > VWAP`, and is it redundant with the 9 EMA? (offline) |
 | `probe*.py`, `diag.py`, `loo.py`, `gradient.py` | Older one-off probes; superseded by the above |
 
 Convention: a diagnostic that needs the engine's verdict calls

@@ -12,6 +12,7 @@ the command at its head.
 | `2026-08-streams-roundup.md` | **The 480 live streams the corpus never had.** Answers the timing question: the micro-pullback is often a 10-second pattern our 1-minute detector cannot see |
 | `2026-08-bughunt.md` | Four mechanical defects found by line-by-line re-read; the fake-halt veto alone moved agreement with his labelled trades 4% → 22% |
 | `2026-08-ispo-stream.md` | Case study of the 4½-hour ISPO live session: risk discipline matches the spec, four rules diverge (session window, halt-level targets, resumption entries, anticipation) |
+| `2026-08-vwap-condition.md` | `require_above_vwap` is our most binding gate (56.5% pass) and it vetoes a setup he has a dedicated video about. Also disproves his "VWAP and the 9 EMA are rarely inverted" claim on our data (41% inverted) |
 
 Headline: of every ticker he named that resolves to a symbol, **100% were in
 the pool** and the detector found structure on **97%** — but only 31% pass the
