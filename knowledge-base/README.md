@@ -32,6 +32,10 @@ emphasises.
 +6h on ET): when to scan, when the plan closes, the two-hour tradeable window,
 and the hard stop.
 
+**`TRADINGVIEW-SETUP.md`** — the three screeners and the chart layout, with
+the exact filter fields, plus the two things TradingView cannot do (relative
+volume pre-market, and free float) and the workarounds.
+
 ## How to use this
 
 Every strategy document is written as a set of mechanical rules so it can be translated into code and backtested. **Documenting a strategy here does not mean it works.** Each document carries a "Verification Status" section stating what evidence exists.
