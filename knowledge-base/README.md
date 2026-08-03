@@ -28,6 +28,10 @@ video for each module and a gate to pass before moving on. Built from the
 concept-frequency map in `data/rules_digest.md`, so it covers what he actually
 emphasises.
 
+**`DAILY-ROUTINE-FR.md`** — the session hour by hour in France time (CEST is
++6h on ET): when to scan, when the plan closes, the two-hour tradeable window,
+and the hard stop.
+
 ## How to use this
 
 Every strategy document is written as a set of mechanical rules so it can be translated into code and backtested. **Documenting a strategy here does not mean it works.** Each document carries a "Verification Status" section stating what evidence exists.
