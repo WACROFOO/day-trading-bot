@@ -13,6 +13,7 @@ been removed after one drifted (see
 | `STRATEGY_V2.md` | Parameter distributions, conflicts flagged | **GENERATED** — same script |
 | `PLATFORM.md` | Broker/platform mechanics: hotkeys, order types | by hand |
 | `small-cap-momentum-bull-flag.md` | The core pattern in isolation | by hand |
+| `abcd-pattern.md` | The second-attempt setup, checked across all three registers. Corrects the common misreading that the entry is the break of B | by hand |
 
 Reading order for a newcomer: `STRATEGY.md` → `PLAYBOOK_V2.md` →
 `PARAMETERS.md` (§13 first). To verify any rule against the tape:

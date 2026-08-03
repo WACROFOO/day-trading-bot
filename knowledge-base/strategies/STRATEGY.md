@@ -387,9 +387,13 @@ break of the **pre-market high**.
 with a flat ceiling (repeated rejections at the same price). The break of that
 ceiling is the entry. Cleaner than a normal flag because the level is obvious.
 
-**ABCD pattern** — a run up (A to B), a pullback (B to C), then a break above B
-(the D leg). Same logic, longer timeframe. He notes the stop is further away
-than on a bull flag, so it needs a bigger payoff to be worth it.
+**ABCD pattern** — a bull flag that *failed*, taken on the second attempt.
+**A** is the low of the first pullback, **B** the high that failed to break the
+high of day (he calls B "the pivot"), **C** the second pullback low, **D** the
+break through B. The entry is at **C** — first candle to make a new high, while
+price holds the 9 EMA — **not** at the break of B, which he says is too
+extended. B is where he *adds*. Reject the setup if C breaks below A. Full
+mechanics and evidence: `abcd-pattern.md`.
 
 **Dip and rip / halt resumption** — when a stock rises more than 10% in under 5
 minutes it gets **halted** for 5 minutes. When it resumes it often dips first,
