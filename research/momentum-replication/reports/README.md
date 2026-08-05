@@ -19,6 +19,7 @@ the command at its head.
 | `2026-08-oos-march-2024.md` | **v2 fails out of sample.** 0 of 49 bracket settings positive in March 2024 against 36 of 36 in July 2026. The premise replicates (big excursion, poor close) but the population's MFE/\|MAE\| fell from 0.73 to 0.39 — the strategy is a bet on the regime, not an edge in a rule |
 | `2026-08-regime-filter.md` | **The line closes.** 8,828 symbol-days over 894 sessions: the regime is not persistent (r≤0.09 at any lookback), the filter adds nothing at any threshold, and buy-the-open on gappers is negative in every year 2022-2026. Mean MFE +13.76% but median only +5.09% — the excursion is a tail, not a typical outcome |
 | `2026-08-short-hold.md` | Buy pre-open / sell 30 min after. Entering at 09:29 is worse than at 09:30 in every pairing (that leg alone is −1.50% median, 34% positive). Shorter holds cut stdev 4× (31.2% → 7.5%) but the median is negative at every horizon from 5 min to the close |
+| `2026-08-known-edges.md` | The literature check. Our own 31%-close-green over 894 sessions IS the documented edge, measured from the wrong side — it matches the MAX effect (Bali/Cakici/Whitelaw 2011) and Miller's short-sale-constraint overpricing. Also why it is largely unharvestable |
 | `2026-08-vwap-condition.md` | `require_above_vwap` is our most binding gate (56.5% pass) and it vetoes a setup he has a dedicated video about. Also disproves his "VWAP and the 9 EMA are rarely inverted" claim on our data (41% inverted) |
 
 Headline: of every ticker he named that resolves to a symbol, **100% were in
