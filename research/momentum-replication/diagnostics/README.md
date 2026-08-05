@@ -19,6 +19,7 @@ demonstrably took — not P&L.
 | `small_account.py` | The run priced for a small account (PDT cap, 1x margin) |
 | `exercise.py` | Deals one real setup as a decision with the future withheld (training) |
 | `score_basket.py` | Buy-open/sell-close basket sized by a 0-100 pillar score, with an equal-weight control (offline) |
+| `exit_rules.py` | Which exit rule fixes the open-to-close basket, on real minute bars (offline) |
 | `vwap.py` | How binding is `price > VWAP`, and is it redundant with the 9 EMA? (offline) |
 | `probe*.py`, `diag.py`, `loo.py`, `gradient.py` | Older one-off probes; superseded by the above |
 
