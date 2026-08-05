@@ -13,6 +13,7 @@ the command at its head.
 | `2026-08-bughunt.md` | Four mechanical defects found by line-by-line re-read; the fake-halt veto alone moved agreement with his labelled trades 4% → 22% |
 | `2026-08-ispo-stream.md` | Case study of the 4½-hour ISPO live session: risk discipline matches the spec, four rules diverge (session window, halt-level targets, resumption entries, anticipation) |
 | `2026-08-05-session.md` | A live watch list scored against its own session. The pre-market fade veto cost the day's biggest winner; tested on 722 July symbol-days, faded names run MORE — but only 7% take out their pre-market high, so it is a setup classifier, not a filter |
+| `2026-08-05-recap.md` | The close. All twelve names finished off their highs, median −30%, the three biggest runners −45 to −49%. Four of the six traps were visible in filings before the open |
 | `2026-08-vwap-condition.md` | `require_above_vwap` is our most binding gate (56.5% pass) and it vetoes a setup he has a dedicated video about. Also disproves his "VWAP and the 9 EMA are rarely inverted" claim on our data (41% inverted) |
 
 Headline: of every ticker he named that resolves to a symbol, **100% were in
