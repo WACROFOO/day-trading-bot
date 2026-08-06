@@ -1,0 +1,53 @@
+<!-- source: https://www.warriortrading.com/wrap-month-sept/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# +$2,577.40 as we wrap up the month of Sept!
+
+## +$2,577.40 as we wrap up the month of Sept!
+
+Okay, so we’ll go over the trades from today. Finishing the morning up $2,577.40. You can see the P&L down here in the corner. The P&L up at the top is my net profit today because I carried PGNX overnight, so that extra $219, whatever it is, is from my swing trade, and then the rest were trades from today. So this is a nice way to finish up the month with a green trade, a couple green trades, and a green day; definitely a nice Friday.
+
+Last Friday was $8,000, today is $2,500, so Friday’s have been one of the best days of the month for the month of September. Now, we’ll go over the trades from today and I’ll talk a little bit about this month as we’re at the end of it, but we’ll do a full recap of the month at some point, probably next week.
+
+Okay, so let’s see. First trade of the day today was on HMNY. So, HMNY was one of these … you know, it’s just such a crazy mover. It’s had so much volatility. I was half thinking about it last night, or yesterday afternoon, around this $11 spot. I was like tempted to swing trade overnight, but I was like, “That’s crazy. It’s up so much, it’s too extended. I can’t, I can’t do it.”
+
+But sure enough, it gapped up and squeezed up today to a high of $14. So my first trade, as you can see here, was at 9:30, like as soon as the bell rang, and I jumped in at $12. Here, the pre-market high was $12.14, so I thought it would pop up and if it broke over $12 we would get a nice squeeze. We actually only got from $12 up to $12.27.
+
+So I was in at $12, 1,500 shares, and I don’t know if I was … yeah, I actually tried to take more size and those orders didn’t fill; those were buy orders. So I only filled 620 shares of a 4,500 share order. I sold half, 310 shares, I tried to sell at 27 at the high. I didn’t fill any. I tried to sell at 15, I didn’t sell any. I tried to sell at 12, no fill. 02, no fill. And so, what I ended up doing is while I was holding that trade — only 620 shares — I saw ROKU starting to pop up and I jumped in that trade. So I’ll show you that trade in a second. But HMNY I finally sold at $12.10 for like $65 profit.
+
+And ROKU I jumped into and I was in with 5,000 shares at $27. So let’s look at that. That was at 9:31. This was a really nice move. Why did I choose $27? Because it was just over the pre-market high, so I was looking for that breakout. So, let’s see. So this was the high of $27. I jumped in with 5,000 shares, and this is what happened at the next candle. We squeezed up all the way to $29.80; from $27 to almost $30 in 5, 6 minutes.
+
+So that gave me $1,810 of profit, and that was the big trade today. Now, as soon as I got in … you know, the thing with these, just like HMNY, I jumped in it at $12, it pops up to $12.27, and then it dropped. And HMNY, I mean right now it’s back down … well it’s actually, it’s still up versus that entry. But didn’t hold that level. And with ROKU, I didn’t know if it would hold or not. In the first candle it dropped down to $25.80 and then popped up and hit $26.74. So there’s a lot of volatility there.
+
+So as soon as it was popping up I was like, “Okay, time to take some profit.” And I started … I sold half at $27.33. You know, $250 times 30 cents is $700, so I’m gonna sell half when I’m up $750, so I sold half. I sold a little bit more at 33, at 29, and because we sort of popped up there and had a little bit of resistance, it hit 66 and then it came all the way back down to $27.22 and that’s where I was nervous. And then it opened up.
+
+I sold the very last of it, I guess, at $27.68. So, total there, $1,800, which really wasn’t that bad. Closed out HMNY, took a small trade on AMMA —only made $82 on it, didn’t work out very well. And then, let’s see, I got back in ROKU at $28.50, sold at $28.60, $28.74, and $28.59, so added a little bit more profit there. I sold my swing trade today, PGNX. I got in this yesterday at $7.20. This was on a daily chart breakout. Popped up to a high of $7.39 yesterday, today’s high is $7.38. I was able to take profit only at $7.31, but $200 for an overnight trade is not bad; easy profit.
+
+And I had one last trade on HMNY from $13 up to $13.15, $13.23, and then selling the rest as it came back down. So, total on HMNY, $464. Overall today is a day where accuracy was pretty good. Four or five trades, green on all four. You know, the last few days have been a real effort for me to be focused on discipline, focused on taking good quality trades, not forcing it, and so I’ve made about $4,000 in the last three days, which is good. Doesn’t change the fact that I had a bad start to the week with $14,000 in losses, and that was really frustrating for me that I pushed it so hard and was basically a deer in the headlights on those trades at the beginning of the week. And what it does, because of those two days, it put me red on the month.
+
+So as of right now, we’re at the end of September and I’m gonna finish this month down about $4,000. This is my second red month of the year, and I’m not happy about it. I would much prefer to be green every single month of the year, the way I was in 2016, but being down $4,000 is certainly not the end of the world. Being down $40,000, $50,000, $80,000, that’s when things get scary. Being down a couple thousand, not a big deal.
+
+The important thing is controlling the amount of draw down that you have. You know, we’re all gonna have those ups and downs, and ups and downs, the ebbs and the flows, but you just want to make sure that those pull backs aren’t too dramatic. We were getting a little on the dramatic side early this week with those two big red days in a row. It was that one stock IZEA that just really caught me off guard.
+
+It’s frustrating. My approach this month of swinging for the fences didn’t work very well. And I talk a lot about the importance of going for base hits, not trying to swing for the fences, just taking one trade at a time, small wins here, small wins there, and that’s what I did in May. April was my last red month, and I was down actually $4,100 in April, and about $4,100 roughly here in September.
+
+When I get my statement I’ll know exactly what it is, but somewhere around there. In May I ended up making like $18,000, and I was focused on trading with smaller size and taking really good quality entries just the way I have the last three days, Wednesday, Thursday, and Friday. I’m gonna continue that into October, and I’m gonna try to have a really solid month of October. Sort of a rebound, a bounce back from what was, I suppose, a disappointing September.
+
+Historically, Septembers have been pretty good for me. 2016 I made $18,000, 2015 around $10,000, so I’ve been doing well in September, but this September just … you know, if I hadn’t had those two red days I’d be up about $10,000 this month. You know, I mean, it’s just I let myself get a little too aggressive. I was a deer in the headlights on those trades that I got in and they were going the wrong way, and so now I’ve got to dig myself out of the hole from that. And it’s really … those were my own mistakes.
+
+The funny thing, or sad thing, I’m not sure which it is, but the interesting thing at the least, is that traders in the room traded some of those same stocks I lost money on but they made money on them because they took the profit when they had them. Most of those trades I was green before I went red but I was going for a home run, so I didn’t want to take the $200, $300, I was going for $2,000, $3,000. Didn’t take the profit, turned into a loss.
+
+I didn’t stop out quickly, the loss got bigger, and bigger, and bigger, and now the thought of trying to get a $7,000 winner or a $14,000 winner is like, it’s not gonna happen. I mean, yes I made $8,000 last Friday, but that was the best day I’d had in over a month, so the odds of getting two days like that to rebuild those profits in two days is not gonna happen. You rebuild by going for base hits, one trade at a time. And so that’s gonna be the focus here for the month of October.
+
+So anyways, finishing September on a nice green note; $2,577.40 on the 179th trading day of the year. You know, one of the struggles for me has definitely been that instinct to swing for the fences and be too aggressive, and I’ve gotta taper that back a little bit. So, I made $14,000 last week, and this week I’m down probably like $11,000 or something like that, $8,000. Not my best month ever, but I’m looking forward to starting a fresh month on Monday.
+
+Next week I’ll be in New York City. I’ll be in New York City with … not starting on Monday, I’ll be there Monday night, but Monday I’ll be here in my office and then the rest of the week I’ll be in the city trading with students who are part of our inner circle, which is gonna be a lot of fun. So it’s our private inner circle seminar next week in New York, and I’ll be doing some live streams from there. I’ll still be trading in the mornings in the chat room, so we’ll still have our morning trading sessions. And then the afternoons, we’ll be doing seminars and different classes and things like that.
+
+Okay, so anyways, that’s about it for me today. Looking forward to the weekend. And then starting next week fresh, staying focused on small wins. Even if it’s only $200, $300. You don’t need to swing for the fences. Today happened to be a good day but I wasn’t expecting ROKU to work out as well as it did. It just ended up being just a really fantastic trade. All right? So, that’s about it for me today.
+
+This girl seems to want to go for a walk. Hey, June. Okay girl. So I’m gonna take her out for a walk and grab a little bit of lunch and enjoy some of the afternoon. So yeah, Brendan, we have our inner circle seminar twice a year. The last seminar was in Las Vegas, and this seminar is going to be in New York. The next one will be in March and we haven’t announced the location yet. You can check out the inner circle on our website. Right on the main menu you can see the inner circle page.
+
+Okay, so I hope you guys all have an awesome weekend. Get some rest and we’ll see you back here first thing on Monday morning. Yeah, Juan, we’ll still be doing the watch list, I’ll still be trading every day next week. The only difference is I’ll be trading from New York.
+
+Oh, hey, I didn’t see you there. I was just working on the dream board for my next home run trade; hopefully it comes soon. Until then, make sure you subscribe to get email alerts any time I go live or upload new videos. Until then, happy surfing.
+</div

@@ -1,0 +1,46 @@
+<!-- source: https://www.warriortrading.com/day-1-of-2018-day-237-of-the-1mil-challenge/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Day 1 of 2018! Day 237 of the $1 Million Challenge
+
+## Day 1 of 2018! Day 237 of the $1 Million Challenge
+
+What’s up, everyone? Today’s the first trading day of January, and unfortunately, it is a red day. So today is going to be a red day recap. I reach a level four of frustration in my trades today. You can hear all about it in today’s Mid Day Market Recap.
+
+All right, everyone. Today is our first Mid Day Market Recap for the month of January and for 2018. So here we are at the beginning of the new year, and today was a little bit of a frustrating day for me. I got off to a really good start with three or four really pretty solid trades, and then I ended up just getting a little bit too aggressive and then having several losses in a row, which is one of those things that is, for me, really frustrating. It’s actually more frustrating to have, I think it was four red trades in a row than it is to lose the 3,800 bucks or whatever it is.
+
+I’ll show you my P&L here today. You’ll be able to see where I’m at. Giving back some of my profit from, what was it, Friday. I can’t even remember how much I made on Friday. Let’s see. I finished on Friday with 30, no, it was actually $4,000. So I just gave back $4,000, which was basically Friday’s profit. So that’s only one day back, right? So several steps forward, one step back, it’s not the end of the world. It’s just a little bit annoying.
+
+Anyways. You can see here the trades that I took. The very first trade out of the gates was BURG, and this is one that was gapping up this morning. We had news on it, and it was moving up, cryptocurrency, sympathy, all that stuff. So on this one right out of the gates, I was watching it for a possible pop over the pre-market pivot, which I thought was going to be on the one minute chart right around 4.40. So we were kind of selling off, and then we popped up, we dropped down a little bit. And I thought if we could break over that level that we would then start to move back up.
+
+So my very first trade was long, 5,000 shares at 4.31. It pops up to 4.47. I sold a quarter. It drops down to 4.42, I sell more, and I guess I sold the rest at 4.33. I then get back in at 4.50, selling at 4.53, 4.54. Adding back at 4.50 again, a third time. Selling at 4.67, 4.63. Adding back at 4.75, 4.68. Selling at 4.97 and 4.84. High of day was 5.14.
+
+So on this one I was kind of trading in and out of that range. Got back in at 4.93, 4.99, or something like that. Sold at 4.99. Sold a little more at 5.12. So I actually sold two cents off high of day, which is not bad. But getting in, getting out, getting in, getting out, and I managed to make about $2,100 profit on the name, so overall that was fine.
+
+Then my next trade was LTEA, and I jumped into this with 8,000 shares at 6.98. It’s halted, and it resumes and squeezes all the way up to a high of 7.65. So you might wonder, well, how did I manage to make only $188 on this trade? I was in, it’s halted, it squeezes up, it taps 7.50. What I decided to do was I sold at 7.38 and 7.40 most of my position, and then I got back in at, what was it, I got back in … Actually, I sold some all the way down at 6.88 because it dropped down, and then as it popped back up, I got back in at 7.44, and then stopped out at 6.75.
+
+So I went from being up $2,000, 2,500 bucks, and then I gave it back on that trade. So that was my first red trade of the day, losing $2,100 or so on LTEA. So I gave back most of my profit minus $188. So that was frustrating, and you can see it came all the way back down here to six, and it was not clean at all. So that was frustrating.
+
+Then I got into CHCI, and on this one, I got in high. I thought it was going to tap $4. I got in at 3.71, as you can see. I ended up stopping out at 3.19. It popped up here. It tapped 3.90. It couldn’t get over that level, and then it dropped all the way down here to 2.73. I mean, it dropped a full dollar per share.
+
+So on that one, I lost $2,600 bucks. And so at that point, I went from being up $2,400 on the day to down 270. And I thought, okay, I’m down 270 bucks. Should I just stop trading, or should I look for another opportunity? I saw SGRP hit the scanner, and it was kind of like CHCI. Sort of looked similar to the way that one looked when it first hit the scanner, so I jumped in it. You can see here this was a total fake out. It ended up dropping further down than it started. It went from 30 to 49, and then all the way back down to 16. So I lost 700 bucks on that.
+
+So at the point, after these four trades, I was down 980 bucks. So now I’ve got two losses in a row. Sorry, three losses in a row — LTEA, CHCI, and SGRP. At that point, I should’ve just walked away because I was starting to feel frustrated. Having three losses in a row and giving back your whole day of profit is really frustrating. I took one last trade, and that was on MTP.
+
+This one also squeezed up, got halted. I got in after the halt. You can see here, I got in at 63, 62, 63. I got a little slippage on my entry, and then it came all the way back down to 2.10. I stopped out at 2.06 and lost 2,800 bucks on that one. So that was the fourth loss in a row, and at that point, I was just like, “I’m done for the day. I’m just feeling really frustrated.”
+
+I’ve had days where I lost more than 3,800 bucks and I didn’t feel frustrated at all. Because I just felt like I got into something, and I stopped out right away, and it just was a big loss, but whatever. Today, I felt really frustrated, and I think it’s for a couple reasons. I felt frustrated, number one, because I had my daily goal. I was up 2,000 bucks, and I gave it away. So number one, I had it, and I gave it away. That’s really frustrating. Number two, I was wrong on four trades in a row, which at a certain point gets very frustrating by itself. And number three, three of those four losses were big losses because I got caught in stocks that were really extended right at the tipping point, and then they had that big drop.
+
+Today’s a day where I really wish that I had just said, “I’m down $265. I’m just going to be done trading for the day. I’m just done.” Because the very fact that I had my daily goal, and I gave the whole thing back. How many days do you think I’ve had my daily goal, gave the whole thing back, and then went back to being at the daily goal? Versus how many days I did something like this, where I went back to break even, and then I just went further into the red? I just wish I had just walked away, so I’m frustrated, number four, with myself for continuing trading even though it was choppy. I should’ve just walked away, so I’m really frustrated. I hate starting a month in the red. I hate starting the year in the red.
+
+So now I’m in the red on the year. Whatever. It’s the first day, and 3,800 bucks … The big picture is the money really doesn’t even … It’s not even the money that’s as much of an issue because it’s only giving back one day of profits. It gave back the profit from Friday. It’s more of the frustration of those four points that has me a little irritated. But that’s just the way it goes, and we had an amazing month last month. $8,400 of profit in December.
+
+This is a different start to 2018 than I had for 2017, but just a reminder that you’ve got to stay focused. I should’ve been scaling down on my share size as I got further into the day, not increasing my size, and so that was a mistake. Today, I just wasn’t as focused and wasn’t as disciplined as I should’ve been. And maybe it’s being kind of whatever, a little lackadaisical after coming back from a three-day weekend and just not as focused today. So the market will always remind you if you’re not focused that you’ve got to get focused.
+
+So tomorrow, we’ll be back at it. My account is in the small … I’m at $35,000 this morning. I’ll be at $31,000 tomorrow. So I’m really got to be very smart. I can’t have multiple days like this where I’m going to go below the PDT level. I’ve got to get myself back into the green and dig my way out.
+
+I really congratulate those of you that made your 2,000 bucks on BURG and walked away. I know [John Eltan 00:10:32], he’s up 3,600 bucks today. You know why? It’s because he took his profit on LTEA, and then he didn’t trade this crap. Actually, he might’ve traded CCHI and made a little money on it, but he didn’t chase them so high as I did.
+
+Being a little too aggressive and not following your rules can really quickly put you on the other side of the P&L line. Anyways. That’s where we’re at here today. Not the way I was hoping to start the month, but we’ll get back at it first thing tomorrow morning, and hopefully we’ll have a couple of really good trades in the morning. The first couple trades are the ones that are most important, so hopefully we’ll have a couple of good ones to start the day tomorrow. All right. Anyways. That’s it for me, and I’ll see all of you guys first thing tomorrow morning.
+
+Oh, hey. I didn’t see you there. I was just working on the dream board for my next home run trade. Hopefully it comes soon. Until then, make sure you subscribe to get email alerts any time I go live or upload new videos. Until then, happy surfing.

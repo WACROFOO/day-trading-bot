@@ -1,0 +1,41 @@
+<!-- source: https://www.warriortrading.com/wearing-red-on-a-green-day-1600-ross-trade-recap/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Wearing Red on a Green Day +$1,600! | Ross’ Trade Recap
+
+What’s up everyone. So guess what? A green day. Wearing red, and I am not afraid. Today was a reverse jinx. I knew wearing red, typically, would put me at a high likelihood of having a red day.
+
+However, following a red day, I wear red, and that way I’m green, good thinking, all right? So a green day, 1,600 bucks, happy about that. 198th trading day of the year, slow and steady wins the race.
+
+Yeah I’m still down, versus yesterday. Lost 4,000 yesterday, so 1,600 today doesn’t make it all back. But it’s a step in the right direction, and I’m going to keep it going tomorrow and through the rest of the week. So we’re going to break down the trades from today in the midday recap. Any questions, any comments, leave them below, and I’ll come back through and answer them later this after. All right? See you guys first thing tomorrow morning.
+
+All right everyone, so we’re going to go over our midday recap for today, and break down the trades for this morning. Today is a green day, which is great. Getting back from the red day yesterday. So this is my P&L here today. Only traded two stocks. So I kept it a little bit simple here, I didn’t overtrade today. I really just took two individual trades, and that was it. ACHV lost 500 bucks, and DFBG had made $2,197.
+
+So green by 1,600 bucks. It doesn’t make back all that I lost yesterday, but it makes back a good portion of it. And that’s all I can really ask for, you know? It’s just one step in the right direction. So today, what was kind of interesting is that both of the trades were right off of our gap scanner. So if I do historical date and time on this, 9:15am, we will see that our third leading gapper was ACHV. Gapping up, priced at $2.73, up 27% with a four million share float, and merely a million shares of volume pre market.
+
+So on this one, I was looking at it pre market, and thought that it looked good in its consolidation. For a break of the pre market high of $3. Now, when the bell rang, this ended up dipping down, and there was a 75,000 share seller at $2.85. I jumped into this thinking that that seller would break, and that did not happen. The seller didn’t break. So I jumped in and stopped out with 3,000 shares for about a 15 cent loss, down $529. So that was disappointing, to have my first trade of the day be red. But it was worth a stab. I thought it was worth a stab. So that was ACHV.
+
+Second one, DFBG. DFBG. So this one was our fourth or fifth leading gapper, $5, 18% gap, 11 million share float with 33,000 shares of pre market volume. Now this one had a catalyst this morning, as you can see here. So there was two headlines right at 7:00, 7:02am. And pre market, it popped up to a high of $5.55. When I looked at this one, I thought it looked certainly interesting, pre market. Not a lot of volume, but it was holding up relatively well, and it was really the second best looking gapper that we had on the scan.
+
+I was interested, and kept it on watch. It opened and dipped down to a low of $4.85, and then curled back up to $5.19. Now what I typically do is, I’ll keep the stocks on watch that I’m watching with the level two windows up like this. So I had ACHV and DFBG just like this, watching them side by side. And I already had an order ready on DFBG at $5.50. So that order was ready to go. ACHV was at two, was actually at $3.00.
+
+So all I have to do is click the buy button if I want to jump in. I’m ready to go. So ACHV pops up, doesn’t work, drops back down, take the loss. DFBG, I’m watching, and all of a sudden, I start to see volume coming in at $5.18, $5.19, $5.20, 21, 22, 23, 24, 25. I punch an order for 3,000 shares at 25. It pops up quickly, I press the button again, I get filled the second time right at $5.49, so just under the half dollar. All right, so now I’ve got 6,000 shares at an average price of $5.38, or something like that.
+
+It squeezes up to $5.75, pulls back for a second, and as it curls back up, I add again at $5.75. So now I’ve got just under 9,000 shares at an average, now, of about $5.50. It squeezes up and taps a high of $5.95, and I’m selling into that squeeze. So I sold, let’s see, looking at my orders here. I sold 4,400 shares at $5.80, I sold 950 shares at $5.94. I sold 944 shares at $5.89, and then I sold the rest as it came back down at $5.52.
+
+So unfortunately, on this one, I gave it a second to pull back, and I actually was using a 15 second chart on this. Which, I’ll sometimes use in the first five minutes of trading. What I was seeing here was this little consolidation. I had my hand on the buy button to buy if it broke over 70, $5.70, and boom, for a retest a high a day, because this is a micro pullback. That didn’t happen, it broke the bottom of this channel. So I sold the rest of my position down here.
+
+So my 3,000 shares that I added at 75, I actually lost 25 cents on those. So I was up more like $2,500 on this one, and finished up 2,100. But green is good. I’m disappointed it didn’t hold up, and has been fading since that opening squeeze. But it did give one opportunity. Since then, the only stock that’s hit the scanners that’s looked good was OGEN, O-G-E-N. However, this one squeezed up sort of just so quickly here, I didn’t really feel like there was a good opportunity to get in.
+
+It then pulls back, and I’m watching it, and I just wasn’t today super interested in this stock. Partially because I could see the resistance of the 200 moving average at $1.49, $1.50. I thought that was going to be a potential issue. It had room up to it. The volume seemed a little crowded. I was honestly surprised that it didn’t get halted as it broke through a dollar. But for whatever reason it didn’t. So that also sort of made me think that, since it wasn’t getting halted on circuit breakers, it wasn’t going to go as parabolic or get as crazy, so I just left it alone.
+
+I did see DRYS popping up, was watching this on this little flag pattern here, but generally don’t trust the stock very much, so no trades on that. GLBS is a shipping stock, has sympathy sometimes, but popped up and sold off. DCIX did the same. So really, no momentum there in the shipping stocks today. This was another one that was really weak, GSL. Pre market hit a high of two dollars, and is back down at a dollar. So kind of a little bit of a disappointing day in a way, that we didn’t have more momentum.
+
+If I hadn’t hit DFBG, I don’t know that there would’ve been anything else that I could’ve traded. I mean, it was really pretty slow. So TZOO, Travel Zoo, yeah. A little bit of a move there, but pretty light volume. So I don’t know, I’ll be green today, happy with that, 1,600 bucks. So put it in the calendar here, make it official. So let’s see, plus $1,667.32 is now going to be my first green day. So one green day, the hot streak starts over, but that’s okay. It’s my 198th trading day of the year. And tomorrow is the last day of October.
+
+So I’ll see if I can finish October closer to $40,000 in profit. I would have to log into my light speed and see exactly where I’m sitting on the month. But yeah, somewhere around 40,000, that would be a nice target. Let’s see, log in quick and see where I’m at. It won’t include today’s profits, but it will give me a bit of an idea of where I’m sitting.
+
+So month to date, as of yesterday, was $38,000, no, that didn’t include yesterday’s loss. So $38,000 minus $4,000 is $34,000, plus today is $35,600. So sitting around $35,600, that’s okay. A little below where I’d kind of like to be, but whatever. Green is good, and I live to trade another day. So I’ll be back at it first thing tomorrow, 9:00, 9:15 for pre market analysis, and hopefully, we’ll see some more momentum.
+
+Yeah, I just have a little calendar that I kind of just take my notes on, and write my daily news. So anyways, that’s it for me, I’ll see you guys back at it tomorrow morning. If you’re still watching, you must have really enjoyed that video. So why not subscribe and get email alerts anytime I upload new content? Remember, when you subscribe, you become a member of the Warrior Trading family.
+</div

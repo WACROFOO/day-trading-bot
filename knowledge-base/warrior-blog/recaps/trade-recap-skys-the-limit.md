@@ -1,0 +1,66 @@
+<!-- source: https://www.warriortrading.com/trade-recap-skys-the-limit/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Trade Recap: Sky’s The Limit! +$2.6K!
+
+What’s up everyone? All right, another green [day trading](https://www.warriortrading.com/day-trading/). Second day of the week, finishing up $2,600. Green is good. That puts me up over $10,000 this week. I’m working my way out of the hole, had a couple red days last week. I’m almost out. Then from there, it’s going to be back into all time highs for 2018. Think I’m sitting right now around 260, 270,000 on the year; which is awesome. About $600,000 in my account that I started in January 2017, with just $583. I’m loving it.
+
+Today, I took two trades. I kept it simple. The last couple days have been really focused not overtrading, just one trade, maybe two trades, and getting the profit like that. It feels good. It’s stress free trading. Green is good. We’ll break it all down in today’s midday market recap. …
+
+All right, everyone. Time for our midday market recap. While we’re doing this recap, we’re going to be watching HEAR continuing to surge up without me. It’s making some nice moves here. For me, today was all about stress free trading. A second day of stress free trading. It’s what I really wanted. Just trying to book some profit without getting myself into a jam, or taking a lot of risk.
+
+Here’s where I’m sitting today, $2,651.26. Green is good. $2,000 is awesome. That puts me up over $10,000 on the week. It puts me up $64,000 on the month, which is awesome. It’s been an amazing month. Something that I’m going to be doing this month, which is going to be really exciting, is half of these profits, I’m up 64,000. As of right now, $32,000 of my profits this month are going to be donated to charities and organizations in honor of Memorial Day. Right now, it’s 32,000, and it’ll be a running total. We’ll see how high I get. If I get to 100k this month, 50k is going out. I’m happy to do it. I’m just … I’m grateful to be in a position where I can do it.
+
+My grandmother was a nurse in the army in World War II. My grandfather was a solider. He got wounded, and they met in the infirmary. That’s kind of the story of how they met. I wouldn’t be here if either of them hadn’t had the courage to serve this country.
+
+I wanted to do something special this year for Memorial Day, so I’ll be donating to a number of different charitable organizations in Western Massachusetts, the Berkshires, and this area. I want to encourage you guys to make some donations as well. Even if you only want to donate 100 bucks, or 50 bucks, or if you’re in a position to donate a little bit more; that’s awesome, too. We’re going to put together a page on our website and kind of tally up how many pledges we can get from the Warrior Trading community; because I think it’ll be pretty cool to see how many of us are willing to set up.
+
+I don’t mind if I’m carrying the majority of the donation. I’m just happy if it encourages us to do something good, and give back some of these profits. Being able to make $65,000 in one month is absolutely incredible. It’s ridiculous. The amount of money we make trading, it almost becomes like pretend money because it’s … just … It’s crazy. We, of course, are thankful for those who have served, who have given their lives for this country. We’re thankful for all the veterans.
+
+Anyways, something special for this month for Memorial Day that I’m doing. Yeah, so today, $2600 for me; $1300 for organizations, $1300 I’ll keep. That’s cool.
+
+All right, so trades from today. This morning, CLWT. This was the big one. We had it on the watch list pre-market. It was the only thing that was interesting about CWLT is that this is a five cent tick stock. It’s not the type of stock we typically would trade, but … because about a week ago, it made this really big move from two dollars all the way up to 845. It showed us that it has the ability to make really quick moves. We decided, ‘Okay, this one’s worth keeping a close eye on.’ Pre-market high was 520, and then right out of the gates, it started to surge up.
+
+Now, when the market opened this morning, I was a little bit hesitant. I didn’t feel super comfortable just jumping right in. I’m not as good as reading the time and sales, and the level two on … these [five cent tick stocks](https://www.warriortrading.com/5-cent-tick-size-pilot-program/). I just was kind of like, ‘You know what? I’m going to hold off for a second,’ and it popped up to a high of 75, as you can see here. It then pulls back for a second. It pops up and taps 75. It pulls back again. I got in right there at 75.
+
+As it came up for the second break, I jumped in with 10,000 shares at an average of like 78, getting in at 74, 78, and 80. It then squeezes up to a high right here of 625, and I sold right around six dollars. I took my profit on that. Ended up going a little bit higher, 640, but it didn’t do that much. I think I captured a pretty good chunk of the move there. So $2200 on that one with 10,000 shares.
+
+Then, the second one was CREG. C-R-E-G, this one just sort of popped up in the late morning. I jumped in with 4,000 shares roughly, partial fill, and sold at 215, and … where was it? 215 and 206, 2010. That ended up just being a $369 winner. A little bit of a smaller win.
+
+The one that I missed this morning was SORL. This one was right off our watch list. I just fumbled a little bit. I had it on watch for a breaking pre-market highs, which were at 640. I had my order ready at 650 to get in. The bell rings, and it just pops up so fast. I missed it. It goes from 640 all the way to 688. Almost a 50 cent breakout, which was amazing. That’s awesome.
+
+I saw John made, I don’t know, 1500 bucks on it, or something like that? I know a bunch of you guys traded it, and did really well on it. I just missed the whole thing. Sometimes they’ll go without you. This could have been a $5,000 day if I’d hid that, but I missed it. It pulled back and didn’t give a second opportunity.
+
+HEAR, this one, it wasn’t on the watch list but you can see it’s been grinding up here. I’m kind of just feeling like … for me, the price is a little too high. It’s a little outside my wheel house for go-to price range. I thought it was going to hit resistance at this trend line that I had drawn. It was a descending, this yellow line from here down to here. It did. It hit it, pulled back, and then it just blasted through. Then it popped up, it pulled back again, five minute setup, and now it’s continuing higher.
+
+Congratulations for those of you that did step up and take this trade. I just felt like when I was looking at it, that the risk of it dropping back down and giving me a false breakout was too high. Even though 22, or $2600 is a really great day, it’s not … It’s certainly not anywhere close to the best day of the year for me. It’s … a good day, but I don’t have enough of a cushion to take risk. I’d rather just walk away with $2600. That’s important. Know when to hold them, know when to fold them, know when to get up and walk away.
+
+This right now is kind of a … hit and run market. You get your profit and you get out. If you stay and you stick around, there’s a good chance you’re going to give back everything you gained. Today, I was pretty disciplined about just taking these trades, getting in, getting out, and being done.
+
+Yesterday, I took … Let’s see, I took just the one trade on BOXL. Right now, three trades this week, and over $10,000 profit; close to $11,000 on the week. That’s awesome, right? Yeah, Blaine, it sure did.
+
+It’s kind of like three trades, three winners. I’m happy with that. That’s some good profit. But having said all that, I’m still in the hole from last week. I lost like 15, almost $17,000 in three days last week. I’m still down about $6,000 versus my all time highs on the month. I was up about $70,000 on the month, 71, and I’m up like $64,000, $65,000. I want to try to get myself back into all time highs. I have this goal of 100k on the month. It would be awesome if my best month is here in May, and if I give half of it away. I feel like that would be some really good karma points, maybe I’ll have my best month because I’m giving half of it away. I’ll net more than I would have made if I wasn’t giving half of it away.
+
+We’ll see. I think it’s going to be … a good month. In any case, sitting at 64, 65,000 right now is awesome. Puts me at 268,000 on the year. 603,000 in my small account that started with $583. From $583 to $603,822.61, and that’s in about a year and a half. I started January 1st, … 2017. Let’s see, today, I’ll just make it official on the calendar. 86th day of the year; so day 86. 20 … 2,020 … $2,651. All right, so 2600, and at 86 days in the year and 268,000, I’m averaging $3,120 per day. Per day.
+
+I mean, I remember when I was working at a gas station pumping gas, making $8 an hour before taxes. I’d work a full 40 hour week, and I wasn’t walking home with much more than a $180. I mean, it was … Yeah. I remember it. I was looking the other day at this old photo album. I was seeing some of these pictures of myself in high school and early college, when I was … just going through what people go through at that age; trying to figure out what you want to do, working at the gas station, working at an art studio, and … mowing lawns, and … Man, I never … I didn’t think becoming a millionaire was in my future. I didn’t think so.
+
+Even when I started trading, I didn’t think becoming a millionaire from trading was in my future. I thought maybe I could make enough money trading a couple times a day to pay my bills. But then once you start to get good, you realize there’s nothing stopping you from making more money except for taking big share size.
+
+For those of you who have already made over $100,000 trading, give yourself a big pat on the back. It’s a huge accomplishment. I know Roberto, Mike, [Arsh 00:12:33], Tyler, John, these guys have all … hit that mark. For those of you that are getting near the half million dollar mark, John L10, those of you getting close to the million dollar mark, a big pat on your back. You really deserve it.
+
+Now, I know making a million dollars trading … when it happens over the course of three, or four, or five years, … it might seem like, ‘Well, you’re’ … you spend some of it, and some of it goes out to taxes, and all that stuff.Just because you made a million dollars trading doesn’t mean you have a million in the bank. It really is proving that you’ve achieved a really high level mastery over this skill of trading. For me to be in a place where not only can I make a really good living trading, but that I can also teach so many of you guys how to trade is just … I mean, it’s awesome. I feel really fortunate.
+
+I suppose that’s the ultimate; to get so good at something that people actually do want to learn from you, if you’re willing to teach. I’m … feeling very fortunate, and … this has been a great year so far. Off to the best start I’ve ever had. Four and a half months into the year, 268,000. Tracking still for around 600,000. I have a goal of 665,000 this year. I’m hoping that I hit it. I might not, but I’m really hoping I hit it this year.
+
+That’s the target for the year. Every day is a step in the right direction. You know what? Even days like today, 2600 a day. Let’s do the math. There’s usually around 220 trading days in the year, if you give yourself a couple days off; so 200 trading days, 220 trading days times 2600 is $572,000. Today is a great day. $2600 is an awesome day.
+
+The reality is you’re not going to be green every one of the 220 days. You got to figure you’ll be green maybe 75% of them, 80% of them. Then, you’ll have some red days. You need to average more on your green days to make up for the red days. … Those are the metrics. You guys all have them. You know where you’re at.
+
+Anyways, … this is about it … for me right now. Oh, and last thing that I guess I’ll mention. Let me just get up and grab this here. … This month another laptop giveaway. We’re going to give away three laptops to Warrior Pro students. So three laptops going out to Warrior Pro students this month. All of the students are eligible and we’ll draw names out of a hat … at the end of the month. We’ll probably draw the names out of the hat right around June 1st, or something like that.
+
+Anyone that’s watching on YouTube of Facebook, if you join the Warrior Pro classes this month, your name will be entered as well. We’ll be giving away three Lenovo laptops, the same laptops that I use every day for trading. That’ll help get some of our students off to a good start this summer as you’re going through the classes, and getting into the markets.
+
+All right, so that’s it for me. I’m going to go enjoy some of this nice weather. I will see all of you back here first thing tomorrow morning, nine, 9:15, pre-market analysis. We’ll see if we can find a couple more stocks to trade. All right, I’ll see you guys in the morning.
+
+If you’re still watching, you must have really enjoyed that video. Why not subscribe and get email alerts any time I upload new content? Remember, when you subscribe, you become a member of the Warrior Trading family.

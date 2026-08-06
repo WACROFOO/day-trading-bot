@@ -1,0 +1,52 @@
+<!-- source: https://www.warriortrading.com/red-day-recap-day-26/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Red Day Recap on Day 26!
+
+## Red Day Recap on Day 26!
+
+What’s up everyone? All right, so here we are, 26th day of 2018, finishing the morning in the red again. This has been a choppy week. I mean the market dropped 1200 points, bounced back up today, continuing a little bit higher. I’m having a hard time finding really good opportunities. This right now is an opportunity for me to focus on being disciplined, trade the best, leave the rest. I say it again and again, and that, right now, is what I got to focus on.
+
+Today, I’m down $1,500 and you know what? It’s not a big deal. My best day of the year so far is 18,000 in the green. $18,000, so a day where I lose 1,500, this is just the noise. It’s nothing worth getting bent out of shape about. It’s really not a big deal. Right now is just the opportunity for me to focus on discipline.
+
+Today, I’m happy because I walked away. I could have kept trading. Right now, it’s, let’s see, 10:30, I could keep trading. I’m instead going to take the cue from the market. I have four trades today, and two losses. The one loss was 1,700, the other loss was 180. The two winners I have were both less than $300 winners. You guys know when I have a good day, within the first five minutes, I’m up $1,000. On a day like today where 20, 30 minutes into the day I was only up $350, it was a cue that things might be choppy.
+
+On that last trade, I ended up being nicely in the green. Then [inaudible 00:01:30] it flushed down, dropped really fast. I got stopped out, and it put me in the red. Instead of trying to get myself back into the green, instead of trying to fight against the tide, fight against the current, I’m saying, “No.” I’m throwing in the towel. I’m going to take the hint, I’m going to take the cue.
+
+Before I get myself all frustrated and I end up having those three losses in a row, I’m just going to say, “Enough’s enough.” Two losses in a row today. I’m saying, “That’s fine. I’m done.” It’s a snowstorm outside. I’ve got other things to do, so I’ll be back at it first thing tomorrow morning. Before we get to tomorrow, let’s break down all of the trades today in our Midday Market Recap.
+
+All right. First trade from this morning, DRYS. This one was off our Gap Scanner. I was watching DRYS because I thought, well it’s actually a decent pre-market flag. I didn’t have a lot of confidence in it, but I thought it would be worth a try at least. I got in, 10,000 shares at 48. Ended up selling for only $244 of profit, very small winner. $244, my first trade. My target was 10 cents, $1,000, didn’t get it.
+
+Second trade, [BSPM 00:02:50]. This one I got a partial fill of 2,300 shares at 389. As it started to squeeze up here, topped out at 412, I got no fill on those orders. Sold 200 shares at 410 to scale out, sold the rest at 391. Only $99 profit on that trade.
+
+Then, I got back in DRYS at 365. This was for a first five minute candle to make a new high, actually it was because it was consolidating right here. I thought that if it broke over 370, it would break high of day. I got in a little early at 365. We popped up and we tapped 370. Then, we rolled over pretty hard, as you can see. On that one, I stopped out for a $180 loss, which puts me up $79 net profit on DRYS.
+
+The last trade was NETE. This one, we were watching pre-market because it was a gapper. The bell rang and it dropped down. It then broke and broke over the [View App 00:04:00] and started to squeeze. I jumped in it at $8 with 10,000 shares. I was in it at $8. It squeezes up and taps a high of 843. I thought it was going to be halted. I thought at least it would break over the half dollar of 850, but I thought it was about to be halted. It ended up not getting halted and, in the next candle, dropping all the way down to 726. I was still holding my full position, because I thought I was going to sell it up in the 870, maybe even $9 area.
+
+All of a sudden, it drops down and I’m down $7,500. I sold as it popped back up here, selling on the [Ask 00:04:42] at $8, 801, 797, 809. Bunch of orders I put out that didn’t get filled, and then bailed on the rest at 766. If I’d been able to sell all of it back at break even, that would have been preferred. I was having a hard time getting out, it was just too heavy. That was disappointing. I’m glad that I minimized the loss to $1,700 from being down 7,500. I think that’s definitely a win. That’s $6,000 of recouped losses. Obviously I certainly wish that I hadn’t … I wish that it had been stronger.
+
+Today was just a day where we didn’t see a lot of strength in Small Caps. This one started to open up, it started to look really good. I was up 40 cents on it, on the Ask. I thought it was going to keep going higher, so I was being a little aggressive. Now, that was in part because the stock had [inaudible 00:05:45], an actual catalyst. Decent daily chart for a curl. It’s a former runner, so I thought I’d give it a chance. Man, it just didn’t hold up at all. I’m just surprised at how fast it dropped there.
+
+I think the issue probably was it was about to get halted at 832. When stocks are about to get halted, the price is pinned at that level. What happens is it’ll be pinned at that level, I believe, for 15 seconds. There are times where it’s pinned for 10 seconds, 11 seconds, 12 seconds. Then, all of a sudden, it resumes trading and that’s what happened. It dropped and boom. It dropped fast from 843 all the way down to 726. That’s volatility, and we love volatility.
+
+On this one, I just caught it going the wrong way. I didn’t get in soon enough. I jumped in a little too fast, probably should have waited for the first one minute candle to make a new high. Again, a lot of these stocks, especially when they break over View App, they don’t wait for you. They just take off. If you don’t jump in, you miss the whole opportunity.
+
+Luck of the draw there, down 1,700 on the name, down 1,500 on the day. After making $3,600 yesterday, I am pretty much just feeling like you know what? I would rather keep the losses moderate here, $1,500, and not keep trading. I’d rather come back tomorrow and try to find good opportunities. If the momentum is really hot tomorrow, if we have really great opportunities, I’ll make $1,500 in the first five minutes. If the market is slow again tomorrow and I only have $100 on one name and 79 on the other, then I definitely have to slow down.
+
+NETE was a great opportunity. It was very close to being a home run, it just … I don’t know. For whatever reason, it didn’t work. Had this gotten halted here and resumed and squeezed up to 870, 880, $9, would have been a five, six, $7,000 winner easily. Profit-loss ratio was there. The potential was there easily. I was up $4,000 on it, and I thought I had more in it. That’s just the way it is, but I’m not beaten up. I’m not frustrated really. It’s just a day where we didn’t have a lot of follow through.
+
+That’s fine. I’d rather tap out before I get myself frustrated, and be back at it first thing tomorrow morning. That’s the thing. Keeping the losses small and reminding yourself, number one, you don’t have to trade every day. Number two, you don’t have to be green every day. It’s not a big deal to close the day in the red, it really isn’t. This is a marathon. There are some legs of this race where you’re going to be … There will be others ahead of you. You’ll be a little bit behind. You’ll make up the time on another day. Not going to sweat it here, I’ll just be back at it first thing tomorrow morning.
+
+February, for sure, has been a tricky month for me. I’m down about 8,000 on the month. After making $117,000 in January, it’s kind of strange that the momentum has shifted here so quickly. It is what it is. It’s just part of the deal with trading. You have hot months and you have cold months. I know, for me, it always feels like I’m only as good as my last trade. I’m not really patting myself on the back that much for having a great month of January. I’m more just trying to focus on getting things turned around here for February.
+
+If I do take a moment and step back, and I think I should, it’s a good reminder that the market fluctuates. You’ll have hot months, you’ll have cold months so just got to go with the flow. Not get too bent out of shape about it, and know that there will be some hot momentum down the road. It’s maybe not here today, but tomorrow, the next day, next week, things will pick back up. I’ll have some great opportunities, and I will have another $100,000 month.
+
+My goal, I would say, would be, at some point, to have a $100,000 day. I do think that that’s possible. My best day so far is $42,000, but I’d love to have a $100,000 day at some point. That might not be this year, might not be until next year, but it’ll happen. Another $100,000 month will happen, and a $100,000 day will happen at some point.
+
+It’s just right now, yeah, $1,500 in the red, doesn’t matter. Not a big deal, not going to sweat it. Not going to let that get me bent out of shape, so I start getting aggressive on trade number four, five, six, seven and then finish the day down 10,000. Finishing the day down 10,000 is definitely going to be … That would be a hard day to bounce back from.
+
+So far, the worst day of the year for me … Oh let’s see. Best day of the year is $18,000 profit so far for 2018. The worst day of the year is, I think, 7,500 in the red, 7,300. It’s not bad. Today, 1,500 in the red. It’s just the noise, no big deal.
+
+All right, so that’s it for me. I’ll be back at it first thing tomorrow morning, and hopefully we’ll see some good opportunities and the momentum will start to pick back up. I’m hoping the overall market starts to curl, and we make our way back up towards the highs and that this is not a bear flag, right? A bear flag is a drop, a pop and then going back all the way to the lows. That’s definitely not what I want to see. I want to see that we curl up off these levels, and get back up towards 280. We’ll see what happens. I’ll be back at it first thing tomorrow morning, 9:00 a.m., 9:15 for pre-market analysis. All right, see you guys in the morning.
+
+If you’re still watching, you must have really enjoyed that video. Why not subscribe and get email alerts any time I upload new content? Remember when you subscribe, you become a member of the Warrior Trading family.

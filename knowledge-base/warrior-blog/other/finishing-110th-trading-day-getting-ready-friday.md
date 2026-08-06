@@ -1,0 +1,30 @@
+<!-- source: https://www.warriortrading.com/finishing-110th-trading-day-getting-ready-friday/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Finishing the 110th Trading Day and getting ready for FRIDAY!
+
+## Finishing the 110th Trading Day and getting ready for FRIDAY!
+
+All right guys, so we’ll do a midday market recap here, go over the trades from this morning. Overall, today was kind of a slow day. It was just not a lot of really good opportunities. I’m finishing the day down $111, which is kind of just like a rest day. Being up 100 or down 100 is just sort of for me either way is basically flat until the next day when I can hit 1,000 bucks.
+
+So the stocks I traded today, starting with our pre-market watch list, we were watching SKLN. This one is coming back up to the [inaudible 00:00:39] here during the lunch hour will be interesting to see if it breaks over that level into the afternoon. I’m not sure it will, but pre-market it was squeezing up a little bit and opening just under 210. I got in as soon as the bell rang at 215. We popped up to a high of 226, pulled back. I sold for $153 profit and then it suddenly popped up to 241 and I was like, “Oh man, I was not expecting that.”
+
+Then it dropped all the way down to 205. Then it went all the way back up to 243. Then it came all the way back down to 205 again, so just kind of weird price action on this one. I think it was sort of faking people out both to the long side and to the short side. So if you walked away with a little bit of profit on it, that’s good. If you were on the wrong side of it, don’t feel too bad. This was pretty choppy today.
+
+It ended up consolidating down around the lows, starting to curl back up a little bit, but I’m not sure. The volumes you can see is a fraction of what it was earlier today. Not much on that. HTGM, this one was on watch pre-market, but I said I don’t know if I like it because the move started after hours. I didn’t expect it to sell off this much though. It gave up the entire gap, so maybe I should have because of the last time it had a gap it sold off, but in any case, just not clean at all.
+
+So no trades on that. Next one was CCCR. I got in this one shortly after the market opened at three, let’s see, I got in this one at 317. Right here on this one minute consolidation I saw it consolidating here. Actually it got filled at 319. We popped up to a high of 327. Pulled back, went all the way to 335, but again on this one I only made 136 bucks. I just wasn’t feeling it. It just didn’t do exactly what I thought it would so small gain on that. The one loser today was NEU and what’s sad about this one is it was one of the best setups today.
+
+I really liked this. It was coming down to support on the daily level at 56.48. We had at the time that I got in 10-plus consecutive red candles and so I was like, “Okay, first candle to make a new high is going to be my entry.” We had high of day volume on this candle that finally made lows. So I watched it as the [inaudible 00:03:17] was forming and as the price came back up and crossed over the half dollar, I got in at 56.50 for the break at the half dollar. We popped up to a high of 56.59. My target was 56.91 with 3,000 shares.
+
+Potential profit target, 1,500 bucks. I really thought this looked clean. Unfortunately it just went right back down to the lows and I lost $475. So you know, it is what it is. I thought it was a good looking setup for a reversal. It just didn’t work and I didn’t go back in for a second trade. I just figured you know what? Forget it. It’s on a good setup it’s not working. It’s not working, I’m not going to go back. Ended up popping a little bit down here off the lows, 50 cents or so, but not when I took my trade on it.
+
+Last stock I traded was TRCO, a higher priced stock. Starts squeezing up on news and I jumped in this at $41. We popped up to a high of 41.88. I held the whole thing up that much on 500 shares. I was up like 350 bucks or something. Didn’t lock it up. It dropped down to 40.83. I was down 100 bucks. Came back up, sold it for $75 profit. It was just like okay, whatever. Took a small stab at it, small size trying to ride the momentum, but it just didn’t really work out super well.
+
+I saw that KR was in play today. I know you guys were trading it both long off the bottom and short off this bear flag up here. I know Mike did a really great trade on Ali Baba earlier today, shorting at 134 or 135, right around 135 I think it was or 134-something. Then looking for the break here. Really nice sell off, so good trade on that one, but for the small caps just not a lot moving today. So again, today’s a day where I came into the market, took a couple trades, didn’t really make any progress but didn’t give back a lot either so that’s fine.
+
+Remember, this is Thursday. I told myself go easy on Thursday and for the most part I did. I maybe was a little too aggressive on NUE. I thought it was a good setup. I thought it was worth a stab. If I saw that same setup again would I do it? Yeah, I would. It really was a decent setup so I don’t feel bad about that trade. It just didn’t work out. Okay?
+
+So in any case, that’s about it for today. Really a short recap. Not a lot to cover today, so hopefully that means tomorrow will be just an incredible day. We’ll have an awesome finish to the week, have one of those surprise moves on a Friday, one of those stocks that goes up 100 or 200%. I can’t wait for the next stock to do that. I’m just kind of like sitting here patiently waiting, waiting for that setup that I can just really jump on and get aggressive on, but you know, you’ve just got to sit tight and wait for that opportunity. So maybe it will be tomorrow, maybe it will be early next week.
+
+I’ll be here ready to strike as soon as I see that A quality setup. Okay, so that’s it for today. I’ll see you all first thing tomorrow morning. All right, bye guys. Oh hey, I didn’t see you there. I was just working on the dream board for my next home run trade. Hopefully it comes soon. Until then, make sure you subscribe to get email alerts any time I go live or upload new videos. Until then, happy surfing.

@@ -1,0 +1,34 @@
+<!-- source: https://www.warriortrading.com/dug-out-of-hole/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Spent morning digging myself out of the hole!
+
+## Spent morning digging myself out of the hole!
+
+All right guys, we’re going to do a little Midday Market Recap here. This is actually, believe it or not, my third Midday Market Recap. The first one, I was recording the wrong screen. The second one, my mic didn’t work, and so now we’re doing it a third time. This is going to be a quick recap because the first one was half an hour, the second one was 20 minutes. This one’s going to be even shorter. I’m not doing this for another two hours until I get it right.
+
+This is the 132nd day of the year. I’m finishing the day up $415.71. Not bad. What’s interesting is that out of the four trades, these three didn’t work very well. I only really had one good trade. Despite just 25% accuracy, I ended up having a really decent day. That’s because I focus on A quality setups that have lots of potential and I keep my[ stops ](https://www.warriortrading.com/stop-order-definition-day-trading-terminology/)tight on setups that … I just keep my stops tight in general.
+
+We’ll go over these trades, starting with ZN. First trade of the day here. Now, on this one, this wasn’t on my [gap](https://www.warriortrading.com/gap-definition-day-trading-terminology/) scanner. I wasn’t watching it. I didn’t think it had any potential. I had no idea I was going to trade this one today, but right out of the gates it started to pop up. It pulls back a little bit and I was like, “All right. First candle to make a new high will be my entry”, so I got in here at 38.
+
+You can see my orders right here, 38, 38 and 39, 7,500 shares. Now it’s very typical for me to place orders like this. When I use my hotkeys they’re only for 2,500 shares so I press it three times. When I build out the order in my order entry form, I still use 2,500 shares as my default size and then I just press it once, twice and three times. I just feel more comfortable doing that. That way if I get in and I immediately realize maybe that there’s a hidden seller, I won’t add anymore. I’ll just say, “Whoa, I’m going to slow down.”
+
+Or if I instantly start to see a false breakout I won’t keep adding. I’ll just stop adding. That’s why I start a little on the small side and then I continue adding. Unfortunately this one, it popped up to 43 and then immediately did a very harsh rejection and goes all the way to red. This is what we call a bearish engulfing candle, the red candle, bigger than the previous green candle. Honestly just a horrible, horribly green, horribly red candle there.
+
+I’m glad I stopped out at 34 with $350 lost. If I’d held all the way through this pullback I could have lost over $2,000. Just really not a very clean stock, so when that’s the way you start your day, you have to get a little cautious. Okay, clearly things are not feeling right. I’ve got to be a little more careful. Second trade, KTOV. On this one I started with 2,500 shares, tried to double to 5,000. Only got another 600 so I only had 3,100 shares of it.
+
+You can see here I got in for what I thought was going to be the first five minute candle to make a new high right here on that green candle with [Adoji 00:03:14]. We ended up having another false breakout. Up to 65 and then down to 53. Not clean at all, so very disappointing there. I made 64 bucks because as soon as I recognized it wasn’t going to make a five minute candle new high right here, I stopped out.
+
+Made two cents with 3,000 shares, but it’s not what I wanted, so basically another trade that didn’t work. Third trade, MBRX. Now this one was on our gap scan, but as soon as the bell rang, it just sold off really hard. As it started to pop back up I was watching for a red to green move and we got a little consolidation right at 220 and 218. I added at 219, 219 5,000 shares for the break over 220, target high of day, 225.
+
+We hit 225 and another false breakout. On this one I lost 400 bucks, just under. So three trades in a row no follow through. At that point I was like, “All right, maybe today’s just not a good day for me. Maybe I’ll just throw in the towel,” and I was down $688. Now I made $1,800 yesterday, so being down 688, not the end of the world, but obviously I don’t want to let it get too far, too much further into the red because before you know it it can be down 1,200, down 1,600 and then I’m giving back everything from yesterday.
+
+I was cautiously looking for the next trade. CAPR, very strong right out of the gates. It was not on my watch list because it’s a lower priced stock. Maybe it should have been, but it ended up as you can see squeezing from $1 all the way up to $1.33, so I decided to watch it for a five minute setup. I said I’m not going to trade the one minute chart on this. I’m going to trade the five minute. My entry will be the first five minute candle to make a new high. The high of this red candle, the first red candle of the day was 127 and so I got in at 127 and 128 as that candle, the next candle that’s green, broke the high of the previous candle.
+
+We [squeeze](https://www.warriortrading.com/short-squeeze-definition/) up to a high of 134. Pull back for a second and then we end up squeezing up all the way to 62. In hindsight with 10,000 shares I probably could have made more money on it, but I sold half at 138 and then had a couple orders out to sell more. They didn’t fill. I canceled them and then sold more at 137, 139 and 142.
+
+Now one of the things I was showing everyone during my earlier Midday Market Recap is the way I put out the orders to buy. So someone was asking why I use so small, why I use 2,500 shares times three. I enter my order like this and then if I want to get in I just go one, two, three, boom, boom, boom. I’m in. I can easily cancel them, but I seem to prefer to do that versus having to manually type in 7,500 shares because sometimes I want to take 7,500. Sometimes I want to take 10,000. Sometimes I only want to take 2,500.
+
+So I just leave it at 2,500 and I can go up or down as I’d like. All right? In total, I was able to make $1,000 on CAPR, get myself out of the hole, into the green and so that’s a good day. Green is good. It’s my fourth consecutive green day. So far this month I’m green on 10 out of 11 trading days so that’s the type of accuracy that I like to see. I’d like to be green tomorrow and Thursday, have a solid green week here. Then I’m out Friday, but I’ll be back next week.
+
+All right? That’s it for today. If you guys are going to trade in the afternoon, make sure you trade smart, otherwise I’ll see you first thing tomorrow morning. Oh hey, I didn’t see you there. Well. I was just working on the dream board for my next home run trade. Hopefully it comes soon. Until then, make sure you subscribe to get email alerts anytime I go live or upload new videos. Until then, happy surfing.

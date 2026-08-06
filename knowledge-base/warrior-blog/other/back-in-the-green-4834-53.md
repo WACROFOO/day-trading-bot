@@ -1,0 +1,58 @@
+<!-- source: https://www.warriortrading.com/back-in-the-green-4834-53/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Back in The Green! +$4,834.53!
+
+What’s up everyone. All right, here we are, 77th day of the year, second day of May, finishing in the green, up $4,800. That’s what I needed. Just a green day to break the red streak. Made back all of yesterday’s losses, all of Monday’s losses, so now back in the green on the week. And you know what, we saw some really good opportunities today.
+
+I’m getting excited. Maybe this is going to be the beginning of the next high streak. I will love that, so today $4,800. Let’s hope we have a good day again Thursday, a good day Friday. Start to get May turned around and pointing in the right direction. We’ll breakdown all of today’s trades in today’s mid-day market recap.
+
+All right everyone, why don’t we do our mid-day market recap here. Finishing the second day of May up $4,834.58. That is a pretty good day. It’s actually one of the best days I’ve had now in like almost two weeks. It is the best day. Well, no I had a day last Monday where I made $4,800, so I’m pretty much tied with my best day in the last two weeks. But, $4,800, $5,000, that’s an awesome day.
+
+what helped get me there today was NVIV. You can see it around the charts right now. Squeezed out of the gates from eight up to $10.35 a pullback and then a squeeze. Right now it’s hitting a high of $13.12. So, really nice action on this one. If anything I under-traded it. I could’ve been more aggressive on it, but I just held back a little bit. At first, and then I didn’t get back in for this second wave up.
+
+I love seeing it opening up this as much as it is. This is a great sign for [momentum](https://www.warriortrading.com/momentum-day-trading-strategy/). However, you’ve got 2, 4, 6, 8 green [candles](/candlestick-day-trading-terminology/) in a row, this is parabolic. When they get this extended you have to be really careful because when you buy up here, you just position yourself with so much risk.
+
+For right now I’m going to be done with it and be happy with my gains. One of the things I said yesterday is that when you slow down a little bit and you start being more conservative and taking the quick gains, you will miss the first stocks that start to take off because you know, you’re being conservative which the right thing to do when you’ve been in a market where you keep seeing stocks like LEDS that pop up and come all the way back down. Or, SSKM. This is one that I lost $300 on.
+
+I got in at $1.50, it popped up to $1.54 and dropped all the way back down to $1.37. FLKS, I got in this one also. Got an after the circuit breaker halt and look at how ugly this was. This was the one minute set up right here. A little one minute pullback. I got in for the first candle to make a new high and then it tanked. I mean, it was ugly. When you have trades like that, you have to start to be cautious. When you have a tiny bit of profit, you have to start taking it. You can’t just hold and hope for really big moves.
+
+Today on NVIV, when we talked about it pre-market we said it’s interesting, it’s got very light [volume](/volume-definition-day-trading-terminology/), but it does have a recent [reverse split](/stock-split-definition-day-trading-terminology/). It’s the type of stock that if it gets some volume it could work, so it’s worth keeping an eye on. It was up 12%. The bell rings and it starts squeezing up Matt. The room called it out and said, “Hey, check out NVIV, it’s starting to move.” I wouldn’t have seen it most likely if it weren’t for Matt, so he gets the credit on this one.
+
+I saw when he called it out, tried to jump in. Now remember, I use a 10 cent offset so when I was pressing the buy button, I was pressing it at 47 and 48 and it was executing at 57 and 58 because it was already moving that fast. I tried to take 10,000 shares knowing reverse split setup is one of the strongest ones right now. I only fill 2,046 and then this is kind of crazy, four seconds later, I added another 2,500 shares $1 higher. That’s how fast it moved. I added more at $1.96, $9.96 cents and sold at $10.24, $10.23 and $10. The rest I sold at $9.50.
+
+That was through this pullback holding, up into this move to $10.40 was the highest. All in all, that was a really solid trade and guess what, it ended up coming almost all the way back down to $8.40. And so I thought, look, another stock typical not holding its levels, just showing weakness and so I just stopped watching it.
+
+It then kind of did this, this little curl. It kind of started to move up. It hit $9.50 and I was still like, “Well, I don’t know. I’m not that interested, not sure,” because at this time, I had just taken trades on these three and basically given back some of my profit. GNPX was a small winner, but nothing too impressive. So I just didn’t think we were going to see a lot of momentum.
+
+It then pops up here to $10 and I’m like, “All right, it’s interesting.” But then look, it goes from $10.07 all the way down to a low of $9.35. That’s a big drop right there. It doesn’t look very nice. And then boom, it takes off. I don’t know, someone jumps in, it pops up to $10.30, pulls back, and then it really started to open up. It squeezed into a circuit breaker halt. Now we’ve got a high of $14.
+
+This is one of those stocks where hindsight is 20-20, yeah, I should’ve gotten back into it. I could’ve been more aggressive, I could’ve tried to scalp it, I could’ve made more money on it. But remember, today’s a day where the caution flag was up right. That orange flag saying, “Slow down. Be really careful. The market has not been friendly to you in the last two weeks. You’ve gotten hit in the face eight out of the last 10 days. So, if you have profit, take it and run. Whatever you do, don’t give it back because the market wants to take it back from you.”
+
+So, I followed the rules there. Yeah, I did take bigger size on the first entry and NVIV. If I had gotten filled a full 10,000 shares, well, it would’ve been a $10,000, maybe even a $15,000 winner and I would’ve been really in the driver’s seat. But, you know, I didn’t and that’s fine. I got a partial fill, $4,800 of profit. This move here, I didn’t really expect it. I didn’t think it would open up as much as it did.
+
+We do often watch this setup for a break over high of day, but the problem is that it was occurring at $10.30 and it was after I had just had one loss on FLKS, one loss on SSKN and a third loss on GNPX. I took two trades on GNPX. The first trade I was long at 14 for the squeeze here, sorry, I was long at 15 for the squeeze here. I just jumped in at the whole dollar and rode the momentum. So, it was a higher risk entry and made $1,000.
+
+I then got back in for the first five minute candle to make a new high, which was over $14.96. So, we had this green candle here. I was waiting for the first candle to make a new high. It broke a new high here, hit $15.22 and then dropped to $14.24 and I lost $300. So I was like, “Look, I’ve had three losses in a row. I’m not feeling the momentum. I got to slow down.” Maybe today was just a day where I just get one good trade and that’s it.
+
+So, I followed my rules and I stepped back before I gave back more gains. I was up I guess maybe at one point like $5,500. So you know, hindsight’s 20-20 but I love seeing this type of momentum. This has room on the daily chart to $16.75. Right now I can’t buy it though. Even if I wanted to, I can’t be a buyer after 2, 4, 6, 8, 9 green candles in a row. It’s just too extended.
+
+So I would say, watch for the first pullback. Maybe some traders are looking to short this for a move back down towards the nine moving average. That might work if you have shares available to borrow, I don’t. It might be a short term reversal here, but be mindful that recent reverse split stocks can create big technical breakouts and this thing could go higher. I mean, there’s no reason that it couldn’t. So, just be careful if you are thinking about going to the short side.
+
+However, right now I can’t be a buyer. I got to wait for a pullback. And by the time it does pull back and gives us two or three red candles, well, it’s going to be noon time and I’m not going to take a lunchtime trade. So, I think for me, I’m just gonna say hey, $4,800 is a great day of trading. Did I capture every opportunity out there? Maybe not, but I’m walking away green and I want to do it again tomorrow.
+
+I just want to break that red streak, and today is you know, the first day of hopefully green streak. That’s what I just want to think of it as. I’m thinking that this might be an indicator of momentum that we’ll see again later in the week. We saw some decent opportunities yesterday, I just wasn’t good about my entries. HTBX was really difficult for me. I didn’t trade it very well.
+
+Good opportunities yesterday, good opportunities today. Let’s see what Thursday and Friday have in store for us. Maybe we’ll get some real surprise momentum and a couple opportunities to really give ourselves a little bit of a profit cushion. So, as of right now I’m back into the green on the month of May, which is awesome. Don’t like starting in the red, but I’m only green by like $1,200. I know that relatively speaking $1,200 in two days is fantastic, but you know, I want to get a little closer to $10,000 on the week. That’s my goal and I’ve got two more days to move towards it.
+
+We’ll see what we can do. I think right now it’s just a time to get excited. Make sure you’re ready because if we do see that this is the beginning of a new hot streak, I want to make sure every single one of you guys are able to capitalize on the opportunities. When a stock goes from $8 to $14, there’s a lot of windows in here. So, even if I chose not to trade this right here, you guys having gone through the Warrior Pro class and many of you have, you should know that this is a pullback set up.
+
+A pullback under high a day is a possible short squeeze and that’s exactly what happened. Pullback under high a day again, in a hot market on day five of a hot streak, I would’ve slammed this with some big size 5,000, 10,000 shares. After a two week cold streak, I’m just a little bit gun shy and I think that’s the right way to be right now, but this is a setup that you guys should know. So even if I choose not to trade it, you can trade it on your own.
+
+That’s why I built Warrior Trading. I wanted to make this education accessible to beginner traders so you guys could learn how to trade, so you could take the same trades that I take every single day regardless of whether or not I’m there. You don’t have to just be a follower. You can learn to carve your own path. I hope you guys did pretty well. NVIV I know I saw a bunch of you post $2,000 winners, $3,000 winners, $4,000 winners, $5,000 winners.
+
+Really love seeing that. John, I saw him post a $2,500 winner on it. So, good opportunities, some good profits and why don’t we see if we can do it again tomorrow and put down two back to back green days. That would be really nice here at the beginning of the month.
+
+Alright, that’s the game plan. I hope you guys have a great afternoon. We’ll be back at it first thing tomorrow morning, nine, nine fifteen for pre-market analysis and we’ll see if we can find a couple more strong stocks to trade. All right, that’s it from me. I’ll see you guys first thing tomorrow morning.
+
+If you’re still watching, you must have really enjoyed that video so why not subscribe and get email alerts anytime I upload new content? Remember, when you subscribe, you become a member of the Warrior Trading family.

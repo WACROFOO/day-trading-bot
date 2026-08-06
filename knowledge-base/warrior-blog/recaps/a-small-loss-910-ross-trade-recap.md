@@ -1,0 +1,32 @@
+<!-- source: https://www.warriortrading.com/a-small-loss-910-ross-trade-recap/ -->
+<!-- lastmod: 2025-01-11 -->
+
+# A Small Loss -$910 | Ross’ Trade Recap
+
+What’s up everyone? All right, so second red day recap in a row, down $910, but you know what, I’m not giving back more than one good day of profit, and that’s important to me. You know, a small loss, it’s disappointing. I was really hoping we’d have some hot momentum today. There was some momentum on IPWR, that’s a stock below a dollar, or at least it was at the time. In this recap I don’t know what it’s gonna be at by the close. But IPWR, cheap one. Kona cheap …
+
+All right everyone, so we’re gonna go over the trades from today. Going to finish the day down $910, so second red day in a row which is a bummer, but at the same time keeping the losses small, relatively speaking, which is good. The three stocks I traded, ZKIN, this one popped up on the scanners. As you can see here it squeezed up to a high of 39 and then dropped all the way back down to 203. I got in it at $2.26 and got back out for a $4.30 profit. Nothing really exciting on that one. Did not hold its levels. I was looking at the potential on the daily chart room up to 277, but didn’t go through there.
+
+UXIN, this one surprised me a little bit today, that it gave us the opportunities that it did give. I took three trades on it. One winner right here on that first one I’m gonna make a new high, which was $180. The second winner right here, which was about $300 and it put me up $580 on the name, and then my third trade I just took right here, anticipating that it was going to break over the high of 93 and I was going to be able to sell it up at $3, and I was anticipating a high day break in getting in a little early. I could have waited for the break at 93 but I wanted to get in a little early, and then stopped out right here and gave back the $500 I had made, and I’m now red $157 on UXIN.
+
+Kona, this was a trade that hit the scanners, squeezing up, got halted on a circuit breaker right here at 87. I jumped in at 98 cents for the break over $1, looking for that whole dollar roll, which is when we get the break of a dollar and then a squeeze into often a second circuit breaker halt. Ended up hitting a high of $1.07 and then immediately coming back to 84 cents. Stopped out quick, down $750.
+
+So, you know, I really … like, today is just kind of another, just, bummer of a day. No momentum. We started the day with a gap scanner that was totally dead, nothing on this gap scanner at all. It looked good. I mean, absolutely nothing. Tried to work with what we had but ZKIN was no good, Kona was no good, and UXIN I’ve never liked trading this stock. I’ve always found it to be difficult, down $157 on it, like, it doesn’t matter. It’s not the end of the world. Kona’s the one that’s a little bit of a bummer, but you know, you got to know when to walk away and today is one of those days where I only have two losses, but my winners are so small. I guess I have three winners and two losses, red on the day, the winners were tiny, the losses were fairly small, but bigger obviously than the winners.
+
+So, I’m really just trying to embrace that last week making $25,000 was a big step up. You know, and this week is kind of like this, so, well actually this week, if we do this correctly, if last week was $25,000, this week I went up $1,800 then down $2,500 and now down another $900, so kind of just like hanging out here. And if I just have to hang out and wait for these next green trades and that next $25,000 winner, you know, that’s what I’ll do. I’ll just sit tight.
+
+There’s no reason to force it. So, I’m not getting emotional, I’m not trading with big size, I’m just, you know, kind of grinding my way through and today’s the day where I picked up a couple more losers than winners, so just gonna shut it down. I’m not gonna hit my max loss. I’m not even gonna go there, you know, just gonna leave it alone.
+
+Well, I was negative on UXIN because this is one that I’ve really never done well on. I was honestly surprised that it moved up as much as it did from here to here. Now I took the first five minute candle to make a new high right here, yeah, and it did a false break out of 65, dropped back down, and then it ran without me. For those of you who’ve been watching me trade for a while, you know that this isn’t a home run type of stock.
+
+Yeah there was some opportunity on it, but it’s not a home run. And the best I could have done on it, you know, might have been $1,000 or a little bit more, but this wouldn’t have been a stock that would have given me my daily goal probably under any circumstances, just because it’s very hard to read the level two with it being as crowded as it is. Lots of big sellers, 22 million shares of volume, reading the tape becomes a lot more difficult. You see a lot of false break outs in the movement on the tape, so you got to know where your edge is.
+
+But you know, if you like the set up, if you feel good about it, there’s no reason not to trade it, but yeah, usually not my cup of tea.
+
+So anyways, we’ll finish it up here and live to trade another day. Be back at it first thing tomorrow, hopefully we have some better stocks on the scanner tomorrow and can finish this short week with a green day. Green on Monday, red here Tuesday, Wednesday gonna try to be green on Thursday. You know, one of the things that’s really important is to not ever go red more than one good day of green. So my daily average is $2,000 per day. So, you know, as long as I’m not losing more than $2,000 on a red day I’m usually okay with it because it’s like, whatever, one good day and I’m right back at it. It’s not a big deal.
+
+When I lose three, four, five grand, now I’m talking about needing two good days to get back out, and that becomes more difficult. So, you can do down $7,000, $10,000, $15,000, $20,000 now you’re talking about weeks to get back out of the hole. So keeping those losses as small as possible so you’re never giving back more than one good day of profit helps keep things in perspective. All right?
+
+So anyways, that’s it for me. I’ll be back at it first thing tomorrow morning, pre-market watch list around 9:15 and I’ll see you guys then. All right, bye everyone.
+
+If you’re still watching you must have really enjoyed that video. So why not subscribe and get email alerts anytime I upload new content. Remember when you subscribe, you become a member of the warrior trading family.

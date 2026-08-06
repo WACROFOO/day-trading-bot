@@ -1,0 +1,42 @@
+<!-- source: https://www.warriortrading.com/momentum-back-market/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# +$1,696.04 as the Momentum is coming back into the market!
+
+## +$1,696.04 as the Momentum is coming back into the market!
+
+## 
+
+All right everyone. So, time for our midday market recap. We’ll go over the trades from today, another really great day, $1,696.04. I mean, that’s a really great way to start the week. $4,000 yesterday, plus another just about $1,700 today puts me up right around $5,500, $5,600 on the week and it’s going to put me up about $8,500 on the month, which is a really nice way to start the month after September, which was so choppy.
+
+Let’s see, so 185th day of the year here and, you know, today, I’m finishing today, $1,700, which feels good, but I was up $2,700, so I gave back $1,000, so I’m not really ending the day feeling super on top. I feel a little bit like, well, it was a really, really good day and then I gave back a little bit of profit and then, just said, I’m done for the day or whatever.
+
+Let’s see, let’s go over the trades from this morning. First trade, ROKA. This was right off our watch list. No, I think yesterday was 184, yeah, yesterday was day 84, today’s day 185, at least according to my records here. But, I’ve missed some days. It’s my 185th trading day. Some people, if you didn’t miss any days, you’re further ahead than me. So, anyways, first trade of the day was ROKA. This was straight off our watch list.
+
+This morning we had three stacks on the watch list, ROKA, HMNY and we were sort of watching, what was that, KALV, but that was the stock we weren’t super familiar with, so I said I wasn’t totally sure about it.
+
+Anyways, ROKA, first stock that was on the watch list, pre-market high was, let’s see, 135 and basically as soon as the bell rang, this thing started squeezing up. It popped up to, you can see a high of 178, and as it was squeezing up, my first trade was in anticipation of the break of the half dollar. So, I jumped in at 146, 148, expecting that we would break over the half dollar, because it was surging up. As soon as the bell rang, it surged up. In the first one minute candle, we had 500,000 shares of volume. So, you could watch the level two, and you could just see all these orders coming through, so I jumped in for the break at 150, put it up on the ask at 163, 164, 164 and 160. Built $1,000 in the first minute and thirty seconds.
+
+Next trade was SRAX. Now, I’ll say that ROKA ended up going higher, ended up hitting a high of 255 and we traded it a couple more times and I ended up giving back some of that profit, unfortunately, on some of these trades a little further up. I’ll come back to those ones, though. Next one was SRAX, S-R-A-X, hit the scanner, jumped in for the half dollar break, 350, pops up to a high of 364, I sold at 360, tried to sell at 363, sold the rest 358 as it dropped back down. I wasn’t really able to hold that level, I ended up being a little bit on the weak side, but it was on the scanner and we were seeing so much strength in the market, I just wanted to jump in and try to ride the momentum, wherever I saw it popping up. So, that was the trade on SRAX and the next one was LINU.
+
+Another one that pops up on the scanner, starting to squeeze up, this his a high of 260 from a low of 160, so it moved up a full point. You can see here it hit a high of 238 and then it pulled back and on this pull back here, was the entry opportunity, so I’ll just draw that flag on the one-minute chart. That was the little pull back that gave us an opportunity to jump in, 230, and we squeezed up to a high of 259. So, on that one, made a really nice profit, it was a solid trade, let’s see, in at 230, out at 239, 244, 242, 252 and I sold the rest at 230. So, at the end of that LINU trade, I think I was up like $1,900 or something like that.
+
+Then I see ROKA on the scanner again, or I’ve got it on watch still. So I pull it back up and I was looking for the first five-minute candle to make a new high, which was an entry, right here at 215. Long at 215, I went to 2,500 shares, I should have been … well, you can see I tried to be more aggressive, I didn’t get filled. I only got filled 2,500 shares. I canceled the orders for the rest. It pops up, I’m selling at 33, 32, 27 adding another 400 or so dollars. That one was about $425.
+
+So, decent trade there on ROKA and I ended up getting back in it at 240. It had popped up here, it pulled back a little bit, so I got back in for the second five-minute candle to make a new high, which was right here, 240. That one ended up popping up to a high of 48 and then coming back down and I sold it for a one cent profit. Then, I got back in at 245 right here, we pop up over the half dollar, which I was looking for, the break of the half dollar, gets up to 251, I try to start selling, I don’t get filled. I end up stopping out at 230 and on that one I lost $1,100.
+
+So, I’ll show you that entry, that was, let’s see, right here on this candle on the one-minute chart, which was definitely disappointing, because it just got rejected really, kind of harshly. And you can see, look it happened again here, it happened again here, and it happened again here. Every time it broke over that 40 level, it just got like hammered back down. So, it just wasn’t able to hold those levels, which was really a little disappointing, but … so I gave back 1,000 on that trade, I tried to get back in one more time over 40, then I stopped out of that one, basically break even.
+
+So, great start to the day. A little bit slower on those last two trades, so a total of five winners today and two losers, seven trades total, up $1,700 or just under and that’s a solid day. So, I’m not going to push my luck. I’m going to be happy with that. It’s above my $1,000 daily goal, so I’ll be happy with that. That puts me well over my weekly goal now, 5,500, 5,600, plus or minus after commission, so not a bad way to start the week.
+
+Hopefully we see this continued momentum here Wednesday, Thursday and Friday, because this right now is shaping up to be a really fantastic month. Slow and steady is the name of the game and those first couple trades are the most important, because each day the first two to three trades are my opportunity to build a cushion. Once I have the cushion, I’m in the driver’s seat, so the goal tomorrow will be to try to build that cushion on the first couple trades and hopefully we have some good looking set ups.
+
+Now, HMNY, I saw it on the scanners, but I just felt like the spreads were going to make it difficult and I just didn’t feel super confident on it. The place I was watching it last, which I told traders, I said, “Let’s watch to see what it does here, because this looks like it’s setting up for a break out over 2,550, but I bet it’s going to be a false break.” And look, it went from 2,550 all the way down to 2,376. I mean, it just totally tanked and then went back up to high a day.
+
+That’s the way that one trades, so it’s really frustrating. So, I think I’m glad today, I stayed away from it and just not getting chopped up. I found a way to get into the market, capture $1,700 and get out, so anyone who is green in the chat room, on Facebook, on YouTube, those of you watching, if you’re green, you’re doing something nine out of ten traders can’t do consistently. Don’t worry if you don’t get everyone of them or you see something run without you. Find an opportunity to capture a little bit of profit, put it in your pocket and then call it a day.
+
+So, it’s [inaudible 00:09:03] here calling it a day as we come into the lunch hour. I’ll be back at it first thing tomorrow morning, 3:00 p.m., where your ProMentor session today is going to be with Mike. He’s going to be teaching you guys his trading strategy using pivots and levels on the higher price stocks. So, large cap class starts today and it will run Tuesday, Wednesday, Thursday and Friday, 3:00 p.m. eastern.
+
+Okay, so look forward to that. All the Warrior Pro students and the Inner Circle students and everyone else, I’ll see you first thing tomorrow morning in the chat room. All right, have a great afternoon everyone.
+
+Oh, hey. I didn’t see you there. Well, I was just working on the dream board for my next home run trade, hopefully it comes soon. Until then, make sure you subscribe to get email alerts anytime I go live or upload new videos. Until then, happy surfing.

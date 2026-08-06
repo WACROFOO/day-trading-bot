@@ -1,0 +1,51 @@
+<!-- source: https://www.warriortrading.com/up-over-2k-7-trades-7-winners/ -->
+<!-- lastmod: 2025-01-08 -->
+
+# Up over $2k – 7 Trades, 7 Winners!
+
+## Up over $2k – 7 Trades, 7 Winners!
+
+What’s up everyone. All right, so today’s the second trading day of March finishing the morning up over $2,000. I took seven trades today and had seven winners. Accuracy. On point. That’s what I like. The goal today wasn’t to try to make a lot of money, it was just to try to keep building the cushion.
+
+I have this memory of being younger and being at the ocean and I was on one of those piers. One side of the pier had lobster boats all lined up and the other side was kind of like rocks, it was sort of like a jetty with rocks and sand. I remember falling between the dock, the pier, and where the sand was and I started to slip down. I started to slide down and I could see the ocean down below me.
+
+I might have been seven or eight years old and I was just trying to hold onto the sand, hold onto the rocks and try to get my traction, first, to stop sliding and then just to hold traction. Then, to start to get a little bit of headway and then once I started to get going I scrambled back up. That is almost exactly what I’m doing right now with my trading.
+
+February was sliding down. The end of February, trying to regain a little traction at the bottom and right now just trying to crawl, just get my way back up away from the water line, which for me is the red line. I don’t want to go red on the month of March, I just want to start to make a little progress, get green, and then once I build a little bit of a cushion then start to stride and really try to get some progress, make some really good gains.
+
+Right now I’ve got $2,200 today, $1,400 yesterday, so $3,500, $3,600 profit on the month of March. You know what? If I stop right now I will have made more in March than I made last month so the bar is set pretty low but my target right now would be $20,000. A $20,000 month is really bare minimum for me. Even if I’m doing $20,000 a month I would be only at $240,000 on the year, and last year was $380,000.  A quarter million is just like … If I can’t do that, I don’t even have any business trading anymore. That’s how I feel.
+
+$20,000, that’s the goal, that’s $5,000 a week. Obviously, we only had two days this week for the month of March so it’s going to be a little bit of a slow start here but really just trying to get a little bit of traction. Then, once I have a little bit of profit then maybe I’ll feel comfortable taking a little bit more risk. One of the things I talked about yesterday is that it’s not uncommon for me at the beginning of a month to take a little bit of risk knowing I’ve got the whole rest of the month to make up for it if I do make a mistake, but I don’t want to do that this month. Right now I need a confidence boost of just being in the green.
+
+As you can see, I’m trading from a hotel. JFK is right there. I’m going to fly out later this afternoon and head to California, another week in the sun, I’m looking forward to it. I drove down last night, this wasn’t the plan. This was a last minute game plan change because of a snow storm. It’s snowing really hard back up north and I knew that if I waited to drive down this morning the drive would take forever and it would be dangerous.
+
+Drove down last night, staying at the hotel at the airport and trading on hotel wifi. It’s not exactly what I wanted but I made do with it. A little bit of lag. Internet speed was only about 3.6 megabits per second, which is quite slow, but it didn’t stop me from making 2,000 bucks. Drove down here, got settled in, traded this morning, and now I’m getting ready to head out, go to the airport and get on the plane. All right, so that’s it for me. I hope you guys have an awesome weekend, get some rest and watch today’s midday recap. Enjoy it. If you have any questions, put the comments in the footer below. I’ll come back and answer them later. Let’s get into it, break down today’s trades.
+
+All right, so we’re going to break down the trades from this morning, finishing day up $2,188.88. Not bad. It puts me up about $3,600 on the month of March and that’s something that I feel good about. I actually never got myself really into the green in February because right away the first day I lost $7,000 so this is a month where they’re not bad either. Let me … My headset cancels out here. Sorry.
+
+Finishing up $2,000 today, $1,400 yesterday, green is good. All right, so let’s break down the trades here. Let’s see, I’m going to put on my music in the background because if I don’t do that my headset will turn itself off for inactivity. All right, so there we go, got my music in the background. All right, so let’s see. Bam, bam, bam.
+
+First trade of the day Zzan. Let’s scroll this back so you guys can see it. All right, and I’ll bring up my broker screen here. These are the trades. Only two stocks I traded, Zzan and AVGR. Seven trades, seven winners. Zzan this morning started to pop up. There was news out of, I think it was a patent so it was squeezing up a little bit and it squeezed from $6 all the way up to $9.76, which is obviously a pretty big move. It then pulled back, pre-market, consolidated, and I was watching it for a break over the VWAP once the bell rang.
+
+The bell rang and as you can see here it popped up so my entry was based on a break of the half dollar. I like entries around half dollars and whole dollars. Right here we had this little pivot right about $8.45. The bell rang and as soon as it rang, boom, I’m sending my orders to buy it, $8.41 and $8.48. It pops up, I sell a quarter at $8.71, I sell more at $8.70, $8.83, $8.60, I’m out the rest. A small scalp, about $800 profit on that first trade. It wasn’t a massive winner but not bad.
+
+You can see in the first candle it popped up and then it dropped back down, but then the second candle it continued higher so then I did a one minute opening range break out. Remember, the one minute opening range break out is where we buy the top of the first one minute candle with usually a 15, 20 cent stop. I got in a little early, anticipating that this would happen because we saw so much volume coming in. I got in at $8.94 and let’s see, that was 2500 shares, $8.84, sold at $8.99, $8.99, and $9.19. Now I’m up about, I don’t know, close to $1,000 on the name. That’s trade number two.
+
+Trade number three. I said, “Okay, now we need to let it pull back for a second.” It pulls back and I got in right here at $9.25, anticipating the first one minute candle to make a new high on this little one minute flag, small little one minute flag there. I’m back in at $9.25. I was a little more aggressive on my size on that one, I think I was actually a little too aggressive. I immediately got out of half of it when it felt like it wasn’t opening up the way I thought it would. Sold the rest at 29, 31, and then it finally did pop up and I sold more at 39 and 49.
+
+It ended up working but it was a little touch and go there for a second and I was like, “Ooh, I better lighten up, I don’t want this to turn into a loss.” That was Zzan. Then I took a quick scalp on AVGR. This one hit our high day momentum scanner. I knew there was news on it this morning so I was like, “All right, I’ll give it a stab.” I jumped in at $1.35, ended up selling at $1.36. I only made $25 on that so a small trade, whatever.
+
+Next one, Zzan, I got back in it. At this point, ended up pulling back, as you can see, on the five minute and consolidating sideways. At this point right here I said, “Okay guys, I think this is looking good if it breaks over $8.64 maybe for a re-test of high of day but at least for a little bit of a pop. All right, so this goes sideways, sideways on the one minute chart, as you can see. It then pops up, it tests 65. As it came back up right there that’s where I got in, this time at 52, 56, and 59 with an average of 4500 shares at $8.55.
+
+It pops up to 64, I’m selling at 61, 73, 68, kind of was a little choppy. I think added at 87 and … Yeah, exactly at 87, 3,000 shares and sold on this move up through [inaudible 00:10:29]. Couple scalps there and best exit 909. Ended up giving me $2,163 profit on that stock. You know what? Green is good, it’s really not bad, I’m happy with that. This is a great day, accuracy on point. This is what I needed to go into the weekend.
+
+I’ve got a six hour flight ahead of me and the last thing I wanted to do was sit on that flight and think about how I lost $2,000 this morning or whatever. I just wanted to finish the week on a good note so mission accomplished, green this week on four out of five days. I’m not even actually sure what my profit is for the week, let’s see. Looks like my profit on the week is about $4,000 so that’s not bad, green is good. It’s not the best week ever but, hey, $4,000 is not bad.
+
+Thanks, Ronald, I’ll keep that in mind the whole time I’m on the flight, that’s a good pep talk there. All right, so let’s see. Yeah, that’s about it for me, just another green day and hopefully we’ll continue this momentum next week. It’s nice because we had great opportunities on Thursday with TENX, good opportunities today on Zzan so definitely seeing momentum coming back into the market and my hope is that it just continues.
+
+Slow and steady we make our way into a really good month and that would be a nice way for me to kind of clean the slate or whatever from a red month of February. All right, so that’s the game plan, I hope you guys all have an awesome weekend, get some rest. Those of you watching on Facebook and YouTube, go back and leave comments, I’ll come through and answer them later on. Guys, study up because next week, Monday morning’s going to be here real quick and I want to make sure you guys are all able to capitalize on these opportunities.
+
+I think I walked you guys through all these trades pretty well today as they happened live and I will be doing the same thing Monday morning. All right, so enjoy your weekend and we’ll be back at it next week.
+
+If you’re still watching you must have really enjoyed that video so why not subscribe and get email alerts anytime I upload new content? Remember, when you subscribe you become a member of the Warrior Trading family.
+</div

@@ -1,0 +1,20 @@
+<!-- source: https://www.warriortrading.com/great-opportunities-in-the-market-6675-ross-trade-recap/ -->
+<!-- lastmod: 2025-01-11 -->
+
+# Great Opportunities in The Market +$6,675! | Ross’ Trade Recap
+
+What’s up, everyone? All right. So, another newly $7,000 green day solid momentum. SOLY continuing the move today, ELTK making a three hundred percent move, some opportunities. Pedal to the metal, this is the time to be aggressive. I think we’re going to get a really strong finish to the month of May, so let’s keep it going here on Thursday and Friday. I’ll be trading on my traveling trading station, and we’re going to continue to capitalize on these opportunities. All right. See you guys first thing tomorrow morning.
+
+All right, everyone. We’re going to do our mid-day market recap here and go over the trades from this morning. You know what, another solid green day, and another day kind of like yesterday where I did well, but I could’ve done better.
+
+Here’s the P&L today. I’ll see if I can make this font just a little bigger. Really, I can’t complain. It’s a solid green day, $6,675. I’m not sure if this is actually the right spot. No, that’s a different spot. Anyways, that’s where I’m going to finish the day. I was up over $10,000, and then gave back profit on this drop right here on ELTK. This one was wild, up over 300%, making some really big moves. The thing is I missed most of the good setups. It’s squeezed in those circuit breaker halt here. I’d scalped it out of the halt, but it dropped and then went sideways. I then got back in right here, but only was small size. Got to move here up to this level, scalped it again with small size. I was up about $4,000 going into this halt, but I was still holding down here. It resumed and dropped down and, boom, that profit was gone.
+
+Now, I think the reason this one opened lower, so much volume, 14 million shares of volume, and I think that there were some people taking probably big orders for the short side. I think that we just didn’t have the imbalance to the buy side as strong as we’ve had on other stocks and, as a result, we got a fairly kind of poor result coming out of the halts on both trades. So I went from being up 4,000 on that, to being up only $800 and, you know what, for me, at the end of the day, green is good. I’ve got $6,600 more than I had this morning, more than I had an hour ago. Was I up 10,000? Yeah. Would it have been nice to walk away with a full 10 grand? Sure. But you got to take some risks, and that’s how you get big green days. Other days you take the risk and end up giving back a little bit. But as long as you’re walking away with profit, you’re doing well.
+
+This is my trade on SOLY. I got in this right here for the break over $22. Break over $22, I’m in, 2,000 shares, and there’s that squeeze up to 2683. Circuit breaker halt resumes, ends up hitting a high of $29, $5,136 on SOLY.
+
+Now, this is a higher-priced stock, but the only reason I traded it was because yesterday, it was at $8. I was actually up over $12,000 on this one yesterday before I ended up taking a little bit of a loss on it through this consolidation in the afternoon. By 4 PM, market closes, it goes up to $22 after-hours. So, some really impressive action and VLRX was a quick scalp off the scanners.
+
+Overall, really happy with the action, but I got to run. I’m flying to San Francisco, and I’m going to be trading on my traveling trading station for the rest of the week. So, I will see you guys first thing tomorrow morning and hopefully we see this momentum continue. We’re having an epic finish to the month of May, so book that profit, time to be aggressive. I’m stepping up and taking bigger share size and we’re going to see if we can finish this off with another 10, 15, $20,000 over the next two days. All right. That’s the game plan. I’ll see you guys first thing tomorrow morning.
+
+If you’re still watching, you must’ve really enjoyed that video. So, why not subscribe and get email alerts any time I upload new content? Remember, when you subscribe, you become a member of the Warrior Trading Family.

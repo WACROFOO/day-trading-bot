@@ -1,0 +1,195 @@
+<!-- source: https://www.warriortrading.com/day-trading-terminology/ -->
+<!-- lastmod: 2026-01-28 -->
+
+# Day Trading Terminology:  Top Trading Terms Every Trader Should Know!
+
+# Day Trading Terminology Every Trader MUST Understand
+
+[Day trading](https://www.warriortrading.com/day-trade-definition-day-trading-terminology/) terminology is something every trader will need to understand.  We’re going to start with basic terms that most day traders will already be familiar with.  Then we’ll jump into the more advanced terms that you may still have questions about.
+
+Remember, to quickly search for a term you can search this page using the Control + F button!  If you have any questions as you are reading these definitions please don’t hesitate to reach out by [contacting us](https://www.warriortrading.com/contact) today.  Remember, as part of our [Day Trading Courses](/trading-courses/) I will explain each of these terms & how I use them in my day-to-day career as a trader.
+
+## Basic Day Trading Terminology
+
+Day Trading: ([see complete definition](https://www.warriortrading.com/day-trade-definition-day-trading-terminology/)) [Day Trading](https://www.warriortrading.com/day-trade-definition-day-trading-terminology/) is defined as the simple act of buying shares of a stock with the intention of selling them on the same day
+
+Professional Day Trader: A professional day trader can informally be considered somebody who day trades for a living, but from a regulatory perspective, it refers to a trader who is licensed with either their Series 6, 7, 63, 65, or 66.  Traders who are licensed pay higher fees for market data.   That’s why when you open an account you have to tell them if you are a professional (licensed) trader.  Day traders are not required to be licensed if they are trading their own money.
+
+Pattern Day Trader Rules: ([see complete definition](https://www.warriortrading.com/pattern-day-trader-rule/)) The [Pattern Day Trader](https://www.warriortrading.com/pattern-day-trader-rule/) (PDT) Rule states that if a trader takes 3 or more day trades in a 5 day period, they are a day trader and they must maintain a minimum account balance of $25,000 USD.  Many traders who are unable to maintain that balance will trade at either a Prop Firm (see below), or at Suretrader.
+
+Swing Trading: ([see complete definition](https://www.warriortrading.com/swing-trading-definition/)) [Swing Trading](https://www.warriortrading.com/swing-trading-definition/), in contrast to Day Trading, requires overnight hold times.  Swing traders will hold stocks for at least 1 night, but perhaps many nights.  These are very short-term investments.
+
+Stock Market Hours: The market is open from 9:30am -4pm EST Monday –Friday. There are holidays when the market is closed or closes at 1pm.  Pre-market and after-hours trading is available but liquidity is often very low because there aren’t a lot of buyers or sellers trading after hours.
+
+Bull or Bullish: This term refers to a strong market of stocks moving up.  This can even be used to reference a specific position  trader is taking.  If they are bullish, they expect the stock to go up.
+
+Bear or Bearish: This term refers to a weak market. This means traders think the price of stocks or a specific stock will be going down.  If they are bearish, they may sell their bullish positions or even take short positions (see below).
+
+Initial Public Offering (IPO): ([see complete definition](https://www.warriortrading.com/initial-public-offering-ipo-definition-day-trading-terminology/)) When a company does an [IPO](https://www.warriortrading.com/initial-public-offering-ipo-definition-day-trading-terminology/), they sell a fixed number of shares onto the open market to raise money.  This could be, for example, 10 million shares. If those shares are priced at $10/share, they will raise $100 mil from the IPO.  This money gets invested into the company for future growth (building factories, strategic investments, etc).
+
+Float: ([see complete definition](https://www.warriortrading.com/float-definition-day-trading-terminology/)) [Float](https://www.warriortrading.com/float-definition-day-trading-terminology/) refers to the number of outstanding shares available to trade. When the company did the initial IPO, they released shares. That number is typically the float, although there are 3 ways the number of shares can change.  The Float is equal to the supply level.  Stocks with limited supply and high demand are the ones that move up or down the fastest.
+
+Share Buy Back: (see complete definition) A Share Buyback program is when a company buys back shares that were sold during the IPO.  By doing this they are reducing the number of shares available to trade and everyone holding shares of the company will see their shares increase in value.  Share Buybacks will decrease the float.
+
+Secondary Offering : ([see complete definition](https://www.warriortrading.com/secondary-offering-definition/)) A secondary offering is an offering that is given after the Initial Public Offering.  Even if a company performs multiple secondary offerings, they are always called secondary (not third, fourth, etc).  A secondary offering will raise money for the company by selling more shares.  This increases the supply of shares on the market and decreases the value of those shares.  This is generally not something long term investors like to see.
+
+Stock Splits: [Stock Split](https://www.warriortrading.com/stock-split-definition-day-trading-terminology/) can change the price of a stock. Apple did a 7:1 stock split.  The $700 stock multiplied all shares x 7 to reduce the price of the stock to $100.  This means if you held 1000 shares at $700, you now own 7000 at $100.  This increased the float.  Some companies will perform a REVERSE stock split.  A 10:1 reverse stock split will take a stock trading at $1.00 and turn it into $10.00.  If you were previously holding 1000 shares at $1.00, you would only be holding 100 shares at $10 after the split.
+
+## Day Trading Terminology: Bulls vs. Bears
+
+Long Side Trading: When traders are “long” a stock, they are buying shares.  This means they have a “long” position and expect the stock to go up.  These traders will profit when the stock moves up, or will lose money when the stock moves down.  They also have a “bullish” position.  To exit a bullish or long side position, a trader may “scale out,” or sell their shares in small portions.
+
+Scaling In or Scaling Out: To enter or to exit a position a trader may “scale.”  This technique, when used to scale in, means buying a partial position at 5.50, and adding (or scaling) with a 2nd position at 6.00.  Due to scaling in with equal sizes, the trader has a cost average of 5.75.
+
+Cost Average: Cost average is the average price of the stock that you paid.  Meaning if the stock was first bought at 10.00, then rises to 11 and you double your position, you will have a cost average of 10.50.
+
+Dollar Cost Averaging: Dollar Cost Averaging is a strategy many investors use, although it’s not used as much by day traders.  This means that if every month you add $1000 of stock even though you were adding at various prices throughout the year, you will have a dollar cost average that helps balance out the big ups and big downs that may have been occurring when you were taking positions.
+
+Averaging Down or Averaging Up: This is essentially the same process as scaling, except that averaging down isn’t something many trader do.  It’s generally not considered a smart trading style.  Averaging down is when you buy a stock at 10, the price drops to 8.00, so you add more shares and bring your average cost down to 9.00.  If you add 2x or even 3x the size to 8.00, you could bring your cost average down as low as 8.50.  The risk is that you are adding to a position that you are already losing money on, and some traders say this is throwing good money at bad money.
+
+Short Side Trading: ([see complete definition](https://www.warriortrading.com/short-selling-definition/)) Traders who are “short” a stock are [short selling](https://www.warriortrading.com/short-selling-definition/) shares and creating a negative share balance.  This means they will be holding -1000 shares.  As soon as they sell the shares they turn a profit from the sale, BUT, they must buy back the shares.  The shares have been borrowed from the broker to sell in advance, with the intention of buying the shares back in a short period of time.
+
+Borrowing:  You must borrow shares from your broker in order to short.  If your broker doesn’t have shares available to borrow, you can’t short the stock.  IPO’s are never shortable since brokers won’t have shares available yet to borrow.
+
+Covering: To close a short position a trader must “cover” their position.  This is buying stocks to cover the shares they borrowed from their broker.  Like a long-sided trader, they can scale out of the short position in small increments.
+
+Days to Cover: Brokers will give traders who borrow shares a certain number of days to cover.  This could be 7 days, 14 days, etc. By the end of this period if the trader has not covered their position, the broker can do it manually and will charge the trader a liquidation fee.
+
+Short Interest: [Short interest](https://www.warriortrading.com/short-interest-definition-day-trading-terminology/) refers to the number of shares all traders around the world are currently holding as a short position against the stock.  If a company has outstanding shares (float) of 10 mil shares, and 1 mil of those shares are short, the short interest is 10%.  When stocks have short interest 30% or higher, there is potential for [short squeezes](https://www.warriortrading.com/short-squeeze-definition-day-trading-terminology/).
+
+Short Squeeze: ([see complete definition](https://www.warriortrading.com/short-squeeze-definition-day-trading-terminology/)) This is when a stock suddenly starts moving up, and traders who are holding short positions start buying to cover their position, or their broker covers their position for them because they’ve hit a max loss on their account. This creates an extreme buy/sell imbalance and can lead stocks to making 50-100% moves intraday.
+
+Short Sale Restriction: Short Sale Restriction (SSR) occurs when a stock drops 10% or more in a single day.  Once a stock has SSR traders cannot take short positions except when the stock is moving up.  Positions can only be taken on “upticks”.  In other words, when stocks are moving up.  That means traders short at the Ask Price, and have to wait for a buyer to buy the shares they are trying to sell short.
+
+## Day Trading Terminology: Account Types
+
+Cash Account: ([see complete definition](https://www.warriortrading.com/cash-account-definition-day-trading-terminology/)) When you trade in [cash account](https://www.warriortrading.com/cash-account-definition-day-trading-terminology/), the amount of money in the account is exactly the same as how much you deposited.  When you take a trade, you have to wait T+1 (Transaction + 1 day to settle).  Stocks take 1 day for transactions to settle (it was previously 3 days).  It’s like waiting for a check to clear.  There is nothing you can do while you wait.  Options trades are T+1 and take only 1 day to settle, which means you can trade with the cash the next day.
+
+Margin Accounts: ([see complete definition](https://www.warriortrading.com/margin-account-definition-day-trading-terminology/)) A [margin account](https://www.warriortrading.com/margin-account-definition-day-trading-terminology/) requires a margin agreement. With a margin account trades still take T+1, but instead of requiring you to wait 1 day before you can trade with that money, the broker gives you credit to trade with the money as soon as the trade has been completed.  This is what allows day traders to take 10+ trades in a single morning.  We can trade the same cash 1000x times a day if we’d like.  All we need is a margin account.
+
+Proprietary Firm Accounts: (s[ee complete defintion](https://www.warriortrading.com/proprietary-trading-definition-day-trading-terminology/)) [Proprietary trading](https://www.warriortrading.com/proprietary-trading-definition-day-trading-terminology/) firms originally were regulated trading firms.  These firms will hire traders, require them to get licensed to trade (Series 6,7,63,65,66, etc), and allow them to trade with the firms own money.  These firms may require traders to deposit up to $10k of their own money, but once they have passed their license, they can get 10x leverage or more.  Some of the best traders could have 10mil or more in cash available to trade.
+
+Binary Options Accounts: [(see complete definition](https://www.warriortrading.com/binary-option-definition-day-trading-terminology/)) [Binary Options](https://www.warriortrading.com/binary-option-definition-day-trading-terminology/) are a way of betting against a stocks price.  These are highly unregulated and illegal in many countries.  You make a bet that the stock will be over/under a certain price by a certain time.  Instead of trading, you are simply placing bets on value of stocks.
+
+CFD Accounts: A Contract-For-Difference account is illegal in the United States.  These are offered by international brokers and for non-US residents.  When you buy a CFD, you aren’t actually buying shares of a stock.  You are buying a contract to buy x number of shares of a stock.  You can then sell back the contract as the price goes up.  Instead of buying actual shares, you buy contracts to buy shares.  The advantage is that in theory you could buy a contract to buy 1mil shares, even if there were only 100k shares available to buy at that price at the time.
+
+Retirement Accounts: Trading a 401k or an IRA account is fairly common.  This is often where traders have already amassed a reasonable amount of capital.  Many firms will allow you to trade a retirement account but there are some restrictions.
+
+◦1. No Shorting
+
+◦2. No Leverage
+
+◦3. Margin is only for trades to settle immediately, not for trading borrowed $
+
+◦4. You cannot access the profits until retirement age, without penalty.
+
+◦5. Growth in [Roth IRAs](https://www.warriortrading.com/roth-ira-account/) are typically tax-free.
+
+Margin: ([see complete definition](https://www.warriortrading.com/margin-account-definition-day-trading-terminology/)) Traders are able to open a [margin account](https://www.warriortrading.com/margin-account-definition-day-trading-terminology/) with a brokerage.  In addition to allow you to trade on borrowed money, they also extend a line of credit to your account for trading.  US Brokers can give you 4x leverage on a $25k+ PDT account, which means if you deposit $100k, you will have $400k in total buying power with $300k Margin being borrowed money from the broker.  There are no fees for trading on Margin during the day, but holding with margin overnight is subject to interest rate fees.  This is called the Margin Rate.
+
+Leverage Rate: The rate that your cash deposit will be multiplied to give you total buying power.  All US Brokers can give you 4x leverage on a $25k+ PDT account.  Suretrader is 6x leverage.  Prop Firms can be 10x leverage or higher. CFD accounts can offer leverage up to 50x which can quickly magnify losses.
+
+Overnight Leverage: Most brokers reduce overnight leverage to only 2x cash balance.
+
+Buying Power: ([see complete definition](https://www.warriortrading.com/buying-power-definition-day-trading-terminology/)) Your [buying power](https://www.warriortrading.com/buying-power-definition-day-trading-terminology/) is your cash balance plus your margin.  In the case of 4x leverage with a $100k cash balance, you have $400k in buying power.  If you take a trade for $250k, you will have $150k in remaining buying power.
+
+Margin Rate: The percentage a trader has to pay their broker in exchange for borrowing money.
+
+Margin Call: Traders who are issued a margin call are in debt to their broker.  The broker will require you to repay the debt and can force you to sell other assets to come up with the money.
+
+## Day Trading Terminology: Placing Orders
+
+Bid Price: ([see complete definition](https://www.warriortrading.com/bid-price-definition/)) The [Bid Price](https://www.warriortrading.com/bid-price-definition/) is the price traders are currently bidding a stock at.  Every stock has a bid.  Lets say traders are bidding 10.00.  Traders can put an order to buy at 10.00, and they will have to wait for a seller to come sell them shares.  Alternatively, they can simply buy from a seller who is sitting on the ask at 10.02.
+
+Ask Price: ([see complete definition](https://www.warriortrading.com/ask-price-definition-day-trading-terminology/)) The [Ask price](https://www.warriortrading.com/ask-price-definition-day-trading-terminology/) is the price traders are currently asking to sell the stock at. Every stock has an ask.  Lets say traders are asking 10.02.  Traders can put an order to sell at 10.02, and they will have to wait for a buyer to come buy shares from them.  Alternatively, they can simply sell to a buyer who is sitting on the bid at 10.00.
+
+Level 1:  ([see complete definition](https://www.warriortrading.com/level-1-definition-day-trading-terminology/)) [Level 1](https://www.warriortrading.com/level-1-definition-day-trading-terminology/) is the Current Bid Price vs the Current Ask Price.  In the above example, 10.00 x 10.02
+
+Spread: The Spread is the difference between the Bid price and the Ask price.  In the above example we have a 2 cent spread.
+
+Market Makers: ([see complete definition](https://www.warriortrading.com/market-maker-definition-day-trading-terminology/)) [Market Makers](https://www.warriortrading.com/market-maker-definition-day-trading-terminology/) create the spread.  They are large institutional banks that are both buyers and sellers of a stock.  They will post a Bid, and Post and Ask.  They create the spread, and the profit by selling shares between the spread.  The larger the spreads, the more the market makers can profit
+
+ECNs: ([see complete definition](https://www.warriortrading.com/electronic-communication-network-ecn-definition-day-trading-terminology/)) [Electronic Communication Networks](https://www.warriortrading.com/electronic-communication-network-ecn-definition-day-trading-terminology/).  If you think of the stock market as an island, there are many bridges we can take to get to the island.  These bridges are called ECNs or Market Makers and they charge “tolls”, or fees, to use their networks.
+
+Routes: Market Makers offer a route that connects individual traders to the market.  When traders choose to use specific market makers or ECNs, they are direct routing.  The advantage is that this can increase the order speed.  Returning to the idea of an island, ARCA (short for archipelago), is a popular route.   Other popular routes include NYSE, EDGX, JPCC, POST, INET.
+
+Smart Routing: Most brokers offer smart routing.  Instead of asking you to direct route your order, they will choose the route they feel is best.  If they have arranged a discounted rate with a certain broker, they may use that route as a preferred route.  They may also see if they have shares available from traders inside the firm before routing your order out to the “island”.   This may not always be in the best interest of the trader.  For that reason, I choose to not use smart routing, and instead direct route my orders.
+
+Dark Pools of Liquidity: Dark Pools of Liquidity are like ports the “island” that are holding shares, but nobody can see them.  Sometimes these shares are being held by firms or institutions and they trade internally out of this pool of shares.  This has a disadvantage for retail traders because if you want to buy 10k shares, you will not have access to the dark pool where 10k may be available.  As a result, you pay a higher price.  Using Dark Pool Routing, you can now ping the dark pools to see if they have shares available.
+
+Level 2: ([see complete definition](https://www.warriortrading.com/level-2-definition-day-trading-terminology/)) In addition to understanding Level 1 and the bid/ask, day traders need to understand [Level 2](https://www.warriortrading.com/level-2-definition-day-trading-terminology/).  Lets start by talking about the Bid.  If the bid is 10.00, there is a buyer sitting waiting to buy shares at 10.00.  But are there other buyers also lined up?  By using Level 2 data, we can see buyers at 9.99, 9.98, 9.97, and so on.  We may seem bids stacked tightly on the Level 2, or we may see them spaced apart such as 9.95, 9.89, 9.74, 9.64.
+
+When we see full market depth on both the [Bid](https://www.warriortrading.com/bid-price-definition/) side an the [Ask](https://www.warriortrading.com/ask-price-definition-day-trading-terminology/) side we are seeing complete level 2.  Although Level 2 is shown with Bids on the Left and Ask on the Right, some software choose to show it as a long line going left to right, with the current price being in the middle.  In addition to seeing the prices where orders are listed, Level 2 also shows the number of shares for each order, and the market maker or ECN (electronic communications network) that is routing the order.
+
+Time & Sales: ([see complete definition](https://www.warriortrading.com/time-and-sales-definition-day-trading-terminology/)) Next to the Level 2 Window is typically a [Time & Sales](https://www.warriortrading.com/time-and-sales-definition-day-trading-terminology/) Window.  This will show every transaction that occurs and will list the price, the shares, the route, and the time.  This transactions will appear red if they occur at the bid price, green if they occur at the ask price, and white if they occur in between the spread.
+
+Remember that the market is a closed system, every buyer has a seller, and every seller has a buyer.  We consider transactions “sales” or “buys” based on the whether the transaction goes through at the bid price or the ask price.
+
+Volume: ([see complete definition](https://www.warriortrading.com/volume-definition-day-trading-terminology/)) [Volume](https://www.warriortrading.com/volume-definition-day-trading-terminology/) is a measure for the number of shares traded.  A stock that trades 1mil shares in a day has a volume of 1mil.  Some stocks trade tens of millions in volume each day while others trade just a few hundred thousand shares or less. As we watch the Time and Sales, we are able to see volume.
+
+Relative Volume: ([see complete definition](https://www.warriortrading.com/relative-volume-day-trading-terminology/)) [Relative volume](https://www.warriortrading.com/relative-volume-day-trading-terminology/) is one of the most important indicators day traders need to know. It shows how much volume a stock has compared to its average volume for the same period. It acts as a gauge indicating how in play a stock is and the more in play it is, the more likely setups with follow through.
+
+A Thin Market: A thin market means not many traders actively trade a particular stock.  It may also mean not many market makers are actively “making the market” for those stocks by providing a reasonable bid/ask spread.  Thinly traded stocks can have 20-30 cent spreads which makes it very difficult to trade.
+
+These stocks often have a low float (few shares available to trade).  When they experience strong demand, these stocks can quickly move 50-100%.  They are worth watching for day trade opportunities.
+
+A Thick Market: Thickly traded markets and stocks will be crowded with traders.  Many times these stocks have very large floats, are very well capitalized, and trade slowly.  This makes them great vehicles for long term and lower risk investment.  AT the same time, that makes them unattractive for day traders.  Even with high demand they rarely move that quickly.
+
+Circuit Breaker Halts: ([see complete definition](https://www.warriortrading.com/circuit-breaker-halts/)) Stocks can be halted and paused from trading for several reasons.  During circuit breaker halts traders cannot trade the stock in any way.  Halts can last from 5min to hours or days.  We have a written extensively on [Circuit Breaker Halts](https://www.warriortrading.com/circuit-breaker-halts/) since there are several important points to understand.
+
+Market Orders: ([see complete definition](https://www.warriortrading.com/market-order-definition-day-trading-terminology/)) A [market orders](https://www.warriortrading.com/market-order-definition-day-trading-terminology/) tells our broker to get you shares at current market prices.  If you send the order to buy 1000 shares at 5.00, the broker will get you 1000 shares, but since you haven’t said the most you are willing to pay, they may give you shares at a higher price.  If you accidentally type in 100000 shares, you may get filled at 5.50 or higher.
+
+Slippage: ([see complete definition](https://www.warriortrading.com/slippage-definition-day-trading-terminology/)) [Slippage](https://www.warriortrading.com/slippage-definition-day-trading-terminology/) is the difference between the price you thought you would trade at, and the price the trade actually went through at.  This is the result of fast moving markets, volatile stocks, and spreads.
+
+Limit Orders: ([see complete definition](https://www.warriortrading.com/limit-order-definition-day-trading-terminology/)) A [limit order](https://www.warriortrading.com/limit-order-definition-day-trading-terminology/) is when you ask your broker to buy you shares and state the most you are willing to pay.  A limit order of 1000 at 5.05 will not fill higher than that price.  That means if the price moves quickly, you may not get 1000 shares.
+
+Stop Orders: ([see complete definition](https://www.warriortrading.com/stop-order-definition-day-trading-terminology/)) A [Stop Order](https://www.warriortrading.com/stop-order-definition-day-trading-terminology/) is an order that will trigger when a stock crosses a certain price.  A stop order is used by many traders to reduce risk.  They set a stop at their max loss price.  If the price crosses that level, the order is automatically sent.  Stop orders can be sent as both market orders or limit orders
+
+FOK Order: This is Fill or Kill.  This means either you get your entire order filled or the order won’t fill at all.  This prevent partial orders, but I don’t like using it.
+
+GTC Order: This is a Good Till Cancelled.  That means the order will stay on the brokers servers until you cancel it.
+
+Fill Price or Getting Filled: This is the price the trades are executing at with your broker.  This becomes your average cost.
+
+Partial Fill: This is when you have a limit order that is too tight and you only fill part of your entire order.  The remaining order needs to either be cancelled or you have to keep waiting to see if the price comes back to give you the rest of your fill.
+
+## Day Trading Terminology: Fundamental & Technical Analysis
+
+Fundamental Analysis: [Fundamental Analysis](https://www.warriortrading.com/fundamental-analysis-definition-day-trading-terminology/) is when a trader (or more often an investor), looks at the fundamental metrics of a company.  This includes their Annual and Quarterly Earnings per share, Their Book Value (total value of company assets), the strength of their sector, an the potential for growth.  This is a complex analysis based on many factors.  In the end, a trader will have a long bias or a short bias on a stock.
+
+Technical Analysis: [Technical Analysis](https://www.warriortrading.com/technical-analysis-definition-day-trading-terminology/), in contrast to fundamental analysis, does not focus on the fundamental metrics of a company, but instead, focuses solely on the price of the stock.  Technical analysis requires a complex understanding of chart patterns and technical indicators.  This is the type of trading most day traders will practice.
+
+Line Charts: Line charts are the most simple type of chart.  These charts simply plot a line.  This can give a good understanding of price action over long periods of time, but for shorter time periods it doesn’t provide necessary insight that traders require.
+
+Bar Charts: Like Line Charts, bar charts provide very little information that active trades will want.  They show the open price and the close price for any given period, but that’s it.  If the chart is a daily chart you will see that each bar represents a single day in time.
+
+Candlestick Charts: ([see complete definition](https://www.warriortrading.com/candlestick-definition-day-trading-terminology/)) [Candlestick](https://www.warriortrading.com/candlestick-definition-day-trading-terminology/) charts are what most active day traders will use to help them establish a basis for taking a trade.  A candle stick includes 4 pieces of information.  The open price, the close price, the high of the period price, an the low of the period price.
+
+When these 4 pieces of information come together, candle sticks can take shapes that communicate market sentiment.  For instance, a candle that opened at 10.00, had a high of 10.50, closed at 9.90, and had a low of 9.90, will appear very weak or bearish.  The stock spiked up but was unable to hold those levels and sold off.   A simple line chart or bar chart would have not been able to communicate the same meaning to us.
+
+Doji Candle Sticks: A doji candle stick has a long upper wick or lower wick.  The wick refers to the high or low of day.  The body of a doji is smaller than the candle wick, meaning the open and close price were fairly close together.  These candles are considered candles of indecision.
+
+Hammer Candle: A hammer candle occurs at the bottom of a long down trend and looks like a hammer.  It has a long lower wick (like a doji), that forms the handle.  The small body on the top is the hammer that swings down.  This is considered a stock hammering out it’s base.  That’s because the candle wick shows that even though the price dropped it surged back up quickly!
+
+Inverted Hammer Candle: An inverted hammer is an upside hammer that occurs at the top of a bullish run.  Like the regular Hammer Formation, this candle shows the stock squeezed up but was unable to hold those high prices and sold off.  Indicating a reversal may be in store.
+
+Multiple Candle Stick Patterns: When multiple candle sticks are lined up next to each other they can form patterns including Flat Top Breakouts, Bull Flags or Bear Flags.
+
+Chart Time Frames: Trades can choose to use a multitude of time frames.  I personally use the 5min time frame and have found this one is the most commonly used among day traders.  I also use the 1min time frame for quick entries, and the daily time frame to understand the overall history of a stock.
+
+Gaps: ([see complete definition](https://www.warriortrading.com/gap-definition-day-trading-terminology/)) [Gaps](https://www.warriortrading.com/gap-definition-day-trading-terminology/) on a daily chart occur when a stock opens higher or lower, than it closed the previous day.  This happens when there is news or some type of catalyst overnight.
+
+Technical Indicators:  Technical indicators, or studies, help us interpret current price action.  These lag slightly behind the price action, so Candle Stick Patterns will almost always be more valuable than technical indicators.
+
+Moving Averages: ([see complete definition](https://www.warriortrading.com/exponential-moving-average/)) Moving averages are a technical indicator that tell us the average price of a stock over a period of time.  They can be either [Simple Moving Averages](https://www.warriortrading.com/simple-moving-average/), or [Exponential Moving Averages](https://www.warriortrading.com/exponential-moving-average/).  An Exponential Moving Average weights recent price action heavier than older price action.  This means the moving average will move faster in response to recent moves.  I use Exponential Moving Averages on my charts.
+
+Relative Strength Index: ([see complete definition](https://www.warriortrading.com/relative-strength-index-rsi-definition-day-trading-terminology/)) [Relative Strength Index](https://www.warriortrading.com/relative-strength-index-rsi-definition-day-trading-terminology/) (RSI), is an oscillating indicator that moves between 0 and 100.  A stock with an RSI of 0 has been oversold and may be due for a bounce.  A stock with an RSI of 100 is extremely overbought and may be due for a reversal.  When combined with candle stick patterns this can be a helpful indicator.
+
+MACD: ([see complete definition](https://www.warriortrading.com/moving-average-convergence-divergence-macd-definition-day-trading-terminology/)) [Moving Average Convergence Divergence](https://www.warriortrading.com/moving-average-convergence-divergence-macd-definition-day-trading-terminology/) (MACD) indicator is another oscillating indicator.  This measures the distance between moving averages.  If the moving averages are moving apart a stock is moving quickly, if they are coming close together, a stock has changed directions and is returning to balance.  If they are close together, the stock isn’t moving in much of any direction.
+
+Bollinger Bands: ([see complete definition](https://www.warriortrading.com/bollinger-bands-definition-day-trading-terminology/)) These are moving averages that are offset by a standard deviation.  This means 95% of all price action will take place in between the top and bottom bands.  Some traders look for stocks trading outside their [Bollinger Bands](https://www.warriortrading.com/bollinger-bands-definition-day-trading-terminology/) as that indicates an extreme situation (5% status).  The idea here is that these stocks are very extended and are due to reverse.  In combination with RSI and candle stick patterns, this can help us find good stocks for reversal strategies.
+
+Average True Range: ([see complete definition](https://www.warriortrading.com/average-true-range-definition-day-trading-terminology/)) The [Average True Range](https://www.warriortrading.com/average-true-range-definition-day-trading-terminology/) is a trading term used to the measure the [volatility](https://www.warriortrading.com/volatility-definition-day-trading-terminology/) of a[ stock](https://www.warriortrading.com/stock-definition-day-trading-terminology/) or index and tells us the average price range a stock typically trades in. 
+
+Alligator Indicator: ([see complete definition](https://www.warriortrading.com/alligator-indicator-definition-day-trading-terminology/)) The [Alligator Indicator](https://www.warriortrading.com/alligator-indicator-definition-day-trading-terminology/) was first introduced by Bill Williams in the 1990s with the idea that markets trend a small portion of the time while remaining in a sideways range for most of the time. 
+</div
