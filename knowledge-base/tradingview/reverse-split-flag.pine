@@ -1,0 +1,83 @@
+//@version=5
+// Reverse-split flag — paste into TradingView's Pine editor, "Add to chart".
+//
+// Written after BYAH on 2026-08-06 appeared to gap from $0.33 to $2.84
+// overnight. It had not moved: the board consolidated 8 shares into 1 that
+// morning. The gap % was arithmetically correct and completely meaningless.
+//
+// Two independent tells, because they answer different questions:
+//
+//   DID ONE JUST HAPPEN?   request.splits() reads the corporate action off
+//                          TradingView's own feed. A reverse split has
+//                          denominator > numerator (1-for-8 => 1/8).
+//
+//   HAS THIS DONE IT BEFORE?  52-week high divided by price. Real companies
+//                          do not fall 50x in a year; split-adjusted history
+//                          does. BYAH read 111x, PAVS 16,086x, AZI 55x.
+//                          All three had consolidated. CLRO read 1.5x.
+//
+// The second test needs no corporate-action feed at all, so it still works
+// on a symbol whose split has not been recorded yet.
+
+indicator("Reverse-split flag", overlay = true)
+
+lookbackDays = input.int(400,  "Split lookback (bars)", minval = 1)
+ratioWarn    = input.float(20, "Warn when 52w high / price exceeds", minval = 2)
+showTable    = input.bool(true, "Show the panel")
+
+// ---------------------------------------------------------------- the split
+num = request.splits(syminfo.tickerid, splits.numerator)
+den = request.splits(syminfo.tickerid, splits.denominator)
+
+isSplit   = not na(num) and not na(den) and num > 0 and den > 0
+isReverse = isSplit and den > num
+ratio     = isSplit ? den / num : na
+
+plotshape(isReverse, title = "reverse split", style = shape.labeldown,
+          location = location.abovebar, color = color.red,
+          textcolor = color.white, size = size.small, text = "R/S")
+plotshape(isSplit and not isReverse, title = "forward split",
+          style = shape.labelup, location = location.belowbar,
+          color = color.teal, textcolor = color.white, size = size.tiny,
+          text = "split")
+
+// Recent is what matters: a consolidation two years ago is history, one last
+// month means the dilution cycle is live.
+barsSince = ta.barssince(isReverse)
+recent    = not na(barsSince) and barsSince <= lookbackDays
+bgcolor(recent ? color.new(color.red, 92) : na, title = "post-reverse-split")
+
+// ------------------------------------------------------- the history tell
+// 252 sessions ~ one year. Uses the chart's own adjusted history, which is
+// the point: the adjustment is the evidence.
+hi52  = ta.highest(high, 252)
+stretch = close > 0 ? hi52 / close : na
+stretched = not na(stretch) and stretch > ratioWarn
+
+if showTable and barstate.islast
+    var table t = table.new(position.top_right, 2, 4,
+                            border_width = 1, frame_width = 1)
+    verdict = recent ? "REVERSE SPLIT — recent"
+              : stretched ? "consolidated before"
+              : "clean"
+    vcol    = recent ? color.red : stretched ? color.orange : color.teal
+    table.cell(t, 0, 0, "split check",  bgcolor = color.new(color.gray, 70),
+               text_color = color.white, text_size = size.small)
+    table.cell(t, 1, 0, verdict, bgcolor = color.new(vcol, 30),
+               text_color = color.white, text_size = size.small)
+    table.cell(t, 0, 1, "52w high / price", text_size = size.small)
+    table.cell(t, 1, 1, na(stretch) ? "n/a" : str.tostring(stretch, "#.#") + "x",
+               text_color = stretched ? color.red : color.gray,
+               text_size = size.small)
+    table.cell(t, 0, 2, "last reverse split", text_size = size.small)
+    table.cell(t, 1, 2, na(barsSince) ? "none on record"
+               : str.tostring(barsSince) + " bars ago", text_size = size.small)
+    table.cell(t, 0, 3, "ratio", text_size = size.small)
+    table.cell(t, 1, 3, na(ratio) ? "-" : "1-for-" + str.tostring(ratio, "#.#"),
+               text_size = size.small)
+
+// Set the alert once, on a watchlist, and stop checking by hand.
+alertcondition(isReverse, "Reverse split on this bar",
+               "{{ticker}} reverse split — the gap is the split, not a move")
+alertcondition(stretched, "52w high far above price",
+               "{{ticker}} 52w high is many multiples of price — split-adjusted history")
