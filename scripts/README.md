@@ -12,3 +12,9 @@ market data or the trading engine.
 | `mine_streams.py` | Topic-mines the live-stream transcripts; each topic tied to an open question in the research |
 | `run_scanner.py` | CLI wrapper for the paper-trading platform's scanner |
 | `pipeline/` | The numbered corpus pipeline — see its README |
+| `corpus.py` | **Search every register at once, with citations.** Entry point for the `warrior-corpus` skill |
+| `fetch_warrior_blog.py` / `fetch_warrior_fast.py` | Fetch the written corpus from warriortrading.com |
+| `challenge_july.py` | Extract the July small-account challenge from the recaps |
+| `warrior_blog_index.py` | Categorised index of the site sitemaps |
+| `premarket_dd.py` | Live pre-market due diligence from the tape |
+| `import_tradingview.py` | TradingView chart-data CSV → engine bar cache |
