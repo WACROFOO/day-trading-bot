@@ -1,6 +1,6 @@
 # recaps — 419 articles
 
-From warriortrading.com. Each file keeps its source URL and lastmod
+From warriortrading.com. Each file carries its source URL and lastmod
 in a header comment, so a claim can be cited like a video timestamp.
 
 Total ~1,033,451 words.

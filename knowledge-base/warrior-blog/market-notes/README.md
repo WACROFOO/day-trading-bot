@@ -1,6 +1,6 @@
 # market notes — 22 articles
 
-From warriortrading.com. Each file keeps its source URL and lastmod
+From warriortrading.com. Each file carries its source URL and lastmod
 in a header comment, so a claim can be cited like a video timestamp.
 
 Total ~24,195 words.

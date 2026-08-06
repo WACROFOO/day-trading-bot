@@ -38,7 +38,7 @@ import time
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, 'knowledge-base', 'warrior-blog')
-URLS = os.path.join(OUT, '.urls.json')
+URLS = os.path.join(OUT, 'URLS.json')
 TMP = '/tmp/claude-0/-home-user-day-trading-bot/wt_batch'
 UA = ('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 '
       '(KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36')

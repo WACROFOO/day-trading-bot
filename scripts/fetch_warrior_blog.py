@@ -46,7 +46,7 @@ OUT = os.path.join(ROOT, 'knowledge-base', 'warrior-blog')
 CACHE = os.path.join(OUT, '.raw')
 WORKERS = 3                      # the site 504s above this - it is a small business
 DELAY = 0.6
-URLS_CACHE = os.path.join(OUT, '.urls.json')
+URLS_CACHE = os.path.join(OUT, 'URLS.json')   # tracked: it IS source data
 
 REGISTERS = [
     ('recaps', r'recap|green-day|red-day|-challenge|trade-of-the|day-\d+|ross-trade|mikes-|small-account-\d'),

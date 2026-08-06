@@ -1,14 +1,18 @@
 # warrior-blog — the written corpus
 
-**2,063 articles, ~3,127,215 words** fetched from the warriortrading.com
-public sitemaps (robots.txt explicitly allows ClaudeBot).
+**2,063 articles, ~3,127,215 words**, stored in full in this repo.
 
-A **second register**, independent of `transcripts/`, `recaps/` and
-`streams/`: edited, dated prose rather than auto-captioned speech. The
-written trade recaps state entries, exits and reasoning in writing.
+A second register independent of `transcripts/`, `recaps/` and `streams/`:
+edited, dated prose rather than auto-captioned speech. 419 are written
+trade recaps that state entries, exits and reasoning in writing.
 
-Rebuild / resume: `python scripts/fetch_warrior_fast.py` (idempotent).
-URLs with no extractable text are listed in `NOT-FETCHED.md`.
+`URLS.json` is the manifest of all 2,162 source URLs with lastmod dates —
+tracked, because it is source data. The 99 URLs with no extractable text
+are itemised in `NOT-FETCHED.md`, so the counts reconcile:
+**2,162 = 2063 stored + 99 unextractable.**
+
+Search with `python scripts/corpus.py "<term>"`, or the `warrior-corpus`
+skill. Refetch with `python scripts/fetch_warrior_fast.py` (idempotent).
 
 | category | articles | words | |
 |---|---:|---:|---|
