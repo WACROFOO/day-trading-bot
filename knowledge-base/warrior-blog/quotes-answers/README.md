@@ -1,9 +1,9 @@
 # quotes answers — 12 articles
 
-From warriortrading.com. Each file carries its source URL and lastmod
-in a header comment, so a claim can be cited like a video timestamp.
+Quote pages and Q&A stubs.
 
-Total ~3,137 words.
+Total ~3,137 words. Each file carries its source
+URL and lastmod in a header comment.
 
 | article | words | updated | source |
 |---|---:|---|---|

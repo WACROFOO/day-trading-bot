@@ -1,9 +1,9 @@
 # reviews — 136 articles
 
-From warriortrading.com. Each file carries its source URL and lastmod
-in a header comment, so a claim can be cited like a video timestamp.
+Broker, tool and service reviews.
 
-Total ~301,395 words.
+Total ~301,395 words. Each file carries its source
+URL and lastmod in a header comment.
 
 | article | words | updated | source |
 |---|---:|---|---|

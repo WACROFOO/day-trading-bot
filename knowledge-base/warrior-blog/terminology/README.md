@@ -1,300 +1,131 @@
-# terminology — 293 articles
+# terminology — 124 articles
 
-From warriortrading.com. Each file carries its source URL and lastmod
-in a header comment, so a claim can be cited like a video timestamp.
+Definitional articles — "what is X", "X explained".
 
-Total ~242,193 words.
+Total ~78,538 words. Each file carries its source
+URL and lastmod in a header comment.
 
 | article | words | updated | source |
 |---|---:|---|---|
-| [Slippage Definition: Day Trading Terminology](slippage-definition-day-trading-terminology.md) | 22,098 | 2025-01-08 | [↗](https://www.warriortrading.com/slippage-definition-day-trading-terminology/) |
-| [Long Straddle Definition: Day Trading Terminology](long-straddle-definition-day-trading-terminology.md) | 22,031 | 2025-01-08 | [↗](https://www.warriortrading.com/long-straddle-definition-day-trading-terminology/) |
-| [Merger Definition: Day Trading Terminology](merger-definition-day-trading-terminology.md) | 21,992 | 2025-01-08 | [↗](https://www.warriortrading.com/merger-definition-day-trading-terminology/) |
-| [Day Trading Terminology:  Top Trading Terms Every Trader Should Know!](day-trading-terminology.md) | 4,929 | 2026-01-28 | [↗](https://www.warriortrading.com/day-trading-terminology/) |
+| [What Are Market Internals and How To Use Them](market-internals.md) | 1,950 | 2025-12-16 | [↗](https://www.warriortrading.com/market-internals/) |
+| [What Are Floor Traders and What Did They Do?](floor-traders.md) | 1,933 | 2025-01-08 | [↗](https://www.warriortrading.com/floor-traders/) |
 | [What Is Market Liquidity & Its Impact on Trading](liquidity-in-trading.md) | 1,818 | 2025-11-18 | [↗](https://www.warriortrading.com/liquidity-in-trading/) |
 | [What is a Thinly Traded Stock?](what-is-a-thinly-traded-stock.md) | 1,817 | 2025-01-09 | [↗](https://www.warriortrading.com/what-is-a-thinly-traded-stock/) |
-| [Bear Trap Explained For Beginners](bear-trap-definition-day-trading-terminology.md) | 1,760 | 2026-03-10 | [↗](https://www.warriortrading.com/bear-trap-definition-day-trading-terminology/) |
-| [Market Maker Explained For Beginners](market-maker-definition-day-trading-terminology.md) | 1,675 | 2025-01-08 | [↗](https://www.warriortrading.com/market-maker-definition-day-trading-terminology/) |
 | [Current Ratio Definition: Day Trading Terminology](current-ratio-definition-day-trading-terminology.md) | 1,634 | 2025-01-08 | [↗](https://www.warriortrading.com/current-ratio-definition-day-trading-terminology/) |
-| [What is Stock Market Seasonality?](what-is-stock-market-seasonality.md) | 1,611 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-stock-market-seasonality/) |
-| [Volume Profile vs Market Profile: What’s the Difference?](volume-profile-vs-market-profile.md) | 1,529 | 2025-01-08 | [↗](https://www.warriortrading.com/volume-profile-vs-market-profile/) |
-| [A Complete Guide To Volume Price Analysis](volume-price-analysis.md) | 1,524 | 2025-06-26 | [↗](https://www.warriortrading.com/volume-price-analysis/) |
-| [What Is Carry Trading?](what-is-carry-trading.md) | 1,491 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-carry-trading/) |
+| [What Is a Pump and Dump Scheme and How To Avoid Them](pump-and-dump-stock.md) | 1,304 | 2025-11-18 | [↗](https://www.warriortrading.com/pump-and-dump-stock/) |
 | [Stock Float Definition: Day Trading Terminology](float-definition-day-trading-terminology.md) | 1,301 | 2025-12-05 | [↗](https://www.warriortrading.com/float-definition-day-trading-terminology/) |
-| [Tape Reading in Trading: What It Is & How To Use It](what-is-tape-reading-in-trading.md) | 1,272 | 2025-12-09 | [↗](https://www.warriortrading.com/what-is-tape-reading-in-trading/) |
-| [Order Types | Fast Explanation](order-types-fast-explanation.md) | 1,260 | 2025-01-11 | [↗](https://www.warriortrading.com/order-types-fast-explanation/) |
-| [How To Use Volume To Improve Your Day Trading](how-to-use-volume-day-trading.md) | 1,240 | 2025-02-24 | [↗](https://www.warriortrading.com/how-to-use-volume-day-trading/) |
-| [Bull Trap: How to Avoid the Fake Bounce](bull-trap-definition-day-trading-terminology.md) | 1,219 | 2025-01-08 | [↗](https://www.warriortrading.com/bull-trap-definition-day-trading-terminology/) |
-| [What Is a Stop Order? Definition and Types](stop-order-definition-day-trading-terminology.md) | 1,211 | 2025-11-14 | [↗](https://www.warriortrading.com/stop-order-definition-day-trading-terminology/) |
-| [Can You Trade Stock Options After-Hours?](options-after-hours.md) | 1,169 | 2025-06-26 | [↗](https://www.warriortrading.com/options-after-hours/) |
-| [Level 1 Quotes Explained For Beginners](level-1-definition-day-trading-terminology.md) | 1,141 | 2025-01-08 | [↗](https://www.warriortrading.com/level-1-definition-day-trading-terminology/) |
-| [Pump And Dump Explained For Beginners](pump-and-dump-definition-day-trading-terminology.md) | 1,118 | 2025-01-11 | [↗](https://www.warriortrading.com/pump-and-dump-definition-day-trading-terminology/) |
+| [What Are Meme Stocks: Should You Buy Them?](meme-stocks.md) | 1,270 | 2025-11-18 | [↗](https://www.warriortrading.com/meme-stocks/) |
+| [What Is Position Sizing in Trading?](position-sizing.md) | 1,256 | 2025-09-11 | [↗](https://www.warriortrading.com/position-sizing/) |
+| [What Are Cult Stocks And How Should You Trade Them?](cult-stocks.md) | 1,251 | 2025-01-08 | [↗](https://www.warriortrading.com/cult-stocks/) |
+| [What is Position Trading and How Does it Work?](position-trading.md) | 1,146 | 2025-12-16 | [↗](https://www.warriortrading.com/position-trading/) |
+| [What Are The Pros And Cons of Day Trading?](pros-and-cons-of-day-trading.md) | 1,123 | 2025-06-26 | [↗](https://www.warriortrading.com/pros-and-cons-of-day-trading/) |
+| [What Are the Most Lucrative Hours To Day Trade?](best-time-to-day-trade.md) | 1,121 | 2025-11-18 | [↗](https://www.warriortrading.com/best-time-to-day-trade/) |
+| [What Are the Best Laptops for Day Trading in 2025?](day-trading-laptop.md) | 1,117 | 2025-10-23 | [↗](https://www.warriortrading.com/day-trading-laptop/) |
+| [What Are LUPA Stocks?](lupa-stocks.md) | 1,096 | 2025-01-08 | [↗](https://www.warriortrading.com/lupa-stocks/) |
 | [What Is A Sovereign Wealth Fund and How Do They Work?](what-is-a-sovereign-wealth-fund-and-how-do-they-work.md) | 1,093 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-a-sovereign-wealth-fund-and-how-do-they-work/) |
-| [What Is The Best Strategy For Small Accounts?](what-is-the-best-strategy-for-small-accounts.md) | 1,080 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-the-best-strategy-for-small-accounts/) |
-| [What is a Tape Bomb?](what-is-a-tape-bomb.md) | 1,076 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-a-tape-bomb/) |
-| [Understanding How Stock Volume Affects Price](stock-volume.md) | 1,015 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-volume/) |
-| [Marketable Limit Orders Explained for Beginners](marketable-limit-order.md) | 1,012 | 2025-01-08 | [↗](https://www.warriortrading.com/marketable-limit-order/) |
-| [What is MOMO Trading?](what-is-momo-trading.md) | 997 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-momo-trading/) |
-| [Quadruple Witching and How It Impacts Stocks](quadruple-witching-definition-day-trading-terminology.md) | 976 | 2025-01-08 | [↗](https://www.warriortrading.com/quadruple-witching-definition-day-trading-terminology/) |
-| [Stock Order Types Essential Guide](stock-order-types.md) | 975 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-order-types/) |
-| [How Does After Hours Trading Work?](after-hours-trading.md) | 953 | 2025-04-21 | [↗](https://www.warriortrading.com/after-hours-trading/) |
-| [What is an S-1 Filing?](what-is-an-s-1-filing.md) | 947 | 2025-01-08 | [↗](https://www.warriortrading.com/what-is-an-s-1-filing/) |
-| [Butterfly Spread Definition: Day Trading Terminology](butterfly-spread-definition.md) | 878 | 2025-01-08 | [↗](https://www.warriortrading.com/butterfly-spread-definition/) |
-| [Straddle Definition: Day Trading Terminology](straddle-definition-day-trading-terminology.md) | 878 | 2025-01-08 | [↗](https://www.warriortrading.com/straddle-definition-day-trading-terminology/) |
-| [Option Definition: Day Trading Terminology](option-definition-day-trading-terminology.md) | 842 | 2025-01-08 | [↗](https://www.warriortrading.com/option-definition-day-trading-terminology/) |
-| [Blockchain Definition: Day Trading Terminology](blockchain-definition.md) | 830 | 2025-01-08 | [↗](https://www.warriortrading.com/blockchain-definition/) |
+| [What Are Multibagger Stocks?](multibagger-stocks.md) | 1,024 | 2025-01-08 | [↗](https://www.warriortrading.com/multibagger-stocks/) |
+| [What is a UGMA Account and How Do They Work?](ugma-account.md) | 1,023 | 2025-01-08 | [↗](https://www.warriortrading.com/ugma-account/) |
+| [Lagging Indicator Definition: Day Trading Terminology](lagging-indicator-definition-day-trading-terminology.md) | 1,013 | 2025-01-08 | [↗](https://www.warriortrading.com/lagging-indicator-definition-day-trading-terminology/) |
+| [FAANG Stocks Explained and 2020 Outlook](faang-stocks.md) | 1,003 | 2025-01-08 | [↗](https://www.warriortrading.com/faang-stocks/) |
+| [What is the Wilshire 5000 Index?](wilshire-5000-index.md) | 976 | 2025-01-08 | [↗](https://www.warriortrading.com/wilshire-5000-index/) |
+| [Equity Swaps Explained](equity-swaps-explained.md) | 887 | 2025-10-10 | [↗](https://www.warriortrading.com/equity-swaps-explained/) |
+| [What is a Composite Index?](composite-index.md) | 852 | 2025-01-08 | [↗](https://www.warriortrading.com/composite-index/) |
 | [Equity Definition: Day Trading Terminology](equity-definition-day-trading-terminology.md) | 816 | 2025-01-08 | [↗](https://www.warriortrading.com/equity-definition-day-trading-terminology/) |
-| [Dead Cat Bounce Definition: Day Trading Terminology](dead-cat-bounce-definition.md) | 813 | 2025-01-08 | [↗](https://www.warriortrading.com/dead-cat-bounce-definition/) |
-| [Futures Definition: Day Trading Terminology](futures-definition-day-trading-terminology.md) | 777 | 2025-02-14 | [↗](https://www.warriortrading.com/futures-definition-day-trading-terminology/) |
 | [Insider Trading Definition: Day Trading Terminology](insider-trading-definition-day-trading-terminology.md) | 777 | 2025-01-11 | [↗](https://www.warriortrading.com/insider-trading-definition-day-trading-terminology/) |
-| [Low Float Stocks: 2 Key Factors to Consider Before Trading Them](low-float-stocks.md) | 769 | 2025-01-08 | [↗](https://www.warriortrading.com/low-float-stocks/) |
-| [Revenue Definition: Day Trading Terminology](revenue-definition-day-trading-terminology.md) | 761 | 2025-01-08 | [↗](https://www.warriortrading.com/revenue-definition-day-trading-terminology/) |
 | [Sharpe Ratio Definition: Day Trading Terminology](sharpe-ratio-definition-day-trading-terminology.md) | 756 | 2025-01-08 | [↗](https://www.warriortrading.com/sharpe-ratio-definition-day-trading-terminology/) |
-| [Secondary Offering Definition: Day Trading Terminology](secondary-offering-definition.md) | 752 | 2025-01-08 | [↗](https://www.warriortrading.com/secondary-offering-definition/) |
 | [Diversification Definition: Day Trading Terminology](diversification-definition.md) | 747 | 2025-01-11 | [↗](https://www.warriortrading.com/diversification-definition/) |
-| [Debit Spread Definition: Day Trading Terminology](debit-spread-definition-day-trading-terminology.md) | 744 | 2025-01-08 | [↗](https://www.warriortrading.com/debit-spread-definition-day-trading-terminology/) |
-| [Option Expiration: Day Trading Terminology](option-expiration-day-trading-terminology.md) | 743 | 2025-01-08 | [↗](https://www.warriortrading.com/option-expiration-day-trading-terminology/) |
 | [Linear Regression Definition: Day Trading Terminology](linear-regression-definition-day-trading-terminology.md) | 740 | 2025-01-11 | [↗](https://www.warriortrading.com/linear-regression-definition-day-trading-terminology/) |
-| [Hedging Definition: Day Trading Terminology](hedging-definition-day-trade-terminology.md) | 733 | 2025-12-15 | [↗](https://www.warriortrading.com/hedging-definition-day-trade-terminology/) |
+| [Earnings Per Share (EPS) Definition: Day Trading Terminology](earnings-per-share-eps.md) | 737 | 2025-01-08 | [↗](https://www.warriortrading.com/earnings-per-share-eps/) |
 | [Net Income Definition: Day Trading Terminology](net-income-definition-day-trading-terminology.md) | 733 | 2025-01-11 | [↗](https://www.warriortrading.com/net-income-definition-day-trading-terminology/) |
-| [Time In Force “TIF” Definition: Day Trading Terminology](time-force-tif-definition-day-trading-terminology.md) | 733 | 2025-01-08 | [↗](https://www.warriortrading.com/time-force-tif-definition-day-trading-terminology/) |
-| [Divergence Definition: Day Trading Terminology](divergence-definition-day-trading-terminology.md) | 732 | 2025-01-08 | [↗](https://www.warriortrading.com/divergence-definition-day-trading-terminology/) |
 | [Liquidity Definition: Day Trading Terminology](liquidity-definition-day-trading-terminology.md) | 731 | 2025-01-11 | [↗](https://www.warriortrading.com/liquidity-definition-day-trading-terminology/) |
-| [Incorporating Volume Analysis To Make Better Trades](volume-analysis.md) | 731 | 2025-01-08 | [↗](https://www.warriortrading.com/volume-analysis/) |
-| [Security Definition: Day Trading Terminology](security-definition-day-trading-terminology.md) | 730 | 2025-01-11 | [↗](https://www.warriortrading.com/security-definition-day-trading-terminology/) |
-| [Parity Definition: Day Trading Terminology](parity-definition-day-trading-terminology.md) | 729 | 2025-01-08 | [↗](https://www.warriortrading.com/parity-definition-day-trading-terminology/) |
 | [Treasury Stock Definition: Day Trading Terminology](treasury-stock-definition-day-trading-terminology.md) | 728 | 2025-01-11 | [↗](https://www.warriortrading.com/treasury-stock-definition-day-trading-terminology/) |
 | [Fiduciary Definition: Trading Terminology](fiduciary-definition-trading-terminology.md) | 726 | 2025-01-08 | [↗](https://www.warriortrading.com/fiduciary-definition-trading-terminology/) |
-| [Channel Pattern Definition: Day Trading Terminology](channel-pattern-definition-day-trading-terminology.md) | 723 | 2025-01-08 | [↗](https://www.warriortrading.com/channel-pattern-definition-day-trading-terminology/) |
-| [Investment Banker Definition: Day Trading Terminology](investment-banker-definition-day-trading-terminology.md) | 723 | 2025-01-08 | [↗](https://www.warriortrading.com/investment-banker-definition-day-trading-terminology/) |
-| [Market Index Definition: Day Trading Terminology](market-index-definition-day-trading-terminology.md) | 723 | 2025-01-11 | [↗](https://www.warriortrading.com/market-index-definition-day-trading-terminology/) |
-| [Convertible Bonds Definition: Day Trading Terminology](convertible-bonds-definition-day-trading-terminology.md) | 722 | 2025-01-11 | [↗](https://www.warriortrading.com/convertible-bonds-definition-day-trading-terminology/) |
 | [Wealth Definition: Day Trading Terminology](wealth-definition-day-trading-terminology.md) | 721 | 2025-01-08 | [↗](https://www.warriortrading.com/wealth-definition-day-trading-terminology/) |
 | [Financial Markets Definition: Day Trading Terminology](financial-markets-definition-day-trading-terminology.md) | 720 | 2025-01-11 | [↗](https://www.warriortrading.com/financial-markets-definition-day-trading-terminology/) |
 | [Andrews’ Pitchfork Definition: Day Trading Terminology](andrews-pitchfork-definition-day-trading-terminology.md) | 716 | 2025-01-11 | [↗](https://www.warriortrading.com/andrews-pitchfork-definition-day-trading-terminology/) |
-| [Direct Access Routing Definition: Day Trading Terminology](direct-access-routing-definition-day-trading-terminology.md) | 716 | 2025-01-11 | [↗](https://www.warriortrading.com/direct-access-routing-definition-day-trading-terminology/) |
 | [Modern Portfolio Theory Definition: Day Trading Terminology](modern-portfolio-theory-definition-trading-terminology.md) | 716 | 2025-01-08 | [↗](https://www.warriortrading.com/modern-portfolio-theory-definition-trading-terminology/) |
-| [Book Value Definition: Day Trading Terminology](book-value-definition-day-trading-terminology.md) | 714 | 2025-01-08 | [↗](https://www.warriortrading.com/book-value-definition-day-trading-terminology/) |
 | [Common Stock Definition: Day Trading Terminology](common-stock-definition-day-trading-terminology.md) | 714 | 2025-12-15 | [↗](https://www.warriortrading.com/common-stock-definition-day-trading-terminology/) |
-| [Alpha Definition: Day Trading Terminology](alpha-definition-day-trading-terminology.md) | 711 | 2025-01-11 | [↗](https://www.warriortrading.com/alpha-definition-day-trading-terminology/) |
-| [American Stock Exchange (AMEX) Definition: Day Trading Terminology](american-stock-exchange-amex-definition-day-trading-terminology.md) | 711 | 2025-12-15 | [↗](https://www.warriortrading.com/american-stock-exchange-amex-definition-day-trading-terminology/) |
-| [Financial Advisor Definition: Day Trading Terminology](financial-advisor-definition-day-trading-terminology.md) | 708 | 2025-01-08 | [↗](https://www.warriortrading.com/financial-advisor-definition-day-trading-terminology/) |
-| [Junk Bond Definition: Day Trading Terminology](junk-bond-definition-day-trading-terminology.md) | 708 | 2025-01-11 | [↗](https://www.warriortrading.com/junk-bond-definition-day-trading-terminology/) |
-| [Capitulation Definition: Day Trading Terminology](capitulation-definition-day-trading-terminology.md) | 707 | 2025-01-11 | [↗](https://www.warriortrading.com/capitulation-definition-day-trading-terminology/) |
-| [Fixed Income Definition: Day Trading Terminology](fixed-income-definition-day-trading-terminology.md) | 706 | 2025-01-11 | [↗](https://www.warriortrading.com/fixed-income-definition-day-trading-terminology/) |
-| [Venture Capital Definition: Day Trading Terminology](venture-capital-definition-day-trading-terminology.md) | 706 | 2025-01-08 | [↗](https://www.warriortrading.com/venture-capital-definition-day-trading-terminology/) |
-| [Price Rate of Change (ROC) Definition: Day Trading Terminology](price-rate-of-change-roc-definition-day-trading-terminology.md) | 703 | 2025-01-11 | [↗](https://www.warriortrading.com/price-rate-of-change-roc-definition-day-trading-terminology/) |
-| [New York Mercantile Exchange (NYMEX) Definition: Day Trading Terminology](new-york-mercantile-exchange-nymex-definition-day-trading-terminology.md) | 702 | 2025-01-08 | [↗](https://www.warriortrading.com/new-york-mercantile-exchange-nymex-definition-day-trading-terminology/) |
-| [Red Herring Definition: Day Trading Terminology](red-herring-definition-day-trading-terminology.md) | 702 | 2025-01-08 | [↗](https://www.warriortrading.com/red-herring-definition-day-trading-terminology/) |
+| [Stockbroker Definition: Day Trading Terminology](stockbroker-definition-day-trading-terminology.md) | 711 | 2025-01-08 | [↗](https://www.warriortrading.com/stockbroker-definition-day-trading-terminology/) |
 | [Capital Expenditure (CapEx) Definition: Day Trading Terminology](capital-expenditure-capex-day-trading-terminology.md) | 701 | 2025-01-08 | [↗](https://www.warriortrading.com/capital-expenditure-capex-day-trading-terminology/) |
-| [Digital Asset Definition: Day Trading Terminology](digital-asset-definition-day-trading-terminology.md) | 701 | 2025-01-11 | [↗](https://www.warriortrading.com/digital-asset-definition-day-trading-terminology/) |
-| [Underwriter Definition: Day Trading Terminology](underwriter-definition-day-trading-terminology.md) | 701 | 2025-01-08 | [↗](https://www.warriortrading.com/underwriter-definition-day-trading-terminology/) |
-| [Prospectus Definition: Day Trading Terminology](prospectus-definition-day-trading-terminology.md) | 696 | 2025-01-08 | [↗](https://www.warriortrading.com/prospectus-definition-day-trading-terminology/) |
 | [Volatility Definition: Day Trading Terminology](volatility-definition-day-trading-terminology.md) | 685 | 2025-01-08 | [↗](https://www.warriortrading.com/volatility-definition-day-trading-terminology/) |
-| [Mutual Fund Definition: Day Trading Terminology](mutual-fund-definition-day-trading-terminology.md) | 674 | 2025-01-08 | [↗](https://www.warriortrading.com/mutual-fund-definition-day-trading-terminology/) |
-| [Unicorn Definition: Day Trading Terminology](unicorn-definition-day-trading-terminology.md) | 671 | 2025-01-08 | [↗](https://www.warriortrading.com/unicorn-definition-day-trading-terminology/) |
 | [Volume Definition: Day Trading Terminology](volume-definition-day-trading-terminology.md) | 671 | 2025-01-08 | [↗](https://www.warriortrading.com/volume-definition-day-trading-terminology/) |
-| [Freeriding Definition: Day Trading Terminology](freeriding-definition-day-trading-terminology.md) | 670 | 2025-01-08 | [↗](https://www.warriortrading.com/freeriding-definition-day-trading-terminology/) |
-| [How to Trade Like A Casino: An Introduction to Credit Spreads](how-to-trade-like-a-casino-an-introduction-to-credit-spreads.md) | 667 | 2025-01-08 | [↗](https://www.warriortrading.com/how-to-trade-like-a-casino-an-introduction-to-credit-spreads/) |
-| [Arbitrage Definition: Day Trading Terminology](arbitrage-definition-day-trading-terminology.md) | 663 | 2025-01-08 | [↗](https://www.warriortrading.com/arbitrage-definition-day-trading-terminology/) |
-| [Electronic Communication Network (ECN) Definition: Day Trading Terminolo](electronic-communication-network-ecn-definition-day-trading-terminology.md) | 657 | 2025-01-08 | [↗](https://www.warriortrading.com/electronic-communication-network-ecn-definition-day-trading-terminology/) |
 | [Relative Volume Definition: Day Trading Terminology](relative-volume-day-trading-terminology.md) | 652 | 2025-01-11 | [↗](https://www.warriortrading.com/relative-volume-day-trading-terminology/) |
-| [Private Placement Definition: Day Trading Terminology](private-placement-definition-day-trading-terminology.md) | 649 | 2025-01-08 | [↗](https://www.warriortrading.com/private-placement-definition-day-trading-terminology/) |
-| [Triple Top Definition: Day Trading Terminology](triple-top-definition-day-trading-terminology.md) | 649 | 2025-01-08 | [↗](https://www.warriortrading.com/triple-top-definition-day-trading-terminology/) |
-| [On Balance Volume Definition: Day Trading Terminology](on-balance-volume-definition-day-trading-terminology.md) | 648 | 2025-01-08 | [↗](https://www.warriortrading.com/on-balance-volume-definition-day-trading-terminology/) |
-| [Head and Shoulder Pattern Trading Guide](head-shoulder-definition-day-trading-terminology.md) | 647 | 2025-01-08 | [↗](https://www.warriortrading.com/head-shoulder-definition-day-trading-terminology/) |
-| [One Cancels Other Order (OCO): Day Trading Terminology](one-cancels-other-day-trading-terminology.md) | 642 | 2025-01-08 | [↗](https://www.warriortrading.com/one-cancels-other-day-trading-terminology/) |
 | [Share Buyback Definition: Day Trading Terminology](share-buyback-definition-day-trading-terminology.md) | 638 | 2025-01-08 | [↗](https://www.warriortrading.com/share-buyback-definition-day-trading-terminology/) |
 | [Dollar Cost Averaging Definition: Day Trading Terminology](dollar-cost-averaging-definition-day-trading-terminology.md) | 637 | 2025-01-08 | [↗](https://www.warriortrading.com/dollar-cost-averaging-definition-day-trading-terminology/) |
-| [Bar Chart Definition: Day Trading Terminology](bar-chart-definition-day-trading-terminology.md) | 628 | 2025-01-08 | [↗](https://www.warriortrading.com/bar-chart-definition-day-trading-terminology/) |
-| [Triple Bottom Definition: Day Trading Terminology](triple-bottom-definition-day-trading-terminology.md) | 626 | 2025-01-08 | [↗](https://www.warriortrading.com/triple-bottom-definition-day-trading-terminology/) |
-| [Bond Definition: Day Trading Terminology](bond-definition-day-trading-terminology.md) | 625 | 2025-01-08 | [↗](https://www.warriortrading.com/bond-definition-day-trading-terminology/) |
-| [Joint Account Definition: Day Trading Terminology](joint-account-definition-day-trading-terminology.md) | 615 | 2025-01-08 | [↗](https://www.warriortrading.com/joint-account-definition-day-trading-terminology/) |
-| [Trailing Stop Definition: Day Trading Terminology](trailing-stop-definition-day-trading-terminology.md) | 615 | 2025-01-08 | [↗](https://www.warriortrading.com/trailing-stop-definition-day-trading-terminology/) |
 | [OTC Market Definition: Day Trading Terminology](otc-markets-definition-day-trading-terminology.md) | 602 | 2025-01-08 | [↗](https://www.warriortrading.com/otc-markets-definition-day-trading-terminology/) |
-| [Dark Pool Definition: Day Trading Terminology](dark-pool-definition-day-trading-terminology.md) | 597 | 2025-01-08 | [↗](https://www.warriortrading.com/dark-pool-definition-day-trading-terminology/) |
-| [Rho Definition: Day Trading Terminology](rho-definition-day-trading-terminology.md) | 595 | 2025-01-08 | [↗](https://www.warriortrading.com/rho-definition-day-trading-terminology/) |
-| [Return on Investment (ROI) – Day Trading Terminology](return-on-investment-roi-day-trading-terminology.md) | 593 | 2025-01-08 | [↗](https://www.warriortrading.com/return-on-investment-roi-day-trading-terminology/) |
 | [Resistance Level Definition: Day Trading Terminology](resistance-level-definition-day-trading-terminology.md) | 591 | 2025-01-08 | [↗](https://www.warriortrading.com/resistance-level-definition-day-trading-terminology/) |
 | [Line Chart Definition: Day Trading Terminology](line-chart-definition-day-trading-terminology.md) | 588 | 2025-01-08 | [↗](https://www.warriortrading.com/line-chart-definition-day-trading-terminology/) |
-| [Out of the Money Definition: Day Trading Terminology](out-of-the-money-definition-day-trading-terminology.md) | 582 | 2025-01-08 | [↗](https://www.warriortrading.com/out-of-the-money-definition-day-trading-terminology/) |
-| [Intrinsic Value Definition: Day Trading Terminology](intrinsic-value-definition-day-trading-terminology.md) | 579 | 2025-01-08 | [↗](https://www.warriortrading.com/intrinsic-value-definition-day-trading-terminology/) |
-| [Bear Market Definition: Day Trading Terminology](bear-market-definition-day-trading-terminology.md) | 578 | 2025-01-08 | [↗](https://www.warriortrading.com/bear-market-definition-day-trading-terminology/) |
 | [CFD Account Definition: Day Trading Terminology](cfd-account-definition-day-trading-terminology.md) | 576 | 2025-01-08 | [↗](https://www.warriortrading.com/cfd-account-definition-day-trading-terminology/) |
 | [Rights Offering Definition: Day Trading Terminology](rights-offering-definition-day-trading-terminology.md) | 571 | 2025-01-08 | [↗](https://www.warriortrading.com/rights-offering-definition-day-trading-terminology/) |
-| [Option Greeks Definition: Day Trading Terminology](option-greeks-definition-day-trading-terminology.md) | 570 | 2025-01-08 | [↗](https://www.warriortrading.com/option-greeks-definition-day-trading-terminology/) |
-| [Recession Definition: Day Trading Terminology](recession-definition-day-trading-terminology.md) | 566 | 2025-01-08 | [↗](https://www.warriortrading.com/recession-definition-day-trading-terminology/) |
 | [Yield Curve Definition: Day Trading Terminology](yield-curve-definition-day-trading-terminology.md) | 562 | 2025-01-11 | [↗](https://www.warriortrading.com/yield-curve-definition-day-trading-terminology/) |
 | [NASDAQ Definition: Day Trading Terminology](nasdaq-definition-day-trading-terminology.md) | 560 | 2025-01-08 | [↗](https://www.warriortrading.com/nasdaq-definition-day-trading-terminology/) |
-| [Fill Price Definition: Day Trading Terminology](fill-price-definition-day-trading-terminology.md) | 559 | 2025-01-08 | [↗](https://www.warriortrading.com/fill-price-definition-day-trading-terminology/) |
 | [Price Target Definition: Day Trading Terminology](price-target-definition-day-trading-terminology.md) | 556 | 2025-01-08 | [↗](https://www.warriortrading.com/price-target-definition-day-trading-terminology/) |
 | [Support Level Definition: Day Trading Terminology](support-level-definition-day-trading-terminology.md) | 556 | 2025-01-08 | [↗](https://www.warriortrading.com/support-level-definition-day-trading-terminology/) |
-| [Box Spread Definition: Day Trading Terminology](box-spread-definition-day-trading-terminology.md) | 551 | 2025-01-11 | [↗](https://www.warriortrading.com/box-spread-definition-day-trading-terminology/) |
-| [Credit Default Swap Definition: Day Trading Terminology](credit-default-swap-definition-day-trading-terminology.md) | 551 | 2025-01-11 | [↗](https://www.warriortrading.com/credit-default-swap-definition-day-trading-terminology/) |
-| [Dark Cloud Cover Definition: Day Trading Terminology](dark-cloud-cover-definition-day-trading-terminology.md) | 551 | 2025-01-08 | [↗](https://www.warriortrading.com/dark-cloud-cover-definition-day-trading-terminology/) |
-| [Delta Neutral Definition: Day Trading Terminology](delta-neutral-definition-day-trading-terminology.md) | 550 | 2025-01-08 | [↗](https://www.warriortrading.com/delta-neutral-definition-day-trading-terminology/) |
-| [Options Roll Up Definition: Day Trading Terminology](options-roll-up-definition-day-trading-terminology.md) | 549 | 2025-01-11 | [↗](https://www.warriortrading.com/options-roll-up-definition-day-trading-terminology/) |
-| [Federal Reserve Definition: Day Trading Terminology](federal-reserve-definition-day-trading-terminology.md) | 547 | 2025-01-11 | [↗](https://www.warriortrading.com/federal-reserve-definition-day-trading-terminology/) |
-| [National Association of Securities Dealers (NASD) Definition: Day Tradin](national-association-of-securities-dealers-nasd-definition-day-trading-terminology.md) | 546 | 2025-01-08 | [↗](https://www.warriortrading.com/national-association-of-securities-dealers-nasd-definition-day-trading-terminology/) |
+| [Gross Domestic Product (GDP) Definition: Day Trading Terminology](gross-domestic-product-gdp.md) | 550 | 2025-01-11 | [↗](https://www.warriortrading.com/gross-domestic-product-gdp/) |
 | [Stock Definition: Day Trading Terminology](stock-definition-day-trading-terminology.md) | 546 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-definition-day-trading-terminology/) |
-| [Cryptocurrency Definition: Day Trading Terminology](cryptocurrency-definition-day-trading-terminology.md) | 545 | 2025-01-08 | [↗](https://www.warriortrading.com/cryptocurrency-definition-day-trading-terminology/) |
-| [Collateralized Debt Obligation (CDO) Definition: Day Trading Terminology](collateralized-debt-obligation-cdo-definition-day-trading-terminology.md) | 542 | 2025-01-11 | [↗](https://www.warriortrading.com/collateralized-debt-obligation-cdo-definition-day-trading-terminology/) |
 | [Debt Definition: Day Trading Terminology](debt-definition-day-trading-terminology.md) | 542 | 2025-01-11 | [↗](https://www.warriortrading.com/debt-definition-day-trading-terminology/) |
-| [Piercing Pattern Definition: Day Trading Terminology](piercing-pattern-definition-day-trading-terminology.md) | 541 | 2025-01-08 | [↗](https://www.warriortrading.com/piercing-pattern-definition-day-trading-terminology/) |
-| [Iron Condor Definition: Day Trading Terminology](iron-condor-definition-day-trading-terminology.md) | 535 | 2025-01-08 | [↗](https://www.warriortrading.com/iron-condor-definition-day-trading-terminology/) |
 | [Allocation Definition: Day Trading Terminology](allocation-definition-day-trading-terminology.md) | 534 | 2025-01-11 | [↗](https://www.warriortrading.com/allocation-definition-day-trading-terminology/) |
 | [Chinese Wall Definition: Day Trading Terminology](chinese-wall-definition-day-trading-terminology.md) | 534 | 2025-01-08 | [↗](https://www.warriortrading.com/chinese-wall-definition-day-trading-terminology/) |
 | [Hidden Seller Definition: Day Trading Terminology](hidden-seller-definition-day-trading-terminology.md) | 534 | 2025-01-11 | [↗](https://www.warriortrading.com/hidden-seller-definition-day-trading-terminology/) |
 | [Russell 2000 Definition: Day Trading Terminology](russell-2000-definition-day-trading-terminology.md) | 533 | 2025-01-08 | [↗](https://www.warriortrading.com/russell-2000-definition-day-trading-terminology/) |
-| [At the Money Definition: Day Trading Terminology](at-the-money-definition-day-trading-terminology.md) | 532 | 2025-01-11 | [↗](https://www.warriortrading.com/at-the-money-definition-day-trading-terminology/) |
-| [Black Scholes Definition: Day Trading Terminology](black-scholes-definition-day-trading-terminology.md) | 532 | 2025-01-08 | [↗](https://www.warriortrading.com/black-scholes-definition-day-trading-terminology/) |
-| [Securities and Exchange Commission (SEC) Definition: Day Trading Termino](sec-definition-day-trading-terminology.md) | 532 | 2025-01-08 | [↗](https://www.warriortrading.com/sec-definition-day-trading-terminology/) |
 | [NYSE Definition: Day Trading Terminology](nyse-definition-day-trading-terminology.md) | 531 | 2025-01-08 | [↗](https://www.warriortrading.com/nyse-definition-day-trading-terminology/) |
-| [Ratio Spread Definition: Day Trading Terminology](ratio-spread-definition-day-trading-terminology.md) | 531 | 2025-01-08 | [↗](https://www.warriortrading.com/ratio-spread-definition-day-trading-terminology/) |
 | [Scaling In/Out Definition: Day Trading Terminology](scaling-in-out-definition-day-trading-terminology.md) | 531 | 2025-01-11 | [↗](https://www.warriortrading.com/scaling-in-out-definition-day-trading-terminology/) |
 | [Shareholder Definition: Day Trading Terminology](shareholder-definition-day-trading-terminology.md) | 530 | 2025-01-11 | [↗](https://www.warriortrading.com/shareholder-definition-day-trading-terminology/) |
-| [Delta Definition: Day Trading Terminology](delta-definition-day-trading-terminology.md) | 528 | 2025-01-08 | [↗](https://www.warriortrading.com/delta-definition-day-trading-terminology/) |
-| [Market Order Definition: Day Trading Terminology](market-order-definition.md) | 528 | 2025-01-23 | [↗](https://www.warriortrading.com/market-order-definition/) |
-| [Dividend Reinvestment Plan (DRIP) Definition: Day Trading Terminology](dividend-reinvestment-plan-drip-definition-day-trading-terminology.md) | 527 | 2025-01-08 | [↗](https://www.warriortrading.com/dividend-reinvestment-plan-drip-definition-day-trading-terminology/) |
-| [Assignment Definition: Day Trading Terminology](assignment-definition-day-trading-terminology.md) | 525 | 2025-01-08 | [↗](https://www.warriortrading.com/assignment-definition-day-trading-terminology/) |
-| [Contango Definition: Day Trading Terminology](contango-definition-day-trading-terminology.md) | 524 | 2025-02-14 | [↗](https://www.warriortrading.com/contango-definition-day-trading-terminology/) |
-| [Municipal Bond Definition: Day Trading Terminology](municipal-bond-definition-day-trading-terminology.md) | 524 | 2025-12-15 | [↗](https://www.warriortrading.com/municipal-bond-definition-day-trading-terminology/) |
-| [Stock Market Definition: Day Trading Terminology](stock-market-definition-day-trading-terminology.md) | 522 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-market-definition-day-trading-terminology/) |
-| [Compound Interest Definition: Day Trading Terminology](compound-interest-definition-day-trading-terminology.md) | 521 | 2025-01-08 | [↗](https://www.warriortrading.com/compound-interest-definition-day-trading-terminology/) |
-| [Order Imbalance Definition: Day Trading Terminology](order-imbalance-definition-day-trading-terminology.md) | 521 | 2025-01-11 | [↗](https://www.warriortrading.com/order-imbalance-definition-day-trading-terminology/) |
-| [Private Equity Definition: Day Trading Terminology](private-equity-definition-day-trading-terminology.md) | 520 | 2025-01-11 | [↗](https://www.warriortrading.com/private-equity-definition-day-trading-terminology/) |
-| [U.S. Treasury (T-bills) Definition: Day Trading Terminology](u-s-treasury-t-bills-definition-day-trading-terminology.md) | 520 | 2025-01-11 | [↗](https://www.warriortrading.com/u-s-treasury-t-bills-definition-day-trading-terminology/) |
-| [CBOE Definition: Day Trading Terminology](cboe-definition-day-trading-terminology.md) | 519 | 2025-01-08 | [↗](https://www.warriortrading.com/cboe-definition-day-trading-terminology/) |
 | [Cost of Capital Definition: Day Trading Terminology](cost-of-capital-definition-day-trading-terminology.md) | 518 | 2025-01-08 | [↗](https://www.warriortrading.com/cost-of-capital-definition-day-trading-terminology/) |
 | [Hidden Order Definition: Day Trading Terminology](hidden-order-definition-day-trading-terminology.md) | 518 | 2025-01-11 | [↗](https://www.warriortrading.com/hidden-order-definition-day-trading-terminology/) |
 | [Market Sentiment Definition: Day Trading Terminology](market-sentiment-definition-day-trading-terminology.md) | 518 | 2025-01-11 | [↗](https://www.warriortrading.com/market-sentiment-definition-day-trading-terminology/) |
-| [Money Flow Index Definition: Day Trading Terminology](money-flow-index-definition-day-trading-terminology.md) | 518 | 2025-01-08 | [↗](https://www.warriortrading.com/money-flow-index-definition-day-trading-terminology/) |
 | [Securities Fraud Definition: Day Trading Terminology](securities-fraud-definition-day-trading-terminology.md) | 518 | 2025-01-08 | [↗](https://www.warriortrading.com/securities-fraud-definition-day-trading-terminology/) |
-| [Central Bank Definition: Day Trading Terminology](central-bank-definition-day-trading-terminology.md) | 517 | 2025-01-08 | [↗](https://www.warriortrading.com/central-bank-definition-day-trading-terminology/) |
-| [CUSIP Number Definition: Day Trading Terminology](cusip-number-definition-day-trading-terminology.md) | 516 | 2025-01-08 | [↗](https://www.warriortrading.com/cusip-number-definition-day-trading-terminology/) |
-| [Interest Rates Definition: Day Trading Terminology](interest-rates-definition-day-trading-terminology.md) | 516 | 2025-01-11 | [↗](https://www.warriortrading.com/interest-rates-definition-day-trading-terminology/) |
 | [Crossed Market Definition: Day Trading Terminology](crossed-market-definition.md) | 515 | 2025-01-08 | [↗](https://www.warriortrading.com/crossed-market-definition/) |
-| [Difference Between A Stop And Limit Order](difference-stop-limit-order.md) | 514 | 2025-01-08 | [↗](https://www.warriortrading.com/difference-stop-limit-order/) |
-| [Duration Definition: Day Trading Terminology](duration-definition-day-trading-terminology.md) | 514 | 2025-01-11 | [↗](https://www.warriortrading.com/duration-definition-day-trading-terminology/) |
-| [Ethereum Definition: Day Trading Terminology](ethereum-definition-day-trading-terminology.md) | 514 | 2025-01-11 | [↗](https://www.warriortrading.com/ethereum-definition-day-trading-terminology/) |
 | [Asset Definition: Day Trading Terminology](asset-definition-day-trading-terminology.md) | 513 | 2025-01-08 | [↗](https://www.warriortrading.com/asset-definition-day-trading-terminology/) |
 | [Money Market Definition: Day Trading Terminology](money-market-definition-day-trading-terminology.md) | 513 | 2025-01-11 | [↗](https://www.warriortrading.com/money-market-definition-day-trading-terminology/) |
 | [Volume Profile Definition: Day Trading Terminology](volume-profile-definition-day-trading-terminology.md) | 513 | 2025-01-08 | [↗](https://www.warriortrading.com/volume-profile-definition-day-trading-terminology/) |
-| [Churning Definition: Day Trading Terminology](churning-definition-day-trading-terminology.md) | 512 | 2025-01-08 | [↗](https://www.warriortrading.com/churning-definition-day-trading-terminology/) |
 | [Emerging Markets Definition: Day Trading Terminology](emerging-markets-definition-day-trading-terminology.md) | 512 | 2025-12-15 | [↗](https://www.warriortrading.com/emerging-markets-definition-day-trading-terminology/) |
 | [Intraday Definition: Day Trading Terminology](intraday-definition-day-trading-terminology.md) | 512 | 2025-01-11 | [↗](https://www.warriortrading.com/intraday-definition-day-trading-terminology/) |
-| [Volatility Skew Definition: Day Trading Terminology](volatility-skew-definition-day-trading-terminology.md) | 512 | 2025-01-08 | [↗](https://www.warriortrading.com/volatility-skew-definition-day-trading-terminology/) |
 | [Thick Market Definition: Day Trading Terminology](thick-market-definition-day-trading-terminology.md) | 511 | 2025-01-11 | [↗](https://www.warriortrading.com/thick-market-definition-day-trading-terminology/) |
 | [Accredited Investor Definition: Day Trading Terminology](accredited-investor-definition-day-trading-terminology.md) | 509 | 2025-01-11 | [↗](https://www.warriortrading.com/accredited-investor-definition-day-trading-terminology/) |
 | [Commingling Definition: Day Trading Terminology](commingling-definition-day-trading-terminology.md) | 506 | 2025-01-08 | [↗](https://www.warriortrading.com/commingling-definition-day-trading-terminology/) |
 | [Penny Stock Definition: Day Trading Terminology](penny-stock-definition-day-trading-terminology.md) | 506 | 2025-01-08 | [↗](https://www.warriortrading.com/penny-stock-definition-day-trading-terminology/) |
-| [Syndicate Definition: Day Trading Terminology](syndicate-definition-day-trading-terminology.md) | 506 | 2025-01-08 | [↗](https://www.warriortrading.com/syndicate-definition-day-trading-terminology/) |
-| [Acquisition Definition: Day Trading Terminology](acquisition-definition-day-trading-terminology.md) | 505 | 2025-01-11 | [↗](https://www.warriortrading.com/acquisition-definition-day-trading-terminology/) |
-| [Individual Account Definition: Day Trading Terminology](individual-account-definition-day-trading-terminology.md) | 505 | 2025-01-11 | [↗](https://www.warriortrading.com/individual-account-definition-day-trading-terminology/) |
-| [Painting the Tape Definition: Day Trading Terminology](painting-the-tap-definition-day-trading-terminology.md) | 504 | 2025-01-08 | [↗](https://www.warriortrading.com/painting-the-tap-definition-day-trading-terminology/) |
-| [Intercontinental Exchange (ICE) Definition: Day Trading Terminology](intercontinental-exchange-ice-definition-day-trading-terminology.md) | 503 | 2025-02-14 | [↗](https://www.warriortrading.com/intercontinental-exchange-ice-definition-day-trading-terminology/) |
 | [Liabilities Definition: Day Trading Terminology](liabilities-definition-day-trading-terminology.md) | 503 | 2025-01-11 | [↗](https://www.warriortrading.com/liabilities-definition-day-trading-terminology/) |
-| [Blue Sky Laws Definition: Day Trading Terminology](blue-sky-laws-definition-day-trading-terminology.md) | 499 | 2025-01-08 | [↗](https://www.warriortrading.com/blue-sky-laws-definition-day-trading-terminology/) |
-| [Vega Definition: Day Trading Terminology](vega-definition-day-trading-terminology.md) | 493 | 2025-01-08 | [↗](https://www.warriortrading.com/vega-definition-day-trading-terminology/) |
 | [Block Trade Definition: Day Trading Terminology](block-trade-definition-day-trading-terminology.md) | 491 | 2025-01-08 | [↗](https://www.warriortrading.com/block-trade-definition-day-trading-terminology/) |
-| [Cash Settled Options Definition: Day Trading Terminology](cash-settled-options-definition-day-trading-terminology.md) | 489 | 2025-01-08 | [↗](https://www.warriortrading.com/cash-settled-options-definition-day-trading-terminology/) |
-| [Put Option Definition: Day Trading Terminology](put-option-definition-day-trading-terminology.md) | 482 | 2025-01-08 | [↗](https://www.warriortrading.com/put-option-definition-day-trading-terminology/) |
-| [Call Option Definition: Day Trading Terminology](call-option-definition-day-trading-terminology.md) | 481 | 2025-01-08 | [↗](https://www.warriortrading.com/call-option-definition-day-trading-terminology/) |
-| [Limit Order Definition: Day Trading Terminology](limit-order-definition-day-trading-terminology.md) | 481 | 2025-01-08 | [↗](https://www.warriortrading.com/limit-order-definition-day-trading-terminology/) |
-| [Binary Option Definition: Day Trading Terminology](binary-option-definition-day-trading-terminology.md) | 480 | 2025-01-08 | [↗](https://www.warriortrading.com/binary-option-definition-day-trading-terminology/) |
-| [Good Till Canceled (GTC) Order: Day Trading Terminology](good-till-canceled-gtc-order-day-trading-terminology.md) | 480 | 2025-01-08 | [↗](https://www.warriortrading.com/good-till-canceled-gtc-order-day-trading-terminology/) |
 | [Historical Volatility Definition: Day Trading Terminology](historical-volatility-definition-day-trading-terminology.md) | 480 | 2025-01-08 | [↗](https://www.warriortrading.com/historical-volatility-definition-day-trading-terminology/) |
-| [Day Trade Explained For Beginners](day-trade-definition-day-trading-terminology.md) | 478 | 2025-01-08 | [↗](https://www.warriortrading.com/day-trade-definition-day-trading-terminology/) |
 | [Beta Definition: Day Trading Terminology](beta-definition-day-trading-terminology.md) | 472 | 2025-01-08 | [↗](https://www.warriortrading.com/beta-definition-day-trading-terminology/) |
-| [Order Routing Definition: Day Trading Terminology](order-routing-definition-day-trading-terminology.md) | 469 | 2025-01-08 | [↗](https://www.warriortrading.com/order-routing-definition-day-trading-terminology/) |
-| [Option Series Definition: Day Trading Terminology](option-series-definition-day-trading-terminology.md) | 463 | 2025-01-08 | [↗](https://www.warriortrading.com/option-series-definition-day-trading-terminology/) |
-| [Cup and Handle Trading Guide](cup-handle-definition.md) | 461 | 2025-01-08 | [↗](https://www.warriortrading.com/cup-handle-definition/) |
-| [Implied Volatility Definition: Day Trading Terminology](implied-volatility-definition-day-trading-terminology.md) | 459 | 2025-01-08 | [↗](https://www.warriortrading.com/implied-volatility-definition-day-trading-terminology/) |
 | [Blue Chip Stocks Definition: Day Trading Terminology](blue-chip-stocks-definition-day-trading-terminology.md) | 457 | 2025-01-08 | [↗](https://www.warriortrading.com/blue-chip-stocks-definition-day-trading-terminology/) |
-| [Option Chain Definition: Day Trading Terminology](option-chain-definition-day-trading-terminology.md) | 457 | 2025-01-08 | [↗](https://www.warriortrading.com/option-chain-definition-day-trading-terminology/) |
-| [Stop-Limit Order Explained](stop-limit-order-definition.md) | 455 | 2025-01-08 | [↗](https://www.warriortrading.com/stop-limit-order-definition/) |
-| [Proprietary Trading Definition: Day Trading Terminology](proprietary-trading-definition-day-trading-terminology.md) | 453 | 2025-01-08 | [↗](https://www.warriortrading.com/proprietary-trading-definition-day-trading-terminology/) |
-| [Strike Price Definition: Day Trading Terminology](strike-price-definition-day-trading-terminology.md) | 450 | 2025-01-08 | [↗](https://www.warriortrading.com/strike-price-definition-day-trading-terminology/) |
-| [Covered Call Definition: Day Trading Terminology](covered-call-definition-day-trading-terminology.md) | 446 | 2025-01-08 | [↗](https://www.warriortrading.com/covered-call-definition-day-trading-terminology/) |
 | [Buying Power Definition: Day Trading Terminology](buying-power-definition-day-trading-terminology.md) | 445 | 2025-01-08 | [↗](https://www.warriortrading.com/buying-power-definition-day-trading-terminology/) |
-| [Vertical Spread Definition: Day Trading Terminology](vertical-spread-definition-day-trading-terminology.md) | 433 | 2025-01-08 | [↗](https://www.warriortrading.com/vertical-spread-definition-day-trading-terminology/) |
-| [Option Theta Definition: Day Trading Terminology](option-theta-definition-day-trading-terminology.md) | 429 | 2025-01-08 | [↗](https://www.warriortrading.com/option-theta-definition-day-trading-terminology/) |
-| [Capital Gains Tax – Everything You Need to Know](capital-gain-definition-day-trading-terminology.md) | 428 | 2025-01-08 | [↗](https://www.warriortrading.com/capital-gain-definition-day-trading-terminology/) |
-| [After Hours Trading: Day Trading Terminology](after-hours-trading-definition-day-trading-terminology.md) | 427 | 2025-01-08 | [↗](https://www.warriortrading.com/after-hours-trading-definition-day-trading-terminology/) |
-| [In The Money Definition: Day Trading Terminology](in-the-money-definition-day-trading-terminology.md) | 426 | 2025-01-08 | [↗](https://www.warriortrading.com/in-the-money-definition-day-trading-terminology/) |
-| [LEAPS Definition: Day Trading Terminology](leaps-definition-day-trading-terminology.md) | 424 | 2025-01-08 | [↗](https://www.warriortrading.com/leaps-definition-day-trading-terminology/) |
 | [Price Averaging Definition: Day Trading Terminology](price-averaging-definition-day-trading-terminology.md) | 423 | 2025-01-08 | [↗](https://www.warriortrading.com/price-averaging-definition-day-trading-terminology/) |
-| [High Frequency Trading Definition: Day Trading Terminology](high-frequency-trading-definition-day-trading-terminology.md) | 418 | 2025-01-08 | [↗](https://www.warriortrading.com/high-frequency-trading-definition-day-trading-terminology/) |
 | [Gap Definition: Day Trading Terminology](gap-definition-day-trading-terminology.md) | 407 | 2025-01-08 | [↗](https://www.warriortrading.com/gap-definition-day-trading-terminology/) |
 | [Market Capitalization Definition: Day Trading Terminology](market-capitalization-definition-day-trading-terminology.md) | 406 | 2025-01-08 | [↗](https://www.warriortrading.com/market-capitalization-definition-day-trading-terminology/) |
-| [One Triggers Other Order Definition: Day Trading Terminology](one-triggers-other-day-trading-terminology.md) | 402 | 2025-01-08 | [↗](https://www.warriortrading.com/one-triggers-other-day-trading-terminology/) |
-| [Protective Put Definition: Day Trading Terminology](protective-put-definition-day-trading-terminology.md) | 402 | 2025-01-08 | [↗](https://www.warriortrading.com/protective-put-definition-day-trading-terminology/) |
-| [Bull Market Definition: Day Trading Terminology](bull-market-definition-day-trading-terminology.md) | 397 | 2025-01-08 | [↗](https://www.warriortrading.com/bull-market-definition-day-trading-terminology/) |
-| [Forex Definition: Day Trading Terminology](forex-definition-day-trading-terminology.md) | 392 | 2025-01-08 | [↗](https://www.warriortrading.com/forex-definition-day-trading-terminology/) |
-| [Long Sided Trading Definition: Day Trading Terminology](long-sided-trading-definition-day-trading-terminology.md) | 389 | 2025-01-08 | [↗](https://www.warriortrading.com/long-sided-trading-definition-day-trading-terminology/) |
-| [Dividend Definition: Day Trading Terminology](dividend-definition.md) | 386 | 2025-01-08 | [↗](https://www.warriortrading.com/dividend-definition/) |
+| [Stock Borrowing Definition: Day Trading Terminology](stock-borrowing-definition-day-trading-terminology.md) | 390 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-borrowing-definition-day-trading-terminology/) |
 | [Spread Definition: Day Trading Terminology](spread-definition-day-trading-terminology.md) | 384 | 2025-01-08 | [↗](https://www.warriortrading.com/spread-definition-day-trading-terminology/) |
-| [Strangle (Options) Definition: Day Trading Terminology](strangle-options-definition-day-trading-terminology.md) | 384 | 2025-01-08 | [↗](https://www.warriortrading.com/strangle-options-definition-day-trading-terminology/) |
-| [A Different Perspective About Liquidity](a-different-perspective-about-liquidity.md) | 383 | 2025-02-14 | [↗](https://www.warriortrading.com/a-different-perspective-about-liquidity/) |
 | [Standard Deviation Definition: Day Trading Terminology](standard-deviation-definition-day-trading-terminology.md) | 382 | 2025-01-08 | [↗](https://www.warriortrading.com/standard-deviation-definition-day-trading-terminology/) |
-| [Floor Trader Pivots Definition: Day Trading Terminology](floor-pivots-definition-day-trading-terminology.md) | 380 | 2025-01-08 | [↗](https://www.warriortrading.com/floor-pivots-definition-day-trading-terminology/) |
-| [Fork (Cryptocurrency) Definition: Day Trading Terminology](fork-cryptocurrency-definition-day-trading-terminology.md) | 379 | 2025-01-08 | [↗](https://www.warriortrading.com/fork-cryptocurrency-definition-day-trading-terminology/) |
-| [Cash Account Definition: Day Trading Terminology](cash-account-definition-day-trading-terminology.md) | 378 | 2025-01-08 | [↗](https://www.warriortrading.com/cash-account-definition-day-trading-terminology/) |
 | [Hyperinflation Definition: Day Trading Terminology](hyperinflation-definition-day-trading-terminology.md) | 377 | 2025-01-08 | [↗](https://www.warriortrading.com/hyperinflation-definition-day-trading-terminology/) |
 | [Calendar Spread Definition: Day Trading Terminology](calendar-spread-definition-day-trading-terminology.md) | 376 | 2025-01-08 | [↗](https://www.warriortrading.com/calendar-spread-definition-day-trading-terminology/) |
-| [Partial Fill Definition: Day Trading Terminology](partial-fill-definition-day-trading-definition.md) | 376 | 2025-01-08 | [↗](https://www.warriortrading.com/partial-fill-definition-day-trading-definition/) |
 | [P/E Ratio Definition: Day Trading Terminology](p-e-ratio-definition-day-trading-terminology.md) | 372 | 2025-01-08 | [↗](https://www.warriortrading.com/p-e-ratio-definition-day-trading-terminology/) |
-| [Buy To Cover Definition: Day Trading Terminology](buy-to-cover-definition-day-trading-terminology.md) | 371 | 2025-01-08 | [↗](https://www.warriortrading.com/buy-to-cover-definition-day-trading-terminology/) |
-| [Oscillator Definition: Day Trading Terminology](oscillator-definition-day-trading-terminology.md) | 368 | 2025-01-08 | [↗](https://www.warriortrading.com/oscillator-definition-day-trading-terminology/) |
 | [Dow Theory Definition: Day Trading Terminology](dow-theory-definition-day-trading-terminology.md) | 361 | 2025-01-08 | [↗](https://www.warriortrading.com/dow-theory-definition-day-trading-terminology/) |
+| [Swing Trading Definition: Day Trading Terminology](swing-trading-definition.md) | 359 | 2025-01-08 | [↗](https://www.warriortrading.com/swing-trading-definition/) |
 | [Thin Market Definition: Day Trading Terminology](thin-market-definition-day-trading-terminology.md) | 357 | 2025-01-08 | [↗](https://www.warriortrading.com/thin-market-definition-day-trading-terminology/) |
-| [Death Cross Definition & Trading Guide](death-cross-definition-day-trading-terminology.md) | 356 | 2025-01-08 | [↗](https://www.warriortrading.com/death-cross-definition-day-trading-terminology/) |
-| [Amortization Definition: Day Trading Terminology](amortization-definition-day-trading-terminology.md) | 355 | 2025-01-08 | [↗](https://www.warriortrading.com/amortization-definition-day-trading-terminology/) |
-| [Average True Range Definition](average-true-range-definition-day-trading-terminology.md) | 352 | 2025-01-08 | [↗](https://www.warriortrading.com/average-true-range-definition-day-trading-terminology/) |
 | [Stock Split Definition: Day Trading Terminology](stock-split-definition-day-trading-terminology.md) | 352 | 2025-01-08 | [↗](https://www.warriortrading.com/stock-split-definition-day-trading-terminology/) |
 | [Warrant Definition: Day Trading Terminology](warrant-definition-day-trading-terminology.md) | 348 | 2025-01-08 | [↗](https://www.warriortrading.com/warrant-definition-day-trading-terminology/) |
 | [Fundamental Analysis Definition: Day Trading Terminology](fundamental-analysis-definition-day-trading-terminology.md) | 346 | 2025-01-08 | [↗](https://www.warriortrading.com/fundamental-analysis-definition-day-trading-terminology/) |
 | [Underlying Asset Definition: Day Trading Terminology](underlying-asset-definition-day-trading-terminology.md) | 341 | 2025-01-08 | [↗](https://www.warriortrading.com/underlying-asset-definition-day-trading-terminology/) |
-| [Ex-Dividend Date Definition: Day Trading Terminology](ex-dividend-definition-day-trading-terminology.md) | 339 | 2025-01-08 | [↗](https://www.warriortrading.com/ex-dividend-definition-day-trading-terminology/) |
 | [Cold Storage Definition: Day Trading Terminology](cold-storage-definition-day-trading-terminology.md) | 337 | 2025-01-08 | [↗](https://www.warriortrading.com/cold-storage-definition-day-trading-terminology/) |
 | [Fiat Currency Definition: Day Trading Terminology](fiat-currency-definition-day-trading-terminology.md) | 336 | 2025-01-08 | [↗](https://www.warriortrading.com/fiat-currency-definition-day-trading-terminology/) |
-| [Contrarian Trader Definition: Day Trading Terminology](contrarian-trader-definition-day-trading-terminology.md) | 335 | 2025-01-08 | [↗](https://www.warriortrading.com/contrarian-trader-definition-day-trading-terminology/) |
-| [Dow Jones Industrial Average – DJIA: Day Trading Terminology](dow-jones-industrial-average-djia-day-trading-terminology.md) | 335 | 2025-01-08 | [↗](https://www.warriortrading.com/dow-jones-industrial-average-djia-day-trading-terminology/) |
-| [Net Asset Value (NAV) Definition: Day Trading Terminology](net-asset-value-nav-definition-day-trading-terminology.md) | 335 | 2025-01-08 | [↗](https://www.warriortrading.com/net-asset-value-nav-definition-day-trading-terminology/) |
-| [Elliott Wave Definition: Day Trading Terminology](elliott-wave-definition-day-trading-terminology.md) | 334 | 2025-01-08 | [↗](https://www.warriortrading.com/elliott-wave-definition-day-trading-terminology/) |
-| [Credit Spread Definition: Day Trading Terminology](credit-spread-definition-day-trading-terminology.md) | 333 | 2025-01-08 | [↗](https://www.warriortrading.com/credit-spread-definition-day-trading-terminology/) |
-| [Golden Cross Definition: Day Trading Terminology](golden-cross-definition-day-trading-terminology.md) | 331 | 2025-01-08 | [↗](https://www.warriortrading.com/golden-cross-definition-day-trading-terminology/) |
-| [Market Cycle Definition: Day Trading Terminology](market-cycle-definition-day-trading-terminology.md) | 331 | 2025-01-08 | [↗](https://www.warriortrading.com/market-cycle-definition-day-trading-terminology/) |
-| [Preferred Stock Definition: Day Trading Terminology](preferred-stock-definition-day-trading-terminology.md) | 328 | 2025-01-08 | [↗](https://www.warriortrading.com/preferred-stock-definition-day-trading-terminology/) |
+| [Aroon Indicator Definition: Day Trading Terminology](aroon-indicator-definition-day-trading-terminology.md) | 331 | 2025-01-08 | [↗](https://www.warriortrading.com/aroon-indicator-definition-day-trading-terminology/) |
 | [Market Breadth Definition: Day Trading Terminology](market-breadth-definition-day-trading-terminology.md) | 325 | 2025-01-08 | [↗](https://www.warriortrading.com/market-breadth-definition-day-trading-terminology/) |
-| [American Depository Receipt (ADR) Definition: Day Trading Terminology](american-depository-receipt-adr-definition-day-trading-terminology.md) | 324 | 2025-01-08 | [↗](https://www.warriortrading.com/american-depository-receipt-adr-definition-day-trading-terminology/) |
 | [Price Action Definition: Day Trading Terminology](price-action-definition-day-trading-terminology.md) | 324 | 2025-01-08 | [↗](https://www.warriortrading.com/price-action-definition-day-trading-terminology/) |
-| [Keltner Channel Definition: Day Trading Terminology](keltner-channel-definition-day-trading-terminology.md) | 323 | 2025-01-08 | [↗](https://www.warriortrading.com/keltner-channel-definition-day-trading-terminology/) |
 | [European Option Definition: Day Trading Terminology](european-option-definition-day-trading-terminology.md) | 322 | 2025-01-08 | [↗](https://www.warriortrading.com/european-option-definition-day-trading-terminology/) |
-| [Fill Or Kill (FOK) Definition: Day Trading Terminology](fill-or-kill-fok-definition-day-trading-terminology.md) | 320 | 2025-01-08 | [↗](https://www.warriortrading.com/fill-or-kill-fok-definition-day-trading-terminology/) |
 | [Market Trend Definition: Day Trading Terminology](market-trend-definition-day-trading-terminology.md) | 320 | 2025-01-08 | [↗](https://www.warriortrading.com/market-trend-definition-day-trading-terminology/) |
-| [Collar Strategy Definition: Day Trading Terminology](collar-definition-day-trading-terminology.md) | 319 | 2025-01-08 | [↗](https://www.warriortrading.com/collar-definition-day-trading-terminology/) |
 | [Pink Sheets Definition: Day Trading Terminology](pink-sheets-definition-day-trading-terminology.md) | 319 | 2025-01-08 | [↗](https://www.warriortrading.com/pink-sheets-definition-day-trading-terminology/) |
 | [PEG Ratio Definition: Day Trading Terminology](peg-ratio-definition-day-trading-terminology.md) | 318 | 2025-01-08 | [↗](https://www.warriortrading.com/peg-ratio-definition-day-trading-terminology/) |
-| [Mining Rig Definition: Day Trading Terminology](mining-rig-definition-day-trading-terminology.md) | 317 | 2025-01-08 | [↗](https://www.warriortrading.com/mining-rig-definition-day-trading-terminology/) |
-| [Mortgage-Backed Security (MBS) Definition: Day Trading Terminology](mortgage-backed-security-definition-day-trading-terminology.md) | 317 | 2025-01-08 | [↗](https://www.warriortrading.com/mortgage-backed-security-definition-day-trading-terminology/) |
 | [Day Trader Definition: Day Trading Terminology](day-trader-definition-day-trading-terminology.md) | 316 | 2025-12-15 | [↗](https://www.warriortrading.com/day-trader-definition-day-trading-terminology/) |
 | [Derivative Definition: Day Trading Terminology](derivative-definition-day-trading-terminology.md) | 315 | 2025-01-08 | [↗](https://www.warriortrading.com/derivative-definition-day-trading-terminology/) |
-| [Altcoin Definition: Daytrading Terminology](altcoin-definition-daytrading-terminology.md) | 314 | 2025-01-08 | [↗](https://www.warriortrading.com/altcoin-definition-daytrading-terminology/) |
 | [Put-Call Ratio Definition: Day Trading Terminology](put-call-ratio-definition-day-trading-terminology.md) | 314 | 2025-01-08 | [↗](https://www.warriortrading.com/put-call-ratio-definition-day-trading-terminology/) |
 | [Shares Outstanding Definition: Day Trading Terminology](shares-outstanding-definition.md) | 312 | 2025-01-08 | [↗](https://www.warriortrading.com/shares-outstanding-definition/) |
-| [Bitcoin Cash Definition: Day Trading Terminology](bitcoin-cash-definition-day-trading-terminology.md) | 311 | 2025-01-08 | [↗](https://www.warriortrading.com/bitcoin-cash-definition-day-trading-terminology/) |
 | [Commodity Definition: Day Trading Terminology](commodity-definition-day-trading-terminology.md) | 311 | 2025-02-14 | [↗](https://www.warriortrading.com/commodity-definition-day-trading-terminology/) |
-| [Average Directional Index Definition: Day Trading Terminology](average-directional-index-definition-day-trading-terminology.md) | 308 | 2025-12-15 | [↗](https://www.warriortrading.com/average-directional-index-definition-day-trading-terminology/) |
 | [Option Class Definition: Day Trading Terminology](option-class-definition-day-trading-terminology.md) | 308 | 2025-01-08 | [↗](https://www.warriortrading.com/option-class-definition-day-trading-terminology/) |
 | [Open Interest Definition: Day Trading Terminology](open-interest-definition.md) | 307 | 2025-01-08 | [↗](https://www.warriortrading.com/open-interest-definition/) |
-| [Tick Index Definition: Day Trading Terminology](tick-index-definition-day-trading-terminology.md) | 307 | 2025-01-08 | [↗](https://www.warriortrading.com/tick-index-definition-day-trading-terminology/) |
-| [Volatility Crush Definition: Day Trading Terminology](volatility-crush-definition-day-trading-terminology.md) | 307 | 2025-01-08 | [↗](https://www.warriortrading.com/volatility-crush-definition-day-trading-terminology/) |
-| [Gamma Definition: Day Trading Terminology](gamma-definition-day-trading-terminology.md) | 306 | 2025-01-08 | [↗](https://www.warriortrading.com/gamma-definition-day-trading-terminology/) |
 | [Basket Trade Definition: Day Trading Terminology](basket-trade-definition-day-trading-terminology.md) | 305 | 2025-01-08 | [↗](https://www.warriortrading.com/basket-trade-definition-day-trading-terminology/) |
 | [Proof Of Work Definition: Day Trading Terminology](proof-of-work-definition-day-trading-terminology.md) | 302 | 2025-01-08 | [↗](https://www.warriortrading.com/proof-of-work-definition-day-trading-terminology/) |
 | [Extrinsic Value Definition: Day Trading Terminology](extrinsic-value-definition-day-trading-terminology.md) | 301 | 2025-01-08 | [↗](https://www.warriortrading.com/extrinsic-value-definition-day-trading-terminology/) |
-| [Initial Coin Offering (ICO) Definition: Day Trading Terminology](initial-coin-offering-ico-definition-day-trading-terminology.md) | 299 | 2025-01-08 | [↗](https://www.warriortrading.com/initial-coin-offering-ico-definition-day-trading-terminology/) |
 | [American Option Definition: Day Trading Terminology](american-option-definition-day-trading-terminology.md) | 298 | 2025-01-08 | [↗](https://www.warriortrading.com/american-option-definition-day-trading-terminology/) |
 | [Bag Holder Definition: Day Trading Terminology](bag-holder-definition-day-trading-terminology.md) | 294 | 2025-01-08 | [↗](https://www.warriortrading.com/bag-holder-definition-day-trading-terminology/) |
 | [Mark To Market Definition: Day Trading Terminology](mark-to-market-definition-day-trading-terminology.md) | 284 | 2025-01-08 | [↗](https://www.warriortrading.com/mark-to-market-definition-day-trading-terminology/) |

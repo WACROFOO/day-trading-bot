@@ -1,9 +1,9 @@
 # market notes — 22 articles
 
-From warriortrading.com. Each file carries its source URL and lastmod
-in a header comment, so a claim can be cited like a video timestamp.
+Weekly market overviews and watch lists.
 
-Total ~24,195 words.
+Total ~24,195 words. Each file carries its source
+URL and lastmod in a header comment.
 
 | article | words | updated | source |
 |---|---:|---|---|
