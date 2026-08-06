@@ -43,7 +43,7 @@ name comes from it. Never quote finviz's `Change`, `Price`, `Volume` or
 
 > *"Before I even pulled up the chart, I saw that it was a 50 million share
 > float. 50 million shares is a little on the higher side, especially for a
-> stock priced at $1."* — `ZfwTJAMLroA` 12:49
+> stock priced at USD 1."* — `ZfwTJAMLroA` 12:49
 
 Float and price kill a name **before the chart is opened**. That is the whole
 trick, and it is why this runs on published metrics.
@@ -56,7 +56,7 @@ trick, and it is why this runs on published metrics.
 
 | # | gate | threshold | provenance |
 |---|---|---|---|
-| 1 | price | $2.00–$20.00 hard; **$2.50–$9 preferred** | `PARAMETERS.md` §1; *"I prefer stocks generally between $2.50 and $8 or $9"* `ZfwTJAMLroA` 13:13 |
+| 1 | price | USD 2.00–20.00 hard; **USD 2.50–9.00 preferred** | `PARAMETERS.md` §1; *"I prefer stocks generally between [USD] 2.50 and 8 or 9 [dollars]"* `ZfwTJAMLroA` 13:13 |
 | 2 | float | **< 20M**, sweet spot < 10M | `PARAMETERS.md` §1 |
 | 3 | volume | **≥ 250,000 shares** or it is not even on the scanner | *"the volume threshold is um 250,000 shares minimum"* `1zBC9RKwfeU` 1:06:48 |
 | 4 | catalyst | a dated, same-day reason | finviz `whyMoving` block carries a `catalyst` boolean |
@@ -80,8 +80,8 @@ pairs — the score carries negative information. Gates, then eyes.
 ## What the script cannot see — always add these by hand
 
 1. **Capital structure.** finviz has no shelf and no ATM. On 2026-08-05 this
-   was the decisive check: ASTC carried a **$24.5M ATM plus a $200M shelf
-   against a $21M market cap**. Look for a live ATM, a recent reverse split
+   was the decisive check: ASTC carried a **USD 24.5M ATM plus a USD 200M shelf
+   against a USD 21M market cap**. Look for a live ATM, a recent reverse split
    (a sub-5M share count is the tell), and a dilution vote. See
    `reports/2026-08-05-recap.md`.
 2. **The chart shape.** Metrics say a name qualifies; they never say it is
@@ -121,7 +121,7 @@ When asked for the stars:
 2. Give the survivors in **gap-% order**, each with float, price, rotation and
    the catalyst headline.
 3. Name what was rejected and on which gate. The rejections are most of the
-   value; they are what stops a $1.18 stock with a 4.4M float from being
+   value; they are what stops a USD 1.18 stock with a 4.4M float from being
    "interesting because it's up 17%".
 4. Add the filings check and the chart shape for the top one or two only.
 5. **If nothing survives, say so.** That is a normal morning:
