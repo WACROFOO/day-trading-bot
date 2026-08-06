@@ -163,6 +163,10 @@ def finviz(sym):
         'cash_sh': to_num(d.get('Cash/sh')),
         'debt_eq': to_num(d.get('Debt/Eq')),
         'ipo': d.get('IPO'),
+        'prev_close_fv': to_num(d.get('Prev Close')),
+        # "52W High" comes as "316.00 -99.10%" - the level, then the distance
+        'high_52w': to_num((d.get('52W High') or '').split()[0] or None),
+        'perf_year': to_num(d.get('Perf Year')),
     }
     # sector / industry / country live in the header filter links
     links = re.findall(r'screener\?v=1[^"]*f=(?:sec|ind|geo)[^"]*"[^>]*>([^<]+)', raw)
@@ -182,6 +186,51 @@ def finviz(sym):
         except Exception:
             pass
     out['news'] = [(strip(t), strip(h)) for t, h in NEWS_ROW.findall(raw)[:5]]
+    return out
+
+
+# ------------------------------------------------------- reverse-split check
+YF_DAILY = ('https://query1.finance.yahoo.com/v8/finance/chart/'
+            '{}?interval=1d&range=1mo')
+
+
+def split_check(sym, prev_close_fv):
+    """Did a reverse split just happen, and does the history smell of one?
+
+    Written after BYAH on 2026-08-06 looked like it had gone from $0.33 to
+    $2.84 overnight.  It had not: the board consolidated 8 shares into 1 that
+    morning, so the price was the same pizza in fewer slices.  Two tests:
+
+      TODAY   Yahoo's last daily close has not yet been back-adjusted while
+              finviz already reports the post-split Prev Close.  Their ratio
+              is then the split factor, and a split factor is a CLEAN number.
+              BYAH read 2.64 / 0.33 = 8.000.  A genuine overnight move gives
+              a ragged ratio like 1.37, never 8.000.
+
+      HISTORY 52-week high divided by price.  Real companies do not fall 50x
+              in a year; adjusted history does.  BYAH: 316.00 / 2.84 = 111x.
+              AZI: 125.70 / 2.30 = 55x.  Both had consolidated.
+
+    Yahoo is used only as a SECOND OPINION on one number.  Nothing here is a
+    metric in its own right - the whole test is that two sources disagree.
+    """
+    out = {}
+    try:
+        j = json.loads(sh(['curl', '-s', '--compressed', '--max-time', '20',
+                           '-H', f'User-Agent: {UA}', YF_DAILY.format(sym)]))
+        q = j['chart']['result'][0]['indicators']['quote'][0]['close']
+        closes = [c for c in q if c]
+        yf_prev = closes[-2] if len(closes) >= 2 else None
+    except Exception:
+        return out
+    if yf_prev and prev_close_fv and yf_prev > 0:
+        ratio = prev_close_fv / yf_prev
+        near = round(ratio)
+        if near >= 2 and abs(ratio - near) < 0.02:
+            out['split_today'] = near
+        elif ratio and abs(ratio - 1) > 0.15:
+            # sources disagree but not by a clean factor - still worth saying
+            out['prev_close_mismatch'] = ratio
     return out
 
 
@@ -259,6 +308,20 @@ def grade(r):
 
     # capital-structure smell tests that decided 2026-08-05.  finviz cannot
     # see a shelf, so these are pointers to the filing, not verdicts.
+    # A reverse split makes the price look like it moved when it did not, so
+    # this is a KILL, not a warning: the gap % that put the name on the list
+    # is an accounting artefact.  BYAH, 2026-08-06.
+    if r.get('split_today'):
+        kill.append(f'{r["split_today"]}-for-1 reverse split effective today — '
+                    f'the "gap" is the split, not a move')
+    elif r.get('prev_close_mismatch'):
+        warn.append(f'finviz and Yahoo disagree on prior close by '
+                    f'{r["prev_close_mismatch"]:.2f}x — verify before trusting gap%')
+    hi52, px_ = r.get('high_52w'), r.get('pm_close') or r.get('prev_close')
+    if hi52 and px_ and hi52 / px_ > 20:
+        warn.append(f'52w high {hi52/px_:.0f}x the price — history has been '
+                    f'split-adjusted, this has consolidated before')
+
     so, mc = r.get('shares_out'), r.get('mkt_cap')
     if so and so < 5e6:
         warn.append(f'only {so/1e6:.2f}M shares out — check for a reverse split')
@@ -298,7 +361,10 @@ def main():
 
     with cf.ThreadPoolExecutor(max_workers=6) as ex:
         metrics = list(ex.map(finviz, [c['sym'] for c in cands]))
-    rows = [{**c, **m} for c, m in zip(cands, metrics)]
+        splits = list(ex.map(lambda m: split_check(m['sym'],
+                                                   m.get('prev_close_fv')),
+                             metrics))
+    rows = [{**c, **m, **s} for c, m, s in zip(cands, metrics, splits)]
     for r in rows:
         r['verdict'], r['reasons'] = grade(r)
 

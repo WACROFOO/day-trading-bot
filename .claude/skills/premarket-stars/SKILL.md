@@ -22,6 +22,7 @@ metric = finviz. Nothing from bars.
 | volume | under 250k pre-market |
 | catalyst | none dated today |
 | still rising | more than 25% off the pre-market high |
+| reverse split | one took effect today — the gap is the split, not a move |
 
 Separates STAR from WATCH: rotation (pm volume ÷ float), % of an average day,
 short float ≥15%.
