@@ -1,14 +1,17 @@
-# The 60-day pre-market challenge
+# The 60-day challenge
 
 One atomic task a day, 30–45 minutes, each building on the last.
 
-**Your window: 12:00–14:00 France = 06:00–08:00 ET.** Entirely pre-market. The
-bell rings at 15:30 France, 90 minutes after you log off.
+**The session is the strategy's own, `PARAMETERS.md` §2: 07:00–11:30 ET =
+13:00–17:30 France.** Pre-market scan from 13:00, the bell at 15:30, hard stop
+at 17:30. No fixed personal window — you are there for the open, which is where
+the setups actually resolve.
 
 Three rules that follow from that and never change:
 
-1. **Flat by 14:00 France.** You cannot hold a position into an open you will
-   not see. No exceptions, ever.
+1. **Hard stop 17:30 France (11:30 ET), and nothing between 17:30 and 21:00.**
+   §2 calls midday a no-trade zone. Write your stop time down each morning
+   before the scan, and obey the one you wrote, not the one you feel like.
 2. **Paper only, for all 60 days.** Our own replication of these rules over 894
    sessions produced negative expectancy (`reports/2026-08-regime-filter.md`).
    The goal here is *process*, not profit.
@@ -28,7 +31,7 @@ You cannot trade what you cannot size. No charts this phase.
 | 1 | S | Write your account rules on one sheet of paper: €500 account, **€10 max risk per trade** (2%), **€30 daily stop** (6%), 3 losses = done, max 2 names/day | The sheet exists and is next to your screen |
 | 2 | S | Position sizing drill. `shares = risk ÷ (entry − stop)`. Do 20 by hand: entry 3.14 stop 2.98, entry 9.07 stop 8.25, … | 20 answers, no calculator errors |
 | 3 | S | Expectancy. `(win% × avg win) − (loss% × avg loss)`. Compute the breakeven win rate at 1.5:1, 2:1, 3:1 | You can state why 40% wins at 2:1 beats 60% at 1:1 |
-| 4 | S | Map your window. Write the FR↔ET table for 12:00–14:00 and mark what is happening in the market at each half hour | You can say what 13:20 France is in ET without thinking |
+| 4 | S | Map the session. FR↔ET table for 13:00–17:30, marking the pre-market scan, the bell at 15:30, the 09:35 blackout end and the 10:30 close of the prime window | You can say what 15:47 France is in ET without thinking |
 | 5 | S | Read `strategies/PARAMETERS.md` §13, the misreading traps | You can name three rules that are commonly misread |
 | 6 | S | Halts. LULD bands, the 5-minute minimum, why size is the only defence. `corpus.py "halt" --show streams` | You can explain what happens to your order during a halt |
 | 7 | S | Float. What it is, where to check it, why under 20M. Look up the float of 5 random tickers | 5 floats found from a source that reconciles with volume |
@@ -36,9 +39,11 @@ You cannot trade what you cannot size. No charts this phase.
 | 9 | S | TradingView: extended hours ON, the three screens, a 10-second chart. `TRADINGVIEW-SETUP.md` | Pre-market bars visible on your chart |
 | 10 | S | **Week review.** Write your one-page rulebook from days 1–9 | One page. You will revise it on day 59 |
 
-## Phase 2 · Days 11–20 — Reading the pre-market
+## Phase 2 · Days 11–20 — Reading the pre-market, then the open
 
-Still no trades. You are learning to see.
+Still no trades. You are learning to see. From day 15 stay through 15:30
+France and watch what the bell does to the names you picked at 13:00 — that
+comparison is the whole point of being there for both.
 
 | # | | Task | Done when |
 |---|---|---|---|
@@ -51,7 +56,7 @@ Still no trades. You are learning to see.
 | 17 | L | Run `python scripts/premarket_dd.py SYM SYM SYM` on your list. Compare the tape to your scoring | You found one name the tape disagreed with you on |
 | 18 | L | Run the capital-structure check on your top 2. Reject anything with a live ATM or a recent reverse split | At least one name rejected on filings alone |
 | 19 | L | Build a 3-name watchlist with a written one-sentence reason each | 3 names, 3 reasons |
-| 20 | S | **Week review.** Of everything you picked in days 11–19, how many actually ran? Count honestly | A hit rate, written down |
+| 20 | S | **Week review.** Of everything you picked in days 11–19, how many actually ran after the bell? Count honestly | A hit rate, written down |
 
 ## Phase 3 · Days 21–32 — Levels and patterns
 
@@ -78,7 +83,7 @@ Now you trade. Paper. One setup at a time.
 |---|---|---|---|
 | 33 | L | Write a complete trade plan for 1 name — entry, stop, **size**, target 1 — and place **no order** | A plan with 4 numbers |
 | 34 | L | Same for 3 names. Rank them. Trade none | 3 plans |
-| 35 | L | **First paper trade.** Take your highest-ranked setup. Outcome irrelevant | 1 trade, closed before 14:00 |
+| 35 | L | **First paper trade.** Take your highest-ranked setup, after the 09:35 blackout ends. Outcome irrelevant | 1 trade, closed before your written stop time |
 | 36 | L | Add the rule: move stop to breakeven after target 1 | Applied on one trade |
 | 37 | L | The exit ladder: sell half at target 1, trail the rest | Applied on one trade |
 | 38 | L | Journal template. Entry, stop, size, exit, reason, **"did I follow the plan?"** | Every trade so far journalled |
@@ -95,13 +100,13 @@ Same session every day. The repetition *is* the training.
 
 | # | | Task |
 |---|---|---|
-| 45 | L | Full routine, focus: **the 13:00 scan** — is your list built by 13:30? |
+| 45 | L | Full routine, focus: **the scan** — is your list built by 15:15 France, before the bell? |
 | 46 | L | Full routine, focus: **the catalyst** — no trade without one, whatever the chart |
 | 47 | L | Full routine, focus: **size** — recompute shares on every trade, no guessing |
 | 48 | L | Full routine, focus: **the entry trigger** — first candle to make a new high, or no entry |
 | 49 | L | Full routine, focus: **the stop** — off the chart, never a round number you invented |
 | 50 | L | Full routine, focus: **target 1** — sell half, no hesitation |
-| 51 | L | Full routine, focus: **flat by 14:00** — no negotiation with yourself |
+| 51 | L | Full routine, focus: **the hard stop** — flat at 17:30 France, no negotiation with yourself |
 | 52 | L | Full routine, focus: **the journal** — written within 10 minutes of the close |
 | 53 | L | Full routine, focus: **no trade is a position** — best action may be nothing |
 | 54 | S | **Week review.** Read all your journals. What sentence recurs? |

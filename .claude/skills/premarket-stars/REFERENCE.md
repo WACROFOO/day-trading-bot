@@ -2,8 +2,7 @@
 
 Why the skill is built this way. Read only when a rule is questioned.
 
-Any pre-market hour, 04:00–09:30 ET. There is no 12:00–14:00 window here — the
-whole pre-market is in scope, and the answer changes minute to minute, so
+Any pre-market hour, 04:00–09:30 ET. The whole pre-market is in scope, and the answer changes minute to minute, so
 always re-run rather than quoting an earlier list.
 
 ## The one command
