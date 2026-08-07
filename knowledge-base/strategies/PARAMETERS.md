@@ -9,7 +9,9 @@ does not mean it works.
 
 **Conflict** = the corpus states more than one value. Backtest the range.
 
-> **Read §13 before implementing any of this.** A full implementation attempt produced ~18 defects and not one was a wrong number here — every one was a misreading of a rule that was already stated correctly. §13 lists each trap with the citation that settles it.
+> **Read §13 and §15 before implementing any of this.** A full implementation attempt produced ~18 defects and not one was a wrong number here — every one was a misreading of a rule that was already stated correctly. §13 lists each trap with the citation that settles it.
+>
+> **A 2026-08 audit against the 2,063-article blog corpus — never previously consulted — found 16 more, and again not one was arithmetic.** Every single one was a *type* error: a scanner dial read as a gate, a sustained state read as an instantaneous test, a caution read as a veto, a conditional rule read as universal, a dated practice read as timeless. §15 is that pattern; `reports/2026-08-parameter-audit.md` is the workings. Sixteen parameters changed, including `volume_min`, `stop_max_distance`, `size_ladder` and the entire expectancy basis of §9.
 
 ---
 
@@ -293,9 +295,12 @@ position_value  = shares * entry_price          # NOT the risk
 |---|---|---|---|---|
 | `risk_pct_per_trade` | 2.0 | % of account | 125 | 3–5% also stated |
 | `risk_flat_beginner` | 50 | $ | 125 | — |
-| `size_ladder` | 100 → 200 → 400 → 800 | shares | 125 | 50 start also stated |
+| `size_ladder` | 100 → 200 → 300 → 400 | shares, **+100/week** | 125 | doubling was wrong |
+| `size_max` | 20,000 | shares | — | his stated ceiling |
+| `size_open_fraction` | 0.25 | of normal, at the open | — | earned back intraday |
+| `size_up_trigger` | +1,000 | $ on the day before sizing up | — | — |
 | `scale_priority` | size before frequency | — | 125 | — |
-| `max_trades_per_day` | 1–2 | count | 22 | — |
+| `max_trades_per_day` | 2–4 | names | 22 | 1–2 was low |
 
 Yield per share size, at the stated $0.20/share edge:
 
@@ -307,6 +312,31 @@ Yield per share size, at the stated $0.20/share edge:
 
 Constraint: fill quality degrades with size on sub-20M float. The edge does not
 scale linearly and the corpus admits percentage returns fall as the account grows.
+
+### The ladder is linear, and it has a ceiling
+
+> *"this approach of **starting with 100 shares and then increasing by 100
+> shares each week** has been very successful."*
+> — `blog/getting-started/5-steps-to-success-trading-online`
+
+Geometric doubling put a beginner at 800 shares in week 4 against his 400.
+
+> *"I'll probably **max out share size at 20,000 shares**."* — `blog/other/3-lessons-making-60k`
+
+### Size is not constant within a day — it is earned back
+
+> *"I began each day by trading with **a quarter of my normal share size**. So
+> if I usually trade 20,000 shares, I'd start with 5,000 instead. I told myself
+> — **don't size up until you're already up at least $1,000 on the day.**"*
+> — `blog/other/how-being-a-great-loser-can-lead-to-day-trading-success`
+
+This is §8's daily-limit logic running **forward** rather than backward: the
+account is protected at the open, not only after losses have accumulated. A
+backtest sizing every trade identically overstates early-session risk every day.
+
+The mirror image is named as a **mistake**, not a rule: *"I start with 5,000
+shares, it goes up $0.20, I'm up $1,000 and I double to 10,000... it comes back
+down to break even and I stop out flat"* (`blog/recaps/day-72-583-challenge`).
 
 ---
 
@@ -355,7 +385,22 @@ untradeable.
 | 3 | < $0.75 | 15¢ or 75%, whichever is **lesser** |
 
 Bands are **doubled in the opening and closing auctions** (`StpXbe3Ga3Y`
-[08:37]). The move must be outside the band **within 5 minutes**.
+[08:37]); the closing window is **15:35–16:00** exactly
+(`blog/rules-regulation/circuit-breaker-halts`). The opening window's exact
+times are still unstated anywhere in the corpus. The move must be outside the
+band **within 5 minutes**.
+
+> **Tier 3 is correct as written — do not "reconcile" it.** The dedicated
+> article confirms *"the **lessor of 15 cents or 75%**"*. A second blog article
+> says *"a **15%** price jump or drop"* (`blog/risk-psychology/rollercoaster-day-of-trading`)
+> and that one is simply wrong. Reconciling toward the majority would corrupt a
+> parameter the spec already had right.
+
+**5 minutes is a minimum, and downside halts run long.** *"At 9:36 a.m. trading
+halted from a circuit breaker down at $17.36. It took **20 minutes** before
+trading resumed... shares dropped to begin trading at $13"*
+(`blog/market-news/peck-electric-700-epic-short-squeeze-archives`). A bot
+modelling every halt as a 5-minute gap mis-handles the case that costs most.
 
 ### Trigger and order mechanics
 
@@ -402,17 +447,57 @@ breakeven_win_rate = 1 / (1 + reward_risk)
 
 | Reward:Risk | Breakeven win rate | At 60% win rate, E per $1 risked |
 |---|---|---|
+| **0.57:1** | **63.6%** | **−$0.03** ← his April |
 | 1:1 | 50.0% | +$0.20 |
+| **1.42:1** | **41.3%** | **+$0.45** ← his February, best month of that year |
 | 1.5:1 | 40.0% | +$0.50 |
-| **2:1** | **33.3%** | **+$0.80** |
+| 2:1 | 33.3% | +$0.80 |
 | 3:1 | 25.0% | +$1.40 |
 
-Stated accuracy targets: 50% floor, 65–75% claimed. `win_rate` n=48.
+### He has never posted a 2:1. Use his numbers.
 
-At 2:1 and 60%, expectancy is +0.8R per trade. Two trades a day at 2% risk is
-+3.2% daily — which is implausibly high and is exactly why this needs testing
-rather than believing. The likely failure points: real win rate below 50%,
-slippage eating the 0.10 stop, and no fills at scale.
+An earlier version of this section built the table on `min_reward_risk = 2.0`
+and concluded that +3.2% daily was *"implausibly high"*. It was implausible
+because **the input was wrong**. His own TraderVue report, two months side by
+side (`blog/community-company/behind-trades-get-trading-rut-ep-7`):
+
+| | April (lost money) | February (best of the year) |
+|---|---|---|
+| accuracy | **60%** | **68%** |
+| average winner | **$781** | **$1,870** |
+| average loser | **$1,364** | **$1,318** |
+| win/loss ratio | **0.57** | **1.42** |
+| net | −$4,229 | +$70,000 |
+
+Recomputed on his figures: 0.68 × 1.42 − 0.32 = **+0.65R**, not +0.80R.
+
+### The decisive variable is `avg_win`, not `win_rate`
+
+Accuracy moved 8 points between those months. The average **winner** moved
+**2.4×**. The average **loser** barely moved at all.
+
+> *"This shows me that my **risk wasn't actually any different** between April
+> and February. What was different was that **I wasn't getting the home run
+> trade**... accuracy was only slightly better. **The big difference was the
+> profit/loss ratio.**"*
+
+Everything §1 gates on is *selection*, and selection moves the win rate. The
+variable that separated −$4,229 from +$70,000 sits on the **exit** side. This
+matches `reports/2026-08-score-basket.md`, which found selection features
+predict only risk and never upside — the same result, stated from inside his
+P&L. **`NEXT-STEPS.md` §4 is not one open question among several; it is the
+one that decides the strategy.**
+
+### Accuracy: 69%, verified, not "claimed"
+
+> *"I've taken over **24,268 day trades**... I'm trading with an accuracy of
+> **69%**."* — `blog/core-strategy/bull-flag-trading`; *"since 1/1/2017
+> accuracy is **70%**... over 15,000 trades"* — `blog/recaps/trade-recap-max-loss`
+
+Lifetime 69–70% across two independent samples; monthly 60–68%. Use **69% as
+the prior and the monthly spread as the uncertainty**, not a 50% floor.
+
+Remaining failure points: slippage eating the 0.10 stop, and no fills at scale.
 
 ---
 
@@ -517,15 +602,18 @@ stop:
   allow_average_down: false
 
 exit:
-  min_reward_risk: 2.0
+  min_reward_risk: 2.0          # a REALISED target (13); he posts 0.57-1.42
   target_1: high_of_day_retest
   scale_pct: [50, 25, 25]
   hard_exits: [first_candle_new_low, macd_negative, vwap_break, high_volume_red]
 
 sizing:
   risk_pct_per_trade: 2.0
-  max_trades_per_day: 2
-  size_ladder: [100, 200, 400, 800]
+  size_max_shares: 20_000
+  size_open_fraction: 0.25      # start the day at 1/4 size
+  size_up_trigger_usd: 1_000    # earn it back before sizing up
+  max_trades_per_day: 4
+  size_ladder: [100, 200, 300, 400]   # +100/week, NOT doubling
 
 daily_limits:
   max_loss_pct: 6.0

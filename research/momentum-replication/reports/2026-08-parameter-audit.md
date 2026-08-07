@@ -9,13 +9,15 @@ This is that check. Every parameter re-read against teaching, recaps, streams
 §13 already establishes that in this corpus the numbers are usually right and
 the readings are usually wrong.
 
-Seven corrections. One of them invalidates a tool built three days ago.
+**Sixteen corrections across three passes, covering every section of the spec.**
+One of them invalidates a tool built three days ago; one rewrites the basis of
+the expectancy model. Not a single one is an arithmetic error.
 
 ---
 
 ## The structural error: a scanner setting is not a trade gate
 
-Six of the seven findings are the same mistake wearing different numbers. §1 is
+Six of the sixteen findings are the same mistake wearing different numbers. §1 is
 titled *"Universe filter — applied before the chart is looked at. **All must
 pass.**"* and lists `gain_pct_min`, `rvol_min` and `volume_min` alongside price
 and float as though they were the same kind of object.
@@ -192,7 +194,7 @@ every file header, and nothing in the pipeline has ever read it.
 
 ---
 
-## Confirmed unchanged
+## Confirmed unchanged (first pass)
 
 Worth stating, because the audit could have found rot everywhere and did not:
 
@@ -282,10 +284,156 @@ the first scale.
 
 ---
 
+# Third pass — §7, §8b, §9
+
+## 11. §9's `min_reward_risk = 2.0` never happened. His best month was 1.42.
+
+This is the largest finding in the audit, and the corpus contained the answer
+the whole time. `behind-trades-get-trading-rut-ep-7` puts two months of his own
+TraderVue report side by side:
+
+| | April (lost money) | February (best of the year) |
+|---|---|---|
+| accuracy | **60%** | **68%** |
+| average winner | **$781** | **$1,870** |
+| average loser | **$1,364** | **$1,318** |
+| **win/loss ratio** | **0.57** | **1.42** |
+| net | −$4,229 | +$70,000 |
+
+§9 builds its expectancy table on `min_reward_risk >= 2.0` and concludes:
+
+> *"At 2:1 and 60%, expectancy is +0.8R per trade. Two trades a day at 2% risk
+> is +3.2% daily — which is implausibly high and is exactly why this needs
+> testing rather than believing."*
+
+It was implausible because **the input was wrong**. He has never posted a 2.0.
+His *best month of the year* was **1.42**, and the 60% month in the same report
+ran at **0.57** and lost money. §13 already established that `min_reward_risk`
+is a realised ratio rather than a veto; this supplies the realised values, and
+they are half the spec's figure.
+
+Recomputed on his own numbers: 0.68 × 1.42 − 0.32 = **+0.65R**, not +0.80R.
+
+## 12. The decisive variable is `avg_win`, not `win_rate` — he says so
+
+Between his worst month and his best, accuracy moved 8 points (60 → 68) while
+the average winner moved **2.4×** ($781 → $1,870). The average *loser* barely
+moved at all ($1,364 → $1,318).
+
+> *"This shows me that my **risk wasn't actually any different** between April
+> and February. What was different was that **I wasn't getting the home run
+> trade**... Now, accuracy was only slightly better. **The big difference was
+> the profit/loss ratio.**"*
+
+Everything §1 gates on — price, float, catalyst, rvol — is selection, and
+selection moves the win rate. The variable that decided a −$4,229 month from a
++$70,000 one is on the **exit** side. `reports/2026-08-score-basket.md` found
+selection features predict only risk and never upside (max |r| = 0.19); this is
+the same result stated from inside his own P&L.
+
+`NEXT-STEPS.md` §4 ("what should target 1 be") is therefore not one open
+question among several. It is the one that decides the strategy.
+
+## 13. §9's accuracy figures are understated, and verified
+
+§9: *"Stated accuracy targets: 50% floor, 65–75% claimed."* "Claimed" undersells
+it — the number is third-party-tracked and repeated over enormous samples:
+
+> *"I've taken over **24,268 day trades**... Currently, I'm trading with an
+> accuracy of **69%**."* — `blog/core-strategy/bull-flag-trading`
+
+> *"since 1/1/2017 accuracy is **70%**... over **15,000 trades**"*
+> — `blog/recaps/trade-recap-max-loss`
+
+An article is titled *"Momentum Day Trading Strategies Gave a **Verified**
+Accuracy of 69%"*. Monthly accuracy swings 60–68%; the lifetime figure is
+69–70%. **Use 69% as the prior and treat the month-to-month spread as the
+uncertainty**, rather than the spec's 50% floor.
+
+## 14. `size_ladder` is linear, not geometric
+
+§7: `size_ladder 100 → 200 → 400 → 800` — doubling. The blog states the ramp
+he actually teaches:
+
+> *"this approach of **starting with 100 shares and then increasing by 100
+> shares each week** has been very successful."*
+> — `blog/getting-started/5-steps-to-success-trading-online`
+
+100 → 200 → 300 → 400. By week 4 the spec has a beginner at **800 shares**
+against his 400 — double the risk at the point in the ramp where a beginner is
+least equipped to carry it.
+
+The spec also has no ceiling. He states one: *"I'll probably **max out share
+size at 20,000 shares**"* (`3-lessons-making-60k`), corroborated by *"I don't
+think I had any trades in the month where I had more than 20,001 position"*.
+
+## 15. §7 is missing the intraday size ramp entirely
+
+Size is not a per-trade constant re-derived from the stop. It **starts reduced
+each day and is earned back within the session**:
+
+> *"I began each day by trading with **a quarter of my normal share size**. So
+> if I usually trade 20,000 shares, I'd start with 5,000 instead. I told myself
+> — **don't size up until you're already up at least $1,000 on the day.**"*
+> — `blog/other/how-being-a-great-loser-can-lead-to-day-trading-success`
+
+Seen live too: *"I would typically start with 2,500 shares, but I know how
+quickly I could lose 30 cents... I'm just gonna start with 1,500"*
+(`day-102-100k-challenge`).
+
+This is §8's daily-limit logic running **forward** instead of backward — the
+account is protected at the open, not only after losses. A backtest sizing every
+trade identically overstates early-session risk on every single day.
+
+And the mirror image, which he names as a **mistake**: *"I start with 5,000
+shares, it goes up $0.20, I'm up $1,000 and **I double to 10,000**... it comes
+back down to break even and I stop out flat"* (`day-72-583-challenge`).
+
+`max_trades_per_day: 1–2` is also low. Observed: *"Three trades today"*
+(`profit-trading-day`), *"four stocks... four individual trades and a total of
+like 22 individual [executions]"* (`day-90-live-las-vegas`).
+
+## 16. §8b is CORRECT and part of the corpus is wrong — do not "fix" it
+
+The dedicated article confirms the spec verbatim:
+
+> *"All Tier 2 stocks that closed the previous day below 75 cents will have
+> trading halt thresholds at **the lessor of 15 cents or 75%**."*
+> — `blog/rules-regulation/circuit-breaker-halts`
+
+Another blog article contradicts it: *"if a stock priced under 75 cents
+experiences a **15% price jump or drop**, it triggers a halt"*
+(`blog/risk-psychology/rollercoaster-day-of-trading`). **That is wrong** — 15%
+is not the rule, 15 *cents* or 75% is. The spec took the regulatory version and
+should keep it.
+
+Recorded here because the obvious next move on finding a conflict is to
+"reconcile" it, and reconciling toward the majority would corrupt a correct
+parameter. `halt_trigger_dwell` 15 seconds and the 10% / 20% tiers are
+independently confirmed (`a-wild-ride-through-40-halts`,
+`rollercoaster-day-of-trading`).
+
+Two additions §8b lacks:
+
+- **The doubling window has exact times**: *"the volatility bands are doubled
+  to accommodate increased volatility near the closing bell **between
+  3:35pm–4pm**"*. §8b says "opening and closing auctions" without hours. The
+  opening window's exact times are still unstated in the corpus.
+- **A halt is 5 minutes *minimum*, and downside halts run long**: *"At 9:36 a.m.
+  trading halted from a circuit breaker down at $17.36. It took **20 minutes**
+  before trading resumed... shares dropped to begin trading at $13"*
+  (`blog/market-news/peck-electric-700-epic-short-squeeze-archives`). A bot
+  modelling halts as 5-minute gaps will mis-handle the case that costs most.
+
+---
+
 ## Still not audited
 
-§4 trigger, §7 sizing ladder, §8b halts, §9 expectancy. The blog has not been
-searched for any of them.
+§4 entry trigger. The blog's uses of *"first candle to make a new high"* are
+illustrative rather than definitional (`3-lessons-making-60k` walks failed
+examples), and nothing was found that qualifies or contradicts §4. `order_type`
+and `max_slippage 0.15` have **no blog support in either direction** — they
+remain the least-evidenced parameters in the spec.
 
 ## The pattern, across both passes
 
@@ -300,8 +448,9 @@ Every one of the ten findings is a **type error**, never an arithmetic one:
 | a dated practice | a timeless rule (finding 7) |
 | two conditions | one (finding 9) |
 
-Ten for ten. The next implementation should be reviewed against *that* list
-rather than against the numbers.
+Ten for ten at that point, and sixteen for sixteen by the end. The next
+implementation should be reviewed against *that* list rather than against the
+numbers — the numbers were almost never the problem.
 
 One new rejection reason appeared and has no home in the spec: *"TA, **five
 cent tick**"* (`starting-off-september-grateful-334`) — a tick-size / spread
