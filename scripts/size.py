@@ -38,9 +38,11 @@ import sys
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--entry', type=float, required=True)
-    ap.add_argument('--stop', type=float, required=True,
+    ap.add_argument('--entry', type=float)
+    ap.add_argument('--stop', type=float,
                     help='a level READ OFF THE CHART, below support')
+    ap.add_argument('--card', action='store_true',
+                    help='the one-line rule and its lookup table')
     ap.add_argument('--account', type=float, default=500.0)
     ap.add_argument('--risk', type=float, default=10.0, help='per trade')
     ap.add_argument('--daily-stop', type=float, default=30.0)
@@ -48,6 +50,25 @@ def main():
     ap.add_argument('--winrate', type=float, default=0.5)
     a = ap.parse_args()
 
+    if a.card:
+        # position = risk / (entry-stop) * entry = risk / stop%, so with a
+        # fixed per-trade risk the entry price cancels out entirely and the
+        # money down depends ONLY on how far the stop is, in percent.
+        print(f'\n  put in = {a.risk*100:.0f} / (stop distance in %)'
+              f'      [risk {a.risk:.0f}, account {a.account:.0f}]\n')
+        print(f'  {"stop is":>9}   {"put in":>8}   {"% of account":>12}')
+        for pct in (2, 3, 5, 7, 8, 10, 15, 20, 30):
+            pos = a.risk / (pct / 100)
+            flag = '   <- your whole account' if pos >= a.account else ''
+            print(f'  {pct:>7}%   {min(pos, a.account):>8.0f}'
+                  f'   {min(pos, a.account)/a.account*100:>11.0f}%{flag}')
+        print(f'\n  shares = put in / price.  Below '
+              f'{a.risk/a.account*100:.0f}% the position would exceed the '
+              f'account: risk less, never borrow.\n')
+        return 0
+
+    if a.entry is None or a.stop is None:
+        ap.error('--entry and --stop are required (or use --card)')
     if a.stop >= a.entry:
         print('stop must be below entry for a long', file=sys.stderr)
         return 1
