@@ -17,20 +17,73 @@ does not mean it works.
 
 Applied before the chart is looked at. All must pass.
 
+> **A scanner setting is not a trade gate.** See §15. Three of the rows below
+> were implemented as gates and are dials: `gain_pct_min`, `rvol_scan`,
+> `volume_min`. Getting this wrong is the largest single source of error found
+> in the 2026-08 audit.
+
 | Parameter | Op | Value | Unit | n | Conflict |
 |---|---|---|---|---|---|
 | `price_min` | >= | 2.00 | $ | 144 | 1.00 also stated |
 | `price_max` | <= | 20.00 | $ | 144 | 10.00 also stated |
 | `price_sweet_min` | >= | 5.00 | $ | — | 2.00 |
 | `price_sweet_max` | <= | 10.00 | $ | — | — |
-| `gain_pct_min` | >= | 10 | % on day | 666 | — |
-| `rvol_min` | >= | 5.0 | x 50-day avg | 61 | 100x, 500x cited as ideal |
-| `float_max` | <= | 20 | M shares | 72 | 10M preferred, 5M ideal |
+| `gain_pct_scan` | >= | 5 | % — the scanner dial | — | — |
+| `gain_pct_min` | >= | 10 | % on day — the pillar | 666 | — |
+| `rvol_scan` | >= | 5.0 | x — the scanner dial | 61 | — |
+| `rvol_min_trade` | >= | 1.5 | x — where he makes money | — | measured, see below |
+| `rvol_preferred` | >= | 3.0 | x — where he does best | — | measured |
+| `float_max_hot` | <= | 20 | M shares | 72 | 10M preferred |
+| `float_max_cold` | <= | 5 | M shares — cold market | — | regime-conditional |
 | `has_catalyst` | == | true | bool | 83 | — |
-| `volume_min` | >= | 500,000 | shares cum. | 102 | — |
+| `volume_min` | >= | 1,000,000 | shares cum. | 102 | 500k was wrong |
+| `premarket_volume_max` | <= | 1,000,000 | shares — **soft** | — | 1.5M accepted once |
+| `premarket_volume_min` | — | none | — | — | traded on 8,000 |
 | `rate_of_change_min` | > | 0 | % gain per minute, rising | — | not numerically stated |
 
-Rejects: `price < 1`, `float > 100M`, no catalyst, faded from pre-market high.
+Rejects: `price < 1`, `float > 100M`, no catalyst, faded from pre-market high,
+wide tick (*"TA, five cent tick"*, `starting-off-september-grateful-334`).
+
+### The volume rows, which are measured rather than taught
+
+`volume_min` was 500,000 and is wrong. He has published a split of **his own
+broker statements**:
+
+> *"Stocks with a relative volume of **150% and higher** is where I make money.
+> I did the best on stocks with relative volume of **300% and higher**...
+> **the stocks that have less than a million shares of volume I actually lost
+> $8,000 on. I did not make money on those stocks.** The stocks that closed the
+> day with one to two and a half million or more in volume are the ones I did
+> the best on."* — `blog/risk-psychology/rollercoaster-trader-behind-trades-ep-6`
+
+500,000 sits inside the band he lost money in. And 150% is **1.5×**, not 5× —
+the 5× is what he types into the scanner, not what a trade must clear.
+
+### Pre-market volume runs the OTHER WAY
+
+Every other volume rule here has a floor. This one has a ceiling and no floor,
+because the gap-and-go is a bet on an imbalance that has not yet resolved:
+
+> *"It already has **2 million shares of premarket volume**. So I already have a
+> little bit of a negative bias on it **before I even pull up the chart**."*
+> — `ZfwTJAMLroA` [13:21]
+
+> *"stocks that have millions of shares of pre-market volume don't really work
+> for the gap and go as much, because **I'm not the first one to see it**."*
+> — `blog/recaps/day-2-of-our-nyc-seminar`
+
+No floor: NCTY was traded on **8,000 shares** of pre-market volume, on the
+strength of the catalyst alone (`blog/recaps/starting-off-september-grateful-334`).
+
+### `float_max` changes with the tape
+
+> *"I focus on stocks with a float under 20 million shares, and **when the
+> market is colder, I tighten that down to under 5 million**."*
+> — `blog/risk-psychology/can-you-trade-in-a-cash-account`
+
+`reports/2026-08-regime-filter.md` tested regime as a filter on **entries** and
+found nothing. It never tested regime as a modifier of the **universe**. Those
+are different experiments and the second is untried.
 
 Funnel: ~8,000 equities → ~50 scanner hits → 3–5 watchlist → 1–2 trades.
 
@@ -69,9 +122,35 @@ not. See §10.
 | `session_open` | 09:30 | — | 44 |
 | `entry_blackout_end` | 09:35 | skip first 5 min | 44 |
 | `prime_window` | 09:30–10:30 | most edge here | 44 |
-| `session_close` | 11:30 | hard stop | 16 |
-| `premarket_start` | 07:00 | limit orders only | 38 |
+| `session_typical_close` | 10:30–11:00 | **the 90-minute mark** | — |
+| `session_close` | 11:30 | outer edge, not the centre | 16 |
+| `premarket_start` | 07:00 | **era-dependent — see below** | 38 |
 | `midday_avoid` | 11:30–15:00 | no trades | 16 |
+
+He frames the session as a **duration**, not a clock time, and it ends earlier
+than 11:30:
+
+> *"For me, I'm in the zone... for most days, it's from **9:30 until 10:30 or
+> 11:00**. So right around that **90 minute mark**."*
+> — `blog/recaps/starting-off-september-grateful-334`
+
+A backtest holding to 11:30 trades 30–60 minutes he is not in.
+
+### `premarket_start` is the 2017 rule, and the practice reversed
+
+> *"**I've traded pre-market maybe half a dozen times in the last year**, so
+> probably won't trade pre-market. I'll just trade 9:30 to noontime."*
+> — `blog/other/3-lessons-making-60k-1-month-behind-trades-ep-4`,
+> lastmod **2017-03-04**
+
+In the July 2026 challenge, `07:00` is named **78 times against 36 for
+`09:30`**, and `pre-market` **161 times against 9 for "the close"**
+(`reports/2026-07-challenge.md`). "Limit orders only" is a 2017 rule preserved
+as present tense.
+
+**Every blog file carries a `<!-- lastmod: -->` header and no pipeline has ever
+read it.** Any parameter drawn from a 2017–2019 article needs that date
+attached before it is treated as current.
 
 Personal window incl. pre-market: 07:00–11:00, stated as derived from 24,446 of
 his own trades. Unverified.
@@ -158,7 +237,7 @@ high. Same trigger, larger scale.
 | Parameter | Op | Value | Unit | n |
 |---|---|---|---|---|
 | `stop_price` | = | low of pullback candle | $ | 50 |
-| `stop_max_distance` | <= | 0.20 | $ per share | — |
+| `stop_max_distance` | <= | 0.30 | $ per share | — |
 | `stop_typical` | ~ | 0.08–0.10 | $ per share | — |
 | `stop_min_distance` | >= | spread width | $ | — |
 | `breakeven_trigger` | >= | +0.10 | $ or after 1st scale | 30 |
@@ -167,6 +246,14 @@ high. Same trigger, larger scale.
 | `vwap_break_exit` | == | true | hard invalidation | 45 |
 
 If `stop_distance > stop_max_distance`: reduce size or skip. Never widen.
+
+`stop_max_distance` was 0.20 with no citation and no `n`. His own numbered rule
+list gives 0.30, and the justification is emotional rather than mechanical —
+which is why it behaves like a §8 limit, not a chart-derived stop:
+
+> *"Rule number four, tight stops, **30 cent max loss**. If I have a 50, 60, 70
+> cent loss, that's going to start to trigger the emotions."*
+> — `blog/recaps/starting-off-september-grateful-334`
 
 ---
 
@@ -386,10 +473,15 @@ Full workings: `../data/support_definition.md`,
 universe:
   price_min: 2.00
   price_max: 20.00
-  gain_pct_min: 10
-  rvol_min: 5.0
-  float_max_shares: 20_000_000
-  volume_min_shares: 500_000
+  gain_pct_scan: 5            # scanner dial
+  gain_pct_min: 10            # the pillar
+  rvol_scan: 5.0              # scanner dial
+  rvol_min_trade: 1.5         # measured floor
+  rvol_preferred: 3.0
+  float_max_shares_hot: 20_000_000
+  float_max_shares_cold: 5_000_000
+  volume_min_shares: 1_000_000        # was 500_000 - he LOST money there
+  premarket_volume_max: 1_000_000     # soft: a ceiling, not a floor
   require_catalyst: true
   min_pillars: 5            # price, float, news, rvol, rate_of_change
 
@@ -404,7 +496,7 @@ support:
 session:
   timezone: America/New_York
   start: "09:35"
-  end: "11:30"
+  end: "11:00"          # the 90-minute mark; 11:30 is the outer edge
   prime_end: "10:30"
 
 entry:
@@ -419,7 +511,7 @@ entry:
 
 stop:
   rule: pullback_low
-  max_distance: 0.20
+  max_distance: 0.30
   breakeven_at: 0.10
   allow_widen: false
   allow_average_down: false
@@ -461,7 +553,9 @@ strategy does not clear that, the rules are noise.
 ---
 
 *Derived from `../data/rules_digest.md` — 2,040 rules, 2,903 numeric figures,
-257 videos. Values are stated, not validated. See `STRATEGY.md` §12.*
+257 videos, **plus a 2026-08 audit against the 2,063-article blog corpus**
+(`reports/2026-08-parameter-audit.md`). Values are stated, not validated.
+See `STRATEGY.md` §12.*
 
 ---
 
@@ -637,3 +731,51 @@ external confirmation of any part of the pipeline.
 
 Their dates cannot be taken from the index (see `data/README.md`); they are a
 numbered series and should be ordered by their own sequence.
+
+---
+
+## 15. A scanner setting is not a trade gate
+
+§13 records that ~18 defects were all misreadings rather than wrong numbers.
+The 2026-08 audit against the blog corpus found six more, and they are all the
+**same** misreading:
+
+§1 is titled *"Universe filter — applied before the chart is looked at. All
+must pass"*, and it lists price, float, gap %, relative volume and volume as
+though those five were one kind of object. They are two.
+
+| | he types this into a scanner | he requires this of a trade |
+|---|---|---|
+| gap | **5%** — *"all the stocks gapping up more than 5% in the entire market"* (`kicking-back-after-a-7k-day`) | 10% is the pillar |
+| relative volume | **5×** (`in-depth-guide-to-my-macd-scalping-strategy`) | *"**150%** and higher is where I make money"* |
+| volume | **250,000** minimum (`1zBC9RKwfeU` 1:06:48) | *"less than a million... I actually **lost $8,000**"* |
+| float | 20M | 20M hot, **5M cold** |
+
+A scanner dial is set **loose** so that nothing is missed; the eye tightens it
+afterwards. Implemented as a gate, a loose dial admits junk and a tight one
+silently deletes the population you were trying to find. Both failure modes
+look like the strategy not working.
+
+**The test that separates them:** ask whether the number appears in a sentence
+about *finding* stocks or about *trading* them. *"I look for stocks priced
+between $2 and $20, up at least 10%, with a relative volume of 5x or higher"* —
+that is a lookup. *"The stocks that closed the day with one to two and a half
+million or more in volume are the ones I did the best on"* — that is a result.
+
+Where they disagree, the **result wins**, because it is measured against
+realised P&L and the dial is not measured against anything.
+
+### The same shape, one register up
+
+§13's traps are all "a caution implemented as a veto": `stop_max_distance`,
+the third pullback, "too extended". §15's are "a dial implemented as a gate".
+Both come from the same habit — reading a statement as more binding than it is.
+When a rule and a behaviour disagree in this corpus, the behaviour is the rule
+and the statement is the emphasis.
+
+### Dates are evidence too
+
+Every blog file carries `<!-- lastmod: -->` and no pipeline has ever read it.
+`premarket_start` is a 2017 rule (§2) that the 2026 recaps reverse. Undated,
+the corpus reads as one voice speaking at once; dated, it shows a practice that
+changed. Attach the date before treating anything as present tense.

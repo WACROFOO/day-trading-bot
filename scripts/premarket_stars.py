@@ -64,6 +64,12 @@ FLOAT_MAX = 20_000_000                    # PARAMETERS.md §1
 FLOAT_SOFT = 10_000_000                   # under this is the sweet spot
 VOL_MIN = 250_000                         # "the volume threshold is um 250,000
                                           #  shares minimum" 1zBC9RKwfeU 1:06:48
+                                          #  A SCANNER DIAL, not a gate - he
+                                          #  traded NCTY on 8,000 shares of
+                                          #  pre-market volume.  PARAMETERS.md 15
+PM_VOL_CROWDED = 1_000_000                # "volume not more than a million
+                                          #  pre-market. You don't want it super
+                                          #  crowded" keeping-my-head-above-water-142
 GAP_MIN = 10.0                            # pillar 5
 FADE_MAX = 25.0                           # % off the pre-market high before
                                           # "still rising" is no longer true
@@ -287,10 +293,21 @@ def grade(r):
             warn.append(f'{off:.0f}% off the pre-market high')
 
     # --- context, not gates -------------------------------------------
+    # Rotation is NOT a plus.  This tool awarded CLRO for 27x its float trading
+    # pre-market; the corpus says that is the most damning fact about a
+    # gap-and-go, not its best feature - the imbalance the trade bets on has
+    # already resolved.  "It already has 2 million shares of premarket volume,
+    # so I already have a little bit of a negative bias on it before I even
+    # pull up the chart" (ZfwTJAMLroA 13:21); "stocks that have millions of
+    # shares of pre-market volume don't really work for the gap and go as much,
+    # because I'm not the first one to see it" (blog, day-2-of-our-nyc-seminar).
+    # Soft, not a veto: 1.5M was accepted once (11th-green-day-in-a-row-3k).
+    # Full evidence: reports/2026-08-parameter-audit.md section 3.
     if fl and pmv:
         r['rotation'] = pmv / fl
-        if r['rotation'] >= 1:
-            plus.append(f'{r["rotation"]:.1f}x the float traded pre-market')
+    if pmv > PM_VOL_CROWDED:
+        warn.append(f'{pmv/1e6:.1f}M shares already traded pre-market — '
+                    f'crowded, the move may be over before the bell')
     # finviz publishes a 3-month average of FULL-DAY volume, so this ratio is
     # "how much of a normal entire session has already traded before the bell",
     # not a like-for-like RVOL.  0.6 is already extraordinary.  Note the
@@ -299,9 +316,6 @@ def grade(r):
     # pre-market-only baseline.  Rotation vs float is the cleaner read.
     if r.get('avg_vol') and pmv:
         r['pct_avg_day'] = pmv / r['avg_vol']
-        if r['pct_avg_day'] >= 0.5:
-            plus.append(f'{r["pct_avg_day"]:.0%} of an average full day already '
-                        f'traded pre-market')
     sf = r.get('short_float')
     if sf and sf >= 15:
         plus.append(f'short float {sf:.1f}% — squeeze fuel')
