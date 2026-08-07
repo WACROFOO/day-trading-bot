@@ -11,7 +11,7 @@ does not mean it works.
 
 > **Read §13 and §15 before implementing any of this.** A full implementation attempt produced ~18 defects and not one was a wrong number here — every one was a misreading of a rule that was already stated correctly. §13 lists each trap with the citation that settles it.
 >
-> **A 2026-08 audit against the 2,063-article blog corpus — never previously consulted — found 16 more, and again not one was arithmetic.** Every single one was a *type* error: a scanner dial read as a gate, a sustained state read as an instantaneous test, a caution read as a veto, a conditional rule read as universal, a dated practice read as timeless. §15 is that pattern; `reports/2026-08-parameter-audit.md` is the workings. Sixteen parameters changed, including `volume_min`, `stop_max_distance`, `size_ladder` and the entire expectancy basis of §9.
+> **A 2026-08 audit against the 2,063-article blog corpus — never previously consulted — found 21 more across every section, and again not one was arithmetic.** Every single one was a *type* error: a scanner dial read as a gate, a sustained state read as an instantaneous test, a caution read as a veto, a conditional rule read as universal, a dated practice read as timeless. §15 is that pattern; `reports/2026-08-parameter-audit.md` is the workings. Twenty-one parameters changed, including `volume_min`, `stop_max_distance`, `size_ladder`, the entry trigger's reference candle, and the entire expectancy basis of §9. One §13 entry marked "unresolved without sub-minute data" was resolved from the blog.
 
 ---
 
@@ -223,14 +223,56 @@ is the whole rule in a sentence.
 
 | Parameter | Value | n |
 |---|---|---|
-| `trigger` | first candle to exceed prior candle high | 80 |
+| `trigger` | first candle to exceed **the previous red candle's** high | 80 |
+| `trigger_timing` | **intrabar**, at the break — not on the close | — |
+| `min_dip_bars` | **1** | — |
 | `timeframe` | 1 | min |
-| `order_type` | market / limit at ask + 0.15 | — |
-| `max_slippage` | 0.15 | $ per share |
-| `confirm_before_entry` | true — no anticipating | 47 |
+| `order_type` | marketable limit | 68 |
+| `limit_offset` | **UNSOURCED** — sweep, do not tune | 0 |
+| `confirm_candle_trigger` | true — wait for the candle | 47 |
+| `anticipate_level_break` | **true** — position 10–25¢ below a named level | 29 |
 
 Bull flag variant: flagpole → 2–3 candle consolidation → break of consolidation
 high. Same trigger, larger scale.
+
+> *"The correct entry is the first candle to make a new high after 2–3 red
+> candles of pulling back. By placing my mouse over **the previous red candle**
+> I can see the high, low, open, and close... **The moment a green candle
+> breaks the high is when I'm buying.**"*
+> — `blog/core-strategy/bull-flag-trading`
+
+The reference high is the **immediately preceding red candle**, not the high of
+the move or of the day; and entry is **intrabar**. A backtest triggering on
+`close > prior_high` enters late by up to a whole bar.
+
+### Confirmation and anticipation apply to different objects
+
+`confirm_before_entry — no anticipating` was one row, and it inverted the
+streams: *"anticipate the break"* appears **29 times across 26 streams** against
+**one** *"wait for confirmation"*.
+
+| object | rule |
+|---|---|
+| a **candle** trigger | **confirmed** — wait for it |
+| a **horizontal level** (whole dollar, pre-market high, HOD) | **anticipated** — be positioned below it |
+
+> *"I'll take a long 63 to anticipate the break through **68**, then I'll add at
+> 68"* — `KQU4HPH4S_4` [14:34]
+
+The anticipated levels are almost all whole or half dollars — §3's `at_support`
+components — and most are **adds**. This is the ABCD rule again: entry at C,
+**add** through B, never buy the break itself. §4 previously deleted the add
+ladder by applying the candle rule to levels.
+
+### `limit_offset` has no source
+
+`corpus.py "15 cents of slippage"` → **0 hits in all four registers**.
+`PLATFORM.md`'s `n=68` counts order-type mentions, not the 0.15. The order type
+is well sourced and its semantics exact — *"the limit order is 62. That's a
+marketable limit order, so that means I wouldn't fill any higher than 62"*
+(`YuNvqwJftVY` [01:04:24]) — but the offset is a **free parameter presented as a
+citation**, currently doing duty as the cost assumption in every backtest.
+Treat it like `support.tolerance_pct`: sweep it, report the spread, never tune.
 
 ---
 
@@ -246,6 +288,18 @@ high. Same trigger, larger scale.
 | `widen_stop_allowed` | == | false | bool | 50 |
 | `add_to_loser_allowed` | == | false | bool | 50 |
 | `vwap_break_exit` | == | true | hard invalidation | 45 |
+
+> **The stop is MENTAL, not resting — and that breaks the calibration.**
+> *"I'm buying with a marketable limit order, and then **I have a mental stop**.
+> So I press the sell button when I'm ready to get out"* (`-Aj8oowFAFY` [22:47]);
+> *"this is **for better or for worse**... using a mental stop, if it goes to
+> 3.25 and I keep holding it, I'll just keep losing more and more money, and
+> **I've certainly done that**"* (`yKV3C2DoaFg` [28:46]). He names it a weakness
+> and has since placed real stops in Lightspeed — so **implement the resting
+> stop**, but do not compare the result to his 69% / 1.42 as though they were
+> the same instrument. A resting stop is stopped out by wicks he held through,
+> and never blows through a level he blew through: **worse win rate, better
+> average loss.** The bias is not one-signed.
 
 If `stop_distance > stop_max_distance`: reduce size or skip. Never widen.
 
@@ -586,16 +640,19 @@ session:
 
 entry:
   timeframe_min: 1
-  trigger: first_candle_new_high
+  trigger: first_candle_exceeds_prior_RED_candle_high
+  trigger_timing: intrabar        # not close > prior_high
+  min_dip_bars: 1                 # 13 resolved: one red candle is enough
   max_pullback_index: 2
   require_macd_positive: true
   require_above_vwap: true
   require_above_ema9: true
   require_declining_pullback_volume: true
-  max_slippage: 0.15
+  limit_offset: 0.15              # UNSOURCED - sweep 0.00-0.30, never tune
 
 stop:
   rule: pullback_low
+  order: resting                  # he uses a MENTAL stop; see 5 before comparing
   max_distance: 0.30
   breakeven_at: 0.10
   allow_widen: false
@@ -787,7 +844,14 @@ as well as the 1-minute — *"the first pullbacks on the lower time frames, like
 10-second, one minute"* (`m5zu_X-_51I` [46:43]). On a 1-minute chart a fast
 mover's dips are frequently a single bar. Requiring two 1-minute bars therefore
 removes setups exactly where the move is fastest; a 1-minute pause **is** a 2–3
-candle pullback at 10-second resolution. Unresolved without sub-minute data.
+candle pullback at 10-second resolution.
+
+**RESOLVED (2026-08 audit), and without sub-minute data.** The blog states the
+minimum directly: *"As soon as the **1st red candle** has formed, I can begin
+looking for the first candle to make a new high"*
+(`blog/core-strategy/bull-flag-trading`). One red candle is enough; the "2–3" is
+the typical case in the illustration that follows, not a floor.
+**`MIN_DIP_BARS = 1`.**
 
 ### §1's rejects are rules, not commentary
 

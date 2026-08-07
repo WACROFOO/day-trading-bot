@@ -9,7 +9,7 @@ This is that check. Every parameter re-read against teaching, recaps, streams
 §13 already establishes that in this corpus the numbers are usually right and
 the readings are usually wrong.
 
-**Sixteen corrections across three passes, covering every section of the spec.**
+**Twenty-one corrections across four passes. Every section audited, §1 to §14.**
 One of them invalidates a tool built three days ago; one rewrites the basis of
 the expectancy model. Not a single one is an arithmetic error.
 
@@ -17,7 +17,7 @@ the expectancy model. Not a single one is an arithmetic error.
 
 ## The structural error: a scanner setting is not a trade gate
 
-Six of the sixteen findings are the same mistake wearing different numbers. §1 is
+Six of the twenty-one findings are the same mistake wearing different numbers. §1 is
 titled *"Universe filter — applied before the chart is looked at. **All must
 pass.**"* and lists `gain_pct_min`, `rvol_min` and `volume_min` alongside price
 and float as though they were the same kind of object.
@@ -427,13 +427,138 @@ Two additions §8b lacks:
 
 ---
 
-## Still not audited
+# Fourth pass — §4, the last section
 
-§4 entry trigger. The blog's uses of *"first candle to make a new high"* are
-illustrative rather than definitional (`3-lessons-making-60k` walks failed
-examples), and nothing was found that qualifies or contradicts §4. `order_type`
-and `max_slippage 0.15` have **no blog support in either direction** — they
-remain the least-evidenced parameters in the spec.
+## 17. `confirm_before_entry — no anticipating` is inverted by the streams
+
+§4: `confirm_before_entry | true — no anticipating | n=47`. The register split
+is as lopsided as any in this project:
+
+| phrase | teaching | recaps | **streams** | blog |
+|---|---|---|---|---|
+| *"anticipate the break"* | 11 | 3 | **29 in 26 files** | 17 |
+| *"wait for confirmation"* | 1 | 0 | **1** | 12 |
+
+Twenty-nine to one, in the register that records decisions made **before the
+outcome was known**. Read the entries and the rule is not "don't anticipate" —
+it is *what* he anticipates:
+
+> *"added at 9.09 to anticipate the break of **9.15**"* — `YuNvqwJftVY`
+> *"adding at 87 to anticipate the break of **89**"* — `RpoBINs58qw`
+> *"I'll take a long 63 to anticipate the break through **68**, then I'll add
+> at 68"* — `KQU4HPH4S_4`
+> *"added right there 75, 74 to anticipate the break of **80**"* — `txPT1JwFUJQ`
+> *"entry when I took it was at 59 to anticipate the break through **60**"*
+> — `pRY87PI2Zbc`
+
+Anticipated levels: 9.15, 89, 68, 80, 4.15, 80, 60, 13, 40. **Almost all are
+whole or half dollars** — §3's `at_support` confluence component. And most are
+**adds**, not initial entries: *"adding at"*, *"I'll add at 68"*, *"I keep
+adding every 10 cents"*.
+
+**Two different objects, and §4 applies one rule to both:**
+
+| object | rule |
+|---|---|
+| a **candle** trigger (first candle to make a new high) | **confirmed** — wait for it |
+| a **horizontal level** (whole dollar, pre-market high, HOD) | **anticipated** — be positioned 10–25¢ below |
+
+This is exactly the ABCD correction already in `abcd-pattern.md`: entry at C,
+**add** through B, never buy the break of B because *"that feels rather
+extended"*. Same mechanism — he is always positioned *before* the level, never
+chasing it. §4 flattens that into a prohibition and deletes the add ladder.
+
+## 18. `max_slippage: 0.15` is invented — zero corpus support
+
+`corpus.py "15 cents of slippage"` returns **0 hits in all four registers**.
+`PLATFORM.md:99` asserts *"marketable limit at ask + $0.15"* with `n=68`, but
+that `n` counts *"market vs limit order control"* mentions; the 0.15 is
+attached to none of them.
+
+The order **type** is well sourced and its semantics are stated exactly:
+
+> *"the limit order is 62. That's a marketable limit order, so that means
+> **I wouldn't fill any higher than 62**."* — `YuNvqwJftVY` [01:04:24]
+
+So marketable-limit is right and the **offset is a free parameter that has been
+presented as a citation**. It is currently doing double duty as a cost
+assumption in every backtest. Treat it like `support.tolerance_pct` — the
+spec's one acknowledged free number: **sweep it, never tune it, and report the
+spread.**
+
+## 19. The stop is MENTAL, not resting — and that breaks the calibration
+
+§5 defines `stop_price = low of pullback candle` and every backtest implements
+it as a resting order. He does not use one:
+
+> *"for my trading strategy, I'm buying with a marketable limit order, and then
+> **I have a mental stop**. So I press the sell button when I'm ready to get
+> out."* — `-Aj8oowFAFY` [22:47]
+
+> *"one of the things that I do is — and this is **for better or for worse** —
+> I use mental stops... this is an area where **I question whether that's the
+> right decision**... if I'm getting in at 3.37 I'm gonna tell myself my max
+> loss is 3.25. Obviously if I set an actual stop, once that max loss hits I
+> will be out, which is the **benefit** of an actual stop order. Using a mental
+> stop, if it goes to 3.25 and I keep holding it, I'll just keep losing more
+> and more money, and **I've certainly done that on more than one occasion**."*
+> — `yKV3C2DoaFg` [28:46–29:39]
+
+Confirmed in blog too: *"I don't have any stop. I have a mental max loss on it,
+but I don't have any stop order"* (`blog/recaps/day-trading-new-swing-trade-position`).
+
+**This is not a rule to copy — he flags it as a weakness and has since started
+placing real stops in Lightspeed.** But it breaks the calibration in §14 and
+§9, in *both directions at once*:
+
+| | resting stop (the backtest) | mental stop (his statistics) |
+|---|---|---|
+| wick through the level | **stopped out** | held, often profitably |
+| fast flush past the level | filled near the stop | **blows through — bigger loss** |
+
+So a resting-stop backtest shows a **worse win rate** and a **better average
+loss** than the man whose 69% and 1.42 it is being compared against. Every
+comparison in this repo has assumed they are the same instrument. They are not,
+and the bias is not even one-signed.
+
+## 20. §4's trigger is CORRECT, and the blog sharpens it
+
+> *"The correct entry is the first candle to make a new high after 2–3 red
+> candles of pulling back. By placing my mouse over **the previous red candle**
+> I can see the high, low, open, and close... **The moment a green candle breaks
+> the high is when I'm buying.**"* — `blog/core-strategy/bull-flag-trading`
+
+Two things the spec leaves ambiguous, now settled:
+
+- The reference high is the **immediately preceding red candle's** high — not
+  the high of the move, not the high of day.
+- Entry is **intrabar**, at the moment of the break. Not on the close. A
+  backtest triggering on `close > prior_high` enters late by up to a full bar.
+
+`momentum-day-trading-strategy` confirms the paired stop in the same sentence:
+*"the first green candle to make a new high after the pullback is my entry,
+**with my stop at the low of the pullback**"* — §5 corroborated in the register
+§5 never cited.
+
+One conditional worth carrying: the trigger is **price-band dependent**.
+*"Trying to get in at the first candle to make a new high to make a 20–30 cent
+scalp doesn't justify the risk. **You can't trade these stocks that way**"* —
+of high-priced names (`blog/core-strategy/day-106-finishing-week-3-bull-flag-trades`).
+
+## 21. §13's "unresolved" 2–3 candle question is resolved — by the blog
+
+§13 closes *"The 2–3 candle pullback is chart-relative"* with: *"Requiring two
+1-minute bars removes setups exactly where the move is fastest. **Unresolved
+without sub-minute data.**"*
+
+It is resolvable without sub-minute data, and the answer was in the blog:
+
+> *"As soon as the **1st red candle** has formed, **I can begin looking for the
+> first candle to make a new high**."* — `blog/core-strategy/bull-flag-trading`
+
+**One red candle is enough.** The "2–3" is the typical case in the illustration
+that follows (*"we had 3 red candles in a row"*), not a minimum. `MIN_DIP_BARS`
+should be **1**, and the §13 entry can be closed.
 
 ## The pattern, across both passes
 
@@ -447,10 +572,33 @@ Every one of the ten findings is a **type error**, never an arithmetic one:
 | a conditional rule | a universal one (findings 4, 10) |
 | a dated practice | a timeless rule (finding 7) |
 | two conditions | one (finding 9) |
+| a rule about candles | applied to levels too (finding 17) |
+| a free parameter | presented as a citation (finding 18) |
+| a *mental* stop | a resting order (finding 19) |
 
-Ten for ten at that point, and sixteen for sixteen by the end. The next
-implementation should be reviewed against *that* list rather than against the
-numbers — the numbers were almost never the problem.
+**Twenty-one for twenty-one.** Not one arithmetic error in the whole spec. The
+next implementation should be reviewed against *that* table rather than against
+the numbers — the numbers were almost never the problem.
+
+## Audit coverage
+
+| § | status |
+|---|---|
+| 1 universe | findings 1–4 |
+| 2 session | findings 6–7 |
+| 3 entry gate | findings 8–9 |
+| **4 trigger** | **findings 17–18, 20** |
+| 5 stop | findings 5, 19 |
+| 6 exit | finding 10 |
+| 7 sizing | findings 14–15 |
+| 8 daily limits | confirmed in full, blog-cited |
+| 8b halts | finding 16 — spec correct, corpus wrong |
+| 9 expectancy | findings 11–13 |
+| 10 unquantifiable | unchanged |
+| 13 clarifications | **one entry closed by finding 21** |
+| 14 recaps | consequence of finding 19 |
+
+Nothing left unaudited.
 
 One new rejection reason appeared and has no home in the spec: *"TA, **five
 cent tick**"* (`starting-off-september-grateful-334`) — a tick-size / spread
