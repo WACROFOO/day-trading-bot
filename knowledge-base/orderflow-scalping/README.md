@@ -1,9 +1,10 @@
 # Order-flow scalping — a second, separate method
 
-**This is not the Ross Cameron corpus.** Different instrument, different
-timeframe, different session, different evidence base. It is kept in its own
-directory so nothing here can be mistaken for, or silently merged into,
-`../strategies/`.
+**Self-contained. Nothing here relates to anything else in this repository.**
+Different instrument, different timeframe, different session, different evidence
+base. It is kept in its own directory so nothing in it can be mistaken for, or
+silently merged into, other work. It intentionally references no file outside
+this folder, and no file outside this folder references it.
 
 | | |
 |---|---|
@@ -18,7 +19,7 @@ directory so nothing here can be mistaken for, or silently merged into,
 
 | file | what it is |
 |---|---|
-| `MODEL.md` | the dissection — the three steps, the vocabulary, and how it differs from the Ross corpus |
+| `MODEL.md` | the dissection — the three steps, the vocabulary, and what makes it hard to encode |
 | `PLAYBOOK.md` | the executable form: pre-conditions, trigger, stop, targets, management, and a test order |
 | `TRANSFER-TO-EQUITIES.md` | **can this run on cash stocks in market hours?** what ports, what degrades, what blocks it |
 | `transcripts/tvERE-Beu2U.txt` | deduplicated timestamped captions, with a provenance header |
@@ -41,30 +42,25 @@ directory so nothing here can be mistaken for, or silently merged into,
 
 ## Evidence weight — read this before trusting any of it
 
-The whole method of this repo is that a claim's register and sample size decide
-how much it is worth. On that scale, this directory is **thin**:
+**One document. One session. One trader.**
 
-| | Ross corpus | here |
-|---|---|---|
-| documents | 2,680 across four registers | **1** |
-| registers | teaching / recaps / streams / blog | one live session |
-| cross-checks possible | register splits, date stamps, P&L statements | **none** |
+There is nothing here to cross-check against — no second session, no dated
+series, no published trade log, no independent account of the same rules. When a
+method is described only once, there is no way to tell a firm rule from an
+offhand remark, and no way to catch a number that was misspoken.
 
-There is no lopsided register split to find here, because there is only one
-register. The `../../research/momentum-replication/reports/2026-08-parameter-audit.md`
-method — read the same rule across four registers and find the type errors —
-**cannot be run on this material.** Treat every number below as single-sourced
-until a second source exists.
+Treat every figure in this directory as single-sourced until a second source
+exists. That is not a formality: the stop-placement rule, the +20–30% win-rate
+claim and the 500% return all rest on the same single testimony.
 
-Two further limits, both stated by the author or by this repo:
+Two further limits, one stated by the author:
 
 - **Step three is not automatable**, by his own account [00:11:00].
-- **Futures are leveraged.** No sizing tool in this repo transfers; `scripts/size.py`
-  assumes cash equities and a €500 account.
+- **Futures are leveraged**, and this directory contains no sizing rules at all.
+  Work out contract size and risk yourself before trading anything.
 
-And the standing prior: this repo's replication of a far better-documented
-strategy came out **negative over 894 sessions**
-(`../../research/momentum-replication/reports/2026-08-regime-filter.md`).
+And the standing prior for any trading method: most do not survive honest
+out-of-sample testing. Assume this one has not been tested, because it has not.
 
 ## To extend this
 

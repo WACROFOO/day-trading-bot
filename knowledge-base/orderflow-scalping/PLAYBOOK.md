@@ -1,13 +1,12 @@
 # Order-flow scalping — the playbook
 
 The executable form of `MODEL.md`. Every rule traces to a timestamp in
-`transcripts/tvERE-Beu2U.txt`. Where the source is vague, this says so instead
-of inventing a number — that discipline is the one thing carried over from the
-Ross spec, where 21 of 21 audit findings turned out to be interpretation errors
-rather than wrong numbers.
+`transcripts/tvERE-Beu2U.txt`. Where the source is vague, this says so rather
+than inventing a number — an invented threshold that later reads as a citation
+is worse than an admitted gap.
 
-**Instrument: Nasdaq futures. Session: New York only.** Nothing below applies
-to cash equities and none of this repo's sizing tools apply to futures.
+**Instrument: Nasdaq futures. Session: New York only.** See
+`TRANSFER-TO-EQUITIES.md` before assuming any of it applies to cash stocks.
 
 ---
 
@@ -142,9 +141,7 @@ step three, the part he says cannot be automated [00:11:00].
 > *"building profit for the day, building profit for the day, building profit
 > for the day. And in directional days, I risk for example..."* — [00:01:08]
 
-Small wins first; directional size only on a cushion. Independently the same
-shape as `../strategies/PARAMETERS.md` §7 — start at a quarter size, size up
-after +$1,000.
+Small wins first; directional size only on a cushion.
 
 Win rate is explicitly traded against R rather than maximised: he contrasts *"one
 setup with high win rate"* [01:38:29] against setups where *"the win rate it's
@@ -157,8 +154,8 @@ lower on this but..."* [01:41:15].
 Recorded so nobody fills these in from imagination later:
 
 - **No risk-per-trade percentage.** Never stated.
-- **No daily loss limit.** Never stated. Contrast Ross, who names $2,000,
-  broker-enforced, and three-reds-and-done.
+- **No daily loss limit.** Never stated — no figure, no consecutive-loss rule,
+  no walk-away condition anywhere in 3.5 hours.
 - **No maximum trades per day.**
 - **No definition of "out of balance" precise enough to code.** It is read off a
   profile by eye.
@@ -168,15 +165,15 @@ Recorded so nobody fills these in from imagination later:
 - **No stop distance in ticks.** Only "beyond the cluster" and "1–2 ticks inside
   the high".
 
-Five of those six are risk controls. **That is the largest gap between this
-document and the Ross spec, and it is the gap that matters most.**
+**Five of those six are risk controls.** A method can be described completely
+and still leave you with no way to survive being wrong about it. That is the
+largest gap in this source and the one to close first, from your own rules.
 
 ---
 
 ## If you want to test it
 
-In falsification order, cheapest first — the same structure as
-`../strategies/PARAMETERS.md` §12.
+In falsification order, cheapest first. Stop when one fails.
 
 1. **Data.** This needs footprint / delta / volume-profile data. Nothing in this
    repo has it; every tool here runs on OHLCV plus published metrics. **Without

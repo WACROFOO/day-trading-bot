@@ -3,11 +3,10 @@
 Dissected from one source: `transcripts/tvERE-Beu2U.txt`, a 3h34m live session
 on the Chart Fanatics channel, 2025-09-21, 43,007 words. Futures scalper,
 introduced as top-three in the Robbins World Cup futures division with a stated
-**500%+ over twelve months** — a claim this repo has not verified.
+**500%+ over twelve months** — a claim not verified here.
 
 **Read the caveats at the bottom before anything else here.** One trader, one
-video, against 2,680 documents for the Ross Cameron corpus. This document is a
-faithful dissection, not an endorsement.
+video, one session. This document is a faithful dissection, not an endorsement.
 
 ---
 
@@ -19,9 +18,9 @@ faithful dissection, not an endorsement.
 > dynamic entity? It's like trying to cage an animal that is not made to be in a
 > cage."* — [00:06:34]
 
-That distinction is load-bearing. The Ross spec in `../strategies/PARAMETERS.md`
-is a gate cascade: numeric thresholds, all must pass. This is a **sequence of
-conditions on state**, and step three is explicitly not automatable:
+That distinction is load-bearing. This is not a set of numeric thresholds that
+either pass or fail — it is a **sequence of conditions on market state**, and
+step three is explicitly not automatable:
 
 > *"The step three is a little bit more difficult because it's the part where
 > you really need the experience and **you cannot just automate it**."* — [00:11:00]
@@ -220,9 +219,7 @@ The scale-out is **triggered by the tape**, not by a fixed R:
 > directional days, I risk for example..."* — [01:08]
 
 The stated shape: accumulate small wins to build a cushion, then take real
-directional risk only once the day is already green. That is the same asymmetry
-Ross describes in `../strategies/PARAMETERS.md` §7 — start at a quarter size,
-size up only after +$1,000 — arrived at independently.
+directional risk only once the day is already green.
 
 He is explicit that win rate is traded against R, not maximised:
 
@@ -232,37 +229,27 @@ He is explicit that win rate is traded against R, not maximised:
 
 ---
 
-## How this differs from the Ross corpus
+## The model's own shape
 
-| | Ross Cameron (`../strategies/`) | This model |
-|---|---|---|
-| instrument | US small-cap equities, $2–20, float <20M | **Nasdaq futures** |
-| what selects the trade | five pillars: price, float, catalyst, RVOL, gap | **market state: out of balance** |
-| news | mandatory catalyst | **never mentioned** |
-| session | pre-market through ~11:00 ET | **New York only; explicitly not before** |
-| chart | 1-minute and 10-second candles | **footprint / volume profile / CVD** |
-| entry trigger | first candle to exceed the prior red candle's high | **aggression at a validated level, after break *and* test** |
-| stop | low of the pullback candle | **above/below the aggression cluster, 1–2 ticks inside the high** |
-| first target | retest of high of day | **previous daily high** |
-| break-even | after +$0.10 or first scale | **when CVD confirms the leg** |
+Three things make this hard to encode, and they are worth naming before anyone
+tries.
 
-Two genuine convergences, reached from different directions: **scale half and
-move to break-even early**, and **build the day's cushion before taking size**.
-
-The deepest difference is epistemic. Ross's method is a filter you can encode —
-which is why `PARAMETERS.md` exists and why 21 interpretation errors could be
-found in it. This one is a *reading* of state that its author says cannot be
-automated at step three. Any implementation has to decide what to do about that
-sentence rather than route around it.
+- **The selector is market *state*, not instrument properties.** Nothing is
+  filtered by price, size, sector or news — the question is only whether the
+  market is currently out of balance. News is never mentioned once in 3.5 hours.
+- **The trigger is order flow, not a candle.** Aggression is read from the
+  footprint. No arrangement of OHLC bars reproduces it.
+- **Step three is a reading, not a rule.** Its author says so directly
+  [00:11:00]. An implementation has to decide what to do about that sentence
+  rather than route around it.
 
 ---
 
 ## Caveats — read before using any of this
 
-1. **One source.** 43,007 words from a single interview. The Ross corpus is
-   2,680 documents across four registers, and the whole method of this repo is
-   that a lopsided register split is itself a finding. There is no split here to
-   check — no recaps, no independent streams, nothing dated differently.
+1. **One source.** 43,007 words from a single interview. There is nothing here
+   to cross-check against — no second session, no dated series, no published
+   trade log. Every number below is single-sourced until that changes.
 2. **The 500% is unverified.** Robbins World Cup results are published; this
    repo has not checked them, and a percentage return says nothing about the
    capital base or the drawdown path.
@@ -271,14 +258,16 @@ sentence rather than route around it.
    register — but it is one session, and a demonstration selects for a day the
    model works.
 4. **Step three is stated as non-automatable by its own author.** Anything built
-   from this must say explicitly which part it has replaced with a proxy, and
-   `PARAMETERS.md` §10 is the standing warning about what proxies do to a
-   backtest.
-5. **Futures are leveraged.** Every sizing rule in `../../scripts/size.py`
-   assumes cash equities and a €500 account. A single Nasdaq futures contract
-   has notional far beyond that. **None of the sizing work in this repo
-   transfers.** Micro contracts change the arithmetic but not the point.
-6. **This repo's own record.** Its replication of a far better-documented
-   strategy produced negative expectancy over 894 sessions
-   (`../../research/momentum-replication/reports/2026-08-regime-filter.md`).
-   That is the prior to hold against any new method, including this one.
+   from this must say explicitly which part it replaced with a proxy. A proxy for
+   a rule you could not encode is the largest single source of backtest error:
+   freeze it before running, test several reasonable versions, and if the sign of
+   the result flips between them, discard the finding rather than keeping the
+   version that worked.
+5. **Futures are leveraged, and this directory contains no sizing rules.** A
+   single Nasdaq contract carries notional far beyond a small account; the
+   micros change the arithmetic but not the point. Nothing here tells you how
+   many contracts to trade, and nothing outside this directory was written for
+   futures. Work that out before risking anything.
+6. **Paper first.** A method with one source, an unverified return claim, and a
+   step its own author says cannot be automated deserves more scepticism than a
+   well-documented one, not less.

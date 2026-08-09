@@ -66,15 +66,6 @@ link, not a paraphrase.
    made before the outcome was known.
 5. **State the register split when it is lopsided**, even when unasked.
 
-## A second method lives outside this corpus
-
-`knowledge-base/orderflow-scalping/` holds a **different trader and a different
-market** — Fabio Valentino, Nasdaq futures, order-flow scalping, one video.
-It is deliberately outside the six registers above and `corpus.py` does not
-search it. Never blend its rules into a Ross answer; if a question is about
-footprint, delta, CVD, volume profile or "out of balance", it belongs there and
-the answer must say it is single-sourced.
-
 ## Directory indexes
 
 Every directory has a `README.md` that is a real index — read it before

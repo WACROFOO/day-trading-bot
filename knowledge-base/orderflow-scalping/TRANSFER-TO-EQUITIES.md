@@ -27,10 +27,6 @@ These need no order-flow data at all, and they are the same three items
 | first target = **previous daily high** | pure price structure |
 | stop **1–2 ticks inside** the obvious high | ports, and arguably matters *more* on equities, where stop-runs at round numbers and prior highs are well documented |
 
-`../strategies/PARAMETERS.md` §3 already carries the same idea from a different
-direction — `at_support` requires two independent reasons at one price, and
-whole/half dollars are one of them. A low-volume node is a third kind of reason.
-
 **Session also ports cleanly.** His "New York session" is 09:30–16:00 ET, which
 is exactly cash equity regular hours.
 
@@ -56,21 +52,21 @@ work around by paying for a better feed.
 
 It is not *useless* on equities — traders do read tape on liquid names — but any
 claim transferred from this video about how reliable aggression is should be
-discounted, and this repo has no measurement of by how much.
+discounted, and there is no measurement here of by how much.
 
-## 3. What breaks: the instrument choice collides with the rest of this repo
+## 3. What breaks: only the most liquid names qualify
 
 Order flow needs **depth** — continuous two-sided institutional flow. On cash
-equities that means the most liquid names: index ETFs and mega-caps.
+equities that means index ETFs and mega-caps, and essentially nothing else.
 
-The Ross universe in `../strategies/PARAMETERS.md` §1 needs the **opposite**:
-float under 20 million, which is a *supply constraint*, deliberately illiquid.
-On a 5M-float small cap, "aggression" is a handful of retail market orders and
-the book is a few hundred shares deep.
+A low-float small cap is the worst possible instrument for this. On a 5M-float
+name, "aggression" is a handful of retail market orders and the book is a few
+hundred shares deep; the footprint is reading noise. Low float is a deliberate
+*supply constraint*, which is the opposite of the depth this model reads.
 
-> **You cannot run both methods on the same names.** They select for opposite
-> liquidity. Anything in `premarket_stars.py` is disqualified as an order-flow
-> instrument by the very property that puts it on the list.
+> **Any strategy that selects for small float selects against this model.** If a
+> name is interesting because its float is tiny, it is disqualified here by that
+> same property.
 
 ## 4. The blocker that decides it: a €500 account cannot scalp US equities
 
@@ -97,17 +93,15 @@ than beyond the high. They cost nothing, they need no new data, and they are
 already the top of the test order in `PLAYBOOK.md`.
 
 **Do not try to run the order-flow core on cash equities with this account.**
-The data is weaker, the right instruments are the wrong ones for everything else
-in this repo, and PDT settles it regardless.
+The data is weaker, only a handful of mega-cap names would even qualify, and PDT
+settles it regardless.
 
-**If you want the model as designed, the instrument is MNQ, not stocks** — and
-that is a different broker, a leveraged product, and a point at which every
-sizing tool here stops applying. `../../scripts/size.py` assumes cash equities
-and a €500 account; a Nasdaq futures contract's notional is orders of magnitude
-beyond that. **Nothing in this repo sizes futures. Do not reuse it.**
+**If you want the model as designed, the instrument is MNQ, not stocks** — a
+different broker and a leveraged product. A Nasdaq contract's notional is orders
+of magnitude beyond a small cash account, and **nothing in this directory tells
+you how to size one.** Work that out separately, and do not borrow a sizing rule
+written for cash equities.
 
-**And the standing prior applies here too.** This repo's replication of a far
-better documented strategy came out negative over 894 sessions
-(`../../research/momentum-replication/reports/2026-08-regime-filter.md`). A
-method with one source and a non-automatable step deserves more scepticism, not
-less. Paper first, on whichever instrument you pick.
+**Paper first, on whichever instrument you pick.** A method with one source, an
+unverified return claim, and a step its own author says cannot be automated
+deserves more scepticism than a well-documented one, not less.
