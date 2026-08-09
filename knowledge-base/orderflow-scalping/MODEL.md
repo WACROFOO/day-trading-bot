@@ -126,6 +126,12 @@ squeeze** is expected if the same thing happens again on the next leg
 > specifically for equities. So for NASDAQ... it's not working properly during
 > the first hour of London session."* — [00:16:41]
 
+**"Equities" here means the equity *index futures*, not cash stocks.** Every
+size reference in 3.5 hours is a futures contract — *"one contract in mini"*
+[01:15:19], *"per contract $160"* [01:11:55], *"30 contract as a filter"*
+[01:31:49], *"more than 40 contract here"* [01:50:16]. A single stock is never
+named. See `TRANSFER-TO-EQUITIES.md` for what does and does not carry over.
+
 > *"one concept that I use to remove this is that **I don't trade before New
 > York**."* — [00:17:19]
 

@@ -11,7 +11,7 @@ directory so nothing here can be mistaken for, or silently merged into,
 | credential | stated top-three, Robbins World Cup futures division, 500%+ / 12 months (**unverified here**) |
 | source | one video, `https://youtu.be/tvERE-Beu2U`, Chart Fanatics, 2025-09-21 |
 | length | 3h34m · 43,007 words · 5,568 caption lines |
-| instrument | Nasdaq futures |
+| instrument | Nasdaq **futures** (NQ/MNQ) — never single stocks |
 | session | New York only |
 
 ## Files
@@ -20,6 +20,7 @@ directory so nothing here can be mistaken for, or silently merged into,
 |---|---|
 | `MODEL.md` | the dissection — the three steps, the vocabulary, and how it differs from the Ross corpus |
 | `PLAYBOOK.md` | the executable form: pre-conditions, trigger, stop, targets, management, and a test order |
+| `TRANSFER-TO-EQUITIES.md` | **can this run on cash stocks in market hours?** what ports, what degrades, what blocks it |
 | `transcripts/tvERE-Beu2U.txt` | deduplicated timestamped captions, with a provenance header |
 
 ## The method in six lines
