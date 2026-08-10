@@ -360,6 +360,29 @@ def grade(r):
             else 'WATCH'), plus + warn
 
 
+def pillars(r):
+    """The five pillars as booleans, in his order: price, float, news,
+    volume, rate-of-change. Returned separately from grade() because a
+    verdict answers "do I look at this" and the scorecard answers "why".
+
+    None means unknowable from the data, which is NOT the same as a fail —
+    a float finviz does not publish is a reason to check, not to reject.
+    """
+    px = r.get('pm_close') or r.get('prev_close')
+    fl, pmv = r.get('float'), r.get('pm_vol') or 0
+    off = r.get('off_high')
+    return [
+        None if px is None else (PRICE_MIN <= px <= PRICE_MAX),
+        None if fl is None else (fl <= FLOAT_MAX),
+        bool(r.get('why_catalyst')),
+        None if not pmv else (VOL_MIN <= pmv <= PM_VOL_CROWDED),
+        None if off is None else (r.get('gap', 0) >= GAP_MIN and off <= FADE_MAX),
+    ]
+
+
+DOT = {True: '+', False: '-', None: '?'}
+
+
 # ------------------------------------------------------------------ alerts
 def notify(title, message):
     """Desktop notification. macOS osascript, Linux notify-send, else silent.
@@ -416,6 +439,9 @@ def main():
     watch = [r for r in rows if r['verdict'] == 'WATCH']
     rej = [r for r in rows if r['verdict'] == 'REJECT']
 
+    for r in rows:
+        r['pillars'] = pillars(r)
+
     # --- header: where we are in the morning -------------------------
     bell = now.replace(hour=9, minute=30, second=0, microsecond=0)
     delta = (bell - now).total_seconds()
@@ -423,41 +449,57 @@ def main():
         h, m = int(delta // 3600), int(delta % 3600 // 60)
         when = f'bell in {h}h{m:02d}' if h else f'bell in {m} min'
     else:
-        when = 'market OPEN — pre-market figures are frozen at 09:30'
-    print(f'\n  PRE-MARKET  ·  {now:%a %d %b  %H:%M} ET  ·  {when}')
+        when = 'OPEN — pre-market figures frozen at 09:30'
 
+    # --- the session verdict: one answer, before any ticker ----------
+    # A per-name verdict never answers "should I trade at all today", and
+    # that is the question a 06:30 scan is actually for.
+    withcat = [r for r in stars + watch if r.get('why_catalyst')]
     if stars:
-        head = f'{len(stars)} star' + ('s' if len(stars) > 1 else '')
+        call, why = 'GO', f'{len(stars)} name(s) clear every gate'
+    elif withcat:
+        call, why = 'SELECTIVE', f'no star, but {len(withcat)} carry a real catalyst'
     elif watch:
-        head = 'no star — ' + str(len(watch)) + ' to watch'
+        call, why = 'STAND DOWN', 'names qualify on price and float, none has a catalyst'
     else:
-        head = 'NOTHING QUALIFIES'
-    print(f'  {len(rows)} gapped  ·  {head}\n')
+        call, why = 'STAND DOWN', 'nothing survives the cascade'
+
+    bar = '─' * 68
+    print(f'\n  ┌{bar}┐')
+    print(f'  │ {call:<12}{why:<40}{when:>14} │')
+    counts = (f'{len(rows)} gapped · {len(stars)} star · {len(watch)} watch · '
+              f'{len(rej)} rejected')
+    print('  │ ' + counts.ljust(66) + ' │')
+    print(f'  └{bar}┘\n')
 
     def line(r):
-        fl = f'{r["float"]/1e6:.1f}M' if r.get('float') else ' ?  '
+        fl = f'{r["float"]/1e6:.1f}M' if r.get('float') else '  ?  '
+        pil = ' '.join(DOT[p] for p in r['pillars'])
         # the single most decisive thing about this name, on the same line
         kills = [x for x in r['reasons'] if 'faded' in x or 'over' in x
                  or 'under' in x or 'split' in x or 'not common stock' in x]
         soft = [x for x in r['reasons'] if 'no same-day catalyst' in x
                 or 'not flagged a catalyst' in x or 'crowded' in x]
         why = (kills or soft or r['reasons'] or [''])[0]
-        why = re.sub(r' — .*', '', why)[:46]
-        return (f'  {r["sym"]:<6}{r["gap"]:>5.0f}%  '
-                f'{(r.get("pm_close") or 0):>7.2f}  float {fl:>6}  {why}')
+        why = re.sub(r' — .*', '', why)[:40]
+        return (f'  {r["sym"]:<6}{r["gap"]:>5.0f}%'
+                f'{(r.get("pm_close") or 0):>8.2f}{fl:>7}   {pil}   {why}')
+
+    COLS = ('  sym      gap%   price  float   P F N V R   the one thing '
+            'that decides it')
 
     if stars:
-        print('  ▸ STARS')
+        print('  ▸ STARS'); print(COLS)
         for r in stars:
             print(line(r))
         print()
     if watch:
-        print('  ▸ WATCH')
+        print('  ▸ WATCH'); print(COLS)
         for r in watch:
             print(line(r))
         print()
     if rej and a.all:
-        print('  ▸ REJECTED — and why')
+        print('  ▸ REJECTED — and why'); print(COLS)
         for r in rej:
             print(line(r))
         print()
@@ -474,7 +516,9 @@ def main():
 
     if not stars and not watch:
         print('  A sparse scanner is a normal morning. No trade is a position.\n')
-    print('  Gates only, no score.  --all shows rejects  ·  --json for data\n')
+    print('  P price · F float · N news · V volume · R rate-of-change      '
+          '+ pass   - fail   ? unknown')
+    print('  Gates, not a score.  --all shows rejects  ·  --json for data\n')
 
     if a.notify and stars:
         names = ', '.join(f'{r["sym"]} +{r["gap"]:.0f}%' for r in stars)
