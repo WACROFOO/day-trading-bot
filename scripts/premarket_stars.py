@@ -430,6 +430,9 @@ def main():
     rows = [{**c, **m, **s} for c, m, s in zip(cands, metrics, splits)]
     for r in rows:
         r['verdict'], r['reasons'] = grade(r)
+        # must precede the --json return: grade() fills off_high, which
+        # pillars() needs, and --json was emitting nulls for the scorecard
+        r['pillars'] = pillars(r)
 
     if a.json:
         print(json.dumps(rows, indent=2, default=str))
@@ -438,9 +441,6 @@ def main():
     stars = [r for r in rows if r['verdict'] == 'STAR']
     watch = [r for r in rows if r['verdict'] == 'WATCH']
     rej = [r for r in rows if r['verdict'] == 'REJECT']
-
-    for r in rows:
-        r['pillars'] = pillars(r)
 
     # --- header: where we are in the morning -------------------------
     bell = now.replace(hour=9, minute=30, second=0, microsecond=0)
