@@ -34,10 +34,15 @@ the pillar score against equal weight and found it carries NEGATIVE
 information — it lost 16 of 16 matched pairs.  Gates, then eyes.
 
 Usage:
-    python scripts/premarket_stars.py
-    python scripts/premarket_stars.py --min-gap 20 --top 25
-    python scripts/premarket_stars.py --all          # show rejects too
-    python scripts/premarket_stars.py --json
+    python3 scripts/premarket_stars.py
+    python3 scripts/premarket_stars.py --all         # + rejects and their gate
+    python3 scripts/premarket_stars.py --notify      # desktop alert on a STAR
+    python3 scripts/premarket_stars.py --min-gap 20 --top 25
+    python3 scripts/premarket_stars.py --json
+
+Output is grouped STARS / WATCH / REJECTED with the decisive reason on the
+same line, because the question a scanner answers at 06:30 is "what do I
+look at", not "what are all the columns".
 """
 import argparse
 import concurrent.futures as cf
@@ -355,6 +360,25 @@ def grade(r):
             else 'WATCH'), plus + warn
 
 
+# ------------------------------------------------------------------ alerts
+def notify(title, message):
+    """Desktop notification. macOS osascript, Linux notify-send, else silent.
+
+    Deliberately fire-and-forget: a scanner that crashes because a
+    notification daemon is missing is worse than one that stays quiet.
+    """
+    for cmd in (['osascript', '-e',
+                 f'display notification "{message}" with title "{title}"'],
+                ['notify-send', title, message]):
+        try:
+            if subprocess.run(cmd, capture_output=True,
+                              timeout=5).returncode == 0:
+                return True
+        except Exception:
+            continue
+    return False
+
+
 # ------------------------------------------------------------------ output
 def main():
     ap = argparse.ArgumentParser()
@@ -362,6 +386,8 @@ def main():
     ap.add_argument('--top', type=int, default=20, help='candidates to enrich')
     ap.add_argument('--all', action='store_true', help='print rejects too')
     ap.add_argument('--json', action='store_true')
+    ap.add_argument('--notify', action='store_true',
+                    help='desktop notification when a STAR appears (macOS/Linux)')
     a = ap.parse_args()
 
     now = dt.datetime.now(ET)
@@ -386,41 +412,73 @@ def main():
         print(json.dumps(rows, indent=2, default=str))
         return 0
 
-    print(f'\nPre-market gap scanner — {now:%Y-%m-%d %H:%M ET}')
-    print(f'sorted by gap %, his order.  discovery: TradingView premarket_change'
-          f'  ·  metrics: finviz\n')
-    hdr = (f'{"":2}{"sym":<7}{"gap%":>7}{"px":>8}{"float":>9}{"pm vol":>11}'
-           f'{"xfloat":>8}{"%avgD":>8}{"shrt%":>7}  verdict')
-    print(hdr)
-    print('-' * len(hdr))
-    for i, r in enumerate(rows, 1):
-        if r['verdict'] == 'REJECT' and not a.all:
-            continue
-        mark = {'STAR': '*', 'WATCH': '.', 'REJECT': 'x'}[r['verdict']]
-        fl = f'{r["float"]/1e6:.2f}M' if r.get('float') else '?'
-        rot = f'{r["rotation"]:.2f}' if r.get('rotation') else '-'
-        rv = f'{r["pct_avg_day"]:.2f}' if r.get('pct_avg_day') else '-'
-        sf = f'{r["short_float"]:.1f}' if r.get('short_float') else '-'
-        print(f'{mark} {r["sym"]:<7}{r["gap"]:>6.0f}%'
-              f'{(r.get("pm_close") or 0):>8.2f}{fl:>9}'
-              f'{r.get("pm_vol", 0):>11,.0f}{rot:>8}{rv:>8}{sf:>7}'
-              f'  {r["verdict"]}')
+    stars = [r for r in rows if r['verdict'] == 'STAR']
+    watch = [r for r in rows if r['verdict'] == 'WATCH']
+    rej = [r for r in rows if r['verdict'] == 'REJECT']
 
-    print()
-    for r in rows:
-        if r['verdict'] == 'REJECT' and not a.all:
-            continue
-        print(f'{r["sym"]}  [{r["verdict"]}]  {r.get("sector", "")}')
-        for x in r['reasons']:
-            print(f'    - {x}')
-        if r.get('why'):
-            print(f'    catalyst: {r["why"]}  ({r.get("why_time", "")})')
+    # --- header: where we are in the morning -------------------------
+    bell = now.replace(hour=9, minute=30, second=0, microsecond=0)
+    delta = (bell - now).total_seconds()
+    if delta > 0:
+        h, m = int(delta // 3600), int(delta % 3600 // 60)
+        when = f'bell in {h}h{m:02d}' if h else f'bell in {m} min'
+    else:
+        when = 'market OPEN — pre-market figures are frozen at 09:30'
+    print(f'\n  PRE-MARKET  ·  {now:%a %d %b  %H:%M} ET  ·  {when}')
+
+    if stars:
+        head = f'{len(stars)} star' + ('s' if len(stars) > 1 else '')
+    elif watch:
+        head = 'no star — ' + str(len(watch)) + ' to watch'
+    else:
+        head = 'NOTHING QUALIFIES'
+    print(f'  {len(rows)} gapped  ·  {head}\n')
+
+    def line(r):
+        fl = f'{r["float"]/1e6:.1f}M' if r.get('float') else ' ?  '
+        # the single most decisive thing about this name, on the same line
+        kills = [x for x in r['reasons'] if 'faded' in x or 'over' in x
+                 or 'under' in x or 'split' in x or 'not common stock' in x]
+        soft = [x for x in r['reasons'] if 'no same-day catalyst' in x
+                or 'not flagged a catalyst' in x or 'crowded' in x]
+        why = (kills or soft or r['reasons'] or [''])[0]
+        why = re.sub(r' — .*', '', why)[:46]
+        return (f'  {r["sym"]:<6}{r["gap"]:>5.0f}%  '
+                f'{(r.get("pm_close") or 0):>7.2f}  float {fl:>6}  {why}')
+
+    if stars:
+        print('  ▸ STARS')
+        for r in stars:
+            print(line(r))
+        print()
+    if watch:
+        print('  ▸ WATCH')
+        for r in watch:
+            print(line(r))
+        print()
+    if rej and a.all:
+        print('  ▸ REJECTED — and why')
+        for r in rej:
+            print(line(r))
         print()
 
-    kept = sum(1 for r in rows if r['verdict'] != 'REJECT')
-    print(f'{len(rows)} gapped, {kept} survived the cascade.')
-    print('Gates only. No score — reports/2026-08-score-basket.md measured the '
-          'pillar score as worse than equal weight.')
+    # --- detail only for what survived --------------------------------
+    for r in stars + watch:
+        print(f'  {r["sym"]}  ·  {r.get("sector", "")}  ·  '
+              f'{r.get("pm_vol", 0):,.0f} shares pre-market')
+        if r.get('why'):
+            print(f'      catalyst  {r["why"][:88]}')
+        for x in r['reasons']:
+            print(f'      · {x}')
+        print()
+
+    if not stars and not watch:
+        print('  A sparse scanner is a normal morning. No trade is a position.\n')
+    print('  Gates only, no score.  --all shows rejects  ·  --json for data\n')
+
+    if a.notify and stars:
+        names = ', '.join(f'{r["sym"]} +{r["gap"]:.0f}%' for r in stars)
+        notify(f'{len(stars)} star', names)
     return 0
 
 
