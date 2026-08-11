@@ -44,9 +44,32 @@ trick, and it is why this runs on published metrics.
 | 2 | **float** | over **20M** | sweet spot **< 10M**; **< 5M in a cold market** |
 | 3 | **catalyst** | none dated **today** | non-negotiable |
 | 4 | **still rising** | more than **25 %** off the pre-market high | *"stair stepping down… I'm not a buyer"* |
-| 5 | **reverse split** | one took effect today | the gap is the split, not a move |
+| 5 | **reverse split** | the gap is *arithmetic* | see below — the split alone is not the veto |
 | 6 | **instrument** | fund / ETF | ADRs are fine — he trades them |
 | 7 | **tick size** | quotes in 5¢ increments | *"TA, five cent tick"* |
+
+### Gate 5, stated precisely — the split is not the veto
+
+The rule is *"the gap is the split, not a move"*. That is a claim about
+**arithmetic**, and it has a precondition: the reported previous close must be
+**unadjusted**. Test it before firing the gate.
+
+| test | meaning | action |
+|---|---|---|
+| `prev_close ÷ split_ratio ≈ prev_close_adjusted` | the gap is the ratio | **kill** — there is no move |
+| prev close already adjusted, price gapped *on top* | a real move on a newly shrunk float | **gate does not fire** |
+
+A reverse split reduces the float. A tiny float is the thing this whole method
+is hunting. Killing every post-split name deletes the population you wanted.
+
+The split still matters — as **context**, not a veto: it means a compliance
+problem, a shell balance sheet, and an offering that can land without warning.
+Price that in the size, not in the reject.
+
+> **MSGY, 2026-08-11.** Prev close 2.3144 was *already* 1-for-8 adjusted; the
+> +114% was real. Every other gate passed — price, 0.56M float, VWAP, 9 EMA,
+> MACD positive and above signal, 6.6M volume, 272× RVOL. Rejected on gate 5
+> anyway. It ran 2.54 → 5.43. **The gate fired without its precondition.**
 
 ### The one that runs backwards
 
