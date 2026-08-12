@@ -22,7 +22,7 @@ metric = finviz. Nothing from bars.
 | volume | under 250k pre-market |
 | catalyst | none dated today |
 | still rising | more than 25% off the pre-market high |
-| reverse split | one took effect today — the gap is the split, not a move |
+| reverse split | **only if** finviz÷yahoo prev close ≈ clean integer — then the gap IS the split. If sources agree, the move is real and a fresh sub-1M float is a feature, not a veto (MSGY 2026-08-11) |
 
 Separates STAR from WATCH: rotation (pm volume ÷ float), % of an average day,
 short float ≥15%.
@@ -40,6 +40,9 @@ State the ET time. Survivors in gap-% order with float, price, rotation,
 catalyst. Name the rejects and their gate — that is most of the value. If
 nothing survives, say so; sparse mornings are normal. Faded ≠ dead: report the
 fade, not a verdict. Always say which RVOL denominator you used.
+
+Every number cited must come from a tool output in this turn — never from
+memory, never inferred. No number, no claim.
 
 Selection only, not expectancy — see `reports/2026-08-regime-filter.md`. Paper.
 Rationale, quotes and provenance: `REFERENCE.md`.
