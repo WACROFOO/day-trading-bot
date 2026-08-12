@@ -40,13 +40,40 @@ trick, and it is why this runs on published metrics.
 
 | # | gate | kill if | |
 |---|---|---|---|
-| 1 | **price** | outside **$2.00 – 20.00** | preferred **$2.50 – 9** |
+| 1 | **price** | outside **$2.00 – 20.00** | preferred **$2.50 – 9** — but a **soft floor under a penny theme**, see below |
 | 2 | **float** | over **20M** | sweet spot **< 10M**; **< 5M in a cold market** |
-| 3 | **catalyst** | none dated **today** | non-negotiable |
+| 3 | **catalyst** | none dated **today** **AND no live theme** | a running theme substitutes — see below |
 | 4 | **still rising** | more than **25 %** off the pre-market high | *"stair stepping down… I'm not a buyer"* |
 | 5 | **reverse split** | the gap is *arithmetic* | see below — the split alone is not the veto |
 | 6 | **instrument** | fund / ETF | ADRs are fine — he trades them |
 | 7 | **tick size** | quotes in 5¢ increments | *"TA, five cent tick"* |
+
+### Gates 1 and 3, softened by the theme — 2026-08-12
+
+Two corrections from his own recap of a day our cascade rejected everything
+and he booked +$17,617 (OFAL, RMCF, SPRC):
+
+**The theme substitutes for the catalyst.** *"Chinese Hong Kong stock with no
+news starts ripping"* — and he bought it, because SCKT ran Monday and PLAG ran
+yesterday. Sympathy momentum IS the same-day reason. JWEL (2026-08-10) was
+rejected here on "no catalyst" for the same wrong reading. Gate 3 fires only
+when there is neither news **nor** a live theme the name belongs to. A theme
+is live when the last 1–3 sessions produced a >100% runner of the same
+class (country, sector, price band) — the scanner's job is to say *which*.
+
+**The $2 floor bends under a penny theme.** He rejected JOB at $0.56 and CXDC
+at $1.15 in normal tape — and bought RMCF at $1.66 today because *"the theme
+today was definitely penny stocks."* When the theme lives below $2, the floor
+moves to roughly $1.50; what actually kills a cheap name is the **halt band**,
+not the price: prior close **< $0.75 → 15¢ bands** (near-untradeable in RTH),
+$0.75–3 → 20%, > $3 → 10%. Check the *prior close*, not the current print —
+bands don't update intraday (PLAG halted every 15¢ at $6/share).
+
+**And the clock outranks both.** OFAL's tradeable move was 06:05–08:30
+pre-market — *"I actually prefer trading in the pre-market session when
+there's no halts."* His volume tell: PM volume highest, declining after the
+open = the move is behind you. No scan before 09:30 = no trade, whatever the
+gates say. (Error class count: 23 — a preference implemented as a veto.)
 
 ### Gate 5, stated precisely — the split is not the veto
 
