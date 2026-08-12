@@ -5,9 +5,10 @@ description: Answer "le plan pour aujourd'hui", "je fais quoi maintenant", "what
 
 # Trading day
 
-**First, always:** `TZ=America/New_York date` — anchor to real ET time.
-France = ET + 6h in summer. Never recite the schedule without saying where in
-it we are right now.
+**First, always:** `./now` — it prints the ET/France time, the market phase,
+the countdown to the next boundary, and the watchlist tape. Anchor every
+answer to its header. Never recite the schedule without saying where in it we
+are right now.
 
 Two answer shapes:
 

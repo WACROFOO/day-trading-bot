@@ -49,9 +49,12 @@ there first, then check whether a skill repeats it.
   `PARAMETERS.md` the numeric spec
 - `knowledge-base/orderflow-scalping/` — a DIFFERENT trader's futures model.
   Self-contained: never cross-reference it with the Ross material, either way
-- `scripts/` — `tape.py` (intraday workup), `premarket_stars.py` (gap scan),
-  `catalyst_score.py`, `premarket_dd.py` (pre-market shape), `size.py`,
-  `corpus.py` (corpus search)
+- `./now [SYM…]` — the standard terminal report: market phase (pre-market /
+  open / after-hours), countdown to the next boundary, then the `tape.py`
+  workup of the watchlist (`./now --set SYM SYM`, `./now --scan` pre-market)
+- `scripts/` — `tape.py` (intraday workup), `now.py` (phase report),
+  `premarket_stars.py` (gap scan), `catalyst_score.py`, `premarket_dd.py`
+  (pre-market shape), `size.py`, `corpus.py` (corpus search)
 - `research/momentum-replication/reports/` — 23 measurements; cite before
   re-deriving anything
 
