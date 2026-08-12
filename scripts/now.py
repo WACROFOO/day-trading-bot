@@ -73,6 +73,8 @@ def header():
     print(f"phase: {name}{left or ''}")
     print(f"       {advice}")
     print("money window 09:35-11:00 ET · hard stop 11:30 · paper only")
+    print("data: yahoo 1m bars (per-ticker time = last print) · finviz metrics")
+    print("      before the open finviz price/volume fields are LAST session's")
     print('=' * 78)
     return name
 
@@ -239,6 +241,10 @@ def main():
             print()
         else:
             print(f"## {g['sym']} - tape fetch failed\n")
+
+    print('-' * 78)
+    print("NOT CHECKED here: spread, executable bid/ask, borrow, live halt state,")
+    print("Level 2, filings (run catalyst_score.py). Selection only, no order.")
 
 
 if __name__ == '__main__':

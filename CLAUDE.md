@@ -14,6 +14,11 @@ Analysis here is selection quality, never a claim of edge.
 | "analyse my trades", pasted blotter/P&L | skill `trade-review` |
 | "plan du jour", "je fais quoi maintenant" | skill `trading-day` |
 | "what does Ross say/teach/do about X" | skill `warrior-corpus` |
+| writing a standalone report/playbook/write-up | skill `trading-report-design` |
+
+**Media rule:** chat answers are verdict-first (rule 2 below). Standalone
+documents follow `trading-report-design`: provenance first, verdict last,
+rejects visible, limitations footer. Same goal, two media.
 
 The skills carry **format**; thresholds and rules live in
 `knowledge-base/strategies/FILTERS.md`, which wins every conflict. Fix a rule
