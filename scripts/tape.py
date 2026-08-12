@@ -11,23 +11,26 @@ Conventions, matching how the analysis has been done by hand all along:
   * EMAs and MACD run over the full 1-minute series including pre-market,
     so the open does not reset the averages.
   * VWAP is regular-hours only.
-  * A halt is >= 3 consecutive missing 1-minute bars during regular hours.
-    Yahoo omits bars with no prints; LULD halts are 5 minutes minimum, so 3
-    missing minutes separates a halt from a thin tape.
-  * Stop check: the median 1-minute range is the smallest stop the tape can
-    actually honour. A stop below it is fiction, and the output says so.
+  * A halt is >= 3 consecutive missing 1-minute bars during regular hours
+    (09:30-16:00). Yahoo omits bars with no prints; LULD halts are 5 minutes
+    minimum, so 3 missing minutes separates a halt from a thin tape.
+  * Stop check: the median 1-minute range of the last 30 regular-hours bars
+    is the smallest stop the tape can honour. Below it is fiction.
 
 Usage:
     python3 scripts/tape.py MSGY
     python3 scripts/tape.py MSGY WYHG TDIC          # compact, one block each
     python3 scripts/tape.py MSGY --bars 15          # more of the recent tape
+
+`compute(sym)` returns the numbers as a dict; `render(d)` prints them.
+`now.py` builds its summary table from compute() so the table and the detail
+blocks can never disagree.
 """
 import argparse
 import datetime as dt
 import json
 import statistics
 import subprocess
-import sys
 from zoneinfo import ZoneInfo
 
 ET = ZoneInfo('America/New_York')
@@ -51,7 +54,7 @@ def ema(vals, n):
     return out
 
 
-def study(sym, nbars):
+def compute(sym):
     r = fetch(sym)
     meta = r['meta']
     q = r['indicators']['quote'][0]
@@ -63,7 +66,7 @@ def study(sym, nbars):
                      q['high'][i], q['low'][i], q['close'][i],
                      q['volume'][i] or 0))
     if not rows:
-        print(f'{sym}: no bars'); return
+        return None
 
     closes = [b[4] for b in rows]
     e9, e20 = ema(closes, 9), ema(closes, 20)
@@ -74,66 +77,95 @@ def study(sym, nbars):
     rth = [b for b in rows if 570 <= minute(b) < 960]
     pm = [b for b in rows if minute(b) < 570]
 
-    last = meta.get('regularMarketPrice') or closes[-1]
-    prev = meta.get('chartPreviousClose')
-    now = dt.datetime.now(ET)
-    print(f"## {sym} · {now:%H:%M:%S} ET")
-    gap = f' ({(last/prev-1)*100:+.1f}%)' if prev else ''
-    print(f'last {last:.2f}  prev {prev:.2f}{gap}' if prev
-          else f'last {last:.2f}')
+    # Pre-market quirk: until today's regular session prints, Yahoo leaves
+    # regularMarketPrice at yesterday's close and chartPreviousClose one
+    # session further back. The latest bar is the truth; when the regular
+    # session hasn't traded today, yesterday's close IS regularMarketPrice.
+    rmt = meta.get('regularMarketTime')
+    rth_today = (rmt and
+                 dt.datetime.fromtimestamp(rmt, ET).date() == rows[-1][0].date())
+    d = {
+        'sym': sym,
+        'last': closes[-1],
+        'prev': (meta.get('chartPreviousClose') if rth_today
+                 else meta.get('regularMarketPrice')),
+        'rows': rows, 'e9': e9, 'e20': e20, 'macd': macd, 'sig': sig,
+        'hist': macd[-1] - sig[-1],
+        'macd_pass': macd[-1] > 0 and macd[-1] > sig[-1],
+        'pm_hi': max((b[2] for b in pm), default=None),
+        'pm_lo': min((b[3] for b in pm), default=None),
+        'pm_vol': sum(b[5] for b in pm),
+        'vwap': None, 'hod': None, 'lod': None, 'fade': None,
+        'rth_vol': 0, 'halts': [], 'med_range': None, 'top_ranges': [],
+    }
+    d['gap'] = (d['last'] / d['prev'] - 1) * 100 if d['prev'] else None
+    d['above_e9'] = closes[-1] > e9[-1]
 
-    if pm:
-        pmv = sum(b[5] for b in pm)
-        print(f'PM   hi {max(b[2] for b in pm):.2f}  lo '
-              f'{min(b[3] for b in pm):.2f}  vol {pmv:,}'
-              + ('  (yahoo hides most PM volume)' if pmv == 0 else ''))
     if rth:
-        hod = max(b[2] for b in rth); lod = min(b[3] for b in rth)
-        hodt = next(b[0] for b in rth if b[2] == hod)
-        lodt = next(b[0] for b in rth if b[3] == lod)
-        vv = sum(b[5] for b in rth)
+        d['hod'] = max(b[2] for b in rth)
+        d['lod'] = min(b[3] for b in rth)
+        d['hod_t'] = next(b[0] for b in rth if b[2] == d['hod'])
+        d['lod_t'] = next(b[0] for b in rth if b[3] == d['lod'])
+        d['fade'] = (d['last'] / d['hod'] - 1) * 100
+        d['rth_vol'] = sum(b[5] for b in rth)
         pv = sum((b[2] + b[3] + b[4]) / 3 * b[5] for b in rth)
-        print(f'RTH  HOD {hod:.2f} @{hodt:%H:%M}  LOD {lod:.2f} @{lodt:%H:%M}'
-              f'  fade {(last/hod-1)*100:+.1f}%  vol {vv:,}')
-        if vv:
-            print(f'VWAP {pv/vv:.3f}  ({"above" if last > pv/vv else "BELOW"})')
+        d['vwap'] = pv / d['rth_vol'] if d['rth_vol'] else None
 
-        # halts: >=3 consecutive missing RTH minutes
         have = {minute(b) for b in rth}
-        halts, run = [], []
+        run = []
         for m in range(570, max(have) + 1):
             if m not in have:
                 run.append(m)
             else:
                 if len(run) >= 3:
-                    halts.append((run[0], run[-1]))
+                    d['halts'].append((run[0], run[-1]))
                 run = []
-        for a, b in halts:
-            print(f'HALT {a//60:02d}:{a%60:02d}-{b//60:02d}:{b%60:02d}'
-                  f'  ({b-a+1} min)')
 
         ranges = sorted((b[2] - b[3] for b in rth), reverse=True)
-        recent = [b[2] - b[3] for b in rth[-30:]]
-        med = statistics.median(recent)
-        print(f'1-min range  median(last 30) {med:.2f}  session top3 '
-              + ' '.join(f'{x:.2f}' for x in ranges[:3])
-              + f'  → smallest honest stop ≈ {med:.2f}'
-              + (', wider through halts' if halts else ''))
+        d['med_range'] = statistics.median([b[2] - b[3] for b in rth[-30:]])
+        d['top_ranges'] = ranges[:3]
+    return d
 
-    print(f'EMA9 {e9[-1]:.3f}  EMA20 {e20[-1]:.3f}  '
-          f'({"above both" if closes[-1] > e9[-1] and closes[-1] > e20[-1] else "below 9" if closes[-1] < e9[-1] else "between"})')
-    h = macd[-1] - sig[-1]
-    ok = macd[-1] > 0 and h > 0
-    print(f'MACD {macd[-1]:+.4f}  sig {sig[-1]:+.4f}  hist {h:+.4f}'
-          f'  ({"passes" if ok else "FAILS"}: needs positive AND above signal)')
 
-    print(f'{"time":>6} {"open":>6} {"high":>6} {"low":>6} {"close":>6}'
-          f' {"vol":>9} {"ema9":>6} {"hist":>8}')
+def render(d, nbars=8):
+    if d is None:
+        return
+    now = dt.datetime.now(ET)
+    print(f"## {d['sym']} · {now:%H:%M:%S} ET")
+    gap = f" ({d['gap']:+.1f}%)" if d['gap'] is not None else ''
+    prev = f"  prev {d['prev']:.2f}" if d['prev'] else ''
+    print(f"last {d['last']:.2f}{prev}{gap}")
+    if d['pm_hi'] is not None:
+        print(f"PM   hi {d['pm_hi']:.2f}  lo {d['pm_lo']:.2f}  vol {d['pm_vol']:,}"
+              + ('  (yahoo hides most PM volume)' if d['pm_vol'] == 0 else ''))
+    if d['vwap'] is not None:
+        print(f"RTH  HOD {d['hod']:.2f} @{d['hod_t']:%H:%M}  LOD {d['lod']:.2f}"
+              f" @{d['lod_t']:%H:%M}  fade {d['fade']:+.1f}%  vol {d['rth_vol']:,}")
+        print(f"VWAP {d['vwap']:.3f}  ({'above' if d['last'] > d['vwap'] else 'BELOW'})")
+        for a, b in d['halts']:
+            print(f"HALT {a//60:02d}:{a%60:02d}-{b//60:02d}:{b%60:02d}  ({b-a+1} min)")
+        print(f"1-min range  median(last 30) {d['med_range']:.2f}  session top3 "
+              + ' '.join(f'{x:.2f}' for x in d['top_ranges'])
+              + f"  → smallest honest stop ≈ {d['med_range']:.2f}"
+              + (', wider through halts' if d['halts'] else ''))
+    e9, e20 = d['e9'][-1], d['e20'][-1]
+    state = ('above both' if d['last'] > e9 and d['last'] > e20
+             else 'below 9' if d['last'] < e9 else 'between')
+    print(f"EMA9 {e9:.3f}  EMA20 {e20:.3f}  ({state})")
+    print(f"MACD {d['macd'][-1]:+.4f}  sig {d['sig'][-1]:+.4f}  hist {d['hist']:+.4f}"
+          f"  ({'passes' if d['macd_pass'] else 'FAILS'}: needs positive AND above signal)")
+    print(f"{'time':>6} {'open':>6} {'high':>6} {'low':>6} {'close':>6}"
+          f" {'vol':>9} {'ema9':>6} {'hist':>8}")
+    rows = d['rows']
     for i in range(max(0, len(rows) - nbars), len(rows)):
         b = rows[i]
-        print(f'{b[0]:%H:%M}  {b[1]:6.2f} {b[2]:6.2f} {b[3]:6.2f} {b[4]:6.2f}'
-              f' {b[5]:9,} {e9[i]:6.2f} {macd[i]-sig[i]:+8.4f}')
+        print(f"{b[0]:%H:%M}  {b[1]:6.2f} {b[2]:6.2f} {b[3]:6.2f} {b[4]:6.2f}"
+              f" {b[5]:9,} {d['e9'][i]:6.2f} {d['macd'][i]-d['sig'][i]:+8.4f}")
     print()
+
+
+def study(sym, nbars=8):
+    render(compute(sym), nbars)
 
 
 def main():
