@@ -14,6 +14,7 @@ Analysis here is selection quality, never a claim of edge.
 | "analyse my trades", pasted blotter/P&L | skill `trade-review` |
 | "plan du jour", "je fais quoi maintenant" | skill `trading-day` |
 | "what does Ross say/teach/do about X" | skill `warrior-corpus` |
+| pre-market/after-hours orders, sessions, fills | skill `extended-hours` |
 | writing a standalone report/playbook/write-up | skill `trading-report-design` |
 
 **Media rule:** chat answers are verdict-first (rule 2 below). Standalone

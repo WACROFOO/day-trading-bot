@@ -153,8 +153,9 @@ anything taught.
 | **session volume** | **≥ 1,000,000** | *"less than a million shares of volume I actually lost $8,000 on"* |
 | best band | **1.0 – 2.5M+** | *"the ones I did the best on"* |
 | **relative volume** | **≥ 1.5×** to make money, **≥ 3×** best | *"150% and higher is where I make money"* |
-| session | **09:35 – 11:00 ET** | *"the 90 minute mark"*; 11:30 is the outer edge |
+| session | **07:00 – 11:00 ET** since 2020 | pre-2020 the money was 09:35–11:00; his post-March-2020 stats start the profit curve at 07:00. 11:30 stays the outer edge |
 | midday | **no trades 11:30 – 15:00** | |
+| after hours | **no trades 16:00 – 20:00** | *"doesn't look like I'm net profitable trading after hours"* — his own measured stats. Watch, note levels, trade the 07:00 wave instead |
 
 ---
 
