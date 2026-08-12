@@ -169,7 +169,8 @@ The fastest way to calibrate. Each is a real name turned down on the scanner:
 ```bash
 python3 scripts/premarket_stars.py --all --notify   # layers 0 and 1
 python3 scripts/catalyst_score.py SYM SYM           # layer 1, catalyst, 3 channels
-python3 scripts/premarket_dd.py SYM                 # the tape: fade, descending peaks
+python3 scripts/premarket_dd.py SYM                 # pre-market shape: fade, descending peaks
+python3 scripts/tape.py SYM                         # layer 2 live: VWAP, EMAs, MACD, halts, honest stop
 python3 scripts/size.py --entry X --stop Y          # after the chart says yes
 ```
 

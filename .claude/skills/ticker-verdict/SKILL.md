@@ -18,11 +18,14 @@ it poisons trust in every real number around it.
 ## Always run first
 
 ```bash
-python3 scripts/premarket_dd.py SYM      # bars, VWAP, EMA9/20, MACD, halts
+python3 scripts/tape.py SYM              # VWAP, EMA9/20, MACD, halts, ranges, fade — ONE command, no ad-hoc python
 python3 scripts/catalyst_score.py SYM    # 3-channel evidence
 ```
 Plus finviz snapshot (float, shs out, book, cash, 52W high) and the
-**split test** below. State the ET time in the header.
+**split test** below. `tape.py` exists so the tape side is never hand-rolled —
+hand-rolled fetches are where invented numbers come from. Thresholds live in
+`knowledge-base/strategies/FILTERS.md`; on any conflict with this file,
+FILTERS.md wins.
 
 ## Gate 5 — the split test is MANDATORY before any reverse-split verdict
 

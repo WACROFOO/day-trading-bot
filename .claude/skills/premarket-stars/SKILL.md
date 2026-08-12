@@ -13,6 +13,9 @@ python scripts/premarket_stars.py --all     # + rejects and why
 Discovery (gap %, pre-market volume/high) = TradingView. Every deciding
 metric = finviz. Nothing from bars.
 
+Thresholds are copies — `knowledge-base/strategies/FILTERS.md` is the source
+and wins any conflict.
+
 ## Gates, in order — a cascade, not a score
 
 | gate | kill if |
