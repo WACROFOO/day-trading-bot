@@ -1,0 +1,726 @@
+//@version=6
+strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V4", overlay=true,
+     initial_capital=100000, currency=currency.USD, default_qty_type=strategy.fixed,
+     pyramiding=0, commission_type=strategy.commission.percent, commission_value=0.01,
+     slippage=10, calc_on_every_tick=true, calc_on_order_fills=true,
+     process_orders_on_close=false,
+     max_labels_count=100, max_lines_count=50)
+
+// ============================================================================
+// ROSS FIRST PULLBACK V4 — V3 audited against this repo's measured rules.
+// Audit + divergence table: reports/2026-08-pine-v3-audit.md. V3 archived
+// alongside. Changes are marked  // V4:  with origin + evidence status.
+//
+// SCOPE EXCLUSION (design pack): this script sees ONE chart. Float, catalyst,
+// gap context, dilution, live halt state — the entire Layer 0/1 reject
+// cascade — live OUTSIDE it (./now --scan). This is a Layer-2 TRIGGER tool
+// for a name that already survived selection. It qualifies nothing.
+//
+// PAPER ONLY. Backtest fills on halting low-floats are optimistic: stop
+// orders fill AT the stop in simulation and through gaps in reality
+// (MSGY resumed +15% from its halt price, 2026-08-14). slippage=10 ticks
+// is the V4 default (V3 had 1); re-run any result at 5/10/20/25 before
+// believing it. Nothing here establishes profitability — the repo's own
+// 894-session replication was negative expectancy.
+// ============================================================================
+
+// ───────────────────────────── Inputs ─────────────────────────────
+gImpulse = "1. Impulse"
+minPushPct          = input.float(5.0, "Minimum push %", minval=0.5, maxval=30.0, step=0.5, group=gImpulse)
+minImpulseBars      = input.int(1, "Minimum impulse bars", minval=1, maxval=6, group=gImpulse)
+minPushATR          = input.float(2.0, "Minimum push (ATR)", minval=0.25, maxval=20.0, step=0.25, group=gImpulse)
+maxImpulseBars      = input.int(6, "Detection lookback bars", minval=1, maxval=12, group=gImpulse)
+// V4: LOCAL_ADDITION carried over from V3, evidence_status UNTESTED — no
+// corpus source for an efficiency floor. Kept because it filters chop the
+// eye would also reject; flagged so nobody mistakes it for a Ross rule.
+minEfficiency       = input.float(0.60, "Minimum directional efficiency [UNTESTED local]", minval=0.0, maxval=1.0, step=0.05, group=gImpulse)
+volumeBaselineBars  = input.int(20, "Volume baseline bars", minval=5, maxval=100, group=gImpulse)
+minPushRVOL         = input.float(2.0, "Minimum push RVOL", minval=0.5, maxval=20.0, step=0.25, group=gImpulse)
+// V4: LOCAL_ADDITION, UNTESTED — $ volume floor has no corpus source (the
+// closest is "1M+ session shares", a different object). Kept, flagged.
+minDollarVolume     = input.float(100000.0, "Minimum avg $ volume / min [UNTESTED local]", minval=0.0, step=25000.0, group=gImpulse)
+
+gPullback = "2. First pullback"
+minPullbackBars     = input.int(1, "Minimum pullback bars", minval=1, maxval=3, group=gPullback)
+// V4: default 3 -> 4. A pullback DURATION cap is a LOCAL_ADDITION (the
+// source's "3rd pullback" rule is about pullback NUMBER, handled below);
+// loosened one bar so a slow flag is not auto-rejected. UNTESTED.
+maxPullbackBars     = input.int(4, "Maximum pullback bars [local, was 3]", minval=1, maxval=6, group=gPullback)
+maxRetracementPct   = input.float(50.0, "Maximum retracement %", minval=10.0, maxval=90.0, step=1.0, group=gPullback)
+maxPBVolumeRatio    = input.float(0.70, "Maximum pullback / push volume", minval=0.10, maxval=2.0, step=0.05, group=gPullback)
+bullishLowerWickPct = input.float(30.0, "Good lower wick %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
+toppingTailWarnPct  = input.float(40.0, "Upper wick warning %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
+
+gMomentum = "3. Momentum"
+requireMACD          = input.bool(true, "Require MACD > 0 and histogram > 0", group=gMomentum)
+// V4: defaults OFF -> ON. Origin SOURCE: FILTERS.md Layer 2 requires
+// price > VWAP and price > EMA9 at entry — they are chart gates, not
+// options. V3 shipped them off, which tests a different strategy.
+requireEMA           = input.bool(true, "Require close > EMA9 and EMA9 >= EMA20", group=gMomentum)
+requireVWAP          = input.bool(true, "Require close > VWAP", group=gMomentum)
+
+gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
+// V4: NEW, default ON. The measured profit curve starts at 07:00 ET and the
+// hard stop is 11:30; V3's "no time filter" backtests 15:00 chop as if it
+// were 09:45. Needs extended-hours ON on the chart to see 07:00-09:30.
+useSessionWindow     = input.bool(true, "Only arm inside 07:00-11:30 ET", group=gSession)
+sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
+
+gStructure = "5. Structure / reward"
+requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure)
+minRRtoPeak          = input.float(2.0, "Minimum R to impulse peak", minval=0.0, maxval=10.0, step=0.25, group=gStructure)
+supportTolerancePct  = input.float(0.35, "Support tolerance %", minval=0.05, maxval=3.0, step=0.05, group=gStructure)
+supportToleranceATR  = input.float(0.20, "Support tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=gStructure)
+
+gRisk = "6. Risk / sizing"
+riskBudget           = input.float(200.0, "Risk budget per trade $", minval=1.0, step=10.0, group=gRisk)
+maxPositionValue     = input.float(25000.0, "Maximum position value $", minval=100.0, step=500.0, group=gRisk)
+maxStopPct           = input.float(3.0, "Maximum structural stop %", minval=0.25, maxval=20.0, step=0.25, group=gRisk)
+maxStopATR           = input.float(1.5, "Maximum structural stop ATR", minval=0.25, maxval=10.0, step=0.25, group=gRisk)
+useMaxDollarStop     = input.bool(false, "Also enforce maximum $ stop", group=gRisk)
+maxStopDollar        = input.float(0.20, "Maximum $ stop", minval=0.01, maxval=20.0, step=0.01, group=gRisk)
+// V4: NEW. Origin SOURCE (book halt-band table), evidence REASONED_NOT_
+// MEASURED: a stop wider than the LULD band cannot be honoured — price
+// halts before reaching it and reopens wherever the auction says.
+haltBandVeto         = input.bool(true, "Veto entry if stop wider than halt band", group=gRisk)
+
+gExecution = "7. Entry / exit"
+breakoutBufferTicks  = input.int(1, "Breakout buffer ticks [UNTESTED local]", minval=0, maxval=20, group=gExecution)
+rewardMultiple       = input.float(2.0, "Profit target (R)", minval=0.5, maxval=10.0, step=0.25, group=gExecution)
+bailoutEnabled       = input.bool(true, "Enable breakout-or-bailout", group=gExecution)
+bailoutBars          = input.int(2, "Full bars allowed to prove momentum", minval=1, maxval=10, group=gExecution)
+minimumMFER          = input.float(0.5, "Minimum MFE required (R) [UNTESTED local]", minval=0.0, maxval=5.0, step=0.1, group=gExecution)
+bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry", group=gExecution)
+
+gVisual = "8. Display"
+showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
+showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual)
+bandHalfWidthTicks   = input.int(5, "Band half-width (ticks)", minval=1, maxval=100, group=gVisual)
+showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+debugMode            = input.bool(false, "Debug plots", group=gVisual)
+
+// ───────────────────────── Raw indicators ─────────────────────────
+atr = ta.atr(14)
+ema9 = ta.ema(close, 9)
+ema20 = ta.ema(close, 20)
+vwapValue = ta.vwap(hlc3)
+[macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
+volumeBaseline = ta.sma(volume, volumeBaselineBars)
+
+isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
+
+// V4: session gate. na(time(...)) outside the window.
+inSession = not useSessionWindow or not na(time(timeframe.period, sessionWindow, "America/New_York"))
+
+// V4: previous-day close for the halt-band tier (book: bands are set by the
+// PRIOR close and do not change intraday). Updated at the first bar of a new
+// exchange day from the last print of the prior day — includes after-hours,
+// which is a documented approximation, stated in the audit.
+var float prevDayClose = na
+if ta.change(time("D")) != 0
+    prevDayClose := close[1]
+// tier: <$0.75 -> fixed 15c band; $0.75-3 -> 20%; >$3 -> 10%
+haltBandWidth = na(prevDayClose) ? na :
+     prevDayClose < 0.75 ? 0.15 :
+     prevDayClose <= 3.0 ? close * 0.20 : close * 0.10
+
+f_safeDiv(float numerator, float denominator, float fallback) =>
+    denominator != 0 and not na(denominator) ? numerator / denominator : fallback
+
+// ───────────────────────── State machine ─────────────────────────
+int IDLE     = 0
+int IMPULSE  = 1
+int PULLBACK = 2
+int ARMED    = 3
+int LONG     = 4
+int INVALID  = 5
+int DONE     = 6
+
+// V4: vocabulary pass (design pack) — display names are research states,
+// not instructions. Internal constants unchanged: never key logic on a
+// display string.
+f_stateName(int state) =>
+    state == IDLE ? "SEARCHING" :
+     state == IMPULSE ? "WATCH" :
+     state == PULLBACK ? "PULLBACK" :
+     state == ARMED ? "TRIGGER SET" :
+     state == LONG ? "IN TRADE" :
+     state == INVALID ? "NO" : "DONE"
+
+// ───────────────────── Dynamic impulse candidate ─────────────────────
+float bestStartLow = na
+float bestStartClose = na
+float bestPct = 0.0
+float bestATR = 0.0
+float bestEfficiency = 0.0
+float bestRVOL = 0.0
+float bestVolumeSum = na
+float bestBaseline = na
+float bestPath = na
+int bestBars = 0
+int bestStartBar = na
+
+var int scanAfterBar = na
+
+enoughHistory = bar_index > volumeBaselineBars + maxImpulseBars + 5
+
+if isOneMinute and barstate.isconfirmed and enoughHistory
+    for candidateBars = minImpulseBars to maxImpulseBars
+        int candidateStartBar = bar_index - candidateBars
+        bool freshCandidate = na(scanAfterBar) or candidateStartBar > scanAfterBar
+
+        float candidateStartLow = low[candidateBars]
+        float candidateStartClose = close[candidateBars]
+        float candidateRange = high - candidateStartLow
+
+        float candidatePath = 0.0
+        float candidateVolumeSum = 0.0
+        bool currentIsPeak = true
+
+        for j = 0 to candidateBars - 1
+            candidatePath += math.abs(close[j] - close[j + 1])
+            candidateVolumeSum += volume[j]
+
+        for k = 1 to candidateBars
+            currentIsPeak := currentIsPeak and high >= high[k]
+
+        float candidatePct = f_safeDiv(candidateRange, candidateStartLow, 0.0) * 100.0
+        float candidateATR = f_safeDiv(candidateRange, atr, 0.0)
+        float candidateEfficiency = f_safeDiv(close - candidateStartClose, candidatePath, 0.0)
+        float candidateAvgVolume = candidateVolumeSum / candidateBars
+        float candidateBaseline = volumeBaseline[candidateBars + 1]
+        float candidateRVOL = f_safeDiv(candidateAvgVolume, candidateBaseline, 0.0)
+        float candidateDollarVolume = candidateAvgVolume * math.max(close, candidateStartClose)
+
+        bool priceAdvancing = close > candidateStartClose and close > open
+        bool qualifies = freshCandidate and currentIsPeak and priceAdvancing and
+             candidatePct >= minPushPct and
+             candidateATR >= minPushATR and
+             candidateEfficiency >= minEfficiency and
+             candidateRVOL >= minPushRVOL and
+             candidateDollarVolume >= minDollarVolume
+
+        if qualifies and (candidatePct > bestPct or (candidatePct == bestPct and candidateEfficiency > bestEfficiency))
+            bestStartLow := candidateStartLow
+            bestStartClose := candidateStartClose
+            bestPct := candidatePct
+            bestATR := candidateATR
+            bestEfficiency := candidateEfficiency
+            bestRVOL := candidateRVOL
+            bestVolumeSum := candidateVolumeSum
+            bestBaseline := candidateBaseline
+            bestPath := candidatePath
+            bestBars := candidateBars
+            bestStartBar := candidateStartBar
+
+// ───────────────────────── Persistent setup data ─────────────────────────
+var int setupState = IDLE
+var int stateStartBar = na
+
+var int impulseStartBar = na
+var int impulsePeakBar = na
+var float pushStartPrice = na
+var float pushStartClose = na
+var float pushPeak = na
+var float pushPct = na
+var float pushATR = na
+var float pushEfficiency = na
+var float pushRVOL = na
+var float pushVolumeSum = na
+var float pushAvgVolume = na
+var float pushDollarVolume = na
+var float pushBaselineVolume = na
+var float pushPath = na
+var int pushBars = 0
+
+var int pullbackStartBar = na
+var int pullbackLastBar = na
+var int pullbackBars = 0
+var int redPullbackBars = 0
+var float pullbackLow = na
+var float pullbackVolumeSum = 0.0
+
+var float triggerPrice = na
+var float structuralStop = na
+var float plannedRisk = na
+var float plannedTarget = na
+var float plannedRRtoPeak = na
+var float plannedShares = na
+var float setupQuality = na
+
+var float tradeEntryPrice = na
+var float tradeRisk = na
+var float activeTarget = na
+var int tradeEntryBar = na
+var float highestSinceEntry = na
+
+var string statusReason = "Scanning"
+
+// V4: setup counter for the day — the SOURCE rule "3rd pullback: reduce
+// size, don't skip" is about pullback NUMBER in the run. Pine cannot track
+// a run across resets cleanly, so the proxy is setups-armed-today; from the
+// 3rd, quantity is halved. LOCAL mapping of a SOURCE rule, documented.
+var int setupsToday = 0
+if ta.change(time("D")) != 0
+    setupsToday := 0
+
+var bool eventArmed = false
+var bool eventLong = false
+var bool eventInvalid = false
+var bool eventBailout = false
+
+eventArmed := false
+eventLong := false
+eventInvalid := false
+eventBailout := false
+
+// ───────────────────────── Detect actual broker fill ─────────────────────────
+if strategy.position_size > 0 and setupState != LONG
+    setupState := LONG
+    stateStartBar := bar_index
+    tradeEntryBar := bar_index
+    tradeEntryPrice := strategy.position_avg_price
+    tradeRisk := tradeEntryPrice - structuralStop
+    activeTarget := tradeEntryPrice + tradeRisk * rewardMultiple
+    highestSinceEntry := tradeEntryPrice
+    statusReason := "In trade: manage"
+    eventLong := true
+
+if strategy.position_size == 0 and setupState == LONG and not na(tradeEntryPrice)
+    setupState := DONE
+    stateStartBar := bar_index
+    scanAfterBar := bar_index
+    statusReason := "Trade closed"
+
+// ───────────────────────── Confirmed-bar state updates ─────────────────────────
+if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
+    if (setupState == DONE or setupState == INVALID) and bar_index > stateStartBar
+        setupState := IDLE
+        statusReason := "Scanning"
+        impulseStartBar := na
+        impulsePeakBar := na
+        pushStartPrice := na
+        pushStartClose := na
+        pushPeak := na
+        pushPct := na
+        pushATR := na
+        pushEfficiency := na
+        pushRVOL := na
+        pushVolumeSum := na
+        pushAvgVolume := na
+        pushDollarVolume := na
+        pushBaselineVolume := na
+        pushPath := na
+        pushBars := 0
+        pullbackStartBar := na
+        pullbackLastBar := na
+        pullbackBars := 0
+        redPullbackBars := 0
+        pullbackLow := na
+        pullbackVolumeSum := 0.0
+        triggerPrice := na
+        structuralStop := na
+        plannedRisk := na
+        plannedTarget := na
+        plannedRRtoPeak := na
+        plannedShares := na
+        setupQuality := na
+        tradeEntryPrice := na
+        tradeRisk := na
+        activeTarget := na
+        tradeEntryBar := na
+        highestSinceEntry := na
+
+    if setupState == IDLE and bestBars > 0
+        setupState := IMPULSE
+        stateStartBar := bar_index
+
+        impulseStartBar := bestStartBar
+        impulsePeakBar := bar_index
+        pushStartPrice := bestStartLow
+        pushStartClose := bestStartClose
+        pushPeak := high
+        pushPct := bestPct
+        pushATR := bestATR
+        pushEfficiency := bestEfficiency
+        pushRVOL := bestRVOL
+        pushVolumeSum := bestVolumeSum
+        pushAvgVolume := bestVolumeSum / bestBars
+        pushDollarVolume := pushAvgVolume * math.max(pushPeak, pushStartClose)
+        pushBaselineVolume := bestBaseline
+        pushPath := bestPath
+        pushBars := bestBars
+
+        pullbackStartBar := na
+        pullbackLastBar := na
+        pullbackBars := 0
+        redPullbackBars := 0
+        pullbackLow := na
+        pullbackVolumeSum := 0.0
+
+        triggerPrice := na
+        structuralStop := na
+        plannedRisk := na
+        plannedTarget := na
+        plannedRRtoPeak := na
+        plannedShares := na
+        setupQuality := na
+
+        tradeEntryPrice := na
+        tradeRisk := na
+        activeTarget := na
+        tradeEntryBar := na
+        highestSinceEntry := na
+
+        statusReason := "Impulse qualified - wait pullback"
+
+    else if setupState == IMPULSE
+        bool newPeak = high > pushPeak
+        bool cleanContinuation = newPeak and close >= open and close >= close[1]
+
+        if cleanContinuation
+            pushPeak := high
+            impulsePeakBar := bar_index
+            pushBars += 1
+            pushVolumeSum += volume
+            pushAvgVolume := pushVolumeSum / pushBars
+            pushRVOL := f_safeDiv(pushAvgVolume, pushBaselineVolume, 0.0)
+            pushDollarVolume := pushAvgVolume * math.max(pushPeak, pushStartClose)
+            pushPath += math.abs(close - close[1])
+            pushEfficiency := f_safeDiv(close - pushStartClose, pushPath, 0.0)
+            pushPct := f_safeDiv(pushPeak - pushStartPrice, pushStartPrice, 0.0) * 100.0
+            pushATR := f_safeDiv(pushPeak - pushStartPrice, atr, 0.0)
+            statusReason := "Impulse extending"
+
+        else
+            if newPeak
+                pushPeak := high
+                impulsePeakBar := bar_index
+                pushPct := f_safeDiv(pushPeak - pushStartPrice, pushStartPrice, 0.0) * 100.0
+                pushATR := f_safeDiv(pushPeak - pushStartPrice, atr, 0.0)
+
+            setupState := PULLBACK
+            stateStartBar := bar_index
+            pullbackStartBar := bar_index
+            pullbackLastBar := bar_index
+            pullbackBars := 1
+            redPullbackBars := close < open ? 1 : 0
+            pullbackLow := low
+            pullbackVolumeSum := volume
+            statusReason := "First pullback developing"
+
+    else if setupState == PULLBACK or setupState == ARMED
+        if bar_index > pullbackLastBar
+            if setupState == ARMED
+                strategy.cancel("Long")
+
+            setupState := PULLBACK
+            pullbackBars += 1
+            redPullbackBars += close < open ? 1 : 0
+            pullbackLow := math.min(pullbackLow, low)
+            pullbackVolumeSum += volume
+            pullbackLastBar := bar_index
+            statusReason := "Pullback updating"
+
+// ───────────────────────── Live setup measurements ─────────────────────────
+pushRange = not na(pushPeak) and not na(pushStartPrice) ? pushPeak - pushStartPrice : na
+retracementPct = setupState == PULLBACK or setupState == ARMED ?
+     f_safeDiv(pushPeak - pullbackLow, pushRange, 999.0) * 100.0 : na
+
+pullbackAvgVolume = pullbackBars > 0 ? pullbackVolumeSum / pullbackBars : na
+pullbackVolumeRatio = pullbackBars > 0 ? f_safeDiv(pullbackAvgVolume, pushAvgVolume, 999.0) : na
+decliningPBVolume = pullbackBars <= 1 ? true : volume < volume[1]
+
+candleRange = high - low
+lowerWick = math.min(open, close) - low
+upperWick = high - math.max(open, close)
+lowerWickPct = f_safeDiv(lowerWick, candleRange, 0.0) * 100.0
+upperWickPct = f_safeDiv(upperWick, candleRange, 0.0) * 100.0
+bottomingTail = lowerWickPct >= bullishLowerWickPct
+toppingTailWarning = upperWickPct >= toppingTailWarnPct
+
+emaBullish = close > ema9 and ema9 >= ema20
+vwapBullish = close > vwapValue
+macdBullish = macdValue > 0 and macdHist > 0
+histogramIncreasing = macdHist > macdHist[1]
+
+supportTolerance = math.max(close * supportTolerancePct / 100.0, atr * supportToleranceATR)
+halfDollarBelow = math.floor(close * 2.0) / 2.0
+ema9Support = ema9 <= close and close - ema9 <= supportTolerance
+ema20Support = ema20 <= close and close - ema20 <= supportTolerance
+vwapSupport = vwapValue <= close and close - vwapValue <= supportTolerance
+roundSupport = halfDollarBelow <= close and close - halfDollarBelow <= supportTolerance
+emaClustered = ema9Support and ema20Support and math.abs(ema9 - ema20) <= supportTolerance
+supportCountRaw = (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport ? 1 : 0) + (roundSupport ? 1 : 0)
+supportCount = supportCountRaw - (emaClustered ? 1 : 0)
+
+candidateTrigger = setupState == PULLBACK ? high + breakoutBufferTicks * syminfo.mintick : triggerPrice
+candidateStop = setupState == PULLBACK ? pullbackLow : structuralStop
+candidateRisk = candidateTrigger - candidateStop
+candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
+candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
+candidateRRtoPeak = f_safeDiv(pushPeak - candidateTrigger, candidateRisk, -999.0)
+candidateRiskShares = candidateRisk > 0 ? math.floor(riskBudget / candidateRisk) : 0.0
+candidateCapitalShares = candidateTrigger > 0 ? math.floor(maxPositionValue / candidateTrigger) : 0.0
+candidateShares = math.min(candidateRiskShares, candidateCapitalShares)
+
+// V4: halt-band check — a stop wider than the band cannot be honoured.
+stopExceedsHaltBand = not na(haltBandWidth) and candidateRisk > haltBandWidth
+
+pushGate = pushPct >= minPushPct and pushATR >= minPushATR and pushEfficiency >= minEfficiency and pushRVOL >= minPushRVOL and pushDollarVolume >= minDollarVolume
+pullbackCountGate = pullbackBars >= minPullbackBars and pullbackBars <= maxPullbackBars and redPullbackBars >= 1
+retracementGate = not na(retracementPct) and retracementPct <= maxRetracementPct
+volumeGate = not na(pullbackVolumeRatio) and pullbackVolumeRatio <= maxPBVolumeRatio
+momentumGate = (not requireMACD or macdBullish) and (not requireEMA or emaBullish) and (not requireVWAP or vwapBullish)
+riskGate = candidateRisk > 0 and candidateRiskPct <= maxStopPct and candidateRiskATR <= maxStopATR and
+     (not useMaxDollarStop or candidateRisk <= maxStopDollar) and candidateShares >= 1 and
+     (not haltBandVeto or not stopExceedsHaltBand)                     // V4
+rrGate = not requireRRtoPeak or candidateRRtoPeak >= minRRtoPeak
+sessionGate = inSession                                                 // V4
+
+hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and sessionGate
+
+// ─────────────────── Quality number: DISPLAY ONLY (V4) ───────────────────
+// V4: A+/A/B letter grades REMOVED. Origin of the demotion: MEASURED —
+// reports/2026-08-score-basket.md: a pillar score lost 16 of 16 matched
+// pairs against equal weight and was anti-predictive above 50. The number
+// below never gates anything and is labelled display-only on the dashboard.
+pushStrengthNorm = minPushPct > 0 ? math.min(pushPct / minPushPct, 1.5) : 0.0
+rvolNorm = minPushRVOL > 0 ? math.min(pushRVOL / minPushRVOL, 1.5) : 0.0
+effNorm = minEfficiency > 0 ? math.min(pushEfficiency / minEfficiency, 1.5) : 1.0
+atrNorm = minPushATR > 0 ? math.min(pushATR / minPushATR, 1.5) : 0.0
+impulseScore = math.min(30.0, 8.0 * pushStrengthNorm + 8.0 * rvolNorm + 7.0 * effNorm + 7.0 * atrNorm)
+retracementPoints = not na(retracementPct) ? (retracementPct <= 25 ? 12.0 : retracementPct <= 35 ? 10.0 : retracementPct <= 50 ? 6.0 : 0.0) : 0.0
+volumePoints = not na(pullbackVolumeRatio) ? (pullbackVolumeRatio <= 0.40 ? 10.0 : pullbackVolumeRatio <= 0.55 ? 8.0 : pullbackVolumeRatio <= maxPBVolumeRatio ? 5.0 : 0.0) : 0.0
+pullbackScore = math.min(30.0, retracementPoints + volumePoints + (decliningPBVolume ? 4.0 : 0.0) + (bottomingTail ? 4.0 : 0.0))
+momentumScore = math.min(20.0, (emaBullish ? 5.0 : 0.0) + (vwapBullish ? 3.0 : 0.0) + (macdBullish ? 8.0 : 0.0) + (histogramIncreasing ? 4.0 : 0.0))
+roomPoints = candidateRRtoPeak >= 2.0 ? 8.0 : candidateRRtoPeak >= 1.0 ? 4.0 : candidateRRtoPeak >= 0.5 ? 2.0 : 0.0
+riskCompactPoints = candidateRiskPct <= 1.5 ? 3.0 : candidateRiskPct <= maxStopPct ? 1.5 : 0.0
+structureScore = math.min(20.0, roomPoints + math.min(supportCount, 3) * 2.0 + (not toppingTailWarning ? 3.0 : 0.0) + riskCompactPoints)
+liveQuality = math.max(0.0, math.min(100.0, impulseScore + pullbackScore + momentumScore + structureScore))
+
+string gateReason =
+     not sessionGate ? "Outside 07:00-11:30 ET window" :
+     not pushGate ? "Push quality failed" :
+     pullbackBars < minPullbackBars ? "Need more pullback" :
+     redPullbackBars < 1 ? "Need a red pullback candle" :
+     not retracementGate ? "Retracement " + str.tostring(retracementPct, "#.0") + "% > " + str.tostring(maxRetracementPct, "#.0") + "%" :
+     not volumeGate ? "PB volume " + str.tostring(pullbackVolumeRatio, "#.00") + "x > " + str.tostring(maxPBVolumeRatio, "#.00") + "x" :
+     requireMACD and not macdBullish ? "MACD momentum failed" :
+     requireEMA and not emaBullish ? "EMA trend failed" :
+     requireVWAP and not vwapBullish ? "VWAP trend failed" :
+     haltBandVeto and stopExceedsHaltBand ? "Stop " + str.tostring(candidateRisk, format.mintick) + " wider than halt band " + str.tostring(haltBandWidth, format.mintick) :
+     not riskGate ? "Structural risk too wide" :
+     requireRRtoPeak and not rrGate ? "Only " + str.tostring(candidateRRtoPeak, "#.00") + "R to peak" :
+     "READY"
+
+// ───────────────────────── Arm / invalidate at bar close ─────────────────────────
+if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setupState == PULLBACK
+    bool structuralInvalid = not na(retracementPct) and retracementPct > maxRetracementPct
+    bool tooManyPullbackBars = pullbackBars > maxPullbackBars
+
+    if structuralInvalid or tooManyPullbackBars
+        strategy.cancel("Long")
+        setupState := INVALID
+        stateStartBar := bar_index
+        scanAfterBar := bar_index
+        statusReason := structuralInvalid ?
+             "NO: retracement " + str.tostring(retracementPct, "#.0") + "%" :
+             "NO: pullback > " + str.tostring(maxPullbackBars) + " bars"
+        eventInvalid := true
+
+    else if hardGatesOK
+        triggerPrice := candidateTrigger
+        structuralStop := candidateStop
+        plannedRisk := candidateRisk
+        plannedTarget := candidateTrigger + candidateRisk * rewardMultiple
+        plannedRRtoPeak := candidateRRtoPeak
+        // V4: from the 3rd setup of the day, half size — SOURCE rule
+        // "3rd pullback: reduce size, don't skip", mapped to setup count.
+        setupsToday += 1
+        plannedShares := setupsToday >= 3 ? math.max(1, math.floor(candidateShares / 2)) : candidateShares
+        setupQuality := liveQuality
+
+        setupState := ARMED
+        stateStartBar := bar_index
+        statusReason := "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart"
+        eventArmed := true
+
+        strategy.entry("Long", strategy.long, qty=plannedShares, stop=triggerPrice,
+             comment="ROSS FP trigger",
+             alert_message="ROSS FP V4 ENTRY | {{ticker}} | stop-entry filled")
+
+    else if pullbackBars >= maxPullbackBars
+        strategy.cancel("Long")
+        setupState := INVALID
+        stateStartBar := bar_index
+        scanAfterBar := bar_index
+        statusReason := "NO: " + gateReason
+        eventInvalid := true
+
+    else
+        statusReason := gateReason
+
+// ───────────────────── Realtime safety cancellation ─────────────────────
+if isOneMinute and setupState == ARMED and strategy.position_size == 0 and not barstate.isconfirmed
+    maxAllowedPullbackLow = pushPeak - pushRange * maxRetracementPct / 100.0
+    if low < maxAllowedPullbackLow
+        strategy.cancel("Long")
+
+// ───────────────────────── Trade management ─────────────────────────
+if strategy.position_size > 0 and setupState == LONG and tradeRisk > 0
+    strategy.exit("Bracket", from_entry="Long", stop=structuralStop, limit=activeTarget,
+         comment_loss="STRUCTURAL STOP", comment_profit="TARGET",
+         alert_message="ROSS FP V4 EXIT | {{ticker}}")
+
+mfeR = setupState == LONG and tradeRisk > 0 ?
+     f_safeDiv(highestSinceEntry - tradeEntryPrice, tradeRisk, 0.0) : na
+barsAfterEntry = setupState == LONG and not na(tradeEntryBar) ? bar_index - tradeEntryBar : 0
+
+if isOneMinute and barstate.isconfirmed and strategy.position_size > 0 and setupState == LONG and bar_index > tradeEntryBar
+    highestSinceEntry := math.max(highestSinceEntry, high)
+    mfeR := f_safeDiv(highestSinceEntry - tradeEntryPrice, tradeRisk, 0.0)
+    barsAfterEntry := bar_index - tradeEntryBar
+
+    bool failedMFE = bailoutEnabled and barsAfterEntry >= bailoutBars and mfeR < minimumMFER
+    bool lostEntryEarly = bailoutEnabled and bailOnCloseBelowEntry and barsAfterEntry <= bailoutBars and close < tradeEntryPrice
+
+    if failedMFE or lostEntryEarly
+        statusReason := failedMFE ?
+             "BAIL: only " + str.tostring(mfeR, "#.00") + "R MFE" :
+             "BAIL: close below entry"
+        eventBailout := true
+        strategy.close("Long", comment="BAILOUT", immediately=true,
+             alert_message="ROSS FP V4 BAILOUT | {{ticker}}")
+
+// ───────────────────────── Display values ─────────────────────────
+displayQuality = setupState == ARMED or setupState == LONG ? setupQuality : liveQuality
+displayEntry = setupState == LONG ? tradeEntryPrice : setupState == ARMED ? triggerPrice : candidateTrigger
+displayStop = setupState == LONG or setupState == ARMED ? structuralStop : candidateStop
+displayTarget = setupState == LONG ? activeTarget : setupState == ARMED ? plannedTarget :
+     candidateRisk > 0 ? candidateTrigger + candidateRisk * rewardMultiple : na
+displayRR = setupState == ARMED or setupState == LONG ? plannedRRtoPeak : candidateRRtoPeak
+displayShares = setupState == ARMED or setupState == LONG ? plannedShares : candidateShares
+displayRiskDollar = setupState == LONG ? tradeRisk : setupState == ARMED ? plannedRisk : candidateRisk
+displayRiskCash = not na(displayShares) and not na(displayRiskDollar) ? displayShares * displayRiskDollar : na
+
+stateColor =
+     setupState == LONG ? color.lime :
+     setupState == ARMED ? color.yellow :
+     setupState == INVALID ? color.red :
+     setupState == PULLBACK or setupState == IMPULSE ? color.orange :
+     color.gray
+
+momentumText = (macdBullish ? "MACD✓" : "MACD✕") + " " +
+     (emaBullish ? "EMA✓" : "EMA✕") + " " +
+     (vwapBullish ? "VWAP✓" : "VWAP✕")
+
+actionText =
+     not isOneMinute ? "USE 1-MINUTE CHART" :
+     not inSession and useSessionWindow ? "OUTSIDE WINDOW — LOG ONLY" :
+     setupState == IDLE ? "WAIT FOR IMPULSE" :
+     setupState == IMPULSE ? "WAIT FOR FIRST PULLBACK" :
+     setupState == PULLBACK ? gateReason :
+     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" :
+     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" :
+     statusReason
+
+// ───────────────────────── Minimal chart ─────────────────────────
+activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
+
+plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr)
+plot(showLevels and (setupState == ARMED or setupState == LONG) ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
+bandHalfWidth = bandHalfWidthTicks * syminfo.mintick
+showTradeLevels = setupState == ARMED or setupState == LONG
+plot(showLevels and showTradeLevels ? displayStop : na, "Stop", color=color.red, linewidth=2, style=plot.style_linebr)
+stopBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayStop + bandHalfWidth : na, "Stop band upper", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
+stopBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayStop - bandHalfWidth : na, "Stop band lower", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
+fill(stopBandUpperPlot, stopBandLowerPlot, color=color.new(color.red, 82), title="Stop loss band")
+plot(showLevels and showTradeLevels ? displayTarget : na, "Target", color=color.aqua, linewidth=2, style=plot.style_linebr)
+targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
+targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
+fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.aqua, 82), title="Target price band")
+
+plot(showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
+plot(showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
+plot(showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20))
+
+plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr)
+plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr)
+
+plotshape(eventArmed, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="TRG")
+plotshape(eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.small, text="IN")
+plotshape(eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="X")
+plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="BAIL")
+
+// ───────────────────────── Dashboard ─────────────────────────
+var table dash = table.new(position.bottom_right, 2, 11, border_width=1)
+
+if barstate.islast
+    table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=color.rgb(25, 25, 25), text_color=color.white)
+    table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF", bgcolor=stateColor, text_color=color.black)
+
+    table.cell(dash, 0, 1, "QUALITY*")
+    table.cell(dash, 1, 1, str.tostring(displayQuality, "#") + "  *display only — a similar score measured ANTI-predictive (16/16)")
+
+    table.cell(dash, 0, 2, "PUSH")
+    table.cell(dash, 1, 2,
+         str.tostring(pushPct, "#.1") + "% | " +
+         str.tostring(pushRVOL, "#.1") + "x | $" +
+         str.tostring(pushDollarVolume / 1000.0, "#") + "k/m | E " + str.tostring(pushEfficiency, "#.00"))
+
+    table.cell(dash, 0, 3, "PULLBACK")
+    table.cell(dash, 1, 3,
+         str.tostring(pullbackBars) + "b | " +
+         str.tostring(retracementPct, "#.0") + "% | Vol " +
+         str.tostring(pullbackVolumeRatio, "#.00") + "x | setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)))
+
+    table.cell(dash, 0, 4, "MOMENTUM")
+    table.cell(dash, 1, 4, momentumText, text_color=macdBullish ? color.lime : color.orange)
+
+    table.cell(dash, 0, 5, "HALT BAND")
+    table.cell(dash, 1, 5, na(haltBandWidth) ? "—  (no prior close yet)" :
+         str.tostring(haltBandWidth, format.mintick) +
+         (stopExceedsHaltBand ? "  ⚠ STOP WIDER THAN BAND" : "  ok"),
+         text_color=stopExceedsHaltBand ? color.red : color.white)
+
+    table.cell(dash, 0, 6, "ENTRY / STOP")
+    table.cell(dash, 1, 6,
+         str.tostring(displayEntry, format.mintick) + " / " +
+         str.tostring(displayStop, format.mintick))
+
+    table.cell(dash, 0, 7, "TARGET / ROOM")
+    table.cell(dash, 1, 7,
+         str.tostring(displayTarget, format.mintick) + " / " +
+         str.tostring(displayRR, "#.00") + "R")
+
+    table.cell(dash, 0, 8, "SIZE / RISK")
+    table.cell(dash, 1, 8,
+         str.tostring(displayShares, "#") + " / $" +
+         str.tostring(displayRiskCash, "#"))
+
+    table.cell(dash, 0, 9, "ACTION")
+    table.cell(dash, 1, 9, actionText, bgcolor=stateColor, text_color=color.black)
+
+    table.cell(dash, 0, 10, "LIMITS")
+    table.cell(dash, 1, 10, "Paper only · selection lives outside (float/news/halts) · fills optimistic in backtest",
+         text_color=color.gray)
+
+// ───────────────────────── Alerts ─────────────────────────
+if eventArmed
+    alert("ROSS FP V4 | TRIGGER SET | " + syminfo.ticker +
+         " | entry " + str.tostring(triggerPrice, format.mintick) +
+         " | stop " + str.tostring(structuralStop, format.mintick) +
+         " | target " + str.tostring(plannedTarget, format.mintick), alert.freq_once_per_bar_close)
+
+if eventLong
+    alert("ROSS FP V4 | ENTRY FILLED | " + syminfo.ticker +
+         " | entry " + str.tostring(tradeEntryPrice, format.mintick) +
+         " | stop " + str.tostring(structuralStop, format.mintick) +
+         " | target " + str.tostring(activeTarget, format.mintick), alert.freq_all)
+
+if eventInvalid
+    alert("ROSS FP V4 | NO | " + syminfo.ticker + " | " + statusReason, alert.freq_once_per_bar_close)
+
+if eventBailout
+    alert("ROSS FP V4 | BAILOUT | " + syminfo.ticker + " | " + statusReason, alert.freq_once_per_bar_close)
