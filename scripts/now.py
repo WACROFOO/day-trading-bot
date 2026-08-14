@@ -206,10 +206,10 @@ def gates(g, now_et, phase_open=True):
 # coloured lamps in a terminal; plain +/-/? when piped so nothing is lost
 LAMP = ({'+': GOOD('●'), '-': BAD('●'), '?': DIM('○')} if tape._TTY
         else {'+': '+', '-': '-', '?': '?'})
-VERDICT_PAINT = {'REVIEW': lambda t: c(f' {t} ', '1;7;32'),  # inverted green
-                 'LOG': lambda t: c(f' {t} ', '36'),
-                 'WATCH': lambda t: c(f' {t} ', '1;33'),
-                 'REJECT': lambda t: c(f' {t} ', '1;31')}
+VERDICT_PAINT = {'REVIEW': lambda t: c(t, '1;32'),
+                 'LOG': lambda t: c(t, '36'),
+                 'WATCH': lambda t: c(t, '1;33'),
+                 'REJECT': lambda t: c(t, '1;31')}
 
 
 VERDICT_RANK = {'REVIEW': 0, 'LOG': 1, 'WATCH': 2, 'REJECT': 3}
@@ -222,47 +222,99 @@ def dollar_vol(g):
     return ((t['rth_vol'] or t['pm_vol']) or 0) * (t['last'] or 0)
 
 
-def board(rows):
-    """The unified board: one grammar, ranked, crowned. Returns rows sorted."""
-    rows.sort(key=lambda g: (VERDICT_RANK.get(g['verdict'], 3), -dollar_vol(g)))
-    crown = next((g['sym'] for g in rows if g['verdict'] != 'REJECT'), None)
-    print(f" # {'sym':<5}{'last':>7} {'chg%':>5} {'fade%':>6} {'float':>6} "
-          f"{'rot':>4} {'rvol':>5}  {'PFCRVEM':^7}  {'verdict':<8} reason")
-    print('-' * 78)
-    for i, g in enumerate(rows, 1):
-        t, fv = g['tape'], g['fv']
-        gc, verdict, fade = g['gates'], g['verdict'], g['fade']
+def board(rows, phase_open=True, now_et=None):
+    """The verdict table, screenshot-style: box frame, verdict first column,
+    session-position columns coloured by state, WHY block underneath."""
+    rows.sort(key=lambda g: (VERDICT_RANK.get(g['verdict'], 4), -dollar_vol(g)))
+
+    W = [7, 8, 8, 6, 9, 10, 10, 8, 7, 6, 8]   # column content widths
+    HEAD = ['', 'TICKER', 'PRICE', 'CHG', 'vs OPEN', 'off HIGH', 'in RANGE',
+            'VOLUME', 'FLOAT', 'RVOL', 'NEWS']
+
+    def edge(l, m, r):
+        return l + m.join('─' * w for w in W) + r
+
+    def rowline(cells):
+        out = '│'
+        for w, (txt, paint) in zip(W, cells):
+            pad = f'{txt:^{w}}' if paint is None else f'{txt:^{w}}'
+            out += (pad if paint is None else paint(pad)) + '│'
+        return out
+
+    def col_off_high(v):
+        if v is None:
+            return '—', None
+        t = f'{v:+.0f}%'
+        return t, (GOOD if v > -7 else WARN if v > -15 else BAD)
+
+    def col_range(v):
+        if v is None:
+            return '—', None
+        t = f'{v:.0f}%'
+        return t, (GOOD if v >= 60 else WARN if v >= 30 else BAD)
+
+    now = now_et or dt.datetime.now(ET)
+    state = 'regular session live' if phase_open else 'window shut — log only'
+    print(f"VERDICT   {GOOD('OPEN') if phase_open else BAD('SHUT')}  "
+          f"{now:%H:%M} ET · {state}")
+    print(edge('┌', '┬', '┐'))
+    print(rowline([(h, None) for h in HEAD]))
+    print(edge('├', '┼', '┤'))
+    for g in rows:
+        t, fv, gc = g['tape'], g['fv'], g['gates']
         last = f"{t['last']:.2f}" if t else '—'
-        gap = f"{t['gap']:+.0f}" if t and t['gap'] is not None else '—'
-        fd = f"{fade:+.1f}" if fade is not None else '—'
-        if fade is not None and fade <= -25:
-            fd = BAD(fd)
-        fl = fv.get('float')
-        fls = f"{fl/1e6:.2g}M" if fl else '—'
+        chg = f"{t['gap']:+.0f}%" if t and t['gap'] is not None else '—'
+        vso, vso_p = '—', None
+        if t and t.get('day_open'):
+            v = (t['last'] / t['day_open'] - 1) * 100
+            vso, vso_p = f'{v:+.0f}%', (GOOD if v > 0 else BAD)
+        offh, offh_p = col_off_high(g['fade'])
+        rng, rng_p = col_range(t.get('in_range') if t else None)
         vol = ((t['rth_vol'] or t['pm_vol']) if t else 0) or 0
-        # book ch10 component 4: rotation = the imbalance (OBLN: 321M / 6M)
-        rot = f"{vol/fl:.0f}x" if fl and vol else '—'
-        # book guardrail 1: relative volume, floor 2.0
+        vs = f'{vol/1e6:.1f}M' if vol >= 1e6 else (f'{vol/1e3:.0f}K' if vol else '—')
+        fl = fv.get('float')
+        fls = f'{fl/1e6:.1f}M' if fl else '—'
         av = fv.get('avg_vol')
-        rvol = vol / av if av and vol else None
-        rv = (f"{rvol:.1f}x" if rvol < 10 else f"{rvol:.0f}x") if rvol else '—'
-        if rvol and rvol < 2:
-            rv = WARN(rv)
-        lamps = ''.join(LAMP[gc[k]] for k in 'PFCRVEM')
-        vpaint = VERDICT_PAINT.get(verdict, str)
-        tail = GOOD(' ◄ STRONGEST') if g['sym'] == crown else ''
-        reason = g['reason'][:20 if tail else 26]
-        print(f"{i:>2} {g['sym']:<5}{last:>7} {gap:>5} {fd:>6} {fls:>6} "
-              f"{rot:>4} {rv:>5}  {lamps}  {vpaint(verdict):<8} "
-              f"{reason}{tail}")
-    print('-' * 78)
-    print(DIM("P price · F float · C catalyst · R rising(≤25% off high) · "
-              "V >VWAP · E >EMA9 · M MACD   ") +
-          GOOD('●') + DIM('pass ') + BAD('●') + DIM('fail ') + DIM('○unknown'))
-    print(DIM("rot = day vol ÷ float (imbalance) · rvol = vs 3-mo avg "
-              "(book floor 2.0) · thresholds: FILTERS.md"))
+        rv = f'{vol/av:.0f}x' if av and vol else '—'
+        news = ('C', GOOD) if gc['C'] == '+' else (
+            ('—', None) if 'no ' in g['clabel'][:14] else ('MANUAL', WARN))
+        verdict = g['verdict'] if g['verdict'] != 'REJECT' else 'NO'
+        vp = VERDICT_PAINT.get(g['verdict'], str)
+        print(rowline([
+            (verdict, lambda x, _vp=vp: _vp_pad(x, _vp)),
+            (g['sym'], None), (last, None), (chg, None), (vso, vso_p),
+            (offh, offh_p), (rng, rng_p), (vs, None), (fls, None),
+            (rv, None), news]))
+    print(edge('└', '┴', '┘'))
+    print(DIM("in RANGE: 100% = at the day's high (front side) · 0% = at the "
+              "low (back side, move is over)"))
     print()
+    print('WHY')
+    for g in rows:
+        verdict = g['verdict'] if g['verdict'] != 'REJECT' else 'NO'
+        vp = VERDICT_PAINT.get(g['verdict'], str)
+        reason = g['reason']
+        t = g['tape']
+        if (t and g['fade'] is not None and t.get('in_range') is not None
+                and g['fade'] <= -15):
+            reason = (f"back side of the move — {abs(g['fade']):.0f}% off the "
+                      f"high, sitting at {t['in_range']:.0f}% of the day's range")
+        print(f"  {vp(f'{verdict:<6}')} {g['sym']:<6} {reason}")
+    print()
+    if not phase_open:
+        print(BAD("Outside the 07:00-11:00 ET window (13:00-17:00 France) — "
+                  "log these, don't trade them."))
+        print()
     return rows
+
+
+def _vp_pad(cell, paint):
+    """Center-pad a verdict cell, then colour only the word."""
+    word = cell.strip()
+    total = len(cell)
+    left = (total - len(word)) // 2
+    right = total - len(word) - left
+    return ' ' * left + paint(word) + ' ' * right
 
 
 def main():
@@ -338,7 +390,7 @@ def main():
                   f"{ps.kill_reason(r)[:58]}")
         print()
 
-    rows = board(rows)                                     # the verdict table
+    rows = board(rows, phase_open, now_et)                 # the verdict table
 
     detail = [g for g in rows if g['verdict'] != 'REJECT'][:3]
     rest = [g for g in rows if g not in detail]

@@ -145,6 +145,7 @@ def compute(sym):
         # in RANGE: 100% = at the day's high (front side) · 0% = back side
         span = d['hod'] - d['lod']
         d['in_range'] = (d['last'] - d['lod']) / span * 100 if span else None
+        d['day_open'] = rth[0][1]
         # gatekeeper 2: a recent red candle on outsized volume kills the entry
         vols = [b[5] for b in rth if b[5]]
         avg_v = sum(vols) / len(vols) if vols else 0
