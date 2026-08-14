@@ -38,6 +38,23 @@ UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
 URL = ('https://query1.finance.yahoo.com/v8/finance/chart/'
        '{}?range=1d&interval=1m&includePrePost=true')
 
+# ---- colour: on for terminals, off when piped, NO_COLOR respected ----------
+import os
+_TTY = (os.environ.get('FORCE_COLOR') or
+        (sys_stdout_isatty := __import__('sys').stdout.isatty())) and \
+       not os.environ.get('NO_COLOR')
+
+
+def c(txt, code):
+    """ANSI wrap. Codes: 32 green, 31 red, 33 yellow, 2 dim, 1 bold, 7 invert."""
+    return f'\033[{code}m{txt}\033[0m' if _TTY else str(txt)
+
+
+GOOD = lambda t: c(t, '1;32')
+BAD = lambda t: c(t, '1;31')
+WARN = lambda t: c(t, '33')
+DIM = lambda t: c(t, '2')
+
 
 def fetch(sym):
     p = subprocess.run(['curl', '-s', '--compressed', '--max-time', '30',
@@ -139,21 +156,32 @@ def render(d, nbars=8):
         print(f"PM   hi {d['pm_hi']:.2f}  lo {d['pm_lo']:.2f}  vol {d['pm_vol']:,}"
               + ('  (yahoo hides most PM volume)' if d['pm_vol'] == 0 else ''))
     if d['vwap'] is not None:
+        fade_s = f"{d['fade']:+.1f}%"
+        fade_s = BAD(fade_s) if d['fade'] <= -25 else (
+            WARN(fade_s) if d['fade'] <= -15 else fade_s)
         print(f"RTH  HOD {d['hod']:.2f} @{d['hod_t']:%H:%M}  LOD {d['lod']:.2f}"
-              f" @{d['lod_t']:%H:%M}  fade {d['fade']:+.1f}%  vol {d['rth_vol']:,}")
-        print(f"VWAP {d['vwap']:.3f}  ({'above' if d['last'] > d['vwap'] else 'BELOW'})")
+              f" @{d['lod_t']:%H:%M}  fade {fade_s}  vol {d['rth_vol']:,}")
+        above = d['last'] > d['vwap']
+        print(f"VWAP {d['vwap']:.3f}  "
+              + (GOOD('(above)') if above else BAD('(BELOW)')))
         for a, b in d['halts']:
-            print(f"HALT {a//60:02d}:{a%60:02d}-{b//60:02d}:{b%60:02d}  ({b-a+1} min)")
+            print(BAD(f"HALT {a//60:02d}:{a%60:02d}-{b//60:02d}:{b%60:02d}"
+                      f"  ({b-a+1} min)"))
         print(f"1-min range  median(last 30) {d['med_range']:.2f}  session top3 "
               + ' '.join(f'{x:.2f}' for x in d['top_ranges'])
               + f"  → smallest honest stop ≈ {d['med_range']:.2f}"
               + (', wider through halts' if d['halts'] else ''))
     e9, e20 = d['e9'][-1], d['e20'][-1]
-    state = ('above both' if d['last'] > e9 and d['last'] > e20
-             else 'below 9' if d['last'] < e9 else 'between')
-    print(f"EMA9 {e9:.3f}  EMA20 {e20:.3f}  ({state})")
+    if d['last'] > e9 and d['last'] > e20:
+        state = GOOD('(above both)')
+    elif d['last'] < e9:
+        state = BAD('(below 9)')
+    else:
+        state = WARN('(between)')
+    print(f"EMA9 {e9:.3f}  EMA20 {e20:.3f}  {state}")
+    verdict = (GOOD('passes') if d['macd_pass'] else BAD('FAILS'))
     print(f"MACD {d['macd'][-1]:+.4f}  sig {d['sig'][-1]:+.4f}  hist {d['hist']:+.4f}"
-          f"  ({'passes' if d['macd_pass'] else 'FAILS'}: needs positive AND above signal)")
+          f"  ({verdict}: needs positive AND above signal)")
     print(f"{'time':>6} {'open':>6} {'high':>6} {'low':>6} {'close':>6}"
           f" {'vol':>9} {'ema9':>6} {'hist':>8}")
     rows = d['rows']

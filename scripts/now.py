@@ -31,6 +31,7 @@ from zoneinfo import ZoneInfo
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import tape  # noqa: E402
 import premarket_stars as ps  # noqa: E402
+from tape import GOOD, BAD, WARN, DIM, c  # noqa: E402
 
 ET = ZoneInfo('America/New_York')
 FR = ZoneInfo('Europe/Paris')
@@ -65,16 +66,21 @@ def phase_at(now_et):
     return cur[1], cur[2], left
 
 
+PHASE_COLOR = {'MONEY WINDOW': GOOD, 'PRE-MARKET': WARN, 'OPENING DRIVE': WARN,
+               'WIND-DOWN': WARN, 'OFF-BOOK': BAD, 'AFTER HOURS': BAD}
+
+
 def header():
     now = dt.datetime.now(ET)
     name, advice, left = phase_at(now)
+    paint = PHASE_COLOR.get(name, DIM)
     print('=' * 78)
     print(f"{now:%a %d %b} · {now:%H:%M:%S} ET ({now.astimezone(FR):%H:%M} France)")
-    print(f"phase: {name}{left or ''}")
+    print(f"phase: {paint(name)}{left or ''}")
     print(f"       {advice}")
     print("money window 09:35-11:00 ET · hard stop 11:30 · paper only")
-    print("data: yahoo 1m bars (per-ticker time = last print) · finviz metrics")
-    print("      before the open finviz price/volume fields are LAST session's")
+    print(DIM("data: yahoo 1m bars (per-ticker time = last print) · finviz metrics"))
+    print(DIM("      before the open finviz price/volume fields are LAST session's"))
     print('=' * 78)
     return name
 
@@ -154,9 +160,17 @@ def gates(g, now_et):
     return gc, verdict, clabel, fade
 
 
+# coloured lamps in a terminal; plain +/-/? when piped so nothing is lost
+LAMP = ({'+': GOOD('●'), '-': BAD('●'), '?': DIM('○')} if tape._TTY
+        else {'+': '+', '-': '-', '?': '?'})
+VERDICT_PAINT = {'SETUP': lambda t: c(f' {t} ', '1;7;32'),   # inverted green
+                 'WATCH': lambda t: c(f' {t} ', '1;33'),
+                 'REJECT': lambda t: c(f' {t} ', '1;31')}
+
+
 def board(rows, now_et):
     print(f"{'sym':<5} {'last':>7} {'gap%':>7} {'fade%':>6} {'float':>6} "
-          f"{'vol':>7} {'P F C R V E M':^13}  {'verdict':<7} catalyst")
+          f"{'vol':>7}  {'P F C R V E M':^13}  {'verdict':<8} catalyst")
     print('-' * 78)
     for g in rows:
         t, fv = g['tape'], g['fv']
@@ -164,16 +178,21 @@ def board(rows, now_et):
         last = f"{t['last']:.2f}" if t else '?'
         gap = f"{t['gap']:+.1f}" if t and t['gap'] is not None else '?'
         fd = f"{fade:+.1f}" if fade is not None else '?'
+        if fade is not None and fade <= -25:
+            fd = BAD(fd)
         fl = fv.get('float')
         fls = f"{fl/1e6:.2g}M" if fl else '?'
         vol = t['rth_vol'] or t['pm_vol'] if t else 0
         vs = f"{vol/1e6:.1f}M" if vol >= 1e6 else (f"{vol/1e3:.0f}k" if vol else '?')
-        score = ' '.join(gc[k] for k in 'PFCRVEM')
+        score = ' '.join(LAMP[gc[k]] for k in 'PFCRVEM')
+        vpaint = VERDICT_PAINT.get(verdict, str)
         print(f"{g['sym']:<5} {last:>7} {gap:>7} {fd:>6} {fls:>6} "
-              f"{vs:>7} {score:^13}  {verdict:<7} {clabel}")
+              f"{vs:>7}  {score}  {vpaint(verdict):<8} {DIM(clabel)}")
     print('-' * 78)
-    print("P price 2-20 · F float<20M · C catalyst today · R ≤25% off high · "
-          "V >VWAP · E >EMA9 · M MACD")
+    print(DIM("P price 2-20 · F float<20M · C catalyst today · R ≤25% off high · "
+              "V >VWAP · E >EMA9 · M MACD   ") +
+          GOOD('●') + DIM(' pass  ') + BAD('●') + DIM(' fail  ') +
+          DIM('○ unknown'))
     print()
 
 
