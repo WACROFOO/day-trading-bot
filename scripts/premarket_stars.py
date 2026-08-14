@@ -448,6 +448,37 @@ def notify(title, message):
 
 
 # ------------------------------------------------------------------ output
+def scan(min_gap=GAP_MIN, top=20, live=False):
+    """The full graded pipeline, silent — importable by now.py.
+
+    discover -> finviz -> split test -> grade -> pillars. Returns the rows;
+    prints nothing. main() renders the same rows for the standalone CLI.
+    """
+    cands = discover_live(min_gap, top) if live else discover(min_gap, top)
+    if not cands:
+        return []
+    with cf.ThreadPoolExecutor(max_workers=6) as ex:
+        metrics = list(ex.map(finviz, [c['sym'] for c in cands]))
+        splits = list(ex.map(lambda m: split_check(m['sym'],
+                                                   m.get('prev_close_fv')),
+                             metrics))
+    rows = [{**c, **m, **s} for c, m, s in zip(cands, metrics, splits)]
+    for r in rows:
+        r['verdict'], r['reasons'] = grade(r)
+        # must precede any --json return: grade() fills off_high, which
+        # pillars() needs, and --json was emitting nulls for the scorecard
+        r['pillars'] = pillars(r)
+    return rows
+
+
+def kill_reason(r):
+    """The one reason that decides a rejected scan row, for one-line prints."""
+    kills = [x for x in r.get('reasons', []) if 'under' in x or 'over' in x
+             or 'off the' in x or 'split' in x or 'instrument' in x
+             or 'fund' in x or 'no price' in x]
+    return (kills or r.get('reasons') or ['?'])[0]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--min-gap', type=float, default=GAP_MIN)
@@ -462,25 +493,13 @@ def main():
     a = ap.parse_args()
 
     now = dt.datetime.now(ET)
-    cands = discover_live(a.min_gap, a.top) if a.live else discover(a.min_gap, a.top)
-    if not cands:
+    rows = scan(a.min_gap, a.top, a.live)
+    if not rows:
         print(f'{now:%Y-%m-%d %H:%M ET} — nothing gapping over '
               f'{a.min_gap:.0f}% with {VOL_MIN:,}+ shares.')
         print('That is a legitimate answer.  "Sitting down to a fairly sparse '
               'gap scanner" (fy1NpvXJq0U 01:49).')
         return 0
-
-    with cf.ThreadPoolExecutor(max_workers=6) as ex:
-        metrics = list(ex.map(finviz, [c['sym'] for c in cands]))
-        splits = list(ex.map(lambda m: split_check(m['sym'],
-                                                   m.get('prev_close_fv')),
-                             metrics))
-    rows = [{**c, **m, **s} for c, m, s in zip(cands, metrics, splits)]
-    for r in rows:
-        r['verdict'], r['reasons'] = grade(r)
-        # must precede the --json return: grade() fills off_high, which
-        # pillars() needs, and --json was emitting nulls for the scorecard
-        r['pillars'] = pillars(r)
 
     if a.json:
         print(json.dumps(rows, indent=2, default=str))

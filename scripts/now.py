@@ -112,7 +112,11 @@ def gather(sym):
 
 
 import re as _re
-BUYOUT_RE = _re.compile(r'acquir|buyout|to be bought|merger agreement|take.?private',
+# target-side only: a company DOING an acquisition is not pinned to a deal
+# price - only the one BEING bought is. (MSGY "to acquire 20% stake" was
+# wrongly killed by a looser 'acquir' match.)
+BUYOUT_RE = _re.compile(r'to be acquired|acquired by|buyout|to be bought'
+                        r'|merger agreement|going private|take.?private',
                         _re.I)
 
 
@@ -170,7 +174,30 @@ def gates(g, now_et):
         verdict = 'SETUP'
     else:
         verdict = 'WATCH'
-    return gc, verdict, clabel, fade
+
+    # the one-line reason: the first thing that decides the row (device 4:
+    # the reason must match the logic that fired)
+    if split_kill:
+        reason = 'gap IS the split ✗'
+    elif buyout_kill:
+        reason = 'BUYOUT — pinned ✗'
+    elif gc['P'] == '-':
+        reason = f'price {last:.2f} ✗' if last else 'price ✗'
+    elif gc['F'] == '-':
+        reason = f'float {fl/1e6:.0f}M ✗'
+    elif gc['R'] == '-':
+        reason = f'{fade:.0f}% off high ✗'
+    elif gc['V'] == '-':
+        reason = 'below VWAP'
+    elif gc['E'] == '-':
+        reason = 'below EMA9'
+    elif gc['M'] == '-':
+        reason = 'MACD below signal'
+    elif gc['C'] != '+':
+        reason = clabel
+    else:
+        reason = 'all gates green'
+    return gc, verdict, clabel, fade, reason
 
 
 # coloured lamps in a terminal; plain +/-/? when piped so nothing is lost
@@ -181,15 +208,26 @@ VERDICT_PAINT = {'SETUP': lambda t: c(f' {t} ', '1;7;32'),   # inverted green
                  'REJECT': lambda t: c(f' {t} ', '1;31')}
 
 
-def board(rows, now_et):
-    print(f"{'sym':<5} {'last':>7} {'gap%':>6} {'fade%':>6} {'float':>6} "
-          f"{'vol':>6} {'rot':>5} {'rvol':>5}  {'P F C R V E M':^13}  "
-          f"{'verdict':<8} catalyst")
+VERDICT_RANK = {'SETUP': 0, 'WATCH': 1, 'REJECT': 2}
+
+
+def dollar_vol(g):
+    t = g['tape']
+    if not t:
+        return 0.0
+    return ((t['rth_vol'] or t['pm_vol']) or 0) * (t['last'] or 0)
+
+
+def board(rows):
+    """The unified board: one grammar, ranked, crowned. Returns rows sorted."""
+    rows.sort(key=lambda g: (VERDICT_RANK.get(g['verdict'], 3), -dollar_vol(g)))
+    crown = next((g['sym'] for g in rows if g['verdict'] != 'REJECT'), None)
+    print(f" # {'sym':<5}{'last':>7} {'chg%':>5} {'fade%':>6} {'float':>6} "
+          f"{'rot':>4} {'rvol':>5}  {'PFCRVEM':^7}  {'verdict':<8} reason")
     print('-' * 78)
-    strongest, strongest_score = None, 0.0
-    for g in rows:
+    for i, g in enumerate(rows, 1):
         t, fv = g['tape'], g['fv']
-        gc, verdict, clabel, fade = g['gates'], g['verdict'], g['clabel'], g['fade']
+        gc, verdict, fade = g['gates'], g['verdict'], g['fade']
         last = f"{t['last']:.2f}" if t else '?'
         gap = f"{t['gap']:+.0f}" if t and t['gap'] is not None else '?'
         fd = f"{fade:+.1f}" if fade is not None else '?'
@@ -197,36 +235,30 @@ def board(rows, now_et):
             fd = BAD(fd)
         fl = fv.get('float')
         fls = f"{fl/1e6:.2g}M" if fl else '?'
-        vol = (t['rth_vol'] or t['pm_vol']) if t else 0
-        vs = f"{vol/1e6:.1f}M" if vol >= 1e6 else (f"{vol/1e3:.0f}k" if vol else '?')
-        # book ch10 component 4: rotation = imbalance (OBLN: 321M on a 6M float)
+        vol = ((t['rth_vol'] or t['pm_vol']) if t else 0) or 0
+        # book ch10 component 4: rotation = the imbalance (OBLN: 321M / 6M)
         rot = f"{vol/fl:.0f}x" if fl and vol else '?'
-        # book guardrail 1: relative volume, minimum 2.0
+        # book guardrail 1: relative volume, floor 2.0
         av = fv.get('avg_vol')
         rvol = vol / av if av and vol else None
-        rv = f"{rvol:.0f}x" if rvol else '?'
+        rv = (f"{rvol:.1f}x" if rvol < 10 else f"{rvol:.0f}x") if rvol else '?'
         if rvol and rvol < 2:
             rv = WARN(rv)
-        score = ' '.join(LAMP[gc[k]] for k in 'PFCRVEM')
+        lamps = ''.join(LAMP[gc[k]] for k in 'PFCRVEM')
         vpaint = VERDICT_PAINT.get(verdict, str)
-        print(f"{g['sym']:<5} {last:>7} {gap:>6} {fd:>6} {fls:>6} "
-              f"{vs:>6} {rot:>5} {rv:>5}  {score}  {vpaint(verdict):<8} "
-              f"{DIM(clabel[:34])}")
-        # guardrail 13: "is this the strongest stock today?" - attention =
-        # dollar volume, only names not already dead
-        if t and verdict != 'REJECT' and vol * t['last'] > strongest_score:
-            strongest, strongest_score = g['sym'], vol * t['last']
+        tail = GOOD(' ◄ STRONGEST') if g['sym'] == crown else ''
+        reason = g['reason'][:20 if tail else 26]
+        print(f"{i:>2} {g['sym']:<5}{last:>7} {gap:>5} {fd:>6} {fls:>6} "
+              f"{rot:>4} {rv:>5}  {lamps}  {vpaint(verdict):<8} "
+              f"{reason}{tail}")
     print('-' * 78)
-    if strongest:
-        print(f"STRONGEST TODAY (guardrail 13): {GOOD(strongest)}"
-              + DIM("  — trade the obvious one or none at all (GR 15)"))
-    print(DIM("P price 2-20 · F float<20M · C catalyst today · R ≤25% off high · "
+    print(DIM("P price · F float · C catalyst · R rising(≤25% off high) · "
               "V >VWAP · E >EMA9 · M MACD   ") +
-          GOOD('●') + DIM(' pass  ') + BAD('●') + DIM(' fail  ') +
-          DIM('○ unknown'))
-    print(DIM("rot = day vol ÷ float (imbalance) · rvol = day vol ÷ 3-mo avg "
-              "(book floor: 2.0)"))
+          GOOD('●') + DIM('pass ') + BAD('●') + DIM('fail ') + DIM('○unknown'))
+    print(DIM("rot = day vol ÷ float (imbalance) · rvol = vs 3-mo avg "
+              "(book floor 2.0) · thresholds: FILTERS.md"))
     print()
+    return rows
 
 
 def main():
@@ -245,58 +277,95 @@ def main():
     name = header()
     now_et = dt.datetime.now(ET)
 
+    scan_rows, scan_rejects = [], []
     if args.scan:
-        cmd = [sys.executable,
-               os.path.join(ROOT, 'scripts', 'premarket_stars.py'), '--all']
         # after the bell TradingView freezes premarket_change; switch to the
         # live intraday discovery so the scan can still surface new names
-        if name in ('OPENING DRIVE', 'MONEY WINDOW', 'WIND-DOWN', 'OFF-BOOK'):
-            cmd.append('--live')
-        subprocess.run(cmd)
-        print()
+        live = name in ('OPENING DRIVE', 'MONEY WINDOW', 'WIND-DOWN', 'OFF-BOOK')
+        scan_rows = ps.scan(live=live)
 
-    syms = ([s.upper() for s in args.symbols]
-            or (args.set_wl and [s.upper() for s in args.set_wl])
-            or watchlist())
+    survivors = [r['sym'] for r in scan_rows if r['verdict'] != 'REJECT']
+    listed = ([s.upper() for s in args.symbols]
+              or (args.set_wl and [s.upper() for s in args.set_wl])
+              or watchlist())
+    # unified universe: scan survivors first (they carry today's move),
+    # then the watchlist — deduplicated, capped so the run stays <60s
+    syms = list(dict.fromkeys(survivors + listed))[:12]
+    # a name on the board never repeats in the reject list (and would
+    # double-count in the funnel)
+    scan_rejects = [r for r in scan_rows
+                    if r['verdict'] == 'REJECT' and r['sym'] not in set(syms)]
     if not syms:
-        print('no watchlist - set one:  ./now --set SYM SYM')
-        if name == 'PRE-MARKET' and not args.scan:
-            print('or scan the gappers:     ./now --scan')
+        if args.scan:
+            print('scan: nothing gapping — a sparse scanner is a normal '
+                  'morning. No trade is a position.')
+        else:
+            print('no watchlist - set one:  ./now --set SYM SYM')
+            if name == 'PRE-MARKET':
+                print('or scan the gappers:     ./now --scan')
         return
 
-    with ThreadPoolExecutor(max_workers=4) as ex:
+    with ThreadPoolExecutor(max_workers=6) as ex:
         rows = list(ex.map(gather, syms))
     for g in rows:
-        g['gates'], g['verdict'], g['clabel'], g['fade'] = gates(g, now_et)
+        (g['gates'], g['verdict'], g['clabel'],
+         g['fade'], g['reason']) = gates(g, now_et)
 
     if name.startswith('CLOSED') or name == 'AFTER HOURS':
         print(f'[last session data for: {" ".join(syms)}]\n')
 
-    board(rows, now_et)                          # layer 1
+    rows = board(rows)                                     # layer 1, ranked
 
-    for g in rows:                               # layer 2
-        if g['tape']:
-            tape.render(g['tape'], args.bars)
-            fv = g['fv']
-            bits = []
-            if fv.get('shares_out'):
-                bits.append(f"shs out {fv['shares_out']/1e6:.2g}M")
-            if fv.get('cash_sh') is not None:
-                bits.append(f"cash/sh {fv['cash_sh']:.2f}")
-            if fv.get('high_52w') and g['tape']['last']:
-                mult = fv['high_52w'] / g['tape']['last']
-                bits.append(f"52W high {fv['high_52w']:.2f} ({mult:.0f}x)"
-                            + (' ← split-adjusted history' if mult > 20 else ''))
-            if fv.get('short_float') is not None:
-                bits.append(f"short {fv['short_float']:.1f}%")
-            if bits:
-                print('   ' + ' · '.join(bits))
-            if g['split'].get('split_today'):
-                print(f"   REVERSE SPLIT {g['split']['split_today']}:1 took "
-                      "effect today - the gap is the split")
-            print()
-        else:
+    # funnel: universe before filter (device 2 - never a survivor count
+    # without a denominator)
+    n_setup = sum(1 for g in rows if g['verdict'] == 'SETUP')
+    n_watch = sum(1 for g in rows if g['verdict'] == 'WATCH')
+    n_rej = sum(1 for g in rows if g['verdict'] == 'REJECT') + len(scan_rejects)
+    universe = (len(scan_rows) if args.scan else 0) + len(rows) - len(
+        [g for g in rows if any(r['sym'] == g['sym'] for r in scan_rows)])
+    print(f"{universe} considered · {n_setup} setup · {n_watch} watch · "
+          f"{n_rej} rejected"
+          + ('' if args.scan else '   (watchlist only — ./now --scan for the market)'))
+    print()
+
+    if scan_rejects:                                       # one line each
+        print(DIM('  ✗ scan rejects — the killing gate:'))
+        for r in scan_rejects:
+            print(f"  {BAD('✗')} {r['sym']:<6}{r.get('gap') or 0:>5.0f}%   "
+                  f"{ps.kill_reason(r)[:58]}")
+        print()
+
+    detail = [g for g in rows if g['verdict'] != 'REJECT'][:3]
+    rest = [g for g in rows if g not in detail]
+    for g in detail:                                       # layer 2, top 3
+        if not g['tape']:
             print(f"## {g['sym']} - tape fetch failed\n")
+            continue
+        tape.render(g['tape'], args.bars)
+        fv = g['fv']
+        bits = []
+        if fv.get('shares_out'):
+            bits.append(f"shs out {fv['shares_out']/1e6:.2g}M")
+        if fv.get('cash_sh') is not None:
+            bits.append(f"cash/sh {fv['cash_sh']:.2f}")
+        if fv.get('high_52w') and g['tape']['last']:
+            mult = fv['high_52w'] / g['tape']['last']
+            bits.append(f"52W high {fv['high_52w']:.2f} ({mult:.0f}x)"
+                        + (' ← split-adjusted history' if mult > 20 else ''))
+        if fv.get('short_float') is not None:
+            bits.append(f"short {fv['short_float']:.1f}%")
+        if bits:
+            print('   ' + ' · '.join(bits))
+        if fv.get('why'):
+            print(DIM(f"   catalyst: {fv['why'][:70]}"))
+        if g['split'].get('split_today'):
+            print(BAD(f"   REVERSE SPLIT {g['split']['split_today']}:1 took "
+                      "effect today - the gap is the split"))
+        print()
+    if rest:
+        print(DIM('  details on demand: '
+                  + ' · '.join(f"./now {g['sym']}" for g in rest[:8])))
+        print()
 
     print('-' * 78)
     print("NOT CHECKED here: spread, executable bid/ask, borrow, live halt state,")
