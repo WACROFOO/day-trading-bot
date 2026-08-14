@@ -103,6 +103,8 @@ showSR               = input.bool(true, "Show nearest resistance/support bands",
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
+// V4.3: readable by default; shrink only if the user asks the input to
+dashSize             = input.string("small", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
 debugMode            = input.bool(false, "Debug plots", group=gVisual)
 
 // ───────────────────────── Raw indicators ─────────────────────────
@@ -727,20 +729,21 @@ plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=locatio
 // look that worked), sized down: tiny text, no borders, short strings,
 // em dashes for absents. dashFull adds the three diagnostic rows.
 LBL = color.rgb(28, 28, 30)
+DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
 var table dash = table.new(position.bottom_right, 2, 11, border_width=0)
 
 f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
-         text_size=size.tiny, text_halign=text.align_left)
+         text_size=DSZ, text_halign=text.align_left)
     table.cell(dash, 1, r, value, text_color=vcolor,
-         text_size=size.tiny, text_halign=text.align_left)
+         text_size=DSZ, text_halign=text.align_left)
 
 if barstate.islast
     table.clear(dash, 0, 0, 1, 10)
     table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=LBL, text_color=color.white,
-         text_size=size.tiny, text_halign=text.align_left)
+         text_size=DSZ, text_halign=text.align_left)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
-         bgcolor=stateColor, text_color=color.black, text_size=size.tiny)
+         bgcolor=stateColor, text_color=color.black, text_size=DSZ)
 
     f_row(1, "ACTION", actionText, color.white)
     f_row(2, "MOMENTUM", momentumText, macdBullish ? color.lime : color.orange)
