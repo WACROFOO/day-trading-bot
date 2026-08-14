@@ -190,12 +190,15 @@ def gates(g, now_et, phase_open=True):
         reason = f'float {fl/1e6:.0f}M ✗'
     elif gc['R'] == '-':
         reason = f'{fade:.0f}% off high ✗'
+    # a WATCH must carry its own revival level — a snapshot verdict decays
+    # silently, and the reader needs the price that flips it (ONFO 08-14:
+    # 'below EMA9' at 10:43, reclaimed 4.00 at 10:56, ran to 5.57 unseen)
     elif gc['V'] == '-':
-        reason = 'below VWAP'
+        reason = f"below VWAP (flips >{t['vwap']:.2f})"
     elif gc['E'] == '-':
-        reason = 'below EMA9'
+        reason = f"below EMA9 (flips >{t['e9'][-1]:.2f})"
     elif gc['M'] == '-':
-        reason = 'MACD below signal'
+        reason = 'MACD below signal (needs the cross — no single price)'
     elif gc['C'] != '+':
         reason = clabel
     else:
