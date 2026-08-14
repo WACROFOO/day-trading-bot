@@ -96,7 +96,13 @@ gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
 showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual)
 bandHalfWidthTicks   = input.int(5, "Band half-width (ticks)", minval=1, maxval=100, group=gVisual)
+// V4.1: nearest structural levels drawn as bands — resistance above,
+// support below, from confirmed swing pivots (his "two reasons at one
+// price" needs the level on screen, not in your head).
+showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual)
+srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
 debugMode            = input.bool(false, "Debug plots", group=gVisual)
 
 // ───────────────────────── Raw indicators ─────────────────────────
@@ -126,6 +132,40 @@ haltBandWidth = na(prevDayClose) ? na :
 
 f_safeDiv(float numerator, float denominator, float fallback) =>
     denominator != 0 and not na(denominator) ? numerator / denominator : fallback
+
+// V4.1: em dash for absent values (design pack: absent != zero, never NaN)
+f_px(float v) =>
+    na(v) ? "—" : str.tostring(v, format.mintick)
+
+f_n(float v, string fmt) =>
+    na(v) ? "—" : str.tostring(v, fmt)
+
+// V4.1: nearest resistance above / support below from confirmed pivots.
+var array<float> pivHighs = array.new_float()
+var array<float> pivLows = array.new_float()
+float ph = ta.pivothigh(high, srPivotLen, srPivotLen)
+float pl = ta.pivotlow(low, srPivotLen, srPivotLen)
+if not na(ph)
+    array.push(pivHighs, ph)
+    if array.size(pivHighs) > 40
+        array.shift(pivHighs)
+if not na(pl)
+    array.push(pivLows, pl)
+    if array.size(pivLows) > 40
+        array.shift(pivLows)
+
+float nearestRes = na
+float nearestSup = na
+if array.size(pivHighs) > 0
+    for i = 0 to array.size(pivHighs) - 1
+        float v = array.get(pivHighs, i)
+        if v > close and (na(nearestRes) or v < nearestRes)
+            nearestRes := v
+if array.size(pivLows) > 0
+    for i = 0 to array.size(pivLows) - 1
+        float v = array.get(pivLows, i)
+        if v < close and (na(nearestSup) or v > nearestSup)
+            nearestSup := v
 
 // ───────────────────────── State machine ─────────────────────────
 int IDLE     = 0
@@ -629,9 +669,11 @@ actionText =
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
 
 plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr)
-plot(showLevels and (setupState == ARMED or setupState == LONG) ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
+plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
 bandHalfWidth = bandHalfWidthTicks * syminfo.mintick
-showTradeLevels = setupState == ARMED or setupState == LONG
+// V4.1: candidate stop/target bands visible from the PULLBACK stage, not
+// only once armed — the level should be on screen while you decide.
+showTradeLevels = activeStructure
 plot(showLevels and showTradeLevels ? displayStop : na, "Stop", color=color.red, linewidth=2, style=plot.style_linebr)
 stopBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayStop + bandHalfWidth : na, "Stop band upper", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
 stopBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayStop - bandHalfWidth : na, "Stop band lower", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
@@ -640,6 +682,15 @@ plot(showLevels and showTradeLevels ? displayTarget : na, "Target", color=color.
 targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
 targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
 fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.aqua, 82), title="Target price band")
+
+// V4.1: nearest structural levels as bands — resistance red-grey above,
+// support green-grey below. Colour = trust/role, not direction hype.
+resU = plot(showSR ? nearestRes + bandHalfWidth : na, "Resistance band upper", color=color.new(color.gray, 100), style=plot.style_linebr)
+resL = plot(showSR ? nearestRes - bandHalfWidth : na, "Resistance band lower", color=color.new(color.gray, 100), style=plot.style_linebr)
+fill(resU, resL, color=color.new(color.maroon, 78), title="Nearest resistance")
+supU = plot(showSR ? nearestSup + bandHalfWidth : na, "Support band upper", color=color.new(color.gray, 100), style=plot.style_linebr)
+supL = plot(showSR ? nearestSup - bandHalfWidth : na, "Support band lower", color=color.new(color.gray, 100), style=plot.style_linebr)
+fill(supU, supL, color=color.new(color.teal, 78), title="Nearest support")
 
 plot(showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
 plot(showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
@@ -654,57 +705,57 @@ plotshape(eventInvalid, title="Setup rejected", style=shape.xcross, location=loc
 plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="BAIL")
 
 // ───────────────────────── Dashboard ─────────────────────────
+// V4.1: compact single-column table by default (tiny text, em dashes,
+// nothing but the decision surface). dashFull restores the audit view.
 var table dash = table.new(position.bottom_right, 2, 11, border_width=1)
 
 if barstate.islast
-    table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=color.rgb(25, 25, 25), text_color=color.white)
-    table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF", bgcolor=stateColor, text_color=color.black)
-
-    table.cell(dash, 0, 1, "QUALITY*")
-    table.cell(dash, 1, 1, str.tostring(displayQuality, "#") + "  *display only — a similar score measured ANTI-predictive (16/16)")
-
-    table.cell(dash, 0, 2, "PUSH")
-    table.cell(dash, 1, 2,
-         str.tostring(pushPct, "#.1") + "% | " +
-         str.tostring(pushRVOL, "#.1") + "x | $" +
-         str.tostring(pushDollarVolume / 1000.0, "#") + "k/m | E " + str.tostring(pushEfficiency, "#.00"))
-
-    table.cell(dash, 0, 3, "PULLBACK")
-    table.cell(dash, 1, 3,
-         str.tostring(pullbackBars) + "b | " +
-         str.tostring(retracementPct, "#.0") + "% | Vol " +
-         str.tostring(pullbackVolumeRatio, "#.00") + "x | setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)))
-
-    table.cell(dash, 0, 4, "MOMENTUM")
-    table.cell(dash, 1, 4, momentumText, text_color=macdBullish ? color.lime : color.orange)
-
-    table.cell(dash, 0, 5, "HALT BAND")
-    table.cell(dash, 1, 5, na(haltBandWidth) ? "—  (no prior close yet)" :
-         str.tostring(haltBandWidth, format.mintick) +
-         (stopExceedsHaltBand ? "  ⚠ STOP WIDER THAN BAND" : "  ok"),
-         text_color=stopExceedsHaltBand ? color.red : color.white)
-
-    table.cell(dash, 0, 6, "ENTRY / STOP")
-    table.cell(dash, 1, 6,
-         str.tostring(displayEntry, format.mintick) + " / " +
-         str.tostring(displayStop, format.mintick))
-
-    table.cell(dash, 0, 7, "TARGET / ROOM")
-    table.cell(dash, 1, 7,
-         str.tostring(displayTarget, format.mintick) + " / " +
-         str.tostring(displayRR, "#.00") + "R")
-
-    table.cell(dash, 0, 8, "SIZE / RISK")
-    table.cell(dash, 1, 8,
-         str.tostring(displayShares, "#") + " / $" +
-         str.tostring(displayRiskCash, "#"))
-
-    table.cell(dash, 0, 9, "ACTION")
-    table.cell(dash, 1, 9, actionText, bgcolor=stateColor, text_color=color.black)
-
-    table.cell(dash, 0, 10, "LIMITS")
-    table.cell(dash, 1, 10, "Paper only · selection lives outside (float/news/halts) · fills optimistic in backtest",
-         text_color=color.gray)
+    if not dashFull
+        table.clear(dash, 0, 0, 1, 10)
+        table.cell(dash, 0, 0, "ROSS FP V4 · " + (isOneMinute ? f_stateName(setupState) : "WRONG TF"),
+             bgcolor=stateColor, text_color=color.black, text_size=size.small)
+        table.cell(dash, 0, 1, actionText, text_size=size.tiny,
+             text_color=color.white, text_halign=text.align_left)
+        table.cell(dash, 0, 2, momentumText + " · band " + f_px(haltBandWidth) +
+             (stopExceedsHaltBand ? " ⚠" : " ok"),
+             text_size=size.tiny, text_halign=text.align_left,
+             text_color=stopExceedsHaltBand ? color.red : color.silver)
+        table.cell(dash, 0, 3, "E " + f_px(displayEntry) + " · S " + f_px(displayStop) +
+             " · T " + f_px(displayTarget) + " · " + f_n(displayShares, "#") + " sh · $" +
+             f_n(displayRiskCash, "#") + " risk",
+             text_size=size.tiny, text_halign=text.align_left, text_color=color.silver)
+        table.cell(dash, 0, 4, "R " + f_px(nearestRes) + " · S " + f_px(nearestSup) +
+             " · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)),
+             text_size=size.tiny, text_halign=text.align_left, text_color=color.silver)
+        table.cell(dash, 0, 5, "paper · fills optimistic · selection outside",
+             text_size=size.tiny, text_halign=text.align_left, text_color=color.gray)
+    else
+        table.clear(dash, 0, 0, 1, 10)
+        table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=color.rgb(25, 25, 25), text_color=color.white, text_size=size.small)
+        table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF", bgcolor=stateColor, text_color=color.black, text_size=size.small)
+        table.cell(dash, 0, 1, "QUALITY*", text_size=size.tiny)
+        table.cell(dash, 1, 1, f_n(displayQuality, "#") + " *display-only — anti-predictive 16/16", text_size=size.tiny)
+        table.cell(dash, 0, 2, "PUSH", text_size=size.tiny)
+        table.cell(dash, 1, 2, f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | $" +
+             f_n(pushDollarVolume / 1000.0, "#") + "k/m | E " + f_n(pushEfficiency, "#.00"), text_size=size.tiny)
+        table.cell(dash, 0, 3, "PULLBACK", text_size=size.tiny)
+        table.cell(dash, 1, 3, str.tostring(pullbackBars) + "b | " + f_n(retracementPct, "#.0") + "% | Vol " +
+             f_n(pullbackVolumeRatio, "#.00") + "x | setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), text_size=size.tiny)
+        table.cell(dash, 0, 4, "MOMENTUM", text_size=size.tiny)
+        table.cell(dash, 1, 4, momentumText, text_color=macdBullish ? color.lime : color.orange, text_size=size.tiny)
+        table.cell(dash, 0, 5, "HALT BAND", text_size=size.tiny)
+        table.cell(dash, 1, 5, f_px(haltBandWidth) + (stopExceedsHaltBand ? " ⚠ STOP WIDER THAN BAND" : " ok"),
+             text_color=stopExceedsHaltBand ? color.red : color.white, text_size=size.tiny)
+        table.cell(dash, 0, 6, "E / S / T", text_size=size.tiny)
+        table.cell(dash, 1, 6, f_px(displayEntry) + " / " + f_px(displayStop) + " / " + f_px(displayTarget), text_size=size.tiny)
+        table.cell(dash, 0, 7, "ROOM / SIZE / RISK", text_size=size.tiny)
+        table.cell(dash, 1, 7, f_n(displayRR, "#.00") + "R / " + f_n(displayShares, "#") + " / $" + f_n(displayRiskCash, "#"), text_size=size.tiny)
+        table.cell(dash, 0, 8, "NEAREST R / S", text_size=size.tiny)
+        table.cell(dash, 1, 8, f_px(nearestRes) + " / " + f_px(nearestSup), text_size=size.tiny)
+        table.cell(dash, 0, 9, "ACTION", text_size=size.tiny)
+        table.cell(dash, 1, 9, actionText, bgcolor=stateColor, text_color=color.black, text_size=size.tiny)
+        table.cell(dash, 0, 10, "LIMITS", text_size=size.tiny)
+        table.cell(dash, 1, 10, "paper only · selection outside · fills optimistic", text_color=color.gray, text_size=size.tiny)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed
