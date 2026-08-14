@@ -63,7 +63,12 @@ gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // V4: NEW, default ON. The measured profit curve starts at 07:00 ET and the
 // hard stop is 11:30; V3's "no time filter" backtests 15:00 chop as if it
 // were 09:45. Needs extended-hours ON on the chart to see 07:00-09:30.
-useSessionWindow     = input.bool(true, "Only arm inside 07:00-11:30 ET", group=gSession)
+// V4.4: WITHDRAWN as a default hard gate per operator request 2026-08-15 —
+// recorded, not deleted (design pack). The verdict now prints at every
+// moment; off-window bars are tagged "· off-window" instead of blocked.
+// Re-enable this input to restore the hard gate. Origin of the window
+// itself stays SOURCE (profit curve starts 07:00, hard stop 11:30).
+useSessionWindow     = input.bool(false, "HARD-gate: only arm inside 07:00-11:30 ET", group=gSession)
 sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
 
 gStructure = "5. Structure / reward"
@@ -119,6 +124,8 @@ isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
 inSession = not useSessionWindow or not na(time(timeframe.period, sessionWindow, "America/New_York"))
+// V4.4: informational window flag, independent of the hard gate
+inWindowInfo = not na(time(timeframe.period, sessionWindow, "America/New_York"))
 
 // V4: previous-day close for the halt-band tier (book: bands are set by the
 // PRIOR close and do not change intraday). Updated at the first bar of a new
@@ -657,15 +664,18 @@ momentumText = (macdBullish ? "MACD✓" : "MACD✕") + " " +
      (emaBullish ? "EMA✓" : "EMA✕") + " " +
      (vwapBullish ? "VWAP✓" : "VWAP✕")
 
+// V4.4: a verdict at EVERY moment — never a blank "wait". Outside a
+// structured setup the chart gates still say yes/no continuously.
+chartVerdict = macdBullish and emaBullish and vwapBullish ? "CHART OK" :
+     "NO — " + (not vwapBullish ? "below VWAP" : not emaBullish ? "below EMA9" : "MACD weak")
+windowTag = inWindowInfo ? "" : " · off-window"
 actionText =
      not isOneMinute ? "USE 1-MINUTE CHART" :
-     not inSession and useSessionWindow ? "OUTSIDE WINDOW — LOG ONLY" :
-     setupState == IDLE ? "WAIT FOR IMPULSE" :
-     setupState == IMPULSE ? "WAIT FOR FIRST PULLBACK" :
-     setupState == PULLBACK ? gateReason :
-     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" :
-     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" :
-     statusReason
+     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag :
+     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag :
+     setupState == PULLBACK ? (hardGatesOK ? "READY" : gateReason) + windowTag :
+     setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag :
+     chartVerdict + " — no setup yet" + windowTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
@@ -745,7 +755,7 @@ if barstate.islast
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
          bgcolor=stateColor, text_color=color.black, text_size=DSZ)
 
-    f_row(1, "ACTION", actionText, color.white)
+    f_row(1, "VERDICT", actionText, color.white)
     f_row(2, "MOMENTUM", momentumText, macdBullish ? color.lime : color.orange)
     f_row(3, "HALT BAND", f_px(haltBandWidth) + (stopExceedsHaltBand ? " ⚠ stop wider" : " ok"),
          stopExceedsHaltBand ? color.red : color.silver)
