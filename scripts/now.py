@@ -111,6 +111,11 @@ def gather(sym):
     return out
 
 
+import re as _re
+BUYOUT_RE = _re.compile(r'acquir|buyout|to be bought|merger agreement|take.?private',
+                        _re.I)
+
+
 def catalyst_today(fv, now_et):
     """'+' dated today with catalyst flag, '-' none/old, with a label."""
     why, when = fv.get('why', ''), fv.get('why_time', '')
@@ -118,6 +123,10 @@ def catalyst_today(fv, now_et):
         return '?', 'finviz unreachable'
     if not why:
         return '?', 'no same-day read on finviz'
+    if BUYOUT_RE.search(why):
+        # book, guardrail #13: "When a stock is a buyout, the value becomes
+        # fixed at the buyout price and volatility disappears."
+        return 'X', f'BUYOUT — price pinned to deal: {why[:40]}'
     today = now_et.strftime('%Y-%m-%d') in when or now_et.strftime('%b-%d') in when
     if fv.get('why_catalyst') and today:
         return '+', why[:46]
@@ -148,8 +157,12 @@ def gates(g, now_et):
     if split_kill:
         clabel = f"gap IS a {sp['split_today']}:1 reverse split"
         gc['C'] = '-'
+    buyout_kill = gc['C'] == 'X'
+    if buyout_kill:
+        gc['C'] = '-'
 
-    hard_fail = '-' in (gc['P'], gc['F'], gc['R']) or split_kill
+    hard_fail = ('-' in (gc['P'], gc['F'], gc['R']) or split_kill
+                 or buyout_kill)
     chart_ok = all(gc[k] == '+' for k in 'VEM')
     if hard_fail:
         verdict = 'REJECT'
@@ -169,30 +182,50 @@ VERDICT_PAINT = {'SETUP': lambda t: c(f' {t} ', '1;7;32'),   # inverted green
 
 
 def board(rows, now_et):
-    print(f"{'sym':<5} {'last':>7} {'gap%':>7} {'fade%':>6} {'float':>6} "
-          f"{'vol':>7}  {'P F C R V E M':^13}  {'verdict':<8} catalyst")
+    print(f"{'sym':<5} {'last':>7} {'gap%':>6} {'fade%':>6} {'float':>6} "
+          f"{'vol':>6} {'rot':>5} {'rvol':>5}  {'P F C R V E M':^13}  "
+          f"{'verdict':<8} catalyst")
     print('-' * 78)
+    strongest, strongest_score = None, 0.0
     for g in rows:
         t, fv = g['tape'], g['fv']
         gc, verdict, clabel, fade = g['gates'], g['verdict'], g['clabel'], g['fade']
         last = f"{t['last']:.2f}" if t else '?'
-        gap = f"{t['gap']:+.1f}" if t and t['gap'] is not None else '?'
+        gap = f"{t['gap']:+.0f}" if t and t['gap'] is not None else '?'
         fd = f"{fade:+.1f}" if fade is not None else '?'
         if fade is not None and fade <= -25:
             fd = BAD(fd)
         fl = fv.get('float')
         fls = f"{fl/1e6:.2g}M" if fl else '?'
-        vol = t['rth_vol'] or t['pm_vol'] if t else 0
+        vol = (t['rth_vol'] or t['pm_vol']) if t else 0
         vs = f"{vol/1e6:.1f}M" if vol >= 1e6 else (f"{vol/1e3:.0f}k" if vol else '?')
+        # book ch10 component 4: rotation = imbalance (OBLN: 321M on a 6M float)
+        rot = f"{vol/fl:.0f}x" if fl and vol else '?'
+        # book guardrail 1: relative volume, minimum 2.0
+        av = fv.get('avg_vol')
+        rvol = vol / av if av and vol else None
+        rv = f"{rvol:.0f}x" if rvol else '?'
+        if rvol and rvol < 2:
+            rv = WARN(rv)
         score = ' '.join(LAMP[gc[k]] for k in 'PFCRVEM')
         vpaint = VERDICT_PAINT.get(verdict, str)
-        print(f"{g['sym']:<5} {last:>7} {gap:>7} {fd:>6} {fls:>6} "
-              f"{vs:>7}  {score}  {vpaint(verdict):<8} {DIM(clabel)}")
+        print(f"{g['sym']:<5} {last:>7} {gap:>6} {fd:>6} {fls:>6} "
+              f"{vs:>6} {rot:>5} {rv:>5}  {score}  {vpaint(verdict):<8} "
+              f"{DIM(clabel[:34])}")
+        # guardrail 13: "is this the strongest stock today?" - attention =
+        # dollar volume, only names not already dead
+        if t and verdict != 'REJECT' and vol * t['last'] > strongest_score:
+            strongest, strongest_score = g['sym'], vol * t['last']
     print('-' * 78)
+    if strongest:
+        print(f"STRONGEST TODAY (guardrail 13): {GOOD(strongest)}"
+              + DIM("  — trade the obvious one or none at all (GR 15)"))
     print(DIM("P price 2-20 · F float<20M · C catalyst today · R ≤25% off high · "
               "V >VWAP · E >EMA9 · M MACD   ") +
           GOOD('●') + DIM(' pass  ') + BAD('●') + DIM(' fail  ') +
           DIM('○ unknown'))
+    print(DIM("rot = day vol ÷ float (imbalance) · rvol = day vol ÷ 3-mo avg "
+              "(book floor: 2.0)"))
     print()
 
 

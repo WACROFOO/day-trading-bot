@@ -47,6 +47,7 @@ trick, and it is why this runs on published metrics.
 | 5 | **reverse split** | the gap is *arithmetic* | see below — the split alone is not the veto |
 | 6 | **instrument** | fund / ETF | ADRs are fine — he trades them |
 | 7 | **tick size** | quotes in 5¢ increments | *"TA, five cent tick"* |
+| 8 | **buyout** | acquisition announced | *"the value becomes fixed at the buyout price and volatility disappears"* (book, GR#13 discussion). HHS 2026-08-14: pinned under the $5.00 deal all day |
 
 ### Gates 1 and 3, softened by the theme — 2026-08-12
 
@@ -152,10 +153,36 @@ anything taught.
 |---|---|---|
 | **session volume** | **≥ 1,000,000** | *"less than a million shares of volume I actually lost $8,000 on"* |
 | best band | **1.0 – 2.5M+** | *"the ones I did the best on"* |
-| **relative volume** | **≥ 1.5×** to make money, **≥ 3×** best | *"150% and higher is where I make money"* |
+| **relative volume** | **≥ 1.5×** to make money, **≥ 3×** best | *"150% and higher is where I make money"*; the book's scanner floor is **2.0** (GR#1) — between the teaching dial (5×) and the broker-split floor (1.5×) |
 | session | **07:00 – 11:00 ET** since 2020 | pre-2020 the money was 09:35–11:00; his post-March-2020 stats start the profit curve at 07:00. 11:30 stays the outer edge |
 | midday | **no trades 11:30 – 15:00** | |
 | after hours | **no trades 16:00 – 20:00** | *"doesn't look like I'm net profitable trading after hours"* — his own measured stats. Watch, note levels, trade the 07:00 wave instead |
+
+---
+
+## The book's six components of a strong stock (ch. 10, 2023)
+
+The five pillars, restated by the primary source — plus one this repo was
+missing:
+
+1. volatile **right now** — already up 15–20%+, *"buy high and sell higher"*
+2. fear (FOMO) in the market
+3. greed — *"one-day-old FOMO"*, the spillover into tomorrow
+4. supply/demand **imbalance** — rotation vs float (his example: OBLN, 321M
+   traded on a 6M float). `./now` shows this as the `rot` column
+5. high relative volume (`rvol` column; book floor 2.0)
+6. **former runner status** — he runs a dedicated scanner with LOWER volume
+   thresholds for names that ran before: *"when a former runner starts to
+   move, I want to make sure I see it quickly."* This is the day-2 watch
+   (FGI 08-14) — and his test for whether a runner is signal or distraction
+   is relative volume: *"if it isn't high — former runner or not — that
+   stock probably is not the right trade for today"*
+
+Two selection guardrails sit on top: **#13** *"Is this the strongest stock
+today?"* (`./now` crowns it by dollar volume) and **#15** *"Is this the
+obvious one?"* — if you had to talk yourself into it, it isn't. And the
+sizing corollary, **#10**: no single trade weighted to erase more than one
+or two previous winners.
 
 ---
 
