@@ -683,14 +683,32 @@ targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + 
 targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
 fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.aqua, 82), title="Target price band")
 
-// V4.1: nearest structural levels as bands — resistance red-grey above,
-// support green-grey below. Colour = trust/role, not direction hype.
-resU = plot(showSR ? nearestRes + bandHalfWidth : na, "Resistance band upper", color=color.new(color.gray, 100), style=plot.style_linebr)
-resL = plot(showSR ? nearestRes - bandHalfWidth : na, "Resistance band lower", color=color.new(color.gray, 100), style=plot.style_linebr)
-fill(resU, resL, color=color.new(color.maroon, 78), title="Nearest resistance")
-supU = plot(showSR ? nearestSup + bandHalfWidth : na, "Support band upper", color=color.new(color.gray, 100), style=plot.style_linebr)
-supL = plot(showSR ? nearestSup - bandHalfWidth : na, "Support band lower", color=color.new(color.gray, 100), style=plot.style_linebr)
-fill(supU, supL, color=color.new(color.teal, 78), title="Nearest support")
+// V4.2: nearest structural levels as CLEAN bands — one box per level,
+// anchored a few bars back and extended right. No historical trail (the
+// stepped plot ribbons looked like debris across the chart).
+var box resBox = na
+var box supBox = na
+if barstate.islast and showSR
+    if not na(resBox)
+        box.delete(resBox)
+    if not na(supBox)
+        box.delete(supBox)
+    if not na(nearestRes)
+        resBox := box.new(bar_index - 30, nearestRes + bandHalfWidth,
+             bar_index, nearestRes - bandHalfWidth,
+             border_color=color.new(color.red, 60), border_width=1,
+             bgcolor=color.new(color.maroon, 82), extend=extend.right,
+             text="R " + str.tostring(nearestRes, format.mintick),
+             text_color=color.new(color.red, 25), text_size=size.tiny,
+             text_halign=text.align_left)
+    if not na(nearestSup)
+        supBox := box.new(bar_index - 30, nearestSup + bandHalfWidth,
+             bar_index, nearestSup - bandHalfWidth,
+             border_color=color.new(color.teal, 60), border_width=1,
+             bgcolor=color.new(color.teal, 84), extend=extend.right,
+             text="S " + str.tostring(nearestSup, format.mintick),
+             text_color=color.new(color.teal, 15), text_size=size.tiny,
+             text_halign=text.align_left)
 
 plot(showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
 plot(showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
@@ -705,57 +723,40 @@ plotshape(eventInvalid, title="Setup rejected", style=shape.xcross, location=loc
 plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="BAIL")
 
 // ───────────────────────── Dashboard ─────────────────────────
-// V4.1: compact single-column table by default (tiny text, em dashes,
-// nothing but the decision surface). dashFull restores the audit view.
-var table dash = table.new(position.bottom_right, 2, 11, border_width=1)
+// V4.2: the original two-column layout (labels left, values right — the
+// look that worked), sized down: tiny text, no borders, short strings,
+// em dashes for absents. dashFull adds the three diagnostic rows.
+LBL = color.rgb(28, 28, 30)
+var table dash = table.new(position.bottom_right, 2, 11, border_width=0)
+
+f_row(int r, string label, string value, color vcolor) =>
+    table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
+         text_size=size.tiny, text_halign=text.align_left)
+    table.cell(dash, 1, r, value, text_color=vcolor,
+         text_size=size.tiny, text_halign=text.align_left)
 
 if barstate.islast
-    if not dashFull
-        table.clear(dash, 0, 0, 1, 10)
-        table.cell(dash, 0, 0, "ROSS FP V4 · " + (isOneMinute ? f_stateName(setupState) : "WRONG TF"),
-             bgcolor=stateColor, text_color=color.black, text_size=size.small)
-        table.cell(dash, 0, 1, actionText, text_size=size.tiny,
-             text_color=color.white, text_halign=text.align_left)
-        table.cell(dash, 0, 2, momentumText + " · band " + f_px(haltBandWidth) +
-             (stopExceedsHaltBand ? " ⚠" : " ok"),
-             text_size=size.tiny, text_halign=text.align_left,
-             text_color=stopExceedsHaltBand ? color.red : color.silver)
-        table.cell(dash, 0, 3, "E " + f_px(displayEntry) + " · S " + f_px(displayStop) +
-             " · T " + f_px(displayTarget) + " · " + f_n(displayShares, "#") + " sh · $" +
-             f_n(displayRiskCash, "#") + " risk",
-             text_size=size.tiny, text_halign=text.align_left, text_color=color.silver)
-        table.cell(dash, 0, 4, "R " + f_px(nearestRes) + " · S " + f_px(nearestSup) +
-             " · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)),
-             text_size=size.tiny, text_halign=text.align_left, text_color=color.silver)
-        table.cell(dash, 0, 5, "paper · fills optimistic · selection outside",
-             text_size=size.tiny, text_halign=text.align_left, text_color=color.gray)
-    else
-        table.clear(dash, 0, 0, 1, 10)
-        table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=color.rgb(25, 25, 25), text_color=color.white, text_size=size.small)
-        table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF", bgcolor=stateColor, text_color=color.black, text_size=size.small)
-        table.cell(dash, 0, 1, "QUALITY*", text_size=size.tiny)
-        table.cell(dash, 1, 1, f_n(displayQuality, "#") + " *display-only — anti-predictive 16/16", text_size=size.tiny)
-        table.cell(dash, 0, 2, "PUSH", text_size=size.tiny)
-        table.cell(dash, 1, 2, f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | $" +
-             f_n(pushDollarVolume / 1000.0, "#") + "k/m | E " + f_n(pushEfficiency, "#.00"), text_size=size.tiny)
-        table.cell(dash, 0, 3, "PULLBACK", text_size=size.tiny)
-        table.cell(dash, 1, 3, str.tostring(pullbackBars) + "b | " + f_n(retracementPct, "#.0") + "% | Vol " +
-             f_n(pullbackVolumeRatio, "#.00") + "x | setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), text_size=size.tiny)
-        table.cell(dash, 0, 4, "MOMENTUM", text_size=size.tiny)
-        table.cell(dash, 1, 4, momentumText, text_color=macdBullish ? color.lime : color.orange, text_size=size.tiny)
-        table.cell(dash, 0, 5, "HALT BAND", text_size=size.tiny)
-        table.cell(dash, 1, 5, f_px(haltBandWidth) + (stopExceedsHaltBand ? " ⚠ STOP WIDER THAN BAND" : " ok"),
-             text_color=stopExceedsHaltBand ? color.red : color.white, text_size=size.tiny)
-        table.cell(dash, 0, 6, "E / S / T", text_size=size.tiny)
-        table.cell(dash, 1, 6, f_px(displayEntry) + " / " + f_px(displayStop) + " / " + f_px(displayTarget), text_size=size.tiny)
-        table.cell(dash, 0, 7, "ROOM / SIZE / RISK", text_size=size.tiny)
-        table.cell(dash, 1, 7, f_n(displayRR, "#.00") + "R / " + f_n(displayShares, "#") + " / $" + f_n(displayRiskCash, "#"), text_size=size.tiny)
-        table.cell(dash, 0, 8, "NEAREST R / S", text_size=size.tiny)
-        table.cell(dash, 1, 8, f_px(nearestRes) + " / " + f_px(nearestSup), text_size=size.tiny)
-        table.cell(dash, 0, 9, "ACTION", text_size=size.tiny)
-        table.cell(dash, 1, 9, actionText, bgcolor=stateColor, text_color=color.black, text_size=size.tiny)
-        table.cell(dash, 0, 10, "LIMITS", text_size=size.tiny)
-        table.cell(dash, 1, 10, "paper only · selection outside · fills optimistic", text_color=color.gray, text_size=size.tiny)
+    table.clear(dash, 0, 0, 1, 10)
+    table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=LBL, text_color=color.white,
+         text_size=size.tiny, text_halign=text.align_left)
+    table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
+         bgcolor=stateColor, text_color=color.black, text_size=size.tiny)
+
+    f_row(1, "ACTION", actionText, color.white)
+    f_row(2, "MOMENTUM", momentumText, macdBullish ? color.lime : color.orange)
+    f_row(3, "HALT BAND", f_px(haltBandWidth) + (stopExceedsHaltBand ? " ⚠ stop wider" : " ok"),
+         stopExceedsHaltBand ? color.red : color.silver)
+    f_row(4, "E / S / T", f_px(displayEntry) + " / " + f_px(displayStop) + " / " + f_px(displayTarget), color.silver)
+    f_row(5, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
+         " / " + f_n(displayRR, "#.0") + "R room", color.silver)
+    f_row(6, "R / S", f_px(nearestRes) + " / " + f_px(nearestSup) +
+         "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
+
+    if dashFull
+        f_row(7, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
+        f_row(8, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
+        f_row(9, "PULLBACK", str.tostring(pullbackBars) + "b | " + f_n(retracementPct, "#.0") + "% | vol " + f_n(pullbackVolumeRatio, "#.00") + "x", color.gray)
+    f_row(10, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed
