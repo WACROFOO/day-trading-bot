@@ -258,3 +258,48 @@ The same discipline in a playbook or explainer:
   things that read like rules and are not: a *realised* ratio mistaken for
   an entry threshold, a *dial* mistaken for a floor, a *cold-market setting*
   mistaken for a constant.
+
+
+---
+
+## Worked specimens (from the design pack, 2026-08-14)
+
+Match this density. `./now` implements these; any new report surface must too.
+
+### Character set
+
+```
+Rules/frames   ━ ─ ┈ ┌ ┬ ┐ ├ ┼ ┤ └ ┴ ┘ │
+Status         ✓ ✗ ! → ▸ ⚠
+Separators     ·  (middle dot, spaced)
+Layers         ① ② ③   Gates  ① ②
+Absent value   —  (em dash, never 0, never blank)
+```
+
+`—` for a genuinely absent value and `0` for a measured zero are different
+facts. Never render one as the other.
+
+### Verdict vocabulary for scanner output
+
+`REVIEW` (all gates green — go read the chart yourself) · `WATCH` · `WAIT` ·
+`NO`/`REJECT` · `LOG` (would be REVIEW but the session window is shut) ·
+`MANUAL REVIEW`. Never `SETUP`, `ARMED`, `QUALIFIED`, `BUY`, `TAKE`.
+*(SETUP was renamed REVIEW in now.py 2026-08-14 — reads as an instruction.)*
+
+### The two gatekeepers, always with sub-conditions
+
+```
+✓ ① MACD 12/26/9  +0.31 above zero · above signal (+0.28) · hist +0.036
+✗ ② VOLUME  HIGH-VOLUME RED 2.6x avg, 0 bar(s) ago — gatekeeper says no
+```
+
+### Pre-send checklist
+
+- [ ] Provenance banner first, measured age, timestamp
+- [ ] Funnel line — universe before filtering
+- [ ] Every reject visible with the reason that actually fired, ✗ on the cell
+- [ ] Inline legend under any derived metric (`in RANGE`, `rot`, `rvol`)
+- [ ] Sources shown when they could differ; disagreement blocks the conclusion
+- [ ] Layers numbered with what each may NOT decide
+- [ ] `—` vs `0` distinguished · non-actionable vocabulary · limitations footer
+- [ ] If data is missing for a section, SAY SO — do not omit the section

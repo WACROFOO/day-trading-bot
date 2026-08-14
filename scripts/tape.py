@@ -114,6 +114,7 @@ def compute(sym):
         'pm_vol': sum(b[5] for b in pm),
         'vwap': None, 'hod': None, 'lod': None, 'fade': None,
         'rth_vol': 0, 'halts': [], 'med_range': None, 'top_ranges': [],
+        'hv_red': 'NOT_MEASURED',  # absent ≠ measured-clean
     }
     d['gap'] = (d['last'] / d['prev'] - 1) * 100 if d['prev'] else None
     d['above_e9'] = closes[-1] > e9[-1]
@@ -141,6 +142,17 @@ def compute(sym):
         ranges = sorted((b[2] - b[3] for b in rth), reverse=True)
         d['med_range'] = statistics.median([b[2] - b[3] for b in rth[-30:]])
         d['top_ranges'] = ranges[:3]
+        # in RANGE: 100% = at the day's high (front side) · 0% = back side
+        span = d['hod'] - d['lod']
+        d['in_range'] = (d['last'] - d['lod']) / span * 100 if span else None
+        # gatekeeper 2: a recent red candle on outsized volume kills the entry
+        vols = [b[5] for b in rth if b[5]]
+        avg_v = sum(vols) / len(vols) if vols else 0
+        d['hv_red'] = None
+        for back, b in enumerate(reversed(rth[-10:])):
+            if b[4] < b[1] and avg_v and b[5] > 2 * avg_v:
+                d['hv_red'] = (back, b[5] / avg_v)
+                break
     return d
 
 
@@ -159,8 +171,13 @@ def render(d, nbars=8):
         fade_s = f"{d['fade']:+.1f}%"
         fade_s = BAD(fade_s) if d['fade'] <= -25 else (
             WARN(fade_s) if d['fade'] <= -15 else fade_s)
+        rng = (f"  in RANGE {d['in_range']:.0f}%"
+               if d.get('in_range') is not None else '')
         print(f"RTH  HOD {d['hod']:.2f} @{d['hod_t']:%H:%M}  LOD {d['lod']:.2f}"
-              f" @{d['lod_t']:%H:%M}  fade {fade_s}  vol {d['rth_vol']:,}")
+              f" @{d['lod_t']:%H:%M}  fade {fade_s}{rng}  vol {d['rth_vol']:,}")
+        if rng:
+            print(DIM('     in RANGE: 100% = at the day high (front side) · '
+                      '0% = at the low (back side, move over)'))
         above = d['last'] > d['vwap']
         print(f"VWAP {d['vwap']:.3f}  "
               + (GOOD('(above)') if above else BAD('(BELOW)')))
@@ -179,9 +196,22 @@ def render(d, nbars=8):
     else:
         state = WARN('(between)')
     print(f"EMA9 {e9:.3f}  EMA20 {e20:.3f}  {state}")
-    verdict = (GOOD('passes') if d['macd_pass'] else BAD('FAILS'))
-    print(f"MACD {d['macd'][-1]:+.4f}  sig {d['sig'][-1]:+.4f}  hist {d['hist']:+.4f}"
-          f"  ({verdict}: needs positive AND above signal)")
+    # the two gatekeepers, sub-conditions exposed (design device 7)
+    m_lamp = GOOD('✓') if d['macd_pass'] else BAD('✗')
+    above_sig = d['macd'][-1] > d['sig'][-1]
+    print(f"{m_lamp} ① MACD 12/26/9  {d['macd'][-1]:+.4f}"
+          f"  {'above' if d['macd'][-1] > 0 else 'BELOW'} zero"
+          f" · {'above' if above_sig else 'BELOW'} signal ({d['sig'][-1]:+.4f})"
+          f" · hist {d['hist']:+.4f}")
+    hv = d.get('hv_red')
+    if hv == 'NOT_MEASURED':
+        print(DIM('○ ② VOLUME  not measured — no regular-session bars yet'))
+    elif hv is None:
+        print(f"{GOOD('✓')} ② VOLUME  clean — no high-volume red in the last 10 bars")
+    else:
+        back, mult = hv
+        print(f"{BAD('✗')} ② VOLUME  HIGH-VOLUME RED {mult:.1f}x avg, "
+              f"{back} bar(s) ago — gatekeeper says no")
     print(f"{'time':>6} {'open':>6} {'high':>6} {'low':>6} {'close':>6}"
           f" {'vol':>9} {'ema9':>6} {'hist':>8}")
     rows = d['rows']

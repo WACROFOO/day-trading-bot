@@ -16,9 +16,10 @@ Gates (thresholds live in knowledge-base/strategies/FILTERS.md, which wins):
   (≤25% off high) · V above VWAP · E above 9 EMA · M MACD positive AND
   above signal.  '+' pass · '-' fail · '?' unknown.
 
-Verdict: any hard kill (P, F, R, or gap-is-the-split) -> REJECT.
-Hard gates pass but chart (V/E/M) or catalyst missing -> WATCH.
-Everything green -> SETUP (the chart says yes; size it and find the entry).
+Verdict (non-actionable vocabulary, per the report-design pack):
+any hard kill (P, F, R, split, buyout) -> REJECT. Chart or catalyst
+incomplete -> WATCH. Everything green -> REVIEW inside the session
+window (go read the chart yourself), LOG outside it.
 """
 import argparse
 import datetime as dt
@@ -139,7 +140,7 @@ def catalyst_today(fv, now_et):
     return '-', f'stale: {why[:38]}'
 
 
-def gates(g, now_et):
+def gates(g, now_et, phase_open=True):
     t, fv, sp = g['tape'], g['fv'], g['split']
     last = t['last'] if t else None
     fl = fv.get('float')
@@ -168,10 +169,12 @@ def gates(g, now_et):
     hard_fail = ('-' in (gc['P'], gc['F'], gc['R']) or split_kill
                  or buyout_kill)
     chart_ok = all(gc[k] == '+' for k in 'VEM')
+    # non-actionable vocabulary: REVIEW = all gates green, go read the chart
+    # yourself; LOG = would be REVIEW but the session window is shut
     if hard_fail:
         verdict = 'REJECT'
     elif chart_ok and gc['C'] == '+':
-        verdict = 'SETUP'
+        verdict = 'REVIEW' if phase_open else 'LOG'
     else:
         verdict = 'WATCH'
 
@@ -203,12 +206,13 @@ def gates(g, now_et):
 # coloured lamps in a terminal; plain +/-/? when piped so nothing is lost
 LAMP = ({'+': GOOD('●'), '-': BAD('●'), '?': DIM('○')} if tape._TTY
         else {'+': '+', '-': '-', '?': '?'})
-VERDICT_PAINT = {'SETUP': lambda t: c(f' {t} ', '1;7;32'),   # inverted green
+VERDICT_PAINT = {'REVIEW': lambda t: c(f' {t} ', '1;7;32'),  # inverted green
+                 'LOG': lambda t: c(f' {t} ', '36'),
                  'WATCH': lambda t: c(f' {t} ', '1;33'),
                  'REJECT': lambda t: c(f' {t} ', '1;31')}
 
 
-VERDICT_RANK = {'SETUP': 0, 'WATCH': 1, 'REJECT': 2}
+VERDICT_RANK = {'REVIEW': 0, 'LOG': 1, 'WATCH': 2, 'REJECT': 3}
 
 
 def dollar_vol(g):
@@ -228,20 +232,20 @@ def board(rows):
     for i, g in enumerate(rows, 1):
         t, fv = g['tape'], g['fv']
         gc, verdict, fade = g['gates'], g['verdict'], g['fade']
-        last = f"{t['last']:.2f}" if t else '?'
-        gap = f"{t['gap']:+.0f}" if t and t['gap'] is not None else '?'
-        fd = f"{fade:+.1f}" if fade is not None else '?'
+        last = f"{t['last']:.2f}" if t else '—'
+        gap = f"{t['gap']:+.0f}" if t and t['gap'] is not None else '—'
+        fd = f"{fade:+.1f}" if fade is not None else '—'
         if fade is not None and fade <= -25:
             fd = BAD(fd)
         fl = fv.get('float')
-        fls = f"{fl/1e6:.2g}M" if fl else '?'
+        fls = f"{fl/1e6:.2g}M" if fl else '—'
         vol = ((t['rth_vol'] or t['pm_vol']) if t else 0) or 0
         # book ch10 component 4: rotation = the imbalance (OBLN: 321M / 6M)
-        rot = f"{vol/fl:.0f}x" if fl and vol else '?'
+        rot = f"{vol/fl:.0f}x" if fl and vol else '—'
         # book guardrail 1: relative volume, floor 2.0
         av = fv.get('avg_vol')
         rvol = vol / av if av and vol else None
-        rv = (f"{rvol:.1f}x" if rvol < 10 else f"{rvol:.0f}x") if rvol else '?'
+        rv = (f"{rvol:.1f}x" if rvol < 10 else f"{rvol:.0f}x") if rvol else '—'
         if rvol and rvol < 2:
             rv = WARN(rv)
         lamps = ''.join(LAMP[gc[k]] for k in 'PFCRVEM')
@@ -305,25 +309,24 @@ def main():
                 print('or scan the gappers:     ./now --scan')
         return
 
+    phase_open = name in ('OPENING DRIVE', 'MONEY WINDOW')
     with ThreadPoolExecutor(max_workers=6) as ex:
         rows = list(ex.map(gather, syms))
     for g in rows:
         (g['gates'], g['verdict'], g['clabel'],
-         g['fade'], g['reason']) = gates(g, now_et)
+         g['fade'], g['reason']) = gates(g, now_et, phase_open)
 
     if name.startswith('CLOSED') or name == 'AFTER HOURS':
         print(f'[last session data for: {" ".join(syms)}]\n')
 
-    rows = board(rows)                                     # layer 1, ranked
-
-    # funnel: universe before filter (device 2 - never a survivor count
-    # without a denominator)
-    n_setup = sum(1 for g in rows if g['verdict'] == 'SETUP')
+    # document order per the design pack: funnel (universe before filter),
+    # then what died and why, then the verdict board, then detail
+    n_rev = sum(1 for g in rows if g['verdict'] in ('REVIEW', 'LOG'))
     n_watch = sum(1 for g in rows if g['verdict'] == 'WATCH')
     n_rej = sum(1 for g in rows if g['verdict'] == 'REJECT') + len(scan_rejects)
     universe = (len(scan_rows) if args.scan else 0) + len(rows) - len(
         [g for g in rows if any(r['sym'] == g['sym'] for r in scan_rows)])
-    print(f"{universe} considered · {n_setup} setup · {n_watch} watch · "
+    print(f"{universe} considered · {n_rev} review · {n_watch} watch · "
           f"{n_rej} rejected"
           + ('' if args.scan else '   (watchlist only — ./now --scan for the market)'))
     print()
@@ -334,6 +337,8 @@ def main():
             print(f"  {BAD('✗')} {r['sym']:<6}{r.get('gap') or 0:>5.0f}%   "
                   f"{ps.kill_reason(r)[:58]}")
         print()
+
+    rows = board(rows)                                     # the verdict table
 
     detail = [g for g in rows if g['verdict'] != 'REJECT'][:3]
     rest = [g for g in rows if g not in detail]
