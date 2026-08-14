@@ -194,9 +194,13 @@ def main():
     now_et = dt.datetime.now(ET)
 
     if args.scan:
-        subprocess.run([sys.executable,
-                        os.path.join(ROOT, 'scripts', 'premarket_stars.py'),
-                        '--all'])
+        cmd = [sys.executable,
+               os.path.join(ROOT, 'scripts', 'premarket_stars.py'), '--all']
+        # after the bell TradingView freezes premarket_change; switch to the
+        # live intraday discovery so the scan can still surface new names
+        if name in ('OPENING DRIVE', 'MONEY WINDOW', 'WIND-DOWN', 'OFF-BOOK'):
+            cmd.append('--live')
+        subprocess.run(cmd)
         print()
 
     syms = ([s.upper() for s in args.symbols]

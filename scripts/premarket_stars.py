@@ -122,6 +122,49 @@ def discover(min_gap, limit):
     return [dict(zip(keys, r['d'])) for r in rows]
 
 
+def discover_live(min_gap, limit):
+    """Intraday movers by change vs previous close — the RTH discovery mode.
+
+    TradingView freezes premarket_change at 09:30, so after the open the
+    pre-market scan can never surface a new name. This queries the live
+    session instead and maps day fields onto the same keys the cascade
+    reads: gap <- change, pm_high <- day high (the fade check becomes
+    %-off-day-high, which is the right question intraday), pm_vol <- day
+    volume with live=True so grade() skips the pre-market crowding ceiling
+    (a ceiling on PRE-MARKET volume is meaningless at 10:30).
+    """
+    body = json.dumps({
+        'filter': [
+            {'left': 'change', 'operation': 'greater', 'right': min_gap},
+            {'left': 'volume', 'operation': 'greater', 'right': 1_000_000},
+            {'left': 'close', 'operation': 'in_range', 'right': [0.5, 60]},
+        ],
+        'columns': ['name', 'close', 'change', 'volume', 'high', 'low',
+                    'open', 'exchange', 'type'],
+        'sort': {'sortBy': 'change', 'sortOrder': 'desc'},
+        'range': [0, limit],
+        'markets': ['america'],
+    })
+    out = sh(['curl', '-s', '-X', 'POST', TV_SCAN, '--max-time', '30',
+              '-H', 'Content-Type: application/json', '-H', f'User-Agent: {UA}',
+              '-d', '@-'], stdin=body)
+    try:
+        rows = json.loads(out)['data']
+    except Exception:
+        print('live discovery failed — TradingView scanner unreachable',
+              file=sys.stderr)
+        return []
+    keys = ['sym', 'pm_close', 'gap', 'pm_vol', 'pm_high', 'pm_low',
+            'day_open', 'exchange', 'type']
+    out_rows = []
+    for r in rows:
+        d = dict(zip(keys, r['d']))
+        d['prev_close'] = None
+        d['live'] = True
+        out_rows.append(d)
+    return out_rows
+
+
 # ------------------------------------------------------------ finviz metrics
 LABEL_VALUE = re.compile(
     r'snapshot-td-label"[^>]*>(.*?)</div>.*?snapshot-td-content[^>]*>(.*?)</div>',
@@ -176,7 +219,7 @@ def finviz(sym):
         'ipo': d.get('IPO'),
         'prev_close_fv': to_num(d.get('Prev Close')),
         # "52W High" comes as "316.00 -99.10%" - the level, then the distance
-        'high_52w': to_num((d.get('52W High') or '').split()[0] or None),
+        'high_52w': to_num(((d.get('52W High') or '').split() or [None])[0]),
         'perf_year': to_num(d.get('Perf Year')),
     }
     # sector / industry / country live in the header filter links
@@ -310,7 +353,9 @@ def grade(r):
     # Full evidence: reports/2026-08-parameter-audit.md section 3.
     if fl and pmv:
         r['rotation'] = pmv / fl
-    if pmv > PM_VOL_CROWDED:
+    if pmv > PM_VOL_CROWDED and not r.get('live'):
+        # the ceiling is about PRE-MARKET volume; day volume at 10:30 is
+        # not crowding evidence, so live mode skips it
         warn.append(f'{pmv/1e6:.1f}M shares already traded pre-market — '
                     f'crowded, the move may be over before the bell')
     # finviz publishes a 3-month average of FULL-DAY volume, so this ratio is
@@ -411,10 +456,13 @@ def main():
     ap.add_argument('--json', action='store_true')
     ap.add_argument('--notify', action='store_true',
                     help='desktop notification when a STAR appears (macOS/Linux)')
+    ap.add_argument('--live', action='store_true',
+                    help='intraday discovery: change vs prev close instead of '
+                         'the premarket_change column TradingView freezes at 09:30')
     a = ap.parse_args()
 
     now = dt.datetime.now(ET)
-    cands = discover(a.min_gap, a.top)
+    cands = discover_live(a.min_gap, a.top) if a.live else discover(a.min_gap, a.top)
     if not cands:
         print(f'{now:%Y-%m-%d %H:%M ET} — nothing gapping over '
               f'{a.min_gap:.0f}% with {VOL_MIN:,}+ shares.')
@@ -448,6 +496,8 @@ def main():
     if delta > 0:
         h, m = int(delta // 3600), int(delta % 3600 // 60)
         when = f'bell in {h}h{m:02d}' if h else f'bell in {m} min'
+    elif a.live:
+        when = 'LIVE — intraday movers'
     else:
         when = 'OPEN — pre-market figures frozen at 09:30'
 
@@ -506,8 +556,9 @@ def main():
 
     # --- detail only for what survived --------------------------------
     for r in stars + watch:
+        vol_label = 'shares today' if r.get('live') else 'shares pre-market'
         print(f'  {r["sym"]}  ·  {r.get("sector", "")}  ·  '
-              f'{r.get("pm_vol", 0):,.0f} shares pre-market')
+              f'{r.get("pm_vol", 0):,.0f} {vol_label}')
         if r.get('why'):
             print(f'      catalyst  {r["why"][:88]}')
         for x in r['reasons']:
