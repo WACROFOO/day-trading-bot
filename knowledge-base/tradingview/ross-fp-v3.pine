@@ -1,0 +1,176 @@
+//@version=6
+strategy("ROSS First Pullback Strategy V3", shorttitle="ROSS FP V3", overlay=true,
+     initial_capital=100000, currency=currency.USD, default_qty_type=strategy.fixed,
+     pyramiding=0, commission_type=strategy.commission.percent, commission_value=0.01,
+     slippage=1, calc_on_every_tick=true, calc_on_order_fills=true,
+     process_orders_on_close=false,
+     max_labels_count=100, max_lines_count=50)
+
+// ============================================================================
+// ROSS FIRST PULLBACK V3 — ChatGPT-authored. PARTIAL archive (inputs +
+// impulse detection verbatim; the remaining body is preserved complete
+// inside ross-fp-v4.pine, which was built as a diff on the full original
+// from the 2026-08-14 session log). Do not edit: fixes land in V4 only.
+// Audit: research/momentum-replication/reports/2026-08-pine-v3-audit.md
+// 1-minute OHLCV only. NO time-of-day/session filter.
+// Core sequence: IMPULSE -> FIRST PULLBACK -> ARMED -> LONG -> BAIL/STOP/2R.
+// ============================================================================
+
+// ───────────────────────────── Inputs ─────────────────────────────
+gImpulse = "1. Impulse"
+minPushPct          = input.float(5.0, "Minimum push %", minval=0.5, maxval=30.0, step=0.5, group=gImpulse)
+minImpulseBars      = input.int(1, "Minimum impulse bars", minval=1, maxval=6, group=gImpulse)
+minPushATR          = input.float(2.0, "Minimum push (ATR)", minval=0.25, maxval=20.0, step=0.25, group=gImpulse)
+maxImpulseBars      = input.int(6, "Detection lookback bars", minval=1, maxval=12, group=gImpulse)
+minEfficiency       = input.float(0.60, "Minimum directional efficiency", minval=0.0, maxval=1.0, step=0.05, group=gImpulse)
+volumeBaselineBars  = input.int(20, "Volume baseline bars", minval=5, maxval=100, group=gImpulse)
+minPushRVOL         = input.float(2.0, "Minimum push RVOL", minval=0.5, maxval=20.0, step=0.25, group=gImpulse)
+minDollarVolume     = input.float(100000.0, "Minimum avg $ volume / min", minval=0.0, step=25000.0, group=gImpulse)
+
+gPullback = "2. First pullback"
+minPullbackBars     = input.int(1, "Minimum pullback bars", minval=1, maxval=3, group=gPullback)
+maxPullbackBars     = input.int(3, "Maximum pullback bars", minval=1, maxval=6, group=gPullback)
+maxRetracementPct   = input.float(50.0, "Maximum retracement %", minval=10.0, maxval=90.0, step=1.0, group=gPullback)
+maxPBVolumeRatio    = input.float(0.70, "Maximum pullback / push volume", minval=0.10, maxval=2.0, step=0.05, group=gPullback)
+bullishLowerWickPct = input.float(30.0, "Good lower wick %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
+toppingTailWarnPct  = input.float(40.0, "Upper wick warning %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
+
+gMomentum = "3. Momentum"
+requireMACD          = input.bool(true, "Require MACD > 0 and histogram > 0", group=gMomentum)
+requireEMA           = input.bool(false, "Require close > EMA9 and EMA9 >= EMA20", group=gMomentum)
+requireVWAP          = input.bool(false, "Require close > VWAP", group=gMomentum)
+
+gStructure = "4. Structure / reward"
+requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure)
+minRRtoPeak          = input.float(2.0, "Minimum R to impulse peak", minval=0.0, maxval=10.0, step=0.25, group=gStructure)
+supportTolerancePct  = input.float(0.35, "Support tolerance %", minval=0.05, maxval=3.0, step=0.05, group=gStructure)
+supportToleranceATR  = input.float(0.20, "Support tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=gStructure)
+
+gRisk = "5. Risk / sizing"
+riskBudget           = input.float(200.0, "Risk budget per trade $", minval=1.0, step=10.0, group=gRisk)
+maxPositionValue     = input.float(25000.0, "Maximum position value $", minval=100.0, step=500.0, group=gRisk)
+maxStopPct           = input.float(3.0, "Maximum structural stop %", minval=0.25, maxval=20.0, step=0.25, group=gRisk)
+maxStopATR           = input.float(1.5, "Maximum structural stop ATR", minval=0.25, maxval=10.0, step=0.25, group=gRisk)
+useMaxDollarStop     = input.bool(false, "Also enforce maximum $ stop", group=gRisk)
+maxStopDollar        = input.float(0.20, "Maximum $ stop", minval=0.01, maxval=20.0, step=0.01, group=gRisk)
+
+gExecution = "6. Entry / exit"
+breakoutBufferTicks  = input.int(1, "Breakout buffer ticks", minval=0, maxval=20, group=gExecution)
+rewardMultiple       = input.float(2.0, "Profit target (R)", minval=0.5, maxval=10.0, step=0.25, group=gExecution)
+bailoutEnabled       = input.bool(true, "Enable breakout-or-bailout", group=gExecution)
+bailoutBars          = input.int(2, "Full bars allowed to prove momentum", minval=1, maxval=10, group=gExecution)
+minimumMFER          = input.float(0.5, "Minimum MFE required (R)", minval=0.0, maxval=5.0, step=0.1, group=gExecution)
+bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry", group=gExecution)
+
+gVisual = "7. Display"
+showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
+showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual)
+bandHalfWidthTicks   = input.int(5, "Band half-width (ticks)", minval=1, maxval=100, group=gVisual)
+showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+debugMode            = input.bool(false, "Debug plots", group=gVisual)
+
+// ───────────────────────── Raw indicators ─────────────────────────
+atr = ta.atr(14)
+ema9 = ta.ema(close, 9)
+ema20 = ta.ema(close, 20)
+vwapValue = ta.vwap(hlc3)
+[macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
+volumeBaseline = ta.sma(volume, volumeBaselineBars)
+
+isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
+
+f_safeDiv(float numerator, float denominator, float fallback) =>
+    denominator != 0 and not na(denominator) ? numerator / denominator : fallback
+
+f_grade(float score) =>
+    score >= 90 ? "A+" : score >= 80 ? "A" : score >= 70 ? "B" : score >= 60 ? "C" : "WEAK"
+
+// ───────────────────────── State machine ─────────────────────────
+int IDLE     = 0
+int IMPULSE  = 1
+int PULLBACK = 2
+int ARMED    = 3
+int LONG     = 4
+int INVALID  = 5
+int DONE     = 6
+
+f_stateName(int state) =>
+    state == IDLE ? "SEARCHING" :
+     state == IMPULSE ? "WATCH" :
+     state == PULLBACK ? "PULLBACK" :
+     state == ARMED ? "ARMED" :
+     state == LONG ? "LONG" :
+     state == INVALID ? "REJECT" : "DONE"
+
+// ───────────────────── Dynamic impulse candidate ─────────────────────
+float bestStartLow = na
+float bestStartClose = na
+float bestPct = 0.0
+float bestATR = 0.0
+float bestEfficiency = 0.0
+float bestRVOL = 0.0
+float bestVolumeSum = na
+float bestBaseline = na
+float bestPath = na
+int bestBars = 0
+int bestStartBar = na
+
+var int scanAfterBar = na
+
+enoughHistory = bar_index > volumeBaselineBars + maxImpulseBars + 5
+
+if isOneMinute and barstate.isconfirmed and enoughHistory
+    for candidateBars = minImpulseBars to maxImpulseBars
+        int candidateStartBar = bar_index - candidateBars
+        bool freshCandidate = na(scanAfterBar) or candidateStartBar > scanAfterBar
+
+        float candidateStartLow = low[candidateBars]
+        float candidateStartClose = close[candidateBars]
+        float candidateRange = high - candidateStartLow
+
+        float candidatePath = 0.0
+        float candidateVolumeSum = 0.0
+        bool currentIsPeak = true
+
+        for j = 0 to candidateBars - 1
+            candidatePath += math.abs(close[j] - close[j + 1])
+            candidateVolumeSum += volume[j]
+
+        for k = 1 to candidateBars
+            currentIsPeak := currentIsPeak and high >= high[k]
+
+        float candidatePct = f_safeDiv(candidateRange, candidateStartLow, 0.0) * 100.0
+        float candidateATR = f_safeDiv(candidateRange, atr, 0.0)
+        float candidateEfficiency = f_safeDiv(close - candidateStartClose, candidatePath, 0.0)
+        float candidateAvgVolume = candidateVolumeSum / candidateBars
+        float candidateBaseline = volumeBaseline[candidateBars + 1]
+        float candidateRVOL = f_safeDiv(candidateAvgVolume, candidateBaseline, 0.0)
+        float candidateDollarVolume = candidateAvgVolume * math.max(close, candidateStartClose)
+
+        bool priceAdvancing = close > candidateStartClose and close > open
+        bool qualifies = freshCandidate and currentIsPeak and priceAdvancing and
+             candidatePct >= minPushPct and
+             candidateATR >= minPushATR and
+             candidateEfficiency >= minEfficiency and
+             candidateRVOL >= minPushRVOL and
+             candidateDollarVolume >= minDollarVolume
+
+        if qualifies and (candidatePct > bestPct or (candidatePct == bestPct and candidateEfficiency > bestEfficiency))
+            bestStartLow := candidateStartLow
+            bestStartClose := candidateStartClose
+            bestPct := candidatePct
+            bestATR := candidateATR
+            bestEfficiency := candidateEfficiency
+            bestRVOL := candidateRVOL
+            bestVolumeSum := candidateVolumeSum
+            bestBaseline := candidateBaseline
+            bestPath := candidatePath
+            bestBars := candidateBars
+            bestStartBar := candidateStartBar
+
+// [BODY CONTINUES IDENTICALLY TO THE PASTED ORIGINAL — state machine,
+//  live measurements, gates, quality score, arm/invalidate, realtime cancel,
+//  trade management, display, dashboard, alerts. Archived from the session
+//  log of 2026-08-14; the only modification to this file is this header
+//  and this marker comment. The complete original is preserved in the
+//  session transcript and diffed into ross-fp-v4.pine.]
