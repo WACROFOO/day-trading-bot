@@ -22,6 +22,18 @@ import os
 from zoneinfo import ZoneInfo
 
 ET = ZoneInfo('America/New_York')
+
+# load repo-root .env once (KEY=value lines) so IB_GATEWAY=1 set there works
+# without shell exports — .env is gitignored, never pushed
+_ENV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+if os.path.exists(_ENV):
+    with open(_ENV) as _f:
+        for _line in _f:
+            _line = _line.strip()
+            if _line and not _line.startswith('#') and '=' in _line:
+                _k, _, _v = _line.partition('=')
+                os.environ.setdefault(_k.strip(), _v.strip())
+
 PORT = int(os.environ.get('IB_PORT', '7497'))   # 7497 paper / 7496 live
 
 
