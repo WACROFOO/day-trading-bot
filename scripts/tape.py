@@ -72,16 +72,28 @@ def ema(vals, n):
 
 
 def compute(sym):
-    r = fetch(sym)
-    meta = r['meta']
-    q = r['indicators']['quote'][0]
+    # IBKR real-time when a local gateway is up (IB_GATEWAY=1 in .env);
+    # yahoo otherwise. The source is carried into the output so the
+    # provenance line never lies about where a number came from.
+    ib_meta = None
     rows = []
-    for i, t in enumerate(r['timestamp']):
-        if q['close'][i] is None:
-            continue
-        rows.append((dt.datetime.fromtimestamp(t, ET), q['open'][i],
-                     q['high'][i], q['low'][i], q['close'][i],
-                     q['volume'][i] or 0))
+    if True:
+        try:
+            import ib_feed
+            if ib_feed.enabled():
+                rows, ib_meta = ib_feed.fetch(sym)
+        except Exception:
+            rows, ib_meta = [], None
+    if not rows:
+        r = fetch(sym)
+        meta = r['meta']
+        q = r['indicators']['quote'][0]
+        for i, t in enumerate(r['timestamp']):
+            if q['close'][i] is None:
+                continue
+            rows.append((dt.datetime.fromtimestamp(t, ET), q['open'][i],
+                         q['high'][i], q['low'][i], q['close'][i],
+                         q['volume'][i] or 0))
     if not rows:
         return None
 
@@ -94,18 +106,27 @@ def compute(sym):
     rth = [b for b in rows if 570 <= minute(b) < 960]
     pm = [b for b in rows if minute(b) < 570]
 
-    # Pre-market quirk: until today's regular session prints, Yahoo leaves
-    # regularMarketPrice at yesterday's close and chartPreviousClose one
-    # session further back. The latest bar is the truth; when the regular
-    # session hasn't traded today, yesterday's close IS regularMarketPrice.
-    rmt = meta.get('regularMarketTime')
-    rth_today = (rmt and
-                 dt.datetime.fromtimestamp(rmt, ET).date() == rows[-1][0].date())
+    if ib_meta:
+        prev_close = ib_meta['prev']
+    else:
+        # Pre-market quirk: until today's regular session prints, Yahoo
+        # leaves regularMarketPrice at yesterday's close and
+        # chartPreviousClose one session further back. The latest bar is
+        # the truth; before today's RTH, yesterday's close IS
+        # regularMarketPrice.
+        rmt = meta.get('regularMarketTime')
+        rth_today = (rmt and
+                     dt.datetime.fromtimestamp(rmt, ET).date() == rows[-1][0].date())
+        prev_close = (meta.get('chartPreviousClose') if rth_today
+                      else meta.get('regularMarketPrice'))
     d = {
         'sym': sym,
-        'last': closes[-1],
-        'prev': (meta.get('chartPreviousClose') if rth_today
-                 else meta.get('regularMarketPrice')),
+        'source': 'ibkr' if ib_meta else 'yahoo',
+        'bid': ib_meta['bid'] if ib_meta else None,
+        'ask': ib_meta['ask'] if ib_meta else None,
+        'halted_live': ib_meta['halted'] if ib_meta else None,
+        'last': (ib_meta['last'] if ib_meta and ib_meta['last'] else closes[-1]),
+        'prev': prev_close,
         'rows': rows, 'e9': e9, 'e20': e20, 'macd': macd, 'sig': sig,
         'hist': macd[-1] - sig[-1],
         'macd_pass': macd[-1] > 0 and macd[-1] > sig[-1],
@@ -161,10 +182,16 @@ def render(d, nbars=8):
     if d is None:
         return
     now = dt.datetime.now(ET)
-    print(f"## {d['sym']} · {now:%H:%M:%S} ET")
+    src = d.get('source', 'yahoo')
+    src_tag = GOOD('ibkr·rt') if src == 'ibkr' else DIM('yahoo')
+    print(f"## {d['sym']} · {now:%H:%M:%S} ET · {src_tag}")
+    if d.get('halted_live'):
+        print(BAD('⚠ HALTED RIGHT NOW — exchange halt flag is live'))
     gap = f" ({d['gap']:+.1f}%)" if d['gap'] is not None else ''
     prev = f"  prev {d['prev']:.2f}" if d['prev'] else ''
-    print(f"last {d['last']:.2f}{prev}{gap}")
+    ba = (f"  bid {d['bid']:.2f} / ask {d['ask']:.2f}"
+          if d.get('bid') and d.get('ask') else '')
+    print(f"last {d['last']:.2f}{prev}{gap}{ba}")
     if d['pm_hi'] is not None:
         print(f"PM   hi {d['pm_hi']:.2f}  lo {d['pm_lo']:.2f}  vol {d['pm_vol']:,}"
               + ('  (yahoo hides most PM volume)' if d['pm_vol'] == 0 else ''))
