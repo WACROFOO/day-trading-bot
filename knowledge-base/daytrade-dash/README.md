@@ -58,6 +58,26 @@ is a hypothesis with a dashboard, and its Pine Screener mode runs on a
 WATCHLIST (max ~1000 names), not the whole market — selection still starts
 with a real scan.
 
+## First live snapshot — observed bounds (2026-08-17, 40 HOD alerts)
+
+From `WARRIOR_SCANNER_SOURCE_ANALYSIS.md` (clean-room, no credentials
+touched). OBSERVED, single-snapshot — bounds, not thresholds:
+
+- **The float tiers get their first bounds:** "Low Float – High RVOL"
+  showed floats up to **5.38M**; "Medium Float – High RVOL – under $20"
+  showed **33.39M**. So low-float ceiling ≥5.4M, and 33M classifies as
+  medium — our binary 20M cap sits between the two real tiers.
+- **The platform alerts below $2** (Volatility Hunter at $1.07, Squeeze 5/5
+  at $1.73–1.99) — consistent with the penny-theme finding of 08-12: the $2
+  floor is OUR selection rule, not the scanner's.
+- **Former Momo floats were tiny**: 0.319M–1.60M in this snapshot.
+- Displayed RVOL values were flagged implausibly large by the analyst — do
+  not copy Warrior RVOL numbers into any tool without the denominator
+  question answered (see calibration).
+- API surface confirmed server-side (`/v1/scanner/config`, `/const`,
+  `/strategies` — bearer-protected). Thresholds are unrecoverable from the
+  client; calibration is the only honest path.
+
 ## Pine replica audit (2026-08-17)
 
 Audited: `ross_style_momentum_scanner.pine` → corrected copy at
