@@ -689,11 +689,11 @@ showTradeLevels = activeStructure
 plot(showLevels and showTradeLevels ? displayStop : na, "Stop", color=color.red, linewidth=2, style=plot.style_linebr)
 stopBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayStop + bandHalfWidth : na, "Stop band upper", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
 stopBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayStop - bandHalfWidth : na, "Stop band lower", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
-fill(stopBandUpperPlot, stopBandLowerPlot, color=color.new(color.red, 82), title="Stop loss band")
-plot(showLevels and showTradeLevels ? displayTarget : na, "Target", color=color.aqua, linewidth=2, style=plot.style_linebr)
-targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
-targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.aqua, 100), linewidth=1, style=plot.style_linebr)
-fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.aqua, 82), title="Target price band")
+fill(stopBandUpperPlot, stopBandLowerPlot, color=color.new(color.red, 80), title="Stop loss band (SL)")
+plot(showLevels and showTradeLevels ? displayTarget : na, "Target", color=color.lime, linewidth=2, style=plot.style_linebr)
+targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr)
+targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr)
+fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), title="Target price band (TP)")
 
 // V4.2: nearest structural levels as CLEAN bands — one box per level,
 // anchored a few bars back and extended right. No historical trail (the
