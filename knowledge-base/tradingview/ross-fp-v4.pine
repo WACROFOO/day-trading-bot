@@ -7,7 +7,7 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK — revision V4.8 (2026-08-17).
+// ROSS FIRST PULLBACK — revision V4.8.1 (2026-08-17).
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -149,7 +149,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V4.8"                       // bump on every shipped change
+REV = "V4.8.1"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -689,6 +689,14 @@ displayShares = setupState == ARMED or setupState == LONG ? plannedShares : cand
 displayRiskDollar = setupState == LONG ? tradeRisk : setupState == ARMED ? plannedRisk : candidateRisk
 displayRiskCash = not na(displayShares) and not na(displayRiskDollar) ? displayShares * displayRiskDollar : na
 
+// V4.8: room to the prior high is a RED FLAG, not a quiet number.
+// TRUG 2026-08-17 armed a trigger 4 cents under the impulse peak with a
+// 5-cent stop — 0.4R of room — and the dashboard rendered that in silver
+// next to the share count. A warning nobody can see is not a warning.
+thinRoom = not na(candidateRRtoPeak) and candidateRRtoPeak < 1.0 and
+     (setupState == PULLBACK or setupState == ARMED)
+roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(displayRR, "#.1") + "R TO PRIOR HIGH — " : ""
+
 stateColor =
      setupState == LONG ? color.lime :
      setupState == ARMED ? (thinRoom ? color.orange : color.yellow) :
@@ -707,13 +715,6 @@ chartVerdict = macdBullish and emaBullish and vwapBullish ? "CHART OK" :
      not vwapBullish ? "below VWAP " + str.tostring(vwapValue, format.mintick) :
      not emaBullish ? "below EMA9 " + str.tostring(ema9, format.mintick) : "MACD weak")
 windowTag = inWindowInfo ? "" : " · off-window"
-// V4.8: room to the prior high is a RED FLAG, not a quiet number.
-// TRUG 2026-08-17 armed a trigger 4 cents under the impulse peak with a
-// 5-cent stop — 0.4R of room — and the dashboard rendered that in silver
-// next to the share count. A warning nobody can see is not a warning.
-thinRoom = not na(candidateRRtoPeak) and candidateRRtoPeak < 1.0 and
-     (setupState == PULLBACK or setupState == ARMED)
-roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(displayRR, "#.1") + "R TO PRIOR HIGH — " : ""
 // V4.7: provisional reads are labelled. A verdict that can still flip
 // before the close must say so — the design pack's fail-closed rule.
 liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
