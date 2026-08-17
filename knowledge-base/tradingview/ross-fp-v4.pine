@@ -110,6 +110,12 @@ showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisu
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
 // V4.3: readable by default; shrink only if the user asks the input to
 dashSize             = input.string("small", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
+// V4.7: live evaluation on the FORMING bar, for what you READ. Order
+// logic stays on confirmed bars — that separation is what stops the state
+// machine flip-flopping inside a candle and keeps the backtest honest.
+// Ross's own split: "confirm the candle" (setup) but enter intrabar on the
+// break (trigger, already handled by the resting stop-entry).
+liveEval             = input.bool(true, "Evaluate verdict on the forming bar (display)", group=gVisual)
 debugMode            = input.bool(false, "Debug plots", group=gVisual)
 
 // ───────────────────────── Raw indicators ─────────────────────────
@@ -493,8 +499,13 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
 
 // ───────────────────────── Live setup measurements ─────────────────────────
 pushRange = not na(pushPeak) and not na(pushStartPrice) ? pushPeak - pushStartPrice : na
+// V4.7: the forming bar's low counts immediately for DISPLAY. At bar
+// close the state machine has already folded it in, so this is a no-op
+// then and pure live information intrabar.
+pullbackLowLive = (setupState == PULLBACK or setupState == ARMED) and liveEval and not na(pullbackLow) ?
+     math.min(pullbackLow, low) : pullbackLow
 retracementPct = setupState == PULLBACK or setupState == ARMED ?
-     f_safeDiv(pushPeak - pullbackLow, pushRange, 999.0) * 100.0 : na
+     f_safeDiv(pushPeak - pullbackLowLive, pushRange, 999.0) * 100.0 : na
 
 pullbackAvgVolume = pullbackBars > 0 ? pullbackVolumeSum / pullbackBars : na
 pullbackVolumeRatio = pullbackBars > 0 ? f_safeDiv(pullbackAvgVolume, pushAvgVolume, 999.0) : na
@@ -525,7 +536,7 @@ supportCountRaw = (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport 
 supportCount = supportCountRaw - (emaClustered ? 1 : 0)
 
 candidateTrigger = setupState == PULLBACK ? high + breakoutBufferTicks * syminfo.mintick : triggerPrice
-candidateStop = setupState == PULLBACK ? pullbackLow : structuralStop
+candidateStop = setupState == PULLBACK ? pullbackLowLive : structuralStop
 candidateRisk = candidateTrigger - candidateStop
 candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
 candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
@@ -692,13 +703,16 @@ chartVerdict = macdBullish and emaBullish and vwapBullish ? "CHART OK" :
      not vwapBullish ? "below VWAP " + str.tostring(vwapValue, format.mintick) :
      not emaBullish ? "below EMA9 " + str.tostring(ema9, format.mintick) : "MACD weak")
 windowTag = inWindowInfo ? "" : " · off-window"
+// V4.7: provisional reads are labelled. A verdict that can still flip
+// before the close must say so — the design pack's fail-closed rule.
+liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
 actionText =
      not isOneMinute ? "USE 1-MINUTE CHART" :
-     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag :
-     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag :
-     setupState == PULLBACK ? (hardGatesOK ? "READY" : gateReason) + windowTag :
-     setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag :
-     chartVerdict + " — no setup yet" + windowTag
+     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag + liveTag :
+     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag + liveTag :
+     setupState == PULLBACK ? (hardGatesOK ? "READY" : gateReason) + windowTag + liveTag :
+     setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag + liveTag :
+     chartVerdict + " — no setup yet" + windowTag + liveTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
