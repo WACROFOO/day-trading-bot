@@ -118,3 +118,36 @@ file minus the `// V2:` lines; setup guide archived here).
 Not compiled here (no TV runtime) — paste into the editor; report errors.
 
 Paper only. Observed scanner behaviour is selection evidence, not edge.
+
+---
+
+## Incident log — TRUG, 2026-08-17
+
+**MEASURED.** `tape.py TRUG` 10:33 ET: HOD 1.82 @10:23 on 1.62M shares;
+10:26 and 10:27 both topped at exactly 1.78; 10:28 opened 1.74, low 1.56.
+
+The strategy armed a trigger at **1.7801** with stop 1.7300 — i.e. **4 cents
+under the impulse peak with a 5-cent stop, 0.4R of room**. The trigger was
+never cleanly taken out (highs printed 1.78, not 1.7801) and the next bar
+broke down 18 cents.
+
+Three defects, all mine, all in presentation rather than arithmetic:
+
+1. **The 0.4R room warning was rendered in silver, next to the share count.**
+   A red flag nobody can see is not a red flag. → V4.8 puts it in the verdict
+   line, in red, as `⚠ ONLY 0.4R TO PRIOR HIGH`.
+2. **A bright yellow `TRIGGER SET` banner reads as an instruction** — the exact
+   failure mode the design pack's vocabulary rule names. Renaming ARMED to
+   TRIGGER SET did not fix the colour. → V4.8 turns the banner orange when the
+   room is thin.
+3. **`requireRRtoPeak` shipped default OFF**, justified in the V3 audit by the
+   "2:1 R:R is a realised ratio, not a pre-entry veto" finding. That conflated
+   two different objects: the *trade plan's* R:R (correctly not a veto) and
+   *room to the prior high* (a genuine extension check the source does make).
+   The gate stays optional — flipping a default on one trade would be inferring
+   a threshold from one day — but it is now recommended in the input group and
+   the warning fires regardless.
+
+Not a defect, and worth recording plainly: the script's trigger was 1.7801.
+An entry taken at 1.71 is **below** the trigger — anticipating the setup, not
+taking it. The tool never printed a signal at that price.

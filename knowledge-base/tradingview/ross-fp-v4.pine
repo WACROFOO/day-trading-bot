@@ -7,7 +7,7 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK — revision V4.7 (2026-08-17).
+// ROSS FIRST PULLBACK — revision V4.8 (2026-08-17).
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -149,7 +149,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V4.7"                       // bump on every shipped change
+REV = "V4.8"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -691,7 +691,7 @@ displayRiskCash = not na(displayShares) and not na(displayRiskDollar) ? displayS
 
 stateColor =
      setupState == LONG ? color.lime :
-     setupState == ARMED ? color.yellow :
+     setupState == ARMED ? (thinRoom ? color.orange : color.yellow) :
      setupState == INVALID ? color.red :
      setupState == PULLBACK or setupState == IMPULSE ? color.orange :
      color.gray
@@ -707,14 +707,21 @@ chartVerdict = macdBullish and emaBullish and vwapBullish ? "CHART OK" :
      not vwapBullish ? "below VWAP " + str.tostring(vwapValue, format.mintick) :
      not emaBullish ? "below EMA9 " + str.tostring(ema9, format.mintick) : "MACD weak")
 windowTag = inWindowInfo ? "" : " · off-window"
+// V4.8: room to the prior high is a RED FLAG, not a quiet number.
+// TRUG 2026-08-17 armed a trigger 4 cents under the impulse peak with a
+// 5-cent stop — 0.4R of room — and the dashboard rendered that in silver
+// next to the share count. A warning nobody can see is not a warning.
+thinRoom = not na(candidateRRtoPeak) and candidateRRtoPeak < 1.0 and
+     (setupState == PULLBACK or setupState == ARMED)
+roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(displayRR, "#.1") + "R TO PRIOR HIGH — " : ""
 // V4.7: provisional reads are labelled. A verdict that can still flip
 // before the close must say so — the design pack's fail-closed rule.
 liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
 actionText =
      not isOneMinute ? "USE 1-MINUTE CHART" :
      setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag + liveTag :
-     setupState == ARMED ? "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag + liveTag :
-     setupState == PULLBACK ? (hardGatesOK ? "READY" : gateReason) + windowTag + liveTag :
+     setupState == ARMED ? roomWarn + "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag + liveTag :
+     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + windowTag + liveTag :
      setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag + liveTag :
      chartVerdict + " — no setup yet" + windowTag + liveTag
 
@@ -796,7 +803,7 @@ if barstate.islast
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
          bgcolor=stateColor, text_color=color.black, text_size=DSZ)
 
-    f_row(1, "VERDICT", actionText, color.white)
+    f_row(1, "VERDICT", actionText, thinRoom ? color.red : color.white)
     f_row(2, "MOMENTUM", momentumText, macdBullish ? color.lime : color.orange)
     // V4.6: print the VWAP number AND its anchor — a gate you cannot check
     // against your own chart is a gate you cannot trust
@@ -806,7 +813,8 @@ if barstate.islast
          stopExceedsHaltBand ? color.red : color.silver)
     f_row(5, "TP / SL", f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry), color.silver)
     f_row(6, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
-         " / " + f_n(displayRR, "#.1") + "R room", color.silver)
+         " / " + f_n(displayRR, "#.1") + "R room" + (thinRoom ? "  ⚠ EXTENDED" : ""),
+         thinRoom ? color.red : color.silver)
     f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
          "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
 
