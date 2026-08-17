@@ -1,0 +1,262 @@
+//@version=6
+indicator("Ross-Style Momentum Scanner + Risk Bands (repo-audited v2)", shorttitle = "Ross Approx v2", overlay = true, max_labels_count = 200)
+
+// ============================================================================
+// V2 (2026-08-17): ChatGPT's scanner replica, audited against FILTERS.md and
+// the 2026-08 measurements. The ORIGINAL is this file minus the lines tagged
+// // V2: — four changes only, everything else verbatim. Audit notes:
+// knowledge-base/daytrade-dash/README.md, "Pine replica audit".
+// This approximates PUBLIC Warrior criteria; server thresholds are opaque.
+// ============================================================================
+
+string GROUP_PILLARS = "1. Five Pillars"
+float minPrice       = input.float(2.00, "Minimum price", minval = 0.01, step = 0.25, group = GROUP_PILLARS)
+float maxPrice       = input.float(20.00, "Maximum price", minval = 0.01, step = 1.00, group = GROUP_PILLARS)
+float minGainPct     = input.float(10.0, "Minimum gain from prior close (%)", minval = 0.0, step = 0.5, group = GROUP_PILLARS)
+// V2: default 5.0 -> 2.0. Origin SOURCE: the book's own scanner (guardrail
+// #1) floors RVOL at 2.0; 5x is the teaching-video dial and as a HARD gate
+// it deletes the population (audit error class: dial read as gate). The
+// denominator below also understates RVOL early in the day - see audit.
+float minDailyRvol   = input.float(2.0, "Minimum daily relative volume [book GR#1; 5x = teaching dial]", minval = 0.1, step = 0.25, group = GROUP_PILLARS)
+int   dailyVolLength = input.int(20, "Daily-volume average length", minval = 5, maxval = 100, group = GROUP_PILLARS)
+float maxFloatM      = input.float(20.0, "Maximum float/supply proxy (millions)", minval = 0.1, step = 1.0, group = GROUP_PILLARS)
+float manualFloatM   = input.float(0.0, "Manual float in millions (0 = shares-outstanding proxy)", minval = 0.0, step = 0.1, group = GROUP_PILLARS,
+     tooltip = "TradingView does not reliably provide true float for every symbol. Enter the verified float here for single-chart use. Leave at 0 in Pine Screener mode.")
+// V2: default false -> true. Origin MEASURED (week of 08-11): the week's
+// biggest runners (ONFO, WETO, SXTC) had NO published float - fail-closed
+// here silently deletes exactly the population the scan hunts. The screener
+// column "Float known" (plot 11) keeps the unknowns visible instead.
+bool  allowUnknownFloat = input.bool(true, "Allow candidate when float data is unavailable", group = GROUP_PILLARS)
+bool  catalystConfirmed = input.bool(false, "News/catalyst confirmed manually", group = GROUP_PILLARS,
+     tooltip = "Pine cannot determine whether Warrior's flame/news criterion is present. Confirm news separately, then enable this for the chart symbol.")
+
+string GROUP_MOMO = "2. Momentum approximations"
+float minFiveMinRvol = input.float(2.0, "Minimum 5-minute relative volume", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+float runningUpPct   = input.float(3.0, "Running Up: minimum move (%)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+int   runningUpMins  = input.int(2, "Running Up: lookback (minutes)", minval = 1, maxval = 30, group = GROUP_MOMO)
+float lowFloatMaxM   = input.float(20.0, "Low-float ceiling (millions)", minval = 0.1, step = 1.0, group = GROUP_MOMO)
+float mediumFloatMaxM = input.float(100.0, "Medium-float ceiling (millions)", minval = 1.0, step = 5.0, group = GROUP_MOMO)
+float highRvol       = input.float(5.0, "High relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+float mediumRvol     = input.float(2.0, "Medium relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+float formerMomoGain = input.float(50.0, "Former-momo proxy: prior daily gain (%)", minval = 10.0, step = 5.0, group = GROUP_MOMO)
+
+string GROUP_RISK = "3. Entry, stop and target bands"
+string signalSource = input.string("Five Pillars HOD", "Band trigger", options = ["Five Pillars HOD", "HOD Momentum", "Running Up", "Any momentum signal"], group = GROUP_RISK)
+float entryOffset    = input.float(0.01, "Entry above signal-bar high ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
+string stopMethod    = input.string("Signal candle low", "Stop method", options = ["Signal candle low", "ATR"], group = GROUP_RISK)
+float stopOffset     = input.float(0.01, "Stop below signal-bar low ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
+int   atrLength      = input.int(14, "ATR length", minval = 2, group = GROUP_RISK)
+float atrStopMult    = input.float(1.0, "ATR stop multiple", minval = 0.1, step = 0.1, group = GROUP_RISK)
+float rewardR        = input.float(2.0, "Target reward/risk multiple", minval = 0.25, step = 0.25, group = GROUP_RISK)
+float bandHalfWidth  = input.float(0.02, "Band half-width ($)", minval = 0.0, step = 0.01, group = GROUP_RISK)
+bool  showRiskBands  = input.bool(true, "Show entry / stop / target bands", group = GROUP_RISK)
+
+string GROUP_DISPLAY = "4. Display"
+bool showDashboard = input.bool(true, "Show dashboard", group = GROUP_DISPLAY)
+bool showSignals   = input.bool(true, "Show signal markers", group = GROUP_DISPLAY)
+bool tintCandidate = input.bool(true, "Tint chart when technical pillars pass", group = GROUP_DISPLAY)
+
+[priorCloseD, currentDailyVolume, averageDailyVolume, prior52WeekHigh, bestDailyGain120] = request.security(
+     syminfo.tickerid,
+     "1D",
+     [close[1], volume, ta.sma(volume[1], dailyVolLength), ta.highest(high[1], 252), ta.highest(100.0 * (close / close[1] - 1.0), 120)],
+     gaps = barmerge.gaps_off,
+     lookahead = barmerge.lookahead_off)
+
+[volume5m, averageVolume5m] = request.security(
+     syminfo.tickerid,
+     "5",
+     [volume, ta.sma(volume[1], 20)],
+     gaps = barmerge.gaps_off,
+     lookahead = barmerge.lookahead_off)
+
+float sharesOutstanding = request.financial(syminfo.tickerid, "TOTAL_SHARES_OUTSTANDING", "FQ", gaps = barmerge.gaps_off)
+
+float gainPct     = not na(priorCloseD) and priorCloseD > 0 ? 100.0 * (close / priorCloseD - 1.0) : na
+float dailyRvol   = not na(averageDailyVolume) and averageDailyVolume > 0 ? currentDailyVolume / averageDailyVolume : na
+float fiveMinRvol = not na(averageVolume5m) and averageVolume5m > 0 ? volume5m / averageVolume5m : na
+float supplyM     = manualFloatM > 0 ? manualFloatM : (not na(sharesOutstanding) ? sharesOutstanding / 1000000.0 : na)
+
+bool priceOk  = close >= minPrice and close <= maxPrice
+bool gainOk   = not na(gainPct) and gainPct >= minGainPct
+bool rvolOk   = not na(dailyRvol) and dailyRvol >= minDailyRvol
+bool floatOk  = (not na(supplyM) and supplyM <= maxFloatM) or (na(supplyM) and allowUnknownFloat)
+int pillarScore = (priceOk ? 1 : 0) + (gainOk ? 1 : 0) + (rvolOk ? 1 : 0) + (floatOk ? 1 : 0)
+
+bool technicalFivePillarCandidate = pillarScore == 4
+bool fullFivePillarCandidate      = technicalFivePillarCandidate and catalystConfirmed
+
+bool newTradingDay = ta.change(time("1D")) != 0
+var float intradayHigh = na
+float highBeforeThisBar = newTradingDay or na(intradayHigh) ? na : intradayHigh
+if newTradingDay or na(intradayHigh)
+    intradayHigh := high
+else
+    intradayHigh := math.max(intradayHigh, high)
+
+bool newHod = not na(highBeforeThisBar) and high > highBeforeThisBar and close > highBeforeThisBar
+bool aboveAverageMomentum = not na(fiveMinRvol) and fiveMinRvol >= minFiveMinRvol
+bool hodMomentum = newHod and aboveAverageMomentum and close > open
+
+float chartSeconds = timeframe.in_seconds()
+int runBars = math.max(1, int(math.ceil(runningUpMins * 60.0 / chartSeconds)))
+int bars5   = math.max(1, int(math.ceil(5.0 * 60.0 / chartSeconds)))
+int bars10  = math.max(1, int(math.ceil(10.0 * 60.0 / chartSeconds)))
+float runningMovePct = bar_index >= runBars and close[runBars] > 0 ? 100.0 * (close / close[runBars] - 1.0) : na
+float move5Pct       = bar_index >= bars5 and close[bars5] > 0 ? 100.0 * (close / close[bars5] - 1.0) : na
+float move10Pct      = bar_index >= bars10 and close[bars10] > 0 ? 100.0 * (close / close[bars10] - 1.0) : na
+
+bool runningUp  = not na(runningMovePct) and runningMovePct >= runningUpPct and aboveAverageMomentum
+bool squeeze5   = not na(move5Pct) and move5Pct >= 5.0 and aboveAverageMomentum
+bool squeeze10  = not na(move10Pct) and move10Pct >= 10.0 and aboveAverageMomentum
+bool breakout52 = not na(prior52WeekHigh) and high >= prior52WeekHigh and high[1] < prior52WeekHigh
+bool formerMomo = not na(bestDailyGain120) and bestDailyGain120 >= formerMomoGain
+
+bool lowFloat    = not na(supplyM) and supplyM <= lowFloatMaxM
+bool mediumFloat = not na(supplyM) and supplyM > lowFloatMaxM and supplyM <= mediumFloatMaxM
+bool medRelVol   = not na(fiveMinRvol) and fiveMinRvol >= mediumRvol
+bool highRelVol  = not na(fiveMinRvol) and fiveMinRvol >= highRvol
+
+bool lowFloatMedRvol          = newHod and lowFloat and medRelVol
+bool lowFloatHighRvol         = newHod and lowFloat and highRelVol
+bool lowFloatHighRvolOver20   = lowFloatHighRvol and close > 20
+bool lowFloatVolatilityHunter = newHod and lowFloat and aboveAverageMomentum and ta.atr(atrLength) / close * 100.0 >= 3.0
+bool formerMomoHod            = newHod and formerMomo and aboveAverageMomentum
+bool mediumFloatMedOver20     = newHod and mediumFloat and medRelVol and close > 20
+bool mediumFloatHighOver20    = newHod and mediumFloat and highRelVol and close > 20
+bool mediumFloatHighUnder20   = newHod and mediumFloat and highRelVol and close <= 20
+bool squeeze52Week            = breakout52 and aboveAverageMomentum
+bool anyHodSubStrategy = lowFloatMedRvol or lowFloatHighRvol or lowFloatHighRvolOver20 or lowFloatVolatilityHunter or formerMomoHod or mediumFloatMedOver20 or mediumFloatHighOver20 or mediumFloatHighUnder20 or squeeze5 or squeeze10 or squeeze52Week
+
+bool fivePillarHod = technicalFivePillarCandidate and newHod and aboveAverageMomentum
+
+bool chosenRiskSignal = switch signalSource
+    "Five Pillars HOD"   => fivePillarHod
+    "HOD Momentum"       => hodMomentum or anyHodSubStrategy
+    "Running Up"         => runningUp
+    => fivePillarHod or hodMomentum or anyHodSubStrategy or runningUp or squeeze5 or squeeze10
+
+bool newRiskSignal = chosenRiskSignal and not chosenRiskSignal[1]
+float atrValue = ta.atr(atrLength)
+var float entryLevel = na
+var float stopLevel = na
+var float targetLevel = na
+var string bandStatus = "Waiting"
+
+if newTradingDay
+    entryLevel := na
+    stopLevel := na
+    targetLevel := na
+    bandStatus := "Waiting"
+
+if newRiskSignal
+    entryLevel := high + entryOffset
+    float candleStop = low - stopOffset
+    float atrStop = entryLevel - atrValue * atrStopMult
+    stopLevel := stopMethod == "ATR" ? atrStop : candleStop
+    float initialRisk = math.max(entryLevel - stopLevel, syminfo.mintick)
+    targetLevel := entryLevel + initialRisk * rewardR
+    // V2: vocabulary (design pack) - was "Armed"
+    bandStatus := "Trigger set"
+else if not na(entryLevel) and bandStatus == "Trigger set"
+    if low <= stopLevel
+        bandStatus := "Stopped"
+    else if high >= targetLevel
+        bandStatus := "Target hit"
+    else if high >= entryLevel
+        bandStatus := "Triggered"
+else if not na(entryLevel) and bandStatus == "Triggered"
+    if low <= stopLevel
+        bandStatus := "Stopped"
+    else if high >= targetLevel
+        bandStatus := "Target hit"
+
+float entryLower = showRiskBands and not na(entryLevel) ? entryLevel - bandHalfWidth : na
+float entryUpper = showRiskBands and not na(entryLevel) ? entryLevel + bandHalfWidth : na
+float stopLower  = showRiskBands and not na(stopLevel) ? stopLevel - bandHalfWidth : na
+float stopUpper  = showRiskBands and not na(stopLevel) ? stopLevel + bandHalfWidth : na
+float targetLower = showRiskBands and not na(targetLevel) ? targetLevel - bandHalfWidth : na
+float targetUpper = showRiskBands and not na(targetLevel) ? targetLevel + bandHalfWidth : na
+
+plot(pillarScore, "Pillar score (0-4)", display = display.data_window)
+plot(close, "Price", display = display.data_window)
+plot(gainPct, "Gain from prior close %", display = display.data_window)
+plot(dailyRvol, "Daily RVOL", display = display.data_window)
+plot(fiveMinRvol, "5-minute RVOL", display = display.data_window)
+plot(supplyM, "Float/supply proxy M", display = display.data_window)
+plot(technicalFivePillarCandidate ? 1 : 0, "Technical 4/4 candidate", display = display.data_window)
+plot(fivePillarHod ? 1 : 0, "Five Pillars HOD", display = display.data_window)
+plot(hodMomentum or anyHodSubStrategy ? 1 : 0, "HOD Momentum", display = display.data_window)
+plot(runningUp ? 1 : 0, "Running Up", display = display.data_window)
+// V2: plot 11 - float provenance column, so unknown-float candidates are
+// visible as unknown instead of silently included or excluded
+plot(na(supplyM) ? 0 : 1, "Float known (0 = unverified)", display = display.data_window)
+
+entryLoPlot = plot(entryLower, "Entry band lower", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
+entryHiPlot = plot(entryUpper, "Entry band upper", color = color.new(color.aqua, 0), linewidth = 1, style = plot.style_linebr)
+stopLoPlot = plot(stopLower, "Stop band lower", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
+stopHiPlot = plot(stopUpper, "Stop band upper", color = color.new(color.red, 0), linewidth = 1, style = plot.style_linebr)
+targetLoPlot = plot(targetLower, "Target band lower", color = color.new(color.lime, 0), linewidth = 1, style = plot.style_linebr)
+targetHiPlot = plot(targetUpper, "Target band upper", color = color.new(color.lime, 0), linewidth = 1, style = plot.style_linebr)
+fill(entryLoPlot, entryHiPlot, color.new(color.aqua, 82), title = "ENTRY zone")
+fill(stopLoPlot, stopHiPlot, color.new(color.red, 82), title = "STOP zone")
+fill(targetLoPlot, targetHiPlot, color.new(color.lime, 82), title = "TARGET zone")
+
+plotshape(showSignals and fivePillarHod, title = "Five Pillars HOD marker", style = shape.labelup, location = location.belowbar, color = color.lime, text = "5P HOD", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and hodMomentum and not fivePillarHod, title = "HOD marker", style = shape.triangleup, location = location.belowbar, color = color.aqua, text = "HOD", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and runningUp and not hodMomentum, title = "Running Up marker", style = shape.circle, location = location.belowbar, color = color.orange, text = "RUN", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and squeeze5, title = "5% in 5 minutes marker", style = shape.diamond, location = location.abovebar, color = color.yellow, text = "5/5", textcolor = color.black, size = size.tiny)
+plotshape(showSignals and squeeze10, title = "10% in 10 minutes marker", style = shape.diamond, location = location.abovebar, color = color.fuchsia, text = "10/10", textcolor = color.white, size = size.tiny)
+bgcolor(tintCandidate and technicalFivePillarCandidate ? color.new(color.lime, 92) : na, title = "Technical candidate tint")
+
+alertcondition(technicalFivePillarCandidate and not technicalFivePillarCandidate[1], "Technical Five Pillars candidate", "{{exchange}}:{{ticker}} now passes the four technical Ross-style pillars. Check news manually. Price: {{close}}")
+alertcondition(fullFivePillarCandidate and not fullFivePillarCandidate[1], "Full Five Pillars candidate", "{{exchange}}:{{ticker}} passes the configured Five Pillars, including manual catalyst confirmation. Price: {{close}}")
+alertcondition(fivePillarHod, "Five Pillars HOD alert", "{{exchange}}:{{ticker}} Ross-style Five Pillars HOD approximation at {{close}}")
+alertcondition(hodMomentum or anyHodSubStrategy, "HOD Momentum alert", "{{exchange}}:{{ticker}} HOD momentum approximation at {{close}}")
+alertcondition(runningUp, "Running Up alert", "{{exchange}}:{{ticker}} Running Up approximation at {{close}}")
+alertcondition(squeeze5, "Squeeze: 5% in 5 minutes", "{{exchange}}:{{ticker}} moved at least 5% in approximately 5 minutes. Price: {{close}}")
+alertcondition(squeeze10, "Squeeze: 10% in 10 minutes", "{{exchange}}:{{ticker}} moved at least 10% in approximately 10 minutes. Price: {{close}}")
+alertcondition(breakout52, "52-week breakout", "{{exchange}}:{{ticker}} is breaking the prior 52-week high. Price: {{close}}")
+
+f_passText(bool condition) => condition ? "PASS" : "FAIL"
+f_passColor(bool condition) => condition ? color.new(color.lime, 10) : color.new(color.red, 10)
+f_num(float value, string pattern) => na(value) ? "—" : str.tostring(value, pattern)
+
+var table dashboard = table.new(position.top_right, 3, 12, bgcolor = color.new(color.white, 5), frame_color = color.new(color.gray, 40), frame_width = 1)
+if barstate.islast and showDashboard
+    table.cell(dashboard, 0, 0, "FILTER", text_color = color.white, bgcolor = color.new(color.blue, 45))
+    table.cell(dashboard, 1, 0, "VALUE", text_color = color.white, bgcolor = color.new(color.blue, 45))
+    table.cell(dashboard, 2, 0, "STATUS", text_color = color.white, bgcolor = color.new(color.blue, 45))
+    table.cell(dashboard, 0, 1, "Price")
+    table.cell(dashboard, 1, 1, "$" + f_num(close, "#.##"))
+    table.cell(dashboard, 2, 1, f_passText(priceOk), bgcolor = f_passColor(priceOk))
+    table.cell(dashboard, 0, 2, "Gain vs close")
+    table.cell(dashboard, 1, 2, f_num(gainPct, "#.##") + "%")
+    table.cell(dashboard, 2, 2, f_passText(gainOk), bgcolor = f_passColor(gainOk))
+    table.cell(dashboard, 0, 3, "Daily RVOL")
+    table.cell(dashboard, 1, 3, f_num(dailyRvol, "#.##") + "x")
+    table.cell(dashboard, 2, 3, f_passText(rvolOk), bgcolor = f_passColor(rvolOk))
+    table.cell(dashboard, 0, 4, "Float/supply")
+    table.cell(dashboard, 1, 4, f_num(supplyM, "#.##") + "M" + (na(supplyM) ? "" : manualFloatM > 0 ? " (manual)" : " (shs-out proxy)"))
+    table.cell(dashboard, 2, 4, f_passText(floatOk), bgcolor = f_passColor(floatOk))
+    table.cell(dashboard, 0, 5, "News")
+    table.cell(dashboard, 1, 5, catalystConfirmed ? "Confirmed" : "Manual check")
+    table.cell(dashboard, 2, 5, f_passText(catalystConfirmed), bgcolor = f_passColor(catalystConfirmed))
+    table.cell(dashboard, 0, 6, "Technical score")
+    table.cell(dashboard, 1, 6, str.tostring(pillarScore) + "/4")
+    table.cell(dashboard, 2, 6, f_passText(technicalFivePillarCandidate), bgcolor = f_passColor(technicalFivePillarCandidate))
+    table.cell(dashboard, 0, 7, "5m RVOL")
+    table.cell(dashboard, 1, 7, f_num(fiveMinRvol, "#.##") + "x")
+    table.cell(dashboard, 2, 7, f_passText(aboveAverageMomentum), bgcolor = f_passColor(aboveAverageMomentum))
+    table.cell(dashboard, 0, 8, "HOD / Running")
+    table.cell(dashboard, 1, 8, hodMomentum ? "HOD" : runningUp ? "Running Up" : "None")
+    table.cell(dashboard, 2, 8, hodMomentum or runningUp ? "ACTIVE" : "WAIT")
+    table.cell(dashboard, 0, 9, "Entry")
+    table.cell(dashboard, 1, 9, na(entryLevel) ? "—" : "$" + f_num(entryLevel, "#.##"), bgcolor = color.new(color.aqua, 80))
+    table.cell(dashboard, 2, 9, bandStatus)
+    table.cell(dashboard, 0, 10, "Stop")
+    table.cell(dashboard, 1, 10, na(stopLevel) ? "—" : "$" + f_num(stopLevel, "#.##"), bgcolor = color.new(color.red, 80))
+    table.cell(dashboard, 2, 10, stopMethod)
+    table.cell(dashboard, 0, 11, "Target")
+    table.cell(dashboard, 1, 11, na(targetLevel) ? "—" : "$" + f_num(targetLevel, "#.##"), bgcolor = color.new(color.lime, 80))
+    table.cell(dashboard, 2, 11, f_num(rewardR, "#.##") + "R")

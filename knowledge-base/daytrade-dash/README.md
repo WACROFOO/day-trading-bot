@@ -58,4 +58,43 @@ is a hypothesis with a dashboard, and its Pine Screener mode runs on a
 WATCHLIST (max ~1000 names), not the whole market — selection still starts
 with a real scan.
 
+## Pine replica audit (2026-08-17)
+
+Audited: `ross_style_momentum_scanner.pine` → corrected copy at
+`knowledge-base/tradingview/ross-style-scanner-v2.pine` (original = that
+file minus the `// V2:` lines; setup guide archived here).
+
+**Four changes applied:**
+
+| change | origin |
+|---|---|
+| Daily-RVOL pillar default 5.0 → **2.0** | SOURCE — book GR#1's scanner floors RVOL at 2.0; 5× is the teaching dial, and as a hard gate it re-commits the audit's one error class |
+| `allowUnknownFloat` false → **true**, + new plot 11 "Float known" | MEASURED — the week's biggest runners (ONFO, WETO, SXTC) had NO published float; fail-closed silently deleted the hunted population. The provenance column keeps unknowns visible instead of hidden |
+| band status "Armed" → "Trigger set" | design pack vocabulary |
+| N/A → em dash in dashboard | design pack: absent ≠ zero |
+
+**Flagged, not changed (denominator honesty):**
+
+- **Daily RVOL = cumulative day volume ÷ 20-day full-day average** — at
+  07:30 the numerator is a fraction of a day, so morning RVOL is understated
+  exactly when it matters. No clean Pine fix; the 2.0 default partially
+  compensates. Judge morning RVOL by eye, not by this cell.
+- **5-min RVOL average includes overnight bars** on extended-hours charts —
+  quiet-bar deflation inflates pre-market RVOL. Same class of bias, opposite
+  direction. Both cells are labelled by vendor method, per device 8.
+- **Float proxy = shares outstanding** (≥ float by definition) — overstates,
+  so the 20M ceiling rejects names whose true float qualifies. Their manual
+  input mitigates per-chart; in Screener mode treat FAIL-on-float as
+  "verify", not "dead".
+- **Entry band = signal-bar high + 1¢, stop = signal-bar low − 1¢** — a
+  visualization of the break, not the micro-pullback entry (that lives in
+  ROSS FP V4). A 1-min signal bar on a halting name can span $1+: the
+  candle-low stop is then fiction (measured medians 0.23–0.83 this week).
+  Use the ATR stop method on fast tape.
+- **`breakout52` compares against yesterday's completed daily value**
+  (lookahead_off) — correct and non-repainting, but a first-ever ATH day
+  prints nothing until the next daily close. Known blind spot.
+
+Not compiled here (no TV runtime) — paste into the editor; report errors.
+
 Paper only. Observed scanner behaviour is selection evidence, not edge.
