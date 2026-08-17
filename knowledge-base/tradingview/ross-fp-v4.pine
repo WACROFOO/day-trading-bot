@@ -7,7 +7,7 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK — revision V4.8.1 (2026-08-17).
+// ROSS FIRST PULLBACK — revision V4.9 (2026-08-17).
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -103,7 +103,13 @@ bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry",
 gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
 showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual)
-bandHalfWidthTicks   = input.int(5, "Band half-width (ticks)", minval=1, maxval=100, group=gVisual)
+// V4.9: band width was a FIXED tick count, so it did not adapt to the
+// instrument or to price zoom — 5 ticks is a hairline on a $9 stock and a
+// slab on a $1.70 one. ATR-relative by default; ticks still available.
+bandMode             = input.string("ATR fraction", "Band width mode", options=["ATR fraction", "Fixed ticks"], group=gVisual)
+bandATRfrac          = input.float(0.12, "Band half-width (× ATR)", minval=0.01, maxval=2.0, step=0.01, group=gVisual)
+bandHalfWidthTicks   = input.int(5, "Band half-width (ticks, fixed mode)", minval=1, maxval=100, group=gVisual)
+markerSize           = input.string("small", "Signal marker size", options=["tiny", "small", "normal", "large"], group=gVisual)
 // V4.1: nearest structural levels drawn as bands — resistance above,
 // support below, from confirmed swing pivots (his "two reasons at one
 // price" needs the level on screen, not in your head).
@@ -149,7 +155,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V4.8.1"                       // bump on every shipped change
+REV = "V4.9"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -731,7 +737,10 @@ activeStructure = setupState == PULLBACK or setupState == ARMED or setupState ==
 
 plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr)
 plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
-bandHalfWidth = bandHalfWidthTicks * syminfo.mintick
+// V4.9: half-width follows the instrument's own volatility so the band
+// keeps the same visual weight whatever the price scale.
+bandHalfWidth = bandMode == "Fixed ticks" ? bandHalfWidthTicks * syminfo.mintick :
+     math.max(atr * bandATRfrac, syminfo.mintick)
 // V4.1: candidate stop/target bands visible from the PULLBACK stage, not
 // only once armed — the level should be on screen while you decide.
 showTradeLevels = activeStructure
@@ -755,18 +764,20 @@ if barstate.islast and showSR
     if not na(supBox)
         box.delete(supBox)
     if not na(nearestRes)
-        resBox := box.new(bar_index - 30, nearestRes + bandHalfWidth,
+        // V4.9: extend.both — a 30-bar anchor slid out of view on any
+        // horizontal zoom; the level exists across the whole chart.
+        resBox := box.new(bar_index - 1, nearestRes + bandHalfWidth,
              bar_index, nearestRes - bandHalfWidth,
              border_color=color.new(color.gray, 55), border_width=1,
-             bgcolor=color.new(color.blue, 88), extend=extend.right,
+             bgcolor=color.new(color.blue, 88), extend=extend.both,
              text="R " + str.tostring(nearestRes, format.mintick),
              text_color=color.new(color.blue, 20), text_size=size.tiny,
              text_halign=text.align_left)
     if not na(nearestSup)
-        supBox := box.new(bar_index - 30, nearestSup + bandHalfWidth,
+        supBox := box.new(bar_index - 1, nearestSup + bandHalfWidth,
              bar_index, nearestSup - bandHalfWidth,
              border_color=color.new(color.gray, 55), border_width=1,
-             bgcolor=color.new(color.purple, 88), extend=extend.right,
+             bgcolor=color.new(color.purple, 88), extend=extend.both,
              text="S " + str.tostring(nearestSup, format.mintick),
              text_color=color.new(color.purple, 20), text_size=size.tiny,
              text_halign=text.align_left)
@@ -778,10 +789,14 @@ plot(showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20))
 plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr)
 plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr)
 
-plotshape(eventArmed, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="TRG")
-plotshape(eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.small, text="IN")
-plotshape(eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="X")
-plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="BAIL")
+// V4.9: marker glyphs are fixed PIXELS in Pine — they cannot follow a
+// price zoom. Exposed as an input so the size matches how you actually
+// view the chart, rather than pretending it adapts.
+MSZ = markerSize == "tiny" ? size.tiny : markerSize == "normal" ? size.normal : markerSize == "large" ? size.large : size.small
+plotshape(eventArmed, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=MSZ, text="TRG")
+plotshape(eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=MSZ, text="IN")
+plotshape(eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=MSZ, text="X")
+plotshape(eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=MSZ, text="BAIL")
 
 // ───────────────────────── Dashboard ─────────────────────────
 // V4.2: the original two-column layout (labels left, values right — the
