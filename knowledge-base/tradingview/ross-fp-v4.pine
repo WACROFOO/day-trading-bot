@@ -7,7 +7,10 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK V4 — V3 audited against this repo's measured rules.
+// ROSS FIRST PULLBACK — revision V4.7 (2026-08-17).
+// NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
+// script's revision. Our revision is the REV constant below and the V4.x tags.
+// V3 audited against this repo's measured rules.
 // Audit + divergence table: reports/2026-08-pine-v3-audit.md. V3 archived
 // alongside. Changes are marked  // V4:  with origin + evidence status.
 //
@@ -146,6 +149,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
+REV = "V4.7"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -787,7 +791,7 @@ f_row(int r, string label, string value, color vcolor) =>
 
 if barstate.islast
     table.clear(dash, 0, 0, 1, 10)
-    table.cell(dash, 0, 0, "ROSS FP V4", bgcolor=LBL, text_color=color.white,
+    table.cell(dash, 0, 0, "ROSS FP " + REV, bgcolor=LBL, text_color=color.white,
          text_size=DSZ, text_halign=text.align_left)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
          bgcolor=stateColor, text_color=color.black, text_size=DSZ)
