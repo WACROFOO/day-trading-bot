@@ -5,14 +5,34 @@ Reference material for building the day trading bot: traders studied, strategies
 ## Structure
 
 ```
-sources/      Profiles of traders/educators whose methods we study
-strategies/   The CANONICAL strategy documents (the only copy — see its README)
-transcripts/  Raw captions for the 257-video teaching shortlist
-summaries/    Per-video rule/threshold summaries (the claims DB is built from these)
-recaps/       Daily recap transcripts, June–July 2026, real upload dates (the calibration set)
-streams/      Live-stream transcripts, 2021–2023 (~1.3M words — decisions before the outcome)
-data/         Channel indexes, digests, and derived reference files
+THE ROSS MATERIAL
+  strategies/       The CANONICAL rules. FILTERS.md is the bible, PARAMETERS.md
+                    the numeric spec, SCANNERS.md the Day Trade Dash mapping
+  transcripts/      Raw captions, 258-video teaching shortlist — what he SAYS
+  recaps/           69 daily recaps, real upload dates — what he DID that day
+  streams/          290 live streams — decisions BEFORE the outcome was known
+  summaries/        Per-video rule/threshold summaries; the claims DB is built here
+  warrior-blog/     2,090 written articles in 26 topic folders, each with an index
+  warrior-support/  126 vendor help-desk articles. Platform mechanics ONLY —
+                    never a rule; FILTERS.md wins any disagreement
+  daytrade-dash/    His actual scanner platform: taxonomy, alert-export captures,
+                    the calibration protocol
+  tradingview/      Our Pine implementations — the strategy and the scanner
+  data/             Channel indexes, digests, derived reference files
+  sources/          Profiles of the traders/educators studied
+  prompts/          Reusable prompt scaffolds
+
+NOT THE ROSS MATERIAL — do not cross-reference, in either direction
+  orderflow-scalping/   A DIFFERENT trader's futures model. Self-contained.
 ```
+
+Top-level documents: `STUDY-PLAN.md`, `DAILY-ROUTINE-FR.md`,
+`TRADINGVIEW-SETUP.md`, `WARRIOR-BLOG-INDEX.md`, `60-DAY-PLAN.md`.
+
+**Navigate this by its indexes, not by grepping it.** `python3 scripts/kb.py
+where "term"` searches the index layer only and tells you which folder in one
+step; `kb.py open DIR` prints that folder's index. Grep is the fallback for
+when the index has failed, and `kb.py doctor` finds indexes that have.
 
 The three transcript registers differ in what they can prove: teaching videos
 explain setups after the fact, recaps narrate a finished day, and only the

@@ -25,6 +25,30 @@ The skills carry **format**; thresholds and rules live in
 `knowledge-base/strategies/FILTERS.md`, which wins every conflict. Fix a rule
 there first, then check whether a skill repeats it.
 
+## Search protocol — descend the index, never grep blind
+
+Every directory carries a README that is a real index. Grepping the tree
+throws that away: it returns hundreds of line-hits with no register attached,
+and **the register is usually the finding** (185 ABCD mentions in teaching
+against 3 in recaps is the answer, not a detail).
+
+Four steps, in order, stopping as soon as you have what you need:
+
+| step | command | answers |
+|---|---|---|
+| 1 | `python3 scripts/kb.py where "term"` | which folder — searches indexes only |
+| 2 | `python3 scripts/kb.py open DIR` | that folder's index + contents |
+| 3 | `python3 scripts/corpus.py "term"` | register split, then `--show`/`--files`/`--claims` |
+| 4 | grep | only when 1–3 failed |
+
+`python3 scripts/kb.py map` shows the whole tree at once. Before re-deriving
+anything, check `research/momentum-replication/reports/` — 27 measurements
+are already there.
+
+**If a search needed grep, an index failed.** Run `python3 scripts/kb.py
+doctor`, fix the index that omitted the directory, and commit that fix with
+the answer. An index nobody maintains sends the next reader back to grepping.
+
 ## Non-negotiable answer rules
 
 1. **Provenance — nothing is asserted that was not read this turn.** Two
@@ -39,9 +63,8 @@ there first, then check whether a skill repeats it.
    or does; every rule, threshold, parameter or scanner setting; every number
    attributed to the corpus or to a past measurement — must be **read out of a
    file in this turn and cited by path**, with the video id and timestamp for
-   anything spoken. Search it (`python3 scripts/corpus.py "term"`), read the
-   hit, quote from the hit. Check `research/momentum-replication/reports/`
-   before re-deriving anything.
+   anything spoken. Find it with the search protocol above, read the hit,
+   quote from the hit.
 
    **If it is not in the knowledge base, the answer is "not in the corpus".**
    Never close the gap from memory, never infer a number he did not state,

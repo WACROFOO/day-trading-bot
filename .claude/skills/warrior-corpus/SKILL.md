@@ -7,15 +7,27 @@ description: Search and cite the Ross Cameron / Warrior Trading corpus in this r
 
 Everything is local. Do not WebSearch for what he says — search the corpus.
 
-## Start here, always
+## Start here, always — index first, contents second
 
 ```bash
-python scripts/corpus.py --index                 # what exists and where
-python scripts/corpus.py "micro pullback"        # counts per register
+python3 scripts/kb.py where "micro pullback"     # 1. WHICH FOLDER (indexes only)
+python3 scripts/kb.py open knowledge-base/strategies   # 2. that folder's index
+python3 scripts/corpus.py --index                # 3. what exists per register
+python3 scripts/corpus.py "micro pullback"       # 4. counts per register
 ```
 
-`--index` costs nothing and prevents the most common error: answering from one
-register when another contradicts it.
+**Steps 1–2 are not optional politeness — they are what makes this fast.**
+`kb.py where` searches only README/INDEX files, so it answers "which folder"
+in one command instead of returning 400 undifferentiated line-hits. Every
+directory here has a real index; going straight to full-text search discards
+that work and is how a five-step answer becomes a fifteen-step one.
+
+`--index` then costs nothing and prevents the most common error: answering
+from one register when another contradicts it.
+
+If you find yourself reaching for grep, an index failed. Run
+`python3 scripts/kb.py doctor`, fix the index, and commit that with the
+answer — otherwise the next reader repeats your search.
 
 ## The registers are the method, not filing
 
@@ -67,11 +79,18 @@ link, not a paraphrase.
    made before the outcome was known.
 5. **State the register split when it is lopsided**, even when unasked.
 
-## Directory indexes
+## Directory indexes — the navigation layer
 
-Every directory has a `README.md` that is a real index — read it before
-listing files. `knowledge-base/warrior-blog/README.md` maps 14 categories;
-each category README lists its articles by length with source links.
+Every directory has a `README.md` that is a real index. **Read it before
+listing files.** `knowledge-base/warrior-blog/README.md` maps 26 category
+folders; each category README lists its articles by length with source links.
+
+`python3 scripts/kb.py map` prints the whole tree with each index's one-line
+purpose — the cheapest possible orientation when the question is unfamiliar.
+
+The index layer is maintained, not decorative: `kb.py doctor` fails when a
+README omits its own subdirectories, because a directory invisible in its
+parent index is a directory the next reader will grep for.
 `knowledge-base/warrior-support/README.md` maps 18 folders under the support
 portal's own 5 categories, so a folder name there is the vendor's own filing,
 not a guess of ours.
