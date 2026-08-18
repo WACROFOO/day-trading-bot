@@ -19,7 +19,7 @@ SOURCE  the 4 videos that walk the scanner library screen by screen:
   observation — every number below is a quoted scanner setting or a stated
   preference. Nothing here was checked against tape.py.
 ! THE PLATFORM'S OWN THRESHOLDS ARE SERVER-SIDE. They are not in the JS
-  bundle (`ross-tradingview-mastery/references/source-analysis.md`). Where he
+  bundle (`.claude/skills/ross-tradingview-mastery/references/source-analysis.md`). Where he
   never states a number, this document says UNKNOWN rather than guessing.
 ```
 
@@ -322,7 +322,7 @@ sometimes 100 (yg5E [00:12:48]).
 
 ## Corrections this research makes to our own spec
 
-`ross-tradingview-mastery/references/source-analysis.md` carried four numbers
+`.claude/skills/ross-tradingview-mastery/references/source-analysis.md` carried four numbers
 that the corpus now overrides. Recorded in place rather than deleted.
 
 | rule | was | now | why |
@@ -352,8 +352,8 @@ volume before the bell — float and short float only.
 
 **TradingView — the closest to the alert engine.** The Pine implementation and
 its per-strategy formulas live in
-`.claude/skills/ross-tradingview-mastery/` (`assets/ross_style_momentum_scanner.pine`,
-`references/source-analysis.md`). Apply the five corrections above before
+`.claude/skills/ross-tradingview-mastery/` (`.claude/skills/ross-tradingview-mastery/assets/ross_style_momentum_scanner.pine`,
+`.claude/skills/ross-tradingview-mastery/references/source-analysis.md`). Apply the five corrections above before
 using it.
 
 **Not reproducible anywhere in this repo:** true float feed, news/catalyst
@@ -374,9 +374,9 @@ threshold set — which is precisely the strategy he says fires earliest.
   approximated: Ross's Top Gappers, Large Cap Highest Volume, Top Change Since
   Open, Top of Trend (Large Cap), Short Squeeze, plain Squeeze Alert.
 - **None of this is evidence of profitability.** Replication over 894 sessions
-  produced negative expectancy (`reports/2026-08-regime-filter.md`), and the
+  produced negative expectancy (`research/momentum-replication/reports/2026-08-regime-filter.md`), and the
   documented edge in this population is on the short side and largely
-  unharvestable (`reports/2026-08-known-edges.md`). This is a **selection**
+  unharvestable (`research/momentum-replication/reports/2026-08-known-edges.md`). This is a **selection**
   document. Paper only.
 
 ---

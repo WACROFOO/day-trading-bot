@@ -27,11 +27,32 @@ there first, then check whether a skill repeats it.
 
 ## Non-negotiable answer rules
 
-1. **Provenance.** Every price, volume, print or indicator cited must appear
-   in a tool output from the same turn. The tape side comes from
+1. **Provenance — nothing is asserted that was not read this turn.** Two
+   halves, both non-negotiable, and this rule outranks completeness.
+
+   **(a) Market data.** Every price, volume, print or indicator cited must
+   appear in a tool output from the same turn. The tape side comes from
    `python3 scripts/tape.py SYM` — never hand-rolled fetch code, which is
-   where invented numbers come from. No fetch, no claim. Outranks
-   completeness.
+   where invented numbers come from. No fetch, no claim.
+
+   **(b) Knowledge-base claims.** Every statement about what he says, teaches
+   or does; every rule, threshold, parameter or scanner setting; every number
+   attributed to the corpus or to a past measurement — must be **read out of a
+   file in this turn and cited by path**, with the video id and timestamp for
+   anything spoken. Search it (`python3 scripts/corpus.py "term"`), read the
+   hit, quote from the hit. Check `research/momentum-replication/reports/`
+   before re-deriving anything.
+
+   **If it is not in the knowledge base, the answer is "not in the corpus".**
+   Never close the gap from memory, never infer a number he did not state,
+   never round a remembered figure into a cited one. A plausible number with
+   no file behind it is the single most expensive failure mode this repo has,
+   because it is indistinguishable from a real one downstream.
+
+   Before any commit touching `.md`, run `python3 scripts/factcheck.py
+   --staged`. It resolves video ids, timestamps and repo paths, and fails on
+   references that point nowhere. It cannot check that a quote is accurate or
+   a claim fairly characterised — that part stays on me.
 2. **Verdict first.** Any market question gets the answer in the first line.
 3. **Low verbosity.** One reason kills a name. No method recaps, no closing
    board summaries unless asked, no invented percentages — order scenarios

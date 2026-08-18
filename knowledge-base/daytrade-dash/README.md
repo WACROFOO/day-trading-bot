@@ -43,7 +43,8 @@ The trial's value is measured divergence, not admiration. Every capture:
      tighter server-side thresholds)
    - rank disagreements in the top 5 (their sort vs our gap-% sort)
 5. After ≥3 sessions of captures, write the divergence report to
-   `research/momentum-replication/reports/2026-08-dash-calibration.md` and
+   research/momentum-replication/reports/2026-08-dash-calibration.md
+   (NOT YET WRITTEN — planned output, not a citation) and
    only then adjust premarket_stars.py dials — one change per measured gap,
    origin SOURCE (observed), never guessed.
 
