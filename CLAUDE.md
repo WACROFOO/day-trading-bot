@@ -52,7 +52,8 @@ there first, then check whether a skill repeats it.
 ## Layout
 
 - `knowledge-base/strategies/` — Ross method. `FILTERS.md` is the bible;
-  `PARAMETERS.md` the numeric spec
+  `PARAMETERS.md` the numeric spec; `SCANNERS.md` the Day Trade Dash strategies
+  mapped to what he says they filter for (discovery layer, never a gate)
 - `knowledge-base/orderflow-scalping/` — a DIFFERENT trader's futures model.
   Self-contained: never cross-reference it with the Ross material, either way
 - `./now [SYM…]` — the standard terminal report: market phase (pre-market /

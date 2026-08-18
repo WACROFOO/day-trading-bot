@@ -6,6 +6,8 @@ been removed after one drifted (see
 
 | File | What it is | Edit? |
 |---|---|---|
+| `FILTERS.md` | **The filter bible** — every gate in the order it fires, post-audit. Wins any conflict with a skill | by hand |
+| `SCANNERS.md` | The discovery layer: every named Day Trade Dash strategy mapped to what he says it filters for, with register + timestamp. Companion to `FILTERS.md`, not a substitute for it | by hand |
 | `PARAMETERS.md` | The numeric spec. Every rule with an `n=` evidence count. **§13 lists the misreading traps** — an implementation attempt produced ~20 defects and not one was a wrong number here; all were misreadings §13 now documents | by hand |
 | `PLAYBOOK.md` | The same rules as a step-by-step execution sequence | by hand |
 | `STRATEGY.md` | Prose description of the strategy | by hand |

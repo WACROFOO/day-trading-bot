@@ -1,5 +1,12 @@
 # Warrior scanner source analysis and clean-room TradingView mapping
 
+> **Superseded values, 2026-08-18.** Five formulas below were written before
+> the Warrior corpus was searched for scanner definitions. The corpus states
+> four of them outright. Corrections are marked `SUPERSEDED →` in place; the
+> original wording is kept because the reasoning is the asset. Full evidence,
+> with register and timestamp for every threshold, is in
+> `knowledge-base/strategies/SCANNERS.md`.
+
 ## Result
 
 The scanner formulas are not embedded in the public page HTML or hard-coded in the downloadable JavaScript bundle. The delivered client is a user interface and transport layer. Scanner widgets, data-point definitions, strategies and filter values are obtained from protected server APIs.
@@ -119,12 +126,19 @@ Recommended transparent starting limit: 20 million shares. This is an independen
 ### Ross-style Five Pillars list
 
 ```text
-2 <= price <= 20
+2 <= price <= 20          # "between 5 and 10 is even better"
 percentage change from prior close >= 10
 daily relative volume >= 5
-verified float <= 20 million
+verified float <= 20 million     # SUPERSEDED -> < 10 million
 news/catalyst = manual external check
 ```
+
+`SUPERSEDED ->` **float < 10 million.** Pillar 5 verbatim: *"the float should
+be less than 10 million shares, but lower is also better"*
+(`oKlhUSSHe2Q` [00:30:38]). 20M is the *scanner dial* from `FILTERS.md`
+Layer 0, not the pillar. Also confirmed: this alert is a **state**, not an
+event — rows drop off when a name stops meeting the criteria
+(`oKlhUSSHe2Q` [00:31:18]), so it cannot be implemented as an append-only feed.
 
 The technical list should expose four automatic tests and keep catalyst/news as a separate manual field.
 
@@ -144,9 +158,19 @@ Recommended starting five-minute RVOL threshold: 2x. Calibrate this against Warr
 ```text
 100 × (current_close / close_N_minutes_ago - 1) >= configured_move
 AND five-minute relative volume >= configured threshold
+AND last_price < high_of_day                      # ADDED, confirmed
 ```
 
-Transparent starting point: 3% in 2 minutes with five-minute RVOL of at least 2x.
+`SUPERSEDED ->` **the below-high-of-day exclusion is definitional**, not
+optional: *"the running up scanner tells me when a stock is squeezing up right
+now even if it's below its high of day. **In fact, it has to be below the high
+of day. Otherwise we'll put it on the high of day momentum scanner.**"*
+(`w97KlUrVDk0` [01:00:52]). Running Up and HOD Momentum are complement sets.
+Without the exclusion the two widgets duplicate each other and the trade the
+scanner exists to surface — an entry below the day's high — is lost.
+
+Move size and window remain UNKNOWN. Transparent starting point: 3% in 2
+minutes with five-minute RVOL of at least 2x.
 
 ### Explicit Squeeze branches
 
@@ -154,6 +178,12 @@ Transparent starting point: 3% in 2 minutes with five-minute RVOL of at least 2x
 5-minute squeeze  = move over approximately 5 minutes >= 5%
 10-minute squeeze = move over approximately 10 minutes >= 10%
 ```
+
+Both windows are CONFIRMED (`w97KlUrVDk0` [00:58:40], `yg5E_mqGFGg`
+[00:16:36], [00:17:16]); the 5/5 branch is described as *"kind of like a
+pre-alert"* for the 10/10. Audio alerts are enabled on the 10/10 branch and
+the low-float branches only — *"the others I don't use audio alerts for"*
+(`yg5E_mqGFGg` [00:19:36]).
 
 Add a volume confirmation to reduce illiquid single-print alerts.
 
@@ -171,7 +201,23 @@ The prior-high calculation must exclude the current daily bar.
 highest one-day percentage gain during the preceding 120 sessions >= configured threshold
 ```
 
-Transparent starting threshold: 50%. This is only a proxy for Warrior's private former-runner classification.
+~~Transparent starting threshold: 50%.~~ `SUPERSEDED ->` **100%.** He states
+it: *"low float former momentum stock. That means this is a stock that in the
+past went up **over 100% in one day**, and that's in the recent past"*
+(`w97KlUrVDk0` [00:58:29]). 50% roughly doubles the candidate pool against
+what he describes.
+
+**Second confirmed property, previously missing: this strategy runs on
+loosened thresholds so it fires earlier than the others.** *"Low float former
+momo stocks, when they pick up, they can start moving really quickly, and so
+for that reason I want to see them a little sooner… some of the filters are
+adjusted a little bit so I could see it quicker. I don't do that for every
+type of stock because otherwise you start getting a lot of false alerts"*
+(`yg5E_mqGFGg` [00:16:03]). A replica applying one threshold set across all
+HOD branches has deleted the early-warning this branch exists for.
+
+The lookback window and the exact loosening remain UNKNOWN; it is still a
+proxy for Warrior's private former-runner database.
 
 ### High of Day Momentum family
 
@@ -188,12 +234,44 @@ Then classify the event using independently configured branches:
 - low float + medium RVOL;
 - low float + high RVOL;
 - low float + high RVOL + price above $20;
-- low float + high ATR percentage;
+- low float + high ATR percentage; `SUPERSEDED ->` the stated component is **float sub-1 million shares** (*"low float volatility hunter — it's a low float stock, sub 1 million shares"*, `w97KlUrVDk0` [00:58:35]). The ATR half is still our inference.
 - former-momentum proxy;
 - medium float + medium/high RVOL;
 - 5% in 5 minutes;
 - 10% in 10 minutes;
 - 52-week breakout.
+
+### Reversal family — CONFIRMED, previously absent from this document
+
+The platform ships ten reversal strategies and this reference had none.
+
+```text
+V5 variant   >= 3 consecutive same-direction candles
+V8 variant   >= 4 consecutive same-direction candles
+timeframe    5-minute (a 1-minute variant also ships)
+direction    consecutive green -> top reversal (short)
+             consecutive red   -> bottom reversal (long)
+extremes     RSI > 80 or < 20        <- what the shipped hybrid filters
+             RSI > 90 or < 10        <- what he says interests him
+             candle FULLY outside Bollinger Bands, 20 period / 2 std dev
+ideal        5-10 consecutive candles ending in a pin bar or doji
+entry        first candle to make a new low (short), stop at the high
+```
+
+Sources: `eCSzHYl8apo` [00:10:03], [00:10:30], [00:11:17], [00:11:49],
+[00:11:56]; `jfe1Zl-5EQI` [00:17:55], [00:18:10], [00:20:07], [00:20:41];
+`yg5E_mqGFGg` [00:21:08].
+
+**V5 and V8 are one dial, not two settings.** He switches between them
+intraday to keep the alert rate followable: *"some days we'll have so many
+alerts you can't follow them all, so you go to the V8. Other days there are so
+few alerts on the V8 you want more ideas, so you look at the V5"*
+(`eCSzHYl8apo` [00:12:04]).
+
+**Register warning.** Ten shipped reversal strategies against 5 teaching
+files, **0 video recaps** and 2 streams in the corpus; `bollinger` is 0 in
+both streams and recaps. Implement it if you want the platform mapped —
+do not treat it as a strategy he trades.
 
 ## Calibration procedure
 

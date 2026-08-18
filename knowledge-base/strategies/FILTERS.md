@@ -28,6 +28,12 @@ Finviz free serves **last session's** price/change/volume before the bell. Use
 it for float, short float and news — never to rank pre-market gappers. For live
 `premarket_change`, use TradingView.
 
+The dials above are ours, applied to a finviz/TradingView screen. **What his
+own platform's named strategies filter for — Top Gappers at 7%, the squeeze
+windows, Former Momo at "over 100% in one day", Running Up's below-high-of-day
+exclusion, the V5/V8 reversal split — is `SCANNERS.md`.** That document is
+discovery only; nothing in it overrides a gate here.
+
 **Sort by gap % descending and work top-down.** *"This is the way I have it every
 morning... if I don't see something right away that I like, I move on."*
 
