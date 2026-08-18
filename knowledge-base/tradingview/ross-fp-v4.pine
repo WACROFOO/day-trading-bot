@@ -7,7 +7,7 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK — revision V4.9.1 (2026-08-17).
+// ROSS FIRST PULLBACK — revision V4.10 (2026-08-18).
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -159,7 +159,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V4.9.1"                       // bump on every shipped change
+REV = "V4.10"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -555,6 +555,29 @@ candidateRisk = candidateTrigger - candidateStop
 candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
 candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
 candidateRRtoPeak = f_safeDiv(pushPeak - candidateTrigger, candidateRisk, -999.0)
+
+// V4.10: HIGH OF DAY. Origin SOURCE, corroborated MEASURED.
+// The script tracked only the local impulse peak, which is the wrong obstacle
+// whenever the impulse is a LOWER high. Two source statements make the day's
+// high the object that matters:
+//   "targets a break through the high of day"      _4Q0hlNFn-A @00:46:41
+//   "it cannot break through high of day..."       IHeJROuEzRU @00:01:06
+// and the platform capture (2026-08-18, 299/299 alerts vs a 4.7% base rate)
+// shows every scanner branch triggering only on a NEW high of day.
+// Above the HOD nobody is holding a losing position — that is the whole
+// supply/demand argument (js25lIZMUSY @00:22:49). Below it, there is trapped
+// supply between the trigger and open air, and the script was blind to it.
+newDay = ta.change(time("D")) != 0
+var float dayHigh = na
+dayHighPrev = newDay or na(dayHigh) ? na : dayHigh
+dayHigh := newDay or na(dayHigh) ? high : math.max(dayHigh, high)
+
+// room to the day's high, in R — the honest overhead measure
+candidateRRtoHOD = f_safeDiv(dayHigh - candidateTrigger, candidateRisk, -999.0)
+// is this impulse making the high, or is it a lower high under trapped supply?
+peakIsHOD = not na(pushPeak) and not na(dayHigh) and pushPeak >= dayHigh - syminfo.mintick
+// the FIRST obstacle above the trigger is what a 1R move must clear
+nextObstacleR = candidateTrigger < pushPeak ? candidateRRtoPeak : candidateRRtoHOD
 candidateRiskShares = candidateRisk > 0 ? math.floor(riskBudget / candidateRisk) : 0.0
 candidateCapitalShares = candidateTrigger > 0 ? math.floor(maxPositionValue / candidateTrigger) : 0.0
 candidateShares = math.min(candidateRiskShares, candidateCapitalShares)
@@ -703,9 +726,19 @@ displayRiskCash = not na(displayShares) and not na(displayRiskDollar) ? displayS
 // TRUG 2026-08-17 armed a trigger 4 cents under the impulse peak with a
 // 5-cent stop — 0.4R of room — and the dashboard rendered that in silver
 // next to the share count. A warning nobody can see is not a warning.
-thinRoom = not na(candidateRRtoPeak) and candidateRRtoPeak < 1.0 and
+// V4.10: measured against the NEAREST obstacle, not always the impulse peak.
+// A setup whose trigger already sits above the impulse peak still has the
+// day's high overhead; before this, that case reported the peak's room and
+// read as clear.
+thinRoom = not na(nextObstacleR) and nextObstacleR < 1.0 and
      (setupState == PULLBACK or setupState == ARMED)
-roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(displayRR, "#.1") + "R TO PRIOR HIGH — " : ""
+roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(nextObstacleR, "#.1") + "R TO " +
+     (candidateTrigger < pushPeak ? "PRIOR HIGH" : "HIGH OF DAY") + " — " : ""
+// V4.10: a first pullback under a LOWER high is a different trade from one
+// making new highs. Named, not silently averaged in with the good case.
+lowerHighTag = not peakIsHOD and not na(dayHigh) and
+     (setupState == PULLBACK or setupState == ARMED) ?
+     "  · LOWER HIGH (HOD " + str.tostring(dayHigh, format.mintick) + ")" : ""
 
 stateColor =
      setupState == LONG ? color.lime :
@@ -731,8 +764,8 @@ liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
 actionText =
      not isOneMinute ? "USE 1-MINUTE CHART" :
      setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag + liveTag :
-     setupState == ARMED ? roomWarn + "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + windowTag + liveTag :
-     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + windowTag + liveTag :
+     setupState == ARMED ? roomWarn + "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + lowerHighTag + windowTag + liveTag :
+     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + lowerHighTag + windowTag + liveTag :
      setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag + liveTag :
      chartVerdict + " — no setup yet" + windowTag + liveTag
 
@@ -740,6 +773,9 @@ actionText =
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
 
 plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr)
+// V4.10: the day's high drawn as the obstacle it is. Dotted so it never reads
+// as an entry/stop/target level — green and red stay reserved for TP and SL.
+plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles)
 plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
 // V4.9: half-width follows the instrument's own volatility so the band
 // keeps the same visual weight whatever the price scale.
@@ -813,7 +849,7 @@ plotshape(lg and eventBailout, title="Bailout (large)", style=shape.labeldown, l
 // em dashes for absents. dashFull adds the three diagnostic rows.
 LBL = color.rgb(28, 28, 30)
 DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
-var table dash = table.new(position.bottom_right, 2, 11, border_width=0)
+var table dash = table.new(position.bottom_right, 2, 12, border_width=0)
 
 f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
@@ -822,7 +858,7 @@ f_row(int r, string label, string value, color vcolor) =>
          text_size=DSZ, text_halign=text.align_left)
 
 if barstate.islast
-    table.clear(dash, 0, 0, 1, 10)
+    table.clear(dash, 0, 0, 1, 11)
     table.cell(dash, 0, 0, "ROSS FP " + REV, bgcolor=LBL, text_color=color.white,
          text_size=DSZ, text_halign=text.align_left)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
@@ -843,10 +879,20 @@ if barstate.islast
     f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
          "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
 
+    // V4.10: the day's high, and whether this impulse is the one making it.
+    // Every scanner branch measured on 2026-08-18 fired only on a new HOD, and
+    // the source names a failure to break it as the exit tell — so it belongs
+    // on the face of the dashboard, not implied by the R/S row.
+    f_row(8, "HIGH OF DAY", f_px(dayHigh) +
+         (peakIsHOD ? "  · impulse IS the high" : "  ⚠ lower high") +
+         (not na(candidateRRtoHOD) and candidateRRtoHOD > -900 ?
+              "  · " + f_n(candidateRRtoHOD, "#.1") + "R away" : ""),
+         peakIsHOD ? color.lime : color.orange)
+
     if dashFull
-        f_row(8, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-        f_row(9, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
-    f_row(10, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
+        f_row(9, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
+        f_row(10, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
+    f_row(11, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed

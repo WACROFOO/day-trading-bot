@@ -31,10 +31,23 @@ bool  catalystConfirmed = input.bool(false, "News/catalyst confirmed manually", 
      tooltip = "Pine cannot determine whether Warrior's flame/news criterion is present. Confirm news separately, then enable this for the chart symbol.")
 
 string GROUP_MOMO = "2. Momentum approximations"
-float minFiveMinRvol = input.float(2.0, "Minimum 5-minute relative volume", minval = 0.1, step = 0.25, group = GROUP_MOMO)
+// V3 (MEASURED 2026-08-18): default 2.0 -> 1.0. The platform fired Former Momo
+// on IPST at 5-min RVOL 102.4% (=1.024x) and Volatility Hunter on WETO at
+// 172.4% (=1.724x). A 2.0x floor blocks both — and they are exactly the two
+// loosest branches, consistent with the measured finding that Former Momo runs
+// the lowest thresholds. Per-branch strictness stays in mediumRvol/highRvol
+// below; this gate means "at or above average", which is what its name says.
+// NOTE ON UNITS: the platform exports this column as a PERCENT (102.4);
+// this input is a RATIO (1.024). Do not paste one into the other.
+float minFiveMinRvol = input.float(1.0, "Minimum 5-minute relative volume (ratio, not %)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
 float runningUpPct   = input.float(3.0, "Running Up: minimum move (%)", minval = 0.1, step = 0.25, group = GROUP_MOMO)
 int   runningUpMins  = input.int(2, "Running Up: lookback (minutes)", minval = 1, maxval = 30, group = GROUP_MOMO)
-float lowFloatMaxM   = input.float(20.0, "Low-float ceiling (millions)", minval = 0.1, step = 1.0, group = GROUP_MOMO)
+// MEASURED 2026-08-18: low-float branches fired on XOS at 8.40M float; the
+// medium branch fired on WFF at 41.92M and no low-float branch did. The real
+// boundary is therefore bracketed to (8.40M, 41.92M]. The 20.0 default sits
+// INSIDE that bracket, so it is consistent with observation but not confirmed
+// by it — do not read it as the platform's value.
+float lowFloatMaxM   = input.float(20.0, "Low-float ceiling (millions) [bracketed 8.4-41.9]", minval = 0.1, step = 1.0, group = GROUP_MOMO)
 float mediumFloatMaxM = input.float(100.0, "Medium-float ceiling (millions)", minval = 1.0, step = 5.0, group = GROUP_MOMO)
 float highRvol       = input.float(5.0, "High relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
 float mediumRvol     = input.float(2.0, "Medium relative-volume threshold", minval = 0.1, step = 0.25, group = GROUP_MOMO)
@@ -94,7 +107,13 @@ if newTradingDay or na(intradayHigh)
 else
     intradayHigh := math.max(intradayHigh, high)
 
-bool newHod = not na(highBeforeThisBar) and high > highBeforeThisBar and close > highBeforeThisBar
+// V3 (MEASURED 2026-08-18): the "close > highBeforeThisBar" term was removed.
+// Against 299 real platform alerts (captures/2026-08-18-momo-alerts.csv), the
+// alert bar's HIGH exceeded the prior high 299/299 times, but its CLOSE did so
+// only 196/299 — the close condition would have missed 34.4% of genuine alerts.
+// A new high of day is made by the print, not by where the minute happens to
+// settle. Origin: MEASURED against exported output.
+bool newHod = not na(highBeforeThisBar) and high > highBeforeThisBar
 bool aboveAverageMomentum = not na(fiveMinRvol) and fiveMinRvol >= minFiveMinRvol
 bool hodMomentum = newHod and aboveAverageMomentum and close > open
 
