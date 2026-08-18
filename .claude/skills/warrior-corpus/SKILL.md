@@ -1,6 +1,6 @@
 ---
 name: warrior-corpus
-description: Search and cite the Ross Cameron / Warrior Trading corpus in this repo — 258 teaching transcripts, 69 daily recaps, 290 live streams, 2,063 written blog articles, 7,937 tagged claims, and 23 measurement reports. Use whenever a question is about what he says, teaches, or did; about a strategy rule, parameter, pattern, or indicator; or before re-deriving anything this project has already measured.
+description: Search and cite the Ross Cameron / Warrior Trading corpus in this repo — 258 teaching transcripts, 69 daily recaps, 290 live streams, 2,063 written blog articles, 126 help-desk articles, 7,937 tagged claims, and 23 measurement reports. Use whenever a question is about what he says, teaches, or did; about a strategy rule, parameter, pattern, or indicator; about how the Warrior platform, scanners or chat room behave; or before re-deriving anything this project has already measured.
 ---
 
 # Warrior Trading corpus
@@ -25,6 +25,7 @@ register when another contradicts it.
 | `recaps` | 69 | what he **did** that day — labelled outcomes, the calibration set |
 | `streams` | 290 | decisions made **before** the outcome was known |
 | `blog` | 2,063 | edited written prose, dated; **419 are written trade recaps** |
+| `support` | 126 | help desk — what the **platform** does, never what the method is |
 | `strategy-docs` | 9 | our spec; `PARAMETERS.md` is the numeric source of truth |
 | `reports` | 23 | **what this project already measured** |
 
@@ -71,6 +72,9 @@ link, not a paraphrase.
 Every directory has a `README.md` that is a real index — read it before
 listing files. `knowledge-base/warrior-blog/README.md` maps 14 categories;
 each category README lists its articles by length with source links.
+`knowledge-base/warrior-support/README.md` maps 18 folders under the support
+portal's own 5 categories, so a folder name there is the vendor's own filing,
+not a guess of ours.
 
 ## Corpus-specific gotchas
 
@@ -81,11 +85,18 @@ each category README lists its articles by length with source links.
 - `NOT-FETCHED.md` lists 99 URLs with no extractable text (36 are video-only
   stubs whose transcript is already in `recaps/` or `streams/`).
 - Blog files carry `<!-- source: URL -->` and `<!-- lastmod: DATE -->` headers.
+- `support` is a **vendor manual, not a method register**: it answers "why did
+  my pre-market order reject" or "what does that scanner column mean", never
+  "is this a good entry". Do not cite it for a rule — `FILTERS.md` wins, and a
+  disagreement between the two is a support-article staleness bug, not a rule
+  change. Its files carry a `<!-- modified: DATE -->` header; several are years
+  old and describe screens that have since been redesigned.
 
 ## Refetching
 
 ```bash
-python scripts/fetch_warrior_fast.py       # idempotent, resumable
+python scripts/fetch_warrior_fast.py        # blog + transcripts, resumable
+python scripts/fetch_warrior_support.py     # help desk, cached, cheap re-runs
 ```
 
 Uses one curl per batch with `--compressed --http2 --parallel`. Do **not**

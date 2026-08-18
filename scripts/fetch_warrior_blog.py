@@ -194,8 +194,14 @@ def fetch_one(item):
     dest = os.path.join(OUT, category(u), slug_of(u)[:90] + '.md')
     if os.path.exists(dest) and os.path.getsize(dest) > 400:
         txt = open(dest, encoding='utf-8', errors='replace').read()
-        m = re.search(r'^# (.+)$', txt, re.M)
-        return u, mod, (m.group(1) if m else ''), txt.split('\n\n', 1)[-1]
+        # Split on the title line, not the first blank one. The header is two
+        # comment lines THEN a blank THEN "# Title", so splitting on the blank
+        # hands the title back as body text and main() writes it a second time
+        # — every cached re-run added another copy. strip('\n') for the same
+        # reason on the other end: main() re-appends the trailing newline.
+        m = re.search(r'(?m)^# (.+)$', txt)
+        return u, mod, (m.group(1) if m else ''), \
+            (txt[m.end():] if m else txt).strip('\n')
     raw = curl(u)
     time.sleep(DELAY)
     if len(raw) < 2000:

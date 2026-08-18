@@ -12,6 +12,7 @@ checking more than one.
     recaps/          69 daily recaps      what he DID that day (labelled)
     streams/        289 live streams      decisions BEFORE the outcome is known
     warrior-blog/  2063 written articles  edited, dated prose
+    warrior-support/126 help-desk articles what the PLATFORM does, not the method
     data/claims.db 7937 tagged claims     deep-linked to a video timestamp
 
 So the default output is a per-register breakdown, not a flat list. A term that
@@ -46,6 +47,8 @@ REGISTERS = [
      'decisions made BEFORE the outcome was known — the honest register'),
     ('blog', os.path.join(KB, 'warrior-blog'),
      'edited written prose, dated; 419 of these are written trade recaps'),
+    ('support', os.path.join(KB, 'warrior-support'),
+     'help desk — platform mechanics, order rejects, scanner columns; never a rule'),
     ('strategy-docs', os.path.join(KB, 'strategies'),
      'our canonical spec — PARAMETERS.md is the numeric source of truth'),
     ('reports', os.path.join(ROOT, 'research', 'momentum-replication', 'reports'),
@@ -102,9 +105,12 @@ def main():
             print(f'  {"":<14}            {why}')
         print(f'\n  claims.db      7937 claims / 1749 params / 10218 chunks, '
               f'each deep-linked to a video timestamp')
-        print('\n  blog categories:')
-        bp = os.path.join(KB, 'warrior-blog')
-        if os.path.isdir(bp):
+        for label, sub in (('blog categories', 'warrior-blog'),
+                           ('support folders', 'warrior-support')):
+            bp = os.path.join(KB, sub)
+            if not os.path.isdir(bp):
+                continue
+            print(f'\n  {label}:')
             for c in sorted(os.listdir(bp)):
                 d = os.path.join(bp, c)
                 if os.path.isdir(d) and not c.startswith('.'):

@@ -1,0 +1,117 @@
+[
+ {
+  "category": "Member Login & Subscription Management",
+  "folders": [
+   {
+    "name": "Logging In",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000155681",
+    "slug": "logging-in"
+   },
+   {
+    "name": "Managing My Subscriptions and Member Account",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000151471",
+    "slug": "managing-my-subscriptions-and-member-account"
+   },
+   {
+    "name": "What does my subscription include?",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000155685",
+    "slug": "what-does-my-subscription-include"
+   }
+  ]
+ },
+ {
+  "category": "Using the Warrior Trading Platform (Day Trade Dash, Community, and Simulator)",
+  "folders": [
+   {
+    "name": "Live Trading & Chat Room with Live Stream: How to Use the Platform",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000165286",
+    "slug": "live-trading-chat-room-with-live-stream-how-to-use-the-platf"
+   },
+   {
+    "name": "Live Trading & Chat Room: Troubleshooting & Errors",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000165867",
+    "slug": "live-trading-chat-room-troubleshooting-errors"
+   },
+   {
+    "name": "News Feed (Day Trade Dash)",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000178222",
+    "slug": "news-feed-day-trade-dash"
+   },
+   {
+    "name": "Stock Scanners (Day Trade Dash)",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000167768",
+    "slug": "stock-scanners-day-trade-dash"
+   },
+   {
+    "name": "Charting (Day Trade Dash and Web-Based Sim)",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000171870",
+    "slug": "charting-day-trade-dash-and-web-based-sim"
+   },
+   {
+    "name": "Web Simulator (New!)",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000178514",
+    "slug": "web-simulator-new"
+   }
+  ]
+ },
+ {
+  "category": "About Warrior Trading Memberships & Services",
+  "folders": [
+   {
+    "name": "Our Products and Services",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000162594",
+    "slug": "our-products-and-services"
+   },
+   {
+    "name": "Trading Chat Room, Simulator, and Classes",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000155677",
+    "slug": "trading-chat-room-simulator-and-classes"
+   },
+   {
+    "name": "Discounts, Rebate Programs, and Free Online Training Workshop",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000151470",
+    "slug": "discounts-rebate-programs-and-free-online-training-workshop"
+   },
+   {
+    "name": "Profitability Badge Applications",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000169193",
+    "slug": "profitability-badge-applications"
+   }
+  ]
+ },
+ {
+  "category": "Education Portal and Educational Resources",
+  "folders": [
+   {
+    "name": "Using the Education Portal (Trading Course Platform)",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000146296",
+    "slug": "using-the-education-portal-trading-course-platform"
+   },
+   {
+    "name": "Trading Questions",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000151053",
+    "slug": "trading-questions"
+   },
+   {
+    "name": "Live Trading Tools & Layouts",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000167008",
+    "slug": "live-trading-tools-layouts"
+   },
+   {
+    "name": "Transitioning from WT Sim to a Live Account",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000166956",
+    "slug": "transitioning-from-wt-sim-to-a-live-account"
+   }
+  ]
+ },
+ {
+  "category": "General Tech Support",
+  "folders": [
+   {
+    "name": "General Tech How-Tos",
+    "url": "https://support.warriortrading.com/support/solutions/folders/19000162983",
+    "slug": "general-tech-how-tos"
+   }
+  ]
+ }
+]

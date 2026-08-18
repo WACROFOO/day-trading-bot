@@ -56,6 +56,9 @@ there first, then check whether a skill repeats it.
   mapped to what he says they filter for (discovery layer, never a gate)
 - `knowledge-base/orderflow-scalping/` — a DIFFERENT trader's futures model.
   Self-contained: never cross-reference it with the Ross material, either way
+- `knowledge-base/warrior-support/` — the vendor help desk, 126 articles in the
+  portal's own folders. Platform mechanics only (order rejects, scanner
+  columns, halt display). Never a rule: `FILTERS.md` wins any disagreement
 - `./now [SYM…]` — the standard terminal report: market phase (pre-market /
   open / after-hours), countdown to the next boundary, then the `tape.py`
   workup of the watchlist (`./now --set SYM SYM`, `./now --scan` pre-market)
