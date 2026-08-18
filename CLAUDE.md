@@ -127,6 +127,8 @@ back to grepping, and the log is there so a pattern of excuses is visible.
 - `knowledge-base/warrior-support/` — the vendor help desk, 126 articles in the
   portal's own folders. Platform mechanics only (order rejects, scanner
   columns, halt display). Never a rule: `FILTERS.md` wins any disagreement
+- `knowledge-base/daytrade-dash/PLAYBOOK.md` — the platform session block by
+  block: which Dash scanner, which column, which minute
 - `./now [SYM…]` — the standard terminal report: market phase (pre-market /
   open / after-hours), countdown to the next boundary, then the `tape.py`
   workup of the watchlist (`./now --set SYM SYM`, `./now --scan` pre-market)
@@ -138,7 +140,8 @@ back to grepping, and the log is there so a pattern of excuses is visible.
 
 ## Session
 
-Money window 09:35–11:00 ET, hard stop 11:30 (13:00–17:30 France). The
+Prime window 09:35–10:30 ET, typical close 11:00, hard stop 11:30 —
+the outer edge, not the centre (`PARAMETERS.md` §2, n=44/16). The
 pre-market 07:00–09:30 ET can contain the whole move (JWEL 2026-08-10).
 Blotter timestamps are usually France local = ET + 6h in summer.
 

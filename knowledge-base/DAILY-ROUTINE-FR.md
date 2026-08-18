@@ -9,6 +9,14 @@ converted. Risk numbers are for a €500 account at the documented 2% per trade.
 
 | France | ET | Phase | What happens |
 |---|---|---|---|
+> **Boundaries corrected 2026-08-18** against `strategies/PARAMETERS.md` §2 and
+> `daytrade-dash/PLAYBOOK.md`: prime is **09:35–10:30 ET**, typical close
+> **11:00**, hard stop **11:30** (the outer edge, not the centre). 04:00 is when
+> the *platform* opens; **07:00 is when the session starts** — that is where
+> `07:00` is named 78× against 36× for `09:30` across 36 July recaps.
+> Account basis below (€500) differs from the `trading-day` skill ($100k paper);
+> that split is deliberate and unresolved — pick one before sizing anything.
+
 | 10:00 | 04:00 | Early pre-market | Nothing to do. Scanners can run, but volume is too thin to judge |
 | **13:00** | 07:00 | **Pre-market opens properly** | First real look. Gap scanner on |
 | **14:00** | 08:00 | **News window** | Catalysts land. This is pillar #3 |

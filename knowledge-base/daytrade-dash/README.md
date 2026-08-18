@@ -8,6 +8,10 @@ the platform's actual formula. Trial data has an expiry date; capture first,
 interpret later.
 ```
 
+**The session, block by block: [`PLAYBOOK.md`](PLAYBOOK.md)** — which widget,
+which column, which minute, 04:00 → 20:00 ET with France times. This README
+holds the evidence; the playbook holds the operating order.
+
 ## The scanner taxonomy, as retrieved 2026-08-17
 
 | scanner | what it appears to do | our equivalent |

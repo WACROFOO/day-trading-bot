@@ -39,22 +39,51 @@ FR = ZoneInfo('Europe/Paris')
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WATCHLIST = os.path.join(ROOT, 'watchlist.txt')
 
+# (minutes from ET midnight, label, repo action, Day Trade Dash action)
+#
+# The 4th field is the PLATFORM lane, kept visibly separate from the repo lane
+# because they answer different questions: Dash says which name, our tools say
+# whether it survives the reject cascade. Full block detail and every source:
+# knowledge-base/daytrade-dash/PLAYBOOK.md
+#
+# Boundaries changed 2026-08-18 to match that playbook. Before this there was
+# no 07:00 boundary at all - 04:00-09:30 was one undifferentiated PRE-MARKET
+# block, which is why the 07:00 rule lived only in prose while the clock said
+# nothing. 10:30 is new too: PARAMETERS.md §2 puts prime at 09:30-10:30 (n=44)
+# and the typical close at "the 90-minute mark", so 09:35-11:00 as one flat
+# block overstated the back half by 30 minutes.
 PHASES = [
-    (0,        'CLOSED',        'nothing to do'),
-    (4 * 60,   'PRE-MARKET',    'scan: ./now --scan   (the move can happen HERE - JWEL ran 07:00-07:45)'),
-    (9 * 60 + 30, 'OPENING DRIVE', 'HANDS OFF - let the first candles print'),
-    (9 * 60 + 35, 'MONEY WINDOW', 'pullbacks 1-2 only, tape.py before every entry'),
-    (11 * 60,  'WIND-DOWN',     'new entries only on a perfect setup'),
-    (11 * 60 + 30, 'OFF-BOOK',  'past the hard stop - review, do not trade'),
-    (16 * 60,  'AFTER HOURS',   'session over - run trade-review if trades were taken'),
-    (20 * 60,  'CLOSED',        'nothing to do'),
+    (0,            'CLOSED',        'nothing to do', ''),
+    (4 * 60,       'PRE-MARKET 04', 'too thin to act - platform is up, liquidity is not',
+                                    'Top Gappers if awake. No decisions'),
+    (7 * 60,       'PRE-MARKET 07', 'scan: ./now --scan   (the move can happen HERE - JWEL ran 07:00-07:45)',
+                                    'Top Gappers + 5 Pillar List. Red/orange flame only. Running Up = news hour'),
+    (8 * 60,       'NEWS WAVE',     'catalyst_score.py on the top 2, EDGAR by hand for 6-K filers',
+                                    'Running Up + re-scan. Watch for flames TURNING red on your names'),
+    (9 * 60,       'LIST LOCKS',    'final watchlist, 3 names max - stop adding',
+                                    '5 Pillar List. Top Gappers FREEZES at 09:30'),
+    (9 * 60 + 30,  'OPENING DRIVE', 'HANDS OFF - let the first candles print',
+                                    'Small-Cap HOD Momo + Halt Scanner. Count which name alerts most'),
+    (9 * 60 + 35,  'PRIME WINDOW',  'pullbacks 1-2 only, tape.py before every entry',
+                                    'HOD Momo, audio on. REPEAT ALERTS on one symbol = the ranking'),
+    (10 * 60 + 30, 'LATE WINDOW',   'reduce - past the 90-minute mark, new entries must be better',
+                                    'HOD Momo thinning across lanes = the day is done'),
+    (11 * 60,      'WIND-DOWN',     'new entries only on a perfect setup',
+                                    'Halt Scanner only'),
+    (11 * 60 + 30, 'OFF-BOOK',      'past the hard stop - review, do not trade',
+                                    'dead zone to 15:00 - no trades (PARAMETERS.md §2)'),
+    (15 * 60,      'POWER HOUR',    'watch only - nothing here has been measured',
+                                    'Top of Trend (vendor built it for this hour). WATCH ONLY'),
+    (16 * 60,      'AFTER HOURS',   'session over - run trade-review if trades were taken',
+                                    'After Hours Top Gainers - tomorrow list, not today trades'),
+    (20 * 60,      'CLOSED',        'nothing to do', ''),
 ]
 
 
 def phase_at(now_et):
     m = now_et.hour * 60 + now_et.minute
     if now_et.weekday() >= 5:
-        return 'CLOSED (weekend)', 'nothing to do', None
+        return 'CLOSED (weekend)', 'nothing to do', '', None
     cur, nxt = PHASES[0], None
     for i, p in enumerate(PHASES):
         if m >= p[0]:
@@ -64,22 +93,27 @@ def phase_at(now_et):
     if nxt:
         d = nxt[0] - m
         left = f' -> {nxt[1]} in {d//60}h{d%60:02d}m' if d >= 60 else f' -> {nxt[1]} in {d}m'
-    return cur[1], cur[2], left
+    return cur[1], cur[2], cur[3], left
 
 
-PHASE_COLOR = {'MONEY WINDOW': GOOD, 'PRE-MARKET': WARN, 'OPENING DRIVE': WARN,
-               'WIND-DOWN': WARN, 'OFF-BOOK': BAD, 'AFTER HOURS': BAD}
+PHASE_COLOR = {'PRIME WINDOW': GOOD,
+               'PRE-MARKET 07': WARN, 'NEWS WAVE': WARN, 'LIST LOCKS': WARN,
+               'OPENING DRIVE': WARN, 'LATE WINDOW': WARN, 'WIND-DOWN': WARN,
+               'PRE-MARKET 04': DIM, 'POWER HOUR': DIM,
+               'OFF-BOOK': BAD, 'AFTER HOURS': BAD}
 
 
 def header():
     now = dt.datetime.now(ET)
-    name, advice, left = phase_at(now)
+    name, advice, dash, left = phase_at(now)
     paint = PHASE_COLOR.get(name, DIM)
     print('=' * 78)
     print(f"{now:%a %d %b} · {now:%H:%M:%S} ET ({now.astimezone(FR):%H:%M} France)")
     print(f"phase: {paint(name)}{left or ''}")
     print(f"       {advice}")
-    print("money window 09:35-11:00 ET · hard stop 11:30 · paper only")
+    if dash:
+        print(f"  DASH {dash}")
+    print("prime 09:35-10:30 · typical close 11:00 · hard stop 11:30 ET · paper only")
     print(DIM("data: yahoo 1m bars (per-ticker time = last print) · finviz metrics"))
     print(DIM("      before the open finviz price/volume fields are LAST session's"))
     print('=' * 78)
@@ -340,7 +374,8 @@ def main():
     if args.scan:
         # after the bell TradingView freezes premarket_change; switch to the
         # live intraday discovery so the scan can still surface new names
-        live = name in ('OPENING DRIVE', 'MONEY WINDOW', 'WIND-DOWN', 'OFF-BOOK')
+        live = name in ('OPENING DRIVE', 'PRIME WINDOW', 'LATE WINDOW',
+                        'WIND-DOWN', 'OFF-BOOK')
         scan_rows = ps.scan(live=live)
 
     survivors = [r['sym'] for r in scan_rows if r['verdict'] != 'REJECT']
@@ -364,7 +399,7 @@ def main():
                 print('or scan the gappers:     ./now --scan')
         return
 
-    phase_open = name in ('OPENING DRIVE', 'MONEY WINDOW')
+    phase_open = name in ('OPENING DRIVE', 'PRIME WINDOW', 'LATE WINDOW')
     with ThreadPoolExecutor(max_workers=6) as ex:
         rows = list(ex.map(gather, syms))
     for g in rows:

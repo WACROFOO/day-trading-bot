@@ -27,9 +27,22 @@ Two answer shapes:
 | 14:30 | 08:30 | Final watchlist, 3 names max. Levels: PM high, VWAP, whole dollars. `size.py --card` so sizes are decided before emotions exist |
 | 15:00 | 09:00 | Last scan. Fade check: >25% off PM high = dead. Distrust anything appearing after 09:00 |
 | 15:30 | 09:30 | **Open. Hands off 5 minutes** — let the first candles print |
-| 15:35–17:00 | 09:35–11:00 | **The money window.** Pullbacks 1–2 only, `tape.py` before every entry, stop ≥ the median 1-min range, no 3¢ stops on halting names |
+| 15:35–16:30 | 09:35–10:30 | **Prime window.** Pullbacks 1–2 only, `tape.py` before every entry, stop ≥ the median 1-min range, no 3¢ stops on halting names |
+| 16:30–17:00 | 10:30–11:00 | **Late window.** Past the 90-minute mark — reduce, new entries must be better than the ones you took |
 | 17:00 | 11:00 | Wind down. New entries only on a perfect setup |
 | 17:30 | 11:30 | **Hard stop.** Green or red, done. Then, if trades were taken: trade-review |
+
+## Boundaries
+
+Prime 09:35–10:30, typical close 11:00, hard stop 11:30 — the **outer edge, not
+the centre** (`PARAMETERS.md` §2: `prime_window` n=44, `session_close` n=16).
+He frames the session as a **duration** — *"9:30 until 10:30 or 11:00, right
+around that 90 minute mark"* — so a plan that runs to 11:30 trades 30–60
+minutes he is not in. Corrected 2026-08-18: this table previously ran
+09:35–11:00 as one flat block.
+
+For the platform side of each block — which Dash scanner, which column —
+see `knowledge-base/daytrade-dash/PLAYBOOK.md`.
 
 ## Standing reminders
 
