@@ -198,3 +198,40 @@ threshold needs a measurement.
 - Paper only. Knowing how his scanner selects is selection evidence. The
   894-session replication of this strategy class was negative expectancy,
   and reverse-engineering the funnel does not revisit that.
+
+---
+
+## Correction, same day — the $10 ceiling is WEAK, not clean
+
+`scripts/dash_filters.py` was written to generalise the PFSA reasoning, and
+grading it exposed an overclaim in Finding 2 above. The exclusion logic is
+sound, but **the branch envelope it is measured against was built from two
+symbols** (SGLY, XOS). A "ceiling at 9.83" may simply mean no qualifying name
+that morning happened to trade higher.
+
+| grade | rule |
+|---|---|
+| FIRM | ≥4 symbols built the envelope |
+| TENTATIVE | 3 |
+| **WEAK** | **2 — an "envelope" of two points** |
+| SUSPECT | the axis is not a plausible scanner filter |
+
+The $10 ceiling grades **WEAK**. It keeps one piece of outside support: the
+medium-float branch carries `Price under $20` **in its own name**, so price
+ceilings demonstrably exist in this scanner family — the question is only
+whether this branch has one and where. It is not adopted.
+
+The same pass flagged two results as unusable that a naive reading would have
+promoted:
+
+- `Squeeze 10%/10min × XOS` produced a **short-interest** "ceiling". Short
+  interest is a displayed column, not a documented gate on a momentum scan.
+  Graded SUSPECT and excluded by axis, not by taste.
+- `Squeeze 5%/5min × PFSA` produced a **price** ceiling of [6.22, 10.20) —
+  which contradicts `Squeeze 10%/10min` firing on PFSA at **12.77**. Two
+  members of the same family cannot plausibly cap 6 dollars apart. Thin data,
+  not a filter.
+
+Updated capture: the 300-row superset (04:02:48 → 05:42:34 ET). HOD
+verification on it holds at **299/299 vs a 4.7% baseline** — that finding is
+unaffected and remains the only FIRM structural result in this session.
