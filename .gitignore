@@ -32,3 +32,6 @@ data/*.log
 
 # Runtime artifacts
 data/*.db
+
+# scratch / hook side-effects
+research/index-failures.log

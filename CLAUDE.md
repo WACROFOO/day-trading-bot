@@ -45,9 +45,26 @@ Four steps, in order, stopping as soon as you have what you need:
 anything, check `research/momentum-replication/reports/` — 27 measurements
 are already there.
 
-**If a search needed grep, an index failed.** Run `python3 scripts/kb.py
-doctor`, fix the index that omitted the directory, and commit that fix with
-the answer. An index nobody maintains sends the next reader back to grepping.
+**Step 4 is blocked, not discouraged.** A `grep`/`rg`/`find` aimed at
+`knowledge-base/` or `research/` is denied by a PreToolUse hook
+(`scripts/index_first_hook.sh`). Searching *code* is untouched — only the
+corpus, which is the part that has an index to descend.
+
+This rule was prose first and I broke it in the session that wrote it. It is
+a hook now for that reason.
+
+**If steps 1–3 genuinely cannot find it, an index has failed.** Re-run the
+search with
+
+```
+# INDEX-FAILED: <what you sought, which index should have had it>
+```
+
+appended to the command. That is allowed, and it is a declaration rather than
+a flag: it appends to `research/index-failures.log`, and it obliges running
+`python3 scripts/kb.py doctor` and fixing the index that missed — **in the
+same commit as the answer**. An index nobody maintains sends the next reader
+back to grepping, and the log is there so a pattern of excuses is visible.
 
 ## Non-negotiable answer rules
 

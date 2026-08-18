@@ -7,6 +7,12 @@
         "hooks": [
           {
             "type": "command",
+            "command": "\"$(git rev-parse --show-toplevel)/scripts/index_first_hook.sh\"",
+            "timeout": 20,
+            "statusMessage": "Checking the index-first rule..."
+          },
+          {
+            "type": "command",
             "if": "Bash(git commit*)",
             "command": "\"$(git rev-parse --show-toplevel)/scripts/factcheck_hook.sh\"",
             "timeout": 60,

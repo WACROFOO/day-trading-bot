@@ -25,9 +25,13 @@ that work and is how a five-step answer becomes a fifteen-step one.
 `--index` then costs nothing and prevents the most common error: answering
 from one register when another contradicts it.
 
-If you find yourself reaching for grep, an index failed. Run
-`python3 scripts/kb.py doctor`, fix the index, and commit that with the
-answer — otherwise the next reader repeats your search.
+**Grep of `knowledge-base/` is blocked by a hook**, not merely discouraged —
+searching code is unaffected. If steps 1–3 truly cannot find it, append
+`# INDEX-FAILED: <what you sought, which index should have had it>` to the
+command; that runs, logs to `research/index-failures.log`, and obliges
+`python3 scripts/kb.py doctor` plus the index fix in the same commit.
+
+Reaching for grep is a finding about the index, not about the corpus.
 
 ## The registers are the method, not filing
 
