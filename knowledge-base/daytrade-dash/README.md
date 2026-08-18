@@ -67,6 +67,9 @@ touched). OBSERVED, single-snapshot — bounds, not thresholds:
   showed floats up to **5.38M**; "Medium Float – High RVOL – under $20"
   showed **33.39M**. So low-float ceiling ≥5.4M, and 33M classifies as
   medium — our binary 20M cap sits between the two real tiers.
+  **Tightened 2026-08-18** by the Momo CSV export: low-float ceiling
+  **≥8.40M** (XOS), medium **includes 41.92M** (WFF, which fires the medium
+  branch and no low-float one). Boundary bracketed to (8.40M, 41.92M].
 - **The platform alerts below $2** (Volatility Hunter at $1.07, Squeeze 5/5
   at $1.73–1.99) — consistent with the penny-theme finding of 08-12: the $2
   floor is OUR selection rule, not the scanner's.
@@ -118,6 +121,32 @@ file minus the `// V2:` lines; setup guide archived here).
 Not compiled here (no TV runtime) — paste into the editor; report errors.
 
 Paper only. Observed scanner behaviour is selection evidence, not edge.
+
+---
+
+## Momo alert export, 2026-08-18 — first filter reverse-engineering
+
+**MEASURED.** Operator exported 295 high-day-momentum alert rows (04:02–05:36
+ET, 7 symbols, 6 branches) to `captures/2026-08-18-momo-alerts.csv`. Full
+analysis: `research/momentum-replication/reports/2026-08-18-momo-scanner-reverse-engineering.md`.
+
+Three results worth carrying:
+
+1. **`event` is `New High` on 295/295 rows.** Cross-checked against continuous
+   1-min bars: the alert bar sets a new high of day in **293/293** measurable
+   cases, against a **5.0%** base rate over all 626 bars of those names. The
+   six branches are qualification rules sharing one trigger — and it is a
+   trigger `./now` does not implement.
+2. **Low Float / High Rel Vol caps price near $10.** PFSA passes every other
+   observable condition of that branch and never fires it; bracket
+   [9.83, 10.1951). The medium-float branch caps at $20 by its own name, so
+   the low-float branch is the *tighter* one on price.
+3. **Former Momo carries the lowest RVOL floor — IPST fired at 2.13**, the
+   minimum in the file. Confirms ch.10's "lower thresholds" claim from output,
+   and lands just above the 2.0 the scanner v2 correction already adopted.
+
+The export contains **no news/flame field** — `Symbol / News` is only a quote
+URL. The flame is UI-only and does not survive CSV export.
 
 ---
 
