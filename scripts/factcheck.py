@@ -67,6 +67,17 @@ def check(path, idx):
         text = fh.read()
     bad, ok = [], 0
 
+    # A file that TESTS this checker must contain broken citations — they are
+    # its fixtures. Blocking the test suite for having fake video ids in it is
+    # the checker misreading its own reflection. The exemption is a declaration
+    # rather than a filename pattern, so it cannot be claimed by accident and
+    # is visible in the file that claims it.
+    # Assembled from halves so THIS file never contains the literal marker.
+    # Spelled out whole, factcheck.py exempted itself the moment the feature
+    # shipped — a checker that skips its own source is worse than no checker.
+    if ('FACTCHECK' '-FIX' 'TURES') in text:
+        return 'exempt', []
+
     for vid, ts in CITE.findall(text):
         if vid not in idx:
             bad.append((f'{vid} @{ts}', 'no such transcript in the corpus'))
@@ -155,7 +166,10 @@ def main():
             continue
         ok, bad = check(f, idx)
         rel = os.path.relpath(f, ROOT)
-        if bad:
+        if ok == 'exempt':
+            print(f'– {rel}  (declares itself fixtures — broken citations '
+                  f'are its test data)')
+        elif bad:
             print(f'✗ {rel}')
             for what, why in bad:
                 print(f'    {what}  —  {why}')

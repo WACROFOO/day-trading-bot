@@ -45,10 +45,17 @@ Four steps, in order, stopping as soon as you have what you need:
 anything, check `research/momentum-replication/reports/` — 27 measurements
 are already there.
 
-**Step 4 is blocked, not discouraged.** A `grep`/`rg`/`find` aimed at
-`knowledge-base/` or `research/` is denied by a PreToolUse hook
-(`scripts/index_first_hook.sh`). Searching *code* is untouched — only the
+**Step 4 is blocked, not discouraged.** `scripts/index_first_hook.py` denies
+blind corpus search across every surface it can reach: Bash (search tools,
+inline interpreters, and bulk readers over a glob), the **Grep/Glob tools**,
+and `Read` of a raw transcript. Searching *code* is untouched — only the
 corpus, which is the part that has an index to descend.
+
+Reading ONE named file is always allowed; that is what `kb.py open` does.
+Fanning out over the corpus is the failure mode, not reading.
+
+`python3 scripts/test_guards.py` tests all of it, bypass attempts included.
+Run it after touching any guard.
 
 This rule was prose first and I broke it in the session that wrote it. It is
 a hook now for that reason.
