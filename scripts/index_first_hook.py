@@ -142,8 +142,17 @@ def main():
     if not hits_corpus:
         return 0
 
-    is_search = bool(SEARCH.search(cmd)) or bool(INLINE.search(cmd))
-    # Bulk readers only matter when they fan out over a glob.
+    # FAN-OUT is the failure mode, not reading. `sed -n '10,20p' FILE.md` is a
+    # single-file read and blocking it was a false positive on the very lookup
+    # this rule exists to make fast. So a search tool only trips when it
+    # actually sweeps: a glob, a recursive flag, or a bare directory target.
+    fans_out = (
+        '*' in cmd
+        or re.search(r'\s-[a-zA-Z]*[rR][a-zA-Z]*(\s|$)', cmd)
+        or re.search(r'(knowledge-base|research)[\w/.-]*/(\s|$|["\')])', cmd)
+        or re.search(r'\b(knowledge-base|research)\b(?![\w/.-]*\.\w+)', cmd)
+    )
+    is_search = (bool(SEARCH.search(cmd)) or bool(INLINE.search(cmd))) and fans_out
     is_bulk_glob = bool(BULK.search(cmd)) and '*' in cmd
 
     if is_search or is_bulk_glob:

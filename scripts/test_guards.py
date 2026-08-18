@@ -211,6 +211,27 @@ def test_hooks():
     check('commit message mentioning grep is not blocked', not d,
           'hook matched a commit message')
 
+    # Reading ONE named file is the documented allowance and was blocked live,
+    # on the exact lookup this rule is meant to speed up. Fan-out is the
+    # failure mode; a line-range read of a known file is step 2 of the protocol.
+    for label, cmd in [
+        ('sed line-range on one file',
+         "sed -n '10,20p' knowledge-base/strategies/SCANNERS.md"),
+        ('head on one file', 'head -30 knowledge-base/daytrade-dash/README.md'),
+        ('cat one named file', 'cat knowledge-base/strategies/FILTERS.md'),
+        ('awk on one file', "awk 'NR<20' knowledge-base/strategies/SCANNERS.md"),
+    ]:
+        d, _ = hook('index_first_hook.py', cmd)
+        check(f'allows: {label}', not d, 'single-file read wrongly denied')
+
+    # ...but the same tools fanning out must still trip.
+    for label, cmd in [
+        ('sed over a glob', "sed -n '/flame/p' knowledge-base/transcripts/*.txt"),
+        ('head over a directory', 'grep -r flame knowledge-base'),
+    ]:
+        d, _ = hook('index_first_hook.py', cmd)
+        check(f'denies: {label}', d, 'fan-out slipped through')
+
     print('\nindex_first_hook — non-Bash tool surfaces')
     for tool, ti, want, label in [
         ('Grep', {'pattern': 'flame', 'path': 'knowledge-base'}, True, 'Grep tool at corpus'),

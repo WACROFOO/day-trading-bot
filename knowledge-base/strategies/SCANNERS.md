@@ -9,7 +9,7 @@ layer** only.
 
 ```
 CORPUS · 258 teaching / 69 recaps / 290 streams / 2,090 blog · local, no network call
-SOURCE  the 4 videos that walk the scanner library screen by screen:
+SOURCE  the 5 videos that walk the scanner library screen by screen:
         yg5E_mqGFGg  Stock Scanners for Beginner Day Trading Strategies   (full library tour)
         w97KlUrVDk0  How to Grow a Small Account with ZERO Experience     (alert anatomy)
         eCSzHYl8apo  scanner layout walkthrough                           (reversal + pullback)
