@@ -26,6 +26,99 @@ its lower thresholds were claimed in the book (ch.10) — now seen live. The
 float TIERING (low vs medium branches) is new information: the 20M cap is a
 simplification of a two-tier reality.
 
+## VENDOR-DOCUMENTED — the support portal, retrieved from the local corpus
+
+```
+SOURCE · knowledge-base/warrior-support/stock-scanners-day-trade-dash/
+         19000117763-scanners-how-to-load-use-them-in-the-chat-room-wt.md
+         Warrior Trading's own help-desk page, "Modified Thu, Jan 8, 2026".
+         This is the VENDOR describing its own product - a primary source for
+         platform behaviour, and a stronger one than a transcript for anything
+         mechanical. It is still not a threshold disclosure: no numeric filter
+         values appear anywhere in it.
+```
+
+### The news flame, settled
+
+The portal publishes the table directly, under the column header
+**"Age of Headline"**:
+
+| indicator | age of headline |
+|---|---|
+| red flame | 0 to 2 hours old |
+| orange flame | 2 to 12 hours old |
+| yellow flame | 12 to 24 hours old |
+| **no indicator** | **over 24 hours old** |
+
+This matches the two transcripts (`oxob0x0Xz7s` @00:57:52, `oKlhUSSHe2Q`
+@00:18:43) exactly, and closes the one part that was inference rather than
+quotation: that the colour encodes **recency and nothing else**. The vendor's
+own column header is "Age of Headline". No quality, source or magnitude
+dimension exists.
+
+Two mechanical facts the transcripts do not give:
+
+- **The flame can lag its own alert by up to 5 minutes.** "For the alert
+  scanners, the news indicators can update up to 5 minutes after the alert has
+  already been made" - so a fresh alert showing no flame may still be a news
+  move. Judging catalyst by the first paint is a mistake.
+- **The 5 Pillar scanners do not filter news at all.** "we do not currently
+  filter out whether a stock has news or not... you will want to ensure that
+  the stock also features a flame indicator." The fifth pillar is manual even
+  on the scanner named after the five pillars.
+
+### The complete scanner inventory
+
+**List scanners** (update every 30 s): Top Gappers (top 100; **stop updating
+at 09:30**), Ross's 5 Pillar Scan List, Penny-Top Gappers (<$5), Ross's Top
+Gappers, Large Cap, Large Cap Earnings with Gap, Top Gainers / Top Losers
+(continue all day), Low Float Top Gainers, Penny Top Gainers / Losers, After
+Hours Top Gainers (16:00-20:00), Recent IPO Top Moving (uplisted, held above
+open, last 90 days), **Recent Reverse Split** (last 30 days, **more than
+10:1**; the column value is the ratio), Change Since Open, Top of Trend
+(built for Power Hour 15:00-16:00), Continuation, Top RSI Trend, Top Relative
+Volume, Top Volume 5 Minutes, Large Cap Highest Volume.
+
+**Alert scanners** (update every second, optional chime): Ross's 5 Pillar
+Alert; **Small-Cap HOD Momo** with sub-strategies Low Float Med/High Rel Vol,
+Low Float High Rel Vol $20+, Low Float Volatility Hunter (HOD breakout),
+Former Momo, Medium Float Med Rel Vol $20+, Medium Float High Rel Vol $20+,
+Medium Float High Rel Vol under $20, Squeeze 10%/10min, Squeeze 5%/5min,
+Squeeze 52wk Breakout; **Penny HOD Momo** (all **under $2.00**) with Penny
+52-week High, Penny Volatility Hunter, Penny Squeeze; Running Up; Running
+Down; Reversal; Large Cap HOD Momo; **Halt Scanner**.
+
+This confirms the six branches in the 08-18 export are sub-strategies of one
+scanner (Small-Cap HOD Momo), which is why `event` was `New High` on every
+row - the parent scanner is defined as "Scans for New HOD price alerts on
+above-average momentum".
+
+### Columns the export has and we did not know were standard
+
+Symbol/News, Price, Volume Today, Relative Volume (Daily), Relative Volume
+(5 min), Gap %, **ATR**, Change From Close %, Short Interest, **Short Ratio**.
+Volume, Float and Gap% are gradient-coloured by value; the HOD scanner adds a
+**Strategy column colour-coded per sub-strategy**.
+
+**Float can read zero** for IPOs and new listings, and real float data can be
+absent for 24-48 hours; the platform then shows a **"Check Filings"**
+indicator. That is the vendor conceding the same unknown-float hole that made
+`allowUnknownFloat` necessary in scanner v2 - it does not fail closed either.
+
+### A divergence worth keeping, not resolving
+
+On video (`yg5E_mqGFGg` @00:19:36) he says audio is on for **two** strategies:
+*"low float and squeezing up 10 in 10 minutes"*. The portal instead documents
+his setting as **all strategies except the Medium Float ones**:
+*"Want to set the same alerts that Ross has on the Small Cap - High of Day
+Momentum scanner? Select all strategies except the Medium Float scanners."*
+
+Both are sources; neither is obviously stale. Recorded as a divergence rather
+than silently picking one. What both agree on: **Medium Float is the tier he
+does not want interrupting him.**
+
+---
+
 ## Calibration protocol — the point of the trial
 
 The trial's value is measured divergence, not admiration. Every capture:
