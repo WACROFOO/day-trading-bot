@@ -279,7 +279,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V7.4"                       // bump on every shipped change — keep alerts + title in step
+REV = "V7.5"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -682,6 +682,7 @@ var float ghostTrig = na
 var float ghostStop = na
 var float ghostTgt = na
 var float ghostShares = na
+var int   ghostBar = na
 
 eventArmed := false
 eventLong := false
@@ -768,6 +769,14 @@ if confirmedPass and (newDayBar or (useSessionWindow and not inSession) or
          ((useSessionWindow and not inSession) or (pastFlatCutoff and not allowOvernightPositions))
         strategy.close("Long", comment="Day over - sold",
              alert_message="ROSS FP V7 SESSION FLAT | {{ticker}}")
+    // V7.5 (live CDTG report): a ghost plan captured pre-market survived into
+    // the afternoon and displayed "signal 4.08" with price at 6.50. Ghosts
+    // now die at every boundary and age out after 10 bars.
+    ghostTrig := na
+    ghostStop := na
+    ghostTgt := na
+    ghostShares := na
+    ghostBar := na
     if setupState != IDLE and setupState != LONG
         strategy.cancel("Long")
         setupState := INVALID
@@ -820,6 +829,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
         ghostStop := na
         ghostTgt := na
         ghostShares := na
+        ghostBar := na
 
     // ── V5: HOD BREAK-AND-RETEST ──────────────────────────────────────────
     // Checked BEFORE the impulse path, because a retest that also satisfies
@@ -1176,6 +1186,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
             ghostStop := candidateStop
             ghostTgt := candidateTrigger + candidateRisk * rewardMultiple
             ghostShares := candidateShares
+            ghostBar := bar_index
             statusReason := "BUY SIGNAL above " + str.tostring(candidateTrigger, format.mintick) +
                  " — NO ORDER (see GATES)"
         else
@@ -1240,6 +1251,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
         ghostStop := fStop
         ghostTgt := fTrig + fRisk * rewardMultiple
         ghostShares := fShares
+        ghostBar := bar_index
         statusReason := "BUY SIGNAL above " + str.tostring(fTrig, format.mintick) +
              " — NO ORDER (see GATES)"
     if fastOK
@@ -1406,7 +1418,7 @@ chartVerdict = macdBullish and emaBullish and vwapBullish ? "chart healthy" :
      not emaBullish ? "price below EMA9 " + str.tostring(ema9, format.mintick) : "MACD not positive")
 // V4.7: provisional reads are labelled. A verdict that can still flip
 // before the close must say so — the design pack's fail-closed rule.
-liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
+liveTag = liveEval and not barstate.isconfirmed ? " ·live" : ""
 // V5.3: verdict compressed by operator request — one glance, not a sentence.
 // Nothing vanished: levels moved to the PLAN row, the lower high to the HOD
 // row, gate failures to the GATES row.
@@ -1623,121 +1635,116 @@ if barstate.islast
     avgDollarVol20 = ta.sma(close * volume, 20)
     outOfUniverse = strategy.position_size == 0 and setupState != LONG and
          (not pillarPrice or (not na(avgDollarVol20) and avgDollarVol20 < minDollarVolume))
+
+    // ── V7.5 STATUS: short and decisive. The reason chain already speaks
+    // plainly; the row just stops stacking tags on it.
+    string shortMsg = str.replace(actionText, "Rejected — ", "")
     string statusLine = outOfUniverse ?
          "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
               "volume too thin ($" + f_n(avgDollarVol20, "#") + "/min)") :
-         ''
-              +
-              f_stateName(setupState) +
+         f_stateName(setupState) +
               (setupState == INVALID or setupState == DONE ? ageTag : "") +
-              " — " + actionText
+              " — " + shortMsg
     f_row(1, "STATUS", statusLine,
          outOfUniverse ? color.gray :
          thinRoom ? color.red : setupState == ARMED ? color.yellow :
          setupState == LONG ? color.lime : color.white)
-    f_row(2, "MOMENTUM", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
-         (not vwapKnown ? "VWAP?" : f_crit("VWAP", vwapBullish)),
-         macdBullish and emaBullish and vwapBullish ? CRIT_ALL : CRIT_SOME)
-    // V4.6: print the VWAP number AND its anchor — a gate you cannot check
-    // against your own chart is a gate you cannot trust
-    if dashFull
-        f_row(3, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
-             vwapBullish ? color.lime : color.orange)
-    if inRTH or dashFull
-        f_row(4, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
-             f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ STOP WIDER - unenforceable" :
-                  "  ok · " + f_n(f_safeDiv(haltBandWidth, displayRiskDollar, na), "#.1") + "R to halt"),
-             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
-    // V5.3: the plan on ONE row, ladder included. Exit rules are the repo's
-    // own (DAILY-ROUTINE-FR.md): half off at T1, stop to break-even, rest to
-    // the 2R target. T1 = entry + 1R.
-    f_row(5, setupState == ARMED ? "▶ PLAN" : setupState == LONG ? "▶ IN TRADE" : "PLAN",
-         setupState == ARMED or setupState == LONG ?
-              "in " + f_px(setupState == LONG ? tradeEntryPrice : triggerPrice) +
-              " · SL " + f_px(structuralStop) + (usingATRstop ? "ᵃᵗʳ" : "") +
-              " · T1½ " + f_px((setupState == LONG ? tradeEntryPrice : triggerPrice) +
-                   (setupState == LONG ? tradeRisk : plannedRisk)) +
-              " · T2 " + f_px(setupState == LONG ? activeTarget : plannedTarget) :
-              (not na(ghostTrig) ?
-                   "signal " + f_px(ghostTrig) + " · SL " + f_px(ghostStop) +
-                   " · T2 " + f_px(ghostTgt) + "  — NO ORDER (clock)" :
-                   "— arm pending"),
-         setupState == ARMED ? color.yellow : setupState == LONG ? color.lime : color.gray)
-    // V5.3: risk stated the way the guidelines judge it — dollars and % of the
-    // account, never notional. Room appears only when it IS the warning.
-    // V7.1 (operator): never empty — with no plan it shows the size you COULD
-    // take right here with an ATR stop, clearly marked as hypothetical.
-    bool hasPlan = (setupState == ARMED or setupState == LONG) and not na(displayShares) and displayShares > 0
-    f_row(6, "SIZE", hasPlan ?
-         f_n(displayShares, "#") + " sh · $" + f_n(displayRiskCash, "#") +
-              " risk (" + f_n(f_safeDiv(displayRiskCash, 100000.0, 0.0) * 100.0, "#.00") + "%)" +
-              (thinRoom ? "  ⚠ " + f_rr(nextObstacleR) + " ROOM" : "") :
-         "≈ " + f_n(anyShares, "#") + " sh if bought HERE (ATR stop " +
-              f_px(close - anyRisk) + ") · $" + f_n(riskBudget, "#") + " risk",
-         hasPlan ? (thinRoom ? color.red : color.silver) : color.gray)
-    if dashFull
-        f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
-             "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
 
-    // V4.10: the day's high, and whether this impulse is the one making it.
-    // Every scanner branch measured on 2026-08-18 fired only on a new HOD, and
-    // the source names a failure to break it as the exit tell — so it belongs
-    // on the face of the dashboard, not implied by the R/S row.
-    f_row(8, "HIGH OF DAY", f_px(dayHigh) +
-         (not hodComparable ? "" : peakIsHOD ? "  · impulse IS the high" : "  ⚠ lower high") +
+    // ── V7.5 PLAN + SIZE: one live plan, always. Priority: a real position,
+    // then a working order, then the LIVE candidate of the forming setup,
+    // then a fresh ghost (clock withheld it), then "if bought here". Entry,
+    // stop, T1 (sell half, +1R), T2 (2R) and the share count all come from
+    // the SAME source so the two rows can never describe different trades.
+    bool ghostFresh = not na(ghostTrig) and not na(ghostBar) and bar_index - ghostBar <= 10
+    bool candLive = setupState == PULLBACK and not na(candidateTrigger) and
+         candidateRisk > 0 and candidateShares >= 1
+    int planSrc = setupState == LONG ? 5 : setupState == ARMED ? 4 :
+         candLive ? 3 : ghostFresh ? 2 : 1
+    float pEntry = planSrc == 5 ? tradeEntryPrice : planSrc == 4 ? triggerPrice :
+         planSrc == 3 ? candidateTrigger : planSrc == 2 ? ghostTrig : close
+    float pRisk = planSrc == 5 ? tradeRisk : planSrc == 4 ? plannedRisk :
+         planSrc == 3 ? candidateRisk : planSrc == 2 ? ghostTrig - ghostStop : anyRisk
+    float pStop = planSrc == 5 and t1Filled ? tradeEntryPrice :
+         planSrc == 5 ? structuralStop : planSrc == 4 ? structuralStop :
+         planSrc == 3 ? candidateStop : planSrc == 2 ? ghostStop : close - anyRisk
+    float pT1 = pEntry + pRisk
+    float pT2 = planSrc == 5 ? activeTarget : planSrc == 4 ? plannedTarget :
+         planSrc == 2 ? ghostTgt : pEntry + pRisk * rewardMultiple
+    float pShares = planSrc == 5 or planSrc == 4 ? displayShares :
+         planSrc == 3 ? candidateShares : planSrc == 2 ? ghostShares : anyShares
+    string planTag = planSrc == 5 ? (t1Filled ? " · half sold, stop at entry" : "") :
+         planSrc == 4 ? " · order working" :
+         planSrc == 3 ? " · live, not armed yet" :
+         planSrc == 2 ? " · NO ORDER (clock)" : " · if bought HERE"
+    color planCol = planSrc == 5 ? color.lime : planSrc == 4 ? color.yellow :
+         planSrc == 3 ? color.white : color.gray
+    f_row(2, planSrc >= 4 ? "▶ PLAN" : "PLAN",
+         "buy " + f_px(pEntry) + " · stop " + f_px(pStop) +
+         (usingATRstop and planSrc >= 3 ? "ᵃᵗʳ" : "") +
+         " · sell½ " + f_px(pT1) + " · target " + f_px(pT2) + planTag, planCol)
+    f_row(3, "SIZE", f_n(pShares, "#") + " shares · $" +
+         f_n(pShares * pRisk, "#") + " at risk (" +
+         f_n(f_safeDiv(pShares * pRisk, 100000.0, 0.0) * 100.0, "#.00") + "% of account)" +
+         (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " of room above" : ""),
+         thinRoom and planSrc >= 3 ? color.red : planCol)
+
+    // ── V7.5: the gates split into the two questions they actually answer.
+    // SETUP = is THIS dip tradeable. TREND = is the tape behind it.
+    // (PILLARS below is a third, different question: is this the right STOCK
+    // at all — selection, decided before the chart. Gates time; pillars pick.)
+    pbApplicable = setupState == PULLBACK or setupState == ARMED
+    f_row(4, "SETUP", f_crit("Push", pushGate) +
+         (pbApplicable ? " " + f_crit("DipLen", pullbackCountGate) + " " +
+              f_crit("Depth", retracementGate) + " " + f_crit("DipVol", volumeGate) + " " +
+              ("Risk" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) :
+              " DipLen· Depth· DipVol· Risk·  (no dip yet)"),
+         pbApplicable ? (pushGate and pullbackCountGate and retracementGate and
+              volumeGate and riskGate ? CRIT_ALL : CRIT_SOME) :
+              (pushGate ? CRIT_ALL : CRIT_SOME))
+    f_row(5, "TREND", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
+         (not vwapKnown ? "VWAP? " : f_crit("VWAP", vwapBullish) + " ") +
+         f_crit("Room", rrGate) + " " + f_crit("Clock", sessionGate and venueGate) +
+         (scanGates ? " " + f_crit("Fit", scanGate) : ""),
+         macdBullish and emaBullish and vwapBullish and rrGate and
+              sessionGate and venueGate and scanGate ? CRIT_ALL : CRIT_SOME)
+
+    f_row(6, "HIGH OF DAY", f_px(dayHigh) +
+         (not hodComparable ? "" : peakIsHOD ? "  · this move IS the high" : "  ⚠ lower high") +
          (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
          not hodComparable ? color.silver : peakIsHOD ? color.lime : color.orange)
 
-    // V5: the scanner lane, on the same screen as the trigger. Before this the
-    // operator had to hold "does this name even qualify" in their head while
-    // reading a trigger price.
+    // STOCK FIT = the pillars: selection, not timing. A 4/4 here says "right
+    // kind of stock"; it never says "buy now" — that is what SETUP/TREND do.
     if showScanPanel
-        f_row(9, "PILLARS " + str.tostring(pillarScore) + "/4",
-             f_crit("P", pillarPrice) + " " +
-             (na(scanFloat) ? "F? " : not floatVerified ? "F~ " : f_crit("F", pillarFloat) + " ") +
-             (not rvolKnown ? "R? " : f_crit("R", pillarRVOL) + " ") + f_crit("G", pillarGap) +
-             "  · " + f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
-             (not rvolKnown ? " (unack'd)" : "") +
-             (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M" +
-                  (floatVerified ? "" : " unver.")),
+        f_row(7, "STOCK FIT " + str.tostring(pillarScore) + "/4",
+             f_crit("Price", pillarPrice) + " " +
+             (na(scanFloat) ? "Float? " : not floatVerified ? "Float~ " : f_crit("Float", pillarFloat) + " ") +
+             (not rvolKnown ? "Rvol? " : f_crit("Rvol", pillarRVOL) + " ") + f_crit("Gap", pillarGap) +
+             "  · " + f_n(scanGap, "#.0") + "% · " + f_n(scanRVOL, "#.1") + "x",
              pillarScore == 4 ? CRIT_ALL : CRIT_SOME)
-        // "2+ hits" is the met-criterion here — his own rule: one alert is
-        // not a candidate (KSPN, yg5E_mqGFGg @00:16:47).
-        f_row(10, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
+        f_row(8, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
              (laneSqueeze5 ? "SQ5 " : "") + (laneSqueeze10 ? "SQ10 " : "") +
              (laneAny ? "" : "no lane this bar") +
              " · " + f_crit(str.tostring(laneHits) + " hits", laneHits >= 2),
              laneHits >= 2 ? CRIT_ALL : CRIT_SOME)
 
-    // V5.1: every TRADE gate on one line, same ✓/✗ + all-met colour rule. This
-    // is the line that answers "why is there no trigger" without hunting.
-    // V5.2: a gate that cannot be judged yet shows '·', not a cross. On the YJ
-    // screenshot PB/RETR/VOL/RISK all read ✗ in IMPULSE state — before any
-    // pullback existed to fail them. A false cross teaches the eye to ignore
-    // crosses, which is the TRUG lesson all over again.
-    // V6 (finding 18b): the row claiming to hold every trade gate omitted
-    // MOM, RR and SCAN — it could read green while the entry was refused.
-    // It now lists all of them and its colour IS hardGatesOK.
-    pbApplicable = setupState == PULLBACK or setupState == ARMED
-    f_row(11, "GATES", f_crit("PUSH", pushGate) + " " +
-         (pbApplicable ? f_crit("PB", pullbackCountGate) + " " + f_crit("RETR", retracementGate) + " " +
-              f_crit("VOL", volumeGate) + " " +
-              ("RISK" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) : "PB· RETR· VOL· RISK·") +
-         " " + f_crit("MOM", momentumGate) + f_crit(" RR", rrGate) +
-         (scanGates ? f_crit(" SCAN", scanGate) : "") + f_crit(" SESS", sessionGate) +
-         (fastLane or uptrendLane ? " · lanes" : ""),
-         pbApplicable ? (hardGatesOK ? CRIT_ALL : CRIT_SOME) :
-              (pushGate and momentumGate and sessionGate ? CRIT_ALL : CRIT_SOME))
-
+    if inRTH or dashFull
+        f_row(9, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+             f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ stop wider than the band" :
+                  "  ok · " + f_rr(f_safeDiv(haltBandWidth, pRisk, na)) + " to halt"),
+             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
     if dashFull
+        f_row(10, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
+             vwapBullish ? color.lime : color.orange)
+        f_row(11, "R / S", f_px(nearestRes) + " / " + f_px(nearestSup) +
+             "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
         f_row(12, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-    if dashFull
         f_row(13, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed
-    alert("ROSS FP V4 | TRIGGER SET | " + syminfo.ticker +
+    alert("ROSS FP V7 | ORDER SET | " + syminfo.ticker +
          " | entry " + str.tostring(triggerPrice, format.mintick) +
          " | stop " + str.tostring(structuralStop, format.mintick) +
          " | target " + str.tostring(plannedTarget, format.mintick), alert.freq_once_per_bar_close)
