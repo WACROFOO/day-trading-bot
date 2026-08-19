@@ -135,7 +135,7 @@ back to grepping, and the log is there so a pattern of excuses is visible.
 - `scripts/` — `tape.py` (intraday workup), `now.py` (phase report),
   `premarket_stars.py` (gap scan), `catalyst_score.py`, `premarket_dd.py`
   (pre-market shape), `size.py`, `corpus.py` (corpus search)
-- `research/momentum-replication/reports/` — 23 measurements; cite before
+- `research/momentum-replication/reports/` — 27 measurements; cite before
   re-deriving anything
 
 ## Session
