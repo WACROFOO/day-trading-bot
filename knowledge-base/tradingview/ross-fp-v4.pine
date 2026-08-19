@@ -279,7 +279,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V7.3"                       // bump on every shipped change — keep alerts + title in step
+REV = "V7.4"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -676,6 +676,12 @@ var bool eventBailout = false
 // seen while placing NO order, so the session rule keeps its teeth and the
 // operator keeps their eyes.
 var bool eventGhost = false
+// V7.4: the ghost carries a full plan so PLAN/SIZE stay populated while the
+// clock withholds the order. Display only; nothing reads these for orders.
+var float ghostTrig = na
+var float ghostStop = na
+var float ghostTgt = na
+var float ghostShares = na
 
 eventArmed := false
 eventLong := false
@@ -810,6 +816,10 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
         setupRetestLevel := na
         tradeInitialQty := na
         t1Filled := false
+        ghostTrig := na
+        ghostStop := na
+        ghostTgt := na
+        ghostShares := na
 
     // ── V5: HOD BREAK-AND-RETEST ──────────────────────────────────────────
     // Checked BEFORE the impulse path, because a retest that also satisfies
@@ -1094,9 +1104,10 @@ riskCompactPoints = candidateRiskPct <= 1.5 ? 3.0 : candidateRiskPct <= maxStopP
 structureScore = math.min(20.0, roomPoints + math.min(supportCount, 3) * 2.0 + (not toppingTailWarning ? 3.0 : 0.0) + riskCompactPoints)
 liveQuality = math.max(0.0, math.min(100.0, impulseScore + pullbackScore + momentumScore + structureScore))
 
+// V7.4 (operator): the clock is NOT a verdict criterion. Session/venue live
+// on the GATES row (SESS) and in the PLAN row's "no order" tag; the verdict
+// judges the SETUP.
 string gateReason =
-     not sessionGate ? "Outside 07:00-11:30 ET window" :
-     not venueGate ? "Pre-market: orders cannot fill here (limit-only venue)" :
      not pushGate ? "Move up too weak to trade" :
      pullbackBars < minPullbackBars ? "Dip too short so far" :
      redPullbackBars < 1 ? "Waiting for a red candle" :
@@ -1161,8 +1172,12 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
              volumeGate and momentumGate and riskGate and rrGate and scanGate
         if gatesExceptWindow and not (sessionGate and venueGate)
             eventGhost := true
-            statusReason := "PATTERN OK — no order (" +
-                 (not sessionGate ? "session over" : "pre-market venue") + "). Your call."
+            ghostTrig := candidateTrigger
+            ghostStop := candidateStop
+            ghostTgt := candidateTrigger + candidateRisk * rewardMultiple
+            ghostShares := candidateShares
+            statusReason := "BUY SIGNAL above " + str.tostring(candidateTrigger, format.mintick) +
+                 " — NO ORDER (see GATES)"
         else
             statusReason := gateReason
 
@@ -1221,8 +1236,12 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
     // V7.3: lane pattern valid, clock refused -> ghost, not silence.
     if fastCoreOK and not fastOK
         eventGhost := true
-        statusReason := "PATTERN OK (red-candle break " + str.tostring(fTrig, format.mintick) +
-             ") — no order (" + (not sessionGate ? "session over" : "pre-market venue") + "). Your call."
+        ghostTrig := fTrig
+        ghostStop := fStop
+        ghostTgt := fTrig + fRisk * rewardMultiple
+        ghostShares := fShares
+        statusReason := "BUY SIGNAL above " + str.tostring(fTrig, format.mintick) +
+             " — NO ORDER (see GATES)"
     if fastOK
         triggerPrice := fTrig
         structuralStop := fStop
@@ -1385,7 +1404,6 @@ chartVerdict = macdBullish and emaBullish and vwapBullish ? "chart healthy" :
      "not yet — " + (not vwapKnown ? "VWAP not started (RTH anchor)" :
      not vwapBullish ? "price below VWAP " + str.tostring(vwapValue, format.mintick) :
      not emaBullish ? "price below EMA9 " + str.tostring(ema9, format.mintick) : "MACD not positive")
-windowTag = inWindowInfo ? "" : " · off-window"
 // V4.7: provisional reads are labelled. A verdict that can still flip
 // before the close must say so — the design pack's fail-closed rule.
 liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
@@ -1410,13 +1428,13 @@ ageTag = barsInState <= 0 ? "" : " (" + str.tostring(barsInState) + (barsInState
 
 actionText =
      (not isOneMinute ? "USE 1-MINUTE CHART" :
-     setupState == LONG ? "MANAGE " + f_n(mfeR, "#.00") + "R" + windowTag :
-     setupState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + shortLH + windowTag :
-     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + shortLH + windowTag :
-     setupState == IMPULSE ? chartVerdict + " · waiting for the dip" + windowTag :
-     setupState == INVALID ? statusReason + windowTag :
-     setupState == DONE ? "DONE — log the trade" + windowTag :
-     chartVerdict + windowTag) + liveTag
+     setupState == LONG ? "MANAGE " + f_n(mfeR, "#.00") + "R" :
+     setupState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + shortLH :
+     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + shortLH :
+     setupState == IMPULSE ? chartVerdict + " · waiting for the dip" :
+     setupState == INVALID ? statusReason :
+     setupState == DONE ? "DONE — log the trade" :
+     chartVerdict) + liveTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
@@ -1605,13 +1623,12 @@ if barstate.islast
     avgDollarVol20 = ta.sma(close * volume, 20)
     outOfUniverse = strategy.position_size == 0 and setupState != LONG and
          (not pillarPrice or (not na(avgDollarVol20) and avgDollarVol20 < minDollarVolume))
-    sessionOver = useSessionWindow and not inSession
     string statusLine = outOfUniverse ?
          "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
               "volume too thin ($" + f_n(avgDollarVol20, "#") + "/min)") :
-         (eventGhost ? "PATTERN SEEN · no order (window) — " :
-          sessionOver ? "SESSION OVER (07:00-11:30 ET) · watch only — " : "") +
+         ''
+              +
               f_stateName(setupState) +
               (setupState == INVALID or setupState == DONE ? ageTag : "") +
               " — " + actionText
@@ -1642,7 +1659,10 @@ if barstate.islast
               " · T1½ " + f_px((setupState == LONG ? tradeEntryPrice : triggerPrice) +
                    (setupState == LONG ? tradeRisk : plannedRisk)) +
               " · T2 " + f_px(setupState == LONG ? activeTarget : plannedTarget) :
-              "— arm pending",
+              (not na(ghostTrig) ?
+                   "signal " + f_px(ghostTrig) + " · SL " + f_px(ghostStop) +
+                   " · T2 " + f_px(ghostTgt) + "  — NO ORDER (clock)" :
+                   "— arm pending"),
          setupState == ARMED ? color.yellow : setupState == LONG ? color.lime : color.gray)
     // V5.3: risk stated the way the guidelines judge it — dollars and % of the
     // account, never notional. Room appears only when it IS the warning.
