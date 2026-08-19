@@ -156,6 +156,14 @@ fallbackATRmult      = input.float(1.0, "Fallback stop distance (x ATR)", minval
 // what he actually does: he runs no impulse detector; he sees an uptrend, a
 // red candle, and the break of its high.
 uptrendLane          = input.bool(true, "UPTREND LANE: red candle + full momentum stack arms in ANY state", group=gExecution)
+// V5.4: LANES RESPECT THE HIGH OF DAY. Session evidence (TNON 2026-08-19):
+// three lane entries, three stops, every one armed UNDER a lower high with
+// the dashboard already showing the warning. This is not a new rule - it is
+// V4.10's trapped-supply logic (above the HOD nobody holds a loser;
+// js25lIZMUSY @00:22:49) finally applied to the lanes that were bypassing
+// it. A lane may arm only when the trigger is at/above the HOD, or has at
+// least 1R of open air before it.
+lanesRespectHOD      = input.bool(true, "Lanes require new-high or >=1R room to HOD", group=gExecution)
 
 gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
@@ -216,7 +224,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V5.3"                       // bump on every shipped change
+REV = "V5.4"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -913,7 +921,12 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
     float fRiskPct = f_safeDiv(fRisk, fTrig, 999.0) * 100.0
     float fShares = fRisk > 0 ? math.min(math.floor(riskBudget / fRisk),
          math.floor(maxPositionValue / fTrig)) : 0.0
-    bool fastOK = fRisk > 0 and fRiskPct <= maxStopPct and
+    // V5.4: the lower-high guard. fTrig at/above HOD = breaking to open air;
+    // otherwise demand >=1R before the overhead supply. Three TNON stops in
+    // one session, all under a lower high, are what this line costs to skip.
+    bool fRoomOK = not lanesRespectHOD or na(dayHigh) or fTrig >= dayHigh or
+         (fRisk > 0 and (dayHigh - fTrig) / fRisk >= 1.0)
+    bool fastOK = fRisk > 0 and fRiskPct <= maxStopPct and fRoomOK and
          fShares >= 1 and (not haltBandVeto or not (inRTH and fRisk > haltBandWidth))
     if fastOK
         triggerPrice := fTrig
