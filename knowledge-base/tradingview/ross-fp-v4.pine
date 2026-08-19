@@ -279,7 +279,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V7.1"                       // bump on every shipped change — keep alerts + title in step
+REV = "V7.2"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -1115,7 +1115,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
         stateStartBar := bar_index
         scanAfterBar := bar_index
         statusReason := structuralInvalid ?
-             "Rejected — dip too deep (" + f_n(retracementPct, "#.0") + "%)" :
+             (not na(retracementPct) and retracementPct > 100 ? "Rejected — dip broke below where the move started" : "Rejected — dip too deep (" + f_n(retracementPct, "#.0") + "%)") :
              "Rejected — dip lasted too long"
         eventInvalid := true
 
@@ -1380,6 +1380,13 @@ shortLH = hodComparable and not peakIsHOD and
 // fall through to chartVerdict and print "CHART OK" beside a red NO header.
 // V6 (finding 17): the LIVE tag is appended again — it was computed and
 // dropped in the V5.3 compression, so provisional reads looked final.
+// V7.2 (live BTCT report): a rejection sentence with no timestamp reads as a
+// verdict on the CURRENT candle. State changes only at candle close (the
+// anti-repaint choice), so on a vertical move the header lags 1-2 minutes —
+// the age tag makes that lag visible instead of misleading.
+barsInState = na(stateStartBar) ? 0 : bar_index - stateStartBar
+ageTag = barsInState <= 0 ? "" : " (" + str.tostring(barsInState) + (barsInState == 1 ? " candle ago" : " candles ago") + ")"
+
 actionText =
      (not isOneMinute ? "USE 1-MINUTE CHART" :
      setupState == LONG ? "MANAGE " + f_n(mfeR, "#.00") + "R" + windowTag :
@@ -1567,7 +1574,25 @@ if barstate.islast
 
     // V7.1 (operator): signal and update merged on one row — one sentence
     // that names the state AND says what to do, no cross-referencing.
-    f_row(1, "STATUS", f_stateName(setupState) + " — " + actionText,
+    // V7.2 (live BTCT report): when a name fails the UNIVERSE — price outside
+    // $2-20 or liquidity below the floor — every bar-level message is noise.
+    // Say the one big thing instead. And when the session is over, say it in
+    // words, not a tag: the operator read "off-window" as a footnote while
+    // the real message was "this strategy stopped trading 105 minutes ago".
+    avgDollarVol20 = ta.sma(close * volume, 20)
+    outOfUniverse = strategy.position_size == 0 and setupState != LONG and
+         (not pillarPrice or (not na(avgDollarVol20) and avgDollarVol20 < minDollarVolume))
+    sessionOver = useSessionWindow and not inSession
+    string statusLine = outOfUniverse ?
+         "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
+              "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
+              "volume too thin ($" + f_n(avgDollarVol20, "#") + "/min)") :
+         (sessionOver ? "SESSION OVER (07:00-11:30 ET) · watch only — " : "") +
+              f_stateName(setupState) +
+              (setupState == INVALID or setupState == DONE ? ageTag : "") +
+              " — " + actionText
+    f_row(1, "STATUS", statusLine,
+         outOfUniverse ? color.gray :
          thinRoom ? color.red : setupState == ARMED ? color.yellow :
          setupState == LONG ? color.lime : color.white)
     f_row(2, "MOMENTUM", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
