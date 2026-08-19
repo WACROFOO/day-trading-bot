@@ -242,6 +242,11 @@ def test_hooks():
         d, _ = hook('index_first_hook.py', cmd)
         check(f'allows: {label}', not d, 'single-file read wrongly denied')
 
+    d, _ = hook('index_first_hook.py',
+                'python3 -c "s=open(\'knowledge-base/strategies/FILTERS.md\').read(); print(len(s))"')
+    check('allows: python -c reading ONE named corpus file', not d,
+          'single-file inline read wrongly denied (live false positive)')
+
     # ...but the same tools fanning out must still trip.
     for label, cmd in [
         ('sed over a glob', "sed -n '/flame/p' knowledge-base/transcripts/*.txt"),

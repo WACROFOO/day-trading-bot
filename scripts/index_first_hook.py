@@ -152,7 +152,13 @@ def main():
         or re.search(r'(knowledge-base|research)[\w/.-]*/(\s|$|["\')])', cmd)
         or re.search(r'\b(knowledge-base|research)\b(?![\w/.-]*\.\w+)', cmd)
     )
-    is_search = (bool(SEARCH.search(cmd)) or bool(INLINE.search(cmd))) and fans_out
+    # An inline interpreter is only a search engine when it FANS OUT — glob,
+    # walk, listdir. `python3 -c` reading one named corpus file is the same
+    # allowed act as `kb.py open`, and blocking it (false positive, live,
+    # 2026-08-19) teaches the operator to distrust the guard.
+    inline_fans = bool(INLINE.search(cmd)) and bool(
+        re.search(r'glob|walk|listdir|iterdir|scandir', cmd))
+    is_search = (bool(SEARCH.search(cmd)) and fans_out) or inline_fans
     is_bulk_glob = bool(BULK.search(cmd)) and '*' in cmd
 
     if is_search or is_bulk_glob:

@@ -1,13 +1,19 @@
 //@version=6
-strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V4", overlay=true,
+strategy("ROSS First Pullback Strategy V6 (repo-audited)", shorttitle="ROSS FP V6", overlay=true,
      initial_capital=100000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.percent, commission_value=0.01,
-     slippage=10, calc_on_every_tick=true, calc_on_order_fills=true,
+     slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
      process_orders_on_close=false,
      max_labels_count=100, max_lines_count=50)
+// V6 (external audit finding 4): calc_on_order_fills turned OFF. With it on,
+// a historical fill triggers an extra execution in which barstate.isconfirmed
+// is STILL true and the bar's final OHLC is already visible — so confirmed-bar
+// signal logic could re-run mid-bar on information that did not exist yet
+// (look-ahead), and could double-run per bar. Cost of off: the bracket is
+// placed one tick (live) / one bar (historical) after the fill. Disclosed.
 
 // ============================================================================
-// ROSS FIRST PULLBACK + HOD RETEST — revision V5.0 (2026-08-18).
+// ROSS FIRST PULLBACK + HOD RETEST — revision V6.0 (2026-08-19).\n// V6 is the response to the external adversarial audit (20 findings):\n// knowledge-base/tradingview/AUDIT-RESPONSE-V6.md maps every finding to its fix.
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -224,7 +230,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V5.4"                       // bump on every shipped change
+REV = "V6.0"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -285,31 +291,61 @@ dayHigh := newDayBar or na(dayHigh) ? high : math.max(dayHigh, high)
 // followed by a pullback INTO that broken level was invisible unless the push
 // happened to satisfy the impulse detector. That is a whole second entry the
 // script was skipping.
-var float brokenHOD   = na      // the level that was taken out
+// V6 (finding 11): brokenHOD is an EPISODE, not a ratchet. The old code
+// overwrote the level on every new high, so after a 10.00 -> 10.50 run the
+// "broken resistance" read 10.30 and a real retest of 10.00 was invisible.
+// An episode: freezes the FIRST close-confirmed break level; ends when the
+// retest is consumed, the level fails (2 confirmed closes below), or it ages
+// out. A wick alone no longer records a break — the close must confirm it.
+retestMaxAgeBars = input.int(30, "Retest: max age (bars)", minval=5, maxval=120, group=gRetest)
+var float brokenHOD   = na      // frozen first-break level of the episode
 var int   brokenBar   = na
 var bool  retestArmed = false
+var int   closesBelowBroken = 0
 if newDayBar
     brokenHOD := na
     brokenBar := na
     retestArmed := false
-// a break is recorded when this bar's high exceeds the PREVIOUS running high
-if not na(dayHighPrev) and high > dayHighPrev and not na(dayHighPrev)
+    closesBelowBroken := 0
+// record only the FIRST break of an episode, close-confirmed
+if na(brokenHOD) and not na(dayHighPrev) and close > dayHighPrev and barstate.isconfirmed
     brokenHOD := dayHighPrev
     brokenBar := bar_index
     retestArmed := true
+    closesBelowBroken := 0
+// episode maintenance: failure and age, on confirmed bars only
+if not na(brokenHOD) and barstate.isconfirmed and bar_index > brokenBar
+    closesBelowBroken := close < brokenHOD ? closesBelowBroken + 1 : 0
+    if closesBelowBroken >= 2 or bar_index - brokenBar > retestMaxAgeBars
+        brokenHOD := na
+        brokenBar := na
+        retestArmed := false
+        closesBelowBroken := 0
 
+// V6 (finding 19): the numerator is validated too — na/x returned na and
+// ignored the requested fallback, so "safe" was only half true.
 f_safeDiv(float numerator, float denominator, float fallback) =>
-    denominator != 0 and not na(denominator) ? numerator / denominator : fallback
+    not na(numerator) and not na(denominator) and denominator != 0 ? numerator / denominator : fallback
 
 // ── V5: scanner criteria, computed on this chart ──────────────────────────
 // Daily RVOL here is cumulative day volume / 20-day average full-day volume.
 // KNOWN BIAS, stated rather than hidden: before ~10:00 the numerator holds a
 // fraction of a day and the denominator holds whole days, so this reads LOW
 // exactly when it matters most. Judge the morning by eye, not by this cell.
-dayVolCum = ta.cum(volume) - ta.valuewhen(newDayBar, ta.cum(volume), 0)
+// V6 (finding 13): the old cum()-minus-valuewhen form zeroed the first bar
+// of every day and then subtracted that bar's volume from every later
+// reading — on gappers the opening bar IS the volume story. Accumulate.
+var float dayVolCum = 0.0
+dayVolCum := barstate.isfirst or newDayBar ? volume : dayVolCum + volume
+// V6 (finding 10): previous-day values with lookahead_off arrive one daily
+// interval LATE on historical intraday bars (the merge happens at the end of
+// the daily bar), so history and realtime showed different prior closes and
+// baselines, and a reload could change the criteria. The documented stable
+// pattern for ALREADY-CLOSED HTF values is the [1]-offset WITH lookahead_on:
+// the offset removes the future leak, the lookahead removes the merge delay.
 [avgDailyVol, prevCloseD] = request.security(syminfo.tickerid, "1D",
-     [ta.sma(volume[1], 20), close[1]], gaps=barmerge.gaps_off,
-     lookahead=barmerge.lookahead_off)
+     [ta.sma(volume, 20)[1], close[1]], gaps=barmerge.gaps_off,
+     lookahead=barmerge.lookahead_on)
 scanRVOL  = f_safeDiv(dayVolCum, avgDailyVol, na)
 scanGap   = na(prevCloseD) or prevCloseD <= 0 ? na : (close / prevCloseD - 1.0) * 100.0
 scanFloat = manualFloatM > 0 ? manualFloatM : na
@@ -350,6 +386,11 @@ f_px(float v) =>
 
 f_n(float v, string fmt) =>
     na(v) ? "—" : str.tostring(v, fmt)
+
+// V5.1: -999/-999.1R on screen was the f_safeDiv SENTINEL leaking into the
+// dashboard (live example, EHGO). A sentinel is for logic, never for eyes.
+f_rr(float v) =>
+    na(v) or v <= -900 or v >= 900 ? "—" : str.tostring(v, "#.1") + "R"
 
 // V4.1: nearest resistance above / support below from confirmed pivots.
 var array<float> pivHighs = array.new_float()
@@ -466,10 +507,26 @@ if isOneMinute and barstate.isconfirmed and enoughHistory
 
 // ───────────────────────── Persistent setup data ─────────────────────────
 var int setupState = IDLE
-// V5: which of the two patterns armed. Display only — never key logic on it.
+// V5/V6: which pattern armed. Display + provenance — never key logic on it.
 int KIND_PULLBACK = 0
 int KIND_RETEST   = 1
+int KIND_FAST     = 2
+int KIND_UPTREND  = 3
 var int setupKind = KIND_PULLBACK
+
+// ── V6 broker-lifecycle latches (audit findings 1 & 2) ──────────────────
+// varip survives the intrabar rollback that erases ordinary `var` writes.
+// These are the ONLY varip values in the script, deliberately: they latch
+// facts about the ORDER BOOK (which does not roll back) so the state
+// machine cannot contradict it. Everything else stays rollback-consistent.
+varip bool intrabarCancelled = false   // an intrabar cancel happened this bar
+if barstate.isnew
+    intrabarCancelled := false
+// Monotonic trade counters: strategy.closedtrades never rolls back, so a
+// same-minute entry+exit is detectable even after every var was rewound.
+var int handledClosedTrades = 0
+var float tradeInitialQty = na
+var bool t1Filled = false
 var int stateStartBar = na
 
 var int impulseStartBar = na
@@ -503,6 +560,7 @@ var float plannedRRtoPeak = na
 var float plannedShares = na
 var float setupQuality = na
 
+var float setupRetestLevel = na    // V6: frozen retest basis for this setup
 var float tradeEntryPrice = na
 var float tradeRisk = na
 var float activeTarget = na
@@ -538,14 +596,79 @@ if strategy.position_size > 0 and setupState != LONG
     tradeRisk := tradeEntryPrice - structuralStop
     activeTarget := tradeEntryPrice + tradeRisk * rewardMultiple
     highestSinceEntry := tradeEntryPrice
+    tradeInitialQty := strategy.position_size
+    t1Filled := false
+    // V6 (finding 7): the setup counter now counts FILLS, not arms. Before
+    // this, every trigger refresh of one physical pullback incremented it,
+    // so the 3rd-setup half-size rule fired on the first setup's revisions.
+    setupsToday += 1
+    // V6 (finding 3, disclosure): if this bar's low already touched the stop,
+    // the fill sequence inside the bar is UNKNOWABLE from OHLC — live logic
+    // may have cancelled before the trigger. Marked, never silently trusted.
+    if not na(structuralStop) and low <= structuralStop
+        label.new(bar_index, high, "AMBIGUOUS SEQ", style=label.style_label_down,
+             color=color.new(color.orange, 20), textcolor=color.black, size=size.small)
     statusReason := "In trade: manage"
     eventLong := true
+
+// V6 (finding 2): strategy.closedtrades is monotonic and never rolls back.
+// A same-minute entry+exit used to vanish — LONG was assigned intrabar, the
+// exit recalc rolled it back to ARMED, and neither detector fired. Counting
+// closed trades catches it regardless of what the var state got rewound to.
+if strategy.closedtrades > handledClosedTrades
+    handledClosedTrades := strategy.closedtrades
+    if strategy.position_size == 0
+        setupState := DONE
+        stateStartBar := bar_index
+        scanAfterBar := bar_index
+        strategy.cancel("Long")
+        statusReason := "Trade closed"
+    else
+        // partial close = the T1 half filled; runner stop moves to entry
+        t1Filled := true
 
 if strategy.position_size == 0 and setupState == LONG and not na(tradeEntryPrice)
     setupState := DONE
     stateStartBar := bar_index
     scanAfterBar := bar_index
     statusReason := "Trade closed"
+
+// ── V6 (finding 4): one authoritative signal pass per bar. With
+// calc_on_order_fills off this is belt-and-braces, but it stays so a future
+// re-enable cannot silently double-run the confirmed logic on one bar.
+var int lastSignalBar = na
+bool confirmedPass = isOneMinute and barstate.isconfirmed and
+     (na(lastSignalBar) or bar_index != lastSignalBar)
+
+// ── V6 (finding 1, commit step): a latched intrabar cancel becomes a
+// durable INVALID at the close, whatever the rolled-back var state says.
+if confirmedPass and intrabarCancelled and strategy.position_size == 0 and
+     (setupState == ARMED or setupState == PULLBACK)
+    setupState := INVALID
+    stateStartBar := bar_index
+    scanAfterBar := bar_index
+    triggerPrice := na
+    structuralStop := na
+    plannedRisk := na
+    plannedTarget := na
+    plannedShares := na
+    statusReason := "NO: order cancelled intrabar"
+    eventInvalid := true
+
+// ── V6 (finding 5): pending orders and setups do not survive a session
+// boundary or a new day. Positions are flattened at the session edge when
+// the hard window is on. (A halt still cannot be escaped from Pine — no
+// ticks means no cancel; that limit is disclosed, not solved.)
+if confirmedPass and (newDayBar or (useSessionWindow and not inSession))
+    if strategy.position_size > 0 and useSessionWindow and not inSession
+        strategy.close("Long", comment="SESSION FLAT",
+             alert_message="ROSS FP V6 SESSION FLAT | {{ticker}}")
+    if setupState != IDLE and setupState != LONG
+        strategy.cancel("Long")
+        setupState := INVALID
+        stateStartBar := bar_index
+        scanAfterBar := bar_index
+        statusReason := newDayBar ? "new day - setup cleared" : "session over - order cancelled"
 
 // ───────────────────────── Confirmed-bar state updates ─────────────────────────
 if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
@@ -585,6 +708,9 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
         activeTarget := na
         tradeEntryBar := na
         highestSinceEntry := na
+        setupRetestLevel := na
+        tradeInitialQty := na
+        t1Filled := false
 
     // ── V5: HOD BREAK-AND-RETEST ──────────────────────────────────────────
     // Checked BEFORE the impulse path, because a retest that also satisfies
@@ -631,9 +757,16 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
         pullbackStartBar := bar_index
         pullbackLastBar := bar_index
         pullbackBars := 1
-        redPullbackBars := 1             // the touch itself is the pullback leg
+        // V6 (finding 12): the qualifying retest candle is green by
+        // construction (close >= open), and recording it as red falsified a
+        // shared counter. The count is honest now; the gate below accepts a
+        // retest setup without a red candle explicitly.
+        redPullbackBars := close < open ? 1 : 0
         pullbackLow := low
         pullbackVolumeSum := volume
+        // V6 (finding 11): the setup keeps its OWN frozen copy of the level —
+        // later episode changes cannot silently move a live setup's basis.
+        setupRetestLevel := brokenHOD
         statusReason := "HOD retest holding " + str.tostring(brokenHOD, format.mintick)
 
     if setupState == IDLE and bestBars > 0
@@ -736,10 +869,10 @@ pushRange = not na(pushPeak) and not na(pushStartPrice) ? pushPeak - pushStartPr
 pullbackLowLive = (setupState == PULLBACK or setupState == ARMED) and liveEval and not na(pullbackLow) ?
      math.min(pullbackLow, low) : pullbackLow
 retracementPct = setupState == PULLBACK or setupState == ARMED ?
-     f_safeDiv(pushPeak - pullbackLowLive, pushRange, 999.0) * 100.0 : na
+     f_safeDiv(pushPeak - pullbackLowLive, pushRange, na) * 100.0 : na
 
 pullbackAvgVolume = pullbackBars > 0 ? pullbackVolumeSum / pullbackBars : na
-pullbackVolumeRatio = pullbackBars > 0 ? f_safeDiv(pullbackAvgVolume, pushAvgVolume, 999.0) : na
+pullbackVolumeRatio = pullbackBars > 0 ? f_safeDiv(pullbackAvgVolume, pushAvgVolume, na) : na
 decliningPBVolume = pullbackBars <= 1 ? true : volume < volume[1]
 
 candleRange = high - low
@@ -777,33 +910,47 @@ candidateWide = not na(candidateRiskRaw) and candidateRiskRaw > 0 and
 usingATRstop = atrStopFallback and candidateWide
 candidateStop = usingATRstop ? candidateTrigger - atr * fallbackATRmult : candidateStopRaw
 candidateRisk = candidateTrigger - candidateStop
-candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
-candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
-candidateRRtoPeak = f_safeDiv(pushPeak - candidateTrigger, candidateRisk, -999.0)
+candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, na) * 100.0
+candidateRiskATR = f_safeDiv(candidateRisk, atr, na)
+candidateRRtoPeak = f_safeDiv(pushPeak - candidateTrigger, candidateRisk, na)
 
 // room to the day's high, in R — the honest overhead measure
-candidateRRtoHOD = f_safeDiv(dayHigh - candidateTrigger, candidateRisk, -999.0)
+candidateRRtoHOD = f_safeDiv(dayHigh - candidateTrigger, candidateRisk, na)
 // is this impulse making the high, or is it a lower high under trapped supply?
 peakIsHOD = not na(pushPeak) and not na(dayHigh) and pushPeak >= dayHigh - syminfo.mintick
 // the FIRST obstacle above the trigger is what a 1R move must clear
 nextObstacleR = candidateTrigger < pushPeak ? candidateRRtoPeak : candidateRRtoHOD
-candidateRiskShares = candidateRisk > 0 ? math.floor(riskBudget / candidateRisk) : 0.0
+// V6 (finding 14): the declaration says slippage=10 ticks, applied adversely
+// to the stop entry AND the stop exit — so the modelled worst-case loss per
+// share is structural risk + 2×10 ticks. Sizing on structural risk alone let
+// a 10-cent plan lose ~3× its budget in simulation. Size on the worst case.
+SLIP_TICKS = 10   // keep equal to the strategy() slippage= argument
+slipPerShare = 2 * SLIP_TICKS * syminfo.mintick
+effRiskPerShare = candidateRisk > 0 ? candidateRisk + slipPerShare : na
+candidateRiskShares = not na(effRiskPerShare) ? math.floor(riskBudget / effRiskPerShare) : 0.0
 candidateCapitalShares = candidateTrigger > 0 ? math.floor(maxPositionValue / candidateTrigger) : 0.0
 candidateShares = math.min(candidateRiskShares, candidateCapitalShares)
 
 // V4: halt-band check — a stop wider than the band cannot be honoured.
 // V5: the veto is RTH-only; outside it the band is information, not a gate.
-stopExceedsHaltBand = inRTH and not na(haltBandWidth) and candidateRisk > haltBandWidth
+// V6 (finding 9): FAIL-CLOSED — an unknown band inside RTH now vetoes
+// instead of silently passing. na used to compare as non-blocking.
+stopExceedsHaltBand = inRTH and (na(haltBandWidth) or candidateRisk > haltBandWidth)
+
 
 pushGate = pushPct >= minPushPct and pushATR >= minPushATR and pushEfficiency >= minEfficiency and pushRVOL >= minPushRVOL and pushDollarVolume >= minDollarVolume
-pullbackCountGate = pullbackBars >= minPullbackBars and pullbackBars <= maxPullbackBars and redPullbackBars >= 1
+// V6 (finding 12): a retest setup's pullback IS the touch — a red candle is
+// not part of that pattern's definition, so it is not demanded of it.
+pullbackCountGate = pullbackBars >= minPullbackBars and pullbackBars <= maxPullbackBars and
+     (redPullbackBars >= 1 or setupKind == KIND_RETEST)
 retracementGate = not na(retracementPct) and retracementPct <= maxRetracementPct
 volumeGate = not na(pullbackVolumeRatio) and pullbackVolumeRatio <= maxPBVolumeRatio
 momentumGate = (not requireMACD or macdBullish) and (not requireEMA or emaBullish) and (not requireVWAP or vwapBullish)
-riskGate = candidateRisk > 0 and candidateRiskPct <= maxStopPct and candidateRiskATR <= maxStopATR and
+riskGate = candidateRisk > 0 and not na(candidateRiskPct) and candidateRiskPct <= maxStopPct and
+     not na(candidateRiskATR) and candidateRiskATR <= maxStopATR and
      (not useMaxDollarStop or candidateRisk <= maxStopDollar) and candidateShares >= 1 and
      (not haltBandVeto or not stopExceedsHaltBand)                     // V4
-rrGate = not requireRRtoPeak or candidateRRtoPeak >= minRRtoPeak
+rrGate = not requireRRtoPeak or (not na(candidateRRtoPeak) and candidateRRtoPeak >= minRRtoPeak)
 // V5: default OFF. A scanner criterion is a DISCOVERY dial; using it as a
 // trade gate is this project's single most repeated error (21 corrections).
 // Available for anyone who wants it, never on by default.
@@ -836,14 +983,14 @@ string gateReason =
      not pushGate ? "Push quality failed" :
      pullbackBars < minPullbackBars ? "Need more pullback" :
      redPullbackBars < 1 ? "Need a red pullback candle" :
-     not retracementGate ? "Retracement " + str.tostring(retracementPct, "#.0") + "% > " + str.tostring(maxRetracementPct, "#.0") + "%" :
-     not volumeGate ? "PB volume " + str.tostring(pullbackVolumeRatio, "#.00") + "x > " + str.tostring(maxPBVolumeRatio, "#.00") + "x" :
+     not retracementGate ? "Retracement " + f_n(retracementPct, "#.0") + "% > " + str.tostring(maxRetracementPct, "#.0") + "%" :
+     not volumeGate ? "PB volume " + f_n(pullbackVolumeRatio, "#.00") + "x > " + str.tostring(maxPBVolumeRatio, "#.00") + "x" :
      requireMACD and not macdBullish ? "MACD momentum failed" :
      requireEMA and not emaBullish ? "EMA trend failed" :
      requireVWAP and not vwapBullish ? "VWAP trend failed" :
      haltBandVeto and stopExceedsHaltBand ? "Stop " + str.tostring(candidateRisk, format.mintick) + " wider than halt band " + str.tostring(haltBandWidth, format.mintick) :
      not riskGate ? "Structural risk too wide" :
-     requireRRtoPeak and not rrGate ? "Only " + str.tostring(candidateRRtoPeak, "#.00") + "R to peak" :
+     requireRRtoPeak and not rrGate ? "Only " + f_rr(candidateRRtoPeak) + " to peak" :
      not scanGate ? "Scanner criteria " + str.tostring(pillarScore) + "/4" :
      "READY"
 
@@ -858,7 +1005,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
         stateStartBar := bar_index
         scanAfterBar := bar_index
         statusReason := structuralInvalid ?
-             "NO: retracement " + str.tostring(retracementPct, "#.0") + "%" :
+             "NO: retracement " + f_n(retracementPct, "#.0") + "%" :
              "NO: pullback > " + str.tostring(maxPullbackBars) + " bars"
         eventInvalid := true
 
@@ -868,10 +1015,10 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
         plannedRisk := candidateRisk
         plannedTarget := candidateTrigger + candidateRisk * rewardMultiple
         plannedRRtoPeak := candidateRRtoPeak
-        // V4: from the 3rd setup of the day, half size — SOURCE rule
-        // "3rd pullback: reduce size, don't skip", mapped to setup count.
-        setupsToday += 1
-        plannedShares := setupsToday >= 3 ? math.max(1, math.floor(candidateShares / 2)) : candidateShares
+        // V4/V6: from the 3rd FILLED setup of the day, half size. The counter
+        // moved to the fill detector (finding 7): arm-time counting charged
+        // every trigger revision of one pullback as a new setup.
+        plannedShares := setupsToday >= 2 ? math.max(1, math.floor(candidateShares / 2)) : candidateShares
         setupQuality := liveQuality
 
         setupState := ARMED
@@ -881,7 +1028,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
 
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=triggerPrice,
              comment="ROSS FP trigger",
-             alert_message="ROSS FP V4 ENTRY | {{ticker}} | stop-entry filled")
+             alert_message="ROSS FP V6 ENTRY | {{ticker}} | stop-entry filled")
 
     else if pullbackBars >= maxPullbackBars
         strategy.cancel("Long")
@@ -904,9 +1051,15 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
 // would just be noise.
 fullStackGreen = macdBullish and emaBullish and vwapBullish
 inStructure = setupState == IMPULSE or setupState == PULLBACK
+// V6 (finding 6): the uptrend lane may arm ONLY from clean IDLE, never from
+// the INVALID or DONE it used to overwrite in the same execution — a formal
+// NO or a completed trade could previously re-arm one line later, emitting
+// contradictory alerts for one candle. bar_index > stateStartBar keeps it
+// off the transition bar; the latches keep it off cancel/close bars.
 laneOpen = (fastLane and inStructure and momentumGate) or
-     (uptrendLane and not inStructure and setupState != ARMED and setupState != LONG and fullStackGreen)
+     (uptrendLane and setupState == IDLE and bar_index > stateStartBar and fullStackGreen)
 if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
+     not intrabarCancelled and not eventInvalid and
      laneOpen and close < open
     float fTrig = high + breakoutBufferTicks * syminfo.mintick
     float fStopRaw = low
@@ -918,27 +1071,51 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
     bool fATR = atrStopFallback and fWide
     float fStop = fATR ? fTrig - atr * fallbackATRmult : fStopRaw
     float fRisk = fTrig - fStop
-    float fRiskPct = f_safeDiv(fRisk, fTrig, 999.0) * 100.0
-    float fShares = fRisk > 0 ? math.min(math.floor(riskBudget / fRisk),
+    float fRiskPct = f_safeDiv(fRisk, fTrig, na) * 100.0
+    // V6 (finding 14): same slippage-aware sizing as the formal path
+    float fShares = fRisk > 0 ? math.min(math.floor(riskBudget / (fRisk + slipPerShare)),
          math.floor(maxPositionValue / fTrig)) : 0.0
     // V5.4: the lower-high guard. fTrig at/above HOD = breaking to open air;
     // otherwise demand >=1R before the overhead supply. Three TNON stops in
     // one session, all under a lower high, are what this line costs to skip.
     bool fRoomOK = not lanesRespectHOD or na(dayHigh) or fTrig >= dayHigh or
          (fRisk > 0 and (dayHigh - fTrig) / fRisk >= 1.0)
-    bool fastOK = fRisk > 0 and fRiskPct <= maxStopPct and fRoomOK and
-         fShares >= 1 and (not haltBandVeto or not (inRTH and fRisk > haltBandWidth))
+    // V6 (finding 9): the lanes now pass the SAME global controls the formal
+    // path advertises as hard — session, post-fallback ATR cap, dollar cap,
+    // scanner veto when user-enabled, fail-closed halt band. The lanes still
+    // skip only what they are documented to skip: push quality, retracement,
+    // pullback volume.
+    bool fHaltOK = not haltBandVeto or not inRTH or
+         (not na(haltBandWidth) and fRisk <= haltBandWidth)
+    float fRiskATR = f_safeDiv(fRisk, atr, na)
+    bool fastOK = fRisk > 0 and not na(fRiskPct) and fRiskPct <= maxStopPct and
+         not na(fRiskATR) and fRiskATR <= maxStopATR and
+         (not useMaxDollarStop or fRisk <= maxStopDollar) and
+         fRoomOK and fShares >= 1 and fHaltOK and sessionGate and scanGate
     if fastOK
         triggerPrice := fTrig
         structuralStop := fStop
         plannedRisk := fRisk
         plannedTarget := fTrig + fRisk * rewardMultiple
-        plannedRRtoPeak := f_safeDiv(dayHigh - fTrig, fRisk, -999.0)
-        setupsToday += 1
-        plannedShares := setupsToday >= 3 ? math.max(1, math.floor(fShares / 2)) : fShares
+        plannedRRtoPeak := f_safeDiv(dayHigh - fTrig, fRisk, na)
+        plannedShares := setupsToday >= 2 ? math.max(1, math.floor(fShares / 2)) : fShares
         setupQuality := liveQuality
         setupState := ARMED
         stateStartBar := bar_index
+        // V6 (finding 8): a lane arm initialises a COMPLETE setup record with
+        // its own provenance kind. Before this it inherited whatever the
+        // previous setup left — including KIND_RETEST labels on lane entries
+        // and na pullbackLow that poisoned every later math.min().
+        setupKind := inStructure ? KIND_FAST : KIND_UPTREND
+        pullbackLow := na(pullbackLow) ? low : math.min(pullbackLow, low)
+        pullbackVolumeSum := pullbackVolumeSum > 0 ? pullbackVolumeSum + volume : volume
+        redPullbackBars := math.max(redPullbackBars, 1)
+        if setupKind == KIND_UPTREND
+            // no push record exists in a clean-IDLE arm; leave push* na so
+            // retracement math reads na (not a sentinel) and cannot
+            // false-invalidate. The intrabar cancel keys on structuralStop.
+            pushPeak := na
+            pushStartPrice := na
         // V5.3 (YJ zombie bug): the lane armed from IMPULSE with
         // pullbackLastBar = na, so `bar_index > pullbackLastBar` was na-false
         // forever: the state could neither refresh its trigger nor expire.
@@ -954,39 +1131,60 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
         eventArmed := true
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=fTrig,
              comment="ROSS FP fast lane",
-             alert_message="ROSS FP V5.1 FAST ENTRY | {{ticker}} | red-high break")
+             alert_message="ROSS FP V6 FAST ENTRY | {{ticker}} | red-high break")
+
+// V6 (finding 4): commit the one-pass-per-bar latch after all signal blocks.
+if confirmedPass
+    lastSignalBar := bar_index
 
 // ───────────────────── Realtime safety cancellation ─────────────────────
-// V5.3: cancelling the order without leaving ARMED created the zombie state —
-// the dashboard kept promising a trigger no order backed. Cancel = INVALID.
-if isOneMinute and setupState == ARMED and strategy.position_size == 0 and not barstate.isconfirmed
-    maxAllowedPullbackLow = pushPeak - pushRange * maxRetracementPct / 100.0
-    if low < maxAllowedPullbackLow and not na(pushRange)
-        strategy.cancel("Long")
-        setupState := INVALID
-        stateStartBar := bar_index
-        scanAfterBar := bar_index
-        statusReason := "NO: retraced through 50% intrabar - order cancelled"
-        eventInvalid := true
-
-// V5.3 STALENESS GUARD: an ARMED trigger the price has left behind is dead.
-// A live stop order fills the moment price crosses it, so price sitting a
-// full ATR ABOVE the trigger while still flat means no order is working —
-// whatever the state machine believes. Kill it; the lanes re-arm on the next
-// red candle anyway.
+// V6 (finding 1): the V5.3 version wrote INVALID/IDLE into ordinary `var`
+// state intrabar. Pine rolls those writes back before the next realtime
+// tick while the strategy.cancel() persists — recreating the exact zombie
+// (TRIGGER SET with no working order) the fix claimed to remove. Now the
+// cancel latches `intrabarCancelled` (varip — survives the rollback); the
+// in-execution state change is display-only, and the CLOSE execution
+// commits INVALID durably below. Arming paths all check the latch.
+// The cancel condition is also simplified to the level that means it:
+// price touching the STRUCTURAL STOP before the trigger kills the setup —
+// well-defined for every setup kind, including lanes with no push record.
 if isOneMinute and setupState == ARMED and strategy.position_size == 0 and
+     not barstate.isconfirmed and not intrabarCancelled and
+     not na(structuralStop) and low <= structuralStop
+    strategy.cancel("Long")
+    intrabarCancelled := true
+    setupState := INVALID
+    statusReason := "NO: stop touched before trigger - order cancelled"
+
+// V5.3/V6 STALENESS GUARD: flat with price a full ATR above the trigger
+// means no order is working, whatever the state machine believes.
+if isOneMinute and setupState == ARMED and strategy.position_size == 0 and
+     not barstate.isconfirmed and not intrabarCancelled and
      not na(triggerPrice) and close > triggerPrice + atr
     strategy.cancel("Long")
+    intrabarCancelled := true
     setupState := IDLE
-    stateStartBar := bar_index
-    scanAfterBar := bar_index
     statusReason := "stale trigger " + str.tostring(triggerPrice, format.mintick) + " abandoned"
 
 // ───────────────────────── Trade management ─────────────────────────
+// V6 (finding 16): the dashboard promised "half at T1, stop to break-even,
+// rest to 2R" while the code ran a single all-or-nothing bracket — the
+// Strategy Tester and the screen described two different strategies. The
+// ladder is now real: T1 takes 50% at entry+1R; once the partial fill is
+// detected (strategy.closedtrades increments, position shrinks) the runner's
+// stop moves to entry. Detection lands one tick late live / next bar in
+// backtest — a conservative, disclosed lag.
 if strategy.position_size > 0 and setupState == LONG and tradeRisk > 0
-    strategy.exit("Bracket", from_entry="Long", stop=structuralStop, limit=activeTarget,
-         comment_loss="STRUCTURAL STOP", comment_profit="TARGET",
-         alert_message="ROSS FP V4 EXIT | {{ticker}}")
+    float t1Target = tradeEntryPrice + tradeRisk
+    if not t1Filled
+        strategy.exit("T1", from_entry="Long", qty_percent=50,
+             stop=structuralStop, limit=t1Target,
+             comment_loss="STRUCTURAL STOP", comment_profit="T1 HALF",
+             alert_message="ROSS FP V6 T1 | {{ticker}}")
+    strategy.exit("RUNNER", from_entry="Long", qty_percent=100,
+         stop=t1Filled ? tradeEntryPrice : structuralStop, limit=activeTarget,
+         comment_loss=t1Filled ? "BREAKEVEN" : "STRUCTURAL STOP", comment_profit="TARGET",
+         alert_message="ROSS FP V6 EXIT | {{ticker}}")
 
 mfeR = setupState == LONG and tradeRisk > 0 ?
      f_safeDiv(highestSinceEntry - tradeEntryPrice, tradeRisk, 0.0) : na
@@ -1005,8 +1203,11 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size > 0 and setup
              "BAIL: only " + str.tostring(mfeR, "#.00") + "R MFE" :
              "BAIL: close below entry"
         eventBailout := true
-        strategy.close("Long", comment="BAILOUT", immediately=true,
-             alert_message="ROSS FP V4 BAILOUT | {{ticker}}")
+        // V6 (finding 15): `immediately=true` filled the bailout at the very
+        // close it had just observed — an assumption live execution cannot
+        // honour. The market order now fills at the next tick/bar open.
+        strategy.close("Long", comment="BAILOUT",
+             alert_message="ROSS FP V6 BAILOUT | {{ticker}}")
 
 // ───────────────────────── Display values ─────────────────────────
 displayQuality = setupState == ARMED or setupState == LONG ? setupQuality : liveQuality
@@ -1029,7 +1230,7 @@ displayRiskCash = not na(displayShares) and not na(displayRiskDollar) ? displayS
 // read as clear.
 thinRoom = not na(nextObstacleR) and nextObstacleR < 1.0 and
      (setupState == PULLBACK or setupState == ARMED)
-roomWarn = thinRoom ? "⚠ ONLY " + str.tostring(nextObstacleR, "#.1") + "R TO " +
+roomWarn = thinRoom ? "⚠ ONLY " + f_rr(nextObstacleR) + " TO " +
      (candidateTrigger < pushPeak ? "PRIOR HIGH" : "HIGH OF DAY") + " — " : ""
 // V4.10: a first pullback under a LOWER high is a different trade from one
 // making new highs. Named, not silently averaged in with the good case.
@@ -1061,15 +1262,24 @@ liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
 // V5.3: verdict compressed by operator request — one glance, not a sentence.
 // Nothing vanished: levels moved to the PLAN row, the lower high to the HOD
 // row, gate failures to the GATES row.
-shortLH = not peakIsHOD and not na(dayHigh) and
+// V6 (finding 18d): with no impulse, peakIsHOD is vacuously false and the
+// display called EVERY quiet moment a lower high. Comparison needs a peak.
+hodComparable = not na(pushPeak) and not na(dayHigh)
+shortLH = hodComparable and not peakIsHOD and
      (setupState == PULLBACK or setupState == ARMED) ? " · LH" : ""
+// V6 (finding 18a): every state gets an explicit branch — INVALID used to
+// fall through to chartVerdict and print "CHART OK" beside a red NO header.
+// V6 (finding 17): the LIVE tag is appended again — it was computed and
+// dropped in the V5.3 compression, so provisional reads looked final.
 actionText =
-     not isOneMinute ? "USE 1-MINUTE CHART" :
-     setupState == LONG ? "MANAGE " + str.tostring(mfeR, "#.00") + "R" + windowTag :
-     setupState == ARMED ? roomWarn + "BUY >" + str.tostring(triggerPrice, format.mintick) + shortLH + windowTag :
+     (not isOneMinute ? "USE 1-MINUTE CHART" :
+     setupState == LONG ? "MANAGE " + f_n(mfeR, "#.00") + "R" + windowTag :
+     setupState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + shortLH + windowTag :
      setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + shortLH + windowTag :
      setupState == IMPULSE ? chartVerdict + " · wait PB" + windowTag :
-     chartVerdict + windowTag
+     setupState == INVALID ? statusReason + windowTag :
+     setupState == DONE ? "DONE — log the trade" + windowTag :
+     chartVerdict + windowTag) + liveTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
@@ -1082,7 +1292,7 @@ plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.n
 // retest is live, so it does not clutter a normal pullback chart.
 plot(showLevels and enableRetest and not na(brokenHOD) and
      (setupState == PULLBACK or setupState == ARMED) and setupKind == KIND_RETEST
-     ? brokenHOD : na, "Broken HOD (retest level)",
+     ? setupRetestLevel : na, "Broken HOD (retest level)",
      color=color.new(color.aqua, 20), linewidth=2, style=plot.style_linebr)
 plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
 // V4.9: half-width follows the instrument's own volatility so the band
@@ -1146,11 +1356,11 @@ lg = showMarkers and bigMarkers
 // the chart and, later, in the trade log.
 plotshape(sm and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.tiny, text="RT")
 plotshape(lg and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest, large)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.normal, text="RT")
-plotshape(sm and eventArmed, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="TRG")
+plotshape(sm and eventArmed and setupKind != KIND_RETEST, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="TRG")
 plotshape(sm and eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.tiny, text="IN")
 plotshape(sm and eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="X")
 plotshape(sm and eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="BAIL")
-plotshape(lg and eventArmed, title="Trigger set (large)", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.normal, text="TRG")
+plotshape(lg and eventArmed and setupKind != KIND_RETEST, title="Trigger set (large)", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.normal, text="TRG")
 plotshape(lg and eventLong, title="Entry filled (large)", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.normal, text="IN")
 plotshape(lg and eventInvalid, title="Setup rejected (large)", style=shape.xcross, location=location.abovebar, color=color.red, size=size.normal, text="X")
 plotshape(lg and eventBailout, title="Bailout (large)", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.normal, text="BAIL")
@@ -1171,10 +1381,6 @@ f_crit(string nm, bool ok) =>
     nm + (ok ? "✓" : "✗")
 CRIT_ALL = color.lime
 CRIT_SOME = color.orange
-// V5.1: -999/-999.1R on screen was the f_safeDiv SENTINEL leaking into the
-// dashboard (live example, EHGO). A sentinel is for logic, never for eyes.
-f_rr(float v) =>
-    na(v) or v <= -900 or v >= 900 ? "—" : str.tostring(v, "#.1") + "R"
 
 f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
@@ -1232,17 +1438,16 @@ if barstate.islast
     // the source names a failure to break it as the exit tell — so it belongs
     // on the face of the dashboard, not implied by the R/S row.
     f_row(8, "HIGH OF DAY", f_px(dayHigh) +
-         (peakIsHOD ? "  · impulse IS the high" : "  ⚠ lower high") +
-         (not na(candidateRRtoHOD) and math.abs(candidateRRtoHOD) < 900 ?
-              "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
-         peakIsHOD ? color.lime : color.orange)
+         (not hodComparable ? "" : peakIsHOD ? "  · impulse IS the high" : "  ⚠ lower high") +
+         (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
+         not hodComparable ? color.silver : peakIsHOD ? color.lime : color.orange)
 
     // V5: the scanner lane, on the same screen as the trigger. Before this the
     // operator had to hold "does this name even qualify" in their head while
     // reading a trigger price.
     if showScanPanel
         f_row(9, "PILLARS " + str.tostring(pillarScore) + "/4",
-             f_crit("P", pillarPrice) + " " + f_crit("F", pillarFloat) + " " +
+             f_crit("P", pillarPrice) + " " + (na(scanFloat) ? "F? " : f_crit("F", pillarFloat) + " ") +
              f_crit("R", pillarRVOL) + " " + f_crit("G", pillarGap) +
              "  · " + f_n(scanGap, "#.0") + "% · rvol " + f_n(scanRVOL, "#.1") + "x" +
              (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M"),
@@ -1261,16 +1466,19 @@ if barstate.islast
     // screenshot PB/RETR/VOL/RISK all read ✗ in IMPULSE state — before any
     // pullback existed to fail them. A false cross teaches the eye to ignore
     // crosses, which is the TRUG lesson all over again.
+    // V6 (finding 18b): the row claiming to hold every trade gate omitted
+    // MOM, RR and SCAN — it could read green while the entry was refused.
+    // It now lists all of them and its colour IS hardGatesOK.
     pbApplicable = setupState == PULLBACK or setupState == ARMED
     f_row(11, "GATES", f_crit("PUSH", pushGate) + " " +
          (pbApplicable ? f_crit("PB", pullbackCountGate) + " " + f_crit("RETR", retracementGate) + " " +
               f_crit("VOL", volumeGate) + " " +
               ("RISK" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) : "PB· RETR· VOL· RISK·") +
-         " " + f_crit("SESS", sessionGate) +
-         (fastLane or uptrendLane ? "  · lanes ON" : ""),
-         pushGate and sessionGate and (not pbApplicable or
-              (pullbackCountGate and retracementGate and volumeGate and riskGate))
-              ? CRIT_ALL : CRIT_SOME)
+         " " + f_crit("MOM", momentumGate) + f_crit(" RR", rrGate) +
+         (scanGates ? f_crit(" SCAN", scanGate) : "") + f_crit(" SESS", sessionGate) +
+         (fastLane or uptrendLane ? " · lanes" : ""),
+         pbApplicable ? (hardGatesOK ? CRIT_ALL : CRIT_SOME) :
+              (pushGate and momentumGate and sessionGate ? CRIT_ALL : CRIT_SOME))
 
     if dashFull
         f_row(12, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
