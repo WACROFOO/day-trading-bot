@@ -128,6 +128,16 @@ bailoutEnabled       = input.bool(true, "Enable breakout-or-bailout", group=gExe
 bailoutBars          = input.int(2, "Full bars allowed to prove momentum", minval=1, maxval=10, group=gExecution)
 minimumMFER          = input.float(0.5, "Minimum MFE required (R) [UNTESTED local]", minval=0.0, maxval=5.0, step=0.1, group=gExecution)
 bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry", group=gExecution)
+// V5.1: FAST LANE. Reported live (EHGO 2026-08-19): red candles printed inside
+// a valid structure, the formal path rejected the pullback on a quality gate,
+// price ripped +0.40 with no trigger ever offered. The fast lane arms the
+// stop-entry AT THE CLOSE OF ANY RED CANDLE inside an active structure —
+// trigger = that candle's high + buffer, stop = its low — so the break fills
+// intrabar (calc_on_every_tick) without waiting for another bar to load.
+// It still respects: momentum gates, max stop %, halt band (RTH), shares>=1.
+// It deliberately skips: push-quality, retracement %, volume ratio. Those
+// stay as INFO on the dashboard; the operator sees them and decides.
+fastLane             = input.bool(true, "FAST LANE: arm on every red candle in structure", group=gExecution)
 
 gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
@@ -188,7 +198,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V5.0"                       // bump on every shipped change
+REV = "V5.1"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -850,10 +860,42 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
     else
         statusReason := gateReason
 
+// ───────────────────── V5.1 fast lane ─────────────────────
+// Runs AFTER the formal arm block: if that path armed this bar, state is
+// already ARMED and this is skipped. If it declined on a quality gate, this
+// arms anyway — with the reason the formal path declined kept in view.
+if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and fastLane and
+     (setupState == IMPULSE or setupState == PULLBACK) and close < open
+    float fTrig = high + breakoutBufferTicks * syminfo.mintick
+    float fStop = low
+    float fRisk = fTrig - fStop
+    float fRiskPct = f_safeDiv(fRisk, fTrig, 999.0) * 100.0
+    float fShares = fRisk > 0 ? math.min(math.floor(riskBudget / fRisk),
+         math.floor(maxPositionValue / fTrig)) : 0.0
+    bool fastOK = momentumGate and fRisk > 0 and fRiskPct <= maxStopPct and
+         fShares >= 1 and (not haltBandVeto or not (inRTH and fRisk > haltBandWidth))
+    if fastOK
+        triggerPrice := fTrig
+        structuralStop := fStop
+        plannedRisk := fRisk
+        plannedTarget := fTrig + fRisk * rewardMultiple
+        plannedRRtoPeak := f_safeDiv(dayHigh - fTrig, fRisk, -999.0)
+        setupsToday += 1
+        plannedShares := setupsToday >= 3 ? math.max(1, math.floor(fShares / 2)) : fShares
+        setupQuality := liveQuality
+        setupState := ARMED
+        stateStartBar := bar_index
+        statusReason := "FAST trigger " + str.tostring(fTrig, format.mintick) +
+             " (red-candle high) — fills intrabar"
+        eventArmed := true
+        strategy.entry("Long", strategy.long, qty=plannedShares, stop=fTrig,
+             comment="ROSS FP fast lane",
+             alert_message="ROSS FP V5.1 FAST ENTRY | {{ticker}} | red-high break")
+
 // ───────────────────── Realtime safety cancellation ─────────────────────
 if isOneMinute and setupState == ARMED and strategy.position_size == 0 and not barstate.isconfirmed
     maxAllowedPullbackLow = pushPeak - pushRange * maxRetracementPct / 100.0
-    if low < maxAllowedPullbackLow
+    if low < maxAllowedPullbackLow and not na(pushRange)
         strategy.cancel("Long")
 
 // ───────────────────────── Trade management ─────────────────────────
@@ -1032,6 +1074,19 @@ LBL = color.rgb(28, 28, 30)
 DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
 var table dash = table.new(position.bottom_right, 2, 14, border_width=0)
 
+// V5.1 display rule, operator-specified: each criterion carries its own ✓/✗,
+// and a LINE is green only when EVERY criterion on it is met — orange while
+// any one is missing. (Pine colours a cell, not parts of it, so the glyph is
+// the per-criterion state and the row colour is the all-met state.)
+f_crit(string nm, bool ok) =>
+    nm + (ok ? "✓" : "✗")
+CRIT_ALL = color.lime
+CRIT_SOME = color.orange
+// V5.1: -999/-999.1R on screen was the f_safeDiv SENTINEL leaking into the
+// dashboard (live example, EHGO). A sentinel is for logic, never for eyes.
+f_rr(float v) =>
+    na(v) or v <= -900 or v >= 900 ? "—" : str.tostring(v, "#.1") + "R"
+
 f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
          text_size=DSZ, text_halign=text.align_left)
@@ -1048,7 +1103,9 @@ if barstate.islast
          bgcolor=stateColor, text_color=color.black, text_size=DSZ)
 
     f_row(1, "VERDICT", actionText, thinRoom ? color.red : color.white)
-    f_row(2, "MOMENTUM", momentumText, macdBullish ? color.lime : color.orange)
+    f_row(2, "MOMENTUM", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
+         (not vwapKnown ? "VWAP?" : f_crit("VWAP", vwapBullish)),
+         macdBullish and emaBullish and vwapBullish ? CRIT_ALL : CRIT_SOME)
     // V4.6: print the VWAP number AND its anchor — a gate you cannot check
     // against your own chart is a gate you cannot trust
     f_row(3, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
@@ -1059,9 +1116,13 @@ if barstate.islast
          f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ STOP WIDER - unenforceable" :
               "  ok · " + f_n(f_safeDiv(haltBandWidth, displayRiskDollar, na), "#.1") + "R to halt"),
          not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
-    f_row(5, "TP / SL", f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry), color.silver)
+    f_row(5, setupState == ARMED ? "▶ BUY ABOVE" : "TP / SL",
+         setupState == ARMED ?
+              f_px(triggerPrice) + "  stop " + f_px(structuralStop) + "  tgt " + f_px(plannedTarget) :
+              f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry),
+         setupState == ARMED ? color.yellow : color.silver)
     f_row(6, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
-         " / " + f_n(displayRR, "#.1") + "R room" + (thinRoom ? "  ⚠ EXTENDED" : ""),
+         " / " + f_rr(displayRR) + " room" + (thinRoom ? "  ⚠ EXTENDED" : ""),
          thinRoom ? color.red : color.silver)
     f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
          "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
@@ -1072,8 +1133,8 @@ if barstate.islast
     // on the face of the dashboard, not implied by the R/S row.
     f_row(8, "HIGH OF DAY", f_px(dayHigh) +
          (peakIsHOD ? "  · impulse IS the high" : "  ⚠ lower high") +
-         (not na(candidateRRtoHOD) and candidateRRtoHOD > -900 ?
-              "  · " + f_n(candidateRRtoHOD, "#.1") + "R away" : ""),
+         (not na(candidateRRtoHOD) and math.abs(candidateRRtoHOD) < 900 ?
+              "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
          peakIsHOD ? color.lime : color.orange)
 
     // V5: the scanner lane, on the same screen as the trigger. Before this the
@@ -1081,20 +1142,30 @@ if barstate.islast
     // reading a trigger price.
     if showScanPanel
         f_row(9, "PILLARS " + str.tostring(pillarScore) + "/4",
-             (pillarPrice ? "P" : "p") + (pillarFloat ? "F" : "f") +
-             (pillarRVOL ? "R" : "r") + (pillarGap ? "G" : "g") +
+             f_crit("P", pillarPrice) + " " + f_crit("F", pillarFloat) + " " +
+             f_crit("R", pillarRVOL) + " " + f_crit("G", pillarGap) +
              "  · " + f_n(scanGap, "#.0") + "% · rvol " + f_n(scanRVOL, "#.1") + "x" +
              (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M"),
-             pillarScore == 4 ? color.lime : pillarScore >= 3 ? color.orange : color.gray)
+             pillarScore == 4 ? CRIT_ALL : CRIT_SOME)
+        // "2+ hits" is the met-criterion here — his own rule: one alert is
+        // not a candidate (KSPN, yg5E_mqGFGg @00:16:47).
         f_row(10, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
              (laneSqueeze5 ? "SQ5 " : "") + (laneSqueeze10 ? "SQ10 " : "") +
-             (laneAny ? "" : "— no lane this bar") +
-             "  · " + str.tostring(laneHits) + " hits today",
-             laneHits >= 2 ? color.lime : laneAny ? color.orange : color.gray)
+             (laneAny ? "" : "no lane this bar") +
+             " · " + f_crit(str.tostring(laneHits) + " hits", laneHits >= 2),
+             laneHits >= 2 ? CRIT_ALL : CRIT_SOME)
+
+    // V5.1: every TRADE gate on one line, same ✓/✗ + all-met colour rule. This
+    // is the line that answers "why is there no trigger" without hunting.
+    f_row(11, "GATES", f_crit("PUSH", pushGate) + " " + f_crit("PB", pullbackCountGate) + " " +
+         f_crit("RETR", retracementGate) + " " + f_crit("VOL", volumeGate) + " " +
+         f_crit("RISK", riskGate) + " " + f_crit("SESS", sessionGate) +
+         (fastLane ? "  · fast lane ON" : ""),
+         pushGate and pullbackCountGate and retracementGate and volumeGate and riskGate and sessionGate
+              ? CRIT_ALL : CRIT_SOME)
 
     if dashFull
-        f_row(11, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-        f_row(12, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
+        f_row(12, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
     f_row(13, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
