@@ -216,7 +216,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V5.2"                       // bump on every shipped change
+REV = "V5.3"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -926,6 +926,14 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
         setupQuality := liveQuality
         setupState := ARMED
         stateStartBar := bar_index
+        // V5.3 (YJ zombie bug): the lane armed from IMPULSE with
+        // pullbackLastBar = na, so `bar_index > pullbackLastBar` was na-false
+        // forever: the state could neither refresh its trigger nor expire.
+        // Combined with the safety cancel below, that produced a TRIGGER SET
+        // showing a 20-minute-old plan 0.70 below price.
+        pullbackLastBar := bar_index
+        pullbackStartBar := na(pullbackStartBar) ? bar_index : pullbackStartBar
+        pullbackBars := math.max(pullbackBars, 1)
         statusReason := (inStructure ? "FAST" : "UPTREND") + " trigger " +
              str.tostring(fTrig, format.mintick) +
              (fATR ? " · ATR stop " + str.tostring(fStop, format.mintick) : "") +
@@ -936,10 +944,30 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
              alert_message="ROSS FP V5.1 FAST ENTRY | {{ticker}} | red-high break")
 
 // ───────────────────── Realtime safety cancellation ─────────────────────
+// V5.3: cancelling the order without leaving ARMED created the zombie state —
+// the dashboard kept promising a trigger no order backed. Cancel = INVALID.
 if isOneMinute and setupState == ARMED and strategy.position_size == 0 and not barstate.isconfirmed
     maxAllowedPullbackLow = pushPeak - pushRange * maxRetracementPct / 100.0
     if low < maxAllowedPullbackLow and not na(pushRange)
         strategy.cancel("Long")
+        setupState := INVALID
+        stateStartBar := bar_index
+        scanAfterBar := bar_index
+        statusReason := "NO: retraced through 50% intrabar - order cancelled"
+        eventInvalid := true
+
+// V5.3 STALENESS GUARD: an ARMED trigger the price has left behind is dead.
+// A live stop order fills the moment price crosses it, so price sitting a
+// full ATR ABOVE the trigger while still flat means no order is working —
+// whatever the state machine believes. Kill it; the lanes re-arm on the next
+// red candle anyway.
+if isOneMinute and setupState == ARMED and strategy.position_size == 0 and
+     not na(triggerPrice) and close > triggerPrice + atr
+    strategy.cancel("Long")
+    setupState := IDLE
+    stateStartBar := bar_index
+    scanAfterBar := bar_index
+    statusReason := "stale trigger " + str.tostring(triggerPrice, format.mintick) + " abandoned"
 
 // ───────────────────────── Trade management ─────────────────────────
 if strategy.position_size > 0 and setupState == LONG and tradeRisk > 0
@@ -1017,13 +1045,18 @@ windowTag = inWindowInfo ? "" : " · off-window"
 // V4.7: provisional reads are labelled. A verdict that can still flip
 // before the close must say so — the design pack's fail-closed rule.
 liveTag = liveEval and not barstate.isconfirmed ? " · LIVE (bar forming)" : ""
+// V5.3: verdict compressed by operator request — one glance, not a sentence.
+// Nothing vanished: levels moved to the PLAN row, the lower high to the HOD
+// row, gate failures to the GATES row.
+shortLH = not peakIsHOD and not na(dayHigh) and
+     (setupState == PULLBACK or setupState == ARMED) ? " · LH" : ""
 actionText =
      not isOneMinute ? "USE 1-MINUTE CHART" :
-     setupState == LONG ? "MANAGE | MFE " + str.tostring(mfeR, "#.00") + "R" + windowTag + liveTag :
-     setupState == ARMED ? roomWarn + "Trigger " + str.tostring(triggerPrice, format.mintick) + " — confirm on chart" + lowerHighTag + windowTag + liveTag :
-     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + lowerHighTag + windowTag + liveTag :
-     setupState == IMPULSE ? chartVerdict + " — wait first pullback" + windowTag + liveTag :
-     chartVerdict + " — no setup yet" + windowTag + liveTag
+     setupState == LONG ? "MANAGE " + str.tostring(mfeR, "#.00") + "R" + windowTag :
+     setupState == ARMED ? roomWarn + "BUY >" + str.tostring(triggerPrice, format.mintick) + shortLH + windowTag :
+     setupState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + shortLH + windowTag :
+     setupState == IMPULSE ? chartVerdict + " · wait PB" + windowTag :
+     chartVerdict + windowTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = setupState == PULLBACK or setupState == ARMED or setupState == LONG
@@ -1151,25 +1184,35 @@ if barstate.islast
          macdBullish and emaBullish and vwapBullish ? CRIT_ALL : CRIT_SOME)
     // V4.6: print the VWAP number AND its anchor — a gate you cannot check
     // against your own chart is a gate you cannot trust
-    f_row(3, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
-         vwapBullish ? color.lime : color.orange)
-    // V5: the band only exists 09:30-16:00. Outside it this row is context for
-    // "what happens if I am still holding at the bell", never a gate.
-    f_row(4, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
-         f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ STOP WIDER - unenforceable" :
-              "  ok · " + f_n(f_safeDiv(haltBandWidth, displayRiskDollar, na), "#.1") + "R to halt"),
-         not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
-    f_row(5, setupState == ARMED ? "▶ BUY ABOVE" : "TP / SL",
-         setupState == ARMED ?
-              f_px(triggerPrice) + "  stop " + f_px(structuralStop) +
-              (usingATRstop ? " (ATR)" : "") + "  tgt " + f_px(plannedTarget) :
-              f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry),
-         setupState == ARMED ? color.yellow : color.silver)
-    f_row(6, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
-         " / " + f_rr(displayRR) + " room" + (thinRoom ? "  ⚠ EXTENDED" : ""),
+    if dashFull
+        f_row(3, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
+             vwapBullish ? color.lime : color.orange)
+    if inRTH or dashFull
+        f_row(4, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+             f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ STOP WIDER - unenforceable" :
+                  "  ok · " + f_n(f_safeDiv(haltBandWidth, displayRiskDollar, na), "#.1") + "R to halt"),
+             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
+    // V5.3: the plan on ONE row, ladder included. Exit rules are the repo's
+    // own (DAILY-ROUTINE-FR.md): half off at T1, stop to break-even, rest to
+    // the 2R target. T1 = entry + 1R.
+    f_row(5, setupState == ARMED ? "▶ PLAN" : setupState == LONG ? "▶ IN TRADE" : "PLAN",
+         setupState == ARMED or setupState == LONG ?
+              "in " + f_px(setupState == LONG ? tradeEntryPrice : triggerPrice) +
+              " · SL " + f_px(structuralStop) + (usingATRstop ? "ᵃᵗʳ" : "") +
+              " · T1½ " + f_px((setupState == LONG ? tradeEntryPrice : triggerPrice) +
+                   (setupState == LONG ? tradeRisk : plannedRisk)) +
+              " · T2 " + f_px(setupState == LONG ? activeTarget : plannedTarget) :
+              "— arm pending",
+         setupState == ARMED ? color.yellow : setupState == LONG ? color.lime : color.gray)
+    // V5.3: risk stated the way the guidelines judge it — dollars and % of the
+    // account, never notional. Room appears only when it IS the warning.
+    f_row(6, "SIZE", f_n(displayShares, "#") + " sh · $" + f_n(displayRiskCash, "#") +
+         " risk (" + f_n(f_safeDiv(displayRiskCash, 100000.0, 0.0) * 100.0, "#.00") + "%)" +
+         (thinRoom ? "  ⚠ " + f_rr(nextObstacleR) + " ROOM" : ""),
          thinRoom ? color.red : color.silver)
-    f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
-         "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
+    if dashFull
+        f_row(7, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
+             "  · setup #" + str.tostring(setupsToday + (setupState == PULLBACK ? 1 : 0)), color.silver)
 
     // V4.10: the day's high, and whether this impulse is the one making it.
     // Every scanner branch measured on 2026-08-18 fired only on a new HOD, and
@@ -1218,7 +1261,8 @@ if barstate.islast
 
     if dashFull
         f_row(12, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-    f_row(13, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
+    if dashFull
+        f_row(13, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed
