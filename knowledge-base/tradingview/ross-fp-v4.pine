@@ -279,7 +279,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V7.2"                       // bump on every shipped change — keep alerts + title in step
+REV = "V7.3"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -670,11 +670,18 @@ var bool eventArmed = false
 var bool eventLong = false
 var bool eventInvalid = false
 var bool eventBailout = false
+// V7.3 (live CDTG report): when the PATTERN passes and only the clock says
+// no, silence is the wrong answer — the operator watched a valid read go
+// unmentioned and traded it manually. A ghost signal shows the pattern was
+// seen while placing NO order, so the session rule keeps its teeth and the
+// operator keeps their eyes.
+var bool eventGhost = false
 
 eventArmed := false
 eventLong := false
 eventInvalid := false
 eventBailout := false
+eventGhost := false
 
 // ───────────────────────── Detect actual broker fill ─────────────────────────
 if strategy.position_size > 0 and setupState != LONG
@@ -1149,7 +1156,15 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
         eventInvalid := true
 
     else
-        statusReason := gateReason
+        // V7.3: everything but the clock passed -> say so, place nothing.
+        bool gatesExceptWindow = pushGate and pullbackCountGate and retracementGate and
+             volumeGate and momentumGate and riskGate and rrGate and scanGate
+        if gatesExceptWindow and not (sessionGate and venueGate)
+            eventGhost := true
+            statusReason := "PATTERN OK — no order (" +
+                 (not sessionGate ? "session over" : "pre-market venue") + "). Your call."
+        else
+            statusReason := gateReason
 
 // ───────────────────── V5.1 fast lane ─────────────────────
 // Runs AFTER the formal arm block: if that path armed this bar, state is
@@ -1198,10 +1213,16 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
     bool fHaltOK = not haltBandVeto or not inRTH or
          (not na(haltBandWidth) and fRisk <= haltBandWidth)
     float fRiskATR = f_safeDiv(fRisk, atr, na)
-    bool fastOK = fRisk > 0 and not na(fRiskPct) and fRiskPct <= maxStopPct and
+    bool fastCoreOK = fRisk > 0 and not na(fRiskPct) and fRiskPct <= maxStopPct and
          not na(fRiskATR) and fRiskATR <= maxStopATR and
          (not useMaxDollarStop or fRisk <= maxStopDollar) and
-         fRoomOK and fShares >= 1 and fHaltOK and sessionGate and scanGate and venueGate
+         fRoomOK and fShares >= 1 and fHaltOK and scanGate
+    bool fastOK = fastCoreOK and sessionGate and venueGate
+    // V7.3: lane pattern valid, clock refused -> ghost, not silence.
+    if fastCoreOK and not fastOK
+        eventGhost := true
+        statusReason := "PATTERN OK (red-candle break " + str.tostring(fTrig, format.mintick) +
+             ") — no order (" + (not sessionGate ? "session over" : "pre-market venue") + "). Your call."
     if fastOK
         triggerPrice := fTrig
         structuralStop := fStop
@@ -1532,6 +1553,8 @@ plotshape(lg and eventArmed and setupKind == KIND_RETEST, title="Trigger set (re
 plotshape(sm and eventArmed and setupKind != KIND_RETEST, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="SET")
 plotshape(sm and eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.tiny, text="BUY")
 plotshape(sm and eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="NO")
+plotshape(sm and eventGhost, title="Pattern seen, no order", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.tiny, text="SEEN")
+plotshape(lg and eventGhost, title="Pattern seen, no order (large)", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.normal, text="SEEN")
 plotshape(sm and eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="EXIT")
 plotshape(lg and eventArmed and setupKind != KIND_RETEST, title="Trigger set (large)", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.normal, text="SET")
 plotshape(lg and eventLong, title="Entry filled (large)", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.normal, text="BUY")
@@ -1587,7 +1610,8 @@ if barstate.islast
          "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
               "volume too thin ($" + f_n(avgDollarVol20, "#") + "/min)") :
-         (sessionOver ? "SESSION OVER (07:00-11:30 ET) · watch only — " : "") +
+         (eventGhost ? "PATTERN SEEN · no order (window) — " :
+          sessionOver ? "SESSION OVER (07:00-11:30 ET) · watch only — " : "") +
               f_stateName(setupState) +
               (setupState == INVALID or setupState == DONE ? ageTag : "") +
               " — " + actionText
