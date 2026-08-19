@@ -138,6 +138,24 @@ bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry",
 // It deliberately skips: push-quality, retracement %, volume ratio. Those
 // stay as INFO on the dashboard; the operator sees them and decides.
 fastLane             = input.bool(true, "FAST LANE: arm on every red candle in structure", group=gExecution)
+// V5.2: ATR-FALLBACK STOP. Live example (YJ 2026-08-19): the pullback candle
+// spanned 2.64->2.41 — a candle-low stop of ~9%% of price, so the RISK gate
+// refused and no trigger existed while the bounce paid. The repo's own audit
+// already names this failure: "a 1-min signal bar on a halting name can span
+// $1+: the candle-low stop is then fiction... Use the ATR stop method on fast
+// tape" (knowledge-base/daytrade-dash/README.md, measured medians 0.23-0.83).
+// When the candle-low stop breaches maxStopPct/maxStopATR, substitute
+// trigger - fallbackATRmult*ATR instead of rejecting, and SAY SO on screen.
+atrStopFallback      = input.bool(true, "ATR-fallback stop when candle-low stop too wide", group=gExecution)
+fallbackATRmult      = input.float(1.0, "Fallback stop distance (x ATR)", minval=0.25, maxval=5.0, step=0.25, group=gExecution)
+// V5.2: UPTREND LANE. YJ again: the 72%% retracement correctly invalidated the
+// formal setup (that protection stays), but recovery then required a whole new
+// impulse detection while price left. In a confirmed uptrend — MACD, EMA and
+// VWAP ALL green, hard-coded, no toggles — a red candle is a micro-pullback
+// whatever the state machine happens to call the moment. This is closest to
+// what he actually does: he runs no impulse detector; he sees an uptrend, a
+// red candle, and the break of its high.
+uptrendLane          = input.bool(true, "UPTREND LANE: red candle + full momentum stack arms in ANY state", group=gExecution)
 
 gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
@@ -198,7 +216,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V5.1"                       // bump on every shipped change
+REV = "V5.2"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -741,7 +759,15 @@ supportCountRaw = (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport 
 supportCount = supportCountRaw - (emaClustered ? 1 : 0)
 
 candidateTrigger = setupState == PULLBACK ? high + breakoutBufferTicks * syminfo.mintick : triggerPrice
-candidateStop = setupState == PULLBACK ? pullbackLowLive : structuralStop
+candidateStopRaw = setupState == PULLBACK ? pullbackLowLive : structuralStop
+candidateRiskRaw = candidateTrigger - candidateStopRaw
+// V5.2: wide-candle fallback — audit: candle-low stops are fiction on wide
+// bars. The substituted stop satisfies the risk caps by construction.
+candidateWide = not na(candidateRiskRaw) and candidateRiskRaw > 0 and
+     (f_safeDiv(candidateRiskRaw, candidateTrigger, 0.0) * 100.0 > maxStopPct or
+      f_safeDiv(candidateRiskRaw, atr, 0.0) > maxStopATR)
+usingATRstop = atrStopFallback and candidateWide
+candidateStop = usingATRstop ? candidateTrigger - atr * fallbackATRmult : candidateStopRaw
 candidateRisk = candidateTrigger - candidateStop
 candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
 candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
@@ -864,15 +890,30 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
 // Runs AFTER the formal arm block: if that path armed this bar, state is
 // already ARMED and this is skipped. If it declined on a quality gate, this
 // arms anyway — with the reason the formal path declined kept in view.
-if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and fastLane and
-     (setupState == IMPULSE or setupState == PULLBACK) and close < open
+// V5.2: two lanes share this block. Structure lane (IMPULSE/PULLBACK) needs
+// the input-configurable momentum gate. Uptrend lane (any state, YJ case)
+// demands the FULL stack green, hard-coded — a looser lane with looser gates
+// would just be noise.
+fullStackGreen = macdBullish and emaBullish and vwapBullish
+inStructure = setupState == IMPULSE or setupState == PULLBACK
+laneOpen = (fastLane and inStructure and momentumGate) or
+     (uptrendLane and not inStructure and setupState != ARMED and setupState != LONG and fullStackGreen)
+if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
+     laneOpen and close < open
     float fTrig = high + breakoutBufferTicks * syminfo.mintick
-    float fStop = low
+    float fStopRaw = low
+    float fRiskRaw = fTrig - fStopRaw
+    // same wide-candle rule as the formal path — the YJ candle IS this case
+    bool fWide = fRiskRaw > 0 and
+         (f_safeDiv(fRiskRaw, fTrig, 0.0) * 100.0 > maxStopPct or
+          f_safeDiv(fRiskRaw, atr, 0.0) > maxStopATR)
+    bool fATR = atrStopFallback and fWide
+    float fStop = fATR ? fTrig - atr * fallbackATRmult : fStopRaw
     float fRisk = fTrig - fStop
     float fRiskPct = f_safeDiv(fRisk, fTrig, 999.0) * 100.0
     float fShares = fRisk > 0 ? math.min(math.floor(riskBudget / fRisk),
          math.floor(maxPositionValue / fTrig)) : 0.0
-    bool fastOK = momentumGate and fRisk > 0 and fRiskPct <= maxStopPct and
+    bool fastOK = fRisk > 0 and fRiskPct <= maxStopPct and
          fShares >= 1 and (not haltBandVeto or not (inRTH and fRisk > haltBandWidth))
     if fastOK
         triggerPrice := fTrig
@@ -885,8 +926,10 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and fast
         setupQuality := liveQuality
         setupState := ARMED
         stateStartBar := bar_index
-        statusReason := "FAST trigger " + str.tostring(fTrig, format.mintick) +
-             " (red-candle high) — fills intrabar"
+        statusReason := (inStructure ? "FAST" : "UPTREND") + " trigger " +
+             str.tostring(fTrig, format.mintick) +
+             (fATR ? " · ATR stop " + str.tostring(fStop, format.mintick) : "") +
+             " — fills intrabar"
         eventArmed := true
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=fTrig,
              comment="ROSS FP fast lane",
@@ -1118,7 +1161,8 @@ if barstate.islast
          not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
     f_row(5, setupState == ARMED ? "▶ BUY ABOVE" : "TP / SL",
          setupState == ARMED ?
-              f_px(triggerPrice) + "  stop " + f_px(structuralStop) + "  tgt " + f_px(plannedTarget) :
+              f_px(triggerPrice) + "  stop " + f_px(structuralStop) +
+              (usingATRstop ? " (ATR)" : "") + "  tgt " + f_px(plannedTarget) :
               f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry),
          setupState == ARMED ? color.yellow : color.silver)
     f_row(6, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
@@ -1157,11 +1201,19 @@ if barstate.islast
 
     // V5.1: every TRADE gate on one line, same ✓/✗ + all-met colour rule. This
     // is the line that answers "why is there no trigger" without hunting.
-    f_row(11, "GATES", f_crit("PUSH", pushGate) + " " + f_crit("PB", pullbackCountGate) + " " +
-         f_crit("RETR", retracementGate) + " " + f_crit("VOL", volumeGate) + " " +
-         f_crit("RISK", riskGate) + " " + f_crit("SESS", sessionGate) +
-         (fastLane ? "  · fast lane ON" : ""),
-         pushGate and pullbackCountGate and retracementGate and volumeGate and riskGate and sessionGate
+    // V5.2: a gate that cannot be judged yet shows '·', not a cross. On the YJ
+    // screenshot PB/RETR/VOL/RISK all read ✗ in IMPULSE state — before any
+    // pullback existed to fail them. A false cross teaches the eye to ignore
+    // crosses, which is the TRUG lesson all over again.
+    pbApplicable = setupState == PULLBACK or setupState == ARMED
+    f_row(11, "GATES", f_crit("PUSH", pushGate) + " " +
+         (pbApplicable ? f_crit("PB", pullbackCountGate) + " " + f_crit("RETR", retracementGate) + " " +
+              f_crit("VOL", volumeGate) + " " +
+              ("RISK" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) : "PB· RETR· VOL· RISK·") +
+         " " + f_crit("SESS", sessionGate) +
+         (fastLane or uptrendLane ? "  · lanes ON" : ""),
+         pushGate and sessionGate and (not pbApplicable or
+              (pullbackCountGate and retracementGate and volumeGate and riskGate))
               ? CRIT_ALL : CRIT_SOME)
 
     if dashFull
