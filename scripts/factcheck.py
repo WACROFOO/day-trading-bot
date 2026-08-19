@@ -35,9 +35,20 @@ CORPUS_DIRS = ['transcripts', 'recaps', 'streams']
 
 # A youtube id: 11 chars of [A-Za-z0-9_-]. Require a timestamp nearby or a
 # .txt suffix, otherwise ordinary words and hashes match constantly.
+# The (?<!...) is load-bearing: without it the 11-char TAIL of a longer word
+# matches. "accumulating at 04:00" was read as video id "ccumulating" and
+# reported as a fabricated citation — a false positive that, left in, teaches
+# the reader to ignore this tool's output.
 CITE = re.compile(
-    r'`?([A-Za-z0-9_-]{11})(?:\.txt)?`?\s*'
+    r'(?<![A-Za-z0-9_-])`?([A-Za-z0-9_-]{11})(?:\.txt)?`?\s*'
     r'(?:@|\[|\bat\s+)\s*(\d{1,2}:\d{2}(?::\d{2})?)')
+# ...and even with the boundary, "stabilising at 09:30" matched: that word is
+# also exactly 11 characters. Measured against the real index instead of
+# guessed: all 611 corpus ids carry an uppercase letter, digit, underscore or
+# hyphen, and NONE is pure lowercase letters. So a pure-lowercase token is an
+# English word, not an id. This is a heuristic and it is the right kind — it
+# can only cause a MISSED check, never a false accusation.
+ID_SHAPE = re.compile(r'[A-Z0-9_-]')
 # repo paths in backticks: scripts/x.py, research/.../y.md
 PATH = re.compile(r'`([a-zA-Z0-9_./-]+\.(?:py|md|pine|csv|json|txt|sh))`')
 
@@ -79,6 +90,8 @@ def check(path, idx):
         return 'exempt', []
 
     for vid, ts in CITE.findall(text):
+        if not ID_SHAPE.search(vid):
+            continue                      # ordinary prose, not a video id
         if vid not in idx:
             bad.append((f'{vid} @{ts}', 'no such transcript in the corpus'))
             continue

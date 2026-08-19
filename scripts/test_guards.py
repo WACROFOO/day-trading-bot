@@ -112,10 +112,21 @@ def test_factcheck():
     rc, out = sh(f'python3 scripts/factcheck.py {real}')
     check('real video id + timestamp + path passes', rc == 0, out[:120])
 
-    fake = tmp('Ross states it in `zzzzzzzzzzz` @00:11:22.\n')
+    # Shaped like a real id (has caps/digits) — a pure-lowercase token is now
+    # correctly read as prose, so the fixture has to look like what it imitates.
+    fake = tmp('Ross states it in `zZ9qQ7xKm2p` @00:11:22.\n')
     rc, out = sh(f'python3 scripts/factcheck.py {fake}')
     check('catches fabricated video id', rc == 1 and 'no such transcript' in out,
           out[:120])
+
+    # ...and the id-shape heuristic must not become a bypass: a lowercase
+    # token is skipped, which is a MISS, never a false pass of a real id.
+    lower = tmp('Ross states it in `abcdefghijk` @00:11:22.\n')
+    rc, out = sh(f'python3 scripts/factcheck.py {lower}')
+    check('HOLE: pure-lowercase fake id is skipped as prose', rc == 1,
+          'no corpus id is pure lowercase (0 of 611 measured), so this can '
+          'only miss a fabricated id that looks like an English word - '
+          'accepted cost of not accusing prose', hole=True)
 
     badts = tmp('He says it in `js25lIZMUSY` @23:59:58.\n')
     rc, out = sh(f'python3 scripts/factcheck.py {badts}')
@@ -126,6 +137,13 @@ def test_factcheck():
     rc, out = sh(f'python3 scripts/factcheck.py {nopath}')
     check('catches path that exists nowhere',
           rc == 1 and 'NOT FOUND ANYWHERE' in out, out[:120])
+
+    # FALSE POSITIVE found live: the 11-char tail of a longer word followed by
+    # "at HH:MM" was read as a video id. Prose must not trip a citation checker.
+    prose = tmp('Volume has been accumulating at 04:00 and stabilising at 09:30.\n')
+    rc, out = sh(f'python3 scripts/factcheck.py {prose}')
+    check('ordinary prose with "word at HH:MM" is not a citation', rc == 0,
+          out[:140])
 
     # BYPASS: the same invented claim with the citation simply omitted
     naked = tmp('Ross requires float under 3.7M and RVOL over 8.2x.\n')

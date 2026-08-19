@@ -7,7 +7,7 @@ strategy("ROSS First Pullback Strategy V4 (repo-audited)", shorttitle="ROSS FP V
      max_labels_count=100, max_lines_count=50)
 
 // ============================================================================
-// ROSS FIRST PULLBACK — revision V4.10 (2026-08-18).
+// ROSS FIRST PULLBACK + HOD RETEST — revision V5.0 (2026-08-18).
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -73,6 +73,35 @@ gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // itself stays SOURCE (profit curve starts 07:00, hard stop 11:30).
 useSessionWindow     = input.bool(false, "HARD-gate: only arm inside 07:00-11:30 ET", group=gSession)
 sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
+
+gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
+// V5: the strategy answered WHEN and was blind to WHETHER THE NAME QUALIFIES,
+// so the operator had to hold the scanner state in their head. These mirror
+// the Day Trade Dash sub-strategies documented in
+// knowledge-base/daytrade-dash/PLAYBOOK.md. They are DISPLAY-ONLY by default:
+// selection happens before the chart, and a chart-side gate would re-commit
+// this project's most common error class (scanner dial used as a trade gate).
+showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan)
+scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan)
+manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan)
+scanMinPrice         = input.float(2.0, "Price floor", minval=0.01, step=0.25, group=gScan)
+scanMaxPrice         = input.float(20.0, "Price ceiling", minval=0.5, step=1.0, group=gScan)
+// MEASURED 2026-08-18: the platform fired Former Momo at daily RVOL 2.13, its
+// loosest lane. 5.0 is the teaching dial; as a hard floor it deletes the
+// population the method hunts.
+scanMinRVOL          = input.float(2.0, "Daily RVOL floor", minval=0.1, step=0.25, group=gScan)
+scanMinGap           = input.float(10.0, "Gain from prior close %", minval=0.0, step=1.0, group=gScan)
+// MEASURED: low-float branches fired at 8.40M, medium included 41.92M, so the
+// real tier boundary is bracketed to (8.40, 41.92]. 20 sits inside it —
+// consistent with observation, NOT confirmed by it.
+scanLowFloatMaxM     = input.float(20.0, "Low-float ceiling M [bracketed 8.4-41.9]", minval=0.1, step=1.0, group=gScan)
+
+gRetest = "5b. HOD break-and-retest (V5)"
+// SOURCE, register STREAMS: "where it broke through it, it got above it, it
+// retests it, and then if it can hold it" — YuNvqwJftVY @00:22:37.
+// Default ON: V4 skipped this setup entirely, which is the reported symptom.
+enableRetest         = input.bool(true, "Enable HOD break-and-retest entries", group=gRetest)
+retestTolATR         = input.float(0.25, "Retest tolerance (x ATR)", minval=0.02, maxval=2.0, step=0.01, group=gRetest)
 
 gStructure = "5. Structure / reward"
 requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure)
@@ -159,7 +188,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V4.10"                       // bump on every shipped change
+REV = "V5.0"                       // bump on every shipped change
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -175,12 +204,109 @@ var float prevDayClose = na
 if ta.change(time("D")) != 0
     prevDayClose := close[1]
 // tier: <$0.75 -> fixed 15c band; $0.75-3 -> 20%; >$3 -> 10%
-haltBandWidth = na(prevDayClose) ? na :
+haltBandRaw = na(prevDayClose) ? na :
      prevDayClose < 0.75 ? 0.15 :
      prevDayClose <= 3.0 ? close * 0.20 : close * 0.10
 
+// V5: LULD HALTS ONLY EXIST 09:30-16:00 ET. Three independent sources say so:
+//   "there's no halts pre-market, there's no halts after hours, but during
+//    regular trading hours there are halts"        5aWoZdbXJrA @00:47:03
+//   "between 4:00 a.m. and 9:30 and 4:00 p.m. and 8:00 p.m., limit orders
+//    only ... and no halts"                        oxob0x0Xz7s @01:47:41
+//   extended-hours SKILL.md, same boundary.
+// V4 computed the band at every hour and let it VETO at every hour. Outside
+// RTH that vetoes a setup for a risk that cannot occur — and the session now
+// starts at 07:00, so the wrong half of the morning was exposed to it.
+// The band is still DISPLAYED outside RTH (it tells you what happens if you
+// are still holding at 09:30) but it no longer blocks anything.
+inRTH = not na(time(timeframe.period, "0930-1600", "America/New_York"))
+haltBandWidth = haltBandRaw
+
+// V4.10: HIGH OF DAY. Origin SOURCE, corroborated MEASURED.
+// The script tracked only the local impulse peak, which is the wrong obstacle
+// whenever the impulse is a LOWER high. Two source statements make the day's
+// high the object that matters:
+//   "targets a break through the high of day"      _4Q0hlNFn-A @00:46:41
+//   "it cannot break through high of day..."       IHeJROuEzRU @00:01:06
+// and the platform capture (2026-08-18, 299/299 alerts vs a 4.7% base rate)
+// shows every scanner branch triggering only on a NEW high of day.
+// Above the HOD nobody is holding a losing position — that is the whole
+// supply/demand argument (js25lIZMUSY @00:22:49).
+// V5: moved ABOVE the state machine — the HOD-retest setup below needs the
+// running high while states are being decided, not after.
+newDayBar = ta.change(time("D")) != 0
+var float dayHigh = na
+dayHighPrev = newDayBar or na(dayHigh) ? na : dayHigh
+dayHigh := newDayBar or na(dayHigh) ? high : math.max(dayHigh, high)
+
+// V5: THE BREAK AND RETEST. Origin SOURCE, register STREAMS (the strongest —
+// decisions made before the outcome was known; 307 hits).
+//   "where it broke through it, it got above it, it retests it, and then if
+//    it can hold it"                              YuNvqwJftVY @00:22:37
+//   "dialed in on this for a retest of our high a day 66.38"
+//                                                 YuNvqwJftVY @01:11:52
+// V4 could only see impulse -> first pullback, so a clean break of the high
+// followed by a pullback INTO that broken level was invisible unless the push
+// happened to satisfy the impulse detector. That is a whole second entry the
+// script was skipping.
+var float brokenHOD   = na      // the level that was taken out
+var int   brokenBar   = na
+var bool  retestArmed = false
+if newDayBar
+    brokenHOD := na
+    brokenBar := na
+    retestArmed := false
+// a break is recorded when this bar's high exceeds the PREVIOUS running high
+if not na(dayHighPrev) and high > dayHighPrev and not na(dayHighPrev)
+    brokenHOD := dayHighPrev
+    brokenBar := bar_index
+    retestArmed := true
+
 f_safeDiv(float numerator, float denominator, float fallback) =>
     denominator != 0 and not na(denominator) ? numerator / denominator : fallback
+
+// ── V5: scanner criteria, computed on this chart ──────────────────────────
+// Daily RVOL here is cumulative day volume / 20-day average full-day volume.
+// KNOWN BIAS, stated rather than hidden: before ~10:00 the numerator holds a
+// fraction of a day and the denominator holds whole days, so this reads LOW
+// exactly when it matters most. Judge the morning by eye, not by this cell.
+dayVolCum = ta.cum(volume) - ta.valuewhen(newDayBar, ta.cum(volume), 0)
+[avgDailyVol, prevCloseD] = request.security(syminfo.tickerid, "1D",
+     [ta.sma(volume[1], 20), close[1]], gaps=barmerge.gaps_off,
+     lookahead=barmerge.lookahead_off)
+scanRVOL  = f_safeDiv(dayVolCum, avgDailyVol, na)
+scanGap   = na(prevCloseD) or prevCloseD <= 0 ? na : (close / prevCloseD - 1.0) * 100.0
+scanFloat = manualFloatM > 0 ? manualFloatM : na
+
+pillarPrice = close >= scanMinPrice and close <= scanMaxPrice
+pillarRVOL  = not na(scanRVOL) and scanRVOL >= scanMinRVOL
+pillarGap   = not na(scanGap) and scanGap >= scanMinGap
+// UNKNOWN float passes. Fail-closed here silently deletes the biggest runners:
+// ONFO, WETO and SXTC all had no published float in the week they ran, and the
+// vendor's own scanner shows "Check Filings" rather than rejecting.
+pillarFloat = na(scanFloat) or scanFloat <= scanLowFloatMaxM
+pillarScore = (pillarPrice ? 1 : 0) + (pillarRVOL ? 1 : 0) + (pillarGap ? 1 : 0) + (pillarFloat ? 1 : 0)
+
+// which Dash lane this name would fire, if any. Every lane requires a NEW HOD
+// — measured 299/299 against a 4.7% base rate (2026-08-18 export).
+newHodBar   = not na(dayHighPrev) and high > dayHighPrev
+scanBurst5  = bar_index >= 5  and close[5] > 0  ? (close / close[5] - 1.0) * 100.0 : na
+scanBurst10 = bar_index >= 10 and close[10] > 0 ? (close / close[10] - 1.0) * 100.0 : na
+laneSqueeze5  = newHodBar and not na(scanBurst5)  and scanBurst5  >= 5.0
+laneSqueeze10 = newHodBar and not na(scanBurst10) and scanBurst10 >= 10.0
+laneLowFloat  = newHodBar and not na(scanFloat) and scanFloat <= scanLowFloatMaxM and pillarRVOL
+laneAny       = laneSqueeze5 or laneSqueeze10 or laneLowFloat
+// his own stated ranking: repeat alerts, not any single one.
+// "a stock hitting scanners more and more times is definitely a good
+//  indicator that it's got some momentum" — yg5E_mqGFGg @00:17:02
+// and the negative: KSPN "only triggered it once... probably not going to
+// trade it" @00:16:47. One alert is not a candidate.
+var int laneHits = 0
+if newDayBar
+    laneHits := 0
+if laneAny
+    laneHits += 1
+
 
 // V4.1: em dash for absent values (design pack: absent != zero, never NaN)
 f_px(float v) =>
@@ -304,6 +430,10 @@ if isOneMinute and barstate.isconfirmed and enoughHistory
 
 // ───────────────────────── Persistent setup data ─────────────────────────
 var int setupState = IDLE
+// V5: which of the two patterns armed. Display only — never key logic on it.
+int KIND_PULLBACK = 0
+int KIND_RETEST   = 1
+var int setupKind = KIND_PULLBACK
 var int stateStartBar = na
 
 var int impulseStartBar = na
@@ -420,9 +550,60 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0
         tradeEntryBar := na
         highestSinceEntry := na
 
+    // ── V5: HOD BREAK-AND-RETEST ──────────────────────────────────────────
+    // Checked BEFORE the impulse path, because a retest that also satisfies
+    // the impulse detector should be labelled as the retest — it is the more
+    // specific pattern and its stop is the better-defined one.
+    //
+    // Shape: the high of day was taken out (brokenHOD set above), price came
+    // back INTO that level, and this bar HELD it — traded down to/through the
+    // level intraday but closed back above. That close is "if it can hold it"
+    // (YuNvqwJftVY @00:22:37). The broken high is now support; the stop goes
+    // under it, which is a structurally tighter and more defensible stop than
+    // a pullback low floating in space.
+    //
+    // Everything after this point is shared with the first-pullback path:
+    // same gates, same halt-band check, same sizing, same bailout. The retest
+    // only supplies a different REASON to be in the PULLBACK state.
+    retestTol = math.max(atr * retestTolATR, syminfo.mintick)
+    retestTouch = retestArmed and not na(brokenHOD) and bar_index > brokenBar and
+         low <= brokenHOD + retestTol and close > brokenHOD and close >= open
+    if enableRetest and setupState == IDLE and retestTouch
+        setupState := PULLBACK
+        stateStartBar := bar_index
+        setupKind := KIND_RETEST
+        retestArmed := false
+
+        // the "impulse" for a retest is the leg from the broken level to the
+        // high that broke it — real, measurable, and not a detector guess
+        impulseStartBar := brokenBar
+        impulsePeakBar := bar_index
+        pushStartPrice := brokenHOD
+        pushStartClose := brokenHOD
+        pushPeak := dayHigh
+        pushPct := f_safeDiv(dayHigh - brokenHOD, brokenHOD, 0.0) * 100.0
+        pushATR := f_safeDiv(dayHigh - brokenHOD, atr, 0.0)
+        pushEfficiency := 1.0            // a break to a new high IS directional
+        pushPath := math.max(dayHigh - brokenHOD, syminfo.mintick)
+        pushBars := math.max(bar_index - brokenBar, 1)
+        pushVolumeSum := volume
+        pushAvgVolume := volume
+        pushDollarVolume := close * volume
+        pushBaselineVolume := ta.sma(volume, volumeBaselineBars)
+        pushRVOL := f_safeDiv(volume, ta.sma(volume, volumeBaselineBars), 0.0)
+
+        pullbackStartBar := bar_index
+        pullbackLastBar := bar_index
+        pullbackBars := 1
+        redPullbackBars := 1             // the touch itself is the pullback leg
+        pullbackLow := low
+        pullbackVolumeSum := volume
+        statusReason := "HOD retest holding " + str.tostring(brokenHOD, format.mintick)
+
     if setupState == IDLE and bestBars > 0
         setupState := IMPULSE
         stateStartBar := bar_index
+        setupKind := KIND_PULLBACK
 
         impulseStartBar := bestStartBar
         impulsePeakBar := bar_index
@@ -556,22 +737,6 @@ candidateRiskPct = f_safeDiv(candidateRisk, candidateTrigger, 999.0) * 100.0
 candidateRiskATR = f_safeDiv(candidateRisk, atr, 999.0)
 candidateRRtoPeak = f_safeDiv(pushPeak - candidateTrigger, candidateRisk, -999.0)
 
-// V4.10: HIGH OF DAY. Origin SOURCE, corroborated MEASURED.
-// The script tracked only the local impulse peak, which is the wrong obstacle
-// whenever the impulse is a LOWER high. Two source statements make the day's
-// high the object that matters:
-//   "targets a break through the high of day"      _4Q0hlNFn-A @00:46:41
-//   "it cannot break through high of day..."       IHeJROuEzRU @00:01:06
-// and the platform capture (2026-08-18, 299/299 alerts vs a 4.7% base rate)
-// shows every scanner branch triggering only on a NEW high of day.
-// Above the HOD nobody is holding a losing position — that is the whole
-// supply/demand argument (js25lIZMUSY @00:22:49). Below it, there is trapped
-// supply between the trigger and open air, and the script was blind to it.
-newDay = ta.change(time("D")) != 0
-var float dayHigh = na
-dayHighPrev = newDay or na(dayHigh) ? na : dayHigh
-dayHigh := newDay or na(dayHigh) ? high : math.max(dayHigh, high)
-
 // room to the day's high, in R — the honest overhead measure
 candidateRRtoHOD = f_safeDiv(dayHigh - candidateTrigger, candidateRisk, -999.0)
 // is this impulse making the high, or is it a lower high under trapped supply?
@@ -583,7 +748,8 @@ candidateCapitalShares = candidateTrigger > 0 ? math.floor(maxPositionValue / ca
 candidateShares = math.min(candidateRiskShares, candidateCapitalShares)
 
 // V4: halt-band check — a stop wider than the band cannot be honoured.
-stopExceedsHaltBand = not na(haltBandWidth) and candidateRisk > haltBandWidth
+// V5: the veto is RTH-only; outside it the band is information, not a gate.
+stopExceedsHaltBand = inRTH and not na(haltBandWidth) and candidateRisk > haltBandWidth
 
 pushGate = pushPct >= minPushPct and pushATR >= minPushATR and pushEfficiency >= minEfficiency and pushRVOL >= minPushRVOL and pushDollarVolume >= minDollarVolume
 pullbackCountGate = pullbackBars >= minPullbackBars and pullbackBars <= maxPullbackBars and redPullbackBars >= 1
@@ -594,9 +760,13 @@ riskGate = candidateRisk > 0 and candidateRiskPct <= maxStopPct and candidateRis
      (not useMaxDollarStop or candidateRisk <= maxStopDollar) and candidateShares >= 1 and
      (not haltBandVeto or not stopExceedsHaltBand)                     // V4
 rrGate = not requireRRtoPeak or candidateRRtoPeak >= minRRtoPeak
+// V5: default OFF. A scanner criterion is a DISCOVERY dial; using it as a
+// trade gate is this project's single most repeated error (21 corrections).
+// Available for anyone who wants it, never on by default.
+scanGate = not scanGates or pillarScore == 4
 sessionGate = inSession                                                 // V4
 
-hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and sessionGate
+hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and scanGate and sessionGate
 
 // ─────────────────── Quality number: DISPLAY ONLY (V4) ───────────────────
 // V4: A+/A/B letter grades REMOVED. Origin of the demotion: MEASURED —
@@ -630,6 +800,7 @@ string gateReason =
      haltBandVeto and stopExceedsHaltBand ? "Stop " + str.tostring(candidateRisk, format.mintick) + " wider than halt band " + str.tostring(haltBandWidth, format.mintick) :
      not riskGate ? "Structural risk too wide" :
      requireRRtoPeak and not rrGate ? "Only " + str.tostring(candidateRRtoPeak, "#.00") + "R to peak" :
+     not scanGate ? "Scanner criteria " + str.tostring(pillarScore) + "/4" :
      "READY"
 
 // ───────────────────────── Arm / invalidate at bar close ─────────────────────────
@@ -776,6 +947,12 @@ plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color
 // V4.10: the day's high drawn as the obstacle it is. Dotted so it never reads
 // as an entry/stop/target level — green and red stay reserved for TP and SL.
 plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles)
+// V5: the BROKEN high — the level a retest is testing. Drawn only while a
+// retest is live, so it does not clutter a normal pullback chart.
+plot(showLevels and enableRetest and not na(brokenHOD) and
+     (setupState == PULLBACK or setupState == ARMED) and setupKind == KIND_RETEST
+     ? brokenHOD : na, "Broken HOD (retest level)",
+     color=color.new(color.aqua, 20), linewidth=2, style=plot.style_linebr)
 plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
 // V4.9: half-width follows the instrument's own volatility so the band
 // keeps the same visual weight whatever the price scale.
@@ -834,6 +1011,10 @@ plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEB
 // sets, picked by a boolean, rather than pretending a variable works.
 sm = showMarkers and not bigMarkers
 lg = showMarkers and bigMarkers
+// V5: retest triggers get their own glyph so the two setups are separable on
+// the chart and, later, in the trade log.
+plotshape(sm and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.tiny, text="RT")
+plotshape(lg and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest, large)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.normal, text="RT")
 plotshape(sm and eventArmed, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="TRG")
 plotshape(sm and eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.tiny, text="IN")
 plotshape(sm and eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="X")
@@ -849,7 +1030,7 @@ plotshape(lg and eventBailout, title="Bailout (large)", style=shape.labeldown, l
 // em dashes for absents. dashFull adds the three diagnostic rows.
 LBL = color.rgb(28, 28, 30)
 DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
-var table dash = table.new(position.bottom_right, 2, 12, border_width=0)
+var table dash = table.new(position.bottom_right, 2, 14, border_width=0)
 
 f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
@@ -858,10 +1039,12 @@ f_row(int r, string label, string value, color vcolor) =>
          text_size=DSZ, text_halign=text.align_left)
 
 if barstate.islast
-    table.clear(dash, 0, 0, 1, 11)
+    table.clear(dash, 0, 0, 1, 13)
     table.cell(dash, 0, 0, "ROSS FP " + REV, bgcolor=LBL, text_color=color.white,
          text_size=DSZ, text_halign=text.align_left)
-    table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) : "WRONG TF",
+    table.cell(dash, 1, 0, isOneMinute ? f_stateName(setupState) +
+         (setupState == PULLBACK or setupState == ARMED or setupState == LONG ?
+              (setupKind == KIND_RETEST ? "  ·RETEST" : "  ·PULLBACK") : "") : "WRONG TF",
          bgcolor=stateColor, text_color=color.black, text_size=DSZ)
 
     f_row(1, "VERDICT", actionText, thinRoom ? color.red : color.white)
@@ -870,8 +1053,12 @@ if barstate.islast
     // against your own chart is a gate you cannot trust
     f_row(3, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
          vwapBullish ? color.lime : color.orange)
-    f_row(4, "HALT BAND", f_px(haltBandWidth) + (stopExceedsHaltBand ? " ⚠ stop wider" : " ok"),
-         stopExceedsHaltBand ? color.red : color.silver)
+    // V5: the band only exists 09:30-16:00. Outside it this row is context for
+    // "what happens if I am still holding at the bell", never a gate.
+    f_row(4, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+         f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ STOP WIDER - unenforceable" :
+              "  ok · " + f_n(f_safeDiv(haltBandWidth, displayRiskDollar, na), "#.1") + "R to halt"),
+         not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
     f_row(5, "TP / SL", f_px(displayTarget) + " / " + f_px(displayStop) + "   entry " + f_px(displayEntry), color.silver)
     f_row(6, "SIZE / RISK", f_n(displayShares, "#") + " sh / $" + f_n(displayRiskCash, "#") +
          " / " + f_n(displayRR, "#.1") + "R room" + (thinRoom ? "  ⚠ EXTENDED" : ""),
@@ -889,10 +1076,26 @@ if barstate.islast
               "  · " + f_n(candidateRRtoHOD, "#.1") + "R away" : ""),
          peakIsHOD ? color.lime : color.orange)
 
+    // V5: the scanner lane, on the same screen as the trigger. Before this the
+    // operator had to hold "does this name even qualify" in their head while
+    // reading a trigger price.
+    if showScanPanel
+        f_row(9, "PILLARS " + str.tostring(pillarScore) + "/4",
+             (pillarPrice ? "P" : "p") + (pillarFloat ? "F" : "f") +
+             (pillarRVOL ? "R" : "r") + (pillarGap ? "G" : "g") +
+             "  · " + f_n(scanGap, "#.0") + "% · rvol " + f_n(scanRVOL, "#.1") + "x" +
+             (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M"),
+             pillarScore == 4 ? color.lime : pillarScore >= 3 ? color.orange : color.gray)
+        f_row(10, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
+             (laneSqueeze5 ? "SQ5 " : "") + (laneSqueeze10 ? "SQ10 " : "") +
+             (laneAny ? "" : "— no lane this bar") +
+             "  · " + str.tostring(laneHits) + " hits today",
+             laneHits >= 2 ? color.lime : laneAny ? color.orange : color.gray)
+
     if dashFull
-        f_row(9, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-        f_row(10, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
-    f_row(11, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
+        f_row(11, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
+        f_row(12, "PUSH", f_n(pushPct, "#.1") + "% | " + f_n(pushRVOL, "#.1") + "x | E " + f_n(pushEfficiency, "#.00"), color.gray)
+    f_row(13, "LIMITS", "paper · fills optimistic · selection outside", color.gray)
 
 // ───────────────────────── Alerts ─────────────────────────
 if eventArmed
