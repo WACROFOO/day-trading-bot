@@ -60,7 +60,7 @@ is being lost. It also found the exit look-ahead below.
 
 | Report | Subject |
 |---|---|
-| `2026-08-pine-v8-benchmark.md` | The V7.5 vs V8.0 Pine cores on 330 real ticker-days: the entire −2.9R gap is same-bar stop accounting (25% of fills hit trigger AND stop in one minute), and the $2k rebase carries ~10–15% commission drag per trade |
+| `2026-08-pine-v8-benchmark.md` | The V7.5 vs V8.0 Pine cores on 330 real ticker-days: the entire −2.9R gap is same-bar stop accounting (25% of fills hit trigger AND stop in one minute), and the $2k rebase carries ~10–15% commission drag per trade. V8.1 rerun: execution parity confirmed; the 31 afternoon signals the ghost layer shows-but-refuses sum to −9.47R hypothetical — the clock window, measured |
 | `2026-07-27-audit.md` | Why the week produced almost nothing — selection, not execution |
 | `fix-target.md` | The unreachable-target defect, verified out-of-sample on TCX |
 

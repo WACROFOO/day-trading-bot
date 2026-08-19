@@ -29,9 +29,11 @@ def ema_series(vals, n):
     return out
 
 class Cfg:
-    def __init__(self, name, sameBarStop, entryTimeOK, risk, maxPos, retestBand):
+    def __init__(self, name, sameBarStop, entryTimeOK, risk, maxPos, retestBand,
+                 winStart=7*60, winEnd=11*60+30):
         self.name=name; self.sameBarStop=sameBarStop; self.entryTimeOK=entryTimeOK
         self.risk=risk; self.maxPos=maxPos; self.retestBand=retestBand
+        self.winStart=winStart; self.winEnd=winEnd
 
 V75 = Cfg('V7.5', sameBarStop=False, entryTimeOK=False, risk=200.0, maxPos=25000.0, retestBand=False)
 V80 = Cfg('V8.0', sameBarStop=True,  entryTimeOK=True,  risk=20.0,  maxPos=2000.0,  retestBand=True)
@@ -60,37 +62,37 @@ def run(sym, bars, cfg):
         if day != d.date():
             # new day: flatten anything (shouldn't exist), reset
             if pos is not None:
-                trades.append(dict(sym=sym, day=day, r=(bars[i-1][4]-pos['entry'])/pos['rps'],
+                trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=(bars[i-1][4]-pos['entry'])/pos['rps'],
                                    cash=pos['sh_open']*(bars[i-1][4]-pos['entry']) - COMM, kind='DAYEND'))
                 pos=None; flattens+=1
             day=d.date(); state='IDLE'; arm=None; dayHigh=None; brokenHOD=None
             setupsToday=0; pull=None; retestArmedUsed=False
         hhmm = d.hour*60+d.minute
-        in_win = 7*60 <= hhmm < 11*60+30
-        last_win_bar = hhmm >= 11*60+29
+        in_win = cfg.winStart <= hhmm < cfg.winEnd
+        last_win_bar = hhmm >= cfg.winEnd - 1
         dayHigh = h if dayHigh is None else max(dayHigh, h)
         # ---- position management first (orders live from prior bars) ----
         if pos is not None and pos.get('bail_next') and i > pos['bail_i']:
             px = o - SLIP
             cash = pos.get('cash_banked',0) + pos['sh']*(px-pos['entry']) - COMM*2
             r = pos.get('r_banked',0) + (pos['sh']/pos['sh_open'])*(px-pos['entry'])/pos['rps']
-            trades.append(dict(sym=sym, day=day, r=r, cash=cash, kind='BAIL')); pos=None
+            trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=r, cash=cash, kind='BAIL')); pos=None
         if pos is not None:
             stop_active = (i > pos['entry_i']) or pos['stop_same_bar']
             exited=False
             # gap through stop
             if stop_active and o <= pos['stop']:
                 px = o - SLIP
-                trades.append(dict(sym=sym, day=day, r=(px-pos['entry'])/pos['rps'],
+                trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=(px-pos['entry'])/pos['rps'],
                     cash=pos['sh_open']*(px-pos['entry']) - COMM*2, kind='STOP-GAP')); exited=True
             elif stop_active and l <= pos['stop'] and h >= (pos['t1'] if not pos['half_done'] else pos['t2']):
                 ambiguous += 1  # both touched: resolve stop-first, both engines
                 px = pos['stop'] - SLIP
-                trades.append(dict(sym=sym, day=day, r=(px-pos['entry'])/pos['rps'],
+                trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=(px-pos['entry'])/pos['rps'],
                     cash=pos['sh_open']*(px-pos['entry']) - COMM*2, kind='STOP-AMBIG')); exited=True
             elif stop_active and l <= pos['stop']:
                 px = pos['stop'] - SLIP
-                trades.append(dict(sym=sym, day=day, r=(px-pos['entry'])/pos['rps'],
+                trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=(px-pos['entry'])/pos['rps'],
                     cash=pos['sh_open']*(px-pos['entry']) - COMM*2, kind='STOP')); exited=True
             else:
                 if not pos['half_done'] and h >= pos['t1']:
@@ -105,17 +107,17 @@ def run(sym, bars, cfg):
                     px = max(o, pos['t2'])
                     cash = pos.get('cash_banked',0) + pos['sh']*(px-pos['entry']) - COMM*2
                     r = pos.get('r_banked',0) + (pos['sh']/pos['sh_open'])*(px-pos['entry'])/pos['rps']
-                    trades.append(dict(sym=sym, day=day, r=r, cash=cash, kind='T2')); exited=True
+                    trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=r, cash=cash, kind='T2')); exited=True
                 # bailout: confirmed close below stop while stop not yet active (V7.5 path)
                 if pos is not None and not exited and not stop_active and c < pos['stop']:
                     pos['bail_next']=True; pos['bail_i']=i
             if exited: pos=None
         # session-edge flatten
-        if pos is not None and not in_win and 7*60 <= pos['hhmm_in'] :
+        if pos is not None and not in_win and cfg.winStart <= pos['hhmm_in'] :
             px = o - SLIP if o else c
             cash = pos.get('cash_banked',0) + pos['sh']*(px-pos['entry']) - COMM*2
             r = pos.get('r_banked',0) + (pos['sh']/pos['sh_open'])*(px-pos['entry'])/pos['rps']
-            trades.append(dict(sym=sym, day=day, r=r, cash=cash, kind='SESSFLAT')); pos=None; flattens+=1
+            trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=r, cash=cash, kind='SESSFLAT')); pos=None; flattens+=1
         # ---- pending entry order ----
         if arm is not None and pos is None:
             if not in_win:
@@ -144,7 +146,7 @@ def run(sym, bars, cfg):
                         if stop_same_bar and l <= pos['stop']:
                             ambiguous += 1
                             px = pos['stop'] - SLIP
-                            trades.append(dict(sym=sym, day=day, r=(px-pos['entry'])/pos['rps'],
+                            trades.append(dict(sym=sym, day=day, t_in=pos['hhmm_in'], r=(px-pos['entry'])/pos['rps'],
                                 cash=pos['sh_open']*(px-pos['entry']) - COMM*2, kind='STOP-SAMEBAR'))
                             pos=None
         # ---- setup detection (confirmed bars only; skip if in position) ----
@@ -274,11 +276,41 @@ if __name__ == '__main__':
              risk=200.0, maxPos=25000.0, retestBand=True)
     H2 = Cfg('V75exec+V8size', sameBarStop=False, entryTimeOK=False,
              risk=20.0, maxPos=2000.0, retestBand=False)
+    # V8.1 executes identically to V8.0 (its changes are display-layer).
+    # What V8.1 ADDS is the ghost layer: the same pattern engine shown
+    # outside the clock window with no order. GHOST opens the window to
+    # 04:00-20:00; its trades entered outside 07:00-11:30 are exactly what
+    # the SEEN markers + PLAN row would have displayed (hypothetically
+    # traded by the same rules, which the real script never would).
+    V81G = Cfg('V8.1-GHOST', sameBarStop=True, entryTimeOK=True,
+               risk=20.0, maxPos=2000.0, retestBand=True,
+               winStart=4*60, winEnd=20*60)
     nbars = sum(len(v) for v in B.values())
     print(f'{len(B)} symbols · {nbars} 1m bars')
-    for cfg in (V75, V80, H1, H2):
+    for cfg in (V75, V80, H1, H2, V81G):
         res = [run(s, bars, cfg) for s, bars in B.items()]
         print(f'{cfg.name:15s}', agg(res))
+    print()
+    print('--- V8.1 ghost layer: entries by clock bucket (GHOST run) ---')
+    res = [run(s, bars, V81G) for s, bars in B.items()]
+    T = [t for r in res for t in r['trades']]
+    def bucket(m):
+        return ('PRE 04:00-07:00' if m < 420 else
+                'WINDOW 07:00-11:30' if m < 690 else
+                'LATE 11:30-16:00' if m < 960 else 'AH 16:00-20:00')
+    from collections import defaultdict
+    agg2 = defaultdict(lambda: [0, 0.0, 0])
+    for t in T:
+        b = bucket(t['t_in'])
+        agg2[b][0] += 1; agg2[b][1] += t['r']; agg2[b][2] += t['r'] > 0
+    for b in ('PRE 04:00-07:00', 'WINDOW 07:00-11:30', 'LATE 11:30-16:00', 'AH 16:00-20:00'):
+        n, sr, w = agg2[b]
+        print(f'  {b:20s} {n:3d} trades · {w}W/{n-w}L · sumR {sr:+.2f}')
+    print('  ghost-only trades (outside 07:00-11:30):')
+    for t in sorted(T, key=lambda t: (str(t['day']), t['t_in'])):
+        if not (420 <= t['t_in'] < 690):
+            print(f"    {t['sym']:5s} {t['day']} {t['t_in']//60:02d}:{t['t_in']%60:02d} "
+                  f"{t['kind']:12s} r={t['r']:+.2f}")
     for cfg in (V75, V80):
         print(f'--- {cfg.name} trades ---')
         for r in (run(s, bars, cfg) for s, bars in B.items()):

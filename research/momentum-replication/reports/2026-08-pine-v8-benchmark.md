@@ -100,6 +100,50 @@ n=20 proves nothing by itself, but it is CONSISTENT with the 894-session
 replication (`2026-08-regime-filter.md`): an accurate implementation is
 still not an edge. Nothing here contradicts the repo's standing verdict.
 
+## V8.1 rerun — execution parity, and the ghost layer measured
+
+```
+RERUN · 2026-08-19 15:08 ET, bars refreshed to that minute (100,823 bars).
+        08-19 is PARTIAL: power hour and after-hours missing on the last day.
+```
+
+V8.1's execution core is byte-identical to V8.0 (its changes are
+display-layer), and the rerun confirms it: **20 fills, −10.55R, 5 ambiguous
+— unchanged.** What V8.1 adds is the ghost layer: the same pattern engine
+shown outside the clock window with SEEN markers and a plan, order withheld.
+The GHOST config measures what that layer would have displayed by opening
+the window to 04:00–20:00 and hypothetically trading the extra signals by
+the same rules — which the real script never does.
+
+| clock bucket | signals | W–L | ΣR (hypothetical) |
+|---|---:|---:|---:|
+| PRE 04:00–07:00 | 0 | — | — |
+| WINDOW 07:00–11:30 (the real trades) | 20 | 1–19 | −11.15R* |
+| LATE 11:30–16:00 (**ghost-only**) | **31** | 5–26 | **−9.47R** |
+| AH 16:00–20:00 | 0 | — | — |
+
+\* differs from the real −10.55R because in the GHOST run nothing flattens
+at 11:30 — the two SESSFLAT trades ran on and lost more; afternoon positions
+also occupy state. The 20 entries are the same.
+
+Three readings:
+
+1. **The clock earns its keep, measured.** The 31 afternoon signals the
+   ghost layer shows but refuses to trade sum to −9.47R hypothetical over
+   11 days (5 winners, 26 stops). The discipline the ghosts make visible-
+   but-untraded avoided roughly 9.5R of losses on this tape.
+2. **The operator's CDTG instinct was real — and so is the base rate.**
+   CDTG 2026-08-18 fires two afternoon ghosts, 11:45 and 14:08, both
+   reaching the 2R target — the exact session the operator traded manually
+   while the script showed nothing (the complaint that produced the ghost
+   layer). V8.1 would have shown both. The same afternoon tape also
+   produced 26 stop-outs elsewhere: the layer's value is showing the
+   pattern while the window rule keeps the aggregate from being paid for it.
+3. **Zero pre-market ghosts is weak evidence, not proof.** The volume
+   gates (2× a 20-bar baseline, $100k/min) rarely pass on thin 04:00–07:00
+   tape in this sample. JWEL-class pre-market runs may still produce
+   ghosts on their day; this window contained none that qualified.
+
 ## What this benchmark could not check
 
 - **Tick order** — the entire D1 question. Only broker-grade tick data or
@@ -114,6 +158,8 @@ still not an edge. Nothing here contradicts the repo's standing verdict.
 - **Scanner gates** — float, daily RVOL, news: off-chart in both engines,
   not simulated.
 - **D2/D5** — zero occurrences here is weak evidence of rarity, not proof.
+- **The last day** — the V8.1 rerun's 08-19 data ends 15:08 ET; that day's
+  late/AH buckets are incomplete by construction.
 
 ## Verdict
 
