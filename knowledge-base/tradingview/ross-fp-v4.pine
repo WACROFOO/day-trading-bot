@@ -1,10 +1,20 @@
 //@version=6
-strategy("ROSS First Pullback Strategy V6 (repo-audited)", shorttitle="ROSS FP V6", overlay=true,
+//@strategy_alert_message {{strategy.order.alert_message}}
+strategy("ROSS First Pullback Strategy V7 (audited paper model)", shorttitle="ROSS FP V7", overlay=true,
      initial_capital=100000, currency=currency.USD, default_qty_type=strategy.fixed,
-     pyramiding=0, commission_type=strategy.commission.percent, commission_value=0.01,
+     pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
      process_orders_on_close=false,
+     backtest_fill_limits_assumption=1,
+     margin_long=100, use_bar_magnifier=false,
      max_labels_count=100, max_lines_count=50)
+// V7 (reviewer): cash_per_order commissions (closer to the retail broker this
+// models than a bp fee); limit fills demand a 1-tick breach before counting
+// (conservative-fill answer to audit finding 15); margin_long=100 = cash
+// account; use_bar_magnifier stated explicitly so the fill model is on the
+// record. initial_capital stays 100000 — the repo's standing paper basis;
+// the reviewer's 2000 would silently pick a third account basis (the €500 vs
+// $100k split is flagged as the operator's decision, not a script's).
 // V6 (external audit finding 4): calc_on_order_fills turned OFF. With it on,
 // a historical fill triggers an extra execution in which barstate.isconfirmed
 // is STILL true and the bar's final OHLC is already visible — so confirmed-bar
@@ -13,7 +23,12 @@ strategy("ROSS First Pullback Strategy V6 (repo-audited)", shorttitle="ROSS FP V
 // placed one tick (live) / one bar (historical) after the fill. Disclosed.
 
 // ============================================================================
-// ROSS FIRST PULLBACK + HOD RETEST — revision V6.0 (2026-08-19).\n// V6 is the response to the external adversarial audit (20 findings):\n// knowledge-base/tradingview/AUDIT-RESPONSE-V6.md maps every finding to its fix.
+// ROSS FIRST PULLBACK + HOD RETEST — revision V7.0 (2026-08-19).
+// V6 answered the external adversarial audit (20 findings) — the map is in
+// knowledge-base/tradingview/AUDIT-RESPONSE-V6.md. V7 implements the
+// reviewer's follow-up: honest venue modelling (no fictional pre-market
+// stop/market fills), provenance-gated scanner criteria, RVOL-at-time
+// instead of the full-day-denominator proxy, and a daily flat cutoff.
 // NOTE: the "//@version=6" line above is the PINE LANGUAGE version, not this
 // script's revision. Our revision is the REV constant below and the V4.x tags.
 // V3 audited against this repo's measured rules.
@@ -44,7 +59,8 @@ maxImpulseBars      = input.int(6, "Detection lookback bars", minval=1, maxval=1
 // eye would also reject; flagged so nobody mistakes it for a Ross rule.
 minEfficiency       = input.float(0.60, "Minimum directional efficiency [UNTESTED local]", minval=0.0, maxval=1.0, step=0.05, group=gImpulse)
 volumeBaselineBars  = input.int(20, "Volume baseline bars", minval=5, maxval=100, group=gImpulse)
-minPushRVOL         = input.float(2.0, "Minimum push RVOL", minval=0.5, maxval=20.0, step=0.25, group=gImpulse)
+minPushRVOL         = input.float(2.0, "Minimum push/local-volume ratio", minval=0.5, maxval=20.0, step=0.25, group=gImpulse,
+     tooltip="Average volume on the detected push divided by the prior local 20-bar SMA baseline. This is NOT RVOL-at-time; calling it RVOL overstated what it measures (reviewer).")
 // V4: LOCAL_ADDITION, UNTESTED — $ volume floor has no corpus source (the
 // closest is "1M+ session shares", a different object). Kept, flagged.
 minDollarVolume     = input.float(100000.0, "Minimum avg $ volume / min [UNTESTED local]", minval=0.0, step=25000.0, group=gImpulse)
@@ -77,8 +93,20 @@ gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // moment; off-window bars are tagged "· off-window" instead of blocked.
 // Re-enable this input to restore the hard gate. Origin of the window
 // itself stays SOURCE (profit curve starts 07:00, hard stop 11:30).
-useSessionWindow     = input.bool(false, "HARD-gate: only arm inside 07:00-11:30 ET", group=gSession)
+// V7 (reviewer): the hard window returns as the DEFAULT. This reverses the
+// operator's V4.4 "verdict at every moment" default on the reviewer's venue
+// argument: outside RTH the real venue is limit-orders-only (extended-hours
+// SKILL.md), so the emulator's pre-market stop/market fills are fiction and
+// a backtest containing them tests a strategy nobody can execute. The
+// verdict still PRINTS at every moment — only ARMING is gated. Flip this
+// input off to restore V4.4 behaviour knowingly.
+useSessionWindow     = input.bool(true, "HARD-gate: only arm inside 07:00-11:30 ET", group=gSession)
 sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
+allowPremarketEmulatorFills = input.bool(false, "Allow optimistic premarket stop/market fills [EXPERIMENTAL]", group=gSession,
+     tooltip="Default OFF: the documented extended-hours venue is limit-orders-only, so simulated stop/market fills there are optimistic fiction. Pre-market stays visible for study; orders arm only in RTH unless you explicitly accept invalid fill modelling.")
+allowOvernightPositions = input.bool(false, "Allow positions past the daily flat cutoff", group=gSession)
+dailyFlatHour        = input.int(15, "Daily flat cutoff hour ET", minval=0, maxval=23, group=gSession)
+dailyFlatMinute      = input.int(58, "Daily flat cutoff minute ET", minval=0, maxval=59, group=gSession)
 
 gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 // V5: the strategy answered WHEN and was blind to WHETHER THE NAME QUALIFIES,
@@ -90,13 +118,32 @@ gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan)
 scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan)
 manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan)
+// V7 (reviewer): a typed number is not a verified number. Float counts as
+// KNOWN for gating only when its provenance is stated; a manual unverified
+// value still displays, labelled, but gates as unknown.
+floatSource          = input.string("Unknown", "Float provenance",
+     options=["Unknown", "SEC filing verified", "Trusted feed verified", "Manual unverified"], group=gScan,
+     tooltip="Pine has no authoritative float field. A number is counted as verified only when its provenance is explicitly SEC filing or trusted feed.")
+// V7 (reviewer): TradingView's volume feed is not Warrior's. The RVOL pillar
+// GATES only when the operator has acknowledged the feed and bound that
+// acknowledgement to this exchange prefix — switching symbols fails closed.
+scanFeedVerified     = input.bool(false, "Acknowledge TV feed/session for RVOL gating", group=gScan,
+     tooltip="Manual acknowledgement only — it does not prove parity with Warrior. Gating also requires the exchange-prefix binding and a named feed source below.")
+scanFeedPrefix       = input.string("", "Feed acknowledgement exchange prefix", group=gScan,
+     tooltip="Bind the acknowledgement to the current syminfo.prefix, e.g. NASDAQ. A different prefix fails closed.")
+scanFeedSource       = input.string("Unknown", "Acknowledged TradingView feed",
+     options=["Unknown", "Cboe One/free", "Consolidated/paid", "Other paid/validated"], group=gScan,
+     tooltip="Record which TradingView feed was checked. Even Consolidated/paid remains a TV proxy, not Warrior's Daily Rate.")
+rvolLookbackDays     = input.int(30, "RVOL-at-time lookback days", minval=10, maxval=60, group=gScan)
 scanMinPrice         = input.float(2.0, "Price floor", minval=0.01, step=0.25, group=gScan)
 scanMaxPrice         = input.float(20.0, "Price ceiling", minval=0.5, step=1.0, group=gScan)
 // MEASURED 2026-08-18: the platform fired Former Momo at daily RVOL 2.13, its
 // loosest lane. 5.0 is the teaching dial; as a hard floor it deletes the
 // population the method hunts.
-scanMinRVOL          = input.float(2.0, "Daily RVOL floor", minval=0.1, step=0.25, group=gScan)
-scanMinGap           = input.float(10.0, "Gain from prior close %", minval=0.0, step=1.0, group=gScan)
+scanMinRVOL          = input.float(2.0, "USER TV RVOL-at-time proxy floor [UNCALIBRATED]", minval=0.1, step=0.25, group=gScan,
+     tooltip="Applied to TradingView same-time cumulative-volume pace only. No validated mapping to Warrior Daily Rate exists (the 2.13 Former Momo observation is a DIFFERENT metric on a DIFFERENT feed); collect matched timestamp pairs before treating this threshold as predictive.")
+scanMinGap           = input.float(10.0, "Premarket mark / RTH-open gap floor %", minval=0.0, step=1.0, group=gScan,
+     tooltip="Before 09:30 ET this tests the live premarket mark against prior close. From 09:30 on it tests the FROZEN RTH-open gap, so the pillar stops drifting with intraday price.")
 // MEASURED: low-float branches fired at 8.40M, medium included 41.92M, so the
 // real tier boundary is bracketed to (8.40, 41.92]. 20 sits inside it —
 // consistent with observation, NOT confirmed by it.
@@ -108,6 +155,8 @@ gRetest = "5b. HOD break-and-retest (V5)"
 // Default ON: V4 skipped this setup entirely, which is the reported symptom.
 enableRetest         = input.bool(true, "Enable HOD break-and-retest entries", group=gRetest)
 retestTolATR         = input.float(0.25, "Retest tolerance (x ATR)", minval=0.02, maxval=2.0, step=0.01, group=gRetest)
+retestStopBufferTicks = input.int(1, "Retest stop below broken HOD (ticks)", minval=1, maxval=20, group=gRetest,
+     tooltip="The retest stop is forced BELOW the reclaimed level — never left above the support the setup claims to trade against (reviewer).")
 
 gStructure = "5. Structure / reward"
 requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure)
@@ -230,7 +279,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V6.0"                       // bump on every shipped change — keep alerts + title in step
+REV = "V7.0"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // V4: session gate. na(time(...)) outside the window.
@@ -346,17 +395,56 @@ dayVolCum := barstate.isfirst or newDayBar ? volume : dayVolCum + volume
 [avgDailyVol, prevCloseD] = request.security(syminfo.tickerid, "1D",
      [ta.sma(volume, 20)[1], close[1]], gaps=barmerge.gaps_off,
      lookahead=barmerge.lookahead_on)
-scanRVOL  = f_safeDiv(dayVolCum, avgDailyVol, na)
-scanGap   = na(prevCloseD) or prevCloseD <= 0 ? na : (close / prevCloseD - 1.0) * 100.0
+// ── V7 (reviewer): RVOL-AT-TIME replaces the full-day-denominator proxy.
+// The old cell divided a partial day by whole days and read ~0.2x on a name
+// doing 10x business at 07:30 — biased LOW exactly when it mattered. This
+// compares today's cumulative volume with the average cumulative volume AT
+// THE SAME MINUTE over the lookback, via a per-minute EMA baseline (alpha =
+// 1/lookbackDays). Warm-up: the baseline needs ~a lookback of chart history
+// per minute slot; before that the value is honestly na.
+var array<float> cumAtTimeAvg = array.new_float(1440, na)
+var array<int>   cumAtTimeN   = array.new_int(1440, 0)
+minuteET = hour(time, "America/New_York") * 60 + minute(time, "America/New_York")
+rvolBase = array.get(cumAtTimeAvg, minuteET)
+scanRVOL = f_safeDiv(dayVolCum, rvolBase, na)
+if barstate.isconfirmed
+    int nSeen = array.get(cumAtTimeN, minuteET)
+    float prior = array.get(cumAtTimeAvg, minuteET)
+    float alpha = 1.0 / rvolLookbackDays
+    array.set(cumAtTimeAvg, minuteET, na(prior) ? dayVolCum : prior + alpha * (dayVolCum - prior))
+    array.set(cumAtTimeN, minuteET, nSeen + 1)
+rvolWarm = array.get(cumAtTimeN, minuteET) >= rvolLookbackDays / 3
+
+// V7 (reviewer): the RVOL pillar may GATE only under an acknowledged feed
+// bound to this exchange prefix. Anything else is display-only UNKNOWN.
+rvolTrusted = scanFeedVerified and scanFeedSource != "Unknown" and
+     scanFeedPrefix == syminfo.prefix
+rvolKnown = rvolTrusted and rvolWarm and not na(scanRVOL)
+
+// V7 (reviewer): the gap freezes at the RTH open. Before 09:30 it is the
+// live premarket mark vs prior close; after, the FROZEN open gap — so the
+// pillar stops drifting with every intraday print.
+var float rthOpenPx = na
+if newDayBar
+    rthOpenPx := na
+if na(rthOpenPx) and inRTH
+    rthOpenPx := open
+scanGap = na(prevCloseD) or prevCloseD <= 0 ? na :
+     (not na(rthOpenPx) ? (rthOpenPx / prevCloseD - 1.0) * 100.0
+                        : (close / prevCloseD - 1.0) * 100.0)
+
+// V7 (reviewer): a typed float is not a verified float.
+floatVerified = manualFloatM > 0 and
+     (floatSource == "SEC filing verified" or floatSource == "Trusted feed verified")
 scanFloat = manualFloatM > 0 ? manualFloatM : na
 
 pillarPrice = close >= scanMinPrice and close <= scanMaxPrice
-pillarRVOL  = not na(scanRVOL) and scanRVOL >= scanMinRVOL
+pillarRVOL  = rvolKnown and scanRVOL >= scanMinRVOL
 pillarGap   = not na(scanGap) and scanGap >= scanMinGap
-// UNKNOWN float passes. Fail-closed here silently deletes the biggest runners:
-// ONFO, WETO and SXTC all had no published float in the week they ran, and the
-// vendor's own scanner shows "Check Filings" rather than rejecting.
-pillarFloat = na(scanFloat) or scanFloat <= scanLowFloatMaxM
+// UNKNOWN float passes the SCORE (fail-closed deletes ONFO/WETO/SXTC-class
+// runners and the vendor shows "Check Filings" rather than rejecting), but
+// only a provenance-verified float renders as a checked criterion.
+pillarFloat = not floatVerified or scanFloat <= scanLowFloatMaxM
 pillarScore = (pillarPrice ? 1 : 0) + (pillarRVOL ? 1 : 0) + (pillarGap ? 1 : 0) + (pillarFloat ? 1 : 0)
 
 // which Dash lane this name would fire, if any. Every lane requires a NEW HOD
@@ -366,7 +454,7 @@ scanBurst5  = bar_index >= 5  and close[5] > 0  ? (close / close[5] - 1.0) * 100
 scanBurst10 = bar_index >= 10 and close[10] > 0 ? (close / close[10] - 1.0) * 100.0 : na
 laneSqueeze5  = newHodBar and not na(scanBurst5)  and scanBurst5  >= 5.0
 laneSqueeze10 = newHodBar and not na(scanBurst10) and scanBurst10 >= 10.0
-laneLowFloat  = newHodBar and not na(scanFloat) and scanFloat <= scanLowFloatMaxM and pillarRVOL
+laneLowFloat  = newHodBar and floatVerified and scanFloat <= scanLowFloatMaxM and pillarRVOL
 laneAny       = laneSqueeze5 or laneSqueeze10 or laneLowFloat
 // his own stated ranking: repeat alerts, not any single one.
 // "a stock hitting scanners more and more times is definitely a good
@@ -659,10 +747,13 @@ if confirmedPass and intrabarCancelled and strategy.position_size == 0 and
 // boundary or a new day. Positions are flattened at the session edge when
 // the hard window is on. (A halt still cannot be escaped from Pine — no
 // ticks means no cancel; that limit is disclosed, not solved.)
-if confirmedPass and (newDayBar or (useSessionWindow and not inSession))
-    if strategy.position_size > 0 and useSessionWindow and not inSession
+pastFlatCutoff = minuteET >= dailyFlatHour * 60 + dailyFlatMinute
+if confirmedPass and (newDayBar or (useSessionWindow and not inSession) or
+     (pastFlatCutoff and not allowOvernightPositions))
+    if strategy.position_size > 0 and
+         ((useSessionWindow and not inSession) or (pastFlatCutoff and not allowOvernightPositions))
         strategy.close("Long", comment="SESSION FLAT",
-             alert_message="ROSS FP V6 SESSION FLAT | {{ticker}}")
+             alert_message="ROSS FP V7 SESSION FLAT | {{ticker}}")
     if setupState != IDLE and setupState != LONG
         strategy.cancel("Long")
         setupState := INVALID
@@ -901,6 +992,11 @@ supportCount = supportCountRaw - (emaClustered ? 1 : 0)
 
 candidateTrigger = setupState == PULLBACK ? high + breakoutBufferTicks * syminfo.mintick : triggerPrice
 candidateStopRaw = setupState == PULLBACK ? pullbackLowLive : structuralStop
+// V7 (reviewer): a retest setup's stop must sit BELOW the level it claims to
+// trade against — a stop above the reclaimed HOD defends nothing.
+candidateStopRaw := setupState == PULLBACK and setupKind == KIND_RETEST and not na(setupRetestLevel) ?
+     math.min(candidateStopRaw, setupRetestLevel - retestStopBufferTicks * syminfo.mintick) :
+     candidateStopRaw
 candidateRiskRaw = candidateTrigger - candidateStopRaw
 // V5.2: wide-candle fallback — audit: candle-low stops are fiction on wide
 // bars. The substituted stop satisfies the risk caps by construction.
@@ -956,8 +1052,13 @@ rrGate = not requireRRtoPeak or (not na(candidateRRtoPeak) and candidateRRtoPeak
 // Available for anyone who wants it, never on by default.
 scanGate = not scanGates or pillarScore == 4
 sessionGate = inSession                                                 // V4
+// V7 (reviewer): outside RTH the real venue takes LIMIT orders only, so the
+// emulator's stop/market fills there are fiction. Arming is RTH-only unless
+// the operator explicitly opts into invalid fill modelling. The verdict and
+// the whole display still run pre-market — only order placement is gated.
+venueGate = inRTH or allowPremarketEmulatorFills
 
-hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and scanGate and sessionGate
+hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and scanGate and sessionGate and venueGate
 
 // ─────────────────── Quality number: DISPLAY ONLY (V4) ───────────────────
 // V4: A+/A/B letter grades REMOVED. Origin of the demotion: MEASURED —
@@ -980,6 +1081,7 @@ liveQuality = math.max(0.0, math.min(100.0, impulseScore + pullbackScore + momen
 
 string gateReason =
      not sessionGate ? "Outside 07:00-11:30 ET window" :
+     not venueGate ? "Pre-market: limit-only venue, no stop-entry fills (see input)" :
      not pushGate ? "Push quality failed" :
      pullbackBars < minPullbackBars ? "Need more pullback" :
      redPullbackBars < 1 ? "Need a red pullback candle" :
@@ -1028,7 +1130,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and setu
 
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=triggerPrice,
              comment="ROSS FP trigger",
-             alert_message="ROSS FP V6 ENTRY | {{ticker}} | stop-entry filled")
+             alert_message="ROSS FP V7 ENTRY | {{ticker}} | stop-entry filled")
 
     else if pullbackBars >= maxPullbackBars
         strategy.cancel("Long")
@@ -1091,7 +1193,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
     bool fastOK = fRisk > 0 and not na(fRiskPct) and fRiskPct <= maxStopPct and
          not na(fRiskATR) and fRiskATR <= maxStopATR and
          (not useMaxDollarStop or fRisk <= maxStopDollar) and
-         fRoomOK and fShares >= 1 and fHaltOK and sessionGate and scanGate
+         fRoomOK and fShares >= 1 and fHaltOK and sessionGate and scanGate and venueGate
     if fastOK
         triggerPrice := fTrig
         structuralStop := fStop
@@ -1131,7 +1233,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size == 0 and
         eventArmed := true
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=fTrig,
              comment="ROSS FP fast lane",
-             alert_message="ROSS FP V6 FAST ENTRY | {{ticker}} | red-high break")
+             alert_message="ROSS FP V7 FAST ENTRY | {{ticker}} | red-high break")
 
 // V6 (finding 4): commit the one-pass-per-bar latch after all signal blocks.
 if confirmedPass
@@ -1180,11 +1282,11 @@ if strategy.position_size > 0 and setupState == LONG and tradeRisk > 0
         strategy.exit("T1", from_entry="Long", qty_percent=50,
              stop=structuralStop, limit=t1Target,
              comment_loss="STRUCTURAL STOP", comment_profit="T1 HALF",
-             alert_message="ROSS FP V6 T1 | {{ticker}}")
+             alert_message="ROSS FP V7 T1 | {{ticker}}")
     strategy.exit("RUNNER", from_entry="Long", qty_percent=100,
          stop=t1Filled ? tradeEntryPrice : structuralStop, limit=activeTarget,
          comment_loss=t1Filled ? "BREAKEVEN" : "STRUCTURAL STOP", comment_profit="TARGET",
-         alert_message="ROSS FP V6 EXIT | {{ticker}}")
+         alert_message="ROSS FP V7 EXIT | {{ticker}}")
 
 mfeR = setupState == LONG and tradeRisk > 0 ?
      f_safeDiv(highestSinceEntry - tradeEntryPrice, tradeRisk, 0.0) : na
@@ -1207,7 +1309,7 @@ if isOneMinute and barstate.isconfirmed and strategy.position_size > 0 and setup
         // close it had just observed — an assumption live execution cannot
         // honour. The market order now fills at the next tick/bar open.
         strategy.close("Long", comment="BAILOUT",
-             alert_message="ROSS FP V6 BAILOUT | {{ticker}}")
+             alert_message="ROSS FP V7 BAILOUT | {{ticker}}")
 
 // ───────────────────────── Display values ─────────────────────────
 displayQuality = setupState == ARMED or setupState == LONG ? setupQuality : liveQuality
@@ -1447,10 +1549,13 @@ if barstate.islast
     // reading a trigger price.
     if showScanPanel
         f_row(9, "PILLARS " + str.tostring(pillarScore) + "/4",
-             f_crit("P", pillarPrice) + " " + (na(scanFloat) ? "F? " : f_crit("F", pillarFloat) + " ") +
-             f_crit("R", pillarRVOL) + " " + f_crit("G", pillarGap) +
-             "  · " + f_n(scanGap, "#.0") + "% · rvol " + f_n(scanRVOL, "#.1") + "x" +
-             (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M"),
+             f_crit("P", pillarPrice) + " " +
+             (na(scanFloat) ? "F? " : not floatVerified ? "F~ " : f_crit("F", pillarFloat) + " ") +
+             (not rvolKnown ? "R? " : f_crit("R", pillarRVOL) + " ") + f_crit("G", pillarGap) +
+             "  · " + f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
+             (not rvolKnown ? " (unack'd)" : "") +
+             (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M" +
+                  (floatVerified ? "" : " unver.")),
              pillarScore == 4 ? CRIT_ALL : CRIT_SOME)
         // "2+ hits" is the met-criterion here — his own rule: one alert is
         // not a candidate (KSPN, yg5E_mqGFGg @00:16:47).
