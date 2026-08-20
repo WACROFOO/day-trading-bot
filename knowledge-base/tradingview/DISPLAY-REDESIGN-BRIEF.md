@@ -154,4 +154,9 @@ the redesign is not done.
 
 ---
 
+**DELIVERED — V9.0, 2026-08-20.** All four defects implemented; the two
+string-keyed-logic and hidden-ambiguity-count traps the acceptance test
+would have caught were fixed before delivery. `pine_check` clean;
+TradingView compile still the operator's step.
+
 Paper only. Display work; no edge claimed.

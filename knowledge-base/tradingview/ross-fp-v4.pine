@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V8.2 (paper only)", shorttitle="ROSS FP V8.2", overlay=true,
+strategy("ROSS First Pullback Strategy V9.0 (paper only)", shorttitle="ROSS FP V9.0", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -121,6 +121,24 @@ strategy("ROSS First Pullback Strategy V8.2 (paper only)", shorttitle="ROSS FP V
 //      shows in full only when the machine is idle and flat; any live
 //      state (MOVE UP, DIP FORMING, a finished trade) keeps its dynamic
 //      verdict, with a short "not a playbook stock" suffix when relevant.
+// V9.0 (DISPLAY-REDESIGN-BRIEF.md, 2026-08-20) — display + sizing layer
+// only; the execution core is untouched:
+//   1. CLOCK row splits two different clocks: market phase (pre-market /
+//      OPEN / after-hours) vs THIS strategy's arming window. A chart whose
+//      inputs carry a stale "window off" override now says so in red —
+//      TradingView preserves per-chart input overrides across updates.
+//   2. Sizing basis is the source's rule (PARAMETERS.md §7, n=125): risk
+//      2% of account per trade by default, flat-$ beginner path kept
+//      ($50, §7). The SIZE row shows the DERIVATION — risk/share, budget,
+//      slip reserve, % of account — no number without its origin.
+//   3. Two-layer chart: the decision layer (plan lines, HOD, one compact
+//      marker per event class, short order codes) always on; everything
+//      else (AMBIGUOUS SEQ labels, SEEN ghosts, S/R fan, EMA/VWAP lines)
+//      behind one DIAGNOSTIC toggle, default off. The ambiguity COUNT
+//      stays on LIMITS regardless — the audit artifact is never lost.
+//   4. Verdict verbs: BUY >x.xx / WAIT — reason / NO — reason / MANAGE.
+//      One of the four is always present; VERDICT, PLAN and SIZE render
+//      one text size up from the reference rows.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -264,10 +282,18 @@ gRisk = "6. Risk / sizing"
 // $2,000 max position = cash account, no leverage. The old pair (200 /
 // 25,000) was 10% risk and 12.5x account value — presented as executable
 // sizing, it was the single most dangerous default in the file.
-riskBudget           = input.float(20.0, "Risk budget per trade $ [1% of $2k]", minval=1.0, step=5.0, group=gRisk)
+// V9 (defect 2): the source's sizing rule, measured — PARAMETERS.md §7:
+// risk 2% of account per trade (n=125; 3-5% also stated), $50 flat for the
+// beginner path (n=125). shares = risk_budget / risk_per_share. The old
+// $20 default was 1% — a local choice presented as if it were the rule.
+riskMode             = input.string("% of account (source: 2%)", "Risk basis", options=["% of account (source: 2%)", "Flat $ (beginner path)"], group=gRisk,
+     tooltip="PARAMETERS.md §7: risk_pct_per_trade = 2.0% of account (n=125); risk_flat_beginner = $50 (n=125).")
+riskPctInput         = input.float(2.0, "Risk % of account per trade [source: 2%]", minval=0.1, maxval=10.0, step=0.25, group=gRisk)
+riskFlatInput        = input.float(50.0, "Flat $ risk per trade [source: $50 beginner]", minval=1.0, step=5.0, group=gRisk)
+riskBudget           = riskMode == "Flat $ (beginner path)" ? riskFlatInput : strategy.initial_capital * riskPctInput / 100.0
 maxPositionValue     = input.float(2000.0, "Maximum position value $ [cash account]", minval=100.0, step=100.0, group=gRisk)
-accountSize          = input.float(2000.0, "Account size $ (risk-% display only)", minval=100.0, step=100.0, group=gRisk,
-     tooltip="Used only to show risk as % of account on the dashboard. Keep it equal to strategy initial_capital; Pine cannot read that back.")
+// V9: accountSize input retired — the dashboard reads
+// strategy.initial_capital directly, which Pine CAN read back.
 // V8: the sizing stress assumption is now an input so testing another
 // slippage setting cannot silently desynchronise sizing from the emulator.
 slipTicksInput       = input.int(10, "Slippage assumption (ticks) — MUST match Properties slippage", minval=0, maxval=100, group=gRisk,
@@ -345,6 +371,10 @@ bigMarkers           = input.bool(false, "Large signal markers", group=gVisual)
 showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual)
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+// V9 (defect 3): ONE switch for everything that is not the trade decision.
+// The decision layer (plan lines, HOD, one marker per event class) is
+// always on; this reveals the working parts when you want them.
+showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, ghost SEEN, S/R fan, EMA/VWAP", group=gVisual)
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
 // V4.3: readable by default; shrink only if the user asks the input to
 dashSize             = input.string("small", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
@@ -384,7 +414,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V8.2"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.0"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -877,8 +907,11 @@ if strategy.position_size > 0
         // live logic may have cancelled before the trigger. V8: counted.
         if barstate.ishistory and not na(structuralStop) and low <= structuralStop
             historicalFillAmbiguities += 1
-            label.new(bar_index, high, "AMBIGUOUS SEQ", style=label.style_label_down,
-                 color=color.new(color.orange, 20), textcolor=color.black, size=size.small)
+            // V9 (defect 3): the label is diagnostic; the COUNT on the
+            // LIMITS row is the audit artifact and renders regardless.
+            if showDiagnostics
+                label.new(bar_index, high, "AMBIGUOUS SEQ", style=label.style_label_down,
+                     color=color.new(color.orange, 20), textcolor=color.black, size=size.small)
         statusReason := "Bought — follow the plan"
         eventLong := true
 
@@ -1502,7 +1535,7 @@ if confirmedPass and strategy.position_size == 0 and setupState == PULLBACK and
         eventArmed := true
 
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=triggerPrice,
-             comment="Buy on break",
+             comment="IN",
              alert_message="ROSS FP " + REV + " ENTRY | {{ticker}} | stop-entry filled")
         // V8 (re-audit critical 1): PRE-STAGED PROTECTION. Exits used to be
         // submitted only after the fill was detected — with
@@ -1518,12 +1551,12 @@ if confirmedPass and strategy.position_size == 0 and setupState == PULLBACK and
         if not na(t1QtyArm)
             strategy.exit("T1", from_entry="Long", qty=t1QtyArm,
                  stop=structuralStop, limit=triggerPrice + plannedRisk,
-                 comment_loss="STOP LOSS", comment_profit="SOLD HALF +1R",
+                 comment_loss="STOP", comment_profit="T1",
                  alert_message="ROSS FP " + REV + " T1 | {{ticker}}")
         strategy.exit("RUNNER", from_entry="Long",
              qty=plannedShares - (na(t1QtyArm) ? 0 : t1QtyArm),
              stop=structuralStop, limit=plannedTarget,
-             comment_loss="STOP LOSS", comment_profit="TARGET HIT",
+             comment_loss="STOP", comment_profit="T2",
              alert_message="ROSS FP " + REV + " EXIT | {{ticker}}")
 
     else if pullbackBars >= maxPullbackBars
@@ -1661,7 +1694,7 @@ if confirmedPass and strategy.position_size == 0 and
              (fATR ? " · wide candle, ATR stop " + str.tostring(fStop, format.mintick) : "")
         eventArmed := true
         strategy.entry("Long", strategy.long, qty=plannedShares, stop=fTrig,
-             comment="Quick buy on break",
+             comment="IN-Q",
              alert_message="ROSS FP " + REV + " FAST ENTRY | {{ticker}} | red-high break")
         // V8: same pre-staged protection as the formal path — the historical
         // entry bar is never naked. Whole-share legs (P23), as above.
@@ -1669,12 +1702,12 @@ if confirmedPass and strategy.position_size == 0 and
         if not na(t1QtyLane)
             strategy.exit("T1", from_entry="Long", qty=t1QtyLane,
                  stop=fStop, limit=fTrig + fRisk,
-                 comment_loss="STOP LOSS", comment_profit="SOLD HALF +1R",
+                 comment_loss="STOP", comment_profit="T1",
                  alert_message="ROSS FP " + REV + " T1 | {{ticker}}")
         strategy.exit("RUNNER", from_entry="Long",
              qty=plannedShares - (na(t1QtyLane) ? 0 : t1QtyLane),
              stop=fStop, limit=fTrig + fRisk * rewardMultiple,
-             comment_loss="STOP LOSS", comment_profit="TARGET HIT",
+             comment_loss="STOP", comment_profit="T2",
              alert_message="ROSS FP " + REV + " EXIT | {{ticker}}")
 
 // V6 (finding 4): commit the one-pass-per-bar latch after all signal blocks.
@@ -1728,11 +1761,11 @@ if strategy.position_size > 0 and setupState == LONG and tradeRisk > 0
     if not t1Filled and not na(t1QtyLive)
         strategy.exit("T1", from_entry="Long", qty=t1QtyLive,
              stop=structuralStop, limit=t1Target,
-             comment_loss="STOP LOSS", comment_profit="SOLD HALF +1R",
+             comment_loss="STOP", comment_profit="T1",
              alert_message="ROSS FP " + REV + " T1 | {{ticker}}")
     strategy.exit("RUNNER", from_entry="Long", qty=strategy.position_size,
          stop=t1Filled ? tradeEntryPrice : structuralStop, limit=activeTarget,
-         comment_loss=t1Filled ? "BREAK-EVEN EXIT" : "STOP LOSS", comment_profit="TARGET HIT",
+         comment_loss=t1Filled ? "BE" : "STOP", comment_profit="T2",
          alert_message="ROSS FP " + REV + " EXIT | {{ticker}}")
 
 mfeR = setupState == LONG and tradeRisk > 0 ?
@@ -1762,7 +1795,8 @@ if confirmedPass and strategy.position_size > 0 and setupState == LONG and bar_i
 if flattenRequested and strategy.position_size > 0
     // V6 (finding 15): no immediately=true — the market order fills at the
     // next tick/bar open, not at the close it just observed.
-    strategy.close("Long", comment=flattenReason,
+    // V9 (defect 3): the chart shows a code; the sentence goes to STATUS.
+    strategy.close("Long", comment=flattenIsBailout ? "BAIL" : "FLAT",
          alert_message="ROSS FP " + REV + (flattenIsBailout ? " BAILOUT | " : " FLAT | ") + "{{ticker}}")
     statusReason := flattenReason
     if flattenIsBailout
@@ -1862,17 +1896,29 @@ shortLH = hodComparable and not peakIsHOD and
 // V8: branches read the EFFECTIVE state; a pending-cancel bar shows the
 // rejection, not the rolled-back ARMED plan (statusReason itself rolled
 // back, so the cancelledPending text is explicit).
+// V9 (defect 4): four verbs, one always present — BUY / WAIT / NO / MANAGE.
+// onlyClockBlocks is computed from the gate BOOLEANS, never from the
+// gateReason display string (design rule: display strings key nothing).
+bool onlyClockBlocks = pushGate and pullbackCountGate and retracementGate and
+     volumeGate and momentumGate and riskGate and rrGate and scanGate and
+     not (sessionGate and venueGate and entryTimeOK)
 actionText =
      (not isOneMinute ? "USE 1-MINUTE CHART" :
-     not supportedMarket ? "UNSUPPORTED SYMBOL — US 1-min stocks only, display-only here" :
-     displayState == LONG ? "MANAGE " + f_n(mfeR, "#.00") + "R" :
-     displayState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + shortLH :
-     displayState == PULLBACK ? roomWarn + (hardGatesOK ? "READY" : gateReason) + shortLH :
-     displayState == IMPULSE ? chartVerdict + " · waiting for the dip" :
+     not supportedMarket ? "NO — unsupported symbol (US 1-min stocks only)" :
+     displayState == LONG ? "MANAGE — " + f_n(mfeR, "#.00") + "R so far · stop " +
+          f_px(t1Filled ? tradeEntryPrice : structuralStop) :
+     displayState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + " — order working" + shortLH :
+     displayState == PULLBACK ? (hardGatesOK ?
+          roomWarn + "BUY >" + f_px(candidateTrigger) + " — arms at bar close" + shortLH :
+          onlyClockBlocks ?
+               roomWarn + "WAIT — window shut, pattern valid (no order)" + shortLH :
+               roomWarn + "WAIT — " + gateReason + shortLH) :
+     displayState == IMPULSE ? "WAIT — move up live, dip not started" :
      displayState == INVALID ? (cancelledPending ?
-          "Rejected — stop touched before entry, order removed" : statusReason) :
-     displayState == DONE ? "DONE — log the trade" :
-     chartVerdict) + liveTag
+          "NO — stop hit before entry, order removed" :
+          "NO — " + str.replace(statusReason, "Rejected — ", "")) :
+     displayState == DONE ? "NO — trade over, log it" :
+     "WAIT — " + chartVerdict) + liveTag
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = displayState == PULLBACK or displayState == ARMED or displayState == LONG
@@ -1935,7 +1981,7 @@ f_near(array<float> src, bool above_, int n_, float tol) =>
     while array.size(out) > n_
         array.pop(out)
     out
-if barstate.islast and showSR
+if barstate.islast and showSR and showDiagnostics
     while array.size(srLines) > 0
         line.delete(array.pop(srLines))
     while array.size(srLabels) > 0
@@ -1970,7 +2016,7 @@ if barstate.islast and showSR
 
 var box resBox = na
 var box supBox = na
-if barstate.islast and showSR
+if barstate.islast and showSR and showDiagnostics
     if not na(resBox)
         box.delete(resBox)
     if not na(supBox)
@@ -1994,9 +2040,9 @@ if barstate.islast and showSR
              text_color=color.new(color.purple, 20), text_size=size.tiny,
              text_halign=text.align_left)
 
-plot(showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
-plot(showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
-plot(showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20))
+plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
+plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
+plot(showDiagnostics and showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20))
 
 plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr)
 plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr)
@@ -2019,8 +2065,8 @@ plotshape(lg and eventLong, title="Entry filled (large)", style=shape.labelup, l
 plotshape(lg and eventInvalid, title="Setup rejected (large)", style=shape.xcross, location=location.abovebar, color=color.red, size=size.normal, text="NO")
 plotshape(lg and eventBailout, title="Bailout (large)", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.normal, text="EXIT")
 // V7.3: the ghost — pattern seen, clock withheld the order.
-plotshape(sm and eventGhost, title="Pattern seen, no order", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.tiny, text="SEEN")
-plotshape(lg and eventGhost, title="Pattern seen, no order (large)", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.normal, text="SEEN")
+plotshape(sm and showDiagnostics and eventGhost, title="Pattern seen, no order", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.tiny, text="SEEN")
+plotshape(lg and showDiagnostics and eventGhost, title="Pattern seen, no order (large)", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.normal, text="SEEN")
 
 // ───────────────────────── Dashboard ─────────────────────────
 // V4.2: the original two-column layout (labels left, values right — the
@@ -2028,6 +2074,8 @@ plotshape(lg and eventGhost, title="Pattern seen, no order (large)", style=shape
 // em dashes for absents. dashFull adds the three diagnostic rows.
 LBL = color.rgb(28, 28, 30)
 DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
+// V9 (defect 4): the three decision rows render one size up.
+DSZ_BIG = dashSize == "tiny" ? size.small : size.normal
 // V7.2: INVALID/DONE verdicts age in candles, so a stale NO cannot read live.
 int barsInState = na(stateStartBar) ? 0 : bar_index - stateStartBar
 ageTag = barsInState <= 0 ? "" : " (" + str.tostring(barsInState) + (barsInState == 1 ? " candle ago" : " candles ago") + ")"
@@ -2043,7 +2091,7 @@ avgDollarVol20 = ta.sma(close * volume, 20)
 avgDollarVol5 = ta.sma(close * volume, 5)
 avgDollarVolDay = f_safeDiv(dayDollarCum, dayBarCount, na)
 liquidPerMin = math.max(nz(avgDollarVol20, 0.0), math.max(nz(avgDollarVol5, 0.0), nz(avgDollarVolDay, 0.0)))
-var table dash = table.new(position.bottom_right, 2, 14, border_width=0)
+var table dash = table.new(position.bottom_right, 2, 15, border_width=0)
 
 // V5.1 display rule, operator-specified: each criterion carries its own ✓/✗,
 // and a LINE is green only when EVERY criterion on it is met — orange while
@@ -2060,8 +2108,16 @@ f_row(int r, string label, string value, color vcolor) =>
     table.cell(dash, 1, r, value, text_color=vcolor,
          text_size=DSZ, text_halign=text.align_left)
 
+// V9: emphasis rows — PLAN and SIZE (VERDICT is written inline, it also
+// carries a state-coloured background).
+f_rowBig(int r, string label, string value, color vcolor) =>
+    table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.white,
+         text_size=DSZ_BIG, text_halign=text.align_left)
+    table.cell(dash, 1, r, value, text_color=vcolor,
+         text_size=DSZ_BIG, text_halign=text.align_left)
+
 if barstate.islast
-    table.clear(dash, 0, 0, 1, 13)
+    table.clear(dash, 0, 0, 1, 14)
     table.cell(dash, 0, 0, "ROSS FP " + REV, bgcolor=LBL, text_color=color.white,
          text_size=DSZ, text_halign=text.align_left)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(displayState) +
@@ -2084,22 +2140,23 @@ if barstate.islast
     outOfUniverse = strategy.position_size == 0 and displayState == IDLE and
          (not pillarPrice or thinTape)
 
-    // ── V7.5 STATUS: short and decisive. The reason chain already speaks
-    // plainly; the row just stops stacking tags on it. Reads the EFFECTIVE
-    // state (V8): a pending-cancel bar shows the rejection, never a plan.
-    string shortMsg = str.replace(actionText, "Rejected — ", "")
-    string statusLine = outOfUniverse ?
-         "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
+    // ── V9 VERDICT: actionText IS the row (four verbs, always one).
+    // Reads the EFFECTIVE state (V8): a pending-cancel bar shows the
+    // rejection, never a plan. Banner only when idle+flat (V8.2).
+    string vLine = outOfUniverse ?
+         "NO — not a playbook stock: " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
-              "volume too thin (best $" + f_n(liquidPerMin, "#") + "/min: burst/20-bar/day)") :
-         f_stateName(displayState) +
+              "volume thin (best $" + f_n(liquidPerMin, "#") + "/min: burst/20-bar/day)") :
+         actionText +
               (displayState == INVALID or displayState == DONE ? ageTag : "") +
-              " — " + shortMsg +
               (not pillarPrice or thinTape ? "  · ⚠ not a playbook stock" : "")
-    f_row(1, "STATUS", statusLine,
-         outOfUniverse ? color.gray :
+    color vCol = outOfUniverse ? color.gray :
          thinRoom ? color.red : displayState == ARMED ? color.yellow :
-         displayState == LONG ? color.lime : color.white)
+         displayState == LONG ? color.lime : color.white
+    table.cell(dash, 0, 1, "VERDICT", bgcolor=LBL, text_color=color.white,
+         text_size=DSZ_BIG, text_halign=text.align_left)
+    table.cell(dash, 1, 1, vLine, text_color=vCol,
+         bgcolor=color.new(stateColor, 82), text_size=DSZ_BIG, text_halign=text.align_left)
 
     // ── V7.5 PLAN + SIZE: one live plan, always. Priority: a real position,
     // then a working order, then the LIVE candidate of the forming setup,
@@ -2133,18 +2190,37 @@ if barstate.islast
     // forming candidate — never inferred after the fact.
     string atrMark = planSrc >= 4 ? (plannedUsesATRStop ? "ᵃᵗʳ" : "") :
          (planSrc == 3 and usingATRstop ? "ᵃᵗʳ" : "")
-    f_row(2, planSrc >= 4 ? "▶ PLAN" : "PLAN",
+    f_rowBig(2, planSrc >= 4 ? "▶ PLAN" : "PLAN",
          "buy " + f_px(pEntry) + " · stop " + f_px(pStop) + atrMark +
          " · sell½ " + f_px(pT1) + " · target " + f_px(pT2) + planTag, planCol)
-    // V8.1 (benchmark): the worst case names slippage AND the $2 round-trip
-    // commission — at $20 risk that toll is 10-15% of the budget, per trade.
+    // V9 (defect 2): the DERIVATION, not just the result. Rule from
+    // PARAMETERS.md §7: shares = risk_budget / risk_per_share, budget 2%
+    // of account (n=125). The slip reserve (audit finding 14) and the $2
+    // round-trip commission (benchmark: 10-15% of a small budget) are
+    // SHOWN, not silently deducted.
     float worstCase = pShares * (pRisk + slipPerShare) + 2.0
-    f_row(3, "SIZE", f_n(pShares, "#") + " shares · $" +
-         f_n(pShares * pRisk, "#") + " at risk (" +
-         f_n(f_safeDiv(pShares * pRisk, strategy.initial_capital, 0.0) * 100.0, "#.00") + "% of account)" +
-         " · worst $" + f_n(worstCase, "#") + " with slip + $2 fees" +
-         (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " of room above" : ""),
+    string sizeTag = setupsToday >= 2 and planSrc >= 3 ? " · ½ size (3rd trade of day)" : ""
+    f_rowBig(3, "SIZE", "$" + f_n(pRisk, "#.00") + "/sh risk → " + f_n(pShares, "#") +
+         " sh of $" + f_n(riskBudget, "#") + " budget (slip reserve $" +
+         f_n(pShares * slipPerShare, "#") + ") = " +
+         f_n(f_safeDiv(pShares * pRisk, strategy.initial_capital, 0.0) * 100.0, "#.0") + "% acct" +
+         " · worst $" + f_n(worstCase, "#") + " w/ fees" + sizeTag +
+         (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
          thinRoom and planSrc >= 3 ? color.red : planCol)
+
+    // ── V9 CLOCK (defect 1): two different clocks, named apart. Market
+    // phase is the exchange; the window is THIS strategy's arming rule.
+    // "Market OPEN · window OVER" must be readable in one glance, and a
+    // stale per-chart "window off" override announces itself in red.
+    string mktPhase = minuteET < 570 ? "PRE-MARKET" : minuteET < 960 ? "market OPEN" : "AFTER-HOURS"
+    string winText = not useSessionWindow ?
+         "⚠ WINDOW GATE OFF — arms at ANY hour (non-default input — reset chart inputs)" :
+         inSession ? (entryTimeOK ? "window " + sessionWindow + " ET · open" :
+              "window closing — no new orders this bar") :
+         "window " + sessionWindow + " ET · OVER — watch only, no orders"
+    f_row(4, "CLOCK", mktPhase + " · " + winText,
+         not useSessionWindow ? color.red :
+         inSession and entryTimeOK ? color.lime : color.orange)
 
     // ── V7.5: the gates split into the two questions they actually answer.
     // SETUP = is THIS dip tradeable. TREND = is the tape behind it.
@@ -2153,7 +2229,7 @@ if barstate.islast
     // pillars pick.) A gate that cannot be judged yet shows '·', not a
     // cross (V5.2 — a false cross teaches the eye to ignore crosses).
     pbApplicable = setupState == PULLBACK or setupState == ARMED
-    f_row(4, "SETUP", f_crit("Push", pushGate) +
+    f_row(5, "SETUP", f_crit("Push", pushGate) +
          (pbApplicable ? " " + f_crit("DipLen", pullbackCountGate) + " " +
               f_crit("Depth", retracementGate) + " " + f_crit("DipVol", volumeGate) + " " +
               ("Risk" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) :
@@ -2161,17 +2237,17 @@ if barstate.islast
          pbApplicable ? (pushGate and pullbackCountGate and retracementGate and
               volumeGate and riskGate ? CRIT_ALL : CRIT_SOME) :
               (pushGate ? CRIT_ALL : CRIT_SOME))
-    f_row(5, "TREND", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
+    // V9: the Clock lamp moved to its own CLOCK row above — one lamp
+    // conflating market phase, window, venue and last-bar was defect 1.
+    f_row(6, "TREND", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
          (not vwapKnown ? "VWAP? " : f_crit("VWAP", vwapBullish) + " ") +
-         f_crit("Room", rrGate) + " " +
-         f_crit("Clock", sessionGate and venueGate and entryTimeOK) +
+         f_crit("Room", rrGate) +
          (scanGates ? " " + f_crit("Fit", scanGate) : ""),
-         macdBullish and emaBullish and vwapBullish and rrGate and
-              sessionGate and venueGate and entryTimeOK and scanGate ? CRIT_ALL : CRIT_SOME)
+         macdBullish and emaBullish and vwapBullish and rrGate and scanGate ? CRIT_ALL : CRIT_SOME)
 
     // V4.10: the day's high, and whether this impulse is the one making it.
     // Every scanner branch measured on 2026-08-18 fired only on a new HOD.
-    f_row(6, "HIGH OF DAY", f_px(dayHigh) +
+    f_row(7, "HIGH OF DAY", f_px(dayHigh) +
          (not hodComparable ? "" : peakIsHOD ? "  · this move IS the high" : "  ⚠ lower high") +
          (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
          not hodComparable ? color.silver : peakIsHOD ? color.lime : color.orange)
@@ -2179,7 +2255,7 @@ if barstate.islast
     // STOCK FIT = the pillars: selection, not timing. A 4/4 here says "right
     // kind of stock"; it never says "buy now" — that is what SETUP/TREND do.
     if showScanPanel
-        f_row(7, "STOCK FIT " + str.tostring(pillarScore) + "/4",
+        f_row(8, "STOCK FIT " + str.tostring(pillarScore) + "/4",
              f_crit("Price", pillarPrice) + " " +
              (na(scanFloat) ? "Float? " : not floatVerified ? "Float~ " : f_crit("Float", pillarFloat) + " ") +
              (not rvolKnown ? "Rvol? " : f_crit("Rvol", pillarRVOL) + " ") + f_crit("Gap", pillarGap) +
@@ -2194,27 +2270,30 @@ if barstate.islast
              pillarScore == 4 and floatVerified and rvolKnown ? CRIT_ALL : CRIT_SOME)
         // "2+ hits" is the met-criterion here — his own rule: one alert is
         // not a candidate (KSPN, yg5E_mqGFGg @00:16:47).
-        f_row(8, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
+        f_row(9, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
              (laneSqueeze5 ? "SQ5 " : "") + (laneSqueeze10 ? "SQ10 " : "") +
              (laneAny ? "" : "no lane this bar") +
              " · " + f_crit(str.tostring(laneHits) + " hits", laneHits >= 2),
              laneHits >= 2 ? CRIT_ALL : CRIT_SOME)
 
     if inRTH or dashFull
-        f_row(9, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+        f_row(10, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
              f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ stop wider than the band" :
                   "  ok · " + f_rr(f_safeDiv(haltBandWidth, pRisk, na)) + " to halt"),
              not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
     if dashFull
-        f_row(10, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
+        f_row(11, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
              vwapBullish ? color.lime : color.orange)
-        f_row(11, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
+        f_row(12, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
              "  · setup #" + str.tostring(setupsToday + (displayState == PULLBACK ? 1 : 0)), color.silver)
-        f_row(12, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-        // V8 (ND-8): the fill-ambiguity counter where the operator looks; an
-        // optimistic backtest fill is only acceptable when its count is
-        // visible and owned. V8.1: the fee toll named beside it (benchmark).
-        f_row(13, "LIMITS", "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
+        f_row(13, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
+    // V8 (ND-8): the fill-ambiguity counter where the operator looks; an
+    // optimistic backtest fill is only acceptable when its count is visible
+    // and owned. V8.1: the fee toll named beside it (benchmark). V9: a
+    // non-zero count forces the row onto the COMPACT dashboard too — the
+    // labels can hide (defect 3), the count cannot.
+    if dashFull or historicalFillAmbiguities > 0
+        f_row(14, "LIMITS", "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
              str.tostring(historicalFillAmbiguities) +
              (historicalFillAmbiguities > 0 ? " ⚠ expectancy not portable" : ""),
              historicalFillAmbiguities > 0 ? color.orange : color.gray)
