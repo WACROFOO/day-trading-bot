@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.2 (paper only)", shorttitle="ROSS FP V9.2", overlay=true,
+strategy("ROSS First Pullback Strategy V9.3 (paper only)", shorttitle="ROSS FP V9.3", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -159,6 +159,13 @@ strategy("ROSS First Pullback Strategy V9.2 (paper only)", shorttitle="ROSS FP V
 //   d. HIGH OF DAY names the front/back side: % off the high, and >=20%
 //      off prints BACK SIDE in orange — the move-is-over fact the row
 //      used to leave silent (PCLA: HOD 11.33, price 7.99, said nothing).
+// V9.3 (operator, live MMA 2026-08-20): HALT BAND and DASH LANE rows
+//      retired — the halt band's decision fact (unenforceable stop) is a
+//      red warning on SIZE when it fires; the lane row's (his 2+ hits
+//      rule) is a chip on STOCK FIT. LIMITS cut to one clause. BUY/STOP/
+//      TGT in Unicode bold capitals. Float/Rvol chips colour from the
+//      MEASURED value (typed float, warmed TV proxy) while score and
+//      gates stay fail-closed on provenance.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -440,7 +447,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.2"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.3"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -2159,21 +2166,22 @@ f_b(bool ok) =>
 
 if barstate.islast
     // ── row layout: fixed rows 0..7, optional rows packed after them ──
+    // V9.3 (operator): HALT BAND and DASH LANE rows retired. The halt
+    // band's one decision fact — an unenforceable stop — is a red warning
+    // on SIZE when it fires; the lane row's one decision fact — his 2+
+    // hits rule — is a chip on STOCK FIT. Everything else those rows
+    // showed was reference, not decision.
     bool showFitRows = showScanPanel
-    bool showHalt = inRTH or dashFull
     bool showLimits = dashFull or historicalFillAmbiguities > 0
     int rFit = showFitRows ? 8 : -1
-    int rLane = showFitRows ? 9 : -1
-    int nextRow = showFitRows ? 10 : 8
-    int rHalt = showHalt ? nextRow : -1
-    nextRow += showHalt ? 1 : 0
+    int nextRow = showFitRows ? 9 : 8
     int rVwap = dashFull ? nextRow : -1
     int rRS = dashFull ? nextRow + 1 : -1
     int rQual = dashFull ? nextRow + 2 : -1
     nextRow += dashFull ? 3 : 0
     int rLim = showLimits ? nextRow : -1
     nextRow += showLimits ? 1 : 0
-    int rowSig = nextRow * 100 + (showFitRows ? 1 : 0) + (showHalt ? 2 : 0) +
+    int rowSig = nextRow * 100 + (showFitRows ? 1 : 0) +
          (dashFull ? 4 : 0) + (showLimits ? 8 : 0)
     if na(dash) or rowSig != lastRowSig
         if not na(dash)
@@ -2239,20 +2247,25 @@ if barstate.islast
     string atrMark = planSrc >= 4 ? (plannedUsesATRStop ? "ᵃᵗʳ" : "") :
          (planSrc == 3 and usingATRstop ? "ᵃᵗʳ" : "")
     f_label(2, planSrc >= 4 ? "▶ PLAN" : "PLAN", planSrc >= 4)
-    f_text(2, "buy " + f_px(pEntry) + " · stop " + f_px(pStop) + atrMark +
-         " · ½ " + f_px(pT1) + " · tgt " + f_px(pT2) + planTag, planCol)
+    // V9.3 (operator): the three levels in bold capitals. Pine tables
+    // have no bold — these are Unicode bold-sans capitals, which
+    // TradingView renders.
+    f_text(2, "𝗕𝗨𝗬 " + f_px(pEntry) + " · 𝗦𝗧𝗢𝗣 " + f_px(pStop) + atrMark +
+         " · ½ " + f_px(pT1) + " · 𝗧𝗚𝗧 " + f_px(pT2) + planTag, planCol)
 
     // ── V9.2 SIZE: shares, $ position against the REAL equity base, risk.
     // The % is the POSITION's share of equity, labelled as such — the
     // sizing rule itself (2% risk, PARAMETERS.md §7) lives in the code.
     string sizeTag = setupsToday >= 2 and planSrc >= 3 ? " · ½ size (3rd trade)" : ""
     f_label(3, "SIZE", false)
+    bool haltWarn = inRTH and stopExceedsHaltBand
     f_text(3, f_n(pShares, "#") + " sh · $" + f_n(pShares * pEntry, "#") +
          " position (" + f_n(f_safeDiv(pShares * pEntry, equityBase, 0.0) * 100.0, "#") +
          "% of $" + f_n(equityBase, "#") + ") · risk $" + f_n(pShares * pRisk, "#") +
          " / $" + f_n(riskBudget, "#") + " budget" + sizeTag +
+         (haltWarn ? "  ⚠ stop wider than halt band " + f_px(haltBandWidth) : "") +
          (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
-         thinRoom and planSrc >= 3 ? color.red : planCol)
+         haltWarn or (thinRoom and planSrc >= 3) ? color.red : planCol)
 
     // ── CLOCK (V9 defect 1): market phase chip + THIS strategy's window.
     string mktPhase = minuteET < 570 ? "PRE-MKT" : minuteET < 960 ? "OPEN" : "AFTER-HRS"
@@ -2309,31 +2322,23 @@ if barstate.islast
         bool fitAll = pillarScore == 4 and floatVerified and rvolKnown
         f_label(rFit, "STOCK FIT " + str.tostring(pillarScore) + "/4", fitAll)
         f_chip(1, rFit, "Price", f_b(pillarPrice))
-        f_chip(2, rFit, not floatVerified ? "Float~" : "Float",
-             na(scanFloat) or not floatVerified ? -1 : f_b(pillarFloat))
-        f_chip(3, rFit, "Rvol", rvolKnown ? f_b(pillarRVOL) : -1)
+        // V9.3: chips show the MEASURED state. Float: Pine has no float
+        // field — it gates only when typed AND provenance-verified (the
+        // score stays fail-closed), but a typed value colours the chip.
+        // Rvolᵗ: the TV same-time proxy IS calculated — the chip colours
+        // from it once warmed; the score still demands the acknowledged
+        // feed (V7 reviewer gate).
+        f_chip(2, rFit, floatVerified ? "Float" : "Float~",
+             na(scanFloat) ? -1 : f_b(scanFloat <= scanLowFloatMaxM))
+        f_chip(3, rFit, "Rvolᵗ", na(scanRVOL) or not rvolWarm ? -1 : f_b(scanRVOL >= scanMinRVOL))
         f_chip(4, rFit, "Gap", f_b(pillarGap))
-        table.cell(dash, 5, rFit, f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
-             (rvolKnown ? "" : " unack'd") +
+        // his 2+ hits rule (KSPN, yg5E_mqGFGg @00:16:47): one alert is not
+        // a candidate — the retired DASH LANE row's one decision fact.
+        f_chip(5, rFit, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
+        table.cell(dash, 6, rFit, f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
              (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M" +
                   (floatVerified ? "" : "~")),
              text_color=color.silver, text_size=DSZ, text_halign=text.align_left)
-    if rLane >= 0
-        // "2+ hits" — his rule: one alert is not a candidate
-        // (KSPN, yg5E_mqGFGg @00:16:47). Inactive lanes are slate: absence,
-        // not failure.
-        f_label(rLane, "DASH LANE", laneHits >= 2)
-        f_chip(1, rLane, "LowF", laneLowFloat ? 1 : -1)
-        f_chip(2, rLane, "SQ5", laneSqueeze5 ? 1 : -1)
-        f_chip(3, rLane, "SQ10", laneSqueeze10 ? 1 : -1)
-        f_chip(4, rLane, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
-
-    if rHalt >= 0
-        f_label(rHalt, "HALT BAND", inRTH and not na(haltBandWidth) and not stopExceedsHaltBand)
-        f_text(rHalt, not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
-             f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ stop wider than the band" :
-                  "  ok · " + f_rr(f_safeDiv(haltBandWidth, pRisk, na)) + " to halt"),
-             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
     if rVwap >= 0
         f_label(rVwap, "VWAP", vwapBullish)
         f_text(rVwap, f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
@@ -2345,11 +2350,13 @@ if barstate.islast
         f_text(rQual, f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
     // V8 ND-8 / V9: a non-zero ambiguity count forces LIMITS on — the
     // labels can hide (defect 3), the count cannot.
+    // V9.3 (operator): one clause, no boilerplate — the fee/fill caveats
+    // live in the header. The count is the audit artifact and stays.
     if rLim >= 0
         f_label(rLim, "LIMITS", false)
-        f_text(rLim, "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
-             str.tostring(historicalFillAmbiguities) +
-             (historicalFillAmbiguities > 0 ? " ⚠ expectancy not portable" : ""),
+        f_text(rLim, historicalFillAmbiguities > 0 ?
+             "⚠ " + str.tostring(historicalFillAmbiguities) + " ambiguous fills — backtest R not portable" :
+             "paper · fills optimistic",
              historicalFillAmbiguities > 0 ? CHIP_NO : color.gray)
 
     // merges once per rebuild, AFTER every top-left cell exists.
@@ -2361,10 +2368,6 @@ if barstate.islast
         table.merge_cells(dash, 1, 3, 6, 3)
         table.merge_cells(dash, 2, 4, 6, 4)
         table.merge_cells(dash, 1, 7, 6, 7)
-        if rFit >= 0
-            table.merge_cells(dash, 5, rFit, 6, rFit)
-        if rHalt >= 0
-            table.merge_cells(dash, 1, rHalt, 6, rHalt)
         if rVwap >= 0
             table.merge_cells(dash, 1, rVwap, 6, rVwap)
             table.merge_cells(dash, 1, rRS, 6, rRS)
