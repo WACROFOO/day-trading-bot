@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.3 (paper only)", shorttitle="ROSS FP V9.3", overlay=true,
+strategy("ROSS First Pullback Strategy V9.4 (paper only)", shorttitle="ROSS FP V9.4", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -166,6 +166,18 @@ strategy("ROSS First Pullback Strategy V9.3 (paper only)", shorttitle="ROSS FP V
 //      TGT in Unicode bold capitals. Float/Rvol chips colour from the
 //      MEASURED value (typed float, warmed TV proxy) while score and
 //      gates stay fail-closed on provenance.
+// V9.4 (operator step-back, live MMA + Top Gainers export 2026-08-20):
+//   a. S/R fan back on the DECISION layer (2 clean levels each side +
+//      prev close) — hiding key levels behind diagnostics was over-
+//      cleaning. PRE-MARKET HIGH added as a first-class level.
+//   b. Hypothetical stop is STRUCTURAL (under the 5-bar swing low, never
+//      tighter than 1 fallback-ATR) — the bare ATR stop read too narrow,
+//      and its 2R target inherited the narrowness.
+//   c. Float/RVOL vs the Warrior export: Pine cannot read float at all
+//      (type it; scripts/chart_card.py prints it from the export), and
+//      Warrior's "Rel Vol Daily Rate" is a DIFFERENT measure from the TV
+//      same-time proxy — neither is wrong, they are not the same number.
+//      Full coverage map: knowledge-base/tradingview/STRATEGY-COVERAGE.md
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -257,7 +269,8 @@ gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 // this project's most common error class (scanner dial used as a trade gate).
 showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan)
 scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan)
-manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan)
+manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan,
+     tooltip="Pine has NO float field — TradingView does not expose it to scripts. Type it from Day Trade Dash / finviz; `python3 scripts/chart_card.py <export.csv> SYM` prints it (and the RVOL context) from a Top Gainers export.")
 // V7 (reviewer): a typed number is not a verified number. Float counts as
 // KNOWN for gating only when its provenance is stated; a manual unverified
 // value still displays, labelled, but gates as unknown.
@@ -447,7 +460,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.3"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.4"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -590,6 +603,15 @@ dayBarCount := barstate.isfirst or newDayBar ? 1 : dayBarCount + 1
 var array<float> cumAtTimeAvg = array.new_float(1440, na)
 var array<int>   cumAtTimeN   = array.new_int(1440, 0)
 minuteET = hour(time, "America/New_York") * 60 + minute(time, "America/New_York")
+// V9.4 (operator): the PRE-MARKET HIGH is a first-class level — the
+// pre-market can contain the whole move (JWEL 2026-08-10, CLAUDE.md), and
+// its high is the breakout line the open trades against. Needs extended
+// hours ON on the chart; stays na otherwise, and says nothing.
+var float pmHigh = na
+if newDayBar
+    pmHigh := na
+if minuteET < 570
+    pmHigh := na(pmHigh) ? high : math.max(pmHigh, high)
 rvolBase = array.get(cumAtTimeAvg, minuteET)
 scanRVOL = f_safeDiv(dayVolCum, rvolBase, na)
 // V8: confirmedPass — a fill recalc must not double-feed the baseline.
@@ -1436,7 +1458,13 @@ candidateRiskShares = not na(effRiskPerShare) ? math.floor(riskBudget / effRiskP
 // once a setup exists. With no plan, this answers "if I bought right here
 // with an ATR stop, how many shares does my $ risk buy" — same slippage-aware
 // sizing as a real plan, labelled as hypothetical on the dashboard.
-anyRisk = atr * fallbackATRmult
+// V9.4 (operator: "stops too narrow"): the hypothetical stop is now
+// STRUCTURAL — under the lowest low of the last 5 bars — and never
+// tighter than 1 fallback-ATR. A bare 1-ATR stop on a 1-min chart of a
+// beaten-down mover was fiction; under the swing low is where the real
+// stop goes (and 2R of the wider risk moves the target out with it).
+anyStop = math.min(ta.lowest(low, 5) - syminfo.mintick, close - atr * fallbackATRmult)
+anyRisk = close - anyStop
 anyShares = anyRisk > 0 ? math.min(math.floor(riskBudget / (anyRisk + slipPerShare)),
      math.floor(maxPositionValue / close)) : na
 candidateCapitalShares = candidateTrigger > 0 ? math.floor(maxPositionValue / candidateTrigger) : 0.0
@@ -1965,6 +1993,7 @@ plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color
 // V4.10: the day's high drawn as the obstacle it is. Dotted so it never reads
 // as an entry/stop/target level — green and red stay reserved for TP and SL.
 plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles)
+plot(showLevels and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-market high", color=color.new(color.teal, 40), linewidth=1, style=plot.style_circles)
 // V5: the BROKEN high — the level a retest is testing. Drawn only while a
 // retest is live, so it does not clutter a normal pullback chart.
 // V8 (re-audit ND-10): the frozen level plot keys on the SETUP'S frozen copy
@@ -1999,9 +2028,11 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // key levels traced, not just the single nearest band. Up to 3 resistances
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
-maxSRlines = input.int(3, "S/R levels each side", minval=1, maxval=5, group=gVisual)
+maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual)
 var array<line> srLines = array.new_line()
 var array<label> srLabels = array.new_label()
+// V9.4: S/R back on the DECISION layer — hiding the key levels behind
+// the diagnostics toggle was over-cleaning (operator, live MMA).
 f_near(array<float> src, bool above_, int n_, float tol) =>
     array<float> out = array.new_float()
     if array.size(src) > 0
@@ -2019,7 +2050,7 @@ f_near(array<float> src, bool above_, int n_, float tol) =>
     while array.size(out) > n_
         array.pop(out)
     out
-if barstate.islast and showSR and showDiagnostics
+if barstate.islast and showSR
     while array.size(srLines) > 0
         line.delete(array.pop(srLines))
     while array.size(srLabels) > 0
@@ -2054,7 +2085,7 @@ if barstate.islast and showSR and showDiagnostics
 
 var box resBox = na
 var box supBox = na
-if barstate.islast and showSR and showDiagnostics
+if barstate.islast and showSR
     if not na(resBox)
         box.delete(resBox)
     if not na(supBox)

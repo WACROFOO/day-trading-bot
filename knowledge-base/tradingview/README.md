@@ -10,6 +10,7 @@ answers WHICH NAME, the other answers WHEN.
 | `ross-fp-v3.pine` | archived predecessor, kept for the audit trail |
 | `reverse-split-flag.pine` | standalone split-detection helper |
 | `SCANNER-V2-PLAYBOOK.md` | how to operate the scanner: the three modes, the denominator problem, the eleven columns |
+| `STRATEGY-COVERAGE.md` | what the strategy script covers, what it structurally cannot (float, halts, 10-second patterns, Warrior RVOL parity), and how to read the dashboard |
 
 **Before pushing any edit:** `python3 scripts/pine_check.py <file>` — catches
 top-level forward references (CE10272) and non-const `plotshape` arguments
