@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.1 (paper only)", shorttitle="ROSS FP V9.1", overlay=true,
+strategy("ROSS First Pullback Strategy V9.2 (paper only)", shorttitle="ROSS FP V9.2", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -145,6 +145,20 @@ strategy("ROSS First Pullback Strategy V9.1 (paper only)", shorttitle="ROSS FP V
 //      paints its TITLE green, so the left column alone reads the board.
 //      SIZE cut to what was asked: shares, $ position vs equity, risk $.
 //      Palette unified (TV green/orange), bordered cells, merged text rows.
+// V9.2 (operator, live PCLA 2026-08-20):
+//   a. Sizing reads the ACCOUNT's equity (accountEquity input; 0 = auto
+//      strategy.equity, so the 2% rule compounds), never the strategy's
+//      initial_capital default. SIZE labels the % as the POSITION's share
+//      of equity — it was read as the sizing rule.
+//   b. ADRs (syminfo.type "dr") are supported — the venue gate rejected
+//      NASDAQ-listed PCLA outright, and foreign ADRs are a large part of
+//      the small-cap momentum universe.
+//   c. The table holds exactly the rows currently shown (rebuilt on row-
+//      set changes) — no blank rows; ONE text size everywhere; PLAN tags
+//      cut to two words and "if bought HERE" removed.
+//   d. HIGH OF DAY names the front/back side: % off the high, and >=20%
+//      off prints BACK SIDE in orange — the move-is-over fact the row
+//      used to leave silent (PCLA: HOD 11.33, price 7.99, said nothing).
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -296,7 +310,13 @@ riskMode             = input.string("% of account (source: 2%)", "Risk basis", o
      tooltip="PARAMETERS.md §7: risk_pct_per_trade = 2.0% of account (n=125); risk_flat_beginner = $50 (n=125).")
 riskPctInput         = input.float(2.0, "Risk % of account per trade [source: 2%]", minval=0.1, maxval=10.0, step=0.25, group=gRisk)
 riskFlatInput        = input.float(50.0, "Flat $ risk per trade [source: $50 beginner]", minval=1.0, step=5.0, group=gRisk)
-riskBudget           = riskMode == "Flat $ (beginner path)" ? riskFlatInput : strategy.initial_capital * riskPctInput / 100.0
+// V9.2 (operator): size from the ACCOUNT's equity, not the strategy's
+// initial_capital default. 0 = automatic: strategy.equity (initial capital
+// plus this strategy's own simulated P&L, so the 2% rule compounds). Set
+// it explicitly to match a broker/paper account Pine cannot see.
+accountEquity        = input.float(0.0, "Account equity $ (0 = auto: strategy equity)", minval=0.0, step=100.0, group=gRisk)
+equityBase           = accountEquity > 0 ? accountEquity : strategy.equity
+riskBudget           = riskMode == "Flat $ (beginner path)" ? riskFlatInput : equityBase * riskPctInput / 100.0
 maxPositionValue     = input.float(2000.0, "Maximum position value $ [cash account]", minval=100.0, step=100.0, group=gRisk)
 // V9: accountSize input retired — the dashboard reads
 // strategy.initial_capital directly, which Pine CAN read back.
@@ -420,7 +440,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.1"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.2"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -1452,7 +1472,12 @@ sessionGate = inSession                                                 // V4
 // futures, CFD) runs display-only: no arming, no orders. This is a paper
 // research model; widening the supported set is a re-validation task, not
 // an input toggle.
-supportedMarket = syminfo.type == "stock"
+// V9.2 (live PCLA 2026-08-20): ADRs are "dr", not "stock", and the gate
+// rejected a NASDAQ-listed runner outright. Foreign ADRs are a large part
+// of the small-cap momentum universe; they stay IN. (CLAUDE.md rule 7's
+// dilution blind spot for foreign private issuers is a manual check, not
+// an exclusion.)
+supportedMarket = syminfo.type == "stock" or syminfo.type == "dr"
 venueGate = supportedMarket and (inRTH or allowPremarketEmulatorFills)
 
 hardGatesOK = pushGate and pullbackCountGate and retracementGate and volumeGate and momentumGate and riskGate and rrGate and scanGate and sessionGate and venueGate and entryTimeOK
@@ -1910,7 +1935,7 @@ bool onlyClockBlocks = pushGate and pullbackCountGate and retracementGate and
      not (sessionGate and venueGate and entryTimeOK)
 actionText =
      (not isOneMinute ? "USE 1-MINUTE CHART" :
-     not supportedMarket ? "NO — unsupported symbol (US 1-min stocks only)" :
+     not supportedMarket ? "NO — unsupported symbol (US-listed stocks/ADRs, 1-min only)" :
      displayState == LONG ? "MANAGE — " + f_n(mfeR, "#.00") + "R so far · stop " +
           f_px(t1Filled ? tradeEntryPrice : structuralStop) :
      displayState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + " — order working" + shortLH :
@@ -2080,8 +2105,8 @@ plotshape(lg and showDiagnostics and eventGhost, title="Pattern seen, no order (
 // em dashes for absents. dashFull adds the three diagnostic rows.
 LBL = color.rgb(28, 28, 30)
 DSZ = dashSize == "tiny" ? size.tiny : dashSize == "normal" ? size.normal : size.small
-// V9 (defect 4): the three decision rows render one size up.
-DSZ_BIG = dashSize == "tiny" ? size.small : size.normal
+// V9.2 (operator): ONE text size for every row — emphasis comes from the
+// VERDICT row's state-coloured background and the green titles, not fonts.
 // V7.2: INVALID/DONE verdicts age in candles, so a stale NO cannot read live.
 int barsInState = na(stateStartBar) ? 0 : bar_index - stateStartBar
 ageTag = barsInState <= 0 ? "" : " (" + str.tostring(barsInState) + (barsInState == 1 ? " candle ago" : " candles ago") + ")"
@@ -2100,24 +2125,26 @@ liquidPerMin = math.max(nz(avgDollarVol20, 0.0), math.max(nz(avgDollarVol5, 0.0)
 // V9.1 (operator, live BTCT 2026-08-20): the criteria GRID. Pine colours
 // CELLS, so every criterion gets its own cell — a chip: green when met,
 // orange when failed, slate with a · when not judgeable yet (V5.2 rule).
-// A row whose judged chips are all green paints its TITLE green too, so
-// the left column read top-to-bottom is the whole board. Text rows span
-// the chip columns via merge_cells (done once; the table is overwritten
-// in place every render — never cleared, so the merges survive).
-var table dash = table.new(position.bottom_right, 7, 15, border_width=2,
-     border_color=color.rgb(15, 15, 17), frame_color=color.rgb(15, 15, 17), frame_width=2)
+// A row whose judged chips are all green paints its TITLE green too.
+// V9.2 (operator, live PCLA): ONE text size everywhere; the table holds
+// EXACTLY the rows currently shown (it is rebuilt when the row set
+// changes — a few times a day at most — so no blank rows ever render);
+// PLAN loses its tag noise; SIZE says shares, $ position vs the account's
+// real equity, and risk — nothing else.
+var table dash = na
+var int lastRowSig = -1
 var bool dashMerged = false
 
 CHIP_OK = color.rgb(8, 153, 129)
 CHIP_NO = color.rgb(245, 124, 0)
 CHIP_NA = color.rgb(42, 46, 57)
 
-f_label(int r, string txt, bool allMet, string sz) =>
+f_label(int r, string txt, bool allMet) =>
     table.cell(dash, 0, r, txt, bgcolor=allMet ? CHIP_OK : LBL,
-         text_color=color.white, text_size=sz, text_halign=text.align_left)
+         text_color=color.white, text_size=DSZ, text_halign=text.align_left)
 
-f_text(int r, string value, color vcolor, string sz) =>
-    table.cell(dash, 1, r, value, text_color=vcolor, text_size=sz,
+f_text(int r, string value, color vcolor) =>
+    table.cell(dash, 1, r, value, text_color=vcolor, text_size=DSZ,
          text_halign=text.align_left)
 
 // one criterion, one cell: 1 met · 0 failed · -1 not judgeable yet
@@ -2131,7 +2158,32 @@ f_b(bool ok) =>
     ok ? 1 : 0
 
 if barstate.islast
-    f_label(0, "ROSS FP " + REV, false, DSZ)
+    // ── row layout: fixed rows 0..7, optional rows packed after them ──
+    bool showFitRows = showScanPanel
+    bool showHalt = inRTH or dashFull
+    bool showLimits = dashFull or historicalFillAmbiguities > 0
+    int rFit = showFitRows ? 8 : -1
+    int rLane = showFitRows ? 9 : -1
+    int nextRow = showFitRows ? 10 : 8
+    int rHalt = showHalt ? nextRow : -1
+    nextRow += showHalt ? 1 : 0
+    int rVwap = dashFull ? nextRow : -1
+    int rRS = dashFull ? nextRow + 1 : -1
+    int rQual = dashFull ? nextRow + 2 : -1
+    nextRow += dashFull ? 3 : 0
+    int rLim = showLimits ? nextRow : -1
+    nextRow += showLimits ? 1 : 0
+    int rowSig = nextRow * 100 + (showFitRows ? 1 : 0) + (showHalt ? 2 : 0) +
+         (dashFull ? 4 : 0) + (showLimits ? 8 : 0)
+    if na(dash) or rowSig != lastRowSig
+        if not na(dash)
+            table.delete(dash)
+        dash := table.new(position.bottom_right, 7, nextRow, border_width=2,
+             border_color=color.rgb(15, 15, 17), frame_color=color.rgb(15, 15, 17), frame_width=2)
+        lastRowSig := rowSig
+        dashMerged := false
+
+    f_label(0, "ROSS FP " + REV, false)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(displayState) +
          (displayState == PULLBACK or displayState == ARMED or displayState == LONG ?
               (setupKind == KIND_RETEST ? " · retest buy" :
@@ -2144,8 +2196,7 @@ if barstate.islast
     outOfUniverse = strategy.position_size == 0 and displayState == IDLE and
          (not pillarPrice or thinTape)
 
-    // ── VERDICT: actionText IS the row (four verbs, always one). Reads
-    // the EFFECTIVE state (V8): a pending cancel shows the rejection.
+    // ── VERDICT: actionText IS the row (four verbs, always one).
     string vLine = outOfUniverse ?
          "NO — not a playbook stock: " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
@@ -2156,9 +2207,9 @@ if barstate.islast
     color vCol = outOfUniverse ? color.gray :
          thinRoom ? color.red : displayState == ARMED ? color.yellow :
          displayState == LONG ? color.lime : color.white
-    f_label(1, "VERDICT", hardGatesOK, DSZ_BIG)
+    f_label(1, "VERDICT", hardGatesOK)
     table.cell(dash, 1, 1, vLine, text_color=vCol,
-         bgcolor=color.new(stateColor, 82), text_size=DSZ_BIG, text_halign=text.align_left)
+         bgcolor=color.new(stateColor, 82), text_size=DSZ, text_halign=text.align_left)
 
     // ── PLAN + SIZE: one live plan, always (V7.5 5-source chain).
     bool ghostFresh = not na(ghostTrig) and not na(ghostBar) and bar_index - ghostBar <= 10
@@ -2178,36 +2229,35 @@ if barstate.islast
          planSrc == 2 ? ghostTgt : pEntry + pRisk * rewardMultiple
     float pShares = planSrc == 5 or planSrc == 4 ? displayShares :
          planSrc == 3 ? candidateShares : planSrc == 2 ? ghostShares : anyShares
-    string planTag = planSrc == 5 ? (t1Filled ? " · half sold, stop at entry" : "") :
-         planSrc == 4 ? " · order working" :
-         planSrc == 3 ? " · live, not armed yet" :
-         planSrc == 2 ? " · NO ORDER (clock)" : " · if bought HERE"
+    // V9.2: tags cut to two words — the row colour already carries state.
+    string planTag = planSrc == 5 ? (t1Filled ? " · ½ sold, stop@entry" : "") :
+         planSrc == 4 ? " · working" :
+         planSrc == 3 ? " · live" :
+         planSrc == 2 ? " · no order (clock)" : ""
     color planCol = planSrc == 5 ? color.lime : planSrc == 4 ? color.yellow :
          planSrc == 3 ? color.white : color.gray
     string atrMark = planSrc >= 4 ? (plannedUsesATRStop ? "ᵃᵗʳ" : "") :
          (planSrc == 3 and usingATRstop ? "ᵃᵗʳ" : "")
-    f_label(2, planSrc >= 4 ? "▶ PLAN" : "PLAN", planSrc >= 4, DSZ_BIG)
+    f_label(2, planSrc >= 4 ? "▶ PLAN" : "PLAN", planSrc >= 4)
     f_text(2, "buy " + f_px(pEntry) + " · stop " + f_px(pStop) + atrMark +
-         " · sell½ " + f_px(pT1) + " · target " + f_px(pT2) + planTag, planCol, DSZ_BIG)
+         " · ½ " + f_px(pT1) + " · tgt " + f_px(pT2) + planTag, planCol)
 
-    // ── V9.1 SIZE (operator): only what the decision needs — shares, the
-    // dollar position against equity, the risk. The derivation (shares =
-    // risk_budget / risk_per_share, 2% default per PARAMETERS.md §7; slip
-    // reserve per audit F14; $2 fees) LIVES IN THE SIZING CODE and stays
-    // out of the row.
+    // ── V9.2 SIZE: shares, $ position against the REAL equity base, risk.
+    // The % is the POSITION's share of equity, labelled as such — the
+    // sizing rule itself (2% risk, PARAMETERS.md §7) lives in the code.
     string sizeTag = setupsToday >= 2 and planSrc >= 3 ? " · ½ size (3rd trade)" : ""
-    f_label(3, "SIZE", false, DSZ_BIG)
-    f_text(3, f_n(pShares, "#") + " sh ≈ $" + f_n(pShares * pEntry, "#") + " · " +
-         f_n(f_safeDiv(pShares * pEntry, strategy.initial_capital, 0.0) * 100.0, "#") +
-         "% of $" + f_n(strategy.initial_capital, "#") + " equity · risk $" +
-         f_n(pShares * pRisk, "#") + sizeTag +
+    f_label(3, "SIZE", false)
+    f_text(3, f_n(pShares, "#") + " sh · $" + f_n(pShares * pEntry, "#") +
+         " position (" + f_n(f_safeDiv(pShares * pEntry, equityBase, 0.0) * 100.0, "#") +
+         "% of $" + f_n(equityBase, "#") + ") · risk $" + f_n(pShares * pRisk, "#") +
+         " / $" + f_n(riskBudget, "#") + " budget" + sizeTag +
          (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
-         thinRoom and planSrc >= 3 ? color.red : planCol, DSZ_BIG)
+         thinRoom and planSrc >= 3 ? color.red : planCol)
 
     // ── CLOCK (V9 defect 1): market phase chip + THIS strategy's window.
     string mktPhase = minuteET < 570 ? "PRE-MKT" : minuteET < 960 ? "OPEN" : "AFTER-HRS"
     bool clockOK = useSessionWindow and inSession and entryTimeOK
-    f_label(4, "CLOCK", clockOK, DSZ)
+    f_label(4, "CLOCK", clockOK)
     f_chip(1, 4, mktPhase, minuteET >= 570 and minuteET < 960 ? 1 : -1)
     string winText = not useSessionWindow ?
          "⚠ WINDOW GATE OFF — arms at ANY hour (reset chart inputs)" :
@@ -2222,105 +2272,87 @@ if barstate.islast
     pbApplicable = setupState == PULLBACK or setupState == ARMED
     bool setupAll = pbApplicable and pushGate and pullbackCountGate and
          retracementGate and volumeGate and riskGate
-    f_label(5, "SETUP", setupAll, DSZ)
+    f_label(5, "SETUP", setupAll)
     f_chip(1, 5, "Push", f_b(pushGate))
     f_chip(2, 5, "DipLen", pbApplicable ? f_b(pullbackCountGate) : -1)
     f_chip(3, 5, "Depth", pbApplicable ? f_b(retracementGate) : -1)
     f_chip(4, 5, "DipVol", pbApplicable ? f_b(volumeGate) : -1)
     f_chip(5, 5, usingATRstop ? "Riskᵃᵗʳ" : "Risk", pbApplicable ? f_b(riskGate) : -1)
-    table.cell(dash, 6, 5, "")
 
     bool trendAll = macdBullish and emaBullish and vwapBullish and rrGate and
          (not scanGates or scanGate)
-    f_label(6, "TREND", trendAll, DSZ)
+    f_label(6, "TREND", trendAll)
     f_chip(1, 6, "MACD", f_b(macdBullish))
     f_chip(2, 6, "EMA", f_b(emaBullish))
     f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
     f_chip(4, 6, "Room", f_b(rrGate))
     f_chip(5, 6, "Fit", scanGates ? f_b(scanGate) : -1)
-    table.cell(dash, 6, 6, "")
 
-    f_label(7, "HIGH OF DAY", hodComparable and peakIsHOD, DSZ)
+    // V9.2 (trading read, live PCLA: HOD 11.33 with price 7.99 and the row
+    // said nothing): the DISTANCE off the high is the front-side/back-side
+    // fact. >20% off the high = the move is over — the repo's own reject
+    // language. Named, coloured, never silent.
+    float pctOffHigh = not na(dayHigh) and dayHigh > 0 ?
+         (dayHigh - close) / dayHigh * 100.0 : na
+    bool backSide = not na(pctOffHigh) and pctOffHigh >= 20.0
+    f_label(7, "HIGH OF DAY", hodComparable and peakIsHOD and not backSide)
     f_text(7, f_px(dayHigh) +
+         (na(pctOffHigh) ? "" : backSide ?
+              "  ⚠ BACK SIDE — " + f_n(pctOffHigh, "#") + "% off the high" :
+              "  · " + f_n(pctOffHigh, "#") + "% off high") +
          (not hodComparable ? "" : peakIsHOD ? "  · this move IS the high" : "  ⚠ lower high") +
          (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
-         not hodComparable ? color.silver : peakIsHOD ? CHIP_OK : CHIP_NO, DSZ)
+         backSide ? CHIP_NO : not hodComparable ? color.silver : peakIsHOD ? CHIP_OK : CHIP_NO)
 
     // STOCK FIT = selection, not timing (fail-closed on unknowns, V8 r18).
-    if showScanPanel
+    if rFit >= 0
         bool fitAll = pillarScore == 4 and floatVerified and rvolKnown
-        f_label(8, "STOCK FIT " + str.tostring(pillarScore) + "/4", fitAll, DSZ)
-        f_chip(1, 8, "Price", f_b(pillarPrice))
-        f_chip(2, 8, not floatVerified ? "Float~" : "Float",
+        f_label(rFit, "STOCK FIT " + str.tostring(pillarScore) + "/4", fitAll)
+        f_chip(1, rFit, "Price", f_b(pillarPrice))
+        f_chip(2, rFit, not floatVerified ? "Float~" : "Float",
              na(scanFloat) or not floatVerified ? -1 : f_b(pillarFloat))
-        f_chip(3, 8, "Rvol", rvolKnown ? f_b(pillarRVOL) : -1)
-        f_chip(4, 8, "Gap", f_b(pillarGap))
-        table.cell(dash, 5, 8, f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
+        f_chip(3, rFit, "Rvol", rvolKnown ? f_b(pillarRVOL) : -1)
+        f_chip(4, rFit, "Gap", f_b(pillarGap))
+        table.cell(dash, 5, rFit, f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
              (rvolKnown ? "" : " unack'd") +
              (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M" +
                   (floatVerified ? "" : "~")),
              text_color=color.silver, text_size=DSZ, text_halign=text.align_left)
+    if rLane >= 0
         // "2+ hits" — his rule: one alert is not a candidate
-        // (KSPN, yg5E_mqGFGg @00:16:47). Inactive lanes are slate, not
-        // orange: a lane not firing is absence, not failure.
-        f_label(9, "DASH LANE", laneHits >= 2, DSZ)
-        f_chip(1, 9, "LowF", laneLowFloat ? 1 : -1)
-        f_chip(2, 9, "SQ5", laneSqueeze5 ? 1 : -1)
-        f_chip(3, 9, "SQ10", laneSqueeze10 ? 1 : -1)
-        f_chip(4, 9, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
-        table.cell(dash, 5, 9, "")
-    else
-        f_label(8, "", false, DSZ)
-        f_chip(1, 8, "", -1)
-        f_chip(2, 8, "", -1)
-        f_chip(3, 8, "", -1)
-        f_chip(4, 8, "", -1)
-        table.cell(dash, 5, 8, "")
-        f_label(9, "", false, DSZ)
-        f_chip(1, 9, "", -1)
-        f_chip(2, 9, "", -1)
-        f_chip(3, 9, "", -1)
-        f_chip(4, 9, "", -1)
-        table.cell(dash, 5, 9, "")
+        // (KSPN, yg5E_mqGFGg @00:16:47). Inactive lanes are slate: absence,
+        // not failure.
+        f_label(rLane, "DASH LANE", laneHits >= 2)
+        f_chip(1, rLane, "LowF", laneLowFloat ? 1 : -1)
+        f_chip(2, rLane, "SQ5", laneSqueeze5 ? 1 : -1)
+        f_chip(3, rLane, "SQ10", laneSqueeze10 ? 1 : -1)
+        f_chip(4, rLane, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
 
-    if inRTH or dashFull
-        f_label(10, "HALT BAND", inRTH and not na(haltBandWidth) and not stopExceedsHaltBand, DSZ)
-        f_text(10, not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+    if rHalt >= 0
+        f_label(rHalt, "HALT BAND", inRTH and not na(haltBandWidth) and not stopExceedsHaltBand)
+        f_text(rHalt, not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
              f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ stop wider than the band" :
                   "  ok · " + f_rr(f_safeDiv(haltBandWidth, pRisk, na)) + " to halt"),
-             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver, DSZ)
-    else
-        f_label(10, "", false, DSZ)
-        f_text(10, "", color.gray, DSZ)
-    if dashFull
-        f_label(11, "VWAP", vwapBullish, DSZ)
-        f_text(11, f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
-             vwapBullish ? CHIP_OK : CHIP_NO, DSZ)
-        f_label(12, "R / S (blue/purple)", false, DSZ)
-        f_text(12, f_px(nearestRes) + " / " + f_px(nearestSup) +
-             "  · setup #" + str.tostring(setupsToday + (displayState == PULLBACK ? 1 : 0)), color.silver, DSZ)
-        f_label(13, "QUALITY*", false, DSZ)
-        f_text(13, f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray, DSZ)
-    else
-        f_label(11, "", false, DSZ)
-        f_text(11, "", color.gray, DSZ)
-        f_label(12, "", false, DSZ)
-        f_text(12, "", color.gray, DSZ)
-        f_label(13, "", false, DSZ)
-        f_text(13, "", color.gray, DSZ)
-    // V8 ND-8 / V9: a non-zero ambiguity count forces LIMITS onto the
-    // compact dashboard — labels can hide (defect 3), the count cannot.
-    if dashFull or historicalFillAmbiguities > 0
-        f_label(14, "LIMITS", false, DSZ)
-        f_text(14, "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
+             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
+    if rVwap >= 0
+        f_label(rVwap, "VWAP", vwapBullish)
+        f_text(rVwap, f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
+             vwapBullish ? CHIP_OK : CHIP_NO)
+        f_label(rRS, "R / S (blue/purple)", false)
+        f_text(rRS, f_px(nearestRes) + " / " + f_px(nearestSup) +
+             "  · setup #" + str.tostring(setupsToday + (displayState == PULLBACK ? 1 : 0)), color.silver)
+        f_label(rQual, "QUALITY*", false)
+        f_text(rQual, f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
+    // V8 ND-8 / V9: a non-zero ambiguity count forces LIMITS on — the
+    // labels can hide (defect 3), the count cannot.
+    if rLim >= 0
+        f_label(rLim, "LIMITS", false)
+        f_text(rLim, "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
              str.tostring(historicalFillAmbiguities) +
              (historicalFillAmbiguities > 0 ? " ⚠ expectancy not portable" : ""),
-             historicalFillAmbiguities > 0 ? CHIP_NO : color.gray, DSZ)
-    else
-        f_label(14, "", false, DSZ)
-        f_text(14, "", color.gray, DSZ)
+             historicalFillAmbiguities > 0 ? CHIP_NO : color.gray)
 
-    // merges once, AFTER the first full render wrote every top-left cell.
+    // merges once per rebuild, AFTER every top-left cell exists.
     if not dashMerged
         dashMerged := true
         table.merge_cells(dash, 1, 0, 6, 0)
@@ -2329,13 +2361,16 @@ if barstate.islast
         table.merge_cells(dash, 1, 3, 6, 3)
         table.merge_cells(dash, 2, 4, 6, 4)
         table.merge_cells(dash, 1, 7, 6, 7)
-        table.merge_cells(dash, 5, 8, 6, 8)
-        table.merge_cells(dash, 5, 9, 6, 9)
-        table.merge_cells(dash, 1, 10, 6, 10)
-        table.merge_cells(dash, 1, 11, 6, 11)
-        table.merge_cells(dash, 1, 12, 6, 12)
-        table.merge_cells(dash, 1, 13, 6, 13)
-        table.merge_cells(dash, 1, 14, 6, 14)
+        if rFit >= 0
+            table.merge_cells(dash, 5, rFit, 6, rFit)
+        if rHalt >= 0
+            table.merge_cells(dash, 1, rHalt, 6, rHalt)
+        if rVwap >= 0
+            table.merge_cells(dash, 1, rVwap, 6, rVwap)
+            table.merge_cells(dash, 1, rRS, 6, rRS)
+            table.merge_cells(dash, 1, rQual, 6, rQual)
+        if rLim >= 0
+            table.merge_cells(dash, 1, rLim, 6, rLim)
 
 // ───────────────────────── Alerts ─────────────────────────
 // V8 (V6 directive — duplicate-channel exclusion): this file has TWO alert
