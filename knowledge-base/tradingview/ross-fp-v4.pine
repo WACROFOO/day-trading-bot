@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V8.1 (paper only)", shorttitle="ROSS FP V8.1", overlay=true,
+strategy("ROSS First Pullback Strategy V8.2 (paper only)", shorttitle="ROSS FP V8.2", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -103,6 +103,24 @@ strategy("ROSS First Pullback Strategy V8.1 (paper only)", shorttitle="ROSS FP V
 //      T1+runner ladder $3 — 10-15% of the risk budget on EVERY trade.
 //      The $100k paper basis hid this toll; the $2,000 basis pays it.
 //      Shown on the SIZE (worst case) and LIMITS rows.
+// V8.2 (live CDTG + JZ screenshots, 2026-08-20): three operator-reported
+// defects, each with the mechanism named:
+//   1. LATE JOIN. The impulse scanner could only SEE a push on a bar that
+//      was itself the green peak. When the machine was busy (lane trade ->
+//      bailout -> DONE) while the peak printed, it returned to IDLE inside
+//      the dip and called the rest of the day "(no dip yet)" — the CDTG
+//      13:32-35 pullback was real and never assessed. A new block joins a
+//      dip already in progress (peak <= maxPullbackBars back, push gates
+//      pass on the completed window, retrace still ok) as a normal
+//      PULLBACK — same fields, same gates, same arm path, same bar.
+//   2. LIQUIDITY is judged on the best of the 5-bar burst, the 20-bar
+//      average and the DAY average $/min. The old 20-bar-only measure
+//      called CDTG "too thin ($17.6k/min)" 40 minutes after it traded
+//      millions — a decayed average vetoing a stock that qualified.
+//   3. The NOT A PLAYBOOK STOCK banner no longer REPLACES the status. It
+//      shows in full only when the machine is idle and flat; any live
+//      state (MOVE UP, DIP FORMING, a finished trade) keeps its dynamic
+//      verdict, with a short "not a playbook stock" suffix when relevant.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -366,7 +384,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V8.1"                       // bump on every shipped change — keep alerts + title in step
+REV = "V8.2"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -484,6 +502,12 @@ f_safeDiv(float numerator, float denominator, float fallback) =>
 // reading — on gappers the opening bar IS the volume story. Accumulate.
 var float dayVolCum = 0.0
 dayVolCum := barstate.isfirst or newDayBar ? volume : dayVolCum + volume
+// V8.2: day $ traded and day bar count, for a liquidity measure that a
+// quiet half hour after a huge spike cannot decay to zero.
+var float dayDollarCum = 0.0
+var int dayBarCount = 0
+dayDollarCum := barstate.isfirst or newDayBar ? close * volume : dayDollarCum + close * volume
+dayBarCount := barstate.isfirst or newDayBar ? 1 : dayBarCount + 1
 // V6 (finding 10): previous-day values with lookahead_off arrive one daily
 // interval LATE on historical intraday bars (the merge happens at the end of
 // the daily bar), so history and realtime showed different prior closes and
@@ -644,6 +668,8 @@ int bestBars = 0
 int bestStartBar = na
 
 var int scanAfterBar = na
+// V8.2: one late-join attempt per peak bar (see the LATE JOIN block)
+var int lateJoinPeakBar = na
 
 enoughHistory = bar_index > volumeBaselineBars + maxImpulseBars + 5
 
@@ -1191,6 +1217,81 @@ if confirmedPass and strategy.position_size == 0
             pullbackVolumeSum += volume
             pullbackLastBar := bar_index
             statusReason := "Dip continuing"
+
+    // ── V8.2 LATE JOIN (live CDTG 2026-08-20) ────────────────────────────
+    // The scanner above can only SEE a push on a bar that is itself the
+    // green peak. If the machine was busy (DONE/INVALID after a lane trade)
+    // while the peak printed, it returns to IDLE inside the dip and the
+    // pullback is never assessed. This block scans for a COMPLETED push
+    // whose peak sits 1..maxPullbackBars bars back with the dip still in
+    // progress, and joins it as a normal PULLBACK — same fields, same
+    // gates, same arm path, this same bar. One join per peak bar
+    // (lateJoinPeakBar); a peak the join already tried is not retried.
+    if setupState == IDLE and bestBars == 0 and enoughHistory and
+         not eventInvalid and not intrabarCancelled
+        bool ljFound = false
+        for p = 1 to maxPullbackBars
+            if not ljFound
+                bool peakGreen = close[p] > open[p]
+                bool stillPeak = true
+                int ljReds = 0
+                float ljLow = low
+                float ljVol = 0.0
+                for k = 0 to p - 1
+                    stillPeak := stillPeak and high[p] > high[k]
+                    ljReds += close[k] < open[k] ? 1 : 0
+                    ljLow := math.min(ljLow, low[k])
+                    ljVol += volume[k]
+                if peakGreen and stillPeak and ljReds >= 1 and
+                     (na(lateJoinPeakBar) or bar_index - p != lateJoinPeakBar)
+                    for cb = minImpulseBars to maxImpulseBars
+                        if not ljFound
+                            float ljStartLow = low[p + cb]
+                            float ljStartClose = close[p + cb]
+                            float ljRange = high[p] - ljStartLow
+                            float ljPath = 0.0
+                            float ljPushVol = 0.0
+                            for j = p to p + cb - 1
+                                ljPath += math.abs(close[j] - close[j + 1])
+                                ljPushVol += volume[j]
+                            float ljPct = f_safeDiv(ljRange, ljStartLow, 0.0) * 100.0
+                            float ljATR = f_safeDiv(ljRange, atr, 0.0)
+                            float ljEff = f_safeDiv(close[p] - ljStartClose, ljPath, 0.0)
+                            float ljAvgVol = ljPushVol / cb
+                            float ljBase = volumeBaseline[p + cb + 1]
+                            float ljRVOL = f_safeDiv(ljAvgVol, ljBase, 0.0)
+                            float ljDollar = ljAvgVol * math.max(close[p], ljStartClose)
+                            float ljRetr = f_safeDiv(high[p] - ljLow, ljRange, 100.0) * 100.0
+                            if ljPct >= minPushPct and ljATR >= minPushATR and
+                                 ljEff >= minEfficiency and ljRVOL >= minPushRVOL and
+                                 ljDollar >= minDollarVolume and ljRetr <= maxRetracementPct
+                                setupState := PULLBACK
+                                stateStartBar := bar_index
+                                setupKind := KIND_PULLBACK
+                                impulseStartBar := bar_index - p - cb
+                                impulsePeakBar := bar_index - p
+                                pushStartPrice := ljStartLow
+                                pushStartClose := ljStartClose
+                                pushPeak := high[p]
+                                pushPct := ljPct
+                                pushATR := ljATR
+                                pushEfficiency := ljEff
+                                pushRVOL := ljRVOL
+                                pushVolumeSum := ljPushVol
+                                pushAvgVolume := ljAvgVol
+                                pushDollarVolume := ljDollar
+                                pushBaselineVolume := ljBase
+                                pushPath := ljPath
+                                pushBars := cb
+                                pullbackStartBar := bar_index - p + 1
+                                pullbackLastBar := bar_index
+                                pullbackBars := p
+                                redPullbackBars := ljReds
+                                pullbackLow := ljLow
+                                pullbackVolumeSum := ljVol
+                                lateJoinPeakBar := bar_index - p
+                                statusReason := "Late read — dip already in progress, joined"
+                                ljFound := true
 
 // ───────────────────────── Live setup measurements ─────────────────────────
 pushRange = not na(pushPeak) and not na(pushStartPrice) ? pushPeak - pushStartPrice : na
@@ -1932,7 +2033,16 @@ int barsInState = na(stateStartBar) ? 0 : bar_index - stateStartBar
 ageTag = barsInState <= 0 ? "" : " (" + str.tostring(barsInState) + (barsInState == 1 ? " candle ago" : " candles ago") + ")"
 // V7.2 universe check. Computed at global scope: a ta.* call inside the
 // islast branch would execute conditionally and return garbage.
+// V8.2 (live CDTG/JZ 2026-08-20): liquidity is the BEST of the 5-bar burst,
+// the 20-bar average and the day average $/min. The 20-bar-only measure
+// called CDTG "too thin ($17.6k/min)" 40 minutes after it traded millions,
+// and vetoed JZ MID-SQUEEZE because 15 of its last 20 bars were dead. The
+// floor itself stays [UNTESTED local]; its job is filtering dead tape,
+// never vetoing an active spike.
 avgDollarVol20 = ta.sma(close * volume, 20)
+avgDollarVol5 = ta.sma(close * volume, 5)
+avgDollarVolDay = f_safeDiv(dayDollarCum, dayBarCount, na)
+liquidPerMin = math.max(nz(avgDollarVol20, 0.0), math.max(nz(avgDollarVol5, 0.0), nz(avgDollarVolDay, 0.0)))
 var table dash = table.new(position.bottom_right, 2, 14, border_width=0)
 
 // V5.1 display rule, operator-specified: each criterion carries its own ✓/✗,
@@ -1966,8 +2076,13 @@ if barstate.islast
     // V7.2 (live BTCT report): when a name fails the UNIVERSE — price outside
     // the scan band or liquidity below the floor — every bar-level message is
     // noise. Say the one big thing instead.
-    outOfUniverse = strategy.position_size == 0 and displayState != LONG and
-         (not pillarPrice or (not na(avgDollarVol20) and avgDollarVol20 < minDollarVolume))
+    // V8.2: the banner claims the WHOLE row only when the machine is idle
+    // and flat. Any live state — MOVE UP, DIP FORMING, a working order, a
+    // finished trade — keeps its dynamic verdict (the "status isn't
+    // dynamic" report was this banner overwriting a live state machine).
+    bool thinTape = liquidPerMin < minDollarVolume
+    outOfUniverse = strategy.position_size == 0 and displayState == IDLE and
+         (not pillarPrice or thinTape)
 
     // ── V7.5 STATUS: short and decisive. The reason chain already speaks
     // plainly; the row just stops stacking tags on it. Reads the EFFECTIVE
@@ -1976,10 +2091,11 @@ if barstate.islast
     string statusLine = outOfUniverse ?
          "NOT A PLAYBOOK STOCK — " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
-              "volume too thin ($" + f_n(avgDollarVol20, "#") + "/min)") :
+              "volume too thin (best $" + f_n(liquidPerMin, "#") + "/min: burst/20-bar/day)") :
          f_stateName(displayState) +
               (displayState == INVALID or displayState == DONE ? ageTag : "") +
-              " — " + shortMsg
+              " — " + shortMsg +
+              (not pillarPrice or thinTape ? "  · ⚠ not a playbook stock" : "")
     f_row(1, "STATUS", statusLine,
          outOfUniverse ? color.gray :
          thinRoom ? color.red : displayState == ARMED ? color.yellow :

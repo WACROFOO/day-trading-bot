@@ -144,6 +144,24 @@ Three readings:
    tape in this sample. JWEL-class pre-market runs may still produce
    ghosts on their day; this window contained none that qualified.
 
+## V8.2 addendum — the late-join path, measured
+
+Three live defects (CDTG + JZ screenshots, 2026-08-20) produced V8.2: a
+LATE JOIN path (the impulse scanner could only see a push on a bar that was
+itself the green peak — a machine busy with a trade while the peak printed
+came back to IDLE inside the dip and never assessed it), a liquidity
+measure that takes the best of 5-bar burst / 20-bar / day average $-per-min
+(the 20-bar-only figure called CDTG "too thin, $17.6k/min" 40 minutes after
+it traded millions), and the universe banner demoted so it can no longer
+replace a live state's verdict.
+
+Late-join, added to this harness and rerun: **+1 fill inside the
+07:00–11:30 window over the full 11 days** (XHLD 08-17 09:40, −0.18R);
+ΣR −10.55 → −10.73, nothing else moved. On this tape the path is
+near-neutral on P&L — its effect is coverage: dips that printed while the
+machine digested a previous trade are now assessed (and ghost-flagged when
+the clock refuses, which is where the CDTG 13:30 miss actually lived).
+
 ## What this benchmark could not check
 
 - **Tick order** — the entire D1 question. Only broker-grade tick data or

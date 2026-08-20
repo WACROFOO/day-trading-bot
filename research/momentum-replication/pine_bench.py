@@ -30,10 +30,10 @@ def ema_series(vals, n):
 
 class Cfg:
     def __init__(self, name, sameBarStop, entryTimeOK, risk, maxPos, retestBand,
-                 winStart=7*60, winEnd=11*60+30):
+                 winStart=7*60, winEnd=11*60+30, lateJoin=False):
         self.name=name; self.sameBarStop=sameBarStop; self.entryTimeOK=entryTimeOK
         self.risk=risk; self.maxPos=maxPos; self.retestBand=retestBand
-        self.winStart=winStart; self.winEnd=winEnd
+        self.winStart=winStart; self.winEnd=winEnd; self.lateJoin=lateJoin
 
 V75 = Cfg('V7.5', sameBarStop=False, entryTimeOK=False, risk=200.0, maxPos=25000.0, retestBand=False)
 V80 = Cfg('V8.0', sameBarStop=True,  entryTimeOK=True,  risk=20.0,  maxPos=2000.0,  retestBand=True)
@@ -50,7 +50,7 @@ def run(sym, bars, cfg):
         a = tr if a is None else (a*13+tr)/14
         atr.append(a); prev_c=c
     trades=[]; ambiguous=0; sharesRejected=0; armed_count=0; flattens=0
-    samebar_risk=0; lastbar_arms=0
+    samebar_risk=0; lastbar_arms=0; lj_peak=-1
     state='IDLE'; day=None
     pos=None  # dict(entry, stop, t1, t2, sh, half_done, entry_i)
     arm=None  # dict(trigger, stop, bar_armed)
@@ -175,6 +175,52 @@ def run(sym, bars, cfg):
             if found and c > o and in_win:
                 state='IMPULSE'; pull=dict(push=found, reds=0, plow=None, pvol=0, redhigh=None)
                 continue
+            # V8.2 LATE JOIN: peak printed while the machine was busy; join
+            # the dip in progress. Mirrors the Pine block: peak green and
+            # still the high, >=1 red since, push gates on the completed
+            # window, retrace ok; arm same-bar off the last red high.
+            if cfg.lateJoin and state=='IDLE' and not found and arm is None:
+                ljdone=False
+                for poff in range(1,5):
+                    if ljdone or i-poff < 22 or (i-poff) == lj_peak: continue
+                    pk = bars[i-poff]
+                    if not pk[4] > pk[1]: continue
+                    since = bars[i-poff+1:i+1]
+                    if not since or any(b[2] >= pk[2] for b in since): continue
+                    reds=[b for b in since if b[4]<b[1]]
+                    if not reds: continue
+                    plow=min(b[3] for b in since); pvol=sum(b[5] for b in since)
+                    for cb in range(1,7):
+                        j=i-poff-cb+1
+                        if j<1 or ljdone: continue
+                        wlo=min(b[3] for b in bars[j:i-poff+1]); whi=pk[2]
+                        if wlo<=0: continue
+                        push=whi-wlo; pushPct=push/wlo*100
+                        if not (pushPct>=5.0 or (atr[i] and push>=2.0*atr[i])): continue
+                        net=pk[4]-bars[j][1]
+                        path=sum(abs(b[4]-b[1]) for b in bars[j:i-poff+1]) or 1e-9
+                        if net/path<0.60 or net<=0: continue
+                        base=[b[5] for b in bars[max(0,j-20):j]]
+                        baseavg=sum(base)/len(base) if base else 0
+                        pv=sum(b[5] for b in bars[j:i-poff+1])/cb
+                        if baseavg>0 and pv<2.0*baseavg: continue
+                        if pv*pk[4]<100000: continue
+                        if (whi-plow)/max(push,1e-9)>0.50: continue
+                        # join + same-bar arm off the last red candle's high
+                        state='IMPULSE'
+                        pull=dict(push=dict(lo=wlo,hi=whi,start=j), reds=len(reds),
+                                  plow=plow, pvol=pvol, redhigh=reds[-1][2])
+                        lj_peak=i-poff; ljdone=True
+                        if in_win and (not cfg.entryTimeOK or not last_win_bar) and macd[i]>=sig[i]:
+                            pbvol=pvol/len(reds)
+                            if pv>0 and pbvol/pv<=0.70:
+                                trigger=pull['redhigh']+TICK; stop=plow-TICK
+                                if atr[i] and (trigger-stop)<0.3*atr[i]:
+                                    stop=trigger-1.5*atr[i]
+                                arm=dict(trigger=trigger, stop=stop)
+                                armed_count+=1
+                                if last_win_bar: lastbar_arms+=1
+                continue
         if state=='IMPULSE' and pull is not None:
             if c < o:  # red bar: pullback building
                 pull['reds'] += 1
@@ -287,9 +333,18 @@ if __name__ == '__main__':
                winStart=4*60, winEnd=20*60)
     nbars = sum(len(v) for v in B.values())
     print(f'{len(B)} symbols · {nbars} 1m bars')
-    for cfg in (V75, V80, H1, H2, V81G):
+    V82 = Cfg('V8.2-lateJoin', sameBarStop=True, entryTimeOK=True,
+              risk=20.0, maxPos=2000.0, retestBand=True, lateJoin=True)
+    for cfg in (V75, V80, H1, H2, V81G, V82):
         res = [run(s, bars, cfg) for s, bars in B.items()]
         print(f'{cfg.name:15s}', agg(res))
+    print()
+    print('--- V8.2 late-join: trades added vs V8.0 ---')
+    r80={( t['sym'],str(t['day']),t['t_in']) for res in [[run(s,b,V80) for s,b in B.items()]] for r in res for t in r['trades']}
+    for r in (run(s,b,V82) for s,b in B.items()):
+        for t in r['trades']:
+            if (t['sym'],str(t['day']),t['t_in']) not in r80:
+                print(f"  {t['sym']:5s} {t['day']} {t['t_in']//60:02d}:{t['t_in']%60:02d} {t['kind']:12s} r={t['r']:+.2f}")
     print()
     print('--- V8.1 ghost layer: entries by clock bucket (GHOST run) ---')
     res = [run(s, bars, V81G) for s, bars in B.items()]
