@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.5 (paper only)", shorttitle="ROSS FP V9.5", overlay=true,
+strategy("ROSS First Pullback Strategy V9.6 (paper only)", shorttitle="ROSS FP V9.6", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -184,6 +184,11 @@ strategy("ROSS First Pullback Strategy V9.5 (paper only)", shorttitle="ROSS FP V
 //      Both pivot kinds now feed both sides; price decides the role. The
 //      5-bar pivot confirmation lag is inherent and stays (a level is not
 //      a level until the market has rejected it).
+// V9.6 (operator): automatic TREND LINES. Downtrend = swing-high anchor
+//      through the latest lower high (the breakout line); uptrend = swing-
+//      low anchor through the latest higher low (the trend-loss line).
+//      Extended right, labelled, and the label flips to BROKEN/LOST the
+//      bar the close crosses the line.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -421,6 +426,11 @@ bigMarkers           = input.bool(false, "Large signal markers", group=gVisual)
 // support below, from confirmed swing pivots (his "two reasons at one
 // price" needs the level on screen, not in your head).
 showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual)
+// V9.6 (operator): automatic trend lines. Downtrend = the line from the
+// swing high across the most recent LOWER high (the breakout line);
+// uptrend = from the swing low across the most recent HIGHER low (the
+// trend-loss line). Labelled, and flagged the bar price breaks them.
+showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual)
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
 // V9 (defect 3): ONE switch for everything that is not the trade decision.
@@ -466,7 +476,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.5"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.6"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -700,16 +710,24 @@ f_rr(float v) =>
 // V4.1: nearest resistance above / support below from confirmed pivots.
 var array<float> pivHighs = array.new_float()
 var array<float> pivLows = array.new_float()
+// V9.6: bar indices kept in lockstep with the prices — trend lines need
+// BOTH coordinates of a pivot, the fan only needed the price.
+var array<int> pivHighBars = array.new_int()
+var array<int> pivLowBars = array.new_int()
 float ph = ta.pivothigh(high, srPivotLen, srPivotLen)
 float pl = ta.pivotlow(low, srPivotLen, srPivotLen)
 if not na(ph)
     array.push(pivHighs, ph)
+    array.push(pivHighBars, bar_index - srPivotLen)
     if array.size(pivHighs) > 40
         array.shift(pivHighs)
+        array.shift(pivHighBars)
 if not na(pl)
     array.push(pivLows, pl)
+    array.push(pivLowBars, bar_index - srPivotLen)
     if array.size(pivLows) > 40
         array.shift(pivLows)
+        array.shift(pivLowBars)
 
 // V9.5 (live WYHG 2026-08-20): POLARITY. Supports came only from pivot
 // LOWS and resistances only from pivot HIGHS — so a broken-resistance
@@ -2127,6 +2145,83 @@ if barstate.islast and showSR
              text="S " + str.tostring(nearestSup, format.mintick),
              text_color=color.new(color.purple, 20), text_size=size.tiny,
              text_halign=text.align_left)
+
+// ── V9.6 TREND LINES (operator) ─────────────────────────────────────────
+// Downtrend line: anchored at the HIGHEST pivot high in the window, drawn
+// through the most recent LOWER pivot high after it — the line a breakout
+// has to break. Uptrend line: the mirror on pivot lows — the line whose
+// loss ends the trend. Both extend right; the label names the line and
+// flips to BROKEN the moment the close is through it, so breakouts and
+// trend failures read off the chart without measuring anything.
+var line dnTL = na
+var line upTL = na
+var label dnTLlab = na
+var label upTLlab = na
+if barstate.islast and showTrendLine
+    if not na(dnTL)
+        line.delete(dnTL)
+        dnTL := na
+    if not na(upTL)
+        line.delete(upTL)
+        upTL := na
+    if not na(dnTLlab)
+        label.delete(dnTLlab)
+        dnTLlab := na
+    if not na(upTLlab)
+        label.delete(upTLlab)
+        upTLlab := na
+    // downtrend: swing high anchor -> latest lower high after it
+    int nH = array.size(pivHighs)
+    if nH >= 2
+        int hiIdx = 0
+        for i = 1 to nH - 1
+            if array.get(pivHighs, i) > array.get(pivHighs, hiIdx)
+                hiIdx := i
+        int touchIdx = -1
+        if hiIdx < nH - 1
+            // ascending, keep the LAST match = the most recent lower high
+            for i = hiIdx + 1 to nH - 1
+                if array.get(pivHighs, i) < array.get(pivHighs, hiIdx)
+                    touchIdx := i
+        if touchIdx > hiIdx
+            int x1 = array.get(pivHighBars, hiIdx)
+            float y1 = array.get(pivHighs, hiIdx)
+            int x2 = array.get(pivHighBars, touchIdx)
+            float y2 = array.get(pivHighs, touchIdx)
+            dnTL := line.new(x1, y1, x2, y2, extend=extend.right,
+                 color=color.new(color.red, 25), width=2)
+            float dnNow = line.get_price(dnTL, bar_index)
+            bool dnBroken = close > dnNow
+            dnTLlab := label.new(bar_index + 2, dnNow,
+                 dnBroken ? "downtrend BROKEN ▲" : "downtrend",
+                 style=label.style_none, text_size=size.small,
+                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
+    // uptrend: swing low anchor -> latest higher low after it
+    int nL = array.size(pivLows)
+    if nL >= 2
+        int loIdx = 0
+        for i = 1 to nL - 1
+            if array.get(pivLows, i) < array.get(pivLows, loIdx)
+                loIdx := i
+        int touchIdxL = -1
+        if loIdx < nL - 1
+            // ascending, keep the LAST match = the most recent higher low
+            for i = loIdx + 1 to nL - 1
+                if array.get(pivLows, i) > array.get(pivLows, loIdx)
+                    touchIdxL := i
+        if touchIdxL > loIdx
+            int x1L = array.get(pivLowBars, loIdx)
+            float y1L = array.get(pivLows, loIdx)
+            int x2L = array.get(pivLowBars, touchIdxL)
+            float y2L = array.get(pivLows, touchIdxL)
+            upTL := line.new(x1L, y1L, x2L, y2L, extend=extend.right,
+                 color=color.new(color.teal, 25), width=2)
+            float upNow = line.get_price(upTL, bar_index)
+            bool upLost = close < upNow
+            upTLlab := label.new(bar_index + 2, upNow,
+                 upLost ? "uptrend LOST ▼" : "uptrend",
+                 style=label.style_none, text_size=size.small,
+                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
 
 plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
 plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
