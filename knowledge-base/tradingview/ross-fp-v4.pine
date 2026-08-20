@@ -2194,7 +2194,7 @@ if barstate.islast and showTrendLine
             bool dnBroken = close > dnNow
             dnTLlab := label.new(bar_index + 2, dnNow,
                  dnBroken ? "downtrend BROKEN ▲" : "downtrend",
-                 style=label.style_none, text_size=size.small,
+                 style=label.style_none, size=size.small,
                  textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
     // uptrend: swing low anchor -> latest higher low after it
     int nL = array.size(pivLows)
@@ -2220,7 +2220,7 @@ if barstate.islast and showTrendLine
             bool upLost = close < upNow
             upTLlab := label.new(bar_index + 2, upNow,
                  upLost ? "uptrend LOST ▼" : "uptrend",
-                 style=label.style_none, text_size=size.small,
+                 style=label.style_none, size=size.small,
                  textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
 
 plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))

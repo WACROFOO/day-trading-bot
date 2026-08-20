@@ -144,6 +144,45 @@ def const_string_args(lines, declared_at):
     return findings
 
 
+# Named args that do NOT exist on these calls — each pair shipped once.
+# label.new sizes text with `size=`; table.cell with `text_size=`. Mixing
+# them compiles nowhere (CE10120) and the V9.6 trend-line labels shipped
+# with exactly that mix.
+WRONG_ARGS = (
+    ('label.new', re.compile(r'\btext_size\s*='), 'label.new has no text_size — the argument is size='),
+    ('line.new', re.compile(r'\btext_size\s*=|(?<![\w.])size\s*='), 'line.new has no size/text_size argument'),
+    ('table.cell', re.compile(r'(?<![\w.])(?<!text_)size\s*='), 'table.cell has no size — the argument is text_size='),
+)
+
+
+def wrong_named_args(lines):
+    """Scan multi-line drawing calls for named args the function lacks."""
+    findings = []
+    for fn, pat, msg in WRONG_ARGS:
+        depth = 0
+        start = 0
+        buf = []
+        for n, raw in enumerate(lines, 1):
+            code = strip_comment(raw)
+            if depth == 0:
+                idx = code.find(fn + '(')
+                if idx < 0:
+                    continue
+                start = n
+                buf = [code[idx:]]
+                depth = buf[0].count('(') - buf[0].count(')')
+            else:
+                buf.append(code)
+                depth += code.count('(') - code.count(')')
+            if depth <= 0 and buf:
+                stmt = ' '.join(buf)
+                if pat.search(blank_strings(stmt)):
+                    findings.append((start, f'CE10120 risk: {msg} (call starting here)'))
+                buf = []
+                depth = 0
+    return findings
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -159,10 +198,11 @@ def main():
                 declared_at[m.group(1)] = n
 
         findings = sorted(forward_refs(lines)
-                          + const_string_args(lines, declared_at))
+                          + const_string_args(lines, declared_at)
+                          + wrong_named_args(lines))
         print(f'{path}  ({len(lines)} lines)')
         if not findings:
-            print('  clean — no forward reference, no non-const plotshape arg')
+            print('  clean — no forward reference, no non-const plotshape arg, no wrong-named drawing arg')
         for n, msg in findings:
             print(f'  line {n}: {msg}')
             bad += 1
