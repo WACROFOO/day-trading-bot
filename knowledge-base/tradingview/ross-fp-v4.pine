@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.4 (paper only)", shorttitle="ROSS FP V9.4", overlay=true,
+strategy("ROSS First Pullback Strategy V9.5 (paper only)", shorttitle="ROSS FP V9.5", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -178,6 +178,12 @@ strategy("ROSS First Pullback Strategy V9.4 (paper only)", shorttitle="ROSS FP V
 //      Warrior's "Rel Vol Daily Rate" is a DIFFERENT measure from the TV
 //      same-time proxy — neither is wrong, they are not the same number.
 //      Full coverage map: knowledge-base/tradingview/STRATEGY-COVERAGE.md
+// V9.5 (live WYHG 2026-08-20): S/R POLARITY — supports were drawn only
+//      from pivot lows and resistances only from pivot highs, so a broken
+//      resistance shelf under price (support by polarity) never printed.
+//      Both pivot kinds now feed both sides; price decides the role. The
+//      5-bar pivot confirmation lag is inherent and stays (a level is not
+//      a level until the market has rejected it).
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -460,7 +466,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.4"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.5"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -705,16 +711,27 @@ if not na(pl)
     if array.size(pivLows) > 40
         array.shift(pivLows)
 
-float nearestRes = na
-float nearestSup = na
+// V9.5 (live WYHG 2026-08-20): POLARITY. Supports came only from pivot
+// LOWS and resistances only from pivot HIGHS — so a broken-resistance
+// shelf sitting under price (5.80 on WYHG, made of pivot highs price had
+// cleared) was invisible as support, and a lost-support level overhead
+// was invisible as resistance. A level is a level: both pivot kinds feed
+// both sides; which side of PRICE it is on decides its role.
+var array<float> allPiv = array.new_float()
+array.clear(allPiv)
 if array.size(pivHighs) > 0
     for i = 0 to array.size(pivHighs) - 1
-        float v = array.get(pivHighs, i)
-        if v > close and (na(nearestRes) or v < nearestRes)
-            nearestRes := v
+        array.push(allPiv, array.get(pivHighs, i))
 if array.size(pivLows) > 0
     for i = 0 to array.size(pivLows) - 1
-        float v = array.get(pivLows, i)
+        array.push(allPiv, array.get(pivLows, i))
+float nearestRes = na
+float nearestSup = na
+if array.size(allPiv) > 0
+    for i = 0 to array.size(allPiv) - 1
+        float v = array.get(allPiv, i)
+        if v > close and (na(nearestRes) or v < nearestRes)
+            nearestRes := v
         if v < close and (na(nearestSup) or v > nearestSup)
             nearestSup := v
 
@@ -2056,8 +2073,10 @@ if barstate.islast and showSR
     while array.size(srLabels) > 0
         label.delete(array.pop(srLabels))
     float tolSR = atr * 0.5
-    array<float> resL = f_near(pivHighs, true, maxSRlines, tolSR)
-    array<float> supL = f_near(pivLows, false, maxSRlines, tolSR)
+    // V9.5: both pivot kinds feed both sides (polarity flip) — f_near's
+    // above/below filter assigns the role from the CURRENT price.
+    array<float> resL = f_near(allPiv, true, maxSRlines, tolSR)
+    array<float> supL = f_near(allPiv, false, maxSRlines, tolSR)
     if array.size(resL) > 0
         for i = 0 to array.size(resL) - 1
             float v = array.get(resL, i)
