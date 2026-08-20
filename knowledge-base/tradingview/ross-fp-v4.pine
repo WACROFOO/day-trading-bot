@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.0 (paper only)", shorttitle="ROSS FP V9.0", overlay=true,
+strategy("ROSS First Pullback Strategy V9.1 (paper only)", shorttitle="ROSS FP V9.1", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -139,6 +139,12 @@ strategy("ROSS First Pullback Strategy V9.0 (paper only)", shorttitle="ROSS FP V
 //   4. Verdict verbs: BUY >x.xx / WAIT — reason / NO — reason / MANAGE.
 //      One of the four is always present; VERDICT, PLAN and SIZE render
 //      one text size up from the reference rows.
+// V9.1 (operator, live BTCT 2026-08-20): the criteria GRID. Every
+//      criterion is its own table cell — green chip met, orange failed,
+//      slate · not judgeable — and a row whose judged chips are all green
+//      paints its TITLE green, so the left column alone reads the board.
+//      SIZE cut to what was asked: shares, $ position vs equity, risk $.
+//      Palette unified (TV green/orange), bordered cells, merged text rows.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -414,7 +420,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.0"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.1"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -2091,78 +2097,70 @@ avgDollarVol20 = ta.sma(close * volume, 20)
 avgDollarVol5 = ta.sma(close * volume, 5)
 avgDollarVolDay = f_safeDiv(dayDollarCum, dayBarCount, na)
 liquidPerMin = math.max(nz(avgDollarVol20, 0.0), math.max(nz(avgDollarVol5, 0.0), nz(avgDollarVolDay, 0.0)))
-var table dash = table.new(position.bottom_right, 2, 15, border_width=0)
+// V9.1 (operator, live BTCT 2026-08-20): the criteria GRID. Pine colours
+// CELLS, so every criterion gets its own cell — a chip: green when met,
+// orange when failed, slate with a · when not judgeable yet (V5.2 rule).
+// A row whose judged chips are all green paints its TITLE green too, so
+// the left column read top-to-bottom is the whole board. Text rows span
+// the chip columns via merge_cells (done once; the table is overwritten
+// in place every render — never cleared, so the merges survive).
+var table dash = table.new(position.bottom_right, 7, 15, border_width=2,
+     border_color=color.rgb(15, 15, 17), frame_color=color.rgb(15, 15, 17), frame_width=2)
+var bool dashMerged = false
 
-// V5.1 display rule, operator-specified: each criterion carries its own ✓/✗,
-// and a LINE is green only when EVERY criterion on it is met — orange while
-// any one is missing. (Pine colours a cell, not parts of it, so the glyph is
-// the per-criterion state and the row colour is the all-met state.)
-f_crit(string nm, bool ok) =>
-    nm + (ok ? "✓" : "✗")
-CRIT_ALL = color.lime
-CRIT_SOME = color.orange
+CHIP_OK = color.rgb(8, 153, 129)
+CHIP_NO = color.rgb(245, 124, 0)
+CHIP_NA = color.rgb(42, 46, 57)
 
-f_row(int r, string label, string value, color vcolor) =>
-    table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.silver,
-         text_size=DSZ, text_halign=text.align_left)
-    table.cell(dash, 1, r, value, text_color=vcolor,
-         text_size=DSZ, text_halign=text.align_left)
+f_label(int r, string txt, bool allMet, string sz) =>
+    table.cell(dash, 0, r, txt, bgcolor=allMet ? CHIP_OK : LBL,
+         text_color=color.white, text_size=sz, text_halign=text.align_left)
 
-// V9: emphasis rows — PLAN and SIZE (VERDICT is written inline, it also
-// carries a state-coloured background).
-f_rowBig(int r, string label, string value, color vcolor) =>
-    table.cell(dash, 0, r, label, bgcolor=LBL, text_color=color.white,
-         text_size=DSZ_BIG, text_halign=text.align_left)
-    table.cell(dash, 1, r, value, text_color=vcolor,
-         text_size=DSZ_BIG, text_halign=text.align_left)
+f_text(int r, string value, color vcolor, string sz) =>
+    table.cell(dash, 1, r, value, text_color=vcolor, text_size=sz,
+         text_halign=text.align_left)
+
+// one criterion, one cell: 1 met · 0 failed · -1 not judgeable yet
+f_chip(int c, int r, string nm, int st) =>
+    table.cell(dash, c, r, st == -1 ? nm + " ·" : nm,
+         bgcolor=st == 1 ? CHIP_OK : st == 0 ? CHIP_NO : CHIP_NA,
+         text_color=st == -1 ? color.new(color.silver, 30) : color.white,
+         text_size=DSZ, text_halign=text.align_center)
+
+f_b(bool ok) =>
+    ok ? 1 : 0
 
 if barstate.islast
-    table.clear(dash, 0, 0, 1, 14)
-    table.cell(dash, 0, 0, "ROSS FP " + REV, bgcolor=LBL, text_color=color.white,
-         text_size=DSZ, text_halign=text.align_left)
+    f_label(0, "ROSS FP " + REV, false, DSZ)
     table.cell(dash, 1, 0, isOneMinute ? f_stateName(displayState) +
          (displayState == PULLBACK or displayState == ARMED or displayState == LONG ?
               (setupKind == KIND_RETEST ? " · retest buy" :
                setupKind == KIND_FAST or setupKind == KIND_UPTREND ? " · quick buy" :
                " · dip buy") : "") : "WRONG TF",
-         bgcolor=stateColor, text_color=color.black, text_size=DSZ)
+         bgcolor=stateColor, text_color=color.black, text_size=DSZ, text_halign=text.align_center)
 
-    // V7.1 (operator): signal and update merged on one row — one sentence
-    // that names the state AND says what to do, no cross-referencing.
-    // V7.2 (live BTCT report): when a name fails the UNIVERSE — price outside
-    // the scan band or liquidity below the floor — every bar-level message is
-    // noise. Say the one big thing instead.
-    // V8.2: the banner claims the WHOLE row only when the machine is idle
-    // and flat. Any live state — MOVE UP, DIP FORMING, a working order, a
-    // finished trade — keeps its dynamic verdict (the "status isn't
-    // dynamic" report was this banner overwriting a live state machine).
+    // V8.2: the banner claims the row only when the machine is idle+flat.
     bool thinTape = liquidPerMin < minDollarVolume
     outOfUniverse = strategy.position_size == 0 and displayState == IDLE and
          (not pillarPrice or thinTape)
 
-    // ── V9 VERDICT: actionText IS the row (four verbs, always one).
-    // Reads the EFFECTIVE state (V8): a pending-cancel bar shows the
-    // rejection, never a plan. Banner only when idle+flat (V8.2).
+    // ── VERDICT: actionText IS the row (four verbs, always one). Reads
+    // the EFFECTIVE state (V8): a pending cancel shows the rejection.
     string vLine = outOfUniverse ?
          "NO — not a playbook stock: " + (not pillarPrice ?
               "price " + f_px(close) + " outside $" + f_n(scanMinPrice, "#") + "-" + f_n(scanMaxPrice, "#") :
-              "volume thin (best $" + f_n(liquidPerMin, "#") + "/min: burst/20-bar/day)") :
+              "volume thin (best $" + f_n(liquidPerMin, "#") + "/min)") :
          actionText +
               (displayState == INVALID or displayState == DONE ? ageTag : "") +
               (not pillarPrice or thinTape ? "  · ⚠ not a playbook stock" : "")
     color vCol = outOfUniverse ? color.gray :
          thinRoom ? color.red : displayState == ARMED ? color.yellow :
          displayState == LONG ? color.lime : color.white
-    table.cell(dash, 0, 1, "VERDICT", bgcolor=LBL, text_color=color.white,
-         text_size=DSZ_BIG, text_halign=text.align_left)
+    f_label(1, "VERDICT", hardGatesOK, DSZ_BIG)
     table.cell(dash, 1, 1, vLine, text_color=vCol,
          bgcolor=color.new(stateColor, 82), text_size=DSZ_BIG, text_halign=text.align_left)
 
-    // ── V7.5 PLAN + SIZE: one live plan, always. Priority: a real position,
-    // then a working order, then the LIVE candidate of the forming setup,
-    // then a fresh ghost (clock withheld it), then "if bought here". Entry,
-    // stop, T1 (sell half, +1R), T2 (2R) and the share count all come from
-    // the SAME source so the two rows can never describe different trades.
+    // ── PLAN + SIZE: one live plan, always (V7.5 5-source chain).
     bool ghostFresh = not na(ghostTrig) and not na(ghostBar) and bar_index - ghostBar <= 10
     bool candLive = displayState == PULLBACK and not na(candidateTrigger) and
          candidateRisk > 0 and candidateShares >= 1
@@ -2180,123 +2178,164 @@ if barstate.islast
          planSrc == 2 ? ghostTgt : pEntry + pRisk * rewardMultiple
     float pShares = planSrc == 5 or planSrc == 4 ? displayShares :
          planSrc == 3 ? candidateShares : planSrc == 2 ? ghostShares : anyShares
-    string planTag = planSrc == 5 ? (t1Filled ? " · half sold, stop at entry (break-even)" : "") :
+    string planTag = planSrc == 5 ? (t1Filled ? " · half sold, stop at entry" : "") :
          planSrc == 4 ? " · order working" :
          planSrc == 3 ? " · live, not armed yet" :
          planSrc == 2 ? " · NO ORDER (clock)" : " · if bought HERE"
     color planCol = planSrc == 5 ? color.lime : planSrc == 4 ? color.yellow :
          planSrc == 3 ? color.white : color.gray
-    // ᵃᵗʳ provenance: latched at arm time for a real order (V8), live for a
-    // forming candidate — never inferred after the fact.
     string atrMark = planSrc >= 4 ? (plannedUsesATRStop ? "ᵃᵗʳ" : "") :
          (planSrc == 3 and usingATRstop ? "ᵃᵗʳ" : "")
-    f_rowBig(2, planSrc >= 4 ? "▶ PLAN" : "PLAN",
-         "buy " + f_px(pEntry) + " · stop " + f_px(pStop) + atrMark +
-         " · sell½ " + f_px(pT1) + " · target " + f_px(pT2) + planTag, planCol)
-    // V9 (defect 2): the DERIVATION, not just the result. Rule from
-    // PARAMETERS.md §7: shares = risk_budget / risk_per_share, budget 2%
-    // of account (n=125). The slip reserve (audit finding 14) and the $2
-    // round-trip commission (benchmark: 10-15% of a small budget) are
-    // SHOWN, not silently deducted.
-    float worstCase = pShares * (pRisk + slipPerShare) + 2.0
-    string sizeTag = setupsToday >= 2 and planSrc >= 3 ? " · ½ size (3rd trade of day)" : ""
-    f_rowBig(3, "SIZE", "$" + f_n(pRisk, "#.00") + "/sh risk → " + f_n(pShares, "#") +
-         " sh of $" + f_n(riskBudget, "#") + " budget (slip reserve $" +
-         f_n(pShares * slipPerShare, "#") + ") = " +
-         f_n(f_safeDiv(pShares * pRisk, strategy.initial_capital, 0.0) * 100.0, "#.0") + "% acct" +
-         " · worst $" + f_n(worstCase, "#") + " w/ fees" + sizeTag +
-         (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
-         thinRoom and planSrc >= 3 ? color.red : planCol)
+    f_label(2, planSrc >= 4 ? "▶ PLAN" : "PLAN", planSrc >= 4, DSZ_BIG)
+    f_text(2, "buy " + f_px(pEntry) + " · stop " + f_px(pStop) + atrMark +
+         " · sell½ " + f_px(pT1) + " · target " + f_px(pT2) + planTag, planCol, DSZ_BIG)
 
-    // ── V9 CLOCK (defect 1): two different clocks, named apart. Market
-    // phase is the exchange; the window is THIS strategy's arming rule.
-    // "Market OPEN · window OVER" must be readable in one glance, and a
-    // stale per-chart "window off" override announces itself in red.
-    string mktPhase = minuteET < 570 ? "PRE-MARKET" : minuteET < 960 ? "market OPEN" : "AFTER-HOURS"
+    // ── V9.1 SIZE (operator): only what the decision needs — shares, the
+    // dollar position against equity, the risk. The derivation (shares =
+    // risk_budget / risk_per_share, 2% default per PARAMETERS.md §7; slip
+    // reserve per audit F14; $2 fees) LIVES IN THE SIZING CODE and stays
+    // out of the row.
+    string sizeTag = setupsToday >= 2 and planSrc >= 3 ? " · ½ size (3rd trade)" : ""
+    f_label(3, "SIZE", false, DSZ_BIG)
+    f_text(3, f_n(pShares, "#") + " sh ≈ $" + f_n(pShares * pEntry, "#") + " · " +
+         f_n(f_safeDiv(pShares * pEntry, strategy.initial_capital, 0.0) * 100.0, "#") +
+         "% of $" + f_n(strategy.initial_capital, "#") + " equity · risk $" +
+         f_n(pShares * pRisk, "#") + sizeTag +
+         (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
+         thinRoom and planSrc >= 3 ? color.red : planCol, DSZ_BIG)
+
+    // ── CLOCK (V9 defect 1): market phase chip + THIS strategy's window.
+    string mktPhase = minuteET < 570 ? "PRE-MKT" : minuteET < 960 ? "OPEN" : "AFTER-HRS"
+    bool clockOK = useSessionWindow and inSession and entryTimeOK
+    f_label(4, "CLOCK", clockOK, DSZ)
+    f_chip(1, 4, mktPhase, minuteET >= 570 and minuteET < 960 ? 1 : -1)
     string winText = not useSessionWindow ?
-         "⚠ WINDOW GATE OFF — arms at ANY hour (non-default input — reset chart inputs)" :
+         "⚠ WINDOW GATE OFF — arms at ANY hour (reset chart inputs)" :
          inSession ? (entryTimeOK ? "window " + sessionWindow + " ET · open" :
               "window closing — no new orders this bar") :
-         "window " + sessionWindow + " ET · OVER — watch only, no orders"
-    f_row(4, "CLOCK", mktPhase + " · " + winText,
-         not useSessionWindow ? color.red :
-         inSession and entryTimeOK ? color.lime : color.orange)
+         "window " + sessionWindow + " ET · OVER — watch only"
+    table.cell(dash, 2, 4, winText,
+         text_color=not useSessionWindow ? color.red : clockOK ? CHIP_OK : CHIP_NO,
+         text_size=DSZ, text_halign=text.align_left)
 
-    // ── V7.5: the gates split into the two questions they actually answer.
-    // SETUP = is THIS dip tradeable. TREND = is the tape behind it.
-    // (STOCK FIT below is a third, different question: is this the right
-    // STOCK at all — selection, decided before the chart. Gates time;
-    // pillars pick.) A gate that cannot be judged yet shows '·', not a
-    // cross (V5.2 — a false cross teaches the eye to ignore crosses).
+    // ── SETUP: is THIS dip tradeable. TREND: is the tape behind it.
     pbApplicable = setupState == PULLBACK or setupState == ARMED
-    f_row(5, "SETUP", f_crit("Push", pushGate) +
-         (pbApplicable ? " " + f_crit("DipLen", pullbackCountGate) + " " +
-              f_crit("Depth", retracementGate) + " " + f_crit("DipVol", volumeGate) + " " +
-              ("Risk" + (riskGate ? (usingATRstop ? "✓ᵃᵗʳ" : "✓") : "✗")) :
-              " DipLen· Depth· DipVol· Risk·  (no dip yet)"),
-         pbApplicable ? (pushGate and pullbackCountGate and retracementGate and
-              volumeGate and riskGate ? CRIT_ALL : CRIT_SOME) :
-              (pushGate ? CRIT_ALL : CRIT_SOME))
-    // V9: the Clock lamp moved to its own CLOCK row above — one lamp
-    // conflating market phase, window, venue and last-bar was defect 1.
-    f_row(6, "TREND", f_crit("MACD", macdBullish) + " " + f_crit("EMA", emaBullish) + " " +
-         (not vwapKnown ? "VWAP? " : f_crit("VWAP", vwapBullish) + " ") +
-         f_crit("Room", rrGate) +
-         (scanGates ? " " + f_crit("Fit", scanGate) : ""),
-         macdBullish and emaBullish and vwapBullish and rrGate and scanGate ? CRIT_ALL : CRIT_SOME)
+    bool setupAll = pbApplicable and pushGate and pullbackCountGate and
+         retracementGate and volumeGate and riskGate
+    f_label(5, "SETUP", setupAll, DSZ)
+    f_chip(1, 5, "Push", f_b(pushGate))
+    f_chip(2, 5, "DipLen", pbApplicable ? f_b(pullbackCountGate) : -1)
+    f_chip(3, 5, "Depth", pbApplicable ? f_b(retracementGate) : -1)
+    f_chip(4, 5, "DipVol", pbApplicable ? f_b(volumeGate) : -1)
+    f_chip(5, 5, usingATRstop ? "Riskᵃᵗʳ" : "Risk", pbApplicable ? f_b(riskGate) : -1)
+    table.cell(dash, 6, 5, "")
 
-    // V4.10: the day's high, and whether this impulse is the one making it.
-    // Every scanner branch measured on 2026-08-18 fired only on a new HOD.
-    f_row(7, "HIGH OF DAY", f_px(dayHigh) +
+    bool trendAll = macdBullish and emaBullish and vwapBullish and rrGate and
+         (not scanGates or scanGate)
+    f_label(6, "TREND", trendAll, DSZ)
+    f_chip(1, 6, "MACD", f_b(macdBullish))
+    f_chip(2, 6, "EMA", f_b(emaBullish))
+    f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
+    f_chip(4, 6, "Room", f_b(rrGate))
+    f_chip(5, 6, "Fit", scanGates ? f_b(scanGate) : -1)
+    table.cell(dash, 6, 6, "")
+
+    f_label(7, "HIGH OF DAY", hodComparable and peakIsHOD, DSZ)
+    f_text(7, f_px(dayHigh) +
          (not hodComparable ? "" : peakIsHOD ? "  · this move IS the high" : "  ⚠ lower high") +
          (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
-         not hodComparable ? color.silver : peakIsHOD ? color.lime : color.orange)
+         not hodComparable ? color.silver : peakIsHOD ? CHIP_OK : CHIP_NO, DSZ)
 
-    // STOCK FIT = the pillars: selection, not timing. A 4/4 here says "right
-    // kind of stock"; it never says "buy now" — that is what SETUP/TREND do.
+    // STOCK FIT = selection, not timing (fail-closed on unknowns, V8 r18).
     if showScanPanel
-        f_row(8, "STOCK FIT " + str.tostring(pillarScore) + "/4",
-             f_crit("Price", pillarPrice) + " " +
-             (na(scanFloat) ? "Float? " : not floatVerified ? "Float~ " : f_crit("Float", pillarFloat) + " ") +
-             (not rvolKnown ? "Rvol? " : f_crit("Rvol", pillarRVOL) + " ") + f_crit("Gap", pillarGap) +
-             "  · " + f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
-             // V8 (P30): the number names itself — a TradingView same-time
-             // proxy with numerator/expected exposed, never Warrior parity.
-             (rvolKnown ? " TV-proxy (" + f_n(dayVolCum, "#") + " vs " + f_n(rvolBase, "#") + " exp)" :
-                  " (unack'd)") +
+        bool fitAll = pillarScore == 4 and floatVerified and rvolKnown
+        f_label(8, "STOCK FIT " + str.tostring(pillarScore) + "/4", fitAll, DSZ)
+        f_chip(1, 8, "Price", f_b(pillarPrice))
+        f_chip(2, 8, not floatVerified ? "Float~" : "Float",
+             na(scanFloat) or not floatVerified ? -1 : f_b(pillarFloat))
+        f_chip(3, 8, "Rvol", rvolKnown ? f_b(pillarRVOL) : -1)
+        f_chip(4, 8, "Gap", f_b(pillarGap))
+        table.cell(dash, 5, 8, f_n(scanGap, "#.0") + "% · rvolᵗ " + f_n(scanRVOL, "#.1") + "x" +
+             (rvolKnown ? "" : " unack'd") +
              (na(scanFloat) ? " · float ?" : " · " + f_n(scanFloat, "#.1") + "M" +
-                  (floatVerified ? "" : " unver.")),
-             // V8 (regression 18): unknown inputs never render as all-pass.
-             pillarScore == 4 and floatVerified and rvolKnown ? CRIT_ALL : CRIT_SOME)
-        // "2+ hits" is the met-criterion here — his own rule: one alert is
-        // not a candidate (KSPN, yg5E_mqGFGg @00:16:47).
-        f_row(9, "DASH LANE", (laneLowFloat ? "LowFloat " : "") +
-             (laneSqueeze5 ? "SQ5 " : "") + (laneSqueeze10 ? "SQ10 " : "") +
-             (laneAny ? "" : "no lane this bar") +
-             " · " + f_crit(str.tostring(laneHits) + " hits", laneHits >= 2),
-             laneHits >= 2 ? CRIT_ALL : CRIT_SOME)
+                  (floatVerified ? "" : "~")),
+             text_color=color.silver, text_size=DSZ, text_halign=text.align_left)
+        // "2+ hits" — his rule: one alert is not a candidate
+        // (KSPN, yg5E_mqGFGg @00:16:47). Inactive lanes are slate, not
+        // orange: a lane not firing is absence, not failure.
+        f_label(9, "DASH LANE", laneHits >= 2, DSZ)
+        f_chip(1, 9, "LowF", laneLowFloat ? 1 : -1)
+        f_chip(2, 9, "SQ5", laneSqueeze5 ? 1 : -1)
+        f_chip(3, 9, "SQ10", laneSqueeze10 ? 1 : -1)
+        f_chip(4, 9, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
+        table.cell(dash, 5, 9, "")
+    else
+        f_label(8, "", false, DSZ)
+        f_chip(1, 8, "", -1)
+        f_chip(2, 8, "", -1)
+        f_chip(3, 8, "", -1)
+        f_chip(4, 8, "", -1)
+        table.cell(dash, 5, 8, "")
+        f_label(9, "", false, DSZ)
+        f_chip(1, 9, "", -1)
+        f_chip(2, 9, "", -1)
+        f_chip(3, 9, "", -1)
+        f_chip(4, 9, "", -1)
+        table.cell(dash, 5, 9, "")
 
     if inRTH or dashFull
-        f_row(10, "HALT BAND", not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
+        f_label(10, "HALT BAND", inRTH and not na(haltBandWidth) and not stopExceedsHaltBand, DSZ)
+        f_text(10, not inRTH ? f_px(haltBandWidth) + "  · no halts outside 09:30-16:00" :
              f_px(haltBandWidth) + (stopExceedsHaltBand ? "  ⚠ stop wider than the band" :
                   "  ok · " + f_rr(f_safeDiv(haltBandWidth, pRisk, na)) + " to halt"),
-             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver)
+             not inRTH ? color.gray : stopExceedsHaltBand ? color.red : color.silver, DSZ)
+    else
+        f_label(10, "", false, DSZ)
+        f_text(10, "", color.gray, DSZ)
     if dashFull
-        f_row(11, "VWAP", f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
-             vwapBullish ? color.lime : color.orange)
-        f_row(12, "R / S (blue/purple)", f_px(nearestRes) + " / " + f_px(nearestSup) +
-             "  · setup #" + str.tostring(setupsToday + (displayState == PULLBACK ? 1 : 0)), color.silver)
-        f_row(13, "QUALITY*", f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray)
-    // V8 (ND-8): the fill-ambiguity counter where the operator looks; an
-    // optimistic backtest fill is only acceptable when its count is visible
-    // and owned. V8.1: the fee toll named beside it (benchmark). V9: a
-    // non-zero count forces the row onto the COMPACT dashboard too — the
-    // labels can hide (defect 3), the count cannot.
+        f_label(11, "VWAP", vwapBullish, DSZ)
+        f_text(11, f_px(vwapValue) + (vwapAnchorMode == "Regular hours only (09:30)" ? " (RTH anchor)" : " (incl. pre-mkt)"),
+             vwapBullish ? CHIP_OK : CHIP_NO, DSZ)
+        f_label(12, "R / S (blue/purple)", false, DSZ)
+        f_text(12, f_px(nearestRes) + " / " + f_px(nearestSup) +
+             "  · setup #" + str.tostring(setupsToday + (displayState == PULLBACK ? 1 : 0)), color.silver, DSZ)
+        f_label(13, "QUALITY*", false, DSZ)
+        f_text(13, f_n(displayQuality, "#") + " *display-only, anti-predictive 16/16", color.gray, DSZ)
+    else
+        f_label(11, "", false, DSZ)
+        f_text(11, "", color.gray, DSZ)
+        f_label(12, "", false, DSZ)
+        f_text(12, "", color.gray, DSZ)
+        f_label(13, "", false, DSZ)
+        f_text(13, "", color.gray, DSZ)
+    // V8 ND-8 / V9: a non-zero ambiguity count forces LIMITS onto the
+    // compact dashboard — labels can hide (defect 3), the count cannot.
     if dashFull or historicalFillAmbiguities > 0
-        f_row(14, "LIMITS", "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
+        f_label(14, "LIMITS", false, DSZ)
+        f_text(14, "paper · fills optimistic · fees ≈10-15% of risk/trade · hist ambiguities: " +
              str.tostring(historicalFillAmbiguities) +
              (historicalFillAmbiguities > 0 ? " ⚠ expectancy not portable" : ""),
-             historicalFillAmbiguities > 0 ? color.orange : color.gray)
+             historicalFillAmbiguities > 0 ? CHIP_NO : color.gray, DSZ)
+    else
+        f_label(14, "", false, DSZ)
+        f_text(14, "", color.gray, DSZ)
+
+    // merges once, AFTER the first full render wrote every top-left cell.
+    if not dashMerged
+        dashMerged := true
+        table.merge_cells(dash, 1, 0, 6, 0)
+        table.merge_cells(dash, 1, 1, 6, 1)
+        table.merge_cells(dash, 1, 2, 6, 2)
+        table.merge_cells(dash, 1, 3, 6, 3)
+        table.merge_cells(dash, 2, 4, 6, 4)
+        table.merge_cells(dash, 1, 7, 6, 7)
+        table.merge_cells(dash, 5, 8, 6, 8)
+        table.merge_cells(dash, 5, 9, 6, 9)
+        table.merge_cells(dash, 1, 10, 6, 10)
+        table.merge_cells(dash, 1, 11, 6, 11)
+        table.merge_cells(dash, 1, 12, 6, 12)
+        table.merge_cells(dash, 1, 13, 6, 13)
+        table.merge_cells(dash, 1, 14, 6, 14)
 
 // ───────────────────────── Alerts ─────────────────────────
 // V8 (V6 directive — duplicate-channel exclusion): this file has TWO alert
