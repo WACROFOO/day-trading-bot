@@ -142,12 +142,44 @@ default, so a full session runs 04:00–20:00 rather than 390 bars.
 inside the traded span — on a thin small cap those holes are normal, not
 a fetch error.
 
+## Blinded walk-forward replay
+
+Grades strategy decisions candle by candle with the future hidden, then
+scores them. The prompt that drives it is
+`knowledge-base/strategies/REPLAY_EVAL_PROMPT.md`.
+
+```bash
+python scripts/replay_eval.py --symbols SDOT --days 5
+python scripts/replay_eval.py --symbols SDOT,ABCD --date 2026-08-20 --sweep
+```
+
+At cursor `t` the engine builds `visible = bars.iloc[:t+1]` and every gate,
+indicator and level is computed from that slice alone. `assert_causal`
+re-derives EMA9/EMA20/VWAP/MACD on the truncated frame and raises
+`LookAheadError` if any value at `t` differs from the same value computed on
+the full session — and the test suite proves that guard fires by feeding it a
+deliberately non-causal (centered-window) indicator. The 5-minute frame is
+resampled from `visible`, so its final bar is in-progress, as on a live screen.
+
+Output is one row per candle decision (every §3 gate boolean, the verdict, the
+resolved outcome) written to `results/replay_<date>.csv`, plus a confusion
+matrix, the §9 comparison, the §12 baselines and the §12.3 tolerance sweep.
+
+What it deliberately will not do: pass off `tape_green` / `no_seller_wall` /
+float / catalyst as satisfied (they need Level 2 and paid fundamentals, so
+they are carried as UNTESTABLE/UNKNOWN), claim significance below 20 resolved
+trades, or report the best cell of a parameter sweep whose sign flips.
+Symbols passed with `--symbols` are a manual list, not a point-in-time 09:25
+scan — the run says so on every invocation, because choosing tickers that are
+known to have run is the fastest way to a fake edge.
+
 ## Structure
 
 ```
-src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, history, scanner)
+src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, history, replay, scanner)
 scripts/run_scanner.py  scanner CLI
 scripts/fetch_1m_history.py  1-minute candle archive CLI
+scripts/replay_eval.py  blinded walk-forward replay CLI
 tests/               test suite
 knowledge-base/      strategy research and specs
 ```
