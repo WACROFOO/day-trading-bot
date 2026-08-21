@@ -586,3 +586,55 @@ def test_momentum_stalling_is_a_hard_exit():
         "Volume": [10_000.0] * 5}, index=idx)
     out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90, target=9.0))
     assert out.exit_reason in {"momentum_stalling", "topping_tail"}
+
+
+# --------------------------------------------- adversarial audit scenarios
+# Both reproductions below were written by independent auditors against the
+# pre-fix code. They are kept verbatim in intent so the exact attacks that
+# found these leaks stay in the suite.
+
+def flag_with_trigger_high(trigger_high: float) -> pd.DataFrame:
+    """Identical session through the fill; only the trigger candle's high
+    differs. Nothing knowable at the fill price changes between the two."""
+    o = [4.85, 4.90, 4.95, 5.00, 5.03, 5.06, 5.02, 4.99, 5.03]
+    h = [4.88, 4.93, 4.98, 5.03, 5.06, 5.09, 5.03, 5.02, trigger_high]
+    l = [4.83, 4.88, 4.93, 4.98, 5.01, 5.04, 5.00, 5.00, 5.01]
+    c = [4.87, 4.92, 4.97, 5.02, 5.05, 5.07, 5.01, 5.01, 5.05]
+    v = [50_000.0] * 6 + [6_000.0, 5_000.0, 70_000.0]
+    idx = pd.date_range("2026-08-20 09:35", periods=len(o), freq="1min",
+                        tz="America/New_York")
+    return pd.DataFrame({"Open": o, "High": h, "Low": l, "Close": c,
+                         "Volume": v}, index=idx)
+
+
+def test_trigger_candles_own_high_cannot_change_the_reward_risk():
+    """Auditor scenario: two sessions identical through the fill, one whose
+    trigger candle runs to 5.40. Pre-fix the §6 target read that high, so the
+    same fill priced at 0.80 R:R in one case and 7.00 in the other — the
+    engine selected exactly the breakouts that already exploded inside the
+    entry minute, and booked them at the pre-explosion price."""
+    quiet = replay.order_params(flag_with_trigger_high(5.06), stop=5.00)
+    explosive = replay.order_params(flag_with_trigger_high(5.40), stop=5.00)
+    assert quiet["entry"] == pytest.approx(explosive["entry"])
+    assert quiet["target"] == pytest.approx(explosive["target"])
+    assert quiet["reward_risk"] == pytest.approx(explosive["reward_risk"])
+
+
+def test_a_same_candle_shakeout_is_a_loss_not_a_seven_r_winner():
+    """Auditor scenario: the trigger candle dips through the pullback low
+    after filling — the routine low-float stop-run this §1 universe produces
+    constantly. Pre-fix, management started at cursor+1, so this was logged
+    as exit_reason=session_end, r_multiple=+7.40, mae_r=0.00."""
+    idx = pd.date_range("2026-08-20 09:35", periods=4, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open":  [5.02, 5.30, 5.40, 5.50],
+        "High":  [5.40, 5.45, 5.55, 5.65],   # trigger candle rips to 5.40
+        "Low":   [4.95, 5.28, 5.38, 5.48],   # ...after slicing through 5.00
+        "Close": [5.06, 5.42, 5.52, 5.62],
+        "Volume": [70_000.0] * 4}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.05, stop=5.00, target=5.60,
+                                             shares=100))
+    assert out.exit_reason == "stop"
+    assert out.r_multiple < 0, "a same-candle shakeout must not book as a win"
+    assert out.mae_r < 0, "the entry candle's excursion must be recorded"
