@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.9 (paper only)", shorttitle="ROSS FP V9.9", overlay=true,
+strategy("ROSS First Pullback Strategy V9.10 (paper only)", shorttitle="ROSS FP V9.10", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -206,6 +206,12 @@ strategy("ROSS First Pullback Strategy V9.9 (paper only)", shorttitle="ROSS FP V
 //      day boundary, so anchors are today's low / today's high, never an
 //      overnight print from yesterday. The session defines the window,
 //      which adapts the lines to any timeframe by construction.
+// V9.10 (live SDOT): trend-line ANCHORS are scored, not assumed. On a
+//      name that doubled intraday the tangent from the session low sat
+//      $5 under price — right geometry, dead leg. Every candidate swing
+//      anchor is scored on touches (bars sitting ON the line, 0.2 ATR)
+//      minus distance-from-price in ATR, and the best line is drawn; no
+//      candidate with >= 2 touches means no line.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -495,7 +501,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.9"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.10"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -751,6 +757,8 @@ var array<float> tlLows = array.new_float()
 var array<float> tlHighs = array.new_float()
 var array<int> tlBars = array.new_int()
 var array<int> tlTimes = array.new_int()
+// V9.10: scratch list of candidate anchors, reused by both sides.
+var array<int> tlCand = array.new_int()
 // V9.9 (live JUNS — the uptrend line anchored on yesterday's overnight
 // prints, 43% below price): trend lines are INTRADAY objects. The arrays
 // reset at the day boundary, so the up-line starts at TODAY's low and
@@ -2214,71 +2222,142 @@ if barstate.islast and showTrendLine
     if not na(upTLlab)
         label.delete(upTLlab)
         upTLlab := na
-    // V9.8 TANGENT TREND LINES (live USDE: the two-pivot line cut through
-    // price). Uptrend: anchor at the window's LOWEST low, slope = the
-    // minimum of (low_k - anchor)/(bars) over every later confirmed bar —
-    // the steepest line that keeps ALL lows on or above it. It touches
-    // structure at least twice and cannot cross a confirmed bar; only
-    // LIVE price can break it, which is exactly the breakout/loss signal.
-    // Downtrend is the mirror on highs. An anchor younger than 10 bars
-    // means that side has no trend yet — nothing is drawn, honestly.
+    // V9.10 TREND LINES — tangent geometry (V9.8) + SCORED ANCHORS.
+    // Live SDOT: on a name that doubled intraday, the tangent from the
+    // session low sat $5 under price — correct geometry describing a leg
+    // that ended hours ago. A trend line is only useful if it describes
+    // the CURRENT leg, so every candidate swing anchor is now scored and
+    // the best line wins:
+    //   touches  bars whose low sits ON the line (within 0.2 ATR) — a
+    //            line with 4 touches is real structure, 2 is a guess
+    //   distance how far the projected line sits from price, in ATR —
+    //            a line 10 ATR away cannot be broken, so it says nothing
+    //   score    touches * 2 - distance   (structure first, then relevance)
+    // The winner is still a TANGENT from its anchor: it can touch price
+    // and never cut it, so only LIVE price breaks it. No candidate with
+    // >= 2 touches and a valid slope = no line, honestly.
     int nB = array.size(tlBars)
     if nB >= 20
         int fromB = tlLookback > 0 ? math.max(0, nB - tlLookback) : 0
-        // ── uptrend tangent ──
-        int loA = fromB
-        for i = fromB + 1 to nB - 1
-            if array.get(tlLows, i) < array.get(tlLows, loA)
-                loA := i
-        if loA <= nB - 10
-            int barA = array.get(tlBars, loA)
-            float lowA = array.get(tlLows, loA)
-            float upSlope = na
-            int upTouch = -1
-            for k = loA + 3 to nB - 1
-                float s = (array.get(tlLows, k) - lowA) / (array.get(tlBars, k) - barA)
-                if na(upSlope) or s < upSlope
-                    upSlope := s
-                    upTouch := k
-            if upTouch > 0 and upSlope >= 0
-                float upNow = lowA + upSlope * (bar_index - barA)
-                bool upLost = close < upNow
-                upTL := line.new(array.get(tlTimes, loA), lowA,
-                     array.get(tlTimes, upTouch), array.get(tlLows, upTouch),
-                     xloc=xloc.bar_time, extend=extend.right,
-                     color=color.new(color.teal, upLost ? 70 : 25),
-                     style=upLost ? line.style_dashed : line.style_solid, width=2)
-                upTLlab := label.new(time, upNow,
-                     upLost ? "uptrend LOST ▼" : "uptrend",
-                     xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                     textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
-        // ── downtrend tangent ──
-        int hiA = fromB
-        for i = fromB + 1 to nB - 1
-            if array.get(tlHighs, i) > array.get(tlHighs, hiA)
-                hiA := i
-        if hiA <= nB - 10
-            int barH = array.get(tlBars, hiA)
-            float highA = array.get(tlHighs, hiA)
-            float dnSlope = na
-            int dnTouch = -1
-            for k = hiA + 3 to nB - 1
-                float s = (array.get(tlHighs, k) - highA) / (array.get(tlBars, k) - barH)
-                if na(dnSlope) or s > dnSlope
-                    dnSlope := s
-                    dnTouch := k
-            if dnTouch > 0 and dnSlope <= 0
-                float dnNow = highA + dnSlope * (bar_index - barH)
-                bool dnBroken = close > dnNow
-                dnTL := line.new(array.get(tlTimes, hiA), highA,
-                     array.get(tlTimes, dnTouch), array.get(tlHighs, dnTouch),
-                     xloc=xloc.bar_time, extend=extend.right,
-                     color=color.new(color.red, dnBroken ? 70 : 25),
-                     style=dnBroken ? line.style_dashed : line.style_solid, width=2)
-                dnTLlab := label.new(time, dnNow,
-                     dnBroken ? "downtrend BROKEN ▲" : "downtrend",
-                     xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                     textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
+        float tolTL = math.max(atr * 0.20, syminfo.mintick)
+        // ── uptrend: candidate anchors = local lows + the session low ──
+        array.clear(tlCand)
+        for i = fromB + 2 to nB - 9
+            bool isMin = true
+            for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
+                if array.get(tlLows, j) < array.get(tlLows, i)
+                    isMin := false
+            if isMin
+                array.push(tlCand, i)
+        while array.size(tlCand) > 10
+            array.shift(tlCand)
+        int dayLoI = fromB
+        for i = fromB + 1 to nB - 9
+            if array.get(tlLows, i) < array.get(tlLows, dayLoI)
+                dayLoI := i
+        array.push(tlCand, dayLoI)
+        float bestScore = na
+        int bestA = -1
+        float bestSlope = na
+        int bestTouch = -1
+        if array.size(tlCand) > 0
+            for ci = 0 to array.size(tlCand) - 1
+                int a = array.get(tlCand, ci)
+                int barA = array.get(tlBars, a)
+                float lowA = array.get(tlLows, a)
+                float sl = na
+                int tch = -1
+                for k = a + 2 to nB - 1
+                    float s = (array.get(tlLows, k) - lowA) / (array.get(tlBars, k) - barA)
+                    if na(sl) or s < sl
+                        sl := s
+                        tch := k
+                if not na(sl) and sl >= 0 and tch > 0
+                    int touches = 1
+                    for k = a + 2 to nB - 1
+                        float lineK = lowA + sl * (array.get(tlBars, k) - barA)
+                        if math.abs(array.get(tlLows, k) - lineK) <= tolTL
+                            touches += 1
+                    float lineNow = lowA + sl * (bar_index - barA)
+                    float distATR = f_safeDiv(close - lineNow, atr, 99.0)
+                    float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
+                    if touches >= 2 and (na(bestScore) or score > bestScore)
+                        bestScore := score
+                        bestA := a
+                        bestSlope := sl
+                        bestTouch := tch
+        if bestA >= 0
+            float lowA2 = array.get(tlLows, bestA)
+            float upNow = lowA2 + bestSlope * (bar_index - array.get(tlBars, bestA))
+            bool upLost = close < upNow
+            upTL := line.new(array.get(tlTimes, bestA), lowA2,
+                 array.get(tlTimes, bestTouch), array.get(tlLows, bestTouch),
+                 xloc=xloc.bar_time, extend=extend.right,
+                 color=color.new(color.teal, upLost ? 70 : 25),
+                 style=upLost ? line.style_dashed : line.style_solid, width=2)
+            upTLlab := label.new(time, upNow,
+                 upLost ? "uptrend LOST ▼" : "uptrend",
+                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
+                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
+        // ── downtrend: mirror, candidates = local highs + the session high ──
+        array.clear(tlCand)
+        for i = fromB + 2 to nB - 9
+            bool isMax = true
+            for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
+                if array.get(tlHighs, j) > array.get(tlHighs, i)
+                    isMax := false
+            if isMax
+                array.push(tlCand, i)
+        while array.size(tlCand) > 10
+            array.shift(tlCand)
+        int dayHiI = fromB
+        for i = fromB + 1 to nB - 9
+            if array.get(tlHighs, i) > array.get(tlHighs, dayHiI)
+                dayHiI := i
+        array.push(tlCand, dayHiI)
+        float bestScoreD = na
+        int bestAD = -1
+        float bestSlopeD = na
+        int bestTouchD = -1
+        if array.size(tlCand) > 0
+            for ci = 0 to array.size(tlCand) - 1
+                int a = array.get(tlCand, ci)
+                int barA = array.get(tlBars, a)
+                float highA = array.get(tlHighs, a)
+                float sl = na
+                int tch = -1
+                for k = a + 2 to nB - 1
+                    float s = (array.get(tlHighs, k) - highA) / (array.get(tlBars, k) - barA)
+                    if na(sl) or s > sl
+                        sl := s
+                        tch := k
+                if not na(sl) and sl <= 0 and tch > 0
+                    int touches = 1
+                    for k = a + 2 to nB - 1
+                        float lineK = highA + sl * (array.get(tlBars, k) - barA)
+                        if math.abs(array.get(tlHighs, k) - lineK) <= tolTL
+                            touches += 1
+                    float lineNow = highA + sl * (bar_index - barA)
+                    float distATR = f_safeDiv(lineNow - close, atr, 99.0)
+                    float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
+                    if touches >= 2 and (na(bestScoreD) or score > bestScoreD)
+                        bestScoreD := score
+                        bestAD := a
+                        bestSlopeD := sl
+                        bestTouchD := tch
+        if bestAD >= 0
+            float highA2 = array.get(tlHighs, bestAD)
+            float dnNow = highA2 + bestSlopeD * (bar_index - array.get(tlBars, bestAD))
+            bool dnBroken = close > dnNow
+            dnTL := line.new(array.get(tlTimes, bestAD), highA2,
+                 array.get(tlTimes, bestTouchD), array.get(tlHighs, bestTouchD),
+                 xloc=xloc.bar_time, extend=extend.right,
+                 color=color.new(color.red, dnBroken ? 70 : 25),
+                 style=dnBroken ? line.style_dashed : line.style_solid, width=2)
+            dnTLlab := label.new(time, dnNow,
+                 dnBroken ? "downtrend BROKEN ▲" : "downtrend",
+                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
+                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
 
 plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
 plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
