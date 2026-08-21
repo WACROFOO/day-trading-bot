@@ -11,6 +11,7 @@ been removed after one drifted (see
 | `PARAMETERS.md` | The numeric spec. Every rule with an `n=` evidence count. **§13 lists the misreading traps** — an implementation attempt produced ~20 defects and not one was a wrong number here; all were misreadings §13 now documents | by hand |
 | `PLAYBOOK.md` | The same rules as a step-by-step execution sequence | by hand |
 | `STRATEGY.md` | Prose description of the strategy | by hand |
+| `MICRO-PULLBACK-SPEC.md` | The core setup written as detection rules for a machine: four states, the trigger, the refusals, the scenarios, and sizing worked for a EUR 2,000 account | by hand |
 | `PLAYBOOK_V2.md` | Beginner-oriented playbook, with citations | **GENERATED** — `scripts/pipeline/13_render_v2_docs.py` |
 | `STRATEGY_V2.md` | Parameter distributions, conflicts flagged | **GENERATED** — same script |
 | `PLATFORM.md` | Broker/platform mechanics: hotkeys, order types | by hand |
