@@ -30,13 +30,31 @@ def ema_series(vals, n):
 
 class Cfg:
     def __init__(self, name, sameBarStop, entryTimeOK, risk, maxPos, retestBand,
-                 winStart=7*60, winEnd=11*60+30, lateJoin=False):
+                 winStart=7*60, winEnd=11*60+30, lateJoin=False,
+                 macdMode='signal', maxStopPct=None):
         self.name=name; self.sameBarStop=sameBarStop; self.entryTimeOK=entryTimeOK
         self.risk=risk; self.maxPos=maxPos; self.retestBand=retestBand
         self.winStart=winStart; self.winEnd=winEnd; self.lateJoin=lateJoin
+        # 'signal'   macd >= signal (the harness's original)
+        # 'pine'     macd > 0 AND histogram > 0  (ross-fp-v4.pine V9.12)
+        # 'sourced'  macd > 0 only — the corpus rule without the local
+        #            histogram addition (STRATEGY.md: "MACD positive =
+        #            green light"; the histogram condition is not sourced)
+        self.macdMode=macdMode
+        # riskGate's stop cap as % of price (ross-fp-v4.pine: 3.0).
+        # None = no cap, which is what this harness did before.
+        self.maxStopPct=maxStopPct
 
 V75 = Cfg('V7.5', sameBarStop=False, entryTimeOK=False, risk=200.0, maxPos=25000.0, retestBand=False)
 V80 = Cfg('V8.0', sameBarStop=True,  entryTimeOK=True,  risk=20.0,  maxPos=2000.0,  retestBand=True)
+
+def _macd_ok(mode, m, s_, i):
+    if mode == 'pine':
+        return m[i] > 0 and (m[i] - s_[i]) > 0
+    if mode == 'sourced':
+        return m[i] > 0
+    return m[i] >= s_[i]
+
 
 def run(sym, bars, cfg, trace=None):
     """bars: list of (ts,o,h,l,c,v) ints/floats, chronological.
@@ -246,7 +264,7 @@ def run(sym, bars, cfg, trace=None):
                     state='IDLE'; pull=None
                 elif pull['reds'] >= 1:
                     # armable on next green cross of red-bar high — place stop order now
-                    if in_win and (not cfg.entryTimeOK or not last_win_bar) and macd[i] >= sig[i]:
+                    if in_win and (not cfg.entryTimeOK or not last_win_bar) and _macd_ok(cfg.macdMode, macd, sig, i):
                         w = pull['push']['start']
                         pushbars = i - w
                         pushvol = sum(b[5] for b in bars[w:i+1-pull['reds']]) / max(1, pushbars-pull['reds']+1)
@@ -256,9 +274,13 @@ def run(sym, bars, cfg, trace=None):
                             stop = pull['plow'] - TICK
                             if atr[i] and (trigger-stop) < 0.3*atr[i]:
                                 stop = trigger - 1.5*atr[i]   # ATR-fallback
-                            arm = dict(trigger=trigger, stop=stop)
-                            armed_count += 1
-                            if last_win_bar: lastbar_arms += 1
+                            if cfg.maxStopPct is not None and trigger > 0 and \
+                                    (trigger - stop) / trigger * 100 > cfg.maxStopPct:
+                                pass          # riskGate: stop too wide to size
+                            else:
+                                arm = dict(trigger=trigger, stop=stop)
+                                armed_count += 1
+                                if last_win_bar: lastbar_arms += 1
                             if trace is not None:
                                 trace.append(dict(t=t, note='ARM', trigger=round(trigger,4), stop=round(stop,4)))
                     if trace is not None and arm is None and pull['reds'] >= 1:
@@ -269,7 +291,7 @@ def run(sym, bars, cfg, trace=None):
                         _trig = pull['redhigh'] + TICK
                         _stp = pull['plow'] - TICK
                         trace.append(dict(t=t, note='NOARM',
-                            in_win=in_win, macd_ok=bool(macd[i] >= sig[i]),
+                            in_win=in_win, macd_ok=bool(_macd_ok(cfg.macdMode, macd, sig, i)),
                             dip_vol_ratio=round(_vr, 2) if _vr else None,
                             stop_pct=round((_trig - _stp) / _trig * 100, 1) if _trig > 0 else None))
             elif h > pull['push']['hi']:
@@ -361,7 +383,22 @@ if __name__ == '__main__':
     print(f'{len(B)} symbols · {nbars} 1m bars')
     V82 = Cfg('V8.2-lateJoin', sameBarStop=True, entryTimeOK=True,
               risk=20.0, maxPos=2000.0, retestBand=True, lateJoin=True)
-    for cfg in (V75, V80, H1, H2, V81G, V82):
+    PINE = Cfg('pine macd>0+hist', sameBarStop=True, entryTimeOK=True,
+               risk=40.0, maxPos=2000.0, retestBand=True, macdMode='pine')
+    SRC = Cfg('sourced macd>0', sameBarStop=True, entryTimeOK=True,
+              risk=40.0, maxPos=2000.0, retestBand=True, macdMode='sourced')
+    PINE_NW = Cfg('pine no-window', sameBarStop=True, entryTimeOK=True,
+                  risk=40.0, maxPos=2000.0, retestBand=True, macdMode='pine',
+                  winStart=4*60, winEnd=20*60)
+    SRC_NW = Cfg('sourced no-window', sameBarStop=True, entryTimeOK=True,
+                 risk=40.0, maxPos=2000.0, retestBand=True, macdMode='sourced',
+                 winStart=4*60, winEnd=20*60)
+    caps = [('cap 3% (pine)', 3.0), ('cap 5% (their rpct5)', 5.0),
+            ('cap 8%', 8.0), ('sans cap', None)]
+    CAPCFG = [Cfg(n, sameBarStop=True, entryTimeOK=True, risk=40.0,
+                  maxPos=2000.0, retestBand=True, macdMode='pine', maxStopPct=c)
+              for n, c in caps]
+    for cfg in (PINE, SRC, PINE_NW, SRC_NW, *CAPCFG):
         res = [run(s, bars, cfg) for s, bars in B.items()]
         print(f'{cfg.name:15s}', agg(res))
     print()
