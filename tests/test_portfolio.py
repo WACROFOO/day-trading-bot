@@ -285,3 +285,39 @@ def test_drawdown_walkaway_persists_across_sessions():
     sim = portfolio.simulate(logs, keys, cfg)
     assert sim["days"].iloc[1]["locked"]
     assert "drawdown" in sim["days"].iloc[1]["lock_reason"]
+
+
+def test_account_walkaway_is_recorded_even_when_a_daily_limit_fires_first():
+    """Reviewer scenario. HWM 100,000; the day opens at 85,000 (already 15%
+    down) and losses take equity to 79,800 — 6.12% on the day AND 20.2% off
+    the high-water mark. The daily-loss rule used to return first, so §8's
+    account walkaway was never recorded and released the next morning.
+
+    A 20% account drawdown is always assembled out of days that trip the 6%
+    daily limit first, which made the walkaway close to unreachable."""
+    day = portfolio.DayState(date="d", start_equity=85_000.0, peak_equity=85_000.0)
+    cfg = portfolio.Config()
+    assert portfolio.account_walkaway(79_800.0, 100_000.0, cfg) != ""
+    locked, reason = portfolio.risk_check(day, 79_800.0, 100_000.0, cfg)
+    assert locked and "drawdown" in reason, \
+        "the account walkaway must outrank the daily latch, not queue behind it"
+
+
+def test_daily_limits_still_fire_when_the_account_is_healthy():
+    day = portfolio.DayState(date="d", start_equity=100_000.0, peak_equity=100_000.0)
+    cfg = portfolio.Config()
+    locked, reason = portfolio.risk_check(day, 93_000.0, 100_000.0, cfg)
+    assert locked and "max_daily_loss" in reason
+
+
+def test_walkaway_persists_when_a_daily_rule_fired_on_the_same_trade():
+    """End-to-end version: the lock must survive into the next session."""
+    rows = []
+    for day in ["2026-08-20", "2026-08-21"]:
+        bars = bars_for([5.00, 4.95, 4.85, 4.70], day)
+        rows.append((bars, take_row(day, "AAA", bars, 0, 5.00, 4.90, 5.20)))
+    logs, keys = build(rows)
+    cfg = portfolio.Config(starting_equity=1_000.0, drawdown_walkaway_pct=1.0,
+                           max_daily_loss_pct=0.5)      # daily rule fires too
+    sim = portfolio.simulate(logs, keys, cfg)
+    assert sim["days"].iloc[1]["locked"], "walkaway released overnight"

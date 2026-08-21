@@ -92,30 +92,56 @@ class DayState:
     lock_time: pd.Timestamp | None = None
 
 
-def risk_check(day: DayState, equity: float, hwm: float,
-                cfg: Config) -> tuple[bool, str]:
-    """§8 — evaluated after every closed trade. Returns (locked, reason)."""
+def account_walkaway(equity: float, hwm: float, cfg: Config) -> str:
+    """§8's 20% drawdown walkaway. ACCOUNT scope, evaluated independently.
+
+    This must not sit behind the four daily latches. A 20% account drawdown
+    is essentially always assembled out of days that trip the 6% daily loss
+    or green-to-red first, so chaining it behind them consumes the branch
+    and the walkaway never records — leaving §8's only account-scope limit
+    inert while the account is a fifth underwater.
+    """
+    if hwm <= 0:
+        return ""
+    drawdown = (hwm - equity) / hwm * 100.0
+    if drawdown >= cfg.drawdown_walkaway_pct:
+        return f"drawdown {drawdown:.1f}% from high-water mark"
+    return ""
+
+
+def daily_limits(day: DayState, equity: float, cfg: Config) -> str:
+    """§8's four DAILY latches. These release on the next session."""
     loss_pct = (day.start_equity - equity) / day.start_equity * 100.0
     if loss_pct >= cfg.max_daily_loss_pct:
-        return True, f"max_daily_loss {loss_pct:.2f}% >= {cfg.max_daily_loss_pct}%"
+        return f"max_daily_loss {loss_pct:.2f}% >= {cfg.max_daily_loss_pct}%"
 
     peak_gain = day.peak_equity - day.start_equity
     if peak_gain > 0:
         given_back = (day.peak_equity - equity) / peak_gain * 100.0
         if given_back >= cfg.giveback_pct:
-            return True, f"giveback {given_back:.0f}% of peak gain"
+            return f"giveback {given_back:.0f}% of peak gain"
 
     if cfg.green_to_red_stop and day.peak_equity > day.start_equity and equity < day.start_equity:
-        return True, "green_to_red"
+        return "green_to_red"
 
     if day.consecutive_losses >= cfg.consecutive_loss_stop:
-        return True, f"{day.consecutive_losses} consecutive losses"
+        return f"{day.consecutive_losses} consecutive losses"
 
-    drawdown = (hwm - equity) / hwm * 100.0 if hwm > 0 else 0.0
-    if drawdown >= cfg.drawdown_walkaway_pct:
-        return True, f"drawdown {drawdown:.1f}% from high-water mark"
+    return ""
 
-    return False, ""
+
+def risk_check(day: DayState, equity: float, hwm: float,
+               cfg: Config) -> tuple[bool, str]:
+    """§8 — evaluated after every closed trade. Returns (locked, reason).
+
+    The account walkaway is tested FIRST and separately, because it outranks
+    and outlives the daily latches.
+    """
+    walkaway = account_walkaway(equity, hwm, cfg)
+    if walkaway:
+        return True, walkaway
+    daily = daily_limits(day, equity, cfg)
+    return bool(daily), daily
 
 
 def _opportunity_cost(bars: pd.DataFrame, cursor: int, row, equity: float,
@@ -250,11 +276,15 @@ def simulate(logs: pd.DataFrame,
             curve.append({"timestamp": exit_time, "equity": equity,
                           "event": f"{row['symbol']} {out.exit_reason}"})
 
+            # The account walkaway is recorded whether or not a daily latch
+            # also fired — otherwise the daily rule consumes the branch and
+            # the walkaway silently releases overnight.
+            walkaway = account_walkaway(equity, hwm, cfg)
+            if walkaway:
+                account_locked = walkaway
             day.locked, day.lock_reason = risk_check(day, equity, hwm, cfg)
             if day.locked:
                 day.lock_time = exit_time
-                if "drawdown" in day.lock_reason:
-                    account_locked = day.lock_reason
 
         day.end_equity = equity
         days.append(day)

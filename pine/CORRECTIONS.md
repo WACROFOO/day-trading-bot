@@ -302,6 +302,94 @@ That difficulty is itself the result. The setup §3 describes is genuinely rare,
 and any backtest finding it often is finding something else.
 
 
+---
+
+# Fourth pass — Pine review
+
+Three lenses over the Pine source (runtime/arithmetic, repainting, spec
+fidelity) produced 16 candidates; 7 survived refutation. One of them was also
+live in the Python engine.
+
+## FIX-13 was unreachable — the account walkaway queued behind the daily latches · critical · §8 · **both engines**
+
+`accountLocked` was set only in the **last** branch of an `else if` chain, so
+any of the four daily latches firing first consumed the branch and the 20%
+drawdown walkaway never recorded. The Python `risk_check` had the identical
+shape via early `return`s.
+
+Reproduced exactly: high-water mark 100,000, the day opens at 85,000 (already
+15% down), losses take equity to 79,800.
+
+```
+daily loss   = 6.12%   (limit 6%)   -> fires first, chain exits
+acct drawdown = 20.20%  (limit 20%)  -> never evaluated
+account walkaway recorded? False
+```
+
+The account is a fifth underwater and trades on the next morning. And because
+a 20% account drawdown is *always* assembled out of days that trip the 6%
+daily loss or green-to-red first, this was not merely fragile — the walkaway
+was close to unreachable, leaving §8's only account-scope limit inert.
+
+The account walkaway is now evaluated **first and independently**, in both
+engines, because it is a different scope from the daily latches and outlives
+them.
+
+`portfolio.account_walkaway` / `portfolio.daily_limits` · Pine `[FIX-13]`
+
+## FIX-16 — §8 counted every partial scale-out as a completed trade · major · §7/§8
+
+`strategy.closedtrades` increments on **partial** exits, so the §6 50/25/25
+ladder booked three "trades" per position. One winner exhausted §7's 2-per-day
+budget while its runner was still open — delivering 0.67 trades/day against
+§7's 1–2 — and a green first scale reset the consecutive-loss counter even
+when the trade ended red, so §8's three-in-a-row stop could never latch on a
+scaled trade. Round trips are now detected from the position going flat.
+
+## FIX-17 — the §5 stop was not live on the candle the entry filled · major · §5
+
+`strategy.exit` was submitted only from inside `if inPos`, which first becomes
+true at the **close** of the fill bar — so no stop existed during the trigger
+candle, the most volatile candle of the trade. Meanwhile that same candle's
+high was allowed to ratchet the stop to breakeven. The entry candle's upside
+was priced and its downside ignored.
+
+The reviewer's walk-through: entry fills at 5.31, the bar trades down to 5.10
+through a 5.12 stop, recovers, and closes 5.34 — booked as a small winner
+instead of a −1R stop-out. The whole bracket is now submitted on the placement
+bar and is live from the instant the entry fills.
+
+## FIX-18 — `scale2Pct` was a dead input · major · §6
+
+The second rung hard-coded "50% of the remainder", which equals 25% of the
+original **only while `scale1Pct` is exactly 50**. `scale2Pct` was read
+nowhere. Setting `scale1Pct = 40` silently produced a 40/30/30 ladder; setting
+`scale2Pct = 30` changed nothing at all. The rungs are now `strategy.exit`
+orders whose `qty_percent` is a share of the entry quantity, so both inputs are
+read and the ladder is whatever they say.
+
+## FIX-19 — the rungs filled at the next bar's open · major · §6
+
+`strategy.close()` is a **market** order. A target touched intrabar was
+therefore executed at whatever the next bar opened at, so the realized R was
+never the R the §6 gate approved: a bar that spikes to 5.22 and closes 5.02
+"scaled at target" somewhere near 5.02. A profit target is a resting limit
+order and is now modelled as one.
+
+## FIX-20 — §1 was reduced to a price band · major · §1
+
+`priceOk` checked price alone, while §1 is explicit: *"applied before the chart
+is looked at. All must pass."* Day gain ≥ 10%, RVOL ≥ 5.0, cumulative volume
+≥ 500,000 and a rising rate of change are all computable from OHLCV and were
+simply absent — so the strategy would arm on a flat, barely-traded stock whose
+dip happened to land on a level. The comment naming only float and catalyst as
+non-computable implied the rest were handled.
+
+All four are now enforced, and `pillars_passed` is plotted to the data window
+so results can be split by it as §12.3 asks. It tops out at 3 of 5: float and
+catalyst genuinely need outside data and are still not evaluated.
+
+
 # Findings — not fixed, deliberately
 
 ## The §6 2:1 gate structurally rejects shallow pullbacks

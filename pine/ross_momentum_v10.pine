@@ -50,6 +50,9 @@ strategy("Ross Momentum V10", overlay = true,
 grpU = "§1 universe"
 priceMin      = input.float(2.00,  "Min price",              group = grpU)
 priceMax      = input.float(20.00, "Max price",              group = grpU)
+gainPctMin    = input.float(10.0,  "Min % gain on day",      group = grpU)
+rvolMin       = input.float(5.0,   "Min RVOL vs 50d avg",    group = grpU)
+volMinShare   = input.int(500000,  "Min cumulative volume",  group = grpU)
 
 grpS = "§2 session (exchange time)"
 entryWindow   = input.session("0935-1130", "Entry window",   group = grpS)
@@ -92,12 +95,39 @@ inEntryWindow = not na(time(timeframe.period, entryWindow))
 inPrime       = not na(time(timeframe.period, primeWindow))
 newDay        = ta.change(time("D")) != 0
 
-// ------------------------------------------------------- §1 price filter
-priceOk = close >= priceMin and close <= priceMax
-// NOTE: float <= 20M and the news catalyst (§1) are NOT computable on a chart.
-// They are the trader's manual pre-check. This script assumes the symbol
-// already passed them; it cannot verify that, and silently treating them as
-// satisfied is how a backtest flatters itself.
+// ----------------------------------------------------------- §1 universe
+// [FIX-20] §1 is "applied before the chart is looked at. All must pass" — it
+// is not just a price band. Four of the five pillars are computable from
+// OHLCV and were missing, so the strategy would arm on a flat, untraded stock
+// whose dip happened to land on a level. Only float and catalyst genuinely
+// need outside data.
+prevClose = request.security(syminfo.tickerid, "D", close[1],
+     lookahead = barmerge.lookahead_off)
+avgVol50  = request.security(syminfo.tickerid, "D", ta.sma(volume, 50)[1],
+     lookahead = barmerge.lookahead_off)
+
+var float dayVol = 0.0
+dayVol := newDay ? volume : dayVol + volume
+
+gainPct  = not na(prevClose) and prevClose > 0 ? (close - prevClose) / prevClose * 100.0 : na
+rvol     = not na(avgVol50) and avgVol50 > 0 ? dayVol / avgVol50 : na
+rocOk    = ta.change(close, 5) > 0                    // §1 rate_of_change, rising
+
+pillarPrice = close >= priceMin and close <= priceMax
+pillarGain  = not na(gainPct) and gainPct >= gainPctMin
+pillarRvol  = not na(rvol) and rvol >= rvolMin
+pillarVol   = dayVol >= volMinShare
+
+universeOk = pillarPrice and pillarGain and pillarRvol and pillarVol and rocOk
+
+// NOTE: two of §1's five pillars — float <= 20M and the news catalyst — are
+// NOT computable on a chart and are NOT evaluated here. They remain the
+// trader's manual pre-check, so `pillarsPassed` below tops out at 3 of 5 and
+// §1's min_pillars_to_trade = 5 can never be verified by this script alone.
+// Silently treating them as satisfied is how a backtest flatters itself.
+pillarsPassed = (pillarPrice ? 1 : 0) + (pillarRvol ? 1 : 0) + (rocOk ? 1 : 0)
+plot(pillarsPassed, "pillars_passed (of 3 computable)",
+     display = display.data_window)   // §12.3: split results by this
 
 // -------------------------------------------------- [FIX-1] pullback state
 var float hod           = na      // high of day, premarket included
@@ -236,9 +266,17 @@ dayStartEq := nz(dayStartEq, strategy.equity)
 dayPeakEq  := math.max(nz(dayPeakEq, strategy.equity), strategy.equity)
 hwm        := math.max(nz(hwm, strategy.equity), strategy.equity)
 
-// Re-evaluate §8 whenever a trade closes.
-if ta.change(strategy.closedtrades) > 0
-    lastProfit = strategy.closedtrades.profit(strategy.closedtrades - 1)
+// [FIX-16] §8 counts ROUND TRIPS. strategy.closedtrades increments on every
+// PARTIAL exit, so the §6 50/25/25 ladder books three "trades" per position:
+// one winner alone would exhaust §7's 2-per-day budget while the runner is
+// still open, and a green first scale would reset consecLoss even if the
+// trade ended red. Detect the position going flat instead.
+var float tradeStartEq = na
+if strategy.position_size != 0 and nz(strategy.position_size[1]) == 0
+    tradeStartEq := nz(strategy.equity[1], strategy.equity)
+
+if strategy.position_size == 0 and nz(strategy.position_size[1]) != 0
+    lastProfit = strategy.equity - nz(tradeStartEq, strategy.equity)
     dayTrades  := dayTrades + 1
     consecLoss := lastProfit > 0 ? 0 : consecLoss + 1
 
@@ -247,25 +285,33 @@ if ta.change(strategy.closedtrades) > 0
     givenBack  = peakGain > 0 ? (dayPeakEq - strategy.equity) / peakGain * 100.0 : 0.0
     ddPct      = (hwm - strategy.equity) / hwm * 100.0
 
-    if lossPct >= maxDayLossPct
-        locked := true
-        lockReason := "max daily loss"
-    else if peakGain > 0 and givenBack >= givebackPct
-        locked := true
-        lockReason := "giveback of peak gain"
-    else if dayPeakEq > dayStartEq and strategy.equity < dayStartEq
-        locked := true
-        lockReason := "green to red"
-    else if consecLoss >= consecLossMax
-        locked := true
-        lockReason := "consecutive losses"
-    else if ddPct >= ddWalkawayPct
-        locked := true
-        lockReason := "drawdown walkaway"
+    // [FIX-13, corrected] The account walkaway is a DIFFERENT SCOPE from the
+    // four daily latches and must be evaluated independently. Chained behind
+    // them, the 6% daily loss -- which is how a 20% account drawdown is
+    // always assembled -- consumed the branch and the walkaway released
+    // overnight, leaving §8's only account-scope limit inert.
+    if ddPct >= ddWalkawayPct
         accountLocked := true
         accountReason := "drawdown walkaway"
+        locked        := true
+        lockReason    := "drawdown walkaway"
 
-canTrade = not locked and dayTrades < maxTradesDay and inEntryWindow and priceOk
+    // The four DAILY latches. These release on the next session.
+    if not locked
+        if lossPct >= maxDayLossPct
+            locked := true
+            lockReason := "max daily loss"
+        else if peakGain > 0 and givenBack >= givebackPct
+            locked := true
+            lockReason := "giveback of peak gain"
+        else if dayPeakEq > dayStartEq and strategy.equity < dayStartEq
+            locked := true
+            lockReason := "green to red"
+        else if consecLoss >= consecLossMax
+            locked := true
+            lockReason := "consecutive losses"
+
+canTrade = not locked and dayTrades < maxTradesDay and inEntryWindow and universeOk
 
 // ------------------------------------------------------------ §3 gate
 // Evaluated while the dip is armed and BEFORE the break — this is the
@@ -319,20 +365,55 @@ qty        = math.max(0, math.min(math.min(qtyByRisk, qtyByCash), qtyByTape))
 // on a later bar, by which time entryPrice, stopPrice and riskPerShare have
 // been recomputed off that bar -- managing the position with those values
 // would use a stop the trade was never sized against.
-var float pendStop   = na
-var float pendTarget = na
-var float pendRisk   = na
+//
+// [FIX-17] The whole §5/§6 bracket is submitted ON THE PLACEMENT BAR, so it is
+// live from the instant the entry fills. Sending the stop only from `if inPos`
+// meant it was first submitted at the CLOSE of the fill bar and not active
+// until the bar after: the trigger candle -- the most volatile candle of the
+// trade -- ran unprotected, while its high was still allowed to ratchet the
+// stop to breakeven. That priced the entry candle's upside and ignored its
+// downside.
+//
+// [FIX-18/19] The rungs are resting LIMIT orders sized from the inputs, not
+// strategy.close() market orders. strategy.close() fills at the next bar's
+// open, so a target touched intrabar was executed at an unrelated price a
+// minute later -- the realized R was never the R the §6 gate approved. And
+// the old second rung hard-coded "50% of the remainder", which is only 25% of
+// the original while scale1Pct happens to be exactly 50; scale2Pct was read
+// nowhere and the ladder silently stopped being 50/25/25 off the defaults.
+var float pendStop    = na
+var float pendTarget  = na
+var float pendTarget2 = na
+var float pendRisk    = na
+var float entryQty    = na
+
+// strategy.exit's qty_percent is a share of the ENTRY quantity, so scale1Pct
+// and scale2Pct give 50/25/25 of the original directly -- no remainder
+// arithmetic, and both inputs are actually read.
 
 if canTrade and setupValid and qty > 0 and strategy.position_size == 0
-    pendStop   := stopPrice
-    pendTarget := target1
-    pendRisk   := riskPerShare
+    pendStop    := stopPrice
+    pendTarget  := target1
+    pendRisk    := riskPerShare
+    pendTarget2 := math.max(target1 + riskPerShare, entryPrice + 2 * riskPerShare)
+    entryQty    := qty
     strategy.entry("L", strategy.long, qty = qty, stop = entryPrice,
          comment = "pb" + str.tostring(liveIndex))
+    // §6 ladder as resting brackets: 50% at target_1, 25% at target_2, 25%
+    // trailing on the §5 stop. All three share the stop, so any of them can
+    // take the position out at the pullback low.
+    strategy.exit("x1", from_entry = "L", qty_percent = scale1Pct,
+         stop = stopPrice, limit = target1,   comment_loss = "stop")
+    strategy.exit("x2", from_entry = "L", qty_percent = scale2Pct,
+         stop = stopPrice, limit = pendTarget2, comment_loss = "stop")
+    strategy.exit("x3", from_entry = "L", stop = stopPrice, comment_loss = "stop")
 
-// Cancel the resting order the moment the setup stops being valid.
+// Cancel every resting order the moment the setup stops being valid.
 if strategy.position_size == 0 and (not setupValid or not canTrade)
     strategy.cancel("L")
+    strategy.cancel("x1")
+    strategy.cancel("x2")
+    strategy.cancel("x3")
 
 // --------------------------------------------------------------- §6 exits
 var float posStop    = na
@@ -340,21 +421,36 @@ var float posTarget  = na
 var float posTarget2 = na
 var float posRisk    = na
 var bool  scaled1    = false
-var bool  scaled2    = false
 
-if strategy.position_size > 0 and strategy.position_size[1] == 0
+if strategy.position_size > 0 and nz(strategy.position_size[1]) == 0
     // use the LATCHED terms, not this bar's recomputed ones [FIX-14]
     posStop    := pendStop
     posRisk    := pendRisk
     posTarget  := pendTarget
-    posTarget2 := math.max(pendTarget + pendRisk,
-                           strategy.position_avg_price + 2 * pendRisk)
+    posTarget2 := pendTarget2
     scaled1    := false
-    scaled2    := false
 
 inPos = strategy.position_size > 0
 
-// §6 hard exits — any one invalidates the thesis.
+// §5 breakeven, both arms. The first rung FILLING is what counts, not the
+// price merely being touched, so it is detected from the position shrinking.
+if inPos and not scaled1 and not na(entryQty) and strategy.position_size < entryQty
+    scaled1 := true
+    posStop := math.max(nz(posStop, pendStop), strategy.position_avg_price)
+
+// §5's other arm: +$0.10 in hand, before any scale.
+if inPos and not scaled1 and high >= strategy.position_avg_price + 0.10
+    posStop := math.max(nz(posStop, pendStop), strategy.position_avg_price)
+
+// Re-issue the surviving rungs whenever the stop ratchets. Same IDs, so these
+// modify the resting orders rather than adding new ones.
+if inPos
+    strategy.exit("x2", from_entry = "L", qty_percent = scale2Pct,
+         stop = posStop, limit = posTarget2, comment_loss = "stop")
+    strategy.exit("x3", from_entry = "L", stop = posStop, comment_loss = "stop")
+
+// §6 hard exits — any one invalidates the thesis. These are genuinely market
+// exits (a signal, not a price level), so strategy.close is correct here.
 exitNewLow  = inPos and low < low[1]
 exitMacd    = inPos and macdHist < 0
 exitVwap    = inPos and close < vwapV
@@ -367,29 +463,10 @@ upperWick   = high - math.max(close, open)
 barRange    = high - low
 exitTail    = inPos and barRange > 0 and upperWick > 2 * bodySize and
               upperWick > 0.5 * barRange                       // topping tail
-rng1        = high - low
 exitStall   = inPos and close > open and close[1] > open[1] and close[2] > open[2] and
-              rng1 < (high[1] - low[1]) and (high[1] - low[1]) < (high[2] - low[2])
+              barRange < (high[1] - low[1]) and (high[1] - low[1]) < (high[2] - low[2])
 
 hardExit    = exitNewLow or exitMacd or exitVwap or exitHeavy or exitTail or exitStall
-
-// §6 ladder: 50% at target 1, 25% at target 2, 25% runs. [FIX-11]
-if inPos and not scaled1 and high >= posTarget
-    strategy.close("L", qty_percent = scale1Pct, comment = "scale target1")
-    scaled1 := true
-    posStop := strategy.position_avg_price          // §5 breakeven after scale
-
-if inPos and scaled1 and not scaled2 and high >= posTarget2
-    // 25 of the original position is 50 of what is left after the first scale
-    strategy.close("L", qty_percent = 50, comment = "scale target2")
-    scaled2 := true
-
-// §5's other breakeven arm: +$0.10 in hand, before any scale.
-if inPos and not scaled1 and high >= strategy.position_avg_price + 0.10
-    posStop := math.max(nz(posStop, stopPrice), strategy.position_avg_price)
-
-if inPos
-    strategy.exit("stop", from_entry = "L", stop = posStop)
 
 if hardExit
     reason = exitNewLow ? "new low" : exitMacd ? "macd<0" : exitVwap ? "vwap break" :
@@ -415,7 +492,7 @@ plotshape(setupValid and canTrade and strategy.position_size == 0,
      color = color.new(color.green, 0), size = size.tiny)
 
 // --------------------------------------------------------------- table
-var table hud = table.new(position.top_right, 2, 8, border_width = 1)
+var table hud = table.new(position.top_right, 2, 9, border_width = 1)
 if barstate.islast
     table.cell(hud, 0, 0, "V10 state",  bgcolor = color.new(color.gray, 70))
     table.cell(hud, 1, 0, locked ? "LOCKED: " + lockReason : "active",
@@ -432,3 +509,7 @@ if barstate.islast
          "/" + str.tostring(qtyByTape))
     table.cell(hud, 0, 6, "trades today"), table.cell(hud, 1, 6, str.tostring(dayTrades))
     table.cell(hud, 0, 7, "consec losses"), table.cell(hud, 1, 7, str.tostring(consecLoss))
+    table.cell(hud, 0, 8, "§1 gain/rvol")
+    table.cell(hud, 1, 8, (na(gainPct) ? "-" : str.tostring(gainPct, "#.#") + "%") + " / " +
+         (na(rvol) ? "-" : str.tostring(rvol, "#.#") + "x"),
+         bgcolor = universeOk ? color.new(color.green, 70) : color.new(color.red, 70))
