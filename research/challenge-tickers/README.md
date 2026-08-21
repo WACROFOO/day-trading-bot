@@ -127,3 +127,93 @@ is the metadata behind the table above and ships in this folder.
 
 Paper only. This is a labelled list of what he talked about after the
 close, useful as a calibration set — not a watchlist and not advice.
+
+---
+
+# Tous les tickers du corpus, datés par leur megaday
+
+```
+Reproduire : python3 scripts/corpus_tickers.py --min-files 2 --min-range 30 \
+                 --out research/challenge-tickers/corpus-megadays.csv
+SOURCE · les QUATRE registres, pas seulement les recaps :
+         transcripts (258) + summaries (260) + streams (290) + recaps (69)
+         = 873 fichiers, 1 711 tokens majuscules, 665 candidats retenus
+         (cités dans >= 2 fichiers distincts).
+DATE · le megaday n'est PAS la date de la vidéo. C'est la séance où le
+       titre a fait son plus grand range intraday, mesurée sur les barres
+       journalières. Un token inventé par les sous-titres n'a pas de
+       megaday et disparaît : c'est le filtre.
+RÉSULTAT · 250 tickers avec un megaday >= 30 % de range.
+```
+
+| année du megaday | tickers |
+|---|---|
+| 2021 | 12 |
+| 2022 | 28 |
+| 2023 | 26 |
+| 2024 | 60 |
+| 2025 | 61 |
+| 2026 | 63 |
+
+Registres où ils sont cités : streams 123, transcripts 120, summaries 104, recaps 90.
+
+## Les 40 megadays les plus récents (depuis juin 2026)
+
+| megaday | ticker | range | var. clôture | volume | fichiers |
+|---|---|---|---|---|---|
+| 2026-06-01 | **NXTC** | 146% | -45.5% | 922,500 | 2 |
+| 2026-06-02 | **HKIT** | 195% | -90.6% | 964,892 | 2 |
+| 2026-06-04 | **VERU** | 247% | 88.0% | 92,865,600 | 2 |
+| 2026-06-08 | **TDIC** | 260% | 123.7% | 22,877,648 | 5 |
+| 2026-06-09 | **CCTG** | 276% | 271.6% | 119,339,800 | 4 |
+| 2026-06-09 | **AZI** | 317% | 63.7% | 190,648,400 | 2 |
+| 2026-06-10 | **DSY** | 211% | 291.3% | 113,587,700 | 6 |
+| 2026-06-12 | **CUPR** | 156% | 64.7% | 83,262,200 | 3 |
+| 2026-06-15 | **PAVS** | 206% | -8.7% | 6,713,637 | 3 |
+| 2026-06-16 | **GDC** | 359% | -73.3% | 3,201,829 | 5 |
+| 2026-06-17 | **ICCM** | 165% | 200.5% | 152,922,500 | 4 |
+| 2026-06-17 | **CLWT** | 74% | 30.8% | 78,755,100 | 2 |
+| 2026-06-24 | **PLSM** | 110% | 93.3% | 58,325,600 | 7 |
+| 2026-06-24 | **FRTT** | 250% | -28.2% | 78,866,300 | 4 |
+| 2026-06-24 | **RAM** | 52% | % | 14,248,800 | 3 |
+| 2026-06-25 | **ROC** | 38% | 14.8% | 202,000 | 3 |
+| 2026-06-30 | **CELZ** | 244% | 79.0% | 188,686,100 | 3 |
+| 2026-06-30 | **SVRE** | 192% | -2.9% | 27,354,900 | 2 |
+| 2026-06-30 | **ADTX** | 200% | 200.0% | 204,136,200 | 2 |
+| 2026-07-01 | **JEM** | 300% | -19.1% | 6,465,533 | 3 |
+| 2026-07-02 | **CLRO** | 208% | 101.2% | 87,174,400 | 7 |
+| 2026-07-14 | **LGHL** | 176% | 10.7% | 33,435,900 | 3 |
+| 2026-07-20 | **BIYA** | 240% | -15.2% | 75,620,900 | 6 |
+| 2026-07-21 | **OMH** | 394% | 222.4% | 304,781,400 | 6 |
+| 2026-07-21 | **VIVK** | 287% | 49.1% | 141,350,600 | 2 |
+| 2026-07-22 | **LABT** | 128% | 83.3% | 79,569,700 | 2 |
+| 2026-07-22 | **ADVB** | 132% | 73.0% | 29,586,600 | 2 |
+| 2026-07-24 | **SXTC** | 400% | -80.8% | 324,050,300 | 2 |
+| 2026-07-27 | **SK** | 34% | -14.9% | 758,300 | 3 |
+| 2026-08-03 | **GV** | 85% | -20.0% | 204,700 | 3 |
+| 2026-08-04 | **AMIX** | 371% | 434.2% | 120,033,100 | 3 |
+| 2026-08-05 | **ZYBT** | 240% | 84.4% | 71,604,500 | 3 |
+| 2026-08-21 | **SUGP** | 279% | -42.3% | 39,657,361 | 3 |
+
+Liste complète : `corpus-megadays.csv` — ticker, megaday, range %, variation
+de clôture, volume, nombre de fichiers du corpus qui le citent, et dans
+quels registres.
+
+## Ce que ça ne dit pas
+
+- **« cité dans le corpus » n'est pas « il l'a tradé ».** Les registres
+  mélangent trades pris, noms de watch-list et exemples pédagogiques. La
+  colonne `registers` dit de quel type de mention il s'agit : `recaps` =
+  il en a parlé après la séance, `streams` = décision en direct,
+  `transcripts`/`summaries` = matériel d'enseignement.
+- **Le megaday peut être postérieur à la vidéo.** Un titre cité en 2022
+  peut avoir explosé en 2025 ; la date donnée est celle du plus gros
+  range, pas celle de la mention.
+- **Les prints aberrants sont filtrés, pas corrigés.** Les barres dont le
+  plus bas est sous 25 % de la clôture sont rejetées : sur un reverse
+  split Yahoo sert des prints comme CRKN 2026-08-13 bas $0,0002 /
+  clôture $0,0003, soit un « range » de 49 900 % qui n'a jamais eu lieu
+  (règle 6 du CLAUDE.md). Le range est aussi plafonné à 400 %.
+- **Aucune vérification du flottant, du catalyseur ou des halts** ici.
+
+Paper only.
