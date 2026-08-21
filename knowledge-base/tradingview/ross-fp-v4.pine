@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.11 (paper only)", shorttitle="ROSS FP V9.11", overlay=true,
+strategy("ROSS First Pullback Strategy V9.12 (paper only)", shorttitle="ROSS FP V9.12", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -218,6 +218,12 @@ strategy("ROSS First Pullback Strategy V9.11 (paper only)", shorttitle="ROSS FP 
 //      negative number. BOUGHT <price> / SOLD <price> + $ + % + R now
 //      say the result in words, one label per side, share count absent.
 //      Turn TV's off: Settings -> Style -> uncheck "Trades on chart".
+// V9.12 (operator): the 07:00-11:30 HARD WINDOW IS OFF BY DEFAULT. The
+//      script now arms whenever the pattern is valid, at any hour. The
+//      input remains — switching it on restores the previous behaviour
+//      and re-enables the ghost layer. Flatten-at-cutoff and flatten-at-
+//      day-end are unchanged: this drops the entry window, not the
+//      no-overnight rule. Evidence on both sides is cited at the input.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -292,7 +298,20 @@ gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // a backtest containing them tests a strategy nobody can execute. The
 // verdict still PRINTS at every moment — only ARMING is gated. Flip this
 // input off to restore V4.4 behaviour knowingly.
-useSessionWindow     = input.bool(true, "HARD-gate: only arm inside 07:00-11:30 ET", group=gSession)
+// V9.12 (operator): the 07:00-11:30 window is OFF by default — the script
+// arms whenever the pattern is valid, all session. Evidence both ways, so
+// the switch stays: FOR dropping it, his own longest live session ran
+// 12:00-16:00 and produced ~$65k of ~$78k, and the real rule reads as
+// conditional — midday is dead UNLESS a monster is live
+// (research/momentum-replication/reports/2026-08-ispo-stream.md).
+// AGAINST, measured here: the afternoon setups this now takes were 5W/26L,
+// -9.47R hypothetical over 11 days
+// (research/momentum-replication/reports/2026-08-pine-v8-benchmark.md).
+// Turning it back on restores the old behaviour exactly; the ghost layer
+// (SEEN markers, plan without an order) only exists while it is ON.
+// Day-trading discipline does NOT depend on this input: positions still
+// flatten at the daily cutoff and at the day's end.
+useSessionWindow     = input.bool(false, "HARD-gate: only arm inside 07:00-11:30 ET [default OFF]", group=gSession)
 sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
 allowPremarketEmulatorFills = input.bool(false, "Allow optimistic premarket stop/market fills [EXPERIMENTAL]", group=gSession,
      tooltip="Default OFF: the documented extended-hours venue is limit-orders-only, so simulated stop/market fills there are optimistic fiction. Pre-market stays visible for study; orders arm only in RTH unless you explicitly accept invalid fill modelling.")
@@ -514,7 +533,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.11"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.12"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -2609,16 +2628,22 @@ if barstate.islast
 
     // ── CLOCK (V9 defect 1): market phase chip + THIS strategy's window.
     string mktPhase = minuteET < 570 ? "PRE-MKT" : minuteET < 960 ? "OPEN" : "AFTER-HRS"
-    bool clockOK = useSessionWindow and inSession and entryTimeOK
+    // V9.12: with the gate off by default, "off" is no longer an alarm —
+    // the row reports the phase and where we are versus the prime window,
+    // and only flags the window when it is actually gating.
+    bool inPrime = minuteET >= 7 * 60 and minuteET < 11 * 60 + 30
+    bool clockOK = useSessionWindow ? (inSession and entryTimeOK) : true
     f_label(4, "CLOCK", clockOK)
     f_chip(1, 4, mktPhase, minuteET >= 570 and minuteET < 960 ? 1 : -1)
     string winText = not useSessionWindow ?
-         "⚠ WINDOW GATE OFF — arms at ANY hour (reset chart inputs)" :
+         (inPrime ? "prime 0700-1130 ET · no window gate — arms any hour" :
+              "outside prime 0700-1130 ET · no window gate — arms anyway") :
          inSession ? (entryTimeOK ? "window " + sessionWindow + " ET · open" :
               "window closing — no new orders this bar") :
          "window " + sessionWindow + " ET · OVER — watch only"
     table.cell(dash, 2, 4, winText,
-         text_color=not useSessionWindow ? color.red : clockOK ? CHIP_OK : CHIP_NO,
+         text_color=not useSessionWindow ? (inPrime ? CHIP_OK : color.silver) :
+              clockOK ? CHIP_OK : CHIP_NO,
          text_size=DSZ, text_halign=text.align_left)
 
     // ── SETUP: is THIS dip tradeable. TREND: is the tape behind it.
