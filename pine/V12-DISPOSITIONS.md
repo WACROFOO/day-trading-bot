@@ -4,7 +4,8 @@
 |---|---|
 | V11 baseline as audited | `70c4db21e14aff9092889eff59e8d1aa25e28555ebe7e2133db01a6d3d0bba31` |
 | Codex candidate (V11.1) | `fc7d3e78fc0618cb1972d23b5c74d6b243a1dbfa9d306e3074e22bed0ec1419a` |
-| **V12 (this file)** | `7e89210aec0b5ee00c7267ae337bfc40f9eab87e5ee94170d9c995b3ab19cfba` |
+| V12 (compiled by operator) | `7e89210aec0b5ee00c7267ae337bfc40f9eab87e5ee94170d9c995b3ab19cfba` |
+| **V12.1 (this file)** | `a2fffe5db395a482662f1dfa95c47834213b089673893ee727f2c8897266eb1a` |
 
 The audited baseline hash resolves to my commit `beaaa02` **with the trailing
 newline stripped** — verified by reproducing the hash. So Codex audited the
@@ -12,12 +13,36 @@ post-CE10156 V11, and its line references map to my file.
 
 ## Release status
 
-`COMPILE FAILED`
+`LIFECYCLE TESTS FAILED`
 
-Not because a compile failed — because **none has been attempted**. This
-environment has no TradingView. Under the audit's own rule that is the only
-status available, and none of `accurate`, `validated`, `production-ready` or
-`profitable` is claimed anywhere.
+**C1 is now partially satisfied: V12 compiled and ran.** Operator screenshot
+shows `ROSS FP V12` live on USDE, 1-minute, dashboard rendering, verdict
+`REJECTED / NO`, plan and ladder populated. That clears `COMPILE FAILED`.
+
+It cannot advance further: A01–A38 have not been run and section 8 has no
+data. `LIFECYCLE TESTS FAILED` is the honest status — the lifecycle tests
+have not passed because they have not been run.
+
+Still not claimed anywhere: `accurate`, `validated`, `production-ready`,
+`profitable`.
+
+### V12.1 display revision (operator report on the running build)
+
+Six defects, all display-layer, all reported from the live V12 chart:
+
+| # | Reported | Change |
+|---|---|---|
+| 1 | grid eats the chart | `dashSize` defaults `tiny`; new `dashCompact` retires the standing LIMITS caveat row, which reappears whenever the ambiguity count is non-zero |
+| 2 | verdict far too long | one verb + short reason; live/playbook/room provenance clauses demoted behind `dashFull` |
+| 3 | markers unusable at zoom, far above/below candles | `location.abovebar/belowbar` offset by a fraction of the **visible price range**, so the gap grows as you zoom out. All twelve now `location.absolute` pinned to a price, with an ATR-fraction clearance — ATR is in price units, so it holds at any zoom |
+| 4 | want dollar P&L on the chart | live label on the last bar of an open position: net $, %, share count, green/red. One label moved per bar, not one per bar — `max_labels_count` is finite |
+| 5 | SIZE "63% of $2000" meaningless | SIZE is now shares + dollars only; modeled risk, budget and binding constraint moved to `dashFull` |
+| 6 | PLAN rungs unnamed | `T1 7.20 (88) · T2 7.26 (44) · T3 7.31 (44)` |
+
+Item 3 is the second time this bug was fixed. The V12 fix corrected the
+`BOUGHT`/`SOLD` **labels** (`yloc`) but left the twelve `plotshape` **markers**
+on bar-relative locations. Same defect class, different API, and I did not
+sweep for the second one — the same failure that produced C2.
 
 ## Method
 

@@ -669,7 +669,14 @@ showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisu
 showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, ghost SEEN, S/R fan, EMA/VWAP", group=gVisual)
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
 // V4.3: readable by default; shrink only if the user asks the input to
-dashSize             = input.string("small", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
+// V12.1 (operator: "the grid takes too much space in the graph"). The panel
+// is a heads-up display over a 1-minute chart, not a report: it defaults to
+// the tightest readable size, and the LIMITS row — a standing caveat, not a
+// live decision — now rides with the full dashboard rather than always
+// occupying a row. Both are inputs; nothing is removed, only stood down.
+dashSize             = input.string("tiny", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
+dashCompact          = input.bool(true, "Compact panel (hide standing caveat row)", group=gVisual,
+     tooltip="The LIMITS row states permanent modelling caveats. They do not change bar to bar, so by default they live in the header and the full dashboard instead of holding a row on every chart.")
 // V4.7: live evaluation on the FORMING bar, for what you READ. Order
 // logic stays on confirmed bars — that separation is what stops the state
 // machine flip-flopping inside a candle and keeps the backtest honest.
@@ -1559,7 +1566,7 @@ if confirmedPass and (newDayBar or lastWindowBar or isLastBarOfDay or
         stateStartBar := bar_index
         scanAfterBar := bar_index
         statusReason := newDayBar ? "New day — starting fresh" :
-             "Boundary ahead — order removed before it could fill off-window"
+             "boundary ahead"
     // V7.5 (live CDTG report): a ghost plan captured pre-market survived
     // into the afternoon and displayed "signal 4.08" with price at 6.50.
     // Ghosts die at every boundary and age out after 10 bars.
@@ -2720,24 +2727,31 @@ string v11LockLine = useRiskGovernor and v11Locked ?
      useRiskGovernor and v11DayTrades >= maxTradesPerDay ?
           "NO — §8 daily trade cap reached (" + str.tostring(v11DayTrades) + ")" : ""
 
+// V12.1 (operator: "the verdict is way longer than it should be"). One verb
+// and a short reason — the operator needs to read it in a glance mid-session,
+// not parse a sentence. The provenance clauses (live-vs-confirmed, playbook
+// warning, room warning) are diagnostics: they move behind the full-dashboard
+// toggle instead of riding on every verdict. Nothing is deleted, only demoted.
+string verdictTail = dashFull ? liveTag : ""
+string roomShort = dashFull ? roomWarn : ""
+
 actionText =
-     (not isOneMinute ? "USE 1-MINUTE CHART" :
-     not supportedMarket ? "NO — unsupported symbol (US-listed stocks/ADRs, 1-min only)" :
+     (not isOneMinute ? "1-MIN CHART ONLY" :
+     not supportedMarket ? "NO · unsupported symbol" :
      v11LockLine != "" and displayState != LONG ? v11LockLine :
-     displayState == LONG ? "MANAGE — " + f_n(mfeR, "#.00") + "R so far · stop " +
+     displayState == LONG ? "MANAGE · " + f_n(mfeR, "#.0") + "R · stop " +
           f_px(t1Filled ? tradeEntryPrice : structuralStop) :
-     displayState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + " — order working" + shortLH :
+     displayState == ARMED ? roomShort + "BUY >" + f_px(triggerPrice) + " · working" :
      displayState == PULLBACK ? (hardGatesOK ?
-          roomWarn + "BUY >" + f_px(candidateTrigger) + " — arms at bar close" + shortLH :
-          onlyClockBlocks ?
-               roomWarn + "WAIT — window shut, pattern valid (no order)" + shortLH :
-               roomWarn + "WAIT — " + gateReason + shortLH) :
-     displayState == IMPULSE ? "WAIT — move up live, dip not started" :
+          roomShort + "BUY >" + f_px(candidateTrigger) + " · at close" :
+          onlyClockBlocks ? "WAIT · window shut" :
+               "WAIT · " + gateReason) :
+     displayState == IMPULSE ? "WAIT · dip not started" :
      displayState == INVALID ? (cancelledPending ?
-          "NO — stop hit before entry, order removed" :
-          "NO — " + str.replace(statusReason, "Rejected — ", "")) :
-     displayState == DONE ? "NO — trade over, log it" :
-     "WAIT — " + chartVerdict) + liveTag
+          "NO · stopped before entry" :
+          "NO · " + str.replace(statusReason, "Rejected — ", "")) :
+     displayState == DONE ? "NO · trade over" :
+     "WAIT · " + chartVerdict) + verdictTail
 
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = displayState == PULLBACK or displayState == ARMED or displayState == LONG
@@ -3042,19 +3056,64 @@ sm = showMarkers and not bigMarkers
 lg = showMarkers and bigMarkers
 // V5: retest triggers get their own glyph so the two setups are separable on
 // the chart and, later, in the trade log.
-plotshape(sm and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.tiny, text="SET")
-plotshape(lg and eventArmed and setupKind == KIND_RETEST, title="Trigger set (retest, large)", style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.normal, text="SET")
-plotshape(sm and eventArmed and setupKind != KIND_RETEST, title="Trigger set", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.tiny, text="SET")
-plotshape(sm and eventLong, title="Entry filled", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.tiny, text="BUY")
-plotshape(sm and eventInvalid, title="Setup rejected", style=shape.xcross, location=location.abovebar, color=color.red, size=size.tiny, text="NO")
-plotshape(sm and eventBailout, title="Bailout", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.tiny, text="EXIT")
-plotshape(lg and eventArmed and setupKind != KIND_RETEST, title="Trigger set (large)", style=shape.circle, location=location.belowbar, color=color.yellow, size=size.normal, text="SET")
-plotshape(lg and eventLong, title="Entry filled (large)", style=shape.labelup, location=location.belowbar, color=color.lime, textcolor=color.black, size=size.normal, text="BUY")
-plotshape(lg and eventInvalid, title="Setup rejected (large)", style=shape.xcross, location=location.abovebar, color=color.red, size=size.normal, text="NO")
-plotshape(lg and eventBailout, title="Bailout (large)", style=shape.labeldown, location=location.abovebar, color=color.orange, textcolor=color.black, size=size.normal, text="EXIT")
-// V7.3: the ghost — pattern seen, clock withheld the order.
-plotshape(sm and showDiagnostics and eventGhost, title="Pattern seen, no order", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.tiny, text="SEEN")
-plotshape(lg and showDiagnostics and eventGhost, title="Pattern seen, no order (large)", style=shape.circle, location=location.belowbar, color=color.new(color.gray, 30), size=size.normal, text="SEEN")
+// V12.1 (operator: markers "don't sync with the graph and remain unusable when
+// zooming the price in or out, way above or below the candles").
+//
+// location.abovebar / location.belowbar offset the shape by a fraction of the
+// VISIBLE PRICE RANGE, so the gap between marker and candle grows every time
+// the price scale is zoomed out — at a wide zoom the marker ends up nowhere
+// near the bar it describes. location.absolute pins the shape to a price, and
+// the small clearance below is a fraction of ATR, which is denominated in
+// price and therefore holds at any zoom.
+markOffset = nz(atr, 0.0) * 0.15
+mkArmed    = not na(triggerPrice) ? triggerPrice - markOffset : low - markOffset
+mkEntry    = not na(tradeEntryPrice) ? tradeEntryPrice : close
+mkReject   = high + markOffset
+mkExit     = high + markOffset
+mkGhost    = not na(ghostTrig) ? ghostTrig - markOffset : low - markOffset
+
+plotshape(sm and eventArmed and setupKind == KIND_RETEST ? mkArmed : na, title="Trigger set (retest)", style=shape.diamond, location=location.absolute, color=color.aqua, size=size.tiny, text="SET")
+plotshape(lg and eventArmed and setupKind == KIND_RETEST ? mkArmed : na, title="Trigger set (retest, large)", style=shape.diamond, location=location.absolute, color=color.aqua, size=size.normal, text="SET")
+plotshape(sm and eventArmed and setupKind != KIND_RETEST ? mkArmed : na, title="Trigger set", style=shape.circle, location=location.absolute, color=color.yellow, size=size.tiny, text="SET")
+plotshape(sm and eventLong ? mkEntry : na, title="Entry filled", style=shape.labelup, location=location.absolute, color=color.lime, textcolor=color.black, size=size.tiny, text="BUY")
+plotshape(sm and eventInvalid ? mkReject : na, title="Setup rejected", style=shape.xcross, location=location.absolute, color=color.red, size=size.tiny, text="NO")
+plotshape(sm and eventBailout ? mkExit : na, title="Bailout", style=shape.labeldown, location=location.absolute, color=color.orange, textcolor=color.black, size=size.tiny, text="EXIT")
+plotshape(lg and eventArmed and setupKind != KIND_RETEST ? mkArmed : na, title="Trigger set (large)", style=shape.circle, location=location.absolute, color=color.yellow, size=size.normal, text="SET")
+plotshape(lg and eventLong ? mkEntry : na, title="Entry filled (large)", style=shape.labelup, location=location.absolute, color=color.lime, textcolor=color.black, size=size.normal, text="BUY")
+plotshape(lg and eventInvalid ? mkReject : na, title="Setup rejected (large)", style=shape.xcross, location=location.absolute, color=color.red, size=size.normal, text="NO")
+plotshape(lg and eventBailout ? mkExit : na, title="Bailout (large)", style=shape.labeldown, location=location.absolute, color=color.orange, textcolor=color.black, size=size.normal, text="EXIT")
+plotshape(sm and showDiagnostics and eventGhost ? mkGhost : na, title="Pattern seen, no order", style=shape.circle, location=location.absolute, color=color.new(color.gray, 30), size=size.tiny, text="SEEN")
+plotshape(lg and showDiagnostics and eventGhost ? mkGhost : na, title="Pattern seen, no order (large)", style=shape.circle, location=location.absolute, color=color.new(color.gray, 30), size=size.normal, text="SEEN")
+
+// ── V12.1 (operator: "in case of a trade I need to see directly in the graph
+// the profit/loss in dollars so I can know if it's a winning trade").
+//
+// A live P&L tag riding the last bar of an open position, in dollars, green
+// when ahead and red when behind. strategy.openprofit is already net of the
+// modelled commission, so this is the same number the SOLD label prints when
+// the position closes — not a gross figure that shrinks at the exit.
+//
+// One label, moved each bar rather than one per bar: labels are a capped
+// resource and a per-bar trail would exhaust max_labels_count and start
+// dropping the oldest markers.
+var label livePnlLab = na
+if showTradeResult and strategy.position_size > 0 and barstate.islast
+    float openPnl = strategy.openprofit
+    float openPct = f_safeDiv(openPnl, math.max(strategy.position_avg_price *
+         strategy.position_size, 1.0), 0.0) * 100.0
+    bool winning = openPnl >= 0
+    if not na(livePnlLab)
+        label.delete(livePnlLab)
+    livePnlLab := label.new(time, close,
+         (winning ? "▲ +$" : "▼ -$") + f_n(math.abs(openPnl), "#.##") +
+         "  (" + (winning ? "+" : "") + f_n(openPct, "#.0") + "%)  " +
+         f_n(strategy.position_size, "#") + " sh",
+         xloc=xloc.bar_time, yloc=yloc.price, style=label.style_label_left,
+         size=size.small, color=winning ? color.new(color.green, 10) : color.new(color.red, 10),
+         textcolor=color.white)
+if strategy.position_size == 0 and not na(livePnlLab)
+    label.delete(livePnlLab)
+    livePnlLab := na
 
 // ───────────────────────── Dashboard ─────────────────────────
 // V4.2: the original two-column layout (labels left, values right — the
@@ -3122,7 +3181,10 @@ if barstate.islast
     // hits rule — is a chip on STOCK FIT. Everything else those rows
     // showed was reference, not decision.
     bool showFitRows = showScanPanel
-    bool showLimits = true
+    // V12.1: a permanent caveat does not need a permanent row. It reappears
+    // the moment it carries live information — a non-zero ambiguity count —
+    // which is the one case where it is a finding rather than boilerplate.
+    bool showLimits = not dashCompact or dashFull or historicalFillAmbiguities > 0
     int rFit = showFitRows ? 8 : -1
     int nextRow = showFitRows ? 9 : 8
     int rVwap = dashFull ? nextRow : -1
@@ -3213,11 +3275,13 @@ if barstate.islast
     float pQtyT1 = pQtyBase >= 2 ? math.floor(pQtyBase / 2.0) : 0.0
     float pQtyT2 = pHasThirdRung ? math.floor(pQtyBase / 4.0) : 0.0
     float pQtyRunner = math.max(pQtyBase - pQtyT1 - pQtyT2, 0.0)
+    // V12.1 (operator): name the rungs. "88@7.20" does not say which target
+    // it is; T1/T2/T3 does, and the share count still rides with each one.
     string ladderText = (pQtyT1 > 0 ?
-         " · " + f_n(pQtyT1, "#") + "@" + f_px(pT1) : "") +
-         (pQtyT2 > 0 ? " · " + f_n(pQtyT2, "#") + "@" + f_px(pT2) : "") +
-         (pQtyRunner > 0 ? " · " + f_n(pQtyRunner, "#") + "@" +
-              f_px(pHasThirdRung ? pT3 : pT2) : "")
+         "  T1 " + f_px(pT1) + " (" + f_n(pQtyT1, "#") + ")" : "") +
+         (pQtyT2 > 0 ? "  T2 " + f_px(pT2) + " (" + f_n(pQtyT2, "#") + ")" : "") +
+         (pQtyRunner > 0 ? "  T3 " + f_px(pHasThirdRung ? pT3 : pT2) +
+              " (" + f_n(pQtyRunner, "#") + ")" : "")
     f_text(2, "𝗕𝗨𝗬 " + f_px(pEntry) + " · 𝗦𝗧𝗢𝗣 " + f_px(pStop) + atrMark +
          ladderText + planTag, planCol)
 
@@ -3235,10 +3299,13 @@ if barstate.islast
     float pModeledCashRisk = pShares * pAdversePerShare + pRemainingFees
     string pBound = planSrc == 5 or planSrc == 4 ? plannedSizeBoundBy :
          planSrc == 3 ? v11SizeBoundBy : planSrc == 2 ? "ghost" : "hypothetical"
+    // V12.1 (operator): SIZE answers one question — how many shares and how
+    // much money. The percent-of-equity figure read as a risk number and was
+    // not one; modeled risk, the budget and the binding constraint moved to
+    // the full dashboard where they are diagnostics, not the headline.
     f_text(3, f_n(pShares, "#") + " sh · $" + f_n(pShares * pEntry, "#") +
-         " position (" + f_n(f_safeDiv(pShares * pEntry, equityBase, 0.0) * 100.0, "#") +
-         "% of $" + f_n(equityBase, "#") + ") · modeled risk $" + f_n(pModeledCashRisk, "#") +
-         " incl. slip/fees / $" + f_n(riskBudget, "#") + " budget · bound " + pBound +
+         (dashFull ? "  ·  risk $" + f_n(pModeledCashRisk, "#") + " / $" +
+              f_n(riskBudget, "#") + " · " + pBound : "") +
          (haltWarn ? "  ⚠ stop wider than LULD heuristic " + f_px(haltBandWidth) : "") +
          (thinRoom and planSrc >= 3 ? "  ⚠ only " + f_rr(nextObstacleR) + " room above" : ""),
          haltWarn or (thinRoom and planSrc >= 3) ? color.red : planCol)
