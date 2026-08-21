@@ -25,10 +25,13 @@ SESSION_END = dt.time(11, 30)     # hard stop
 # --- §3 / §5 / §6 / §7 parameters (frozen before the run) --------------
 CONFLUENCE_MIN = 2
 TOLERANCE_PCT = 0.25
+TOLERANCE_FLOOR = 0.01   # §3 tolerance_floor: spread; one tick without quote data
 MAX_PULLBACK_INDEX = 2
 STOP_MAX_DISTANCE = 0.20
 MIN_REWARD_RISK = 2.0
 RISK_PCT = 2.0
+MAX_PARTICIPATION_PCT = 10.0   # share of the tape you can take without moving it
+PARTICIPATION_WINDOW = 20      # bars of volume history used for the estimate
 
 # --- execution model (matches the paper-trading broker) ----------------
 COMMISSION_PER_SHARE = 0.005
@@ -87,6 +90,36 @@ def assert_causal(full: pd.DataFrame, cursor: int, *, rtol: float = 1e-9) -> Non
                 f"{name} at cursor {cursor}: full={a!r} truncated={b!r} — leak")
 
 
+# ------------------------------------------------------------------ §7 sizing
+
+def size_position(equity: float, entry: float, risk_per_share: float,
+                  visible: pd.DataFrame | None = None, *,
+                  risk_pct: float = RISK_PCT,
+                  participation_pct: float = MAX_PARTICIPATION_PCT) -> tuple[int, str]:
+    """Shares to trade, and which constraint bound. §7 plus two realities.
+
+    §7 sizes purely from risk, which on an 8-cent stop asks a $100k account
+    for ~25,000 shares of a $5 stock — the entire account, in one sub-20M
+    float name. Two caps make the number fillable: cash (no margin) and
+    participation (you cannot be most of the tape without becoming the
+    price). §7 concedes the second itself: "fill quality degrades with size
+    on sub-20M float. The edge does not scale linearly."
+    """
+    if risk_per_share <= 0 or entry <= 0:
+        return 0, "invalid"
+    # floor division on floats silently loses a share: 2000 // 0.10 == 19999.0
+    by_risk = int((equity * risk_pct / 100.0) / risk_per_share + 1e-9)
+    affordable = int(equity / entry + 1e-9)              # cash only, no margin
+    caps = {"risk": by_risk, "cash": affordable}
+    if visible is not None and len(visible) and participation_pct > 0:
+        tape = float(visible["Volume"].tail(PARTICIPATION_WINDOW).median())
+        if np.isfinite(tape) and tape > 0:
+            caps["liquidity"] = int(tape * participation_pct / 100.0)
+    shares = min(caps.values())
+    bound = min(caps, key=lambda k: caps[k])
+    return max(0, shares), bound
+
+
 # ------------------------------------------------------------------ §3 support
 
 def swing_highs(visible: pd.DataFrame, left: int = 2, right: int = 2) -> list[float]:
@@ -102,11 +135,18 @@ def swing_highs(visible: pd.DataFrame, left: int = 2, right: int = 2) -> list[fl
 
 
 def support_reasons(price: float, visible: pd.DataFrame,
-                    tolerance_pct: float = TOLERANCE_PCT) -> list[str]:
-    """Which of the §3 confluence components sit at `price`."""
+                    tolerance_pct: float = TOLERANCE_PCT,
+                    tolerance_floor: float = TOLERANCE_FLOOR) -> list[str]:
+    """Which of the §3 confluence components sit at `price`.
+
+    §3 floors the tolerance at the spread width. Free OHLCV carries no
+    quotes, so one tick stands in — without it a $2.00 stock gets a
+    half-cent window and no level can match except by exact equality,
+    making the gate unreachable across the bottom of the §1 price range.
+    """
     if visible.empty or not np.isfinite(price):
         return []
-    tol = abs(price) * tolerance_pct / 100.0
+    tol = max(abs(price) * tolerance_pct / 100.0, tolerance_floor)
     close = visible["Close"]
     reasons = []
 
@@ -250,6 +290,7 @@ class Decision:
     reward_risk: float = float("nan")
     shares: int = 0
     size_capped_by_cash: bool = False
+    size_bound_by: str = ""
     support_reasons: str = ""
 
 
@@ -322,11 +363,9 @@ def evaluate(visible: pd.DataFrame, symbol: str, *,
         d.reason = f"reward:risk {d.reward_risk:.2f} < {MIN_REWARD_RISK}"
         return d
 
-    budget = equity * RISK_PCT / 100.0                  # §7
-    by_risk = int(budget // d.risk_per_share)
-    affordable = int(equity // d.entry)                 # cash only — no margin
-    d.shares = min(by_risk, affordable)
-    d.size_capped_by_cash = d.shares < by_risk
+    d.shares, d.size_bound_by = size_position(equity, d.entry, d.risk_per_share,
+                                              visible)          # §7
+    d.size_capped_by_cash = d.size_bound_by != "risk"
     if d.shares <= 0:
         d.reason = "size rounds to zero"
         return d

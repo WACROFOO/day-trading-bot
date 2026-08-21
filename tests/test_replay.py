@@ -107,8 +107,10 @@ def test_support_reasons_empty_at_a_random_price():
 def test_support_tolerance_widens_the_match():
     bars = session([5.0 + i * 0.01 for i in range(30)])
     price = float(indicators.ema9(bars["Close"]).iloc[-1]) + 0.01
-    narrow = replay.support_reasons(price, bars, tolerance_pct=0.01)
-    wide = replay.support_reasons(price, bars, tolerance_pct=0.50)
+    narrow = replay.support_reasons(price, bars, tolerance_pct=0.01,
+                                    tolerance_floor=0.0)
+    wide = replay.support_reasons(price, bars, tolerance_pct=0.50,
+                                  tolerance_floor=0.0)
     assert len(wide) > len(narrow)
 
 
@@ -417,3 +419,27 @@ def test_full_pipeline_produces_a_trade_on_a_textbook_bull_flag():
     assert t["reward_risk"] >= replay.MIN_REWARD_RISK        # §6
     assert t["confluence_count"] >= replay.CONFLUENCE_MIN    # §3
     assert t["shares"] * t["entry"] <= 25_000.0 + 1e-6       # §7 cash cap
+
+
+def test_support_tolerance_is_floored_at_a_tick():
+    """§3 floors tolerance at the spread. Without a floor a $2 stock gets a
+    half-cent window and no level can ever match."""
+    cheap = session([2.00] * 30)
+    assert replay.support_reasons(2.005, cheap, tolerance_pct=0.25) != []
+    # 0.25% of $2.00 is $0.005 — smaller than one tick
+    assert 2.00 * 0.25 / 100.0 < replay.TOLERANCE_FLOOR
+
+
+def test_support_tolerance_floor_does_not_shrink_a_wide_window():
+    """On a $20 stock the percentage window is wider than the floor and wins."""
+    rich = session([20.00] * 30)
+    assert replay.support_reasons(20.04, rich, tolerance_pct=0.25) != []
+
+
+def test_sizing_does_not_lose_a_share_to_float_division():
+    """Regression: `2000 // 0.10` is 19999.0, not 20000 — floor division on
+    binary floats silently drops a share, and the error scales with size."""
+    bars = session([5.0] * 30)
+    bars["Volume"] = 10_000_000.0
+    shares, bound = replay.size_position(100_000.0, 5.00, 0.10, bars)
+    assert shares == 20_000 and bound == "risk"

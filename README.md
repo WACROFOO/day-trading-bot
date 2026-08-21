@@ -173,13 +173,47 @@ Symbols passed with `--symbols` are a manual list, not a point-in-time 09:25
 scan — the run says so on every invocation, because choosing tickers that are
 known to have run is the fastest way to a fake edge.
 
+## Multi-ticker paper trading with a performance report
+
+Runs the blinded replay across several tickers on **one shared account**, then
+writes a performance / accuracy report.
+
+```bash
+python scripts/paper_trade_eval.py --scan --days 5 --equity 100000
+python scripts/paper_trade_eval.py --symbols SDOT,ABCD --days 5
+```
+
+`replay.py` decides one symbol in isolation; `portfolio.py` answers what a
+single account could actually have traded. Capital is finite, only one position
+is held at a time, §7 caps the day at two trades, and §8 can lock the account
+outright — so most valid signals are never actionable, and the report says
+which and what each one would have paid.
+
+Position size is bounded by three things, not one: §7's risk budget, available
+cash (no margin), and **participation** — a cap on how much of the tape one
+order can be. Without that third cap a $100k account sizes 20,000 shares of a
+$5 sub-20M-float name off an 8-cent stop and the backtest reports fills that
+never existed. §7 concedes the point itself.
+
+The report (`results/performance_<date>.md`) covers: every losing trade with
+the mechanism that killed it, winners that were skipped and the single rule
+that skipped them, signals the account never got to trade priced by
+opportunity cost, exit attribution, MAE/MFE stop-noise analysis, time-of-day
+decay against the §2 prime window, per-gate rejection rates, sizing
+constraints, cost drag, and a confusion matrix.
+
+Overlapping counterfactuals are collapsed into distinct opportunities before
+anything is counted — every candle inside one move resolves profitably, so the
+raw count overstates missed opportunities by roughly an order of magnitude.
+
 ## Structure
 
 ```
-src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, history, replay, scanner)
+src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, history, replay, portfolio, report, scanner)
 scripts/run_scanner.py  scanner CLI
 scripts/fetch_1m_history.py  1-minute candle archive CLI
 scripts/replay_eval.py  blinded walk-forward replay CLI
+scripts/paper_trade_eval.py  multi-ticker paper trading + report CLI
 tests/               test suite
 knowledge-base/      strategy research and specs
 ```
