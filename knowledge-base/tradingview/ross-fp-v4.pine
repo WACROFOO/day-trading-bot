@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.10 (paper only)", shorttitle="ROSS FP V9.10", overlay=true,
+strategy("ROSS First Pullback Strategy V9.11 (paper only)", shorttitle="ROSS FP V9.11", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -212,6 +212,12 @@ strategy("ROSS First Pullback Strategy V9.10 (paper only)", shorttitle="ROSS FP 
 //      anchor is scored on touches (bars sitting ON the line, 0.2 ATR)
 //      minus distance-from-price in ATR, and the best line is drawn; no
 //      candidate with >= 2 touches means no line.
+// V9.11 (operator): TRADE RESULT markers. TradingView's own trade
+//      labels print the SHARE COUNT beside each order ("+146", "-73"),
+//      which reads like money and is not — a winning exit can show a
+//      negative number. BOUGHT <price> / SOLD <price> + $ + % + R now
+//      say the result in words, one label per side, share count absent.
+//      Turn TV's off: Settings -> Style -> uncheck "Trades on chart".
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -454,6 +460,13 @@ showSR               = input.bool(true, "Show nearest resistance/support bands",
 // uptrend = from the swing low across the most recent HIGHER low (the
 // trend-loss line). Labelled, and flagged the bar price breaks them.
 showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual)
+// V9.11 (operator): the trade RESULT in words. TradingView's own trade
+// markers print the SHARE COUNT next to each order ("+146", "-73"), which
+// reads like a P&L and is not one — a winning exit can show "-73". These
+// markers say bought where, sold where, and what it made.
+// Turn TradingView's off: strategy Settings -> Style -> uncheck
+// "Trades on chart" (and "Quantity"), keep these on.
+showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", group=gVisual)
 tlLookback           = input.int(0, "Trend lines: lookback bars (0 = since day start)", minval=0, maxval=720, group=gVisual,
      tooltip="V9.9: trend lines are day-scoped — the up-line anchors at TODAY's low, the down-line at TODAY's high (tangent: steepest slope keeping every confirmed bar on the right side; it can touch price, never cut it). Set a bar count only to narrow within the day.")
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
@@ -501,7 +514,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.10"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.11"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -926,6 +939,13 @@ var int stateStartBar = na
 // it later from live ATR let the dashboard's ᵃᵗʳ marker describe a stop
 // method the plan never used.
 var bool plannedUsesATRStop = false
+// V9.11: one closed trade's readable result — entry anchor, running
+// realized P&L (all legs), and the size/risk basis for the % and R.
+var float resPnL = 0.0
+var float resEntryPx = na
+var int   resEntryTime = na
+var float resQty = na
+var float resRisk = na
 
 var int impulseStartBar = na
 var int impulsePeakBar = na
@@ -1056,6 +1076,17 @@ if strategy.position_size > 0
                      color=color.new(color.orange, 20), textcolor=color.black, size=size.small)
         statusReason := "Bought — follow the plan"
         eventLong := true
+        // V9.11: anchor the readable result and mark the buy.
+        resPnL := 0.0
+        resEntryPx := tradeEntryPrice
+        resEntryTime := time
+        resQty := strategy.position_size
+        resRisk := tradeRisk
+        if showTradeResult
+            label.new(time, low, "BOUGHT " + f_px(tradeEntryPrice),
+                 xloc=xloc.bar_time, yloc=yloc.belowbar,
+                 style=label.style_label_up, size=size.small,
+                 color=color.new(color.teal, 15), textcolor=color.white)
 
 // V6 (finding 2) / V8: strategy.closedtrades is monotonic and never rolls
 // back. handledClosedTrades is now varip so the batch below processes each
@@ -1078,13 +1109,41 @@ if strategy.closedtrades > handledClosedTrades
         // same-bar historical round trip: sequence unknowable — count it
         if barstate.ishistory and closedEntryBar == closedExitBar
             historicalFillAmbiguities += 1
+        // V9.11: every leg's realized P&L (commission included) rolls up
+        // into ONE number for the position — a T1 partial plus a runner
+        // is one trade to the operator, not two.
+        resPnL += strategy.closedtrades.profit(tradeNum)
     handledClosedTrades := strategy.closedtrades
     if strategy.position_size == 0
         setupState := DONE
         stateStartBar := bar_index
         scanAfterBar := bar_index
         strategy.cancel("Long")
-        statusReason := "Trade finished — log it"
+        // V9.11: the result, in words, where the trade ended. Percent is
+        // the return on the position, R the multiple of the risk taken —
+        // the two numbers that judge a trade. Share count deliberately
+        // absent: it is a sizing fact, not a result.
+        float resExitPx = strategy.closedtrades.exit_price(strategy.closedtrades - 1)
+        float resPct = not na(resEntryPx) and not na(resQty) and resEntryPx * resQty != 0 ?
+             resPnL / (resEntryPx * resQty) * 100.0 : na
+        float resR = not na(resRisk) and not na(resQty) and resRisk * resQty != 0 ?
+             resPnL / (resRisk * resQty) : na
+        bool resWin = resPnL >= 0
+        statusReason := (resWin ? "WON " : "LOST ") + "$" + f_n(math.abs(resPnL), "#.##") +
+             (na(resR) ? "" : " (" + f_n(resR, "#.0") + "R)") + " — log it"
+        if showTradeResult and not na(resEntryPx)
+            label.new(time, high, "SOLD " + f_px(resExitPx) + "\n" +
+                 (resWin ? "+" : "-") + "$" + f_n(math.abs(resPnL), "#.##") +
+                 (na(resPct) ? "" : "  " + (resWin ? "+" : "") + f_n(resPct, "#.0") + "%") +
+                 (na(resR) ? "" : "  " + (resWin ? "+" : "") + f_n(resR, "#.0") + "R"),
+                 xloc=xloc.bar_time, yloc=yloc.abovebar,
+                 style=label.style_label_down, size=size.small,
+                 color=resWin ? color.new(color.green, 10) : color.new(color.red, 10),
+                 textcolor=color.white)
+            line.new(resEntryTime, resEntryPx, time, resExitPx,
+                 xloc=xloc.bar_time, width=1, style=line.style_dotted,
+                 color=resWin ? color.new(color.green, 30) : color.new(color.red, 30))
+        resEntryPx := na
 
 if strategy.position_size == 0 and setupState == LONG and not na(tradeEntryPrice)
     setupState := DONE
