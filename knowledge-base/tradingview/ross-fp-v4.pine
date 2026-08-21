@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V9.7 (paper only)", shorttitle="ROSS FP V9.7", overlay=true,
+strategy("ROSS First Pullback Strategy V9.8 (paper only)", shorttitle="ROSS FP V9.8", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -196,6 +196,12 @@ strategy("ROSS First Pullback Strategy V9.7 (paper only)", shorttitle="ROSS FP V
 //      pivots so the lines track the CURRENT leg; a broken line renders
 //      dashed and dim. AAPL itself is out of universe by design ($2-20):
 //      the NO verdict there is correct, not a miss.
+// V9.8 (live USDE): TANGENT trend lines. The two-pivot line could cut
+//      through price between its anchors; the tangent (anchor at the
+//      window extreme, steepest slope keeping every confirmed bar on the
+//      right side) touches structure and cannot cross it — only live
+//      price can break it, which IS the signal. No trend in the window =
+//      no line, instead of a wrong line.
 // NOT COMPILED HERE: TradingView is the only compiler. Paste, compile, then
 // run the manual regression list (repo AUDIT-RESPONSE-V6.md + V8 additions)
 // on replay before trusting any number this file prints.
@@ -438,8 +444,8 @@ showSR               = input.bool(true, "Show nearest resistance/support bands",
 // uptrend = from the swing low across the most recent HIGHER low (the
 // trend-loss line). Labelled, and flagged the bar price breaks them.
 showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual)
-tlPivots             = input.int(12, "Trend lines: recent pivots window", minval=4, maxval=40, group=gVisual,
-     tooltip="Anchors are searched only in the last N confirmed pivots, so the lines track the CURRENT leg instead of the whole session (V9.7, live AAPL).")
+tlLookback           = input.int(240, "Trend lines: lookback (1m bars)", minval=30, maxval=300, group=gVisual,
+     tooltip="V9.8: tangent construction — the uptrend line is anchored at the window's lowest low with the steepest slope that keeps EVERY confirmed bar low on or above it (mirror for the downtrend line). It can touch price, never cut it; only LIVE price can break it, which is the signal.")
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
 // V9 (defect 3): ONE switch for everything that is not the trade decision.
@@ -485,7 +491,7 @@ vwapValue = vwapAnchorMode == "Regular hours only (09:30)" ? vwapRTH : ta.vwap(h
 [macdValue, macdSignal, macdHist] = ta.macd(close, 12, 26, 9)
 volumeBaseline = ta.sma(volume, volumeBaselineBars)
 
-REV = "V9.7"                       // bump on every shipped change — keep alerts + title in step
+REV = "V9.8"                       // bump on every shipped change — keep alerts + title in step
 isOneMinute = timeframe.isminutes and timeframe.multiplier == 1
 
 // ── V8: one authoritative signal pass per bar, declared EARLY so every
@@ -721,33 +727,36 @@ var array<float> pivHighs = array.new_float()
 var array<float> pivLows = array.new_float()
 // V9.6: bar indices kept in lockstep with the prices — trend lines need
 // BOTH coordinates of a pivot, the fan only needed the price.
-var array<int> pivHighBars = array.new_int()
-var array<int> pivLowBars = array.new_int()
-// V9.7: pivot TIMES stored too. Drawing a line at an OLD bar_index makes
-// the runtime resolve it through the time series' history buffer — on
-// AAPL that blew up live ("historical offset 358 beyond limit 357",
-// bar 7214). time[srPivotLen] at confirmation is a small FIXED offset,
-// and drawing in xloc.bar_time never touches the buffer again.
-var array<int> pivHighTimes = array.new_int()
-var array<int> pivLowTimes = array.new_int()
 float ph = ta.pivothigh(high, srPivotLen, srPivotLen)
 float pl = ta.pivotlow(low, srPivotLen, srPivotLen)
 if not na(ph)
     array.push(pivHighs, ph)
-    array.push(pivHighBars, bar_index - srPivotLen)
-    array.push(pivHighTimes, time[srPivotLen])
     if array.size(pivHighs) > 40
         array.shift(pivHighs)
-        array.shift(pivHighBars)
-        array.shift(pivHighTimes)
 if not na(pl)
     array.push(pivLows, pl)
-    array.push(pivLowBars, bar_index - srPivotLen)
-    array.push(pivLowTimes, time[srPivotLen])
     if array.size(pivLows) > 40
         array.shift(pivLows)
-        array.shift(pivLowBars)
-        array.shift(pivLowTimes)
+// V9.8 (live USDE — a trend line that price crossed twenty times): the
+// two-pivot construction is retired. A real trend line is a TANGENT: it
+// may touch price, never cut it. These rolling per-bar arrays feed that
+// construction (confirmed bars only; times stored at write time so the
+// drawing never resolves an old bar_index through the history buffer —
+// the AAPL crash class).
+var array<float> tlLows = array.new_float()
+var array<float> tlHighs = array.new_float()
+var array<int> tlBars = array.new_int()
+var array<int> tlTimes = array.new_int()
+if barstate.isconfirmed
+    array.push(tlLows, low)
+    array.push(tlHighs, high)
+    array.push(tlBars, bar_index)
+    array.push(tlTimes, time)
+    if array.size(tlBars) > 300
+        array.shift(tlLows)
+        array.shift(tlHighs)
+        array.shift(tlBars)
+        array.shift(tlTimes)
 
 // V9.5 (live WYHG 2026-08-20): POLARITY. Supports came only from pivot
 // LOWS and resistances only from pivot HIGHS — so a broken-resistance
@@ -2190,72 +2199,71 @@ if barstate.islast and showTrendLine
     if not na(upTLlab)
         label.delete(upTLlab)
         upTLlab := na
-    // V9.7: anchors from the RECENT pivot window only (tlPivots), drawn
-    // in xloc.bar_time (no history-buffer lookups — the AAPL runtime
-    // error), slope math on bar indices, and a broken line goes DASHED
-    // and dim so the active line owns the eye.
-    // downtrend: swing high anchor -> latest lower high after it
-    int nH = array.size(pivHighs)
-    if nH >= 2
-        int fromH = math.max(0, nH - tlPivots)
-        int hiIdx = fromH
-        for i = fromH + 1 to nH - 1
-            if array.get(pivHighs, i) > array.get(pivHighs, hiIdx)
-                hiIdx := i
-        int touchIdx = -1
-        if hiIdx < nH - 1
-            // ascending, keep the LAST match = the most recent lower high
-            for i = hiIdx + 1 to nH - 1
-                if array.get(pivHighs, i) < array.get(pivHighs, hiIdx)
-                    touchIdx := i
-        if touchIdx > hiIdx
-            int b1 = array.get(pivHighBars, hiIdx)
-            float y1 = array.get(pivHighs, hiIdx)
-            int b2 = array.get(pivHighBars, touchIdx)
-            float y2 = array.get(pivHighs, touchIdx)
-            float dnNow = b2 > b1 ? y1 + (y2 - y1) / (b2 - b1) * (bar_index - b1) : na
-            bool dnBroken = not na(dnNow) and close > dnNow
-            dnTL := line.new(array.get(pivHighTimes, hiIdx), y1,
-                 array.get(pivHighTimes, touchIdx), y2,
-                 xloc=xloc.bar_time, extend=extend.right,
-                 color=color.new(color.red, dnBroken ? 70 : 25),
-                 style=dnBroken ? line.style_dashed : line.style_solid, width=2)
-            if not na(dnNow)
-                dnTLlab := label.new(time, dnNow,
-                     dnBroken ? "downtrend BROKEN ▲" : "downtrend",
-                     xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                     textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
-    // uptrend: swing low anchor -> latest higher low after it
-    int nL = array.size(pivLows)
-    if nL >= 2
-        int fromL = math.max(0, nL - tlPivots)
-        int loIdx = fromL
-        for i = fromL + 1 to nL - 1
-            if array.get(pivLows, i) < array.get(pivLows, loIdx)
-                loIdx := i
-        int touchIdxL = -1
-        if loIdx < nL - 1
-            // ascending, keep the LAST match = the most recent higher low
-            for i = loIdx + 1 to nL - 1
-                if array.get(pivLows, i) > array.get(pivLows, loIdx)
-                    touchIdxL := i
-        if touchIdxL > loIdx
-            int b1L = array.get(pivLowBars, loIdx)
-            float y1L = array.get(pivLows, loIdx)
-            int b2L = array.get(pivLowBars, touchIdxL)
-            float y2L = array.get(pivLows, touchIdxL)
-            float upNow = b2L > b1L ? y1L + (y2L - y1L) / (b2L - b1L) * (bar_index - b1L) : na
-            bool upLost = not na(upNow) and close < upNow
-            upTL := line.new(array.get(pivLowTimes, loIdx), y1L,
-                 array.get(pivLowTimes, touchIdxL), y2L,
-                 xloc=xloc.bar_time, extend=extend.right,
-                 color=color.new(color.teal, upLost ? 70 : 25),
-                 style=upLost ? line.style_dashed : line.style_solid, width=2)
-            if not na(upNow)
+    // V9.8 TANGENT TREND LINES (live USDE: the two-pivot line cut through
+    // price). Uptrend: anchor at the window's LOWEST low, slope = the
+    // minimum of (low_k - anchor)/(bars) over every later confirmed bar —
+    // the steepest line that keeps ALL lows on or above it. It touches
+    // structure at least twice and cannot cross a confirmed bar; only
+    // LIVE price can break it, which is exactly the breakout/loss signal.
+    // Downtrend is the mirror on highs. An anchor younger than 10 bars
+    // means that side has no trend yet — nothing is drawn, honestly.
+    int nB = array.size(tlBars)
+    if nB >= 20
+        int fromB = math.max(0, nB - tlLookback)
+        // ── uptrend tangent ──
+        int loA = fromB
+        for i = fromB + 1 to nB - 1
+            if array.get(tlLows, i) < array.get(tlLows, loA)
+                loA := i
+        if loA <= nB - 10
+            int barA = array.get(tlBars, loA)
+            float lowA = array.get(tlLows, loA)
+            float upSlope = na
+            int upTouch = -1
+            for k = loA + 3 to nB - 1
+                float s = (array.get(tlLows, k) - lowA) / (array.get(tlBars, k) - barA)
+                if na(upSlope) or s < upSlope
+                    upSlope := s
+                    upTouch := k
+            if upTouch > 0 and upSlope >= 0
+                float upNow = lowA + upSlope * (bar_index - barA)
+                bool upLost = close < upNow
+                upTL := line.new(array.get(tlTimes, loA), lowA,
+                     array.get(tlTimes, upTouch), array.get(tlLows, upTouch),
+                     xloc=xloc.bar_time, extend=extend.right,
+                     color=color.new(color.teal, upLost ? 70 : 25),
+                     style=upLost ? line.style_dashed : line.style_solid, width=2)
                 upTLlab := label.new(time, upNow,
                      upLost ? "uptrend LOST ▼" : "uptrend",
                      xloc=xloc.bar_time, style=label.style_none, size=size.small,
                      textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
+        // ── downtrend tangent ──
+        int hiA = fromB
+        for i = fromB + 1 to nB - 1
+            if array.get(tlHighs, i) > array.get(tlHighs, hiA)
+                hiA := i
+        if hiA <= nB - 10
+            int barH = array.get(tlBars, hiA)
+            float highA = array.get(tlHighs, hiA)
+            float dnSlope = na
+            int dnTouch = -1
+            for k = hiA + 3 to nB - 1
+                float s = (array.get(tlHighs, k) - highA) / (array.get(tlBars, k) - barH)
+                if na(dnSlope) or s > dnSlope
+                    dnSlope := s
+                    dnTouch := k
+            if dnTouch > 0 and dnSlope <= 0
+                float dnNow = highA + dnSlope * (bar_index - barH)
+                bool dnBroken = close > dnNow
+                dnTL := line.new(array.get(tlTimes, hiA), highA,
+                     array.get(tlTimes, dnTouch), array.get(tlHighs, dnTouch),
+                     xloc=xloc.bar_time, extend=extend.right,
+                     color=color.new(color.red, dnBroken ? 70 : 25),
+                     style=dnBroken ? line.style_dashed : line.style_solid, width=2)
+                dnTLlab := label.new(time, dnNow,
+                     dnBroken ? "downtrend BROKEN ▲" : "downtrend",
+                     xloc=xloc.bar_time, style=label.style_none, size=size.small,
+                     textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
 
 plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
 plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
