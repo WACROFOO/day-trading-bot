@@ -64,8 +64,12 @@ maxPbIndex    = input.int(2, "Max pullback index",     minval = 1, group = grpE)
 
 grpX = "§5/§6 risk"
 stopMaxDist   = input.float(0.20, "Max stop distance $",     group = grpX)
+stopMinDist   = input.float(0.01, "Min stop distance $",     group = grpX,
+     tooltip = "[FIX-10] §5 stop_min_distance >= spread width.")
 minRR         = input.float(2.0,  "Min reward:risk",         group = grpX)
 scale1Pct     = input.int(50, "Scale % at target 1",         group = grpX)
+scale2Pct     = input.int(25, "Scale % at target 2",         group = grpX,
+     tooltip = "[FIX-11] §6 is 50/25/25, not 50/50.")
 
 grpZ = "§7/§8 sizing and limits"
 riskPct       = input.float(2.0,  "Risk % of equity",        group = grpZ)
@@ -179,13 +183,22 @@ else
 tolOf(float p) =>
     math.max(math.abs(p) * tolPct / 100.0, syminfo.mintick)
 
-// A confirmed pivot high, used as a "flipped level" (was resistance, now
-// support). ta.pivothigh(2,2) is only known 2 bars later, and referencing it
-// with that offset is what keeps this from repainting.
+// A confirmed pivot high used as a "flipped level" — resistance that was
+// BROKEN and is now being retested from above. ta.pivothigh(2,2) is only
+// known 2 bars later, which is what keeps this from repainting.
+//
+// [FIX-9] The level must actually have been exceeded since it formed.
+// Checking `abs(p - level) <= tol and p >= level - tol` is a tautology (the
+// second clause follows from the first), so every nearby swing high counted
+// and confluence was inflated. Same defect existed in the Python engine.
 pivotHi = ta.pivothigh(high, 2, 2)
-var float lastFlip = na
+var float pendingFlip = na
+var float lastFlip    = na
 if not na(pivotHi)
-    lastFlip := pivotHi
+    pendingFlip := pivotHi
+if not na(pendingFlip) and high > pendingFlip + tolOf(pendingFlip)
+    lastFlip    := pendingFlip          // broken -> now a support candidate
+    pendingFlip := na
 
 confluenceAt(float p) =>
     float tol = tolOf(p)
@@ -195,7 +208,7 @@ confluenceAt(float p) =>
     n += math.abs(p - ema20) <= tol ? 1 : 0
     n += not na(ma200) and math.abs(p - ma200) <= tol ? 1 : 0
     n += math.abs(p - vwapV) <= tol ? 1 : 0
-    n += not na(lastFlip) and math.abs(p - lastFlip) <= tol and p >= lastFlip - tol ? 1 : 0
+    n += not na(lastFlip) and math.abs(p - lastFlip) <= tol ? 1 : 0
     n
 
 // ------------------------------------------------------- [FIX-6] §8 gate
@@ -204,16 +217,20 @@ var float dayPeakEq   = na
 var float hwm         = na
 var int   dayTrades   = 0
 var int   consecLoss  = 0
-var bool  locked      = false
-var string lockReason = ""
+var bool  locked        = false
+var string lockReason   = ""
+var bool  accountLocked = false      // [FIX-13] §8 walkaway outlives the day
+var string accountReason = ""
 
 if newDay
     dayStartEq := strategy.equity
     dayPeakEq  := strategy.equity
     dayTrades  := 0
     consecLoss := 0
-    locked     := false
-    lockReason := ""
+    // [FIX-13] The 20% drawdown walkaway stops the ACCOUNT, not the day.
+    // Releasing it overnight lets the deepest drawdown of the run trade on.
+    locked     := accountLocked
+    lockReason := accountLocked ? accountReason : ""
 
 dayStartEq := nz(dayStartEq, strategy.equity)
 dayPeakEq  := math.max(nz(dayPeakEq, strategy.equity), strategy.equity)
@@ -245,6 +262,8 @@ if ta.change(strategy.closedtrades) > 0
     else if ddPct >= ddWalkawayPct
         locked := true
         lockReason := "drawdown walkaway"
+        accountLocked := true
+        accountReason := "drawdown walkaway"
 
 canTrade = not locked and dayTrades < maxTradesDay and inEntryWindow and priceOk
 
@@ -275,7 +294,7 @@ gateEma9   = close > ema9
 gateVol    = not na(liveDipVol) and not na(impVolAvg) and liveDipVol < impVolAvg
 gateIndex  = liveIndex >= 1 and liveIndex <= maxPbIndex
 gateSupport = not na(stopPrice) and confluenceAt(stopPrice) >= confluenceMin
-gateStop   = riskPerShare > 0 and riskPerShare <= stopMaxDist       // §5
+gateStop   = riskPerShare >= stopMinDist and riskPerShare <= stopMaxDist   // §5
 gateRR     = rewardRisk >= minRR                                     // §6
 
 // NOTE: §3 also requires tape_green and no_seller_wall. Both need Level 2,
@@ -304,14 +323,20 @@ if strategy.position_size == 0 and (not setupValid or not canTrade)
     strategy.cancel("L")
 
 // --------------------------------------------------------------- §6 exits
-var float posStop   = na
-var float posTarget = na
-var bool  scaled    = false
+var float posStop    = na
+var float posTarget  = na
+var float posTarget2 = na
+var float posRisk    = na
+var bool  scaled1    = false
+var bool  scaled2    = false
 
 if strategy.position_size > 0 and strategy.position_size[1] == 0
-    posStop   := stopPrice
-    posTarget := target1
-    scaled    := false
+    posStop    := stopPrice
+    posRisk    := riskPerShare
+    posTarget  := target1
+    posTarget2 := math.max(target1 + riskPerShare, strategy.position_avg_price + 2 * riskPerShare)
+    scaled1    := false
+    scaled2    := false
 
 inPos = strategy.position_size > 0
 
@@ -319,21 +344,42 @@ inPos = strategy.position_size > 0
 exitNewLow  = inPos and low < low[1]
 exitMacd    = inPos and macdHist < 0
 exitVwap    = inPos and close < vwapV
-avgVol      = ta.sma(volume, 20)
+avgVol      = ta.sma(volume[1], 20)          // excludes the current bar
 exitHeavy   = inPos and close < open and volume > 2 * avgVol
-hardExit    = exitNewLow or exitMacd or exitVwap or exitHeavy
 
-// Scale §6 scale_1_pct at target 1, then move the stop to breakeven (§5).
-if inPos and not scaled and high >= posTarget
+// [FIX-12] §6 lists six hard exits; two more are computable from OHLCV.
+bodySize    = math.abs(close - open)
+upperWick   = high - math.max(close, open)
+barRange    = high - low
+exitTail    = inPos and barRange > 0 and upperWick > 2 * bodySize and
+              upperWick > 0.5 * barRange                       // topping tail
+rng1        = high - low
+exitStall   = inPos and close > open and close[1] > open[1] and close[2] > open[2] and
+              rng1 < (high[1] - low[1]) and (high[1] - low[1]) < (high[2] - low[2])
+
+hardExit    = exitNewLow or exitMacd or exitVwap or exitHeavy or exitTail or exitStall
+
+// §6 ladder: 50% at target 1, 25% at target 2, 25% runs. [FIX-11]
+if inPos and not scaled1 and high >= posTarget
     strategy.close("L", qty_percent = scale1Pct, comment = "scale target1")
-    scaled  := true
-    posStop := strategy.position_avg_price          // §5 breakeven_trigger
+    scaled1 := true
+    posStop := strategy.position_avg_price          // §5 breakeven after scale
+
+if inPos and scaled1 and not scaled2 and high >= posTarget2
+    // 25 of the original position is 50 of what is left after the first scale
+    strategy.close("L", qty_percent = 50, comment = "scale target2")
+    scaled2 := true
+
+// §5's other breakeven arm: +$0.10 in hand, before any scale.
+if inPos and not scaled1 and high >= strategy.position_avg_price + 0.10
+    posStop := math.max(nz(posStop, stopPrice), strategy.position_avg_price)
 
 if inPos
     strategy.exit("stop", from_entry = "L", stop = posStop)
 
 if hardExit
-    reason = exitNewLow ? "new low" : exitMacd ? "macd<0" : exitVwap ? "vwap break" : "heavy red"
+    reason = exitNewLow ? "new low" : exitMacd ? "macd<0" : exitVwap ? "vwap break" :
+             exitHeavy ? "heavy red" : exitTail ? "topping tail" : "momentum stalling"
     strategy.close("L", comment = reason)
 
 // §2: nothing is held past the hard stop.

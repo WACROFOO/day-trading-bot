@@ -145,6 +145,105 @@ figure shown alongside so the two are never confused.
 
 ---
 
+---
+
+# Second pass — defects found by adversarial audit
+
+Three independent audits of `replay.py` (leakage, spec fidelity, execution
+realism) produced 29 candidates. Several were found by more than one auditor
+working separately, which is the signal worth trusting. Each was reproduced
+before being fixed.
+
+## FIX-9 — flipped_level was a tautology · defect · §3 · **both engines**
+
+`abs(price - level) <= tol and price >= level - tol` — the second clause
+follows from the first, so it tested nothing. Every nearby swing high counted
+as a "flipped level" and confluence was inflated, which matters because
+confluence ≥ 2 is the §3 gate's tightest condition.
+
+§3 means resistance that was **broken** and is now being retested from above.
+Both engines now require the level to have actually been exceeded since it
+formed. Pine tracks a pending pivot and promotes it only once price trades
+through it.
+
+`replay.support_reasons` · Pine `[FIX-9]`
+
+## FIX-10 — §5 stop_min_distance was unimplemented · defect · §5
+
+§5 sets a floor of the spread width on the stop. Without it a sub-tick stop
+produces an enormous share count from `risk_budget / risk_per_share`.
+
+## FIX-11 — the scale ladder was 50/50, not 50/25/25 · defect · §6
+
+§6 scales 50% at target_1, 25% at the next level, and trails 25%. Both engines
+sold half and dumped the rest on the first hard exit — which understates the
+runner and misrepresents where R actually comes from. §5's `+$0.10` breakeven
+arm was also missing; only the after-first-scale arm existed.
+
+## FIX-12 — two §6 hard exits were missing · defect · §6
+
+§6 lists six. Four were implemented. "Large topping tail" (upper wick > 2× body
+and > half the range) and "green candles shrinking / momentum stalls" (three up
+bars with contracting range) are both computable from OHLCV, so leaving them
+out was an omission rather than a data limit. Also `high_volume_red` divided by
+an average that **included the current bar**, making the signal impossible on
+the first bars and too strict right after.
+
+## FIX-13 — §8's drawdown walkaway released overnight · defect · §8
+
+The 20% walkaway stops the *account*, not the day. Resetting it with the daily
+latches let the deepest drawdown of the run trade straight through. It now
+persists until explicitly cleared.
+
+`portfolio.simulate` · Pine `[FIX-13]`
+
+---
+
+# Python-only defects
+
+These could not occur in Pine, which is worth saying plainly — the Pine
+implementation is structurally safer in these two respects.
+
+## The exit model ran on fabricated indicator values · critical · §5/§6
+
+`resolve()` computed VWAP and MACD on a slice **beginning at the entry bar**.
+VWAP is cumulative from the session open, so re-seeding it makes it equal that
+bar's own typical price; MACD's histogram restarts at exactly 0.0.
+
+Measured on a monotonic 5.00 → 6.00 ramp, at the entry bar: full-session VWAP
+**5.2564**, re-seeded VWAP **5.5128**. `close < vwap` flips from false to true —
+so a **rising** stock fires a `vwap_break` exit on the first bar it is held. The
+entire §5/§6 exit model was running on invented numbers.
+
+Pine's `ta.vwap` is session-anchored by construction and cannot be re-seeded
+this way.
+
+## Other execution defects
+
+- **§2's 11:30 hard stop was never enforced on exits.** Positions ran to the end
+  of the fetched frame — 20:00 with premarket data — so an 11:29 entry could be
+  held all afternoon and scored on whatever the close did. Pine flattens at the
+  window edge.
+- **The entry candle was never inspected.** Management began at `cursor + 1`, so
+  a fill that reversed through its own stop inside the entry minute was recorded
+  as an untouched winner with `mae_r = 0`. Pine's broker model checks intrabar.
+- **Gaps through the stop filled at the stop.** Every loss was capped near 1.2R
+  regardless of how far the bar opened below it.
+- **§6's target read the trigger candle's own high**, which only prints once that
+  bar closes — after the fill price is already fixed. A minute of hindsight
+  handed to the reward:risk test.
+- **SKIP counterfactuals were priced under different rules than TAKEs** (flat 2R
+  target, uncapped size), so precision and recall measured different things and
+  could not be compared. Both now route through one `order_params`.
+- **§9's breakeven win rate was hard-coded** to `1/(1+2.0)`. Scaling half at
+  target_1 caps upside well below 2R while a stop still costs a full R plus
+  costs, so a losing system could be reported as clearing breakeven. It now
+  follows the realized reward:risk.
+
+On the wiring fixture these changes moved the reported return from **+8.6% to
++1.1%**, with exits finally firing on real values.
+
+
 # Findings — not fixed, deliberately
 
 ## The §6 2:1 gate structurally rejects shallow pullbacks
