@@ -101,11 +101,42 @@ Two §1 criteria are **manual checks**, not computed: float ≤ 20M shares
 it for passers only, slowly) and the news catalyst. They appear as
 manual-check columns rather than being silently dropped.
 
+## 1-minute candle history
+
+Pull every 1-minute candle the free feed still has for a symbol and keep
+it in a local archive:
+
+```bash
+python scripts/fetch_1m_history.py SDOT              # trailing 30 days
+python scripts/fetch_1m_history.py SDOT --days 7     # just this week
+python scripts/fetch_1m_history.py SDOT --no-prepost # regular session only
+python scripts/fetch_1m_history.py SDOT --gaps       # + missing-minute count
+python scripts/fetch_1m_history.py SDOT --summary-only  # re-read the archive
+```
+
+**Yahoo keeps only ~30 calendar days of 1-minute bars**, and caps a single
+request at 8 days — so "all the 1m history" means the trailing month, not
+the symbol's full life. No free source serves deeper 1m history; that is a
+paid feed (Polygon, Databento, Alpaca's historical plans).
+
+The fetcher walks the window in 7-day chunks and merges the result into
+`data/history/<SYMBOL>_1m.csv`. The archive is **additive**: each run adds
+only bars it doesn't already have, so running it weekly accumulates a
+history far past the 30-day window. Bars older than your first run cannot
+be recovered from this feed — start the archive early.
+
+Output is one row per session (bar count, first/last bar, OHLC, volume)
+plus the last five bars. Timestamps are `America/New_York`. Pre/post-market
+bars are included by default, so a full session runs 04:00–20:00 rather
+than 390 bars; `--gaps` counts regular-session minutes with no print, which
+on a thin small cap is normal, not a fetch error.
+
 ## Structure
 
 ```
-src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, scanner)
+src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, history, scanner)
 scripts/run_scanner.py  scanner CLI
+scripts/fetch_1m_history.py  1-minute candle archive CLI
 tests/               test suite
 knowledge-base/      strategy research and specs
 ```
