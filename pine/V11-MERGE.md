@@ -144,6 +144,42 @@ observed. If the rows still smear in TradingView, the next suspect is string
 length itself, and the answer there is a shorter SIZE line — which does change
 the display, so I have not done it unasked.
 
+## CE10156 — the compile error, and the rule behind it
+
+The first paste into TradingView failed with:
+
+```
+Syntax error at input "end of line without line continuation"
+```
+
+One line, mine:
+
+```pine
+v11BrokeStructure = (not na(vwapValue) and close < vwapValue) or
+                    (not na(v11LegLow) and close < v11LegLow)     // 20 spaces
+```
+
+Pine continues a statement onto the next line only when that line is indented
+by a number of spaces that is **not a multiple of four**. Four, eight, twelve,
+twenty read as the start of a local block instead — so the parser hits the end
+of an unfinished expression and reports the failure on the *following* line,
+never naming the cause. Deep indents inside an unclosed `(` are exempt, which
+is why the file's long argument lists are fine and only this one broke.
+
+Indent changed to 5. Verified three ways: the fixed file passes, V9.12 passes
+(it compiles, so a rule that flagged it would be wrong), and reintroducing the
+20-space indent is caught.
+
+**The linter learned it.** `scripts/pine_check.py` — the project's own checker,
+brought over from the V9 branch — now carries a `continuation_indent` rule, the
+same way V9.6's `label.new size=` compile error was turned into a rule rather
+than a memory. The word-operator test needs a boundary check: `stopExceedsHaltBand`
+ends with the letters `and` and is not a continuation.
+
+One more construct was hardened in the same pass, before a compiler could find
+it: `v11LockLine` ended a ternary with `na` against string branches, which is a
+type-inference trap. It uses `""` now.
+
 ## What is still not true of V11
 
 - **It has never been compiled.** Written and checked statically — declaration

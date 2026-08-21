@@ -655,7 +655,7 @@ if v11NewDay
     v11LegLow  := na
 
 v11BrokeStructure = (not na(vwapValue) and close < vwapValue) or
-                    (not na(v11LegLow) and close < v11LegLow)
+     (not na(v11LegLow) and close < v11LegLow)
 if v11BrokeStructure
     v11PbIndex := 0
     v11InPb    := false
@@ -2448,16 +2448,18 @@ bool onlyClockBlocks = pushGate and pullbackCountGate and retracementGate and
 // V9 already fixed once. §8 stopping the day is the rule WORKING, and the
 // operator has to be able to see that it is why nothing is arming — so the
 // lock outranks every other verb except the ones about the chart itself.
+// Empty string rather than na: a ternary whose branches are a string and na
+// is a type-inference trap in Pine, and "" tests the same way here.
 string v11LockLine = useRiskGovernor and v11Locked ?
      "NO — §8 " + v11LockReason + ", account stopped" +
           (v11AcctLocked ? " (walkaway — survives the session)" : " today") :
      useRiskGovernor and v11DayTrades >= maxTradesPerDay ?
-          "NO — §7 daily trade cap reached (" + str.tostring(v11DayTrades) + ")" : na
+          "NO — §7 daily trade cap reached (" + str.tostring(v11DayTrades) + ")" : ""
 
 actionText =
      (not isOneMinute ? "USE 1-MINUTE CHART" :
      not supportedMarket ? "NO — unsupported symbol (US-listed stocks/ADRs, 1-min only)" :
-     not na(v11LockLine) and displayState != LONG ? v11LockLine :
+     v11LockLine != "" and displayState != LONG ? v11LockLine :
      displayState == LONG ? "MANAGE — " + f_n(mfeR, "#.00") + "R so far · stop " +
           f_px(t1Filled ? tradeEntryPrice : structuralStop) :
      displayState == ARMED ? roomWarn + "BUY >" + f_px(triggerPrice) + " — order working" + shortLH :
