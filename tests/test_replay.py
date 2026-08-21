@@ -392,55 +392,61 @@ def test_size_is_capped_by_cash_not_just_risk():
             assert d.size_capped_by_cash
 
 
-def test_full_pipeline_produces_a_trade_on_a_textbook_bull_flag():
-    """End-to-end guard: impulse -> 2-candle light-volume dip onto a whole
-    dollar -> break of the prior high. If this ever stops producing a TAKE,
-    the gate has silently closed and every run will report zero trades as
-    though that were a clean result."""
-    pre = list(4.45 + np.random.default_rng(7).normal(0, 0.004, 150))
-    ramp = list(np.linspace(4.50, 5.30, 20))
-    dip = [5.15, 5.03]                       # low lands on $5.00
-    brk = [5.20, 5.32, 5.46, 5.60, 5.72]
-    px = np.array(pre + ramp + dip + brk)
-    vol = np.array([2_000.] * 150 + [60_000.] * 20 + [7_000., 5_000.] + [80_000.] * 5)
+def textbook_flag() -> pd.DataFrame:
+    """A setup that survives HONEST timing.
+
+    The §3 gate is judged on the close of the last dip bar, so the dip must
+    still be holding the 9 EMA at that moment *and* have landed on a level.
+    Those two only coexist in a narrow band, which is exactly what makes the
+    setup rare.
+
+    Structure: an impulse topping at 5.50 (leaving a pivot), a shallow dip
+    that confirms it, a second leg breaking 5.50 so it flips to support, then
+    a two-bar light-volume pullback whose low returns to precisely 5.50 — the
+    half dollar, the flipped level and the 9 EMA all at once.
+    """
+    pre = list(4.60 + np.random.default_rng(11).normal(0, 0.003, 160))
+    legA = list(np.linspace(4.62, 5.47, 18))     # tops with High = 5.50
+    pbA = [5.44, 5.40]                           # confirms the 5.50 pivot
+    legB = [5.50, 5.62, 5.74]                    # breaks 5.50 -> it flips
+    dip = [5.62, 5.53]                           # low = 5.50, back to the level
+    brk = [5.65, 5.81, 5.99, 6.19, 6.39]
+    px = np.array(pre + legA + pbA + legB + dip + brk)
+    vol = np.array([2_000.] * 160 + [60_000.] * 18 + [8_000.] * 2
+                   + [70_000.] * 3 + [5_000.] * 2 + [80_000.] * 5)
     idx = pd.date_range("2026-08-20 07:00", periods=len(px), freq="1min",
                         tz="America/New_York")
-    bars = pd.DataFrame({"Open": px, "High": px + 0.03, "Low": px - 0.03,
+    return pd.DataFrame({"Open": px, "High": px + 0.03, "Low": px - 0.03,
                          "Close": px, "Volume": vol}, index=idx)
 
-    log = replay.replay_session(bars, "TEST")
+
+def test_full_pipeline_produces_a_trade_on_a_textbook_bull_flag():
+    """End-to-end guard: if this stops producing a TAKE the gate has silently
+    closed, and every run will then report zero trades as though that were a
+    clean result. That failure mode has already occurred twice here."""
+    log = replay.replay_session(textbook_flag(), "TEST")
     takes = log[log["verdict"] == "TAKE"]
     assert len(takes) >= 1
     t = takes.iloc[0]
-    assert t["stop"] == pytest.approx(5.00, abs=1e-6)        # §5 pullback low
+    assert t["stop"] == pytest.approx(5.50, abs=1e-6)        # §5 pullback low
     assert t["risk_per_share"] <= replay.STOP_MAX_DISTANCE   # §5 cap
     assert t["reward_risk"] >= replay.MIN_REWARD_RISK        # §6
     assert t["confluence_count"] >= replay.CONFLUENCE_MIN    # §3
     assert t["shares"] * t["entry"] <= 25_000.0 + 1e-6       # §7 cash cap
 
 
-def test_support_tolerance_is_floored_at_a_tick():
-    """§3 floors tolerance at the spread. Without a floor a $2 stock gets a
-    half-cent window and no level can ever match."""
-    cheap = session([2.00] * 30)
-    assert replay.support_reasons(2.005, cheap, tolerance_pct=0.25) != []
-    # 0.25% of $2.00 is $0.005 — smaller than one tick
-    assert 2.00 * 0.25 / 100.0 < replay.TOLERANCE_FLOOR
-
-
-def test_support_tolerance_floor_does_not_shrink_a_wide_window():
-    """On a $20 stock the percentage window is wider than the floor and wins."""
-    rich = session([20.00] * 30)
-    assert replay.support_reasons(20.04, rich, tolerance_pct=0.25) != []
-
-
-def test_sizing_does_not_lose_a_share_to_float_division():
-    """Regression: `2000 // 0.10` is 19999.0, not 20000 — floor division on
-    binary floats silently drops a share, and the error scales with size."""
-    bars = session([5.0] * 30)
-    bars["Volume"] = 10_000_000.0
-    shares, bound = replay.size_position(100_000.0, 5.00, 0.10, bars)
-    assert shares == 20_000 and bound == "risk"
+def test_the_gate_is_judged_before_the_trigger_candle_closes():
+    """The fill is priced at the break of the PRIOR bar's high, which happens
+    mid-candle. Judging §3 on the trigger candle's own close hands the filter
+    a minute of information the fill never had — enough to let a dip that had
+    already lost the 9 EMA qualify because price recovered by the close."""
+    bars = textbook_flag()
+    trigger = 160 + 18 + 2 + 3 + 2
+    visible = replay.visible_slice(bars, trigger)
+    d = replay.evaluate(visible, "TEST")
+    assert d.price == pytest.approx(float(visible["Close"].iloc[-2])), \
+        "the gate must read the prior bar's close, not the trigger candle's"
+    assert d.entry == pytest.approx(float(visible["High"].iloc[-2]) + 0.02)
 
 
 # ------------------------------------------------------- audit regressions

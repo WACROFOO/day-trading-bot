@@ -314,7 +314,19 @@ qty        = math.max(0, math.min(math.min(qtyByRisk, qtyByCash), qtyByTape))
 // ------------------------------------------------------------- execution
 // §4: "the first candle to trade above the high of the previous candle."
 // A resting stop order fills exactly on that event and cannot look ahead.
+//
+// [FIX-14] The order's terms are latched WHEN IT IS PLACED. The fill happens
+// on a later bar, by which time entryPrice, stopPrice and riskPerShare have
+// been recomputed off that bar -- managing the position with those values
+// would use a stop the trade was never sized against.
+var float pendStop   = na
+var float pendTarget = na
+var float pendRisk   = na
+
 if canTrade and setupValid and qty > 0 and strategy.position_size == 0
+    pendStop   := stopPrice
+    pendTarget := target1
+    pendRisk   := riskPerShare
     strategy.entry("L", strategy.long, qty = qty, stop = entryPrice,
          comment = "pb" + str.tostring(liveIndex))
 
@@ -331,10 +343,12 @@ var bool  scaled1    = false
 var bool  scaled2    = false
 
 if strategy.position_size > 0 and strategy.position_size[1] == 0
-    posStop    := stopPrice
-    posRisk    := riskPerShare
-    posTarget  := target1
-    posTarget2 := math.max(target1 + riskPerShare, strategy.position_avg_price + 2 * riskPerShare)
+    // use the LATCHED terms, not this bar's recomputed ones [FIX-14]
+    posStop    := pendStop
+    posRisk    := pendRisk
+    posTarget  := pendTarget
+    posTarget2 := math.max(pendTarget + pendRisk,
+                           strategy.position_avg_price + 2 * pendRisk)
     scaled1    := false
     scaled2    := false
 

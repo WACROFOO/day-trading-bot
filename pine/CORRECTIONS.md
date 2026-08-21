@@ -244,6 +244,64 @@ On the wiring fixture these changes moved the reported return from **+8.6% to
 +1.1%**, with exits finally firing on real values.
 
 
+---
+
+# Third pass — timing leaks found by self-review
+
+## FIX-14 — the resting order's terms were re-derived at fill time · defect · Pine only · §5
+
+When a resting stop order fills, Pine is on a **later bar**, by which point
+`entryPrice`, `stopPrice` and `riskPerShare` have all been recomputed from that
+bar. The position was then managed against a stop it was never sized against —
+and if the dip state had moved on, against a stop belonging to a different
+pullback entirely.
+
+The order's terms are now latched when it is **placed** and read back on the
+fill. The Python engine cannot have this bug: it decides and prices in the same
+call.
+
+Pine `[FIX-14]`
+
+## FIX-15 — the §3 gate was judged on the trigger candle's close · defect · Python only · §3/§4
+
+The fill is priced at the break of the **prior** bar's high — an event that
+happens mid-candle. But the gate read `close`, `vwap`, `ema9` and `macd_hist`
+at the trigger candle's own close, which is only knowable a minute later. The
+filter therefore had information the fill did not.
+
+It is not a subtle distortion. A dip that had **already lost the 9 EMA** could
+still qualify, because by the trigger candle's close price had recovered above
+it. §3 requires *holding* the 9 EMA; the old timing let setups through that had
+already broken it.
+
+The gate is now judged on the close of the last dip bar, and the current bar is
+allowed to contribute one fact only: whether it took out that bar's high. This
+is the playbook's own ordering — Step 3 confirms the chart, Step 4 waits for the
+trigger — and it is why the same decision expresses cleanly in Pine as a resting
+stop order.
+
+`replay.evaluate` · Pine had this right by construction
+
+### What it cost
+
+The end-to-end fixture stopped qualifying, which is the finding rather than a
+problem with the fix: it had only ever passed *because* of the leak. Its dip ran
+from 5.30 to 5.03 and was below the 9 EMA at the moment the order would have
+rested. Under honest timing it is not a §3 setup.
+
+A replacement had to satisfy both §3 conditions **simultaneously** — the dip
+lands on a level *and* is still holding the 9 EMA when the chart is confirmed.
+Those coexist only in a narrow band, and a scan of 36 candidate geometries found
+8. The one now in the suite: an impulse topping at 5.50, a dip confirming that
+pivot, a second leg breaking 5.50 so it flips to support, then a two-bar
+light-volume pullback whose low returns to exactly 5.50 — half dollar, flipped
+level and 9 EMA at one price. Entry 5.58, stop 5.50, risk **$0.08** (§5's stated
+typical), reward:risk 2.38, confluence 3.
+
+That difficulty is itself the result. The setup §3 describes is genuinely rare,
+and any backtest finding it often is finding something else.
+
+
 # Findings — not fixed, deliberately
 
 ## The §6 2:1 gate structurally rejects shallow pullbacks

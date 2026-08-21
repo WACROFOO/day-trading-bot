@@ -338,33 +338,48 @@ def evaluate(visible: pd.DataFrame, symbol: str, *,
              tolerance_pct: float = TOLERANCE_PCT) -> Decision:
     """Evaluate the §3 gate and §4 trigger at the cursor. No future access."""
     bar = visible.iloc[-1]
-    ts, price = visible.index[-1], float(bar["Close"])
-    close = visible["Close"]
+    ts = visible.index[-1]
+
+    # The §3 chart check is made on the CLOSE OF THE PRIOR BAR, not this one.
+    # The fill is priced at the break of that bar's high — an event that
+    # happens mid-candle — so judging the gate on the trigger candle's own
+    # close would hand the filter a minute of information the fill never had.
+    # This is the playbook's ordering: Step 3 confirms the chart, Step 4 waits
+    # for the trigger. It is also why the same decision can be expressed in
+    # Pine as a resting stop order.
+    prior = visible.iloc[:-1]
+    if len(prior) < 3:
+        return Decision(timestamp=ts, symbol=symbol, price=float(bar["Close"]),
+                        verdict="SKIP", reason="insufficient history")
+
+    price = float(prior["Close"].iloc[-1])
+    close = prior["Close"]
 
     d = Decision(timestamp=ts, symbol=symbol, price=price,
                  verdict="SKIP", reason="")
 
     hist = float(indicators.macd(close)["hist"].iloc[-1])
-    vwap_now = float(indicators.vwap(visible).iloc[-1])
+    vwap_now = float(indicators.vwap(prior).iloc[-1])
     ema9_now = float(indicators.ema9(close).iloc[-1])
     d.macd_positive = bool(np.isfinite(hist) and hist > 0)
     d.above_vwap = bool(np.isfinite(vwap_now) and price > vwap_now)
     d.above_ema9 = bool(np.isfinite(ema9_now) and price > ema9_now)
 
-    pb = detect_pullback(visible)
+    pb = detect_pullback(prior)
     d.pullback_index_ok = 1 <= pb.index <= MAX_PULLBACK_INDEX
     d.pullback_volume_lighter = bool(
         np.isfinite(pb.pullback_volume) and np.isfinite(pb.impulse_volume)
         and pb.pullback_volume < pb.impulse_volume)
 
-    dip_low = pb.low if np.isfinite(pb.low) else float(bar["Low"])
-    reasons = support_reasons(dip_low, visible, tolerance_pct)
+    dip_low = pb.low if np.isfinite(pb.low) else float(prior["Low"].iloc[-1])
+    reasons = support_reasons(dip_low, prior, tolerance_pct)
     d.confluence_count = len(reasons)
     d.at_support = len(reasons) >= CONFLUENCE_MIN
     d.support_reasons = "|".join(reasons)
 
-    # §4: the trigger is this candle taking out the prior candle's high
-    prior_high = float(visible["High"].iloc[-2])
+    # §4: the trigger is THIS candle taking out the prior candle's high — the
+    # only thing the current bar is allowed to tell us.
+    prior_high = float(prior["High"].iloc[-1])
     d.trigger = bool(float(bar["High"]) > prior_high)
 
     gate = {
@@ -402,7 +417,7 @@ def evaluate(visible: pd.DataFrame, symbol: str, *,
         return d
 
     d.shares, d.size_bound_by = size_position(equity, d.entry, d.risk_per_share,
-                                              visible)          # §7
+                                              prior)            # §7
     d.size_capped_by_cash = d.size_bound_by != "risk"
     if d.shares <= 0:
         d.reason = "size rounds to zero"
