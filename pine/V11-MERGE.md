@@ -107,6 +107,43 @@ V9 sold half at 1R and ran the rest. §6 specifies 50 / 25 / 25. The middle rung
 respects V9's whole-share discipline: below 4 shares the ladder collapses back
 to two legs.
 
+## Display: unchanged from V9.12
+
+Verified rather than asserted. Every `table.*`, `plot`, `label.*`, `line.*` and
+`plotshape` call in V11 is byte-identical to V9.12 — 88 display calls on both
+sides, zero differences. The layout, the row order, the chip colours, the plan
+and size rows, the trend lines, the S/R levels and the position info are V9.12's,
+untouched.
+
+Exactly **one** V11 change can alter a displayed string: when §8 has locked the
+account, the VERDICT row says so. Without it a locked account would arm nothing
+and explain nothing — the zombie-display defect V9 had already fixed once, in
+its own words: "a cancelled order can no longer show BUY".
+
+### On the messy screenshot
+
+The chart supplied was **V9.9**, three revisions behind. Most of that clutter —
+the trend line running away across the whole chart, the `uptrend` / `downtrend`
+labels colliding with the price scale — is what **V9.10** was for: *"scored
+trend-line anchors — the line must describe the CURRENT leg"*, with a candidate
+needing two touches before a line is drawn at all. Moving to V11 picks that up.
+
+The smeared SIZE and LIMITS rows are a different matter and are **not** fixed by
+V9.12: those two rows are identical in V9.9, V9.12 and V11. They are the two
+widest strings in the dashboard and they live in merged rows, and the merge
+block never creates the cells it merges across — columns 2..6 of those rows are
+never written. `table.merge_cells` wants the range to exist; when the merge does
+not take, a 600-pixel string is left inside a chip-width column and TradingView
+draws it overflowing its neighbours, which is exactly what the smear looks like.
+
+V11 creates that range empty once, before merging. It changes no text, no
+colour and no layout — if the merge was already taking, the empty cells are
+invisible. **This is a hypothesis I cannot confirm without the renderer**: Pine
+cannot be compiled here, so the fix is reasoned from the code rather than
+observed. If the rows still smear in TradingView, the next suspect is string
+length itself, and the answer there is a shorter SIZE line — which does change
+the display, so I have not done it unasked.
+
 ## What is still not true of V11
 
 - **It has never been compiled.** Written and checked statically — declaration

@@ -3053,6 +3053,31 @@ if barstate.islast
     // merges once per rebuild, AFTER every top-left cell exists.
     if not dashMerged
         dashMerged := true
+        // V11 (display hardening — no design change): the wide rows write
+        // ONLY their top-left cell, so columns 2..6 of those rows are never
+        // created. table.merge_cells wants the whole range to exist; when it
+        // does not merge, a long string is left inside a chip-width column 1
+        // and TradingView draws it overflowing across its neighbours — which
+        // is what smears the SIZE and LIMITS rows. Creating the range empty
+        // first costs nothing visually and lets the merge take.
+        //
+        // These writes happen ONCE, BEFORE the merge. Writing a non-top-left
+        // cell of an already-merged range is what Pine warns against, so they
+        // must never move below the merge calls.
+        for cc = 2 to 6
+            table.cell(dash, cc, 0, "", text_size=DSZ)
+            table.cell(dash, cc, 1, "", text_size=DSZ)
+            table.cell(dash, cc, 2, "", text_size=DSZ)
+            table.cell(dash, cc, 3, "", text_size=DSZ)
+            table.cell(dash, cc, 7, "", text_size=DSZ)
+            if cc >= 3
+                table.cell(dash, cc, 4, "", text_size=DSZ)
+            if rVwap >= 0
+                table.cell(dash, cc, rVwap, "", text_size=DSZ)
+                table.cell(dash, cc, rRS, "", text_size=DSZ)
+                table.cell(dash, cc, rQual, "", text_size=DSZ)
+            if rLim >= 0
+                table.cell(dash, cc, rLim, "", text_size=DSZ)
         table.merge_cells(dash, 1, 0, 6, 0)
         table.merge_cells(dash, 1, 1, 6, 1)
         table.merge_cells(dash, 1, 2, 6, 2)
