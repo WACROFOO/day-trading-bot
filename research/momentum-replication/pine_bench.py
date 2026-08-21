@@ -38,8 +38,12 @@ class Cfg:
 V75 = Cfg('V7.5', sameBarStop=False, entryTimeOK=False, risk=200.0, maxPos=25000.0, retestBand=False)
 V80 = Cfg('V8.0', sameBarStop=True,  entryTimeOK=True,  risk=20.0,  maxPos=2000.0,  retestBand=True)
 
-def run(sym, bars, cfg):
-    """bars: list of (ts,o,h,l,c,v) ints/floats, chronological."""
+def run(sym, bars, cfg, trace=None):
+    """bars: list of (ts,o,h,l,c,v) ints/floats, chronological.
+    trace: optional list — appended with per-bar state dicts and event
+    notes so trade_audit.py can say what the engine believed at any
+    minute. Caveat: this is the Python port, not the Pine; a few Pine
+    gates (max stop %, halt band) are reported, not enforced."""
     closes=[b[4] for b in bars]
     e12=ema_series(closes,12); e26=ema_series(closes,26)
     macd=[a-b for a,b in zip(e12,e26)]; sig=ema_series(macd,9)
@@ -68,6 +72,8 @@ def run(sym, bars, cfg):
             day=d.date(); state='IDLE'; arm=None; dayHigh=None; brokenHOD=None
             setupsToday=0; pull=None; retestArmedUsed=False
         hhmm = d.hour*60+d.minute
+        if trace is not None:
+            trace.append(dict(t=t, state=('LONG' if pos is not None else state), armed=arm is not None))
         in_win = cfg.winStart <= hhmm < cfg.winEnd
         last_win_bar = hhmm >= cfg.winEnd - 1
         dayHigh = h if dayHigh is None else max(dayHigh, h)
@@ -123,6 +129,8 @@ def run(sym, bars, cfg):
             if not in_win:
                 arm=None
             elif c < arm['stop']:
+                if trace is not None:
+                    trace.append(dict(t=t, note='ARM-CANCEL', why='close below stop'))
                 arm=None  # invalidated
             elif h >= arm['trigger']:
                 entry = max(o, arm['trigger']) + SLIP
@@ -141,6 +149,8 @@ def run(sym, bars, cfg):
                                    hhmm_in=hhmm)
                         setupsToday += 1
                         arm=None
+                        if trace is not None:
+                            trace.append(dict(t=t, note='FILL', entry=round(entry,4)))
                         if l <= pos['stop']: samebar_risk += 1
                         # V8 same-bar: stop touched after entry this very bar
                         if stop_same_bar and l <= pos['stop']:
@@ -230,6 +240,9 @@ def run(sym, bars, cfg):
                 pushrange = pull['push']['hi'] - pull['push']['lo']
                 retr = (pull['push']['hi'] - pull['plow'])/pushrange if pushrange>0 else 1
                 if pull['reds'] > 4 or retr > 0.50:
+                    if trace is not None:
+                        trace.append(dict(t=t, note='REJECT',
+                            why=f'dip too deep ({retr*100:.0f}%)' if retr > 0.50 else 'dip too long'))
                     state='IDLE'; pull=None
                 elif pull['reds'] >= 1:
                     # armable on next green cross of red-bar high — place stop order now
@@ -246,6 +259,19 @@ def run(sym, bars, cfg):
                             arm = dict(trigger=trigger, stop=stop)
                             armed_count += 1
                             if last_win_bar: lastbar_arms += 1
+                            if trace is not None:
+                                trace.append(dict(t=t, note='ARM', trigger=round(trigger,4), stop=round(stop,4)))
+                    if trace is not None and arm is None and pull['reds'] >= 1:
+                        _w = pull['push']['start']
+                        _pb = i - _w
+                        _pv = sum(b[5] for b in bars[_w:i+1-pull['reds']]) / max(1, _pb-pull['reds']+1)
+                        _vr = (pull['pvol']/pull['reds'])/_pv if _pv > 0 else None
+                        _trig = pull['redhigh'] + TICK
+                        _stp = pull['plow'] - TICK
+                        trace.append(dict(t=t, note='NOARM',
+                            in_win=in_win, macd_ok=bool(macd[i] >= sig[i]),
+                            dip_vol_ratio=round(_vr, 2) if _vr else None,
+                            stop_pct=round((_trig - _stp) / _trig * 100, 1) if _trig > 0 else None))
             elif h > pull['push']['hi']:
                 pull['push']['hi']=h  # push extends
             elif pull['reds']>0 and c > o:
