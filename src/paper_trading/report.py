@@ -195,10 +195,21 @@ def build(logs: pd.DataFrame, sim: dict, *,
             "final_equity_$": final_eq,
         }])
         add(_md(headline, "{:.3f}"))
-        breakeven = 1 / (1 + replay.MIN_REWARD_RISK)
-        add(f"\n§9 breakeven win rate at 2:1 is **{breakeven:.1%}**; this sample ran "
-            f"**{win_rate:.1%}** over **{len(trades)}** trades — "
+        sc = replay.score(logs)
+        nominal = sc.get("breakeven_win_rate_nominal", 1 / (1 + replay.MIN_REWARD_RISK))
+        realized_rr = sc.get("realized_reward_risk", float("nan"))
+        breakeven = sc.get("breakeven_win_rate", nominal)
+        add(f"\n§9's breakeven win rate is **{nominal:.1%}** at the 2:1 the rules "
+            f"aim for. But the reward:risk actually achieved here was "
+            f"**{realized_rr:.2f}:1**"
+            + ("" if np.isfinite(realized_rr) else " (not yet measurable)")
+            + f", which moves the real breakeven to **{breakeven:.1%}**. "
+            f"This sample ran **{win_rate:.1%}** over **{len(trades)}** trades — "
             f"{'above' if win_rate > breakeven else 'below'} it.\n")
+        add(f"\nScaling half the position at target_1 caps the upside well below "
+            f"2R while a stop still costs a full R plus costs, so the achieved "
+            f"ratio is structurally lower than the target one. Judging the "
+            f"result against the nominal 33.3% can pass a losing system.\n")
         if len(trades) < 20:
             add(f"\n> ⚠ **N = {len(trades)}. Not significant.** Do not read an edge "
                 f"into this. The corpus claims 65–75% (§9); distinguishing that from "

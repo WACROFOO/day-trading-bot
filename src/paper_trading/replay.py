@@ -28,6 +28,7 @@ TOLERANCE_PCT = 0.25
 TOLERANCE_FLOOR = 0.01   # §3 tolerance_floor: spread; one tick without quote data
 MAX_PULLBACK_INDEX = 2
 STOP_MAX_DISTANCE = 0.20
+STOP_MIN_DISTANCE = 0.01   # §5 stop_min_distance >= spread width
 MIN_REWARD_RISK = 2.0
 RISK_PCT = 2.0
 MAX_PARTICIPATION_PCT = 10.0   # share of the tape you can take without moving it
@@ -122,16 +123,22 @@ def size_position(equity: float, entry: float, risk_per_share: float,
 
 # ------------------------------------------------------------------ §3 support
 
-def swing_highs(visible: pd.DataFrame, left: int = 2, right: int = 2) -> list[float]:
-    """Confirmed local highs. Only highs with `right` bars after them count,
-    so a pivot is never claimed before the market confirmed it."""
+def swing_highs_indexed(visible: pd.DataFrame, left: int = 2,
+                        right: int = 2) -> list[tuple[int, float]]:
+    """Confirmed local highs as (position, price)."""
     highs = visible["High"].to_numpy()
     out = []
     for i in range(left, len(highs) - right):
         window = highs[i - left:i + right + 1]
-        if highs[i] == window.max() and (window.argmax() == left):
-            out.append(float(highs[i]))
+        if highs[i] == window.max() and window.argmax() == left:
+            out.append((i, float(highs[i])))
     return out
+
+
+def swing_highs(visible: pd.DataFrame, left: int = 2, right: int = 2) -> list[float]:
+    """Confirmed local highs. Only highs with `right` bars after them count,
+    so a pivot is never claimed before the market confirmed it."""
+    return [price for _, price in swing_highs_indexed(visible, left, right)]
 
 
 def support_reasons(price: float, visible: pd.DataFrame,
@@ -162,9 +169,16 @@ def support_reasons(price: float, visible: pd.DataFrame,
         ma200 = float(close.rolling(200).mean().iloc[-1])
         if np.isfinite(ma200) and abs(price - ma200) <= tol:
             reasons.append("ma200")
-    # flipped level: an earlier confirmed high, now at or below price
-    for high in swing_highs(visible.iloc[:-1]):
-        if abs(price - high) <= tol and price >= high - tol:
+    # §3 flipped level: resistance that was actually BROKEN and is now being
+    # retested from above. The level must have been exceeded by a later bar —
+    # without that check `abs(price - high) <= tol and price >= high - tol` is
+    # a tautology (the second clause follows from the first), so any nearby
+    # swing high counted and confluence was inflated.
+    highs_frame = visible.iloc[:-1]
+    for pos, level in swing_highs_indexed(highs_frame):
+        after = highs_frame["High"].iloc[pos + 1:]
+        broken = len(after) and float(after.max()) > level + tol
+        if broken and abs(price - level) <= tol:
             reasons.append("flipped_level")
             break
     return reasons
@@ -294,6 +308,31 @@ class Decision:
     support_reasons: str = ""
 
 
+def order_params(visible: pd.DataFrame, stop: float) -> dict:
+    """§4/§5/§6 order arithmetic from one place.
+
+    Both a TAKE and the counterfactual for a SKIP must be priced by the same
+    rules; pricing skips at a flat 2R while trades target the high-of-day
+    retest makes precision and recall measure different things and quietly
+    breaks the comparison the whole report rests on.
+    """
+    prior_high = float(visible["High"].iloc[-2])
+    entry = prior_high + min(SLIPPAGE_PER_SHARE, MAX_SLIPPAGE)
+    risk = entry - stop
+    if risk <= 0:
+        return {"entry": entry, "stop": stop, "risk": risk, "target": float("nan"),
+                "target_source": "", "reward_risk": float("nan")}
+    # the trigger candle's own high is excluded — it prints after the fill
+    # price is already fixed
+    hod = float(visible["High"].iloc[:-1].max())
+    if hod > entry:
+        target, source = hod, "hod_retest"
+    else:
+        target, source = entry + 2 * risk, "2R_fallback"
+    return {"entry": entry, "stop": stop, "risk": risk, "target": target,
+            "target_source": source, "reward_risk": (target - entry) / risk}
+
+
 def evaluate(visible: pd.DataFrame, symbol: str, *,
              equity: float = 25_000.0,
              tolerance_pct: float = TOLERANCE_PCT) -> Decision:
@@ -342,23 +381,22 @@ def evaluate(visible: pd.DataFrame, symbol: str, *,
         d.reason = "gate: " + ",".join(failed)
         return d
 
-    # §4 entry: the break of the prior high, plus slippage (capped §4)
-    d.entry = prior_high + min(SLIPPAGE_PER_SHARE, MAX_SLIPPAGE)
-    d.stop = dip_low                                    # §5
-    d.risk_per_share = d.entry - d.stop
+    # §4/§5/§6 order arithmetic
+    o = order_params(visible, dip_low)
+    d.entry, d.stop = o["entry"], o["stop"]
+    d.risk_per_share = o["risk"]
+    d.target, d.target_source = o["target"], o["target_source"]
+    d.reward_risk = o["reward_risk"]
+
     if d.risk_per_share <= 0:
         d.reason = "stop above entry"
+        return d
+    if d.risk_per_share < STOP_MIN_DISTANCE:            # §5 stop_min_distance
+        d.reason = f"stop distance {d.risk_per_share:.3f} < spread floor"
         return d
     if d.risk_per_share > STOP_MAX_DISTANCE:            # §5 never widen
         d.reason = f"stop distance {d.risk_per_share:.3f} > {STOP_MAX_DISTANCE}"
         return d
-
-    hod = float(visible["High"].max())                  # §6 target_1
-    if hod > d.entry:
-        d.target, d.target_source = hod, "hod_retest"
-    else:
-        d.target, d.target_source = d.entry + 2 * d.risk_per_share, "2R_fallback"
-    d.reward_risk = (d.target - d.entry) / d.risk_per_share
     if d.reward_risk < MIN_REWARD_RISK:                 # §6
         d.reason = f"reward:risk {d.reward_risk:.2f} < {MIN_REWARD_RISK}"
         return d
@@ -389,75 +427,137 @@ class Outcome:
     bars_held: int = 0
 
 
-def resolve(future: pd.DataFrame, d: Decision) -> Outcome:
-    """Manage the position on bars strictly after the entry candle (§5/§6).
+def resolve(bars: pd.DataFrame, entry_idx: int, d: Decision) -> Outcome:
+    """Manage the position from the entry candle onward (§5/§6).
 
-    Half the position leaves at target_1 (§6 scale_1_pct), the stop moves to
-    breakeven after that scale (§5), and the remainder exits on the first
-    hard-exit signal or the stop. Costs: commission + slippage on every fill.
+    Takes the WHOLE session and the entry bar's position, not a pre-sliced
+    future, because VWAP and MACD are path-dependent: computed on a slice
+    that starts at the entry, VWAP re-seeds to that bar's own typical price
+    and MACD's histogram resets to zero. On a rising session that makes
+    `close < vwap` true on the very first bar, firing a fabricated
+    `vwap_break` exit on essentially every trade. Indicators are therefore
+    computed once over the full session and indexed — still causal, because
+    bar i only ever reads bars up to i.
+
+    The entry candle is inspected too: the fill happens intrabar, so a
+    candle that reverses through the stop after filling is a loss, not an
+    untouched winner with mae_r = 0.
     """
-    if future.empty:
+    if bars is None or entry_idx >= len(bars) - 1:
         return Outcome()
 
-    risk, entry = d.risk_per_share, d.entry
-    stop, scaled = d.stop, False
+    vwap_s = indicators.vwap(bars)                    # full-session, causal
+    hist_s = indicators.macd(bars["Close"])["hist"]
+    avg_vol = bars["Volume"].shift(1).rolling(20, min_periods=1).mean()
+
+    entry, risk = d.entry, d.risk_per_share
+    shares = max(int(d.shares), 0)
+    if shares <= 0 or risk <= 0:
+        return Outcome()
+
+    # §6 scale ladder 50 / 25 / 25, in whole shares
+    s1 = int(round(shares * 0.50))
+    s2 = int(round(shares * 0.25))
+    runner = shares - s1 - s2
+    remaining = shares
+    legs: list[tuple[int, float]] = []
+
+    t1 = d.target
+    t2 = max(t1 + risk, entry + 2 * risk)             # §6 "next level"
+    stop = d.stop
+    scaled1 = scaled2 = False
     mae = mfe = 0.0
-    vwap_s = indicators.vwap(future)
-    hist_s = indicators.macd(future["Close"])["hist"]
-    realized = 0.0          # R banked by the scaled half
-    prior_low = float(future["Low"].iloc[0])
 
-    for i in range(len(future)):
-        bar = future.iloc[i]
-        mae = min(mae, (float(bar["Low"]) - entry) / risk)
-        mfe = max(mfe, (float(bar["High"]) - entry) / risk)
+    def close_out(fill: float, reason: str, i: int) -> Outcome:
+        legs.append((remaining, fill))
+        gross = sum(sh * (px - entry) for sh, px in legs)
+        commission = COMMISSION_PER_SHARE * shares * 2
+        return Outcome(resolved=True, exit_price=fill, exit_reason=reason,
+                       r_multiple=gross / (risk * shares),
+                       net_pnl=gross - commission, mae_r=mae, mfe_r=mfe,
+                       bars_held=i - entry_idx + 1)
 
-        if float(bar["Low"]) <= stop:                    # stop first: worst case
-            fill = stop - SLIPPAGE_PER_SHARE
-            r = realized + (1 - 0.5 * scaled) * (fill - entry) / risk
-            return _outcome(d, fill, "stop" if not scaled else "breakeven_stop",
-                            r, mae, mfe, i + 1)
+    for i in range(entry_idx, len(bars)):
+        bar = bars.iloc[i]
+        ts = bars.index[i]
 
-        if not scaled and float(bar["High"]) >= d.target:
-            fill = d.target - SLIPPAGE_PER_SHARE
-            realized = 0.5 * (fill - entry) / risk
-            scaled, stop = True, entry                   # §5 breakeven
-
-        exit_reason = _hard_exit(bar, future, i, prior_low,
-                                 float(vwap_s.iloc[i]), float(hist_s.iloc[i]))
-        prior_low = float(bar["Low"])
-        if exit_reason:
+        # §2: flat by the 11:30 hard stop, never into midday_avoid
+        if ts.time() >= SESSION_END:
             fill = float(bar["Close"]) - SLIPPAGE_PER_SHARE
-            r = realized + (1 - 0.5 * scaled) * (fill - entry) / risk
-            return _outcome(d, fill, exit_reason, r, mae, mfe, i + 1)
+            return close_out(fill, "session_hard_stop", i)
 
-    last = float(future["Close"].iloc[-1]) - SLIPPAGE_PER_SHARE
-    r = realized + (1 - 0.5 * scaled) * (last - entry) / risk
-    return _outcome(d, last, "session_end", r, mae, mfe, len(future))
+        low, high = float(bar["Low"]), float(bar["High"])
+        mae = min(mae, (low - entry) / risk)
+        mfe = max(mfe, (high - entry) / risk)
+
+        # Stop is checked first: when a bar touches both stop and target the
+        # conservative reading is that the stop went first.
+        if low <= stop:
+            gap = float(bar["Open"])                  # a gap through the stop
+            fill = min(stop, gap) - SLIPPAGE_PER_SHARE
+            reason = "breakeven_stop" if scaled1 else "stop"
+            return close_out(fill, reason, i)
+
+        if i > entry_idx:                             # §6 targets and hard exits
+            if not scaled1 and high >= t1 and s1 > 0:
+                legs.append((s1, t1 - SLIPPAGE_PER_SHARE))
+                remaining -= s1
+                scaled1, stop = True, entry           # §5 breakeven after scale
+            if scaled1 and not scaled2 and high >= t2 and s2 > 0:
+                legs.append((s2, t2 - SLIPPAGE_PER_SHARE))
+                remaining -= s2
+                scaled2 = True
+            if not scaled1 and high >= entry + 0.10:  # §5 other breakeven arm
+                stop = max(stop, entry)
+
+            reason = _hard_exit(bars, i, float(vwap_s.iloc[i]),
+                                float(hist_s.iloc[i]), float(avg_vol.iloc[i]))
+            if reason:
+                return close_out(float(bar["Close"]) - SLIPPAGE_PER_SHARE, reason, i)
+
+        if remaining <= 0:                            # the ladder emptied
+            gross = sum(sh * (px - entry) for sh, px in legs)
+            return Outcome(
+                resolved=True, exit_price=t2, exit_reason="fully_scaled",
+                r_multiple=gross / (risk * shares),
+                net_pnl=gross - COMMISSION_PER_SHARE * shares * 2,
+                mae_r=mae, mfe_r=mfe, bars_held=i - entry_idx + 1)
+
+    last = float(bars["Close"].iloc[-1]) - SLIPPAGE_PER_SHARE
+    return close_out(last, "session_end", len(bars) - 1)
 
 
-def _hard_exit(bar, future, i, prior_low, vwap_now, hist_now) -> str:
+def _hard_exit(bars: pd.DataFrame, i: int, vwap_now: float, hist_now: float,
+               avg_vol: float) -> str:
     """§6 hard exits, in the order they invalidate the thesis."""
-    if float(bar["Low"]) < prior_low and i > 0:
+    bar = bars.iloc[i]
+    if float(bar["Low"]) < float(bars["Low"].iloc[i - 1]):
         return "first_candle_new_low"
     if np.isfinite(hist_now) and hist_now < 0:
         return "macd_negative"
     if np.isfinite(vwap_now) and float(bar["Close"]) < vwap_now:
         return "vwap_break"
     red = float(bar["Close"]) < float(bar["Open"])
-    avg_vol = float(future["Volume"].iloc[:i + 1].mean())
-    if red and np.isfinite(avg_vol) and float(bar["Volume"]) > 2 * avg_vol:
+    if red and np.isfinite(avg_vol) and avg_vol > 0 and float(bar["Volume"]) > 2 * avg_vol:
         return "high_volume_red"
+
+    # §6 "large topping tail": an upper wick that dwarfs the body — buyers
+    # pushed and were sold into inside the same minute.
+    body = abs(float(bar["Close"]) - float(bar["Open"]))
+    upper = float(bar["High"]) - max(float(bar["Close"]), float(bar["Open"]))
+    rng = float(bar["High"]) - float(bar["Low"])
+    if rng > 0 and upper > 2 * body and upper > 0.5 * rng:
+        return "topping_tail"
+
+    # §6 "green candles shrinking / momentum stalls": three consecutive up
+    # bars whose ranges contract monotonically.
+    if i >= 3:
+        window = bars.iloc[i - 2:i + 1]
+        greens = (window["Close"] > window["Open"]).all()
+        ranges = (window["High"] - window["Low"]).to_numpy()
+        if greens and ranges[0] > ranges[1] > ranges[2]:
+            return "momentum_stalling"
     return ""
-
-
-def _outcome(d: Decision, fill: float, reason: str, r: float,
-             mae: float, mfe: float, bars: int) -> Outcome:
-    commission = COMMISSION_PER_SHARE * d.shares * 2
-    net = r * d.risk_per_share * d.shares - commission
-    return Outcome(resolved=True, exit_price=fill, exit_reason=reason,
-                   r_multiple=r, net_pnl=net, mae_r=mae, mfe_r=mfe,
-                   bars_held=bars)
 
 
 # ------------------------------------------------------------------ session
@@ -499,7 +599,7 @@ def replay_session(bars: pd.DataFrame, symbol: str, *,
         row["cursor"] = cursor
         # counterfactual: resolve anything that triggered, taken or not
         if d.trigger and np.isfinite(d.entry) and d.shares > 0:
-            out = resolve(bars.iloc[cursor + 1:], d)
+            out = resolve(bars, cursor, d)
         elif d.trigger:
             out = _counterfactual(bars, cursor, d, equity)
         else:
@@ -514,20 +614,20 @@ def _counterfactual(bars: pd.DataFrame, cursor: int, d: Decision,
                     equity: float) -> Outcome:
     """What a SKIP would have done, priced by the same §4/§5 rules."""
     visible = visible_slice(bars, cursor)
-    prior_high = float(visible["High"].iloc[-2])
     pb = detect_pullback(visible)
     stop = pb.low if np.isfinite(pb.low) else float(visible["Low"].iloc[-1])
-    entry = prior_high + SLIPPAGE_PER_SHARE
-    risk = entry - stop
-    if risk <= 0:
+    o = order_params(visible, stop)
+    if o["risk"] <= 0:
+        return Outcome()
+    shares, _ = size_position(equity, o["entry"], o["risk"], visible)
+    if shares <= 0:
         return Outcome()
     shadow = Decision(timestamp=d.timestamp, symbol=d.symbol, price=d.price,
                       verdict="SKIP", reason="counterfactual",
-                      entry=entry, stop=stop,
-                      target=entry + 2 * risk, target_source="2R_counterfactual",
-                      risk_per_share=risk,
-                      shares=max(1, int((equity * RISK_PCT / 100.0) // risk)))
-    return resolve(bars.iloc[cursor + 1:], shadow)
+                      entry=o["entry"], stop=o["stop"], target=o["target"],
+                      target_source=o["target_source"], risk_per_share=o["risk"],
+                      reward_risk=o["reward_risk"], shares=shares)
+    return resolve(bars, cursor, shadow)
 
 
 # ------------------------------------------------------------------ scoring
@@ -558,8 +658,23 @@ def score(log: pd.DataFrame) -> dict:
         "win_rate": tp / (tp + fp) if (tp + fp) else float("nan"),
         "expectancy_r": float(taken_r.mean()) if len(taken_r) else float("nan"),
         "net_pnl": float(log.loc[took & resolved, "outcome_net_pnl"].sum()),
-        "breakeven_win_rate": 1 / (1 + MIN_REWARD_RISK),   # §9
+        "breakeven_win_rate_nominal": 1 / (1 + MIN_REWARD_RISK),   # §9 at 2:1
     }
+    # §9's breakeven follows the reward:risk actually ACHIEVED, not the 2.0
+    # the rules aim at. Scaling half the position at target_1 caps the upside
+    # well below 2R while a stop still costs a full R plus costs, so judging
+    # the result against 1/(1+2.0) can pass a losing system.
+    wins = log.loc[took & resolved & won, "outcome_r_multiple"]
+    losses = log.loc[took & resolved & ~won, "outcome_r_multiple"]
+    avg_win = float(wins.mean()) if len(wins) else float("nan")
+    avg_loss = abs(float(losses.mean())) if len(losses) else float("nan")
+    realized_rr = avg_win / avg_loss if avg_loss and np.isfinite(avg_loss) and avg_loss > 0 else float("nan")
+    out["avg_win_r"] = avg_win
+    out["avg_loss_r"] = avg_loss
+    out["realized_reward_risk"] = realized_rr
+    out["breakeven_win_rate"] = (1 / (1 + realized_rr)
+                                 if np.isfinite(realized_rr) and realized_rr > 0
+                                 else out["breakeven_win_rate_nominal"])
     out["clears_breakeven"] = bool(
         np.isfinite(out["win_rate"]) and out["win_rate"] > out["breakeven_win_rate"])
     out["significant"] = out["n_trades"] >= 20
@@ -596,7 +711,7 @@ def baseline_random(bars: pd.DataFrame, *, n: int = 20, seed: int = 0,
                      entry=entry, stop=entry - stop_distance,
                      target=entry + 2 * stop_distance, target_source="2R",
                      risk_per_share=stop_distance, shares=100)
-        out = resolve(bars.iloc[cursor + 1:], d)
+        out = resolve(bars, cursor, d)
         if out.resolved:
             results.append(out.r_multiple)
     return {"baseline": "random", "n": len(results),

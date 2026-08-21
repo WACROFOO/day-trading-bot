@@ -136,7 +136,7 @@ def _opportunity_cost(bars: pd.DataFrame, cursor: int, row, equity: float,
         verdict="TAKE", reason="blocked-counterfactual", entry=entry, stop=stop,
         target=float(row["target"]), risk_per_share=risk,
         reward_risk=float(row["reward_risk"]), shares=shares)
-    out = replay.resolve(bars.iloc[cursor + 1:], shadow)
+    out = replay.resolve(bars, cursor, shadow)
     return (out.r_multiple, out.net_pnl) if out.resolved else (float("nan"), float("nan"))
 
 
@@ -159,6 +159,7 @@ def simulate(logs: pd.DataFrame,
 
     equity = cfg.starting_equity
     hwm = equity
+    account_locked = ""          # §8 walkaway persists across sessions
     trades: list[Trade] = []
     blocked: list[Blocked] = []
     days: list[DayState] = []
@@ -170,6 +171,11 @@ def simulate(logs: pd.DataFrame,
     for session in sorted(logs["session"].unique()):
         day_takes = takes[takes["session"] == session].sort_values("timestamp")
         day = DayState(date=str(session), start_equity=equity, peak_equity=equity)
+        if account_locked:
+            # §8's 20% drawdown walkaway is not a daily latch — it stops the
+            # account until a human resets it. Releasing it overnight would
+            # let the worst drawdown of the run trade straight through.
+            day.locked, day.lock_reason = True, account_locked
         open_until: pd.Timestamp | None = None
 
         for _, row in day_takes.iterrows():
@@ -217,7 +223,7 @@ def simulate(logs: pd.DataFrame,
                 target_source=str(row.get("target_source", "")),
                 risk_per_share=risk, reward_risk=float(row["reward_risk"]),
                 shares=shares, size_capped_by_cash=bound != "risk")
-            out = replay.resolve(bars.iloc[cursor + 1:], sized)
+            out = replay.resolve(bars, cursor, sized)
             if not out.resolved:
                 continue
 
@@ -228,7 +234,7 @@ def simulate(logs: pd.DataFrame,
             day.trades += 1
             day.consecutive_losses = 0 if out.net_pnl > 0 else day.consecutive_losses + 1
 
-            exit_time = bars.index[min(cursor + out.bars_held, len(bars) - 1)]
+            exit_time = bars.index[min(cursor + out.bars_held - 1, len(bars) - 1)]
             open_until = exit_time
             trades.append(Trade(
                 session=day.date, symbol=row["symbol"], entry_time=ts,
@@ -247,6 +253,8 @@ def simulate(logs: pd.DataFrame,
             day.locked, day.lock_reason = risk_check(day, equity, hwm, cfg)
             if day.locked:
                 day.lock_time = exit_time
+                if "drawdown" in day.lock_reason:
+                    account_locked = day.lock_reason
 
         day.end_equity = equity
         days.append(day)

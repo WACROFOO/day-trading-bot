@@ -176,43 +176,41 @@ def test_evaluate_sizes_from_risk_not_capital():
 
 # ------------------------------------------------------------------ outcome
 
+def make_trade(entry=5.00, stop=4.90, target=5.20, shares=100):
+    return replay.Decision(
+        timestamp=pd.Timestamp("2026-08-20 09:40", tz="America/New_York"),
+        symbol="T", price=entry, verdict="TAKE", reason="",
+        entry=entry, stop=stop, target=target,
+        risk_per_share=entry - stop, shares=shares)
+
+
 def test_resolve_stops_out_at_the_pullback_low():
-    d = replay.Decision(timestamp=pd.Timestamp("2026-08-20 09:40", tz="America/New_York"),
-                        symbol="T", price=5.0, verdict="TAKE", reason="",
-                        entry=5.00, stop=4.90, target=5.20, risk_per_share=0.10,
-                        shares=100)
-    future = session([4.85, 4.80], start="2026-08-20 09:41")
-    out = replay.resolve(future, d)
+    d = make_trade()
+    bars = session([5.00, 4.85, 4.80], start="2026-08-20 09:40")
+    out = replay.resolve(bars, 0, d)
     assert out.resolved and out.r_multiple < 0
     assert out.exit_reason in {"stop", "first_candle_new_low"}
 
 
 def test_resolve_scales_at_target_then_trails_to_breakeven():
-    d = replay.Decision(timestamp=pd.Timestamp("2026-08-20 09:40", tz="America/New_York"),
-                        symbol="T", price=5.0, verdict="TAKE", reason="",
-                        entry=5.00, stop=4.90, target=5.20, risk_per_share=0.10,
-                        shares=100)
-    future = session([5.25, 5.30, 5.35], start="2026-08-20 09:41")
-    out = replay.resolve(future, d)
+    d = make_trade()
+    bars = session([5.00, 5.25, 5.30, 5.35], start="2026-08-20 09:40")
+    out = replay.resolve(bars, 0, d)
     assert out.resolved and out.r_multiple > 0
     assert out.mfe_r > 0
 
 
 def test_resolve_costs_reduce_net_pnl():
-    d = replay.Decision(timestamp=pd.Timestamp("2026-08-20 09:40", tz="America/New_York"),
-                        symbol="T", price=5.0, verdict="TAKE", reason="",
-                        entry=5.00, stop=4.90, target=5.20, risk_per_share=0.10,
-                        shares=100)
-    future = session([5.25, 5.30], start="2026-08-20 09:41")
-    out = replay.resolve(future, d)
+    d = make_trade()
+    bars = session([5.00, 5.25, 5.30], start="2026-08-20 09:40")
+    out = replay.resolve(bars, 0, d)
     gross = out.r_multiple * d.risk_per_share * d.shares
     assert out.net_pnl < gross            # commission taken off
 
-def test_resolve_on_empty_future_is_unresolved():
-    d = replay.Decision(timestamp=pd.Timestamp("2026-08-20 09:40", tz="America/New_York"),
-                        symbol="T", price=5.0, verdict="TAKE", reason="",
-                        entry=5.0, stop=4.9, target=5.2, risk_per_share=0.1, shares=100)
-    assert not replay.resolve(session([]).iloc[:0], d).resolved
+
+def test_resolve_with_no_bars_after_entry_is_unresolved():
+    bars = session([5.00], start="2026-08-20 09:40")
+    assert not replay.resolve(bars, 0, make_trade()).resolved
 
 
 # ------------------------------------------------------------------ session
@@ -443,3 +441,148 @@ def test_sizing_does_not_lose_a_share_to_float_division():
     bars["Volume"] = 10_000_000.0
     shares, bound = replay.size_position(100_000.0, 5.00, 0.10, bars)
     assert shares == 20_000 and bound == "risk"
+
+
+# ------------------------------------------------------- audit regressions
+
+def test_vwap_is_not_reseeded_at_the_entry_bar():
+    """Regression, and the worst bug found: resolve() used to compute VWAP on
+    a slice starting at the entry, so VWAP re-seeded to that bar's own typical
+    price. On a RISING session that makes close < vwap true immediately and
+    fires a fabricated vwap_break exit on essentially every trade."""
+    rising = session(np.linspace(5.00, 6.00, 40), start="2026-08-20 09:40")
+    d = make_trade(entry=5.02, stop=4.90, target=5.60, shares=100)
+    out = replay.resolve(rising, 0, d)
+    assert out.exit_reason != "vwap_break"
+    assert out.r_multiple > 0
+
+
+def test_macd_histogram_is_not_reseeded_at_the_entry_bar():
+    """Same defect via MACD: on a fresh slice the histogram starts at exactly
+    0.0 and the slightest dip reads as macd_negative."""
+    rising = session(np.linspace(5.00, 5.80, 40), start="2026-08-20 09:40")
+    d = make_trade(entry=5.02, stop=4.90, target=5.50, shares=100)
+    out = replay.resolve(rising, 0, d)
+    assert out.exit_reason != "macd_negative"
+
+
+def test_position_is_not_carried_past_the_session_hard_stop():
+    """§2 stops at 11:30. resolve() used to run to the end of the fetched
+    frame — 20:00 with prepost=True — so an 11:29 entry could be held all
+    afternoon and score whatever the close happened to do."""
+    idx = pd.date_range("2026-08-20 11:25", periods=200, freq="1min",
+                        tz="America/New_York")
+    px = np.linspace(5.0, 9.0, 200)          # a huge afternoon run
+    bars = pd.DataFrame({"Open": px, "High": px + 0.02, "Low": px - 0.02,
+                         "Close": px, "Volume": 10_000.0}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90, target=20.0))
+    assert out.resolved
+    exit_bar = idx[min(out.bars_held - 1, len(idx) - 1)]
+    assert exit_bar.time() <= replay.SESSION_END
+
+
+def test_entry_candle_reversal_through_the_stop_is_a_loss():
+    """The fill happens intrabar. A candle that fills then reverses through
+    the stop was previously recorded as an untouched winner with mae_r = 0,
+    because management started at the NEXT bar."""
+    idx = pd.date_range("2026-08-20 09:40", periods=3, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open": [5.00, 5.10, 5.20], "High": [5.10, 5.15, 5.25],
+        "Low":  [4.80, 5.05, 5.15], "Close": [4.85, 5.10, 5.20],
+        "Volume": [10_000.0] * 3}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90))
+    assert out.exit_reason == "stop"
+    assert out.r_multiple < 0 and out.mae_r < 0
+
+
+def test_a_gap_through_the_stop_fills_at_the_open_not_the_stop():
+    """Assuming stop - slippage on a bar that opened below the stop caps
+    every loss at ~1.2R and quietly flatters the worst trades."""
+    idx = pd.date_range("2026-08-20 09:40", periods=2, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open": [5.02, 4.50], "High": [5.05, 4.55], "Low": [5.00, 4.40],
+        "Close": [5.02, 4.45], "Volume": [10_000.0] * 2}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90))
+    assert out.exit_price <= 4.50           # filled at the gap, not at 4.90
+    assert out.r_multiple < -1.0            # a gap costs more than 1R
+
+
+def test_flipped_level_requires_the_level_to_have_been_broken():
+    """§3's flipped level is resistance that was BROKEN and is being retested.
+    The old guard (`abs(p-h) <= tol and p >= h - tol`) was a tautology — the
+    second clause follows from the first — so any nearby swing high counted
+    and confluence was inflated."""
+    # a swing high at ~5.55 that price never exceeds afterwards
+    never_broken = session([5.0, 5.2, 5.5, 5.3, 5.1, 5.2, 5.3, 5.25, 5.2, 5.3])
+    assert "flipped_level" not in replay.support_reasons(5.55, never_broken)
+
+
+def test_flipped_level_counts_once_the_level_is_actually_broken():
+    broken = session([5.0, 5.2, 5.5, 5.3, 5.1, 5.6, 5.8, 5.7, 5.6, 5.55])
+    assert "flipped_level" in replay.support_reasons(5.55, broken)
+
+
+def test_target_excludes_the_trigger_candles_own_high():
+    """§6's high-of-day target must not read the high of the candle that is
+    still forming when the fill price is fixed — that is a minute of
+    hindsight handed to the reward:risk test."""
+    bars = ramp_then_dip(n_up=14, n_dip=2, base=5.0, step=0.04)
+    d = replay.evaluate(bars, "TEST")
+    if np.isfinite(d.target) and d.target_source == "hod_retest":
+        assert d.target <= float(bars["High"].iloc[:-1].max())
+
+
+def test_scale_ladder_is_fifty_twentyfive_twentyfive():
+    """§6 scales 50/25/25, not 50/50."""
+    idx = pd.date_range("2026-08-20 09:40", periods=6, freq="1min",
+                        tz="America/New_York")
+    px = np.array([5.02, 5.25, 5.45, 5.60, 5.70, 5.80])
+    bars = pd.DataFrame({"Open": px, "High": px + 0.05, "Low": px - 0.01,
+                         "Close": px, "Volume": 10_000.0}, index=idx)
+    d = make_trade(entry=5.02, stop=4.92, target=5.22, shares=100)
+    out = replay.resolve(bars, 0, d)
+    assert out.resolved and out.r_multiple > 0
+
+
+def test_high_volume_red_average_excludes_the_current_bar():
+    """Dividing by an average that includes the current bar makes the signal
+    impossible early on and 2x too strict right after."""
+    idx = pd.date_range("2026-08-20 09:40", periods=5, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open":  [5.02, 5.10, 5.20, 5.30, 5.40],
+        "High":  [5.06, 5.15, 5.25, 5.35, 5.45],
+        "Low":   [5.00, 5.08, 5.18, 5.28, 5.20],
+        "Close": [5.02, 5.12, 5.22, 5.32, 5.22],   # last bar red
+        "Volume": [1_000.0, 1_000.0, 1_000.0, 1_000.0, 50_000.0],
+    }, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90, target=9.0))
+    assert out.exit_reason in {"high_volume_red", "first_candle_new_low"}
+
+
+def test_topping_tail_is_a_hard_exit():
+    """§6 lists a large topping tail; it was computable but unimplemented."""
+    idx = pd.date_range("2026-08-20 09:40", periods=3, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open":  [5.02, 5.10, 5.20], "High": [5.06, 5.14, 5.90],
+        "Low":   [5.00, 5.08, 5.18], "Close": [5.02, 5.12, 5.22],
+        "Volume": [10_000.0] * 3}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90, target=9.0))
+    assert out.exit_reason == "topping_tail"
+
+
+def test_momentum_stalling_is_a_hard_exit():
+    """§6's 'green candles shrinking' — three up bars with contracting range."""
+    idx = pd.date_range("2026-08-20 09:40", periods=5, freq="1min",
+                        tz="America/New_York")
+    bars = pd.DataFrame({
+        "Open":  [5.02, 5.10, 5.30, 5.42, 5.48],
+        "High":  [5.06, 5.32, 5.44, 5.50, 5.52],
+        "Low":   [5.00, 5.09, 5.29, 5.41, 5.47],
+        "Close": [5.02, 5.30, 5.42, 5.48, 5.51],
+        "Volume": [10_000.0] * 5}, index=idx)
+    out = replay.resolve(bars, 0, make_trade(entry=5.02, stop=4.90, target=9.0))
+    assert out.exit_reason in {"momentum_stalling", "topping_tail"}

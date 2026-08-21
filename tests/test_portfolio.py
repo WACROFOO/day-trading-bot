@@ -269,3 +269,19 @@ def test_sizing_helper_reports_which_cap_bound():
     assert bound == "risk" and shares == 20_000
     shares, bound = replay.size_position(10_000.0, 5.00, 0.01, bars)
     assert bound == "cash" and shares == 2_000
+
+
+def test_drawdown_walkaway_persists_across_sessions():
+    """§8's 20% walkaway stops the account until a human resets it. If it
+    released overnight, the deepest drawdown of the run would trade on."""
+    rows = []
+    for i, day in enumerate(["2026-08-20", "2026-08-21"]):
+        bars = bars_for([5.00, 4.95, 4.85, 4.70], day)
+        rows.append((bars, take_row(day, "AAA", bars, 0, 5.00, 4.90, 5.20)))
+    logs, keys = build(rows)
+    cfg = portfolio.Config(starting_equity=1_000.0, drawdown_walkaway_pct=1.0,
+                           max_daily_loss_pct=99.0, giveback_pct=999.0,
+                           green_to_red_stop=False, consecutive_loss_stop=99)
+    sim = portfolio.simulate(logs, keys, cfg)
+    assert sim["days"].iloc[1]["locked"]
+    assert "drawdown" in sim["days"].iloc[1]["lock_reason"]
