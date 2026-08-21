@@ -133,7 +133,9 @@ def classify(sym, date):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--meta', required=True, help='video metadata json')
+    ap.add_argument('--meta', help='video metadata json (id -> title/upload_date)')
+    ap.add_argument('--dir', help='directory of yt-dlp output: <id>.info.json + '
+                                  '<id>.en.vtt — used instead of --meta/--vtt')
     ap.add_argument('--vtt', default=None, help='directory of .en.vtt caption files')
     ap.add_argument('--since', default='20260730')
     ap.add_argument('--min-hits', type=int, default=2,
@@ -141,7 +143,26 @@ def main():
     ap.add_argument('--json', default=None)
     args = ap.parse_args()
 
-    meta = json.load(open(args.meta))
+    if args.dir:
+        # yt-dlp writes one .info.json per video; build the meta map from them
+        meta = {}
+        for f in sorted(os.listdir(args.dir)):
+            if not f.endswith('.info.json'):
+                continue
+            try:
+                j = json.load(open(os.path.join(args.dir, f)))
+            except Exception:
+                continue
+            vid = j.get('id') or f[:-len('.info.json')]
+            meta[vid] = dict(title=j.get('title', ''),
+                             upload_date=j.get('upload_date'),
+                             description=(j.get('description') or '')[:4000])
+        args.vtt = args.dir
+        print(f'{len(meta)} videos found in {args.dir}')
+    elif args.meta:
+        meta = json.load(open(args.meta))
+    else:
+        ap.error('give --dir (yt-dlp output) or --meta')
     vids = sorted(((v, m) for v, m in meta.items()
                    if m.get('upload_date', '') >= args.since),
                   key=lambda kv: kv[1]['upload_date'], reverse=True)
