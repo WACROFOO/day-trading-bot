@@ -150,9 +150,24 @@ def test_session_summary_one_row_per_day():
     assert out["volume"].tolist() == [5000.0, 3000.0]
 
 
-def test_missing_regular_minutes_counts_the_holes():
+def test_missing_regular_minutes_counts_holes_inside_the_traded_span():
+    ten = bars("2026-08-20 09:30", 10)
+    holed = ten.drop(ten.index[[3, 7]])
+    out = history.missing_regular_minutes(holed)
+    assert out["missing_minutes"].iloc[0] == 2
+
+
+def test_missing_regular_minutes_ignores_a_session_still_in_progress():
+    """10 bars from the open is 0 missing, not 380 — the day is not over."""
     out = history.missing_regular_minutes(bars("2026-08-20 09:30", 10))
-    assert out["missing_minutes"].iloc[0] == 380   # 390 - 10
+    assert out["missing_minutes"].iloc[0] == 0
+
+
+def test_missing_regular_minutes_counts_a_full_closed_session():
+    morning = bars("2026-08-20 09:30", 30)
+    close = bars("2026-08-20 15:59", 1)
+    out = history.missing_regular_minutes(pd.concat([morning, close]))
+    assert out["missing_minutes"].iloc[0] == 390 - 31
 
 
 def test_missing_regular_minutes_ignores_extended_hours():
@@ -172,3 +187,82 @@ def test_fetch_1m_default_feed_is_resolved_at_call_time(monkeypatch):
     out = history.fetch_1m("SDOT", days=7, chunk_days=7,
                            now=dt.datetime(2026, 8, 21, tzinfo=dt.timezone.utc))
     assert seen == ["SDOT"] and len(out) == 2
+
+
+# ------------------------------------------------------------------ single day
+
+def test_market_today_uses_market_tz_not_utc():
+    # 00:30 UTC on the 22nd is still the 21st in New York
+    late = dt.datetime(2026, 8, 22, 0, 30, tzinfo=dt.timezone.utc)
+    assert history.market_today(late) == dt.date(2026, 8, 21)
+
+
+def test_day_window_spans_exactly_one_market_day():
+    start, end = history.day_window(dt.date(2026, 8, 21))
+    assert start.hour == 0 and (end - start) == dt.timedelta(days=1)
+
+
+def test_fetch_day_requests_a_bounded_window_and_keeps_that_day():
+    seen = {}
+
+    def fake(symbol, start, end, prepost):
+        seen.update(start=start, end=end, prepost=prepost)
+        # feed leaks an adjacent session; fetch_day must drop it
+        return pd.concat([bars("2026-08-20 15:00", 3), bars("2026-08-21 04:00", 6)])
+
+    out = history.fetch_day("SDOT", dt.date(2026, 8, 21), fetch=fake)
+    assert len(out) == 6
+    assert set(out.index.date) == {dt.date(2026, 8, 21)}
+    assert seen["prepost"] is True
+    assert (seen["end"] - seen["start"]) == dt.timedelta(days=1)
+
+
+def test_fetch_day_defaults_to_today_in_market_time():
+    def fake(symbol, start, end, prepost):
+        return bars(f"{start:%Y-%m-%d} 04:00", 2)
+
+    now = dt.datetime(2026, 8, 21, 14, 54, tzinfo=dt.timezone.utc)
+    out = history.fetch_day("SDOT", now=now, fetch=fake)
+    assert set(out.index.date) == {dt.date(2026, 8, 21)}
+
+
+def test_fetch_day_wraps_feed_errors_as_network_error():
+    def boom(symbol, start, end, prepost):
+        raise RuntimeError("403")
+
+    with pytest.raises(history.NetworkError, match="SDOT"):
+        history.fetch_day("SDOT", dt.date(2026, 8, 21), fetch=boom)
+
+
+def test_fetch_day_empty_session_returns_empty(tmp_path):
+    out = history.fetch_day("SDOT", dt.date(2026, 8, 21),
+                            fetch=lambda *a, **k: pd.DataFrame())
+    assert out.empty
+
+
+def test_day_anatomy_splits_premarket_from_regular():
+    pre = bars("2026-08-21 08:00", 4, price=3.0)     # high 3.1
+    reg = bars("2026-08-21 09:30", 6, price=5.0)     # high 5.1
+    a = history.day_anatomy(pd.concat([pre, reg]))
+    assert a["premarket_bars"] == 4 and a["regular_bars"] == 6
+    assert a["premarket_high"] == pytest.approx(3.1)
+    assert a["open"] == pytest.approx(5.0)
+    assert a["broke_premarket_high"] is True
+    assert a["high"] == pytest.approx(5.1)
+    assert a["volume"] == pytest.approx(10_000.0)
+
+
+def test_day_anatomy_premarket_only_session_has_no_open():
+    a = history.day_anatomy(bars("2026-08-21 05:00", 5))
+    assert a["premarket_bars"] == 5 and a["regular_bars"] == 0
+    assert "open" not in a and "broke_premarket_high" not in a
+
+
+def test_day_anatomy_flags_a_failed_premarket_break():
+    pre = bars("2026-08-21 08:00", 3, price=9.0)     # high 9.1
+    reg = bars("2026-08-21 09:30", 3, price=6.0)     # high 6.1
+    assert history.day_anatomy(pd.concat([pre, reg]))["broke_premarket_high"] is False
+
+
+def test_day_anatomy_empty_is_empty_dict():
+    assert history.day_anatomy(history.normalize(None)) == {}

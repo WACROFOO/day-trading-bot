@@ -107,6 +107,9 @@ Pull every 1-minute candle the free feed still has for a symbol and keep
 it in a local archive:
 
 ```bash
+python scripts/fetch_1m_history.py SDOT --today      # today only, premarket incl.
+python scripts/fetch_1m_history.py SDOT --today --tail 30   # last 30 bars only
+python scripts/fetch_1m_history.py SDOT --date 2026-08-20   # one past session
 python scripts/fetch_1m_history.py SDOT              # trailing 30 days
 python scripts/fetch_1m_history.py SDOT --days 7     # just this week
 python scripts/fetch_1m_history.py SDOT --no-prepost # regular session only
@@ -125,11 +128,19 @@ only bars it doesn't already have, so running it weekly accumulates a
 history far past the 30-day window. Bars older than your first run cannot
 be recovered from this feed — start the archive early.
 
-Output is one row per session (bar count, first/last bar, OHLC, volume)
-plus the last five bars. Timestamps are `America/New_York`. Pre/post-market
-bars are included by default, so a full session runs 04:00–20:00 rather
-than 390 bars; `--gaps` counts regular-session minutes with no print, which
-on a thin small cap is normal, not a fetch error.
+`--today` / `--date` fetch one bounded session and print **every bar**
+(04:00 ET onward, premarket included unless `--no-prepost`), followed by a
+session anatomy: premarket high/low/volume, the 09:30 open, high and low
+with their timestamps, last price, total volume, and whether price broke
+the premarket high. Those bars are merged into the same archive.
+
+Without `--today`/`--date`, output is one row per session (bar count,
+first/last bar, OHLC, volume) plus the last five bars. Timestamps are
+`America/New_York` throughout. Pre/post-market bars are included by
+default, so a full session runs 04:00–20:00 rather than 390 bars.
+`--gaps` counts regular-session minutes with no print, measured only
+inside the traded span — on a thin small cap those holes are normal, not
+a fetch error.
 
 ## Structure
 

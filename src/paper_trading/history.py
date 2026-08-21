@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import datetime as dt
 from pathlib import Path
+from zoneinfo import ZoneInfo
 from typing import Callable, Iterator
 
 import pandas as pd
@@ -22,8 +23,10 @@ CHUNK_DAYS = 7           # per-request span (Yahoo caps at 8)
 
 OHLCV = ["Open", "High", "Low", "Close", "Volume"]
 
+PREMARKET_OPEN = dt.time(4, 0)
 REGULAR_OPEN = dt.time(9, 30)
 REGULAR_CLOSE = dt.time(16, 0)
+EXTENDED_CLOSE = dt.time(20, 0)
 
 
 class NetworkError(RuntimeError):
@@ -118,6 +121,75 @@ def fetch_1m(symbol: str, days: int = MAX_LOOKBACK_DAYS, *,
     return out
 
 
+def market_today(now: dt.datetime | None = None) -> dt.date:
+    """Today's date in market time — not the caller's local date."""
+    now = now or dt.datetime.now(dt.timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=dt.timezone.utc)
+    return now.astimezone(ZoneInfo(MARKET_TZ)).date()
+
+
+def day_window(day: dt.date) -> tuple[dt.datetime, dt.datetime]:
+    """(start, end) spanning one market calendar day, for a bounded request."""
+    start = pd.Timestamp(day).tz_localize(MARKET_TZ)
+    return start.to_pydatetime(), (start + pd.Timedelta(days=1)).to_pydatetime()
+
+
+def fetch_day(symbol: str, day: dt.date | None = None, *,
+              prepost: bool = True,
+              now: dt.datetime | None = None,
+              fetch: Callable[..., pd.DataFrame] | None = None) -> pd.DataFrame:
+    """Every 1-minute bar for a single session, 04:00 ET onward.
+
+    One bounded request rather than a rolling lookback, so an intraday call
+    returns that day only — premarket included unless prepost is False.
+    """
+    fetch = fetch or _yf_fetch
+    day = day or market_today(now)
+    start, end = day_window(day)
+    try:
+        bars = normalize(fetch(symbol, start, end, prepost))
+    except Exception as exc:                            # noqa: BLE001 - re-raised typed
+        raise NetworkError(f"{symbol.upper()} {day}: {exc}") from exc
+    if bars.empty:
+        return bars
+    return bars[bars.index.date == day]
+
+
+def day_anatomy(df: pd.DataFrame) -> dict:
+    """Premarket vs regular-session shape of one day, for the §1 checks."""
+    df = normalize(df)
+    if df.empty:
+        return {}
+    pre = df[df.index.time < REGULAR_OPEN]
+    reg = df[df.index.time >= REGULAR_OPEN]
+    out = {
+        "bars": len(df),
+        "first_bar": df.index.min(),
+        "last_bar": df.index.max(),
+        "last_price": float(df["Close"].iloc[-1]),
+        "high": float(df["High"].max()),
+        "high_at": df["High"].idxmax(),
+        "low": float(df["Low"].min()),
+        "low_at": df["Low"].idxmin(),
+        "volume": float(df["Volume"].sum()),
+        "premarket_bars": len(pre),
+        "regular_bars": len(reg),
+    }
+    if not pre.empty:
+        out |= {"premarket_high": float(pre["High"].max()),
+                "premarket_low": float(pre["Low"].min()),
+                "premarket_volume": float(pre["Volume"].sum())}
+    if not reg.empty:
+        first = reg.iloc[0]
+        out |= {"open": float(first["Open"]),
+                "open_at": reg.index[0],
+                "regular_volume": float(reg["Volume"].sum())}
+        if not pre.empty and out.get("premarket_high"):
+            out["broke_premarket_high"] = bool(reg["High"].max() > out["premarket_high"])
+    return out
+
+
 # ------------------------------------------------------------------ archive
 
 def archive_path(root: Path, symbol: str) -> Path:
@@ -163,17 +235,23 @@ def session_summary(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def missing_regular_minutes(df: pd.DataFrame) -> pd.DataFrame:
-    """Per-day count of 9:30-15:59 minutes with no bar (thin-tape gaps)."""
+    """Per-day count of regular-session minutes with no bar (thin-tape gaps).
+
+    The expected range stops at the day's last bar, so a session still in
+    progress reports the holes inside the traded span rather than counting
+    the hours that have not happened yet.
+    """
     df = normalize(df)
     if df.empty:
         return pd.DataFrame(columns=["date", "missing_minutes"])
     reg = df.between_time(REGULAR_OPEN, dt.time(15, 59))
     rows = []
     for day, chunk in reg.groupby(reg.index.date):
-        expected = pd.date_range(
-            pd.Timestamp(day).tz_localize(MARKET_TZ) + pd.Timedelta(hours=9, minutes=30),
-            periods=390, freq="1min",
-        )
+        open_ts = (pd.Timestamp(day).tz_localize(MARKET_TZ)
+                   + pd.Timedelta(hours=9, minutes=30))
+        last_ts = min(chunk.index.max(),
+                      open_ts + pd.Timedelta(minutes=389))
+        expected = pd.date_range(open_ts, last_ts, freq="1min")
         rows.append({"date": day,
                      "missing_minutes": int(len(expected.difference(chunk.index)))})
     return pd.DataFrame(rows)
