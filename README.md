@@ -206,6 +206,23 @@ Overlapping counterfactuals are collapsed into distinct opportunities before
 anything is counted — every candle inside one move resolves profitably, so the
 raw count overstates missed opportunities by roughly an order of magnitude.
 
+## TradingView strategy (Pine)
+
+`pine/ross_momentum_v10.pine` encodes the same rule set for TradingView —
+strategy version 10, Pine language v6 (different numbers, different things).
+
+The entry is a resting stop order placed at the prior candle's high while the
+pullback is still forming. That implements §4 literally ("the first candle to
+trade above the high of the previous candle"), follows the playbook's ordering
+— Step 3 confirms the chart, Step 4 waits for the trigger — and is
+non-repainting by construction, because the fill happens on a real break rather
+than on a decision made after the break printed.
+
+`pine/CORRECTIONS.md` records all 15 corrections: the symptom, the root cause,
+and where each fix lives on both sides. It also records the findings that were
+deliberately **not** fixed, because a rule that is correctly implemented and
+still loses money is a result about the strategy rather than a bug.
+
 ## Structure
 
 ```
@@ -215,6 +232,7 @@ scripts/fetch_1m_history.py  1-minute candle archive CLI
 scripts/replay_eval.py  blinded walk-forward replay CLI
 scripts/paper_trade_eval.py  multi-ticker paper trading + report CLI
 tests/               test suite
+pine/                TradingView strategy + corrections record
 knowledge-base/      strategy research and specs
 ```
 

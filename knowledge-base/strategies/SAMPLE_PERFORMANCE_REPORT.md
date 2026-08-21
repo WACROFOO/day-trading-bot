@@ -15,7 +15,7 @@
 
 # Performance & accuracy report (SAMPLE / SYNTHETIC)
 
-_Generated 2026-08-21 16:20 · account $100,000 · 4 symbol(s) · 5 session(s)_
+_Generated 2026-08-21 17:42 · account $100,000 · 4 symbol(s) · 5 session(s)_
 
 ## Data provenance and what this cannot tell you
 
@@ -35,10 +35,10 @@ Every TAKE below therefore rests on an unverified assumption that those four con
 
 | trades | win_rate | expectancy_R | profit_factor | avg_win_$ | avg_loss_$ | net_$ | return_% | final_equity_$ |
 |---|---|---|---|---|---|---|---|---|
-| 3 | 1.000 | 0.858 | inf | 351.729 | 0.000 | 1055.187 | 1.055 | 101055.187 |
+| 3 | 1.000 | 0.672 | inf | 262.765 | 0.000 | 788.296 | 0.788 | 100788.296 |
 
 
-§9's breakeven win rate is **33.3%** at the 2:1 the rules aim for. But the reward:risk actually achieved here was **nan:1** (not yet measurable), which moves the real breakeven to **33.3%**. This sample ran **100.0%** over **3** trades — above it.
+§9's breakeven win rate is **33.3%** at the 2:1 the rules aim for. But the reward:risk actually achieved here was **7.95:1**, which moves the real breakeven to **11.2%**. This sample ran **100.0%** over **3** trades — above it.
 
 
 Scaling half the position at target_1 caps the upside well below 2R while a stop still costs a full R plus costs, so the achieved ratio is structurally lower than the target one. Judging the result against the nominal 33.3% can pass a losing system.
@@ -58,9 +58,9 @@ _72 profitable SKIP candles collapse to **60 distinct opportunities** — every 
 
 | token | gate | winners_blocked | sole_blocker | median_R_forgone | total_R_forgone |
 |---|---|---|---|---|---|
-| no_confluence | fewer than 2 support reasons (§3) | 53 | 19 | 1.05 | 121.34 |
-| macd_hist<=0 | MACD histogram not positive (§3) | 32 | 1 | 0.65 | 26.66 |
-| price<=ema9 | price below EMA9 (§3) | 16 | 0 | 0.56 | 32.16 |
+| no_confluence | fewer than 2 support reasons (§3) | 56 | 18 | 1.01 | 124.59 |
+| price<=ema9 | price below EMA9 (§3) | 29 | 1 | 0.71 | 54.14 |
+| macd_hist<=0 | MACD histogram not positive (§3) | 27 | 0 | 0.69 | 26.73 |
 
 
 `sole_blocker` is the column that matters: those are winners where that condition was the **only** thing in the way. A high count there means the rule is either mis-encoded or genuinely costing money — and per §12.3 you investigate it, you do not quietly relax it.
@@ -68,7 +68,25 @@ _72 profitable SKIP candles collapse to **60 distinct opportunities** — every 
 
 ## Signals the account never got to trade
 
-_Every valid signal was actionable._
+| reason | signals | median_would_be_R | total_would_be_R | total_would_be_usd |
+|---|---|---|---|---|
+| max_trades_per_day | 1 | 1.40 | 1.40 | 1117.88 |
+| position_already_open | 1 | -0.11 | -0.11 | -143.82 |
+
+
+These are not strategy failures — they are capacity limits. §7 caps the day at two trades and only one position is held at a time, so a third good setup is unreachable by construction. If `total_would_be_usd` is large and positive, the binding constraint on this account is **capacity, not signal quality**.
+
+
+<details><summary>Every blocked signal</summary>
+
+
+| session | symbol | timestamp | reason | detail | would_be_r | would_be_pnl |
+|---|---|---|---|---|---|---|
+| 2026-08-17 | CCCC | 08-17 14:01 | position_already_open | position open until 10:02 | -0.11 | -143.82 |
+| 2026-08-18 | CCCC | 08-18 14:22 | max_trades_per_day | 2 taken (§7 cap 2) | 1.40 | 1117.88 |
+
+
+</details>
 
 
 ## Diagnostics
@@ -78,7 +96,7 @@ _Every valid signal was actionable._
 
 | exit_reason | n | total_R | mean_R | net |
 |---|---|---|---|---|
-| macd_negative | 3 | 2.57 | 0.86 | 1055.19 |
+| macd_negative | 3 | 2.02 | 0.67 | 788.30 |
 
 
 ### Are stops being hit by noise?
@@ -94,9 +112,8 @@ If winners routinely dip below −0.5R before working, the §5 stop at the pullb
 
 | bucket | n | total_R | mean_R |
 |---|---|---|---|
-| 14:00 | 1 | 0.45 | 0.45 |
+| 14:00 | 2 | 0.69 | 0.35 |
 | 14:20 | 1 | 1.32 | 1.32 |
-| 14:30 | 1 | 0.80 | 0.80 |
 
 
 §2 puts the edge in 09:30–10:30. If mean R is negative after 10:30, the hard stop should move earlier, not later.
@@ -108,10 +125,10 @@ If winners routinely dip below −0.5R before working, the §5 stop at the pullb
 |---|---|---|
 | fewer than 2 support reasons (§3) | 1229 | 97.2 |
 | pullback volume not lighter than impulse (§3) | 993 | 78.5 |
-| 3rd+ pullback of the move (§3) | 667 | 52.7 |
-| MACD histogram not positive (§3) | 456 | 36.0 |
+| 3rd+ pullback of the move (§3) | 677 | 53.5 |
+| MACD histogram not positive (§3) | 443 | 35.0 |
 | no break of the prior candle high (§4) | 288 | 22.8 |
-| price below EMA9 (§3) | 206 | 16.3 |
+| price below EMA9 (§3) | 203 | 16.0 |
 | price below VWAP (§3) | 24 | 1.9 |
 
 
@@ -145,15 +162,15 @@ When anything other than `risk` binds, §7's risk-based sizing is not what is be
 
 |  | won | lost |
 |---|---|---|
-| TAKE | 3 | 0 |
-| SKIP | 72 | 581 |
+| TAKE | 4 | 1 |
+| SKIP | 72 | 580 |
 
 
-- precision **1.000** — of setups taken, the share that won
+- precision **0.800** — of setups taken, the share that won
 
-- recall **0.048** — of the **63** distinct winning opportunities, the share actually taken
+- recall **0.062** — of the **64** distinct winning opportunities, the share actually taken
 
-- raw candle recall **0.040** — the same figure before overlapping candles inside a single move are collapsed. It understates recall and is shown only so the two are not confused
+- raw candle recall **0.053** — the same figure before overlapping candles inside a single move are collapsed. It understates recall and is shown only so the two are not confused
 
 - decisions evaluated: **1,265** across 4 symbol(s)
 
@@ -165,11 +182,11 @@ Low recall with high precision means the rules are leaving money on the table bu
 
 | date | trades | start_equity | end_equity | pnl | consecutive_losses | locked | lock_reason |
 |---|---|---|---|---|---|---|---|
-| 2026-08-17 | 2 | 100000.00 | 100479.24 | 479.24 | 0 | False |  |
-| 2026-08-18 | 1 | 100479.24 | 101055.19 | 575.94 | 0 | False |  |
-| 2026-08-19 | 0 | 101055.19 | 101055.19 | 0.00 | 0 | False |  |
-| 2026-08-20 | 0 | 101055.19 | 101055.19 | 0.00 | 0 | False |  |
-| 2026-08-21 | 0 | 101055.19 | 101055.19 | 0.00 | 0 | False |  |
+| 2026-08-17 | 1 | 100000.00 | 100156.18 | 156.18 | 0 | False |  |
+| 2026-08-18 | 2 | 100156.18 | 100788.30 | 632.11 | 0 | False |  |
+| 2026-08-19 | 0 | 100788.30 | 100788.30 | 0.00 | 0 | False |  |
+| 2026-08-20 | 0 | 100788.30 | 100788.30 | 0.00 | 0 | False |  |
+| 2026-08-21 | 0 | 100788.30 | 100788.30 | 0.00 | 0 | False |  |
 
 
 ---
