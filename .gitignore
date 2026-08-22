@@ -15,6 +15,7 @@ results/
 # above silently dropped them from `git add <dir>`: the commit succeeded,
 # the file 404'd on GitHub. Keep any new data table listed here.
 !research/challenge-tickers/*.csv
+!research/megaday-study/data/*.csv
 !research/trade-journal/*.csv
 !research/trade-log/*.csv
 

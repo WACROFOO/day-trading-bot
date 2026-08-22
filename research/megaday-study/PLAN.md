@@ -1,5 +1,9 @@
 # Étude des 250 megadays — plan détaillé
 
+> **Étude terminée. Résultat et verdict : `RESULTS.md`.** Le plan ci-dessous
+> a été suivi tel quel ; le protocole de lecture du holdout a été figé avant
+> de le lancer et n'a pas été révisé après.
+
 ```
 ACTIF · 250+ sessions "megaday" en barres 1 minute, chacune datée par la
      tape (research/challenge-tickers/corpus-megadays.csv).
