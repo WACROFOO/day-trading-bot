@@ -148,6 +148,37 @@ Et la forme, calculée sur `data/holdout-trades.csv` :
   d'affilée et que les trois trades qui font l'année ne sont pas
   identifiables à l'avance.
 
+## 5bis. Étape 3 — typer les journées : aucune séparation trouvée
+
+Post-mortem, holdout déjà consommé : cette étape ne pouvait produire
+qu'une hypothèse. 98 jours typés sur des variables connues à 09:45
+seulement (`data/typing-report.md`, `data/day-types.csv`).
+
+- **Les trois gros gagnants ne partagent aucun type.** DRCT et VERU sont
+  PM−/range, INHD est PM+/drive_up.
+- **Les 8 pertes consécutives ne se concentrent pas** : réparties sur 4
+  types, à peu près proportionnellement à la population.
+- **Le taux de base ne sépare pas** : les deux seuls types à n décent
+  (PM+/drive_up n=24, médiane +1,34 ; PM−/drive_up n=17, médiane +1,56)
+  sont interchangeables. PM−/range paraît spectaculaire (+8,27) avec n=5 —
+  le « type à 5 journées ne prouve rien » du critère écrit d'avance.
+- Par numéro de dip : le 1er et le 2e se valent (MFE médian ~1,9R). Par
+  heure : pas de gradient net, n ≤ 14 partout.
+
+**Une hypothèse a été écartée en cours de route, et c'est important pour
+la suite : le halt comme marqueur des gros gagnants est un artefact.** Le
+flag `halt_before_945` est vrai sur 84 % des journées, y compris sur des
+titres à **0 action échangée en pré-market** (SMX, INLF ; FGL à 2 actions).
+Volume pré-market médian : 87 k avec le flag contre 5,0 M sans — le flag
+détecte une tape vide, pas une suspension. Trois gagnants portant tous un
+flag présent à 84 % arrivent par hasard 59 % du temps. Un halt doit se
+mesurer comme un trou EN SÉANCE sur un titre qui imprimait avant et après.
+
+Réserve de lecture : la table par type mélange des MFE (tuning) et des R
+réalisés (holdout), et n va de 3 à 24. La conclusion est **« aucune
+séparation trouvée »**, pas « aucune séparation n'existe » — ce test ne
+pouvait pas détecter une séparation modeste.
+
 ## 6. Ce que l'étude n'a pas pu regarder
 
 - **Détecter le megaday en temps réel.** Tout ceci est conditionné au fait
@@ -159,7 +190,14 @@ Et la forme, calculée sur `data/holdout-trades.csv` :
   vers 2025.
 - **Les halts, les reprises, la lecture du prix indicatif** — techniques
   qu'il utilise et qu'aucune barre ne contient.
-- n = 62 en tuning, 31 en holdout. Petit, et assumé comme tel.
+- n = 62 en tuning, 31 en holdout ; 3 à 24 par type de journée. Petit,
+  et assumé comme tel.
+- **Le dataset ne contient que des positifs** — 250 megadays, zéro
+  contre-exemple. On ne construit pas un détecteur sur des positifs
+  seuls : répondre à « ce titre va-t-il courir ? » demande de collecter
+  les journées où les mêmes critères ont sonné à 09:30 et où rien ne
+  s'est passé. C'est le prochain jeu de données, pas la prochaine
+  analyse.
 
 ## Verdict
 
