@@ -670,6 +670,13 @@ showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", grou
 tlLookback           = input.int(0, "Trend lines: lookback bars (0 = since day start)", minval=0, maxval=720, group=gVisual,
      tooltip="V9.9: trend lines are day-scoped — the up-line anchors at TODAY's low, the down-line at TODAY's high (tangent: steepest slope keeping every confirmed bar on the right side; it can touch price, never cut it). Set a bar count only to narrow within the day.", display = display.none)
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual, display = display.none)
+// V12.4 (operator, four rounds of "the lines make no sense"): the trend-line
+// chooser scored distance from price as a SOFT penalty capped at 20, so a
+// line eight ATR away with twelve touches (24 - 20 = 4) beat a line half an
+// ATR away with two (4 - 0.5 = 3.5). Nothing anywhere said "if it is nowhere
+// near price, do not draw it", which is how a $13.70 stock ended up with
+// trend lines at $12.97. A line that far from price describes nothing.
+maxTLdistATR         = input.float(2.5, "Hide a trend line further than N ATR from price", minval=0.5, maxval=20.0, step=0.5, group=gVisual, display = display.none)
 showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual, display = display.none)
 // V9 (defect 3): ONE switch for everything that is not the trade decision.
 // The decision layer (plan lines, HOD, one marker per event class) is
@@ -2987,12 +2994,22 @@ if barstate.islast and showTrendLine
                             touches += 1
                     float lineNow = lowA + sl * (bar_index - barA)
                     float distATR = f_safeDiv(close - lineNow, atr, 99.0)
-                    float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
+                    // V12.4: distance is no longer a capped penalty. Capped
+                    // at 20, a far line with many touches always won; the cap
+                    // is what let an irrelevant line outscore a relevant one.
+                    float score = touches * 2.0 - math.abs(distATR) * 3.0
                     if touches >= 2 and (na(bestScore) or score > bestScore)
                         bestScore := score
                         bestA := a
                         bestSlope := sl
                         bestTouch := tch
+        // V12.4: hard relevance gate — the line must be near the price it
+        // claims to describe, not merely the best-scoring of a bad field.
+        float upNowChk = bestA >= 0 ?
+             array.get(tlLows, bestA) + bestSlope * (bar_index - array.get(tlBars, bestA)) : na
+        if bestA >= 0 and not na(upNowChk) and
+             math.abs(close - upNowChk) > maxTLdistATR * atr
+            bestA := -1
         if bestA >= 0
             float lowA2 = array.get(tlLows, bestA)
             float upNow = lowA2 + bestSlope * (bar_index - array.get(tlBars, bestA))
@@ -3053,12 +3070,21 @@ if barstate.islast and showTrendLine
                             touches += 1
                     float lineNow = highA + sl * (bar_index - barA)
                     float distATR = f_safeDiv(lineNow - close, atr, 99.0)
-                    float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
+                    // V12.4: distance is no longer a capped penalty. Capped
+                    // at 20, a far line with many touches always won; the cap
+                    // is what let an irrelevant line outscore a relevant one.
+                    float score = touches * 2.0 - math.abs(distATR) * 3.0
                     if touches >= 2 and (na(bestScoreD) or score > bestScoreD)
                         bestScoreD := score
                         bestAD := a
                         bestSlopeD := sl
                         bestTouchD := tch
+        // V12.4: same hard relevance gate on the downtrend line.
+        float dnNowChk = bestAD >= 0 ?
+             array.get(tlHighs, bestAD) + bestSlopeD * (bar_index - array.get(tlBars, bestAD)) : na
+        if bestAD >= 0 and not na(dnNowChk) and
+             math.abs(close - dnNowChk) > maxTLdistATR * atr
+            bestAD := -1
         if bestAD >= 0
             float highA2 = array.get(tlHighs, bestAD)
             float dnNow = highA2 + bestSlopeD * (bar_index - array.get(tlBars, bestAD))
