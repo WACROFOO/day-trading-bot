@@ -54,6 +54,46 @@ calls remain unscoped, verified by paren-matching the file rather than by
 grep, because ten plots were named `displayEntry`, `displayStop` … and a
 substring test skipped them.
 
+### V12.2 — levels, and the panel items that gate nothing
+
+**Levels were drawn edge-to-edge with no anchor.** `allPiv` stored pivot
+*prices only* — the bar was thrown away — so an S/R line had nothing to
+attach to and was drawn `extend=extend.both`: a rule across the entire chart,
+through history the level did not exist in. That is why every level read as
+constant and unrelated to price. Pivot bars are now kept beside the prices
+(`pivHighBars` / `pivLowBars` / `allPivBars`), `f_near` was replaced by
+`f_nearIdx` which returns *which* pivot it picked, and each level now starts
+at the swing that created it and extends **right only**.
+
+**The nearest-R / nearest-S boxes are gone.** They drew the same level a
+second time — R1 and S1 already are the nearest levels — as a shaded band,
+also `extend.both`. Two renderings of one price, one of them spanning all
+history. Zero `extend.both` remain in the file.
+
+**Labels moved clear of the right edge** (`bar_index + 8`), which is where
+they were colliding with the trend-line labels and producing the garbled
+overlap.
+
+**What the highlighted panel items meant, and why they are off now.** The
+operator was right that they gate nothing:
+
+| Item | Meaning | Now |
+|---|---|---|
+| `Risk ·` `DipLen ·` `Fit ·` | gate chips; the trailing `·` is the panel's "not judgeable yet" marker, shown when no candidate setup exists | kept — they do gate |
+| `Conf 3 ·` | §3 confluence count | kept — gates via `confluenceGate` |
+| `§8` | daily risk governor, green = not locked | kept — gates via `v11RiskGovernorOK` |
+| `3 hits`, `-.2% · TV-EWMA 4.1x (8.75M/1.99M exp) · float ?` | STOCK FIT: day change, the TV pace proxy, unknown float | **off by default** |
+
+STOCK FIT is display-only — `scanGates` defaults off, so none of it can block
+or permit a trade — and its detail string is the widest text in the panel. It
+was setting the width of column 6, which is why `Conf` and `§8` rendered as
+bars stretched across half the table rather than as chips.
+
+Verified this pass changed **display only**: `hardGatesOK`, `fastCoreOK`,
+`fastOK`, `confluenceGate`, `pullbackIndexGate`, `v11RiskGovernorOK`,
+`riskGate`, `rrGate`, `scanGate`, `momentumGate` and `pushGate` are all
+byte-identical to the Codex base.
+
 Item 3 is the second time this bug was fixed. The V12 fix corrected the
 `BOUGHT`/`SOLD` **labels** (`yloc`) but left the twelve `plotshape` **markers**
 on bar-relative locations. Same defect class, different API, and I did not

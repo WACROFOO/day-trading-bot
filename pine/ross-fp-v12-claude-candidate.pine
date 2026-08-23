@@ -452,7 +452,15 @@ gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 // knowledge-base/daytrade-dash/PLAYBOOK.md. They are DISPLAY-ONLY by default:
 // selection happens before the chart, and a chart-side gate would re-commit
 // this project's most common error class (scanner dial used as a trade gate).
-showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan, display = display.none)
+// V12.2 (operator: "the highlighted part serves for nothing ... remove them
+// if no interest for the verdict"). Correct. The STOCK FIT row is DISPLAY
+// ONLY: scanGates defaults off, so none of Price / Float~ / TV pace / Gap
+// can block or permit a trade, and its detail string ("-.2% · TV-EWMA 4.1x
+// (8.75M/1.99M exp) · float ?") is the widest text in the panel — it sets
+// the width of column 6, which is why the Conf and §8 chips rendered as
+// bars stretched across half the table. Off by default; the selection facts
+// live in the STOCK FIT panel when you want them.
+showScanPanel        = input.bool(false, "Show scanner-criteria panel (display only)", group=gScan, display = display.none)
 scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan, display = display.none)
 manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan,
      tooltip="Pine has NO float field — TradingView does not expose it to scripts. Type it from Day Trade Dash / finviz; `python3 scripts/chart_card.py <export.csv> SYM` prints it (and the RVOL context) from a Top Gainers export.", display = display.none)
@@ -1070,14 +1078,25 @@ var array<float> pivLows = array.new_float()
 // BOTH coordinates of a pivot, the fan only needed the price.
 float ph = ta.pivothigh(high, srPivotLen, srPivotLen)
 float pl = ta.pivotlow(low, srPivotLen, srPivotLen)
+// V12.2 (operator: levels "are constant and don't align with price and the
+// right levels"): a level has TWO coordinates. Only the price was kept, so
+// an S/R line had nothing to anchor to and was drawn extend.both — a rule
+// straight across the chart, past and future, with no visible connection to
+// the swing that created it. The pivot's bar is now stored beside its price.
+var array<int> pivHighBars = array.new_int()
+var array<int> pivLowBars = array.new_int()
 if not na(ph)
     array.push(pivHighs, ph)
+    array.push(pivHighBars, bar_index - srPivotLen)
     if array.size(pivHighs) > 40
         array.shift(pivHighs)
+        array.shift(pivHighBars)
 if not na(pl)
     array.push(pivLows, pl)
+    array.push(pivLowBars, bar_index - srPivotLen)
     if array.size(pivLows) > 40
         array.shift(pivLows)
+        array.shift(pivLowBars)
 // V9.8 (live USDE — a trend line that price crossed twenty times): the
 // two-pivot construction is retired. A real trend line is a TANGENT: it
 // may touch price, never cut it. These rolling per-bar arrays feed that
@@ -1119,13 +1138,17 @@ if barstate.isconfirmed
 // was invisible as resistance. A level is a level: both pivot kinds feed
 // both sides; which side of PRICE it is on decides its role.
 var array<float> allPiv = array.new_float()
+var array<int> allPivBars = array.new_int()
 array.clear(allPiv)
+array.clear(allPivBars)
 if array.size(pivHighs) > 0
     for i = 0 to array.size(pivHighs) - 1
         array.push(allPiv, array.get(pivHighs, i))
+        array.push(allPivBars, array.get(pivHighBars, i))
 if array.size(pivLows) > 0
     for i = 0 to array.size(pivLows) - 1
         array.push(allPiv, array.get(pivLows, i))
+        array.push(allPivBars, array.get(pivLowBars, i))
 float nearestRes = na
 float nearestSup = na
 if array.size(allPiv) > 0
@@ -2803,23 +2826,35 @@ var array<line> srLines = array.new_line()
 var array<label> srLabels = array.new_label()
 // V9.4: S/R back on the DECISION layer — hiding the key levels behind
 // the diagnostics toggle was over-cleaning (operator, live MMA).
-f_near(array<float> src, bool above_, int n_, float tol) =>
-    array<float> out = array.new_float()
-    if array.size(src) > 0
-        for i = 0 to array.size(src) - 1
-            float v = array.get(src, i)
-            if (above_ ? v > close : v < close)
-                bool dup = false
-                if array.size(out) > 0
-                    for j = 0 to array.size(out) - 1
-                        if math.abs(array.get(out, j) - v) <= tol
-                            dup := true
-                if not dup
-                    array.push(out, v)
-    array.sort(out, above_ ? order.ascending : order.descending)
-    while array.size(out) > n_
-        array.pop(out)
-    out
+// V12.2: returns INDICES into src, not a copy of the prices. The caller
+// needs the pivot's bar as well as its price to anchor the line, and a
+// price-only list has already thrown that away.
+f_nearIdx(array<float> src, bool above_, int n_, float tol) =>
+    array<int> picked = array.new_int()
+    array<float> seen = array.new_float()
+    // nearest first: walk the candidates repeatedly, taking the closest
+    // untaken one that is not inside tol of something already taken
+    for pass = 1 to n_
+        int bestI = -1
+        float bestD = 1e20
+        if array.size(src) > 0
+            for i = 0 to array.size(src) - 1
+                float v = array.get(src, i)
+                if (above_ ? v > close : v < close)
+                    bool dup = false
+                    if array.size(seen) > 0
+                        for j = 0 to array.size(seen) - 1
+                            if math.abs(array.get(seen, j) - v) <= tol
+                                dup := true
+                    if not dup
+                        float d = math.abs(v - close)
+                        if d < bestD
+                            bestD := d
+                            bestI := i
+        if bestI >= 0
+            array.push(picked, bestI)
+            array.push(seen, array.get(src, bestI))
+    picked
 if barstate.islast and showSR
     while array.size(srLines) > 0
         line.delete(array.pop(srLines))
@@ -2828,58 +2863,47 @@ if barstate.islast and showSR
     float tolSR = atr * 0.5
     // V9.5: both pivot kinds feed both sides (polarity flip) — f_near's
     // above/below filter assigns the role from the CURRENT price.
-    array<float> resL = f_near(allPiv, true, maxSRlines, tolSR)
-    array<float> supL = f_near(allPiv, false, maxSRlines, tolSR)
-    if array.size(resL) > 0
-        for i = 0 to array.size(resL) - 1
-            float v = array.get(resL, i)
-            array.push(srLines, line.new(bar_index - 1, v, bar_index, v,
-                 extend=extend.both, color=color.new(color.blue, i == 0 ? 30 : 60),
+    array<int> resI = f_nearIdx(allPiv, true, maxSRlines, tolSR)
+    array<int> supI = f_nearIdx(allPiv, false, maxSRlines, tolSR)
+    // V12.2: each level now STARTS at the pivot that created it and extends
+    // right only. extend.both drew a rule across the whole chart, including
+    // history the level did not exist in, which is what made every level look
+    // constant and unrelated to price. Labels sit clear of the right edge so
+    // they stop colliding with the trend-line labels.
+    if array.size(resI) > 0
+        for i = 0 to array.size(resI) - 1
+            int    k = array.get(resI, i)
+            float  v = array.get(allPiv, k)
+            int    b = math.min(array.get(allPivBars, k), bar_index - 1)
+            array.push(srLines, line.new(b, v, bar_index, v,
+                 extend=extend.right, color=color.new(color.blue, i == 0 ? 30 : 65),
                  width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 2, v,
+            array.push(srLabels, label.new(bar_index + 8, v,
                  "R" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
                  style=label.style_none, textcolor=color.new(color.blue, 20), size=size.small))
-    if array.size(supL) > 0
-        for i = 0 to array.size(supL) - 1
-            float v = array.get(supL, i)
-            array.push(srLines, line.new(bar_index - 1, v, bar_index, v,
-                 extend=extend.both, color=color.new(color.purple, i == 0 ? 30 : 60),
+    if array.size(supI) > 0
+        for i = 0 to array.size(supI) - 1
+            int    k = array.get(supI, i)
+            float  v = array.get(allPiv, k)
+            int    b = math.min(array.get(allPivBars, k), bar_index - 1)
+            array.push(srLines, line.new(b, v, bar_index, v,
+                 extend=extend.right, color=color.new(color.purple, i == 0 ? 30 : 65),
                  width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 2, v,
+            array.push(srLabels, label.new(bar_index + 8, v,
                  "S" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
                  style=label.style_none, textcolor=color.new(color.purple, 20), size=size.small))
     if not na(prevDayClose)
         array.push(srLines, line.new(bar_index - 1, prevDayClose, bar_index, prevDayClose,
-             extend=extend.both, color=color.new(color.gray, 40), style=line.style_dashed))
-        array.push(srLabels, label.new(bar_index + 2, prevDayClose,
+             extend=extend.right, color=color.new(color.gray, 55), style=line.style_dashed))
+        array.push(srLabels, label.new(bar_index + 8, prevDayClose,
              "prev close " + str.tostring(prevDayClose, format.mintick),
-             style=label.style_none, textcolor=color.new(color.gray, 20), size=size.small))
+             style=label.style_none, textcolor=color.new(color.gray, 30), size=size.small))
 
-var box resBox = na
-var box supBox = na
-if barstate.islast and showSR
-    if not na(resBox)
-        box.delete(resBox)
-    if not na(supBox)
-        box.delete(supBox)
-    if not na(nearestRes)
-        // V4.9: extend.both — a 30-bar anchor slid out of view on any
-        // horizontal zoom; the level exists across the whole chart.
-        resBox := box.new(bar_index - 1, nearestRes + bandHalfWidth,
-             bar_index, nearestRes - bandHalfWidth,
-             border_color=color.new(color.gray, 55), border_width=1,
-             bgcolor=color.new(color.blue, 88), extend=extend.both,
-             text="R " + str.tostring(nearestRes, format.mintick),
-             text_color=color.new(color.blue, 20), text_size=size.tiny,
-             text_halign=text.align_left)
-    if not na(nearestSup)
-        supBox := box.new(bar_index - 1, nearestSup + bandHalfWidth,
-             bar_index, nearestSup - bandHalfWidth,
-             border_color=color.new(color.gray, 55), border_width=1,
-             bgcolor=color.new(color.purple, 88), extend=extend.both,
-             text="S " + str.tostring(nearestSup, format.mintick),
-             text_color=color.new(color.purple, 20), text_size=size.tiny,
-             text_halign=text.align_left)
+// V12.2: the nearest-R / nearest-S BOXES are removed. They drew the SAME
+// level a second time — R1 and S1 already are the nearest levels — as a
+// shaded band with extend.both, so the chart carried two renderings of one
+// price, one of them a rule across the entire history. The anchored R1/S1
+// lines above carry the same information and show which swing made it.
 
 // ── V9.6 TREND LINES (operator) ─────────────────────────────────────────
 // Downtrend line: anchored at the HIGHEST pivot high in the window, drawn
