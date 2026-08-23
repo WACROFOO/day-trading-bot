@@ -94,6 +94,32 @@ Verified this pass changed **display only**: `hardGatesOK`, `fastCoreOK`,
 `riskGate`, `rrGate`, `scanGate`, `momentumGate` and `pushGate` are all
 byte-identical to the Codex base.
 
+### V12.3 — the lines
+
+Two geometry bugs, both mine, both visible as lines floating in empty space.
+
+**Trend lines were projected forever.** They were drawn between two past
+pivots and then `extend = extend.right`. On a chart whose right margin has
+not traded yet, that projection is the *only* part on screen: two lines
+crossing blank space, touching no candle, describing nothing. A trend line
+states the leg that exists — it is not a forecast. Both now terminate at the
+last bar, at the line's own value there (`upNow` / `dnNow`, already computed
+for the lost/broken test).
+
+**S/R projected to the chart edge.** A level *should* look forward, unlike a
+trend line, but not across an untraded margin. Bounded to 12 bars past the
+last one, just beyond the labels.
+
+The file now contains **zero** `extend.right` and **zero** `extend.both`.
+Every drawn object has both endpoints on, or just past, real bars.
+
+Trend labels are nudged ±0.25 ATR off the line end so the two cannot land on
+the same pixel when the lines converge — that was the garbled
+`downtrend`/`uptrend` overlap.
+
+Display-only again, verified: all ten gate booleans byte-identical to the
+Codex base.
+
 Item 3 is the second time this bug was fixed. The V12 fix corrected the
 `BOUGHT`/`SOLD` **labels** (`yloc`) but left the twelve `plotshape` **markers**
 on bar-relative locations. Same defect class, different API, and I did not

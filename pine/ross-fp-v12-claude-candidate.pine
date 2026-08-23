@@ -2875,8 +2875,8 @@ if barstate.islast and showSR
             int    k = array.get(resI, i)
             float  v = array.get(allPiv, k)
             int    b = math.min(array.get(allPivBars, k), bar_index - 1)
-            array.push(srLines, line.new(b, v, bar_index, v,
-                 extend=extend.right, color=color.new(color.blue, i == 0 ? 30 : 65),
+            array.push(srLines, line.new(b, v, bar_index + 12, v,
+                 extend=extend.none, color=color.new(color.blue, i == 0 ? 30 : 65),
                  width=i == 0 ? 2 : 1))
             array.push(srLabels, label.new(bar_index + 8, v,
                  "R" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
@@ -2886,15 +2886,15 @@ if barstate.islast and showSR
             int    k = array.get(supI, i)
             float  v = array.get(allPiv, k)
             int    b = math.min(array.get(allPivBars, k), bar_index - 1)
-            array.push(srLines, line.new(b, v, bar_index, v,
-                 extend=extend.right, color=color.new(color.purple, i == 0 ? 30 : 65),
+            array.push(srLines, line.new(b, v, bar_index + 12, v,
+                 extend=extend.none, color=color.new(color.purple, i == 0 ? 30 : 65),
                  width=i == 0 ? 2 : 1))
             array.push(srLabels, label.new(bar_index + 8, v,
                  "S" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
                  style=label.style_none, textcolor=color.new(color.purple, 20), size=size.small))
     if not na(prevDayClose)
-        array.push(srLines, line.new(bar_index - 1, prevDayClose, bar_index, prevDayClose,
-             extend=extend.right, color=color.new(color.gray, 55), style=line.style_dashed))
+        array.push(srLines, line.new(bar_index - 60, prevDayClose, bar_index + 12, prevDayClose,
+             extend=extend.none, color=color.new(color.gray, 55), style=line.style_dashed))
         array.push(srLabels, label.new(bar_index + 8, prevDayClose,
              "prev close " + str.tostring(prevDayClose, format.mintick),
              style=label.style_none, textcolor=color.new(color.gray, 30), size=size.small))
@@ -2997,12 +2997,19 @@ if barstate.islast and showTrendLine
             float lowA2 = array.get(tlLows, bestA)
             float upNow = lowA2 + bestSlope * (bar_index - array.get(tlBars, bestA))
             bool upLost = close < upNow
-            upTL := line.new(array.get(tlTimes, bestA), lowA2,
-                 array.get(tlTimes, bestTouch), array.get(tlLows, bestTouch),
-                 xloc=xloc.bar_time, extend=extend.right,
+            // V12.3 (operator): the line ENDS AT THE LAST BAR. It used to be
+            // drawn between two past pivots and then extend.right, so it was
+            // projected forever into the future — and on a chart with an
+            // untraded right margin the projection was the only part visible,
+            // a line crossing empty space touching no candle. A trend line
+            // describes the leg that exists; it does not forecast one.
+            upTL := line.new(array.get(tlTimes, bestA), lowA2, time, upNow,
+                 xloc=xloc.bar_time, extend=extend.none,
                  color=color.new(color.teal, upLost ? 70 : 25),
                  style=upLost ? line.style_dashed : line.style_solid, width=2)
-            upTLlab := label.new(time, upNow,
+            // nudged below the line end so the two trend labels cannot land
+            // on the same pixel when the lines converge
+            upTLlab := label.new(time, upNow - atr * 0.25,
                  upLost ? "uptrend LOST ▼" : "uptrend",
                  xloc=xloc.bar_time, style=label.style_none, size=size.small,
                  textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
@@ -3056,12 +3063,12 @@ if barstate.islast and showTrendLine
             float highA2 = array.get(tlHighs, bestAD)
             float dnNow = highA2 + bestSlopeD * (bar_index - array.get(tlBars, bestAD))
             bool dnBroken = close > dnNow
-            dnTL := line.new(array.get(tlTimes, bestAD), highA2,
-                 array.get(tlTimes, bestTouchD), array.get(tlHighs, bestTouchD),
-                 xloc=xloc.bar_time, extend=extend.right,
+            // V12.3: same — terminate at the last bar, label nudged above.
+            dnTL := line.new(array.get(tlTimes, bestAD), highA2, time, dnNow,
+                 xloc=xloc.bar_time, extend=extend.none,
                  color=color.new(color.red, dnBroken ? 70 : 25),
                  style=dnBroken ? line.style_dashed : line.style_solid, width=2)
-            dnTLlab := label.new(time, dnNow,
+            dnTLlab := label.new(time, dnNow + atr * 0.25,
                  dnBroken ? "downtrend BROKEN ▲" : "downtrend",
                  xloc=xloc.bar_time, style=label.style_none, size=size.small,
                  textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
