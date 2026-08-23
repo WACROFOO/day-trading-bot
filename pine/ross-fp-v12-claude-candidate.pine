@@ -654,7 +654,22 @@ bigMarkers           = input.bool(false, "Large signal markers", group=gVisual, 
 // V4.1: nearest structural levels drawn as bands — resistance above,
 // support below, from confirmed swing pivots (his "two reasons at one
 // price" needs the level on screen, not in your head).
-showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual, display = display.none)
+// V12.5 (operator, sixth report on the same subsystem): the S/R map and the
+// trend lines are OFF by default.
+//
+// This is a stopgap, not a fix. Five attempts have each corrected something
+// real — anchors, ylocs, plotshape locations, infinite extends, a capped
+// distance penalty — and the operator still reports the levels as wrong. A
+// level that MIGHT be wrong is worse than no level: it invites a decision
+// against a price that may not be there. Until the drawing layer is rebuilt
+// and checked against a live chart, it does not draw.
+//
+// Nothing the strategy TRADES on is affected: entry, stop, T1/T2/T3, the
+// high of day, the position markers and the panel are all independent of
+// these two switches.
+showChartMap         = input.bool(false, "Chart map: S/R levels + trend lines [OFF: under repair]", group=gVisual, display = display.none,
+     tooltip="Turned off after repeated reports that the levels do not match price. The traded levels — entry, stop, targets — are drawn regardless.")
+showSR               = input.bool(true, "  └ nearest resistance/support", group=gVisual, display = display.none)
 // V9.6 (operator): automatic trend lines. Downtrend = the line from the
 // swing high across the most recent LOWER high (the breakout line);
 // uptrend = from the swing low across the most recent HIGHER low (the
@@ -2862,7 +2877,7 @@ f_nearIdx(array<float> src, bool above_, int n_, float tol) =>
             array.push(picked, bestI)
             array.push(seen, array.get(src, bestI))
     picked
-if barstate.islast and showSR
+if barstate.islast and showSR and showChartMap
     while array.size(srLines) > 0
         line.delete(array.pop(srLines))
     while array.size(srLabels) > 0
@@ -2923,7 +2938,7 @@ var line dnTL = na
 var line upTL = na
 var label dnTLlab = na
 var label upTLlab = na
-if barstate.islast and showTrendLine
+if barstate.islast and showTrendLine and showChartMap
     if not na(dnTL)
         line.delete(dnTL)
         dnTL := na
