@@ -373,39 +373,39 @@ strategy("ROSS First Pullback Strategy V12 (Codex audit candidate · paper only)
 
 // ───────────────────────────── Inputs ─────────────────────────────
 gImpulse = "1. Impulse"
-minPushPct          = input.float(5.0, "Minimum push %", minval=0.5, maxval=30.0, step=0.5, group=gImpulse)
-minImpulseBars      = input.int(1, "Minimum impulse bars", minval=1, maxval=6, group=gImpulse)
-minPushATR          = input.float(2.0, "Minimum push (ATR)", minval=0.25, maxval=20.0, step=0.25, group=gImpulse)
-maxImpulseBars      = input.int(6, "Detection lookback bars", minval=1, maxval=12, group=gImpulse)
+minPushPct          = input.float(5.0, "Minimum push %", minval=0.5, maxval=30.0, step=0.5, group=gImpulse, display = display.none)
+minImpulseBars      = input.int(1, "Minimum impulse bars", minval=1, maxval=6, group=gImpulse, display = display.none)
+minPushATR          = input.float(2.0, "Minimum push (ATR)", minval=0.25, maxval=20.0, step=0.25, group=gImpulse, display = display.none)
+maxImpulseBars      = input.int(6, "Detection lookback bars", minval=1, maxval=12, group=gImpulse, display = display.none)
 // V4: LOCAL_ADDITION carried over from V3, evidence_status UNTESTED — no
 // corpus source for an efficiency floor. Kept because it filters chop the
 // eye would also reject; flagged so nobody mistakes it for a Ross rule.
-minEfficiency       = input.float(0.60, "Minimum directional efficiency [UNTESTED local]", minval=0.0, maxval=1.0, step=0.05, group=gImpulse)
-volumeBaselineBars  = input.int(20, "Volume baseline bars", minval=5, maxval=100, group=gImpulse)
+minEfficiency       = input.float(0.60, "Minimum directional efficiency [UNTESTED local]", minval=0.0, maxval=1.0, step=0.05, group=gImpulse, display = display.none)
+volumeBaselineBars  = input.int(20, "Volume baseline bars", minval=5, maxval=100, group=gImpulse, display = display.none)
 minPushRVOL         = input.float(2.0, "Minimum push/local-volume ratio", minval=0.5, maxval=20.0, step=0.25, group=gImpulse,
-     tooltip="Average volume on the detected push divided by the prior local 20-bar SMA baseline. This is NOT RVOL-at-time; calling it RVOL overstated what it measures (reviewer).")
+     tooltip="Average volume on the detected push divided by the prior local 20-bar SMA baseline. This is NOT RVOL-at-time; calling it RVOL overstated what it measures (reviewer).", display = display.none)
 // V4: LOCAL_ADDITION, UNTESTED — $ volume floor has no corpus source (the
 // closest is "1M+ session shares", a different object). Kept, flagged.
-minDollarVolume     = input.float(100000.0, "Minimum avg $ volume / min [UNTESTED local]", minval=0.0, step=25000.0, group=gImpulse)
+minDollarVolume     = input.float(100000.0, "Minimum avg $ volume / min [UNTESTED local]", minval=0.0, step=25000.0, group=gImpulse, display = display.none)
 
 gPullback = "2. First pullback"
-minPullbackBars     = input.int(1, "Minimum pullback bars", minval=1, maxval=3, group=gPullback)
+minPullbackBars     = input.int(1, "Minimum pullback bars", minval=1, maxval=3, group=gPullback, display = display.none)
 // V4: default 3 -> 4. A pullback DURATION cap is a LOCAL_ADDITION (the
 // source's "3rd pullback" rule is about pullback NUMBER, handled below);
 // loosened one bar so a slow flag is not auto-rejected. UNTESTED.
-maxPullbackBars     = input.int(4, "Maximum pullback bars [local, was 3]", minval=1, maxval=6, group=gPullback)
-maxRetracementPct   = input.float(50.0, "Maximum retracement %", minval=10.0, maxval=90.0, step=1.0, group=gPullback)
-maxPBVolumeRatio    = input.float(0.70, "Maximum pullback / push volume", minval=0.10, maxval=2.0, step=0.05, group=gPullback)
-bullishLowerWickPct = input.float(30.0, "Good lower wick %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
-toppingTailWarnPct  = input.float(40.0, "Upper wick warning %", minval=0.0, maxval=100.0, step=5.0, group=gPullback)
+maxPullbackBars     = input.int(4, "Maximum pullback bars [local, was 3]", minval=1, maxval=6, group=gPullback, display = display.none)
+maxRetracementPct   = input.float(50.0, "Maximum retracement %", minval=10.0, maxval=90.0, step=1.0, group=gPullback, display = display.none)
+maxPBVolumeRatio    = input.float(0.70, "Maximum pullback / push volume", minval=0.10, maxval=2.0, step=0.05, group=gPullback, display = display.none)
+bullishLowerWickPct = input.float(30.0, "Good lower wick %", minval=0.0, maxval=100.0, step=5.0, group=gPullback, display = display.none)
+toppingTailWarnPct  = input.float(40.0, "Upper wick warning %", minval=0.0, maxval=100.0, step=5.0, group=gPullback, display = display.none)
 
 gMomentum = "3. Momentum"
-requireMACD          = input.bool(true, "Require MACD > 0 and histogram > 0", group=gMomentum)
+requireMACD          = input.bool(true, "Require MACD > 0 and histogram > 0", group=gMomentum, display = display.none)
 // V4: defaults OFF -> ON. Origin SOURCE: FILTERS.md Layer 2 requires
 // price > VWAP and price > EMA9 at entry — they are chart gates, not
 // options. V3 shipped them off, which tests a different strategy.
-requireEMA           = input.bool(true, "Require close > EMA9 and EMA9 >= EMA20", group=gMomentum)
-requireVWAP          = input.bool(true, "Require close > VWAP", group=gMomentum)
+requireEMA           = input.bool(true, "Require close > EMA9 and EMA9 >= EMA20", group=gMomentum, display = display.none)
+requireVWAP          = input.bool(true, "Require close > VWAP", group=gMomentum, display = display.none)
 
 gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // V4: NEW, default ON. The measured profit curve starts at 07:00 ET and the
@@ -437,13 +437,13 @@ gSession = "4. Session (SOURCE: broker-split stats + book ch.3)"
 // Day-trading discipline does NOT depend on this input: positions still
 // flatten at the daily cutoff and at the day's end.
 useSessionWindow     = input.bool(true, "HARD-gate: only arm inside 07:00-11:30 ET [evidence default]", group=gSession,
-     tooltip="The repo's own 11-day audit found the added afternoon set at 5W/26L, -9.47R. With premarket emulator fills disabled, executable paper orders are effectively limited to 09:30-11:30 ET.")
-sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession)
+     tooltip="The repo's own 11-day audit found the added afternoon set at 5W/26L, -9.47R. With premarket emulator fills disabled, executable paper orders are effectively limited to 09:30-11:30 ET.", display = display.none)
+sessionWindow        = input.session("0700-1130", "Window (exchange tz)", group=gSession, display = display.none)
 allowPremarketEmulatorFills = input.bool(false, "Allow optimistic premarket stop/market fills [EXPERIMENTAL]", group=gSession,
-     tooltip="Default OFF: the documented extended-hours venue is limit-orders-only, so simulated stop/market fills there are optimistic fiction. Pre-market stays visible for study; orders arm only in RTH unless you explicitly accept invalid fill modelling.")
-allowOvernightPositions = input.bool(false, "Allow positions past the daily flat cutoff", group=gSession)
-dailyFlatHour        = input.int(15, "Daily flat cutoff hour ET", minval=0, maxval=23, group=gSession)
-dailyFlatMinute      = input.int(58, "Daily flat cutoff minute ET", minval=0, maxval=59, group=gSession)
+     tooltip="Default OFF: the documented extended-hours venue is limit-orders-only, so simulated stop/market fills there are optimistic fiction. Pre-market stays visible for study; orders arm only in RTH unless you explicitly accept invalid fill modelling.", display = display.none)
+allowOvernightPositions = input.bool(false, "Allow positions past the daily flat cutoff", group=gSession, display = display.none)
+dailyFlatHour        = input.int(15, "Daily flat cutoff hour ET", minval=0, maxval=23, group=gSession, display = display.none)
+dailyFlatMinute      = input.int(58, "Daily flat cutoff minute ET", minval=0, maxval=59, group=gSession, display = display.none)
 
 gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 // V5: the strategy answered WHEN and was blind to WHETHER THE NAME QUALIFIES,
@@ -452,58 +452,58 @@ gScan = "5a. Scanner criteria (V5 — mirrors Day Trade Dash)"
 // knowledge-base/daytrade-dash/PLAYBOOK.md. They are DISPLAY-ONLY by default:
 // selection happens before the chart, and a chart-side gate would re-commit
 // this project's most common error class (scanner dial used as a trade gate).
-showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan)
-scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan)
+showScanPanel        = input.bool(true, "Show scanner-criteria panel", group=gScan, display = display.none)
+scanGates            = input.bool(false, "Also VETO when criteria fail [off = display only]", group=gScan, display = display.none)
 manualFloatM         = input.float(0.0, "Float (millions, 0 = unknown)", minval=0.0, step=0.1, group=gScan,
-     tooltip="Pine has NO float field — TradingView does not expose it to scripts. Type it from Day Trade Dash / finviz; `python3 scripts/chart_card.py <export.csv> SYM` prints it (and the RVOL context) from a Top Gainers export.")
+     tooltip="Pine has NO float field — TradingView does not expose it to scripts. Type it from Day Trade Dash / finviz; `python3 scripts/chart_card.py <export.csv> SYM` prints it (and the RVOL context) from a Top Gainers export.", display = display.none)
 floatTicker          = input.string("", "Float applies to ticker", group=gScan,
-     tooltip="Required symbol binding for a manual float, e.g. MSS. Switching charts without changing this field makes float UNKNOWN instead of silently reusing another company's number.")
+     tooltip="Required symbol binding for a manual float, e.g. MSS. Switching charts without changing this field makes float UNKNOWN instead of silently reusing another company's number.", display = display.none)
 // V7 (reviewer): a typed number is not a verified number. Float counts as
 // KNOWN for gating only when its provenance is stated; a manual unverified
 // value still displays, labelled, but gates as unknown.
 floatSource          = input.string("Unknown", "Float provenance",
      options=["Unknown", "SEC filing verified", "Trusted feed verified", "Manual unverified"], group=gScan,
-     tooltip="Pine has no authoritative float field. A number is counted as verified only when its provenance is explicitly SEC filing or trusted feed.")
+     tooltip="Pine has no authoritative float field. A number is counted as verified only when its provenance is explicitly SEC filing or trusted feed.", display = display.none)
 // V7 (reviewer): TradingView's volume feed is not Warrior's. The RVOL pillar
 // GATES only when the operator has acknowledged the feed and bound that
 // acknowledgement to this exchange prefix — switching symbols fails closed.
 scanFeedVerified     = input.bool(false, "Acknowledge TV feed/session for RVOL gating", group=gScan,
-     tooltip="Manual acknowledgement only — it does not prove parity with Warrior. Gating also requires the exchange-prefix binding and a named feed source below.")
+     tooltip="Manual acknowledgement only — it does not prove parity with Warrior. Gating also requires the exchange-prefix binding and a named feed source below.", display = display.none)
 scanFeedPrefix       = input.string("", "Feed acknowledgement exchange prefix", group=gScan,
-     tooltip="Bind the acknowledgement to the current syminfo.prefix, e.g. NASDAQ. A different prefix fails closed.")
+     tooltip="Bind the acknowledgement to the current syminfo.prefix, e.g. NASDAQ. A different prefix fails closed.", display = display.none)
 scanFeedSource       = input.string("Unknown", "Acknowledged TradingView feed",
      options=["Unknown", "Cboe One/free", "Consolidated/paid", "Other paid/validated"], group=gScan,
-     tooltip="Record which TradingView feed was checked. Even Consolidated/paid remains a TV proxy, not Warrior's Daily Rate.")
+     tooltip="Record which TradingView feed was checked. Even Consolidated/paid remains a TV proxy, not Warrior's Daily Rate.", display = display.none)
 rvolLookbackDays     = input.int(30, "TV pace EWMA baseline days", minval=10, maxval=60, group=gScan,
-     tooltip="Exponential same-minute chart-session baseline, not an exact rolling mean and not Warrior Daily Rate. Gating waits for this many observations in the minute slot.")
-scanMinPrice         = input.float(2.0, "Price floor", minval=0.01, step=0.25, group=gScan)
-scanMaxPrice         = input.float(20.0, "Price ceiling", minval=0.5, step=1.0, group=gScan)
+     tooltip="Exponential same-minute chart-session baseline, not an exact rolling mean and not Warrior Daily Rate. Gating waits for this many observations in the minute slot.", display = display.none)
+scanMinPrice         = input.float(2.0, "Price floor", minval=0.01, step=0.25, group=gScan, display = display.none)
+scanMaxPrice         = input.float(20.0, "Price ceiling", minval=0.5, step=1.0, group=gScan, display = display.none)
 // MEASURED 2026-08-18: the platform fired Former Momo at daily RVOL 2.13, its
 // loosest lane. 5.0 is the teaching dial; as a hard floor it deletes the
 // population the method hunts.
 scanMinRVOL          = input.float(2.0, "USER TV RVOL-at-time proxy floor [UNCALIBRATED]", minval=0.1, step=0.25, group=gScan,
-     tooltip="Applied to TradingView same-time cumulative-volume pace only. No validated mapping to Warrior Daily Rate exists (the 2.13 Former Momo observation is a DIFFERENT metric on a DIFFERENT feed); collect matched timestamp pairs before treating this threshold as predictive.")
+     tooltip="Applied to TradingView same-time cumulative-volume pace only. No validated mapping to Warrior Daily Rate exists (the 2.13 Former Momo observation is a DIFFERENT metric on a DIFFERENT feed); collect matched timestamp pairs before treating this threshold as predictive.", display = display.none)
 scanMinGap           = input.float(10.0, "Premarket mark / RTH-open gap floor %", minval=0.0, step=1.0, group=gScan,
-     tooltip="Before 09:30 ET this tests the live premarket mark against prior close. From 09:30 on it tests the FROZEN RTH-open gap, so the pillar stops drifting with intraday price.")
+     tooltip="Before 09:30 ET this tests the live premarket mark against prior close. From 09:30 on it tests the FROZEN RTH-open gap, so the pillar stops drifting with intraday price.", display = display.none)
 // MEASURED: low-float branches fired at 8.40M, medium included 41.92M, so the
 // real tier boundary is bracketed to (8.40, 41.92]. 20 sits inside it —
 // consistent with observation, NOT confirmed by it.
-scanLowFloatMaxM     = input.float(20.0, "Low-float ceiling M [bracketed 8.4-41.9]", minval=0.1, step=1.0, group=gScan)
+scanLowFloatMaxM     = input.float(20.0, "Low-float ceiling M [bracketed 8.4-41.9]", minval=0.1, step=1.0, group=gScan, display = display.none)
 
 gRetest = "5b. HOD break-and-retest (V5)"
 // SOURCE, register STREAMS: "where it broke through it, it got above it, it
 // retests it, and then if it can hold it" — YuNvqwJftVY @00:22:37.
 // Default ON: V4 skipped this setup entirely, which is the reported symptom.
-enableRetest         = input.bool(true, "Enable HOD break-and-retest entries", group=gRetest)
-retestTolATR         = input.float(0.25, "Retest tolerance (x ATR)", minval=0.02, maxval=2.0, step=0.01, group=gRetest)
+enableRetest         = input.bool(true, "Enable HOD break-and-retest entries", group=gRetest, display = display.none)
+retestTolATR         = input.float(0.25, "Retest tolerance (x ATR)", minval=0.02, maxval=2.0, step=0.01, group=gRetest, display = display.none)
 retestStopBufferTicks = input.int(1, "Retest stop below broken HOD (ticks)", minval=1, maxval=20, group=gRetest,
-     tooltip="The retest stop is forced BELOW the reclaimed level — never left above the support the setup claims to trade against (reviewer).")
+     tooltip="The retest stop is forced BELOW the reclaimed level — never left above the support the setup claims to trade against (reviewer).", display = display.none)
 
 gStructure = "5. Structure / reward"
-requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure)
-minRRtoPeak          = input.float(2.0, "Minimum R to impulse peak", minval=0.0, maxval=10.0, step=0.25, group=gStructure)
-supportTolerancePct  = input.float(0.35, "Support tolerance %", minval=0.05, maxval=3.0, step=0.05, group=gStructure)
-supportToleranceATR  = input.float(0.20, "Support tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=gStructure)
+requireRRtoPeak      = input.bool(false, "Require minimum room to impulse peak", group=gStructure, display = display.none)
+minRRtoPeak          = input.float(2.0, "Minimum R to impulse peak", minval=0.0, maxval=10.0, step=0.25, group=gStructure, display = display.none)
+supportTolerancePct  = input.float(0.35, "Support tolerance %", minval=0.05, maxval=3.0, step=0.05, group=gStructure, display = display.none)
+supportToleranceATR  = input.float(0.20, "Support tolerance ATR", minval=0.05, maxval=2.0, step=0.05, group=gStructure, display = display.none)
 
 gRisk = "6. Risk / sizing"
 // V8: defaults rebased to the $2,000 account. $20 = 1% risk per trade;
@@ -515,76 +515,76 @@ gRisk = "6. Risk / sizing"
 // beginner path (n=125). shares = risk_budget / risk_per_share. The old
 // $20 default was 1% — a local choice presented as if it were the rule.
 riskMode             = input.string("% of account (source: 2%)", "Risk basis", options=["% of account (source: 2%)", "Flat $ (beginner path)"], group=gRisk,
-     tooltip="PARAMETERS.md §7: risk_pct_per_trade = 2.0% of account (n=125); risk_flat_beginner = $50 (n=125).")
-riskPctInput         = input.float(2.0, "Risk % of account per trade [source: 2%]", minval=0.1, maxval=10.0, step=0.25, group=gRisk)
-riskFlatInput        = input.float(50.0, "Flat $ risk per trade [source: $50 beginner]", minval=1.0, step=5.0, group=gRisk)
+     tooltip="PARAMETERS.md §7: risk_pct_per_trade = 2.0% of account (n=125); risk_flat_beginner = $50 (n=125).", display = display.none)
+riskPctInput         = input.float(2.0, "Risk % of account per trade [source: 2%]", minval=0.1, maxval=10.0, step=0.25, group=gRisk, display = display.none)
+riskFlatInput        = input.float(50.0, "Flat $ risk per trade [source: $50 beginner]", minval=1.0, step=5.0, group=gRisk, display = display.none)
 // V9.2 (operator): size from the ACCOUNT's equity, not the strategy's
 // initial_capital default. 0 = automatic: strategy.equity (initial capital
 // plus this strategy's own simulated P&L, so the 2% rule compounds). Set
 // it explicitly to match a broker/paper account Pine cannot see.
-accountEquity        = input.float(0.0, "Account equity $ (0 = auto: strategy equity)", minval=0.0, step=100.0, group=gRisk)
+accountEquity        = input.float(0.0, "Account equity $ (0 = auto: strategy equity)", minval=0.0, step=100.0, group=gRisk, display = display.none)
 equityBase           = accountEquity > 0 ? accountEquity : strategy.equity
 riskBudget           = riskMode == "Flat $ (beginner path)" ? riskFlatInput : equityBase * riskPctInput / 100.0
-maxPositionValue     = input.float(2000.0, "Maximum position value $ [cash account]", minval=100.0, step=100.0, group=gRisk)
+maxPositionValue     = input.float(2000.0, "Maximum position value $ [cash account]", minval=100.0, step=100.0, group=gRisk, display = display.none)
 // V9: accountSize input retired — the dashboard reads
 // strategy.initial_capital directly, which Pine CAN read back.
 // V8: the sizing stress assumption is now an input so testing another
 // slippage setting cannot silently desynchronise sizing from the emulator.
 slipTicksInput       = input.int(10, "Slippage assumption (ticks) — MUST match Properties slippage", minval=0, maxval=100, group=gRisk,
-     tooltip="Pine cannot read the strategy() slippage= argument back. Sizing budgets adverse slippage on BOTH the stop entry and the stop exit: 2 x this many ticks per share.")
-maxStopPct           = input.float(3.0, "Maximum structural stop %", minval=0.25, maxval=20.0, step=0.25, group=gRisk)
-maxStopATR           = input.float(1.5, "Maximum structural stop ATR", minval=0.25, maxval=10.0, step=0.25, group=gRisk)
-useMaxDollarStop     = input.bool(false, "Also enforce maximum $ stop", group=gRisk)
-maxStopDollar        = input.float(0.20, "Maximum $ stop", minval=0.01, maxval=20.0, step=0.01, group=gRisk)
+     tooltip="Pine cannot read the strategy() slippage= argument back. Sizing budgets adverse slippage on BOTH the stop entry and the stop exit: 2 x this many ticks per share.", display = display.none)
+maxStopPct           = input.float(3.0, "Maximum structural stop %", minval=0.25, maxval=20.0, step=0.25, group=gRisk, display = display.none)
+maxStopATR           = input.float(1.5, "Maximum structural stop ATR", minval=0.25, maxval=10.0, step=0.25, group=gRisk, display = display.none)
+useMaxDollarStop     = input.bool(false, "Also enforce maximum $ stop", group=gRisk, display = display.none)
+maxStopDollar        = input.float(0.20, "Maximum $ stop", minval=0.01, maxval=20.0, step=0.01, group=gRisk, display = display.none)
 // V4: NEW. Origin SOURCE (book halt-band table), evidence REASONED_NOT_
 // MEASURED: a stop wider than the LULD band cannot be honoured — price
 // halts before reaching it and reopens wherever the auction says.
 haltBandVeto         = input.bool(false, "Veto from LULD-width heuristic [OFF; not a live band]", group=gRisk,
-     tooltip="Pine cannot observe the live LULD reference price, band state, pauses or reopen auction. This prior-close tier approximation is display/research only by default.")
+     tooltip="Pine cannot observe the live LULD reference price, band state, pauses or reopen auction. This prior-close tier approximation is display/research only by default.", display = display.none)
 
 // ── V11 (from V10): §3 gate fidelity ───────────────────────────────────────
 gV11c = "§3 confluence and pullback index (V11)"
 requireConfluence    = input.bool(true,  "Require §3 support confluence", group=gV11c,
-     tooltip="V9 computed supportCount and spent it only on the display-only quality score, so a dip that stopped at no level could still arm. §3 is explicit: two independent reasons, not one.")
-minConfluence        = input.int(2, "Minimum confluence reasons [source: 2]", minval=1, maxval=6, group=gV11c)
+     tooltip="V9 computed supportCount and spent it only on the display-only quality score, so a dip that stopped at no level could still arm. §3 is explicit: two independent reasons, not one.", display = display.none)
+minConfluence        = input.int(2, "Minimum confluence reasons [source: 2]", minval=1, maxval=6, group=gV11c, display = display.none)
 requirePullbackIndex = input.bool(true,  "Require 1st or 2nd pullback only", group=gV11c,
-     tooltip="§3 pullback_index <= 2. Distinct from pullbackBars, which counts how many BARS the dip lasts.")
-maxPullbackIndex     = input.int(2, "Maximum pullback index [source: 2]", minval=1, maxval=5, group=gV11c)
+     tooltip="§3 pullback_index <= 2. Distinct from pullbackBars, which counts how many BARS the dip lasts.", display = display.none)
+maxPullbackIndex     = input.int(2, "Maximum pullback index [source: 2]", minval=1, maxval=5, group=gV11c, display = display.none)
 
 // ── V11 (from V10): §7 participation cap ───────────────────────────────────
 gV11p = "§7 participation (V11)"
 useParticipationCap  = input.bool(true, "Cap size by share of the tape", group=gV11p,
-     tooltip="§7 concedes it: fill quality degrades with size on sub-20M float and the edge does not scale linearly. Without this a backtest reports fills that never existed.")
-participationPct     = input.float(10.0, "Max % of median minute volume", minval=0.5, maxval=100.0, step=0.5, group=gV11p)
-participationLen     = input.int(20, "Volume lookback (bars)", minval=5, maxval=200, group=gV11p)
+     tooltip="§7 concedes it: fill quality degrades with size on sub-20M float and the edge does not scale linearly. Without this a backtest reports fills that never existed.", display = display.none)
+participationPct     = input.float(10.0, "Max % of median minute volume", minval=0.5, maxval=100.0, step=0.5, group=gV11p, display = display.none)
+participationLen     = input.int(20, "Volume lookback (bars)", minval=5, maxval=200, group=gV11p, display = display.none)
 
 // ── V11 (from V10): §8 daily risk limits — absent from V9 entirely ─────────
 gV11r = "§8 daily risk limits (V11)"
 useRiskGovernor      = input.bool(true,  "Enforce §8 daily limits", group=gV11r,
-     tooltip="§8's five rules. V9 had none of them, so a losing day compounded instead of stopping.")
-maxTradesPerDay      = input.int(2,    "Max trades per day [source: 1-2]", minval=1, maxval=20, group=gV11r)
-maxDailyLossPct      = input.float(6.0,  "Max daily loss %",        minval=0.5, maxval=50.0, step=0.5, group=gV11r)
-givebackPct          = input.float(50.0, "Giveback % of peak gain", minval=10.0, maxval=100.0, step=5.0, group=gV11r)
-useGreenToRed        = input.bool(true,  "Stop if the day goes green to red", group=gV11r)
-consecLossMax        = input.int(3,    "Consecutive losses to stop", minval=2, maxval=10, group=gV11r)
-ddWalkawayPct        = input.float(20.0, "Drawdown walkaway % from equity high", minval=5.0, maxval=90.0, step=1.0, group=gV11r)
+     tooltip="§8's five rules. V9 had none of them, so a losing day compounded instead of stopping.", display = display.none)
+maxTradesPerDay      = input.int(2,    "Max trades per day [source: 1-2]", minval=1, maxval=20, group=gV11r, display = display.none)
+maxDailyLossPct      = input.float(6.0,  "Max daily loss %",        minval=0.5, maxval=50.0, step=0.5, group=gV11r, display = display.none)
+givebackPct          = input.float(50.0, "Giveback % of peak gain", minval=10.0, maxval=100.0, step=5.0, group=gV11r, display = display.none)
+useGreenToRed        = input.bool(true,  "Stop if the day goes green to red", group=gV11r, display = display.none)
+consecLossMax        = input.int(3,    "Consecutive losses to stop", minval=2, maxval=10, group=gV11r, display = display.none)
+ddWalkawayPct        = input.float(20.0, "Drawdown walkaway % from equity high", minval=5.0, maxval=90.0, step=1.0, group=gV11r, display = display.none)
 
 // ── V11 (from V10): §6 exits V9 scored but never acted on ─────────────────
 gV11x = "§6 additional hard exits (V11)"
 useToppingTailExit   = input.bool(false, "Exit on a large topping tail [UNVALIDATED]", group=gV11x,
-     tooltip="Narrative rule, not yet supported by an isolated out-of-sample ablation. Default OFF until it improves net expectancy without unacceptable drawdown or trade deletion.")
+     tooltip="Narrative rule, not yet supported by an isolated out-of-sample ablation. Default OFF until it improves net expectancy without unacceptable drawdown or trade deletion.", display = display.none)
 useStallExit         = input.bool(false, "Exit on shrinking green candles [UNVALIDATED]", group=gV11x,
-     tooltip="Narrative rule, not yet supported by an isolated out-of-sample ablation. Default OFF.")
+     tooltip="Narrative rule, not yet supported by an isolated out-of-sample ablation. Default OFF.", display = display.none)
 useThirdRung         = input.bool(true, "Scale 50/25/25 instead of 50/50", group=gV11x,
-     tooltip="§6: scale_1_pct 50, scale_2_pct 25, runner_pct 25.")
+     tooltip="§6: scale_1_pct 50, scale_2_pct 25, runner_pct 25.", display = display.none)
 
 gExecution = "7. Entry / exit"
-breakoutBufferTicks  = input.int(1, "Breakout buffer ticks [UNTESTED local]", minval=0, maxval=20, group=gExecution)
-rewardMultiple       = input.float(2.0, "Profit target (R)", minval=0.5, maxval=10.0, step=0.25, group=gExecution)
-bailoutEnabled       = input.bool(true, "Enable breakout-or-bailout", group=gExecution)
-bailoutBars          = input.int(2, "Full bars allowed to prove momentum", minval=1, maxval=10, group=gExecution)
-minimumMFER          = input.float(0.5, "Minimum MFE required (R) [UNTESTED local]", minval=0.0, maxval=5.0, step=0.1, group=gExecution)
-bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry", group=gExecution)
+breakoutBufferTicks  = input.int(1, "Breakout buffer ticks [UNTESTED local]", minval=0, maxval=20, group=gExecution, display = display.none)
+rewardMultiple       = input.float(2.0, "Profit target (R)", minval=0.5, maxval=10.0, step=0.25, group=gExecution, display = display.none)
+bailoutEnabled       = input.bool(true, "Enable breakout-or-bailout", group=gExecution, display = display.none)
+bailoutBars          = input.int(2, "Full bars allowed to prove momentum", minval=1, maxval=10, group=gExecution, display = display.none)
+minimumMFER          = input.float(0.5, "Minimum MFE required (R) [UNTESTED local]", minval=0.0, maxval=5.0, step=0.1, group=gExecution, display = display.none)
+bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry", group=gExecution, display = display.none)
 // V5.1: FAST LANE. Reported live (EHGO 2026-08-19): red candles printed inside
 // a valid structure, the formal path rejected the pullback on a quality gate,
 // price ripped +0.40 with no trigger ever offered. The fast lane arms the
@@ -595,7 +595,7 @@ bailOnCloseBelowEntry = input.bool(true, "Bail if early bar closes below entry",
 // It deliberately skips: push-quality, retracement %, volume ratio. Those
 // stay as INFO on the dashboard; the operator sees them and decides.
 fastLane             = input.bool(false, "FAST LANE [EXPERIMENTAL]: red candle in structure", group=gExecution,
-     tooltip="Default OFF: this lane deliberately bypasses the formal push/retracement/volume definition and therefore must be tested as a separate strategy variant.")
+     tooltip="Default OFF: this lane deliberately bypasses the formal push/retracement/volume definition and therefore must be tested as a separate strategy variant.", display = display.none)
 // V5.2: ATR-FALLBACK STOP. Live example (YJ 2026-08-19): the pullback candle
 // spanned 2.64->2.41 — a candle-low stop of ~9%% of price, so the RISK gate
 // refused and no trigger existed while the bounce paid. The repo's own audit
@@ -604,8 +604,8 @@ fastLane             = input.bool(false, "FAST LANE [EXPERIMENTAL]: red candle i
 // tape" (knowledge-base/daytrade-dash/README.md, measured medians 0.23-0.83).
 // When the candle-low stop breaches maxStopPct/maxStopATR, substitute
 // trigger - fallbackATRmult*ATR instead of rejecting, and SAY SO on screen.
-atrStopFallback      = input.bool(true, "ATR-fallback stop when candle-low stop too wide", group=gExecution)
-fallbackATRmult      = input.float(1.0, "Fallback stop distance (x ATR)", minval=0.25, maxval=5.0, step=0.25, group=gExecution)
+atrStopFallback      = input.bool(true, "ATR-fallback stop when candle-low stop too wide", group=gExecution, display = display.none)
+fallbackATRmult      = input.float(1.0, "Fallback stop distance (x ATR)", minval=0.25, maxval=5.0, step=0.25, group=gExecution, display = display.none)
 // V5.2: UPTREND LANE. YJ again: the 72%% retracement correctly invalidated the
 // formal setup (that protection stays), but recovery then required a whole new
 // impulse detection while price left. In a confirmed uptrend — MACD, EMA and
@@ -614,7 +614,7 @@ fallbackATRmult      = input.float(1.0, "Fallback stop distance (x ATR)", minval
 // what he actually does: he runs no impulse detector; he sees an uptrend, a
 // red candle, and the break of its high.
 uptrendLane          = input.bool(false, "UPTREND LANE [EXPERIMENTAL]: red candle + momentum", group=gExecution,
-     tooltip="Default OFF: this is a generic micro-pullback strategy, not the audited first-pullback setup. Enable only in a separately labelled experiment.")
+     tooltip="Default OFF: this is a generic micro-pullback strategy, not the audited first-pullback setup. Enable only in a separately labelled experiment.", display = display.none)
 // V5.4: LANES RESPECT THE HIGH OF DAY. Session evidence (TNON 2026-08-19):
 // three lane entries, three stops, every one armed UNDER a lower high with
 // the dashboard already showing the warning. This is not a new rule - it is
@@ -622,68 +622,68 @@ uptrendLane          = input.bool(false, "UPTREND LANE [EXPERIMENTAL]: red candl
 // js25lIZMUSY @00:22:49) finally applied to the lanes that were bypassing
 // it. A lane may arm only when the trigger is at/above the HOD, or has at
 // least 1R of open air before it.
-lanesRespectHOD      = input.bool(true, "Lanes require new-high or >=1R room to HOD", group=gExecution)
+lanesRespectHOD      = input.bool(true, "Lanes require new-high or >=1R room to HOD", group=gExecution, display = display.none)
 useCappedStopLimit   = input.bool(true, "Entry model: capped stop-limit [conservative]", group=gExecution,
-     tooltip="Default ON: after the trigger, do not buy above the cap. This produces missed fills on gaps instead of assuming an unlimited stop-market chase. Historical OHLC still cannot prove intrabar queue order.")
-entryCapTicks        = input.int(5, "Entry cap above trigger (ticks)", minval=1, maxval=100, group=gExecution)
+     tooltip="Default ON: after the trigger, do not buy above the cap. This produces missed fills on gaps instead of assuming an unlimited stop-market chase. Historical OHLC still cannot prove intrabar queue order.", display = display.none)
+entryCapTicks        = input.int(5, "Entry cap above trigger (ticks)", minval=1, maxval=100, group=gExecution, display = display.none)
 commissionPerOrderInput = input.float(1.0, "Commission/order — MUST match Properties", minval=0.0, maxval=20.0, step=0.25, group=gExecution,
-     tooltip="Pine cannot read strategy() commission_value back. Sizing reserves entry plus every planned exit order; keep this equal to Properties.")
+     tooltip="Pine cannot read strategy() commission_value back. Sizing reserves entry plus every planned exit order; keep this equal to Properties.", display = display.none)
 
 gVisual = "8. Display"
-showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual)
-showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual)
+showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
+showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual, display = display.none)
 // V4.9: band width was a FIXED tick count, so it did not adapt to the
 // instrument or to price zoom — 5 ticks is a hairline on a $9 stock and a
 // slab on a $1.70 one. ATR-relative by default; ticks still available.
-bandMode             = input.string("ATR fraction", "Band width mode", options=["ATR fraction", "Fixed ticks"], group=gVisual)
-bandATRfrac          = input.float(0.12, "Band half-width (× ATR)", minval=0.01, maxval=2.0, step=0.01, group=gVisual)
-bandHalfWidthTicks   = input.int(5, "Band half-width (ticks, fixed mode)", minval=1, maxval=100, group=gVisual)
+bandMode             = input.string("ATR fraction", "Band width mode", options=["ATR fraction", "Fixed ticks"], group=gVisual, display = display.none)
+bandATRfrac          = input.float(0.12, "Band half-width (× ATR)", minval=0.01, maxval=2.0, step=0.01, group=gVisual, display = display.none)
+bandHalfWidthTicks   = input.int(5, "Band half-width (ticks, fixed mode)", minval=1, maxval=100, group=gVisual, display = display.none)
 // V4.9.1: plotshape(size=) demands a CONST string — an input-derived value
 // is rejected (CE10123). So the choice is a boolean and each size is a
 // separate const call. Pine cannot size a glyph from a variable.
-showMarkers          = input.bool(true, "Show signal markers", group=gVisual)
-bigMarkers           = input.bool(false, "Large signal markers", group=gVisual)
+showMarkers          = input.bool(true, "Show signal markers", group=gVisual, display = display.none)
+bigMarkers           = input.bool(false, "Large signal markers", group=gVisual, display = display.none)
 // V4.1: nearest structural levels drawn as bands — resistance above,
 // support below, from confirmed swing pivots (his "two reasons at one
 // price" needs the level on screen, not in your head).
-showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual)
+showSR               = input.bool(true, "Show nearest resistance/support bands", group=gVisual, display = display.none)
 // V9.6 (operator): automatic trend lines. Downtrend = the line from the
 // swing high across the most recent LOWER high (the breakout line);
 // uptrend = from the swing low across the most recent HIGHER low (the
 // trend-loss line). Labelled, and flagged the bar price breaks them.
-showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual)
+showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual, display = display.none)
 // V9.11 (operator): the trade RESULT in words. TradingView's own trade
 // markers print the SHARE COUNT next to each order ("+146", "-73"), which
 // reads like a P&L and is not one — a winning exit can show "-73". These
 // markers say bought where, sold where, and what it made.
 // Turn TradingView's off: strategy Settings -> Style -> uncheck
 // "Trades on chart" (and "Quantity"), keep these on.
-showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", group=gVisual)
+showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", group=gVisual, display = display.none)
 tlLookback           = input.int(0, "Trend lines: lookback bars (0 = since day start)", minval=0, maxval=720, group=gVisual,
-     tooltip="V9.9: trend lines are day-scoped — the up-line anchors at TODAY's low, the down-line at TODAY's high (tangent: steepest slope keeping every confirmed bar on the right side; it can touch price, never cut it). Set a bar count only to narrow within the day.")
-srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual)
-showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+     tooltip="V9.9: trend lines are day-scoped — the up-line anchors at TODAY's low, the down-line at TODAY's high (tangent: steepest slope keeping every confirmed bar on the right side; it can touch price, never cut it). Set a bar count only to narrow within the day.", display = display.none)
+srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual, display = display.none)
+showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual, display = display.none)
 // V9 (defect 3): ONE switch for everything that is not the trade decision.
 // The decision layer (plan lines, HOD, one marker per event class) is
 // always on; this reveals the working parts when you want them.
-showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, ghost SEEN, S/R fan, EMA/VWAP", group=gVisual)
-dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual)
+showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, ghost SEEN, S/R fan, EMA/VWAP", group=gVisual, display = display.none)
+dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual, display = display.none)
 // V4.3: readable by default; shrink only if the user asks the input to
 // V12.1 (operator: "the grid takes too much space in the graph"). The panel
 // is a heads-up display over a 1-minute chart, not a report: it defaults to
 // the tightest readable size, and the LIMITS row — a standing caveat, not a
 // live decision — now rides with the full dashboard rather than always
 // occupying a row. Both are inputs; nothing is removed, only stood down.
-dashSize             = input.string("tiny", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual)
+dashSize             = input.string("tiny", "Dashboard text size", options=["tiny", "small", "normal"], group=gVisual, display = display.none)
 dashCompact          = input.bool(true, "Compact panel (hide standing caveat row)", group=gVisual,
-     tooltip="The LIMITS row states permanent modelling caveats. They do not change bar to bar, so by default they live in the header and the full dashboard instead of holding a row on every chart.")
+     tooltip="The LIMITS row states permanent modelling caveats. They do not change bar to bar, so by default they live in the header and the full dashboard instead of holding a row on every chart.", display = display.none)
 // V4.7: live evaluation on the FORMING bar, for what you READ. Order
 // logic stays on confirmed bars — that separation is what stops the state
 // machine flip-flopping inside a candle and keeps the backtest honest.
 // Ross's own split: "confirm the candle" (setup) but enter intrabar on the
 // break (trigger, already handled by the resting stop-entry).
-liveEval             = input.bool(true, "Evaluate verdict on the forming bar (display)", group=gVisual)
-debugMode            = input.bool(false, "Debug plots", group=gVisual)
+liveEval             = input.bool(true, "Evaluate verdict on the forming bar (display)", group=gVisual, display = display.none)
+debugMode            = input.bool(false, "Debug plots", group=gVisual, display = display.none)
 
 // ───────────────────────── Raw indicators ─────────────────────────
 atr = ta.atr(14)
@@ -722,7 +722,7 @@ if barstate.isconfirmed and not na(flipLevel) and
 vwapAnchorMode = input.string("Session incl. pre-market", "VWAP anchor",
      options = ["Session incl. pre-market", "Regular hours only (09:30)"],
      group = "3. Momentum",
-     tooltip = "Match this to the VWAP you read on your own chart. The dashboard prints the value so you can verify it.")
+     tooltip = "Match this to the VWAP you read on your own chart. The dashboard prints the value so you can verify it.", display = display.none)
 var float rthPV  = 0.0
 var float rthVol = 0.0
 inRTHsess = not na(time(timeframe.period, "0930-1600", "America/New_York"))
@@ -866,7 +866,7 @@ dayHigh := newDayBar or na(dayHigh) ? high : math.max(dayHigh, high)
 // An episode: freezes the FIRST close-confirmed break level; ends when the
 // retest is consumed, the level fails (2 confirmed closes below), or it ages
 // out. A wick alone no longer records a break — the close must confirm it.
-retestMaxAgeBars = input.int(30, "Retest: max age (bars)", minval=5, maxval=120, group=gRetest)
+retestMaxAgeBars = input.int(30, "Retest: max age (bars)", minval=5, maxval=120, group=gRetest, display = display.none)
 var float brokenHOD   = na      // frozen first-break level of the episode
 var int   brokenBar   = na
 var bool  retestArmed = false
@@ -2756,11 +2756,11 @@ actionText =
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = displayState == PULLBACK or displayState == ARMED or displayState == LONG
 
-plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr)
+plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr, display = display.pane)
 // V4.10: the day's high drawn as the obstacle it is. Dotted so it never reads
 // as an entry/stop/target level — green and red stay reserved for TP and SL.
-plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles)
-plot(showLevels and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-market high", color=color.new(color.teal, 40), linewidth=1, style=plot.style_circles)
+plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles, display = display.pane)
+plot(showLevels and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-market high", color=color.new(color.teal, 40), linewidth=1, style=plot.style_circles, display = display.pane)
 // V5: the BROKEN high — the level a retest is testing. Drawn only while a
 // retest is live, so it does not clutter a normal pullback chart.
 // V8 (re-audit ND-10): the frozen level plot keys on the SETUP'S frozen copy
@@ -2770,8 +2770,8 @@ plot(showLevels and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-mar
 plot(showLevels and enableRetest and not na(setupRetestLevel) and
      (displayState == PULLBACK or displayState == ARMED) and setupKind == KIND_RETEST
      ? setupRetestLevel : na, "Broken HOD (retest level)",
-     color=color.new(color.aqua, 20), linewidth=2, style=plot.style_linebr)
-plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr)
+     color=color.new(color.aqua, 20), linewidth=2, style=plot.style_linebr, display = display.pane)
+plot(showLevels and activeStructure ? displayEntry : na, "Entry", color=color.yellow, linewidth=2, style=plot.style_linebr, display = display.pane)
 // V4.9: half-width follows the instrument's own volatility so the band
 // keeps the same visual weight whatever the price scale.
 bandHalfWidth = bandMode == "Fixed ticks" ? bandHalfWidthTicks * syminfo.mintick :
@@ -2779,16 +2779,16 @@ bandHalfWidth = bandMode == "Fixed ticks" ? bandHalfWidthTicks * syminfo.mintick
 // V4.1: candidate stop/target bands visible from the PULLBACK stage, not
 // only once armed — the level should be on screen while you decide.
 showTradeLevels = activeStructure
-plot(showLevels and showTradeLevels ? displayStop : na, "Stop", color=color.red, linewidth=2, style=plot.style_linebr)
-stopBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayStop + bandHalfWidth : na, "Stop band upper", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
-stopBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayStop - bandHalfWidth : na, "Stop band lower", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr)
+plot(showLevels and showTradeLevels ? displayStop : na, "Stop", color=color.red, linewidth=2, style=plot.style_linebr, display = display.pane)
+stopBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayStop + bandHalfWidth : na, "Stop band upper", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr, display = display.pane)
+stopBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayStop - bandHalfWidth : na, "Stop band lower", color=color.new(color.red, 100), linewidth=1, style=plot.style_linebr, display = display.pane)
 fill(stopBandUpperPlot, stopBandLowerPlot, color=color.new(color.red, 80), title="Stop loss band (SL)")
-plot(showLevels and showTradeLevels and not t1Filled ? displayT1 : na, "T1 (1R)", color=color.aqua, linewidth=1, style=plot.style_linebr)
-plot(showLevels and showTradeLevels ? displayTarget : na, "T2 / target", color=color.lime, linewidth=2, style=plot.style_linebr)
+plot(showLevels and showTradeLevels and not t1Filled ? displayT1 : na, "T1 (1R)", color=color.aqua, linewidth=1, style=plot.style_linebr, display = display.pane)
+plot(showLevels and showTradeLevels ? displayTarget : na, "T2 / target", color=color.lime, linewidth=2, style=plot.style_linebr, display = display.pane)
 plot(showLevels and showTradeLevels and displayHasThirdRung ? displayRunnerTarget : na,
-     "Runner target", color=color.new(color.lime, 25), linewidth=1, style=plot.style_circles)
-targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr)
-targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr)
+     "Runner target", color=color.new(color.lime, 25), linewidth=1, style=plot.style_circles, display = display.pane)
+targetBandUpperPlot = plot(showPriceBands and showTradeLevels ? displayTarget + bandHalfWidth : na, "Target band upper", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr, display = display.pane)
+targetBandLowerPlot = plot(showPriceBands and showTradeLevels ? displayTarget - bandHalfWidth : na, "Target band lower", color=color.new(color.lime, 100), linewidth=1, style=plot.style_linebr, display = display.pane)
 fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), title="Target price band (TP)")
 
 // V4.2: nearest structural levels as CLEAN bands — one box per level,
@@ -2798,7 +2798,7 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // key levels traced, not just the single nearest band. Up to 3 resistances
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
-maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual)
+maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual, display = display.none)
 var array<line> srLines = array.new_line()
 var array<label> srLabels = array.new_label()
 // V9.4: S/R back on the DECISION layer — hiding the key levels behind
@@ -3042,12 +3042,12 @@ if barstate.islast and showTrendLine
                  xloc=xloc.bar_time, style=label.style_none, size=size.small,
                  textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
 
-plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20))
-plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20))
-plot(showDiagnostics and showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20))
+plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20), display = display.pane)
+plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20), display = display.pane)
+plot(showDiagnostics and showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20), display = display.pane)
 
-plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr)
-plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr)
+plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr, display = display.pane)
+plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr, display = display.pane)
 
 // V4.9: marker glyphs are fixed PIXELS in Pine — they cannot follow a
 // price zoom, and their size must be a compile-time constant. Two const

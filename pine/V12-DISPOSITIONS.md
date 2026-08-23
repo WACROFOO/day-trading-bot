@@ -37,7 +37,22 @@ Six defects, all display-layer, all reported from the live V12 chart:
 | 3 | markers unusable at zoom, far above/below candles | `location.abovebar/belowbar` offset by a fraction of the **visible price range**, so the gap grows as you zoom out. All twelve now `location.absolute` pinned to a price, with an ATR-fraction clearance — ATR is in price units, so it holds at any zoom |
 | 4 | want dollar P&L on the chart | live label on the last bar of an open position: net $, %, share count, green/red. One label moved per bar, not one per bar — `max_labels_count` is finite |
 | 5 | SIZE "63% of $2000" meaningless | SIZE is now shares + dollars only; modeled risk, budget and binding constraint moved to `dashFull` |
+| 7 | source text leaking across the chart layout | every `input.*` carries `display = display.none` and every `plot()` `display = display.pane` — see below |
 | 6 | PLAN rungs unnamed | `T1 7.20 (88) · T2 7.26 (44) · T3 7.31 (44)` |
+
+**Item 7 — the status-line leak.** The strip across the top of the chart —
+`ROS... 5 1 2 6 0.6 20 2 100,000 1 4 50 0.7 30 40 0700-1130 … % of account
+(source: 2…` — was TradingView printing all 109 input values, and some input
+*label text*, into the status line, plus the value of every `plot()`. With 109
+inputs that strip is wider than the chart.
+
+I told the operator last turn this was only a chart setting. That was wrong:
+Pine inputs and plots both take a `display` parameter. All 108 inputs are now
+`display = display.none` and all 18 plots `display = display.pane` — they still
+draw on the chart, they just stop printing their values into the header. Zero
+calls remain unscoped, verified by paren-matching the file rather than by
+grep, because ten plots were named `displayEntry`, `displayStop` … and a
+substring test skipped them.
 
 Item 3 is the second time this bug was fixed. The V12 fix corrected the
 `BOUGHT`/`SOLD` **labels** (`yloc`) but left the twelve `plotshape` **markers**
