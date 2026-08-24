@@ -754,6 +754,99 @@ def _load_scanned(provider, cfg, rules, days_back: int, workers: int):
     return out
 
 
+
+# ------------------------------------------------------------ stage: verify
+def stage_verify(args):
+    """The three decisive tests, run against whatever key is present.
+
+    reports/data_acquisition.md says which free tiers claim what. This stage
+    does not trust any of it: it makes the requests and prints what came
+    back. Run it the moment a key is added, before any backtest is believed.
+    """
+    from src.data import NasdaqHaltFeed, PROVIDERS
+    name = args.provider or ("polygon" if os.environ.get("POLYGON_API_KEY")
+                             or os.environ.get("MASSIVE_API_KEY")
+                             else "alpaca" if os.environ.get("ALPACA_API_KEY_ID")
+                             else "yahoo")
+    prov = PROVIDERS[name]()
+    print(f"VERIFYING provider={name} enabled={getattr(prov, 'enabled', True)}\n")
+    day = dt.date.fromisoformat(args.day) if args.day else None
+    if day is None:
+        day = dt.datetime.now(ET).date() - dt.timedelta(days=args.days_back)
+        while day.weekday() >= 5:
+            day -= dt.timedelta(days=1)
+
+    ok = {}
+
+    # TEST 1 — extended-hours volume. The one that decides everything.
+    print(f"[1] pre-market VOLUME on {day} (AAPL)")
+    try:
+        bars = prov.minute_bars("AAPL", day, premarket=True)
+        pm = [b for b in bars if b.et.time() < dt.time(9, 30)]
+        withvol = sum(1 for b in pm if b.v > 0)
+        print(f"    {len(pm)} pre-market bars, {withvol} carry volume")
+        ok["premarket_volume"] = withvol > 0
+        print("    -> PASS" if withvol else "    -> FAIL (this is the Yahoo blocker)")
+    except Exception as e:                                       # noqa: BLE001
+        print(f"    ERROR {e}"); ok["premarket_volume"] = False
+
+    # TEST 2 — delisted retention. The survivorship fix.
+    print(f"\n[2] delisted retention")
+    hits = 0
+    for sym in ("MULN", "BBBYQ", "ATVI", "SIVBQ"):
+        try:
+            n = len(prov.daily_bars(sym, day - dt.timedelta(days=900), day))
+        except Exception:                                        # noqa: BLE001
+            n = 0
+        print(f"    {sym:<6} {n} daily bars")
+        hits += 1 if n else 0
+    ok["delisted"] = hits >= 2
+    print(f"    -> {'PASS' if ok['delisted'] else 'FAIL'} ({hits}/4 retained)")
+
+    # TEST 3 — history depth for MINUTE bars, which is the study's real limit
+    print(f"\n[3] minute-bar history depth")
+    for back in (30, 90, 365, 700, 1200):
+        d = dt.datetime.now(ET).date() - dt.timedelta(days=back)
+        while d.weekday() >= 5:
+            d -= dt.timedelta(days=1)
+        try:
+            n = len(prov.minute_bars("AAPL", d, premarket=True))
+        except Exception:                                        # noqa: BLE001
+            n = 0
+        print(f"    {back:>5}d back ({d}) : {n} bars")
+        if n:
+            ok["minute_depth_days"] = back
+
+    # TEST 4 — the point-in-time symbol list, if the provider has one
+    print(f"\n[4] point-in-time symbol list (delisted included)")
+    if hasattr(prov, "tickers_on") and getattr(prov, "enabled", False):
+        try:
+            rows = prov.tickers_on(day - dt.timedelta(days=365), active=False)
+            print(f"    {len(rows)} INACTIVE tickers listed a year ago")
+            ok["pit_symbols"] = len(rows) > 0
+        except Exception as e:                                   # noqa: BLE001
+            print(f"    ERROR {e}"); ok["pit_symbols"] = False
+    else:
+        print("    not offered by this provider")
+        ok["pit_symbols"] = False
+
+    # TEST 5 — halts, which no bar API supplies
+    print(f"\n[5] halt feed (free, prospective only)")
+    halts = NasdaqHaltFeed.fetch()
+    print(f"    {len(halts)} records in the rolling Nasdaq RSS window")
+    if halts:
+        print(f"    newest: {halts[0]}")
+    ok["halts_live"] = bool(halts)
+
+    print("\n" + "-" * 60)
+    for k, v in ok.items():
+        print(f"  {k:<22} {v}")
+    (RESULTS / "provider_verification.json").write_text(json.dumps(
+        dict(provider=name, checked_utc=dt.datetime.now(dt.timezone.utc).isoformat(),
+             results=ok), indent=2))
+    print(f"\nwrote results/provider_verification.json")
+
+
 # ---------------------------------------------------------------------- cli --
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
@@ -793,6 +886,12 @@ def main():
     pl.add_argument("--workers", type=int, default=8)
     pl.add_argument("--provider", default=None)
     pl.set_defaults(func=stage_placebo)
+
+    vf = sub.add_parser("verify")
+    vf.add_argument("--provider", default=None)
+    vf.add_argument("--day", default=None)
+    vf.add_argument("--days-back", type=int, default=3)
+    vf.set_defaults(func=stage_verify)
 
     r = sub.add_parser("report")
     r.set_defaults(func=stage_report)

@@ -21,6 +21,7 @@ SHA-256, study period, cost assumptions, seed.
 | `account_simulation.csv` | §26 | $2,000 cash account, compounding |
 | `parameter_inventory.csv` + `degrees_of_freedom.json` | §22 | every parameter classified by provenance; ~29.8 effective DoF |
 | `data_quality.json` | §29 | the measured provider probes |
+| `provider_verification.json` | §29 | output of `run.py verify` — the five decisive checks against whatever key is present |
 | `*_run.log` | — | stage logs, kept so a funnel count can be traced |
 
 **Not produced, and why:** walk-forward folds (one month of intraday data),

@@ -242,20 +242,77 @@ class _KeyedProvider(BarProvider):
 
 
 class PolygonProvider(_KeyedProvider):
-    """polygon.io Stocks Starter (~$29/mo at time of writing).
+    """Polygon.io — rebranded to Massive (massive.com) in 2026. The API host
+    `api.polygon.io` still answers, so nothing here changed but the name.
 
-    The recommended provider for this study: consolidated SIP, 5 years of
-    1-minute aggregates, extended hours WITH volume, delisted tickers
-    retained, and an explicit `adjusted=false` so raw prices can be used with
-    a separate split calendar (which is what an intraday study wants).
+    THE FREE "Stocks Basic" PLAN IS ENOUGH TO RUN THIS STUDY. Verified from
+    the vendor docs 2026-08-24 (reports/data_acquisition.md carries the
+    quotes):
+      - minute aggregates are "Included in all Stocks plans" and cover
+        "pre-market, regular market, and after-hours sessions"
+      - 2 years of history (Starter, $29/mo, extends this to 5)
+      - the tickers reference takes `date=` and `active=false` and returns
+        names that have since delisted, with a `delisted_utc` field —
+        also included in all plans. THIS IS THE SURVIVORSHIP FIX.
+      - grouped daily returns EVERY US ticker for one date in ONE call, so
+        the whole universe costs ~500 calls for two years
+      - free-tier data recency is end-of-day, which is exactly what a
+        historical backtest wants and no obstacle at all
+    The only free-tier cost is 5 calls/minute, handled by `_throttle` below.
     """
     name = "polygon"
     env_key = "POLYGON_API_KEY"
     BASE = "https://api.polygon.io"
+    # free tier: 5 calls/min. Set POLYGON_CALLS_PER_MIN=0 to disable on paid.
+    _last_calls: list[float] = []
+
+    def __init__(self):
+        super().__init__()
+        if not self.key:
+            # the rebrand shipped a second env var name; accept either
+            self.key = os.environ.get("MASSIVE_API_KEY", "")
+        self.calls_per_min = int(os.environ.get("POLYGON_CALLS_PER_MIN", "5"))
+
+    def _throttle(self):
+        """Free tier is 5 calls/min. Sleeping is cheaper than a 429 storm."""
+        if self.calls_per_min <= 0:
+            return
+        now = time.time()
+        PolygonProvider._last_calls = [t for t in PolygonProvider._last_calls
+                                       if now - t < 60.0]
+        if len(PolygonProvider._last_calls) >= self.calls_per_min:
+            wait = 60.0 - (now - PolygonProvider._last_calls[0]) + 0.25
+            if wait > 0:
+                time.sleep(wait)
+            now = time.time()
+            PolygonProvider._last_calls = [t for t in PolygonProvider._last_calls
+                                           if now - t < 60.0]
+        PolygonProvider._last_calls.append(time.time())
+
+    def grouped_daily(self, day: dt.date, include_otc: bool = False) -> list[dict]:
+        """EVERY US ticker's daily bar for one date, in ONE request.
+
+        This is what makes a multi-year universe affordable on 5 calls/min:
+        ~500 trading days in two years is ~500 calls, not 6,742.
+        """
+        self._require()
+        key = f"grouped_{day.isoformat()}_{int(include_otc)}"
+        cached = self._cache_get("grouped", key)
+        if cached is not None:
+            return cached
+        self._throttle()
+        url = (f"{self.BASE}/v2/aggs/grouped/locale/us/market/stocks/"
+               f"{day.isoformat()}?adjusted=false"
+               f"&include_otc={'true' if include_otc else 'false'}&apiKey={self.key}")
+        raw = _curl(url)
+        rows = json.loads(raw).get("results", []) if raw else []
+        self._cache_put("grouped", key, rows)
+        return rows
 
     def _agg(self, sym: str, mult: int, span: str, frm: str, to: str,
              adjusted: bool) -> list[Bar]:
         self._require()
+        self._throttle()
         url = (f"{self.BASE}/v2/aggs/ticker/{sym}/range/{mult}/{span}/{frm}/{to}"
                f"?adjusted={'true' if adjusted else 'false'}&sort=asc&limit=50000"
                f"&apiKey={self.key}")
@@ -285,6 +342,7 @@ class PolygonProvider(_KeyedProvider):
 
     def splits(self, sym: str) -> list[dict]:
         self._require()
+        self._throttle()
         raw = _curl(f"{self.BASE}/v3/reference/splits?ticker={sym}&limit=1000&apiKey={self.key}")
         return json.loads(raw).get("results", []) if raw else []
 
@@ -292,6 +350,7 @@ class PolygonProvider(_KeyedProvider):
         """Point-in-time symbol list INCLUDING delisted names - this is the
         call that removes survivorship bias from the universe."""
         self._require()
+        self._throttle()
         out, url = [], (f"{self.BASE}/v3/reference/tickers?market=stocks"
                         f"&date={day.isoformat()}&limit=1000&apiKey={self.key}")
         if active is not None:
@@ -314,17 +373,22 @@ class PolygonProvider(_KeyedProvider):
         return json.loads(raw).get("results", []) if raw else []
 
     def capabilities(self) -> Capability:
+        paid = self.calls_per_min <= 0
         return Capability(
-            name="Polygon.io Stocks (Starter or above)",
-            minute_bars=True, minute_history_days=1825,
+            name=("Polygon.io / Massive — Stocks "
+                  + ("Starter or above" if paid else "Basic (FREE)")),
+            minute_bars=True, minute_history_days=1825 if paid else 730,
             premarket_bars=True, premarket_volume=True,
             delisted_retained=True, quotes=True, trades=True,
             halts=False, news=True,
             corporate_actions="v3/reference/splits + adjusted=false raw bars",
             adjusted="caller's choice; this study requests raw",
             available_here=self.enabled,
-            note="Recommended. Satisfies all three hard needs. Halts still "
-                 "need a separate source (see data_quality.md).")
+            note=("Recommended. The FREE Basic plan already satisfies all "
+                  "three hard needs (minute bars with extended hours, 2 years "
+                  "of history, delisted retention) at 5 calls/min; $29/mo "
+                  "Starter lifts that to 5 years and unlimited calls. Halts "
+                  "still need a separate source — see data_acquisition.md."))
 
 
 class AlpacaProvider(_KeyedProvider):
@@ -395,6 +459,45 @@ class AlpacaProvider(_KeyedProvider):
             available_here=self.enabled,
             note="FREE TIER IS IEX-ONLY. Do not compute RVOL on it. "
                  "Delisted retention unverified - test before relying on it.")
+
+
+class NasdaqHaltFeed:
+    """Free LULD halt/resume data — but PROSPECTIVE ONLY.
+
+    `nasdaqtrader.com/rss.aspx?feed=tradehalts` is public, needs no key, and
+    carries the halt timestamp AND the resumption timestamp to the second,
+    with the reason code (LUDP = LULD pause, T1/T12 = news, M = market-wide).
+    MEASURED 2026-08-24: 99 items, five reason codes present.
+
+    The catch, stated because it decides how the feed can be used: it is a
+    ROLLING window, not an archive. The 99 items span a handful of dates.
+    There is no historical download here, so this cannot backfill the halt
+    flags on a two-year study — it can only accumulate them going forward.
+    Poll it daily into a local table and the halt model becomes real for
+    every session AFTER you start; sessions before it stay flagged-unknown.
+    """
+    URL = "https://www.nasdaqtrader.com/rss.aspx?feed=tradehalts"
+
+    @staticmethod
+    def fetch() -> list[dict]:
+        import re
+        raw = _curl(NasdaqHaltFeed.URL)
+        if not raw:
+            return []
+        out = []
+        for block in re.findall(r"<item>(.*?)</item>", raw, re.S):
+            def f(tag):
+                m = re.search(rf"<ndaq:{tag}>(.*?)</ndaq:{tag}>", block, re.S)
+                return m.group(1).strip() if m else None
+            sym = f("IssueSymbol")
+            if not sym:
+                continue
+            out.append(dict(symbol=sym, halt_date=f("HaltDate"),
+                            halt_time=f("HaltTime"), reason=f("ReasonCode"),
+                            resume_date=f("ResumptionDate"),
+                            resume_quote_time=f("ResumptionQuoteTime"),
+                            resume_trade_time=f("ResumptionTradeTime")))
+        return out
 
 
 PROVIDERS: dict[str, type[BarProvider]] = {

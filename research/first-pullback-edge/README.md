@@ -17,7 +17,7 @@ over 976 sessions.
 | Path | What |
 |---|---|
 | `config/strategy.yaml` | the frozen parameter set. Every value carries the `ross-fp-v4.pine` line it came from and a `provenance` tag (sourced / measured / local / study) |
-| `src/data.py` | provider interface. Yahoo works here; Polygon and Alpaca adapters are written and activate on a key |
+| `src/data.py` | provider interface + the free Nasdaq halt feed. Yahoo works here; the Massive/Polygon adapter (free-tier throttle, grouped daily, point-in-time delisted symbol list) and Alpaca adapter activate on a key |
 | `src/data_quality.py` | the measured data-quality probes — minute reach, pre-market volume, delisted retention, missing bars |
 | `src/universe.py` | point-in-time scanner. Daily layer (multi-year) and intraday layer (frozen at 09:35 ET) |
 | `src/indicators.py` | strictly causal incremental EMA/MACD/ATR/VWAP/HOD. No vectorised pass exists, so no future bar can leak |
@@ -27,17 +27,17 @@ over 976 sessions.
 | `src/metrics.py` | §13 metrics and the day-clustered bootstrap |
 | `src/validation.py` | chronological splits, ablation marginals, rejected-trade split, gate overlap, placebos |
 | `src/param_audit.py` | parameter inventory and the degrees-of-freedom estimate |
-| `tests/` | 32 tests, all about look-ahead and fill ordering. `python3 -m pytest tests/ -q` |
-| `run.py` | `universe` → `fetch` → `ablation` → `sensitivity` → `placebo` → `report` |
+| `tests/` | 33 tests, all about look-ahead and fill ordering. `python3 -m pytest tests/ -q` |
+| `run.py` | `verify` → `universe` → `fetch` → `ablation` → `sensitivity` → `placebo` → `report` |
 | `data/` | `candidate_days`, `trades`, `rejected_setups`, `missed_entries` (parquet + csv) |
 | `results/` | `summary`, `ablation`, `yearly`, `regime`, `sensitivity`, `rejected_trades`, `holdout`, `parameter_inventory`, `run_manifest.json` |
-| `reports/` | `data_quality.md` first, then `final_report.md` |
+| `reports/` | `data_quality.md` first, then `data_acquisition.md` (which free APIs unblock it), then `final_report.md` |
 
 ## Reproduce
 
 ```bash
 cd research/first-pullback-edge
-python3 -m pytest tests/ -q                       # 32 tests
+python3 -m pytest tests/ -q                       # 33 tests
 python3 -m src.data_quality                       # measure the feed
 python3 run.py universe --start 2022-09-01 --end 2026-08-21
 python3 run.py fetch     --days 25
@@ -53,16 +53,23 @@ study period, the cost assumptions and the seed.
 ## The one thing that would change the answer
 
 A minute feed with years of history, extended-hours volume and delisted
-tickers. `src/data.py::PolygonProvider` is already wired for it:
+tickers — and **the free tier of Massive (formerly Polygon.io) has all
+three.** Full reasoning, with the vendor docs quoted, in
+`reports/data_acquisition.md`.
 
 ```bash
-export POLYGON_API_KEY=...
-python3 run.py universe --start 2021-01-01 --end 2026-08-21 --provider polygon
-python3 run.py ablation --days 1200 --provider polygon
+export POLYGON_API_KEY=...                    # free "Stocks Basic" plan
+python3 run.py verify --provider polygon      # the five decisive checks
+python3 run.py universe --provider polygon --start 2024-08-01 --end 2026-08-21
+python3 run.py ablation --provider polygon --days 500
 ```
 
-Nothing else in the pipeline changes. `reports/data_quality.md` §7 has the
-three tests to run before paying.
+`run.py verify` makes the requests rather than trusting the docs: pre-market
+volume, delisted retention, minute-history depth, the point-in-time symbol
+list, and the free Nasdaq halt feed. Run it before believing any backtest.
+
+Nothing else in the pipeline changes — the provider is one seam, the config
+is frozen and hashed, and the tests do not care where bars come from.
 
 ## Related work in this repo — cite before re-deriving
 

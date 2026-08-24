@@ -1,0 +1,10 @@
+{
+  "provider": "yahoo",
+  "checked_utc": "2026-08-24T19:24:39.829449+00:00",
+  "results": {
+    "premarket_volume": false,
+    "delisted": false,
+    "pit_symbols": false,
+    "halts_live": true
+  }
+}
