@@ -1,0 +1,218 @@
+{
+  "generated_utc": "2026-08-24T16:20:15.758097+00:00",
+  "provider": "yahoo",
+  "capability_matrix": [
+    {
+      "name": "Yahoo chart v8 (unauthenticated)",
+      "minute_bars": true,
+      "minute_history_days": 30,
+      "premarket_bars": true,
+      "premarket_volume": false,
+      "delisted_retained": false,
+      "quotes": false,
+      "trades": false,
+      "halts": false,
+      "news": false,
+      "corporate_actions": "split calendar in-response; each response independently adjusted - never stitch windows",
+      "adjusted": "adjusted, basis varies per response",
+      "available_here": true,
+      "note": "Only provider reachable without credentials in this environment. Fails all three of the study's hard data needs."
+    },
+    {
+      "name": "Polygon.io Stocks (Starter or above)",
+      "minute_bars": true,
+      "minute_history_days": 1825,
+      "premarket_bars": true,
+      "premarket_volume": true,
+      "delisted_retained": true,
+      "quotes": true,
+      "trades": true,
+      "halts": false,
+      "news": true,
+      "corporate_actions": "v3/reference/splits + adjusted=false raw bars",
+      "adjusted": "caller's choice; this study requests raw",
+      "available_here": false,
+      "note": "Recommended. Satisfies all three hard needs. Halts still need a separate source (see data_quality.md)."
+    },
+    {
+      "name": "Alpaca market data (feed=sip)",
+      "minute_bars": true,
+      "minute_history_days": 2190,
+      "premarket_bars": true,
+      "premarket_volume": true,
+      "delisted_retained": null,
+      "quotes": true,
+      "trades": true,
+      "halts": false,
+      "news": true,
+      "corporate_actions": "adjustment=raw|split|dividend|all",
+      "adjusted": "caller's choice; this study requests raw",
+      "available_here": false,
+      "note": "FREE TIER IS IEX-ONLY. Do not compute RVOL on it. Delisted retention unverified - test before relying on it."
+    }
+  ],
+  "minute_history_probe": [
+    {
+      "days_back": 2,
+      "day": "2026-08-21",
+      "bars": 957,
+      "ok": true,
+      "error": null
+    },
+    {
+      "days_back": 10,
+      "day": "2026-08-14",
+      "bars": 959,
+      "ok": true,
+      "error": null
+    },
+    {
+      "days_back": 20,
+      "day": "2026-08-04",
+      "bars": 960,
+      "ok": true,
+      "error": null
+    },
+    {
+      "days_back": 25,
+      "day": "2026-07-30",
+      "bars": 960,
+      "ok": true,
+      "error": null
+    },
+    {
+      "days_back": 30,
+      "day": "2026-07-24",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    },
+    {
+      "days_back": 35,
+      "day": "2026-07-20",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    },
+    {
+      "days_back": 45,
+      "day": "2026-07-10",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    },
+    {
+      "days_back": 60,
+      "day": "2026-06-25",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    },
+    {
+      "days_back": 120,
+      "day": "2026-04-24",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    },
+    {
+      "days_back": 365,
+      "day": "2025-08-22",
+      "bars": 0,
+      "ok": false,
+      "error": null
+    }
+  ],
+  "premarket_volume_probe": [
+    {
+      "symbol": "AAPL",
+      "day": "2026-08-21",
+      "premarket_bars": 327,
+      "with_volume": 0,
+      "rth_bars": 630
+    },
+    {
+      "symbol": "SPY",
+      "day": "2026-08-21",
+      "premarket_bars": 314,
+      "with_volume": 0,
+      "rth_bars": 628
+    },
+    {
+      "symbol": "TSLA",
+      "day": "2026-08-21",
+      "premarket_bars": 330,
+      "with_volume": 0,
+      "rth_bars": 630
+    },
+    {
+      "symbol": "NVDA",
+      "day": "2026-08-21",
+      "premarket_bars": 330,
+      "with_volume": 0,
+      "rth_bars": 630
+    }
+  ],
+  "delisted_probe": [
+    {
+      "symbol": "MULN",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    },
+    {
+      "symbol": "ATVI",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    },
+    {
+      "symbol": "TWTR",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    },
+    {
+      "symbol": "SIVBQ",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    },
+    {
+      "symbol": "FRCB",
+      "daily_bars": 1029,
+      "retained": true,
+      "last_bar": "2026-08-21"
+    },
+    {
+      "symbol": "AMTD",
+      "daily_bars": 1030,
+      "retained": true,
+      "last_bar": "2026-08-24"
+    },
+    {
+      "symbol": "SNDL",
+      "daily_bars": 1030,
+      "retained": true,
+      "last_bar": "2026-08-24"
+    },
+    {
+      "symbol": "BBBYQ",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    },
+    {
+      "symbol": "WEWKQ",
+      "daily_bars": 0,
+      "retained": false,
+      "last_bar": null
+    }
+  ],
+  "timezone": "America/New_York; DST handled by zoneinfo, bar timestamps are epoch seconds converted at read time",
+  "quote_coverage": "NONE. Spread is a proxy: 25th percentile of recent 1-minute ranges, floored at one tick.",
+  "trade_coverage": "NONE. No tick or trade-level data, so intrabar sequence is unknowable and ambiguity is a policy.",
+  "halt_coverage": "NONE. Missing minutes are flagged as possible halts; no LULD halt/resume feed is reachable here.",
+  "news_coverage": "NONE point-in-time. Catalyst classification cannot be done without a timestamped historical news feed.",
+  "float_coverage": "NONE point-in-time. Float is a current snapshot at best, which is not the float on the trade date."
+}

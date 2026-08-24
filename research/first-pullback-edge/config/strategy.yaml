@@ -1,0 +1,226 @@
+# ============================================================================
+# First-Pullback edge study — frozen parameter set
+#
+# EVERY value here is transcribed from knowledge-base/tradingview/ross-fp-v4.pine
+# (title "ROSS First Pullback Strategy V9.12", REV = "V9.12", line 536) at the
+# commit recorded in results/run_manifest.json. The `pine` key on each entry is
+# the line number it came from. Nothing in this file was chosen by looking at a
+# result: this is the ablation's frozen input, per brief section 8.
+#
+# `provenance` classifies each parameter per brief section 22:
+#   sourced      - traceable to the Warrior corpus (knowledge-base/strategies)
+#   measured     - set by a measurement in research/momentum-replication/reports
+#   local        - a local heuristic, marked [UNTESTED local] in the Pine itself
+#   display      - affects only what the chart says, never a fill
+#   study        - introduced by THIS study (costs, ambiguity policy); not the
+#                  strategy's, and never tuned against the ablation output
+# ============================================================================
+
+meta:
+  strategy_file: knowledge-base/tradingview/ross-fp-v4.pine
+  strategy_rev: V9.12
+  pine_language_version: 6
+
+# ---------------------------------------------------------------- universe --
+# Scanner parameters. Kept SEPARATE from entry filters (brief section 2).
+# These are DISCOVERY dials. ross-fp-v4.pine line 330 `scanGates` defaults to
+# FALSE - the live strategy never vetoes a trade on them; it only displays
+# them. This study therefore uses them to build the candidate universe and
+# never as an entry gate, which matches the shipped default.
+universe:
+  price_min:        {value: 2.0,    pine: 350, provenance: sourced}
+  price_max:        {value: 20.0,   pine: 351, provenance: sourced}
+  gap_min_pct:      {value: 10.0,   pine: 357, provenance: sourced}
+  rvol_min:         {value: 2.0,    pine: 355, provenance: local}   # "[UNCALIBRATED]" in the Pine
+  low_float_max_m:  {value: 20.0,   pine: 362, provenance: sourced} # bracketed 8.4-41.9M
+  # study-side liquidity floor so the universe is tradeable at all; NOT a Pine
+  # parameter. Deliberately loose - tightening it is a selection decision.
+  min_premarket_dollar_volume: {value: 250000.0, provenance: study}
+  scan_timestamp_et: {value: "09:35", provenance: study}  # when the watchlist is frozen
+
+# ----------------------------------------------------------------- impulse --
+# ross-fp-v4.pine lines 878-930 (candidate-window search) and 1645 (pushGate).
+# The detector scans windows of 1..6 bars ENDING at the current bar and keeps
+# the highest-pct window that satisfies every condition below.
+impulse:
+  min_push_pct:         {value: 5.0,      pine: 251, provenance: sourced}
+  min_impulse_bars:     {value: 1,        pine: 252, provenance: local}
+  min_push_atr:         {value: 2.0,      pine: 253, provenance: local}
+  max_impulse_bars:     {value: 6,        pine: 254, provenance: local}
+  min_efficiency:       {value: 0.60,     pine: 258, provenance: local}   # "[UNTESTED local]"
+  volume_baseline_bars: {value: 20,       pine: 259, provenance: local}
+  min_push_rvol:        {value: 2.0,      pine: 260, provenance: local}
+  min_dollar_volume:    {value: 100000.0, pine: 264, provenance: local}   # "[UNTESTED local]"
+
+# ---------------------------------------------------------------- pullback --
+pullback:
+  min_pullback_bars:    {value: 1,    pine: 267, provenance: sourced}
+  max_pullback_bars:    {value: 4,    pine: 271, provenance: local}   # "[local, was 3]"
+  max_retracement_pct:  {value: 50.0, pine: 272, provenance: sourced}
+  max_pb_volume_ratio:  {value: 0.70, pine: 273, provenance: local}   # variant D's rule
+
+# ---------------------------------------------------------------- momentum --
+# variant B's rules. ross-fp-v4.pine lines 1578-1583, gate at 1649.
+momentum:
+  require_macd: {value: true, pine: 278, provenance: sourced}   # macd > 0 AND hist > 0
+  require_ema:  {value: true, pine: 282, provenance: sourced}   # close > ema9 AND ema9 >= ema20
+  require_vwap: {value: true, pine: 283, provenance: sourced}
+  ema_fast: 9
+  ema_slow: 20
+  macd_fast: 12
+  macd_slow: 26
+  macd_signal: 9
+  vwap_anchor: {value: "session_incl_premarket", pine: 518, provenance: sourced}
+
+# -------------------------------------------------------------- confluence --
+# variant C's rule. ross-fp-v4.pine lines 1577-1585.
+# CRITICAL: in the shipped strategy `supportCount` feeds ONLY the display-only
+# quality score (line 1701). There is NO confluence gate in ross-fp-v4.pine.
+# Variant C therefore tests a filter the current strategy does not enforce,
+# using the Pine's exact support definitions. See reports/final_report.md.
+confluence:
+  support_tolerance_pct: {value: 0.35, pine: 376, provenance: local}
+  support_tolerance_atr: {value: 0.20, pine: 377, provenance: local}
+  min_support_count:     {value: 1,    pine: null, provenance: study}  # the gate C adds
+  # supports counted: ema9, ema20, vwap, nearest half-dollar below.
+  # ema9+ema20 within tolerance of each other count once (emaClustered, 1584-5)
+
+# -------------------------------------------------------------- HOD / room --
+# variant E's rule. ross-fp-v4.pine line 1860 (lanesRespectHOD).
+# HOD is ALWAYS highest high observed from session start THROUGH the current
+# bar. Never the eventual daily high - enforced by tests/test_lookahead.py.
+hod_room:
+  require: {value: true, pine: 457, provenance: local}
+  min_room_r: {value: 1.0, pine: 1860, provenance: local}
+  # passes if trigger >= HOD_at_time (breaking to open air)
+  #      or (HOD_at_time - trigger)/risk >= min_room_r
+
+# ------------------------------------------------------------------- risk ---
+risk:
+  account_equity:      {value: 2000.0, pine: 5,   provenance: measured}
+  risk_pct:            {value: 2.0,    pine: 390, provenance: sourced}
+  max_position_value:  {value: 2000.0, pine: 399, provenance: measured}
+  max_stop_pct:        {value: 3.0,    pine: 406, provenance: local}
+  # STUDY guard, not the Pine's: a stop under two ticks is a rounding artefact
+  # and makes R meaningless. Zero A-F trades are affected (checked); it exists
+  # so the placebo runs, which move the trigger, cannot blow up.
+  min_risk_ticks:      {value: 2,      provenance: study}
+  max_stop_atr:        {value: 1.5,    pine: 407, provenance: local}
+  atr_stop_fallback:   {value: true,   pine: 440, provenance: local}
+  fallback_atr_mult:   {value: 1.0,    pine: 441, provenance: local}
+  slip_ticks_sizing:   {value: 10,     pine: 404, provenance: study}
+  halt_band_veto:      {value: true,   pine: 413, provenance: sourced}
+  third_trade_half_size: {value: true, pine: 1759, provenance: sourced}
+
+# -------------------------------------------------------------- execution ---
+execution:
+  tick: 0.01
+  breakout_buffer_ticks: {value: 1,   pine: 416, provenance: local}
+  reward_multiple:       {value: 2.0, pine: 417, provenance: sourced}
+  bailout_enabled:       {value: true, pine: 418, provenance: sourced}
+  bailout_bars:          {value: 2,   pine: 419, provenance: sourced}
+  minimum_mfe_r:         {value: 0.5, pine: 420, provenance: local}
+  bail_on_close_below_entry: {value: true, pine: 421, provenance: sourced}
+  # T1 sells floor(qty/2) at entry+1R, stop to break-even, runner exits at +2R
+  ladder: {t1_r: 1.0, t1_fraction: 0.5, runner_r: 2.0, be_after_t1: true, pine: 1981}
+  # stop-limit entry cap (brief section 10). The Pine uses strategy.entry(stop=)
+  # which is a plain stop order; `backtest_fill_limits_assumption=1` (line 8)
+  # demands a 1-tick breach. This study ADDS an explicit limit cap so a gap
+  # through the trigger is a MISS rather than a fantasy fill.
+  stop_limit_cap_pct: {value: 1.0, provenance: study}
+  # absolute floor on the limit offset, set to the Pine's own declared
+  # slippage assumption (slipTicksInput = 10, line 404). Without it the
+  # percentage cap on a $3 shell is 3c - inside the spread - and the
+  # model rejects its own fills. See reports/final_report.md sect. 10.
+  stop_limit_cap_ticks: {value: 10, pine: 404, provenance: study}
+
+# ------------------------------------------------------------------ lanes ---
+# Additional entry PATHS enabled by default in the shipped strategy. They skip
+# push quality, retracement and pullback volume. Variant F only.
+lanes:
+  fast_lane:     {value: true, pine: 431, provenance: local}
+  uptrend_lane:  {value: true, pine: 449, provenance: local}
+  enable_retest: {value: true, pine: 368, provenance: local}
+  late_join:     {value: true, pine: 110, provenance: local}
+
+# ---------------------------------------------------------------- session ---
+session:
+  # useSessionWindow defaults FALSE (line 314) but venueGate (1682) requires
+  # RTH unless allowPremarketEmulatorFills (314/316, default false).
+  # Net effect on defaults: orders only inside RTH.
+  arm_window_et: {start: "09:30", end: "15:58", pine: 1682, provenance: sourced}
+  daily_flat_et: {value: "15:58", pine: 319, provenance: sourced}
+  # The Warrior session the corpus describes; used for the time-of-day cut
+  # (brief section 16) and available as an alternative window.
+  prime_window_et: {start: "07:00", end: "11:30", provenance: sourced}
+
+# -------------------------------------------------- daily risk governor (F) --
+# brief section 27. NONE of these exist in ross-fp-v4.pine - the Pine has only
+# the third-trade half-size rule and the daily flat cutoff. Values below come
+# from knowledge-base/strategies/FILTERS.md and are run as an OVERLAY so
+# section 27's with/without comparison is possible.
+governor:
+  enabled_in_F: false          # F as shipped has no governor
+  max_trades_per_day: 3
+  max_daily_loss_r: 3.0
+  consecutive_loss_stop: 3
+  green_to_red_stop: true
+  giveback_pct_of_peak: 30.0
+
+# -------------------------------------------------------------- cost model --
+# brief sections 9 and 28. STUDY parameters - not the strategy's.
+costs:
+  commission_per_order: 1.0            # matches Pine line 6 (cash_per_order)
+  scenarios:
+    gross:      {slip_ticks_min: 0,  spread_mult: 0.0, atr_mult: 0.00, commission: false}
+    low:        {slip_ticks_min: 1,  spread_mult: 0.5, atr_mult: 0.02, commission: true}
+    realistic:  {slip_ticks_min: 3,  spread_mult: 1.0, atr_mult: 0.05, commission: true}
+    stressed:   {slip_ticks_min: 10, spread_mult: 2.0, atr_mult: 0.15, commission: true}
+  # cap on our share of a bar's printed volume
+  max_participation_pct: 2.0
+
+# ------------------------------------------------------- ambiguity policy ---
+# brief section 5. A 1-minute bar that touches BOTH the trigger and the stop
+# carries no sequence information. Default is pessimistic; all three are
+# reported whenever the ambiguous share is material.
+ambiguity:
+  default_policy: pessimistic     # pessimistic | optimistic | exclude
+  report_all: true
+
+# ---------------------------------------------------------------- variants --
+# The ablation ladder. `gates` lists the gate ids each variant ANDs together.
+variants:
+  A: {label: "First pullback",   gates: [impulse, pullback_structure, retracement, risk_structural]}
+  B: {label: "+ VWAP/EMA/MACD",  gates: [impulse, pullback_structure, retracement, risk_structural, momentum]}
+  C: {label: "+ Confluence",     gates: [impulse, pullback_structure, retracement, risk_structural, momentum, confluence]}
+  D: {label: "+ Pullback volume",gates: [impulse, pullback_structure, retracement, risk_structural, momentum, confluence, pb_volume]}
+  E: {label: "+ HOD room",       gates: [impulse, pullback_structure, retracement, risk_structural, momentum, confluence, pb_volume, hod_room]}
+  F: {label: "Full strategy",    gates: [impulse, pullback_structure, retracement, risk_structural, momentum, pb_volume, hod_room, halt_band]
+      , lanes: true, retest: true, late_join: true, third_trade_half_size: true}
+  # ---- secondary ladder: the SHIPPED strategy's own gate order -----------
+  # C collapses the sample (the confluence gate passes 13.9% of setups) and
+  # the shipped strategy does not contain it, so D and E inherit a sample of
+  # one. These two rungs re-run the same ablation WITHOUT the confluence
+  # gate, which is what A -> B -> + pullback volume -> + HOD room -> F
+  # actually looks like in ross-fp-v4.pine. Reported as a clearly-labelled
+  # SECONDARY analysis; the primary A-F table is the one the brief asked for
+  # and is reported unchanged.
+  D_noconf: {label: "B + pullback volume (no confluence)",
+             gates: [impulse, pullback_structure, retracement, risk_structural, momentum, pb_volume]}
+  E_noconf: {label: "D_noconf + HOD room",
+             gates: [impulse, pullback_structure, retracement, risk_structural, momentum, pb_volume, hod_room]}
+
+  # NOTE the two ways F is NOT E-plus-something:
+  #   1. F does NOT include `confluence` - the shipped strategy has no such gate.
+  #   2. F ADDS entry paths (lanes/retest/late-join) that skip push quality,
+  #      retracement and pullback volume, so F can produce MORE trades than E.
+  # Both are reported rather than smoothed over.
+
+# ------------------------------------------------------- chronological split --
+# brief section 7. Fractions of the ordered session list, never shuffled.
+splits:
+  development_frac: 0.45
+  validation_frac:  0.25
+  holdout_frac:     0.30      # untouched until the frozen run
+
+seed: 20260824

@@ -1,0 +1,6 @@
+fetch window 2026-07-21 -> 2026-08-24 (25 sessions)
+  364 candidate ticker-days inside the minute window
+  fetched 100/364
+  fetched 200/364
+  fetched 300/364
+  minute bars present for 324/364 ticker-days

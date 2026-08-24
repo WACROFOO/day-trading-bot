@@ -1,0 +1,40 @@
+{
+  "symbols_scanned": 6742,
+  "candidate_days": 8152,
+  "sessions": 976,
+  "distinct_names": 2295,
+  "by_year": [
+    {
+      "year": "2022",
+      "ticker_days": 263,
+      "sessions": 74,
+      "names": 222
+    },
+    {
+      "year": "2023",
+      "ticker_days": 1085,
+      "sessions": 240,
+      "names": 657
+    },
+    {
+      "year": "2024",
+      "ticker_days": 1933,
+      "sessions": 252,
+      "names": 937
+    },
+    {
+      "year": "2025",
+      "ticker_days": 2801,
+      "sessions": 250,
+      "names": 1311
+    },
+    {
+      "year": "2026",
+      "ticker_days": 2070,
+      "sessions": 160,
+      "names": 1059
+    }
+  ],
+  "split_days": 46,
+  "reverse_split_flagged": 139
+}

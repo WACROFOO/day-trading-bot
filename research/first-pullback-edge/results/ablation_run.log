@@ -1,0 +1,11 @@
+ablation over 364 candidate ticker-days, 2026-07-21 -> 2026-08-24
+  218 ticker-days pass the 09:35:00 point-in-time scanner
+  variant A: cumulative trades 409
+  variant B: cumulative trades 634
+  variant C: cumulative trades 662
+  variant D: cumulative trades 671
+  variant E: cumulative trades 680
+  variant F: cumulative trades 1040
+  variant D_noconf: cumulative trades 1190
+  variant E_noconf: cumulative trades 1340
+wrote 1340 trade rows, 7421 setup rows

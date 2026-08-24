@@ -1,0 +1,10 @@
+{
+  "total_strategy_parameters": 48,
+  "by_class": {
+    "externally sourced rule": 21,
+    "local heuristic": 25,
+    "empirically validated": 2
+  },
+  "effective_degrees_of_freedom": 29.8,
+  "note": "A rough weight, not a statistic: sourced thresholds count 0.2, measured 0.3, local heuristics 1.0. The comparison that matters is against the number of independent SESSIONS in the sample, not the number of trades - trades inside one session are not independent observations of a parameter choice."
+}

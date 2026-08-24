@@ -1,0 +1,54 @@
+section,parameter,value,affects,provenance,classification,pine_line,pine_flags_it_local,freedom_weight
+universe,price_min,2.0,universe selection,sourced,externally sourced rule,350,False,0.2
+universe,price_max,20.0,universe selection,sourced,externally sourced rule,351,False,0.2
+universe,gap_min_pct,10.0,universe selection,sourced,externally sourced rule,357,False,0.2
+universe,rvol_min,2.0,universe selection,local,local heuristic,355,True,1.0
+universe,low_float_max_m,20.0,universe selection,sourced,externally sourced rule,362,False,0.2
+universe,min_premarket_dollar_volume,250000.0,universe selection,study,study parameter (not the strategy's),,False,0.0
+universe,scan_timestamp_et,09:35,universe selection,study,study parameter (not the strategy's),,False,0.0
+impulse,min_push_pct,5.0,entry,sourced,externally sourced rule,251,False,0.2
+impulse,min_impulse_bars,1,entry,local,local heuristic,252,False,1.0
+impulse,min_push_atr,2.0,entry,local,local heuristic,253,False,1.0
+impulse,max_impulse_bars,6,entry,local,local heuristic,254,False,1.0
+impulse,min_efficiency,0.6,entry,local,local heuristic,258,True,1.0
+impulse,volume_baseline_bars,20,entry,local,local heuristic,259,False,1.0
+impulse,min_push_rvol,2.0,entry,local,local heuristic,260,False,1.0
+impulse,min_dollar_volume,100000.0,entry,local,local heuristic,264,True,1.0
+pullback,min_pullback_bars,1,entry,sourced,externally sourced rule,267,False,0.2
+pullback,max_pullback_bars,4,entry,local,local heuristic,271,True,1.0
+pullback,max_retracement_pct,50.0,entry,sourced,externally sourced rule,272,False,0.2
+pullback,max_pb_volume_ratio,0.7,entry,local,local heuristic,273,False,1.0
+momentum,require_macd,True,entry,sourced,externally sourced rule,278,False,0.2
+momentum,require_ema,True,entry,sourced,externally sourced rule,282,False,0.2
+momentum,require_vwap,True,entry,sourced,externally sourced rule,283,False,0.2
+momentum,vwap_anchor,session_incl_premarket,entry,sourced,externally sourced rule,518,False,0.2
+confluence,support_tolerance_pct,0.35,entry,local,local heuristic,376,False,1.0
+confluence,support_tolerance_atr,0.2,entry,local,local heuristic,377,False,1.0
+confluence,min_support_count,1,entry,study,study parameter (not the strategy's),,False,0.0
+hod_room,require,True,entry,local,local heuristic,457,False,1.0
+hod_room,min_room_r,1.0,entry,local,local heuristic,1860,False,1.0
+risk,account_equity,2000.0,stop / sizing,measured,empirically validated,5,False,0.3
+risk,risk_pct,2.0,stop / sizing,sourced,externally sourced rule,390,False,0.2
+risk,max_position_value,2000.0,stop / sizing,measured,empirically validated,399,False,0.3
+risk,max_stop_pct,3.0,stop / sizing,local,local heuristic,406,False,1.0
+risk,max_stop_atr,1.5,stop / sizing,local,local heuristic,407,False,1.0
+risk,atr_stop_fallback,True,stop / sizing,local,local heuristic,440,False,1.0
+risk,fallback_atr_mult,1.0,stop / sizing,local,local heuristic,441,False,1.0
+risk,slip_ticks_sizing,10,stop / sizing,study,study parameter (not the strategy's),404,False,0.0
+risk,halt_band_veto,True,stop / sizing,sourced,externally sourced rule,413,False,0.2
+risk,third_trade_half_size,True,stop / sizing,sourced,externally sourced rule,1759,False,0.2
+execution,breakout_buffer_ticks,1,entry / exit,local,local heuristic,416,True,1.0
+execution,reward_multiple,2.0,entry / exit,sourced,externally sourced rule,417,False,0.2
+execution,bailout_enabled,True,entry / exit,sourced,externally sourced rule,418,False,0.2
+execution,bailout_bars,2,entry / exit,sourced,externally sourced rule,419,False,0.2
+execution,minimum_mfe_r,0.5,entry / exit,local,local heuristic,420,True,1.0
+execution,bail_on_close_below_entry,True,entry / exit,sourced,externally sourced rule,421,False,0.2
+execution,ladder,"{'t1_r': 1.0, 't1_fraction': 0.5, 'runner_r': 2.0, 'be_after_t1': True}",entry / exit,local,local heuristic,1981,False,1.0
+execution,stop_limit_cap_pct,1.0,entry / exit,study,study parameter (not the strategy's),,False,0.0
+lanes,fast_lane,True,entry,local,local heuristic,431,False,1.0
+lanes,uptrend_lane,True,entry,local,local heuristic,449,False,1.0
+lanes,enable_retest,True,entry,local,local heuristic,368,False,1.0
+lanes,late_join,True,entry,local,local heuristic,110,False,1.0
+session,arm_window_et,"{'start': '09:30', 'end': '15:58'}",entry / exit,sourced,externally sourced rule,1682,False,0.2
+session,daily_flat_et,15:58,entry / exit,sourced,externally sourced rule,319,False,0.2
+session,prime_window_et,"{'start': '07:00', 'end': '11:30'}",entry / exit,sourced,externally sourced rule,,False,0.2

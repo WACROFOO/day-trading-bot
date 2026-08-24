@@ -1,0 +1,8 @@
+  218 qualified ticker-days loaded
+  base_A: 49 trades, exp -1.775R
+  pullback_1_only: 35 trades, exp -2.032R
+  pullback_2_only: 10 trades, exp -1.311R
+  pullback_3plus: 2 trades, exp -1.943R
+  trigger_shift_up_5t: 16 trades, exp -1.161R
+  trigger_shift_down_5t: 113 trades, exp -2.597R
+  random_entry: 1090 trades, exp -0.993R

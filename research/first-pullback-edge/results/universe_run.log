@@ -1,0 +1,67 @@
+universe: 6742 symbols, 2022-09-01 -> 2026-08-21, provider=yahoo
+  250/6742 symbols, 192 candidate-days
+  500/6742 symbols, 643 candidate-days
+  750/6742 symbols, 928 candidate-days
+  1000/6742 symbols, 1181 candidate-days
+  1250/6742 symbols, 1446 candidate-days
+  1500/6742 symbols, 1728 candidate-days
+  1750/6742 symbols, 2039 candidate-days
+  2000/6742 symbols, 2336 candidate-days
+  2250/6742 symbols, 2547 candidate-days
+  2500/6742 symbols, 2784 candidate-days
+  2750/6742 symbols, 3038 candidate-days
+  3000/6742 symbols, 3368 candidate-days
+  3250/6742 symbols, 3651 candidate-days
+  3500/6742 symbols, 3921 candidate-days
+  3750/6742 symbols, 4267 candidate-days
+  4000/6742 symbols, 4565 candidate-days
+  4250/6742 symbols, 4841 candidate-days
+  4500/6742 symbols, 5079 candidate-days
+  4750/6742 symbols, 5397 candidate-days
+  5000/6742 symbols, 5693 candidate-days
+  5250/6742 symbols, 6085 candidate-days
+  5500/6742 symbols, 6403 candidate-days
+  5750/6742 symbols, 6827 candidate-days
+  6000/6742 symbols, 7149 candidate-days
+  6250/6742 symbols, 7454 candidate-days
+  6500/6742 symbols, 7807 candidate-days
+{
+  "symbols_scanned": 6742,
+  "candidate_days": 8152,
+  "sessions": 976,
+  "distinct_names": 2295,
+  "by_year": [
+    {
+      "year": "2022",
+      "ticker_days": 263,
+      "sessions": 74,
+      "names": 222
+    },
+    {
+      "year": "2023",
+      "ticker_days": 1085,
+      "sessions": 240,
+      "names": 657
+    },
+    {
+      "year": "2024",
+      "ticker_days": 1933,
+      "sessions": 252,
+      "names": 937
+    },
+    {
+      "year": "2025",
+      "ticker_days": 2801,
+      "sessions": 250,
+      "names": 1311
+    },
+    {
+      "year": "2026",
+      "ticker_days": 2070,
+      "sessions": 160,
+      "names": 1059
+    }
+  ],
+  "split_days": 46,
+  "reverse_split_flagged": 139
+}
