@@ -69,7 +69,9 @@ score-basket died (`research/momentum-replication/reports/2026-08-score-basket.m
 
 ## Current state
 
-Journal: empty — starts with your first `trade_log.py add`.
+Journal: 1 trade — XPON 2026-08-24, classified OFF-PATTERN by the audit
+(bounce, not a first-pullback). The ledger needs n>=30 before any
+threshold moves.
 
 Paper only. The loop improves the tool's honesty and calibration; it
 does not create an edge that the 894-session replication says is not
