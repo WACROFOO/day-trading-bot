@@ -207,6 +207,56 @@ The declarations are now immediately above the plotshape block that consumes
 them, so a future block edit cannot orphan them without also deleting the
 uses.
 
+### V12.9 - the structure map, on finite lines. My V12.6 was the bug.
+
+The operator's chart showed four jagged lines wandering across it, shadowing
+price, touching nothing. That is not a rendering glitch. It is exactly what
+V12.6 asked TradingView to draw.
+
+**Cause.** `mainR` is defined as "the nearest confirmed level ABOVE THE
+CURRENT CLOSE". Its value therefore changes on almost every bar. V12.6 fed it
+to `plot()`, and `plot()` joins per-bar values into one continuous line. Two
+of those (resistance, support) plus two more for the trend lines are the four
+squiggles. Four series; zero levels.
+
+`plot()` is right for something that genuinely has a value on every bar - an
+EMA, VWAP. A support level is ONE price and needs ONE horizontal line.
+
+**My reasoning was wrong too, and that is the more useful admission.** I moved
+to plots claiming line objects "drift" under zoom. They do not. A line whose
+two y-coordinates are prices is pinned to those prices at every zoom level.
+What drifted in V12.0 was `location.abovebar` / `yloc.abovebar` on *shapes and
+labels* - a different API on a different object, already fixed separately. I
+generalised one bug into a rule that did not apply to lines and deleted code
+that worked. V11 had it right: `line.new(b1, v, b2, v)`. Codex reached the
+same conclusion independently in its V12.8 header - *"finite line objects
+only: no historical stair-step plots"*.
+
+**Now.** Four objects, which is the entire ask: main resistance, main support,
+uptrend, downtrend. Each is a finite `line.new` with explicit bar_index/price
+coordinates, rebuilt on the last bar, showing current structure only. A
+horizontal level passes the same price as both y-coordinates, so it is
+horizontal by construction rather than by intent.
+
+Added: a **role buffer** (max of 2 ticks, 5% ATR) so a level price is sitting
+exactly on is classified as neither support nor resistance and is not drawn -
+previously it would be named as a target price had already reached. Levels
+are anchored at the bar where they formed, so the line starts at its origin.
+Trend lines still require two confirmed pivots forming a real higher-low or
+lower-high pair.
+
+Removed from the default chart: the impulse-peak, high-of-day and
+pre-market-high series. MAIN resistance now names its source ("R 3.84 . HOD"),
+so those three said nothing the structure map does not. Behind
+`showContextPlots`, default off.
+
+`dayLow` did not exist in this file; the block keeps its own `srDayLow`.
+That was caught by the `undeclared()` rule added in V12.6.1, on its first
+run against new code.
+
+Display-only: all ten gate booleans still byte-identical to the V11 base.
+Still not compiled here - TradingView remains the only real compiler.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its

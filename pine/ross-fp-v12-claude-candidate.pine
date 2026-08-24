@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12 (Codex audit candidate · paper only)", shorttitle="ROSS FP V12", overlay=true,
+strategy("ROSS First Pullback Strategy V12.9 (finite-line structure · paper only)", shorttitle="ROSS FP V12.9", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -639,6 +639,11 @@ commissionPerOrderInput = input.float(1.0, "Commission/order — MUST match Prop
 
 gVisual = "8. Display"
 showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
+// V12.9: the impulse-peak / high-of-day / pre-market-high series are three
+// more lines drawn on every bar, and MAIN resistance now NAMES its source
+// ("R 3.84 · HOD"), so they say nothing the structure map does not. Default
+// off — the operator asked for trend lines and main S/R, not a fan.
+showContextPlots     = input.bool(false, "  └ also plot impulse peak / HOD / PM-high series", group=gVisual, display = display.none)
 showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual, display = display.none)
 // V4.9: band width was a FIXED tick count, so it did not adapt to the
 // instrument or to price zoom — 5 ticks is a hairline on a $9 stock and a
@@ -2801,11 +2806,11 @@ actionText =
 // ───────────────────────── Minimal chart ─────────────────────────
 activeStructure = displayState == PULLBACK or displayState == ARMED or displayState == LONG
 
-plot(showLevels and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr, display = display.pane)
+plot(showLevels and showContextPlots and activeStructure ? pushPeak : na, "Impulse peak", color=color.fuchsia, linewidth=1, style=plot.style_linebr, display = display.pane)
 // V4.10: the day's high drawn as the obstacle it is. Dotted so it never reads
 // as an entry/stop/target level — green and red stay reserved for TP and SL.
-plot(showLevels and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles, display = display.pane)
-plot(showLevels and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-market high", color=color.new(color.teal, 40), linewidth=1, style=plot.style_circles, display = display.pane)
+plot(showLevels and showContextPlots and not na(dayHigh) ? dayHigh : na, "High of day", color=color.new(color.fuchsia, 45), linewidth=1, style=plot.style_circles, display = display.pane)
+plot(showLevels and showContextPlots and not na(pmHigh) and pmHigh != dayHigh ? pmHigh : na, "Pre-market high", color=color.new(color.teal, 40), linewidth=1, style=plot.style_circles, display = display.pane)
 // V5: the BROKEN high — the level a retest is testing. Drawn only while a
 // retest is live, so it does not clutter a normal pullback chart.
 // V8 (re-audit ND-10): the frozen level plot keys on the SETUP'S frozen copy
@@ -2848,91 +2853,124 @@ srReachATR   = input.float(6.0, "Structure reach (ATR) — ignore levels beyond"
      tooltip="A level twenty ATR away is not structure the next few minutes will meet. Beyond this distance no MAIN level is drawn at all.")
 tlProjectBars = input.int(20, "Trend-line forward projection (bars)", minval=0, maxval=120, group=gVisual, display = display.none,
      tooltip="Finite. Earlier versions used extend.right, which on a chart with an untraded right margin drew a line across empty space and nothing else.")
-// ═══════════════════ V12.6 STRUCTURE MAP (rebuilt) ═══════════════════════
-// Five previous attempts fixed real geometry defects and still produced
-// levels the operator called wrong. This is a rebuild on a different
-// architecture, per the Codex V12.6 spec:
+// ═══════════════════ V12.9 STRUCTURE MAP (finite lines) ══════════════════
+// WHY THIS IS BEING REWRITTEN AGAIN, PLAINLY.
 //
-//   "Plot-based MAIN/trend series provide a historical rendering backstop;
-//    last-bar drawing objects remain responsible for labels and projection."
+// V12.6 turned every level into a plot() series and called that the fix. It
+// was the bug. `mainR` is defined as "the nearest confirmed level ABOVE THE
+// CURRENT CLOSE", so its value changes on almost every bar — and plot() joins
+// those per-bar values into one continuous jagged line that wanders across
+// the entire chart, shadowing price roughly half an ATR above it. Two of
+// those (blue = resistance, purple = support) plus two more for the trend
+// lines are the four squiggles on the operator's chart. Four series, zero
+// levels.
 //
-// That is the load-bearing idea. A plot() is bound to its series value by
-// TradingView itself — it cannot sit at a price other than the number it
-// carries, at any zoom, on any bar. Every previous version drew levels ONLY
-// as line objects created on the last bar, which is where the drift and the
-// label/position disagreements lived. Now the level IS a plotted series and
-// the drawing objects only add a name and a forward projection.
+// plot() is the right tool for something that genuinely HAS a value on every
+// bar: an EMA, VWAP. A support level is ONE price. It has to be ONE
+// horizontal line.
 //
-// Two more rules from the same spec, both aimed at fabricated structure:
-//   - MAIN R/S is the CLOSEST ELIGIBLE CONFIRMED level, and it names its
-//     source. A level with no provenance is not drawn.
-//   - A trend line is not fabricated until TWO qualifying confirmed pivots
-//     exist — a genuine higher-low pair, or lower-high pair. No tangent
-//     fitting, no candle-touch counting: those manufacture a line out of any
-//     price series, which is exactly how a $13.70 stock got a line at $12.97.
+// The reasoning that led me to plots was also wrong. I claimed line objects
+// "drift" under zoom. They do not. A line whose two y-coordinates are prices
+// is pinned to those prices at any zoom, forever. What drifted back in V12.0
+// was location.abovebar / yloc.abovebar on SHAPES and LABELS — a different
+// API, on a different object, already fixed separately. I generalised that
+// one bug into a rule that did not apply to lines, and threw away code that
+// worked. V11 had it right all along:  line.new(b1, v, b2, v).
+//
+// So: finite line objects, rebuilt on the last bar, showing CURRENT structure
+// only — which is also the whole ask. Main resistance, main support,
+// uptrend, downtrend. Four objects. Nothing else.
 
-// ── MAIN support / resistance, with provenance ───────────────────────────
-// Candidates are facts, not fits: confirmed pivots (srPivotLen bars each
-// side, so they cannot repaint), the prior day's close, the pre-market high
-// and the high of day.
-f_lastPivotAbove(array<float> src, float px, float lim) =>
-    float best = na
-    if array.size(src) > 0
-        for i = 0 to array.size(src) - 1
-            float v = array.get(src, i)
-            if v > px and v - px <= lim and (na(best) or v < best)
-                best := v
-    best
+// ── where a level was born, so a line can start there ────────────────────
+// The file tracks dayHigh but has no session low, so this block keeps its
+// own. Named srDayLow rather than dayLow so it cannot collide with anything
+// the strategy body may add later.
+var float srDayLow  = na
+var int dayStartBar = na
+var int dayHighBar  = na
+var int dayLowBar   = na
+if newDayBar
+    dayStartBar := bar_index
+    dayHighBar  := bar_index
+    dayLowBar   := bar_index
+    srDayLow    := low
+else
+    srDayLow := na(srDayLow) ? low : math.min(srDayLow, low)
+if not na(dayHigh) and high >= dayHigh
+    dayHighBar := bar_index
+if not na(srDayLow) and low <= srDayLow
+    dayLowBar := bar_index
 
-f_lastPivotBelow(array<float> src, float px, float lim) =>
-    float best = na
-    if array.size(src) > 0
-        for i = 0 to array.size(src) - 1
-            float v = array.get(src, i)
-            if v < px and px - v <= lim and (na(best) or v > best)
-                best := v
-    best
-
-// A level beyond this is not structure the next few minutes will meet.
+// ── candidate selection: nearest eligible level, and where it came from ──
+// A "role buffer" keeps a level that price is sitting exactly on from being
+// called resistance or support at all — at that distance it is neither, and
+// drawing it invites a trade against a line the price has already reached.
+float srBuf   = math.max(syminfo.mintick * 2.0, nz(atr, syminfo.mintick) * 0.05)
 float srReach = atr * srReachATR
 
-float pivR = f_lastPivotAbove(allPiv, close, srReach)
-float pivS = f_lastPivotBelow(allPiv, close, srReach)
+f_nearAbove(array<float> vals, array<int> bars_, float px, float buf, float lim) =>
+    float bp = na
+    int   bb = na
+    if array.size(vals) > 0
+        for i = 0 to array.size(vals) - 1
+            float v = array.get(vals, i)
+            if v > px + buf and v - px <= lim and (na(bp) or v < bp)
+                bp := v
+                bb := array.get(bars_, i)
+    [bp, bb]
 
-// resistance candidates, nearest wins; each carries where it came from
-float mainR = pivR
+f_nearBelow(array<float> vals, array<int> bars_, float px, float buf, float lim) =>
+    float bp = na
+    int   bb = na
+    if array.size(vals) > 0
+        for i = 0 to array.size(vals) - 1
+            float v = array.get(vals, i)
+            if v < px - buf and px - v <= lim and (na(bp) or v > bp)
+                bp := v
+                bb := array.get(bars_, i)
+    [bp, bb]
+
+[pivR, pivRbar] = f_nearAbove(allPiv, allPivBars, close, srBuf, srReach)
+[pivS, pivSbar] = f_nearBelow(allPiv, allPivBars, close, srBuf, srReach)
+
+float  mainR    = pivR
+int    mainRbar = pivRbar
 string mainRsrc = na(pivR) ? "" : "pivot"
-if not na(dayHigh) and dayHigh > close and dayHigh - close <= srReach and
+if not na(dayHigh) and dayHigh > close + srBuf and dayHigh - close <= srReach and
      (na(mainR) or dayHigh < mainR)
-    mainR := dayHigh
+    mainR    := dayHigh
+    mainRbar := dayHighBar
     mainRsrc := "HOD"
-if not na(pmHigh) and pmHigh > close and pmHigh - close <= srReach and
+if not na(pmHigh) and pmHigh > close + srBuf and pmHigh - close <= srReach and
      (na(mainR) or pmHigh < mainR)
-    mainR := pmHigh
+    mainR    := pmHigh
+    mainRbar := dayStartBar
     mainRsrc := "PM high"
-if not na(prevDayClose) and prevDayClose > close and prevDayClose - close <= srReach and
+if not na(prevDayClose) and prevDayClose > close + srBuf and prevDayClose - close <= srReach and
      (na(mainR) or prevDayClose < mainR)
-    mainR := prevDayClose
+    mainR    := prevDayClose
+    mainRbar := dayStartBar
     mainRsrc := "prev close"
 
-float mainS = pivS
+float  mainS    = pivS
+int    mainSbar = pivSbar
 string mainSsrc = na(pivS) ? "" : "pivot"
-if not na(prevDayClose) and prevDayClose < close and close - prevDayClose <= srReach and
+if not na(srDayLow) and srDayLow < close - srBuf and close - srDayLow <= srReach and
+     (na(mainS) or srDayLow > mainS)
+    mainS    := srDayLow
+    mainSbar := dayLowBar
+    mainSsrc := "LOD"
+if not na(prevDayClose) and prevDayClose < close - srBuf and close - prevDayClose <= srReach and
      (na(mainS) or prevDayClose > mainS)
-    mainS := prevDayClose
+    mainS    := prevDayClose
+    mainSbar := dayStartBar
     mainSsrc := "prev close"
 
-bool srOn = showChartMap and showSR
-// THE LEVELS THEMSELVES ARE PLOTS. Bound to their value by construction.
-plot(srOn and not na(mainR) ? mainR : na, "MAIN resistance",
-     color=color.new(color.blue, 15), linewidth=2, style=plot.style_linebr, display=display.pane)
-plot(srOn and not na(mainS) ? mainS : na, "MAIN support",
-     color=color.new(color.purple, 15), linewidth=2, style=plot.style_linebr, display=display.pane)
-
 // ── trend lines: two confirmed pivots, or nothing ────────────────────────
-// An uptrend line needs a HIGHER LOW: two confirmed pivot lows, the later
-// one above the earlier. A downtrend line needs a LOWER HIGH. If the pair
-// does not exist, no line exists — that is the whole anti-fabrication rule.
+// An uptrend line needs a HIGHER LOW: two confirmed pivot lows, the later one
+// above the earlier. A downtrend line needs a LOWER HIGH. If the pair does
+// not exist, no line exists — that is the whole anti-fabrication rule, and it
+// is why a $13.70 stock can no longer be given a line at $12.97.
 f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
     int n = array.size(vals)
     float p1 = na
@@ -2942,10 +2980,10 @@ f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
     if n >= 2
         p2 := array.get(vals, n - 1)
         b2 := array.get(bars_, n - 1)
-        // Ascending loop, keeping the LAST qualifying pivot. A descending
+        // Ascending loop keeping the LAST qualifying pivot. A descending
         // `for i = n - 2 to 0` relies on Pine inferring a negative step,
-        // which is exactly the kind of assumption that has cost this file a
-        // compile round already. Ascend and overwrite instead.
+        // which is the kind of assumption that has already cost this file a
+        // compile round-trip. Ascend and overwrite instead.
         for i = 0 to n - 2
             float pv = array.get(vals, i)
             bool ok = wantRising ? p2 > pv : p2 < pv
@@ -2957,16 +2995,18 @@ f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
 [upP1, upB1, upP2, upB2] = f_pairSlope(pivLows, pivLowBars, true)
 [dnP1, dnB1, dnP2, dnB2] = f_pairSlope(pivHighs, pivHighBars, false)
 
-float upSlope = not na(upP1) and upB2 != upB1 ? (upP2 - upP1) / (upB2 - upB1) : na
-float dnSlope = not na(dnP1) and dnB2 != dnB1 ? (dnP2 - dnP1) / (dnB2 - dnB1) : na
-float upLine = not na(upSlope) ? upP1 + upSlope * (bar_index - upB1) : na
-float dnLine = not na(dnSlope) ? dnP1 + dnSlope * (bar_index - dnB1) : na
+bool  upValid = not na(upP1) and not na(upB1) and upB2 > upB1
+bool  dnValid = not na(dnP1) and not na(dnB1) and dnB2 > dnB1
+float upSlope = upValid ? (upP2 - upP1) / (upB2 - upB1) : na
+float dnSlope = dnValid ? (dnP2 - dnP1) / (dnB2 - dnB1) : na
+float upLine  = upValid ? upP1 + upSlope * (bar_index - upB1) : na
+float dnLine  = dnValid ? dnP1 + dnSlope * (bar_index - dnB1) : na
 
-// relevance: a line far from price describes nothing, whatever its fit
+// a line far from price describes nothing, whatever its fit
 bool upRelevant = not na(upLine) and math.abs(close - upLine) <= maxTLdistATR * atr
 bool dnRelevant = not na(dnLine) and math.abs(close - dnLine) <= maxTLdistATR * atr
 
-// break state is CLOSE-confirmed and persists; it is not re-decided by a wick
+// break state is CLOSE-confirmed and persists; a wick does not re-decide it
 var bool upBroken = false
 var bool dnBroken = false
 if newDayBar
@@ -2981,60 +3021,82 @@ if barstate.isconfirmed and not na(dnLine) and close > dnLine
 if barstate.isconfirmed and not na(dnLine) and close < dnLine
     dnBroken := false
 
+bool srOn = showChartMap and showSR
 bool tlOn = showChartMap and showTrendLine
-plot(tlOn and upRelevant ? upLine : na, "Uptrend (higher lows)",
-     color=color.new(color.teal, upBroken ? 70 : 20), linewidth=2, style=plot.style_linebr, display=display.pane)
-plot(tlOn and dnRelevant ? dnLine : na, "Downtrend (lower highs)",
-     color=color.new(color.red, dnBroken ? 70 : 20), linewidth=2, style=plot.style_linebr, display=display.pane)
 
-// ── last bar only: names, and a FINITE forward projection ────────────────
-var label mainRlab = na
-var label mainSlab = na
-var line  upProj = na
-var line  dnProj = na
-var label upLab = na
-var label dnLab = na
+// ── draw: last bar only, finite objects, explicit price coordinates ──────
+// Every y-coordinate below is a PRICE and every x-coordinate is a BAR INDEX.
+// That is what makes these pinned: TradingView maps price->pixel with the
+// scale currently in view, so the line sits on its price at every zoom level
+// and through every pan. There is no offset term anywhere in this block.
+var line  mainRline = na
+var line  mainSline = na
+var line  upTL      = na
+var line  dnTL      = na
+var label mainRlab  = na
+var label mainSlab  = na
+var label upLab     = na
+var label dnLab     = na
 if barstate.islast
+    if not na(mainRline)
+        line.delete(mainRline)
+    if not na(mainSline)
+        line.delete(mainSline)
+    if not na(upTL)
+        line.delete(upTL)
+    if not na(dnTL)
+        line.delete(dnTL)
     if not na(mainRlab)
         label.delete(mainRlab)
     if not na(mainSlab)
         label.delete(mainSlab)
-    if not na(upProj)
-        line.delete(upProj)
-    if not na(dnProj)
-        line.delete(dnProj)
     if not na(upLab)
         label.delete(upLab)
     if not na(dnLab)
         label.delete(dnLab)
+    int rightEdge = bar_index + tlProjectBars
+
     if srOn and not na(mainR)
-        mainRlab := label.new(bar_index + 3, mainR,
+        // horizontal by construction: BOTH y-coordinates are the same price
+        int lft = na(mainRbar) ? bar_index - 50 : math.min(mainRbar, bar_index - 1)
+        mainRline := line.new(lft, mainR, rightEdge, mainR, xloc=xloc.bar_index,
+             extend=extend.none, style=line.style_solid,
+             color=color.new(color.red, 25), width=2)
+        mainRlab := label.new(rightEdge, mainR,
              "R " + str.tostring(mainR, format.mintick) + " · " + mainRsrc,
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
-             textcolor=color.new(color.blue, 10), size=size.small)
+             textcolor=color.new(color.red, 10), size=size.small)
+
     if srOn and not na(mainS)
-        mainSlab := label.new(bar_index + 3, mainS,
+        int lft = na(mainSbar) ? bar_index - 50 : math.min(mainSbar, bar_index - 1)
+        mainSline := line.new(lft, mainS, rightEdge, mainS, xloc=xloc.bar_index,
+             extend=extend.none, style=line.style_solid,
+             color=color.new(color.green, 25), width=2)
+        mainSlab := label.new(rightEdge, mainS,
              "S " + str.tostring(mainS, format.mintick) + " · " + mainSsrc,
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
-             textcolor=color.new(color.purple, 10), size=size.small)
+             textcolor=color.new(color.green, 10), size=size.small)
+
     if tlOn and upRelevant
-        float upAhead = upP1 + upSlope * (bar_index + tlProjectBars - upB1)
-        upProj := line.new(bar_index, upLine, bar_index + tlProjectBars, upAhead,
-             xloc=xloc.bar_index, extend=extend.none, style=line.style_dotted,
-             color=color.new(color.teal, 55), width=1)
-        upLab := label.new(bar_index + tlProjectBars, upAhead,
+        // anchored on the two pivots that define it, then projected forward
+        float upAhead = upP1 + upSlope * (rightEdge - upB1)
+        upTL := line.new(upB1, upP1, rightEdge, upAhead, xloc=xloc.bar_index,
+             extend=extend.none, style=line.style_solid,
+             color=color.new(color.teal, upBroken ? 65 : 20), width=2)
+        upLab := label.new(rightEdge, upAhead,
              upBroken ? "uptrend lost" : "uptrend",
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
-             textcolor=color.new(upBroken ? color.orange : color.teal, 15), size=size.small)
+             textcolor=color.new(upBroken ? color.orange : color.teal, 10), size=size.small)
+
     if tlOn and dnRelevant
-        float dnAhead = dnP1 + dnSlope * (bar_index + tlProjectBars - dnB1)
-        dnProj := line.new(bar_index, dnLine, bar_index + tlProjectBars, dnAhead,
-             xloc=xloc.bar_index, extend=extend.none, style=line.style_dotted,
-             color=color.new(color.red, 55), width=1)
-        dnLab := label.new(bar_index + tlProjectBars, dnAhead,
+        float dnAhead = dnP1 + dnSlope * (rightEdge - dnB1)
+        dnTL := line.new(dnB1, dnP1, rightEdge, dnAhead, xloc=xloc.bar_index,
+             extend=extend.none, style=line.style_solid,
+             color=color.new(color.orange, dnBroken ? 65 : 20), width=2)
+        dnLab := label.new(rightEdge, dnAhead,
              dnBroken ? "downtrend broken" : "downtrend",
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
-             textcolor=color.new(dnBroken ? color.lime : color.red, 15), size=size.small)
+             textcolor=color.new(dnBroken ? color.lime : color.orange, 10), size=size.small)
 
 
 // V5: retest triggers get their own glyph so the two setups are separable on
