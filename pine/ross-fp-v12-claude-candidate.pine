@@ -3055,6 +3055,15 @@ mkReject   = high + markOffset
 mkExit     = high + markOffset
 mkGhost    = not na(ghostTrig) ? ghostTrig - markOffset : low - markOffset
 
+// Marker visibility, split by size so each glyph has a tiny and a normal
+// variant and only one of the pair is ever live. Declared HERE, immediately
+// above the plotshape block that consumes them: V12.6 replaced a block that
+// happened to end on these two lines and took them with it (CE10272,
+// "Undeclared identifier sm"). Keeping a declaration adjacent to its only
+// use is what stops a block edit from silently orphaning it again.
+sm = showMarkers and not bigMarkers
+lg = showMarkers and bigMarkers
+
 plotshape(sm and eventArmed and setupKind == KIND_RETEST ? mkArmed : na, title="Trigger set (retest)", style=shape.diamond, location=location.absolute, color=color.aqua, size=size.tiny, text="SET")
 plotshape(lg and eventArmed and setupKind == KIND_RETEST ? mkArmed : na, title="Trigger set (retest, large)", style=shape.diamond, location=location.absolute, color=color.aqua, size=size.normal, text="SET")
 plotshape(sm and eventArmed and setupKind != KIND_RETEST ? mkArmed : na, title="Trigger set", style=shape.circle, location=location.absolute, color=color.yellow, size=size.tiny, text="SET")

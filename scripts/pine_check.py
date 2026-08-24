@@ -119,6 +119,83 @@ def forward_refs(lines):
     return findings
 
 
+# `[a, b, c] = f(...)` — tuple destructuring declares every name in the bracket.
+TUPLE = re.compile(r'^\s*\[([^\]]+)\]\s*=(?!=)')
+# `for i = 0 to n` and `for [k, v] in m` declare their loop variables.
+FOR1 = re.compile(r'\bfor\s+([A-Za-z_]\w*)\s*=')
+FOR2 = re.compile(r'\bfor\s+\[?([A-Za-z_]\w*)\s*,\s*([A-Za-z_]\w*)\]?\s+in\b')
+# `strategy.closedtrades.entry_price(...)` — a dotted path of ANY depth is a
+# builtin reference, not a bare identifier. Two-part stripping alone left the
+# three-part ones looking undeclared.
+DOTTED = re.compile(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+')
+# `title=` / `color=` — a named-argument key is syntax, not a name being read.
+NAMEDARG = re.compile(r'\b[A-Za-z_]\w*\s*=(?!=)')
+
+
+def _all_declared(lines):
+    """Every name this file binds, at any indent — assignment, tuple, function,
+    parameter or loop variable. Indent is irrelevant here: we are asking
+    whether a name exists at all, not whether it is in scope."""
+    names = set()
+    for raw in lines:
+        code = strip_comment(raw)
+        stripped = code.strip()
+        m = FUNCDEF.match(stripped)
+        if m:
+            names.add(m.group(1))
+            for prm in m.group(2).split(','):
+                prm = prm.strip().split('=')[0].strip().split()
+                if prm:
+                    names.add(prm[-1])
+            continue
+        m = TUPLE.match(code)
+        if m:
+            for nm in m.group(1).split(','):
+                nm = nm.strip().split()[-1:] or ['']
+                if nm[0]:
+                    names.add(nm[0])
+            continue
+        m = ASSIGN.match(stripped)
+        if m:
+            names.add(m.group(1))
+        m = FOR1.search(code)
+        if m:
+            names.add(m.group(1))
+        m = FOR2.search(code)
+        if m:
+            names.add(m.group(1))
+            names.add(m.group(2))
+    return names
+
+
+def undeclared(lines):
+    """Identifiers read but never bound anywhere in the file.
+
+    forward_refs() only compares line numbers for names it already found a
+    declaration for, so `if name not in declared: continue` made a name with
+    NO declaration the one case it could not see. That is the gap V12.6
+    shipped through: a block replacement whose range happened to end on the
+    two lines declaring `sm` and `lg` deleted them, left twelve uses behind,
+    and the checker called the file clean. TradingView answered CE10272."""
+    declared = _all_declared(lines)
+    findings = []
+    seen = set()
+    for n, raw in enumerate(lines, 1):
+        code = blank_strings(strip_comment(raw))
+        if not code.strip():
+            continue
+        code = DOTTED.sub(' ', code)
+        code = NAMEDARG.sub(' ', code)
+        for name in IDENT.findall(code):
+            if name in SKIP or name in declared or name in seen:
+                continue
+            seen.add(name)
+            findings.append(
+                (n, f'CE10272: "{name}" is used but never declared anywhere '
+                    f'in this file'))
+    return findings
+
+
 def const_string_args(lines, declared_at):
     """plotshape/plotchar const-string args fed a variable or an input."""
     findings = []
@@ -257,10 +334,11 @@ def main():
         findings = sorted(forward_refs(lines)
                           + const_string_args(lines, declared_at)
                           + wrong_named_args(lines)
-                          + continuation_indent(lines))
+                          + continuation_indent(lines)
+                          + undeclared(lines))
         print(f'{path}  ({len(lines)} lines)')
         if not findings:
-            print('  clean — no bad continuation indent, no forward reference, no non-const plotshape arg, no wrong-named drawing arg')
+            print('  clean — no bad continuation indent, no forward reference, no non-const plotshape arg, no wrong-named drawing arg, no undeclared name')
         for n, msg in findings:
             print(f'  line {n}: {msg}')
             bad += 1

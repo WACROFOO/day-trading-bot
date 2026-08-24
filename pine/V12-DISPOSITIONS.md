@@ -161,6 +161,52 @@ Gate booleans: all ten still byte-identical to the Codex V11 base.
 audit's own rule that is not a compile proof. V12.6 is a candidate until it is
 pasted into TradingView and the result reported.
 
+### V12.6.1 - CE10272, and the checker gap that let it ship
+
+TradingView: `Undeclared identifier "sm"` at line 3058, 13 problems.
+
+**Cause.** V12.6 rebuilt the structure map by replacing a line range. That
+range ran 2849-3128, and old lines 3127-3128 were:
+
+```
+sm = showMarkers and not bigMarkers
+lg = showMarkers and bigMarkers
+```
+
+They had nothing to do with the structure map. They sat at the tail of the
+range and were deleted as collateral, leaving twelve plotshape calls reading
+two names that no longer existed.
+
+**Swept, not spot-fixed.** Every top-level binding in the replaced range was
+diffed against the new file. Four are missing and all four are intentional
+(`dnTL`, `upTL`, `dnTLlab`, `upTLlab` - the old trend-line objects the
+rebuild replaced). Then every identifier in the whole file was checked
+against every binding in the whole file: `sm` and `lg` are the only two names
+used and never declared. One defect, confirmed as one.
+
+**The checker gap.** `pine_check.py` was clean on this file. `forward_refs()`
+compares line numbers only for names it already found a declaration for:
+
+```
+if name in SKIP or name in params or name not in declared:
+    continue
+```
+
+A name with NO declaration hits `name not in declared` and is skipped - the
+one case the CE10272 rule could not see. Added `undeclared()`, which flags
+any identifier bound nowhere in the file. Getting it quiet required handling
+three real false-positive classes first: dotted paths of arbitrary depth
+(`strategy.closedtrades.entry_price`), tuple destructuring
+(`[macdValue, macdSignal, macdHist] = ta.macd(...)`), and named-argument keys.
+
+Verified by regression, not by a clean pass: run against V12.6 as shipped it
+reports `sm` at line 3058 - the same identifier at the same line TradingView
+reported. Run against V12.5 it is clean, confirming V12.6 introduced this.
+
+The declarations are now immediately above the plotshape block that consumes
+them, so a future block edit cannot orphan them without also deleting the
+uses.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
