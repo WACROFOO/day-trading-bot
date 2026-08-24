@@ -35,7 +35,8 @@ from src.indicators import same_time_cum_volume_profile            # noqa: E402
 from src.metrics import (account_simulation, clustered_bootstrap,   # noqa: E402
                          by_bucket, core_metrics, verdict)
 from src.setups import GATE_IDS, Params, Variant                   # noqa: E402
-from src.universe import (ScanRules, candidate_days, nasdaq_listed,  # noqa: E402
+from src.universe import (ScanRules, candidate_days,                 # noqa: E402
+                          candidate_days_grouped, nasdaq_listed,
                           qualify_intraday, to_records)
 from src import validation as V                                    # noqa: E402
 
@@ -162,6 +163,22 @@ def stage_universe(args):
     else:
         pool = nasdaq_listed()
         pool_path.write_text(json.dumps(pool))
+    # -- grouped path: one call per DATE, survivorship-free --------------
+    if args.grouped:
+        if not hasattr(provider, "grouped_daily"):
+            print(f"provider {provider.name} has no grouped_daily; "
+                  f"drop --grouped or switch provider"); return
+
+        def prog(day, n, tickers, cands):
+            print(f"  {day}  session {n:>4}  {tickers:>6} tickers  "
+                  f"{cands:>6} candidate-days so far", flush=True)
+
+        rows = candidate_days_grouped(provider, start, end, rules,
+                                      progress=prog)
+        _finish_universe(cfg, rules, to_records(rows), args,
+                         symbols_scanned=None, provider=provider)
+        return
+
     syms = sorted({p["sym"] for p in pool})
     if args.limit:
         rng = random.Random(cfg["seed"])
@@ -184,7 +201,11 @@ def stage_universe(args):
         for r in ex.map(work, syms):
             rows.extend(r)
 
-    recs = to_records(rows)
+    _finish_universe(cfg, rules, to_records(rows), args,
+                     symbols_scanned=len(syms), provider=provider)
+
+
+def _finish_universe(cfg, rules, recs, args, symbols_scanned, provider):
     df = save_table(recs, "candidate_days")
     by_year = {}
     if len(df):
@@ -192,19 +213,22 @@ def stage_universe(args):
         by_year = df.groupby("year").agg(
             ticker_days=("sym", "size"), sessions=("day", "nunique"),
             names=("sym", "nunique")).reset_index().to_dict("records")
-    summary = dict(symbols_scanned=len(syms), candidate_days=len(recs),
+    summary = dict(provider=provider.name,
+                   construction="grouped_daily (survivorship-free)" if args.grouped
+                   else "symbol list (survivorship-biased snapshot)",
+                   symbols_scanned=symbols_scanned, candidate_days=len(recs),
                    sessions=int(df["day"].nunique()) if len(df) else 0,
                    distinct_names=int(df["sym"].nunique()) if len(df) else 0,
                    by_year=by_year,
-                   split_days=int(df["split_on_day"].sum()) if len(df) else 0,
                    reverse_split_flagged=int(df["reverse_split_ratio"].notna().sum())
                    if len(df) else 0)
     save_results(by_year, "universe_by_year")
     (RESULTS / "universe_summary.json").write_text(json.dumps(summary, indent=2))
-    write_manifest(cfg, dict(universe=dict(start=args.start, end=args.end,
-                                           rules=rules.__dict__ | {"scan_time_et": str(rules.scan_time_et)},
-                                           **{k: v for k, v in summary.items() if k != "by_year"})))
-    print(json.dumps(summary, indent=2)[:2000])
+    write_manifest(cfg, dict(universe=dict(
+        start=args.start, end=args.end,
+        rules=rules.__dict__ | {"scan_time_et": str(rules.scan_time_et)},
+        **{k: v for k, v in summary.items() if k != "by_year"})))
+    print(json.dumps(summary, indent=2)[:2500])
 
 
 # --------------------------------------------------------------- stage: fetch
@@ -274,37 +298,33 @@ def stage_ablation(args):
                       scan_time_et=dt.time(*map(int, _v(cfg["universe"]["scan_timestamp_et"]).split(":"))))
     cap_pct = _v(cfg["execution"]["stop_limit_cap_pct"])
     cap_ticks = _v(cfg["execution"]["stop_limit_cap_ticks"])
-    days = _trading_days(args.days)
-    lo, hi = days[0], days[-1]
-
-    import pandas as pd
-    cd = pd.read_csv(DATA / "candidate_days.csv")
-    cd = cd[(cd["day"] >= lo.isoformat()) & (cd["day"] <= hi.isoformat())]
-    cd = cd[cd["reverse_split_ratio"].isna()]
-    pairs = sorted({(r.sym, r.day, r.prev_close) for r in cd.itertuples()})
-    print(f"ablation over {len(pairs)} candidate ticker-days, {lo} -> {hi}")
+    pairs, lo, hi = _select_candidates(cfg, args.start, args.end, args.days)
+    print(f"ablation, {lo} -> {hi}")
+    if args.prefetch:
+        _prefetch_minute_months(provider, pairs)
 
     # ---- load bars once, qualify the scanner point-in-time ----------
     def _load(pair):
         sym, day, prev_close = pair
         d = dt.date.fromisoformat(day)
-        bars = provider.minute_bars(sym, d, premarket=True)
+        try:
+            bars = provider.minute_bars(sym, d, premarket=True)
+        except Exception as e:                                  # noqa: BLE001
+            print(f"    skip {sym} {day}: {str(e)[:70]}")
+            return None
         if len(bars) < 60:
             return None
-        prior = []
-        for k in range(1, 4):
-            pd_ = d - dt.timedelta(days=k)
-            if pd_.weekday() < 5:
-                pb = provider.minute_bars(sym, pd_, premarket=True)
-                if pb:
-                    prior.append(pb)
+        prior = _prior_sessions(provider, sym, d, 3)
         profile = same_time_cum_volume_profile(prior) if prior else None
         q = qualify_intraday(sym, d, bars, prev_close, rules, profile)
         if q is None or not q.qualified_intraday:
             return None
         return (sym, d, bars, prev_close, profile, q.scan_ts, q)
 
-    with ThreadPoolExecutor(max_workers=args.workers) as ex:
+    # a month-chunked provider serves every day from one cached request, so
+    # threading it would only multiply rate-limit pressure for no gain
+    workers = 1 if hasattr(provider, "minute_month") else args.workers
+    with ThreadPoolExecutor(max_workers=workers) as ex:
         raw = [r for r in ex.map(_load, pairs) if r is not None]
     loaded = [r[:6] for r in raw]
     save_table([{k: v for k, v in r[6].__dict__.items()} for r in raw],
@@ -547,7 +567,7 @@ def stage_sensitivity(args):
     variants = variants_from_config(cfg)
     provider = get_provider(args.provider)
     rules = _rules(cfg)
-    loaded = _load_scanned(provider, cfg, rules, args.days, args.workers)
+    loaded = _load_scanned(provider, cfg, rules, args.days, args.workers, args)
     cost = COST_MODELS["realistic"]
 
     grid = {
@@ -610,7 +630,7 @@ def stage_placebo(args):
     variants = variants_from_config(cfg)
     provider = get_provider(args.provider)
     rules = _rules(cfg)
-    loaded = _load_scanned(provider, cfg, rules, args.days, args.workers)
+    loaded = _load_scanned(provider, cfg, rules, args.days, args.workers, args)
     cost = COST_MODELS["realistic"]
     A = variants["A"]
 
@@ -711,6 +731,78 @@ def _baseline_random(loaded, params, cost, cfg, n_draws: int = 5):
     return m
 
 
+def _select_candidates(cfg, start: str | None, end: str | None,
+                       days_back: int | None, cap: int | None = None):
+    """The candidate ticker-days the intraday study will actually work on.
+
+    Two knobs, both point-in-time and both DISCOVERY dials rather than entry
+    gates: the date range, and `max_names_per_session` — the top-N gappers
+    of each session, ranked on a gap that is known at 09:30. Reverse-split
+    artefacts are dropped here (flagged in the universe table, never
+    silently vetoed there).
+    """
+    import pandas as pd
+    cd = pd.read_csv(DATA / "candidate_days.csv")
+    if start and end:
+        lo, hi = start, end
+    else:
+        days = _trading_days(days_back or 25)
+        lo, hi = days[0].isoformat(), days[-1].isoformat()
+    cd = cd[(cd["day"] >= lo) & (cd["day"] <= hi)]
+    cd = cd[cd["reverse_split_ratio"].isna()]
+    cap = cap if cap is not None else _v(cfg["universe"].get(
+        "max_names_per_session", {"value": 0}))
+    if cap:
+        cd = (cd.sort_values(["day", "gap_pct"], ascending=[True, False])
+                .groupby("day", group_keys=False).head(int(cap)))
+    pairs = sorted({(r.sym, r.day, r.prev_close) for r in cd.itertuples()})
+    print(f"  {len(pairs)} candidate ticker-days, {cd['day'].nunique()} sessions, "
+          f"{cd['sym'].nunique()} names  [{lo} -> {hi}, cap {cap or 'none'}/session]")
+    return pairs, lo, hi
+
+
+def _prefetch_minute_months(provider, pairs, workers: int = 1):
+    """Warm the month cache before the run.
+
+    On a month-chunked provider this is one request per (ticker, month), so
+    a 2,500-ticker-day study costs roughly the number of distinct ticker
+    months, not 2,500 — the difference between six hours and a day.
+    """
+    if not hasattr(provider, "minute_month"):
+        return
+    months = sorted({(sym, day[:4], day[5:7]) for sym, day, _ in pairs})
+    print(f"  prefetching {len(months)} ticker-months "
+          f"(~{len(months) / 5 / 60:.1f}h at 5 calls/min)")
+    for n, (sym, y, m) in enumerate(months, 1):
+        try:
+            provider.minute_month(sym, int(y), int(m))
+        except Exception as e:                                  # noqa: BLE001
+            print(f"    {sym} {y}-{m}: {str(e)[:80]}")
+        if n % 25 == 0:
+            print(f"    {n}/{len(months)}", flush=True)
+
+
+def _prior_sessions(provider, sym: str, day: dt.date, n: int) -> list:
+    """The n previous sessions' bars, for the RVOL-at-time denominator.
+
+    On a month-chunked provider these are already in the cache the target
+    day came from, so they cost nothing. Only prior days are ever read —
+    that is what keeps RVOL-at-time free of look-ahead.
+    """
+    out, d, tried = [], day - dt.timedelta(days=1), 0
+    while len(out) < n and tried < 10:
+        tried += 1
+        if d.weekday() < 5:
+            try:
+                pb = provider.minute_bars(sym, d, premarket=True)
+            except Exception:                                   # noqa: BLE001
+                pb = []
+            if pb:
+                out.append(pb)
+        d -= dt.timedelta(days=1)
+    return out
+
+
 def _rules(cfg):
     u = cfg["universe"]
     return ScanRules(price_min=_v(u["price_min"]), price_max=_v(u["price_max"]),
@@ -719,35 +811,30 @@ def _rules(cfg):
                      scan_time_et=dt.time(*map(int, _v(u["scan_timestamp_et"]).split(":"))))
 
 
-def _load_scanned(provider, cfg, rules, days_back: int, workers: int):
+def _load_scanned(provider, cfg, rules, days_back: int, workers: int,
+                  args_ns=None):
     """Reload the point-in-time-qualified ticker-days used by the ablation."""
-    import pandas as pd
-    days = _trading_days(days_back)
-    lo, hi = days[0], days[-1]
-    cd = pd.read_csv(DATA / "candidate_days.csv")
-    cd = cd[(cd["day"] >= lo.isoformat()) & (cd["day"] <= hi.isoformat())]
-    cd = cd[cd["reverse_split_ratio"].isna()]
-    pairs = sorted({(r.sym, r.day, r.prev_close) for r in cd.itertuples()})
+    pairs, lo, hi = _select_candidates(cfg, getattr(args_ns, "start", None),
+                                       getattr(args_ns, "end", None), days_back)
 
     def _load(pair):
         sym, day, prev_close = pair
         d = dt.date.fromisoformat(day)
-        bars = provider.minute_bars(sym, d, premarket=True)
+        try:
+            bars = provider.minute_bars(sym, d, premarket=True)
+        except Exception as e:                                  # noqa: BLE001
+            print(f"    skip {sym} {day}: {str(e)[:70]}")
+            return None
         if len(bars) < 60:
             return None
-        prior = []
-        for k in range(1, 4):
-            pd_ = d - dt.timedelta(days=k)
-            if pd_.weekday() < 5:
-                pb = provider.minute_bars(sym, pd_, premarket=True)
-                if pb:
-                    prior.append(pb)
+        prior = _prior_sessions(provider, sym, d, 3)
         profile = same_time_cum_volume_profile(prior) if prior else None
         q = qualify_intraday(sym, d, bars, prev_close, rules, profile)
         if q is None or not q.qualified_intraday:
             return None
         return (sym, d, bars, prev_close, profile, q.scan_ts)
 
+    workers = 1 if hasattr(provider, "minute_month") else workers
     with ThreadPoolExecutor(max_workers=workers) as ex:
         out = [r for r in ex.map(_load, pairs) if r is not None]
     print(f"  {len(out)} qualified ticker-days loaded")
@@ -860,22 +947,34 @@ def main():
     u.add_argument("--workers", type=int, default=12)
     u.add_argument("--provider", default=None)
     u.add_argument("--refresh-pool", action="store_true")
+    u.add_argument("--grouped", action="store_true",
+                   help="build from grouped daily bars: one call per DATE, "
+                        "every ticker that traded, delisted names included")
     u.set_defaults(func=stage_universe)
 
     f = sub.add_parser("fetch")
     f.add_argument("--days", type=int, default=25)
+    f.add_argument("--start", default=None)
+    f.add_argument("--end", default=None)
     f.add_argument("--workers", type=int, default=8)
     f.add_argument("--provider", default=None)
     f.set_defaults(func=stage_fetch)
 
     a = sub.add_parser("ablation")
     a.add_argument("--days", type=int, default=25)
+    a.add_argument("--start", default=None)
+    a.add_argument("--end", default=None)
     a.add_argument("--workers", type=int, default=8)
     a.add_argument("--provider", default=None)
+    a.add_argument("--prefetch", action="store_true",
+                   help="warm the ticker-month cache first (one request per "
+                        "ticker-month; do this before a long ablation)")
     a.set_defaults(func=stage_ablation)
 
     sv = sub.add_parser("sensitivity")
     sv.add_argument("--days", type=int, default=25)
+    sv.add_argument("--start", default=None)
+    sv.add_argument("--end", default=None)
     sv.add_argument("--workers", type=int, default=8)
     sv.add_argument("--variants", nargs="*", default=None)
     sv.add_argument("--provider", default=None)
@@ -883,6 +982,8 @@ def main():
 
     pl = sub.add_parser("placebo")
     pl.add_argument("--days", type=int, default=25)
+    pl.add_argument("--start", default=None)
+    pl.add_argument("--end", default=None)
     pl.add_argument("--workers", type=int, default=8)
     pl.add_argument("--provider", default=None)
     pl.set_defaults(func=stage_placebo)

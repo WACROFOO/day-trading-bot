@@ -65,17 +65,34 @@ class Capability:
 
 def _curl(url: str, headers: dict[str, str] | None = None, tries: int = 3,
           timeout: int = 45) -> str | None:
+    return _curl2(url, headers, tries, timeout)[1]
+
+
+def _curl2(url: str, headers: dict[str, str] | None = None, tries: int = 3,
+           timeout: int = 45) -> tuple[int, str | None]:
+    """As `_curl`, but returns the HTTP status too.
+
+    This exists because of a defect found on 2026-08-24: Polygon answers a
+    rate-limit with HTTP 429 and a JSON body. `json.loads` succeeds,
+    `.get("results")` returns [], and the caller records "no data for this
+    date" — a throttled request became a silent hole in the universe. Status
+    codes are never optional when the error path is also valid JSON.
+    """
     args = ["curl", "-s", "--compressed", "--max-time", str(timeout),
-            "-H", f"User-Agent: {UA}"]
+            "-o", "-", "-w", "\n%{http_code}", "-H", f"User-Agent: {UA}"]
     for k, v in (headers or {}).items():
         args += ["-H", f"{k}: {v}"]
     args.append(url)
     for attempt in range(tries):
         p = subprocess.run(args, capture_output=True, text=True)
-        if p.returncode == 0 and p.stdout.strip():
-            return p.stdout
+        if p.returncode == 0 and p.stdout:
+            body, _, code = p.stdout.rpartition("\n")
+            try:
+                return int(code.strip()), body
+            except ValueError:
+                return 0, body
         time.sleep(1.5 * (attempt + 1))
-    return None
+    return 0, None
 
 
 class BarProvider:
@@ -273,6 +290,29 @@ class PolygonProvider(_KeyedProvider):
             self.key = os.environ.get("MASSIVE_API_KEY", "")
         self.calls_per_min = int(os.environ.get("POLYGON_CALLS_PER_MIN", "5"))
 
+    def _get(self, url: str, what: str) -> dict:
+        """One request, with the rate limit respected and 429 treated as an
+        ERROR to retry rather than as an empty result."""
+        for attempt in range(6):
+            self._throttle()
+            code, body = _curl2(url, tries=1)
+            if code == 200 and body:
+                try:
+                    d = json.loads(body)
+                except json.JSONDecodeError:
+                    d = {}
+                if d.get("status") != "ERROR":
+                    return d
+            if code == 429 or (body and '"status":"ERROR"' in body):
+                wait = min(60.0, 5.0 * (attempt + 1))
+                time.sleep(wait)
+                continue
+            if code in (403, 404):
+                return {}
+            time.sleep(2.0 * (attempt + 1))
+        raise RuntimeError(f"{self.name}: {what} failed after retries "
+                           f"(last HTTP {code}). Rate limit or plan gate.")
+
     def _throttle(self):
         """Free tier is 5 calls/min. Sleeping is cheaper than a 429 storm."""
         if self.calls_per_min <= 0:
@@ -300,39 +340,53 @@ class PolygonProvider(_KeyedProvider):
         cached = self._cache_get("grouped", key)
         if cached is not None:
             return cached
-        self._throttle()
         url = (f"{self.BASE}/v2/aggs/grouped/locale/us/market/stocks/"
                f"{day.isoformat()}?adjusted=false"
                f"&include_otc={'true' if include_otc else 'false'}&apiKey={self.key}")
-        raw = _curl(url)
-        rows = json.loads(raw).get("results", []) if raw else []
+        rows = self._get(url, f"grouped_daily {day}").get("results", [])
         self._cache_put("grouped", key, rows)
         return rows
 
     def _agg(self, sym: str, mult: int, span: str, frm: str, to: str,
              adjusted: bool) -> list[Bar]:
         self._require()
-        self._throttle()
         url = (f"{self.BASE}/v2/aggs/ticker/{sym}/range/{mult}/{span}/{frm}/{to}"
                f"?adjusted={'true' if adjusted else 'false'}&sort=asc&limit=50000"
                f"&apiKey={self.key}")
-        raw = _curl(url)
-        if not raw:
-            return []
-        d = json.loads(raw)
+        d = self._get(url, f"aggs {sym} {frm}")
         return [Bar(int(r["t"] // 1000), r["o"], r["h"], r["l"], r["c"], r.get("v", 0.0))
                 for r in (d.get("results") or [])]
 
-    def minute_bars(self, sym: str, day: dt.date, premarket: bool = True) -> list[Bar]:
-        key = f"{sym}_{day.isoformat()}"
-        cached = self._cache_get("minute", key)
-        if cached is not None:
-            bars = [Bar(*b) for b in cached]
-        else:
+    def minute_month(self, sym: str, year: int, month: int) -> dict[str, list[Bar]]:
+        """A whole ticker-MONTH of minute bars in ONE request, split by day.
+
+        This is the difference between a study that fits in the free tier and
+        one that does not. At 5 calls/minute, fetching per ticker-day costs
+        one call per day plus one per prior day needed for the RVOL profile;
+        per ticker-month it costs one call for roughly 21 sessions AND hands
+        back the prior days for free. The aggregate limit is 50,000 bars and
+        a month of 1-minute extended-hours data is ~20,000, so a month fits.
+        """
+        key = f"{sym}_{year}-{month:02d}"
+        cached = self._cache_get("minute_month", key)
+        if cached is None:
+            first = dt.date(year, month, 1)
+            last = (dt.date(year + (month == 12), (month % 12) + 1, 1)
+                    - dt.timedelta(days=1))
             # adjusted=false: raw traded prices. The split calendar is applied
             # separately so a reverse split cannot fabricate a gap.
-            bars = self._agg(sym, 1, "minute", day.isoformat(), day.isoformat(), False)
-            self._cache_put("minute", key, [list(asdict(b).values()) for b in bars])
+            bars = self._agg(sym, 1, "minute", first.isoformat(), last.isoformat(), False)
+            by_day: dict[str, list] = {}
+            for b in bars:
+                by_day.setdefault(b.et.date().isoformat(), []).append(
+                    list(asdict(b).values()))
+            self._cache_put("minute_month", key, by_day)
+            cached = by_day
+        return {d: [Bar(*r) for r in rows] for d, rows in cached.items()}
+
+    def minute_bars(self, sym: str, day: dt.date, premarket: bool = True) -> list[Bar]:
+        # served out of the month cache, so a whole month costs one request
+        bars = self.minute_month(sym, day.year, day.month).get(day.isoformat(), [])
         if not premarket:
             bars = [b for b in bars if dt.time(9, 30) <= b.et.time() < dt.time(16, 0)]
         return bars
@@ -342,24 +396,20 @@ class PolygonProvider(_KeyedProvider):
 
     def splits(self, sym: str) -> list[dict]:
         self._require()
-        self._throttle()
-        raw = _curl(f"{self.BASE}/v3/reference/splits?ticker={sym}&limit=1000&apiKey={self.key}")
-        return json.loads(raw).get("results", []) if raw else []
+        return self._get(f"{self.BASE}/v3/reference/splits?ticker={sym}"
+                         f"&limit=1000&apiKey={self.key}",
+                         f"splits {sym}").get("results", [])
 
     def tickers_on(self, day: dt.date, active: bool | None = None) -> list[dict]:
         """Point-in-time symbol list INCLUDING delisted names - this is the
         call that removes survivorship bias from the universe."""
         self._require()
-        self._throttle()
         out, url = [], (f"{self.BASE}/v3/reference/tickers?market=stocks"
                         f"&date={day.isoformat()}&limit=1000&apiKey={self.key}")
         if active is not None:
             url += f"&active={'true' if active else 'false'}"
         while url:
-            raw = _curl(url)
-            if not raw:
-                break
-            d = json.loads(raw)
+            d = self._get(url, f"tickers {day}")
             out += d.get("results", [])
             nxt = d.get("next_url")
             url = f"{nxt}&apiKey={self.key}" if nxt else None
@@ -368,9 +418,9 @@ class PolygonProvider(_KeyedProvider):
     def quotes(self, sym: str, day: dt.date) -> list[dict]:
         """NBBO. Needed for a real spread instead of the range-quartile proxy."""
         self._require()
-        raw = _curl(f"{self.BASE}/v3/quotes/{sym}?timestamp={day.isoformat()}"
-                    f"&limit=50000&apiKey={self.key}")
-        return json.loads(raw).get("results", []) if raw else []
+        return self._get(f"{self.BASE}/v3/quotes/{sym}?timestamp={day.isoformat()}"
+                         f"&limit=50000&apiKey={self.key}",
+                         f"quotes {sym}").get("results", [])
 
     def capabilities(self) -> Capability:
         paid = self.calls_per_min <= 0

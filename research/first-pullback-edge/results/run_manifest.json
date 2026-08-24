@@ -1,7 +1,7 @@
 {
-  "generated_utc": "2026-08-24T17:25:12.109806+00:00",
-  "git_commit": "10338757917fc112aa2619d56ec5ad6ed79f849a",
-  "config_sha256": "d224b4e568aafd44127770c4bd7dc702f21aedd3159b4dade3f398bd4dc4d4a3",
+  "generated_utc": "2026-08-24T21:20:51.590824+00:00",
+  "git_commit": "797ce4a7145c7808cd5893ab074bad9a790c0dea",
+  "config_sha256": "1c0ee57059badf1512f8972d8cf1929292c7afdd2ad56b3715a419d4cd7955ab",
   "strategy_file": "knowledge-base/tradingview/ross-fp-v4.pine",
   "strategy_rev": "V9.12",
   "seed": 20260824,
@@ -34,7 +34,7 @@
   },
   "timezone": "America/New_York",
   "universe": {
-    "start": "2022-09-01",
+    "start": "2024-09-24",
     "end": "2026-08-21",
     "rules": {
       "price_min": 2.0,
@@ -45,12 +45,13 @@
       "low_float_max_m": 20.0,
       "scan_time_et": "09:35:00"
     },
-    "symbols_scanned": 6742,
-    "candidate_days": 8152,
-    "sessions": 976,
-    "distinct_names": 2295,
-    "split_days": 46,
-    "reverse_split_flagged": 139
+    "provider": "polygon",
+    "construction": "grouped_daily (survivorship-free)",
+    "symbols_scanned": null,
+    "candidate_days": 7948,
+    "sessions": 479,
+    "distinct_names": 2731,
+    "reverse_split_flagged": 344
   },
   "minute_window": {
     "start": "2026-07-21",

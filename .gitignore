@@ -30,7 +30,10 @@ research/first-pullback-edge/data/symbol_pool.json
 
 # Secrets
 .env
+.env.*
+*.env
 *.key
+research/first-pullback-edge/.env.local
 config.local.py
 
 # IDE / OS

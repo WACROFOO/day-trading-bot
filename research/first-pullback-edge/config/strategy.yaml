@@ -36,7 +36,14 @@ universe:
   # study-side liquidity floor so the universe is tradeable at all; NOT a Pine
   # parameter. Deliberately loose - tightening it is a selection decision.
   min_premarket_dollar_volume: {value: 250000.0, provenance: study}
-  scan_timestamp_et: {value: "09:35", provenance: study}  # when the watchlist is frozen
+  scan_timestamp_et: {value: "09:35", provenance: study}
+  # How many names the scanner hands the trader per session, ranked by gap %
+  # at the open. A DISCOVERY cap, not an entry gate: it is point-in-time
+  # (gap is known at 09:30) and it is what a person with one screen actually
+  # does. It also decides the study's size — 500 sessions x 5 = 2,500
+  # ticker-days, which is the brief's target band. Raising it costs one API
+  # call per extra ticker-month, nothing else.
+  max_names_per_session: {value: 3, provenance: study}  # when the watchlist is frozen
 
 # ----------------------------------------------------------------- impulse --
 # ross-fp-v4.pine lines 878-930 (candidate-window search) and 1645 (pushGate).

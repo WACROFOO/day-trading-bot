@@ -187,6 +187,71 @@ def candidate_days(provider: BarProvider, symbols: list[str],
     return out
 
 
+def candidate_days_grouped(provider, start: dt.date, end: dt.date,
+                          rules: ScanRules, warmup_days: int = 40,
+                          progress=None) -> list[CandidateDay]:
+    """Point-in-time universe built from GROUPED DAILY bars — one call per
+    trading date, every ticker that printed that day.
+
+    This is the survivorship-free construction and it is why it exists:
+    `candidate_days()` iterates a symbol LIST, and any list is a list of
+    things that still exist. Grouped daily is a snapshot of what actually
+    traded on the date, so a company that gapped 40% in 2025 and delisted in
+    2026 is present on its own day and absent afterwards, with no special
+    handling.
+
+    Prices are requested RAW (`adjusted=false`), so a reverse split appears
+    as a genuine discontinuity in the series rather than being smoothed away.
+    `detect_reverse_split` flags a clean-integer ratio per CLAUDE.md rule 6;
+    the flag is recorded, never used as a silent veto.
+
+    Point-in-time discipline is unchanged: for session D the only inputs are
+    D's OPEN, D-1's CLOSE, and the trailing-20-session dollar volume that
+    EXCLUDES D.
+    """
+    day = start - dt.timedelta(days=warmup_days)
+    prev_close: dict[str, float] = {}
+    dv_hist: dict[str, list[float]] = {}
+    out: list[CandidateDay] = []
+    sessions = 0
+    while day <= end:
+        if day.weekday() >= 5:
+            day += dt.timedelta(days=1)
+            continue
+        rows = provider.grouped_daily(day)
+        if not rows:                       # market holiday
+            day += dt.timedelta(days=1)
+            continue
+        sessions += 1
+        if progress:
+            progress(day, sessions, len(rows), len(out))
+        for r in rows:
+            sym = r.get("T")
+            o, c, v = r.get("o"), r.get("c"), r.get("v", 0.0)
+            if not sym or o is None or c is None:
+                continue
+            pc = prev_close.get(sym)
+            hist = dv_hist.setdefault(sym, [])
+            if day >= start and pc and pc > 0 and len(hist) >= 20:
+                gap = (o - pc) / pc * 100.0
+                prior_dv = sum(hist[-20:]) / 20.0
+                if (rules.price_min <= o <= rules.price_max
+                        and gap >= rules.gap_min_pct
+                        and prior_dv >= rules.min_dollar_volume):
+                    out.append(CandidateDay(
+                        sym=sym, day=day.isoformat(), prev_close=pc, open_px=o,
+                        gap_pct=gap, prior_dollar_volume_20d=prior_dv,
+                        split_on_day=False,
+                        reverse_split_ratio=detect_reverse_split(pc, o),
+                        source=f"{provider.name}:grouped"))
+            prev_close[sym] = c
+            hist.append(v * c)
+            if len(hist) > 25:
+                del hist[:-25]
+        day += dt.timedelta(days=1)
+    return out
+
+
 def qualify_intraday(sym: str, day: dt.date, bars: list[Bar], prev_close: float | None,
                      rules: ScanRules,
                      same_time_profile: dict[int, float] | None = None) -> CandidateDay | None:

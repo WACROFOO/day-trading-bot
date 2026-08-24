@@ -1,40 +1,29 @@
 {
-  "symbols_scanned": 6742,
-  "candidate_days": 8152,
-  "sessions": 976,
-  "distinct_names": 2295,
+  "provider": "polygon",
+  "construction": "grouped_daily (survivorship-free)",
+  "symbols_scanned": null,
+  "candidate_days": 7948,
+  "sessions": 479,
+  "distinct_names": 2731,
   "by_year": [
     {
-      "year": "2022",
-      "ticker_days": 263,
-      "sessions": 74,
-      "names": 222
-    },
-    {
-      "year": "2023",
-      "ticker_days": 1085,
-      "sessions": 240,
-      "names": 657
-    },
-    {
       "year": "2024",
-      "ticker_days": 1933,
-      "sessions": 252,
-      "names": 937
+      "ticker_days": 998,
+      "sessions": 69,
+      "names": 626
     },
     {
       "year": "2025",
-      "ticker_days": 2801,
+      "ticker_days": 3848,
       "sessions": 250,
-      "names": 1311
+      "names": 1798
     },
     {
       "year": "2026",
-      "ticker_days": 2070,
+      "ticker_days": 3102,
       "sessions": 160,
-      "names": 1059
+      "names": 1447
     }
   ],
-  "split_days": 46,
-  "reverse_split_flagged": 139
+  "reverse_split_flagged": 344
 }

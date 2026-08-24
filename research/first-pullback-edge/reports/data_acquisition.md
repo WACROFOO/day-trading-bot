@@ -5,6 +5,12 @@ CHECKED 2026-08-24 from this container. Vendor claims are quoted from the
 docs pages named below; everything marked MEASURED was requested and the
 response inspected. Free tiers change — re-run `python3 run.py verify`
 after adding any key rather than trusting this page.
+
+✓ REMEDIATED 2026-08-24 — a free Massive key was supplied and the five
+  decisive checks now PASS. The verification output is below in §2a and in
+  results/provider_verification.json. The Yahoo limitations in
+  data_quality.md are no longer the study's constraint; they are kept there
+  as the record of what was wrong and how it was found.
 ```
 
 **Short answer: one free key does it — Massive (formerly Polygon.io), the
@@ -26,6 +32,45 @@ this study, and no money is needed either.
 | consolidated tape (not one exchange) | **✓** | see §3 | claimed |
 | cost | **$0** | $0 | $0 |
 | throughput | 5 calls/min | 200 calls/min | **25 calls/DAY** |
+
+---
+
+## 2a. MEASURED on a real free key — all five checks pass
+
+`python3 run.py verify --provider polygon`, 2026-08-24:
+
+```
+[1] pre-market VOLUME on 2026-08-21 (AAPL)
+    252 pre-market bars, 252 carry volume            -> PASS
+[2] delisted retention
+    MULN   229 daily bars · SIVBQ  51 daily bars     -> PASS
+    BBBYQ / ATVI  0 bars — both delisted in 2023, i.e. OUTSIDE the free
+    plan's 2-year window. Not a retention failure; a depth limit.
+[3] minute-bar history depth (AAPL)
+     30d back  791 bars ·  90d  866 ·  365d  642 ·  700d  746
+    1200d back    0 bars   -> the 2-year boundary, exactly as documented
+[4] point-in-time symbol list
+    5,000 INACTIVE tickers listed a year ago         -> PASS
+[5] halt feed
+    100 records in the rolling Nasdaq RSS window     -> live
+```
+
+Also measured directly:
+
+| thing | result |
+|---|---|
+| `grouped_daily` on one date | **12,483 tickers in one 1.8s call** |
+| grouped-daily history boundary | 2024-08-26 works, 2024-08-01 returns nothing → **exactly 2 years** |
+| rate limit | **5 calls/min, enforced by HTTP 429** |
+
+**A defect this turn, recorded because it is the kind that hides:** a 429
+comes back as *valid JSON* with no `results` key. `json.loads` succeeds and
+`.get("results", [])` returns an empty list, so a throttled request was
+becoming "no data for this date" — a silent hole in the universe. `_curl2`
+now returns the HTTP status, `PolygonProvider._get` treats 429 and
+`status: ERROR` as retryable, and five poisoned cache entries written before
+the fix were purged. **Status codes are never optional when the error path is
+also valid JSON.**
 
 ---
 
@@ -61,9 +106,13 @@ Four things follow, and they matter:
    symbol: ~500 trading days in two years ≈ **1.7 hours**, versus 22 hours
    if it were 6,742 symbol requests. `PolygonProvider.grouped_daily()` is
    written for exactly this and the throttle is built in.
-3. **Minute bars then cost one call per ticker-day.** 3,000 ticker-days at
-   5/min ≈ **10 hours** — one overnight run, unattended, cached to disk.
-   That is the brief's full sample target on a free key.
+3. **Minute bars cost one call per ticker-MONTH, not per ticker-day.** The
+   aggregate limit is 50,000 bars and a month of 1-minute extended-hours
+   data is ~20,000, so `PolygonProvider.minute_month()` pulls a whole month
+   in one request and serves every day out of it — including the prior
+   sessions the RVOL-at-time denominator needs, which would otherwise have
+   cost three extra calls each. That is the difference between a study that
+   fits the free tier and one that does not.
 4. **`active=false` with a past `date` is the survivorship fix.** It is the
    single thing Yahoo cannot do at any price, and it is on the free plan.
 
