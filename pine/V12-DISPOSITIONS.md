@@ -301,6 +301,52 @@ sit under the lows it connects.
 Display and level-selection only. All ten gate booleans remain byte-identical
 to the V11 base, and the arrays the gates read are unmodified.
 
+### V12.11 - the V9 structure block, restored verbatim
+
+The operator: *"go back to V8 or V9; figure out how you did manage these
+indicators in the chart."* Correct instruction. There is no V8/V9 file in the
+repo, but V11 IS V9.12 (I built it by merging the latest V9 revision with the
+V10 fixes), so its structure block is the V9 code. Lines 2513-2762 of
+`ross_fp_v11.pine` are now in V12, verified byte-identical.
+
+**Three regressions, all mine, each the same mistake.**
+
+1. `extend=extend.both`. V9 draws a level as a horizontal rule across the
+   WHOLE chart, past and future. In V12.4 I called that a bug - "a line
+   extending into empty margin" - and replaced it with finite segments
+   spanning origin-bar to a few bars right of now. It was not a bug. A level
+   is a price that matters everywhere, so it must be visible wherever the
+   operator has scrolled. This is the single biggest reason levels kept
+   reading as detached from the candles.
+
+2. Two levels each side, not one. V9 prints R1/R2 and S1/S2, deduplicated
+   within half an ATR so a cluster shows once, plus the prior-day close
+   dashed. I had narrowed it to one level per side behind an ATR reach cap
+   that could suppress everything - which on DAIC it did, producing "no
+   support neither resistance".
+
+3. Tangent trend lines, not pivot pairs. V9 takes, from each candidate
+   anchor, the MINIMUM slope to any later low - the line that by construction
+   cannot cut through the lows - then keeps it only if two or more lows touch
+   within tolerance. V12.10 demanded two confirmed `ta.pivotlow` pivots,
+   which in a tight range never confirm, so no trend line was drawn at all.
+
+Every one of these came from me taking a single real defect, generalising it
+into a rule, and discarding working code that the rule happened to cover.
+V12.6 (plot-based levels) was the same error. The lesson is narrower fixes,
+and checking the previous version before replacing its approach.
+
+Removed the six inputs that only existed to serve the discarded design
+(`showChartMap`, `srReachATR`, `tlProjectBars`, `maxTLdistATR`,
+`swingLookback`, `tlMaxAgeBars`) so the settings dialog stops offering
+controls that do nothing.
+
+Kept from V12: the marker-location fix, the `sm`/`lg` declaration, the
+`undeclared()` checker rule, and `showContextPlots` (default off) for the
+impulse-peak / HOD / PM-high series the operator called clutter.
+
+All ten gate booleans remain byte-identical to the V11 base.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
