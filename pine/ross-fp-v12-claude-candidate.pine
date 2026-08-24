@@ -667,9 +667,9 @@ bigMarkers           = input.bool(false, "Large signal markers", group=gVisual, 
 // Nothing the strategy TRADES on is affected: entry, stop, T1/T2/T3, the
 // high of day, the position markers and the panel are all independent of
 // these two switches.
-showChartMap         = input.bool(false, "Chart map: S/R levels + trend lines [OFF: under repair]", group=gVisual, display = display.none,
-     tooltip="Turned off after repeated reports that the levels do not match price. The traded levels — entry, stop, targets — are drawn regardless.")
-showSR               = input.bool(true, "  └ nearest resistance/support", group=gVisual, display = display.none)
+showChartMap         = input.bool(true,  "Chart map: MAIN S/R + trend lines", group=gVisual, display = display.none,
+     tooltip="Rebuilt in V12.6: levels are PLOTTED series (bound to their value by TradingView, so they cannot drift from the price they name), and a trend line is not drawn until two confirmed pivots form a genuine higher-low or lower-high pair.")
+showSR               = input.bool(true, "  └ MAIN support / resistance", group=gVisual, display = display.none)
 // V9.6 (operator): automatic trend lines. Downtrend = the line from the
 // swing high across the most recent LOWER high (the breakout line);
 // uptrend = from the swing low across the most recent HIGHER low (the
@@ -2843,289 +2843,200 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // key levels traced, not just the single nearest band. Up to 3 resistances
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
-maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual, display = display.none)
-var array<line> srLines = array.new_line()
-var array<label> srLabels = array.new_label()
-// V9.4: S/R back on the DECISION layer — hiding the key levels behind
-// the diagnostics toggle was over-cleaning (operator, live MMA).
-// V12.2: returns INDICES into src, not a copy of the prices. The caller
-// needs the pivot's bar as well as its price to anchor the line, and a
-// price-only list has already thrown that away.
-f_nearIdx(array<float> src, bool above_, int n_, float tol) =>
-    array<int> picked = array.new_int()
-    array<float> seen = array.new_float()
-    // nearest first: walk the candidates repeatedly, taking the closest
-    // untaken one that is not inside tol of something already taken
-    for pass = 1 to n_
-        int bestI = -1
-        float bestD = 1e20
-        if array.size(src) > 0
-            for i = 0 to array.size(src) - 1
-                float v = array.get(src, i)
-                if (above_ ? v > close : v < close)
-                    bool dup = false
-                    if array.size(seen) > 0
-                        for j = 0 to array.size(seen) - 1
-                            if math.abs(array.get(seen, j) - v) <= tol
-                                dup := true
-                    if not dup
-                        float d = math.abs(v - close)
-                        if d < bestD
-                            bestD := d
-                            bestI := i
-        if bestI >= 0
-            array.push(picked, bestI)
-            array.push(seen, array.get(src, bestI))
-    picked
-if barstate.islast and showSR and showChartMap
-    while array.size(srLines) > 0
-        line.delete(array.pop(srLines))
-    while array.size(srLabels) > 0
-        label.delete(array.pop(srLabels))
-    float tolSR = atr * 0.5
-    // V9.5: both pivot kinds feed both sides (polarity flip) — f_near's
-    // above/below filter assigns the role from the CURRENT price.
-    array<int> resI = f_nearIdx(allPiv, true, maxSRlines, tolSR)
-    array<int> supI = f_nearIdx(allPiv, false, maxSRlines, tolSR)
-    // V12.2: each level now STARTS at the pivot that created it and extends
-    // right only. extend.both drew a rule across the whole chart, including
-    // history the level did not exist in, which is what made every level look
-    // constant and unrelated to price. Labels sit clear of the right edge so
-    // they stop colliding with the trend-line labels.
-    if array.size(resI) > 0
-        for i = 0 to array.size(resI) - 1
-            int    k = array.get(resI, i)
-            float  v = array.get(allPiv, k)
-            int    b = math.min(array.get(allPivBars, k), bar_index - 1)
-            array.push(srLines, line.new(b, v, bar_index + 12, v,
-                 extend=extend.none, color=color.new(color.blue, i == 0 ? 30 : 65),
-                 width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 8, v,
-                 "R" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
-                 style=label.style_none, textcolor=color.new(color.blue, 20), size=size.small))
-    if array.size(supI) > 0
-        for i = 0 to array.size(supI) - 1
-            int    k = array.get(supI, i)
-            float  v = array.get(allPiv, k)
-            int    b = math.min(array.get(allPivBars, k), bar_index - 1)
-            array.push(srLines, line.new(b, v, bar_index + 12, v,
-                 extend=extend.none, color=color.new(color.purple, i == 0 ? 30 : 65),
-                 width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 8, v,
-                 "S" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
-                 style=label.style_none, textcolor=color.new(color.purple, 20), size=size.small))
-    if not na(prevDayClose)
-        array.push(srLines, line.new(bar_index - 60, prevDayClose, bar_index + 12, prevDayClose,
-             extend=extend.none, color=color.new(color.gray, 55), style=line.style_dashed))
-        array.push(srLabels, label.new(bar_index + 8, prevDayClose,
-             "prev close " + str.tostring(prevDayClose, format.mintick),
-             style=label.style_none, textcolor=color.new(color.gray, 30), size=size.small))
+// V12.6: reach and projection, the only two numbers the structure map needs.
+srReachATR   = input.float(6.0, "Structure reach (ATR) — ignore levels beyond", minval=1.0, maxval=40.0, step=0.5, group=gVisual, display = display.none,
+     tooltip="A level twenty ATR away is not structure the next few minutes will meet. Beyond this distance no MAIN level is drawn at all.")
+tlProjectBars = input.int(20, "Trend-line forward projection (bars)", minval=0, maxval=120, group=gVisual, display = display.none,
+     tooltip="Finite. Earlier versions used extend.right, which on a chart with an untraded right margin drew a line across empty space and nothing else.")
+// ═══════════════════ V12.6 STRUCTURE MAP (rebuilt) ═══════════════════════
+// Five previous attempts fixed real geometry defects and still produced
+// levels the operator called wrong. This is a rebuild on a different
+// architecture, per the Codex V12.6 spec:
+//
+//   "Plot-based MAIN/trend series provide a historical rendering backstop;
+//    last-bar drawing objects remain responsible for labels and projection."
+//
+// That is the load-bearing idea. A plot() is bound to its series value by
+// TradingView itself — it cannot sit at a price other than the number it
+// carries, at any zoom, on any bar. Every previous version drew levels ONLY
+// as line objects created on the last bar, which is where the drift and the
+// label/position disagreements lived. Now the level IS a plotted series and
+// the drawing objects only add a name and a forward projection.
+//
+// Two more rules from the same spec, both aimed at fabricated structure:
+//   - MAIN R/S is the CLOSEST ELIGIBLE CONFIRMED level, and it names its
+//     source. A level with no provenance is not drawn.
+//   - A trend line is not fabricated until TWO qualifying confirmed pivots
+//     exist — a genuine higher-low pair, or lower-high pair. No tangent
+//     fitting, no candle-touch counting: those manufacture a line out of any
+//     price series, which is exactly how a $13.70 stock got a line at $12.97.
 
-// V12.2: the nearest-R / nearest-S BOXES are removed. They drew the SAME
-// level a second time — R1 and S1 already are the nearest levels — as a
-// shaded band with extend.both, so the chart carried two renderings of one
-// price, one of them a rule across the entire history. The anchored R1/S1
-// lines above carry the same information and show which swing made it.
+// ── MAIN support / resistance, with provenance ───────────────────────────
+// Candidates are facts, not fits: confirmed pivots (srPivotLen bars each
+// side, so they cannot repaint), the prior day's close, the pre-market high
+// and the high of day.
+f_lastPivotAbove(array<float> src, float px, float lim) =>
+    float best = na
+    if array.size(src) > 0
+        for i = 0 to array.size(src) - 1
+            float v = array.get(src, i)
+            if v > px and v - px <= lim and (na(best) or v < best)
+                best := v
+    best
 
-// ── V9.6 TREND LINES (operator) ─────────────────────────────────────────
-// Downtrend line: anchored at the HIGHEST pivot high in the window, drawn
-// through the most recent LOWER pivot high after it — the line a breakout
-// has to break. Uptrend line: the mirror on pivot lows — the line whose
-// loss ends the trend. Both extend right; the label names the line and
-// flips to BROKEN the moment the close is through it, so breakouts and
-// trend failures read off the chart without measuring anything.
-var line dnTL = na
-var line upTL = na
-var label dnTLlab = na
-var label upTLlab = na
-if barstate.islast and showTrendLine and showChartMap
-    if not na(dnTL)
-        line.delete(dnTL)
-        dnTL := na
-    if not na(upTL)
-        line.delete(upTL)
-        upTL := na
-    if not na(dnTLlab)
-        label.delete(dnTLlab)
-        dnTLlab := na
-    if not na(upTLlab)
-        label.delete(upTLlab)
-        upTLlab := na
-    // V9.10 TREND LINES — tangent geometry (V9.8) + SCORED ANCHORS.
-    // Live SDOT: on a name that doubled intraday, the tangent from the
-    // session low sat $5 under price — correct geometry describing a leg
-    // that ended hours ago. A trend line is only useful if it describes
-    // the CURRENT leg, so every candidate swing anchor is now scored and
-    // the best line wins:
-    //   touches  bars whose low sits ON the line (within 0.2 ATR) — a
-    //            line with 4 touches is real structure, 2 is a guess
-    //   distance how far the projected line sits from price, in ATR —
-    //            a line 10 ATR away cannot be broken, so it says nothing
-    //   score    touches * 2 - distance   (structure first, then relevance)
-    // The winner is still a TANGENT from its anchor: it can touch price
-    // and never cut it, so only LIVE price breaks it. No candidate with
-    // >= 2 touches and a valid slope = no line, honestly.
-    int nB = array.size(tlBars)
-    if nB >= 20
-        int fromB = tlLookback > 0 ? math.max(0, nB - tlLookback) : 0
-        float tolTL = math.max(atr * 0.20, syminfo.mintick)
-        // ── uptrend: candidate anchors = local lows + the session low ──
-        array.clear(tlCand)
-        for i = fromB + 2 to nB - 9
-            bool isMin = true
-            for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
-                if array.get(tlLows, j) < array.get(tlLows, i)
-                    isMin := false
-            if isMin
-                array.push(tlCand, i)
-        while array.size(tlCand) > 10
-            array.shift(tlCand)
-        int dayLoI = fromB
-        for i = fromB + 1 to nB - 9
-            if array.get(tlLows, i) < array.get(tlLows, dayLoI)
-                dayLoI := i
-        array.push(tlCand, dayLoI)
-        float bestScore = na
-        int bestA = -1
-        float bestSlope = na
-        int bestTouch = -1
-        if array.size(tlCand) > 0
-            for ci = 0 to array.size(tlCand) - 1
-                int a = array.get(tlCand, ci)
-                int barA = array.get(tlBars, a)
-                float lowA = array.get(tlLows, a)
-                float sl = na
-                int tch = -1
-                for k = a + 2 to nB - 1
-                    float s = (array.get(tlLows, k) - lowA) / (array.get(tlBars, k) - barA)
-                    if na(sl) or s < sl
-                        sl := s
-                        tch := k
-                if not na(sl) and sl >= 0 and tch > 0
-                    int touches = 1
-                    for k = a + 2 to nB - 1
-                        float lineK = lowA + sl * (array.get(tlBars, k) - barA)
-                        if math.abs(array.get(tlLows, k) - lineK) <= tolTL
-                            touches += 1
-                    float lineNow = lowA + sl * (bar_index - barA)
-                    float distATR = f_safeDiv(close - lineNow, atr, 99.0)
-                    // V12.4: distance is no longer a capped penalty. Capped
-                    // at 20, a far line with many touches always won; the cap
-                    // is what let an irrelevant line outscore a relevant one.
-                    float score = touches * 2.0 - math.abs(distATR) * 3.0
-                    if touches >= 2 and (na(bestScore) or score > bestScore)
-                        bestScore := score
-                        bestA := a
-                        bestSlope := sl
-                        bestTouch := tch
-        // V12.4: hard relevance gate — the line must be near the price it
-        // claims to describe, not merely the best-scoring of a bad field.
-        float upNowChk = bestA >= 0 ?
-             array.get(tlLows, bestA) + bestSlope * (bar_index - array.get(tlBars, bestA)) : na
-        if bestA >= 0 and not na(upNowChk) and
-             math.abs(close - upNowChk) > maxTLdistATR * atr
-            bestA := -1
-        if bestA >= 0
-            float lowA2 = array.get(tlLows, bestA)
-            float upNow = lowA2 + bestSlope * (bar_index - array.get(tlBars, bestA))
-            bool upLost = close < upNow
-            // V12.3 (operator): the line ENDS AT THE LAST BAR. It used to be
-            // drawn between two past pivots and then extend.right, so it was
-            // projected forever into the future — and on a chart with an
-            // untraded right margin the projection was the only part visible,
-            // a line crossing empty space touching no candle. A trend line
-            // describes the leg that exists; it does not forecast one.
-            upTL := line.new(array.get(tlTimes, bestA), lowA2, time, upNow,
-                 xloc=xloc.bar_time, extend=extend.none,
-                 color=color.new(color.teal, upLost ? 70 : 25),
-                 style=upLost ? line.style_dashed : line.style_solid, width=2)
-            // nudged below the line end so the two trend labels cannot land
-            // on the same pixel when the lines converge
-            upTLlab := label.new(time, upNow - atr * 0.25,
-                 upLost ? "uptrend LOST ▼" : "uptrend",
-                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
-        // ── downtrend: mirror, candidates = local highs + the session high ──
-        array.clear(tlCand)
-        for i = fromB + 2 to nB - 9
-            bool isMax = true
-            for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
-                if array.get(tlHighs, j) > array.get(tlHighs, i)
-                    isMax := false
-            if isMax
-                array.push(tlCand, i)
-        while array.size(tlCand) > 10
-            array.shift(tlCand)
-        int dayHiI = fromB
-        for i = fromB + 1 to nB - 9
-            if array.get(tlHighs, i) > array.get(tlHighs, dayHiI)
-                dayHiI := i
-        array.push(tlCand, dayHiI)
-        float bestScoreD = na
-        int bestAD = -1
-        float bestSlopeD = na
-        int bestTouchD = -1
-        if array.size(tlCand) > 0
-            for ci = 0 to array.size(tlCand) - 1
-                int a = array.get(tlCand, ci)
-                int barA = array.get(tlBars, a)
-                float highA = array.get(tlHighs, a)
-                float sl = na
-                int tch = -1
-                for k = a + 2 to nB - 1
-                    float s = (array.get(tlHighs, k) - highA) / (array.get(tlBars, k) - barA)
-                    if na(sl) or s > sl
-                        sl := s
-                        tch := k
-                if not na(sl) and sl <= 0 and tch > 0
-                    int touches = 1
-                    for k = a + 2 to nB - 1
-                        float lineK = highA + sl * (array.get(tlBars, k) - barA)
-                        if math.abs(array.get(tlHighs, k) - lineK) <= tolTL
-                            touches += 1
-                    float lineNow = highA + sl * (bar_index - barA)
-                    float distATR = f_safeDiv(lineNow - close, atr, 99.0)
-                    // V12.4: distance is no longer a capped penalty. Capped
-                    // at 20, a far line with many touches always won; the cap
-                    // is what let an irrelevant line outscore a relevant one.
-                    float score = touches * 2.0 - math.abs(distATR) * 3.0
-                    if touches >= 2 and (na(bestScoreD) or score > bestScoreD)
-                        bestScoreD := score
-                        bestAD := a
-                        bestSlopeD := sl
-                        bestTouchD := tch
-        // V12.4: same hard relevance gate on the downtrend line.
-        float dnNowChk = bestAD >= 0 ?
-             array.get(tlHighs, bestAD) + bestSlopeD * (bar_index - array.get(tlBars, bestAD)) : na
-        if bestAD >= 0 and not na(dnNowChk) and
-             math.abs(close - dnNowChk) > maxTLdistATR * atr
-            bestAD := -1
-        if bestAD >= 0
-            float highA2 = array.get(tlHighs, bestAD)
-            float dnNow = highA2 + bestSlopeD * (bar_index - array.get(tlBars, bestAD))
-            bool dnBroken = close > dnNow
-            // V12.3: same — terminate at the last bar, label nudged above.
-            dnTL := line.new(array.get(tlTimes, bestAD), highA2, time, dnNow,
-                 xloc=xloc.bar_time, extend=extend.none,
-                 color=color.new(color.red, dnBroken ? 70 : 25),
-                 style=dnBroken ? line.style_dashed : line.style_solid, width=2)
-            dnTLlab := label.new(time, dnNow + atr * 0.25,
-                 dnBroken ? "downtrend BROKEN ▲" : "downtrend",
-                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
+f_lastPivotBelow(array<float> src, float px, float lim) =>
+    float best = na
+    if array.size(src) > 0
+        for i = 0 to array.size(src) - 1
+            float v = array.get(src, i)
+            if v < px and px - v <= lim and (na(best) or v > best)
+                best := v
+    best
 
-plot(showDiagnostics and showTrendLines ? ema9 : na, "EMA9", color=color.new(color.blue, 20), display = display.pane)
-plot(showDiagnostics and showTrendLines ? ema20 : na, "EMA20", color=color.new(color.orange, 20), display = display.pane)
-plot(showDiagnostics and showTrendLines ? vwapValue : na, "VWAP", color=color.new(color.purple, 20), display = display.pane)
+// A level beyond this is not structure the next few minutes will meet.
+float srReach = atr * srReachATR
 
-plot(debugMode and activeStructure ? pushStartPrice : na, "DEBUG impulse start", color=color.gray, style=plot.style_linebr, display = display.pane)
-plot(debugMode and activeStructure ? pushStartPrice + pushRange * 0.5 : na, "DEBUG 50% level", color=color.new(color.orange, 40), style=plot.style_linebr, display = display.pane)
+float pivR = f_lastPivotAbove(allPiv, close, srReach)
+float pivS = f_lastPivotBelow(allPiv, close, srReach)
 
-// V4.9: marker glyphs are fixed PIXELS in Pine — they cannot follow a
-// price zoom, and their size must be a compile-time constant. Two const
-// sets, picked by a boolean, rather than pretending a variable works.
-sm = showMarkers and not bigMarkers
-lg = showMarkers and bigMarkers
+// resistance candidates, nearest wins; each carries where it came from
+float mainR = pivR
+string mainRsrc = na(pivR) ? "" : "pivot"
+if not na(dayHigh) and dayHigh > close and dayHigh - close <= srReach and
+     (na(mainR) or dayHigh < mainR)
+    mainR := dayHigh
+    mainRsrc := "HOD"
+if not na(pmHigh) and pmHigh > close and pmHigh - close <= srReach and
+     (na(mainR) or pmHigh < mainR)
+    mainR := pmHigh
+    mainRsrc := "PM high"
+if not na(prevDayClose) and prevDayClose > close and prevDayClose - close <= srReach and
+     (na(mainR) or prevDayClose < mainR)
+    mainR := prevDayClose
+    mainRsrc := "prev close"
+
+float mainS = pivS
+string mainSsrc = na(pivS) ? "" : "pivot"
+if not na(prevDayClose) and prevDayClose < close and close - prevDayClose <= srReach and
+     (na(mainS) or prevDayClose > mainS)
+    mainS := prevDayClose
+    mainSsrc := "prev close"
+
+bool srOn = showChartMap and showSR
+// THE LEVELS THEMSELVES ARE PLOTS. Bound to their value by construction.
+plot(srOn and not na(mainR) ? mainR : na, "MAIN resistance",
+     color=color.new(color.blue, 15), linewidth=2, style=plot.style_linebr, display=display.pane)
+plot(srOn and not na(mainS) ? mainS : na, "MAIN support",
+     color=color.new(color.purple, 15), linewidth=2, style=plot.style_linebr, display=display.pane)
+
+// ── trend lines: two confirmed pivots, or nothing ────────────────────────
+// An uptrend line needs a HIGHER LOW: two confirmed pivot lows, the later
+// one above the earlier. A downtrend line needs a LOWER HIGH. If the pair
+// does not exist, no line exists — that is the whole anti-fabrication rule.
+f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
+    int n = array.size(vals)
+    float p1 = na
+    float p2 = na
+    int   b1 = na
+    int   b2 = na
+    if n >= 2
+        p2 := array.get(vals, n - 1)
+        b2 := array.get(bars_, n - 1)
+        // Ascending loop, keeping the LAST qualifying pivot. A descending
+        // `for i = n - 2 to 0` relies on Pine inferring a negative step,
+        // which is exactly the kind of assumption that has cost this file a
+        // compile round already. Ascend and overwrite instead.
+        for i = 0 to n - 2
+            float pv = array.get(vals, i)
+            bool ok = wantRising ? p2 > pv : p2 < pv
+            if ok
+                p1 := pv
+                b1 := array.get(bars_, i)
+    [p1, b1, p2, b2]
+
+[upP1, upB1, upP2, upB2] = f_pairSlope(pivLows, pivLowBars, true)
+[dnP1, dnB1, dnP2, dnB2] = f_pairSlope(pivHighs, pivHighBars, false)
+
+float upSlope = not na(upP1) and upB2 != upB1 ? (upP2 - upP1) / (upB2 - upB1) : na
+float dnSlope = not na(dnP1) and dnB2 != dnB1 ? (dnP2 - dnP1) / (dnB2 - dnB1) : na
+float upLine = not na(upSlope) ? upP1 + upSlope * (bar_index - upB1) : na
+float dnLine = not na(dnSlope) ? dnP1 + dnSlope * (bar_index - dnB1) : na
+
+// relevance: a line far from price describes nothing, whatever its fit
+bool upRelevant = not na(upLine) and math.abs(close - upLine) <= maxTLdistATR * atr
+bool dnRelevant = not na(dnLine) and math.abs(close - dnLine) <= maxTLdistATR * atr
+
+// break state is CLOSE-confirmed and persists; it is not re-decided by a wick
+var bool upBroken = false
+var bool dnBroken = false
+if newDayBar
+    upBroken := false
+    dnBroken := false
+if barstate.isconfirmed and not na(upLine) and close < upLine
+    upBroken := true
+if barstate.isconfirmed and not na(upLine) and close > upLine
+    upBroken := false
+if barstate.isconfirmed and not na(dnLine) and close > dnLine
+    dnBroken := true
+if barstate.isconfirmed and not na(dnLine) and close < dnLine
+    dnBroken := false
+
+bool tlOn = showChartMap and showTrendLine
+plot(tlOn and upRelevant ? upLine : na, "Uptrend (higher lows)",
+     color=color.new(color.teal, upBroken ? 70 : 20), linewidth=2, style=plot.style_linebr, display=display.pane)
+plot(tlOn and dnRelevant ? dnLine : na, "Downtrend (lower highs)",
+     color=color.new(color.red, dnBroken ? 70 : 20), linewidth=2, style=plot.style_linebr, display=display.pane)
+
+// ── last bar only: names, and a FINITE forward projection ────────────────
+var label mainRlab = na
+var label mainSlab = na
+var line  upProj = na
+var line  dnProj = na
+var label upLab = na
+var label dnLab = na
+if barstate.islast
+    if not na(mainRlab)
+        label.delete(mainRlab)
+    if not na(mainSlab)
+        label.delete(mainSlab)
+    if not na(upProj)
+        line.delete(upProj)
+    if not na(dnProj)
+        line.delete(dnProj)
+    if not na(upLab)
+        label.delete(upLab)
+    if not na(dnLab)
+        label.delete(dnLab)
+    if srOn and not na(mainR)
+        mainRlab := label.new(bar_index + 3, mainR,
+             "R " + str.tostring(mainR, format.mintick) + " · " + mainRsrc,
+             xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
+             textcolor=color.new(color.blue, 10), size=size.small)
+    if srOn and not na(mainS)
+        mainSlab := label.new(bar_index + 3, mainS,
+             "S " + str.tostring(mainS, format.mintick) + " · " + mainSsrc,
+             xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
+             textcolor=color.new(color.purple, 10), size=size.small)
+    if tlOn and upRelevant
+        float upAhead = upP1 + upSlope * (bar_index + tlProjectBars - upB1)
+        upProj := line.new(bar_index, upLine, bar_index + tlProjectBars, upAhead,
+             xloc=xloc.bar_index, extend=extend.none, style=line.style_dotted,
+             color=color.new(color.teal, 55), width=1)
+        upLab := label.new(bar_index + tlProjectBars, upAhead,
+             upBroken ? "uptrend lost" : "uptrend",
+             xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
+             textcolor=color.new(upBroken ? color.orange : color.teal, 15), size=size.small)
+    if tlOn and dnRelevant
+        float dnAhead = dnP1 + dnSlope * (bar_index + tlProjectBars - dnB1)
+        dnProj := line.new(bar_index, dnLine, bar_index + tlProjectBars, dnAhead,
+             xloc=xloc.bar_index, extend=extend.none, style=line.style_dotted,
+             color=color.new(color.red, 55), width=1)
+        dnLab := label.new(bar_index + tlProjectBars, dnAhead,
+             dnBroken ? "downtrend broken" : "downtrend",
+             xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
+             textcolor=color.new(dnBroken ? color.lime : color.red, 15), size=size.small)
+
+
 // V5: retest triggers get their own glyph so the two setups are separable on
 // the chart and, later, in the trade log.
 // V12.1 (operator: markers "don't sync with the graph and remain unusable when

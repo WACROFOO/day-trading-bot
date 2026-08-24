@@ -120,6 +120,38 @@ the same pixel when the lines converge — that was the garbled
 Display-only again, verified: all ten gate booleans byte-identical to the
 Codex base.
 
+### V12.6 — the structure map, rebuilt
+
+Five attempts each fixed a real defect and the levels were still reported
+wrong. This is a rebuild on a different architecture, taken from Codex's
+V12.6.2 spec (the file itself never arrived — three pastes carried its header
+comments only — so the design is implemented from that spec, not merged).
+
+**The load-bearing change.** Codex: *"Plot-based MAIN/trend series provide a
+historical rendering backstop; last-bar drawing objects remain responsible for
+labels and projection."* Every level is now a **plotted series**. A  is
+bound to its value by TradingView itself — it cannot sit at a price other than
+the number it carries, at any zoom, on any bar. Every earlier version drew
+levels only as  objects created on the last bar, and that is where the
+drift and the label/position disagreements lived.
+
+**Anti-fabrication.** A trend line is not drawn until **two confirmed pivots**
+form a genuine higher-low or lower-high pair. The old tangent/touch-count
+fitting manufactures a line out of any price series — which is how a $13.70
+stock got a line at $12.97. Slope comes from the pair, projection is finite
+(, default 20), and the break state is close-confirmed and
+persistent rather than re-decided by a wick.
+
+**Provenance.** MAIN R and MAIN S are the closest eligible level and they name
+their source — , , , . Anything beyond
+ (default 6 ATR) is not structure the next few minutes will meet
+and is not drawn at all.
+
+Zero  and zero  remain in live code. Every drawing
+object's coordinates are explicit /price pairs.
+
+Gate booleans: all ten still byte-identical to the Codex V11 base.
+
 Item 3 is the second time this bug was fixed. The V12 fix corrected the
 `BOUGHT`/`SOLD` **labels** (`yloc`) but left the twelve `plotshape` **markers**
 on bar-relative locations. Same defect class, different API, and I did not
