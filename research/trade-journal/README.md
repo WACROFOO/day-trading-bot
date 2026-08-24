@@ -69,9 +69,18 @@ score-basket died (`research/momentum-replication/reports/2026-08-score-basket.m
 
 ## Current state
 
-Journal: 1 trade — XPON 2026-08-24, classified OFF-PATTERN by the audit
-(bounce, not a first-pullback). The ledger needs n>=30 before any
-threshold moves.
+Journal: 3 trades, all 2026-08-24, all classified **OFF-PATTERN** by
+the audit — net −24.46$. XPON 08:52 (+0.54), BTCT 10:27 scratch, BTCT
+10:36 (−25.00). The audit's verdict is the same each time: no push/dip
+structure at the entry minute. Two of the three bought a lower high
+into a rolling-over move.
+
+The −25.00 is a **sizing** finding, not a gate finding: on the ~500$
+balance, 2% is 10$ (PARAMETERS.md §7) and the daily cap is 6% = 30$
+(§8). 100 shares at 2.67 with the dip low at 2.60 was 142 shares' worth
+of stop distance taken at 100 shares with no stop placed. Nothing here
+moves a threshold — OFF-PATTERN is the engine agreeing it was not the
+setup, which is the loop working, not the loop objecting.
 
 Paper only. The loop improves the tool's honesty and calibration; it
 does not create an edge that the 894-session replication says is not

@@ -1,2 +1,4 @@
 date,sym,side,entry_hhmm,entry,exit_hhmm,exit,shares,pnl,note
 2026-08-24,XPON,long,08:52,7.87,08:53,8.41,1,0.54,"1-share test, pre-market micro pullback"
+2026-08-24,BTCT,long,10:27,2.72,10:27,2.72,1,0.0,"1-share test, scratch"
+2026-08-24,BTCT,long,10:36,2.67,10:37,2.42,100,-25.0,entry minute inferred from tape (2.67 in 10:34/35/36/37 bars); exit 2.42 in the 10:37 bar
