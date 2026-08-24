@@ -22,6 +22,7 @@ results/
 # 30 asks for them by name). The 121MB bar cache under data/cache/ is NOT —
 # it is regenerable from the provider and is excluded below.
 !research/first-pullback-edge/data/*.csv
+!research/first-pullback-edge/data/halts.csv
 !research/first-pullback-edge/data/*.parquet
 !research/first-pullback-edge/results/
 !research/first-pullback-edge/results/*.csv

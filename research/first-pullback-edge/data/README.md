@@ -11,6 +11,7 @@ either fetched market data or the output of a `run.py` stage.
 | `rejected_setups.{parquet,csv}` | EVERY candidate the detector saw with each gate's verdict, traded or not. This is what makes the rejected-trade analysis possible | `run.py ablation` |
 | `missed_entries.{parquet,csv}` | stop-limit orders that triggered but could not fill inside the limit offset | `run.py ablation` |
 | `placebo_trades.{parquet,csv}` | the null-test ledger: pullback number, shifted triggers | `run.py placebo` |
+| `halts.csv` | accumulated LULD halts from the free Nasdaq RSS feed — halt time to the millisecond, resumption time, reason code. **Forward-only**: the feed is a rolling ~100-record window with no archive, so this builds from the day the poller starts and cannot backfill | `python3 -m src.halt_poller` |
 | `symbol_pool.json` | current Nasdaq/NYSE/AMEX listings (6,742). **Survivorship-biased snapshot** — not committed, regenerate with `--refresh-pool` | `run.py universe` |
 | `cache/` | provider bar cache, ~121MB, regenerable. Not committed | `src/data.py` |
 
