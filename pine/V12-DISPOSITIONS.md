@@ -257,6 +257,50 @@ run against new code.
 Display-only: all ten gate booleans still byte-identical to the V11 base.
 Still not compiled here - TradingView remains the only real compiler.
 
+### V12.10 - stale structure: why DAIC showed a useless line and no support
+
+The V12.9 geometry held (R 2.4500 sat on 2.45, S 1.8050 on 1.805), but the
+levels it chose were the wrong ones. Three causes, each reproduced before
+being fixed.
+
+**1. The pivot arrays are never reset per session.** `pivHighs` / `pivLows`
+keep the last 40 confirmed pivots whenever they happened. On DAIC, +449% on
+the day, that array still carried pivots from when the stock traded near
+$0.40. A level from a different price regime is not structure. Fixed with a
+day-scoped copy for the structure map only - the shared arrays also feed the
+confluence gate, so they are untouched and every gate boolean still behaves
+identically.
+
+**2. No support existed because a strict pivot needs clearance on both
+sides.** In a tight range none confirm, so the map reported nothing while
+price was visibly bouncing off a shelf. DAIC's obvious floor was ~2.15; the
+nearest confirmed pivot below was 1.805, half a dollar away and useless. The
+extreme of a recent window is a real level whether or not a pivot confirmed
+on it, so the swing high/low over `swingLookback` (20) bars now competes as a
+candidate and names itself "20-bar low".
+
+**3. The rising line was expired, not wrong.** My first explanation - that
+the pair-finder picked a bad anchor - was incorrect, and porting both the old
+and new function to Python disproved it: on that pivot pattern they choose
+the same anchor. The actual cause is staleness. The newest pivot low was 80
+bars old; its slope was measured across 15 bars and extrapolated 95 more, so
+a line built from 1.62 -> 1.80 was still being drawn at 2.76 against a price
+of 2.34, sweeping up through the entire consolidation. Nothing was wrong with
+the pair; the line had run out and no rule said so.
+
+Two guards, verified on the reproduction: FRESHNESS - expire a line whose
+newest anchor is older than `tlMaxAgeBars` (60). REACH - project at most one
+anchor-span past the newest pivot (measure 15, project 15, not 95), and if
+that reach is already behind the current bar, draw nothing. DAIC's line fails
+both independently; a current line (pivots 5 bars back) passes both.
+
+Also: structure reach tightened from 6 ATR to 3 ATR, and trend pairs are now
+validated so no intermediate pivot violates the line - an uptrend line must
+sit under the lows it connects.
+
+Display and level-selection only. All ten gate booleans remain byte-identical
+to the V11 base, and the arrays the gates read are unmodified.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its

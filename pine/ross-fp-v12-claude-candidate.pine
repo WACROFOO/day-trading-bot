@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.9 (finite-line structure · paper only)", shorttitle="ROSS FP V12.9", overlay=true,
+strategy("ROSS First Pullback Strategy V12.10 (day-scoped structure · paper only)", shorttitle="ROSS FP V12.10", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -2849,8 +2849,10 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
 // V12.6: reach and projection, the only two numbers the structure map needs.
-srReachATR   = input.float(6.0, "Structure reach (ATR) — ignore levels beyond", minval=1.0, maxval=40.0, step=0.5, group=gVisual, display = display.none,
+srReachATR   = input.float(3.0, "Structure reach (ATR) — ignore levels beyond", minval=1.0, maxval=40.0, step=0.5, group=gVisual, display = display.none,
      tooltip="A level twenty ATR away is not structure the next few minutes will meet. Beyond this distance no MAIN level is drawn at all.")
+tlMaxAgeBars  = input.int(60, "Trend line expires if its newest pivot is older than N bars", minval=10, maxval=400, group=gVisual, display = display.none)
+swingLookback = input.int(20, "Consolidation window (bars) for the swing high / low level", minval=5, maxval=200, group=gVisual, display = display.none)
 tlProjectBars = input.int(20, "Trend-line forward projection (bars)", minval=0, maxval=120, group=gVisual, display = display.none,
      tooltip="Finite. Earlier versions used extend.right, which on a chart with an untraded right margin drew a line across empty space and nothing else.")
 // ═══════════════════ V12.9 STRUCTURE MAP (finite lines) ══════════════════
@@ -2930,8 +2932,40 @@ f_nearBelow(array<float> vals, array<int> bars_, float px, float buf, float lim)
                 bb := array.get(bars_, i)
     [bp, bb]
 
-[pivR, pivRbar] = f_nearAbove(allPiv, allPivBars, close, srBuf, srReach)
-[pivS, pivSbar] = f_nearBelow(allPiv, allPivBars, close, srBuf, srReach)
+// ── TODAY'S pivots only ──────────────────────────────────────────────────
+// pivHighs / pivLows are never reset per session: they hold the last 40
+// confirmed pivots whenever they happened. On DAIC (+449% on the day) that
+// array still carried pivots from when the stock traded near $0.40, and a
+// level from a different price regime is not structure — it is noise that
+// outvotes today's.
+//
+// Those arrays also feed the confluence gate, so they are NOT modified here.
+// The structure map filters its own day-scoped copy instead, which keeps
+// every gate boolean's behaviour identical.
+var array<float> dayPiv     = array.new_float()
+var array<int>   dayPivBars = array.new_int()
+array.clear(dayPiv)
+array.clear(dayPivBars)
+if array.size(allPiv) > 0 and not na(dayStartBar)
+    for i = 0 to array.size(allPiv) - 1
+        if array.get(allPivBars, i) >= dayStartBar
+            array.push(dayPiv, array.get(allPiv, i))
+            array.push(dayPivBars, array.get(allPivBars, i))
+
+[pivR, pivRbar] = f_nearAbove(dayPiv, dayPivBars, close, srBuf, srReach)
+[pivS, pivSbar] = f_nearBelow(dayPiv, dayPivBars, close, srBuf, srReach)
+
+// ── the consolidation edge ───────────────────────────────────────────────
+// A strict pivot needs srPivotLen bars of separation on BOTH sides, so in a
+// tight range none confirm and the map reports "no support" while price is
+// visibly bouncing off a shelf. DAIC: the obvious floor was ~2.15, and the
+// nearest confirmed pivot below was 1.805 — half a dollar away and useless.
+// The extreme of the recent window is a real level whether or not a pivot
+// ever confirmed on it.
+float swingHi = ta.highest(high, swingLookback)
+float swingLo = ta.lowest(low, swingLookback)
+int   swingHiBar = bar_index - ta.highestbars(high, swingLookback)
+int   swingLoBar = bar_index - ta.lowestbars(low, swingLookback)
 
 float  mainR    = pivR
 int    mainRbar = pivRbar
@@ -2951,6 +2985,11 @@ if not na(prevDayClose) and prevDayClose > close + srBuf and prevDayClose - clos
     mainR    := prevDayClose
     mainRbar := dayStartBar
     mainRsrc := "prev close"
+if not na(swingHi) and swingHi > close + srBuf and swingHi - close <= srReach and
+     (na(mainR) or swingHi < mainR)
+    mainR    := swingHi
+    mainRbar := swingHiBar
+    mainRsrc := str.tostring(swingLookback) + "-bar high"
 
 float  mainS    = pivS
 int    mainSbar = pivSbar
@@ -2965,13 +3004,26 @@ if not na(prevDayClose) and prevDayClose < close - srBuf and close - prevDayClos
     mainS    := prevDayClose
     mainSbar := dayStartBar
     mainSsrc := "prev close"
+if not na(swingLo) and swingLo < close - srBuf and close - swingLo <= srReach and
+     (na(mainS) or swingLo > mainS)
+    mainS    := swingLo
+    mainSbar := swingLoBar
+    mainSsrc := str.tostring(swingLookback) + "-bar low"
 
 // ── trend lines: two confirmed pivots, or nothing ────────────────────────
 // An uptrend line needs a HIGHER LOW: two confirmed pivot lows, the later one
 // above the earlier. A downtrend line needs a LOWER HIGH. If the pair does
 // not exist, no line exists — that is the whole anti-fabrication rule, and it
 // is why a $13.70 stock can no longer be given a line at $12.97.
-f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
+
+// A pair is only a trend line if NOTHING BETWEEN THE ANCHORS VIOLATES IT.
+// f_pairSlope took the first pair with the right ordering, so on DAIC it
+// anchored a rising line on a 1.42 low and drove it straight through an hour
+// of candles above. An uptrend line must sit UNDER the lows it connects;
+// every intermediate pivot low has to be on or above it. Validation uses the
+// stored pivots rather than historical bar access, so it needs no dynamic
+// [bar_index - i] offsets and cannot provoke a max_bars_back error.
+f_trendPair(array<float> vals, array<int> bars_, bool wantRising, float tol) =>
     int n = array.size(vals)
     float p1 = na
     float p2 = na
@@ -2980,31 +3032,78 @@ f_pairSlope(array<float> vals, array<int> bars_, bool wantRising) =>
     if n >= 2
         p2 := array.get(vals, n - 1)
         b2 := array.get(bars_, n - 1)
-        // Ascending loop keeping the LAST qualifying pivot. A descending
-        // `for i = n - 2 to 0` relies on Pine inferring a negative step,
-        // which is the kind of assumption that has already cost this file a
-        // compile round-trip. Ascend and overwrite instead.
         for i = 0 to n - 2
             float pv = array.get(vals, i)
-            bool ok = wantRising ? p2 > pv : p2 < pv
-            if ok
-                p1 := pv
-                b1 := array.get(bars_, i)
+            int   bv = array.get(bars_, i)
+            bool ordered = wantRising ? p2 > pv : p2 < pv
+            if ordered and b2 > bv
+                float sl = (p2 - pv) / (b2 - bv)
+                bool clean = true
+                for j = i + 1 to n - 2
+                    int   bj = array.get(bars_, j)
+                    float vj = array.get(vals, j)
+                    float lv = pv + sl * (bj - bv)
+                    if wantRising and vj < lv - tol
+                        clean := false
+                    if not wantRising and vj > lv + tol
+                        clean := false
+                if clean
+                    p1 := pv
+                    b1 := bv
     [p1, b1, p2, b2]
 
-[upP1, upB1, upP2, upB2] = f_pairSlope(pivLows, pivLowBars, true)
-[dnP1, dnB1, dnP2, dnB2] = f_pairSlope(pivHighs, pivHighBars, false)
+// today's pivots only, for the same reason the S/R ladder is day-scoped
+var array<float> dayLo     = array.new_float()
+var array<int>   dayLoBars = array.new_int()
+var array<float> dayHi     = array.new_float()
+var array<int>   dayHiBars = array.new_int()
+array.clear(dayLo)
+array.clear(dayLoBars)
+array.clear(dayHi)
+array.clear(dayHiBars)
+if array.size(pivLows) > 0 and not na(dayStartBar)
+    for i = 0 to array.size(pivLows) - 1
+        if array.get(pivLowBars, i) >= dayStartBar
+            array.push(dayLo, array.get(pivLows, i))
+            array.push(dayLoBars, array.get(pivLowBars, i))
+if array.size(pivHighs) > 0 and not na(dayStartBar)
+    for i = 0 to array.size(pivHighs) - 1
+        if array.get(pivHighBars, i) >= dayStartBar
+            array.push(dayHi, array.get(pivHighs, i))
+            array.push(dayHiBars, array.get(pivHighBars, i))
 
-bool  upValid = not na(upP1) and not na(upB1) and upB2 > upB1
-bool  dnValid = not na(dnP1) and not na(dnB1) and dnB2 > dnB1
+float tlTol = nz(atr, syminfo.mintick) * 0.25
+[upP1, upB1, upP2, upB2] = f_trendPair(dayLo, dayLoBars, true, tlTol)
+[dnP1, dnB1, dnP2, dnB2] = f_trendPair(dayHi, dayHiBars, false, tlTol)
+
+// A trend line is only as good as the pivots under it. DAIC's rising line
+// came from a slope measured across 15 bars and then extrapolated 95 more:
+// 1.62 -> 1.80 over bars 55-70, still being drawn at bar 150, by which point
+// it read 2.76 against a price of 2.34 and swept up through the whole
+// consolidation. Nothing was wrong with the pair. The line had simply expired
+// and no rule said so.
+//
+// Two guards. FRESHNESS: if the newest anchor pivot is older than
+// tlMaxAgeBars, the line describes structure that is gone. REACH: a line may
+// be projected at most one anchor-span past its newest pivot — measure over
+// 15 bars, project 15, not 95. When that reach is already behind the current
+// bar the line has run out and is not drawn at all.
+bool  upValid = not na(upP1) and not na(upB1) and upB2 > upB1 and
+     bar_index - upB2 <= tlMaxAgeBars
+bool  dnValid = not na(dnP1) and not na(dnB1) and dnB2 > dnB1 and
+     bar_index - dnB2 <= tlMaxAgeBars
+int   upReach = upValid ? upB2 + (upB2 - upB1) : na
+int   dnReach = dnValid ? dnB2 + (dnB2 - dnB1) : na
 float upSlope = upValid ? (upP2 - upP1) / (upB2 - upB1) : na
 float dnSlope = dnValid ? (dnP2 - dnP1) / (dnB2 - dnB1) : na
 float upLine  = upValid ? upP1 + upSlope * (bar_index - upB1) : na
 float dnLine  = dnValid ? dnP1 + dnSlope * (bar_index - dnB1) : na
 
 // a line far from price describes nothing, whatever its fit
-bool upRelevant = not na(upLine) and math.abs(close - upLine) <= maxTLdistATR * atr
-bool dnRelevant = not na(dnLine) and math.abs(close - dnLine) <= maxTLdistATR * atr
+bool upRelevant = not na(upLine) and math.abs(close - upLine) <= maxTLdistATR * atr and
+     upReach > bar_index
+bool dnRelevant = not na(dnLine) and math.abs(close - dnLine) <= maxTLdistATR * atr and
+     dnReach > bar_index
 
 // break state is CLOSE-confirmed and persists; a wick does not re-decide it
 var bool upBroken = false
@@ -3079,21 +3178,23 @@ if barstate.islast
 
     if tlOn and upRelevant
         // anchored on the two pivots that define it, then projected forward
-        float upAhead = upP1 + upSlope * (rightEdge - upB1)
-        upTL := line.new(upB1, upP1, rightEdge, upAhead, xloc=xloc.bar_index,
+        int   upEdge  = math.min(rightEdge, upReach)
+        float upAhead = upP1 + upSlope * (upEdge - upB1)
+        upTL := line.new(upB1, upP1, upEdge, upAhead, xloc=xloc.bar_index,
              extend=extend.none, style=line.style_solid,
              color=color.new(color.teal, upBroken ? 65 : 20), width=2)
-        upLab := label.new(rightEdge, upAhead,
+        upLab := label.new(upEdge, upAhead,
              upBroken ? "uptrend lost" : "uptrend",
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
              textcolor=color.new(upBroken ? color.orange : color.teal, 10), size=size.small)
 
     if tlOn and dnRelevant
-        float dnAhead = dnP1 + dnSlope * (rightEdge - dnB1)
-        dnTL := line.new(dnB1, dnP1, rightEdge, dnAhead, xloc=xloc.bar_index,
+        int   dnEdge  = math.min(rightEdge, dnReach)
+        float dnAhead = dnP1 + dnSlope * (dnEdge - dnB1)
+        dnTL := line.new(dnB1, dnP1, dnEdge, dnAhead, xloc=xloc.bar_index,
              extend=extend.none, style=line.style_solid,
              color=color.new(color.orange, dnBroken ? 65 : 20), width=2)
-        dnLab := label.new(rightEdge, dnAhead,
+        dnLab := label.new(dnEdge, dnAhead,
              dnBroken ? "downtrend broken" : "downtrend",
              xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none,
              textcolor=color.new(dnBroken ? color.lime : color.orange, 10), size=size.small)
