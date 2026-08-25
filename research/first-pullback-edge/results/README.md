@@ -23,6 +23,7 @@ SHA-256, study period, cost assumptions, seed.
 | `data_quality.json` | §29 | the measured provider probes |
 | `provider_verification.json` | §29 | output of `run.py verify` — the five decisive checks against whatever key is present |
 | `*_run.log` | — | stage logs, kept so a funnel count can be traced |
+| `*.live.log` | — | **not committed.** In-flight progress log of a long background run; it churns on every write. The final log is copied to the tracked `*_run.log` name when the run lands |
 
 **Not produced, and why:** walk-forward folds (one month of intraday data),
 market-regime buckets (no regime variation in 20 consecutive sessions),

@@ -26,6 +26,10 @@ results/
 !research/first-pullback-edge/data/*.parquet
 !research/first-pullback-edge/results/
 !research/first-pullback-edge/results/*.csv
+# Live progress logs of long background runs. These churn on every write and
+# would otherwise make the tree dirty every turn; the FINAL log is copied to
+# the tracked name and committed when the run lands.
+research/first-pullback-edge/results/*.live.log
 research/first-pullback-edge/data/cache/
 research/first-pullback-edge/data/symbol_pool.json
 
