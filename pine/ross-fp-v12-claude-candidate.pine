@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.11 (V9 structure restored · paper only)", shorttitle="ROSS FP V12.11", overlay=true,
+strategy("ROSS First Pullback Strategy V12.12 (V9 structure + distance ceiling · paper only)", shorttitle="ROSS FP V12.12", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -2885,6 +2885,14 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
 maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual)
+// V12.12 (operator, live DAIC +500%): V9 scores a trend line by
+// touches*2 - distance, so distance can always be outvoted by touch count.
+// On DAIC the winner was anchored on the session low at 2.05 while price was
+// 3.66 — 1.6 dollars of empty space below the candles. Two costs: the line
+// describes nothing tradeable, and because TradingView auto-scales the pane
+// to fit every drawing, it dragged the axis down to 1.20 and squashed the
+// candles into the top half of the chart. A hard ceiling, not a score term.
+maxTLdistATR = input.float(3.0, "Hide a trend line further than N ATR from price", minval=0.5, maxval=20.0, group=gVisual, display = display.none)
 var array<line> srLines = array.new_line()
 var array<label> srLabels = array.new_label()
 // V9.4: S/R back on the DECISION layer — hiding the key levels behind
@@ -3050,7 +3058,7 @@ if barstate.islast and showTrendLine
                     float lineNow = lowA + sl * (bar_index - barA)
                     float distATR = f_safeDiv(close - lineNow, atr, 99.0)
                     float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
-                    if touches >= 2 and (na(bestScore) or score > bestScore)
+                    if touches >= 2 and distATR <= maxTLdistATR and (na(bestScore) or score > bestScore)
                         bestScore := score
                         bestA := a
                         bestSlope := sl
@@ -3109,7 +3117,7 @@ if barstate.islast and showTrendLine
                     float lineNow = highA + sl * (bar_index - barA)
                     float distATR = f_safeDiv(lineNow - close, atr, 99.0)
                     float score = touches * 2.0 - math.min(math.max(distATR, 0.0), 20.0)
-                    if touches >= 2 and (na(bestScoreD) or score > bestScoreD)
+                    if touches >= 2 and distATR <= maxTLdistATR and (na(bestScoreD) or score > bestScoreD)
                         bestScoreD := score
                         bestAD := a
                         bestSlopeD := sl

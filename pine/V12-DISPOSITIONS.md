@@ -347,6 +347,66 @@ impulse-peak / HOD / PM-high series the operator called clutter.
 
 All ten gate booleans remain byte-identical to the V11 base.
 
+### V12.12 - the misalignment is a CHART SETTING, not the code
+
+The operator: *"by dragging the graph upper or lower we lose analysis
+capabilities of the chart indicators; as they get unaligned with the
+candles."* Eleven revisions had not fixed this. The reason is that it is not
+in the Pine file.
+
+**The proof.** Every S/R label is created as
+
+```
+label.new(bar_index + 2, v, "R" + str.tostring(v, format.mintick))
+```
+
+The y-coordinate and the text are THE SAME VARIABLE `v`, and with no `yloc`
+argument the default is `yloc.price`. It is not possible for that label to
+render at a price other than the one printed in its own text. Yet the DAIC
+screenshot shows:
+
+| label text | drawn at | ratio |
+|---|---|---|
+| prev_close 3.91 | ~3.30 | 0.844 |
+| R 4.66 | ~4.05 | 0.869 |
+| S2 4.10 | ~3.60 | 0.878 |
+| R 5.04 | ~4.30 | 0.853 |
+
+A roughly CONSTANT ratio across four independent levels is a single linear
+price-to-pixel transform applied to the drawings and a different one applied
+to the axis. No Pine code can produce that; the script hands TradingView a
+price and has no say in how it is mapped to a pixel.
+
+What produces it is the price-scale option **"Scale price chart only"**. With
+it on, a vertical drag rescales the main series alone and leaves overlaid
+drawings on their previous mapping - which is the reported symptom stated
+almost word for word. A script pinned to a second scale does the same thing.
+
+This is worth recording as a method failure: from V12.0 onward I treated
+"lines do not align" as a geometry bug and rewrote the drawing layer five
+times over it - bar-relative locations, then line objects, then plot series,
+then finite lines, then back to V9. Each rewrite fixed something real, and
+none of them could have fixed this, because the transform was never mine to
+control. The arithmetic above took two minutes and should have been the first
+thing I did.
+
+**The one real code defect in the same screenshot.** The teal uptrend line was
+anchored on the session low at 2.05 while price was 3.66 - 1.6 dollars of
+empty space under the candles. V9 scores a line as `touches*2 - distance`
+with distance capped at 20, so distance is a soft term. It was not outvoted
+here: no nearby line reached the two-touch minimum, so the far line was the
+only candidate and was drawn by default. Because TradingView auto-scales the
+pane to fit every drawing, it also pulled the axis down to 1.20 and squashed
+the candles into the top half - destroying exactly the "analysis capability"
+the operator is describing.
+
+Fixed with a hard ceiling rather than a score term: `maxTLdistATR` (3.0). At
+ATR 0.18 the session-low line sits 8.94 ATR away and is now rejected outright,
+so the outcome is no line instead of a useless one. A live pullback line at
+1.44 ATR still draws.
+
+Gate booleans unchanged.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
