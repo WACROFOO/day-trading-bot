@@ -24,6 +24,10 @@ results/
 !research/first-pullback-edge/data/*.csv
 !research/first-pullback-edge/data/halts.csv
 !research/first-pullback-edge/data/*.parquet
+# The setup ledger is 189k rows x ~50 columns. Parquet is 13MB and is the
+# format the brief asks for; the CSV mirror is 115MB, over GitHub's 100MB
+# per-file limit. Parquet only for this one table.
+research/first-pullback-edge/data/rejected_setups.csv
 !research/first-pullback-edge/results/
 !research/first-pullback-edge/results/*.csv
 # Live progress logs of long background runs. These churn on every write and

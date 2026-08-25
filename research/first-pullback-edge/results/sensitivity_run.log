@@ -1,20 +1,13 @@
-  218 qualified ticker-days loaded
-  A max_stop_pct: done
-  A max_pb_volume_ratio: done
-  A max_retracement_pct: done
-  A min_push_pct: done
-  A min_room_r: done
-  A reward_multiple: done
-  A min_efficiency: done
-  A max_pullback_bars: done
-  A fallback_atr_mult: done
-  F max_stop_pct: done
-  F max_pb_volume_ratio: done
-  F max_retracement_pct: done
-  F min_push_pct: done
-  F min_room_r: done
-  F reward_multiple: done
-  F min_efficiency: done
-  F max_pullback_bars: done
-  F fallback_atr_mult: done
+  2377 candidate ticker-days, 479 sessions, 1351 names  [2024-09-24 -> 2026-08-21, cap 5/session]
+  1837 qualified ticker-days loaded
+  92 parameter settings x 1837 ticker-days
+  200/1837 · 6483 trade rows
+  400/1837 · 12650 trade rows
+  600/1837 · 18141 trade rows
+  800/1837 · 23223 trade rows
+  1000/1837 · 28265 trade rows
+  1200/1837 · 33337 trade rows
+  1400/1837 · 39493 trade rows
+  1600/1837 · 44275 trade rows
+  1800/1837 · 49297 trade rows
 wrote 92 sensitivity rows

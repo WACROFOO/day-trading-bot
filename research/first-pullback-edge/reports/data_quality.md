@@ -7,7 +7,14 @@ Measured 2026-08-24 from this container. Every row below is a request that
 was actually made; the failures are recorded as failures.
 ```
 
-No conclusion in `final_report.md` is stronger than this page. Read it first.
+> **✓ SUPERSEDED 2026-08-25 — kept as the record, not as the constraint.**
+> Every limitation below was real and measured on Yahoo, and every one of
+> them has since been cleared by two free API keys: Massive (ex-Polygon) for
+> a survivorship-free universe and Alpaca `feed=sip` for consolidated minute
+> bars back to 2016. What actually applies to the study as run is in
+> `data_acquisition.md` §2a and `final_report.md` §1. This page stays because
+> the method that found the limitations is the reusable part — and because a
+> deleted warning teaches nobody anything.
 
 ---
 

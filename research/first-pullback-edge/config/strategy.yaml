@@ -43,7 +43,7 @@ universe:
   # does. It also decides the study's size — 500 sessions x 5 = 2,500
   # ticker-days, which is the brief's target band. Raising it costs one API
   # call per extra ticker-month, nothing else.
-  max_names_per_session: {value: 3, provenance: study}  # when the watchlist is frozen
+  max_names_per_session: {value: 5, provenance: study}  # when the watchlist is frozen
 
 # ----------------------------------------------------------------- impulse --
 # ross-fp-v4.pine lines 878-930 (candidate-window search) and 1645 (pushGate).

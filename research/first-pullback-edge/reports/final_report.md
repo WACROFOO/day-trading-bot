@@ -1,97 +1,97 @@
 # First Pullback — does it have an edge?
 
 An adversarial ablation of `knowledge-base/tradingview/ross-fp-v4.pine`
-(REV `V9.12`), run against the brief's 38 requirements.
+(REV `V9.12`) against the brief's 38 requirements.
 
 ```
-FEED · Yahoo chart v8, unauthenticated · 1-minute · pre/post requested
-       MEASURED 2026-08-24 from this container (results/data_quality.json)
-! 1-MINUTE HISTORY REACHES 25 DAYS. 30 days back returns HTTP 422.
-! PRE-MARKET VOLUME IS ZERO FOR EVERY SYMBOL, AAPL AND SPY INCLUDED.
-! 6 OF 9 DELISTED TICKERS PROBED RETURN 404 — the universe is
-  survivorship-biased and it cannot be repaired from this feed.
-→ The brief asks for 1,000-3,000 ticker-days across multiple years.
-  The intraday ablation below runs on 20 SESSIONS and 49 TRADES at its
-  widest rung. Read every number in this document as a pipeline
-  demonstration, not as an expectancy estimate.
+FEED · universe  · Massive (ex-Polygon) grouped daily, free Basic tier
+       minute    · Alpaca Basic, feed=sip, CONSOLIDATED — verified 2026-08-25
+       cross-check · 28 RTH sessions compared across BOTH feeds: identical
+       minute counts, identical session highs and lows, volume within 0.7%.
+       ZERO disagreements. (results/provider_verification.json)
+✓ pre-market volume present · ✓ delisted names retained in the universe by
+  construction · ✓ 1-minute history 2024-09-24 → 2026-08-21
 
-CODE · git 1033875 · config sha256 d224b4e5… · seed 20260824 · py 3.11.15
-       33 tests pass (tests/), all of them about look-ahead and fill order
+SAMPLE · 7,948 candidate ticker-days · 479 sessions · 2,731 names
+         1,837 scanner-qualified ticker-days · 20,248 pullback candidates
+         838 trades in variant A across 353 sessions and 945 names
+         → the brief's 1,000–3,000 ticker-day target is MET
+
+CODE · git 33d5774 · config sha256 (see run_manifest.json) · seed 20260824
+       33 tests pass, all of them about look-ahead and fill ordering
 ```
 
-Read `data_quality.md` first. It is the constraint that shapes everything here.
+**Answer: no. There is no edge here, and the evidence is now strong enough to
+say so rather than to plead insufficient sample.** Every variant's 95%
+confidence interval lies entirely below zero, in every year, in the untouched
+holdout, and a random entry minute on the same tape beats all six.
 
 ---
 
 ## 1. What was considered — the funnel
 
-| stage | count | source |
-|---|---:|---|
-| symbol pool (current Nasdaq/NYSE/AMEX listings) | **6,742** | `data/symbol_pool.json` |
-| **candidate ticker-days 2022-09-01 → 2026-08-21** | **8,152** | `data/candidate_days.parquet` |
-| … over sessions / distinct names | 976 / 2,295 | same |
-| … falling inside the obtainable 1-minute window | **349** | `2026-07-28 → 2026-08-21` |
-| … passing the 09:35 ET point-in-time scanner | **218** | `data/scanned_ticker_days.parquet` |
-| pullback candidates observed by the detector (variant A) | **670** | on 20 sessions, 119 names |
-| … passing variant A's gates | 254 | `data/rejected_setups.parquet` |
-| … filled (realistic costs, pessimistic ambiguity) | **49** | `data/trades.parquet` |
+| stage | count |
+|---|---:|
+| universe construction | **grouped daily, one call per DATE** — every ticker that printed |
+| candidate ticker-days 2024-09-24 → 2026-08-21 | **7,948** |
+| … sessions / distinct names | 479 / 2,731 |
+| … after the top-5-gappers-per-session scanner cap | 2,377 |
+| … passing the 09:35 ET point-in-time scanner | **1,837** |
+| pullback candidates the detector observed (variant A) | **20,248** on 477 sessions, 945 names |
+| … armed and filled (realistic costs, pessimistic ambiguity) | **838** |
+| stop-limit orders that triggered but could not fill | 2,988 (almost all under *stressed* slippage — see §4) |
 
-The daily layer **meets** the brief's sample target: 8,152 ticker-days is
-above the 1,000–3,000 band, across four calendar years and two obvious
-regimes. The intraday layer, which is where A–F actually live, does not and
-cannot.
+The universe is **survivorship-free by construction**, which is the one thing
+the earlier Yahoo-based version of this study could not achieve. Grouped daily
+returns what actually traded on a date, so a company that gapped in 2025 and
+delisted in 2026 appears on its own day and vanishes afterwards with no
+special handling. A symbol list — any symbol list — is a list of things that
+still exist.
 
 | year | ticker-days | sessions | names |
 |---|---:|---:|---:|
-| 2022 (from 09-01) | 263 | 74 | 222 |
-| 2023 | 1,085 | 240 | 657 |
-| 2024 | 1,933 | 252 | 937 |
-| 2025 | 2,801 | 250 | 1,311 |
-| 2026 (to 08-21) | 2,070 | 160 | 1,059 |
+| 2024 (from 09-24) | 998 | 69 | 626 |
+| 2025 | 3,848 | 250 | 1,798 |
+| 2026 (to 08-21) | 3,102 | 160 | 1,447 |
 
-Scanner rules, stated as the brief demands and kept **separate from entry
-filters**: open price $2–20, gap ≥ 10% vs the previous close, trailing
-20-session dollar volume ≥ $250k, split-artefact days excluded. The intraday
-layer re-qualifies at 09:35 ET on bars printed up to that minute only.
-`scanGates` is `false` in the shipped Pine (line 330), so none of these is
-ever used as a trade gate here either.
+Scanner rules, kept **separate from entry filters** as the brief demands: open
+$2–20, gap ≥ 10% vs the previous close, trailing-20-session dollar volume ≥
+$250k, reverse-split artefacts excluded (344 flagged), then the top 5 gappers
+per session. `scanGates` is `false` in the shipped Pine (line 330), so none of
+these is used as a trade gate here either.
 
 ---
 
 ## 2. What distinguishes A from F
 
-| rule | A | B | C | D | E | F | Pine line |
+| rule | A | B | C | D | E | F | Pine |
 |---|:-:|:-:|:-:|:-:|:-:|:-:|---|
 | qualifying impulse (≥5% **and** ≥2 ATR **and** eff ≥0.60 **and** RVOL ≥2 **and** ≥$100k/min) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 878–930, 1645 |
 | first pullback, 1–4 bars, ≥1 red | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1646 |
 | retracement ≤ 50% of the push | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1647 |
-| structural stop + caps (≤3% of price, ≤1.5 ATR, ATR fallback, shares ≥1) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1598–1656 |
+| structural stop + caps (≤3% of price, ≤1.5 ATR, ATR fallback) | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1598–1656 |
 | trigger = pullback-bar high + 1 tick · stop = pullback low − 1 tick | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | 1587–1589 |
-| close > VWAP **and** close > EMA9 **and** EMA9 ≥ EMA20 **and** MACD > 0 **and** hist > 0 | — | ✓ | ✓ | ✓ | ✓ | ✓ | 1580–1583, 1649 |
-| confluence: ≥1 support (EMA9 / EMA20 / VWAP / half-dollar, EMAs clustered count once) | — | — | ✓ | ✓ | ✓ | **—** | 1577–1585 |
+| close > VWAP **and** > EMA9 **and** EMA9 ≥ EMA20 **and** MACD > 0 **and** hist > 0 | — | ✓ | ✓ | ✓ | ✓ | ✓ | 1580–83, 1649 |
+| confluence: ≥1 support (EMA9 / EMA20 / VWAP / half-dollar, clustered EMAs once) | — | — | ✓ | ✓ | ✓ | **—** | 1577–1585 |
 | pullback volume ≤ 0.70 × push volume | — | — | — | ✓ | ✓ | ✓ | 1648 |
-| HOD room: trigger ≥ HOD-at-time, or ≥1R of headroom | — | — | — | — | ✓ | ✓ | 1860 |
+| HOD room: trigger ≥ HOD-at-time, or ≥1R headroom | — | — | — | — | ✓ | ✓ | 1860 |
 | halt-band veto (LULD tier, fail-closed inside RTH) | — | — | — | — | — | ✓ | 1642, 1652 |
 | fast lane / uptrend lane / HOD break-and-retest | — | — | — | — | — | ✓ | 1836–1940, 1315–1362 |
 | third-trade half size | — | — | — | — | — | ✓ | 1759 |
 
-**Two ways the requested ladder is not monotone, both reported rather than
-smoothed:**
+**Two ways the requested ladder is not monotone, reported rather than smoothed:**
 
 1. **C is not a rung of the shipped strategy.** `supportCount` exists in the
-   Pine but feeds only the display-only quality score (line 1701). There is
-   no confluence gate. C therefore tests a filter the operator does not run —
-   and it passes only **14.2%** of candidates, which collapses D and E to
-   n=1. A secondary ladder without it is reported in §5b.
-2. **F is not E-plus-something.** Its lanes and the HOD retest are extra
-   entry *paths* that skip push quality, retracement and pullback volume, so
-   F can produce **more** trades than E. It did: 20 vs 1.
+   Pine but feeds only the display-only quality score (line 1701) — there is
+   no confluence gate. It passes **15.3%** of candidates, so D and E inherit
+   small samples. A secondary ladder without it is in §5b.
+2. **F is not E-plus-something.** Its lanes and retest are extra entry
+   *paths* that skip push quality, retracement and pullback volume, so F
+   produces **more** trades than E (279 vs 38).
 
-**Not implemented, and therefore not measured in F:** the V8.2 LATE JOIN path
-(Pine 1477–1545). Justification is a measurement, not convenience — the
-repo's own benchmark found it added **+1 fill in 330 ticker-days**
-(`research/momentum-replication/reports/2026-08-pine-v8-benchmark.md`, V8.2
-addendum). It is the one declared gap between F and the shipped script.
+**Declared gap:** the V8.2 LATE JOIN path (Pine 1477–1545) is not implemented.
+The repo's own benchmark measured it at **+1 fill in 330 ticker-days**
+(`research/momentum-replication/reports/2026-08-pine-v8-benchmark.md`).
 
 ---
 
@@ -99,90 +99,76 @@ addendum). It is the one declared gap between F and the shipped script.
 
 | control | how |
 |---|---|
-| indicators | incremental only. No vectorised pass over a day exists in `src/indicators.py`, so there is no place for bar *i+1* to enter |
-| HOD | `max(high)` from session start **through the current bar**. Never the eventual daily high |
+| indicators | incremental only; no vectorised pass exists, so no place for bar *i+1* to enter |
+| HOD | `max(high)` from session start **through the current bar** |
 | RVOL-at-time | today's cumulative volume vs the same-session-minute average over **prior days only** |
-| gap | today's open (or the 09:35 last price) vs the **previous** close |
-| universe | daily layer reads open, previous close and trailing-20 dollar volume **excluding today**. Today's high, close, volume and range are never read |
-| scanner timestamp | frozen at 09:35 ET; every trade carries `scan_ts` and an entry can never precede it |
+| universe | open, previous close, trailing-20 dollar volume **excluding today** |
+| scanner timestamp | frozen at 09:35 ET; every trade carries `scan_ts` |
 | engine | one strict left-to-right pass, one Snapshot per bar |
 
-Tested, not asserted (`tests/test_lookahead.py`):
+Tested, not asserted (`tests/test_lookahead.py`, 33 tests):
 
 ```
 ✓ HOD at bar 20 is 5.25 while the eventual daily high is 9.99
-✓ feeding bars 0..k reproduces the first k+1 values of a full-day pass exactly
+✓ feeding bars 0..k reproduces the first k+1 values of a full pass exactly
 ✓ the engine's snapshot list never exceeds the bar it was handed
-✓ TRUNCATION AUDIT — cut the session at 45/50/55/60 bars, re-run: every
+✓ TRUNCATION AUDIT — cut a session at 45/50/55/60 bars and re-run: every
   trade entered before the cut returns with identical entry, price and stop
-✓ every recorded setup's hod_at_time equals max(high) over bars 0..i
 ✓ no entry precedes its own scan timestamp
 ```
 
-**Fields that could not be reconstructed point-in-time, flagged rather than
-substituted:** float (`float_provenance = "unavailable"` on every row),
-catalyst/news (no timestamped feed), true spread (proxy: 25th percentile of
-recent 1-minute ranges), halt state (missing minutes flagged, not resolved).
-**Brief §17's float cut and §18's catalyst analysis cannot be produced.** No
-row is labelled "no catalyst" — absence of a news feed is not absence of news.
+**Still unreconstructable point-in-time, flagged not substituted:** float
+(`float_provenance = "unavailable"` on every row), catalyst/news, true spread
+(proxy: 25th percentile of recent 1-minute ranges), halt state. **Brief §17's
+float cut and all of §18 cannot be produced.** No row is labelled "no
+catalyst" — absence of a news feed is not absence of news.
 
 ---
 
-## 4. Execution model, and the one number that governs everything
+## 4. The execution model, and the number that governs everything
 
-```
-COSTS · commission $1/order (matches Pine line 6, cash_per_order)
-        slippage = slip_ticks + spread_mult x (spread_est / 2)
-                              + atr_mult x ATR x participation
-        participation cap 2% of the printed minute
-        gross / low / realistic / stressed, all four reported
-AMBIGUITY · a bar covering trigger AND stop carries no sequence information.
-        Flagged, then resolved under an explicit policy. All three reported.
-```
+**43.0% of variant A's fills are intrabar-ambiguous** — the entry minute
+covered both the trigger and the stop, and 1-minute OHLC carries no sequence.
+Prior measurements in this repo put it at 25% on 330 ticker-days
+(`2026-08-pine-v8-benchmark.md`) and 26% on 250+ megadays
+(`research/megaday-study/RESULTS.md`); on 838 fills over two years it is
+higher still. This is a structural property of the pattern, not a quirk.
 
-**Ambiguous entry bars: 30.6% of variant A's fills.** Two independent prior
-measurements in this repo put it at 25% (`2026-08-pine-v8-benchmark.md`, 330
-ticker-days) and 26% (`research/megaday-study/RESULTS.md`, 250+ megadays).
-Three measurements, same number. This is a structural property of 1-minute
-OHLC on this universe, not a quirk of one sample.
-
-### The execution tax — the finding that dominates every table below
+### The execution tax
 
 | cost model | n | expectancy | slippage | commission | median stop | median entry slip |
 |---|---:|---:|---:|---:|---:|---:|
-| gross | 51 | **−0.274 R** | 0.000 R | 0.000 R | 1.74% of price | 0.000% |
-| low | 51 | −1.027 R | 0.284 R | 0.220 R | 1.74% | 0.447% |
-| **realistic** | 49 | **−1.775 R** | 0.701 R | 0.224 R | 1.73% | 1.034% |
-| stressed | **4** | −0.517 R | 0.650 R | 0.139 R | 1.71% | 0.817% |
-
-Read the identity, which is `research/megaday-study/RESULTS.md` §4 reproduced
-on a different sample:
+| **gross** | 895 | **−0.419 R** | 0.000 R | 0.000 R | 1.99% of price | 0.000% |
+| low | 897 | −1.096 R | 0.241 R | 0.193 R | 1.99% | 0.456% |
+| **realistic** | 838 | **−1.853 R** | 0.606 R | 0.195 R | 1.96% | 1.088% |
+| stressed | **35** | −2.173 R | 0.624 R | 0.124 R | 1.60% | 0.784% |
 
 ```
-tax in R = (spread + slippage, as % of price) / (stop, as % of price)
-         =            1.356%                  /        1.73%        = 0.79 R per trade
+tax in R = (cost as % of price) / (stop as % of price)
+         =        1.57%          /        1.96%        ≈ 0.80 R per trade
 ```
 
-The stop is small **because the strategy caps it**: `maxStopPct = 3.0`
-(Pine 406), a value that appears nowhere in the corpus. The sibling study
-measured the population's median stop at **3.02%** — the cap is sitting on
-the median, removing 51% of setups and locking every backtest into the regime
-where the execution tax per R is highest. This study did not set out to
-confirm that and confirms it anyway.
+The stop is small because the strategy **caps** it: `maxStopPct = 3.0`
+(Pine 406), a number that appears nowhere in the corpus and which
+`research/megaday-study/RESULTS.md` §4 measured sitting on the population's
+median stop. That study's prediction — widen the cap, cut the tax — replicates
+here exactly (§11), and still never reaches zero.
 
-**A second, smaller tax nobody has written down.** Sizing uses the
-slippage-stressed risk (Pine 1616–1621): `shares = budget / (risk + 2 × 10
-ticks)`. On these stops the $0.20 assumption is larger than the stop itself,
-so the position is sized to roughly **a third of the nominal risk budget** —
-and the fixed $1/order commission then costs **0.224 R per trade** instead of
-the ~0.07 R the $40 budget implies. The V8 header discloses a 10–15% drag;
-measured here it is 22%.
+A second tax nobody has written down: sizing uses the slippage-stressed risk
+(Pine 1616–1621), `shares = budget / (risk + 2 × 10 ticks)`. On these stops
+the $0.20 assumption exceeds the stop itself, so positions are sized to about
+a third of the nominal risk budget and the fixed $1/order commission costs
+**0.195 R per trade** instead of the ~0.07 R the budget implies.
 
-**The stressed column is not a good result.** Its `−0.517 R` comes from
-**4 fills**: under stressed slippage the modelled cost breaches the entry
-limit offset and ~90% of entries are simply **MISSED**. That is the honest
-reading — *in a poor-fill environment this strategy largely does not get
-filled*, which is information, not performance.
+**The stressed column is not a result, it is a refusal:** only **35 of 838**
+entries fill, because modelled slippage breaches the entry limit offset. In a
+poor-fill environment this strategy largely does not get executed.
+
+**Exit mix (variant A, realistic):** 544 STOP · **157 STOP_GAP** · 100 T2 ·
+32 STOP_AMBIGUOUS · 5 SESSION_FLAT. Nearly one in five exits gaps *through*
+the stop and fills at the next open, which is where the missing halt feed
+bites hardest — 4 trades carry `halt_flag`, and there is no halt archive to
+check the rest against (see `data_acquisition.md` §5).
 
 ---
 
@@ -191,406 +177,346 @@ filled*, which is information, not performance.
 ```
 Realistic costs · pessimistic ambiguity · Experiment 1 (identical exits for
 every variant: stop, T1 at +1R on half, stop to break-even, runner at +2R,
-flat at the window edge). 20 sessions, 2026-07-28 → 2026-08-21.
+flat at the window edge). 479 sessions, 2024-09-24 → 2026-08-21.
 95% CI = day-clustered bootstrap, 5,000 draws, resampling SESSIONS.
 ```
 
 | Variant | Added rule | Trades | Win % | Avg Win R | Avg Loss R | **Exp. R** | PF | Max DD (R) | 95% CI | Holdout Exp. | Verdict |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---|---:|---|
-| **A** | First pullback | 49 | 16.3% | +0.77 | −2.27 | **−1.775** | 0.12 | −86.97 | [−2.24, −1.32] | −1.37 | INSUFFICIENT SAMPLE |
-| **B** | + VWAP/EMA/MACD | 26 | 26.9% | — | — | **−1.351** | 0.20 | −35.25 | [−2.05, −0.74] | −1.01 | INSUFFICIENT SAMPLE |
-| **C** | + Confluence | 3 | 0.0% | — | — | **−1.828** | 0.00 | −5.48 | [−2.02, −1.71] | −2.02 | INSUFFICIENT SAMPLE |
-| **D** | + Pullback volume | 1 | 0.0% | — | — | **−1.744** | 0.00 | −1.74 | degenerate | — | INSUFFICIENT SAMPLE |
-| **E** | + HOD room | 1 | 0.0% | — | — | **−1.744** | 0.00 | −1.74 | degenerate | — | INSUFFICIENT SAMPLE |
-| **F** | Full strategy | 20 | 20.0% | — | — | **−1.585** | 0.10 | −31.71 | [−2.40, −0.88] | −1.26 | INSUFFICIENT SAMPLE |
+| **A** | First pullback | 838 | 12.9% | +0.68 | −2.27 | **−1.853** | 0.06 | −1553 | [−1.95, −1.76] | −1.884 | **NEGATIVE EDGE** |
+| **B** | + VWAP/EMA/MACD | 457 | 13.8% | — | — | **−1.710** | 0.08 | −782 | [−1.84, −1.58] | −1.828 | **NEGATIVE EDGE** |
+| **C** | + Confluence | 102 | 19.6% | — | — | **−1.472** | 0.12 | −150 | [−1.72, −1.23] | −1.609 | **NEGATIVE EDGE** |
+| **D** | + Pullback volume | 41 | 19.5% | — | — | −1.418 | 0.14 | −58 | [−1.80, −1.03] | — | insufficient sample |
+| **E** | + HOD room | 38 | 18.4% | — | — | −1.427 | 0.12 | −54 | [−1.82, −1.03] | — | insufficient sample |
+| **F** | Full strategy | 279 | 14.3% | — | — | **−1.704** | 0.08 | −475 | [−1.87, −1.54] | −1.838 | **NEGATIVE EDGE** |
 
-Every confidence interval lies **entirely below zero**. That is not evidence
-of a negative edge at the level the brief would accept — the sample is far
-too small and the cost model is uncalibrated — but nothing in this table
-points upward.
+**Every interval lies entirely below zero.** The best variant loses 1.4R per
+trade. The profit factor never exceeds 0.14 — for every dollar made, seven to
+sixteen are lost.
 
 **Marginal effects.**
 
-| step | trades removed | exp. before | exp. after | Δ exp. | DD improved? | CI narrower? |
-|---|---:|---:|---:|---:|:-:|:-:|
-| B − A | 23 | −1.775 | −1.351 | **+0.424** | yes (−87 → −35) | no (0.92 → 1.31) |
-| C − B | 23 | −1.351 | −1.828 | **−0.477** | yes, by deletion | degenerate |
-| D − C | 2 | −1.828 | −1.744 | +0.083 | degenerate | degenerate |
-| E − D | 0 | −1.744 | −1.744 | 0.000 | — | — |
-| F − E | **−19** (F *adds* trades) | −1.744 | −1.585 | +0.159 | worse (−1.7 → −31.7) | — |
+| step | trades removed | exp. before | exp. after | Δ exp. |
+|---|---:|---:|---:|---:|
+| B − A | 381 | −1.853 | −1.710 | **+0.143** |
+| C − B | 355 | −1.710 | −1.472 | **+0.238** |
+| D − C | 61 | −1.472 | −1.418 | +0.054 |
+| E − D | 3 | −1.418 | −1.427 | −0.009 |
+| F − E | **−241** (F *adds*) | −1.427 | −1.704 | −0.277 |
+
+Each filter helps a little and costs sample. **None of them, stacked in any
+order, gets within 1.4R of break-even.**
 
 ### 5b. Secondary ladder — the shipped strategy's own gate order
 
-C, D and E are degenerate because of a gate the operator does not run. Repeat
-the ablation without it:
-
 | Variant | Trades | Win % | Exp. R | 95% CI |
 |---|---:|---:|---:|---|
-| A | 49 | 16.3% | −1.775 | [−2.24, −1.32] |
-| B | 26 | 26.9% | **−1.351** | [−2.05, −0.74] |
-| B + pullback volume | 17 | 17.6% | −1.722 | [−2.39, −1.09] |
-| + HOD room | 17 | 11.8% | −1.819 | [−2.49, −1.20] |
-| F (adds lanes, retest, halt band, half-size) | 20 | 20.0% | −1.585 | [−2.40, −0.88] |
+| A | 838 | 12.9% | −1.853 | [−1.95, −1.76] |
+| B | 457 | 13.8% | −1.710 | [−1.84, −1.58] |
+| B + pullback volume | 212 | 16.5% | −1.576 | [−1.76, −1.39] |
+| + HOD room | 183 | 15.8% | −1.607 | [−1.80, −1.41] |
+| F | 279 | 14.3% | −1.704 | [−1.87, −1.54] |
 
-Same shape: the momentum stack is the only rung that moves expectancy up, and
-everything after it moves it back down while shrinking the sample.
-
-### 5c. What the gates actually do — pass rates over 670 observed candidates
+### 5c. Gate pass rates over 20,248 observed candidates
 
 ```
-✓ impulse              100.0%   (definitional — it is the detector)
-✓ halt_band            100.0%   REJECTED NOTHING in 670 candidates
-  pullback_structure    76.0%
-  retracement           74.9%   ← the 50% bound barely bites; see §11
-  risk_structural       72.5%
-  hod_room              85.2%
-  momentum              54.5%   ← the binding one
-  pb_volume             45.4%
-✗ confluence            14.2%   ← collapses the sample by itself
+impulse             100.0%   (definitional — it is the detector)
+halt_band            99.6%   rejects almost nothing
+hod_room             83.6%
+pullback_structure   83.2%
+retracement          77.9%   ← barely bites; see §11
+risk_structural      64.4%
+momentum             60.4%
+pb_volume            37.1%
+confluence           15.3%   ← by far the most binding
 ```
 
 ---
 
 ## 6. Rejected-trade analysis — did the filters remove the right trades?
 
-Variant A's 49 trades, split by each gate's verdict, both sides traded under
+Variant A's 838 trades split by each gate's verdict, both sides traded under
 the identical exit model. **Research only.**
 
 | gate | accepted n / exp. | rejected n / exp. | separation | winners removed | losers removed |
 |---|---|---|---:|---:|---:|
-| **momentum** | 23 / **−1.398** | 26 / **−2.108** | **+0.710** | 2 | **24** |
-| confluence | 4 / −2.180 | 45 / −1.739 | **−0.441** | 8 | 37 |
-| pb_volume | 36 / −2.007 | 13 / −1.133 | **−0.874** | 3 | 10 |
-| hod_room | 44 / −1.963 | 5 / −0.116 | **−1.847** | 3 | 2 |
-| halt_band | 49 / −1.775 | 0 / — | — | 0 | 0 |
+| **confluence** | 84 / **−1.468** | 754 / −1.896 | **+0.428** | 91 | 650 |
+| **momentum** | 417 / **−1.721** | 421 / −1.984 | **+0.263** | 53 | **364** |
+| pb_volume | 396 / −1.805 | 442 / −1.896 | +0.091 | 45 | 389 |
+| **hod_room** | 761 / −1.910 | 77 / **−1.297** | **−0.612** | 15 | 60 |
+| halt_band | 836 / −1.856 | 2 / −0.897 | — | 0 | 2 |
 
-Reading, with the sample sizes attached:
+**A correction to my own earlier reading.** On the 49-trade Yahoo sample,
+confluence appeared to separate the *wrong* way (−0.441). At 838 trades it is
+the **best** filter in the study (+0.428). The small-sample sign was noise,
+and I reported it as a finding at the time. This is what the larger sample was
+for.
 
-- **momentum is the only filter whose accepted population beats its rejected
-  population.** It removed 24 losers against 2 winners. The CIs still overlap
-  ([−2.05, −0.71] vs [−2.63, −1.66]).
-- **confluence, pullback volume and HOD room all separate the wrong way** on
-  this sample, and §11's parameter sweep independently agrees for the last
-  two: loosening either threshold improves expectancy monotonically. HOD room's rejected trades are the best sub-population in the
-  whole study (−0.12 R, 60% win) — but n=5, and this **contradicts** the
-  sibling megaday finding that the new-high filter separates *favourably*
-  (median MFE 2.04 R vs 1.35 R, n=62, `research/megaday-study/RESULTS.md` §2).
-  Two studies, opposite signs, both under-powered. **UNCERTAIN.**
-- **halt_band vetoed nothing in 670 candidates.** Its purpose is to refuse a
-  stop wider than the LULD band; after the 3% cap and the ATR fallback, no
-  stop is ever that wide. It is inert in this configuration.
+**HOD room is the one filter that is actively harmful**, consistently: the
+77 setups it rejects are the best sub-population anywhere in the study
+(−1.297 R, 19.5% win). §11's parameter sweep agrees independently. This
+contradicts `research/megaday-study/RESULTS.md` §2, which found the new-high
+filter separating *favourably* on n=62 — that study measured MFE on megadays,
+this one measures realised R on a general gapper population, and the
+populations are not the same.
 
 ---
 
 ## 7. Filter redundancy (brief §21)
 
-Phi coefficients between gate decisions, 670 candidates. The largest
-magnitude anywhere is **0.33**.
+Phi between gate decisions over 20,248 candidates. Largest magnitude **0.31**.
 
 | gate A | gate B | phi | agree % |
 |---|---|---:|---:|
-| momentum | risk_structural | **−0.327** | 37.5% |
-| momentum | hod_room | **−0.313** | 42.1% |
-| hod_room | risk_structural | +0.262 | 74.2% |
-| momentum | pb_volume | −0.196 | 39.9% |
+| momentum | hod_room | **−0.310** | 45.8% |
+| momentum | retracement | +0.211 | 64.4% |
+| momentum | risk_structural | −0.208 | 43.3% |
+| hod_room | risk_structural | +0.204 | 66.9% |
 
-**The filters are not redundant — but two of them are actively opposed.**
-Requiring the full momentum stack pushes selection *toward* setups with wider
-stops and *less* room to the high of day, because the stack only turns green
-once price is extended. The brief's hypothesis (VWAP, EMA and MACD all just
-measure short-term momentum, so one would do) is not what the data shows;
-what it shows is that momentum and room-to-HOD are fighting each other.
+**The filters are not redundant — two of them are opposed.** Requiring the
+full momentum stack pushes selection *toward* setups with less room to the
+high of day, because the stack only turns green once price is extended. The
+brief's hypothesis (VWAP/EMA/MACD are all one thing) is not what the data
+shows.
 
 ---
 
-## 8. Cuts (brief §§16–17)
+## 8. Cuts
 
-**Time of day, variant A.** The shipped default is `useSessionWindow = false`
-(Pine 314), so orders are armed 09:30–15:58.
+**Time of day, variant A.** `useSessionWindow` defaults FALSE (Pine 314), so
+orders arm 09:30–15:58.
 
 | window | trades | win % | exp. R | avg MFE |
 |---|---:|---:|---:|---:|
-| 09:30–10:00 | 9 | 33.3% | **−0.715** | +1.20 |
-| 10:00–10:30 | 3 | 33.3% | −1.277 | +0.97 |
-| 10:30–11:30 | 10 | 20.0% | −1.335 | +1.02 |
-| **11:30–16:00** | **27** | **7.4%** | **−2.346** | +0.82 |
+| 09:30–10:00 | 185 | 17.8% | **−1.573** | +0.84 |
+| 10:00–10:30 | 48 | 14.6% | −1.828 | +0.96 |
+| 10:30–11:30 | 118 | 8.5% | **−2.043** | +0.71 |
+| 11:30–16:00 | **487** | 11.9% | −1.916 | +0.75 |
 | pre-market | 0 | — | — | — |
 
-**More than half of variant A's trades are afternoon trades, and they are the
-worst population in the study.** The corpus session is 09:35–10:30 with a
-hard stop at 11:30 (`PARAMETERS.md` §2). The same conclusion was reached from
-the other direction by the repo's ghost-layer measurement: 31 afternoon
-signals over 11 days summed to **−9.47 R** hypothetical
-(`2026-08-pine-v8-benchmark.md`, V8.1 rerun). **Turning the session window on
-is the single largest lever visible in this study, and it is a default, not a
-discovery.**
+**58% of trades are afternoon trades.** The corpus session is 09:35–10:30 with
+a hard stop at 11:30 (`PARAMETERS.md` §2). Turning the window on would help —
+and would still leave −1.573 R.
 
-Zero pre-market trades is a data fact, not a strategy fact: pre-market volume
-is zero on this feed, so the volume gates can never pass before 09:30.
+Zero pre-market trades despite pre-market volume now being present: the
+volume gates (2× a 20-bar baseline, $100k/min) rarely pass on 04:00–09:30
+tape, matching the ghost-layer finding in `2026-08-pine-v8-benchmark.md`.
 
-**Stock characteristics, variant A** (buckets with n≥5 only):
+**Stock characteristics, variant A** (n ≥ 30):
 
-| cut | bucket | n | win % | exp. R | reaches +1R |
-|---|---|---:|---:|---:|---:|
-| price | $2–5 | 24 | 8.3% | **−2.340** | 29% |
-| price | $5–10 | 14 | 28.6% | −1.158 | 57% |
-| price | $10–20 | 10 | 20.0% | −1.167 | 40% |
-| gap | 10–20% | 6 | 16.7% | −1.112 | 50% |
-| gap | 20–50% | 18 | 16.7% | −1.631 | 39% |
-| gap | 50–100% | 13 | 30.8% | −1.421 | 46% |
-| gap | **>100%** | 9 | **0.0%** | **−2.764** | 33% |
-| RVOL-at-time | <2 | 8 | 0.0% | −2.059 | 25% |
-| RVOL-at-time | **>5** | 14 | **50.0%** | **−0.885** | 57% |
-| pullback depth | <20% | 9 | 11.1% | −1.331 | 44% |
-| pullback depth | 35–50% | 22 | 18.2% | −2.012 | 41% |
-| pullback number | 1st | 35 | 17.1% | −2.032 | 34% |
-| pullback number | 2nd | 12 | 8.3% | −1.356 | 42% |
+| cut | bucket | n | win % | exp. R |
+|---|---|---:|---:|---:|
+| price | **$2–5** | 422 | 10.4% | **−2.280** |
+| price | $5–10 | 251 | 15.5% | −1.480 |
+| price | **$10–20** | 142 | 15.5% | **−1.181** |
+| gap | 10–20% | 43 | 9.3% | −2.333 |
+| gap | 20–50% | 336 | 17.6% | −1.754 |
+| gap | 50–100% | 289 | 9.0% | −1.941 |
+| gap | >100% | 156 | 12.2% | −1.758 |
+| pullback № | 1st | 425 | 12.2% | **−1.966** |
+| pullback № | 2nd | 223 | 12.6% | −1.883 |
+| pullback № | **3rd+** | 190 | 14.7% | **−1.566** |
+| confluence | 0 supports | 754 | 12.1% | −1.896 |
+| confluence | **1 support** | 83 | 20.5% | **−1.459** |
+| RVOL-at-time | <2 / 2–5 / >5 | 179 / 61 / 426 | — | −1.79 / −1.93 / −1.85 |
 
-The cheapest tier and the biggest gaps are the worst; genuine relative volume
-is the best single discriminator in the table. **Float and catalyst cuts are
-absent — the data does not exist. See §3.**
+Two things worth naming. **The cheapest tier is the worst** — $2–5 loses a
+full R more per trade than $10–20, and it is half the sample. And **"first"
+is the worst pullback of the three**, which is the setup the strategy is named
+after.
 
-**Market-regime cut (strong/weak momentum environment, high/low volatility):
-NOT PRODUCED.** Twenty consecutive sessions in one month contain no regime
-variation to cut on. The four-year regime question is already answered
-elsewhere on 8,828 symbol-days: buy-the-open on gappers is negative in every
-year 2022–2026 and the regime is not forecastable at any lookback from 5 to
-60 sessions (`research/momentum-replication/reports/2026-08-regime-filter.md`).
+**RVOL does not discriminate at all** at this sample size — the three buckets
+are within 0.14 R of each other. On the 49-trade sample RVOL >5 looked like
+the best feature in the study. It was noise.
+
+**Market-regime cut: NOT PRODUCED.** Two years is not enough distinct regime
+to cut on. The four-year daily-proxy version of that question is already
+answered in `research/momentum-replication/reports/2026-08-regime-filter.md`:
+negative in every year 2022–2026, and the regime is not forecastable at any
+lookback.
 
 ---
 
 ## 9. Holdout and yearly consistency
 
 ```
-CHRONOLOGICAL SPLIT of 19 traded sessions — never shuffled
-  development 8 sessions  2026-07-27 → 2026-08-06
-  validation  5 sessions  2026-08-07 → 2026-08-13
-  holdout     6 sessions  2026-08-14 → 2026-08-21   (opened once)
+CHRONOLOGICAL SPLIT of 373 traded sessions — never shuffled
+  development 167 sessions   validation 94   holdout 112 (opened once)
 ```
 
 | variant | dev | validation | **holdout** | holdout n |
 |---|---:|---:|---:|---:|
-| A | −2.095 | −1.669 | **−1.370** | 14 |
-| B | −1.936 | −0.863 | **−1.010** | 6 |
-| F | −2.586 | −0.804 | **−1.262** | 3 |
+| A | −1.899 | −1.728 | **−1.884** | 271 |
+| B | −1.703 | −1.555 | **−1.828** | 152 |
+| C | −1.352 | −1.443 | **−1.609** | 40 |
+| F | −1.766 | −1.420 | **−1.838** | 87 |
 
-**A six-session holdout is not a holdout.** No parameter was selected on it —
-the config was frozen and hashed before the run — but three trades cannot
-confirm or refute anything, and the "improvement" from development to holdout
-is a two-week drift in one direction, not evidence of stability.
+**The holdout is 112 sessions and 271 trades for variant A, and it agrees with
+development to within 0.02 R.** No parameter was selected on it — the config
+was frozen and hashed before the run.
 
-**Yearly consistency and walk-forward: NOT PRODUCED.** One month of intraday
-data contains no years to compare and `walk_forward_folds()` correctly returns
-`[]` rather than manufacturing folds. `results/yearly.csv` exists and holds a
-single row per variant, all of it 2026.
+| variant | year | trades | win % | avg win R | avg loss R | exp. R | PF |
+|---|---|---:|---:|---:|---:|---:|---:|
+| A | 2024 | 116 | 9.5% | +0.62 | −2.46 | −2.143 | 0.04 |
+| A | 2025 | 404 | 14.6% | +0.70 | −2.23 | −1.761 | 0.08 |
+| A | 2026 | 318 | 11.9% | +0.66 | −2.26 | −1.865 | 0.06 |
+| B | 2024/25/26 | 64/211/182 | — | — | — | −1.994 / −1.536 / −1.813 | — |
+| F | 2024/25/26 | 44/130/105 | — | — | — | −1.911 / −1.520 / −1.846 | — |
+
+**Negative in every year, for every variant.** There is no good year hiding a
+bad one.
 
 ---
 
-## 10. Baselines and placebos (brief §§24–25)
+## 10. Baselines and placebos
 
 Same qualifying ticker-days, same exit ladder, same realistic costs.
 
-| baseline | n | win % | exp. R | 95% CI |
-|---|---:|---:|---:|---|
-| **variant A as shipped** | 49 | 16.3% | **−1.775** | [−2.24, −1.32] |
-| first pullback only (`pullback_number == 1`) | 35 | 17.1% | −2.032 | [−2.55, −1.55] |
-| second pullback only | 10 | 10.0% | −1.311 | [−1.96, −0.46] |
-| third pullback and later | 2 | 0.0% | −1.943 | [−3.38, −0.50] |
-| trigger shifted **up** 5 ticks | 16 | 25.0% | **−1.161** | [−1.81, −0.63] |
-| trigger shifted **down** 5 ticks | 113 | 8.8% | −2.597 | [−2.92, −2.33] |
-| **random entry, 09:35–11:30, 1-ATR stop** | **1,090** | 24.9% | **−0.993** | **[−1.13, −0.87]** |
+| baseline | n | win % | exp. R | PF | avg MFE | 95% CI |
+|---|---:|---:|---:|---:|---:|---|
+| **variant A as shipped** | 838 | 12.9% | **−1.853** | 0.06 | 0.78 | [−1.95, −1.76] |
+| first pullback only | 420 | 12.4% | **−1.961** | 0.05 | 0.82 | [−2.09, −1.84] |
+| second pullback only | 208 | 13.0% | −1.869 | 0.07 | 0.74 | [−2.05, −1.69] |
+| third pullback and later | 166 | 13.3% | **−1.636** | 0.08 | 0.74 | [−1.82, −1.44] |
+| trigger shifted **up** 5 ticks | 376 | 9.3% | −1.963 | 0.05 | 0.66 | [−2.10, −1.83] |
+| trigger shifted **down** 5 ticks | 1,732 | 10.9% | −2.334 | 0.05 | 0.84 | [−2.43, −2.24] |
+| **random entry, 09:35–11:30, 1-ATR stop** | **9,175** | **28.1%** | **−0.823** | **0.25** | **1.16** | **[−0.86, −0.79]** |
 
-Two results here are uncomfortable and are reported because they are:
+**A random entry minute beats the first pullback by more than a full R.** Not
+marginally, not within noise: 9,175 random entries against 838 strategy
+entries, non-overlapping intervals, and the random population wins on every
+metric — win rate 28.1% vs 12.9%, profit factor 0.25 vs 0.06, average
+favourable excursion 1.16 R vs 0.78 R.
 
-1. **A random entry minute beats the first pullback on this tape.** −0.99 R
-   against −1.78 R, with a 22× larger sample. The obvious defence — "the
-   random baseline uses a wider stop, so it pays less tax per R" — was
-   checked and **fails**: the random baseline's 1-ATR stop is a median
-   **1.49%** of price against the strategy's **1.73%**. It pays *more* tax per
-   R, not less, and still wins.
-2. **Restricting to the *first* pullback is worse than not restricting**
-   (−2.03 vs −1.78), and the *second* pullback is the best of the three. The
-   sibling megaday study found the same non-separation from the other side —
-   "par numéro de dip : le 1er et le 2e se valent"
-   (`research/megaday-study/RESULTS.md` §5bis).
+The obvious defence — "the random baseline uses a wider stop, so it pays less
+tax per R" — was checked on the smaller sample and **fails**: its 1-ATR stop
+was a median 1.49% of price against the strategy's 1.73%. It pays *more* tax
+per R and still wins.
 
-An arbitrary +5-tick shift of the trigger also outperforms the trigger the
-strategy actually uses. A rule whose exact level can be moved five cents in a
-direction chosen at random and improve is not a level the market respects on
-this sample.
+**This is the study's central result.** The pattern does not merely fail to
+add value over a random entry on the same qualifying tape — it destroys value
+relative to one. Selecting *for* the first-pullback shape is selecting *for*
+worse outcomes.
 
 ---
 
-## 11. Parameter sensitivity (brief §23)
+## 11. Parameter sensitivity
 
-Run only after the frozen A–F experiment. Each parameter perturbed around its
-shipped value, everything else fixed. Variant A, realistic costs.
+Run only after the frozen A–F experiment; each parameter perturbed around its
+shipped value, everything else fixed.
 
 **`max_stop_pct` — monotone, no plateau, no spike at the shipped value:**
 
-| cap | trades | exp. R | 95% CI |
-|---:|---:|---:|---|
-| 1.5% | 26 | −2.157 | [−2.79, −1.49] |
-| 2.0% | 39 | −1.952 | [−2.54, −1.48] |
-| **3.0% (shipped)** | 49 | −1.775 | [−2.24, −1.32] |
-| 4.5% | 56 | −1.757 | [−2.17, −1.36] |
-| 6.0% | 59 | **−1.672** | [−2.07, −1.29] |
-| 9.0% | 59 | −1.672 | [−2.07, −1.29] |
+| cap | A trades | A exp. R | F trades | F exp. R |
+|---:|---:|---:|---:|---:|
+| 1.5% | 267 | −2.317 | 103 | −2.091 |
+| 2.0% | 549 | −2.026 | 184 | −1.959 |
+| **3.0% (shipped)** | 838 | −1.853 | 279 | −1.704 |
+| 4.5% | 1,018 | −1.719 | 358 | −1.637 |
+| 6.0% | 1,069 | −1.676 | 369 | −1.586 |
+| 9.0% | 1,076 | **−1.669** | 376 | **−1.568** |
 
-The direction predicted by `research/megaday-study/RESULTS.md` §4 replicates
-exactly — widening the cap reduces the execution tax and improves expectancy
-monotonically, flattening above ~6% where the ATR fallback takes over. **It
-never crosses zero.** Correcting the unsourced parameter makes the strategy
-less bad, not profitable. That is the same conclusion the sibling study
-reached: *"Le corriger ne produit pas un edge — il révèle la loterie qui
-était dessous."*
+`research/megaday-study/RESULTS.md` §4 predicted this direction before
+measuring it, and it replicates on an independent two-year sample. **Widening
+the cap reduces the execution tax monotonically and never crosses zero.**
+Correcting the single most consequential unsourced parameter in the strategy
+makes it less bad by 0.18 R and leaves it losing 1.67 R per trade.
 
-**`min_push_pct` — monotone the other way:** 3% → −1.908 (n=71), 5% shipped →
-−1.775 (n=49), 8% → −1.409 (n=17). A stronger impulse requirement helps and
-keeps helping; the shipped value is not a local optimum, which is evidence
-*against* it having been fitted.
+**`min_room_r` (E and F's rule) — tightening it is monotonically worse:**
+F at 0.0 R (gate off) −1.630 → 1.0 R shipped −1.704 → 2.0 R −1.772.
+Independent confirmation of §6.
 
-**`max_retracement_pct`:** A: 30% → −1.533 (n=21), 50% shipped → −1.775
-(n=49), 70% → −1.796 (n=69). On F the gradient is steeper: 30% → −1.045
-(n=9), 70% → −1.781 (n=29). The shipped 50% bound sits mid-range and barely
-bites — 74.9% of candidates pass it. This is
-`research/megaday-study/RESULTS.md` §1 again: median dip depth 39%, p90 49%,
-*"la borne de retracement à 50% ne filtre rien"*.
+**`max_pb_volume_ratio` — looser is better:** F at 0.5 −1.749, shipped 0.7
+−1.704, 0.9 −1.651.
 
-**`min_room_r` (variant E and F's rule) — tightening it makes things worse,
-monotonically.** On variant A the parameter is inert because A does not carry
-the gate; on F:
+**`max_retracement_pct` — inert.** Variant A: −1.852 at 30%, −1.853 at 50%,
+−1.845 at 70%. The bound moves the trade count from 283 to 1,118 and moves
+expectancy by 0.008 R. `research/megaday-study/RESULTS.md` §1 said the same
+from the other direction: median dip depth 39%, p90 49%, *"la borne de
+retracement à 50% ne filtre rien"*.
 
-| required room | trades | exp. R | 95% CI |
-|---:|---:|---:|---|
-| 0.0 R (gate off) | 23 | **−1.361** | [−2.24, −0.63] |
-| 0.5 R | 23 | −1.491 | [−2.34, −0.75] |
-| **1.0 R (shipped)** | 20 | −1.585 | [−2.40, −0.88] |
-| 1.5 R | 19 | −1.728 | [−2.43, −1.11] |
-| 2.0 R | 19 | −1.728 | [−2.43, −1.11] |
+**`reward_multiple` — flat:** −1.849 to −1.856 across 1.5R–4R.
 
-Independent corroboration of §6: the HOD-room gate rejects the better trades
-on this sample. It still contradicts the megaday study's n=62 result, so the
-verdict stays **UNCERTAIN**, but now two different tests inside this study
-point the same way.
+**`min_push_pct` — mildly monotone up:** 3% −1.933 → 8% −1.817.
 
-**`max_pb_volume_ratio` (variant D and F's rule) — looser is better:** on F,
-0.5 → −1.863 (n=15), **0.7 shipped → −1.585** (n=20), 0.8 → −1.451 (n=22),
-0.9 → −1.524 (n=23). Same direction as its accept/reject split.
-
-**`reward_multiple` — flat.** A: −1.771 / −1.775 / −1.786 / −1.803 / −1.762
-across 1.5R–4R. F: −1.597 → −1.533, mildly better at higher targets. The 2R
-profit target is not a fitted optimum, which is the good news in this table.
-
-**`max_stop_pct` on F is NOT monotone** (best at 2.0%, −1.502) where on A it
-is. With 10–25 trades per cell that difference is noise, and it is recorded
-rather than interpreted.
-
-**`max_pullback_bars`, `min_efficiency`, `fallback_atr_mult`:** flat-to-noisy
-neighbourhoods, no spike at the shipped value.
-
-No parameter shows the spike-at-the-shipped-number signature of curve
-fitting. The problem is not that the parameters are over-tuned; it is that
-none of them reaches positive expectancy anywhere in its neighbourhood.
+No parameter shows the spike-at-the-shipped-number signature of curve fitting.
+The parameters are not over-tuned; **there is simply no setting of any of them
+that reaches positive expectancy.**
 
 ---
 
-## 12. Overfitting audit (brief §22)
+## 12. Overfitting audit
 
 ```
 48 strategy parameters affecting universe, entry, stop, sizing or exit
-   21  externally sourced rule      (traceable to the corpus)
-    2  empirically validated        (the $2,000 account basis)
-   25  LOCAL HEURISTIC              (13 flagged [UNTESTED local] by the Pine itself)
-    5  study parameters             (costs, ambiguity policy, limit offset)
-→ effective degrees of freedom ≈ 29.8   (results/degrees_of_freedom.json)
+   21 externally sourced · 2 empirically validated · 25 LOCAL HEURISTIC
+      (13 flagged [UNTESTED local] or [UNCALIBRATED] by the Pine itself)
+→ effective degrees of freedom ≈ 29.8   against 479 independent SESSIONS
 ```
 
-Against **20 independent sessions**. Trades inside one session are not
-independent observations of a parameter choice, so the comparison that matters
-is 29.8 knobs against 20 sessions — roughly one and a half free parameters per
-independent observation. **No out-of-sample conclusion of any kind is
-supportable at that ratio**, in either direction.
-
-Parameters most likely to have been introduced after looking at individual
-trades, flagged on their own evidence:
-
-| parameter | value | why flagged |
-|---|---|---|
-| `max_stop_pct` | 3.0 | nowhere in the corpus; sits on the measured population median (3.02%) |
-| `max_pullback_bars` | 4 | the Pine's own comment reads `[local, was 3]` — a value that moved |
-| `min_efficiency` | 0.60 | `[UNTESTED local]` |
-| `min_dollar_volume` | 100,000 | `[UNTESTED local]` |
-| `minimum_mfe_r` | 0.5 | `[UNTESTED local]`, and the bailout it drives closed 14 of F's 20 trades |
-| `scanMinRVOL` | 2.0 | `[UNCALIBRATED]` in the Pine's own label |
+At 20 sessions this ratio made every conclusion unsupportable. At **479
+sessions it is roughly 16 sessions per free parameter**, which is enough to
+carry the negative result — and a negative result is in any case the direction
+overfitting does not manufacture. You do not accidentally fit your way to
+losing 1.85 R per trade across three years and an untouched holdout.
 
 ---
 
 ## 13. Experiment 2 — F with its own management logic
 
-Identical entries, F's own exits (breakout-or-bailout: out after 2 bars if
-MFE < 0.5 R, or on a close below entry inside 2 bars).
-
 | | n | win % | exp. R | exits |
 |---|---:|---:|---:|---|
-| Exp 1, common ladder | 20 | 20.0% | −1.585 | 12 STOP · 5 T2 · 3 STOP_GAP |
-| **Exp 2, F's management** | 20 | **0.0%** | **−1.885** | **14 BAILOUT** · 3 STOP_GAP · 3 STOP |
+| Exp 1, common ladder | 279 | 14.3% | −1.704 | 201 STOP · 39 T2 · 28 STOP_GAP |
+| **Exp 2, F's management** | 282 | **6.7%** | −1.581 | **150 BAILOUT** · 87 STOP · 18 T2 |
 
-The bailout closed 14 of 20 trades and **took every winner with it** — the
-five trades that reached +2 R under the common ladder were bailed out before
-they got there. On 20 trades this is an observation, not a verdict, but the
-mechanism is legible: a 2-bar / 0.5 R patience threshold on a 1-minute chart
-of a stock whose median favourable excursion is +0.94 R will exit most
-positions during normal noise.
+The breakout-or-bailout rule (out after 2 bars if MFE < 0.5 R) closes **150 of
+282** trades and cuts the win rate in half. It slightly *improves* expectancy
+(−1.581 vs −1.704) by cutting losses faster — it is a damage-control rule that
+works as intended, on a system that should not be running.
 
 ---
 
-## 14. Account simulation (brief §26)
+## 14. Account simulation
 
-$2,000 cash account, 2% risk, $2,000 max position, $1/order, realistic costs,
+$2,000 cash, 2% risk, $2,000 max position, $1/order, realistic costs,
 compounding.
 
-| variant | end equity | return | max DD | trades |
-|---|---:|---:|---:|---:|
-| A | $1,173 | **−41.3%** | −$835 (−41.6%) | 49 |
-| B | $1,600 | −20.0% | −$408 | 26 |
-| F | $1,628 | −18.6% | −$382 | 20 |
+| variant | end equity | return | max DD | **ruined** |
+|---|---:|---:|---:|:-:|
+| A | **−$0.44** | **−100.0%** | −$2,014 | **YES** |
+| B | $0.73 | −100.0% | −$2,013 | — |
+| C | $229.52 | −88.5% | −$1,770 | — |
+| F | **−$0.37** | **−100.0%** | −$2,000 | **YES** |
 
-R performance and dollar performance are separate facts and are kept
-separate. Neither is an estimate of anything at n=49 over 20 sessions.
+**Variants A and F destroy the account.** Longest losing streak in A: 39
+trades. Worst single day: −20.2 R.
 
-**Daily risk governor (brief §27): NOT RUN.** The shipped strategy has no
-governor — only the third-trade half-size rule and the 15:58 flat. The
-overlay is implemented (`_governor_stop` in `src/backtest.py`, configured in
-`config/strategy.yaml`) and switched off, because a with/without comparison
-on 20 sessions where the median session carries 2–3 trades cannot separate
-"the governor helped" from "the governor deleted trades". It runs the moment
-the sample supports it.
+**Daily risk governor (§27): NOT RUN.** The shipped strategy has none — only
+third-trade half-size and the 15:58 flat. The overlay is implemented and
+switched off. Given the account outcome above it would change *how fast* the
+account dies, not whether.
 
 ---
 
-## 15. What this analysis could not check
+## 15. What this analysis still could not check
 
-- **Anything before 2026-07-28 intraday.** The feed stops at 25 days. This is
-  the whole limitation; everything else is downstream of it.
-- **The pre-market session**, which is where the source says the move often
-  is — 07:00 named 78 times against 36 for 09:30 across his July recaps
-  (`research/momentum-replication/reports/2026-07-challenge.md`). Zero
-  pre-market volume on this feed makes it unmodellable.
-- **Delisted names.** 6 of 9 probed return 404. Direction of the resulting
-  bias is unquantified.
-- **Intrabar sequence.** 30.6% of fills are structurally undecidable without
-  tick data.
-- **Halts.** One trade carries `halt_flag`; there is no halt/resume feed to
-  confirm or deny any of them.
-- **Float and catalyst.** No point-in-time source. Brief §17's float cut and
-  all of §18 are absent, not empty.
-- **True spread.** A range-quartile proxy drives the slippage model, and the
-  slippage model drives the headline. An error here moves every number in §5.
-- **The Pine itself.** `src/setups.py` is a Python port. TradingView is the
-  only Pine compiler; state parity is asserted, not proven.
-- **The LATE JOIN path**, declared and not implemented (§2).
-- **Yearly, walk-forward, regime.** One month of data.
+- **Halts.** 157 of 838 exits gap through the stop; 4 carry `halt_flag`.
+  There is no halt archive (the free Nasdaq feed is forward-only —
+  `data_acquisition.md` §5), so a LULD pause that reopened below the stop is
+  booked at the stop price and **understates** the loss.
+- **Intrabar sequence.** 43% of fills are structurally undecidable without
+  tick data. All three policies are reported; the choice moves A between
+  −0.419 R (gross, pessimistic) and +0.108 R (gross, exclude).
+- **True spread.** A range-quartile proxy drives the slippage model, which
+  drives the headline. Quotes are a paid endpoint.
+- **Float and catalyst.** No point-in-time source. §17's float cut and all of
+  §18 are absent, not empty.
+- **Before 2024-09.** Two years, not the eight Alpaca could reach — the
+  survivorship-free universe depends on Massive's grouped daily, which is
+  capped at two years on the free tier.
+- **The Pine itself.** `src/setups.py` is a Python port; TradingView is the
+  only Pine compiler. State parity is asserted, not proven.
+- **The LATE JOIN path**, declared and not implemented.
 
 ---
 
@@ -598,61 +524,72 @@ the sample supports it.
 
 | # | question | answer |
 |---|---|---|
-| 1 | Does the basic first pullback (A) have positive expectancy? | **No evidence that it does.** −1.775 R, CI [−2.24, −1.32], n=49 over 20 sessions. Gross of all costs it is still −0.274 R. **NO DEMONSTRATED EDGE — insufficient sample.** |
-| 2 | Does VWAP/EMA/MACD improve out-of-sample expectancy? | **Directionally yes, inconclusively.** +0.424 R, the only rung that moves up, and the only filter whose accepted set beats its rejected set (+0.710 R separation, 24 losers removed against 2 winners). CIs overlap. **UNCERTAIN, lean KEEP.** |
-| 3 | Does confluence add measurable edge? | **No — it separates the wrong way** (−0.441 R) and passes only 14.2% of candidates. It is also **not in the shipped strategy**. **REMOVE / do not add.** |
-| 4 | Does low pullback volume add measurable edge? | **Not on this sample, twice over.** The accept/reject split separates −0.874 R (rejected trades outperformed), and loosening the threshold on F improves expectancy monotonically (0.5 → −1.863, shipped 0.7 → −1.585, 0.8 → −1.451). **UNCERTAIN, lean REMOVE — n=13 rejected.** |
-| 5 | Does requiring room to HOD add measurable edge? | **Contradictory.** Two tests inside this study say no — separation −1.847 R, and tightening the requirement on F is monotonically worse (gate off −1.361 → 2R −1.728). The sibling megaday study found the *opposite* on n=62 (median MFE 2.04 R vs 1.35 R). **UNCERTAIN — needs the bigger sample to settle.** |
-| 6 | Does F beat the simpler variants after realistic costs? | **No.** F −1.585 R vs B −1.351 R. F's own management logic (Exp 2) is worse still at −1.885 R with a 0% win rate. |
-| 7 | Which filter removes the most **winning** trades? | **Confluence** — 8 of A's winners. |
-| 8 | Which filter removes the most **losing** trades? | **Confluence again** (37), but it removes almost everything. Per unit of damage, **momentum**: 24 losers against 2 winners. |
-| 9 | Largest statistically credible improvement? | **None is statistically credible at this sample size.** The largest point estimate is the momentum stack, +0.424 R on the ladder / +0.710 R on the accept-reject split, CIs overlapping throughout. |
-| 10 | Does it survive stressed slippage? | **The question does not arise: under stressed slippage ~90% of entries are never filled.** Four fills survive. |
-| 11 | Does it survive the untouched holdout? | **The holdout is 6 sessions and 3–14 trades. It cannot answer.** All variants stay negative in it. |
-| 12 | Genuine edge, or overfitting/noise? | **Neither is demonstrated.** ~30 effective degrees of freedom against 20 independent sessions makes any out-of-sample claim unsupportable. What *is* established is narrower and does not depend on the sample: the pattern is negative **before costs**, a random entry on the same tape beats it, and the execution tax at the shipped stop cap is ~0.8 R per trade. |
+| 1 | Does the basic first pullback (A) have positive expectancy? | **No. −1.853 R, CI [−1.95, −1.76], n=838 over 353 sessions.** Negative gross of all costs (−0.419 R). **NEGATIVE EDGE.** |
+| 2 | Does VWAP/EMA/MACD improve out-of-sample expectancy? | **Yes, and it does not matter.** +0.143 R on the ladder, +0.263 R accept-vs-reject, 364 losers removed against 53 winners. It moves −1.85 to −1.71. **KEEP — but it is rearranging deck chairs.** |
+| 3 | Does confluence add measurable edge? | **It is the strongest filter in the study** (+0.428 R separation, +0.238 R on the ladder) — and it is **not in the shipped strategy** and passes only 15.3% of candidates. **KEEP if the strategy were viable; it is not.** *This reverses my earlier small-sample reading.* |
+| 4 | Does low pullback volume add measurable edge? | **Barely.** +0.091 R separation; loosening the threshold improves F monotonically. **UNCERTAIN, lean REMOVE.** |
+| 5 | Does requiring room to HOD add measurable edge? | **No — it is harmful.** −0.612 R separation, and tightening it is monotonically worse in the sweep. **REMOVE.** |
+| 6 | Does F beat the simpler variants after realistic costs? | **No.** F −1.704 vs C −1.472. F's own management (Exp 2) is −1.581 with a 6.7% win rate. |
+| 7 | Which filter removes the most **winning** trades? | **Confluence** — 91 of A's winners (it removes 90% of everything). |
+| 8 | Which filter removes the most **losing** trades? | **Confluence** (650). Per unit of damage, **momentum**: 364 losers against 53 winners. |
+| 9 | Largest statistically credible improvement? | **Confluence**, +0.428 R with non-overlapping-ish intervals at n=84/754. Credible, and insufficient. |
+| 10 | Does it survive stressed slippage? | **The question does not arise: 35 of 838 entries fill.** In a poor-fill environment the strategy is not executable. |
+| 11 | Does it survive the untouched holdout? | **It survives it consistently — as a loss.** A: −1.884 R on 271 trades over 112 sessions, within 0.02 R of development. |
+| 12 | Genuine edge, or overfitting/noise? | **Neither. It is a genuine negative.** Every CI below zero, every year, the holdout, and a random entry on the same tape beats it by more than 1 R. |
 
 ---
 
 ## Verdict
 
-**INSUFFICIENT DATA TO ANSWER THE QUESTION AS ASKED, and the pipeline that
-would answer it is built, tested and ready.**
+**NO EDGE. The First Pullback, as specified in `ross-fp-v4.pine` V9.12, has
+negative expectancy on 838 trades across 479 sessions, 945 names and three
+calendar years — before costs as well as after.**
 
-Three things are established and do not depend on the small sample:
+Four findings, in descending order of how much they should change what you do:
 
-1. **The blocker is 1-minute history, and it is one API key wide.** 25 days
-   is what this environment can reach. `PolygonProvider` is wired for 5 years
-   with extended-hours volume and delisted retention; §7 of `data_quality.md`
-   has the three tests to run before paying and the exact commands after.
-2. **The execution tax is structural, not incidental.** At the shipped 3%
-   stop cap — an unsourced number sitting on the population's median stop —
-   costs consume ~0.8 R per trade, and widening the cap improves expectancy
-   monotonically without ever reaching zero. Two independent studies in this
-   repo now say the same thing.
-3. **Nothing in this study points upward.** Gross of all costs, variant A is
-   negative. A random entry minute on the same qualifying tape beats it. An
-   arbitrary five-tick shift of the trigger beats it. The afternoon trades
-   that make up more than half the sample lose −2.35 R each, and the session
-   window that would delete them is a default switch, not a discovery.
+1. **A random entry minute on the same qualifying tape beats every variant by
+   over a full R**, on 9,175 trades, with a *tighter* stop. The pattern is not
+   neutral; selecting for it selects for worse outcomes than not selecting at
+   all. No filter in the ladder recovers that gap — the best of them closes
+   0.4 R of a 1.0 R deficit.
 
-That is consistent with everything else measured in this repository: 8,828
-symbol-days over 894 sessions with no edge in any year
-(`2026-08-regime-filter.md`), an accurate Pine port at −7.66 R and −10.55 R
-on 330 ticker-days (`2026-08-pine-v8-benchmark.md`), and a 250-megaday study
-whose own verdict is *"moteur de rejet, pas de génération de signal"*
-(`research/megaday-study/RESULTS.md`).
+2. **The strategy loses money gross of all costs** (−0.419 R). Execution
+   costs then add another 0.8 R of tax, driven by a stop cap that is unsourced
+   and sits on the population's median stop. Widening it helps monotonically
+   and never reaches zero. **The costs are not the problem; they are the
+   amplifier.**
 
-**The next step is data, not another rule.** Re-running this exact pipeline on
-five years of consolidated minute bars is a single command and a $29
-subscription, and it would move the sample from 49 trades to something in the
-thousands. Until then the correct statement is the one the brief asked for
-verbatim: **there is insufficient evidence of positive expectancy.**
+3. **Three of the five filters are worth what they cost, and it changes
+   nothing.** Confluence (+0.428) and momentum (+0.263) genuinely separate.
+   HOD room actively harms (−0.612). Pullback volume is noise. Stacking the
+   good ones gets to −1.47 R.
+
+4. **The account dies.** $2,000 → $0 for variants A and F, 39-trade losing
+   streaks, −20 R days.
+
+Two of my own earlier readings were wrong and are corrected above: on 49
+trades confluence looked harmful (it is the best filter) and RVOL >5 looked
+like the strongest feature (it does not discriminate at all). Both were
+small-sample noise reported as findings. That is precisely why the sample was
+worth getting.
+
+This lands where every other measurement in this repository has landed:
+8,828 symbol-days over 894 sessions with no edge in any year
+(`2026-08-regime-filter.md`), an accurate Pine port at −7.66 R and −10.55 R on
+330 ticker-days (`2026-08-pine-v8-benchmark.md`), and a 250-megaday study
+whose verdict is *"moteur de rejet, pas de génération de signal"*
+(`research/megaday-study/RESULTS.md`). Four independent methods, one answer.
+
+**What would be worth testing next is not another filter on this entry.** The
+entry is the problem. If anything here is worth pursuing it is the observation
+that the *random* population reaches +1 R far more often (28.1% win rate,
+1.16 R average MFE) than the pattern-selected one — which says the qualifying
+*universe* may hold something the *pattern* is actively selecting away from.
 
 ---
 
 ```
 NO TICKET ISSUED. Paper only. This study did not validate executable
-bid/ask, borrow, halt state, float, catalyst, or the Pine's own compiled
-behaviour. Every figure above is reproducible from results/run_manifest.json
-(git 1033875, config sha256 d224b4e5…, seed 20260824).
+bid/ask, borrow, halt state, float, catalyst, or the Pine's compiled
+behaviour. Reproducible from results/run_manifest.json.
 ```

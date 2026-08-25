@@ -450,11 +450,6 @@ class AlpacaProvider(_KeyedProvider):
     env_key = "ALPACA_API_KEY_ID"
     BASE = "https://data.alpaca.markets/v2"
 
-    def __init__(self):
-        super().__init__()
-        self.secret = os.environ.get("ALPACA_API_SECRET_KEY", "")
-        self.feed = os.environ.get("ALPACA_FEED", "sip")
-
     @property
     def enabled(self) -> bool:
         return bool(self.key and self.secret)
@@ -462,53 +457,110 @@ class AlpacaProvider(_KeyedProvider):
     def _hdr(self):
         return {"APCA-API-KEY-ID": self.key, "APCA-API-SECRET-KEY": self.secret}
 
-    def minute_bars(self, sym: str, day: dt.date, premarket: bool = True) -> list[Bar]:
+    # documented 200/min on Basic; 351/min observed in a burst on 2026-08-25.
+    # Throttled below the observed figure, not at it.
+    _calls: list[float] = []
+
+    def __init__(self):
+        super().__init__()
+        self.secret = os.environ.get("ALPACA_API_SECRET_KEY", "")
+        self.feed = os.environ.get("ALPACA_FEED", "sip")
+        self.calls_per_min = int(os.environ.get("ALPACA_CALLS_PER_MIN", "180"))
+
+    def _throttle(self):
+        if self.calls_per_min <= 0:
+            return
+        now = time.time()
+        AlpacaProvider._calls = [t for t in AlpacaProvider._calls if now - t < 60.0]
+        if len(AlpacaProvider._calls) >= self.calls_per_min:
+            time.sleep(max(0.0, 60.0 - (now - AlpacaProvider._calls[0]) + 0.2))
+            now = time.time()
+            AlpacaProvider._calls = [t for t in AlpacaProvider._calls if now - t < 60.0]
+        AlpacaProvider._calls.append(time.time())
+
+    def _bars(self, sym: str, start: dt.datetime, end: dt.datetime,
+              timeframe: str = "1Min") -> list[Bar]:
+        """Paged bar pull. `end` is always well in the past for a backtest,
+        which is what lets a free account read the SIP feed at all:
+        'the end parameter must be at least 15 minutes old to query SIP data
+        without a subscription' (docs.alpaca.markets/us/docs/market-data-faq).
+        """
         self._require()
-        start = dt.datetime.combine(day, dt.time(4, 0), ET)
-        end = dt.datetime.combine(day, dt.time(20, 0), ET)
-        url = (f"{self.BASE}/stocks/{sym}/bars?timeframe=1Min"
-               f"&start={start.isoformat()}&end={end.isoformat()}"
-               f"&adjustment=raw&feed={self.feed}&limit=10000")
+        base = (f"{self.BASE}/stocks/{sym}/bars?timeframe={timeframe}"
+                f"&start={start.isoformat()}&end={end.isoformat()}"
+                f"&adjustment=raw&feed={self.feed}&limit=10000")
         out: list[Bar] = []
-        while url:
-            raw = _curl(url, self._hdr())
-            if not raw:
-                break
+        url = base
+        for _ in range(50):                       # page cap: a month is ~3
+            self._throttle()
+            code, raw = _curl2(url, self._hdr(), tries=3)
+            if code != 200 or not raw:
+                if code in (403, 404):
+                    break
+                raise RuntimeError(f"alpaca {sym}: HTTP {code} {(raw or '')[:100]}")
             d = json.loads(raw)
             for r in d.get("bars") or []:
                 ts = int(dt.datetime.fromisoformat(r["t"].replace("Z", "+00:00")).timestamp())
                 out.append(Bar(ts, r["o"], r["h"], r["l"], r["c"], r.get("v", 0.0)))
             tok = d.get("next_page_token")
-            url = (url.split("&page_token")[0] + f"&page_token={tok}") if tok else None
-        if not premarket:
-            out = [b for b in out if dt.time(9, 30) <= b.et.time() < dt.time(16, 0)]
+            if not tok:
+                break
+            url = base + f"&page_token={tok}"
         return out
 
+    def minute_month(self, sym: str, year: int, month: int) -> dict[str, list[Bar]]:
+        """A whole ticker-month of SIP minute bars, split by session date.
+        Same contract as PolygonProvider.minute_month so the driver does not
+        care which provider it is talking to."""
+        key = f"{sym}_{year}-{month:02d}_{self.feed}"
+        cached = self._cache_get("minute_month", key)
+        if cached is None:
+            first = dt.datetime.combine(dt.date(year, month, 1), dt.time(4, 0), ET)
+            nxt = dt.date(year + (month == 12), (month % 12) + 1, 1)
+            last = dt.datetime.combine(nxt, dt.time(4, 0), ET)
+            # A free account may only read SIP when `end` is at least 15
+            # minutes old. For the CURRENT month the month-end is in the
+            # future, which silently returns nothing — clamp it.
+            cutoff = dt.datetime.now(ET) - dt.timedelta(minutes=20)
+            if last > cutoff:
+                last = cutoff
+            if last <= first:
+                return {}
+            bars = self._bars(sym, first, last)
+            by_day: dict[str, list] = {}
+            for b in bars:
+                by_day.setdefault(b.et.date().isoformat(), []).append(
+                    list(asdict(b).values()))
+            self._cache_put("minute_month", key, by_day)
+            cached = by_day
+        return {d: [Bar(*r) for r in rows] for d, rows in cached.items()}
+
+    def minute_bars(self, sym: str, day: dt.date, premarket: bool = True) -> list[Bar]:
+        bars = self.minute_month(sym, day.year, day.month).get(day.isoformat(), [])
+        if not premarket:
+            bars = [b for b in bars if dt.time(9, 30) <= b.et.time() < dt.time(16, 0)]
+        return bars
+
     def daily_bars(self, sym: str, start: dt.date, end: dt.date) -> list[Bar]:
-        self._require()
-        url = (f"{self.BASE}/stocks/{sym}/bars?timeframe=1Day"
-               f"&start={start.isoformat()}&end={end.isoformat()}"
-               f"&adjustment=raw&feed={self.feed}&limit=10000")
-        raw = _curl(url, self._hdr())
-        if not raw:
-            return []
-        d = json.loads(raw)
-        return [Bar(int(dt.datetime.fromisoformat(r["t"].replace("Z", "+00:00")).timestamp()),
-                    r["o"], r["h"], r["l"], r["c"], r.get("v", 0.0))
-                for r in (d.get("bars") or [])]
+        return self._bars(sym, dt.datetime.combine(start, dt.time(0, 0), ET),
+                          dt.datetime.combine(end + dt.timedelta(days=1), dt.time(0, 0), ET),
+                          timeframe="1Day")
 
     def capabilities(self) -> Capability:
         return Capability(
-            name=f"Alpaca market data (feed={self.feed})",
-            minute_bars=True, minute_history_days=2190,
+            name=f"Alpaca market data (Basic, feed={self.feed})",
+            minute_bars=True, minute_history_days=3650,
             premarket_bars=True, premarket_volume=(self.feed == "sip"),
-            delisted_retained=None, quotes=True, trades=True,
+            delisted_retained=True, quotes=True, trades=True,
             halts=False, news=True,
             corporate_actions="adjustment=raw|split|dividend|all",
             adjusted="caller's choice; this study requests raw",
             available_here=self.enabled,
-            note="FREE TIER IS IEX-ONLY. Do not compute RVOL on it. "
-                 "Delisted retention unverified - test before relying on it.")
+            note="MEASURED 2026-08-25 on a free Basic key: feed=sip returns "
+                 "CONSOLIDATED historical bars back to 2016 at 351 calls/min "
+                 "observed. feed=iex on the same SGLY session returned 0.2% "
+                 "of consolidated volume and 23% of the minutes - never "
+                 "compute RVOL on it, and never trust its session high.")
 
 
 class NasdaqHaltFeed:

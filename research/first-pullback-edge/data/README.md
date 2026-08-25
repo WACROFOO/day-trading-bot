@@ -8,7 +8,7 @@ either fetched market data or the output of a `run.py` stage.
 | `candidate_days.{parquet,csv}` | the point-in-time universe: 8,152 ticker-days, 2022-09-01 → 2026-08-21, built from open / previous close / trailing-20 dollar volume only | `run.py universe` |
 | `scanned_ticker_days.{parquet,csv}` | the 218 ticker-days that passed the 09:35 ET intraday scanner inside the minute window | `run.py ablation` |
 | `trades.{parquet,csv}` | the trade ledger — every field brief §11 asks for, one row per (variant × cost model × ambiguity policy × experiment) | `run.py ablation` |
-| `rejected_setups.{parquet,csv}` | EVERY candidate the detector saw with each gate's verdict, traded or not. This is what makes the rejected-trade analysis possible | `run.py ablation` |
+| `rejected_setups.parquet` | **parquet only** (189k rows; the CSV mirror is 115MB, over GitHub's per-file limit). EVERY candidate the detector saw with each gate's verdict, traded or not. This is what makes the rejected-trade analysis possible | `run.py ablation` |
 | `missed_entries.{parquet,csv}` | stop-limit orders that triggered but could not fill inside the limit offset | `run.py ablation` |
 | `placebo_trades.{parquet,csv}` | the null-test ledger: pullback number, shifted triggers | `run.py placebo` |
 | `halts.csv` | accumulated LULD halts from the free Nasdaq RSS feed — halt time to the millisecond, resumption time, reason code. **Forward-only**: the feed is a rolling ~100-record window with no archive, so this builds from the day the poller starts and cannot backfill | `python3 -m src.halt_poller` |

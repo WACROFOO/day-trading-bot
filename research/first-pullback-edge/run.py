@@ -285,6 +285,83 @@ def stage_fetch(args):
         ticker_days_requested=len(res), ticker_days_with_bars=len(have))))
 
 
+
+# ---------------------------------------------------- parallel ablation ----
+# A module-level worker and an explicit initializer, because the cross-product
+# is CPU-bound: threads would serialise on the GIL and buy nothing. Each task
+# is one ticker-day carrying its own bars; the shared frozen inputs (params,
+# variants, the combo list, the entry-limit offset) are installed once per
+# process rather than pickled per task.
+_WK: dict = {}
+
+
+def _init_worker(params, variants, combos, cap_pct, cap_ticks):
+    """combos: list of (label, Variant, params_override_or_None, cost_name,
+    policy, experiment). Carrying the Variant object rather than a name lets
+    the sensitivity and placebo stages reuse this worker for variants that
+    exist only for one run."""
+    _WK.update(params=params, variants=variants, combos=combos,
+               cap_pct=cap_pct, cap_ticks=cap_ticks)
+
+
+def _day_worker(item):
+    from src.data import Bar
+    sym, day_iso, bar_tuples, prev_close, profile, scan_ts = item
+    d = dt.date.fromisoformat(day_iso)
+    bars = [Bar(*t) for t in bar_tuples]
+    trades, missed, setups = [], [], []
+    for label, variant, p_over, cost_name, policy, exp in _WK["combos"]:
+        vname = label
+        r = run_day(sym, d, bars, p_over or _WK["params"], variant,
+                    COST_MODELS[cost_name], policy, experiment=exp,
+                    prev_close=prev_close, same_time_profile=profile,
+                    scan_ts=scan_ts, limit_cap_pct=_WK["cap_pct"],
+                    limit_cap_ticks=_WK["cap_ticks"])
+        rows = trade_records(r.trades)
+        for row in rows:
+            row["variant"] = label
+        trades.extend(rows)
+        missed.extend([m.__dict__ for m in r.missed])
+        if (cost_name == "realistic" and policy == "pessimistic"
+                and exp == "exp1_common_exits"):
+            for s in r.observed:
+                row = {k: v for k, v in s.__dict__.items() if k != "gates"}
+                row["variant"] = vname
+                row.update({f"gate_{g}": s.gates.get(g) for g in GATE_IDS})
+                row["passes_variant"] = s.passes(variant)
+                setups.append(row)
+    return trades, missed, setups
+
+
+
+def _run_parallel(loaded, params, variants, combos, cap_pct, cap_ticks,
+                  workers: int, label: str = "cells"):
+    """Fan the (ticker-day x combo) cross-product over processes."""
+    print(f"  {len(combos)} {label} x {len(loaded)} ticker-days", flush=True)
+    _init_worker(params, variants, combos, cap_pct, cap_ticks)
+    payload = [(sym, d.isoformat(),
+                [(b.ts, b.o, b.h, b.l, b.c, b.v) for b in bars], prev_close,
+                profile, scan_ts)
+               for sym, d, bars, prev_close, profile, scan_ts in loaded]
+    trades, missed, setups, done = [], [], [], 0
+    if workers > 1:
+        from concurrent.futures import ProcessPoolExecutor
+        pool = ProcessPoolExecutor(
+            max_workers=workers, initializer=_init_worker,
+            initargs=(params, variants, combos, cap_pct, cap_ticks))
+        mapper = pool.map(_day_worker, payload, chunksize=8)
+    else:
+        pool, mapper = None, map(_day_worker, payload)
+    for t, m, st in mapper:
+        trades.extend(t); missed.extend(m); setups.extend(st)
+        done += 1
+        if done % 200 == 0:
+            print(f"  {done}/{len(loaded)} · {len(trades)} trade rows", flush=True)
+    if pool is not None:
+        pool.shutdown()
+    return trades, missed, setups
+
+
 # ------------------------------------------------------------ stage: ablation
 def stage_ablation(args):
     cfg = load_config()
@@ -332,34 +409,48 @@ def stage_ablation(args):
     print(f"  {len(loaded)} ticker-days pass the {rules.scan_time_et} "
           f"point-in-time scanner")
 
-    all_trades, all_setups, all_missed = [], [], []
-    policies = ["pessimistic", "optimistic", "exclude"]
-    experiments = [("exp1_common_exits", False), ("exp2_full_management", True)]
-
+    # ---- the cross-product, parallel over ticker-days ------------------
+    # Every (ticker-day, variant, cost, policy, experiment) cell is
+    # independent, so the outer loop is the one worth splitting. Inverting
+    # the nesting — ticker-day outermost — means each worker touches one
+    # day's bars once instead of the driver walking the whole corpus 90
+    # times. On 4 cores that is the difference between ~90 minutes and ~25.
+    combos = []
     for vname, variant in variants.items():
         for cost_name in ("gross", "low", "realistic", "stressed"):
-            cost = COST_MODELS[cost_name]
-            for policy in policies:
-                for exp, is_full in experiments:
+            for policy in ("pessimistic", "optimistic", "exclude"):
+                for exp in ("exp1_common_exits", "exp2_full_management"):
                     if exp == "exp2_full_management" and vname != "F":
                         continue
-                    for sym, d, bars, prev_close, profile, scan_ts in loaded:
-                        r = run_day(sym, d, bars, params, variant, cost, policy,
-                                    experiment=exp, prev_close=prev_close,
-                                    same_time_profile=profile, scan_ts=scan_ts,
-                                    limit_cap_pct=cap_pct, limit_cap_ticks=cap_ticks)
-                        all_trades.extend(trade_records(r.trades))
-                        all_missed.extend([m.__dict__ for m in r.missed])
-                        if (cost_name == "realistic" and policy == "pessimistic"
-                                and exp == "exp1_common_exits"):
-                            for s in r.observed:
-                                row = {k: v for k, v in s.__dict__.items() if k != "gates"}
-                                row["variant"] = vname
-                                row.update({f"gate_{g}": s.gates.get(g)
-                                            for g in GATE_IDS})
-                                row["passes_variant"] = s.passes(variant)
-                                all_setups.append(row)
-        print(f"  variant {vname}: cumulative trades {len(all_trades)}")
+                    combos.append((vname, variants[vname], None,
+                                   cost_name, policy, exp))
+    print(f"  {len(combos)} variant x cost x policy x experiment cells "
+          f"x {len(loaded)} ticker-days")
+
+    _init_worker(params, variants, combos, cap_pct, cap_ticks)
+
+    all_trades, all_setups, all_missed = [], [], []
+    done = 0
+    payload = [(sym, d.isoformat(),
+                [(b.ts, b.o, b.h, b.l, b.c, b.v) for b in bars], prev_close,
+                profile, scan_ts)
+               for sym, d, bars, prev_close, profile, scan_ts in loaded]
+    if args.compute_workers > 1:
+        from concurrent.futures import ProcessPoolExecutor
+        pool = ProcessPoolExecutor(
+            max_workers=args.compute_workers, initializer=_init_worker,
+            initargs=(params, variants, combos, cap_pct, cap_ticks))
+        mapper = pool.map(_day_worker, payload, chunksize=8)
+    else:
+        pool, mapper = None, map(_day_worker, payload)
+    for t, m, st in mapper:
+        all_trades.extend(t); all_missed.extend(m); all_setups.extend(st)
+        done += 1
+        if done % 100 == 0:
+            print(f"  {done}/{len(loaded)} ticker-days · "
+                  f"{len(all_trades)} trade rows", flush=True)
+    if pool is not None:
+        pool.shutdown()
 
     save_table(all_trades, "trades")
     save_table(all_setups, "rejected_setups")
@@ -567,6 +658,8 @@ def stage_sensitivity(args):
     variants = variants_from_config(cfg)
     provider = get_provider(args.provider)
     rules = _rules(cfg)
+    cap_pct = _v(cfg["execution"]["stop_limit_cap_pct"])
+    cap_ticks = _v(cfg["execution"]["stop_limit_cap_ticks"])
     loaded = _load_scanned(provider, cfg, rules, args.days, args.workers, args)
     cost = COST_MODELS["realistic"]
 
@@ -581,34 +674,34 @@ def stage_sensitivity(args):
         "max_pullback_bars": [2, 3, 4, 5, 6],
         "fallback_atr_mult": [0.5, 1.0, 1.5, 2.0, 3.0],
     }
-    rows = []
-    for vname in (args.variants or ["A", "E", "F"]):
+    combos, meta = [], {}
+    for vname in (args.variants or ["A", "F"]):
         variant = variants[vname]
         for pname, values in grid.items():
             for val in values:
+                lab = f"{vname}|{pname}|{val}"
                 v2 = Variant(**{**variant.__dict__, "override": {pname: val}})
-                # the override has to reach the EXECUTION model too, not only
-                # the setup detector: reward_multiple and the risk caps live
-                # on both sides. Passing the un-overridden base here silently
-                # froze every exit-side parameter at its shipped value.
-                p2 = v2.p(base)
-                trades = []
-                for sym, d, bars, prev_close, profile, scan_ts in loaded:
-                    r = run_day(sym, d, bars, p2, v2, cost, "pessimistic",
-                                prev_close=prev_close, same_time_profile=profile,
-                                scan_ts=scan_ts)
-                    trades.extend(trade_records(r.trades))
-                m = core_metrics(trades)
-                ci = clustered_bootstrap(trades, seed=cfg["seed"])
-                rows.append(dict(variant=vname, parameter=pname, value=val,
-                                 shipped=(val == getattr(base, pname)),
-                                 trades=m.get("trades", 0),
-                                 expectancy_r=m.get("expectancy_r"),
-                                 win_rate=m.get("win_rate"),
-                                 profit_factor=m.get("profit_factor"),
-                                 max_dd_r=m.get("max_dd_r"),
-                                 ci_lo=ci["lo"], ci_hi=ci["hi"]))
-            print(f"  {vname} {pname}: done")
+                combos.append((lab, v2, v2.p(base), "realistic",
+                               "pessimistic", "exp1_common_exits"))
+                meta[lab] = (vname, pname, val, val == getattr(base, pname))
+    trades, _, _ = _run_parallel(loaded, base, variants, combos, cap_pct,
+                                 cap_ticks, args.compute_workers,
+                                 label="parameter settings")
+    by_lab = {}
+    for t in trades:
+        by_lab.setdefault(t["variant"], []).append(t)
+    rows = []
+    for lab, (vname, pname, val, shipped) in meta.items():
+        sel = by_lab.get(lab, [])
+        m = core_metrics(sel)
+        ci = clustered_bootstrap(sel, seed=cfg["seed"])
+        rows.append(dict(variant=vname, parameter=pname, value=val,
+                         shipped=shipped, trades=m.get("trades", 0),
+                         expectancy_r=m.get("expectancy_r"),
+                         win_rate=m.get("win_rate"),
+                         profit_factor=m.get("profit_factor"),
+                         max_dd_r=m.get("max_dd_r"),
+                         ci_lo=ci["lo"], ci_hi=ci["hi"]))
     save_results(rows, "sensitivity")
     print(f"wrote {len(rows)} sensitivity rows")
 
@@ -771,8 +864,9 @@ def _prefetch_minute_months(provider, pairs, workers: int = 1):
     if not hasattr(provider, "minute_month"):
         return
     months = sorted({(sym, day[:4], day[5:7]) for sym, day, _ in pairs})
+    rate = max(1, getattr(provider, "calls_per_min", 5))
     print(f"  prefetching {len(months)} ticker-months "
-          f"(~{len(months) / 5 / 60:.1f}h at 5 calls/min)")
+          f"(~{len(months) / rate / 60:.1f}h at {rate} calls/min)")
     for n, (sym, y, m) in enumerate(months, 1):
         try:
             provider.minute_month(sym, int(y), int(m))
@@ -966,6 +1060,7 @@ def main():
     a.add_argument("--end", default=None)
     a.add_argument("--workers", type=int, default=8)
     a.add_argument("--provider", default=None)
+    a.add_argument("--compute-workers", type=int, default=4)
     a.add_argument("--prefetch", action="store_true",
                    help="warm the ticker-month cache first (one request per "
                         "ticker-month; do this before a long ablation)")
@@ -977,6 +1072,7 @@ def main():
     sv.add_argument("--end", default=None)
     sv.add_argument("--workers", type=int, default=8)
     sv.add_argument("--variants", nargs="*", default=None)
+    sv.add_argument("--compute-workers", type=int, default=4)
     sv.add_argument("--provider", default=None)
     sv.set_defaults(func=stage_sensitivity)
 
@@ -986,6 +1082,7 @@ def main():
     pl.add_argument("--end", default=None)
     pl.add_argument("--workers", type=int, default=8)
     pl.add_argument("--provider", default=None)
+    pl.add_argument("--compute-workers", type=int, default=4)
     pl.set_defaults(func=stage_placebo)
 
     vf = sub.add_parser("verify")

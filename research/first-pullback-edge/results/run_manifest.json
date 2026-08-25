@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-08-24T21:20:51.590824+00:00",
-  "git_commit": "797ce4a7145c7808cd5893ab074bad9a790c0dea",
+  "generated_utc": "2026-08-25T20:07:36.025392+00:00",
+  "git_commit": "ffcec8a7c791f005395c73cfce838fa4e8b7339e",
   "config_sha256": "1c0ee57059badf1512f8972d8cf1929292c7afdd2ad56b3715a419d4cd7955ab",
   "strategy_file": "knowledge-base/tradingview/ross-fp-v4.pine",
   "strategy_rev": "V9.12",
@@ -61,10 +61,10 @@
     "ticker_days_with_bars": 324
   },
   "ablation": {
-    "candidate_ticker_days": 364,
-    "scanned_ticker_days": 218,
-    "sessions": 20,
-    "trades_rows": 1340,
-    "setups_rows": 7421
+    "candidate_ticker_days": 2377,
+    "scanned_ticker_days": 1837,
+    "sessions": 479,
+    "trades_rows": 20127,
+    "setups_rows": 188966
   }
 }

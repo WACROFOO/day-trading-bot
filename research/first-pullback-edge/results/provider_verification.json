@@ -1,11 +1,11 @@
 {
-  "provider": "polygon",
-  "checked_utc": "2026-08-24T19:33:42.273022+00:00",
+  "provider": "alpaca",
+  "checked_utc": "2026-08-25T19:22:27.426215+00:00",
   "results": {
     "premarket_volume": true,
-    "delisted": true,
-    "minute_depth_days": 700,
-    "pit_symbols": true,
+    "delisted": false,
+    "minute_depth_days": 1200,
+    "pit_symbols": false,
     "halts_live": true
   }
 }

@@ -1,11 +1,23 @@
-ablation over 364 candidate ticker-days, 2026-07-21 -> 2026-08-24
-  218 ticker-days pass the 09:35:00 point-in-time scanner
-  variant A: cumulative trades 409
-  variant B: cumulative trades 634
-  variant C: cumulative trades 662
-  variant D: cumulative trades 671
-  variant E: cumulative trades 680
-  variant F: cumulative trades 1040
-  variant D_noconf: cumulative trades 1190
-  variant E_noconf: cumulative trades 1340
-wrote 1340 trade rows, 7421 setup rows
+  2377 candidate ticker-days, 479 sessions, 1351 names  [2024-09-24 -> 2026-08-21, cap 5/session]
+ablation, 2024-09-24 -> 2026-08-21
+  1837 ticker-days pass the 09:35:00 point-in-time scanner
+  108 variant x cost x policy x experiment cells x 1837 ticker-days
+  100/1837 ticker-days · 1554 trade rows
+  200/1837 ticker-days · 2726 trade rows
+  300/1837 ticker-days · 4214 trade rows
+  400/1837 ticker-days · 5476 trade rows
+  500/1837 ticker-days · 6358 trade rows
+  600/1837 ticker-days · 7496 trade rows
+  700/1837 ticker-days · 8408 trade rows
+  800/1837 ticker-days · 9285 trade rows
+  900/1837 ticker-days · 10337 trade rows
+  1000/1837 ticker-days · 11437 trade rows
+  1100/1837 ticker-days · 12083 trade rows
+  1200/1837 ticker-days · 13412 trade rows
+  1300/1837 ticker-days · 14579 trade rows
+  1400/1837 ticker-days · 15926 trade rows
+  1500/1837 ticker-days · 16488 trade rows
+  1600/1837 ticker-days · 17661 trade rows
+  1700/1837 ticker-days · 18617 trade rows
+  1800/1837 ticker-days · 19519 trade rows
+wrote 20127 trade rows, 188966 setup rows

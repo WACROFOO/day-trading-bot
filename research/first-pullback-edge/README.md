@@ -4,13 +4,17 @@ An adversarial ablation of `knowledge-base/tradingview/ross-fp-v4.pine`
 (REV V9.12): six increasingly restrictive variants, point-in-time universe,
 no look-ahead, costs modelled, ambiguity counted.
 
-**Read `reports/data_quality.md` before `reports/final_report.md`.** The
-headline is a data verdict, not a strategy verdict: 1-minute history reaches
-**25 days** from the only feed available here, so the ablation runs on **20
-sessions and 49 trades at its widest rung** where the brief asks for
-1,000–3,000 ticker-days. Everything the pipeline can do without minute data
-— the 4-year point-in-time universe — **is** done: 8,152 candidate ticker-days
-over 976 sessions.
+**Verdict: NO EDGE.** 838 trades across 479 sessions, 945 names and three
+calendar years. Every variant's 95% CI lies entirely below zero, in every
+year and in the untouched 112-session holdout — and a **random entry minute
+on the same tape beats every variant by more than a full R** (−0.823 R on
+9,175 trades vs −1.853 R for the basic first pullback). The strategy is
+negative **gross of all costs**; costs then add ~0.8 R of tax on top.
+
+Read `reports/data_acquisition.md` for how the data blocker was cleared
+(two free API keys), then `reports/final_report.md`.
+`reports/data_quality.md` is kept as the record of what was wrong with the
+original feed and how it was found.
 
 ## Layout
 
@@ -37,39 +41,40 @@ over 976 sessions.
 
 ```bash
 cd research/first-pullback-edge
+export POLYGON_API_KEY=...           # free Massive Basic — the universe
+export ALPACA_API_KEY_ID=... ALPACA_API_SECRET_KEY=... ALPACA_FEED=sip
 python3 -m pytest tests/ -q                       # 33 tests
-python3 -m src.data_quality                       # measure the feed
-python3 run.py universe --start 2022-09-01 --end 2026-08-21
-python3 run.py fetch     --days 25
-python3 run.py ablation  --days 25
-python3 run.py sensitivity --days 25 --variants A B F
-python3 run.py placebo   --days 25
+python3 run.py verify --provider alpaca           # the five decisive checks
+python3 run.py universe --grouped --provider polygon \
+        --start 2024-09-24 --end 2026-08-21       # survivorship-free, ~1.7h
+python3 run.py ablation --provider alpaca --prefetch \
+        --start 2024-09-24 --end 2026-08-21 --compute-workers 4
+python3 run.py sensitivity --provider alpaca --variants A F \
+        --start 2024-09-24 --end 2026-08-21
+python3 run.py placebo  --provider alpaca --start 2024-09-24 --end 2026-08-21
 python3 run.py report
 ```
+
+**Massive for the universe, Alpaca for the bars.** Only Massive has a
+point-in-time symbol list that includes delisted names (the survivorship
+fix); only Alpaca serves consolidated minute bars deep and fast enough to
+make the intraday run affordable. Neither alone is sufficient.
 
 `results/run_manifest.json` carries the git commit, the config SHA-256, the
 study period, the cost assumptions and the seed.
 
-## The one thing that would change the answer
+## Data provenance
 
-A minute feed with years of history, extended-hours volume and delisted
-tickers — and **the free tier of Massive (formerly Polygon.io) has all
-three.** Full reasoning, with the vendor docs quoted, in
-`reports/data_acquisition.md`.
+Both feeds were verified from this container rather than trusted:
+`run.py verify` makes the requests — pre-market volume, delisted retention,
+minute-history depth, the point-in-time symbol list, the halt feed — and
+writes `results/provider_verification.json`.
 
-```bash
-export POLYGON_API_KEY=...                    # free "Stocks Basic" plan
-python3 run.py verify --provider polygon      # the five decisive checks
-python3 run.py universe --provider polygon --start 2024-08-01 --end 2026-08-21
-python3 run.py ablation --provider polygon --days 500
-```
-
-`run.py verify` makes the requests rather than trusting the docs: pre-market
-volume, delisted retention, minute-history depth, the point-in-time symbol
-list, and the free Nasdaq halt feed. Run it before believing any backtest.
-
-Nothing else in the pipeline changes — the provider is one seam, the config
-is frozen and hashed, and the tests do not care where bars come from.
+The two feeds were also **cross-checked against each other** on 28 shared RTH
+sessions: identical minute counts, identical session highs and lows, volume
+within 0.7%, **zero disagreements**. Two independent consolidated sources
+agreeing is the defence this repo lacked when a stitched-window adjustment
+once fabricated +10,555% gaps (`momentum-replication/HISTORY.md` defect 1).
 
 ## Related work in this repo — cite before re-deriving
 
