@@ -4,12 +4,18 @@ An adversarial ablation of `knowledge-base/tradingview/ross-fp-v4.pine`
 (REV V9.12): six increasingly restrictive variants, point-in-time universe,
 no look-ahead, costs modelled, ambiguity counted.
 
-**Verdict: NO EDGE.** 838 trades across 479 sessions, 945 names and three
-calendar years. Every variant's 95% CI lies entirely below zero, in every
-year and in the untouched 112-session holdout — and a **random entry minute
-on the same tape beats every variant by more than a full R** (−0.823 R on
-9,175 trades vs −1.853 R for the basic first pullback). The strategy is
-negative **gross of all costs**; costs then add ~0.8 R of tax on top.
+**Verdict: NO EDGE.** 3,627 trades across 1,453 sessions, 5,797 names and
+**eleven calendar years** (2016–2026, COVID and the meme-stock era included).
+Every variant's 95% CI lies entirely below zero, in **every one of the eleven
+years**, and in a 478-session untouched holdout — and a **random entry minute
+on the same tape beats every variant by 0.80 R** (−0.940 R on 42,510 trades
+vs −1.741 R for the basic first pullback). The strategy is negative **gross
+of all costs**. Applying every correction the study can justify, at once,
+reaches −1.222 R.
+
+The universe is survivorship-free by construction: **12,613 tickers, 6,701
+of them carrying a delisted date — more than half the universe is companies
+that no longer exist.**
 
 Read `reports/data_acquisition.md` for how the data blocker was cleared
 (two free API keys), then `reports/final_report.md`.
@@ -31,8 +37,11 @@ original feed and how it was found.
 | `src/metrics.py` | §13 metrics and the day-clustered bootstrap |
 | `src/validation.py` | chronological splits, ablation marginals, rejected-trade split, gate overlap, placebos |
 | `src/param_audit.py` | parameter inventory and the degrees-of-freedom estimate |
+| `src/fetch_plan.py` | prices the intraday fetch before spending hours on it |
+| `src/halt_poller.py` | accumulates LULD halts from the free Nasdaq feed (forward-only) |
+| `extend_universe.py` | the pre-2024 universe: historical ticker list x multi-symbol daily |
 | `tests/` | 33 tests, all about look-ahead and fill ordering. `python3 -m pytest tests/ -q` |
-| `run.py` | `verify` → `universe` → `fetch` → `ablation` → `sensitivity` → `placebo` → `report` |
+| `run.py` | `verify` → `universe` → `ablation` → `sensitivity` → `placebo` → `stage2` → `report` |
 | `data/` | `candidate_days`, `trades`, `rejected_setups`, `missed_entries` (parquet + csv) |
 | `results/` | `summary`, `ablation`, `yearly`, `regime`, `sensitivity`, `rejected_trades`, `holdout`, `parameter_inventory`, `run_manifest.json` |
 | `reports/` | `data_quality.md` first, then `data_acquisition.md` (which free APIs unblock it), then `final_report.md` |
@@ -46,12 +55,14 @@ export ALPACA_API_KEY_ID=... ALPACA_API_SECRET_KEY=... ALPACA_FEED=sip
 python3 -m pytest tests/ -q                       # 33 tests
 python3 run.py verify --provider alpaca           # the five decisive checks
 python3 run.py universe --grouped --provider polygon \
-        --start 2024-09-24 --end 2026-08-21       # survivorship-free, ~1.7h
+        --start 2024-09-24 --end 2026-08-21       # grouped daily, ~1.7h
+python3 extend_universe.py --start 2016-01-04 --end 2024-09-23  # ~1.5h
 python3 run.py ablation --provider alpaca --prefetch \
-        --start 2024-09-24 --end 2026-08-21 --compute-workers 4
+        --start 2016-01-04 --end 2026-08-21 --compute-workers 4
 python3 run.py sensitivity --provider alpaca --variants A F \
-        --start 2024-09-24 --end 2026-08-21
-python3 run.py placebo  --provider alpaca --start 2024-09-24 --end 2026-08-21
+        --start 2016-01-04 --end 2026-08-21
+python3 run.py placebo --provider alpaca --start 2016-01-04 --end 2026-08-21
+python3 run.py stage2  --provider alpaca --start 2016-01-04 --end 2026-08-21
 python3 run.py report
 ```
 

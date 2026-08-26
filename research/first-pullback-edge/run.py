@@ -584,10 +584,11 @@ def stage_report(args):
     # ---- rejected-trade analysis (brief section 20) ------------------
     # Counterfactual: run variant A's trades and split them by each gate.
     a_trades = per_variant["A"]
+    gidx = _gate_index(setups, "A")
     by_gate = {}
     for g in ("momentum", "confluence", "pb_volume", "hod_room", "halt_band"):
-        acc = [t for t in a_trades if _gate_of(setups, t, g) is True]
-        rej = [t for t in a_trades if _gate_of(setups, t, g) is False]
+        acc = [t for t in a_trades if _gate_of(gidx, t, g) is True]
+        rej = [t for t in a_trades if _gate_of(gidx, t, g) is False]
         by_gate[g] = dict(accepted=acc, rejected=rej)
     save_results(V.accepted_vs_rejected(by_gate), "rejected_trades")
 
@@ -637,12 +638,24 @@ def stage_report(args):
                       for v in all_variants}, indent=2))
 
 
-def _gate_of(setups, trade, gate):
+def _gate_index(setups, variant="A"):
+    """(sym, day, ts) -> the gate vector, built once.
+
+    This used to be a linear scan per trade. At 654k setup rows and 4k
+    trades that is billions of comparisons and the report stage simply never
+    returns — an O(n^2) that was invisible at 49 trades and fatal at scale.
+    """
+    idx = {}
     for s in setups:
-        if (s.get("sym") == trade["sym"] and s.get("day") == trade["day"]
-                and s.get("ts") == trade["setup_ts"] and s.get("variant") == "A"):
-            return s.get(f"gate_{gate}")
-    return None
+        if s.get("variant") != variant:
+            continue
+        idx[(s.get("sym"), s.get("day"), s.get("ts"))] = s
+    return idx
+
+
+def _gate_of(idx, trade, gate):
+    s = idx.get((trade["sym"], trade["day"], trade["setup_ts"]))
+    return s.get(f"gate_{gate}") if s else None
 
 
 
