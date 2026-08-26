@@ -143,24 +143,69 @@ python3 run.py verify --provider alpaca
 | *"For historical queries, the `end` parameter must be at least 15 minutes old to query SIP data without a subscription"* | `docs.alpaca.markets/us/docs/market-data-faq` |
 | the default `feed` is *"the 'best' available feed based on the user's subscription"* — which for a free account means IEX unless `feed=sip` is passed explicitly | same |
 
-**Read that third row carefully, because it is the interesting one.** Taken
-at face value, a free Alpaca account can pull **SIP consolidated** historical
-bars back to 2016 at 200 requests/minute, provided every query ends more than
-15 minutes ago — which every backtest query does. If that holds, it is
-strictly better than the Massive free tier on both depth and throughput.
+**MEASURED 2026-08-25 on a real free Basic key — the claim holds.**
 
-**It is a vendor claim and this study has not verified it**, because there is
-no key in this container. `run.py verify --provider alpaca` is the check, and
-the thing to look at is whether the returned volume for a thin small-cap is
-consolidated-sized or ~2.5% of it. **Do not compute RVOL on IEX-only volume**
-— every threshold in `config/strategy.yaml` is calibrated against consolidated
-tape, and an IEX-only denominator makes the comparison meaningless. Worse for
-this study specifically, IEX-only bars can miss the prints that formed the
-session high, and the entry trigger *is* a high.
+```
+IEX vs SIP, same symbol, same session, free account:
+
+  SGLY 2026-08-20   iex   188 bars   total volume        91,167
+                    sip   827 bars   total volume    45,041,453
+  AAPL 2026-08-20   iex   392 bars   total volume     1,163,164
+                    sip   821 bars   total volume    41,127,645
+
+history depth (feed=sip, one RTH session, 100-bar probe):
+  2026 · 2025 · 2024 · 2022 · 2020 · 2018 · 2016  -> ALL return data
+
+rate limit: 30 rapid calls, 0 rejected, 5.1s -> 351 calls/min observed
+            (documented 200/min; this study throttles to 180)
+```
+
+Three things follow, and the middle one is a warning worth repeating:
+
+1. **A free Alpaca account reads consolidated SIP historical bars back to
+   2016 at 180+ calls/min.** That is 5 years deeper and 36x faster than the
+   Massive free tier, and it is what made an eleven-year intraday study
+   possible at all.
+2. **IEX is 0.2% of consolidated volume on a small cap** — not the ~2.5%
+   quoted for the market as a whole — and it carries **23% of the minutes**.
+   Never compute RVOL on it. Worse for this study specifically: a feed
+   missing 77% of the minutes will miss the print that formed the session
+   high, and the entry trigger *is* a high.
+3. **The month-end clamp matters.** A free account may only read SIP when
+   `end` is at least 15 minutes old. For the CURRENT month the month-end is
+   in the future, and the request silently returns nothing rather than
+   erroring. `minute_month()` clamps `end` to now-20min; without it the most
+   recent month is quietly empty.
 
 Alpaca also has a free news API back to 2015, which is the only realistic
-free route to the catalyst analysis (`final_report.md` §3 records it as
-impossible; it becomes possible here).
+free route to the catalyst analysis (`final_report.md` records it as
+impossible; it becomes possible with that key).
+
+### What Alpaca does NOT give — and why both keys are needed
+
+`run.py verify --provider alpaca` fails one check that Massive passes:
+**there is no point-in-time symbol list.** Alpaca's `/v2/assets` is
+current-state. That single endpoint — Massive's
+`/v3/reference/tickers?date=&active=false` — is the whole survivorship fix,
+and it is why this study uses **Massive for the universe and Alpaca for the
+bars**. Neither alone is sufficient:
+
+| | Massive free | Alpaca free |
+|---|:-:|:-:|
+| point-in-time symbol list incl. delisted | **✓** | ✗ |
+| historical ticker list with `delisted_utc` | **✓** (12,613 tickers, 6,701 delisted) | ✗ |
+| grouped daily (whole market, one call) | **✓** | ✗ |
+| minute-bar depth | 2 years | **✓ 2016** |
+| throughput | 5/min | **✓ 180+/min** |
+
+### Cross-check: the two feeds agree exactly
+
+28 shared RTH sessions compared bar-for-bar: **identical minute counts,
+identical session highs and lows, volume within 0.7%, zero disagreements.**
+Two independent consolidated sources agreeing is the defence this repo
+lacked when a stitched-window adjustment fabricated +10,555% gaps
+(`research/momentum-replication/HISTORY.md` defect 1). Running one feed
+unchecked is how that happened; running two is cheap.
 
 ---
 
