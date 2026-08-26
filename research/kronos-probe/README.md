@@ -71,6 +71,32 @@ ten seconds. The entire bill is the rollout, because Kronos has **no KV
 cache** — each of the 30 generated bars re-runs the full stack over the whole
 window.
 
+## The predicted candles are not always valid candles
+
+Measured, not assumed — `results/bar_validity.json`, 1,080 predicted bars:
+
+| check | rate |
+|---|---:|
+| high < close | 1.11% |
+| high < open | 0.74% |
+| low > open | 1.20% |
+| low > close | 1.11% |
+| **high < low** outright | **0.09%** |
+| **any inconsistency** | **3.43%** |
+
+Kronos reconstructs O/H/L/C through a quantiser trained on OHLC but not
+constrained by it. Their own downstream never notices, because every signal
+in their bundled backtest comes from the close column alone. This probe reads
+high and low directly, so that rate is roughly **one bad bar per 30-bar
+path** — enough to flip a barrier touch.
+
+So both readings are carried: `p_win` from the raw bars and `p_win_repaired`
+after a **monotone** repair (`high = max(open, high, close)`,
+`low = min(open, low, close)`). Monotone matters — a repair that could
+*narrow* a bar would invent barrier misses. `invalid_bar_rate` travels per
+anchor, so the rate stays attached to the result instead of living only in a
+diagnostic file.
+
 ## Known limitations, stated before any result
 
 - **19% of anchors drop** for having fewer than 150 same-session bars before
@@ -95,11 +121,32 @@ window.
 | Path | What |
 |---|---|
 | `src/bars.py` | session-aware slicing of the cached Alpaca minute bars; drops rather than pads |
-| `src/anchors.py` | decision points from the finished ablation, with their realised outcomes |
+| `src/anchors.py` | both populations — variant-A decision points, and the random-entry arm rebuilt from the parent study's own `SessionState` |
 | `src/forecast.py` | Kronos inference keeping the sample axis, and the barrier reduction |
+| `src/truth.py` | the matched outcome from the forward tape, graded by the same rule the model's paths are |
 | `price_run.py` | measures throughput and projects the real run |
-| `run_probe.py` | the discrimination test: P(+1R before -1R) vs what happened |
-| `results/` | `pricing.json`, then `probe_*.csv` and `probe_*_summary.json` |
+| `run_probe.py` | generates the probabilities for one population |
+| `score.py` | grades them — kept separate so re-scoring never costs a rollout |
+| `diagnose_bars.py` | how often a predicted candle is not a candle |
+| `tests/` | 20 tests, all on assumptions that fail silently. `python3 -m pytest tests/ -q` |
+| `results/` | `pricing.json`, `bar_validity.json`, then `probe_*.csv` and `probe_*_summary.json` |
+
+## The two arms
+
+| arm | anchors | what it asks |
+|---|---|---|
+| `--population pattern` | variant-A `setup_ts` | can the model sort the pullback trades? |
+| `--population random` | random minute 09:35–11:30 on a qualifying ticker-day, risk = 1 ATR | the report's actual open question |
+
+The second is the one that matters. The report found the **random**
+population reaches +1 R far more often than the pattern-selected one. If the
+model's `p_win` does not also rank random above pattern, it is blind to
+whatever actually separates them — and that is a result, not a null.
+
+The random anchors were never stored (`run.py` keeps only `day`, `net_r`,
+`mfe_r`), so they are rebuilt under the same rule using the parent study's
+own `SessionState`, which makes the ATR the identical causal one the backtest
+used.
 
 ## Run
 
@@ -109,9 +156,16 @@ pip install huggingface_hub safetensors
 git clone https://github.com/shiyu-coder/Kronos /home/user/shiyu-coder/kronos
 
 cd research/kronos-probe
+python3 -m pytest tests/ -q                       # 20 tests
 python3 price_run.py --anchors 16 --paths 8 --batch 16
-python3 run_probe.py --limit 300 --paths 16 --batch 16
+python3 diagnose_bars.py --anchors 6 --paths 6
+python3 run_probe.py --limit 300 --paths 16 --batch 16 --population pattern
+python3 run_probe.py --limit 300 --paths 16 --batch 16 --population random
+python3 score.py results/probe_pattern.csv results/probe_random.csv
 ```
+
+Run the arms **sequentially**, not in parallel: four cores saturate at batch
+4, so concurrent jobs halve each other rather than finishing sooner.
 
 Weights come from the Hugging Face Hub on first use
 (`NeoQuasar/Kronos-Tokenizer-base`, `NeoQuasar/Kronos-small`). No fine-tuning
