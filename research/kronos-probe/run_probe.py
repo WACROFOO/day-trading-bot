@@ -170,8 +170,13 @@ def main():
               f"eta {(el / done) * (len(items) - done) / 60:.1f} min",
               flush=True)
 
-    out = truth.attach(pd.DataFrame(recs), horizon=a.pred)
+    # Write the rollouts BEFORE grading them. The probabilities cost ninety
+    # minutes; the grade costs seconds and is re-runnable via score.py. An
+    # exception in the truth join must never discard the expensive half.
     dest = ROOT / "results" / f"probe_{tag}.csv"
+    raw = pd.DataFrame(recs)
+    raw.to_csv(dest, index=False)
+    out = truth.attach(raw, horizon=a.pred)
     out.to_csv(dest, index=False)
 
     # Score only where the barrier question actually resolved. 'neither' is a

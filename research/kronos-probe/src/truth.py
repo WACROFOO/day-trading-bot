@@ -27,6 +27,15 @@ def barrier_outcome(sym: str, day: str, anchor_ts: int, entry: float,
     Returns `outcome` in {win, loss, neither, no_data} — 'neither' when the
     horizon ran out (or the session ended) with no barrier touched, which is
     a real and common third case, not a loss in disguise.
+
+    CAUTION on `fwd_mfe_r` / `fwd_mae_r`: these are the excursions over the
+    WHOLE horizon regardless of whether a barrier was hit, so they are NOT
+    comparable to the parent study's `mfe_r`, which is measured over the
+    trade's actual life and stops when the position does. On a sample of 41
+    variant-A anchors the two read 2.54 R and 0.78 R for that reason alone.
+    The unconditional version is the right one to compare against the model,
+    because the model's paths are also unconditional — but never put the two
+    columns side by side as if they measured the same thing.
     """
     rows = forward_bars(sym, day, anchor_ts, horizon)
     if not rows:
