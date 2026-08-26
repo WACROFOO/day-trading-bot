@@ -14,14 +14,32 @@ requirements.
                  looks at the bars printed SO FAR and decides. It needs minute
                  bars, which is where the data wall is.
 
-SURVIVORSHIP. The symbol list is the weak point and it is stated, not hidden.
-`nasdaq_listed()` returns names that are listed TODAY. Every company that
-delisted, was acquired or went to the pink sheets during the study period is
-missing from it, and this universe delists constantly. Yahoo 404s on delisted
-tickers, so there is no way to repair it from the free tier.
-`polygon_symbols_on()` is the fix and it needs a key: Polygon's
-/v3/reference/tickers accepts a `date` and returns what was listed THAT DAY,
-delisted names included.
+SURVIVORSHIP — three builders, and only the first one is biased.
+
+  `candidate_days()`        screens a SYMBOL LIST. Any symbol list is a list
+                            of things that still exist, so this one is
+                            survivorship-biased by construction. Kept for the
+                            no-key path and for reproducing the original
+                            Yahoo-era result; do not build a study on it.
+
+  `candidate_days_grouped()` screens GROUPED DAILY — one request per DATE,
+                            returning every ticker that actually printed that
+                            day. A company that gapped in 2025 and delisted in
+                            2026 appears on its own day and is absent
+                            afterwards, with no special handling. This is the
+                            fix, and it reaches back as far as the provider's
+                            grouped-daily history (2 years on Massive free).
+
+  `candidate_days_multi()`  covers everything OLDER than that by the other
+                            route: the full historical ticker list — active
+                            AND delisted, each delisted row carrying its
+                            `delisted_utc` — screened with multi-symbol daily
+                            bars. Also survivorship-free, and it is what
+                            extends the study to 2016.
+
+MEASURED 2026-08-25: the historical ticker list holds 12,613 names, 6,701 of
+them carrying a delisted date. More than half the universe is companies that
+no longer exist, which is the size of the hole a symbol-list build leaves.
 """
 from __future__ import annotations
 
