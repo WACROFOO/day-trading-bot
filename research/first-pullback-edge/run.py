@@ -295,13 +295,15 @@ def stage_fetch(args):
 _WK: dict = {}
 
 
-def _init_worker(params, variants, combos, cap_pct, cap_ticks):
+def _init_worker(params, variants, combos, cap_pct, cap_ticks,
+                 collect_setups=True):
     """combos: list of (label, Variant, params_override_or_None, cost_name,
     policy, experiment). Carrying the Variant object rather than a name lets
     the sensitivity and placebo stages reuse this worker for variants that
     exist only for one run."""
     _WK.update(params=params, variants=variants, combos=combos,
-               cap_pct=cap_pct, cap_ticks=cap_ticks)
+               cap_pct=cap_pct, cap_ticks=cap_ticks,
+               collect_setups=collect_setups)
 
 
 def _day_worker(item):
@@ -322,7 +324,14 @@ def _day_worker(item):
             row["variant"] = label
         trades.extend(rows)
         missed.extend([m.__dict__ for m in r.missed])
-        if (cost_name == "realistic" and policy == "pessimistic"
+        # The setup ledger is wanted ONCE, from the ablation's baseline cell.
+        # Sensitivity and stage-2 run every config at realistic/pessimistic/
+        # exp1, so without this flag each of ~90 configs appended its full
+        # observed list — ~19 million rows pickled back to a parent that
+        # never reads them. That is what made the sensitivity run look
+        # stalled: it was not stuck, it was drowning.
+        if (_WK.get("collect_setups", True)
+                and cost_name == "realistic" and policy == "pessimistic"
                 and exp == "exp1_common_exits"):
             for s in r.observed:
                 row = {k: v for k, v in s.__dict__.items() if k != "gates"}
@@ -335,10 +344,11 @@ def _day_worker(item):
 
 
 def _run_parallel(loaded, params, variants, combos, cap_pct, cap_ticks,
-                  workers: int, label: str = "cells"):
+                  workers: int, label: str = "cells",
+                  collect_setups: bool = False):
     """Fan the (ticker-day x combo) cross-product over processes."""
     print(f"  {len(combos)} {label} x {len(loaded)} ticker-days", flush=True)
-    _init_worker(params, variants, combos, cap_pct, cap_ticks)
+    _init_worker(params, variants, combos, cap_pct, cap_ticks, collect_setups)
     payload = [(sym, d.isoformat(),
                 [(b.ts, b.o, b.h, b.l, b.c, b.v) for b in bars], prev_close,
                 profile, scan_ts)
@@ -348,7 +358,8 @@ def _run_parallel(loaded, params, variants, combos, cap_pct, cap_ticks,
         from concurrent.futures import ProcessPoolExecutor
         pool = ProcessPoolExecutor(
             max_workers=workers, initializer=_init_worker,
-            initargs=(params, variants, combos, cap_pct, cap_ticks))
+            initargs=(params, variants, combos, cap_pct, cap_ticks,
+                      collect_setups))
         mapper = pool.map(_day_worker, payload, chunksize=8)
     else:
         pool, mapper = None, map(_day_worker, payload)
@@ -436,7 +447,7 @@ def stage_ablation(args):
     print(f"  {len(combos)} variant x cost x policy x experiment cells "
           f"x {len(loaded)} ticker-days")
 
-    _init_worker(params, variants, combos, cap_pct, cap_ticks)
+    _init_worker(params, variants, combos, cap_pct, cap_ticks, True)
 
     all_trades, all_setups, all_missed = [], [], []
     done = 0
@@ -448,7 +459,7 @@ def stage_ablation(args):
         from concurrent.futures import ProcessPoolExecutor
         pool = ProcessPoolExecutor(
             max_workers=args.compute_workers, initializer=_init_worker,
-            initargs=(params, variants, combos, cap_pct, cap_ticks))
+            initargs=(params, variants, combos, cap_pct, cap_ticks, True))
         mapper = pool.map(_day_worker, payload, chunksize=8)
     else:
         pool, mapper = None, map(_day_worker, payload)

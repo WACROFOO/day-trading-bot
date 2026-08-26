@@ -1,9 +1,9 @@
-  2377 candidate ticker-days, 479 sessions, 1351 names  [2024-09-24 -> 2026-08-21, cap 5/session]
-  1837 qualified ticker-days loaded
-  base_A: 838 trades, exp -1.853R
-  pullback_1_only: 420 trades, exp -1.961R
-  pullback_2_only: 208 trades, exp -1.869R
-  pullback_3plus: 166 trades, exp -1.636R
-  trigger_shift_up_5t: 376 trades, exp -1.963R
-  trigger_shift_down_5t: 1732 trades, exp -2.334R
-  random_entry: 9175 trades, exp -0.823R
+  11363 candidate ticker-days, 2608 sessions, 4074 names  [2016-01-04 -> 2026-08-21, cap 5/session]
+  8505 qualified ticker-days loaded
+  base_A: 3627 trades, exp -1.741R
+  pullback_1_only: 1800 trades, exp -1.865R
+  pullback_2_only: 819 trades, exp -1.745R
+  pullback_3plus: 767 trades, exp -1.568R
+  trigger_shift_up_5t: 1656 trades, exp -1.916R
+  trigger_shift_down_5t: 7435 trades, exp -2.245R
+  random_entry: 42510 trades, exp -0.940R

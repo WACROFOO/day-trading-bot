@@ -1,13 +1,46 @@
-  2377 candidate ticker-days, 479 sessions, 1351 names  [2024-09-24 -> 2026-08-21, cap 5/session]
-  1837 qualified ticker-days loaded
-  92 parameter settings x 1837 ticker-days
-  200/1837 · 6483 trade rows
-  400/1837 · 12650 trade rows
-  600/1837 · 18141 trade rows
-  800/1837 · 23223 trade rows
-  1000/1837 · 28265 trade rows
-  1200/1837 · 33337 trade rows
-  1400/1837 · 39493 trade rows
-  1600/1837 · 44275 trade rows
-  1800/1837 · 49297 trade rows
+  11363 candidate ticker-days, 2608 sessions, 4074 names  [2016-01-04 -> 2026-08-21, cap 5/session]
+  8505 qualified ticker-days loaded
+  92 parameter settings x 8505 ticker-days
+  200/8505 · 6360 trade rows
+  400/8505 · 12472 trade rows
+  600/8505 · 17630 trade rows
+  800/8505 · 22465 trade rows
+  1000/8505 · 28475 trade rows
+  1200/8505 · 34337 trade rows
+  1400/8505 · 40349 trade rows
+  1600/8505 · 45859 trade rows
+  1800/8505 · 51397 trade rows
+  2000/8505 · 57288 trade rows
+  2200/8505 · 63652 trade rows
+  2400/8505 · 67937 trade rows
+  2600/8505 · 73001 trade rows
+  2800/8505 · 78097 trade rows
+  3000/8505 · 82532 trade rows
+  3200/8505 · 88284 trade rows
+  3400/8505 · 93336 trade rows
+  3600/8505 · 97954 trade rows
+  3800/8505 · 104177 trade rows
+  4000/8505 · 109921 trade rows
+  4200/8505 · 114944 trade rows
+  4400/8505 · 118881 trade rows
+  4600/8505 · 123682 trade rows
+  4800/8505 · 129465 trade rows
+  5000/8505 · 135948 trade rows
+  5200/8505 · 141802 trade rows
+  5400/8505 · 147529 trade rows
+  5600/8505 · 152377 trade rows
+  5800/8505 · 156874 trade rows
+  6000/8505 · 163594 trade rows
+  6200/8505 · 169478 trade rows
+  6400/8505 · 174562 trade rows
+  6600/8505 · 180988 trade rows
+  6800/8505 · 186653 trade rows
+  7000/8505 · 191719 trade rows
+  7200/8505 · 196347 trade rows
+  7400/8505 · 200850 trade rows
+  7600/8505 · 206872 trade rows
+  7800/8505 · 211333 trade rows
+  8000/8505 · 215812 trade rows
+  8200/8505 · 222075 trade rows
+  8400/8505 · 227907 trade rows
 wrote 92 sensitivity rows

@@ -1,0 +1,55 @@
+  11363 candidate ticker-days, 2608 sessions, 4074 names  [2016-01-04 -> 2026-08-21, cap 5/session]
+  8505 qualified ticker-days loaded
+  8 post-freeze configurations x 8505 ticker-days
+  200/8505 · 164 trade rows
+  400/8505 · 347 trade rows
+  600/8505 · 507 trade rows
+  800/8505 · 699 trade rows
+  1000/8505 · 882 trade rows
+  1200/8505 · 1044 trade rows
+  1400/8505 · 1248 trade rows
+  1600/8505 · 1383 trade rows
+  1800/8505 · 1559 trade rows
+  2000/8505 · 1722 trade rows
+  2200/8505 · 1896 trade rows
+  2400/8505 · 2019 trade rows
+  2600/8505 · 2126 trade rows
+  2800/8505 · 2266 trade rows
+  3000/8505 · 2384 trade rows
+  3200/8505 · 2549 trade rows
+  3400/8505 · 2664 trade rows
+  3600/8505 · 2794 trade rows
+  3800/8505 · 2934 trade rows
+  4000/8505 · 3107 trade rows
+  4200/8505 · 3232 trade rows
+  4400/8505 · 3373 trade rows
+  4600/8505 · 3493 trade rows
+  4800/8505 · 3601 trade rows
+  5000/8505 · 3764 trade rows
+  5200/8505 · 3900 trade rows
+  5400/8505 · 4047 trade rows
+  5600/8505 · 4176 trade rows
+  5800/8505 · 4276 trade rows
+  6000/8505 · 4490 trade rows
+  6200/8505 · 4678 trade rows
+  6400/8505 · 4824 trade rows
+  6600/8505 · 5005 trade rows
+  6800/8505 · 5181 trade rows
+  7000/8505 · 5359 trade rows
+  7200/8505 · 5479 trade rows
+  7400/8505 · 5614 trade rows
+  7600/8505 · 5731 trade rows
+  7800/8505 · 5852 trade rows
+  8000/8505 · 5992 trade rows
+  8200/8505 · 6136 trade rows
+  8400/8505 · 6297 trade rows
+  0_frozen_C           n=533   exp=-1.497R  win=0.174  CI[-1.610,-1.380]
+  1_stop6              n=730   exp=-1.333R  win=0.201  CI[-1.432,-1.232]
+  2_clock              n=238   exp=-1.358R  win=0.185  CI[-1.516,-1.188]
+  3_no_hod_room        n=533   exp=-1.497R  win=0.174  CI[-1.610,-1.380]
+  4_stop6_clock        n=390   exp=-1.222R  win=0.208  CI[-1.348,-1.093]
+  5_all_three          n=390   exp=-1.222R  win=0.208  CI[-1.348,-1.093]
+  6_all_three_on_A     n=2233  exp=-1.427R  win=0.190  CI[-1.487,-1.369]
+  7_all_three_on_F     n=1294  exp=-1.297R  win=0.216  CI[-1.374,-1.223]
+
+wrote results/stage2_corrections.csv

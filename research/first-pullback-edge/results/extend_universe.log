@@ -1,0 +1,363 @@
+pulling the full historical ticker list (active + delisted) …
+symbol universe: 12613 rows, 6701 carrying a delisted_utc · 10981 in scope for 2016-01-04 -> 2024-09-23
+  40/10981 symbols · A · 39 candidate-days
+  80/10981 symbols · ABAX · 101 candidate-days
+  120/10981 symbols · AC · 167 candidate-days
+  160/10981 symbols · ACHV · 247 candidate-days
+  200/10981 symbols · ACXP · 323 candidate-days
+  240/10981 symbols · ADP · 407 candidate-days
+  280/10981 symbols · AENZ · 448 candidate-days
+  320/10981 symbols · AFMD · 522 candidate-days
+  360/10981 symbols · AGRI · 626 candidate-days
+  400/10981 symbols · AII · 685 candidate-days
+  440/10981 symbols · AJG · 786 candidate-days
+  480/10981 symbols · ALEC · 832 candidate-days
+  520/10981 symbols · ALOV · 906 candidate-days
+  560/10981 symbols · AM · 976 candidate-days
+  600/10981 symbols · AMNB · 1043 candidate-days
+  640/10981 symbols · AMTX · 1107 candidate-days
+  680/10981 symbols · ANRO · 1200 candidate-days
+  720/10981 symbols · APGN · 1301 candidate-days
+  760/10981 symbols · APUR · 1386 candidate-days
+  800/10981 symbols · ARDM · 1446 candidate-days
+  840/10981 symbols · ARQ · 1494 candidate-days
+  880/10981 symbols · ASCMA · 1567 candidate-days
+  920/10981 symbols · ASZ · 1619 candidate-days
+  960/10981 symbols · ATMR · 1709 candidate-days
+  1000/10981 symbols · AUG · 1797 candidate-days
+  1040/10981 symbols · AVGO · 1894 candidate-days
+  1080/10981 symbols · AXDX · 1958 candidate-days
+  1120/10981 symbols · AZTA · 2002 candidate-days
+  1160/10981 symbols · BAX · 2115 candidate-days
+  1200/10981 symbols · BCAC · 2165 candidate-days
+  1240/10981 symbols · BDMD · 2235 candidate-days
+  1280/10981 symbols · BFC · 2291 candidate-days
+  1320/10981 symbols · BHBK · 2395 candidate-days
+  1360/10981 symbols · BIOR · 2443 candidate-days
+  1400/10981 symbols · BKU · 2537 candidate-days
+  1440/10981 symbols · BLUA · 2615 candidate-days
+  1480/10981 symbols · BNKK · 2661 candidate-days
+  1520/10981 symbols · BOWL · 2708 candidate-days
+  1560/10981 symbols · BRD · 2754 candidate-days
+  1600/10981 symbols · BSAA · 2842 candidate-days
+  1640/10981 symbols · BTCS · 2911 candidate-days
+  1680/10981 symbols · BVS · 2966 candidate-days
+  1720/10981 symbols · BY · 3018 candidate-days
+  1760/10981 symbols · CAFN · 3128 candidate-days
+  1800/10981 symbols · CARM · 3209 candidate-days
+  1840/10981 symbols · CBK · 3241 candidate-days
+  1880/10981 symbols · CCCX · 3281 candidate-days
+  1920/10981 symbols · CCV · 3345 candidate-days
+  1960/10981 symbols · CECO · 3448 candidate-days
+  2000/10981 symbols · CETV · 3484 candidate-days
+  2040/10981 symbols · CGCT · 3571 candidate-days
+  2080/10981 symbols · CHK · 3636 candidate-days
+  2120/10981 symbols · CIAN · 3682 candidate-days
+  2160/10981 symbols · CJES · 3733 candidate-days
+  2200/10981 symbols · CLH · 3870 candidate-days
+  2240/10981 symbols · CMA · 3920 candidate-days
+  2280/10981 symbols · CMSS · 3972 candidate-days
+  2320/10981 symbols · CNQ · 4067 candidate-days
+  2360/10981 symbols · COGT · 4116 candidate-days
+  2400/10981 symbols · COT · 4153 candidate-days
+  2440/10981 symbols · CPRI · 4223 candidate-days
+  2480/10981 symbols · CRGO · 4312 candidate-days
+  2520/10981 symbols · CRZN · 4360 candidate-days
+  2560/10981 symbols · CSWCZ · 4410 candidate-days
+  2600/10981 symbols · CTS · 4456 candidate-days
+  2640/10981 symbols · CVA · 4503 candidate-days
+  2680/10981 symbols · CWBR · 4579 candidate-days
+  2720/10981 symbols · CYRX · 4658 candidate-days
+  2760/10981 symbols · DAY · 4781 candidate-days
+  2800/10981 symbols · DDMX · 4817 candidate-days
+  2840/10981 symbols · DFLI · 4857 candidate-days
+  2880/10981 symbols · DHX · 4899 candidate-days
+  2920/10981 symbols · DM · 4953 candidate-days
+  2960/10981 symbols · DNTH · 5031 candidate-days
+  3000/10981 symbols · DRCT · 5119 candidate-days
+  3040/10981 symbols · DSX · 5192 candidate-days
+  3080/10981 symbols · DWDP · 5241 candidate-days
+  3120/10981 symbols · EBAC · 5314 candidate-days
+  3160/10981 symbols · EDNC · 5368 candidate-days
+  3200/10981 symbols · EGIO · 5429 candidate-days
+  3240/10981 symbols · ELEV · 5485 candidate-days
+  3280/10981 symbols · EMCI · 5541 candidate-days
+  3320/10981 symbols · ENLV · 5638 candidate-days
+  3360/10981 symbols · EPAM · 5678 candidate-days
+  3400/10981 symbols · ERB · 5733 candidate-days
+  3440/10981 symbols · ESNT · 5787 candidate-days
+  3480/10981 symbols · EU · 5873 candidate-days
+  3520/10981 symbols · EVSI · 5942 candidate-days
+  3560/10981 symbols · EYE · 5998 candidate-days
+  3600/10981 symbols · FBK · 6034 candidate-days
+  3640/10981 symbols · FCSC · 6089 candidate-days
+  3680/10981 symbols · FFBW · 6122 candidate-days
+  3720/10981 symbols · FIGX · 6160 candidate-days
+  3760/10981 symbols · FLLC · 6211 candidate-days
+  3800/10981 symbols · FMST · 6249 candidate-days
+  3840/10981 symbols · FOR · 6297 candidate-days
+  3880/10981 symbols · FREQ · 6364 candidate-days
+  3920/10981 symbols · FSBK · 6412 candidate-days
+  3960/10981 symbols · FTCV · 6488 candidate-days
+  4000/10981 symbols · FUNC · 6521 candidate-days
+  4040/10981 symbols · GAIA · 6565 candidate-days
+  4080/10981 symbols · GBS · 6638 candidate-days
+  4120/10981 symbols · GECCI · 6721 candidate-days
+  4160/10981 symbols · GFL · 6750 candidate-days
+  4200/10981 symbols · GIFI · 6782 candidate-days
+  4240/10981 symbols · GLIBK · 6841 candidate-days
+  4280/10981 symbols · GMM · 6923 candidate-days
+  4320/10981 symbols · GOED · 7026 candidate-days
+  4360/10981 symbols · GPUS · 7109 candidate-days
+  4400/10981 symbols · GRSD · 7159 candidate-days
+  4440/10981 symbols · GSUM · 7208 candidate-days
+  4480/10981 symbols · GWAV · 7264 candidate-days
+  4520/10981 symbols · HAVAR · 7293 candidate-days
+  4560/10981 symbols · HCKT · 7363 candidate-days
+  4600/10981 symbols · HES · 7390 candidate-days
+  4640/10981 symbols · HIL · 7485 candidate-days
+  4680/10981 symbols · HMCO · 7561 candidate-days
+  4720/10981 symbols · HOME · 7611 candidate-days
+  4760/10981 symbols · HR · 7652 candidate-days
+  4800/10981 symbols · HTAQ · 7722 candidate-days
+  4840/10981 symbols · HURN · 7784 candidate-days
+  4880/10981 symbols · HZO · 7830 candidate-days
+  4920/10981 symbols · ICAD · 7921 candidate-days
+  4960/10981 symbols · IDXX · 7981 candidate-days
+  5000/10981 symbols · IKGH · 8069 candidate-days
+  5040/10981 symbols · IMO · 8164 candidate-days
+  5080/10981 symbols · INFI · 8276 candidate-days
+  5120/10981 symbols · INTJ · 8337 candidate-days
+  5160/10981 symbols · IPAS · 8371 candidate-days
+  5200/10981 symbols · IPXX · 8415 candidate-days
+  5240/10981 symbols · ISIL · 8472 candidate-days
+  5280/10981 symbols · ITU · 8554 candidate-days
+  5320/10981 symbols · JASN · 8584 candidate-days
+  5360/10981 symbols · JFIN · 8651 candidate-days
+  5400/10981 symbols · JONE · 8705 candidate-days
+  5440/10981 symbols · JZXN · 8756 candidate-days
+  5480/10981 symbols · KDC · 8799 candidate-days
+  5520/10981 symbols · KINZ · 8861 candidate-days
+  5560/10981 symbols · KNF · 8937 candidate-days
+  5600/10981 symbols · KRNL · 8987 candidate-days
+  5640/10981 symbols · KVUEW · 9052 candidate-days
+  5680/10981 symbols · LAR · 9091 candidate-days
+  5720/10981 symbols · LCCC · 9163 candidate-days
+  5760/10981 symbols · LEVL · 9219 candidate-days
+  5800/10981 symbols · LGPS · 9280 candidate-days
+  5840/10981 symbols · LINE · 9364 candidate-days
+  5880/10981 symbols · LLYVK · 9428 candidate-days
+  5920/10981 symbols · LOB · 9483 candidate-days
+  5960/10981 symbols · LPTV · 9536 candidate-days
+  6000/10981 symbols · LTH · 9600 candidate-days
+  6040/10981 symbols · LVS · 9658 candidate-days
+  6080/10981 symbols · MACC · 9733 candidate-days
+  6120/10981 symbols · MAXN · 9775 candidate-days
+  6160/10981 symbols · MBX · 9809 candidate-days
+  6200/10981 symbols · MDA · 9876 candidate-days
+  6240/10981 symbols · MEDP · 9960 candidate-days
+  6280/10981 symbols · MFIC · 10042 candidate-days
+  6320/10981 symbols · MHFI · 10106 candidate-days
+  6360/10981 symbols · MITL · 10170 candidate-days
+  6400/10981 symbols · MLSS · 10242 candidate-days
+  6440/10981 symbols · MNSO · 10298 candidate-days
+  6480/10981 symbols · MOTA · 10346 candidate-days
+  6520/10981 symbols · MRIC · 10409 candidate-days
+  6560/10981 symbols · MSGM · 10458 candidate-days
+  6600/10981 symbols · MTL · 10542 candidate-days
+  6640/10981 symbols · MVNR · 10629 candidate-days
+  6680/10981 symbols · MZOR · 10694 candidate-days
+  6720/10981 symbols · NBAC · 10788 candidate-days
+  6760/10981 symbols · NCW · 10864 candidate-days
+  6800/10981 symbols · NEWA · 10900 candidate-days
+  6840/10981 symbols · NGHCN · 11005 candidate-days
+  6880/10981 symbols · NKA · 11057 candidate-days
+  6920/10981 symbols · NN · 11143 candidate-days
+  6960/10981 symbols · NPI · 11192 candidate-days
+  7000/10981 symbols · NSEC · 11253 candidate-days
+  7040/10981 symbols · NTRA · 11338 candidate-days
+  7080/10981 symbols · NVEE · 11400 candidate-days
+  7120/10981 symbols · NWN · 11448 candidate-days
+  7160/10981 symbols · NYMTZ · 11503 candidate-days
+  7200/10981 symbols · OCDX · 11593 candidate-days
+  7240/10981 symbols · OFRM · 11643 candidate-days
+  7280/10981 symbols · OLLI · 11707 candidate-days
+  7320/10981 symbols · ONCT · 11786 candidate-days
+  7360/10981 symbols · OPNT · 11889 candidate-days
+  7400/10981 symbols · ORM · 11962 candidate-days
+  7440/10981 symbols · OTH · 12026 candidate-days
+  7480/10981 symbols · OYST · 12087 candidate-days
+  7520/10981 symbols · PAQC · 12132 candidate-days
+  7560/10981 symbols · PBM · 12178 candidate-days
+  7600/10981 symbols · PDCE · 12243 candidate-days
+  7640/10981 symbols · PERI · 12273 candidate-days
+  7680/10981 symbols · PGC · 12342 candidate-days
+  7720/10981 symbols · PHX · 12432 candidate-days
+  7760/10981 symbols · PLAO · 12512 candidate-days
+  7800/10981 symbols · PLYM · 12537 candidate-days
+  7840/10981 symbols · PNX · 12574 candidate-days
+  7880/10981 symbols · PPIH · 12636 candidate-days
+  7920/10981 symbols · PRM · 12715 candidate-days
+  7960/10981 symbols · PRZM · 12818 candidate-days
+  8000/10981 symbols · PTGX · 12867 candidate-days
+  8040/10981 symbols · PUYI · 12950 candidate-days
+  8080/10981 symbols · PZG · 12994 candidate-days
+  8120/10981 symbols · QNC · 13092 candidate-days
+  8160/10981 symbols · QUMU · 13130 candidate-days
+  8200/10981 symbols · RARX · 13177 candidate-days
+  8240/10981 symbols · RCMT · 13245 candidate-days
+  8280/10981 symbols · REGN · 13313 candidate-days
+  8320/10981 symbols · RFAI · 13386 candidate-days
+  8360/10981 symbols · RILYK · 13514 candidate-days
+  8400/10981 symbols · RMBS · 13571 candidate-days
+  8440/10981 symbols · ROC · 13603 candidate-days
+  8480/10981 symbols · RPRX · 13670 candidate-days
+  8520/10981 symbols · RTLPO · 13726 candidate-days
+  8560/10981 symbols · RWLK · 13809 candidate-days
+  8600/10981 symbols · SAFT · 13832 candidate-days
+  8640/10981 symbols · SAVA · 13915 candidate-days
+  8680/10981 symbols · SBXD · 13974 candidate-days
+  8720/10981 symbols · SCSC · 14039 candidate-days
+  8760/10981 symbols · SECZ · 14104 candidate-days
+  8800/10981 symbols · SFE · 14161 candidate-days
+  8840/10981 symbols · SGML · 14222 candidate-days
+  8880/10981 symbols · SHOR · 14322 candidate-days
+  8920/10981 symbols · SIR · 14362 candidate-days
+  8960/10981 symbols · SKYT · 14446 candidate-days
+  9000/10981 symbols · SLS · 14515 candidate-days
+  9040/10981 symbols · SMTS · 14601 candidate-days
+  9080/10981 symbols · SNOA · 14674 candidate-days
+  9120/10981 symbols · SOLO · 14769 candidate-days
+  9160/10981 symbols · SPEX · 14841 candidate-days
+  9200/10981 symbols · SPRT · 14927 candidate-days
+  9240/10981 symbols · SRLP · 15020 candidate-days
+  9280/10981 symbols · SSRI · 15069 candidate-days
+  9320/10981 symbols · STHO · 15118 candidate-days
+  9360/10981 symbols · STRY · 15161 candidate-days
+  9400/10981 symbols · SURF · 15201 candidate-days
+  9440/10981 symbols · SWFT · 15246 candidate-days
+  9480/10981 symbols · SYNX · 15323 candidate-days
+  9520/10981 symbols · TAST · 15386 candidate-days
+  9560/10981 symbols · TCJH · 15429 candidate-days
+  9600/10981 symbols · TECX · 15486 candidate-days
+  9640/10981 symbols · TGAN · 15557 candidate-days
+  9680/10981 symbols · THRN · 15630 candidate-days
+  9720/10981 symbols · TKNO · 15724 candidate-days
+  9760/10981 symbols · TMK · 15776 candidate-days
+  9800/10981 symbols · TONT · 15857 candidate-days
+  9840/10981 symbols · TPRE · 15897 candidate-days
+  9880/10981 symbols · TRMB · 15963 candidate-days
+  9920/10981 symbols · TRXC · 16002 candidate-days
+  9960/10981 symbols · TTI · 16088 candidate-days
+  10000/10981 symbols · TWG · 16131 candidate-days
+  10040/10981 symbols · TZOO · 16202 candidate-days
+  10080/10981 symbols · UFAB · 16245 candidate-days
+  10120/10981 symbols · UNM · 16314 candidate-days
+  10160/10981 symbols · USCT · 16359 candidate-days
+  10200/10981 symbols · VAC · 16432 candidate-days
+  10240/10981 symbols · VCXB · 16504 candidate-days
+  10280/10981 symbols · VGNTW · 16580 candidate-days
+  10320/10981 symbols · VIST · 16663 candidate-days
+  10360/10981 symbols · VNCE · 16753 candidate-days
+  10400/10981 symbols · VRML · 16802 candidate-days
+  10440/10981 symbols · VSTA · 16911 candidate-days
+  10480/10981 symbols · VWE · 16997 candidate-days
+  10520/10981 symbols · WBB · 17025 candidate-days
+  10560/10981 symbols · WENA · 17062 candidate-days
+  10600/10981 symbols · WIFI · 17143 candidate-days
+  10640/10981 symbols · WMB · 17204 candidate-days
+  10680/10981 symbols · WPZ · 17218 candidate-days
+  10720/10981 symbols · WTI · 17287 candidate-days
+  10760/10981 symbols · XBIO · 17402 candidate-days
+  10800/10981 symbols · XOG · 17474 candidate-days
+  10840/10981 symbols · XUE · 17553 candidate-days
+  10880/10981 symbols · YI · 17606 candidate-days
+  10920/10981 symbols · YVR · 17660 candidate-days
+  10960/10981 symbols · ZGNX · 17722 candidate-days
+  10981/10981 symbols · ZSTK · 17768 candidate-days
+
+17768 candidate ticker-days, 2016-01-04 -> 2024-09-23
+{
+  "construction": "grouped_daily 2024-09-24+ ; historical ticker list x multi-symbol daily before that (both survivorship-free)",
+  "total_candidate_days": 25716,
+  "sessions": 2615,
+  "names": 5797,
+  "span": [
+    "2016-02-03",
+    "2026-08-21"
+  ],
+  "symbols_screened": 10981,
+  "symbols_with_delisted_date": 6701,
+  "by_year": [
+    {
+      "year": "2016",
+      "ticker_days": 986,
+      "sessions": 215,
+      "names": 645
+    },
+    {
+      "year": "2017",
+      "ticker_days": 1147,
+      "sessions": 245,
+      "names": 676
+    },
+    {
+      "year": "2018",
+      "ticker_days": 1225,
+      "sessions": 247,
+      "names": 754
+    },
+    {
+      "year": "2019",
+      "ticker_days": 1193,
+      "sessions": 249,
+      "names": 741
+    },
+    {
+      "year": "2020",
+      "ticker_days": 4565,
+      "sessions": 252,
+      "names": 1822
+    },
+    {
+      "year": "2021",
+      "ticker_days": 3012,
+      "sessions": 252,
+      "names": 1411
+    },
+    {
+      "year": "2022",
+      "ticker_days": 1891,
+      "sessions": 246,
+      "names": 1176
+    },
+    {
+      "year": "2023",
+      "ticker_days": 1903,
+      "sessions": 247,
+      "names": 1176
+    },
+    {
+      "year": "2024",
+      "ticker_days": 2844,
+      "sessions": 252,
+      "names": 1459
+    },
+    {
+      "year": "2025",
+      "ticker_days": 3848,
+      "sessions": 250,
+      "names": 1798
+    },
+    {
+      "year": "2026",
+      "ticker_days": 3102,
+      "sessions": 160,
+      "names": 1447
+    }
+  ],
+  "by_source": {
+    "alpaca:multi": 17768,
+    "polygon:grouped": 7948
+  }
+}

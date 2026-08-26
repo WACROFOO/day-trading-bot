@@ -375,7 +375,71 @@ genuinely exercised in configs 5 and 7, where F carries the gate: F frozen
 
 ---
 
-## 12. Overfitting audit
+## 12. Parameter sensitivity
+
+Run only after the frozen A–F experiment; each parameter perturbed around its
+shipped value, everything else held. 90 configurations × 8,505 ticker-days.
+
+**Two parameters move the number, and they are the same parameter wearing
+two hats: the stop is too tight.**
+
+**`fallback_atr_mult` — the largest single lever in the strategy, and it was
+not on anyone's list:**
+
+| ATR multiple | A trades | A exp. R | A win % | F exp. R |
+|---:|---:|---:|---:|---:|
+| 0.5 | 4,191 | **−2.604** | 10.2% | −2.296 |
+| **1.0 (shipped)** | 3,627 | **−1.741** | 14.3% | −1.626 |
+| 1.5 | 3,627 | **−1.467** | 18.4% | **−1.477** |
+| 2.0 | 3,184 | −1.480 | 18.0% | −1.510 |
+| 3.0 | 3,184 | −1.480 | 18.0% | −1.510 |
+
+Moving the wide-candle fallback stop from 1 ATR to 1.5 ATR is worth
+**+0.274 R** and lifts the win rate from 14.3% to 18.4%. It then **plateaus**
+— 1.5, 2.0 and 3.0 are indistinguishable — which is the shape a robust
+parameter is supposed to have and the shipped value does not. At 0.5 ATR the
+strategy loses 2.6 R per trade. `fallback_atr_mult` is flagged `local
+heuristic` in `config/strategy.yaml` and carries no corpus citation.
+
+**`max_stop_pct` — monotone, no plateau, no spike at the shipped value:**
+
+| cap | A trades | A exp. R | F exp. R |
+|---:|---:|---:|---:|
+| 1.5% | 1,196 | −2.114 | −1.938 |
+| 2.0% | 2,248 | −1.909 | −1.771 |
+| **3.0% (shipped)** | 3,627 | −1.741 | −1.626 |
+| 4.5% | 4,284 | −1.645 | −1.544 |
+| 6.0% | 4,438 | −1.605 | −1.507 |
+| 9.0% | 4,462 | **−1.596** | **−1.497** |
+
+`research/megaday-study/RESULTS.md` §4 predicted this direction before
+measuring it. It replicates on eleven independent years, and it never crosses
+zero.
+
+**Everything else is inert or nearly so:**
+
+| parameter | A range across the whole sweep |
+|---|---|
+| `min_push_pct` 3 → 8 | −1.875 → −1.655 (monotone, mild) |
+| `max_retracement_pct` 30 → 70 | −1.698 → −1.749 — **0.05 R across a 2.3× swing in trade count** |
+| `reward_multiple` 1.5 → 4.0 | −1.742 → −1.749 — **flat to three decimals** |
+| `max_pullback_bars` 2 → 6 | −1.726 → −1.736 — flat |
+| `min_efficiency` 0.4 → 0.8 | −1.741 → −1.737 — flat |
+| `min_room_r`, `max_pb_volume_ratio` | inert on A (not in its gate set); on F both show **looser is better** |
+
+The 50% retracement bound moves the trade count from 1,146 to 4,634 and moves
+expectancy by 0.05 R — it is not a filter, it is a formality. Same finding as
+`research/megaday-study/RESULTS.md` §1 from the other direction: median dip
+depth 39%, p90 49%, *"la borne de retracement à 50% ne filtre rien"*.
+
+**No parameter shows the spike-at-the-shipped-value signature of curve
+fitting.** Two show the strategy is stopped too tightly, and correcting both
+would land somewhere near −1.4 R. There is no setting of any parameter, or
+any pair of them, that reaches zero.
+
+---
+
+## 13. Overfitting audit
 
 ```
 48 strategy parameters · 25 LOCAL HEURISTIC (13 self-flagged in the Pine)
@@ -390,7 +454,7 @@ holdout.
 
 ---
 
-## 13. Experiment 2 and the account
+## 14. Experiment 2 and the account
 
 F with its own breakout-or-bailout management closes most trades early; it
 improves expectancy slightly by cutting losses faster, on a system that
@@ -404,7 +468,7 @@ the above it would change how fast the account dies, not whether.
 
 ---
 
-## 14. What this analysis still could not check
+## 15. What this analysis still could not check
 
 - **Halts.** 677 of 3,627 exits gap through the stop; the free Nasdaq feed is
   forward-only, so a LULD pause that reopened below the stop is booked at the
@@ -419,7 +483,7 @@ the above it would change how fast the account dies, not whether.
 
 ---
 
-## 15. Answers to the twelve questions
+## 16. Answers to the twelve questions
 
 | # | question | answer |
 |---|---|---|
@@ -459,6 +523,13 @@ Five findings, in descending order of consequence:
    −1.222 R.** Widening the unsourced stop cap, restricting to the corpus
    session and dropping the harmful filter recover 0.28 R of a 1.5 R deficit.
    The costs are not the problem; they are the amplifier.
+
+   The sweep adds one lever nobody had flagged: **`fallback_atr_mult`, the
+   wide-candle fallback stop, is worth more than the stop cap** — 1.0 → 1.5
+   ATR is +0.274 R and it *plateaus* there, which is the shape a sound
+   parameter has and the shipped value does not. Both levers say the same
+   thing: the strategy is stopped too tightly. Correcting both lands near
+   −1.4 R.
 
 4. **Three of my own earlier readings were wrong and are corrected above.**
    Confluence looked harmful at n=49, best-in-study at n=838, and marginal at
