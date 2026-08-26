@@ -1,0 +1,26 @@
+{
+  "measured_on": {
+    "threads": 4,
+    "device": "cpu",
+    "cuda": false
+  },
+  "model": "NeoQuasar/Kronos-small",
+  "params": 24741376,
+  "ctx": 150,
+  "pred_len": 30,
+  "paths": 8,
+  "batch": 16,
+  "anchors_timed": 16,
+  "anchors_dropped": 7,
+  "context_span_median_min": 149.0,
+  "seconds_per_rollout": 1.1538,
+  "seconds_per_anchor": 9.23,
+  "cpu_hours_projection": {
+    "variant A trades @ 8 paths": 9.3,
+    "variant A trades @ 20 paths": 23.2,
+    "qualified ticker-days @ 8 paths": 21.8,
+    "qualified ticker-days @ 20 paths": 54.5,
+    "random-entry baseline @ 8 paths": 109.0,
+    "random-entry baseline @ 20 paths": 272.5
+  }
+}
