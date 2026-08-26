@@ -16,12 +16,16 @@ evidence. Changing the reduction costs no rollouts.
 from __future__ import annotations
 
 import argparse
+import datetime as _dt
 import json
 import sys
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import numpy as np
 import pandas as pd
+
+_ET = ZoneInfo("America/New_York")
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
@@ -143,17 +147,31 @@ def compare(path_a: Path, path_b: Path, ctx_len: int = 150) -> dict:
                                    if len(d) else None),
         )
 
-    lo = max(frames["pattern"].anchor_z.quantile(.05),
-             frames["random"].anchor_z.quantile(.05))
-    hi = min(frames["pattern"].anchor_z.quantile(.95),
-             frames["random"].anchor_z.quantile(.95))
-    band = both[(both.anchor_z >= lo) & (both.anchor_z <= hi)]
+    # SECOND confound, found after the first: the random arm inherits the
+    # parent baseline's 09:35-11:30 window while the pattern arm runs all
+    # session and is 52% afternoon. The parent report's own time-of-day cut
+    # makes 09:30-10:00 the strategy's best bucket, so leaving this
+    # uncontrolled flatters the random arm. Match on both, not one.
+    both["et"] = both.anchor_ts.map(
+        lambda t: _dt.datetime.fromtimestamp(int(t), _ET))
+    both["in_window"] = both.et.map(
+        lambda x: _dt.time(9, 35) <= x.time() < _dt.time(11, 30))
+    win = both[both.in_window]
+
+    lo = max(win[win.arm == "pattern"].anchor_z.quantile(.05),
+             win[win.arm == "random"].anchor_z.quantile(.05))
+    hi = min(win[win.arm == "pattern"].anchor_z.quantile(.95),
+             win[win.arm == "random"].anchor_z.quantile(.95))
+    band = win[(win.anchor_z >= lo) & (win.anchor_z <= hi)]
+
     return dict(
         raw={t: _stats(f) for t, f in frames.items()},
+        session_window_only={t: _stats(win[win.arm == t]) for t in frames},
         z_overlap_band=[round(float(lo), 3), round(float(hi), 3)],
         matched={t: _stats(band[band.arm == t]) for t in frames},
-        note="A gap that survives the matched band is about the populations; "
-             "one that vanishes was the z-score gap.",
+        note="Matched on BOTH 09:35-11:30 and the overlapping anchor-z band. "
+             "A gap that survives is about the populations; one that vanishes "
+             "was a confound.",
     )
 
 
@@ -192,7 +210,7 @@ def main():
         payload["comparison"] = cmp
         print(f"\n=== pattern vs random ===")
         print(f"z overlap band: {cmp['z_overlap_band']}")
-        for label in ("raw", "matched"):
+        for label in ("raw", "session_window_only", "matched"):
             print(f"\n-- {label} --")
             print(f"{'':22s} {'pattern':>12s} {'random':>12s}")
             for k in ("n", "anchor_z_median", "realised_win_rate",

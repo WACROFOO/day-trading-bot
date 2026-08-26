@@ -177,6 +177,257 @@
         "frac_at_mode": 0.007
       },
       "kronos_minus_free": 0.0302
+    },
+    {
+      "file": "probe_random.csv",
+      "n": 300,
+      "n_resolved": 299,
+      "n_win": 131,
+      "base_rate": 0.4381,
+      "scores": [
+        {
+          "score": "risk_pct",
+          "source": "free",
+          "auc": 0.5683,
+          "ci": [
+            0.501,
+            0.633
+          ],
+          "inverted": true,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "exp_close_r",
+          "source": "kronos",
+          "auc": 0.5638,
+          "ci": [
+            0.497,
+            0.626
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "exp_mfe_r",
+          "source": "kronos",
+          "auc": 0.5603,
+          "ci": [
+            0.495,
+            0.626
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "med_close_r",
+          "source": "kronos",
+          "auc": 0.5558,
+          "ci": [
+            0.491,
+            0.617
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "p_touch_up",
+          "source": "kronos",
+          "auc": 0.5483,
+          "ci": [
+            0.483,
+            0.614
+          ],
+          "inverted": false,
+          "distinct": 17,
+          "frac_at_mode": 0.177
+        },
+        {
+          "score": "p_win",
+          "source": "kronos",
+          "auc": 0.5317,
+          "ci": [
+            0.466,
+            0.598
+          ],
+          "inverted": false,
+          "distinct": 17,
+          "frac_at_mode": 0.117
+        },
+        {
+          "score": "p_win_repaired",
+          "source": "kronos",
+          "auc": 0.5309,
+          "ci": [
+            0.464,
+            0.597
+          ],
+          "inverted": false,
+          "distinct": 17,
+          "frac_at_mode": 0.11
+        },
+        {
+          "score": "exp_mae_r",
+          "source": "kronos",
+          "auc": 0.5187,
+          "ci": [
+            0.451,
+            0.583
+          ],
+          "inverted": true,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "window_ret_pct",
+          "source": "free",
+          "auc": 0.5096,
+          "ci": [
+            0.446,
+            0.576
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "dist_from_window_mean_R",
+          "source": "free",
+          "auc": 0.5094,
+          "ci": [
+            0.444,
+            0.575
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "anchor_z",
+          "source": "free",
+          "auc": 0.5081,
+          "ci": [
+            0.441,
+            0.57
+          ],
+          "inverted": true,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        },
+        {
+          "score": "dist_from_window_high_R",
+          "source": "free",
+          "auc": 0.5047,
+          "ci": [
+            0.435,
+            0.569
+          ],
+          "inverted": false,
+          "distinct": 299,
+          "frac_at_mode": 0.003
+        }
+      ],
+      "best_kronos": {
+        "score": "exp_close_r",
+        "source": "kronos",
+        "auc": 0.5638,
+        "ci": [
+          0.497,
+          0.626
+        ],
+        "inverted": false,
+        "distinct": 299,
+        "frac_at_mode": 0.003
+      },
+      "best_free": {
+        "score": "risk_pct",
+        "source": "free",
+        "auc": 0.5683,
+        "ci": [
+          0.501,
+          0.633
+        ],
+        "inverted": true,
+        "distinct": 299,
+        "frac_at_mode": 0.003
+      },
+      "kronos_minus_free": -0.0045
     }
-  ]
+  ],
+  "comparison": {
+    "raw": {
+      "pattern": {
+        "n": 300,
+        "n_resolved": 300,
+        "realised_win_rate": 0.0867,
+        "anchor_z_median": 2.117,
+        "p_win_mean": 0.0106,
+        "frac_p_win_zero": 0.9033,
+        "exp_close_r_mean": -2.928,
+        "true_fwd_close_r_mean": 0.022
+      },
+      "random": {
+        "n": 300,
+        "n_resolved": 299,
+        "realised_win_rate": 0.4381,
+        "anchor_z_median": -0.439,
+        "p_win_mean": 0.4267,
+        "frac_p_win_zero": 0.0167,
+        "exp_close_r_mean": 0.204,
+        "true_fwd_close_r_mean": -0.056
+      }
+    },
+    "session_window_only": {
+      "pattern": {
+        "n": 104,
+        "n_resolved": 104,
+        "realised_win_rate": 0.125,
+        "anchor_z_median": 2.027,
+        "p_win_mean": 0.0102,
+        "frac_p_win_zero": 0.8846,
+        "exp_close_r_mean": -2.628,
+        "true_fwd_close_r_mean": -0.535
+      },
+      "random": {
+        "n": 300,
+        "n_resolved": 299,
+        "realised_win_rate": 0.4381,
+        "anchor_z_median": -0.439,
+        "p_win_mean": 0.4267,
+        "frac_p_win_zero": 0.0167,
+        "exp_close_r_mean": 0.204,
+        "true_fwd_close_r_mean": -0.056
+      }
+    },
+    "z_overlap_band": [
+      -0.573,
+      2.004
+    ],
+    "matched": {
+      "pattern": {
+        "n": 46,
+        "n_resolved": 46,
+        "realised_win_rate": 0.2391,
+        "anchor_z_median": 0.56,
+        "p_win_mean": 0.0163,
+        "frac_p_win_zero": 0.8261,
+        "exp_close_r_mean": -1.581,
+        "true_fwd_close_r_mean": -0.255
+      },
+      "random": {
+        "n": 144,
+        "n_resolved": 144,
+        "realised_win_rate": 0.4097,
+        "anchor_z_median": 0.406,
+        "p_win_mean": 0.4262,
+        "frac_p_win_zero": 0.0069,
+        "exp_close_r_mean": -0.362,
+        "true_fwd_close_r_mean": -0.068
+      }
+    },
+    "note": "Matched on BOTH 09:35-11:30 and the overlapping anchor-z band. A gap that survives is about the populations; one that vanishes was a confound."
+  }
 }

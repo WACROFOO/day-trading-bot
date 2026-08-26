@@ -1,0 +1,41 @@
+{
+  "config": {
+    "model": "NeoQuasar/Kronos-small",
+    "population": "random",
+    "ctx": 150,
+    "pred_len": 30,
+    "paths": 16,
+    "temperature": 1.0,
+    "top_p": 0.9,
+    "seed": 20260826
+  },
+  "n": 300,
+  "anchors_dropped": 0,
+  "outcome_counts": {
+    "loss": 168,
+    "win": 131,
+    "neither": 1
+  },
+  "n_resolved": 299,
+  "n_win": 131,
+  "n_loss": 168,
+  "realised_barrier_win_rate": 0.4381,
+  "p_win_mean": 0.4267,
+  "p_win_on_winners": 0.4423,
+  "p_win_on_losers": 0.4163,
+  "separation": 0.026,
+  "auc": 0.5317,
+  "corr_p_win_vs_fwd_close_r": 0.1161,
+  "corr_exp_mfe_vs_true_mfe": 0.0862,
+  "model_mean_exp_mfe_r": 2.509,
+  "true_mean_fwd_mfe_r": 2.655,
+  "model_mean_exp_mae_r": 2.569,
+  "true_mean_fwd_mae_r": 2.354,
+  "study_exp_r": null,
+  "minutes": 86.4,
+  "top_decile": {
+    "n": 29,
+    "win_rate": 0.5862,
+    "vs_base": 0.1481
+  }
+}
