@@ -1,16 +1,68 @@
 {
-  "provider": "polygon",
-  "construction": "grouped_daily (survivorship-free)",
-  "symbols_scanned": null,
-  "candidate_days": 7948,
-  "sessions": 479,
-  "distinct_names": 2731,
+  "construction": "grouped_daily 2024-09-24+ ; historical ticker list x multi-symbol daily before that (both survivorship-free)",
+  "total_candidate_days": 25716,
+  "sessions": 2615,
+  "names": 5797,
+  "span": [
+    "2016-02-03",
+    "2026-08-21"
+  ],
+  "symbols_screened": 10981,
+  "symbols_with_delisted_date": 6701,
   "by_year": [
     {
+      "year": "2016",
+      "ticker_days": 986,
+      "sessions": 215,
+      "names": 645
+    },
+    {
+      "year": "2017",
+      "ticker_days": 1147,
+      "sessions": 245,
+      "names": 676
+    },
+    {
+      "year": "2018",
+      "ticker_days": 1225,
+      "sessions": 247,
+      "names": 754
+    },
+    {
+      "year": "2019",
+      "ticker_days": 1193,
+      "sessions": 249,
+      "names": 741
+    },
+    {
+      "year": "2020",
+      "ticker_days": 4565,
+      "sessions": 252,
+      "names": 1822
+    },
+    {
+      "year": "2021",
+      "ticker_days": 3012,
+      "sessions": 252,
+      "names": 1411
+    },
+    {
+      "year": "2022",
+      "ticker_days": 1891,
+      "sessions": 246,
+      "names": 1176
+    },
+    {
+      "year": "2023",
+      "ticker_days": 1903,
+      "sessions": 247,
+      "names": 1176
+    },
+    {
       "year": "2024",
-      "ticker_days": 998,
-      "sessions": 69,
-      "names": 626
+      "ticker_days": 2844,
+      "sessions": 252,
+      "names": 1459
     },
     {
       "year": "2025",
@@ -25,5 +77,8 @@
       "names": 1447
     }
   ],
-  "reverse_split_flagged": 344
+  "by_source": {
+    "alpaca:multi": 17768,
+    "polygon:grouped": 7948
+  }
 }

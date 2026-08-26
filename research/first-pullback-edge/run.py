@@ -415,10 +415,19 @@ def stage_ablation(args):
     # the nesting — ticker-day outermost — means each worker touches one
     # day's bars once instead of the driver walking the whole corpus 90
     # times. On 4 cores that is the difference between ~90 minutes and ~25.
+    # The full 4-cost x 3-policy grid is only needed where a cost or
+    # ambiguity table is actually reported. D and E collapse to tens of
+    # trades and the secondary ladder is reported at realistic/pessimistic
+    # only, so running 12 cells for them buys nothing and costs an hour.
+    FULL_GRID = {"A", "B", "C", "F"}
     combos = []
     for vname, variant in variants.items():
-        for cost_name in ("gross", "low", "realistic", "stressed"):
-            for policy in ("pessimistic", "optimistic", "exclude"):
+        costs = (("gross", "low", "realistic", "stressed")
+                 if vname in FULL_GRID else ("realistic",))
+        policies = (("pessimistic", "optimistic", "exclude")
+                    if vname in FULL_GRID else ("pessimistic",))
+        for cost_name in costs:
+            for policy in policies:
                 for exp in ("exp1_common_exits", "exp2_full_management"):
                     if exp == "exp2_full_management" and vname != "F":
                         continue
@@ -1028,6 +1037,94 @@ def stage_verify(args):
     print(f"\nwrote results/provider_verification.json")
 
 
+
+# --------------------------------------------------------------- stage: 2 --
+def stage_stage2(args):
+    """POST-FREEZE HYPOTHESES — brief section 8 and section 33.
+
+    The frozen A-F experiment is done and reported. Everything here was
+    chosen AFTER seeing those results and is therefore a new hypothesis, not
+    a finding: it is labelled as such in the output and in the report, and it
+    is measured on the SAME data, which means it cannot confirm itself. What
+    it can do is answer one question the ablation raises and cannot settle:
+
+        if every correction this study argues for were applied at once,
+        does the strategy reach positive expectancy?
+
+    Three corrections, each traceable to a measurement rather than a hunch:
+
+      STOP    max_stop_pct 3.0 -> 6.0. Unsourced in the corpus, sitting on
+              the population's median stop (research/megaday-study/RESULTS.md
+              section 4), and monotone in this study's own sweep.
+      CLOCK   arm only 09:35-11:30, the corpus session
+              (knowledge-base/strategies/PARAMETERS.md section 2). 58% of
+              variant A's trades are afternoon trades and they are the worst
+              bucket in the study.
+      ROOM    drop the HOD-room gate. It is the one filter with a negative
+              accept-minus-reject separation, and tightening it is
+              monotonically worse in the sweep.
+
+    Run individually and stacked, against the best frozen rung as baseline.
+    """
+    cfg = load_config()
+    base = params_from_config(cfg)
+    variants = variants_from_config(cfg)
+    provider = get_provider(args.provider)
+    rules = _rules(cfg)
+    cap_pct = _v(cfg["execution"]["stop_limit_cap_pct"])
+    cap_ticks = _v(cfg["execution"]["stop_limit_cap_ticks"])
+    loaded = _load_scanned(provider, cfg, rules, args.days, args.workers, args)
+
+    C = variants["C"]
+    no_room = tuple(g for g in C.gates if g != "hod_room")
+    WIDE = {"max_stop_pct": 6.0}
+    CLOCK = {"arm_start_et": dt.time(9, 35), "arm_end_et": dt.time(11, 30)}
+
+    defs = {
+        "0_frozen_C":        (C.gates,  {}),
+        "1_stop6":           (C.gates,  dict(WIDE)),
+        "2_clock":           (C.gates,  dict(CLOCK)),
+        "3_no_hod_room":     (no_room,  {}),
+        "4_stop6_clock":     (C.gates,  {**WIDE, **CLOCK}),
+        "5_all_three":       (no_room,  {**WIDE, **CLOCK}),
+        "6_all_three_on_A":  (variants["A"].gates, {**WIDE, **CLOCK}),
+        "7_all_three_on_F":  (tuple(g for g in variants["F"].gates
+                                    if g != "hod_room"), {**WIDE, **CLOCK}),
+    }
+    combos = []
+    for lab, (gates, over) in defs.items():
+        v = Variant(name=lab, label=lab, gates=gates, override=over,
+                    lanes=lab.endswith("_on_F"), retest=lab.endswith("_on_F"))
+        combos.append((lab, v, v.p(base), "realistic", "pessimistic",
+                       "exp1_common_exits"))
+    trades, _, _ = _run_parallel(loaded, base, variants, combos, cap_pct,
+                                 cap_ticks, args.compute_workers,
+                                 label="post-freeze configurations")
+    by = {}
+    for t in trades:
+        by.setdefault(t["variant"], []).append(t)
+    rows = []
+    for lab in defs:
+        sel = by.get(lab, [])
+        m = core_metrics(sel)
+        ci = clustered_bootstrap(sel, seed=cfg["seed"])
+        acct = account_simulation(sel, equity0=_v(cfg["risk"]["account_equity"]),
+                                  risk_pct=_v(cfg["risk"]["risk_pct"]),
+                                  max_position_value=_v(cfg["risk"]["max_position_value"]))
+        m.update(config=lab, exp_ci_lo=ci["lo"], exp_ci_hi=ci["hi"],
+                 verdict=verdict(ci, m.get("trades", 0)),
+                 end_equity=acct["end_equity"], ruined=acct["ruined"],
+                 hypothesis="POST-FREEZE — measured on the same data as A-F, "
+                            "so it cannot confirm itself")
+        rows.append(m)
+        print(f"  {lab:<20} n={m.get('trades',0):<5} "
+              f"exp={m.get('expectancy_r', float('nan')):+.3f}R  "
+              f"win={m.get('win_rate', float('nan')):.3f}  "
+              f"CI[{ci['lo']:.3f},{ci['hi']:.3f}]", flush=True)
+    save_results(rows, "stage2_corrections")
+    print("\nwrote results/stage2_corrections.csv")
+
+
 # ---------------------------------------------------------------------- cli --
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
@@ -1090,6 +1187,15 @@ def main():
     vf.add_argument("--day", default=None)
     vf.add_argument("--days-back", type=int, default=3)
     vf.set_defaults(func=stage_verify)
+
+    s2 = sub.add_parser("stage2")
+    s2.add_argument("--days", type=int, default=25)
+    s2.add_argument("--start", default=None)
+    s2.add_argument("--end", default=None)
+    s2.add_argument("--workers", type=int, default=8)
+    s2.add_argument("--compute-workers", type=int, default=4)
+    s2.add_argument("--provider", default=None)
+    s2.set_defaults(func=stage_stage2)
 
     r = sub.add_parser("report")
     r.set_defaults(func=stage_report)

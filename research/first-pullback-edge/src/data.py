@@ -415,6 +415,37 @@ class PolygonProvider(_KeyedProvider):
             url = f"{nxt}&apiKey={self.key}" if nxt else None
         return out
 
+    def all_tickers(self, types=("CS", "ADRC"), active=None) -> list[dict]:
+        """Every ticker the reference DB holds, active and/or delisted.
+
+        `active=false` with no date returns the whole historical delisted set
+        with a `delisted_utc` on each row — page one alone spans 2004-2017.
+        Union that with `active=true` and you have a symbol universe that a
+        company leaving the exchange does not fall out of, which is the
+        survivorship fix for any period grouped-daily cannot reach.
+        """
+        self._require()
+        out: list[dict] = []
+        for t in types:
+            for act in ([active] if active is not None else [True, False]):
+                url = (f"{self.BASE}/v3/reference/tickers?market=stocks"
+                       f"&type={t}&active={'true' if act else 'false'}"
+                       f"&limit=1000&apiKey={self.key}")
+                page = 0
+                while url and page < 60:
+                    d = self._get(url, f"tickers {t} active={act} p{page}")
+                    out += d.get("results", [])
+                    nxt = d.get("next_url")
+                    url = f"{nxt}&apiKey={self.key}" if nxt else None
+                    page += 1
+        seen, uniq = set(), []
+        for r in out:
+            k = (r.get("ticker"), r.get("delisted_utc"))
+            if k not in seen:
+                seen.add(k)
+                uniq.append(r)
+        return uniq
+
     def quotes(self, sym: str, day: dt.date) -> list[dict]:
         """NBBO. Needed for a real spread instead of the range-quartile proxy."""
         self._require()
@@ -545,6 +576,43 @@ class AlpacaProvider(_KeyedProvider):
         return self._bars(sym, dt.datetime.combine(start, dt.time(0, 0), ET),
                           dt.datetime.combine(end + dt.timedelta(days=1), dt.time(0, 0), ET),
                           timeframe="1Day")
+
+    def daily_bars_multi(self, symbols: list[str], start: dt.date,
+                         end: dt.date) -> dict[str, list[Bar]]:
+        """Daily bars for MANY symbols per request.
+
+        The screening layer needs open / previous close / trailing dollar
+        volume for thousands of names over years. One symbol per request is
+        tens of thousands of calls; the multi-symbol endpoint carries a
+        comma-separated list and pages through 10,000 bars at a time, which
+        turns the same job into hundreds.
+        """
+        self._require()
+        out: dict[str, list[Bar]] = {s: [] for s in symbols}
+        base = (f"{self.BASE}/stocks/bars?symbols={','.join(symbols)}"
+                f"&timeframe=1Day&start={start.isoformat()}&end={end.isoformat()}"
+                f"&adjustment=raw&feed={self.feed}&limit=10000")
+        url = base
+        for _ in range(400):
+            self._throttle()
+            code, raw = _curl2(url, self._hdr(), tries=3)
+            if code != 200 or not raw:
+                if code in (403, 404):
+                    break
+                raise RuntimeError(f"alpaca multi: HTTP {code} {(raw or '')[:120]}")
+            d = json.loads(raw)
+            for sym, rows in (d.get("bars") or {}).items():
+                out.setdefault(sym, [])
+                for r in rows:
+                    ts = int(dt.datetime.fromisoformat(
+                        r["t"].replace("Z", "+00:00")).timestamp())
+                    out[sym].append(Bar(ts, r["o"], r["h"], r["l"], r["c"],
+                                        r.get("v", 0.0)))
+            tok = d.get("next_page_token")
+            if not tok:
+                break
+            url = base + f"&page_token={tok}"
+        return out
 
     def capabilities(self) -> Capability:
         return Capability(

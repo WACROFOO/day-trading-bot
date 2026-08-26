@@ -252,6 +252,60 @@ def candidate_days_grouped(provider, start: dt.date, end: dt.date,
     return out
 
 
+def candidate_days_multi(alpaca, symbols: list[str], start: dt.date,
+                        end: dt.date, rules: ScanRules, batch: int = 40,
+                        warmup_days: int = 45, progress=None) -> list[CandidateDay]:
+    """Point-in-time universe for a period grouped-daily cannot reach.
+
+    Grouped daily is the better construction and it is capped at two years on
+    the free tier. For everything before that, the survivorship-free path is:
+    take the FULL historical ticker list (active + delisted, from the
+    reference DB) and screen it with multi-symbol daily bars. A company that
+    left the exchange in 2019 is in that list with a `delisted_utc`, so it is
+    screened on the days it actually traded and is simply absent afterwards.
+
+    Same point-in-time discipline as everywhere else: session D reads only
+    D's OPEN, D-1's CLOSE, and the trailing-20-session dollar volume that
+    EXCLUDES D.
+    """
+    out: list[CandidateDay] = []
+    lo = start - dt.timedelta(days=warmup_days)
+    for i in range(0, len(symbols), batch):
+        chunk = symbols[i:i + batch]
+        try:
+            got = alpaca.daily_bars_multi(chunk, lo, end)
+        except Exception as e:                                  # noqa: BLE001
+            if progress:
+                progress(i, len(symbols), f"ERROR {str(e)[:60]}", len(out))
+            continue
+        for sym, bars in got.items():
+            if len(bars) < 25:
+                continue
+            dollar = [b.v * b.c for b in bars]
+            for k in range(21, len(bars)):
+                b, prev = bars[k], bars[k - 1]
+                d = b.et.date()
+                if not (start <= d <= end) or prev.c <= 0:
+                    continue
+                gap = (b.o - prev.c) / prev.c * 100.0
+                if not (rules.price_min <= b.o <= rules.price_max):
+                    continue
+                if gap < rules.gap_min_pct:
+                    continue
+                prior_dv = sum(dollar[k - 20:k]) / 20.0
+                if prior_dv < rules.min_dollar_volume:
+                    continue
+                out.append(CandidateDay(
+                    sym=sym, day=d.isoformat(), prev_close=prev.c, open_px=b.o,
+                    gap_pct=gap, prior_dollar_volume_20d=prior_dv,
+                    split_on_day=False,
+                    reverse_split_ratio=detect_reverse_split(prev.c, b.o),
+                    source="alpaca:multi"))
+        if progress:
+            progress(i + len(chunk), len(symbols), chunk[0], len(out))
+    return out
+
+
 def qualify_intraday(sym: str, day: dt.date, bars: list[Bar], prev_close: float | None,
                      rules: ScanRules,
                      same_time_profile: dict[int, float] | None = None) -> CandidateDay | None:
