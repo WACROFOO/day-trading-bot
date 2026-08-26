@@ -1,0 +1,180 @@
+[
+  {
+    "file": "probe_pattern.csv",
+    "n": 300,
+    "n_resolved": 300,
+    "n_win": 26,
+    "base_rate": 0.0867,
+    "scores": [
+      {
+        "score": "exp_close_r",
+        "source": "kronos",
+        "auc": 0.6745,
+        "ci": [
+          0.571,
+          0.778
+        ],
+        "inverted": false,
+        "distinct": 300,
+        "frac_at_mode": 0.003
+      },
+      {
+        "score": "exp_mae_r",
+        "source": "kronos",
+        "auc": 0.671,
+        "ci": [
+          0.557,
+          0.773
+        ],
+        "inverted": true,
+        "distinct": 300,
+        "frac_at_mode": 0.003
+      },
+      {
+        "score": "exp_mfe_r",
+        "source": "kronos",
+        "auc": 0.6621,
+        "ci": [
+          0.564,
+          0.757
+        ],
+        "inverted": false,
+        "distinct": 300,
+        "frac_at_mode": 0.003
+      },
+      {
+        "score": "med_close_r",
+        "source": "kronos",
+        "auc": 0.648,
+        "ci": [
+          0.548,
+          0.749
+        ],
+        "inverted": false,
+        "distinct": 300,
+        "frac_at_mode": 0.003
+      },
+      {
+        "score": "dist_from_window_mean_R",
+        "source": "free",
+        "auc": 0.6443,
+        "ci": [
+          0.533,
+          0.746
+        ],
+        "inverted": true,
+        "distinct": 298,
+        "frac_at_mode": 0.007
+      },
+      {
+        "score": "anchor_z",
+        "source": "free",
+        "auc": 0.6437,
+        "ci": [
+          0.535,
+          0.742
+        ],
+        "inverted": true,
+        "distinct": 298,
+        "frac_at_mode": 0.007
+      },
+      {
+        "score": "dist_from_window_high_R",
+        "source": "free",
+        "auc": 0.6317,
+        "ci": [
+          0.526,
+          0.731
+        ],
+        "inverted": false,
+        "distinct": 298,
+        "frac_at_mode": 0.007
+      },
+      {
+        "score": "p_touch_up",
+        "source": "kronos",
+        "auc": 0.6219,
+        "ci": [
+          0.517,
+          0.723
+        ],
+        "inverted": false,
+        "distinct": 17,
+        "frac_at_mode": 0.313
+      },
+      {
+        "score": "window_ret_pct",
+        "source": "free",
+        "auc": 0.6129,
+        "ci": [
+          0.479,
+          0.741
+        ],
+        "inverted": true,
+        "distinct": 298,
+        "frac_at_mode": 0.007
+      },
+      {
+        "score": "risk_pct",
+        "source": "free",
+        "auc": 0.5473,
+        "ci": [
+          0.44,
+          0.652
+        ],
+        "inverted": false,
+        "distinct": 298,
+        "frac_at_mode": 0.007
+      },
+      {
+        "score": "p_win",
+        "source": "kronos",
+        "auc": 0.5105,
+        "ci": [
+          0.451,
+          0.557
+        ],
+        "inverted": true,
+        "distinct": 7,
+        "frac_at_mode": 0.903
+      },
+      {
+        "score": "p_win_repaired",
+        "source": "kronos",
+        "auc": 0.5105,
+        "ci": [
+          0.451,
+          0.557
+        ],
+        "inverted": true,
+        "distinct": 7,
+        "frac_at_mode": 0.903
+      }
+    ],
+    "best_kronos": {
+      "score": "exp_close_r",
+      "source": "kronos",
+      "auc": 0.6745,
+      "ci": [
+        0.571,
+        0.778
+      ],
+      "inverted": false,
+      "distinct": 300,
+      "frac_at_mode": 0.003
+    },
+    "best_free": {
+      "score": "dist_from_window_mean_R",
+      "source": "free",
+      "auc": 0.6443,
+      "ci": [
+        0.533,
+        0.746
+      ],
+      "inverted": true,
+      "distinct": 298,
+      "frac_at_mode": 0.007
+    },
+    "kronos_minus_free": 0.0302
+  }
+]

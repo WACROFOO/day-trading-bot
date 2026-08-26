@@ -1,0 +1,35 @@
+{
+  "high < low": {
+    "count": 1,
+    "pct": 0.093
+  },
+  "high < open": {
+    "count": 8,
+    "pct": 0.741
+  },
+  "high < close": {
+    "count": 12,
+    "pct": 1.111
+  },
+  "low > open": {
+    "count": 13,
+    "pct": 1.204
+  },
+  "low > close": {
+    "count": 12,
+    "pct": 1.111
+  },
+  "negative volume": {
+    "count": 2,
+    "pct": 0.185
+  },
+  "non-positive price": {
+    "count": 0,
+    "pct": 0.0
+  },
+  "ANY inconsistency": {
+    "count": 37,
+    "pct": 3.426
+  },
+  "_bars_checked": 1080
+}
