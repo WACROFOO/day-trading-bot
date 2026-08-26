@@ -793,16 +793,50 @@ def stage_placebo(args):
         print(f"  {name}: {m.get('trades', 0)} trades, "
               f"exp {m.get('expectancy_r', float('nan')):.3f}R")
 
-    # baseline 1: random entry minute on the same qualifying ticker-days
+    # baseline 1: random entry minute on the same qualifying ticker-days.
+    # BOTH terms — the original (which the published report used, and which
+    # external review showed was measured on easier terms than the strategy)
+    # and the symmetric one. Keeping both is the correction being visible.
     rows.append(_baseline_random(loaded, base, cost, cfg))
+    rows.append(_baseline_random(loaded, base, cost, cfg, symmetric=True))
     save_results(rows, "baselines")
     save_table(ledger, "placebo_trades")
 
 
-def _baseline_random(loaded, params, cost, cfg, n_draws: int = 5):
+def _baseline_random(loaded, params, cost, cfg, n_draws: int = 5,
+                     symmetric: bool = False):
     """A random minute between 09:35 and 11:30 on a qualifying candidate,
     1-ATR stop, the same T1/runner ladder. If the elaborate pattern cannot
-    beat this, the pattern is not where the edge lives."""
+    beat this, the pattern is not where the edge lives.
+
+    ! ASYMMETRY DEFECT, found 2026-08-26 by external review. As originally
+    written this baseline was measured on easier terms than the strategy it
+    was compared against, in three separate ways:
+
+      1. ENTRY COST. It entered at `s.bar.c` with the fill price passed
+         straight through, so it paid NO entry slippage. The strategy pays a
+         median $0.0500 per share against a median planned risk of $0.1079 —
+         that is 0.52 R of entry cost the baseline never paid.
+      2. R DENOMINATOR. Here risk_per_share is computed from the same price
+         used as the fill, so realised risk == planned risk exactly. In the
+         strategy the fill lands ABOVE the trigger, so realised risk
+         (entry_fill - stop) is a median 1.52x the planned risk that R is
+         denominated in. Every strategy loss is inflated ~1.5x before any
+         exit slippage; the baseline's is not.
+      3. SAME-BAR STOP. `stop_active_same_bar=False` here, unconditionally,
+         while the strategy runs it True under the pessimistic policy. ~25%
+         of strategy fills touch trigger and stop in the same minute — the
+         exact population this exempts the baseline from.
+
+    Measured effect of (2) alone: the strategy reads -1.741 R on planned risk
+    and -1.082 R on the risk actually taken, so the headline 0.80 R gap to
+    this baseline collapses to about 0.14 R before (1) and (3) are even
+    addressed.
+
+    `symmetric=True` runs the baseline on the SAME terms as the strategy.
+    Both are kept and both are reported: the original is the number the
+    published report used, and deleting it would hide the correction.
+    """
     from src.execution import PositionSim
     from src.indicators import SessionState
     rng = random.Random(cfg["seed"])
@@ -827,12 +861,22 @@ def _baseline_random(loaded, params, cost, cfg, n_draws: int = 5):
                          int(params.max_position_value // entry))
             if shares < 1:
                 continue
+            fill = entry
+            same_bar_stop = False
+            if symmetric:
+                # (1) charge the same per-share entry slippage the strategy
+                #     pays, and (3) arm the stop on the entry bar whenever
+                #     that bar spans both barriers, as the strategy does.
+                fill = entry + cost.slippage(s.atr, s.spread_est, shares,
+                                             s.bar.v)
+                same_bar_stop = (s.bar.l <= stop <= s.bar.h)
             fake = type("S", (), dict(stop=stop, risk_per_share=entry - stop,
                                       ts=s.bar.ts, et=s.et.isoformat(),
                                       trigger=entry, planned_shares=shares,
                                       kind="random", atr=s.atr))()
-            pos = PositionSim(fake, entry, shares, k, s.bar, cost, params,
-                              stop_active_same_bar=False, bailout=False)
+            pos = PositionSim(fake, fill, shares, k, s.bar, cost, params,
+                              stop_active_same_bar=same_bar_stop,
+                              bailout=False)
             for j in range(k + 1, len(snaps)):
                 if pos.step(snaps[j], j):
                     break
@@ -843,17 +887,30 @@ def _baseline_random(loaded, params, cost, cfg, n_draws: int = 5):
                 pos.force_flat(snaps[-1], "DAY_END")
             gross = pos.banked
             fees = cost.fee(pos.orders)
-            r_unit = pos.rps * pos.shares_open
-            trades.append(dict(day=d.isoformat(), net_r=(gross - fees) / r_unit,
-                               net_pnl=gross - fees, mfe_r=pos.mfe, mae_r=pos.mae,
+            net = gross - fees
+            # BOTH denominators, always. The planned one is what the report
+            # published; the realised one (fill - stop) is the risk actually
+            # carried. They differ by a median 1.52x in the strategy and by
+            # the slippage term here, and reporting only the first is what
+            # produced the defect this function documents.
+            r_planned = pos.rps * pos.shares_open
+            r_actual = (fill - stop) * pos.shares_open
+            trades.append(dict(day=d.isoformat(), net_r=net / r_planned,
+                               net_r_actual=net / r_actual,
+                               net_pnl=net, mfe_r=pos.mfe, mae_r=pos.mae,
                                ambiguous=False, halt_flag=pos.halt,
                                participation_capped=False))
+    tag = "random_entry_symmetric" if symmetric else "random_entry"
     m = core_metrics(trades)
     ci = clustered_bootstrap(trades, seed=cfg["seed"])
-    m.update(baseline=f"random_entry_x{n_draws}", ci_lo=ci["lo"], ci_hi=ci["hi"],
-             verdict=verdict(ci, m.get("trades", 0)))
-    print(f"  random_entry: {m.get('trades', 0)} trades, "
-          f"exp {m.get('expectancy_r', float('nan')):.3f}R")
+    act = [t["net_r_actual"] for t in trades]
+    m.update(baseline=f"{tag}_x{n_draws}", ci_lo=ci["lo"], ci_hi=ci["hi"],
+             verdict=verdict(ci, m.get("trades", 0)),
+             expectancy_r_actual_risk=(sum(act) / len(act)) if act else None,
+             symmetric_terms=symmetric)
+    print(f"  {tag}: {m.get('trades', 0)} trades, "
+          f"exp {m.get('expectancy_r', float('nan')):.3f}R planned / "
+          f"{m.get('expectancy_r_actual_risk', float('nan')):.3f}R realised")
     return m
 
 
