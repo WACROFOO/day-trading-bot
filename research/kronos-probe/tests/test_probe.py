@@ -214,3 +214,34 @@ def test_batch_replication_yields_distinct_paths():
     closes = paths[0, :, :, 3]
     assert len(np.unique(closes.round(6))) > 1, (
         "all sampled paths identical — the sample axis is a copy, not a sample")
+
+
+# ------------------------------------------------ invalid-bar repair
+def test_repair_only_widens_a_bar():
+    """The repair must be monotone: it can pull high up and low down to
+    contain the bar's own open and close, never the reverse. A repair that
+    could narrow a bar would be inventing barrier misses."""
+    arr = np.zeros((1, 1, 1, 6))
+    arr[0, 0, 0] = (10.0, 9.0, 10.5, 11.0, 0, 0)     # high<open, low>close
+    raw = barrier_probabilities(arr, np.array([10.0]), np.array([1.0]))
+    fix_hi = max(9.0, 10.0, 11.0)
+    fix_lo = min(10.5, 10.0, 11.0)
+    assert fix_hi >= 9.0 and fix_lo <= 10.5
+    # repaired bar reaches +1R (11.0) so it must resolve as a win
+    assert raw["p_win_repaired"][0] == 1.0
+    assert raw["invalid_bar_rate"][0] == 1.0
+
+
+def test_valid_bars_are_unchanged_by_repair():
+    """On well-formed candles the two readings must agree exactly, or the
+    repair is doing something other than repairing."""
+    arr = np.zeros((1, 2, 3, 6))
+    rng = np.random.default_rng(3)
+    for k in range(2):
+        for i in range(3):
+            o, c = 10 + rng.normal(0, .2), 10 + rng.normal(0, .2)
+            h, l = max(o, c) + abs(rng.normal(0, .1)), min(o, c) - abs(rng.normal(0, .1))
+            arr[0, k, i] = (o, h, l, c, 0, 0)
+    s = barrier_probabilities(arr, np.array([10.0]), np.array([1.0]))
+    assert s["p_win"][0] == s["p_win_repaired"][0]
+    assert s["invalid_bar_rate"][0] == 0.0

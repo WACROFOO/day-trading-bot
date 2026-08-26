@@ -119,23 +119,38 @@ def barrier_probabilities(paths: np.ndarray, entry: np.ndarray,
     up = (entry + risk)[:, None]                    # (B, 1)
     dn = (entry - risk)[:, None]
 
-    hi, lo = paths[:, :, :, H], paths[:, :, :, L]
-    hit_up = hi >= up[:, :, None]
-    hit_dn = lo <= dn[:, :, None]
+    def _resolve(hi, lo):
+        hit_up = hi >= up[:, :, None]
+        hit_dn = lo <= dn[:, :, None]
+        first_up = np.where(hit_up.any(axis=2), hit_up.argmax(axis=2), t + 1)
+        first_dn = np.where(hit_dn.any(axis=2), hit_dn.argmax(axis=2), t + 1)
+        return first_up < first_dn, hit_up      # ties -> loss (pessimistic)
 
-    first_up = np.where(hit_up.any(axis=2), hit_up.argmax(axis=2), t + 1)
-    first_dn = np.where(hit_dn.any(axis=2), hit_dn.argmax(axis=2), t + 1)
-    win = first_up < first_dn                       # ties -> loss (pessimistic)
+    hi, lo = paths[:, :, :, H], paths[:, :, :, L]
+    win, hit_up = _resolve(hi, lo)
+
+    # Nothing in the decoder enforces high >= max(open, close): measured at
+    # 3.4% of predicted bars inconsistent, 0.09% with high < low outright
+    # (results/bar_validity.json). The repair is monotone — it can only widen
+    # a bar to contain its own open and close — and both readings are
+    # returned so the repair's effect is visible instead of assumed.
+    o, c = paths[:, :, :, O], paths[:, :, :, C]
+    hi_fix = np.maximum.reduce([hi, o, c])
+    lo_fix = np.minimum.reduce([lo, o, c])
+    win_fix, _ = _resolve(hi_fix, lo_fix)
 
     close_r = (paths[:, :, -1, C] - entry[:, None]) / risk[:, None]
     mfe_r = (hi.max(axis=2) - entry[:, None]) / risk[:, None]
     mae_r = (entry[:, None] - lo.min(axis=2)) / risk[:, None]
+    bad = ((hi < lo) | (hi < o) | (hi < c) | (lo > o) | (lo > c))
 
     return dict(
         p_win=win.mean(axis=1),
+        p_win_repaired=win_fix.mean(axis=1),
         p_touch_up=hit_up.any(axis=2).mean(axis=1),
         exp_mfe_r=mfe_r.mean(axis=1),
         exp_mae_r=mae_r.mean(axis=1),
         exp_close_r=close_r.mean(axis=1),
         med_close_r=np.median(close_r, axis=1),
+        invalid_bar_rate=bad.mean(axis=(1, 2)),
     )
