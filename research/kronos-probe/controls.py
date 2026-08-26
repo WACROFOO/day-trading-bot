@@ -106,10 +106,64 @@ def evaluate(path: Path, ctx_len: int = 150) -> dict:
     )
 
 
+def compare(path_a: Path, path_b: Path, ctx_len: int = 150) -> dict:
+    """Pattern vs random, with the confound measured instead of ignored.
+
+    The two populations differ by ~2.5 sigma in where the anchor sits inside
+    its own context window (pattern median +2.12, random -0.44), and the
+    model's forecast correlates 0.756 with that window's mean. So a raw gap
+    in p_win between the arms is mostly the z-score gap, NOT the model
+    telling the populations apart.
+
+    The honest comparison is within an overlapping z band: among anchors that
+    sit at comparable heights in their own window, does the model still
+    separate the two populations?
+    """
+    frames = {}
+    for tag, p in (("pattern", path_a), ("random", path_b)):
+        d = add_free_features(pd.read_csv(p), ctx_len)
+        d["arm"] = tag
+        frames[tag] = d
+    both = pd.concat(frames.values(), ignore_index=True)
+
+    def _stats(d):
+        dec = d[d.true_outcome.isin(["win", "loss"])]
+        return dict(
+            n=int(len(d)), n_resolved=int(len(dec)),
+            realised_win_rate=(round(float((dec.true_outcome == "win").mean()), 4)
+                               if len(dec) else None),
+            anchor_z_median=(round(float(d.anchor_z.median()), 3)
+                             if len(d) else None),
+            p_win_mean=round(float(d.p_win.mean()), 4) if len(d) else None,
+            frac_p_win_zero=(round(float((d.p_win == 0).mean()), 4)
+                             if len(d) else None),
+            exp_close_r_mean=(round(float(d.exp_close_r.mean()), 3)
+                              if len(d) else None),
+            true_fwd_close_r_mean=(round(float(d.true_fwd_close_r.mean()), 3)
+                                   if len(d) else None),
+        )
+
+    lo = max(frames["pattern"].anchor_z.quantile(.05),
+             frames["random"].anchor_z.quantile(.05))
+    hi = min(frames["pattern"].anchor_z.quantile(.95),
+             frames["random"].anchor_z.quantile(.95))
+    band = both[(both.anchor_z >= lo) & (both.anchor_z <= hi)]
+    return dict(
+        raw={t: _stats(f) for t, f in frames.items()},
+        z_overlap_band=[round(float(lo), 3), round(float(hi), 3)],
+        matched={t: _stats(band[band.arm == t]) for t in frames},
+        note="A gap that survives the matched band is about the populations; "
+             "one that vanishes was the z-score gap.",
+    )
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="+", type=Path)
     ap.add_argument("--ctx", type=int, default=150)
+    ap.add_argument("--compare", action="store_true",
+                    help="with exactly two files: pattern vs random, "
+                         "raw and matched on anchor z-score")
     a = ap.parse_args()
 
     out = []
@@ -131,7 +185,25 @@ def main():
                   f"{r['best_free']['score']} {r['best_free']['auc']:.4f}"
                   f"   delta {r['kronos_minus_free']:+.4f}")
 
-    (ROOT / "results" / "controls.json").write_text(json.dumps(out, indent=2))
+    payload = dict(per_file=out)
+
+    if a.compare and len(a.files) == 2:
+        cmp = compare(a.files[0], a.files[1], a.ctx)
+        payload["comparison"] = cmp
+        print(f"\n=== pattern vs random ===")
+        print(f"z overlap band: {cmp['z_overlap_band']}")
+        for label in ("raw", "matched"):
+            print(f"\n-- {label} --")
+            print(f"{'':22s} {'pattern':>12s} {'random':>12s}")
+            for k in ("n", "anchor_z_median", "realised_win_rate",
+                      "p_win_mean", "frac_p_win_zero", "exp_close_r_mean",
+                      "true_fwd_close_r_mean"):
+                p = cmp[label]["pattern"].get(k)
+                q = cmp[label]["random"].get(k)
+                print(f"{k:22s} {str(p):>12s} {str(q):>12s}")
+        print(f"\n{cmp['note']}")
+
+    (ROOT / "results" / "controls.json").write_text(json.dumps(payload, indent=2))
     print(f"\nwrote {ROOT / 'results' / 'controls.json'}")
 
 
