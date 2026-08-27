@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.14 (trend lines on, levels deduped · paper only)", shorttitle="ROSS FP V12.14", overlay=true,
+strategy("ROSS First Pullback Strategy V12.15 (clean chart · paper only)", shorttitle="ROSS FP V12.15", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -638,13 +638,22 @@ commissionPerOrderInput = input.float(1.0, "Commission/order — MUST match Prop
      tooltip="Pine cannot read strategy() commission_value back. Sizing reserves entry plus every planned exit order; keep this equal to Properties.", display = display.none)
 
 gVisual = "8. Display"
-showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
+// ── V12.15 CLEAN CHART ───────────────────────────────────────────────────
+// Operator: "hide the unnecessary arrow shapes in color from the chart."
+// On PPCB those green / teal / yellow / red chevrons are these three layers.
+// They are plot.style_linebr series, so they redraw on EVERY bar of EVERY
+// past setup episode, and because entry/stop/target move while a setup is
+// forming, each episode leaves a little coloured tent behind. Nothing is
+// lost by hiding them: the live numbers are in the PLAN and SIZE rows of the
+// dashboard, which is where an operator reads them anyway. All three remain
+// available as toggles.
+showLevels           = input.bool(false, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
 // V12.9: the impulse-peak / high-of-day / pre-market-high series are three
 // more lines drawn on every bar, and MAIN resistance now NAMES its source
 // ("R 3.84 · HOD"), so they say nothing the structure map does not. Default
 // off — the operator asked for trend lines and main S/R, not a fan.
 showContextPlots     = input.bool(false, "  └ also plot impulse peak / HOD / PM-high series", group=gVisual, display = display.none)
-showPriceBands       = input.bool(true, "Show target / stop bands", group=gVisual, display = display.none)
+showPriceBands       = input.bool(false, "Show target / stop bands", group=gVisual, display = display.none)
 // V4.9: band width was a FIXED tick count, so it did not adapt to the
 // instrument or to price zoom — 5 ticks is a hairline on a $9 stock and a
 // slab on a $1.70 one. ATR-relative by default; ticks still available.
@@ -654,7 +663,7 @@ bandHalfWidthTicks   = input.int(5, "Band half-width (ticks, fixed mode)", minva
 // V4.9.1: plotshape(size=) demands a CONST string — an input-derived value
 // is rejected (CE10123). So the choice is a boolean and each size is a
 // separate const call. Pine cannot size a glyph from a variable.
-showMarkers          = input.bool(true, "Show signal markers", group=gVisual, display = display.none)
+showMarkers          = input.bool(false, "Show signal markers", group=gVisual, display = display.none)
 bigMarkers           = input.bool(false, "Large signal markers", group=gVisual, display = display.none)
 // V4.1: nearest structural levels drawn as bands — resistance above,
 // support below, from confirmed swing pivots (his "two reasons at one
@@ -689,6 +698,9 @@ showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-
 // Turn TradingView's off: strategy Settings -> Style -> uncheck
 // "Trades on chart" (and "Quantity"), keep these on.
 showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", group=gVisual, display = display.none)
+tlMinBars            = input.int(12, "Trend lines: minimum bars before one can be drawn", minval=6, maxval=120, group=gVisual, display = display.none)
+tlAnchorGap          = input.int(4, "Trend lines: keep anchors this many bars off the right edge", minval=2, maxval=30, group=gVisual, display = display.none)
+tlLabelOffset        = input.int(6, "Trend lines: label offset (bars right of last)", minval=0, maxval=40, group=gVisual, display = display.none)
 tlLookback           = input.int(0, "Trend lines: lookback bars (0 = since day start)", minval=0, maxval=720, group=gVisual,
      tooltip="V9.9: trend lines are day-scoped — the up-line anchors at TODAY's low, the down-line at TODAY's high (tangent: steepest slope keeping every confirmed bar on the right side; it can touch price, never cut it). Set a bar count only to narrow within the day.", display = display.none)
 srPivotLen           = input.int(5, "Pivot strength (bars each side)", minval=2, maxval=15, group=gVisual, display = display.none)
@@ -3053,12 +3065,18 @@ if barstate.islast and showTrendLine
     // and never cut it, so only LIVE price breaks it. No candidate with
     // >= 2 touches and a valid slope = no line, honestly.
     int nB = array.size(tlBars)
-    if nB >= 20
+    // V12.15: was a hard 20-bar minimum, with anchors additionally kept nine
+    // bars off the right edge. On PPCB, which began printing at 12:33, the
+    // chart held about 17 bars at 12:49 and no trend line could exist -- while
+    // the first 15-30 minutes is exactly when this strategy trades. Both
+    // bounds are inputs now: 12 bars minimum, anchors allowed to within 4 bars
+    // of the right edge, so a swing formed minutes ago can still anchor.
+    if nB >= tlMinBars
         int fromB = tlLookback > 0 ? math.max(0, nB - tlLookback) : 0
         float tolTL = math.max(atr * 0.20, syminfo.mintick)
         // ── uptrend: candidate anchors = local lows + the session low ──
         array.clear(tlCand)
-        for i = fromB + 2 to nB - 9
+        for i = fromB + 2 to nB - tlAnchorGap
             bool isMin = true
             for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
                 if array.get(tlLows, j) < array.get(tlLows, i)
@@ -3068,7 +3086,7 @@ if barstate.islast and showTrendLine
         while array.size(tlCand) > 10
             array.shift(tlCand)
         int dayLoI = fromB
-        for i = fromB + 1 to nB - 9
+        for i = fromB + 1 to nB - tlAnchorGap
             if array.get(tlLows, i) < array.get(tlLows, dayLoI)
                 dayLoI := i
         array.push(tlCand, dayLoI)
@@ -3111,13 +3129,18 @@ if barstate.islast and showTrendLine
                  xloc=xloc.bar_time, extend=extend.right,
                  color=color.new(color.teal, upLost ? 70 : 25),
                  style=upLost ? line.style_dashed : line.style_solid, width=2)
-            upTLlab := label.new(time, upNow,
-                 upLost ? "uptrend LOST ▼" : "uptrend",
-                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 20))
+            // V12.15: the label used to print at `time`, on top of the last
+            // candles. It now sits in the empty right margin at the price the
+            // line actually holds there, so it reads as a continuation of the
+            // line instead of covering price action.
+            float upAt = lowA2 + bestSlope * (bar_index + tlLabelOffset - array.get(tlBars, bestA))
+            upTLlab := label.new(bar_index + tlLabelOffset, upAt,
+                 (upLost ? "uptrend lost  " : "uptrend  ") + str.tostring(upNow, format.mintick),
+                 xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
+                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 10))
         // ── downtrend: mirror, candidates = local highs + the session high ──
         array.clear(tlCand)
-        for i = fromB + 2 to nB - 9
+        for i = fromB + 2 to nB - tlAnchorGap
             bool isMax = true
             for j = math.max(fromB, i - 2) to math.min(nB - 1, i + 2)
                 if array.get(tlHighs, j) > array.get(tlHighs, i)
@@ -3127,7 +3150,7 @@ if barstate.islast and showTrendLine
         while array.size(tlCand) > 10
             array.shift(tlCand)
         int dayHiI = fromB
-        for i = fromB + 1 to nB - 9
+        for i = fromB + 1 to nB - tlAnchorGap
             if array.get(tlHighs, i) > array.get(tlHighs, dayHiI)
                 dayHiI := i
         array.push(tlCand, dayHiI)
@@ -3170,10 +3193,11 @@ if barstate.islast and showTrendLine
                  xloc=xloc.bar_time, extend=extend.right,
                  color=color.new(color.red, dnBroken ? 70 : 25),
                  style=dnBroken ? line.style_dashed : line.style_solid, width=2)
-            dnTLlab := label.new(time, dnNow,
-                 dnBroken ? "downtrend BROKEN ▲" : "downtrend",
-                 xloc=xloc.bar_time, style=label.style_none, size=size.small,
-                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 20))
+            float dnAt = highA2 + bestSlopeD * (bar_index + tlLabelOffset - array.get(tlBars, bestAD))
+            dnTLlab := label.new(bar_index + tlLabelOffset, dnAt,
+                 (dnBroken ? "downtrend broken  " : "downtrend  ") + str.tostring(dnNow, format.mintick),
+                 xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
+                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 10))
 
 
 // V5: retest triggers get their own glyph so the two setups are separable on
