@@ -407,6 +407,63 @@ so the outcome is no line instead of a useless one. A live pullback line at
 
 Gate booleans unchanged.
 
+### V12.13 - what V8 actually did, recovered from git
+
+The operator asked me to stop working from revision history and instead
+recover how V8 traced lines correctly. The whole history is in git -
+`knowledge-base/tradingview/ross-fp-v4.pine` kept its filename while the
+version advanced through V7.x, V8.x and V9.x - so this is recoverable fact,
+not memory.
+
+**V8 had no diagonal trend lines.** Its `showTrendLines` input is a toggle for
+the EMA9 / EMA20 / VWAP plots:
+
+```
+showTrendLines = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisual)
+```
+
+Drawn diagonals were introduced in V9.6 ("automatic trend lines with
+break/loss flags") and reworked in V9.7, V9.8, V9.9 and V9.10 - five attempts
+in the original line too. Every complaint in this thread - "lines make no
+sense", "cuts through the candles", "detached from price", "useless lines" -
+has been about a diagonal. Not once about a horizontal level. V8 looked clean
+because there was nothing diagonal in it. Diagonals are now default OFF.
+
+**V8's S/R geometry is already what ships.** `line.new(bar_index - 1, v,
+bar_index, v, extend=extend.both)` plus `label.new(bar_index + 2, v, ...)`,
+unchanged. The one substantive difference is polarity: V8 sourced resistance
+from `pivHighs` and support from `pivLows`. V9.5 pointed both at `allPiv` so
+any pivot could be either role, which doubles the candidate pool and allows a
+pivot LOW to be drawn as resistance above price. Default is now V8;
+`srBothPolarities` restores V9.5.
+
+**Overlapping labels.** Every label printed at `bar_index + 2`, so two levels
+a few cents apart collided on the same pixel row. Each label now gets its own
+x column (`srLabelStagger`, 4 bars).
+
+### Why "adapt to zoom and drag" cannot be delivered by any Pine script
+
+Stated plainly because it has been asked for repeatedly. **Pine has no access
+to the chart viewport.** There is no API for the visible bar range or the
+visible price range, and a script is not re-executed when the chart is panned
+or zoomed. Drawing objects are built on `barstate.islast` and hold their
+coordinates until a new bar arrives. Nothing in Pine - not this file, not V8,
+not the Codex candidates - can recompute levels for wherever the chart has
+been scrolled to.
+
+This is exactly why V8 read as correct at every zoom: a HORIZONTAL line with
+`extend.both` spans the full width at one price, so there is no anchor to
+drift away from and no viewport dependence to fail. A diagonal is anchored to
+two specific bars; pan away from them and it floats in space with nothing
+visible to relate it to. The V8 look is not a better algorithm, it is a shape
+that is immune to the problem.
+
+Combined with the scale finding in V12.12 - "Scale price chart only" applying
+a different price-to-pixel transform to drawings than to the axis - the two
+non-code causes account for the whole complaint.
+
+Gate booleans unchanged.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its

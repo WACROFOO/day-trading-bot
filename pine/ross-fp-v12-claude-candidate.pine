@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.12 (V9 structure + distance ceiling · paper only)", shorttitle="ROSS FP V12.12", overlay=true,
+strategy("ROSS First Pullback Strategy V12.13 (V8 level polarity · paper only)", shorttitle="ROSS FP V12.13", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -677,7 +677,13 @@ showSR               = input.bool(true, "  └ MAIN support / resistance", group
 // swing high across the most recent LOWER high (the breakout line);
 // uptrend = from the swing low across the most recent HIGHER low (the
 // trend-loss line). Labelled, and flagged the bar price breaks them.
-showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-lows)", group=gVisual, display = display.none)
+// V12.13: OFF, because V8 -- the version the operator remembers as correct --
+// had NO diagonal trend lines at all. Its "showTrendLines" toggle only turned
+// on the EMA9/EMA20/VWAP plots; drawn diagonals arrived in V9.6. Every
+// complaint since ("lines make no sense", "cuts through the candles",
+// "detached from price") has been about a diagonal, never about a horizontal
+// level. Kept as a feature, no longer imposed as a default.
+showTrendLine        = input.bool(false, "Draw trend lines (lower-highs / higher-lows)", group=gVisual, display = display.none)
 // V9.11 (operator): the trade RESULT in words. TradingView's own trade
 // markers print the SHARE COUNT next to each order ("+146", "-73"), which
 // reads like a P&L and is not one — a winning exit can show "-73". These
@@ -2885,6 +2891,11 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
 maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual)
+// V12.13 (operator: levels "overlapped in the graph"): every label used to
+// print at bar_index + 2, so two levels a few cents apart landed on the same
+// pixel row and their texts collided. Each label now gets its own x slot.
+srLabelStagger = input.int(4, "Bars between S/R label columns", minval=0, maxval=20, group=gVisual, display = display.none)
+srBothPolarities = input.bool(false, "S/R: let any pivot be either role (V9.5) — off = V8 highs/lows", group=gVisual, display = display.none)
 // V12.12 (operator, live DAIC +500%): V9 scores a trend line by
 // touches*2 - distance, so distance can always be outvoted by touch count.
 // On DAIC the winner was anchored on the session low at 2.05 while price was
@@ -2922,15 +2933,24 @@ if barstate.islast and showSR
     float tolSR = atr * 0.5
     // V9.5: both pivot kinds feed both sides (polarity flip) — f_near's
     // above/below filter assigns the role from the CURRENT price.
-    array<float> resL = f_near(allPiv, true, maxSRlines, tolSR)
-    array<float> supL = f_near(allPiv, false, maxSRlines, tolSR)
+    // V12.13 POLARITY. V8 sourced resistance from pivot HIGHS and support
+    // from pivot LOWS. V9.5 pointed both at allPiv so any pivot could play
+    // either role ("a level is a level"), which doubles the candidate pool
+    // and lets a pivot LOW be drawn as resistance above price. That is more
+    // lines and less meaning, and it is one of the things that changed
+    // between the version the operator liked and the ones he did not.
+    // Default is the V8 behaviour; srBothPolarities restores V9.5.
+    array<float> resSrc = srBothPolarities ? allPiv : pivHighs
+    array<float> supSrc = srBothPolarities ? allPiv : pivLows
+    array<float> resL = f_near(resSrc, true, maxSRlines, tolSR)
+    array<float> supL = f_near(supSrc, false, maxSRlines, tolSR)
     if array.size(resL) > 0
         for i = 0 to array.size(resL) - 1
             float v = array.get(resL, i)
             array.push(srLines, line.new(bar_index - 1, v, bar_index, v,
                  extend=extend.both, color=color.new(color.blue, i == 0 ? 30 : 60),
                  width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 2, v,
+            array.push(srLabels, label.new(bar_index + 2 + i * srLabelStagger, v,
                  "R" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
                  style=label.style_none, textcolor=color.new(color.blue, 20), size=size.small))
     if array.size(supL) > 0
@@ -2939,13 +2959,13 @@ if barstate.islast and showSR
             array.push(srLines, line.new(bar_index - 1, v, bar_index, v,
                  extend=extend.both, color=color.new(color.purple, i == 0 ? 30 : 60),
                  width=i == 0 ? 2 : 1))
-            array.push(srLabels, label.new(bar_index + 2, v,
+            array.push(srLabels, label.new(bar_index + 2 + i * srLabelStagger, v,
                  "S" + str.tostring(i + 1) + " " + str.tostring(v, format.mintick),
                  style=label.style_none, textcolor=color.new(color.purple, 20), size=size.small))
     if not na(prevDayClose)
         array.push(srLines, line.new(bar_index - 1, prevDayClose, bar_index, prevDayClose,
              extend=extend.both, color=color.new(color.gray, 40), style=line.style_dashed))
-        array.push(srLabels, label.new(bar_index + 2, prevDayClose,
+        array.push(srLabels, label.new(bar_index + 2 + maxSRlines * srLabelStagger, prevDayClose,
              "prev close " + str.tostring(prevDayClose, format.mintick),
              style=label.style_none, textcolor=color.new(color.gray, 20), size=size.small))
 
