@@ -464,6 +464,37 @@ non-code causes account for the whole complaint.
 
 Gate booleans unchanged.
 
+### V12.14 - trend lines back on, and the level that was drawn twice
+
+Two operator reports, both correct.
+
+**"No trend lines."** V12.13 turned them off because V8 had none. That was my
+inference, not the ask - the request was never "remove them", it was "make
+them work". Default restored.
+
+They would also have been suppressed with the toggle on: V12.12 set the
+distance ceiling at 3.0 ATR, which is too tight. On VNRX (ATR ~0.01) a
+downtrend line projecting 0.02-0.04 above a 0.68 price is 2-4 ATR away, and
+that is exactly the line a breakout has to break, so it must be drawn.
+Ceiling raised to 6.0 ATR, which still rejects DAIC's session-low tangent at
+8.94 ATR. Verified both cases.
+
+**"Levels are still overlapped."** Real, and a different mechanism from the
+label collision fixed in V12.13. The band boxes print their own
+`R <price>` from `nearestRes`, which is computed from `allPiv` in a separate
+block at line 1176 and never deduplicated against the R1/R2 lines. On VNRX
+that produced `R1 0.7146` and `R 0.7097` - 0.0049 apart, inside the half-ATR
+dedup tolerance. One level, two drawings, two labels on top of each other.
+
+The first level drawn on each side is now remembered (`srR1` / `srS1`) and a
+band box is skipped when it would only restate it. Tolerance is 0.75 ATR,
+deliberately wider than the 0.5 ATR line dedup: at exactly 0.5 the VNRX pair
+was suppressed by one ten-thousandth, which is true but not worth depending
+on. Anything the line dedup passes is more than 0.5 ATR from its neighbour,
+so the wider box tolerance cannot hide a distinct level.
+
+Gate booleans unchanged.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
