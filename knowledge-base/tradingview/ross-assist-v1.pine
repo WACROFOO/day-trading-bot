@@ -1,0 +1,241 @@
+//@version=6
+// ross-assist-v1 — the third instrument: a coach, not a scanner, not a bot.
+//
+// Scanner v2 answers WHICH NAME. fp-v4 demonstrates WHEN (as a strategy sim).
+// This answers: AM I ALLOWED · IS THIS STILL THE STOCK · IS THE TAPE BEHIND
+// AN ENTRY · WHAT IS MY EXACT PLAN · WHEN DO I GET OUT · AM I DONE FOR THE DAY.
+// It places no orders, holds no position, simulates nothing.
+//
+// Design source: knowledge-base/tradingview/ASSISTANT-PLAN.md (every rule
+// there carries its corpus citation; this file cites the plan, not the tape).
+// Vocabulary is non-actionable by rule: STAND DOWN · NO · WAIT · WATCH ·
+// REVIEW · MANAGE · DONE FOR THE DAY. Never BUY, never ARMED.
+//
+// Honesty chips: float and catalyst are MANUAL inputs that FAIL CLOSED when
+// untyped. Tape (⑦) and Level 2 (⑧) render as UNKNOWN — two of the eight
+// entry gates are the operator's to check by eye, and hiding them would be
+// the silent-filter anti-pattern.
+//
+// Chart: 1-minute, extended hours ON. Chart-only tool (no screener budget).
+indicator("Ross Assist v1", overlay = true, max_lines_count = 20, max_labels_count = 20)
+
+// ───────────────────────────── inputs ─────────────────────────────
+grpWin  = "My window (ET) — personal availability, layered on his phases"
+inWinOpen  = input.session("0900-1100", "trading window (ET)", group = grpWin,
+     tooltip = "Your own operating window. 09:00-09:30 is PRE-MARKET: limit orders only, no halts. The corpus phases (blackout 09:30-09:35, prime 09:35-10:30, wind-down 10:30-11:00) render inside it. The clock only ever DOWNGRADES a verdict.")
+
+grpFit  = "Stock fit — manual, fail closed"
+inFloatM   = input.float(0.0, "float (millions) — 0 = unknown", group = grpFit, minval = 0,
+     tooltip = "Pine has no float field. Untyped = ? and the pillar FAILS. Pillar <10M, bright <5M; the 20M number is a scanner dial, not a gate.")
+inCatalyst = input.bool(false, "catalyst confirmed (news dated today OR live theme)", group = grpFit)
+inPmHigh   = input.float(0.0, "pre-market high (0 = use session high)", group = grpFit)
+
+grpPlan = "Plan"
+inAccount  = input.float(2000.0, "account size $", group = grpPlan, minval = 0)
+inRiskPct  = input.float(2.0, "risk % per trade", group = grpPlan, minval = 0.1, maxval = 10)
+inTolPct   = input.float(0.25, "support confluence tolerance % — UNSOURCED, sweep 0.10-0.50", group = grpPlan, minval = 0.05, maxval = 1.0)
+
+grpMng  = "Manage / discipline — manual"
+inEntry    = input.float(0.0, "my entry price (0 = flat)", group = grpMng, minval = 0)
+inDayPnl   = input.float(0.0, "day P&L $", group = grpMng)
+inDayPeak  = input.float(0.0, "day peak P&L $", group = grpMng)
+inLossRow  = input.int(0, "consecutive losses", group = grpMng, minval = 0)
+inNames    = input.int(0, "names traded today", group = grpMng, minval = 0)
+
+// ─────────────────────────── indicators ───────────────────────────
+// All state from CONFIRMED bars (barstate.isconfirmed guards intrabar lies);
+// the trigger/stop lines are the one intentionally intrabar object, labelled.
+ema9  = ta.ema(close, 9)
+ema20 = ta.ema(close, 20)
+ma200 = ta.sma(close, 200)
+[macdLine, macdSig, macdHist] = ta.macd(close, 12, 26, 9)
+vwapVal = ta.vwap(hlc3)
+
+// session bookkeeping (ET; chart must be extended-hours ON)
+newDay = ta.change(time("D")) != 0
+var float dayHigh = na
+var float pmHighAuto = na
+var float cumVol = 0.0
+if newDay
+    dayHigh := high
+    pmHighAuto := na
+    cumVol := 0.0
+dayHigh := math.max(nz(dayHigh, high), high)
+cumVol += volume
+
+etHour   = hour(time, "America/New_York")
+etMin    = minute(time, "America/New_York")
+etHM     = etHour * 100 + etMin
+isPre    = etHM < 930
+if isPre
+    pmHighAuto := math.max(nz(pmHighAuto, high), high)
+pmHigh   = inPmHigh > 0 ? inPmHigh : nz(pmHighAuto, dayHigh)
+
+// ───────────────────────── A · CLOCK ─────────────────────────────
+inMyWindow = not na(time(timeframe.period, inWinOpen, "America/New_York"))
+// his phases (PARAMETERS.md §2 via ASSISTANT-PLAN.md module A)
+phase = etHM < 700 ? "OVERNIGHT" :
+     etHM < 900  ? "PRE-MARKET (his 07:00 wave)" :
+     etHM < 930  ? "PRE-MARKET · my window · LIMIT ORDERS ONLY" :
+     etHM < 935  ? "OPEN BLACKOUT 09:30-09:35" :
+     etHM < 1030 ? "PRIME 09:35-10:30" :
+     etHM < 1100 ? "WIND-DOWN (his 90-minute mark)" :
+     etHM < 1130 ? "OUTER EDGE — past my window" :
+     etHM < 1500 ? "MIDDAY — STAND DOWN" : "LATE — STAND DOWN"
+clockAllows = inMyWindow and not (etHM >= 930 and etHM < 935)
+
+// ──────────────────────── B · STOCK FIT ──────────────────────────
+pPrice   = close >= 2.0 and close <= 20.0
+pFloatKnown = inFloatM > 0
+pFloat   = pFloatKnown and inFloatM < 10.0
+pFloatBright = pFloatKnown and inFloatM < 5.0
+// change on day: previous close from the daily feed (confirmed data only)
+prevDayClose = request.security(syminfo.tickerid, "D", close[1], lookahead = barmerge.lookahead_on)
+chgPct   = 100.0 * (close - prevDayClose) / prevDayClose
+pChange  = chgPct >= 10.0
+fadePct  = 100.0 * (pmHigh - close) / math.max(pmHigh, syminfo.mintick)
+backSide = fadePct > 25.0
+volFloorWarn = etHM >= 1000 and cumVol < 1000000
+
+// ─────────────────────── C · TREND GATES ─────────────────────────
+gMacd  = macdHist > 0 and macdLine > macdSig
+gVwap  = close > vwapVal
+gEma9  = close > ema9
+// pullback tracking on confirmed bars: red run after a green impulse
+var int   pullbackNum  = 0
+var float pullbackLow  = na
+var float lastRedHigh  = na
+var float impulseVol   = na
+var float pullVol      = na
+isRed   = close < open
+isGreen = close > open
+if barstate.isconfirmed
+    if newDay
+        pullbackNum := 0
+        pullbackLow := na
+        lastRedHigh := na
+    if isRed and (isGreen[1] or na(lastRedHigh))
+        pullbackNum += 1
+        pullbackLow := low
+        lastRedHigh := high
+        impulseVol  := volume[1]
+        pullVol     := volume
+    else if isRed
+        pullbackLow := math.min(nz(pullbackLow, low), low)
+        lastRedHigh := high
+        pullVol     += volume
+gVolShape = not na(impulseVol) and not na(pullVol) and pullVol < impulseVol
+gCount    = pullbackNum <= 2
+gThird    = pullbackNum == 3
+// support confluence: >= 2 independent reasons within tol (tol UNSOURCED)
+tol = close * inTolPct / 100.0
+nearWhole = math.abs(close - math.round(close)) <= tol
+nearHalf  = math.abs(close * 2 - math.round(close * 2)) / 2 <= tol
+supCount  = (nearWhole or nearHalf ? 1 : 0) +
+     (math.abs(close - ema9)  <= tol ? 1 : 0) +
+     (math.abs(close - ema20) <= tol ? 1 : 0) +
+     (math.abs(close - ma200) <= tol ? 1 : 0) +
+     (math.abs(close - vwapVal) <= tol ? 1 : 0)
+gSupport  = supCount >= 2
+
+// ────────────────────────── D · PLAN ─────────────────────────────
+trigger = not na(lastRedHigh) ? lastRedHigh + syminfo.mintick : na
+stopPx  = not na(pullbackLow) ? pullbackLow - syminfo.mintick : na
+riskPS  = not na(trigger) and not na(stopPx) ? trigger - stopPx : na
+spreadProxy = ta.sma(high - low, 5)
+stopTooTight = not na(riskPS) and riskPS < spreadProxy * 0.5
+stopTooWide  = not na(riskPS) and riskPS > 0.30
+riskBudget = inAccount * inRiskPct / 100.0
+shares = not na(riskPS) and riskPS > 0 ? math.min(math.floor(riskBudget / riskPS), 20000) : na
+// slippage honesty: the study measured entry cost ~half the planned risk unit
+// on this class. Expected REAL risk ≈ 1.5x planned. Shown, never hidden.
+riskReal = not na(riskPS) ? riskPS * 1.5 : na
+
+// ───────────────────────── E · MANAGE ────────────────────────────
+inTrade = inEntry > 0
+upR     = inTrade and not na(riskPS) and riskPS > 0 ? (close - inEntry) / riskPS : na
+exitVwap = inTrade and close < vwapVal
+exitMacd = inTrade and macdHist < 0
+hiVolRed = isRed and volume > 2.0 * ta.sma(volume, 20)
+exitHVRed = inTrade and hiVolRed
+newLowBelowFlag = inTrade and not na(pullbackLow) and close < pullbackLow
+scalePrompt = inTrade and not na(upR) and upR >= 1.0
+
+// ─────────────────────── F · DISCIPLINE ──────────────────────────
+doneGreenRed = inDayPeak > 0 and inDayPnl < 0
+doneGiveback = inDayPeak > 0 and inDayPnl < inDayPeak * 0.5
+doneStreak   = inLossRow >= 3
+doneLossCap  = inDayPnl <= -(inAccount * 0.06)
+doneDay      = doneGreenRed or doneGiveback or doneStreak or doneLossCap
+warnNames    = inNames > 4
+
+// ──────────────────────── G · HALT BAND ──────────────────────────
+bandPct  = prevDayClose > 3.0 ? 10.0 : prevDayClose >= 0.75 ? 20.0 : na
+bandNote = na(bandPct) ? "<$0.75: lesser of 15c/75% — near untradeable" :
+     str.tostring(bandPct, "#") + "% band (from PRIOR close — does not update intraday)"
+stopVsBand = not na(riskPS) and not na(bandPct) and
+     (riskPS / close) * 100.0 > bandPct
+
+// ───────────────────────── verdict ───────────────────────────────
+// Order of authority: DONE > STAND DOWN > NO > MANAGE > WAIT/WATCH > REVIEW.
+gatesPass = gMacd and gVwap and gEma9 and gVolShape and gSupport and (gCount or gThird)
+fitPass   = pPrice and pChange and pFloat and inCatalyst and not backSide
+verdict = doneDay ? "DONE FOR THE DAY" :
+     not clockAllows ? "STAND DOWN — outside window" :
+     inTrade ? "MANAGE" :
+     backSide ? "NO — back side (" + str.tostring(fadePct, "#.#") + "% off high)" :
+     not fitPass ? "NO — fit" :
+     not gatesPass ? "WAIT" :
+     gThird ? "REVIEW — 3rd pullback, REDUCE SIZE" : "REVIEW"
+vColor = doneDay ? color.new(color.purple, 0) :
+     verdict == "MANAGE" ? color.new(color.blue, 0) :
+     str.startswith(verdict, "REVIEW") ? color.new(color.teal, 0) :
+     verdict == "WAIT" ? color.new(color.orange, 0) : color.new(color.gray, 0)
+
+// ────────────────────────── render ───────────────────────────────
+plot(vwapVal, "VWAP", color = color.new(color.orange, 0), linewidth = 2)
+plot(ema9,  "EMA9",  color = color.new(color.aqua, 40))
+plot(ema20, "EMA20", color = color.new(color.blue, 60))
+// plan lines: greyed when gates do not allow (hypothetical), labelled intrabar
+planLive = gatesPass and fitPass and clockAllows and not doneDay
+trigCol = planLive ? color.new(color.aqua, 0) : color.new(color.gray, 70)
+stopCol = planLive ? color.new(color.red, 0)  : color.new(color.gray, 70)
+plot(trigger, "trigger (prev red high + tick, INTRABAR)", trigCol, 2, plot.style_linebr)
+plot(stopPx,  "stop (pullback low - tick)", stopCol, 2, plot.style_linebr)
+
+var table T = table.new(position.top_right, 2, 15, border_width = 1)
+cell(int r, string a, string b, color c) =>
+    table.cell(T, 0, r, a, text_halign = text.align_left,  text_size = size.small, bgcolor = color.new(c, 85))
+    table.cell(T, 1, r, b, text_halign = text.align_right, text_size = size.small, bgcolor = color.new(c, 85))
+lamp(bool ok) => ok ? "✓" : "✗"
+if barstate.islast
+    table.cell(T, 0, 0, verdict, text_halign = text.align_center, text_size = size.normal, bgcolor = vColor, text_color = color.white)
+    table.cell(T, 1, 0, phase,   text_halign = text.align_center, text_size = size.small,  bgcolor = vColor, text_color = color.white)
+    cell(1, "price $2-20", lamp(pPrice) + " " + str.tostring(close, "#.##"), pPrice ? color.green : color.red)
+    cell(2, "change ≥10%", lamp(pChange) + " " + str.tostring(chgPct, "#.#") + "%", pChange ? color.green : color.red)
+    cell(3, "float <10M", (pFloatKnown ? lamp(pFloat) + " " + str.tostring(inFloatM, "#.#") + "M (you entered)" : "? UNKNOWN — fails closed"), pFloatKnown ? (pFloat ? color.green : color.red) : color.orange)
+    cell(4, "catalyst/theme", inCatalyst ? "✓ (you confirmed)" : "? manual — fails closed", inCatalyst ? color.green : color.orange)
+    cell(5, "fade from high", lamp(not backSide) + " " + str.tostring(fadePct, "#.#") + "% off " + (inPmHigh > 0 ? "PM high" : "high"), backSide ? color.red : color.green)
+    cell(6, "① MACD hist>0 & >signal", lamp(gMacd), gMacd ? color.green : color.red)
+    cell(7, "② > VWAP", lamp(gVwap), gVwap ? color.green : color.red)
+    cell(8, "③ > EMA9", lamp(gEma9), gEma9 ? color.green : color.red)
+    cell(9, "④ pull vol < impulse vol", lamp(gVolShape), gVolShape ? color.green : color.red)
+    cell(10, "⑤ pullback #" + str.tostring(pullbackNum), gThird ? "REDUCE SIZE" : lamp(gCount), gThird ? color.orange : (gCount ? color.green : color.red))
+    cell(11, "⑥ support ≥2 (tol " + str.tostring(inTolPct, "#.##") + "% UNSOURCED)", lamp(gSupport) + " " + str.tostring(supCount), gSupport ? color.green : color.red)
+    cell(12, "⑦ tape · ⑧ Level 2", "? UNKNOWN — check by eye", color.orange)
+    planTxt = na(riskPS) ? "no pullback yet" :
+         str.tostring(shares, "#") + " sh · risk $" + str.tostring(riskPS, "#.###") +
+         " (expect ~$" + str.tostring(riskReal, "#.###") + " real)" +
+         (stopTooWide ? " · CUT SIZE >$0.30" : "") + (stopTooTight ? " · NO: stop inside noise" : "")
+    cell(13, "plan", planTxt, stopTooTight ? color.red : stopTooWide ? color.orange : color.gray)
+    mngTxt = not inTrade ? "flat" :
+         (scalePrompt ? "SCALE 50% · stop→BE · " : "") +
+         (exitVwap ? "EXIT: VWAP break · " : "") + (exitMacd ? "EXIT: MACD<0 · " : "") +
+         (exitHVRed ? "EXIT: hi-vol red · " : "") + (newLowBelowFlag ? "EXIT: low below flag · " : "") +
+         "+" + str.tostring(nz(upR), "#.##") + "R"
+    cell(14, "manage · " + bandNote + (stopVsBand ? " · STOP UNENFORCEABLE" : "") + (volFloorWarn ? " · <1M shares" : "") + (warnNames ? " · >4 names" : ""), mngTxt, exitVwap or exitMacd or exitHVRed or newLowBelowFlag ? color.red : color.gray)
+
+alertcondition(gatesPass and fitPass and clockAllows and not doneDay, "REVIEW state", "Ross Assist: all evaluable gates green — go read the chart, tape and L2 yourself.")
+alertcondition(doneDay, "DONE FOR THE DAY", "Ross Assist: discipline rule fired — done for the day.")
+// NO TICKET ISSUED. A board of green lamps is a prompt to read the chart,
+// never an instruction. Two of eight gates are yours to check by eye.
