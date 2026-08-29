@@ -1,12 +1,14 @@
 # tradingview/ — our Pine implementations
 
-Two different instruments. Confusing them is the most common error here: one
-answers WHICH NAME, the other answers WHEN.
+Two shipped instruments and one planned. Confusing them is the most common
+error here: one answers WHICH NAME, one answers WHEN, the third (planned)
+answers AM-I-ALLOWED / WHAT'S-MY-PLAN / WHEN-AM-I-DONE.
 
 | file | what it is |
 |---|---|
 | `ross-fp-v4.pine` | **THE STRATEGY.** First-pullback entry logic — impulse, pullback, trigger, stop, target, halt-band veto, high-of-day room. Revision in the `REV` constant and on the dashboard (the `//@version=6` line is the Pine LANGUAGE version, not ours) |
 | `ross-style-scanner-v2.pine` | **THE SCANNER.** Clean-room approximation of the Day Trade Dash branches; scores the four measurable pillars and exposes 11 Pine Screener columns. Holds no position, has no opinion on entry |
+| `ASSISTANT-PLAN.md` | **THE ASSISTANT (plan, unbuilt).** Design for `ross-assist-v1.pine`: a chart-only indicator that coaches the human — session clock, pillar card, §3 gate lamps, plan levels + sizing, in-trade exit signals, §8 daily-limit lamps, halt bands. Every threshold cited; no orders, no simulation |
 | `ross-fp-v3.pine` | archived predecessor, kept for the audit trail |
 | `reverse-split-flag.pine` | standalone split-detection helper |
 | `SCANNER-V2-PLAYBOOK.md` | how to operate the scanner: the three modes, the denominator problem, the eleven columns |
