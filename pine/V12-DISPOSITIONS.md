@@ -544,6 +544,69 @@ and 13 labels against `max_labels_count=100`.
 
 Gate booleans unchanged - display only.
 
+### V12.17 - the mastery bundle, applied to the existing strategy
+
+Additive only. Nothing was replaced; the four enhancements below were chosen
+because each closes a gap between the confirmed Preview material and what this
+script actually measured.
+
+**1. The daily 200 EMA - a real defect, not an enhancement.** The line read:
+
+```
+ma200v = ta.sma(close, 200)
+```
+
+A 200-period SIMPLE average on the CHART timeframe. On a 1-minute chart that
+is a ~3.3-hour intraday line. The playbook's confirmed reference is the DAILY
+200 EMA - "privilégier un titre au-dessus du daily 200 EMA", with one sitting
+$0.50-1.00 overhead treated as problematic resistance. Wrong timeframe AND
+wrong average type, and it fed `ma200Support`, one of the six §3 confluence
+components - so the confluence gate was counting a level the strategy does not
+mean. Now `request.security(..., "1D", ta.ema(close, 200))` with
+`lookahead_off`. `use200Daily` restores the old behaviour for comparison.
+
+**2. The fifth pillar.** The script scored four (price, RVOL, gap, float); the
+playbook names five. Catalyst is now operator-supplied and fail-closed exactly
+like the float - confirmed, bound to this ticker, and given a provenance that
+is not "Unknown" or "Chat/rumour". Switching symbols fails closed rather than
+carrying yesterday's news to a new chart.
+
+Confirmed and respected: breaking news is *preferred but not mandatory*, and
+Warrior's own Five Pillars scanner does not require news. So the catalyst
+raises the score and the grade and never vetoes on its own. The flame is
+reproduced as a news-age clock only (red 0-2h, orange 2-12h, yellow 12-24h),
+explicitly not a compliance score.
+
+`pillarScore5` and an A/B/C grade sit beside the existing four-pillar
+`pillarScore`, which is byte-identical - the scanner gate is untouched.
+
+**3. Scenario D: does 2R fit before the wall?** The playbook requires "un
+objectif d'au moins 2R avant la première résistance probable", and Scenario D
+fails a trade on precisely this. Nothing measured it: the script sized the
+trade, drew T1/T2/T3, and let the operator find the wall afterwards. The
+nearest overhead obstacle among HOD, daily 200 EMA, pre-market high and
+nearest confirmed pivot is now named, the room is expressed in R, and the HIGH
+OF DAY row turns red when it is under target.
+
+Verified against both worked scenarios in the playbook:
+
+| case | wall | room | expected | got |
+|---|---|---|---|---|
+| Scenario D (5.20 / stop 5.00 / 200EMA 5.50) | daily 200 EMA | 1.5R | PASS | flagged under 2R |
+| Scenario B (6.75 / stop 6.65 / HOD 7.00) | HOD | 2.5R | 2.5R | 2.5R |
+
+**4. Price sweet spot.** $2-20 qualifies, $5-10 is the band the course calls
+ideal. Display only.
+
+**The one behavioural change, stated plainly.** Every gate boolean is still
+byte-identical in source to the V11 base, and the four-pillar scanner score is
+untouched. But item 1 changes the VALUE `ma200Support` returns, which feeds
+`supportCount` and therefore `confluenceGate`. That is a deliberate correction
+- the gate was counting the wrong line - and it is the only place this release
+can change which trades arm.
+
+`request.security` count is 2, well inside the limit of 40.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its

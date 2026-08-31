@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.16 (trend channels · paper only)", shorttitle="ROSS FP V12.16", overlay=true,
+strategy("ROSS First Pullback Strategy V12.17 (five pillars + daily 200 EMA · paper only)", shorttitle="ROSS FP V12.17", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -472,6 +472,27 @@ floatTicker          = input.string("", "Float applies to ticker", group=gScan,
 floatSource          = input.string("Unknown", "Float provenance",
      options=["Unknown", "SEC filing verified", "Trusted feed verified", "Manual unverified"], group=gScan,
      tooltip="Pine has no authoritative float field. A number is counted as verified only when its provenance is explicitly SEC filing or trusted feed.", display = display.none)
+// ── V12.17 §4 CATALYST — the fifth pillar ────────────────────────────────
+// The mastery bundle names five pillars: price, change, relative volume,
+// float and CATALYST. This script scored four. Pine cannot read a newswire,
+// so the catalyst is operator-supplied and fail-closed exactly like the
+// float: it counts only when confirmed, bound to THIS ticker, and given a
+// provenance. Switching symbols without updating the binding fails closed
+// rather than carrying yesterday's news onto a new chart.
+//
+// Confirmed (Preview ch.1-6): breaking news is PREFERRED BUT NOT MANDATORY --
+// a technical breakout can supply the justification. So the catalyst raises
+// the score and the grade; it is never a hard veto on its own.
+catalystConfirmed    = input.bool(false, "Catalyst confirmed for this ticker", group=gScan, display = display.none,
+     tooltip="Read the headline, its exact time and its source before ticking this. A promotional release is not a catalyst.")
+catalystTicker       = input.string("", "Catalyst applies to ticker", group=gScan, display = display.none,
+     tooltip="Symbol binding, e.g. MSS. Without a match the catalyst pillar fails closed.")
+catalystAgeH         = input.float(0.0, "Catalyst age (hours since the headline)", minval=0.0, maxval=240.0, step=0.25, group=gScan, display = display.none,
+     tooltip="Drives the flame equivalent: red 0-2h, orange 2-12h, yellow 12-24h, none beyond 24h. The flame is a NEWS-AGE clock only -- it is not a compliance score.")
+catalystSource       = input.string("Unknown", "Catalyst provenance", group=gScan, display = display.none,
+     options=["Unknown", "Company PR / newswire", "SEC filing", "Reputable media", "Chat/rumour"],
+     tooltip="Chat or rumour never counts as a verified catalyst.")
+
 // V7 (reviewer): TradingView's volume feed is not Warrior's. The RVOL pillar
 // GATES only when the operator has acknowledged the feed and bound that
 // acknowledgement to this exchange prefix — switching symbols fails closed.
@@ -748,7 +769,25 @@ atr = ta.atr(14)
 ema9 = ta.ema(close, 9)
 ema20 = ta.ema(close, 20)
 // V11 (from V10): §3 confluence components V9 did not carry.
-ma200v = ta.sma(close, 200)
+// V12.17 §5/§10 DEFECT FIX. This was `ta.sma(close, 200)` -- a 200-period
+// SIMPLE average on the CHART timeframe. On a 1-minute chart that is a
+// ~3.3-hour intraday line, not the level the playbook means. The confirmed
+// reference is the DAILY 200 EMA: "privilégier un titre au-dessus du daily
+// 200 EMA", and a daily 200 EMA sitting ~$0.50-1.00 overhead is treated as
+// problematic resistance. Two errors in one line -- wrong timeframe and
+// wrong average type -- and it fed ma200Support, one of the six §3
+// confluence components, so the confluence gate was counting the wrong line.
+//
+// lookahead_off keeps it non-repainting: the daily value used intraday is
+// the one available at that moment, never the finished day's.
+ma200Daily = request.security(syminfo.tickerid, "1D", ta.ema(close, 200),
+     gaps=barmerge.gaps_off, lookahead=barmerge.lookahead_off)
+ema200WarnDist = input.float(0.75, "Warn when the daily 200 EMA is within $N overhead", minval=0.05, maxval=10.0, step=0.05, group=gVisual, display = display.none,
+     tooltip="Playbook §5 treats a daily 200 EMA about $0.50-1.00 above price as potentially problematic resistance. Scale it with the price and ATR of what you trade.")
+use200Daily = input.bool(true, "Use the DAILY 200 EMA (off = legacy 200-bar chart SMA)", group=gVisual, display = display.none,
+     tooltip="On = the playbook's daily 200 EMA. Off restores the pre-V12.17 behaviour for comparison.")
+ma200chart = ta.sma(close, 200)
+ma200v = use200Daily and not na(ma200Daily) ? ma200Daily : ma200chart
 // Flipped level: a CONFIRMED pivot high (known 2 bars late, which is what
 // keeps it from repainting) is promoted to a support candidate only once
 // price has actually traded through it.
@@ -1084,6 +1123,34 @@ pillarGap   = not na(scanGap) and scanGap >= scanMinGap
 // scanner panel may still display UNKNOWN, but the score counts only facts.
 pillarFloat = floatVerified and scanFloat <= scanLowFloatMaxM
 pillarScore = (pillarPrice ? 1 : 0) + (pillarRVOL ? 1 : 0) + (pillarGap ? 1 : 0) + (pillarFloat ? 1 : 0)
+
+// ── V12.17: the fifth pillar, the flame, and the A/B grade ───────────────
+// Fail-closed like the float: confirmed AND bound to this ticker AND given a
+// provenance that is not "Unknown" or "Chat/rumour".
+catalystBound    = catalystTicker == syminfo.ticker
+catalystVerified = catalystConfirmed and catalystBound and
+     (catalystSource == "Company PR / newswire" or catalystSource == "SEC filing" or
+      catalystSource == "Reputable media")
+pillarCatalyst   = catalystVerified
+
+// The flame is a NEWS-AGE CLOCK, nothing more. It says nothing about the
+// quality of the catalyst, the float, the RVOL or the spread. Reproduced
+// here only so the age is visible beside the score, never as a pass mark.
+flameState = not catalystVerified ? "—" :
+     catalystAgeH <= 2.0  ? "RED"    :
+     catalystAgeH <= 12.0 ? "ORANGE" :
+     catalystAgeH <= 24.0 ? "YELLOW" : "cold"
+
+// Five Pillars proper. The four technical pillars can all be true with no
+// news at all -- Warrior's own Five Pillars scanner does not require news --
+// so the catalyst is scored, not demanded.
+pillarScore5 = pillarScore + (pillarCatalyst ? 1 : 0)
+setupGrade   = pillarScore5 >= 5 ? "A" : pillarScore5 == 4 ? "B" : "C"
+
+// §4 price sweet spot. $2-20 qualifies; $5-10 is the band the course calls
+// ideal. Display only -- it sharpens a choice between two candidates, it
+// does not veto one.
+priceIdeal = close >= 5.0 and close <= 10.0
 
 // which Dash lane this name would fire, if any. Every lane requires a NEW HOD
 // — measured 299/299 against a 4.7% base rate (2026-08-18 export).
@@ -2704,6 +2771,41 @@ displayInitialShares = displayState == LONG ? tradeInitialQty :
      displayState == ARMED ? plannedShares : candidateShares
 displayHasThirdRung = useThirdRung and not na(displayInitialShares) and displayInitialShares >= 4
 displayT1 = not na(displayEntry) and not na(displayPlanRisk) ? displayEntry + displayPlanRisk : na
+
+// ── V12.17 §5 / Scenario D: does 2R actually FIT before the wall? ────────
+// The playbook is explicit: "vérifier qu'un objectif d'au moins 2R tient
+// avant la première résistance probable", and Scenario D fails a trade for
+// exactly this -- price 5.20, daily 200 EMA 5.50, stop needing 0.20, so 2R
+// cannot be reached before the barrier: PASS.
+//
+// Nothing in this script measured that. It sized the trade, drew T1/T2/T3
+// and let the operator discover the wall afterwards. The nearest OVERHEAD
+// obstacle is whichever of these sits above the entry and is closest:
+// high of day, the daily 200 EMA, the pre-market high, and the nearest
+// confirmed resistance the structure map already found.
+f_lowerOf(float a, float b) => na(a) ? b : na(b) ? a : math.min(a, b)
+
+float roomEntry = displayEntry
+float wallHOD   = not na(dayHigh)      and not na(roomEntry) and dayHigh      > roomEntry ? dayHigh      : na
+float wall200   = not na(ma200v)       and not na(roomEntry) and ma200v       > roomEntry ? ma200v       : na
+float wallPM    = not na(pmHigh)       and not na(roomEntry) and pmHigh       > roomEntry ? pmHigh       : na
+float wallPiv   = not na(nearestRes)   and not na(roomEntry) and nearestRes   > roomEntry ? nearestRes   : na
+float nearestWall = f_lowerOf(f_lowerOf(wallHOD, wall200), f_lowerOf(wallPM, wallPiv))
+
+string wallSrc = na(nearestWall) ? "" :
+     nearestWall == wallHOD ? "HOD" :
+     nearestWall == wall200 ? "daily 200 EMA" :
+     nearestWall == wallPM  ? "PM high" : "pivot"
+
+// Reward available before the wall, expressed in R.
+float roomR = not na(nearestWall) and not na(roomEntry) and not na(displayPlanRisk) and displayPlanRisk > 0 ?
+     (nearestWall - roomEntry) / displayPlanRisk : na
+// No wall overhead means open air, which is room, not a failure.
+bool room2R = na(nearestWall) or na(roomR) or roomR >= rewardMultiple
+// §5 also flags a daily 200 EMA sitting close overhead as problematic in its
+// own right, independent of the R arithmetic.
+bool ema200Overhead = not na(wall200) and not na(roomEntry) and
+     wall200 - roomEntry <= ema200WarnDist
 displayRunnerTarget = displayHasThirdRung and not na(displayEntry) and not na(displayPlanRisk) ?
      displayEntry + displayPlanRisk * (rewardMultiple + 1.0) : na
 displayRR = displayState == ARMED or displayState == LONG ? plannedRRtoPeak : candidateRRtoPeak
@@ -3592,8 +3694,14 @@ if barstate.islast
               "  ⚠ BACK SIDE — " + f_n(pctOffHigh, "#") + "% off the high" :
               "  · " + f_n(pctOffHigh, "#") + "% off high") +
          (not hodComparable ? "" : peakIsHOD ? "  · this move IS the high" : "  ⚠ lower high") +
-         (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : ""),
-         backSide ? CHIP_NO : not hodComparable ? color.silver : peakIsHOD ? CHIP_OK : CHIP_NO)
+         (not na(candidateRRtoHOD) ? "  · " + f_rr(candidateRRtoHOD) + " away" : "") +
+         // V12.17 Scenario D: name the wall and say whether 2R fits before it.
+         (na(nearestWall) ? "" :
+              "  · wall " + f_px(nearestWall) + " (" + wallSrc + ")" +
+              (na(roomR) ? "" : "  " + f_n(roomR, "#.0") + "R room" +
+                   (room2R ? "" : "  ⚠ under " + f_n(rewardMultiple, "#.#") + "R"))) +
+         (ema200Overhead ? "  ⚠ daily 200 EMA overhead" : ""),
+         backSide or not room2R ? CHIP_NO : not hodComparable ? color.silver : peakIsHOD ? CHIP_OK : CHIP_NO)
 
     // STOCK FIT = selection, not timing (fail-closed on unknowns, V8 r18).
     if rFit >= 0
@@ -3610,6 +3718,11 @@ if barstate.islast
              na(scanFloat) ? -1 : f_b(scanFloat <= scanLowFloatMaxM))
         f_chip(3, rFit, "TV pace", na(scanRVOL) or not rvolWarm ? -1 : f_b(scanRVOL >= scanMinRVOL))
         f_chip(4, rFit, "Gap", f_b(pillarGap))
+        // V12.17: the fifth pillar, and the grade it produces. Grey with a
+        // dot = the operator has not answered the news question yet, which
+        // is different from having answered "no".
+        f_chip(6, rFit, setupGrade + " " + str.tostring(pillarScore5) + "/5",
+             pillarScore5 >= 5 ? 1 : pillarScore5 == 4 ? -1 : 0)
         // his 2+ hits rule (KSPN, yg5E_mqGFGg @00:16:47): one alert is not
         // a candidate — the retired DASH LANE row's one decision fact.
         f_chip(5, rFit, str.tostring(laneHits) + " hits", f_b(laneHits >= 2))
