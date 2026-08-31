@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.20 (trend-line guards · paper only)", shorttitle="ROSS FP V12.20", overlay=true,
+strategy("ROSS First Pullback Strategy V12.21 (levels ranked by touches · paper only)", shorttitle="ROSS FP V12.21", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -3148,7 +3148,7 @@ fill(targetBandUpperPlot, targetBandLowerPlot, color=color.new(color.lime, 80), 
 // key levels traced, not just the single nearest band. Up to 3 resistances
 // above and 3 supports below from confirmed pivots, deduplicated within an
 // ATR-fraction so a cluster prints one line, plus the prior-day close.
-maxSRlines = input.int(2, "S/R levels each side [V9.4: 2 = clean]", minval=1, maxval=5, group=gVisual)
+maxSRlines = input.int(3, "S/R levels each side [V12.21: 3, ranked by touches]", minval=1, maxval=6, group=gVisual)
 // V12.13 (operator: levels "overlapped in the graph"): every label used to
 // print at bar_index + 2, so two levels a few cents apart landed on the same
 // pixel row and their texts collided. Each label now gets its own x slot.
@@ -3179,6 +3179,17 @@ var array<line> srLines = array.new_line()
 var array<label> srLabels = array.new_label()
 // V9.4: S/R back on the DECISION layer — hiding the key levels behind
 // the diagnostics toggle was over-cleaning (operator, live MMA).
+// How many bars actually traded AT this price, within tolerance. Wicks count:
+// a level rejected by a wick was tested just as truly as one closed against.
+f_levelTouches(float lvl, float tol) =>
+    int t = 0
+    if array.size(tlBars) > 0
+        for k = 0 to array.size(tlBars) - 1
+            if math.abs(array.get(tlHighs, k) - lvl) <= tol or
+                 math.abs(array.get(tlLows, k) - lvl) <= tol
+                t += 1
+    t
+
 f_near(array<float> src, bool above_, int n_, float tol) =>
     array<float> out = array.new_float()
     if array.size(src) > 0
@@ -3192,10 +3203,32 @@ f_near(array<float> src, bool above_, int n_, float tol) =>
                             dup := true
                 if not dup
                     array.push(out, v)
-    array.sort(out, above_ ? order.ascending : order.descending)
-    while array.size(out) > n_
-        array.pop(out)
-    out
+    // V12.21: rank by STRENGTH, then proximity.
+    //
+    // Until now this sorted purely by price and kept the n NEAREST levels.
+    // Nearest is not strongest, and the course is explicit that it is touches
+    // that make a level credible: "more touches make them more credible"
+    // (ch.5), with `touch_count = 3` in the corpus parameters -- 23 of 41
+    // explicit counts say "the third touch". A level price has tested three
+    // times outranks a closer one it has brushed once.
+    array<float> ranked = array.new_float()
+    while array.size(out) > 0 and array.size(ranked) < n_
+        int   bestI = 0
+        int   bestT = -1
+        float bestD = 1e12
+        for i = 0 to array.size(out) - 1
+            float v = array.get(out, i)
+            int   tch = f_levelTouches(v, tol)
+            float dist = math.abs(v - close)
+            if tch > bestT or (tch == bestT and dist < bestD)
+                bestT := tch
+                bestD := dist
+                bestI := i
+        array.push(ranked, array.get(out, bestI))
+        array.remove(out, bestI)
+    // draw nearest-first so R1 is always the one price meets next
+    array.sort(ranked, above_ ? order.ascending : order.descending)
+    ranked
 if barstate.islast and showSR
     while array.size(srLines) > 0
         line.delete(array.pop(srLines))
