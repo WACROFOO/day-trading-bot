@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.29 (pattern row + ABCD ordering · paper only)", shorttitle="ROSS FP V12.29", overlay=true,
+strategy("ROSS First Pullback Strategy V12.30 (HOD always drawn · paper only)", shorttitle="ROSS FP V12.30", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -3514,6 +3514,47 @@ if barstate.islast
              style=label.style_none, size=size.small,
              textcolor=color.new(flatTopBroken ? color.lime : color.orange, 10))
 
+// ── V12.30 (NCRA audit): HOD and PM high are ALWAYS drawn. §11 lists the
+// levels to trace before an entry and these two are FIRST — yet since
+// V12.15 they hid behind showContextPlots (default off). The cost showed on
+// NCRA: three minutes after a vertical spike no pivot has confirmed yet, so
+// the chart showed NO resistance overhead while the day high — the one level
+// everyone was watching — was known the instant it printed. Dashed, in the
+// S/R colours, part of the map proper.
+var line hodLine = na
+var line pmhLine = na
+var label hodLab = na
+var label pmhLab = na
+if barstate.islast
+    if not na(hodLine)
+        line.delete(hodLine)
+        hodLine := na
+    if not na(pmhLine)
+        line.delete(pmhLine)
+        pmhLine := na
+    if not na(hodLab)
+        label.delete(hodLab)
+        hodLab := na
+    if not na(pmhLab)
+        label.delete(pmhLab)
+        pmhLab := na
+    if showSR and not na(dayHigh)
+        hodLine := line.new(bar_index - 1, dayHigh, bar_index, dayHigh,
+             extend=extend.both, style=line.style_dashed, width=2,
+             color=color.new(color.blue, 20))
+        hodLab := label.new(bar_index + 2, dayHigh,
+             "HOD " + str.tostring(dayHigh, format.mintick),
+             style=label.style_none, size=size.small,
+             textcolor=color.new(color.blue, 0))
+    if showSR and not na(pmHigh) and (na(dayHigh) or math.abs(pmHigh - dayHigh) > atr * 0.25)
+        pmhLine := line.new(bar_index - 1, pmHigh, bar_index, pmHigh,
+             extend=extend.both, style=line.style_dashed, width=1,
+             color=color.new(color.teal, 35))
+        pmhLab := label.new(bar_index + 2, pmHigh,
+             "PM high " + str.tostring(pmHigh, format.mintick),
+             style=label.style_none, size=size.small,
+             textcolor=color.new(color.teal, 15))
+
 var box resBox = na
 var box supBox = na
 if barstate.islast and showSR
@@ -4018,7 +4059,14 @@ if barstate.islast
     float pThirdBasis = planSrc == 5 ? tradeInitialQty : pShares
     bool pHasThirdRung = useThirdRung and not na(pThirdBasis) and pThirdBasis >= 4
     // V9.2: tags cut to two words — the row colour already carries state.
-    string planTag = planSrc == 5 ?
+    // V12.30 (NCRA audit): the panel showed BUY 3.14 · STOP 3.06 · live with
+    // price already at 2.99 — the live bar had traded THROUGH the stop, so
+    // the plan on screen was already dead and still read "live". The state
+    // machine catches it when the bar confirms; the display now says so the
+    // moment it happens instead of one bar late.
+    bool planDead = planSrc == 3 and not na(pStop) and close < pStop
+    string planTag = planDead ? " · ✕ DIP BROKE THE STOP — plan void" :
+         planSrc == 5 ?
          (t2Filled ? " · ¾ sold, stop@entry" : t1Filled ? " · ½ sold, stop@entry" : "") :
          planSrc == 4 ? " · working" +
               (useCappedStopLimit ? " · cap " + f_px(triggerPrice + entryCapTicks * syminfo.mintick) : "") :
@@ -4044,7 +4092,7 @@ if barstate.islast
          (pQtyRunner > 0 ? "  T3 " + f_px(pHasThirdRung ? pT3 : pT2) +
               " (" + f_n(pQtyRunner, "#") + ")" : "")
     f_text(2, "𝗕𝗨𝗬 " + f_px(pEntry) + " · 𝗦𝗧𝗢𝗣 " + f_px(pStop) + atrMark +
-         ladderText + planTag, planCol)
+         ladderText + planTag, planDead ? CHIP_NO : planCol)
 
     // ── V9.2 SIZE: shares, $ position against the REAL equity base, risk.
     // The % is the POSITION's share of equity, labelled as such — the
