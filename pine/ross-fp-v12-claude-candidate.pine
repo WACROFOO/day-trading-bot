@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.23 (both void edges · paper only)", shorttitle="ROSS FP V12.23", overlay=true,
+strategy("ROSS First Pullback Strategy V12.24 (level + void confluence · paper only)", shorttitle="ROSS FP V12.24", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -2203,7 +2203,39 @@ ma200Support = not na(ma200v) and math.abs(supportRef - ma200v) <= supportTolera
 flipSupport = not na(flipLevel) and not na(flipBreakBar) and bar_index > flipBreakBar and
      math.abs(supportRef - flipLevel) <= supportTolerance and close >= flipLevel
 emaClustered = ema9Support and ema20Support and math.abs(ema9 - ema20) <= supportTolerance
-supportCountRaw = (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport ? 1 : 0) +
+// ── V12.24: the two components the corpus ranks highest and the code never
+// counted ─────────────────────────────────────────────────────────────────
+//
+// WETO ran +90% and the panel read "Conf 0" while the SAME SCRIPT was drawing
+// "S 10.50" on the chart. Zero confluence on a chart displaying a support the
+// dip was bouncing off. That is a false negative, not a conservative call.
+//
+// Cause: five of the six components -- EMA9, EMA20, VWAP, 200 EMA, and to a
+// degree the flipped level -- are MEAN-REVERTING lines. On a vertical runner
+// they sit far below the pullback low by construction, so they cannot be
+// "within tolerance" of it. Requiring two of them systematically rejects the
+// strongest movers, which are exactly the ones this strategy exists to trade.
+//
+// The playbook's own evidence table ranks the pairs Ross actually names:
+//   daily level + moving average      54
+//   trend line + whole dollar         54
+//   former resistance + trend line    53
+// "Daily / weekly chart level" alone: 157 mentions across 42 videos -- the
+// third most-cited component of all. It was not in at_support(). Neither was
+// a gap or window edge, which the strong-chart checklist names as resistance
+// in its own right.
+//
+// Both are pure arithmetic on data already computed above, so they are added
+// here rather than approximated.
+levelSupport = not na(nearestSup) and
+     math.abs(supportRef - nearestSup) <= supportTolerance and close >= nearestSup
+voidEdgeSupport = (not na(winBot) and math.abs(supportRef - winBot) <= supportTolerance and close >= winBot) or
+     (not na(winTop) and math.abs(supportRef - winTop) <= supportTolerance and close >= winTop) or
+     (not na(gapBot) and math.abs(supportRef - gapBot) <= supportTolerance and close >= gapBot) or
+     (not na(gapTop) and math.abs(supportRef - gapTop) <= supportTolerance and close >= gapTop)
+
+supportCountRaw = (levelSupport ? 1 : 0) + (voidEdgeSupport ? 1 : 0) +
+     (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport ? 1 : 0) +
      (roundSupport ? 1 : 0) + (ma200Support ? 1 : 0) + (flipSupport ? 1 : 0)
 supportCount = supportCountRaw - (emaClustered ? 1 : 0)
 
