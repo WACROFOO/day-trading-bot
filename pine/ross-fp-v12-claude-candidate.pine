@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.27 (flat top + ABCD · paper only)", shorttitle="ROSS FP V12.27", overlay=true,
+strategy("ROSS First Pullback Strategy V12.28 (plain-language verdict · paper only)", shorttitle="ROSS FP V12.28", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -752,6 +752,11 @@ showTrendLines       = input.bool(false, "Show EMA9 / EMA20 / VWAP", group=gVisu
 // The decision layer (plan lines, HOD, one marker per event class) is
 // always on; this reveals the working parts when you want them.
 showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, ghost SEEN, S/R fan, EMA/VWAP", group=gVisual, display = display.none)
+// V12.28 (operator: "give me a fair judgment for the setup rather than all
+// these metrics"). Twelve chips across two rows made the reader do the
+// summarising. Off = those two rows become plain sentences: one judgment on
+// the setup, one naming the pattern. On = the original chip grid.
+dashChips            = input.bool(false, "Show the chip grid instead of plain-language rows", group=gVisual, display = display.none)
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual, display = display.none)
 // V4.3: readable by default; shrink only if the user asks the input to
 // V12.1 (operator: "the grid takes too much space in the graph"). The panel
@@ -3937,7 +3942,7 @@ if barstate.islast
     int rLim = showLimits ? nextRow : -1
     nextRow += showLimits ? 1 : 0
     int rowSig = nextRow * 100 + (showFitRows ? 1 : 0) +
-         (dashFull ? 4 : 0) + (showLimits ? 8 : 0)
+         (dashFull ? 4 : 0) + (showLimits ? 8 : 0) + (dashChips ? 16 : 0)
     if na(dash) or rowSig != lastRowSig
         if not na(dash)
             table.delete(dash)
@@ -4082,29 +4087,62 @@ if barstate.islast
     // V12.22 (operator: "it's complicated to decrypt"). Every chip now says
     // what it MEASURES in plain words, and the two that are really counters
     // print the count against the requirement instead of a bare number.
-    f_chip(1, 5, "Impulse", f_b(pushGate))
-    f_chip(2, 5, "Dip bars", pbApplicable ? f_b(pullbackCountGate) : -1)
-    f_chip(3, 5, "Dip depth", pbApplicable ? f_b(retracementGate) : -1)
-    f_chip(4, 5, "Dip vol", pbApplicable ? f_b(volumeGate) : -1)
-    f_chip(5, 5, usingATRstop ? "Risk ATR" : "Risk", pbApplicable ? f_b(riskGate) : -1)
+    // V12.28: one plain judgment, naming the FIRST thing that is wrong --
+    // which is the only thing that matters, since any one of them is fatal.
+    string setupLine = not pbApplicable ?
+          (pushGate ? "impulse seen — waiting for the dip to form" : "no impulse yet") :
+     not pushGate            ? "impulse not strong enough" :
+     not pullbackCountGate   ? "dip is the wrong length (needs " + str.tostring(minPullbackBars) +
+          "-" + str.tostring(maxPullbackBars) + " candles)" :
+     not retracementGate     ? "dip too deep or too shallow" :
+     not volumeGate          ? "too much selling in the dip" :
+     not riskGate            ? "stop too far — risk per share too large" :
+     not confluenceGate      ? "only " + str.tostring(supportCount) + " of " +
+          str.tostring(minConfluence) + " support reasons at the dip low" :
+     not pullbackIndexGate   ? "pullback #" + str.tostring(v11PbIndex) + " — past the 1st/2nd" :
+     "setup is clean"
+    if not dashChips
+        f_text(5, setupLine, setupAll ? CHIP_OK : pbApplicable ? CHIP_NO : color.silver)
+    if dashChips
+        f_chip(1, 5, "Impulse", f_b(pushGate))
+        f_chip(2, 5, "Dip bars", pbApplicable ? f_b(pullbackCountGate) : -1)
+        f_chip(3, 5, "Dip depth", pbApplicable ? f_b(retracementGate) : -1)
+        f_chip(4, 5, "Dip vol", pbApplicable ? f_b(volumeGate) : -1)
+        f_chip(5, 5, usingATRstop ? "Risk ATR" : "Risk", pbApplicable ? f_b(riskGate) : -1)
     // "Conf 0" was the least readable cell on the panel: a bare count with no
     // hint of the target. It now reads "Support 0/2" -- reasons found over
     // reasons required.
-    f_chip(6, 5, "Support " + str.tostring(supportCount) + "/" + str.tostring(minConfluence),
+        f_chip(6, 5, "Support " + str.tostring(supportCount) + "/" + str.tostring(minConfluence),
          pbApplicable ? f_b(confluenceGate and pullbackIndexGate) : -1)
 
     bool trendAll = macdBullish and emaBullish and vwapBullish and rrGate and
          (not scanGates or scanGate) and v11RiskGovernorOK
-    f_label(6, "TREND", trendAll)
-    f_chip(1, 6, "MACD", f_b(macdBullish))
-    f_chip(2, 6, "EMA", f_b(emaBullish))
-    f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
-    f_chip(4, 6, "Room", f_b(rrGate))
-    f_chip(5, 6, "Scan fit", scanGates ? f_b(scanGate) : -1)
+    // V12.28: in sentence mode this row names the PATTERN -- the thing the
+    // operator asked to see clearly -- and states the trend in words rather
+    // than six coloured squares.
+    string trendWords = trendAll ? "trend intact" :
+     not macdBullish ? "MACD has rolled over" :
+     not emaBullish  ? "price lost the 9 EMA" :
+     not vwapBullish ? "price is under VWAP" :
+     not rrGate      ? "no room to target" : "trend mixed"
+    string patLine = (abcdBroken ? "ABCD broken · " : abcdOK ? "ABCD forming · " : "") +
+     (flatTopBroken ? "flat top BROKEN " + str.tostring(flatTopPx, format.mintick) + " · " :
+          not na(flatTopPx) ? "flat top " + str.tostring(flatTopN) + "x " +
+               str.tostring(flatTopPx, format.mintick) + " · " : "") +
+     trendWords
+    f_label(6, dashChips ? "TREND" : "PATTERN", trendAll)
+    if not dashChips
+        f_text(6, patLine, trendAll ? CHIP_OK : CHIP_NO)
+    if dashChips
+        f_chip(1, 6, "MACD", f_b(macdBullish))
+        f_chip(2, 6, "EMA", f_b(emaBullish))
+        f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
+        f_chip(4, 6, "Room", f_b(rrGate))
+        f_chip(5, 6, "Scan fit", scanGates ? f_b(scanGate) : -1)
     // "§8" meant nothing without the playbook open beside the chart. It is
     // the daily risk governor -- loss cap, trade cap, drawdown walkaway --
     // so it now says so.
-    f_chip(6, 6, "Day limits", f_b(v11RiskGovernorOK))
+        f_chip(6, 6, "Day limits", f_b(v11RiskGovernorOK))
 
     // V9.2 (trading read, live PCLA: HOD 11.33 with price 7.99 and the row
     // said nothing): the DISTANCE off the high is the front-side/back-side
@@ -4214,6 +4252,9 @@ if barstate.islast
         table.merge_cells(dash, 1, 3, 6, 3)
         table.merge_cells(dash, 2, 4, 6, 4)
         table.merge_cells(dash, 1, 7, 6, 7)
+        if not dashChips
+            table.merge_cells(dash, 1, 5, 6, 5)
+            table.merge_cells(dash, 1, 6, 6, 6)
         if rVwap >= 0
             table.merge_cells(dash, 1, rVwap, 6, rVwap)
             table.merge_cells(dash, 1, rRS, 6, rRS)
