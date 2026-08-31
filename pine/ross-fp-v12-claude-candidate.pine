@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.22 (volume-weighted levels · paper only)", shorttitle="ROSS FP V12.22", overlay=true,
+strategy("ROSS First Pullback Strategy V12.23 (both void edges · paper only)", shorttitle="ROSS FP V12.23", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -2914,8 +2914,21 @@ float wallPM    = not na(pmHigh)       and not na(roomEntry) and pmHigh       > 
 float wallPiv   = not na(nearestRes)   and not na(roomEntry) and nearestRes   > roomEntry and not f_inWindow(nearestRes) ? nearestRes : na
 // The EDGES of a window are real levels -- the checklist names "gap-edge or
 // window-edge resistance" -- even though its interior is empty.
-float wallWinE  = not na(winTop) and not na(roomEntry) and winTop > roomEntry ? winTop : na
-float wallGapE  = not na(gapTop) and not na(roomEntry) and gapTop > roomEntry ? gapTop : na
+// V12.23 -- BOTH edges, not just the far one. An empty zone has two
+// boundaries and each is a real price: the NEAR edge is the last price that
+// actually traded before the void, the FAR edge is the first price that
+// traded on the other side. V12.19 registered only winTop/gapTop, so with
+// price beneath a void spanning 10.21-11.47 it reported 11.47 as the next
+// resistance and silently skipped 10.21 -- overstating the room by the whole
+// width of the near boundary. The interior stays suppressed, which is the
+// part that was already right: nothing traded in there, so there is no level
+// in there.
+float wallWinLo = not na(winBot) and not na(roomEntry) and winBot > roomEntry ? winBot : na
+float wallWinHi = not na(winTop) and not na(roomEntry) and winTop > roomEntry ? winTop : na
+float wallGapLo = not na(gapBot) and not na(roomEntry) and gapBot > roomEntry ? gapBot : na
+float wallGapHi = not na(gapTop) and not na(roomEntry) and gapTop > roomEntry ? gapTop : na
+float wallWinE  = f_lowerOf(wallWinLo, wallWinHi)
+float wallGapE  = f_lowerOf(wallGapLo, wallGapHi)
 float nearestWall = f_lowerOf(f_lowerOf(f_lowerOf(wallHOD, wall200), f_lowerOf(wallPM, wallPiv)),
      f_lowerOf(wallWinE, wallGapE))
 
@@ -2923,8 +2936,10 @@ string wallSrc = na(nearestWall) ? "" :
      nearestWall == wallHOD  ? "HOD" :
      nearestWall == wall200  ? "daily 200 EMA" :
      nearestWall == wallPM   ? "PM high" :
-     nearestWall == wallWinE ? "window edge" :
-     nearestWall == wallGapE ? "gap edge" : "pivot"
+     nearestWall == wallWinLo ? "window near edge" :
+     nearestWall == wallWinHi ? "window far edge" :
+     nearestWall == wallGapLo ? "gap near edge" :
+     nearestWall == wallGapHi ? "gap far edge" : "pivot"
 
 // Overhead empty space, reported as the room it is.
 bool windowAbove = (not na(winBot) and not na(roomEntry) and winBot >= roomEntry) or
