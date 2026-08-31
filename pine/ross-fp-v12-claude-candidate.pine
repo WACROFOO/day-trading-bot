@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.19 (daily gaps + windows · paper only)", shorttitle="ROSS FP V12.19", overlay=true,
+strategy("ROSS First Pullback Strategy V12.20 (trend-line guards · paper only)", shorttitle="ROSS FP V12.20", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -780,6 +780,12 @@ ema20 = ta.ema(close, 20)
 //
 // lookahead_off keeps it non-repainting: the daily value used intraday is
 // the one available at that moment, never the finished day's.
+// V12.19b guards, from the Chapter 5 rule "trend lines need at least two
+// anchors ... AVOID COVERING THE CHART WITH SPECULATIVE LINES."
+tlMinSlopeATR  = input.float(0.5, "A trend line must travel at least N x ATR across its anchors", minval=0.0, maxval=10.0, step=0.1, group=gVisual, display = display.none,
+     tooltip="A line with no slope is a horizontal level, and horizontal levels are already drawn as S1/S2/R1/R2. Below this it is not a trend.")
+tlMaxWidthATR  = input.float(3.0, "Drop the opposite rail when the channel is wider than N x ATR", minval=0.5, maxval=30.0, step=0.5, group=gVisual, display = display.none,
+     tooltip="The opposite rail is offset by the largest excursion. Across a vertical spike that excursion IS the spike, so the channel stops describing a channel and spans a regime change instead.")
 winLookDays = input.int(20, "Daily lookback for gaps / windows (days)", minval=3, maxval=120, group=gVisual, display = display.none)
 winMinATR   = input.float(2.0, "A window must be at least N x the daily ATR", minval=1.0, maxval=10.0, step=0.25, group=gVisual, display = display.none,
      tooltip="Chapter 5: a meaningful gap or window is roughly 2x a typical daily candle or 2x the daily ATR.")
@@ -3382,7 +3388,22 @@ if barstate.islast and showTrendLine
             float lowA2 = array.get(tlLows, bestA)
             float upNow = lowA2 + bestSlope * (bar_index - array.get(tlBars, bestA))
             bool upLost = close < upNow
-            upTL := line.new(array.get(tlTimes, bestA), lowA2,
+            // V12.19b GUARD 1 -- a flat line is not a trend. On AEHL the
+            // uptrend anchored on pre-market chop at 5.88 with almost no
+            // slope and ran the full chart width. That is a horizontal
+            // support level, and S1/S2 already draw those. Tested BEFORE the
+            // line is created, so a flat fit produces no drawing at all.
+            // Measured over the FITTED span (anchor -> touch), not anchor ->
+            // now. Travel to the current bar grows with elapsed time, so a
+            // near-flat premarket line accumulates enough of it to pass after
+            // a few hours -- which is how AEHL's 5.88 line survived the first
+            // version of this guard. The line is only evidenced across the
+            // span its two anchors span.
+            float upTravel = math.abs(bestSlope) *
+     math.max(1, array.get(tlBars, bestTouch) - array.get(tlBars, bestA))
+            bool  upSloped = not na(atr) and atr > 0 and upTravel >= atr * tlMinSlopeATR
+            if upSloped
+                upTL := line.new(array.get(tlTimes, bestA), lowA2,
                  array.get(tlTimes, bestTouch), array.get(tlLows, bestTouch),
                  xloc=xloc.bar_time, extend=extend.right,
                  color=color.new(color.teal, upLost ? 70 : 25),
@@ -3403,7 +3424,13 @@ if barstate.islast and showTrendLine
                 if dv > upWidth
                     upWidth := dv
             float upTop = upNow + upWidth
-            if showTrendChannel and upWidth > 0
+            // GUARD 2 -- the opposite rail is offset by the LARGEST
+            // excursion, so across a vertical spike that excursion is the
+            // spike itself. AEHL: 5.88 floor, 7.71 ceiling, 1.83 wide on a
+            // $6.79 stock -- roughly 15 ATR. That is not a channel, it spans
+            // a regime change. Above the cap the fitted rail stands alone.
+            bool upChannelOK = not na(atr) and atr > 0 and upWidth <= atr * tlMaxWidthATR
+            if showTrendChannel and upSloped and upWidth > 0 and upChannelOK
                 upTL2 := line.new(array.get(tlTimes, bestA), lowA2 + upWidth,
                      array.get(tlTimes, bestTouch), array.get(tlLows, bestTouch) + upWidth,
                      xloc=xloc.bar_time, extend=extend.right,
@@ -3414,12 +3441,12 @@ if barstate.islast and showTrendLine
             float upAt = lowA2 + bestSlope * (bar_index + tlLabelOffset - array.get(tlBars, bestA))
             string upTxt = (upLost ? "uptrend lost  " : "uptrend  ") +
                  str.tostring(upNow, format.mintick) +
-                 (showTrendChannel and upWidth > 0 ?
+                 (showTrendChannel and upSloped and upWidth > 0 and upChannelOK ?
                       "  –  " + str.tostring(upTop, format.mintick) : "")
-            upTLlab := label.new(bar_index + tlLabelOffset, upAt,
+            upTLlab := upSloped ? label.new(bar_index + tlLabelOffset, upAt,
                  upTxt,
                  xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
-                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 10))
+                 textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 10)) : na
         // ── downtrend: mirror, candidates = local highs + the session high ──
         array.clear(tlCand)
         for i = fromB + 2 to nB - tlAnchorGap
@@ -3470,7 +3497,11 @@ if barstate.islast and showTrendLine
             float highA2 = array.get(tlHighs, bestAD)
             float dnNow = highA2 + bestSlopeD * (bar_index - array.get(tlBars, bestAD))
             bool dnBroken = close > dnNow
-            dnTL := line.new(array.get(tlTimes, bestAD), highA2,
+            float dnTravel = math.abs(bestSlopeD) *
+     math.max(1, array.get(tlBars, bestTouchD) - array.get(tlBars, bestAD))
+            bool  dnSloped = not na(atr) and atr > 0 and dnTravel >= atr * tlMinSlopeATR
+            if dnSloped
+                dnTL := line.new(array.get(tlTimes, bestAD), highA2,
                  array.get(tlTimes, bestTouchD), array.get(tlHighs, bestTouchD),
                  xloc=xloc.bar_time, extend=extend.right,
                  color=color.new(color.red, dnBroken ? 70 : 25),
@@ -3483,7 +3514,8 @@ if barstate.islast and showTrendLine
                 if dv > dnWidth
                     dnWidth := dv
             float dnBot = dnNow - dnWidth
-            if showTrendChannel and dnWidth > 0
+            bool dnChannelOK = not na(atr) and atr > 0 and dnWidth <= atr * tlMaxWidthATR
+            if showTrendChannel and dnSloped and dnWidth > 0 and dnChannelOK
                 dnTL2 := line.new(array.get(tlTimes, bestAD), highA2 - dnWidth,
                      array.get(tlTimes, bestTouchD), array.get(tlHighs, bestTouchD) - dnWidth,
                      xloc=xloc.bar_time, extend=extend.right,
@@ -3493,13 +3525,13 @@ if barstate.islast and showTrendLine
                     dnFill := linefill.new(dnTL, dnTL2, color.new(color.red, 94))
             float dnAt = highA2 + bestSlopeD * (bar_index + tlLabelOffset - array.get(tlBars, bestAD))
             string dnTxt = (dnBroken ? "downtrend broken  " : "downtrend  ") +
-                 (showTrendChannel and dnWidth > 0 ?
+                 (showTrendChannel and dnSloped and dnWidth > 0 and dnChannelOK ?
                       str.tostring(dnBot, format.mintick) + "  –  " : "") +
                  str.tostring(dnNow, format.mintick)
-            dnTLlab := label.new(bar_index + tlLabelOffset, dnAt,
+            dnTLlab := dnSloped ? label.new(bar_index + tlLabelOffset, dnAt,
                  dnTxt,
                  xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
-                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 10))
+                 textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 10)) : na
 
 
 // V5: retest triggers get their own glyph so the two setups are separable on

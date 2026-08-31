@@ -717,6 +717,55 @@ inside the window and today's HOD at 5.80.
 
 `request.security` count is 4, inside the limit of 40.
 
+### V12.20 - trend-line guards, from the one rule the code was breaking
+
+AEHL: an "uptrend 5.88 - 7.71" corridor whose floor was a flat line across
+pre-market chop and whose ceiling sat at the top of a vertical spike - 1.83
+wide on a $6.79 stock, roughly 15 ATR. It described nothing.
+
+The confirmed rule it broke is one sentence in Chapter 5:
+
+> "Trend lines need at least two anchors; more touches make them more
+> credible. **Avoid covering the chart with speculative lines.**"
+
+Two guards, both derived from that.
+
+**Guard 1 - a flat line is not a trend.** The AEHL floor was anchored on
+pre-market chop with almost no slope and ran the full chart width. That is a
+horizontal support level, and S1/S2/R1/R2 already draw those. A line must now
+travel at least `tlMinSlopeATR` (0.5) x ATR across its anchors or it is not
+drawn at all - line, rail, fill and label together.
+
+The first version of this guard measured travel from the anchor to the CURRENT
+bar, and AEHL passed it: 0.080 against 0.060 needed. Travel to now grows with
+elapsed time, so any near-flat line accumulates enough of it after a few
+hours. Corrected to the FITTED span, anchor to touch - the only span the two
+anchors actually evidence. AEHL then travels 0.012 against 0.060 and is
+suppressed, while a genuine intraday leg at 0.320 is untouched.
+
+**Guard 2 - cap the channel.** The opposite rail is offset by the largest
+excursion, so across a vertical spike that excursion IS the spike and the
+"channel" spans a regime change rather than a range. Above `tlMaxWidthATR`
+(3.0) x ATR the fitted rail stands alone.
+
+Verified against the screenshot:
+
+| line | travel | width | result |
+|---|---|---|---|
+| uptrend 5.88-7.71 | 0.012 (need 0.060) | 15 ATR | nothing drawn |
+| downtrend 6.16-6.90 | 0.750 | 6 ATR | line only, rail dropped |
+| a genuine intraday leg | 0.320 | 1.7 ATR | line + channel, unchanged |
+
+### Correction to an earlier statement
+
+I told the operator that inverted head-and-shoulders was not in the confirmed
+set. That was half wrong. `warrior-public-site-map.md` line 69 lists head and
+shoulders in the public Warrior pattern taxonomy, so it IS confirmed public
+material. The same file adds the caveat that matters: *"Cette taxonomie est
+une bibliothèque de notions. Elle ne doit pas être confondue avec la stratégie
+active et prioritaire de Ross."* Confirmed as curriculum, explicitly not part
+of the active strategy - which is why it still does not belong in the gates.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
