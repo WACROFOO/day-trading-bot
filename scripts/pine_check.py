@@ -317,6 +317,39 @@ def continuation_indent(lines):
     return out
 
 
+DECL_TYPED = re.compile(r'^(\s*)(?:var(?:ip)?\s+)?(float|int|bool|string|color|line|label|box)\s+([A-Za-z_]\w*)\s*=(?!=)')
+
+
+def duplicate_declarations(lines):
+    """Typed re-declaration of the same name — Pine rejects it in one scope.
+
+    Caught live in V12.29: a dashboard edit left `string patLine =` declared
+    in two places in the same block; the file was linter-clean and would have
+    failed in TradingView. Column-0 duplicates are always an error. Indented
+    duplicates can be legal when the two sites are in different blocks (a
+    loop-local float, say), so only `string`/drawing types — which rarely
+    recur legitimately — are flagged there, as likely rather than certain."""
+    seen = {}
+    out = []
+    for n, raw in enumerate(lines, 1):
+        m = DECL_TYPED.match(strip_comment(raw))
+        if not m:
+            continue
+        indent, typ, name = len(m.group(1)), m.group(2), m.group(3)
+        key = (name, typ)
+        if key in seen:
+            first = seen[key]
+            if indent == 0:
+                out.append((n, f'duplicate declaration: {typ} "{name}" already '
+                               f'declared at line {first} — Pine rejects this'))
+            elif typ in ('string', 'line', 'label', 'box'):
+                out.append((n, f'LIKELY duplicate: {typ} "{name}" also declared at '
+                               f'line {first}; if both are in one scope Pine rejects it'))
+        else:
+            seen[key] = n
+    return out
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -335,10 +368,11 @@ def main():
                           + const_string_args(lines, declared_at)
                           + wrong_named_args(lines)
                           + continuation_indent(lines)
-                          + undeclared(lines))
+                          + undeclared(lines)
+                          + duplicate_declarations(lines))
         print(f'{path}  ({len(lines)} lines)')
         if not findings:
-            print('  clean — no bad continuation indent, no forward reference, no non-const plotshape arg, no wrong-named drawing arg, no undeclared name')
+            print('  clean — no bad continuation indent, no forward reference, no non-const plotshape arg, no wrong-named drawing arg, no undeclared name, no duplicate declaration')
         for n, msg in findings:
             print(f'  line {n}: {msg}')
             bad += 1

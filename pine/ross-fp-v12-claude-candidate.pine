@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.28 (plain-language verdict · paper only)", shorttitle="ROSS FP V12.28", overlay=true,
+strategy("ROSS First Pullback Strategy V12.29 (pattern row + ABCD ordering · paper only)", shorttitle="ROSS FP V12.29", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -756,7 +756,7 @@ showDiagnostics      = input.bool(false, "DIAGNOSTIC layer: ambiguity labels, gh
 // these metrics"). Twelve chips across two rows made the reader do the
 // summarising. Off = those two rows become plain sentences: one judgment on
 // the setup, one naming the pattern. On = the original chip grid.
-dashChips            = input.bool(false, "Show the chip grid instead of plain-language rows", group=gVisual, display = display.none)
+dashChips            = input.bool(false, "SETUP row: show the six chips instead of one sentence", group=gVisual, display = display.none)
 dashFull             = input.bool(false, "Full dashboard (compact by default)", group=gVisual, display = display.none)
 // V4.3: readable by default; shrink only if the user asks the input to
 // V12.1 (operator: "the grid takes too much space in the graph"). The panel
@@ -1371,6 +1371,8 @@ var array<int> tlCand = array.new_int()
 showPatterns    = input.bool(true, "Name chart patterns (flat top, ABCD)", group=gVisual, display = display.none)
 flatTopTouches  = input.int(3, "Flat top: highs needed at one price", minval=2, maxval=8, group=gVisual, display = display.none,
      tooltip="PARAMETERS.md touch_count = 3: 23 of 41 explicit counts say the THIRD touch is the one that matters.")
+abcdMaxAge      = input.int(30, "ABCD: D must be within N bars", minval=5, maxval=120, group=gVisual, display = display.none,
+     tooltip="A morning ABCD is not still forming three hours later. The last leg has to be recent structure.")
 flatTopLook     = input.int(60, "Flat top: bars to scan", minval=15, maxval=200, group=gVisual, display = display.none,
      tooltip="Bounded on purpose -- the scan is O(n^2) and an unbounded session would risk Pine's execution limit.")
 
@@ -1398,26 +1400,47 @@ f_flatTop(float tol, int minT, int look) =>
 // A = low, B = impulse high, C = HIGHER low, D = the first new-high attempt.
 // Day-scoped: yesterday's pivots describe yesterday's move.
 f_abcd(float tol) =>
+    // V12.29 (operator, WETO: "the ABCD is not forming — we have lower lows.
+    // you're missing it"). Correct. The first version collected the last two
+    // day-scoped lows and the last two highs INDEPENDENTLY and never checked
+    // that they interleave as A-low, B-high, C-low, D-high in time. On a
+    // fading chart the newest pivot is a LOW printed after the last high, so
+    // the comparison was between the wrong events entirely -- and a falling
+    // structure could read "ABCD forming".
+    //
+    // Now every leg carries its bar and the sequence must be chronological:
+    // A before B before C before D. That alone kills the WETO case, because
+    // its most recent pivot low sits AFTER the last pivot high. On top of
+    // that: C must be a HIGHER low than A, C must sit below B (it is a
+    // pullback, not a breakout), D must reach at least near B, and D must be
+    // recent -- a morning pattern is not still "forming" three hours later.
     float aPx = na
     float bPx = na
     float cPx = na
     float dPx = na
-    int   dBar = na
+    int   aB = na
+    int   bB = na
+    int   cB = na
+    int   dB = na
     int   dayFirst = array.size(tlBars) > 0 ? array.get(tlBars, 0) : na
     if not na(dayFirst) and array.size(pivLows) >= 2 and array.size(pivHighs) >= 2
-        // last two confirmed lows and highs from today
         for i = 0 to array.size(pivLows) - 1
             if array.get(pivLowBars, i) >= dayFirst
                 aPx := cPx
+                aB  := cB
                 cPx := array.get(pivLows, i)
+                cB  := array.get(pivLowBars, i)
         for i = 0 to array.size(pivHighs) - 1
             if array.get(pivHighBars, i) >= dayFirst
                 bPx := dPx
+                bB  := dB
                 dPx := array.get(pivHighs, i)
-    // C must be a HIGHER low than A, and D must reach at least near B --
-    // that is the "first new-high attempt that may not clear HOD".
-    bool ok = not na(aPx) and not na(bPx) and not na(cPx) and not na(dPx) and
-     cPx > aPx and dPx >= bPx - tol
+                dB  := array.get(pivHighBars, i)
+    bool haveAll  = not na(aPx) and not na(bPx) and not na(cPx) and not na(dPx)
+    bool ordered  = haveAll and aB < bB and bB < cB and cB < dB
+    bool fresh    = not na(dB) and bar_index - dB <= abcdMaxAge
+    bool ok = ordered and fresh and
+     cPx > aPx and cPx < bPx and dPx >= bPx - tol
     [ok, aPx, bPx, cPx, dPx]
 // V9.9 (live JUNS — the uptrend line anchored on yesterday's overnight
 // prints, 43% below price): trend lines are INTRADAY objects. The arrays
@@ -3224,21 +3247,11 @@ string v11LockLine = useRiskGovernor and v11Locked ?
 // not parse a sentence. The provenance clauses (live-vs-confirmed, playbook
 // warning, room warning) are diagnostics: they move behind the full-dashboard
 // toggle instead of riding on every verdict. Nothing is deleted, only demoted.
-// V12.18: alignment rides the verdict line -- advisory, never a veto. The
-// playbook says "refuser NORMALEMENT", not always, and a personal threshold
-// is meant to be set after backtesting, so this reports and does not gate.
-string alignTag = alignState == "aligned" ? "" :
-     alignState == "5m n/a"  ? "  · 5m n/a" :
-     alignState == "1m weak" ? "  ⚠ 5m ok, 1m weak — refuse normally" :
-     alignState == "1m leads" ? "  ⚠ 1m leads 5m — leader only" :
-     "  ⚠ neither timeframe constructive"
-string bigBarTag = bigBar5 ? "  ⚠ huge 5m bar — its low is not a normal-size stop" : ""
-// V12.27: pattern names ride the verdict line. Naming only -- §9: these
-// shapes "ne remplacent ni les Five Pillars ni le plan de risque".
-string patTag = not showPatterns ? "" :
-     (abcdBroken ? "  · ABCD broken" : abcdOK ? "  · ABCD" : "") +
-     (flatTopBroken ? "  · flat top broken" : not na(flatTopPx) ? "  · flat top " + str.tostring(flatTopN) + "x" : "")
-string verdictTail = (dashFull ? liveTag : "") + alignTag + bigBarTag + patTag
+// V12.29 (operator): the verdict row carries the VERDICT. "refuse normally"
+// and the pattern names were bloating it -- the PATTERN row is intended for
+// exactly that, so alignment, the big-bar warning and the pattern names all
+// live there now.
+string verdictTail = dashFull ? liveTag : ""
 string roomShort = dashFull ? roomWarn : ""
 
 actionText =
@@ -4065,17 +4078,30 @@ if barstate.islast
     // and only flags the window when it is actually gating.
     bool inPrime = minuteET >= 7 * 60 and minuteET < 11 * 60 + 30
     bool clockOK = useSessionWindow ? (inSession and entryTimeOK) : true
-    f_label(4, "CLOCK", clockOK)
+    // V12.29 (operator: "instead of the clock windows, place the pattern").
+    // The session phase keeps its one chip -- PRE-MKT / OPEN / AH is a fact
+    // worth one cell -- but the long window sentence is gone: when the clock
+    // actually blocks, the VERDICT already says "WAIT · window shut". The
+    // remaining five cells carry what the operator asked to see: the pattern,
+    // the 1m/5m alignment, and the oversized-5m-bar stop warning.
+    string alignShort = alignState == "aligned" ? "1m+5m aligned" :
+         alignState == "5m n/a"  ? "" :
+         alignState == "1m weak" ? "5m ok, 1m weak" :
+         alignState == "1m leads" ? "1m leads 5m" : "no timeframe constructive"
+    string patCore = not showPatterns ? "" :
+         (abcdBroken ? "ABCD broken" : abcdOK ? "ABCD forming" : "") +
+         (flatTopBroken or not na(flatTopPx) ?
+              ((abcdOK or abcdBroken) ? " · " : "") +
+              (flatTopBroken ? "flat top BROKEN " + str.tostring(flatTopPx, format.mintick) :
+                   "flat top " + str.tostring(flatTopN) + "x " + str.tostring(flatTopPx, format.mintick)) : "")
+    string patLine = patCore +
+         (patCore != "" and alignShort != "" ? " · " : "") + alignShort +
+         (bigBar5 ? " · ⚠ huge 5m bar" : "")
+    bool patGood = (abcdOK or abcdBroken or flatTopBroken) and alignState != "1m weak"
+    f_label(4, "PATTERN", patGood)
     f_chip(1, 4, mktPhase, minuteET >= 570 and minuteET < 960 ? 1 : -1)
-    string winText = not useSessionWindow ?
-         (inPrime ? "prime 0700-1130 ET · no window gate — arms any hour" :
-              "outside prime 0700-1130 ET · no window gate — arms anyway") :
-         inSession ? (entryTimeOK ? "window " + sessionWindow + " ET · open" :
-              "window closing — no new orders this bar") :
-         "window " + sessionWindow + " ET · OVER — watch only"
-    table.cell(dash, 2, 4, winText,
-         text_color=not useSessionWindow ? (inPrime ? CHIP_OK : color.silver) :
-              clockOK ? CHIP_OK : CHIP_NO,
+    table.cell(dash, 2, 4, patLine == "" ? "—" : patLine,
+         text_color=patGood ? CHIP_OK : color.silver,
          text_size=DSZ, text_halign=text.align_left)
 
     // ── SETUP: is THIS dip tradeable. TREND: is the tape behind it.
@@ -4117,32 +4143,18 @@ if barstate.islast
 
     bool trendAll = macdBullish and emaBullish and vwapBullish and rrGate and
          (not scanGates or scanGate) and v11RiskGovernorOK
-    // V12.28: in sentence mode this row names the PATTERN -- the thing the
-    // operator asked to see clearly -- and states the trend in words rather
-    // than six coloured squares.
-    string trendWords = trendAll ? "trend intact" :
-     not macdBullish ? "MACD has rolled over" :
-     not emaBullish  ? "price lost the 9 EMA" :
-     not vwapBullish ? "price is under VWAP" :
-     not rrGate      ? "no room to target" : "trend mixed"
-    string patLine = (abcdBroken ? "ABCD broken · " : abcdOK ? "ABCD forming · " : "") +
-     (flatTopBroken ? "flat top BROKEN " + str.tostring(flatTopPx, format.mintick) + " · " :
-          not na(flatTopPx) ? "flat top " + str.tostring(flatTopN) + "x " +
-               str.tostring(flatTopPx, format.mintick) + " · " : "") +
-     trendWords
-    f_label(6, dashChips ? "TREND" : "PATTERN", trendAll)
-    if not dashChips
-        f_text(6, patLine, trendAll ? CHIP_OK : CHIP_NO)
-    if dashChips
-        f_chip(1, 6, "MACD", f_b(macdBullish))
-        f_chip(2, 6, "EMA", f_b(emaBullish))
-        f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
-        f_chip(4, 6, "Room", f_b(rrGate))
-        f_chip(5, 6, "Scan fit", scanGates ? f_b(scanGate) : -1)
-    // "§8" meant nothing without the playbook open beside the chart. It is
-    // the daily risk governor -- loss cap, trade cap, drawdown walkaway --
-    // so it now says so.
-        f_chip(6, 6, "Day limits", f_b(v11RiskGovernorOK))
+    // V12.29 (operator: "restore the trend line where I had MACD, VWAP and
+    // EMA — that was very important"). V12.28 spent this row on the pattern
+    // sentence; the pattern lives on row 4 now and the trend chips are back
+    // unconditionally. Day limits keeps its plain name (the §8 daily risk
+    // governor: loss cap, trade cap, drawdown walkaway).
+    f_label(6, "TREND", trendAll)
+    f_chip(1, 6, "MACD", f_b(macdBullish))
+    f_chip(2, 6, "EMA", f_b(emaBullish))
+    f_chip(3, 6, "VWAP", vwapKnown ? f_b(vwapBullish) : -1)
+    f_chip(4, 6, "Room", f_b(rrGate))
+    f_chip(5, 6, "Scan fit", scanGates ? f_b(scanGate) : -1)
+    f_chip(6, 6, "Day limits", f_b(v11RiskGovernorOK))
 
     // V9.2 (trading read, live PCLA: HOD 11.33 with price 7.99 and the row
     // said nothing): the DISTANCE off the high is the front-side/back-side
@@ -4254,7 +4266,6 @@ if barstate.islast
         table.merge_cells(dash, 1, 7, 6, 7)
         if not dashChips
             table.merge_cells(dash, 1, 5, 6, 5)
-            table.merge_cells(dash, 1, 6, 6, 6)
         if rVwap >= 0
             table.merge_cells(dash, 1, rVwap, 6, rVwap)
             table.merge_cells(dash, 1, rRS, 6, rRS)
