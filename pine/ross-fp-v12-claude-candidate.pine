@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.17 (five pillars + daily 200 EMA · paper only)", shorttitle="ROSS FP V12.17", overlay=true,
+strategy("ROSS First Pullback Strategy V12.18 (multi-timeframe alignment · paper only)", shorttitle="ROSS FP V12.18", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -780,8 +780,29 @@ ema20 = ta.ema(close, 20)
 //
 // lookahead_off keeps it non-repainting: the daily value used intraday is
 // the one available at that moment, never the finished day's.
+// ── V12.18 §10 MULTI-TIME-FRAME ALIGNMENT ───────────────────────────────
+// The playbook devotes a whole section to it and this script had NO 5-minute
+// data at all -- it read one timeframe and called that the setup:
+//
+//   "meilleur cas : 1-minute et 5-minute constructifs"
+//   "bon 5-minute mais mauvais 1-minute : refuser normalement"
+//   "excellent 1-minute avant la formation du 5-minute : possible sur un
+//    leader exceptionnel"
+//   "ne pas utiliser le bas d'une immense bougie 5-minute comme stop avec une
+//    taille normale"
+//
+// One tupled request.security keeps the call budget at three. INTRABAR
+// BEHAVIOUR, documented per SKILL.md: these 5-minute values update while the
+// 5-minute bar is forming, which is what an operator actually reads. They are
+// advisory, never an order trigger, so the live reading is the useful one.
+[c5, e9_5, e20_5, h5, l5] = request.security(syminfo.tickerid, "5",
+     [close, ta.ema(close, 9), ta.ema(close, 20), high, low],
+     gaps=barmerge.gaps_off, lookahead=barmerge.lookahead_off)
+
 ma200Daily = request.security(syminfo.tickerid, "1D", ta.ema(close, 200),
      gaps=barmerge.gaps_off, lookahead=barmerge.lookahead_off)
+bigBar5ATR = input.float(4.0, "Flag a 5-minute bar wider than N x the 1-minute ATR", minval=1.0, maxval=20.0, step=0.5, group=gVisual, display = display.none,
+     tooltip="Playbook §10: do not use the low of an enormous 5-minute candle as a stop at normal size. Above this multiple the dashboard says so.")
 ema200WarnDist = input.float(0.75, "Warn when the daily 200 EMA is within $N overhead", minval=0.05, maxval=10.0, step=0.05, group=gVisual, display = display.none,
      tooltip="Playbook §5 treats a daily 200 EMA about $0.50-1.00 above price as potentially problematic resistance. Scale it with the price and ATR of what you trade.")
 use200Daily = input.bool(true, "Use the DAILY 200 EMA (off = legacy 200-bar chart SMA)", group=gVisual, display = display.none,
@@ -2061,6 +2082,24 @@ bottomingTail = lowerWickPct >= bullishLowerWickPct
 toppingTailWarning = upperWickPct >= toppingTailWarnPct
 
 emaBullish = close > ema9 and ema9 >= ema20
+
+// V12.18: the four §10 states, named as the playbook names them.
+bool tf5Known       = not na(c5) and not na(e9_5) and not na(e20_5)
+bool tf5Constructive = tf5Known and c5 > e9_5 and e9_5 >= e20_5
+bool tf1Constructive = emaBullish
+string alignState = not tf5Known         ? "5m n/a" :
+     tf5Constructive and tf1Constructive ? "aligned" :
+     tf5Constructive and not tf1Constructive ? "1m weak" :
+     not tf5Constructive and tf1Constructive ? "1m leads" : "neither"
+// "aligned" is the best case; "1m weak" is the one the playbook says to
+// refuse normally, because entry and risk are imprecise on the timeframe you
+// are actually trading. "1m leads" is allowed only on an exceptional leader.
+bool alignOK = alignState == "aligned" or alignState == "5m n/a"
+
+// The oversized-5m-candle warning. A 5-minute bar several times the size of
+// the 1-minute ATR means its low is a stop you cannot take at normal size.
+float range5 = tf5Known and not na(h5) and not na(l5) ? h5 - l5 : na
+bool bigBar5 = not na(range5) and not na(atr) and atr > 0 and range5 >= atr * bigBar5ATR
 vwapKnown   = not na(vwapValue)                       // V4.6
 vwapBullish = vwapKnown and close > vwapValue
 macdBullish = macdValue > 0 and macdHist > 0
@@ -2907,7 +2946,16 @@ string v11LockLine = useRiskGovernor and v11Locked ?
 // not parse a sentence. The provenance clauses (live-vs-confirmed, playbook
 // warning, room warning) are diagnostics: they move behind the full-dashboard
 // toggle instead of riding on every verdict. Nothing is deleted, only demoted.
-string verdictTail = dashFull ? liveTag : ""
+// V12.18: alignment rides the verdict line -- advisory, never a veto. The
+// playbook says "refuser NORMALEMENT", not always, and a personal threshold
+// is meant to be set after backtesting, so this reports and does not gate.
+string alignTag = alignState == "aligned" ? "" :
+     alignState == "5m n/a"  ? "  · 5m n/a" :
+     alignState == "1m weak" ? "  ⚠ 5m ok, 1m weak — refuse normally" :
+     alignState == "1m leads" ? "  ⚠ 1m leads 5m — leader only" :
+     "  ⚠ neither timeframe constructive"
+string bigBarTag = bigBar5 ? "  ⚠ huge 5m bar — its low is not a normal-size stop" : ""
+string verdictTail = (dashFull ? liveTag : "") + alignTag + bigBarTag
 string roomShort = dashFull ? roomWarn : ""
 
 actionText =

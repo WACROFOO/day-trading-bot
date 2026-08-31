@@ -607,6 +607,63 @@ can change which trades arm.
 
 `request.security` count is 2, well inside the limit of 40.
 
+### V12.18 - multi-time-frame alignment, and an audit of what is still missing
+
+The operator asked four questions. Answers came from the code, not memory.
+
+**Catalyst is score-only, as required.** `pillarCatalyst` appears in exactly
+four places, all scoring or display. It is in no gate and no veto, matching
+"preferred but not mandatory".
+
+**Gaps: correct. Windows: absent.** `scanGap` measures the RTH open against
+`prevCloseD`, which is a genuine `1D` request - so the gap is computed on the
+daily reference the playbook defines. The price WINDOW is not implemented at
+all: the only "window" in the file is the 07:00-11:30 session-time window.
+The §11 rule - a low-structure zone worth about twice a normal daily candle
+or twice the daily ATR - has no code, and the script has no daily ATR either
+(`ta.atr(14)` is chart-timeframe).
+
+**Alignment was completely absent - now built.** The script had NO 5-minute
+data. It read one timeframe and called that the setup, while §10 devotes a
+section to the interaction. One tupled `request.security` (call budget now 3)
+supplies 5-minute close, EMA9, EMA20, high and low, and the four states are
+named as the playbook names them:
+
+| 5m constructive | 1m constructive | state | playbook |
+|---|---|---|---|
+| yes | yes | `aligned` | best case |
+| yes | no | `1m weak` | refuse normally |
+| no | yes | `1m leads` | exceptional leader only |
+| no | no | `neither` | no |
+
+Plus the oversized-bar warning: a 5-minute bar wider than `bigBar5ATR` (4)
+times the 1-minute ATR gets flagged, because its low is not a stop you can
+take at normal size.
+
+**Advisory, not a gate**, deliberately. The playbook says "refuser
+NORMALEMENT" - normally, not always - and it lists personal thresholds as
+things to fix after backtesting. It reports on the verdict line; gating comes
+after the operator has watched it.
+
+Intrabar behaviour documented in-line: the 5-minute values update while that
+bar forms, which is what an operator reads. They never trigger an order.
+
+**Chart patterns: none exist.** Zero hits for ABCD, flat top, cup and handle,
+double top, head and shoulders, gravestone, doji or hammer. The four
+`KIND_*` constants are entry mechanics, not chart patterns. Two candlestick
+shapes DO exist under other names: `bottomingTail` and `toppingTailWarning`.
+
+Worth recording for scope discipline: the bundle §9 confirms exactly four
+patterns - ABCD, flat top breakout, cup and handle, double top. Inverted
+head-and-shoulders and inverted gravestone are NOT in the confirmed set, so
+building them would import unconfirmed material. §9 also states plainly that
+these shapes "ne remplacent ni les Five Pillars ni le plan de risque", which
+argues for labels rather than gates.
+
+**Not implementable in Pine at all:** spread (no bid/ask exposed to a
+strategy - `syminfo.bid`/`ask` count is zero), Level 2, tape, dilution and
+SEC filings. Those stay operator-side by nature, not by omission.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
