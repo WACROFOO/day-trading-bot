@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.26 (level-based first target · paper only)", shorttitle="ROSS FP V12.26", overlay=true,
+strategy("ROSS First Pullback Strategy V12.27 (flat top + ABCD · paper only)", shorttitle="ROSS FP V12.27", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -1351,6 +1351,69 @@ var array<int> tlTimes = array.new_int()
 var array<float> tlVols = array.new_float()
 // V9.10: scratch list of candidate anchors, reused by both sides.
 var array<int> tlCand = array.new_int()
+
+// ═══════════ V12.27 CHART PATTERNS — LABELS, NEVER GATES ═════════════════
+// §9 is explicit: "Ces formes ne remplacent ni les Five Pillars ni le plan de
+// risque." A shape on a stock with no attention, no volume and no room is not
+// the same setup. So these are named on the chart and nothing more — they do
+// not arm, block, size or price anything.
+//
+// Only the two the Preview confirms AND that are mechanically decidable are
+// built here. Cup-and-handle and head-and-shoulders need a subjective read
+// over many bars, and head-and-shoulders appears only in the PUBLIC taxonomy,
+// which the bundle warns is "une bibliothèque de notions ... à ne pas
+// confondre avec la stratégie active et prioritaire de Ross".
+showPatterns    = input.bool(true, "Name chart patterns (flat top, ABCD)", group=gVisual, display = display.none)
+flatTopTouches  = input.int(3, "Flat top: highs needed at one price", minval=2, maxval=8, group=gVisual, display = display.none,
+     tooltip="PARAMETERS.md touch_count = 3: 23 of 41 explicit counts say the THIRD touch is the one that matters.")
+flatTopLook     = input.int(60, "Flat top: bars to scan", minval=15, maxval=200, group=gVisual, display = display.none,
+     tooltip="Bounded on purpose -- the scan is O(n^2) and an unbounded session would risk Pine's execution limit.")
+
+// ── Flat top: "repeated resistance at one price, then breakout; often
+// clusters at half/whole dollars." The densest cluster of HIGHS wins.
+f_flatTop(float tol, int minT, int look) =>
+    float bestLvl = na
+    int   bestN   = 0
+    int   n = array.size(tlHighs)
+    if n > 2
+        int from_ = math.max(0, n - look)
+        for i = from_ to n - 1
+            float lvl = array.get(tlHighs, i)
+            int c = 0
+            for j = from_ to n - 1
+                if math.abs(array.get(tlHighs, j) - lvl) <= tol
+                    c += 1
+            if c > bestN
+                bestN   := c
+                bestLvl := lvl
+    [bestN >= minT ? bestLvl : na, bestN >= minT ? bestN : 0]
+
+// ── ABCD: "impulse, 2+ candle pullback, first new-high attempt that may not
+// clear HOD, consolidation, then renewed break of the later apex/HOD."
+// A = low, B = impulse high, C = HIGHER low, D = the first new-high attempt.
+// Day-scoped: yesterday's pivots describe yesterday's move.
+f_abcd(float tol) =>
+    float aPx = na
+    float bPx = na
+    float cPx = na
+    float dPx = na
+    int   dBar = na
+    int   dayFirst = array.size(tlBars) > 0 ? array.get(tlBars, 0) : na
+    if not na(dayFirst) and array.size(pivLows) >= 2 and array.size(pivHighs) >= 2
+        // last two confirmed lows and highs from today
+        for i = 0 to array.size(pivLows) - 1
+            if array.get(pivLowBars, i) >= dayFirst
+                aPx := cPx
+                cPx := array.get(pivLows, i)
+        for i = 0 to array.size(pivHighs) - 1
+            if array.get(pivHighBars, i) >= dayFirst
+                bPx := dPx
+                dPx := array.get(pivHighs, i)
+    // C must be a HIGHER low than A, and D must reach at least near B --
+    // that is the "first new-high attempt that may not clear HOD".
+    bool ok = not na(aPx) and not na(bPx) and not na(cPx) and not na(dPx) and
+     cPx > aPx and dPx >= bPx - tol
+    [ok, aPx, bPx, cPx, dPx]
 // V9.9 (live JUNS — the uptrend line anchored on yesterday's overnight
 // prints, 43% below price): trend lines are INTRADAY objects. The arrays
 // reset at the day boundary, so the up-line starts at TODAY's low and
@@ -1375,6 +1438,17 @@ if barstate.isconfirmed
         array.shift(tlBars)
         array.shift(tlTimes)
         array.shift(tlVols)
+
+// V12.27: evaluate the two patterns once per bar.
+float patTol = math.max(nz(atr, syminfo.mintick) * 0.25, syminfo.mintick * 2)
+[flatTopPx, flatTopN] = f_flatTop(patTol, flatTopTouches, flatTopLook)
+[abcdOK, abcdA, abcdB, abcdC, abcdD] = f_abcd(patTol)
+// A flat top is only news while it still caps price; once price closes
+// through it the shape has resolved into a breakout.
+bool flatTopLive   = not na(flatTopPx) and close <= flatTopPx + patTol
+bool flatTopBroken = not na(flatTopPx) and close > flatTopPx + patTol
+// ABCD completes on the break of D, the "renewed break of the later apex".
+bool abcdBroken = abcdOK and not na(abcdD) and close > abcdD
 
 // V9.5 (live WYHG 2026-08-20): POLARITY. Supports came only from pivot
 // LOWS and resistances only from pivot HIGHS — so a broken-resistance
@@ -3154,7 +3228,12 @@ string alignTag = alignState == "aligned" ? "" :
      alignState == "1m leads" ? "  ⚠ 1m leads 5m — leader only" :
      "  ⚠ neither timeframe constructive"
 string bigBarTag = bigBar5 ? "  ⚠ huge 5m bar — its low is not a normal-size stop" : ""
-string verdictTail = (dashFull ? liveTag : "") + alignTag + bigBarTag
+// V12.27: pattern names ride the verdict line. Naming only -- §9: these
+// shapes "ne remplacent ni les Five Pillars ni le plan de risque".
+string patTag = not showPatterns ? "" :
+     (abcdBroken ? "  · ABCD broken" : abcdOK ? "  · ABCD" : "") +
+     (flatTopBroken ? "  · flat top broken" : not na(flatTopPx) ? "  · flat top " + str.tostring(flatTopN) + "x" : "")
+string verdictTail = (dashFull ? liveTag : "") + alignTag + bigBarTag + patTag
 string roomShort = dashFull ? roomWarn : ""
 
 actionText =
@@ -3395,6 +3474,27 @@ if barstate.islast and showSR
         array.push(srLabels, label.new(bar_index + 2 + maxSRlines * srLabelStagger, prevDayClose,
              "prev close " + str.tostring(prevDayClose, format.mintick),
              style=label.style_none, textcolor=color.new(color.gray, 20), size=size.small))
+
+// ── V12.27: the flat top drawn where it is, in its own colour so it is not
+// mistaken for an R-level. Labels only; nothing here gates a trade.
+var line  ftLine = na
+var label ftLab  = na
+if barstate.islast
+    if not na(ftLine)
+        line.delete(ftLine)
+        ftLine := na
+    if not na(ftLab)
+        label.delete(ftLab)
+        ftLab := na
+    if showPatterns and showSR and not na(flatTopPx)
+        ftLine := line.new(bar_index - 1, flatTopPx, bar_index, flatTopPx,
+             extend=extend.both, style=line.style_dotted, width=2,
+             color=color.new(flatTopBroken ? color.lime : color.orange, 30))
+        ftLab := label.new(bar_index + 2 + maxSRlines * srLabelStagger + srLabelStagger, flatTopPx,
+             (flatTopBroken ? "FLAT TOP BROKEN " : "FLAT TOP ") +
+             str.tostring(flatTopN) + "x " + str.tostring(flatTopPx, format.mintick),
+             style=label.style_none, size=size.small,
+             textcolor=color.new(flatTopBroken ? color.lime : color.orange, 10))
 
 var box resBox = na
 var box supBox = na
