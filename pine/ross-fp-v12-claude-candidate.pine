@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.25 (trade levels back on · paper only)", shorttitle="ROSS FP V12.25", overlay=true,
+strategy("ROSS First Pullback Strategy V12.26 (level-based first target · paper only)", shorttitle="ROSS FP V12.26", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -795,6 +795,33 @@ tlMaxWidthATR  = input.float(3.0, "Drop the opposite rail when the channel is wi
 winLookDays = input.int(20, "Daily lookback for gaps / windows (days)", minval=3, maxval=120, group=gVisual, display = display.none)
 winMinATR   = input.float(2.0, "A window must be at least N x the daily ATR", minval=1.0, maxval=10.0, step=0.25, group=gVisual, display = display.none,
      tooltip="Chapter 5: a meaningful gap or window is roughly 2x a typical daily candle or 2x the daily ATR.")
+// ── V12.26 §7/§15 FIRST TARGET = A LEVEL, NOT A MULTIPLE ─────────────────
+// The ladder sold its first 50% at exactly 1R. The playbook never says that:
+//
+//   §7  "Première cible : retest du HOD ou prochaine résistance évidente."
+//       "Cible minimale de planification : Entry + 2 x risque par action."
+//   §15  1. HOD si le ratio reste acceptable
+//        2. cible mécanique 2R
+//        3. half-dollar / whole-dollar
+//        4. résistance daily suivante
+//
+// 1R is not in that hierarchy at all. A mechanical 1R sells half the position
+// into empty space while the obvious level sits ten cents higher, and on a
+// name where the HOD is only 0.6R away it holds through the one price the
+// whole market is watching.
+//
+// So T1 becomes the NEAREST REAL LEVEL above entry -- HOD, pre-market high,
+// the next half or whole dollar, a gap or window edge, or the nearest
+// confirmed pivot -- provided it is at least t1MinR away so the ladder cannot
+// collapse onto a level two cents overhead. With no qualifying level, it
+// falls back to the mechanical 1R it used before.
+t1MinR = input.float(0.8, "First target must be at least N x risk away", minval=0.2, maxval=3.0, step=0.1, group=gExecution, display = display.none,
+     tooltip="Guards the level-based T1: a level closer than this is not worth a leg, so the ladder falls back to a mechanical 1R.")
+t1UseLevels = input.bool(true, "First target snaps to the nearest real level (HOD / round / gap edge)", group=gExecution, display = display.none)
+
+f_lowerAbove(float best, float cand, float floorPx) =>
+    na(cand) or cand <= floorPx ? best : na(best) or cand < best ? cand : best
+
 // ── V12.19 DAILY GAPS AND WINDOWS ────────────────────────────────────────
 // Corrected after re-reading the Chapter 5 lesson "Gaps & Windows on Daily
 // Charts". The confirmed definitions:
@@ -2240,6 +2267,28 @@ voidEdgeSupport = (not na(winBot) and math.abs(supportRef - winBot) <= supportTo
      (not na(gapBot) and math.abs(supportRef - gapBot) <= supportTolerance and close >= gapBot) or
      (not na(gapTop) and math.abs(supportRef - gapTop) <= supportTolerance and close >= gapTop)
 
+// V12.26: resolve the §15 target hierarchy into one price.
+f_firstTarget(float entryPx, float riskPs) =>
+    float floorPx = entryPx + riskPs * t1MinR
+    float best = na
+    if t1UseLevels and not na(entryPx) and not na(riskPs) and riskPs > 0
+        // 1. HOD -- the top of the hierarchy
+        best := f_lowerAbove(best, dayHigh, floorPx)
+        // pre-market high, the level the open trades against
+        best := f_lowerAbove(best, pmHigh, floorPx)
+        // 3. the next half dollar, then the next whole dollar
+        best := f_lowerAbove(best, math.ceil(entryPx * 2.0) / 2.0, floorPx)
+        best := f_lowerAbove(best, math.ceil(entryPx), floorPx)
+        // gap and window edges -- both boundaries are real prices
+        best := f_lowerAbove(best, winBot, floorPx)
+        best := f_lowerAbove(best, winTop, floorPx)
+        best := f_lowerAbove(best, gapBot, floorPx)
+        best := f_lowerAbove(best, gapTop, floorPx)
+        // 4. nearest confirmed structural resistance
+        best := f_lowerAbove(best, nearestRes, floorPx)
+    // no qualifying level: the mechanical 1R it always used
+    na(best) ? entryPx + riskPs : best
+
 supportCountRaw = (levelSupport ? 1 : 0) + (voidEdgeSupport ? 1 : 0) +
      (ema9Support ? 1 : 0) + (ema20Support ? 1 : 0) + (vwapSupport ? 1 : 0) +
      (roundSupport ? 1 : 0) + (ma200Support ? 1 : 0) + (flipSupport ? 1 : 0)
@@ -2584,9 +2633,11 @@ if confirmedPass and strategy.position_size == 0 and setupState == PULLBACK and
              math.floor(plannedShares / 4) : na
         float stagedEntryArm = triggerPrice + entryAdversePerShare
         float stagedRiskArm = stagedEntryArm - structuralStop
+        // V12.26: T1 is the nearest real level, not a bare 1R.
+        float t1PxArm = f_firstTarget(stagedEntryArm, stagedRiskArm)
         if not na(t1QtyArm)
             strategy.exit("T1", from_entry="Long", qty=t1QtyArm,
-                 stop=structuralStop, limit=stagedEntryArm + stagedRiskArm,
+                 stop=structuralStop, limit=t1PxArm,
                  comment_loss="STOP", comment_profit="T1",
                  alert_message="ROSS FP " + REV + " T1 | {{ticker}}")
         if not na(t2QtyArm)
@@ -2921,7 +2972,8 @@ displayPlanRisk = displayState == LONG ? tradeRisk : displayState == ARMED ? pla
 displayInitialShares = displayState == LONG ? tradeInitialQty :
      displayState == ARMED ? plannedShares : candidateShares
 displayHasThirdRung = useThirdRung and not na(displayInitialShares) and displayInitialShares >= 4
-displayT1 = not na(displayEntry) and not na(displayPlanRisk) ? displayEntry + displayPlanRisk : na
+displayT1 = not na(displayEntry) and not na(displayPlanRisk) and displayPlanRisk > 0 ?
+     f_firstTarget(displayEntry, displayPlanRisk) : na
 
 // ── V12.17 §5 / Scenario D: does 2R actually FIT before the wall? ────────
 // The playbook is explicit: "vérifier qu'un objectif d'au moins 2R tient
