@@ -664,6 +664,59 @@ argues for labels rather than gates.
 strategy - `syminfo.bid`/`ask` count is zero), Level 2, tape, dilution and
 SEC filings. Those stay operator-side by nature, not by omission.
 
+### V12.19 - gaps and windows, corrected against the lesson
+
+The operator: *"windows are made of big candles in the previous days, where
+there would be no resistance -- check twice the gap and windows lesson."*
+Correct on both counts, and V12.17 had the consequence backwards.
+
+Re-read from `references/day-trading-basics-preview-mastery.md`, Chapter 5
+"Gaps & Windows on Daily Charts":
+
+- Gap: the regular-session open is materially above or below the prior close.
+- Window: "a large area with little visible support/resistance, created by a
+  true gap **or a large long-body candle**."
+- Size: roughly 2x a typical daily candle or 2x daily ATR.
+- "Recent price action overrides older levels; scan from the current right
+  edge to the left and upward."
+- "**Do not skip across a newer gap/window to use an older minor level as if
+  the newer structure did not exist.**"
+- Gap fill: the move back through the empty zone to the boundary of the candle
+  before the gap.
+- Strong-daily-chart checklist, item 1: "**large gaps/windows create room**".
+
+**What I had wrong.** My earlier summary called a window a zone to treat as an
+obstacle. It is the opposite: a window is empty space, and empty space is
+ROOM. V12.17's wall search took the nearest overhead level unconditionally, so
+a stale price sitting inside a window -- one the market has already run
+through -- could be reported as the ceiling and understate the room. That is
+precisely the error the lesson warns against.
+
+**Now.** Windows are detected on the daily timeframe from two sources: the
+most recent oversized daily BODY (>= `winMinATR` x daily ATR, default 2.0, per
+the lesson) and the most recent genuine untraded gap between consecutive daily
+bars. A level falling inside either is skipped as resistance. Window and gap
+EDGES remain real levels -- the checklist names "gap-edge or window-edge
+resistance" -- and the current HOD is exempt, because today's own high is live
+structure whatever older window contains it. Overhead empty space is reported
+as "window overhead = room", and the gap-fill boundary is named.
+
+Detection runs INSIDE the daily context deliberately. On a 1-minute chart a
+requested daily series indexed `[1]` means "the previous CHART bar's value of
+the daily high", not the previous day -- so evaluating the loop inside
+`request.security` is what makes `open[i]`/`close[i]` genuine prior days.
+
+Verified on the lesson's own shape: a 4.00-7.00 daily body against ATR 1.20
+(3.00 >= 2 x 1.20 qualifies), entry 5.20, risk 0.20, a stale pivot at 5.60
+inside the window and today's HOD at 5.80.
+
+| version | wall chosen | room | reading |
+|---|---|---|---|
+| V12.17 | stale pivot 5.60 | 2.0R | borderline, wrong |
+| V12.19 | HOD 5.80 | 3.0R | correct |
+
+`request.security` count is 4, inside the limit of 40.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
