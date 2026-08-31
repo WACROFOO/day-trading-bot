@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.15 (clean chart · paper only)", shorttitle="ROSS FP V12.15", overlay=true,
+strategy("ROSS First Pullback Strategy V12.16 (trend channels · paper only)", shorttitle="ROSS FP V12.16", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -698,6 +698,16 @@ showTrendLine        = input.bool(true, "Draw trend lines (lower-highs / higher-
 // Turn TradingView's off: strategy Settings -> Style -> uncheck
 // "Trades on chart" (and "Quantity"), keep these on.
 showTradeResult      = input.bool(true, "Show BOUGHT / SOLD + P&L markers", group=gVisual, display = display.none)
+// V12.16 (operator: "for each pattern uptrend or downtrend, the resistance
+// and support -- a range for every trend forming"). A single tangent gives
+// only the side the trend leans on: an uptrend line is the floor, a downtrend
+// line is the ceiling, and neither says where the move runs out. The opposite
+// rail is drawn PARALLEL, offset by the largest excursion the other extreme
+// made from the fitted line over the same span -- the standard parallel
+// channel. Parallel rather than a second independent fit on purpose: two free
+// fits can diverge or cross and stop describing one move.
+showTrendChannel     = input.bool(true, "Trend lines: draw the opposite rail (channel)", group=gVisual, display = display.none)
+fillTrendChannel     = input.bool(true, "  └ shade the channel", group=gVisual, display = display.none)
 tlMinBars            = input.int(12, "Trend lines: minimum bars before one can be drawn", minval=6, maxval=120, group=gVisual, display = display.none)
 tlAnchorGap          = input.int(4, "Trend lines: keep anchors this many bars off the right edge", minval=2, maxval=30, group=gVisual, display = display.none)
 tlLabelOffset        = input.int(6, "Trend lines: label offset (bars right of last)", minval=0, maxval=40, group=gVisual, display = display.none)
@@ -3035,15 +3045,31 @@ if barstate.islast and showSR
 // trend failures read off the chart without measuring anything.
 var line dnTL = na
 var line upTL = na
+var line     dnTL2  = na
+var line     upTL2  = na
+var linefill dnFill = na
+var linefill upFill = na
 var label dnTLlab = na
 var label upTLlab = na
 if barstate.islast and showTrendLine
+    if not na(dnFill)
+        linefill.delete(dnFill)
+        dnFill := na
+    if not na(upFill)
+        linefill.delete(upFill)
+        upFill := na
     if not na(dnTL)
         line.delete(dnTL)
         dnTL := na
     if not na(upTL)
         line.delete(upTL)
         upTL := na
+    if not na(dnTL2)
+        line.delete(dnTL2)
+        dnTL2 := na
+    if not na(upTL2)
+        line.delete(upTL2)
+        upTL2 := na
     if not na(dnTLlab)
         label.delete(dnTLlab)
         dnTLlab := na
@@ -3133,9 +3159,33 @@ if barstate.islast and showTrendLine
             // candles. It now sits in the empty right margin at the price the
             // line actually holds there, so it reads as a continuation of the
             // line instead of covering price action.
+            // ── the opposite rail ──────────────────────────────────────
+            // Widest the HIGHS ever got above the fitted floor across the
+            // same span. That excursion, applied as a parallel offset, is the
+            // ceiling the move has actually respected — so floor and ceiling
+            // together are the range this trend is travelling inside.
+            float upWidth = 0.0
+            for k = bestA to nB - 1
+                float lk = lowA2 + bestSlope * (array.get(tlBars, k) - array.get(tlBars, bestA))
+                float dv = array.get(tlHighs, k) - lk
+                if dv > upWidth
+                    upWidth := dv
+            float upTop = upNow + upWidth
+            if showTrendChannel and upWidth > 0
+                upTL2 := line.new(array.get(tlTimes, bestA), lowA2 + upWidth,
+                     array.get(tlTimes, bestTouch), array.get(tlLows, bestTouch) + upWidth,
+                     xloc=xloc.bar_time, extend=extend.right,
+                     color=color.new(color.teal, upLost ? 80 : 45),
+                     style=line.style_dashed, width=1)
+                if fillTrendChannel
+                    upFill := linefill.new(upTL, upTL2, color.new(color.teal, 94))
             float upAt = lowA2 + bestSlope * (bar_index + tlLabelOffset - array.get(tlBars, bestA))
+            string upTxt = (upLost ? "uptrend lost  " : "uptrend  ") +
+                 str.tostring(upNow, format.mintick) +
+                 (showTrendChannel and upWidth > 0 ?
+                      "  –  " + str.tostring(upTop, format.mintick) : "")
             upTLlab := label.new(bar_index + tlLabelOffset, upAt,
-                 (upLost ? "uptrend lost  " : "uptrend  ") + str.tostring(upNow, format.mintick),
+                 upTxt,
                  xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
                  textcolor=upLost ? color.new(color.orange, 0) : color.new(color.teal, 10))
         // ── downtrend: mirror, candidates = local highs + the session high ──
@@ -3193,9 +3243,29 @@ if barstate.islast and showTrendLine
                  xloc=xloc.bar_time, extend=extend.right,
                  color=color.new(color.red, dnBroken ? 70 : 25),
                  style=dnBroken ? line.style_dashed : line.style_solid, width=2)
+            // ── the opposite rail: deepest the LOWS fell below the ceiling ──
+            float dnWidth = 0.0
+            for k = bestAD to nB - 1
+                float lk = highA2 + bestSlopeD * (array.get(tlBars, k) - array.get(tlBars, bestAD))
+                float dv = lk - array.get(tlLows, k)
+                if dv > dnWidth
+                    dnWidth := dv
+            float dnBot = dnNow - dnWidth
+            if showTrendChannel and dnWidth > 0
+                dnTL2 := line.new(array.get(tlTimes, bestAD), highA2 - dnWidth,
+                     array.get(tlTimes, bestTouchD), array.get(tlHighs, bestTouchD) - dnWidth,
+                     xloc=xloc.bar_time, extend=extend.right,
+                     color=color.new(color.red, dnBroken ? 80 : 45),
+                     style=line.style_dashed, width=1)
+                if fillTrendChannel
+                    dnFill := linefill.new(dnTL, dnTL2, color.new(color.red, 94))
             float dnAt = highA2 + bestSlopeD * (bar_index + tlLabelOffset - array.get(tlBars, bestAD))
+            string dnTxt = (dnBroken ? "downtrend broken  " : "downtrend  ") +
+                 (showTrendChannel and dnWidth > 0 ?
+                      str.tostring(dnBot, format.mintick) + "  –  " : "") +
+                 str.tostring(dnNow, format.mintick)
             dnTLlab := label.new(bar_index + tlLabelOffset, dnAt,
-                 (dnBroken ? "downtrend broken  " : "downtrend  ") + str.tostring(dnNow, format.mintick),
+                 dnTxt,
                  xloc=xloc.bar_index, yloc=yloc.price, style=label.style_none, size=size.small,
                  textcolor=dnBroken ? color.new(color.lime, 0) : color.new(color.red, 10))
 

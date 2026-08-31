@@ -495,6 +495,55 @@ so the wider box tolerance cannot hide a distinct level.
 
 Gate booleans unchanged.
 
+### V12.16 - a range for every trend, not a single rail
+
+Operator: *"for each pattern uptrend or downtrend, the resistance and support
+-- I need a range for every trend forming."*
+
+A single tangent only ever gives the side the trend leans on. An uptrend line
+is the floor price keeps bouncing off; a downtrend line is the ceiling it
+keeps failing at. Neither says where the move runs out, which is the half you
+need to size a target.
+
+Each trend now draws both rails:
+
+| trend | fitted rail | opposite rail |
+|---|---|---|
+| uptrend | floor, tangent under the lows | ceiling, parallel |
+| downtrend | ceiling, tangent over the highs | floor, parallel |
+
+The opposite rail is offset by the **largest excursion the other extreme made
+from the fitted line over the same span** - the standard parallel channel. So
+an uptrend's ceiling is the furthest the highs ever got above its floor, which
+by construction contains every high in the leg.
+
+Parallel rather than a second independent fit, deliberately. Two free fits can
+diverge, converge or cross, and at that point they no longer describe one
+move. A parallel pair always does.
+
+Labels now carry the range rather than one number:
+
+```
+uptrend  2.60  -  3.06
+downtrend broken  3.70  -  3.94
+```
+
+Both rails extend right, the opposite rail is dashed and lighter so the fitted
+one still reads as primary, and the band between them is shaded at 94%
+transparency (`fillTrendChannel`, on). `showTrendChannel` turns the whole
+addition off.
+
+Verified by porting the maths to Python against a synthetic rising leg: zero
+highs finish above the computed ceiling, confirming the offset is a true
+containing envelope. One low sits below the floor - that is pre-existing V9
+behaviour, whose tangent search starts at `a + 2` and therefore skips the bar
+immediately after the anchor. Not introduced here and left alone.
+
+Object budget checked: worst case about 15 lines against `max_lines_count=50`,
+and 13 labels against `max_labels_count=100`.
+
+Gate booleans unchanged - display only.
+
 ## Method
 
 The audit says *"Do not merge the Codex candidate blindly."* I reproduced its
