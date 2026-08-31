@@ -1,6 +1,6 @@
 //@version=6
 //@strategy_alert_message {{strategy.order.alert_message}}
-strategy("ROSS First Pullback Strategy V12.24 (level + void confluence · paper only)", shorttitle="ROSS FP V12.24", overlay=true,
+strategy("ROSS First Pullback Strategy V12.25 (trade levels back on · paper only)", shorttitle="ROSS FP V12.25", overlay=true,
      initial_capital=2000, currency=currency.USD, default_qty_type=strategy.fixed,
      pyramiding=0, commission_type=strategy.commission.cash_per_order, commission_value=1.0,
      slippage=10, calc_on_every_tick=true, calc_on_order_fills=false,
@@ -668,7 +668,13 @@ gVisual = "8. Display"
 // lost by hiding them: the live numbers are in the PLAN and SIZE rows of the
 // dashboard, which is where an operator reads them anyway. All three remain
 // available as toggles.
-showLevels           = input.bool(false, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
+// V12.25: back ON. V12.15 turned three layers off when the operator asked to
+// hide "the arrow shapes in color". Two of them were the clutter he meant --
+// the signal markers and the shaded bands. This third one was his TRADE: the
+// entry, stop and T1/T2/T3 lines. Hiding it left the plan as text in the
+// dashboard with nothing on the chart to trade against. Markers and bands
+// stay off; the plan comes back.
+showLevels           = input.bool(true, "Show Entry / Stop / Target / Peak", group=gVisual, display = display.none)
 // V12.9: the impulse-peak / high-of-day / pre-market-high series are three
 // more lines drawn on every bar, and MAIN resistance now NAMES its source
 // ("R 3.84 · HOD"), so they say nothing the structure map does not. Default
