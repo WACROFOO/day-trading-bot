@@ -542,6 +542,112 @@ function renderHeader(frame) {
   return { last, chg, hod, row, meta, nf, halted, sym };
 }
 
+/* Catalyst classification. The provider's own category is unreliable across
+   feeds, so the headline itself is scanned for the families the course
+   teaches. This is a labelled heuristic, not a claim about the news: the
+   headline stays visible so you can overrule it in one read.
+
+   Three grades that change what you do:
+     hard     — quantifiable economic value (contract, FDA, earnings, buyout)
+     soft     — attention without quantifiable value (analyst, partnership)
+     dilutive — supply is increasing (offering, placement, shelf) */
+const CATALYST_RULES = [
+  { grade: "dilutive", label: "Dilutive",
+    words: ["offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
+            "registered direct", "atm program", "convertible"],
+    note: "Supply is increasing. Ross treats this as risk context, not a green light — read the size before anything else." },
+  { grade: "hard", label: "Hard catalyst",
+    words: ["fda", "approval", "breakthrough", "phase 1", "phase 2", "phase 3", "clinical",
+            "contract", "awarded", "award", "order", "purchase agreement", "acquisition",
+            "acquire", "merger", "buyout", "earnings", "revenue", "guidance", "profit",
+            "patent", "uplist", "nasdaq listing"],
+    note: "Quantifiable economic value — this is the catalyst family the funnel is built for." },
+  { grade: "soft", label: "Soft catalyst",
+    words: ["partnership", "agreement", "mou", "collaboration", "analyst", "price target",
+            "upgrade", "initiated", "appoint", "names", "joins", "announces", "reverse split",
+            "conference", "presentation", "short interest"],
+    note: "Attention without quantifiable value. It can still move a low float, but it does not justify size on its own." },
+];
+function classifyCatalyst(headline, category) {
+  const hay = ((headline || "") + " " + (category || "")).toLowerCase();
+  for (const rule of CATALYST_RULES) {
+    if (rule.words.some(w => hay.indexOf(w) >= 0)) return rule;
+  }
+  return { grade: "soft", label: "Unclassified", note:
+    "No familiar catalyst family matched. Read the headline yourself before treating it as a reason." };
+}
+const FLAME_BAND = { red: "0–2h", orange: "2–12h", yellow: "12–24h" };
+
+function technicalScore(ctx) {
+  const T = S.pillarThresholds, { last, chg, row, meta } = ctx;
+  return [
+    last != null && last >= T.priceMin && last <= T.priceMax,
+    (chg || 0) >= T.gainMinPct,
+    row && (row.rvolDaily || 0) >= T.rvolMin,
+    meta.floatQuality === "verified" && meta.floatShares < T.floatMaxShares,
+  ].filter(Boolean).length;
+}
+
+function renderCatalyst(host, ctx) {
+  const { nf } = ctx;
+  const score = technicalScore(ctx);
+  host.appendChild(el("div", "divider", "catalyst"));
+  if (!nf) {
+    const head = el("div", "cat-head");
+    head.appendChild(el("span", "flame-chip none", "NO FLAME · >24h"));
+    head.appendChild(el("span", "cat-quality none", "none observed"));
+    host.appendChild(head);
+    const read = el("div", "cat-read");
+    read.innerHTML = score === 4
+      ? "All four technical pillars pass with <b>no qualifying headline</b>. Confirmed course: a technical breakout can supply the justification — news is preferred, never required."
+      : "No headline and " + score + "/4 technical pillars. Nothing here to build a thesis on.";
+    host.appendChild(read);
+    return;
+  }
+  const cls = classifyCatalyst(nf.item.headline, nf.item.category);
+  const flame = nf.flame || "none";
+  const head = el("div", "cat-head");
+  head.appendChild(el("span", "flame-chip " + flame,
+    (flame === "none" ? "NO FLAME" : flame.toUpperCase()) + " · " + (FLAME_BAND[flame] || ">24h")));
+  head.appendChild(el("span", "cat-quality " + cls.grade, cls.label));
+  if (nf.item.category)
+    head.appendChild(el("span", "pill", nf.item.category.replace(/_/g, " ")));
+  host.appendChild(head);
+  host.appendChild(el("p", "headline", nf.item.headline));
+
+  // Age, drawn against the 24-hour window the flame encodes.
+  const age = el("div", "cat-age");
+  age.appendChild(el("span", null, Math.round(nf.ageMin) + " min"));
+  const bar = el("div", "age-bar");
+  const fill = el("i", null, "");
+  fill.style.width = Math.max(2, Math.min(100, nf.ageMin / 1440 * 100)) + "%";
+  fill.style.background = flame === "red" ? "var(--flame-red)"
+    : flame === "orange" ? "var(--flame-orange)"
+    : flame === "yellow" ? "var(--flame-yellow)" : "var(--ink-faint)";
+  bar.appendChild(fill); age.appendChild(bar);
+  age.appendChild(el("span", null, "24h"));
+  host.appendChild(age);
+  const latency = (new Date(nf.item.firstObservedAt) - new Date(nf.item.publishedAt)) / 60000;
+  host.appendChild(el("div", "note", "published " + etClock(nf.item.publishedAt) +
+    " ET · seen by the feed " + (latency >= 1 ? Math.round(latency) + " min later" : "immediately")));
+
+  const read = el("div", "cat-read");
+  if (cls.grade === "dilutive") {
+    read.innerHTML = "<b>Dilution risk.</b> " + cls.note +
+      " A red flame on an offering is not the same signal as a red flame on a contract.";
+  } else if (flame === "red" && score === 4) {
+    read.innerHTML = "<b>Fresh " + cls.label.toLowerCase() + " on a 4/4 candidate.</b> " + cls.note +
+      " This is what the funnel looks for — the chart still decides the entry.";
+  } else if (score === 4) {
+    read.innerHTML = "Four pillars pass, but the headline is <b>" + Math.round(nf.ageMin) +
+      " minutes old</b>. Older news means the crowd has already seen it; demand has to show in volume, not in the story.";
+  } else {
+    read.innerHTML = "<b>Recent news, " + score + "/4 pillars.</b> A flame is recency, never compliance — " +
+      "a flamed stock that fails the measurable pillars is still a reject.";
+  }
+  host.appendChild(read);
+}
+
 function renderQuote(frame, ctx) {
   const { last, chg, row, meta, nf, halted } = ctx;
   const q = $("#quoteCard"); q.textContent = "";
@@ -560,19 +666,7 @@ function renderQuote(frame, ctx) {
   kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
   kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
   q.appendChild(grid);
-  q.appendChild(el("div", "divider", "catalyst"));
-  if (nf) {
-    q.appendChild(el("p", "headline", nf.item.headline));
-    const g2 = el("div", "qgrid");
-    kv(g2, "Published", etClock(nf.item.publishedAt));
-    kv(g2, "Observed", etClock(nf.item.firstObservedAt));
-    kv(g2, "Age", Math.round(nf.ageMin) + " min");
-    kv(g2, "Flame", nf.flame || "none");
-    q.appendChild(g2);
-  } else {
-    q.appendChild(el("div", "placeholder",
-      "No qualifying headline observed. No flame does not disqualify a candidate — news is scored, never required."));
-  }
+  renderCatalyst(q, ctx);
   if (meta.floatQuality === "shares_outstanding_proxy")
     q.appendChild(el("div", "note warn",
       "Shares outstanding shown as an explicit proxy — not float. The supply pillar fails until a verified value exists."));
@@ -820,25 +914,168 @@ function beep(severity) {
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
   C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "timeline",
-  R1: "level2", R2: "verdict", R3: "chart-daily",
+  R1: "level2", R2: "verdict",
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v1";
+// Cards with no slot wait in the tray; drag one onto a card to swap it in.
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-daily"]);
+const DEFAULT_SIZES = {
+  wLeft: 336, wRight: 352,
+  slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
+           C4: 0.42, R1: 1.62, R2: 1.05 },
+};
+const LAYOUT_KEY = "momentum-workstation.layout.v2";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
+let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
 function loadLayout() {
   try {
     const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || "null");
-    if (saved && Object.keys(saved).length === Object.keys(DEFAULT_LAYOUT).length &&
-        Object.values(saved).sort().join() === Object.values(DEFAULT_LAYOUT).sort().join()) {
-      layout = saved;
+    if (saved && saved.layout &&
+        Object.keys(saved.layout).sort().join() === Object.keys(DEFAULT_LAYOUT).sort().join() &&
+        Object.values(saved.layout).every(c => ALL_CARDS.indexOf(c) >= 0) &&
+        new Set(Object.values(saved.layout)).size === Object.keys(DEFAULT_LAYOUT).length) {
+      layout = saved.layout;
+      if (saved.sizes && saved.sizes.slots) sizes = saved.sizes;
     }
   } catch (e) { /* a corrupt or blocked store just means the default desk */ }
 }
 function saveLayout() {
-  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify(layout)); } catch (e) {}
+  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify({ layout: layout, sizes: sizes })); }
+  catch (e) {}
 }
-function cardEl(id) { return document.querySelector('[data-card="' + id + '"]'); }
+function slotEl(id) { return document.querySelector('[data-slot="' + id + '"]'); }
+
+function applySizes() {
+  const grid = $("#grid");
+  grid.style.setProperty("--w-left", sizes.wLeft + "px");
+  grid.style.setProperty("--w-right", sizes.wRight + "px");
+  Object.keys(sizes.slots).forEach(id => {
+    const node = slotEl(id);
+    if (node) { node.style.flexGrow = sizes.slots[id]; node.style.flexBasis = "0"; }
+  });
+}
+
+/* Gutters resize the two panes they sit between. A vertical gutter trades
+   height between the slots above and below it; a horizontal one trades width
+   between two columns, or between the 5-minute and 10-second charts. The pair
+   keeps its combined size, so resizing never breaks the one-screen fit. */
+function wireResizers() {
+  document.querySelectorAll(".gutter").forEach(g => {
+    g.addEventListener("pointerdown", e => beginResize(e, g));
+    g.addEventListener("keydown", e => {
+      const step = e.shiftKey ? 48 : 16;
+      const map = { ArrowLeft: -step, ArrowUp: -step, ArrowRight: step, ArrowDown: step };
+      if (!(e.key in map)) return;
+      e.preventDefault();
+      nudge(g, map[e.key]);
+    });
+  });
+}
+function resizeContext(g) {
+  if (g.dataset.cols) return { kind: "col", side: g.dataset.cols };
+  if (g.dataset.pair) {
+    const [a, b] = g.dataset.pair.split(",");
+    return { kind: "axis", a: a, b: b, horizontal: true };
+  }
+  const [a, b] = g.dataset.between.split(",");
+  return { kind: "axis", a: a, b: b, horizontal: false };
+}
+function nudge(g, delta) {
+  const ctx = resizeContext(g);
+  if (ctx.kind === "col") {
+    const key = ctx.side === "left" ? "wLeft" : "wRight";
+    const sign = ctx.side === "left" ? 1 : -1;
+    sizes[key] = Math.max(220, Math.min(680, sizes[key] + sign * delta));
+  } else {
+    const a = slotEl(ctx.a), b = slotEl(ctx.b);
+    const aPx = ctx.horizontal ? a.offsetWidth : a.offsetHeight;
+    const bPx = ctx.horizontal ? b.offsetWidth : b.offsetHeight;
+    const total = aPx + bPx, min = ctx.horizontal ? 120 : 46;
+    const nextA = Math.max(min, Math.min(total - min, aPx + delta));
+    const sum = (sizes.slots[ctx.a] || 1) + (sizes.slots[ctx.b] || 1);
+    sizes.slots[ctx.a] = sum * (nextA / total);
+    sizes.slots[ctx.b] = sum * (1 - nextA / total);
+  }
+  applySizes(); saveLayout(); afterResize();
+}
+function beginResize(e, g) {
+  e.preventDefault();
+  const ctx = resizeContext(g);
+  const startX = e.clientX, startY = e.clientY;
+  const a = ctx.kind === "axis" ? slotEl(ctx.a) : null;
+  const b = ctx.kind === "axis" ? slotEl(ctx.b) : null;
+  const aPx = a ? (ctx.horizontal ? a.offsetWidth : a.offsetHeight) : 0;
+  const bPx = b ? (ctx.horizontal ? b.offsetWidth : b.offsetHeight) : 0;
+  const total = aPx + bPx, min = ctx.horizontal ? 120 : 46;
+  const sum = a ? (sizes.slots[ctx.a] || 1) + (sizes.slots[ctx.b] || 1) : 0;
+  const baseW = ctx.kind === "col" ? (ctx.side === "left" ? sizes.wLeft : sizes.wRight) : 0;
+  g.setPointerCapture(e.pointerId);
+  g.classList.add("dragging");
+  document.body.classList.add("resizing");
+
+  const move = ev => {
+    if (ctx.kind === "col") {
+      const delta = (ev.clientX - startX) * (ctx.side === "left" ? 1 : -1);
+      const key = ctx.side === "left" ? "wLeft" : "wRight";
+      sizes[key] = Math.max(220, Math.min(680, baseW + delta));
+    } else {
+      const delta = ctx.horizontal ? ev.clientX - startX : ev.clientY - startY;
+      const nextA = Math.max(min, Math.min(total - min, aPx + delta));
+      sizes.slots[ctx.a] = sum * (nextA / total);
+      sizes.slots[ctx.b] = sum * (1 - nextA / total);
+    }
+    applySizes();
+    Object.values(PANES).forEach(p => p.resize());
+  };
+  const up = ev => {
+    g.releasePointerCapture(ev.pointerId);
+    g.classList.remove("dragging");
+    document.body.classList.remove("resizing");
+    g.removeEventListener("pointermove", move);
+    g.removeEventListener("pointerup", up);
+    saveLayout(); afterResize();
+  };
+  g.addEventListener("pointermove", move);
+  g.addEventListener("pointerup", up);
+}
+function afterResize() {
+  Object.values(PANES).forEach(p => p.resize());
+  renderCharts(FRAMES[state.frame]);
+}
+
+/* Cards not on the desk live in the tray. */
+function placedCards() { return Object.values(layout); }
+function renderTray() {
+  const host = $("#trayCards"); host.textContent = "";
+  const spare = ALL_CARDS.filter(c => placedCards().indexOf(c) === -1);
+  if (!spare.length) {
+    host.appendChild(el("div", "tray-empty", "Every card is on the desk."));
+    return;
+  }
+  spare.forEach(id => {
+    const card = cardEl(id);
+    const title = card ? (card.querySelector(".card-title") || {}).textContent || id : id;
+    const item = el("div", "tray-item");
+    item.setAttribute("draggable", "true");
+    item.dataset.trayCard = id;              // never data-card: that selects cards
+    item.appendChild(el("span", "grip", "⠿"));
+    item.appendChild(el("span", null, title));
+    item.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", id);
+      e.dataTransfer.effectAllowed = "move";
+    });
+    host.appendChild(item);
+  });
+}
+function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
 function applyLayout() {
+  const parked = document.getElementById("parked");
+  ALL_CARDS.forEach(id => {
+    if (placedCards().indexOf(id) === -1) {
+      const card = cardEl(id);
+      if (card && card.parentElement !== parked) parked.appendChild(card);
+    }
+  });
   Object.keys(layout).forEach(slotId => {
     const slot = document.querySelector('[data-slot="' + slotId + '"]');
     const card = cardEl(layout[slotId]);
@@ -850,12 +1087,13 @@ function slotOf(card) {
   return found;
 }
 function swapCards(aId, bId) {
-  if (aId === bId) return;
+  if (aId === bId || ALL_CARDS.indexOf(aId) === -1) return;
   const sa = Object.keys(layout).find(k => layout[k] === aId);
   const sb = Object.keys(layout).find(k => layout[k] === bId);
-  if (!sa || !sb) return;
-  layout[sa] = bId; layout[sb] = aId;
-  applyLayout(); saveLayout();
+  if (!sb) return;
+  if (sa) { layout[sa] = bId; layout[sb] = aId; }
+  else { layout[sb] = aId; }        // arrived from the tray: bId goes back to it
+  applyLayout(); saveLayout(); renderTray();
   Object.values(PANES).forEach(p => p.resize());
   render();
 }
@@ -912,10 +1150,20 @@ function wireLayout() {
   });
   $("#btnLayout").onclick = () => {
     layout = Object.assign({}, DEFAULT_LAYOUT);
-    applyLayout(); saveLayout();
+    sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
+    applyLayout(); applySizes(); saveLayout(); renderTray();
     Object.values(PANES).forEach(p => p.resize());
     render();
   };
+  $("#btnTray").onclick = () => {
+    const tray = $("#tray");
+    tray.hidden = !tray.hidden;
+    $("#btnTray").setAttribute("aria-pressed", String(!tray.hidden));
+    if (!tray.hidden) renderTray();
+  };
+  document.addEventListener("dragover", e => {
+    if (e.target.closest("#tray")) e.preventDefault();
+  });
 }
 
 /* ── render ─────────────────────────────────────────────────────────── */
@@ -962,7 +1210,10 @@ function init() {
   const backdrop = document.createElement("div");
   backdrop.id = "expandBackdrop"; backdrop.hidden = true;
   document.body.appendChild(backdrop);
-  loadLayout(); applyLayout(); wireLayout();
+  const parked = document.createElement("div");
+  parked.id = "parked"; parked.hidden = true;
+  document.body.appendChild(parked);
+  loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
 
   $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId + " · deterministic replay";
   $("#disclaimer").textContent = S.disclaimer;

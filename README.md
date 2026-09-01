@@ -164,13 +164,15 @@ python scripts/make_replay_fixture.py                          # regenerate the 
 python scripts/build_dashboard_artifact.py build/workstation.html   # single-file build
 ```
 
-**Layout** — every card is portable. Drag any card header onto another card to
-swap their places, press ⛶ (or `E`) to expand one over the whole workspace, and
-`⟲ Layout` restores the default. The arrangement is saved per browser. The
-default desk fits one viewport with no page scrolling: three scanner cards with
-quote/supply/risk/catalyst beneath them on the left, a large 1-minute chart over
-a 5-minute and 10-second pair in the centre with the alert timeline below, and
-Level 2, the setup verdict and the daily chart on the right.
+**Layout** — every card is portable *and* resizable. Drag a card header onto
+another card to swap places; drag the gutters between cards or columns to
+change their size; ⛶ (or `E`) expands one over the workspace; `⊞ Cards` holds
+cards that are off the desk; `⟲ Layout` restores the defaults. Layout and sizes
+are saved per browser, and the desk stays inside one viewport at every size.
+Default: three scanner cards with quote/supply/risk/catalyst beneath them on
+the left; a large 1-minute chart over a 5-minute and 10-second pair in the
+centre with the alert timeline below; Level 2 (about 60% of the column) over
+the setup verdict on the right. The daily chart starts in the tray.
 
 - **Three scanner cards** in funnel order — Ross-style Five Pillars Scan
   (candidates), Running Up (live acceleration) and Small Cap HOD Momentum
@@ -190,6 +192,12 @@ Level 2, the setup verdict and the daily chart on the right.
 - **Explainable rows**: expanding a Five Pillars row shows each pillar's
   arithmetic against the Confirmed course threshold plus gap, 5m RVOL, 5m
   volume, position in range and spread.
+- **Catalyst, graded** — the card shows the flame band (RED · 0–2h), a
+  hard / soft / dilutive grade classified from the headline, the age drawn
+  against the 24-hour window, feed latency, and a plain-language read against
+  the funnel ("Fresh hard catalyst on a 4/4 candidate — the chart still decides
+  the entry"; "Dilution risk — a red flame on an offering is not the same
+  signal as a red flame on a contract").
 - **Level 2 and Time & Sales** — depth ladder with size bars and wall
   detection, plus a coloured tape. The book is **simulated**, generated
   deterministically from the replay snapshot and labelled on the card.
@@ -222,6 +230,12 @@ session after the close (where the 15-minute delay stops mattering), and paper
 trade the plans through the risk-gated simulator. It also states plainly what
 the delayed feed cannot do — live 1-minute entries — and the 30-session
 progression before that question comes up.
+
+`docs/wiring-market-data.md` is the integration manual: the one normalized
+record contract every card is fed by, a card-to-stream dependency map, and
+step-by-step adapters for market data, reference/float, news, halts and Level 2
+— with the five mistakes that corrupt RVOL, a go-live checklist, and the cost
+ladder in the order each upgrade becomes worth paying for.
 
 Ten **synthetic** symbols exercise the behaviours worth testing: a 5/5 leader
 with a clean first pullback, a low-float runner with no news, a gapper that

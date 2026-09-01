@@ -313,7 +313,7 @@ def test_ui_chart_stack_is_1m_large_over_5m_and_10s(page):
     10-second side by side beneath it."""
     _seek(page, 124)
     boxes = {c: page.locator(f"[data-card={c}] .chart-host").bounding_box()
-             for c in ("chart-1m", "chart-5m", "chart-10s", "chart-daily")}
+             for c in ("chart-1m", "chart-5m", "chart-10s")}
     one, five, ten = boxes["chart-1m"], boxes["chart-5m"], boxes["chart-10s"]
     assert one["height"] > five["height"]                 # 1m is the big one
     assert one["width"] > five["width"] * 1.5             # and spans the pair
@@ -366,6 +366,103 @@ def test_ui_flames_on_every_scanner_row(page):
     assert "recency" in title or "no qualifying headline" in title
 
 
+def test_ui_gutters_resize_panes_and_persist(page):
+    """Cards are resizable, not just swappable: a gutter trades space between
+    the two panes it sits between, and the sizes are remembered."""
+    before = page.locator("[data-card=level2]").bounding_box()
+    gutter = page.locator('[data-between="R1,R2"]')
+    box = gutter.bounding_box()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    page.mouse.down()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2 + 110, steps=8)
+    page.mouse.up()
+    page.wait_for_timeout(300)
+    after = page.locator("[data-card=level2]").bounding_box()
+    assert after["height"] > before["height"] + 60
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v2'))")
+    assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
+    # the page must still fit after a resize
+    metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
+    assert metrics["sh"] <= metrics["ih"] + 2
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+
+
+def test_ui_columns_resize(page):
+    """The whole right column can be widened for the book."""
+    before = page.locator("[data-col=right]").bounding_box()
+    gutter = page.locator('.gutter-h[data-cols=right]')
+    box = gutter.bounding_box()
+    page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
+    page.mouse.down()
+    page.mouse.move(box["x"] - 80, box["y"] + box["height"] / 2, steps=8)
+    page.mouse.up()
+    page.wait_for_timeout(300)
+    after = page.locator("[data-col=right]").bounding_box()
+    assert after["width"] > before["width"] + 50
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+
+
+def test_ui_level2_owns_more_than_half_the_right_column(page):
+    """Level 2 and the book get the room by default, per the desk brief."""
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+    column = page.locator("[data-col=right]").bounding_box()
+    book = page.locator("[data-card=level2]").bounding_box()
+    assert book["height"] / column["height"] > 0.5
+
+
+def test_ui_bottom_right_card_is_off_the_desk(page):
+    """The daily chart was removed from the desk but stays available in the
+    tray rather than being deleted."""
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(250)
+    assert page.locator(".slot [data-card=chart-daily]").count() == 0
+    page.locator("#btnTray").click()
+    page.wait_for_timeout(250)
+    assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
+    items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
+    assert items == ["chart-daily"]
+    page.locator("#btnTray").click()
+    page.wait_for_timeout(150)
+
+
+def test_ui_catalyst_card_grades_the_news(page):
+    """The catalyst reads at a glance: flame band, hard/soft/dilutive grade,
+    age against the 24-hour window, and what it means for the funnel."""
+    _seek(page, 124)
+    rows = page.locator("[data-card=scan-pillars] .trow")
+    for i in range(rows.count()):
+        if rows.nth(i).inner_text().startswith("ABCD"):
+            rows.nth(i).click()
+            break
+    page.wait_for_timeout(300)
+    chip = page.locator(".flame-chip").inner_text()
+    assert chip.startswith("RED") and "0–2h" in chip
+    assert page.locator(".cat-quality").inner_text() == "Hard catalyst"
+    assert page.locator(".age-bar i").count() == 1
+    read = page.locator(".cat-read").inner_text()
+    assert "4/4 candidate" in read and "chart still decides" in read
+
+
+def test_ui_catalyst_flags_dilution(page):
+    """An offering headline is graded dilutive however fresh the flame is."""
+    _seek(page, 100)
+    page.evaluate("""() => {
+      const rows = document.querySelectorAll('[data-card=scan-hod] .trow, [data-card=scan-running] .trow');
+      for (const r of rows) if (r.textContent.startsWith('CYQN')) { r.click(); return; }
+      window.__selectFallback = true;
+    }""")
+    page.wait_for_timeout(300)
+    if page.locator("#symTicker").inner_text() != "CYQN":
+        page.goto(page.url.split("?")[0] + "?symbol=CYQN")
+        page.wait_for_timeout(600)
+        _seek(page, 100)
+    assert page.locator(".cat-quality").inner_text() == "Dilutive"
+    assert "Dilution risk" in page.locator(".cat-read").inner_text()
+
+
 def test_ui_cards_swap_by_drag_and_persist(page):
     """Any card can be dragged onto any other to trade places, and the desk
     comes back the way it was left."""
@@ -382,8 +479,8 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v1'))")
-    assert saved[target] == "chart-10s"
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v2'))")
+    assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == before

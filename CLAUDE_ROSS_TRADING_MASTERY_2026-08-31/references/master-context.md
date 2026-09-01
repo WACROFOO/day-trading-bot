@@ -236,6 +236,33 @@ pullback (entry 7.20, stop 7.05, target 7.51, three pullback candles, lighter
 pullback volume) rather than two setups. The plan test was pinned to that
 fixture detail and now asserts the invariants instead.
 
+## Workstation: resizable desk and graded catalyst (September 1, 2026)
+
+Fourth layout pass:
+
+- cards are resizable, not only swappable: draggable gutters trade space
+  between adjacent cards and between columns, with keyboard support; sizes
+  persist beside the layout, and the desk stays inside one viewport;
+- Level 2 takes about 60% of the right column by default;
+- the daily chart was removed from the desk at the user's request and lives in
+  a card tray (`⊞ Cards`) rather than being deleted;
+- the catalyst card now grades news: flame band chip, hard/soft/dilutive
+  classification from the headline (a labelled heuristic, headline stays
+  visible), age drawn against the 24-hour flame window, feed latency, and a
+  read that combines flame age with the pillar count — including the two cases
+  the course emphasises (no flame with 4/4 pillars is still a candidate; a
+  flame with failing pillars is still a reject; an offering-type headline is
+  risk context whatever its age).
+
+Bug found and fixed: tray entries carried `data-card`, the same attribute the
+layout manager uses to find cards, so `querySelector` returned a tray row and
+the layout manager parked the wrong node — leaving duplicate tray entries that
+accumulated on every layout reset.
+
+`docs/wiring-market-data.md` documents the normalized record contract and the
+step-by-step for connecting scanners, charts, news, reference/float, halts and
+Level 2 to a real provider.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

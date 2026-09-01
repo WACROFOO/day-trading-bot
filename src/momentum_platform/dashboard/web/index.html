@@ -42,17 +42,23 @@
       <div class="health-sub" id="chartEngineSub">detecting…</div>
     </div>
 
-    <button id="btnLayout" class="btn ghost" title="Restore the default card layout">⟲ Layout</button>
+    <button id="btnTray" class="btn ghost" title="Cards not on the desk">⊞ Cards</button>
+    <button id="btnLayout" class="btn ghost" title="Restore the default layout and sizes">⟲ Layout</button>
     <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇</button>
   </header>
 
   <main class="grid" id="grid">
     <section class="col dock" data-col="left">
-      <div class="slot slot-scan" data-slot="L1"></div>
-      <div class="slot slot-scan" data-slot="L2"></div>
-      <div class="slot slot-scan" data-slot="L3"></div>
-      <div class="slot slot-quote" data-slot="L4"></div>
+      <div class="slot" data-slot="L1" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L1,L2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize scanner cards"></div>
+      <div class="slot" data-slot="L2" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L2,L3" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize scanner cards"></div>
+      <div class="slot" data-slot="L3" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L3,L4" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize quote card"></div>
+      <div class="slot" data-slot="L4" style="flex-grow:1.36"></div>
     </section>
+
+    <div class="gutter gutter-h" data-cols="left" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize left column"></div>
 
     <section class="col workspace" data-col="center">
       <div class="sym-header" id="symHeader">
@@ -63,20 +69,30 @@
         </div>
         <div class="sym-stats" id="symStats"></div>
       </div>
-      <div class="slot slot-chart-main" data-slot="C1"></div>
-      <div class="pair">
-        <div class="slot slot-chart-sub" data-slot="C2"></div>
-        <div class="slot slot-chart-sub" data-slot="C3"></div>
+      <div class="slot" data-slot="C1" style="flex-grow:1.7"></div>
+      <div class="gutter gutter-v" data-between="C1,PAIR" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the 1-minute chart"></div>
+      <div class="pair" data-slot="PAIR" style="flex-grow:1.15">
+        <div class="slot" data-slot="C2" style="flex-grow:1"></div>
+        <div class="gutter gutter-h pair-gutter" data-pair="C2,C3" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize the 5-minute and 10-second charts"></div>
+        <div class="slot" data-slot="C3" style="flex-grow:1"></div>
       </div>
-      <div class="slot slot-timeline" data-slot="C4"></div>
+      <div class="gutter gutter-v" data-between="PAIR,C4" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the alert timeline"></div>
+      <div class="slot" data-slot="C4" style="flex-grow:0.42"></div>
     </section>
 
+    <div class="gutter gutter-h" data-cols="right" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize right column"></div>
+
     <section class="col context" data-col="right">
-      <div class="slot slot-l2" data-slot="R1"></div>
-      <div class="slot slot-verdict" data-slot="R2"></div>
-      <div class="slot slot-daily" data-slot="R3"></div>
+      <div class="slot" data-slot="R1" style="flex-grow:1.62"></div>
+      <div class="gutter gutter-v" data-between="R1,R2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize Level 2"></div>
+      <div class="slot" data-slot="R2" style="flex-grow:1.05"></div>
     </section>
   </main>
+
+  <div id="tray" class="tray" hidden aria-label="Cards not on the desk">
+    <div class="tray-head">Available cards <span class="muted tiny">drag onto any card to swap it in</span></div>
+    <div id="trayCards" class="tray-cards"></div>
+  </div>
 
   <!-- Cards. Each is portable: the layout manager moves them between slots. -->
   <template id="cards">
