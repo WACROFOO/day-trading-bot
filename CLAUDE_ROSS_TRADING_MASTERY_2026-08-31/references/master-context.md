@@ -101,6 +101,21 @@ Default planning model:
 
 The script has received structural review but must be compiled in TradingView before being called production-ready.
 
+## YouTube-corpus knowledge merged (September 1, 2026)
+
+The repository's earlier knowledge base (257 public YouTube transcripts, 7,937 claims, 2,050 mechanical rules in `knowledge-base/`) was reconciled with this bundle. The merged reference is `references/youtube-corpus-integration.md`. Highlights:
+
+- Both sources agree on the Five Pillars, first-pullback trigger/stop/2R structure, light-volume pullback rule, minimal indicator set and R-based review.
+- The corpus adds (Observed, untested): session windows (blackout 09:30–09:35, prime to 10:30, hard stop 11:30), entry gates (above VWAP/9 EMA, MACD positive, pullback index ≤2, support confluence ≥2), scale-out 50/25/25 with breakeven move, daily limits (6% max loss, 50% giveback, green-to-red, 3 strikes, 1–2 trades), LULD halt-band arithmetic, hotkey schemes, extra setups (Gap and Go, dip-and-rip, VWAP reclaim, ABCD, reverse-split bounce).
+- Parameters are distributions, not constants (RVOL 2x–100x, float <1M–<50M with 10–20M reportedly best-performing, gain 2–30%) — sweep in backtests.
+- The flame does not exist in the YouTube corpus (bundle/platform-only concept).
+- FTC 2022 settlement ($3M) noted; treat claimed performance as marketing to be disproved.
+- Bundle wins all conflicts (authenticated course > public video paraphrase); both versions preserved in the integration file.
+
+## Platform build status (September 1, 2026)
+
+`src/momentum_platform/` implements the replay-first backend from `references/scanner-alert-platform-spec.md` (stdlib-only): session calendar, hot state with 1m bar building, clean-room formulas, scanners (Top Gainers/Losers/Gappers with 09:30 freeze, Low Float, Top RVOL, Five Pillars list + rising-edge alert, HOD Momentum with branch labeling, Running Up/Down, 5-in-5, 10-in-10, 52-week breakout), canonical event envelope with reasons and definition versions, notification router (idempotency, cooldown with price-tier override, consolidation, console/JSONL/webhook channels), SQLite event store + watchlist. The older `src/paper_trading` package remains the manual simulator; its audited gaps and bugs are listed in `references/youtube-corpus-integration.md` §7.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.
