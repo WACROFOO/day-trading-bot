@@ -672,16 +672,17 @@ function renderCatalyst(host, ctx) {
 }
 
 function renderQuote(frame, ctx) {
-  const { last, chg, row, meta, nf, halted } = ctx;
+  const { last, chg, row, meta, nf, halted, sym } = ctx;
   const q = $("#quoteCard"); q.textContent = "";
   const grid = el("div", "qgrid");
   const wide = row && row.spread != null && row.price && row.spread / row.price > 0.01;
   kv(grid, "Last", fx(last));
-  kv(grid, "Float", meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "UNKNOWN",
-     meta.floatQuality === "verified" ? null : "down");
+  const qf = effectiveFloat(sym, meta);
+  kv(grid, "Float", qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN",
+     qf.quality === "unknown" ? "down" : null);
   kv(grid, "Prev close", fx(meta.prevClose));
-  kv(grid, "Float source", (meta.floatQuality || "unknown").replace(/_/g, " ").replace(" proxy", ""),
-     meta.floatQuality === "verified" ? null : "down");
+  kv(grid, "Float source", qf.quality.replace(/_/g, " ").replace(" proxy", ""),
+     qf.quality === "unknown" ? "down" : null);
   kv(grid, "Change", pct(chg), dirClass(chg));
   kv(grid, "52w high", fx(meta.high52w));
   kv(grid, "Spread", row ? "$" + fx(row.spread, 3) : "—", wide ? "down" : null);
@@ -782,7 +783,13 @@ function renderVerdict(frame, ctx) {
   const priceOk = last != null && last >= T.priceMin && last <= T.priceMax;
   const gainOk = (chg || 0) >= T.gainMinPct;
   const rvolOk = row && (row.rvolDaily || 0) >= T.rvolMin;
-  const floatOk = meta.floatQuality === "verified" && meta.floatShares < T.floatMaxShares;
+  const fl = effectiveFloat(sym, meta);
+  // Only a float somebody actually verified counts — the feed's, or yours.
+  // A shares-outstanding proxy is not float and must never pass the pillar:
+  // outstanding includes locked-up insider and restricted stock that cannot
+  // hit the tape, so a proxy flatters the very number that decides size.
+  const floatOk = fl.shares != null && fl.shares < T.floatMaxShares &&
+                  (fl.quality === "verified" || fl.quality === "you verified");
   const newsOk = !!nf;
   const technical = [priceOk, gainOk, rvolOk, floatOk].filter(Boolean).length;
   const momentumOk = row && (row.rvol5m || 0) >= 2;
@@ -807,8 +814,14 @@ function renderVerdict(frame, ctx) {
   const verdict = blockers.length ? "PASS" : waits.length ? "WAIT" : "GO";
   const banner = el("div", "verdict-banner " + verdict.toLowerCase());
   banner.appendChild(el("b", null, verdict));
+  // GO needs every condition at once, which is rare by construction. A bare
+  // "WAIT" gives no sense of whether a setup is one condition away or five,
+  // so the banner carries the count and the list below names them.
+  const missing = blockers.length + waits.length;
   banner.appendChild(el("span", null, verdict === "GO" ? "candidate and structure both check out"
-    : verdict === "WAIT" ? "watch, do not enter yet" : "reject this candidate"));
+    : verdict === "WAIT"
+      ? "watch, do not enter yet — " + missing + (missing === 1 ? " condition" : " conditions") + " short"
+      : "reject this candidate"));
   host.appendChild(banner);
 
   const why = el("div", "why");
@@ -831,7 +844,8 @@ function renderVerdict(frame, ctx) {
   line("Price", fx(last), priceOk);
   line("Gain vs close", pct(chg), gainOk);
   line("Daily RVOL", row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
-  line("Float / supply", meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "unknown", floatOk);
+  line("Float / supply", fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" +
+       (fl.quality === "you verified" ? " (yours)" : "") : "unknown", floatOk);
   line("News", newsOk ? "Observed" : "Manual check", newsOk);
   line("Technical score", technical + "/4", technical === 4);
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
@@ -848,6 +862,13 @@ function renderVerdict(frame, ctx) {
 
 /* Sizing lives outside the re-rendered card so the operator can type into it
    while the replay keeps running. The dollar risk is always theirs. */
+function syncFloatInput() {
+  const box = document.getElementById("floatInput");
+  if (!box || document.activeElement === box) return;   // never fight the typist
+  const mine = userFloats()[state.selected];
+  box.value = mine > 0 ? mine : "";
+}
+
 function renderSizing(plan, row) {
   const out = $("#sizingOut"); out.textContent = "";
   const risk = Number(state.riskDollars);
@@ -1211,6 +1232,37 @@ function openingSymbol() {
   return names[0] || null;
 }
 
+
+/* Float the operator looked up themselves.
+
+   No free data source publishes float, so the feed reports it unknown and the
+   supply pillar fails — correctly, because guessing a float would be inventing
+   the number that decides position size. But a pillar that can never pass caps
+   the technical score at 3/4 forever, and the verdict matrix treats 3/4 as a
+   WAIT, so the desk was structurally incapable of ever reaching GO.
+
+   The way out is not to relax the pillar. It is to let you supply the number
+   you verified yourself, and to label it as yours rather than the feed's. */
+const FLOAT_KEY = "desk.floats.v1";
+function userFloats() {
+  try { return JSON.parse(localStorage.getItem(FLOAT_KEY) || "{}"); }
+  catch (e) { return {}; }
+}
+function setUserFloat(symbol, millions) {
+  const all = userFloats();
+  if (millions == null || !(millions > 0)) delete all[symbol];
+  else all[symbol] = millions;
+  try { localStorage.setItem(FLOAT_KEY, JSON.stringify(all)); } catch (e) {}
+}
+/* Feed value wins when the feed has one; otherwise yours, marked as yours. */
+function effectiveFloat(symbol, meta) {
+  if (meta && meta.floatQuality === "verified" && meta.floatShares)
+    return { shares: meta.floatShares, quality: "verified" };
+  const mine = userFloats()[symbol];
+  if (mine > 0) return { shares: mine * 1e6, quality: "you verified" };
+  return { shares: meta ? meta.floatShares : null, quality: (meta && meta.floatQuality) || "unknown" };
+}
+
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
   const frame = FRAMES[state.frame];
@@ -1274,12 +1326,22 @@ function init() {
     }
     syncTransport(); render();
   });
+  const floatInput = $("#floatInput");
+  // Kept outside the re-rendered body, like the risk box, so typing a number
+  // is not interrupted by the next frame.
+  floatInput.oninput = e => {
+    const v = parseFloat(e.target.value);
+    setUserFloat(state.selected, isNaN(v) ? null : v);
+    render();
+  };
+
   const riskInput = $("#riskInput");
   riskInput.value = state.riskDollars;
   riskInput.oninput = e => {
     state.riskDollars = e.target.value;
     const frame = FRAMES[state.frame];
     renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
+    syncFloatInput();
   };
   $("#btnSound").onclick = () => {
     state.sound = !state.sound;

@@ -631,3 +631,26 @@ def test_an_empty_chart_pane_explains_itself_above_the_canvas():
     block = css.split(".chart-note{")[1].split("}")[0]
     assert "z-index" in block, "the note must sit above the chart canvases"
     assert "background" in block, "the note needs a ground to stay legible"
+
+
+def test_a_shares_outstanding_proxy_never_passes_the_float_pillar():
+    """Outstanding includes locked-up insider and restricted stock that cannot
+    reach the tape, so a proxy flatters the number that decides position size."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert 'fl.quality === "verified" || fl.quality === "you verified"' in app, \
+        "only a verified float — the feed's or the operator's — may pass"
+    assert "shares_outstanding_proxy" not in app.split("const floatOk")[1][:400]
+
+
+def test_the_operator_can_supply_a_float_the_feed_lacks():
+    """No free source publishes float, so a pillar that can only be satisfied
+    by the feed caps the technical score at 3/4 forever and makes GO
+    unreachable. The way out is the operator's own verified number."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    html = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+            / "dashboard" / "web" / "index.html").read_text()
+    assert 'id="floatInput"' in html
+    assert "function setUserFloat" in app and "function effectiveFloat" in app
+    assert "you verified" in app, "an operator-supplied float must be labelled as theirs"
