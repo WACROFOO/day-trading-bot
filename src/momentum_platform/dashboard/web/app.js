@@ -83,6 +83,15 @@ const PALETTE = {
   entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
 };
 
+function paneNote(host) {
+  return function (message) {
+    let n = host.querySelector(".chart-note");
+    if (!message) { if (n) n.remove(); return; }
+    if (!n) { n = document.createElement("div"); n.className = "chart-note"; host.appendChild(n); }
+    n.textContent = message;
+  };
+}
+
 function makePane(hostId, daily) {
   const host = document.getElementById(hostId);
   if (!TV) return canvasPane(host);
@@ -113,6 +122,7 @@ function makePane(hostId, daily) {
 
   return {
     engine: "tradingview",
+    note: paneNote(host),
     resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
     render(bars, opts) {
       if (!bars.length) { candles.setData([]); volume.setData([]); return; }
@@ -163,6 +173,7 @@ function canvasPane(host) {
   host.appendChild(canvas);
   return {
     engine: "canvas",
+    note: paneNote(host),
     resize() { canvas.style.height = host.clientHeight + "px"; },
     render(bars, opts) {
       canvas.setAttribute("height", String(Math.max(80, host.clientHeight)));
@@ -277,32 +288,22 @@ function newsFor(sym, nowMs) {
 }
 
 /* ── tiles ──────────────────────────────────────────────────────────── */
-function tileShell(id, title, kind, stateLabel, note, onFreeze) {
-  const t = el("div", "tile" + (kind === "alert" ? " alert-tile" : "") + (state.focusTile === id ? " focused" : ""));
-  t.dataset.tile = id;
-  const head = el("div", "tile-head");
-  head.appendChild(el("span", "tile-title", title));
-  const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : "replay"), stateLabel);
-  st.dataset.state = stateLabel;
-  head.appendChild(st);
-  head.appendChild(el("span", "tile-age", etTime(FRAMES[state.frame].ts)));
-  if (kind === "list") {
-    const fz = el("button", "icon-btn", "❄");
-    fz.title = "Freeze visible order (Space)";
-    fz.setAttribute("aria-pressed", String(!!state.frozen[id]));
-    fz.onclick = e => { e.stopPropagation(); onFreeze(); };
-    head.appendChild(fz);
-  } else {
-    const snd = el("button", "icon-btn", "🔔");
-    snd.title = "Alert sound for this tile — notification only, never a filter";
-    snd.setAttribute("aria-pressed", "true");
-    snd.onclick = e => { e.stopPropagation(); snd.setAttribute("aria-pressed", snd.getAttribute("aria-pressed") === "true" ? "false" : "true"); };
-    head.appendChild(snd);
+function cardHead(card, title, stateLabel, extras) {
+  const head = el("div", "card-head");
+  head.setAttribute("draggable", "true");
+  head.appendChild(el("span", "grip", "⠿"));
+  head.appendChild(el("span", "card-title", title));
+  if (stateLabel) {
+    const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : "replay"), stateLabel);
+    st.dataset.state = stateLabel;
+    head.appendChild(st);
   }
-  head.onclick = () => { state.focusTile = id; render(); };
-  t.appendChild(head);
-  if (note) t.appendChild(el("div", "tile-note", note));
-  return t;
+  (extras || []).forEach(n => head.appendChild(n));
+  const ex = el("button", "icon-btn expand", "⛶");
+  ex.title = "Expand (E)";
+  head.appendChild(ex);
+  card.appendChild(head);
+  return head;
 }
 
 function flameFor(symbol, nowMs) {
@@ -313,7 +314,8 @@ function flameFor(symbol, nowMs) {
   return el_;
 }
 
-function renderListTile(id, frame) {
+function fillListCard(card, id, frame) {
+  card.textContent = "";
   const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
   const rows = (frame.lists[id] || []).map(rowObj);
   const froz = state.frozen[id];
@@ -324,14 +326,21 @@ function renderListTile(id, frame) {
     ordered = froz.order.map(s => byS[s]).filter(Boolean);
     pending = rows.filter(r => froz.order.indexOf(r.symbol) === -1).length;
   }
-  const tile = tileShell(id, meta.title, "list", froz ? "FROZEN" : "REPLAY", meta.note, () => {
+  const age = el("span", "tile-age", etTime(frame.ts));
+  const fz = el("button", "icon-btn", "❄");
+  fz.title = "Freeze visible order (Space)";
+  fz.setAttribute("aria-pressed", String(!!froz));
+  fz.onclick = e => {
+    e.stopPropagation();
     state.frozen[id] = froz ? null : { order: rows.map(r => r.symbol) };
     if (!state.frozen[id]) delete state.frozen[id];
     render();
-  });
+  };
+  cardHead(card, meta.title, froz ? "FROZEN" : "REPLAY", [age, fz]);
+  card.appendChild(el("div", "tile-note", meta.note));
   const cols = el("div", "tile-cols list-cols");
   ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
-  tile.appendChild(cols);
+  card.appendChild(cols);
   const body = el("div", "tile-rows");
   if (!ordered.length)
     body.appendChild(el("div", "empty", "No symbol currently meets all four technical pillars. An empty list is a real answer."));
@@ -359,10 +368,9 @@ function renderListTile(id, frame) {
     if (state.openRow === id + "|" + r.symbol) body.appendChild(reasonsDrawer(r, sym, id));
   });
   state.prevRowKeys[id] = ordered.map(r => r.symbol);
-  tile.appendChild(body);
-  if (pending) tile.appendChild(el("div", "pending",
+  card.appendChild(body);
+  if (pending) card.appendChild(el("div", "pending",
     pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply"));
-  return tile;
 }
 
 function reasonsDrawer(r, sym, listId) {
@@ -418,12 +426,14 @@ function shortBranch(branch, scannerId) {
           .replace(/_/g, "·");
 }
 
-function renderAlertTile(cfg, idx) {
+function fillAlertCard(card, cfg, idx) {
+  card.textContent = "";
   const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 60);
-  const tile = tileShell(cfg.id, cfg.title, "alert", "REPLAY", cfg.note);
+  cardHead(card, cfg.title, "REPLAY", [el("span", "tile-age", etTime(FRAMES[state.frame].ts))]);
+  card.appendChild(el("div", "tile-note", cfg.note));
   const cols = el("div", "tile-cols alert-cols");
   ["Time", "Symbol / news", "Price", "Chg", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
-  tile.appendChild(cols);
+  card.appendChild(cols);
   const body = el("div", "tile-rows");
   if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
   all.forEach(a => {
@@ -447,8 +457,7 @@ function renderAlertTile(cfg, idx) {
     tr.onclick = () => select(a.symbol, cfg.id);
     body.appendChild(tr);
   });
-  tile.appendChild(body);
-  return tile;
+  card.appendChild(body);
 }
 
 /* ── timeline ───────────────────────────────────────────────────────── */
@@ -743,14 +752,34 @@ function renderSizing(plan, row) {
 
 /* ── charts ─────────────────────────────────────────────────────────── */
 const PANES = {};
+function bars10sUpTo(sym, frame) {
+  const all = (S.bars10s || {})[sym] || [];
+  if (!all.length) return [];
+  const upto = frame.barIndex10s != null ? frame.barIndex10s : (frame.barIndex + 1) * 6 - 1;
+  return all.slice(0, Math.min(upto + 1, all.length));
+}
+
 function renderCharts(frame) {
   const sym = state.selected, meta = SYMS[sym] || {};
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
-  PANES.a.render(bars1, { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
-  PANES.b.render(agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+  const common = { hod: hod, plan: plan, openTs: openTs };
+  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true }, common));
+  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true }, common));
+  const sub = bars10sUpTo(sym, frame);
+  if (sub.length) {
+    PANES.d.note(null);
+    // Micro-pullbacks live here: several 10-second candles can form a pause
+    // inside a single green 1-minute candle.
+    PANES.d.render(sub.slice(-180), Object.assign({ vwap: true, ema9: true }, common));
+  } else {
+    PANES.d.render([], {});
+    PANES.d.note("10-second bars need tick or sub-minute data. This feed publishes " +
+                 "1-minute bars at best, so the micro view stays empty rather than " +
+                 "inventing candles.");
+  }
   PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w });
 }
 
@@ -785,6 +814,110 @@ function beep(severity) {
   } catch (e) { /* audio is a convenience; the visual alert always fires */ }
 }
 
+/* ── layout: cards live in named slots, drag a header onto another card to
+   swap them, ⛶ expands one card over the workspace. The arrangement is saved
+   per browser so the desk comes back the way it was left. */
+const DEFAULT_LAYOUT = {
+  L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
+  C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "timeline",
+  R1: "level2", R2: "verdict", R3: "chart-daily",
+};
+const LAYOUT_KEY = "momentum-workstation.layout.v1";
+let layout = Object.assign({}, DEFAULT_LAYOUT);
+
+function loadLayout() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || "null");
+    if (saved && Object.keys(saved).length === Object.keys(DEFAULT_LAYOUT).length &&
+        Object.values(saved).sort().join() === Object.values(DEFAULT_LAYOUT).sort().join()) {
+      layout = saved;
+    }
+  } catch (e) { /* a corrupt or blocked store just means the default desk */ }
+}
+function saveLayout() {
+  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify(layout)); } catch (e) {}
+}
+function cardEl(id) { return document.querySelector('[data-card="' + id + '"]'); }
+function applyLayout() {
+  Object.keys(layout).forEach(slotId => {
+    const slot = document.querySelector('[data-slot="' + slotId + '"]');
+    const card = cardEl(layout[slotId]);
+    if (slot && card && card.parentElement !== slot) slot.appendChild(card);
+  });
+}
+function slotOf(card) {
+  const found = Object.keys(layout).find(k => layout[k] === card.dataset.card);
+  return found;
+}
+function swapCards(aId, bId) {
+  if (aId === bId) return;
+  const sa = Object.keys(layout).find(k => layout[k] === aId);
+  const sb = Object.keys(layout).find(k => layout[k] === bId);
+  if (!sa || !sb) return;
+  layout[sa] = bId; layout[sb] = aId;
+  applyLayout(); saveLayout();
+  Object.values(PANES).forEach(p => p.resize());
+  render();
+}
+function toggleExpand(card) {
+  const backdrop = $("#expandBackdrop");
+  const already = card.classList.contains("expanded");
+  document.querySelectorAll(".card.expanded").forEach(c => c.classList.remove("expanded"));
+  backdrop.hidden = already;
+  if (!already) card.classList.add("expanded");
+  requestAnimationFrame(() => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
+}
+function wireLayout() {
+  const grid = $("#grid");
+  grid.addEventListener("dragstart", e => {
+    const head = e.target.closest(".card-head");
+    if (!head) return;
+    const card = head.closest(".card");
+    e.dataTransfer.setData("text/plain", card.dataset.card);
+    e.dataTransfer.effectAllowed = "move";
+    card.classList.add("dragging");
+  });
+  grid.addEventListener("dragend", () => {
+    document.querySelectorAll(".dragging,.drop-target")
+      .forEach(c => c.classList.remove("dragging", "drop-target"));
+  });
+  grid.addEventListener("dragover", e => {
+    const card = e.target.closest(".card");
+    if (!card || card.classList.contains("dragging")) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    card.classList.add("drop-target");
+  });
+  grid.addEventListener("dragleave", e => {
+    const card = e.target.closest(".card");
+    if (card) card.classList.remove("drop-target");
+  });
+  grid.addEventListener("drop", e => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+    e.preventDefault();
+    card.classList.remove("drop-target");
+    swapCards(e.dataTransfer.getData("text/plain"), card.dataset.card);
+  });
+  grid.addEventListener("click", e => {
+    const btn = e.target.closest(".expand");
+    if (btn) { e.stopPropagation(); toggleExpand(btn.closest(".card")); }
+  });
+  $("#expandBackdrop").addEventListener("click", () => {
+    const open = document.querySelector(".card.expanded");
+    if (open) toggleExpand(open);
+  });
+  $("#btnLayout").onclick = () => {
+    layout = Object.assign({}, DEFAULT_LAYOUT);
+    applyLayout(); saveLayout();
+    Object.values(PANES).forEach(p => p.resize());
+    render();
+  };
+}
+
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
   const frame = FRAMES[state.frame];
@@ -795,9 +928,10 @@ function render() {
   badge.textContent = frame.session; badge.className = "badge " + frame.session;
   $("#feedText").textContent = "REPLAY";
   $("#feedAge").textContent = S.generatedFrom;
-  const host = $("#tiles"); host.textContent = "";
-  DOCK_ORDER.forEach(id => host.appendChild(
-    LIST_IDS.indexOf(id) >= 0 ? renderListTile(id, frame) : renderAlertTile(ALERT_TILES[id], state.frame)));
+  document.querySelectorAll(".card[data-kind]").forEach(card => {
+    if (card.dataset.kind === "list") fillListCard(card, card.dataset.scanner, frame);
+    else fillAlertCard(card, ALERT_TILES[card.dataset.scanner], state.frame);
+  });
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame);
@@ -821,6 +955,15 @@ function pause() { state.playing = false; $("#btnPlay").textContent = "▶ Play"
 
 /* ── wiring ─────────────────────────────────────────────────────────── */
 function init() {
+  const tpl = document.getElementById("cards");
+  const holder = document.createDocumentFragment();
+  Array.from(tpl.content.children).forEach(node => holder.appendChild(node.cloneNode(true)));
+  document.getElementById("grid").appendChild(holder);
+  const backdrop = document.createElement("div");
+  backdrop.id = "expandBackdrop"; backdrop.hidden = true;
+  document.body.appendChild(backdrop);
+  loadLayout(); applyLayout(); wireLayout();
+
   $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId + " · deterministic replay";
   $("#disclaimer").textContent = S.disclaimer;
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
@@ -857,11 +1000,21 @@ function init() {
     else if (k === "k" || e.key === "ArrowUp") { state.focusRow = Math.max(0, state.focusRow - 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
     else if (e.key === "Enter") { state.locked = !state.locked; render(); }
     else if (e.key === " ") { const id = state.focusTile; if (LIST_IDS.indexOf(id) >= 0) { state.frozen[id] = state.frozen[id] ? null : { order: rows.map(r => r.symbol) }; if (!state.frozen[id]) delete state.frozen[id]; render(); } e.preventDefault(); }
+    else if (k === "e") {
+      const card = document.querySelector(".card.expanded") ||
+                   cardEl(layout[state.focusTile === "five_pillars_list" ? "L1" : "C1"]);
+      if (card) toggleExpand(card);
+    }
     else if (k === "n") { $("#quoteCard").scrollIntoView({ block: "center" }); }
     else if (k === "a") { $("#btnSound").click(); }
-    else if (e.key === "Escape") { state.locked = false; state.openRow = null; state.openAlert = null; render(); }
+    else if (e.key === "Escape") {
+      const open = document.querySelector(".card.expanded");
+      if (open) { toggleExpand(open); return; }
+      state.locked = false; state.openRow = null; state.openAlert = null; render();
+    }
   });
   PANES.a = makePane("chartA", false);
+  PANES.d = makePane("chartD", false);
   PANES.b = makePane("chartB", false);
   PANES.c = makePane("chartC", true);
   const usingTV = PANES.a.engine === "tradingview";
@@ -872,7 +1025,7 @@ function init() {
     Object.values(PANES).forEach(p => p.resize());
     renderCharts(FRAMES[state.frame]);
   });
-  ["chartA", "chartB", "chartC"].forEach(id => ro.observe(document.getElementById(id)));
+  ["chartA", "chartB", "chartC", "chartD"].forEach(id => ro.observe(document.getElementById(id)));
   window.addEventListener("resize", () => {
     Object.values(PANES).forEach(p => p.resize());
     renderCharts(FRAMES[state.frame]);

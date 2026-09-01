@@ -78,6 +78,22 @@ def test_gappers_frozen_after_open(session):
     assert frames[open_idx]["lists"]["top_gainers"] != frames[-1]["lists"]["top_gainers"]
 
 
+def test_minute_bars_are_aggregates_of_ten_second_bars(session):
+    """The fixture is generated at 10-second resolution and the 1-minute series
+    the scanners consume is built from it, so the timeframes cannot disagree."""
+    sub = session["bars10s"]["ABCD"]
+    minutes = session["bars"]["ABCD"]
+    assert len(sub) == len(minutes) * 6
+    for i, minute in enumerate(minutes):
+        chunk = sub[i * 6:(i + 1) * 6]
+        assert minute[0] == chunk[0][0]                      # same open time
+        assert minute[1] == chunk[0][1]                      # open
+        assert minute[2] == max(c[2] for c in chunk)         # high
+        assert minute[3] == min(c[3] for c in chunk)         # low
+        assert minute[4] == chunk[-1][4]                     # close
+        assert minute[5] == sum(c[5] for c in chunk)         # volume
+
+
 def test_pillar_reasons_are_itemised(session):
     alerts = [a for f in session["frames"] for a in f["alerts"]
               if a["scannerId"] == "five_pillars_alert"]
@@ -156,8 +172,9 @@ def test_halt_transitions_are_critical_and_official(session):
 
 
 def test_plan_bands_do_not_repaint(session):
-    plans = [p for p in session["plans"] if p["symbol"] == "ABCD"]
-    assert len(plans) >= 2, "ABCD should arm more than one setup"
+    plans = session["plans"]
+    assert len(plans) >= 2, "the session should arm several setups"
+    assert any(p["symbol"] == "ABCD" for p in plans), "the leader should arm one"
     for plan in plans:
         assert plan["stop"] < plan["entry"] < plan["target"]
         assert plan["target"] == pytest.approx(
@@ -261,11 +278,10 @@ def _seek(page, frame: int):
 
 
 def test_ui_opens_three_scanner_cards(page):
-    """Three cards in funnel order: candidates, acceleration, breakout."""
+    """Three scanner cards in funnel order: candidates, acceleration, breakout."""
     _seek(page, 118)
-    assert page.locator(".tile").count() == 3
-    for tile in ("five_pillars_list", "running_up", "hod_momentum"):
-        assert page.locator(f"[data-tile={tile}]").count() == 1
+    for card in ("scan-pillars", "scan-running", "scan-hod"):
+        assert page.locator(f"[data-card={card}]").count() == 1
 
 
 def test_ui_tiles_report_state(page):
@@ -274,47 +290,52 @@ def test_ui_tiles_report_state(page):
 
 
 def test_ui_alert_rows_show_session(page):
-    """Running Up and HOD Momentum both fire premarket and in regular hours, so
-    each row states which session produced it."""
     _seek(page, 150)
-    tags = page.eval_on_selector_all("[data-tile=hod_momentum] .pill.ses",
+    tags = page.eval_on_selector_all("[data-card=scan-hod] .pill.ses",
                                      "els => els.map(e => e.textContent)")
     assert tags and set(tags) <= {"PM", "RTH", "AH"}
 
 
 def test_ui_row_click_links_everything(page):
     _seek(page, 118)
-    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     symbol = page.locator("#symTicker").inner_text()
     assert symbol and symbol != "—"
-    assert f"symbol={symbol}" in page.url                      # deep-linkable
-    assert page.locator("[data-tile=five_pillars_list] .trow.sel").count() >= 1
+    assert f"symbol={symbol}" in page.url
+    assert page.locator("[data-card=scan-pillars] .trow.sel").count() >= 1
     assert page.locator("#quoteCard").inner_text().strip()
     assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_three_charts_always_present(page):
-    """1m execution, 5m structure and daily room are fixed roles — there are no
-    interval toggles to lose."""
-    _seek(page, 118)
-    assert page.locator("canvas").count() == 3
-    for cid in ("#chartA", "#chartB", "#chartC"):
-        box = page.locator(cid).bounding_box()
-        assert box and box["width"] > 200 and box["height"] > 100
-    titles = page.eval_on_selector_all(".chart-title", "els => els.map(e => e.textContent)")
-    assert titles == ["1m · execution", "5m · structure", "Daily · room"]
-    # Each pane fills its container whichever renderer is active.
-    for cid in ("#chartA", "#chartB", "#chartC"):
-        host = page.locator(cid).bounding_box()
-        inner = page.locator(f"{cid} canvas").first.bounding_box()
-        assert inner and abs(inner["width"] - host["width"]) < 4
+def test_ui_chart_stack_is_1m_large_over_5m_and_10s(page):
+    """The requested stack: one large 1-minute chart, with 5-minute and
+    10-second side by side beneath it."""
+    _seek(page, 124)
+    boxes = {c: page.locator(f"[data-card={c}] .chart-host").bounding_box()
+             for c in ("chart-1m", "chart-5m", "chart-10s", "chart-daily")}
+    one, five, ten = boxes["chart-1m"], boxes["chart-5m"], boxes["chart-10s"]
+    assert one["height"] > five["height"]                 # 1m is the big one
+    assert one["width"] > five["width"] * 1.5             # and spans the pair
+    assert abs(five["y"] - ten["y"]) < 4                  # 5m and 10s share a row
+    assert ten["x"] > five["x"] + five["width"] - 4       # side by side
+    assert five["y"] > one["y"] + one["height"] - 4       # below the 1m
+    for cid in boxes:
+        inner = page.locator(f"[data-card={cid}] .chart-host canvas").first.bounding_box()
+        assert inner and abs(inner["width"] - boxes[cid]["width"]) < 4
+
+
+def test_ui_ten_second_chart_has_finer_bars_than_one_minute(page):
+    """10-second bars are the fixture's source of truth; the 1-minute series is
+    their aggregate, so the micro chart must carry strictly more bars."""
+    counts = page.evaluate("""() => {
+      const s = window.__SESSION__, sym = 'ABCD';
+      return {sub: (s.bars10s[sym] || []).length, min: s.bars[sym].length};
+    }""")
+    assert counts["sub"] == counts["min"] * 6
 
 
 def test_ui_reports_its_chart_engine(page):
-    """TradingView Lightweight Charts is the renderer; when the library cannot
-    load the pane falls back to canvas and the header says so rather than
-    showing an empty chart."""
     engine = page.locator("#chartEngine").inner_text()
     assert engine in {"TRADINGVIEW", "CANVAS"}
     sub = page.locator("#chartEngineSub").inner_text()
@@ -322,8 +343,6 @@ def test_ui_reports_its_chart_engine(page):
 
 
 def test_ui_fits_one_viewport(page):
-    """The whole decision path is visible without scrolling the page; only row
-    lists scroll."""
     page.set_viewport_size({"width": 1680, "height": 1000})
     page.wait_for_timeout(400)
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -331,72 +350,116 @@ def test_ui_fits_one_viewport(page):
 
 
 def test_ui_quote_card_sits_under_the_scanners(page):
-    """Quote / supply / risk / catalyst lives at the bottom of the left column."""
-    quote = page.locator("#quoteCard").bounding_box()
-    tiles = page.locator("#tiles").bounding_box()
-    l2 = page.locator("#l2Card").bounding_box()
-    assert quote["y"] > tiles["y"]                       # below the scanner stack
-    assert abs(quote["x"] - tiles["x"]) < 4              # same (left) column
-    assert l2["x"] > quote["x"] + quote["width"]         # Level 2 is on the right
+    quote = page.locator("[data-card=quote]").bounding_box()
+    scan = page.locator("[data-card=scan-pillars]").bounding_box()
+    l2 = page.locator("[data-card=level2]").bounding_box()
+    assert quote["y"] > scan["y"]
+    assert abs(quote["x"] - scan["x"]) < 4
+    assert l2["x"] > quote["x"] + quote["width"]
 
 
 def test_ui_flames_on_every_scanner_row(page):
-    """Confirmed platform: scanner rows carry the news flame, lists and alerts
-    alike. A flame is news age only."""
     _seek(page, 130)
-    assert page.locator("[data-tile=five_pillars_list] .trow .flame").count() >= 1
-    assert page.locator("[data-tile=hod_momentum] .trow .flame").count() >= 1
-    title = page.locator("[data-tile=five_pillars_list] .trow .flame").first.get_attribute("title")
+    assert page.locator("[data-card=scan-pillars] .trow .flame").count() >= 1
+    assert page.locator("[data-card=scan-hod] .trow .flame").count() >= 1
+    title = page.locator("[data-card=scan-pillars] .trow .flame").first.get_attribute("title")
     assert "recency" in title or "no qualifying headline" in title
+
+
+def test_ui_cards_swap_by_drag_and_persist(page):
+    """Any card can be dragged onto any other to trade places, and the desk
+    comes back the way it was left."""
+    before = page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot")
+    target = page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot")
+    page.evaluate("""() => {
+      const dt = new DataTransfer();
+      const src = document.querySelector('[data-card=chart-10s] .card-head');
+      const dst = document.querySelector('[data-card=level2]');
+      src.dispatchEvent(new DragEvent('dragstart', {dataTransfer: dt, bubbles: true}));
+      dst.dispatchEvent(new DragEvent('dragover', {dataTransfer: dt, bubbles: true, cancelable: true}));
+      dst.dispatchEvent(new DragEvent('drop', {dataTransfer: dt, bubbles: true, cancelable: true}));
+    }""")
+    page.wait_for_timeout(300)
+    assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
+    assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == before
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v1'))")
+    assert saved[target] == "chart-10s"
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+    assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == before
+
+
+def test_ui_any_card_expands_and_restores(page):
+    _seek(page, 124)
+    for card in ("chart-1m", "level2", "scan-pillars"):
+        page.locator(f"[data-card={card}] .expand").click()
+        page.wait_for_timeout(250)
+        box = page.locator(f"[data-card={card}]").bounding_box()
+        assert box["width"] > 1400 and box["height"] > 700, card
+        page.keyboard.press("Escape")
+        page.wait_for_timeout(250)
+        assert page.locator(".card.expanded").count() == 0
 
 
 def test_ui_freeze_pins_row_order(page):
     _seek(page, 110)
-    sel = "[data-tile=five_pillars_list] .trow b"
+    sel = "[data-card=scan-pillars] .trow b"
     before = page.eval_on_selector_all(sel, "els => els.map(e => e.textContent)")
-    page.locator("[data-tile=five_pillars_list] .icon-btn").click()
+    page.locator("[data-card=scan-pillars] .card-head .icon-btn:not(.expand)").click()
     page.wait_for_timeout(150)
     _seek(page, 148)
     after = page.eval_on_selector_all(sel, "els => els.map(e => e.textContent)")
     assert before == after
-    assert page.locator("[data-tile=five_pillars_list] .tile-state").inner_text() == "FROZEN"
-    page.locator("[data-tile=five_pillars_list] .icon-btn").click()
+    assert page.locator("[data-card=scan-pillars] .tile-state").inner_text() == "FROZEN"
+    page.locator("[data-card=scan-pillars] .card-head .icon-btn:not(.expand)").click()
     page.wait_for_timeout(150)
+
+
+def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
+    _seek(page, 125)
+    page.keyboard.press("Escape")
+    page.wait_for_timeout(150)
+    page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    drawer = page.locator(".reasons")
+    assert drawer.count() == 1
+    text = drawer.inner_text()
+    for token in ("price $2", "gain", "RVOL", "float", "confirmed course"):
+        assert token in text
 
 
 def test_ui_level2_ladder_renders(page):
     _seek(page, 125)
-    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
-    assert page.locator(".ladder .lp").count() == 16          # 8 levels per side
+    assert page.locator(".ladder .lp").count() == 16
     assert page.locator(".tape .print").count() == 10
     bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
     asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
-    assert bids == sorted(bids, reverse=True)                 # best bid at the top
-    assert asks == sorted(asks)                               # best offer at the top
-    assert bids[0] < asks[0]                                  # never crossed
+    assert bids == sorted(bids, reverse=True)
+    assert asks == sorted(asks)
+    assert bids[0] < asks[0]
     body = page.locator("#l2Card").inner_text().lower()
     assert "simulated" in body and "not licensed market data" in body
 
 
 def test_ui_verdict_mirrors_pine_and_decides(page):
     _seek(page, 125)
-    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
     assert labels == ["Price", "Gain vs close", "Daily RVOL", "Float / supply", "News",
                       "Technical score", "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
-    verdict = page.locator(".verdict-banner b").inner_text()
-    assert verdict in {"GO", "WAIT", "PASS"}
-    assert page.locator(".why-row").count() >= 1              # always says why
+    assert page.locator(".verdict-banner b").inner_text() in {"GO", "WAIT", "PASS"}
+    assert page.locator(".why-row").count() >= 1
 
 
 def test_ui_sizing_needs_the_operators_own_risk(page):
     _seek(page, 125)
-    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     assert "will not assume one for you" in page.locator(".sizing").inner_text()
-    page.locator(".risk-input input").fill("25")
+    page.locator("#riskInput").fill("25")
     page.wait_for_timeout(250)
     sizing = page.locator(".sizing").inner_text()
     assert "Shares" in sizing and "Planned loss" in sizing

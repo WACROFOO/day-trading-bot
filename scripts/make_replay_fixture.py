@@ -126,6 +126,7 @@ SYMBOLS = [
 
 
 def interpolate(waypoints, m):
+    """Piecewise-linear price at fractional minute `m`."""
     if m <= waypoints[0][0]:
         return waypoints[0][1]
     for (m0, p0), (m1, p1) in zip(waypoints, waypoints[1:]):
@@ -199,32 +200,36 @@ def main() -> int:
         for minute, status in sym.halts:
             halt_events.append((minute, sym.symbol, status))
 
+    SUB = 6                      # 10-second bars per minute
     for m in range(MINUTES):
-        ts = START + timedelta(minutes=m)
-        iso = ts.isoformat().replace("+00:00", "Z")
+        ts_minute = START + timedelta(minutes=m)
+        iso_minute = ts_minute.isoformat().replace("+00:00", "Z")
         for minute, symbol, status in halt_events:
             if minute == m:
                 lines.append(json.dumps({"type": "halt", "symbol": symbol,
-                                         "status": status, "ts": iso}))
+                                         "status": status, "ts": iso_minute}))
         for sym in SYMBOLS:
-            close = interpolate(sym.waypoints, m)
-            prev = interpolate(sym.waypoints, m - 1) if m else close
-            jitter = rng.uniform(-sym.noise, sym.noise) * close
-            o = round(prev + jitter, 4)
-            c = round(close, 4)
-            wick = abs(rng.uniform(0, sym.noise * 2)) * close
-            h = round(max(o, c) + wick, 4)
-            l = round(min(o, c) - wick, 4)
             mult = sym.volume_spikes.get(m, 1.0)
-            # Premarket carries a fraction of regular-session participation.
             session_scale = 0.25 if m < OPEN_M else 1.0
-            v = int(sym.base_volume * mult * session_scale * rng.uniform(0.85, 1.15))
-            lines.append(json.dumps({
-                "type": "bar", "symbol": sym.symbol, "ts": iso,
-                "open": o, "high": h, "low": l, "close": c, "volume": v,
-                "bid": round(c * (1 - sym.spread_frac), 4),
-                "ask": round(c * (1 + sym.spread_frac), 4),
-            }))
+            minute_volume = sym.base_volume * mult * session_scale
+            for k in range(SUB):
+                frac_now = m + k / SUB
+                frac_prev = m + (k - 1) / SUB
+                close = interpolate(sym.waypoints, frac_now)
+                prev = interpolate(sym.waypoints, frac_prev) if (m or k) else close
+                jitter = rng.uniform(-sym.noise, sym.noise) * close
+                o = round(prev + jitter, 4)
+                c = round(close + rng.uniform(-sym.noise, sym.noise) * close * 0.4, 4)
+                wick = abs(rng.uniform(0, sym.noise * 1.6)) * close
+                lines.append(json.dumps({
+                    "type": "bar", "tf": "10s", "symbol": sym.symbol,
+                    "ts": (ts_minute + timedelta(seconds=10 * k)).isoformat().replace("+00:00", "Z"),
+                    "open": o, "high": round(max(o, c) + wick, 4),
+                    "low": round(min(o, c) - wick, 4), "close": c,
+                    "volume": int(minute_volume / SUB * rng.uniform(0.7, 1.3)),
+                    "bid": round(c * (1 - sym.spread_frac), 4),
+                    "ask": round(c * (1 + sym.spread_frac), 4),
+                }))
 
     out.write_text("\n".join(lines) + "\n")
     print(f"wrote {out} ({len(lines)} records, {out.stat().st_size // 1024} KB)")

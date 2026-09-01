@@ -164,32 +164,35 @@ python scripts/make_replay_fixture.py                          # regenerate the 
 python scripts/build_dashboard_artifact.py build/workstation.html   # single-file build
 ```
 
-**Layout** — the whole decision path fits one viewport; only row lists scroll.
-Left: three scanner cards with the quote/supply/risk/catalyst card beneath
-them. Centre: three charts plus the alert timeline. Right: Level 2 and the
-setup verdict.
+**Layout** — every card is portable. Drag any card header onto another card to
+swap their places, press ⛶ (or `E`) to expand one over the whole workspace, and
+`⟲ Layout` restores the default. The arrangement is saved per browser. The
+default desk fits one viewport with no page scrolling: three scanner cards with
+quote/supply/risk/catalyst beneath them on the left, a large 1-minute chart over
+a 5-minute and 10-second pair in the centre with the alert timeline below, and
+Level 2, the setup verdict and the daily chart on the right.
 
 - **Three scanner cards** in funnel order — Ross-style Five Pillars Scan
   (candidates), Running Up (live acceleration) and Small Cap HOD Momentum
   (breakout). Every row carries the news flame, and alert rows tag the session
   (PM / RTH) plus the branch that fired, matching the captured column sets.
-- **Charts render with TradingView Lightweight Charts** (real crosshair, price
-  and time scales, zoom and pan), pinned from cdnjs. If the library cannot
-  load, each pane falls back to a built-in canvas renderer and the header says
-  `CANVAS · library unavailable` rather than showing an empty chart. Neither
-  renderer supplies market data — that comes from the session.
-- **Fixed chart roles**: 1m execution, 5m structure, daily room. Nothing to
-  toggle and nothing to lose on a symbol change.
-- **One selected symbol** drives the header, all three charts and both side
-  columns, with the ticker in the URL for deep links.
+- **Four charts**: 1-minute execution (large), 5-minute structure and
+  10-second micro side by side, daily room. The fixture is generated at
+  10-second resolution and the 1-minute series the scanners consume is its
+  exact aggregate, so no timeframe can disagree with what the scanners saw.
+  A feed without sub-minute data says so rather than inventing candles.
+- **TradingView Lightweight Charts** is the renderer (real crosshair, price and
+  time scales, zoom and pan), pinned from cdnjs, with a canvas fallback and an
+  honest engine badge when the library cannot load.
+- **One selected symbol** drives the header, every chart and both side columns,
+  with the ticker in the URL for deep links.
 - **Row-order freeze** pins a ranking while values keep updating.
 - **Explainable rows**: expanding a Five Pillars row shows each pillar's
   arithmetic against the Confirmed course threshold plus gap, 5m RVOL, 5m
   volume, position in range and spread.
 - **Level 2 and Time & Sales** — depth ladder with size bars and wall
   detection, plus a coloured tape. The book is **simulated**, generated
-  deterministically from the replay snapshot and labelled on the card; no
-  licensed depth feed is connected. A real feed replaces one function.
+  deterministically from the replay snapshot and labelled on the card.
 - **Setup verdict** — mirrors the bundled Pine dashboard's eleven rows, applies
   the playbook GO / WAIT / PASS matrix, always states why, and sizes from the
   operator's own dollar risk.
@@ -209,6 +212,16 @@ is frequently missing — in which case shares outstanding is shown as an
 explicit proxy and the supply pillar fails rather than passing on the wrong
 number. This path was written but could not be exercised in the build
 container, whose proxy blocks the provider.
+
+### Using it from day one
+
+`docs/daily-operating-guide.md` is the step-by-step routine: build today's
+watchlist with `python scripts/daily_watchlist.py --top 8`, pipe the symbols
+into `--live`, rehearse the funnel during the prime window, replay the whole
+session after the close (where the 15-minute delay stops mattering), and paper
+trade the plans through the risk-gated simulator. It also states plainly what
+the delayed feed cannot do — live 1-minute entries — and the 30-session
+progression before that question comes up.
 
 Ten **synthetic** symbols exercise the behaviours worth testing: a 5/5 leader
 with a clean first pullback, a low-float runner with no news, a gapper that

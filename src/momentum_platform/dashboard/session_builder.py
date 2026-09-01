@@ -137,6 +137,38 @@ def build_session_from_records(
         elif kind == "bar":
             bar_records.append(rec)
 
+    # 10-second fixtures are the single source of truth: the 1-minute bars the
+    # scanner engine consumes are aggregated from them, so no chart timeframe
+    # can disagree with what the scanners saw. Feeds that only publish minute
+    # bars (any live provider on a free tier) pass straight through.
+    sub_bars: dict[str, list] = {}
+    if any(r.get("tf") == "10s" for r in bar_records):
+        minute_groups: dict[tuple, list] = {}
+        order: list = []
+        for rec in bar_records:
+            sub_bars.setdefault(rec["symbol"], []).append([
+                int(datetime.fromisoformat(rec["ts"].replace("Z", "+00:00")).timestamp()),
+                rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
+            ])
+            minute_iso = rec["ts"][:17] + "00Z" if len(rec["ts"]) > 17 else rec["ts"]
+            key = (rec["symbol"], minute_iso)
+            if key not in minute_groups:
+                minute_groups[key] = []
+                order.append(key)
+            minute_groups[key].append(rec)
+        bar_records = []
+        for symbol, minute_iso in order:
+            chunk = minute_groups[(symbol, minute_iso)]
+            bar_records.append({
+                "type": "bar", "symbol": symbol, "ts": minute_iso,
+                "open": chunk[0]["open"],
+                "high": max(c["high"] for c in chunk),
+                "low": min(c["low"] for c in chunk),
+                "close": chunk[-1]["close"],
+                "volume": sum(c["volume"] for c in chunk),
+                "bid": chunk[-1].get("bid"), "ask": chunk[-1].get("ask"),
+            })
+
     hot = HotState()
     hot.load_reference([
         ReferenceData(
@@ -279,6 +311,7 @@ def build_session_from_records(
             "session": session_name,
             "feed": {"status": "replay", "lastEventAgeSec": 0},
             "barIndex": len(bars_by_symbol[next(iter(symbols))]) - 1,
+            "barIndex10s": len(bars_by_symbol[next(iter(symbols))]) * 6 - 1 if sub_bars else None,
             "lists": lists,
             "alerts": frame_alerts,
             "halts": dict(halt_state),
@@ -306,6 +339,7 @@ def build_session_from_records(
         "definitionVersions": {s.scanner_id: s.definition_version for s in engine.scanners},
         "symbols": symbols,
         "bars": bars_by_symbol,
+        "bars10s": sub_bars,
         "frames": frames,
         "plans": plans,
     }

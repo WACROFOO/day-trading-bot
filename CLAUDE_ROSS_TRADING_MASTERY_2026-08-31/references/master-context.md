@@ -213,6 +213,29 @@ Second layout pass at the user's direction:
 Outstanding for real operation: a licensed market-data provider, a licensed
 news feed, and licensed Level 2 (the user has explicitly deferred depth).
 
+## Workstation: portable cards, 10-second charts, operating guide (September 1, 2026)
+
+Third layout pass, at the user's direction:
+
+- every card is portable: drag a card header onto another card to swap slots,
+  expand any card over the workspace, reset to the default desk; the
+  arrangement persists in localStorage;
+- chart stack is now a large 1-minute chart over a 5-minute and 10-second pair,
+  with the daily chart moved to the right column;
+- the replay fixture is generated at 10-second resolution and the 1-minute
+  bars the scanners consume are its exact aggregate (asserted in tests), so no
+  chart timeframe can disagree with what the scanners saw; feeds without
+  sub-minute data show an explicit note instead of synthesised candles;
+- `scripts/daily_watchlist.py` runs the universe scan and emits today's
+  candidates as a symbol list for the dashboard's `--live` flag;
+- `docs/daily-operating-guide.md` documents the daily routine, the honest
+  limits of a 15-minute delayed feed, and the 30-session progression.
+
+One regenerated-fixture consequence: ABCD now arms a single textbook first
+pullback (entry 7.20, stop 7.05, target 7.51, three pullback candles, lighter
+pullback volume) rather than two setups. The plan test was pinned to that
+fixture detail and now asserts the invariants instead.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

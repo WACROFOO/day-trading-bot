@@ -42,20 +42,19 @@
       <div class="health-sub" id="chartEngineSub">detecting…</div>
     </div>
 
+    <button id="btnLayout" class="btn ghost" title="Restore the default card layout">⟲ Layout</button>
     <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇</button>
   </header>
 
-  <main class="grid">
-
-    <section class="dock" aria-label="Scanners and symbol context">
-      <div id="tiles"></div>
-      <div class="card quote-card">
-        <div class="card-head">Quote · supply · risk · catalyst</div>
-        <div id="quoteCard" class="card-body"></div>
-      </div>
+  <main class="grid" id="grid">
+    <section class="col dock" data-col="left">
+      <div class="slot slot-scan" data-slot="L1"></div>
+      <div class="slot slot-scan" data-slot="L2"></div>
+      <div class="slot slot-scan" data-slot="L3"></div>
+      <div class="slot slot-quote" data-slot="L4"></div>
     </section>
 
-    <section class="workspace" aria-label="Charts">
+    <section class="col workspace" data-col="center">
       <div class="sym-header" id="symHeader">
         <div class="sym-id">
           <span class="sym-ticker" id="symTicker">—</span>
@@ -64,63 +63,101 @@
         </div>
         <div class="sym-stats" id="symStats"></div>
       </div>
-
-      <figure class="chart-card" id="paneA">
-        <figcaption class="chart-head">
-          <span class="chart-title">1m · execution</span>
-          <span class="chart-role">entry · structural stop · trigger</span>
-          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k hod"></i>HOD</span>
-        </figcaption>
-        <div class="chart-host" id="chartA"></div>
-      </figure>
-
-      <figure class="chart-card" id="paneB">
-        <figcaption class="chart-head">
-          <span class="chart-title">5m · structure</span>
-          <span class="chart-role">is the move still constructive</span>
-          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20</span>
-        </figcaption>
-        <div class="chart-host" id="chartB"></div>
-      </figure>
-
-      <figure class="chart-card" id="paneC">
-        <figcaption class="chart-head">
-          <span class="chart-title">Daily · room</span>
-          <span class="chart-role">resistance · 200 EMA · 52-week high</span>
-          <span class="legend"><i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
-        </figcaption>
-        <div class="chart-host" id="chartC"></div>
-      </figure>
-
-      <div class="timeline-card">
-        <div class="card-head"><span>Alert timeline</span><span class="muted tiny" id="alertCount">0</span></div>
-        <div id="timeline" class="timeline"></div>
+      <div class="slot slot-chart-main" data-slot="C1"></div>
+      <div class="pair">
+        <div class="slot slot-chart-sub" data-slot="C2"></div>
+        <div class="slot slot-chart-sub" data-slot="C3"></div>
       </div>
+      <div class="slot slot-timeline" data-slot="C4"></div>
     </section>
 
-    <section class="context" aria-label="Level 2 and verdict">
-      <div class="card l2-card">
-        <div class="card-head">Level 2 · Time &amp; Sales <span class="tag sim">simulated</span></div>
-        <div id="l2Card" class="card-body l2"></div>
-      </div>
-
-      <div class="card verdict-card">
-        <div class="card-head">Setup verdict <span class="tag">pine mirror</span></div>
-        <div id="verdictCard" class="card-body"></div>
-        <div class="card-body sizing">
-          <label class="risk-input"><span>Your risk / trade $</span>
-            <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
-                   aria-label="Your dollar risk per trade">
-          </label>
-          <div id="sizingOut"></div>
-        </div>
-      </div>
+    <section class="col context" data-col="right">
+      <div class="slot slot-l2" data-slot="R1"></div>
+      <div class="slot slot-verdict" data-slot="R2"></div>
+      <div class="slot slot-daily" data-slot="R3"></div>
     </section>
   </main>
 
+  <!-- Cards. Each is portable: the layout manager moves them between slots. -->
+  <template id="cards">
+    <article class="card" data-card="scan-pillars" data-kind="list" data-scanner="five_pillars_list"></article>
+    <article class="card" data-card="scan-running" data-kind="alert" data-scanner="running_up"></article>
+    <article class="card" data-card="scan-hod" data-kind="alert" data-scanner="hod_momentum"></article>
+
+    <article class="card" data-card="quote">
+      <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
+        <span class="card-title">Quote · supply · risk · catalyst</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="card-body" id="quoteCard"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-1m">
+      <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
+        <span class="card-title">1 minute · execution</span>
+        <span class="chart-role">entry · structural stop · trigger</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k hod"></i>HOD</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="chart-host" id="chartA"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-5m">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">5 minute · structure</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="chart-host" id="chartB"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-10s">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">10 second · micro</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="chart-host" id="chartD"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-daily">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Daily · room</span>
+        <span class="legend"><i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="chart-host" id="chartC"></div>
+    </article>
+
+    <article class="card" data-card="timeline">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Alert timeline</span>
+        <span class="muted tiny" id="alertCount">0</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="card-body timeline" id="timeline"></div>
+    </article>
+
+    <article class="card" data-card="level2">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Level 2 · Time &amp; Sales</span>
+        <span class="tag sim">simulated</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="card-body l2" id="l2Card"></div>
+    </article>
+
+    <article class="card verdict-card" data-card="verdict">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Setup verdict</span>
+        <span class="tag">pine mirror</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="card-body" id="verdictCard"></div>
+      <div class="card-body sizing">
+        <label class="risk-input"><span>Your risk / trade $</span>
+          <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
+                 aria-label="Your dollar risk per trade"></label>
+        <div id="sizingOut"></div>
+      </div>
+    </article>
+  </template>
+
   <footer class="statusbar">
     <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
-    <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
+    <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>E</kbd> expand · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
   </footer>
 </div>
 
