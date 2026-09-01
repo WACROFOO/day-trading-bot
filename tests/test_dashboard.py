@@ -573,3 +573,38 @@ def test_ui_alert_click_seeks_charts(page):
 
 def test_ui_no_javascript_errors(page):
     assert page.errors == []
+
+
+def test_chart_library_is_served_locally_not_from_a_cdn():
+    """A content blocker eating a CDN request must not silently downgrade the
+    charts to the canvas fallback mid-session."""
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    html = (web / "index.html").read_text()
+    vendor = web / "vendor" / "lightweight-charts.standalone.production.js"
+
+    assert vendor.is_file(), "the chart library must be vendored into web/vendor/"
+    assert vendor.stat().st_size > 100_000, "vendored library looks truncated"
+    assert 'src="vendor/lightweight-charts.standalone.production.js"' in html
+    assert "cdnjs.cloudflare.com" not in html, "no CDN dependency for the chart engine"
+    assert (web / "vendor" / "lightweight-charts-LICENSE.txt").is_file(), \
+        "Apache-2.0 requires the licence to travel with the code"
+
+
+def test_page_declares_a_favicon_so_the_console_stays_clean():
+    """An unprompted /favicon.ico 404 buries real errors during a session."""
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    assert 'rel="icon"' in (web / "index.html").read_text()
+
+
+def test_intraday_charts_are_plotted_on_the_new_york_clock():
+    """The chart axis must agree with the session clock.
+
+    lightweight-charts labels epoch seconds on a UTC axis, so an unshifted
+    09:45 setup renders as 13:45 and every level noted off the chart sits four
+    hours from where the scanner and alert timeline put it.
+    """
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert "America/New_York" in app, "chart times must be converted to ET"
+    assert "time: deskTime(b[0])" in app, \
+        "intraday bars must go through the ET conversion, not raw epoch"

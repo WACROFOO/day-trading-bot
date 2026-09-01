@@ -76,6 +76,29 @@ function alertsUpTo(idx) {
    from the session (replay fixture today, a licensed feed later). */
 const TV = window.LightweightCharts || null;
 
+/* lightweight-charts renders epoch seconds on a UTC axis. This desk runs on
+   New York time, so an 09:45 setup would be labelled 13:45 and every price
+   level you noted off the chart would sit four hours from where the scanner,
+   the alert timeline and the header clock put it. Shift each stamp by the ET
+   offset in force on that date — DST-safe, so it stays correct across the
+   March and November changeovers. */
+const ET_PARTS = new Intl.DateTimeFormat("en-US", {
+  timeZone: "America/New_York", hour12: false,
+  year: "numeric", month: "2-digit", day: "2-digit",
+  hour: "2-digit", minute: "2-digit", second: "2-digit",
+});
+function deskTime(epochSeconds) {
+  const p = {};
+  for (const part of ET_PARTS.formatToParts(new Date(epochSeconds * 1000))) {
+    p[part.type] = part.value;
+  }
+  const wallClock = Date.UTC(+p.year, +p.month - 1, +p.day,
+                             (+p.hour) % 24, +p.minute, +p.second) / 1000;
+  return wallClock;
+}
+
+
+
 const PALETTE = {
   bg: "#0b1119", text: "#93a4b8", grid: "#141d27", border: "#1d2836",
   up: "#2ad17f", down: "#ff5f6e", vwap: "#c39bff", ema9: "#4dd2ff",
@@ -129,7 +152,7 @@ function makePane(hostId, daily) {
       const t = i => daily ? bars[i].d : bars[i][0];
       const rows = bars.map((b, i) => daily
         ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
-        : { time: b[0], open: b[1], high: b[2], low: b[3], close: b[4] });
+        : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
       candles.setData(rows);
       volume.setData(bars.map((b, i) => ({
         time: rows[i].time, value: daily ? b.v : b[5],
@@ -1270,7 +1293,8 @@ function init() {
   PANES.c = makePane("chartC", true);
   const usingTV = PANES.a.engine === "tradingview";
   $("#chartEngine").textContent = usingTV ? "TRADINGVIEW" : "CANVAS";
-  $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3" : "library unavailable — fallback";
+  $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3 · local"
+    : "vendor/lightweight-charts…js missing — fallback";
   $("#chartDot").className = "dot " + (usingTV ? "live" : "stale");
   const ro = new ResizeObserver(() => {
     Object.values(PANES).forEach(p => p.resize());
