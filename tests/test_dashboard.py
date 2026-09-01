@@ -728,3 +728,14 @@ def test_chart_panes_carry_the_tradingview_dressing():
                    "session-shade", 'text: "09:30"', 'text: "16:00"', '"#26a69a"', '"#ef5350"'):
         assert needle in app, needle
     assert ".tv-legend{" in css and ".session-shade{" in css
+
+
+def test_ten_second_pane_is_cut_by_time_not_by_index():
+    """Trade-built 10-second bars are sparse, so an index that assumes six per
+    minute overshoots and the micro pane leaks the end of the day into the
+    morning. The cut must be by the frame's timestamp."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function bars10sUpTo")[1].split("\nfunction ")[0]
+    assert "frame.t + 60" in body
+    assert "barIndex10s" not in body and "* 6" not in body

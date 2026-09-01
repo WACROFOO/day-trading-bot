@@ -970,8 +970,16 @@ const PANES = {};
 function bars10sUpTo(sym, frame) {
   const all = (S.bars10s || {})[sym] || [];
   if (!all.length) return [];
-  const upto = frame.barIndex10s != null ? frame.barIndex10s : (frame.barIndex + 1) * 6 - 1;
-  return all.slice(0, Math.min(upto + 1, all.length));
+  // Cut by TIME, never by index. An index assumes six 10-second bars per
+  // minute for every symbol; bars built from real trade prints are sparse
+  // (an empty bucket is skipped, not drawn), so the index overshot and the
+  // micro pane showed the close of the day at 11:17. The frame's minute
+  // covers [t, t+60), so include every 10-second bar that starts inside it.
+  const limit = frame.t + 60;
+  let hi = all.length;                       // bars are sorted; binary search
+  let lo = 0;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (all[mid][0] < limit) lo = mid + 1; else hi = mid; }
+  return all.slice(0, lo);
 }
 
 function renderCharts(frame) {
