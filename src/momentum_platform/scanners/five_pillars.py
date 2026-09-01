@@ -68,8 +68,13 @@ def score_pillars(
 
 
 class FivePillarsList(Scanner):
-    """Ranked list of candidates meeting all four technical pillars,
-    sorted by daily RVOL descending. News is a displayed column, not a gate."""
+    """Ranked list of momentum candidates, sorted by daily RVOL descending.
+
+    Price, gain and relative volume are hard gates. Float gates only when it is
+    known and above the cap; an unknown float is carried on the row as unknown
+    rather than excluding the candidate, because no free source publishes float
+    and a gate on absent data makes the list permanently empty. News is a
+    displayed column, never a gate."""
 
     scanner_id = "five_pillars_list"
     definition_version = "five_pillars_list@1.0.0"
@@ -85,7 +90,29 @@ class FivePillarsList(Scanner):
             if snap.last is None:
                 continue
             reasons, technical, news_ok = score_pillars(snap, now)
-            if technical < 4:
+            # The three measurable pillars are hard gates. The float pillar is
+            # a gate only when float is KNOWN and too large — a verified fail.
+            # An unknown float cannot exclude a candidate, because no free
+            # source publishes float and the list would then be empty forever
+            # on the data most people have. The row carries float="unknown" and
+            # technical_score 3/4 so nothing is silently promoted; the verdict
+            # card still withholds GO until somebody verifies the number.
+            by_filter = {r.filter: r for r in reasons}
+            # Name the gates rather than deriving them by exclusion. News is a
+            # displayed column, never a gate — this class's own docstring says
+            # so, and an earlier version silently gated on it anyway.
+            if not all(by_filter[name].passed
+                       for name in ("price_in_band", "gain_pct", "rvol_daily")):
+                continue
+            # Float gates only when it is KNOWN and too large — a verified
+            # fail. An unknown float cannot exclude anything: no free source
+            # publishes it, so the list would be empty forever on the data
+            # most people have. The row carries float="unknown" and a 3/4
+            # score, so nothing is silently promoted, and the verdict card
+            # still withholds GO until somebody verifies the number.
+            float_reason = by_filter["float_shares"]
+            float_known = float_reason.value != "unknown"
+            if float_known and not float_reason.passed:
                 continue
             rows.append(
                 RankedRow(
@@ -95,6 +122,7 @@ class FivePillarsList(Scanner):
                     | {
                         "technical_score": technical,
                         "full_score": technical + int(news_ok),
+                        "float_verified": float_known,
                         "news": self._news_block(snap, now),
                     },
                     reasons=reasons,

@@ -366,7 +366,7 @@ function fillListCard(card, id, frame) {
   card.appendChild(cols);
   const body = el("div", "tile-rows");
   if (!ordered.length)
-    body.appendChild(el("div", "empty", "No symbol currently meets all four technical pillars. An empty list is a real answer."));
+    body.appendChild(el("div", "empty", "Nothing passes price, gain and RVOL right now. An empty list is a real answer — do not widen the filter to fill it."));
   const prevKeys = state.prevRowKeys[id] || [];
   ordered.forEach((r, i) => {
     const sym = SYMS[r.symbol] || {};

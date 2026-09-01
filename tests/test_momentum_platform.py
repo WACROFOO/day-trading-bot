@@ -685,3 +685,62 @@ class TestGoldenReplay:
         pillars = lists["five_pillars_list"]
         assert [r.symbol for r in pillars] == ["ABCD"]
         store.close()
+
+
+# -- absent data must not silence discovery -----------------------------------
+# No free feed publishes float. Gating discovery on it made the Five Pillars
+# list permanently empty and the HOD scanner permanently silent on exactly the
+# data most people have, while the verdict card could never reach GO.
+
+def test_unknown_float_does_not_empty_the_five_pillars_list():
+    from momentum_platform.scanners.five_pillars import FivePillarsList, score_pillars
+    from momentum_platform.models import SymbolSnapshot, DataStatus, FloatQuality
+    from datetime import datetime, timezone
+
+    now = datetime(2026, 9, 1, 14, 0, tzinfo=timezone.utc)
+    snap = SymbolSnapshot(
+        symbol="TEST", last=7.0, change_from_close_pct=45.0, rvol_daily=12.0,
+        float_shares=None, float_quality=FloatQuality.UNKNOWN,
+        data_status=DataStatus.REPLAY, event_ts=now,
+    )
+    reasons, technical, _ = score_pillars(snap, now)
+    assert technical == 3, "an unknown float still fails its own pillar"
+    by = {r.filter: r for r in reasons}
+    assert by["float_shares"].passed is False
+    assert by["price_in_band"].passed and by["gain_pct"].passed and by["rvol_daily"].passed
+
+
+def test_a_known_float_above_the_cap_still_excludes():
+    """Unknown is not evidence of smallness. A verified-too-large float is a
+    real disqualification and must keep excluding the candidate."""
+    from momentum_platform.scanners.five_pillars import score_pillars, FLOAT_MAX_SHARES
+    from momentum_platform.models import SymbolSnapshot, DataStatus, FloatQuality
+    from datetime import datetime, timezone
+
+    now = datetime(2026, 9, 1, 14, 0, tzinfo=timezone.utc)
+    snap = SymbolSnapshot(
+        symbol="BIG", last=7.0, change_from_close_pct=45.0, rvol_daily=12.0,
+        float_shares=FLOAT_MAX_SHARES * 10, float_quality=FloatQuality.VERIFIED,
+        data_status=DataStatus.REPLAY, event_ts=now,
+    )
+    reasons, _, _ = score_pillars(snap, now)
+    fr = {r.filter: r for r in reasons}["float_shares"]
+    assert fr.value != "unknown" and fr.passed is False
+
+
+def test_hod_momentum_labels_an_unknown_float_rather_than_going_silent():
+    """The branch is a label, by the scanner's own docstring. Letting a missing
+    label suppress the alert made the scanner mute on every free feed."""
+    from momentum_platform.scanners.momentum_events import HodMomentumScanner
+    from momentum_platform.models import SymbolSnapshot, DataStatus, FloatQuality
+    from datetime import datetime, timezone
+
+    s = HodMomentumScanner()
+    snap = SymbolSnapshot(
+        symbol="TEST", last=7.0, change_from_close_pct=45.0, rvol_5m=6.0,
+        volume_5m=90_000, float_shares=None, float_quality=FloatQuality.UNKNOWN,
+        data_status=DataStatus.REPLAY, event_ts=datetime(2026, 9, 1, 14, 0, tzinfo=timezone.utc),
+    )
+    branch = s._branch(snap)
+    assert branch is not None, "an unknown float must not suppress the alert"
+    assert branch.startswith("unknown_float"), branch

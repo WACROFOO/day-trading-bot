@@ -66,8 +66,16 @@ class HodMomentumScanner(Scanner):
             prefix = "low_float"
         elif f is not None and f <= self.medium_float_max:
             prefix = "medium_float"
-        else:
+        elif f is not None:
+            # Float is known and larger than every captured band: this is not a
+            # small-cap momentum name, so there is no branch for it.
             return None
+        else:
+            # Float is unknown, which is the normal case on a free feed. The
+            # branch is a LABEL, as this class's docstring says; letting a
+            # missing label suppress the alert entirely means the scanner goes
+            # permanently silent on exactly the data most people have.
+            prefix = "unknown_float"
         price_tag = "price_20_plus" if (snap.last or 0) >= self.price_band_split else "price_under_20"
         return f"{prefix}_{band}_{price_tag}"
 
