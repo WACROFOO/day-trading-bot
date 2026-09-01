@@ -108,7 +108,19 @@ def build_session_from_records(
     source_name: str,
     max_rows: int = 10,
     data_status: str = "replay",
+    volume_floor_scale: float = 1.0,
 ) -> dict:
+    """Build the dashboard session.
+
+    volume_floor_scale multiplies the scanners' absolute share-count floors
+    (the 25,000-shares-per-5-minutes liquidity gates). Those floors are stated
+    against the consolidated tape. A single-venue feed such as IEX carries a
+    fraction of that volume, so the same floor applied unscaled keeps every
+    event scanner silent on a stock that is plainly running — exactly what a
+    full live session showed: two names up 35-75% on 80x relative volume, and
+    zero alerts all day. Relative-volume gates are unaffected: both sides of
+    those ratios come from the same venue.
+    """
     """Build a session from normalized records. Replay fixtures and live
     provider pulls both land here, so the scanner behaviour is identical."""
 
@@ -146,10 +158,12 @@ def build_session_from_records(
         minute_groups: dict[tuple, list] = {}
         order: list = []
         for rec in bar_records:
-            sub_bars.setdefault(rec["symbol"], []).append([
-                int(datetime.fromisoformat(rec["ts"].replace("Z", "+00:00")).timestamp()),
-                rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
-            ])
+            if rec.get("tf") == "10s":
+                sub_bars.setdefault(rec["symbol"], []).append([
+                    int(datetime.fromisoformat(rec["ts"].replace("Z", "+00:00")).timestamp()),
+                    rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
+                ])
+            # A 1-minute record collapses to a one-bar chunk below, unchanged.
             minute_iso = rec["ts"][:17] + "00Z" if len(rec["ts"]) > 17 else rec["ts"]
             key = (rec["symbol"], minute_iso)
             if key not in minute_groups:
@@ -185,8 +199,11 @@ def build_session_from_records(
     engine = ScannerEngine(
         hot=hot,
         scanners=[
-            FivePillarsAlert(), HodMomentumScanner(), RunningMoveScanner(direction="up"),
-            RunningMoveScanner(direction="down"), squeeze_5_in_5(), squeeze_10_in_10(),
+            FivePillarsAlert(),
+            HodMomentumScanner(min_volume_5m=25_000 * volume_floor_scale),
+            RunningMoveScanner(direction="up", min_volume_5m=25_000 * volume_floor_scale),
+            RunningMoveScanner(direction="down", min_volume_5m=25_000 * volume_floor_scale),
+            squeeze_5_in_5(), squeeze_10_in_10(),
             Breakout52wScanner(),
             FivePillarsList(max_rows=max_rows), TopGappersScanner(max_rows=max_rows),
             top_gainers(max_rows=max_rows), top_relative_volume(max_rows=max_rows),

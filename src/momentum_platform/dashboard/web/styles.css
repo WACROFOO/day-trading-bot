@@ -343,3 +343,15 @@ body.resizing .gutter{pointer-events:auto}
 .age-bar i{position:absolute;left:0;top:0;bottom:0;border-radius:2px}
 
 #parked{display:none}
+
+/* ── TradingView dressing on the chart panes ─────────────────────────── */
+/* OHLC legend: top-left, follows the crosshair, rests on the last bar. */
+.tv-legend{position:absolute;top:4px;left:8px;z-index:4;pointer-events:none;
+  font:10.5px var(--mono);color:#b2b5be;display:flex;gap:5px;align-items:baseline;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.tv-legend .k{color:#787b86;margin-left:4px}
+.tv-legend .u{color:#26a69a} .tv-legend .d{color:#ef5350}
+/* Extended-hours tint, drawn under the series and above the grid.
+   Sits below the empty-pane note (z-index 5) so an explanation still reads. */
+.session-shade{position:absolute;top:0;bottom:0;z-index:1;pointer-events:none;
+  background:rgba(120,130,150,0.06);border-left:1px dashed rgba(255,194,71,0.25);width:0}

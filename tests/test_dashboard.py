@@ -654,3 +654,77 @@ def test_the_operator_can_supply_a_float_the_feed_lacks():
     assert 'id="floatInput"' in html
     assert "function setUserFloat" in app and "function effectiveFloat" in app
     assert "you verified" in app, "an operator-supplied float must be labelled as theirs"
+
+
+# -- mixed 10s / 1m records, and venue-scaled volume floors -------------------
+
+def _day(symbol, tf=None, step=60, n=120, vol=900):
+    from datetime import datetime, timedelta, timezone
+    out = []
+    t0 = datetime(2026, 9, 1, 13, 30, tzinfo=timezone.utc)
+    price = 5.0
+    for i in range(n):
+        ts = t0 + timedelta(seconds=i * step)
+        rec = {"type": "bar", "symbol": symbol, "ts": ts.isoformat().replace("+00:00", "Z"),
+               "open": price, "high": price + 0.05, "low": price - 0.01,
+               "close": price + 0.04, "volume": vol}
+        if tf:
+            rec["tf"] = tf
+        out.append(rec)
+        price += 0.04
+    return out
+
+
+def test_only_true_ten_second_records_feed_the_micro_chart():
+    from momentum_platform.dashboard.session_builder import build_session_from_records
+    recs = [{"type": "reference", "symbol": "TEN", "prev_close": 4.5, "avg_daily_volume": 1e5,
+             "high_52w": 9, "float_shares": None, "float_quality": "unknown"},
+            {"type": "reference", "symbol": "MIN", "prev_close": 4.5, "avg_daily_volume": 1e5,
+             "high_52w": 9, "float_shares": None, "float_quality": "unknown"}]
+    recs += _day("TEN", tf="10s", step=10, n=120)
+    recs += _day("MIN", step=60, n=20)
+    s = build_session_from_records(recs, "t", "t", 10, "iex")
+    assert "TEN" in s["bars10s"] and s["bars10s"]["TEN"]
+    assert "MIN" not in s["bars10s"], "minute bars must never masquerade as 10-second candles"
+    assert s["bars"]["TEN"] and s["bars"]["MIN"], "both symbols still get 1-minute bars"
+
+
+def test_single_venue_scale_lets_a_real_runner_alert():
+    """IEX prints a fraction of consolidated volume. The 25,000-share floor was
+    stated against the consolidated tape, so unscaled it silences every event
+    scanner on a name that is plainly running — a full live session showed
+    two names up 35-75% on 80x RVOL and zero alerts all day."""
+    from datetime import datetime, timedelta, timezone
+    from momentum_platform.dashboard.session_builder import build_session_from_records
+    ET = timezone(timedelta(hours=-4)); day = datetime(2026, 9, 1, 4, 0, tzinfo=ET)
+    recs = [{"type": "reference", "symbol": "IEXR", "prev_close": 4.9, "avg_daily_volume": 40_000,
+             "high_52w": 200, "float_shares": None, "float_quality": "unknown"}]
+    price = 5.0
+    for i in range(300):
+        ts = day + timedelta(minutes=i)
+        # IEX-scale prints: ~1,400 shares a minute at the peak, ~7k per 5 minutes.
+        o, c, v = (price, price + 0.005, 60) if i < 200 else (price, price + 0.09, 1_400)
+        recs.append({"type": "bar", "symbol": "IEXR",
+                     "ts": ts.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
+                     "open": round(o, 2), "high": round(max(o, c) + 0.02, 2),
+                     "low": round(min(o, c) - 0.02, 2), "close": round(c, 2), "volume": v})
+        price = c
+    unscaled = build_session_from_records(recs, "a", "a", 10, "iex", volume_floor_scale=1.0)
+    scaled = build_session_from_records(recs, "b", "b", 10, "iex", volume_floor_scale=0.1)
+    n_un = sum(len(f["alerts"]) for f in unscaled["frames"])
+    n_sc = sum(len(f["alerts"]) for f in scaled["frames"])
+    assert n_un == 0, f"unscaled floor should silence IEX-scale volume, got {n_un}"
+    assert n_sc > 0, "the scaled floor must let the runner alert"
+
+
+def test_chart_panes_carry_the_tradingview_dressing():
+    """Engine alone was not enough: people recognise the OHLC legend, the
+    symbol watermark, the open marker and session tint, and axis labels on
+    the New York clock rather than the browser locale."""
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    app = (web / "app.js").read_text()
+    css = (web / "styles.css").read_text()
+    for needle in ("tv-legend", "subscribeCrosshairMove", "watermark:", "tickMarkFormatter",
+                   "session-shade", 'text: "09:30"', 'text: "16:00"', '"#26a69a"', '"#ef5350"'):
+        assert needle in app, needle
+    assert ".tv-legend{" in css and ".session-shade{" in css

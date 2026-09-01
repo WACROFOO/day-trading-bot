@@ -44,6 +44,14 @@ PAPER_BASE = "https://paper-api.alpaca.markets"
 from .tls import ssl_context
 
 
+# IEX is one of many venues and prints a fraction of consolidated volume.
+# The scanners' 25,000-shares-per-5-minutes liquidity floor is stated against
+# the consolidated tape; applied unscaled to IEX it silenced every event
+# scanner on names running 35-75% on 80x relative volume. This divisor is an
+# independent approximation chosen to be permissive — the same-venue RVOL
+# ratios remain the real gates. Calibrate it against your own journal.
+IEX_VOLUME_FLOOR_SCALE = 0.1
+
 class AlpacaError(RuntimeError):
     """Raised with a message written for a human, not a stack trace."""
 
@@ -166,6 +174,29 @@ class AlpacaClient:
                     break
         return out
 
+    def trades(self, symbols: Iterable[str], start: str, end: Optional[str] = None,
+               limit: int = 10000) -> dict:
+        """Historical trade prints. Free tier: IEX only.
+
+        This is the one sub-minute source the free feed has. Ten-second bars
+        aggregated from it are real prints, not an interpolation of minute
+        bars — the micro chart shows them or stays empty, never invents."""
+        symbols = list(symbols)
+        out: dict = {}
+        for chunk in _chunks(symbols, 100):
+            token = None
+            while True:
+                payload = self._get(self.data_base, "/v2/stocks/trades", {
+                    "symbols": ",".join(chunk), "start": start, "end": end,
+                    "limit": limit, "feed": self.feed, "page_token": token,
+                })
+                for symbol, rows in (payload.get("trades") or {}).items():
+                    out.setdefault(symbol, []).extend(rows or [])
+                token = payload.get("next_page_token")
+                if not token:
+                    break
+        return out
+
     def news(self, symbols: Iterable[str], limit: int = 50,
              start: Optional[str] = None) -> list:
         payload = self._get(self.data_base, "/v1beta1/news", {
@@ -207,6 +238,29 @@ def load_dotenv(path: str = ".env") -> None:
 
 
 # -- normalization ----------------------------------------------------------
+
+
+def aggregate_trades(trades: list, seconds: int = 10) -> list:
+    """Bucket trade prints into fixed OHLCV bars. Empty buckets are skipped:
+    a bar with no prints is absence of trading, not a flat candle."""
+    buckets: dict = {}
+    for tr in trades or []:
+        price, size, ts = tr.get("p"), tr.get("s"), tr.get("t")
+        if not price or not ts or price <= 0:
+            continue
+        stamp = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        epoch = int(stamp.timestamp()) // seconds * seconds
+        b = buckets.get(epoch)
+        if b is None:
+            buckets[epoch] = {"o": price, "h": price, "l": price, "c": price, "v": 0}
+            b = buckets[epoch]
+        b["h"] = max(b["h"], price); b["l"] = min(b["l"], price); b["c"] = price
+        b["v"] += int(size or 0)
+    return [{
+        "ts": datetime.fromtimestamp(e, UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "open": b["o"], "high": b["h"], "low": b["l"], "close": b["c"], "volume": b["v"],
+    } for e, b in sorted(buckets.items())]
+
 
 def _iso(dt: datetime) -> str:
     return dt.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
@@ -267,7 +321,25 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
 
     start, end = session_window(day)
     minute = client.bars(symbols, "1Min", start, end)
+
+    # Sub-minute bars from trade prints. The session builder re-derives the
+    # 1-minute bars from these so every timeframe agrees with what the
+    # scanners saw. Symbols with no prints fall back to the feed's minute bars.
+    ten_second: dict = {}
+    try:
+        for symbol, prints in client.trades(symbols, start, end).items():
+            bars10 = aggregate_trades(prints, 10)
+            if bars10:
+                ten_second[symbol] = bars10
+    except AlpacaError as exc:
+        print(f"  10-second bars unavailable: {exc}")
+        print("  the micro chart will say so; minute bars are unaffected")
+
     for symbol in symbols:
+        for b in ten_second.get(symbol, []):
+            records.append({"type": "bar", "tf": "10s", "symbol": symbol, **b})
+        if symbol in ten_second:
+            continue                       # minutes are derived from the 10s bars
         for r in minute.get(symbol, []):
             close = r.get("c")
             if not close or close <= 0:
@@ -333,6 +405,7 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
         records, session_id="alpaca-" + "-".join(symbols[:3]),
         source_name="alpaca %s feed" % client.feed,
         max_rows=max_rows, data_status="live" if client.feed == "sip" else "iex",
+        volume_floor_scale=1.0 if client.feed == "sip" else IEX_VOLUME_FLOOR_SCALE,
     )
     session["disclaimer"] = (
         "Alpaca %s feed. IEX is one venue, so absolute volume is a fraction of "

@@ -118,24 +118,86 @@ function paneNote(host) {
 function makePane(hostId, daily) {
   const host = document.getElementById(hostId);
   if (!TV) return canvasPane(host);
+  /* Styled to read like a TradingView chart: their default candle and volume
+     colours, a symbol/interval watermark, a dashed crosshair with axis labels,
+     a last-price line, and an OHLC legend that follows the cursor. The engine
+     is TradingView's own; what was missing was the dressing people recognise. */
+  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69a80", volDown: "#ef535080",
+                cross: "#758696", label: "#2a2e39" };
+  const hhmm = t => {
+    const d = new Date(t * 1000);   // stamps are already shifted to the ET wall clock
+    return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
+  };
   const chart = TV.createChart(host, {
     width: host.clientWidth || 400, height: host.clientHeight || 200,
-    layout: { background: { color: PALETTE.bg }, textColor: PALETTE.text,
+    layout: { background: { type: "solid", color: PALETTE.bg }, textColor: "#b2b5be",
               fontFamily: '"IBM Plex Mono", ui-monospace, monospace', fontSize: 10 },
-    grid: { vertLines: { color: PALETTE.grid }, horzLines: { color: PALETTE.grid } },
-    rightPriceScale: { borderColor: PALETTE.border, scaleMargins: { top: 0.08, bottom: 0.26 } },
-    timeScale: { borderColor: PALETTE.border, timeVisible: !daily, secondsVisible: false,
-                 rightOffset: 2, barSpacing: daily ? 3 : 5 },
-    crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0 },
+    grid: { vertLines: { color: "#1c2230" }, horzLines: { color: "#1c2230" } },
+    rightPriceScale: { borderColor: "#2a2e39", scaleMargins: { top: 0.08, bottom: 0.26 } },
+    timeScale: { borderColor: "#2a2e39", timeVisible: !daily, secondsVisible: false,
+                 rightOffset: 3, barSpacing: daily ? 3 : 6,
+                 // Bars carry ET wall-clock stamps: label them as such and never
+                 // let the browser locale inject "01 sept. '26" mid-axis.
+                 tickMarkFormatter: daily ? undefined : (t => hhmm(t)) },
+    localization: { locale: "en-US", timeFormatter: daily ? undefined : (t => hhmm(t) + " ET") },
+    crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0,
+                 vertLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label },
+                 horzLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label } },
+    watermark: { visible: true, color: "rgba(120,130,150,0.10)", fontSize: 34, text: "",
+                 horzAlign: "center", vertAlign: "center" },
     handleScale: true, handleScroll: true,
   });
   const candles = chart.addCandlestickSeries({
-    upColor: PALETTE.up, downColor: PALETTE.down, borderVisible: false,
-    wickUpColor: PALETTE.up, wickDownColor: PALETTE.down,
+    upColor: TVC.up, downColor: TVC.down, borderVisible: false,
+    wickUpColor: TVC.up, wickDownColor: TVC.down,
+    priceLineVisible: true, lastValueVisible: true, priceLineColor: "#9598a1", priceLineStyle: 1,
   });
   const volume = chart.addHistogramSeries({
-    priceFormat: { type: "volume" }, priceScaleId: "vol", color: "#1c6b47",
+    priceFormat: { type: "volume" }, priceScaleId: "vol", color: TVC.volUp,
+    lastValueVisible: false, priceLineVisible: false,
   });
+
+  /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar. */
+  const legend = document.createElement("div");
+  legend.className = "tv-legend";
+  host.appendChild(legend);
+  let lastRows = [], lastVols = [];
+  const showLegend = (row, vol) => {
+    if (!row) { legend.textContent = ""; return; }
+    const chg = row.open ? (row.close - row.open) / row.open * 100 : 0;
+    const c = row.close >= row.open ? "u" : "d";
+    const cell = (k, v) => '<span class="k">' + k + '</span><span class="' + c + '">' + v + '</span>';
+    legend.innerHTML = cell("O", row.open.toFixed(2)) + cell("H", row.high.toFixed(2)) +
+      cell("L", row.low.toFixed(2)) + cell("C", row.close.toFixed(2)) +
+      '<span class="' + c + '">' + (chg >= 0 ? "+" : "") + chg.toFixed(2) + '%</span>' +
+      (vol != null ? cell("Vol", Math.round(vol).toLocaleString("en-US")) : "");
+  };
+  chart.subscribeCrosshairMove(param => {
+    const tail = lastRows.length - 1;
+    if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail]); return; }
+    const i = lastRows.findIndex(r => r.time === param.time);
+    showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail]);
+  });
+
+  /* Extended-hours shading, the way TradingView's ext-hours mode draws it:
+     premarket and after-hours are tinted so the 09:30 open and 16:00 close
+     read at a glance. Overlays that track the time scale, since the library
+     has no native session bands. */
+  const shadePre = document.createElement("div"), shadePost = document.createElement("div");
+  shadePre.className = "session-shade"; shadePost.className = "session-shade";
+  host.appendChild(shadePre); host.appendChild(shadePost);
+  let sessionBounds = null;   // { open, close } as ET wall-clock epoch seconds
+  const paintShade = () => {
+    if (!sessionBounds || daily) { shadePre.style.width = "0"; shadePost.style.width = "0"; return; }
+    const ts = chart.timeScale();
+    const xo = ts.timeToCoordinate(sessionBounds.open), xc = ts.timeToCoordinate(sessionBounds.close);
+    const w = Math.max(0, host.clientWidth - 58);      // minus the price scale
+    shadePre.style.left = "0";
+    shadePre.style.width = xo != null ? Math.max(0, Math.min(w, xo)) + "px" : "0";
+    if (xc != null) { shadePost.style.left = Math.max(0, xc) + "px"; shadePost.style.width = Math.max(0, w - xc) + "px"; }
+    else shadePost.style.width = "0";
+  };
+  chart.timeScale().subscribeVisibleLogicalRangeChange(paintShade);
   chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
   const lines = {};
   const lineFor = key => (lines[key] = lines[key] ||
@@ -148,16 +210,31 @@ function makePane(hostId, daily) {
     note: paneNote(host),
     resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
     render(bars, opts) {
-      if (!bars.length) { candles.setData([]); volume.setData([]); return; }
-      const t = i => daily ? bars[i].d : bars[i][0];
+      chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
+      if (!bars.length) { candles.setData([]); volume.setData([]); lastRows = []; lastVols = []; showLegend(null); paintShade(); return; }
       const rows = bars.map((b, i) => daily
         ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
         : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
       candles.setData(rows);
+      const vols = bars.map(b => daily ? b.v : b[5]);
       volume.setData(bars.map((b, i) => ({
-        time: rows[i].time, value: daily ? b.v : b[5],
-        color: rows[i].close >= rows[i].open ? "#1c6b4788" : "#7a2b3488",
+        time: rows[i].time, value: vols[i],
+        color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
       })));
+      lastRows = rows; lastVols = vols; showLegend(rows[rows.length - 1], vols[vols.length - 1]);
+      sessionBounds = (!daily && opts.openTs)
+        ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
+      if (candles.setMarkers) {          // 09:30 / 16:00 marked on the bars, as TradingView does
+        const marks = [];
+        if (sessionBounds) {
+          const at = t => rows.find(r => r.time >= t);
+          const o = at(sessionBounds.open), c = at(sessionBounds.close);
+          if (o) marks.push({ time: o.time, position: "belowBar", color: "#ffc247", shape: "arrowUp", text: "09:30" });
+          if (c) marks.push({ time: c.time, position: "aboveBar", color: "#758696", shape: "arrowDown", text: "16:00" });
+        }
+        candles.setMarkers(marks);
+      }
+      paintShade();
       const closes = rows.map(r => r.close);
       const put = (key, series) => {
         if (!series) { if (lines[key]) lines[key].setData([]); return; }
@@ -903,22 +980,22 @@ function renderCharts(frame) {
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
-  const common = { hod: hod, plan: plan, openTs: openTs };
-  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true }, common));
-  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true }, common));
+  const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym };
+  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, tf: "1m" }, common));
+  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
     PANES.d.note(null);
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
-    PANES.d.render(sub.slice(-180), Object.assign({ vwap: true, ema9: true }, common));
+    PANES.d.render(sub.slice(-180), Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
   } else {
     PANES.d.render([], {});
     PANES.d.note("10-second bars need tick or sub-minute data. This feed publishes " +
                  "1-minute bars at best, so the micro view stays empty rather than " +
                  "inventing candles.");
   }
-  PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w });
+  PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
 }
 
 /* ── selection ──────────────────────────────────────────────────────── */

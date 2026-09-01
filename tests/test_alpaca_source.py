@@ -57,6 +57,9 @@ def client(monkeypatch):
         if path == "/v2/stocks/bars":
             rows = daily if params.get("timeframe") == "1Day" else minutes
             return {"bars": {"ZZZZ": rows}, "next_page_token": None}
+        if path == "/v2/stocks/trades":
+            # No prints in this fixture: every symbol falls back to minute bars.
+            return {"trades": {}, "next_page_token": None}
         if path == "/v1beta1/news":
             return {"news": [{"id": 991, "headline": "ZZZZ wins $40M contract",
                               "created_at": iso(today - timedelta(minutes=30)),
@@ -263,3 +266,84 @@ def test_a_failed_news_lookup_is_announced_not_swallowed(capsys):
     out = capsys.readouterr().out
     assert "news unavailable" in out
     assert "none observed" in out
+
+
+# -- 10-second bars from trade prints ------------------------------------------
+# The free feed publishes minute bars at best, but it does serve historical
+# IEX trade prints. Ten-second bars aggregated from those are real, not an
+# interpolation, so the micro chart can finally show candles honestly.
+
+def test_trades_aggregate_into_ten_second_bars():
+    bars = al.aggregate_trades([
+        {"t": "2026-09-01T13:30:01Z", "p": 5.00, "s": 100},
+        {"t": "2026-09-01T13:30:04Z", "p": 5.10, "s": 50},
+        {"t": "2026-09-01T13:30:09Z", "p": 4.95, "s": 25},
+        {"t": "2026-09-01T13:30:31Z", "p": 5.20, "s": 10},
+    ], 10)
+    assert [b["ts"] for b in bars] == ["2026-09-01T13:30:00Z", "2026-09-01T13:30:30Z"]
+    assert bars[0] == {"ts": "2026-09-01T13:30:00Z", "open": 5.0, "high": 5.1,
+                       "low": 4.95, "close": 4.95, "volume": 175}
+
+
+def test_empty_buckets_are_absent_not_flat():
+    """A ten-second window with no prints is absence of trading, not a
+    flat candle. Inventing one would draw activity that never happened."""
+    bars = al.aggregate_trades([
+        {"t": "2026-09-01T13:30:01Z", "p": 5.00, "s": 1},
+        {"t": "2026-09-01T13:31:01Z", "p": 5.00, "s": 1},
+    ], 10)
+    assert len(bars) == 2
+
+
+def test_bad_prints_are_skipped():
+    assert al.aggregate_trades([{"t": "2026-09-01T13:30:01Z", "p": 0, "s": 1},
+                                {"p": 5.0, "s": 1}]) == []
+
+
+def test_symbols_with_prints_get_ten_second_bars_and_the_rest_keep_minutes():
+    """Mixed feeds are normal: a runner prints all day on IEX, a quiet name
+    may not print at all. Each symbol takes the best data it actually has."""
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            if timeframe == "1Min":
+                return {s: [{"t": "2026-09-01T13:30:00Z", "o": 5, "h": 5.2, "l": 4.9, "c": 5.1, "v": 900}]
+                        for s in symbols}
+            return {}
+
+        def trades(self, symbols, start, end=None, limit=10000):
+            return {"RUNR": [{"t": "2026-09-01T13:30:01Z", "p": 5.0, "s": 100},
+                             {"t": "2026-09-01T13:30:15Z", "p": 5.3, "s": 100}]}
+
+        def news(self, symbols, limit=50, start=None):
+            return []
+
+    recs = al.fetch_records(Stub("PK", "s" * 40), ["RUNR", "QUIET"])
+    ten = [r for r in recs if r.get("tf") == "10s"]
+    assert {r["symbol"] for r in ten} == {"RUNR"}
+    assert len(ten) == 2
+    mins = [r for r in recs if r["type"] == "bar" and r.get("tf") != "10s"]
+    assert {r["symbol"] for r in mins} == {"QUIET"}, "RUNR's minutes are derived from its 10s bars"
+
+
+def test_a_trades_outage_keeps_the_minute_bars(capsys):
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            if timeframe == "1Min":
+                return {"AAA": [{"t": "2026-09-01T13:30:00Z", "o": 5, "h": 5, "l": 5, "c": 5, "v": 1}]}
+            return {}
+
+        def trades(self, symbols, start, end=None, limit=10000):
+            raise al.AlpacaError("trades not entitled")
+
+        def news(self, symbols, limit=50, start=None):
+            return []
+
+    recs = al.fetch_records(Stub("PK", "s" * 40), ["AAA"])
+    assert any(r["type"] == "bar" for r in recs)
+    assert "10-second bars unavailable" in capsys.readouterr().out
