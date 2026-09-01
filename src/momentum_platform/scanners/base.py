@@ -58,6 +58,9 @@ class Scanner:
             "float_m": None if snap.float_shares is None else round(snap.float_shares / 1e6, 2),
             "float_quality": snap.float_quality.value,
             "spread": _round(snap.spread_abs, 4),
+            "gap_pct": _round(snap.gap_pct),
+            "hod_distance_pct": _round(snap.hod_distance_pct),
+            "range_position": _round(snap.range_position, 3),
         }
 
     def _event(

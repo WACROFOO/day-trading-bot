@@ -116,7 +116,7 @@ class CallbackChannel(Channel):
 class RouterConfig:
     cooldown_seconds: Dict[str, float] = field(
         default_factory=lambda: {
-            "hod_momentum": 60.0,
+            "hod_momentum": 180.0,
             "running_up": 120.0,
             "running_down": 120.0,
             "squeeze_5_in_5": 120.0,
@@ -154,7 +154,7 @@ class NotificationRouter:
         self.channels = channels or [ConsoleChannel()]
         self._seen_keys: Dict[str, datetime] = {}
         self._last_alert: Dict[str, tuple] = {}     # (symbol, scanner, branch) -> (ts, price)
-        self._recent_symbol_alert: Dict[str, tuple] = {}  # symbol -> (ts, primary, [also])
+        self._recent_symbol_alert: Dict[str, tuple] = {}  # symbol -> (ts, group dict)
         self.deliveries: List[Delivery] = []
         self.suppressed_count = 0
 
@@ -196,18 +196,31 @@ class NotificationRouter:
                 return False
         self._last_alert[cd_key] = (now, event.values.get("last"))
 
-        # Consolidation: same-symbol alerts within the window group under the
-        # first (primary) alert instead of firing separately.
-        consolidated = None
+        # Consolidation: same-symbol alerts inside the window join the first
+        # (primary) alert's group rather than firing separately. The group dict
+        # is handed to the channels by reference and keeps filling, so a
+        # consumer sees "+N more" without losing any raw event.
         recent = self._recent_symbol_alert.get(event.symbol)
         if recent is not None:
-            first_ts, primary, also = recent
+            first_ts, group = recent
             if (now - first_ts).total_seconds() <= self.config.consolidation_window_seconds:
-                if event.scanner != primary and event.scanner not in also:
-                    also.append(event.scanner)
-                self._suppress(event, f"consolidated_under_{primary}")
+                if event.scanner != group["primary"] and event.scanner not in group["also_triggered"]:
+                    group["also_triggered"].append(event.scanner)
+                group["also_event_ids"].append(event.event_id)
+                group["latest_ts"] = now.isoformat()
+                group["count"] += 1
+                self._suppress(event, f"consolidated_under_{group['primary']}")
                 return False
-        self._recent_symbol_alert[event.symbol] = (now, event.scanner, [])
+        consolidated = {
+            "symbol": event.symbol,
+            "primary": event.scanner,
+            "also_triggered": [],
+            "also_event_ids": [],
+            "first_ts": now.isoformat(),
+            "latest_ts": now.isoformat(),
+            "count": 1,
+        }
+        self._recent_symbol_alert[event.symbol] = (now, consolidated)
 
         for channel in self.channels:
             try:

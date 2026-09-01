@@ -412,10 +412,47 @@ class TestNotificationRouter:
     def test_cooldown_suppresses_then_rearms(self):
         router, delivered = self.collector()
         t0 = utc(2026, 9, 1, 14, 0)
+        cooldown = router.config.cooldown_for("hod_momentum")
+        assert cooldown == 180.0          # Configuration, not a Warrior value
         assert router.handle(make_event(ts=t0))
-        assert not router.handle(make_event(ts=t0 + timedelta(seconds=30)))
-        assert router.handle(make_event(ts=t0 + timedelta(seconds=61)))
+        assert not router.handle(make_event(ts=t0 + timedelta(seconds=cooldown - 1)))
+        assert router.handle(make_event(ts=t0 + timedelta(seconds=cooldown + 1)))
         assert len(delivered) == 2
+
+    def test_consolidation_group_records_later_alerts(self):
+        # The primary alert's group keeps filling so the UI can show "+N more"
+        # while every raw event stays in history.
+        groups = []
+        router = NotificationRouter(
+            RouterConfig(consolidation_window_seconds=3.0),
+            [CallbackChannel(lambda e, c: groups.append(c))],
+        )
+        t0 = utc(2026, 9, 1, 14, 0)
+        router.handle(make_event(ts=t0, scanner="five_pillars_alert"))
+        router.handle(make_event(ts=t0 + timedelta(seconds=1), scanner="running_up"))
+        router.handle(make_event(ts=t0 + timedelta(seconds=2), scanner="squeeze_5_in_5"))
+        assert len(groups) == 1
+        assert groups[0]["primary"] == "five_pillars_alert"
+        assert groups[0]["also_triggered"] == ["running_up", "squeeze_5_in_5"]
+        assert groups[0]["count"] == 3
+
+    def test_hod_requires_meaningful_advance(self):
+        from momentum_platform.scanners import HodMomentumScanner
+        scanner = HodMomentumScanner(min_hod_advance_pct=0.5)
+        hot = HotState()
+        state = hot.get("ABCD")
+        base = snapshot(last=10.0, session_high=10.0, change_from_close_pct=20.0,
+                        rvol_daily=6.0, volume_5m=50_000, float_shares=10_000_000,
+                        event_ts=utc(2026, 9, 1, 14, 0), session=Session.REGULAR)
+        scanner.on_snapshot(base, None, state, hot)
+        tick = snapshot(last=10.02, session_high=10.02, change_from_close_pct=20.0,
+                        rvol_daily=6.0, volume_5m=50_000, float_shares=10_000_000,
+                        event_ts=utc(2026, 9, 1, 14, 1), session=Session.REGULAR)
+        assert scanner.on_snapshot(tick, None, state, hot) == []   # +0.2% is noise
+        real = snapshot(last=10.30, session_high=10.30, change_from_close_pct=20.0,
+                        rvol_daily=6.0, volume_5m=50_000, float_shares=10_000_000,
+                        event_ts=utc(2026, 9, 1, 14, 2), session=Session.REGULAR)
+        assert len(scanner.on_snapshot(real, None, state, hot)) == 1
 
     def test_price_tier_overrides_cooldown(self):
         router, delivered = self.collector()

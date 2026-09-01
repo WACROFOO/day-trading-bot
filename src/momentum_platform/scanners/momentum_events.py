@@ -41,6 +41,7 @@ class HodMomentumScanner(Scanner):
         medium_float_max: float = 100_000_000,
         high_rvol_min: float = 5.0,
         price_band_split: float = 20.0,
+        min_hod_advance_pct: float = 0.25,
     ) -> None:
         self.min_change_pct = min_change_pct
         self.min_recent_rvol = min_recent_rvol
@@ -50,6 +51,10 @@ class HodMomentumScanner(Scanner):
         self.medium_float_max = medium_float_max
         self.high_rvol_min = high_rvol_min
         self.price_band_split = price_band_split
+        # Confirmed platform: HOD Momo does NOT alert on every high-of-day
+        # print. Requiring a minimum advance over the prior high is this
+        # application's independent approximation of that behaviour.
+        self.min_hod_advance_pct = min_hod_advance_pct
         self._prior_hod: dict = {}
 
     def _branch(self, snap: SymbolSnapshot) -> Optional[str]:
@@ -82,13 +87,17 @@ class HodMomentumScanner(Scanner):
         self._prior_hod[key] = current_high
         if prior_hod is None:
             return []  # first observation seeds the HOD; no alert
-        new_hod = current_high > prior_hod + MIN_TICK_BUFFER
+        advance_needed = max(
+            MIN_TICK_BUFFER, prior_hod * self.min_hod_advance_pct / 100.0
+        )
+        new_hod = current_high > prior_hod + advance_needed
         if not new_hod:
             return []
 
         rvol_recent = current.rvol_5m if current.rvol_5m is not None else current.rvol_daily
         reasons = [
-            Reason("new_hod", _round(current_high, 4), True, _round(prior_hod, 4)),
+            Reason("new_hod", _round(current_high, 4), True,
+                   _round(prior_hod + advance_needed, 4)),
             Reason("change_pct", _round(current.change_from_close_pct),
                    (current.change_from_close_pct or 0) >= self.min_change_pct, self.min_change_pct),
             Reason("recent_rvol", _round(rvol_recent),

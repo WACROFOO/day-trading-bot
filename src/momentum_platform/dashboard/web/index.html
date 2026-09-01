@@ -1,0 +1,141 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Workstation — Replay</title>
+<link rel="stylesheet" href="styles.css">
+<body>
+<div id="app" class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <div class="brand-name">Momentum Workstation</div>
+        <div class="brand-sub" id="sessionLabel">loading session…</div>
+      </div>
+    </div>
+
+    <div class="clock">
+      <div class="clock-time" id="clockET">--:--</div>
+      <div class="clock-meta"><span id="sessionBadge" class="badge">—</span><span id="frameCounter" class="muted">—</span></div>
+    </div>
+
+    <div class="transport" role="group" aria-label="Replay transport">
+      <button id="btnPlay" class="btn primary" aria-label="Play or pause replay">▶ Play</button>
+      <button class="btn" data-seek="open">09:30</button>
+      <button class="btn" data-seek="alert">First alert</button>
+      <label class="speed">Speed
+        <select id="speed" aria-label="Replay speed">
+          <option value="1">1×</option>
+          <option value="4" selected>4×</option>
+          <option value="12">12×</option>
+          <option value="40">40×</option>
+        </select>
+      </label>
+      <input id="scrub" class="scrub" type="range" min="0" max="0" value="0" aria-label="Scrub replay">
+    </div>
+
+    <div class="health">
+      <div class="health-row">
+        <span id="feedDot" class="dot replay" aria-hidden="true"></span>
+        <span id="feedText" class="health-text">REPLAY</span>
+      </div>
+      <div class="health-sub" id="feedAge">deterministic fixture</div>
+    </div>
+
+    <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇 Alerts</button>
+  </header>
+
+  <main class="grid">
+
+    <section class="dock" aria-label="Scanner dock">
+      <div class="dock-head">
+        <span>Scanner dock</span>
+        <span class="muted tiny">Tier 1 · click a row to link everything</span>
+      </div>
+      <div id="tiles"></div>
+    </section>
+
+    <section class="workspace" aria-label="Chart workspace">
+      <div class="sym-header" id="symHeader">
+        <div class="sym-id">
+          <span class="sym-ticker" id="symTicker">—</span>
+          <span id="symLock" class="lock" hidden title="Selection locked (Enter)">LOCKED</span>
+          <span id="symFlame" class="flame" hidden></span>
+        </div>
+        <div class="sym-stats" id="symStats"></div>
+      </div>
+
+      <figure class="chart-card">
+        <figcaption class="chart-head">
+          <span class="chart-title">Chart A · execution</span>
+          <span class="seg" role="group" aria-label="Chart A interval">
+            <button class="seg-btn active" data-chart="a" data-tf="1m">1m</button>
+            <button class="seg-btn" data-chart="a" data-tf="10s" disabled title="10-second bars need tick data (Phase 5)">10s</button>
+          </span>
+          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20 <i class="k hod"></i>HOD</span>
+        </figcaption>
+        <canvas id="chartA" height="300"></canvas>
+      </figure>
+
+      <figure class="chart-card">
+        <figcaption class="chart-head">
+          <span class="chart-title">Chart B · context</span>
+          <span class="seg" role="group" aria-label="Chart B interval">
+            <button class="seg-btn active" data-chart="b" data-tf="5m">5m</button>
+            <button class="seg-btn" data-chart="b" data-tf="1D">Daily</button>
+          </span>
+          <span class="legend" id="legendB"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20</span>
+        </figcaption>
+        <canvas id="chartB" height="240"></canvas>
+      </figure>
+
+      <div class="timeline-card">
+        <div class="card-head">
+          <span>Alert timeline</span>
+          <span class="muted tiny" id="alertCount">0 events</span>
+        </div>
+        <div id="timeline" class="timeline"></div>
+      </div>
+    </section>
+
+    <section class="context" aria-label="Symbol context">
+      <div class="card">
+        <div class="card-head">Quote</div>
+        <div id="quoteCard" class="card-body"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">Catalyst</div>
+        <div id="newsCard" class="card-body"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">Supply &amp; risk</div>
+        <div id="riskCard" class="card-body"></div>
+      </div>
+      <div class="card plan">
+        <div class="card-head">Planning bands <span class="tag frozen">frozen on arm</span></div>
+        <div id="planCard" class="card-body"></div>
+      </div>
+      <div class="card muted-card">
+        <div class="card-head">Level 2 · Time &amp; Sales</div>
+        <div class="card-body placeholder">
+          Licence-gated (Phase 3). Depth and prints are not simulated — an
+          empty book is more honest than a fabricated one.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="statusbar">
+    <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
+    <span class="keys">
+      <kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze ·
+      <kbd>1</kbd><kbd>5</kbd><kbd>D</kbd> charts · <kbd>N</kbd> news · <kbd>A</kbd> audio · <kbd>Esc</kbd> back
+    </span>
+  </footer>
+</div>
+
+<div id="rowTip" class="rowtip" hidden></div>
+<script src="session.js"></script>
+<script src="app.js"></script>
+</body>

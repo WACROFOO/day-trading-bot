@@ -142,6 +142,32 @@ intervals but a shared ticker, keyboard model, and the Section 25 MVP acceptance
 The uploaded `SCANNER_ALERT_PLATFORM_IMPLEMENTATION_SPEC.md` was byte-identical to the bundled
 `references/scanner-alert-platform-spec.md`; no merge was required.
 
+## Workstation dashboard built (September 1, 2026)
+
+`src/momentum_platform/dashboard/` implements Steps 1-2 of the dashboard
+specification: the static workstation shell and a fully deterministic replay
+prototype. Nine Tier-1 tiles, one shared selected symbol, two charts with
+independent intervals, row-order freeze, expandable pass/fail reasons, frozen
+planning bands, alert timeline with consolidation groups, and honest float /
+news-latency / halt / Level-2 surfaces. `docs/dashboard-plan.md` answers the
+seven pre-coding deliverables. 77 tests pass, including Chromium-driven
+acceptance tests mapped to the specification's Section 25 criteria (skipped
+automatically when no browser is available).
+
+Engine changes the dashboard work surfaced:
+
+- HOD Momentum now requires a configurable minimum advance over the prior high
+  (0.25% default, an independent approximation) so it stops alerting on every
+  high-of-day print, matching the confirmed platform description;
+- the notification router builds a real consolidation group that keeps filling
+  as later same-symbol alerts arrive, so a consumer can show "+N more" without
+  losing any raw event;
+- ranked rows now carry their own captured values, so a frozen list freezes its
+  numbers as well as its order.
+
+Still not built, by design: live provider adapter, news/SEC/halt feeds, Level 2
+and Time & Sales, external notification channels, broker integration.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

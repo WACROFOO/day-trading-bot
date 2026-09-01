@@ -151,10 +151,54 @@ yfinance tracker is for development and delayed watchlist tracking only; a
 licensed real-time feed (Alpaca/Polygon/Databento) plugs into the same
 `MarketUpdate` interface when ready.
 
+## Workstation dashboard (`src/momentum_platform/dashboard/`)
+
+The scanner-first workstation from
+`CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/dashboard-scanner-chart-knowledge.md`,
+built replay-first (Steps 1–2: shell + deterministic replay, no live feed, no
+Level 2, no broker). Stdlib backend, dependency-free frontend.
+
+```bash
+PYTHONPATH=src python -m momentum_platform.dashboard.server   # http://127.0.0.1:8787
+python scripts/make_replay_fixture.py                          # regenerate the fixture
+python scripts/build_dashboard_artifact.py build/workstation.html   # single-file build
+```
+
+- **Nine Tier-1 tiles** in the spec's order, list and alert architectures kept
+  visibly distinct: Five Pillars Scan, Five Pillars Alert, Top Gappers (frozen
+  at 09:30 ET), Top Gainers, Running Up/Squeezes, HOD Momentum, Top RVOL, Top
+  5m Volume, Halt.
+- **One selected symbol** drives the header, both charts, news, supply/risk and
+  planning bands; the ticker is in the URL so an alert deep-links into the
+  workspace. Chart A stays 1-minute and Chart B stays 5-minute/daily across
+  selection changes.
+- **Row-order freeze** pins a tile's ranking while values keep updating and
+  queues new candidates in a pending badge — the 09:30 misclick guard.
+- **Explainable rows**: expanding a Five Pillars row shows each pillar's
+  arithmetic against the Confirmed course threshold; alerts carry their
+  server-side reasons, definition version and evidence label.
+- **Frozen planning bands** drawn from the first-pullback detector: entry,
+  stop and 2R target stop moving once armed, and a warning fires when the
+  spread is a large share of planned risk.
+- **Honest data surfaces**: float source quality (verified / proxy / unknown)
+  is never silently substituted, news carries both `publishedAt` and
+  `firstObservedAt` so flame latency stays visible, halts come only from an
+  official status transition, and Level 2 / Time & Sales are empty
+  licence-gated placeholders rather than fabricated depth.
+
+Ten **synthetic** symbols exercise the behaviours worth testing: a 5/5 leader
+with a clean first pullback, a low-float runner with no news, a gapper that
+fades after the open, a halt and resumption, a proxy-float name, a squeeze
+ladder, a spread-blown name that qualifies numerically but not practically, and
+a quiet control. The session is produced by running the production scanner
+engine over the fixture, so the prototype cannot drift from the engine.
+
 ## Structure
 
 ```
 src/momentum_platform/  event-driven scanner + alert engine (models, sessions, formulas, state, scanners/, notify, store, engine, pullback, datasources/, cli)
+src/momentum_platform/dashboard/  replay workstation (session_builder, server, web/)
+docs/dashboard-plan.md  component tree, state contract, chart sync, fixture schemas, acceptance map
 src/paper_trading/   manual simulator package (app, ledger, broker, risk_gate, risk, indicators, datafeed, scanner)
 fixtures/market_replay/  deterministic replay fixtures (golden tests)
 scripts/run_scanner.py  scanner CLI

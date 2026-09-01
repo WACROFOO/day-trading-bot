@@ -1,0 +1,591 @@
+/* Momentum Workstation — replay shell.
+   One selected symbol drives every panel. Charts keep their own intervals.
+   Nothing here places an order; scanner rows are research candidates. */
+(function () {
+"use strict";
+const S = window.__SESSION__;
+if (!S) { document.body.innerHTML = "<p style='padding:20px'>session.js failed to load</p>"; return; }
+
+const COL = {};
+S.rowColumns.forEach((c, i) => COL[c] = i);
+const SYMS = S.symbols, FRAMES = S.frames, BARS = S.bars;
+const OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+const LIST_IDS = ["five_pillars_list", "top_gappers", "top_gainers", "top_relative_volume", "top_volume_5m"];
+const ALERT_TILES = {
+  five_pillars_alert: { id: "five_pillars_alert", scanners: ["five_pillars_alert"] },
+  running_up: { id: "running_up", scanners: ["running_up", "running_down", "squeeze_5_in_5", "squeeze_10_in_10", "breakout_52w"] },
+  hod_momentum: { id: "hod_momentum", scanners: ["hod_momentum"] },
+  halt: { id: "halt", scanners: ["halt"] },
+};
+// Tier-1 workspace order, per dashboard spec section 9.
+const DOCK_ORDER = ["five_pillars_list", "five_pillars_alert", "top_gappers", "top_gainers",
+                    "running_up", "hod_momentum", "top_relative_volume", "top_volume_5m", "halt"];
+const ALERT_TILE_TITLE = {
+  five_pillars_alert: "Ross's 5 Pillars Alert",
+  hod_momentum: "Small Cap · High of Day Momentum",
+  running_up: "Running Up / Down · Squeezes",
+  halt: "Halt",
+};
+
+const state = {
+  frame: 0, playing: false, speed: 4, selected: null, locked: false,
+  frozen: {}, openRow: null, openAlert: null, chartA: "1m", chartB: "5m",
+  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {},
+};
+
+/* ── formatting ─────────────────────────────────────────────────────── */
+const $ = s => document.querySelector(s);
+const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
+const fx = (v, d = 2) => v == null ? "—" : Number(v).toFixed(d);
+const pct = v => v == null ? "—" : (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
+const vol = v => v == null ? "—" : v >= 1e6 ? (v / 1e6).toFixed(1) + "M" : v >= 1e3 ? Math.round(v / 1e3) + "k" : String(v);
+const dirClass = v => v == null ? "flat" : v > 0.05 ? "up" : v < -0.05 ? "down" : "flat";
+const etTime = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
+const etClock = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
+const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]); return o; };
+
+/* ── derived series ─────────────────────────────────────────────────── */
+function barsUpTo(sym, idx) { const b = BARS[sym] || []; return b.slice(0, Math.min(idx + 1, b.length)); }
+function agg(bars, n) {
+  const out = [];
+  for (let i = 0; i < bars.length; i += n) {
+    const c = bars.slice(i, i + n); if (!c.length) break;
+    out.push([c[0][0], c[0][1], Math.max(...c.map(x => x[2])), Math.min(...c.map(x => x[3])), c[c.length - 1][4], c.reduce((s, x) => s + x[5], 0)]);
+  }
+  return out;
+}
+function ema(vals, n) {
+  const k = 2 / (n + 1); const out = []; let prev = null;
+  vals.forEach((v, i) => { prev = i === 0 ? v : v * k + prev * (1 - k); out.push(i + 1 < n ? null : prev); });
+  return out;
+}
+function vwap(bars) {
+  let pv = 0, vv = 0;
+  return bars.map(b => { const tp = (b[2] + b[3] + b[4]) / 3; pv += tp * b[5]; vv += b[5]; return vv ? pv / vv : b[4]; });
+}
+function activePlan(sym, t) {
+  const p = (S.plans || []).filter(x => x.symbol === sym && x.armedAt <= t);
+  return p.length ? p[p.length - 1] : null;
+}
+function alertsUpTo(idx) {
+  const out = [];
+  for (let i = 0; i <= idx && i < FRAMES.length; i++) FRAMES[i].alerts.forEach(a => out.push(a));
+  return out;
+}
+
+/* ── canvas chart ───────────────────────────────────────────────────── */
+function drawChart(canvas, bars, opts) {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || 600, h = Number(canvas.getAttribute("height"));
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const g = canvas.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = "#0b1119"; g.fillRect(0, 0, w, h);
+  if (!bars.length) {
+    g.fillStyle = "#63748a"; g.font = "12px system-ui";
+    g.fillText("no bars for this symbol yet", 14, h / 2); return;
+  }
+  const padL = 6, padR = 58, padT = 8, volH = Math.round(h * 0.2), padB = 16;
+  const plotH = h - padT - volH - padB, plotW = w - padL - padR;
+  const N = bars.length, bw = Math.max(1.2, Math.min(9, plotW / N * 0.72)), step = plotW / N;
+
+  const extras = [];
+  if (opts.plan) extras.push(opts.plan.entry, opts.plan.stop, opts.plan.target);
+  if (opts.hod) extras.push(opts.hod);
+  if (opts.h52) extras.push(opts.h52);
+  let lo = Math.min(...bars.map(b => b[3]), ...extras);
+  let hi = Math.max(...bars.map(b => b[2]), ...extras);
+  const pad = (hi - lo) * 0.08 || hi * 0.02; lo -= pad; hi += pad;
+  const y = p => padT + plotH - (p - lo) / (hi - lo) * plotH;
+  const x = i => padL + i * step + step / 2;
+  const maxV = Math.max(...bars.map(b => b[5]), 1);
+
+  // premarket shading
+  if (opts.openTs) {
+    const firstReg = bars.findIndex(b => b[0] >= opts.openTs);
+    if (firstReg > 0) { g.fillStyle = "#0e141d"; g.fillRect(padL, padT, x(firstReg) - padL - step / 2, plotH + volH); }
+    if (firstReg > 0) {
+      g.strokeStyle = "#2a3a4d"; g.setLineDash([3, 3]); g.beginPath();
+      g.moveTo(x(firstReg) - step / 2, padT); g.lineTo(x(firstReg) - step / 2, padT + plotH + volH); g.stroke();
+      g.setLineDash([]); g.fillStyle = "#63748a"; g.font = "9px ui-monospace,monospace";
+      g.fillText("09:30", x(firstReg) - step / 2 + 3, padT + 9);
+    }
+  }
+  // price gridlines
+  g.font = "10px ui-monospace,monospace"; g.textAlign = "left";
+  for (let i = 0; i <= 4; i++) {
+    const p = lo + (hi - lo) * i / 4, yy = y(p);
+    g.strokeStyle = "#141d27"; g.beginPath(); g.moveTo(padL, yy); g.lineTo(padL + plotW, yy); g.stroke();
+    g.fillStyle = "#63748a"; g.fillText(p.toFixed(2), padL + plotW + 6, yy + 3);
+  }
+  // volume
+  bars.forEach((b, i) => {
+    const vh = b[5] / maxV * (volH - 4);
+    g.fillStyle = b[4] >= b[1] ? "#1c6b47" : "#7a2b34";
+    g.fillRect(x(i) - bw / 2, padT + plotH + volH - vh, bw, vh);
+  });
+  // planning bands — frozen at arm time, they never move with new bars
+  if (opts.plan) {
+    // Tight 2R plans put the three levels within a few pixels of each other, so
+    // labels are nudged apart rather than drawn on top of one another.
+    const spec = [["target", opts.plan.target, "#2ad17f"], ["entry", opts.plan.entry, "#22c7e8"], ["stop", opts.plan.stop, "#ff5f6e"]]
+      .sort((a, b) => b[1] - a[1]);
+    let lastLabelY = -99;
+    spec.forEach(([name, price, col]) => {
+      const half = Math.max(1.5, plotH * 0.004);
+      g.fillStyle = col + "22"; g.fillRect(padL, y(price) - half, plotW, half * 2);
+      g.strokeStyle = col; g.setLineDash([5, 4]); g.lineWidth = 1;
+      g.beginPath(); g.moveTo(padL, y(price)); g.lineTo(padL + plotW, y(price)); g.stroke(); g.setLineDash([]);
+      let ly = y(price) - 3;
+      if (ly - lastLabelY < 11) ly = lastLabelY + 11;
+      lastLabelY = ly;
+      const label = name.toUpperCase() + " " + price.toFixed(2);
+      g.font = "9px ui-monospace,monospace";
+      const wpx = g.measureText(label).width + 6;
+      g.fillStyle = "#0b1119cc"; g.fillRect(padL + 2, ly - 8, wpx, 10);
+      g.fillStyle = col; g.fillText(label, padL + 5, ly);
+    });
+  }
+  const hline = (p, col, label) => {
+    if (p == null) return;
+    g.strokeStyle = col; g.setLineDash([2, 3]); g.beginPath();
+    g.moveTo(padL, y(p)); g.lineTo(padL + plotW, y(p)); g.stroke(); g.setLineDash([]);
+    g.fillStyle = col; g.font = "9px ui-monospace,monospace";
+    g.textAlign = "right"; g.fillText(label, padL + plotW - 4, y(p) - 3); g.textAlign = "left";
+  };
+  hline(opts.hod, "#ffc247", "HOD " + fx(opts.hod));
+  hline(opts.h52, "#c39bff", "52w high " + fx(opts.h52));
+  // candles
+  bars.forEach((b, i) => {
+    const up = b[4] >= b[1], col = up ? "#2ad17f" : "#ff5f6e";
+    g.strokeStyle = col; g.fillStyle = col; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(x(i), y(b[2])); g.lineTo(x(i), y(b[3])); g.stroke();
+    const yo = y(b[1]), yc = y(b[4]);
+    g.fillRect(x(i) - bw / 2, Math.min(yo, yc), bw, Math.max(1, Math.abs(yc - yo)));
+  });
+  // overlays
+  const line = (series, col) => {
+    g.strokeStyle = col; g.lineWidth = 1.3; g.beginPath(); let started = false;
+    series.forEach((v, i) => { if (v == null) return; const px = x(i), py = y(v); started ? g.lineTo(px, py) : (g.moveTo(px, py), started = true); });
+    g.stroke();
+  };
+  const closes = bars.map(b => b[4]);
+  if (opts.vwap) line(vwap(bars), "#c39bff");
+  if (opts.ema9) line(ema(closes, 9), "#4dd2ff");
+  if (opts.ema20) line(ema(closes, 20), "#ff9ad2");
+  if (opts.ema200) line(ema(closes, 200), "#ffb648");
+  // last price tag
+  const last = closes[closes.length - 1];
+  g.fillStyle = "#dde6f1"; g.font = "600 10px ui-monospace,monospace";
+  g.fillRect(padL + plotW + 2, y(last) - 8, padR - 8, 16);
+  g.fillStyle = "#0b1119"; g.fillText(last.toFixed(2), padL + plotW + 6, y(last) + 4);
+}
+
+/* ── pillar chips (computed in the browser from published thresholds) ── */
+function pillarChecks(row, meta) {
+  const T = S.pillarThresholds;
+  const f = meta.floatShares, quality = meta.floatQuality;
+  return [
+    { k: "P", name: "price $" + T.priceMin + "–$" + T.priceMax, v: row.price, ok: row.price >= T.priceMin && row.price <= T.priceMax },
+    { k: "G", name: "gain ≥ " + T.gainMinPct + "%", v: pct(row.changePct), ok: (row.changePct || 0) >= T.gainMinPct },
+    { k: "R", name: "daily RVOL ≥ " + T.rvolMin + "×", v: fx(row.rvolDaily) + "×", ok: (row.rvolDaily || 0) >= T.rvolMin },
+    {
+      k: "F", name: "float < " + (T.floatMaxShares / 1e6) + "M",
+      v: quality === "verified" ? (f / 1e6).toFixed(1) + "M" : quality === "unknown" ? "unknown" : (f / 1e6).toFixed(1) + "M proxy",
+      ok: quality === "verified" && f < T.floatMaxShares,
+    },
+  ];
+}
+function newsFor(sym, nowMs) {
+  const items = (SYMS[sym] && SYMS[sym].news) || [];
+  const visible = items.filter(n => new Date(n.firstObservedAt).getTime() <= nowMs);
+  if (!visible.length) return null;
+  const n = visible[visible.length - 1];
+  const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
+  const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
+  return { item: n, ageMin, flame };
+}
+
+/* ── tiles ──────────────────────────────────────────────────────────── */
+function tileShell(id, title, kind, stateLabel, note, onFreeze) {
+  const t = el("div", "tile" + (kind === "alert" ? " alert-tile" : "") + (state.focusTile === id ? " focused" : ""));
+  t.dataset.tile = id;
+  const head = el("div", "tile-head");
+  head.appendChild(el("span", "tile-title", title));
+  const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : "replay"), stateLabel);
+  st.dataset.state = stateLabel;
+  head.appendChild(st);
+  head.appendChild(el("span", "tile-age", etTime(FRAMES[state.frame].ts)));
+  if (kind === "list") {
+    const fz = el("button", "icon-btn", "❄");
+    fz.title = "Freeze visible order (Space)";
+    fz.setAttribute("aria-pressed", String(!!state.frozen[id]));
+    fz.onclick = e => { e.stopPropagation(); onFreeze(); };
+    head.appendChild(fz);
+  } else {
+    const snd = el("button", "icon-btn", "🔔");
+    snd.title = "Alert sound for this tile — notification only, never a filter";
+    snd.setAttribute("aria-pressed", "true");
+    snd.onclick = e => { e.stopPropagation(); snd.setAttribute("aria-pressed", snd.getAttribute("aria-pressed") === "true" ? "false" : "true"); };
+    head.appendChild(snd);
+  }
+  head.onclick = () => { state.focusTile = id; render(); };
+  t.appendChild(head);
+  if (note) t.appendChild(el("div", "tile-note", note));
+  return t;
+}
+
+function renderListTile(id, frame) {
+  const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
+  const rows = (frame.lists[id] || []).map(rowObj);
+  const froz = state.frozen[id];
+  let ordered = rows, pending = 0;
+  if (froz) {
+    const byS = {}; rows.forEach(r => byS[r.symbol] = r);
+    ordered = froz.order.map(s => byS[s]).filter(Boolean);
+    pending = rows.filter(r => froz.order.indexOf(r.symbol) === -1).length;
+  }
+  const tile = tileShell(id, meta.title, "list", froz ? "FROZEN" : "REPLAY", meta.note, () => {
+    state.frozen[id] = froz ? null : { order: rows.map(r => r.symbol) };
+    if (!state.frozen[id]) delete state.frozen[id];
+    render();
+  });
+  const cols = el("div", "tile-cols");
+  ["Symbol", "Last", "Chg", meta.metric.indexOf("RVOL") >= 0 ? "RVOL" : "Gap", "Vol"].forEach(c => cols.appendChild(el("span", null, c)));
+  tile.appendChild(cols);
+  const body = el("div", "tile-rows");
+  if (!ordered.length) body.appendChild(el("div", "empty", "No symbol currently qualifies. An empty list is a real answer."));
+  const prevKeys = state.prevRowKeys[id] || [];
+  ordered.forEach((r, i) => {
+    const sym = SYMS[r.symbol] || {};
+    const tr = el("div", "trow" + (state.selected === r.symbol ? " sel" : "") + (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
+    tr.dataset.symbol = r.symbol; tr.dataset.rowIndex = i; tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    const s = el("span", "tsym"); s.appendChild(el("b", null, r.symbol));
+    const nf = newsFor(r.symbol, new Date(frame.ts).getTime());
+    if (nf && nf.flame) { const fl = el("i", "flame " + nf.flame); fl.title = "news " + Math.round(nf.ageMin) + " min old — recency only"; s.appendChild(fl); }
+    if (sym.floatQuality && sym.floatQuality !== "verified") s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "float ?" : "proxy"));
+    if (r.spread != null && r.price && r.spread / r.price > 0.01) s.appendChild(el("span", "pill warn", "spread"));
+    tr.appendChild(s);
+    tr.appendChild(el("span", null, fx(r.price)));
+    tr.appendChild(el("span", dirClass(r.changePct), pct(r.changePct)));
+    tr.appendChild(el("span", null, meta.metric.indexOf("RVOL") >= 0 ? fx(r.rvolDaily) + "×" : pct(r.gapPct)));
+    tr.appendChild(el("span", "muted", vol(r.volume)));
+    tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };
+    tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
+    body.appendChild(tr);
+    if (state.openRow === id + "|" + r.symbol) body.appendChild(reasonsDrawer(r, sym, id));
+  });
+  state.prevRowKeys[id] = ordered.map(r => r.symbol);
+  tile.appendChild(body);
+  if (pending) tile.appendChild(el("div", "pending", pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply the latest ranking"));
+  return tile;
+}
+
+function reasonsDrawer(r, sym, listId) {
+  const d = el("div", "reasons");
+  const head = el("div", "reason");
+  head.appendChild(el("span", "reason-name", "Why this row is here — " + (S.definitionVersions[listId] || listId)));
+  d.appendChild(head);
+  if (listId === "five_pillars_list") {
+    pillarChecks(r, sym).forEach(c => {
+      const row = el("div", "reason");
+      row.appendChild(el("span", c.ok ? "ok" : "no", c.ok ? "PASS" : "FAIL"));
+      row.appendChild(el("span", "reason-name", c.name));
+      row.appendChild(el("span", null, String(c.v)));
+      row.appendChild(el("span", "ev confirmed", "confirmed course"));
+      d.appendChild(row);
+    });
+    const n = el("div", "reason");
+    n.appendChild(el("span", "reason-name", "news / catalyst — displayed, never a gate (Confirmed platform)"));
+    d.appendChild(n);
+  } else {
+    const row = el("div", "reason");
+    row.appendChild(el("span", "ok", "RANK"));
+    row.appendChild(el("span", "reason-name", (S.listMeta[listId] || {}).metric + " — " + (S.listMeta[listId] || {}).note));
+    row.appendChild(el("span", "ev approximation", "approximation"));
+    d.appendChild(row);
+  }
+  return d;
+}
+
+function renderAlertTile(cfg, idx) {
+  const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 40);
+  const tile = tileShell(cfg.id, ALERT_TILE_TITLE[cfg.id], "alert", "REPLAY",
+    cfg.id === "halt" ? "Official status transitions only — never inferred from missing trades."
+      : "Rising edge, then cooldown. Branch menus choose sounds, not filters.");
+  const body = el("div", "tile-rows");
+  if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
+  all.forEach(a => {
+    const tr = el("div", "trow" + (state.selected === a.symbol ? " sel" : ""));
+    tr.style.gridTemplateColumns = "46px 1fr auto";
+    tr.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
+    const mid = el("span", "tsym");
+    mid.appendChild(el("b", null, a.symbol));
+    mid.appendChild(el("span", "tl-what", a.branch ? a.branch.replace(/_/g, " ") : a.scannerId.replace(/_/g, " ")));
+    tr.appendChild(mid);
+    tr.appendChild(el("span", "sev " + a.severity, a.severity));
+    tr.onclick = () => select(a.symbol, cfg.id);
+    body.appendChild(tr);
+  });
+  tile.appendChild(body);
+  return tile;
+}
+
+/* ── timeline ───────────────────────────────────────────────────────── */
+function renderTimeline(idx) {
+  const host = $("#timeline"); host.textContent = "";
+  const all = alertsUpTo(idx).slice().reverse();
+  $("#alertCount").textContent = all.length + " event" + (all.length === 1 ? "" : "s");
+  if (!all.length) { host.appendChild(el("div", "empty", "No alerts yet in this replay.")); return; }
+  all.slice(0, 60).forEach(a => {
+    const row = el("div", "tl-row");
+    row.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
+    const main = el("div", "tl-main");
+    main.appendChild(el("span", "tl-sym", a.symbol));
+    const nf = a.news && a.news.flame;
+    if (nf) main.appendChild(el("i", "flame " + nf));
+    main.appendChild(el("span", "tl-what", ((S.alertMeta[a.scannerId] || {}).title || a.scannerId) + (a.branch ? " · " + a.branch.replace(/_/g, " ") : "")));
+    if (a.group && a.group.count > 1) main.appendChild(el("span", "more", "+" + (a.group.count - 1) + " more"));
+    row.appendChild(main);
+    row.appendChild(el("span", "sev " + a.severity, a.severity));
+    row.onclick = () => {
+      select(a.symbol, a.scannerId);
+      state.openAlert = state.openAlert === a.eventId ? null : a.eventId;
+      // Selecting a historical alert seeks the charts to that moment.
+      const target = FRAMES.findIndex(f => f.ts === a.sourceTime || f.t * 1000 >= new Date(a.sourceTime).getTime());
+      if (target >= 0) { state.frame = target; syncTransport(); }
+      render();
+    };
+    host.appendChild(row);
+    if (state.openAlert === a.eventId) host.appendChild(alertDetail(a));
+  });
+}
+function alertDetail(a) {
+  const d = el("div", "tl-detail");
+  d.appendChild(el("div", "tiny muted", "definition " + a.definitionVersion + " · source " + a.sourceTime + " · observed " + a.observedTime));
+  (a.reasons || []).forEach(r => {
+    const row = el("div", "reason");
+    row.appendChild(el("span", r.passed ? "ok" : "no", r.passed ? "PASS" : "FAIL"));
+    row.appendChild(el("span", "reason-name", r.filter || r.field));
+    row.appendChild(el("span", null, String(r.value) + (r.threshold != null ? " vs " + r.threshold : "")));
+    row.appendChild(el("span", "ev " + (r.evidence || "approximation"), r.evidence || "approximation"));
+    d.appendChild(row);
+  });
+  if (a.group && a.group.count > 1) {
+    d.appendChild(el("div", "tiny muted", "consolidated with: " + a.group.also_triggered.join(", ") +
+      " — every raw event is kept in history"));
+  }
+  return d;
+}
+
+/* ── context panels ─────────────────────────────────────────────────── */
+function kv(host, lab, val, cls) {
+  const r = el("div", "kv"); r.appendChild(el("span", "lab", lab));
+  r.appendChild(el("span", cls || null, val)); host.appendChild(r);
+}
+function renderContext(frame) {
+  const sym = state.selected, meta = SYMS[sym] || {}, nowMs = new Date(frame.ts).getTime();
+  const bars = barsUpTo(sym, frame.barIndex);
+  const last = bars.length ? bars[bars.length - 1][4] : null;
+  const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
+  const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
+  let row = null;
+  for (const id of LIST_IDS) {
+    const found = (frame.lists[id] || []).map(rowObj).find(r => r.symbol === sym);
+    if (found) { row = found; break; }
+  }
+
+  $("#symTicker").textContent = sym || "—";
+  $("#symLock").hidden = !state.locked;
+  const nf = newsFor(sym, nowMs);
+  const flameEl = $("#symFlame");
+  flameEl.hidden = !(nf && nf.flame);
+  if (nf && nf.flame) { flameEl.className = "flame " + nf.flame; flameEl.title = "news " + Math.round(nf.ageMin) + " min old"; }
+  const stats = $("#symStats"); stats.textContent = "";
+  const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
+  stat("Last", fx(last));
+  stat("Change", pct(chg), dirClass(chg));
+  stat("HOD", fx(hod));
+  stat("RVOL", row ? fx(row.rvolDaily) + "×" : "—");
+  stat("Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M" : meta.floatQuality === "unknown" ? "UNKNOWN" : (meta.floatShares / 1e6).toFixed(1) + "M proxy",
+    meta.floatQuality === "verified" ? null : "flat");
+  stat("Halt", (frame.halts && frame.halts[sym] === "halted") ? "HALTED" : "trading", (frame.halts && frame.halts[sym] === "halted") ? "down" : null);
+
+  const q = $("#quoteCard"); q.textContent = "";
+  kv(q, "Last", fx(last)); kv(q, "Prev close", fx(meta.prevClose));
+  kv(q, "Change", pct(chg), dirClass(chg));
+  kv(q, "Spread", row ? "$" + fx(row.spread, 3) : "—", row && row.spread / (row.price || 1) > 0.01 ? "down" : null);
+  kv(q, "Range position", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
+  kv(q, "5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
+
+  const n = $("#newsCard"); n.textContent = "";
+  if (nf) {
+    const h = el("p", "headline", nf.item.headline); n.appendChild(h);
+    kv(n, "Published", etClock(nf.item.publishedAt) + " ET");
+    kv(n, "First observed", etClock(nf.item.firstObservedAt) + " ET");
+    kv(n, "Age", Math.round(nf.ageMin) + " min → " + (nf.flame || "no flame"));
+    kv(n, "Category", (nf.item.category || "—").replace(/_/g, " "));
+    n.appendChild(el("div", "note", "The flame is news age only. It says nothing about whether the news is good, or whether the other pillars pass."));
+  } else {
+    n.appendChild(el("div", "placeholder", "No qualifying headline observed yet. A stock with no flame can still be a valid technical candidate — news is not a gate."));
+  }
+
+  const rk = $("#riskCard"); rk.textContent = "";
+  kv(rk, "Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M" : "—");
+  kv(rk, "Source quality", meta.floatQuality || "unknown", meta.floatQuality === "verified" ? null : "down");
+  kv(rk, "52-week high", fx(meta.high52w));
+  kv(rk, "Avg daily volume", vol(meta.avgDailyVolume));
+  if (meta.floatQuality === "shares_outstanding_proxy")
+    rk.appendChild(el("div", "note warn", "Shares outstanding shown as an explicit proxy — it is not float, and the float pillar fails until a verified value exists."));
+
+  const p = $("#planCard"); p.textContent = "";
+  const plan = activePlan(sym, frame.t);
+  if (!plan) {
+    p.appendChild(el("div", "placeholder", "No armed setup. Bands appear only when the detector confirms impulse → 2–4 candle pullback → first new high, and then they stop moving."));
+  } else {
+    const band = (cls, lab, v) => { const b = el("div", "band " + cls); b.appendChild(el("span", null, lab)); b.appendChild(el("b", null, fx(v))); p.appendChild(b); };
+    band("target", "Target 2R", plan.target); band("entry", "Entry", plan.entry); band("stop", "Stop", plan.stop);
+    kv(p, "Risk / share", "$" + fx(plan.riskShare, 3));
+    kv(p, "Pullback candles", String(plan.pullbackCandles));
+    kv(p, "Pullback volume", plan.volumeOk ? "lighter ✓" : "heavier ✗", plan.volumeOk ? "up" : "down");
+    kv(p, "Armed", etTime(new Date(plan.armedAt * 1000).toISOString()) + " ET");
+    if (row && row.spread != null) {
+      const share = row.spread / plan.riskShare * 100;
+      if (share > 20) p.appendChild(el("div", "note warn", "Spread is " + share.toFixed(0) + "% of planned risk. On this stop distance the round trip eats the edge before the trade starts."));
+    }
+    p.appendChild(el("div", "note", "Planning visual only. Size from your own dollar risk; this app places no orders."));
+  }
+}
+
+/* ── charts ─────────────────────────────────────────────────────────── */
+function renderCharts(frame) {
+  const sym = state.selected, meta = SYMS[sym] || {};
+  const bars1 = barsUpTo(sym, frame.barIndex);
+  const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
+  const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
+  const plan = activePlan(sym, frame.t);
+  drawChart($("#chartA"), bars1, { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+  if (state.chartB === "1D") {
+    const daily = (meta.dailyBars || []).map(d => [0, d.o, d.h, d.l, d.c, d.v]);
+    drawChart($("#chartB"), daily, { ema20: true, ema200: true, h52: meta.high52w });
+    $("#legendB").innerHTML = '<i class="k ema20"></i>EMA20 <i class="k hod" style="background:#ffb648"></i>EMA200 <i class="k" style="background:#c39bff"></i>52w high';
+  } else {
+    drawChart($("#chartB"), agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+    $("#legendB").innerHTML = '<i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20';
+  }
+}
+
+/* ── selection ──────────────────────────────────────────────────────── */
+function select(symbol, source, rowIndex) {
+  if (!symbol || !SYMS[symbol]) return;
+  state.selected = symbol;
+  if (source) state.focusTile = source;
+  if (rowIndex != null) state.focusRow = rowIndex;
+  const url = new URL(location.href); url.searchParams.set("symbol", symbol);
+  history.replaceState({}, "", url);
+  render();
+}
+function toggleReasons(listId, symbol) {
+  const key = listId + "|" + symbol;
+  state.openRow = state.openRow === key ? null : key;
+}
+
+/* ── audio ──────────────────────────────────────────────────────────── */
+let audioCtx = null;
+function beep(severity) {
+  if (!state.sound) return;
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    const freq = severity === "critical" ? 340 : severity === "high" ? 660 : 520;
+    o.frequency.value = freq; o.type = "sine";
+    g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.22);
+    o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + 0.24);
+  } catch (e) { /* audio is a convenience; the visual alert always fires */ }
+}
+
+/* ── render ─────────────────────────────────────────────────────────── */
+function render() {
+  const frame = FRAMES[state.frame];
+  if (!state.selected) state.selected = new URL(location.href).searchParams.get("symbol") || "ABCD";
+  $("#clockET").textContent = etClock(frame.ts);
+  $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
+  const badge = $("#sessionBadge");
+  badge.textContent = frame.session; badge.className = "badge " + frame.session;
+  $("#feedText").textContent = "REPLAY";
+  $("#feedAge").textContent = S.generatedFrom;
+  const host = $("#tiles"); host.textContent = "";
+  DOCK_ORDER.forEach(id => host.appendChild(
+    LIST_IDS.indexOf(id) >= 0 ? renderListTile(id, frame) : renderAlertTile(ALERT_TILES[id], state.frame)));
+  renderCharts(frame); renderContext(frame); renderTimeline(state.frame);
+}
+function syncTransport() { $("#scrub").value = String(state.frame); }
+
+/* ── transport ──────────────────────────────────────────────────────── */
+let timer = null;
+function tick() {
+  if (state.frame >= FRAMES.length - 1) { pause(); return; }
+  state.frame++;
+  const fresh = FRAMES[state.frame].alerts;
+  if (fresh.length) beep(fresh[0].severity);
+  syncTransport(); render();
+}
+function play() {
+  state.playing = true; $("#btnPlay").textContent = "❚❚ Pause";
+  clearInterval(timer); timer = setInterval(tick, Math.max(60, 1000 / state.speed));
+}
+function pause() { state.playing = false; $("#btnPlay").textContent = "▶ Play"; clearInterval(timer); }
+
+/* ── wiring ─────────────────────────────────────────────────────────── */
+function init() {
+  $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId + " · deterministic replay";
+  $("#disclaimer").textContent = S.disclaimer;
+  const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
+  scrub.oninput = () => { state.frame = Number(scrub.value); render(); };
+  $("#btnPlay").onclick = () => state.playing ? pause() : play();
+  $("#speed").onchange = e => { state.speed = Number(e.target.value); if (state.playing) play(); };
+  document.querySelectorAll("[data-seek]").forEach(b => b.onclick = () => {
+    if (b.dataset.seek === "open" && OPEN_INDEX >= 0) state.frame = OPEN_INDEX;
+    if (b.dataset.seek === "alert") {
+      const i = FRAMES.findIndex(f => f.alerts.length);
+      if (i >= 0) state.frame = i;
+    }
+    syncTransport(); render();
+  });
+  document.querySelectorAll(".seg-btn[data-chart]").forEach(b => b.onclick = () => {
+    if (b.disabled) return;
+    const which = b.dataset.chart;
+    document.querySelectorAll('.seg-btn[data-chart="' + which + '"]').forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    if (which === "b") state.chartB = b.dataset.tf; else state.chartA = b.dataset.tf;
+    render();
+  });
+  $("#btnSound").onclick = () => {
+    state.sound = !state.sound;
+    $("#btnSound").setAttribute("aria-pressed", String(state.sound));
+    $("#btnSound").textContent = (state.sound ? "🔔" : "🔇") + " Alerts";
+    if (state.sound) beep("medium");
+  };
+  document.addEventListener("keydown", e => {
+    if (e.target.matches("input,select,textarea")) return;
+    const rows = (FRAMES[state.frame].lists[state.focusTile] || []).map(rowObj);
+    const k = e.key.toLowerCase();
+    if (k === "j" || e.key === "ArrowDown") { state.focusRow = Math.min(rows.length - 1, state.focusRow + 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
+    else if (k === "k" || e.key === "ArrowUp") { state.focusRow = Math.max(0, state.focusRow - 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
+    else if (e.key === "Enter") { state.locked = !state.locked; render(); }
+    else if (e.key === " ") { const id = state.focusTile; if (LIST_IDS.indexOf(id) >= 0) { state.frozen[id] = state.frozen[id] ? null : { order: rows.map(r => r.symbol) }; if (!state.frozen[id]) delete state.frozen[id]; render(); } e.preventDefault(); }
+    else if (k === "1") { state.chartA = "1m"; render(); }
+    else if (k === "5") { state.chartB = "5m"; document.querySelectorAll('.seg-btn[data-chart="b"]').forEach(x => x.classList.toggle("active", x.dataset.tf === "5m")); render(); }
+    else if (k === "d") { state.chartB = "1D"; document.querySelectorAll('.seg-btn[data-chart="b"]').forEach(x => x.classList.toggle("active", x.dataset.tf === "1D")); render(); }
+    else if (k === "n") { $("#newsCard").scrollIntoView({ block: "center" }); }
+    else if (k === "a") { $("#btnSound").click(); }
+    else if (e.key === "Escape") { state.locked = false; state.openRow = null; state.openAlert = null; render(); }
+  });
+  window.addEventListener("resize", () => renderCharts(FRAMES[state.frame]));
+  state.frame = Math.max(0, OPEN_INDEX - 8);
+  syncTransport(); render();
+}
+init();
+})();
