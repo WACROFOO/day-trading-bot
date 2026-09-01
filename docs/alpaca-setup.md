@@ -124,6 +124,24 @@ Do not continue until the first five checks pass.
 
 ---
 
+## Keeping up to date
+
+```bash
+bash scripts/update.sh
+```
+
+It stashes any uncommitted edits, snapshots your commits to a `backup-…`
+branch, fetches with retries, and moves you onto the latest version — then
+tells you what changed. Your `.env` is git-ignored, so no update can touch
+your credentials.
+
+> **A warning about copying commands from chat.** macOS uses zsh, and an
+> interactive zsh does **not** treat `#` as a comment. Pasting a block like
+> `# 1) do this` gives `zsh: parse error near ')'` and nothing runs. Copy
+> command lines only, never the commented explanations around them.
+
+---
+
 ## Step 4 — start the desk
 
 ```bash
