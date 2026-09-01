@@ -101,13 +101,66 @@ Two §1 criteria are **manual checks**, not computed: float ≤ 20M shares
 it for passers only, slowly) and the news catalyst. They appear as
 manual-check columns rather than being silently dropped.
 
+## Momentum scanner + alert platform (`src/momentum_platform/`)
+
+The replay-first, event-driven scanner and alerting engine specified in
+`CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/scanner-alert-platform-spec.md`.
+Stdlib-only core (no pandas/yfinance needed except for the optional live
+tracker), so it runs and tests anywhere.
+
+What it implements:
+
+- **Session calendar** — premarket 04:00–09:30, regular, after-hours in
+  `America/New_York`, DST-safe, daily state reset.
+- **Hot state** — per-symbol snapshots, 1-minute bar building from ticks or
+  bars, rolling 5-minute volume and RVOL.
+- **Scanners** (every event carries raw values, pass/fail reasons and a
+  definition version): Top Gainers / Losers / Gappers (gappers freeze at
+  09:30 ET), Low Float Top Gainers, Top RVOL, Top 5m Volume, Five Pillars
+  list + rising-edge alert (Confirmed course thresholds: $2–$20, +10%,
+  RVOL ≥ 5x, float < 20M; news scored separately, never silently required),
+  HOD Momentum with branch labeling, Running Up/Down, Squeeze 5-in-5 and
+  10-in-10, 52-week breakout. All non-course thresholds are labeled
+  independent approximations.
+- **First-pullback detector** — impulse → 2–4 candle pullback on declining
+  volume → new-high trigger; frozen entry/stop/2R planning bands that never
+  repaint (fixes the documented gap in the bundled Pine script).
+- **Notification router** — idempotency keys, per-scanner cooldowns with
+  price-tier override, same-symbol consolidation, severity filter; console,
+  JSONL timeline (`data/alerts.jsonl`) and Slack-compatible webhook
+  channels (`MOMENTUM_WEBHOOK_URL`, kept out of git). Channel failure never
+  blocks scanning.
+- **SQLite event store** — every alert persisted with reasons, plus a
+  watchlist.
+- **News flame** — Confirmed platform mapping (red 0–2h, orange 2–12h,
+  yellow 12–24h) computed from publication time; a flame means recent news,
+  not good news.
+
+CLI:
+
+```bash
+export PYTHONPATH=src
+python -m momentum_platform.cli replay fixtures/market_replay/demo_momentum_day.jsonl
+python -m momentum_platform.cli watchlist add ABCD QUIE
+python -m momentum_platform.cli track --interval 30        # yfinance, ~15m DELAYED
+python -m momentum_platform.cli events --symbol ABCD
+```
+
+Scanner events are research candidates, never entry signals or orders. The
+yfinance tracker is for development and delayed watchlist tracking only; a
+licensed real-time feed (Alpaca/Polygon/Databento) plugs into the same
+`MarketUpdate` interface when ready.
+
 ## Structure
 
 ```
-src/paper_trading/   platform package (app, ledger, broker, risk_gate, risk, indicators, datafeed, scanner)
+src/momentum_platform/  event-driven scanner + alert engine (models, sessions, formulas, state, scanners/, notify, store, engine, pullback, datasources/, cli)
+src/paper_trading/   manual simulator package (app, ledger, broker, risk_gate, risk, indicators, datafeed, scanner)
+fixtures/market_replay/  deterministic replay fixtures (golden tests)
 scripts/run_scanner.py  scanner CLI
 tests/               test suite
-knowledge-base/      strategy research and specs
+knowledge-base/      strategy research extracted from the YouTube corpus
+CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/  canonical knowledge bundle (course-derived)
 ```
 
 ## Disclaimer

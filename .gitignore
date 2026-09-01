@@ -32,3 +32,6 @@ data/*.log
 
 # Runtime artifacts
 data/*.db
+
+# Momentum platform runtime artifacts
+data/alerts.jsonl
