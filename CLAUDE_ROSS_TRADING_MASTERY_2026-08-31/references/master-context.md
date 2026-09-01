@@ -116,6 +116,32 @@ The repository's earlier knowledge base (257 public YouTube transcripts, 7,937 c
 
 `src/momentum_platform/` implements the replay-first backend from `references/scanner-alert-platform-spec.md` (stdlib-only): session calendar, hot state with 1m bar building, clean-room formulas, scanners (Top Gainers/Losers/Gappers with 09:30 freeze, Low Float, Top RVOL, Five Pillars list + rising-edge alert, HOD Momentum with branch labeling, Running Up/Down, 5-in-5, 10-in-10, 52-week breakout), canonical event envelope with reasons and definition versions, notification router (idempotency, cooldown with price-tier override, consolidation, console/JSONL/webhook channels), SQLite event store + watchlist. The older `src/paper_trading` package remains the manual simulator; its audited gaps and bugs are listed in `references/youtube-corpus-integration.md` §7.
 
+## Dashboard knowledge added (September 1, 2026)
+
+`references/dashboard-scanner-chart-knowledge.md` captures the authenticated Day Trade Dash
+walkthrough as a focused UI specification. New Confirmed-visible material beyond the earlier
+references:
+
+- the exact 29-widget inventory with each tile's visible fields and type (list vs alert);
+- the 11 Small Cap HOD Momentum branch names, with float bands / RVOL cutoffs / Volatility
+  Hunter / Former Momo still Unknown;
+- tile-level behaviors: dockable panels, per-tile audio and branch-sound menus, global alert
+  volume, grouped/expandable alerts, per-tile online/offline plus green/red feed health,
+  Scanner History (one widget at a time, ~6 months, by scanner and date), layout save and
+  pop-out;
+- flame interactions: hover for headline preview, click to open the story; alert-row flames can
+  arrive minutes after the alert while list flames refresh on the list cycle;
+- premarket gapper lists visibly stop updating at 09:30 ET.
+
+Clean-room design added by the same document: shared single selected-symbol state with a
+ten-step selection transaction, row-order freeze during fast re-ranking, tile lifecycle
+CLOSED->LOADING->CONNECTING->LIVE->STALE->OFFLINE->RECONNECTING, Tier 1/2/3 tile priority,
+two-chart workspace (Chart A 1m execution, Chart B 5m/daily context) with independent
+intervals but a shared ticker, keyboard model, and the Section 25 MVP acceptance criteria.
+
+The uploaded `SCANNER_ALERT_PLATFORM_IMPLEMENTATION_SPEC.md` was byte-identical to the bundled
+`references/scanner-alert-platform-spec.md`; no merge was required.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

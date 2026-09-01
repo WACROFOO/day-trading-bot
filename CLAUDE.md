@@ -11,6 +11,10 @@ The canonical, most recent knowledge base is `CLAUDE_ROSS_TRADING_MASTERY_2026-0
 3. `CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/master-context.md` — current knowledge ledger and unresolved items.
 4. `CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/strategy-playbook.md` — consolidated executable playbook.
 
+For dashboard/UI work (scanner tiles, linked charts, selected-symbol state, alert timeline) read
+`CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/dashboard-scanner-chart-knowledge.md`;
+for merged YouTube-corpus knowledge read `references/youtube-corpus-integration.md`.
+
 The master collaboration prompt (working modes, evidence hierarchy, short commands) is `CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/PROMPT_TO_CLAUDE.md`; follow it in study sessions.
 
 ## Older material in this repository

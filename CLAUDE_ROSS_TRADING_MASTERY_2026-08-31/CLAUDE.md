@@ -17,6 +17,7 @@ Then load only the references required by the question:
 - Every visible scanner, columns and named sub-strategies: `references/platform-filter-inventory.md`
 - Captured platform requirements and reconstruction audit: `references/platform-rebuild-audit.md`
 - Implementable scanner/notification architecture, formulas, schemas and roadmap: `references/scanner-alert-platform-spec.md`
+- Dashboard UI, scanner tiles, two-chart workspace and selected-symbol UX: `references/dashboard-scanner-chart-knowledge.md`
 - Source-code and reverse-engineering boundary: `references/source-analysis.md`
 - TradingView installation and screener use: `references/tradingview-setup.md`
 - Pine implementation: `assets/ross_style_momentum_scanner.pine`
