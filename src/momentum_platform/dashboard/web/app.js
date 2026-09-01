@@ -68,22 +68,125 @@ function alertsUpTo(idx) {
   return out;
 }
 
-/* ── canvas chart ───────────────────────────────────────────────────── */
+/* ── charts ──────────────────────────────────────────────────────────
+   Primary renderer is TradingView's Lightweight Charts (real crosshair,
+   price/time scales, zoom and pan). If the library is unavailable — offline,
+   blocked CDN — every pane falls back to a built-in canvas renderer so the
+   workspace is never blank. Neither library supplies market data; that comes
+   from the session (replay fixture today, a licensed feed later). */
+const TV = window.LightweightCharts || null;
+
+const PALETTE = {
+  bg: "#0b1119", text: "#93a4b8", grid: "#141d27", border: "#1d2836",
+  up: "#2ad17f", down: "#ff5f6e", vwap: "#c39bff", ema9: "#4dd2ff",
+  ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", h52: "#c39bff",
+  entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
+};
+
+function makePane(hostId, daily) {
+  const host = document.getElementById(hostId);
+  if (!TV) return canvasPane(host);
+  const chart = TV.createChart(host, {
+    width: host.clientWidth || 400, height: host.clientHeight || 200,
+    layout: { background: { color: PALETTE.bg }, textColor: PALETTE.text,
+              fontFamily: '"IBM Plex Mono", ui-monospace, monospace', fontSize: 10 },
+    grid: { vertLines: { color: PALETTE.grid }, horzLines: { color: PALETTE.grid } },
+    rightPriceScale: { borderColor: PALETTE.border, scaleMargins: { top: 0.08, bottom: 0.26 } },
+    timeScale: { borderColor: PALETTE.border, timeVisible: !daily, secondsVisible: false,
+                 rightOffset: 2, barSpacing: daily ? 3 : 5 },
+    crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0 },
+    handleScale: true, handleScroll: true,
+  });
+  const candles = chart.addCandlestickSeries({
+    upColor: PALETTE.up, downColor: PALETTE.down, borderVisible: false,
+    wickUpColor: PALETTE.up, wickDownColor: PALETTE.down,
+  });
+  const volume = chart.addHistogramSeries({
+    priceFormat: { type: "volume" }, priceScaleId: "vol", color: "#1c6b47",
+  });
+  chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+  const lines = {};
+  const lineFor = key => (lines[key] = lines[key] ||
+    chart.addLineSeries({ color: PALETTE[key], lineWidth: 1, priceLineVisible: false,
+                          lastValueVisible: false, crosshairMarkerVisible: false }));
+  let priceLines = [];
+
+  return {
+    engine: "tradingview",
+    resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
+    render(bars, opts) {
+      if (!bars.length) { candles.setData([]); volume.setData([]); return; }
+      const t = i => daily ? bars[i].d : bars[i][0];
+      const rows = bars.map((b, i) => daily
+        ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
+        : { time: b[0], open: b[1], high: b[2], low: b[3], close: b[4] });
+      candles.setData(rows);
+      volume.setData(bars.map((b, i) => ({
+        time: rows[i].time, value: daily ? b.v : b[5],
+        color: rows[i].close >= rows[i].open ? "#1c6b4788" : "#7a2b3488",
+      })));
+      const closes = rows.map(r => r.close);
+      const put = (key, series) => {
+        if (!series) { if (lines[key]) lines[key].setData([]); return; }
+        lineFor(key).setData(series.map((v, i) => v == null ? null : { time: rows[i].time, value: v })
+                                   .filter(Boolean));
+      };
+      put("vwap", opts.vwap ? vwap(bars) : null);
+      put("ema9", opts.ema9 ? ema(closes, 9) : null);
+      put("ema20", opts.ema20 ? ema(closes, 20) : null);
+      put("ema200", opts.ema200 ? ema(closes, 200) : null);
+      priceLines.forEach(l => candles.removePriceLine(l));
+      priceLines = [];
+      const mark = (price, color, title) => {
+        if (price == null) return;
+        priceLines.push(candles.createPriceLine({
+          price: price, color: color, lineWidth: 1,
+          lineStyle: TV.LineStyle ? TV.LineStyle.Dashed : 2,
+          axisLabelVisible: true, title: title,
+        }));
+      };
+      if (opts.plan) {
+        mark(opts.plan.target, PALETTE.target, "TARGET");
+        mark(opts.plan.entry, PALETTE.entry, "ENTRY");
+        mark(opts.plan.stop, PALETTE.stop, "STOP");
+      }
+      mark(opts.hod, PALETTE.hod, "HOD");
+      mark(opts.h52, PALETTE.h52, "52w");
+    },
+  };
+}
+
+/* Canvas fallback — same inputs, no dependency. */
+function canvasPane(host) {
+  const canvas = document.createElement("canvas");
+  canvas.style.width = "100%";
+  host.appendChild(canvas);
+  return {
+    engine: "canvas",
+    resize() { canvas.style.height = host.clientHeight + "px"; },
+    render(bars, opts) {
+      canvas.setAttribute("height", String(Math.max(80, host.clientHeight)));
+      drawChart(canvas, bars.length && bars[0].d
+        ? bars.map(b => [0, b.o, b.h, b.l, b.c, b.v]) : bars, opts);
+    },
+  };
+}
+
 function drawChart(canvas, bars, opts) {
   const dpr = window.devicePixelRatio || 1;
-  const w = canvas.clientWidth || 600, h = Number(canvas.getAttribute("height"));
+  const w = canvas.clientWidth || canvas.parentElement.clientWidth || 600;
+  const h = Number(canvas.getAttribute("height")) || 200;
   canvas.width = w * dpr; canvas.height = h * dpr;
   const g = canvas.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
   g.clearRect(0, 0, w, h);
-  g.fillStyle = "#0b1119"; g.fillRect(0, 0, w, h);
+  g.fillStyle = PALETTE.bg; g.fillRect(0, 0, w, h);
   if (!bars.length) {
-    g.fillStyle = "#63748a"; g.font = "12px system-ui";
-    g.fillText("no bars for this symbol yet", 14, h / 2); return;
+    g.fillStyle = "#63748a"; g.font = "11px system-ui";
+    g.fillText("no bars yet", 12, h / 2); return;
   }
-  const padL = 6, padR = 58, padT = 8, volH = Math.round(h * 0.2), padB = 16;
+  const padL = 4, padR = 50, padT = 6, volH = Math.round(h * 0.18), padB = 12;
   const plotH = h - padT - volH - padB, plotW = w - padL - padR;
-  const N = bars.length, bw = Math.max(1.2, Math.min(9, plotW / N * 0.72)), step = plotW / N;
-
+  const N = bars.length, bw = Math.max(1, Math.min(8, plotW / N * 0.7)), step = plotW / N;
   const extras = [];
   if (opts.plan) extras.push(opts.plan.entry, opts.plan.stop, opts.plan.target);
   if (opts.hod) extras.push(opts.hod);
@@ -94,86 +197,58 @@ function drawChart(canvas, bars, opts) {
   const y = p => padT + plotH - (p - lo) / (hi - lo) * plotH;
   const x = i => padL + i * step + step / 2;
   const maxV = Math.max(...bars.map(b => b[5]), 1);
-
-  // premarket shading
-  if (opts.openTs) {
-    const firstReg = bars.findIndex(b => b[0] >= opts.openTs);
-    if (firstReg > 0) { g.fillStyle = "#0e141d"; g.fillRect(padL, padT, x(firstReg) - padL - step / 2, plotH + volH); }
-    if (firstReg > 0) {
-      g.strokeStyle = "#2a3a4d"; g.setLineDash([3, 3]); g.beginPath();
-      g.moveTo(x(firstReg) - step / 2, padT); g.lineTo(x(firstReg) - step / 2, padT + plotH + volH); g.stroke();
-      g.setLineDash([]); g.fillStyle = "#63748a"; g.font = "9px ui-monospace,monospace";
-      g.fillText("09:30", x(firstReg) - step / 2 + 3, padT + 9);
-    }
+  g.font = "9px ui-monospace,monospace"; g.textAlign = "left";
+  for (let i = 0; i <= 3; i++) {
+    const p = lo + (hi - lo) * i / 3, yy = y(p);
+    g.strokeStyle = PALETTE.grid; g.beginPath(); g.moveTo(padL, yy); g.lineTo(padL + plotW, yy); g.stroke();
+    g.fillStyle = "#63748a"; g.fillText(p.toFixed(2), padL + plotW + 5, yy + 3);
   }
-  // price gridlines
-  g.font = "10px ui-monospace,monospace"; g.textAlign = "left";
-  for (let i = 0; i <= 4; i++) {
-    const p = lo + (hi - lo) * i / 4, yy = y(p);
-    g.strokeStyle = "#141d27"; g.beginPath(); g.moveTo(padL, yy); g.lineTo(padL + plotW, yy); g.stroke();
-    g.fillStyle = "#63748a"; g.fillText(p.toFixed(2), padL + plotW + 6, yy + 3);
-  }
-  // volume
   bars.forEach((b, i) => {
-    const vh = b[5] / maxV * (volH - 4);
+    const vh = b[5] / maxV * (volH - 3);
     g.fillStyle = b[4] >= b[1] ? "#1c6b47" : "#7a2b34";
     g.fillRect(x(i) - bw / 2, padT + plotH + volH - vh, bw, vh);
   });
-  // planning bands — frozen at arm time, they never move with new bars
   if (opts.plan) {
-    // Tight 2R plans put the three levels within a few pixels of each other, so
-    // labels are nudged apart rather than drawn on top of one another.
-    const spec = [["target", opts.plan.target, "#2ad17f"], ["entry", opts.plan.entry, "#22c7e8"], ["stop", opts.plan.stop, "#ff5f6e"]]
-      .sort((a, b) => b[1] - a[1]);
-    let lastLabelY = -99;
+    const spec = [["TARGET", opts.plan.target, PALETTE.target], ["ENTRY", opts.plan.entry, PALETTE.entry],
+                  ["STOP", opts.plan.stop, PALETTE.stop]].sort((a, b) => b[1] - a[1]);
+    let lastY = -99;
     spec.forEach(([name, price, col]) => {
-      const half = Math.max(1.5, plotH * 0.004);
-      g.fillStyle = col + "22"; g.fillRect(padL, y(price) - half, plotW, half * 2);
-      g.strokeStyle = col; g.setLineDash([5, 4]); g.lineWidth = 1;
-      g.beginPath(); g.moveTo(padL, y(price)); g.lineTo(padL + plotW, y(price)); g.stroke(); g.setLineDash([]);
-      let ly = y(price) - 3;
-      if (ly - lastLabelY < 12) ly = lastLabelY + 12;
-      lastLabelY = ly;
-      const label = name.toUpperCase() + " " + price.toFixed(2);
-      g.font = "9px ui-monospace,monospace";
-      const wpx = g.measureText(label).width + 6;
-      g.fillStyle = "#0b1119cc"; g.fillRect(padL + 2, ly - 8, wpx, 10);
-      g.fillStyle = col; g.fillText(label, padL + 5, ly);
+      g.strokeStyle = col; g.setLineDash([4, 3]); g.beginPath();
+      g.moveTo(padL, y(price)); g.lineTo(padL + plotW, y(price)); g.stroke(); g.setLineDash([]);
+      let ly = y(price) - 2; if (ly - lastY < 11) ly = lastY + 11; lastY = ly;
+      const label = name + " " + price.toFixed(2);
+      g.font = "8px ui-monospace,monospace";
+      g.fillStyle = "#0b1119cc"; g.fillRect(padL + 1, ly - 7, g.measureText(label).width + 5, 9);
+      g.fillStyle = col; g.fillText(label, padL + 3, ly);
     });
   }
   const hline = (p, col, label) => {
     if (p == null) return;
     g.strokeStyle = col; g.setLineDash([2, 3]); g.beginPath();
     g.moveTo(padL, y(p)); g.lineTo(padL + plotW, y(p)); g.stroke(); g.setLineDash([]);
-    g.fillStyle = col; g.font = "9px ui-monospace,monospace";
-    g.textAlign = "right"; g.fillText(label, padL + plotW - 4, y(p) - 3); g.textAlign = "left";
+    g.fillStyle = col; g.font = "8px ui-monospace,monospace"; g.textAlign = "right";
+    g.fillText(label, padL + plotW - 3, y(p) - 2); g.textAlign = "left";
   };
-  hline(opts.hod, "#ffc247", "HOD " + fx(opts.hod));
-  hline(opts.h52, "#c39bff", "52w high " + fx(opts.h52));
-  // candles
+  hline(opts.hod, PALETTE.hod, "HOD " + fx(opts.hod));
+  hline(opts.h52, PALETTE.h52, "52w " + fx(opts.h52));
   bars.forEach((b, i) => {
-    const up = b[4] >= b[1], col = up ? "#2ad17f" : "#ff5f6e";
+    const col = b[4] >= b[1] ? PALETTE.up : PALETTE.down;
     g.strokeStyle = col; g.fillStyle = col; g.lineWidth = 1;
     g.beginPath(); g.moveTo(x(i), y(b[2])); g.lineTo(x(i), y(b[3])); g.stroke();
     const yo = y(b[1]), yc = y(b[4]);
     g.fillRect(x(i) - bw / 2, Math.min(yo, yc), bw, Math.max(1, Math.abs(yc - yo)));
   });
-  // overlays
   const line = (series, col) => {
-    g.strokeStyle = col; g.lineWidth = 1.3; g.beginPath(); let started = false;
-    series.forEach((v, i) => { if (v == null) return; const px = x(i), py = y(v); started ? g.lineTo(px, py) : (g.moveTo(px, py), started = true); });
+    g.strokeStyle = col; g.lineWidth = 1.2; g.beginPath(); let started = false;
+    series.forEach((v, i) => { if (v == null) return; const px = x(i), py = y(v);
+      started ? g.lineTo(px, py) : (g.moveTo(px, py), started = true); });
     g.stroke();
   };
   const closes = bars.map(b => b[4]);
-  if (opts.vwap) line(vwap(bars), "#c39bff");
-  if (opts.ema9) line(ema(closes, 9), "#4dd2ff");
-  if (opts.ema20) line(ema(closes, 20), "#ff9ad2");
-  if (opts.ema200) line(ema(closes, 200), "#ffb648");
-  // last price tag
-  const last = closes[closes.length - 1];
-  g.fillStyle = "#dde6f1"; g.font = "600 10px ui-monospace,monospace";
-  g.fillRect(padL + plotW + 2, y(last) - 8, padR - 8, 16);
-  g.fillStyle = "#0b1119"; g.fillText(last.toFixed(2), padL + plotW + 6, y(last) + 4);
+  if (opts.vwap) line(vwap(bars), PALETTE.vwap);
+  if (opts.ema9) line(ema(closes, 9), PALETTE.ema9);
+  if (opts.ema20) line(ema(closes, 20), PALETTE.ema20);
+  if (opts.ema200) line(ema(closes, 200), PALETTE.ema200);
 }
 
 /* ── pillar chips (computed in the browser from published thresholds) ── */
@@ -230,10 +305,19 @@ function tileShell(id, title, kind, stateLabel, note, onFreeze) {
   return t;
 }
 
+function flameFor(symbol, nowMs) {
+  const nf = newsFor(symbol, nowMs);
+  const el_ = el("i", "flame " + (nf && nf.flame ? nf.flame : "none"));
+  el_.title = nf ? "news " + Math.round(nf.ageMin) + " min old — recency only, not quality"
+                 : "no qualifying headline in the last 24h";
+  return el_;
+}
+
 function renderListTile(id, frame) {
   const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
   const rows = (frame.lists[id] || []).map(rowObj);
   const froz = state.frozen[id];
+  const nowMs = new Date(frame.ts).getTime();
   let ordered = rows, pending = 0;
   if (froz) {
     const byS = {}; rows.forEach(r => byS[r.symbol] = r);
@@ -245,26 +329,30 @@ function renderListTile(id, frame) {
     if (!state.frozen[id]) delete state.frozen[id];
     render();
   });
-  const cols = el("div", "tile-cols");
-  ["Symbol", "Last", "Chg", meta.metric.indexOf("RVOL") >= 0 ? "RVOL" : "Gap", "Vol"].forEach(c => cols.appendChild(el("span", null, c)));
+  const cols = el("div", "tile-cols list-cols");
+  ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
   tile.appendChild(cols);
   const body = el("div", "tile-rows");
-  if (!ordered.length) body.appendChild(el("div", "empty", "No symbol currently qualifies. An empty list is a real answer."));
+  if (!ordered.length)
+    body.appendChild(el("div", "empty", "No symbol currently meets all four technical pillars. An empty list is a real answer."));
   const prevKeys = state.prevRowKeys[id] || [];
   ordered.forEach((r, i) => {
     const sym = SYMS[r.symbol] || {};
-    const tr = el("div", "trow" + (state.selected === r.symbol ? " sel" : "") + (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
-    tr.dataset.symbol = r.symbol; tr.dataset.rowIndex = i; tr.setAttribute("role", "button"); tr.tabIndex = 0;
-    const s = el("span", "tsym"); s.appendChild(el("b", null, r.symbol));
-    const nf = newsFor(r.symbol, new Date(frame.ts).getTime());
-    if (nf && nf.flame) { const fl = el("i", "flame " + nf.flame); fl.title = "news " + Math.round(nf.ageMin) + " min old — recency only"; s.appendChild(fl); }
-    if (sym.floatQuality && sym.floatQuality !== "verified") s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "float ?" : "proxy"));
-    if (r.spread != null && r.price && r.spread / r.price > 0.01) s.appendChild(el("span", "pill warn", "spread"));
+    const tr = el("div", "trow list-row" + (state.selected === r.symbol ? " sel" : "") +
+      (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
+    tr.dataset.symbol = r.symbol; tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    const s = el("span", "tsym");
+    s.appendChild(el("b", null, r.symbol));
+    s.appendChild(flameFor(r.symbol, nowMs));
+    if (sym.floatQuality && sym.floatQuality !== "verified")
+      s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "?" : "proxy"));
+    if (r.spread != null && r.price && r.spread / r.price > 0.01)
+      s.appendChild(el("span", "pill warn", "sprd"));
     tr.appendChild(s);
     tr.appendChild(el("span", null, fx(r.price)));
     tr.appendChild(el("span", dirClass(r.changePct), pct(r.changePct)));
-    tr.appendChild(el("span", null, meta.metric.indexOf("RVOL") >= 0 ? fx(r.rvolDaily) + "×" : pct(r.gapPct)));
-    tr.appendChild(el("span", "muted", vol(r.volume)));
+    tr.appendChild(el("span", null, fx(r.rvolDaily) + "×"));
+    tr.appendChild(el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—"));
     tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };
     tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
     body.appendChild(tr);
@@ -272,7 +360,8 @@ function renderListTile(id, frame) {
   });
   state.prevRowKeys[id] = ordered.map(r => r.symbol);
   tile.appendChild(body);
-  if (pending) tile.appendChild(el("div", "pending", pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply the latest ranking"));
+  if (pending) tile.appendChild(el("div", "pending",
+    pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply"));
   return tile;
 }
 
@@ -293,6 +382,14 @@ function reasonsDrawer(r, sym, listId) {
     const n = el("div", "reason");
     n.appendChild(el("span", "reason-name", "news / catalyst — displayed, never a gate (Confirmed platform)"));
     d.appendChild(n);
+    [["gap %", pct(r.gapPct)], ["5m RVOL", fx(r.rvol5m) + "×"], ["5m volume", vol(r.volume5m)],
+     ["volume", vol(r.volume)], ["position in range", r.rangePos != null ? (r.rangePos * 100).toFixed(0) + "%" : "—"],
+     ["spread", "$" + fx(r.spread, 3)]].forEach(([lab, val]) => {
+      const row = el("div", "reason");
+      row.appendChild(el("span", "reason-name", lab));
+      row.appendChild(el("span", null, String(val)));
+      d.appendChild(row);
+    });
   } else {
     const row = el("div", "reason");
     row.appendChild(el("span", "ok", "RANK"));
@@ -308,22 +405,45 @@ function sessionOf(iso) {
     { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
   return hhmm < "09:30" ? "PM" : hhmm < "16:00" ? "RTH" : "AH";
 }
+const BRANCH_SHORT = {
+  low_float: "LF", medium_float: "MF", high_rvol: "HR", medium_rvol: "MR",
+  price_20_plus: "20+", price_under_20: "<20",
+};
+function shortBranch(branch, scannerId) {
+  if (!branch) return scannerId.replace(/_/g, " ").replace("running ", "run ");
+  return branch.split("_").reduce((acc, _, i, parts) => acc, null) ||
+    branch.replace(/low_float/, "LF").replace(/medium_float/, "MF")
+          .replace(/high_rvol/, "HR").replace(/medium_rvol/, "MR")
+          .replace(/price_20_plus/, "20+").replace(/price_under_20/, "<20")
+          .replace(/_/g, "·");
+}
+
 function renderAlertTile(cfg, idx) {
-  const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 40);
+  const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 60);
   const tile = tileShell(cfg.id, cfg.title, "alert", "REPLAY", cfg.note);
+  const cols = el("div", "tile-cols alert-cols");
+  ["Time", "Symbol / news", "Price", "Chg", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
+  tile.appendChild(cols);
   const body = el("div", "tile-rows");
   if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
   all.forEach(a => {
-    const tr = el("div", "trow" + (state.selected === a.symbol ? " sel" : ""));
-    tr.style.gridTemplateColumns = "44px 1fr auto";
+    const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : ""));
     tr.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
     const mid = el("span", "tsym");
     mid.appendChild(el("b", null, a.symbol));
+    // The alert carries the flame observed AT the alert, which is the honest
+    // record even when the news feed caught up minutes later.
+    const fl = el("i", "flame " + (a.news && a.news.flame ? a.news.flame : "none"));
+    fl.title = a.news ? "news " + a.news.age_minutes + " min old at alert time" : "no headline at alert time";
+    mid.appendChild(fl);
     const ses = sessionOf(a.sourceTime);
     mid.appendChild(el("span", "pill ses " + ses.toLowerCase(), ses));
-    mid.appendChild(el("span", "tl-what", a.branch ? a.branch.replace(/_/g, " ") : a.scannerId.replace(/_/g, " ")));
     tr.appendChild(mid);
-    tr.appendChild(el("span", "sev " + a.severity, a.severity));
+    tr.appendChild(el("span", null, fx(a.values && a.values.last)));
+    tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
+    const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
+    br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " — branch labels the alert, it is not the filter";
+    tr.appendChild(br);
     tr.onclick = () => select(a.symbol, cfg.id);
     body.appendChild(tr);
   });
@@ -416,31 +536,37 @@ function renderHeader(frame) {
 function renderQuote(frame, ctx) {
   const { last, chg, row, meta, nf, halted } = ctx;
   const q = $("#quoteCard"); q.textContent = "";
-  kv(q, "Last", fx(last)); kv(q, "Prev close", fx(meta.prevClose));
-  kv(q, "Change", pct(chg), dirClass(chg));
+  const grid = el("div", "qgrid");
   const wide = row && row.spread != null && row.price && row.spread / row.price > 0.01;
-  kv(q, "Spread", row ? "$" + fx(row.spread, 3) : "—", wide ? "down" : null);
-  kv(q, "Range position", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
-  q.appendChild(el("div", "divider", "supply"));
-  kv(q, "Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M"
-      : meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "UNKNOWN",
+  kv(grid, "Last", fx(last));
+  kv(grid, "Float", meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "UNKNOWN",
      meta.floatQuality === "verified" ? null : "down");
-  kv(q, "Source quality", (meta.floatQuality || "unknown").replace(/_/g, " "),
+  kv(grid, "Prev close", fx(meta.prevClose));
+  kv(grid, "Float source", (meta.floatQuality || "unknown").replace(/_/g, " ").replace(" proxy", ""),
      meta.floatQuality === "verified" ? null : "down");
-  kv(q, "52-week high", fx(meta.high52w));
-  kv(q, "Avg daily volume", vol(meta.avgDailyVolume));
-  kv(q, "Halt status", halted ? "HALTED" : "trading", halted ? "down" : null);
+  kv(grid, "Change", pct(chg), dirClass(chg));
+  kv(grid, "52w high", fx(meta.high52w));
+  kv(grid, "Spread", row ? "$" + fx(row.spread, 3) : "—", wide ? "down" : null);
+  kv(grid, "Avg volume", vol(meta.avgDailyVolume));
+  kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
+  kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  q.appendChild(grid);
   q.appendChild(el("div", "divider", "catalyst"));
   if (nf) {
     q.appendChild(el("p", "headline", nf.item.headline));
-    kv(q, "Published", etClock(nf.item.publishedAt) + " ET");
-    kv(q, "First observed", etClock(nf.item.firstObservedAt) + " ET");
-    kv(q, "Age → flame", Math.round(nf.ageMin) + " min → " + (nf.flame || "none"));
+    const g2 = el("div", "qgrid");
+    kv(g2, "Published", etClock(nf.item.publishedAt));
+    kv(g2, "Observed", etClock(nf.item.firstObservedAt));
+    kv(g2, "Age", Math.round(nf.ageMin) + " min");
+    kv(g2, "Flame", nf.flame || "none");
+    q.appendChild(g2);
   } else {
-    q.appendChild(el("div", "placeholder", "No qualifying headline observed. A stock with no flame can still be a valid technical candidate — news is scored, never required."));
+    q.appendChild(el("div", "placeholder",
+      "No qualifying headline observed. No flame does not disqualify a candidate — news is scored, never required."));
   }
   if (meta.floatQuality === "shares_outstanding_proxy")
-    q.appendChild(el("div", "note warn", "Shares outstanding shown as an explicit proxy — it is not float, and the supply pillar fails until a verified value exists."));
+    q.appendChild(el("div", "note warn",
+      "Shares outstanding shown as an explicit proxy — not float. The supply pillar fails until a verified value exists."));
 }
 
 /* Level 2 — SIMULATED depth. No licensed depth feed is connected, so the
@@ -616,16 +742,16 @@ function renderSizing(plan, row) {
 }
 
 /* ── charts ─────────────────────────────────────────────────────────── */
+const PANES = {};
 function renderCharts(frame) {
   const sym = state.selected, meta = SYMS[sym] || {};
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
-  drawChart($("#chartA"), bars1, { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
-  drawChart($("#chartB"), agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
-  const daily = (meta.dailyBars || []).map(d => [0, d.o, d.h, d.l, d.c, d.v]);
-  drawChart($("#chartC"), daily, { ema20: true, ema200: true, h52: meta.high52w });
+  PANES.a.render(bars1, { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+  PANES.b.render(agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+  PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w });
 }
 
 /* ── selection ──────────────────────────────────────────────────────── */
@@ -735,7 +861,22 @@ function init() {
     else if (k === "a") { $("#btnSound").click(); }
     else if (e.key === "Escape") { state.locked = false; state.openRow = null; state.openAlert = null; render(); }
   });
-  window.addEventListener("resize", () => renderCharts(FRAMES[state.frame]));
+  PANES.a = makePane("chartA", false);
+  PANES.b = makePane("chartB", false);
+  PANES.c = makePane("chartC", true);
+  const usingTV = PANES.a.engine === "tradingview";
+  $("#chartEngine").textContent = usingTV ? "TRADINGVIEW" : "CANVAS";
+  $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3" : "library unavailable — fallback";
+  $("#chartDot").className = "dot " + (usingTV ? "live" : "stale");
+  const ro = new ResizeObserver(() => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
+  ["chartA", "chartB", "chartC"].forEach(id => ro.observe(document.getElementById(id)));
+  window.addEventListener("resize", () => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
   state.frame = Math.max(0, OPEN_INDEX - 8);
   syncTransport(); render();
 }

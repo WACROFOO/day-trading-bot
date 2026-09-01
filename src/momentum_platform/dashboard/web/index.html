@@ -5,6 +5,7 @@
 <link rel="stylesheet" href="styles.css">
 <body>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightweight-charts/4.1.3/lightweight-charts.standalone.production.js"></script>
 <div id="app" class="shell">
 
   <header class="topbar">
@@ -12,108 +13,102 @@
       <span class="mark" aria-hidden="true"></span>
       <div>
         <div class="brand-name">Momentum Workstation</div>
-        <div class="brand-sub" id="sessionLabel">loading session…</div>
+        <div class="brand-sub" id="sessionLabel">loading…</div>
       </div>
     </div>
 
     <div class="clock">
       <div class="clock-time" id="clockET">--:--</div>
-      <div class="clock-meta"><span id="sessionBadge" class="badge">—</span><span id="frameCounter" class="muted">—</span></div>
+      <div class="clock-meta"><span id="sessionBadge" class="badge">—</span><span id="frameCounter" class="muted tiny">—</span></div>
     </div>
 
     <div class="transport" role="group" aria-label="Replay transport">
-      <button id="btnPlay" class="btn primary" aria-label="Play or pause replay">▶ Play</button>
+      <button id="btnPlay" class="btn primary">▶ Play</button>
       <button class="btn" data-seek="open">09:30</button>
-      <button class="btn" data-seek="alert">First alert</button>
-      <label class="speed">Speed
-        <select id="speed" aria-label="Replay speed">
-          <option value="1">1×</option><option value="4" selected>4×</option>
-          <option value="12">12×</option><option value="40">40×</option>
-        </select>
-      </label>
+      <button class="btn" data-seek="alert">Alert</button>
+      <select id="speed" class="sel" aria-label="Replay speed">
+        <option value="1">1×</option><option value="4" selected>4×</option>
+        <option value="12">12×</option><option value="40">40×</option>
+      </select>
       <input id="scrub" class="scrub" type="range" min="0" max="0" value="0" aria-label="Scrub replay">
     </div>
 
     <div class="health">
-      <div class="health-row"><span id="feedDot" class="dot replay" aria-hidden="true"></span><span id="feedText" class="health-text">REPLAY</span></div>
-      <div class="health-sub" id="feedAge">deterministic fixture</div>
+      <div class="health-row"><span id="feedDot" class="dot replay"></span><span id="feedText" class="health-text">REPLAY</span></div>
+      <div class="health-sub" id="feedAge">fixture</div>
+    </div>
+    <div class="health">
+      <div class="health-row"><span id="chartDot" class="dot"></span><span id="chartEngine" class="health-text">CHARTS</span></div>
+      <div class="health-sub" id="chartEngineSub">detecting…</div>
     </div>
 
-    <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇 Alerts</button>
+    <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇</button>
   </header>
 
   <main class="grid">
 
-    <section class="dock" aria-label="Scanner dock">
-      <div class="dock-head">
-        <span>Scanners</span>
-        <span class="muted tiny">candidates → acceleration → breakout</span>
-      </div>
+    <section class="dock" aria-label="Scanners and symbol context">
       <div id="tiles"></div>
+      <div class="card quote-card">
+        <div class="card-head">Quote · supply · risk · catalyst</div>
+        <div id="quoteCard" class="card-body"></div>
+      </div>
     </section>
 
-    <section class="workspace" aria-label="Chart workspace">
+    <section class="workspace" aria-label="Charts">
       <div class="sym-header" id="symHeader">
         <div class="sym-id">
           <span class="sym-ticker" id="symTicker">—</span>
-          <span id="symLock" class="lock" hidden title="Selection locked (Enter)">LOCKED</span>
+          <span id="symLock" class="lock" hidden>LOCKED</span>
           <span id="symFlame" class="flame" hidden></span>
         </div>
         <div class="sym-stats" id="symStats"></div>
       </div>
 
-      <figure class="chart-card">
+      <figure class="chart-card" id="paneA">
         <figcaption class="chart-head">
-          <span class="chart-title">1 minute · execution</span>
-          <span class="chart-role">entry, structural stop, trigger</span>
-          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20 <i class="k hod"></i>HOD</span>
+          <span class="chart-title">1m · execution</span>
+          <span class="chart-role">entry · structural stop · trigger</span>
+          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k hod"></i>HOD</span>
         </figcaption>
-        <canvas id="chartA" height="264"></canvas>
+        <div class="chart-host" id="chartA"></div>
       </figure>
 
-      <figure class="chart-card">
+      <figure class="chart-card" id="paneB">
         <figcaption class="chart-head">
-          <span class="chart-title">5 minute · structure</span>
+          <span class="chart-title">5m · structure</span>
           <span class="chart-role">is the move still constructive</span>
-          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20</span>
+          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20</span>
         </figcaption>
-        <canvas id="chartB" height="188"></canvas>
+        <div class="chart-host" id="chartB"></div>
       </figure>
 
-      <figure class="chart-card">
+      <figure class="chart-card" id="paneC">
         <figcaption class="chart-head">
           <span class="chart-title">Daily · room</span>
-          <span class="chart-role">resistance, 200 EMA, 52-week high</span>
-          <span class="legend"><i class="k ema20"></i>EMA20 <i class="k ema200"></i>EMA200 <i class="k h52"></i>52w</span>
+          <span class="chart-role">resistance · 200 EMA · 52-week high</span>
+          <span class="legend"><i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
         </figcaption>
-        <canvas id="chartC" height="188"></canvas>
+        <div class="chart-host" id="chartC"></div>
       </figure>
 
       <div class="timeline-card">
-        <div class="card-head"><span>Alert timeline</span><span class="muted tiny" id="alertCount">0 events</span></div>
+        <div class="card-head"><span>Alert timeline</span><span class="muted tiny" id="alertCount">0</span></div>
         <div id="timeline" class="timeline"></div>
       </div>
     </section>
 
-    <section class="context" aria-label="Symbol context">
-      <div class="card">
-        <div class="card-head">Quote · supply · risk</div>
-        <div id="quoteCard" class="card-body"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-head">
-          Level 2 · Time &amp; Sales
-          <span class="tag sim" title="No licensed depth feed is connected">simulated</span>
-        </div>
+    <section class="context" aria-label="Level 2 and verdict">
+      <div class="card l2-card">
+        <div class="card-head">Level 2 · Time &amp; Sales <span class="tag sim">simulated</span></div>
         <div id="l2Card" class="card-body l2"></div>
       </div>
 
       <div class="card verdict-card">
-        <div class="card-head">Setup verdict <span class="tag" id="verdictVersion">pine mirror</span></div>
+        <div class="card-head">Setup verdict <span class="tag">pine mirror</span></div>
         <div id="verdictCard" class="card-body"></div>
         <div class="card-body sizing">
-          <label class="risk-input"><span>Your risk per trade $</span>
+          <label class="risk-input"><span>Your risk / trade $</span>
             <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
                    aria-label="Your dollar risk per trade">
           </label>
@@ -125,10 +120,7 @@
 
   <footer class="statusbar">
     <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
-    <span class="keys">
-      <kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze ·
-      <kbd>N</kbd> news · <kbd>A</kbd> audio · <kbd>Esc</kbd> back
-    </span>
+    <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
   </footer>
 </div>
 

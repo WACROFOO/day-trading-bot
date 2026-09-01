@@ -182,6 +182,32 @@ def test_definition_versions_present(session):
             assert "@" in alert["definitionVersion"]
 
 
+def test_live_session_shares_the_replay_shape(monkeypatch):
+    """The live adapter emits the same normalized records, so the scanner
+    engine and the dashboard behave identically on real data. The network is
+    never touched here — only the record contract is exercised."""
+    from momentum_platform.dashboard.session_builder import build_session_from_records
+    records = [
+        {"type": "reference", "symbol": "ZZZZ", "prev_close": 4.0,
+         "avg_daily_volume": 100_000, "high_52w": 9.0, "float_shares": 8_000_000,
+         "float_quality": "verified", "daily_bars": []},
+        {"type": "news", "symbol": "ZZZZ", "provider_id": "n1",
+         "published_at": "2026-09-01T13:00:00Z", "first_observed_at": "2026-09-01T13:02:00Z",
+         "headline": "ZZZZ wins contract", "category": "contract"},
+        {"type": "bar", "symbol": "ZZZZ", "ts": "2026-09-01T13:31:00Z",
+         "open": 5.0, "high": 5.3, "low": 4.95, "close": 5.25, "volume": 400_000},
+        {"type": "bar", "symbol": "ZZZZ", "ts": "2026-09-01T13:32:00Z",
+         "open": 5.25, "high": 5.6, "low": 5.2, "close": 5.55, "volume": 500_000},
+    ]
+    live = build_session_from_records(records, "live-zzzz", "yfinance (delayed ~15m)",
+                                      data_status="delayed")
+    assert live["dataStatus"] == "delayed"
+    assert live["tradingDate"] == "2026-09-01"
+    assert set(live["rowColumns"]) == set(build_session(FIXTURE)["rowColumns"])
+    assert live["symbols"]["ZZZZ"]["floatQuality"] == "verified"
+    assert len(live["frames"]) == 2 and live["bars"]["ZZZZ"]
+
+
 def test_session_json_has_no_secrets(session):
     blob = json.dumps(session).lower()
     for needle in ("api_key", "apikey", "authorization", "bearer ", "webhook",
@@ -277,7 +303,51 @@ def test_ui_three_charts_always_present(page):
         box = page.locator(cid).bounding_box()
         assert box and box["width"] > 200 and box["height"] > 100
     titles = page.eval_on_selector_all(".chart-title", "els => els.map(e => e.textContent)")
-    assert titles == ["1 minute · execution", "5 minute · structure", "Daily · room"]
+    assert titles == ["1m · execution", "5m · structure", "Daily · room"]
+    # Each pane fills its container whichever renderer is active.
+    for cid in ("#chartA", "#chartB", "#chartC"):
+        host = page.locator(cid).bounding_box()
+        inner = page.locator(f"{cid} canvas").first.bounding_box()
+        assert inner and abs(inner["width"] - host["width"]) < 4
+
+
+def test_ui_reports_its_chart_engine(page):
+    """TradingView Lightweight Charts is the renderer; when the library cannot
+    load the pane falls back to canvas and the header says so rather than
+    showing an empty chart."""
+    engine = page.locator("#chartEngine").inner_text()
+    assert engine in {"TRADINGVIEW", "CANVAS"}
+    sub = page.locator("#chartEngineSub").inner_text()
+    assert ("lightweight-charts" in sub) if engine == "TRADINGVIEW" else ("fallback" in sub)
+
+
+def test_ui_fits_one_viewport(page):
+    """The whole decision path is visible without scrolling the page; only row
+    lists scroll."""
+    page.set_viewport_size({"width": 1680, "height": 1000})
+    page.wait_for_timeout(400)
+    metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
+    assert metrics["sh"] <= metrics["ih"] + 2
+
+
+def test_ui_quote_card_sits_under_the_scanners(page):
+    """Quote / supply / risk / catalyst lives at the bottom of the left column."""
+    quote = page.locator("#quoteCard").bounding_box()
+    tiles = page.locator("#tiles").bounding_box()
+    l2 = page.locator("#l2Card").bounding_box()
+    assert quote["y"] > tiles["y"]                       # below the scanner stack
+    assert abs(quote["x"] - tiles["x"]) < 4              # same (left) column
+    assert l2["x"] > quote["x"] + quote["width"]         # Level 2 is on the right
+
+
+def test_ui_flames_on_every_scanner_row(page):
+    """Confirmed platform: scanner rows carry the news flame, lists and alerts
+    alike. A flame is news age only."""
+    _seek(page, 130)
+    assert page.locator("[data-tile=five_pillars_list] .trow .flame").count() >= 1
+    assert page.locator("[data-tile=hod_momentum] .trow .flame").count() >= 1
+    title = page.locator("[data-tile=five_pillars_list] .trow .flame").first.get_attribute("title")
+    assert "recency" in title or "no qualifying headline" in title
 
 
 def test_ui_freeze_pins_row_order(page):

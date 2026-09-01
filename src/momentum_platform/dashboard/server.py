@@ -28,6 +28,10 @@ DEFAULT_FIXTURE = (
 
 @lru_cache(maxsize=4)
 def _session(fixture: str) -> dict:
+    """`fixture` is a path, or "live:AAPL,TSLA" for real delayed data."""
+    if fixture.startswith("live:"):
+        from ..datasources.live_session import build_live_session
+        return build_live_session(fixture[5:].split(","))
     return build_session(fixture)
 
 
@@ -89,15 +93,21 @@ def make_handler(fixture: str):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Momentum Workstation replay dashboard")
     ap.add_argument("--fixture", default=str(DEFAULT_FIXTURE))
+    ap.add_argument("--live", metavar="SYMBOLS",
+                    help="comma-separated real symbols to load from yfinance "
+                         "(delayed ~15m) instead of a replay fixture")
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--host", default="127.0.0.1")
     args = ap.parse_args(argv)
 
-    session = _session(args.fixture)
+    source = f"live:{args.live}" if args.live else args.fixture
+    session = _session(source)
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "
           f"{sum(len(f['alerts']) for f in session['frames'])} alerts")
     print(f"workstation: http://{args.host}:{args.port}/")
-    ThreadingHTTPServer((args.host, args.port), make_handler(args.fixture)).serve_forever()
+    if args.live:
+        print("DELAYED data (~15 minutes) — research only, not an entitled feed")
+    ThreadingHTTPServer((args.host, args.port), make_handler(source)).serve_forever()
     return 0
 
 

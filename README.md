@@ -164,31 +164,51 @@ python scripts/make_replay_fixture.py                          # regenerate the 
 python scripts/build_dashboard_artifact.py build/workstation.html   # single-file build
 ```
 
+**Layout** — the whole decision path fits one viewport; only row lists scroll.
+Left: three scanner cards with the quote/supply/risk/catalyst card beneath
+them. Centre: three charts plus the alert timeline. Right: Level 2 and the
+setup verdict.
+
 - **Three scanner cards** in funnel order — Ross-style Five Pillars Scan
-  (candidates), Running Up (live acceleration, premarket and regular hours) and
-  Small Cap HOD Momentum (breakout); alert rows tag the session that produced
-  them.
-- **Three charts** with fixed roles: 1-minute execution, 5-minute structure,
-  daily room. No interval toggles to lose.
-- **One selected symbol** drives the header, all three charts and the whole
-  right column, with the ticker in the URL for deep links.
-- **Row-order freeze** pins a tile's ranking while values keep updating and
-  queues new candidates in a pending badge — the 09:30 misclick guard.
+  (candidates), Running Up (live acceleration) and Small Cap HOD Momentum
+  (breakout). Every row carries the news flame, and alert rows tag the session
+  (PM / RTH) plus the branch that fired, matching the captured column sets.
+- **Charts render with TradingView Lightweight Charts** (real crosshair, price
+  and time scales, zoom and pan), pinned from cdnjs. If the library cannot
+  load, each pane falls back to a built-in canvas renderer and the header says
+  `CANVAS · library unavailable` rather than showing an empty chart. Neither
+  renderer supplies market data — that comes from the session.
+- **Fixed chart roles**: 1m execution, 5m structure, daily room. Nothing to
+  toggle and nothing to lose on a symbol change.
+- **One selected symbol** drives the header, all three charts and both side
+  columns, with the ticker in the URL for deep links.
+- **Row-order freeze** pins a ranking while values keep updating.
 - **Explainable rows**: expanding a Five Pillars row shows each pillar's
-  arithmetic against the Confirmed course threshold; alerts carry their
-  server-side reasons, definition version and evidence label.
-- **Quote · supply · risk** in one card: price and spread, float with its
-  source quality, halt state, and the catalyst with both `publishedAt` and
-  `firstObservedAt` so flame latency stays visible.
-- **Level 2 and Time & Sales** — a depth ladder with size bars, wall detection
-  and a coloured tape. The book is **simulated**, generated deterministically
-  from the replay snapshot and labelled as such on the card, because no
-  licensed depth feed is connected; swapping in a real feed replaces one
-  function.
-- **Setup verdict** — mirrors the bundled Pine dashboard's eleven rows, then
-  applies the playbook's GO / WAIT / PASS matrix and always states why.
-  Position sizing uses the operator's own dollar risk; the app never assumes
-  one.
+  arithmetic against the Confirmed course threshold plus gap, 5m RVOL, 5m
+  volume, position in range and spread.
+- **Level 2 and Time & Sales** — depth ladder with size bars and wall
+  detection, plus a coloured tape. The book is **simulated**, generated
+  deterministically from the replay snapshot and labelled on the card; no
+  licensed depth feed is connected. A real feed replaces one function.
+- **Setup verdict** — mirrors the bundled Pine dashboard's eleven rows, applies
+  the playbook GO / WAIT / PASS matrix, always states why, and sizes from the
+  operator's own dollar risk.
+
+### Real market data (delayed)
+
+```bash
+PYTHONPATH=src python -m momentum_platform.dashboard.server --live AAPL,TSLA,SOFI
+```
+
+Pulls real 1-minute bars, daily history, reference data and **real news
+headlines** through yfinance and runs them through the same scanner engine, so
+every card behaves identically on live symbols. Limits are stated on screen:
+data is ~15 minutes delayed and not exchange-entitled, 1-minute history is
+roughly the last seven days, premarket coverage is partial, and `floatShares`
+is frequently missing — in which case shares outstanding is shown as an
+explicit proxy and the supply pillar fails rather than passing on the wrong
+number. This path was written but could not be exercised in the build
+container, whose proxy blocks the provider.
 
 Ten **synthetic** symbols exercise the behaviours worth testing: a 5/5 leader
 with a clean first pullback, a low-float runner with no news, a gapper that

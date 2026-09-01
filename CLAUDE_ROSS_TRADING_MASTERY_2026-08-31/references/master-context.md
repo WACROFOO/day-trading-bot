@@ -190,6 +190,29 @@ Two more engine corrections came out of this revision:
 - ranked rows now expose raw five-minute volume, which Top Volume 5 Minutes
   needs to display what it ranks and which the depth ladder uses for scale.
 
+## Workstation layout and charting revision (September 1, 2026)
+
+Second layout pass at the user's direction:
+
+- quote / supply / risk / catalyst moved to the bottom of the left column,
+  under the three scanner cards; Level 2 and the setup verdict share the right
+  column;
+- every card sized so the whole decision path fits one viewport at 1440x900
+  and above — only row lists scroll, never the page;
+- charts now render with TradingView Lightweight Charts (pinned 4.1.3 from
+  cdnjs) with a built-in canvas fallback and an honest engine badge, so a
+  blocked CDN degrades instead of blanking;
+- scanner rows carry the news flame on lists and alerts alike, and alert rows
+  show session (PM/RTH) and branch, matching the captured column sets;
+- a live mode (`--live SYMBOLS`) builds the same session from real delayed
+  yfinance bars, daily history and real news headlines through a shared
+  `build_session_from_records` path, so replay and live exercise identical
+  scanner code. It is written but unverified: this container's proxy blocks
+  the provider and both CDNs.
+
+Outstanding for real operation: a licensed market-data provider, a licensed
+news feed, and licensed Level 2 (the user has explicitly deferred depth).
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

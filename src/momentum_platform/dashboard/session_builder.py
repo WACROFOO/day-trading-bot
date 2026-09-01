@@ -92,12 +92,25 @@ def _row(ranked) -> list:
 
 
 def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
+    """Build a session from a replay fixture file."""
     fixture_path = Path(fixture_path)
     records = [
         json.loads(line)
         for line in fixture_path.read_text().splitlines()
         if line.strip() and not line.startswith("#")
     ]
+    return build_session_from_records(records, fixture_path.stem, fixture_path.name, max_rows)
+
+
+def build_session_from_records(
+    records: list,
+    session_id: str,
+    source_name: str,
+    max_rows: int = 10,
+    data_status: str = "replay",
+) -> dict:
+    """Build a session from normalized records. Replay fixtures and live
+    provider pulls both land here, so the scanner behaviour is identical."""
 
     symbols: dict[str, dict] = {}
     news_queue: list[dict] = []
@@ -271,13 +284,17 @@ def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
             "halts": dict(halt_state),
         })
 
+    trading_date = (
+        frames[0]["ts"][:10] if frames else datetime.now(UTC).strftime("%Y-%m-%d")
+    )
     return {
-        "sessionId": fixture_path.stem,
-        "generatedFrom": fixture_path.name,
-        "tradingDate": "2026-09-01",
+        "sessionId": session_id,
+        "generatedFrom": source_name,
+        "dataStatus": data_status,
+        "tradingDate": trading_date,
         "timezone": "America/New_York",
-        "disclaimer": ("Synthetic symbols and clean-room approximations. Scanner events are "
-                       "research candidates, never entry signals or orders."),
+        "disclaimer": ("Clean-room approximations. Scanner events are research candidates, "
+                       "never entry signals or orders."),
         "rowColumns": ROW_COLUMNS,
         "listMeta": LIST_META,
         "alertMeta": ALERT_META,
