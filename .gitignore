@@ -36,3 +36,6 @@ data/*.db
 # Momentum platform runtime artifacts
 data/alerts.jsonl
 build/
+
+# SEC ticker->CIK map, re-downloaded weekly
+data/sec_cache/
