@@ -124,6 +124,63 @@ Do not continue until the first five checks pass.
 
 ---
 
+## Step 4 — start the desk
+
+```bash
+bash scripts/start.sh
+```
+
+That is the whole command, and it is the one you will type every day.
+
+It checks Alpaca first, then does the right thing:
+
+| What it finds | What it does |
+|---|---|
+| Live feed working | opens the desk on today's real IEX data |
+| Keys missing | tells you to run `setup.sh`, opens the recorded session |
+| Keys rejected | tells you to regenerate the pair, opens the recorded session |
+| Network blocked | tells you it is the network, **not** your keys, opens the recorded session |
+| Port 8787 busy | moves to 8788 and says so |
+
+**The desk always comes up.** If the live feed is unavailable you get a
+recorded trading session instead — every card, chart, scanner and the verdict
+engine behave identically, only the data is from a saved day. That is the
+right place to learn the platform while a connection problem gets sorted.
+
+Variations:
+
+```bash
+bash scripts/start.sh AAPL,TSLA   # live, symbols you name
+bash scripts/start.sh --scan      # live, whatever passed the pillars today
+bash scripts/start.sh --replay    # recorded session on purpose, no network
+```
+
+### The one thing that trips everybody up
+
+The last thing the script prints is the address:
+
+```
+Open this in your browser:  http://127.0.0.1:8787
+```
+
+`127.0.0.1` means **this computer**. The page exists only while that terminal
+window is running the script. So:
+
+- **Leave the terminal window open.** Closing it, or pressing Ctrl-C, stops the
+  desk and the browser tab immediately goes dead.
+- **Open the address in a browser on the same computer.** It is not a website;
+  another device on your wifi cannot reach it, and neither can anyone else.
+- **"This site can't be reached" means nothing is running**, not that something
+  is broken. Go back to the terminal, run `bash scripts/start.sh`, wait for the
+  address to print, *then* open the browser.
+
+> **You should see** the header read `IEX` on live data, or `REPLAY` on a
+> recorded session. Press Play to walk the session forward minute by minute.
+
+---
+
+## Step 4b — doing it by hand (optional)
+
 ## Step 4 — see real charts in the workstation (2 minutes)
 
 Pick any two liquid symbols to start:
@@ -245,9 +302,18 @@ progression — is in `docs/daily-operating-guide.md`.
 
 ## When something breaks
 
-Run `python scripts/verify_alpaca.py` first. It isolates which layer failed:
-credentials, network, entitlement, or simply a closed market. Ninety percent of
-problems are one of:
+| What you see | What it actually means |
+|---|---|
+| **This site can't be reached** at `127.0.0.1:8787` | No desk is running. Start it in a terminal with `bash scripts/start.sh`, wait for the address to print, then reload. |
+| The page went blank mid-session | The terminal was closed or Ctrl-C was pressed. Start it again. |
+| Header says `REPLAY` when you wanted live | The launcher already told you why, higher up in the terminal. Scroll up and read that line. |
+| `Could not reach Alpaca` | Network, VPN or firewall. **Your keys are fine.** Try home wifi. |
+| `401` / `403` from Alpaca itself | The key pair is wrong. Regenerate a paper pair, re-run `setup.sh`. |
+| Charts empty on live data | The market has not traded yet today. Normal before 04:00 ET. |
+
+Run `python scripts/verify_alpaca.py` for the layer-by-layer breakdown. It
+isolates which one failed: credentials, network, entitlement, or simply a
+closed market. Ninety percent of problems are one of:
 
 1. `.env` in the wrong folder — it belongs next to `README.md`;
 2. live keys used against the paper endpoint;

@@ -179,3 +179,40 @@ def test_no_bars_produces_an_actionable_message(client, monkeypatch):
     message = str(exc.value)
     assert "premarket starts 04:00 ET" in message
     assert "verify_alpaca.py" in message
+
+
+# -- preflight classification -------------------------------------------------
+# The launcher tells the user either "your keys are wrong" or "your network is
+# blocked" based on this. A proxy refusing CONNECT also reports 403, so these
+# cases must not be confused: a misread sends the user to regenerate a
+# perfectly good key pair.
+
+import importlib.util as _ilu  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+_spec = _ilu.spec_from_file_location(
+    "preflight", _Path(__file__).resolve().parents[1] / "scripts" / "preflight.py")
+preflight = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(preflight)
+
+
+def test_proxy_tunnel_403_is_a_network_block_not_a_bad_key():
+    msg = ("Could not reach Alpaca (Tunnel connection failed: 403 Forbidden). "
+           "Check your internet connection, and any company proxy or VPN.")
+    assert preflight._classify(msg) == preflight.UNREACHABLE
+
+
+def test_plain_401_is_a_rejected_credential():
+    assert preflight._classify("HTTP 401 unauthorized") == preflight.REJECTED
+
+
+def test_alpaca_403_without_tunnel_wording_is_rejected():
+    assert preflight._classify("HTTP 403 forbidden: account not entitled") == preflight.REJECTED
+
+
+def test_connection_refused_is_a_network_block():
+    assert preflight._classify("Connection refused") == preflight.UNREACHABLE
+
+
+def test_unknown_message_falls_through_to_other():
+    assert preflight._classify("teapot") == preflight.OTHER
