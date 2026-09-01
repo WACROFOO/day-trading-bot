@@ -11,35 +11,49 @@ Be honest about the feed before building a routine on it.
 
 | Capability | Status today | Consequence |
 |---|---|---|
-| Universe scan for today's movers | Works (free, NASDAQ) | You get a real candidate list every morning |
-| Real 1-minute bars and daily history | Works, **~15 min delayed** | Charts are real; the last 15 minutes are not there |
-| Real news headlines with timestamps | Works (provider publish time) | The flame is real, latency is shown |
-| Float | Often missing | Shown as an explicit proxy; the supply pillar fails rather than guessing |
+| Universe scan for today's movers | Works (free, ~11,000 names) | A real candidate list every morning |
+| 1-minute bars and daily history | Works, **real-time on IEX** | Charts are live, not delayed |
+| News headlines with timestamps | Works (provider publish time) | The flame is real, latency is shown |
+| SEC filings / dilution risk | Works (free, no account) | `catalyst_score.py` sees live takedowns |
+| Float | Not published free | Shown `unknown`; the supply pillar fails rather than guessing |
 | 10-second bars | Not on this feed | The micro chart says so instead of inventing candles |
 | Level 2 depth | Not licensed | Simulated and labelled; deferred by your own decision |
-| Live 1-minute entries | **No** | A 15-minute delay makes real-time execution impossible |
+| Absolute volume | **Understated** | IEX is one venue. Ratios survive, raw share counts do not |
 
-The delay does not block the three things that actually build skill:
+### The one caveat that matters
+
+The free feed is **IEX**, a single exchange, and it is genuinely real-time —
+prices, highs and percentage moves are trustworthy. But IEX carries a slice of
+total US volume, so **absolute volume is understated**. Relative volume still
+works, because the scanner divides today's IEX volume by prior days' *IEX*
+volume — both sides come from the same venue, so the ratio holds. Never compare
+an IEX volume figure against a website quoting consolidated volume.
+
+What is still missing does not block the three things that build skill:
 **building the watchlist**, **rehearsing the funnel**, and **journalling
-decisions in R**. It only blocks live execution — which you should not be
-doing yet anyway.
+decisions in R**.
 
 ## 1. One-time setup (15 minutes)
 
-```bash
-git clone <your repo>            # or pull the branch
-cd day-trading-bot
-pip install -r requirements.txt  # pandas, yfinance, streamlit, plotly, pytest
-python -m pytest tests/ -q       # everything should pass
 ```
+cd day-trading-bot
+bash scripts/setup.sh
+```
+
+That one command finds your Python, takes your Alpaca paper keys, writes a
+git-ignored `.env`, runs the tests and proves the connection. The desk core
+needs no third-party packages — it is Python standard library only.
 
 Verify the workstation runs on the deterministic fixture before pointing it at
 real symbols — if this looks wrong, the problem is the install, not the market:
 
-```bash
-PYTHONPATH=src python -m momentum_platform.dashboard.server
-# open http://127.0.0.1:8787, press Play, watch a full morning replay
 ```
+bash scripts/start.sh
+```
+
+Open http://127.0.0.1:8787 and press Play for a full morning replay. If the
+live feed is unavailable the launcher says why and opens the recorded session
+instead, so the desk always comes up.
 
 Spend one sitting here. Learn the desk before you learn the market: drag cards
 to the slots you want, expand the 1-minute chart with ⛶, click a scanner row
