@@ -29,6 +29,9 @@ DEFAULT_FIXTURE = (
 @lru_cache(maxsize=4)
 def _session(fixture: str) -> dict:
     """`fixture` is a path, or "live:AAPL,TSLA" for real delayed data."""
+    if fixture.startswith("alpaca:"):
+        from ..datasources.alpaca_source import build_alpaca_session
+        return build_alpaca_session(fixture[7:].split(","))
     if fixture.startswith("live:"):
         from ..datasources.live_session import build_live_session
         return build_live_session(fixture[5:].split(","))
@@ -93,6 +96,9 @@ def make_handler(fixture: str):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Momentum Workstation replay dashboard")
     ap.add_argument("--fixture", default=str(DEFAULT_FIXTURE))
+    ap.add_argument("--alpaca", metavar="SYMBOLS",
+                    help="comma-separated symbols to load from Alpaca (free IEX feed); "
+                         "credentials come from .env")
     ap.add_argument("--live", metavar="SYMBOLS",
                     help="comma-separated real symbols to load from yfinance "
                          "(delayed ~15m) instead of a replay fixture")
@@ -100,11 +106,16 @@ def main(argv=None) -> int:
     ap.add_argument("--host", default="127.0.0.1")
     args = ap.parse_args(argv)
 
-    source = f"live:{args.live}" if args.live else args.fixture
+    source = (f"alpaca:{args.alpaca}" if args.alpaca
+              else f"live:{args.live}" if args.live
+              else args.fixture)
     session = _session(source)
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "
           f"{sum(len(f['alerts']) for f in session['frames'])} alerts")
     print(f"workstation: http://{args.host}:{args.port}/")
+    if args.alpaca:
+        print("Alpaca IEX feed — single venue, so absolute volume is a fraction of the "
+              "consolidated tape. Research only.")
     if args.live:
         print("DELAYED data (~15 minutes) — research only, not an entitled feed")
     ThreadingHTTPServer((args.host, args.port), make_handler(source)).serve_forever()

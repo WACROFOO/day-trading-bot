@@ -205,7 +205,26 @@ the setup verdict on the right. The daily chart starts in the tray.
   the playbook GO / WAIT / PASS matrix, always states why, and sizes from the
   operator's own dollar risk.
 
-### Real market data (delayed)
+### Real market data — Alpaca free tier (recommended)
+
+```bash
+cp .env.example .env                 # paste your paper keys, git ignores this file
+python scripts/verify_alpaca.py      # nine checks with plain-language fixes
+python scripts/alpaca_watchlist.py --top 8
+PYTHONPATH=src python -m momentum_platform.dashboard.server --alpaca AAPL,TSLA
+```
+
+Standard library only — no extra packages. Gives real-time IEX bars, daily
+history, real news headlines with publication timestamps, and the tradable US
+universe across NASDAQ *and* NYSE. `docs/alpaca-setup.md` is the step-by-step.
+
+The one caveat: IEX is a single venue, so **absolute volume is understated**
+while prices and percentage moves are exact. Relative volume divides today's
+IEX volume by prior days' IEX volume — same venue on both sides — so the ratio
+stays meaningful and is labelled `iex` wherever it appears. Alpaca publishes no
+float, so the supply pillar reads `unknown` rather than guessing.
+
+### Real market data (delayed, yfinance fallback)
 
 ```bash
 PYTHONPATH=src python -m momentum_platform.dashboard.server --live AAPL,TSLA,SOFI

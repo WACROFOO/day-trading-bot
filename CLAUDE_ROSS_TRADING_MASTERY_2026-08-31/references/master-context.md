@@ -263,6 +263,34 @@ accumulated on every layout reset.
 step-by-step for connecting scanners, charts, news, reference/float, halts and
 Level 2 to a real provider.
 
+## Alpaca free tier wired (September 1, 2026)
+
+`src/momentum_platform/datasources/alpaca_source.py` connects the platform to
+Alpaca's free tier using the standard library only (urllib + a tiny .env
+reader), so there is nothing to install. It supplies real-time IEX minute bars,
+daily history, snapshots, real news headlines with publication timestamps, and
+the tradable US universe across NASDAQ and NYSE.
+
+Method note worth preserving: the free feed is IEX, a single venue carrying a
+slice of consolidated volume. Prices and percentage moves are exact; absolute
+volume is understated. The adapter therefore computes relative volume as
+today's IEX volume over the mean of prior days' **IEX** volume — same venue on
+both sides, so the ratio remains meaningful against the Confirmed 5x pillar
+even though neither number is consolidated. Sessions are labelled `iex`.
+
+Alpaca publishes no float, so `float_quality` is `unknown` and the supply
+pillar fails with a visible reason rather than being guessed.
+
+Supporting pieces: `scripts/verify_alpaca.py` (nine diagnostic checks with
+plain-language remediation), `scripts/alpaca_watchlist.py` (two-pass full-market
+scan that stays inside the free rate limit: snapshots for price/gain across
+~11,000 names, then daily bars only for survivors to compute RVOL), a
+`--alpaca SYMBOLS` mode on the dashboard server, and `docs/alpaca-setup.md`.
+
+Neither Alpaca nor the CDNs are reachable from the build container, so the
+adapter is verified by offline tests against canned Alpaca-shaped payloads
+rather than against the live API.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.
