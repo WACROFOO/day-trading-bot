@@ -4,6 +4,35 @@
 > type, what you should see, and what to do when you see something else.
 > Nothing here costs money and nothing places a real order.
 
+## Where to run this
+
+Everything below runs **on your own computer**, in a terminal, in the folder
+that holds `README.md`. It cannot be done for you from a cloud session: those
+containers sit behind a proxy that blocks `api.alpaca.markets` outright, and
+they are wiped when the session ends, so any `.env` written there disappears
+with it. Your keys belong on your machine and nowhere else.
+
+---
+
+## The fastest path (one command)
+
+If you would rather not edit files by hand:
+
+```bash
+cd day-trading-bot
+bash scripts/setup.sh
+```
+
+It finds your Python, asks for the two keys (the secret stays hidden as you
+type or paste it), writes `.env` with owner-only permissions, proves git is
+ignoring it, runs the test suite, and finishes by running the connection check
+in Step 3. If anything fails it tells you which of the two usual causes it is.
+
+Steps 1–3 below are the same thing done by hand, so you can see what the script
+did. Read them either way — Step 4 onward is the part that matters daily.
+
+---
+
 ## Before anything: the two rules about keys
 
 1. **The secret key is shown once.** When Alpaca generates a pair, copy both
