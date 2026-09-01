@@ -620,3 +620,14 @@ def test_the_desk_never_opens_on_a_symbol_the_session_lacks():
         "the opening symbol must not fall back to a fixture ticker"
     assert "function openingSymbol()" in app
     assert "names[0] || null" in app, "must open on a symbol the session carries"
+
+
+def test_an_empty_chart_pane_explains_itself_above_the_canvas():
+    """The chart library paints opaque canvases inside the pane. A note with
+    no stacking order is written and then covered, so an empty pane looks
+    broken instead of saying why it is empty."""
+    css = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "styles.css").read_text()
+    block = css.split(".chart-note{")[1].split("}")[0]
+    assert "z-index" in block, "the note must sit above the chart canvases"
+    assert "background" in block, "the note needs a ground to stay legible"

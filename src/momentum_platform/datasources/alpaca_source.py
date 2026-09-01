@@ -231,7 +231,6 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
     if not symbols:
         raise AlpacaError("No symbols given.")
     records: List[dict] = []
-    observed = _iso(datetime.now(UTC))
 
     daily_start = _iso(datetime.now(UTC) - timedelta(days=daily_lookback_days))
     daily = client.bars(symbols, "1Day", daily_start)
@@ -291,12 +290,24 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
                         "type": "news", "symbol": symbol,
                         "provider_id": str(item.get("id")),
                         "published_at": published,
-                        "first_observed_at": observed,
+                        # A headline becomes visible in the replay at
+                        # first_observed_at. Stamping that with the fetch time
+                        # puts it after every bar in the session, so the flame
+                        # never appears and the catalyst card reads "none
+                        # observed" on a stock that has news — which is worse
+                        # than showing nothing, because it reads as a finding.
+                        # The delivery latency of a historical headline is not
+                        # something this feed reports, so use the publication
+                        # time rather than inventing a delay.
+                        "first_observed_at": published,
                         "headline": headline,
                         "category": (item.get("source") or "news").lower(),
                     })
-    except AlpacaError:
-        pass          # a missing news entitlement must not break the session
+    except AlpacaError as exc:
+        # Never silent. A swallowed failure renders as "no catalyst", which is
+        # a claim the data does not support.
+        print(f"  news unavailable for this session: {exc}")
+        print("  the catalyst card will show 'not checked', not 'none observed'")
 
     return records
 

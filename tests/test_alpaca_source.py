@@ -216,3 +216,50 @@ def test_connection_refused_is_a_network_block():
 
 def test_unknown_message_falls_through_to_other():
     assert preflight._classify("teapot") == preflight.OTHER
+
+
+# -- news must be visible inside the session it belongs to --------------------
+
+def test_news_becomes_visible_at_publication_not_at_fetch_time(monkeypatch):
+    """A headline stamped with the fetch time is observed after every bar in a
+    historical session, so the flame never lights and the catalyst card reads
+    'none observed' on a stock that plainly has news."""
+    published = "2026-09-01T17:24:00Z"
+    payload = {
+        "news": [{"id": 1, "headline": "Company wins contract",
+                  "created_at": published, "symbols": ["BIAF"], "source": "wire"}],
+    }
+
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            return {}
+
+        def news(self, symbols, limit=50, start=None):
+            return payload["news"]
+
+    records = al.fetch_records(Stub("PK", "s" * 40), ["BIAF"])
+    news = [r for r in records if r["type"] == "news"]
+    assert news, "the headline must reach the session"
+    assert news[0]["first_observed_at"] == news[0]["published_at"] == published
+
+
+def test_a_failed_news_lookup_is_announced_not_swallowed(capsys):
+    """Silence renders as 'no catalyst', which the data does not support."""
+
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            return {}
+
+        def news(self, symbols, limit=50, start=None):
+            raise al.AlpacaError("news entitlement missing")
+
+    al.fetch_records(Stub("PK", "s" * 40), ["BIAF"])
+    out = capsys.readouterr().out
+    assert "news unavailable" in out
+    assert "none observed" in out

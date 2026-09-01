@@ -281,8 +281,14 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 #expandBackdrop{position:fixed;inset:0;background:#040609cc;z-index:39}
 #expandBackdrop[hidden]{display:none}
 
-.chart-note{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  text-align:center;padding:14px;color:var(--ink-faint);font-size:10.5px;line-height:1.5}
+/* The chart library paints its own canvases inside this box, so an
+   explanation with no stacking order of its own is drawn and then covered —
+   the pane reads as broken when it is actually telling you why it is empty.
+   Sit above the canvases, and carry a background so the text stays legible. */
+.chart-note{position:absolute;inset:0;z-index:5;display:flex;align-items:center;
+  justify-content:center;text-align:center;padding:14px;color:var(--ink-faint);
+  font-size:10.5px;line-height:1.5;background:color-mix(in srgb,var(--bg) 82%,transparent);
+  pointer-events:none}
 
 /* ── resizable grid ─────────────────────────────────────────────────── */
 .grid{grid-template-columns:var(--w-left,336px) 6px minmax(0,1fr) 6px var(--w-right,352px);
