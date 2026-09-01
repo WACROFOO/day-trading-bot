@@ -608,3 +608,15 @@ def test_intraday_charts_are_plotted_on_the_new_york_clock():
     assert "America/New_York" in app, "chart times must be converted to ET"
     assert "time: deskTime(b[0])" in app, \
         "intraday bars must go through the ET conversion, not raw epoch"
+
+
+def test_the_desk_never_opens_on_a_symbol_the_session_lacks():
+    """A hard-coded fixture symbol was selected on live sessions, so every
+    panel rendered empty and the verdict read PASS 0/4 on a stock that does
+    not exist. The desk looked broken while the feed was working."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert 'searchParams.get("symbol") || "ABCD"' not in app, \
+        "the opening symbol must not fall back to a fixture ticker"
+    assert "function openingSymbol()" in app
+    assert "names[0] || null" in app, "must open on a symbol the session carries"

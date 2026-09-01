@@ -279,3 +279,36 @@ def test_the_source_is_reported_for_diagnostics():
     tls._cached = None
     assert "certificates from" in tls.describe()
     tls._cached = None
+
+
+# -- watchlist handoff --------------------------------------------------------
+# --scan runs the watchlist itself so nobody has to copy symbols between two
+# commands. A run with no survivors ends on a sentence, and turning that
+# sentence into tickers would fabricate candidates out of prose.
+
+_cs_spec = _ilu.spec_from_file_location(
+    "catalyst_score", ROOT / "scripts" / "catalyst_score.py")
+catalyst_score = _ilu.module_from_spec(_cs_spec)
+_cs_spec.loader.exec_module(catalyst_score)
+
+
+def test_symbols_are_read_off_the_last_line():
+    out = "fetching…\n\n  SYM  PRICE\n  BIAF  6.71\n\nBIAF,SSM,CTMX\n"
+    assert catalyst_score.symbols_from_watchlist(out) == ["BIAF", "SSM", "CTMX"]
+
+
+def test_a_prose_ending_yields_no_symbols():
+    out = "scanning…\nNo symbol passed the pillars today.\n"
+    assert catalyst_score.symbols_from_watchlist(out) == []
+
+
+def test_empty_output_yields_no_symbols():
+    assert catalyst_score.symbols_from_watchlist("") == []
+
+
+def test_a_single_symbol_still_parses():
+    assert catalyst_score.symbols_from_watchlist("AAPL\n") == ["AAPL"]
+
+
+def test_an_overlong_token_is_rejected_as_not_a_ticker():
+    assert catalyst_score.symbols_from_watchlist("CANDIDATES\n") == []

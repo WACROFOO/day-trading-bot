@@ -1189,10 +1189,32 @@ function wireLayout() {
   });
 }
 
+
+/* Which symbol the desk opens on.
+
+   This used to fall back to a hard-coded "ABCD" — a name from the bundled
+   replay fixture. Pointed at a live session of AAPL/TSLA/NVDA it selected a
+   symbol that was not in the data, so every panel rendered empty and the
+   verdict card read PASS 0/4 on a stock that does not exist. The desk looked
+   broken while the feed was working perfectly.
+
+   Never select a symbol this session does not carry: honour ?symbol= only
+   when it is present, otherwise open on the first one the session actually
+   has. */
+function openingSymbol() {
+  const names = Object.keys(SYMS || {});
+  const asked = new URL(location.href).searchParams.get("symbol");
+  if (asked && SYMS[asked.toUpperCase()]) return asked.toUpperCase();
+  if (asked && names.length) {
+    console.warn(`${asked} is not in this session; opening ${names[0]} instead.`);
+  }
+  return names[0] || null;
+}
+
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
   const frame = FRAMES[state.frame];
-  if (!state.selected) state.selected = new URL(location.href).searchParams.get("symbol") || "ABCD";
+  if (!state.selected) state.selected = openingSymbol();
   $("#clockET").textContent = etClock(frame.ts);
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
   const badge = $("#sessionBadge");

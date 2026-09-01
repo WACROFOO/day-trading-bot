@@ -23,6 +23,7 @@ data is never reported as a clean result.
 from __future__ import annotations
 
 import argparse
+import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -43,6 +44,23 @@ G, Y, R, D, B, O = "\033[92m", "\033[93m", "\033[91m", "\033[2m", "\033[1m", "\0
 FLAME_PAINT = {"red": R, "orange": Y, "yellow": Y, "none": D}
 VERDICT_PAINT = {"QUALIFIED": G, "WATCH": Y, "CAUTION": Y, "AVOID": R,
                  "PASS": D, "UNKNOWN": Y}
+
+
+def symbols_from_watchlist(stdout: str) -> list:
+    """Pull the ticker list off the watchlist's last line.
+
+    The script prints a human-readable table and finishes with a bare
+    comma-separated list. A run with no survivors ends on prose instead, so
+    reject anything that does not look like tickers rather than turning a
+    sentence into symbols.
+    """
+    lines = [ln.strip() for ln in stdout.splitlines() if ln.strip()]
+    if not lines:
+        return []
+    parts = [p.strip().upper() for p in lines[-1].split(",") if p.strip()]
+    if not parts or any(" " in p or not p.isalnum() or len(p) > 6 for p in parts):
+        return []
+    return parts
 
 
 def latest_news(client, symbol: str, lookback_hours: int) -> tuple:
@@ -68,7 +86,9 @@ def main(argv=None) -> int:
         description="Grade the catalyst behind one or more symbols (selection only)")
     ap.add_argument("symbols", nargs="*", help="tickers, e.g. TSLA AAPL")
     ap.add_argument("--scan", action="store_true",
-                    help="score whatever passed the pillars today")
+                    help="scan the market first, then score what it finds")
+    ap.add_argument("--top", type=int, default=8,
+                    help="how many movers --scan should keep (default 8)")
     ap.add_argument("--days", type=int, default=90,
                     help="filing lookback window in days (default 90)")
     ap.add_argument("--news-hours", type=int, default=48,
@@ -79,11 +99,23 @@ def main(argv=None) -> int:
 
     symbols = [s.strip().upper() for s in args.symbols if s.strip()]
     if args.scan and not symbols:
-        print(f"{D}--scan reads the watchlist. Run this first:{O}\n"
-              f"    python scripts/alpaca_watchlist.py --top 8\n"
-              f"{D}then pass the symbols it prints on the last line:{O}\n"
-              f"    python scripts/catalyst_score.py $(python scripts/alpaca_watchlist.py --top 8 | tail -1 | tr ',' ' ')\n")
-        return 2
+        # Run the watchlist ourselves rather than telling the user to copy
+        # symbols between two commands. Its last line is the comma-separated
+        # list; everything above it is the human-readable table.
+        print(f"{D}scanning the market for today's movers…{O}")
+        proc = subprocess.run(
+            [sys.executable, str(Path(__file__).with_name("alpaca_watchlist.py")),
+             "--top", str(args.top)],
+            capture_output=True, text=True)
+        sys.stdout.write(proc.stdout)
+        if proc.returncode != 0:
+            sys.stderr.write(proc.stderr)
+            return proc.returncode
+        symbols = symbols_from_watchlist(proc.stdout)
+        if not symbols:
+            print(f"\n{Y}Nothing passed the pillars. That is a normal morning — "
+                  f"do not widen the filter to manufacture a candidate.{O}\n")
+            return 0
     if not symbols:
         ap.error("give at least one symbol, e.g. python scripts/catalyst_score.py TSLA")
 
