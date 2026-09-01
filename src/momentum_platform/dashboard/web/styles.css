@@ -7,8 +7,9 @@
   --entry:#22c7e8; --stop:#ff5f6e; --target:#2ad17f;
   --hi:#ffc247; --accent:#5b8cff; --critical:#ff8a3d;
   --flame-red:#ff4a3d; --flame-orange:#ff9a2e; --flame-yellow:#ffd54a;
-  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
-  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
   --r:8px;
 }
 *{box-sizing:border-box}
@@ -29,7 +30,7 @@ kbd{font:11px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .mark{width:26px;height:26px;border-radius:7px;flex:none;
   background:conic-gradient(from 210deg,var(--entry),var(--target) 45%,var(--hi) 70%,var(--entry));
   box-shadow:0 0 0 1px #ffffff1a inset}
-.brand-name{font-weight:650;letter-spacing:.2px}
+.brand-name{font-family:var(--cond);font-weight:600;letter-spacing:.4px;font-size:15px;text-transform:uppercase}
 .brand-sub{font-size:11px;color:var(--ink-faint)}
 .clock{min-width:120px}
 .clock-time{font:600 20px/1 var(--mono);font-variant-numeric:tabular-nums}
@@ -127,7 +128,7 @@ kbd{font:11px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .sym-header{display:flex;align-items:center;gap:14px;background:var(--panel);
   border:1px solid var(--line);border-radius:var(--r);padding:9px 12px}
 .sym-id{display:flex;align-items:center;gap:8px}
-.sym-ticker{font:700 22px/1 var(--sans);letter-spacing:.5px}
+.sym-ticker{font:700 22px/1 var(--cond);letter-spacing:1px}
 .lock{font:600 9px/1 var(--mono);letter-spacing:.7px;color:#0b0f14;background:var(--hi);
   padding:3px 5px;border-radius:3px}
 .sym-stats{display:flex;gap:16px;flex-wrap:wrap;font:12px var(--mono);font-variant-numeric:tabular-nums}
@@ -197,3 +198,7 @@ canvas{display:block;width:100%}
   .dock,.context,.workspace{overflow:visible}
 }
 @media (prefers-reduced-motion:reduce){.trow.fresh{animation:none}}
+
+/* keyboard focus — the dock is driven by J/K/Enter, so focus must be visible */
+:focus-visible{outline:2px solid var(--entry);outline-offset:1px;border-radius:4px}
+.trow:focus-visible{outline-offset:-2px}
