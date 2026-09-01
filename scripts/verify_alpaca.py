@@ -18,6 +18,7 @@ from zoneinfo import ZoneInfo
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from momentum_platform.datasources.tls import describe as describe_tls  # noqa: E402
 from momentum_platform.datasources.alpaca_source import (  # noqa: E402
     AlpacaError, client_from_env, fetch_records, load_dotenv, session_window,
 )
@@ -62,6 +63,7 @@ def main(argv=None) -> int:
 
     # ---------------------------------------------------------------- 1
     step("credentials")
+    print(f"  {DIM}trust store: {describe_tls()}{OFF}")
     load_dotenv()
     import os
     key = os.environ.get("ALPACA_KEY_ID", "").strip()

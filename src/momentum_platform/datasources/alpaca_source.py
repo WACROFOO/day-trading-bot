@@ -41,6 +41,9 @@ DATA_BASE = "https://data.alpaca.markets"
 PAPER_BASE = "https://paper-api.alpaca.markets"
 
 
+from .tls import ssl_context
+
+
 class AlpacaError(RuntimeError):
     """Raised with a message written for a human, not a stack trace."""
 
@@ -74,7 +77,8 @@ class AlpacaClient:
             "Accept": "application/json",
         })
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+            with urllib.request.urlopen(req, timeout=self.timeout,
+                                        context=ssl_context()) as resp:
                 return json.loads(resp.read().decode())
         except urllib.error.HTTPError as exc:
             body = exc.read().decode(errors="replace")[:300]

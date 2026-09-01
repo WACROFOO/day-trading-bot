@@ -33,6 +33,9 @@ CACHE = Path(__file__).resolve().parents[3] / "data" / "sec_cache"
 MIN_INTERVAL = 0.12          # ~8 req/s, inside the SEC's ~10 req/s ceiling
 
 
+from .tls import ssl_context
+
+
 class SecError(RuntimeError):
     """Raised with a message written for a human, not a stack trace."""
 
@@ -73,7 +76,8 @@ class SecClient:
             "Accept-Encoding": "gzip, deflate",
         })
         try:
-            with urllib.request.urlopen(req, timeout=self.timeout) as resp:
+            with urllib.request.urlopen(req, timeout=self.timeout,
+                                        context=ssl_context()) as resp:
                 raw = resp.read()
                 if resp.headers.get("Content-Encoding") == "gzip":
                     import gzip

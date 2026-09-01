@@ -225,7 +225,7 @@ def test_alpaca_ssl_error_names_the_actual_fix():
 
     client = al.AlpacaClient(key_id="PKTEST", secret_key="s" * 40)
 
-    def boom(req, timeout=None):
+    def boom(req, timeout=None, **kwargs):
         raise urllib.error.URLError(
             "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: "
             "unable to get local issuer certificate")
@@ -243,3 +243,39 @@ def test_alpaca_ssl_error_names_the_actual_fix():
     assert "Install Certificates.command" in message
     assert "certifi" in message
     assert "keys and your network are fine" in message.lower()
+
+
+# -- certificate discovery ----------------------------------------------------
+# Install Certificates.command writes into /Library and needs an administrator,
+# which many people on a work laptop do not have. The desk finds a CA bundle on
+# its own instead, so a stock machine works with no install and no admin.
+
+from momentum_platform.datasources import tls  # noqa: E402
+
+
+def test_a_context_is_always_returned():
+    assert tls.ssl_context() is not None
+
+
+def test_verification_is_never_disabled():
+    """A silently-trusting context on a machine holding brokerage keys would
+    be far worse than a visible failure."""
+    import ssl as _ssl
+    ctx = tls.ssl_context()
+    assert ctx.verify_mode == _ssl.CERT_REQUIRED
+    assert ctx.check_hostname is True
+
+
+def test_an_explicit_environment_setting_wins(monkeypatch):
+    monkeypatch.setattr(tls, "_cached", None)
+    monkeypatch.setenv("SSL_CERT_FILE", "/somewhere/roots.pem")
+    tls._cached = None
+    tls.ssl_context()
+    assert "SSL_CERT" in tls.ca_source()
+    tls._cached = None
+
+
+def test_the_source_is_reported_for_diagnostics():
+    tls._cached = None
+    assert "certificates from" in tls.describe()
+    tls._cached = None

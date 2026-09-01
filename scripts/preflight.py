@@ -27,6 +27,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from momentum_platform.datasources.alpaca_source import (  # noqa: E402
     AlpacaError, client_from_env, load_dotenv,
 )
+from momentum_platform.datasources.tls import describe as describe_tls  # noqa: E402
 
 ET = ZoneInfo("America/New_York")
 
@@ -66,6 +67,8 @@ def main() -> int:
         clock = client.clock()
     except AlpacaError as exc:
         code = _classify(str(exc))
+        if code == CERT:
+            print(f"certificates: {describe_tls()}")
         label = {REJECTED: "credentials rejected",
                  UNREACHABLE: "network blocked",
                  CERT: "certificates not installed",

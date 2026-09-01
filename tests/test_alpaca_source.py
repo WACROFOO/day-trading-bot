@@ -150,7 +150,7 @@ def test_http_errors_explain_themselves(monkeypatch):
     monkeypatch.setattr(al.AlpacaClient, "_get", al.AlpacaClient._get)
     client = al.AlpacaClient("PKTEST", "secret")
 
-    def opener(req, timeout=None):
+    def opener(req, timeout=None, **kwargs):
         raise urllib.error.HTTPError(req.full_url, 401, "Unauthorized", {}, io.BytesIO(b"bad key"))
 
     monkeypatch.setattr(al.urllib.request, "urlopen", opener)
@@ -159,7 +159,7 @@ def test_http_errors_explain_themselves(monkeypatch):
     message = str(exc.value)
     assert "401" in message and "PAPER" in message      # says what to check
 
-    def rate_limited(req, timeout=None):
+    def rate_limited(req, timeout=None, **kwargs):
         raise urllib.error.HTTPError(req.full_url, 429, "Too Many", {}, io.BytesIO(b""))
 
     monkeypatch.setattr(al.urllib.request, "urlopen", rate_limited)
