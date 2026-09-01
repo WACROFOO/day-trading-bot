@@ -136,28 +136,34 @@ def interpolate(waypoints, m):
 
 
 def build_daily_bars(sym: Sym, rng: random.Random, count: int = 260):
-    """Deterministic prior daily history ending on the previous session, with
-    the 52-week high embedded so the breakout scanner has a real reference."""
-    bars, price = [], sym.prev_close * 0.72
-    day = datetime(2026, 9, 1, tzinfo=UTC) - timedelta(days=count + 1)
-    peak_at = count // 3
+    """Deterministic prior daily history: a rally into the 52-week high about a
+    third of the way in, then a fade to the previous close. The 52-week high
+    emerges from the path instead of being stamped onto one bar."""
+    bars = []
+    start = sym.prev_close * 0.62
+    peak_at = int(count * 0.34)
+    day = datetime(2026, 9, 1, tzinfo=UTC) - timedelta(days=int(count * 1.45))
     for i in range(count):
         day += timedelta(days=1)
         while day.weekday() >= 5:
             day += timedelta(days=1)
-        drift = (sym.prev_close - price) / max(1, count - i)
-        price = max(0.2, price + drift + rng.uniform(-0.012, 0.012) * price)
-        high = price * (1 + abs(rng.uniform(0, 0.02)))
-        if i == peak_at:
-            high = sym.high_52w
-        low = price * (1 - abs(rng.uniform(0, 0.02)))
-        bars.append({
-            "d": day.strftime("%Y-%m-%d"),
-            "o": round(price * (1 + rng.uniform(-0.01, 0.01)), 2),
-            "h": round(high, 2), "l": round(low, 2),
-            "c": round(price, 2),
-            "v": int(sym.avg_daily_volume * rng.uniform(0.6, 1.4)),
-        })
+        if i <= peak_at:
+            frac = i / max(1, peak_at)
+            base = start + (sym.high_52w * 0.97 - start) * (frac ** 0.85)
+        else:
+            frac = (i - peak_at) / max(1, count - 1 - peak_at)
+            base = sym.high_52w * 0.97 + (sym.prev_close - sym.high_52w * 0.97) * (frac ** 0.7)
+        close = max(0.2, base * (1 + rng.uniform(-0.018, 0.018)))
+        open_ = max(0.2, close * (1 + rng.uniform(-0.012, 0.012)))
+        high = max(open_, close) * (1 + abs(rng.uniform(0, 0.016)))
+        low = min(open_, close) * (1 - abs(rng.uniform(0, 0.016)))
+        bars.append({"d": day.strftime("%Y-%m-%d"), "o": round(open_, 2),
+                     "h": round(high, 2), "l": round(low, 2), "c": round(close, 2),
+                     "v": int(sym.avg_daily_volume * rng.uniform(0.6, 1.4))})
+    # Anchor both ends: the series peaks at the stated 52-week high and closes
+    # on the stated previous close.
+    peak_bar = max(bars, key=lambda b: b["h"])
+    peak_bar["h"] = round(sym.high_52w, 2)
     bars[-1]["c"] = round(sym.prev_close, 2)
     return bars
 

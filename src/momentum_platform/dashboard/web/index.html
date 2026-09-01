@@ -27,20 +27,15 @@
       <button class="btn" data-seek="alert">First alert</button>
       <label class="speed">Speed
         <select id="speed" aria-label="Replay speed">
-          <option value="1">1×</option>
-          <option value="4" selected>4×</option>
-          <option value="12">12×</option>
-          <option value="40">40×</option>
+          <option value="1">1×</option><option value="4" selected>4×</option>
+          <option value="12">12×</option><option value="40">40×</option>
         </select>
       </label>
       <input id="scrub" class="scrub" type="range" min="0" max="0" value="0" aria-label="Scrub replay">
     </div>
 
     <div class="health">
-      <div class="health-row">
-        <span id="feedDot" class="dot replay" aria-hidden="true"></span>
-        <span id="feedText" class="health-text">REPLAY</span>
-      </div>
+      <div class="health-row"><span id="feedDot" class="dot replay" aria-hidden="true"></span><span id="feedText" class="health-text">REPLAY</span></div>
       <div class="health-sub" id="feedAge">deterministic fixture</div>
     </div>
 
@@ -51,8 +46,8 @@
 
     <section class="dock" aria-label="Scanner dock">
       <div class="dock-head">
-        <span>Scanner dock</span>
-        <span class="muted tiny">Tier 1 · click a row to link everything</span>
+        <span>Scanners</span>
+        <span class="muted tiny">candidates → acceleration → breakout</span>
       </div>
       <div id="tiles"></div>
     </section>
@@ -69,59 +64,60 @@
 
       <figure class="chart-card">
         <figcaption class="chart-head">
-          <span class="chart-title">Chart A · execution</span>
-          <span class="seg" role="group" aria-label="Chart A interval">
-            <button class="seg-btn active" data-chart="a" data-tf="1m">1m</button>
-            <button class="seg-btn" data-chart="a" data-tf="10s" disabled title="10-second bars need tick data (Phase 5)">10s</button>
-          </span>
+          <span class="chart-title">1 minute · execution</span>
+          <span class="chart-role">entry, structural stop, trigger</span>
           <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20 <i class="k hod"></i>HOD</span>
         </figcaption>
-        <canvas id="chartA" height="300"></canvas>
+        <canvas id="chartA" height="264"></canvas>
       </figure>
 
       <figure class="chart-card">
         <figcaption class="chart-head">
-          <span class="chart-title">Chart B · context</span>
-          <span class="seg" role="group" aria-label="Chart B interval">
-            <button class="seg-btn active" data-chart="b" data-tf="5m">5m</button>
-            <button class="seg-btn" data-chart="b" data-tf="1D">Daily</button>
-          </span>
-          <span class="legend" id="legendB"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20</span>
+          <span class="chart-title">5 minute · structure</span>
+          <span class="chart-role">is the move still constructive</span>
+          <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20</span>
         </figcaption>
-        <canvas id="chartB" height="240"></canvas>
+        <canvas id="chartB" height="188"></canvas>
+      </figure>
+
+      <figure class="chart-card">
+        <figcaption class="chart-head">
+          <span class="chart-title">Daily · room</span>
+          <span class="chart-role">resistance, 200 EMA, 52-week high</span>
+          <span class="legend"><i class="k ema20"></i>EMA20 <i class="k ema200"></i>EMA200 <i class="k h52"></i>52w</span>
+        </figcaption>
+        <canvas id="chartC" height="188"></canvas>
       </figure>
 
       <div class="timeline-card">
-        <div class="card-head">
-          <span>Alert timeline</span>
-          <span class="muted tiny" id="alertCount">0 events</span>
-        </div>
+        <div class="card-head"><span>Alert timeline</span><span class="muted tiny" id="alertCount">0 events</span></div>
         <div id="timeline" class="timeline"></div>
       </div>
     </section>
 
     <section class="context" aria-label="Symbol context">
       <div class="card">
-        <div class="card-head">Quote</div>
+        <div class="card-head">Quote · supply · risk</div>
         <div id="quoteCard" class="card-body"></div>
       </div>
+
       <div class="card">
-        <div class="card-head">Catalyst</div>
-        <div id="newsCard" class="card-body"></div>
+        <div class="card-head">
+          Level 2 · Time &amp; Sales
+          <span class="tag sim" title="No licensed depth feed is connected">simulated</span>
+        </div>
+        <div id="l2Card" class="card-body l2"></div>
       </div>
-      <div class="card">
-        <div class="card-head">Supply &amp; risk</div>
-        <div id="riskCard" class="card-body"></div>
-      </div>
-      <div class="card plan">
-        <div class="card-head">Planning bands <span class="tag frozen">frozen on arm</span></div>
-        <div id="planCard" class="card-body"></div>
-      </div>
-      <div class="card muted-card">
-        <div class="card-head">Level 2 · Time &amp; Sales</div>
-        <div class="card-body placeholder">
-          Licence-gated (Phase 3). Depth and prints are not simulated — an
-          empty book is more honest than a fabricated one.
+
+      <div class="card verdict-card">
+        <div class="card-head">Setup verdict <span class="tag" id="verdictVersion">pine mirror</span></div>
+        <div id="verdictCard" class="card-body"></div>
+        <div class="card-body sizing">
+          <label class="risk-input"><span>Your risk per trade $</span>
+            <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
+                   aria-label="Your dollar risk per trade">
+          </label>
+          <div id="sizingOut"></div>
         </div>
       </div>
     </section>
@@ -131,12 +127,11 @@
     <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
     <span class="keys">
       <kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze ·
-      <kbd>1</kbd><kbd>5</kbd><kbd>D</kbd> charts · <kbd>N</kbd> news · <kbd>A</kbd> audio · <kbd>Esc</kbd> back
+      <kbd>N</kbd> news · <kbd>A</kbd> audio · <kbd>Esc</kbd> back
     </span>
   </footer>
 </div>
 
-<div id="rowTip" class="rowtip" hidden></div>
 <script src="session.js"></script>
 <script src="app.js"></script>
 </body>

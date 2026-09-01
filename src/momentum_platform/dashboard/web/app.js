@@ -10,26 +10,21 @@ const COL = {};
 S.rowColumns.forEach((c, i) => COL[c] = i);
 const SYMS = S.symbols, FRAMES = S.frames, BARS = S.bars;
 const OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
-const LIST_IDS = ["five_pillars_list", "top_gappers", "top_gainers", "top_relative_volume", "top_volume_5m"];
+const LIST_IDS = ["five_pillars_list"];
 const ALERT_TILES = {
-  five_pillars_alert: { id: "five_pillars_alert", scanners: ["five_pillars_alert"] },
-  running_up: { id: "running_up", scanners: ["running_up", "running_down", "squeeze_5_in_5", "squeeze_10_in_10", "breakout_52w"] },
-  hod_momentum: { id: "hod_momentum", scanners: ["hod_momentum"] },
-  halt: { id: "halt", scanners: ["halt"] },
+  running_up: { id: "running_up", title: "Running Up · live uptrend",
+                note: "Acceleration before a new high. Fires in premarket and regular hours.",
+                scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10"] },
+  hod_momentum: { id: "hod_momentum", title: "Small Cap · High of Day Momentum",
+                  note: "New high plus momentum — not every high-of-day print. Branch labels the float/RVOL band.",
+                  scanners: ["hod_momentum", "breakout_52w"] },
 };
-// Tier-1 workspace order, per dashboard spec section 9.
-const DOCK_ORDER = ["five_pillars_list", "five_pillars_alert", "top_gappers", "top_gainers",
-                    "running_up", "hod_momentum", "top_relative_volume", "top_volume_5m", "halt"];
-const ALERT_TILE_TITLE = {
-  five_pillars_alert: "Ross's 5 Pillars Alert",
-  hod_momentum: "Small Cap · High of Day Momentum",
-  running_up: "Running Up / Down · Squeezes",
-  halt: "Halt",
-};
+// Three cards, in funnel order: candidates -> acceleration -> breakout.
+const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
 
 const state = {
   frame: 0, playing: false, speed: 4, selected: null, locked: false,
-  frozen: {}, openRow: null, openAlert: null, chartA: "1m", chartB: "5m",
+  frozen: {}, openRow: null, openAlert: null, riskDollars: "",
   sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {},
 };
 
@@ -137,7 +132,7 @@ function drawChart(canvas, bars, opts) {
       g.strokeStyle = col; g.setLineDash([5, 4]); g.lineWidth = 1;
       g.beginPath(); g.moveTo(padL, y(price)); g.lineTo(padL + plotW, y(price)); g.stroke(); g.setLineDash([]);
       let ly = y(price) - 3;
-      if (ly - lastLabelY < 11) ly = lastLabelY + 11;
+      if (ly - lastLabelY < 12) ly = lastLabelY + 12;
       lastLabelY = ly;
       const label = name.toUpperCase() + " " + price.toFixed(2);
       g.font = "9px ui-monospace,monospace";
@@ -308,19 +303,24 @@ function reasonsDrawer(r, sym, listId) {
   return d;
 }
 
+function sessionOf(iso) {
+  const hhmm = new Date(iso).toLocaleTimeString("en-US",
+    { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
+  return hhmm < "09:30" ? "PM" : hhmm < "16:00" ? "RTH" : "AH";
+}
 function renderAlertTile(cfg, idx) {
   const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 40);
-  const tile = tileShell(cfg.id, ALERT_TILE_TITLE[cfg.id], "alert", "REPLAY",
-    cfg.id === "halt" ? "Official status transitions only — never inferred from missing trades."
-      : "Rising edge, then cooldown. Branch menus choose sounds, not filters.");
+  const tile = tileShell(cfg.id, cfg.title, "alert", "REPLAY", cfg.note);
   const body = el("div", "tile-rows");
   if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
   all.forEach(a => {
     const tr = el("div", "trow" + (state.selected === a.symbol ? " sel" : ""));
-    tr.style.gridTemplateColumns = "46px 1fr auto";
+    tr.style.gridTemplateColumns = "44px 1fr auto";
     tr.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
     const mid = el("span", "tsym");
     mid.appendChild(el("b", null, a.symbol));
+    const ses = sessionOf(a.sourceTime);
+    mid.appendChild(el("span", "pill ses " + ses.toLowerCase(), ses));
     mid.appendChild(el("span", "tl-what", a.branch ? a.branch.replace(/_/g, " ") : a.scannerId.replace(/_/g, " ")));
     tr.appendChild(mid);
     tr.appendChild(el("span", "sev " + a.severity, a.severity));
@@ -383,77 +383,235 @@ function kv(host, lab, val, cls) {
   const r = el("div", "kv"); r.appendChild(el("span", "lab", lab));
   r.appendChild(el("span", cls || null, val)); host.appendChild(r);
 }
-function renderContext(frame) {
+function symbolRow(frame, sym) {
+  for (const id of LIST_IDS.concat(["top_gainers", "top_relative_volume", "top_volume_5m", "top_gappers"])) {
+    const found = (frame.lists[id] || []).map(rowObj).find(r => r.symbol === sym);
+    if (found) return found;
+  }
+  return null;
+}
+
+function renderHeader(frame) {
   const sym = state.selected, meta = SYMS[sym] || {}, nowMs = new Date(frame.ts).getTime();
   const bars = barsUpTo(sym, frame.barIndex);
   const last = bars.length ? bars[bars.length - 1][4] : null;
   const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
   const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
-  let row = null;
-  for (const id of LIST_IDS) {
-    const found = (frame.lists[id] || []).map(rowObj).find(r => r.symbol === sym);
-    if (found) { row = found; break; }
-  }
-
+  const row = symbolRow(frame, sym);
   $("#symTicker").textContent = sym || "—";
   $("#symLock").hidden = !state.locked;
-  const nf = newsFor(sym, nowMs);
-  const flameEl = $("#symFlame");
+  const nf = newsFor(sym, nowMs), flameEl = $("#symFlame");
   flameEl.hidden = !(nf && nf.flame);
   if (nf && nf.flame) { flameEl.className = "flame " + nf.flame; flameEl.title = "news " + Math.round(nf.ageMin) + " min old"; }
   const stats = $("#symStats"); stats.textContent = "";
   const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
-  stat("Last", fx(last));
-  stat("Change", pct(chg), dirClass(chg));
-  stat("HOD", fx(hod));
+  stat("Last", fx(last)); stat("Change", pct(chg), dirClass(chg)); stat("HOD", fx(hod));
   stat("RVOL", row ? fx(row.rvolDaily) + "×" : "—");
-  stat("Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M" : meta.floatQuality === "unknown" ? "UNKNOWN" : (meta.floatShares / 1e6).toFixed(1) + "M proxy",
-    meta.floatQuality === "verified" ? null : "flat");
-  stat("Halt", (frame.halts && frame.halts[sym] === "halted") ? "HALTED" : "trading", (frame.halts && frame.halts[sym] === "halted") ? "down" : null);
+  stat("5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
+  const halted = frame.halts && frame.halts[sym] === "halted";
+  stat("Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  return { last, chg, hod, row, meta, nf, halted, sym };
+}
 
+function renderQuote(frame, ctx) {
+  const { last, chg, row, meta, nf, halted } = ctx;
   const q = $("#quoteCard"); q.textContent = "";
   kv(q, "Last", fx(last)); kv(q, "Prev close", fx(meta.prevClose));
   kv(q, "Change", pct(chg), dirClass(chg));
-  kv(q, "Spread", row ? "$" + fx(row.spread, 3) : "—", row && row.spread / (row.price || 1) > 0.01 ? "down" : null);
+  const wide = row && row.spread != null && row.price && row.spread / row.price > 0.01;
+  kv(q, "Spread", row ? "$" + fx(row.spread, 3) : "—", wide ? "down" : null);
   kv(q, "Range position", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
-  kv(q, "5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
-
-  const n = $("#newsCard"); n.textContent = "";
+  q.appendChild(el("div", "divider", "supply"));
+  kv(q, "Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M"
+      : meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "UNKNOWN",
+     meta.floatQuality === "verified" ? null : "down");
+  kv(q, "Source quality", (meta.floatQuality || "unknown").replace(/_/g, " "),
+     meta.floatQuality === "verified" ? null : "down");
+  kv(q, "52-week high", fx(meta.high52w));
+  kv(q, "Avg daily volume", vol(meta.avgDailyVolume));
+  kv(q, "Halt status", halted ? "HALTED" : "trading", halted ? "down" : null);
+  q.appendChild(el("div", "divider", "catalyst"));
   if (nf) {
-    const h = el("p", "headline", nf.item.headline); n.appendChild(h);
-    kv(n, "Published", etClock(nf.item.publishedAt) + " ET");
-    kv(n, "First observed", etClock(nf.item.firstObservedAt) + " ET");
-    kv(n, "Age", Math.round(nf.ageMin) + " min → " + (nf.flame || "no flame"));
-    kv(n, "Category", (nf.item.category || "—").replace(/_/g, " "));
-    n.appendChild(el("div", "note", "The flame is news age only. It says nothing about whether the news is good, or whether the other pillars pass."));
+    q.appendChild(el("p", "headline", nf.item.headline));
+    kv(q, "Published", etClock(nf.item.publishedAt) + " ET");
+    kv(q, "First observed", etClock(nf.item.firstObservedAt) + " ET");
+    kv(q, "Age → flame", Math.round(nf.ageMin) + " min → " + (nf.flame || "none"));
   } else {
-    n.appendChild(el("div", "placeholder", "No qualifying headline observed yet. A stock with no flame can still be a valid technical candidate — news is not a gate."));
+    q.appendChild(el("div", "placeholder", "No qualifying headline observed. A stock with no flame can still be a valid technical candidate — news is scored, never required."));
   }
-
-  const rk = $("#riskCard"); rk.textContent = "";
-  kv(rk, "Float", meta.floatQuality === "verified" ? (meta.floatShares / 1e6).toFixed(1) + "M" : "—");
-  kv(rk, "Source quality", meta.floatQuality || "unknown", meta.floatQuality === "verified" ? null : "down");
-  kv(rk, "52-week high", fx(meta.high52w));
-  kv(rk, "Avg daily volume", vol(meta.avgDailyVolume));
   if (meta.floatQuality === "shares_outstanding_proxy")
-    rk.appendChild(el("div", "note warn", "Shares outstanding shown as an explicit proxy — it is not float, and the float pillar fails until a verified value exists."));
+    q.appendChild(el("div", "note warn", "Shares outstanding shown as an explicit proxy — it is not float, and the supply pillar fails until a verified value exists."));
+}
 
-  const p = $("#planCard"); p.textContent = "";
+/* Level 2 — SIMULATED depth. No licensed depth feed is connected, so the
+   ladder is generated deterministically from the replay snapshot (seeded by
+   symbol + frame) purely to exercise the widget. Swap _depth() for a licensed
+   feed adapter and the rest of the card is unchanged. */
+function seeded(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return function () { h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0; return h / 4294967296; };
+}
+function _depth(sym, frameIdx, price, spreadAbs, vol5m) {
+  const rnd = seeded(sym + "|" + frameIdx);
+  const tick = price >= 1 ? 0.01 : 0.001;
+  const half = Math.max(tick, (spreadAbs || tick * 2) / 2);
+  const base = Math.max(100, Math.round((vol5m || 20000) / 60));
+  const side = dir => Array.from({ length: 8 }, (_, i) => {
+    const lvl = price + dir * (half + i * tick);
+    let size = Math.round(base * (0.35 + rnd() * 1.3));
+    if (rnd() < 0.11) size *= 4 + Math.round(rnd() * 5);      // occasional wall
+    return { price: Number(lvl.toFixed(price >= 1 ? 2 : 4)), size: size, mpid: ["ARCA","NSDQ","BATS","EDGX","MIAX"][Math.floor(rnd() * 5)] };
+  });
+  const bids = side(-1), asks = side(1);
+  const median = a => a.map(x => x.size).sort((p, q) => p - q)[Math.floor(a.length / 2)];
+  const mb = median(bids), ma = median(asks);
+  bids.forEach(l => l.wall = l.size >= mb * 4);
+  asks.forEach(l => l.wall = l.size >= ma * 4);
+  const prints = Array.from({ length: 10 }, () => {
+    const atAsk = rnd() > 0.45;
+    return { price: Number((price + (atAsk ? half : -half)).toFixed(price >= 1 ? 2 : 4)),
+             size: Math.round(base * (0.05 + rnd() * 0.6)), atAsk: atAsk };
+  });
+  return { bids: bids, asks: asks, prints: prints };
+}
+function renderL2(frame, ctx) {
+  const host = $("#l2Card"); host.textContent = "";
+  const { last, row, halted, sym } = ctx;
+  if (last == null) { host.appendChild(el("div", "placeholder", "No quote yet.")); return; }
+  if (halted) {
+    host.appendChild(el("div", "halt-banner", "HALTED — the book is not a reliable picture during a halt, and a stop does not protect through a reopen."));
+  }
+  const book = _depth(sym, state.frame, last, row ? row.spread : null, row ? row.volume5m : null);
+  const maxSize = Math.max(...book.bids.map(b => b.size), ...book.asks.map(a => a.size));
+  const ladder = el("div", "ladder");
+  ladder.appendChild(el("div", "ladder-head", "Bid")); ladder.appendChild(el("div", "ladder-head", "Size"));
+  ladder.appendChild(el("div", "ladder-head", "Size")); ladder.appendChild(el("div", "ladder-head", "Ask"));
+  for (let i = 0; i < 8; i++) {
+    const b = book.bids[i], a = book.asks[i];
+    const bp = el("div", "lp bid" + (i === 0 ? " inside" : ""), fx(b.price)); ladder.appendChild(bp);
+    const bs = el("div", "ls bid" + (b.wall ? " wall" : ""));
+    bs.appendChild(el("span", "bar", "")); bs.lastChild.style.width = (b.size / maxSize * 100) + "%";
+    bs.appendChild(el("span", "n", String(b.size))); ladder.appendChild(bs);
+    const as = el("div", "ls ask" + (a.wall ? " wall" : ""));
+    as.appendChild(el("span", "bar", "")); as.lastChild.style.width = (a.size / maxSize * 100) + "%";
+    as.appendChild(el("span", "n", String(a.size))); ladder.appendChild(as);
+    ladder.appendChild(el("div", "lp ask" + (i === 0 ? " inside" : ""), fx(a.price)));
+  }
+  host.appendChild(ladder);
+  const wall = book.asks.find(a => a.wall);
+  if (wall) host.appendChild(el("div", "note warn", "Large offer resting at " + fx(wall.price) +
+    " (" + wall.size + "). A seller above the trigger caps the move until it is consumed."));
+  host.appendChild(el("div", "divider", "time & sales"));
+  const tape = el("div", "tape");
+  book.prints.forEach(p => {
+    const r = el("div", "print " + (p.atAsk ? "up" : "down"));
+    r.appendChild(el("span", null, fx(p.price)));
+    r.appendChild(el("span", "n", String(p.size)));
+    r.appendChild(el("span", "side", p.atAsk ? "ask" : "bid"));
+    tape.appendChild(r);
+  });
+  host.appendChild(tape);
+  host.appendChild(el("div", "note", "Simulated depth generated from the replay snapshot — not licensed market data. Level 2 shows resting orders; the tape shows what actually executed."));
+}
+
+/* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
+   playbook GO / WAIT / PASS matrix. Education and planning only. */
+function renderVerdict(frame, ctx) {
+  const { last, chg, hod, row, meta, nf, halted, sym } = ctx;
+  const host = $("#verdictCard"); host.textContent = "";
+  const T = S.pillarThresholds;
   const plan = activePlan(sym, frame.t);
-  if (!plan) {
-    p.appendChild(el("div", "placeholder", "No armed setup. Bands appear only when the detector confirms impulse → 2–4 candle pullback → first new high, and then they stop moving."));
+  const alerts = alertsUpTo(state.frame).filter(a => a.symbol === sym);
+  const recent = alerts.filter(a => frame.t - Math.floor(new Date(a.sourceTime).getTime() / 1000) <= 300);
+  const hodActive = recent.some(a => a.scannerId === "hod_momentum");
+  const runActive = recent.some(a => a.scannerId.indexOf("running_up") === 0 || a.scannerId.indexOf("squeeze") === 0);
+
+  const priceOk = last != null && last >= T.priceMin && last <= T.priceMax;
+  const gainOk = (chg || 0) >= T.gainMinPct;
+  const rvolOk = row && (row.rvolDaily || 0) >= T.rvolMin;
+  const floatOk = meta.floatQuality === "verified" && meta.floatShares < T.floatMaxShares;
+  const newsOk = !!nf;
+  const technical = [priceOk, gainOk, rvolOk, floatOk].filter(Boolean).length;
+  const momentumOk = row && (row.rvol5m || 0) >= 2;
+
+  // GO / WAIT / PASS — playbook section 6.
+  const blockers = [], waits = [];
+  if (halted) blockers.push("Halted — no plan survives a reopen at an unknown price.");
+  if (technical <= 2) blockers.push("Only " + technical + "/4 technical pillars; 3/5 or fewer is a normal reject.");
+  const spreadShare = plan && row && row.spread ? row.spread / plan.riskShare : null;
+  if (spreadShare != null && spreadShare > 0.35)
+    blockers.push("Spread is " + (spreadShare * 100).toFixed(0) + "% of planned risk — the round trip eats the edge.");
+  if (plan && plan.target > (meta.high52w || Infinity) && last < meta.high52w)
+    blockers.push("52-week high at " + fx(meta.high52w) + " sits between entry and the 2R target.");
+  if (plan && !plan.volumeOk)
+    blockers.push("Pullback volume was heavier than the impulse — sellers, not a pause.");
+  if (technical === 3) waits.push("3/4 technical pillars — one condition still missing.");
+  if (!plan) waits.push("No confirmed first pullback yet; nothing to place a structural stop against.");
+  if (plan && last != null && last > plan.entry + plan.riskShare)
+    waits.push("Price is already more than 1R beyond the trigger — chasing here inverts the reward/risk.");
+  if (!hodActive && !runActive) waits.push("No live momentum event in the last five minutes.");
+
+  const verdict = blockers.length ? "PASS" : waits.length ? "WAIT" : "GO";
+  const banner = el("div", "verdict-banner " + verdict.toLowerCase());
+  banner.appendChild(el("b", null, verdict));
+  banner.appendChild(el("span", null, verdict === "GO" ? "candidate and structure both check out"
+    : verdict === "WAIT" ? "watch, do not enter yet" : "reject this candidate"));
+  host.appendChild(banner);
+
+  const why = el("div", "why");
+  (blockers.length ? blockers : waits.length ? waits : ["Four pillars, a confirmed pullback, usable spread and 2R of room."]).forEach(r => {
+    const x = el("div", "why-row");
+    x.appendChild(el("span", "why-dot " + verdict.toLowerCase(), ""));
+    x.appendChild(el("span", null, r));
+    why.appendChild(x);
+  });
+  host.appendChild(why);
+
+  const table = el("div", "verdict-table");
+  const line = (label, value, status, cls) => {
+    const r = el("div", "vrow");
+    r.appendChild(el("span", "vlab", label));
+    r.appendChild(el("span", "vval", value));
+    r.appendChild(el("span", "vst " + (cls || (status ? "ok" : "no")), status === null ? "—" : (cls ? status : (status ? "PASS" : "FAIL"))));
+    table.appendChild(r);
+  };
+  line("Price", fx(last), priceOk);
+  line("Gain vs close", pct(chg), gainOk);
+  line("Daily RVOL", row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
+  line("Float / supply", meta.floatShares ? (meta.floatShares / 1e6).toFixed(1) + "M" : "unknown", floatOk);
+  line("News", newsOk ? "Observed" : "Manual check", newsOk);
+  line("Technical score", technical + "/4", technical === 4);
+  line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
+  line("HOD / Running", hodActive ? "HOD" : runActive ? "Running Up" : "None",
+       hodActive || runActive ? "ACTIVE" : "WAIT", hodActive || runActive ? "ok" : "warn");
+  line("Entry", plan ? fx(plan.entry) : "N/A", plan ? "ARMED" : "—", plan ? "ok" : "muted-st");
+  line("Stop", plan ? fx(plan.stop) : "N/A", "pullback low", "muted-st");
+  line("Target", plan ? fx(plan.target) : "N/A", plan ? plan.rewardMultiple.toFixed(1) + "R" : "—", "muted-st");
+  host.appendChild(el("div", "divider", "pine dashboard mirror"));
+  host.appendChild(table);
+
+  renderSizing(plan, row);
+}
+
+/* Sizing lives outside the re-rendered card so the operator can type into it
+   while the replay keeps running. The dollar risk is always theirs. */
+function renderSizing(plan, row) {
+  const out = $("#sizingOut"); out.textContent = "";
+  const risk = Number(state.riskDollars);
+  if (plan && risk > 0) {
+    const reserve = row && row.spread ? row.spread : 0;
+    const prudent = plan.riskShare + reserve;
+    const shares = Math.floor(risk / prudent);
+    kv(out, "Prudent risk / share", "$" + fx(prudent, 3));
+    kv(out, "Shares", String(shares));
+    kv(out, "Position value", "$" + (shares * plan.entry).toFixed(0));
+    kv(out, "Planned loss", "$" + (shares * prudent).toFixed(2));
+    out.appendChild(el("div", "note", "Shares = your risk ÷ (entry − stop + spread reserve), then capped by what the book can actually absorb."));
+  } else if (plan) {
+    out.appendChild(el("div", "note", "Enter your own dollar risk to size this plan. The app will not assume one for you."));
   } else {
-    const band = (cls, lab, v) => { const b = el("div", "band " + cls); b.appendChild(el("span", null, lab)); b.appendChild(el("b", null, fx(v))); p.appendChild(b); };
-    band("target", "Target 2R", plan.target); band("entry", "Entry", plan.entry); band("stop", "Stop", plan.stop);
-    kv(p, "Risk / share", "$" + fx(plan.riskShare, 3));
-    kv(p, "Pullback candles", String(plan.pullbackCandles));
-    kv(p, "Pullback volume", plan.volumeOk ? "lighter ✓" : "heavier ✗", plan.volumeOk ? "up" : "down");
-    kv(p, "Armed", etTime(new Date(plan.armedAt * 1000).toISOString()) + " ET");
-    if (row && row.spread != null) {
-      const share = row.spread / plan.riskShare * 100;
-      if (share > 20) p.appendChild(el("div", "note warn", "Spread is " + share.toFixed(0) + "% of planned risk. On this stop distance the round trip eats the edge before the trade starts."));
-    }
-    p.appendChild(el("div", "note", "Planning visual only. Size from your own dollar risk; this app places no orders."));
+    out.appendChild(el("div", "note", "No armed setup to size yet."));
   }
 }
 
@@ -465,14 +623,9 @@ function renderCharts(frame) {
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
   drawChart($("#chartA"), bars1, { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
-  if (state.chartB === "1D") {
-    const daily = (meta.dailyBars || []).map(d => [0, d.o, d.h, d.l, d.c, d.v]);
-    drawChart($("#chartB"), daily, { ema20: true, ema200: true, h52: meta.high52w });
-    $("#legendB").innerHTML = '<i class="k ema20"></i>EMA20 <i class="k hod" style="background:#ffb648"></i>EMA200 <i class="k" style="background:#c39bff"></i>52w high';
-  } else {
-    drawChart($("#chartB"), agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
-    $("#legendB").innerHTML = '<i class="k vwap"></i>VWAP <i class="k ema9"></i>EMA9 <i class="k ema20"></i>EMA20';
-  }
+  drawChart($("#chartB"), agg(bars1, 5), { vwap: true, ema9: true, ema20: true, hod: hod, plan: plan, openTs: openTs });
+  const daily = (meta.dailyBars || []).map(d => [0, d.o, d.h, d.l, d.c, d.v]);
+  drawChart($("#chartC"), daily, { ema20: true, ema200: true, h52: meta.high52w });
 }
 
 /* ── selection ──────────────────────────────────────────────────────── */
@@ -519,7 +672,9 @@ function render() {
   const host = $("#tiles"); host.textContent = "";
   DOCK_ORDER.forEach(id => host.appendChild(
     LIST_IDS.indexOf(id) >= 0 ? renderListTile(id, frame) : renderAlertTile(ALERT_TILES[id], state.frame)));
-  renderCharts(frame); renderContext(frame); renderTimeline(state.frame);
+  const ctx = renderHeader(frame);
+  renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
+  renderVerdict(frame, ctx); renderTimeline(state.frame);
 }
 function syncTransport() { $("#scrub").value = String(state.frame); }
 
@@ -554,14 +709,13 @@ function init() {
     }
     syncTransport(); render();
   });
-  document.querySelectorAll(".seg-btn[data-chart]").forEach(b => b.onclick = () => {
-    if (b.disabled) return;
-    const which = b.dataset.chart;
-    document.querySelectorAll('.seg-btn[data-chart="' + which + '"]').forEach(x => x.classList.remove("active"));
-    b.classList.add("active");
-    if (which === "b") state.chartB = b.dataset.tf; else state.chartA = b.dataset.tf;
-    render();
-  });
+  const riskInput = $("#riskInput");
+  riskInput.value = state.riskDollars;
+  riskInput.oninput = e => {
+    state.riskDollars = e.target.value;
+    const frame = FRAMES[state.frame];
+    renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
+  };
   $("#btnSound").onclick = () => {
     state.sound = !state.sound;
     $("#btnSound").setAttribute("aria-pressed", String(state.sound));
@@ -570,16 +724,14 @@ function init() {
   };
   document.addEventListener("keydown", e => {
     if (e.target.matches("input,select,textarea")) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
     const rows = (FRAMES[state.frame].lists[state.focusTile] || []).map(rowObj);
     const k = e.key.toLowerCase();
     if (k === "j" || e.key === "ArrowDown") { state.focusRow = Math.min(rows.length - 1, state.focusRow + 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
     else if (k === "k" || e.key === "ArrowUp") { state.focusRow = Math.max(0, state.focusRow - 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
     else if (e.key === "Enter") { state.locked = !state.locked; render(); }
     else if (e.key === " ") { const id = state.focusTile; if (LIST_IDS.indexOf(id) >= 0) { state.frozen[id] = state.frozen[id] ? null : { order: rows.map(r => r.symbol) }; if (!state.frozen[id]) delete state.frozen[id]; render(); } e.preventDefault(); }
-    else if (k === "1") { state.chartA = "1m"; render(); }
-    else if (k === "5") { state.chartB = "5m"; document.querySelectorAll('.seg-btn[data-chart="b"]').forEach(x => x.classList.toggle("active", x.dataset.tf === "5m")); render(); }
-    else if (k === "d") { state.chartB = "1D"; document.querySelectorAll('.seg-btn[data-chart="b"]').forEach(x => x.classList.toggle("active", x.dataset.tf === "1D")); render(); }
-    else if (k === "n") { $("#newsCard").scrollIntoView({ block: "center" }); }
+    else if (k === "n") { $("#quoteCard").scrollIntoView({ block: "center" }); }
     else if (k === "a") { $("#btnSound").click(); }
     else if (e.key === "Escape") { state.locked = false; state.openRow = null; state.openAlert = null; render(); }
   });

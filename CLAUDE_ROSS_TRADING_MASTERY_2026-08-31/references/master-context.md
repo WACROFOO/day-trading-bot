@@ -168,6 +168,28 @@ Engine changes the dashboard work surfaced:
 Still not built, by design: live provider adapter, news/SEC/halt feeds, Level 2
 and Time & Sales, external notification channels, broker integration.
 
+## Workstation layout revision (September 1, 2026)
+
+The dashboard was narrowed to the decision path at the user's direction: three
+scanner cards (Five Pillars Scan, Running Up, HOD Momentum), three fixed-role
+charts (1m execution, 5m structure, daily room), a merged quote/supply/risk/
+catalyst card, a Level 2 depth-and-tape card, and a setup-verdict card that
+mirrors the bundled Pine dashboard rows and issues GO / WAIT / PASS with
+reasons plus sizing from the operator's own dollar risk.
+
+Level 2 is explicitly SIMULATED: no licensed depth feed is connected, so the
+ladder is generated deterministically from the replay snapshot and labelled on
+the card. It exercises the widget without fabricating market data.
+
+Two more engine corrections came out of this revision:
+
+- the first-pullback detector treated every consecutive green candle since the
+  session start as the impulse leg, so a long quiet premarket drift dragged the
+  mean impulse volume below the pullback's and inverted the volume test on a
+  textbook setup; the impulse window is now bounded (six bars by default);
+- ranked rows now expose raw five-minute volume, which Top Volume 5 Minutes
+  needs to display what it ranks and which the depth ladder uses for scale.
+
 ## Current next steps
 
 1. Compile the Pine script in TradingView and resolve any compiler feedback.

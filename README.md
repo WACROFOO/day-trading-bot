@@ -164,27 +164,31 @@ python scripts/make_replay_fixture.py                          # regenerate the 
 python scripts/build_dashboard_artifact.py build/workstation.html   # single-file build
 ```
 
-- **Nine Tier-1 tiles** in the spec's order, list and alert architectures kept
-  visibly distinct: Five Pillars Scan, Five Pillars Alert, Top Gappers (frozen
-  at 09:30 ET), Top Gainers, Running Up/Squeezes, HOD Momentum, Top RVOL, Top
-  5m Volume, Halt.
-- **One selected symbol** drives the header, both charts, news, supply/risk and
-  planning bands; the ticker is in the URL so an alert deep-links into the
-  workspace. Chart A stays 1-minute and Chart B stays 5-minute/daily across
-  selection changes.
+- **Three scanner cards** in funnel order — Ross-style Five Pillars Scan
+  (candidates), Running Up (live acceleration, premarket and regular hours) and
+  Small Cap HOD Momentum (breakout); alert rows tag the session that produced
+  them.
+- **Three charts** with fixed roles: 1-minute execution, 5-minute structure,
+  daily room. No interval toggles to lose.
+- **One selected symbol** drives the header, all three charts and the whole
+  right column, with the ticker in the URL for deep links.
 - **Row-order freeze** pins a tile's ranking while values keep updating and
   queues new candidates in a pending badge — the 09:30 misclick guard.
 - **Explainable rows**: expanding a Five Pillars row shows each pillar's
   arithmetic against the Confirmed course threshold; alerts carry their
   server-side reasons, definition version and evidence label.
-- **Frozen planning bands** drawn from the first-pullback detector: entry,
-  stop and 2R target stop moving once armed, and a warning fires when the
-  spread is a large share of planned risk.
-- **Honest data surfaces**: float source quality (verified / proxy / unknown)
-  is never silently substituted, news carries both `publishedAt` and
-  `firstObservedAt` so flame latency stays visible, halts come only from an
-  official status transition, and Level 2 / Time & Sales are empty
-  licence-gated placeholders rather than fabricated depth.
+- **Quote · supply · risk** in one card: price and spread, float with its
+  source quality, halt state, and the catalyst with both `publishedAt` and
+  `firstObservedAt` so flame latency stays visible.
+- **Level 2 and Time & Sales** — a depth ladder with size bars, wall detection
+  and a coloured tape. The book is **simulated**, generated deterministically
+  from the replay snapshot and labelled as such on the card, because no
+  licensed depth feed is connected; swapping in a real feed replaces one
+  function.
+- **Setup verdict** — mirrors the bundled Pine dashboard's eleven rows, then
+  applies the playbook's GO / WAIT / PASS matrix and always states why.
+  Position sizing uses the operator's own dollar risk; the app never assumes
+  one.
 
 Ten **synthetic** symbols exercise the behaviours worth testing: a 5/5 leader
 with a clean first pullback, a low-float runner with no news, a gapper that

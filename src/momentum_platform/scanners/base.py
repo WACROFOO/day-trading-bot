@@ -55,6 +55,7 @@ class Scanner:
             "rvol_daily": _round(snap.rvol_daily),
             "rvol_5m": _round(snap.rvol_5m),
             "volume_today": snap.volume_today,
+            "volume_5m": snap.volume_5m,
             "float_m": None if snap.float_shares is None else round(snap.float_shares / 1e6, 2),
             "float_quality": snap.float_quality.value,
             "spread": _round(snap.spread_abs, 4),

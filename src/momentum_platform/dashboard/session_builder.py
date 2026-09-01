@@ -48,7 +48,7 @@ UTC = timezone.utc
 
 ROW_COLUMNS = [
     "symbol", "price", "changePct", "gapPct", "volume",
-    "rvolDaily", "rvol5m", "spread", "hodDistPct", "rangePos",
+    "rvolDaily", "rvol5m", "spread", "hodDistPct", "rangePos", "volume5m",
 ]
 
 LIST_META = {
@@ -87,6 +87,7 @@ def _row(ranked) -> list:
         ranked.symbol, _num(v.get("last"), 4), v.get("change_pct"), v.get("gap_pct"),
         int(v.get("volume_today") or 0), v.get("rvol_daily"), v.get("rvol_5m"),
         v.get("spread"), v.get("hod_distance_pct"), v.get("range_position"),
+        int(v.get("volume_5m") or 0),
     ]
 
 

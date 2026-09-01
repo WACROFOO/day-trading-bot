@@ -577,6 +577,23 @@ class TestFirstPullback:
         det.on_bar(make_bar("ABCD", utc(2026, 9, 1, 13, 37), 5.49, 5.75, 5.48, 5.72, 700_000))
         assert det.state == SetupState.TARGET_HIT
 
+    def test_quiet_drift_is_not_counted_as_the_impulse(self):
+        """Regression: an unbounded impulse leg swallowed a long low-volume
+        premarket drift, dragging mean impulse volume below the pullback's and
+        inverting the volume test on a textbook setup."""
+        det = FirstPullbackDetector()
+        specs = [(5.00 + i * 0.002, 5.005 + i * 0.002, 4.998 + i * 0.002,
+                  5.004 + i * 0.002, 2_400) for i in range(60)]   # quiet drift
+        specs += [(5.12, 5.30, 5.11, 5.28, 70_000),               # real impulse
+                  (5.28, 5.55, 5.27, 5.52, 65_000),
+                  (5.52, 5.54, 5.38, 5.40, 14_000),               # light pullback
+                  (5.40, 5.42, 5.30, 5.35, 13_000),
+                  (5.35, 5.50, 5.34, 5.48, 60_000)]               # trigger
+        for bar in self.bars(specs):
+            det.on_bar(bar)
+        assert det.active_plan is not None
+        assert det.active_plan.volume_ok, "pullback volume was lighter than the impulse"
+
     def test_long_pullback_expires(self):
         det = FirstPullbackDetector(max_pullback_bars=4)
         specs = [

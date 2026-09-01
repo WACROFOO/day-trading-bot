@@ -234,11 +234,12 @@ def _seek(page, frame: int):
     page.wait_for_timeout(250)
 
 
-def test_ui_opens_tier1_tiles(page):
+def test_ui_opens_three_scanner_cards(page):
+    """Three cards in funnel order: candidates, acceleration, breakout."""
     _seek(page, 118)
-    assert page.locator(".tile").count() == 9
-    assert page.locator("[data-tile=five_pillars_list]").count() == 1
-    assert page.locator("[data-tile=halt]").count() == 1
+    assert page.locator(".tile").count() == 3
+    for tile in ("five_pillars_list", "running_up", "hod_momentum"):
+        assert page.locator(f"[data-tile={tile}]").count() == 1
 
 
 def test_ui_tiles_report_state(page):
@@ -246,54 +247,89 @@ def test_ui_tiles_report_state(page):
     assert states and all(s in {"REPLAY", "FROZEN", "STALE", "OFFLINE", "LIVE"} for s in states)
 
 
+def test_ui_alert_rows_show_session(page):
+    """Running Up and HOD Momentum both fire premarket and in regular hours, so
+    each row states which session produced it."""
+    _seek(page, 150)
+    tags = page.eval_on_selector_all("[data-tile=hod_momentum] .pill.ses",
+                                     "els => els.map(e => e.textContent)")
+    assert tags and set(tags) <= {"PM", "RTH", "AH"}
+
+
 def test_ui_row_click_links_everything(page):
     _seek(page, 118)
-    page.locator("[data-tile=top_gainers] .trow").nth(1).click()
+    page.locator("[data-tile=five_pillars_list] .trow").first.click()
     page.wait_for_timeout(250)
     symbol = page.locator("#symTicker").inner_text()
     assert symbol and symbol != "—"
-    assert symbol in page.locator("#quoteCard").inner_text() or page.locator("#quoteCard").inner_text()
-    assert f"symbol={symbol}" in page.url          # deep-linkable
-    assert page.locator("[data-tile=top_gainers] .trow.sel").count() >= 1
+    assert f"symbol={symbol}" in page.url                      # deep-linkable
+    assert page.locator("[data-tile=five_pillars_list] .trow.sel").count() >= 1
+    assert page.locator("#quoteCard").inner_text().strip()
+    assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_intervals_survive_symbol_change(page):
+def test_ui_three_charts_always_present(page):
+    """1m execution, 5m structure and daily room are fixed roles — there are no
+    interval toggles to lose."""
     _seek(page, 118)
-    page.keyboard.press("d")                        # Chart B -> daily
-    page.locator("[data-tile=five_pillars_list] .trow").first.click()
-    page.wait_for_timeout(250)
-    assert page.locator(".seg-btn[data-chart=a].active").inner_text() == "1m"
-    assert page.locator(".seg-btn[data-chart=b].active").inner_text() == "Daily"
-    page.keyboard.press("5")
-    page.wait_for_timeout(150)
-    assert page.locator(".seg-btn[data-chart=b].active").inner_text() == "5m"
+    assert page.locator("canvas").count() == 3
+    for cid in ("#chartA", "#chartB", "#chartC"):
+        box = page.locator(cid).bounding_box()
+        assert box and box["width"] > 200 and box["height"] > 100
+    titles = page.eval_on_selector_all(".chart-title", "els => els.map(e => e.textContent)")
+    assert titles == ["1 minute · execution", "5 minute · structure", "Daily · room"]
 
 
 def test_ui_freeze_pins_row_order(page):
     _seek(page, 110)
-    sel = "[data-tile=top_gainers] .trow b"
+    sel = "[data-tile=five_pillars_list] .trow b"
     before = page.eval_on_selector_all(sel, "els => els.map(e => e.textContent)")
-    page.locator("[data-tile=top_gainers] .icon-btn").click()
+    page.locator("[data-tile=five_pillars_list] .icon-btn").click()
     page.wait_for_timeout(150)
     _seek(page, 148)
     after = page.eval_on_selector_all(sel, "els => els.map(e => e.textContent)")
     assert before == after
-    assert page.locator("[data-tile=top_gainers] .tile-state").inner_text() == "FROZEN"
-    page.locator("[data-tile=top_gainers] .icon-btn").click()   # release
+    assert page.locator("[data-tile=five_pillars_list] .tile-state").inner_text() == "FROZEN"
+    page.locator("[data-tile=five_pillars_list] .icon-btn").click()
     page.wait_for_timeout(150)
 
 
-def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
+def test_ui_level2_ladder_renders(page):
     _seek(page, 125)
-    page.keyboard.press("Escape")          # clear any drawer a prior test opened
-    page.wait_for_timeout(150)
     page.locator("[data-tile=five_pillars_list] .trow").first.click()
     page.wait_for_timeout(250)
-    drawer = page.locator(".reasons")
-    assert drawer.count() == 1
-    text = drawer.inner_text()
-    for token in ("price $2", "gain", "RVOL", "float", "confirmed course"):
-        assert token in text
+    assert page.locator(".ladder .lp").count() == 16          # 8 levels per side
+    assert page.locator(".tape .print").count() == 10
+    bids = page.eval_on_selector_all(".ladder .lp.bid", "els => els.map(e => parseFloat(e.textContent))")
+    asks = page.eval_on_selector_all(".ladder .lp.ask", "els => els.map(e => parseFloat(e.textContent))")
+    assert bids == sorted(bids, reverse=True)                 # best bid at the top
+    assert asks == sorted(asks)                               # best offer at the top
+    assert bids[0] < asks[0]                                  # never crossed
+    body = page.locator("#l2Card").inner_text().lower()
+    assert "simulated" in body and "not licensed market data" in body
+
+
+def test_ui_verdict_mirrors_pine_and_decides(page):
+    _seek(page, 125)
+    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.wait_for_timeout(250)
+    labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
+    assert labels == ["Price", "Gain vs close", "Daily RVOL", "Float / supply", "News",
+                      "Technical score", "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
+    verdict = page.locator(".verdict-banner b").inner_text()
+    assert verdict in {"GO", "WAIT", "PASS"}
+    assert page.locator(".why-row").count() >= 1              # always says why
+
+
+def test_ui_sizing_needs_the_operators_own_risk(page):
+    _seek(page, 125)
+    page.locator("[data-tile=five_pillars_list] .trow").first.click()
+    page.wait_for_timeout(250)
+    assert "will not assume one for you" in page.locator(".sizing").inner_text()
+    page.locator(".risk-input input").fill("25")
+    page.wait_for_timeout(250)
+    sizing = page.locator(".sizing").inner_text()
+    assert "Shares" in sizing and "Planned loss" in sizing
 
 
 def test_ui_alert_click_seeks_charts(page):

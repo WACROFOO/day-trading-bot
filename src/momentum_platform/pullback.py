@@ -77,6 +77,7 @@ class FirstPullbackDetector:
     def __init__(
         self,
         min_impulse_bars: int = 2,
+        max_impulse_bars: int = 6,
         min_impulse_range_pct: float = 2.0,
         min_pullback_bars: int = 1,
         max_pullback_bars: int = 4,
@@ -86,6 +87,10 @@ class FirstPullbackDetector:
         expire_armed_after_bars: int = 5,
     ) -> None:
         self.min_impulse_bars = min_impulse_bars
+        # An impulse is a burst, not "every green candle since the open". Left
+        # unbounded, a long quiet premarket drift would be counted as the
+        # impulse leg and its low volume would invert the volume comparison.
+        self.max_impulse_bars = max_impulse_bars
         self.min_impulse_range_pct = min_impulse_range_pct
         self.min_pullback_bars = min_pullback_bars
         self.max_pullback_bars = max_pullback_bars
@@ -139,6 +144,7 @@ class FirstPullbackDetector:
         if w.state == SetupState.SEEKING_IMPULSE:
             if self._green(bar):
                 w.impulse_bars.append(bar)
+                del w.impulse_bars[:-self.max_impulse_bars]
             else:
                 if self._impulse_valid(w.impulse_bars):
                     w.state = SetupState.PULLBACK
