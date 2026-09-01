@@ -83,6 +83,16 @@ else
        note "$PREFLIGHT"
        note "a VPN, company network or cloud container will do this;"
        note "your keys are probably fine — try again on home wifi" ;;
+    5) bad  "this Python cannot verify HTTPS certificates"
+       note "Your keys and your network are both fine. The request never left"
+       note "this computer. Python from python.org ships its own certificate"
+       note "store and ignores the macOS keychain, so it must be filled once:"
+       note ""
+       note "    open the Applications folder, find your Python 3.x folder,"
+       note "    and double-click 'Install Certificates.command'"
+       note ""
+       note "or from a terminal:  $PY -m pip install --upgrade certifi"
+       note "then run this again." ;;
     *) bad  "$PREFLIGHT" ;;
   esac
 fi

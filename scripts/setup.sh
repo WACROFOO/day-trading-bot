@@ -105,6 +105,7 @@ good ".env is untracked"
 
 # ----------------------------------------------------------------- tests ----
 head2 "4. Checking the code runs on your machine"
+TESTTMP=$(mktemp -d 2>/dev/null || echo "/tmp/desk-tests-$$")
 PYTEST=""
 if $PY -m pytest --version >/dev/null 2>&1; then PYTEST="$PY -m pytest"
 elif command -v pytest >/dev/null 2>&1;   then PYTEST="pytest"
@@ -112,15 +113,20 @@ fi
 if [ -z "$PYTEST" ]; then
   printf '  %swarn%s  pytest is not installed, so the test suite was skipped.\n' "$Y" "$O"
   note "optional — install it with: $PY -m pip install pytest"
-elif $PYTEST -q >/tmp/desk-tests.$$ 2>&1; then
+# pytest writes a cache and per-test temp dirs. If it cannot write them next
+# to the repo, every test using a temp path errors and the run looks broken
+# when the code is fine. Keep both outside the repo so the result reflects the
+# code and nothing else.
+elif $PYTEST -q -p no:cacheprovider --basetemp="$TESTTMP" >/tmp/desk-tests.$$ 2>&1; then
   good "test suite passes ($(grep -Eo '[0-9]+ passed' /tmp/desk-tests.$$ | tail -1))"
   rm -f /tmp/desk-tests.$$
+  [ -n "${TESTTMP:-}" ] && rm -rf "$TESTTMP"
 else
   printf '  %swarn%s  the test suite did not come back clean:\n' "$Y" "$O"
-  grep -E 'ModuleNotFoundError|failed|ERROR ' /tmp/desk-tests.$$ | sort -u | head -6 \
-    | while IFS= read -r line; do note "$line"; done
-  note "full detail: $PYTEST -q"
-  note "a missing module only affects older tests; the desk itself needs no extras."
+  grep -E '^[0-9]+ (failed|passed)|ModuleNotFoundError|^ERROR ' /tmp/desk-tests.$$ \
+    | sort -u | head -6 | while IFS= read -r line; do note "$line"; done
+  note "full detail: $PYTEST -q --basetemp=\"\$(mktemp -d)\""
+  note "ModuleNotFoundError for pandas affects only older tests, not the desk."
   rm -f /tmp/desk-tests.$$
 fi
 
@@ -142,14 +148,25 @@ if [ $rc -eq 0 ]; then
   say ""
   say "  ${D}The full walkthrough is in docs/alpaca-setup.md, Step 4 onward.${O}"
 else
-  say "  The FAIL above names its own fix. The two usual causes:"
+  say "  The FAIL above names its own fix. The three causes, in order of"
+  say "  how often they are the real one:"
   say ""
-  say "  ${B}401 / forbidden${O}  the key or secret is wrong. Generate a fresh pair"
-  say "                  in the Alpaca dashboard (Paper Trading toggle on),"
-  say "                  then re-run this script and paste the new values."
-  say "  ${B}could not reach${O}  a network, proxy, VPN or firewall is blocking"
-  say "                  api.alpaca.markets. Try again off the corporate"
-  say "                  network, or with the VPN switched off."
+  say "  ${B}certificate verify failed${O}"
+  say "      Your keys and network are FINE — the request never left this"
+  say "      computer. Python from python.org carries its own certificate"
+  say "      store and ignores the macOS keychain. Fill it once:"
+  say "        open Applications, find your Python 3.x folder, and"
+  say "        double-click ${B}Install Certificates.command${O}"
+  say "      or run:  ${B}$PY -m pip install --upgrade certifi${O}"
+  say "      ${D}Do NOT regenerate your keys for this error.${O}"
+  say ""
+  say "  ${B}401 / forbidden${O}"
+  say "      The key or secret really is wrong. Generate a fresh pair in the"
+  say "      Alpaca dashboard with the Paper Trading toggle on, then re-run."
+  say ""
+  say "  ${B}could not reach${O}"
+  say "      A network, proxy, VPN or firewall is blocking api.alpaca.markets."
+  say "      Try again off the corporate network, or with the VPN off."
   say ""
   say "  Re-run any time with: ${B}bash scripts/setup.sh${O}"
 fi

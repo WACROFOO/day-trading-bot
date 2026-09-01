@@ -325,6 +325,7 @@ progression — is in `docs/daily-operating-guide.md`.
 | **This site can't be reached** at `127.0.0.1:8787` | No desk is running. Start it in a terminal with `bash scripts/start.sh`, wait for the address to print, then reload. |
 | The page went blank mid-session | The terminal was closed or Ctrl-C was pressed. Start it again. |
 | Header says `REPLAY` when you wanted live | The launcher already told you why, higher up in the terminal. Scroll up and read that line. |
+| `certificate verify failed` | **Not a network problem and not a bad key.** Python from python.org carries its own certificate store and ignores the macOS keychain. Open Applications → your Python 3.x folder → double-click `Install Certificates.command`, then retry. Do not regenerate your keys. |
 | `Could not reach Alpaca` | Network, VPN or firewall. **Your keys are fine.** Try home wifi. |
 | `401` / `403` from Alpaca itself | The key pair is wrong. Regenerate a paper pair, re-run `setup.sh`. |
 | Charts empty on live data | The market has not traded yet today. Normal before 04:00 ET. |

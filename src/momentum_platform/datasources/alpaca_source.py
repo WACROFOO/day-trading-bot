@@ -97,9 +97,26 @@ class AlpacaClient:
                 ) from None
             raise AlpacaError("Alpaca returned HTTP %d for %s\n%s" % (exc.code, path, body)) from None
         except urllib.error.URLError as exc:
+            reason = str(exc.reason)
+            if "CERTIFICATE_VERIFY" in reason or "SSLCertVerification" in reason:
+                # Not a network problem, and not a bad key. A python.org build on
+                # macOS ships its own CA store and does not read the system
+                # keychain, so every HTTPS call fails until that store is
+                # populated. Saying "check your connection" here sends people to
+                # regenerate perfectly good credentials.
+                raise AlpacaError(
+                    "Python on this machine cannot verify HTTPS certificates, so the "
+                    "request never left your computer. Your keys and your network are "
+                    "fine.\n\n"
+                    "On macOS with Python from python.org, fix it once by opening the\n"
+                    "Applications folder, then your Python 3.x folder, and double-clicking\n"
+                    "the file named: Install Certificates.command\n\n"
+                    "From a terminal instead: python3 -m pip install --upgrade certifi\n\n"
+                    "Detail: %s" % reason
+                ) from None
             raise AlpacaError(
                 "Could not reach Alpaca (%s). Check your internet connection, and any "
-                "company proxy or VPN that might block api/data.alpaca.markets." % exc.reason
+                "company proxy or VPN that might block api/data.alpaca.markets." % reason
             ) from None
 
     # -- endpoints ----------------------------------------------------------

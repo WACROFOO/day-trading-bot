@@ -10,6 +10,7 @@ Prints one human-readable line and exits with a code the launcher reads:
     2  credentials were rejected by Alpaca
     3  Alpaca could not be reached from this network
     4  something else went wrong
+    5  this Python cannot verify HTTPS certificates
 
 Reads only. Never places an order.
 """
@@ -29,7 +30,7 @@ from momentum_platform.datasources.alpaca_source import (  # noqa: E402
 
 ET = ZoneInfo("America/New_York")
 
-NO_CREDS, REJECTED, UNREACHABLE, OTHER = 1, 2, 3, 4
+NO_CREDS, REJECTED, UNREACHABLE, OTHER, CERT = 1, 2, 3, 4, 5
 
 
 def _classify(message: str) -> int:
@@ -40,6 +41,11 @@ def _classify(message: str) -> int:
     as a bad key and the user regenerates a perfectly good pair.
     """
     low = message.lower()
+    if "certificate" in low or "sslcertverification" in low:
+        # Checked before the network cases: a cert failure never leaves the
+        # machine, so calling it a network block sends the user to change
+        # wifi and regenerate keys that were never the problem.
+        return CERT
     if "tunnel" in low or "could not reach" in low or "connection" in low:
         return UNREACHABLE
     if "401" in low or "403" in low or "unauthorized" in low or "forbidden" in low:
@@ -62,6 +68,7 @@ def main() -> int:
         code = _classify(str(exc))
         label = {REJECTED: "credentials rejected",
                  UNREACHABLE: "network blocked",
+                 CERT: "certificates not installed",
                  OTHER: "unexpected error"}[code]
         print(f"{label}: {exc}")
         return code

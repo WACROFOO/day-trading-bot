@@ -96,9 +96,16 @@ class SecClient:
                 ) from None
             raise SecError("SEC returned HTTP %d for %s" % (exc.code, url)) from None
         except urllib.error.URLError as exc:
+            reason = str(exc.reason)
+            if "CERTIFICATE_VERIFY" in reason or "SSLCertVerification" in reason:
+                raise SecError(
+                    "Python on this machine cannot verify HTTPS certificates. On macOS "
+                    "run '/Applications/Python 3.x/Install Certificates.command' once, "
+                    "or 'python3 -m pip install --upgrade certifi'.\nDetail: %s" % reason
+                ) from None
             raise SecError(
                 "Could not reach SEC EDGAR (%s). Check your connection, and any "
-                "proxy or VPN that might block sec.gov." % exc.reason
+                "proxy or VPN that might block sec.gov." % reason
             ) from None
 
     # -- ticker -> CIK --------------------------------------------------------

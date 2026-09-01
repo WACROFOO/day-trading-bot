@@ -193,3 +193,53 @@ def test_unknown_ticker_returns_empty_without_calling_submissions():
 def test_filing_url_is_well_formed():
     url = _filing_url(111, "0000000000-26-000001", "doc.htm")
     assert url == "https://www.sec.gov/Archives/edgar/data/111/000000000026000001/doc.htm"
+
+
+# -- certificate failures are not network failures ----------------------------
+# A macOS python.org build ships its own CA store and ignores the system
+# keychain, so every HTTPS call fails until it is populated. Reporting that as
+# "check your connection" sends the user to change wifi and regenerate keys
+# that were never the problem — which is exactly what happened once.
+
+import importlib.util as _ilu  # noqa: E402
+
+_spec = _ilu.spec_from_file_location("preflight", ROOT / "scripts" / "preflight.py")
+preflight = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(preflight)
+
+CERT_MESSAGE = ("Could not reach Alpaca ([SSL: CERTIFICATE_VERIFY_FAILED] certificate "
+                "verify failed: unable to get local issuer certificate (_ssl.c:1082))")
+
+
+def test_certificate_failure_is_not_reported_as_a_network_block():
+    assert preflight._classify(CERT_MESSAGE) == preflight.CERT
+
+
+def test_certificate_failure_is_not_reported_as_a_bad_key():
+    assert preflight._classify(CERT_MESSAGE) != preflight.REJECTED
+
+
+def test_alpaca_ssl_error_names_the_actual_fix():
+    from momentum_platform.datasources import alpaca_source as al
+    import urllib.error
+
+    client = al.AlpacaClient(key_id="PKTEST", secret_key="s" * 40)
+
+    def boom(req, timeout=None):
+        raise urllib.error.URLError(
+            "[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: "
+            "unable to get local issuer certificate")
+
+    import urllib.request
+    original = urllib.request.urlopen
+    urllib.request.urlopen = boom
+    try:
+        with pytest.raises(al.AlpacaError) as exc:
+            client.account()
+    finally:
+        urllib.request.urlopen = original
+
+    message = str(exc.value)
+    assert "Install Certificates.command" in message
+    assert "certifi" in message
+    assert "keys and your network are fine" in message.lower()
