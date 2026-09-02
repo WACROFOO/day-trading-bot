@@ -760,3 +760,11 @@ def test_a_failed_live_session_falls_back_instead_of_crashing():
     assert "except AlpacaError" in block
     assert "Could not build the live session" in block
     assert "build_session(str(DEFAULT_FIXTURE))" in block
+
+
+def test_a_stepped_back_session_is_announced_in_the_header():
+    """At 04:15 the trading date alone is easy to skim past; a previous
+    session must never quietly pass for today's."""
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    assert "S.sessionNote" in (web / "app.js").read_text()
+    assert ".session-note{" in (web / "styles.css").read_text()

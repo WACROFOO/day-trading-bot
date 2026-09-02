@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
@@ -34,6 +35,7 @@ from momentum_platform.datasources.alpaca_source import (  # noqa: E402
 )
 
 UTC = timezone.utc
+ET = ZoneInfo("America/New_York")
 
 
 def main(argv=None) -> int:
@@ -64,11 +66,19 @@ def main(argv=None) -> int:
         log("pass 1 — price and gain across the whole universe…")
         survivors = []
         snaps = client.snapshots(universe)
+        # Which session do these numbers describe? Alpaca's dailyBar is the most
+        # recent COMPLETED daily bar, so before the open it is yesterday's. The
+        # scan must say so: printing a completed session's move under the
+        # heading "today's movers" invites acting on a move that already ended.
+        bar_dates: dict = {}
         for symbol, snap in snaps.items():
             if not snap:
                 continue
             day = snap.get("dailyBar") or {}
             prev = snap.get("prevDailyBar") or {}
+            stamp = str(day.get("t") or "")[:10]
+            if stamp:
+                bar_dates[stamp] = bar_dates.get(stamp, 0) + 1
             last = (snap.get("latestTrade") or {}).get("p") or day.get("c")
             prev_close, volume = prev.get("c"), day.get("v") or 0
             if not last or not prev_close or prev_close <= 0:
@@ -79,6 +89,14 @@ def main(argv=None) -> int:
                 survivors.append({"symbol": symbol, "price": last, "gain": gain,
                                   "volume": volume})
         log(f"  {len(survivors)} passed price, gain and volume")
+        session_date = max(bar_dates, key=bar_dates.get) if bar_dates else ""
+        today_et = datetime.now(ET).date().isoformat()
+        if session_date and session_date != today_et:
+            log("")
+            log(f"  NOTE: these are the {session_date} session's moves, not today's.")
+            log(f"  Alpaca's daily bar is the last COMPLETED session, and today "
+                f"({today_et}) has not")
+            log("  produced one yet. Re-run after 09:30 ET for today's move.")
         if not survivors:
             log("\nNothing qualifies right now. That is a normal answer — "
                 "do not widen the filter to manufacture a candidate.")

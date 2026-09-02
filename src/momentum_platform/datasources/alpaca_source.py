@@ -413,6 +413,24 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
     client = client_from_env(feed)
     symbols = [s.upper().strip() for s in symbols if s.strip()]
     records = fetch_records(client, symbols, day=day)
+
+    # Before the open — or on a morning these names have not printed on IEX yet
+    # — today's window is empty. Falling back to the bundled fixture would swap
+    # the user's real candidates for invented ones, so step back through recent
+    # trading days and open the last session these symbols actually traded.
+    stepped_back_to = None
+    if day is None and not any(r["type"] == "bar" for r in records):
+        anchor = session_day()
+        for _ in range(5):
+            anchor -= timedelta(days=1)
+            while anchor.weekday() >= 5:
+                anchor -= timedelta(days=1)
+            print(f"  no bars for today yet — trying {anchor.date().isoformat()}")
+            previous = fetch_records(client, symbols, day=anchor)
+            if any(r["type"] == "bar" for r in previous):
+                records, stepped_back_to = previous, anchor.date().isoformat()
+                break
+
     if not any(r["type"] == "bar" for r in records):
         raise AlpacaError(
             "Alpaca returned no 1-minute bars for %s.\n"
@@ -429,6 +447,13 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
         max_rows=max_rows, data_status="live" if client.feed == "sip" else "iex",
         volume_floor_scale=1.0 if client.feed == "sip" else IEX_VOLUME_FLOOR_SCALE,
     )
+    if stepped_back_to:
+        # Say it in the payload, not just the terminal: the header must never
+        # let a previous session pass for today's.
+        session["sessionNote"] = (
+            "Showing the %s session — today has produced no bars for these "
+            "symbols yet." % stepped_back_to)
+        print(f"  showing the {stepped_back_to} session instead of today")
     session["disclaimer"] = (
         "Alpaca %s feed. IEX is one venue, so absolute volume is a fraction of "
         "consolidated volume; relative volume compares IEX to IEX and stays meaningful. "

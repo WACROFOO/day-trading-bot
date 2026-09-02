@@ -1398,6 +1398,13 @@ function init() {
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
 
   $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId + " · deterministic replay";
+  // When the desk stepped back because today had no bars, say so in the header.
+  // The trading date alone is easy to skim past at 04:15 in the morning.
+  if (S.sessionNote) {
+    const warn = el("span", "session-note", S.sessionNote);
+    $("#sessionLabel").appendChild(document.createTextNode("  "));
+    $("#sessionLabel").appendChild(warn);
+  }
   $("#disclaimer").textContent = S.disclaimer;
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
   scrub.oninput = () => { state.frame = Number(scrub.value); render(); };

@@ -355,3 +355,6 @@ body.resizing .gutter{pointer-events:auto}
    Sits below the empty-pane note (z-index 5) so an explanation still reads. */
 .session-shade{position:absolute;top:0;bottom:0;z-index:1;pointer-events:none;
   background:rgba(120,130,150,0.06);border-left:1px dashed rgba(255,194,71,0.25);width:0}
+/* Header warning when the desk stepped back to an earlier session. */
+.session-note{color:var(--hi);border:1px solid #4a3c17;background:#241d0c;
+  border-radius:3px;padding:0 5px;margin-left:6px;font-size:9.5px}

@@ -383,3 +383,56 @@ def test_session_window_end_is_never_before_start(monkeypatch):
     start, end = al.session_window()
     assert start < end, (start, end)
     assert start.startswith("2026-09-01T08:00:00")      # 04:00 ET on Sept 1
+
+
+# -- an empty "today" must not become the synthetic fixture -------------------
+
+def _snap_client(bars_by_day):
+    """A client whose 1-minute bars exist only on the days given."""
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            if timeframe != "1Min":
+                return {}
+            date = start[:10]
+            rows = bars_by_day.get(date)
+            if not rows:
+                return {}
+            return {s: rows for s in symbols}
+
+        def trades(self, symbols, start, end=None, limit=10000):
+            return {}
+
+        def news(self, symbols, limit=50, start=None):
+            return []
+    return Stub("PK", "s" * 40)
+
+
+def test_an_empty_today_steps_back_to_the_last_traded_session(capsys, monkeypatch):
+    """Falling back to the bundled fixture would swap the user's real
+    candidates for invented ones. Step back to a real session instead."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    monkeypatch.setattr(al, "session_day", lambda now=None: datetime(2026, 9, 2, 4, 15, tzinfo=et))
+    rows = [{"t": "2026-09-01T13:31:00Z", "o": 5, "h": 5.2, "l": 4.9, "c": 5.1, "v": 900}]
+    client = _snap_client({"2026-09-01": rows})       # only yesterday has bars
+    recs = al.fetch_records(client, ["AAA"])
+    assert not any(r["type"] == "bar" for r in recs), "today is genuinely empty"
+    recs_prev = al.fetch_records(client, ["AAA"], day=datetime(2026, 9, 1, 12, 0, tzinfo=et))
+    assert any(r["type"] == "bar" for r in recs_prev), "yesterday has bars to step back to"
+
+
+def test_the_step_back_is_announced_in_the_payload(monkeypatch):
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    monkeypatch.setattr(al, "session_day", lambda now=None: datetime(2026, 9, 2, 4, 15, tzinfo=et))
+    rows = [{"t": f"2026-09-01T13:{m:02d}:00Z", "o": 5, "h": 5.2, "l": 4.9, "c": 5.1, "v": 900}
+            for m in range(31, 59)]
+    client = _snap_client({"2026-09-01": rows})
+    monkeypatch.setattr(al, "client_from_env", lambda feed=None: client)
+    session = al.build_alpaca_session(["AAA"])
+    assert "sessionNote" in session
+    assert "2026-09-01" in session["sessionNote"]
+    assert "today has produced no bars" in session["sessionNote"]
