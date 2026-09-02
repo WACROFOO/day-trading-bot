@@ -739,3 +739,24 @@ def test_ten_second_pane_is_cut_by_time_not_by_index():
     body = app.split("function bars10sUpTo")[1].split("\nfunction ")[0]
     assert "frame.t + 60" in body
     assert "barIndex10s" not in body and "* 6" not in body
+
+
+def test_the_startup_banner_describes_the_feed_actually_loaded():
+    """Asking for --alpaca and falling back to the fixture must not still
+    announce an Alpaca feed: that tells the user they are on live data when
+    they are looking at a recorded day."""
+    server = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+              / "dashboard" / "server.py").read_text()
+    assert 'session.get("dataStatus") in ("iex", "live")' in server
+    assert "RECORDED SESSION" in server
+
+
+def test_a_failed_live_session_falls_back_instead_of_crashing():
+    """A traceback leaves the user with no desk at all. The fallback keeps the
+    desk up and says why, and the REPLAY badge makes the substitution visible."""
+    server = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+              / "dashboard" / "server.py").read_text()
+    block = server.split("startswith(\"alpaca:\")")[1][:1200]
+    assert "except AlpacaError" in block
+    assert "Could not build the live session" in block
+    assert "build_session(str(DEFAULT_FIXTURE))" in block

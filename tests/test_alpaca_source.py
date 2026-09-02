@@ -347,3 +347,39 @@ def test_a_trades_outage_keeps_the_minute_bars(capsys):
     recs = al.fetch_records(Stub("PK", "s" * 40), ["AAA"])
     assert any(r["type"] == "bar" for r in recs)
     assert "10-second bars unavailable" in capsys.readouterr().out
+
+
+# -- the session window must never be inverted --------------------------------
+
+def test_before_four_am_the_window_is_the_previous_weekday():
+    """A 03:52 ET run asked for today's 04:00-03:52 and Alpaca refused it."""
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    now = datetime(2026, 9, 2, 3, 52, tzinfo=et)          # Wednesday, pre-dawn
+    assert al.session_day(now).date() == datetime(2026, 9, 1).date()
+
+
+def test_a_weekend_rolls_back_to_friday():
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    sat = datetime(2026, 9, 5, 12, 0, tzinfo=et)
+    assert al.session_day(sat).date() == datetime(2026, 9, 4).date()
+    mon_early = datetime(2026, 9, 7, 2, 0, tzinfo=et)
+    assert al.session_day(mon_early).date() == datetime(2026, 9, 4).date()
+
+
+def test_midday_is_today():
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    assert al.session_day(datetime(2026, 9, 2, 11, 0, tzinfo=et)).date() == datetime(2026, 9, 2).date()
+
+
+def test_session_window_end_is_never_before_start(monkeypatch):
+    class FrozenDT(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return datetime(2026, 9, 2, 7, 52, tzinfo=timezone.utc)  # 03:52 ET
+    monkeypatch.setattr(al, "datetime", FrozenDT)
+    start, end = al.session_window()
+    assert start < end, (start, end)
+    assert start.startswith("2026-09-01T08:00:00")      # 04:00 ET on Sept 1

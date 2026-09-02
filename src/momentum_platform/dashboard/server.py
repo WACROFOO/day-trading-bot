@@ -30,8 +30,19 @@ DEFAULT_FIXTURE = (
 def _session(fixture: str) -> dict:
     """`fixture` is a path, or "live:AAPL,TSLA" for real delayed data."""
     if fixture.startswith("alpaca:"):
-        from ..datasources.alpaca_source import build_alpaca_session
-        return build_alpaca_session(fixture[7:].split(","))
+        from ..datasources.alpaca_source import AlpacaError, build_alpaca_session
+        try:
+            return build_alpaca_session(fixture[7:].split(","))
+        except AlpacaError as exc:
+            # A live-session failure is a message, not a traceback, and it must
+            # not leave the user staring at a dead terminal. Say why, then open
+            # the recorded session; the header badge reads REPLAY, so the
+            # substitution is visible, never silent.
+            print("\nCould not build the live session:")
+            print("  " + str(exc).replace("\n", "\n  "))
+            print("\nOpening the recorded session instead so the desk still comes up.")
+            print("Fix the cause above and restart to get live data.\n")
+            return build_session(str(DEFAULT_FIXTURE))
     if fixture.startswith("live:"):
         from ..datasources.live_session import build_live_session
         return build_live_session(fixture[5:].split(","))
@@ -113,9 +124,15 @@ def main(argv=None) -> int:
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "
           f"{sum(len(f['alerts']) for f in session['frames'])} alerts")
     print(f"workstation: http://{args.host}:{args.port}/")
-    if args.alpaca:
+    # Describe the feed the session ACTUALLY carries. Asking for --alpaca and
+    # falling back to the fixture used to still print "Alpaca IEX feed", which
+    # tells the user they are on live data when they are not.
+    if session.get("dataStatus") in ("iex", "live"):
         print("Alpaca IEX feed — single venue, so absolute volume is a fraction of the "
               "consolidated tape. Research only.")
+    elif args.alpaca:
+        print("RECORDED SESSION — the live feed failed above, so this is not today's "
+              "market. The header badge reads REPLAY.")
     if args.live:
         print("DELAYED data (~15 minutes) — research only, not an entitled feed")
     ThreadingHTTPServer((args.host, args.port), make_handler(source)).serve_forever()

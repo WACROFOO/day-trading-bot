@@ -266,13 +266,35 @@ def _iso(dt: datetime) -> str:
     return dt.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
 
 
+def session_day(now: Optional[datetime] = None) -> datetime:
+    """The trading day the desk should show right now, as an ET datetime.
+
+    Before 04:00 ET there is no session yet today, so "today's window" would
+    end before it starts — Alpaca rejects that with "end should not be before
+    start", and a 03:52 ET run crashed on exactly that. Roll back to the most
+    recent weekday in that case, and from a weekend to Friday. The desk then
+    opens on the last completed session, which is what a pre-dawn scan is
+    actually looking at anyway.
+    """
+    anchor = (now or datetime.now(UTC)).astimezone(ET)
+    if anchor.hour < 4:
+        anchor -= timedelta(days=1)
+    while anchor.weekday() >= 5:            # 5 = Saturday, 6 = Sunday
+        anchor -= timedelta(days=1)
+    return anchor
+
+
 def session_window(day: Optional[datetime] = None) -> tuple:
-    """Premarket open (04:00 ET) through now, as RFC3339 strings."""
+    """Premarket open (04:00 ET) through the close or now, as RFC3339 strings."""
     now = datetime.now(UTC)
-    anchor = (day or now).astimezone(ET)
+    anchor = day.astimezone(ET) if day is not None else session_day(now)
     start_et = anchor.replace(hour=4, minute=0, second=0, microsecond=0)
     end_et = anchor.replace(hour=20, minute=0, second=0, microsecond=0)
-    end = min(end_et.astimezone(UTC), now) if day is None else end_et.astimezone(UTC)
+    end = end_et.astimezone(UTC)
+    if day is None and now < end:
+        end = now
+    if end <= start_et.astimezone(UTC):     # never hand Alpaca an inverted window
+        end = end_et.astimezone(UTC)
     return _iso(start_et.astimezone(UTC)), _iso(end)
 
 
