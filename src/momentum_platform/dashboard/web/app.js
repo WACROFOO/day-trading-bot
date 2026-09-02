@@ -1083,16 +1083,18 @@ function beep(severity) {
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
   C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "timeline",
-  R1: "level2", R2: "verdict",
+  // The screener takes the tall right slot: it is real data about the whole
+  // band, refreshed on a timer. Level 2 is simulated and waits in the tray.
+  R1: "screener", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-daily", "tv-widget"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "chart-daily", "tv-widget"]);
 const DEFAULT_SIZES = {
   wLeft: 336, wRight: 352,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
            C4: 0.42, R1: 1.62, R2: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v2";
+const LAYOUT_KEY = "momentum-workstation.layout.v3";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1470,6 +1472,55 @@ function renderWidget(sym, meta) {
   document.head.appendChild(tag);
 }
 
+
+/* The screener card polls its own endpoint — every 20 seconds, independent of
+   session reloads — so the table moves even when the desk's bars do not. A
+   row's source says where the number came from: Yahoo (consolidated, delayed)
+   or IEX (real-time, one venue). Clicking a row selects it if it is on the
+   desk and asks the server to add it otherwise. */
+function ageText(asOf) {
+  if (!asOf) return "—";
+  const ms = typeof asOf === "number" ? (asOf > 1e12 ? asOf : asOf * 1000) : Date.parse(asOf);
+  if (!ms) return "—";
+  const s = Math.max(0, Math.round((Date.now() - ms) / 1000));
+  return s < 90 ? s + "s" : s < 5400 ? Math.round(s / 60) + "m" : Math.round(s / 3600) + "h";
+}
+function renderScreener(data) {
+  const host = document.getElementById("screenerRows"); if (!host) return;
+  const tag = document.getElementById("screenerSource");
+  const src = (data && data.source) || "none";
+  if (tag) { tag.textContent = src === "yahoo-delayed" ? "Yahoo · delayed" : src === "iex" ? "IEX · real-time" : "paused";
+             tag.className = "tag " + (src === "yahoo-delayed" ? "yahoo" : src === "iex" ? "iex" : ""); }
+  const note = document.getElementById("screenerNote");
+  if (note && data) note.textContent = (data.notes && data.notes.length) ? data.notes.join(" ")
+    : "Every name $" + data.band[0] + "–" + data.band[1] + " up ≥" + data.min_gain + "% in the current session. Click a row to put it on the desk.";
+  host.textContent = "";
+  const rows = (data && data.rows) || [];
+  if (!rows.length) { host.appendChild(el("div", "empty", "Nothing in the band is moving right now. That is a real answer.")); return; }
+  rows.forEach(r => {
+    const onDesk = !!SYMS[r.symbol];
+    const tr = el("div", "trow screener-row" + (onDesk ? " ondesk" : "") + (state.selected === r.symbol ? " sel" : ""));
+    tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    tr.title = [r.name, r.exchange, r.session].filter(Boolean).join(" · ");
+    const sym = el("span", "tsym"); sym.appendChild(el("b", null, r.symbol)); tr.appendChild(sym);
+    tr.appendChild(el("span", null, fx(r.price)));
+    tr.appendChild(el("span", dirClass(r.change_pct), pct(r.change_pct)));
+    tr.appendChild(el("span", "src " + r.source, r.source));
+    tr.appendChild(el("span", "muted", ageText(r.as_of)));
+    tr.onclick = () => {
+      if (onDesk) { select(r.symbol, "screener"); render(); return; }
+      fetch("/api/v1/desk/add?symbol=" + encodeURIComponent(r.symbol)).then(x => x.json()).then(j => {
+        if (note) note.textContent = j.added && j.added.length ? r.symbol + " joins the desk on the next refresh." : (j.note || "");
+      }).catch(() => {});
+    };
+    host.appendChild(tr);
+  });
+}
+function pollScreener() {
+  const tick = () => fetch("/api/v1/screener", { cache: "no-store" }).then(r => r.json()).then(renderScreener).catch(() => {});
+  tick(); setInterval(tick, 20000);
+}
+
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
   const frame = FRAMES[state.frame];
@@ -1519,7 +1570,8 @@ function init() {
   document.body.appendChild(parked);
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
 
-  $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId + " · deterministic replay";
+  $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId +
+    (S.live ? " · LIVE — following the newest bar; scrub back to review" : " · deterministic replay");
   // When the desk stepped back because today had no bars, say so in the header.
   // The trading date alone is easy to skim past at 04:15 in the morning.
   if (S.sessionNote) {
@@ -1537,6 +1589,7 @@ function init() {
     $("#feedDot").className = "dot live";
     liveFollow();
   }
+  pollScreener();
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
   scrub.oninput = () => { state.frame = Number(scrub.value); render(); };
   $("#btnPlay").onclick = () => state.playing ? pause() : play();

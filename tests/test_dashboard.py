@@ -352,7 +352,7 @@ def test_ui_fits_one_viewport(page):
 def test_ui_quote_card_sits_under_the_scanners(page):
     quote = page.locator("[data-card=quote]").bounding_box()
     scan = page.locator("[data-card=scan-pillars]").bounding_box()
-    l2 = page.locator("[data-card=level2]").bounding_box()
+    l2 = page.locator("[data-card=screener]").bounding_box()
     assert quote["y"] > scan["y"]
     assert abs(quote["x"] - scan["x"]) < 4
     assert l2["x"] > quote["x"] + quote["width"]
@@ -369,7 +369,7 @@ def test_ui_flames_on_every_scanner_row(page):
 def test_ui_gutters_resize_panes_and_persist(page):
     """Cards are resizable, not just swappable: a gutter trades space between
     the two panes it sits between, and the sizes are remembered."""
-    before = page.locator("[data-card=level2]").bounding_box()
+    before = page.locator("[data-card=screener]").bounding_box()
     gutter = page.locator('[data-between="R1,R2"]')
     box = gutter.bounding_box()
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2)
@@ -377,9 +377,9 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.mouse.move(box["x"] + box["width"] / 2, box["y"] + box["height"] / 2 + 110, steps=8)
     page.mouse.up()
     page.wait_for_timeout(300)
-    after = page.locator("[data-card=level2]").bounding_box()
+    after = page.locator("[data-card=screener]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v2'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v3'))")
     assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -404,12 +404,12 @@ def test_ui_columns_resize(page):
     page.wait_for_timeout(300)
 
 
-def test_ui_level2_owns_more_than_half_the_right_column(page):
+def test_ui_the_tall_right_card_owns_more_than_half_the_column(page):
     """Level 2 and the book get the room by default, per the desk brief."""
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
     column = page.locator("[data-col=right]").bounding_box()
-    book = page.locator("[data-card=level2]").bounding_box()
+    book = page.locator("[data-card=screener]").bounding_box()
     assert book["height"] / column["height"] > 0.5
 
 
@@ -423,7 +423,7 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert sorted(items) == ["chart-daily", "tv-widget"]
+    assert sorted(items) == ["chart-daily", "level2", "tv-widget"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -467,19 +467,19 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     """Any card can be dragged onto any other to trade places, and the desk
     comes back the way it was left."""
     before = page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot")
-    target = page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot")
+    target = page.eval_on_selector("[data-card=screener]", "e => e.parentElement.dataset.slot")
     page.evaluate("""() => {
       const dt = new DataTransfer();
       const src = document.querySelector('[data-card=chart-10s] .card-head');
-      const dst = document.querySelector('[data-card=level2]');
+      const dst = document.querySelector('[data-card=screener]');
       src.dispatchEvent(new DragEvent('dragstart', {dataTransfer: dt, bubbles: true}));
       dst.dispatchEvent(new DragEvent('dragover', {dataTransfer: dt, bubbles: true, cancelable: true}));
       dst.dispatchEvent(new DragEvent('drop', {dataTransfer: dt, bubbles: true, cancelable: true}));
     }""")
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
-    assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v2'))")
+    assert page.eval_on_selector("[data-card=screener]", "e => e.parentElement.dataset.slot") == before
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v3'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -488,7 +488,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
 
 def test_ui_any_card_expands_and_restores(page):
     _seek(page, 124)
-    for card in ("chart-1m", "level2", "scan-pillars"):
+    for card in ("chart-1m", "screener", "scan-pillars"):
         page.locator(f"[data-card={card}] .expand").click()
         page.wait_for_timeout(250)
         box = page.locator(f"[data-card={card}]").bounding_box()

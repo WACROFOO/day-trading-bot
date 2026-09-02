@@ -362,3 +362,11 @@ body.resizing .gutter{pointer-events:auto}
 /* TradingView's embedded chart: their iframe fills the host. */
 .tv-host{position:relative;min-height:120px}
 .tv-host iframe{position:absolute;inset:0;width:100%!important;height:100%!important;border:0}
+
+/* Screener rows: symbol · price · change · source · age */
+.screener-cols,.screener-row{grid-template-columns:1.2fr .8fr .8fr .55fr .9fr}
+.screener-row .src{font-size:8.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--ink-faint)}
+.screener-row .src.yahoo{color:#c9a0ff} .screener-row .src.iex{color:#7fd1ff}
+.screener-row.ondesk{box-shadow:inset 2px 0 0 var(--up)}
+.tag.yahoo{color:#c9a0ff;border-color:#4a3c6b;background:#1c1530}
+.tag.iex{color:#7fd1ff;border-color:#1d4d6b;background:#0f2230}

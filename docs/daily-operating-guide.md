@@ -111,6 +111,37 @@ The only thing that gives the scanners consolidated premarket volume is a
 consolidated feed: `ALPACA_FEED=sip` in `.env`, which is Alpaca's paid tier.
 Nothing free provides it. Decide that with the journal in hand, not before.
 
+### The screener card — the current situation, at every time
+
+The tall right card is the screener: **every name in the price band that is
+moving in the current session**, refreshed every 60 seconds on the server and
+polled by the page every 20, independent of the desk's bars. Each row shows
+price, change against yesterday's close, the source, and how old the print is.
+
+- **Yahoo · delayed** — consolidated premarket/regular/after-hours quotes,
+  about 15 minutes behind, unofficial (no key, no contract). Before the open
+  this is the only free number that reflects a move IEX has not printed.
+- **IEX · real-time** — the entitled feed, one venue. Thin before ~07:00 ET,
+  whole from 09:30.
+
+Click a row: if the name is on the desk it is selected; if not, the server
+adds it and it joins on the next refresh (the desk holds up to eight). The
+scanners and the verdict still run on IEX bars — the screener finds, the
+entitled feed decides. If Yahoo is unavailable the card says so and shows
+IEX; it never goes quiet without a reason.
+
+### Following live, with the delay you accept
+
+1. **Discovery** is the screener (Yahoo, delayed). Watch the top rows.
+2. **The desk** is IEX (real-time, sparse premarket). Click a screener row to
+   put a runner on it; from ~07:00 ET its IEX bars fill in, at 09:30 they are
+   whole, and the scanners and verdict work on them.
+3. **The TradingView card** shows the consolidated chart for the selected
+   symbol on TradingView's delay rules.
+
+Two different clocks on one screen is the honest picture of a free stack. The
+paid consolidated feed (`ALPACA_FEED=sip`) collapses them into one.
+
 ### Live refresh
 
 A live desk refreshes **every 20 seconds** — incrementally, fetching only the

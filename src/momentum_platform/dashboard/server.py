@@ -53,6 +53,7 @@ class LiveSession:
         self.max_symbols = max_symbols
         self.symbols = source[7:].split(",") if source.startswith("alpaca:") else []
         self.lock = threading.Lock()
+        self.screener: "ScreenerLoop | None" = None
         self.records: list = []          # the live session's normalized records
         self.session = self._build()
         self.built_at = time.time()
@@ -128,6 +129,18 @@ class LiveSession:
         with self.lock:
             return self.session
 
+    def add_symbols(self, symbols) -> list:
+        """Put new names on the desk; the next refresh builds them in."""
+        added = []
+        for sym in symbols:
+            sym = str(sym).strip().upper()
+            if sym and sym not in self.symbols and len(self.symbols) < self.max_symbols:
+                self.symbols.append(sym)
+                added.append(sym)
+        if added:
+            self.records = []            # full build with the new names
+        return added
+
     def _loop(self) -> None:
         from ..datasources.alpaca_source import (AlpacaError, client_from_env,
                                                  scan_market)
@@ -137,8 +150,11 @@ class LiveSession:
             try:
                 if self.rescan and time.time() - self.last_scan >= self.rescan * 60:
                     self.last_scan = time.time()
-                    found = scan_market(client_from_env(), min_price=PRICE_MIN,
-                                        max_price=PRICE_MAX, top=self.max_symbols)
+                    if self.screener is not None and self.screener.current()["rows"]:
+                        found = {"rows": self.screener.current()["rows"], "stale": False}
+                    else:
+                        found = scan_market(client_from_env(), min_price=PRICE_MIN,
+                                            max_price=PRICE_MAX, top=self.max_symbols)
                     fresh = [r["symbol"] for r in found["rows"] if r["symbol"] not in self.symbols]
                     if fresh and not found["stale"]:
                         room = max(0, self.max_symbols - len(self.symbols))
@@ -161,6 +177,56 @@ class LiveSession:
                 print(f"  refresh failed, keeping the last good session: {exc}")
             except Exception as exc:          # never let the thread die silently
                 print(f"  refresh error, keeping the last good session: {exc!r}")
+
+
+class ScreenerLoop:
+    """The screener table, refreshed on a timer, independent of the session.
+
+    The desk session is a handful of symbols with bars. The screener is the
+    whole band: every name moving in the current session, from delayed
+    consolidated quotes when they are available and from IEX when they are
+    not. It runs on its own thread so the page can poll it every few seconds
+    without reloading, and its top rows are what join the desk on a rescan.
+    """
+
+    def __init__(self, every: int = 60, use_yahoo: bool = True, top: int = 30) -> None:
+        self.every = every
+        self.use_yahoo = use_yahoo
+        self.top = top
+        self.lock = threading.Lock()
+        self.latest: dict = {"rows": [], "source": "none", "asof": None,
+                             "notes": ["screener has not run yet"]}
+        threading.Thread(target=self._loop, daemon=True, name="desk-screener").start()
+
+    def current(self) -> dict:
+        with self.lock:
+            return self.latest
+
+    def _loop(self) -> None:
+        from ..datasources.alpaca_source import AlpacaError, client_from_env
+        from ..datasources.screener import build_screener
+        from ..scanners.five_pillars import PRICE_MAX, PRICE_MIN
+        yahoo = None
+        if self.use_yahoo:
+            from ..datasources.yahoo_quotes import YahooQuotes
+            yahoo = YahooQuotes()
+        while True:
+            try:
+                out = build_screener(client_from_env(), yahoo=yahoo, min_price=PRICE_MIN,
+                                     max_price=PRICE_MAX, top=self.top,
+                                     log=lambda m: None)
+                with self.lock:
+                    self.latest = out
+                stamp = datetime.now().strftime("%H:%M:%S")
+                print(f"  screener {stamp} — {len(out['rows'])} rows from {out['source']}")
+            except AlpacaError as exc:
+                with self.lock:
+                    self.latest = {"rows": [], "source": "none", "asof": None,
+                                   "notes": [f"screener paused: {exc}"]}
+                print(f"  screener failed: {exc}")
+            except Exception as exc:
+                print(f"  screener error: {exc!r}")
+            time.sleep(self.every)
 
 
 @lru_cache(maxsize=4)
@@ -189,7 +255,7 @@ def _session_from_source(fixture: str) -> dict:
 _session = _session_from_source
 
 
-def make_handler(fixture, live: "LiveSession | None" = None):
+def make_handler(fixture, live: "LiveSession | None" = None, screener: "ScreenerLoop | None" = None):
     holder = live or LiveSession(fixture)
     class Handler(BaseHTTPRequestHandler):
         server_version = "MomentumWorkstation/0.1"
@@ -236,6 +302,20 @@ def make_handler(fixture, live: "LiveSession | None" = None):
                     "lists": session["listMeta"], "alerts": session["alertMeta"],
                     "definitionVersions": session["definitionVersions"],
                 })
+            if path == "/api/v1/screener":
+                return self._json(screener.current() if screener else
+                                  {"rows": [], "source": "none", "asof": None,
+                                   "notes": ["screener runs only with a live Alpaca session"]})
+            if path == "/api/v1/desk/add":
+                from urllib.parse import parse_qs
+                wanted = parse_qs(urlparse(self.path).query).get("symbol", [])
+                if not holder.symbols:
+                    return self._json({"added": [], "symbols": [],
+                                       "note": "the recorded session cannot take new symbols"}, 400)
+                added = holder.add_symbols(wanted)
+                return self._json({"added": added, "symbols": holder.symbols,
+                                   "note": "joins the desk on the next refresh" if added else
+                                   "already on the desk, or the desk is full"})
             if path == "/api/v1/replay/session":
                 return self._json({k: v for k, v in session.items() if not k.startswith("_")})
             if path == "/api/v1/scanner-events":
@@ -264,6 +344,10 @@ def main(argv=None) -> int:
                     help="refresh a live Alpaca session this often (default 20 with --alpaca)")
     ap.add_argument("--rescan", type=int, default=0, metavar="MINUTES",
                     help="with --alpaca: re-scan the universe this often and add new runners")
+    ap.add_argument("--screener-every", type=int, default=60, metavar="SECONDS",
+                    help="with --alpaca: refresh the whole-band screener this often (0 = off)")
+    ap.add_argument("--no-yahoo", action="store_true",
+                    help="screener uses IEX snapshots only, never Yahoo delayed quotes")
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--host", default="127.0.0.1")
     args = ap.parse_args(argv)
@@ -273,6 +357,12 @@ def main(argv=None) -> int:
               else args.fixture)
     refresh = args.refresh if args.refresh is not None else (20 if args.alpaca else 0)
     live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
+    screener = None
+    if args.alpaca and args.screener_every > 0:
+        import os
+        use_yahoo = (not args.no_yahoo) and os.environ.get("PREMARKET_QUOTES", "yahoo").lower() != "off"
+        screener = ScreenerLoop(every=args.screener_every, use_yahoo=use_yahoo)
+        live.screener = screener
     session = live.current()
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "
           f"{sum(len(f['alerts']) for f in session['frames'])} alerts")
@@ -292,7 +382,11 @@ def main(argv=None) -> int:
         print(f"LIVE — the session rebuilds every {refresh}s"
               + (f" and re-scans the market every {args.rescan} min" if args.rescan else "")
               + ". The page follows the live edge on its own.")
-    ThreadingHTTPServer((args.host, args.port), make_handler(source, live)).serve_forever()
+    if screener is not None:
+        print(f"SCREENER — the whole band, every {args.screener_every}s, "
+              + ("Yahoo delayed quotes with IEX fallback" if screener.use_yahoo else "IEX only")
+              + ". Click a row to put it on the desk.")
+    ThreadingHTTPServer((args.host, args.port), make_handler(source, live, screener)).serve_forever()
     return 0
 
 
