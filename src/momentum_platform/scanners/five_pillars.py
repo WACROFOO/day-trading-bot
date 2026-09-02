@@ -15,13 +15,37 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
-from ..models import RankedRow, Reason, ScannerEvent, SymbolSnapshot
+from ..models import FloatQuality, RankedRow, Reason, ScannerEvent, SymbolSnapshot
 from ..state import HotState, SymbolState
 from .base import EdgeTracker, Scanner, _round
 
 # Confirmed course thresholds.
-PRICE_MIN = 2.0
+def _env_float(name: str, default: float) -> float:
+    """Read an operator override from the environment or the repo's .env.
+
+    The Confirmed course band is $2-20. An operator may widen it (to $1-20,
+    say) for their own universe, but the desk must then label the band as
+    theirs everywhere it appears — never as Ross's."""
+    import os
+    raw = os.environ.get(name)
+    if raw is None:
+        try:
+            from pathlib import Path
+            for line in (Path(__file__).resolve().parents[3] / ".env").read_text().splitlines():
+                if line.startswith(name + "="):
+                    raw = line.split("=", 1)[1].strip().strip('"').strip("'")
+        except OSError:
+            raw = None
+    try:
+        return float(raw) if raw not in (None, "") else default
+    except ValueError:
+        return default
+
+
+PRICE_MIN_CONFIRMED = 2.0
+PRICE_MIN = _env_float("DESK_PRICE_MIN", PRICE_MIN_CONFIRMED)
 PRICE_MAX = 20.0
+PRICE_BAND_EVIDENCE = "confirmed_course" if PRICE_MIN == PRICE_MIN_CONFIRMED else "operator_override"
 GAIN_MIN_PCT = 10.0
 RVOL_MIN = 5.0
 FLOAT_MAX_SHARES = 20_000_000
@@ -112,7 +136,13 @@ class FivePillarsList(Scanner):
             # still withholds GO until somebody verifies the number.
             float_reason = by_filter["float_shares"]
             float_known = float_reason.value != "unknown"
-            if float_known and not float_reason.passed:
+            # A shares-outstanding figure is an upper bound on float. Under the
+            # cap it PROVES float under the cap (and passed above). Over the cap
+            # it proves nothing, so it must not exclude — only a verified float
+            # over the cap is a real disqualification.
+            verified_fail = (float_known and not float_reason.passed
+                             and snap.float_quality == FloatQuality.VERIFIED)
+            if verified_fail:
                 continue
             rows.append(
                 RankedRow(

@@ -633,14 +633,16 @@ def test_an_empty_chart_pane_explains_itself_above_the_canvas():
     assert "background" in block, "the note needs a ground to stay legible"
 
 
-def test_a_shares_outstanding_proxy_never_passes_the_float_pillar():
-    """Outstanding includes locked-up insider and restricted stock that cannot
-    reach the tape, so a proxy flatters the number that decides position size."""
+def test_shares_outstanding_is_an_upper_bound_on_float():
+    """Outstanding >= float always. Under the cap it PROVES float under the
+    cap; over the cap it proves nothing and must read as unknown, never as a
+    fail and never as a pass."""
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
-    assert 'fl.quality === "verified" || fl.quality === "you verified"' in app, \
-        "only a verified float — the feed's or the operator's — may pass"
-    assert "shares_outstanding_proxy" not in app.split("const floatOk")[1][:400]
+    block = app.split("const fl = effectiveFloat(sym, meta);")[1][:900]
+    assert 'soBound = fl.quality === "shares_outstanding_proxy"' in block
+    assert "fl.shares < T.floatMaxShares" in block
+    assert "floatUnknown" in block
 
 
 def test_the_operator_can_supply_a_float_the_feed_lacks():
@@ -756,7 +758,7 @@ def test_a_failed_live_session_falls_back_instead_of_crashing():
     desk up and says why, and the REPLAY badge makes the substitution visible."""
     server = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
               / "dashboard" / "server.py").read_text()
-    block = server.split("startswith(\"alpaca:\")")[1][:1200]
+    block = server.split("def _session_from_source")[1][:1400]
     assert "except AlpacaError" in block
     assert "Could not build the live session" in block
     assert "build_session(str(DEFAULT_FIXTURE))" in block
@@ -768,3 +770,19 @@ def test_a_stepped_back_session_is_announced_in_the_header():
     web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
     assert "S.sessionNote" in (web / "app.js").read_text()
     assert ".session-note{" in (web / "styles.css").read_text()
+
+
+def test_five_minute_candles_sit_on_the_clock():
+    """Index grouping started 5-minute candles at 09:04 and labelled the axis
+    09:04 / 12:01 / 15:03. Bucket by floor(ts / 300) like every platform."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function agg(bars, n)")[1].split("\nfunction ")[0]
+    assert "Math.floor(b[0] / span) * span" in body
+    assert "bars.slice(i, i + n)" not in body
+
+
+def test_the_price_band_carries_its_evidence_label():
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert 'T.evidence === "operator_override"' in app

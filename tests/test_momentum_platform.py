@@ -744,3 +744,50 @@ def test_hod_momentum_labels_an_unknown_float_rather_than_going_silent():
     branch = s._branch(snap)
     assert branch is not None, "an unknown float must not suppress the alert"
     assert branch.startswith("unknown_float"), branch
+
+
+def test_price_band_override_is_labelled_as_the_operators(monkeypatch):
+    """The Confirmed pillar is $2-20. Widening it is allowed, but the band must
+    then be labelled as the operator's, never presented as Ross's."""
+    import importlib
+    from momentum_platform.scanners import five_pillars as fp
+    monkeypatch.setenv("DESK_PRICE_MIN", "1")
+    mod = importlib.reload(fp)
+    try:
+        assert mod.PRICE_MIN == 1.0
+        assert mod.PRICE_BAND_EVIDENCE == "operator_override"
+    finally:
+        monkeypatch.delenv("DESK_PRICE_MIN")
+        importlib.reload(fp)
+    assert fp.PRICE_BAND_EVIDENCE == "confirmed_course"
+
+
+def test_shares_outstanding_under_the_cap_passes_the_float_pillar():
+    from momentum_platform.scanners.five_pillars import score_pillars, FLOAT_MAX_SHARES
+    from momentum_platform.models import SymbolSnapshot, DataStatus, FloatQuality
+    from datetime import datetime, timezone
+    now = datetime(2026, 9, 2, 14, 0, tzinfo=timezone.utc)
+    snap = SymbolSnapshot(symbol="SO", last=7.0, change_from_close_pct=40.0, rvol_daily=12.0,
+                          float_shares=FLOAT_MAX_SHARES - 1, float_quality=FloatQuality.SHARES_OUTSTANDING,
+                          data_status=DataStatus.REPLAY, event_ts=now)
+    _, technical, _ = score_pillars(snap, now)
+    assert technical == 4
+
+
+def test_shares_outstanding_over_the_cap_does_not_exclude_from_the_list():
+    """Over the cap the bound proves nothing about float, so the candidate
+    must still be discoverable — only a VERIFIED float over the cap excludes."""
+    from momentum_platform.scanners.five_pillars import FivePillarsList, FLOAT_MAX_SHARES
+    from momentum_platform.models import SymbolSnapshot, DataStatus, FloatQuality
+    from momentum_platform.state import HotState
+    from datetime import datetime, timezone
+    now = datetime(2026, 9, 2, 14, 0, tzinfo=timezone.utc)
+    hot = HotState()
+    for sym, q in (("BIG", FloatQuality.SHARES_OUTSTANDING), ("VER", FloatQuality.VERIFIED)):
+        st = hot.get(sym)
+        st.snapshot = SymbolSnapshot(symbol=sym, last=7.0, change_from_close_pct=40.0, rvol_daily=12.0,
+                                     float_shares=FLOAT_MAX_SHARES * 5, float_quality=q,
+                                     data_status=DataStatus.REPLAY, event_ts=now)
+    rows = {r.symbol for r in FivePillarsList().rank(hot, now)}
+    assert "BIG" in rows, "an over-cap proxy is unknown, not a disqualification"
+    assert "VER" not in rows, "a verified float over the cap is a real disqualification"

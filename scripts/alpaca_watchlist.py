@@ -30,7 +30,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from momentum_platform.datasources.alpaca_source import (  # noqa: E402
+from momentum_platform.scanners.five_pillars import PRICE_MIN  # noqa: E402
+from momentum_platform.datasources.alpaca_source import (
+    scan_market,  # noqa: E402
     AlpacaError, client_from_env, momentum_universe,
 )
 
@@ -41,7 +43,7 @@ ET = ZoneInfo("America/New_York")
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Scan today's market through Alpaca")
     ap.add_argument("--top", type=int, default=8)
-    ap.add_argument("--min-price", type=float, default=2.0)
+    ap.add_argument("--min-price", type=float, default=PRICE_MIN)
     ap.add_argument("--max-price", type=float, default=20.0)
     ap.add_argument("--min-gain", type=float, default=10.0, help="percent vs previous close")
     ap.add_argument("--min-rvol", type=float, default=5.0)
@@ -60,71 +62,24 @@ def main(argv=None) -> int:
     log = lambda msg: print(msg, file=sys.stderr)
     try:
         log("fetching the tradable universe…")
-        universe = momentum_universe(client, max_symbols=args.limit_universe)
-        log(f"  {len(universe):,} tradable US equities")
-
         log("pass 1 — price and gain across the whole universe…")
-        survivors = []
-        snaps = client.snapshots(universe)
-        # Which session do these numbers describe? Alpaca's dailyBar is the most
-        # recent COMPLETED daily bar, so before the open it is yesterday's. The
-        # scan must say so: printing a completed session's move under the
-        # heading "today's movers" invites acting on a move that already ended.
-        bar_dates: dict = {}
-        for symbol, snap in snaps.items():
-            if not snap:
-                continue
-            day = snap.get("dailyBar") or {}
-            prev = snap.get("prevDailyBar") or {}
-            stamp = str(day.get("t") or "")[:10]
-            if stamp:
-                bar_dates[stamp] = bar_dates.get(stamp, 0) + 1
-            last = (snap.get("latestTrade") or {}).get("p") or day.get("c")
-            prev_close, volume = prev.get("c"), day.get("v") or 0
-            if not last or not prev_close or prev_close <= 0:
-                continue
-            gain = (last / prev_close - 1) * 100
-            if (args.min_price <= last <= args.max_price
-                    and gain >= args.min_gain and volume >= args.min_volume):
-                survivors.append({"symbol": symbol, "price": last, "gain": gain,
-                                  "volume": volume})
-        log(f"  {len(survivors)} passed price, gain and volume")
-        session_date = max(bar_dates, key=bar_dates.get) if bar_dates else ""
-        today_et = datetime.now(ET).date().isoformat()
-        if session_date and session_date != today_et:
-            log("")
-            log(f"  NOTE: these are the {session_date} session's moves, not today's.")
-            log(f"  Alpaca's daily bar is the last COMPLETED session, and today "
-                f"({today_et}) has not")
-            log("  produced one yet. Re-run after 09:30 ET for today's move.")
-        if not survivors:
-            log("\nNothing qualifies right now. That is a normal answer — "
-                "do not widen the filter to manufacture a candidate.")
-            return 1
-
-        log("pass 2 — relative volume for the survivors…")
-        symbols = [s["symbol"] for s in survivors]
-        start = (datetime.now(UTC) - timedelta(days=40)).isoformat(
-            timespec="seconds").replace("+00:00", "Z")
-        daily = client.bars(symbols, "1Day", start)
-        rows = []
-        for item in survivors:
-            history = [b for b in daily.get(item["symbol"], []) if (b.get("v") or 0) > 0]
-            prior = [b["v"] for b in history[-21:-1]]
-            if len(prior) < 5:
-                continue
-            avg = sum(prior) / len(prior)
-            item["rvol"] = item["volume"] / avg if avg else 0
-            if item["rvol"] >= args.min_rvol:
-                rows.append(item)
-        rows.sort(key=lambda r: r["rvol"], reverse=True)
-        log(f"  {len(rows)} also passed relative volume ≥ {args.min_rvol}x")
+        result = scan_market(client, min_price=args.min_price, max_price=args.max_price,
+                             min_gain=args.min_gain, min_rvol=args.min_rvol,
+                             min_volume=args.min_volume, top=0,
+                             limit_universe=args.limit_universe, log=log)
     except AlpacaError as exc:
         print(f"\n{exc}", file=sys.stderr)
         return 2
-
+    if result["stale"]:
+        log("")
+        log(f"  NOTE: these are the {result['session_date']} session's moves, not today's.")
+        log(f"  Alpaca's daily bar is the last COMPLETED session, and today "
+            f"({result['today']}) has not")
+        log("  produced one yet. Re-run after 09:30 ET for today's move.")
+    rows = result["rows"]
     if not rows:
-        log("\nNo candidate cleared all four computable pillars today.")
+        log("\nNothing qualifies right now. That is a normal answer — "
+            "do not widen the filter to manufacture a candidate.")
         return 1
 
     top = rows[: args.top]

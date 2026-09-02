@@ -312,3 +312,21 @@ def test_a_single_symbol_still_parses():
 
 def test_an_overlong_token_is_rejected_as_not_a_ticker():
     assert catalyst_score.symbols_from_watchlist("CANDIDATES\n") == []
+
+
+# -- shares outstanding from company facts -----------------------------------
+
+def test_shares_outstanding_takes_the_latest_reported_figure():
+    payloads = {
+        "company_tickers.json": TICKERS,
+        "CIK0000000111.json": {"facts": {"dei": {"EntityCommonStockSharesOutstanding": {"units": {
+            "shares": [{"val": 18_000_000, "end": "2026-03-31"},
+                       {"val": 21_500_000, "end": "2026-06-30"},
+                       {"val": 0, "end": "2026-07-31"}]}}}}},
+    }
+    got = FakeSec(payloads).shares_outstanding("ABCD")
+    assert got == {"shares": 21_500_000, "as_of": "2026-06-30"}
+
+
+def test_shares_outstanding_is_none_for_an_unknown_ticker():
+    assert FakeSec({"company_tickers.json": TICKERS}).shares_outstanding("ZZZZ") is None

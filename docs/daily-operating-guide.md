@@ -59,6 +59,48 @@ Spend one sitting here. Learn the desk before you learn the market: drag cards
 to the slots you want, expand the 1-minute chart with ⛶, click a scanner row
 and watch every panel follow it. The layout is saved in your browser.
 
+## 1b. The commands you will actually type
+
+```
+./now                     phase header + board for the saved watchlist
+./now MSGY WYHG           board for these names (watchlist untouched)
+./now --set MSGY WYHG     save the watchlist, then board
+./now --scan              scan the market first, then board the survivors
+./now --scan --desk       ...and open the workstation on them
+bash scripts/morning.sh   scan, grade catalysts, open the desk, keep re-scanning
+```
+
+The board is one row per ticker: last, change, RVOL, the gate scorecard
+`P F C R V E` (price band · float · catalyst · still rising · above VWAP ·
+above 9 EMA; `+` pass, `-` fail, `?` unknown), a verdict word and the catalyst
+read. `F` comes from the company's own SEC shares-outstanding figure, which is
+an upper bound on float: `+` proves float is under 20M, `?` means the bound
+is above it and float is genuinely unknown.
+
+Verdict words are vocabulary, not instructions: REJECT on any hard fail, WATCH
+while the chart or catalyst is incomplete, REVIEW when everything is green
+inside the session window, LOG outside it.
+
+### Live mode
+
+With `--alpaca` the desk is live: the server rebuilds the session every 60
+seconds and the page follows the newest bar on its own (scrub back to study a
+pullback and it leaves you there until you return to the live edge). The badge
+reads **LIVE**. `morning.sh` adds `--rescan 5`: every five minutes the market
+is scanned again and any new runner that passes the pillars joins the desk
+without a restart, so Running Up and HOD report the tape as it is now.
+
+IEX is real-time — there is no 15-minute delay on this feed. It is one venue,
+so absolute volume is understated; the relative-volume ratios compare IEX to
+IEX and hold.
+
+### Your own price band
+
+The Confirmed course pillar is $2–20. To widen the low end for your universe
+put `DESK_PRICE_MIN=1` in `.env`. Every place the band appears then labels it
+as **yours** — the board header, the verdict card, the scan — so the course
+value is never misattributed.
+
 ## 2. The daily loop
 
 Times are ET, with Paris in brackets (subtract 6 hours; for about three weeks

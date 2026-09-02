@@ -12,6 +12,9 @@ from __future__ import annotations
 import argparse
 import json
 import mimetypes
+from datetime import datetime
+import threading
+import time
 from functools import lru_cache
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -26,8 +29,81 @@ DEFAULT_FIXTURE = (
 )
 
 
+class LiveSession:
+    """Holds the current session and rebuilds it on a timer.
+
+    A replay is a picture of the tape at the moment it was fetched. Trading
+    premarket needs the picture to move: Running Up and HOD must report the
+    tape as it is now, and a new runner must be able to join the desk without
+    a restart. So, when the source is Alpaca, a background thread rebuilds the
+    session every `refresh` seconds and, every `rescan` minutes, re-scans the
+    universe and adds any new survivor to the symbol list (capped, because the
+    free feed allows about 200 requests a minute and a runner's trade prints
+    page deep).
+
+    Every build is stamped; the page polls the stamp and reloads its data when
+    it changes. Nothing here places an order.
+    """
+
+    def __init__(self, source: str, refresh: int = 0, rescan: int = 0,
+                 max_symbols: int = 8) -> None:
+        self.source = source
+        self.refresh = refresh
+        self.rescan = rescan
+        self.max_symbols = max_symbols
+        self.symbols = source[7:].split(",") if source.startswith("alpaca:") else []
+        self.lock = threading.Lock()
+        self.session = self._build()
+        self.built_at = time.time()
+        self.last_scan = 0.0
+        if source.startswith("alpaca:") and refresh > 0:
+            threading.Thread(target=self._loop, daemon=True, name="desk-refresh").start()
+
+    def _build(self) -> dict:
+        s = _session_from_source("alpaca:" + ",".join(self.symbols) if self.symbols else self.source)
+        s["live"] = bool(self.refresh) and self.source.startswith("alpaca:") \
+            and s.get("dataStatus") in ("iex", "live")
+        s["refreshSeconds"] = self.refresh
+        s["builtAt"] = time.time()
+        return s
+
+    def current(self) -> dict:
+        with self.lock:
+            return self.session
+
+    def _loop(self) -> None:
+        from ..datasources.alpaca_source import (AlpacaError, client_from_env,
+                                                 scan_market)
+        from ..scanners.five_pillars import PRICE_MIN, PRICE_MAX
+        while True:
+            time.sleep(self.refresh)
+            try:
+                if self.rescan and time.time() - self.last_scan >= self.rescan * 60:
+                    self.last_scan = time.time()
+                    found = scan_market(client_from_env(), min_price=PRICE_MIN,
+                                        max_price=PRICE_MAX, top=self.max_symbols)
+                    fresh = [r["symbol"] for r in found["rows"] if r["symbol"] not in self.symbols]
+                    if fresh and not found["stale"]:
+                        room = max(0, self.max_symbols - len(self.symbols))
+                        added = fresh[:room]
+                        if added:
+                            self.symbols = self.symbols + added
+                            print(f"  rescan: {', '.join(added)} joined the desk")
+                s = self._build()
+                with self.lock:
+                    self.session = s
+                    self.built_at = s["builtAt"]
+                stamp = datetime.now().strftime("%H:%M:%S")
+                print(f"  refreshed {stamp} — {len(s['frames'])} frames, "
+                      f"{sum(len(f['alerts']) for f in s['frames'])} alerts")
+            except AlpacaError as exc:
+                print(f"  refresh failed, keeping the last good session: {exc}")
+            except Exception as exc:          # never let the thread die silently
+                print(f"  refresh error, keeping the last good session: {exc!r}")
+
+
 @lru_cache(maxsize=4)
-def _session(fixture: str) -> dict:
+def _session_from_source(fixture: str) -> dict:
     """`fixture` is a path, or "live:AAPL,TSLA" for real delayed data."""
     if fixture.startswith("alpaca:"):
         from ..datasources.alpaca_source import AlpacaError, build_alpaca_session
@@ -49,7 +125,11 @@ def _session(fixture: str) -> dict:
     return build_session(fixture)
 
 
-def make_handler(fixture: str):
+_session = _session_from_source
+
+
+def make_handler(fixture, live: "LiveSession | None" = None):
+    holder = live or LiveSession(fixture)
     class Handler(BaseHTTPRequestHandler):
         server_version = "MomentumWorkstation/0.1"
 
@@ -69,7 +149,7 @@ def make_handler(fixture: str):
 
         def do_GET(self) -> None:  # noqa: N802
             path = urlparse(self.path).path
-            session = _session(fixture)
+            session = holder.current()
 
             if path in ("/", "/index.html"):
                 return self._send((WEB / "index.html").read_bytes(), "text/html; charset=utf-8")
@@ -77,7 +157,12 @@ def make_handler(fixture: str):
                 body = b"window.__SESSION__=" + json.dumps(session, default=str).encode() + b";"
                 return self._send(body, "application/javascript")
             if path == "/api/v1/health":
-                return self._json({"status": "ok", "mode": "replay", "fixture": Path(fixture).name})
+                return self._json({"status": "ok",
+                                   "mode": "live" if session.get("live") else "replay",
+                                   "fixture": Path(str(fixture)).name,
+                                   "builtAt": session.get("builtAt"),
+                                   "refreshSeconds": session.get("refreshSeconds", 0),
+                                   "symbols": list(session.get("symbols", {}).keys())})
             if path == "/api/v1/data-health":
                 return self._json({
                     "provider": "replay-fixture", "connectionState": "replay",
@@ -113,6 +198,10 @@ def main(argv=None) -> int:
     ap.add_argument("--live", metavar="SYMBOLS",
                     help="comma-separated real symbols to load from yfinance "
                          "(delayed ~15m) instead of a replay fixture")
+    ap.add_argument("--refresh", type=int, default=None, metavar="SECONDS",
+                    help="rebuild a live Alpaca session this often (default 60 with --alpaca)")
+    ap.add_argument("--rescan", type=int, default=0, metavar="MINUTES",
+                    help="with --alpaca: re-scan the universe this often and add new runners")
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--host", default="127.0.0.1")
     args = ap.parse_args(argv)
@@ -120,7 +209,9 @@ def main(argv=None) -> int:
     source = (f"alpaca:{args.alpaca}" if args.alpaca
               else f"live:{args.live}" if args.live
               else args.fixture)
-    session = _session(source)
+    refresh = args.refresh if args.refresh is not None else (60 if args.alpaca else 0)
+    live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
+    session = live.current()
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "
           f"{sum(len(f['alerts']) for f in session['frames'])} alerts")
     print(f"workstation: http://{args.host}:{args.port}/")
@@ -135,7 +226,11 @@ def main(argv=None) -> int:
               "market. The header badge reads REPLAY.")
     if args.live:
         print("DELAYED data (~15 minutes) — research only, not an entitled feed")
-    ThreadingHTTPServer((args.host, args.port), make_handler(source)).serve_forever()
+    if session.get("live"):
+        print(f"LIVE — the session rebuilds every {refresh}s"
+              + (f" and re-scans the market every {args.rescan} min" if args.rescan else "")
+              + ". The page follows the live edge on its own.")
+    ThreadingHTTPServer((args.host, args.port), make_handler(source, live)).serve_forever()
     return 0
 
 

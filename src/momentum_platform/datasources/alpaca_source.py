@@ -311,6 +311,16 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
     daily_start = _iso(datetime.now(UTC) - timedelta(days=daily_lookback_days))
     daily = client.bars(symbols, "1Day", daily_start)
     snaps = client.snapshots(symbols)
+    shares_out: dict = {}
+    try:
+        from .sec_source import client_from_env as _sec
+        sec = _sec()
+        for symbol in symbols:
+            found = sec.shares_outstanding(symbol)
+            if found:
+                shares_out[symbol] = found
+    except Exception as exc:                 # EDGAR down must not block the desk
+        print(f"  shares outstanding unavailable from SEC: {exc}")
 
     for symbol in symbols:
         rows = daily.get(symbol, [])
@@ -330,14 +340,18 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
         avg_volume = sum(recent) / len(recent) if recent else None
         high_52w = max((b["h"] for b in daily_bars[-252:] if b["h"]), default=None)
 
+        # Alpaca does not publish float, and nothing free does. SEC company
+        # facts do give shares OUTSTANDING — the company's own cover-page
+        # figure — which is an upper bound on float, labelled as exactly that.
+        so = shares_out.get(symbol)
         records.append({
             "type": "reference", "symbol": symbol,
             "prev_close": prev_close,
             "avg_daily_volume": avg_volume,
             "high_52w": high_52w,
-            # Alpaca does not publish float. Never guess it: an unknown float
-            # fails the supply pillar with a visible reason.
-            "float_shares": None, "float_quality": "unknown",
+            "float_shares": so["shares"] if so else None,
+            "float_quality": "shares_outstanding_proxy" if so else "unknown",
+            "float_asof": so["as_of"] if so else None,
             "daily_bars": daily_bars,
         })
 
@@ -462,6 +476,67 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
     )
     return session
 
+
+
+def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float = 20.0,
+                min_gain: float = 10.0, min_rvol: float = 5.0, min_volume: float = 20_000,
+                top: int = 8, limit_universe: int = 0, log=None) -> dict:
+    """Two-pass market scan on the free feed.
+
+    Pass 1 applies price, gain and a volume floor across the whole tradable
+    universe from one snapshot call per 100 symbols. Pass 2 pulls daily bars
+    only for the survivors and computes same-venue relative volume.
+
+    Returns {"rows": [...], "session_date": "YYYY-MM-DD", "today": "YYYY-MM-DD",
+    "stale": bool}. Alpaca's dailyBar is the most recent COMPLETED daily bar,
+    so before the open the moves are the previous session's; `stale` says so
+    and the caller must say so too — a finished move printed as a live one is
+    an invitation to chase.
+    """
+    say = log or (lambda *_: None)
+    universe = momentum_universe(client, max_symbols=limit_universe)
+    say(f"  {len(universe):,} tradable US equities")
+    survivors, bar_dates = [], {}
+    snaps = client.snapshots(universe)
+    for symbol, snap in snaps.items():
+        if not snap:
+            continue
+        day = snap.get("dailyBar") or {}
+        prev = snap.get("prevDailyBar") or {}
+        stamp = str(day.get("t") or "")[:10]
+        if stamp:
+            bar_dates[stamp] = bar_dates.get(stamp, 0) + 1
+        last = (snap.get("latestTrade") or {}).get("p") or day.get("c")
+        prev_close, volume = prev.get("c"), day.get("v") or 0
+        if not last or not prev_close or prev_close <= 0:
+            continue
+        gain = (last / prev_close - 1) * 100
+        if min_price <= last <= max_price and gain >= min_gain and volume >= min_volume:
+            survivors.append({"symbol": symbol, "price": last, "gain": gain, "volume": volume})
+    say(f"  {len(survivors)} passed price, gain and volume")
+    session_date = max(bar_dates, key=bar_dates.get) if bar_dates else ""
+    today = datetime.now(ET).date().isoformat()
+    result = {"rows": [], "session_date": session_date, "today": today,
+              "stale": bool(session_date and session_date != today)}
+    if not survivors:
+        return result
+    symbols = [s["symbol"] for s in survivors]
+    start = _iso(datetime.now(UTC) - timedelta(days=40))
+    daily = client.bars(symbols, "1Day", start)
+    rows = []
+    for item in survivors:
+        history = [b for b in daily.get(item["symbol"], []) if (b.get("v") or 0) > 0]
+        prior = [b["v"] for b in history[-21:-1]]
+        if len(prior) < 5:
+            continue
+        avg = sum(prior) / len(prior)
+        item["rvol"] = item["volume"] / avg if avg else 0
+        if item["rvol"] >= min_rvol:
+            rows.append(item)
+    rows.sort(key=lambda r: r["rvol"], reverse=True)
+    say(f"  {len(rows)} also passed relative volume ≥ {min_rvol}x")
+    result["rows"] = rows[:top] if top else rows
+    return result
 
 def momentum_universe(client: AlpacaClient, max_symbols: int = 0) -> List[str]:
     """Tradable US common stocks — NASDAQ and NYSE, not just NASDAQ."""

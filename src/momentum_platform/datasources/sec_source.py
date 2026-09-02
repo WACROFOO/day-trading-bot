@@ -29,6 +29,7 @@ from typing import Dict, List, Optional
 
 SEC_TICKERS = "https://www.sec.gov/files/company_tickers.json"
 SEC_SUBMISSIONS = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
+SEC_FACTS = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json"
 CACHE = Path(__file__).resolve().parents[3] / "data" / "sec_cache"
 MIN_INTERVAL = 0.12          # ~8 req/s, inside the SEC's ~10 req/s ceiling
 
@@ -179,6 +180,31 @@ class SecClient:
                 "url": _filing_url(cik, accession, docs[i] if i < len(docs) else ""),
             })
         return out
+
+
+    def shares_outstanding(self, symbol: str) -> Optional[dict]:
+        """Latest dei:EntityCommonStockSharesOutstanding from XBRL company facts.
+
+        This is what the company itself reported on its most recent 10-Q/10-K
+        cover — free, official, and dated. It is NOT float: it includes
+        locked-up insider and restricted stock. It is always >= float, which
+        makes it a sound upper bound and nothing more. Returns
+        {"shares": int, "as_of": "YYYY-MM-DD"} or None when EDGAR has no
+        figure for the ticker."""
+        cik = self.cik_for(symbol)
+        if cik is None:
+            return None
+        payload = self._get(SEC_FACTS.format(cik=cik))
+        facts = ((payload.get("facts") or {}).get("dei") or {}).get("EntityCommonStockSharesOutstanding") or {}
+        entries = (facts.get("units") or {}).get("shares") or []
+        best = None
+        for e in entries:
+            val, end = e.get("val"), e.get("end") or e.get("filed") or ""
+            if not val or val <= 0:
+                continue
+            if best is None or end > best["as_of"]:
+                best = {"shares": int(val), "as_of": end}
+        return best
 
 
 def _filing_url(cik: int, accession: str, document: str) -> str:

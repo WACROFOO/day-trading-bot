@@ -41,11 +41,19 @@ const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]);
 
 /* ── derived series ─────────────────────────────────────────────────── */
 function barsUpTo(sym, idx) { const b = BARS[sym] || []; return b.slice(0, Math.min(idx + 1, b.length)); }
+/* Aggregate 1-minute bars into n-minute candles ON THE CLOCK. Grouping every n
+   bars by index started 5-minute candles at 09:04 when the first print landed
+   there, and the axis labelled 09:04 / 12:01 / 15:03 — no platform draws a
+   5-minute chart that way. Bucket by floor(ts / (n*60)) so candles sit on
+   :00/:05/:10 like every other chart the user has ever read, and a gap in the
+   prints simply yields a missing candle rather than shifting every later one. */
 function agg(bars, n) {
-  const out = [];
-  for (let i = 0; i < bars.length; i += n) {
-    const c = bars.slice(i, i + n); if (!c.length) break;
-    out.push([c[0][0], c[0][1], Math.max(...c.map(x => x[2])), Math.min(...c.map(x => x[3])), c[c.length - 1][4], c.reduce((s, x) => s + x[5], 0)]);
+  const span = n * 60, out = [];
+  let cur = null;
+  for (const b of bars) {
+    const bucket = Math.floor(b[0] / span) * span;
+    if (!cur || cur[0] !== bucket) { cur = [bucket, b[1], b[2], b[3], b[4], b[5]]; out.push(cur); continue; }
+    cur[2] = Math.max(cur[2], b[2]); cur[3] = Math.min(cur[3], b[3]); cur[4] = b[4]; cur[5] += b[5];
   }
   return out;
 }
@@ -861,12 +869,16 @@ function renderVerdict(frame, ctx) {
   const gainOk = (chg || 0) >= T.gainMinPct;
   const rvolOk = row && (row.rvolDaily || 0) >= T.rvolMin;
   const fl = effectiveFloat(sym, meta);
-  // Only a float somebody actually verified counts — the feed's, or yours.
-  // A shares-outstanding proxy is not float and must never pass the pillar:
-  // outstanding includes locked-up insider and restricted stock that cannot
-  // hit the tape, so a proxy flatters the very number that decides size.
+  // Float passes when somebody verified it under the cap — the feed, or you.
+  // Shares outstanding (from SEC filings) is NOT float: it includes locked-up
+  // insider and restricted stock. But it is always >= float, which makes it a
+  // sound upper bound: outstanding under 20M proves float under 20M. Above the
+  // cap it proves nothing either way, so it counts as unknown — never as a
+  // fail, and never as a pass.
+  const soBound = fl.quality === "shares_outstanding_proxy";
   const floatOk = fl.shares != null && fl.shares < T.floatMaxShares &&
-                  (fl.quality === "verified" || fl.quality === "you verified");
+                  (fl.quality === "verified" || fl.quality === "you verified" || soBound);
+  const floatUnknown = fl.shares == null || (soBound && fl.shares >= T.floatMaxShares);
   const newsOk = !!nf;
   const technical = [priceOk, gainOk, rvolOk, floatOk].filter(Boolean).length;
   const momentumOk = row && (row.rvol5m || 0) >= 2;
@@ -918,11 +930,13 @@ function renderVerdict(frame, ctx) {
     r.appendChild(el("span", "vst " + (cls || (status ? "ok" : "no")), status === null ? "—" : (cls ? status : (status ? "PASS" : "FAIL"))));
     table.appendChild(r);
   };
-  line("Price", fx(last), priceOk);
+  line("Price", fx(last) + "  $" + T.priceMin + "–" + T.priceMax +
+       (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
   line("Gain vs close", pct(chg), gainOk);
   line("Daily RVOL", row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
   line("Float / supply", fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" +
-       (fl.quality === "you verified" ? " (yours)" : "") : "unknown", floatOk);
+       (fl.quality === "you verified" ? " (yours)" : soBound ? " SO" : "") : "unknown",
+       floatOk, floatUnknown && !floatOk ? "warn" : undefined);
   line("News", newsOk ? "Observed" : "Manual check", newsOk);
   line("Technical score", technical + "/4", technical === 4);
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
@@ -1348,6 +1362,41 @@ function effectiveFloat(symbol, meta) {
   return { shares: meta ? meta.floatShares : null, quality: (meta && meta.floatQuality) || "unknown" };
 }
 
+
+/* Live follow. The server stamps every rebuild; when the stamp changes the
+   page reloads its data. Before reloading it remembers the selected symbol
+   and whether the user sat on the live edge, and puts both back afterwards —
+   so a trader watching the newest candle keeps watching the newest candle,
+   and one who scrubbed back to study a pullback is not yanked forward. */
+const LIVE_KEY = "desk.live.restore";
+function liveFollow() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(LIVE_KEY) || "null");
+    if (saved) {
+      sessionStorage.removeItem(LIVE_KEY);
+      if (saved.selected && SYMS[saved.selected]) state.selected = saved.selected;
+      state.frame = saved.atEnd ? FRAMES.length - 1 : Math.min(saved.frame || 0, FRAMES.length - 1);
+      state.locked = !!saved.locked;
+    } else {
+      state.frame = FRAMES.length - 1;        // first load of a live desk: newest bar
+    }
+  } catch (e) { /* storage unavailable: just open on the live edge */ state.frame = FRAMES.length - 1; }
+  let stamp = S.builtAt;
+  setInterval(() => {
+    fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      if (!h.builtAt || h.builtAt === stamp) return;
+      stamp = h.builtAt;
+      try {
+        sessionStorage.setItem(LIVE_KEY, JSON.stringify({
+          selected: state.selected, frame: state.frame, locked: state.locked,
+          atEnd: state.frame >= FRAMES.length - 1,
+        }));
+      } catch (e) {}
+      location.reload();
+    }).catch(() => {});
+  }, 15000);
+}
+
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
   const frame = FRAMES[state.frame];
@@ -1356,7 +1405,7 @@ function render() {
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
   const badge = $("#sessionBadge");
   badge.textContent = frame.session; badge.className = "badge " + frame.session;
-  $("#feedText").textContent = "REPLAY";
+  $("#feedText").textContent = S.live ? "LIVE" : "REPLAY";
   $("#feedAge").textContent = S.generatedFrom;
   document.querySelectorAll(".card[data-kind]").forEach(card => {
     if (card.dataset.kind === "list") fillListCard(card, card.dataset.scanner, frame);
@@ -1406,6 +1455,15 @@ function init() {
     $("#sessionLabel").appendChild(warn);
   }
   $("#disclaimer").textContent = S.disclaimer;
+  if (S.live) {
+    // A live session rebuilds itself on the server; the badge says so and the
+    // page follows the newest build. Replay controls still work — scrub back
+    // and the page stays where you put it until you return to the live edge.
+    $("#feedText").textContent = "LIVE";
+    $("#feedAge").textContent = "IEX · rebuilds every " + S.refreshSeconds + "s";
+    $("#feedDot").className = "dot live";
+    liveFollow();
+  }
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
   scrub.oninput = () => { state.frame = Number(scrub.value); render(); };
   $("#btnPlay").onclick = () => state.playing ? pause() : play();

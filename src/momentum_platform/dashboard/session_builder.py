@@ -36,6 +36,7 @@ from ..scanners import (
     top_volume_5m,
 )
 from ..scanners.five_pillars import (
+    PRICE_BAND_EVIDENCE,
     FLOAT_MAX_SHARES,
     GAIN_MIN_PCT,
     PRICE_MAX,
@@ -351,7 +352,7 @@ def build_session_from_records(
         "pillarThresholds": {
             "priceMin": PRICE_MIN, "priceMax": PRICE_MAX, "gainMinPct": GAIN_MIN_PCT,
             "rvolMin": RVOL_MIN, "floatMaxShares": FLOAT_MAX_SHARES,
-            "evidence": "confirmed_course",
+            "evidence": PRICE_BAND_EVIDENCE,
         },
         "definitionVersions": {s.scanner_id: s.definition_version for s in engine.scanners},
         "symbols": symbols,

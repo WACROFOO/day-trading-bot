@@ -26,8 +26,9 @@ printf '\n%sMorning routine%s  %s%s%s\n' "$B" "$O" "$D" "$(date '+%A %d %B, %H:%
 note "read-only — nothing here places an order or sizes a position"
 
 # ---------------------------------------------------------------- step 1 ----
+BAND=$(PYTHONPATH=src $PY -c 'from momentum_platform.scanners.five_pillars import PRICE_MIN, PRICE_MAX, PRICE_BAND_EVIDENCE as E; print(f"${PRICE_MIN:g}-{PRICE_MAX:g}" + (" (your override)" if E == "operator_override" else ""))' 2>/dev/null)
 step "1 of 3 — scanning the market"
-note "roughly 11,000 US equities against price \$2-20, gain >=10%, RVOL >=5x"
+note "roughly 11,000 US equities against price ${BAND:-\$2-20}, gain >=10%, RVOL >=5x"
 note "this takes a minute or two"
 SCAN=$($PY scripts/alpaca_watchlist.py --top 8 2>&1); SCAN_RC=$?
 echo "$SCAN" | sed 's/^/  /'
@@ -78,4 +79,8 @@ say "  ${D}Read the verdicts above before you look at a single chart.${O}"
 say "  ${D}AVOID means the company is printing shares into the move — the${O}"
 say "  ${D}chart cannot rescue that. QUALIFIED earns a look, nothing more.${O}"
 say ""
+# Keep scanning while the desk is up: every 5 minutes a new runner that
+# passes the pillars joins the desk on its own, so Running Up and HOD report
+# the tape as it is now rather than as it was when the routine started.
+export DESK_SERVER_ARGS="--rescan 5"
 exec bash scripts/start.sh "$SYMBOLS"

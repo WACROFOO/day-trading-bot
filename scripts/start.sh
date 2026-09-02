@@ -132,6 +132,10 @@ fi
 head2 "starting"
 say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
 say "  ${D}$BANNER${O}"
+if [ $LIVE -eq 0 ]; then
+  say "  ${D}live: the session rebuilds every 60s; the page follows the newest bar on its own${O}"
+  [ -n "${DESK_SERVER_ARGS:-}" ] && say "  ${D}server flags: ${DESK_SERVER_ARGS}${O}"
+fi
 say ""
 say "  ${B}This window is now busy running the desk.${O}"
 say "  ${D}It will not accept commands, and anything you type here is ignored.${O}"
@@ -140,5 +144,8 @@ say ""
 say "  ${D}To run anything else  open a new tab:  Cmd-T on a Mac, Ctrl-Shift-T on Linux${O}"
 say "  ${D}To stop the desk      press Ctrl-C here  (typing 'q' or 'exit' does nothing)${O}"
 say ""
+# DESK_SERVER_ARGS lets a caller (morning.sh) add server flags such as
+# --rescan without every launcher growing its own option parser.
+# shellcheck disable=SC2086
 PYTHONPATH=src exec $PY -m momentum_platform.dashboard.server \
-  --host 127.0.0.1 --port "$PORT" "${ARGS[@]+"${ARGS[@]}"}"
+  --host 127.0.0.1 --port "$PORT" "${ARGS[@]+"${ARGS[@]}"}" ${DESK_SERVER_ARGS:-}
