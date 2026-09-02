@@ -330,3 +330,18 @@ def test_shares_outstanding_takes_the_latest_reported_figure():
 
 def test_shares_outstanding_is_none_for_an_unknown_ticker():
     assert FakeSec({"company_tickers.json": TICKERS}).shares_outstanding("ZZZZ") is None
+
+
+def test_company_profile_reads_country_from_submissions():
+    payloads = {
+        "company_tickers.json": TICKERS,
+        "CIK0000000111.json": {"name": "ABCD Holdings", "stateOfIncorporation": "E9",
+                               "stateOfIncorporationDescription": "Cayman Islands",
+                               "addresses": {"business": {"stateOrCountryDescription": "China"}},
+                               "sicDescription": "Services-Prepackaged Software",
+                               "filings": {"recent": {}}},
+    }
+    prof = FakeSec(payloads).company_profile("ABCD")
+    assert prof["business_country"] == "China"
+    assert prof["incorporation_desc"] == "Cayman Islands"
+    assert prof["name"] == "ABCD Holdings"

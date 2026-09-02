@@ -140,7 +140,7 @@ def board(symbols: list) -> int:
         sec = None
 
     inside = phase_at(dt.datetime.now(ET))[0] in ("PRIME WINDOW", "OPENING DRIVE", "LATE WINDOW")
-    print(f"\n{B}{'SYM':<6}{'LAST':>8}{'CHG':>8}{'RVOL':>7}   {'P F C R V E':<12} {'VERDICT':<8} CATALYST{O}")
+    print(f"\n{B}{'SYM':<6}{'LAST':>8}{'CHG':>8}{'RVOL':>7}   {'P F C R V E':<12} {'VERDICT':<8} {'EXCH':<7}{'COUNTRY':<14}CATALYST{O}")
     for sym in symbols:
         ref, bs = refs.get(sym, {}), bars.get(sym, [])
         if not bs:
@@ -194,8 +194,11 @@ def board(symbols: list) -> int:
         elif read.dilution_filings:
             cat += " · shelf on file"
         gates = " ".join([P, F, C, R_, V, E])
+        exch = (ref.get("exchange") or "—")[:6]
+        ctry = (ref.get("country") or "—")[:13]
         print(f"{B}{sym:<6}{O}{last:>8.2f}{(f'{chg:+.1f}%' if chg is not None else '—'):>8}"
-              f"{(f'{rvol:.1f}x' if rvol else '—'):>7}   {gates:<12} {paint}{verdict:<8}{O} {D}{cat}{O}")
+              f"{(f'{rvol:.1f}x' if rvol else '—'):>7}   {gates:<12} {paint}{verdict:<8}{O} "
+              f"{D}{exch:<7}{ctry:<14}{O}{D}{cat}{O}")
         if hl:
             age = read.age_min / 60 if read.age_min is not None else None
             print(f"      {D}{hl['headline'][:80]}"

@@ -53,6 +53,7 @@ class LiveSession:
         self.max_symbols = max_symbols
         self.symbols = source[7:].split(",") if source.startswith("alpaca:") else []
         self.lock = threading.Lock()
+        self.records: list = []          # the live session's normalized records
         self.session = self._build()
         self.built_at = time.time()
         self.last_scan = 0.0
@@ -60,12 +61,68 @@ class LiveSession:
             threading.Thread(target=self._loop, daemon=True, name="desk-refresh").start()
 
     def _build(self) -> dict:
-        s = _session_from_source("alpaca:" + ",".join(self.symbols) if self.symbols else self.source)
+        if self.symbols:
+            s = self._build_live(full=True)
+        else:
+            s = _session_from_source(self.source)
         s["live"] = bool(self.refresh) and self.source.startswith("alpaca:") \
             and s.get("dataStatus") in ("iex", "live")
         s["refreshSeconds"] = self.refresh
         s["builtAt"] = time.time()
         return s
+
+    def _build_live(self, full: bool) -> dict:
+        """Build the Alpaca session, incrementally when records are held.
+
+        A full rebuild re-fetches a runner's whole day of trade prints — tens
+        of pages — which is why the first cut refreshed only once a minute.
+        Incrementally, only bars, prints and headlines since two minutes
+        before the last held bar are fetched; references are always fresh
+        (they carry the IEX last print). The merge is keyed so a re-fetched
+        bar replaces its earlier copy rather than duplicating it, and the
+        session is rebuilt from the merged records in memory, which is fast.
+        """
+        from ..datasources.alpaca_source import (
+            IEX_VOLUME_FLOOR_SCALE, build_alpaca_session, client_from_env, fetch_records)
+        if full or not self.records:
+            session = build_alpaca_session(self.symbols)
+            self.records = list(session.get("_records") or [])
+            return session
+        client = client_from_env()
+        last_ts = max((r["ts"] for r in self.records if r["type"] == "bar"), default=None)
+        since = None
+        if last_ts:
+            from datetime import datetime, timedelta, timezone
+            t = datetime.fromisoformat(last_ts.replace("Z", "+00:00")) - timedelta(minutes=2)
+            since = t.astimezone(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+        fresh = fetch_records(client, self.symbols, since=since, profiles=False)
+        merged: dict = {}
+        for r in self.records + fresh:
+            if r["type"] == "bar":
+                key = ("bar", r["symbol"], r.get("tf", "1m"), r["ts"])
+            elif r["type"] == "news":
+                key = ("news", r["symbol"], r.get("provider_id"))
+            elif r["type"] == "reference":
+                key = ("reference", r["symbol"])
+                # keep the profile fields the incremental fetch skipped
+                old = merged.get(key)
+                if old:
+                    for k in ("name", "country", "incorporated_in", "exchange",
+                              "float_shares", "float_quality", "float_asof"):
+                        if r.get(k) is None and old.get(k) is not None:
+                            r[k] = old[k]
+            else:
+                key = (r["type"], r.get("symbol"), r.get("ts"))
+            merged[key] = r
+        self.records = list(merged.values())
+        from ..dashboard.session_builder import build_session_from_records
+        session = build_session_from_records(
+            self.records, session_id="alpaca-" + "-".join(self.symbols[:3]),
+            source_name="alpaca %s feed" % client.feed, max_rows=10,
+            data_status="live" if client.feed == "sip" else "iex",
+            volume_floor_scale=1.0 if client.feed == "sip" else IEX_VOLUME_FLOOR_SCALE)
+        session["_records"] = self.records
+        return session
 
     def current(self) -> dict:
         with self.lock:
@@ -88,8 +145,12 @@ class LiveSession:
                         added = fresh[:room]
                         if added:
                             self.symbols = self.symbols + added
+                            self.records = []          # forces a full build with the new names
                             print(f"  rescan: {', '.join(added)} joined the desk")
-                s = self._build()
+                s = self._build_live(full=False) if self.symbols else self._build()
+                s["live"] = True
+                s["refreshSeconds"] = self.refresh
+                s["builtAt"] = time.time()
                 with self.lock:
                     self.session = s
                     self.built_at = s["builtAt"]
@@ -154,7 +215,8 @@ def make_handler(fixture, live: "LiveSession | None" = None):
             if path in ("/", "/index.html"):
                 return self._send((WEB / "index.html").read_bytes(), "text/html; charset=utf-8")
             if path == "/session.js":
-                body = b"window.__SESSION__=" + json.dumps(session, default=str).encode() + b";"
+                public = {k: v for k, v in session.items() if not k.startswith("_")}
+                body = b"window.__SESSION__=" + json.dumps(public, default=str).encode() + b";"
                 return self._send(body, "application/javascript")
             if path == "/api/v1/health":
                 return self._json({"status": "ok",
@@ -175,7 +237,7 @@ def make_handler(fixture, live: "LiveSession | None" = None):
                     "definitionVersions": session["definitionVersions"],
                 })
             if path == "/api/v1/replay/session":
-                return self._json(session)
+                return self._json({k: v for k, v in session.items() if not k.startswith("_")})
             if path == "/api/v1/scanner-events":
                 events = [a for f in session["frames"] for a in f["alerts"]]
                 return self._json({"count": len(events), "events": events})
@@ -199,7 +261,7 @@ def main(argv=None) -> int:
                     help="comma-separated real symbols to load from yfinance "
                          "(delayed ~15m) instead of a replay fixture")
     ap.add_argument("--refresh", type=int, default=None, metavar="SECONDS",
-                    help="rebuild a live Alpaca session this often (default 60 with --alpaca)")
+                    help="refresh a live Alpaca session this often (default 20 with --alpaca)")
     ap.add_argument("--rescan", type=int, default=0, metavar="MINUTES",
                     help="with --alpaca: re-scan the universe this often and add new runners")
     ap.add_argument("--port", type=int, default=8787)
@@ -209,7 +271,7 @@ def main(argv=None) -> int:
     source = (f"alpaca:{args.alpaca}" if args.alpaca
               else f"live:{args.live}" if args.live
               else args.fixture)
-    refresh = args.refresh if args.refresh is not None else (60 if args.alpaca else 0)
+    refresh = args.refresh if args.refresh is not None else (20 if args.alpaca else 0)
     live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
     session = live.current()
     print(f"session: {len(session['frames'])} frames, {len(session['symbols'])} symbols, "

@@ -103,6 +103,19 @@ def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
     return build_session_from_records(records, fixture_path.stem, fixture_path.name, max_rows)
 
 
+
+def _et_clock(ts) -> "str | None":
+    """'2026-09-02T08:12:33.12Z' -> '04:12:33 ET' for the quote card."""
+    if not ts:
+        return None
+    try:
+        from zoneinfo import ZoneInfo
+        d = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        return d.astimezone(ZoneInfo("America/New_York")).strftime("%H:%M:%S ET")
+    except (ValueError, TypeError):
+        return None
+
+
 def build_session_from_records(
     records: list,
     session_id: str,
@@ -140,6 +153,14 @@ def build_session_from_records(
                 "high52w": rec.get("high_52w"),
                 "floatShares": rec.get("float_shares"),
                 "floatQuality": rec.get("float_quality", "unknown"),
+                "floatAsOf": rec.get("float_asof"),
+                "exchange": rec.get("exchange"),
+                "country": rec.get("country"),
+                "incorporatedIn": rec.get("incorporated_in"),
+                "name": rec.get("name"),
+                "iexLast": rec.get("iex_last_price"),
+                "iexLastTime": _et_clock(rec.get("iex_last_ts")),
+                "iexBid": rec.get("iex_bid"), "iexAsk": rec.get("iex_ask"),
                 "dailyBars": rec.get("daily_bars", []),
                 "news": [],
             }

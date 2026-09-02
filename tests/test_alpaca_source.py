@@ -435,4 +435,64 @@ def test_the_step_back_is_announced_in_the_payload(monkeypatch):
     session = al.build_alpaca_session(["AAA"])
     assert "sessionNote" in session
     assert "2026-09-01" in session["sessionNote"]
-    assert "today has produced no bars" in session["sessionNote"]
+    assert "IEX feed has no bars" in session["sessionNote"]
+    assert "ALPACA_FEED=sip" in session["sessionNote"]
+
+
+# -- incremental refresh: `since` narrows the intraday window -----------------
+
+def test_since_narrows_the_intraday_window_and_keeps_references():
+    seen = {}
+
+    class Stub(al.AlpacaClient):
+        def snapshots(self, symbols):
+            return {"AAA": {"latestTrade": {"p": 4.21, "t": "2026-09-02T08:12:33Z"},
+                            "latestQuote": {"bp": 4.20, "ap": 4.22},
+                            "prevDailyBar": {"c": 4.0}}}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            seen.setdefault(timeframe, []).append(start)
+            if timeframe == "1Min":
+                return {"AAA": [{"t": "2026-09-02T13:40:00Z", "o": 4, "h": 4.3, "l": 3.9, "c": 4.2, "v": 500}]}
+            return {}
+
+        def trades(self, symbols, start, end=None, limit=10000):
+            seen.setdefault("trades", []).append(start)
+            return {}
+
+        def news(self, symbols, limit=50, start=None):
+            seen.setdefault("news", []).append(start)
+            return []
+
+        def assets(self, status="active"):
+            return [{"symbol": "AAA", "exchange": "NASDAQ"}]
+
+    al._EXCHANGE_CACHE.update(at=0.0, map={})      # another test may have filled it
+    recs = al.fetch_records(Stub("PK", "s" * 40), ["AAA"], since="2026-09-02T13:30:00Z", profiles=False)
+    assert seen["1Min"][0] == "2026-09-02T13:30:00Z", "minute bars start at `since`"
+    assert seen["trades"][0] == "2026-09-02T13:30:00Z"
+    assert seen["news"][0] == "2026-09-02T13:30:00Z"
+    ref = next(r for r in recs if r["type"] == "reference")
+    assert ref["iex_last_price"] == 4.21 and ref["iex_bid"] == 4.20 and ref["iex_ask"] == 4.22
+    assert ref["exchange"] == "NASDAQ"
+
+
+def test_scan_rows_carry_exchange_and_honour_the_exchange_filter():
+    class Stub(al.AlpacaClient):
+        def assets(self, status="active"):
+            return [{"symbol": s, "tradable": True, "status": "active", "class": "us_equity",
+                     "exchange": e} for s, e in (("NAS", "NASDAQ"), ("NYS", "NYSE"), ("ARC", "ARCA"))]
+
+        def snapshots(self, symbols):
+            return {s: {"dailyBar": {"c": 5.0, "v": 90_000, "t": "2026-09-02T04:00:00Z"},
+                        "prevDailyBar": {"c": 4.0}, "latestTrade": {"p": 5.0}} for s in symbols}
+
+        def bars(self, symbols, timeframe, start, end=None, limit=10000):
+            return {s: [{"v": 10_000}] * 10 for s in symbols}
+
+    al._EXCHANGE_CACHE.update(at=0.0, map={})
+    out = al.scan_market(Stub("PK", "s" * 40), min_price=2, max_price=20, min_gain=10,
+                         min_rvol=5, min_volume=1, top=0, exchanges=["NASDAQ"])
+    assert [r["symbol"] for r in out["rows"]] == ["NAS"]
+    assert out["rows"][0]["exchange"] == "NASDAQ"
+    al._EXCHANGE_CACHE.update(at=0.0, map={})

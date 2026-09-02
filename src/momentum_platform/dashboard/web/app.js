@@ -153,7 +153,8 @@ function makePane(hostId, daily) {
                  horzLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label } },
     watermark: { visible: true, color: "rgba(120,130,150,0.10)", fontSize: 34, text: "",
                  horzAlign: "center", vertAlign: "center" },
-    handleScale: true, handleScroll: true,
+    handleScale: { axisPressedMouseMove: { time: true, price: true }, mouseWheel: true, pinch: true },
+    handleScroll: { mouseWheel: true, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
   });
   const candles = chart.addCandlestickSeries({
     upColor: TVC.up, downColor: TVC.down, borderVisible: false,
@@ -216,6 +217,9 @@ function makePane(hostId, daily) {
   return {
     engine: "tradingview",
     note: paneNote(host),
+    // Zoom is state the trader set on purpose. A live reload must hand it back.
+    getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
+    setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
     resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
     render(bars, opts) {
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
@@ -458,6 +462,10 @@ function fillListCard(card, id, frame) {
     const tr = el("div", "trow list-row" + (state.selected === r.symbol ? " sel" : "") +
       (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
     tr.dataset.symbol = r.symbol; tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    // Where it trades and where the registrant lives — a Chinese ADR on NASDAQ
+    // or a Canadian cross-list is a different animal from a Delaware microcap,
+    // and the screener should say so on the row, not in a tooltip.
+    if (sym.exchange || sym.country) tr.title = [sym.name, sym.exchange, sym.country].filter(Boolean).join(" · ");
     const s = el("span", "tsym");
     s.appendChild(el("b", null, r.symbol));
     s.appendChild(flameFor(r.symbol, nowMs));
@@ -774,6 +782,13 @@ function renderQuote(frame, ctx) {
   kv(grid, "Avg volume", vol(meta.avgDailyVolume));
   kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
   kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  if (meta.iexLast != null) {
+    // What the single venue has actually printed most recently — shown so a
+    // thin premarket reads as "IEX last print 04:12" rather than as silence.
+    kv(grid, "IEX last print", fx(meta.iexLast) + (meta.iexLastTime ? "  " + meta.iexLastTime : ""));
+    if (meta.iexBid != null && meta.iexAsk != null)
+      kv(grid, "IEX quote", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
+  }
   q.appendChild(grid);
   renderCatalyst(q, ctx);
   if (meta.floatQuality === "shares_outstanding_proxy")
@@ -934,9 +949,12 @@ function renderVerdict(frame, ctx) {
        (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
   line("Gain vs close", pct(chg), gainOk);
   line("Daily RVOL", row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
+  // Three states, three words: PASS, FAIL, UNKNOWN. An over-cap shares-
+  // outstanding bound is the third — it must never render as "false".
+  const floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false);
   line("Float / supply", fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" +
        (fl.quality === "you verified" ? " (yours)" : soBound ? " SO" : "") : "unknown",
-       floatOk, floatUnknown && !floatOk ? "warn" : undefined);
+       floatStatus, floatStatus === "UNKNOWN" ? "warn" : undefined);
   line("News", newsOk ? "Observed" : "Manual check", newsOk);
   line("Technical score", technical + "/4", technical === 4);
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
@@ -984,16 +1002,18 @@ const PANES = {};
 function bars10sUpTo(sym, frame) {
   const all = (S.bars10s || {})[sym] || [];
   if (!all.length) return [];
-  // Cut by TIME, never by index. An index assumes six 10-second bars per
-  // minute for every symbol; bars built from real trade prints are sparse
-  // (an empty bucket is skipped, not drawn), so the index overshot and the
-  // micro pane showed the close of the day at 11:17. The frame's minute
-  // covers [t, t+60), so include every 10-second bar that starts inside it.
-  const limit = frame.t + 60;
-  let hi = all.length;                       // bars are sorted; binary search
-  let lo = 0;
+  // Cut by TIME at both ends. The upper cut is the frame's minute — an index
+  // that assumed six bars a minute once leaked the close of the day into the
+  // morning. The lower cut is a fixed 30-minute window: trade-built bars are
+  // sparse outside the open, and "the last 180 bars" spanned an hour and read
+  // as scattered dots. A time window shows density as it really is; an empty
+  // bucket stays absent rather than being drawn flat.
+  const limit = frame.t + 60, floor = limit - 30 * 60;
+  let hi = all.length, lo = 0;
   while (lo < hi) { const mid = (lo + hi) >> 1; if (all[mid][0] < limit) lo = mid + 1; else hi = mid; }
-  return all.slice(0, lo);
+  let start = 0, end = lo;
+  while (start < end && all[start][0] < floor) start++;
+  return all.slice(start, end);
 }
 
 function renderCharts(frame) {
@@ -1007,10 +1027,11 @@ function renderCharts(frame) {
   PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
-    PANES.d.note(null);
+    PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
-    PANES.d.render(sub.slice(-180), Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
+    PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
+    if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second prints on IEX in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
     PANES.d.note("10-second bars need tick or sub-minute data. This feed publishes " +
@@ -1018,6 +1039,11 @@ function renderCharts(frame) {
                  "inventing candles.");
   }
   PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
+  if (PENDING_RANGES) {          // first paint after a live reload: give the zoom back
+    const r = PENDING_RANGES; PENDING_RANGES = null;
+    ["a", "b", "d", "c"].forEach(k => { if (r[k] && PANES[k] && PANES[k].setRange) PANES[k].setRange(r[k]); });
+  }
+  renderWidget(sym, meta);
 }
 
 /* ── selection ──────────────────────────────────────────────────────── */
@@ -1060,7 +1086,7 @@ const DEFAULT_LAYOUT = {
   R1: "level2", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-daily"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-daily", "tv-widget"]);
 const DEFAULT_SIZES = {
   wLeft: 336, wRight: 352,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
@@ -1213,6 +1239,7 @@ function renderTray() {
 function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
 function applyLayout() {
   const parked = document.getElementById("parked");
+  WIDGET_SYMBOL = null;   // the widget card may have just come on screen
   ALL_CARDS.forEach(id => {
     if (placedCards().indexOf(id) === -1) {
       const card = cardEl(id);
@@ -1369,6 +1396,7 @@ function effectiveFloat(symbol, meta) {
    so a trader watching the newest candle keeps watching the newest candle,
    and one who scrubbed back to study a pullback is not yanked forward. */
 const LIVE_KEY = "desk.live.restore";
+let PENDING_RANGES = null;
 function liveFollow() {
   try {
     const saved = JSON.parse(sessionStorage.getItem(LIVE_KEY) || "null");
@@ -1377,6 +1405,7 @@ function liveFollow() {
       if (saved.selected && SYMS[saved.selected]) state.selected = saved.selected;
       state.frame = saved.atEnd ? FRAMES.length - 1 : Math.min(saved.frame || 0, FRAMES.length - 1);
       state.locked = !!saved.locked;
+      PENDING_RANGES = saved.ranges || null;
     } else {
       state.frame = FRAMES.length - 1;        // first load of a live desk: newest bar
     }
@@ -1390,11 +1419,55 @@ function liveFollow() {
         sessionStorage.setItem(LIVE_KEY, JSON.stringify({
           selected: state.selected, frame: state.frame, locked: state.locked,
           atEnd: state.frame >= FRAMES.length - 1,
+          ranges: { a: PANES.a.getRange && PANES.a.getRange(), b: PANES.b.getRange && PANES.b.getRange(),
+                    d: PANES.d.getRange && PANES.d.getRange(), c: PANES.c.getRange && PANES.c.getRange() },
         }));
       } catch (e) {}
       location.reload();
     }).catch(() => {});
   }, 15000);
+}
+
+
+/* TradingView's own embeddable Advanced Chart, following the selected symbol.
+   This is TradingView's page inside an iframe: their data (consolidated, on
+   their delay rules for a logged-out viewer), their toolbar, their terms. It
+   cannot draw this desk's entry/stop/target — that is what the annotated
+   panes are for — but it gives the familiar toolbar and, before the open, a
+   consolidated premarket price that the single-venue IEX feed may not show.
+   The script loads once, on first use, and only when the card is on screen. */
+let WIDGET_SYMBOL = null, WIDGET_LOADING = false;
+function tvSymbol(sym, meta) {
+  const ex = (meta && meta.exchange) || "";
+  const prefix = ex === "NASDAQ" ? "NASDAQ:" : ex === "NYSE" ? "NYSE:" : (ex === "AMEX" || ex === "ARCA") ? "AMEX:" : "";
+  return prefix + sym;
+}
+function renderWidget(sym, meta) {
+  const host = document.getElementById("tvWidget");
+  if (!host || !sym || WIDGET_SYMBOL === sym) return;
+  const card = host.closest(".card");
+  if (!card || card.parentElement === document.getElementById("parked")) return;  // not on screen
+  const draw = () => {
+    if (!window.TradingView || !window.TradingView.widget) return;
+    WIDGET_SYMBOL = sym;
+    host.textContent = "";
+    const mount = document.createElement("div"); mount.id = "tvWidgetMount"; mount.style.height = "100%";
+    host.appendChild(mount);
+    new window.TradingView.widget({
+      symbol: tvSymbol(sym, meta), interval: "1", timezone: "America/New_York", theme: "dark",
+      style: "1", locale: "en", container_id: "tvWidgetMount", autosize: true,
+      withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
+      session: "extended", details: false, hotlist: false, calendar: false,
+    });
+  };
+  if (window.TradingView) { draw(); return; }
+  if (WIDGET_LOADING) return;
+  WIDGET_LOADING = true;
+  const tag = document.createElement("script");
+  tag.src = "https://s3.tradingview.com/tv.js"; tag.async = true;
+  tag.onload = draw;
+  tag.onerror = () => { host.textContent = "TradingView's widget script could not be loaded (offline, or blocked by an extension)."; };
+  document.head.appendChild(tag);
 }
 
 /* ── render ─────────────────────────────────────────────────────────── */

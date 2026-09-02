@@ -50,6 +50,11 @@ def main(argv=None) -> int:
     ap.add_argument("--min-volume", type=float, default=100_000,
                     help="IEX shares today; lower than a consolidated threshold on purpose")
     ap.add_argument("--limit-universe", type=int, default=0, help="scan only the first N (testing)")
+    ap.add_argument("--exchange", action="append", metavar="X",
+                    help="only these listing exchanges (NASDAQ, NYSE, AMEX, ARCA); repeatable")
+    ap.add_argument("--country", action="append", metavar="NAME",
+                    help="registrant country/state must contain this (e.g. China, Cayman, "
+                         "British Columbia, Ontario); repeatable")
     ap.add_argument("--save", metavar="PATH")
     args = ap.parse_args(argv)
 
@@ -66,7 +71,8 @@ def main(argv=None) -> int:
         result = scan_market(client, min_price=args.min_price, max_price=args.max_price,
                              min_gain=args.min_gain, min_rvol=args.min_rvol,
                              min_volume=args.min_volume, top=0,
-                             limit_universe=args.limit_universe, log=log)
+                             limit_universe=args.limit_universe, log=log,
+                             exchanges=args.exchange, countries=args.country)
     except AlpacaError as exc:
         print(f"\n{exc}", file=sys.stderr)
         return 2
@@ -83,10 +89,11 @@ def main(argv=None) -> int:
         return 1
 
     top = rows[: args.top]
-    log(f"\n  {'SYM':<6} {'PRICE':>8} {'GAIN':>8} {'RVOL':>7} {'VOLUME(IEX)':>12}")
+    log(f"\n  {'SYM':<6} {'PRICE':>8} {'GAIN':>8} {'RVOL':>7} {'VOLUME(IEX)':>12}  {'EXCH':<7}{'COUNTRY'}")
     for r in top:
         log(f"  {r['symbol']:<6} {r['price']:>8.2f} {r['gain']:>7.1f}% "
-            f"{r['rvol']:>6.1f}x {int(r['volume']):>12,}")
+            f"{r['rvol']:>6.1f}x {int(r['volume']):>12,}  {(r.get('exchange') or '—'):<7}"
+            f"{r.get('country') or '—'}")
     log("\n  Float and catalyst are still yours to verify — the workstation shows "
         "both as explicit columns.\n")
 

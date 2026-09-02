@@ -423,7 +423,7 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert items == ["chart-daily"]
+    assert sorted(items) == ["chart-daily", "tv-widget"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -740,7 +740,7 @@ def test_ten_second_pane_is_cut_by_time_not_by_index():
            / "dashboard" / "web" / "app.js").read_text()
     body = app.split("function bars10sUpTo")[1].split("\nfunction ")[0]
     assert "frame.t + 60" in body
-    assert "barIndex10s" not in body and "* 6" not in body
+    assert "(frame.barIndex + 1) * 6" not in body and "frame.barIndex10s" not in body
 
 
 def test_the_startup_banner_describes_the_feed_actually_loaded():
@@ -786,3 +786,86 @@ def test_the_price_band_carries_its_evidence_label():
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
     assert 'T.evidence === "operator_override"' in app
+
+
+def test_ten_second_pane_is_a_thirty_minute_window():
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function bars10sUpTo")[1].split("\nfunction ")[0]
+    assert "limit - 30 * 60" in body
+    assert "slice(-180)" not in app.split("function renderCharts")[1][:1500]
+
+
+def test_zoom_is_handed_back_after_a_live_reload():
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert "getVisibleLogicalRange" in app and "setVisibleLogicalRange" in app
+    assert "PENDING_RANGES" in app
+
+
+def test_tradingview_widget_card_exists_and_is_labelled_as_theirs():
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    html = (web / "index.html").read_text(); app = (web / "app.js").read_text()
+    assert 'data-card="tv-widget"' in html and "TradingView data" in html
+    assert '"tv-widget"' in app and "s3.tradingview.com/tv.js" in app
+    assert 'session: "extended"' in app, "premarket must be on in the widget"
+
+
+def test_quote_card_shows_the_iex_last_print():
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert '"IEX last print"' in app
+
+
+def test_live_holder_merges_incrementally_and_never_serialises_records(monkeypatch):
+    from momentum_platform.dashboard import server as srv
+    calls = {"full": 0, "inc": 0}
+    base = [{"type": "reference", "symbol": "AAA", "prev_close": 4.0, "avg_daily_volume": 1e5,
+             "high_52w": 9, "float_shares": 1_000_000, "float_quality": "shares_outstanding_proxy",
+             "country": "China", "exchange": "NASDAQ"}]
+    bars = [{"type": "bar", "symbol": "AAA", "ts": f"2026-09-02T13:{m:02d}:00Z", "open": 4,
+             "high": 4.2, "low": 3.9, "close": 4.1, "volume": 500} for m in range(30, 40)]
+
+    def fake_build(symbols):
+        calls["full"] += 1
+        from momentum_platform.dashboard.session_builder import build_session_from_records
+        s = build_session_from_records(base + bars, "t", "t", 10, "iex")
+        s["_records"] = base + bars
+        return s
+
+    def fake_fetch(client, symbols, since=None, profiles=True, **kw):
+        calls["inc"] += 1
+        assert since is not None and profiles is False
+        # a fresh reference WITHOUT the profile fields, plus one re-sent and one new bar
+        return [{"type": "reference", "symbol": "AAA", "prev_close": 4.0, "avg_daily_volume": 1e5,
+                 "high_52w": 9, "float_shares": None, "float_quality": "unknown"},
+                dict(bars[-1], close=4.15),
+                {"type": "bar", "symbol": "AAA", "ts": "2026-09-02T13:40:00Z", "open": 4.1,
+                 "high": 4.3, "low": 4.0, "close": 4.25, "volume": 700}]
+
+    class FakeClient:
+        feed = "iex"
+    monkeypatch.setattr("momentum_platform.datasources.alpaca_source.build_alpaca_session", fake_build)
+    monkeypatch.setattr("momentum_platform.datasources.alpaca_source.fetch_records", fake_fetch)
+    monkeypatch.setattr("momentum_platform.datasources.alpaca_source.client_from_env", lambda feed=None: FakeClient())
+
+    live = srv.LiveSession("alpaca:AAA", refresh=0)
+    assert calls["full"] == 1
+    s2 = live._build_live(full=False)
+    assert calls["inc"] == 1
+    kinds = [r for r in live.records if r["type"] == "bar"]
+    assert len(kinds) == 11, "one bar replaced, one added, none duplicated"
+    ref = next(r for r in live.records if r["type"] == "reference")
+    assert ref["country"] == "China" and ref["float_shares"] == 1_000_000, \
+        "profile fields survive an incremental reference"
+    assert "_records" in s2
+    public = {k: v for k, v in s2.items() if not k.startswith("_")}
+    assert "_records" not in public
+
+
+def test_float_row_has_three_words_never_a_boolean():
+    """Over the cap, the shares-outstanding bound is UNKNOWN — a third state.
+    Rendering the boolean directly printed the word 'false' on the card."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert 'floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false)' in app

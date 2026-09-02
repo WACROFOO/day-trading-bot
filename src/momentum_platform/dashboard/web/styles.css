@@ -358,3 +358,7 @@ body.resizing .gutter{pointer-events:auto}
 /* Header warning when the desk stepped back to an earlier session. */
 .session-note{color:var(--hi);border:1px solid #4a3c17;background:#241d0c;
   border-radius:3px;padding:0 5px;margin-left:6px;font-size:9.5px}
+
+/* TradingView's embedded chart: their iframe fills the host. */
+.tv-host{position:relative;min-height:120px}
+.tv-host iframe{position:absolute;inset:0;width:100%!important;height:100%!important;border:0}

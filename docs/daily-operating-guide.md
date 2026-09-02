@@ -94,6 +94,43 @@ IEX is real-time — there is no 15-minute delay on this feed. It is one venue,
 so absolute volume is understated; the relative-volume ratios compare IEX to
 IEX and hold.
 
+### Premarket, honestly
+
+IEX is one venue. Before roughly 07:00 ET a $2–20 microcap may have printed
+on other venues (what TradingView shows) and not once on IEX. Then the desk:
+
+- says so in the header note and steps back to the last session IEX carried;
+- shows **IEX last print** with its time on the quote card, so a thin tape
+  reads as "IEX last print 04:12" rather than as silence;
+- offers the **TradingView card** (drag it from the Cards tray): TradingView's
+  own chart for the selected symbol, with their consolidated premarket price.
+  It is their data under their terms and cannot draw this desk's entry, stop
+  or target — the annotated panes do that.
+
+The only thing that gives the scanners consolidated premarket volume is a
+consolidated feed: `ALPACA_FEED=sip` in `.env`, which is Alpaca's paid tier.
+Nothing free provides it. Decide that with the journal in hand, not before.
+
+### Live refresh
+
+A live desk refreshes **every 20 seconds** — incrementally, fetching only the
+prints since the last bar, so it stays inside the free tier's request budget.
+Zoom survives the refresh: each pane hands its visible range back after the
+reload. `--refresh SECONDS` changes the cadence.
+
+### Screener columns and filters
+
+Every row carries its listing exchange and the registrant's country from SEC
+records — a Chinese ADR on NASDAQ shows Cayman Islands or Beijing, a Canadian
+cross-list shows British Columbia or Ontario. Hover a Five Pillars row for
+name · exchange · country. The scan takes filters:
+
+```
+python3 scripts/alpaca_watchlist.py --exchange NASDAQ --exchange NYSE
+python3 scripts/alpaca_watchlist.py --country China --country Cayman
+python3 scripts/alpaca_watchlist.py --country "British Columbia" --country Ontario
+```
+
 ### Your own price band
 
 The Confirmed course pillar is $2–20. To widen the low end for your universe

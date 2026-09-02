@@ -301,8 +301,15 @@ def session_window(day: Optional[datetime] = None) -> tuple:
 def fetch_records(client: AlpacaClient, symbols: Iterable[str],
                   day: Optional[datetime] = None,
                   daily_lookback_days: int = 400,
-                  rvol_window: int = 20) -> List[dict]:
-    """Reference + news + 1-minute bar records for the given symbols."""
+                  rvol_window: int = 20,
+                  since: Optional[str] = None,
+                  profiles: bool = True) -> List[dict]:
+    """Reference + news + 1-minute bar records for the given symbols.
+
+    `since` (RFC3339) narrows the intraday bar/trade/news window for an
+    incremental refresh: the caller merges the result over the records it
+    already holds. References are always rebuilt — they carry the IEX last
+    print, which is the freshest thing on the page."""
     symbols = [s.upper().strip() for s in symbols if s.strip()]
     if not symbols:
         raise AlpacaError("No symbols given.")
@@ -311,7 +318,12 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
     daily_start = _iso(datetime.now(UTC) - timedelta(days=daily_lookback_days))
     daily = client.bars(symbols, "1Day", daily_start)
     snaps = client.snapshots(symbols)
+    try:
+        exchanges = exchange_map(client)
+    except AlpacaError:
+        exchanges = {}
     shares_out: dict = {}
+    country: dict = {}
     try:
         from .sec_source import client_from_env as _sec
         sec = _sec()
@@ -319,6 +331,10 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
             found = sec.shares_outstanding(symbol)
             if found:
                 shares_out[symbol] = found
+            if profiles:
+                prof = sec.company_profile(symbol)
+                if prof:
+                    country[symbol] = prof
     except Exception as exc:                 # EDGAR down must not block the desk
         print(f"  shares outstanding unavailable from SEC: {exc}")
 
@@ -344,11 +360,24 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
         # facts do give shares OUTSTANDING — the company's own cover-page
         # figure — which is an upper bound on float, labelled as exactly that.
         so = shares_out.get(symbol)
+        prof = country.get(symbol) or {}
+        last_tr = snap.get("latestTrade") or {}
+        last_q = snap.get("latestQuote") or {}
         records.append({
             "type": "reference", "symbol": symbol,
             "prev_close": prev_close,
             "avg_daily_volume": avg_volume,
             "high_52w": high_52w,
+            # The single venue's most recent print and quote. Before the open
+            # this may be the only thing IEX has for a microcap; the desk shows
+            # it as "IEX last print 04:12" rather than reading as silence.
+            "iex_last_price": last_tr.get("p"),
+            "iex_last_ts": last_tr.get("t"),
+            "iex_bid": last_q.get("bp"), "iex_ask": last_q.get("ap"),
+            "exchange": exchanges.get(symbol),
+            "name": prof.get("name"),
+            "country": prof.get("business_country") or prof.get("incorporation_desc"),
+            "incorporated_in": prof.get("incorporation_desc") or prof.get("state_of_incorporation"),
             "float_shares": so["shares"] if so else None,
             "float_quality": "shares_outstanding_proxy" if so else "unknown",
             "float_asof": so["as_of"] if so else None,
@@ -356,6 +385,8 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
         })
 
     start, end = session_window(day)
+    if since and since > start:
+        start = since                        # incremental: only the tail
     minute = client.bars(symbols, "1Min", start, end)
 
     # Sub-minute bars from trade prints. The session builder re-derives the
@@ -387,7 +418,8 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
             })
 
     try:
-        for item in client.news(symbols, limit=50, start=_iso(datetime.now(UTC) - timedelta(days=2))):
+        news_start = since if since else _iso(datetime.now(UTC) - timedelta(days=2))
+        for item in client.news(symbols, limit=50, start=news_start):
             published = item.get("created_at") or item.get("updated_at")
             headline = item.get("headline")
             if not published or not headline:
@@ -439,7 +471,7 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
             anchor -= timedelta(days=1)
             while anchor.weekday() >= 5:
                 anchor -= timedelta(days=1)
-            print(f"  no bars for today yet — trying {anchor.date().isoformat()}")
+            print(f"  IEX has no bars for today yet — trying {anchor.date().isoformat()}")
             previous = fetch_records(client, symbols, day=anchor)
             if any(r["type"] == "bar" for r in previous):
                 records, stepped_back_to = previous, anchor.date().isoformat()
@@ -461,12 +493,16 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
         max_rows=max_rows, data_status="live" if client.feed == "sip" else "iex",
         volume_floor_scale=1.0 if client.feed == "sip" else IEX_VOLUME_FLOOR_SCALE,
     )
+    session["_records"] = records          # for incremental refresh; never serialised
     if stepped_back_to:
         # Say it in the payload, not just the terminal: the header must never
         # let a previous session pass for today's.
         session["sessionNote"] = (
-            "Showing the %s session — today has produced no bars for these "
-            "symbols yet." % stepped_back_to)
+            "Showing the %s session — the IEX feed has no bars for these symbols "
+            "today yet. IEX is one venue and carries little premarket volume in "
+            "microcaps; other venues may be printing. The quote card shows IEX's "
+            "last print; the TradingView card shows consolidated prices. "
+            "ALPACA_FEED=sip (paid) removes this limit." % stepped_back_to)
         print(f"  showing the {stepped_back_to} session instead of today")
     session["disclaimer"] = (
         "Alpaca %s feed. IEX is one venue, so absolute volume is a fraction of "
@@ -480,7 +516,9 @@ def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
 
 def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float = 20.0,
                 min_gain: float = 10.0, min_rvol: float = 5.0, min_volume: float = 20_000,
-                top: int = 8, limit_universe: int = 0, log=None) -> dict:
+                top: int = 8, limit_universe: int = 0, log=None,
+                exchanges: Optional[List[str]] = None,
+                countries: Optional[List[str]] = None) -> dict:
     """Two-pass market scan on the free feed.
 
     Pass 1 applies price, gain and a volume floor across the whole tradable
@@ -495,7 +533,14 @@ def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float =
     """
     say = log or (lambda *_: None)
     universe = momentum_universe(client, max_symbols=limit_universe)
-    say(f"  {len(universe):,} tradable US equities")
+    try:
+        ex_map = exchange_map(client)
+    except AlpacaError:
+        ex_map = {}
+    if exchanges:
+        want = {e.upper() for e in exchanges}
+        universe = [s for s in universe if ex_map.get(s, "").upper() in want]
+    say(f"  {len(universe):,} tradable US equities" + (f" on {', '.join(exchanges)}" if exchanges else ""))
     survivors, bar_dates = [], {}
     snaps = client.snapshots(universe)
     for symbol, snap in snaps.items():
@@ -512,7 +557,8 @@ def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float =
             continue
         gain = (last / prev_close - 1) * 100
         if min_price <= last <= max_price and gain >= min_gain and volume >= min_volume:
-            survivors.append({"symbol": symbol, "price": last, "gain": gain, "volume": volume})
+            survivors.append({"symbol": symbol, "price": last, "gain": gain, "volume": volume,
+                              "exchange": ex_map.get(symbol)})
     say(f"  {len(survivors)} passed price, gain and volume")
     session_date = max(bar_dates, key=bar_dates.get) if bar_dates else ""
     today = datetime.now(ET).date().isoformat()
@@ -535,8 +581,40 @@ def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float =
             rows.append(item)
     rows.sort(key=lambda r: r["rvol"], reverse=True)
     say(f"  {len(rows)} also passed relative volume ≥ {min_rvol}x")
+    # Country comes from the SEC registrant record, fetched for survivors only
+    # (a few names, not eleven thousand). A Chinese ADR on NASDAQ shows its
+    # Cayman/Beijing registrant; a Canadian cross-list shows British Columbia.
+    try:
+        from .sec_source import client_from_env as _sec
+        sec = _sec()
+        for r in rows:
+            prof = sec.company_profile(r["symbol"]) or {}
+            r["country"] = prof.get("business_country") or prof.get("incorporation_desc")
+    except Exception:
+        for r in rows:
+            r.setdefault("country", None)
+    if countries:
+        want = [c.lower() for c in countries]
+        rows = [r for r in rows if r.get("country") and any(w in r["country"].lower() for w in want)]
+        say(f"  {len(rows)} match country filter {', '.join(countries)}")
     result["rows"] = rows[:top] if top else rows
     return result
+
+
+_EXCHANGE_CACHE: dict = {"at": 0.0, "map": {}}
+
+
+def exchange_map(client: AlpacaClient, max_age_seconds: float = 3600.0) -> dict:
+    """symbol -> listing exchange, from the assets endpoint, cached an hour."""
+    import time as _time
+    if _time.time() - _EXCHANGE_CACHE["at"] < max_age_seconds and _EXCHANGE_CACHE["map"]:
+        return _EXCHANGE_CACHE["map"]
+    out = {}
+    for asset in client.assets():
+        if asset.get("symbol") and asset.get("exchange"):
+            out[asset["symbol"]] = asset["exchange"]
+    _EXCHANGE_CACHE.update(at=_time.time(), map=out)
+    return out
 
 def momentum_universe(client: AlpacaClient, max_symbols: int = 0) -> List[str]:
     """Tradable US common stocks — NASDAQ and NYSE, not just NASDAQ."""

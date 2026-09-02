@@ -182,6 +182,26 @@ class SecClient:
         return out
 
 
+    def company_profile(self, symbol: str) -> Optional[dict]:
+        """Name, state/country of incorporation and business address country
+        from the EDGAR submissions record. This is how a Chinese ADR or a
+        Canadian cross-list shows itself: a NASDAQ ticker whose registrant is
+        incorporated in the Cayman Islands, British Columbia, or Nevada with a
+        Beijing business address. Free, official, cached with the CIK map."""
+        cik = self.cik_for(symbol)
+        if cik is None:
+            return None
+        payload = self._get(SEC_SUBMISSIONS.format(cik=cik))
+        biz = ((payload.get("addresses") or {}).get("business") or {})
+        return {
+            "name": payload.get("name"),
+            "state_of_incorporation": payload.get("stateOfIncorporation") or None,
+            "incorporation_desc": payload.get("stateOfIncorporationDescription") or None,
+            "business_country": biz.get("stateOrCountryDescription") or biz.get("stateOrCountry") or None,
+            "sic": payload.get("sicDescription") or None,
+            "exchanges": payload.get("exchanges") or [],
+        }
+
     def shares_outstanding(self, symbol: str) -> Optional[dict]:
         """Latest dei:EntityCommonStockSharesOutstanding from XBRL company facts.
 
