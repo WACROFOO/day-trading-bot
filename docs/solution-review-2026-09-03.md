@@ -214,3 +214,81 @@ bash scripts/start.sh --ibkr
 
 Stop with Ctrl-C. Update with `bash scripts/update.sh`. Everything runs
 locally on 127.0.0.1; nothing is exposed to the network.
+
+---
+
+## 9. Final assessment before sharing (recording of 2026-09-03, 14:13–14:14 ET)
+
+What the recording shows working, end to end, on live data:
+
+- The feed badge reads LIVE with the provider, read-only flag and generation
+  beneath it; the clock, quote card, ten-second candles and screener rows
+  advance every few seconds with no reload.
+- The scanner union admits the $1–30 band (ORBS at $1.02 appears), drops 33
+  non-stock instruments and says so in the screener note.
+- Running Up fires as an uptrend (BIAF 13:58, GRI 13:12, AEHL 13:07) with
+  RTH pills; High of Day carries PM alerts from 08:03 and 08:24, so premarket
+  prints reach the scanners.
+- The board scores every desk name; the verdict states the one condition
+  short (no live momentum event) and arms an entry, stop and target.
+- Audio alerts are on, the legend is one click away.
+
+What the recording exposed, fixed in this round:
+
+- The board marked NTRB's 12.2M shares-outstanding proxy FAIL while the
+  verdict marked it PASS. One rule now applies everywhere: under the cap the
+  proxy proves float under the cap (pass, labelled SO); over the cap it proves
+  nothing (unknown); a verified figure is compared directly.
+- A Benzinga market wrap ("12 Health Care Stocks Moving In Thursday's Intraday
+  Session") earned a red flame and a News PASS. Roundup headlines are now
+  classified as such, carry no flame, and do not satisfy the news pillar.
+- The quote card showed "$—" for spread while the board had a value; both
+  now fall back to the provider's live bid and ask.
+- The TradingView panes opened on a multi-day view for thin names; they now
+  open on the session (1D) and the week (5D).
+
+## 10. What remains before relying on it for day trading, concretely
+
+Ordered by how much each one changes outcomes.
+
+1. **A results ledger, in R.** Every armed plan should be recorded (symbol,
+   time, entry, stop, target) and resolved by the tape: triggered or not,
+   stop or target first, R gained or lost. Twenty sessions of that is the
+   evidence that the setup, as this desk defines it, has an edge before any
+   real money is at risk. Nothing on the desk does this yet; it is the most
+   important missing piece.
+2. **Halt detection.** IBKR reports a halted flag on each ticker. A halted
+   name must show HALTED on the tile, invalidate any armed plan, and never
+   fire an alert. Not wired yet.
+3. **Real-time news.** Headlines are polled from Alpaca's free Benzinga
+   relay. For a catalyst-driven strategy the headline has to arrive as it
+   prints: IBKR sells Benzinga Pro through the API (provider code BZ, read
+   with the same read-only connection), or Benzinga's own API pushes it.
+   Either is a subscription decision.
+4. **Verified float.** This account is not entitled to IBKR fundamentals
+   (error 10358). The IBKR fundamentals add-on gives total float per name;
+   until then the supply pillar is an upper bound or unknown, and float must
+   be verified by hand before sizing.
+5. **Level 2.** The ladder is simulated. NASDAQ TotalView through IBKR gives
+   real depth on the same read-only connection. Until then, the bid and ask
+   on the quote card are the only real book data.
+6. **Faster discovery.** A runner that starts between two-minute scan rounds
+   is seen up to two minutes late. A streaming scanner subscription (IBKR
+   updates it every ~30 s) replaces the ten one-shot queries and the 150
+   snapshot quotes per round.
+7. **Execution discipline, by hand.** The desk places no orders by design.
+   A written routine is needed: read entry, stop and target from the desk,
+   enter a bracket order in the TWS paper account, size from the R risk
+   typed on the desk, log the outcome in the ledger. Only after the ledger
+   shows an edge in paper does any of this move to a live account.
+8. **Operational hardening.** Run whole sessions for two weeks: TWS restarts
+   overnight (the desk reconnects, but the morning start should be a single
+   command), logs to a file, a daily health summary, and an automatic
+   restart if the process dies.
+9. **Cost awareness.** Snapshot quotes on names outside a streaming
+   subscription are billed per snapshot by IBKR; the two-minute cadence and
+   150-name cap keep that bounded. Raising either multiplies the bill.
+10. **Scope honesty for the team.** The scanners are approximations of the
+    course scanners, the pillars are the Confirmed ones, the mastery covers
+    Basics chapters 1–6 only. Every number on the desk carries its label, and
+    the review page states the limits. That is what makes it presentable.

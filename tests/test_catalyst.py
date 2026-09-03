@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from momentum_platform.catalyst import (  # noqa: E402
-    DILUTIVE_WORDS, HARD_WORDS, SOFT_WORDS, assess, classify, flame,
+    DILUTIVE_WORDS, HARD_WORDS, ROUNDUP_WORDS, SOFT_WORDS, assess, classify, flame,
 )
 from momentum_platform.datasources.sec_source import (  # noqa: E402
     SecClient, SecError, _filing_url,
@@ -126,6 +126,7 @@ def test_python_and_javascript_grade_the_same_words():
             r'grade:\s*"(\w+)".*?words:\s*\[(.*?)\]', block.group(1), re.S):
         found[grade] = [w.strip().strip('"') for w in words.split(",") if w.strip()]
 
+    assert found["roundup"] == ROUNDUP_WORDS
     assert found["dilutive"] == DILUTIVE_WORDS
     assert found["hard"] == HARD_WORDS
     assert found["soft"] == SOFT_WORDS
@@ -356,3 +357,19 @@ def test_company_profile_reads_country_from_submissions():
     assert prof["business_country"] == "China"
     assert prof["incorporation_desc"] == "Cayman Islands"
     assert prof["name"] == "ABCD Holdings"
+
+
+def test_a_market_roundup_is_not_a_catalyst():
+    """"12 Health Care Stocks Moving In Thursday's Intraday Session" named the
+    desk's runner among eleven others and earned a red flame and a News PASS.
+    A list of names is not news about this one."""
+    from datetime import datetime, timedelta, timezone
+    now = datetime(2026, 9, 3, 18, 0, tzinfo=timezone.utc)
+    read = assess("NTRB", "12 Health Care Stocks Moving In Thursday's Intraday Session",
+                  published=now - timedelta(minutes=30), now=now)
+    assert read.grade.grade == "roundup"
+    assert read.flame_color == "none" and read.verdict() == "PASS"
+    assert any("roundup" in n for n in read.notes)
+    real = assess("NTRB", "Nutriband receives FDA clearance for AVERSA patch",
+                  published=now - timedelta(minutes=30), now=now)
+    assert real.grade.grade == "hard" and real.flame_color == "red" and real.verdict() == "QUALIFIED"

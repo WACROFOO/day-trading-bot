@@ -26,6 +26,13 @@ from typing import List, Optional, Sequence
 # Mirrored in dashboard/web/app.js (CATALYST_RULES). Order matters: dilutive is
 # tested first, so "offering" wins over "agreement" in a headline carrying both.
 
+# A market wrap ("12 Health Care Stocks Moving In Thursday's Session") names a
+# dozen tickers and says nothing about any of them. It is not a catalyst and
+# earns no flame; it used to read as fresh news and pass the pillar.
+ROUNDUP_WORDS = [
+    "stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
+    "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday", "moving in",
+]
 DILUTIVE_WORDS = [
     "offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
     "registered direct", "atm program", "convertible",
@@ -43,6 +50,9 @@ SOFT_WORDS = [
 ]
 
 RULES = [
+    ("roundup", "Market roundup", ROUNDUP_WORDS,
+     "A list of names, not a story about this one. Not a catalyst; find the company's "
+     "own headline."),
     ("dilutive", "Dilutive", DILUTIVE_WORDS,
      "Supply is increasing. Ross treats this as risk context, not a green light — "
      "read the size before anything else."),
@@ -184,6 +194,9 @@ def assess(symbol: str,
     if published is not None:
         read.age_min = age_minutes(published, now)
         read.flame_color = flame(read.age_min)
+    if read.grade.grade == "roundup":
+        read.flame_color = "none"            # recency of a list is not recency of news
+        read.notes.append("The only headline is a market roundup — not a catalyst for this name.")
 
     if read.has_live_takedown:
         forms = sorted({f["form"] for f in read.filings if f.get("form") in TAKEDOWN_FORMS})

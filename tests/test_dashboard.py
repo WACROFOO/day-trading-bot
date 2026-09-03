@@ -913,3 +913,17 @@ def test_ui_five_pillars_board_lists_every_desk_symbol(page):
     rows.first.click()
     page.wait_for_timeout(200)
     assert page.locator("[data-card=pillars-board] .pb-row.sel").count() == 1
+
+
+def test_ui_float_pillar_reads_the_same_on_the_board_as_in_the_verdict(page):
+    """Shares outstanding over the cap proves nothing: UNKNOWN on the board,
+    never FAIL — the verdict already said so and the board disagreed."""
+    _seek(page, 124)
+    cell = page.evaluate("""() => {
+      const row = Array.from(document.querySelectorAll('[data-card=pillars-board] .pb-row:not(.head)'))
+        .find(r => r.querySelector('b').textContent === 'EPHZ');
+      const cells = row.querySelectorAll('.pb-cell');
+      return { v: cells[3].querySelector('.v').textContent, pill: cells[3].querySelector('.pb-pill').textContent };
+    }""")
+    assert cell["pill"] == "UNKNOWN" and cell["v"].endswith("M SO"), cell
+    assert page.evaluate("typeof floatPillar") == "undefined", "module-scoped, not a global"

@@ -397,16 +397,28 @@ function pillarChecks(row, meta) {
     { k: "P", name: "price $" + T.priceMin + "–$" + T.priceMax, v: row.price, ok: row.price >= T.priceMin && row.price <= T.priceMax },
     { k: "G", name: "gain ≥ " + T.gainMinPct + "%", v: pct(row.changePct), ok: (row.changePct || 0) >= T.gainMinPct },
     { k: "R", name: "daily RVOL ≥ " + T.rvolMin + "×", v: fx(row.rvolDaily) + "×", ok: (row.rvolDaily || 0) >= T.rvolMin },
-    {
-      k: "F", name: "float < " + (T.floatMaxShares / 1e6) + "M",
-      v: quality === "verified" ? (f / 1e6).toFixed(1) + "M" : quality === "unknown" ? "unknown" : (f / 1e6).toFixed(1) + "M proxy",
-      ok: quality === "verified" && f < T.floatMaxShares,
-    },
+    floatPillar(f, quality, T.floatMaxShares),
   ];
+}
+/* The float pillar, one rule for the board, the list chips and the verdict.
+   Shares outstanding is a sound UPPER bound on float: under the cap it PROVES
+   float under the cap (pass, labelled SO); over the cap it proves nothing
+   (unknown — never a fail, never a pass). A verified figure is compared
+   directly. The board once said FAIL on a 12.2M proxy the verdict called PASS. */
+function floatPillar(f, quality, cap) {
+  const m = f != null ? (f / 1e6).toFixed(1) + "M" : null;
+  if (quality === "verified" || quality === "you verified")
+    return { k: "F", name: "float < " + (cap / 1e6) + "M", v: m + (quality === "you verified" ? " (yours)" : ""), ok: f < cap, unknown: false };
+  if (quality === "shares_outstanding_proxy" && f != null)
+    return f < cap
+      ? { k: "F", name: "float < " + (cap / 1e6) + "M — proven by shares outstanding under the cap", v: m + " SO", ok: true, unknown: false }
+      : { k: "F", name: "float < " + (cap / 1e6) + "M — shares outstanding over the cap proves nothing", v: m + " SO", ok: false, unknown: true };
+  return { k: "F", name: "float < " + (cap / 1e6) + "M", v: "unknown", ok: false, unknown: true };
 }
 function newsFor(sym, nowMs) {
   const items = (SYMS[sym] && SYMS[sym].news) || [];
-  const visible = items.filter(n => new Date(n.firstObservedAt).getTime() <= nowMs);
+  const visible = items.filter(n => new Date(n.firstObservedAt).getTime() <= nowMs &&
+                                    classifyCatalyst(n.headline, n.category).grade !== "roundup");
   if (!visible.length) return null;
   const n = visible[visible.length - 1];
   const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
@@ -685,7 +697,6 @@ function renderPillarsBoard(frame) {
     const nf = newsFor(sym, nowMs);
     checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
                   ok: !!(nf && nf.flame), unknown: !nf });
-    checks[3].unknown = meta.floatQuality === "unknown";
     checks[2].unknown = row.rvolDaily == null;
     const passed = checks.filter(c => c.ok).length;
     const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
@@ -772,6 +783,12 @@ function renderHeader(frame) {
      soft     — attention without quantifiable value (analyst, partnership)
      dilutive — supply is increasing (offering, placement, shelf) */
 const CATALYST_RULES = [
+  // A market wrap that lists twelve names "moving in Thursday's session" is
+  // not news about the company. It used to earn a red flame and a News PASS.
+  { grade: "roundup", label: "Market roundup",
+    words: ["stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
+            "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday", "moving in"],
+    note: "A list of names, not a story about this one. Not a catalyst; find the company's own headline." },
   { grade: "dilutive", label: "Dilutive",
     words: ["offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
             "registered direct", "atm program", "convertible"],
@@ -883,7 +900,10 @@ function renderQuote(frame, ctx) {
      qf.quality === "unknown" ? "down" : null);
   kv(grid, "Change", pct(chg), dirClass(chg));
   kv(grid, "52w high", fx(meta.high52w));
-  kv(grid, "Spread", row ? "$" + fx(row.spread, 3) : "—", wide ? "down" : null);
+  const spreadNow = row && row.spread != null ? row.spread
+                  : (meta.iexBid != null && meta.iexAsk != null ? meta.iexAsk - meta.iexBid : null);
+  kv(grid, "Spread", spreadNow != null ? "$" + fx(spreadNow, 3) : "—",
+     wide || (spreadNow != null && last && spreadNow / last > 0.01) ? "down" : null);
   kv(grid, "Avg volume", vol(meta.avgDailyVolume));
   kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
   kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
@@ -1690,6 +1710,7 @@ function renderWidgetIn(host, sym, meta) {
     // EMA, extended hours, their toolbar. Only the interval differs.
     new window.TradingView.widget({
       symbol: tvSymbol(sym, meta), interval: host.dataset.interval || "1", timezone: "America/New_York", theme: "dark",
+      range: host.dataset.range || "1D",
       style: "1", locale: "en", container_id: mount.id, autosize: true,
       withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
       session: "extended", details: false, hotlist: false, calendar: false,
