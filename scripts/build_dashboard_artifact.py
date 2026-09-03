@@ -23,9 +23,9 @@ def main() -> int:
     out = Path(sys.argv[1] if len(sys.argv) > 1 else "build/workstation.html")
     out.parent.mkdir(parents=True, exist_ok=True)
 
-    html = (WEB / "index.html").read_text()
-    css = (WEB / "styles.css").read_text()
-    js = (WEB / "app.js").read_text()
+    html = (WEB / "index.html").read_text(encoding="utf-8")
+    css = (WEB / "styles.css").read_text(encoding="utf-8")
+    js = (WEB / "app.js").read_text(encoding="utf-8")
     session = json.dumps(build_session(FIXTURE), default=str, separators=(",", ":"))
 
     # The artifact host supplies <!doctype>, <head> and <body>; keep only the
@@ -34,9 +34,13 @@ def main() -> int:
     title = re.search(r"<title>(.*?)</title>", html).group(1)
     body = body.replace('<script src="session.js"></script>', "").replace('<script src="app.js"></script>', "")
 
-    page = (f"<title>{title}</title>\n<style>\n{css}\n</style>\n{body}\n"
+    # The charset declaration is NOT optional here. index.html carries it in the
+    # head this builder strips, so the standalone file went out with none: a
+    # browser opening it from disk guessed windows-1252 and every en-dash, x
+    # and >= on the desk rendered as mojibake.
+    page = (f"<meta charset=\"utf-8\">\n<title>{title}</title>\n<style>\n{css}\n</style>\n{body}\n"
             f"<script>window.__SESSION__={session};</script>\n<script>\n{js}\n</script>\n")
-    out.write_text(page)
+    out.write_text(page, encoding="utf-8")
     print(f"wrote {out} ({out.stat().st_size // 1024} KB)")
     return 0
 

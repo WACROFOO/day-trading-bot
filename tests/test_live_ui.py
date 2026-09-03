@@ -125,7 +125,12 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         quote = pg.evaluate("window.__SESSION__.symbols.AAA.iexLast")
         assert quote == 4.35
         label = pg.evaluate("Array.from(document.querySelectorAll('#quoteCard .qgrid span')).map(e => e.textContent).join('|')")
-        assert "IBKR last print" in label and "IEX last print" not in label
+        assert "IBKR print" in label and "IEX print" not in label
+        # One stamp format from both code paths: the server rebuild and the
+        # streamed quote must not disagree about a trailing " ET".
+        assert " ET" not in label, label
+        stamp = pg.eval_on_selector("#quoteCard .stamp", "e => e.children.length")
+        assert stamp == 2, "price and time are separate elements, so neither wraps"
         states = pg.eval_on_selector_all(".tile-state", "els => els.map(e => e.textContent)")
         assert states and "REPLAY" not in states and set(states) <= {"LIVE", "STALE"}, states
         assert pg.locator("[data-card=pillars-board] .pb-row:not(.head)").count() == 1
@@ -141,12 +146,29 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         # the board carries the market-data columns and the desk band note
         heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
         assert heads[:7] == ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP"]
-        assert "desk admits $1–30" in pg.text_content("#pillarsBoardNote")
-        assert "pillars $2–20" in pg.text_content("#pillarsBoardNote")
+        note = pg.text_content("#pillarsBoardNote")
+        assert "$2–20" in note and "RVOL ≥5×" in note and len(note) < 70, note
+        assert "desk admits $1–30" in pg.get_attribute("#pillarsBoardNote", "title")
         # a server rebuild announces itself and the page refetches at once
         before_built = pg.evaluate("window.__SESSION__.builtAt")
         desk.refresh_session()
         pg.wait_for_function(f"window.__SESSION__.builtAt !== {before_built!r}", timeout=5000)
         assert pg.evaluate("window.DeskLive.counts.session") >= 1
+
+        # The alert sound fires on ARRIVALS, never on refreshes. Every rebuild
+        # mints fresh event ids, so keying the sound on ids turned the desk
+        # into a metronome; keying it on a ticker entering a grid does not.
+        beeps = pg.evaluate("window.__deskBeeps()")
+        for _ in range(3):
+            desk.refresh_session()
+            pg.wait_for_timeout(250)
+        assert pg.evaluate("window.__deskBeeps()") == beeps, "a refresh is not an alert"
+
+        # The timeline keeps what the rebuild window drops.
+        logged = pg.evaluate("document.querySelectorAll('[data-card=scan-running] .trow').length")
+        desk.refresh_session()
+        pg.wait_for_timeout(250)
+        assert pg.evaluate("document.querySelectorAll('[data-card=scan-running] .trow').length") >= logged
+        assert pg.locator("[data-card=scan-running] .tile-rows.timeline").count() == 1
         assert not errors, errors
         browser.close()

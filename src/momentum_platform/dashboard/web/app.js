@@ -13,11 +13,11 @@ let OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
 const PROVIDER = (S.provider && S.provider.provider) ? String(S.provider.provider).toUpperCase() : "IEX";
 const LIST_IDS = ["five_pillars_list"];
 const ALERT_TILES = {
-  running_up: { id: "running_up", title: "Running Up · live uptrend",
-                note: "Up ≥3% over the last 10 minutes, a fresh 10-minute high in the last 3, price above the 10-minute VWAP, 5-minute volume above the floor. One alert per leg. Approximation — the Warrior formula is unknown.",
+  running_up: { id: "running_up", title: "Running Up",
+                note: "≥3% in 10 min · fresh 10-min high · above VWAP · liquid. One alert per leg. Approximation.",
                 scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10"] },
-  hod_momentum: { id: "hod_momentum", title: "Small Cap · High of Day Momentum",
-                  note: "New high plus momentum — not every high-of-day print. Branch labels the float/RVOL band.",
+  hod_momentum: { id: "hod_momentum", title: "High of Day",
+                  note: "New high with momentum. The branch labels the float and RVOL band. Approximation.",
                   scanners: ["hod_momentum", "breakout_52w"] },
 };
 // Three cards, in funnel order: candidates -> acceleration -> breakout.
@@ -26,11 +26,29 @@ const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
 const state = {
   frame: 0, playing: false, speed: 4, selected: null, locked: false,
   frozen: {}, openRow: null, openAlert: null, riskDollars: "",
-  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {},
+  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {}, arrivals: new Set(),
 };
 
 /* ── formatting ─────────────────────────────────────────────────────── */
 const $ = s => document.querySelector(s);
+const SVGNS = "http://www.w3.org/2000/svg";
+const svgEl = (t, attrs) => { const n = document.createElementNS(SVGNS, t);
+  Object.keys(attrs || {}).forEach(k => n.setAttribute(k, attrs[k])); return n; };
+/* A real flame, not a rounded blob. Two paths so the hot states read as fire
+   at 9 pixels: the silhouette takes its colour from the band, the core is a
+   lighter tongue inside it. The "none" state keeps the silhouette hollow so
+   the symbol column stays aligned whether or not a headline exists. */
+function flameIcon(band, title) {
+  const svg = svgEl("svg", { viewBox: "0 0 12 14", class: "flame " + (band || "none"),
+                             role: "img", "aria-label": title || "news recency" });
+  svg.appendChild(svgEl("path", { d: "M6 0C6 3.1 1.5 4.1 1.5 8.2 1.5 11.5 3.5 14 6 14s4.5-2.5 4.5-5.8C10.5 5.6 8.8 4.6 8.4 2.3 7.8 4.1 6.9 4.6 6 5.7Z" }));
+  svg.appendChild(svgEl("path", { class: "core", d: "M6 7.4c.1 1.4-1.3 1.8-1.3 3.2 0 1 .6 1.8 1.3 1.8s1.3-.8 1.3-1.8c0-1.1-1-1.5-1.3-3.2Z" }));
+  if (title) {
+    svg.setAttribute("title", title);          // read by tooling and hover alike
+    const t = svgEl("title", {}); t.textContent = title; svg.appendChild(t);
+  }
+  return svg;
+}
 const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
 const fx = (v, d = 2) => v == null ? "—" : Number(v).toFixed(d);
 const pct = v => v == null ? "—" : (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
@@ -83,6 +101,35 @@ function activePlan(sym, t) {
   const p = (S.plans || []).filter(x => x.symbol === sym && x.armedAt <= t);
   return p.length ? p[p.length - 1] : null;
 }
+/* The alert timeline. The server rebuilds the whole session every few seconds;
+   an alert that ages out of that rebuild window used to vanish from the tile.
+   The desk keeps its own log, keyed by the event's STABLE idempotency key
+   (symbol|scanner|branch|second — the event id is a fresh uuid on every
+   rebuild), so Running Up and High of Day read as a timeline: newest first,
+   older entries retained for the session. */
+const ALERT_LOG = [];              // newest first
+const ALERT_KEYS = new Set();
+const ALERT_CAP = 300;
+function alertKey(a) {
+  return a.idempotencyKey || (a.symbol + "|" + a.scannerId + "|" + (a.branch || "-") + "|" + a.sourceTime);
+}
+function ingestAlerts(idx) {
+  const fresh = [];
+  alertsUpTo(idx).forEach(a => {
+    const k = alertKey(a);
+    if (ALERT_KEYS.has(k)) return;
+    ALERT_KEYS.add(k);
+    fresh.push(Object.assign({ _key: k, _at: Date.parse(a.sourceTime) }, a));
+  });
+  fresh.sort((x, y) => x._at - y._at);          // oldest first, so unshift leaves newest on top
+  fresh.forEach(r => ALERT_LOG.unshift(r));
+  if (ALERT_LOG.length > ALERT_CAP) ALERT_LOG.length = ALERT_CAP;
+  return fresh;
+}
+function loggedAlerts(scanners) {
+  return ALERT_LOG.filter(a => scanners.indexOf(a.scannerId) >= 0);
+}
+
 function alertsUpTo(idx) {
   const out = [];
   for (let i = 0; i <= idx && i < FRAMES.length; i++) FRAMES[i].alerts.forEach(a => out.push(a));
@@ -457,10 +504,23 @@ function cardHead(card, title, stateLabel, extras) {
 
 function flameFor(symbol, nowMs) {
   const nf = newsFor(symbol, nowMs);
-  const el_ = el("i", "flame " + (nf && nf.flame ? nf.flame : "none"));
-  el_.title = nf ? "news " + Math.round(nf.ageMin) + " min old — recency only, not quality"
-                 : "no qualifying headline in the last 24h";
-  return el_;
+  return flameIcon(nf && nf.flame ? nf.flame : "none",
+    nf ? fmtAge(nf.ageMin * 60000) + " old — recency, not quality" : "no headline in 24h");
+}
+/* Compact age: now, 45s, 12m, 5h, 3d. A timeline reads by distance from now,
+   not by absolute stamps. The duration is always measured against the DESK
+   clock — the current frame — so a recorded session shows minutes since the
+   event, not hours since yesterday. */
+function fmtAge(ms) {
+  const s = Math.round(ms / 1000);
+  if (s < 5) return "now";
+  if (s < 60) return s + "s";
+  if (s < 3600) return Math.round(s / 60) + "m";
+  if (s < 86400) return Math.round(s / 3600) + "h";
+  return Math.round(s / 86400) + "d";
+}
+function deskNow() {
+  return FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].t * 1000 : Date.now();
 }
 
 function fillListCard(card, id, frame) {
@@ -492,7 +552,7 @@ function fillListCard(card, id, frame) {
   card.appendChild(cols);
   const body = el("div", "tile-rows");
   if (!ordered.length)
-    body.appendChild(el("div", "empty", "Nothing passes price, gain and RVOL right now. An empty list is a real answer — do not widen the filter to fill it."));
+    body.appendChild(el("div", "empty", "Nothing passes price, gain and RVOL. An empty list is a real answer."));
   const prevKeys = state.prevRowKeys[id] || [];
   ordered.forEach((r, i) => {
     const sym = SYMS[r.symbol] || {};
@@ -574,36 +634,52 @@ function sessionOf(iso) {
 const BRANCH_SHORT = {
   low_float: "LF", medium_float: "MF", high_rvol: "HR", medium_rvol: "MR",
   price_20_plus: "20+", price_under_20: "<20",
+  unknown_float: "?F", uptrend_10m: "UP·10m", qualified: "QUAL",
 };
+/* The scanner id carries the branch on the squeeze scanners, where the branch
+   itself is just "qualified". Two characters of column beat fourteen. */
+const SCANNER_SHORT = { squeeze_5_in_5: "5in5", squeeze_10_in_10: "10in10",
+                        running_up: "UP·10m", running_down: "DN·10m",
+                        breakout_52w: "52wk", hod_momentum: "HOD" };
 function shortBranch(branch, scannerId) {
-  if (!branch) return scannerId.replace(/_/g, " ").replace("running ", "run ");
-  return branch.split("_").reduce((acc, _, i, parts) => acc, null) ||
-    branch.replace(/low_float/, "LF").replace(/medium_float/, "MF")
-          .replace(/high_rvol/, "HR").replace(/medium_rvol/, "MR")
-          .replace(/price_20_plus/, "20+").replace(/price_under_20/, "<20")
-          .replace(/_/g, "·");
+  // "qualified" is the squeeze scanners' only branch, so it says nothing the
+  // scanner name does not; fall back to the scanner's own short label there.
+  if (!branch || branch === "qualified") return SCANNER_SHORT[scannerId] || scannerId.replace(/_/g, "·");
+  if (BRANCH_SHORT[branch]) return BRANCH_SHORT[branch];
+  return branch.replace(/low_float/, "LF").replace(/medium_float/, "MF").replace(/unknown_float/, "?F")
+               .replace(/high_rvol/, "HR").replace(/medium_rvol/, "MR")
+               .replace(/price_20_plus/, "20+").replace(/price_under_20/, "<20")
+               .replace(/_/g, "·");
 }
 
+/* The alert tiles are timelines, drawn from the desk's own persistent log
+   rather than from the current rebuild window, so an event stays on screen
+   for the session. Newest first; a left rail ties the rows together and the
+   age column says how far back each one sits. */
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
-  const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 60);
-  cardHead(card, cfg.title, feedLabel(), [el("span", "tile-age", etTime(FRAMES[state.frame].ts))]);
-  card.appendChild(el("div", "tile-note", cfg.note));
+  const all = loggedAlerts(cfg.scanners).slice(0, 80);
+  const head = cardHead(card, cfg.title, feedLabel(), []);
+  head.insertBefore(el("span", "tile-count", String(all.length)), head.querySelector(".expand"));
+  const note = el("div", "tile-note", cfg.note);
+  note.title = cfg.note;
+  card.appendChild(note);
   const cols = el("div", "tile-cols alert-cols");
-  ["Time", "Symbol / news", "Price", "Chg", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
+  ["Time", "Age", "Symbol", "Price", "Chg", ""].forEach(c => cols.appendChild(el("span", null, c)));
   card.appendChild(cols);
-  const body = el("div", "tile-rows");
+  const body = el("div", "tile-rows timeline");
   if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
   all.forEach(a => {
-    const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : ""));
+    const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
+      (state.arrivals.has(a.symbol) ? " fresh" : ""));
     tr.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
+    tr.appendChild(el("span", "tl-age", fmtAge(deskNow() - a._at)));
     const mid = el("span", "tsym");
     mid.appendChild(el("b", null, a.symbol));
     // The alert carries the flame observed AT the alert, which is the honest
     // record even when the news feed caught up minutes later.
-    const fl = el("i", "flame " + (a.news && a.news.flame ? a.news.flame : "none"));
-    fl.title = a.news ? "news " + a.news.age_minutes + " min old at alert time" : "no headline at alert time";
-    mid.appendChild(fl);
+    mid.appendChild(flameIcon(a.news && a.news.flame ? a.news.flame : "none",
+      a.news ? "news " + a.news.age_minutes + " min old at alert" : "no headline at alert"));
     const ses = sessionOf(a.sourceTime);
     const sesEl = el("span", "pill ses " + ses.toLowerCase(), ses);
     sesEl.title = SESSION_HELP[ses];
@@ -687,9 +763,13 @@ function renderPillarsBoard(frame) {
   const nowMs = new Date(frame.ts).getTime();
   const T = S.pillarThresholds || {};
   const note = $("#pillarsBoardNote");
-  if (note) note.textContent = "pillars $" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
-    "× · float <" + (T.floatMaxShares / 1e6) + "M · news (Confirmed course) — desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
-    (T.deskBandEvidence === "operator_override" ? " (your band)" : "") + ". Float and news are columns, never gates.";
+  if (note) {
+    note.textContent = "$" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
+      "× · float <" + (T.floatMaxShares / 1e6) + "M · news";
+    note.title = "Confirmed course pillars. The desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
+      (T.deskBandEvidence === "operator_override" ? " (your band)" : "") +
+      ", so a name outside the pillar is still shown with its price cell FAIL. Float and news are columns, never gates.";
+  }
   const rows = Object.keys(SYMS).map(sym => {
     const { row, meta } = boardRow(frame, sym);
     const bars = barsUpTo(sym, frame.barIndex);
@@ -711,7 +791,7 @@ function renderPillarsBoard(frame) {
   ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "Price", "Gain", "Daily RVOL", "Float", "News", "Pillars"]
     .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
-  if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk yet.")); return; }
+  if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
   rows.forEach(r => {
     const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
     const symCell = el("b", null, r.sym);
@@ -741,7 +821,12 @@ function renderPillarsBoard(frame) {
 /* ── context panels ─────────────────────────────────────────────────── */
 function kv(host, lab, val, cls) {
   const r = el("div", "kv"); r.appendChild(el("span", "lab", lab));
-  r.appendChild(el("span", cls || null, val)); host.appendChild(r);
+  // The value span always carries `val`, which is what stops a long value
+  // wrapping onto three lines — the stylesheet had the rule, the markup never
+  // had the class, so "12.31 14:59:43 ET" broke across the card.
+  const v = el("span", "val" + (cls ? " " + cls : ""));
+  if (val instanceof Node) v.appendChild(val); else v.textContent = val;
+  r.appendChild(v); host.appendChild(r);
 }
 function symbolRow(frame, sym) {
   for (const id of LIST_IDS.concat(["top_gainers", "top_relative_volume", "top_volume_5m", "top_gappers"])) {
@@ -831,30 +916,33 @@ function renderCatalyst(host, ctx) {
   host.appendChild(el("div", "divider", "catalyst"));
   if (!nf) {
     const head = el("div", "cat-head");
-    head.appendChild(el("span", "flame-chip none", "NO FLAME · >24h"));
-    head.appendChild(el("span", "cat-quality none", "none observed"));
+    const nfc = el("span", "flame-chip none");
+    nfc.appendChild(flameIcon("none")); nfc.appendChild(el("span", null, "NO NEWS 24H"));
+    head.appendChild(nfc);
     host.appendChild(head);
     const read = el("div", "cat-read");
-    read.innerHTML = score === 4
-      ? "All four technical pillars pass with <b>no qualifying headline</b>. Confirmed course: a technical breakout can supply the justification — news is preferred, never required."
-      : "No headline and " + score + "/4 technical pillars. Nothing here to build a thesis on.";
+    read.textContent = score === 4
+      ? "4/4 technical, no headline. The course allows a technical breakout to carry it."
+      : "No headline, " + score + "/4 technical. Nothing to build a thesis on.";
     host.appendChild(read);
     return;
   }
   const cls = classifyCatalyst(nf.item.headline, nf.item.category);
   const flame = nf.flame || "none";
   const head = el("div", "cat-head");
-  head.appendChild(el("span", "flame-chip " + flame,
-    (flame === "none" ? "NO FLAME" : flame.toUpperCase()) + " · " + (FLAME_BAND[flame] || ">24h")));
+  const fc = el("span", "flame-chip " + flame);
+  fc.appendChild(flameIcon(flame));
+  fc.appendChild(el("span", null, FLAME_BAND[flame] || ">24h"));
+  fc.title = flame === "none" ? "no headline inside 24h" : "news " + (FLAME_BAND[flame] || "") + " old — recency, not quality";
+  head.appendChild(fc);
   head.appendChild(el("span", "cat-quality " + cls.grade, cls.label));
-  if (nf.item.category)
-    head.appendChild(el("span", "pill", nf.item.category.replace(/_/g, " ")));
+  if (nf.item.category) head.title = "source: " + nf.item.category.replace(/_/g, " ");
   host.appendChild(head);
   host.appendChild(el("p", "headline", nf.item.headline));
 
   // Age, drawn against the 24-hour window the flame encodes.
   const age = el("div", "cat-age");
-  age.appendChild(el("span", null, Math.round(nf.ageMin) + " min"));
+  age.appendChild(el("span", null, fmtAge(nf.ageMin * 60000)));
   const bar = el("div", "age-bar");
   const fill = el("i", null, "");
   fill.style.width = Math.max(2, Math.min(100, nf.ageMin / 1440 * 100)) + "%";
@@ -865,24 +953,36 @@ function renderCatalyst(host, ctx) {
   age.appendChild(el("span", null, "24h"));
   host.appendChild(age);
   const latency = (new Date(nf.item.firstObservedAt) - new Date(nf.item.publishedAt)) / 60000;
-  host.appendChild(el("div", "note", "published " + etClock(nf.item.publishedAt) +
-    " ET · seen by the feed " + (latency >= 1 ? Math.round(latency) + " min later" : "immediately")));
+  const pub = el("div", "note", "published " + etClock(nf.item.publishedAt));
+  pub.title = "seen by the feed " + (latency >= 1 ? Math.round(latency) + " min later" : "immediately");
+  host.appendChild(pub);
 
-  const read = el("div", "cat-read");
-  if (cls.grade === "dilutive") {
-    read.innerHTML = "<b>Dilution risk.</b> " + cls.note +
-      " A red flame on an offering is not the same signal as a red flame on a contract.";
+  const read = el("div", "cat-read " + cls.grade);
+  if (cls.grade === "roundup") {
+    read.textContent = "A list of movers, not this company's news. Not a catalyst.";
+  } else if (cls.grade === "dilutive") {
+    read.textContent = "Dilution risk. Read the size before anything else.";
   } else if (flame === "red" && score === 4) {
-    read.innerHTML = "<b>Fresh " + cls.label.toLowerCase() + " on a 4/4 candidate.</b> " + cls.note +
-      " This is what the funnel looks for — the chart still decides the entry.";
+    read.textContent = "Fresh " + cls.label.toLowerCase() + " on a 4/4 candidate. The chart decides the entry.";
   } else if (score === 4) {
-    read.innerHTML = "Four pillars pass, but the headline is <b>" + Math.round(nf.ageMin) +
-      " minutes old</b>. Older news means the crowd has already seen it; demand has to show in volume, not in the story.";
+    read.textContent = "4/4 pillars, headline " + fmtAge(nf.ageMin * 60000) +
+      " old. The crowd has seen it; demand must show in volume.";
   } else {
-    read.innerHTML = "<b>Recent news, " + score + "/4 pillars.</b> A flame is recency, never compliance — " +
-      "a flamed stock that fails the measurable pillars is still a reject.";
+    read.textContent = "Recent news, " + score + "/4 pillars. A flame is recency, not compliance.";
   }
+  read.title = cls.note;
   host.appendChild(read);
+}
+
+/* Where the float number came from, in two or three words. The long form
+   ("SEC shares outstanding (upper bound)") is kept in the tooltip and in the
+   legend; the card has one line of room. */
+function floatSourceShort(qf, meta) {
+  if (qf.quality === "you verified") return "you verified";
+  const src = meta.floatSource || "";
+  if (/IBKR/i.test(src)) return /float/i.test(src) ? "IBKR float" : "IBKR shares out";
+  if (/SEC/i.test(src)) return "SEC shares out";
+  return qf.quality === "unknown" ? "unknown" : qf.quality.replace(/_/g, " ").replace(" proxy", "");
 }
 
 function renderQuote(frame, ctx) {
@@ -895,9 +995,7 @@ function renderQuote(frame, ctx) {
   kv(grid, "Float", qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN",
      qf.quality === "unknown" ? "down" : null);
   kv(grid, "Prev close", fx(meta.prevClose));
-  kv(grid, "Float source", qf.quality === "user" ? "you verified it"
-     : meta.floatSource ? meta.floatSource.replace(/ \(.*\)/, "") : qf.quality.replace(/_/g, " ").replace(" proxy", ""),
-     qf.quality === "unknown" ? "down" : null);
+  kv(grid, "Float from", floatSourceShort(qf, meta), qf.quality === "unknown" ? "down" : null);
   kv(grid, "Change", pct(chg), dirClass(chg));
   kv(grid, "52w high", fx(meta.high52w));
   const spreadNow = row && row.spread != null ? row.spread
@@ -908,13 +1006,21 @@ function renderQuote(frame, ctx) {
   kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
   kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
   if (meta.iexLast != null) {
-    // What the feed has actually printed most recently — shown so a thin
-    // premarket reads as "IEX last print 04:12" rather than as silence. The
-    // label names the provider: IEX is one venue, IBKR is the consolidated tape.
+    // The feed's most recent print, so a thin premarket reads as a stamped
+    // price rather than as silence. Price and stamp are separate elements:
+    // the whole desk is on the ET clock, the header says so, and appending
+    // " ET" here only on the rebuild path made the suffix blink on and off
+    // between stream updates.
     const src = (meta.lastSource || "iex").toUpperCase();
-    kv(grid, src + " last print", fx(meta.iexLast) + (meta.iexLastTime ? "  " + meta.iexLastTime : ""));
+    const stamp = el("span", "stamp");
+    stamp.appendChild(el("b", null, fx(meta.iexLast)));
+    if (meta.iexLastTime) {
+      stamp.appendChild(document.createTextNode(" "));
+      stamp.appendChild(el("i", null, meta.iexLastTime));
+    }
+    kv(grid, src + " print", stamp);
     if (meta.iexBid != null && meta.iexAsk != null)
-      kv(grid, src + " quote", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
+      kv(grid, src + " bid/ask", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
   }
   q.appendChild(grid);
   renderCatalyst(q, ctx);
@@ -1203,27 +1309,38 @@ function unlockAudio() {
     if (audioCtx.state === "suspended") audioCtx.resume();
   } catch (e) {}
 }
-/* New alerts on a live desk: the session refresh compares event ids with the
-   last one and beeps once at the highest severity, flashing the tile. */
-let SEEN_ALERTS = null;
-function noteNewAlerts() {
-  const ids = new Set();
-  let top = null;
-  const rank = { critical: 3, high: 2, medium: 1, low: 0 };
-  FRAMES.forEach(f => f.alerts.forEach(a => {
-    ids.add(a.eventId);
-    if (SEEN_ALERTS && !SEEN_ALERTS.has(a.eventId) && (!top || rank[a.severity] > rank[top.severity])) top = a;
-  }));
-  if (SEEN_ALERTS && top) {
-    beep(top.severity);
-    const card = document.querySelector('[data-card="scan-running"], [data-card="scan-hod"]');
-    document.querySelectorAll(".card[data-kind=alert]").forEach(c => { c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash"); });
-    if (card) setTimeout(() => card.classList.remove("flash"), 1600);
-  }
-  SEEN_ALERTS = ids;
-  return top;
+/* Audio fires on ARRIVALS, not on refreshes.
+   The session is rebuilt every few seconds and every rebuild mints fresh event
+   ids, so keying the alert sound on ids meant a beep every three seconds — a
+   metronome, not an alert. A ticker earns exactly one sound: the moment it
+   first appears in the top-gainers list or in the Running Up timeline. It
+   never sounds again for that grid, however many times it re-ranks. */
+const ANNOUNCED = new Set();
+let AUDIO_SEEDED = false;
+function membership(frame) {
+  const keys = [];
+  (frame.lists[LIST_IDS[0]] || []).forEach(row => keys.push("gainers:" + row[COL.symbol]));
+  loggedAlerts(ALERT_TILES.running_up.scanners).forEach(a => keys.push("running:" + a.symbol));
+  return keys;
 }
+function noteArrivals(frame) {
+  const keys = membership(frame);
+  const fresh = keys.filter(k => !ANNOUNCED.has(k));
+  keys.forEach(k => ANNOUNCED.add(k));
+  if (!AUDIO_SEEDED) { AUDIO_SEEDED = true; return []; }   // the first paint is not news
+  if (!fresh.length) return [];
+  state.arrivals = new Set(fresh.map(k => k.split(":")[1]));
+  beep(fresh.some(k => k.startsWith("gainers:")) ? "high" : "medium");
+  const which = fresh.some(k => k.startsWith("gainers:")) ? "scan-pillars" : "scan-running";
+  const card = document.querySelector('[data-card="' + which + '"]');
+  if (card) { card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+              setTimeout(() => card.classList.remove("flash"), 1700); }
+  return fresh;
+}
+let BEEPS = 0;
+if (typeof window !== "undefined") window.__deskBeeps = () => BEEPS;   // audio test hook
 function beep(severity) {
+  BEEPS++;
   if (!state.sound) return;
   try {
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
@@ -1606,7 +1723,6 @@ function refreshSession() {
     state.frame = FRAMES.length - 1;
     PENDING_RANGES = null; SNAP_LIVE = true;   // chart objects persist: keep the zoom, show the newest bar
     render();
-    noteNewAlerts();
   }).catch(() => {}).then(() => { refreshing = false; });
 }
 
@@ -1748,11 +1864,18 @@ function renderScreener(data) {
                              : src === "ibkr" ? "IBKR · live scans" : "paused";
              tag.className = "tag " + (src === "yahoo-delayed" ? "yahoo" : src === "iex" || src === "ibkr" ? "iex" : ""); }
   const note = document.getElementById("screenerNote");
-  if (note && data) note.textContent = (data.notes && data.notes.length) ? data.notes.join(" ")
-    : "Every name $" + data.band[0] + "–" + data.band[1] + " up ≥" + data.min_gain + "% in the current session. Click a row to put it on the desk.";
+  if (note && data) {
+    // The provider's notes are a paragraph — the scan codes, the row caps, the
+    // excluded funds. The card has one line: show the band, keep the rest in
+    // the tooltip so nothing honest is lost and nothing verbose is on screen.
+    note.textContent = "$" + data.band[0] + "–" + data.band[1] + " · up ≥" + data.min_gain +
+      "% · click a row to add it";
+    note.title = (data.notes && data.notes.length) ? data.notes.join(" ")
+      : "Every name in the band moving in the current session.";
+  }
   host.textContent = "";
   const rows = (data && data.rows) || [];
-  if (!rows.length) { host.appendChild(el("div", "empty", "Nothing in the band is moving right now. That is a real answer.")); return; }
+  if (!rows.length) { host.appendChild(el("div", "empty", "Nothing in the band is moving.")); return; }
   rows.forEach(r => {
     const onDesk = !!SYMS[r.symbol];
     const tr = el("div", "trow screener-row" + (onDesk ? " ondesk" : "") + (state.selected === r.symbol ? " sel" : ""));
@@ -1786,6 +1909,8 @@ function render() {
   }
   state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);
   const frame = FRAMES[state.frame];
+  ingestAlerts(state.frame);            // the timeline keeps what the rebuild drops
+  noteArrivals(frame);                  // and only an arrival makes a sound
   if (!state.selected) state.selected = openingSymbol();
   $("#clockET").textContent = etClock(frame.ts);
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
@@ -1854,7 +1979,6 @@ function init() {
     $("#btnSound").setAttribute("aria-pressed", "true");
     $("#btnSound").textContent = "🔔 Alerts";
     ["pointerdown", "keydown"].forEach(ev => document.addEventListener(ev, unlockAudio, { once: true }));
-    noteNewAlerts();
     $("#frameCounter").hidden = true;
     $("#feedText").textContent = "LIVE";
     $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");

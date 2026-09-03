@@ -371,8 +371,13 @@ def test_ui_flames_on_every_scanner_row(page):
     _seek(page, 130)
     assert page.locator("[data-card=scan-pillars] .trow .flame").count() >= 1
     assert page.locator("[data-card=scan-hod] .trow .flame").count() >= 1
-    title = page.locator("[data-card=scan-pillars] .trow .flame").first.get_attribute("title")
-    assert "recency" in title or "no qualifying headline" in title
+    flame = page.locator("[data-card=scan-pillars] .trow .flame").first
+    label = flame.get_attribute("aria-label") or ""
+    assert "recency" in label or "no headline" in label
+    # A flame, not a rounded blob: an SVG silhouette with a lighter core.
+    assert page.eval_on_selector("[data-card=scan-pillars] .trow .flame",
+                                 "e => e.tagName.toLowerCase()") == "svg"
+    assert page.locator("[data-card=scan-pillars] .trow .flame path").count() >= 1
 
 
 def test_ui_gutters_resize_panes_and_persist(page):
@@ -447,12 +452,13 @@ def test_ui_catalyst_card_grades_the_news(page):
             rows.nth(i).click()
             break
     page.wait_for_timeout(300)
-    chip = page.locator(".flame-chip").inner_text()
-    assert chip.startswith("RED") and "0–2h" in chip
+    assert "0–2h" in page.locator(".flame-chip").inner_text()
+    assert page.locator(".flame-chip .flame.red").count() == 1
+    assert "0–2h" in (page.locator(".flame-chip").get_attribute("title") or "")
     assert page.locator(".cat-quality").inner_text() == "Hard catalyst"
     assert page.locator(".age-bar i").count() == 1
     read = page.locator(".cat-read").inner_text()
-    assert "4/4 candidate" in read and "chart still decides" in read
+    assert "4/4 candidate" in read and "chart decides" in read
 
 
 def test_ui_catalyst_flags_dilution(page):
@@ -839,8 +845,15 @@ def test_tradingview_widget_card_exists_and_is_labelled_as_theirs():
 def test_quote_card_shows_the_iex_last_print():
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
-    assert 'src + " last print"' in app and 'meta.lastSource || "iex"' in app, \
+    assert 'src + " print"' in app and 'meta.lastSource || "iex"' in app, \
         "the label names the provider that printed: IEX is one venue, IBKR the consolidated tape"
+    # The stamp is a separate element and carries no " ET" suffix — the header
+    # already states the clock, and appending it on one code path only made the
+    # suffix blink on and off between a rebuild and a streamed quote.
+    assert 'el("span", "stamp")' in app
+    sb = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+          / "dashboard" / "session_builder.py").read_text()
+    assert '%H:%M:%S ET' not in sb and '"%H:%M:%S"' in sb
 
 
 def test_live_holder_merges_incrementally_and_never_serialises_records(monkeypatch):
@@ -927,3 +940,20 @@ def test_ui_float_pillar_reads_the_same_on_the_board_as_in_the_verdict(page):
     }""")
     assert cell["pill"] == "UNKNOWN" and cell["v"].endswith("M SO"), cell
     assert page.evaluate("typeof floatPillar") == "undefined", "module-scoped, not a global"
+
+
+def test_artifact_build_declares_its_charset():
+    """The builder strips index.html's head, which carries the charset. Without
+    one, a browser opening the standalone file from disk guesses windows-1252
+    and every en-dash, × and ≥ on the desk renders as mojibake."""
+    src = (Path(__file__).resolve().parents[1] / "scripts" / "build_dashboard_artifact.py").read_text()
+    assert 'charset=\\"utf-8\\"' in src or "charset=\\'utf-8\\'" in src
+    assert 'encoding="utf-8"' in src, "read and write are pinned to UTF-8, not the locale"
+
+
+def test_ui_non_ascii_survives_the_artifact_build(page):
+    """The band separator, the multiplication sign and the >= sign are the ones
+    that break first when the charset is missing."""
+    note = page.text_content("#pillarsBoardNote")
+    assert "–" in note and "≥" in note and "×" in note, note
+    assert "â" not in note, "mojibake: the page is being decoded as windows-1252"

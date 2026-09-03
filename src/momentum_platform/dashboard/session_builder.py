@@ -57,8 +57,8 @@ ROW_COLUMNS = [
 ]
 
 LIST_META = {
-    "five_pillars_list": {"title": "Top gainers · Five Pillars filter", "metric": "Daily RVOL",
-                          "note": "Price, gain and RVOL all pass. Float is a column — verify it yourself before sizing. News is a column too, never a gate."},
+    "five_pillars_list": {"title": "Top gainers · 5 pillars", "metric": "Daily RVOL",
+                          "note": "Price, gain and RVOL pass. Float and news are columns, never gates."},
     "top_gappers": {"title": "Top Gappers", "metric": "Gap %",
                     "note": "Freezes at 09:30 ET, matching the captured platform."},
     "top_gainers": {"title": "Top Gainers", "metric": "Change from close %",
@@ -109,13 +109,19 @@ def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
 
 
 def _et_clock(ts) -> "str | None":
-    """'2026-09-02T08:12:33.12Z' -> '04:12:33 ET' for the quote card."""
+    """'2026-09-02T08:12:33.12Z' -> '04:12:33' for the quote card.
+
+    No ' ET' suffix: the whole desk runs on the ET clock and the header says
+    so. The suffix was appended only on this path, so between a server rebuild
+    and a streamed quote the same field alternated between '14:59:43 ET' and
+    '14:59:43' — the suffix blinked on and off in the card.
+    """
     if not ts:
         return None
     try:
         from zoneinfo import ZoneInfo
         d = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
-        return d.astimezone(ZoneInfo("America/New_York")).strftime("%H:%M:%S ET")
+        return d.astimezone(ZoneInfo("America/New_York")).strftime("%H:%M:%S")
     except (ValueError, TypeError):
         return None
 
