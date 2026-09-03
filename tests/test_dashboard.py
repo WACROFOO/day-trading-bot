@@ -814,7 +814,8 @@ def test_tradingview_widget_card_exists_and_is_labelled_as_theirs():
 def test_quote_card_shows_the_iex_last_print():
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
-    assert '"IEX last print"' in app
+    assert 'src + " last print"' in app and 'meta.lastSource || "iex"' in app, \
+        "the label names the provider that printed: IEX is one venue, IBKR the consolidated tape"
 
 
 def test_live_holder_merges_incrementally_and_never_serialises_records(monkeypatch):

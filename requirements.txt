@@ -5,3 +5,4 @@ streamlit>=1.37
 plotly
 pytest
 tzdata; platform_system == "Windows"
+ib_async==2.1.0

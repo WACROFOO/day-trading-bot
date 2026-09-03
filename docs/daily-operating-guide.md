@@ -94,6 +94,53 @@ IEX is real-time — there is no 15-minute delay on this feed. It is one venue,
 so absolute volume is understated; the relative-volume ratios compare IEX to
 IEX and hold.
 
+### Live on IBKR — the real tape, read-only
+
+This is the mode to use once TWS runs on your Mac. It replaces the single-venue
+IEX picture with the consolidated tape and replaces "rebuild every 20 s" with a
+stream: five-second bars and quotes reach the page as they happen.
+
+```
+cd ~/day-trading-bot
+bash scripts/start.sh --ibkr
+```
+
+or, to start from names you already chose:
+
+```
+bash scripts/start.sh --ibkr CHPT,AEHL
+```
+
+What has to be true on your machine:
+
+- TWS is running and logged in. Edit > Global Configuration > API > Settings:
+  "Enable ActiveX and Socket Clients" ON, "Read-Only API" ON, socket port 7496.
+- Your account has real-time NASDAQ data (Network C/UTP). If TWS only has
+  delayed data the desk refuses it and says DELAYED; it never shows a delayed
+  print under a LIVE badge.
+- `python3 scripts/ibkr_preflight.py` prints "OK — live, read-only". The
+  launcher runs it for you and explains each failure.
+
+What the desk does in this mode:
+
+- Client 27 streams the desk symbols (a quote line and a five-second bar line
+  each, up to 25 symbols); client 28 runs ten NASDAQ scanner queries every two
+  minutes and puts new runners in the band on the desk. Neither client can
+  place an order: the connection is opened read-only and the code has no order
+  method (a test fails if one appears).
+- The ten-second pane is built from real five-second bars; a candle exists only
+  when both halves arrived. Minutes are the sum of their ten-second candles.
+- The header badge reads LIVE, STALE (no bar for 20 s in regular hours, 60 s
+  extended), DELAYED or OFFLINE. The desk reconnects on its own and resubscribes
+  once, and the badge shows the generation and reconnect count.
+- There is no replay transport on a live desk. The page sits on the live edge
+  and updates in place; it does not reload, so your zoom stays where you put it.
+- The screener card says "Union of 10/10 NASDAQ scans … not an exhaustive
+  list". That is what a scanner union is. The chart still defines the setup.
+- Headlines still come from Alpaca's free news endpoint when your keys are in
+  `.env`; float is still the SEC shares-outstanding upper bound. IBKR has
+  neither for free.
+
 ### Premarket, honestly
 
 IEX is one venue. Before roughly 07:00 ET a $2–20 microcap may have printed

@@ -161,6 +161,7 @@ def build_session_from_records(
                 "iexLast": rec.get("iex_last_price"),
                 "iexLastTime": _et_clock(rec.get("iex_last_ts")),
                 "iexBid": rec.get("iex_bid"), "iexAsk": rec.get("iex_ask"),
+                "lastSource": rec.get("last_source", "iex"),
                 "dailyBars": rec.get("daily_bars", []),
                 "news": [],
             }

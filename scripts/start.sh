@@ -5,6 +5,8 @@
 #   bash scripts/start.sh AAPL,TSLA      # live, these symbols
 #   bash scripts/start.sh --scan         # live, today's movers
 #   bash scripts/start.sh --replay       # recorded session, no network needed
+#   bash scripts/start.sh --ibkr         # live IBKR data over TWS, scanner picks the desk
+#   bash scripts/start.sh --ibkr CHPT,AEHL   # live IBKR data, these symbols to start
 #
 # Checks Alpaca first. If the live feed is not available it says exactly why
 # and opens the recorded session instead, so the desk always comes up.
@@ -23,6 +25,7 @@ MODE="auto"; SYMBOLS=""
 case "${1:-}" in
   --replay) MODE="replay" ;;
   --scan)   MODE="scan" ;;
+  --ibkr)   MODE="ibkr"; SYMBOLS="${2:-}" ;;
   "")       : ;;
   -*)       say "unknown option: $1"; exit 2 ;;
   *)        MODE="symbols"; SYMBOLS="$1" ;;
@@ -62,6 +65,35 @@ if [ "$PORT" != 8787 ]; then
   note "something else is on 8787, most likely a desk you already started"
 else
   good "port 8787 is free"
+fi
+
+# ----------------------------------------------------------------- ibkr ----
+if [ "$MODE" = "ibkr" ]; then
+  head2 "checking TWS (Interactive Brokers)"
+  PREFLIGHT=$($PY scripts/ibkr_preflight.py 2>&1); IBKR=$?
+  printf '%s\n' "$PREFLIGHT" | sed 's/^/       /'
+  case $IBKR in
+    0) good "IBKR live data confirmed — read-only" ;;
+    1) bad  "ib_async is missing";       note "run:  $PY -m pip install ib_async==2.1.0" ;;
+    2) bad  "TWS is not reachable";      note "start TWS, enable the read-only API on port 7496, then rerun" ;;
+    3) bad  "IBKR data is DELAYED";      note "the desk refuses delayed data; subscribe to NASDAQ real-time" ;;
+    4) warn "no real-time bars arrived"; note "outside 04:00-20:00 ET this is normal; the desk will still connect" ;;
+    5) warn "the scanner answered with nothing"; note "the desk starts with the symbols you gave, if any" ;;
+    *) bad  "preflight failed: $PREFLIGHT" ;;
+  esac
+  if [ $IBKR -eq 0 ] || [ $IBKR -ge 4 ]; then
+    head2 "starting"
+    say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
+    say "  ${D}live IBKR feed over TWS, read-only — ${SYMBOLS:-scanner picks the desk}${O}"
+    say ""
+    say "  ${B}This window is now busy running the desk.${O}  Ctrl-C stops it."
+    say ""
+    # shellcheck disable=SC2086
+    PYTHONPATH=src exec $PY -m momentum_platform.dashboard.server \
+      --host 127.0.0.1 --port "$PORT" --ibkr "$SYMBOLS" ${DESK_SERVER_ARGS:-}
+  fi
+  bad "not starting the IBKR desk; fix the point above and run:  bash scripts/start.sh --ibkr"
+  exit 1
 fi
 
 # --------------------------------------------------------------- alpaca ----

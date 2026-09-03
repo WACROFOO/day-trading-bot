@@ -37,6 +37,21 @@ Invariants enforced by tests, mapped to the audit's rules:
 | Client ids 27 (desk) / 28 (scanner) | `IbkrStream(client_id=27)` default; the scanner process uses 28 (wiring step). |
 | Line limits | `max_lines=50`, two lines per symbol, refusal is logged in `Health.messages`, never silent. |
 
+## Wired (second round, same day)
+
+The user asked to move to live IBKR data without waiting for the uncommitted
+diff, so the wiring below was executed in this repository:
+
+| File | Change |
+|---|---|
+| `src/momentum_platform/datasources/ibkr_scanner.py` | 10-query NASDAQ scanner union (5 codes × NMS/SCM), live snapshot rows, reference / daily / minute records, SEC float bound, Alpaca headlines. |
+| `src/momentum_platform/dashboard/ibkr_desk.py` | One worker thread owning both TWS connections (27 desk, 28 scanner); pumps the ib_async loop, ticks health every second, rebuilds the session in memory every 10 s, scans every 120 s, queues cross-thread symbol adds. Duck-types `LiveSession`. |
+| `src/momentum_platform/dashboard/server.py` | `--ibkr [SYMBOLS]`, `--ibkr-rescan`; `GET /api/v1/stream` (SSE); `provider` block in `/api/v1/health`; honest fallback to the recorded session when TWS is unreachable. |
+| `src/momentum_platform/dashboard/web/app.js`, `index.html` | `live.js` loaded; live desks hide the replay transport; `streamFollow()` draws `bar10s`/`bar1m`/`quote` events in place, swaps the session in place on rebuild (no reload), provider badge LIVE/STALE/DELAYED/OFFLINE; provider-named "last print". |
+| `src/momentum_platform/datasources/screener.py` | IEX rows whose last print predates the session are dropped (the "+30 % as of 307 h" rows). |
+| `scripts/ibkr_preflight.py`, `scripts/start.sh --ibkr`, `.env.example`, `requirements.txt` | Preflight with exit codes; launcher mode; `IBKR_HOST/PORT`; `ib_async==2.1.0`. |
+| `tests/fake_ibkr.py`, `tests/test_ibkr_desk.py`, `tests/test_live_ui.py` | Offline fake TWS; desk/scanner tests; end-to-end page test through the real server (Playwright). |
+
 ## Not done here, on purpose
 
 - **No edits to `server.py`, `session_builder.py`, `app.js`, `index.html`,

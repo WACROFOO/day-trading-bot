@@ -22,7 +22,8 @@ from __future__ import annotations
 from datetime import datetime, timezone
 from typing import List, Optional
 
-from .alpaca_source import AlpacaClient, AlpacaError, exchange_map, momentum_universe
+from .alpaca_source import (AlpacaClient, AlpacaError, exchange_map, momentum_universe,
+                            session_day, session_window)
 
 
 def _pool(client: AlpacaClient, min_price: float, max_price: float,
@@ -66,6 +67,7 @@ def build_screener(client: AlpacaClient, yahoo=None, min_price: float = 2.0,
     today = datetime.now(timezone.utc).astimezone().date().isoformat()
     result = {"rows": [], "source": "iex", "asof": datetime.now(timezone.utc).isoformat(timespec="seconds"),
               "notes": [], "band": [min_price, max_price], "min_gain": min_gain}
+    session_start = session_window(session_day())[0]
     pool = _pool(client, min_price, max_price, pool_limit, say)
     by_sym = {r["symbol"]: r for r in pool}
 
@@ -92,6 +94,11 @@ def build_screener(client: AlpacaClient, yahoo=None, min_price: float = 2.0,
             if not price or not pc:
                 continue
             chg, src, asof, session = (price / pc - 1) * 100, "iex", base.get("iex_time"), None
+            # A print from a previous session is not a move in this one. A
+            # name whose last IEX trade was 307 hours ago was listed at +30%
+            # because its stale print was compared with a newer close.
+            if not asof or str(asof) < session_start:
+                continue
         if not (min_price <= price <= max_price) or chg < min_gain:
             continue
         rows.append({

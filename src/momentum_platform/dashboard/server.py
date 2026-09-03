@@ -257,6 +257,9 @@ _session = _session_from_source
 
 def make_handler(fixture, live: "LiveSession | None" = None, screener: "ScreenerLoop | None" = None):
     holder = live or LiveSession(fixture)
+    if screener is None and getattr(holder, "screener", None) is not None:
+        screener = holder.screener
+    hub = getattr(holder, "hub", None)              # IBKR desk: server-sent events
     class Handler(BaseHTTPRequestHandler):
         server_version = "MomentumWorkstation/0.1"
 
@@ -285,12 +288,27 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 body = b"window.__SESSION__=" + json.dumps(public, default=str).encode() + b";"
                 return self._send(body, "application/javascript")
             if path == "/api/v1/health":
-                return self._json({"status": "ok",
-                                   "mode": "live" if session.get("live") else "replay",
-                                   "fixture": Path(str(fixture)).name,
-                                   "builtAt": session.get("builtAt"),
-                                   "refreshSeconds": session.get("refreshSeconds", 0),
-                                   "symbols": list(session.get("symbols", {}).keys())})
+                payload = {"status": "ok",
+                           "mode": "live" if session.get("live") else "replay",
+                           "fixture": Path(str(fixture)).name,
+                           "builtAt": session.get("builtAt"),
+                           "refreshSeconds": session.get("refreshSeconds", 0),
+                           "streaming": bool(hub is not None),
+                           "symbols": list(session.get("symbols", {}).keys())}
+                if hasattr(holder, "health"):
+                    payload["provider"] = holder.health()
+                return self._json(payload)
+            if path == "/api/v1/stream":
+                if hub is None:
+                    return self._json({"error": "no live stream on this session; start with --ibkr"}, 404)
+                from .stream import SSE_HEADERS, parse_last_event_id, serve_sse
+                self.send_response(200)
+                for k, v in SSE_HEADERS:
+                    self.send_header(k, v)
+                self.end_headers()
+                serve_sse(hub, self.wfile, parse_last_event_id(self.headers.get("Last-Event-ID")),
+                          flush=self.wfile.flush)
+                return None
             if path == "/api/v1/data-health":
                 return self._json({
                     "provider": "replay-fixture", "connectionState": "replay",
@@ -314,7 +332,8 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                                        "note": "the recorded session cannot take new symbols"}, 400)
                 added = holder.add_symbols(wanted)
                 return self._json({"added": added, "symbols": holder.symbols,
-                                   "note": "joins the desk on the next refresh" if added else
+                                   "note": ("joins the desk in a few seconds" if hub is not None else
+                                            "joins the desk on the next refresh") if added else
                                    "already on the desk, or the desk is full"})
             if path == "/api/v1/replay/session":
                 return self._json({k: v for k, v in session.items() if not k.startswith("_")})
@@ -348,6 +367,12 @@ def main(argv=None) -> int:
                     help="with --alpaca: refresh the whole-band screener this often (0 = off)")
     ap.add_argument("--no-yahoo", action="store_true",
                     help="screener uses IEX snapshots only, never Yahoo delayed quotes")
+    ap.add_argument("--ibkr", metavar="SYMBOLS", nargs="?", const="",
+                    help="live IBKR desk over TWS (read-only). Optional comma-separated symbols; "
+                         "with none, the scanner union picks today's runners. Needs TWS on "
+                         "IBKR_HOST:IBKR_PORT (default 127.0.0.1:7496).")
+    ap.add_argument("--ibkr-rescan", type=int, default=120, metavar="SECONDS",
+                    help="with --ibkr: run the NASDAQ scanner union this often (0 = off)")
     ap.add_argument("--port", type=int, default=8787)
     ap.add_argument("--host", default="127.0.0.1")
     args = ap.parse_args(argv)
@@ -356,8 +381,14 @@ def main(argv=None) -> int:
               else f"live:{args.live}" if args.live
               else args.fixture)
     refresh = args.refresh if args.refresh is not None else (20 if args.alpaca else 0)
-    live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
     screener = None
+    live = None
+    if args.ibkr is not None:
+        live = _ibkr_desk(args, refresh if args.refresh is not None else 10)
+    if live is None:
+        live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
+    else:
+        source = live.source
     if args.alpaca and args.screener_every > 0:
         import os
         use_yahoo = (not args.no_yahoo) and os.environ.get("PREMARKET_QUOTES", "yahoo").lower() != "off"
@@ -386,8 +417,43 @@ def main(argv=None) -> int:
         print(f"SCREENER — the whole band, every {args.screener_every}s, "
               + ("Yahoo delayed quotes with IEX fallback" if screener.use_yahoo else "IEX only")
               + ". Click a row to put it on the desk.")
+    if getattr(live, "hub", None) is not None:
+        h = live.health()
+        print(f"IBKR — TWS read-only, client {h.get('clientId')} (desk) / {h.get('scannerClientId')} "
+              f"(scanner), market data type {h.get('marketDataType')}, feed {h.get('state')}.")
+        print(f"STREAMING — candles, quotes and health reach the page as they happen; the session "
+              f"rebuilds every {live.rebuild}s and the scanner union runs every {live.rescan}s.")
     ThreadingHTTPServer((args.host, args.port), make_handler(source, live, screener)).serve_forever()
     return 0
+
+
+def _ibkr_desk(args, rebuild: int):
+    """Start the IBKR desk, or say exactly why it could not and return None
+    so the caller falls back to the recorded session — visibly."""
+    import os
+    from .ibkr_desk import IbkrDesk
+    from ..datasources.ibkr_scanner import IbkrError
+    from ..scanners.five_pillars import PRICE_MAX, PRICE_MIN
+    symbols = [s for s in (args.ibkr or "").split(",") if s.strip()]
+    desk = IbkrDesk(symbols, host=os.environ.get("IBKR_HOST", "127.0.0.1"),
+                    port=int(os.environ.get("IBKR_PORT", "7496")),
+                    rebuild=rebuild, rescan=args.ibkr_rescan,
+                    min_price=PRICE_MIN, max_price=PRICE_MAX)
+    try:
+        desk.start()
+        return desk
+    except IbkrError as exc:
+        print("\nCould not start the IBKR desk:")
+        print("  " + str(exc).replace("\n", "\n  "))
+        print("\nOpening the recorded session instead so the desk still comes up.")
+        print("Fix the cause above and restart to get live data.\n")
+        desk.stop()
+        return None
+    except Exception as exc:
+        print(f"\nCould not start the IBKR desk: {exc!r}")
+        print("Opening the recorded session instead. Run: python3 scripts/ibkr_preflight.py\n")
+        desk.stop()
+        return None
 
 
 if __name__ == "__main__":

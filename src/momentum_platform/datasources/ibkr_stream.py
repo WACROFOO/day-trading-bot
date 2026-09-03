@@ -155,6 +155,18 @@ class BarStore:
                     done.add(m)
         return out
 
+    def candles_10s(self, symbol: str) -> List[Bar]:
+        """Every complete ten-second candle in the store (both halves present),
+        oldest first — the chart's history, independent of the emit-once set."""
+        book = self._bars.get(symbol, {})
+        out = []
+        for start in sorted({k // 10 * 10 for k in book}):
+            if start in book and start + 5 in book:
+                bar = self._aggregate(symbol, start, 10)
+                if bar is not None:
+                    out.append(bar)
+        return out
+
     def forming_1m(self, symbol: str) -> Optional[Bar]:
         """The current, still-open minute — for the chart's last candle."""
         book = self._bars.get(symbol, {})

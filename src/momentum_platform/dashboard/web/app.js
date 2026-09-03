@@ -9,7 +9,8 @@ if (!S) { document.body.innerHTML = "<p style='padding:20px'>session.js failed t
 const COL = {};
 S.rowColumns.forEach((c, i) => COL[c] = i);
 const SYMS = S.symbols, FRAMES = S.frames, BARS = S.bars;
-const OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+let OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+const PROVIDER = (S.provider && S.provider.provider) ? String(S.provider.provider).toUpperCase() : "IEX";
 const LIST_IDS = ["five_pillars_list"];
 const ALERT_TILES = {
   running_up: { id: "running_up", title: "Running Up · live uptrend",
@@ -40,7 +41,13 @@ const etClock = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "Am
 const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]); return o; };
 
 /* ── derived series ─────────────────────────────────────────────────── */
-function barsUpTo(sym, idx) { const b = BARS[sym] || []; return b.slice(0, Math.min(idx + 1, b.length)); }
+function barsUpTo(sym, idx) {
+  const b = BARS[sym] || [];
+  // On a streaming desk the live edge is "everything the store has": a minute
+  // that closed since the last server rebuild is already in BARS via the stream.
+  if (S.streaming && idx >= FRAMES.length - 1) return b;
+  return b.slice(0, Math.min(idx + 1, b.length));
+}
 /* Aggregate 1-minute bars into n-minute candles ON THE CLOCK. Grouping every n
    bars by index started 5-minute candles at 09:04 when the first print landed
    there, and the axis labelled 09:04 / 12:01 / 15:03 — no platform draws a
@@ -783,11 +790,13 @@ function renderQuote(frame, ctx) {
   kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
   kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
   if (meta.iexLast != null) {
-    // What the single venue has actually printed most recently — shown so a
-    // thin premarket reads as "IEX last print 04:12" rather than as silence.
-    kv(grid, "IEX last print", fx(meta.iexLast) + (meta.iexLastTime ? "  " + meta.iexLastTime : ""));
+    // What the feed has actually printed most recently — shown so a thin
+    // premarket reads as "IEX last print 04:12" rather than as silence. The
+    // label names the provider: IEX is one venue, IBKR is the consolidated tape.
+    const src = (meta.lastSource || "iex").toUpperCase();
+    kv(grid, src + " last print", fx(meta.iexLast) + (meta.iexLastTime ? "  " + meta.iexLastTime : ""));
     if (meta.iexBid != null && meta.iexAsk != null)
-      kv(grid, "IEX quote", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
+      kv(grid, src + " quote", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
   }
   q.appendChild(grid);
   renderCatalyst(q, ctx);
@@ -1008,7 +1017,8 @@ function bars10sUpTo(sym, frame) {
   // sparse outside the open, and "the last 180 bars" spanned an hour and read
   // as scattered dots. A time window shows density as it really is; an empty
   // bucket stays absent rather than being drawn flat.
-  const limit = frame.t + 60, floor = limit - 30 * 60;
+  const atEdge = S.streaming && state.frame >= FRAMES.length - 1;
+  const limit = atEdge ? Math.floor(Date.now() / 1000) + 60 : frame.t + 60, floor = limit - 30 * 60;
   let hi = all.length, lo = 0;
   while (lo < hi) { const mid = (lo + hi) >> 1; if (all[mid][0] < limit) lo = mid + 1; else hi = mid; }
   let start = 0, end = lo;
@@ -1031,7 +1041,7 @@ function renderCharts(frame) {
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
     PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
-    if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second prints on IEX in the last 30 minutes — thin tape, not a broken chart.");
+    if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
     PANES.d.note("10-second bars need tick or sub-minute data. This feed publishes " +
@@ -1399,6 +1409,89 @@ function effectiveFloat(symbol, meta) {
    and one who scrubbed back to study a pullback is not yanked forward. */
 const LIVE_KEY = "desk.live.restore";
 let PENDING_RANGES = null;
+
+/* Provider health -> the header badge. LIVE is the only green; STALE, DELAYED
+   and OFFLINE are named as such, never dressed as live. */
+function setFeedBadge(h) {
+  if (!h) return;
+  const st = String(h.state || "OFFLINE").toUpperCase();
+  const cls = st === "LIVE" ? "live" : st === "STALE" ? "stale" : "offline";
+  $("#feedText").textContent = st;
+  $("#feedDot").className = "dot " + cls;
+  const bits = [String(h.provider || PROVIDER).toUpperCase(), h.readOnly ? "read-only" : "", "gen " + (h.generation || 0)];
+  if (h.reconnects) bits.push(h.reconnects + " reconnects");
+  if (h.marketDataType && h.marketDataType !== 1) bits.push("data type " + h.marketDataType);
+  $("#feedAge").textContent = bits.filter(Boolean).join(" · ");
+}
+
+/* Upsert one [t,o,h,l,c,v] bar into a sorted array by time. */
+function upsertBar(arr, bar) {
+  let i = arr.length;
+  while (i > 0 && arr[i - 1][0] > bar[0]) i--;
+  if (i > 0 && arr[i - 1][0] === bar[0]) arr[i - 1] = bar; else arr.splice(i, 0, bar);
+}
+
+/* Replace the session in place — same arrays and objects, new contents — so
+   every closure keeps working, then paint on the live edge with the zoom the
+   trader had. No reload. */
+let refreshing = false;
+function refreshSession() {
+  if (refreshing) return;
+  refreshing = true;
+  fetch("/api/v1/replay/session", { cache: "no-store" }).then(r => r.json()).then(next => {
+    const ranges = { a: PANES.a.getRange && PANES.a.getRange(), b: PANES.b.getRange && PANES.b.getRange(),
+                     d: PANES.d.getRange && PANES.d.getRange(), c: PANES.c.getRange && PANES.c.getRange() };
+    FRAMES.length = 0; (next.frames || []).forEach(f => FRAMES.push(f));
+    Object.keys(BARS).forEach(k => delete BARS[k]); Object.assign(BARS, next.bars || {});
+    S.bars10s = S.bars10s || {};
+    Object.keys(S.bars10s).forEach(k => delete S.bars10s[k]); Object.assign(S.bars10s, next.bars10s || {});
+    Object.keys(SYMS).forEach(k => delete SYMS[k]); Object.assign(SYMS, next.symbols || {});
+    S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
+    OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+    if (state.selected && !SYMS[state.selected]) state.selected = null;
+    state.frame = FRAMES.length - 1;
+    PENDING_RANGES = ranges;
+    render();
+  }).catch(() => {}).then(() => { refreshing = false; });
+}
+
+/* Streaming follow: candles, quotes, health and screener rows arrive over
+   the event stream and are drawn as they arrive. The server still rebuilds
+   the scanner session every few seconds; when its stamp moves, the page
+   swaps the data in place. Nothing here reloads the page. */
+function streamFollow() {
+  state.frame = FRAMES.length - 1;
+  if (!window.DeskLive) { liveFollow(); return; }
+  let paint = null;
+  const schedule = () => { if (paint) return; paint = setTimeout(() => { paint = null; render(); }, 250); };
+  DeskLive.on("bar10s", b => {
+    const arr = (S.bars10s[b.symbol] = S.bars10s[b.symbol] || []);
+    upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    if (b.symbol === state.selected) schedule();
+  }).on("bar1m", b => {
+    const arr = (BARS[b.symbol] = BARS[b.symbol] || []);
+    upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    if (b.symbol === state.selected) schedule();
+  }).on("quote", q => {
+    const meta = SYMS[q.symbol]; if (!meta) return;
+    meta.iexLast = q.price; meta.iexLastTime = etClock(q.ts);
+    if (q.bid != null) meta.iexBid = q.bid; if (q.ask != null) meta.iexAsk = q.ask;
+    if (q.symbol === state.selected) schedule();
+  }).on("health", setFeedBadge)
+    .on("screener", renderScreener)
+    .on("symbol-added", () => refreshSession())
+    .on("resync", () => refreshSession())
+    .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
+      $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
+    .connect("/api/v1/stream");
+  let stamp = S.builtAt;
+  setInterval(() => {
+    fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      if (h.provider) setFeedBadge(h.provider);
+      if (h.builtAt && h.builtAt !== stamp) { stamp = h.builtAt; refreshSession(); }
+    }).catch(() => {});
+  }, 5000);
+}
 function liveFollow() {
   try {
     const saved = JSON.parse(sessionStorage.getItem(LIVE_KEY) || "null");
@@ -1523,6 +1616,12 @@ function pollScreener() {
 
 /* ── render ─────────────────────────────────────────────────────────── */
 function render() {
+  if (!FRAMES.length) {
+    $("#clockET").textContent = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
+    $("#frameCounter").textContent = "waiting for the first bar";
+    return;
+  }
+  state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);
   const frame = FRAMES[state.frame];
   if (!state.selected) state.selected = openingSymbol();
   $("#clockET").textContent = etClock(frame.ts);
@@ -1571,7 +1670,8 @@ function init() {
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
 
   $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId +
-    (S.live ? " · LIVE — following the newest bar; scrub back to review" : " · deterministic replay");
+    (S.streaming ? " · LIVE — " + PROVIDER + " read-only, streaming"
+     : S.live ? " · LIVE — following the newest bar" : " · deterministic replay");
   // When the desk stepped back because today had no bars, say so in the header.
   // The trading date alone is easy to skim past at 04:15 in the morning.
   if (S.sessionNote) {
@@ -1581,13 +1681,16 @@ function init() {
   }
   $("#disclaimer").textContent = S.disclaimer;
   if (S.live) {
-    // A live session rebuilds itself on the server; the badge says so and the
-    // page follows the newest build. Replay controls still work — scrub back
-    // and the page stays where you put it until you return to the live edge.
+    // A live desk has no replay transport: there is nothing to play back and
+    // a scrub bar that jumped to the start on every refresh read as a bug.
+    // The page sits on the live edge and stays there.
+    $(".transport").hidden = true;
+    $("#frameCounter").hidden = true;
     $("#feedText").textContent = "LIVE";
-    $("#feedAge").textContent = "IEX · rebuilds every " + S.refreshSeconds + "s";
+    $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");
     $("#feedDot").className = "dot live";
-    liveFollow();
+    if (S.provider) setFeedBadge(S.provider);
+    if (S.streaming) streamFollow(); else liveFollow();
   }
   pollScreener();
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);

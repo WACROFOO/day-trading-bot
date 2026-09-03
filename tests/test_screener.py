@@ -38,6 +38,11 @@ def test_premarket_state_without_a_premarket_print_falls_to_regular():
     assert p["session"] == "regular"
 
 
+# A print only counts as a move in THIS session, so the stub's timestamps are
+# derived from the session clock rather than hard-coded to a past day.
+SESSION_START = al.session_window(al.session_day())[0]
+
+
 class StubAlpaca(al.AlpacaClient):
     def __init__(self):
         super().__init__("PK", "s" * 40)
@@ -51,7 +56,7 @@ class StubAlpaca(al.AlpacaClient):
             "SSM": {"prevDailyBar": {"c": 2.68}, "dailyBar": {"v": 0, "t": "2026-09-01T04:00:00Z"},
                     "latestTrade": {"p": 2.68, "t": "2026-09-01T19:59:57Z"}},       # IEX: nothing today
             "BIG": {"prevDailyBar": {"c": 150.0}, "dailyBar": {"v": 10}, "latestTrade": {"p": 151}},  # out of band
-            "FLAT": {"prevDailyBar": {"c": 5.0}, "dailyBar": {"v": 100}, "latestTrade": {"p": 5.05, "t": "2026-09-02T09:00:00Z"}},
+            "FLAT": {"prevDailyBar": {"c": 5.0}, "dailyBar": {"v": 100}, "latestTrade": {"p": 5.05, "t": SESSION_START}},
         }
 
 

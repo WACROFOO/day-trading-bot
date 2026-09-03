@@ -1,0 +1,266 @@
+"""IBKR market scanner union and reference data, read-only.
+
+The screener half of the handoff audit: ten TWS scanner queries (five scan
+codes on the two NASDAQ tiers), fifty rows each, in the operator's price band,
+merged into one candidate set and quoted from live snapshots. The union is a
+DISCOVERY set — it is not exhaustive, the payload says so, and the chart still
+defines the setup.
+
+Also here: the reference and minute-history records the desk session is
+built from (previous close, average volume, 52-week high, daily bars, the
+day's one-minute bars), because they come from the same TWS connection.
+
+Nothing here transmits anything. Every call is a request for data.
+"""
+
+from __future__ import annotations
+
+from datetime import datetime, timedelta, timezone
+from typing import Callable, Dict, Iterable, List, Optional
+
+UTC = timezone.utc
+
+SCAN_CODES = ("TOP_PERC_GAIN", "HOT_BY_VOLUME", "TOP_VOLUME_RATE", "TOP_TRADE_RATE", "MOST_ACTIVE")
+LOCATIONS = ("STK.NASDAQ.NMS", "STK.NASDAQ.SCM")     # Global (Select) Market, Capital Market
+ROWS_PER_SCAN = 50
+DELAYED_TYPES = (3, 4)
+
+
+class IbkrError(RuntimeError):
+    pass
+
+
+def _iso(dt: datetime) -> str:
+    return dt.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def _num(v) -> Optional[float]:
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    return None if f != f else f
+
+
+def _scanner_subscription(code: str, location: str, min_price: float, max_price: float, rows: int):
+    try:
+        from ib_async import ScannerSubscription
+    except ImportError:
+        ScannerSubscription = _PlainSubscription
+    return ScannerSubscription(instrument="STK", locationCode=location, scanCode=code,
+                               abovePrice=min_price, belowPrice=max_price, numberOfRows=rows)
+
+
+class _PlainSubscription:
+    def __init__(self, **kw):
+        self.__dict__.update(kw)
+
+
+def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN,
+               codes: Iterable[str] = SCAN_CODES, locations: Iterable[str] = LOCATIONS,
+               log: Optional[Callable[[str], None]] = None) -> Dict[str, dict]:
+    """Run every (code, location) scan and merge the hits by symbol.
+
+    Returns symbol -> {symbol, exchange, name, scans, contract}. A query that
+    fails is logged and skipped; the caller's notes say how many ran."""
+    say = log or (lambda m: None)
+    found: Dict[str, dict] = {}
+    ran = failed = 0
+    for location in locations:
+        for code in codes:
+            sub = _scanner_subscription(code, location, min_price, max_price, rows)
+            try:
+                hits = ib.reqScannerData(sub)
+                ran += 1
+            except Exception as exc:
+                failed += 1
+                say(f"  scan {code} {location} failed: {exc}")
+                continue
+            for hit in hits or []:
+                cd = getattr(hit, "contractDetails", None)
+                c = getattr(cd, "contract", None)
+                sym = getattr(c, "symbol", None)
+                if not sym:
+                    continue
+                entry = found.setdefault(sym, {
+                    "symbol": sym, "exchange": getattr(c, "primaryExchange", None) or "NASDAQ",
+                    "name": getattr(cd, "longName", None), "scans": [], "contract": c,
+                })
+                if code not in entry["scans"]:
+                    entry["scans"].append(code)
+    found["__meta__"] = {"ran": ran, "failed": failed}
+    return found
+
+
+def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+                  chunk: int = 50) -> tuple:
+    """Quote every scan hit from a live snapshot. Returns (rows, notes)."""
+    entries = [v for k, v in found.items() if k != "__meta__"]
+    rows: List[dict] = []
+    notes: List[str] = []
+    delayed = 0
+    now = clock()
+    for i in range(0, len(entries), chunk):
+        batch = entries[i:i + chunk]
+        try:
+            tickers = ib.reqTickers(*[e["contract"] for e in batch])
+        except Exception as exc:
+            notes.append(f"snapshot batch failed: {exc}")
+            continue
+        for e, t in zip(batch, tickers):
+            mdt = getattr(t, "marketDataType", None)
+            if mdt in DELAYED_TYPES:
+                delayed += 1
+                continue
+            price = _num(getattr(t, "last", None))
+            if price is None and hasattr(t, "marketPrice"):
+                try:
+                    price = _num(t.marketPrice())
+                except Exception:
+                    price = None
+            prev = _num(getattr(t, "close", None))
+            if price is None or price <= 0 or not prev:
+                continue
+            rows.append({
+                "symbol": e["symbol"], "price": round(price, 4),
+                "change_pct": round((price / prev - 1) * 100, 2),
+                "source": "ibkr", "as_of": _iso(now), "session": None,
+                "prev_close": prev, "exchange": e["exchange"], "name": e.get("name"),
+                "volume": _num(getattr(t, "volume", None)),
+                "bid": _num(getattr(t, "bid", None)), "ask": _num(getattr(t, "ask", None)),
+                "scans": list(e["scans"]),
+            })
+    if delayed:
+        notes.append(f"{delayed} names reported DELAYED market data and were dropped — "
+                     "the desk never shows a delayed print as live.")
+    return rows, notes
+
+
+def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float = 10.0,
+                        top: int = 30, log: Optional[Callable[[str], None]] = None,
+                        clock: Callable[[], datetime] = lambda: datetime.now(UTC)) -> dict:
+    """The screener payload the page renders: same shape as the Alpaca/Yahoo
+    screener, source "ibkr", with honest notes about what a scan union is."""
+    found = scan_union(ib, min_price, max_price, log=log)
+    meta = found.get("__meta__", {"ran": 0, "failed": 0})
+    rows, notes = snapshot_rows(ib, found, clock=clock)
+    kept = [r for r in rows if min_price <= r["price"] <= max_price and r["change_pct"] >= min_gain]
+    kept.sort(key=lambda r: -r["change_pct"])
+    total = meta["ran"] + meta["failed"]
+    notes.insert(0, f"Union of {meta['ran']}/{total} NASDAQ scans ({', '.join(SCAN_CODES)}, "
+                    f"{ROWS_PER_SCAN} rows each) — a discovery set, not an exhaustive list.")
+    if meta["failed"]:
+        notes.append(f"{meta['failed']} scan queries failed; see the server log.")
+    return {"rows": kept[:top] if top else kept, "source": "ibkr", "asof": _iso(clock()),
+            "notes": notes, "band": [min_price, max_price], "min_gain": min_gain,
+            "scanned": len(found) - 1}
+
+
+# ---------------------------------------------------------- reference -----
+
+def _bar_date(b) -> str:
+    d = getattr(b, "date", None)
+    if isinstance(d, datetime):
+        return d.date().isoformat()
+    return str(d)[:10]
+
+
+def daily_bars(ib, contract, lookback: str = "1 Y") -> List[dict]:
+    hist = ib.reqHistoricalData(contract, "", lookback, "1 day", "TRADES", True, formatDate=2)
+    return [{"d": _bar_date(b), "o": _num(b.open), "h": _num(b.high), "l": _num(b.low),
+             "c": _num(b.close), "v": int(_num(b.volume) or 0)} for b in hist or []]
+
+
+def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optional[str] = None,
+                     name: Optional[str] = None, today: Optional[str] = None,
+                     sec: Optional[dict] = None, clock: Callable[[], datetime] = lambda: datetime.now(UTC)) -> dict:
+    """The reference record the session builder consumes. Previous close is
+    the last COMPLETED day's close, never today's partial bar."""
+    today = today or clock().astimezone(timezone(timedelta(hours=-4))).date().isoformat()
+    completed = [b for b in bars if b["d"] < today and b["c"]]
+    prev_close = completed[-1]["c"] if completed else None
+    recent = [b["v"] for b in completed[-20:] if b["v"] > 0]
+    avg_volume = sum(recent) / len(recent) if recent else None
+    high_52w = max((b["h"] for b in bars[-252:] if b["h"]), default=None)
+    last = _num(getattr(ticker, "last", None)) if ticker is not None else None
+    last_ts = getattr(ticker, "time", None) if ticker is not None else None
+    sec = sec or {}
+    return {
+        "type": "reference", "symbol": symbol,
+        "prev_close": prev_close, "avg_daily_volume": avg_volume, "high_52w": high_52w,
+        "iex_last_price": last, "iex_last_ts": _iso(last_ts) if isinstance(last_ts, datetime) else None,
+        "iex_bid": _num(getattr(ticker, "bid", None)) if ticker is not None else None,
+        "iex_ask": _num(getattr(ticker, "ask", None)) if ticker is not None else None,
+        "last_source": "ibkr",
+        "exchange": exchange, "name": name,
+        "country": sec.get("country"), "incorporated_in": sec.get("incorporated_in"),
+        "float_shares": sec.get("shares"),
+        "float_quality": "shares_outstanding_proxy" if sec.get("shares") else "unknown",
+        "float_asof": sec.get("as_of"),
+        "daily_bars": bars,
+    }
+
+
+def minute_records(ib, contract, symbol: str) -> List[dict]:
+    """Today's one-minute bars, extended hours included, as bar records."""
+    hist = ib.reqHistoricalData(contract, "", "1 D", "1 min", "TRADES", False, formatDate=2)
+    out = []
+    for b in hist or []:
+        ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=UTC)
+        close = _num(b.close)
+        if not close or close <= 0:
+            continue
+        out.append({"type": "bar", "tf": "1m", "symbol": symbol, "ts": _iso(ts),
+                    "open": _num(b.open), "high": _num(b.high), "low": _num(b.low),
+                    "close": close, "volume": int(_num(b.volume) or 0)})
+    return out
+
+
+def store_records(store, symbol: str) -> List[dict]:
+    """Complete ten-second candles from the live store as bar records."""
+    return [{"type": "bar", "tf": "10s", "symbol": symbol, "ts": _iso(b.ts),
+             "open": b.open, "high": b.high, "low": b.low, "close": b.close, "volume": b.volume}
+            for b in store.candles_10s(symbol)]
+
+
+def sec_profile(symbol: str) -> dict:
+    """Shares outstanding (an upper bound on float) and country from EDGAR,
+    free and official. Any failure is an empty dict, never an exception."""
+    try:
+        from .sec_source import client_from_env
+        sec = client_from_env()
+        so = sec.shares_outstanding(symbol) or {}
+        prof = sec.company_profile(symbol) or {}
+        return {"shares": so.get("shares"), "as_of": so.get("as_of"),
+                "country": prof.get("business_country") or prof.get("incorporation_desc"),
+                "incorporated_in": prof.get("incorporation_desc") or prof.get("state_of_incorporation")}
+    except Exception:
+        return {}
+
+
+def news_records(symbols: List[str], since: Optional[datetime] = None) -> tuple:
+    """Headlines from Alpaca's free news endpoint when keys exist; IBKR news
+    needs its own subscriptions. Returns (records, note)."""
+    try:
+        from .alpaca_source import client_from_env
+        client = client_from_env()
+    except Exception as exc:
+        return [], f"no headline source: {exc}"
+    start = _iso(since or datetime.now(UTC) - timedelta(days=2))
+    out = []
+    try:
+        for item in client.news(symbols, limit=50, start=start):
+            published = item.get("created_at") or item.get("updated_at")
+            headline = item.get("headline")
+            if not published or not headline:
+                continue
+            for symbol in item.get("symbols", []):
+                if symbol in symbols:
+                    out.append({"type": "news", "symbol": symbol, "provider_id": str(item.get("id")),
+                                "published_at": published, "first_observed_at": published,
+                                "headline": headline, "category": item.get("source")})
+    except Exception as exc:
+        return [], f"headlines unavailable: {exc}"
+    return out, None
