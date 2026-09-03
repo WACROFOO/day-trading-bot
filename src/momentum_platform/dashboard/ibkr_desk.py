@@ -23,6 +23,7 @@ ibkr_stream.py; this file only schedules them.
 
 from __future__ import annotations
 
+import logging
 import queue
 import threading
 import time
@@ -38,6 +39,26 @@ from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
 UTC = timezone.utc
+
+# TWS messages that are acknowledgements, not problems. 162 "API scanner
+# subscription cancelled" is TWS confirming that a one-shot scan was closed
+# after it answered; ib_async logs it at ERROR and it filled the terminal with
+# ten red lines per scan round.
+BENIGN = ("API scanner subscription cancelled", "Market data farm connection is OK",
+          "HMDS data farm connection is OK", "Sec-def data farm connection is OK")
+
+
+class _TwsNoise(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        msg = record.getMessage()
+        return not any(b in msg for b in BENIGN)
+
+
+def quiet_tws_logs() -> None:
+    for name in ("ib_async.wrapper", "ib_async.ib", "ib_async.client"):
+        lg = logging.getLogger(name)
+        if not any(isinstance(f, _TwsNoise) for f in lg.filters):
+            lg.addFilter(_TwsNoise())
 
 
 class _ScreenerView:
@@ -93,8 +114,9 @@ class IbkrDesk:
 
     # -- lifecycle --------------------------------------------------------------
 
-    def start(self, timeout: float = 120.0) -> dict:
+    def start(self, timeout: float = 600.0) -> dict:
         """Start the worker and block until the first session exists."""
+        quiet_tws_logs()
         t = threading.Thread(target=self._worker, daemon=True, name="ibkr-desk")
         self._worker_thread = t
         t.start()
@@ -174,13 +196,19 @@ class IbkrDesk:
         self.log(f"  IBKR desk connected read-only, client {self.client_id}, server version {h.server_version}")
         if not self.symbols and self.rescan:
             self._connect_scanner()
-            self.scan()
+            self.log("  no symbols given: the scanner picks the desk (30-90 s the first time)")
+            self.scan(add=False)
+            self.symbols = [r["symbol"] for r in self._screener["rows"][:self.max_symbols]]
         if not self.symbols:
             raise IbkrError("no symbols on the desk and the scanner found nothing in the band; "
-                            "pass symbols (e.g. --ibkr-symbols CHPT,AEHL) or widen DESK_PRICE_MIN")
+                            "start with names, e.g.  bash scripts/start.sh --ibkr CHPT,AEHL  "
+                            "or widen DESK_PRICE_MIN in .env")
         self._subscribe(self.symbols)
         self.refresh_session()
-        return self.current()
+        s = self.current()
+        self.log(f"  desk ready: {', '.join(self.symbols)} — {len(s['frames'])} minutes of history, "
+                 f"{sum(len(f['alerts']) for f in s['frames'])} alerts so far")
+        return s
 
     def _connect_scanner(self) -> None:
         if self.scanner_ib is not None and self.scanner_ib.isConnected():
@@ -199,6 +227,7 @@ class IbkrDesk:
     def _subscribe(self, symbols: List[str]) -> List[str]:
         added = self.stream.subscribe(symbols, backfill_seconds=3600)
         for sym in added:
+            self.log(f"  {sym}: subscribed (quote + 5-second bars); loading daily and minute history")
             c = self.stream._contract(sym)
             try:
                 bars = daily_bars(self.stream.ib, c)
@@ -278,18 +307,20 @@ class IbkrDesk:
             self.built_at = session["builtAt"]
         return session
 
-    def scan(self) -> dict:
+    def scan(self, add: bool = True) -> dict:
         self._connect_scanner()
         out = build_ibkr_screener(self.scanner_ib, self.min_price, self.max_price, self.min_gain,
                                   self.top, log=self.log, clock=self.clock)
         with self.lock:
             self._screener = out
         self.hub.publish("screener", out)
-        self.log(f"  scanner: {len(out['rows'])} rows in the band from {out.get('scanned', 0)} scan hits")
-        fresh = [r["symbol"] for r in out["rows"] if r["symbol"] not in self.symbols]
-        room = max(0, self.max_symbols - len(self.symbols))
-        if fresh and room:
-            self.add_symbols(fresh[:room])
+        self.log(f"  scanner: {len(out['rows'])} names up ≥{self.min_gain:g}% in the band"
+                 + (": " + " ".join(r["symbol"] for r in out["rows"][:10]) if out["rows"] else ""))
+        if add:
+            fresh = [r["symbol"] for r in out["rows"] if r["symbol"] not in self.symbols]
+            room = max(0, self.max_symbols - len(self.symbols))
+            if fresh and room:
+                self.add_symbols(fresh[:room])
         return out
 
     # -- surface used by the HTTP handler ------------------------------------------

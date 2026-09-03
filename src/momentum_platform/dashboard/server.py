@@ -435,6 +435,8 @@ def _ibkr_desk(args, rebuild: int):
     from ..datasources.ibkr_scanner import IbkrError
     from ..scanners.five_pillars import PRICE_MAX, PRICE_MIN
     symbols = [s for s in (args.ibkr or "").split(",") if s.strip()]
+    print("Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; "
+          "the line 'desk ready' means the page is up.", flush=True)
     desk = IbkrDesk(symbols, host=os.environ.get("IBKR_HOST", "127.0.0.1"),
                     port=int(os.environ.get("IBKR_PORT", "7496")),
                     rebuild=rebuild, rescan=args.ibkr_rescan,

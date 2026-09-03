@@ -208,3 +208,34 @@ def test_no_order_surface_anywhere_in_the_ibkr_path():
         src = inspect.getsource(mod)
         for word in ("placeOrder", "cancelOrder", "reqOpenOrders", "whatIfOrder"):
             assert word not in src, f"{mod.__name__} mentions {word}"
+
+
+def test_scan_hits_are_prioritised_and_capped_with_every_top_gainer_kept():
+    found = {f"G{i}": {"symbol": f"G{i}", "scans": ["TOP_PERC_GAIN"], "contract": None, "exchange": "NASDAQ"} for i in range(100)}
+    found.update({f"M{i}": {"symbol": f"M{i}", "scans": ["HOT_BY_VOLUME", "MOST_ACTIVE"], "contract": None, "exchange": "NASDAQ"} for i in range(100)})
+    found.update({f"S{i}": {"symbol": f"S{i}", "scans": ["MOST_ACTIVE"], "contract": None, "exchange": "NASDAQ"} for i in range(200)})
+    found["__meta__"] = {"ran": 10, "failed": 0}
+    picked = sc.prioritise(found, 150)
+    assert len(picked) == 150
+    assert all(e["symbol"].startswith("G") for e in picked[:100]), "every TOP_PERC_GAIN hit is quoted"
+    assert all(e["symbol"].startswith("M") for e in picked[100:]), "then names several scans agree on"
+
+
+def test_tws_scanner_cancel_acknowledgements_are_filtered_from_the_log():
+    import logging
+    from momentum_platform.dashboard.ibkr_desk import quiet_tws_logs
+    quiet_tws_logs()
+    lg = logging.getLogger("ib_async.wrapper")
+    rec = lg.makeRecord("ib_async.wrapper", logging.ERROR, __file__, 1,
+                        "Error 162, reqId 3: Historical Market Data Service error message:API scanner subscription cancelled: 3", (), None)
+    assert not all(f.filter(rec) for f in lg.filters), "the acknowledgement is dropped"
+    real = lg.makeRecord("ib_async.wrapper", logging.ERROR, __file__, 1, "Error 10197: No market data during competing live session", (), None)
+    assert all(f.filter(real) for f in lg.filters), "a real error still shows"
+
+
+def test_bootstrap_without_symbols_lets_the_scanner_pick_the_desk():
+    desk, ib, clock = make_desk(rescan=60)
+    desk.symbols = []
+    session = desk._bootstrap()
+    assert desk.symbols == ["CCC"], "only names up >= min gain in the band (AAA is +9%) become the desk"
+    assert set(session["symbols"]) == {"CCC"}

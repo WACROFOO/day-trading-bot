@@ -92,16 +92,33 @@ def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN
     return found
 
 
-def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = lambda: datetime.now(UTC),
-                  chunk: int = 50) -> tuple:
-    """Quote every scan hit from a live snapshot. Returns (rows, notes)."""
+MAX_QUOTES = 150
+
+
+def prioritise(found: Dict[str, dict], limit: int = MAX_QUOTES) -> List[dict]:
+    """Which hits to quote, in order: every TOP_PERC_GAIN hit first (that scan
+    is already sorted by the gain we screen on), then names several scans
+    agree on, then the rest — capped, because a snapshot of an illiquid name
+    can take eleven seconds and a union of ten scans can be four hundred names."""
     entries = [v for k, v in found.items() if k != "__meta__"]
+    entries.sort(key=lambda e: (0 if "TOP_PERC_GAIN" in e["scans"] else 1, -len(e["scans"]), e["symbol"]))
+    return entries[:limit] if limit else entries
+
+
+def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+                  chunk: int = 75, limit: int = MAX_QUOTES,
+                  log: Optional[Callable[[str], None]] = None) -> tuple:
+    """Quote the prioritised scan hits from live snapshots. Returns (rows, notes)."""
+    say = log or (lambda m: None)
+    entries = prioritise(found, limit)
+    skipped = max(0, len(found) - 1 - len(entries))
     rows: List[dict] = []
     notes: List[str] = []
     delayed = 0
     now = clock()
     for i in range(0, len(entries), chunk):
         batch = entries[i:i + chunk]
+        say(f"  quoting {i + 1}-{i + len(batch)} of {len(entries)} scan hits")
         try:
             tickers = ib.reqTickers(*[e["contract"] for e in batch])
         except Exception as exc:
@@ -133,6 +150,9 @@ def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = la
     if delayed:
         notes.append(f"{delayed} names reported DELAYED market data and were dropped — "
                      "the desk never shows a delayed print as live.")
+    if skipped:
+        notes.append(f"{skipped} further scan hits were not quoted (cap {limit}); every "
+                     "TOP_PERC_GAIN hit in the band was.")
     return rows, notes
 
 
@@ -141,9 +161,12 @@ def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float 
                         clock: Callable[[], datetime] = lambda: datetime.now(UTC)) -> dict:
     """The screener payload the page renders: same shape as the Alpaca/Yahoo
     screener, source "ibkr", with honest notes about what a scan union is."""
+    say = log or (lambda m: None)
+    say(f"  scanning NASDAQ: {len(SCAN_CODES) * len(LOCATIONS)} queries, ${min_price:g}-{max_price:g}")
     found = scan_union(ib, min_price, max_price, log=log)
     meta = found.get("__meta__", {"ran": 0, "failed": 0})
-    rows, notes = snapshot_rows(ib, found, clock=clock)
+    say(f"  scan union: {len(found) - 1} names from {meta['ran']} queries")
+    rows, notes = snapshot_rows(ib, found, clock=clock, log=log)
     kept = [r for r in rows if min_price <= r["price"] <= max_price and r["change_pct"] >= min_gain]
     kept.sort(key=lambda r: -r["change_pct"])
     total = meta["ran"] + meta["failed"]
