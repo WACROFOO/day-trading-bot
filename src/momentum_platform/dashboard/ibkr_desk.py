@@ -32,8 +32,9 @@ from concurrent.futures import Future
 from datetime import datetime, timezone
 from typing import Callable, Dict, List, Optional
 
-from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, minute_records,
-                                        news_records, reference_record, sec_profile, store_records)
+from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
+                                        minute_records, news_records, reference_record, sec_profile,
+                                        store_records)
 from ..datasources.ibkr_stream import IbkrStream
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
@@ -240,10 +241,15 @@ class IbkrDesk:
                 self.log(f"  {sym}: minute history failed: {exc}")
                 self._minutes[sym] = []
             sec = sec_profile(sym) if self.sec else {}
+            fl = float_from_ibkr(self.stream.ib, c)
             self._reference[sym] = reference_record(
                 sym, bars, ticker=self.stream._tickers.get(sym),
                 exchange=getattr(c, "primaryExchange", None) or "NASDAQ",
-                name=getattr(c, "longName", None) or None, sec=sec, clock=self.clock)
+                name=getattr(c, "longName", None) or None, sec=sec, clock=self.clock,
+                ibkr_float=fl)
+            r = self._reference[sym]
+            self.log(f"  {sym}: float {r['float_quality']}"
+                     + (f" {r['float_shares'] / 1e6:.1f}M ({r['float_source']})" if r["float_shares"] else ""))
         if added and self.headlines:
             recs, note = news_records(self.symbols)
             if recs:

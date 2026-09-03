@@ -49,6 +49,7 @@
     <button id="btnTray" class="btn ghost" title="Cards not on the desk">⊞ Cards</button>
     <button id="btnLayout" class="btn ghost" title="Restore the default layout and sizes">⟲ Layout</button>
     <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇</button>
+    <button id="btnHelp" class="btn ghost" title="How to read the desk (?)">? Legend</button>
   </header>
 
   <main class="grid" id="grid">
@@ -220,6 +221,30 @@
   </footer>
 </div>
 
+<section id="legend" class="legend-overlay" hidden>
+  <div class="legend-panel">
+    <div class="legend-head"><b>How to read the desk</b><button id="legendClose" class="btn ghost">close</button></div>
+    <div class="legend-grid">
+      <div><h4>Feed states (header and tiles)</h4>
+        <p><b>LIVE</b> real-time bars are arriving. <b>STALE</b> no bar for 20 s in regular hours (60 s extended): the stream is dead, not the stock. <b>DELAYED</b> the provider sent delayed data; the desk refuses it. <b>OFFLINE</b> disconnected; reconnecting. <b>REPLAY</b> a recorded session, not today. <b>FROZEN</b> a list that stops updating at 09:30 by design (Top Gappers).</p></div>
+      <div><h4>Session pills on alerts</h4>
+        <p><b>PM</b> premarket 04:00–09:30 ET: thin tape, wide spreads, a gap forming. <b>RTH</b> regular hours 09:30–16:00 ET: the session the course strategy is built for. <b>AH</b> after hours 16:00–20:00 ET: thin tape, news reactions.</p></div>
+      <div><h4>Five pillars (Confirmed course)</h4>
+        <p><b>Price</b> $2–20. <b>Gain</b> ≥10% on the day. <b>Daily RVOL</b> ≥5× today's volume against the 20-day average. <b>Float</b> &lt;20M shares — a column, never a gate; <i>proxy</i> means SEC shares outstanding (an upper bound), <i>verified</i> means a stated float figure or one you typed. <b>News</b> a headline in the last 24h — a column, never a gate. The desk admits a wider price band (yours) so a name just outside the pillar is seen with its price cell FAIL.</p></div>
+      <div><h4>PASS · FAIL · UNKNOWN</h4>
+        <p><b>PASS</b> the value meets the threshold. <b>FAIL</b> it does not. <b>UNKNOWN</b> there is no value to judge (no float source, no RVOL baseline, no headline seen) — it is never counted as a pass.</p></div>
+      <div><h4>Flames (news recency only)</h4>
+        <p><b>Red</b> ≤2 h old. <b>Orange</b> ≤12 h. <b>Yellow</b> ≤24 h. None: no qualifying headline. A flame says how recent the news is, never how good it is; the catalyst grade (hard, soft, dilutive) is a labelled heuristic on the headline text.</p></div>
+      <div><h4>Scanner branches</h4>
+        <p><b>run up</b> up ≥3% over 10 minutes with a fresh high in the last 3, above the 10-minute VWAP, liquid. <b>LF/MF</b> low / medium float. <b>HR/MR</b> high / medium RVOL. <b>&lt;20 / 20+</b> price band. <b>5-in-5, 10-in-10</b> squeeze branches (up 5% in 5 min, 10% in 10). Branches label an alert; they are not the filter.</p></div>
+      <div><h4>Setup verdict</h4>
+        <p><b>GO</b> every pillar and a live momentum event agree and a plan is armed. <b>WAIT</b> one or two conditions short — watch, do not enter. <b>PASS</b> reject: three or more short. <b>Entry / Stop / Target</b> come from the first pullback: entry over the trigger, stop under the pullback low, target at 2R. Sizing uses only the dollar risk you type; the app never assumes one.</p></div>
+      <div><h4>Charts</h4>
+        <p><b>TradingView panes</b> run on TradingView's data under their rules (a <b>D</b> badge there means delayed to a logged-out viewer). <b>10-second pane</b> is IBKR data; a candle exists only when both 5-second halves arrived; empty buckets stay empty. Shaded areas are extended hours; 09:30 and 16:00 are marked.</p></div>
+    </div>
+    <p class="tiny muted">Clean-room approximations of the course scanners. Outputs are research candidates for simulation and study, never entry signals or orders. Nothing on this desk can place an order.</p>
+  </div>
+</section>
 <script src="live.js"></script>
 <script src="session.js"></script>
 <script src="app.js"></script>

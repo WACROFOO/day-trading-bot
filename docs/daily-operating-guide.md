@@ -164,6 +164,25 @@ What the desk does in this mode:
 - Level 2 stays labelled SIMULATED. Real depth needs an IBKR NASDAQ TotalView
   subscription; without it TWS gives top of book only, which the quote card
   already shows as bid × ask.
+- Two price bands. The Five Pillars analysis keeps the Confirmed $2–20 and
+  cannot be widened; the desk ADMITS a wider band of your own ($1–30 by
+  default, `DESK_PRICE_MIN` / `DESK_PRICE_MAX` in `.env`) so a runner just
+  outside the pillar is still seen, with its price cell FAIL.
+- The bottom strip is the Five Pillars board: every desk name with last,
+  volume today, average volume, spread, HOD, distance to VWAP, then the five
+  pillar cells (value plus PASS / FAIL / UNKNOWN) and a score. UNKNOWN never
+  counts as a pass. Float says where it came from: IBKR fundamentals total
+  float (verified), SEC shares outstanding (upper bound), or unknown.
+- The scanner union drops leveraged ETFs, ETNs, funds, warrants and units by
+  instrument type; the screener note says how many. A 2x daily ETF is not a
+  small-cap runner.
+- Running Up now means an uptrend, not a spike: up ≥3% over the last 10
+  minutes, a fresh 10-minute high in the last 3, price above the 10-minute
+  VWAP, 5-minute volume above the floor, one alert per leg. Approximation.
+- Audio alerts are on by default on a live desk; the first click or key
+  unlocks the browser's sound. New alerts beep once at the highest severity
+  and flash the tile. The A key toggles; the ? key (or "? Legend" in the
+  header) opens the legend that explains every pill, state and verdict.
 
 ### Premarket, honestly
 

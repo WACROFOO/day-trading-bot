@@ -14,7 +14,7 @@ const PROVIDER = (S.provider && S.provider.provider) ? String(S.provider.provide
 const LIST_IDS = ["five_pillars_list"];
 const ALERT_TILES = {
   running_up: { id: "running_up", title: "Running Up · live uptrend",
-                note: "Acceleration before a new high. Fires in premarket and regular hours.",
+                note: "Up ≥3% over the last 10 minutes, a fresh 10-minute high in the last 3, price above the 10-minute VWAP, 5-minute volume above the floor. One alert per leg. Approximation — the Warrior formula is unknown.",
                 scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10"] },
   hod_momentum: { id: "hod_momentum", title: "Small Cap · High of Day Momentum",
                   note: "New high plus momentum — not every high-of-day print. Branch labels the float/RVOL band.",
@@ -549,6 +549,11 @@ function reasonsDrawer(r, sym, listId) {
   return d;
 }
 
+const SESSION_HELP = {
+  PM: "PM — premarket, 04:00–09:30 ET. Thin tape, wide spreads; a move here is a gap forming.",
+  RTH: "RTH — regular trading hours, 09:30–16:00 ET. The session the course strategy is built for.",
+  AH: "AH — after hours, 16:00–20:00 ET. Thin tape; news reactions and unwinds.",
+};
 function sessionOf(iso) {
   const hhmm = new Date(iso).toLocaleTimeString("en-US",
     { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
@@ -588,7 +593,9 @@ function fillAlertCard(card, cfg, idx) {
     fl.title = a.news ? "news " + a.news.age_minutes + " min old at alert time" : "no headline at alert time";
     mid.appendChild(fl);
     const ses = sessionOf(a.sourceTime);
-    mid.appendChild(el("span", "pill ses " + ses.toLowerCase(), ses));
+    const sesEl = el("span", "pill ses " + ses.toLowerCase(), ses);
+    sesEl.title = SESSION_HELP[ses];
+    mid.appendChild(sesEl);
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
     tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
@@ -666,8 +673,14 @@ function renderPillarsBoard(frame) {
   const host = $("#pillarsBoard"); if (!host) return;
   host.textContent = "";
   const nowMs = new Date(frame.ts).getTime();
+  const T = S.pillarThresholds || {};
+  const note = $("#pillarsBoardNote");
+  if (note) note.textContent = "pillars $" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
+    "× · float <" + (T.floatMaxShares / 1e6) + "M · news (Confirmed course) — desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
+    (T.deskBandEvidence === "operator_override" ? " (your band)" : "") + ". Float and news are columns, never gates.";
   const rows = Object.keys(SYMS).map(sym => {
     const { row, meta } = boardRow(frame, sym);
+    const bars = barsUpTo(sym, frame.barIndex);
     const checks = pillarChecks(row, meta);
     const nf = newsFor(sym, nowMs);
     checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
@@ -675,21 +688,37 @@ function renderPillarsBoard(frame) {
     checks[3].unknown = meta.floatQuality === "unknown";
     checks[2].unknown = row.rvolDaily == null;
     const passed = checks.filter(c => c.ok).length;
-    return { sym, row, checks, passed };
+    const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
+    const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
+    const spread = row.spread != null ? row.spread
+                 : (meta.iexBid != null && meta.iexAsk != null ? meta.iexAsk - meta.iexBid : null);
+    const vw = bars.length ? vwap(bars) : [];
+    const lastVwap = vw.length ? vw[vw.length - 1] : null;
+    return { sym, row, checks, passed, meta, volToday, hod, spread, lastVwap };
   }).sort((a, b) => b.passed - a.passed || (b.row.changePct || -1e9) - (a.row.changePct || -1e9));
   const head = el("div", "pb-row head");
-  ["Symbol", "Last", "Price", "Gain", "Daily RVOL", "Float", "News", "Pillars"].forEach(h => head.appendChild(el("span", null, h)));
+  ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "Price", "Gain", "Daily RVOL", "Float", "News", "Pillars"]
+    .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
   if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk yet.")); return; }
   rows.forEach(r => {
     const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
-    tr.appendChild(el("b", null, r.sym));
+    const symCell = el("b", null, r.sym);
+    symCell.title = [r.meta.name, r.meta.exchange, r.meta.country].filter(Boolean).join(" · ");
+    tr.appendChild(symCell);
     tr.appendChild(el("span", dirClass(r.row.changePct), fx(r.row.price)));
+    tr.appendChild(el("span", "v", vol(r.volToday)));
+    tr.appendChild(el("span", "v", vol(r.meta.avgDailyVolume)));
+    const wide = r.spread != null && r.row.price && r.spread / r.row.price > 0.01;
+    tr.appendChild(el("span", wide ? "down" : "v", r.spread != null ? "$" + fx(r.spread, 3) : "—"));
+    tr.appendChild(el("span", "v", fx(r.hod)));
+    const vsV = r.lastVwap && r.row.price ? (r.row.price / r.lastVwap - 1) * 100 : null;
+    tr.appendChild(el("span", dirClass(vsV), vsV == null ? "—" : pct(vsV)));
     r.checks.forEach(c => {
       const cell = el("span", "pb-cell");
       cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
       cell.appendChild(el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL"));
-      cell.title = c.name;
+      cell.title = c.name + (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
       tr.appendChild(cell);
     });
     tr.appendChild(el("span", "pb-score " + (r.passed >= 4 ? "up" : r.passed >= 3 ? "" : "down"), r.passed + "/5"));
@@ -849,7 +878,8 @@ function renderQuote(frame, ctx) {
   kv(grid, "Float", qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN",
      qf.quality === "unknown" ? "down" : null);
   kv(grid, "Prev close", fx(meta.prevClose));
-  kv(grid, "Float source", qf.quality.replace(/_/g, " ").replace(" proxy", ""),
+  kv(grid, "Float source", qf.quality === "user" ? "you verified it"
+     : meta.floatSource ? meta.floatSource.replace(/ \(.*\)/, "") : qf.quality.replace(/_/g, " ").replace(" proxy", ""),
      qf.quality === "unknown" ? "down" : null);
   kv(grid, "Change", pct(chg), dirClass(chg));
   kv(grid, "52w high", fx(meta.high52w));
@@ -1147,6 +1177,32 @@ function toggleReasons(listId, symbol) {
 
 /* ── audio ──────────────────────────────────────────────────────────── */
 let audioCtx = null;
+function unlockAudio() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
+  } catch (e) {}
+}
+/* New alerts on a live desk: the session refresh compares event ids with the
+   last one and beeps once at the highest severity, flashing the tile. */
+let SEEN_ALERTS = null;
+function noteNewAlerts() {
+  const ids = new Set();
+  let top = null;
+  const rank = { critical: 3, high: 2, medium: 1, low: 0 };
+  FRAMES.forEach(f => f.alerts.forEach(a => {
+    ids.add(a.eventId);
+    if (SEEN_ALERTS && !SEEN_ALERTS.has(a.eventId) && (!top || rank[a.severity] > rank[top.severity])) top = a;
+  }));
+  if (SEEN_ALERTS && top) {
+    beep(top.severity);
+    const card = document.querySelector('[data-card="scan-running"], [data-card="scan-hod"]');
+    document.querySelectorAll(".card[data-kind=alert]").forEach(c => { c.classList.remove("flash"); void c.offsetWidth; c.classList.add("flash"); });
+    if (card) setTimeout(() => card.classList.remove("flash"), 1600);
+  }
+  SEEN_ALERTS = ids;
+  return top;
+}
 function beep(severity) {
   if (!state.sound) return;
   try {
@@ -1530,6 +1586,7 @@ function refreshSession() {
     state.frame = FRAMES.length - 1;
     PENDING_RANGES = null; SNAP_LIVE = true;   // chart objects persist: keep the zoom, show the newest bar
     render();
+    noteNewAlerts();
   }).catch(() => {}).then(() => { refreshing = false; });
 }
 
@@ -1770,6 +1827,13 @@ function init() {
     // a scrub bar that jumped to the start on every refresh read as a bug.
     // The page sits on the live edge and stays there.
     $(".transport").hidden = true;
+    // Audio alerts are on by default on a live desk. Browsers only let a page
+    // make sound after a gesture, so the first click or key unlocks it.
+    state.sound = true;
+    $("#btnSound").setAttribute("aria-pressed", "true");
+    $("#btnSound").textContent = "🔔 Alerts";
+    ["pointerdown", "keydown"].forEach(ev => document.addEventListener(ev, unlockAudio, { once: true }));
+    noteNewAlerts();
     $("#frameCounter").hidden = true;
     $("#feedText").textContent = "LIVE";
     $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");
@@ -1807,6 +1871,8 @@ function init() {
     renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
     syncFloatInput();
   };
+  $("#btnHelp").onclick = () => { const o = $("#legend"); o.hidden = !o.hidden; };
+  $("#legendClose").onclick = () => { $("#legend").hidden = true; };
   $("#btnSound").onclick = () => {
     state.sound = !state.sound;
     $("#btnSound").setAttribute("aria-pressed", String(state.sound));
@@ -1829,6 +1895,7 @@ function init() {
     }
     else if (k === "n") { $("#quoteCard").scrollIntoView({ block: "center" }); }
     else if (k === "a") { $("#btnSound").click(); }
+    else if (k === "?") { $("#btnHelp").click(); }
     else if (e.key === "Escape") {
       const open = document.querySelector(".card.expanded");
       if (open) { toggleExpand(open); return; }

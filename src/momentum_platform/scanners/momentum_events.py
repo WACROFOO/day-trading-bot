@@ -188,6 +188,102 @@ class RunningMoveScanner(Scanner):
         ]
 
 
+class UptrendScanner(Scanner):
+    """Running Up, refined: a name in a live uptrend right now.
+
+    "Up 5% in 5 minutes" fires on a single spike and is silent while a runner
+    grinds higher on a series of higher highs — the tape a momentum trader
+    actually wants to be alerted to. This scanner asks, over the last
+    `window_minutes` (10 by default — long enough to be a trend, short enough
+    to still be current):
+
+      1. momentum   — last is at least `threshold_pct` above the price
+                      `window_minutes` ago (3% default);
+      2. fresh high — the window's high was printed within the last
+                      `fresh_minutes` (3 default): the move is still making
+                      highs, not fading from a spike;
+      3. control    — last is above the window's volume-weighted average
+                      price: buyers, not sellers, have the last ten minutes;
+      4. liquidity  — 5-minute volume at or above the floor;
+      5. price      — at or above `min_price`.
+
+    Every threshold is an Approximation: the Warrior formula is Unknown. The
+    event fires on the rising edge and re-arms after the condition has failed
+    for three snapshots, so a name that keeps trending fires once per leg."""
+
+    def __init__(
+        self,
+        window_minutes: int = 10,
+        threshold_pct: float = 3.0,
+        fresh_minutes: int = 3,
+        min_volume_5m: float = 25_000,
+        min_price: float = 1.0,
+        version: str = "2.0.0",
+    ) -> None:
+        self.scanner_id = "running_up"
+        self.definition_version = f"running_up@{version}"
+        self.window_minutes = window_minutes
+        self.threshold_pct = threshold_pct
+        self.fresh_minutes = fresh_minutes
+        self.min_volume_5m = min_volume_5m
+        self.min_price = min_price
+        self._edges = EdgeTracker(rearm_after_fails=3)
+
+    def _window(self, state: SymbolState, now) -> list:
+        from datetime import timedelta
+        cutoff = now - timedelta(minutes=self.window_minutes)
+        bars = [b for b in state.minute_bars if b.ts >= cutoff]
+        building = getattr(state, "_building", None)
+        if building is not None and building.ts >= cutoff:
+            bars.append(building)
+        return bars
+
+    def on_snapshot(
+        self,
+        current: SymbolSnapshot,
+        previous: Optional[SymbolSnapshot],
+        state: SymbolState,
+        hot: HotState,
+    ) -> List[ScannerEvent]:
+        from datetime import timedelta
+        now = current.event_ts
+        if now is None or current.last is None:
+            return []
+        ref = state.price_minutes_ago(now, self.window_minutes)
+        bars = self._window(state, now)
+        if ref is None or ref <= 0 or len(bars) < 3:
+            return []
+        move_pct = 100.0 * (current.last / ref - 1.0)
+        move_ok = move_pct >= self.threshold_pct
+        window_high = max(b.high for b in bars)
+        fresh_cut = now - timedelta(minutes=self.fresh_minutes)
+        recent_high = max((b.high for b in bars if b.ts >= fresh_cut), default=None)
+        fresh_ok = recent_high is not None and recent_high >= window_high
+        vol = sum(b.volume for b in bars)
+        vwap = (sum(b.close * b.volume for b in bars) / vol) if vol > 0 else None
+        vwap_ok = vwap is not None and current.last >= vwap
+        volume_ok = (current.volume_5m or 0) >= self.min_volume_5m
+        price_ok = current.last >= self.min_price
+        qualifies = move_ok and fresh_ok and vwap_ok and volume_ok and price_ok
+        if not self._edges.rising_edge(current.symbol, qualifies):
+            return []
+        reasons = [
+            Reason(f"move_{self.window_minutes}m_pct", _round(move_pct), move_ok, self.threshold_pct),
+            Reason(f"fresh_high_{self.fresh_minutes}m", _round(recent_high), fresh_ok, _round(window_high)),
+            Reason(f"above_vwap_{self.window_minutes}m", _round(current.last), vwap_ok, _round(vwap)),
+            Reason("volume_5m", current.volume_5m, volume_ok, self.min_volume_5m),
+            Reason("price_min", _round(current.last), price_ok, self.min_price),
+        ]
+        severity = "high" if move_pct >= 2 * self.threshold_pct else "medium"
+        return [
+            self._event(
+                current, now, "qualified", severity, reasons, branch=f"uptrend_{self.window_minutes}m",
+                extra_values={"reference_price": _round(ref, 4), "window_minutes": self.window_minutes,
+                              "window_high": _round(window_high), "vwap_window": _round(vwap)},
+            )
+        ]
+
+
 def squeeze_5_in_5(**kw) -> RunningMoveScanner:
     """Squeeze branch name Confirmed platform: up 5% in 5 minutes."""
     s = RunningMoveScanner(direction="up", window_minutes=5, threshold_pct=5.0, **kw)

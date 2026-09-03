@@ -42,10 +42,27 @@ def _env_float(name: str, default: float) -> float:
         return default
 
 
+# Two bands, on purpose.
+#
+# PRICE_MIN / PRICE_MAX is the Confirmed course pillar ($2-20). It is what the
+# Five Pillars list, the pillar chips and the verdict evaluate, and it does not
+# move: the analysis stays Ross's analysis.
+#
+# DESK_PRICE_MIN / DESK_PRICE_MAX is the operator's DISCOVERY band: what the
+# scanner union, the screener and the desk admit. Wider than the pillar band
+# by default ($1-30) so a runner just outside Ross's band is still seen, with
+# its price pillar shown as FAIL rather than being invisible. Override it in
+# .env; it is labelled as yours wherever it appears.
 PRICE_MIN_CONFIRMED = 2.0
-PRICE_MIN = _env_float("DESK_PRICE_MIN", PRICE_MIN_CONFIRMED)
-PRICE_MAX = 20.0
-PRICE_BAND_EVIDENCE = "confirmed_course" if PRICE_MIN == PRICE_MIN_CONFIRMED else "operator_override"
+PRICE_MAX_CONFIRMED = 20.0
+PRICE_MIN = PRICE_MIN_CONFIRMED
+PRICE_MAX = PRICE_MAX_CONFIRMED
+PRICE_BAND_EVIDENCE = "confirmed_course"
+DESK_PRICE_MIN = _env_float("DESK_PRICE_MIN", 1.0)
+DESK_PRICE_MAX = _env_float("DESK_PRICE_MAX", 30.0)
+DESK_BAND_EVIDENCE = ("confirmed_course"
+                      if (DESK_PRICE_MIN, DESK_PRICE_MAX) == (PRICE_MIN_CONFIRMED, PRICE_MAX_CONFIRMED)
+                      else "operator_override")
 GAIN_MIN_PCT = 10.0
 RVOL_MIN = 5.0
 FLOAT_MAX_SHARES = 20_000_000

@@ -746,20 +746,29 @@ def test_hod_momentum_labels_an_unknown_float_rather_than_going_silent():
     assert branch.startswith("unknown_float"), branch
 
 
-def test_price_band_override_is_labelled_as_the_operators(monkeypatch):
-    """The Confirmed pillar is $2-20. Widening it is allowed, but the band must
-    then be labelled as the operator's, never presented as Ross's."""
+def test_desk_band_is_the_operators_and_the_pillar_band_never_moves(monkeypatch):
+    """Two bands. The Confirmed pillar ($2-20) is what the Five Pillars analysis
+    evaluates and it cannot be overridden. The desk's discovery band is the
+    operator's ($1-30 by default), labelled as theirs, never as Ross's."""
     import importlib
     from momentum_platform.scanners import five_pillars as fp
     monkeypatch.setenv("DESK_PRICE_MIN", "1")
+    monkeypatch.setenv("DESK_PRICE_MAX", "30")
     mod = importlib.reload(fp)
     try:
-        assert mod.PRICE_MIN == 1.0
-        assert mod.PRICE_BAND_EVIDENCE == "operator_override"
+        assert (mod.PRICE_MIN, mod.PRICE_MAX) == (2.0, 20.0)
+        assert mod.PRICE_BAND_EVIDENCE == "confirmed_course"
+        assert (mod.DESK_PRICE_MIN, mod.DESK_PRICE_MAX) == (1.0, 30.0)
+        assert mod.DESK_BAND_EVIDENCE == "operator_override"
+        monkeypatch.setenv("DESK_PRICE_MIN", "2")
+        monkeypatch.setenv("DESK_PRICE_MAX", "20")
+        mod = importlib.reload(fp)
+        assert mod.DESK_BAND_EVIDENCE == "confirmed_course"
     finally:
         monkeypatch.delenv("DESK_PRICE_MIN")
+        monkeypatch.delenv("DESK_PRICE_MAX")
         importlib.reload(fp)
-    assert fp.PRICE_BAND_EVIDENCE == "confirmed_course"
+    assert (fp.PRICE_MIN, fp.PRICE_MAX) == (2.0, 20.0)
 
 
 def test_shares_outstanding_under_the_cap_passes_the_float_pillar():

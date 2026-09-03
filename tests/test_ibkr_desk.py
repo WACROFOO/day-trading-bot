@@ -42,7 +42,8 @@ def test_scan_union_runs_ten_queries_in_the_band_and_merges_symbols():
     assert all(c[2] == 1.0 and c[3] == 20.0 and c[4] == 50 for c in ib.scan_calls)
     assert set(found) - {"__meta__"} == {"AAA", "BBB", "CCC"}
     assert found["BBB"]["scans"] == ["TOP_PERC_GAIN", "HOT_BY_VOLUME"]
-    assert found["AAA"]["name"] == "Alpha Corp" and found["__meta__"] == {"ran": 10, "failed": 0}
+    assert found["AAA"]["name"] == "Alpha Corp"
+    assert found["__meta__"]["ran"] == 10 and found["__meta__"]["failed"] == 0 and found["__meta__"]["excluded"] == {}
 
 
 def test_screener_rows_come_from_live_snapshots_and_drop_delayed_names():

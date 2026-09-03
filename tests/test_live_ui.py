@@ -130,6 +130,19 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert states and "REPLAY" not in states and set(states) <= {"LIVE", "STALE"}, states
         assert pg.locator("[data-card=pillars-board] .pb-row:not(.head)").count() == 1
         assert pg.locator(".slot [data-card=timeline]").count() == 0
+        # audio alerts default on for a live desk; the legend opens and closes
+        assert pg.get_attribute("#btnSound", "aria-pressed") == "true"
+        assert "Alerts" in pg.text_content("#btnSound")
+        assert not pg.is_visible("#legend")
+        pg.click("#btnHelp")
+        assert pg.is_visible("#legend") and "PM" in pg.text_content("#legend") and "RTH" in pg.text_content("#legend")
+        pg.click("#legendClose")
+        assert not pg.is_visible("#legend")
+        # the board carries the market-data columns and the desk band note
+        heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
+        assert heads[:7] == ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP"]
+        assert "desk admits $1–30" in pg.text_content("#pillarsBoardNote")
+        assert "pillars $2–20" in pg.text_content("#pillarsBoardNote")
         # a server rebuild announces itself and the page refetches at once
         before_built = pg.evaluate("window.__SESSION__.builtAt")
         desk.refresh_session()

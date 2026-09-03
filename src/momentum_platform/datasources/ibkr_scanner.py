@@ -56,6 +56,21 @@ class _PlainSubscription:
         self.__dict__.update(kw)
 
 
+NOT_STOCK = ("ETF", "ETN", "FUND", "PREFERRED", "WARRANT", "RIGHT", "UNIT", "TRUST", "NOTE")
+
+
+def is_common_stock(stock_type: Optional[str]) -> bool:
+    """Ross's universe is common stock (ADRs included: many of the runners are
+    Chinese listings). Leveraged ETFs, ETNs, funds, preferreds, warrants,
+    rights and units gap and run too, and they are not what the strategy is
+    about — a 2x daily ETF on a runner was the desk's top "gainer" once.
+    Unknown types are kept and the row says so."""
+    if not stock_type:
+        return True
+    t = stock_type.upper()
+    return not any(word in t for word in NOT_STOCK)
+
+
 def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN,
                codes: Iterable[str] = SCAN_CODES, locations: Iterable[str] = LOCATIONS,
                log: Optional[Callable[[str], None]] = None) -> Dict[str, dict]:
@@ -65,6 +80,7 @@ def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN
     fails is logged and skipped; the caller's notes say how many ran."""
     say = log or (lambda m: None)
     found: Dict[str, dict] = {}
+    excluded: Dict[str, str] = {}
     ran = failed = 0
     for location in locations:
         for code in codes:
@@ -82,13 +98,18 @@ def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN
                 sym = getattr(c, "symbol", None)
                 if not sym:
                     continue
+                stock_type = getattr(cd, "stockType", None)
+                if not is_common_stock(stock_type):
+                    excluded[sym] = stock_type
+                    continue
                 entry = found.setdefault(sym, {
                     "symbol": sym, "exchange": getattr(c, "primaryExchange", None) or "NASDAQ",
                     "name": getattr(cd, "longName", None), "scans": [], "contract": c,
+                    "stock_type": stock_type,
                 })
                 if code not in entry["scans"]:
                     entry["scans"].append(code)
-    found["__meta__"] = {"ran": ran, "failed": failed}
+    found["__meta__"] = {"ran": ran, "failed": failed, "excluded": excluded}
     return found
 
 
@@ -145,7 +166,7 @@ def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = la
                 "prev_close": prev, "exchange": e["exchange"], "name": e.get("name"),
                 "volume": _num(getattr(t, "volume", None)),
                 "bid": _num(getattr(t, "bid", None)), "ask": _num(getattr(t, "ask", None)),
-                "scans": list(e["scans"]),
+                "scans": list(e["scans"]), "stock_type": e.get("stock_type"),
             })
     if delayed:
         notes.append(f"{delayed} names reported DELAYED market data and were dropped — "
@@ -174,6 +195,11 @@ def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float 
                     f"{ROWS_PER_SCAN} rows each) — a discovery set, not an exhaustive list.")
     if meta["failed"]:
         notes.append(f"{meta['failed']} scan queries failed; see the server log.")
+    excluded = meta.get("excluded") or {}
+    if excluded:
+        sample = ", ".join(f"{k} ({v})" for k, v in list(excluded.items())[:4])
+        notes.append(f"{len(excluded)} non-stock instruments excluded (ETFs, ETNs, funds, warrants): {sample}"
+                     + (" …" if len(excluded) > 4 else ""))
     return {"rows": kept[:top] if top else kept, "source": "ibkr", "asof": _iso(clock()),
             "notes": notes, "band": [min_price, max_price], "min_gain": min_gain,
             "scanned": len(found) - 1}
@@ -196,7 +222,8 @@ def daily_bars(ib, contract, lookback: str = "1 Y") -> List[dict]:
 
 def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optional[str] = None,
                      name: Optional[str] = None, today: Optional[str] = None,
-                     sec: Optional[dict] = None, clock: Callable[[], datetime] = lambda: datetime.now(UTC)) -> dict:
+                     sec: Optional[dict] = None, clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+                     ibkr_float: Optional[dict] = None) -> dict:
     """The reference record the session builder consumes. Previous close is
     the last COMPLETED day's close, never today's partial bar."""
     today = today or clock().astimezone(timezone(timedelta(hours=-4))).date().isoformat()
@@ -208,6 +235,21 @@ def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optio
     last = _num(getattr(ticker, "last", None)) if ticker is not None else None
     last_ts = getattr(ticker, "time", None) if ticker is not None else None
     sec = sec or {}
+    ibkr_float = ibkr_float or {}
+    # Float, by evidence: IBKR's fundamentals float (a stated float figure) is
+    # verified; SEC shares outstanding is an upper bound and says so; nothing
+    # else is unknown. Shares outstanding is never relabelled as float.
+    if ibkr_float.get("float"):
+        float_shares, float_quality, float_asof, float_source = (
+            ibkr_float["float"], "verified", ibkr_float.get("as_of"), "IBKR fundamentals (Refinitiv) total float")
+    elif sec.get("shares"):
+        float_shares, float_quality, float_asof, float_source = (
+            sec["shares"], "shares_outstanding_proxy", sec.get("as_of"), "SEC shares outstanding (upper bound)")
+    elif ibkr_float.get("shares_out"):
+        float_shares, float_quality, float_asof, float_source = (
+            ibkr_float["shares_out"], "shares_outstanding_proxy", ibkr_float.get("as_of"), "IBKR shares outstanding (upper bound)")
+    else:
+        float_shares, float_quality, float_asof, float_source = None, "unknown", None, None
     return {
         "type": "reference", "symbol": symbol,
         "prev_close": prev_close, "avg_daily_volume": avg_volume, "high_52w": high_52w,
@@ -217,9 +259,10 @@ def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optio
         "last_source": "ibkr",
         "exchange": exchange, "name": name,
         "country": sec.get("country"), "incorporated_in": sec.get("incorporated_in"),
-        "float_shares": sec.get("shares"),
-        "float_quality": "shares_outstanding_proxy" if sec.get("shares") else "unknown",
-        "float_asof": sec.get("as_of"),
+        "float_shares": float_shares,
+        "float_quality": float_quality,
+        "float_asof": float_asof,
+        "float_source": float_source,
         "daily_bars": bars,
     }
 
@@ -246,6 +289,31 @@ def store_records(store, symbol: str) -> List[dict]:
     return [{"type": "bar", "tf": "10s", "symbol": symbol, "ts": _iso(b.ts),
              "open": b.open, "high": b.high, "low": b.low, "close": b.close, "volume": b.volume}
             for b in store.candles_10s(symbol)]
+
+
+def float_from_ibkr(ib, contract) -> dict:
+    """Float from IBKR's fundamentals snapshot (Refinitiv ReportSnapshot):
+    the SharesOut element carries TotalFloat. Returns {} when the account has
+    no fundamentals entitlement or the element is absent — never a guess."""
+    try:
+        xml = ib.reqFundamentalData(contract, "ReportSnapshot")
+    except Exception:
+        return {}
+    return parse_float_xml(xml or "")
+
+
+def parse_float_xml(xml: str) -> dict:
+    import re
+    m = re.search(r'<SharesOut([^>]*)>\s*([\d.eE+]+)\s*</SharesOut>', xml)
+    if not m:
+        return {}
+    attrs, shares_out = m.group(1), m.group(2)
+    fl = re.search(r'TotalFloat="([\d.eE+]+)"', attrs)
+    date = re.search(r'Date="([^"]+)"', attrs)
+    out = {"shares_out": _num(shares_out), "as_of": date.group(1) if date else None}
+    if fl and _num(fl.group(1)):
+        out["float"] = _num(fl.group(1))
+    return out
 
 
 def sec_profile(symbol: str) -> dict:

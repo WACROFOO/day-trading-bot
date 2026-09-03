@@ -41,7 +41,7 @@ from momentum_platform.datasources.alpaca_source import (  # noqa: E402
 )
 from momentum_platform.datasources.sec_source import SecError, client_from_env as sec_from_env  # noqa: E402
 from momentum_platform.scanners.five_pillars import (  # noqa: E402
-    FLOAT_MAX_SHARES, PRICE_BAND_EVIDENCE, PRICE_MAX, PRICE_MIN,
+    DESK_BAND_EVIDENCE, DESK_PRICE_MAX, DESK_PRICE_MIN, FLOAT_MAX_SHARES, PRICE_MAX, PRICE_MIN,
 )
 
 ET = ZoneInfo("America/New_York")
@@ -94,10 +94,9 @@ def header() -> None:
     print(f"{B}{now:%a %d %b}  {now:%H:%M} ET  ({now.astimezone(FR):%H:%M} Paris){O}   "
           f"{paint}{name}{O}{D}{left}{O}")
     print(f"{D}{advice}{O}")
-    band = f"${PRICE_MIN:g}-{PRICE_MAX:g}"
-    tag = "operator override" if PRICE_BAND_EVIDENCE == "operator_override" else "confirmed course"
-    print(f"{D}price band {band} ({tag}) · float cap {FLOAT_MAX_SHARES/1e6:.0f}M · "
-          f"IEX volume floor ×{IEX_VOLUME_FLOOR_SCALE}{O}")
+    tag = "yours" if DESK_BAND_EVIDENCE == "operator_override" else "confirmed course"
+    print(f"{D}desk band ${DESK_PRICE_MIN:g}-{DESK_PRICE_MAX:g} ({tag}) · pillar band ${PRICE_MIN:g}-{PRICE_MAX:g} "
+          f"(confirmed course) · float cap {FLOAT_MAX_SHARES/1e6:.0f}M · IEX volume floor ×{IEX_VOLUME_FLOOR_SCALE}{O}")
     print("=" * 78)
 
 
@@ -226,7 +225,7 @@ def main(argv=None) -> int:
     try:
         if args.scan:
             print(f"{D}scanning the market…{O}")
-            found = scan_market(client_from_env(), min_price=PRICE_MIN, max_price=PRICE_MAX,
+            found = scan_market(client_from_env(), min_price=DESK_PRICE_MIN, max_price=DESK_PRICE_MAX,
                                 top=args.top, log=lambda m: print(D + m + O))
             if found["stale"]:
                 print(f"{Y}NOTE: these are the {found['session_date']} session's moves — "

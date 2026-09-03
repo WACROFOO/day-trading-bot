@@ -144,7 +144,7 @@ class LiveSession:
     def _loop(self) -> None:
         from ..datasources.alpaca_source import (AlpacaError, client_from_env,
                                                  scan_market)
-        from ..scanners.five_pillars import PRICE_MIN, PRICE_MAX
+        from ..scanners.five_pillars import DESK_PRICE_MAX as PRICE_MAX, DESK_PRICE_MIN as PRICE_MIN
         while True:
             time.sleep(self.refresh)
             try:
@@ -205,7 +205,7 @@ class ScreenerLoop:
     def _loop(self) -> None:
         from ..datasources.alpaca_source import AlpacaError, client_from_env
         from ..datasources.screener import build_screener
-        from ..scanners.five_pillars import PRICE_MAX, PRICE_MIN
+        from ..scanners.five_pillars import DESK_PRICE_MAX as PRICE_MAX, DESK_PRICE_MIN as PRICE_MIN
         yahoo = None
         if self.use_yahoo:
             from ..datasources.yahoo_quotes import YahooQuotes
@@ -436,7 +436,7 @@ def _ibkr_desk(args, rebuild: int):
     import os
     from .ibkr_desk import IbkrDesk
     from ..datasources.ibkr_scanner import IbkrError
-    from ..scanners.five_pillars import PRICE_MAX, PRICE_MIN
+    from ..scanners.five_pillars import DESK_PRICE_MAX as PRICE_MAX, DESK_PRICE_MIN as PRICE_MIN
     symbols = [s for s in (args.ibkr or "").split(",") if s.strip()]
     print("Starting the IBKR desk. Scan, quotes and history take 30-90 s the first time; "
           "the line 'desk ready' means the page is up.", flush=True)

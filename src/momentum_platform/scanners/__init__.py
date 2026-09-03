@@ -4,6 +4,7 @@ from .momentum_events import (
     Breakout52wScanner,
     HodMomentumScanner,
     RunningMoveScanner,
+    UptrendScanner,
     squeeze_10_in_10,
     squeeze_5_in_5,
 )
@@ -25,6 +26,7 @@ __all__ = [
     "score_pillars",
     "HodMomentumScanner",
     "RunningMoveScanner",
+    "UptrendScanner",
     "Breakout52wScanner",
     "squeeze_5_in_5",
     "squeeze_10_in_10",
