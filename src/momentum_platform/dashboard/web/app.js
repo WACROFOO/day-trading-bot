@@ -1122,7 +1122,9 @@ function renderL2(frame, ctx) {
     tape.appendChild(r);
   });
   host.appendChild(tape);
-  host.appendChild(el("div", "note", "Simulated depth generated from the replay snapshot — not licensed market data. Level 2 shows resting orders; the tape shows what actually executed."));
+  // The ladder AND the tape are generated from the same seed. Saying only
+  // "simulated depth" left the prints below reading as real executions.
+  host.appendChild(el("div", "note", "Simulated book and tape — not licensed market data."));
 }
 
 /* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
@@ -1302,9 +1304,9 @@ function renderCharts(frame) {
     if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
-    PANES.d.note("10-second bars need tick or sub-minute data. This feed publishes " +
-                 "1-minute bars at best, so the micro view stays empty rather than " +
-                 "inventing candles.");
+    // What is true, rather than a claim about the provider's capabilities:
+    // this session carries no sub-minute data for this symbol.
+    PANES.d.note("No sub-minute data for " + sym + " in this session. Empty rather than invented.");
   }
   PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
   if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back
