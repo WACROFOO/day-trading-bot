@@ -308,18 +308,22 @@ def test_ui_row_click_links_everything(page):
     assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_chart_stack_is_1m_large_over_5m_and_10s(page):
-    """The requested stack: one large 1-minute chart, with 5-minute and
-    10-second side by side beneath it."""
+def test_ui_chart_stack_is_tradingview_large_over_1m_and_10s(page):
+    """The requested stack: TradingView's own chart large on top, with the
+    desk's 1-minute and 10-second panes side by side beneath it. The 5-minute
+    pane waits in the tray."""
     _seek(page, 124)
+    big = page.locator("[data-card=tv-widget]").bounding_box()
+    cards = {c: page.locator(f"[data-card={c}]").bounding_box() for c in ("chart-1m", "chart-10s")}
     boxes = {c: page.locator(f"[data-card={c}] .chart-host").bounding_box()
-             for c in ("chart-1m", "chart-5m", "chart-10s")}
-    one, five, ten = boxes["chart-1m"], boxes["chart-5m"], boxes["chart-10s"]
-    assert one["height"] > five["height"]                 # 1m is the big one
-    assert one["width"] > five["width"] * 1.5             # and spans the pair
-    assert abs(five["y"] - ten["y"]) < 4                  # 5m and 10s share a row
-    assert ten["x"] > five["x"] + five["width"] - 4       # side by side
-    assert five["y"] > one["y"] + one["height"] - 4       # below the 1m
+             for c in ("chart-1m", "chart-10s")}
+    one, ten = cards["chart-1m"], cards["chart-10s"]
+    assert big["height"] > one["height"]                  # TradingView is the big one
+    assert big["width"] > one["width"] * 1.5              # and spans the pair
+    assert abs(one["y"] - ten["y"]) < 4                   # 1m and 10s share a row
+    assert ten["x"] > one["x"] + one["width"] - 4         # side by side
+    assert one["y"] > big["y"] + big["height"] - 4        # below the widget
+    assert page.locator(".slot [data-card=chart-5m]").count() == 0
     for cid in boxes:
         inner = page.locator(f"[data-card={cid}] .chart-host canvas").first.bounding_box()
         assert inner and abs(inner["width"] - boxes[cid]["width"]) < 4
@@ -379,7 +383,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=screener]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v3'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v4'))")
     assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -423,7 +427,7 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert sorted(items) == ["chart-daily", "level2", "tv-widget"]
+    assert sorted(items) == ["chart-5m", "chart-daily", "level2"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -479,7 +483,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=screener]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v3'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v4'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)

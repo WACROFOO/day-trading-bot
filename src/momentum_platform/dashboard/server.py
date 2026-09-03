@@ -401,7 +401,10 @@ def main(argv=None) -> int:
     # Describe the feed the session ACTUALLY carries. Asking for --alpaca and
     # falling back to the fixture used to still print "Alpaca IEX feed", which
     # tells the user they are on live data when they are not.
-    if session.get("dataStatus") in ("iex", "live"):
+    ibkr = getattr(live, "hub", None) is not None
+    if ibkr:
+        pass                                   # the IBKR lines below describe this desk
+    elif session.get("dataStatus") in ("iex", "live"):
         print("Alpaca IEX feed — single venue, so absolute volume is a fraction of the "
               "consolidated tape. Research only.")
     elif args.alpaca:
@@ -409,7 +412,7 @@ def main(argv=None) -> int:
               "market. The header badge reads REPLAY.")
     if args.live:
         print("DELAYED data (~15 minutes) — research only, not an entitled feed")
-    if session.get("live"):
+    if session.get("live") and not ibkr:
         print(f"LIVE — the session rebuilds every {refresh}s"
               + (f" and re-scans the market every {args.rescan} min" if args.rescan else "")
               + ". The page follows the live edge on its own.")

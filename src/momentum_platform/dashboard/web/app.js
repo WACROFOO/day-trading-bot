@@ -43,10 +43,16 @@ const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]);
 /* ── derived series ─────────────────────────────────────────────────── */
 function barsUpTo(sym, idx) {
   const b = BARS[sym] || [];
-  // On a streaming desk the live edge is "everything the store has": a minute
-  // that closed since the last server rebuild is already in BARS via the stream.
-  if (S.streaming && idx >= FRAMES.length - 1) return b;
-  return b.slice(0, Math.min(idx + 1, b.length));
+  // Cut by TIME, never by index. A frame's barIndex counts the FIRST symbol's
+  // bars, and on a live desk every symbol has its own history length: an
+  // index cut drew AEHL's 04:00-05:15 premarket flat line as "the chart" at
+  // 10:43 while its 10-second pane, cut by time, showed the real 7-dollar tape.
+  if (!FRAMES.length) return b;
+  const at = FRAMES[Math.min(state.frame, FRAMES.length - 1)].t;
+  const limit = (S.streaming && state.frame >= FRAMES.length - 1) ? Infinity : at + 60;
+  let lo = 0, hi = b.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (b[mid][0] < limit) lo = mid + 1; else hi = mid; }
+  return b.slice(0, lo);
 }
 /* Aggregate 1-minute bars into n-minute candles ON THE CLOCK. Grouping every n
    bars by index started 5-minute candles at 09:04 when the first print landed
@@ -1092,19 +1098,23 @@ function beep(severity) {
    per browser so the desk comes back the way it was left. */
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
-  C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "timeline",
+  // TradingView's own chart — their toolbar, drawing tools and indicators —
+  // is the big pane. The desk's 1-minute and 10-second panes (IBKR data, the
+  // plan's entry/stop/target drawn on them) sit under it; 5-minute waits in
+  // the tray, one drag away, and the widget switches interval with a click.
+  C1: "tv-widget", C2: "chart-1m", C3: "chart-10s", C4: "timeline",
   // The screener takes the tall right slot: it is real data about the whole
   // band, refreshed on a timer. Level 2 is simulated and waits in the tray.
   R1: "screener", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "chart-daily", "tv-widget"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "chart-daily", "chart-5m"]);
 const DEFAULT_SIZES = {
   wLeft: 336, wRight: 352,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
            C4: 0.42, R1: 1.62, R2: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v3";
+const LAYOUT_KEY = "momentum-workstation.layout.v4";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1553,6 +1563,7 @@ function renderWidget(sym, meta) {
       style: "1", locale: "en", container_id: "tvWidgetMount", autosize: true,
       withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
       session: "extended", details: false, hotlist: false, calendar: false,
+      studies: ["VWAP@tv-basicstudies", "MAExp@tv-basicstudies"],
     });
   };
   if (window.TradingView) { draw(); return; }

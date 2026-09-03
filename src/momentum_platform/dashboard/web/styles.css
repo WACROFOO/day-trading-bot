@@ -42,6 +42,7 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .badge.regular{color:#0b0f14;background:var(--up);border-color:transparent}
 .badge.premarket{color:var(--hi);border-color:#4a3c17;background:#241d0c}
 .transport{display:flex;align-items:center;gap:6px;flex:1;min-width:0}
+.transport[hidden],#frameCounter[hidden]{display:none!important}
 .btn{background:var(--panel-2);border:1px solid var(--line);border-radius:5px;
   padding:4px 9px;cursor:pointer;color:var(--ink);white-space:nowrap}
 .btn:hover{border-color:#2b3a4d;background:#17202c}

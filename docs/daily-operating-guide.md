@@ -140,6 +140,16 @@ What the desk does in this mode:
 - Headlines still come from Alpaca's free news endpoint when your keys are in
   `.env`; float is still the SEC shares-outstanding upper bound. IBKR has
   neither for free.
+- The big centre pane is TradingView's own chart: their toolbar, drawing
+  tools, indicators and interval buttons, following the selected symbol. It
+  runs on TradingView's data under TradingView's rules — logged out, NASDAQ
+  prints there can be delayed — so the desk's 1-minute and 10-second panes
+  beneath it, which are IBKR data with the plan's entry, stop and target drawn
+  on, remain the numbers the scanners and the verdict use. The 5-minute pane
+  is in the tray (⊞ Cards); drag it onto any pane to swap.
+- Level 2 stays labelled SIMULATED. Real depth needs an IBKR NASDAQ TotalView
+  subscription; without it TWS gives top of book only, which the quote card
+  already shows as bid × ask.
 
 ### Premarket, honestly
 

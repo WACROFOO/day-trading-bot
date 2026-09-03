@@ -105,6 +105,8 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         pg.wait_for_timeout(800)
         assert not errors, errors
         assert pg.eval_on_selector(".transport", "e => e.hidden") is True, "no replay controls on a live desk"
+        assert not pg.is_visible(".transport"), "hidden must beat the flex display rule, or the bar still shows"
+        assert not pg.is_visible("#frameCounter")
         assert pg.text_content("#feedText") == "LIVE"
         assert "IBKR" in pg.text_content("#feedAge") and "read-only" in pg.text_content("#feedAge")
         assert "read-only, streaming" in pg.text_content("#sessionLabel")
