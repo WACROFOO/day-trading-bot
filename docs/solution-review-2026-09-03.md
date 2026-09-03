@@ -176,10 +176,10 @@ Two bands exist and are labelled everywhere:
 |---|---|---|
 | Level 2 | Simulated, labelled | Real depth needs an IBKR NASDAQ TotalView subscription |
 | Halts | Not detected | An IBKR halted flag exists on the ticker; wiring it is the next step |
-| Float | Verified only when IBKR fundamentals report total float; otherwise SEC shares outstanding as an upper bound; otherwise unknown | The supply pillar can read UNKNOWN on thin names — that is honest, not broken |
+| Float | IBKR fundamentals would give a verified total float, but this account is not entitled (TWS error 10358, seen 2026-09-03); SEC shares outstanding is shown as an upper bound; otherwise unknown | The supply pillar can read UNKNOWN on thin names — that is honest, not broken. Verify float by hand before sizing |
 | News | Alpaca's free endpoint (Benzinga headlines), polled | A real-time news API (Benzinga's own) would push headlines the moment they print; Ross is Observed with Benzinga Pro open; QuoteMedia is not evidenced anywhere in the corpus |
 | TradingView panes | Their data, their delay rules, their terms | The desk's numbers are IBKR; the panes are for reading structure |
-| Scanner union | Ten queries, 50 rows each, 150 quoted per round | A discovery set, never claimed exhaustive; raising the cadence multiplies snapshot quotes IBKR may bill |
+| Scanner union | Ten queries, 50 rows each, 150 quoted per round; leveraged ETFs, ETNs, funds and warrants dropped by instrument type (resolved once per symbol) | A discovery set, never claimed exhaustive; raising the cadence multiplies snapshot quotes IBKR may bill |
 | Scanner formulas | Approximations except the Confirmed pillars | Never presented as Warrior production settings |
 | Mastery boundary | Basics chapters 1–6 Preview videos only | Private chapters, strategies and answer keys are not mastered and never claimed |
 | Orders | None | Simulation happens by hand in the TWS paper account |
