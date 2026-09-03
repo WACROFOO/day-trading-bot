@@ -7,6 +7,11 @@ Filter (PARAMETERS.md §1): price $2–$20, day gain >= 10%,
 rvol >= 5x the 50-day average volume, day volume >= 500,000 shares.
 Float and news catalyst cannot be computed reliably from free data — they
 are surfaced as manual-check columns instead of being silently dropped.
+
+Coverage is reported alongside the results. A scan where most of the universe
+failed to download looks identical to a quiet market — few or no passers — so
+`scan()` records how many symbols actually returned usable bars and the CLI
+refuses to present a degraded scan as a finished watchlist.
 """
 
 from __future__ import annotations
@@ -14,6 +19,7 @@ from __future__ import annotations
 import io
 import urllib.error
 import urllib.request
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -31,14 +37,43 @@ RVOL_MIN = 5.0
 VOLUME_MIN = 500_000
 FLOAT_MAX = 20_000_000  # not computed from free data — manual check
 
-CHUNK_SIZE = 200
+# 200 concurrent requests per chunk exhausts the default macOS file-descriptor
+# limit and swamps DNS; most of the universe then fails to download.
+CHUNK_SIZE = 50
 DOWNLOAD_PERIOD = "3mo"
 AVG_VOLUME_WINDOW = 50
 USER_AGENT = "Mozilla/5.0 (scanner; local paper-trading bot)"
 
+# Below this share of the universe returning bars, results are not a watchlist.
+COVERAGE_MIN_PCT = 90.0
+
 
 class NetworkError(RuntimeError):
     """Raised when the symbol directory cannot be downloaded and no cache exists."""
+
+
+@dataclass(frozen=True)
+class Coverage:
+    """How much of the requested universe actually returned usable bars."""
+
+    requested: int
+    with_data: int
+
+    @property
+    def missing(self) -> int:
+        return self.requested - self.with_data
+
+    @property
+    def pct(self) -> float:
+        return 100.0 * self.with_data / self.requested if self.requested else 0.0
+
+    @property
+    def is_degraded(self) -> bool:
+        return self.pct < COVERAGE_MIN_PCT
+
+    def summary(self) -> str:
+        return (f"{self.with_data:,}/{self.requested:,} symbols returned data "
+                f"({self.pct:.1f}%); {self.missing:,} missing")
 
 
 # ---------------------------------------------------------------- universe list
@@ -190,11 +225,38 @@ def _extract_symbol_frame(data: pd.DataFrame, symbol: str,
     return frame if not frame.empty else None
 
 
+def _collect_stats(symbols: list[str], chunk_size: int, period: str,
+                   rows: dict[str, dict], progress_cb, label: str,
+                   done_base: int, total: int) -> None:
+    """Download `symbols` in chunks and add each one's stats to `rows`."""
+    for start in range(0, len(symbols), chunk_size):
+        chunk = symbols[start:start + chunk_size]
+        try:
+            data = _download_chunk(chunk, period)
+        except Exception as exc:  # noqa: BLE001 - skip a bad chunk, keep scanning
+            data = None
+            if progress_cb:
+                progress_cb(done_base + start + len(chunk), total,
+                            f"chunk failed: {exc}")
+        if data is not None:
+            for sym in chunk:
+                frame = _extract_symbol_frame(data, sym, len(chunk))
+                if frame is None:
+                    continue  # no data / dropped by yfinance
+                stats = compute_stats(frame)
+                if stats:
+                    rows[sym] = stats
+        if progress_cb:
+            done = min(start + len(chunk), len(symbols))
+            progress_cb(done_base + done, total, f"{label} {done}/{len(symbols)}")
+
+
 def scan(symbols: list[str] | None = None,
          include_etf: bool = False,
          chunk_size: int = CHUNK_SIZE,
          period: str = DOWNLOAD_PERIOD,
          fetch_float: bool = False,
+         retry_missing: bool = True,
          progress_cb=None,
          **thresholds) -> pd.DataFrame:
     """Scan the NASDAQ universe (or a given symbol list) against the §1 filter.
@@ -203,30 +265,25 @@ def scan(symbols: list[str] | None = None,
     progress_cb(done, total, message) is called after each chunk for UIs.
     fetch_float=True queries Ticker.info['floatShares'] for passers only
     (one slow HTTP call per passer — off by default).
+    retry_missing=True re-downloads symbols that returned nothing, in smaller
+    chunks, since the usual cause is transient connection exhaustion.
+
+    The returned frame carries a `Coverage` under `.attrs["coverage"]`. Check
+    `is_degraded` before treating the result as a complete scan.
     """
     if symbols is None:
         symbols = fetch_nasdaq_universe(include_etf=include_etf)["symbol"].tolist()
     total = len(symbols)
     rows: dict[str, dict] = {}
-    for start in range(0, total, chunk_size):
-        chunk = symbols[start:start + chunk_size]
-        try:
-            data = _download_chunk(chunk, period)
-        except Exception as exc:  # noqa: BLE001 - skip a bad chunk, keep scanning
-            if progress_cb:
-                progress_cb(min(start + len(chunk), total), total,
-                            f"chunk failed: {exc}")
-            continue
-        for sym in chunk:
-            frame = _extract_symbol_frame(data, sym, len(chunk))
-            if frame is None:
-                continue  # no data / dropped by yfinance
-            stats = compute_stats(frame)
-            if stats:
-                rows[sym] = stats
+    _collect_stats(symbols, chunk_size, period, rows, progress_cb,
+                   "scanned", 0, total)
+
+    missing = [s for s in symbols if s not in rows]
+    if retry_missing and missing:
         if progress_cb:
-            progress_cb(min(start + len(chunk), total), total,
-                        f"scanned {min(start + len(chunk), total)}/{total}")
+            progress_cb(total, total, f"retrying {len(missing):,} with no data")
+        _collect_stats(missing, max(1, chunk_size // 5), period, rows,
+                       progress_cb, "retried", 0, len(missing))
 
     result = apply_filters(pd.DataFrame.from_dict(rows, orient="index"),
                            **thresholds)
@@ -234,6 +291,7 @@ def scan(symbols: list[str] | None = None,
         result["float_shares"] = [
             _fetch_float_shares(sym) for sym in result["symbol"]
         ]
+    result.attrs["coverage"] = Coverage(requested=total, with_data=len(rows))
     return result
 
 

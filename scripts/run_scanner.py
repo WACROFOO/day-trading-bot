@@ -29,6 +29,11 @@ def main() -> int:
                         help="exclude ETFs from the universe")
     parser.add_argument("--fetch-float", action="store_true",
                         help="query floatShares for passers (slow — one call per passer)")
+    parser.add_argument("--chunk-size", type=int, default=scanner.CHUNK_SIZE,
+                        help=f"symbols per download batch (default {scanner.CHUNK_SIZE}); "
+                             "lower it if downloads fail")
+    parser.add_argument("--no-retry", action="store_true",
+                        help="skip the retry pass over symbols that returned no data")
     args = parser.parse_args()
 
     print("Fetching NASDAQ symbol directory...")
@@ -50,8 +55,22 @@ def main() -> int:
         print(f"\r  {message}   ", end="", flush=True)
 
     results = scanner.scan(symbols=symbols, fetch_float=args.fetch_float,
+                           chunk_size=args.chunk_size,
+                           retry_missing=not args.no_retry,
                            progress_cb=progress)
     print()
+
+    coverage = results.attrs.get("coverage")
+    if coverage and coverage.is_degraded:
+        print(f"\nWARNING: incomplete scan — {coverage.summary()}.")
+        print("These results are NOT a watchlist: most of the universe never "
+              "returned data, so passers cannot be distinguished from a quiet "
+              "market. Fix the downloads and re-run before trading off this.")
+        print("Common causes: missing CA certificates, a low open-file limit "
+              "(try `ulimit -n 4096`), or too much concurrency "
+              "(try --chunk-size 20).\n")
+    elif coverage:
+        print(f"Coverage: {coverage.summary()}.")
 
     if results.empty:
         print("No symbols passed the universe filter.")
@@ -65,7 +84,7 @@ def main() -> int:
     out = scanner.results_path(RESULTS_DIR)
     results.to_csv(out, index=False)
     print(f"Saved: {out}")
-    return 0
+    return 2 if coverage and coverage.is_degraded else 0
 
 
 if __name__ == "__main__":

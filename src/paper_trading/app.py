@@ -362,7 +362,10 @@ with tab_scanner:
                 "Scan")
             bar.empty()
             if results is not None:
+                coverage = results.attrs.get("coverage")
                 results = results.head(MAX_SCANNER_ROWS)
+                # .head() may drop attrs depending on the pandas version.
+                results.attrs["coverage"] = coverage
                 current = set(results["symbol"])
                 seen = st.session_state["seen_symbols"]
                 # The first scan only seeds the baseline silently; later
@@ -374,6 +377,14 @@ with tab_scanner:
                 st.session_state["scan_results"] = results
 
     results = st.session_state["scan_results"]
+    if results is not None:
+        coverage = results.attrs.get("coverage")
+        if coverage and coverage.is_degraded:
+            st.error(
+                f"Incomplete scan — {coverage.summary()}. This is not a "
+                "watchlist: most of the universe never returned data, so "
+                "passers cannot be told apart from a quiet market. Re-run "
+                "once downloads are working.")
     if results is None:
         st.caption("Run a scan to populate the hit list — results are kept "
                    "across refreshes.")

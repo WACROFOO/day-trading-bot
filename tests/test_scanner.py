@@ -195,3 +195,80 @@ def test_scan_progress_callback(monkeypatch):
     scanner.scan(symbols=["GOOD"], chunk_size=1,
                  progress_cb=lambda d, t, m: calls.append((d, t)))
     assert calls and calls[-1] == (1, 1)
+
+
+# ------------------------------------------------------------------ coverage
+
+def test_coverage_arithmetic():
+    cov = scanner.Coverage(requested=200, with_data=50)
+    assert cov.missing == 150
+    assert cov.pct == pytest.approx(25.0)
+    assert cov.is_degraded
+
+
+def test_coverage_full_scan_is_not_degraded():
+    cov = scanner.Coverage(requested=100, with_data=100)
+    assert cov.pct == pytest.approx(100.0)
+    assert not cov.is_degraded
+    assert cov.missing == 0
+
+
+def test_coverage_empty_universe_does_not_divide_by_zero():
+    assert scanner.Coverage(requested=0, with_data=0).pct == 0.0
+
+
+def test_scan_reports_degraded_coverage(monkeypatch):
+    """A scan where nearly everything fails must not look like a quiet market."""
+    monkeypatch.setattr(scanner.yf, "download", fake_download)
+    out = scanner.scan(symbols=["GOOD"] + ["BAD"] * 19, chunk_size=20)
+    cov = out.attrs["coverage"]
+    assert cov.requested == 20
+    assert cov.with_data == 1
+    assert cov.is_degraded
+
+
+def test_scan_reports_full_coverage(monkeypatch):
+    monkeypatch.setattr(scanner.yf, "download", fake_download)
+    out = scanner.scan(symbols=["GOOD", "ALSOGOOD"], chunk_size=2)
+    assert not out.attrs["coverage"].is_degraded
+
+
+def test_scan_retries_symbols_that_returned_no_data(monkeypatch):
+    """First pass drops BAD; the retry pass sees it recover."""
+    attempts = {"n": 0}
+
+    def flaky(tickers: str, **kwargs) -> pd.DataFrame:
+        attempts["n"] += 1
+        drop = "BAD" if attempts["n"] == 1 else None
+        symbols = [s for s in tickers.split() if s != drop]
+        cols = pd.MultiIndex.from_product(
+            [symbols, ["Open", "High", "Low", "Close", "Volume"]])
+        df = pd.DataFrame(index=pd.date_range("2024-01-01", periods=3), columns=cols)
+        for s in symbols:
+            df[(s, "Close")] = [1.0, 1.0, 2.0]
+            df[(s, "Volume")] = [100.0, 100.0, 1_000_000.0]
+        return df
+
+    monkeypatch.setattr(scanner.yf, "download", flaky)
+    out = scanner.scan(symbols=["GOOD", "BAD"], chunk_size=2)
+    assert sorted(out["symbol"]) == ["BAD", "GOOD"]
+    assert out.attrs["coverage"].with_data == 2
+
+
+def test_scan_no_retry_leaves_missing_symbols(monkeypatch):
+    monkeypatch.setattr(scanner.yf, "download", fake_download)
+    out = scanner.scan(symbols=["GOOD", "BAD"], chunk_size=2, retry_missing=False)
+    assert out.attrs["coverage"].with_data == 1
+
+
+def test_scan_chunk_exception_does_not_abort_scan(monkeypatch):
+    """One exploding chunk must not lose the symbols in the other chunks."""
+    def sometimes_boom(tickers: str, **kwargs) -> pd.DataFrame:
+        if "BOOM" in tickers:
+            raise RuntimeError("connection reset")
+        return fake_download(tickers, **kwargs)
+
+    monkeypatch.setattr(scanner.yf, "download", sometimes_boom)
+    out = scanner.scan(symbols=["BOOM", "GOOD"], chunk_size=1, retry_missing=False)
+    assert out["symbol"].tolist() == ["GOOD"]
+    assert out.attrs["coverage"].with_data == 1
