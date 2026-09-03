@@ -126,5 +126,14 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert quote == 4.35
         label = pg.evaluate("Array.from(document.querySelectorAll('#quoteCard .qgrid span')).map(e => e.textContent).join('|')")
         assert "IBKR last print" in label and "IEX last print" not in label
+        states = pg.eval_on_selector_all(".tile-state", "els => els.map(e => e.textContent)")
+        assert states and "REPLAY" not in states and set(states) <= {"LIVE", "STALE"}, states
+        assert pg.locator("[data-card=pillars-board] .pb-row:not(.head)").count() == 1
+        assert pg.locator(".slot [data-card=timeline]").count() == 0
+        # a server rebuild announces itself and the page refetches at once
+        before_built = pg.evaluate("window.__SESSION__.builtAt")
+        desk.refresh_session()
+        pg.wait_for_function(f"window.__SESSION__.builtAt !== {before_built!r}", timeout=5000)
+        assert pg.evaluate("window.DeskLive.counts.session") >= 1
         assert not errors, errors
         browser.close()

@@ -140,13 +140,27 @@ What the desk does in this mode:
 - Headlines still come from Alpaca's free news endpoint when your keys are in
   `.env`; float is still the SEC shares-outstanding upper bound. IBKR has
   neither for free.
-- The big centre pane is TradingView's own chart: their toolbar, drawing
-  tools, indicators and interval buttons, following the selected symbol. It
-  runs on TradingView's data under TradingView's rules — logged out, NASDAQ
-  prints there can be delayed — so the desk's 1-minute and 10-second panes
-  beneath it, which are IBKR data with the plan's entry, stop and target drawn
-  on, remain the numbers the scanners and the verdict use. The 5-minute pane
-  is in the tray (⊞ Cards); drag it onto any pane to swap.
+- The centre column is TradingView's own charts: 1 minute large on top,
+  5 minute beneath it, both with their toolbar, drawing tools, session VWAP
+  and EMA, following the selected symbol. They run on TradingView's data under
+  TradingView's rules — the "D" badge on the chart means delayed; logged out,
+  NASDAQ prints there can lag — so the desk's 10-second pane next to them,
+  which is IBKR data drawn in the same colours with the plan's entry, stop and
+  target, and every scanner number, stay on the entitled feed. The desk's own
+  1-minute and 5-minute panes are in the tray (⊞ Cards); drag one onto any
+  pane to swap.
+- The bottom strip is the Five Pillars board: every name on the desk against
+  price, gain, daily RVOL, float and news, with the value and PASS, FAIL or
+  UNKNOWN in each cell and a score out of five, best first. The list card at
+  the top left shows only the names that pass the hard gates; the board shows
+  why the others do not. The alert timeline is in the tray.
+- The scanners rebuild every 3 seconds from the live store and the page
+  refreshes the moment a rebuild lands; the scanner union on client 28 runs
+  every 120 seconds by default (`--ibkr-rescan 60` to run it every minute —
+  each round quotes up to 150 names by snapshot, which IBKR bills per snapshot
+  on names your streaming subscription does not cover).
+- Scanner tiles carry the feed's real state — LIVE, STALE, DELAYED or
+  OFFLINE — from the provider health, never REPLAY, on a live desk.
 - Level 2 stays labelled SIMULATED. Real depth needs an IBKR NASDAQ TotalView
   subscription; without it TWS gives top of book only, which the quote card
   already shows as bid × ask.

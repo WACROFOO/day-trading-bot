@@ -371,3 +371,16 @@ body.resizing .gutter{pointer-events:auto}
 .screener-row.ondesk{box-shadow:inset 2px 0 0 var(--up)}
 .tag.yahoo{color:#c9a0ff;border-color:#4a3c6b;background:#1c1530}
 .tag.iex{color:#7fd1ff;border-color:#1d4d6b;background:#0f2230}
+
+/* Five Pillars board: one row per desk symbol, five pillar cells. */
+.pillars-board{overflow:auto;padding:4px 6px}
+.pb-row{display:grid;grid-template-columns:72px 62px 1fr 1fr 1fr 1fr 1fr 54px;gap:6px;align-items:center;padding:3px 4px;border-bottom:1px solid var(--border,#1d2836);cursor:pointer;font-size:11px}
+.pb-row.head{color:var(--ink-faint,#6b7a8c);font-size:10px;text-transform:uppercase;letter-spacing:.04em;cursor:default}
+.pb-row.sel{background:rgba(91,140,255,.10)}
+.pb-row b{font-size:12px}
+.pb-cell{display:flex;gap:6px;align-items:baseline;white-space:nowrap}
+.pb-cell .v{color:#c7d2de}
+.pb-pill{font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:.04em}
+.pb-pill.pass{background:#0f3d2a;color:#2ad17f}.pb-pill.fail{background:#3d1a1f;color:#ff5f6e}.pb-pill.unknown{background:#3a2f12;color:#ffc247}
+.pb-score{font-weight:700;text-align:right}
+.tile-state.live{background:#0f3d2a;color:#2ad17f}.tile-state.stale{background:#3a2f12;color:#ffc247}.tile-state.offline,.tile-state.delayed{background:#3d1a1f;color:#ff5f6e}

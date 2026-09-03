@@ -9,7 +9,7 @@
 //           .connect("/api/v1/stream");
 (function () {
   const TYPES = ["quote", "bar5s", "bar10s", "bar1m", "health", "screener",
-                 "symbol-added", "alert", "resync"];
+                 "symbol-added", "alert", "session", "resync"];
   const DeskLive = {
     state: "idle",            // idle | connecting | open | reconnecting | closed | unsupported
     lastEventId: null,

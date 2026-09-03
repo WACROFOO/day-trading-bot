@@ -286,7 +286,8 @@ def test_ui_opens_three_scanner_cards(page):
 
 def test_ui_tiles_report_state(page):
     states = page.eval_on_selector_all(".tile-state", "els => els.map(e => e.textContent)")
-    assert states and all(s in {"REPLAY", "FROZEN", "STALE", "OFFLINE", "LIVE"} for s in states)
+    assert states and all(s in {"REPLAY", "FROZEN", "STALE", "OFFLINE", "LIVE", "DELAYED"} for s in states)
+    assert "REPLAY" in states, "a recorded session says so on its tiles"
 
 
 def test_ui_alert_rows_show_session(page):
@@ -308,25 +309,29 @@ def test_ui_row_click_links_everything(page):
     assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_chart_stack_is_tradingview_large_over_1m_and_10s(page):
-    """The requested stack: TradingView's own chart large on top, with the
-    desk's 1-minute and 10-second panes side by side beneath it. The 5-minute
-    pane waits in the tray."""
+def test_ui_chart_stack_is_tradingview_1m_over_tradingview_5m_and_10s(page):
+    """The requested stack: TradingView's 1-minute chart large on top, their
+    5-minute chart and the desk's 10-second pane side by side beneath it, the
+    Five Pillars board across the bottom. The desk's own 1m and 5m panes and
+    the alert timeline wait in the tray."""
     _seek(page, 124)
     big = page.locator("[data-card=tv-widget]").bounding_box()
-    cards = {c: page.locator(f"[data-card={c}]").bounding_box() for c in ("chart-1m", "chart-10s")}
-    boxes = {c: page.locator(f"[data-card={c}] .chart-host").bounding_box()
-             for c in ("chart-1m", "chart-10s")}
-    one, ten = cards["chart-1m"], cards["chart-10s"]
-    assert big["height"] > one["height"]                  # TradingView is the big one
-    assert big["width"] > one["width"] * 1.5              # and spans the pair
-    assert abs(one["y"] - ten["y"]) < 4                   # 1m and 10s share a row
-    assert ten["x"] > one["x"] + one["width"] - 4         # side by side
-    assert one["y"] > big["y"] + big["height"] - 4        # below the widget
-    assert page.locator(".slot [data-card=chart-5m]").count() == 0
-    for cid in boxes:
-        inner = page.locator(f"[data-card={cid}] .chart-host canvas").first.bounding_box()
-        assert inner and abs(inner["width"] - boxes[cid]["width"]) < 4
+    five = page.locator("[data-card=tv-widget-5m]").bounding_box()
+    ten = page.locator("[data-card=chart-10s]").bounding_box()
+    board = page.locator("[data-card=pillars-board]").bounding_box()
+    assert big["height"] > five["height"]                 # TradingView 1m is the big one
+    assert big["width"] > five["width"] * 1.5             # and spans the pair
+    assert abs(five["y"] - ten["y"]) < 4                  # 5m and 10s share a row
+    assert ten["x"] > five["x"] + five["width"] - 4       # side by side
+    assert five["y"] > big["y"] + big["height"] - 4       # below the widget
+    assert board["y"] > ten["y"] + ten["height"] - 4      # the board is the bottom strip
+    for parked in ("chart-1m", "chart-5m", "timeline"):
+        assert page.locator(f".slot [data-card={parked}]").count() == 0
+    host = page.locator("[data-card=chart-10s] .chart-host").bounding_box()
+    inner = page.locator("[data-card=chart-10s] .chart-host canvas").first.bounding_box()
+    assert inner and abs(inner["width"] - host["width"]) < 4
+    assert page.eval_on_selector("#tvWidget", "e => e.dataset.interval") == "1"
+    assert page.eval_on_selector("#tvWidget5", "e => e.dataset.interval") == "5"
 
 
 def test_ui_ten_second_chart_has_finer_bars_than_one_minute(page):
@@ -383,7 +388,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=screener]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v4'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v5'))")
     assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -427,7 +432,7 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert sorted(items) == ["chart-5m", "chart-daily", "level2"]
+    assert sorted(items) == ["chart-1m", "chart-5m", "chart-daily", "level2", "timeline"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -483,7 +488,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=screener]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v4'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v5'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -492,7 +497,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
 
 def test_ui_any_card_expands_and_restores(page):
     _seek(page, 124)
-    for card in ("chart-1m", "screener", "scan-pillars"):
+    for card in ("chart-10s", "screener", "scan-pillars"):
         page.locator(f"[data-card={card}] .expand").click()
         page.wait_for_timeout(250)
         box = page.locator(f"[data-card={card}]").bounding_box()
@@ -567,12 +572,28 @@ def test_ui_sizing_needs_the_operators_own_risk(page):
 
 
 def test_ui_alert_click_seeks_charts(page):
+    """The alert timeline waits in the tray by default; put it in the bottom
+    strip (a saved layout, as a drag would leave it) and it still seeks."""
+    page.evaluate("""() => {
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v5') || '{}');
+      saved.layout = Object.assign({}, saved.layout || {
+        L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'quote',
+        C1: 'tv-widget', C2: 'tv-widget-5m', C3: 'chart-10s', C4: 'timeline', R1: 'screener', R2: 'verdict' });
+      saved.layout.C4 = 'timeline';
+      localStorage.setItem('momentum-workstation.layout.v5', JSON.stringify(saved));
+    }""")
+    page.reload()
+    page.wait_for_timeout(400)
+    assert page.locator(".slot [data-card=timeline]").count() == 1
     _seek(page, 150)
     first_alert_time = page.locator(".tl-row .tl-time").first.inner_text()
     page.locator(".tl-row").first.click()
     page.wait_for_timeout(250)
     assert page.locator("#clockET").inner_text().startswith(first_alert_time)
     assert page.locator(".tl-detail").count() == 1
+    page.locator("#btnLayout").click()
+    page.wait_for_timeout(300)
+    assert page.locator(".slot [data-card=pillars-board]").count() == 1
 
 
 def test_ui_no_javascript_errors(page):
@@ -874,3 +895,21 @@ def test_float_row_has_three_words_never_a_boolean():
     app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
            / "dashboard" / "web" / "app.js").read_text()
     assert 'floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false)' in app
+
+
+def test_ui_five_pillars_board_lists_every_desk_symbol(page):
+    """The bottom strip is the Five Pillars board: one row per desk symbol,
+    five pillar cells with PASS / FAIL / UNKNOWN, a score, sorted by score."""
+    _seek(page, 124)
+    rows = page.locator("[data-card=pillars-board] .pb-row:not(.head)")
+    n = rows.count()
+    assert n == len(page.evaluate("Object.keys(window.__SESSION__.symbols)"))
+    scores = page.eval_on_selector_all("[data-card=pillars-board] .pb-score", "els => els.map(e => e.textContent)")
+    assert all(s.endswith("/5") for s in scores)
+    nums = [int(s.split("/")[0]) for s in scores]
+    assert nums == sorted(nums, reverse=True), "best names first"
+    pills = page.eval_on_selector_all("[data-card=pillars-board] .pb-pill", "els => els.map(e => e.textContent)")
+    assert set(pills) <= {"PASS", "FAIL", "UNKNOWN"} and len(pills) == 5 * n
+    rows.first.click()
+    page.wait_for_timeout(200)
+    assert page.locator("[data-card=pillars-board] .pb-row.sel").count() == 1

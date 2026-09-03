@@ -146,12 +146,28 @@
 
     <article class="card chart-card" data-card="tv-widget">
       <div class="card-head"><span class="grip">⠿</span>
-        <span class="card-title">TradingView · their chart</span>
+        <span class="card-title">TradingView · 1 minute</span>
         <span class="legend tiny">TradingView data &amp; terms · not this desk's feed</span>
         <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
-      <div class="chart-host tv-host" id="tvWidget">
+      <div class="chart-host tv-host" id="tvWidget" data-interval="1">
         <div class="chart-note">Drag this card onto the grid to load TradingView's chart for the selected symbol.</div>
       </div>
+    </article>
+    <article class="card chart-card" data-card="tv-widget-5m">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">TradingView · 5 minute</span>
+        <span class="legend tiny">TradingView data &amp; terms · structure</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="chart-host tv-host" id="tvWidget5" data-interval="5">
+        <div class="chart-note">Drag this card onto the grid to load TradingView's 5-minute chart for the selected symbol.</div>
+      </div>
+    </article>
+    <article class="card" data-card="pillars-board">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Five Pillars · every name on the desk</span>
+        <span class="muted tiny" id="pillarsBoardNote">price · gain · RVOL · float · news — Confirmed thresholds; float and news are columns, never gates</span>
+        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+      <div class="card-body pillars-board" id="pillarsBoard"></div>
     </article>
 
     <article class="card" data-card="timeline">

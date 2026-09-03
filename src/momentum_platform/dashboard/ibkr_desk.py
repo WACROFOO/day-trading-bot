@@ -75,7 +75,7 @@ class IbkrDesk:
     add_symbols(), screener.current(); adds hub (SSE) and health()."""
 
     def __init__(self, symbols: List[str], host: str = "127.0.0.1", port: int = 7496,
-                 client_id: int = 27, scanner_client_id: int = 28, rebuild: int = 10,
+                 client_id: int = 27, scanner_client_id: int = 28, rebuild: int = 3,
                  rescan: int = 120, max_symbols: int = 8, min_price: float = 2.0,
                  max_price: float = 20.0, min_gain: float = 10.0, top: int = 30,
                  ib_factory: Optional[Callable[[], object]] = None,
@@ -305,6 +305,11 @@ class IbkrDesk:
         with self.lock:
             self.session = session
             self.built_at = session["builtAt"]
+        # Tell every open page now: the scanners moved. A poll would find out
+        # in up to five seconds; a trader watching Running Up should not wait.
+        n_alerts = sum(len(f["alerts"]) for f in session["frames"])
+        self.hub.publish("session", {"builtAt": session["builtAt"], "frames": len(session["frames"]),
+                                     "alerts": n_alerts, "symbols": list(self.symbols)})
         return session
 
     def scan(self, add: bool = True) -> dict:

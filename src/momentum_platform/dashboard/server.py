@@ -384,7 +384,7 @@ def main(argv=None) -> int:
     screener = None
     live = None
     if args.ibkr is not None:
-        live = _ibkr_desk(args, refresh if args.refresh is not None else 10)
+        live = _ibkr_desk(args, refresh if args.refresh is not None else 3)
     if live is None:
         live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
     else:

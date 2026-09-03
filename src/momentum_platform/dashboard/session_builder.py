@@ -53,7 +53,7 @@ ROW_COLUMNS = [
 ]
 
 LIST_META = {
-    "five_pillars_list": {"title": "Ross-style Five Pillars Scan", "metric": "Daily RVOL",
+    "five_pillars_list": {"title": "Top gainers · Five Pillars filter", "metric": "Daily RVOL",
                           "note": "Price, gain and RVOL all pass. Float is a column — verify it yourself before sizing. News is a column too, never a gate."},
     "top_gappers": {"title": "Top Gappers", "metric": "Gap %",
                     "note": "Freezes at 09:30 ET, matching the captured platform."},

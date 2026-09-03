@@ -14,6 +14,7 @@ the producers publish:
     screener     the screener payload (rows, source, asof, notes)
     symbol-added {symbol}
     alert        a scanner alert record
+    session      {builtAt, alerts} — the scanners were just rebuilt; refetch
     resync       {reason} — the client fell off the buffer; reload state
 
 Wiring into server.py (a `/api/v1/stream` GET that calls `serve_sse`) is
@@ -37,7 +38,7 @@ from ..state import MarketUpdate
 UTC = timezone.utc
 
 EVENT_TYPES = ("quote", "bar5s", "bar10s", "bar1m", "health", "screener",
-               "symbol-added", "alert", "resync")
+               "symbol-added", "alert", "session", "resync")
 
 
 @dataclass(frozen=True)

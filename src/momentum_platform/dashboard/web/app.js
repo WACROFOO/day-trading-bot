@@ -122,7 +122,7 @@ function deskTime(epochSeconds) {
 
 const PALETTE = {
   bg: "#0b1119", text: "#93a4b8", grid: "#141d27", border: "#1d2836",
-  up: "#2ad17f", down: "#ff5f6e", vwap: "#c39bff", ema9: "#4dd2ff",
+  up: "#2ad17f", down: "#ff5f6e", vwap: "#2962ff", ema9: "#26c6da",
   ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", h52: "#c39bff",
   entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
 };
@@ -233,6 +233,7 @@ function makePane(hostId, daily) {
     // Zoom is state the trader set on purpose. A live reload must hand it back.
     getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
     setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
+    snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
     resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
     render(bars, opts) {
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
@@ -287,6 +288,7 @@ function makePane(hostId, daily) {
       }
       mark(opts.hod, PALETTE.hod, "HOD");
       mark(opts.h52, PALETTE.h52, "52w");
+      if (opts.snapToLive) chart.timeScale().scrollToRealTime();
     },
   };
 }
@@ -413,13 +415,23 @@ function newsFor(sym, nowMs) {
 }
 
 /* ── tiles ──────────────────────────────────────────────────────────── */
+/* What the state pill on a scanner tile says. A live desk names the feed's
+   real state (from the provider's health, never assumed); a recording says
+   REPLAY. "REPLAY" next to a live scanner was a lie the tiles used to tell. */
+function feedLabel() {
+  if (S.streaming || S.live) {
+    const st = (S.provider && S.provider.state) ? String(S.provider.state).toUpperCase() : "LIVE";
+    return st;
+  }
+  return "REPLAY";
+}
 function cardHead(card, title, stateLabel, extras) {
   const head = el("div", "card-head");
   head.setAttribute("draggable", "true");
   head.appendChild(el("span", "grip", "⠿"));
   head.appendChild(el("span", "card-title", title));
   if (stateLabel) {
-    const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : "replay"), stateLabel);
+    const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : stateLabel === "REPLAY" ? "replay" : stateLabel.toLowerCase()), stateLabel);
     st.dataset.state = stateLabel;
     head.appendChild(st);
   }
@@ -461,7 +473,7 @@ function fillListCard(card, id, frame) {
     if (!state.frozen[id]) delete state.frozen[id];
     render();
   };
-  cardHead(card, meta.title, froz ? "FROZEN" : "REPLAY", [age, fz]);
+  cardHead(card, meta.title, froz ? "FROZEN" : feedLabel(), [age, fz]);
   card.appendChild(el("div", "tile-note", meta.note));
   const cols = el("div", "tile-cols list-cols");
   ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
@@ -558,7 +570,7 @@ function shortBranch(branch, scannerId) {
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
   const all = alertsUpTo(idx).filter(a => cfg.scanners.indexOf(a.scannerId) >= 0).reverse().slice(0, 60);
-  cardHead(card, cfg.title, "REPLAY", [el("span", "tile-age", etTime(FRAMES[state.frame].ts))]);
+  cardHead(card, cfg.title, feedLabel(), [el("span", "tile-age", etTime(FRAMES[state.frame].ts))]);
   card.appendChild(el("div", "tile-note", cfg.note));
   const cols = el("div", "tile-cols alert-cols");
   ["Time", "Symbol / news", "Price", "Chg", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
@@ -634,6 +646,56 @@ function alertDetail(a) {
       " — every raw event is kept in history"));
   }
   return d;
+}
+
+/* ── Five Pillars board ─────────────────────────────────────────────── */
+/* Every symbol on the desk against the five pillars, sorted by how many it
+   passes and then by gain. The list card above shows only names that pass
+   the hard gates; this board shows why the others do not, so a name a few
+   RVOL points short is a candidate to watch, not an absence. */
+function boardRow(frame, sym) {
+  const meta = SYMS[sym] || {};
+  const row = symbolRow(frame, sym);
+  if (row) return { row, meta };
+  const bars = barsUpTo(sym, frame.barIndex);
+  const last = bars.length ? bars[bars.length - 1][4] : (meta.iexLast != null ? meta.iexLast : null);
+  const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
+  return { row: { symbol: sym, price: last, changePct: chg, rvolDaily: null, rvol5m: null }, meta };
+}
+function renderPillarsBoard(frame) {
+  const host = $("#pillarsBoard"); if (!host) return;
+  host.textContent = "";
+  const nowMs = new Date(frame.ts).getTime();
+  const rows = Object.keys(SYMS).map(sym => {
+    const { row, meta } = boardRow(frame, sym);
+    const checks = pillarChecks(row, meta);
+    const nf = newsFor(sym, nowMs);
+    checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
+                  ok: !!(nf && nf.flame), unknown: !nf });
+    checks[3].unknown = meta.floatQuality === "unknown";
+    checks[2].unknown = row.rvolDaily == null;
+    const passed = checks.filter(c => c.ok).length;
+    return { sym, row, checks, passed };
+  }).sort((a, b) => b.passed - a.passed || (b.row.changePct || -1e9) - (a.row.changePct || -1e9));
+  const head = el("div", "pb-row head");
+  ["Symbol", "Last", "Price", "Gain", "Daily RVOL", "Float", "News", "Pillars"].forEach(h => head.appendChild(el("span", null, h)));
+  host.appendChild(head);
+  if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk yet.")); return; }
+  rows.forEach(r => {
+    const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
+    tr.appendChild(el("b", null, r.sym));
+    tr.appendChild(el("span", dirClass(r.row.changePct), fx(r.row.price)));
+    r.checks.forEach(c => {
+      const cell = el("span", "pb-cell");
+      cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
+      cell.appendChild(el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL"));
+      cell.title = c.name;
+      tr.appendChild(cell);
+    });
+    tr.appendChild(el("span", "pb-score " + (r.passed >= 4 ? "up" : r.passed >= 3 ? "" : "down"), r.passed + "/5"));
+    tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
+    host.appendChild(tr);
+  });
 }
 
 /* ── context panels ─────────────────────────────────────────────────── */
@@ -1032,13 +1094,19 @@ function bars10sUpTo(sym, frame) {
   return all.slice(start, end);
 }
 
+let CHART_SYM = null, SNAP_LIVE = false;
 function renderCharts(frame) {
   const sym = state.selected, meta = SYMS[sym] || {};
+  // A new symbol, or a refreshed session on a streaming desk, must show the
+  // newest bars: a logical range carried over from another dataset parked the
+  // 1-minute pane on 11:00 with an hour of blank canvas to its right.
+  const snap = S.streaming && (sym !== CHART_SYM || SNAP_LIVE);
+  CHART_SYM = sym; SNAP_LIVE = false;
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
-  const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym };
+  const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
   PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, tf: "1m" }, common));
   PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
@@ -1055,7 +1123,7 @@ function renderCharts(frame) {
                  "inventing candles.");
   }
   PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
-  if (PENDING_RANGES) {          // first paint after a live reload: give the zoom back
+  if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back
     const r = PENDING_RANGES; PENDING_RANGES = null;
     ["a", "b", "d", "c"].forEach(k => { if (r[k] && PANES[k] && PANES[k].setRange) PANES[k].setRange(r[k]); });
   }
@@ -1102,19 +1170,19 @@ const DEFAULT_LAYOUT = {
   // is the big pane. The desk's 1-minute and 10-second panes (IBKR data, the
   // plan's entry/stop/target drawn on them) sit under it; 5-minute waits in
   // the tray, one drag away, and the widget switches interval with a click.
-  C1: "tv-widget", C2: "chart-1m", C3: "chart-10s", C4: "timeline",
+  C1: "tv-widget", C2: "tv-widget-5m", C3: "chart-10s", C4: "pillars-board",
   // The screener takes the tall right slot: it is real data about the whole
   // band, refreshed on a timer. Level 2 is simulated and waits in the tray.
   R1: "screener", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["level2", "chart-daily", "chart-5m"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-1m", "chart-5m", "chart-daily", "level2", "timeline"]);
 const DEFAULT_SIZES = {
   wLeft: 336, wRight: 352,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
            C4: 0.42, R1: 1.62, R2: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v4";
+const LAYOUT_KEY = "momentum-workstation.layout.v5";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1261,7 +1329,7 @@ function renderTray() {
 function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
 function applyLayout() {
   const parked = document.getElementById("parked");
-  WIDGET_SYMBOL = null;   // the widget card may have just come on screen
+  WIDGET_SYMBOL = {};     // a widget card may have just come on screen
   ALL_CARDS.forEach(id => {
     if (placedCards().indexOf(id) === -1) {
       const card = cardEl(id);
@@ -1460,7 +1528,7 @@ function refreshSession() {
     OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
     if (state.selected && !SYMS[state.selected]) state.selected = null;
     state.frame = FRAMES.length - 1;
-    PENDING_RANGES = ranges;
+    PENDING_RANGES = null; SNAP_LIVE = true;   // chart objects persist: keep the zoom, show the newest bar
     render();
   }).catch(() => {}).then(() => { refreshing = false; });
 }
@@ -1490,6 +1558,7 @@ function streamFollow() {
   }).on("health", setFeedBadge)
     .on("screener", renderScreener)
     .on("symbol-added", () => refreshSession())
+    .on("session", () => refreshSession())     // the server just rebuilt the scanners
     .on("resync", () => refreshSession())
     .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
       $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
@@ -1541,26 +1610,30 @@ function liveFollow() {
    panes are for — but it gives the familiar toolbar and, before the open, a
    consolidated premarket price that the single-venue IEX feed may not show.
    The script loads once, on first use, and only when the card is on screen. */
-let WIDGET_SYMBOL = null, WIDGET_LOADING = false;
+let WIDGET_SYMBOL = {}, WIDGET_LOADING = false;
 function tvSymbol(sym, meta) {
   const ex = (meta && meta.exchange) || "";
   const prefix = ex === "NASDAQ" ? "NASDAQ:" : ex === "NYSE" ? "NYSE:" : (ex === "AMEX" || ex === "ARCA") ? "AMEX:" : "";
   return prefix + sym;
 }
 function renderWidget(sym, meta) {
-  const host = document.getElementById("tvWidget");
-  if (!host || !sym || WIDGET_SYMBOL === sym) return;
+  document.querySelectorAll(".tv-host[data-interval]").forEach(host => renderWidgetIn(host, sym, meta));
+}
+function renderWidgetIn(host, sym, meta) {
+  if (!host || !sym || WIDGET_SYMBOL[host.id] === sym) return;
   const card = host.closest(".card");
   if (!card || card.parentElement === document.getElementById("parked")) return;  // not on screen
   const draw = () => {
     if (!window.TradingView || !window.TradingView.widget) return;
-    WIDGET_SYMBOL = sym;
+    WIDGET_SYMBOL[host.id] = sym;
     host.textContent = "";
-    const mount = document.createElement("div"); mount.id = "tvWidgetMount"; mount.style.height = "100%";
+    const mount = document.createElement("div"); mount.id = host.id + "Mount"; mount.style.height = "100%";
     host.appendChild(mount);
+    // The same dressing on every TradingView pane: dark theme, session VWAP,
+    // EMA, extended hours, their toolbar. Only the interval differs.
     new window.TradingView.widget({
-      symbol: tvSymbol(sym, meta), interval: "1", timezone: "America/New_York", theme: "dark",
-      style: "1", locale: "en", container_id: "tvWidgetMount", autosize: true,
+      symbol: tvSymbol(sym, meta), interval: host.dataset.interval || "1", timezone: "America/New_York", theme: "dark",
+      style: "1", locale: "en", container_id: mount.id, autosize: true,
       withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
       session: "extended", details: false, hotlist: false, calendar: false,
       studies: ["VWAP@tv-basicstudies", "MAExp@tv-basicstudies"],
@@ -1571,7 +1644,7 @@ function renderWidget(sym, meta) {
   WIDGET_LOADING = true;
   const tag = document.createElement("script");
   tag.src = "https://s3.tradingview.com/tv.js"; tag.async = true;
-  tag.onload = draw;
+  tag.onload = () => renderWidget(sym, meta);
   tag.onerror = () => { host.textContent = "TradingView's widget script could not be loaded (offline, or blocked by an extension)."; };
   document.head.appendChild(tag);
 }
@@ -1593,8 +1666,9 @@ function renderScreener(data) {
   const host = document.getElementById("screenerRows"); if (!host) return;
   const tag = document.getElementById("screenerSource");
   const src = (data && data.source) || "none";
-  if (tag) { tag.textContent = src === "yahoo-delayed" ? "Yahoo · delayed" : src === "iex" ? "IEX · real-time" : "paused";
-             tag.className = "tag " + (src === "yahoo-delayed" ? "yahoo" : src === "iex" ? "iex" : ""); }
+  if (tag) { tag.textContent = src === "yahoo-delayed" ? "Yahoo · delayed" : src === "iex" ? "IEX · real-time"
+                             : src === "ibkr" ? "IBKR · live scans" : "paused";
+             tag.className = "tag " + (src === "yahoo-delayed" ? "yahoo" : src === "iex" || src === "ibkr" ? "iex" : ""); }
   const note = document.getElementById("screenerNote");
   if (note && data) note.textContent = (data.notes && data.notes.length) ? data.notes.join(" ")
     : "Every name $" + data.band[0] + "–" + data.band[1] + " up ≥" + data.min_gain + "% in the current session. Click a row to put it on the desk.";
@@ -1647,7 +1721,7 @@ function render() {
   });
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
-  renderVerdict(frame, ctx); renderTimeline(state.frame);
+  renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
 }
 function syncTransport() { $("#scrub").value = String(state.frame); }
 
