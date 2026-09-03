@@ -56,9 +56,11 @@ class FakeIB:
     `scans` {code: [sym, ...]}, `names` {sym: longName}."""
 
     def __init__(self, daily=None, minutes=None, fives=None, quotes=None, scans=None,
-                 names=None, fail_connects=0, delayed=()):
+                 names=None, fail_connects=0, delayed=(), types=None):
         self.daily, self.minutes, self.fives = daily or {}, minutes or {}, fives or {}
         self.quotes, self.scans, self.names = quotes or {}, scans or {}, names or {}
+        self.types = types or {}
+        self.detail_calls = []
         self.fail_connects = fail_connects
         self.delayed = set(delayed)
         self.connected = False
@@ -100,6 +102,11 @@ class FakeIB:
         for c in contracts:
             c.longName = self.names.get(c.symbol)
         return list(contracts)
+
+    def reqContractDetails(self, contract):
+        self.detail_calls.append(contract.symbol)
+        return [Obj(contract=contract, stockType=self.types.get(contract.symbol, "COMMON"),
+                    longName=self.names.get(contract.symbol))]
 
     # -- market data
     def reqMktData(self, contract, *args):

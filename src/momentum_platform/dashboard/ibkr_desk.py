@@ -33,8 +33,8 @@ from datetime import datetime, timezone
 from typing import Callable, Dict, List, Optional
 
 from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
-                                        minute_records, news_records, reference_record, sec_profile,
-                                        store_records)
+                                        is_common_stock, minute_records, news_records, reference_record,
+                                        sec_profile, stock_type_of, store_records)
 from ..datasources.ibkr_stream import IbkrStream
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
@@ -46,7 +46,8 @@ UTC = timezone.utc
 # after it answered; ib_async logs it at ERROR and it filled the terminal with
 # ten red lines per scan round.
 BENIGN = ("API scanner subscription cancelled", "Market data farm connection is OK",
-          "HMDS data farm connection is OK", "Sec-def data farm connection is OK")
+          "HMDS data farm connection is OK", "Sec-def data farm connection is OK",
+          "Fundamentals data is not allowed")     # the desk says this once, itself
 
 
 class _TwsNoise(logging.Filter):
@@ -111,6 +112,7 @@ class IbkrDesk:
         self._last_state: Optional[tuple] = None
         self._next_tick = self._next_build = self._next_scan = 0.0
         self._worker_thread: Optional[threading.Thread] = None
+        self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
 
     # -- lifecycle --------------------------------------------------------------
@@ -190,6 +192,10 @@ class IbkrDesk:
         self.stream = IbkrStream(self.host, self.port, self.client_id, ib=ib,
                                  on_update=self.publisher, clock=self.clock)
         h = self.stream.connect()
+        try:                                          # real ib_async: watch TWS error codes
+            self.stream.ib.errorEvent += self._on_tws_error
+        except Exception:
+            pass
         if not h.connected:
             raise IbkrError(f"TWS not reachable at {self.host}:{self.port} (client {self.client_id}): "
                             f"{h.last_error}. Start TWS, enable the read-only API on port {self.port}, "
@@ -225,8 +231,24 @@ class IbkrDesk:
             pass
         self.log(f"  IBKR scanner connected read-only, client {self.scanner_client_id}")
 
+    def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
+        if errorCode == 10358 and self.fundamentals is not False:
+            self.fundamentals = False
+            self.log("  IBKR fundamentals are not entitled on this account: float falls back to "
+                     "SEC shares outstanding (an upper bound) or reads UNKNOWN")
+
     def _subscribe(self, symbols: List[str]) -> List[str]:
-        added = self.stream.subscribe(symbols, backfill_seconds=3600)
+        wanted = []
+        for sym in symbols:
+            c = self.stream._contract(sym)
+            st = stock_type_of(self.stream.ib, c, sym)
+            if not is_common_stock(st):
+                self.log(f"  {sym}: not a common stock ({st}); funds and warrants do not join the desk")
+                if sym in self.symbols:
+                    self.symbols.remove(sym)
+                continue
+            wanted.append(sym)
+        added = self.stream.subscribe(wanted, backfill_seconds=3600)
         for sym in added:
             self.log(f"  {sym}: subscribed (quote + 5-second bars); loading daily and minute history")
             c = self.stream._contract(sym)
@@ -241,7 +263,7 @@ class IbkrDesk:
                 self.log(f"  {sym}: minute history failed: {exc}")
                 self._minutes[sym] = []
             sec = sec_profile(sym) if self.sec else {}
-            fl = float_from_ibkr(self.stream.ib, c)
+            fl = float_from_ibkr(self.stream.ib, c) if self.fundamentals is not False else {}
             self._reference[sym] = reference_record(
                 sym, bars, ticker=self.stream._tickers.get(sym),
                 exchange=getattr(c, "primaryExchange", None) or "NASDAQ",

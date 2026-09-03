@@ -71,6 +71,28 @@ def is_common_stock(stock_type: Optional[str]) -> bool:
     return not any(word in t for word in NOT_STOCK)
 
 
+_STOCK_TYPES: Dict[str, str] = {}          # symbol -> stockType, resolved once per process
+
+
+def stock_type_of(ib, contract, symbol: Optional[str] = None) -> Optional[str]:
+    """The instrument type from contract details, cached per symbol. Scanner
+    hits carry only a thin contract (no stockType), so a leveraged ETF looked
+    like a stock until this lookup was added."""
+    sym = symbol or getattr(contract, "symbol", None)
+    if sym in _STOCK_TYPES:
+        return _STOCK_TYPES[sym]
+    st = getattr(contract, "stockType", None) if contract is not None else None
+    if not st:
+        try:
+            details = ib.reqContractDetails(contract)
+            st = getattr(details[0], "stockType", None) if details else None
+        except Exception:
+            st = None
+    if sym:
+        _STOCK_TYPES[sym] = st or ""
+    return st or None
+
+
 def scan_union(ib, min_price: float, max_price: float, rows: int = ROWS_PER_SCAN,
                codes: Iterable[str] = SCAN_CODES, locations: Iterable[str] = LOCATIONS,
                log: Optional[Callable[[str], None]] = None) -> Dict[str, dict]:
@@ -133,6 +155,22 @@ def snapshot_rows(ib, found: Dict[str, dict], clock: Callable[[], datetime] = la
     say = log or (lambda m: None)
     entries = prioritise(found, limit)
     skipped = max(0, len(found) - 1 - len(entries))
+    # Scanner hits do not say what kind of instrument they are. Ask once per
+    # symbol (cached for the life of the process) and drop the funds here,
+    # before a snapshot quote is spent on them.
+    excluded = found.get("__meta__", {}).get("excluded")
+    kept = []
+    for e in entries:
+        st = e.get("stock_type") or stock_type_of(ib, e["contract"], e["symbol"])
+        e["stock_type"] = st
+        if not is_common_stock(st):
+            if excluded is not None:
+                excluded[e["symbol"]] = st
+            continue
+        kept.append(e)
+    if len(kept) < len(entries):
+        say(f"  {len(entries) - len(kept)} non-stock instruments dropped before quoting")
+    entries = kept
     rows: List[dict] = []
     notes: List[str] = []
     delayed = 0

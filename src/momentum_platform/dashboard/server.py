@@ -266,6 +266,12 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
         def log_message(self, fmt, *args):  # quieter console
             pass
 
+        def handle(self):
+            try:
+                super().handle()
+            except (ConnectionResetError, BrokenPipeError):
+                pass                     # the page closed its event stream; normal
+
         def _send(self, body: bytes, ctype: str, status: int = 200) -> None:
             self.send_response(status)
             self.send_header("Content-Type", ctype)

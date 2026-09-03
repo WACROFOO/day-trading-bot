@@ -240,3 +240,43 @@ def test_bootstrap_without_symbols_lets_the_scanner_pick_the_desk():
     session = desk._bootstrap()
     assert desk.symbols == ["CCC"], "only names up >= min gain in the band (AAA is +9%) become the desk"
     assert set(session["symbols"]) == {"CCC"}
+
+
+def test_funds_are_dropped_by_contract_details_even_when_the_scan_hit_says_nothing():
+    """Scanner hits carry no instrument type. CRCG, HODU, MSTX and MSTP — all
+    leveraged ETFs — reached the desk as "top gainers" because of that."""
+    from momentum_platform.datasources import ibkr_scanner as mod
+    mod._STOCK_TYPES.clear()
+    ib = FakeIB(scans={"TOP_PERC_GAIN": ["AAA", "CRCG", "MSTX"]},
+                quotes={"AAA": FakeTicker(last=4.4, close=4.0), "CRCG": FakeTicker(last=22.0, close=17.0),
+                        "MSTX": FakeTicker(last=16.0, close=12.0)},
+                types={"CRCG": "ETF", "MSTX": "ETF"})
+    out = sc.build_ibkr_screener(ib, 1.0, 30.0, min_gain=5.0, clock=Clock())
+    assert [r["symbol"] for r in out["rows"]] == ["AAA"]
+    assert any("non-stock instruments excluded" in n and "CRCG" in n for n in out["notes"])
+    assert ib.detail_calls.count("CRCG") == 1
+    sc.build_ibkr_screener(ib, 1.0, 30.0, min_gain=5.0, clock=Clock())
+    assert ib.detail_calls.count("CRCG") == 1, "the type is resolved once per process, not per round"
+
+
+def test_the_desk_refuses_a_fund_and_keeps_the_stocks():
+    from momentum_platform.datasources import ibkr_scanner as mod
+    mod._STOCK_TYPES.clear()
+    desk, ib, clock = make_desk()
+    ib.types["BBB"] = "ETF"
+    desk._bootstrap()
+    assert desk.symbols == ["AAA"] and desk.stream.symbols == ["AAA"]
+
+
+def test_fundamentals_are_asked_once_when_the_account_is_not_entitled():
+    from momentum_platform.datasources import ibkr_scanner as mod
+    mod._STOCK_TYPES.clear()
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    desk._on_tws_error(37, 10358, "Fundamentals data is not allowed.", None)
+    assert desk.fundamentals is False
+    calls = []
+    ib.reqFundamentalData = lambda *a, **k: calls.append(a) or ""
+    desk.add_symbols(["CCC"])
+    assert calls == [], "no further fundamentals requests after TWS said no"
+    assert desk._reference["CCC"]["float_quality"] in ("unknown", "shares_outstanding_proxy")
