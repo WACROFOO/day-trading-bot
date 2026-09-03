@@ -195,5 +195,20 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         pg.wait_for_timeout(400)
         if top:
             assert pg.evaluate("document.querySelector('[data-card=scan-running] .tile-rows').scrollTop") == top
+        # The header clock is the REAL ET clock on a live desk. It used to show
+        # the newest frame's stamp, so a session that stopped advancing read as
+        # "09:22" for hours while the market ran on.
+        import datetime as _dt
+        from zoneinfo import ZoneInfo as _Z
+        shown = pg.text_content("#clockET")
+        real = _dt.datetime.now(_Z("America/New_York")).strftime("%H:%M")
+        assert shown.startswith(real[:4]), f"clock {shown} is not the ET wall clock {real}"
+        assert pg.text_content("#sessionBadge") in {"premarket", "regular", "after_hours", "closed"}
+
+        # And the desk states how far behind its data is, beside that clock.
+        lag = pg.text_content("#dataLag")
+        assert lag and ("behind" in lag or lag == "live"), lag
+        assert "behind" in lag, "the fixture's newest bar is hours old, so it must say so"
+        assert pg.get_attribute("#dataLag", "class").endswith("bad")
         assert not errors, errors
         browser.close()

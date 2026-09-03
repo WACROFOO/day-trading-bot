@@ -111,6 +111,13 @@ class IbkrDesk:
         self._stop = threading.Event()
         self._last_state: Optional[tuple] = None
         self._next_tick = self._next_build = self._next_scan = 0.0
+        # Minute history is re-pulled round-robin, one symbol at a time. IBKR
+        # allows about 60 historical requests per ten minutes; refreshing every
+        # symbol on one timer would blow through that, so each cycle takes the
+        # next symbol in turn.
+        self._next_history = 0.0
+        self._history_cursor = 0
+        self.history_every = 20.0
         self._worker_thread: Optional[threading.Thread] = None
         self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
@@ -164,6 +171,9 @@ class IbkrDesk:
         if now >= self._next_build:
             self._next_build = now + self.rebuild
             self._guard(self.refresh_session)
+        if now >= self._next_history:
+            self._next_history = now + self.history_every
+            self._guard(self.refresh_history)
         if self.rescan and now >= self._next_scan:
             self._next_scan = now + self.rescan
             self._guard(self.scan)
@@ -295,6 +305,46 @@ class IbkrDesk:
         if h.state == "OFFLINE":
             s.reconnect()
 
+    def refresh_history(self) -> Optional[str]:
+        """Re-pull the last few minutes of one symbol's history.
+
+        Without this the session was built from the minute bars fetched once at
+        subscribe time plus whatever the live five-second stream had added. On a
+        quiet name IBKR sends no TRADES bars at all, so nothing advanced and the
+        desk sat on its startup minute for hours while the clock ran on. One
+        symbol per cycle keeps the request rate inside IBKR's pacing limit.
+        """
+        if not self.symbols:
+            return None
+        sym = self.symbols[self._history_cursor % len(self.symbols)]
+        self._history_cursor += 1
+        c = self._contracts_for(sym)
+        if c is None:
+            return None
+        try:
+            fresh = minute_records(self.stream.ib, c, sym, duration="900 S")
+        except Exception as exc:
+            self.log(f"  {sym}: minute refresh failed: {exc}")
+            return None
+        if not fresh:
+            return sym
+        merged = {m["ts"]: m for m in self._minutes.get(sym, [])}
+        for m in fresh:
+            merged[m["ts"]] = m
+        self._minutes[sym] = [merged[k] for k in sorted(merged)]
+        return sym
+
+    def _contracts_for(self, sym: str):
+        try:
+            return self.stream._contract(sym)
+        except Exception:
+            return None
+
+    def data_through(self, session: dict) -> Optional[str]:
+        """The newest minute the session actually carries."""
+        frames = session.get("frames") or []
+        return frames[-1]["ts"] if frames else None
+
     def refresh_session(self) -> dict:
         """Rebuild from memory: reference + minute history (for minutes the
         live store does not cover) + complete ten-second candles."""
@@ -334,6 +384,18 @@ class IbkrDesk:
         session["builtAt"] = time.time()
         session["provider"] = self.health()
         session["symbolsOrder"] = list(self.symbols)
+        # What the desk actually has, and when it was asked. The page shows the
+        # gap: a green badge over a session that stopped advancing hours ago is
+        # exactly the "stale but green" this design forbids.
+        now = self.clock()
+        session["asOf"] = now.isoformat(timespec="seconds")
+        through = self.data_through(session)
+        session["dataThrough"] = through
+        if through:
+            last = datetime.fromisoformat(through.replace("Z", "+00:00"))
+            session["dataLagSeconds"] = max(0, int((now - last).total_seconds()))
+        session["provider"]["dataThrough"] = through
+        session["provider"]["dataLagSeconds"] = session.get("dataLagSeconds")
         if self._news_note:
             session["newsNote"] = self._news_note
         with self.lock:

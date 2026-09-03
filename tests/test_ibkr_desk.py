@@ -280,3 +280,43 @@ def test_fundamentals_are_asked_once_when_the_account_is_not_entitled():
     desk.add_symbols(["CCC"])
     assert calls == [], "no further fundamentals requests after TWS said no"
     assert desk._reference["CCC"]["float_quality"] in ("unknown", "shares_outstanding_proxy")
+
+
+def test_minute_history_is_refreshed_so_the_session_keeps_advancing():
+    """The desk used to fetch minute history once at subscribe time. On a quiet
+    name IBKR sends no TRADES bars at all, so nothing advanced and the newest
+    frame stayed at the startup minute while the clock ran on for hours."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    first = desk.current()["frames"][-1]["ts"]
+
+    # the market moves on: ten more minutes of history exist now
+    for sym in ("AAA", "BBB"):
+        start = T0 - timedelta(minutes=30)
+        ib.minutes[sym] = minute_bars(start, 40, 4.0)
+    # one symbol per cycle, round-robin, to stay inside IBKR's pacing limit
+    assert desk.refresh_history() == "AAA"
+    assert desk.refresh_history() == "BBB"
+    assert desk.refresh_history() == "AAA", "round-robin, not every symbol at once"
+    session = desk.refresh_session()
+    assert session["frames"][-1]["ts"] > first, "the session must reach the newer minutes"
+
+
+def test_the_session_reports_how_far_behind_its_data_is():
+    desk, ib, clock = make_desk()
+    session = desk._bootstrap()
+    assert session["dataThrough"] == session["frames"][-1]["ts"]
+    assert session["dataLagSeconds"] is not None and session["dataLagSeconds"] < 120
+    clock.now = T0 + timedelta(hours=7)
+    session = desk.refresh_session()
+    assert session["dataLagSeconds"] > 6 * 3600, "a frozen session must say so"
+    assert session["provider"]["dataLagSeconds"] == session["dataLagSeconds"]
+
+
+def test_history_refresh_asks_for_a_short_window(monkeypatch):
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    ib.hist_calls.clear()
+    desk.refresh_history()
+    mins = [c for c in ib.hist_calls if c[2] == "1 min"]
+    assert mins and mins[0][1] == "900 S", "a rolling refresh, not the whole day again"

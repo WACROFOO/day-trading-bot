@@ -305,9 +305,13 @@ def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optio
     }
 
 
-def minute_records(ib, contract, symbol: str) -> List[dict]:
-    """Today's one-minute bars, extended hours included, as bar records."""
-    hist = ib.reqHistoricalData(contract, "", "1 D", "1 min", "TRADES", False, formatDate=2)
+def minute_records(ib, contract, symbol: str, duration: str = "1 D") -> List[dict]:
+    """One-minute bars, extended hours included, as bar records.
+
+    `duration` is the IBKR window: "1 D" for the session at startup, a short
+    window such as "900 S" for the rolling refresh that keeps the desk's newest
+    minute current without spending the historical-request budget."""
+    hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2)
     out = []
     for b in hist or []:
         ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))

@@ -96,6 +96,14 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .tile-state.replay{color:#bcd0ff;border-color:#2a3a63;background:#141c30}
 .tile-state.frozen{color:#0b0f14;background:var(--hi);border-color:transparent}
 .tile-age{font:9px var(--mono);color:var(--ink-faint)}
+/* Data age, beside the clock. The feed badge reports the connection; this
+   reports whether the numbers under it are still moving. */
+.lag{font:600 9px/1 var(--mono);letter-spacing:.5px;padding:2px 5px;border-radius:3px;
+  border:1px solid var(--line);color:var(--ink-faint);text-transform:uppercase}
+.lag.ok{color:var(--ok-ink);background:var(--ok-bg);border-color:var(--ok-line)}
+.lag.warn{color:var(--unk-ink);background:var(--unk-bg);border-color:var(--unk-line)}
+.lag.bad{color:var(--no-ink);background:var(--no-bg);border-color:var(--no-line)}
+.lag[hidden]{display:none!important}
 .icon-btn{background:none;border:0;cursor:pointer;color:var(--ink-faint);padding:1px 3px;border-radius:3px}
 .icon-btn:hover{color:var(--ink);background:#1a2431}
 .icon-btn[aria-pressed="true"]{color:var(--hi)}

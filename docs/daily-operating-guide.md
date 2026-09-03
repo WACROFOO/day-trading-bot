@@ -179,6 +179,14 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, 5-minute volume above the floor, one alert per leg. Approximation.
+- The header clock is the real ET clock, and the chip beside it says how far
+  behind the desk's own data is: `live` under 90 seconds, then the age in
+  amber, then red. A green feed badge means the CONNECTION is alive; the lag
+  chip is what tells you the numbers under it are still moving.
+- Minute history is re-pulled one symbol at a time every 20 seconds, so the
+  session keeps advancing even on a name that prints no trades for an hour.
+  One symbol per cycle keeps the desk inside IBKR's historical-request pacing
+  limit of roughly 60 requests per ten minutes.
 - Audio alerts are on by default on a live desk; the first click or key
   unlocks the browser's sound. New alerts beep once at the highest severity
   and flash the tile. The A key toggles; the ? key (or "? Legend" in the

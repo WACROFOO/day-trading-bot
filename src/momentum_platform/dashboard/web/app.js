@@ -538,7 +538,18 @@ function fmtAge(ms) {
   return Math.round(s / 86400) + "d";
 }
 function deskNow() {
+  // A streaming desk lives on the wall clock. Measuring ages against the newest
+  // frame made a seven-hour-old alert read "5m" whenever the session stopped
+  // advancing: the two facts are different and the desk must not conflate them.
+  if (S.streaming) return Date.now();
   return FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].t * 1000 : Date.now();
+}
+const etParts = ms => new Date(ms).toLocaleTimeString("en-US",
+  { timeZone: "America/New_York", hour12: false });
+function sessionAt(ms) {
+  const hhmm = etParts(ms).slice(0, 5);
+  return hhmm < "04:00" ? "closed" : hhmm < "09:30" ? "premarket"
+       : hhmm < "16:00" ? "regular" : hhmm < "20:00" ? "after_hours" : "closed";
 }
 
 function fillListCard(card, id, frame) {
@@ -546,7 +557,7 @@ function fillListCard(card, id, frame) {
   const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
   const rows = (frame.lists[id] || []).map(rowObj);
   const froz = state.frozen[id];
-  const nowMs = new Date(frame.ts).getTime();
+  const nowMs = deskNow();
   let ordered = rows, pending = 0;
   if (froz) {
     const byS = {}; rows.forEach(r => byS[r.symbol] = r);
@@ -778,7 +789,7 @@ function boardRow(frame, sym) {
 function renderPillarsBoard(frame) {
   const host = $("#pillarsBoard"); if (!host) return;
   host.textContent = "";
-  const nowMs = new Date(frame.ts).getTime();
+  const nowMs = deskNow();
   const T = S.pillarThresholds || {};
   const note = $("#pillarsBoardNote");
   if (note) {
@@ -857,7 +868,7 @@ function symbolRow(frame, sym) {
 }
 
 function renderHeader(frame) {
-  const sym = state.selected, meta = SYMS[sym] || {}, nowMs = new Date(frame.ts).getTime();
+  const sym = state.selected, meta = SYMS[sym] || {}, nowMs = deskNow();
   const bars = barsUpTo(sym, frame.barIndex);
   const last = bars.length ? bars[bars.length - 1][4] : null;
   const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
@@ -1723,6 +1734,27 @@ function effectiveFloat(symbol, meta) {
 const LIVE_KEY = "desk.live.restore";
 let PENDING_RANGES = null;
 
+/* How far behind the desk's own data is. The badge reports the CONNECTION;
+   this reports the DATA. A stream can be perfectly alive while the session it
+   feeds has stopped advancing, and only this says so. */
+function renderLag(frame) {
+  let host = document.getElementById("dataLag");
+  if (!host) {
+    host = el("span", "lag");
+    host.id = "dataLag";
+    const meta = document.querySelector(".clock-meta");
+    if (!meta) return;
+    meta.appendChild(host);
+  }
+  const lastMs = frame ? frame.t * 1000 : 0;
+  const lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
+  if (lag == null) { host.hidden = true; return; }
+  host.hidden = false;
+  host.textContent = lag < 90 ? "live" : fmtAge(lag * 1000) + " behind";
+  host.className = "lag" + (lag < 90 ? " ok" : lag < 600 ? " warn" : " bad");
+  host.title = "newest bar on the desk: " + etClock(frame.ts) + " ET";
+}
+
 /* Provider health -> the header badge. LIVE is the only green; STALE, DELAYED
    and OFFLINE are named as such, never dressed as live. */
 function setFeedBadge(h) {
@@ -1977,10 +2009,13 @@ function render() {
   ingestAlerts(state.frame);            // the timeline keeps what the rebuild drops
   noteArrivals(frame);                  // and only an arrival makes a sound
   if (!state.selected) state.selected = openingSymbol();
-  $("#clockET").textContent = etClock(frame.ts);
+  const live = S.streaming;
+  $("#clockET").textContent = live ? etParts(Date.now()) : etClock(frame.ts);
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
   const badge = $("#sessionBadge");
-  badge.textContent = frame.session; badge.className = "badge " + frame.session;
+  const ses = live ? sessionAt(Date.now()) : frame.session;
+  badge.textContent = ses; badge.className = "badge " + ses;
+  if (live) renderLag(frame);
   // The badge belongs to the health stream on a streaming desk. render() runs
   // several times a second and used to repaint a static "LIVE" over it, so a
   // STALE or OFFLINE state appeared for an instant and was wiped.
@@ -2055,7 +2090,18 @@ function init() {
     $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");
     $("#feedDot").className = "dot live";
     if (S.provider) setFeedBadge(S.provider);
-    if (S.streaming) streamFollow(); else liveFollow();
+    if (S.streaming) {
+      streamFollow();
+      // The header clock must tick on its own: between events there can be
+      // minutes of silence, and a frozen clock is what made the desk look
+      // parked at its start time.
+      setInterval(() => {
+        $("#clockET").textContent = etParts(Date.now());
+        const ses = sessionAt(Date.now());
+        const b = $("#sessionBadge"); b.textContent = ses; b.className = "badge " + ses;
+        if (FRAMES.length) renderLag(FRAMES[FRAMES.length - 1]);
+      }, 1000);
+    } else liveFollow();
   }
   pollScreener();
   const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
