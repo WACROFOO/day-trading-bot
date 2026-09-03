@@ -307,7 +307,13 @@ class IbkrDesk:
                 last = getattr(t, "last", None)
                 if last is not None and last == last:
                     ref["iex_last_price"] = float(last)
-                    ref["iex_last_ts"] = self.clock().isoformat(timespec="seconds")
+                    # The PRINT's own time when the provider gives one. Stamping
+                    # it with the rebuild clock claimed a freshness the print
+                    # did not have: a quote from four minutes ago read as now.
+                    tick_ts = getattr(t, "time", None)
+                    ref["iex_last_ts"] = (tick_ts.isoformat(timespec="seconds")
+                                          if isinstance(tick_ts, datetime)
+                                          else self.clock().isoformat(timespec="seconds"))
                     ref["iex_bid"] = _num(getattr(t, "bid", None))
                     ref["iex_ask"] = _num(getattr(t, "ask", None))
             records.append(ref)

@@ -145,7 +145,7 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert not pg.is_visible("#legend")
         # the board carries the market-data columns and the desk band note
         heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
-        assert heads[:7] == ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP"]
+        assert heads[:8] == ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band"]
         note = pg.text_content("#pillarsBoardNote")
         assert "$2–20" in note and "RVOL ≥5×" in note and len(note) < 70, note
         assert "desk admits $1–30" in pg.get_attribute("#pillarsBoardNote", "title")
@@ -170,5 +170,30 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         pg.wait_for_timeout(250)
         assert pg.evaluate("document.querySelectorAll('[data-card=scan-running] .trow').length") >= logged
         assert pg.locator("[data-card=scan-running] .tile-rows.timeline").count() == 1
+
+        # A rebuild must not clobber the live health badge with a static LIVE.
+        desk.hub.publish("health", dict(desk.health(), state="STALE"))
+        pg.wait_for_function("document.querySelector('#feedText').textContent === 'STALE'", timeout=5000)
+        desk.refresh_session()
+        pg.wait_for_timeout(400)
+        assert pg.text_content("#feedText") == "STALE", "render() repainted the badge over the health stream"
+
+        # The streamed print survives a rebuild that does not carry it.
+        pg.evaluate("window.__SESSION__.symbols.AAA.iexLastTime = '09:59:59'")
+        pg.evaluate("""() => { const n = JSON.parse(JSON.stringify(window.__SESSION__.symbols));
+                               n.AAA.iexLastTime = null; window.__mergeProbe = n; }""")
+        desk.refresh_session()
+        pg.wait_for_timeout(400)
+        assert pg.evaluate("window.__SESSION__.symbols.AAA.iexLastTime") is not None, \
+            "a rebuild that omits the streamed stamp must not blank it"
+
+        # Scroll position in a tile survives the rebuild.
+        pg.evaluate("""() => { const b = document.querySelector('[data-card=scan-running] .tile-rows');
+                               if (b) { b.style.maxHeight = '40px'; b.scrollTop = 12; } }""")
+        top = pg.evaluate("document.querySelector('[data-card=scan-running] .tile-rows').scrollTop")
+        desk.refresh_session()
+        pg.wait_for_timeout(400)
+        if top:
+            assert pg.evaluate("document.querySelector('[data-card=scan-running] .tile-rows').scrollTop") == top
         assert not errors, errors
         browser.close()

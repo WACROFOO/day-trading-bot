@@ -26,7 +26,7 @@ const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
 const state = {
   frame: 0, playing: false, speed: 4, selected: null, locked: false,
   frozen: {}, openRow: null, openAlert: null, riskDollars: "",
-  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {}, arrivals: new Set(),
+  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {}, arrivals: new Map(),
 };
 
 /* ── formatting ─────────────────────────────────────────────────────── */
@@ -283,6 +283,11 @@ function makePane(hostId, daily) {
     snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
     resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
     render(bars, opts) {
+      let atEdge = false;
+      try {
+        const vr = chart.timeScale().getVisibleLogicalRange();
+        atEdge = !vr || !lastRows.length || vr.to >= lastRows.length - 2;
+      } catch (e) { atEdge = true; }
       chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
       if (!bars.length) { candles.setData([]); volume.setData([]); lastRows = []; lastVols = []; showLegend(null); paintShade(); return; }
       const rows = bars.map((b, i) => daily
@@ -335,7 +340,9 @@ function makePane(hostId, daily) {
       }
       mark(opts.hod, PALETTE.hod, "HOD");
       mark(opts.h52, PALETTE.h52, "52w");
-      if (opts.snapToLive) chart.timeScale().scrollToRealTime();
+      // Follow the tape only when the view is already parked at the newest
+      // bar; a trader who scrolled back to read a pullback keeps their view.
+      if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
     },
   };
 }
@@ -471,6 +478,17 @@ function newsFor(sym, nowMs) {
   const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
   const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
   return { item: n, ageMin, flame };
+}
+
+/* A card is rebuilt from scratch several times a second. Without this the
+   scroll position of every list and timeline snapped back to the top on each
+   rebuild, so a trader could not read down a tile at all. */
+function keepScroll(card, paint) {
+  const before = card.querySelector(".tile-rows");
+  const top = before ? before.scrollTop : 0;
+  paint();
+  const after = card.querySelector(".tile-rows");
+  if (after && top) after.scrollTop = top;
 }
 
 /* ── tiles ──────────────────────────────────────────────────────────── */
@@ -688,7 +706,7 @@ function fillAlertCard(card, cfg, idx) {
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
     tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
     const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
-    br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " — branch labels the alert, it is not the filter";
+    br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " (a label, not the filter)";
     tr.appendChild(br);
     tr.onclick = () => select(a.symbol, cfg.id);
     body.appendChild(tr);
@@ -701,7 +719,7 @@ function renderTimeline(idx) {
   const host = $("#timeline"); host.textContent = "";
   const all = alertsUpTo(idx).slice().reverse();
   $("#alertCount").textContent = all.length + " event" + (all.length === 1 ? "" : "s");
-  if (!all.length) { host.appendChild(el("div", "empty", "No alerts yet in this replay.")); return; }
+  if (!all.length) { host.appendChild(el("div", "empty", "No alerts yet.")); return; }
   all.slice(0, 60).forEach(a => {
     const row = el("div", "tl-row");
     row.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
@@ -715,14 +733,14 @@ function renderTimeline(idx) {
     row.appendChild(el("span", "sev " + a.severity, a.severity));
     row.onclick = () => {
       select(a.symbol, a.scannerId);
-      state.openAlert = state.openAlert === a.eventId ? null : a.eventId;
+      state.openAlert = state.openAlert === alertKey(a) ? null : alertKey(a);
       // Selecting a historical alert seeks the charts to that moment.
       const target = FRAMES.findIndex(f => f.ts === a.sourceTime || f.t * 1000 >= new Date(a.sourceTime).getTime());
       if (target >= 0) { state.frame = target; syncTransport(); }
       render();
     };
     host.appendChild(row);
-    if (state.openAlert === a.eventId) host.appendChild(alertDetail(a));
+    if (state.openAlert === alertKey(a)) host.appendChild(alertDetail(a));
   });
 }
 function alertDetail(a) {
@@ -788,7 +806,7 @@ function renderPillarsBoard(frame) {
     return { sym, row, checks, passed, meta, volToday, hod, spread, lastVwap };
   }).sort((a, b) => b.passed - a.passed || (b.row.changePct || -1e9) - (a.row.changePct || -1e9));
   const head = el("div", "pb-row head");
-  ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "Price", "Gain", "Daily RVOL", "Float", "News", "Pillars"]
+  ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "Daily RVOL", "Float", "News", "Pillars"]
     .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
   if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
@@ -807,7 +825,9 @@ function renderPillarsBoard(frame) {
     tr.appendChild(el("span", dirClass(vsV), vsV == null ? "—" : pct(vsV)));
     r.checks.forEach(c => {
       const cell = el("span", "pb-cell");
-      cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
+      // The price pillar's value is the Last column two cells to the left.
+      // A column that repeats its neighbour has not earned its width.
+      if (c.k !== "P") cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
       cell.appendChild(el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL"));
       cell.title = c.name + (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
       tr.appendChild(cell);
@@ -1025,8 +1045,12 @@ function renderQuote(frame, ctx) {
   q.appendChild(grid);
   renderCatalyst(q, ctx);
   if (meta.floatQuality === "shares_outstanding_proxy")
-    q.appendChild(el("div", "note warn",
-      "Shares outstanding shown as an explicit proxy — not float. The supply pillar fails until a verified value exists."));
+    // Says what the pillar actually does. It used to claim the pillar fails
+    // until a verified value exists, while the pill two inches away read PASS:
+    // outstanding under the cap proves float under the cap.
+    q.appendChild(el("div", "note warn", qf.shares < S.pillarThresholds.floatMaxShares
+      ? "Shares outstanding, not float. Under the cap it proves float is under the cap."
+      : "Shares outstanding, not float. Over the cap it proves nothing — verify before sizing."));
 }
 
 /* Level 2 — SIMULATED depth. No licensed depth feed is connected, so the
@@ -1108,8 +1132,9 @@ function renderVerdict(frame, ctx) {
   const host = $("#verdictCard"); host.textContent = "";
   const T = S.pillarThresholds;
   const plan = activePlan(sym, frame.t);
-  const alerts = alertsUpTo(state.frame).filter(a => a.symbol === sym);
-  const recent = alerts.filter(a => frame.t - Math.floor(new Date(a.sourceTime).getTime() / 1000) <= 300);
+  // From the persistent log, not the sliding rebuild window: the verdict used
+  // to flip ACTIVE -> WAIT while the tile still showed the alert on screen.
+  const recent = ALERT_LOG.filter(a => a.symbol === sym && frame.t - Math.floor(a._at / 1000) <= 300);
   const hodActive = recent.some(a => a.scannerId === "hod_momentum");
   const runActive = recent.some(a => a.scannerId.indexOf("running_up") === 0 || a.scannerId.indexOf("squeeze") === 0);
 
@@ -1222,7 +1247,7 @@ function renderSizing(plan, row) {
     kv(out, "Shares", String(shares));
     kv(out, "Position value", "$" + (shares * plan.entry).toFixed(0));
     kv(out, "Planned loss", "$" + (shares * prudent).toFixed(2));
-    out.appendChild(el("div", "note", "Shares = your risk ÷ (entry − stop + spread reserve), then capped by what the book can actually absorb."));
+    out.appendChild(el("div", "note", "Shares = your risk ÷ (entry − stop + spread reserve). No liquidity cap is applied; check the book yourself."));
   } else if (plan) {
     out.appendChild(el("div", "note", "Enter your own dollar risk to size this plan. The app will not assume one for you."));
   } else {
@@ -1256,7 +1281,10 @@ function renderCharts(frame) {
   // A new symbol, or a refreshed session on a streaming desk, must show the
   // newest bars: a logical range carried over from another dataset parked the
   // 1-minute pane on 11:00 with an hour of blank canvas to its right.
-  const snap = S.streaming && (sym !== CHART_SYM || SNAP_LIVE);
+  // Snap to the newest bar when the SYMBOL changes. Otherwise each pane
+  // decides for itself: it follows the tape while the trader is sitting on the
+  // live edge and holds still the moment they scroll back to study something.
+  const snap = sym !== CHART_SYM;
   CHART_SYM = sym; SNAP_LIVE = false;
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
@@ -1315,7 +1343,13 @@ function unlockAudio() {
    metronome, not an alert. A ticker earns exactly one sound: the moment it
    first appears in the top-gainers list or in the Running Up timeline. It
    never sounds again for that grid, however many times it re-ranks. */
-const ANNOUNCED = new Set();
+/* A ticker is announced once when it enters a grid. It can be announced again
+   only after it has been ABSENT for a while — a name that drops out and comes
+   back ten minutes later is genuinely new information, a name that re-ranks
+   twice a second is not. */
+const SEEN_IN_GRID = new Map();          // membership key -> last time it was there
+const REENTRY_MS = 10 * 60 * 1000;
+const ARRIVAL_MS = 4000;                 // how long a row stays marked new
 let AUDIO_SEEDED = false;
 function membership(frame) {
   const keys = [];
@@ -1324,12 +1358,18 @@ function membership(frame) {
   return keys;
 }
 function noteArrivals(frame) {
+  const now = Date.now();
+  state.arrivals.forEach((until, sym) => { if (until <= now) state.arrivals.delete(sym); });
   const keys = membership(frame);
-  const fresh = keys.filter(k => !ANNOUNCED.has(k));
-  keys.forEach(k => ANNOUNCED.add(k));
+  const fresh = [];
+  keys.forEach(k => {
+    const seen = SEEN_IN_GRID.get(k);
+    if (seen === undefined || now - seen > REENTRY_MS) fresh.push(k);
+    SEEN_IN_GRID.set(k, now);
+  });
   if (!AUDIO_SEEDED) { AUDIO_SEEDED = true; return []; }   // the first paint is not news
   if (!fresh.length) return [];
-  state.arrivals = new Set(fresh.map(k => k.split(":")[1]));
+  fresh.forEach(k => state.arrivals.set(k.split(":")[1], now + ARRIVAL_MS));
   beep(fresh.some(k => k.startsWith("gainers:")) ? "high" : "medium");
   const which = fresh.some(k => k.startsWith("gainers:")) ? "scan-pillars" : "scan-running";
   const card = document.querySelector('[data-card="' + which + '"]');
@@ -1702,6 +1742,24 @@ function upsertBar(arr, bar) {
   if (i > 0 && arr[i - 1][0] === bar[0]) arr[i - 1] = bar; else arr.splice(i, 0, bar);
 }
 
+/* Symbol metadata is MERGED, never wholesale replaced. The stream writes the
+   provider's last print, its time and the book onto these objects between
+   rebuilds; assigning a fresh set every few seconds made those fields vanish
+   and reappear, which is what made the print row flicker. A field the rebuild
+   does not carry keeps the value the stream last wrote. */
+const STREAM_FIELDS = ["iexLast", "iexLastTime", "iexBid", "iexAsk"];
+function mergeSymbols(next) {
+  Object.keys(SYMS).forEach(k => { if (!next[k]) delete SYMS[k]; });
+  Object.keys(next).forEach(k => {
+    const cur = SYMS[k];
+    if (!cur) { SYMS[k] = next[k]; return; }
+    const streamed = {};
+    STREAM_FIELDS.forEach(f => { if (next[k][f] == null && cur[f] != null) streamed[f] = cur[f]; });
+    Object.keys(cur).forEach(f => delete cur[f]);
+    Object.assign(cur, next[k], streamed);           // same object, so closures survive
+  });
+}
+
 /* Replace the session in place — same arrays and objects, new contents — so
    every closure keeps working, then paint on the live edge with the zoom the
    trader had. No reload. */
@@ -1712,16 +1770,21 @@ function refreshSession() {
   fetch("/api/v1/replay/session", { cache: "no-store" }).then(r => r.json()).then(next => {
     const ranges = { a: PANES.a.getRange && PANES.a.getRange(), b: PANES.b.getRange && PANES.b.getRange(),
                      d: PANES.d.getRange && PANES.d.getRange(), c: PANES.c.getRange && PANES.c.getRange() };
+    const wasAtEdge = state.frame >= FRAMES.length - 1;
     FRAMES.length = 0; (next.frames || []).forEach(f => FRAMES.push(f));
     Object.keys(BARS).forEach(k => delete BARS[k]); Object.assign(BARS, next.bars || {});
     S.bars10s = S.bars10s || {};
     Object.keys(S.bars10s).forEach(k => delete S.bars10s[k]); Object.assign(S.bars10s, next.bars10s || {});
-    Object.keys(SYMS).forEach(k => delete SYMS[k]); Object.assign(SYMS, next.symbols || {});
+    mergeSymbols(next.symbols || {});
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
     OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
-    if (state.selected && !SYMS[state.selected]) state.selected = null;
-    state.frame = FRAMES.length - 1;
-    PENDING_RANGES = null; SNAP_LIVE = true;   // chart objects persist: keep the zoom, show the newest bar
+    // A locked symbol is the trader's choice; missing one rebuild does not
+    // revoke it. Only an unlocked selection that has genuinely left the desk
+    // is dropped.
+    if (state.selected && !SYMS[state.selected] && !state.locked) state.selected = null;
+    if (wasAtEdge) state.frame = FRAMES.length - 1;    // a seek back is not undone by a rebuild
+    else state.frame = Math.min(state.frame, FRAMES.length - 1);
+    PENDING_RANGES = null;                             // chart objects persist; the panes keep their zoom
     render();
   }).catch(() => {}).then(() => { refreshing = false; });
 }
@@ -1916,15 +1979,21 @@ function render() {
   $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
   const badge = $("#sessionBadge");
   badge.textContent = frame.session; badge.className = "badge " + frame.session;
-  $("#feedText").textContent = S.live ? "LIVE" : "REPLAY";
-  $("#feedAge").textContent = S.generatedFrom;
-  document.querySelectorAll(".card[data-kind]").forEach(card => {
+  // The badge belongs to the health stream on a streaming desk. render() runs
+  // several times a second and used to repaint a static "LIVE" over it, so a
+  // STALE or OFFLINE state appeared for an instant and was wiped.
+  if (!S.streaming) {
+    $("#feedText").textContent = S.live ? "LIVE" : "REPLAY";
+    $("#feedAge").textContent = S.generatedFrom;
+  }
+  document.querySelectorAll(".card[data-kind]").forEach(card => keepScroll(card, () => {
     if (card.dataset.kind === "list") fillListCard(card, card.dataset.scanner, frame);
     else fillAlertCard(card, ALERT_TILES[card.dataset.scanner], state.frame);
-  });
+  }));
   const ctx = renderHeader(frame);
   renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
   renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
+  syncFloatInput();     // or the box keeps the previous symbol's float and writes it onto this one
 }
 function syncTransport() { $("#scrub").value = String(state.frame); }
 
