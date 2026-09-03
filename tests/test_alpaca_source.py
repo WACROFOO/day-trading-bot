@@ -468,10 +468,14 @@ def test_since_narrows_the_intraday_window_and_keeps_references():
             return [{"symbol": "AAA", "exchange": "NASDAQ"}]
 
     al._EXCHANGE_CACHE.update(at=0.0, map={})      # another test may have filled it
-    recs = al.fetch_records(Stub("PK", "s" * 40), ["AAA"], since="2026-09-02T13:30:00Z", profiles=False)
-    assert seen["1Min"][0] == "2026-09-02T13:30:00Z", "minute bars start at `since`"
-    assert seen["trades"][0] == "2026-09-02T13:30:00Z"
-    assert seen["news"][0] == "2026-09-02T13:30:00Z"
+    # `since` only narrows the window when it is inside today's session, so it
+    # is derived from the session clock rather than hard-coded to a past date.
+    start, _ = al.session_window(al.session_day())
+    since = al._iso(datetime.fromisoformat(start.replace("Z", "+00:00")) + timedelta(minutes=90))
+    recs = al.fetch_records(Stub("PK", "s" * 40), ["AAA"], since=since, profiles=False)
+    assert seen["1Min"][0] == since, "minute bars start at `since`"
+    assert seen["trades"][0] == since
+    assert seen["news"][0] == since
     ref = next(r for r in recs if r["type"] == "reference")
     assert ref["iex_last_price"] == 4.21 and ref["iex_bid"] == 4.20 and ref["iex_ask"] == 4.22
     assert ref["exchange"] == "NASDAQ"

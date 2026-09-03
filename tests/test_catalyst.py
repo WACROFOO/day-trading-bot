@@ -133,9 +133,20 @@ def test_python_and_javascript_grade_the_same_words():
 
 # -- SEC client ---------------------------------------------------------------
 
+SEC_CACHE_DIR: Path = Path()          # set per test by the autouse fixture below
+
+
+@pytest.fixture(autouse=True)
+def _isolated_sec_cache(tmp_path, monkeypatch):
+    """Every test gets its own SEC cache directory: no shared /tmp path, no
+    state leaking between tests or between runs on the same machine."""
+    monkeypatch.setitem(globals(), "SEC_CACHE_DIR", tmp_path / "sec-cache")
+    yield
+
+
 class FakeSec(SecClient):
     def __init__(self, payloads):
-        super().__init__(user_agent="test", cache_dir=Path("/tmp/sec-test-cache"))
+        super().__init__(user_agent="test", cache_dir=SEC_CACHE_DIR)
         self.payloads = payloads
         self.calls = []
 
