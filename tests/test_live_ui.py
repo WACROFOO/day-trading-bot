@@ -213,6 +213,13 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         # live (quotes and bars reached the desk seconds ago) while the newest
         # BAR is hours old: that is quiet tape, and the chip says both rather
         # than calling a live desk "hours behind".
+        # A live desk opens on the live edge and stays there. It used to open
+        # eight minutes before the bell — a replay convenience — and the
+        # follow rule then refused to catch up, so every card sat in the past
+        # while this chip said "live".
+        pos = pg.evaluate("window.__deskFrame()")
+        assert pos["frame"] == pos["frames"] - 1, pos
+        assert pos["ts"] == pos["last"]
         lag = pg.text_content("#dataLag")
         # Short text, fixed-width slot: the chip sits between the clock and the
         # feed badges and must not shove them along the bar when the tape goes
@@ -223,6 +230,47 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert pg.get_attribute("#dataLag", "class").endswith("ok")
         assert "quiet tape" in pg.get_attribute("#dataLag", "title")
         assert not errors, errors
+        browser.close()
+
+
+@pytest.mark.skipif(not Path(CHROME).is_file(), reason="no chromium binary")
+def test_a_live_desk_can_be_parked_on_a_minute_and_says_so(desk_server):
+    """Stepping back to an alert's minute is a deliberate act with a way home.
+    Before this, clicking any alert row pinned every card to that minute for
+    the rest of the session and the header chip still read "live"."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    desk, port = desk_server["desk"], desk_server["port"]
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_timeout(800)
+        start = pg.evaluate("window.__deskFrame()")
+        assert start["frame"] == start["frames"] - 1
+
+        # A click on an alert row selects the name; it does not move the desk.
+        rows = pg.locator(".alert-row")
+        if rows.count():
+            rows.first.click()
+            pg.wait_for_timeout(200)
+            assert pg.evaluate("window.__deskFrame()")["frame"] == start["frames"] - 1
+            assert pg.text_content("#dataLag").startswith("live")
+
+        # Parking is explicit, visible, and reversible.
+        target = pg.evaluate("window.__SESSION__.frames[2].ts")
+        pg.evaluate("ts => window.__deskSeek(ts)", target)
+        pg.wait_for_timeout(200)
+        assert pg.text_content("#dataLag").startswith("paused")
+        assert "return to live" in pg.get_attribute("#dataLag", "title")
+        desk.refresh_session()
+        pg.wait_for_timeout(700)
+        assert pg.text_content("#dataLag").startswith("paused"), "a rebuild does not unpark it"
+        pg.click("#dataLag")
+        pg.wait_for_timeout(200)
+        pos = pg.evaluate("window.__deskFrame()")
+        assert pos["frame"] == pos["frames"] - 1 and pos["ts"] == pos["last"]
+        assert pg.text_content("#dataLag").startswith("live")
         browser.close()
 
 

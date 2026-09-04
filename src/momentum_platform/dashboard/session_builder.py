@@ -53,7 +53,12 @@ UTC = timezone.utc
 
 ROW_COLUMNS = [
     "symbol", "price", "changePct", "gapPct", "volume",
+    # `rvolDaily` is today over prior FULL days; `rvol` is the measure the
+    # pillar actually judged (time-of-day when the desk has a volume profile).
+    # A row that showed the daily number while the gate used the other one
+    # looked impossible: 1.3x sitting in a list that requires 5x.
     "rvolDaily", "rvol5m", "spread", "hodDistPct", "rangePos", "volume5m",
+    "rvol", "rvolMeasure",
 ]
 
 LIST_META = {
@@ -95,6 +100,7 @@ def _row(ranked) -> list:
         int(v.get("volume_today") or 0), v.get("rvol_daily"), v.get("rvol_5m"),
         v.get("spread"), v.get("hod_distance_pct"), v.get("range_position"),
         int(v.get("volume_5m") or 0),
+        v.get("rvol"), v.get("rvol_measure"),
     ]
 
 

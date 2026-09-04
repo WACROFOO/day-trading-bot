@@ -57,6 +57,17 @@ const dirClass = v => v == null ? "flat" : v > 0.05 ? "up" : v < -0.05 ? "down" 
 const etTime = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
 const etClock = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
 const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]); return o; };
+/* The RVOL a row was JUDGED on, and how it was measured. A list that gates on
+   5x showed the daily number beside the name, so a row admitted at 30x
+   time-of-day read 1.3x and looked like a bug in the scanner. */
+const rowRvol = r => (r && r.rvol != null ? r.rvol : (r ? r.rvolDaily : null));
+const rowRvolTitle = r => {
+  if (!r) return "";
+  const tod = r.rvolMeasure === "time_of_day";
+  const head = tod ? "volume so far vs the same clock time in prior sessions"
+                   : "today's volume vs prior FULL days (understates a part-day)";
+  return head + (tod && r.rvolDaily != null ? " · daily measure " + fx(r.rvolDaily) + "×" : "");
+};
 
 /* ── derived series ─────────────────────────────────────────────────── */
 function barsUpTo(sym, idx) {
@@ -463,7 +474,7 @@ function pillarChecks(row, meta) {
 function rvolPillar(row, meta, min) {
   const m = (meta && meta.metrics) || {};
   const tod = m.rvolMeasure === "time_of_day";
-  const v = row.rvolDaily;
+  const v = rowRvol(row);
   const name = tod
     ? "RVOL ≥ " + min + "× — volume so far vs the same clock time in prior sessions"
     : "RVOL ≥ " + min + "× — today vs prior FULL days (understates a part-day)";
@@ -644,7 +655,9 @@ function fillListCard(card, id, frame) {
     tr.appendChild(s);
     tr.appendChild(el("span", null, fx(r.price)));
     tr.appendChild(el("span", dirClass(r.changePct), pct(r.changePct)));
-    tr.appendChild(el("span", null, fx(r.rvolDaily) + "×"));
+    const rv = el("span", null, fx(rowRvol(r)) + "×");
+    rv.title = rowRvolTitle(r);
+    tr.appendChild(rv);
     tr.appendChild(el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—"));
     tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };
     tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
@@ -802,15 +815,33 @@ function renderTimeline(idx) {
     row.onclick = () => {
       select(a.symbol, a.scannerId);
       state.openAlert = state.openAlert === alertKey(a) ? null : alertKey(a);
-      // Selecting a historical alert seeks the charts to that moment.
-      const target = FRAMES.findIndex(f => f.ts === a.sourceTime || f.t * 1000 >= new Date(a.sourceTime).getTime());
-      if (target >= 0) { state.frame = target; syncTransport(); }
+      // On a LIVE desk the click selects the name and nothing else. Seeking
+      // the whole desk to the alert's minute pinned every card there for the
+      // rest of the session — the lists stopped taking new names, the charts
+      // stopped, and nothing said so. Stepping back is now deliberate: the
+      // alert's own detail carries the button, and the header chip says the
+      // desk is parked and takes you back.
+      if (!S.streaming) seekTo(a.sourceTime);
       render();
     };
     host.appendChild(row);
     if (state.openAlert === alertKey(a)) host.appendChild(alertDetail(a));
   });
 }
+/* Step the desk to one minute of the session, and back to the live edge. */
+function seekTo(iso) {
+  const target = FRAMES.findIndex(f => f.ts === iso || f.t * 1000 >= new Date(iso).getTime());
+  if (target < 0) return false;
+  state.frame = target;
+  state.parked = S.streaming && target < FRAMES.length - 1;
+  syncTransport(); render();
+  return true;
+}
+function backToLive() {
+  state.frame = FRAMES.length - 1; state.parked = false; syncTransport(); render();
+}
+function atLiveEdge() { return !S.streaming || state.frame >= FRAMES.length - 1; }
+
 function alertDetail(a) {
   const d = el("div", "tl-detail");
   d.appendChild(el("div", "tiny muted", "definition " + a.definitionVersion + " · source " + a.sourceTime + " · observed " + a.observedTime));
@@ -825,6 +856,13 @@ function alertDetail(a) {
   if (a.group && a.group.count > 1) {
     d.appendChild(el("div", "tiny muted", "consolidated with: " + a.group.also_triggered.join(", ") +
       " — every raw event is kept in history"));
+  }
+  if (S.streaming) {
+    const b = el("button", "icon-btn seek-back", "Show the desk at " + etTime(a.sourceTime));
+    b.title = "Step every card back to this minute. The header chip turns amber while the desk "
+            + "is parked there; click it to return to the live edge.";
+    b.onclick = e => { e.stopPropagation(); seekTo(a.sourceTime); };
+    d.appendChild(b);
   }
   return d;
 }
@@ -843,8 +881,9 @@ function deskBlockers(frame) {
     const { row, meta } = boardRow(frame, sym);
     const checks = pillarChecks(row, meta);
     checks.forEach((c, i) => { if (!c.ok && keys[i]) counts[keys[i]]++; });
-    if (row.rvolDaily == null) unknownRvol++;
-    else if (bestRvol == null || row.rvolDaily > bestRvol) bestRvol = row.rvolDaily;
+    const rv = rowRvol(row);
+    if (rv == null) unknownRvol++;
+    else if (bestRvol == null || rv > bestRvol) bestRvol = rv;
   });
   return { n: syms.length, counts, bestRvol, unknownRvol };
 }
@@ -871,7 +910,8 @@ function boardRow(frame, sym) {
   const m = meta.metrics || null;
   const row = symbolRow(frame, sym) || (m ? {
     symbol: sym, price: m.last, changePct: m.changePct, volume: m.volumeToday,
-    rvolDaily: m.rvol, rvol5m: m.rvol5m, spread: m.spread,
+    rvolDaily: m.rvolDaily, rvol: m.rvol, rvolMeasure: m.rvolMeasure,
+    rvol5m: m.rvol5m, spread: m.spread,
     hodDistPct: m.hodDistPct, rangePos: m.rangePos, volume5m: m.volume5m,
   } : null);
   if (row && !(S.streaming && meta.iexLast != null)) return { row, meta };
@@ -1015,7 +1055,7 @@ function renderHeader(frame) {
   const stats = $("#symStats"); stats.textContent = "";
   const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
   stat("Last", fx(last)); stat("Change", pct(chg), dirClass(chg)); stat("HOD", fx(hod));
-  stat("RVOL", row ? fx(row.rvolDaily) + "×" : "—");
+  stat("RVOL", row ? fx(rowRvol(row)) + "×" : "—");
   stat("5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
   const halted = frame.halts && frame.halts[sym] === "halted";
   stat("Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
@@ -1069,7 +1109,7 @@ function technicalScore(ctx) {
   return [
     last != null && last >= T.priceMin && last <= T.priceMax,
     (chg || 0) >= T.gainMinPct,
-    row && (row.rvolDaily || 0) >= T.rvolMin,
+    row && (rowRvol(row) || 0) >= T.rvolMin,
     meta.floatQuality === "verified" && meta.floatShares < T.floatMaxShares,
   ].filter(Boolean).length;
 }
@@ -1286,7 +1326,7 @@ function renderVerdict(frame, ctx) {
 
   const priceOk = last != null && last >= T.priceMin && last <= T.priceMax;
   const gainOk = (chg || 0) >= T.gainMinPct;
-  const rvolOk = row && (row.rvolDaily || 0) >= T.rvolMin;
+  const rvolOk = row && (rowRvol(row) || 0) >= T.rvolMin;
   const fl = effectiveFloat(sym, meta);
   // Float passes when somebody verified it under the cap — the feed, or you.
   // Shares outstanding (from SEC filings) is NOT float: it includes locked-up
@@ -1353,8 +1393,9 @@ function renderVerdict(frame, ctx) {
        (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
   line("Gain vs close", pct(chg), gainOk);
   const rvolMeta = (SYMS[state.selected] || {}).metrics || {};
-  line(rvolMeta.rvolMeasure === "time_of_day" ? "RVOL · time of day" : "RVOL · daily",
-       row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
+  line((rvolMeta.rvolMeasure || (row && row.rvolMeasure)) === "time_of_day"
+         ? "RVOL · time of day" : "RVOL · daily",
+       row ? fx(rowRvol(row)) + "×" : "—", !!rvolOk);
   // Three states, three words: PASS, FAIL, UNKNOWN. An over-cap shares-
   // outstanding bound is the third — it must never render as "false".
   const floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false);
@@ -1528,7 +1569,13 @@ function noteArrivals(frame) {
 let BEEPS = 0;
 if (typeof window !== "undefined") {
   window.__deskBeeps = () => BEEPS;   // audio test hook
-  window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });   // rollover test hook
+  // Test hooks: the alert memory across a rollover, and where the desk is
+  // sitting relative to the live edge.
+  window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });
+  window.__deskSeek = seekTo;
+  window.__deskFrame = () => ({ frame: state.frame, frames: FRAMES.length,
+                                ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
+                                last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });
 }
 function beep(severity) {
   BEEPS++;
@@ -1894,6 +1941,20 @@ function renderLag(frame) {
     if (!meta) return;
     meta.appendChild(host);
   }
+  // A parked desk is the one state the chip must never call "live": every
+  // card is showing a minute from the past and only this says so.
+  if (S.streaming && FRAMES.length && state.frame < FRAMES.length - 1) {
+    host.hidden = false;
+    host.className = "lag warn parked";
+    host.textContent = "paused " + etClock(FRAMES[state.frame].ts).slice(0, 5);
+    host.title = "The desk is parked at " + etClock(FRAMES[state.frame].ts) + " ET, "
+               + (FRAMES.length - 1 - state.frame) + " minutes behind the live edge. "
+               + "Click to return to live.";
+    host.onclick = backToLive;
+    return;
+  }
+  host.onclick = null;
+  host.classList.remove("parked");
   const lastMs = frame ? frame.t * 1000 : 0;
   let lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
   // A live desk is behind only when IBKR has gone quiet on it. Thin premarket
@@ -2019,7 +2080,13 @@ function refreshSession() {
     // revoke it. Only an unlocked selection that has genuinely left the desk
     // is dropped.
     if (state.selected && !SYMS[state.selected] && !state.locked) state.selected = null;
-    if (wasAtEdge) state.frame = FRAMES.length - 1;    // a seek back is not undone by a rebuild
+    // A live desk follows the tape unless the operator PARKED it on a minute
+    // (the alert detail's "show the desk at" button). Inferring that from the
+    // frame index alone meant any single rebuild that left the page one frame
+    // short stranded it there for the rest of the session.
+    if (S.streaming) state.frame = state.parked ? Math.min(state.frame, FRAMES.length - 1)
+                                                : FRAMES.length - 1;
+    else if (wasAtEdge) state.frame = FRAMES.length - 1;   // a seek back survives a rebuild
     else state.frame = Math.min(state.frame, FRAMES.length - 1);
     PENDING_RANGES = null;                             // chart objects persist; the panes keep their zoom
     render();
@@ -2143,7 +2210,12 @@ function renderWidgetIn(host, sym, meta) {
       range: host.dataset.range || "1D",
       style: "1", locale: "en", container_id: mount.id, autosize: true,
       withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
-      session: "extended", details: false, hotlist: false, calendar: false,
+      // Extended hours on by default, both spellings: the widget has used
+      // `session` and `extended_hours` across versions and ignores the one it
+      // does not know. Without it their chart starts at 09:30 and a premarket
+      // runner shows as a flat line beside a desk that is already moving.
+      session: "extended", extended_hours: true,
+      details: false, hotlist: false, calendar: false,
       studies: ["VWAP@tv-basicstudies", "MAExp@tv-basicstudies"],
     });
   };
@@ -2322,7 +2394,10 @@ function init() {
         $("#clockET").textContent = etParts(Date.now());
         const ses = sessionAt(Date.now());
         const b = $("#sessionBadge"); b.textContent = ses; b.className = "badge " + ses;
-        if (FRAMES.length) renderLag(FRAMES[FRAMES.length - 1]);
+        // The frame the desk is DRAWING, never the newest one: reading the
+        // live edge here is what let the chip say "live" over cards parked
+        // twenty-four minutes in the past.
+        if (FRAMES.length) renderLag(FRAMES[Math.min(state.frame, FRAMES.length - 1)]);
       }, 1000);
     } else liveFollow();
   }
@@ -2405,7 +2480,12 @@ function init() {
     Object.values(PANES).forEach(p => p.resize());
     renderCharts(FRAMES[state.frame]);
   });
-  state.frame = Math.max(0, OPEN_INDEX - 8);
+  // A RECORDING opens eight minutes before the bell, where the interesting
+  // part starts. A LIVE desk opens on the live edge. This line ran on both,
+  // so every live session started parked at 09:22 — eight minutes before the
+  // open — and the follow-the-edge rule below refused to catch up from
+  // there, leaving every card in the past while the header still said live.
+  state.frame = S.streaming ? FRAMES.length - 1 : Math.max(0, OPEN_INDEX - 8);
   syncTransport(); render();
 }
 init();

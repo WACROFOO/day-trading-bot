@@ -358,3 +358,32 @@ every name.
   UNKNOWN for a name that simply reached no ranked list. Empty cards name the
   blocking pillar. The TradingView panes carry the desk's own IBKR last print,
   because their delayed feed showed 10.01 beside a desk price of 12.73.
+
+### Update 2026-09-04 (third session, 09:46 ET)
+
+The RVOL fix held: AKAN scored 5/5 with RVOL 30.63x time-of-day, Running Up
+carried 46 events and High of Day 9. But every card was showing 09:22.
+
+- **Root cause: a replay convenience on a live desk.** `init()` ended with
+  `state.frame = max(0, OPEN_INDEX - 8)` — open a recording eight minutes
+  before the bell. On a live premarket desk `OPEN_INDEX` is the 09:30 frame,
+  so the desk opened parked at 09:22, and `refreshSession`'s follow rule
+  (`wasAtEdge = state.frame >= FRAMES.length - 1`) could never catch up from
+  a position that was not the edge. Every list, chart and alert grid stayed on
+  that minute for the rest of the session.
+- **Why it was invisible.** `renderLag` had two callers: `render()` passed the
+  frame being drawn, the one-second timer passed `FRAMES[FRAMES.length - 1]`.
+  The timer won, so the chip read "live" over a desk parked twenty-four
+  minutes back.
+- **Fix.** A live desk opens on the live edge; following it is now driven by
+  an explicit `state.parked` flag rather than inferred from the frame index,
+  so no single rebuild can strand the desk. Parking is deliberate (the alert
+  detail's "Show the desk at HH:MM") and self-announcing (`paused HH:MM`,
+  amber, click to return). The chip always describes the frame on screen.
+- **The WETO question.** WETO sat in the Five Pillars list at 3.98 / +23.6%
+  while the board showed it at 2.75 / -14.6% and 2/5. Both were right: the
+  list was the 09:22 snapshot the parked desk was holding, the board reads
+  live metrics. The list's RVOL column also showed the daily measure (1.30x)
+  while the gate had used the time-of-day one, which made a legitimate row
+  look impossible. The column now shows the number that gated.
+- TradingView panes default to extended hours.

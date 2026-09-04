@@ -192,6 +192,25 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, liquid, one alert per leg. Approximation.
+- **A live desk opens on the live edge and stays there.** A recording opens
+  eight minutes before the bell, which is where the interesting part starts.
+  That line ran on live desks too, so every live session started parked at
+  09:22 — and the follow-the-edge rule refused to catch up from there, leaving
+  every card, list and chart on that one minute for the rest of the session
+  while the header still said "live". Stepping back in time is now a
+  deliberate act: an alert row click selects the name only, the alert's detail
+  carries a "Show the desk at HH:MM" button, and while the desk is parked the
+  header chip reads `paused HH:MM` in amber and clicking it returns to live.
+- **The lag chip describes the frame on screen.** One of its two callers used
+  the newest frame instead, so the chip could say "live" over cards parked
+  twenty-four minutes in the past.
+- **A list row shows the RVOL it was judged on.** The column carried the daily
+  measure while the gate used the time-of-day one, so a name admitted at 30x
+  read 1.3x and looked like a scanner bug. The daily figure is in the cell's
+  tooltip.
+- **TradingView panes default to extended hours**, so their chart covers
+  premarket rather than starting at 09:30 beside a desk that is already
+  moving.
 - **RVOL is measured against the same clock time.** Today's volume divided by
   the mean of prior FULL days is what the desk used to show, and before the
   open it cannot pass: at 08:53 a runner with 93,000 premarket shares against a
