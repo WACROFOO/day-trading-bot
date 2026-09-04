@@ -94,6 +94,12 @@ IEX is real-time — there is no 15-minute delay on this feed. It is one venue,
 so absolute volume is understated; the relative-volume ratios compare IEX to
 IEX and hold.
 
+### Windows
+
+The Python runs natively; only the `.sh` launchers do not. Use
+`powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr` and see
+`docs/windows-setup.md` for the full path from a clean machine.
+
 ### Live on IBKR — the real tape, read-only
 
 This is the mode to use once TWS runs on your Mac. It replaces the single-venue
