@@ -24,6 +24,7 @@ ibkr_stream.py; this file only schedules them.
 from __future__ import annotations
 
 import logging
+import os
 import queue
 import threading
 import time
@@ -34,6 +35,7 @@ from typing import Callable, Dict, List, Optional
 
 from ..datasources.alpaca_source import session_day
 from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
+                                        ET, intraday_volume_profile,
                                         is_common_stock, minute_records, news_records, reference_record,
                                         session_duration, session_start,
                                         sec_profile, stock_type_of, store_records)
@@ -109,6 +111,12 @@ class IbkrDesk:
         self._reference_day: Dict[str, str] = {}      # session day each reference was built for
         self._float_inputs: Dict[str, tuple] = {}     # (sec profile, ibkr float) kept for the rollover
         self._minutes: Dict[str, List[dict]] = {}
+        # Time-of-day RVOL baseline per symbol, and the session day it was
+        # built for. One historical request per symbol per day, spent in the
+        # same round-robin slot as the minute refresh.
+        self._profiles: Dict[str, List[float]] = {}
+        self._profile_day: Dict[str, str] = {}
+        self.profile_days = int(os.environ.get("DESK_VOLUME_PROFILE_DAYS", "10"))
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._jobs: "queue.Queue[tuple]" = queue.Queue()
@@ -122,6 +130,12 @@ class IbkrDesk:
         self._next_history = 0.0
         self._history_cursor = 0
         self.history_every = 20.0
+        # A TWS farm flap can kill the five-second bar streams while quotes
+        # keep arriving. Nothing reports it, so the desk watches for it.
+        self.bar_stall_seconds = float(os.environ.get("DESK_BAR_STALL_SECONDS", "300"))
+        self.resubscribe_every = 300.0
+        self._next_resubscribe = 0.0
+        self._resubscribe_wanted = False
         self._worker_thread: Optional[threading.Thread] = None
         self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
@@ -245,7 +259,32 @@ class IbkrDesk:
             pass
         self.log(f"  IBKR scanner connected read-only, client {self.scanner_client_id}")
 
+    # TWS status codes that matter to a data-only desk. 1100 is the API's own
+    # connectivity; 2103/2105/2157 are farm connections going down and
+    # 2104/2106/2158 the same farms coming back.
+    FARM_DOWN = (2103, 2105, 2157)
+    FARM_UP = (2104, 2106, 2158)
+
     def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
+        h = self.stream.health if self.stream is not None else None
+        if errorCode == 1100 and h is not None:
+            h.farm_ok = False
+            h.messages.append("TWS lost its connection to IB (1100)")
+        elif errorCode in (1101, 1102) and h is not None:
+            # 1101 restored with data LOST: every subscription must be
+            # re-requested. 1102 claims the data was maintained, but the
+            # five-second bar streams often are not — the stall watchdog
+            # settles it either way, so ask for a check rather than trusting.
+            h.farm_ok = True
+            h.messages.append(f"TWS connection restored ({errorCode})")
+            self._resubscribe_wanted = True
+        elif errorCode in self.FARM_DOWN and h is not None:
+            h.farm_ok = False
+        elif errorCode in self.FARM_UP and h is not None:
+            h.farm_ok = True
+            self._resubscribe_wanted = True
+        elif errorCode == 162 and h is not None:
+            h.pacing = "pacing" in str(errorString).lower()
         if errorCode == 10358 and self.fundamentals is not False:
             self.fundamentals = False
             self.log("  IBKR fundamentals are not entitled on this account: float falls back to "
@@ -304,6 +343,10 @@ class IbkrDesk:
             exchange=getattr(c, "primaryExchange", None) or "NASDAQ",
             name=getattr(c, "longName", None) or None, sec=sec or {}, today=day,
             clock=self.clock, ibkr_float=ibkr_float or {})
+        profile = self._profiles.get(sym)
+        if profile:
+            self._reference[sym]["volume_profile"] = profile
+            self._reference[sym]["volume_profile_days"] = self.profile_days
         self._reference_day[sym] = day
 
     def session_day(self) -> str:
@@ -340,6 +383,7 @@ class IbkrDesk:
     def tick(self) -> None:
         s = self.stream
         s.poll_tickers()
+        self._recover_stalled_bars()
         self.publisher.publish_closed_10s(s.store, s.symbols)
         h = s.check()
         key = (h.state, h.generation, h.subscriptions, h.market_data_type)
@@ -349,6 +393,38 @@ class IbkrDesk:
             self.log(f"  feed {h.state} (gen {h.generation}, {h.subscriptions} lines)")
         if h.state == "OFFLINE":
             s.reconnect()
+
+    def _recover_stalled_bars(self) -> bool:
+        """Re-request the bar streams when quotes arrive but bars have stopped.
+
+        TWS drops and restores its market-data farm (1100 / 1101 / 2103 / 2104)
+        without dropping the API socket. Ticks resume by themselves; the
+        five-second bar subscriptions frequently do not. The desk then shows a
+        live feed badge, a live price and a tape frozen at the last bar before
+        the flap — every chart, RVOL and every event scanner stuck with it,
+        which is what "LAST PRINT 04:00" at 08:53 means. `reconnect()` cannot
+        see this: the socket never dropped."""
+        s = self.stream
+        stalled = s.bars_stalled_for(self.clock())
+        due = self._resubscribe_wanted or (stalled is not None and stalled >= self.bar_stall_seconds)
+        if not due:
+            return False
+        now = time.monotonic()
+        if now < self._next_resubscribe:
+            return False
+        self._next_resubscribe = now + self.resubscribe_every
+        self._resubscribe_wanted = False
+        why = ("TWS reported the data connection restored" if stalled is None
+               else f"no bars for {int(stalled)}s while quotes kept arriving")
+        self.log(f"  {why} — re-requesting quotes and five-second bars")
+        try:
+            s.resubscribe_all()
+        except Exception as exc:
+            self.log(f"  resubscribe failed: {exc}")
+            return False
+        self._next_history = 0.0          # pull fresh minutes on the next cycle
+        self.publisher.publish_health(self.health())
+        return True
 
     def refresh_history(self) -> Optional[str]:
         """Re-pull the last few minutes of one symbol's history.
@@ -366,6 +442,11 @@ class IbkrDesk:
         c = self._contracts_for(sym)
         if c is None:
             return None
+        # One historical request per cycle. A symbol with no volume profile for
+        # today spends its turn on that: without it the RVOL pillar is measured
+        # against whole prior days, which no premarket runner can clear.
+        if self._profile_day.get(sym) != self.session_day():
+            return self.refresh_profile(sym)
         try:
             fresh = minute_records(self.stream.ib, c, sym, duration="900 S",
                                    start=session_start(self.clock()))
@@ -378,6 +459,32 @@ class IbkrDesk:
         for m in fresh:
             merged[m["ts"]] = m
         self._minutes[sym] = [merged[k] for k in sorted(merged)]
+        return sym
+
+    def refresh_profile(self, sym: str) -> Optional[str]:
+        """Rebuild one symbol's time-of-day volume baseline for today."""
+        c = self._contracts_for(sym)
+        if c is None:
+            return None
+        day = self.session_day()
+        try:
+            profile = intraday_volume_profile(
+                self.stream.ib, c, days=self.profile_days,
+                exclude_day=self.clock().astimezone(ET).date())
+        except Exception as exc:
+            self.log(f"  {sym}: volume profile failed: {exc}")
+            self._profile_day[sym] = day       # do not retry every 20 seconds
+            return None
+        self._profile_day[sym] = day
+        if not profile:
+            self.log(f"  {sym}: no intraday history for a volume profile; "
+                     "RVOL stays on the daily measure")
+            return sym
+        self._profiles[sym] = profile
+        ref = self._reference.get(sym)
+        if ref is not None:
+            ref["volume_profile"] = profile
+            ref["volume_profile_days"] = self.profile_days
         return sym
 
     def _contracts_for(self, sym: str):

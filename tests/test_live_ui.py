@@ -188,8 +188,12 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
             "a rebuild that omits the streamed stamp must not blank it"
 
         # Scroll position in a tile survives the rebuild.
+        # The height has to come from a stylesheet: the tile body is rebuilt on
+        # every render, so an inline style would vanish with the old element
+        # and the assertion below would test nothing.
+        pg.add_style_tag(content="[data-card=scan-running] .tile-rows{max-height:40px;overflow:auto}")
         pg.evaluate("""() => { const b = document.querySelector('[data-card=scan-running] .tile-rows');
-                               if (b) { b.style.maxHeight = '40px'; b.scrollTop = 12; } }""")
+                               if (b) b.scrollTop = 12; }""")
         top = pg.evaluate("document.querySelector('[data-card=scan-running] .tile-rows').scrollTop")
         desk.refresh_session()
         pg.wait_for_timeout(400)
@@ -210,7 +214,12 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         # BAR is hours old: that is quiet tape, and the chip says both rather
         # than calling a live desk "hours behind".
         lag = pg.text_content("#dataLag")
-        assert lag.startswith("live") and "last print" in lag, lag
+        # Short text, fixed-width slot: the chip sits between the clock and the
+        # feed badges and must not shove them along the bar when the tape goes
+        # quiet. The explanation is in the tooltip.
+        assert lag.startswith("live · "), lag
+        title = pg.get_attribute("#dataLag", "title")
+        assert "newest bar" in title and "quiet tape, not a delay" in title
         assert pg.get_attribute("#dataLag", "class").endswith("ok")
         assert "quiet tape" in pg.get_attribute("#dataLag", "title")
         assert not errors, errors

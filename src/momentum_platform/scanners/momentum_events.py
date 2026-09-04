@@ -11,6 +11,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
+from ..formulas import effective_rvol
 from ..models import Reason, ScannerEvent, SymbolSnapshot
 from ..state import HotState, SymbolState
 from .base import EdgeTracker, Scanner, _round
@@ -78,7 +79,7 @@ class HodMomentumScanner(Scanner):
     def _branch(self, snap: SymbolSnapshot) -> Optional[str]:
         """Label the event with the closest captured branch name."""
         f = snap.float_shares
-        rvol = snap.rvol_5m or snap.rvol_daily or 0.0
+        rvol = snap.rvol_5m or effective_rvol(snap) or 0.0
         band = "high_rvol" if rvol >= self.high_rvol_min else "medium_rvol"
         if f is not None and f <= self.low_float_max:
             prefix = "low_float"
@@ -120,7 +121,7 @@ class HodMomentumScanner(Scanner):
         if not new_hod:
             return []
 
-        rvol_recent = current.rvol_5m if current.rvol_5m is not None else current.rvol_daily
+        rvol_recent = current.rvol_5m if current.rvol_5m is not None else effective_rvol(current)
         liquid, vol_ok, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
         # In thin tape the recent-RVOL check is the same wall as the share
         # floor (both count shares that have not printed yet); the pillars

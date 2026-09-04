@@ -15,6 +15,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
+from ..formulas import effective_rvol
 from ..models import FloatQuality, RankedRow, Reason, ScannerEvent, SymbolSnapshot
 from ..state import HotState, SymbolState
 from .base import EdgeTracker, Scanner, _round
@@ -79,7 +80,12 @@ def score_pillars(
     """Returns (reasons, technical_score 0-4, news_ok)."""
     price_ok = snap.last is not None and PRICE_MIN <= snap.last <= PRICE_MAX
     gain_ok = (snap.change_from_close_pct or 0.0) >= GAIN_MIN_PCT
-    rvol_ok = snap.rvol_daily is not None and snap.rvol_daily >= RVOL_MIN
+    # `snap.rvol` is the time-of-day measure when the desk has a volume
+    # profile for the symbol and the simple daily one otherwise. Dividing a
+    # premarket part-day by whole prior days can never reach 5x, so measuring
+    # the pillar that way silently closed the list every morning.
+    rvol_value = effective_rvol(snap)
+    rvol_ok = rvol_value is not None and rvol_value >= RVOL_MIN
     # Float pillar requires a known supply value below the cap. An unknown
     # float is a failed check, never silently substituted (spec 7.5) — but the
     # reason row says WHY it failed.
@@ -95,7 +101,10 @@ def score_pillars(
     reasons = [
         Reason("price_in_band", _round(snap.last), price_ok, f"{PRICE_MIN}-{PRICE_MAX}"),
         Reason("gain_pct", _round(snap.change_from_close_pct), gain_ok, GAIN_MIN_PCT),
-        Reason("rvol_daily", _round(snap.rvol_daily), rvol_ok, RVOL_MIN),
+        # The key stays `rvol_daily` (it is the pillar's row across the API and
+        # the page); the value is whichever measure was used, and the row's
+        # `rvol_measure` says which.
+        Reason("rvol_daily", _round(rvol_value), rvol_ok, RVOL_MIN),
         Reason(
             "float_shares",
             snap.float_shares if float_known else "unknown",
@@ -176,7 +185,7 @@ class FivePillarsList(Scanner):
             rows.append(
                 RankedRow(
                     symbol=snap.symbol,
-                    rank_metric=snap.rvol_daily or 0.0,
+                    rank_metric=effective_rvol(snap) or 0.0,
                     values=self._base_values(snap)
                     | {
                         "technical_score": technical,

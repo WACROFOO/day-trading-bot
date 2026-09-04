@@ -192,6 +192,30 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, liquid, one alert per leg. Approximation.
+- **RVOL is measured against the same clock time.** Today's volume divided by
+  the mean of prior FULL days is what the desk used to show, and before the
+  open it cannot pass: at 08:53 a runner with 93,000 premarket shares against a
+  2.2M average day reads 0.04x, so the RVOL pillar failed on every name and the
+  Top gainers list was empty all morning. The desk now pulls ten sessions of
+  five-minute bars per name and compares today's volume with the median the
+  same name had traded by the same clock time. On 2026-09-04 that reads about
+  7.7x for AOUT, which is what an independent screener showed. The R chip's
+  tooltip says which measure produced the number and what the baseline was;
+  the daily figure stays on the row. Threshold Confirmed, method Approximation.
+- **An empty list says why it is empty.** The card counts the desk and names
+  the blocking pillar ("10 names on the desk · blocked by RVOL on 10 (best
+  0.83x of 5x needed), price on 2, gain on 4"). When the tape itself has
+  stopped the event tiles say so, because those scanners read bars.
+- **A live feed with a dead tape recovers itself.** TWS loses and restores its
+  market-data farm (errors 1100/1101/2103/2104) without dropping the API
+  socket. Quotes come back by themselves; the five-second bar streams often do
+  not, and nothing reports it — the desk then shows a live badge, a live price
+  and charts frozen at the last bar before the flap. When quotes keep arriving
+  and no bar has for five minutes, the desk re-requests every quote and bar
+  stream and refills the gap, at most once every five minutes, and says so in
+  the log.
+- The feed chip only counts a CHANGED quote as an arrival. It used to stamp
+  its clock on every poll, so "live" meant "a ticker object exists".
 - Liquidity for Running Up and HOD Momentum is 25,000 shares in the last five
   minutes OR at least three of the five pillars passing (Approximation, not a
   Warrior setting). Before the open a name like a 4/5 on the board trades thin

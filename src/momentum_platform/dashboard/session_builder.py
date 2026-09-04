@@ -63,8 +63,10 @@ LIST_META = {
                     "note": "Freezes at 09:30 ET, matching the captured platform."},
     "top_gainers": {"title": "Top Gainers", "metric": "Change from close %",
                     "note": "Continues updating all session."},
-    "top_relative_volume": {"title": "Top Relative Volume", "metric": "Daily RVOL",
-                            "note": "Simple daily RVOL: today's volume / mean prior full-day volume."},
+    "top_relative_volume": {"title": "Top Relative Volume", "metric": "RVOL",
+                            "note": "Volume so far against what prior sessions had traded by this "
+                                    "clock time, when the desk has a profile; today / mean prior "
+                                    "full-day volume when it does not."},
     "top_volume_5m": {"title": "Top Volume 5 Minutes", "metric": "5m volume",
                       "note": "Raw share volume, never silently replaced by RVOL."},
 }
@@ -161,6 +163,7 @@ def build_session_from_records(
                 "symbol": rec["symbol"],
                 "prevClose": rec.get("prev_close"),
                 "avgDailyVolume": rec.get("avg_daily_volume"),
+                "volumeProfileDays": rec.get("volume_profile_days"),
                 "high52w": rec.get("high_52w"),
                 "floatShares": rec.get("float_shares"),
                 "floatQuality": rec.get("float_quality", "unknown"),
@@ -218,11 +221,14 @@ def build_session_from_records(
                 "bid": chunk[-1].get("bid"), "ask": chunk[-1].get("ask"),
             })
 
+    profiles = {r["symbol"]: r.get("volume_profile") for r in records
+                if r.get("type") == "reference" and r.get("volume_profile")}
     hot = HotState()
     hot.load_reference([
         ReferenceData(
             symbol=s["symbol"], prev_close=s["prevClose"],
             avg_daily_volume=s["avgDailyVolume"], high_52w=s["high52w"],
+            volume_profile=profiles.get(s["symbol"]),
             float_shares=s["floatShares"],
             float_quality=FloatQuality(s["floatQuality"]),
         )
@@ -368,6 +374,32 @@ def build_session_from_records(
             "alerts": frame_alerts,
             "halts": dict(halt_state),
         })
+
+    # Every desk name carries its own numbers. The Five Pillars board used to
+    # scavenge them out of whatever ranked list a symbol happened to reach, so
+    # a name in no list read UNKNOWN on every pillar however much was known
+    # about it.
+    for sym, meta in symbols.items():
+        snap = hot.symbols[sym].snapshot if sym in hot.symbols else None
+        if snap is None:
+            continue
+        meta["metrics"] = {
+            "last": snap.last,
+            "changePct": _num(snap.change_from_close_pct),
+            "volumeToday": int(snap.volume_today or 0),
+            "volume5m": None if snap.volume_5m is None else int(snap.volume_5m),
+            "rvol": _num(snap.rvol),
+            "rvolDaily": _num(snap.rvol_daily),
+            "rvolTod": _num(snap.rvol_tod),
+            "rvolMeasure": snap.rvol_measure,
+            "rvolBaseline": None if snap.rvol_baseline is None else int(snap.rvol_baseline),
+            "rvol5m": _num(snap.rvol_5m),
+            "sessionHigh": snap.session_high,
+            "sessionLow": snap.session_low,
+            "hodDistPct": _num(snap.hod_distance_pct),
+            "rangePos": _num(snap.range_position, 3),
+            "spread": _num(snap.spread_abs, 4),
+        }
 
     # A live desk names the session day it is showing; the first frame's date
     # is a replay convenience only. Derived from the frames, a desk holding

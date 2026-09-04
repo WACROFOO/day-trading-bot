@@ -39,6 +39,7 @@ class ReferenceData:
     symbol: str
     prev_close: Optional[float] = None
     avg_daily_volume: Optional[float] = None
+    volume_profile: Optional[list] = None      # time-of-day RVOL baseline
     high_52w: Optional[float] = None
     float_shares: Optional[float] = None
     float_quality: FloatQuality = FloatQuality.UNKNOWN
@@ -106,6 +107,8 @@ class HotState:
             snap = self.get(ref.symbol).snapshot
             snap.prev_close = ref.prev_close
             snap.avg_daily_volume = ref.avg_daily_volume
+            if ref.volume_profile:
+                snap.volume_profile = list(ref.volume_profile)
             snap.high_52w = ref.high_52w
             snap.float_shares = ref.float_shares
             snap.float_quality = ref.float_quality

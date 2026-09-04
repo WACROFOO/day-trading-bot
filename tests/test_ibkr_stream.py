@@ -428,3 +428,23 @@ def test_late_reply_filter_turns_the_key_error_traceback_into_one_info_line(capl
     recs = [r for r in caplog.records if r.name == "ib_async.Decoder"]
     assert [r.levelname for r in recs] == ["INFO", "ERROR"]
     assert "late reply" in recs[0].getMessage() and recs[0].exc_info is None
+
+
+def test_only_a_changed_quote_counts_as_an_arrival():
+    """`lastQuoteAt` is the feed's heartbeat on the page. Stamping it on every
+    poll made it mean "a ticker exists", so a desk whose tape had not moved in
+    hours still reported a live feed."""
+    class T:
+        last, bid, ask, lastSize, marketDataType = 4.0, 3.99, 4.01, 100, 1
+
+    clock = Clock(datetime(2026, 9, 4, 12, 0, tzinfo=timezone.utc))
+    st = mod.IbkrStream(clock=clock, ib=object())
+    st._tickers["AAA"] = T()
+    st.poll_tickers()
+    first = st.health.last_quote_at
+    clock.now += timedelta(minutes=5)
+    st.poll_tickers()
+    assert st.health.last_quote_at == first, "an unchanged quote is not an arrival"
+    T.last = 4.05
+    st.poll_tickers()
+    assert st.health.last_quote_at == clock.now

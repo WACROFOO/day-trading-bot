@@ -16,9 +16,16 @@ Nothing here transmits anything. Every call is a request for data.
 from __future__ import annotations
 
 from datetime import datetime, timedelta, timezone
+from statistics import median
 from typing import Callable, Dict, Iterable, List, Optional
+from zoneinfo import ZoneInfo
 
 UTC = timezone.utc
+ET = ZoneInfo("America/New_York")
+# 04:00-20:00 ET in five-minute buckets: the extended session, the finest bar
+# size IBKR will return for ten sessions in a single historical request.
+PROFILE_BUCKETS = 192
+PROFILE_BUCKET_MINUTES = 5
 
 SCAN_CODES = ("TOP_PERC_GAIN", "HOT_BY_VOLUME", "TOP_VOLUME_RATE", "TOP_TRADE_RATE", "MOST_ACTIVE")
 LOCATIONS = ("STK.NASDAQ.NMS", "STK.NASDAQ.SCM")     # Global (Select) Market, Capital Market
@@ -361,6 +368,60 @@ def minute_records(ib, contract, symbol: str, duration: str = "1 D",
                     "open": _num(b.open), "high": _num(b.high), "low": _num(b.low),
                     "close": close, "volume": int(_num(b.volume) or 0)})
     return out
+
+
+def intraday_volume_profile(ib, contract, days: int = 10,
+                            exclude_day: Optional[object] = None) -> List[float]:
+    """Median cumulative volume by five-minute bucket after 04:00 ET.
+
+    This is the baseline for time-of-day relative volume. The simple daily
+    measure divides part of a day by whole prior days, so before the open a
+    premarket runner reads a fraction of 1x however violent its tape is and
+    the RVOL pillar can never pass. Here each prior session is walked from
+    04:00 ET, its cumulative share count recorded at every five-minute mark,
+    and the sessions compared at the same mark.
+
+    A bucket's baseline is the median across the prior sessions THAT HAD
+    TRADED by that time; sessions still at zero are left out rather than
+    dragging the median to zero and making every multiple infinite. A bucket
+    no prior session traded in has no baseline (0.0) and the caller falls back
+    to the daily measure and says so.
+
+    Approximation: the threshold RVOL >= 5 is the course's; measuring it this
+    way is this desk's own method, not a Warrior production setting.
+    """
+    hist = ib.reqHistoricalData(contract, "", f"{int(days)} D", "5 mins",
+                                "TRADES", False, formatDate=2)
+    per_day: Dict[object, List[float]] = {}
+    for b in hist or []:
+        ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))
+        if ts.tzinfo is None:
+            ts = ts.replace(tzinfo=UTC)
+        et = ts.astimezone(ET)
+        idx = ((et.hour - 4) * 60 + et.minute) // PROFILE_BUCKET_MINUTES
+        if idx < 0 or idx >= PROFILE_BUCKETS:
+            continue
+        day = et.date()
+        if exclude_day is not None and day == exclude_day:
+            continue          # today is the thing being measured, not a baseline
+        per_day.setdefault(day, [0.0] * PROFILE_BUCKETS)[idx] += float(_num(b.volume) or 0.0)
+    if not per_day:
+        return []
+    cumulative: List[List[float]] = []
+    for day in sorted(per_day):
+        run, row = 0.0, []
+        for v in per_day[day]:
+            run += v
+            row.append(run)
+        if run > 0:
+            cumulative.append(row)
+    if not cumulative:
+        return []
+    profile = []
+    for i in range(PROFILE_BUCKETS):
+        traded = [row[i] for row in cumulative if row[i] > 0]
+        profile.append(float(median(traded)) if traded else 0.0)
+    return profile
 
 
 def store_records(store, symbol: str) -> List[dict]:

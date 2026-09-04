@@ -11,6 +11,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import List, Optional
 
+from ..formulas import effective_rvol
 from ..models import RankedRow, Reason
 from ..sessions import SessionCalendar
 from ..state import HotState
@@ -57,7 +58,8 @@ class TopListScanner(Scanner):
             if self.max_float_shares is not None:
                 if snap.float_shares is None or snap.float_shares > self.max_float_shares:
                     continue
-            value = getattr(snap, self.metric, None)
+            value = (effective_rvol(snap) if self.metric == "rvol"
+                     else getattr(snap, self.metric, None))
             if value is None:
                 continue
             rows.append(
@@ -90,7 +92,7 @@ def low_float_top_gainers(max_float_shares: float = 20_000_000, **kw) -> TopList
 
 
 def top_relative_volume(**kw) -> TopListScanner:
-    return TopListScanner("top_relative_volume", metric="rvol_daily", **kw)
+    return TopListScanner("top_relative_volume", metric="rvol", **kw)
 
 
 def top_volume_5m(**kw) -> TopListScanner:

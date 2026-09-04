@@ -323,3 +323,38 @@ Ordered by how much each one changes outcomes.
   so a flapping link no longer hits the account-summary quota (error 322);
   late replies to timed-out requests log one INFO line instead of a KeyError
   traceback.
+
+### Update 2026-09-04 (second premarket session, 08:53 ET)
+
+Three of the four scanner cards were empty on a morning with real runners on
+the desk. The board scored AOUT 4/5 and AKAN 4/5 with the R pillar red on
+every name.
+
+- **Root cause: the RVOL measure.** `simple_daily_rvol` divides today's
+  cumulative volume by the mean of prior full days. Before the open that is a
+  part-day over whole days, so a violent premarket tape reads a fraction of
+  1x and the pillar can never reach 5x. Every name failed R; the Five Pillars
+  list gates on price, gain AND RVOL, so it was empty by construction.
+  `rvol_time_of_day` had been in `formulas.py` since the first build and was
+  never wired to a baseline.
+- **Fix.** `intraday_volume_profile()` pulls ten sessions of five-minute bars
+  per symbol (one historical request per name per day, in the same round-robin
+  slot as the minute refresh) and takes, for each five-minute mark after 04:00
+  ET, the median cumulative volume across the sessions that had traded by that
+  mark. The pillar is measured against it; the daily number stays on the row;
+  the chip says which measure was used. Cross-check: an independent screener
+  read 7.71x for AOUT and 7.56x for AKAN that morning, against 0.12x on the
+  desk's daily measure.
+- **Second cause: a live feed with a dead tape.** Quotes were current at
+  08:53:19 while the newest bar was 04:00 and the ten-second pane was empty,
+  so the event scanners had nothing to read. TWS restores its data farm
+  without dropping the API socket, and the five-second bar subscriptions do
+  not always come back. `IbkrStream.resubscribe_all()` plus a stall watchdog
+  in the desk tick now re-request both streams when quotes arrive and bars do
+  not, and errors 1100/1101/1102/2103-2106 are handled rather than logged.
+- **Honesty fixes.** `lastQuoteAt` was stamped on every poll, so the feed
+  chip's "live" meant "a ticker exists"; only a changed quote counts now.
+  Every desk symbol publishes its own metrics, so the board no longer reads
+  UNKNOWN for a name that simply reached no ranked list. Empty cards name the
+  blocking pillar. The TradingView panes carry the desk's own IBKR last print,
+  because their delayed feed showed 10.01 beside a desk price of 12.73.

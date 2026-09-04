@@ -7,10 +7,17 @@ to be a proprietary production formula.
 
 from __future__ import annotations
 
+from datetime import datetime
 from statistics import median
 from typing import Optional, Sequence
+from zoneinfo import ZoneInfo
 
 from .models import SymbolSnapshot
+
+ET = ZoneInfo("America/New_York")
+# The volume profile is bucketed at five minutes because that is the finest
+# bar size IBKR will hand back for ten sessions in one request.
+VOLUME_PROFILE_BUCKET_MINUTES = 5
 
 
 def pct_change(current: Optional[float], reference: Optional[float]) -> Optional[float]:
@@ -38,6 +45,47 @@ def rvol_time_of_day(
     if not cleaned:
         return None
     return cumulative_volume_today / median(cleaned)
+
+
+def session_bucket_index(ts: Optional[datetime]) -> Optional[int]:
+    """Which five-minute bucket of the extended session `ts` falls in.
+
+    Bucket 0 is 04:00-04:05 ET. Before 04:00 there is no session volume to
+    compare, so the answer is None rather than a bucket."""
+    if ts is None:
+        return None
+    et = ts.astimezone(ET)
+    minutes = (et.hour - 4) * 60 + et.minute
+    if minutes < 0:
+        return None
+    return minutes // VOLUME_PROFILE_BUCKET_MINUTES
+
+
+def volume_profile_baseline(profile: Optional[Sequence[float]],
+                            ts: Optional[datetime]) -> Optional[float]:
+    """What prior sessions had traded by this clock time.
+
+    `profile[i]` is the median cumulative volume prior sessions had reached by
+    the end of bucket i. A time past the profile's end (an after-hours desk
+    against a profile built to 20:00) uses the last bucket: the full session."""
+    if not profile:
+        return None
+    idx = session_bucket_index(ts)
+    if idx is None:
+        return None
+    value = profile[min(idx, len(profile) - 1)]
+    return value if value and value > 0 else None
+
+
+def effective_rvol(snap: SymbolSnapshot) -> Optional[float]:
+    """The relative-volume number the pillars judge.
+
+    Time-of-day when the desk has a volume profile for the symbol, the simple
+    daily measure otherwise. A snapshot that was never enriched (a test, a
+    fixture built by hand) still answers with whatever it carries."""
+    if getattr(snap, "rvol", None) is not None:
+        return snap.rvol
+    return snap.rvol_daily
 
 
 def rvol_5m_fallback(current_5m_volume: float, prior_5m_volumes: Sequence[float]) -> Optional[float]:
@@ -79,6 +127,19 @@ def enrich_snapshot(snap: SymbolSnapshot) -> SymbolSnapshot:
     gap_ref = snap.regular_open if snap.regular_open else snap.last
     snap.gap_pct = pct_change(gap_ref, snap.prev_close)
     snap.rvol_daily = simple_daily_rvol(snap.volume_today, snap.avg_daily_volume)
+    # Relative volume against the SAME CLOCK TIME of prior sessions. The simple
+    # daily measure divides a part-day by whole days, so at 08:53 a premarket
+    # runner reads 0.12x however violent its tape is, and the RVOL pillar can
+    # never pass before the open. When the desk has a volume profile for the
+    # symbol, the pillar is measured against it instead; `rvol_daily` stays on
+    # the row so both numbers are visible.
+    snap.rvol_baseline = volume_profile_baseline(snap.volume_profile, snap.event_ts)
+    snap.rvol_tod = (rvol_time_of_day(snap.volume_today, [snap.rvol_baseline])
+                     if snap.rvol_baseline else None)
+    if snap.rvol_tod is not None:
+        snap.rvol, snap.rvol_measure = snap.rvol_tod, "time_of_day"
+    else:
+        snap.rvol, snap.rvol_measure = snap.rvol_daily, "daily"
     snap.spread_abs, snap.spread_bps = spread(snap.bid, snap.ask)
     snap.range_position = range_position(snap.last, snap.session_low, snap.session_high)
     if snap.last and snap.session_high and snap.session_high > 0:

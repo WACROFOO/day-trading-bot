@@ -413,6 +413,9 @@ body.resizing .gutter{pointer-events:auto}
 
 /* ── TradingView dressing on the chart panes ─────────────────────────── */
 /* OHLC legend: top-left, follows the crosshair, rests on the last bar. */
+.tv-desk-price{color:var(--ink-faint,#6b7a8c)} .tv-desk-price.hot{color:var(--up,#26a69a)}
+.lag{min-width:96px;display:inline-flex;align-items:center;justify-content:center;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
 .tv-legend{position:absolute;top:4px;left:8px;z-index:4;pointer-events:none;
   font:9.5px var(--mono);color:#b2b5be;display:flex;gap:5px;align-items:baseline;
   font-variant-numeric:tabular-nums;white-space:nowrap}

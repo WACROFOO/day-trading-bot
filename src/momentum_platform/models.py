@@ -67,6 +67,9 @@ class SymbolSnapshot:
     volume_today: float = 0.0
     volume_5m: Optional[float] = None
     avg_daily_volume: Optional[float] = None   # baseline for simple daily RVOL
+    # Median cumulative volume prior sessions had traded by each five-minute
+    # bucket after 04:00 ET. The baseline for time-of-day relative volume.
+    volume_profile: Optional[list] = None
     high_52w: Optional[float] = None           # prior 252 sessions, excludes today
     float_shares: Optional[float] = None
     float_quality: FloatQuality = FloatQuality.UNKNOWN
@@ -80,7 +83,11 @@ class SymbolSnapshot:
     change_from_close_pct: Optional[float] = None
     change_from_open_pct: Optional[float] = None
     gap_pct: Optional[float] = None
-    rvol_daily: Optional[float] = None
+    rvol_daily: Optional[float] = None         # today / mean prior FULL days
+    rvol_tod: Optional[float] = None           # today / prior sessions at this clock time
+    rvol: Optional[float] = None               # the measure the pillars use
+    rvol_measure: str = "daily"                # "time_of_day" when a profile drove it
+    rvol_baseline: Optional[float] = None      # shares the profile expected by now
     rvol_5m: Optional[float] = None
     spread_abs: Optional[float] = None
     spread_bps: Optional[float] = None

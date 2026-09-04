@@ -584,7 +584,7 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
-    assert labels == ["Price", "Gain vs close", "Daily RVOL", "Float / supply", "News",
+    assert labels == ["Price", "Gain vs close", "RVOL · daily", "Float / supply", "News",
                       "Technical score", "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
     assert page.locator(".verdict-banner b").inner_text() in {"GO", "WAIT", "PASS"}
     assert page.locator(".why-row").count() >= 1
@@ -1001,3 +1001,32 @@ def test_ui_non_ascii_survives_the_artifact_build(page):
     note = page.text_content("#pillarsBoardNote")
     assert "–" in note and "≥" in note and "×" in note, note
     assert "â" not in note, "mojibake: the page is being decoded as windows-1252"
+
+
+def test_ui_an_empty_list_names_the_pillar_that_is_closing_it(page):
+    """"An empty list is a real answer" is true and useless on its own. The
+    card counts the desk and names the blocking pillar, so an operator can see
+    that RVOL, not the market, is what emptied it."""
+    text = page.text_content("[data-card=scan-pillars] .empty")
+    assert "names on the desk" in text
+    assert "blocked by RVOL on" in text and "of 5× needed" in text
+
+
+def test_ui_the_rvol_chip_says_which_measure_it_used(page):
+    """Two measures exist and they disagree by two orders of magnitude before
+    the open. The chip must say which one produced the number."""
+    title = page.eval_on_selector_all(
+        "[data-card=pillars-board] .pb-cell",
+        "els => els.map(e => e.title).filter(t => t.indexOf('RVOL') === 0)")
+    assert title, "the board has an RVOL cell"
+    assert any("prior FULL days" in t or "same clock time" in t for t in title)
+
+
+def test_every_desk_symbol_carries_its_own_metrics(session):
+    """The board used to scavenge numbers out of whatever ranked list a symbol
+    reached, so a name in no list read UNKNOWN on every pillar."""
+    for sym, meta in session["symbols"].items():
+        m = meta.get("metrics")
+        assert m is not None, sym
+        assert set(["rvol", "rvolDaily", "rvolMeasure", "volumeToday"]) <= set(m)
+        assert m["rvolMeasure"] in ("daily", "time_of_day")

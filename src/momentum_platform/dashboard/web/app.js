@@ -450,10 +450,33 @@ function pillarChecks(row, meta) {
   return [
     { k: "P", name: "price $" + T.priceMin + "–$" + T.priceMax, v: row.price, ok: row.price >= T.priceMin && row.price <= T.priceMax },
     { k: "G", name: "gain ≥ " + T.gainMinPct + "%", v: pct(row.changePct), ok: (row.changePct || 0) >= T.gainMinPct },
-    { k: "R", name: "daily RVOL ≥ " + T.rvolMin + "×", v: fx(row.rvolDaily) + "×", ok: (row.rvolDaily || 0) >= T.rvolMin },
+    rvolPillar(row, meta, T.rvolMin),
     floatPillar(f, quality, T.floatMaxShares),
   ];
 }
+/* The RVOL pillar. Two measures exist and they disagree by two orders of
+   magnitude before the open: today's volume against whole prior days
+   ("daily") reads 0.12x on a runner at 08:53 and can never reach 5x, while
+   today's volume against what prior sessions had traded by the same clock
+   time ("time of day") reads what a screener shows. The chip says which one
+   it used and what the baseline was, so the number can be checked. */
+function rvolPillar(row, meta, min) {
+  const m = (meta && meta.metrics) || {};
+  const tod = m.rvolMeasure === "time_of_day";
+  const v = row.rvolDaily;
+  const name = tod
+    ? "RVOL ≥ " + min + "× — volume so far vs the same clock time in prior sessions"
+    : "RVOL ≥ " + min + "× — today vs prior FULL days (understates a part-day)";
+  const chip = { k: "R", name: name, v: fx(v) + "×", ok: (v || 0) >= min, unknown: v == null };
+  if (tod && m.rvolBaseline) {
+    chip.name += " · " + vol(m.volumeToday) + " vs " + vol(m.rvolBaseline) + " expected by now"
+               + (meta.volumeProfileDays ? " (" + meta.volumeProfileDays + " sessions)" : "");
+  } else if (!tod && m.rvolDaily != null) {
+    chip.name += " · no volume profile yet for this name";
+  }
+  return chip;
+}
+
 /* The float pillar, one rule for the board, the list chips and the verdict.
    Shares outstanding is a sound UPPER bound on float: under the cap it PROVES
    float under the cap (pass, labelled SO); over the cap it proves nothing
@@ -582,8 +605,25 @@ function fillListCard(card, id, frame) {
   ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
   card.appendChild(cols);
   const body = el("div", "tile-rows");
-  if (!ordered.length)
-    body.appendChild(el("div", "empty", "Nothing passes price, gain and RVOL. An empty list is a real answer."));
+  if (!ordered.length) {
+    const b = deskBlockers(FRAMES[state.frame]);
+    const T2 = S.pillarThresholds || {};
+    let msg = "Nothing passes price, gain and RVOL. An empty list is a real answer.";
+    if (b) {
+      const parts = [];
+      if (b.counts.R) parts.push("RVOL on " + b.counts.R +
+        (b.bestRvol != null ? " (best " + fx(b.bestRvol) + "× of " + T2.rvolMin + "× needed)" : ""));
+      if (b.counts.P) parts.push("price on " + b.counts.P);
+      if (b.counts.G) parts.push("gain on " + b.counts.G);
+      msg = b.n + (b.n === 1 ? " name" : " names") + " on the desk · blocked by " +
+            (parts.length ? parts.join(", ") : "nothing yet — the list is rebuilding") + ".";
+      if (b.unknownRvol) msg += " " + b.unknownRvol + " with no RVOL measured yet.";
+    }
+    const div = el("div", "empty", msg);
+    const stale = tapeStalledNote();
+    if (stale) div.appendChild(el("div", "tiny warn", stale));
+    body.appendChild(div);
+  }
   const prevKeys = state.prevRowKeys[id] || [];
   ordered.forEach((r, i) => {
     const sym = SYMS[r.symbol] || {};
@@ -708,7 +748,12 @@ function fillAlertCard(card, cfg, idx) {
   ["Symbol", "Price", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
   card.appendChild(cols);
   const body = el("div", "tile-rows timeline");
-  if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
+  if (!all.length) {
+    const div = el("div", "empty", "No events yet.");
+    const stale = tapeStalledNote();
+    if (stale) div.appendChild(el("div", "tiny warn", stale));
+    body.appendChild(div);
+  }
   all.forEach(a => {
     const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
       (state.arrivals.has(a.symbol) ? " fresh" : ""));
@@ -784,6 +829,35 @@ function alertDetail(a) {
   return d;
 }
 
+/* ── why a list is empty ─────────────────────────────────────────────
+   An empty scanner is a real answer, but it is not a useful one on its own.
+   These count what the desk knows and name the pillar that is closing the
+   list, and say when the tape itself has stopped — the event scanners read
+   bars, so a frozen tape silences them however well the names score. */
+function deskBlockers(frame) {
+  const syms = Object.keys(SYMS);
+  if (!syms.length || !frame) return null;
+  const counts = { P: 0, G: 0, R: 0, F: 0 }, keys = ["P", "G", "R", "F"];
+  let bestRvol = null, unknownRvol = 0;
+  syms.forEach(sym => {
+    const { row, meta } = boardRow(frame, sym);
+    const checks = pillarChecks(row, meta);
+    checks.forEach((c, i) => { if (!c.ok && keys[i]) counts[keys[i]]++; });
+    if (row.rvolDaily == null) unknownRvol++;
+    else if (bestRvol == null || row.rvolDaily > bestRvol) bestRvol = row.rvolDaily;
+  });
+  return { n: syms.length, counts, bestRvol, unknownRvol };
+}
+function tapeStalledNote() {
+  if (!S.streaming) return null;
+  const f = FRAMES[FRAMES.length - 1];
+  if (!f) return "No bars have arrived since the session start, so the event scanners have nothing to read.";
+  const age = Math.round((Date.now() - f.t * 1000) / 1000);
+  if (age < 300) return null;
+  return "The tape has not advanced in " + fmtAge(age * 1000) +
+         " (newest bar " + etClock(f.ts) + " ET). These scanners read bars, so nothing can fire until it moves.";
+}
+
 /* ── Five Pillars board ─────────────────────────────────────────────── */
 /* Every symbol on the desk against the five pillars, sorted by how many it
    passes and then by gain. The list card above shows only names that pass
@@ -791,7 +865,15 @@ function alertDetail(a) {
    RVOL points short is a candidate to watch, not an absence. */
 function boardRow(frame, sym) {
   const meta = SYMS[sym] || {};
-  const row = symbolRow(frame, sym);
+  // The session publishes every symbol's own numbers. Before that the board read
+  // whatever ranked list a name happened to reach, so a name in no list
+  // showed UNKNOWN on every pillar however much was known about it.
+  const m = meta.metrics || null;
+  const row = symbolRow(frame, sym) || (m ? {
+    symbol: sym, price: m.last, changePct: m.changePct, volume: m.volumeToday,
+    rvolDaily: m.rvol, rvol5m: m.rvol5m, spread: m.spread,
+    hodDistPct: m.hodDistPct, rangePos: m.rangePos, volume5m: m.volume5m,
+  } : null);
   if (row && !(S.streaming && meta.iexLast != null)) return { row, meta };
   const bars = barsUpTo(sym, frame.barIndex);
   const last = S.streaming && meta.iexLast != null ? meta.iexLast
@@ -820,7 +902,6 @@ function renderPillarsBoard(frame) {
     const nf = newsFor(sym, nowMs);
     checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
                   ok: !!(nf && nf.flame), unknown: !nf });
-    checks[2].unknown = row.rvolDaily == null;
     const passed = checks.filter(c => c.ok).length;
     const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
     const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
@@ -1271,7 +1352,9 @@ function renderVerdict(frame, ctx) {
   line("Price", fx(last) + "  $" + T.priceMin + "–" + T.priceMax +
        (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
   line("Gain vs close", pct(chg), gainOk);
-  line("Daily RVOL", row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
+  const rvolMeta = (SYMS[state.selected] || {}).metrics || {};
+  line(rvolMeta.rvolMeasure === "time_of_day" ? "RVOL · time of day" : "RVOL · daily",
+       row ? fx(row.rvolDaily) + "×" : "—", !!rvolOk);
   // Three states, three words: PASS, FAIL, UNKNOWN. An over-cap shares-
   // outstanding bound is the third — it must never render as "false".
   const floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false);
@@ -1824,7 +1907,10 @@ function renderLag(frame) {
     if (lag < 90) {
       host.hidden = false;
       host.className = "lag ok";
-      host.textContent = barLag >= 300 ? "live · last print " + etClock(frame.ts).slice(0, 5) : "live";
+      // Short and fixed-width: the chip sits between the clock and the feed
+      // badges, and a text that grows by ten characters pushed them along the
+      // top bar every time the tape went quiet.
+      host.textContent = barLag >= 300 ? "live · " + etClock(frame.ts).slice(0, 5) : "live";
       host.title = "IBKR sent this desk a quote or bar " + fmtAge(feedLag * 1000) + " ago · newest bar " +
         etClock(frame.ts) + " ET" + (barLag >= 300 ? " (quiet tape, not a delay)" : "");
       return;
@@ -2024,7 +2110,20 @@ function tvSymbol(sym, meta) {
   const prefix = ex === "NASDAQ" ? "NASDAQ:" : ex === "NYSE" ? "NYSE:" : (ex === "AMEX" || ex === "ARCA") ? "AMEX:" : "";
   return prefix + sym;
 }
+/* The embedded chart is TradingView's delayed feed; the desk's numbers are
+   IBKR's. On a premarket gapper the two can differ by a full day's move — the
+   recording showed a 10.01 chart beside a 12.73 desk — so every TradingView
+   card carries the desk's own last print beside its title. */
+function renderTvDeskPrice(sym, meta) {
+  const last = meta && meta.iexLast != null ? meta.iexLast : null;
+  const when = meta && meta.iexLastTime ? meta.iexLastTime : null;
+  document.querySelectorAll(".tv-desk-price").forEach(node => {
+    node.textContent = last == null ? "" : "desk (IBKR) " + fx(last) + (when ? " · " + when : "");
+    node.classList.toggle("hot", last != null);
+  });
+}
 function renderWidget(sym, meta) {
+  renderTvDeskPrice(sym, meta);
   document.querySelectorAll(".tv-host[data-interval]").forEach(host => renderWidgetIn(host, sym, meta));
 }
 function renderWidgetIn(host, sym, meta) {

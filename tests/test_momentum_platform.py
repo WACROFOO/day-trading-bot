@@ -825,3 +825,38 @@ def test_shares_outstanding_over_the_cap_does_not_exclude_from_the_list():
     rows = {r.symbol for r in FivePillarsList().rank(hot, now)}
     assert "BIG" in rows, "an over-cap proxy is unknown, not a disqualification"
     assert "VER" not in rows, "a verified float over the cap is a real disqualification"
+
+
+def test_premarket_rvol_is_measured_against_the_same_clock_time():
+    """The case from the desk on 2026-09-04 at 08:53 ET.
+
+    A runner with 92,930 premarket shares against a 2.2M average full day
+    reads 0.04x on the simple daily measure, so the RVOL pillar fails and the
+    Five Pillars list is empty however violent the tape is. Measured against
+    what prior sessions had traded by 08:53 (about 12,000 shares) the same
+    name reads roughly 7.7x, which is what an independent screener showed for
+    it that morning."""
+    from datetime import datetime, timezone
+
+    from momentum_platform.formulas import enrich_snapshot
+
+    at_0853 = datetime(2026, 9, 4, 12, 53, tzinfo=timezone.utc)
+    profile = [0.0] * 192
+    for i in range(58):                       # cumulative premarket volume by bucket
+        profile[i] = 208.0 * (i + 1)
+    for i in range(58, 192):
+        profile[i] = profile[57]
+    snap = SymbolSnapshot(symbol="AOUT", last=12.73, prev_close=10.01,
+                          volume_today=92_930, avg_daily_volume=2_200_000,
+                          event_ts=at_0853, volume_profile=profile)
+    enrich_snapshot(snap)
+    assert snap.rvol_daily == pytest.approx(0.042, abs=0.002)
+    assert snap.rvol_measure == "time_of_day"
+    assert snap.rvol == pytest.approx(7.7, abs=0.3)
+    assert snap.rvol >= 5.0, "the pillar the daily measure could never pass"
+
+    # With no profile the desk says so rather than inventing one.
+    bare = SymbolSnapshot(symbol="AOUT", last=12.73, prev_close=10.01,
+                          volume_today=92_930, avg_daily_volume=2_200_000, event_ts=at_0853)
+    enrich_snapshot(bare)
+    assert bare.rvol_measure == "daily" and bare.rvol == bare.rvol_daily

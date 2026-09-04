@@ -15,6 +15,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Dict, List, Optional
 
+from ..formulas import effective_rvol
 from ..models import RankedRow, Reason, ScannerEvent, SymbolSnapshot, flame_color
 from ..state import HotState, SymbolState
 
@@ -53,6 +54,11 @@ class Scanner:
             "last": snap.last,
             "change_pct": _round(snap.change_from_close_pct),
             "rvol_daily": _round(snap.rvol_daily),
+            # The measure the pillars actually used, and the share count the
+            # profile expected by this clock time, so a row can be checked.
+            "rvol": _round(effective_rvol(snap)),
+            "rvol_measure": snap.rvol_measure,
+            "rvol_baseline": None if snap.rvol_baseline is None else int(snap.rvol_baseline),
             "rvol_5m": _round(snap.rvol_5m),
             "volume_today": snap.volume_today,
             "volume_5m": snap.volume_5m,

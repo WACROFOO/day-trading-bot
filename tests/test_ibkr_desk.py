@@ -314,10 +314,18 @@ def test_the_session_reports_how_far_behind_its_data_is():
 
 
 def test_history_refresh_asks_for_a_short_window(monkeypatch):
+    """One historical request per cycle: the volume profile a symbol is missing
+    first, the rolling minute window afterwards."""
     desk, ib, clock = make_desk()
     desk._bootstrap()
     ib.hist_calls.clear()
     desk.refresh_history()
+    profile = [c for c in ib.hist_calls if c[2] == "5 mins"]
+    assert profile and profile[0][1] == "10 D", "the RVOL baseline is ten sessions"
+    assert not [c for c in ib.hist_calls if c[2] == "1 min"], "one request per cycle"
+    ib.hist_calls.clear()
+    for _ in range(len(desk.symbols) + 1):
+        desk.refresh_history()
     mins = [c for c in ib.hist_calls if c[2] == "1 min"]
     assert mins and mins[0][1] == "900 S", "a rolling refresh, not the whole day again"
 
@@ -408,3 +416,74 @@ def test_the_desk_rolls_over_at_four_am_et():
     assert session["symbols"]["BBB"]["prevClose"] == day_bars(31, 8.5, today="2026-09-04")[-1][4]
     session = desk.refresh_session()
     assert len([c for c in ib.hist_calls if c[2] == "1 day"]) == 2, "rolled once, not every rebuild"
+
+
+# -- a live feed whose bars have stopped ------------------------------------------
+
+def test_bars_that_stop_while_quotes_keep_arriving_are_re_requested():
+    """TWS drops and restores its data farm without dropping the socket. Ticks
+    come back by themselves, the five-second bar streams often do not, and the
+    desk then shows a live badge over a tape frozen at the last bar."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    ib.push_bar("AAA", T0, 4, 4, 4, 4, 100)
+    desk.tick()
+    before = len(ib.bar_requests) if hasattr(ib, "bar_requests") else None
+    clock.now = T0 + timedelta(minutes=6)
+    ib.quotes["AAA"].last = 4.44                   # the tape is printing; no bars arrive
+    desk.stream.poll_tickers()
+    assert desk.stream.bars_stalled_for(clock.now) >= 300
+    assert desk.tick() is None
+    assert desk.stream.health.resubscribes == 1, "one recovery, not one per tick"
+    assert set(desk.stream.symbols) == {"AAA", "BBB"}, "every symbol comes back"
+    clock.now = T0 + timedelta(minutes=7)
+    ib.quotes["AAA"].last = 4.45
+    desk.tick()
+    assert desk.stream.health.resubscribes == 1, "and not again inside the cooldown"
+    if before is not None:
+        assert len(ib.bar_requests) > before
+
+
+def test_tws_connection_restored_asks_for_a_resubscribe():
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    desk._on_tws_error(-1, 1102, "Connectivity between IB and TWS has been restored")
+    assert desk._resubscribe_wanted is True
+    desk.tick()
+    assert desk.stream.health.resubscribes == 1
+    assert desk.stream.health.farm_ok is True
+
+
+def test_lost_connectivity_is_recorded_without_touching_the_socket():
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    desk._on_tws_error(-1, 1100, "Connectivity between IB and TWS has been lost")
+    assert desk.stream.health.farm_ok is False
+    assert ib.connected is True, "1100 is not a socket drop; the desk must not reconnect on it"
+
+
+# -- time-of-day relative volume ---------------------------------------------------
+
+def test_the_desk_builds_a_ten_session_volume_profile_and_rvol_uses_it():
+    """The RVOL pillar measured against whole prior days can never pass before
+    the open: at 08:53 a runner reads a fraction of 1x however violent its
+    tape. The baseline is what prior sessions had traded by the same clock
+    time."""
+    desk, ib, clock = make_desk()
+    # ten prior sessions, 1,000 shares in each five-minute bucket from 04:00 ET
+    five_min = []
+    for day in range(3, 13):
+        base = datetime(2026, 8, day, 8, 0, tzinfo=UTC)        # 04:00 ET
+        for i in range(120):
+            five_min.append((base + timedelta(minutes=5 * i), 4.0, 4.1, 3.9, 4.0, 1_000))
+    ib.min5["AAA"] = five_min
+    desk._bootstrap()
+    desk.refresh_profile("AAA")
+    profile = desk._reference["AAA"]["volume_profile"]
+    assert len(profile) == 192 and profile[0] == 1_000 and profile[11] == 12_000
+    assert desk._reference["AAA"]["volume_profile_days"] == 10
+    session = desk.refresh_session()
+    metrics = session["symbols"]["AAA"]["metrics"]
+    assert metrics["rvolMeasure"] == "time_of_day"
+    assert metrics["rvolBaseline"] > 0
+    assert metrics["rvolDaily"] is not None, "the daily measure stays on the row too"

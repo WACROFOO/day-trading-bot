@@ -52,12 +52,14 @@ class FakeTicker:
 
 class FakeIB:
     """Seed with `daily` {sym: [(date, o,h,l,c,v)]}, `minutes` {sym: [(dt, o,h,l,c,v)]},
-    `fives` {sym: [(dt, ...)]} for backfill, `quotes` {sym: FakeTicker},
+    `fives` {sym: [(dt, ...)]} for backfill, `min5` {sym: [(dt, ...)]} for the
+    ten-day volume profile, `quotes` {sym: FakeTicker},
     `scans` {code: [sym, ...]}, `names` {sym: longName}."""
 
     def __init__(self, daily=None, minutes=None, fives=None, quotes=None, scans=None,
-                 names=None, fail_connects=0, delayed=(), types=None):
+                 names=None, fail_connects=0, delayed=(), types=None, min5=None):
         self.daily, self.minutes, self.fives = daily or {}, minutes or {}, fives or {}
+        self.min5 = min5 or {}
         self.quotes, self.scans, self.names = quotes or {}, scans or {}, names or {}
         self.types = types or {}
         self.detail_calls = []
@@ -143,6 +145,8 @@ class FakeIB:
             return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.daily.get(sym, [])]
         if size == "1 min":
             return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.minutes.get(sym, [])]
+        if size == "5 mins":
+            return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.min5.get(sym, [])]
         if size == "5 secs":
             return [Obj(date=d, open=o, high=h, low=l, close=c, volume=v) for d, o, h, l, c, v in self.fives.get(sym, [])]
         return []

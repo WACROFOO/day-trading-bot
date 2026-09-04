@@ -241,6 +241,8 @@ class Health:
     last_error: Optional[str] = None
     pacing: bool = False
     subscriptions: int = 0
+    resubscribes: int = 0                   # bar streams re-requested after a stall
+    farm_ok: bool = True                    # TWS market-data farm connection
     messages: Deque[str] = field(default_factory=lambda: deque(maxlen=20))
 
     def as_dict(self) -> dict:
@@ -252,6 +254,7 @@ class Health:
             "reconnects": self.reconnects, "lastQuoteAt": iso(self.last_quote_at),
             "lastBarAt": iso(self.last_bar_at), "lastError": self.last_error,
             "pacing": self.pacing, "subscriptions": self.subscriptions,
+            "resubscribes": self.resubscribes, "farmOk": self.farm_ok,
             "messages": list(self.messages),
         }
 
@@ -298,6 +301,7 @@ class IbkrStream:
         self._symbols: List[str] = []
         self._contracts: Dict[str, object] = {}
         self._tickers: Dict[str, object] = {}
+        self._last_quote: Dict[str, tuple] = {}      # last (price, bid, ask, size) seen
         self._bar_lists: Dict[str, object] = {}
         self._lock = threading.RLock()
         self._backoff = 1.0
@@ -480,13 +484,22 @@ class IbkrStream:
                                     bid=bid, ask=ask, data_status=DataStatus.LIVE))
 
     def poll_tickers(self) -> None:
-        """Read the current top-of-book from each ticker; call on a short timer."""
+        """Read the current top-of-book from each ticker; call on a short timer.
+
+        Only a CHANGED quote counts as an arrival. Stamping the health clock on
+        every poll made `lastQuoteAt` mean "a ticker object exists", so the
+        page reported a live feed over a tape that had not moved in hours."""
         for sym, t in list(self._tickers.items()):
             price = getattr(t, "last", None)
             if price is None or price != price:          # NaN
                 continue
-            self.ingest_quote(sym, float(price), float(getattr(t, "lastSize", 0) or 0),
-                              _num(getattr(t, "bid", None)), _num(getattr(t, "ask", None)),
+            bid, ask = _num(getattr(t, "bid", None)), _num(getattr(t, "ask", None))
+            size = float(getattr(t, "lastSize", 0) or 0)
+            fingerprint = (float(price), bid, ask, size)
+            if self._last_quote.get(sym) == fingerprint:
+                continue
+            self._last_quote[sym] = fingerprint
+            self.ingest_quote(sym, float(price), size, bid, ask,
                               getattr(t, "marketDataType", None))
 
     def _emit_closed(self, symbol: str) -> None:
@@ -514,6 +527,41 @@ class IbkrStream:
         else:
             h.state = "LIVE"
         return h
+
+    def resubscribe_all(self, backfill_seconds: int = 900) -> List[str]:
+        """Re-request every quote and bar stream on the SAME socket.
+
+        TWS can lose its market-data farm and get it back (errors 1100/1101,
+        2103/2104) without the API socket ever dropping. Tick subscriptions
+        usually resume by themselves; five-second bar subscriptions often do
+        not, and nothing tells the client — the desk simply stops receiving
+        bars while quotes keep arriving, so the charts, RVOL and every event
+        scanner sit on the last bar from before the flap. `reconnect()` cannot
+        help because `isConnected()` is still true. This re-requests both
+        streams and backfills the gap."""
+        wanted = list(self._symbols)
+        if not wanted:
+            return []
+        with self._lock:
+            for sym in wanted:
+                self._unsubscribe(sym)
+            self.health.resubscribes += 1
+            self.health.messages.append(f"resubscribed {len(wanted)} symbols after a bar stall")
+        return self.subscribe(wanted, backfill_seconds=backfill_seconds)
+
+    def bars_stalled_for(self, now: Optional[datetime] = None) -> Optional[float]:
+        """Seconds since the last bar while quotes are still arriving.
+
+        None when there is nothing to judge: no symbols, no quotes, or no bar
+        has ever arrived on this connection (a desk that started into a quiet
+        tape has nothing to recover)."""
+        h = self.health
+        now = now or self.clock()
+        if not self._symbols or h.last_quote_at is None or h.last_bar_at is None:
+            return None
+        if (now - h.last_quote_at).total_seconds() > 90:
+            return None                     # the whole feed is quiet, not just bars
+        return (now - h.last_bar_at).total_seconds()
 
     def reconnect(self) -> Health:
         """Drop, back off, connect again, resubscribe every symbol once."""
