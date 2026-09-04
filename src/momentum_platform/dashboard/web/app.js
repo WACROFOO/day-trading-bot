@@ -211,7 +211,7 @@ function makePane(hostId, daily) {
     crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0,
                  vertLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label },
                  horzLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label } },
-    watermark: { visible: true, color: "rgba(120,130,150,0.10)", fontSize: 34, text: "",
+    watermark: { visible: true, color: "rgba(120,130,150,0.07)", fontSize: 22, text: "",
                  horzAlign: "center", vertAlign: "center" },
     handleScale: { axisPressedMouseMove: { time: true, price: true }, mouseWheel: true, pinch: true },
     handleScroll: { mouseWheel: true, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
@@ -505,7 +505,9 @@ function feedLabel() {
 function cardHead(card, title, stateLabel, extras) {
   const head = el("div", "card-head");
   head.setAttribute("draggable", "true");
-  head.appendChild(el("span", "grip", "⠿"));
+  const grip = el("span", "grip", "⠿");
+  grip.title = "Drag this card onto another card to swap their places";
+  head.appendChild(grip);
   head.appendChild(el("span", "card-title", title));
   if (stateLabel) {
     const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : stateLabel === "REPLAY" ? "replay" : stateLabel.toLowerCase()), stateLabel);
@@ -514,7 +516,7 @@ function cardHead(card, title, stateLabel, extras) {
   }
   (extras || []).forEach(n => head.appendChild(n));
   const ex = el("button", "icon-btn expand", "⛶");
-  ex.title = "Expand (E)";
+  ex.title = "Maximize / restore (E)";
   head.appendChild(ex);
   card.appendChild(head);
   return head;
@@ -790,9 +792,11 @@ function alertDetail(a) {
 function boardRow(frame, sym) {
   const meta = SYMS[sym] || {};
   const row = symbolRow(frame, sym);
-  if (row) return { row, meta };
+  if (row && !(S.streaming && meta.iexLast != null)) return { row, meta };
   const bars = barsUpTo(sym, frame.barIndex);
-  const last = bars.length ? bars[bars.length - 1][4] : (meta.iexLast != null ? meta.iexLast : null);
+  const last = S.streaming && meta.iexLast != null ? meta.iexLast
+             : bars.length ? bars[bars.length - 1][4] : null;
+  if (row) return { row: Object.assign({}, row, { price: last, changePct: last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : row.changePct }), meta };
   const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
   return { row: { symbol: sym, price: last, changePct: chg, rvolDaily: null, rvol5m: null }, meta };
 }
@@ -826,11 +830,44 @@ function renderPillarsBoard(frame) {
     const lastVwap = vw.length ? vw[vw.length - 1] : null;
     return { sym, row, checks, passed, meta, volToday, hod, spread, lastVwap };
   }).sort((a, b) => b.passed - a.passed || (b.row.changePct || -1e9) - (a.row.changePct || -1e9));
+  // In a column the thirteen-column table cannot fit; the same rows read as
+  // symbol, last, gain, five pillar chips and the score, with every number
+  // the wide table shows kept in the chip's tooltip.
+  const compact = host.clientWidth > 0 && host.clientWidth < 640;
+  host.classList.toggle("compact", compact);
   const head = el("div", "pb-row head");
-  ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "Daily RVOL", "Float", "News", "Pillars"]
+  (compact ? ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"]
+           : ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "Daily RVOL", "Float", "News", "Pillars"])
     .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
   if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
+  if (compact) {
+    rows.forEach(r => {
+      const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
+      const symCell = el("b", null, r.sym);
+      symCell.title = [r.meta.name, r.meta.exchange, r.meta.country,
+        "vol today " + vol(r.volToday), "avg " + vol(r.meta.avgDailyVolume),
+        "HOD " + fx(r.hod), r.spread != null ? "spread $" + fx(r.spread, 3) : null].filter(Boolean).join(" · ");
+      tr.appendChild(symCell);
+      tr.appendChild(el("span", dirClass(r.row.changePct), fx(r.row.price)));
+      tr.appendChild(el("span", dirClass(r.row.changePct), pct(r.row.changePct)));
+      r.checks.forEach(c => {
+        const cell = el("span", "pb-cell");
+        const v = el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v));
+        cell.appendChild(v);
+        const pill = el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.k);
+        pill.dataset.state = c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL";
+        cell.appendChild(pill);
+        cell.title = c.name + ": " + (typeof c.v === "number" ? fx(c.v) : c.v) + " · " + pill.dataset.state +
+          (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
+        tr.appendChild(cell);
+      });
+      tr.appendChild(el("span", "pb-score " + (r.passed >= 4 ? "up" : r.passed >= 3 ? "" : "down"), r.passed + "/5"));
+      tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
+      host.appendChild(tr);
+    });
+    return;
+  }
   rows.forEach(r => {
     const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
     const symCell = el("b", null, r.sym);
@@ -849,7 +886,9 @@ function renderPillarsBoard(frame) {
       // The price pillar's value is the Last column two cells to the left.
       // A column that repeats its neighbour has not earned its width.
       if (c.k !== "P") cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
-      cell.appendChild(el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL"));
+      const pill = el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL");
+      pill.dataset.state = pill.textContent;
+      cell.appendChild(pill);
       cell.title = c.name + (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
       tr.appendChild(cell);
     });
@@ -880,9 +919,12 @@ function symbolRow(frame, sym) {
 function renderHeader(frame) {
   const sym = state.selected, meta = SYMS[sym] || {}, nowMs = deskNow();
   const bars = barsUpTo(sym, frame.barIndex);
-  const last = bars.length ? bars[bars.length - 1][4] : null;
+  // On a live desk the newest IBKR print outranks the last closed bar: in
+  // thin tape a bar can be forty minutes old while the print is seconds old.
+  const last = S.streaming && meta.iexLast != null ? meta.iexLast
+             : bars.length ? bars[bars.length - 1][4] : null;
   const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
-  const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
+  const hod = bars.length ? Math.max(...bars.map(b => b[2]), last || 0) : null;
   const row = symbolRow(frame, sym);
   $("#symTicker").textContent = sym || "—";
   $("#symLock").hidden = !state.locked;
@@ -1425,24 +1467,25 @@ function beep(severity) {
    per browser so the desk comes back the way it was left. */
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
-  // The desk's own panes are the chart stack: IBKR real-time bars, extended
-  // hours shaded, VWAP and the 9/20/200 EMAs drawn, the plan's entry, stop and
-  // target on them. TradingView's embeds wait in the tray: to a viewer not
-  // signed in to tradingview.com they run fifteen minutes behind (their "D"
-  // badge), and nothing on this side can change that.
-  C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "pillars-board",
-  // The screener takes the tall right slot: it is real data about the whole
-  // band, refreshed on a timer. Level 2 is simulated and waits in the tray.
-  R1: "screener", R2: "verdict",
+  // TradingView's chart is the big pane: their toolbar, drawing tools and
+  // indicators, extended hours on, on the viewer's own TradingView data
+  // entitlement (signed in to tradingview.com in this browser, that is
+  // real-time). Their 5-minute chart and the desk's IBKR 10-second pane
+  // share the row beneath. The desk's own 1m/5m panes wait in the tray.
+  C1: "tv-widget", C2: "tv-widget-5m", C3: "chart-10s",
+  // Right column, top to bottom: the Five Pillars check for every desk
+  // name, Level 2 (simulated, and labelled so), the setup verdict. The
+  // screener is one drag away in the tray.
+  R1: "pillars-board", R2: "level2", R3: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["tv-widget", "tv-widget-5m", "chart-daily", "level2", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["screener", "chart-1m", "chart-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
-  wLeft: 336, wRight: 352,
-  slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
-           C4: 0.42, R1: 1.62, R2: 1.05 },
+  wLeft: 330, wRight: 372,
+  slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
+           R1: 1.35, R2: 1, R3: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v6";
+const LAYOUT_KEY = "momentum-workstation.layout.v7";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1583,9 +1626,15 @@ function renderTray() {
       e.dataTransfer.setData("text/plain", id);
       e.dataTransfer.effectAllowed = "move";
     });
+    item.title = "Drag onto the desk, or click to put it where " + (LAST_CLICKED_CARD || "the screener slot") + " is";
+    item.addEventListener("click", () => {
+      const target = LAST_CLICKED_CARD && placedCards().indexOf(LAST_CLICKED_CARD) >= 0 ? LAST_CLICKED_CARD : layout.R1;
+      swapCards(id, target);
+    });
     host.appendChild(item);
   });
 }
+let LAST_CLICKED_CARD = null;
 function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
 function applyLayout() {
   const parked = document.getElementById("parked");
@@ -1661,6 +1710,8 @@ function wireLayout() {
     swapCards(e.dataTransfer.getData("text/plain"), card.dataset.card);
   });
   grid.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (card && card.dataset.card) LAST_CLICKED_CARD = card.dataset.card;
     const btn = e.target.closest(".expand");
     if (btn) { e.stopPropagation(); toggleExpand(btn.closest(".card")); }
   });
@@ -1761,7 +1812,24 @@ function renderLag(frame) {
     meta.appendChild(host);
   }
   const lastMs = frame ? frame.t * 1000 : 0;
-  const lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
+  let lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
+  // A live desk is behind only when IBKR has gone quiet on it. Thin premarket
+  // tape can go forty minutes without a print while quotes keep ticking; that
+  // is the tape, and the chip says "live" with the newest bar's time beside
+  // it rather than a lag the desk is not suffering.
+  const feedLag = S.streaming ? feedLagSeconds() : null;
+  if (lag != null && feedLag != null) {
+    const barLag = lag;
+    lag = feedLag;
+    if (lag < 90) {
+      host.hidden = false;
+      host.className = "lag ok";
+      host.textContent = barLag >= 300 ? "live · last print " + etClock(frame.ts).slice(0, 5) : "live";
+      host.title = "IBKR sent this desk a quote or bar " + fmtAge(feedLag * 1000) + " ago · newest bar " +
+        etClock(frame.ts) + " ET" + (barLag >= 300 ? " (quiet tape, not a delay)" : "");
+      return;
+    }
+  }
   if (lag == null) {
     // A live desk with no frame has had no print this session; that is a
     // state to name, not a lag to measure.
@@ -1774,8 +1842,19 @@ function renderLag(frame) {
   host.hidden = false;
   host.textContent = lag < 90 ? "live" : fmtAge(lag * 1000) + " behind";
   host.className = "lag" + (lag < 90 ? " ok" : lag < 600 ? " warn" : " bad");
-  host.title = "newest bar on the desk: " + etClock(frame.ts) + " ET";
+  host.title = (feedLag != null ? "nothing from IBKR for " + fmtAge(feedLag * 1000) + " · " : "") +
+    "newest bar on the desk: " + etClock(frame.ts) + " ET";
 }
+/* Seconds since IBKR last sent anything, as the server measured it plus the
+   time since that rebuild; streamed quotes since then count as fresh. */
+function feedLagSeconds() {
+  if (LAST_STREAM_AT) return Math.max(0, Math.round((Date.now() - LAST_STREAM_AT) / 1000));
+  const base = S.feedLagSeconds != null ? S.feedLagSeconds : (S.provider && S.provider.feedLagSeconds);
+  if (base == null) return null;
+  const since = S.builtAt ? Math.max(0, (Date.now() / 1000) - S.builtAt) : 0;
+  return Math.round(base + since);
+}
+let LAST_STREAM_AT = 0;
 
 /* Provider health -> the header badge. LIVE is the only green; STALE, DELAYED
    and OFFLINE are named as such, never dressed as live. */
@@ -1847,6 +1926,7 @@ function refreshSession() {
     mergeSymbols(next.symbols || {});
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
     S.sessionStart = next.sessionStart || S.sessionStart;
+    S.feedLagSeconds = next.feedLagSeconds;
     if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
     OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
     // A locked symbol is the trader's choice; missing one rebuild does not
@@ -1869,6 +1949,7 @@ function streamFollow() {
   if (!window.DeskLive) { liveFollow(); return; }
   let paint = null;
   const schedule = () => { if (paint) return; paint = setTimeout(() => { paint = null; render(); }, 250); };
+  DeskLive.on("*", () => { LAST_STREAM_AT = Date.now(); });
   DeskLive.on("bar10s", b => {
     const arr = (S.bars10s[b.symbol] = S.bars10s[b.symbol] || []);
     upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
@@ -1973,7 +2054,12 @@ function renderWidgetIn(host, sym, meta) {
   const tag = document.createElement("script");
   tag.src = "https://s3.tradingview.com/tv.js"; tag.async = true;
   tag.onload = () => renderWidget(sym, meta);
-  tag.onerror = () => { host.textContent = "TradingView's widget script could not be loaded (offline, or blocked by an extension)."; };
+  tag.onerror = () => {
+    WIDGET_LOADING = false;   // a later symbol change tries the script again
+    document.querySelectorAll(".tv-host[data-interval]").forEach(h => {
+      h.textContent = "TradingView's widget script could not be loaded (offline, or blocked by an extension).";
+    });
+  };
   document.head.appendChild(tag);
 }
 

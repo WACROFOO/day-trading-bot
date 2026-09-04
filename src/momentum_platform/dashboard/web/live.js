@@ -31,6 +31,13 @@
       for (const fn of (this._handlers[type] || [])) {
         try { fn(payload, raw); } catch (e) { console.error("DeskLive handler", type, e); }
       }
+      // "*" hears every DATA event (never the socket's own status): the page
+      // uses it as the feed's heartbeat.
+      if (type !== "status") {
+        for (const fn of (this._handlers["*"] || [])) {
+          try { fn(payload, type); } catch (e) { console.error("DeskLive handler *", type, e); }
+        }
+      }
     },
     _setState(s) {
       if (this.state === s) return;

@@ -81,21 +81,21 @@
         <div class="gutter gutter-h pair-gutter" data-pair="C2,C3" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize the 5-minute and 10-second charts"></div>
         <div class="slot" data-slot="C3" style="flex-grow:1"></div>
       </div>
-      <div class="gutter gutter-v" data-between="PAIR,C4" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the alert timeline"></div>
-      <div class="slot" data-slot="C4" style="flex-grow:0.42"></div>
     </section>
 
     <div class="gutter gutter-h" data-cols="right" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize right column"></div>
 
     <section class="col context" data-col="right">
-      <div class="slot" data-slot="R1" style="flex-grow:1.62"></div>
-      <div class="gutter gutter-v" data-between="R1,R2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize Level 2"></div>
-      <div class="slot" data-slot="R2" style="flex-grow:1.05"></div>
+      <div class="slot" data-slot="R1" style="flex-grow:1.35"></div>
+      <div class="gutter gutter-v" data-between="R1,R2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the Five Pillars check"></div>
+      <div class="slot" data-slot="R2" style="flex-grow:1"></div>
+      <div class="gutter gutter-v" data-between="R2,R3" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize Level 2"></div>
+      <div class="slot" data-slot="R3" style="flex-grow:1.05"></div>
     </section>
   </main>
 
   <div id="tray" class="tray" hidden aria-label="Cards not on the desk">
-    <div class="tray-head">Available cards <span class="muted tiny">drag onto any card to swap it in</span></div>
+    <div class="tray-head">Cards off the desk <span class="muted tiny">drag one onto the card it should replace, or click it to send it to the last card you clicked</span></div>
     <div id="trayCards" class="tray-cards"></div>
   </div>
 
@@ -108,7 +108,7 @@
     <article class="card" data-card="quote">
       <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
         <span class="card-title">Quote · supply · risk · catalyst</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body" id="quoteCard"></div>
     </article>
 
@@ -117,7 +117,7 @@
         <span class="card-title">1 minute · execution</span>
         <span class="chart-role">entry · structural stop · trigger</span>
         <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartA"></div>
     </article>
 
@@ -125,7 +125,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">5 minute · structure</span>
         <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartB"></div>
     </article>
 
@@ -133,7 +133,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">10 second · micro</span>
         <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartD"></div>
     </article>
 
@@ -141,7 +141,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Daily · room</span>
         <span class="legend"><i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host" id="chartC"></div>
     </article>
 
@@ -149,25 +149,25 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 1 minute</span>
         <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget" data-interval="1" data-range="1D">
-        <div class="chart-note">Drag onto the grid to load it.</div>
+        <div class="chart-note">Loading TradingView’s chart… (off the desk, drag it onto the grid to load it)</div>
       </div>
     </article>
     <article class="card chart-card" data-card="tv-widget-5m">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 5 minute</span>
         <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget5" data-interval="5" data-range="5D">
-        <div class="chart-note">Drag onto the grid to load it.</div>
+        <div class="chart-note">Loading TradingView’s chart… (off the desk, drag it onto the grid to load it)</div>
       </div>
     </article>
     <article class="card" data-card="pillars-board">
       <div class="card-head"><span class="grip">⠿</span>
-        <span class="card-title">Five Pillars · every name on the desk</span>
+        <span class="card-title">Five Pillars check</span>
         <span class="muted tiny" id="pillarsBoardNote">price · gain · RVOL · float · news — Confirmed thresholds; float and news are columns, never gates</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body pillars-board" id="pillarsBoard"></div>
     </article>
 
@@ -175,7 +175,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Alert timeline</span>
         <span class="muted tiny" id="alertCount">0</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body timeline" id="timeline"></div>
     </article>
 
@@ -183,7 +183,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Screener · the whole band, now</span>
         <span class="tag" id="screenerSource">…</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="tile-note" id="screenerNote">Every name in the band moving this session.</div>
       <div class="tile-cols screener-cols"><span>Symbol</span><span>Price</span><span>Chg</span><span>Src</span><span>As of</span></div>
       <div class="tile-rows" id="screenerRows"><div class="empty">Waiting for the first screener pass…</div></div>
@@ -193,7 +193,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Level 2 · Time &amp; Sales</span>
         <span class="tag sim">simulated</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body l2" id="l2Card"></div>
     </article>
 
@@ -201,7 +201,7 @@
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Setup verdict</span>
         <span class="tag">pine mirror</span>
-        <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body" id="verdictCard"></div>
       <div class="card-body sizing">
         <label class="risk-input"><span>Your risk / trade $</span>

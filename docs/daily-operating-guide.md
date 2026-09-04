@@ -146,26 +146,29 @@ What the desk does in this mode:
 - Headlines still come from Alpaca's free news endpoint when your keys are in
   `.env`; float is still the SEC shares-outstanding upper bound. IBKR has
   neither for free.
-- The centre column is the desk's own charts on IBKR real-time data: 1 minute
-  large on top, 5 minute and 10 second side by side beneath it. Extended hours
-  are shaded on every pane; the 1- and 5-minute panes draw VWAP and the 9, 20
-  and 200 EMAs by default, with the plan's entry, stop and target. TradingView's
-  embedded charts are in the tray (⊞ Cards): to a viewer who is not signed in
-  to tradingview.com they show US stocks 15 minutes delayed (their "D" badge),
-  and nothing on this side changes that. Sign in to tradingview.com in the same
-  browser and drag the card onto a pane if you want their toolbar; the desk's
-  numbers stay on the IBKR feed either way.
+- The centre column is TradingView's own chart, large on top (1 minute,
+  their toolbar, drawing tools and indicator dialog, extended hours on), with
+  TradingView's 5-minute chart and the desk's 10-second micro pane side by side
+  beneath it. TradingView shows US stocks 15 minutes delayed to a viewer who is
+  not signed in to tradingview.com (their "D" badge); sign in there in the
+  same browser and the pane follows your entitlement. Nothing on this side
+  changes their delay, and the desk's numbers stay on the IBKR feed either
+  way. The desk's own 1-minute, 5-minute and daily panes (VWAP, 9/20/200 EMAs,
+  entry, stop and target drawn) sit in the tray (⊞ Cards) — click one to send
+  it to the last card you clicked, or drag it onto the card it should replace.
 - The desk shows one trading day: from 04:00 ET to now. At startup it asks
   IBKR for the minutes since 04:00 rather than "one day", which at 04:03 hands
   back the previous session; a desk left running rolls over at 04:00 ET, drops
   yesterday's tape, re-reads the previous close, and the page clears its alert
   timeline and arrival memory. Before 04:00 ET the desk shows the last
   completed session and dates itself accordingly.
-- The bottom strip is the Five Pillars board: every name on the desk against
-  price, gain, daily RVOL, float and news, with the value and PASS, FAIL or
-  UNKNOWN in each cell and a score out of five, best first. The list card at
-  the top left shows only the names that pass the hard gates; the board shows
-  why the others do not. The alert timeline is in the tray.
+- The right column is the Five Pillars check, then Level 2, then the setup
+  verdict. In a column the board reads symbol, last, gain, five pillar chips
+  (P, G, R, F, N — green PASS, red FAIL, amber UNKNOWN) and the score out of
+  five, best first; hover a chip for the value behind it, widen the column past
+  640 px and the full thirteen-column table comes back. The list card at the
+  top left shows only the names that pass the hard gates; the board shows why
+  the others do not. The screener and the alert timeline are in the tray.
 - The scanners rebuild every 3 seconds from the live store and the page
   refreshes the moment a rebuild lands; the scanner union on client 28 runs
   every 120 seconds by default (`--ibkr-rescan 60` to run it every minute —
@@ -180,22 +183,30 @@ What the desk does in this mode:
   cannot be widened; the desk ADMITS a wider band of your own ($1–30 by
   default, `DESK_PRICE_MIN` / `DESK_PRICE_MAX` in `.env`) so a runner just
   outside the pillar is still seen, with its price cell FAIL.
-- The bottom strip is the Five Pillars board: every desk name with last,
-  volume today, average volume, spread, HOD, distance to VWAP, then the five
-  pillar cells (value plus PASS / FAIL / UNKNOWN) and a score. UNKNOWN never
-  counts as a pass. Float says where it came from: IBKR fundamentals total
-  float (verified), SEC shares outstanding (upper bound), or unknown.
+- Float on the board says where it came from: IBKR fundamentals total float
+  (verified), SEC shares outstanding (upper bound), or unknown. UNKNOWN never
+  counts as a pass.
 - The scanner union drops leveraged ETFs, ETNs, funds, warrants and units by
   instrument type; the screener note says how many. A 2x daily ETF is not a
   small-cap runner.
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
-  VWAP, 5-minute volume above the floor, one alert per leg. Approximation.
-- The header clock is the real ET clock, and the chip beside it says how far
-  behind the desk's own data is: `live` under 90 seconds, then the age in
-  amber, then red; `no prints yet` when nothing has traded since 04:00 ET. A
-  green feed badge means the CONNECTION is alive; the lag chip is what tells
-  you the numbers under it are still moving.
+  VWAP, liquid, one alert per leg. Approximation.
+- Liquidity for Running Up and HOD Momentum is 25,000 shares in the last five
+  minutes OR at least three of the five pillars passing (Approximation, not a
+  Warrior setting). Before the open a name like a 4/5 on the board trades thin
+  tape; the pillars, not the volume floor, let its fresh high through. The
+  alert's strategy tag says which gate admitted it (`volume_5m` or
+  `pillars_passed`).
+- The header is one slim row: brand, ET clock, session badge, feed chip, and
+  the buttons. The chip beside the clock says whether the desk is receiving:
+  `live` while quotes or bars arrived in the last 90 seconds; `live · last
+  print HH:MM` when the feed is alive but the newest bar is older than five
+  minutes — thin premarket tape, IBKR sends no 5-second bar without a trade,
+  so a name that last printed at 04:00 shows that time rather than an alarm;
+  the age in amber, then red, only when NOTHING has arrived; `no prints yet`
+  when nothing has traded since 04:00 ET. A green feed badge means the
+  CONNECTION is alive; the chip tells you the numbers under it are moving.
 - The alert grids read Time, then the move (`PM %` before 09:30, `Day %`
   after, both against the previous close), then Symbol, Price and the
   strategy label. Hover the time for the age.

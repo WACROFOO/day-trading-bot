@@ -29,6 +29,8 @@ scanner engine and the browser transport consume those, not IBKR types.
 
 from __future__ import annotations
 
+import inspect
+import logging
 import threading
 import time
 from collections import deque
@@ -179,6 +181,51 @@ class BarStore:
 # -------------------------------------------------------------- health -----
 
 
+def read_only_connect(ib, host: str, port: int, client_id: int, timeout: float):
+    """Connect a never-trading client. ib_async's connect() syncs positions,
+    orders, executions and account updates by default; this desk uses none of
+    them, and on a flapping TWS link every reconnect re-requests them until TWS
+    answers with error 322 (account summary quota). readonly=True is kept on
+    every path; the startup sync is skipped only where ib_async offers it."""
+    kwargs = {"clientId": client_id, "readonly": True, "timeout": timeout}
+    try:
+        from ib_async.ib import StartupFetch
+        if "fetchFields" in inspect.signature(ib.connect).parameters:
+            kwargs["fetchFields"] = StartupFetch(0)      # sync nothing: no positions, orders, executions, account updates
+    except Exception:
+        pass
+    quiet_ib_async_logging()
+    return ib.connect(host, port, **kwargs)
+
+
+class _LateReplyFilter(logging.Filter):
+    """ib_async's decoder logs a full traceback when TWS answers a request the
+    client had already timed out and forgotten (KeyError in the reply handler).
+    After a connectivity flap that arrives by the dozen; one line each, no
+    traceback, is enough to know it happened."""
+
+    def filter(self, record: logging.LogRecord) -> bool:
+        exc = record.exc_info[1] if record.exc_info else None
+        if isinstance(exc, KeyError) and str(record.msg).startswith("Error handling fields"):
+            record.msg = "late reply for a request the client already gave up on (ignored)"
+            record.args = ()
+            record.exc_info = None
+            record.levelno = logging.INFO
+            record.levelname = "INFO"
+        return True
+
+
+_QUIETED = False
+
+
+def quiet_ib_async_logging() -> None:
+    global _QUIETED
+    if _QUIETED:
+        return
+    _QUIETED = True
+    logging.getLogger("ib_async.Decoder").addFilter(_LateReplyFilter())
+
+
 @dataclass
 class Health:
     provider: str = "ibkr"
@@ -272,8 +319,7 @@ class IbkrStream:
     def connect(self) -> Health:
         h = self.health
         try:
-            self.ib.connect(self.host, self.port, clientId=self.client_id,
-                            readonly=True, timeout=self.timeout)
+            read_only_connect(self.ib, self.host, self.port, self.client_id, self.timeout)
         except Exception as exc:
             h.connected, h.state, h.last_error = False, "OFFLINE", f"connect failed: {exc}"
             h.messages.append(h.last_error)

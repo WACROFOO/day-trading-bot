@@ -40,7 +40,8 @@ def main() -> int:
         return 1
     ib = IB()
     try:
-        ib.connect(HOST, PORT, clientId=CLIENT, readonly=True, timeout=10)
+        from momentum_platform.datasources.ibkr_stream import read_only_connect
+        read_only_connect(ib, HOST, PORT, CLIENT, 10)
     except Exception as exc:
         print(f"cannot reach TWS at {HOST}:{PORT} — {exc}")
         print("TWS must be running with the API enabled: Edit > Global Configuration > API > Settings:")
@@ -79,6 +80,11 @@ def main() -> int:
         if not syms:
             print("the scanner answered with nothing; check scanner permissions in TWS or widen the band")
             return 5
+        try:
+            mins = ib.reqHistoricalData(c, "", "900 S", "1 min", "TRADES", False, formatDate=2)
+            print(f"{PROBE}: {len(mins or [])} one-minute bars for a '900 S' window (the desk's rolling refresh)")
+        except Exception as exc:
+            print(f"{PROBE}: '900 S' minute history refused ({exc}); the desk falls back to a day window")
         print("OK — live, read-only, real-time bars flowing, scanner answering.")
         return 0
     finally:

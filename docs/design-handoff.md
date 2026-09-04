@@ -26,8 +26,8 @@ every number labelled by how much it can be trusted.
 ```
 Top gainers (who passed)  ->  Running Up (who is accelerating)  ->  High of Day
    ->  Quote / catalyst (what is the story)  ->  Charts (what does it look like)
-   ->  Five Pillars board (all names, scored)  ->  Screener (the whole band)
-   ->  Setup verdict (GO / WAIT / PASS, and the plan)
+   ->  Five Pillars check (all names, scored)  ->  Level 2
+   ->  Setup verdict (GO / WAIT / PASS, and the plan)   [Screener: tray]
 ```
 
 ---
@@ -109,10 +109,10 @@ expand button) and a body.
 | `scan-running` | **Timeline**: time, age, symbol+flame+session pill, price, change, branch | Rail with a node per event; newest node lit |
 | `scan-hod` | Same timeline shape | |
 | `quote` | Two-column key/value grid, then the catalyst block | Flame chip, grade chip, headline, 24h age bar, read-out |
-| `chart-1m` `chart-5m` `chart-10s` `chart-daily` | Lightweight Charts panes | Candles, volume, VWAP/EMA lines, entry/stop/target price lines, session shading |
-| `tv-widget` `tv-widget-5m` | TradingView's embedded chart (tray by default) | Their data, their chrome; 15 minutes delayed unless the viewer is signed in to tradingview.com |
-| `pillars-board` | 13-column table, one row per desk name | Currently 1100px min-width in the shortest slot |
-| `screener` | Ranked table: symbol, price, change, source, age | The whole price band |
+| `chart-1m` `chart-5m` `chart-10s` `chart-daily` | Lightweight Charts panes (10s on the desk; 1m, 5m, daily in the tray) | Candles, volume, VWAP/EMA lines, entry/stop/target price lines, session shading |
+| `tv-widget` `tv-widget-5m` | TradingView's embedded chart (the centre stack by default: 1 minute large, 5 minute beneath) | Their data, their chrome; 15 minutes delayed unless the viewer is signed in to tradingview.com |
+| `pillars-board` | Right column, top. Compact under 640px: symbol, last, gain, five letter chips, score; the 13-column table above that width | Chips carry `data-state` PASS / FAIL / UNKNOWN |
+| `screener` | Ranked table: symbol, price, change, source, age | The whole price band; in the tray by default |
 | `level2` | Simulated ladder + tape | Labelled SIMULATED |
 | `timeline` | Alert log with expandable detail | In the tray by default |
 | `verdict` | Banner (GO/WAIT/PASS), why-list, pillar mirror table, risk inputs, sizing | The decision card |
@@ -148,11 +148,10 @@ these are the ones still open, and they are the brief.
 9. The severity chip is the only chip in the app rendered in lowercase.
 
 **Layout**
-10. **The Five Pillars board is 13 columns and 1100px wide inside the shortest
-    slot on the desk**, so it scrolls on both axes. Either the column set or the
-    slot has to change. Which columns earn their width is a real question:
-    Last, Vol today, Avg vol, Spread, HOD, vs VWAP, then five pillar cells and a
-    score.
+10. Resolved 2026-09-04: the Five Pillars board moved to the top of the right
+    column and reads compact there (symbol, last, gain, P G R F N chips, score;
+    values in tooltips); the 13-column table returns above 640px. The top bar
+    is one 34px row and card heads are 3px; the expand button is an SVG icon.
 11. The expanded-card overlay and the tray hard-code the top bar's height in
     three places.
 

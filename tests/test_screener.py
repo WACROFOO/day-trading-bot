@@ -105,10 +105,14 @@ def test_server_exposes_the_screener_and_desk_add():
     assert "def add_symbols" in server
 
 
-def test_page_carries_the_screener_card_in_the_tall_right_slot():
+def test_page_carries_the_screener_card_and_parks_it_in_the_tray():
+    """The right column is the Five Pillars check, Level 2 and the verdict;
+    the screener is one click away in the Cards tray and still polls."""
     web = ROOT / "src" / "momentum_platform" / "dashboard" / "web"
     html = (web / "index.html").read_text(); app = (web / "app.js").read_text()
     assert 'data-card="screener"' in html
-    assert 'R1: "screener"' in app and "function pollScreener" in app
+    assert 'R1: "pillars-board"' in app and "function pollScreener" in app
+    assert '"screener"' not in app.split("const DEFAULT_LAYOUT")[1].split("};")[0]
+    assert '"screener"' in app.split("const ALL_CARDS")[1].split(";")[0]
     assert "/api/v1/desk/add?symbol=" in app
     assert 'LIVE — following the newest bar' in app

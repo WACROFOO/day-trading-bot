@@ -37,7 +37,7 @@ from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_ba
                                         is_common_stock, minute_records, news_records, reference_record,
                                         session_duration, session_start,
                                         sec_profile, stock_type_of, store_records)
-from ..datasources.ibkr_stream import IbkrStream
+from ..datasources.ibkr_stream import IbkrStream, read_only_connect
 from .session_builder import build_session_from_records
 from .stream import EventHub, UpdatePublisher
 
@@ -238,7 +238,7 @@ class IbkrDesk:
         if self.scanner_ib is None:
             from ib_async import IB
             self.scanner_ib = IB()
-        self.scanner_ib.connect(self.host, self.port, clientId=self.scanner_client_id, readonly=True, timeout=12)
+        read_only_connect(self.scanner_ib, self.host, self.port, self.scanner_client_id, 12)
         try:
             self.scanner_ib.reqMarketDataType(1)
         except Exception:
@@ -454,6 +454,14 @@ class IbkrDesk:
             # No print yet this session: not "behind", there is nothing to be
             # behind. The page says "no prints yet" rather than a lag.
             session["dataLagSeconds"] = None
+        # Two different questions. dataLagSeconds: how old is the newest BAR
+        # (in thin premarket tape a name can go forty minutes without a print,
+        # and that is the tape, not the desk). feedLagSeconds: how long since
+        # IBKR last sent this desk anything at all, quote or bar — the number
+        # that says whether the desk itself is live.
+        beats = [t for t in (h.last_bar_at, h.last_quote_at) if t is not None]
+        session["feedLagSeconds"] = (max(0, int((now - max(beats)).total_seconds())) if beats else None)
+        session["provider"]["feedLagSeconds"] = session["feedLagSeconds"]
         session["provider"]["dataThrough"] = through
         session["provider"]["dataLagSeconds"] = session.get("dataLagSeconds")
         if self._news_note:

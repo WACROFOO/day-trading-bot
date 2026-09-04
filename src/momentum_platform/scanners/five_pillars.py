@@ -108,6 +108,18 @@ def score_pillars(
     return reasons, technical, news_ok
 
 
+def pillars_passed(snap: SymbolSnapshot, now: datetime) -> int:
+    """How many of the five pillars a snapshot passes right now (0-5).
+
+    The event scanners use this as a liquidity alternative in thin tape: a
+    name that carries three or more pillars is a momentum candidate even
+    while its five-minute share count is under the absolute floor, which in
+    premarket every small cap is. Approximation — the course states the
+    pillars, not this use of them."""
+    reasons, technical, news_ok = score_pillars(snap, now)
+    return technical + int(news_ok)
+
+
 class FivePillarsList(Scanner):
     """Ranked list of momentum candidates, sorted by daily RVOL descending.
 

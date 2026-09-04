@@ -17,6 +17,22 @@ from .base import EdgeTracker, Scanner, _round
 
 MIN_TICK_BUFFER = 0.0001
 
+# Liquidity in thin tape. The 25,000-shares-in-five-minutes floor is stated
+# against a busy regular session; at 04:40 ET a name up 26% on 3,000 shares
+# never reaches it, so HOD Momentum and Running Up stayed silent all
+# premarket on exactly the names the desk was built to surface. A name that
+# already carries three of the five pillars is admitted on those instead.
+# Approximation: the course never states a premarket volume rule.
+MIN_PILLARS_FOR_LIQUIDITY = 3
+
+
+def _liquidity(current: SymbolSnapshot, min_volume_5m: float, min_pillars: int):
+    """(passed, volume_ok, pillars_passed) — the share floor OR the pillars."""
+    from .five_pillars import pillars_passed
+    vol_ok = (current.volume_5m or 0) >= min_volume_5m
+    passed = pillars_passed(current, current.event_ts) if current.event_ts is not None else 0
+    return vol_ok or passed >= min_pillars, vol_ok, passed
+
 
 class HodMomentumScanner(Scanner):
     """New high-of-day + momentum confirmation.
@@ -42,11 +58,13 @@ class HodMomentumScanner(Scanner):
         high_rvol_min: float = 5.0,
         price_band_split: float = 20.0,
         min_hod_advance_pct: float = 0.25,
+        min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
     ) -> None:
         self.min_change_pct = min_change_pct
         self.min_recent_rvol = min_recent_rvol
         self.min_price = min_price
         self.min_volume_5m = min_volume_5m
+        self.min_pillars = min_pillars
         self.low_float_max = low_float_max
         self.medium_float_max = medium_float_max
         self.high_rvol_min = high_rvol_min
@@ -103,16 +121,20 @@ class HodMomentumScanner(Scanner):
             return []
 
         rvol_recent = current.rvol_5m if current.rvol_5m is not None else current.rvol_daily
+        liquid, vol_ok, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
+        # In thin tape the recent-RVOL check is the same wall as the share
+        # floor (both count shares that have not printed yet); the pillars
+        # stand in for both, never for the new high or the gain.
+        rvol_ok = (rvol_recent is not None and rvol_recent >= self.min_recent_rvol) or (liquid and not vol_ok)
         reasons = [
             Reason("new_hod", _round(current_high, 4), True,
                    _round(prior_hod + advance_needed, 4)),
             Reason("change_pct", _round(current.change_from_close_pct),
                    (current.change_from_close_pct or 0) >= self.min_change_pct, self.min_change_pct),
-            Reason("recent_rvol", _round(rvol_recent),
-                   rvol_recent is not None and rvol_recent >= self.min_recent_rvol, self.min_recent_rvol),
+            Reason("recent_rvol", _round(rvol_recent), rvol_ok, self.min_recent_rvol),
             Reason("price_min", _round(current.last), current.last >= self.min_price, self.min_price),
-            Reason("volume_5m", current.volume_5m,
-                   (current.volume_5m or 0) >= self.min_volume_5m, self.min_volume_5m),
+            Reason("volume_5m", current.volume_5m, liquid, self.min_volume_5m),
+            Reason("pillars_passed", pillars, liquid, self.min_pillars),
         ]
         if not all(r.passed for r in reasons):
             return []
@@ -219,6 +241,7 @@ class UptrendScanner(Scanner):
         min_volume_5m: float = 25_000,
         min_price: float = 1.0,
         version: str = "2.0.0",
+        min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
     ) -> None:
         self.scanner_id = "running_up"
         self.definition_version = f"running_up@{version}"
@@ -228,6 +251,7 @@ class UptrendScanner(Scanner):
         self.min_volume_5m = min_volume_5m
         self.min_price = min_price
         self._edges = EdgeTracker(rearm_after_fails=3)
+        self.min_pillars = min_pillars
 
     def _window(self, state: SymbolState, now) -> list:
         from datetime import timedelta
@@ -262,7 +286,7 @@ class UptrendScanner(Scanner):
         vol = sum(b.volume for b in bars)
         vwap = (sum(b.close * b.volume for b in bars) / vol) if vol > 0 else None
         vwap_ok = vwap is not None and current.last >= vwap
-        volume_ok = (current.volume_5m or 0) >= self.min_volume_5m
+        volume_ok, _vol_only, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
         price_ok = current.last >= self.min_price
         qualifies = move_ok and fresh_ok and vwap_ok and volume_ok and price_ok
         if not self._edges.rising_edge(current.symbol, qualifies):
@@ -272,6 +296,7 @@ class UptrendScanner(Scanner):
             Reason(f"fresh_high_{self.fresh_minutes}m", _round(recent_high), fresh_ok, _round(window_high)),
             Reason(f"above_vwap_{self.window_minutes}m", _round(current.last), vwap_ok, _round(vwap)),
             Reason("volume_5m", current.volume_5m, volume_ok, self.min_volume_5m),
+            Reason("pillars_passed", pillars, volume_ok, self.min_pillars),
             Reason("price_min", _round(current.last), price_ok, self.min_price),
         ]
         severity = "high" if move_pct >= 2 * self.threshold_pct else "medium"

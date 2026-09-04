@@ -728,6 +728,31 @@ def test_a_known_float_above_the_cap_still_excludes():
     assert fr.value != "unknown" and fr.passed is False
 
 
+def test_hod_momentum_admits_three_pillars_in_thin_tape():
+    """Premarket: 3,000 shares all session, but price in band, gain and a
+    small known float. The share floor is replaced by 3/5 pillars."""
+    from momentum_platform.scanners.momentum_events import HodMomentumScanner
+    sc = HodMomentumScanner()
+    now = utc(2026, 9, 4, 8, 40)
+    first = snapshot(last=12.0, session_high=12.0, change_from_close_pct=26.0, event_ts=now,
+                     volume_5m=500, rvol_5m=None, rvol_daily=0.1, float_shares=12_000_000,
+                     float_quality=FloatQuality.SHARES_OUTSTANDING)
+    assert sc.on_snapshot(first, None, None, None) == []
+    second = snapshot(last=12.6, session_high=12.6, change_from_close_pct=32.0, event_ts=now,
+                      volume_5m=500, rvol_5m=None, rvol_daily=0.1, float_shares=12_000_000,
+                      float_quality=FloatQuality.SHARES_OUTSTANDING)
+    events = sc.on_snapshot(second, first, None, None)
+    assert len(events) == 1, "price, gain and float pillars admit the name"
+    by = {r.filter: r for r in events[0].reasons}
+    assert by["pillars_passed"].value == 3 and by["volume_5m"].passed
+    # one pillar short and no volume: silent, as before
+    poor = snapshot(last=25.0, session_high=25.0, change_from_close_pct=32.0, event_ts=now,
+                    volume_5m=500, rvol_5m=None, rvol_daily=0.1, float_shares=None)
+    sc2 = HodMomentumScanner()
+    sc2.on_snapshot(snapshot(last=24.0, session_high=24.0, event_ts=now), None, None, None)
+    assert sc2.on_snapshot(poor, None, None, None) == []
+
+
 def test_hod_momentum_labels_an_unknown_float_rather_than_going_silent():
     """The branch is a label, by the scanner's own docstring. Letting a missing
     label suppress the alert made the scanner mute on every free feed."""

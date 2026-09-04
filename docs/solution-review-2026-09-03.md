@@ -105,28 +105,33 @@ regular 09:30–16:00, AH after hours 16:00–20:00. Hover any pill for the
 definition.
 
 ### Centre
-- **1 minute · execution** (large) and **5 minute · structure** — the desk's
-  own panes on IBKR real-time data: extended hours shaded, VWAP and the 9, 20
-  and 200 EMAs, the plan's entry, stop and target. (Update 2026-09-04: these
-  replaced the TradingView embeds as the default stack. The embeds are in the
-  tray; to a viewer not signed in to tradingview.com they run 15 minutes
-  behind, which their **D** badge states.)
-- **10 second · micro** — IBKR data. Shows the last 30 minutes; entry, stop,
-  target and HOD lines; extended hours shaded; a note when the tape is thin.
-- **Five Pillars · every name on the desk** — one row per symbol: last, volume
-  today, average volume, spread, HOD, distance to VWAP, then the five pillar
-  cells with value and PASS / FAIL / UNKNOWN, and a score out of five. Sorted
-  best first. UNKNOWN is never counted as a pass.
+- **TradingView · 1 minute** (large) — TradingView's own embedded chart:
+  their toolbar, drawing tools and indicator dialog, extended hours on,
+  following the selected symbol. To a viewer not signed in to tradingview.com
+  it runs 15 minutes behind, which their **D** badge states; signed in, it
+  follows that account's entitlement. Nothing on this side changes their delay.
+- **TradingView · 5 minute** and **10 second · micro** side by side beneath
+  it. The micro pane is IBKR data: the last 30 minutes, entry, stop, target and
+  HOD lines, extended hours shaded, a note when the tape is thin.
+- The desk's own 1-minute, 5-minute and daily panes (IBKR real-time, VWAP and
+  the 9, 20 and 200 EMAs, the plan drawn) are in the tray. (Update 2026-09-04:
+  the desk panes were the default stack for one day; the recording showed the
+  TradingView toolbar and indicators were what the operator used, so the
+  embeds are back on top.)
 
 ### Right column
-- **Screener · the whole band, now** — the scanner union's names in the desk's
-  band up ≥10%, source IBKR, age of the quote. The note says the union is a
+- **Five Pillars check** — one row per desk name: symbol, last, gain, the five
+  pillar chips (P, G, R, F, N; PASS green, FAIL red, UNKNOWN amber, the value
+  in the tooltip) and a score out of five, best first. UNKNOWN is never a
+  pass. Widen the column past 640 px and the full thirteen-column table
+  returns (volume today, average volume, spread, HOD, distance to VWAP).
+- **Level 2 · Time & Sales** — simulated ladder and tape, labelled SIMULATED.
+- **Setup verdict** — GO / WAIT / PASS, the why-list, the pillar mirror, the
+  operator's risk inputs and the size in R.
+- **Screener · the whole band** is in the tray: the scanner union's names in
+  the desk's band up ≥10%, source and age; the note says the union is a
   discovery set, not an exhaustive list, and how many non-stock instruments
-  (leveraged ETFs, ETNs, funds, warrants) were excluded.
-- **Setup verdict** — GO / WAIT / PASS with the conditions short, the pillar
-  mirror, the technical score, and the plan (entry over the trigger, stop
-  under the pullback low, target at 2R). The risk box takes the user's own
-  dollar risk; sizing is shown only once it is typed.
+  were excluded.
 
 ### Flames and catalyst grades
 Red ≤2 h, orange ≤12 h, yellow ≤24 h since publication: recency only. The
@@ -293,3 +298,28 @@ Ordered by how much each one changes outcomes.
     course scanners, the pillars are the Confirmed ones, the mastery covers
     Basics chapters 1–6 only. Every number on the desk carries its label, and
     the review page states the limits. That is what makes it presentable.
+
+### Update 2026-09-04 (premarket recording, 04:43 ET)
+- **Liquidity gate (Approximation).** HOD Momentum and Running Up admit a name
+  when the last five minutes traded ≥25,000 shares OR at least three of the
+  five pillars pass. Premarket tape on a 4/5 name was too thin for the share
+  floor and the scanners stayed silent; the pillar path is what lets that
+  fresh high through. The alert reason names the gate (`volume_5m` or
+  `pillars_passed`). Not a Warrior production setting.
+- **"44M BEHIND" was not a delay.** The feed was LIVE on quotes; the newest
+  5-second bar was 04:00 because IBKR sends no bar without a trade. The chip
+  now reads the feed's own heartbeat (`feedLagSeconds` = age of the newest
+  quote or bar): `live`, or `live · last print HH:MM` when the bar is older
+  than five minutes on a live feed; the amber/red age only when nothing at all
+  arrives. The 900-second minute-history request falls back to a two-day
+  request cut to 04:00 if TWS refuses the short window.
+- **Header** is one 34 px row; card heads 3 px; the watermark is small.
+  Expand buttons carry a visible maximize icon and the tooltip
+  "Maximize / restore (E)". Card heads are draggable with a "Drop here to
+  swap" label on the target; tray items say what they do and load into the
+  last card clicked.
+- **TWS reconnect noise.** Read-only connections skip ib_async's startup sync
+  of positions, orders, executions and account updates (`StartupFetch(0)`),
+  so a flapping link no longer hits the account-summary quota (error 322);
+  late replies to timed-out requests log one INFO line instead of a KeyError
+  traceback.

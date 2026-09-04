@@ -53,7 +53,7 @@ def test_a_grinding_uptrend_fires_once_per_leg():
     e = events[0]
     assert e.branch == "uptrend_10m"
     names = {r.filter for r in e.reasons}
-    assert names == {"move_10m_pct", "fresh_high_3m", "above_vwap_10m", "volume_5m", "price_min"}
+    assert names == {"move_10m_pct", "fresh_high_3m", "above_vwap_10m", "volume_5m", "pillars_passed", "price_min"}
     assert all(r.passed for r in e.reasons)
     assert e.values["window_minutes"] == 10
 
@@ -79,3 +79,26 @@ def test_a_pullback_that_resumes_fires_a_second_leg():
     up2 = [4.01 + 0.03 * i for i in range(1, 13)]         # leg two, fresh highs again
     events = run(up + down + up2)
     assert len(events) == 2, [e.source_ts for e in events]
+
+
+def test_thin_tape_with_three_pillars_still_fires():
+    """04:40 ET: a name up 26% on 3,000 shares never reaches the share floor,
+    yet it carries price, gain and float. Three of five pillars stand in for
+    the floor, so Running Up is not silent all premarket (Approximation)."""
+    closes = [4.00 + 0.02 * i for i in range(16)]
+    hot = HotState()
+    # prev_close far below: gain pillar passes; float known and small: float pillar passes
+    hot.load_reference([ReferenceData(symbol="AAA", prev_close=3.0, avg_daily_volume=200_000,
+                                      float_shares=5_000_000)])
+    sink = Sink()
+    router = NotificationRouter(RouterConfig(), [sink])
+    engine = ScannerEngine(hot=hot, scanners=[UptrendScanner(min_volume_5m=25_000)], router=router)
+    out = []
+    for i, c in enumerate(closes):
+        ts = T0 + timedelta(minutes=i)
+        bar = Bar("AAA", "1m", ts, c, c * 1.002, c * 0.998, c, 100)
+        out += engine.process(MarketUpdate("AAA", ts, price=c, size=100, bar=bar, data_status=DataStatus.REPLAY))
+    events = [e for e in out if e.scanner == "running_up"]
+    assert len(events) == 1, "three pillars admit the name despite 100-share minutes"
+    by = {r.filter: r for r in events[0].reasons}
+    assert by["pillars_passed"].value >= 3 and by["volume_5m"].passed

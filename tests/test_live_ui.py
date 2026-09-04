@@ -145,7 +145,7 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert not pg.is_visible("#legend")
         # the board carries the market-data columns and the desk band note
         heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
-        assert heads[:8] == ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band"]
+        assert heads == ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"], "compact form in the column"
         note = pg.text_content("#pillarsBoardNote")
         assert "$2–20" in note and "RVOL ≥5×" in note and len(note) < 70, note
         assert "desk admits $1–30" in pg.get_attribute("#pillarsBoardNote", "title")
@@ -205,11 +205,14 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert shown.startswith(real[:4]), f"clock {shown} is not the ET wall clock {real}"
         assert pg.text_content("#sessionBadge") in {"premarket", "regular", "after_hours", "closed"}
 
-        # And the desk states how far behind its data is, beside that clock.
+        # And the desk states its own freshness beside that clock. The feed is
+        # live (quotes and bars reached the desk seconds ago) while the newest
+        # BAR is hours old: that is quiet tape, and the chip says both rather
+        # than calling a live desk "hours behind".
         lag = pg.text_content("#dataLag")
-        assert lag and ("behind" in lag or lag == "live"), lag
-        assert "behind" in lag, "the fixture's newest bar is hours old, so it must say so"
-        assert pg.get_attribute("#dataLag", "class").endswith("bad")
+        assert lag.startswith("live") and "last print" in lag, lag
+        assert pg.get_attribute("#dataLag", "class").endswith("ok")
+        assert "quiet tape" in pg.get_attribute("#dataLag", "title")
         assert not errors, errors
         browser.close()
 

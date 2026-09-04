@@ -390,3 +390,41 @@ def test_health_dict_is_json_ready():
     d = s.health.as_dict()
     assert d["readOnly"] is True and d["marketDataType"] == 1 and d["state"] == "LIVE"
     assert d["lastBarAt"] is None and isinstance(d["messages"], list)
+
+
+def test_read_only_connect_skips_the_startup_account_sync_when_ib_async_offers_it():
+    """The desk never trades: no positions, orders, executions or account
+    updates at connect time, so a flapping TWS link cannot exhaust the account
+    summary quota (error 322). readonly=True is always passed."""
+    seen = {}
+
+    class Real:
+        def connect(self, host, port, clientId=1, timeout=4, readonly=False, fetchFields=None):
+            seen.update(host=host, port=port, clientId=clientId, timeout=timeout,
+                        readonly=readonly, fetchFields=fetchFields)
+
+    mod.read_only_connect(Real(), "127.0.0.1", 7496, 27, 4)
+    assert seen["readonly"] is True and seen["clientId"] == 27
+    assert seen["fetchFields"] is not None and not any(seen["fetchFields"] & m for m in type(seen["fetchFields"]))
+
+    class Old:                                   # no fetchFields parameter at all
+        def connect(self, host, port, clientId=1, timeout=4, readonly=False):
+            seen.clear(); seen.update(readonly=readonly)
+
+    mod.read_only_connect(Old(), "127.0.0.1", 7496, 27, 4)
+    assert seen == {"readonly": True}
+
+
+def test_late_reply_filter_turns_the_key_error_traceback_into_one_info_line(caplog):
+    import logging
+    mod.quiet_ib_async_logging()
+    lg = logging.getLogger("ib_async.Decoder")
+    with caplog.at_level(logging.INFO, logger="ib_async.Decoder"):
+        try:
+            {}[7]
+        except KeyError:
+            lg.exception("Error handling fields: [10, 3, 7]")
+        lg.error("Error handling fields: something real", exc_info=False)
+    recs = [r for r in caplog.records if r.name == "ib_async.Decoder"]
+    assert [r.levelname for r in recs] == ["INFO", "ERROR"]
+    assert "late reply" in recs[0].getMessage() and recs[0].exc_info is None

@@ -338,7 +338,15 @@ def minute_records(ib, contract, symbol: str, duration: str = "1 D",
     Bars before `start` are dropped: IBKR's "1 D" at 04:03 ET hands back the
     previous session, and a desk built from it showed yesterday's tape as
     "19 h behind" instead of today's first prints."""
-    hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2)
+    try:
+        hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2)
+    except Exception:
+        # A seconds-form window IBKR will not take is not a reason to run the
+        # desk on last night's tape: ask for the day and cut it to the window.
+        if duration.endswith(" S"):
+            hist = ib.reqHistoricalData(contract, "", "2 D", "1 min", "TRADES", False, formatDate=2)
+        else:
+            raise
     out = []
     for b in hist or []:
         ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))
