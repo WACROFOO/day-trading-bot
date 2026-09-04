@@ -137,7 +137,18 @@ class SecClient:
         return mapping
 
     def cik_for(self, symbol: str) -> Optional[int]:
-        return self.cik_map().get(symbol.upper())
+        """CIK for a ticker, refreshing the cached map once on a miss.
+
+        The map is cached for a week, so a ticker that listed since the last
+        refresh reads as "not in EDGAR" and its float stays unknown for the
+        whole session. A miss is worth one fresh download."""
+        hit = self.cik_map().get(symbol.upper())
+        if hit is not None:
+            return hit
+        try:
+            return self.cik_map(max_age_days=0).get(symbol.upper())
+        except Exception:
+            return None
 
     # -- filings --------------------------------------------------------------
 
@@ -215,8 +226,25 @@ class SecClient:
         if cik is None:
             return None
         payload = self._get(SEC_FACTS.format(cik=cik))
-        facts = ((payload.get("facts") or {}).get("dei") or {}).get("EntityCommonStockSharesOutstanding") or {}
-        entries = (facts.get("units") or {}).get("shares") or []
+        facts = payload.get("facts") or {}
+        best = self._latest_share_fact(facts, "dei", "EntityCommonStockSharesOutstanding")
+        if best:
+            best["basis"] = "shares outstanding"
+            return best
+        # Some registrants — foreign private issuers especially — file the
+        # cover-page fact under us-gaap instead, or only report shares issued.
+        # Both are still upper bounds on float, and each says which it is.
+        for taxonomy, tag, basis in (("us-gaap", "CommonStockSharesOutstanding", "shares outstanding"),
+                                     ("us-gaap", "CommonStockSharesIssued", "shares issued")):
+            best = self._latest_share_fact(facts, taxonomy, tag)
+            if best:
+                best["basis"] = basis
+                return best
+        return None
+
+    @staticmethod
+    def _latest_share_fact(facts: dict, taxonomy: str, tag: str) -> Optional[dict]:
+        entries = ((((facts.get(taxonomy) or {}).get(tag) or {}).get("units") or {}).get("shares") or [])
         best = None
         for e in entries:
             val, end = e.get("val"), e.get("end") or e.get("filed") or ""

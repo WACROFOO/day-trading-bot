@@ -289,12 +289,15 @@ def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optio
             ibkr_float["float"], "verified", ibkr_float.get("as_of"), "IBKR fundamentals (Refinitiv) total float")
     elif sec.get("shares"):
         float_shares, float_quality, float_asof, float_source = (
-            sec["shares"], "shares_outstanding_proxy", sec.get("as_of"), "SEC shares outstanding (upper bound)")
+            sec["shares"], "shares_outstanding_proxy", sec.get("as_of"),
+            "SEC " + (sec.get("basis") or "shares outstanding") + " (upper bound)")
     elif ibkr_float.get("shares_out"):
         float_shares, float_quality, float_asof, float_source = (
             ibkr_float["shares_out"], "shares_outstanding_proxy", ibkr_float.get("as_of"), "IBKR shares outstanding (upper bound)")
     else:
         float_shares, float_quality, float_asof, float_source = None, "unknown", None, None
+        # Why it is unknown, in the record, so the board can say it.
+        float_source = sec.get("note") or ibkr_float.get("note")
     return {
         "type": "reference", "symbol": symbol,
         "prev_close": prev_close, "avg_daily_volume": avg_volume, "high_52w": high_52w,
@@ -458,17 +461,36 @@ def parse_float_xml(xml: str) -> dict:
 
 def sec_profile(symbol: str) -> dict:
     """Shares outstanding (an upper bound on float) and country from EDGAR,
-    free and official. Any failure is an empty dict, never an exception."""
+    free and official.
+
+    A failure is reported in `note` rather than swallowed: an unknown float
+    that is a network hiccup and one that is a genuine EDGAR gap look
+    identical on the board, and only one of the two is worth retrying."""
     try:
         from .sec_source import client_from_env
         sec = client_from_env()
+    except Exception as exc:
+        return {"note": f"EDGAR client unavailable: {exc}"}
+    try:
         so = sec.shares_outstanding(symbol) or {}
+    except Exception as exc:
+        return {"note": f"EDGAR lookup failed: {exc}"}
+    note = None
+    if not so.get("shares"):
+        try:
+            known = sec.cik_for(symbol) is not None
+        except Exception:
+            known = False
+        note = ("EDGAR has no shares-outstanding figure for this registrant"
+                if known else "ticker is not in EDGAR's company list")
+    try:
         prof = sec.company_profile(symbol) or {}
-        return {"shares": so.get("shares"), "as_of": so.get("as_of"),
-                "country": prof.get("business_country") or prof.get("incorporation_desc"),
-                "incorporated_in": prof.get("incorporation_desc") or prof.get("state_of_incorporation")}
     except Exception:
-        return {}
+        prof = {}
+    return {"shares": so.get("shares"), "as_of": so.get("as_of"),
+            "basis": so.get("basis"), "note": note,
+            "country": prof.get("business_country") or prof.get("incorporation_desc"),
+            "incorporated_in": prof.get("incorporation_desc") or prof.get("state_of_incorporation")}
 
 
 def news_records(symbols: List[str], since: Optional[datetime] = None) -> tuple:

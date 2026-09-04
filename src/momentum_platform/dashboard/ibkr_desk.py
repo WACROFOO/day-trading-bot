@@ -116,6 +116,7 @@ class IbkrDesk:
         # same round-robin slot as the minute refresh.
         self._profiles: Dict[str, List[float]] = {}
         self._profile_day: Dict[str, str] = {}
+        self._float_retry: Dict[str, float] = {}     # monotonic time of the last EDGAR retry
         self.profile_days = int(os.environ.get("DESK_VOLUME_PROFILE_DAYS", "10"))
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
@@ -447,6 +448,10 @@ class IbkrDesk:
         # against whole prior days, which no premarket runner can clear.
         if self._profile_day.get(sym) != self.session_day():
             return self.refresh_profile(sym)
+        # An unknown float is often a one-off EDGAR failure, and it was asked
+        # for exactly once, at subscribe time. Retry it — the request goes to
+        # EDGAR, not to TWS, so it costs nothing from the historical budget.
+        self.retry_float(sym)
         try:
             fresh = minute_records(self.stream.ib, c, sym, duration="900 S",
                                    start=session_start(self.clock()))
@@ -486,6 +491,29 @@ class IbkrDesk:
             ref["volume_profile"] = profile
             ref["volume_profile_days"] = self.profile_days
         return sym
+
+    def retry_float(self, sym: str, every: float = 600.0) -> bool:
+        """Ask EDGAR again for a symbol whose float is still unknown."""
+        ref = self._reference.get(sym)
+        if not self.sec or ref is None or ref.get("float_quality") != "unknown":
+            return False
+        now = time.monotonic()
+        if now - self._float_retry.get(sym, -1e9) < every:
+            return False
+        self._float_retry[sym] = now
+        sec = sec_profile(sym)
+        if not sec.get("shares"):
+            if sec.get("note"):
+                ref["float_source"] = sec["note"]
+            return False
+        prev_sec, ibkr = self._float_inputs.get(sym, ({}, {}))
+        self._float_inputs[sym] = (sec, ibkr)
+        c = self._contracts_for(sym)
+        if c is not None:
+            self._set_reference(sym, c, ref.get("daily_bars") or [])
+            self.log(f"  {sym}: float resolved on retry — {sec['shares'] / 1e6:.1f}M "
+                     f"({sec.get('basis') or 'shares outstanding'}, upper bound)")
+        return True
 
     def _contracts_for(self, sym: str):
         try:
@@ -579,8 +607,24 @@ class IbkrDesk:
         # Tell every open page now: the scanners moved. A poll would find out
         # in up to five seconds; a trader watching Running Up should not wait.
         n_alerts = sum(len(f["alerts"]) for f in session["frames"])
-        self.hub.publish("session", {"builtAt": session["builtAt"], "frames": len(session["frames"]),
-                                     "alerts": n_alerts, "symbols": list(self.symbols)})
+        # The event carries the newest minute itself — its lists, its alerts,
+        # and every symbol's current metrics. A full session for a ten-name
+        # desk at midday is well over a megabyte, and the page was refetching
+        # and reparsing all of it every three seconds just to move a grid; the
+        # scanners lurched instead of ticking. The page still reconciles with
+        # a full fetch when the symbol set changes and once a minute anyway.
+        tail = session["frames"][-1] if session["frames"] else None
+        self.hub.publish("session", {
+            "builtAt": session["builtAt"], "frames": len(session["frames"]),
+            "alerts": n_alerts, "symbols": list(self.symbols),
+            "tradingDate": session["tradingDate"],
+            "sessionStart": session["sessionStart"],
+            "dataLagSeconds": session["dataLagSeconds"],
+            "feedLagSeconds": session["feedLagSeconds"],
+            "frame": tail,
+            "metrics": {sym: meta.get("metrics") for sym, meta in session["symbols"].items()
+                        if meta.get("metrics")},
+        })
         return session
 
     def scan(self, add: bool = True) -> dict:

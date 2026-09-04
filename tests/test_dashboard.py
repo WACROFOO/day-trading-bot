@@ -1035,3 +1035,16 @@ def test_every_desk_symbol_carries_its_own_metrics(session):
         assert m is not None, sym
         assert set(["rvol", "rvolDaily", "rvolMeasure", "volumeToday"]) <= set(m)
         assert m["rvolMeasure"] in ("daily", "time_of_day")
+
+
+def test_ui_alert_timelines_are_ordered_by_the_alert_time(page):
+    """A symbol the scanner adds mid-session arrives carrying its whole
+    morning. Ordered by when the page first saw them, those old alerts landed
+    at the top of a timeline headed TIME, above events an hour newer."""
+    page.evaluate("() => localStorage.clear()")
+    page.reload()
+    page.wait_for_selector("[data-card=scan-hod] .alert-row", timeout=15000)
+    for card in ("scan-running", "scan-hod"):
+        times = page.eval_on_selector_all(
+            f"[data-card={card}] .alert-row .tl-time", "els => els.map(e => e.textContent)")
+        assert times == sorted(times, reverse=True), (card, times)

@@ -487,3 +487,22 @@ def test_the_desk_builds_a_ten_session_volume_profile_and_rvol_uses_it():
     assert metrics["rvolMeasure"] == "time_of_day"
     assert metrics["rvolBaseline"] > 0
     assert metrics["rvolDaily"] is not None, "the daily measure stays on the row too"
+
+
+def test_the_rebuild_event_carries_the_new_minute_not_the_whole_session():
+    """The page used to refetch and reparse the entire session every three
+    seconds to move a grid — well over a megabyte on a ten-name desk at
+    midday, so the scanners lurched instead of ticking."""
+    import json
+
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    base = desk.hub.last_id
+    session = desk.refresh_session()
+    ev = [e for e in desk.hub.since(base) if e.type == "session"][-1]
+    assert ev.data["frame"]["ts"] == session["frames"][-1]["ts"]
+    assert ev.data["frame"]["lists"], "the newest minute carries its ranked lists"
+    assert set(ev.data["metrics"]) == set(session["symbols"])
+    assert ev.data["metrics"]["AAA"]["rvolMeasure"] in ("daily", "time_of_day")
+    assert ev.data["tradingDate"] == session["tradingDate"]
+    assert len(json.dumps(ev.data)) * 20 < len(json.dumps(session)), "an order of magnitude smaller"

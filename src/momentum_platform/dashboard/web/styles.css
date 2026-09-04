@@ -415,6 +415,7 @@ body.resizing .gutter{pointer-events:auto}
 /* OHLC legend: top-left, follows the crosshair, rests on the last bar. */
 .tv-desk-price{color:var(--ink-faint,#6b7a8c)} .tv-desk-price.hot{color:var(--up,#26a69a)}
 .lag.parked{cursor:pointer}
+#btnSound.blocked{border-color:var(--hi,#ffc247);color:var(--hi,#ffc247)}
 .tl-detail .seek-back{margin-top:6px;width:auto;padding:2px 8px;font-size:10px}
 .lag{min-width:96px;display:inline-flex;align-items:center;justify-content:center;
   font-variant-numeric:tabular-nums;white-space:nowrap}

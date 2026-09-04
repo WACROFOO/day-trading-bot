@@ -192,6 +192,32 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, liquid, one alert per leg. Approximation.
+- **A sound on every new alert.** The arrival memory was keyed by symbol, so
+  a second Running Up leg on the same name inside ten minutes made no sound at
+  all; it is keyed by the alert now. Only an alert whose own minute is within
+  three minutes of now rings — a name the scanner adds mid-session arrives
+  carrying its whole morning, and that is history landing late, not twenty
+  events firing. Browsers hold a page's audio until it has been clicked once:
+  until then the Alerts button shows 🔕 and says so, and the first click
+  anywhere unlocks it.
+- **The timelines are ordered by the alert's own minute**, never by when the
+  page first heard of it. A symbol added at 10:09 was putting its 07:38 alert
+  at the top of a grid headed TIME.
+- **Top gainers ranks by change from the previous close** — premarket and
+  regular alike — not by relative volume. RVOL stays a gate and a column.
+- **Scanner grids tick rather than lurch.** A rebuild is pushed as the new
+  minute alone (about 8 KB: that minute's ranked lists, its alerts, and every
+  symbol's metrics). The page used to refetch the whole session for it, which
+  on a ten-name desk at midday is over 1.6 MB every three seconds. The full
+  fetch remains the reconciler: whenever the symbol set changes, and once a
+  minute regardless.
+- **An unknown float says why it is unknown** — not in EDGAR's ticker list, no
+  shares-outstanding fact filed, or the lookup failed — and is retried every
+  ten minutes instead of being asked for once at subscribe time. EDGAR's
+  ticker map is re-downloaded on a miss (a company that listed since the last
+  weekly refresh was invisible), and the us-gaap cover-page facts are read
+  when the dei one is absent, labelled "shares outstanding" or "shares
+  issued". Both bound float from above; neither is float.
 - **A live desk opens on the live edge and stays there.** A recording opens
   eight minutes before the bell, which is where the interesting part starts.
   That line ran on live desks too, so every live session started parked at

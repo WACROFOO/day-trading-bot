@@ -337,7 +337,23 @@ def test_shares_outstanding_takes_the_latest_reported_figure():
                        {"val": 0, "end": "2026-07-31"}]}}}}},
     }
     got = FakeSec(payloads).shares_outstanding("ABCD")
-    assert got == {"shares": 21_500_000, "as_of": "2026-06-30"}
+    # `basis` says which cover-page fact answered: some registrants report
+    # only under us-gaap, or only shares issued, and both are still upper
+    # bounds on float that must name themselves.
+    assert got == {"shares": 21_500_000, "as_of": "2026-06-30", "basis": "shares outstanding"}
+
+
+def test_shares_outstanding_falls_back_to_the_us_gaap_cover_page_fact():
+    """Foreign private issuers often report the cover-page count under
+    us-gaap, or only report shares issued. Both bound float from above; an
+    unknown float is what closed the float column on names like these."""
+    payloads = {
+        "company_tickers.json": TICKERS,
+        "CIK0000000111.json": {"facts": {"us-gaap": {"CommonStockSharesIssued": {"units": {
+            "shares": [{"val": 9_400_000, "end": "2026-06-30"}]}}}}},
+    }
+    got = FakeSec(payloads).shares_outstanding("ABCD")
+    assert got == {"shares": 9_400_000, "as_of": "2026-06-30", "basis": "shares issued"}
 
 
 def test_shares_outstanding_is_none_for_an_unknown_ticker():

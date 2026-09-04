@@ -132,8 +132,11 @@ function ingestAlerts(idx) {
     ALERT_KEYS.add(k);
     fresh.push(Object.assign({ _key: k, _at: Date.parse(a.sourceTime) }, a));
   });
-  fresh.sort((x, y) => x._at - y._at);          // oldest first, so unshift leaves newest on top
-  fresh.forEach(r => ALERT_LOG.unshift(r));
+  fresh.forEach(r => ALERT_LOG.push(r));
+  // Sorted by the alert's OWN minute, never by when the page first saw it.
+  // A symbol the scanner adds at 10:09 arrives carrying its whole morning, so
+  // its 07:38 alert was landing at the top of a timeline headed TIME.
+  ALERT_LOG.sort((x, y) => y._at - x._at);
   if (ALERT_LOG.length > ALERT_CAP) ALERT_LOG.length = ALERT_CAP;
   return fresh;
 }
@@ -462,7 +465,7 @@ function pillarChecks(row, meta) {
     { k: "P", name: "price $" + T.priceMin + "–$" + T.priceMax, v: row.price, ok: row.price >= T.priceMin && row.price <= T.priceMax },
     { k: "G", name: "gain ≥ " + T.gainMinPct + "%", v: pct(row.changePct), ok: (row.changePct || 0) >= T.gainMinPct },
     rvolPillar(row, meta, T.rvolMin),
-    floatPillar(f, quality, T.floatMaxShares),
+    floatPillar(f, quality, T.floatMaxShares, meta.floatSource),
   ];
 }
 /* The RVOL pillar. Two measures exist and they disagree by two orders of
@@ -493,7 +496,7 @@ function rvolPillar(row, meta, min) {
    float under the cap (pass, labelled SO); over the cap it proves nothing
    (unknown — never a fail, never a pass). A verified figure is compared
    directly. The board once said FAIL on a 12.2M proxy the verdict called PASS. */
-function floatPillar(f, quality, cap) {
+function floatPillar(f, quality, cap, source) {
   const m = f != null ? (f / 1e6).toFixed(1) + "M" : null;
   if (quality === "verified" || quality === "you verified")
     return { k: "F", name: "float < " + (cap / 1e6) + "M", v: m + (quality === "you verified" ? " (yours)" : ""), ok: f < cap, unknown: false };
@@ -501,7 +504,12 @@ function floatPillar(f, quality, cap) {
     return f < cap
       ? { k: "F", name: "float < " + (cap / 1e6) + "M — proven by shares outstanding under the cap", v: m + " SO", ok: true, unknown: false }
       : { k: "F", name: "float < " + (cap / 1e6) + "M — shares outstanding over the cap proves nothing", v: m + " SO", ok: false, unknown: true };
-  return { k: "F", name: "float < " + (cap / 1e6) + "M", v: "unknown", ok: false, unknown: true };
+  // An unknown float that is a network hiccup and one that is a genuine
+  // EDGAR gap look identical on the board. The record carries the reason, so
+  // the chip can say which it is instead of leaving the operator guessing.
+  return { k: "F", name: "float < " + (cap / 1e6) + "M — unknown"
+                       + (source ? ": " + source : ": no free source published one"),
+           v: "unknown", ok: false, unknown: true };
 }
 function newsFor(sym, nowMs) {
   const items = (SYMS[sym] && SYMS[sym].news) || [];
@@ -1539,31 +1547,50 @@ function unlockAudio() {
 const SEEN_IN_GRID = new Map();          // membership key -> last time it was there
 const REENTRY_MS = 10 * 60 * 1000;
 const ARRIVAL_MS = 4000;                 // how long a row stays marked new
+const ALERT_NEWS_MS = 3 * 60 * 1000;     // older than this, an alert is history arriving late
+const SEEN_CAP = 4000;                   // arrival memory, pruned oldest-first
 let AUDIO_SEEDED = false;
 function membership(frame) {
-  const keys = [];
-  (frame.lists[LIST_IDS[0]] || []).forEach(row => keys.push("gainers:" + row[COL.symbol]));
-  loggedAlerts(ALERT_TILES.running_up.scanners).forEach(a => keys.push("running:" + a.symbol));
-  return keys;
+  const out = [];
+  (frame.lists[LIST_IDS[0]] || []).forEach(row =>
+    out.push({ k: "gainers:" + row[COL.symbol], sym: row[COL.symbol], at: null }));
+  // One entry per ALERT, not per symbol. Keyed by symbol alone, a second
+  // Running Up leg on the same name inside ten minutes made no sound at all.
+  Object.keys(ALERT_TILES).forEach(tile => {
+    loggedAlerts(ALERT_TILES[tile].scanners).forEach(a =>
+      out.push({ k: tile + ":" + a._key, sym: a.symbol, at: a._at }));
+  });
+  return out;
 }
 function noteArrivals(frame) {
   const now = Date.now();
   state.arrivals.forEach((until, sym) => { if (until <= now) state.arrivals.delete(sym); });
-  const keys = membership(frame);
   const fresh = [];
-  keys.forEach(k => {
-    const seen = SEEN_IN_GRID.get(k);
-    if (seen === undefined || now - seen > REENTRY_MS) fresh.push(k);
-    SEEN_IN_GRID.set(k, now);
+  membership(frame).forEach(e => {
+    const seen = SEEN_IN_GRID.get(e.k);
+    if (seen === undefined || now - seen > REENTRY_MS) fresh.push(e);
+    SEEN_IN_GRID.set(e.k, now);
   });
+  if (SEEN_IN_GRID.size > SEEN_CAP) {                       // one key per alert, so prune
+    const keep = Array.from(SEEN_IN_GRID.entries()).sort((a, b) => b[1] - a[1]).slice(0, SEEN_CAP / 2);
+    SEEN_IN_GRID.clear(); keep.forEach(([k, t]) => SEEN_IN_GRID.set(k, t));
+  }
   if (!AUDIO_SEEDED) { AUDIO_SEEDED = true; return []; }   // the first paint is not news
   if (!fresh.length) return [];
-  fresh.forEach(k => state.arrivals.set(k.split(":")[1], now + ARRIVAL_MS));
-  beep(fresh.some(k => k.startsWith("gainers:")) ? "high" : "medium");
-  const which = fresh.some(k => k.startsWith("gainers:")) ? "scan-pillars" : "scan-running";
-  const card = document.querySelector('[data-card="' + which + '"]');
-  if (card) { card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
-              setTimeout(() => card.classList.remove("flash"), 1700); }
+  fresh.forEach(e => state.arrivals.set(e.sym, now + ARRIVAL_MS));
+  // A name the scanner adds mid-session brings its whole morning of alerts
+  // with it. Those are history arriving late, not twenty events firing now,
+  // and they must not empty a magazine of beeps into the room.
+  const deskMs = deskNow();
+  const news = fresh.filter(e => e.at == null || deskMs - e.at <= ALERT_NEWS_MS);
+  if (news.length) {
+    beep(news.some(e => e.k.startsWith("gainers:")) ? "high" : "medium");
+    const which = news.some(e => e.k.startsWith("gainers:")) ? "scan-pillars"
+                : news[0].k.startsWith("hod_momentum:") ? "scan-hod" : "scan-running";
+    const card = document.querySelector('[data-card="' + which + '"]');
+    if (card) { card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+                setTimeout(() => card.classList.remove("flash"), 1700); }
+  }
   return fresh;
 }
 let BEEPS = 0;
@@ -1577,11 +1604,36 @@ if (typeof window !== "undefined") {
                                 ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
                                 last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });
 }
+/* Every browser starts a page's audio context SUSPENDED and only lets a user
+   gesture resume it. A desk left running all morning would therefore make no
+   sound at all until something was clicked, with nothing on screen saying so.
+   The first click or key anywhere on the page unlocks it, and the Alerts
+   button says which of the three states it is in. */
+let AUDIO_BLOCKED = false;
+function audioReady() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended" && audioCtx.resume) audioCtx.resume();
+    AUDIO_BLOCKED = audioCtx.state === "suspended";
+  } catch (e) { AUDIO_BLOCKED = true; }
+  paintSoundButton();
+  return !AUDIO_BLOCKED;
+}
+function paintSoundButton() {
+  const b = document.getElementById("btnSound"); if (!b) return;
+  b.setAttribute("aria-pressed", String(!!state.sound));
+  b.textContent = (!state.sound ? "🔇" : AUDIO_BLOCKED ? "🔕" : "🔔") + " Alerts";
+  b.title = !state.sound ? "Alert sounds are off (A)"
+          : AUDIO_BLOCKED ? "The browser is holding sound until you click the page once (A)"
+          : "A sound on every new alert: high for a name entering the pillars list, "
+            + "medium for a Running Up or High of Day leg (A)";
+  b.classList.toggle("blocked", !!state.sound && AUDIO_BLOCKED);
+}
 function beep(severity) {
   BEEPS++;
   if (!state.sound) return;
   try {
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (!audioReady()) return;
     const o = audioCtx.createOscillator(), g = audioCtx.createGain();
     const freq = severity === "critical" ? 340 : severity === "high" ? 660 : 520;
     o.frequency.value = freq; o.type = "sine";
@@ -2089,8 +2141,37 @@ function refreshSession() {
     else if (wasAtEdge) state.frame = FRAMES.length - 1;   // a seek back survives a rebuild
     else state.frame = Math.min(state.frame, FRAMES.length - 1);
     PENDING_RANGES = null;                             // chart objects persist; the panes keep their zoom
+    LAST_FULL_FETCH = Date.now();
     render();
   }).catch(() => {}).then(() => { refreshing = false; });
+}
+
+/* A scanner rebuild arrives as the newest minute rather than a whole session.
+   The full fetch stays as the reconciler: whenever the desk's symbol set
+   changes (a new name needs its bars, its reference and its float) and once a
+   minute regardless, so nothing can drift. Anything unexpected falls back to
+   the full fetch, which is the behaviour this replaced. */
+let LAST_FULL_FETCH = 0;
+const FULL_FETCH_EVERY_MS = 60000;
+function applySessionTick(p) {
+  if (!p || !p.frame || !FRAMES.length) return refreshSession();
+  if (p.tradingDate && p.tradingDate !== S.tradingDate) return refreshSession();
+  const here = Object.keys(SYMS).slice().sort().join(",");
+  const there = (p.symbols || []).slice().sort().join(",");
+  if (here !== there) return refreshSession();
+  if (Date.now() - LAST_FULL_FETCH > FULL_FETCH_EVERY_MS) return refreshSession();
+  const last = FRAMES[FRAMES.length - 1];
+  if (p.frame.ts > last.ts) FRAMES.push(p.frame);
+  else if (p.frame.ts === last.ts) FRAMES[FRAMES.length - 1] = p.frame;
+  else return;                                  // an older minute: nothing to show
+  if (p.metrics) Object.keys(p.metrics).forEach(sym => {
+    if (SYMS[sym]) SYMS[sym].metrics = p.metrics[sym];
+  });
+  S.builtAt = p.builtAt;
+  S.feedLagSeconds = p.feedLagSeconds;
+  S.sessionStart = p.sessionStart || S.sessionStart;
+  if (!state.parked) state.frame = FRAMES.length - 1;
+  render();
 }
 
 /* Streaming follow: candles, quotes, health and screener rows arrive over
@@ -2119,7 +2200,7 @@ function streamFollow() {
   }).on("health", setFeedBadge)
     .on("screener", renderScreener)
     .on("symbol-added", () => refreshSession())
-    .on("session", () => refreshSession())     // the server just rebuilt the scanners
+    .on("session", applySessionTick)           // the server just rebuilt the scanners
     .on("resync", () => refreshSession())
     .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
       $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
@@ -2377,8 +2458,11 @@ function init() {
     // Audio alerts are on by default on a live desk. Browsers only let a page
     // make sound after a gesture, so the first click or key unlocks it.
     state.sound = true;
-    $("#btnSound").setAttribute("aria-pressed", "true");
-    $("#btnSound").textContent = "🔔 Alerts";
+    paintSoundButton();
+    // One gesture anywhere unlocks the browser's audio; until then the button
+    // shows 🔕 rather than pretending the desk can be heard.
+    ["pointerdown", "keydown"].forEach(ev =>
+      window.addEventListener(ev, () => audioReady(), { once: true }));
     ["pointerdown", "keydown"].forEach(ev => document.addEventListener(ev, unlockAudio, { once: true }));
     $("#frameCounter").hidden = true;
     $("#feedText").textContent = "LIVE";
@@ -2435,9 +2519,8 @@ function init() {
   $("#legendClose").onclick = () => { $("#legend").hidden = true; };
   $("#btnSound").onclick = () => {
     state.sound = !state.sound;
-    $("#btnSound").setAttribute("aria-pressed", String(state.sound));
-    $("#btnSound").textContent = (state.sound ? "🔔" : "🔇") + " Alerts";
-    if (state.sound) beep("medium");
+    if (state.sound) { audioReady(); beep("medium"); }
+    paintSoundButton();
   };
   document.addEventListener("keydown", e => {
     if (e.target.matches("input,select,textarea")) return;

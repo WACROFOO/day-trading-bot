@@ -185,7 +185,13 @@ class FivePillarsList(Scanner):
             rows.append(
                 RankedRow(
                     symbol=snap.symbol,
-                    rank_metric=effective_rvol(snap) or 0.0,
+                    # Ranked by the move, not by relative volume: the list is
+                    # "top gainers", and an operator reads it top-down for the
+                    # biggest percentage on the day (premarket or regular —
+                    # both are the change from the previous close). RVOL stays
+                    # a gate and a column.
+                    rank_metric=snap.change_from_close_pct
+                    if snap.change_from_close_pct is not None else -1e9,
                     values=self._base_values(snap)
                     | {
                         "technical_score": technical,

@@ -62,8 +62,10 @@ ROW_COLUMNS = [
 ]
 
 LIST_META = {
-    "five_pillars_list": {"title": "Top gainers · 5 pillars", "metric": "Daily RVOL",
-                          "note": "Price, gain and RVOL pass. Float and news are columns, never gates."},
+    "five_pillars_list": {"title": "Top gainers · 5 pillars", "metric": "Change %",
+                          "note": "Price, gain and RVOL pass; ranked by change from the previous "
+                                  "close, premarket and regular alike. Float and news are columns, "
+                                  "never gates."},
     "top_gappers": {"title": "Top Gappers", "metric": "Gap %",
                     "note": "Freezes at 09:30 ET, matching the captured platform."},
     "top_gainers": {"title": "Top Gainers", "metric": "Change from close %",
