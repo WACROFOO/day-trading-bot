@@ -133,6 +133,7 @@ def build_session_from_records(
     max_rows: int = 10,
     data_status: str = "replay",
     volume_floor_scale: float = 1.0,
+    trading_date: str | None = None,
 ) -> dict:
     """Build the dashboard session.
 
@@ -368,7 +369,10 @@ def build_session_from_records(
             "halts": dict(halt_state),
         })
 
-    trading_date = (
+    # A live desk names the session day it is showing; the first frame's date
+    # is a replay convenience only. Derived from the frames, a desk holding
+    # last night's tape at 04:03 ET labelled itself with yesterday.
+    trading_date = trading_date or (
         frames[0]["ts"][:10] if frames else datetime.now(UTC).strftime("%Y-%m-%d")
     )
     return {

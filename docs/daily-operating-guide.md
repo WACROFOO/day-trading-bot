@@ -146,15 +146,21 @@ What the desk does in this mode:
 - Headlines still come from Alpaca's free news endpoint when your keys are in
   `.env`; float is still the SEC shares-outstanding upper bound. IBKR has
   neither for free.
-- The centre column is TradingView's own charts: 1 minute large on top,
-  5 minute beneath it, both with their toolbar, drawing tools, session VWAP
-  and EMA, following the selected symbol. They run on TradingView's data under
-  TradingView's rules — the "D" badge on the chart means delayed; logged out,
-  NASDAQ prints there can lag — so the desk's 10-second pane next to them,
-  which is IBKR data drawn in the same colours with the plan's entry, stop and
-  target, and every scanner number, stay on the entitled feed. The desk's own
-  1-minute and 5-minute panes are in the tray (⊞ Cards); drag one onto any
-  pane to swap.
+- The centre column is the desk's own charts on IBKR real-time data: 1 minute
+  large on top, 5 minute and 10 second side by side beneath it. Extended hours
+  are shaded on every pane; the 1- and 5-minute panes draw VWAP and the 9, 20
+  and 200 EMAs by default, with the plan's entry, stop and target. TradingView's
+  embedded charts are in the tray (⊞ Cards): to a viewer who is not signed in
+  to tradingview.com they show US stocks 15 minutes delayed (their "D" badge),
+  and nothing on this side changes that. Sign in to tradingview.com in the same
+  browser and drag the card onto a pane if you want their toolbar; the desk's
+  numbers stay on the IBKR feed either way.
+- The desk shows one trading day: from 04:00 ET to now. At startup it asks
+  IBKR for the minutes since 04:00 rather than "one day", which at 04:03 hands
+  back the previous session; a desk left running rolls over at 04:00 ET, drops
+  yesterday's tape, re-reads the previous close, and the page clears its alert
+  timeline and arrival memory. Before 04:00 ET the desk shows the last
+  completed session and dates itself accordingly.
 - The bottom strip is the Five Pillars board: every name on the desk against
   price, gain, daily RVOL, float and news, with the value and PASS, FAIL or
   UNKNOWN in each cell and a score out of five, best first. The list card at
@@ -187,8 +193,12 @@ What the desk does in this mode:
   VWAP, 5-minute volume above the floor, one alert per leg. Approximation.
 - The header clock is the real ET clock, and the chip beside it says how far
   behind the desk's own data is: `live` under 90 seconds, then the age in
-  amber, then red. A green feed badge means the CONNECTION is alive; the lag
-  chip is what tells you the numbers under it are still moving.
+  amber, then red; `no prints yet` when nothing has traded since 04:00 ET. A
+  green feed badge means the CONNECTION is alive; the lag chip is what tells
+  you the numbers under it are still moving.
+- The alert grids read Time, then the move (`PM %` before 09:30, `Day %`
+  after, both against the previous close), then Symbol, Price and the
+  strategy label. Hover the time for the age.
 - Minute history is re-pulled one symbol at a time every 20 seconds, so the
   session keeps advancing even on a name that prints no trades for an hour.
   One symbol per cycle keeps the desk inside IBKR's historical-request pacing

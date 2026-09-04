@@ -118,7 +118,7 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .tile-cols.alert-cols{grid-template-columns:var(--alert-cols)}
 /* One definition for the header and the rows. They were two independent grids
    whose last track was `auto`, so the columns drifted apart every rebuild. */
-:root{--alert-cols:32px 26px minmax(0,1.6fr) minmax(0,.62fr) minmax(0,.6fr) 50px}
+:root{--alert-cols:34px minmax(0,.66fr) minmax(0,1.6fr) minmax(0,.66fr) 50px}
 .tile-cols span:not(:first-child),.trow > span:not(:first-child),.trow > b{text-align:right}
 .tile-cols.alert-cols span:nth-child(1),.tile-cols.alert-cols span:nth-child(3),
 .alert-row > .tl-time,.alert-row > .tsym{text-align:left}

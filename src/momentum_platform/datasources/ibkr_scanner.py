@@ -305,18 +305,47 @@ def reference_record(symbol: str, bars: List[dict], ticker=None, exchange: Optio
     }
 
 
-def minute_records(ib, contract, symbol: str, duration: str = "1 D") -> List[dict]:
+def session_start(now: Optional[datetime] = None) -> datetime:
+    """04:00 ET of the trading day the desk should show, as a UTC datetime.
+
+    Before 04:00 ET the day rolls back to the last weekday (see
+    `session_day`), so a pre-dawn desk shows the last completed session and
+    says so; from 04:00 the window is today's, however few prints it holds."""
+    from .alpaca_source import session_day
+    day = session_day(now)
+    return day.replace(hour=4, minute=0, second=0, microsecond=0).astimezone(UTC)
+
+
+def session_duration(now: Optional[datetime] = None) -> str:
+    """The IBKR duration string that reaches back to the session start.
+
+    IBKR takes second-based durations up to one day; a longer reach (a weekend
+    desk looking at Friday) is asked for in days and cut to the window after."""
+    now = now or datetime.now(UTC)
+    secs = int((now - session_start(now)).total_seconds())
+    if secs <= 86400:
+        return f"{max(secs, 60)} S"
+    return f"{-(-secs // 86400)} D"
+
+
+def minute_records(ib, contract, symbol: str, duration: str = "1 D",
+                   start: Optional[datetime] = None) -> List[dict]:
     """One-minute bars, extended hours included, as bar records.
 
-    `duration` is the IBKR window: "1 D" for the session at startup, a short
-    window such as "900 S" for the rolling refresh that keeps the desk's newest
-    minute current without spending the historical-request budget."""
+    `duration` is the IBKR window: the seconds since 04:00 ET at startup, a
+    short window such as "900 S" for the rolling refresh that keeps the desk's
+    newest minute current without spending the historical-request budget.
+    Bars before `start` are dropped: IBKR's "1 D" at 04:03 ET hands back the
+    previous session, and a desk built from it showed yesterday's tape as
+    "19 h behind" instead of today's first prints."""
     hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2)
     out = []
     for b in hist or []:
         ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))
         if ts.tzinfo is None:
             ts = ts.replace(tzinfo=UTC)
+        if start is not None and ts < start:
+            continue
         close = _num(b.close)
         if not close or close <= 0:
             continue

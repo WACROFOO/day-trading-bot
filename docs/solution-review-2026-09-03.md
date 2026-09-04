@@ -105,11 +105,12 @@ regular 09:30–16:00, AH after hours 16:00–20:00. Hover any pill for the
 definition.
 
 ### Centre
-- **TradingView · 1 minute** (large) and **TradingView · 5 minute** — their
-  toolbar, drawing tools, session VWAP and EMA, interval buttons. Their data:
-  a **D** badge means TradingView is serving delayed data to a logged-out
-  viewer. These panes are for reading structure the way the course does; the
-  desk's numbers come from IBKR.
+- **1 minute · execution** (large) and **5 minute · structure** — the desk's
+  own panes on IBKR real-time data: extended hours shaded, VWAP and the 9, 20
+  and 200 EMAs, the plan's entry, stop and target. (Update 2026-09-04: these
+  replaced the TradingView embeds as the default stack. The embeds are in the
+  tray; to a viewer not signed in to tradingview.com they run 15 minutes
+  behind, which their **D** badge states.)
 - **10 second · micro** — IBKR data. Shows the last 30 minutes; entry, stop,
   target and HOD lines; extended hours shaded; a note when the tape is thin.
 - **Five Pillars · every name on the desk** — one row per symbol: last, volume

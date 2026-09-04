@@ -309,29 +309,45 @@ def test_ui_row_click_links_everything(page):
     assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_chart_stack_is_tradingview_1m_over_tradingview_5m_and_10s(page):
-    """The requested stack: TradingView's 1-minute chart large on top, their
-    5-minute chart and the desk's 10-second pane side by side beneath it, the
-    Five Pillars board across the bottom. The desk's own 1m and 5m panes and
-    the alert timeline wait in the tray."""
+def test_ui_chart_stack_is_the_desks_1m_over_5m_and_10s(page):
+    """The stack: the desk's own 1-minute pane large on top (IBKR real-time,
+    extended hours, VWAP and the 9/20/200 EMAs), its 5-minute and 10-second
+    panes side by side beneath it, the Five Pillars board across the bottom.
+    TradingView's embeds and the alert timeline wait in the tray: to a viewer
+    not signed in to tradingview.com they run fifteen minutes behind."""
     _seek(page, 124)
-    big = page.locator("[data-card=tv-widget]").bounding_box()
-    five = page.locator("[data-card=tv-widget-5m]").bounding_box()
+    big = page.locator("[data-card=chart-1m]").bounding_box()
+    five = page.locator("[data-card=chart-5m]").bounding_box()
     ten = page.locator("[data-card=chart-10s]").bounding_box()
     board = page.locator("[data-card=pillars-board]").bounding_box()
-    assert big["height"] > five["height"]                 # TradingView 1m is the big one
+    assert big["height"] > five["height"]                 # 1m is the big one
     assert big["width"] > five["width"] * 1.5             # and spans the pair
     assert abs(five["y"] - ten["y"]) < 4                  # 5m and 10s share a row
     assert ten["x"] > five["x"] + five["width"] - 4       # side by side
-    assert five["y"] > big["y"] + big["height"] - 4       # below the widget
+    assert five["y"] > big["y"] + big["height"] - 4       # below the 1m pane
     assert board["y"] > ten["y"] + ten["height"] - 4      # the board is the bottom strip
-    for parked in ("chart-1m", "chart-5m", "timeline"):
+    for parked in ("tv-widget", "tv-widget-5m", "timeline"):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
     host = page.locator("[data-card=chart-10s] .chart-host").bounding_box()
     inner = page.locator("[data-card=chart-10s] .chart-host canvas").first.bounding_box()
     assert inner and abs(inner["width"] - host["width"]) < 4
+    # the 200 EMA is drawn on the 1m and 5m panes, and named in their legends
+    for card in ("chart-1m", "chart-5m"):
+        assert "200" in page.locator(f"[data-card={card}] .legend").inner_text()
     assert page.eval_on_selector("#tvWidget", "e => e.dataset.interval") == "1"
     assert page.eval_on_selector("#tvWidget5", "e => e.dataset.interval") == "5"
+
+
+def test_ui_alert_grids_show_time_then_the_move(page):
+    """Time, then the move as PM % before the open or Day % after it, then the
+    symbol, the price and the strategy label. Age moved to the time's tooltip."""
+    _seek(page, 150)
+    heads = [h.upper() for h in page.locator("[data-card=scan-running] .tile-cols.alert-cols span").all_inner_texts()]
+    assert heads[0] == "TIME" and heads[1] in ("PM %", "DAY %")
+    assert heads[2:] == ["SYMBOL", "PRICE", "STRATEGY"]
+    row = page.locator("[data-card=scan-running] .alert-row").first
+    assert "ago" in row.locator(".tl-time").get_attribute("title")
+    assert row.locator("span").nth(1).inner_text().endswith("%")
 
 
 def test_ui_ten_second_chart_has_finer_bars_than_one_minute(page):
@@ -393,7 +409,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=screener]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v5'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v6'))")
     assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -437,7 +453,7 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert sorted(items) == ["chart-1m", "chart-5m", "chart-daily", "level2", "timeline"]
+    assert sorted(items) == ["chart-daily", "level2", "timeline", "tv-widget", "tv-widget-5m"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -494,7 +510,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=screener]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v5'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v6'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -581,12 +597,12 @@ def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it in the bottom
     strip (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v5') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v6') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'quote',
-        C1: 'tv-widget', C2: 'tv-widget-5m', C3: 'chart-10s', C4: 'timeline', R1: 'screener', R2: 'verdict' });
+        C1: 'chart-1m', C2: 'chart-5m', C3: 'chart-10s', C4: 'timeline', R1: 'screener', R2: 'verdict' });
       saved.layout.C4 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v5', JSON.stringify(saved));
+      localStorage.setItem('momentum-workstation.layout.v6', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)

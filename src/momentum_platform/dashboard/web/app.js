@@ -655,6 +655,9 @@ const SESSION_HELP = {
   RTH: "RTH — regular trading hours, 09:30–16:00 ET. The session the course strategy is built for.",
   AH: "AH — after hours, 16:00–20:00 ET. Thin tape; news reactions and unwinds.",
 };
+function pctHeader() {
+  return sessionOf(new Date(deskNow()).toISOString()) === "PM" ? "PM %" : "Day %";
+}
 function sessionOf(iso) {
   const hhmm = new Date(iso).toLocaleTimeString("en-US",
     { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
@@ -694,15 +697,23 @@ function fillAlertCard(card, cfg, idx) {
   note.title = cfg.note;
   card.appendChild(note);
   const cols = el("div", "tile-cols alert-cols");
-  ["Time", "Age", "Symbol", "Price", "Chg", ""].forEach(c => cols.appendChild(el("span", null, c)));
+  // Time, then the move: "PM %" before the open, "Day %" after it. Both are
+  // the change from the previous close; only the name of the session differs.
+  const pctHead = el("span", null, pctHeader());
+  pctHead.title = "change from the previous close, measured " + (pctHeader() === "PM %" ? "in premarket" : "during the session");
+  cols.appendChild(el("span", null, "Time"));
+  cols.appendChild(pctHead);
+  ["Symbol", "Price", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
   card.appendChild(cols);
   const body = el("div", "tile-rows timeline");
   if (!all.length) body.appendChild(el("div", "empty", "No events yet."));
   all.forEach(a => {
     const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
       (state.arrivals.has(a.symbol) ? " fresh" : ""));
-    tr.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
-    tr.appendChild(el("span", "tl-age", fmtAge(deskNow() - a._at)));
+    const when = el("span", "tl-time", etTime(a.sourceTime));
+    when.title = fmtAge(deskNow() - a._at) + " ago";
+    tr.appendChild(when);
+    tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
     const mid = el("span", "tsym");
     mid.appendChild(el("b", null, a.symbol));
     // The alert carries the flame observed AT the alert, which is the honest
@@ -715,7 +726,6 @@ function fillAlertCard(card, cfg, idx) {
     mid.appendChild(sesEl);
     tr.appendChild(mid);
     tr.appendChild(el("span", null, fx(a.values && a.values.last)));
-    tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
     const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
     br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " (a label, not the filter)";
     tr.appendChild(br);
@@ -1304,8 +1314,8 @@ function renderCharts(frame) {
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
   const plan = activePlan(sym, frame.t);
   const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
-  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, tf: "1m" }, common));
-  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, tf: "5m" }, common));
+  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m" }, common));
+  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "5m" }, common));
   const sub = bars10sUpTo(sym, frame);
   if (sub.length) {
     PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
@@ -1391,7 +1401,10 @@ function noteArrivals(frame) {
   return fresh;
 }
 let BEEPS = 0;
-if (typeof window !== "undefined") window.__deskBeeps = () => BEEPS;   // audio test hook
+if (typeof window !== "undefined") {
+  window.__deskBeeps = () => BEEPS;   // audio test hook
+  window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });   // rollover test hook
+}
 function beep(severity) {
   BEEPS++;
   if (!state.sound) return;
@@ -1412,23 +1425,24 @@ function beep(severity) {
    per browser so the desk comes back the way it was left. */
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
-  // TradingView's own chart — their toolbar, drawing tools and indicators —
-  // is the big pane. The desk's 1-minute and 10-second panes (IBKR data, the
-  // plan's entry/stop/target drawn on them) sit under it; 5-minute waits in
-  // the tray, one drag away, and the widget switches interval with a click.
-  C1: "tv-widget", C2: "tv-widget-5m", C3: "chart-10s", C4: "pillars-board",
+  // The desk's own panes are the chart stack: IBKR real-time bars, extended
+  // hours shaded, VWAP and the 9/20/200 EMAs drawn, the plan's entry, stop and
+  // target on them. TradingView's embeds wait in the tray: to a viewer not
+  // signed in to tradingview.com they run fifteen minutes behind (their "D"
+  // badge), and nothing on this side can change that.
+  C1: "chart-1m", C2: "chart-5m", C3: "chart-10s", C4: "pillars-board",
   // The screener takes the tall right slot: it is real data about the whole
   // band, refreshed on a timer. Level 2 is simulated and waits in the tray.
   R1: "screener", R2: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["chart-1m", "chart-5m", "chart-daily", "level2", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["tv-widget", "tv-widget-5m", "chart-daily", "level2", "timeline"]);
 const DEFAULT_SIZES = {
   wLeft: 336, wRight: 352,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.7, PAIR: 1.15, C2: 1, C3: 1,
            C4: 0.42, R1: 1.62, R2: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v5";
+const LAYOUT_KEY = "momentum-workstation.layout.v6";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1748,7 +1762,15 @@ function renderLag(frame) {
   }
   const lastMs = frame ? frame.t * 1000 : 0;
   const lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
-  if (lag == null) { host.hidden = true; return; }
+  if (lag == null) {
+    // A live desk with no frame has had no print this session; that is a
+    // state to name, not a lag to measure.
+    host.hidden = !S.streaming;
+    host.textContent = "no prints yet";
+    host.className = "lag warn";
+    host.title = "no bar since the session start (04:00 ET)" + (S.sessionStart ? " · " + etClock(S.sessionStart) + " ET" : "");
+    return;
+  }
   host.hidden = false;
   host.textContent = lag < 90 ? "live" : fmtAge(lag * 1000) + " behind";
   host.className = "lag" + (lag < 90 ? " ok" : lag < 600 ? " warn" : " bad");
@@ -1782,6 +1804,19 @@ function upsertBar(arr, bar) {
    and reappear, which is what made the print row flicker. A field the rebuild
    does not carry keeps the value the stream last wrote. */
 const STREAM_FIELDS = ["iexLast", "iexLastTime", "iexBid", "iexAsk"];
+/* 04:00 ET: the desk rolled to a new session. Yesterday's alerts are not
+   today's timeline, and a name that was in a grid last night arriving again
+   this morning is an arrival, with its sound. */
+function newTradingDay(date) {
+  S.tradingDate = date;
+  ALERT_LOG.length = 0;
+  ALERT_KEYS.clear();
+  SEEN_IN_GRID.clear();
+  state.arrivals.clear();
+  const label = $("#sessionLabel");
+  if (label) label.textContent = label.textContent.replace(/^\d{4}-\d{2}-\d{2}/, date);
+}
+
 function mergeSymbols(next) {
   Object.keys(SYMS).forEach(k => { if (!next[k]) delete SYMS[k]; });
   Object.keys(next).forEach(k => {
@@ -1811,6 +1846,8 @@ function refreshSession() {
     Object.keys(S.bars10s).forEach(k => delete S.bars10s[k]); Object.assign(S.bars10s, next.bars10s || {});
     mergeSymbols(next.symbols || {});
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
+    S.sessionStart = next.sessionStart || S.sessionStart;
+    if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
     OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
     // A locked symbol is the trader's choice; missing one rebuild does not
     // revoke it. Only an unlocked selection that has genuinely left the desk
@@ -2001,7 +2038,8 @@ function pollScreener() {
 function render() {
   if (!FRAMES.length) {
     $("#clockET").textContent = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
-    $("#frameCounter").textContent = "waiting for the first bar";
+    $("#frameCounter").textContent = "waiting for the first print of " + S.tradingDate;
+    renderLag(null);
     return;
   }
   state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);

@@ -110,7 +110,7 @@ expand button) and a body.
 | `scan-hod` | Same timeline shape | |
 | `quote` | Two-column key/value grid, then the catalyst block | Flame chip, grade chip, headline, 24h age bar, read-out |
 | `chart-1m` `chart-5m` `chart-10s` `chart-daily` | Lightweight Charts panes | Candles, volume, VWAP/EMA lines, entry/stop/target price lines, session shading |
-| `tv-widget` `tv-widget-5m` | TradingView's embedded chart | Their data, their chrome; carries a delayed badge |
+| `tv-widget` `tv-widget-5m` | TradingView's embedded chart (tray by default) | Their data, their chrome; 15 minutes delayed unless the viewer is signed in to tradingview.com |
 | `pillars-board` | 13-column table, one row per desk name | Currently 1100px min-width in the shortest slot |
 | `screener` | Ranked table: symbol, price, change, source, age | The whole price band |
 | `level2` | Simulated ladder + tape | Labelled SIMULATED |

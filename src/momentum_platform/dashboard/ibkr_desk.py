@@ -32,8 +32,10 @@ from concurrent.futures import Future
 from datetime import datetime, timezone
 from typing import Callable, Dict, List, Optional
 
+from ..datasources.alpaca_source import session_day
 from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
                                         is_common_stock, minute_records, news_records, reference_record,
+                                        session_duration, session_start,
                                         sec_profile, stock_type_of, store_records)
 from ..datasources.ibkr_stream import IbkrStream
 from .session_builder import build_session_from_records
@@ -104,6 +106,8 @@ class IbkrDesk:
         self._screener: dict = {"rows": [], "source": "ibkr", "asof": None,
                                 "notes": ["scanner has not run yet"]}
         self._reference: Dict[str, dict] = {}
+        self._reference_day: Dict[str, str] = {}      # session day each reference was built for
+        self._float_inputs: Dict[str, tuple] = {}     # (sec profile, ibkr float) kept for the rollover
         self._minutes: Dict[str, List[dict]] = {}
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
@@ -267,18 +271,17 @@ class IbkrDesk:
             except Exception as exc:
                 self.log(f"  {sym}: daily history failed: {exc}")
                 bars = []
+            now = self.clock()
             try:
-                self._minutes[sym] = minute_records(self.stream.ib, c, sym)
+                self._minutes[sym] = minute_records(self.stream.ib, c, sym,
+                                                    duration=session_duration(now),
+                                                    start=session_start(now))
             except Exception as exc:
                 self.log(f"  {sym}: minute history failed: {exc}")
                 self._minutes[sym] = []
             sec = sec_profile(sym) if self.sec else {}
             fl = float_from_ibkr(self.stream.ib, c) if self.fundamentals is not False else {}
-            self._reference[sym] = reference_record(
-                sym, bars, ticker=self.stream._tickers.get(sym),
-                exchange=getattr(c, "primaryExchange", None) or "NASDAQ",
-                name=getattr(c, "longName", None) or None, sec=sec, clock=self.clock,
-                ibkr_float=fl)
+            self._set_reference(sym, c, bars, sec=sec, ibkr_float=fl)
             r = self._reference[sym]
             self.log(f"  {sym}: float {r['float_quality']}"
                      + (f" {r['float_shares'] / 1e6:.1f}M ({r['float_source']})" if r["float_shares"] else ""))
@@ -289,6 +292,48 @@ class IbkrDesk:
                 self._news += [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
             self._news_note = note
         return added
+
+    def _set_reference(self, sym: str, c, bars: List[dict], sec: Optional[dict] = None,
+                       ibkr_float: Optional[dict] = None) -> None:
+        day = self.session_day()
+        if sec is None and ibkr_float is None:
+            sec, ibkr_float = self._float_inputs.get(sym, ({}, {}))
+        self._float_inputs[sym] = (sec or {}, ibkr_float or {})
+        self._reference[sym] = reference_record(
+            sym, bars, ticker=self.stream._tickers.get(sym),
+            exchange=getattr(c, "primaryExchange", None) or "NASDAQ",
+            name=getattr(c, "longName", None) or None, sec=sec or {}, today=day,
+            clock=self.clock, ibkr_float=ibkr_float or {})
+        self._reference_day[sym] = day
+
+    def session_day(self) -> str:
+        """The trading day the desk shows (ISO date), by the 04:00 ET rule."""
+        return session_day(self.clock()).date().isoformat()
+
+    def roll_reference(self) -> Optional[str]:
+        """After the 04:00 ET rollover, re-pull ONE stale reference per rebuild.
+
+        Previous close and average volume are read from the daily bars at
+        subscribe time; a desk left running overnight would carry the old
+        day's close into the new session, so every gain and RVOL on the desk
+        would be measured against the wrong base. One symbol per call keeps
+        the historical-request rate inside IBKR's pacing limit."""
+        day = self.session_day()
+        for sym in list(self.symbols):
+            if self._reference_day.get(sym) == day:
+                continue
+            c = self._contracts_for(sym)
+            if c is None:
+                continue
+            try:
+                bars = daily_bars(self.stream.ib, c)
+            except Exception as exc:
+                self.log(f"  {sym}: daily history refresh failed: {exc}")
+                bars = self._reference.get(sym, {}).get("daily_bars", [])
+            self._set_reference(sym, c, bars)
+            self.log(f"  {sym}: reference rolled to session {day}")
+            return sym
+        return None
 
     # -- scheduled work -------------------------------------------------------------
 
@@ -322,7 +367,8 @@ class IbkrDesk:
         if c is None:
             return None
         try:
-            fresh = minute_records(self.stream.ib, c, sym, duration="900 S")
+            fresh = minute_records(self.stream.ib, c, sym, duration="900 S",
+                                   start=session_start(self.clock()))
         except Exception as exc:
             self.log(f"  {sym}: minute refresh failed: {exc}")
             return None
@@ -350,7 +396,17 @@ class IbkrDesk:
         live store does not cover) + complete ten-second candles."""
         s = self.stream
         records: List[dict] = []
+        now = self.clock()
+        start = session_start(now)
+        start_iso = start.isoformat(timespec="seconds").replace("+00:00", "Z")
+        self.roll_reference()
         for sym in self.symbols:
+            # Only this session's tape. The store and the minute cache keep
+            # what they were given; at the 04:00 ET rollover yesterday's bars
+            # would otherwise stay on the desk as today's frames.
+            mins = [m for m in self._minutes.get(sym, []) if m["ts"] >= start_iso]
+            if len(mins) != len(self._minutes.get(sym, [])):
+                self._minutes[sym] = mins
             ref = dict(self._reference.get(sym) or {"type": "reference", "symbol": sym})
             t = s._tickers.get(sym)
             if t is not None:
@@ -367,9 +423,9 @@ class IbkrDesk:
                     ref["iex_bid"] = _num(getattr(t, "bid", None))
                     ref["iex_ask"] = _num(getattr(t, "ask", None))
             records.append(ref)
-            tens = store_records(s.store, sym)
+            tens = [r for r in store_records(s.store, sym) if r["ts"] >= start_iso]
             covered = {r["ts"][:17] + "00Z" for r in tens}
-            records += [m for m in self._minutes.get(sym, []) if m["ts"][:17] + "00Z" not in covered]
+            records += [m for m in mins if m["ts"][:17] + "00Z" not in covered]
             records += tens
         records += self._news
         h = s.health
@@ -377,7 +433,7 @@ class IbkrDesk:
         session = build_session_from_records(
             records, session_id="ibkr-" + "-".join(self.symbols[:3]),
             source_name="IBKR · TWS read-only · live", data_status=status,
-            volume_floor_scale=1.0)
+            volume_floor_scale=1.0, trading_date=self.session_day())
         session["live"] = True
         session["streaming"] = True
         session["refreshSeconds"] = self.rebuild
@@ -387,13 +443,17 @@ class IbkrDesk:
         # What the desk actually has, and when it was asked. The page shows the
         # gap: a green badge over a session that stopped advancing hours ago is
         # exactly the "stale but green" this design forbids.
-        now = self.clock()
         session["asOf"] = now.isoformat(timespec="seconds")
+        session["sessionStart"] = start_iso
         through = self.data_through(session)
         session["dataThrough"] = through
         if through:
             last = datetime.fromisoformat(through.replace("Z", "+00:00"))
             session["dataLagSeconds"] = max(0, int((now - last).total_seconds()))
+        else:
+            # No print yet this session: not "behind", there is nothing to be
+            # behind. The page says "no prints yet" rather than a lag.
+            session["dataLagSeconds"] = None
         session["provider"]["dataThrough"] = through
         session["provider"]["dataLagSeconds"] = session.get("dataLagSeconds")
         if self._news_note:

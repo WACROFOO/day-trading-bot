@@ -116,7 +116,7 @@
       <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
         <span class="card-title">1 minute · execution</span>
         <span class="chart-role">entry · structural stop · trigger</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k hod"></i>HOD</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD</span>
         <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
       <div class="chart-host" id="chartA"></div>
     </article>
@@ -124,7 +124,7 @@
     <article class="card chart-card" data-card="chart-5m">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">5 minute · structure</span>
-        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
         <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
       <div class="chart-host" id="chartB"></div>
     </article>
@@ -148,7 +148,7 @@
     <article class="card chart-card" data-card="tv-widget">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 1 minute</span>
-        <span class="legend tiny">TradingView data &amp; terms · not this desk's feed</span>
+        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
         <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget" data-interval="1" data-range="1D">
         <div class="chart-note">Drag onto the grid to load it.</div>
@@ -157,7 +157,7 @@
     <article class="card chart-card" data-card="tv-widget-5m">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 5 minute</span>
-        <span class="legend tiny">TradingView data &amp; terms · structure</span>
+        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
         <button class="icon-btn expand" title="Expand (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget5" data-interval="5" data-range="5D">
         <div class="chart-note">Drag onto the grid to load it.</div>
@@ -240,7 +240,7 @@
       <div><h4>Setup verdict</h4>
         <p><b>GO</b> every pillar and a live momentum event agree and a plan is armed. <b>WAIT</b> one or two conditions short — watch, do not enter. <b>PASS</b> reject: three or more short. <b>Entry / Stop / Target</b> come from the first pullback: entry over the trigger, stop under the pullback low, target at 2R. Sizing uses only the dollar risk you type; the app never assumes one.</p></div>
       <div><h4>Charts</h4>
-        <p><b>TradingView panes</b> run on TradingView's data under their rules (a <b>D</b> badge there means delayed to a logged-out viewer). <b>10-second pane</b> is IBKR data; a candle exists only when both 5-second halves arrived; empty buckets stay empty. Shaded areas are extended hours; 09:30 and 16:00 are marked.</p></div>
+        <p><b>1-minute, 5-minute and 10-second panes</b> are IBKR real-time data with extended hours shaded, VWAP and the 9, 20 and 200 EMAs drawn; a 10-second candle exists only when both 5-second halves arrived, and empty buckets stay empty. <b>TradingView panes</b> (in the tray) run on TradingView's data under their rules: US stocks are 15 minutes delayed to a viewer not signed in to tradingview.com (their <b>D</b> badge); sign in there in this browser for their real-time feed. 09:30 and 16:00 are marked on every pane.</p></div>
     </div>
     <p class="tiny muted">Clean-room approximations of the course scanners, for simulation and study. Nothing on this desk can place an order.</p>
   </div>

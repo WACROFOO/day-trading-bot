@@ -320,3 +320,91 @@ def test_history_refresh_asks_for_a_short_window(monkeypatch):
     desk.refresh_history()
     mins = [c for c in ib.hist_calls if c[2] == "1 min"]
     assert mins and mins[0][1] == "900 S", "a rolling refresh, not the whole day again"
+
+
+# -- today's session only ---------------------------------------------------------
+
+def test_session_window_reaches_back_to_four_am_et():
+    """At 04:03 ET the desk asks IBKR for the 183 seconds since 04:00, not "1 D",
+    which at that hour hands back the previous session."""
+    at_0403 = datetime(2026, 9, 4, 8, 3, tzinfo=UTC)
+    assert sc.session_start(at_0403) == datetime(2026, 9, 4, 8, 0, tzinfo=UTC)
+    assert sc.session_duration(at_0403) == "180 S"
+    # before 04:00 ET the window is the last completed session (yesterday's)
+    at_0330 = datetime(2026, 9, 4, 7, 30, tzinfo=UTC)
+    assert sc.session_start(at_0330) == datetime(2026, 9, 3, 8, 0, tzinfo=UTC)
+    # a Saturday desk reaches back to Friday's 04:00 ET, asked for in days
+    saturday = datetime(2026, 9, 5, 14, 0, tzinfo=UTC)
+    assert sc.session_start(saturday) == datetime(2026, 9, 4, 8, 0, tzinfo=UTC)
+    assert sc.session_duration(saturday) == "2 D"
+
+
+def test_minute_history_drops_bars_before_the_session_start():
+    yesterday = datetime(2026, 9, 3, 20, 0, tzinfo=UTC)
+    today = datetime(2026, 9, 4, 8, 0, tzinfo=UTC)
+    ib = FakeIB(minutes={"AAA": minute_bars(yesterday, 5, 4.0) + minute_bars(today, 3, 4.5)})
+    c = type("C", (), {"symbol": "AAA"})()
+    recs = sc.minute_records(ib, c, "AAA", duration="180 S", start=today)
+    assert [r["ts"] for r in recs] == ["2026-09-04T08:00:00Z", "2026-09-04T08:01:00Z", "2026-09-04T08:02:00Z"]
+
+
+def test_a_predawn_desk_shows_today_not_yesterdays_tape():
+    """04:03 ET on the 4th: IBKR's history still carries the 3rd. The session
+    must be dated the 4th, carry only the 4th's minutes, and measure its lag
+    from them — the desk read "2026-09-03 · 19 h behind" at that hour."""
+    at_0403 = datetime(2026, 9, 4, 8, 3, tzinfo=UTC)
+    yesterday = datetime(2026, 9, 3, 19, 30, tzinfo=UTC)
+    ib = FakeIB(daily={"AAA": day_bars(30, 4.0, today="2026-09-04")},
+                minutes={"AAA": minute_bars(yesterday, 30, 4.0) + minute_bars(at_0403 - timedelta(minutes=3), 3, 4.5)},
+                quotes={"AAA": FakeTicker(last=4.6, close=4.29)})
+    desk = IbkrDesk(["AAA"], ib_factory=lambda: ib, clock=Clock(at_0403), headlines=False, sec=False)
+    desk.log = lambda m: None
+    session = desk._bootstrap()
+    mins = [c for c in ib.hist_calls if c[2] == "1 min"]
+    assert mins[0][1] == "180 S"
+    assert session["tradingDate"] == "2026-09-04"
+    assert session["sessionStart"] == "2026-09-04T08:00:00Z"
+    assert all(f["ts"] >= "2026-09-04T08:00:00Z" for f in session["frames"])
+    assert session["frames"], "today's three minutes are the session"
+    assert session["dataLagSeconds"] < 300, "measured from today's newest minute, not yesterday's"
+    assert session["symbols"]["AAA"]["prevClose"] == day_bars(30, 4.0, today="2026-09-04")[-1][4]
+
+
+def test_no_prints_yet_is_not_a_lag():
+    at_0401 = datetime(2026, 9, 4, 8, 1, tzinfo=UTC)
+    yesterday = datetime(2026, 9, 3, 19, 30, tzinfo=UTC)
+    ib = FakeIB(daily={"AAA": day_bars(30, 4.0, today="2026-09-04")},
+                minutes={"AAA": minute_bars(yesterday, 30, 4.0)},
+                quotes={"AAA": FakeTicker(last=4.3, close=4.29)})
+    desk = IbkrDesk(["AAA"], ib_factory=lambda: ib, clock=Clock(at_0401), headlines=False, sec=False)
+    desk.log = lambda m: None
+    session = desk._bootstrap()
+    assert session["tradingDate"] == "2026-09-04"
+    assert session["frames"] == []
+    assert session["dataThrough"] is None and session["dataLagSeconds"] is None
+
+
+def test_the_desk_rolls_over_at_four_am_et():
+    """A desk left running overnight: at 04:00 ET the next day the old tape
+    leaves the session, the date advances, and the previous close is re-read
+    from a fresh daily history so gain and RVOL measure against last night's
+    close, not the day before's."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    assert desk.current()["tradingDate"] == "2026-09-03"
+    ib.daily["AAA"] = day_bars(31, 4.5, today="2026-09-04")
+    ib.daily["BBB"] = day_bars(31, 8.5, today="2026-09-04")
+    ib.hist_calls.clear()
+    clock.now = datetime(2026, 9, 4, 8, 5, tzinfo=UTC)
+    session = desk.refresh_session()
+    assert session["tradingDate"] == "2026-09-04"
+    assert session["frames"] == [], "yesterday's minutes left the desk at the rollover"
+    assert desk._minutes["AAA"] == []
+    days = [c for c in ib.hist_calls if c[2] == "1 day"]
+    assert len(days) == 1, "one reference per rebuild, inside the pacing limit"
+    session = desk.refresh_session()
+    assert len([c for c in ib.hist_calls if c[2] == "1 day"]) == 2
+    assert session["symbols"]["AAA"]["prevClose"] == day_bars(31, 4.5, today="2026-09-04")[-1][4]
+    assert session["symbols"]["BBB"]["prevClose"] == day_bars(31, 8.5, today="2026-09-04")[-1][4]
+    session = desk.refresh_session()
+    assert len([c for c in ib.hist_calls if c[2] == "1 day"]) == 2, "rolled once, not every rebuild"

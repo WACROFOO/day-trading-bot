@@ -212,3 +212,40 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert pg.get_attribute("#dataLag", "class").endswith("bad")
         assert not errors, errors
         browser.close()
+
+
+def test_page_rolls_to_the_new_trading_day(desk_server):
+    """04:00 ET: the desk's session is dated today, yesterday's tape is gone,
+    the lag chip says "no prints yet" instead of a 19-hour lag, and the
+    alert timeline and arrival memory start empty. The header read
+    "2026-09-03 · 19H BEHIND" at 04:03 on the 4th before this."""
+    pytest.importorskip("playwright.sync_api")
+    from datetime import datetime
+    from playwright.sync_api import sync_playwright
+    desk, ib, clock, port = (desk_server[k] for k in ("desk", "ib", "clock", "port"))
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        errors: list = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_timeout(800)
+        pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
+        assert pg.text_content("#sessionLabel").startswith("2026-09-03")
+        pg.evaluate("(() => { const m = window.__deskMemory(); m.log.push({symbol: 'AAA', _at: Date.now()}); m.keys.add('x'); m.seen.set('k', 1); })()")
+        try:
+            ib.daily["AAA"] = day_bars(31, 4.2, today="2026-09-04")
+            clock.now = datetime(2026, 9, 4, 8, 5, tzinfo=UTC)
+            desk.refresh_session()
+            pg.wait_for_function("document.querySelector('#sessionLabel').textContent.startsWith('2026-09-04')", timeout=5000)
+            mem = pg.evaluate("(() => { const m = window.__deskMemory(); return [m.log.length, m.keys.size, m.seen.size]; })()")
+            assert mem == [0, 0, 0], mem
+            assert pg.text_content("#dataLag") == "no prints yet"
+            assert "warn" in pg.get_attribute("#dataLag", "class")
+            assert pg.evaluate("window.__SESSION__.frames.length") == 0
+            assert not errors, errors
+        finally:
+            clock.now = T0
+            ib.daily["AAA"] = day_bars(30, 4.0)
+            desk.refresh_session()
+        browser.close()
