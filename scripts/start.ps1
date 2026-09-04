@@ -8,14 +8,22 @@
 
         powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr
         powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr -Symbols CHPT,AEHL
+        powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr -IbkrPort 7497
         powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Replay
+
+    -IbkrPort defaults to 7496, which is TWS's LIVE-account port. A paper
+    login listens on 7497; IB Gateway uses 4001 live and 4002 paper.
+    -IbkrHost defaults to this machine. Point it at another machine's TWS only
+    if that TWS lists this machine's address under Trusted IPs.
 #>
 [CmdletBinding()]
 param(
     [switch]$Ibkr,
     [switch]$Replay,
     [string]$Symbols = "",
-    [int]$Port = 0
+    [int]$Port = 0,
+    [int]$IbkrPort = 0,
+    [string]$IbkrHost = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -86,14 +94,26 @@ $banner = "recorded session (no network needed)"
 
 if ($Ibkr) {
     Head "checking TWS (Interactive Brokers)"
+    if ($IbkrPort -gt 0) { $env:IBKR_PORT = "$IbkrPort" }
+    if ($IbkrHost)       { $env:IBKR_HOST = $IbkrHost }
+    $twsHost = $env:IBKR_HOST; if (-not $twsHost) { $twsHost = "127.0.0.1" }
+    $twsPort = $env:IBKR_PORT; if (-not $twsPort) { $twsPort = "7496" }
+    Note "looking for TWS at ${twsHost}:${twsPort}"
     & $pyExe @pyArgs "scripts/ibkr_preflight.py"
     $code = $LASTEXITCODE
     switch ($code) {
         0 { Good "IBKR live data confirmed - read-only" }
         1 { Bad  "ib_async is missing"
             Note "run:  $pyExe @pyArgs -m pip install -r requirements.txt" }
-        2 { Bad  "TWS is not reachable"
-            Note "start TWS, enable the read-only API on port 7496, then run this again" }
+        2 { Bad  "nothing is listening on ${twsHost}:${twsPort}"
+            Note "1. TWS must be RUNNING and logged in on that machine"
+            Note "2. Edit > Global Configuration > API > Settings:"
+            Note "   Enable ActiveX and Socket Clients ON, Read-Only API ON"
+            Note "3. Check the port TWS actually shows in that dialog."
+            Note "   7496 is the LIVE port, 7497 is PAPER; IB Gateway uses 4001 / 4002."
+            Note "   Rerun with, for example:  -Ibkr -IbkrPort 7497"
+            Note "To see what is listening on this machine, run:"
+            Note "   netstat -ano | findstr LISTENING | findstr 749" }
         3 { Bad  "IBKR data is DELAYED"
             Note "the desk refuses delayed data; subscribe to NASDAQ real-time" }
         4 { Warn "no real-time bars arrived"
