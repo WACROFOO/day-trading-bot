@@ -1007,6 +1007,11 @@ def test_ui_an_empty_list_names_the_pillar_that_is_closing_it(page):
     """"An empty list is a real answer" is true and useless on its own. The
     card counts the desk and names the blocking pillar, so an operator can see
     that RVOL, not the market, is what emptied it."""
+    # Earlier tests in this module drag cards and persist the arrangement; the
+    # desk this one needs is the default one.
+    page.evaluate("() => localStorage.clear()")
+    page.reload()
+    page.wait_for_selector("[data-card=scan-pillars] .empty", timeout=15000)
     text = page.text_content("[data-card=scan-pillars] .empty")
     assert "names on the desk" in text
     assert "blocked by RVOL on" in text and "of 5× needed" in text
