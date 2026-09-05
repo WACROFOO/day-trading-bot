@@ -1,0 +1,33 @@
+{
+  "profileVersion": 1,
+  "_comment": [
+    "The shared trading rules. Every desk that loads this file scans the same",
+    "band, admits the same names and fires the same alerts, so two traders",
+    "running their own IBKR connection see the same screen.",
+    "",
+    "This file is committed. Secrets and machine-specific settings are NOT:",
+    "IBKR host and port, client ids, and API keys stay in each machine's .env.",
+    "",
+    "The Confirmed course pillars ($2-20, >=10%, RVOL >=5x, float <20M, news)",
+    "are NOT here. They live in code because they are Ross's analysis, not an",
+    "operator setting, and the desk fingerprint hashes them so an edit shows up."
+  ],
+  "desk": {
+    "priceMin": 1.0,
+    "priceMax": 30.0,
+    "minGainPct": 10.0,
+    "maxSymbols": 8,
+    "scanTop": 30
+  },
+  "cadence": {
+    "rebuildSeconds": 3,
+    "rescanSeconds": 120,
+    "historyEverySeconds": 20,
+    "volumeProfileDays": 10,
+    "barStallSeconds": 300
+  },
+  "liquidity": {
+    "minVolume5m": 25000,
+    "minPillars": 3
+  }
+}

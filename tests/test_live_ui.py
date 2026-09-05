@@ -234,6 +234,25 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
 
 
 @pytest.mark.skipif(not Path(CHROME).is_file(), reason="no chromium binary")
+def test_the_desk_shows_which_rules_it_is_running(desk_server):
+    """Two traders on their own IBKR connections compare one badge instead of
+    two screens: the hash covers the shared profile, any local override, the
+    Confirmed pillars and the scanner definitions."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        pg.goto(f"http://127.0.0.1:{desk_server['port']}/")
+        pg.wait_for_function("!document.getElementById('rulesBadge').hidden", timeout=10000)
+        assert pg.text_content("#rulesHash").strip()
+        title = pg.get_attribute("#rulesBadge", "title")
+        assert "Desk rules" in title and "liquidity" in title
+        assert "same scanners and the same alerts" in title
+        browser.close()
+
+
+@pytest.mark.skipif(not Path(CHROME).is_file(), reason="no chromium binary")
 def test_a_live_desk_can_be_parked_on_a_minute_and_says_so(desk_server):
     """Stepping back to an alert's minute is a deliberate act with a way home.
     Before this, clicking any alert row pinned every card to that minute for

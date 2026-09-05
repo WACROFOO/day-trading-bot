@@ -1528,12 +1528,7 @@ function toggleReasons(listId, symbol) {
 
 /* ── audio ──────────────────────────────────────────────────────────── */
 let audioCtx = null;
-function unlockAudio() {
-  try {
-    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === "suspended") audioCtx.resume();
-  } catch (e) {}
-}
+function unlockAudio() { audioReady(); }
 /* Audio fires on ARRIVALS, not on refreshes.
    The session is rebuilt every few seconds and every rebuild mints fresh event
    ids, so keying the alert sound on ids meant a beep every three seconds — a
@@ -2057,6 +2052,37 @@ let LAST_STREAM_AT = 0;
 
 /* Provider health -> the header badge. LIVE is the only green; STALE, DELAYED
    and OFFLINE are named as such, never dressed as live. */
+/* Two traders, two IBKR connections, one set of rules. The badge is the hash
+   of everything that decides what this desk admits and what it fires: the
+   shared profile, any local override, the Confirmed pillars and the scanner
+   definitions. Same hash on both screens means the same alerts from the same
+   data — and the tooltip names the entitlements, which are NOT hashed because
+   a desk without fundamentals or without news keys scores the float and news
+   pillars differently and so moves the three-of-five liquidity gate. */
+function setRulesBadge(desk) {
+  const box = document.getElementById("rulesBadge"); if (!box || !desk || !desk.hash) return;
+  box.hidden = false;
+  document.getElementById("rulesHash").textContent = String(desk.hash).slice(0, 8).toUpperCase();
+  const over = Object.keys(desk.envOverrides || {});
+  document.getElementById("rulesSub").textContent =
+    (desk.build ? desk.build + " · " : "") + (over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : "shared profile");
+  const ent = desk.entitlements || {};
+  const missing = Object.keys(ent).filter(k => ent[k] === false);
+  document.getElementById("rulesDot").className = "dot " + (over.length || missing.length ? "stale" : "live");
+  const r = desk.rules || {};
+  const line = sec => Object.keys(r[sec] || {}).sort().map(k => k + "=" + r[sec][k]).join("  ");
+  box.title = "Desk rules " + desk.hash
+    + "\ndesk       " + line("desk")
+    + "\ncadence    " + line("cadence")
+    + "\nliquidity  " + line("liquidity")
+    + (over.length ? "\nlocal overrides: " + over.join(", ") : "")
+    + (missing.length ? "\nnot available here: " + missing.join(", ")
+        + " — the float and news pillars score differently, which moves the 3-of-5 liquidity gate"
+      : "")
+    + "\n\nSame hash on your partner's desk means the same scanners and the same alerts."
+    + "\nCompare with: python3 scripts/desk_parity.py --compare <their hash>";
+}
+
 function setFeedBadge(h) {
   if (!h) return;
   const st = String(h.state || "OFFLINE").toUpperCase();
@@ -2209,6 +2235,7 @@ function streamFollow() {
   setInterval(() => {
     fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
       if (h.provider) setFeedBadge(h.provider);
+      if (h.desk) setRulesBadge(h.desk);
       if (h.builtAt && h.builtAt !== stamp) { stamp = h.builtAt; refreshSession(); }
     }).catch(() => {});
   }, 5000);
@@ -2229,6 +2256,7 @@ function liveFollow() {
   let stamp = S.builtAt;
   setInterval(() => {
     fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      if (h.desk) setRulesBadge(h.desk);
       if (!h.builtAt || h.builtAt === stamp) return;
       stamp = h.builtAt;
       try {
@@ -2450,6 +2478,10 @@ function init() {
     $("#sessionLabel").appendChild(warn);
   }
   $("#disclaimer").textContent = S.disclaimer;
+  // Which rules this desk is running, live or recorded. Two traders compare
+  // one badge instead of two screens.
+  fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json())
+    .then(h => { if (h.desk) setRulesBadge(h.desk); }).catch(() => {});
   if (S.live) {
     // A live desk has no replay transport: there is nothing to play back and
     // a scrub bar that jumped to the start on every refresh read as a bug.
@@ -2462,8 +2494,7 @@ function init() {
     // One gesture anywhere unlocks the browser's audio; until then the button
     // shows 🔕 rather than pretending the desk can be heard.
     ["pointerdown", "keydown"].forEach(ev =>
-      window.addEventListener(ev, () => audioReady(), { once: true }));
-    ["pointerdown", "keydown"].forEach(ev => document.addEventListener(ev, unlockAudio, { once: true }));
+      document.addEventListener(ev, unlockAudio, { once: true }));
     $("#frameCounter").hidden = true;
     $("#feedText").textContent = "LIVE";
     $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");

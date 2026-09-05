@@ -506,3 +506,62 @@ def test_the_rebuild_event_carries_the_new_minute_not_the_whole_session():
     assert ev.data["metrics"]["AAA"]["rvolMeasure"] in ("daily", "time_of_day")
     assert ev.data["tradingDate"] == session["tradingDate"]
     assert len(json.dumps(ev.data)) * 20 < len(json.dumps(session)), "an order of magnitude smaller"
+
+
+# -- two traders, one set of rules --------------------------------------------------
+
+def test_the_desk_reads_its_bands_and_cadence_from_the_shared_profile(tmp_path, monkeypatch):
+    """Two traders each on their own IBKR connection want the same scanners.
+    Everything that decides what a desk admits lives in one committed file."""
+    import json as _json
+
+    from momentum_platform import desk_profile
+
+    prof = tmp_path / "desk-profile.json"
+    prof.write_text(_json.dumps({
+        "profileVersion": 9,
+        "desk": {"priceMin": 3.0, "priceMax": 12.0, "minGainPct": 20.0, "maxSymbols": 4, "scanTop": 7},
+        "cadence": {"rebuildSeconds": 5, "rescanSeconds": 60, "historyEverySeconds": 15,
+                    "volumeProfileDays": 20, "barStallSeconds": 120},
+        "liquidity": {"minVolume5m": 9_000, "minPillars": 2},
+    }))
+    monkeypatch.setattr(desk_profile, "PROFILE_PATH", prof)
+    desk_profile.load(refresh=True)
+    try:
+        d, ib, clock = make_desk()
+        assert (d.min_price, d.max_price, d.min_gain) == (3.0, 12.0, 20.0)
+        assert d.max_symbols == 4 and d.top == 7
+        assert d.rebuild == 5 and d.rescan == 60
+        assert d.history_every == 15 and d.profile_days == 20 and d.bar_stall_seconds == 120
+    finally:
+        desk_profile.load(refresh=True)
+
+
+def test_the_fingerprint_changes_when_a_rule_changes_and_names_the_entitlements(monkeypatch):
+    from momentum_platform import desk_profile
+
+    base = desk_profile.fingerprint()
+    assert len(base["hash"]) == 12 and base["scanners"]["running_up"]
+    monkeypatch.setenv("DESK_PRICE_MIN", "4")
+    changed = desk_profile.fingerprint()
+    assert changed["hash"] != base["hash"], "a local override must not hide behind a matching hash"
+    assert changed["envOverrides"] == {"DESK_PRICE_MIN": 4.0}
+    monkeypatch.delenv("DESK_PRICE_MIN")
+    assert desk_profile.fingerprint()["hash"] == base["hash"]
+
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    fp = desk.fingerprint()
+    # Entitlements are reported, never hashed: they change what the pillars
+    # score, which moves the liquidity gate, and that has to be visible.
+    assert set(fp["entitlements"]) >= {"ibkrFundamentals", "headlines", "secFloat"}
+    assert fp["hash"] == base["hash"]
+
+
+def test_the_scan_ranks_ties_deterministically():
+    """Two desks scanning the same minute must order the same rows the same
+    way, or they hold different names and fire different alerts."""
+    ib = FakeIB(scans={"TOP_PERC_GAIN": ["BBB", "AAA", "CCC"]},
+                quotes={s: FakeTicker(last=4.4, close=4.0) for s in ("AAA", "BBB", "CCC")})
+    out = sc.build_ibkr_screener(ib, 1.0, 20.0, min_gain=5.0, clock=Clock())
+    assert [r["symbol"] for r in out["rows"]] == ["AAA", "BBB", "CCC"], "ties break on the symbol"

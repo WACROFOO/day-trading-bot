@@ -59,8 +59,19 @@ PRICE_MAX_CONFIRMED = 20.0
 PRICE_MIN = PRICE_MIN_CONFIRMED
 PRICE_MAX = PRICE_MAX_CONFIRMED
 PRICE_BAND_EVIDENCE = "confirmed_course"
-DESK_PRICE_MIN = _env_float("DESK_PRICE_MIN", 1.0)
-DESK_PRICE_MAX = _env_float("DESK_PRICE_MAX", 30.0)
+# From the shared profile (config/desk-profile.json), so two traders running
+# their own IBKR connection admit the same names. .env still overrides, and
+# the override is recorded in the desk fingerprint rather than hidden.
+def _desk_rule(key: str, default: float) -> float:
+    try:
+        from ..desk_profile import rules as _rules
+        return float(_rules("desk", key))
+    except Exception:
+        return default
+
+
+DESK_PRICE_MIN = _desk_rule("priceMin", 1.0)
+DESK_PRICE_MAX = _desk_rule("priceMax", 30.0)
 DESK_BAND_EVIDENCE = ("confirmed_course"
                       if (DESK_PRICE_MIN, DESK_PRICE_MAX) == (PRICE_MIN_CONFIRMED, PRICE_MAX_CONFIRMED)
                       else "operator_override")

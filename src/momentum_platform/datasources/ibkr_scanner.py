@@ -234,7 +234,10 @@ def build_ibkr_screener(ib, min_price: float, max_price: float, min_gain: float 
     say(f"  scan union: {len(found) - 1} names from {meta['ran']} queries")
     rows, notes = snapshot_rows(ib, found, clock=clock, log=log)
     kept = [r for r in rows if min_price <= r["price"] <= max_price and r["change_pct"] >= min_gain]
-    kept.sort(key=lambda r: -r["change_pct"])
+    # Deterministic to the last row: two desks scanning the same minute must
+    # rank ties the same way, or they hold different names and fire different
+    # alerts from identical data.
+    kept.sort(key=lambda r: (-r["change_pct"], r["symbol"]))
     total = meta["ran"] + meta["failed"]
     notes.insert(0, f"Union of {meta['ran']}/{total} NASDAQ scans ({', '.join(SCAN_CODES)}, "
                     f"{ROWS_PER_SCAN} rows each) — a discovery set, not an exhaustive list.")

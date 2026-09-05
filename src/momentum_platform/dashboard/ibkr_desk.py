@@ -33,6 +33,7 @@ from concurrent.futures import Future
 from datetime import datetime, timezone
 from typing import Callable, Dict, List, Optional
 
+from .. import desk_profile
 from ..datasources.alpaca_source import session_day
 from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
                                         ET, intraday_volume_profile,
@@ -81,16 +82,26 @@ class IbkrDesk:
     add_symbols(), screener.current(); adds hub (SSE) and health()."""
 
     def __init__(self, symbols: List[str], host: str = "127.0.0.1", port: int = 7496,
-                 client_id: int = 27, scanner_client_id: int = 28, rebuild: int = 3,
-                 rescan: int = 120, max_symbols: int = 8, min_price: float = 2.0,
-                 max_price: float = 20.0, min_gain: float = 10.0, top: int = 30,
+                 client_id: int = 27, scanner_client_id: int = 28, rebuild: Optional[int] = None,
+                 rescan: Optional[int] = None, max_symbols: Optional[int] = None,
+                 min_price: Optional[float] = None, max_price: Optional[float] = None,
+                 min_gain: Optional[float] = None, top: Optional[int] = None,
                  ib_factory: Optional[Callable[[], object]] = None,
                  clock: Callable[[], datetime] = lambda: datetime.now(UTC),
                  headlines: bool = True, sec: bool = True) -> None:
         self.host, self.port = host, port
         self.client_id, self.scanner_client_id = client_id, scanner_client_id
-        self.rebuild, self.rescan, self.max_symbols = rebuild, rescan, max_symbols
-        self.min_price, self.max_price, self.min_gain, self.top = min_price, max_price, min_gain, top
+        # Unset arguments come from the shared profile, so two traders running
+        # their own IBKR connection scan the same band on the same cadence.
+        prof = desk_profile.load()["rules"]
+        pick = lambda given, section, key: given if given is not None else prof[section][key]
+        self.rebuild = pick(rebuild, "cadence", "rebuildSeconds")
+        self.rescan = pick(rescan, "cadence", "rescanSeconds")
+        self.max_symbols = pick(max_symbols, "desk", "maxSymbols")
+        self.min_price = pick(min_price, "desk", "priceMin")
+        self.max_price = pick(max_price, "desk", "priceMax")
+        self.min_gain = pick(min_gain, "desk", "minGainPct")
+        self.top = pick(top, "desk", "scanTop")
         self.symbols: List[str] = [s.strip().upper() for s in symbols if s and s.strip()]
         self.ib_factory = ib_factory
         self.clock = clock
@@ -117,7 +128,7 @@ class IbkrDesk:
         self._profiles: Dict[str, List[float]] = {}
         self._profile_day: Dict[str, str] = {}
         self._float_retry: Dict[str, float] = {}     # monotonic time of the last EDGAR retry
-        self.profile_days = int(os.environ.get("DESK_VOLUME_PROFILE_DAYS", "10"))
+        self.profile_days = int(prof["cadence"]["volumeProfileDays"])
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._jobs: "queue.Queue[tuple]" = queue.Queue()
@@ -130,10 +141,10 @@ class IbkrDesk:
         # next symbol in turn.
         self._next_history = 0.0
         self._history_cursor = 0
-        self.history_every = 20.0
+        self.history_every = float(prof["cadence"]["historyEverySeconds"])
         # A TWS farm flap can kill the five-second bar streams while quotes
         # keep arriving. Nothing reports it, so the desk watches for it.
-        self.bar_stall_seconds = float(os.environ.get("DESK_BAR_STALL_SECONDS", "300"))
+        self.bar_stall_seconds = float(prof["cadence"]["barStallSeconds"])
         self.resubscribe_every = 300.0
         self._next_resubscribe = 0.0
         self._resubscribe_wanted = False
@@ -194,7 +205,11 @@ class IbkrDesk:
             self._next_history = now + self.history_every
             self._guard(self.refresh_history)
         if self.rescan and now >= self._next_scan:
-            self._next_scan = now + self.rescan
+            # Aligned to the wall clock, not to this process's start time: two
+            # desks started ten minutes apart otherwise scan on different
+            # phases and spend the morning holding different names.
+            wall = time.time()
+            self._next_scan = now + max(1.0, self.rescan - (wall % self.rescan))
             self._guard(self.scan)
 
     def _guard(self, fn: Callable) -> None:
@@ -652,6 +667,21 @@ class IbkrDesk:
     def screener_current(self) -> dict:
         with self.lock:
             return self._screener
+
+    def fingerprint(self) -> dict:
+        """What this desk scans and alerts on, as one comparable block.
+
+        Two traders each on their own IBKR connection can compare one hash
+        instead of two screens. Entitlements ride along unhashed: a desk with
+        no fundamentals and no news keys scores the float and news pillars
+        differently, which moves the three-of-five liquidity gate and so the
+        alerts, and that is a real difference even when the rules match."""
+        return desk_profile.fingerprint({
+            "ibkrFundamentals": self.fundamentals is not False,
+            "headlines": bool(self.headlines),
+            "secFloat": bool(self.sec),
+            "marketDataType": getattr(self.stream.health, "market_data_type", None) if self.stream else None,
+        })
 
     def health(self) -> dict:
         d = self.stream.health.as_dict() if self.stream is not None else {"state": "OFFLINE"}

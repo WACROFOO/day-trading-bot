@@ -36,6 +36,7 @@ from ..scanners import (
     top_relative_volume,
     top_volume_5m,
 )
+from ..scanners.momentum_events import MIN_VOLUME_5M
 from ..scanners.five_pillars import (
     PRICE_BAND_EVIDENCE,
     FLOAT_MAX_SHARES,
@@ -249,9 +250,9 @@ def build_session_from_records(
         hot=hot,
         scanners=[
             FivePillarsAlert(),
-            HodMomentumScanner(min_volume_5m=25_000 * volume_floor_scale),
-            UptrendScanner(min_volume_5m=25_000 * volume_floor_scale),
-            RunningMoveScanner(direction="down", min_volume_5m=25_000 * volume_floor_scale),
+            HodMomentumScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
+            UptrendScanner(min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
+            RunningMoveScanner(direction="down", min_volume_5m=MIN_VOLUME_5M * volume_floor_scale),
             squeeze_5_in_5(), squeeze_10_in_10(),
             Breakout52wScanner(),
             FivePillarsList(max_rows=max_rows), TopGappersScanner(max_rows=max_rows),

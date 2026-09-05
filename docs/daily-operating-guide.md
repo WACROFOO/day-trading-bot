@@ -192,6 +192,17 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, liquid, one alert per leg. Approximation.
+- **Two traders, one set of rules.** Everything that decides what a desk
+  admits and what it fires lives in `config/desk-profile.json`, committed, so
+  both of you pull it with the code. The header's RULES badge is the
+  fingerprint of the effective rules — the profile, any local `.env` override,
+  the Confirmed pillars read out of the code, and every scanner's definition
+  version. The same hash on both screens means the same scanners and the same
+  alerts; `python3 scripts/desk_parity.py --compare <their hash>` prints the
+  differences line by line when they disagree. Entitlements ride beside the
+  hash rather than inside it: a desk without IBKR fundamentals or without news
+  keys scores the float and news pillars differently, which moves the
+  three-of-five liquidity gate. See `docs/shared-desk.md`.
 - **A sound on every new alert.** The arrival memory was keyed by symbol, so
   a second Running Up leg on the same name inside ten minutes made no sound at
   all; it is keyed by the alert now. Only an alert whose own minute is within

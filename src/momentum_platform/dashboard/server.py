@@ -303,6 +303,11 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                            "symbols": list(session.get("symbols", {}).keys())}
                 if hasattr(holder, "health"):
                     payload["provider"] = holder.health()
+                if hasattr(holder, "fingerprint"):
+                    payload["desk"] = holder.fingerprint()
+                else:
+                    from .. import desk_profile
+                    payload["desk"] = desk_profile.fingerprint()
                 return self._json(payload)
             if path == "/api/v1/stream":
                 if hub is None:

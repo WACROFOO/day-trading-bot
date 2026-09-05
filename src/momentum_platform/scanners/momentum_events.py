@@ -24,7 +24,19 @@ MIN_TICK_BUFFER = 0.0001
 # premarket on exactly the names the desk was built to surface. A name that
 # already carries three of the five pillars is admitted on those instead.
 # Approximation: the course never states a premarket volume rule.
-MIN_PILLARS_FOR_LIQUIDITY = 3
+def _liquidity_rule(key: str, default):
+    """From the shared profile, so both desks admit a thin-tape runner on the
+    same evidence. Approximation either way: the course states the pillars,
+    not this use of them."""
+    try:
+        from ..desk_profile import rules as _rules
+        return type(default)(_rules("liquidity", key))
+    except Exception:
+        return default
+
+
+MIN_VOLUME_5M = _liquidity_rule("minVolume5m", 25_000)
+MIN_PILLARS_FOR_LIQUIDITY = _liquidity_rule("minPillars", 3)
 
 
 def _liquidity(current: SymbolSnapshot, min_volume_5m: float, min_pillars: int):
@@ -53,7 +65,7 @@ class HodMomentumScanner(Scanner):
         min_change_pct: float = 10.0,
         min_recent_rvol: float = 3.0,
         min_price: float = 1.0,
-        min_volume_5m: float = 25_000,
+        min_volume_5m: float = MIN_VOLUME_5M,
         low_float_max: float = 20_000_000,
         medium_float_max: float = 100_000_000,
         high_rvol_min: float = 5.0,
@@ -161,7 +173,7 @@ class RunningMoveScanner(Scanner):
         direction: str = "up",
         window_minutes: int = 5,
         threshold_pct: float = 5.0,
-        min_volume_5m: float = 25_000,
+        min_volume_5m: float = MIN_VOLUME_5M,
         min_price: float = 1.0,
         version: str = "1.0.0",
     ) -> None:
@@ -239,7 +251,7 @@ class UptrendScanner(Scanner):
         window_minutes: int = 10,
         threshold_pct: float = 3.0,
         fresh_minutes: int = 3,
-        min_volume_5m: float = 25_000,
+        min_volume_5m: float = MIN_VOLUME_5M,
         min_price: float = 1.0,
         version: str = "2.0.0",
         min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
@@ -333,7 +345,7 @@ class Breakout52wScanner(Scanner):
     scanner_id = "breakout_52w"
     definition_version = "breakout_52w@1.0.0"
 
-    def __init__(self, min_volume_5m: float = 25_000) -> None:
+    def __init__(self, min_volume_5m: float = MIN_VOLUME_5M) -> None:
         self.min_volume_5m = min_volume_5m
         self._edges = EdgeTracker(rearm_after_fails=10_000)  # once per run/day
 
