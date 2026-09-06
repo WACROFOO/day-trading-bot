@@ -33,7 +33,8 @@ from journal import ledger as L
 
 from .bridge import decision_clock, intent_from_decision
 from .ibkr_trader import OrderRefused, PaperTrader
-from .intent import refusals
+from .intent import ET, refusals
+from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
 MODES = ("LOG_ONLY", "TRADE")
@@ -191,6 +192,31 @@ class Runner:
             done.append(f"{o['symbol']} x{o['shares']} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
         self.conn.commit()
         return done
+
+    # -------------------------------------------------------- after 16:00
+    def flag_after_hours(self) -> list[int]:
+        """Anything still held after the close is flagged, never acted on.
+
+        docs/paper-exercise-brief.md R10. An after-hours continuation is
+        exit-only and requires a human to confirm each one — the corpus has
+        him measured not net profitable there, with no stops and margin
+        auto-liquidated at 16:00. So this method changes a status and writes
+        an event; the sell happens only through `exercise.py ah-exit --confirm`,
+        which records who confirmed. A runner that could decide this alone
+        would be the bot the brief says not to build.
+        """
+        if self.mode != "TRADE":
+            return []
+        if self.now().astimezone(ET).time() < REGULAR_END:
+            return []
+        flagged = []
+        for o in L.stuck_orders(self.conn):
+            L.flag_manual(self.conn, o["order_id"],
+                          f"after 16:00 ET with {o['shares']} {o['symbol']} still held — "
+                          f"AH exit needs a human: exercise.py ah-exit {o['order_id']} --confirm")
+            flagged.append(o["order_id"])
+        self.conn.commit()
+        return flagged
 
     # ------------------------------------------------------- end of day
     def end_of_day(self) -> list[str]:

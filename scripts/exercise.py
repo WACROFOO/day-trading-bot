@@ -171,6 +171,9 @@ def cmd_live(args) -> int:
                 # `queued`-verdict pre-market entry this call IS the stop.
                 for line in runner.watch_stops():
                     print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}STOP{END}     {line}")
+                for oid in runner.flag_after_hours():
+                    print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}HELD AFTER CLOSE{END} order {oid} — "
+                          f"exercise.py ah-exit {oid} --confirm")
                 if datetime.now(ET).time() >= HARD_STOP and not flattened:
                     done = runner.end_of_day()
                     print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
@@ -205,6 +208,47 @@ def cmd_advance(args) -> int:
     return 0
 
 
+def cmd_stuck(args) -> int:
+    conn = L.connect(_db(args))
+    rows = L.stuck_orders(conn)
+    if not rows:
+        print("no filled, un-exited positions in the ledger"); return 0
+    for o in rows:
+        print(f"  order {o['order_id']:>4}  {o['symbol']:<6} x{o['shares']}  filled {o['fill_price']} "
+              f"stop {o['stop']}  status {o['stop_status']}")
+    return 0
+
+
+def cmd_ah_exit(args) -> int:
+    """The after-hours exception, brief R10: exit-only, one order, a human
+    confirms it here, and who confirmed is written into the ledger."""
+    conn = L.connect(_db(args))
+    o = conn.execute("SELECT * FROM orders WHERE order_id=?", (args.order_id,)).fetchone()
+    if o is None:
+        print(f"{BAD}no order {args.order_id}{END}"); return 1
+    if o["fill_price"] is None or o["exit_ts"] is not None:
+        print(f"{BAD}order {args.order_id} is not a held position{END}"); return 1
+    if not args.confirm:
+        print(f"{WARN}MANUAL_CONFIRMATION_REQUIRED{END}  {o['symbol']} x{o['shares']} filled {o['fill_price']}")
+        print("  after hours: no stops exist, margin is auto-liquidated at 16:00, and the")
+        print("  source is measured not net profitable there. Re-run with --confirm to SELL")
+        print("  at bid − 0.10, limit, extended hours. This is an exit; nothing is bought.")
+        return 2
+    q = L.quote_source(conn, max_age_s=120)(o["symbol"])
+    if not q or q.get("bid") is None:
+        print(f"{BAD}no fresh quote for {o['symbol']} in the ledger — start the desk first{END}"); return 1
+    from execution.ibkr_trader import PaperTrader
+    who = os.environ.get("USER") or "operator"
+    with PaperTrader() as t:
+        px = t.exit_limit(o["symbol"], int(o["shares"]), float(q["bid"]), outside_rth=True)
+    L.record_exit(conn, o["order_id"], reason="AH_exception", price=px,
+                  ts=datetime.now(timezone.utc), confirmed_by=who)
+    L.add_order_event(conn, o["order_id"], f"AH exception confirmed by {who}: SELL LMT {px} (bid {q['bid']})")
+    conn.commit()
+    print(f"{OK}sent{END} SELL {o['shares']} {o['symbol']} LMT {px}  recorded as AH_exception by {who}")
+    return 0
+
+
 def cmd_state(args) -> int:
     conn = L.connect(_db(args))
     for k, v in L.get_state(conn).items():
@@ -218,12 +262,15 @@ def main(argv=None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
+    sub.add_parser("stuck")
+    ah = sub.add_parser("ah-exit"); ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
-            "advance": cmd_advance, "state": cmd_state}[args.cmd](args)
+            "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck,
+            "ah-exit": cmd_ah_exit}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -112,6 +112,7 @@ CREATE TABLE IF NOT EXISTS orders (
     nbbo_bid REAL, nbbo_ask REAL, nbbo_bid_size REAL, nbbo_ask_size REAL,
     nbbo_ts TEXT,                                               -- R4
     exit_reason TEXT, exit_price REAL, exit_ts TEXT,
+    exit_confirmed_by TEXT,                                     -- AH exception only
     placed_at TEXT NOT NULL, updated_at TEXT NOT NULL
 );
 
@@ -353,10 +354,10 @@ def record_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
 
 
 def record_exit(conn: sqlite3.Connection, order_id: int, *, reason: str,
-                price: float, ts) -> None:
+                price: float, ts, confirmed_by: Optional[str] = None) -> None:
     conn.execute("""UPDATE orders SET exit_reason=?, exit_price=?, exit_ts=?,
-                    status='Closed', updated_at=? WHERE order_id=?""",
-                 (reason, price, _et(ts), _now(), order_id))
+                    exit_confirmed_by=?, status='Closed', updated_at=? WHERE order_id=?""",
+                 (reason, price, _et(ts), confirmed_by, _now(), order_id))
 
 
 def record_actuals(conn: sqlite3.Connection, decision_id: str, a: dict) -> None:
@@ -493,3 +494,27 @@ def open_monitored(conn: sqlite3.Connection) -> list[sqlite3.Row]:
 def add_order_event(conn: sqlite3.Connection, order_id: int, text: str) -> None:
     conn.execute("INSERT INTO order_events (order_id, ts, text) VALUES (?,?,?)",
                  (order_id, _now(), text))
+
+
+
+# --------------------------------------------------------- stuck positions
+MANUAL = "MANUAL_CONFIRMATION_REQUIRED"
+
+
+def stuck_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Filled and not exited. After the hard-stop flatten there should be
+    none; any that remain are the brief's third 'stuck' state."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND exit_ts IS NULL
+                           ORDER BY placed_at""").fetchall()
+
+
+def flag_manual(conn: sqlite3.Connection, order_id: int, text: str) -> None:
+    """Mark a position as needing a human. Idempotent; the event is written once."""
+    row = conn.execute("SELECT stop_status FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    if row["stop_status"] == MANUAL:
+        return
+    conn.execute("UPDATE orders SET stop_status=?, updated_at=? WHERE order_id=?",
+                 (MANUAL, _now(), order_id))
+    add_order_event(conn, order_id, text)
