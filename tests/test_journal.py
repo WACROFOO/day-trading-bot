@@ -126,7 +126,7 @@ def test_an_unknown_outcome_is_rejected(conn):
 # ------------------------------------------------ both R denominators, NBBO
 def test_a_fill_records_realised_risk_and_the_nbbo_in_one_write(conn):
     did, _ = record(conn)
-    oid = L.record_order(conn, did, account="DUR339781", session="regular",
+    oid = L.record_order(conn, did, symbol="TEST", account="DUR339781", session="regular",
                          parent_id=4, stop_id=5, target_id=None,
                          trigger=6.05, stop=5.90, target=None, shares=100,
                          dollar_risk=15.0, protected=True)

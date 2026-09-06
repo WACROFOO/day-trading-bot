@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS board_snapshots (
 CREATE TABLE IF NOT EXISTS orders (
     order_id INTEGER PRIMARY KEY AUTOINCREMENT,
     decision_id TEXT NOT NULL REFERENCES decisions(decision_id),
-    account TEXT, session TEXT NOT NULL,
+    symbol TEXT NOT NULL, account TEXT, session TEXT NOT NULL,
     parent_id INTEGER, stop_id INTEGER, target_id INTEGER,
     trigger REAL NOT NULL, stop REAL NOT NULL, target REAL, shares INTEGER NOT NULL,
     dollar_risk REAL NOT NULL, planned_risk REAL NOT NULL,     -- R3 planned
@@ -270,17 +270,17 @@ def set_outcome(conn: sqlite3.Connection, decision_id: str, outcome: str,
                  (outcome, _json(reasons or []), _now(), decision_id))
 
 
-def record_order(conn: sqlite3.Connection, decision_id: str, *, account: str,
-                 session: str, parent_id: int, stop_id: Optional[int],
+def record_order(conn: sqlite3.Connection, decision_id: str, *, symbol: str,
+                 account: str, session: str, parent_id: int, stop_id: Optional[int],
                  target_id: Optional[int], trigger: float, stop: float,
                  target: Optional[float], shares: int, dollar_risk: float,
                  protected: bool) -> int:
     cur = conn.execute("""
-        INSERT INTO orders (decision_id, account, session, parent_id, stop_id, target_id,
-            trigger, stop, target, shares, dollar_risk, planned_risk, protected,
+        INSERT INTO orders (decision_id, symbol, account, session, parent_id, stop_id,
+            target_id, trigger, stop, target, shares, dollar_risk, planned_risk, protected,
             placed_at, updated_at)
-        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
-        (decision_id, account, session, parent_id, stop_id, target_id,
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+        (decision_id, symbol, account, session, parent_id, stop_id, target_id,
          trigger, stop, target, shares, dollar_risk,
          round((trigger - stop) * shares, 2), int(protected), _now(), _now()))
     return int(cur.lastrowid)
@@ -341,7 +341,7 @@ def decisions(conn: sqlite3.Connection, **where: Any) -> list[sqlite3.Row]:
     if where:
         sql += " WHERE " + " AND ".join(f"{k}=?" for k in where)
         args = list(where.values())
-    return conn.execute(sql + " ORDER BY ts_et").fetchall()
+    return conn.execute(sql + " ORDER BY ts_et", args).fetchall()
 
 
 def without_actuals(conn: sqlite3.Connection) -> list[sqlite3.Row]:
