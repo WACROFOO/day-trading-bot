@@ -26,6 +26,8 @@ strategy works.
 | After-hours exception | built: flag after 16:00, human-confirmed exit only | `Runner.flag_after_hours` · `exercise.py ah-exit` |
 | Browser verdict = server cascade | built, Chromium-tested | `dashboard/web/app.js` |
 | One-command day · phase gates · launchd | built | `scripts/day.py` · `exercise.py advance` · `scripts/install_daily.sh` |
+| Feed health → STALE verdict | built: stale/delayed/offline feed arms nothing | `session_builder._feed_is_stale` |
+| Decision-tape vs fill-tape alignment | built: probe + per-fill gap table; order refused without a fresh desk quote; **probe not yet run** | `scripts/alignment_probe.py` · `ledger.alignment_rows` |
 | Pre-registration | **PROPOSED, values unset** | `docs/preregistration.md` |
 
 Baseline for regression: `BASELINE-2026-09-06.md`.

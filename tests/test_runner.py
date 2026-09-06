@@ -120,7 +120,8 @@ def test_trade_mode_places_records_the_order_and_marks_taken(journal):
     t = FakeTrader()
     # "now" is pinned just after the fixture's last plan so nothing is stale
     now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
-    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600)
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
     done = r.step()
     taken = [a for a in done if a.outcome == "TAKEN"]
     assert taken, done
@@ -138,7 +139,7 @@ def test_trade_mode_refuses_a_stale_decision(journal):
     reviewed. LOG_ONLY has no such rule because replay is always 'late'."""
     t = FakeTrader()
     late = lambda: datetime(2026, 9, 1, 18, 0, tzinfo=timezone.utc)    # noqa: E731
-    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=late)
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=late, quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
     done = r.step()
     assert all(a.outcome == "REFUSED" for a in done)
     assert all(any("stale" in x for x in a.reasons) for a in done)
@@ -149,6 +150,8 @@ def test_a_fill_writes_realised_risk_and_nbbo_together(journal):
     t = FakeTrader()
     now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
     quotes = {"ABCD": dict(bid=7.30, ask=7.33, bid_size=300, ask_size=100,
+                          ts="2026-09-01T13:52:10Z"),
+              "DVLT": dict(bid=4.30, ask=4.31, bid_size=100, ask_size=100,
                           ts="2026-09-01T13:52:10Z")}
     r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now,
                max_age_s=3600, quote=lambda s: quotes.get(s))
@@ -173,7 +176,7 @@ def test_a_risk_veto_propagates_rather_than_being_recorded_as_an_outcome(journal
 
     now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
     r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=Latched(), now=now,
-               max_age_s=3600)
+               max_age_s=3600, quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
     with pytest.raises(RuntimeError, match="latched"):
         r.step()
     # and nothing was marked TAKEN behind the veto

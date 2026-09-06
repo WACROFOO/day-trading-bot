@@ -81,7 +81,8 @@ def test_policy_is_phase_c_and_a_definite_verdict():
 # ------------------------------------------------------------- runner
 def test_premarket_plan_is_refused_outside_phase_c_and_the_reason_is_recorded(journal):
     t = FakeTrader()
-    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600)
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
     (a,) = r.step()
     assert a.outcome == "REFUSED" and any("pre-market entry not allowed" in x for x in a.reasons)
     assert not t.brackets and not t.monitored
@@ -96,7 +97,8 @@ def test_log_only_also_records_the_policy_refusal(journal):
 def test_held_verdict_places_a_bracket_and_protection_waits_for_read_back(journal):
     L.set_state(journal, phase="C", probe_verdict="held", probe_date="2026-09-08")
     t = FakeTrader()
-    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600)
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
     (a,) = r.step()
     assert a.outcome == "TAKEN" and len(t.brackets) == 1 and not t.monitored
     o = journal.execute("SELECT * FROM orders").fetchone()
@@ -106,7 +108,8 @@ def test_held_verdict_places_a_bracket_and_protection_waits_for_read_back(journa
 def test_queued_verdict_places_a_monitored_entry_with_no_stop_leg(journal):
     L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
     t = FakeTrader()
-    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600)
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
     (a,) = r.step()
     assert a.outcome == "TAKEN" and len(t.monitored) == 1 and not t.brackets
     o = journal.execute("SELECT * FROM orders").fetchone()
@@ -136,14 +139,30 @@ def test_the_runner_is_the_stop_when_the_bid_touches_it(journal):
 
 
 def test_no_fresh_quote_means_hold_and_say_so_never_guess_a_price(journal):
+    """Two moments, two behaviours. At ORDER time a missing quote refuses the
+    entry outright (decision and order would not share a tape). At WATCH time,
+    once a position exists, a missing quote holds and writes an event — never
+    a guessed sell price."""
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
+    t = FakeTrader()
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z")}
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    _fill(journal, r, t)                       # placed and filled while the quote was fresh
+    quotes.clear()                             # the desk goes quiet
+    assert r.watch_stops() == [] and t.exits == []
+    ev = journal.execute("SELECT text FROM order_events").fetchall()
+    assert any("no fresh quote" in e[0] for e in ev)
+
+
+def test_no_fresh_quote_at_order_time_refuses_the_entry(journal):
     L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
     t = FakeTrader()
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: None)
-    _fill(journal, r, t)
-    assert r.watch_stops() == [] and t.exits == []
-    ev = journal.execute("SELECT text FROM order_events").fetchall()
-    assert any("no fresh quote" in e[0] for e in ev)
+    (a,) = r.step()
+    assert a.outcome == "REFUSED" and any("no fresh desk quote" in x for x in a.reasons)
+    assert not t.monitored and not t.brackets
 
 
 def test_watch_stops_is_inert_in_log_only(journal):

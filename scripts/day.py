@@ -95,6 +95,11 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
                             f"{state.get('sessions_done', 0)} sessions, {f['plans_armed']} decisions")
         if state.get("probe_verdict") is None:
             blockers.append("pre-market probe has not recorded a verdict")
+    if phase in ("A", "B") and state.get("paper_data") != "realtime":
+        blockers.append(f"paper session data is {state.get('paper_data') or 'unmeasured'} — fills would "
+                        f"be judged against a different tape than the decision (scripts/alignment_probe.py)")
+    if phase == "A":
+        pass
     elif phase == "B":
         nxt = "C"
         if f["taken"] < 30:
@@ -151,6 +156,23 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
             lines.append(f"| {k} | {v['n']} | {v['mean_R']:.3f} | {v['median_R']:.3f} | {v['win_rate']:.0%} |")
         else:
             lines.append(f"| {k} | 0 | — | — | — |")
+    pd = st.get("paper_data")
+    lines += ["", "## Alignment (decision tape → fill → fill tape)", "",
+              f"Paper session data: **{pd or 'NOT MEASURED — run scripts/alignment_probe.py'}**"
+              + (f" ({st.get('paper_data_date')})" if pd else ""), ""]
+    al = L.alignment_rows(conn)
+    if al:
+        lines += ["| ET | symbol | decision bid/ask | trigger | fill | fill bid/ask | gap s | slippage |",
+                  "|---|---|---|---:|---:|---|---:|---:|"]
+        for r in al:
+            dba = f"{r['d_bid']}/{r['d_ask']}" if r["d_bid"] is not None else "—"
+            fba = f"{r['nbbo_bid']}/{r['nbbo_ask']}" if r["nbbo_bid"] is not None else "— (unverified)"
+            gap = r["quote_gap_s"] if r["quote_gap_s"] is not None else "—"
+            slip = f"{r['slippage_ratio']:.2f}×" if r["slippage_ratio"] is not None else "—"
+            lines.append(f"| {r['fill_ts'][11:16]} | {r['symbol']} | {dba} | {r['trigger']:.2f} | "
+                         f"{r['fill_price']:.2f} | {fba} | {gap} | {slip} |")
+    else:
+        lines.append("No fills.")
     lamp = "✓" if not rep["diverged"] else "✗"
     lines += ["", "## Replay (R11)", "",
               f"{lamp} {rep['reproduced']}/{rep['checked']} decisions reproduce their recorded verdict"]
@@ -192,6 +214,26 @@ def run_probe_once(conn, today: str, dry: bool) -> None:
         good(f"probe ran — verdict {L.get_state(conn).get('probe_verdict')!r}")
     else:
         warn(f"probe exit {r.returncode} — see its output above; verdict not recorded")
+
+
+def run_alignment_once(conn, today: str, dry: bool) -> None:
+    """Is the paper session on the same tape as the live one? Once per day."""
+    st = L.get_state(conn)
+    if st.get("paper_data_date") == today:
+        good(f"alignment probe already ran today — paper data {st['paper_data']!r}")
+        return
+    if dry:
+        note("would run scripts/alignment_probe.py"); return
+    env = {**os.environ, "JOURNAL_DB": str(DB)}
+    r = subprocess.run([sys.executable, "scripts/alignment_probe.py"], cwd=ROOT, env=env)
+    st = L.get_state(conn)
+    if r.returncode == 0 and st.get("paper_data") == "realtime":
+        good("paper session is on real-time data — decision tape and fill tape agree")
+    elif r.returncode == 0:
+        warn(f"paper session data: {st.get('paper_data')!r} — fills would be judged against a different tape")
+        note("Client Portal › Settings › Paper Trading Account › share real-time market data. Then re-run.")
+    else:
+        warn(f"alignment probe exit {r.returncode} — see its output above")
 
 
 def start_desk(symbols: list[str], dry: bool):
@@ -271,11 +313,12 @@ def main(argv=None) -> int:
     else:
         warn("gap scan returned nothing — the desk's own scanner picks (start.sh --ibkr behaviour)")
 
-    say(f"\n{BOLD}2. Pre-market probe{END}  (once per day, before 09:30)")
+    say(f"\n{BOLD}2. Probes{END}  (once per day)")
+    run_alignment_once(conn, today, args.dry_run)
     if now.time() < REGULAR_START:
         run_probe_once(conn, today, args.dry_run)
     else:
-        note("past 09:30 — the probe only runs pre-market")
+        note("past 09:30 — the stop probe only runs pre-market")
     ok, why = premarket_allowed(L.get_state(conn))
     (good if ok else note)(f"pre-market entries: {'ON' if ok else 'off'} — {why}")
 

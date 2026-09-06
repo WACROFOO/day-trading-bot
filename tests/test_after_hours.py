@@ -42,7 +42,8 @@ def held(tmp_path):
     build_session(FIXTURE, journal=c)
     t = FakeTrader()
     r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t,
-               now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc), max_age_s=3600)
+               now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc), max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
     r.step()
     t.placed[0].fill_price = t.placed[0].trigger; t.placed[0].fill_time = "2026-09-01T13:52:05Z"
     r.sync_fills()

@@ -362,7 +362,8 @@ def build_session_from_records(
                 _st = hot.symbols.get(rec["symbol"])
                 _snap = _st.snapshot if _st else None
                 _meta = symbols.get(rec["symbol"], {})
-                _inputs = cascade_inputs(_meta, halt_state.get(rec["symbol"]), snap=_snap)
+                _inputs = cascade_inputs(_meta, halt_state.get(rec["symbol"]),
+                                         feed_stale=_feed_is_stale(data_status), snap=_snap)
                 _res = evaluate_cascade(_inputs) if _meta else None
                 allowed = bool(_res and _res.plan_allowed)
                 if journal is not None and _res is not None:
@@ -466,7 +467,8 @@ def build_session_from_records(
     cascade_by_symbol = {}
     for sym, meta in symbols.items():
         meta.setdefault("symbol", sym)
-        res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym)))
+        res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym),
+                                              feed_stale=_feed_is_stale(data_status)))
         cascade_by_symbol[sym] = {
             "verdict": res.verdict.value,
             "killedBy": res.killed_by,
@@ -558,6 +560,20 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         halted=(halt == "halted"),
         feed_stale=feed_stale,
     )
+
+
+def _feed_is_stale(data_status) -> bool:
+    """The stream's own health word, as the cascade's `feed_stale`.
+
+    `ibkr_stream.Health.state` is LIVE | STALE | DELAYED | OFFLINE and the
+    desk hands it to this builder as `data_status`. It was never passed on:
+    both cascade calls used feed_stale=False, so a delayed or dead feed still
+    produced REVIEW verdicts and armed plans — the screenshot that showed
+    `1D BEHIND` and `Entry ARMED` in the same frame. Replay and live are the
+    only statuses that mean "this tape is current"; everything else is
+    STALE, and STALE is a verdict with no plan.
+    """
+    return str(data_status or "").lower() not in ("live", "replay")
 
 
 def _plan_allowed(meta: dict, halt: Optional[str], snap=None) -> bool:

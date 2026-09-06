@@ -109,6 +109,17 @@ class Runner:
                 reasons.append(f"pre-market entry not allowed: {why}")
             else:
                 shape = premarket_shape(state)
+        if self.mode == "TRADE" and not reasons:
+            # Alignment at the instant of the order. The decision was made on
+            # the desk's tape; the order goes to a different session that may
+            # see a different (or no) tape. The only alignment that can be
+            # enforced here is that the desk's quote for THIS symbol is fresh
+            # when the order leaves. `quote_source` returns None past 30s, so
+            # a stalled desk cannot place an order on a price it no longer has.
+            q = self.quote(intent.symbol) if self.quote else None
+            if not q or q.get("bid") is None:
+                reasons.append("no fresh desk quote for this symbol — decision and order "
+                               "would not be on the same tape")
         if reasons:
             return "REFUSED", reasons
         if self.mode == "LOG_ONLY":

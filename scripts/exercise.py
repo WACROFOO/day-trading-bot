@@ -93,6 +93,25 @@ def report(conn, *, source: str, synthetic: bool) -> None:
         else:
             print(f"  {k:<12}{0:>4}{'—':>10}{'—':>10}{'—':>7}")
 
+    st = L.get_state(conn)
+    print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
+    pd = st.get("paper_data")
+    lampd = f"{OK}✓{END}" if pd == "realtime" else f"{BAD}✗{END}" if pd else f"{WARN}?{END}"
+    print(f"  {lampd} paper session data: {pd or 'NOT MEASURED — run scripts/alignment_probe.py'}"
+          + (f" ({st.get('paper_data_date')})" if pd else ""))
+    al = L.alignment_rows(conn)
+    if not al:
+        print("  no fills yet")
+    else:
+        print(f"  {'ET':>5} {'sym':<6}{'decision bid/ask':>18}{'trigger':>9}{'fill':>8}{'fill bid/ask':>16}{'gap s':>7}{'slip':>7}")
+        for r in al:
+            dba = f"{r['d_bid']}/{r['d_ask']}" if r["d_bid"] is not None else "—"
+            fba = f"{r['nbbo_bid']}/{r['nbbo_ask']}" if r["nbbo_bid"] is not None else "— (unverified)"
+            gap = r["quote_gap_s"] if r["quote_gap_s"] is not None else "—"
+            slip = f"{r['slippage_ratio']:.2f}x" if r["slippage_ratio"] is not None else "—"
+            print(f"  {r['fill_ts'][11:16]:>5} {r['symbol']:<6}{dba:>18}{r['trigger']:>9.2f}{r['fill_price']:>8.2f}{fba:>16}{gap:>7}{slip:>7}")
+        print(f"  {DIM}gap s = desk quote stamp minus IBKR fill stamp; a fill with no fill bid/ask is UNVERIFIED{END}")
+
     ok = not rep["diverged"]
     lamp = f"{OK}✓{END}" if ok else f"{BAD}✗{END}"
     print(f"\n{BOLD}REPLAY{END}  (R11)")

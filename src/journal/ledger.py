@@ -161,6 +161,8 @@ CREATE TABLE IF NOT EXISTS exercise_state (
     probe_verdict TEXT,                          -- held | queued | inconclusive
     probe_date TEXT,
     dollar_risk REAL,
+    paper_data TEXT,                             -- realtime | delayed | none  (alignment probe)
+    paper_data_date TEXT,
     updated_at TEXT NOT NULL
 );
 
@@ -191,7 +193,24 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
     conn = sqlite3.connect(str(path), timeout=10, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.executescript(_SCHEMA)
+    _migrate(conn)
     return conn
+
+
+# Columns added after a table already existed somewhere. CREATE IF NOT EXISTS
+# does not add them; this does, once, and is a no-op afterwards.
+_ADDED_COLUMNS = {
+    "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT")),
+}
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    for table, cols in _ADDED_COLUMNS.items():
+        have = {r["name"] for r in conn.execute(f"PRAGMA table_info({table})")}
+        for name, typ in cols:
+            if name not in have:
+                conn.execute(f"ALTER TABLE {table} ADD COLUMN {name} {typ}")
+    conn.commit()
 
 
 def _now() -> str:
@@ -471,7 +490,8 @@ def get_state(conn: sqlite3.Connection) -> dict:
 
 
 def set_state(conn: sqlite3.Connection, **fields) -> dict:
-    allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk"}
+    allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
+               "paper_data", "paper_data_date"}
     bad = set(fields) - allowed
     if bad:
         raise ValueError(f"unknown state fields {sorted(bad)}")
@@ -518,3 +538,30 @@ def flag_manual(conn: sqlite3.Connection, order_id: int, text: str) -> None:
     conn.execute("UPDATE orders SET stop_status=?, updated_at=? WHERE order_id=?",
                  (MANUAL, _now(), order_id))
     add_order_event(conn, order_id, text)
+
+
+
+def alignment_rows(conn: sqlite3.Connection) -> list[dict]:
+    """Per fill: what the desk saw at the decision, what IBKR filled, what the
+    desk saw at the fill, and the seconds between IBKR's fill stamp and the
+    desk quote attached to it. This is the whole lag question, measured.
+
+    The gap is computed in Python: the ledger stores ET ISO strings with a
+    UTC offset, and SQLite's julianday() silently returns NULL on those.
+    """
+    rows = conn.execute("""
+        SELECT o.order_id, o.symbol, o.session, d.ts_et AS decision_ts, d.bid AS d_bid, d.ask AS d_ask,
+               o.trigger, o.fill_price, o.fill_ts, o.nbbo_bid, o.nbbo_ask, o.nbbo_ts,
+               o.slippage_ratio, o.protected
+        FROM orders o JOIN decisions d USING(decision_id)
+        WHERE o.fill_price IS NOT NULL ORDER BY o.fill_ts""").fetchall()
+    out = []
+    for r in rows:
+        d = dict(r)
+        gap = None
+        if d["nbbo_ts"] and d["fill_ts"]:
+            gap = int((datetime.fromisoformat(d["nbbo_ts"])
+                       - datetime.fromisoformat(d["fill_ts"])).total_seconds())
+        d["quote_gap_s"] = gap
+        out.append(d)
+    return out

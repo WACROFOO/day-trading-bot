@@ -2,6 +2,14 @@
 
 One command runs the day. This page is what happens around it.
 
+## Once, before the first session
+
+In IBKR Client Portal › Settings › Paper Trading Account, enable sharing
+of **real-time market data** with the paper account. Without it IBKR judges
+paper fills against delayed prices while decisions are made on live ones;
+the morning command measures this and blocks real orders until it reads
+`realtime`.
+
 ## Before 06:55 ET (12:55 France)
 
 1. Log in to **TWS** (live, read-only data, port 7496).
@@ -21,7 +29,7 @@ What it does, in Ross's order (`scripts/day.py`):
 | step | what | where the rule lives |
 |---|---|---|
 | 1 | gap scan → watchlist: STAR then WATCH, rejects named | `scripts/premarket_stars.py` |
-| 2 | pre-market probe, once per day, verdict recorded | `scripts/premarket_probe.py` → `exercise_state` |
+| 2 | two probes, once per day: is the paper account on the live tape (`scripts/alignment_probe.py`); does a pre-market stop hold (`scripts/premarket_probe.py`). Both verdicts recorded | `exercise_state` |
 | 3 | desk starts on the watchlist, journaling every rebuild | `JOURNAL_DB` → `src/journal/ledger.py` |
 | 4 | runner starts in the phase's mode (A = log only) | `docs/preregistration.md` §3 |
 | 5 | hard stop 11:30: runner flattens (TRADE mode) | `PARAMETERS.md` §2 · `src/execution/intent.py` |
