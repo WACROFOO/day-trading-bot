@@ -25,14 +25,21 @@ attaches children by parentId and holds the whole group until the last leg
 carries transmit=True — which is what `transmit` is actually for, as opposed
 to the what-if misuse that broke the preflight twice.
 
-REGULAR HOURS ONLY, for now. A bracket needs a resting stop and extended
-hours do not permit one — `.claude/skills/extended-hours/SKILL.md`: "No stop
-orders of any type [...] Your stop is therefore mental or hotkeyed, never
-resting." IBKR does not reject such an order; it queues it to 09:30, which
-the first smoke test hit as warning 399. `intent.refusals` therefore refuses
-any bracket outside 09:30-16:00 ET. A pre-market mode would need a
-different shape (limit entry, no resting stop, a monitored exit) and is a
-decision, not a default.
+TWO SESSIONS, STATED NOT INFERRED. A regular-hours intent gets the bracket
+described above. A pre-market intent (07:00-09:30) gets every leg flagged
+outsideRth=True, and the stop leg's protection is UNCONFIRMED until read
+back: `.claude/skills/extended-hours/SKILL.md` says no stop of any type
+rests in extended hours, and IBKR queues rather than rejects what it will
+not work (warning 399 on the first smoke test). Whether IBKR's own
+simulated stop is the exception is not in the corpus; `premarket_probe.py`
+answers it empirically. Until then `PlacedOrder.protected` is False for
+every pre-market entry and the caller is expected to read it.
+
+DAY TRADES ONLY. `flatten_all()` is the primitive for "no trade alive":
+cancel everything, then exit every position. In regular hours that is a
+market order. Outside them a market order does not exist, so it needs a
+quote and sells at bid minus an offset - the skill's fill trick, "sell =
+bid - offset" - and refuses without one rather than guess.
 
 NO PRICES COME FROM HERE. The Gateway session has no market data — the
 preflight showed `last=nan bid=-1` — and that is correct. Quotes come from
@@ -44,7 +51,8 @@ from __future__ import annotations
 import os
 from typing import Optional
 
-from .intent import SIDE, EntryIntent, PlacedOrder, refusals
+from .intent import (SIDE, EntryIntent, PlacedOrder, in_regular_hours,
+                     refusals)
 
 HOST = os.environ.get("IBKR_PAPER_HOST", "127.0.0.1")
 PORT = int(os.environ.get("IBKR_PAPER_PORT", "4002"))
@@ -165,7 +173,12 @@ class PaperTrader:
             trigger=intent.trigger, stop=intent.stop, shares=intent.shares,
             intent=intent,
         )
-        rec.events.append(f"placed {len(trades)} legs on {self.account}")
+        # Regular hours: the stop rests, IBKR confirmed the group. Pre-market:
+        # not known until the stop leg's status is read back by sync().
+        rec.protected = not ext
+        rec.events.append(f"placed {len(trades)} legs on {self.account}"
+                          + (" (pre-market, protection unconfirmed)" if ext
+                             else ""))
         self.placed.append(rec)
         return rec
 
@@ -180,11 +193,16 @@ class PaperTrader:
         from ib_async import LimitOrder, StopOrder
 
         oca = f"px-{intent.symbol}-{id(intent)}"
+        # Pre-market legs must say so or IBKR holds them for 09:30. In regular
+        # hours the flag is left False on purpose: a DAY order that is still
+        # open at 16:00 must die, not follow the name into after hours.
+        ext = intent.session == "premarket"
 
         parent = LimitOrder(SIDE, intent.shares, intent.trigger)
         parent.orderId = self.ib.client.getReqId()
         parent.transmit = False
         parent.tif = "DAY"
+        parent.outsideRth = ext
 
         target_leg = None
         if intent.target is not None:
@@ -194,12 +212,14 @@ class PaperTrader:
             target_leg.ocaGroup = oca
             target_leg.transmit = False
             target_leg.tif = "DAY"
+            target_leg.outsideRth = ext
 
         stop_leg = StopOrder("SELL", intent.shares, intent.stop)
         stop_leg.orderId = self.ib.client.getReqId()
         stop_leg.parentId = parent.orderId
         stop_leg.ocaGroup = oca
         stop_leg.tif = "DAY"
+        stop_leg.outsideRth = ext
         # Last leg transmits, releasing the whole group at once. The stop is
         # deliberately the one that carries it: if anything in this sequence
         # fails partway, the group is never released and no unprotected entry
@@ -224,7 +244,55 @@ class PaperTrader:
             if filled and filled > 0 and rec.fill_price != filled:
                 rec.fill_price = filled
                 rec.events.append(f"filled {filled} vs trigger {rec.trigger}")
+
+            stop = by_id.get(rec.stop_id) if rec.stop_id else None
+            if stop is not None:
+                rec.stop_status = stop.orderStatus.status
+                # Warning 399 on the stop leg is the tell: IBKR is holding it
+                # for the open, so it is not protecting anything right now.
+                queued = any(e.errorCode == 399 for e in stop.log)
+                rec.protected = (not queued and rec.stop_status not in
+                                 ("ValidationError", "Inactive", "Cancelled",
+                                  "ApiCancelled"))
         return self.placed
+
+    def flatten_all(self, quote=None, offset: float = 0.10,
+                    now=None) -> list[str]:
+        """No trade alive. Cancel every order, then exit every position.
+
+        `quote(symbol) -> (bid, ask)` is only needed outside regular hours,
+        where a market order does not exist. The default offset is the
+        skill's: "place the limit 10-15c above the ask (selling: below the
+        bid) - it sweeps the levels up to your cap and fills immediately".
+        Prices never come from this session, so the quote is injected.
+        """
+        from ib_async import LimitOrder, MarketOrder
+
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        done: list[str] = []
+        self.cancel_all()
+        rth = in_regular_hours(now)
+        for pos in self.ib.positions():
+            qty = int(pos.position)
+            if qty <= 0:
+                continue        # long-only book; a short here is not ours
+            sym = pos.contract.symbol
+            if rth:
+                order = MarketOrder("SELL", qty)
+            else:
+                if quote is None:
+                    raise RuntimeError(
+                        f"cannot flatten {sym} outside regular hours without "
+                        f"a quote: no market orders exist there and prices do "
+                        f"not come from this session")
+                bid, _ask = quote(sym)
+                order = LimitOrder("SELL", qty, round(bid - offset, 2))
+                order.outsideRth = True
+            order.tif = "DAY"
+            self.ib.placeOrder(pos.contract, order)
+            done.append(f"{sym} x{qty} {order.orderType}")
+        return done
 
     def cancel_all(self) -> int:
         """Cancel every open order on this connection. The kill switch.

@@ -16,7 +16,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from execution.intent import (  # noqa: E402
-    EntryIntent, PlacedOrder, in_regular_hours, refusals, shares_for,
+    EntryIntent, PlacedOrder, in_premarket, in_regular_hours, refusals,
+    session_for, shares_for,
 )
 from execution.ibkr_trader import (  # noqa: E402
     NotPaperError, OrderRefused, PaperTrader, assert_paper,
@@ -223,35 +224,171 @@ def test_the_stop_leg_is_not_optional_when_the_target_is():
     assert stop_leg is not None and stop_leg.transmit is True
 
 
-# ------------------------------------------------------ extended hours
-def test_regular_hours_detection():
+# ------------------------------------------------------ the two sessions
+def test_session_boundaries():
     assert in_regular_hours(RTH) is True
-    assert in_regular_hours(PREMARKET) is False
-    assert in_regular_hours(SUNDAY) is False
-    assert in_regular_hours(dt.datetime(2026, 9, 8, 9, 29, tzinfo=ET)) is False
-    assert in_regular_hours(dt.datetime(2026, 9, 8, 9, 30, tzinfo=ET)) is True
-    assert in_regular_hours(dt.datetime(2026, 9, 8, 16, 0, tzinfo=ET)) is False
+    assert in_premarket(PREMARKET) is True
+    assert session_for(RTH) == "regular"
+    assert session_for(PREMARKET) == "premarket"
+
+    # 07:00 opens pre-market, 09:30 closes it and opens regular, 16:00 ends.
+    b = lambda h, m: dt.datetime(2026, 9, 8, h, m, tzinfo=ET)      # noqa: E731
+    assert session_for(b(6, 59)) is None
+    assert session_for(b(7, 0)) == "premarket"
+    assert session_for(b(9, 29)) == "premarket"
+    assert session_for(b(9, 30)) == "regular"
+    assert session_for(b(15, 59)) == "regular"
+    assert session_for(b(16, 0)) is None
+    assert session_for(SUNDAY) is None          # weekends are not a session
 
 
-def test_a_premarket_bracket_is_refused_because_the_stop_cannot_rest():
-    """`.claude/skills/extended-hours/SKILL.md`: extended hours accept limit
-    orders only, and "No stop orders of any type — banned because thin tape
-    makes stop hunting trivial [...] Your stop is therefore mental or
-    hotkeyed, never resting."
-
-    So a bracket armed at 09:15 is not an early protected entry. IBKR does
-    not reject it either — the 2026-09-06 smoke test got warning 399, "your
-    order will not be placed at the exchange until 09:30" — which is worse
-    than a rejection, because a queued order looks like an accepted one."""
-    r = refusals(intent(), now=PREMARKET)
-    assert any("resting stop cannot exist" in x for x in r)
+def test_a_premarket_intent_is_allowed_in_premarket():
+    """He trades it, so the executor must. `PARAMETERS.md` §2 puts the
+    personal window at 07:00-11:00, and the July 2026 challenge names 07:00
+    78 times against 36 for 09:30."""
+    assert refusals(intent(session="premarket"), now=PREMARKET) == []
 
 
-def test_the_session_gate_is_not_bypassed_by_a_clean_intent():
-    for clock in (PREMARKET, SUNDAY,
-                  dt.datetime(2026, 9, 8, 16, 30, tzinfo=ET)):   # after hours
-        assert refusals(intent(), now=clock) != []
+def test_a_regular_intent_arriving_premarket_is_refused_not_converted():
+    """Converting it would decide, for the caller, to trade a session they
+    did not choose — and a regular bracket pre-market is the queued-to-09:30
+    order that looks accepted."""
+    r = refusals(intent(session="regular"), now=PREMARKET)
+    assert any("outside 09:30-16:00" in x for x in r)
 
 
-def test_inside_regular_hours_a_clean_intent_still_passes():
-    assert refusals(intent(), now=RTH) == []
+def test_a_premarket_intent_arriving_in_rth_is_refused_too():
+    """The check runs both ways. A stale pre-market plan fired at 10:00 has
+    outsideRth on every leg and is not the order anyone reviewed."""
+    r = refusals(intent(session="premarket"), now=RTH)
+    assert any("outside 07:00-09:30" in x for x in r)
+
+
+def test_no_session_trades_outside_both_windows():
+    for clock in (SUNDAY, dt.datetime(2026, 9, 8, 5, 0, tzinfo=ET),
+                  dt.datetime(2026, 9, 8, 16, 30, tzinfo=ET)):
+        for sess in ("regular", "premarket"):
+            assert refusals(intent(session=sess), now=clock) != []
+
+
+def test_an_unknown_session_is_refused():
+    assert any("unknown session" in x
+               for x in refusals(intent(session="afterhours"), now=RTH))
+
+
+# ------------------------------------------------ pre-market protection
+def test_a_premarket_entry_is_not_claimed_protected_when_placed():
+    """The corpus says no stop of any type rests in extended hours, and IBKR
+    queues rather than rejects what it will not work. Until `premarket_probe`
+    settles whether IBKR's simulated stop is the exception, a pre-market
+    entry must not claim protection it cannot demonstrate."""
+    rec = PlacedOrder(symbol="TEST", parent_id=1, trigger=5.0, stop=4.8,
+                      shares=100)
+    assert rec.protected is False           # the default is unprotected
+
+
+def test_the_bracket_flags_outside_rth_only_for_a_premarket_intent():
+    pytest.importorskip("ib_async")
+
+    class FakeClient:
+        def __init__(self): self.n = 100
+        def getReqId(self): self.n += 1; return self.n
+
+    t = PaperTrader()
+    t.ib = type("FakeIB", (), {"client": FakeClient()})()
+
+    for leg in t._bracket(intent(session="premarket", target=5.6)):
+        assert leg.outsideRth is True
+
+    # Regular hours stays False on purpose: a DAY order still open at 16:00
+    # must die, not follow the name into after hours.
+    for leg in t._bracket(intent(session="regular", target=5.6)):
+        assert leg.outsideRth is False
+
+
+# ------------------------------------------------------- day trades only
+def test_flatten_refuses_to_guess_a_price_outside_regular_hours():
+    """No market orders exist in extended hours, and prices never come from
+    the order session. Refusing beats inventing a level."""
+    pytest.importorskip("ib_async")
+
+    class FakePos:
+        position = 100
+        contract = type("C", (), {"symbol": "TEST"})()
+
+    class FakeIB:
+        def positions(self): return [FakePos()]
+        def openTrades(self): return []
+        def cancelOrder(self, o): pass
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    with pytest.raises(RuntimeError, match="without a quote"):
+        t.flatten_all(now=PREMARKET)
+
+
+def test_flatten_sells_at_bid_minus_offset_outside_regular_hours():
+    """The skill's fill trick, run backwards: "sell = bid - offset"."""
+    pytest.importorskip("ib_async")
+
+    sent = []
+
+    class FakePos:
+        position = 100
+        contract = type("C", (), {"symbol": "TEST"})()
+
+    class FakeIB:
+        def positions(self): return [FakePos()]
+        def openTrades(self): return []
+        def cancelOrder(self, o): pass
+        def placeOrder(self, c, o): sent.append(o)
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    done = t.flatten_all(quote=lambda s: (4.50, 4.60), now=PREMARKET)
+
+    assert done == ["TEST x100 LMT"]
+    assert sent[0].lmtPrice == 4.40          # bid 4.50 - 10c
+    assert sent[0].outsideRth is True
+
+
+def test_flatten_uses_a_market_order_inside_regular_hours():
+    pytest.importorskip("ib_async")
+    sent = []
+
+    class FakePos:
+        position = 100
+        contract = type("C", (), {"symbol": "TEST"})()
+
+    class FakeIB:
+        def positions(self): return [FakePos()]
+        def openTrades(self): return []
+        def cancelOrder(self, o): pass
+        def placeOrder(self, c, o): sent.append(o)
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    assert t.flatten_all(now=RTH) == ["TEST x100 MKT"]
+    assert sent[0].orderType == "MKT"
+
+
+# ------------------------------------------------------ the hard stop
+def test_no_new_entry_after_the_1130_hard_stop():
+    """`PARAMETERS.md` §2: `session_close` 11:30 "outer edge, not the
+    centre", `midday_avoid` 11:30-15:00 "no trades".
+
+    The cascade will not catch this. An out-of-window name comes back
+    Verdict.LOG with plan_allowed True — correct for the cascade, since a
+    downgrade is not a kill — so an executor reading only plan_allowed would
+    open a position at 14:00."""
+    late = dt.datetime(2026, 9, 8, 14, 0, tzinfo=ET)
+    assert any("hard stop" in x for x in refusals(intent(), now=late))
+
+
+def test_1129_still_trades_and_1130_does_not():
+    assert refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 29, tzinfo=ET)) == []
+    assert refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 30, tzinfo=ET)) != []
+
+
+def test_the_hard_stop_does_not_reach_back_into_the_premarket_session():
+    assert refusals(intent(session="premarket"), now=PREMARKET) == []

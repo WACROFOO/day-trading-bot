@@ -22,7 +22,7 @@ slippage, so `PlacedOrder` keeps room for both from the first order.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, time
 from typing import Optional
 
 from momentum_platform.sessions import ET, REGULAR_END, REGULAR_START
@@ -41,6 +41,46 @@ SIDE = "BUY"
 # a rounding artefact. Share counts are integers, so some overshoot is
 # unavoidable on a small stop.
 RISK_TOLERANCE = 1.05
+
+
+# `PARAMETERS.md` §2: `premarket_start` 07:00, flagged era-dependent (a 2017
+# "half a dozen times a year" against 07:00 named 78 times in the July 2026
+# challenge). The extended-hours skill gives the mechanical reason for the
+# same boundary: "most retail brokers only allow from 07:00". Both point at
+# the same clock, for different reasons, so 07:00 it is.
+PREMARKET_START = time(7, 0)
+
+SESSIONS = ("regular", "premarket")
+
+# `PARAMETERS.md` §2: `session_close` 11:30 ET "outer edge, not the centre"
+# (n=16), `midday_avoid` 11:30-15:00 "no trades". CLAUDE.md carries the same
+# line with the typical close at 11:00. This is the ENTRY cutoff, not the
+# exit: after it, no new position is opened. Exits are always permitted, so a
+# position opened at 11:29 can still be managed and flattened.
+#
+# It is enforced here because the cascade does not enforce it. An
+# out-of-window name comes back Verdict.LOG with plan_allowed True, which is
+# correct for the cascade — LOG means "record it, do not trade it", and a
+# downgrade is not a kill. But an executor reading only plan_allowed would
+# open a position at 14:00, which is the one thing §2 is most explicit about.
+HARD_STOP = time(11, 30)
+
+
+def in_premarket(now: Optional[datetime] = None) -> bool:
+    """True only inside 07:00-09:30 ET on a weekday."""
+    now = (now or datetime.now(ET)).astimezone(ET)
+    if now.weekday() >= 5:
+        return False
+    return PREMARKET_START <= now.time() < REGULAR_START
+
+
+def session_for(now: Optional[datetime] = None) -> Optional[str]:
+    """Which session an intent placed now belongs to, or None (no trading)."""
+    if in_regular_hours(now):
+        return "regular"
+    if in_premarket(now):
+        return "premarket"
+    return None
 
 
 def in_regular_hours(now: Optional[datetime] = None) -> bool:
@@ -67,6 +107,11 @@ class EntryIntent:
     dollar_risk: float             # the user's own stated risk for this trade
     target: Optional[float] = None  # optional profit-taking limit
     plan_allowed: bool = False      # from cascade.CascadeResult.plan_allowed
+    # Which session this intent is FOR. Not derived from the clock: the caller
+    # states it, and refusals() checks the clock agrees. A regular-hours
+    # intent that arrives pre-market is a mistake about the time, and the
+    # honest response is to refuse it, not to quietly convert it.
+    session: str = "regular"
     verdict: str = ""               # the cascade verdict, recorded not judged
     note: str = ""
 
@@ -122,29 +167,53 @@ def refusals(i: EntryIntent,
                    f"${i.dollar_risk} by more than "
                    f"{(RISK_TOLERANCE - 1) * 100:.0f}%")
 
-    # EXTENDED HOURS. A resting stop does not exist outside 09:30-16:00.
+    # SESSIONS. Two are tradable and they have different order mechanics.
+    #
+    # REGULAR, 09:30-16:00. Brackets with a resting stop, the shape the rest
+    # of this module assumes.
+    #
+    # PRE-MARKET, 07:00-09:30. The corpus is explicit about what does not
+    # work there, .claude/skills/extended-hours/SKILL.md:
     #
     #   "Extended hours accept limit orders only: [...] No stop orders of any
     #    type - banned because thin tape makes stop hunting trivial [...] Your
     #    stop is therefore mental or hotkeyed, never resting."
-    #   -- .claude/skills/extended-hours/SKILL.md
     #
-    # The same file explains the warning IBKR returned on the first smoke
-    # test: orders that cannot participate "sit off-market and fire at
-    # 09:30". IBKR does not reject them, it QUEUES them, which is worse than
-    # a rejection because it looks like acceptance. The 2026-09-06 smoke test
-    # got exactly that: `Warning 399 [...] your order will not be placed at
-    # the exchange until 2026-09-08 09:30:00 US/Eastern`.
+    # and about what happens to an order that cannot participate: it "sit[s]
+    # off-market and fire[s] at 09:30". IBKR does not reject such an order,
+    # it QUEUES it, which looks like acceptance. The 2026-09-06 smoke test
+    # got exactly that: `Warning 399 [...] will not be placed at the
+    # exchange until 2026-09-08 09:30:00 US/Eastern`.
     #
-    # So a bracket armed at 09:15 is not a protected entry with an early
-    # start. It is an entry and a stop that both arrive at the bell, in the
-    # queue, alongside every other resting order - and the skill names that
-    # pile-up as the reason gappers dump at the open. Refused rather than
-    # sent, until a deliberate pre-market mode exists.
-    if not in_regular_hours(now):
-        out.append("outside 09:30-16:00 ET: a resting stop cannot exist, and "
-                   "IBKR would queue this bracket to the next open rather "
-                   "than reject it")
+    # That rule is stated for retail brokers in general - the skill names
+    # thinkorswim, Lightspeed and Webull. Whether IBKR honours a stop that
+    # carries outsideRth=True as a server-side simulated stop pre-market is
+    # NOT in the corpus, and `scripts/premarket_probe.py` exists to find out
+    # empirically before anything is built on either answer. Until it has
+    # run, a pre-market intent is permitted only when the caller has said
+    # "premarket" in so many words, and the executor marks the position as
+    # unconfirmed-protected until the stop leg's status is read back.
+    #
+    # An intent whose stated session disagrees with the clock is refused
+    # outright. Converting it would be deciding, on the caller's behalf, to
+    # trade a session they did not choose.
+    # DAY TRADES ONLY, and the day ends at 11:30. Checked before the session
+    # gate so that an 14:00 attempt is told the real reason rather than being
+    # told it is inside regular hours, which it is.
+    clock = (now or datetime.now(ET)).astimezone(ET)
+    if clock.time() >= HARD_STOP:
+        out.append(f"{clock:%H:%M} ET is past the {HARD_STOP:%H:%M} hard stop; "
+                   f"no new entries (exits are always allowed)")
+
+    if i.session not in SESSIONS:
+        out.append(f"unknown session {i.session!r}; expected one of {SESSIONS}")
+    elif i.session == "regular" and not in_regular_hours(now):
+        out.append("outside 09:30-16:00 ET: a regular-hours bracket needs a "
+                   "resting stop, and IBKR would queue this to the next open "
+                   "rather than reject it")
+    elif i.session == "premarket" and not in_premarket(now):
+        out.append("outside 07:00-09:30 ET: not the pre-market session this "
+                   "intent was built for")
 
     # Sub-penny prices are rejected by the exchange, not by IBKR, so the
     # order dies after it leaves. Caught here where the message is readable.
@@ -190,6 +259,11 @@ class PlacedOrder:
     stop: float = 0.0
     shares: int = 0
     status: str = "submitted"
+    stop_status: str = ""
+    # False until the stop leg is known to be resting and active. Always True
+    # for a regular-hours bracket once placed; for a pre-market one it stays
+    # False until sync() has read the stop leg back without warning 399.
+    protected: bool = False
     fill_price: Optional[float] = None
     fill_time: Optional[str] = None
     nbbo_bid_at_fill: Optional[float] = None   # Phase 3 reconciliation
