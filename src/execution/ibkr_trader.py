@@ -182,6 +182,75 @@ class PaperTrader:
         self.placed.append(rec)
         return rec
 
+    def place_entry_monitored(self, intent: EntryIntent) -> PlacedOrder:
+        """A pre-market entry with NO resting stop, by explicit design.
+
+        Only for the probe verdict `queued`: IBKR would park a stop leg for
+        09:30 and report it as accepted, which is worse than no stop because
+        it looks like one. So none is sent, `protected` is False from the
+        first line, `stop_status` says 'monitored', and `Runner.watch_stops`
+        is the stop — a limit sell at bid − offset the moment the bid touches
+        the level, which is the only exit that exists pre-market
+        (.claude/skills/extended-hours/SKILL.md: limit orders only, sell =
+        bid − offset). This depends on the runner being alive, and the
+        record says so; an operator reading `protected=0` knows exactly what
+        they are holding.
+        """
+        from ib_async import LimitOrder, Stock
+
+        reasons = refusals(intent)
+        if reasons:
+            raise OrderRefused(reasons)
+        if intent.session != "premarket":
+            raise OrderRefused(["a monitored entry is a pre-market shape only; "
+                                "regular hours get a bracket"])
+        if self.risk_gate is not None:
+            self.risk_gate.assert_can_buy()
+        if self.ib is None:
+            raise RuntimeError("not connected")
+
+        stock = Stock(intent.symbol, "SMART", "USD")
+        self.ib.qualifyContracts(stock)
+        parent = LimitOrder(SIDE, intent.shares, intent.trigger)
+        parent.orderId = self.ib.client.getReqId()
+        parent.tif = "DAY"
+        parent.outsideRth = True
+        parent.transmit = True
+        self.ib.placeOrder(stock, parent)
+
+        rec = PlacedOrder(symbol=intent.symbol, parent_id=parent.orderId,
+                          stop_id=None, target_id=None, trigger=intent.trigger,
+                          stop=intent.stop, shares=intent.shares, intent=intent,
+                          protected=False, stop_status="monitored")
+        rec.events.append(f"placed MONITORED entry on {self.account} — no resting stop; "
+                          f"runner.watch_stops is the stop")
+        self.placed.append(rec)
+        return rec
+
+    def exit_limit(self, symbol: str, qty: int, bid: float, offset: float = 0.10,
+                   outside_rth: bool = True) -> float:
+        """SELL qty at bid − offset, limit, extended hours. Returns the price.
+
+        The skill's fill trick, on the sell side: "place the limit 10-15c
+        [...] below the bid — it sweeps the levels up to your cap and fills
+        immediately." A market order does not exist outside regular hours.
+        """
+        from ib_async import LimitOrder, Stock
+
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        if qty <= 0:
+            raise ValueError("exit_limit sells a long; qty must be > 0")
+        px = round(bid - offset, 2)
+        stock = Stock(symbol, "SMART", "USD")
+        self.ib.qualifyContracts(stock)
+        order = LimitOrder("SELL", qty, px)
+        order.tif = "DAY"
+        order.outsideRth = outside_rth
+        order.transmit = True
+        self.ib.placeOrder(stock, order)
+        return px
+
     def _bracket(self, intent: EntryIntent):
         """Build the three legs by hand rather than via `ib.bracketOrder`.
 

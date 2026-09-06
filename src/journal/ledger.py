@@ -115,6 +115,13 @@ CREATE TABLE IF NOT EXISTS orders (
     placed_at TEXT NOT NULL, updated_at TEXT NOT NULL
 );
 
+-- Free-text events against an order: what the runner saw and did, in order.
+CREATE TABLE IF NOT EXISTS order_events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    order_id INTEGER NOT NULL REFERENCES orders(order_id),
+    ts TEXT NOT NULL, text TEXT NOT NULL
+);
+
 -- Halts encountered, with the price either side. PARAMETERS.md §10 says
 -- halt-resume fills are unmodellable from OHLCV; the live log is the only
 -- place this ever gets measured.
@@ -475,3 +482,14 @@ def set_state(conn: sqlite3.Connection, **fields) -> dict:
                  (*fields.values(), _now()))
     conn.commit()
     return get_state(conn)
+
+
+def open_monitored(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Filled, un-exited orders with no resting stop. The runner's watch list."""
+    return conn.execute("""SELECT * FROM orders WHERE protected=0 AND stop_status='monitored'
+                           AND fill_price IS NOT NULL AND exit_ts IS NULL""").fetchall()
+
+
+def add_order_event(conn: sqlite3.Connection, order_id: int, text: str) -> None:
+    conn.execute("INSERT INTO order_events (order_id, ts, text) VALUES (?,?,?)",
+                 (order_id, _now(), text))

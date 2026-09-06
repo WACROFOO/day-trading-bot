@@ -44,6 +44,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from execution.intent import ET, HARD_STOP  # noqa: E402
+from execution.policy import premarket_allowed  # noqa: E402,F401
 from journal import actuals, bars, controls, ledger as L, replay  # noqa: E402
 from momentum_platform.sessions import REGULAR_START  # noqa: E402
 
@@ -75,21 +76,6 @@ def pick_watchlist(rows: list[dict], cap: int = 8) -> tuple[list[str], list[tupl
 def mode_for(state: dict) -> str:
     """Phase A logs only. B and beyond trade. D/E are read-outs: log only again."""
     return "TRADE" if state.get("phase") in ("B", "C") else "LOG_ONLY"
-
-
-def premarket_allowed(state: dict) -> tuple[bool, str]:
-    """Pre-market entries need phase C AND a probe verdict on file.
-    docs/preregistration.md §5: 'queued' means phase C does not start."""
-    if state.get("phase") not in ("C",):
-        return False, f"phase {state.get('phase')} — pre-market entries start in phase C"
-    v = state.get("probe_verdict")
-    if v is None:
-        return False, "no probe verdict recorded — run scripts/premarket_probe.py pre-market"
-    if v == "held":
-        return True, "probe: IBKR holds the stop live pre-market — brackets"
-    if v == "queued":
-        return True, "probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED"
-    return False, f"probe inconclusive ({v!r}) — paste the probe output back"
 
 
 def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:

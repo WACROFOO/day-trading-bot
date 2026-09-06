@@ -34,6 +34,7 @@ from journal import ledger as L
 from .bridge import decision_clock, intent_from_decision
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import refusals
+from .policy import premarket_allowed, premarket_shape
 
 MODES = ("LOG_ONLY", "TRADE")
 
@@ -95,13 +96,28 @@ class Runner:
             if age > self.max_age_s:
                 reasons.append(f"decision is {age:.0f}s old; a stale plan is not "
                                f"the trade the cascade reviewed")
+        # Pre-market is an exercise decision before it is an order decision:
+        # phase C only, and only in the shape the probe verdict dictates.
+        # LOG_ONLY records the refusal too, so phase A shows how many
+        # pre-market plans the desk armed that the policy would have stopped.
+        shape = "bracket"
+        if intent.session == "premarket":
+            state = L.get_state(self.conn)
+            ok, why = premarket_allowed(state)
+            if not ok:
+                reasons.append(f"pre-market entry not allowed: {why}")
+            else:
+                shape = premarket_shape(state)
         if reasons:
             return "REFUSED", reasons
         if self.mode == "LOG_ONLY":
             return "LOG_ONLY", []
 
         try:
-            placed = self.trader.place_bracket(intent, now=clock)
+            if shape == "monitored":
+                placed = self.trader.place_entry_monitored(intent)
+            else:
+                placed = self.trader.place_bracket(intent, now=clock)
         except OrderRefused as exc:
             return "REFUSED", list(exc.reasons)
         # RiskVeto and anything else propagates: a latched day or a dead
@@ -142,6 +158,39 @@ class Runner:
             n += 1
         self.conn.commit()
         return n
+
+    # ------------------------------------------------- the monitored stop
+    def watch_stops(self, offset: float = 0.10) -> list[str]:
+        """TRADE only. For every filled position with no resting stop, exit at
+        bid − offset the moment the bid touches the stop.
+
+        This IS the stop for a `queued`-verdict pre-market entry, and it only
+        exists while this process runs — `PlacedOrder.protected` is False for
+        exactly that reason. A missing or stale quote is recorded as an
+        event and acted on by doing nothing; guessing a price to sell at is
+        worse than one more loop of exposure, and the operator can read the
+        gap in the events.
+        """
+        if self.mode != "TRADE":
+            return []
+        done: list[str] = []
+        for o in L.open_monitored(self.conn):
+            q = self.quote(o["symbol"]) if self.quote else None
+            if not q or q.get("bid") is None:
+                L.add_order_event(self.conn, o["order_id"], "watch_stops: no fresh quote; held")
+                continue
+            bid = float(q["bid"])
+            if bid > o["stop"]:
+                continue
+            px = self.trader.exit_limit(o["symbol"], int(o["shares"]), bid, offset=offset,
+                                        outside_rth=True)
+            L.record_exit(self.conn, o["order_id"], reason="monitored_stop", price=px,
+                          ts=self.now())
+            L.add_order_event(self.conn, o["order_id"],
+                              f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px}")
+            done.append(f"{o['symbol']} x{o['shares']} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+        self.conn.commit()
+        return done
 
     # ------------------------------------------------------- end of day
     def end_of_day(self) -> list[str]:

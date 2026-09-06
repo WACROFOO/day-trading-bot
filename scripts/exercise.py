@@ -167,6 +167,10 @@ def cmd_live(args) -> int:
                       + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
             if args.trade:
                 runner.sync_fills()
+                # The monitored stop lives here and nowhere else: for a
+                # `queued`-verdict pre-market entry this call IS the stop.
+                for line in runner.watch_stops():
+                    print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}STOP{END}     {line}")
                 if datetime.now(ET).time() >= HARD_STOP and not flattened:
                     done = runner.end_of_day()
                     print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
