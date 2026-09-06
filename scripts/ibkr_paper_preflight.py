@@ -80,6 +80,46 @@ def note(msg: str) -> None:
     print(f"       {DIM}{msg}{END}")
 
 
+
+# IBKR fills inapplicable numeric fields with DBL_MAX rather than leaving them
+# out, and ships them as strings. A field is only evidence the order was priced
+# if it parses to a finite number.
+DBL_MAX = 1.7976931348623157e308
+
+# `commission` was renamed `commissionAndFees` in the 10.30 API. Both are read
+# so the check does not depend on which ib_async the machine happens to have.
+_STATE_FIELDS = (
+    "commission", "commissionAndFees", "minCommission", "maxCommission",
+    "initMarginChange", "maintMarginChange", "equityWithLoanChange",
+    "initMarginAfter", "maintMarginAfter", "equityWithLoanAfter",
+)
+
+
+def _finite(raw) -> float | None:
+    """IBKR's string-or-float-or-sentinel -> a real number, or None."""
+    if raw is None or raw == "":
+        return None
+    try:
+        val = float(raw)
+    except (TypeError, ValueError):
+        return None
+    if val != val or abs(val) >= DBL_MAX:      # NaN or the not-applicable flag
+        return None
+    return val
+
+
+def _priced_fields(state) -> dict[str, float]:
+    """Every field IBKR actually put a number in. Empty dict = not priced."""
+    if state is None:
+        return {}
+    out = {}
+    for name in _STATE_FIELDS:
+        val = _finite(getattr(state, name, None))
+        if val is not None:
+            out[name] = val
+    return out
+
+
 def main() -> int:
     print(f"\nIBKR paper order preflight   {HOST}:{PORT}  client {CLIENT}")
     note("nothing here transmits an order")
@@ -154,6 +194,7 @@ def main() -> int:
         stock = Stock(PROBE, "SMART", "USD")
         ib.qualifyContracts(stock)
         probe = LimitOrder("BUY", 1, 1.00)      # far from the market
+        probe.tif = "DAY"                       # silences warning 10349
         # transmit stays True — see the module docstring. IBKR error 321
         # rejects a what-if with transmit=False and then stops replying.
         # `whatIf` is what keeps this off the market, not `transmit`.
@@ -181,14 +222,17 @@ def main() -> int:
             note("  Gateway > Configure > Settings > API > Settings > ")
             note("  'Create API message log file', then look for error 321.")
             return 5
-        if state and (state.initMarginChange or state.commission is not None):
+        priced = _priced_fields(state)
+        for label, val in priced.items():
+            note(f"{label:22s} {val}")
+        if priced:
             good("order permissions confirmed — IBKR priced the order")
-            if state.commission is not None:
-                note(f"commission on 1 share: {state.commission} "
-                     f"{state.commissionCurrency or ''}")
         else:
-            bad("IBKR did not price the order — permissions unconfirmed")
-            note("Check the paper account has US stock trading permissions.")
+            bad("IBKR returned an OrderState with nothing priced in it")
+            note("Every numeric field was absent, empty, or DBL_MAX. Raw:")
+            note(f"  {state!r}"[:400])
+            note("If the fields look populated above, the parser is wrong,")
+            note("not the account — send this block back.")
             return 5
 
         # --- 5. market data on this session (informational) --------------
