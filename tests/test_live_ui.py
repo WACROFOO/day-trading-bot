@@ -371,3 +371,35 @@ def test_the_viewer_key_sees_the_desk_but_cannot_change_it(desk_server, monkeypa
     r, body = _get(port, "/api/v1/desk/add?symbol=ZZZ", headers={"Cookie": "desk_key=viewer-secret"})
     assert r.status == 403 and "only the owner" in json.loads(body)["note"]
     assert "ZZZ" not in desk_server["desk"].symbols
+
+
+def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_server):
+    """The card once summed four booleans into a score where FILTERS.md Layer 1
+    kills, and the browser and server disagreed on screen (IMRN 2026-09-04).
+    The banner word must be the server's, from the six-state vocabulary, and
+    'PASS' must never appear as a verdict — on this desk it means a gate passed."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    port = desk_server["port"]
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        errors: list = []
+        pg.on("pageerror", lambda e: errors.append(str(e)))
+        pg.goto(f"http://127.0.0.1:{port}/")
+        pg.wait_for_timeout(800)
+        assert not errors, errors
+        assert pg.evaluate("!!(window.__SESSION__.cascade && window.__SESSION__.cascade.AAA)"), \
+            "the server must ship a cascade verdict for every symbol"
+        server_word = pg.evaluate("window.__SESSION__.cascade.AAA.verdict")
+        banner = pg.text_content("#verdictCard .verdict-banner b")
+        assert banner == server_word, (banner, server_word)
+        assert banner in {"REJECT", "REVIEW", "WAIT", "WATCH", "STALE", "LOG", "MANAGE"}
+        assert banner != "PASS"
+        assert "server cascade" in pg.get_attribute("#verdictCard .verdict-banner", "title")
+        # every non-passing gate the server reported is named on the card
+        gates = pg.evaluate("window.__SESSION__.cascade.AAA.gates.filter(g => g.state !== 'PASS' && g.state !== 'NOT_APPLICABLE').map(g => g.label)")
+        why = pg.text_content("#verdictCard .why")
+        for g in gates:
+            assert g in why, (g, why)
+        browser.close()

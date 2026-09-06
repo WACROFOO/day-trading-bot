@@ -586,7 +586,18 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
     assert labels == ["Price", "Gain vs close", "RVOL · daily", "Float / supply", "News",
                       "Technical score", "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
-    assert page.locator(".verdict-banner b").inner_text() in {"GO", "WAIT", "PASS"}
+    # The banner is the SERVER's word for the clicked symbol, from the
+    # six-state vocabulary. This test used to accept {"GO", "WAIT", "PASS"} —
+    # the browser's own matrix — and "PASS" as a verdict is the defect the
+    # card no longer has: on this desk PASS means a gate passed.
+    word = page.locator(".verdict-banner b").inner_text()
+    assert word in {"REJECT", "REVIEW", "WAIT", "WATCH", "STALE", "LOG", "MANAGE"}, word
+    assert word != "PASS"
+    # It came from the server: the banner says so, and the word is one the
+    # server actually produced for some symbol in this session.
+    assert "server cascade" in (page.get_attribute(".verdict-banner", "title") or "")
+    produced = set(page.evaluate("Object.values(window.__SESSION__.cascade || {}).map(c => c.verdict)"))
+    assert word in produced, (word, produced)
     assert page.locator(".why-row").count() >= 1
 
 

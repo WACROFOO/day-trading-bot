@@ -112,6 +112,17 @@ function activePlan(sym, t) {
   const p = (S.plans || []).filter(x => x.symbol === sym && x.armedAt <= t);
   return p.length ? p[p.length - 1] : null;
 }
+/* A plan the detector armed and the server's cascade refused to publish. It is
+   counted and named rather than absent, so the card can say "suppressed"
+   instead of "N/A" — the two mean opposite things. */
+function suppressedPlan(sym, t) {
+  const p = (S.suppressedPlans || []).filter(x => x.symbol === sym && x.armedAt <= t);
+  return p.length ? p[p.length - 1] : null;
+}
+/* The server's verdict for a symbol, or null when the payload predates it. */
+function serverVerdict(sym) {
+  return (S.cascade && S.cascade[sym]) || null;
+}
 /* The alert timeline. The server rebuilds the whole session every few seconds;
    an alert that ages out of that rebuild window used to vanish from the tile.
    The desk keeps its own log, keyed by the event's STABLE idempotency key
@@ -1367,23 +1378,45 @@ function renderVerdict(frame, ctx) {
     waits.push("Price is already more than 1R beyond the trigger — chasing here inverts the reward/risk.");
   if (!hodActive && !runActive) waits.push("No live momentum event in the last five minutes.");
 
-  const verdict = blockers.length ? "PASS" : waits.length ? "WAIT" : "GO";
-  const banner = el("div", "verdict-banner " + verdict.toLowerCase());
+  // THE VERDICT IS THE SERVER'S. `src/momentum_platform/cascade.py` runs
+  // FILTERS.md Layer 1 as a reject cascade — first kill is terminal, unknown
+  // fails closed — and ships verdict, killedBy and every gate in
+  // session.cascade. This card used to sum four booleans into a score where
+  // the method kills, and the two disagreed on screen (IMRN 2026-09-04: last
+  // $1.69 against a $2-20 band, card still showed Entry ARMED). The browser
+  // renders a decision it did not make; the local matrix below survives only
+  // as a fallback for a payload that predates the cascade, and it never says
+  // the word PASS as a verdict, because on this desk PASS means a gate passed.
+  const sv = serverVerdict(sym);
+  const localVerdict = blockers.length ? "REJECT" : waits.length ? "WAIT" : "REVIEW";
+  const verdict = sv ? sv.verdict : localVerdict;
+  const cls = { REJECT: "pass", STALE: "pass", WAIT: "wait", WATCH: "wait", LOG: "wait",
+                REVIEW: "go", MANAGE: "go" }[verdict] || "wait";
+  const banner = el("div", "verdict-banner " + cls);
   banner.appendChild(el("b", null, verdict));
-  // GO needs every condition at once, which is rare by construction. A bare
-  // "WAIT" gives no sense of whether a setup is one condition away or five,
-  // so the banner carries the count and the list below names them.
   const missing = blockers.length + waits.length;
-  banner.appendChild(el("span", null, verdict === "GO" ? "candidate and structure both check out"
-    : verdict === "WAIT"
-      ? "watch, do not enter yet — " + missing + (missing === 1 ? " condition" : " conditions") + " short"
-      : "reject this candidate"));
+  const tail = sv
+    ? (sv.killedBy ? "killed on " + sv.killedBy + " — no plan is published for this name"
+       : verdict === "REVIEW" ? "every Layer 1 gate passed — read the chart yourself"
+       : verdict === "STALE" ? "feed stale — no verdict until the tape moves"
+       : verdict === "LOG" ? "outside the session window — logged, not traded"
+       : (sv.reasons && sv.reasons[0]) || "chart gates not yet met")
+    : (verdict === "REVIEW" ? "candidate and structure both check out"
+       : verdict === "WAIT" ? "watch, do not enter yet — " + missing + (missing === 1 ? " condition" : " conditions") + " short"
+       : "reject this candidate");
+  banner.appendChild(el("span", null, tail));
+  banner.title = sv ? "server cascade · " + (sv.gates || []).length + " gates" : "browser fallback — payload has no cascade";
   host.appendChild(banner);
 
   const why = el("div", "why");
-  (blockers.length ? blockers : waits.length ? waits : ["Four pillars, a confirmed pullback, usable spread and 2R of room."]).forEach(r => {
+  const rows = sv
+    ? (sv.gates || []).filter(g => g.state !== "PASS" && g.state !== "NOT_APPLICABLE")
+        .map(g => g.label + ": " + g.state + (g.value != null ? " · " + g.value : "") + (g.reason ? " — " + g.reason : ""))
+        .concat(sv.warnings || [])
+    : (blockers.length ? blockers : waits);
+  (rows.length ? rows : ["Every Layer 1 gate passed. Chart, tape and Level 2 are yours to read."]).forEach(r => {
     const x = el("div", "why-row");
-    x.appendChild(el("span", "why-dot " + verdict.toLowerCase(), ""));
+    x.appendChild(el("span", "why-dot " + cls, ""));
     x.appendChild(el("span", null, r));
     why.appendChild(x);
   });
@@ -1415,7 +1448,9 @@ function renderVerdict(frame, ctx) {
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
   line("HOD / Running", hodActive ? "HOD" : runActive ? "Running Up" : "None",
        hodActive || runActive ? "ACTIVE" : "WAIT", hodActive || runActive ? "ok" : "warn");
-  line("Entry", plan ? fx(plan.entry) : "N/A", plan ? "ARMED" : "—", plan ? "ok" : "muted-st");
+  const sup = !plan && suppressedPlan(sym, frame.t);
+  line("Entry", plan ? fx(plan.entry) : sup ? "suppressed" : "N/A",
+       plan ? "ARMED" : sup ? "KILLED" : "—", plan ? "ok" : sup ? "no" : "muted-st");
   line("Stop", plan ? fx(plan.stop) : "N/A", "pullback low", "muted-st");
   line("Target", plan ? fx(plan.target) : "N/A", plan ? plan.rewardMultiple.toFixed(1) + "R" : "—", "muted-st");
   host.appendChild(el("div", "divider", "pine dashboard mirror"));
@@ -2151,6 +2186,7 @@ function refreshSession() {
     Object.keys(S.bars10s).forEach(k => delete S.bars10s[k]); Object.assign(S.bars10s, next.bars10s || {});
     mergeSymbols(next.symbols || {});
     S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
+    S.cascade = next.cascade || S.cascade; S.suppressedPlans = next.suppressedPlans || [];
     S.sessionStart = next.sessionStart || S.sessionStart;
     S.feedLagSeconds = next.feedLagSeconds;
     if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
