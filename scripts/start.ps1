@@ -139,6 +139,7 @@ if ($Ibkr) {
 # ------------------------------------------------------------------- serve --
 Head "starting"
 Say  "  Open this in your browser:  http://127.0.0.1:$Port"
+if ($env:DESK_KEY) { Note "  an access key is set: add ?key=<your DESK_KEY> to that URL the first time" }
 Note "  $banner"
 Say  ""
 Say  "  This window is now busy running the desk.  Ctrl-C stops it."

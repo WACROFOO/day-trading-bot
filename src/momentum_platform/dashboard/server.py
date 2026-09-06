@@ -255,6 +255,23 @@ def _session_from_source(fixture: str) -> dict:
 _session = _session_from_source
 
 
+# Access keys, for a desk that is opened beyond this machine.
+#
+# With no key set the desk stays as it was: bound to 127.0.0.1, no gate. Set
+# DESK_KEY and every request must carry it, once as ?key=... (a cookie keeps it
+# after that) — the page, session.js, the API and the event stream alike. A
+# DESK_VIEWER_KEY is a second key that can see everything but cannot change the
+# desk: /api/v1/desk/add is refused to it. Two traders sharing one desk over a
+# tunnel give the viewer key to the partner and keep the owner key.
+#
+# Keys are read from the environment, never from the page or the repo.
+def _keys() -> dict:
+    import os
+    owner = (os.environ.get("DESK_KEY") or "").strip()
+    viewer = (os.environ.get("DESK_VIEWER_KEY") or "").strip()
+    return {"owner": owner, "viewer": viewer}
+
+
 def make_handler(fixture, live: "LiveSession | None" = None, screener: "ScreenerLoop | None" = None):
     holder = live or LiveSession(fixture)
     if screener is None and getattr(holder, "screener", None) is not None:
@@ -262,6 +279,28 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
     hub = getattr(holder, "hub", None)              # IBKR desk: server-sent events
     class Handler(BaseHTTPRequestHandler):
         server_version = "MomentumWorkstation/0.1"
+        _set_cookie: "str | None" = None
+
+        def _role(self) -> "str | None":
+            """owner, viewer, or None when the request carries no valid key.
+
+            "open" when no key is configured at all — the localhost default."""
+            keys = _keys()
+            if not keys["owner"] and not keys["viewer"]:
+                return "open"
+            from http.cookies import SimpleCookie
+            from urllib.parse import parse_qs
+            presented = parse_qs(urlparse(self.path).query).get("key", [None])[0]
+            if presented:
+                self._set_cookie = presented          # remembered for the rest of the visit
+            else:
+                jar = SimpleCookie(self.headers.get("Cookie", ""))
+                presented = jar["desk_key"].value if "desk_key" in jar else None
+            if presented and keys["owner"] and presented == keys["owner"]:
+                return "owner"
+            if presented and keys["viewer"] and presented == keys["viewer"]:
+                return "viewer"
+            return None
 
         def log_message(self, fmt, *args):  # quieter console
             pass
@@ -277,14 +316,28 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
             self.send_header("Content-Type", ctype)
             self.send_header("Content-Length", str(len(body)))
             self.send_header("Cache-Control", "no-store")
+            if self._set_cookie:
+                # HttpOnly: the page never reads it, so a script cannot leak it.
+                # No Secure flag: the same desk answers plain http on localhost.
+                self.send_header("Set-Cookie", f"desk_key={self._set_cookie}; Path=/; HttpOnly; SameSite=Lax")
             self.end_headers()
             self.wfile.write(body)
+
+        def _refuse(self) -> None:
+            body = (b"<!doctype html><meta charset=utf-8><title>Momentum workstation</title>"
+                    b"<body style='font:14px system-ui;background:#0b0f14;color:#c9d3df;padding:40px'>"
+                    b"<h2>This desk needs a key</h2><p>Open the link you were given, with "
+                    b"<code>?key=...</code> on the end. The key is remembered for this browser.</p>")
+            self._send(body, "text/html; charset=utf-8", 401)
 
         def _json(self, payload, status: int = 200) -> None:
             self._send(json.dumps(payload, default=str).encode(), "application/json", status)
 
         def do_GET(self) -> None:  # noqa: N802
             path = urlparse(self.path).path
+            role = self._role()
+            if role is None:
+                return self._refuse()
             session = holder.current()
 
             if path in ("/", "/index.html"):
@@ -308,6 +361,7 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                 else:
                     from .. import desk_profile
                     payload["desk"] = desk_profile.fingerprint()
+                payload["role"] = role
                 return self._json(payload)
             if path == "/api/v1/stream":
                 if hub is None:
@@ -337,6 +391,9 @@ def make_handler(fixture, live: "LiveSession | None" = None, screener: "Screener
                                    "notes": ["screener runs only with a live Alpaca session"]})
             if path == "/api/v1/desk/add":
                 from urllib.parse import parse_qs
+                if role == "viewer":
+                    return self._json({"added": [], "symbols": getattr(holder, "symbols", []),
+                                       "note": "this key views the desk; only the owner adds names"}, 403)
                 wanted = parse_qs(urlparse(self.path).query).get("symbol", [])
                 if not holder.symbols:
                     return self._json({"added": [], "symbols": [],

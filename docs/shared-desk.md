@@ -4,17 +4,47 @@ Two people trading the same strategy want the same scanners and the same
 alerts, each from their own machine and their own IBKR connection. This is how
 that is set up and how you prove it is working.
 
+## One desk, two browsers (the bridge)
+
+When only one of you has an IBKR account, the other watches the same desk over
+the internet. Read the terms note below first; then, on the machine with TWS
+(user 1):
+
+1. Put two long random keys in `.env` (never commit them):
+   ```
+   DESK_KEY=<owner key>
+   DESK_VIEWER_KEY=<viewer key>
+   ```
+2. Start the desk as usual: `bash scripts/start.sh --ibkr`.
+3. Open a tunnel to it. Cloudflare's quick tunnel needs no account:
+   ```
+   brew install cloudflared
+   cloudflared tunnel --url http://127.0.0.1:8787
+   ```
+   It prints a `https://<random>.trycloudflare.com` URL. That URL changes each
+   time cloudflared restarts; a named tunnel or Tailscale fixes it if you want
+   a permanent address.
+4. Send the partner the URL **with the viewer key**:
+   `https://<random>.trycloudflare.com/?key=<viewer key>`
+
+The partner (user 2) needs nothing installed — just that link in a browser.
+The key is remembered in a cookie after the first visit. Their RULES badge
+reads `VIEWER`: they see every card, list, chart and alert, and hear the
+alerts, but a click on a screener row cannot add a name to your desk.
+
+You open `http://127.0.0.1:8787/?key=<owner key>` yourself as before.
+
+Without a key set the desk is exactly as it was: open on 127.0.0.1 only.
+
 ## Why not one shared server
 
 IBKR market-data subscriptions are per-subscriber and non-redistributable —
 that restriction comes from the exchange agreements behind them (Nasdaq, NYSE,
 the CTA/UTP tapes), not from IBKR. Serving one person's live IBKR prices to a
 second person is what those terms exist to prevent, and the usual consequence
-is the data subscription being terminated. So: one desk each, own TWS, own
-subscription. The platform is the code, not the data.
-
-The desk also has no authentication and `/api/v1/desk/add` changes the running
-desk, so it stays bound to `127.0.0.1`.
+is the data subscription being terminated. The clean setup is one desk each,
+own TWS, own subscription: the platform is the code, not the data. The bridge
+above is the subscriber's decision to make, knowing that.
 
 ## Setting up the second desk
 

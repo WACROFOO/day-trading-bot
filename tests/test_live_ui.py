@@ -328,3 +328,46 @@ def test_page_rolls_to_the_new_trading_day(desk_server):
             ib.daily["AAA"] = day_bars(30, 4.0)
             desk.refresh_session()
         browser.close()
+
+
+# -- one desk, two browsers: the access key ----------------------------------------
+
+def test_with_no_key_configured_the_desk_stays_open(desk_server, monkeypatch):
+    monkeypatch.delenv("DESK_KEY", raising=False)
+    monkeypatch.delenv("DESK_VIEWER_KEY", raising=False)
+    r, body = _get(desk_server["port"], "/api/v1/health")
+    assert r.status == 200 and json.loads(body)["role"] == "open"
+
+
+def test_a_configured_key_gates_every_request_and_a_cookie_keeps_it(desk_server, monkeypatch):
+    """Opened beyond localhost, the desk must not be readable — or changeable —
+    by whoever finds the URL. The key travels once as ?key= and lives in a
+    cookie after that, so the page's own fetches and its event stream carry
+    it without the key ever appearing in the page's code."""
+    monkeypatch.setenv("DESK_KEY", "owner-secret")
+    port = desk_server["port"]
+    for path in ("/", "/session.js", "/api/v1/health", "/api/v1/stream"):
+        r, body = _get(port, path)
+        assert r.status == 401, path
+        assert b"needs a key" in body
+    r, body = _get(port, "/api/v1/health?key=owner-secret")
+    assert r.status == 200 and json.loads(body)["role"] == "owner"
+    cookie = r.getheader("Set-Cookie")
+    assert cookie and cookie.startswith("desk_key=owner-secret") and "HttpOnly" in cookie
+    r, body = _get(port, "/api/v1/health", headers={"Cookie": "desk_key=owner-secret"})
+    assert r.status == 200 and json.loads(body)["role"] == "owner"
+    r, _ = _get(port, "/api/v1/health", headers={"Cookie": "desk_key=wrong"})
+    assert r.status == 401
+
+
+def test_the_viewer_key_sees_the_desk_but_cannot_change_it(desk_server, monkeypatch):
+    monkeypatch.setenv("DESK_KEY", "owner-secret")
+    monkeypatch.setenv("DESK_VIEWER_KEY", "viewer-secret")
+    port = desk_server["port"]
+    r, body = _get(port, "/api/v1/health?key=viewer-secret")
+    assert r.status == 200 and json.loads(body)["role"] == "viewer"
+    r, body = _get(port, "/session.js", headers={"Cookie": "desk_key=viewer-secret"})
+    assert r.status == 200 and b"__SESSION__" in body
+    r, body = _get(port, "/api/v1/desk/add?symbol=ZZZ", headers={"Cookie": "desk_key=viewer-secret"})
+    assert r.status == 403 and "only the owner" in json.loads(body)["note"]
+    assert "ZZZ" not in desk_server["desk"].symbols

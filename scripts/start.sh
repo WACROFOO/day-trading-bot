@@ -84,6 +84,7 @@ if [ "$MODE" = "ibkr" ]; then
   if [ $IBKR -eq 0 ] || [ $IBKR -ge 4 ]; then
     head2 "starting"
     say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
+[ -n "${DESK_KEY:-}" ] && note "an access key is set: add ?key=<your DESK_KEY> to that URL the first time"
     say "  ${D}live IBKR feed over TWS, read-only — ${SYMBOLS:-scanner picks the desk}${O}"
     say ""
     say "  ${B}This window is now busy running the desk.${O}  Ctrl-C stops it."
@@ -163,6 +164,7 @@ fi
 # ----------------------------------------------------------------- serve ----
 head2 "starting"
 say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
+[ -n "${DESK_KEY:-}" ] && note "an access key is set: add ?key=<your DESK_KEY> to that URL the first time"
 say "  ${D}$BANNER${O}"
 if [ $LIVE -eq 0 ]; then
   say "  ${D}live: the session rebuilds every 60s; the page follows the newest bar on its own${O}"

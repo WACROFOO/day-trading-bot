@@ -2065,7 +2065,8 @@ function setRulesBadge(desk) {
   document.getElementById("rulesHash").textContent = String(desk.hash).slice(0, 8).toUpperCase();
   const over = Object.keys(desk.envOverrides || {});
   document.getElementById("rulesSub").textContent =
-    (desk.build ? desk.build + " · " : "") + (over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : "shared profile");
+    (desk.build ? desk.build + " · " : "") + (over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : "shared profile")
+    + (desk.role === "viewer" ? " · VIEWER" : "");
   const ent = desk.entitlements || {};
   const missing = Object.keys(ent).filter(k => ent[k] === false);
   document.getElementById("rulesDot").className = "dot " + (over.length || missing.length ? "stale" : "live");
@@ -2235,7 +2236,7 @@ function streamFollow() {
   setInterval(() => {
     fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
       if (h.provider) setFeedBadge(h.provider);
-      if (h.desk) setRulesBadge(h.desk);
+      if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk));
       if (h.builtAt && h.builtAt !== stamp) { stamp = h.builtAt; refreshSession(); }
     }).catch(() => {});
   }, 5000);
@@ -2256,7 +2257,7 @@ function liveFollow() {
   let stamp = S.builtAt;
   setInterval(() => {
     fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
-      if (h.desk) setRulesBadge(h.desk);
+      if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk));
       if (!h.builtAt || h.builtAt === stamp) return;
       stamp = h.builtAt;
       try {
@@ -2481,7 +2482,7 @@ function init() {
   // Which rules this desk is running, live or recorded. Two traders compare
   // one badge instead of two screens.
   fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json())
-    .then(h => { if (h.desk) setRulesBadge(h.desk); }).catch(() => {});
+    .then(h => { if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk)); }).catch(() => {});
   if (S.live) {
     // A live desk has no replay transport: there is nothing to play back and
     // a scrub bar that jumped to the start on every refresh read as a bug.
