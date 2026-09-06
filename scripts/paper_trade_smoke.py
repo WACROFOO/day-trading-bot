@@ -20,8 +20,13 @@ come back. An uncancelled resting order left by a crashed smoke test is the
 worst outcome available here, so it is the one thing guaranteed not to
 happen.
 
+Outside 09:30-16:00 ET it proves a different thing, on purpose: that the
+executor REFUSES. A resting stop does not exist in extended hours, and IBKR
+does not reject such an order but queues it to the next open, which looks
+like acceptance. Both paths are a pass; they prove different halves.
+
 Exit codes:
-  0  placed, read back, and cancelled
+  0  placed, read back, and cancelled — or correctly refused out of hours
   1  ib_async is not installed
   2  Gateway not reachable
   3  NOT A PAPER ACCOUNT — nothing was sent
@@ -39,7 +44,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from execution.ibkr_trader import (  # noqa: E402
     NotPaperError, OrderRefused, PaperTrader,
 )
-from execution.intent import EntryIntent, shares_for  # noqa: E402
+from execution.intent import (  # noqa: E402
+    EntryIntent, in_regular_hours, refusals, shares_for,
+)
 
 SYMBOL = os.environ.get("SMOKE_SYMBOL", "AAPL")
 TRIGGER = 1.00      # ~99% below the market. Cannot fill.
@@ -82,6 +89,22 @@ def main() -> int:
     good(f"{shares} shares, planned risk ${intent.planned_risk} "
          f"of ${DOLLAR_RISK} stated")
 
+    # Out of hours the interesting behaviour is the refusal, and it needs no
+    # connection at all — which is itself the point: nothing reaches IBKR.
+    if not in_regular_hours():
+        print("\n2. Session gate")
+        reasons = refusals(intent)
+        if not reasons:
+            bad("outside 09:30-16:00 ET and the intent was NOT refused")
+            note("The session gate is not working. Do not trade this.")
+            return 5
+        good("refused before any connection was opened:")
+        for r in reasons:
+            note(f"- {r}")
+        print(f"\n{OK}PASS{END} — the session gate holds.")
+        note("Re-run inside 09:30-16:00 ET to exercise the placement path.")
+        return 0
+
     trader = PaperTrader()
     print("\n2. Connect")
     try:
@@ -112,9 +135,16 @@ def main() -> int:
         trader.ib.sleep(2)
         trader.sync()
         for t in trader.ib.trades():
-            good(f"order {t.order.orderId:>4}  {t.order.orderType:<5} "
-                 f"{t.order.action} {t.order.totalQuantity:g} "
-                 f"-> {t.orderStatus.status}")
+            status = t.orderStatus.status
+            line = (f"order {t.order.orderId:>4}  {t.order.orderType:<5} "
+                    f"{t.order.action} {t.order.totalQuantity:g} -> {status}")
+            # ValidationError is not a healthy state, and on the first smoke
+            # test it was reachable while the printed status still read
+            # PreSubmitted. Surfaced rather than counted as an ok.
+            (warn if status in ("ValidationError", "Inactive") else good)(line)
+            for entry in t.log:
+                if entry.errorCode:
+                    note(f"  {entry.status}: {entry.message}")
         if placed.fill_price is not None:
             warn(f"FILLED at {placed.fill_price} — this should be impossible")
             note("Investigate before going further. Cancelling anyway.")

@@ -25,6 +25,15 @@ attaches children by parentId and holds the whole group until the last leg
 carries transmit=True — which is what `transmit` is actually for, as opposed
 to the what-if misuse that broke the preflight twice.
 
+REGULAR HOURS ONLY, for now. A bracket needs a resting stop and extended
+hours do not permit one — `.claude/skills/extended-hours/SKILL.md`: "No stop
+orders of any type [...] Your stop is therefore mental or hotkeyed, never
+resting." IBKR does not reject such an order; it queues it to 09:30, which
+the first smoke test hit as warning 399. `intent.refusals` therefore refuses
+any bracket outside 09:30-16:00 ET. A pre-market mode would need a
+different shape (limit entry, no resting stop, a monitored exit) and is a
+decision, not a default.
+
 NO PRICES COME FROM HERE. The Gateway session has no market data — the
 preflight showed `last=nan bid=-1` — and that is correct. Quotes come from
 the live read-only desk feed. This module is a pipe.
@@ -116,14 +125,15 @@ class PaperTrader:
         return False
 
     # --------------------------------------------------------------- orders
-    def place_bracket(self, intent: EntryIntent) -> PlacedOrder:
+    def place_bracket(self, intent: EntryIntent,
+                      now=None) -> PlacedOrder:
         """Entry, stop and optional target, transmitted as one group."""
         # Checks first, library second. An earlier draft imported ib_async at
         # the top of this method, so a refused intent died with
         # ModuleNotFoundError instead of naming the thing the reader can fix.
         # Refusal ordering is not cosmetic: the message is read inside the
         # window the trade lives in.
-        reasons = refusals(intent)
+        reasons = refusals(intent, now=now)
         if reasons:
             raise OrderRefused(reasons)
 

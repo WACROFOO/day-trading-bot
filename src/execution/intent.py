@@ -22,7 +22,15 @@ slippage, so `PlacedOrder` keeps room for both from the first order.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from datetime import datetime
 from typing import Optional
+
+from momentum_platform.sessions import ET, REGULAR_END, REGULAR_START
+
+# Importing the desk's calendar rather than restating 09:30 here. The arrow
+# only points this way: `momentum_platform` must never import `execution`,
+# and a test enforces that. Two definitions of the opening bell would drift,
+# and the one that drifts is always the copy.
 
 # Ross's method is long-only small-cap momentum. Shorting is a different
 # book with different borrow, halt and squeeze behaviour, and none of the
@@ -33,6 +41,19 @@ SIDE = "BUY"
 # a rounding artefact. Share counts are integers, so some overshoot is
 # unavoidable on a small stop.
 RISK_TOLERANCE = 1.05
+
+
+def in_regular_hours(now: Optional[datetime] = None) -> bool:
+    """True only inside 09:30-16:00 ET on a weekday.
+
+    Holidays are not consulted. This is a refusal gate, and being wrong in
+    the safe direction on a holiday costs a trade that the market would not
+    have filled anyway.
+    """
+    now = (now or datetime.now(ET)).astimezone(ET)
+    if now.weekday() >= 5:
+        return False
+    return REGULAR_START <= now.time() < REGULAR_END
 
 
 @dataclass(frozen=True)
@@ -58,7 +79,8 @@ class EntryIntent:
         return round(self.risk_per_share * self.shares, 2)
 
 
-def refusals(i: EntryIntent) -> list[str]:
+def refusals(i: EntryIntent,
+             now: Optional[datetime] = None) -> list[str]:
     """Every reason this order must not be sent. Empty list = sendable.
 
     All reasons are collected rather than raised on the first, because a
@@ -99,6 +121,30 @@ def refusals(i: EntryIntent) -> list[str]:
         out.append(f"planned risk ${i.planned_risk} exceeds stated "
                    f"${i.dollar_risk} by more than "
                    f"{(RISK_TOLERANCE - 1) * 100:.0f}%")
+
+    # EXTENDED HOURS. A resting stop does not exist outside 09:30-16:00.
+    #
+    #   "Extended hours accept limit orders only: [...] No stop orders of any
+    #    type - banned because thin tape makes stop hunting trivial [...] Your
+    #    stop is therefore mental or hotkeyed, never resting."
+    #   -- .claude/skills/extended-hours/SKILL.md
+    #
+    # The same file explains the warning IBKR returned on the first smoke
+    # test: orders that cannot participate "sit off-market and fire at
+    # 09:30". IBKR does not reject them, it QUEUES them, which is worse than
+    # a rejection because it looks like acceptance. The 2026-09-06 smoke test
+    # got exactly that: `Warning 399 [...] your order will not be placed at
+    # the exchange until 2026-09-08 09:30:00 US/Eastern`.
+    #
+    # So a bracket armed at 09:15 is not a protected entry with an early
+    # start. It is an entry and a stop that both arrive at the bell, in the
+    # queue, alongside every other resting order - and the skill names that
+    # pile-up as the reason gappers dump at the open. Refused rather than
+    # sent, until a deliberate pre-market mode exists.
+    if not in_regular_hours(now):
+        out.append("outside 09:30-16:00 ET: a resting stop cannot exist, and "
+                   "IBKR would queue this bracket to the next open rather "
+                   "than reject it")
 
     # Sub-penny prices are rejected by the exchange, not by IBKR, so the
     # order dies after it leaves. Caught here where the message is readable.
