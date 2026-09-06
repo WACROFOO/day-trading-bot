@@ -157,10 +157,11 @@ def cmd_live(args) -> int:
     flattened = False
     try:
         while True:
-            for did, outcome, reasons in runner.step():
-                tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(outcome, "")
-                print(f"  {datetime.now(ET):%H:%M:%S}  {tag}{outcome:<8}{END} {did}"
-                      + (f"  ✗ {'; '.join(reasons)[:100]}" if reasons else ""))
+            for a in runner.step():
+                tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
+                print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
+                      f"{a.trigger:.2f}/{a.stop:.2f}"
+                      + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
             if args.trade:
                 runner.sync_fills()
                 if datetime.now(ET).time() >= HARD_STOP and not flattened:

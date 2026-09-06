@@ -27,7 +27,7 @@ from __future__ import annotations
 
 import sqlite3
 from datetime import datetime, timezone
-from typing import Callable, Optional
+from typing import Callable, NamedTuple, Optional
 
 from journal import ledger as L
 
@@ -36,6 +36,22 @@ from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import refusals
 
 MODES = ("LOG_ONLY", "TRADE")
+
+
+class Acted(NamedTuple):
+    """What the runner did with one decision, with enough to render a line.
+
+    A decision_id alone is a 16-character hash. An operator watching a
+    morning of these needs the symbol and the levels, or the log is
+    unreadable exactly when it matters.
+    """
+    decision_id: str
+    symbol: str
+    ts_et: str
+    trigger: float
+    stop: float
+    outcome: str
+    reasons: list[str]
 
 Quote = Callable[[str], Optional[dict]]     # symbol -> {bid, ask, bid_size, ask_size, ts}
 
@@ -53,16 +69,18 @@ class Runner:
         self.conn, self.mode, self.dollar_risk = conn, mode, dollar_risk
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
-        self.acted: list[tuple[str, str, list[str]]] = []   # (decision, outcome, reasons)
+        self.acted: list[Acted] = []
 
     # ------------------------------------------------------------- the loop
-    def step(self) -> list[tuple[str, str, list[str]]]:
+    def step(self) -> list["Acted"]:
         """Act on every pending decision once. Returns what was done."""
         done = []
         for row in L.pending(self.conn):
             outcome, reasons = self._act(row)
             L.set_outcome(self.conn, row["decision_id"], outcome, reasons)
-            done.append((row["decision_id"], outcome, reasons))
+            done.append(Acted(row["decision_id"], row["symbol"], row["ts_et"],
+                              float(row["trigger"]), float(row["stop"]),
+                              outcome, reasons))
         self.conn.commit()
         self.acted.extend(done)
         return done

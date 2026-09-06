@@ -66,7 +66,7 @@ def test_log_only_acts_on_every_pending_decision_once_and_opens_nothing(journal)
     r = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0)
     done = r.step()
     assert len(done) == before
-    assert {o for _, o, _ in done} <= {"LOG_ONLY", "REFUSED"}
+    assert {a.outcome for a in done} <= {"LOG_ONLY", "REFUSED"}
     assert L.pending(journal) == []
     assert r.step() == []                      # nothing left; idempotent
 
@@ -76,15 +76,23 @@ def test_log_only_judges_each_decision_as_of_its_own_bar_not_the_wall_clock(jour
     hours. Replayed on a Sunday they must still be judged as 09:40 plans."""
     r = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0)
     done = r.step()
-    for did, outcome, reasons in done:
-        assert not any("outside 09:30" in x for x in reasons), (did, reasons)
+    for a in done:
+        assert not any("outside 09:30" in x for x in a.reasons), a
+
+
+def test_the_runner_reports_the_symbol_and_levels_not_just_a_hash(journal):
+    """An operator watching a morning of these needs to know WHICH name. A
+    16-character decision id is unreadable exactly when it matters."""
+    a = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0).step()[0]
+    assert a.symbol and a.symbol.isupper()
+    assert a.trigger > 0 and a.stop > 0 and a.ts_et.startswith("2026-09-01T")
 
 
 def test_a_refusal_records_its_reasons_verbatim(journal):
     # $1 of risk against a 15c stop sizes to 6 shares; fine. $0.01 sizes to 0.
     r = Runner(journal, mode="LOG_ONLY", dollar_risk=0.01)
     done = r.step()
-    assert all(o == "REFUSED" for _, o, _ in done)
+    assert all(a.outcome == "REFUSED" for a in done)
     row = journal.execute("SELECT refusal_reasons_json FROM decisions "
                           "WHERE outcome='REFUSED' LIMIT 1").fetchone()
     reasons = json.loads(row[0])
@@ -93,7 +101,7 @@ def test_a_refusal_records_its_reasons_verbatim(journal):
 
 def test_suppressed_decisions_are_never_offered_to_the_runner(journal):
     r = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0)
-    acted = {d for d, _, _ in r.step()}
+    acted = {a.decision_id for a in r.step()}
     suppressed = {row["decision_id"] for row in L.decisions(journal, outcome="SUPPRESSED")}
     assert suppressed and not (acted & suppressed)
 
@@ -114,7 +122,7 @@ def test_trade_mode_places_records_the_order_and_marks_taken(journal):
     now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
     r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600)
     done = r.step()
-    taken = [d for d, o, _ in done if o == "TAKEN"]
+    taken = [a for a in done if a.outcome == "TAKEN"]
     assert taken, done
     assert len(t.intents) == len(taken)
     orders = journal.execute("SELECT * FROM orders").fetchall()
@@ -132,8 +140,8 @@ def test_trade_mode_refuses_a_stale_decision(journal):
     late = lambda: datetime(2026, 9, 1, 18, 0, tzinfo=timezone.utc)    # noqa: E731
     r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=late)
     done = r.step()
-    assert all(o == "REFUSED" for _, o, _ in done)
-    assert all(any("stale" in x for x in reasons) for _, _, reasons in done)
+    assert all(a.outcome == "REFUSED" for a in done)
+    assert all(any("stale" in x for x in a.reasons) for a in done)
     assert t.intents == []                        # nothing reached the trader
 
 
