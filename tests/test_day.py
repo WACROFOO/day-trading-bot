@@ -62,11 +62,16 @@ def test_phase_a_is_blocked_until_sessions_and_probe(journal):
     assert any("probe" in b for b in blockers)
     L.set_state(journal, sessions_done=5, probe_verdict="held", probe_date="2026-09-08")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    # still blocked: the paper session's tape has not been measured. The first
+    # real orders must not be judged against prices the decision never saw.
+    assert blockers and all("paper session data" in b for b in blockers)
+    L.set_state(journal, paper_data="realtime", paper_data_date="2026-09-08")
+    nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert blockers == []
 
 
 def test_phase_b_is_blocked_by_too_few_trades_and_by_any_unprotected_fill(journal):
-    L.set_state(journal, phase="B", probe_verdict="held")
+    L.set_state(journal, phase="B", probe_verdict="held", paper_data="realtime")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert nxt == "C" and any("30 taken" in b for b in blockers)
     did = L.decisions(journal, plan_allowed=1)[0]["decision_id"]
