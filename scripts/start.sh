@@ -21,7 +21,13 @@ warn() { printf '  %swarn%s %s\n' "$Y" "$O" "$*"; }
 bad()  { printf '  %sxx%s   %s\n' "$R" "$O" "$*"; }
 note() { printf '       %s%s%s\n' "$D" "$*" "$O"; }
 
-MODE="auto"; SYMBOLS=""
+MODE="auto"; SYMBOLS=""; SHARE=0
+# --share anywhere on the line: open the desk to a partner over a tunnel.
+ARGV=()
+for a in "$@"; do
+  if [ "$a" = "--share" ]; then SHARE=1; else ARGV+=("$a"); fi
+done
+set -- "${ARGV[@]+"${ARGV[@]}"}"
 case "${1:-}" in
   --replay) MODE="replay" ;;
   --scan)   MODE="scan" ;;
@@ -30,6 +36,49 @@ case "${1:-}" in
   -*)       say "unknown option: $1"; exit 2 ;;
   *)        MODE="symbols"; SYMBOLS="$1" ;;
 esac
+
+# ------------------------------------------------------------------ share ---
+# One desk, two browsers. Keys are generated once into .env (gitignored,
+# never printed to the repo), cloudflared opens a tunnel to this desk, and the
+# link for the partner — with the VIEWER key — is printed here. The owner key
+# stays on this machine.
+share_setup() {
+  head2 "sharing the desk"
+  touch .env
+  if ! grep -q '^DESK_KEY=.\+' .env; then
+    printf 'DESK_KEY=owner-%s\n' "$(openssl rand -hex 16)" >> .env; good "owner key written to .env"
+  fi
+  if ! grep -q '^DESK_VIEWER_KEY=.\+' .env; then
+    printf 'DESK_VIEWER_KEY=viewer-%s\n' "$(openssl rand -hex 16)" >> .env; good "viewer key written to .env"
+  fi
+  export DESK_KEY="$(sed -n 's/^DESK_KEY=//p' .env | tail -1)"
+  export DESK_VIEWER_KEY="$(sed -n 's/^DESK_VIEWER_KEY=//p' .env | tail -1)"
+  if ! command -v cloudflared >/dev/null 2>&1; then
+    bad "cloudflared is not installed"; note "run:  brew install cloudflared   then start again with --share"; exit 1
+  fi
+  SHARE_LOG="$(mktemp -t desk-tunnel.XXXXXX)"
+  cloudflared tunnel --url "http://127.0.0.1:$PORT" > "$SHARE_LOG" 2>&1 &
+  SHARE_PID=$!
+  trap 'kill $SHARE_PID 2>/dev/null' EXIT
+  URL=""
+  for _ in $(seq 1 40); do
+    URL="$(grep -o 'https://[a-z0-9-]*\.trycloudflare\.com' "$SHARE_LOG" | head -1)"
+    [ -n "$URL" ] && break
+    sleep 0.5
+  done
+  if [ -z "$URL" ]; then
+    bad "the tunnel did not come up"; note "see $SHARE_LOG"; exit 1
+  fi
+  good "tunnel up"
+  say ""
+  say "  ${B}Send your partner this link (view only):${O}"
+  say "  ${G}$URL/?key=$DESK_VIEWER_KEY${O}"
+  say ""
+  say "  ${B}Your own link (owner):${O}"
+  say "  $URL/?key=$DESK_KEY      or locally  http://127.0.0.1:$PORT/?key=$DESK_KEY"
+  say ""
+  note "the link changes each time cloudflared restarts; the keys do not"
+}
 
 printf '\n%sMomentum workstation%s\n' "$B" "$O"
 
@@ -82,6 +131,7 @@ if [ "$MODE" = "ibkr" ]; then
     *) bad  "preflight failed: $PREFLIGHT" ;;
   esac
   if [ $IBKR -eq 0 ] || [ $IBKR -ge 4 ]; then
+    [ $SHARE -eq 1 ] && share_setup
     head2 "starting"
     say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
 [ -n "${DESK_KEY:-}" ] && note "an access key is set: add ?key=<your DESK_KEY> to that URL the first time"
@@ -162,6 +212,7 @@ else
 fi
 
 # ----------------------------------------------------------------- serve ----
+[ $SHARE -eq 1 ] && share_setup
 head2 "starting"
 say "  ${B}Open this in your browser:  http://127.0.0.1:$PORT${O}"
 [ -n "${DESK_KEY:-}" ] && note "an access key is set: add ?key=<your DESK_KEY> to that URL the first time"
