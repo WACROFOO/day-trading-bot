@@ -19,8 +19,11 @@ strategy works.
 | Risk gate, 5 rules + latch | built, pre-existing | `src/paper_trading/risk_gate.py` |
 | Account | `DUR339781` · PAPER · NetLiq $2,143.70 | preflight output |
 | Pre-market stop protection | **UNKNOWN — not yet measured** | `scripts/premarket_probe.py`, unrun |
-| Trade ledger | **does not exist** | — |
-| Reconciliation / replay | **does not exist** | — |
+| Decision ledger | built, 13 tests; fixture: 5 decisions, 10 board rows, 2 halts | `src/journal/ledger.py` |
+| Runner (LOG_ONLY / TRADE) | built, 10 tests, fixture end-to-end | `src/execution/runner.py` · `scripts/exercise.py` |
+| Actuals · replay check · controls | built, 10 tests; replay 5/5 on fixture | `src/journal/actuals.py` · `replay.py` · `controls.py` |
+| Live desk → ledger | wired behind `JOURNAL_DB` | `src/momentum_platform/dashboard/ibkr_desk.py` |
+| Pre-registration | **PROPOSED, values unset** | `docs/preregistration.md` |
 
 Baseline for regression: `BASELINE-2026-09-06.md`.
 One test fails and did before this work: `test_ibkr_stream.py::test_read_only_connect_skips_the_startup_account_sync_when_ib_async_offers_it`.

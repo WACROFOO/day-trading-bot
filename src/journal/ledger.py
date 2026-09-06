@@ -146,7 +146,10 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
     path = Path(db_path) if db_path else DEFAULT_DB
     if str(path) != ":memory:":
         path.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(path), timeout=10)
+    # check_same_thread=False: the live desk rebuilds on a worker thread and
+    # the runner reads on another. Writes are single-statement and idempotent,
+    # so SQLite's own locking is enough; nothing here holds a transaction open.
+    conn = sqlite3.connect(str(path), timeout=10, check_same_thread=False)
     conn.row_factory = sqlite3.Row
     conn.executescript(_SCHEMA)
     return conn

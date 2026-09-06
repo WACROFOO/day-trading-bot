@@ -583,7 +583,8 @@ class IbkrDesk:
         session = build_session_from_records(
             records, session_id="ibkr-" + "-".join(self.symbols[:3]),
             source_name="IBKR · TWS read-only · live", data_status=status,
-            volume_floor_scale=1.0, trading_date=self.session_day())
+            volume_floor_scale=1.0, trading_date=self.session_day(),
+            journal=_journal())
         session["live"] = True
         session["streaming"] = True
         session["refreshSeconds"] = self.rebuild
@@ -722,3 +723,26 @@ def _num(v):
         return None if f != f else f
     except (TypeError, ValueError):
         return None
+
+
+
+# ---------------------------------------------------------------- journal
+_JOURNAL = None
+
+
+def _journal():
+    """The decision ledger, when JOURNAL_DB is set; otherwise None.
+
+    The desk writes what it saw into it on every rebuild — decisions, board,
+    halts — and nothing else changes. It is read-only data in, decisions out;
+    no order path is created, and the guard tests still hold. Off by default
+    so a desk with no exercise running writes nothing.
+    """
+    global _JOURNAL
+    path = os.environ.get("JOURNAL_DB")
+    if not path:
+        return None
+    if _JOURNAL is None:
+        from journal import ledger
+        _JOURNAL = ledger.connect(path)
+    return _JOURNAL

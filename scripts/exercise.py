@@ -1,0 +1,193 @@
+#!/usr/bin/env python3
+"""The paper-trading exercise, from the terminal.
+
+    python3 scripts/exercise.py replay FIXTURE [--db PATH] [--risk 20]
+        Run a fixture through the desk with the journal on, act on every
+        decision in LOG_ONLY, fill actuals from the same tape, print the report.
+        This is step 2 of docs/paper-exercise-brief.md §⑧ — log only, no orders.
+
+    python3 scripts/exercise.py check  [--db PATH]
+        R11: re-run the cascade on every stored decision and prove it reproduces.
+
+    python3 scripts/exercise.py report [--db PATH]
+        The funnel, the controls, the replay result. Nothing else.
+
+    python3 scripts/exercise.py live   [--db PATH] [--risk 20] [--trade]
+        Act on the LIVE desk's decisions. Without --trade: LOG_ONLY, and the
+        Gateway is never touched. With --trade: places brackets on the paper
+        account through PaperTrader (client 31, port 4002) — refuses unless the
+        account is DU*, and runs the end-of-day flatten at the hard stop.
+        The desk must be running with JOURNAL_DB pointing at the same file.
+
+The report is laid out the way .claude/skills/trading-report-design says a
+document must be: provenance first, funnel with denominators, rejects
+visible, verdict last, limitations always. A number here without its
+source is a defect.
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import sys
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
+
+from journal import actuals, bars, controls, ledger as L, replay  # noqa: E402
+
+DIM, BOLD, OK, BAD, WARN, END = "\033[2m", "\033[1m", "\033[92m", "\033[91m", "\033[93m", "\033[0m"
+
+
+def _db(args) -> str:
+    return args.db or os.environ.get("JOURNAL_DB") or str(L.DEFAULT_DB)
+
+
+# ------------------------------------------------------------------ report
+def report(conn, *, source: str, synthetic: bool) -> None:
+    f = L.funnel(conn)
+    rep = replay.check(conn)
+    ctl = controls.summary(conn)
+    now = datetime.now(timezone.utc).astimezone(L.ET).strftime("%Y-%m-%d %H:%M ET")
+
+    print(f"\n{BOLD}PAPER EXERCISE · decision ledger{END}")
+    print(f"LEDGER · {source} · checked {now}")
+    if synthetic:
+        print(f"{WARN}! SYNTHETIC FIXTURE — 10 generated symbols. Proves plumbing, never a market.{END}")
+    first = conn.execute("SELECT MIN(ts_et), MAX(ts_et), COUNT(DISTINCT substr(ts_et,1,10)) FROM decisions").fetchone()
+    if first[0]:
+        print(f"decisions span {first[0][:16]} → {first[1][:16]} ET · {first[2]} session day(s)")
+
+    print(f"\n{BOLD}FUNNEL{END}  (denominator at every stage)")
+    print(f"  {f['board_symbols']:>4} symbols on the board · {f['board_plan_allowed']} rows plan-allowed"
+          f" · {f['board_rows']} board rows")
+    print(f"  {f['plans_armed']:>4} plans armed by the detector")
+    print(f"  {f['plans_suppressed']:>4}   suppressed by the cascade      {DIM}(killed names, shown below){END}")
+    print(f"  {f['plans_allowed']:>4}   allowed")
+    print(f"  {f['refused_by_executor']:>4}     refused by the executor    {DIM}(reasons below){END}")
+    print(f"  {f['log_only']:>4}     LOG_ONLY  · {f['taken']} TAKEN · {f['orders']} orders · "
+          f"{f['fills']} fills · {f['fills_with_nbbo']} with NBBO")
+    print(f"  {f['actuals']:>4} actuals computed · {f['halts']} halt transitions")
+
+    print(f"\n{BOLD}REJECTS{END}  (never hidden)")
+    rows = conn.execute("""SELECT ts_et, symbol, verdict, killed_by, outcome, refusal_reasons_json, last
+                           FROM decisions WHERE outcome IN ('SUPPRESSED','REFUSED') ORDER BY ts_et""").fetchall()
+    if not rows:
+        print("  —")
+    for r in rows:
+        why = r["killed_by"] or ""
+        if r["outcome"] == "REFUSED" and r["refusal_reasons_json"]:
+            import json
+            why = "; ".join(json.loads(r["refusal_reasons_json"]))[:90]
+        print(f"  {r['ts_et'][11:16]}  {r['symbol']:<6} {r['verdict']:<8} {r['outcome']:<10} "
+              f"last {r['last'] if r['last'] is not None else '—':<8} ✗ {why}")
+
+    print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows · no CIs at this n)")
+    print(f"  {'series':<12}{'n':>4}{'mean R':>10}{'median R':>10}{'win':>7}")
+    for k, v in ctl.items():
+        if v["n"]:
+            print(f"  {k:<12}{v['n']:>4}{v['mean_R']:>10.3f}{v['median_R']:>10.3f}{v['win_rate']:>7.0%}")
+        else:
+            print(f"  {k:<12}{0:>4}{'—':>10}{'—':>10}{'—':>7}")
+
+    ok = not rep["diverged"]
+    lamp = f"{OK}✓{END}" if ok else f"{BAD}✗{END}"
+    print(f"\n{BOLD}REPLAY{END}  (R11)")
+    print(f"  {lamp} {rep['reproduced']}/{rep['checked']} decisions reproduce their recorded verdict from stored inputs")
+    for d in rep["diverged"][:10]:
+        print(f"    {d['ts_et'][11:16]} {d['symbol']}: recorded {d['recorded']} · replayed {d['replayed']}")
+
+    print(f"\n{DIM}NOT CHECKED: real fills (paper is simulated; NBBO plausibility only), halt-resume")
+    print(f"fills, sub-minute entries, Level 2, borrow, fees beyond IBKR's estimate, regime.")
+    print(f"Paper only. 894-session replication was negative expectancy; this measures selection.{END}\n")
+
+
+# ---------------------------------------------------------------- commands
+def cmd_replay(args) -> int:
+    from execution.runner import Runner
+    from momentum_platform.dashboard.session_builder import build_session
+
+    fixture = Path(args.fixture)
+    conn = L.connect(_db(args))
+    build_session(fixture, journal=conn)
+    conn.commit()
+    Runner(conn, mode="LOG_ONLY", dollar_risk=args.risk).step()
+    actuals.fill_all(conn, bars.from_fixture(fixture))
+    synthetic = "SYNTHETIC" in fixture.read_text()[:400].upper()
+    report(conn, source=f"{fixture.name} · replay · LOG_ONLY · ${args.risk:g} risk/trade",
+           synthetic=synthetic)
+    return 0
+
+
+def cmd_check(args) -> int:
+    conn = L.connect(_db(args))
+    rep = replay.check(conn)
+    for d in rep["diverged"]:
+        print(f"{BAD}✗{END} {d}")
+    print(f"{rep['reproduced']}/{rep['checked']} reproduced")
+    return 0 if not rep["diverged"] else 1
+
+
+def cmd_report(args) -> int:
+    conn = L.connect(_db(args))
+    report(conn, source=_db(args), synthetic=False)
+    return 0
+
+
+def cmd_live(args) -> int:
+    from execution.intent import ET, HARD_STOP
+    from execution.runner import Runner
+
+    conn = L.connect(_db(args))
+    trader = None
+    if args.trade:
+        from execution.ibkr_trader import PaperTrader
+        trader = PaperTrader()
+        acct = trader.connect()                 # raises NotPaperError on U*
+        print(f"{OK}ok{END} {acct} — paper · client {trader.client_id} · TRADE mode")
+    else:
+        print(f"{DIM}LOG_ONLY — no connection opened; decisions are judged and recorded only{END}")
+    runner = Runner(conn, mode="TRADE" if args.trade else "LOG_ONLY",
+                    dollar_risk=args.risk, trader=trader,
+                    quote=None)          # NBBO source is wired in Phase 3
+    print(f"{DIM}reading {_db(args)} every {args.every}s · hard stop {HARD_STOP:%H:%M} ET · Ctrl-C to stop{END}")
+    flattened = False
+    try:
+        while True:
+            for did, outcome, reasons in runner.step():
+                tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(outcome, "")
+                print(f"  {datetime.now(ET):%H:%M:%S}  {tag}{outcome:<8}{END} {did}"
+                      + (f"  ✗ {'; '.join(reasons)[:100]}" if reasons else ""))
+            if args.trade:
+                runner.sync_fills()
+                if datetime.now(ET).time() >= HARD_STOP and not flattened:
+                    done = runner.end_of_day()
+                    print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
+                    flattened = True
+            time.sleep(args.every)
+    except KeyboardInterrupt:
+        print("\nstopped")
+    finally:
+        if trader is not None:
+            trader.disconnect()
+    return 0
+
+
+def main(argv=None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--db", help="ledger path (default $JOURNAL_DB or data/journal.sqlite)")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
+    sub.add_parser("check"); sub.add_parser("report")
+    lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
+    lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
+    lv.add_argument("--every", type=int, default=5)
+    args = ap.parse_args(argv)
+    return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live}[args.cmd](args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
