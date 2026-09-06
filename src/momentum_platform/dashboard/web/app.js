@@ -1,0 +1,2607 @@
+/* Momentum Workstation — replay shell.
+   One selected symbol drives every panel. Charts keep their own intervals.
+   Nothing here places an order; scanner rows are research candidates. */
+(function () {
+"use strict";
+const S = window.__SESSION__;
+if (!S) { document.body.innerHTML = "<p style='padding:20px'>session.js failed to load</p>"; return; }
+
+const COL = {};
+S.rowColumns.forEach((c, i) => COL[c] = i);
+const SYMS = S.symbols, FRAMES = S.frames, BARS = S.bars;
+let OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+const PROVIDER = (S.provider && S.provider.provider) ? String(S.provider.provider).toUpperCase() : "IEX";
+const LIST_IDS = ["five_pillars_list"];
+const ALERT_TILES = {
+  running_up: { id: "running_up", title: "Running Up",
+                note: "≥3% in 10 min · fresh 10-min high · above VWAP · liquid. One alert per leg. Approximation.",
+                scanners: ["running_up", "squeeze_5_in_5", "squeeze_10_in_10"] },
+  hod_momentum: { id: "hod_momentum", title: "High of Day",
+                  note: "New high with momentum. The branch labels the float and RVOL band. Approximation.",
+                  scanners: ["hod_momentum", "breakout_52w"] },
+};
+// Three cards, in funnel order: candidates -> acceleration -> breakout.
+const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
+
+const state = {
+  frame: 0, playing: false, speed: 4, selected: null, locked: false,
+  frozen: {}, openRow: null, openAlert: null, riskDollars: "",
+  sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {}, arrivals: new Map(),
+};
+
+/* ── formatting ─────────────────────────────────────────────────────── */
+const $ = s => document.querySelector(s);
+const SVGNS = "http://www.w3.org/2000/svg";
+const svgEl = (t, attrs) => { const n = document.createElementNS(SVGNS, t);
+  Object.keys(attrs || {}).forEach(k => n.setAttribute(k, attrs[k])); return n; };
+/* A real flame, not a rounded blob. Two paths so the hot states read as fire
+   at 9 pixels: the silhouette takes its colour from the band, the core is a
+   lighter tongue inside it. The "none" state keeps the silhouette hollow so
+   the symbol column stays aligned whether or not a headline exists. */
+function flameIcon(band, title) {
+  const svg = svgEl("svg", { viewBox: "0 0 12 14", class: "flame " + (band || "none"),
+                             role: "img", "aria-label": title || "news recency" });
+  svg.appendChild(svgEl("path", { d: "M6 0C6 3.1 1.5 4.1 1.5 8.2 1.5 11.5 3.5 14 6 14s4.5-2.5 4.5-5.8C10.5 5.6 8.8 4.6 8.4 2.3 7.8 4.1 6.9 4.6 6 5.7Z" }));
+  svg.appendChild(svgEl("path", { class: "core", d: "M6 7.4c.1 1.4-1.3 1.8-1.3 3.2 0 1 .6 1.8 1.3 1.8s1.3-.8 1.3-1.8c0-1.1-1-1.5-1.3-3.2Z" }));
+  if (title) {
+    svg.setAttribute("title", title);          // read by tooling and hover alike
+    const t = svgEl("title", {}); t.textContent = title; svg.appendChild(t);
+  }
+  return svg;
+}
+const el = (t, c, txt) => { const n = document.createElement(t); if (c) n.className = c; if (txt != null) n.textContent = txt; return n; };
+const fx = (v, d = 2) => v == null ? "—" : Number(v).toFixed(d);
+const pct = v => v == null ? "—" : (v >= 0 ? "+" : "") + v.toFixed(1) + "%";
+const vol = v => v == null ? "—" : v >= 1e6 ? (v / 1e6).toFixed(1) + "M" : v >= 1e3 ? Math.round(v / 1e3) + "k" : String(v);
+const dirClass = v => v == null ? "flat" : v > 0.05 ? "up" : v < -0.05 ? "down" : "flat";
+const etTime = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
+const etClock = iso => new Date(iso).toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
+const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]); return o; };
+/* The RVOL a row was JUDGED on, and how it was measured. A list that gates on
+   5x showed the daily number beside the name, so a row admitted at 30x
+   time-of-day read 1.3x and looked like a bug in the scanner. */
+const rowRvol = r => (r && r.rvol != null ? r.rvol : (r ? r.rvolDaily : null));
+const rowRvolTitle = r => {
+  if (!r) return "";
+  const tod = r.rvolMeasure === "time_of_day";
+  const head = tod ? "volume so far vs the same clock time in prior sessions"
+                   : "today's volume vs prior FULL days (understates a part-day)";
+  return head + (tod && r.rvolDaily != null ? " · daily measure " + fx(r.rvolDaily) + "×" : "");
+};
+
+/* ── derived series ─────────────────────────────────────────────────── */
+function barsUpTo(sym, idx) {
+  const b = BARS[sym] || [];
+  // Cut by TIME, never by index. A frame's barIndex counts the FIRST symbol's
+  // bars, and on a live desk every symbol has its own history length: an
+  // index cut drew AEHL's 04:00-05:15 premarket flat line as "the chart" at
+  // 10:43 while its 10-second pane, cut by time, showed the real 7-dollar tape.
+  if (!FRAMES.length) return b;
+  const at = FRAMES[Math.min(state.frame, FRAMES.length - 1)].t;
+  const limit = (S.streaming && state.frame >= FRAMES.length - 1) ? Infinity : at + 60;
+  let lo = 0, hi = b.length;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (b[mid][0] < limit) lo = mid + 1; else hi = mid; }
+  return b.slice(0, lo);
+}
+/* Aggregate 1-minute bars into n-minute candles ON THE CLOCK. Grouping every n
+   bars by index started 5-minute candles at 09:04 when the first print landed
+   there, and the axis labelled 09:04 / 12:01 / 15:03 — no platform draws a
+   5-minute chart that way. Bucket by floor(ts / (n*60)) so candles sit on
+   :00/:05/:10 like every other chart the user has ever read, and a gap in the
+   prints simply yields a missing candle rather than shifting every later one. */
+function agg(bars, n) {
+  const span = n * 60, out = [];
+  let cur = null;
+  for (const b of bars) {
+    const bucket = Math.floor(b[0] / span) * span;
+    if (!cur || cur[0] !== bucket) { cur = [bucket, b[1], b[2], b[3], b[4], b[5]]; out.push(cur); continue; }
+    cur[2] = Math.max(cur[2], b[2]); cur[3] = Math.min(cur[3], b[3]); cur[4] = b[4]; cur[5] += b[5];
+  }
+  return out;
+}
+function ema(vals, n) {
+  const k = 2 / (n + 1); const out = []; let prev = null;
+  vals.forEach((v, i) => { prev = i === 0 ? v : v * k + prev * (1 - k); out.push(i + 1 < n ? null : prev); });
+  return out;
+}
+function vwap(bars) {
+  let pv = 0, vv = 0;
+  return bars.map(b => { const tp = (b[2] + b[3] + b[4]) / 3; pv += tp * b[5]; vv += b[5]; return vv ? pv / vv : b[4]; });
+}
+function activePlan(sym, t) {
+  const p = (S.plans || []).filter(x => x.symbol === sym && x.armedAt <= t);
+  return p.length ? p[p.length - 1] : null;
+}
+/* The alert timeline. The server rebuilds the whole session every few seconds;
+   an alert that ages out of that rebuild window used to vanish from the tile.
+   The desk keeps its own log, keyed by the event's STABLE idempotency key
+   (symbol|scanner|branch|second — the event id is a fresh uuid on every
+   rebuild), so Running Up and High of Day read as a timeline: newest first,
+   older entries retained for the session. */
+const ALERT_LOG = [];              // newest first
+const ALERT_KEYS = new Set();
+const ALERT_CAP = 300;
+function alertKey(a) {
+  return a.idempotencyKey || (a.symbol + "|" + a.scannerId + "|" + (a.branch || "-") + "|" + a.sourceTime);
+}
+function ingestAlerts(idx) {
+  const fresh = [];
+  alertsUpTo(idx).forEach(a => {
+    const k = alertKey(a);
+    if (ALERT_KEYS.has(k)) return;
+    ALERT_KEYS.add(k);
+    fresh.push(Object.assign({ _key: k, _at: Date.parse(a.sourceTime) }, a));
+  });
+  fresh.forEach(r => ALERT_LOG.push(r));
+  // Sorted by the alert's OWN minute, never by when the page first saw it.
+  // A symbol the scanner adds at 10:09 arrives carrying its whole morning, so
+  // its 07:38 alert was landing at the top of a timeline headed TIME.
+  ALERT_LOG.sort((x, y) => y._at - x._at);
+  if (ALERT_LOG.length > ALERT_CAP) ALERT_LOG.length = ALERT_CAP;
+  return fresh;
+}
+function loggedAlerts(scanners) {
+  return ALERT_LOG.filter(a => scanners.indexOf(a.scannerId) >= 0);
+}
+
+function alertsUpTo(idx) {
+  const out = [];
+  for (let i = 0; i <= idx && i < FRAMES.length; i++) FRAMES[i].alerts.forEach(a => out.push(a));
+  return out;
+}
+
+/* ── charts ──────────────────────────────────────────────────────────
+   Primary renderer is TradingView's Lightweight Charts (real crosshair,
+   price/time scales, zoom and pan). If the library is unavailable — offline,
+   blocked CDN — every pane falls back to a built-in canvas renderer so the
+   workspace is never blank. Neither library supplies market data; that comes
+   from the session (replay fixture today, a licensed feed later). */
+const TV = window.LightweightCharts || null;
+
+/* lightweight-charts renders epoch seconds on a UTC axis. This desk runs on
+   New York time, so an 09:45 setup would be labelled 13:45 and every price
+   level you noted off the chart would sit four hours from where the scanner,
+   the alert timeline and the header clock put it. Shift each stamp by the ET
+   offset in force on that date — DST-safe, so it stays correct across the
+   March and November changeovers. */
+const ET_PARTS = new Intl.DateTimeFormat("en-US", {
+  timeZone: "America/New_York", hour12: false,
+  year: "numeric", month: "2-digit", day: "2-digit",
+  hour: "2-digit", minute: "2-digit", second: "2-digit",
+});
+function deskTime(epochSeconds) {
+  const p = {};
+  for (const part of ET_PARTS.formatToParts(new Date(epochSeconds * 1000))) {
+    p[part.type] = part.value;
+  }
+  const wallClock = Date.UTC(+p.year, +p.month - 1, +p.day,
+                             (+p.hour) % 24, +p.minute, +p.second) / 1000;
+  return wallClock;
+}
+
+
+
+const PALETTE = {
+  bg: "#0b1119", text: "#93a4b8", grid: "#141d27", border: "#1d2836",
+  up: "#2ad17f", down: "#ff5f6e", vwap: "#2962ff", ema9: "#26c6da",
+  ema20: "#ff9ad2", ema200: "#ffb648", hod: "#ffc247", h52: "#c39bff",
+  entry: "#22c7e8", stop: "#ff5f6e", target: "#2ad17f",
+};
+
+function paneNote(host) {
+  return function (message) {
+    let n = host.querySelector(".chart-note");
+    if (!message) { if (n) n.remove(); return; }
+    if (!n) { n = document.createElement("div"); n.className = "chart-note"; host.appendChild(n); }
+    n.textContent = message;
+  };
+}
+
+function makePane(hostId, daily) {
+  const host = document.getElementById(hostId);
+  if (!TV) return canvasPane(host);
+  /* Styled to read like a TradingView chart: their default candle and volume
+     colours, a symbol/interval watermark, a dashed crosshair with axis labels,
+     a last-price line, and an OHLC legend that follows the cursor. The engine
+     is TradingView's own; what was missing was the dressing people recognise. */
+  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69a80", volDown: "#ef535080",
+                cross: "#758696", label: "#2a2e39" };
+  const hhmm = t => {
+    const d = new Date(t * 1000);   // stamps are already shifted to the ET wall clock
+    return String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0");
+  };
+  const chart = TV.createChart(host, {
+    width: host.clientWidth || 400, height: host.clientHeight || 200,
+    layout: { background: { type: "solid", color: PALETTE.bg }, textColor: "#b2b5be",
+              fontFamily: '"IBM Plex Mono", ui-monospace, monospace', fontSize: 10 },
+    grid: { vertLines: { color: "#1c2230" }, horzLines: { color: "#1c2230" } },
+    rightPriceScale: { borderColor: "#2a2e39", scaleMargins: { top: 0.08, bottom: 0.26 } },
+    timeScale: { borderColor: "#2a2e39", timeVisible: !daily, secondsVisible: false,
+                 rightOffset: 3, barSpacing: daily ? 3 : 6,
+                 // Bars carry ET wall-clock stamps: label them as such and never
+                 // let the browser locale inject "01 sept. '26" mid-axis.
+                 tickMarkFormatter: daily ? undefined : (t => hhmm(t)) },
+    localization: { locale: "en-US", timeFormatter: daily ? undefined : (t => hhmm(t) + " ET") },
+    crosshair: { mode: TV.CrosshairMode ? TV.CrosshairMode.Normal : 0,
+                 vertLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label },
+                 horzLine: { color: TVC.cross, width: 1, style: 3, labelBackgroundColor: TVC.label } },
+    watermark: { visible: true, color: "rgba(120,130,150,0.07)", fontSize: 22, text: "",
+                 horzAlign: "center", vertAlign: "center" },
+    handleScale: { axisPressedMouseMove: { time: true, price: true }, mouseWheel: true, pinch: true },
+    handleScroll: { mouseWheel: true, pressedMouseMove: true, horzTouchDrag: true, vertTouchDrag: false },
+  });
+  const candles = chart.addCandlestickSeries({
+    upColor: TVC.up, downColor: TVC.down, borderVisible: false,
+    wickUpColor: TVC.up, wickDownColor: TVC.down,
+    priceLineVisible: true, lastValueVisible: true, priceLineColor: "#9598a1", priceLineStyle: 1,
+  });
+  const volume = chart.addHistogramSeries({
+    priceFormat: { type: "volume" }, priceScaleId: "vol", color: TVC.volUp,
+    lastValueVisible: false, priceLineVisible: false,
+  });
+
+  /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar. */
+  const legend = document.createElement("div");
+  legend.className = "tv-legend";
+  host.appendChild(legend);
+  let lastRows = [], lastVols = [];
+  const showLegend = (row, vol) => {
+    if (!row) { legend.textContent = ""; return; }
+    const chg = row.open ? (row.close - row.open) / row.open * 100 : 0;
+    const c = row.close >= row.open ? "u" : "d";
+    const cell = (k, v) => '<span class="k">' + k + '</span><span class="' + c + '">' + v + '</span>';
+    legend.innerHTML = cell("O", row.open.toFixed(2)) + cell("H", row.high.toFixed(2)) +
+      cell("L", row.low.toFixed(2)) + cell("C", row.close.toFixed(2)) +
+      '<span class="' + c + '">' + (chg >= 0 ? "+" : "") + chg.toFixed(2) + '%</span>' +
+      (vol != null ? cell("Vol", Math.round(vol).toLocaleString("en-US")) : "");
+  };
+  chart.subscribeCrosshairMove(param => {
+    const tail = lastRows.length - 1;
+    if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail]); return; }
+    const i = lastRows.findIndex(r => r.time === param.time);
+    showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail]);
+  });
+
+  /* Extended-hours shading, the way TradingView's ext-hours mode draws it:
+     premarket and after-hours are tinted so the 09:30 open and 16:00 close
+     read at a glance. Overlays that track the time scale, since the library
+     has no native session bands. */
+  const shadePre = document.createElement("div"), shadePost = document.createElement("div");
+  shadePre.className = "session-shade"; shadePost.className = "session-shade";
+  host.appendChild(shadePre); host.appendChild(shadePost);
+  let sessionBounds = null;   // { open, close } as ET wall-clock epoch seconds
+  const paintShade = () => {
+    if (!sessionBounds || daily) { shadePre.style.width = "0"; shadePost.style.width = "0"; return; }
+    const ts = chart.timeScale();
+    const xo = ts.timeToCoordinate(sessionBounds.open), xc = ts.timeToCoordinate(sessionBounds.close);
+    const w = Math.max(0, host.clientWidth - 58);      // minus the price scale
+    shadePre.style.left = "0";
+    shadePre.style.width = xo != null ? Math.max(0, Math.min(w, xo)) + "px" : "0";
+    if (xc != null) { shadePost.style.left = Math.max(0, xc) + "px"; shadePost.style.width = Math.max(0, w - xc) + "px"; }
+    else shadePost.style.width = "0";
+  };
+  chart.timeScale().subscribeVisibleLogicalRangeChange(paintShade);
+  chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+  const lines = {};
+  const lineFor = key => (lines[key] = lines[key] ||
+    chart.addLineSeries({ color: PALETTE[key], lineWidth: 1, priceLineVisible: false,
+                          lastValueVisible: false, crosshairMarkerVisible: false }));
+  let priceLines = [];
+
+  return {
+    engine: "tradingview",
+    note: paneNote(host),
+    // Zoom is state the trader set on purpose. A live reload must hand it back.
+    getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
+    setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
+    snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
+    resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
+    render(bars, opts) {
+      let atEdge = false;
+      try {
+        const vr = chart.timeScale().getVisibleLogicalRange();
+        atEdge = !vr || !lastRows.length || vr.to >= lastRows.length - 2;
+      } catch (e) { atEdge = true; }
+      chart.applyOptions({ watermark: { text: (opts.symbol || "") + (opts.tf ? "  ·  " + opts.tf : "") } });
+      if (!bars.length) { candles.setData([]); volume.setData([]); lastRows = []; lastVols = []; showLegend(null); paintShade(); return; }
+      const rows = bars.map((b, i) => daily
+        ? { time: b.d, open: b.o, high: b.h, low: b.l, close: b.c }
+        : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
+      candles.setData(rows);
+      const vols = bars.map(b => daily ? b.v : b[5]);
+      volume.setData(bars.map((b, i) => ({
+        time: rows[i].time, value: vols[i],
+        color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
+      })));
+      lastRows = rows; lastVols = vols; showLegend(rows[rows.length - 1], vols[vols.length - 1]);
+      sessionBounds = (!daily && opts.openTs)
+        ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
+      if (candles.setMarkers) {          // 09:30 / 16:00 marked on the bars, as TradingView does
+        const marks = [];
+        if (sessionBounds) {
+          const at = t => rows.find(r => r.time >= t);
+          const o = at(sessionBounds.open), c = at(sessionBounds.close);
+          if (o) marks.push({ time: o.time, position: "belowBar", color: "#ffc247", shape: "arrowUp", text: "09:30" });
+          if (c) marks.push({ time: c.time, position: "aboveBar", color: "#758696", shape: "arrowDown", text: "16:00" });
+        }
+        candles.setMarkers(marks);
+      }
+      paintShade();
+      const closes = rows.map(r => r.close);
+      const put = (key, series) => {
+        if (!series) { if (lines[key]) lines[key].setData([]); return; }
+        lineFor(key).setData(series.map((v, i) => v == null ? null : { time: rows[i].time, value: v })
+                                   .filter(Boolean));
+      };
+      put("vwap", opts.vwap ? vwap(bars) : null);
+      put("ema9", opts.ema9 ? ema(closes, 9) : null);
+      put("ema20", opts.ema20 ? ema(closes, 20) : null);
+      put("ema200", opts.ema200 ? ema(closes, 200) : null);
+      priceLines.forEach(l => candles.removePriceLine(l));
+      priceLines = [];
+      const mark = (price, color, title) => {
+        if (price == null) return;
+        priceLines.push(candles.createPriceLine({
+          price: price, color: color, lineWidth: 1,
+          lineStyle: TV.LineStyle ? TV.LineStyle.Dashed : 2,
+          axisLabelVisible: true, title: title,
+        }));
+      };
+      if (opts.plan) {
+        mark(opts.plan.target, PALETTE.target, "TARGET");
+        mark(opts.plan.entry, PALETTE.entry, "ENTRY");
+        mark(opts.plan.stop, PALETTE.stop, "STOP");
+      }
+      mark(opts.hod, PALETTE.hod, "HOD");
+      mark(opts.h52, PALETTE.h52, "52w");
+      // Follow the tape only when the view is already parked at the newest
+      // bar; a trader who scrolled back to read a pullback keeps their view.
+      if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
+    },
+  };
+}
+
+/* Canvas fallback — same inputs, no dependency. */
+function canvasPane(host) {
+  const canvas = document.createElement("canvas");
+  canvas.style.width = "100%";
+  host.appendChild(canvas);
+  return {
+    engine: "canvas",
+    note: paneNote(host),
+    resize() { canvas.style.height = host.clientHeight + "px"; },
+    render(bars, opts) {
+      canvas.setAttribute("height", String(Math.max(80, host.clientHeight)));
+      drawChart(canvas, bars.length && bars[0].d
+        ? bars.map(b => [0, b.o, b.h, b.l, b.c, b.v]) : bars, opts);
+    },
+  };
+}
+
+function drawChart(canvas, bars, opts) {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.clientWidth || canvas.parentElement.clientWidth || 600;
+  const h = Number(canvas.getAttribute("height")) || 200;
+  canvas.width = w * dpr; canvas.height = h * dpr;
+  const g = canvas.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0);
+  g.clearRect(0, 0, w, h);
+  g.fillStyle = PALETTE.bg; g.fillRect(0, 0, w, h);
+  if (!bars.length) {
+    g.fillStyle = "#63748a"; g.font = "11px system-ui";
+    g.fillText("no bars yet", 12, h / 2); return;
+  }
+  const padL = 4, padR = 50, padT = 6, volH = Math.round(h * 0.18), padB = 12;
+  const plotH = h - padT - volH - padB, plotW = w - padL - padR;
+  const N = bars.length, bw = Math.max(1, Math.min(8, plotW / N * 0.7)), step = plotW / N;
+  const extras = [];
+  if (opts.plan) extras.push(opts.plan.entry, opts.plan.stop, opts.plan.target);
+  if (opts.hod) extras.push(opts.hod);
+  if (opts.h52) extras.push(opts.h52);
+  let lo = Math.min(...bars.map(b => b[3]), ...extras);
+  let hi = Math.max(...bars.map(b => b[2]), ...extras);
+  const pad = (hi - lo) * 0.08 || hi * 0.02; lo -= pad; hi += pad;
+  const y = p => padT + plotH - (p - lo) / (hi - lo) * plotH;
+  const x = i => padL + i * step + step / 2;
+  const maxV = Math.max(...bars.map(b => b[5]), 1);
+  g.font = "9px ui-monospace,monospace"; g.textAlign = "left";
+  for (let i = 0; i <= 3; i++) {
+    const p = lo + (hi - lo) * i / 3, yy = y(p);
+    g.strokeStyle = PALETTE.grid; g.beginPath(); g.moveTo(padL, yy); g.lineTo(padL + plotW, yy); g.stroke();
+    g.fillStyle = "#63748a"; g.fillText(p.toFixed(2), padL + plotW + 5, yy + 3);
+  }
+  bars.forEach((b, i) => {
+    const vh = b[5] / maxV * (volH - 3);
+    g.fillStyle = b[4] >= b[1] ? "#1c6b47" : "#7a2b34";
+    g.fillRect(x(i) - bw / 2, padT + plotH + volH - vh, bw, vh);
+  });
+  if (opts.plan) {
+    const spec = [["TARGET", opts.plan.target, PALETTE.target], ["ENTRY", opts.plan.entry, PALETTE.entry],
+                  ["STOP", opts.plan.stop, PALETTE.stop]].sort((a, b) => b[1] - a[1]);
+    let lastY = -99;
+    spec.forEach(([name, price, col]) => {
+      g.strokeStyle = col; g.setLineDash([4, 3]); g.beginPath();
+      g.moveTo(padL, y(price)); g.lineTo(padL + plotW, y(price)); g.stroke(); g.setLineDash([]);
+      let ly = y(price) - 2; if (ly - lastY < 11) ly = lastY + 11; lastY = ly;
+      const label = name + " " + price.toFixed(2);
+      g.font = "8px ui-monospace,monospace";
+      g.fillStyle = "#0b1119cc"; g.fillRect(padL + 1, ly - 7, g.measureText(label).width + 5, 9);
+      g.fillStyle = col; g.fillText(label, padL + 3, ly);
+    });
+  }
+  const hline = (p, col, label) => {
+    if (p == null) return;
+    g.strokeStyle = col; g.setLineDash([2, 3]); g.beginPath();
+    g.moveTo(padL, y(p)); g.lineTo(padL + plotW, y(p)); g.stroke(); g.setLineDash([]);
+    g.fillStyle = col; g.font = "8px ui-monospace,monospace"; g.textAlign = "right";
+    g.fillText(label, padL + plotW - 3, y(p) - 2); g.textAlign = "left";
+  };
+  hline(opts.hod, PALETTE.hod, "HOD " + fx(opts.hod));
+  hline(opts.h52, PALETTE.h52, "52w " + fx(opts.h52));
+  bars.forEach((b, i) => {
+    const col = b[4] >= b[1] ? PALETTE.up : PALETTE.down;
+    g.strokeStyle = col; g.fillStyle = col; g.lineWidth = 1;
+    g.beginPath(); g.moveTo(x(i), y(b[2])); g.lineTo(x(i), y(b[3])); g.stroke();
+    const yo = y(b[1]), yc = y(b[4]);
+    g.fillRect(x(i) - bw / 2, Math.min(yo, yc), bw, Math.max(1, Math.abs(yc - yo)));
+  });
+  const line = (series, col) => {
+    g.strokeStyle = col; g.lineWidth = 1.2; g.beginPath(); let started = false;
+    series.forEach((v, i) => { if (v == null) return; const px = x(i), py = y(v);
+      started ? g.lineTo(px, py) : (g.moveTo(px, py), started = true); });
+    g.stroke();
+  };
+  const closes = bars.map(b => b[4]);
+  if (opts.vwap) line(vwap(bars), PALETTE.vwap);
+  if (opts.ema9) line(ema(closes, 9), PALETTE.ema9);
+  if (opts.ema20) line(ema(closes, 20), PALETTE.ema20);
+  if (opts.ema200) line(ema(closes, 200), PALETTE.ema200);
+}
+
+/* ── pillar chips (computed in the browser from published thresholds) ── */
+function pillarChecks(row, meta) {
+  const T = S.pillarThresholds;
+  const f = meta.floatShares, quality = meta.floatQuality;
+  return [
+    { k: "P", name: "price $" + T.priceMin + "–$" + T.priceMax, v: row.price, ok: row.price >= T.priceMin && row.price <= T.priceMax },
+    { k: "G", name: "gain ≥ " + T.gainMinPct + "%", v: pct(row.changePct), ok: (row.changePct || 0) >= T.gainMinPct },
+    rvolPillar(row, meta, T.rvolMin),
+    floatPillar(f, quality, T.floatMaxShares, meta.floatSource),
+  ];
+}
+/* The RVOL pillar. Two measures exist and they disagree by two orders of
+   magnitude before the open: today's volume against whole prior days
+   ("daily") reads 0.12x on a runner at 08:53 and can never reach 5x, while
+   today's volume against what prior sessions had traded by the same clock
+   time ("time of day") reads what a screener shows. The chip says which one
+   it used and what the baseline was, so the number can be checked. */
+function rvolPillar(row, meta, min) {
+  const m = (meta && meta.metrics) || {};
+  const tod = m.rvolMeasure === "time_of_day";
+  const v = rowRvol(row);
+  const name = tod
+    ? "RVOL ≥ " + min + "× — volume so far vs the same clock time in prior sessions"
+    : "RVOL ≥ " + min + "× — today vs prior FULL days (understates a part-day)";
+  const chip = { k: "R", name: name, v: fx(v) + "×", ok: (v || 0) >= min, unknown: v == null };
+  if (tod && m.rvolBaseline) {
+    chip.name += " · " + vol(m.volumeToday) + " vs " + vol(m.rvolBaseline) + " expected by now"
+               + (meta.volumeProfileDays ? " (" + meta.volumeProfileDays + " sessions)" : "");
+  } else if (!tod && m.rvolDaily != null) {
+    chip.name += " · no volume profile yet for this name";
+  }
+  return chip;
+}
+
+/* The float pillar, one rule for the board, the list chips and the verdict.
+   Shares outstanding is a sound UPPER bound on float: under the cap it PROVES
+   float under the cap (pass, labelled SO); over the cap it proves nothing
+   (unknown — never a fail, never a pass). A verified figure is compared
+   directly. The board once said FAIL on a 12.2M proxy the verdict called PASS. */
+function floatPillar(f, quality, cap, source) {
+  const m = f != null ? (f / 1e6).toFixed(1) + "M" : null;
+  if (quality === "verified" || quality === "you verified")
+    return { k: "F", name: "float < " + (cap / 1e6) + "M", v: m + (quality === "you verified" ? " (yours)" : ""), ok: f < cap, unknown: false };
+  if (quality === "shares_outstanding_proxy" && f != null)
+    return f < cap
+      ? { k: "F", name: "float < " + (cap / 1e6) + "M — proven by shares outstanding under the cap", v: m + " SO", ok: true, unknown: false }
+      : { k: "F", name: "float < " + (cap / 1e6) + "M — shares outstanding over the cap proves nothing", v: m + " SO", ok: false, unknown: true };
+  // An unknown float that is a network hiccup and one that is a genuine
+  // EDGAR gap look identical on the board. The record carries the reason, so
+  // the chip can say which it is instead of leaving the operator guessing.
+  return { k: "F", name: "float < " + (cap / 1e6) + "M — unknown"
+                       + (source ? ": " + source : ": no free source published one"),
+           v: "unknown", ok: false, unknown: true };
+}
+function newsFor(sym, nowMs) {
+  const items = (SYMS[sym] && SYMS[sym].news) || [];
+  const visible = items.filter(n => new Date(n.firstObservedAt).getTime() <= nowMs &&
+                                    classifyCatalyst(n.headline, n.category).grade !== "roundup");
+  if (!visible.length) return null;
+  const n = visible[visible.length - 1];
+  const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
+  const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
+  return { item: n, ageMin, flame };
+}
+
+/* A card is rebuilt from scratch several times a second. Without this the
+   scroll position of every list and timeline snapped back to the top on each
+   rebuild, so a trader could not read down a tile at all. */
+function keepScroll(card, paint) {
+  const before = card.querySelector(".tile-rows");
+  const top = before ? before.scrollTop : 0;
+  paint();
+  const after = card.querySelector(".tile-rows");
+  if (after && top) after.scrollTop = top;
+}
+
+/* ── tiles ──────────────────────────────────────────────────────────── */
+/* What the state pill on a scanner tile says. A live desk names the feed's
+   real state (from the provider's health, never assumed); a recording says
+   REPLAY. "REPLAY" next to a live scanner was a lie the tiles used to tell. */
+function feedLabel() {
+  if (S.streaming || S.live) {
+    const st = (S.provider && S.provider.state) ? String(S.provider.state).toUpperCase() : "LIVE";
+    return st;
+  }
+  return "REPLAY";
+}
+function cardHead(card, title, stateLabel, extras) {
+  const head = el("div", "card-head");
+  head.setAttribute("draggable", "true");
+  const grip = el("span", "grip", "⠿");
+  grip.title = "Drag this card onto another card to swap their places";
+  head.appendChild(grip);
+  head.appendChild(el("span", "card-title", title));
+  if (stateLabel) {
+    const st = el("span", "tile-state " + (stateLabel === "FROZEN" ? "frozen" : stateLabel === "REPLAY" ? "replay" : stateLabel.toLowerCase()), stateLabel);
+    st.dataset.state = stateLabel;
+    head.appendChild(st);
+  }
+  (extras || []).forEach(n => head.appendChild(n));
+  const ex = el("button", "icon-btn expand", "⛶");
+  ex.title = "Maximize / restore (E)";
+  head.appendChild(ex);
+  card.appendChild(head);
+  return head;
+}
+
+function flameFor(symbol, nowMs) {
+  const nf = newsFor(symbol, nowMs);
+  return flameIcon(nf && nf.flame ? nf.flame : "none",
+    nf ? fmtAge(nf.ageMin * 60000) + " old — recency, not quality" : "no headline in 24h");
+}
+/* Compact age: now, 45s, 12m, 5h, 3d. A timeline reads by distance from now,
+   not by absolute stamps. The duration is always measured against the DESK
+   clock — the current frame — so a recorded session shows minutes since the
+   event, not hours since yesterday. */
+function fmtAge(ms) {
+  const s = Math.round(ms / 1000);
+  if (s < 5) return "now";
+  if (s < 60) return s + "s";
+  if (s < 3600) return Math.round(s / 60) + "m";
+  if (s < 86400) return Math.round(s / 3600) + "h";
+  return Math.round(s / 86400) + "d";
+}
+function deskNow() {
+  // A streaming desk lives on the wall clock. Measuring ages against the newest
+  // frame made a seven-hour-old alert read "5m" whenever the session stopped
+  // advancing: the two facts are different and the desk must not conflate them.
+  if (S.streaming) return Date.now();
+  return FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].t * 1000 : Date.now();
+}
+const etParts = ms => new Date(ms).toLocaleTimeString("en-US",
+  { timeZone: "America/New_York", hour12: false });
+function sessionAt(ms) {
+  const hhmm = etParts(ms).slice(0, 5);
+  return hhmm < "04:00" ? "closed" : hhmm < "09:30" ? "premarket"
+       : hhmm < "16:00" ? "regular" : hhmm < "20:00" ? "after_hours" : "closed";
+}
+
+function fillListCard(card, id, frame) {
+  card.textContent = "";
+  const meta = S.listMeta[id] || { title: id, metric: "", note: "" };
+  const rows = (frame.lists[id] || []).map(rowObj);
+  const froz = state.frozen[id];
+  const nowMs = deskNow();
+  let ordered = rows, pending = 0;
+  if (froz) {
+    const byS = {}; rows.forEach(r => byS[r.symbol] = r);
+    ordered = froz.order.map(s => byS[s]).filter(Boolean);
+    pending = rows.filter(r => froz.order.indexOf(r.symbol) === -1).length;
+  }
+  const age = el("span", "tile-age", etTime(frame.ts));
+  const fz = el("button", "icon-btn", "❄");
+  fz.title = "Freeze visible order (Space)";
+  fz.setAttribute("aria-pressed", String(!!froz));
+  fz.onclick = e => {
+    e.stopPropagation();
+    state.frozen[id] = froz ? null : { order: rows.map(r => r.symbol) };
+    if (!state.frozen[id]) delete state.frozen[id];
+    render();
+  };
+  cardHead(card, meta.title, froz ? "FROZEN" : feedLabel(), [age, fz]);
+  card.appendChild(el("div", "tile-note", meta.note));
+  const cols = el("div", "tile-cols list-cols");
+  ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
+  card.appendChild(cols);
+  const body = el("div", "tile-rows");
+  if (!ordered.length) {
+    const b = deskBlockers(FRAMES[state.frame]);
+    const T2 = S.pillarThresholds || {};
+    let msg = "Nothing passes price, gain and RVOL. An empty list is a real answer.";
+    if (b) {
+      const parts = [];
+      if (b.counts.R) parts.push("RVOL on " + b.counts.R +
+        (b.bestRvol != null ? " (best " + fx(b.bestRvol) + "× of " + T2.rvolMin + "× needed)" : ""));
+      if (b.counts.P) parts.push("price on " + b.counts.P);
+      if (b.counts.G) parts.push("gain on " + b.counts.G);
+      msg = b.n + (b.n === 1 ? " name" : " names") + " on the desk · blocked by " +
+            (parts.length ? parts.join(", ") : "nothing yet — the list is rebuilding") + ".";
+      if (b.unknownRvol) msg += " " + b.unknownRvol + " with no RVOL measured yet.";
+    }
+    const div = el("div", "empty", msg);
+    const stale = tapeStalledNote();
+    if (stale) div.appendChild(el("div", "tiny warn", stale));
+    body.appendChild(div);
+  }
+  const prevKeys = state.prevRowKeys[id] || [];
+  ordered.forEach((r, i) => {
+    const sym = SYMS[r.symbol] || {};
+    const tr = el("div", "trow list-row" + (state.selected === r.symbol ? " sel" : "") +
+      (prevKeys.indexOf(r.symbol) === -1 && state.frame > 0 ? " fresh" : ""));
+    tr.dataset.symbol = r.symbol; tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    // Where it trades and where the registrant lives — a Chinese ADR on NASDAQ
+    // or a Canadian cross-list is a different animal from a Delaware microcap,
+    // and the screener should say so on the row, not in a tooltip.
+    if (sym.exchange || sym.country) tr.title = [sym.name, sym.exchange, sym.country].filter(Boolean).join(" · ");
+    const s = el("span", "tsym");
+    s.appendChild(el("b", null, r.symbol));
+    s.appendChild(flameFor(r.symbol, nowMs));
+    if (sym.floatQuality && sym.floatQuality !== "verified")
+      s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "?" : "proxy"));
+    if (r.spread != null && r.price && r.spread / r.price > 0.01)
+      s.appendChild(el("span", "pill warn", "sprd"));
+    tr.appendChild(s);
+    tr.appendChild(el("span", null, fx(r.price)));
+    tr.appendChild(el("span", dirClass(r.changePct), pct(r.changePct)));
+    const rv = el("span", null, fx(rowRvol(r)) + "×");
+    rv.title = rowRvolTitle(r);
+    tr.appendChild(rv);
+    tr.appendChild(el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—"));
+    tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };
+    tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
+    body.appendChild(tr);
+    if (state.openRow === id + "|" + r.symbol) body.appendChild(reasonsDrawer(r, sym, id));
+  });
+  state.prevRowKeys[id] = ordered.map(r => r.symbol);
+  card.appendChild(body);
+  if (pending) card.appendChild(el("div", "pending",
+    pending + " new candidate" + (pending > 1 ? "s" : "") + " waiting — unfreeze to apply"));
+}
+
+function reasonsDrawer(r, sym, listId) {
+  const d = el("div", "reasons");
+  const head = el("div", "reason");
+  head.appendChild(el("span", "reason-name", "Why this row is here — " + (S.definitionVersions[listId] || listId)));
+  d.appendChild(head);
+  if (listId === "five_pillars_list") {
+    pillarChecks(r, sym).forEach(c => {
+      const row = el("div", "reason");
+      row.appendChild(el("span", c.ok ? "ok" : "no", c.ok ? "PASS" : "FAIL"));
+      row.appendChild(el("span", "reason-name", c.name));
+      row.appendChild(el("span", null, String(c.v)));
+      row.appendChild(el("span", "ev confirmed", "confirmed course"));
+      d.appendChild(row);
+    });
+    const n = el("div", "reason");
+    n.appendChild(el("span", "reason-name", "news / catalyst — displayed, never a gate (Confirmed platform)"));
+    d.appendChild(n);
+    [["gap %", pct(r.gapPct)], ["5m RVOL", fx(r.rvol5m) + "×"], ["5m volume", vol(r.volume5m)],
+     ["volume", vol(r.volume)], ["position in range", r.rangePos != null ? (r.rangePos * 100).toFixed(0) + "%" : "—"],
+     ["spread", "$" + fx(r.spread, 3)]].forEach(([lab, val]) => {
+      const row = el("div", "reason");
+      row.appendChild(el("span", "reason-name", lab));
+      row.appendChild(el("span", null, String(val)));
+      d.appendChild(row);
+    });
+  } else {
+    const row = el("div", "reason");
+    row.appendChild(el("span", "ok", "RANK"));
+    row.appendChild(el("span", "reason-name", (S.listMeta[listId] || {}).metric + " — " + (S.listMeta[listId] || {}).note));
+    row.appendChild(el("span", "ev approximation", "approximation"));
+    d.appendChild(row);
+  }
+  return d;
+}
+
+const SESSION_HELP = {
+  PM: "PM — premarket, 04:00–09:30 ET. Thin tape, wide spreads; a move here is a gap forming.",
+  RTH: "RTH — regular trading hours, 09:30–16:00 ET. The session the course strategy is built for.",
+  AH: "AH — after hours, 16:00–20:00 ET. Thin tape; news reactions and unwinds.",
+};
+function pctHeader() {
+  return sessionOf(new Date(deskNow()).toISOString()) === "PM" ? "PM %" : "Day %";
+}
+function sessionOf(iso) {
+  const hhmm = new Date(iso).toLocaleTimeString("en-US",
+    { timeZone: "America/New_York", hour12: false, hour: "2-digit", minute: "2-digit" });
+  return hhmm < "09:30" ? "PM" : hhmm < "16:00" ? "RTH" : "AH";
+}
+const BRANCH_SHORT = {
+  low_float: "LF", medium_float: "MF", high_rvol: "HR", medium_rvol: "MR",
+  price_20_plus: "20+", price_under_20: "<20",
+  unknown_float: "?F", uptrend_10m: "UP·10m", qualified: "QUAL",
+};
+/* The scanner id carries the branch on the squeeze scanners, where the branch
+   itself is just "qualified". Two characters of column beat fourteen. */
+const SCANNER_SHORT = { squeeze_5_in_5: "5in5", squeeze_10_in_10: "10in10",
+                        running_up: "UP·10m", running_down: "DN·10m",
+                        breakout_52w: "52wk", hod_momentum: "HOD" };
+function shortBranch(branch, scannerId) {
+  // "qualified" is the squeeze scanners' only branch, so it says nothing the
+  // scanner name does not; fall back to the scanner's own short label there.
+  if (!branch || branch === "qualified") return SCANNER_SHORT[scannerId] || scannerId.replace(/_/g, "·");
+  if (BRANCH_SHORT[branch]) return BRANCH_SHORT[branch];
+  return branch.replace(/low_float/, "LF").replace(/medium_float/, "MF").replace(/unknown_float/, "?F")
+               .replace(/high_rvol/, "HR").replace(/medium_rvol/, "MR")
+               .replace(/price_20_plus/, "20+").replace(/price_under_20/, "<20")
+               .replace(/_/g, "·");
+}
+
+/* The alert tiles are timelines, drawn from the desk's own persistent log
+   rather than from the current rebuild window, so an event stays on screen
+   for the session. Newest first; a left rail ties the rows together and the
+   age column says how far back each one sits. */
+function fillAlertCard(card, cfg, idx) {
+  card.textContent = "";
+  const all = loggedAlerts(cfg.scanners).slice(0, 80);
+  const head = cardHead(card, cfg.title, feedLabel(), []);
+  head.insertBefore(el("span", "tile-count", String(all.length)), head.querySelector(".expand"));
+  const note = el("div", "tile-note", cfg.note);
+  note.title = cfg.note;
+  card.appendChild(note);
+  const cols = el("div", "tile-cols alert-cols");
+  // Time, then the move: "PM %" before the open, "Day %" after it. Both are
+  // the change from the previous close; only the name of the session differs.
+  const pctHead = el("span", null, pctHeader());
+  pctHead.title = "change from the previous close, measured " + (pctHeader() === "PM %" ? "in premarket" : "during the session");
+  cols.appendChild(el("span", null, "Time"));
+  cols.appendChild(pctHead);
+  ["Symbol", "Price", "Strategy"].forEach(c => cols.appendChild(el("span", null, c)));
+  card.appendChild(cols);
+  const body = el("div", "tile-rows timeline");
+  if (!all.length) {
+    const div = el("div", "empty", "No events yet.");
+    const stale = tapeStalledNote();
+    if (stale) div.appendChild(el("div", "tiny warn", stale));
+    body.appendChild(div);
+  }
+  all.forEach(a => {
+    const tr = el("div", "trow alert-row" + (state.selected === a.symbol ? " sel" : "") +
+      (state.arrivals.has(a.symbol) ? " fresh" : ""));
+    const when = el("span", "tl-time", etTime(a.sourceTime));
+    when.title = fmtAge(deskNow() - a._at) + " ago";
+    tr.appendChild(when);
+    tr.appendChild(el("span", dirClass(a.values && a.values.change_pct), pct(a.values && a.values.change_pct)));
+    const mid = el("span", "tsym");
+    mid.appendChild(el("b", null, a.symbol));
+    // The alert carries the flame observed AT the alert, which is the honest
+    // record even when the news feed caught up minutes later.
+    mid.appendChild(flameIcon(a.news && a.news.flame ? a.news.flame : "none",
+      a.news ? "news " + a.news.age_minutes + " min old at alert" : "no headline at alert"));
+    const ses = sessionOf(a.sourceTime);
+    const sesEl = el("span", "pill ses " + ses.toLowerCase(), ses);
+    sesEl.title = SESSION_HELP[ses];
+    mid.appendChild(sesEl);
+    tr.appendChild(mid);
+    tr.appendChild(el("span", null, fx(a.values && a.values.last)));
+    const br = el("span", "branch", shortBranch(a.branch, a.scannerId));
+    br.title = (a.branch || a.scannerId).replace(/_/g, " ") + " (a label, not the filter)";
+    tr.appendChild(br);
+    tr.onclick = () => select(a.symbol, cfg.id);
+    body.appendChild(tr);
+  });
+  card.appendChild(body);
+}
+
+/* ── timeline ───────────────────────────────────────────────────────── */
+function renderTimeline(idx) {
+  const host = $("#timeline"); host.textContent = "";
+  const all = alertsUpTo(idx).slice().reverse();
+  $("#alertCount").textContent = all.length + " event" + (all.length === 1 ? "" : "s");
+  if (!all.length) { host.appendChild(el("div", "empty", "No alerts yet.")); return; }
+  all.slice(0, 60).forEach(a => {
+    const row = el("div", "tl-row");
+    row.appendChild(el("span", "tl-time", etTime(a.sourceTime)));
+    const main = el("div", "tl-main");
+    main.appendChild(el("span", "tl-sym", a.symbol));
+    const nf = a.news && a.news.flame;
+    if (nf) main.appendChild(el("i", "flame " + nf));
+    main.appendChild(el("span", "tl-what", ((S.alertMeta[a.scannerId] || {}).title || a.scannerId) + (a.branch ? " · " + a.branch.replace(/_/g, " ") : "")));
+    if (a.group && a.group.count > 1) main.appendChild(el("span", "more", "+" + (a.group.count - 1) + " more"));
+    row.appendChild(main);
+    row.appendChild(el("span", "sev " + a.severity, a.severity));
+    row.onclick = () => {
+      select(a.symbol, a.scannerId);
+      state.openAlert = state.openAlert === alertKey(a) ? null : alertKey(a);
+      // On a LIVE desk the click selects the name and nothing else. Seeking
+      // the whole desk to the alert's minute pinned every card there for the
+      // rest of the session — the lists stopped taking new names, the charts
+      // stopped, and nothing said so. Stepping back is now deliberate: the
+      // alert's own detail carries the button, and the header chip says the
+      // desk is parked and takes you back.
+      if (!S.streaming) seekTo(a.sourceTime);
+      render();
+    };
+    host.appendChild(row);
+    if (state.openAlert === alertKey(a)) host.appendChild(alertDetail(a));
+  });
+}
+/* Step the desk to one minute of the session, and back to the live edge. */
+function seekTo(iso) {
+  const target = FRAMES.findIndex(f => f.ts === iso || f.t * 1000 >= new Date(iso).getTime());
+  if (target < 0) return false;
+  state.frame = target;
+  state.parked = S.streaming && target < FRAMES.length - 1;
+  syncTransport(); render();
+  return true;
+}
+function backToLive() {
+  state.frame = FRAMES.length - 1; state.parked = false; syncTransport(); render();
+}
+function atLiveEdge() { return !S.streaming || state.frame >= FRAMES.length - 1; }
+
+function alertDetail(a) {
+  const d = el("div", "tl-detail");
+  d.appendChild(el("div", "tiny muted", "definition " + a.definitionVersion + " · source " + a.sourceTime + " · observed " + a.observedTime));
+  (a.reasons || []).forEach(r => {
+    const row = el("div", "reason");
+    row.appendChild(el("span", r.passed ? "ok" : "no", r.passed ? "PASS" : "FAIL"));
+    row.appendChild(el("span", "reason-name", r.filter || r.field));
+    row.appendChild(el("span", null, String(r.value) + (r.threshold != null ? " vs " + r.threshold : "")));
+    row.appendChild(el("span", "ev " + (r.evidence || "approximation"), r.evidence || "approximation"));
+    d.appendChild(row);
+  });
+  if (a.group && a.group.count > 1) {
+    d.appendChild(el("div", "tiny muted", "consolidated with: " + a.group.also_triggered.join(", ") +
+      " — every raw event is kept in history"));
+  }
+  if (S.streaming) {
+    const b = el("button", "icon-btn seek-back", "Show the desk at " + etTime(a.sourceTime));
+    b.title = "Step every card back to this minute. The header chip turns amber while the desk "
+            + "is parked there; click it to return to the live edge.";
+    b.onclick = e => { e.stopPropagation(); seekTo(a.sourceTime); };
+    d.appendChild(b);
+  }
+  return d;
+}
+
+/* ── why a list is empty ─────────────────────────────────────────────
+   An empty scanner is a real answer, but it is not a useful one on its own.
+   These count what the desk knows and name the pillar that is closing the
+   list, and say when the tape itself has stopped — the event scanners read
+   bars, so a frozen tape silences them however well the names score. */
+function deskBlockers(frame) {
+  const syms = Object.keys(SYMS);
+  if (!syms.length || !frame) return null;
+  const counts = { P: 0, G: 0, R: 0, F: 0 }, keys = ["P", "G", "R", "F"];
+  let bestRvol = null, unknownRvol = 0;
+  syms.forEach(sym => {
+    const { row, meta } = boardRow(frame, sym);
+    const checks = pillarChecks(row, meta);
+    checks.forEach((c, i) => { if (!c.ok && keys[i]) counts[keys[i]]++; });
+    const rv = rowRvol(row);
+    if (rv == null) unknownRvol++;
+    else if (bestRvol == null || rv > bestRvol) bestRvol = rv;
+  });
+  return { n: syms.length, counts, bestRvol, unknownRvol };
+}
+function tapeStalledNote() {
+  if (!S.streaming) return null;
+  const f = FRAMES[FRAMES.length - 1];
+  if (!f) return "No bars have arrived since the session start, so the event scanners have nothing to read.";
+  const age = Math.round((Date.now() - f.t * 1000) / 1000);
+  if (age < 300) return null;
+  return "The tape has not advanced in " + fmtAge(age * 1000) +
+         " (newest bar " + etClock(f.ts) + " ET). These scanners read bars, so nothing can fire until it moves.";
+}
+
+/* ── Five Pillars board ─────────────────────────────────────────────── */
+/* Every symbol on the desk against the five pillars, sorted by how many it
+   passes and then by gain. The list card above shows only names that pass
+   the hard gates; this board shows why the others do not, so a name a few
+   RVOL points short is a candidate to watch, not an absence. */
+function boardRow(frame, sym) {
+  const meta = SYMS[sym] || {};
+  // The session publishes every symbol's own numbers. Before that the board read
+  // whatever ranked list a name happened to reach, so a name in no list
+  // showed UNKNOWN on every pillar however much was known about it.
+  const m = meta.metrics || null;
+  const row = symbolRow(frame, sym) || (m ? {
+    symbol: sym, price: m.last, changePct: m.changePct, volume: m.volumeToday,
+    rvolDaily: m.rvolDaily, rvol: m.rvol, rvolMeasure: m.rvolMeasure,
+    rvol5m: m.rvol5m, spread: m.spread,
+    hodDistPct: m.hodDistPct, rangePos: m.rangePos, volume5m: m.volume5m,
+  } : null);
+  if (row && !(S.streaming && meta.iexLast != null)) return { row, meta };
+  const bars = barsUpTo(sym, frame.barIndex);
+  const last = S.streaming && meta.iexLast != null ? meta.iexLast
+             : bars.length ? bars[bars.length - 1][4] : null;
+  if (row) return { row: Object.assign({}, row, { price: last, changePct: last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : row.changePct }), meta };
+  const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
+  return { row: { symbol: sym, price: last, changePct: chg, rvolDaily: null, rvol5m: null }, meta };
+}
+function renderPillarsBoard(frame) {
+  const host = $("#pillarsBoard"); if (!host) return;
+  host.textContent = "";
+  const nowMs = deskNow();
+  const T = S.pillarThresholds || {};
+  const note = $("#pillarsBoardNote");
+  if (note) {
+    note.textContent = "$" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
+      "× · float <" + (T.floatMaxShares / 1e6) + "M · news";
+    note.title = "Confirmed course pillars. The desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
+      (T.deskBandEvidence === "operator_override" ? " (your band)" : "") +
+      ", so a name outside the pillar is still shown with its price cell FAIL. Float and news are columns, never gates.";
+  }
+  const rows = Object.keys(SYMS).map(sym => {
+    const { row, meta } = boardRow(frame, sym);
+    const bars = barsUpTo(sym, frame.barIndex);
+    const checks = pillarChecks(row, meta);
+    const nf = newsFor(sym, nowMs);
+    checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
+                  ok: !!(nf && nf.flame), unknown: !nf });
+    const passed = checks.filter(c => c.ok).length;
+    const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
+    const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
+    const spread = row.spread != null ? row.spread
+                 : (meta.iexBid != null && meta.iexAsk != null ? meta.iexAsk - meta.iexBid : null);
+    const vw = bars.length ? vwap(bars) : [];
+    const lastVwap = vw.length ? vw[vw.length - 1] : null;
+    return { sym, row, checks, passed, meta, volToday, hod, spread, lastVwap };
+  }).sort((a, b) => b.passed - a.passed || (b.row.changePct || -1e9) - (a.row.changePct || -1e9));
+  // In a column the thirteen-column table cannot fit; the same rows read as
+  // symbol, last, gain, five pillar chips and the score, with every number
+  // the wide table shows kept in the chip's tooltip.
+  const compact = host.clientWidth > 0 && host.clientWidth < 640;
+  host.classList.toggle("compact", compact);
+  const head = el("div", "pb-row head");
+  (compact ? ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"]
+           : ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "Daily RVOL", "Float", "News", "Pillars"])
+    .forEach(h => head.appendChild(el("span", null, h)));
+  host.appendChild(head);
+  if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
+  if (compact) {
+    rows.forEach(r => {
+      const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
+      const symCell = el("b", null, r.sym);
+      symCell.title = [r.meta.name, r.meta.exchange, r.meta.country,
+        "vol today " + vol(r.volToday), "avg " + vol(r.meta.avgDailyVolume),
+        "HOD " + fx(r.hod), r.spread != null ? "spread $" + fx(r.spread, 3) : null].filter(Boolean).join(" · ");
+      tr.appendChild(symCell);
+      tr.appendChild(el("span", dirClass(r.row.changePct), fx(r.row.price)));
+      tr.appendChild(el("span", dirClass(r.row.changePct), pct(r.row.changePct)));
+      r.checks.forEach(c => {
+        const cell = el("span", "pb-cell");
+        const v = el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v));
+        cell.appendChild(v);
+        const pill = el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.k);
+        pill.dataset.state = c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL";
+        cell.appendChild(pill);
+        cell.title = c.name + ": " + (typeof c.v === "number" ? fx(c.v) : c.v) + " · " + pill.dataset.state +
+          (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
+        tr.appendChild(cell);
+      });
+      tr.appendChild(el("span", "pb-score " + (r.passed >= 4 ? "up" : r.passed >= 3 ? "" : "down"), r.passed + "/5"));
+      tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
+      host.appendChild(tr);
+    });
+    return;
+  }
+  rows.forEach(r => {
+    const tr = el("div", "pb-row" + (state.selected === r.sym ? " sel" : ""));
+    const symCell = el("b", null, r.sym);
+    symCell.title = [r.meta.name, r.meta.exchange, r.meta.country].filter(Boolean).join(" · ");
+    tr.appendChild(symCell);
+    tr.appendChild(el("span", dirClass(r.row.changePct), fx(r.row.price)));
+    tr.appendChild(el("span", "v", vol(r.volToday)));
+    tr.appendChild(el("span", "v", vol(r.meta.avgDailyVolume)));
+    const wide = r.spread != null && r.row.price && r.spread / r.row.price > 0.01;
+    tr.appendChild(el("span", wide ? "down" : "v", r.spread != null ? "$" + fx(r.spread, 3) : "—"));
+    tr.appendChild(el("span", "v", fx(r.hod)));
+    const vsV = r.lastVwap && r.row.price ? (r.row.price / r.lastVwap - 1) * 100 : null;
+    tr.appendChild(el("span", dirClass(vsV), vsV == null ? "—" : pct(vsV)));
+    r.checks.forEach(c => {
+      const cell = el("span", "pb-cell");
+      // The price pillar's value is the Last column two cells to the left.
+      // A column that repeats its neighbour has not earned its width.
+      if (c.k !== "P") cell.appendChild(el("span", "v", typeof c.v === "number" ? fx(c.v) : String(c.v)));
+      const pill = el("span", "pb-pill " + (c.ok ? "pass" : c.unknown ? "unknown" : "fail"), c.ok ? "PASS" : c.unknown ? "UNKNOWN" : "FAIL");
+      pill.dataset.state = pill.textContent;
+      cell.appendChild(pill);
+      cell.title = c.name + (c.k === "F" && r.meta.floatSource ? " — " + r.meta.floatSource : "");
+      tr.appendChild(cell);
+    });
+    tr.appendChild(el("span", "pb-score " + (r.passed >= 4 ? "up" : r.passed >= 3 ? "" : "down"), r.passed + "/5"));
+    tr.onclick = () => { select(r.sym, "pillars-board"); render(); };
+    host.appendChild(tr);
+  });
+}
+
+/* ── context panels ─────────────────────────────────────────────────── */
+function kv(host, lab, val, cls) {
+  const r = el("div", "kv"); r.appendChild(el("span", "lab", lab));
+  // The value span always carries `val`, which is what stops a long value
+  // wrapping onto three lines — the stylesheet had the rule, the markup never
+  // had the class, so "12.31 14:59:43 ET" broke across the card.
+  const v = el("span", "val" + (cls ? " " + cls : ""));
+  if (val instanceof Node) v.appendChild(val); else v.textContent = val;
+  r.appendChild(v); host.appendChild(r);
+}
+function symbolRow(frame, sym) {
+  for (const id of LIST_IDS.concat(["top_gainers", "top_relative_volume", "top_volume_5m", "top_gappers"])) {
+    const found = (frame.lists[id] || []).map(rowObj).find(r => r.symbol === sym);
+    if (found) return found;
+  }
+  return null;
+}
+
+function renderHeader(frame) {
+  const sym = state.selected, meta = SYMS[sym] || {}, nowMs = deskNow();
+  const bars = barsUpTo(sym, frame.barIndex);
+  // On a live desk the newest IBKR print outranks the last closed bar: in
+  // thin tape a bar can be forty minutes old while the print is seconds old.
+  const last = S.streaming && meta.iexLast != null ? meta.iexLast
+             : bars.length ? bars[bars.length - 1][4] : null;
+  const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
+  const hod = bars.length ? Math.max(...bars.map(b => b[2]), last || 0) : null;
+  const row = symbolRow(frame, sym);
+  $("#symTicker").textContent = sym || "—";
+  $("#symLock").hidden = !state.locked;
+  const nf = newsFor(sym, nowMs), flameEl = $("#symFlame");
+  flameEl.hidden = !(nf && nf.flame);
+  if (nf && nf.flame) { flameEl.className = "flame " + nf.flame; flameEl.title = "news " + Math.round(nf.ageMin) + " min old"; }
+  const stats = $("#symStats"); stats.textContent = "";
+  const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
+  stat("Last", fx(last)); stat("Change", pct(chg), dirClass(chg)); stat("HOD", fx(hod));
+  stat("RVOL", row ? fx(rowRvol(row)) + "×" : "—");
+  stat("5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
+  const halted = frame.halts && frame.halts[sym] === "halted";
+  stat("Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  return { last, chg, hod, row, meta, nf, halted, sym };
+}
+
+/* Catalyst classification. The provider's own category is unreliable across
+   feeds, so the headline itself is scanned for the families the course
+   teaches. This is a labelled heuristic, not a claim about the news: the
+   headline stays visible so you can overrule it in one read.
+
+   Three grades that change what you do:
+     hard     — quantifiable economic value (contract, FDA, earnings, buyout)
+     soft     — attention without quantifiable value (analyst, partnership)
+     dilutive — supply is increasing (offering, placement, shelf) */
+const CATALYST_RULES = [
+  // A market wrap that lists twelve names "moving in Thursday's session" is
+  // not news about the company. It used to earn a red flame and a News PASS.
+  { grade: "roundup", label: "Market roundup",
+    words: ["stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
+            "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday", "moving in"],
+    note: "A list of names, not a story about this one. Not a catalyst; find the company's own headline." },
+  { grade: "dilutive", label: "Dilutive",
+    words: ["offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
+            "registered direct", "atm program", "convertible"],
+    note: "Supply is increasing. Ross treats this as risk context, not a green light — read the size before anything else." },
+  { grade: "hard", label: "Hard catalyst",
+    words: ["fda", "approval", "breakthrough", "phase 1", "phase 2", "phase 3", "clinical",
+            "contract", "awarded", "award", "order", "purchase agreement", "acquisition",
+            "acquire", "merger", "buyout", "earnings", "revenue", "guidance", "profit",
+            "patent", "uplist", "nasdaq listing"],
+    note: "Quantifiable economic value — this is the catalyst family the funnel is built for." },
+  { grade: "soft", label: "Soft catalyst",
+    words: ["partnership", "agreement", "mou", "collaboration", "analyst", "price target",
+            "upgrade", "initiated", "appoint", "names", "joins", "announces", "reverse split",
+            "conference", "presentation", "short interest"],
+    note: "Attention without quantifiable value. It can still move a low float, but it does not justify size on its own." },
+];
+function classifyCatalyst(headline, category) {
+  const hay = ((headline || "") + " " + (category || "")).toLowerCase();
+  for (const rule of CATALYST_RULES) {
+    if (rule.words.some(w => hay.indexOf(w) >= 0)) return rule;
+  }
+  return { grade: "soft", label: "Unclassified", note:
+    "No familiar catalyst family matched. Read the headline yourself before treating it as a reason." };
+}
+const FLAME_BAND = { red: "0–2h", orange: "2–12h", yellow: "12–24h" };
+
+function technicalScore(ctx) {
+  const T = S.pillarThresholds, { last, chg, row, meta } = ctx;
+  return [
+    last != null && last >= T.priceMin && last <= T.priceMax,
+    (chg || 0) >= T.gainMinPct,
+    row && (rowRvol(row) || 0) >= T.rvolMin,
+    meta.floatQuality === "verified" && meta.floatShares < T.floatMaxShares,
+  ].filter(Boolean).length;
+}
+
+function renderCatalyst(host, ctx) {
+  const { nf } = ctx;
+  const score = technicalScore(ctx);
+  host.appendChild(el("div", "divider", "catalyst"));
+  if (!nf) {
+    const head = el("div", "cat-head");
+    const nfc = el("span", "flame-chip none");
+    nfc.appendChild(flameIcon("none")); nfc.appendChild(el("span", null, "NO NEWS 24H"));
+    head.appendChild(nfc);
+    host.appendChild(head);
+    const read = el("div", "cat-read");
+    read.textContent = score === 4
+      ? "4/4 technical, no headline. The course allows a technical breakout to carry it."
+      : "No headline, " + score + "/4 technical. Nothing to build a thesis on.";
+    host.appendChild(read);
+    return;
+  }
+  const cls = classifyCatalyst(nf.item.headline, nf.item.category);
+  const flame = nf.flame || "none";
+  const head = el("div", "cat-head");
+  const fc = el("span", "flame-chip " + flame);
+  fc.appendChild(flameIcon(flame));
+  fc.appendChild(el("span", null, FLAME_BAND[flame] || ">24h"));
+  fc.title = flame === "none" ? "no headline inside 24h" : "news " + (FLAME_BAND[flame] || "") + " old — recency, not quality";
+  head.appendChild(fc);
+  head.appendChild(el("span", "cat-quality " + cls.grade, cls.label));
+  if (nf.item.category) head.title = "source: " + nf.item.category.replace(/_/g, " ");
+  host.appendChild(head);
+  host.appendChild(el("p", "headline", nf.item.headline));
+
+  // Age, drawn against the 24-hour window the flame encodes.
+  const age = el("div", "cat-age");
+  age.appendChild(el("span", null, fmtAge(nf.ageMin * 60000)));
+  const bar = el("div", "age-bar");
+  const fill = el("i", null, "");
+  fill.style.width = Math.max(2, Math.min(100, nf.ageMin / 1440 * 100)) + "%";
+  fill.style.background = flame === "red" ? "var(--flame-red)"
+    : flame === "orange" ? "var(--flame-orange)"
+    : flame === "yellow" ? "var(--flame-yellow)" : "var(--ink-faint)";
+  bar.appendChild(fill); age.appendChild(bar);
+  age.appendChild(el("span", null, "24h"));
+  host.appendChild(age);
+  const latency = (new Date(nf.item.firstObservedAt) - new Date(nf.item.publishedAt)) / 60000;
+  const pub = el("div", "note", "published " + etClock(nf.item.publishedAt));
+  pub.title = "seen by the feed " + (latency >= 1 ? Math.round(latency) + " min later" : "immediately");
+  host.appendChild(pub);
+
+  const read = el("div", "cat-read " + cls.grade);
+  if (cls.grade === "roundup") {
+    read.textContent = "A list of movers, not this company's news. Not a catalyst.";
+  } else if (cls.grade === "dilutive") {
+    read.textContent = "Dilution risk. Read the size before anything else.";
+  } else if (flame === "red" && score === 4) {
+    read.textContent = "Fresh " + cls.label.toLowerCase() + " on a 4/4 candidate. The chart decides the entry.";
+  } else if (score === 4) {
+    read.textContent = "4/4 pillars, headline " + fmtAge(nf.ageMin * 60000) +
+      " old. The crowd has seen it; demand must show in volume.";
+  } else {
+    read.textContent = "Recent news, " + score + "/4 pillars. A flame is recency, not compliance.";
+  }
+  read.title = cls.note;
+  host.appendChild(read);
+}
+
+/* Where the float number came from, in two or three words. The long form
+   ("SEC shares outstanding (upper bound)") is kept in the tooltip and in the
+   legend; the card has one line of room. */
+function floatSourceShort(qf, meta) {
+  if (qf.quality === "you verified") return "you verified";
+  const src = meta.floatSource || "";
+  if (/IBKR/i.test(src)) return /float/i.test(src) ? "IBKR float" : "IBKR shares out";
+  if (/SEC/i.test(src)) return "SEC shares out";
+  return qf.quality === "unknown" ? "unknown" : qf.quality.replace(/_/g, " ").replace(" proxy", "");
+}
+
+function renderQuote(frame, ctx) {
+  const { last, chg, row, meta, nf, halted, sym } = ctx;
+  const q = $("#quoteCard"); q.textContent = "";
+  const grid = el("div", "qgrid");
+  const wide = row && row.spread != null && row.price && row.spread / row.price > 0.01;
+  kv(grid, "Last", fx(last));
+  const qf = effectiveFloat(sym, meta);
+  kv(grid, "Float", qf.shares ? (qf.shares / 1e6).toFixed(1) + "M" : "UNKNOWN",
+     qf.quality === "unknown" ? "down" : null);
+  kv(grid, "Prev close", fx(meta.prevClose));
+  kv(grid, "Float from", floatSourceShort(qf, meta), qf.quality === "unknown" ? "down" : null);
+  kv(grid, "Change", pct(chg), dirClass(chg));
+  kv(grid, "52w high", fx(meta.high52w));
+  const spreadNow = row && row.spread != null ? row.spread
+                  : (meta.iexBid != null && meta.iexAsk != null ? meta.iexAsk - meta.iexBid : null);
+  kv(grid, "Spread", spreadNow != null ? "$" + fx(spreadNow, 3) : "—",
+     wide || (spreadNow != null && last && spreadNow / last > 0.01) ? "down" : null);
+  kv(grid, "Avg volume", vol(meta.avgDailyVolume));
+  kv(grid, "Range pos", row && row.rangePos != null ? (row.rangePos * 100).toFixed(0) + "%" : "—");
+  kv(grid, "Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
+  if (meta.iexLast != null) {
+    // The feed's most recent print, so a thin premarket reads as a stamped
+    // price rather than as silence. Price and stamp are separate elements:
+    // the whole desk is on the ET clock, the header says so, and appending
+    // " ET" here only on the rebuild path made the suffix blink on and off
+    // between stream updates.
+    const src = (meta.lastSource || "iex").toUpperCase();
+    const stamp = el("span", "stamp");
+    stamp.appendChild(el("b", null, fx(meta.iexLast)));
+    if (meta.iexLastTime) {
+      stamp.appendChild(document.createTextNode(" "));
+      stamp.appendChild(el("i", null, meta.iexLastTime));
+    }
+    kv(grid, src + " print", stamp);
+    if (meta.iexBid != null && meta.iexAsk != null)
+      kv(grid, src + " bid/ask", fx(meta.iexBid) + " × " + fx(meta.iexAsk));
+  }
+  q.appendChild(grid);
+  renderCatalyst(q, ctx);
+  if (meta.floatQuality === "shares_outstanding_proxy")
+    // Says what the pillar actually does. It used to claim the pillar fails
+    // until a verified value exists, while the pill two inches away read PASS:
+    // outstanding under the cap proves float under the cap.
+    q.appendChild(el("div", "note warn", qf.shares < S.pillarThresholds.floatMaxShares
+      ? "Shares outstanding, not float. Under the cap it proves float is under the cap."
+      : "Shares outstanding, not float. Over the cap it proves nothing — verify before sizing."));
+}
+
+/* Level 2 — SIMULATED depth. No licensed depth feed is connected, so the
+   ladder is generated deterministically from the replay snapshot (seeded by
+   symbol + frame) purely to exercise the widget. Swap _depth() for a licensed
+   feed adapter and the rest of the card is unchanged. */
+function seeded(str) {
+  let h = 2166136261 >>> 0;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; }
+  return function () { h ^= h << 13; h >>>= 0; h ^= h >>> 17; h ^= h << 5; h >>>= 0; return h / 4294967296; };
+}
+function _depth(sym, frameIdx, price, spreadAbs, vol5m) {
+  const rnd = seeded(sym + "|" + frameIdx);
+  const tick = price >= 1 ? 0.01 : 0.001;
+  const half = Math.max(tick, (spreadAbs || tick * 2) / 2);
+  const base = Math.max(100, Math.round((vol5m || 20000) / 60));
+  const side = dir => Array.from({ length: 8 }, (_, i) => {
+    const lvl = price + dir * (half + i * tick);
+    let size = Math.round(base * (0.35 + rnd() * 1.3));
+    if (rnd() < 0.11) size *= 4 + Math.round(rnd() * 5);      // occasional wall
+    return { price: Number(lvl.toFixed(price >= 1 ? 2 : 4)), size: size, mpid: ["ARCA","NSDQ","BATS","EDGX","MIAX"][Math.floor(rnd() * 5)] };
+  });
+  const bids = side(-1), asks = side(1);
+  const median = a => a.map(x => x.size).sort((p, q) => p - q)[Math.floor(a.length / 2)];
+  const mb = median(bids), ma = median(asks);
+  bids.forEach(l => l.wall = l.size >= mb * 4);
+  asks.forEach(l => l.wall = l.size >= ma * 4);
+  const prints = Array.from({ length: 10 }, () => {
+    const atAsk = rnd() > 0.45;
+    return { price: Number((price + (atAsk ? half : -half)).toFixed(price >= 1 ? 2 : 4)),
+             size: Math.round(base * (0.05 + rnd() * 0.6)), atAsk: atAsk };
+  });
+  return { bids: bids, asks: asks, prints: prints };
+}
+function renderL2(frame, ctx) {
+  const host = $("#l2Card"); host.textContent = "";
+  const { last, row, halted, sym } = ctx;
+  if (last == null) { host.appendChild(el("div", "placeholder", "No quote yet.")); return; }
+  if (halted) {
+    host.appendChild(el("div", "halt-banner", "HALTED — the book is not a reliable picture during a halt, and a stop does not protect through a reopen."));
+  }
+  const book = _depth(sym, state.frame, last, row ? row.spread : null, row ? row.volume5m : null);
+  const maxSize = Math.max(...book.bids.map(b => b.size), ...book.asks.map(a => a.size));
+  const ladder = el("div", "ladder");
+  ladder.appendChild(el("div", "ladder-head", "Bid")); ladder.appendChild(el("div", "ladder-head", "Size"));
+  ladder.appendChild(el("div", "ladder-head", "Size")); ladder.appendChild(el("div", "ladder-head", "Ask"));
+  for (let i = 0; i < 8; i++) {
+    const b = book.bids[i], a = book.asks[i];
+    const bp = el("div", "lp bid" + (i === 0 ? " inside" : ""), fx(b.price)); ladder.appendChild(bp);
+    const bs = el("div", "ls bid" + (b.wall ? " wall" : ""));
+    bs.appendChild(el("span", "bar", "")); bs.lastChild.style.width = (b.size / maxSize * 100) + "%";
+    bs.appendChild(el("span", "n", String(b.size))); ladder.appendChild(bs);
+    const as = el("div", "ls ask" + (a.wall ? " wall" : ""));
+    as.appendChild(el("span", "bar", "")); as.lastChild.style.width = (a.size / maxSize * 100) + "%";
+    as.appendChild(el("span", "n", String(a.size))); ladder.appendChild(as);
+    ladder.appendChild(el("div", "lp ask" + (i === 0 ? " inside" : ""), fx(a.price)));
+  }
+  host.appendChild(ladder);
+  const wall = book.asks.find(a => a.wall);
+  if (wall) host.appendChild(el("div", "note warn", "Large offer resting at " + fx(wall.price) +
+    " (" + wall.size + "). A seller above the trigger caps the move until it is consumed."));
+  host.appendChild(el("div", "divider", "time & sales"));
+  const tape = el("div", "tape");
+  book.prints.forEach(p => {
+    const r = el("div", "print " + (p.atAsk ? "up" : "down"));
+    r.appendChild(el("span", null, fx(p.price)));
+    r.appendChild(el("span", "n", String(p.size)));
+    r.appendChild(el("span", "side", p.atAsk ? "ask" : "bid"));
+    tape.appendChild(r);
+  });
+  host.appendChild(tape);
+  // The ladder AND the tape are generated from the same seed. Saying only
+  // "simulated depth" left the prints below reading as real executions.
+  host.appendChild(el("div", "note", "Simulated book and tape — not licensed market data."));
+}
+
+/* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
+   playbook GO / WAIT / PASS matrix. Education and planning only. */
+function renderVerdict(frame, ctx) {
+  const { last, chg, hod, row, meta, nf, halted, sym } = ctx;
+  const host = $("#verdictCard"); host.textContent = "";
+  const T = S.pillarThresholds;
+  const plan = activePlan(sym, frame.t);
+  // From the persistent log, not the sliding rebuild window: the verdict used
+  // to flip ACTIVE -> WAIT while the tile still showed the alert on screen.
+  const recent = ALERT_LOG.filter(a => a.symbol === sym && frame.t - Math.floor(a._at / 1000) <= 300);
+  const hodActive = recent.some(a => a.scannerId === "hod_momentum");
+  const runActive = recent.some(a => a.scannerId.indexOf("running_up") === 0 || a.scannerId.indexOf("squeeze") === 0);
+
+  const priceOk = last != null && last >= T.priceMin && last <= T.priceMax;
+  const gainOk = (chg || 0) >= T.gainMinPct;
+  const rvolOk = row && (rowRvol(row) || 0) >= T.rvolMin;
+  const fl = effectiveFloat(sym, meta);
+  // Float passes when somebody verified it under the cap — the feed, or you.
+  // Shares outstanding (from SEC filings) is NOT float: it includes locked-up
+  // insider and restricted stock. But it is always >= float, which makes it a
+  // sound upper bound: outstanding under 20M proves float under 20M. Above the
+  // cap it proves nothing either way, so it counts as unknown — never as a
+  // fail, and never as a pass.
+  const soBound = fl.quality === "shares_outstanding_proxy";
+  const floatOk = fl.shares != null && fl.shares < T.floatMaxShares &&
+                  (fl.quality === "verified" || fl.quality === "you verified" || soBound);
+  const floatUnknown = fl.shares == null || (soBound && fl.shares >= T.floatMaxShares);
+  const newsOk = !!nf;
+  const technical = [priceOk, gainOk, rvolOk, floatOk].filter(Boolean).length;
+  const momentumOk = row && (row.rvol5m || 0) >= 2;
+
+  // GO / WAIT / PASS — playbook section 6.
+  const blockers = [], waits = [];
+  if (halted) blockers.push("Halted — no plan survives a reopen at an unknown price.");
+  if (technical <= 2) blockers.push("Only " + technical + "/4 technical pillars; 3/5 or fewer is a normal reject.");
+  const spreadShare = plan && row && row.spread ? row.spread / plan.riskShare : null;
+  if (spreadShare != null && spreadShare > 0.35)
+    blockers.push("Spread is " + (spreadShare * 100).toFixed(0) + "% of planned risk — the round trip eats the edge.");
+  if (plan && plan.target > (meta.high52w || Infinity) && last < meta.high52w)
+    blockers.push("52-week high at " + fx(meta.high52w) + " sits between entry and the 2R target.");
+  if (plan && !plan.volumeOk)
+    blockers.push("Pullback volume was heavier than the impulse — sellers, not a pause.");
+  if (technical === 3) waits.push("3/4 technical pillars — one condition still missing.");
+  if (!plan) waits.push("No confirmed first pullback yet; nothing to place a structural stop against.");
+  if (plan && last != null && last > plan.entry + plan.riskShare)
+    waits.push("Price is already more than 1R beyond the trigger — chasing here inverts the reward/risk.");
+  if (!hodActive && !runActive) waits.push("No live momentum event in the last five minutes.");
+
+  const verdict = blockers.length ? "PASS" : waits.length ? "WAIT" : "GO";
+  const banner = el("div", "verdict-banner " + verdict.toLowerCase());
+  banner.appendChild(el("b", null, verdict));
+  // GO needs every condition at once, which is rare by construction. A bare
+  // "WAIT" gives no sense of whether a setup is one condition away or five,
+  // so the banner carries the count and the list below names them.
+  const missing = blockers.length + waits.length;
+  banner.appendChild(el("span", null, verdict === "GO" ? "candidate and structure both check out"
+    : verdict === "WAIT"
+      ? "watch, do not enter yet — " + missing + (missing === 1 ? " condition" : " conditions") + " short"
+      : "reject this candidate"));
+  host.appendChild(banner);
+
+  const why = el("div", "why");
+  (blockers.length ? blockers : waits.length ? waits : ["Four pillars, a confirmed pullback, usable spread and 2R of room."]).forEach(r => {
+    const x = el("div", "why-row");
+    x.appendChild(el("span", "why-dot " + verdict.toLowerCase(), ""));
+    x.appendChild(el("span", null, r));
+    why.appendChild(x);
+  });
+  host.appendChild(why);
+
+  const table = el("div", "verdict-table");
+  const line = (label, value, status, cls) => {
+    const r = el("div", "vrow");
+    r.appendChild(el("span", "vlab", label));
+    r.appendChild(el("span", "vval", value));
+    r.appendChild(el("span", "vst " + (cls || (status ? "ok" : "no")), status === null ? "—" : (cls ? status : (status ? "PASS" : "FAIL"))));
+    table.appendChild(r);
+  };
+  line("Price", fx(last) + "  $" + T.priceMin + "–" + T.priceMax +
+       (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
+  line("Gain vs close", pct(chg), gainOk);
+  const rvolMeta = (SYMS[state.selected] || {}).metrics || {};
+  line((rvolMeta.rvolMeasure || (row && row.rvolMeasure)) === "time_of_day"
+         ? "RVOL · time of day" : "RVOL · daily",
+       row ? fx(rowRvol(row)) + "×" : "—", !!rvolOk);
+  // Three states, three words: PASS, FAIL, UNKNOWN. An over-cap shares-
+  // outstanding bound is the third — it must never render as "false".
+  const floatStatus = floatOk ? true : (floatUnknown ? "UNKNOWN" : false);
+  line("Float / supply", fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" +
+       (fl.quality === "you verified" ? " (yours)" : soBound ? " SO" : "") : "unknown",
+       floatStatus, floatStatus === "UNKNOWN" ? "warn" : undefined);
+  line("News", newsOk ? "Observed" : "Manual check", newsOk);
+  line("Technical score", technical + "/4", technical === 4);
+  line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
+  line("HOD / Running", hodActive ? "HOD" : runActive ? "Running Up" : "None",
+       hodActive || runActive ? "ACTIVE" : "WAIT", hodActive || runActive ? "ok" : "warn");
+  line("Entry", plan ? fx(plan.entry) : "N/A", plan ? "ARMED" : "—", plan ? "ok" : "muted-st");
+  line("Stop", plan ? fx(plan.stop) : "N/A", "pullback low", "muted-st");
+  line("Target", plan ? fx(plan.target) : "N/A", plan ? plan.rewardMultiple.toFixed(1) + "R" : "—", "muted-st");
+  host.appendChild(el("div", "divider", "pine dashboard mirror"));
+  host.appendChild(table);
+
+  renderSizing(plan, row);
+}
+
+/* Sizing lives outside the re-rendered card so the operator can type into it
+   while the replay keeps running. The dollar risk is always theirs. */
+function syncFloatInput() {
+  const box = document.getElementById("floatInput");
+  if (!box || document.activeElement === box) return;   // never fight the typist
+  const mine = userFloats()[state.selected];
+  box.value = mine > 0 ? mine : "";
+}
+
+function renderSizing(plan, row) {
+  const out = $("#sizingOut"); out.textContent = "";
+  const risk = Number(state.riskDollars);
+  if (plan && risk > 0) {
+    const reserve = row && row.spread ? row.spread : 0;
+    const prudent = plan.riskShare + reserve;
+    const shares = Math.floor(risk / prudent);
+    kv(out, "Prudent risk / share", "$" + fx(prudent, 3));
+    kv(out, "Shares", String(shares));
+    kv(out, "Position value", "$" + (shares * plan.entry).toFixed(0));
+    kv(out, "Planned loss", "$" + (shares * prudent).toFixed(2));
+    out.appendChild(el("div", "note", "Shares = your risk ÷ (entry − stop + spread reserve). No liquidity cap is applied; check the book yourself."));
+  } else if (plan) {
+    out.appendChild(el("div", "note", "Enter your own dollar risk to size this plan. The app will not assume one for you."));
+  } else {
+    out.appendChild(el("div", "note", "No armed setup to size yet."));
+  }
+}
+
+/* ── charts ─────────────────────────────────────────────────────────── */
+const PANES = {};
+function bars10sUpTo(sym, frame) {
+  const all = (S.bars10s || {})[sym] || [];
+  if (!all.length) return [];
+  // Cut by TIME at both ends. The upper cut is the frame's minute — an index
+  // that assumed six bars a minute once leaked the close of the day into the
+  // morning. The lower cut is a fixed 30-minute window: trade-built bars are
+  // sparse outside the open, and "the last 180 bars" spanned an hour and read
+  // as scattered dots. A time window shows density as it really is; an empty
+  // bucket stays absent rather than being drawn flat.
+  const atEdge = S.streaming && state.frame >= FRAMES.length - 1;
+  const limit = atEdge ? Math.floor(Date.now() / 1000) + 60 : frame.t + 60, floor = limit - 30 * 60;
+  let hi = all.length, lo = 0;
+  while (lo < hi) { const mid = (lo + hi) >> 1; if (all[mid][0] < limit) lo = mid + 1; else hi = mid; }
+  let start = 0, end = lo;
+  while (start < end && all[start][0] < floor) start++;
+  return all.slice(start, end);
+}
+
+let CHART_SYM = null, SNAP_LIVE = false;
+function renderCharts(frame) {
+  const sym = state.selected, meta = SYMS[sym] || {};
+  // A new symbol, or a refreshed session on a streaming desk, must show the
+  // newest bars: a logical range carried over from another dataset parked the
+  // 1-minute pane on 11:00 with an hour of blank canvas to its right.
+  // Snap to the newest bar when the SYMBOL changes. Otherwise each pane
+  // decides for itself: it follows the tape while the trader is sitting on the
+  // live edge and holds still the moment they scroll back to study something.
+  const snap = sym !== CHART_SYM;
+  CHART_SYM = sym; SNAP_LIVE = false;
+  const bars1 = barsUpTo(sym, frame.barIndex);
+  const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
+  const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
+  const plan = activePlan(sym, frame.t);
+  const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
+  PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m" }, common));
+  PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "5m" }, common));
+  const sub = bars10sUpTo(sym, frame);
+  if (sub.length) {
+    PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
+    // Micro-pullbacks live here: several 10-second candles can form a pause
+    // inside a single green 1-minute candle.
+    PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
+    if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
+  } else {
+    PANES.d.render([], {});
+    // What is true, rather than a claim about the provider's capabilities:
+    // this session carries no sub-minute data for this symbol.
+    PANES.d.note("No sub-minute data for " + sym + " in this session. Empty rather than invented.");
+  }
+  PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
+  if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back
+    const r = PENDING_RANGES; PENDING_RANGES = null;
+    ["a", "b", "d", "c"].forEach(k => { if (r[k] && PANES[k] && PANES[k].setRange) PANES[k].setRange(r[k]); });
+  }
+  renderWidget(sym, meta);
+}
+
+/* ── selection ──────────────────────────────────────────────────────── */
+function select(symbol, source, rowIndex) {
+  if (!symbol || !SYMS[symbol]) return;
+  state.selected = symbol;
+  if (source) state.focusTile = source;
+  if (rowIndex != null) state.focusRow = rowIndex;
+  const url = new URL(location.href); url.searchParams.set("symbol", symbol);
+  history.replaceState({}, "", url);
+  render();
+}
+function toggleReasons(listId, symbol) {
+  const key = listId + "|" + symbol;
+  state.openRow = state.openRow === key ? null : key;
+}
+
+/* ── audio ──────────────────────────────────────────────────────────── */
+let audioCtx = null;
+function unlockAudio() { audioReady(); }
+/* Audio fires on ARRIVALS, not on refreshes.
+   The session is rebuilt every few seconds and every rebuild mints fresh event
+   ids, so keying the alert sound on ids meant a beep every three seconds — a
+   metronome, not an alert. A ticker earns exactly one sound: the moment it
+   first appears in the top-gainers list or in the Running Up timeline. It
+   never sounds again for that grid, however many times it re-ranks. */
+/* A ticker is announced once when it enters a grid. It can be announced again
+   only after it has been ABSENT for a while — a name that drops out and comes
+   back ten minutes later is genuinely new information, a name that re-ranks
+   twice a second is not. */
+const SEEN_IN_GRID = new Map();          // membership key -> last time it was there
+const REENTRY_MS = 10 * 60 * 1000;
+const ARRIVAL_MS = 4000;                 // how long a row stays marked new
+const ALERT_NEWS_MS = 3 * 60 * 1000;     // older than this, an alert is history arriving late
+const SEEN_CAP = 4000;                   // arrival memory, pruned oldest-first
+let AUDIO_SEEDED = false;
+function membership(frame) {
+  const out = [];
+  (frame.lists[LIST_IDS[0]] || []).forEach(row =>
+    out.push({ k: "gainers:" + row[COL.symbol], sym: row[COL.symbol], at: null }));
+  // One entry per ALERT, not per symbol. Keyed by symbol alone, a second
+  // Running Up leg on the same name inside ten minutes made no sound at all.
+  Object.keys(ALERT_TILES).forEach(tile => {
+    loggedAlerts(ALERT_TILES[tile].scanners).forEach(a =>
+      out.push({ k: tile + ":" + a._key, sym: a.symbol, at: a._at }));
+  });
+  return out;
+}
+function noteArrivals(frame) {
+  const now = Date.now();
+  state.arrivals.forEach((until, sym) => { if (until <= now) state.arrivals.delete(sym); });
+  const fresh = [];
+  membership(frame).forEach(e => {
+    const seen = SEEN_IN_GRID.get(e.k);
+    if (seen === undefined || now - seen > REENTRY_MS) fresh.push(e);
+    SEEN_IN_GRID.set(e.k, now);
+  });
+  if (SEEN_IN_GRID.size > SEEN_CAP) {                       // one key per alert, so prune
+    const keep = Array.from(SEEN_IN_GRID.entries()).sort((a, b) => b[1] - a[1]).slice(0, SEEN_CAP / 2);
+    SEEN_IN_GRID.clear(); keep.forEach(([k, t]) => SEEN_IN_GRID.set(k, t));
+  }
+  if (!AUDIO_SEEDED) { AUDIO_SEEDED = true; return []; }   // the first paint is not news
+  if (!fresh.length) return [];
+  fresh.forEach(e => state.arrivals.set(e.sym, now + ARRIVAL_MS));
+  // A name the scanner adds mid-session brings its whole morning of alerts
+  // with it. Those are history arriving late, not twenty events firing now,
+  // and they must not empty a magazine of beeps into the room.
+  const deskMs = deskNow();
+  const news = fresh.filter(e => e.at == null || deskMs - e.at <= ALERT_NEWS_MS);
+  if (news.length) {
+    beep(news.some(e => e.k.startsWith("gainers:")) ? "high" : "medium");
+    const which = news.some(e => e.k.startsWith("gainers:")) ? "scan-pillars"
+                : news[0].k.startsWith("hod_momentum:") ? "scan-hod" : "scan-running";
+    const card = document.querySelector('[data-card="' + which + '"]');
+    if (card) { card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
+                setTimeout(() => card.classList.remove("flash"), 1700); }
+  }
+  return fresh;
+}
+let BEEPS = 0;
+if (typeof window !== "undefined") {
+  window.__deskBeeps = () => BEEPS;   // audio test hook
+  // Test hooks: the alert memory across a rollover, and where the desk is
+  // sitting relative to the live edge.
+  window.__deskMemory = () => ({ log: ALERT_LOG, keys: ALERT_KEYS, seen: SEEN_IN_GRID });
+  window.__deskSeek = seekTo;
+  window.__deskFrame = () => ({ frame: state.frame, frames: FRAMES.length,
+                                ts: FRAMES.length ? FRAMES[Math.min(state.frame, FRAMES.length - 1)].ts : null,
+                                last: FRAMES.length ? FRAMES[FRAMES.length - 1].ts : null });
+}
+/* Every browser starts a page's audio context SUSPENDED and only lets a user
+   gesture resume it. A desk left running all morning would therefore make no
+   sound at all until something was clicked, with nothing on screen saying so.
+   The first click or key anywhere on the page unlocks it, and the Alerts
+   button says which of the three states it is in. */
+let AUDIO_BLOCKED = false;
+function audioReady() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended" && audioCtx.resume) audioCtx.resume();
+    AUDIO_BLOCKED = audioCtx.state === "suspended";
+  } catch (e) { AUDIO_BLOCKED = true; }
+  paintSoundButton();
+  return !AUDIO_BLOCKED;
+}
+function paintSoundButton() {
+  const b = document.getElementById("btnSound"); if (!b) return;
+  b.setAttribute("aria-pressed", String(!!state.sound));
+  b.textContent = (!state.sound ? "🔇" : AUDIO_BLOCKED ? "🔕" : "🔔") + " Alerts";
+  b.title = !state.sound ? "Alert sounds are off (A)"
+          : AUDIO_BLOCKED ? "The browser is holding sound until you click the page once (A)"
+          : "A sound on every new alert: high for a name entering the pillars list, "
+            + "medium for a Running Up or High of Day leg (A)";
+  b.classList.toggle("blocked", !!state.sound && AUDIO_BLOCKED);
+}
+function beep(severity) {
+  BEEPS++;
+  if (!state.sound) return;
+  try {
+    if (!audioReady()) return;
+    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+    const freq = severity === "critical" ? 340 : severity === "high" ? 660 : 520;
+    o.frequency.value = freq; o.type = "sine";
+    g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.22);
+    o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + 0.24);
+  } catch (e) { /* audio is a convenience; the visual alert always fires */ }
+}
+
+/* ── layout: cards live in named slots, drag a header onto another card to
+   swap them, ⛶ expands one card over the workspace. The arrangement is saved
+   per browser so the desk comes back the way it was left. */
+const DEFAULT_LAYOUT = {
+  L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
+  // TradingView's chart is the big pane: their toolbar, drawing tools and
+  // indicators, extended hours on, on the viewer's own TradingView data
+  // entitlement (signed in to tradingview.com in this browser, that is
+  // real-time). Their 5-minute chart and the desk's IBKR 10-second pane
+  // share the row beneath. The desk's own 1m/5m panes wait in the tray.
+  C1: "tv-widget", C2: "tv-widget-5m", C3: "chart-10s",
+  // Right column, top to bottom: the Five Pillars check for every desk
+  // name, Level 2 (simulated, and labelled so), the setup verdict. The
+  // screener is one drag away in the tray.
+  R1: "pillars-board", R2: "level2", R3: "verdict",
+};
+// Cards with no slot wait in the tray; drag one onto a card to swap it in.
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["screener", "chart-1m", "chart-5m", "chart-daily", "timeline"]);
+const DEFAULT_SIZES = {
+  wLeft: 330, wRight: 372,
+  slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
+           R1: 1.35, R2: 1, R3: 1.05 },
+};
+const LAYOUT_KEY = "momentum-workstation.layout.v7";
+let layout = Object.assign({}, DEFAULT_LAYOUT);
+let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
+
+function loadLayout() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(LAYOUT_KEY) || "null");
+    if (saved && saved.layout &&
+        Object.keys(saved.layout).sort().join() === Object.keys(DEFAULT_LAYOUT).sort().join() &&
+        Object.values(saved.layout).every(c => ALL_CARDS.indexOf(c) >= 0) &&
+        new Set(Object.values(saved.layout)).size === Object.keys(DEFAULT_LAYOUT).length) {
+      layout = saved.layout;
+      if (saved.sizes && saved.sizes.slots) sizes = saved.sizes;
+    }
+  } catch (e) { /* a corrupt or blocked store just means the default desk */ }
+}
+function saveLayout() {
+  try { localStorage.setItem(LAYOUT_KEY, JSON.stringify({ layout: layout, sizes: sizes })); }
+  catch (e) {}
+}
+function slotEl(id) { return document.querySelector('[data-slot="' + id + '"]'); }
+
+function applySizes() {
+  const grid = $("#grid");
+  grid.style.setProperty("--w-left", sizes.wLeft + "px");
+  grid.style.setProperty("--w-right", sizes.wRight + "px");
+  Object.keys(sizes.slots).forEach(id => {
+    const node = slotEl(id);
+    if (node) { node.style.flexGrow = sizes.slots[id]; node.style.flexBasis = "0"; }
+  });
+}
+
+/* Gutters resize the two panes they sit between. A vertical gutter trades
+   height between the slots above and below it; a horizontal one trades width
+   between two columns, or between the 5-minute and 10-second charts. The pair
+   keeps its combined size, so resizing never breaks the one-screen fit. */
+function wireResizers() {
+  document.querySelectorAll(".gutter").forEach(g => {
+    g.addEventListener("pointerdown", e => beginResize(e, g));
+    g.addEventListener("keydown", e => {
+      const step = e.shiftKey ? 48 : 16;
+      const map = { ArrowLeft: -step, ArrowUp: -step, ArrowRight: step, ArrowDown: step };
+      if (!(e.key in map)) return;
+      e.preventDefault();
+      nudge(g, map[e.key]);
+    });
+  });
+}
+function resizeContext(g) {
+  if (g.dataset.cols) return { kind: "col", side: g.dataset.cols };
+  if (g.dataset.pair) {
+    const [a, b] = g.dataset.pair.split(",");
+    return { kind: "axis", a: a, b: b, horizontal: true };
+  }
+  const [a, b] = g.dataset.between.split(",");
+  return { kind: "axis", a: a, b: b, horizontal: false };
+}
+function nudge(g, delta) {
+  const ctx = resizeContext(g);
+  if (ctx.kind === "col") {
+    const key = ctx.side === "left" ? "wLeft" : "wRight";
+    const sign = ctx.side === "left" ? 1 : -1;
+    sizes[key] = Math.max(220, Math.min(680, sizes[key] + sign * delta));
+  } else {
+    const a = slotEl(ctx.a), b = slotEl(ctx.b);
+    const aPx = ctx.horizontal ? a.offsetWidth : a.offsetHeight;
+    const bPx = ctx.horizontal ? b.offsetWidth : b.offsetHeight;
+    const total = aPx + bPx, min = ctx.horizontal ? 120 : 46;
+    const nextA = Math.max(min, Math.min(total - min, aPx + delta));
+    const sum = (sizes.slots[ctx.a] || 1) + (sizes.slots[ctx.b] || 1);
+    sizes.slots[ctx.a] = sum * (nextA / total);
+    sizes.slots[ctx.b] = sum * (1 - nextA / total);
+  }
+  applySizes(); saveLayout(); afterResize();
+}
+function beginResize(e, g) {
+  e.preventDefault();
+  const ctx = resizeContext(g);
+  const startX = e.clientX, startY = e.clientY;
+  const a = ctx.kind === "axis" ? slotEl(ctx.a) : null;
+  const b = ctx.kind === "axis" ? slotEl(ctx.b) : null;
+  const aPx = a ? (ctx.horizontal ? a.offsetWidth : a.offsetHeight) : 0;
+  const bPx = b ? (ctx.horizontal ? b.offsetWidth : b.offsetHeight) : 0;
+  const total = aPx + bPx, min = ctx.horizontal ? 120 : 46;
+  const sum = a ? (sizes.slots[ctx.a] || 1) + (sizes.slots[ctx.b] || 1) : 0;
+  const baseW = ctx.kind === "col" ? (ctx.side === "left" ? sizes.wLeft : sizes.wRight) : 0;
+  g.setPointerCapture(e.pointerId);
+  g.classList.add("dragging");
+  document.body.classList.add("resizing");
+
+  const move = ev => {
+    if (ctx.kind === "col") {
+      const delta = (ev.clientX - startX) * (ctx.side === "left" ? 1 : -1);
+      const key = ctx.side === "left" ? "wLeft" : "wRight";
+      sizes[key] = Math.max(220, Math.min(680, baseW + delta));
+    } else {
+      const delta = ctx.horizontal ? ev.clientX - startX : ev.clientY - startY;
+      const nextA = Math.max(min, Math.min(total - min, aPx + delta));
+      sizes.slots[ctx.a] = sum * (nextA / total);
+      sizes.slots[ctx.b] = sum * (1 - nextA / total);
+    }
+    applySizes();
+    Object.values(PANES).forEach(p => p.resize());
+  };
+  const up = ev => {
+    g.releasePointerCapture(ev.pointerId);
+    g.classList.remove("dragging");
+    document.body.classList.remove("resizing");
+    g.removeEventListener("pointermove", move);
+    g.removeEventListener("pointerup", up);
+    saveLayout(); afterResize();
+  };
+  g.addEventListener("pointermove", move);
+  g.addEventListener("pointerup", up);
+}
+function afterResize() {
+  Object.values(PANES).forEach(p => p.resize());
+  renderCharts(FRAMES[state.frame]);
+}
+
+/* Cards not on the desk live in the tray. */
+function placedCards() { return Object.values(layout); }
+function renderTray() {
+  const host = $("#trayCards"); host.textContent = "";
+  const spare = ALL_CARDS.filter(c => placedCards().indexOf(c) === -1);
+  if (!spare.length) {
+    host.appendChild(el("div", "tray-empty", "Every card is on the desk."));
+    return;
+  }
+  spare.forEach(id => {
+    const card = cardEl(id);
+    const title = card ? (card.querySelector(".card-title") || {}).textContent || id : id;
+    const item = el("div", "tray-item");
+    item.setAttribute("draggable", "true");
+    item.dataset.trayCard = id;              // never data-card: that selects cards
+    item.appendChild(el("span", "grip", "⠿"));
+    item.appendChild(el("span", null, title));
+    item.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", id);
+      e.dataTransfer.effectAllowed = "move";
+    });
+    item.title = "Drag onto the desk, or click to put it where " + (LAST_CLICKED_CARD || "the screener slot") + " is";
+    item.addEventListener("click", () => {
+      const target = LAST_CLICKED_CARD && placedCards().indexOf(LAST_CLICKED_CARD) >= 0 ? LAST_CLICKED_CARD : layout.R1;
+      swapCards(id, target);
+    });
+    host.appendChild(item);
+  });
+}
+let LAST_CLICKED_CARD = null;
+function cardEl(id) { return document.querySelector('.card[data-card="' + id + '"]'); }
+function applyLayout() {
+  const parked = document.getElementById("parked");
+  WIDGET_SYMBOL = {};     // a widget card may have just come on screen
+  ALL_CARDS.forEach(id => {
+    if (placedCards().indexOf(id) === -1) {
+      const card = cardEl(id);
+      if (card && card.parentElement !== parked) parked.appendChild(card);
+    }
+  });
+  Object.keys(layout).forEach(slotId => {
+    const slot = document.querySelector('[data-slot="' + slotId + '"]');
+    const card = cardEl(layout[slotId]);
+    if (slot && card && card.parentElement !== slot) slot.appendChild(card);
+  });
+}
+function slotOf(card) {
+  const found = Object.keys(layout).find(k => layout[k] === card.dataset.card);
+  return found;
+}
+function swapCards(aId, bId) {
+  if (aId === bId || ALL_CARDS.indexOf(aId) === -1) return;
+  const sa = Object.keys(layout).find(k => layout[k] === aId);
+  const sb = Object.keys(layout).find(k => layout[k] === bId);
+  if (!sb) return;
+  if (sa) { layout[sa] = bId; layout[sb] = aId; }
+  else { layout[sb] = aId; }        // arrived from the tray: bId goes back to it
+  applyLayout(); saveLayout(); renderTray();
+  Object.values(PANES).forEach(p => p.resize());
+  render();
+}
+function toggleExpand(card) {
+  const backdrop = $("#expandBackdrop");
+  const already = card.classList.contains("expanded");
+  document.querySelectorAll(".card.expanded").forEach(c => c.classList.remove("expanded"));
+  backdrop.hidden = already;
+  if (!already) card.classList.add("expanded");
+  requestAnimationFrame(() => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
+}
+function wireLayout() {
+  const grid = $("#grid");
+  grid.addEventListener("dragstart", e => {
+    const head = e.target.closest(".card-head");
+    if (!head) return;
+    const card = head.closest(".card");
+    e.dataTransfer.setData("text/plain", card.dataset.card);
+    e.dataTransfer.effectAllowed = "move";
+    card.classList.add("dragging");
+  });
+  grid.addEventListener("dragend", () => {
+    document.querySelectorAll(".dragging,.drop-target")
+      .forEach(c => c.classList.remove("dragging", "drop-target"));
+  });
+  grid.addEventListener("dragover", e => {
+    const card = e.target.closest(".card");
+    if (!card || card.classList.contains("dragging")) return;
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+    card.classList.add("drop-target");
+  });
+  grid.addEventListener("dragleave", e => {
+    const card = e.target.closest(".card");
+    if (card) card.classList.remove("drop-target");
+  });
+  grid.addEventListener("drop", e => {
+    const card = e.target.closest(".card");
+    if (!card) return;
+    e.preventDefault();
+    card.classList.remove("drop-target");
+    swapCards(e.dataTransfer.getData("text/plain"), card.dataset.card);
+  });
+  grid.addEventListener("click", e => {
+    const card = e.target.closest(".card");
+    if (card && card.dataset.card) LAST_CLICKED_CARD = card.dataset.card;
+    const btn = e.target.closest(".expand");
+    if (btn) { e.stopPropagation(); toggleExpand(btn.closest(".card")); }
+  });
+  $("#expandBackdrop").addEventListener("click", () => {
+    const open = document.querySelector(".card.expanded");
+    if (open) toggleExpand(open);
+  });
+  $("#btnLayout").onclick = () => {
+    layout = Object.assign({}, DEFAULT_LAYOUT);
+    sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
+    applyLayout(); applySizes(); saveLayout(); renderTray();
+    Object.values(PANES).forEach(p => p.resize());
+    render();
+  };
+  $("#btnTray").onclick = () => {
+    const tray = $("#tray");
+    tray.hidden = !tray.hidden;
+    $("#btnTray").setAttribute("aria-pressed", String(!tray.hidden));
+    if (!tray.hidden) renderTray();
+  };
+  document.addEventListener("dragover", e => {
+    if (e.target.closest("#tray")) e.preventDefault();
+  });
+}
+
+
+/* Which symbol the desk opens on.
+
+   This used to fall back to a hard-coded "ABCD" — a name from the bundled
+   replay fixture. Pointed at a live session of AAPL/TSLA/NVDA it selected a
+   symbol that was not in the data, so every panel rendered empty and the
+   verdict card read PASS 0/4 on a stock that does not exist. The desk looked
+   broken while the feed was working perfectly.
+
+   Never select a symbol this session does not carry: honour ?symbol= only
+   when it is present, otherwise open on the first one the session actually
+   has. */
+function openingSymbol() {
+  const names = Object.keys(SYMS || {});
+  const asked = new URL(location.href).searchParams.get("symbol");
+  if (asked && SYMS[asked.toUpperCase()]) return asked.toUpperCase();
+  if (asked && names.length) {
+    console.warn(`${asked} is not in this session; opening ${names[0]} instead.`);
+  }
+  return names[0] || null;
+}
+
+
+/* Float the operator looked up themselves.
+
+   No free data source publishes float, so the feed reports it unknown and the
+   supply pillar fails — correctly, because guessing a float would be inventing
+   the number that decides position size. But a pillar that can never pass caps
+   the technical score at 3/4 forever, and the verdict matrix treats 3/4 as a
+   WAIT, so the desk was structurally incapable of ever reaching GO.
+
+   The way out is not to relax the pillar. It is to let you supply the number
+   you verified yourself, and to label it as yours rather than the feed's. */
+const FLOAT_KEY = "desk.floats.v1";
+function userFloats() {
+  try { return JSON.parse(localStorage.getItem(FLOAT_KEY) || "{}"); }
+  catch (e) { return {}; }
+}
+function setUserFloat(symbol, millions) {
+  const all = userFloats();
+  if (millions == null || !(millions > 0)) delete all[symbol];
+  else all[symbol] = millions;
+  try { localStorage.setItem(FLOAT_KEY, JSON.stringify(all)); } catch (e) {}
+}
+/* Feed value wins when the feed has one; otherwise yours, marked as yours. */
+function effectiveFloat(symbol, meta) {
+  if (meta && meta.floatQuality === "verified" && meta.floatShares)
+    return { shares: meta.floatShares, quality: "verified" };
+  const mine = userFloats()[symbol];
+  if (mine > 0) return { shares: mine * 1e6, quality: "you verified" };
+  return { shares: meta ? meta.floatShares : null, quality: (meta && meta.floatQuality) || "unknown" };
+}
+
+
+/* Live follow. The server stamps every rebuild; when the stamp changes the
+   page reloads its data. Before reloading it remembers the selected symbol
+   and whether the user sat on the live edge, and puts both back afterwards —
+   so a trader watching the newest candle keeps watching the newest candle,
+   and one who scrubbed back to study a pullback is not yanked forward. */
+const LIVE_KEY = "desk.live.restore";
+let PENDING_RANGES = null;
+
+/* How far behind the desk's own data is. The badge reports the CONNECTION;
+   this reports the DATA. A stream can be perfectly alive while the session it
+   feeds has stopped advancing, and only this says so. */
+function renderLag(frame) {
+  let host = document.getElementById("dataLag");
+  if (!host) {
+    host = el("span", "lag");
+    host.id = "dataLag";
+    const meta = document.querySelector(".clock-meta");
+    if (!meta) return;
+    meta.appendChild(host);
+  }
+  // A parked desk is the one state the chip must never call "live": every
+  // card is showing a minute from the past and only this says so.
+  if (S.streaming && FRAMES.length && state.frame < FRAMES.length - 1) {
+    host.hidden = false;
+    host.className = "lag warn parked";
+    host.textContent = "paused " + etClock(FRAMES[state.frame].ts).slice(0, 5);
+    host.title = "The desk is parked at " + etClock(FRAMES[state.frame].ts) + " ET, "
+               + (FRAMES.length - 1 - state.frame) + " minutes behind the live edge. "
+               + "Click to return to live.";
+    host.onclick = backToLive;
+    return;
+  }
+  host.onclick = null;
+  host.classList.remove("parked");
+  const lastMs = frame ? frame.t * 1000 : 0;
+  let lag = lastMs ? Math.max(0, Math.round((Date.now() - lastMs) / 1000)) : null;
+  // A live desk is behind only when IBKR has gone quiet on it. Thin premarket
+  // tape can go forty minutes without a print while quotes keep ticking; that
+  // is the tape, and the chip says "live" with the newest bar's time beside
+  // it rather than a lag the desk is not suffering.
+  const feedLag = S.streaming ? feedLagSeconds() : null;
+  if (lag != null && feedLag != null) {
+    const barLag = lag;
+    lag = feedLag;
+    if (lag < 90) {
+      host.hidden = false;
+      host.className = "lag ok";
+      // Short and fixed-width: the chip sits between the clock and the feed
+      // badges, and a text that grows by ten characters pushed them along the
+      // top bar every time the tape went quiet.
+      host.textContent = barLag >= 300 ? "live · " + etClock(frame.ts).slice(0, 5) : "live";
+      host.title = "IBKR sent this desk a quote or bar " + fmtAge(feedLag * 1000) + " ago · newest bar " +
+        etClock(frame.ts) + " ET" + (barLag >= 300 ? " (quiet tape, not a delay)" : "");
+      return;
+    }
+  }
+  if (lag == null) {
+    // A live desk with no frame has had no print this session; that is a
+    // state to name, not a lag to measure.
+    host.hidden = !S.streaming;
+    host.textContent = "no prints yet";
+    host.className = "lag warn";
+    host.title = "no bar since the session start (04:00 ET)" + (S.sessionStart ? " · " + etClock(S.sessionStart) + " ET" : "");
+    return;
+  }
+  host.hidden = false;
+  host.textContent = lag < 90 ? "live" : fmtAge(lag * 1000) + " behind";
+  host.className = "lag" + (lag < 90 ? " ok" : lag < 600 ? " warn" : " bad");
+  host.title = (feedLag != null ? "nothing from IBKR for " + fmtAge(feedLag * 1000) + " · " : "") +
+    "newest bar on the desk: " + etClock(frame.ts) + " ET";
+}
+/* Seconds since IBKR last sent anything, as the server measured it plus the
+   time since that rebuild; streamed quotes since then count as fresh. */
+function feedLagSeconds() {
+  if (LAST_STREAM_AT) return Math.max(0, Math.round((Date.now() - LAST_STREAM_AT) / 1000));
+  const base = S.feedLagSeconds != null ? S.feedLagSeconds : (S.provider && S.provider.feedLagSeconds);
+  if (base == null) return null;
+  const since = S.builtAt ? Math.max(0, (Date.now() / 1000) - S.builtAt) : 0;
+  return Math.round(base + since);
+}
+let LAST_STREAM_AT = 0;
+
+/* Provider health -> the header badge. LIVE is the only green; STALE, DELAYED
+   and OFFLINE are named as such, never dressed as live. */
+/* Two traders, two IBKR connections, one set of rules. The badge is the hash
+   of everything that decides what this desk admits and what it fires: the
+   shared profile, any local override, the Confirmed pillars and the scanner
+   definitions. Same hash on both screens means the same alerts from the same
+   data — and the tooltip names the entitlements, which are NOT hashed because
+   a desk without fundamentals or without news keys scores the float and news
+   pillars differently and so moves the three-of-five liquidity gate. */
+function setRulesBadge(desk) {
+  const box = document.getElementById("rulesBadge"); if (!box || !desk || !desk.hash) return;
+  box.hidden = false;
+  document.getElementById("rulesHash").textContent = String(desk.hash).slice(0, 8).toUpperCase();
+  const over = Object.keys(desk.envOverrides || {});
+  document.getElementById("rulesSub").textContent =
+    (desk.build ? desk.build + " · " : "") + (over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : "shared profile")
+    + (desk.role === "viewer" ? " · VIEWER" : "");
+  const ent = desk.entitlements || {};
+  const missing = Object.keys(ent).filter(k => ent[k] === false);
+  document.getElementById("rulesDot").className = "dot " + (over.length || missing.length ? "stale" : "live");
+  const r = desk.rules || {};
+  const line = sec => Object.keys(r[sec] || {}).sort().map(k => k + "=" + r[sec][k]).join("  ");
+  box.title = "Desk rules " + desk.hash
+    + "\ndesk       " + line("desk")
+    + "\ncadence    " + line("cadence")
+    + "\nliquidity  " + line("liquidity")
+    + (over.length ? "\nlocal overrides: " + over.join(", ") : "")
+    + (missing.length ? "\nnot available here: " + missing.join(", ")
+        + " — the float and news pillars score differently, which moves the 3-of-5 liquidity gate"
+      : "")
+    + "\n\nSame hash on your partner's desk means the same scanners and the same alerts."
+    + "\nCompare with: python3 scripts/desk_parity.py --compare <their hash>";
+}
+
+function setFeedBadge(h) {
+  if (!h) return;
+  const st = String(h.state || "OFFLINE").toUpperCase();
+  const cls = st === "LIVE" ? "live" : st === "STALE" ? "stale" : "offline";
+  $("#feedText").textContent = st;
+  $("#feedDot").className = "dot " + cls;
+  const bits = [String(h.provider || PROVIDER).toUpperCase(), h.readOnly ? "read-only" : "", "gen " + (h.generation || 0)];
+  if (h.reconnects) bits.push(h.reconnects + " reconnects");
+  if (h.marketDataType && h.marketDataType !== 1) bits.push("data type " + h.marketDataType);
+  $("#feedAge").textContent = bits.filter(Boolean).join(" · ");
+}
+
+/* Upsert one [t,o,h,l,c,v] bar into a sorted array by time. */
+function upsertBar(arr, bar) {
+  let i = arr.length;
+  while (i > 0 && arr[i - 1][0] > bar[0]) i--;
+  if (i > 0 && arr[i - 1][0] === bar[0]) arr[i - 1] = bar; else arr.splice(i, 0, bar);
+}
+
+/* Symbol metadata is MERGED, never wholesale replaced. The stream writes the
+   provider's last print, its time and the book onto these objects between
+   rebuilds; assigning a fresh set every few seconds made those fields vanish
+   and reappear, which is what made the print row flicker. A field the rebuild
+   does not carry keeps the value the stream last wrote. */
+const STREAM_FIELDS = ["iexLast", "iexLastTime", "iexBid", "iexAsk"];
+/* 04:00 ET: the desk rolled to a new session. Yesterday's alerts are not
+   today's timeline, and a name that was in a grid last night arriving again
+   this morning is an arrival, with its sound. */
+function newTradingDay(date) {
+  S.tradingDate = date;
+  ALERT_LOG.length = 0;
+  ALERT_KEYS.clear();
+  SEEN_IN_GRID.clear();
+  state.arrivals.clear();
+  const label = $("#sessionLabel");
+  if (label) label.textContent = label.textContent.replace(/^\d{4}-\d{2}-\d{2}/, date);
+}
+
+function mergeSymbols(next) {
+  Object.keys(SYMS).forEach(k => { if (!next[k]) delete SYMS[k]; });
+  Object.keys(next).forEach(k => {
+    const cur = SYMS[k];
+    if (!cur) { SYMS[k] = next[k]; return; }
+    const streamed = {};
+    STREAM_FIELDS.forEach(f => { if (next[k][f] == null && cur[f] != null) streamed[f] = cur[f]; });
+    Object.keys(cur).forEach(f => delete cur[f]);
+    Object.assign(cur, next[k], streamed);           // same object, so closures survive
+  });
+}
+
+/* Replace the session in place — same arrays and objects, new contents — so
+   every closure keeps working, then paint on the live edge with the zoom the
+   trader had. No reload. */
+let refreshing = false;
+function refreshSession() {
+  if (refreshing) return;
+  refreshing = true;
+  fetch("/api/v1/replay/session", { cache: "no-store" }).then(r => r.json()).then(next => {
+    const ranges = { a: PANES.a.getRange && PANES.a.getRange(), b: PANES.b.getRange && PANES.b.getRange(),
+                     d: PANES.d.getRange && PANES.d.getRange(), c: PANES.c.getRange && PANES.c.getRange() };
+    const wasAtEdge = state.frame >= FRAMES.length - 1;
+    FRAMES.length = 0; (next.frames || []).forEach(f => FRAMES.push(f));
+    Object.keys(BARS).forEach(k => delete BARS[k]); Object.assign(BARS, next.bars || {});
+    S.bars10s = S.bars10s || {};
+    Object.keys(S.bars10s).forEach(k => delete S.bars10s[k]); Object.assign(S.bars10s, next.bars10s || {});
+    mergeSymbols(next.symbols || {});
+    S.plans = next.plans; S.builtAt = next.builtAt; S.provider = next.provider || S.provider;
+    S.sessionStart = next.sessionStart || S.sessionStart;
+    S.feedLagSeconds = next.feedLagSeconds;
+    if (next.tradingDate && next.tradingDate !== S.tradingDate) newTradingDay(next.tradingDate);
+    OPEN_INDEX = FRAMES.findIndex(f => f.session === "regular");
+    // A locked symbol is the trader's choice; missing one rebuild does not
+    // revoke it. Only an unlocked selection that has genuinely left the desk
+    // is dropped.
+    if (state.selected && !SYMS[state.selected] && !state.locked) state.selected = null;
+    // A live desk follows the tape unless the operator PARKED it on a minute
+    // (the alert detail's "show the desk at" button). Inferring that from the
+    // frame index alone meant any single rebuild that left the page one frame
+    // short stranded it there for the rest of the session.
+    if (S.streaming) state.frame = state.parked ? Math.min(state.frame, FRAMES.length - 1)
+                                                : FRAMES.length - 1;
+    else if (wasAtEdge) state.frame = FRAMES.length - 1;   // a seek back survives a rebuild
+    else state.frame = Math.min(state.frame, FRAMES.length - 1);
+    PENDING_RANGES = null;                             // chart objects persist; the panes keep their zoom
+    LAST_FULL_FETCH = Date.now();
+    render();
+  }).catch(() => {}).then(() => { refreshing = false; });
+}
+
+/* A scanner rebuild arrives as the newest minute rather than a whole session.
+   The full fetch stays as the reconciler: whenever the desk's symbol set
+   changes (a new name needs its bars, its reference and its float) and once a
+   minute regardless, so nothing can drift. Anything unexpected falls back to
+   the full fetch, which is the behaviour this replaced. */
+let LAST_FULL_FETCH = 0;
+const FULL_FETCH_EVERY_MS = 60000;
+function applySessionTick(p) {
+  if (!p || !p.frame || !FRAMES.length) return refreshSession();
+  if (p.tradingDate && p.tradingDate !== S.tradingDate) return refreshSession();
+  const here = Object.keys(SYMS).slice().sort().join(",");
+  const there = (p.symbols || []).slice().sort().join(",");
+  if (here !== there) return refreshSession();
+  if (Date.now() - LAST_FULL_FETCH > FULL_FETCH_EVERY_MS) return refreshSession();
+  const last = FRAMES[FRAMES.length - 1];
+  if (p.frame.ts > last.ts) FRAMES.push(p.frame);
+  else if (p.frame.ts === last.ts) FRAMES[FRAMES.length - 1] = p.frame;
+  else return;                                  // an older minute: nothing to show
+  if (p.metrics) Object.keys(p.metrics).forEach(sym => {
+    if (SYMS[sym]) SYMS[sym].metrics = p.metrics[sym];
+  });
+  S.builtAt = p.builtAt;
+  S.feedLagSeconds = p.feedLagSeconds;
+  S.sessionStart = p.sessionStart || S.sessionStart;
+  if (!state.parked) state.frame = FRAMES.length - 1;
+  render();
+}
+
+/* Streaming follow: candles, quotes, health and screener rows arrive over
+   the event stream and are drawn as they arrive. The server still rebuilds
+   the scanner session every few seconds; when its stamp moves, the page
+   swaps the data in place. Nothing here reloads the page. */
+function streamFollow() {
+  state.frame = FRAMES.length - 1;
+  if (!window.DeskLive) { liveFollow(); return; }
+  let paint = null;
+  const schedule = () => { if (paint) return; paint = setTimeout(() => { paint = null; render(); }, 250); };
+  DeskLive.on("*", () => { LAST_STREAM_AT = Date.now(); });
+  DeskLive.on("bar10s", b => {
+    const arr = (S.bars10s[b.symbol] = S.bars10s[b.symbol] || []);
+    upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    if (b.symbol === state.selected) schedule();
+  }).on("bar1m", b => {
+    const arr = (BARS[b.symbol] = BARS[b.symbol] || []);
+    upsertBar(arr, [b.t, b.open, b.high, b.low, b.close, b.volume]);
+    if (b.symbol === state.selected) schedule();
+  }).on("quote", q => {
+    const meta = SYMS[q.symbol]; if (!meta) return;
+    meta.iexLast = q.price; meta.iexLastTime = etClock(q.ts);
+    if (q.bid != null) meta.iexBid = q.bid; if (q.ask != null) meta.iexAsk = q.ask;
+    if (q.symbol === state.selected) schedule();
+  }).on("health", setFeedBadge)
+    .on("screener", renderScreener)
+    .on("symbol-added", () => refreshSession())
+    .on("session", applySessionTick)           // the server just rebuilt the scanners
+    .on("resync", () => refreshSession())
+    .on("status", st => { if (st.state === "reconnecting" || st.state === "closed") {
+      $("#feedText").textContent = "RECONNECTING"; $("#feedDot").className = "dot stale"; } })
+    .connect("/api/v1/stream");
+  let stamp = S.builtAt;
+  setInterval(() => {
+    fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      if (h.provider) setFeedBadge(h.provider);
+      if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk));
+      if (h.builtAt && h.builtAt !== stamp) { stamp = h.builtAt; refreshSession(); }
+    }).catch(() => {});
+  }, 5000);
+}
+function liveFollow() {
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(LIVE_KEY) || "null");
+    if (saved) {
+      sessionStorage.removeItem(LIVE_KEY);
+      if (saved.selected && SYMS[saved.selected]) state.selected = saved.selected;
+      state.frame = saved.atEnd ? FRAMES.length - 1 : Math.min(saved.frame || 0, FRAMES.length - 1);
+      state.locked = !!saved.locked;
+      PENDING_RANGES = saved.ranges || null;
+    } else {
+      state.frame = FRAMES.length - 1;        // first load of a live desk: newest bar
+    }
+  } catch (e) { /* storage unavailable: just open on the live edge */ state.frame = FRAMES.length - 1; }
+  let stamp = S.builtAt;
+  setInterval(() => {
+    fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json()).then(h => {
+      if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk));
+      if (!h.builtAt || h.builtAt === stamp) return;
+      stamp = h.builtAt;
+      try {
+        sessionStorage.setItem(LIVE_KEY, JSON.stringify({
+          selected: state.selected, frame: state.frame, locked: state.locked,
+          atEnd: state.frame >= FRAMES.length - 1,
+          ranges: { a: PANES.a.getRange && PANES.a.getRange(), b: PANES.b.getRange && PANES.b.getRange(),
+                    d: PANES.d.getRange && PANES.d.getRange(), c: PANES.c.getRange && PANES.c.getRange() },
+        }));
+      } catch (e) {}
+      location.reload();
+    }).catch(() => {});
+  }, 15000);
+}
+
+
+/* TradingView's own embeddable Advanced Chart, following the selected symbol.
+   This is TradingView's page inside an iframe: their data (consolidated, on
+   their delay rules for a logged-out viewer), their toolbar, their terms. It
+   cannot draw this desk's entry/stop/target — that is what the annotated
+   panes are for — but it gives the familiar toolbar and, before the open, a
+   consolidated premarket price that the single-venue IEX feed may not show.
+   The script loads once, on first use, and only when the card is on screen. */
+let WIDGET_SYMBOL = {}, WIDGET_LOADING = false;
+function tvSymbol(sym, meta) {
+  const ex = (meta && meta.exchange) || "";
+  const prefix = ex === "NASDAQ" ? "NASDAQ:" : ex === "NYSE" ? "NYSE:" : (ex === "AMEX" || ex === "ARCA") ? "AMEX:" : "";
+  return prefix + sym;
+}
+/* The embedded chart is TradingView's delayed feed; the desk's numbers are
+   IBKR's. On a premarket gapper the two can differ by a full day's move — the
+   recording showed a 10.01 chart beside a 12.73 desk — so every TradingView
+   card carries the desk's own last print beside its title. */
+function renderTvDeskPrice(sym, meta) {
+  const last = meta && meta.iexLast != null ? meta.iexLast : null;
+  const when = meta && meta.iexLastTime ? meta.iexLastTime : null;
+  document.querySelectorAll(".tv-desk-price").forEach(node => {
+    node.textContent = last == null ? "" : "desk (IBKR) " + fx(last) + (when ? " · " + when : "");
+    node.classList.toggle("hot", last != null);
+  });
+}
+function renderWidget(sym, meta) {
+  renderTvDeskPrice(sym, meta);
+  document.querySelectorAll(".tv-host[data-interval]").forEach(host => renderWidgetIn(host, sym, meta));
+}
+function renderWidgetIn(host, sym, meta) {
+  if (!host || !sym || WIDGET_SYMBOL[host.id] === sym) return;
+  const card = host.closest(".card");
+  if (!card || card.parentElement === document.getElementById("parked")) return;  // not on screen
+  const draw = () => {
+    if (!window.TradingView || !window.TradingView.widget) return;
+    WIDGET_SYMBOL[host.id] = sym;
+    host.textContent = "";
+    const mount = document.createElement("div"); mount.id = host.id + "Mount"; mount.style.height = "100%";
+    host.appendChild(mount);
+    // The same dressing on every TradingView pane: dark theme, session VWAP,
+    // EMA, extended hours, their toolbar. Only the interval differs.
+    new window.TradingView.widget({
+      symbol: tvSymbol(sym, meta), interval: host.dataset.interval || "1", timezone: "America/New_York", theme: "dark",
+      range: host.dataset.range || "1D",
+      style: "1", locale: "en", container_id: mount.id, autosize: true,
+      withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
+      // Extended hours on by default, both spellings: the widget has used
+      // `session` and `extended_hours` across versions and ignores the one it
+      // does not know. Without it their chart starts at 09:30 and a premarket
+      // runner shows as a flat line beside a desk that is already moving.
+      session: "extended", extended_hours: true,
+      details: false, hotlist: false, calendar: false,
+      studies: ["VWAP@tv-basicstudies", "MAExp@tv-basicstudies"],
+    });
+  };
+  if (window.TradingView) { draw(); return; }
+  if (WIDGET_LOADING) return;
+  WIDGET_LOADING = true;
+  const tag = document.createElement("script");
+  tag.src = "https://s3.tradingview.com/tv.js"; tag.async = true;
+  tag.onload = () => renderWidget(sym, meta);
+  tag.onerror = () => {
+    WIDGET_LOADING = false;   // a later symbol change tries the script again
+    document.querySelectorAll(".tv-host[data-interval]").forEach(h => {
+      h.textContent = "TradingView's widget script could not be loaded (offline, or blocked by an extension).";
+    });
+  };
+  document.head.appendChild(tag);
+}
+
+
+/* The screener card polls its own endpoint — every 20 seconds, independent of
+   session reloads — so the table moves even when the desk's bars do not. A
+   row's source says where the number came from: Yahoo (consolidated, delayed)
+   or IEX (real-time, one venue). Clicking a row selects it if it is on the
+   desk and asks the server to add it otherwise. */
+function ageText(asOf) {
+  if (!asOf) return "—";
+  const ms = typeof asOf === "number" ? (asOf > 1e12 ? asOf : asOf * 1000) : Date.parse(asOf);
+  if (!ms) return "—";
+  const s = Math.max(0, Math.round((Date.now() - ms) / 1000));
+  return s < 90 ? s + "s" : s < 5400 ? Math.round(s / 60) + "m" : Math.round(s / 3600) + "h";
+}
+function renderScreener(data) {
+  const host = document.getElementById("screenerRows"); if (!host) return;
+  const tag = document.getElementById("screenerSource");
+  const src = (data && data.source) || "none";
+  if (tag) { tag.textContent = src === "yahoo-delayed" ? "Yahoo · delayed" : src === "iex" ? "IEX · real-time"
+                             : src === "ibkr" ? "IBKR · live scans" : "paused";
+             tag.className = "tag " + (src === "yahoo-delayed" ? "yahoo" : src === "iex" || src === "ibkr" ? "iex" : ""); }
+  const note = document.getElementById("screenerNote");
+  if (note && data) {
+    // The provider's notes are a paragraph — the scan codes, the row caps, the
+    // excluded funds. The card has one line: show the band, keep the rest in
+    // the tooltip so nothing honest is lost and nothing verbose is on screen.
+    note.textContent = "$" + data.band[0] + "–" + data.band[1] + " · up ≥" + data.min_gain +
+      "% · click a row to add it";
+    note.title = (data.notes && data.notes.length) ? data.notes.join(" ")
+      : "Every name in the band moving in the current session.";
+  }
+  host.textContent = "";
+  const rows = (data && data.rows) || [];
+  if (!rows.length) { host.appendChild(el("div", "empty", "Nothing in the band is moving.")); return; }
+  rows.forEach(r => {
+    const onDesk = !!SYMS[r.symbol];
+    const tr = el("div", "trow screener-row" + (onDesk ? " ondesk" : "") + (state.selected === r.symbol ? " sel" : ""));
+    tr.setAttribute("role", "button"); tr.tabIndex = 0;
+    tr.title = [r.name, r.exchange, r.session].filter(Boolean).join(" · ");
+    const sym = el("span", "tsym"); sym.appendChild(el("b", null, r.symbol)); tr.appendChild(sym);
+    tr.appendChild(el("span", null, fx(r.price)));
+    tr.appendChild(el("span", dirClass(r.change_pct), pct(r.change_pct)));
+    tr.appendChild(el("span", "src " + r.source, r.source));
+    tr.appendChild(el("span", "muted", ageText(r.as_of)));
+    tr.onclick = () => {
+      if (onDesk) { select(r.symbol, "screener"); render(); return; }
+      fetch("/api/v1/desk/add?symbol=" + encodeURIComponent(r.symbol)).then(x => x.json()).then(j => {
+        if (note) note.textContent = j.added && j.added.length ? r.symbol + " joins the desk on the next refresh." : (j.note || "");
+      }).catch(() => {});
+    };
+    host.appendChild(tr);
+  });
+}
+function pollScreener() {
+  const tick = () => fetch("/api/v1/screener", { cache: "no-store" }).then(r => r.json()).then(renderScreener).catch(() => {});
+  tick(); setInterval(tick, 20000);
+}
+
+/* ── render ─────────────────────────────────────────────────────────── */
+function render() {
+  if (!FRAMES.length) {
+    $("#clockET").textContent = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
+    $("#frameCounter").textContent = "waiting for the first print of " + S.tradingDate;
+    renderLag(null);
+    return;
+  }
+  state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);
+  const frame = FRAMES[state.frame];
+  ingestAlerts(state.frame);            // the timeline keeps what the rebuild drops
+  noteArrivals(frame);                  // and only an arrival makes a sound
+  if (!state.selected) state.selected = openingSymbol();
+  const live = S.streaming;
+  $("#clockET").textContent = live ? etParts(Date.now()) : etClock(frame.ts);
+  $("#frameCounter").textContent = "frame " + (state.frame + 1) + "/" + FRAMES.length;
+  const badge = $("#sessionBadge");
+  const ses = live ? sessionAt(Date.now()) : frame.session;
+  badge.textContent = ses; badge.className = "badge " + ses;
+  if (live) renderLag(frame);
+  // The badge belongs to the health stream on a streaming desk. render() runs
+  // several times a second and used to repaint a static "LIVE" over it, so a
+  // STALE or OFFLINE state appeared for an instant and was wiped.
+  if (!S.streaming) {
+    $("#feedText").textContent = S.live ? "LIVE" : "REPLAY";
+    $("#feedAge").textContent = S.generatedFrom;
+  }
+  document.querySelectorAll(".card[data-kind]").forEach(card => keepScroll(card, () => {
+    if (card.dataset.kind === "list") fillListCard(card, card.dataset.scanner, frame);
+    else fillAlertCard(card, ALERT_TILES[card.dataset.scanner], state.frame);
+  }));
+  const ctx = renderHeader(frame);
+  renderCharts(frame); renderQuote(frame, ctx); renderL2(frame, ctx);
+  renderVerdict(frame, ctx); renderTimeline(state.frame); renderPillarsBoard(frame);
+  syncFloatInput();     // or the box keeps the previous symbol's float and writes it onto this one
+}
+function syncTransport() { $("#scrub").value = String(state.frame); }
+
+/* ── transport ──────────────────────────────────────────────────────── */
+let timer = null;
+function tick() {
+  if (state.frame >= FRAMES.length - 1) { pause(); return; }
+  state.frame++;
+  const fresh = FRAMES[state.frame].alerts;
+  if (fresh.length) beep(fresh[0].severity);
+  syncTransport(); render();
+}
+function play() {
+  state.playing = true; $("#btnPlay").textContent = "❚❚ Pause";
+  clearInterval(timer); timer = setInterval(tick, Math.max(60, 1000 / state.speed));
+}
+function pause() { state.playing = false; $("#btnPlay").textContent = "▶ Play"; clearInterval(timer); }
+
+/* ── wiring ─────────────────────────────────────────────────────────── */
+function init() {
+  const tpl = document.getElementById("cards");
+  const holder = document.createDocumentFragment();
+  Array.from(tpl.content.children).forEach(node => holder.appendChild(node.cloneNode(true)));
+  document.getElementById("grid").appendChild(holder);
+  const backdrop = document.createElement("div");
+  backdrop.id = "expandBackdrop"; backdrop.hidden = true;
+  document.body.appendChild(backdrop);
+  const parked = document.createElement("div");
+  parked.id = "parked"; parked.hidden = true;
+  document.body.appendChild(parked);
+  loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
+
+  $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId +
+    (S.streaming ? " · LIVE — " + PROVIDER + " read-only, streaming"
+     : S.live ? " · LIVE — following the newest bar" : " · deterministic replay");
+  // When the desk stepped back because today had no bars, say so in the header.
+  // The trading date alone is easy to skim past at 04:15 in the morning.
+  if (S.sessionNote) {
+    const warn = el("span", "session-note", S.sessionNote);
+    $("#sessionLabel").appendChild(document.createTextNode("  "));
+    $("#sessionLabel").appendChild(warn);
+  }
+  $("#disclaimer").textContent = S.disclaimer;
+  // Which rules this desk is running, live or recorded. Two traders compare
+  // one badge instead of two screens.
+  fetch("/api/v1/health", { cache: "no-store" }).then(r => r.json())
+    .then(h => { if (h.desk) setRulesBadge(Object.assign({ role: h.role }, h.desk)); }).catch(() => {});
+  if (S.live) {
+    // A live desk has no replay transport: there is nothing to play back and
+    // a scrub bar that jumped to the start on every refresh read as a bug.
+    // The page sits on the live edge and stays there.
+    $(".transport").hidden = true;
+    // Audio alerts are on by default on a live desk. Browsers only let a page
+    // make sound after a gesture, so the first click or key unlocks it.
+    state.sound = true;
+    paintSoundButton();
+    // One gesture anywhere unlocks the browser's audio; until then the button
+    // shows 🔕 rather than pretending the desk can be heard.
+    ["pointerdown", "keydown"].forEach(ev =>
+      document.addEventListener(ev, unlockAudio, { once: true }));
+    $("#frameCounter").hidden = true;
+    $("#feedText").textContent = "LIVE";
+    $("#feedAge").textContent = (S.streaming ? PROVIDER + " · streaming" : "IEX · rebuilds every " + S.refreshSeconds + "s");
+    $("#feedDot").className = "dot live";
+    if (S.provider) setFeedBadge(S.provider);
+    if (S.streaming) {
+      streamFollow();
+      // The header clock must tick on its own: between events there can be
+      // minutes of silence, and a frozen clock is what made the desk look
+      // parked at its start time.
+      setInterval(() => {
+        $("#clockET").textContent = etParts(Date.now());
+        const ses = sessionAt(Date.now());
+        const b = $("#sessionBadge"); b.textContent = ses; b.className = "badge " + ses;
+        // The frame the desk is DRAWING, never the newest one: reading the
+        // live edge here is what let the chip say "live" over cards parked
+        // twenty-four minutes in the past.
+        if (FRAMES.length) renderLag(FRAMES[Math.min(state.frame, FRAMES.length - 1)]);
+      }, 1000);
+    } else liveFollow();
+  }
+  pollScreener();
+  const scrub = $("#scrub"); scrub.max = String(FRAMES.length - 1);
+  scrub.oninput = () => { state.frame = Number(scrub.value); render(); };
+  $("#btnPlay").onclick = () => state.playing ? pause() : play();
+  $("#speed").onchange = e => { state.speed = Number(e.target.value); if (state.playing) play(); };
+  document.querySelectorAll("[data-seek]").forEach(b => b.onclick = () => {
+    if (b.dataset.seek === "open" && OPEN_INDEX >= 0) state.frame = OPEN_INDEX;
+    if (b.dataset.seek === "alert") {
+      const i = FRAMES.findIndex(f => f.alerts.length);
+      if (i >= 0) state.frame = i;
+    }
+    syncTransport(); render();
+  });
+  const floatInput = $("#floatInput");
+  // Kept outside the re-rendered body, like the risk box, so typing a number
+  // is not interrupted by the next frame.
+  floatInput.oninput = e => {
+    const v = parseFloat(e.target.value);
+    setUserFloat(state.selected, isNaN(v) ? null : v);
+    render();
+  };
+
+  const riskInput = $("#riskInput");
+  riskInput.value = state.riskDollars;
+  riskInput.oninput = e => {
+    state.riskDollars = e.target.value;
+    const frame = FRAMES[state.frame];
+    renderSizing(activePlan(state.selected, frame.t), symbolRow(frame, state.selected));
+    syncFloatInput();
+  };
+  $("#btnHelp").onclick = () => { const o = $("#legend"); o.hidden = !o.hidden; };
+  $("#legendClose").onclick = () => { $("#legend").hidden = true; };
+  $("#btnSound").onclick = () => {
+    state.sound = !state.sound;
+    if (state.sound) { audioReady(); beep("medium"); }
+    paintSoundButton();
+  };
+  document.addEventListener("keydown", e => {
+    if (e.target.matches("input,select,textarea")) return;
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const rows = (FRAMES[state.frame].lists[state.focusTile] || []).map(rowObj);
+    const k = e.key.toLowerCase();
+    if (k === "j" || e.key === "ArrowDown") { state.focusRow = Math.min(rows.length - 1, state.focusRow + 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
+    else if (k === "k" || e.key === "ArrowUp") { state.focusRow = Math.max(0, state.focusRow - 1); if (rows[state.focusRow] && !state.locked) select(rows[state.focusRow].symbol, state.focusTile, state.focusRow); e.preventDefault(); }
+    else if (e.key === "Enter") { state.locked = !state.locked; render(); }
+    else if (e.key === " ") { const id = state.focusTile; if (LIST_IDS.indexOf(id) >= 0) { state.frozen[id] = state.frozen[id] ? null : { order: rows.map(r => r.symbol) }; if (!state.frozen[id]) delete state.frozen[id]; render(); } e.preventDefault(); }
+    else if (k === "e") {
+      const card = document.querySelector(".card.expanded") ||
+                   cardEl(layout[state.focusTile === "five_pillars_list" ? "L1" : "C1"]);
+      if (card) toggleExpand(card);
+    }
+    else if (k === "n") { $("#quoteCard").scrollIntoView({ block: "center" }); }
+    else if (k === "a") { $("#btnSound").click(); }
+    else if (k === "?") { $("#btnHelp").click(); }
+    else if (e.key === "Escape") {
+      const open = document.querySelector(".card.expanded");
+      if (open) { toggleExpand(open); return; }
+      state.locked = false; state.openRow = null; state.openAlert = null; render();
+    }
+  });
+  PANES.a = makePane("chartA", false);
+  PANES.d = makePane("chartD", false);
+  PANES.b = makePane("chartB", false);
+  PANES.c = makePane("chartC", true);
+  const usingTV = PANES.a.engine === "tradingview";
+  $("#chartEngine").textContent = usingTV ? "TRADINGVIEW" : "CANVAS";
+  $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3 · local"
+    : "vendor/lightweight-charts…js missing — fallback";
+  $("#chartDot").className = "dot " + (usingTV ? "live" : "stale");
+  const ro = new ResizeObserver(() => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
+  ["chartA", "chartB", "chartC", "chartD"].forEach(id => ro.observe(document.getElementById(id)));
+  window.addEventListener("resize", () => {
+    Object.values(PANES).forEach(p => p.resize());
+    renderCharts(FRAMES[state.frame]);
+  });
+  // A RECORDING opens eight minutes before the bell, where the interesting
+  // part starts. A LIVE desk opens on the live edge. This line ran on both,
+  // so every live session started parked at 09:22 — eight minutes before the
+  // open — and the follow-the-edge rule below refused to catch up from
+  // there, leaving every card in the past while the header still said live.
+  state.frame = S.streaming ? FRAMES.length - 1 : Math.max(0, OPEN_INDEX - 8);
+  syncTransport(); render();
+}
+init();
+})();

@@ -1,0 +1,628 @@
+"""Alpaca adapter — free tier, standard library only.
+
+Nothing here needs `pip install`: it speaks HTTP with `urllib` and returns the
+same normalized records the replay fixtures use, so every scanner, chart and
+card behaves identically on real data.
+
+WHAT THE FREE TIER GIVES YOU
+    - real-time trades and 1-minute bars from the IEX feed (not delayed);
+    - historical daily and minute bars;
+    - news headlines with publication timestamps;
+    - the tradable US equity universe (NASDAQ *and* NYSE);
+    - a paper trading account.
+
+THE ONE CAVEAT THAT MATTERS FOR THIS STRATEGY
+    IEX is a single venue carrying a small share of consolidated volume, so
+    IEX volume is NOT comparable to the consolidated volume the course's
+    "5x relative volume" pillar assumes.
+
+    This adapter handles that by comparing like with like: today's IEX volume
+    is divided by the average of prior days' *IEX* volume. Both sides come
+    from the same venue, so the ratio stays meaningful even though neither
+    number is the consolidated one. Absolute volume is still understated and
+    is labelled `iex` in the session so nothing pretends otherwise.
+"""
+
+from __future__ import annotations
+
+import json
+import os
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime, timedelta, timezone
+from typing import Iterable, List, Optional
+from zoneinfo import ZoneInfo
+
+UTC = timezone.utc
+ET = ZoneInfo("America/New_York")
+
+DATA_BASE = "https://data.alpaca.markets"
+PAPER_BASE = "https://paper-api.alpaca.markets"
+
+
+from .tls import ssl_context
+
+
+# IEX is one of many venues and prints a fraction of consolidated volume.
+# The scanners' 25,000-shares-per-5-minutes liquidity floor is stated against
+# the consolidated tape; applied unscaled to IEX it silenced every event
+# scanner on names running 35-75% on 80x relative volume. This divisor is an
+# independent approximation chosen to be permissive — the same-venue RVOL
+# ratios remain the real gates. Calibrate it against your own journal.
+IEX_VOLUME_FLOOR_SCALE = 0.1
+
+class AlpacaError(RuntimeError):
+    """Raised with a message written for a human, not a stack trace."""
+
+
+class AlpacaClient:
+    def __init__(self, key_id: str, secret_key: str, feed: str = "iex",
+                 data_base: str = DATA_BASE, trading_base: str = PAPER_BASE,
+                 timeout: float = 30.0) -> None:
+        if not key_id or not secret_key:
+            raise AlpacaError(
+                "Missing credentials. Put ALPACA_KEY_ID and ALPACA_SECRET_KEY in a "
+                ".env file next to this repository (see .env.example)."
+            )
+        self.key_id = key_id
+        self.secret_key = secret_key
+        self.feed = feed
+        self.data_base = data_base.rstrip("/")
+        self.trading_base = trading_base.rstrip("/")
+        self.timeout = timeout
+
+    # -- transport ----------------------------------------------------------
+
+    def _get(self, base: str, path: str, params: Optional[dict] = None) -> dict:
+        url = base + path
+        if params:
+            clean = {k: v for k, v in params.items() if v is not None}
+            url += "?" + urllib.parse.urlencode(clean)
+        req = urllib.request.Request(url, headers={
+            "APCA-API-KEY-ID": self.key_id,
+            "APCA-API-SECRET-KEY": self.secret_key,
+            "Accept": "application/json",
+        })
+        try:
+            with urllib.request.urlopen(req, timeout=self.timeout,
+                                        context=ssl_context()) as resp:
+                return json.loads(resp.read().decode())
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode(errors="replace")[:300]
+            if exc.code in (401, 403):
+                raise AlpacaError(
+                    "Alpaca rejected the credentials (HTTP %d). Check that the key and "
+                    "secret are copied whole with no spaces, and that they are PAPER keys "
+                    "if you are using the paper endpoint.\nAlpaca said: %s" % (exc.code, body)
+                ) from None
+            if exc.code == 429:
+                raise AlpacaError(
+                    "Rate limited by Alpaca (HTTP 429). The free tier allows roughly 200 "
+                    "requests a minute — scan fewer symbols, or wait a minute and retry."
+                ) from None
+            if exc.code == 422:
+                raise AlpacaError(
+                    "Alpaca could not understand the request (HTTP 422). This usually means "
+                    "a bad symbol, an unsupported timeframe, or a start date outside your "
+                    "plan's history.\nAlpaca said: %s" % body
+                ) from None
+            raise AlpacaError("Alpaca returned HTTP %d for %s\n%s" % (exc.code, path, body)) from None
+        except urllib.error.URLError as exc:
+            reason = str(exc.reason)
+            if "CERTIFICATE_VERIFY" in reason or "SSLCertVerification" in reason:
+                # Not a network problem, and not a bad key. A python.org build on
+                # macOS ships its own CA store and does not read the system
+                # keychain, so every HTTPS call fails until that store is
+                # populated. Saying "check your connection" here sends people to
+                # regenerate perfectly good credentials.
+                raise AlpacaError(
+                    "Python on this machine cannot verify HTTPS certificates, so the "
+                    "request never left your computer. Your keys and your network are "
+                    "fine.\n\n"
+                    "On macOS with Python from python.org, fix it once by opening the\n"
+                    "Applications folder, then your Python 3.x folder, and double-clicking\n"
+                    "the file named: Install Certificates.command\n\n"
+                    "From a terminal instead: python3 -m pip install --upgrade certifi\n\n"
+                    "Detail: %s" % reason
+                ) from None
+            raise AlpacaError(
+                "Could not reach Alpaca (%s). Check your internet connection, and any "
+                "company proxy or VPN that might block api/data.alpaca.markets." % reason
+            ) from None
+
+    # -- endpoints ----------------------------------------------------------
+
+    def clock(self) -> dict:
+        return self._get(self.trading_base, "/v2/clock")
+
+    def account(self) -> dict:
+        return self._get(self.trading_base, "/v2/account")
+
+    def assets(self, status: str = "active") -> list:
+        result = self._get(self.trading_base, "/v2/assets",
+                           {"status": status, "asset_class": "us_equity"})
+        return result if isinstance(result, list) else []
+
+    def snapshots(self, symbols: Iterable[str]) -> dict:
+        symbols = list(symbols)
+        out: dict = {}
+        for chunk in _chunks(symbols, 100):
+            payload = self._get(self.data_base, "/v2/stocks/snapshots",
+                                {"symbols": ",".join(chunk), "feed": self.feed})
+            # The endpoint has returned both {"snapshots": {...}} and a bare map.
+            out.update(payload.get("snapshots", payload) or {})
+        return out
+
+    def bars(self, symbols: Iterable[str], timeframe: str, start: str,
+             end: Optional[str] = None, limit: int = 10000) -> dict:
+        symbols = list(symbols)
+        out: dict = {}
+        for chunk in _chunks(symbols, 100):
+            token = None
+            while True:
+                payload = self._get(self.data_base, "/v2/stocks/bars", {
+                    "symbols": ",".join(chunk), "timeframe": timeframe,
+                    "start": start, "end": end, "limit": limit,
+                    "feed": self.feed, "adjustment": "split",
+                    "page_token": token,
+                })
+                for symbol, rows in (payload.get("bars") or {}).items():
+                    out.setdefault(symbol, []).extend(rows or [])
+                token = payload.get("next_page_token")
+                if not token:
+                    break
+        return out
+
+    def trades(self, symbols: Iterable[str], start: str, end: Optional[str] = None,
+               limit: int = 10000) -> dict:
+        """Historical trade prints. Free tier: IEX only.
+
+        This is the one sub-minute source the free feed has. Ten-second bars
+        aggregated from it are real prints, not an interpolation of minute
+        bars — the micro chart shows them or stays empty, never invents."""
+        symbols = list(symbols)
+        out: dict = {}
+        for chunk in _chunks(symbols, 100):
+            token = None
+            while True:
+                payload = self._get(self.data_base, "/v2/stocks/trades", {
+                    "symbols": ",".join(chunk), "start": start, "end": end,
+                    "limit": limit, "feed": self.feed, "page_token": token,
+                })
+                for symbol, rows in (payload.get("trades") or {}).items():
+                    out.setdefault(symbol, []).extend(rows or [])
+                token = payload.get("next_page_token")
+                if not token:
+                    break
+        return out
+
+    def news(self, symbols: Iterable[str], limit: int = 50,
+             start: Optional[str] = None) -> list:
+        payload = self._get(self.data_base, "/v1beta1/news", {
+            "symbols": ",".join(list(symbols)), "limit": min(limit, 50),
+            "start": start, "sort": "desc",
+        })
+        return payload.get("news", []) or []
+
+
+def _chunks(items: list, size: int):
+    for i in range(0, len(items), size):
+        yield items[i:i + size]
+
+
+def client_from_env(feed: Optional[str] = None) -> AlpacaClient:
+    """Read credentials from the environment or a local .env file."""
+    load_dotenv()
+    return AlpacaClient(
+        key_id=os.environ.get("ALPACA_KEY_ID", "").strip(),
+        secret_key=os.environ.get("ALPACA_SECRET_KEY", "").strip(),
+        feed=(feed or os.environ.get("ALPACA_FEED", "iex")).strip(),
+        trading_base=os.environ.get("ALPACA_TRADING_BASE", PAPER_BASE).strip(),
+    )
+
+
+def load_dotenv(path: str = ".env") -> None:
+    """Tiny .env reader so there is nothing to install. Existing environment
+    variables always win, and quotes around values are tolerated."""
+    if not os.path.exists(path):
+        return
+    with open(path, encoding="utf-8") as fh:
+        for line in fh:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key, value = key.strip(), value.strip().strip('"').strip("'")
+            os.environ.setdefault(key, value)
+
+
+# -- normalization ----------------------------------------------------------
+
+
+def aggregate_trades(trades: list, seconds: int = 10) -> list:
+    """Bucket trade prints into fixed OHLCV bars. Empty buckets are skipped:
+    a bar with no prints is absence of trading, not a flat candle."""
+    buckets: dict = {}
+    for tr in trades or []:
+        price, size, ts = tr.get("p"), tr.get("s"), tr.get("t")
+        if not price or not ts or price <= 0:
+            continue
+        stamp = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+        epoch = int(stamp.timestamp()) // seconds * seconds
+        b = buckets.get(epoch)
+        if b is None:
+            buckets[epoch] = {"o": price, "h": price, "l": price, "c": price, "v": 0}
+            b = buckets[epoch]
+        b["h"] = max(b["h"], price); b["l"] = min(b["l"], price); b["c"] = price
+        b["v"] += int(size or 0)
+    return [{
+        "ts": datetime.fromtimestamp(e, UTC).isoformat(timespec="seconds").replace("+00:00", "Z"),
+        "open": b["o"], "high": b["h"], "low": b["l"], "close": b["c"], "volume": b["v"],
+    } for e, b in sorted(buckets.items())]
+
+
+def _iso(dt: datetime) -> str:
+    return dt.astimezone(UTC).isoformat(timespec="seconds").replace("+00:00", "Z")
+
+
+def session_day(now: Optional[datetime] = None) -> datetime:
+    """The trading day the desk should show right now, as an ET datetime.
+
+    Before 04:00 ET there is no session yet today, so "today's window" would
+    end before it starts — Alpaca rejects that with "end should not be before
+    start", and a 03:52 ET run crashed on exactly that. Roll back to the most
+    recent weekday in that case, and from a weekend to Friday. The desk then
+    opens on the last completed session, which is what a pre-dawn scan is
+    actually looking at anyway.
+    """
+    anchor = (now or datetime.now(UTC)).astimezone(ET)
+    if anchor.hour < 4:
+        anchor -= timedelta(days=1)
+    while anchor.weekday() >= 5:            # 5 = Saturday, 6 = Sunday
+        anchor -= timedelta(days=1)
+    return anchor
+
+
+def session_window(day: Optional[datetime] = None) -> tuple:
+    """Premarket open (04:00 ET) through the close or now, as RFC3339 strings."""
+    now = datetime.now(UTC)
+    anchor = day.astimezone(ET) if day is not None else session_day(now)
+    start_et = anchor.replace(hour=4, minute=0, second=0, microsecond=0)
+    end_et = anchor.replace(hour=20, minute=0, second=0, microsecond=0)
+    end = end_et.astimezone(UTC)
+    if day is None and now < end:
+        end = now
+    if end <= start_et.astimezone(UTC):     # never hand Alpaca an inverted window
+        end = end_et.astimezone(UTC)
+    return _iso(start_et.astimezone(UTC)), _iso(end)
+
+
+def fetch_records(client: AlpacaClient, symbols: Iterable[str],
+                  day: Optional[datetime] = None,
+                  daily_lookback_days: int = 400,
+                  rvol_window: int = 20,
+                  since: Optional[str] = None,
+                  profiles: bool = True) -> List[dict]:
+    """Reference + news + 1-minute bar records for the given symbols.
+
+    `since` (RFC3339) narrows the intraday bar/trade/news window for an
+    incremental refresh: the caller merges the result over the records it
+    already holds. References are always rebuilt — they carry the IEX last
+    print, which is the freshest thing on the page."""
+    symbols = [s.upper().strip() for s in symbols if s.strip()]
+    if not symbols:
+        raise AlpacaError("No symbols given.")
+    records: List[dict] = []
+
+    daily_start = _iso(datetime.now(UTC) - timedelta(days=daily_lookback_days))
+    daily = client.bars(symbols, "1Day", daily_start)
+    snaps = client.snapshots(symbols)
+    try:
+        exchanges = exchange_map(client)
+    except AlpacaError:
+        exchanges = {}
+    shares_out: dict = {}
+    country: dict = {}
+    try:
+        from .sec_source import client_from_env as _sec
+        sec = _sec()
+        for symbol in symbols:
+            found = sec.shares_outstanding(symbol)
+            if found:
+                shares_out[symbol] = found
+            if profiles:
+                prof = sec.company_profile(symbol)
+                if prof:
+                    country[symbol] = prof
+    except Exception as exc:                 # EDGAR down must not block the desk
+        print(f"  shares outstanding unavailable from SEC: {exc}")
+
+    for symbol in symbols:
+        rows = daily.get(symbol, [])
+        daily_bars = [{
+            "d": r["t"][:10], "o": r.get("o"), "h": r.get("h"),
+            "l": r.get("l"), "c": r.get("c"), "v": int(r.get("v") or 0),
+        } for r in rows]
+
+        snap = snaps.get(symbol, {}) or {}
+        prev = snap.get("prevDailyBar") or {}
+        prev_close = prev.get("c")
+        if prev_close is None and len(daily_bars) >= 2:
+            prev_close = daily_bars[-2]["c"]
+
+        # Same-venue comparison: today's IEX volume against prior IEX days.
+        recent = [b["v"] for b in daily_bars[-(rvol_window + 1):-1] if b["v"] > 0]
+        avg_volume = sum(recent) / len(recent) if recent else None
+        high_52w = max((b["h"] for b in daily_bars[-252:] if b["h"]), default=None)
+
+        # Alpaca does not publish float, and nothing free does. SEC company
+        # facts do give shares OUTSTANDING — the company's own cover-page
+        # figure — which is an upper bound on float, labelled as exactly that.
+        so = shares_out.get(symbol)
+        prof = country.get(symbol) or {}
+        last_tr = snap.get("latestTrade") or {}
+        last_q = snap.get("latestQuote") or {}
+        records.append({
+            "type": "reference", "symbol": symbol,
+            "prev_close": prev_close,
+            "avg_daily_volume": avg_volume,
+            "high_52w": high_52w,
+            # The single venue's most recent print and quote. Before the open
+            # this may be the only thing IEX has for a microcap; the desk shows
+            # it as "IEX last print 04:12" rather than reading as silence.
+            "iex_last_price": last_tr.get("p"),
+            "iex_last_ts": last_tr.get("t"),
+            "iex_bid": last_q.get("bp"), "iex_ask": last_q.get("ap"),
+            "exchange": exchanges.get(symbol),
+            "name": prof.get("name"),
+            "country": prof.get("business_country") or prof.get("incorporation_desc"),
+            "incorporated_in": prof.get("incorporation_desc") or prof.get("state_of_incorporation"),
+            "float_shares": so["shares"] if so else None,
+            "float_quality": "shares_outstanding_proxy" if so else "unknown",
+            "float_asof": so["as_of"] if so else None,
+            "daily_bars": daily_bars,
+        })
+
+    start, end = session_window(day)
+    if since and since > start:
+        start = since                        # incremental: only the tail
+    minute = client.bars(symbols, "1Min", start, end)
+
+    # Sub-minute bars from trade prints. The session builder re-derives the
+    # 1-minute bars from these so every timeframe agrees with what the
+    # scanners saw. Symbols with no prints fall back to the feed's minute bars.
+    ten_second: dict = {}
+    try:
+        for symbol, prints in client.trades(symbols, start, end).items():
+            bars10 = aggregate_trades(prints, 10)
+            if bars10:
+                ten_second[symbol] = bars10
+    except AlpacaError as exc:
+        print(f"  10-second bars unavailable: {exc}")
+        print("  the micro chart will say so; minute bars are unaffected")
+
+    for symbol in symbols:
+        for b in ten_second.get(symbol, []):
+            records.append({"type": "bar", "tf": "10s", "symbol": symbol, **b})
+        if symbol in ten_second:
+            continue                       # minutes are derived from the 10s bars
+        for r in minute.get(symbol, []):
+            close = r.get("c")
+            if not close or close <= 0:
+                continue
+            records.append({
+                "type": "bar", "symbol": symbol, "ts": r["t"],
+                "open": r.get("o"), "high": r.get("h"), "low": r.get("l"),
+                "close": close, "volume": int(r.get("v") or 0),
+            })
+
+    try:
+        news_start = since if since else _iso(datetime.now(UTC) - timedelta(days=2))
+        for item in client.news(symbols, limit=50, start=news_start):
+            published = item.get("created_at") or item.get("updated_at")
+            headline = item.get("headline")
+            if not published or not headline:
+                continue
+            for symbol in item.get("symbols", []):
+                if symbol in symbols:
+                    records.append({
+                        "type": "news", "symbol": symbol,
+                        "provider_id": str(item.get("id")),
+                        "published_at": published,
+                        # A headline becomes visible in the replay at
+                        # first_observed_at. Stamping that with the fetch time
+                        # puts it after every bar in the session, so the flame
+                        # never appears and the catalyst card reads "none
+                        # observed" on a stock that has news — which is worse
+                        # than showing nothing, because it reads as a finding.
+                        # The delivery latency of a historical headline is not
+                        # something this feed reports, so use the publication
+                        # time rather than inventing a delay.
+                        "first_observed_at": published,
+                        "headline": headline,
+                        "category": (item.get("source") or "news").lower(),
+                    })
+    except AlpacaError as exc:
+        # Never silent. A swallowed failure renders as "no catalyst", which is
+        # a claim the data does not support.
+        print(f"  news unavailable for this session: {exc}")
+        print("  the catalyst card will show 'not checked', not 'none observed'")
+
+    return records
+
+
+def build_alpaca_session(symbols: Iterable[str], feed: Optional[str] = None,
+                         day: Optional[datetime] = None, max_rows: int = 10) -> dict:
+    from ..dashboard.session_builder import build_session_from_records
+
+    client = client_from_env(feed)
+    symbols = [s.upper().strip() for s in symbols if s.strip()]
+    records = fetch_records(client, symbols, day=day)
+
+    # Before the open — or on a morning these names have not printed on IEX yet
+    # — today's window is empty. Falling back to the bundled fixture would swap
+    # the user's real candidates for invented ones, so step back through recent
+    # trading days and open the last session these symbols actually traded.
+    stepped_back_to = None
+    if day is None and not any(r["type"] == "bar" for r in records):
+        anchor = session_day()
+        for _ in range(5):
+            anchor -= timedelta(days=1)
+            while anchor.weekday() >= 5:
+                anchor -= timedelta(days=1)
+            print(f"  IEX has no bars for today yet — trying {anchor.date().isoformat()}")
+            previous = fetch_records(client, symbols, day=anchor)
+            if any(r["type"] == "bar" for r in previous):
+                records, stepped_back_to = previous, anchor.date().isoformat()
+                break
+
+    if not any(r["type"] == "bar" for r in records):
+        raise AlpacaError(
+            "Alpaca returned no 1-minute bars for %s.\n"
+            "Most likely reasons, in order:\n"
+            "  1. the market has not opened yet today (premarket starts 04:00 ET);\n"
+            "  2. these symbols simply have not traded on the IEX feed yet;\n"
+            "  3. the symbols are wrong or not tradable.\n"
+            "Run `python scripts/verify_alpaca.py` for a step-by-step check."
+            % ", ".join(symbols)
+        )
+    session = build_session_from_records(
+        records, session_id="alpaca-" + "-".join(symbols[:3]),
+        source_name="alpaca %s feed" % client.feed,
+        max_rows=max_rows, data_status="live" if client.feed == "sip" else "iex",
+        volume_floor_scale=1.0 if client.feed == "sip" else IEX_VOLUME_FLOOR_SCALE,
+    )
+    session["_records"] = records          # for incremental refresh; never serialised
+    if stepped_back_to:
+        # Say it in the payload, not just the terminal: the header must never
+        # let a previous session pass for today's.
+        session["sessionNote"] = (
+            "Showing the %s session — the IEX feed has no bars for these symbols "
+            "today yet. IEX is one venue and carries little premarket volume in "
+            "microcaps; other venues may be printing. The quote card shows IEX's "
+            "last print; the TradingView card shows consolidated prices. "
+            "ALPACA_FEED=sip (paid) removes this limit." % stepped_back_to)
+        print(f"  showing the {stepped_back_to} session instead of today")
+    session["disclaimer"] = (
+        "Alpaca %s feed. IEX is one venue, so absolute volume is a fraction of "
+        "consolidated volume; relative volume compares IEX to IEX and stays meaningful. "
+        "Scanner events are research candidates, never entry signals or orders."
+        % client.feed
+    )
+    return session
+
+
+
+def scan_market(client: AlpacaClient, min_price: float = 2.0, max_price: float = 20.0,
+                min_gain: float = 10.0, min_rvol: float = 5.0, min_volume: float = 20_000,
+                top: int = 8, limit_universe: int = 0, log=None,
+                exchanges: Optional[List[str]] = None,
+                countries: Optional[List[str]] = None) -> dict:
+    """Two-pass market scan on the free feed.
+
+    Pass 1 applies price, gain and a volume floor across the whole tradable
+    universe from one snapshot call per 100 symbols. Pass 2 pulls daily bars
+    only for the survivors and computes same-venue relative volume.
+
+    Returns {"rows": [...], "session_date": "YYYY-MM-DD", "today": "YYYY-MM-DD",
+    "stale": bool}. Alpaca's dailyBar is the most recent COMPLETED daily bar,
+    so before the open the moves are the previous session's; `stale` says so
+    and the caller must say so too — a finished move printed as a live one is
+    an invitation to chase.
+    """
+    say = log or (lambda *_: None)
+    universe = momentum_universe(client, max_symbols=limit_universe)
+    try:
+        ex_map = exchange_map(client)
+    except AlpacaError:
+        ex_map = {}
+    if exchanges:
+        want = {e.upper() for e in exchanges}
+        universe = [s for s in universe if ex_map.get(s, "").upper() in want]
+    say(f"  {len(universe):,} tradable US equities" + (f" on {', '.join(exchanges)}" if exchanges else ""))
+    survivors, bar_dates = [], {}
+    snaps = client.snapshots(universe)
+    for symbol, snap in snaps.items():
+        if not snap:
+            continue
+        day = snap.get("dailyBar") or {}
+        prev = snap.get("prevDailyBar") or {}
+        stamp = str(day.get("t") or "")[:10]
+        if stamp:
+            bar_dates[stamp] = bar_dates.get(stamp, 0) + 1
+        last = (snap.get("latestTrade") or {}).get("p") or day.get("c")
+        prev_close, volume = prev.get("c"), day.get("v") or 0
+        if not last or not prev_close or prev_close <= 0:
+            continue
+        gain = (last / prev_close - 1) * 100
+        if min_price <= last <= max_price and gain >= min_gain and volume >= min_volume:
+            survivors.append({"symbol": symbol, "price": last, "gain": gain, "volume": volume,
+                              "exchange": ex_map.get(symbol)})
+    say(f"  {len(survivors)} passed price, gain and volume")
+    session_date = max(bar_dates, key=bar_dates.get) if bar_dates else ""
+    today = datetime.now(ET).date().isoformat()
+    result = {"rows": [], "session_date": session_date, "today": today,
+              "stale": bool(session_date and session_date != today)}
+    if not survivors:
+        return result
+    symbols = [s["symbol"] for s in survivors]
+    start = _iso(datetime.now(UTC) - timedelta(days=40))
+    daily = client.bars(symbols, "1Day", start)
+    rows = []
+    for item in survivors:
+        history = [b for b in daily.get(item["symbol"], []) if (b.get("v") or 0) > 0]
+        prior = [b["v"] for b in history[-21:-1]]
+        if len(prior) < 5:
+            continue
+        avg = sum(prior) / len(prior)
+        item["rvol"] = item["volume"] / avg if avg else 0
+        if item["rvol"] >= min_rvol:
+            rows.append(item)
+    rows.sort(key=lambda r: r["rvol"], reverse=True)
+    say(f"  {len(rows)} also passed relative volume ≥ {min_rvol}x")
+    # Country comes from the SEC registrant record, fetched for survivors only
+    # (a few names, not eleven thousand). A Chinese ADR on NASDAQ shows its
+    # Cayman/Beijing registrant; a Canadian cross-list shows British Columbia.
+    try:
+        from .sec_source import client_from_env as _sec
+        sec = _sec()
+        for r in rows:
+            prof = sec.company_profile(r["symbol"]) or {}
+            r["country"] = prof.get("business_country") or prof.get("incorporation_desc")
+    except Exception:
+        for r in rows:
+            r.setdefault("country", None)
+    if countries:
+        want = [c.lower() for c in countries]
+        rows = [r for r in rows if r.get("country") and any(w in r["country"].lower() for w in want)]
+        say(f"  {len(rows)} match country filter {', '.join(countries)}")
+    result["rows"] = rows[:top] if top else rows
+    return result
+
+
+_EXCHANGE_CACHE: dict = {"at": 0.0, "map": {}}
+
+
+def exchange_map(client: AlpacaClient, max_age_seconds: float = 3600.0) -> dict:
+    """symbol -> listing exchange, from the assets endpoint, cached an hour."""
+    import time as _time
+    if _time.time() - _EXCHANGE_CACHE["at"] < max_age_seconds and _EXCHANGE_CACHE["map"]:
+        return _EXCHANGE_CACHE["map"]
+    out = {}
+    for asset in client.assets():
+        if asset.get("symbol") and asset.get("exchange"):
+            out[asset["symbol"]] = asset["exchange"]
+    _EXCHANGE_CACHE.update(at=_time.time(), map=out)
+    return out
+
+def momentum_universe(client: AlpacaClient, max_symbols: int = 0) -> List[str]:
+    """Tradable US common stocks — NASDAQ and NYSE, not just NASDAQ."""
+    out = []
+    for asset in client.assets():
+        if (asset.get("tradable") and asset.get("status") == "active"
+                and asset.get("class") == "us_equity"
+                and asset.get("exchange") in ("NASDAQ", "NYSE", "ARCA", "AMEX")):
+            out.append(asset["symbol"])
+    out.sort()
+    return out[:max_symbols] if max_symbols else out

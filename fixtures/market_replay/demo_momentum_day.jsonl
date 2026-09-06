@@ -1,0 +1,15 @@
+# Golden replay fixture: one qualifying momentum runner (ABCD) and one quiet
+# control (QUIE) on 2026-09-01 (EDT, regular open 13:30Z).
+{"type": "reference", "symbol": "ABCD", "prev_close": 5.10, "avg_daily_volume": 400000, "float_shares": 12000000, "float_quality": "verified", "high_52w": 7.90}
+{"type": "reference", "symbol": "QUIE", "prev_close": 10.00, "avg_daily_volume": 1000000, "float_shares": 80000000, "float_quality": "verified", "high_52w": 15.00}
+{"type": "news", "symbol": "ABCD", "published_at": "2026-09-01T13:00:00Z", "headline": "ABCD wins defense contract", "category": "contract"}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:31:00Z", "open": 5.60, "high": 5.70, "low": 5.55, "close": 5.68, "volume": 300000}
+{"type": "bar", "symbol": "QUIE", "ts": "2026-09-01T13:31:00Z", "open": 10.00, "high": 10.06, "low": 9.98, "close": 10.05, "volume": 20000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:32:00Z", "open": 5.68, "high": 5.85, "low": 5.65, "close": 5.83, "volume": 500000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:33:00Z", "open": 5.83, "high": 6.05, "low": 5.80, "close": 6.02, "volume": 700000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:34:00Z", "open": 6.02, "high": 6.20, "low": 6.00, "close": 6.18, "volume": 600000}
+{"type": "bar", "symbol": "QUIE", "ts": "2026-09-01T13:34:00Z", "open": 10.05, "high": 10.07, "low": 10.02, "close": 10.04, "volume": 15000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:35:00Z", "open": 6.18, "high": 6.45, "low": 6.15, "close": 6.42, "volume": 800000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:36:00Z", "open": 6.42, "high": 6.80, "low": 6.40, "close": 6.75, "volume": 900000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:37:00Z", "open": 6.75, "high": 7.40, "low": 6.70, "close": 7.30, "volume": 1000000}
+{"type": "bar", "symbol": "ABCD", "ts": "2026-09-01T13:38:00Z", "open": 7.30, "high": 7.95, "low": 7.25, "close": 7.85, "volume": 1200000}

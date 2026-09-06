@@ -1,6 +1,8 @@
 # data/
 
-One file: `claims.db`, the searchable evidence database.
+`claims.db`, the searchable evidence database — plus `sec_cache/`, the SEC
+ticker→CIK map the desk downloads weekly and re-downloads when stale. That
+cache is gitignored: it is regenerable, and a stale copy is worse than none.
 
 SQLite with FTS5 (BM25, porter-stemmed). 7,937 claims extracted from the
 video summaries, each tagged (kind/topic) and carrying a video id plus a

@@ -64,3 +64,10 @@ data/*.db
 
 # scratch / hook side-effects
 research/index-failures.log
+
+# Momentum platform runtime artifacts
+data/alerts.jsonl
+build/
+
+# SEC ticker->CIK map, re-downloaded weekly
+data/sec_cache/

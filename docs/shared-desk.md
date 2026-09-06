@@ -1,0 +1,156 @@
+# Two traders, one desk
+
+Two people trading the same strategy want the same scanners and the same
+alerts, each from their own machine and their own IBKR connection. This is how
+that is set up and how you prove it is working.
+
+## One desk, two browsers (the bridge)
+
+When only one of you has an IBKR account, the other watches the same desk over
+the internet. Read the terms note below first; then, on the machine with TWS
+(user 1):
+
+1. Put two long random keys in `.env` (never commit them):
+   ```
+   DESK_KEY=<owner key>
+   DESK_VIEWER_KEY=<viewer key>
+   ```
+2. Start the desk as usual: `bash scripts/start.sh --ibkr`.
+3. Open a tunnel to it. Cloudflare's quick tunnel needs no account:
+   ```
+   brew install cloudflared
+   cloudflared tunnel --url http://127.0.0.1:8787
+   ```
+   It prints a `https://<random>.trycloudflare.com` URL. That URL changes each
+   time cloudflared restarts; a named tunnel or Tailscale fixes it if you want
+   a permanent address.
+4. Send the partner the URL **with the viewer key**:
+   `https://<random>.trycloudflare.com/?key=<viewer key>`
+
+The partner (user 2) needs nothing installed — just that link in a browser.
+The key is remembered in a cookie after the first visit. Their RULES badge
+reads `VIEWER`: they see every card, list, chart and alert, and hear the
+alerts, but a click on a screener row cannot add a name to your desk.
+
+You open `http://127.0.0.1:8787/?key=<owner key>` yourself as before.
+
+Without a key set the desk is exactly as it was: open on 127.0.0.1 only.
+
+## Why not one shared server
+
+IBKR market-data subscriptions are per-subscriber and non-redistributable —
+that restriction comes from the exchange agreements behind them (Nasdaq, NYSE,
+the CTA/UTP tapes), not from IBKR. Serving one person's live IBKR prices to a
+second person is what those terms exist to prevent, and the usual consequence
+is the data subscription being terminated. The clean setup is one desk each,
+own TWS, own subscription: the platform is the code, not the data. The bridge
+above is the subscriber's decision to make, knowing that.
+
+## Setting up the second desk
+
+**macOS / Linux**
+
+```
+git clone <repo>            # both of you already have GitHub access
+cd day-trading-bot
+bash scripts/setup.sh
+cp .env.example .env        # then fill in YOUR OWN keys
+python3 scripts/ibkr_preflight.py
+bash scripts/start.sh --ibkr
+```
+
+**Windows (PowerShell)** — there is no bash and no `pkill`; the launcher is
+`scripts\start.ps1` and it does the preflight, the port and `PYTHONPATH` for
+you.
+
+```powershell
+git clone <repo>
+cd day-trading-bot
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env        # then fill in YOUR OWN keys
+powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr
+```
+
+Paper TWS listens on 7497 and IB Gateway on 4001/4002, so add
+`-IbkrPort 7497` if that is your login. To stop a desk that is already running:
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name LIKE 'python%'" |
+  Where-Object { $_.CommandLine -like '*momentum_platform.dashboard.server*' } |
+  ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
+```
+
+Never share `.env`, API keys, or a TWS session. Two API clients on one TWS
+also fight over market-data lines and client ids.
+
+## What makes the two desks agree
+
+`config/desk-profile.json` is committed and holds every rule that decides what
+a desk admits and what it fires:
+
+| Section | Rule | What it changes |
+|---|---|---|
+| `desk` | `priceMin` `priceMax` | the discovery band the scanner and screener use |
+| | `minGainPct` | how much a name must be up to be scanned |
+| | `maxSymbols` `scanTop` | how many names the desk holds and the scan returns |
+| `cadence` | `rebuildSeconds` | how often the scanners re-run |
+| | `rescanSeconds` | how often the IBKR scanner union runs |
+| | `historyEverySeconds` | the rolling minute-history refresh |
+| | `volumeProfileDays` | sessions in the time-of-day RVOL baseline |
+| | `barStallSeconds` | how long without a bar before the desk re-subscribes |
+| `liquidity` | `minVolume5m` `minPillars` | the Approximation gate on Running Up and High of Day |
+
+Pull the same commit and you run the same rules. `.env` still overrides them
+per machine — that is deliberate, for testing — but an override is recorded in
+the fingerprint rather than hidden, so it cannot silently split the two desks.
+
+The Confirmed course pillars ($2–20, ≥10%, RVOL ≥5×, float <20M, news) are
+**not** in the profile. They are Ross's analysis, not an operator setting, so
+they live in code — and the fingerprint hashes them, so an edit to one shows up
+as a mismatch.
+
+## Proving it
+
+The header carries a **RULES** badge: the first eight characters of the
+fingerprint, the build commit, and whether any local override is in force.
+Hover it for the full rule set. Same hash on both screens means the same
+scanners and the same alerts from the same data.
+
+From a terminal:
+
+```
+python3 scripts/desk_parity.py                     # this checkout
+python3 scripts/desk_parity.py --url http://127.0.0.1:8787   # the running desk
+python3 scripts/desk_parity.py --compare 33dfeedb3f51        # against a partner's hash
+python3 scripts/desk_parity.py --json > mine.json            # to send them
+```
+
+On Windows use `python` and `$env:PYTHONPATH="src"` first:
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts\desk_parity.py --url http://127.0.0.1:8787
+python scripts\desk_parity.py --compare 33dfeedb3f51
+```
+
+A mismatch prints the differing rules line by line.
+
+## What a matching hash does NOT promise
+
+**Entitlements.** They are reported beside the hash, never inside it. A desk
+without IBKR fundamentals scores the float pillar from SEC shares outstanding
+(an upper bound) or leaves it unknown; a desk without Alpaca news keys scores
+the news pillar differently. Both change `pillars_passed`, which is one of the
+two ways a name clears the liquidity gate — so the same rules can still
+produce different alerts if one of you is missing a source. The badge turns
+amber and names what is missing.
+
+**Timing.** The scan is aligned to the wall clock rather than to each process's
+start time, so two desks started ten minutes apart still scan on the same
+phase and converge on the same names within one cycle. A desk started at 09:00
+still has no five-second bars from 08:00, so its ten-second pane is shorter —
+the scanners read minute bars and are unaffected.
+
+**Data.** Each desk gets its own IBKR feed. They should agree bar for bar; if
+they do not, that is a feed question, not a rules question, and the RULES badge
+is what tells you which of the two you are looking at.

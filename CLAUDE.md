@@ -149,3 +149,49 @@ Blotter timestamps are usually France local = ET + 6h in summer.
 
 Branch `claude/playbook-pullback-explanation-tg5c33`. Never put a model
 identifier in commits or pushed files.
+
+## The platform, and which source wins
+
+The merge of 2026-09-06 brought the momentum workstation into this repo. Its
+own guide claimed `CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/` as canonical and
+demoted `knowledge-base/` to "supplementary". This file claimed the reverse.
+**Both were right about different things**, and pretending otherwise would
+have let one silently overwrite the other:
+
+| question | authority |
+|---|---|
+| a **threshold, parameter or gate value** | `knowledge-base/strategies/FILTERS.md` — post-audit, and it says so in its own header |
+| **evidence labelling** and what may be called Ross's | the mastery bundle: Confirmed / Observed / Approximation / Unknown |
+| **what is and is not mastered** | the mastery bundle's boundary, below |
+
+Carried forward from the platform guide, unchanged in force:
+
+- Classify claims **Confirmed / Observed / Approximation / Hypothesis to test
+  / Unknown**. Never promote an approximation into an alleged Ross/Warrior
+  production setting.
+- **Mastery boundary:** only the 19 exposed Preview videos in Basics chapters
+  1–6 are covered. Private chapters 7–15, Strategies & Scaling, and locked
+  answer keys are NOT mastered.
+- Never claim access to Warrior server-side scanner code, hidden formulas,
+  credentials or locked content.
+- **Core invariant:** the scanner discovers a candidate; the chart defines the
+  setup; the stop defines the size; the market decides the result.
+- Outputs are education, simulation and backtesting support. Use only the
+  user's own stated dollar risk; express results in R.
+
+For dashboard/UI work read
+`CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/dashboard-scanner-chart-knowledge.md`.
+The mastery ledger lives in
+`CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/master-context.md`.
+
+## Platform layout, after the merge
+
+- `src/momentum_platform/` — the live desk: IBKR read-only stream (clients
+  27/28), scanners, `pullback.py` (the first-pullback state machine), the
+  browser dashboard
+- `src/paper_trading/` — Streamlit manual paper trading: simulated broker,
+  SQLite ledger, 5-rule risk gate with a persistent latch
+- `docs/` — desk design notes, IBKR and Alpaca setup, the solution review
+- **No order path exists**, and two tests fail if one appears in the IBKR
+  modules. Execution work goes in a separate package on a separate
+  connection; that guard stays green.

@@ -1,0 +1,258 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Momentum Workstation</title>
+<link rel="stylesheet" href="styles.css">
+<body>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Sans+Condensed:wght@600&display=swap">
+<!-- Served from this machine, not a CDN. A trading desk that silently drops to
+     fallback charts because a content blocker ate a CDN request is not a tool
+     you can rely on at 09:30. Apache-2.0, license alongside the file. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0e13'/%3E%3Cpath d='M3 12L6 7l3 3 4-7' stroke='%2334d399' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<script src="vendor/lightweight-charts.standalone.production.js"></script>
+<div id="app" class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <div>
+        <div class="brand-name">Momentum Workstation</div>
+        <div class="brand-sub" id="sessionLabel">loading…</div>
+      </div>
+    </div>
+
+    <div class="clock">
+      <div class="clock-time" id="clockET">--:--</div>
+      <div class="clock-meta"><span id="sessionBadge" class="badge">—</span><span id="frameCounter" class="muted tiny">—</span></div>
+    </div>
+
+    <div class="transport" role="group" aria-label="Replay transport">
+      <button id="btnPlay" class="btn primary">▶ Play</button>
+      <button class="btn" data-seek="open">09:30</button>
+      <button class="btn" data-seek="alert">Alert</button>
+      <select id="speed" class="sel" aria-label="Replay speed">
+        <option value="1">1×</option><option value="4" selected>4×</option>
+        <option value="12">12×</option><option value="40">40×</option>
+      </select>
+      <input id="scrub" class="scrub" type="range" min="0" max="0" value="0" aria-label="Scrub replay">
+    </div>
+
+    <div class="health">
+      <div class="health-row"><span id="feedDot" class="dot replay"></span><span id="feedText" class="health-text">REPLAY</span></div>
+      <div class="health-sub" id="feedAge">fixture</div>
+    </div>
+    <div class="health">
+      <div class="health-row"><span id="chartDot" class="dot"></span><span id="chartEngine" class="health-text">CHARTS</span></div>
+      <div class="health-sub" id="chartEngineSub">detecting…</div>
+    </div>
+
+    <div class="health" id="rulesBadge" hidden>
+      <div class="health-row"><span id="rulesDot" class="dot"></span><span id="rulesHash" class="health-text">RULES</span></div>
+      <div class="health-sub" id="rulesSub">shared profile</div>
+    </div>
+
+    <button id="btnTray" class="btn ghost" title="Cards not on the desk">⊞ Cards</button>
+    <button id="btnLayout" class="btn ghost" title="Restore the default layout and sizes">⟲ Layout</button>
+    <button id="btnSound" class="btn ghost" aria-pressed="false" title="Alert audio (A)">🔇</button>
+    <button id="btnHelp" class="btn ghost" title="How to read the desk (?)">? Legend</button>
+  </header>
+
+  <main class="grid" id="grid">
+    <section class="col dock" data-col="left">
+      <div class="slot" data-slot="L1" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L1,L2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize scanner cards"></div>
+      <div class="slot" data-slot="L2" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L2,L3" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize scanner cards"></div>
+      <div class="slot" data-slot="L3" style="flex-grow:0.88"></div>
+      <div class="gutter gutter-v" data-between="L3,L4" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize quote card"></div>
+      <div class="slot" data-slot="L4" style="flex-grow:1.36"></div>
+    </section>
+
+    <div class="gutter gutter-h" data-cols="left" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize left column"></div>
+
+    <section class="col workspace" data-col="center">
+      <div class="sym-header" id="symHeader">
+        <div class="sym-id">
+          <span class="sym-ticker" id="symTicker">—</span>
+          <span id="symLock" class="lock" hidden>LOCKED</span>
+          <span id="symFlame" class="flame" hidden></span>
+        </div>
+        <div class="sym-stats" id="symStats"></div>
+      </div>
+      <div class="slot" data-slot="C1" style="flex-grow:1.7"></div>
+      <div class="gutter gutter-v" data-between="C1,PAIR" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the 1-minute chart"></div>
+      <div class="pair" data-slot="PAIR" style="flex-grow:1.15">
+        <div class="slot" data-slot="C2" style="flex-grow:1"></div>
+        <div class="gutter gutter-h pair-gutter" data-pair="C2,C3" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize the 5-minute and 10-second charts"></div>
+        <div class="slot" data-slot="C3" style="flex-grow:1"></div>
+      </div>
+    </section>
+
+    <div class="gutter gutter-h" data-cols="right" role="separator" aria-orientation="vertical" tabindex="0" aria-label="Resize right column"></div>
+
+    <section class="col context" data-col="right">
+      <div class="slot" data-slot="R1" style="flex-grow:1.35"></div>
+      <div class="gutter gutter-v" data-between="R1,R2" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize the Five Pillars check"></div>
+      <div class="slot" data-slot="R2" style="flex-grow:1"></div>
+      <div class="gutter gutter-v" data-between="R2,R3" role="separator" aria-orientation="horizontal" tabindex="0" aria-label="Resize Level 2"></div>
+      <div class="slot" data-slot="R3" style="flex-grow:1.05"></div>
+    </section>
+  </main>
+
+  <div id="tray" class="tray" hidden aria-label="Cards not on the desk">
+    <div class="tray-head">Cards off the desk <span class="muted tiny">drag one onto the card it should replace, or click it to send it to the last card you clicked</span></div>
+    <div id="trayCards" class="tray-cards"></div>
+  </div>
+
+  <!-- Cards. Each is portable: the layout manager moves them between slots. -->
+  <template id="cards">
+    <article class="card" data-card="scan-pillars" data-kind="list" data-scanner="five_pillars_list"></article>
+    <article class="card" data-card="scan-running" data-kind="alert" data-scanner="running_up"></article>
+    <article class="card" data-card="scan-hod" data-kind="alert" data-scanner="hod_momentum"></article>
+
+    <article class="card" data-card="quote">
+      <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
+        <span class="card-title">Quote · supply · risk · catalyst</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body" id="quoteCard"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-1m">
+      <div class="card-head"><span class="grip" title="Drag to another card to swap places">⠿</span>
+        <span class="card-title">1 minute · execution</span>
+        <span class="chart-role">entry · structural stop · trigger</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k hod"></i>HOD</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host" id="chartA"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-5m">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">5 minute · structure</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9 <i class="k ema20"></i>20 <i class="k ema200"></i>200</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host" id="chartB"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-10s">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">10 second · micro</span>
+        <span class="legend"><i class="k vwap"></i>VWAP <i class="k ema9"></i>9</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host" id="chartD"></div>
+    </article>
+
+    <article class="card chart-card" data-card="chart-daily">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Daily · room</span>
+        <span class="legend"><i class="k ema20"></i>20 <i class="k ema200"></i>200 <i class="k h52"></i>52w</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host" id="chartC"></div>
+    </article>
+
+    <article class="card chart-card" data-card="tv-widget">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">TradingView · 1 minute</span>
+        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
+        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, for comparison with the price on the chart. A gap this large means you are reading TradingView's delayed feed."></span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host tv-host" id="tvWidget" data-interval="1" data-range="1D">
+        <div class="chart-note">Loading TradingView’s chart… (off the desk, drag it onto the grid to load it)</div>
+      </div>
+    </article>
+    <article class="card chart-card" data-card="tv-widget-5m">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">TradingView · 5 minute</span>
+        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
+        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, for comparison with the price on the chart. A gap this large means you are reading TradingView's delayed feed."></span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="chart-host tv-host" id="tvWidget5" data-interval="5" data-range="5D">
+        <div class="chart-note">Loading TradingView’s chart… (off the desk, drag it onto the grid to load it)</div>
+      </div>
+    </article>
+    <article class="card" data-card="pillars-board">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Five Pillars check</span>
+        <span class="muted tiny" id="pillarsBoardNote">price · gain · RVOL · float · news — Confirmed thresholds; float and news are columns, never gates</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body pillars-board" id="pillarsBoard"></div>
+    </article>
+
+    <article class="card" data-card="timeline">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Alert timeline</span>
+        <span class="muted tiny" id="alertCount">0</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body timeline" id="timeline"></div>
+    </article>
+
+    <article class="card" data-card="screener">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Screener · the whole band, now</span>
+        <span class="tag" id="screenerSource">…</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="tile-note" id="screenerNote">Every name in the band moving this session.</div>
+      <div class="tile-cols screener-cols"><span>Symbol</span><span>Price</span><span>Chg</span><span>Src</span><span>As of</span></div>
+      <div class="tile-rows" id="screenerRows"><div class="empty">Waiting for the first screener pass…</div></div>
+    </article>
+
+    <article class="card" data-card="level2">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Level 2 · Time &amp; Sales</span>
+        <span class="tag sim">simulated</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body l2" id="l2Card"></div>
+    </article>
+
+    <article class="card verdict-card" data-card="verdict">
+      <div class="card-head"><span class="grip">⠿</span>
+        <span class="card-title">Setup verdict</span>
+        <span class="tag">pine mirror</span>
+        <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
+      <div class="card-body" id="verdictCard"></div>
+      <div class="card-body sizing">
+        <label class="risk-input"><span>Your risk / trade $</span>
+          <input id="riskInput" type="number" min="1" step="5" placeholder="e.g. 25"
+                 aria-label="Your dollar risk per trade"></label>
+        <label class="risk-input"><span>Float you verified (M)</span>
+          <input id="floatInput" type="number" min="0.1" step="0.5" placeholder="e.g. 4.6"
+                 aria-label="Float in millions, as you verified it"></label>
+        <div id="sizingOut"></div>
+      </div>
+    </article>
+  </template>
+
+  <footer class="statusbar">
+    <span id="disclaimer">Scanner events are research candidates, never entry signals or orders.</span>
+    <span class="keys"><kbd>J</kbd><kbd>K</kbd> row · <kbd>Enter</kbd> lock · <kbd>Space</kbd> freeze · <kbd>E</kbd> expand · <kbd>A</kbd> audio · <kbd>Esc</kbd> back</span>
+  </footer>
+</div>
+
+<section id="legend" class="legend-overlay" hidden>
+  <div class="legend-panel">
+    <div class="legend-head"><b>How to read the desk</b><button id="legendClose" class="btn ghost">close</button></div>
+    <div class="legend-grid">
+      <div><h4>Feed states (header and tiles)</h4>
+        <p><b>LIVE</b> real-time bars are arriving. <b>STALE</b> no bar for 20 s in regular hours (60 s extended): the stream is dead, not the stock. <b>DELAYED</b> the provider sent delayed data; the desk refuses it. <b>OFFLINE</b> disconnected; reconnecting. <b>REPLAY</b> a recorded session, not today. <b>FROZEN</b> a list that stops updating at 09:30 by design (Top Gappers).</p></div>
+      <div><h4>Session pills on alerts</h4>
+        <p><b>PM</b> premarket 04:00–09:30 ET: thin tape, wide spreads, a gap forming. <b>RTH</b> regular hours 09:30–16:00 ET: the session the course strategy is built for. <b>AH</b> after hours 16:00–20:00 ET: thin tape, news reactions.</p></div>
+      <div><h4>Five pillars (Confirmed course)</h4>
+        <p><b>Price</b> $2–20. <b>Gain</b> ≥10% on the day. <b>Daily RVOL</b> ≥5× today's volume against the 20-day average. <b>Float</b> &lt;20M shares — a column, never a gate; <i>proxy</i> means SEC shares outstanding (an upper bound), <i>verified</i> means a stated float figure or one you typed. <b>News</b> a headline in the last 24h — a column, never a gate. The desk admits a wider price band (yours) so a name just outside the pillar is seen with its price cell FAIL.</p></div>
+      <div><h4>PASS · FAIL · UNKNOWN</h4>
+        <p><b>PASS</b> the value meets the threshold. <b>FAIL</b> it does not. <b>UNKNOWN</b> there is no value to judge (no float source, no RVOL baseline, no headline seen) — it is never counted as a pass.</p></div>
+      <div><h4>Flames (news recency only)</h4>
+        <p><b>Red</b> ≤2 h old. <b>Orange</b> ≤12 h. <b>Yellow</b> ≤24 h. None: no qualifying headline. A flame says how recent the news is, never how good it is; the catalyst grade (hard, soft, dilutive) is a labelled heuristic on the headline text.</p></div>
+      <div><h4>Scanner branches</h4>
+        <p><b>run up</b> up ≥3% over 10 minutes with a fresh high in the last 3, above the 10-minute VWAP, liquid. <b>LF/MF</b> low / medium float. <b>HR/MR</b> high / medium RVOL. <b>&lt;20 / 20+</b> price band. <b>5-in-5, 10-in-10</b> squeeze branches (up 5% in 5 min, 10% in 10). Branches label an alert; they are not the filter.</p></div>
+      <div><h4>Setup verdict</h4>
+        <p><b>GO</b> every pillar and a live momentum event agree and a plan is armed. <b>WAIT</b> one or two conditions short — watch, do not enter. <b>PASS</b> reject: three or more short. <b>Entry / Stop / Target</b> come from the first pullback: entry over the trigger, stop under the pullback low, target at 2R. Sizing uses only the dollar risk you type; the app never assumes one.</p></div>
+      <div><h4>Charts</h4>
+        <p><b>1-minute, 5-minute and 10-second panes</b> are IBKR real-time data with extended hours shaded, VWAP and the 9, 20 and 200 EMAs drawn; a 10-second candle exists only when both 5-second halves arrived, and empty buckets stay empty. <b>TradingView panes</b> (in the tray) run on TradingView's data under their rules: US stocks are 15 minutes delayed to a viewer not signed in to tradingview.com (their <b>D</b> badge); sign in there in this browser for their real-time feed. 09:30 and 16:00 are marked on every pane.</p></div>
+    </div>
+    <p class="tiny muted">Clean-room approximations of the course scanners, for simulation and study. Nothing on this desk can place an order.</p>
+  </div>
+</section>
+<script src="live.js"></script>
+<script src="session.js"></script>
+<script src="app.js"></script>
+</body>

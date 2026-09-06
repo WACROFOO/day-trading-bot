@@ -1,0 +1,724 @@
+"""The live desk on IBKR: one worker thread, two read-only TWS connections.
+
+Why one thread: ib_async drives an asyncio loop, and its real-time bar and
+ticker events are dispatched only while that loop runs (inside ib.sleep or a
+blocking request). Spreading calls over HTTP handler threads would starve the
+events or race the loop. So every TWS call — desk stream (client 27), scanner
+union (client 28), history, snapshots — runs on this worker, which alternates
+between pumping the loop and running queued jobs. HTTP handlers only read the
+last built session and enqueue work.
+
+What the worker does, on a schedule:
+  every 0.25 s  pump the loop (events arrive: 5-second bars, tickers)
+  every 1 s     poll tickers -> quote events; publish closed 10 s candles;
+                refresh Health; publish it when it changes; reconnect if down
+  every N s     rebuild the desk session in memory from reference + minute
+                history + the live store, run the scanners, swap the session
+  every M s     run the scanner union on client 28, publish the screener,
+                and put new runners on the desk when there is room
+
+Read-only, never delayed, never invented: the invariants live in
+ibkr_stream.py; this file only schedules them.
+"""
+
+from __future__ import annotations
+
+import logging
+import os
+import queue
+import threading
+import time
+import traceback
+from concurrent.futures import Future
+from datetime import datetime, timezone
+from typing import Callable, Dict, List, Optional
+
+from .. import desk_profile
+from ..datasources.alpaca_source import session_day
+from ..datasources.ibkr_scanner import (IbkrError, build_ibkr_screener, daily_bars, float_from_ibkr,
+                                        ET, intraday_volume_profile,
+                                        is_common_stock, minute_records, news_records, reference_record,
+                                        session_duration, session_start,
+                                        sec_profile, stock_type_of, store_records)
+from ..datasources.ibkr_stream import IbkrStream, read_only_connect
+from .session_builder import build_session_from_records
+from .stream import EventHub, UpdatePublisher
+
+UTC = timezone.utc
+
+# TWS messages that are acknowledgements, not problems. 162 "API scanner
+# subscription cancelled" is TWS confirming that a one-shot scan was closed
+# after it answered; ib_async logs it at ERROR and it filled the terminal with
+# ten red lines per scan round.
+BENIGN = ("API scanner subscription cancelled", "Market data farm connection is OK",
+          "HMDS data farm connection is OK", "Sec-def data farm connection is OK",
+          "Fundamentals data is not allowed")     # the desk says this once, itself
+
+
+class _TwsNoise(logging.Filter):
+    def filter(self, record: logging.LogRecord) -> bool:
+        msg = record.getMessage()
+        return not any(b in msg for b in BENIGN)
+
+
+def quiet_tws_logs() -> None:
+    for name in ("ib_async.wrapper", "ib_async.ib", "ib_async.client"):
+        lg = logging.getLogger(name)
+        if not any(isinstance(f, _TwsNoise) for f in lg.filters):
+            lg.addFilter(_TwsNoise())
+
+
+class _ScreenerView:
+    def __init__(self, desk: "IbkrDesk") -> None:
+        self.desk = desk
+        self.use_yahoo = False
+
+    def current(self) -> dict:
+        return self.desk.screener_current()
+
+
+class IbkrDesk:
+    """Duck-types LiveSession for make_handler: current(), symbols,
+    add_symbols(), screener.current(); adds hub (SSE) and health()."""
+
+    def __init__(self, symbols: List[str], host: str = "127.0.0.1", port: int = 7496,
+                 client_id: int = 27, scanner_client_id: int = 28, rebuild: Optional[int] = None,
+                 rescan: Optional[int] = None, max_symbols: Optional[int] = None,
+                 min_price: Optional[float] = None, max_price: Optional[float] = None,
+                 min_gain: Optional[float] = None, top: Optional[int] = None,
+                 ib_factory: Optional[Callable[[], object]] = None,
+                 clock: Callable[[], datetime] = lambda: datetime.now(UTC),
+                 headlines: bool = True, sec: bool = True) -> None:
+        self.host, self.port = host, port
+        self.client_id, self.scanner_client_id = client_id, scanner_client_id
+        # Unset arguments come from the shared profile, so two traders running
+        # their own IBKR connection scan the same band on the same cadence.
+        prof = desk_profile.load()["rules"]
+        pick = lambda given, section, key: given if given is not None else prof[section][key]
+        self.rebuild = pick(rebuild, "cadence", "rebuildSeconds")
+        self.rescan = pick(rescan, "cadence", "rescanSeconds")
+        self.max_symbols = pick(max_symbols, "desk", "maxSymbols")
+        self.min_price = pick(min_price, "desk", "priceMin")
+        self.max_price = pick(max_price, "desk", "priceMax")
+        self.min_gain = pick(min_gain, "desk", "minGainPct")
+        self.top = pick(top, "desk", "scanTop")
+        self.symbols: List[str] = [s.strip().upper() for s in symbols if s and s.strip()]
+        self.ib_factory = ib_factory
+        self.clock = clock
+        self.headlines, self.sec = headlines, sec
+        self.hub = EventHub()
+        self.publisher = UpdatePublisher(self.hub)
+        self.stream: Optional[IbkrStream] = None
+        self.scanner_ib = None
+        self.screener = _ScreenerView(self)
+        self.lock = threading.Lock()
+        self.session: dict = {}
+        self.built_at = 0.0
+        self.refresh = rebuild
+        self.source = "ibkr:" + ",".join(self.symbols)
+        self._screener: dict = {"rows": [], "source": "ibkr", "asof": None,
+                                "notes": ["scanner has not run yet"]}
+        self._reference: Dict[str, dict] = {}
+        self._reference_day: Dict[str, str] = {}      # session day each reference was built for
+        self._float_inputs: Dict[str, tuple] = {}     # (sec profile, ibkr float) kept for the rollover
+        self._minutes: Dict[str, List[dict]] = {}
+        # Time-of-day RVOL baseline per symbol, and the session day it was
+        # built for. One historical request per symbol per day, spent in the
+        # same round-robin slot as the minute refresh.
+        self._profiles: Dict[str, List[float]] = {}
+        self._profile_day: Dict[str, str] = {}
+        self._float_retry: Dict[str, float] = {}     # monotonic time of the last EDGAR retry
+        self.profile_days = int(prof["cadence"]["volumeProfileDays"])
+        self._news: List[dict] = []
+        self._news_note: Optional[str] = None
+        self._jobs: "queue.Queue[tuple]" = queue.Queue()
+        self._stop = threading.Event()
+        self._last_state: Optional[tuple] = None
+        self._next_tick = self._next_build = self._next_scan = 0.0
+        # Minute history is re-pulled round-robin, one symbol at a time. IBKR
+        # allows about 60 historical requests per ten minutes; refreshing every
+        # symbol on one timer would blow through that, so each cycle takes the
+        # next symbol in turn.
+        self._next_history = 0.0
+        self._history_cursor = 0
+        self.history_every = float(prof["cadence"]["historyEverySeconds"])
+        # A TWS farm flap can kill the five-second bar streams while quotes
+        # keep arriving. Nothing reports it, so the desk watches for it.
+        self.bar_stall_seconds = float(prof["cadence"]["barStallSeconds"])
+        self.resubscribe_every = 300.0
+        self._next_resubscribe = 0.0
+        self._resubscribe_wanted = False
+        self._worker_thread: Optional[threading.Thread] = None
+        self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
+        self.log: Callable[[str], None] = lambda m: print(m, flush=True)
+
+    # -- lifecycle --------------------------------------------------------------
+
+    def start(self, timeout: float = 600.0) -> dict:
+        """Start the worker and block until the first session exists."""
+        quiet_tws_logs()
+        t = threading.Thread(target=self._worker, daemon=True, name="ibkr-desk")
+        self._worker_thread = t
+        t.start()
+        return self.submit(self._bootstrap).result(timeout=timeout)
+
+    def stop(self) -> None:
+        self._stop.set()
+
+    def submit(self, fn: Callable, *args) -> Future:
+        fut: Future = Future()
+        self._jobs.put((fn, args, fut))
+        return fut
+
+    def _worker(self) -> None:
+        try:
+            import asyncio
+            asyncio.set_event_loop(asyncio.new_event_loop())
+        except Exception:
+            pass
+        while not self._stop.is_set():
+            self.run_pending()
+            self.pump(0.25)
+
+    def run_pending(self) -> None:
+        """Run queued jobs and any due scheduled work. Called by the worker;
+        tests call it directly with a fake clock."""
+        while True:
+            try:
+                fn, args, fut = self._jobs.get_nowait()
+            except queue.Empty:
+                break
+            try:
+                fut.set_result(fn(*args))
+            except Exception as exc:
+                fut.set_exception(exc)
+        if self.stream is None:
+            return
+        now = time.monotonic()
+        if now >= self._next_tick:
+            self._next_tick = now + 1.0
+            self._guard(self.tick)
+        if now >= self._next_build:
+            self._next_build = now + self.rebuild
+            self._guard(self.refresh_session)
+        if now >= self._next_history:
+            self._next_history = now + self.history_every
+            self._guard(self.refresh_history)
+        if self.rescan and now >= self._next_scan:
+            # Aligned to the wall clock, not to this process's start time: two
+            # desks started ten minutes apart otherwise scan on different
+            # phases and spend the morning holding different names.
+            wall = time.time()
+            self._next_scan = now + max(1.0, self.rescan - (wall % self.rescan))
+            self._guard(self.scan)
+
+    def _guard(self, fn: Callable) -> None:
+        try:
+            fn()
+        except Exception as exc:                       # never let the worker die
+            self.log(f"  ibkr desk: {fn.__name__} failed: {exc!r}")
+            self.log("  " + traceback.format_exc().strip().replace("\n", "\n  ")[-600:])
+
+    def pump(self, seconds: float) -> None:
+        ib = self.stream.ib if self.stream is not None else None
+        if ib is not None and hasattr(ib, "sleep"):
+            try:
+                ib.sleep(seconds)
+                return
+            except Exception:
+                pass
+        time.sleep(seconds)
+
+    # -- bootstrap ----------------------------------------------------------------
+
+    def _bootstrap(self) -> dict:
+        ib = self.ib_factory() if self.ib_factory else None
+        self.stream = IbkrStream(self.host, self.port, self.client_id, ib=ib,
+                                 on_update=self.publisher, clock=self.clock)
+        h = self.stream.connect()
+        try:                                          # real ib_async: watch TWS error codes
+            self.stream.ib.errorEvent += self._on_tws_error
+        except Exception:
+            pass
+        if not h.connected:
+            raise IbkrError(f"TWS not reachable at {self.host}:{self.port} (client {self.client_id}): "
+                            f"{h.last_error}. Start TWS, enable the read-only API on port {self.port}, "
+                            "and run: python3 scripts/ibkr_preflight.py")
+        self.log(f"  IBKR desk connected read-only, client {self.client_id}, server version {h.server_version}")
+        if not self.symbols and self.rescan:
+            self._connect_scanner()
+            self.log("  no symbols given: the scanner picks the desk (30-90 s the first time)")
+            self.scan(add=False)
+            self.symbols = [r["symbol"] for r in self._screener["rows"][:self.max_symbols]]
+        if not self.symbols:
+            raise IbkrError("no symbols on the desk and the scanner found nothing in the band; "
+                            "start with names, e.g.  bash scripts/start.sh --ibkr CHPT,AEHL  "
+                            "or widen DESK_PRICE_MIN in .env")
+        self._subscribe(self.symbols)
+        self.refresh_session()
+        s = self.current()
+        self.log(f"  desk ready: {', '.join(self.symbols)} — {len(s['frames'])} minutes of history, "
+                 f"{sum(len(f['alerts']) for f in s['frames'])} alerts so far")
+        return s
+
+    def _connect_scanner(self) -> None:
+        if self.scanner_ib is not None and self.scanner_ib.isConnected():
+            return
+        self.scanner_ib = self.ib_factory() if self.ib_factory else None
+        if self.scanner_ib is None:
+            from ib_async import IB
+            self.scanner_ib = IB()
+        read_only_connect(self.scanner_ib, self.host, self.port, self.scanner_client_id, 12)
+        try:
+            self.scanner_ib.reqMarketDataType(1)
+        except Exception:
+            pass
+        self.log(f"  IBKR scanner connected read-only, client {self.scanner_client_id}")
+
+    # TWS status codes that matter to a data-only desk. 1100 is the API's own
+    # connectivity; 2103/2105/2157 are farm connections going down and
+    # 2104/2106/2158 the same farms coming back.
+    FARM_DOWN = (2103, 2105, 2157)
+    FARM_UP = (2104, 2106, 2158)
+
+    def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
+        h = self.stream.health if self.stream is not None else None
+        if errorCode == 1100 and h is not None:
+            h.farm_ok = False
+            h.messages.append("TWS lost its connection to IB (1100)")
+        elif errorCode in (1101, 1102) and h is not None:
+            # 1101 restored with data LOST: every subscription must be
+            # re-requested. 1102 claims the data was maintained, but the
+            # five-second bar streams often are not — the stall watchdog
+            # settles it either way, so ask for a check rather than trusting.
+            h.farm_ok = True
+            h.messages.append(f"TWS connection restored ({errorCode})")
+            self._resubscribe_wanted = True
+        elif errorCode in self.FARM_DOWN and h is not None:
+            h.farm_ok = False
+        elif errorCode in self.FARM_UP and h is not None:
+            h.farm_ok = True
+            self._resubscribe_wanted = True
+        elif errorCode == 162 and h is not None:
+            h.pacing = "pacing" in str(errorString).lower()
+        if errorCode == 10358 and self.fundamentals is not False:
+            self.fundamentals = False
+            self.log("  IBKR fundamentals are not entitled on this account: float falls back to "
+                     "SEC shares outstanding (an upper bound) or reads UNKNOWN")
+
+    def _subscribe(self, symbols: List[str]) -> List[str]:
+        wanted = []
+        for sym in symbols:
+            c = self.stream._contract(sym)
+            st = stock_type_of(self.stream.ib, c, sym)
+            if not is_common_stock(st):
+                self.log(f"  {sym}: not a common stock ({st}); funds and warrants do not join the desk")
+                if sym in self.symbols:
+                    self.symbols.remove(sym)
+                continue
+            wanted.append(sym)
+        added = self.stream.subscribe(wanted, backfill_seconds=3600)
+        for sym in added:
+            self.log(f"  {sym}: subscribed (quote + 5-second bars); loading daily and minute history")
+            c = self.stream._contract(sym)
+            try:
+                bars = daily_bars(self.stream.ib, c)
+            except Exception as exc:
+                self.log(f"  {sym}: daily history failed: {exc}")
+                bars = []
+            now = self.clock()
+            try:
+                self._minutes[sym] = minute_records(self.stream.ib, c, sym,
+                                                    duration=session_duration(now),
+                                                    start=session_start(now))
+            except Exception as exc:
+                self.log(f"  {sym}: minute history failed: {exc}")
+                self._minutes[sym] = []
+            sec = sec_profile(sym) if self.sec else {}
+            fl = float_from_ibkr(self.stream.ib, c) if self.fundamentals is not False else {}
+            self._set_reference(sym, c, bars, sec=sec, ibkr_float=fl)
+            r = self._reference[sym]
+            self.log(f"  {sym}: float {r['float_quality']}"
+                     + (f" {r['float_shares'] / 1e6:.1f}M ({r['float_source']})" if r["float_shares"] else ""))
+        if added and self.headlines:
+            recs, note = news_records(self.symbols)
+            if recs:
+                seen = {(r["symbol"], r["provider_id"]) for r in self._news}
+                self._news += [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
+            self._news_note = note
+        return added
+
+    def _set_reference(self, sym: str, c, bars: List[dict], sec: Optional[dict] = None,
+                       ibkr_float: Optional[dict] = None) -> None:
+        day = self.session_day()
+        if sec is None and ibkr_float is None:
+            sec, ibkr_float = self._float_inputs.get(sym, ({}, {}))
+        self._float_inputs[sym] = (sec or {}, ibkr_float or {})
+        self._reference[sym] = reference_record(
+            sym, bars, ticker=self.stream._tickers.get(sym),
+            exchange=getattr(c, "primaryExchange", None) or "NASDAQ",
+            name=getattr(c, "longName", None) or None, sec=sec or {}, today=day,
+            clock=self.clock, ibkr_float=ibkr_float or {})
+        profile = self._profiles.get(sym)
+        if profile:
+            self._reference[sym]["volume_profile"] = profile
+            self._reference[sym]["volume_profile_days"] = self.profile_days
+        self._reference_day[sym] = day
+
+    def session_day(self) -> str:
+        """The trading day the desk shows (ISO date), by the 04:00 ET rule."""
+        return session_day(self.clock()).date().isoformat()
+
+    def roll_reference(self) -> Optional[str]:
+        """After the 04:00 ET rollover, re-pull ONE stale reference per rebuild.
+
+        Previous close and average volume are read from the daily bars at
+        subscribe time; a desk left running overnight would carry the old
+        day's close into the new session, so every gain and RVOL on the desk
+        would be measured against the wrong base. One symbol per call keeps
+        the historical-request rate inside IBKR's pacing limit."""
+        day = self.session_day()
+        for sym in list(self.symbols):
+            if self._reference_day.get(sym) == day:
+                continue
+            c = self._contracts_for(sym)
+            if c is None:
+                continue
+            try:
+                bars = daily_bars(self.stream.ib, c)
+            except Exception as exc:
+                self.log(f"  {sym}: daily history refresh failed: {exc}")
+                bars = self._reference.get(sym, {}).get("daily_bars", [])
+            self._set_reference(sym, c, bars)
+            self.log(f"  {sym}: reference rolled to session {day}")
+            return sym
+        return None
+
+    # -- scheduled work -------------------------------------------------------------
+
+    def tick(self) -> None:
+        s = self.stream
+        s.poll_tickers()
+        self._recover_stalled_bars()
+        self.publisher.publish_closed_10s(s.store, s.symbols)
+        h = s.check()
+        key = (h.state, h.generation, h.subscriptions, h.market_data_type)
+        if key != self._last_state:
+            self._last_state = key
+            self.publisher.publish_health(self.health())
+            self.log(f"  feed {h.state} (gen {h.generation}, {h.subscriptions} lines)")
+        if h.state == "OFFLINE":
+            s.reconnect()
+
+    def _recover_stalled_bars(self) -> bool:
+        """Re-request the bar streams when quotes arrive but bars have stopped.
+
+        TWS drops and restores its market-data farm (1100 / 1101 / 2103 / 2104)
+        without dropping the API socket. Ticks resume by themselves; the
+        five-second bar subscriptions frequently do not. The desk then shows a
+        live feed badge, a live price and a tape frozen at the last bar before
+        the flap — every chart, RVOL and every event scanner stuck with it,
+        which is what "LAST PRINT 04:00" at 08:53 means. `reconnect()` cannot
+        see this: the socket never dropped."""
+        s = self.stream
+        stalled = s.bars_stalled_for(self.clock())
+        due = self._resubscribe_wanted or (stalled is not None and stalled >= self.bar_stall_seconds)
+        if not due:
+            return False
+        now = time.monotonic()
+        if now < self._next_resubscribe:
+            return False
+        self._next_resubscribe = now + self.resubscribe_every
+        self._resubscribe_wanted = False
+        why = ("TWS reported the data connection restored" if stalled is None
+               else f"no bars for {int(stalled)}s while quotes kept arriving")
+        self.log(f"  {why} — re-requesting quotes and five-second bars")
+        try:
+            s.resubscribe_all()
+        except Exception as exc:
+            self.log(f"  resubscribe failed: {exc}")
+            return False
+        self._next_history = 0.0          # pull fresh minutes on the next cycle
+        self.publisher.publish_health(self.health())
+        return True
+
+    def refresh_history(self) -> Optional[str]:
+        """Re-pull the last few minutes of one symbol's history.
+
+        Without this the session was built from the minute bars fetched once at
+        subscribe time plus whatever the live five-second stream had added. On a
+        quiet name IBKR sends no TRADES bars at all, so nothing advanced and the
+        desk sat on its startup minute for hours while the clock ran on. One
+        symbol per cycle keeps the request rate inside IBKR's pacing limit.
+        """
+        if not self.symbols:
+            return None
+        sym = self.symbols[self._history_cursor % len(self.symbols)]
+        self._history_cursor += 1
+        c = self._contracts_for(sym)
+        if c is None:
+            return None
+        # One historical request per cycle. A symbol with no volume profile for
+        # today spends its turn on that: without it the RVOL pillar is measured
+        # against whole prior days, which no premarket runner can clear.
+        if self._profile_day.get(sym) != self.session_day():
+            return self.refresh_profile(sym)
+        # An unknown float is often a one-off EDGAR failure, and it was asked
+        # for exactly once, at subscribe time. Retry it — the request goes to
+        # EDGAR, not to TWS, so it costs nothing from the historical budget.
+        self.retry_float(sym)
+        try:
+            fresh = minute_records(self.stream.ib, c, sym, duration="900 S",
+                                   start=session_start(self.clock()))
+        except Exception as exc:
+            self.log(f"  {sym}: minute refresh failed: {exc}")
+            return None
+        if not fresh:
+            return sym
+        merged = {m["ts"]: m for m in self._minutes.get(sym, [])}
+        for m in fresh:
+            merged[m["ts"]] = m
+        self._minutes[sym] = [merged[k] for k in sorted(merged)]
+        return sym
+
+    def refresh_profile(self, sym: str) -> Optional[str]:
+        """Rebuild one symbol's time-of-day volume baseline for today."""
+        c = self._contracts_for(sym)
+        if c is None:
+            return None
+        day = self.session_day()
+        try:
+            profile = intraday_volume_profile(
+                self.stream.ib, c, days=self.profile_days,
+                exclude_day=self.clock().astimezone(ET).date())
+        except Exception as exc:
+            self.log(f"  {sym}: volume profile failed: {exc}")
+            self._profile_day[sym] = day       # do not retry every 20 seconds
+            return None
+        self._profile_day[sym] = day
+        if not profile:
+            self.log(f"  {sym}: no intraday history for a volume profile; "
+                     "RVOL stays on the daily measure")
+            return sym
+        self._profiles[sym] = profile
+        ref = self._reference.get(sym)
+        if ref is not None:
+            ref["volume_profile"] = profile
+            ref["volume_profile_days"] = self.profile_days
+        return sym
+
+    def retry_float(self, sym: str, every: float = 600.0) -> bool:
+        """Ask EDGAR again for a symbol whose float is still unknown."""
+        ref = self._reference.get(sym)
+        if not self.sec or ref is None or ref.get("float_quality") != "unknown":
+            return False
+        now = time.monotonic()
+        if now - self._float_retry.get(sym, -1e9) < every:
+            return False
+        self._float_retry[sym] = now
+        sec = sec_profile(sym)
+        if not sec.get("shares"):
+            if sec.get("note"):
+                ref["float_source"] = sec["note"]
+            return False
+        prev_sec, ibkr = self._float_inputs.get(sym, ({}, {}))
+        self._float_inputs[sym] = (sec, ibkr)
+        c = self._contracts_for(sym)
+        if c is not None:
+            self._set_reference(sym, c, ref.get("daily_bars") or [])
+            self.log(f"  {sym}: float resolved on retry — {sec['shares'] / 1e6:.1f}M "
+                     f"({sec.get('basis') or 'shares outstanding'}, upper bound)")
+        return True
+
+    def _contracts_for(self, sym: str):
+        try:
+            return self.stream._contract(sym)
+        except Exception:
+            return None
+
+    def data_through(self, session: dict) -> Optional[str]:
+        """The newest minute the session actually carries."""
+        frames = session.get("frames") or []
+        return frames[-1]["ts"] if frames else None
+
+    def refresh_session(self) -> dict:
+        """Rebuild from memory: reference + minute history (for minutes the
+        live store does not cover) + complete ten-second candles."""
+        s = self.stream
+        records: List[dict] = []
+        now = self.clock()
+        start = session_start(now)
+        start_iso = start.isoformat(timespec="seconds").replace("+00:00", "Z")
+        self.roll_reference()
+        for sym in self.symbols:
+            # Only this session's tape. The store and the minute cache keep
+            # what they were given; at the 04:00 ET rollover yesterday's bars
+            # would otherwise stay on the desk as today's frames.
+            mins = [m for m in self._minutes.get(sym, []) if m["ts"] >= start_iso]
+            if len(mins) != len(self._minutes.get(sym, [])):
+                self._minutes[sym] = mins
+            ref = dict(self._reference.get(sym) or {"type": "reference", "symbol": sym})
+            t = s._tickers.get(sym)
+            if t is not None:
+                last = getattr(t, "last", None)
+                if last is not None and last == last:
+                    ref["iex_last_price"] = float(last)
+                    # The PRINT's own time when the provider gives one. Stamping
+                    # it with the rebuild clock claimed a freshness the print
+                    # did not have: a quote from four minutes ago read as now.
+                    tick_ts = getattr(t, "time", None)
+                    ref["iex_last_ts"] = (tick_ts.isoformat(timespec="seconds")
+                                          if isinstance(tick_ts, datetime)
+                                          else self.clock().isoformat(timespec="seconds"))
+                    ref["iex_bid"] = _num(getattr(t, "bid", None))
+                    ref["iex_ask"] = _num(getattr(t, "ask", None))
+            records.append(ref)
+            tens = [r for r in store_records(s.store, sym) if r["ts"] >= start_iso]
+            covered = {r["ts"][:17] + "00Z" for r in tens}
+            records += [m for m in mins if m["ts"][:17] + "00Z" not in covered]
+            records += tens
+        records += self._news
+        h = s.health
+        status = "live" if h.state == "LIVE" else h.state.lower()
+        session = build_session_from_records(
+            records, session_id="ibkr-" + "-".join(self.symbols[:3]),
+            source_name="IBKR · TWS read-only · live", data_status=status,
+            volume_floor_scale=1.0, trading_date=self.session_day())
+        session["live"] = True
+        session["streaming"] = True
+        session["refreshSeconds"] = self.rebuild
+        session["builtAt"] = time.time()
+        session["provider"] = self.health()
+        session["symbolsOrder"] = list(self.symbols)
+        # What the desk actually has, and when it was asked. The page shows the
+        # gap: a green badge over a session that stopped advancing hours ago is
+        # exactly the "stale but green" this design forbids.
+        session["asOf"] = now.isoformat(timespec="seconds")
+        session["sessionStart"] = start_iso
+        through = self.data_through(session)
+        session["dataThrough"] = through
+        if through:
+            last = datetime.fromisoformat(through.replace("Z", "+00:00"))
+            session["dataLagSeconds"] = max(0, int((now - last).total_seconds()))
+        else:
+            # No print yet this session: not "behind", there is nothing to be
+            # behind. The page says "no prints yet" rather than a lag.
+            session["dataLagSeconds"] = None
+        # Two different questions. dataLagSeconds: how old is the newest BAR
+        # (in thin premarket tape a name can go forty minutes without a print,
+        # and that is the tape, not the desk). feedLagSeconds: how long since
+        # IBKR last sent this desk anything at all, quote or bar — the number
+        # that says whether the desk itself is live.
+        beats = [t for t in (h.last_bar_at, h.last_quote_at) if t is not None]
+        session["feedLagSeconds"] = (max(0, int((now - max(beats)).total_seconds())) if beats else None)
+        session["provider"]["feedLagSeconds"] = session["feedLagSeconds"]
+        session["provider"]["dataThrough"] = through
+        session["provider"]["dataLagSeconds"] = session.get("dataLagSeconds")
+        if self._news_note:
+            session["newsNote"] = self._news_note
+        with self.lock:
+            self.session = session
+            self.built_at = session["builtAt"]
+        # Tell every open page now: the scanners moved. A poll would find out
+        # in up to five seconds; a trader watching Running Up should not wait.
+        n_alerts = sum(len(f["alerts"]) for f in session["frames"])
+        # The event carries the newest minute itself — its lists, its alerts,
+        # and every symbol's current metrics. A full session for a ten-name
+        # desk at midday is well over a megabyte, and the page was refetching
+        # and reparsing all of it every three seconds just to move a grid; the
+        # scanners lurched instead of ticking. The page still reconciles with
+        # a full fetch when the symbol set changes and once a minute anyway.
+        tail = session["frames"][-1] if session["frames"] else None
+        self.hub.publish("session", {
+            "builtAt": session["builtAt"], "frames": len(session["frames"]),
+            "alerts": n_alerts, "symbols": list(self.symbols),
+            "tradingDate": session["tradingDate"],
+            "sessionStart": session["sessionStart"],
+            "dataLagSeconds": session["dataLagSeconds"],
+            "feedLagSeconds": session["feedLagSeconds"],
+            "frame": tail,
+            "metrics": {sym: meta.get("metrics") for sym, meta in session["symbols"].items()
+                        if meta.get("metrics")},
+        })
+        return session
+
+    def scan(self, add: bool = True) -> dict:
+        self._connect_scanner()
+        out = build_ibkr_screener(self.scanner_ib, self.min_price, self.max_price, self.min_gain,
+                                  self.top, log=self.log, clock=self.clock)
+        with self.lock:
+            self._screener = out
+        self.hub.publish("screener", out)
+        self.log(f"  scanner: {len(out['rows'])} names up ≥{self.min_gain:g}% in the band"
+                 + (": " + " ".join(r["symbol"] for r in out["rows"][:10]) if out["rows"] else ""))
+        if add:
+            fresh = [r["symbol"] for r in out["rows"] if r["symbol"] not in self.symbols]
+            room = max(0, self.max_symbols - len(self.symbols))
+            if fresh and room:
+                self.add_symbols(fresh[:room])
+        return out
+
+    # -- surface used by the HTTP handler ------------------------------------------
+
+    def current(self) -> dict:
+        with self.lock:
+            return self.session
+
+    def screener_current(self) -> dict:
+        with self.lock:
+            return self._screener
+
+    def fingerprint(self) -> dict:
+        """What this desk scans and alerts on, as one comparable block.
+
+        Two traders each on their own IBKR connection can compare one hash
+        instead of two screens. Entitlements ride along unhashed: a desk with
+        no fundamentals and no news keys scores the float and news pillars
+        differently, which moves the three-of-five liquidity gate and so the
+        alerts, and that is a real difference even when the rules match."""
+        return desk_profile.fingerprint({
+            "ibkrFundamentals": self.fundamentals is not False,
+            "headlines": bool(self.headlines),
+            "secFloat": bool(self.sec),
+            "marketDataType": getattr(self.stream.health, "market_data_type", None) if self.stream else None,
+        })
+
+    def health(self) -> dict:
+        d = self.stream.health.as_dict() if self.stream is not None else {"state": "OFFLINE"}
+        d["clientId"] = self.client_id
+        d["scannerClientId"] = self.scanner_client_id
+        d["builtAt"] = self.built_at
+        return d
+
+    def add_symbols(self, symbols) -> list:
+        """From the worker: subscribe now. From another thread: enqueue."""
+        wanted = []
+        for sym in symbols:
+            sym = str(sym).strip().upper()
+            if sym and sym not in self.symbols and sym not in wanted and \
+                    len(self.symbols) + len(wanted) < self.max_symbols:
+                wanted.append(sym)
+        if not wanted:
+            return []
+        on_worker = self._worker_thread is None or threading.current_thread() is self._worker_thread
+        if on_worker:
+            return self._add_now(wanted)
+        self.submit(self._add_now, wanted)
+        return wanted
+
+    def _add_now(self, wanted: List[str]) -> List[str]:
+        self.symbols += [s for s in wanted if s not in self.symbols]
+        added = self._subscribe(wanted)
+        for sym in added:
+            self.hub.publish("symbol-added", {"symbol": sym})
+        self.refresh_session()
+        self.log(f"  {', '.join(added)} joined the desk" if added else "  nothing joined the desk")
+        return added
+
+
+def _num(v):
+    try:
+        f = float(v)
+        return None if f != f else f
+    except (TypeError, ValueError):
+        return None
