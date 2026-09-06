@@ -12,6 +12,7 @@ Design notes and operating guides for the momentum workstation.
 | `dashboard-plan.md` · `design-handoff.md` | the dashboard's plan and its handoff notes |
 | `shared-desk.md` | owner and viewer keys; two browsers on one desk |
 | `paper-exercise-brief.md` | **the spec for the paper-trading exercise** — platform state, the priors it must be framed by, the decision ledger, and what it cannot check |
+| `STATUS-2026-09-06.md` | **plain-words status** — what works, what is left, what the owner does |
 | `day-runbook.md` | **run this** — the one command, what happens around it, the human-only commands |
 | `preregistration.md` | the exercise's sample size, stopping rules and failure condition — **PROPOSED until the owner sets the values, before the first order** |
 
