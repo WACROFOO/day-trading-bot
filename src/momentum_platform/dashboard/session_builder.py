@@ -109,7 +109,8 @@ def _row(ranked) -> list:
     ]
 
 
-def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
+def build_session(fixture_path: str | Path, max_rows: int = 10,
+                  journal=None) -> dict:
     """Build a session from a replay fixture file."""
     fixture_path = Path(fixture_path)
     records = [
@@ -117,7 +118,8 @@ def build_session(fixture_path: str | Path, max_rows: int = 10) -> dict:
         for line in fixture_path.read_text().splitlines()
         if line.strip() and not line.startswith("#")
     ]
-    return build_session_from_records(records, fixture_path.stem, fixture_path.name, max_rows)
+    return build_session_from_records(records, fixture_path.stem, fixture_path.name,
+                                      max_rows, journal=journal)
 
 
 
@@ -147,8 +149,18 @@ def build_session_from_records(
     data_status: str = "replay",
     volume_floor_scale: float = 1.0,
     trading_date: str | None = None,
+    journal=None,
 ) -> dict:
     """Build the dashboard session.
+
+    `journal` is an open `journal.ledger` connection, or None. When given,
+    every plan the detector arms — allowed or suppressed — is written as a
+    decision with the point-in-time snapshot and the full cascade result,
+    every halt transition is recorded with the price before it, and the board
+    is snapshotted at the end. Writes are idempotent, so the live desk's
+    rebuild-every-few-seconds loop records each decision once. This is the
+    desk's only relationship with the exercise: it writes what it saw. It
+    never reads an order, and it never touches the order-path package.
 
     volume_floor_scale multiplies the scanners' absolute share-count floors
     (the 25,000-shares-per-5-minutes liquidity gates). Those floors are stated
@@ -307,6 +319,9 @@ def build_session_from_records(
             hot.set_halt(rec["symbol"], rec["status"])
             previous = halt_state.get(rec["symbol"], "trading")
             halt_state[rec["symbol"]] = rec["status"]
+            if previous != rec["status"] and journal is not None:
+                _hs = hot.symbols.get(rec["symbol"])
+                _journal_halt(journal, rec, _hs.snapshot.last if _hs else None)
             if previous != rec["status"]:
                 # Halt transitions come from an official status source and are
                 # never suppressed by cooldown or consolidation.
@@ -343,9 +358,14 @@ def build_session_from_records(
                 # no target, anywhere. IMRN 2026-09-04 failed the $2-20 price
                 # gate and the desk still published `Entry 1.75 · Stop 1.71`.
                 _st = hot.symbols.get(rec["symbol"])
-                allowed = _plan_allowed(symbols.get(rec["symbol"], {}),
-                                        halt_state.get(rec["symbol"]),
-                                        snap=_st.snapshot if _st else None)
+                _snap = _st.snapshot if _st else None
+                _meta = symbols.get(rec["symbol"], {})
+                _inputs = cascade_inputs(_meta, halt_state.get(rec["symbol"]), snap=_snap)
+                _res = evaluate_cascade(_inputs) if _meta else None
+                allowed = bool(_res and _res.plan_allowed)
+                if journal is not None and _res is not None:
+                    _journal_decision(journal, rec, bar, plan, _res, _inputs, _snap,
+                                      _meta, session_id, source_name, data_status)
                 if allowed:
                     plans.append({
                         "planId": plan.plan_id, "symbol": plan.symbol,
@@ -455,6 +475,13 @@ def build_session_from_records(
                        "value": g.value, "reason": g.reason} for g in res.gates],
         }
 
+    if journal is not None and frames:
+        # R1, the denominator: every symbol on the board with its verdict,
+        # stamped with the last bar this build saw. On the live desk that is
+        # now; on a replay it is the end of the fixture, and the row says so
+        # through its timestamp rather than pretending to be mid-session.
+        _journal_board(journal, frames[-1]["ts"], session_id, symbols, cascade_by_symbol)
+
     return {
         "sessionId": session_id,
         "generatedFrom": source_name,
@@ -546,3 +573,45 @@ class _Collector:
 
     def deliver(self, event, consolidated=None) -> None:
         self.sink.append((event, consolidated))
+
+
+
+# ----------------------------------------------------------- the journal
+# Lazy imports: the desk must keep working with no journal package on the
+# path, and the journal must never pull an order path in behind it — it is
+# neutral ground, and a test asserts the desk imports nothing of the order path.
+
+def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
+                      session_id, source_name, data_status) -> None:
+    from journal import ledger as _L
+    snapshot = {
+        "last": getattr(snap, "last", None) if snap else rec.get("close"),
+        "bid": rec.get("bid"), "ask": rec.get("ask"),
+        "session_high": getattr(snap, "session_high", None) if snap else None,
+        "volume": getattr(snap, "volume_today", None) if snap else None,
+        "rvol": getattr(snap, "rvol", None) if snap else None,
+        "change_pct": getattr(snap, "change_from_close_pct", None) if snap else None,
+    }
+    _L.record_decision(
+        journal, symbol=rec["symbol"], armed_at=plan.armed_at_bar, plan=plan,
+        cascade=res, inputs=inputs, snapshot=snapshot,
+        session=_L.session_of(plan.armed_at_bar), session_id=session_id,
+        source_name=source_name, data_status=data_status,
+        bar_resolution=getattr(bar, "timeframe", "1m"),
+        float_quality=meta.get("floatQuality"), float_source=meta.get("floatSource"),
+    )
+
+
+def _journal_halt(journal, rec, last_before) -> None:
+    from journal import ledger as _L
+    _L.record_halt(journal, rec["ts"], rec["symbol"], rec["status"], last_before)
+
+
+def _journal_board(journal, ts, session_id, symbols, cascade_by_symbol) -> None:
+    from journal import ledger as _L
+    rows = []
+    for sym, c in cascade_by_symbol.items():
+        m = (symbols.get(sym) or {}).get("metrics") or {}
+        rows.append({"symbol": sym, "verdict": c["verdict"], "killed_by": c["killedBy"],
+                     "plan_allowed": c["planAllowed"], "last": m.get("last")})
+    _L.record_board(journal, ts, session_id, rows)
