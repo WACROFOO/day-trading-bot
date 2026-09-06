@@ -18,6 +18,8 @@ desk, so it stays bound to `127.0.0.1`.
 
 ## Setting up the second desk
 
+**macOS / Linux**
+
 ```
 git clone <repo>            # both of you already have GitHub access
 cd day-trading-bot
@@ -25,6 +27,27 @@ bash scripts/setup.sh
 cp .env.example .env        # then fill in YOUR OWN keys
 python3 scripts/ibkr_preflight.py
 bash scripts/start.sh --ibkr
+```
+
+**Windows (PowerShell)** — there is no bash and no `pkill`; the launcher is
+`scripts\start.ps1` and it does the preflight, the port and `PYTHONPATH` for
+you.
+
+```powershell
+git clone <repo>
+cd day-trading-bot
+python -m pip install -r requirements.txt
+Copy-Item .env.example .env        # then fill in YOUR OWN keys
+powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr
+```
+
+Paper TWS listens on 7497 and IB Gateway on 4001/4002, so add
+`-IbkrPort 7497` if that is your login. To stop a desk that is already running:
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name LIKE 'python%'" |
+  Where-Object { $_.CommandLine -like '*momentum_platform.dashboard.server*' } |
+  ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
 ```
 
 Never share `.env`, API keys, or a TWS session. Two API clients on one TWS
@@ -70,6 +93,14 @@ python3 scripts/desk_parity.py                     # this checkout
 python3 scripts/desk_parity.py --url http://127.0.0.1:8787   # the running desk
 python3 scripts/desk_parity.py --compare 33dfeedb3f51        # against a partner's hash
 python3 scripts/desk_parity.py --json > mine.json            # to send them
+```
+
+On Windows use `python` and `$env:PYTHONPATH="src"` first:
+
+```powershell
+$env:PYTHONPATH = "src"
+python scripts\desk_parity.py --url http://127.0.0.1:8787
+python scripts\desk_parity.py --compare 33dfeedb3f51
 ```
 
 A mismatch prints the differing rules line by line.

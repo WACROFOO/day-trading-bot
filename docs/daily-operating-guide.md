@@ -192,6 +192,11 @@ What the desk does in this mode:
 - Running Up now means an uptrend, not a spike: up ≥3% over the last 10
   minutes, a fresh 10-minute high in the last 3, price above the 10-minute
   VWAP, liquid, one alert per leg. Approximation.
+- **On Windows** there is no `bash` and no `pkill`: the launcher is
+  `powershell -ExecutionPolicy Bypass -File scripts\start.ps1 -Ibkr`, which
+  runs the preflight, picks a free port and sets `PYTHONPATH` itself. Add
+  `-IbkrPort 7497` for a paper login. `docs/shared-desk.md` has the rest,
+  including how to stop a desk that is already running.
 - **Two traders, one set of rules.** Everything that decides what a desk
   admits and what it fires lives in `config/desk-profile.json`, committed, so
   both of you pull it with the code. The header's RULES badge is the

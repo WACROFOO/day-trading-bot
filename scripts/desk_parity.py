@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
 import urllib.request
 from pathlib import Path
@@ -30,7 +31,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
-G, Y, R, D, B, O = "\033[92m", "\033[93m", "\033[91m", "\033[2m", "\033[1m", "\033[0m"
+# Colour only where it renders. Windows PowerShell hosts vary in whether they
+# interpret ANSI, and a parity report full of escape codes is worse than a
+# plain one.
+if sys.stdout.isatty() and not os.environ.get("NO_COLOR"):
+    G, Y, R, D, B, O = "\033[92m", "\033[93m", "\033[91m", "\033[2m", "\033[1m", "\033[0m"
+else:
+    G = Y = R = D = B = O = ""
 
 
 def from_url(url: str) -> dict:
