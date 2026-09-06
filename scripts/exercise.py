@@ -180,17 +180,46 @@ def cmd_live(args) -> int:
     return 0
 
 
+def cmd_advance(args) -> int:
+    """Move to the next phase ONLY if every pre-registration gate is clear.
+    A human runs this; the day runner only reports whether it could."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from day import gates_for_advance
+    conn = L.connect(_db(args))
+    st = L.get_state(conn)
+    nxt, blockers = gates_for_advance(conn, st)
+    if nxt is None:
+        print(f"phase {st['phase']}: " + "; ".join(blockers)); return 1
+    if blockers:
+        print(f"{BAD}phase {st['phase']} → {nxt} blocked:{END}")
+        for b in blockers:
+            print(f"  ✗ {b}")
+        return 1
+    L.set_state(conn, phase=nxt)
+    print(f"{OK}phase {st['phase']} → {nxt}{END}  every gate clear · recorded in exercise_state")
+    print(f"{DIM}update docs/preregistration.md §5/§3 in the same commit if a value changed{END}")
+    return 0
+
+
+def cmd_state(args) -> int:
+    conn = L.connect(_db(args))
+    for k, v in L.get_state(conn).items():
+        print(f"  {k:<14} {v}")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--db", help="ledger path (default $JOURNAL_DB or data/journal.sqlite)")
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
-    sub.add_parser("check"); sub.add_parser("report")
+    sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
-    return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live}[args.cmd](args)
+    return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
+            "advance": cmd_advance, "state": cmd_state}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -112,16 +112,30 @@ def main() -> int:
 
         print("\nVERDICT")
         if queued_stop:
+            verdict = "queued"
             warn("IBKR QUEUED the stop leg to 09:30 — it protects nothing now")
             note("A pre-market entry is naked from its fill until the bell.")
             note("The pre-market path needs a monitored exit, not a bracket.")
         elif placed.protected:
+            verdict = "held"
             good("IBKR is holding the stop leg as live pre-market")
             note("A pre-market bracket is genuinely protected. Still verify")
             note("a real fill before trusting it with size.")
         else:
+            verdict = "inconclusive"
             warn(f"inconclusive — stop status {placed.stop_status!r}")
             note("Paste this whole output back rather than reading it as a no.")
+        # Machine-readable, and persisted: the day runner and the runner's
+        # pre-market gate read this out of exercise_state rather than a human
+        # re-typing a word they read off a terminal.
+        print(f"VERDICT: {verdict}")
+        try:
+            from journal import ledger as L
+            conn = L.connect(os.environ.get("JOURNAL_DB") or L.DEFAULT_DB)
+            L.set_state(conn, probe_verdict=verdict, probe_date=now.astimezone(ET).date().isoformat())
+            note(f"recorded in exercise_state ({conn.execute('PRAGMA database_list').fetchone()[2]})")
+        except Exception as exc:                        # noqa: BLE001
+            warn(f"verdict NOT recorded: {exc}")
         return 0
     finally:
         try:
