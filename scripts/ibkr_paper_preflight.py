@@ -9,10 +9,24 @@ separate: data comes from the live login on 7496 read-only, orders go to the
 paper login on the Gateway. The desk never gains an order surface.
 
 NOTHING IS TRANSMITTED. The only order-shaped call is `whatIfOrder`, which
-asks IBKR to price an order's margin impact and explicitly does not place it,
-and the order carries `transmit=False` as a second belt. No order-placing API
-is called anywhere in this file — deliberately spelled out rather than named,
-so a grep for the placing verb finds nothing here at all.
+asks IBKR to price an order's margin impact and explicitly does not place it.
+No order-placing API is called anywhere in this file — deliberately spelled
+out rather than named, so a grep for the placing verb finds nothing here at
+all.
+
+`whatIf` is the belt, and it is the ONLY belt available. An earlier draft also
+set `transmit=False` on the probe, reasoning that two guards beat one. IBKR
+rejects that combination outright:
+
+    321  Error validating request.-'bC' : cause -
+         What-If order should have transmit flag set to TRUE.
+
+and then never answers, so the call hangs until the socket drops. The flags
+mean different things: `transmit` decides whether a PLACED order goes to the
+market or waits in TWS, while `whatIf` decides whether the order is placed at
+all. Setting transmit=False on a what-if asks IBKR to park an order it was
+never going to accept, and the extra guard removed the only real one by making
+the request invalid.
 
 Exit codes:
   0  paper order path confirmed
@@ -32,6 +46,7 @@ exactly why this check exists rather than being left to care.
 
 from __future__ import annotations
 
+import asyncio
 import os
 import sys
 
@@ -70,7 +85,7 @@ def main() -> int:
     note("nothing here transmits an order")
 
     try:
-        from ib_async import IB, LimitOrder, Stock
+        from ib_async import IB, LimitOrder, Stock, util
     except ImportError:
         bad("ib_async is not installed")
         note("python3 -m pip install ib_async==2.1.0")
@@ -139,8 +154,33 @@ def main() -> int:
         stock = Stock(PROBE, "SMART", "USD")
         ib.qualifyContracts(stock)
         probe = LimitOrder("BUY", 1, 1.00)      # far from the market
-        probe.transmit = False                  # second belt
-        state = ib.whatIfOrder(stock, probe)
+        # transmit stays True — see the module docstring. IBKR error 321
+        # rejects a what-if with transmit=False and then stops replying.
+        # `whatIf` is what keeps this off the market, not `transmit`.
+        #
+        # Bounded rather than `ib.whatIfOrder(...)`: when IBKR refuses a
+        # request it simply never answers, and the blocking call waits for a
+        # reply that is not coming until the socket drops minutes later. A
+        # preflight that hangs reports nothing; this one names the timeout and
+        # points at the API log, which is where the refusal reason lives.
+        try:
+            if hasattr(ib, "whatIfOrderAsync"):
+                state = util.run(asyncio.wait_for(
+                    ib.whatIfOrderAsync(stock, probe), timeout=20))
+            else:
+                # Fallback for an ib_async without the async twin. Unbounded,
+                # so it can still hang — but the transmit fix above is what
+                # actually stops it hanging, and this keeps the check working
+                # rather than raising AttributeError on a version I cannot
+                # test against from here.
+                state = ib.whatIfOrder(stock, probe)
+        except asyncio.TimeoutError:
+            bad("IBKR never answered the whatIf request (20s)")
+            note("This means the request was refused, not that it was slow.")
+            note("Open the Gateway API log and read the last error line:")
+            note("  Gateway > Configure > Settings > API > Settings > ")
+            note("  'Create API message log file', then look for error 321.")
+            return 5
         if state and (state.initMarginChange or state.commission is not None):
             good("order permissions confirmed — IBKR priced the order")
             if state.commission is not None:
