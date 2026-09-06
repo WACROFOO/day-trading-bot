@@ -124,3 +124,17 @@ def test_a_stopped_out_plan_scores_exactly_minus_one_planned_r(journal):
     for r, val in zip(rows, s):
         if r["first_hit"] == "stop":
             assert val == -1.0
+
+
+def test_actuals_run_from_the_ledgers_own_tape_with_no_fixture():
+    """A live session has no fixture file. The desk wrote the bars; actuals
+    must run from those alone and agree with the fixture path."""
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    from_ledger = bars.from_ledger(c)
+    from_file = bars.from_fixture(FIXTURE)
+    assert set(from_ledger) == set(from_file)
+    for sym in from_file:
+        assert [b[:6] for b in from_ledger[sym]] == [b[:6] for b in from_file[sym]]
+    res = actuals.fill_all(c, from_ledger)
+    assert res["computed"] == 5 and res["no_tape"] == []

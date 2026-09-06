@@ -572,6 +572,10 @@ class IbkrDesk:
                                           else self.clock().isoformat(timespec="seconds"))
                     ref["iex_bid"] = _num(getattr(t, "bid", None))
                     ref["iex_ask"] = _num(getattr(t, "ask", None))
+                    # Sizes travel with the quote so the ledger's NBBO-at-fill
+                    # check (brief R4) can ask "was that size actually there?"
+                    ref["iex_bid_size"] = _num(getattr(t, "bidSize", None))
+                    ref["iex_ask_size"] = _num(getattr(t, "askSize", None))
             records.append(ref)
             tens = [r for r in store_records(s.store, sym) if r["ts"] >= start_iso]
             covered = {r["ts"][:17] + "00Z" for r in tens}

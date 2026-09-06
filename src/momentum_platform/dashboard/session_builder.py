@@ -199,6 +199,8 @@ def build_session_from_records(
                 "iexLast": rec.get("iex_last_price"),
                 "iexLastTime": _et_clock(rec.get("iex_last_ts")),
                 "iexBid": rec.get("iex_bid"), "iexAsk": rec.get("iex_ask"),
+                "iexBidSize": rec.get("iex_bid_size"), "iexAskSize": rec.get("iex_ask_size"),
+                "iexLastTs": rec.get("iex_last_ts"),
                 "lastSource": rec.get("last_source", "iex"),
                 "dailyBars": rec.get("daily_bars", []),
                 "news": [],
@@ -481,6 +483,10 @@ def build_session_from_records(
         # now; on a replay it is the end of the fixture, and the row says so
         # through its timestamp rather than pretending to be mid-session.
         _journal_board(journal, frames[-1]["ts"], session_id, symbols, cascade_by_symbol)
+        # The tape itself, and the latest quote per name. Bars let actuals run
+        # on a real session with no fixture; quotes are the runner's NBBO at
+        # fill time. Neither is a decision, so neither touches `decisions`.
+        _journal_tape(journal, bar_records, symbols)
 
     return {
         "sessionId": session_id,
@@ -615,3 +621,27 @@ def _journal_board(journal, ts, session_id, symbols, cascade_by_symbol) -> None:
         rows.append({"symbol": sym, "verdict": c["verdict"], "killed_by": c["killedBy"],
                      "plan_allowed": c["planAllowed"], "last": m.get("last")})
     _L.record_board(journal, ts, session_id, rows)
+
+
+
+def _journal_tape(journal, bar_records, symbols) -> None:
+    from journal import ledger as _L
+    by_sym: dict = {}
+    latest: dict = {}
+    for rec in bar_records:
+        by_sym.setdefault(rec["symbol"], []).append(
+            (rec["ts"], rec["open"], rec["high"], rec["low"], rec["close"], rec["volume"],
+             rec.get("bid"), rec.get("ask")))
+        if rec.get("bid") is not None or rec.get("ask") is not None:
+            latest[rec["symbol"]] = {"bid": rec.get("bid"), "ask": rec.get("ask"),
+                                     "bid_size": rec.get("bid_size"),
+                                     "ask_size": rec.get("ask_size"), "ts": rec["ts"]}
+    for sym, meta in symbols.items():
+        # The reference record's stream quote is newer than any bar when the
+        # desk is live; prefer it, keep its own timestamp.
+        if meta.get("iexBid") is not None or meta.get("iexAsk") is not None:
+            latest[sym] = {"bid": meta.get("iexBid"), "ask": meta.get("iexAsk"),
+                           "bid_size": meta.get("iexBidSize"), "ask_size": meta.get("iexAskSize"),
+                           "ts": meta.get("iexLastTs") or latest.get(sym, {}).get("ts")}
+    _L.record_bars(journal, by_sym)
+    _L.record_quotes(journal, latest)

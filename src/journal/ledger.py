@@ -125,6 +125,37 @@ CREATE TABLE IF NOT EXISTS halts (
     UNIQUE(ts_et, symbol, status)
 );
 
+-- The tape the desk saw, so actuals can run on a real session with no
+-- fixture and so the runner can read an NBBO without a second broker
+-- connection. One row per symbol per bar; repeats are ignored.
+CREATE TABLE IF NOT EXISTS bars (
+    symbol TEXT NOT NULL, ts TEXT NOT NULL,          -- ts is UTC ISO, as the feed gave it
+    open REAL, high REAL, low REAL, close REAL, volume REAL,
+    bid REAL, ask REAL,
+    PRIMARY KEY (symbol, ts)
+);
+
+-- Latest quote per symbol, overwritten on every desk rebuild. This is the
+-- runner's NBBO source at fill time (R4). The gap between a fill and the
+-- quote read is recorded through the two timestamps, never hidden.
+CREATE TABLE IF NOT EXISTS quotes (
+    symbol TEXT PRIMARY KEY,
+    bid REAL, ask REAL, bid_size REAL, ask_size REAL,
+    ts TEXT NOT NULL, recorded_at TEXT NOT NULL
+);
+
+-- Where the exercise is. One row, keyed 'state'. Phase letters follow
+-- docs/preregistration.md §3; the probe verdict follows §5.
+CREATE TABLE IF NOT EXISTS exercise_state (
+    key TEXT PRIMARY KEY CHECK (key = 'state'),
+    phase TEXT NOT NULL DEFAULT 'A',             -- A log-only, B regular, C +premarket, D read-out
+    sessions_done INTEGER NOT NULL DEFAULT 0,
+    probe_verdict TEXT,                          -- held | queued | inconclusive
+    probe_date TEXT,
+    dollar_risk REAL,
+    updated_at TEXT NOT NULL
+);
+
 -- Written later, from the forward tape. Separate table on purpose: a
 -- decision row must never know what happened next.
 CREATE TABLE IF NOT EXISTS actuals (
@@ -371,3 +402,76 @@ def funnel(conn: sqlite3.Connection) -> dict:
         "actuals": q("SELECT COUNT(*) FROM actuals"),
         "halts": q("SELECT COUNT(*) FROM halts"),
     }
+
+
+
+# ----------------------------------------------------------- the tape
+def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
+    """bars_by_symbol: symbol -> iterable of (ts, o, h, l, c, v[, bid, ask])."""
+    n = 0
+    for sym, rows in bars_by_symbol.items():
+        for r in rows:
+            bid, ask = (r[6], r[7]) if len(r) >= 8 else (None, None)
+            cur = conn.execute(
+                "INSERT OR IGNORE INTO bars (symbol, ts, open, high, low, close, volume, bid, ask) "
+                "VALUES (?,?,?,?,?,?,?,?,?)", (sym, r[0], r[1], r[2], r[3], r[4], r[5], bid, ask))
+            n += cur.rowcount
+    return n
+
+
+def record_quotes(conn: sqlite3.Connection, quotes: dict) -> None:
+    """quotes: symbol -> {bid, ask, bid_size, ask_size, ts}. Overwrites."""
+    for sym, q in quotes.items():
+        if q.get("bid") is None and q.get("ask") is None:
+            continue
+        conn.execute(
+            "INSERT OR REPLACE INTO quotes (symbol, bid, ask, bid_size, ask_size, ts, recorded_at) "
+            "VALUES (?,?,?,?,?,?,?)",
+            (sym, q.get("bid"), q.get("ask"), q.get("bid_size"), q.get("ask_size"),
+             q.get("ts") or _now(), _now()))
+
+
+def quote_source(conn: sqlite3.Connection, max_age_s: int = 30):
+    """A `quote(symbol)` callable for the runner, reading the desk's latest.
+
+    Returns None when the quote is older than max_age_s — a stale NBBO
+    recorded as if current is exactly the kind of plausible wrong number
+    this repo exists to prevent. The runner then records the fill with no
+    NBBO, and the report counts it as unverified rather than verified.
+    """
+    def quote(symbol: str):
+        r = conn.execute("SELECT * FROM quotes WHERE symbol=?", (symbol,)).fetchone()
+        if r is None:
+            return None
+        age = (datetime.now(timezone.utc)
+               - datetime.fromisoformat(r["recorded_at"])).total_seconds()
+        if age > max_age_s:
+            return None
+        return {"bid": r["bid"], "ask": r["ask"], "bid_size": r["bid_size"],
+                "ask_size": r["ask_size"], "ts": r["ts"]}
+    return quote
+
+
+# ------------------------------------------------------- exercise state
+def get_state(conn: sqlite3.Connection) -> dict:
+    r = conn.execute("SELECT * FROM exercise_state WHERE key='state'").fetchone()
+    if r is None:
+        conn.execute("INSERT INTO exercise_state (key, updated_at) VALUES ('state', ?)", (_now(),))
+        conn.commit()
+        r = conn.execute("SELECT * FROM exercise_state WHERE key='state'").fetchone()
+    return dict(r)
+
+
+def set_state(conn: sqlite3.Connection, **fields) -> dict:
+    allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk"}
+    bad = set(fields) - allowed
+    if bad:
+        raise ValueError(f"unknown state fields {sorted(bad)}")
+    if "phase" in fields and fields["phase"] not in ("A", "B", "C", "D", "E"):
+        raise ValueError(f"phase {fields['phase']!r} is not one of A-E")
+    get_state(conn)
+    sets = ", ".join(f"{k}=?" for k in fields)
+    conn.execute(f"UPDATE exercise_state SET {sets}, updated_at=? WHERE key='state'",
+                 (*fields.values(), _now()))
+    conn.commit()
+    return get_state(conn)

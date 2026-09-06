@@ -178,3 +178,61 @@ def test_session_of_matches_the_desk_calendar():
     assert L.session_of("2026-09-08T20:00:00Z") == "none"          # 16:00
     assert L.session_of("2026-09-08T10:59:00Z") == "none"          # 06:59
     assert L.session_of("2026-09-06T14:00:00Z") == "none"          # Sunday
+
+
+# --------------------------------------------------- tape, quotes, state
+def test_bars_are_idempotent_and_come_back_in_fixture_shape(conn):
+    from journal import bars as B
+    rows = {"TEST": [("2026-09-08T14:05:00Z", 6.0, 6.1, 5.9, 6.05, 1000, 6.04, 6.06),
+                     ("2026-09-08T14:06:00Z", 6.05, 6.2, 6.0, 6.15, 1200, 6.14, 6.16)]}
+    assert L.record_bars(conn, rows) == 2
+    assert L.record_bars(conn, rows) == 0
+    tape = B.from_ledger(conn)
+    assert list(tape) == ["TEST"] and len(tape["TEST"]) == 2
+    assert tape["TEST"][0][:6] == ("2026-09-08T14:05:00Z", 6.0, 6.1, 5.9, 6.05, 1000)
+
+
+def test_quote_source_returns_the_latest_and_refuses_a_stale_one(conn):
+    L.record_quotes(conn, {"TEST": dict(bid=6.10, ask=6.12, bid_size=300, ask_size=100,
+                                        ts="2026-09-08T14:06:03Z")})
+    q = L.quote_source(conn)("TEST")
+    assert q == {"bid": 6.10, "ask": 6.12, "bid_size": 300, "ask_size": 100,
+                 "ts": "2026-09-08T14:06:03Z"}
+    assert L.quote_source(conn)("NOPE") is None
+    # age it: a stale NBBO recorded as current is the wrong number this repo exists to stop
+    conn.execute("UPDATE quotes SET recorded_at='2026-01-01T14:00:00+00:00'")
+    assert L.quote_source(conn, max_age_s=30)("TEST") is None
+
+
+def test_quotes_with_neither_side_are_not_written(conn):
+    L.record_quotes(conn, {"EMPTY": dict(bid=None, ask=None, ts="x")})
+    assert conn.execute("SELECT COUNT(*) FROM quotes").fetchone()[0] == 0
+
+
+def test_exercise_state_starts_in_phase_a_and_validates_writes(conn):
+    st = L.get_state(conn)
+    assert st["phase"] == "A" and st["sessions_done"] == 0 and st["probe_verdict"] is None
+    st = L.set_state(conn, phase="B", sessions_done=5, probe_verdict="queued",
+                     probe_date="2026-09-08", dollar_risk=20.0)
+    assert st["phase"] == "B" and st["probe_verdict"] == "queued"
+    with pytest.raises(ValueError):
+        L.set_state(conn, phase="Z")
+    with pytest.raises(ValueError):
+        L.set_state(conn, armed=True)
+
+
+def test_the_desk_writes_the_tape_and_quotes_on_every_build():
+    from pathlib import Path as _P
+    from momentum_platform.dashboard.session_builder import build_session
+    root = _P(__file__).resolve().parents[1]
+    c = L.connect(":memory:")
+    build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
+    # 10 symbols x 151 minutes 08:00-10:30. The fixture also carries 7,550
+    # ten-second bars; the desk journals minutes only, and so does the loader.
+    assert c.execute("SELECT COUNT(*) FROM bars").fetchone()[0] == 1510
+    assert c.execute("SELECT COUNT(DISTINCT symbol) FROM quotes").fetchone()[0] == 10
+    q = c.execute("SELECT bid, ask, ts FROM quotes WHERE symbol='ABCD'").fetchone()
+    assert q["bid"] is not None and q["ask"] > q["bid"] and q["ts"].endswith("Z")
+    # a second build adds no bars
+    build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
+    assert c.execute("SELECT COUNT(*) FROM bars").fetchone()[0] == 1510

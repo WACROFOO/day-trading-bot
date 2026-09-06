@@ -152,7 +152,10 @@ def cmd_live(args) -> int:
         print(f"{DIM}LOG_ONLY — no connection opened; decisions are judged and recorded only{END}")
     runner = Runner(conn, mode="TRADE" if args.trade else "LOG_ONLY",
                     dollar_risk=args.risk, trader=trader,
-                    quote=None)          # NBBO source is wired in Phase 3
+                    # NBBO at fill (brief R4) from the desk's latest quote in the
+                    # ledger. None when older than 30s, and the fill is then
+                    # recorded as unverified rather than decorated.
+                    quote=L.quote_source(conn))
     print(f"{DIM}reading {_db(args)} every {args.every}s · hard stop {HARD_STOP:%H:%M} ET · Ctrl-C to stop{END}")
     flattened = False
     try:
