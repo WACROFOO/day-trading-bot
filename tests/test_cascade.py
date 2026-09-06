@@ -233,3 +233,68 @@ def test_pass_is_never_a_verdict():
 ])
 def test_no_killed_name_ever_allows_a_plan(bad):
     assert evaluate(good(**bad)).plan_allowed is False
+
+
+# ------------------------------------- session wiring (Phase 1b regressions)
+def test_session_suppresses_plans_for_killed_names_and_counts_them():
+    """Both bugs this wiring exposed, locked in.
+
+    1. A killed name must publish no plan. IMRN 2026-09-04 failed the price
+       gate and the desk still showed `Entry 1.75 ARMED`.
+    2. Suppressed plans are COUNTED, never silently dropped — a desk showing
+       no plans must be able to say why.
+    """
+    from pathlib import Path
+    from momentum_platform.dashboard.session_builder import build_session
+
+    root = Path(__file__).resolve().parents[1]
+    s = build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl")
+
+    assert s["plans"], "the cascade must not suppress every plan"
+    assert s["suppressedPlans"], "the fixture contains names that should be killed"
+
+    published = {p["symbol"] for p in s["plans"]}
+    for sym in published:
+        assert s["cascade"][sym]["planAllowed"], f"{sym} published a plan while killed"
+    for p in s["suppressedPlans"]:
+        assert not s["cascade"][p["symbol"]]["planAllowed"]
+
+
+def test_cascade_is_evaluated_point_in_time_not_from_end_of_session_metrics():
+    """meta["metrics"] is attached AFTER the bar loop. Reading it at plan-arm
+    time made every name look priceless, fail the price gate closed, and
+    suppressed 100% of plans in the fixture. The cascade must be fed the live
+    snapshot at that bar instead."""
+    from pathlib import Path
+    from momentum_platform.dashboard.session_builder import (
+        build_session, cascade_inputs)
+
+    root = Path(__file__).resolve().parents[1]
+    s = build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl")
+
+    # A symbol record with metrics stripped is what the loop actually sees.
+    sym = next(iter(s["symbols"]))
+    stripped = dict(s["symbols"][sym])
+    stripped.pop("metrics", None)
+    assert cascade_inputs(stripped).last is None
+
+    class _Snap:
+        last, change_from_close_pct, session_high = 6.0, 50.0, 6.2
+        rvol, volume_today = 8.0, 3_000_000
+
+    assert cascade_inputs(stripped, snap=_Snap()).last == 6.0
+
+
+def test_every_symbol_carries_a_server_side_verdict():
+    """The browser must be able to render a decision it did not make."""
+    from pathlib import Path
+    from momentum_platform.dashboard.session_builder import build_session
+
+    root = Path(__file__).resolve().parents[1]
+    s = build_session(root / "fixtures/market_replay/workstation_open_2026-09-01.jsonl")
+
+    assert set(s["cascade"]) == set(s["symbols"])
+    for sym, c in s["cascade"].items():
+        assert c["verdict"] in {v.value for v in Verdict}
+        assert c["verdict"] != "PASS"          # one word, one meaning
+        assert isinstance(c["gates"], list) and c["gates"]

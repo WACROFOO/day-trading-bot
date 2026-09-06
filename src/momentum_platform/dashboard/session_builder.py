@@ -18,6 +18,8 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Optional
 
+from ..cascade import Inputs as CascadeInputs
+from ..cascade import evaluate as evaluate_cascade
 from ..engine import ScannerEngine
 from ..models import Bar, DataStatus, FloatQuality, NewsItem, flame_color
 from ..notify import NotificationRouter, RouterConfig
@@ -264,6 +266,7 @@ def build_session_from_records(
 
     detectors = {sym: FirstPullbackDetector() for sym in symbols}
     plans: list[dict] = []
+    suppressed_plans: list[dict] = []
     bars_by_symbol: dict[str, list] = {sym: [] for sym in symbols}
     frames: list[dict] = []
 
@@ -333,15 +336,31 @@ def build_session_from_records(
             ])
             plan = detectors[rec["symbol"]].on_bar(bar)
             if plan is not None:
-                plans.append({
-                    "planId": plan.plan_id, "symbol": plan.symbol,
-                    "armedAt": int(plan.armed_at_bar.timestamp()),
-                    "triggerHigh": plan.trigger_high, "entry": plan.entry,
-                    "stop": plan.stop, "target": plan.target,
-                    "riskShare": plan.risk_share, "rewardMultiple": plan.reward_multiple,
-                    "pullbackLow": plan.pullback_low, "impulseHigh": plan.impulse_high,
-                    "pullbackCandles": plan.pullback_candles, "volumeOk": plan.volume_ok,
-                })
+                # The state machine still runs on every bar — suppressing the
+                # DETECTOR would lose the structure the moment a name became
+                # tradeable. What is suppressed is the PLAN reaching the
+                # payload: a name the cascade killed gets no entry, no stop and
+                # no target, anywhere. IMRN 2026-09-04 failed the $2-20 price
+                # gate and the desk still published `Entry 1.75 · Stop 1.71`.
+                _st = hot.symbols.get(rec["symbol"])
+                allowed = _plan_allowed(symbols.get(rec["symbol"], {}),
+                                        halt_state.get(rec["symbol"]),
+                                        snap=_st.snapshot if _st else None)
+                if allowed:
+                    plans.append({
+                        "planId": plan.plan_id, "symbol": plan.symbol,
+                        "armedAt": int(plan.armed_at_bar.timestamp()),
+                        "triggerHigh": plan.trigger_high, "entry": plan.entry,
+                        "stop": plan.stop, "target": plan.target,
+                        "riskShare": plan.risk_share, "rewardMultiple": plan.reward_multiple,
+                        "pullbackLow": plan.pullback_low, "impulseHigh": plan.impulse_high,
+                        "pullbackCandles": plan.pullback_candles, "volumeOk": plan.volume_ok,
+                    })
+                else:
+                    suppressed_plans.append({
+                        "planId": plan.plan_id, "symbol": plan.symbol,
+                        "armedAt": int(plan.armed_at_bar.timestamp()),
+                    })
 
         for event, group in captured:
             snap_values = dict(event.values)
@@ -416,6 +435,26 @@ def build_session_from_records(
     trading_date = trading_date or (
         frames[0]["ts"][:10] if frames else datetime.now(UTC).strftime("%Y-%m-%d")
     )
+    # The cascade verdict is computed HERE, server-side, and shipped. The
+    # browser recomputes pillar ARITHMETIC on purpose — so the UI shows the
+    # sums rather than an opaque verdict — but the POLICY (what kills, in what
+    # order, and what fails closed) is not arithmetic a reader can eyeball,
+    # and two implementations of it can disagree. They did: app.js summed four
+    # booleans into a score where FILTERS.md Layer 1 kills.
+    cascade_by_symbol = {}
+    for sym, meta in symbols.items():
+        meta.setdefault("symbol", sym)
+        res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym)))
+        cascade_by_symbol[sym] = {
+            "verdict": res.verdict.value,
+            "killedBy": res.killed_by,
+            "planAllowed": res.plan_allowed,
+            "reasons": res.reasons,
+            "warnings": res.warnings,
+            "gates": [{"id": g.id, "label": g.label, "state": g.state.value,
+                       "value": g.value, "reason": g.reason} for g in res.gates],
+        }
+
     return {
         "sessionId": session_id,
         "generatedFrom": source_name,
@@ -440,7 +479,61 @@ def build_session_from_records(
         "bars10s": sub_bars,
         "frames": frames,
         "plans": plans,
+        # Plans the detector armed but the cascade refused to publish. Counted
+        # rather than dropped: a silent filter is the anti-pattern, and this
+        # number is the first thing to look at if the desk shows no plans.
+        "suppressedPlans": suppressed_plans,
+        "cascade": cascade_by_symbol,
     }
+
+
+def cascade_inputs(meta: dict, halt: Optional[str] = None,
+                   feed_stale: bool = False, snap=None) -> CascadeInputs:
+    """Adapt a session symbol record to the cascade's Inputs.
+
+    Everything the cascade cannot establish is passed as None rather than
+    guessed. That matters most for float: `floatQuality` distinguishes a
+    verified figure from a shares-outstanding UPPER BOUND, and the cascade
+    treats an over-cap bound as MANUAL_CONFIRMATION_REQUIRED — a question for
+    a human, not a pass. On the desk that surfaces as REJECT with a reason,
+    and the operator answers it with the "Float you verified" input that
+    already exists on the card.
+    """
+    # `snap` is the live snapshot at THIS bar. It matters: meta["metrics"] is
+    # attached after the bar loop finishes, so a plan arming mid-session would
+    # otherwise be judged against an empty metrics dict, read no price, and
+    # fail closed on the price gate. Every plan in the replay fixture was
+    # suppressed that way before this argument existed.
+    if snap is not None:
+        m = {"last": snap.last, "changePct": snap.change_from_close_pct,
+             "sessionHigh": snap.session_high, "rvol": snap.rvol,
+             "volumeToday": snap.volume_today}
+    else:
+        m = meta.get("metrics") or {}
+    quality = meta.get("floatQuality", "unknown")
+    return CascadeInputs(
+        symbol=meta.get("symbol", "?"),
+        last=m.get("last"),
+        change_pct=m.get("changePct"),
+        session_high=m.get("sessionHigh"),
+        float_shares=meta.get("floatShares"),
+        float_is_shares_outstanding=(quality == "shares_outstanding_proxy"),
+        float_verified=(quality in ("verified", "you verified")),
+        catalyst_today=bool(meta.get("news")),
+        session_volume=m.get("volumeToday"),
+        rvol=m.get("rvol"),
+        halted=(halt == "halted"),
+        feed_stale=feed_stale,
+    )
+
+
+def _plan_allowed(meta: dict, halt: Optional[str], snap=None) -> bool:
+    """A killed name gets no plan. Halt is NOT a kill — it is a WAIT — so a
+    halted name may still carry a plan for when it reopens; what it must not
+    carry is a plan the cascade rejected the name outright for."""
+    if not meta:
+        return False
+    return evaluate_cascade(cascade_inputs(meta, halt, snap=snap)).plan_allowed
 
 
 class _Collector:
