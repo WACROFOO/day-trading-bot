@@ -61,6 +61,12 @@ data/*.log
 
 # Runtime artifacts
 data/*.db
+# The decision ledger and SQLite's sidecars. Reports derived from it are
+# committed under research/paper-exercise/reports/; the raw ledger is not.
+data/*.sqlite
+data/*.sqlite-journal
+data/*.sqlite-wal
+data/*.sqlite-shm
 
 # scratch / hook side-effects
 research/index-failures.log

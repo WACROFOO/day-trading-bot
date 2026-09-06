@@ -83,7 +83,19 @@ Settled by `scripts/premarket_probe.py` between 07:00 and 09:30 ET.
 | Probe verdict | Phase C shape |
 |---|---|
 | stop held live | brackets as in phase B, `outsideRth=True`, `protected` confirmed by read-back |
-| stop queued to 09:30 | **phase C does not start** until a monitored-exit design is written, reviewed and pre-registered as an amendment here |
+| stop queued to 09:30 | **phase C does not start** until the owner accepts the monitored-exit amendment below by replacing its `PROPOSED` |
+
+**Amendment A1 — monitored exit (PROPOSED, 2026-09-06).** On a `queued`
+verdict a pre-market entry is placed as a limit alone, with no stop leg
+(`PaperTrader.place_entry_monitored`), recorded `protected=0`,
+`stop_status='monitored'`. `Runner.watch_stops` is the stop: on every loop
+it reads the desk's latest quote from the ledger and, the moment
+bid ≤ stop, sells at bid − $0.10, limit, extended hours — the only exit
+that exists pre-market (`.claude/skills/extended-hours/SKILL.md`). It exists
+only while the runner runs. A missing or stale quote is logged and acted on
+by holding; no price is ever guessed. Every such position counts as
+**unprotected** in the report and in the B→C gate. Accepting A1 means
+accepting that exposure by name.
 
 Result: `PROPOSED: not yet run` — replace with the date and the verdict line.
 
