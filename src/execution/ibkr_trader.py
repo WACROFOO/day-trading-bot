@@ -313,11 +313,25 @@ class PaperTrader:
         if self.ib is None:
             raise RuntimeError("not connected")
         self.ib.sleep(0)
-        by_id = {t.order.orderId: t for t in self.ib.trades()}
+        all_trades = list(self.ib.trades())
+        by_id = {t.order.orderId: t for t in all_trades if t.order.orderId}
+        by_perm = {t.order.permId: t for t in all_trades if getattr(t.order, "permId", 0)}
+
+        def find(order_id, perm_id):
+            # orderId is per API session; after a restart IBKR reports earlier
+            # orders as orderId 0 and only the permId survives.
+            t = by_id.get(order_id) if order_id else None
+            if t is None and perm_id:
+                t = by_perm.get(perm_id)
+            return t
+
         for rec in self.placed:
-            trade = by_id.get(rec.parent_id)
+            trade = find(rec.parent_id, rec.perm_id)
             if trade is None:
                 continue
+            if getattr(trade.order, "permId", 0) and not rec.perm_id:
+                rec.perm_id = trade.order.permId
+                rec.events.append(f"permId {rec.perm_id}")
             rec.status = trade.orderStatus.status
             filled = trade.orderStatus.avgFillPrice
             if filled and filled > 0 and rec.fill_price != filled:
@@ -328,6 +342,11 @@ class PaperTrader:
             # its P&L; without reading them the ledger never learns either.
             for leg_id, why in ((rec.stop_id, "stop"), (rec.target_id, "target")):
                 leg = by_id.get(leg_id) if leg_id else None
+                if leg is None and leg_id:
+                    # a child leg from a previous session: same parent permId group
+                    leg = next((t for t in all_trades
+                                if getattr(t.order, "parentId", 0) == rec.parent_id
+                                and t.order.orderType == ("STP" if why == "stop" else "LMT")), None)
                 if (leg is not None and rec.exit_price is None
                         and leg.orderStatus.status == "Filled"
                         and leg.orderStatus.avgFillPrice
@@ -368,7 +387,8 @@ class PaperTrader:
                               trigger=r["trigger"], stop=r["stop"], shares=int(r["shares"]),
                               status=r["status"], fill_price=r["fill_price"],
                               fill_time=r["fill_ts"], protected=bool(r["protected"]),
-                              stop_status=r["stop_status"])
+                              stop_status=r["stop_status"],
+                              perm_id=(r["perm_id"] if "perm_id" in r.keys() else None))
             rec.events.append("adopted from the ledger after a restart")
             self.placed.append(rec)
             n += 1

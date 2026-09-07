@@ -167,6 +167,10 @@ class Runner:
         n = 0
         self.trader.sync()
         by_parent = {p.parent_id: p for p in self.trader.placed}
+        for r in self.conn.execute("SELECT order_id, parent_id FROM orders WHERE perm_id IS NULL").fetchall():
+            p = by_parent.get(r["parent_id"])
+            if p is not None and p.perm_id:
+                L.set_perm_id(self.conn, r["order_id"], p.perm_id)
         rows = self.conn.execute(
             "SELECT order_id, parent_id, decision_id FROM orders WHERE fill_price IS NULL").fetchall()
         for r in rows:

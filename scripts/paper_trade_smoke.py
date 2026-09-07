@@ -134,8 +134,15 @@ def main() -> int:
         print("\n4. Read it back")
         trader.ib.sleep(2)
         trader.sync()
+        ours = {placed.parent_id, placed.stop_id, placed.target_id} - {None}
         for t in trader.ib.trades():
             status = t.orderStatus.status
+            if t.order.orderId not in ours:
+                # An earlier session's order. IBKR reports it with orderId 0;
+                # only the permId identifies it. Shown, labelled, not judged.
+                note(f"leftover from an earlier session: {t.order.orderType} {t.order.action} "
+                     f"{t.order.totalQuantity:g} -> {status} · permId {getattr(t.order, 'permId', 0)}")
+                continue
             line = (f"order {t.order.orderId:>4}  {t.order.orderType:<5} "
                     f"{t.order.action} {t.order.totalQuantity:g} -> {status}")
             # ValidationError is not a healthy state, and on the first smoke

@@ -120,3 +120,35 @@ def test_sync_reads_the_exit_legs(trader):
     trader.sync()
     assert rec.fill_price == 5.02
     assert rec.exit_price == 4.79 and rec.exit_reason == "stop"
+
+
+def test_sync_records_the_permid_and_matches_by_it_when_orderid_is_zero(trader):
+    """IBKR reports an earlier session's orders as orderId 0; only permId
+    survives. A restarted runner's adopted record must still find its order."""
+    from datetime import datetime
+    from zoneinfo import ZoneInfo
+    rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
+    rec = trader.place_bracket(intent(), now=rth)
+    by_id = {t.order.orderId: t for t in trader.ib.placed}
+    by_id[rec.parent_id].order.permId = 987654
+    trader.sync()
+    assert rec.perm_id == 987654
+    # simulate the next session: the broker reports the same order with orderId 0
+    by_id[rec.parent_id].order.orderId = 0
+    by_id[rec.parent_id].orderStatus = _Status("Filled", 5.03)
+    trader.sync()
+    assert rec.fill_price == 5.03
+
+
+def test_ledger_persists_permid_once(tmp_path):
+    from journal import ledger as L
+    from momentum_platform.dashboard.session_builder import build_session
+    c = L.connect(":memory:")
+    build_session(ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
+    did = L.decisions(c, plan_allowed=1)[0]["decision_id"]
+    oid = L.record_order(c, did, symbol="X", account="DU1", session="regular", parent_id=1, stop_id=2,
+                         target_id=None, trigger=5.0, stop=4.8, target=None, shares=10, dollar_risk=2.0,
+                         protected=True)
+    L.set_perm_id(c, oid, 111); L.set_perm_id(c, oid, 222)          # second write is ignored
+    assert c.execute("SELECT perm_id FROM orders WHERE order_id=?", (oid,)).fetchone()[0] == 111
+    assert L.open_orders(c)[0]["perm_id"] == 111

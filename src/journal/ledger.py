@@ -113,6 +113,7 @@ CREATE TABLE IF NOT EXISTS orders (
     nbbo_ts TEXT,                                               -- R4
     exit_reason TEXT, exit_price REAL, exit_ts TEXT,
     exit_confirmed_by TEXT,                                     -- AH exception only
+    perm_id INTEGER,                                            -- IBKR permId, survives restarts
     placed_at TEXT NOT NULL, updated_at TEXT NOT NULL
 );
 
@@ -208,6 +209,7 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
 # does not add them; this does, once, and is a no-op afterwards.
 _ADDED_COLUMNS = {
     "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT")),
+    "orders": (("perm_id", "INTEGER"),),
 }
 
 
@@ -593,3 +595,9 @@ def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:
                  (_now(), order_id))
     conn.execute("UPDATE decisions SET outcome='NOT_FILLED', acted_at=? WHERE decision_id=?",
                  (_now(), row["decision_id"]))
+
+
+
+def set_perm_id(conn: sqlite3.Connection, order_id: int, perm_id: int) -> None:
+    conn.execute("UPDATE orders SET perm_id=?, updated_at=? WHERE order_id=? AND perm_id IS NULL",
+                 (perm_id, _now(), order_id))

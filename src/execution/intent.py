@@ -273,6 +273,11 @@ class PlacedOrder:
     exit_price: Optional[float] = None
     exit_reason: Optional[str] = None            # stop | target
     exit_time: Optional[str] = None
+    # IBKR's permanent id. orderId is per API session: orders from an earlier
+    # connection come back as orderId 0 (seen 2026-09-07 in the smoke test's
+    # read-back), so a restarted runner must be able to find its orders by
+    # permId. None until the broker has reported it.
+    perm_id: Optional[int] = None
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 
