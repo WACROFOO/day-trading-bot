@@ -266,7 +266,8 @@ def after_close(conn, today: str, dry: bool) -> None:
     rep = replay.check(conn)
     (good if not rep["diverged"] else bad)(f"replay: {rep['reproduced']}/{rep['checked']} reproduce")
     path = write_report(conn, today, "IBKR · TWS read-only · live")
-    good(f"report: {path.relative_to(ROOT)}")
+    shown = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
+    good(f"report: {shown}")
     st = L.get_state(conn)
     bars_today = conn.execute("SELECT COUNT(*) FROM bars WHERE substr(ts,1,10)=?",
                               (datetime.now(timezone.utc).date().isoformat(),)).fetchone()[0]
