@@ -494,7 +494,24 @@ def main(argv=None) -> int:
               f"(scanner), market data type {h.get('marketDataType')}, feed {h.get('state')}.")
         print(f"STREAMING — candles, quotes and health reach the page as they happen; the session "
               f"rebuilds every {live.rebuild}s and the scanner union runs every {live.rescan}s.")
-    ThreadingHTTPServer((args.host, args.port), make_handler(source, live, screener)).serve_forever()
+    httpd = ThreadingHTTPServer((args.host, args.port), make_handler(source, live, screener))
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        # Ctrl-C, or the day command's stop signal at the end of a rehearsal or
+        # the hard stop. It used to surface as a KeyboardInterrupt traceback
+        # from inside socketserver (2026-09-07), read by the owner as an error.
+        # It is the intended way down: close the page, disconnect the desk's
+        # read-only clients, say so once.
+        print("\ndesk stopping — disconnecting from IBKR", flush=True)
+    finally:
+        httpd.server_close()
+        stop = getattr(live, "stop", None)
+        if callable(stop):
+            try:
+                stop()
+            except Exception:                        # noqa: BLE001
+                pass
     return 0
 
 
