@@ -73,6 +73,16 @@ def connect(IB, name, host, port, cid):
     return ib
 
 
+def probe_mode(live_port: int, paper_port: int, live_reachable: bool) -> str:
+    """'single' when both point at one session (IBKR_PORT=4002 — the desk and
+    the executor share the paper login and there is one tape by construction);
+    'paper-only' when TWS is logged out and only the paper session answers;
+    'compare' when both sessions are up."""
+    if live_port == paper_port:
+        return "single"
+    return "compare" if live_reachable else "paper-only"
+
+
 def main() -> int:
     print(f"\nData alignment probe   {SYMBOL}   live {LIVE[1]} vs paper {PAPER[1]}")
     note("both connections read-only; nothing order-shaped is sent")
@@ -81,30 +91,44 @@ def main() -> int:
     except ImportError:
         bad("ib_async is not installed"); note("python3 -m pip install ib_async==2.1.0"); return 1
 
-    live = connect(IB, "LIVE ", *LIVE)
+    single = LIVE[1] == PAPER[1]
+    live = None if single else connect(IB, "LIVE ", *LIVE)
     paper = connect(IB, "PAPER", *PAPER)
-    if live is None or paper is None:
-        for ib in (live, paper):
-            if ib: ib.disconnect()
+    if paper is None:
+        if live: live.disconnect()
         return 2
+    mode = probe_mode(LIVE[1], PAPER[1], live is not None)
+    if mode == "single":
+        note("single-login mode: desk and executor share the paper session (IBKR_PORT=4002).")
+        note("Decision tape and fill tape are the same tape by construction; the only")
+        note("question left is whether that tape is real-time.")
+    elif mode == "paper-only":
+        warn("LIVE session not reachable — TWS logged out? Judging the paper session alone.")
     try:
         if not all(a.startswith("DU") for a in paper.managedAccounts()):
             bad("the 'paper' session is not a paper account — stopping"); return 3
 
         stock = Stock(SYMBOL, "SMART", "USD")
-        live.qualifyContracts(stock); paper.qualifyContracts(stock)
-        # Ask for real-time explicitly on both; IBKR downgrades to delayed
-        # (type 3) by itself when the account is not entitled, and the type
-        # it actually serves is the first thing worth knowing.
-        live.reqMarketDataType(1); paper.reqMarketDataType(1)
-        tl = live.reqMktData(stock, "", False, False)
+        paper.qualifyContracts(stock)
+        # Ask for real-time explicitly; IBKR downgrades to delayed (type 3) by
+        # itself when the account is not entitled, and the type it actually
+        # serves is the first thing worth knowing.
+        paper.reqMarketDataType(1)
         tp = paper.reqMktData(stock, "", False, False)
+        if live is not None:
+            live.qualifyContracts(stock); live.reqMarketDataType(1)
+            tl = live.reqMktData(stock, "", False, False)
+        else:
+            class _Empty:                         # a live side that says nothing
+                last = bid = ask = None; time = None; marketDataType = None
+            tl = _Empty()
 
         print(f"\nSampling {SAMPLE_S}s")
         print(f"  {'t':>3}  {'LIVE last':>10} {'bid':>8} {'ask':>8} {'ts':>9}   {'PAPER last':>10} {'bid':>8} {'ask':>8} {'ts':>9}")
         rows = []
         for i in range(SAMPLE_S // 2):
-            live.sleep(1); paper.sleep(1)
+            paper.sleep(2 if live is None else 1)
+            if live is not None: live.sleep(1)
             def f(x): return "—" if x is None or x != x or x < 0 else f"{x:.2f}"
             def ts(t): return t.time.astimezone(ET).strftime("%H:%M:%S") if getattr(t, "time", None) else "—"
             rows.append((tl.last, tl.bid, tl.ask, tp.last, tp.bid, tp.ask, getattr(tl, "time", None), getattr(tp, "time", None)))
@@ -118,7 +142,7 @@ def main() -> int:
         competing = any(code == 10197 for code, _ in ERRORS["PAPER"])
 
         print("\nVERDICT")
-        if not live_ok:
+        if live is not None and not live_ok:
             warn("LIVE session shows no prints — market closed, or no subscription on the live account")
             verdict = "none"
         if competing:
@@ -149,7 +173,9 @@ def main() -> int:
             verdict = "delayed"
         else:
             med = sorted(lags)[len(lags) // 2] if lags else None
-            good(f"PAPER session is on real-time data (type {mtype_p}); median stamp gap {med if med is not None else '—'}s")
+            good(f"PAPER session is on real-time data (type {mtype_p})"
+                 + (f"; median stamp gap vs live {med}s" if med is not None else
+                    " — the only session, so nothing to lag against"))
             note("Decision tape and fill tape are the same tape. Slippage is measurable.")
             verdict = "realtime"
         print(f"VERDICT: {verdict}")

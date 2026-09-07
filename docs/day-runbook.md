@@ -31,6 +31,23 @@ a trading day decide the design:
    `IBKR_PORT=4002 python3 scripts/day.py`. One login, one tape, no competition.
    The desk connection stays read-only; only the executor's connection may write.
 
+**Recommended Tuesday sequence (single login):**
+
+1. Once, in Client Portal › Settings › Account Settings › Paper Trading
+   Account: share real-time market data subscriptions with the paper
+   account. Log the Gateway out and back in afterwards.
+2. Leave TWS **logged out**. Log the **Gateway** in on the paper account.
+3. Prove the paper session has the tape (any time after 07:00 ET):
+   `IBKR_PORT=4002 python3 scripts/ibkr_preflight.py` — wants
+   `market data type 1` and five-second bars arriving.
+4. `IBKR_PORT=4002 python3 scripts/day.py` at 12:55 France. The alignment
+   probe runs in single-login mode and reports whether the one tape is
+   real-time; the stop probe runs at 07:00 ET as before.
+
+If step 3 shows no data even with TWS out, the sharing setting has not
+taken effect yet. Run the day the original way (both logins) — log-only
+needs no paper prices — and retry step 3 the next morning.
+
 ## Before 06:55 ET (12:55 France)
 
 1. Log in to **TWS** (live, read-only data, port 7496).
