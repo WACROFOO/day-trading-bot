@@ -584,8 +584,10 @@ def test_ui_verdict_mirrors_pine_and_decides(page):
     page.locator("[data-card=scan-pillars] .trow").first.click()
     page.wait_for_timeout(250)
     labels = page.eval_on_selector_all(".vlab", "els => els.map(e => e.textContent)")
+    # "Technical score" is gone: it was the browser's own sum of four booleans,
+    # the exact thing the server's cascade replaced. The rest are values.
     assert labels == ["Price", "Gain vs close", "RVOL · daily", "Float / supply", "News",
-                      "Technical score", "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
+                      "5m RVOL", "HOD / Running", "Entry", "Stop", "Target"]
     # The banner is the SERVER's word for the clicked symbol, from the
     # six-state vocabulary. This test used to accept {"GO", "WAIT", "PASS"} —
     # the browser's own matrix — and "PASS" as a verdict is the defect the

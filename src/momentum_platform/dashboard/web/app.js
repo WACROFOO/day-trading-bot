@@ -725,9 +725,9 @@ function reasonsDrawer(r, sym, listId) {
 }
 
 const SESSION_HELP = {
-  PM: "PM — premarket, 04:00–09:30 ET. Thin tape, wide spreads; a move here is a gap forming.",
-  RTH: "RTH — regular trading hours, 09:30–16:00 ET. The session the course strategy is built for.",
-  AH: "AH — after hours, 16:00–20:00 ET. Thin tape; news reactions and unwinds.",
+  PM: "PM — 04:00–09:30 ET",
+  RTH: "RTH — 09:30–16:00 ET",
+  AH: "AH — 16:00–20:00 ET",
 };
 function pctHeader() {
   return sessionOf(new Date(deskNow()).toISOString()) === "PM" ? "PM %" : "Day %";
@@ -952,7 +952,7 @@ function renderPillarsBoard(frame) {
       "× · float <" + (T.floatMaxShares / 1e6) + "M · news";
     note.title = "Confirmed course pillars. The desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
       (T.deskBandEvidence === "operator_override" ? " (your band)" : "") +
-      ", so a name outside the pillar is still shown with its price cell FAIL. Float and news are columns, never gates.";
+      ", so a name outside the pillar is still shown with its price cell FAIL.";
   }
   const rows = Object.keys(SYMS).map(sym => {
     const { row, meta } = boardRow(frame, sym);
@@ -1444,7 +1444,6 @@ function renderVerdict(frame, ctx) {
        (fl.quality === "you verified" ? " (yours)" : soBound ? " SO" : "") : "unknown",
        floatStatus, floatStatus === "UNKNOWN" ? "warn" : undefined);
   line("News", newsOk ? "Observed" : "Manual check", newsOk);
-  line("Technical score", technical + "/4", technical === 4);
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
   line("HOD / Running", hodActive ? "HOD" : runActive ? "Running Up" : "None",
        hodActive || runActive ? "ACTIVE" : "WAIT", hodActive || runActive ? "ok" : "warn");
@@ -1453,7 +1452,7 @@ function renderVerdict(frame, ctx) {
        plan ? "ARMED" : sup ? "KILLED" : "—", plan ? "ok" : sup ? "no" : "muted-st");
   line("Stop", plan ? fx(plan.stop) : "N/A", "pullback low", "muted-st");
   line("Target", plan ? fx(plan.target) : "N/A", plan ? plan.rewardMultiple.toFixed(1) + "R" : "—", "muted-st");
-  host.appendChild(el("div", "divider", "pine dashboard mirror"));
+  host.appendChild(el("div", "divider", "gates · plan"));
   host.appendChild(table);
 
   renderSizing(plan, row);
