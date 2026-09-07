@@ -46,6 +46,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from execution.intent import ET, HARD_STOP  # noqa: E402
 from execution.policy import premarket_allowed  # noqa: E402,F401
 from journal import actuals, bars, controls, ledger as L, replay  # noqa: E402
+from momentum_platform.holidays import why_closed  # noqa: E402
 from momentum_platform.sessions import REGULAR_START  # noqa: E402
 
 PREMARKET_OPEN = datetime.strptime("06:55", "%H:%M").time()
@@ -189,6 +190,18 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
 
 
 # ------------------------------------------------------- orchestration
+def write_float_overrides(rows: list[dict], today: str) -> int:
+    """Hand the scan's finviz floats to the desk. Layer 0 and Layer 1 then
+    agree on the one number that kills most names."""
+    floats = {r["sym"].upper(): float(r["float"]) for r in rows
+              if r.get("sym") and r.get("float") and r["float"] > 0}
+    path = ROOT / "data" / "float_overrides.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps({"date": today, "source": "finviz via premarket_stars.py",
+                                "floats": floats}, indent=1))
+    return len(floats)
+
+
 def gap_scan(dry: bool) -> list[dict]:
     if dry:
         return []
@@ -302,8 +315,11 @@ def main(argv=None) -> int:
     risk = args.risk or st.get("dollar_risk") or 20.0
     mode = mode_for(st)
     say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk · {DB}")
-    if now.weekday() >= 5:
-        warn("weekend — nothing to do"); return 0
+    closed = why_closed(now.date())
+    if closed:
+        warn(f"{closed} — the market is closed; nothing to do")
+        note("2026-09-07 taught this: the chain ran all morning on Labor Day, feed STALE, nothing said why.")
+        return 0
     if now.time() >= HARD_STOP:
         after_close(conn, today, args.dry_run); return 0
     if now.time() < PREMARKET_OPEN:
@@ -317,6 +333,9 @@ def main(argv=None) -> int:
         symbols, rejects = pick_watchlist(rows)
     for sym, why in rejects:
         note(f"✗ {sym:<6} {why}")
+    if rows and not args.dry_run:
+        n = write_float_overrides(rows, today)
+        note(f"{n} finviz float(s) handed to the desk (data/float_overrides.json)")
     if symbols:
         good(f"{len(symbols)} names: {' '.join(symbols)}")
     else:

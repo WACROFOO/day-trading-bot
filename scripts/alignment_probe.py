@@ -40,12 +40,22 @@ SYMBOL = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get("ALIGN_SYMBOL", "
 LIVE = ("127.0.0.1", int(os.environ.get("IBKR_PORT", "7496")), 33)
 PAPER = ("127.0.0.1", int(os.environ.get("IBKR_PAPER_PORT", "4002")), 34)
 SAMPLE_S = 20
+from zoneinfo import ZoneInfo  # noqa: E402
+ET = ZoneInfo("America/New_York")
 
 OK, BAD, WARN, DIM, END = "\033[92m", "\033[91m", "\033[93m", "\033[2m", "\033[0m"
 def good(m): print(f"  {OK}ok{END}   {m}")
 def bad(m): print(f"  {BAD}xx{END}   {m}")
 def warn(m): print(f"  {WARN}!!{END}   {m}")
 def note(m): print(f"       {DIM}{m}{END}")
+
+
+def mask(acct: str) -> str:
+    """U27412209 -> U****2209. Outputs get pasted into chats; the id need not."""
+    return acct[:1] + "****" + acct[-4:] if len(acct) > 5 else acct
+
+
+ERRORS: dict[str, list[tuple[int, str]]] = {"LIVE ": [], "PAPER": []}
 
 
 def connect(IB, name, host, port, cid):
@@ -55,7 +65,11 @@ def connect(IB, name, host, port, cid):
     except Exception as exc:                        # noqa: BLE001
         bad(f"{name}: cannot reach {host}:{port} — {exc}")
         return None
-    good(f"{name}: connected {host}:{port} client {cid} read-only · accounts {list(ib.managedAccounts())}")
+    # Every API error is kept, by session. Error 10197 on the paper side is a
+    # verdict of its own (see main), and it arrives as an event, not a value.
+    ib.errorEvent += lambda reqId, code, msg, contract=None, *a: ERRORS[name].append((code, msg))
+    good(f"{name}: connected {host}:{port} client {cid} read-only · "
+         f"accounts {[mask(a) for a in ib.managedAccounts()]}")
     return ib
 
 
@@ -92,7 +106,7 @@ def main() -> int:
         for i in range(SAMPLE_S // 2):
             live.sleep(1); paper.sleep(1)
             def f(x): return "—" if x is None or x != x or x < 0 else f"{x:.2f}"
-            def ts(t): return t.time.astimezone().strftime("%H:%M:%S") if getattr(t, "time", None) else "—"
+            def ts(t): return t.time.astimezone(ET).strftime("%H:%M:%S") if getattr(t, "time", None) else "—"
             rows.append((tl.last, tl.bid, tl.ask, tp.last, tp.bid, tp.ask, getattr(tl, "time", None), getattr(tp, "time", None)))
             print(f"  {2*i+2:>3}  {f(tl.last):>10} {f(tl.bid):>8} {f(tl.ask):>8} {ts(tl):>9}   {f(tp.last):>10} {f(tp.bid):>8} {f(tp.ask):>8} {ts(tp):>9}")
 
@@ -101,11 +115,28 @@ def main() -> int:
         lags = [(a - b).total_seconds() for *_, a, b in rows if a and b]
         mtype_p = getattr(tp, "marketDataType", None)
 
+        competing = any(code == 10197 for code, _ in ERRORS["PAPER"])
+
         print("\nVERDICT")
         if not live_ok:
             warn("LIVE session shows no prints — market closed, or no subscription on the live account")
             verdict = "none"
-        if not paper_ok:
+        if competing:
+            # IBKR error 10197, seen on the first live run (2026-09-07): the
+            # paper session is refused market data BECAUSE the live TWS
+            # session is logged in and holds the same subscriptions. This is
+            # not the holiday, not the Client Portal setting, and not fixable
+            # from this side while both are logged in.
+            bad("PAPER session refused market data: IBKR 10197 'No market data during "
+                "competing live session'")
+            note("Your live TWS login holds the subscriptions; the paper session cannot")
+            note("share them while TWS is logged in. Two ways to test on a trading day:")
+            note("  a) log OUT of TWS, keep the Gateway (paper) up, re-run this probe;")
+            note("  b) run the whole desk off the paper Gateway for a day:")
+            note("     IBKR_PORT=4002 python3 scripts/day.py   (with TWS logged out)")
+            note("If (a) reads realtime, the exercise should run as (b): one login, one tape.")
+            verdict = "competing"
+        elif not paper_ok:
             bad("PAPER session shows NO market data")
             note("IBKR simulates paper fills against the data the paper account can see.")
             note("With none, fills are against something you cannot see or check.")

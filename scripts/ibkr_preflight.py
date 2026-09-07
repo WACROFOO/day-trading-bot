@@ -69,8 +69,19 @@ def main() -> int:
         ib.cancelRealTimeBars(bars)
         ib.cancelMktData(c)
         if n == 0:
-            print("no real-time bars arrived. Outside 04:00-20:00 ET this is expected; during the "
-                  "session it means the real-time bar entitlement is missing.")
+            try:
+                sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+                from momentum_platform.holidays import why_closed
+                from zoneinfo import ZoneInfo
+                from datetime import datetime as _dt
+                closed = why_closed(_dt.now(ZoneInfo("America/New_York")).date())
+            except Exception:                                   # noqa: BLE001
+                closed = None
+            if closed:
+                print(f"no real-time bars arrived — expected: {closed}, the market is closed.")
+            else:
+                print("no real-time bars arrived. Outside 04:00-20:00 ET this is expected; during the "
+                      "session it means the real-time bar entitlement is missing.")
             return 4
         sub = ScannerSubscription(instrument="STK", locationCode="STK.NASDAQ.SCM",
                                   scanCode="TOP_PERC_GAIN", abovePrice=1, belowPrice=20, numberOfRows=10)

@@ -10,6 +10,27 @@ paper fills against delayed prices while decisions are made on live ones;
 the morning command measures this and blocks real orders until it reads
 `realtime`.
 
+## Is the market open?
+
+The command checks the NYSE calendar (`src/momentum_platform/holidays.py`)
+and refuses to start on a weekend or holiday, naming which. 7 September
+2026 was Labor Day; the chain ran all morning on a stale feed before this
+check existed.
+
+## The competing-session question (read before Tuesday)
+
+On 7 September the paper session was refused market data with IBKR error
+10197, *"No market data during competing live session"*: the live TWS login
+holds the subscriptions and the paper Gateway cannot share them while TWS is
+logged in. The alignment probe now reports this as `competing`. Two tests on
+a trading day decide the design:
+
+1. Log **out** of TWS, keep the Gateway up, run `python3 scripts/alignment_probe.py`.
+   If it reads `realtime`, the paper account can see prices when it is the only login.
+2. Run the whole desk off the paper Gateway for a day, TWS logged out:
+   `IBKR_PORT=4002 python3 scripts/day.py`. One login, one tape, no competition.
+   The desk connection stays read-only; only the executor's connection may write.
+
 ## Before 06:55 ET (12:55 France)
 
 1. Log in to **TWS** (live, read-only data, port 7496).
@@ -28,7 +49,7 @@ What it does, in Ross's order (`scripts/day.py`):
 
 | step | what | where the rule lives |
 |---|---|---|
-| 1 | gap scan → watchlist: STAR then WATCH, rejects named | `scripts/premarket_stars.py` |
+| 1 | gap scan → watchlist: STAR then WATCH, rejects named; its finviz floats are handed to the desk so Layer 0 and Layer 1 agree on float | `scripts/premarket_stars.py` → the daily float file under `data/` |
 | 2 | two probes, once per day: is the paper account on the live tape (`scripts/alignment_probe.py`); does a pre-market stop hold (`scripts/premarket_probe.py`). Both verdicts recorded | `exercise_state` |
 | 3 | desk starts on the watchlist, journaling every rebuild | `JOURNAL_DB` → `src/journal/ledger.py` |
 | 4 | runner starts in the phase's mode (A = log only) | `docs/preregistration.md` §3 |

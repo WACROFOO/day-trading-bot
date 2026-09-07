@@ -67,6 +67,8 @@ data/*.sqlite
 data/*.sqlite-journal
 data/*.sqlite-wal
 data/*.sqlite-shm
+# The morning's finviz floats, handed from the gap scan to the desk. Daily, regenerated.
+data/float_overrides.json
 
 # scratch / hook side-effects
 research/index-failures.log

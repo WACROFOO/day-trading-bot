@@ -489,6 +489,14 @@ def build_session_from_records(
         # on a real session with no fixture; quotes are the runner's NBBO at
         # fill time. Neither is a decision, so neither touches `decisions`.
         _journal_tape(journal, bar_records, symbols)
+    if journal is not None:
+        # COMMIT. The runner is a separate process reading this file; without
+        # this, every write above stayed inside the desk's own connection and
+        # the runner saw an empty ledger. The fixture tests never noticed
+        # because they read through the same connection. Found by driving the
+        # live desk with the fake broker and opening a second connection —
+        # which is exactly what the runner does.
+        journal.commit()
 
     return {
         "sessionId": session_id,
@@ -606,9 +614,13 @@ class _Collector:
 def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
                       session_id, source_name, data_status) -> None:
     from journal import ledger as _L
+    # Live minute bars carry no bid/ask; the fixture's do. The desk's stream
+    # quote on the reference record is the point-in-time quote that exists on
+    # both paths, so it is the source, with the bar's own as the fallback.
     snapshot = {
         "last": getattr(snap, "last", None) if snap else rec.get("close"),
-        "bid": rec.get("bid"), "ask": rec.get("ask"),
+        "bid": meta.get("iexBid") if meta.get("iexBid") is not None else rec.get("bid"),
+        "ask": meta.get("iexAsk") if meta.get("iexAsk") is not None else rec.get("ask"),
         "session_high": getattr(snap, "session_high", None) if snap else None,
         "volume": getattr(snap, "volume_today", None) if snap else None,
         "rvol": getattr(snap, "rvol", None) if snap else None,
@@ -622,11 +634,13 @@ def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
         bar_resolution=getattr(bar, "timeframe", "1m"),
         float_quality=meta.get("floatQuality"), float_source=meta.get("floatSource"),
     )
+    journal.commit()      # a decision is visible to the runner the moment it exists
 
 
 def _journal_halt(journal, rec, last_before) -> None:
     from journal import ledger as _L
     _L.record_halt(journal, rec["ts"], rec["symbol"], rec["status"], last_before)
+    journal.commit()
 
 
 def _journal_board(journal, ts, session_id, symbols, cascade_by_symbol) -> None:

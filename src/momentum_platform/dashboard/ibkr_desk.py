@@ -363,6 +363,17 @@ class IbkrDesk:
         if profile:
             self._reference[sym]["volume_profile"] = profile
             self._reference[sym]["volume_profile_days"] = self.profile_days
+        # Layer 0 already knows the float: the morning gap scan reads it from
+        # finviz, which is where FILTERS.md says float comes from. Without this
+        # the desk falls back to SEC shares outstanding — an UPPER BOUND — and
+        # the cascade kills every name whose bound is over 20M even when the
+        # scan saw a 6M float. 2026-09-07: the only survivor, WETO, was armed
+        # with "shares_outstanding_proxy 22.0M". Same morning, two answers.
+        ov = _float_override(sym, day)
+        if ov:
+            self._reference[sym]["float_shares"] = ov["float"]
+            self._reference[sym]["float_quality"] = "verified"
+            self._reference[sym]["float_source"] = ov["source"]
         self._reference_day[sym] = day
 
     def session_day(self) -> str:
@@ -750,3 +761,30 @@ def _journal():
         from journal import ledger
         _JOURNAL = ledger.connect(path)
     return _JOURNAL
+
+
+
+# ------------------------------------------------------------ float overrides
+def _float_override(sym: str, day: str) -> Optional[dict]:
+    """Today's gap-scan float for `sym`, or None.
+
+    the daily float file under `data/` is written by scripts/day.py from the
+    pre-market gap scan: {"date": "YYYY-MM-DD", "source": "...",
+    "floats": {"SYM": shares}}. A file from another day is ignored — a float
+    is a point-in-time fact and yesterday's is not evidence about today.
+    """
+    import json
+    path = os.environ.get("FLOAT_OVERRIDES") or os.path.join(
+        os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
+        "data", "float_overrides.json")
+    try:
+        with open(path) as fh:
+            doc = json.load(fh)
+    except (OSError, ValueError):
+        return None
+    if doc.get("date") != day:
+        return None
+    val = (doc.get("floats") or {}).get(sym.upper())
+    if not val or val <= 0:
+        return None
+    return {"float": float(val), "source": doc.get("source") or "gap scan"}
