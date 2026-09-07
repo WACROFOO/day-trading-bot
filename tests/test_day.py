@@ -124,3 +124,20 @@ def test_advance_refuses_when_blocked(tmp_path):
     st = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "state"],
                         cwd=ROOT, capture_output=True, text=True)
     assert "phase          A" in st.stdout
+
+
+def test_a_day_with_no_bars_is_not_counted_as_a_session(tmp_path, monkeypatch):
+    """2026-09-07, Labor Day: the whole chain ran and the feed was rightly
+    STALE all morning. That must not count toward the five log-only sessions."""
+    monkeypatch.setattr(day, "REPORTS", tmp_path)
+    c = L.connect(":memory:")                     # no bars at all
+    monkeypatch.setattr(day, "DB", tmp_path / "j.sqlite")
+    before = L.get_state(c)["sessions_done"]
+    day.after_close(c, "2026-09-07", dry=False)
+    assert L.get_state(c)["sessions_done"] == before
+
+
+def test_the_stop_probe_is_deferred_not_skipped_when_the_day_starts_at_0655():
+    src = (ROOT / "scripts/day.py").read_text()
+    assert "deferred to 07:00" in src
+    assert "PREMARKET_START <= t < REGULAR_START" in src

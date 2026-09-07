@@ -37,7 +37,7 @@ import signal
 import subprocess
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -268,7 +268,15 @@ def after_close(conn, today: str, dry: bool) -> None:
     path = write_report(conn, today, "IBKR · TWS read-only · live")
     good(f"report: {path.relative_to(ROOT)}")
     st = L.get_state(conn)
-    L.set_state(conn, sessions_done=st["sessions_done"] + 1)
+    bars_today = conn.execute("SELECT COUNT(*) FROM bars WHERE substr(ts,1,10)=?",
+                              (datetime.now(timezone.utc).date().isoformat(),)).fetchone()[0]
+    if bars_today == 0:
+        # A holiday or a dead feed. Counting it toward the five log-only
+        # sessions would let the exercise leave phase A on days that taught
+        # it nothing. 2026-09-07 (Labor Day) was the first such day.
+        warn("no bars recorded today — market closed or feed dead; NOT counted as a session")
+    else:
+        L.set_state(conn, sessions_done=st["sessions_done"] + 1)
     nxt, blockers = gates_for_advance(conn, L.get_state(conn))
     if nxt:
         if blockers:
@@ -315,10 +323,13 @@ def main(argv=None) -> int:
 
     say(f"\n{BOLD}2. Probes{END}  (once per day)")
     run_alignment_once(conn, today, args.dry_run)
-    if now.time() < REGULAR_START:
-        run_probe_once(conn, today, args.dry_run)
-    else:
+    # The stop probe needs 07:00-09:30 and this command starts at 06:55, so it
+    # is deferred to the main loop below rather than run here and refused.
+    # The first Monday run did exactly that: exit 6 at 06:55, no verdict.
+    if now.time() >= REGULAR_START:
         note("past 09:30 — the stop probe only runs pre-market")
+    else:
+        note("stop probe: deferred to 07:00")
     ok, why = premarket_allowed(L.get_state(conn))
     (good if ok else note)(f"pre-market entries: {'ON' if ok else 'off'} — {why}")
 
@@ -336,7 +347,12 @@ def main(argv=None) -> int:
     signal.signal(signal.SIGINT, stop); signal.signal(signal.SIGTERM, stop)
 
     say(f"{DIM}running until {HARD_STOP:%H:%M} ET; Ctrl-C stops both{END}")
+    from execution.intent import PREMARKET_START
     while datetime.now(ET).time() < HARD_STOP:
+        t = datetime.now(ET).time()
+        if PREMARKET_START <= t < REGULAR_START and L.get_state(conn).get("probe_date") != today:
+            say(f"\n{BOLD}Pre-market stop probe{END}  ({t:%H:%M} ET)")
+            run_probe_once(conn, today, False)
         for name, p in (("desk", desk), ("runner", runner)):
             if p and p.poll() is not None:
                 bad(f"{name} exited with {p.returncode} — stopping the day")
