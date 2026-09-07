@@ -140,8 +140,22 @@ def main() -> int:
         mtype_p = getattr(tp, "marketDataType", None)
 
         competing = any(code == 10197 for code, _ in ERRORS["PAPER"])
+        try:
+            from momentum_platform.holidays import why_closed
+            closed = why_closed(datetime.now(timezone.utc).astimezone(ET).date())
+        except Exception:                            # noqa: BLE001
+            closed = None
 
         print("\nVERDICT")
+        if closed and not competing and not paper_ok:
+            # No prints can exist on a closed market. The two facts that CAN be
+            # read today — the entitlement type and the absence of 10197 — are
+            # reported, and the realtime/delayed/none verdict waits for an
+            # open market rather than being written as 'none' (2026-09-07).
+            good(f"paper session entitlement: market data type {mtype_p} · no competing-session error")
+            warn(f"{closed} — no prints to judge; verdict deferred to the next open market")
+            print("VERDICT: deferred")
+            return 0
         if live is not None and not live_ok:
             warn("LIVE session shows no prints — market closed, or no subscription on the live account")
             verdict = "none"

@@ -141,3 +141,42 @@ def test_the_stop_probe_is_deferred_not_skipped_when_the_day_starts_at_0655():
     src = (ROOT / "scripts/day.py").read_text()
     assert "deferred to 07:00" in src
     assert "PREMARKET_START <= t < REGULAR_START" in src
+
+
+def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(tmp_path, monkeypatch):
+    """The desk had never connected through the Gateway before Tuesday. A
+    rehearsal exercises desk -> ledger -> runner on a shut market, log-only,
+    for a bounded time, and counts nothing."""
+    import day as d
+    from datetime import datetime, timedelta
+    from zoneinfo import ZoneInfo
+    frozen = datetime(2026, 9, 7, 9, 0, tzinfo=ZoneInfo("America/New_York"))   # Labor Day
+
+    class FrozenDT(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return frozen if tz else frozen.replace(tzinfo=None)
+    monkeypatch.setattr(d, "datetime", FrozenDT)
+    monkeypatch.setattr(d, "DB", tmp_path / "j.sqlite")
+    monkeypatch.setattr(d.time, "sleep", lambda s: None)
+    started = []
+
+    class P:
+        returncode = 0
+        def poll(self): return None
+        def send_signal(self, *_): pass
+        def wait(self, timeout=None): pass
+    monkeypatch.setattr(d, "start_desk", lambda syms, dry: started.append(("desk", syms)) or P())
+    monkeypatch.setattr(d, "start_runner", lambda mode, risk, dry: started.append(("runner", mode)) or P())
+    # the loop must terminate: make the deadline already past on the second look
+    calls = {"n": 0}
+    real_now = FrozenDT.now
+    def ticking(tz=None):
+        calls["n"] += 1
+        return real_now(tz) + timedelta(minutes=calls["n"] * 5)
+    monkeypatch.setattr(FrozenDT, "now", classmethod(lambda cls, tz=None: ticking(tz)))
+    rc = d.main(["--rehearsal", "1", "--symbols", "AAPL"])
+    assert rc == 0
+    assert ("desk", ["AAPL"]) in started
+    assert ("runner", "LOG_ONLY") in started
+    assert L.get_state(L.connect(tmp_path / "j.sqlite"))["sessions_done"] == 0

@@ -306,6 +306,9 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--risk", type=float, default=None, help="overrides exercise_state.dollar_risk")
     ap.add_argument("--symbols", help="skip the gap scan; comma-separated watchlist")
+    ap.add_argument("--rehearsal", type=int, metavar="MINUTES", default=0,
+                    help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
+                         "for this many minutes, then stop. Not counted as a session; no probes.")
     args = ap.parse_args(argv)
 
     now = datetime.now(ET)
@@ -316,16 +319,23 @@ def main(argv=None) -> int:
     mode = mode_for(st)
     say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk · {DB}")
     closed = why_closed(now.date())
-    if closed:
+    if args.rehearsal:
+        # The only way to exercise the desk → ledger → runner chain against
+        # the real Gateway on a day the market is shut. Everything will read
+        # STALE, nothing will arm, nothing is sent, nothing is counted.
+        mode = "LOG_ONLY"
+        warn(f"REHEARSAL for {args.rehearsal} min — {closed or 'market open'} · forced LOG_ONLY · not a session")
+    elif closed:
         warn(f"{closed} — the market is closed; nothing to do")
         note("2026-09-07 taught this: the chain ran all morning on Labor Day, feed STALE, nothing said why.")
         return 0
-    if now.time() >= HARD_STOP:
+    if not args.rehearsal and now.time() >= HARD_STOP:
         after_close(conn, today, args.dry_run); return 0
-    if now.time() < PREMARKET_OPEN:
+    if not args.rehearsal and now.time() < PREMARKET_OPEN:
         warn(f"before {PREMARKET_OPEN:%H:%M} ET — start TWS and the Gateway, come back at 06:55"); return 0
 
     say(f"\n{BOLD}1. Watchlist{END}  (gap scan — STAR then WATCH; rejects named)")
+    rows: list[dict] = []          # the gap scan's rows; empty when --symbols bypasses it
     if args.symbols:
         symbols, rejects = [s.strip().upper() for s in args.symbols.split(",") if s.strip()], []
     else:
@@ -342,11 +352,16 @@ def main(argv=None) -> int:
         warn("gap scan returned nothing — the desk's own scanner picks (start.sh --ibkr behaviour)")
 
     say(f"\n{BOLD}2. Probes{END}  (once per day)")
-    run_alignment_once(conn, today, args.dry_run)
+    if args.rehearsal:
+        note("skipped in a rehearsal")
+    else:
+        run_alignment_once(conn, today, args.dry_run)
     # The stop probe needs 07:00-09:30 and this command starts at 06:55, so it
     # is deferred to the main loop below rather than run here and refused.
     # The first Monday run did exactly that: exit 6 at 06:55, no verdict.
-    if now.time() >= REGULAR_START:
+    if args.rehearsal:
+        pass
+    elif now.time() >= REGULAR_START:
         note("past 09:30 — the stop probe only runs pre-market")
     else:
         note("stop probe: deferred to 07:00")
@@ -366,11 +381,14 @@ def main(argv=None) -> int:
                 p.send_signal(signal.SIGINT)
     signal.signal(signal.SIGINT, stop); signal.signal(signal.SIGTERM, stop)
 
-    say(f"{DIM}running until {HARD_STOP:%H:%M} ET; Ctrl-C stops both{END}")
+    deadline = (datetime.now(ET) + timedelta(minutes=args.rehearsal)) if args.rehearsal else None
+    say(f"{DIM}running until {deadline:%H:%M} ET (rehearsal); Ctrl-C stops both{END}" if deadline
+        else f"{DIM}running until {HARD_STOP:%H:%M} ET; Ctrl-C stops both{END}")
     from execution.intent import PREMARKET_START
-    while datetime.now(ET).time() < HARD_STOP:
+    while (datetime.now(ET) < deadline) if deadline else (datetime.now(ET).time() < HARD_STOP):
         t = datetime.now(ET).time()
-        if PREMARKET_START <= t < REGULAR_START and L.get_state(conn).get("probe_date") != today:
+        if (not args.rehearsal and PREMARKET_START <= t < REGULAR_START
+                and L.get_state(conn).get("probe_date") != today):
             say(f"\n{BOLD}Pre-market stop probe{END}  ({t:%H:%M} ET)")
             run_probe_once(conn, today, False)
         for name, p in (("desk", desk), ("runner", runner)):
@@ -378,6 +396,19 @@ def main(argv=None) -> int:
                 bad(f"{name} exited with {p.returncode} — stopping the day")
                 stop(); return 1
         time.sleep(15)
+    if args.rehearsal:
+        stop()
+        for p in (runner, desk):
+            if p:
+                try: p.wait(timeout=30)
+                except subprocess.TimeoutExpired: p.kill()
+        f = L.funnel(conn)
+        say(f"\n{BOLD}Rehearsal result{END}")
+        good(f"desk and runner ran for {args.rehearsal} min against port {os.environ.get('IBKR_PORT', '7496')}")
+        good(f"ledger: {f['board_rows']} board rows · {f['plans_armed']} plans · {f['plans_suppressed']} suppressed")
+        note("everything STALE and nothing armed is the correct result on a closed market")
+        note("not counted as a session")
+        return 0
     # give the runner its hard-stop flatten (TRADE mode) before closing it
     time.sleep(90)
     stop()
