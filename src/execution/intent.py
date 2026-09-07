@@ -268,6 +268,11 @@ class PlacedOrder:
     fill_time: Optional[str] = None
     nbbo_bid_at_fill: Optional[float] = None   # Phase 3 reconciliation
     nbbo_ask_at_fill: Optional[float] = None
+    # The exit, read from the stop or target leg. Until the 2026-09-07 review
+    # only the entry leg was ever synced, so no P&L or exit reason existed.
+    exit_price: Optional[float] = None
+    exit_reason: Optional[str] = None            # stop | target
+    exit_time: Optional[str] = None
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 

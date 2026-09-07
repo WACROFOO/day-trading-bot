@@ -66,14 +66,20 @@ class FakeTrader:
         rec = PlacedOrder(symbol=intent.symbol, parent_id=100 + len(self.placed), stop_id=1,
                           trigger=intent.trigger, stop=intent.stop, shares=intent.shares, protected=True)
         self.placed.append(rec); return rec
+    def adopt(self, rows): return 0
+    def adopt(self, rows): return 0
     def sync(self): pass
 
 
 NOW = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
 
 
+def _review(c):
+    c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
+
+
 def test_trade_mode_refuses_when_the_desk_has_no_fresh_quote_for_the_symbol():
-    c = L.connect(":memory:"); build_session(FIXTURE, journal=c)
+    c = L.connect(":memory:"); build_session(FIXTURE, journal=c); _review(c)
     t = FakeTrader()
     r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: None)
@@ -84,7 +90,7 @@ def test_trade_mode_refuses_when_the_desk_has_no_fresh_quote_for_the_symbol():
 
 
 def test_trade_mode_places_when_the_desk_quote_is_fresh():
-    c = L.connect(":memory:"); build_session(FIXTURE, journal=c)
+    c = L.connect(":memory:"); build_session(FIXTURE, journal=c); _review(c)
     t = FakeTrader()
     r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))

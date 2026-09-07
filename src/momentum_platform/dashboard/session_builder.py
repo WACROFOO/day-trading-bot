@@ -21,6 +21,7 @@ from typing import Optional
 from ..cascade import Inputs as CascadeInputs
 from ..cascade import evaluate as evaluate_cascade
 from ..engine import ScannerEngine
+from ..indicators import chart_gates
 from ..models import Bar, DataStatus, FloatQuality, NewsItem, flame_color
 from ..notify import NotificationRouter, RouterConfig
 from ..pullback import FirstPullbackDetector
@@ -363,7 +364,8 @@ def build_session_from_records(
                 _snap = _st.snapshot if _st else None
                 _meta = symbols.get(rec["symbol"], {})
                 _inputs = cascade_inputs(_meta, halt_state.get(rec["symbol"]),
-                                         feed_stale=_feed_is_stale(data_status), snap=_snap)
+                                         feed_stale=_feed_is_stale(data_status), snap=_snap,
+                                         chart=chart_gates(bars_by_symbol[rec["symbol"]]))
                 _res = evaluate_cascade(_inputs) if _meta else None
                 allowed = bool(_res and _res.plan_allowed)
                 if journal is not None and _res is not None:
@@ -468,7 +470,8 @@ def build_session_from_records(
     for sym, meta in symbols.items():
         meta.setdefault("symbol", sym)
         res = evaluate_cascade(cascade_inputs(meta, halt_state.get(sym),
-                                              feed_stale=_feed_is_stale(data_status)))
+                                              feed_stale=_feed_is_stale(data_status),
+                                              chart=chart_gates(bars_by_symbol.get(sym, []))))
         cascade_by_symbol[sym] = {
             "verdict": res.verdict.value,
             "killedBy": res.killed_by,
@@ -531,7 +534,8 @@ def build_session_from_records(
 
 
 def cascade_inputs(meta: dict, halt: Optional[str] = None,
-                   feed_stale: bool = False, snap=None) -> CascadeInputs:
+                   feed_stale: bool = False, snap=None,
+                   chart: Optional[dict] = None) -> CascadeInputs:
     """Adapt a session symbol record to the cascade's Inputs.
 
     Everything the cascade cannot establish is passed as None rather than
@@ -567,6 +571,11 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         rvol=m.get("rvol"),
         halted=(halt == "halted"),
         feed_stale=feed_stale,
+        # Layer 2. Computed from the bars up to THIS one by
+        # momentum_platform.indicators; None below warm-up, and None is WATCH.
+        above_vwap=(chart or {}).get("above_vwap"),
+        above_ema9=(chart or {}).get("above_ema9"),
+        macd_positive_and_above_signal=(chart or {}).get("macd_positive_and_above_signal"),
     )
 
 

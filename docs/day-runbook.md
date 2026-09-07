@@ -89,6 +89,7 @@ Entry line, never `ARMED`.
 | `python3 scripts/exercise.py check` | replay check alone; exit 1 on any divergence |
 | `python3 scripts/exercise.py advance` | move to the next phase — refuses and lists blockers unless every gate is clear |
 | `python3 scripts/exercise.py stuck` | any filled, un-exited position |
+| `python3 scripts/exercise.py review` | everything so far across sessions: what kills, what is refused, verdicts, fills, controls, replay, today's risk lock |
 | `python3 scripts/exercise.py ah-exit ID --confirm` | the after-hours exception: exit-only, records who confirmed |
 
 ## Optional: start it for you

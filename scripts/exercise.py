@@ -162,11 +162,16 @@ def cmd_live(args) -> int:
 
     conn = L.connect(_db(args))
     trader = None
+    from journal.risk import JournalRiskGate, RiskVeto
+    gate = JournalRiskGate(conn)
     if args.trade:
         from execution.ibkr_trader import PaperTrader
-        trader = PaperTrader()
+        # The daily risk gate reads THIS ledger and latches in it. Until the
+        # 2026-09-07 review the trader was built with no gate at all.
+        trader = PaperTrader(risk_gate=gate)
         acct = trader.connect()                 # raises NotPaperError on U*
-        print(f"{OK}ok{END} {acct} — paper · client {trader.client_id} · TRADE mode")
+        print(f"{OK}ok{END} {acct} — paper · client {trader.client_id} · TRADE mode · "
+              f"risk gate {gate.limits}")
     else:
         print(f"{DIM}LOG_ONLY — no connection opened; decisions are judged and recorded only{END}")
     runner = Runner(conn, mode="TRADE" if args.trade else "LOG_ONLY",
@@ -179,7 +184,16 @@ def cmd_live(args) -> int:
     flattened = False
     try:
         while True:
-            for a in runner.step():
+            try:
+                acted = runner.step()
+            except RiskVeto as veto:
+                # The day is over for entries. Exits stay allowed; the loop
+                # keeps syncing fills and watching stops, but places nothing.
+                print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}DAY LOCKED{END} {veto.reason} — "
+                      f"no more entries today; exits continue")
+                runner.mode = "LOG_ONLY"
+                acted = []
+            for a in acted:
                 tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
                 print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
                       f"{a.trigger:.2f}/{a.stop:.2f}"
@@ -268,6 +282,64 @@ def cmd_ah_exit(args) -> int:
     return 0
 
 
+def cmd_review(args) -> int:
+    """Everything so far, across sessions. The continuous-improvement view:
+    which gate kills most, which refusal dominates, how the strategy stands
+    against the free baselines, whether every decision still replays."""
+    import json as _json
+    from collections import Counter
+    conn = L.connect(_db(args))
+    st = L.get_state(conn); f = L.funnel(conn); rep = replay.check(conn); ctl = controls.summary(conn)
+    print(f"\n{BOLD}PAPER EXERCISE · cumulative review{END}   phase {st['phase']} · "
+          f"{st['sessions_done']} session(s) counted · {_db(args)}")
+    days = conn.execute("""SELECT substr(ts_et,1,10) d, COUNT(*) n,
+                                  SUM(outcome='SUPPRESSED') sup, SUM(outcome='REFUSED') ref,
+                                  SUM(outcome='LOG_ONLY') lo, SUM(outcome='TAKEN') tk,
+                                  SUM(outcome='NOT_FILLED') nf
+                           FROM decisions GROUP BY d ORDER BY d""").fetchall()
+    print(f"\n{BOLD}SESSIONS{END}")
+    print(f"  {'date':<12}{'decisions':>10}{'killed':>8}{'refused':>9}{'log':>6}{'taken':>7}{'unfilled':>10}")
+    for d in days:
+        print(f"  {d['d']:<12}{d['n']:>10}{d['sup']:>8}{d['ref']:>9}{d['lo']:>6}{d['tk']:>7}{d['nf']:>10}")
+    if not days:
+        print("  —")
+    print(f"\n{BOLD}WHAT KILLS{END}  (Layer 1, cumulative)")
+    kills = Counter(r[0] for r in conn.execute("SELECT killed_by FROM decisions WHERE killed_by IS NOT NULL"))
+    for gate, n in kills.most_common():
+        print(f"  {n:>4}  {gate}")
+    if not kills:
+        print("  —")
+    print(f"\n{BOLD}WHAT THE EXECUTOR REFUSES{END}")
+    reasons = Counter()
+    for (j,) in conn.execute("SELECT refusal_reasons_json FROM decisions WHERE outcome='REFUSED'"):
+        for r in _json.loads(j or "[]"):
+            reasons[r.split(" — ")[0].split(":")[0][:60]] += 1
+    for r, n in reasons.most_common(8):
+        print(f"  {n:>4}  {r}")
+    if not reasons:
+        print("  —")
+    print(f"\n{BOLD}VERDICTS AT THE PLAN{END}")
+    for v, n in conn.execute("SELECT verdict, COUNT(*) FROM decisions GROUP BY verdict ORDER BY 2 DESC"):
+        print(f"  {n:>4}  {v}")
+    print(f"\n{BOLD}FILLS{END}  {f['fills']} of {f['orders']} orders · {f['fills_with_nbbo']} with NBBO")
+    for r in L.alignment_rows(conn)[-10:]:
+        print(f"  {r['fill_ts'][11:16]} {r['symbol']:<6} trigger {r['trigger']:.2f} fill {r['fill_price']:.2f} "
+              f"slip {r['slippage_ratio'] if r['slippage_ratio'] is not None else '—'}")
+    print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows)")
+    for k, v in ctl.items():
+        print(f"  {k:<12} n={v['n']:<4} mean {v['mean_R'] if v['mean_R'] is not None else '—'}  "
+              f"median {v['median_R'] if v['median_R'] is not None else '—'}  win {v['win_rate'] if v['win_rate'] is not None else '—'}")
+    lamp = f"{OK}✓{END}" if not rep["diverged"] else f"{BAD}✗{END}"
+    print(f"\n{BOLD}REPLAY{END}  {lamp} {rep['reproduced']}/{rep['checked']}")
+    from journal.risk import JournalRiskGate
+    rs = JournalRiskGate(conn).state()
+    print(f"\n{BOLD}RISK TODAY{END}  day {rs['day_r']} R · streak {rs['consecutive_losses']} · "
+          f"entries {rs['entries']} · {'LOCKED: ' + rs['reason'] if rs['locked'] else 'open'}")
+    print(f"\n{DIM}Improve the plumbing and the data, not the thresholds: FILTERS.md values and the detector are")
+    print(f"frozen until the phase-D read-out (docs/preregistration.md §7). Paper only.{END}\n")
+    return 0
+
+
 def cmd_state(args) -> int:
     conn = L.connect(_db(args))
     for k, v in L.get_state(conn).items():
@@ -281,14 +353,14 @@ def main(argv=None) -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
-    sub.add_parser("stuck")
+    sub.add_parser("stuck"); sub.add_parser("review")
     ah = sub.add_parser("ah-exit"); ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
-            "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck,
+            "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
             "ah-exit": cmd_ah_exit}[args.cmd](args)
 
 

@@ -28,6 +28,10 @@ strategy works.
 | One-command day · phase gates · launchd | built | `scripts/day.py` · `exercise.py advance` · `scripts/install_daily.sh` |
 | Feed health → STALE verdict | built: stale/delayed/offline feed arms nothing | `session_builder._feed_is_stale` |
 | Decision-tape vs fill-tape alignment | built: probe + per-fill gap table; order refused without a fresh desk quote; **probe not yet run** | `scripts/alignment_probe.py` · `ledger.alignment_rows` |
+| Layer 2 chart gates on the live path; TRADE requires REVIEW | built 09-07 | `src/momentum_platform/indicators.py` · `runner.py` |
+| Daily risk gate fed by the ledger, latched | built 09-07 | `src/journal/risk.py` |
+| Exit legs synced · never-filled reconciled · restart adoption | built 09-07 | `ibkr_trader.sync/adopt` · `runner.reconcile_unfilled` |
+| Cumulative review | built 09-07 | `exercise.py review` |
 | Pre-registration | **PROPOSED, values unset** | `docs/preregistration.md` |
 
 Baseline for regression: `BASELINE-2026-09-06.md`.

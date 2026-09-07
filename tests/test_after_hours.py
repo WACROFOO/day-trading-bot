@@ -31,6 +31,8 @@ class FakeTrader:
                           protected=True)
         self.placed.append(rec); return rec
     def exit_limit(self, *a, **k): self.exits.append(a); return 1.0
+    def adopt(self, rows): return 0
+    def adopt(self, rows): return 0
     def sync(self): pass
 
 
@@ -40,6 +42,7 @@ def held(tmp_path):
     db = tmp_path / "j.sqlite"
     c = L.connect(db)
     build_session(FIXTURE, journal=c)
+    c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
     t = FakeTrader()
     r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t,
                now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc), max_age_s=3600,

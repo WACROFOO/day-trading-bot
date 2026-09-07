@@ -29,6 +29,11 @@ FIXTURE = ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl"
 def journal():
     conn = L.connect(":memory:")
     build_session(FIXTURE, journal=conn)
+    # TRADE mode requires a REVIEW verdict (FILTERS.md Layer 2, all true at
+    # entry). The synthetic fixture's chart gates land on WATCH/WAIT, so the
+    # placement tests here set REVIEW to exercise the order path itself; the
+    # Layer 2 refusal has its own test in test_review_fixes.py.
+    conn.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); conn.commit()
     yield conn
     conn.close()
 
@@ -50,6 +55,7 @@ class FakeTrader:
         self.placed.append(rec)
         return rec
 
+    def adopt(self, rows): return 0
     def sync(self):
         pass
 

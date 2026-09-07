@@ -314,6 +314,20 @@ class PaperTrader:
                 rec.fill_price = filled
                 rec.events.append(f"filled {filled} vs trigger {rec.trigger}")
 
+            # The exit legs. A filled stop or target is the trade's end and
+            # its P&L; without reading them the ledger never learns either.
+            for leg_id, why in ((rec.stop_id, "stop"), (rec.target_id, "target")):
+                leg = by_id.get(leg_id) if leg_id else None
+                if (leg is not None and rec.exit_price is None
+                        and leg.orderStatus.status == "Filled"
+                        and leg.orderStatus.avgFillPrice
+                        and leg.orderStatus.avgFillPrice > 0):
+                    rec.exit_price = leg.orderStatus.avgFillPrice
+                    rec.exit_reason = why
+                    t = leg.log[-1].time if leg.log else None
+                    rec.exit_time = t.isoformat() if t else None
+                    rec.events.append(f"exit {why} at {rec.exit_price}")
+
             stop = by_id.get(rec.stop_id) if rec.stop_id else None
             if stop is not None:
                 rec.stop_status = stop.orderStatus.status
@@ -324,6 +338,31 @@ class PaperTrader:
                                  ("ValidationError", "Inactive", "Cancelled",
                                   "ApiCancelled"))
         return self.placed
+
+    def adopt(self, rows) -> int:
+        """Rebuild the in-memory records from the ledger's open orders.
+
+        `self.placed` lives only as long as this process. A runner restarted
+        mid-morning would otherwise sync nothing for orders it placed before
+        the restart, and a filled position could sit with its exit unrecorded.
+        Adopted records carry the ledger's ids, so `sync()` finds them at the
+        broker exactly as if this process had placed them.
+        """
+        n = 0
+        have = {p.parent_id for p in self.placed}
+        for r in rows:
+            if r["parent_id"] in have:
+                continue
+            rec = PlacedOrder(symbol=r["symbol"], parent_id=r["parent_id"],
+                              stop_id=r["stop_id"], target_id=r["target_id"],
+                              trigger=r["trigger"], stop=r["stop"], shares=int(r["shares"]),
+                              status=r["status"], fill_price=r["fill_price"],
+                              fill_time=r["fill_ts"], protected=bool(r["protected"]),
+                              stop_status=r["stop_status"])
+            rec.events.append("adopted from the ledger after a restart")
+            self.placed.append(rec)
+            n += 1
+        return n
 
     def flatten_all(self, quote=None, offset: float = 0.10,
                     now=None) -> list[str]:

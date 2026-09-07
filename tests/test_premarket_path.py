@@ -65,6 +65,8 @@ class FakeTrader:
     def exit_limit(self, symbol, qty, bid, offset=0.10, outside_rth=True):
         px = round(bid - offset, 2); self.exits.append((symbol, qty, px, outside_rth)); return px
 
+    def adopt(self, rows): return 0
+    def adopt(self, rows): return 0
     def sync(self): pass
 
 

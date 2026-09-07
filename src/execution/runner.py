@@ -72,6 +72,12 @@ class Runner:
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.acted: list[Acted] = []
+        if self.mode == "TRADE":
+            # Whatever the ledger says is still alive at the broker is ours to
+            # track from the first loop, restart or not.
+            adopted = self.trader.adopt(L.open_orders(self.conn))
+            if adopted:
+                self.acted_note = f"adopted {adopted} open order(s) from the ledger"
 
     # ------------------------------------------------------------- the loop
     def step(self) -> list["Acted"]:
@@ -109,6 +115,14 @@ class Runner:
                 reasons.append(f"pre-market entry not allowed: {why}")
             else:
                 shape = premarket_shape(state)
+        if self.mode == "TRADE" and row["verdict"] != "REVIEW":
+            # FILTERS.md Layer 2: "Chart gates — all true at entry". The cascade
+            # says REVIEW only when VWAP, 9 EMA and MACD are all green; WAIT is
+            # a red chart gate, WATCH a gate it could not compute. LOG_ONLY
+            # records those too, so the funnel shows how many pullbacks the
+            # chart turned away.
+            reasons.append(f"Layer 2 not green: verdict {row['verdict']} — chart gates must all "
+                           f"be true at entry")
         if self.mode == "TRADE" and not reasons:
             # Alignment at the instant of the order. The decision was made on
             # the desk's tape; the order goes to a different session that may
@@ -168,8 +182,28 @@ class Runner:
                           status=p.status, stop_status=p.stop_status,
                           protected=p.protected)
             n += 1
+        # Exits: a filled stop or target leg closes the trade in the ledger.
+        for r in self.conn.execute("SELECT order_id, parent_id FROM orders WHERE fill_price IS NOT NULL "
+                                   "AND exit_ts IS NULL").fetchall():
+            p = by_parent.get(r["parent_id"])
+            if p is not None and p.exit_price is not None:
+                L.record_exit(self.conn, r["order_id"], reason=p.exit_reason or "bracket",
+                              price=p.exit_price, ts=p.exit_time or self.now())
+                n += 1
         self.conn.commit()
         return n
+
+    def reconcile_unfilled(self) -> list[int]:
+        """At the hard stop: every entry that never filled is NOT_FILLED, not
+        TAKEN. The actuals still score it — the one that never filled is a
+        measurement too — but the funnel must not count it as a trade."""
+        done = []
+        for r in L.open_orders(self.conn):
+            if r["fill_price"] is None:
+                L.mark_not_filled(self.conn, r["order_id"])
+                done.append(r["order_id"])
+        self.conn.commit()
+        return done
 
     # ------------------------------------------------- the monitored stop
     def watch_stops(self, offset: float = 0.10) -> list[str]:
@@ -243,6 +277,7 @@ class Runner:
             return []
         done = self.trader.flatten_all(quote=lambda s: _bid_ask(self.quote, s),
                                        now=self.now())
+        self.reconcile_unfilled()
         self.conn.commit()
         return done
 

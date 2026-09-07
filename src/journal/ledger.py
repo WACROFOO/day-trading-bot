@@ -116,6 +116,13 @@ CREATE TABLE IF NOT EXISTS orders (
     placed_at TEXT NOT NULL, updated_at TEXT NOT NULL
 );
 
+-- The daily risk latch (journal/risk.py). One row per ET date; once locked,
+-- stays locked for the day and survives a restart.
+CREATE TABLE IF NOT EXISTS risk_day (
+    date TEXT PRIMARY KEY, locked INTEGER NOT NULL DEFAULT 0,
+    reason TEXT, locked_at TEXT
+);
+
 -- Free-text events against an order: what the runner saw and did, in order.
 CREATE TABLE IF NOT EXISTS order_events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -565,3 +572,24 @@ def alignment_rows(conn: sqlite3.Connection) -> list[dict]:
         d["quote_gap_s"] = gap
         out.append(d)
     return out
+
+
+def open_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Orders that may still be alive at the broker: not exited, not cancelled.
+    What a restarted runner must adopt before it can sync anything."""
+    return conn.execute("""SELECT * FROM orders WHERE exit_ts IS NULL
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled')
+                           ORDER BY placed_at""").fetchall()
+
+
+def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:
+    """An entry that never filled by the hard stop. The decision's outcome
+    becomes NOT_FILLED — a different fact from TAKEN, and one the actuals
+    still score, because 'the one that never filled' is a measurement too."""
+    row = conn.execute("SELECT decision_id FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    conn.execute("UPDATE orders SET status='NotFilled', updated_at=? WHERE order_id=?",
+                 (_now(), order_id))
+    conn.execute("UPDATE decisions SET outcome='NOT_FILLED', acted_at=? WHERE decision_id=?",
+                 (_now(), row["decision_id"]))
