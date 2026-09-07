@@ -942,6 +942,7 @@ function boardRow(frame, sym) {
   return { row: { symbol: sym, price: last, changePct: chg, rvolDaily: null, rvol5m: null }, meta };
 }
 function renderPillarsBoard(frame) {
+  if (!frame) return;
   const host = $("#pillarsBoard"); if (!host) return;
   host.textContent = "";
   const nowMs = deskNow();
@@ -1057,6 +1058,7 @@ function symbolRow(frame, sym) {
 }
 
 function renderHeader(frame) {
+  if (!frame) return;
   const sym = state.selected, meta = SYMS[sym] || {}, nowMs = deskNow();
   const bars = barsUpTo(sym, frame.barIndex);
   // On a live desk the newest IBKR print outranks the last closed bar: in
@@ -1508,6 +1510,7 @@ function bars10sUpTo(sym, frame) {
 
 let CHART_SYM = null, SNAP_LIVE = false;
 function renderCharts(frame) {
+  if (!frame) return;                     // no bars yet: nothing to draw, nothing to throw
   const sym = state.selected, meta = SYMS[sym] || {};
   // A new symbol, or a refreshed session on a streaming desk, must show the
   // newest bars: a logical range carried over from another dataset parked the
@@ -2027,6 +2030,7 @@ function renderLag(frame) {
   if (S.streaming && FRAMES.length && state.frame < FRAMES.length - 1) {
     host.hidden = false;
     host.className = "lag warn parked";
+    if (!FRAMES.length) return;
     host.textContent = "paused " + etClock(FRAMES[state.frame].ts).slice(0, 5);
     host.title = "The desk is parked at " + etClock(FRAMES[state.frame].ts) + " ET, "
                + (FRAMES.length - 1 - state.frame) + " minutes behind the live edge. "
@@ -2442,6 +2446,14 @@ function render() {
     $("#clockET").textContent = new Date().toLocaleTimeString("en-US", { timeZone: "America/New_York", hour12: false });
     $("#frameCounter").textContent = "waiting for the first print of " + S.tradingDate;
     renderLag(null);
+    // 2026-09-07, a holiday: every dynamic card was blank and a resize handler
+    // threw on FRAMES[undefined]. An empty card must carry its reason.
+    const why = S.dataStatus === "stale" || S.dataStatus === "offline"
+      ? "feed " + S.dataStatus.toUpperCase() + " — no bars, no verdict"
+      : "no bars yet — nothing to judge";
+    for (const id of ["#verdictCard", "#pillarsBoard", "#quoteCard", "#l2Card"]) {
+      const h = $(id); if (h) { h.textContent = ""; h.appendChild(el("div", "note", why)); }
+    }
     return;
   }
   state.frame = Math.min(Math.max(state.frame, 0), FRAMES.length - 1);

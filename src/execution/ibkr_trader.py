@@ -161,10 +161,13 @@ class PaperTrader:
         self.ib.qualifyContracts(stock)
 
         parent, stop_leg, target_leg = self._bracket(intent)
+        ext = intent.session == "premarket"
 
-        trades = [self.ib.placeOrder(stock, o)
-                  for o in (parent, target_leg, stop_leg) if o is not None]
-
+        # The record exists BEFORE anything is sent, and is kept whatever
+        # happens after. 2026-09-07: this method sent both legs and then
+        # raised on a name that only existed inside _bracket(); the smoke
+        # test's cleanup cancelled them, but the live runner would have died
+        # with orders resting at the broker and no trace of them here.
         rec = PlacedOrder(
             symbol=intent.symbol,
             parent_id=parent.orderId,
@@ -176,10 +179,17 @@ class PaperTrader:
         # Regular hours: the stop rests, IBKR confirmed the group. Pre-market:
         # not known until the stop leg's status is read back by sync().
         rec.protected = not ext
+        self.placed.append(rec)
+        try:
+            trades = [self.ib.placeOrder(stock, o)
+                      for o in (parent, target_leg, stop_leg) if o is not None]
+        except Exception as exc:                        # noqa: BLE001
+            rec.status = "error"
+            rec.events.append(f"placeOrder raised: {exc!r} — CHECK THE BROKER for resting legs")
+            raise
         rec.events.append(f"placed {len(trades)} legs on {self.account}"
                           + (" (pre-market, protection unconfirmed)" if ext
                              else ""))
-        self.placed.append(rec)
         return rec
 
     def place_entry_monitored(self, intent: EntryIntent) -> PlacedOrder:

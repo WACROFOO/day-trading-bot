@@ -403,3 +403,35 @@ def test_the_verdict_card_renders_the_servers_cascade_not_its_own_score(desk_ser
         for g in gates:
             assert g in why, (g, why)
         browser.close()
+
+
+def test_a_desk_with_no_bars_yet_renders_without_a_page_error():
+    """The 2026-09-07 rehearsal screenshot: a live desk on a holiday showed
+    empty cards. Correct if it is 'nothing to show', a defect if render()
+    threw on an empty frame list. This pins the difference."""
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    ib = FakeIB(daily={"AAA": day_bars(30, 4.0)}, minutes={"AAA": []},
+                quotes={"AAA": FakeTicker(last=4.35, close=3.99, bid=4.34, ask=4.36)})
+    desk = IbkrDesk(["AAA"], ib_factory=lambda: ib, clock=Clock(), headlines=False, sec=False, rescan=0)
+    desk.log = lambda m: None
+    desk._bootstrap(); desk._worker_thread = threading.main_thread()
+    sock = socket.socket(); sock.bind(("127.0.0.1", 0)); port = sock.getsockname()[1]; sock.close()
+    httpd = ThreadingHTTPServer(("127.0.0.1", port), make_handler("ibkr:AAA", desk, None))
+    threading.Thread(target=httpd.serve_forever, daemon=True).start()
+    try:
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+            pg = browser.new_page(viewport={"width": 1500, "height": 900})
+            errors: list = []
+            pg.on("pageerror", lambda e: errors.append(str(e)))
+            pg.goto(f"http://127.0.0.1:{port}/")
+            pg.wait_for_timeout(1200)
+            assert not errors, errors
+            assert pg.evaluate("window.__SESSION__.frames.length") == 0
+            # the verdict card says something rather than nothing
+            txt = pg.text_content("#verdictCard") or ""
+            assert txt.strip(), "an empty verdict card on an empty tape hides the reason"
+            browser.close()
+    finally:
+        httpd.shutdown()
