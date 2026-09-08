@@ -76,7 +76,12 @@ def test_policy_is_phase_c_and_a_definite_verdict():
     assert premarket_allowed({"phase": "C", "probe_verdict": None})[0] is False
     assert premarket_allowed({"phase": "C", "probe_verdict": "inconclusive"})[0] is False
     assert premarket_shape({"phase": "C", "probe_verdict": "held"}) == "bracket"
-    assert premarket_shape({"phase": "C", "probe_verdict": "queued"}) == "monitored"
+    # A queued verdict is the monitored shape ONLY once the owner has accepted
+    # amendment A1 by command (audit 2026-09-08 F1). The verdict alone is a no.
+    ok, why = premarket_allowed({"phase": "C", "probe_verdict": "queued"})
+    assert ok is False and "A1" in why and "accept-a1" in why
+    assert premarket_shape({"phase": "C", "probe_verdict": "queued"}) == "none"
+    assert premarket_shape({"phase": "C", "probe_verdict": "queued", "a1_accepted": "yes"}) == "monitored"
     assert premarket_shape({"phase": "A", "probe_verdict": "held"}) == "none"
 
 
@@ -108,7 +113,7 @@ def test_held_verdict_places_a_bracket_and_protection_waits_for_read_back(journa
 
 
 def test_queued_verdict_places_a_monitored_entry_with_no_stop_leg(journal):
-    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
     t = FakeTrader()
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
@@ -125,7 +130,7 @@ def _fill(journal, r, t):
 
 
 def test_the_runner_is_the_stop_when_the_bid_touches_it(journal):
-    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
     t = FakeTrader()
     quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
@@ -156,7 +161,7 @@ def test_no_fresh_quote_means_hold_and_say_so_never_guess_a_price(journal):
     entry outright (decision and order would not share a tape). At WATCH time,
     once a position exists, a missing quote holds and writes an event — never
     a guessed sell price."""
-    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
     t = FakeTrader()
     quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z")}
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
@@ -169,7 +174,7 @@ def test_no_fresh_quote_means_hold_and_say_so_never_guess_a_price(journal):
 
 
 def test_no_fresh_quote_at_order_time_refuses_the_entry(journal):
-    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08")
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
     t = FakeTrader()
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: None)

@@ -114,6 +114,10 @@ class EntryIntent:
     session: str = "regular"
     verdict: str = ""               # the cascade verdict, recorded not judged
     note: str = ""
+    # Correlation key carried into IBKR's orderRef on every leg: the ledger's
+    # decision_id. A restarted runner finds an order whose acknowledgement
+    # was never saved by this, not by an orderId it never learned (audit F4).
+    ref: str = ""
 
     @property
     def risk_per_share(self) -> float:

@@ -132,6 +132,7 @@ class IbkrDesk:
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._news_at: Optional[datetime] = None      # last headline pull
+        self._started: Optional[datetime] = None       # set once, at bootstrap
         self._halt_state: Dict[str, str] = {}         # sym -> halted | trading
         self._jobs: "queue.Queue[tuple]" = queue.Queue()
         self._stop = threading.Event()
@@ -235,8 +236,10 @@ class IbkrDesk:
 
     def _bootstrap(self) -> dict:
         # The desk's own start. Plans the detector arms on bars older than this
-        # came from loaded history, and the ledger tags them as backfill.
-        self._started = self.clock()
+        # came from loaded history, and the ledger tags them as backfill. Set
+        # once: a reconnect that bootstraps again does not move it.
+        if self._started is None:
+            self._started = self.clock()
         ib = self.ib_factory() if self.ib_factory else None
         self.stream = IbkrStream(self.host, self.port, self.client_id, ib=ib,
                                  on_update=self.publisher, clock=self.clock)

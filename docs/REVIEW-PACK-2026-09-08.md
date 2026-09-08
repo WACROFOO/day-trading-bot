@@ -96,8 +96,15 @@ in R. Paper buying power is never used.
 ## 4. Execution safety (phase B onward)
 
 - Entry and stop are transmitted as one IBKR bracket; the stop leg carries
-  the transmit flag, so if anything fails mid-sequence the group is never
-  released and no unprotected entry can exist.
+  the transmit flag, so the group is not released while it is being
+  assembled. That is IBKR's documented use of the flag and no more: a child
+  rejected later, a disconnect or a quantity mismatch is caught by reading
+  order states back and reconciling broker positions against the ledger's
+  exits every loop, not by the transmit sequence.
+- The intent is written and committed before the send, every leg carries
+  the decision id as its order reference, and a restarted runner matches an
+  unacknowledged intent at the broker by that reference or marks it
+  unresolved. It never resends. One runner per ledger, by file lock.
 - Refusals before any order: plan not allowed, stop not below trigger,
   size outside 5% of the sized quantity, off the tick grid, after 11:30,
   wrong session, decision older than 120 s, no fresh desk quote within

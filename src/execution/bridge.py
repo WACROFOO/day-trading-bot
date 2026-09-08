@@ -33,6 +33,7 @@ def intent_from_decision(row: sqlite3.Row | dict, dollar_risk: float,
         verdict=r["verdict"] or "",
         session=r["session"] if r["session"] in ("regular", "premarket") else "none",
         note=f"decision {r['decision_id']}",
+        ref=str(r["decision_id"]),
     )
 
 

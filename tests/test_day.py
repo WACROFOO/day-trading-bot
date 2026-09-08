@@ -42,6 +42,8 @@ def test_premarket_needs_phase_c_and_a_probe_verdict():
     ok, why = day.premarket_allowed({"phase": "C", "probe_verdict": "held"})
     assert ok and "brackets" in why
     ok, why = day.premarket_allowed({"phase": "C", "probe_verdict": "queued"})
+    assert not ok and "A1" in why                      # the verdict alone: no (audit F1)
+    ok, why = day.premarket_allowed({"phase": "C", "probe_verdict": "queued", "a1_accepted": "yes"})
     assert ok and "UNPROTECTED" in why
     assert day.premarket_allowed({"phase": "C", "probe_verdict": "inconclusive"})[0] is False
 
@@ -58,14 +60,13 @@ def journal():
 def test_phase_a_is_blocked_until_sessions_and_probe(journal):
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert nxt == "B"
-    assert any("5 sessions or 40 decisions" in b for b in blockers)
+    assert any("5 sessions AND 40 prospective decisions" in b for b in blockers)
     assert any("probe" in b for b in blockers)
     L.set_state(journal, sessions_done=5, probe_verdict="held", probe_date="2026-09-08")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
-    # still blocked twice over: "5 sessions or 40 decisions, whichever is
-    # later" means BOTH; the fixture has 5 decisions. And the paper tape has
-    # not been measured.
-    assert any("40 decisions" in b for b in blockers)
+    # still blocked twice over: both thresholds must be met; the fixture has 5
+    # decisions. And the paper tape has not been measured.
+    assert any("40 prospective decisions" in b for b in blockers)
     assert any("paper session data" in b for b in blockers)
     # Fabricate the decision count by cloning a real row: the padding must
     # replay (R11 runs inside the gate), so its inputs must reproduce its verdict.

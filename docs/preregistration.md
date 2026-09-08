@@ -36,17 +36,36 @@ better than the free baselines on the same names at the same instants.
 | Dollar risk per trade | **$20** | ≈1% of NetLiq $2,143.70 (preflight 2026-09-06). Also what every probe has used, so nothing changes shape at go-live |
 | Max concurrent positions | **1** | one name at a time makes every fill and every exit attributable; add a second only after the ledger has 60 taken trades |
 | Bar resolution logged | **1m** | the only resolution the desk produces. `2026-08-streams-roundup.md`: the micro-pullback is often a 10-second pattern; this must be recorded as a known limitation, not discovered later |
-| Daily risk gate | existing `RiskLimits` | `src/paper_trading/risk_gate.py`: max daily loss 6%, giveback 50%, 3 consecutive losses stop, 20% drawdown walkaway. Unchanged; these are already latched and persisted |
+| Daily risk gate | **PROPOSED: journal gate — 3 consecutive losses, −3 R on the day, 6 entries** | `src/journal/risk.py` `JournalRiskGate`, the one the executor is built with (`scripts/exercise.py live`). It reads this ledger's fills and exits and latches in `risk_day` by ET date. An earlier draft of this row named `src/paper_trading/risk_gate.py` (percentage rules) — that gate belongs to the manual Streamlit app and reads a ledger this exercise does not write; corrected 2026-09-08 after the outside review. The lock closes entries only; exits, the monitored stop and the 11:30 flatten keep running |
+| Max concurrent positions, enforced | **1** | `Runner._act` refuses an entry while any order is alive — resting, filled and not exited, exit pending, or an unresolved intent (`ledger.positions_alive`). Enforced in code since 2026-09-08; before that it was a value in this table only |
+| Configuration and code, pinned | rules hash + commit | `desk_profile.fingerprint()` and the git commit are stamped on every decision, order and the exercise state |
 | Hard stop, new entries | **11:30 ET** | `PARAMETERS.md` §2 `session_close`, enforced in `src/execution/intent.py` |
 
 ## 3. Phases and sample sizes
 
 | Phase | Mode | Runs until | Gate to the next phase |
 |---|---|---|---|
-| A | LOG_ONLY, live desk | **PROPOSED: 5 sessions or 40 decisions**, whichever is later | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5 |
+| A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions** | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
 | B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; zero unprotected entries |
 | C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** | only in the shape the probe dictates (§5) |
 | D | Read-out | at **PROPOSED: n = 60 taken trades** total | the failure condition in §4 is evaluated ONCE, here, not continuously |
+
+Definitions, fixed 2026-09-08 after the outside review:
+
+- A **qualifying session** is a day on which the desk recorded bars and the
+  runner ran to the hard stop. A holiday, a dead feed, or a rerun of the
+  same day counts for nothing (`scripts/day.py` `after_close`).
+- A **prospective decision** is one armed on a bar the desk watched live.
+  A decision armed on history loaded at start carries `-backfill` in
+  `data_status`, is refused by the runner in every mode, and is excluded
+  from every count and comparison. It stays in the ledger as a diagnostic
+  cohort and the report says how many were excluded.
+- **Probe and smoke orders** (`premarket_probe.py`, `restart_probe.py`,
+  `paper_trade_smoke.py`) never write `orders`; they are not enrolled
+  trades. "Before the first order" means the first row in `orders`.
+- Phase D is a **capped feasibility pilot**, not an inferential threshold.
+  Results are reported with uncertainty, by session stratum (regular hours
+  and pre-market separately), and never pooled without a pre-stated weight.
 
 Why 60: not a power calculation — with the variance the replication
 measured (`2026-08-short-hold.md`: stdev 31.2% per trade before short
@@ -85,6 +104,27 @@ Settled by `scripts/premarket_probe.py` between 07:00 and 09:30 ET.
 | stop held live | brackets as in phase B, `outsideRth=True`, `protected` confirmed by read-back |
 | stop queued to 09:30 | **phase C does not start** until the owner accepts the monitored-exit amendment below by replacing its `PROPOSED` |
 
+**What "protected" means, field by field** (added 2026-09-08 — one boolean
+carried too much):
+
+| fact | where it lives | values |
+|---|---|---|
+| a stop rests at the broker | `orders.stop_status` | `Submitted`/`PreSubmitted` yes; `Cancelled`/`Inactive` no; `monitored` no stop at the broker |
+| the session the order is for | `orders.session` | `regular` / `premarket` |
+| quantity actually held | `orders.filled_qty` | from IBKR; a partial fill is a smaller position |
+| the runner's monitor is alive | runner process + `quote_source` | the monitored stop exists only while `exercise.py live` runs and the desk's quote is under 30 s old |
+| an exit was sent, not yet filled | `orders.status = ExitPending` | closed at the real fill by the next sync |
+| an intent whose acknowledgement was lost | `orders.status = intent` / `UNRESOLVED` | reconciled by `orderRef`; never resent |
+
+`orders.protected` summarises the first row only. A monitored entry is
+**UNPROTECTED** in every report and gate, whatever the monitor's health.
+
+**Accepting A1 is a human act.** `python3 scripts/exercise.py accept-a1
+--confirm` records the operator's name and time in `exercise_state`; the
+policy refuses the monitored shape without it (`src/execution/policy.py`).
+No code path sets it. The outside review of 2026-09-08 recommends not
+accepting it and observing pre-market without orders.
+
 **Amendment A1 — monitored exit (PROPOSED, 2026-09-06).** On a `queued`
 verdict a pre-market entry is placed as a limit alone, with no stop leg
 (`PaperTrader.place_entry_monitored`), recorded `protected=0`,
@@ -102,7 +142,12 @@ Result: `PROPOSED: not yet run` — replace with the date and the verdict line.
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
-- **any** entry is found unprotected (no resting stop, no confirmed monitor)
+- **any** entry is found without a working exit: no stop resting at the
+  broker and — for an A1-accepted monitored entry only — no live monitor
+  with a fresh quote. (A monitored entry is reported UNPROTECTED always; it
+  is a stopping event when its monitor is not live.)
+- an order intent is `UNRESOLVED` at the broker, or the position
+  reconciliation finds an untracked position or a quantity mismatch
 - the replay check diverges on **any** decision
 - cumulative realised R reaches **PROPOSED: −20 R** at any point
 - an after-hours continuation happens without a logged human confirmation
@@ -115,7 +160,7 @@ the cause is written into `docs/paper-exercise-brief.md` §⑦ or fixed.
 | May change, with a dated note here | May NOT change until phase D |
 |---|---|
 | dollar risk **downward** | any FILTERS.md threshold or cascade gate |
-| bar resolution, if the desk gains a finer one | the detector's entry/stop logic |
+| bar resolution **for archival only** — finer bars stored, decisions unchanged | the detector's entry/stop logic — and its **input resolution**: a finer bar feeding the detector is a new strategy version and starts a new cohort |
 | the NBBO source | the failure condition (§4) |
 | the report layout | n (§3) |
 

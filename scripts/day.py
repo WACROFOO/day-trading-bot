@@ -89,12 +89,17 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
     blockers: list[str] = []
     if rep["diverged"]:
         blockers.append(f"replay check: {len(rep['diverged'])} decision(s) do not reproduce")
+    if f.get("orders_unresolved"):
+        blockers.append(f"{f['orders_unresolved']} order intent(s) unresolved at the broker — "
+                        f"a human must clear them (exercise.py stuck)")
     if phase == "A":
         nxt = "B"
-        # "5 sessions or 40 decisions, whichever is LATER" = both must be met.
-        if state.get("sessions_done", 0) < 5 or f["plans_armed"] < 40:
-            blockers.append(f"phase A needs 5 sessions or 40 decisions; have "
-                            f"{state.get('sessions_done', 0)} sessions, {f['plans_armed']} decisions")
+        # Both thresholds. Prospective decisions only: backfill rows (armed on
+        # loaded history) are a diagnostic cohort and count for nothing here.
+        if state.get("sessions_done", 0) < 5 or f["plans_prospective"] < 40:
+            blockers.append(f"phase A needs 5 sessions AND 40 prospective decisions; have "
+                            f"{state.get('sessions_done', 0)} sessions, {f['plans_prospective']} "
+                            f"prospective decisions ({f['plans_backfill']} backfill excluded)")
         if state.get("probe_verdict") is None:
             blockers.append("pre-market probe has not recorded a verdict")
     if phase in ("A", "B") and state.get("paper_data") != "realtime":
@@ -337,6 +342,10 @@ def main(argv=None) -> int:
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--risk", type=float, default=None, help="overrides exercise_state.dollar_risk")
     ap.add_argument("--symbols", help="skip the gap scan; comma-separated watchlist")
+    ap.add_argument("--probe-orders", action="store_true",
+                    help="allow the pre-market stop probe, which PLACES (and cancels) an unfillable "
+                         "paper bracket. Off by default: an observational day dispatches nothing "
+                         "order-shaped (audit 2026-09-08 F6).")
     ap.add_argument("--rehearsal", type=int, metavar="MINUTES", default=0,
                     help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
                          "for this many minutes, then stop. Not counted as a session; no probes.")
@@ -348,6 +357,11 @@ def main(argv=None) -> int:
     st = L.get_state(conn)
     risk = args.risk or st.get("dollar_risk") or 20.0
     mode = mode_for(st)
+    try:                     # pin what ran: rules hash and code commit, in the ledger
+        from momentum_platform import desk_profile as DP
+        L.set_state(conn, rules_hash=DP.fingerprint().get("hash"), code_commit=DP.build_commit())
+    except Exception:        # noqa: BLE001
+        pass
     say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk · {DB}")
     closed = why_closed(now.date())
     if args.rehearsal:
@@ -394,6 +408,8 @@ def main(argv=None) -> int:
     # The first Monday run did exactly that: exit 6 at 06:55, no verdict.
     if args.rehearsal:
         pass
+    elif not args.probe_orders:
+        note("stop probe: OFF — it places an order; pass --probe-orders to run it once, deliberately")
     elif now.time() >= REGULAR_START:
         note("past 09:30 — the stop probe only runs pre-market")
     else:
@@ -429,6 +445,7 @@ def main(argv=None) -> int:
     while (datetime.now(ET) < deadline) if deadline else (datetime.now(ET).time() < HARD_STOP):
         t = datetime.now(ET).time()
         if (not args.rehearsal and PREMARKET_START <= t < REGULAR_START
+                and args.probe_orders
                 and L.get_state(conn).get("probe_date") != today):
             say(f"\n{BOLD}Pre-market stop probe{END}  ({t:%H:%M} ET)")
             run_probe_once(conn, today, False)

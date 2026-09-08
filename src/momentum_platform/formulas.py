@@ -77,6 +77,19 @@ def volume_profile_baseline(profile: Optional[Sequence[float]],
     return value if value and value > 0 else None
 
 
+RVOL_BASELINE_FLOOR_PCT = 0.01        # of the average full-day volume
+RVOL_BASELINE_FLOOR_MIN = 5_000       # shares; whichever is larger
+
+
+def rvol_baseline_floor(avg_daily_volume: Optional[float]) -> Optional[float]:
+    """The least a same-clock-time baseline may be before the time-of-day
+    multiple is trusted: 1% of the average day or 5,000 shares, whichever is
+    larger. This desk's own guard, not a course setting."""
+    if not avg_daily_volume or avg_daily_volume <= 0:
+        return RVOL_BASELINE_FLOOR_MIN
+    return max(RVOL_BASELINE_FLOOR_MIN, RVOL_BASELINE_FLOOR_PCT * avg_daily_volume)
+
+
 def effective_rvol(snap: SymbolSnapshot) -> Optional[float]:
     """The relative-volume number the pillars judge.
 
@@ -134,10 +147,21 @@ def enrich_snapshot(snap: SymbolSnapshot) -> SymbolSnapshot:
     # symbol, the pillar is measured against it instead; `rvol_daily` stays on
     # the row so both numbers are visible.
     snap.rvol_baseline = volume_profile_baseline(snap.volume_profile, snap.event_ts)
-    snap.rvol_tod = (rvol_time_of_day(snap.volume_today, [snap.rvol_baseline])
-                     if snap.rvol_baseline else None)
+    # A baseline of a few hundred shares (a name that never trades before
+    # 09:00) turns 738 shares into "7×" and 6.7M into "1589×" — arithmetic,
+    # not information (owner, 2026-09-08, ISPC/ATRA). Below a floor the
+    # time-of-day measure is not used and the daily measure stands, labelled.
+    floor = rvol_baseline_floor(snap.avg_daily_volume)
+    if snap.rvol_baseline and floor and snap.rvol_baseline < floor:
+        snap.rvol_measure = "daily_thin_baseline"
+        snap.rvol_tod = None
+    else:
+        snap.rvol_tod = (rvol_time_of_day(snap.volume_today, [snap.rvol_baseline])
+                         if snap.rvol_baseline else None)
     if snap.rvol_tod is not None:
         snap.rvol, snap.rvol_measure = snap.rvol_tod, "time_of_day"
+    elif getattr(snap, "rvol_measure", None) == "daily_thin_baseline":
+        snap.rvol = snap.rvol_daily             # the label says why it is the daily one
     else:
         snap.rvol, snap.rvol_measure = snap.rvol_daily, "daily"
     snap.spread_abs, snap.spread_bps = spread(snap.bid, snap.ask)

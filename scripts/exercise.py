@@ -167,6 +167,18 @@ def cmd_live(args) -> int:
     from execution.runner import Runner
 
     conn = L.connect(_db(args))
+    # One writer per ledger. Two runners on one file would both claim the same
+    # pending decision (audit F4). The lock lives beside the database and is
+    # released by the OS when this process ends, crash included.
+    import fcntl
+    lock_path = Path(str(_db(args)) + ".lock")
+    lock_fd = open(lock_path, "w")
+    try:
+        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except (BlockingIOError, OSError):
+        print(f"{BAD}another runner already holds {lock_path} — refusing to start a second{END}")
+        return 4
+    lock_fd.write(str(os.getpid())); lock_fd.flush()
     trader = None
     from journal.risk import JournalRiskGate, RiskVeto
     gate = JournalRiskGate(conn)
@@ -186,6 +198,8 @@ def cmd_live(args) -> int:
                     # ledger. None when older than 30s, and the fill is then
                     # recorded as unverified rather than decorated.
                     quote=L.quote_source(conn))
+    for line in runner.startup_notes:
+        print(f"  {WARN if 'UNRESOLVED' in line else OK}start{END}    {line}")
     print(f"{DIM}reading {_db(args)} every {args.every}s · hard stop {HARD_STOP:%H:%M} ET · Ctrl-C to stop{END}")
     flattened = False
     try:
@@ -220,6 +234,8 @@ def cmd_live(args) -> int:
                       + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
             if args.trade:
                 runner.sync_fills()
+                for line in runner.reconcile_positions():
+                    print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}RECONCILE{END} {line}")
                 # The monitored stop lives here and nowhere else: for a
                 # `queued`-verdict pre-market entry this call IS the stop.
                 for line in runner.watch_stops():
@@ -316,6 +332,29 @@ def cmd_ah_exit(args) -> int:
     return 0
 
 
+def cmd_accept_a1(args) -> int:
+    """Record the owner's acceptance of amendment A1 (docs/preregistration.md
+    §5): pre-market entries on a `queued` probe verdict get NO resting stop;
+    the runner is the stop, and every such position is UNPROTECTED in the
+    report. A human act, recorded with a name and a time. Code never sets it."""
+    conn = L.connect(_db(args))
+    st = L.get_state(conn)
+    if st.get("a1_accepted") == "yes":
+        print(f"A1 already accepted by {st.get('a1_accepted_by')} at {st.get('a1_accepted_at')}"); return 0
+    if not args.confirm:
+        print("Amendment A1 — monitored exit (docs/preregistration.md §5). Accepting means accepting,")
+        print("by name, that a pre-market position has no stop at the broker: if the runner dies,")
+        print("the quote goes stale, the name halts, or the limit does not fill, the exposure is yours.")
+        print("The GPT review of 2026-09-08 recommends observing pre-market without orders instead.")
+        print("Re-run with --confirm to record acceptance; then replace PROPOSED in §5 in the same commit.")
+        return 2
+    who = os.environ.get("USER") or "operator"
+    L.set_state(conn, a1_accepted="yes", a1_accepted_by=who,
+                a1_accepted_at=datetime.now(timezone.utc).isoformat(timespec="seconds"))
+    print(f"{OK}recorded{END} A1 accepted by {who} — update docs/preregistration.md §5 in the same commit")
+    return 0
+
+
 def cmd_review(args) -> int:
     """Everything so far, across sessions. The continuous-improvement view:
     which gate kills most, which refusal dominates, how the strategy stands
@@ -389,13 +428,15 @@ def main(argv=None) -> int:
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
     sub.add_parser("stuck"); sub.add_parser("review")
     ah = sub.add_parser("ah-exit"); ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
+    a1 = sub.add_parser("accept-a1", help="record the owner's acceptance of amendment A1 (monitored pre-market exit)")
+    a1.add_argument("--confirm", action="store_true")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
-            "ah-exit": cmd_ah_exit}[args.cmd](args)
+            "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1}[args.cmd](args)
 
 
 if __name__ == "__main__":

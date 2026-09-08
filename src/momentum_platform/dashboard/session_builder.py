@@ -650,6 +650,7 @@ def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
         "rvol": getattr(snap, "rvol", None) if snap else None,
         "change_pct": getattr(snap, "change_from_close_pct", None) if snap else None,
     }
+    rules_hash, code_commit = _versions()
     _L.record_decision(
         journal, symbol=rec["symbol"], armed_at=plan.armed_at_bar, plan=plan,
         cascade=res, inputs=inputs, snapshot=snapshot,
@@ -657,8 +658,25 @@ def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
         source_name=source_name, data_status=data_status,
         bar_resolution=getattr(bar, "timeframe", "1m"),
         float_quality=meta.get("floatQuality"), float_source=meta.get("floatSource"),
+        rules_hash=rules_hash, code_commit=code_commit,
     )
     journal.commit()      # a decision is visible to the runner the moment it exists
+
+
+_VERSIONS: tuple | None = None
+
+
+def _versions() -> tuple:
+    """(rules hash, code commit), computed once per process and stamped on
+    every decision so a row can be tied to the rules and code that made it."""
+    global _VERSIONS
+    if _VERSIONS is None:
+        try:
+            from .. import desk_profile as DP
+            _VERSIONS = (DP.fingerprint().get("hash"), DP.build_commit())
+        except Exception:                               # noqa: BLE001
+            _VERSIONS = (None, None)
+    return _VERSIONS
 
 
 def _journal_halt(journal, rec, last_before) -> None:

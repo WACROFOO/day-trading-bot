@@ -89,6 +89,8 @@ Entry line, never `ARMED`.
 | `python3 scripts/exercise.py stuck` | any filled, un-exited position |
 | `python3 scripts/exercise.py review` | everything so far across sessions: what kills, what is refused, verdicts, fills, controls, replay, today's risk lock |
 | `python3 scripts/exercise.py ah-exit ID --confirm` | the after-hours exception: exit-only, records who confirmed |
+| `python3 scripts/exercise.py accept-a1 --confirm` | records YOUR acceptance of amendment A1 (pre-market entries with no stop at the broker). Never set by code; read §5 of the pre-registration first |
+| `IBKR_PORT=4002 python3 scripts/day.py --probe-orders` | the only way the day command runs the pre-market stop probe, which places and cancels an unfillable paper bracket. Off by default: an observational day dispatches nothing order-shaped |
 
 ## Optional: start it for you
 
@@ -110,8 +112,16 @@ Entry line, never `ARMED`.
   been read back yet. The next runner sync closes it at the real fill price;
   if the runner is gone, check the position in the Gateway.
 - **The runner restarted mid-morning** → it adopts its open orders from the
-  ledger and matches them at the broker by IBKR's permanent id. Nothing is
-  placed twice: a decision is acted on once, whatever the restart count.
+  ledger and matches them at the broker by IBKR's permanent id. An order
+  whose acknowledgement was never saved is found by its reference (the
+  decision id on every leg) or marked `UNRESOLVED` for you; it is never sent
+  again. Nothing is placed twice, whatever the restart count.
+- **A `start UNRESOLVED intent` or `RECONCILE` line in the runner output** →
+  the ledger and the broker disagree about a position. New entries are
+  blocked until you look: `exercise.py stuck`, then the Gateway's order and
+  position windows.
+- **`another runner already holds …lock`** → a runner is already attached to
+  this ledger. Two would claim the same decision; the second refuses.
 - **Probe says `queued`** → pre-market entries are unprotected by design
   (`src/execution/policy.py`); phase C needs your written acceptance in
   `docs/preregistration.md` §5.

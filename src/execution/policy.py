@@ -24,7 +24,16 @@ def premarket_allowed(state: dict) -> tuple[bool, str]:
     if v == "held":
         return True, "probe: IBKR holds the stop live pre-market — brackets"
     if v == "queued":
-        return True, "probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED"
+        # §5: phase C does not start on this verdict until the owner accepts
+        # amendment A1. Until 2026-09-08 the code allowed the monitored shape
+        # on the verdict alone (audit F1); acceptance is now a recorded human
+        # act — `exercise.py accept-a1 --confirm` — and nothing else.
+        if state.get("a1_accepted") != "yes":
+            return False, ("probe: stop queued to 09:30 — the monitored exit is amendment A1, "
+                           "not yet accepted by the owner (exercise.py accept-a1 --confirm)")
+        return True, (f"probe: stop queued to 09:30 — monitored exit, positions UNPROTECTED "
+                      f"(A1 accepted by {state.get('a1_accepted_by') or '?'} "
+                      f"{str(state.get('a1_accepted_at') or '')[:10]})")
     return False, f"probe inconclusive ({v!r}) — paste the probe output back"
 
 

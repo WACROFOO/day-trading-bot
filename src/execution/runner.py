@@ -72,16 +72,25 @@ class Runner:
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.acted: list[Acted] = []
+        self.startup_notes: list[str] = []
+        # docs/preregistration.md §2: one name at a time. Counted from the
+        # ledger — resting, filled, exit pending, or an unresolved intent.
+        self.max_positions = 1
+        self.rules_hash, self.code_commit = _versions()
         # Entries and exits are separate switches. A risk-gate lock closes
         # entries for the day; the exit side (fill sync, monitored stops, the
         # hard-stop flatten) must keep running in TRADE mode.
         self.entries_enabled = True
         if self.mode == "TRADE":
+            # An intent whose acknowledgement was never saved is matched at the
+            # broker by orderRef, or marked UNRESOLVED. Never resent.
+            for line in self.reconcile_intents():
+                self.startup_notes.append(line)
             # Whatever the ledger says is still alive at the broker is ours to
             # track from the first loop, restart or not.
             adopted = self.trader.adopt(L.open_orders(self.conn))
             if adopted:
-                self.acted_note = f"adopted {adopted} open order(s) from the ledger"
+                self.startup_notes.append(f"adopted {adopted} open order(s) from the ledger")
 
     # ------------------------------------------------------------- the loop
     def step(self) -> list["Acted"]:
@@ -123,8 +132,15 @@ class Runner:
                 reasons.append(f"pre-market entry not allowed: {why}")
             else:
                 shape = premarket_shape(state)
+        if str(row["data_status"] or "").endswith("-backfill"):
+            # Armed on loaded history with inputs from later. Diagnostic
+            # cohort only: not prospective evidence, never an order (audit F3).
+            reasons.append("backfill decision: armed on loaded history, inputs not point-in-time")
         if self.mode == "TRADE" and not self.entries_enabled:
             reasons.append("day locked by the risk gate — no new entries")
+        if self.mode == "TRADE" and L.positions_alive(self.conn) >= self.max_positions:
+            reasons.append(f"one position at a time (preregistration §2): "
+                           f"{L.positions_alive(self.conn)} order(s) alive or unresolved")
         if self.mode == "TRADE" and not row["volume_ok"]:
             # FILTERS.md Layer 2: pullback_volume < impulse_volume, all true at
             # entry. The detector computes it; nothing enforced it.
@@ -153,25 +169,126 @@ class Runner:
         if self.mode == "LOG_ONLY":
             return "LOG_ONLY", []
 
+        # The intent is durable BEFORE the send (audit F4). The decision is
+        # CLAIMED and an orders row exists with status 'intent'; a crash
+        # between here and the acknowledgement leaves exactly that, and the
+        # next start reconciles it by orderRef instead of placing it again.
+        oid = L.record_intent(
+            self.conn, row["decision_id"], symbol=intent.symbol, session=intent.session,
+            trigger=intent.trigger, stop=intent.stop, target=intent.target,
+            shares=intent.shares, dollar_risk=self.dollar_risk,
+            rules_hash=self.rules_hash, code_commit=self.code_commit)
+        self.conn.commit()
         try:
             if shape == "monitored":
                 placed = self.trader.place_entry_monitored(intent)
             else:
                 placed = self.trader.place_bracket(intent, now=clock)
         except OrderRefused as exc:
+            # Nothing was sent: the trader refuses before it touches the socket.
+            self.conn.execute("UPDATE orders SET status='Refused', updated_at=? WHERE order_id=?",
+                              (L._now(), oid))
+            L.add_order_event(self.conn, oid, "refused by the trader before sending: "
+                              + "; ".join(exc.reasons))
             return "REFUSED", list(exc.reasons)
+        except Exception as exc:                        # noqa: BLE001
+            # The send may or may not have reached the broker. The row stays
+            # 'intent' and the decision CLAIMED; reconcile_intents() decides.
+            L.add_order_event(self.conn, oid, f"send raised {exc!r} — acknowledgement unknown; "
+                              f"reconciled by orderRef on the next start, never resent")
+            self.conn.commit()
+            raise
         # RiskVeto and anything else propagates: a latched day or a dead
         # socket is not an outcome to record against one decision, it is the
         # end of the loop, and the caller must see it.
-        L.record_order(
-            self.conn, row["decision_id"], symbol=intent.symbol,
-            account=self.trader.account or "",
-            session=intent.session, parent_id=placed.parent_id,
-            stop_id=placed.stop_id, target_id=placed.target_id,
-            trigger=intent.trigger, stop=intent.stop, target=intent.target,
-            shares=intent.shares, dollar_risk=self.dollar_risk,
-            protected=placed.protected)
+        L.set_order_ids(
+            self.conn, oid, parent_id=placed.parent_id, stop_id=placed.stop_id,
+            target_id=placed.target_id, account=self.trader.account or "",
+            protected=placed.protected, status="submitted",
+            perm_id=getattr(placed, "perm_id", None))
         return "TAKEN", []
+
+    # ------------------------------------------------------ reconciliation
+    def reconcile_intents(self) -> list[str]:
+        """Intents whose acknowledgement was never saved: find them at the
+        broker by orderRef (the decision_id on every leg) or mark UNRESOLVED.
+        Nothing here sends anything."""
+        out: list[str] = []
+        rows = L.intents(self.conn)
+        if not rows:
+            return out
+        ib = getattr(self.trader, "ib", None)
+        trades = list(ib.trades()) if ib is not None and hasattr(ib, "trades") else []
+        for r in rows:
+            legs = [t for t in trades if getattr(t.order, "orderRef", "") == r["decision_id"]]
+            parent = next((t for t in legs if t.order.action == "BUY"), None)
+            if parent is None:
+                L.mark_unresolved(self.conn, r["order_id"],
+                                  "intent recorded, acknowledgement never saved, and no order with "
+                                  "this reference at the broker — NOT resent; check the broker by hand")
+                out.append(f"UNRESOLVED intent #{r['order_id']} {r['symbol']} — not at the broker; "
+                           f"blocks new entries until a human clears it")
+                continue
+            stop = next((t for t in legs if t.order.action == "SELL"
+                         and t.order.orderType == "STP"), None)
+            target = next((t for t in legs if t.order.action == "SELL"
+                           and t.order.orderType == "LMT"), None)
+            L.set_order_ids(self.conn, r["order_id"], parent_id=parent.order.orderId,
+                            stop_id=stop.order.orderId if stop else None,
+                            target_id=target.order.orderId if target else None,
+                            account=self.trader.account or "", protected=stop is not None,
+                            status=parent.orderStatus.status,
+                            perm_id=getattr(parent.order, "permId", None) or None)
+            L.set_outcome(self.conn, r["decision_id"], "TAKEN", [])
+            L.add_order_event(self.conn, r["order_id"],
+                              f"reconciled by orderRef after a restart: parent {parent.order.orderId}, "
+                              f"stop {stop.order.orderId if stop else 'NONE'}")
+            out.append(f"reconciled intent #{r['order_id']} {r['symbol']} by orderRef "
+                       f"(stop {'present' if stop else 'MISSING'})")
+        self.conn.commit()
+        return out
+
+    def reconcile_positions(self) -> list[str]:
+        """Broker positions against the ledger's exits. A long the broker holds
+        that no ledger row covers, or that has no working exit (a resting stop,
+        a monitored stop, or a sell already sent), is flagged for a human.
+        Read-only against the broker; it sends nothing."""
+        if self.mode != "TRADE":
+            return []
+        ib = getattr(self.trader, "ib", None)
+        if ib is None or not hasattr(ib, "positions"):
+            return []
+        out: list[str] = []
+        working = ("Submitted", "PreSubmitted", "monitored")
+        for pos in ib.positions():
+            qty = int(getattr(pos, "position", 0) or 0)
+            if qty <= 0:
+                continue
+            sym = pos.contract.symbol
+            rows = self.conn.execute(
+                "SELECT * FROM orders WHERE symbol=? AND fill_price IS NOT NULL "
+                "AND (exit_ts IS NULL OR status='ExitPending') "
+                "AND status NOT IN ('Cancelled','ApiCancelled','Closed','NotFilled')", (sym,)).fetchall()
+            if not rows:
+                out.append(f"UNTRACKED position {sym} x{qty} at the broker — no ledger row; "
+                           f"exit by hand (exercise.py stuck)")
+                continue
+            covered = sum(int(r["filled_qty"] or r["shares"]) for r in rows)
+            if covered != qty:
+                for r in rows:
+                    L.add_order_event(self.conn, r["order_id"],
+                                      f"quantity mismatch: broker holds {qty}, ledger covers {covered}")
+                out.append(f"QUANTITY MISMATCH {sym}: broker {qty}, ledger {covered}")
+            for r in rows:
+                has_exit = (r["status"] == "ExitPending"
+                            or (r["stop_status"] or "") in working)
+                if not has_exit:
+                    L.flag_manual(self.conn, r["order_id"],
+                                  f"position {sym} x{qty} at the broker with no working exit "
+                                  f"(stop status {r['stop_status']!r}) — a human must place one")
+                    out.append(f"NO WORKING EXIT {sym} x{qty} (order #{r['order_id']})")
+        self.conn.commit()
+        return out
 
     # ------------------------------------------------------------- fills
     def sync_fills(self) -> int:
@@ -193,10 +310,15 @@ class Runner:
                 continue
             if p.filled_qty is not None:
                 L.set_filled_qty(self.conn, r["order_id"], p.filled_qty)
-            # NBBO is asked for AT THE MOMENT the fill is seen. Later is wrong
-            # and earlier is impossible; the gap between fill and this call is
-            # itself recorded through the two timestamps.
-            nbbo = self.quote(p.symbol) if self.quote else None
+            # NBBO in force at the broker's execution time, from the desk's
+            # time-indexed quote ticks (audit 2026-09-08: the poll that notices
+            # a fill can lag it by a loop). The poll-time quote is the fallback
+            # and says so in nbbo_source.
+            nbbo = L.nbbo_at(self.conn, p.symbol, p.fill_time) if p.fill_time else None
+            if nbbo is None:
+                nbbo = self.quote(p.symbol) if self.quote else None
+                if nbbo:
+                    nbbo = {**nbbo, "source": "poll"}
             L.record_fill(self.conn, r["order_id"], fill_price=p.fill_price,
                           fill_ts=p.fill_time or self.now(), nbbo=nbbo,
                           status=p.status, stop_status=p.stop_status,
@@ -344,6 +466,16 @@ class Runner:
         self.reconcile_unfilled()
         self.conn.commit()
         return done
+
+
+def _versions() -> tuple[Optional[str], Optional[str]]:
+    """(rules hash, code commit) stamped on every intent and order, so a row
+    can be tied to the configuration and code that produced it (audit F2)."""
+    try:
+        from momentum_platform import desk_profile as DP
+        return DP.fingerprint().get("hash"), DP.build_commit()
+    except Exception:                                   # noqa: BLE001
+        return None, None
 
 
 def _bid_ask(quote: Optional[Quote], symbol: str) -> tuple[float, float]:

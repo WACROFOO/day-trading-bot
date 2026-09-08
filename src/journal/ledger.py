@@ -56,7 +56,11 @@ DEFAULT_DB = Path(os.environ.get(
     "JOURNAL_DB", Path(__file__).resolve().parents[2] / "data" / "journal.sqlite"))
 
 # The runner's verdict on a decision. PENDING until the runner has looked.
-OUTCOMES = ("PENDING", "TAKEN", "REFUSED", "NOT_FILLED", "LOG_ONLY", "SUPPRESSED")
+# CLAIMED: the runner wrote the intent and is about to send; a row left in
+# CLAIMED after a restart is an ambiguous send and is reconciled, never resent.
+# UNRESOLVED: the reconciliation could not find the order at the broker.
+OUTCOMES = ("PENDING", "CLAIMED", "TAKEN", "REFUSED", "NOT_FILLED", "LOG_ONLY", "SUPPRESSED",
+            "UNRESOLVED")
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS decisions (
@@ -116,6 +120,28 @@ CREATE TABLE IF NOT EXISTS orders (
     perm_id INTEGER,                                            -- IBKR permId, survives restarts
     placed_at TEXT NOT NULL, updated_at TEXT NOT NULL
 );
+
+-- Immutable history of every decision write that changed the row (audit
+-- 2026-09-08, F-"preserve the original decision"). The decisions table is the
+-- latest-state projection; this is the record of what it said before.
+CREATE TABLE IF NOT EXISTS decision_revisions (
+    rev_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    decision_id TEXT NOT NULL, recorded_at TEXT NOT NULL,
+    data_status TEXT, verdict TEXT, killed_by TEXT, plan_allowed INTEGER,
+    outcome TEXT, last REAL, bid REAL, ask REAL,
+    gates_json TEXT, warnings_json TEXT, inputs_json TEXT
+);
+CREATE INDEX IF NOT EXISTS ix_revisions_decision ON decision_revisions(decision_id);
+
+-- Every quote change the desk saw, time-indexed, so a fill can be joined to
+-- the quote in force AT THE EXECUTION TIME rather than at the poll that
+-- noticed the fill (R4). `quotes` keeps only the latest per symbol.
+CREATE TABLE IF NOT EXISTS quote_ticks (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    symbol TEXT NOT NULL, ts TEXT NOT NULL, bid REAL, ask REAL,
+    bid_size REAL, ask_size REAL, recorded_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS ix_quote_ticks_symbol_ts ON quote_ticks(symbol, ts);
 
 -- The daily risk latch (journal/risk.py). One row per ET date; once locked,
 -- stays locked for the day and survives a restart.
@@ -228,9 +254,16 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
 # does not add them; this does, once, and is a no-op afterwards.
 _ADDED_COLUMNS = {
     "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT"),
-                       ("last_session_date", "TEXT")),
+                       ("last_session_date", "TEXT"),
+                       # Amendment A1 (docs/preregistration.md §5) is accepted by a
+                       # human, by command, with a name and a time — never by code.
+                       ("a1_accepted", "TEXT"), ("a1_accepted_by", "TEXT"),
+                       ("a1_accepted_at", "TEXT"),
+                       ("code_commit", "TEXT"), ("rules_hash", "TEXT")),
+    "decisions": (("rules_hash", "TEXT"), ("code_commit", "TEXT")),
     "orders": (("perm_id", "INTEGER"), ("symbol", "TEXT"), ("exit_confirmed_by", "TEXT"),
-               ("filled_qty", "REAL"), ("exit_order_id", "INTEGER")),
+               ("filled_qty", "REAL"), ("exit_order_id", "INTEGER"),
+               ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT")),
     "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
@@ -288,7 +321,9 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
                     data_status: str = "", bar_resolution: str = "1m",
                     source: str = "pullback",
                     float_quality: Optional[str] = None,
-                    float_source: Optional[str] = None) -> str:
+                    float_source: Optional[str] = None,
+                    rules_hash: Optional[str] = None,
+                    code_commit: Optional[str] = None) -> str:
     """One plan, one row. Returns the decision_id. Repeats are no-ops.
 
     `plan` is the detector's PullbackPlan (or anything with entry/stop/target
@@ -302,7 +337,7 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
               "value": g.value, "reason": g.reason, "kills": g.kills}
              for g in cascade.gates]
     outcome = "PENDING" if cascade.plan_allowed else "SUPPRESSED"
-    conn.execute("""
+    cur = conn.execute("""
         INSERT INTO decisions (
             decision_id, ts_et, session, symbol, source, session_id, source_name,
             data_status, bar_resolution,
@@ -310,8 +345,8 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
             float_shares, float_quality, float_source, catalyst, halted,
             verdict, killed_by, plan_allowed, gates_json, warnings_json, inputs_json,
             trigger, stop, target, risk_share, reward_multiple, pullback_candles,
-            volume_ok, outcome, recorded_at)
-        VALUES (?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?)
+            volume_ok, outcome, recorded_at, rules_hash, code_commit)
+        VALUES (?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?, ?,?)
         ON CONFLICT(decision_id) DO UPDATE SET
             -- A row first seen during a STALE build is a fact about the FEED,
             -- not the name. The next LIVE build may replace it; nothing else
@@ -340,9 +375,24 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
         getattr(plan, "risk_share", None), getattr(plan, "reward_multiple", None),
         getattr(plan, "pullback_candles", None),
         int(bool(getattr(plan, "volume_ok", False))),
-        outcome, _now(),
+        outcome, _now(), rules_hash, code_commit,
     ))
+    if cur.rowcount == 1:
+        # The row was inserted or actually updated: keep what it now says as an
+        # immutable revision. A no-op conflict (the same plan re-armed by the
+        # next rebuild) writes nothing here.
+        conn.execute("""INSERT INTO decision_revisions (decision_id, recorded_at, data_status,
+                            verdict, killed_by, plan_allowed, outcome, last, bid, ask,
+                            gates_json, warnings_json, inputs_json)
+                        SELECT decision_id, recorded_at, data_status, verdict, killed_by,
+                               plan_allowed, outcome, last, bid, ask, gates_json, warnings_json,
+                               inputs_json FROM decisions WHERE decision_id=?""", (did,))
     return did
+
+
+def revisions(conn: sqlite3.Connection, decision_id: str) -> list[sqlite3.Row]:
+    return conn.execute("SELECT * FROM decision_revisions WHERE decision_id=? ORDER BY rev_id",
+                        (decision_id,)).fetchall()
 
 
 def record_board(conn: sqlite3.Connection, ts, session_id: str,
@@ -391,6 +441,60 @@ def record_order(conn: sqlite3.Connection, decision_id: str, *, symbol: str,
     return int(cur.lastrowid)
 
 
+def record_intent(conn: sqlite3.Connection, decision_id: str, *, symbol: str, session: str,
+                  trigger: float, stop: float, target: Optional[float], shares: int,
+                  dollar_risk: float, rules_hash: Optional[str] = None,
+                  code_commit: Optional[str] = None) -> int:
+    """The durable intent, written and COMMITTED before anything is sent.
+
+    Audit 2026-09-08 F4: a ledger row written after the send is not an
+    atomic transaction with the broker. If the process dies between the
+    broker's acceptance and the row, the decision was still PENDING and a
+    restarted runner would place it again. Now the decision is CLAIMED and
+    an orders row exists with status 'intent' before `placeOrder`; a row
+    still 'intent' after a restart is reconciled against the broker by its
+    orderRef, and never resent."""
+    cur = conn.execute("""
+        INSERT INTO orders (decision_id, symbol, account, session, parent_id, stop_id,
+            target_id, trigger, stop, target, shares, dollar_risk, planned_risk, protected,
+            status, rules_hash, code_commit, placed_at, updated_at)
+        VALUES (?,?,?,?,NULL,NULL,NULL,?,?,?,?,?,?,0,'intent',?,?,?,?)""",
+        (decision_id, symbol, "", session, trigger, stop, target, shares, dollar_risk,
+         round((trigger - stop) * shares, 2), rules_hash, code_commit, _now(), _now()))
+    conn.execute("UPDATE decisions SET outcome='CLAIMED', acted_at=? WHERE decision_id=?",
+                 (_now(), decision_id))
+    return int(cur.lastrowid)
+
+
+def set_order_ids(conn: sqlite3.Connection, order_id: int, *, parent_id: int,
+                  stop_id: Optional[int], target_id: Optional[int], account: str,
+                  protected: bool, status: str = "submitted",
+                  perm_id: Optional[int] = None) -> None:
+    """The broker's acknowledgement, written against the intent."""
+    conn.execute("""UPDATE orders SET parent_id=?, stop_id=?, target_id=?, account=?, protected=?,
+                    status=?, perm_id=COALESCE(?, perm_id), updated_at=? WHERE order_id=?""",
+                 (parent_id, stop_id, target_id, account, int(protected), status, perm_id,
+                  _now(), order_id))
+
+
+def intents(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Rows written before a send whose acknowledgement was never saved."""
+    return conn.execute("SELECT * FROM orders WHERE status='intent' ORDER BY placed_at").fetchall()
+
+
+def mark_unresolved(conn: sqlite3.Connection, order_id: int, text: str) -> None:
+    """An intent that cannot be matched at the broker. It blocks new entries
+    (the one-position rule counts it) and it is NEVER resent; a human looks."""
+    row = conn.execute("SELECT decision_id FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    conn.execute("UPDATE orders SET status='UNRESOLVED', stop_status=?, updated_at=? WHERE order_id=?",
+                 (MANUAL, _now(), order_id))
+    conn.execute("UPDATE decisions SET outcome='UNRESOLVED', acted_at=? WHERE decision_id=?",
+                 (_now(), row["decision_id"]))
+    add_order_event(conn, order_id, text)
+
+
 def record_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
                 fill_ts, nbbo: Optional[dict] = None, status: str = "Filled",
                 stop_status: Optional[str] = None,
@@ -405,13 +509,13 @@ def record_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
     nbbo = nbbo or {}
     conn.execute("""
         UPDATE orders SET fill_price=?, fill_ts=?, realised_risk=?, slippage_ratio=?,
-            nbbo_bid=?, nbbo_ask=?, nbbo_bid_size=?, nbbo_ask_size=?, nbbo_ts=?,
+            nbbo_bid=?, nbbo_ask=?, nbbo_bid_size=?, nbbo_ask_size=?, nbbo_ts=?, nbbo_source=?,
             status=?, stop_status=COALESCE(?, stop_status),
             protected=COALESCE(?, protected), updated_at=?
         WHERE order_id=?""",
         (fill_price, _et(fill_ts), realised, ratio,
          nbbo.get("bid"), nbbo.get("ask"), nbbo.get("bid_size"), nbbo.get("ask_size"),
-         _et(nbbo["ts"]) if nbbo.get("ts") else None,
+         _et(nbbo["ts"]) if nbbo.get("ts") else None, nbbo.get("source"),
          status, stop_status, None if protected is None else int(protected), _now(),
          order_id))
 
@@ -482,12 +586,18 @@ def funnel(conn: sqlite3.Connection) -> dict:
         "board_symbols": q("SELECT COUNT(DISTINCT symbol) FROM board_snapshots"),
         "board_plan_allowed": q("SELECT COUNT(*) FROM board_snapshots WHERE plan_allowed=1"),
         "plans_armed": q("SELECT COUNT(*) FROM decisions"),
+        # Backfill: armed on bars older than the desk's start, with inputs from
+        # later. Diagnostic cohort; never prospective evidence (audit F3).
+        "plans_backfill": q("SELECT COUNT(*) FROM decisions WHERE data_status LIKE '%-backfill'"),
+        "plans_prospective": q("SELECT COUNT(*) FROM decisions WHERE data_status IS NULL "
+                               "OR data_status NOT LIKE '%-backfill'"),
         "plans_suppressed": q("SELECT COUNT(*) FROM decisions WHERE outcome='SUPPRESSED'"),
         "plans_allowed": q("SELECT COUNT(*) FROM decisions WHERE plan_allowed=1"),
         "refused_by_executor": q("SELECT COUNT(*) FROM decisions WHERE outcome='REFUSED'"),
         "log_only": q("SELECT COUNT(*) FROM decisions WHERE outcome='LOG_ONLY'"),
         "taken": q("SELECT COUNT(*) FROM decisions WHERE outcome='TAKEN'"),
         "orders": q("SELECT COUNT(*) FROM orders"),
+        "orders_unresolved": q("SELECT COUNT(*) FROM orders WHERE status IN ('intent','UNRESOLVED')"),
         "fills": q("SELECT COUNT(*) FROM orders WHERE fill_price IS NOT NULL"),
         "fills_with_nbbo": q("SELECT COUNT(*) FROM orders WHERE fill_price IS NOT NULL AND nbbo_bid IS NOT NULL"),
         "actuals": q("SELECT COUNT(*) FROM actuals"),
@@ -520,15 +630,42 @@ def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
 
 
 def record_quotes(conn: sqlite3.Connection, quotes: dict) -> None:
-    """quotes: symbol -> {bid, ask, bid_size, ask_size, ts}. Overwrites."""
+    """quotes: symbol -> {bid, ask, bid_size, ask_size, ts}. `quotes` keeps the
+    latest per symbol; every CHANGE is appended to `quote_ticks` so a fill can
+    be joined to the quote in force at its execution time."""
     for sym, q in quotes.items():
         if q.get("bid") is None and q.get("ask") is None:
             continue
+        ts = q.get("ts") or _now()
+        prev = conn.execute("SELECT bid, ask, bid_size, ask_size, ts FROM quotes WHERE symbol=?",
+                            (sym,)).fetchone()
+        changed = prev is None or (prev["bid"], prev["ask"], prev["bid_size"], prev["ask_size"], prev["ts"]) != \
+            (q.get("bid"), q.get("ask"), q.get("bid_size"), q.get("ask_size"), ts)
         conn.execute(
             "INSERT OR REPLACE INTO quotes (symbol, bid, ask, bid_size, ask_size, ts, recorded_at) "
             "VALUES (?,?,?,?,?,?,?)",
-            (sym, q.get("bid"), q.get("ask"), q.get("bid_size"), q.get("ask_size"),
-             q.get("ts") or _now(), _now()))
+            (sym, q.get("bid"), q.get("ask"), q.get("bid_size"), q.get("ask_size"), ts, _now()))
+        if changed:
+            conn.execute(
+                "INSERT INTO quote_ticks (symbol, ts, bid, ask, bid_size, ask_size, recorded_at) "
+                "VALUES (?,?,?,?,?,?,?)",
+                (sym, _et(ts), q.get("bid"), q.get("ask"), q.get("bid_size"), q.get("ask_size"), _now()))
+
+
+def nbbo_at(conn: sqlite3.Connection, symbol: str, ts, max_age_s: int = 30):
+    """The desk's quote in force at `ts`: the latest tick at or before it, if
+    not older than max_age_s. None otherwise — an absent NBBO is recorded as
+    absent, never replaced by a later one (R4)."""
+    at = _et(ts)
+    r = conn.execute("""SELECT * FROM quote_ticks WHERE symbol=? AND ts<=? ORDER BY ts DESC LIMIT 1""",
+                     (symbol, at)).fetchone()
+    if r is None:
+        return None
+    age = (datetime.fromisoformat(at) - datetime.fromisoformat(r["ts"])).total_seconds()
+    if age > max_age_s:
+        return None
+    return {"bid": r["bid"], "ask": r["ask"], "bid_size": r["bid_size"], "ask_size": r["ask_size"],
+            "ts": r["ts"], "source": "exec_time_join", "age_s": round(age, 1)}
 
 
 def quote_source(conn: sqlite3.Connection, max_age_s: int = 30):
@@ -576,7 +713,8 @@ def get_state(conn: sqlite3.Connection) -> dict:
 
 def set_state(conn: sqlite3.Connection, **fields) -> dict:
     allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
-               "paper_data", "paper_data_date", "last_session_date"}
+               "paper_data", "paper_data_date", "last_session_date",
+               "a1_accepted", "a1_accepted_by", "a1_accepted_at", "code_commit", "rules_hash"}
     bad = set(fields) - allowed
     if bad:
         raise ValueError(f"unknown state fields {sorted(bad)}")
@@ -657,8 +795,18 @@ def open_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Orders that may still be alive at the broker: not exited, not cancelled.
     What a restarted runner must adopt before it can sync anything."""
     return conn.execute("""SELECT * FROM orders WHERE exit_ts IS NULL
-                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled')
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled',
+                                              'intent', 'UNRESOLVED')
                            ORDER BY placed_at""").fetchall()
+
+
+def positions_alive(conn: sqlite3.Connection) -> int:
+    """How many orders could still become or be a position: resting, filled and
+    not exited, an exit sent but unconfirmed, an intent whose acknowledgement
+    was never saved, or an unresolved intent. The one-position rule
+    (docs/preregistration.md §2) counts every one of these."""
+    return conn.execute("""SELECT COUNT(*) FROM orders WHERE (exit_ts IS NULL OR status='ExitPending')
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled')""").fetchone()[0]
 
 
 def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:

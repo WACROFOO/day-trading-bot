@@ -304,3 +304,202 @@ def test_a_plan_armed_before_the_desk_started_is_tagged_backfill():
     assert rows == ["replay"], rows
     # the suffix must not read as a stale feed
     assert _feed_is_stale("live-backfill") is False and _feed_is_stale("stale-backfill") is True
+
+
+
+# ---- audit 2026-09-08 F4: the intent is durable before the send -------------------------
+def _trade_journal():
+    """A ledger with one REVIEW decision armed at 10:05 ET, ready to trade."""
+    c = L.connect(":memory:")
+    inp = _inputs(); res = evaluate(inp)
+    L.record_decision(c, symbol="T", armed_at="2026-09-08T14:05:00Z",
+                      plan=NS(entry=6.0, stop=5.8, target=6.4, risk_share=0.2, reward_multiple=2.0,
+                              pullback_candles=2, volume_ok=True),
+                      cascade=res, inputs=inp, snapshot={}, session="regular")
+    c.execute("UPDATE decisions SET verdict='REVIEW', plan_allowed=1, outcome='PENDING'"); c.commit()
+    return c
+
+
+_NOW = lambda: datetime(2026, 9, 8, 14, 5, 30, tzinfo=timezone.utc)      # noqa: E731
+_Q = lambda s: dict(bid=6.01, ask=6.03, bid_size=100, ask_size=100, ts="2026-09-08T14:05:29Z")  # noqa: E731
+
+
+class _Trader:
+    account = "DU1"
+    def __init__(self, conn=None, fail=None):
+        self.placed = []; self.conn = conn; self.fail = fail; self.ib = None; self.seen_intent = None
+    def adopt(self, rows): return 0
+    def sync(self): pass
+    def place_bracket(self, intent, now=None):
+        from execution.intent import PlacedOrder
+        if self.conn is not None:                   # what the ledger says AT THE MOMENT of the send
+            self.seen_intent = self.conn.execute(
+                "SELECT status, (SELECT outcome FROM decisions WHERE decision_id=orders.decision_id) "
+                "FROM orders").fetchone()
+        if self.fail:
+            raise self.fail
+        rec = PlacedOrder(symbol=intent.symbol, parent_id=41, stop_id=42, trigger=intent.trigger,
+                          stop=intent.stop, shares=intent.shares, protected=True)
+        rec.intent = intent; self.placed.append(rec); return rec
+
+
+def test_the_intent_row_and_the_claim_exist_before_the_order_is_sent():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    (a,) = r.step()
+    assert a.outcome == "TAKEN"
+    assert tuple(t.seen_intent) == ("intent", "CLAIMED")            # durable before placeOrder
+    o = c.execute("SELECT status, parent_id, stop_id, decision_id FROM orders").fetchone()
+    assert (o["status"], o["parent_id"], o["stop_id"]) == ("submitted", 41, 42)
+    assert t.placed[0].intent.ref == o["decision_id"]                # the correlation key travels
+    assert c.execute("SELECT outcome FROM decisions").fetchone()[0] == "TAKEN"
+
+
+def test_a_send_that_raises_leaves_a_claimed_intent_that_is_never_resent():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c, fail=ConnectionError("socket died mid-send"))
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    with pytest.raises(ConnectionError):
+        r.step()
+    o = c.execute("SELECT status FROM orders").fetchone()
+    assert o["status"] == "intent"
+    assert c.execute("SELECT outcome FROM decisions").fetchone()[0] == "CLAIMED"
+    assert L.pending(c) == []                                        # a restart re-offers nothing
+    assert L.positions_alive(c) == 1                                 # and the slot is taken
+
+    # restart 1: the broker HAS the order (found by orderRef) -> ids written, TAKEN
+    did = c.execute("SELECT decision_id FROM decisions").fetchone()[0]
+    parent = NS(order=NS(orderRef=did, action="BUY", orderType="LMT", orderId=77, permId=9001),
+                orderStatus=NS(status="PreSubmitted"))
+    stop = NS(order=NS(orderRef=did, action="SELL", orderType="STP", orderId=78, permId=9002),
+              orderStatus=NS(status="PreSubmitted"))
+    t2 = _Trader(); t2.ib = NS(trades=lambda: [parent, stop])
+    r2 = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t2, now=_NOW, quote=_Q)
+    assert any("reconciled" in n for n in r2.startup_notes)
+    o = c.execute("SELECT status, parent_id, stop_id, perm_id FROM orders").fetchone()
+    assert (o["status"], o["parent_id"], o["stop_id"], o["perm_id"]) == ("PreSubmitted", 77, 78, 9001)
+    assert c.execute("SELECT outcome FROM decisions").fetchone()[0] == "TAKEN"
+    assert r2.step() == []                                           # nothing placed twice
+
+
+def test_an_intent_the_broker_never_saw_becomes_unresolved_and_blocks_entries():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c, fail=ConnectionError("x"))
+    with pytest.raises(ConnectionError):
+        Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q).step()
+    t2 = _Trader(); t2.ib = NS(trades=lambda: [])                    # broker: nothing with that ref
+    r2 = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t2, now=_NOW, quote=_Q)
+    assert any("UNRESOLVED" in n for n in r2.startup_notes)
+    o = c.execute("SELECT status, stop_status FROM orders").fetchone()
+    assert (o["status"], o["stop_status"]) == ("UNRESOLVED", L.MANUAL)
+    assert c.execute("SELECT outcome FROM decisions").fetchone()[0] == "UNRESOLVED"
+    assert L.positions_alive(c) == 1 and L.funnel(c)["orders_unresolved"] == 1
+    # a second decision is refused by the one-position rule while it stands
+    inp = _inputs(); res = evaluate(inp)
+    L.record_decision(c, symbol="U", armed_at="2026-09-08T14:05:00Z",
+                      plan=NS(entry=7.0, stop=6.8, target=7.4, risk_share=0.2, reward_multiple=2.0,
+                              pullback_candles=2, volume_ok=True),
+                      cascade=res, inputs=inp, snapshot={}, session="regular")
+    c.execute("UPDATE decisions SET verdict='REVIEW', plan_allowed=1, outcome='PENDING' WHERE symbol='U'"); c.commit()
+    (a,) = r2.step()
+    assert a.outcome == "REFUSED" and any("one position at a time" in x for x in a.reasons)
+
+
+def test_one_position_at_a_time_refuses_a_second_entry_while_the_first_is_alive():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    (a,) = r.step(); assert a.outcome == "TAKEN"
+    inp = _inputs(); res = evaluate(inp)
+    L.record_decision(c, symbol="U", armed_at="2026-09-08T14:05:00Z",
+                      plan=NS(entry=7.0, stop=6.8, target=7.4, risk_share=0.2, reward_multiple=2.0,
+                              pullback_candles=2, volume_ok=True),
+                      cascade=res, inputs=inp, snapshot={}, session="regular")
+    c.execute("UPDATE decisions SET verdict='REVIEW', plan_allowed=1, outcome='PENDING' WHERE symbol='U'"); c.commit()
+    (b,) = r.step()
+    assert b.outcome == "REFUSED" and any("one position at a time" in x for x in b.reasons)
+    assert len(t.placed) == 1
+
+
+# ---- F3: backfill rows are refused and never prospective --------------------------------
+def test_backfill_decisions_are_refused_and_excluded_from_prospective_counts():
+    from execution.runner import Runner
+    c = _trade_journal()
+    c.execute("UPDATE decisions SET data_status='live-backfill'"); c.commit()
+    f = L.funnel(c)
+    assert (f["plans_armed"], f["plans_backfill"], f["plans_prospective"]) == (1, 1, 0)
+    r = Runner(c, mode="LOG_ONLY", dollar_risk=20.0, now=_NOW)
+    (a,) = r.step()
+    assert a.outcome == "REFUSED" and any("backfill" in x for x in a.reasons)
+
+
+# ---- immutable revisions, quote ticks -------------------------------------------------
+def test_decision_revisions_keep_each_change_and_ignore_no_op_rewrites():
+    c = L.connect(":memory:")
+    inp = _inputs(); res = evaluate(inp)
+    plan = NS(entry=6.0, stop=5.8, target=6.4, risk_share=0.2, reward_multiple=2.0, pullback_candles=2, volume_ok=True)
+    kw = dict(symbol="T", armed_at="2026-09-08T14:05:00Z", plan=plan, cascade=res, inputs=inp, snapshot={}, session="regular")
+    did = L.record_decision(c, **kw)
+    L.record_decision(c, **kw); L.record_decision(c, **kw)            # the next rebuilds: no change
+    assert len(L.revisions(c, did)) == 1
+    # a STALE-first row upgraded by a LIVE build is a change, and is kept
+    c2 = L.connect(":memory:")
+    stale = NS(verdict=NS(value="STALE"), killed_by="feed", plan_allowed=False, gates=[], warnings=[])
+    L.record_decision(c2, **{**kw, "cascade": stale, "data_status": "stale"})
+    L.record_decision(c2, **{**kw, "data_status": "live"})
+    revs = L.revisions(c2, did)
+    assert [r["verdict"] for r in revs] == ["STALE", res.verdict.value]
+
+
+def test_nbbo_at_joins_the_quote_in_force_at_the_execution_time():
+    c = L.connect(":memory:")
+    L.record_quotes(c, {"T": dict(bid=6.00, ask=6.02, bid_size=100, ask_size=100, ts="2026-09-08T14:05:00Z")})
+    L.record_quotes(c, {"T": dict(bid=6.00, ask=6.02, bid_size=100, ask_size=100, ts="2026-09-08T14:05:00Z")})  # same: no tick
+    L.record_quotes(c, {"T": dict(bid=6.10, ask=6.12, bid_size=200, ask_size=100, ts="2026-09-08T14:05:20Z")})
+    assert c.execute("SELECT COUNT(*) FROM quote_ticks").fetchone()[0] == 2
+    q = L.nbbo_at(c, "T", "2026-09-08T14:05:10Z")
+    assert (q["bid"], q["source"]) == (6.00, "exec_time_join")       # the quote in force at :10, not the later one
+    assert L.nbbo_at(c, "T", "2026-09-08T14:05:25Z")["bid"] == 6.10
+    assert L.nbbo_at(c, "T", "2026-09-08T14:06:30Z") is None          # 70 s old: absent, not decorated
+    assert L.nbbo_at(c, "T", "2026-09-08T14:04:00Z") is None          # before any quote
+
+
+# ---- F5: positions at the broker against the ledger's exits -----------------------------
+def test_reconcile_positions_flags_a_long_with_no_working_exit_and_an_untracked_one():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    r.step()
+    oid = c.execute("SELECT order_id FROM orders").fetchone()[0]
+    L.record_fill(c, oid, fill_price=6.02, fill_ts="2026-09-08T14:06:00Z", stop_status="PreSubmitted")
+    pos = lambda sym, q: NS(position=q, contract=NS(symbol=sym))    # noqa: E731
+    t.ib = NS(positions=lambda: [pos("T", 100), pos("ZZ", 50)])
+    lines = r.reconcile_positions()
+    assert any("UNTRACKED position ZZ" in x for x in lines)
+    assert not any("NO WORKING EXIT T" in x for x in lines)          # stop is PreSubmitted: fine
+    c.execute("UPDATE orders SET stop_status='Cancelled' WHERE order_id=?", (oid,)); c.commit()
+    lines = r.reconcile_positions()
+    assert any("NO WORKING EXIT T" in x for x in lines)
+    assert c.execute("SELECT stop_status FROM orders WHERE order_id=?", (oid,)).fetchone()[0] == L.MANUAL
+
+
+# ---- RVOL: a thin same-clock-time baseline falls back to the daily measure, labelled ------
+def test_a_thin_time_of_day_baseline_is_not_trusted_and_the_daily_measure_stands():
+    from datetime import datetime as _dt
+    from momentum_platform.formulas import enrich_snapshot, rvol_baseline_floor
+    from momentum_platform.models import SymbolSnapshot
+    assert rvol_baseline_floor(None) == 5_000 and rvol_baseline_floor(120_000) == 5_000
+    assert rvol_baseline_floor(2_000_000) == 20_000
+    ts = _dt(2026, 9, 8, 12, 30, tzinfo=timezone.utc)                 # 08:30 ET = bucket 54
+    thin = [100.0] * 60 + [5.0e5] * 140                                 # prior sessions: ~100 shares by 08:30
+    s = SymbolSnapshot(symbol="ATRA", event_ts=ts, last=10.7, volume_today=738,
+                       avg_daily_volume=120_000, volume_profile=thin)
+    enrich_snapshot(s)
+    assert s.rvol_measure == "daily_thin_baseline" and s.rvol_tod is None
+    assert s.rvol == s.rvol_daily and s.rvol < 0.01                     # 738 / 120k, not 7.38x
+    fat = [50_000.0] * 60 + [5.0e5] * 140                               # a name that does trade pre-market
+    s2 = SymbolSnapshot(symbol="ISPC", event_ts=ts, last=1.9, volume_today=6_700_000,
+                        avg_daily_volume=120_000, volume_profile=fat)
+    enrich_snapshot(s2)
+    assert s2.rvol_measure == "time_of_day" and round(s2.rvol) == 134

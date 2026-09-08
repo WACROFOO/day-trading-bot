@@ -239,6 +239,8 @@ class PaperTrader:
         parent.tif = "DAY"
         parent.outsideRth = True
         parent.transmit = True
+        if intent.ref:
+            parent.orderRef = intent.ref
         self.ib.placeOrder(stock, parent)
 
         rec = PlacedOrder(symbol=intent.symbol, parent_id=parent.orderId,
@@ -299,6 +301,8 @@ class PaperTrader:
         parent.transmit = False
         parent.tif = "DAY"
         parent.outsideRth = ext
+        if intent.ref:
+            parent.orderRef = intent.ref
 
         target_leg = None
         if intent.target is not None:
@@ -309,6 +313,8 @@ class PaperTrader:
             target_leg.transmit = False
             target_leg.tif = "DAY"
             target_leg.outsideRth = ext
+            if intent.ref:
+                target_leg.orderRef = intent.ref
 
         stop_leg = StopOrder("SELL", intent.shares, intent.stop)
         stop_leg.orderId = self.ib.client.getReqId()
@@ -316,10 +322,15 @@ class PaperTrader:
         stop_leg.ocaGroup = oca
         stop_leg.tif = "DAY"
         stop_leg.outsideRth = ext
+        if intent.ref:
+            stop_leg.orderRef = intent.ref
         # Last leg transmits, releasing the whole group at once. The stop is
         # deliberately the one that carries it: if anything in this sequence
-        # fails partway, the group is never released and no unprotected entry
-        # can exist.
+        # fails partway, the group is not released. That is IBKR's documented
+        # use of the transmit flag while a bracket is assembled — it says
+        # nothing about a child rejected or cancelled later, a disconnect, or
+        # a quantity mismatch, which is what sync() and
+        # Runner.reconcile_positions() are for (audit 2026-09-08 F5).
         stop_leg.transmit = True
 
         return parent, stop_leg, target_leg
@@ -418,8 +429,8 @@ class PaperTrader:
         n = 0
         have = {p.parent_id for p in self.placed}
         for r in rows:
-            if r["parent_id"] in have:
-                continue
+            if not r["parent_id"] or r["parent_id"] in have:
+                continue        # an intent without ids is reconciled, not adopted
             rec = PlacedOrder(symbol=r["symbol"], parent_id=r["parent_id"],
                               stop_id=r["stop_id"], target_id=r["target_id"],
                               trigger=r["trigger"], stop=r["stop"], shares=int(r["shares"]),

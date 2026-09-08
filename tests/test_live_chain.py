@@ -54,6 +54,10 @@ def live(tmp_path, monkeypatch):
     clock = lambda: T0  # noqa: E731
     desk = IbkrDesk(["AAA"], ib_factory=lambda: ib, clock=clock, headlines=False, sec=False, rescan=0)
     desk.log = lambda m: None
+    # This desk was "up" before the tape it is fed: the fixture's minute bars
+    # stand for bars watched live, not history loaded at start. A start time
+    # after them would (correctly) tag every decision as backfill.
+    desk._started = start - timedelta(minutes=1)
     desk._bootstrap()
     desk.refresh_session()
     yield {"desk": desk, "ib": ib, "db": db, "conn": L.connect(db)}
@@ -116,3 +120,22 @@ def test_a_float_file_from_another_day_is_ignored(tmp_path, monkeypatch):
     assert desk_mod._float_override("AAA", "2026-09-08") is None
     (tmp_path / "old.json").write_text(json.dumps({"date": "2026-09-08", "floats": {"AAA": 6e6}}))
     assert desk_mod._float_override("AAA", "2026-09-08")["float"] == 6e6
+
+
+
+def test_a_log_only_day_never_reaches_an_order_function(live, monkeypatch):
+    """Audit 2026-09-08 F6: the runner's mode alone does not prove the day is
+    order-free. Give the fake broker an order surface that explodes, then run
+    the whole observational loop — desk rebuild, runner step, fill sync,
+    monitored stop, after-hours flag, end of day — and expect silence."""
+    def boom(*a, **k):
+        raise AssertionError("ORDER PATH REACHED in a LOG_ONLY day")
+    for name in ("placeOrder", "cancelOrder", "bracketOrder", "whatIfOrder"):
+        monkeypatch.setattr(type(live["ib"]), name, boom, raising=False)
+    live["desk"].refresh_session()
+    r = Runner(live["conn"], mode="LOG_ONLY", dollar_risk=20.0)
+    assert L.decisions(live["conn"]), "the fixture arms a plan on the live path"
+    acted = r.step()                                   # whatever is pending is judged, never sent
+    assert all(a.outcome in ("LOG_ONLY", "REFUSED") for a in acted)
+    assert r.sync_fills() == 0 and r.watch_stops() == [] and r.flag_after_hours() == [] and r.end_of_day() == []
+    assert live["conn"].execute("SELECT COUNT(*) FROM orders").fetchone()[0] == 0
