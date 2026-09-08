@@ -272,7 +272,7 @@ def test_no_session_trades_outside_both_windows():
 
 
 def test_an_unknown_session_is_refused():
-    assert any("unknown session" in x
+    assert any("outside the 07:00-16:00 ET session window" in x
                for x in refusals(intent(session="afterhours"), now=RTH))
 
 

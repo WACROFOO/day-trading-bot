@@ -104,6 +104,28 @@ move the rehearsal diary aside, preflight on port 4002 from 07:00 ET, then
 Gateway is up: `python3 scripts/restart_probe.py` proves a restarted runner
 finds its orders at the broker by permanent id; it has not been run yet.
 
+## 6b. Found during the first live session (8 September, 08:00–08:10 ET)
+
+- **A browser tab on port 4002 blocked the desk.** Chrome held a TCP
+  connection to the Gateway's API port; the Gateway stalled every new API
+  client behind it and the desk's connect timed out while the preflight,
+  run seconds earlier, had passed. Closing the tab fixed it. Port 4002 is
+  the API, never a page; the platform is http://127.0.0.1:8787.
+- **Warning 2109 on the stop leg.** IBKR accepted the pre-market bracket
+  but said the outside-regular-hours attribute is *ignored* for the stop
+  order type. The probe only knew warning 399 and called it `held`. A stop
+  that cannot trigger before 09:30 protects nothing pre-market, so the
+  verdict is now `queued` with the reason `2109` (`scripts/premarket_probe.py`
+  `verdict_from`, pinned in `tests/test_audit_fixes.py`). Today's recorded
+  `held` is overwritten by tomorrow's probe; phase A places no orders.
+- **Decisions from loaded history.** The desk started at 08:06 with 246
+  minutes of history and its first two decisions were stamped 06:12 and
+  07:28, before it existed. They are real detector output on real bars, but
+  the catalyst, float and halt inputs were the 08:06 values. Such decisions
+  are now tagged `-backfill` in `data_status` (`session_builder.py`
+  `_journal_decision`, from the desk's own start time) so a review can
+  separate them from plans watched live.
+
 ## 7. Still open, honestly
 
 - **The strategy has not been shown to have edge.** The 894-session

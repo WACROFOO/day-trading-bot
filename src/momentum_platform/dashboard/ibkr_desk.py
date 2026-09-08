@@ -234,6 +234,9 @@ class IbkrDesk:
     # -- bootstrap ----------------------------------------------------------------
 
     def _bootstrap(self) -> dict:
+        # The desk's own start. Plans the detector arms on bars older than this
+        # came from loaded history, and the ledger tags them as backfill.
+        self._started = self.clock()
         ib = self.ib_factory() if self.ib_factory else None
         self.stream = IbkrStream(self.host, self.port, self.client_id, ib=ib,
                                  on_update=self.publisher, clock=self.clock)
@@ -443,8 +446,11 @@ class IbkrDesk:
         if now < self._next_resubscribe:
             return False
         self._next_resubscribe = now + self.resubscribe_every
-        self._resubscribe_wanted = False
-        why = ("TWS reported the data connection restored" if stalled is None
+        wanted, self._resubscribe_wanted = self._resubscribe_wanted, False
+        # Name the condition that fired. 2026-09-08 the startup 'connection
+        # restored' notice was logged as "no bars for 1s", which read as a
+        # stall that never happened.
+        why = ("TWS reported the data connection restored" if wanted
                else f"no bars for {int(stalled)}s while quotes kept arriving")
         self.log(f"  {why} — re-requesting quotes and five-second bars")
         try:
@@ -634,7 +640,7 @@ class IbkrDesk:
             records, session_id="ibkr-" + "-".join(self.symbols[:3]),
             source_name="IBKR · TWS read-only · live", data_status=status,
             volume_floor_scale=1.0, trading_date=self.session_day(),
-            journal=_journal())
+            journal=_journal(), journal_since=getattr(self, "_started", None))
         session["live"] = True
         session["streaming"] = True
         session["refreshSeconds"] = self.rebuild

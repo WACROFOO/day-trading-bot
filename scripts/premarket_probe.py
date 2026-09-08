@@ -57,6 +57,26 @@ def warn(m): print(f"  {WARN}!!{END}   {m}")
 def note(m): print(f"       {DIM}{m}{END}")
 
 
+def verdict_from(trades, placed) -> tuple[str, str]:
+    """(verdict, why) from what IBKR said about the stop leg.
+
+    399 on the stop: queued to 09:30. 2109 on the stop: the outsideRth flag was
+    ignored for the order type, so the stop can only trigger in regular hours —
+    it protects nothing pre-market either, and the verdict is `queued` with why
+    '2109'. `held` needs a stop leg IBKR accepted with neither warning."""
+    for t in trades:
+        if t.order.orderId != placed.stop_id:
+            continue
+        codes = {e.errorCode for e in t.log if e.errorCode}
+        if 399 in codes:
+            return "queued", "399"
+        if 2109 in codes:
+            return "queued", "2109"
+    if placed.protected:
+        return "held", ""
+    return "inconclusive", ""
+
+
 def main() -> int:
     now = datetime.now(ET)
     print(f"\nPre-market stop probe   {SYMBOL}   {now:%H:%M ET, %A}")
@@ -99,7 +119,6 @@ def main() -> int:
         trader.sync()
 
         print("\nWhat IBKR says about each leg")
-        queued_stop = False
         for t in trader.ib.trades():
             print(f"  {t.order.orderId:>4}  {t.order.orderType:<5} "
                   f"{t.order.action:<4} outsideRth={t.order.outsideRth}  "
@@ -107,15 +126,19 @@ def main() -> int:
             for e in t.log:
                 if e.errorCode:
                     note(f"    {e.errorCode}: {e.message}")
-                    if e.errorCode == 399 and t.order.orderId == placed.stop_id:
-                        queued_stop = True
+        verdict, why = verdict_from(trader.ib.trades(), placed)
 
         print("\nVERDICT")
-        if queued_stop:
-            verdict = "queued"
+        if verdict == "queued" and why == "399":
             warn("IBKR QUEUED the stop leg to 09:30 — it protects nothing now")
             note("A pre-market entry is naked from its fill until the bell.")
             note("The pre-market path needs a monitored exit, not a bracket.")
+        elif verdict == "queued":
+            warn("IBKR DROPPED outsideRth on the stop leg (warning 2109: the attribute is")
+            warn("ignored for this order type) — the stop is regular-hours only")
+            note("2026-09-08: the leg read PreSubmitted and the probe called it 'held'.")
+            note("A stop that cannot trigger before 09:30 protects nothing pre-market;")
+            note("the verdict is the same as queued. The pre-market path needs a monitored exit.")
         elif placed.protected:
             verdict = "held"
             good("IBKR is holding the stop leg as live pre-market")

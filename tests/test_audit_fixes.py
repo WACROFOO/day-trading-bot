@@ -267,3 +267,40 @@ def test_connect_refuses_a_live_account_and_closes_the_socket(monkeypatch):
     with pytest.raises(NotPaperError, match="not a paper account"):
         t.connect()
     assert t.ib is None and calls == [("connect", 4002, False), ("disconnect",)]
+
+
+# ---- pre-market stop probe: 2109 means the stop is regular-hours only ----------------------
+def test_probe_calls_a_2109_stop_leg_queued_not_held():
+    """2026-09-08 08:06 ET: IBKR answered the stop leg with warning 2109 (the
+    outsideRth attribute is ignored for this order type), the leg read
+    PreSubmitted, and the probe said `held`. A stop that cannot trigger before
+    09:30 protects nothing pre-market; that is `queued`, not `held`."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import premarket_probe as P
+    placed = NS(stop_id=15, protected=True)
+    stop = NS(order=NS(orderId=15), log=[NS(errorCode=0), NS(errorCode=2109)])
+    parent = NS(order=NS(orderId=14), log=[NS(errorCode=0)])
+    assert P.verdict_from([parent, stop], placed) == ("queued", "2109")
+    stop399 = NS(order=NS(orderId=15), log=[NS(errorCode=399)])
+    assert P.verdict_from([parent, stop399], placed) == ("queued", "399")
+    clean = NS(order=NS(orderId=15), log=[NS(errorCode=0)])
+    assert P.verdict_from([parent, clean], placed) == ("held", "")
+    assert P.verdict_from([parent, clean], NS(stop_id=15, protected=False)) == ("inconclusive", "")
+
+
+# ---- decisions armed from loaded history are tagged, not passed off as live -----------
+def test_a_plan_armed_before_the_desk_started_is_tagged_backfill():
+    from momentum_platform.dashboard.session_builder import _feed_is_stale, build_session
+    fixture = ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl"
+    # the desk 'started' after every bar in the fixture: everything is backfill
+    conn = L.connect(":memory:")
+    build_session(fixture, journal=conn, journal_since="2027-01-01T00:00:00Z")
+    rows = [r[0] for r in conn.execute("SELECT DISTINCT data_status FROM decisions").fetchall()]
+    assert rows == ["replay-backfill"], rows
+    # started before the tape: nothing is tagged
+    conn2 = L.connect(":memory:")
+    build_session(fixture, journal=conn2, journal_since="2020-01-01T00:00:00Z")
+    rows = [r[0] for r in conn2.execute("SELECT DISTINCT data_status FROM decisions").fetchall()]
+    assert rows == ["replay"], rows
+    # the suffix must not read as a stale feed
+    assert _feed_is_stale("live-backfill") is False and _feed_is_stale("stale-backfill") is True

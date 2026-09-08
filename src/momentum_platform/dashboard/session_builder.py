@@ -111,7 +111,7 @@ def _row(ranked) -> list:
 
 
 def build_session(fixture_path: str | Path, max_rows: int = 10,
-                  journal=None) -> dict:
+                  journal=None, journal_since=None) -> dict:
     """Build a session from a replay fixture file."""
     fixture_path = Path(fixture_path)
     records = [
@@ -120,7 +120,7 @@ def build_session(fixture_path: str | Path, max_rows: int = 10,
         if line.strip() and not line.startswith("#")
     ]
     return build_session_from_records(records, fixture_path.stem, fixture_path.name,
-                                      max_rows, journal=journal)
+                                      max_rows, journal=journal, journal_since=journal_since)
 
 
 
@@ -151,6 +151,7 @@ def build_session_from_records(
     volume_floor_scale: float = 1.0,
     trading_date: str | None = None,
     journal=None,
+    journal_since=None,
 ) -> dict:
     """Build the dashboard session.
 
@@ -370,7 +371,7 @@ def build_session_from_records(
                 allowed = bool(_res and _res.plan_allowed)
                 if journal is not None and _res is not None:
                     _journal_decision(journal, rec, bar, plan, _res, _inputs, _snap,
-                                      _meta, session_id, source_name, data_status)
+                                      _meta, session_id, source_name, data_status, journal_since)
                 if allowed:
                     plans.append({
                         "planId": plan.plan_id, "symbol": plan.symbol,
@@ -590,7 +591,7 @@ def _feed_is_stale(data_status) -> bool:
     only statuses that mean "this tape is current"; everything else is
     STALE, and STALE is a verdict with no plan.
     """
-    return str(data_status or "").lower() not in ("live", "replay")
+    return str(data_status or "").lower().split("-")[0] not in ("live", "replay")
 
 
 def _plan_allowed(meta: dict, halt: Optional[str], snap=None) -> bool:
@@ -621,8 +622,16 @@ class _Collector:
 # neutral ground, and a test asserts the desk imports nothing of the order path.
 
 def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
-                      session_id, source_name, data_status) -> None:
+                      session_id, source_name, data_status, since=None) -> None:
     from journal import ledger as _L
+    # A plan armed on a bar older than the desk's own start was found in the
+    # history the desk loaded, not watched live: the catalyst, float and
+    # halt inputs are today's, not that minute's. 2026-09-08 08:06 ET the desk
+    # started with 246 minutes of history and its first two decisions were
+    # stamped 06:12 and 07:28. They are real detector output and they count,
+    # but the ledger must say which kind they are.
+    if since is not None and _L._et(plan.armed_at_bar) < _L._et(since):
+        data_status = f"{data_status}-backfill"
     # Point in time (R2). The bar's own bid/ask when it has one (fixture).
     # The desk's stream quote is a quote from NOW; it belongs only to the
     # newest bar. A plan arming on an older bar gets None, never a quote

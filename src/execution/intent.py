@@ -206,7 +206,8 @@ def refusals(i: EntryIntent,
                    f"no new entries (exits are always allowed)")
 
     if i.session not in SESSIONS:
-        out.append(f"unknown session {i.session!r}; expected one of {SESSIONS}")
+        out.append(f"bar is outside the 07:00-16:00 ET session window (session {i.session!r}); "
+                   f"nothing is traded there")
     elif i.session == "regular" and not in_regular_hours(now):
         out.append("outside 09:30-16:00 ET: a regular-hours bracket needs a "
                    "resting stop, and IBKR would queue this to the next open "
