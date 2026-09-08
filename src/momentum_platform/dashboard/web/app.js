@@ -978,7 +978,7 @@ function renderPillarsBoard(frame) {
   host.classList.toggle("compact", compact);
   const head = el("div", "pb-row head");
   (compact ? ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"]
-           : ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "Daily RVOL", "Float", "News", "Pillars"])
+           : ["Symbol", "Last", "Vol today", "Avg vol", "Spread", "HOD", "vs VWAP", "In band", "Gain", "RVOL", "Float", "News", "Pillars"])
     .forEach(h => head.appendChild(el("span", null, h)));
   host.appendChild(head);
   if (!rows.length) { host.appendChild(el("div", "empty", "No symbols on the desk.")); return; }
