@@ -156,6 +156,28 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .tile-note{padding:3px 8px;font:9px/1.3 var(--sans);color:var(--ink-faint);
   border-bottom:1px solid var(--line-soft);background:#0c1219;flex:none;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:help}
+/* The explanatory line under a scanner card is hidden on the desk; it opens
+   from the card's "?" or when the card is maximized (owner, 2026-09-08). */
+.card .tile-note{display:none}
+.card.expanded .tile-note,.card.show-note .tile-note{display:block;white-space:normal;text-overflow:clip}
+.note-btn{font:600 10px/1 var(--mono);color:var(--ink-dim);cursor:help;border:1px solid var(--line);
+  border-radius:50%;width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center}
+.card.show-note .note-btn{color:var(--hi);border-color:#4a3c17}
+/* Catalyst grade on a news chip: hard = value, dilutive = supply, soft = noise. */
+.pill.grade-hard{color:#9fe3c0;border-color:#1f4c38;background:#0f2119}
+.pill.grade-dilutive{color:#ffb3ba;border-color:#4a1f26;background:#301419}
+.pill.grade-soft{color:var(--ink-dim)}
+.pill.partial{color:var(--hi);border-color:#4a3c17;background:#241d0c;font-family:var(--mono)}
+/* The verdict card: banner, pillar and chart-gate chips, the plan. The full
+   gate table and the sentences open when the card is maximized. */
+.vchips{display:flex;flex-wrap:wrap;gap:3px;margin:2px 0 5px}
+.vchip{font:600 9px/1 var(--mono);padding:2px 5px;border-radius:3px;border:1px solid var(--line);color:var(--ink-dim)}
+.vchip.ok{color:#9fe3c0;border-color:#1f4c38;background:#0f2119}
+.vchip.no{color:#ffb3ba;border-color:#4a1f26;background:#301419}
+.vchip.unk{color:var(--hi);border-color:#4a3c17;background:#241d0c;border-style:dashed}
+.vplan{font:11px/1.4 var(--mono);color:var(--ink);margin-bottom:4px}
+.vplan .muted{color:var(--ink-dim)}
+.verdict-card:not(.expanded) .why,.verdict-card:not(.expanded) .verdict-table,.verdict-card:not(.expanded) .divider{display:none}
 
 /* News recency, drawn as a flame rather than a rounded blob. The silhouette
    takes the band colour; the core is a lighter tongue so a red flame reads as

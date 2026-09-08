@@ -23,7 +23,7 @@ const ALERT_TILES = {
 // Three cards, in funnel order: candidates -> acceleration -> breakout.
 const DOCK_ORDER = ["five_pillars_list", "running_up", "hod_momentum"];
 
-const state = {
+const state = { noteOpen: {},
   frame: 0, playing: false, speed: 4, selected: null, locked: false,
   frozen: {}, openRow: null, openAlert: null, riskDollars: "",
   sound: false, focusTile: LIST_IDS[0], focusRow: 0, prevRowKeys: {}, arrivals: new Map(),
@@ -61,12 +61,21 @@ const rowObj = a => { const o = {}; S.rowColumns.forEach((c, i) => o[c] = a[i]);
    5x showed the daily number beside the name, so a row admitted at 30x
    time-of-day read 1.3x and looked like a bug in the scanner. */
 const rowRvol = r => (r && r.rvol != null ? r.rvol : (r ? r.rvolDaily : null));
+const RVOL_EXPLAIN = "RVOL, three measures — TIME OF DAY: volume so far today ÷ what the last 10 sessions had "
+  + "traded by this clock time (the one judged when a profile exists); DAILY: volume so far ÷ average FULL day "
+  + "(reads low all morning); 5m: this five-minute bar ÷ recent five-minute bars (reads high pre-market). "
+  + "A same-time baseline under 1% of the average day is too thin to trust and the daily measure stands.";
 const rowRvolTitle = r => {
-  if (!r) return "";
-  const tod = r.rvolMeasure === "time_of_day";
-  const head = tod ? "volume so far vs the same clock time in prior sessions"
-                   : "today's volume vs prior FULL days (understates a part-day)";
-  return head + (tod && r.rvolDaily != null ? " · daily measure " + fx(r.rvolDaily) + "×" : "");
+  if (!r) return RVOL_EXPLAIN;
+  const m = r.rvolMeasure;
+  const used = m === "time_of_day" ? "judged: time of day"
+             : m === "daily_thin_baseline" ? "judged: DAILY — same-time baseline too thin to trust"
+             : "judged: daily (no volume profile for this name yet)";
+  const parts = [used];
+  if (r.rvol != null && m === "time_of_day") parts.push("time of day " + fx(r.rvol) + "×");
+  if (r.rvolDaily != null) parts.push("daily " + fx(r.rvolDaily) + "×");
+  if (r.rvol5m != null) parts.push("5m " + fx(r.rvol5m) + "×");
+  return parts.join(" · ") + "\n" + RVOL_EXPLAIN;
 };
 
 /* ── derived series ─────────────────────────────────────────────────── */
@@ -489,8 +498,10 @@ function rvolPillar(row, meta, min) {
   const m = (meta && meta.metrics) || {};
   const tod = m.rvolMeasure === "time_of_day";
   const v = rowRvol(row);
+  const thin = m.rvolMeasure === "daily_thin_baseline";
   const name = tod
     ? "RVOL ≥ " + min + "× — volume so far vs the same clock time in prior sessions"
+    : thin ? "RVOL ≥ " + min + "× — today vs prior FULL days (same-time baseline too thin to trust)"
     : "RVOL ≥ " + min + "× — today vs prior FULL days (understates a part-day)";
   const chip = { k: "R", name: name, v: fx(v) + "×", ok: (v || 0) >= min, unknown: v == null };
   if (tod && m.rvolBaseline) {
@@ -629,12 +640,31 @@ function fillListCard(card, id, frame) {
     if (!state.frozen[id]) delete state.frozen[id];
     render();
   };
-  cardHead(card, meta.title, froz ? "FROZEN" : feedLabel(), [age, fz]);
+  const nb = el("span", "icon-btn note-btn", "?"); nb.title = meta.note;
+  cardHead(card, meta.title, froz ? "FROZEN" : feedLabel(), [age, nb, fz]);
+  if (state.noteOpen[card.dataset.card]) card.classList.add("show-note");
   card.appendChild(el("div", "tile-note", meta.note));
   const cols = el("div", "tile-cols list-cols");
-  ["Symbol / news", "Price", "Chg", "RVOL", "Float"].forEach(c => cols.appendChild(el("span", null, c)));
+  const rvHead = el("span", null, "RVOL"); rvHead.title = RVOL_EXPLAIN;
+  ["Symbol / news", "Price", "Chg"].forEach(c => cols.appendChild(el("span", null, c)));
+  cols.appendChild(rvHead); cols.appendChild(el("span", null, "Float"));
   card.appendChild(cols);
   const body = el("div", "tile-rows");
+  // Names that pass three or more of the five pillars but not the hard
+  // gates join the list with their score on the row (owner, 2026-09-08):
+  // a name one pillar short is a candidate to watch, not an absence.
+  const scores = {};
+  if (id === "five_pillars_list" && frame) {
+    const have = new Set(ordered.map(r => r.symbol));
+    const extra = [];
+    Object.keys(SYMS).forEach(sym => {
+      const sc = pillarScore(frame, sym, nowMs);
+      scores[sym] = sc.passed;
+      if (!have.has(sym) && sc.passed >= 3 && sc.row && sc.row.price != null) extra.push(sc.row);
+    });
+    extra.sort((a, b) => (scores[b.symbol] - scores[a.symbol]) || ((b.changePct || -1e9) - (a.changePct || -1e9)));
+    if (!froz) ordered = ordered.concat(extra);
+  }
   if (!ordered.length) {
     const b = deskBlockers(FRAMES[state.frame]);
     const T2 = S.pillarThresholds || {};
@@ -667,6 +697,18 @@ function fillListCard(card, id, frame) {
     const s = el("span", "tsym");
     s.appendChild(el("b", null, r.symbol));
     s.appendChild(flameFor(r.symbol, nowMs));
+    const nfr = newsFor(r.symbol, nowMs);
+    if (nfr) {
+      const g = classifyCatalyst(nfr.item.headline, nfr.item.category);
+      const gp = el("span", "pill grade-" + g.grade, g.grade === "hard" ? "H" : g.grade === "dilutive" ? "D" : "S");
+      gp.title = g.label + " — " + nfr.item.headline + " — " + g.note;
+      s.appendChild(gp);
+    }
+    if (scores[r.symbol] != null && scores[r.symbol] < 5) {
+      const sp = el("span", "pill partial", scores[r.symbol] + "/5");
+      sp.title = scores[r.symbol] + " of 5 pillars pass — on the list to be watched, not because it qualified";
+      s.appendChild(sp);
+    }
     if (sym.floatQuality && sym.floatQuality !== "verified")
       s.appendChild(el("span", "pill unknown", sym.floatQuality === "unknown" ? "?" : "proxy"));
     if (r.spread != null && r.price && r.spread / r.price > 0.01)
@@ -765,8 +807,10 @@ function shortBranch(branch, scannerId) {
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
   const all = loggedAlerts(cfg.scanners).slice(0, 80);
-  const head = cardHead(card, cfg.title, feedLabel(), []);
+  const nb = el("span", "icon-btn note-btn", "?"); nb.title = cfg.note;
+  const head = cardHead(card, cfg.title, feedLabel(), [nb]);
   head.insertBefore(el("span", "tile-count", String(all.length)), head.querySelector(".expand"));
+  if (state.noteOpen[card.dataset.card]) card.classList.add("show-note");
   const note = el("div", "tile-note", cfg.note);
   note.title = cfg.note;
   card.appendChild(note);
@@ -941,6 +985,17 @@ function boardRow(frame, sym) {
   const chg = last && meta.prevClose ? (last / meta.prevClose - 1) * 100 : null;
   return { row: { symbol: sym, price: last, changePct: chg, rvolDaily: null, rvol5m: null }, meta };
 }
+/* The five pillars for one symbol, as the board scores them: the four
+   technical checks plus the news check, with the catalyst grade attached. */
+function pillarScore(frame, sym, nowMs) {
+  const { row, meta } = boardRow(frame, sym);
+  const checks = pillarChecks(row, meta);
+  const nf = newsFor(sym, nowMs);
+  const grade = nf ? classifyCatalyst(nf.item.headline, nf.item.category) : null;
+  checks.push({ k: "N", name: "news catalyst", v: nf ? grade.label : "none seen",
+                ok: !!(nf && nf.flame && grade.grade !== "dilutive"), unknown: !nf, grade: grade ? grade.grade : null });
+  return { row, meta, checks, passed: checks.filter(c => c.ok).length, grade };
+}
 function renderPillarsBoard(frame) {
   if (!frame) return;
   const host = $("#pillarsBoard"); if (!host) return;
@@ -949,10 +1004,10 @@ function renderPillarsBoard(frame) {
   const T = S.pillarThresholds || {};
   const note = $("#pillarsBoardNote");
   if (note) {
-    note.textContent = "$" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
-      "× · float <" + (T.floatMaxShares / 1e6) + "M · news";
-    note.title = "Confirmed course pillars. The desk admits $" + T.deskPriceMin + "–" + T.deskPriceMax +
-      (T.deskBandEvidence === "operator_override" ? " (your band)" : "") +
+    // The thresholds read from the "?" — the head keeps its width for the title.
+    note.title = "$" + T.priceMin + "–" + T.priceMax + " · ≥" + T.gainMinPct + "% · RVOL ≥" + T.rvolMin +
+      "× · float <" + (T.floatMaxShares / 1e6) + "M · news. Confirmed course pillars. The desk admits $" +
+      T.deskPriceMin + "–" + T.deskPriceMax + (T.deskBandEvidence === "operator_override" ? " (your band)" : "") +
       ", so a name outside the pillar is still shown with its price cell FAIL.";
   }
   const rows = Object.keys(SYMS).map(sym => {
@@ -960,8 +1015,10 @@ function renderPillarsBoard(frame) {
     const bars = barsUpTo(sym, frame.barIndex);
     const checks = pillarChecks(row, meta);
     const nf = newsFor(sym, nowMs);
-    checks.push({ k: "N", name: "news catalyst", v: nf ? Math.round(nf.ageMin) + " min" : "none seen",
-                  ok: !!(nf && nf.flame), unknown: !nf });
+    const grade = nf ? classifyCatalyst(nf.item.headline, nf.item.category) : null;
+    checks.push({ k: "N", name: "news catalyst" + (nf ? " — " + grade.label + ": " + nf.item.headline + " — " + grade.note : ""),
+                  v: nf ? grade.label.split(" ")[0] + " · " + fmtAge(nf.ageMin * 60000) : "none seen",
+                  ok: !!(nf && nf.flame && grade.grade !== "dilutive"), unknown: !nf, grade: grade ? grade.grade : null });
     const passed = checks.filter(c => c.ok).length;
     const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
     const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
@@ -1334,6 +1391,15 @@ function renderL2(frame, ctx) {
 
 /* Setup verdict — mirrors the bundled Pine dashboard rows, then applies the
    playbook GO / WAIT / PASS matrix. Education and planning only. */
+/* Short names for the cascade's gates on a chip. Unknown ids keep their label. */
+const GATE_SHORT = { price: "price", float: "float", catalyst: "news", still_rising: "rising", reverse_split: "split",
+                     instrument: "stock", tick_size: "tick", buyout: "buyout", halted: "halt", vwap: "VWAP",
+                     ema9: "9EMA", macd: "MACD", pullback_volume: "vol↓", session: "session", feed: "feed" };
+function shortGate(g) {
+  const id = String(g.id || "").toLowerCase();
+  for (const k of Object.keys(GATE_SHORT)) if (id.indexOf(k) >= 0) return GATE_SHORT[k];
+  return String(g.label || id).split(/[ —:]/)[0].slice(0, 8);
+}
 function renderVerdict(frame, ctx) {
   const { last, chg, hod, row, meta, nf, halted, sym } = ctx;
   const host = $("#verdictCard"); host.textContent = "";
@@ -1410,6 +1476,35 @@ function renderVerdict(frame, ctx) {
   banner.title = sv ? "server cascade · " + (sv.gates || []).length + " gates" : "browser fallback — payload has no cascade";
   host.appendChild(banner);
 
+  // One glance: every gate as a chip, green / red / dashed-unknown, the
+  // reason in its tooltip; then the plan on one line. The sentences and the
+  // full table below open when the card is maximized (owner, 2026-09-08).
+  const chips = el("div", "vchips");
+  const stateCls = st => st === "PASS" ? "ok" : (st === "FAIL" ? "no" : "unk");
+  if (sv && (sv.gates || []).length) {
+    sv.gates.filter(g => g.state !== "NOT_APPLICABLE").forEach(g => {
+      const c = el("span", "vchip " + stateCls(g.state), shortGate(g));
+      c.title = g.label + ": " + g.state + (g.value != null ? " · " + g.value : "") + (g.reason ? " — " + g.reason : "");
+      chips.appendChild(c);
+    });
+    (sv.warnings || []).forEach(w => { const c = el("span", "vchip unk", "!"); c.title = w; chips.appendChild(c); });
+  } else {
+    [["price", priceOk], ["gain", gainOk], ["RVOL", rvolOk], ["float", floatOk ? true : floatUnknown ? null : false], ["news", newsOk]]
+      .forEach(([k, ok]) => { const c = el("span", "vchip " + (ok === null ? "unk" : ok ? "ok" : "no"), k); chips.appendChild(c); });
+  }
+  host.appendChild(chips);
+  const planLine = el("div", "vplan");
+  if (plan) {
+    planLine.innerHTML = "";
+    planLine.appendChild(el("span", null, "entry " + fx(plan.entry) + " · stop " + fx(plan.stop) + " · target " + fx(plan.target)));
+    planLine.appendChild(el("span", "muted", "  " + plan.rewardMultiple.toFixed(1) + "R · risk " + fx(plan.riskShare) + "/sh"));
+  } else {
+    const supp = suppressedPlan(sym, frame.t);
+    planLine.appendChild(el("span", "muted", supp ? "plan suppressed — killed on " + (sv && sv.killedBy || "a gate")
+                                                    : "no plan — no confirmed first pullback yet"));
+  }
+  host.appendChild(planLine);
+
   const why = el("div", "why");
   const rows = sv
     ? (sv.gates || []).filter(g => g.state !== "PASS" && g.state !== "NOT_APPLICABLE")
@@ -1436,8 +1531,8 @@ function renderVerdict(frame, ctx) {
        (T.evidence === "operator_override" ? " (yours)" : ""), priceOk);
   line("Gain vs close", pct(chg), gainOk);
   const rvolMeta = (SYMS[state.selected] || {}).metrics || {};
-  line((rvolMeta.rvolMeasure || (row && row.rvolMeasure)) === "time_of_day"
-         ? "RVOL · time of day" : "RVOL · daily",
+  const rvm = rvolMeta.rvolMeasure || (row && row.rvolMeasure);
+  line(rvm === "time_of_day" ? "RVOL · time of day" : rvm === "daily_thin_baseline" ? "RVOL · daily (thin baseline)" : "RVOL · daily",
        row ? fx(rowRvol(row)) + "×" : "—", !!rvolOk);
   // Three states, three words: PASS, FAIL, UNKNOWN. An over-cap shares-
   // outstanding bound is the third — it must never render as "false".
@@ -1445,7 +1540,8 @@ function renderVerdict(frame, ctx) {
   line("Float / supply", fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" +
        (fl.quality === "you verified" ? " (yours)" : soBound ? " SO" : "") : "unknown",
        floatStatus, floatStatus === "UNKNOWN" ? "warn" : undefined);
-  line("News", newsOk ? "Observed" : "Manual check", newsOk);
+  line("News", nf ? classifyCatalyst(nf.item.headline, nf.item.category).label + " · " + fmtAge(nf.ageMin * 60000) : "none seen",
+       newsOk);
   line("5m RVOL", row ? fx(row.rvol5m) + "×" : "—", !!momentumOk);
   line("HOD / Running", hodActive ? "HOD" : runActive ? "Running Up" : "None",
        hodActive || runActive ? "ACTIVE" : "WAIT", hodActive || runActive ? "ok" : "warn");
@@ -1928,6 +2024,16 @@ function wireLayout() {
     if (card && card.dataset.card) LAST_CLICKED_CARD = card.dataset.card;
     const btn = e.target.closest(".expand");
     if (btn) { e.stopPropagation(); toggleExpand(btn.closest(".card")); }
+    const feed = e.target.closest(".tv-feed");
+    if (feed) { e.stopPropagation(); toggleTvFeed(); }
+    // The "?" on a scanner card opens its one-line explanation; it stays open
+    // across rebuilds until clicked again.
+    const nb = e.target.closest(".note-btn");
+    if (nb && card && card.dataset.card) {
+      e.stopPropagation();
+      state.noteOpen[card.dataset.card] = !state.noteOpen[card.dataset.card];
+      card.classList.toggle("show-note", !!state.noteOpen[card.dataset.card]);
+    }
   });
   $("#expandBackdrop").addEventListener("click", () => {
     const open = document.querySelector(".card.expanded");
@@ -2100,11 +2206,13 @@ let LAST_STREAM_AT = 0;
 function setRulesBadge(desk) {
   const box = document.getElementById("rulesBadge"); if (!box || !desk || !desk.hash) return;
   box.hidden = false;
-  document.getElementById("rulesHash").textContent = String(desk.hash).slice(0, 8).toUpperCase();
+  // The badge says RULES; the hash and the build are in its tooltip (owner,
+  // 2026-09-08: a bare "33DFE…" in the header meant nothing to the reader).
   const over = Object.keys(desk.envOverrides || {});
+  document.getElementById("rulesHash").textContent = "RULES";
   document.getElementById("rulesSub").textContent =
-    (desk.build ? desk.build + " · " : "") + (over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : "shared profile")
-    + (desk.role === "viewer" ? " · VIEWER" : "");
+    over.length ? over.length + " local override" + (over.length > 1 ? "s" : "") : (desk.role === "viewer" ? "VIEWER" : "");
+  box.dataset.hash = String(desk.hash).slice(0, 8).toUpperCase() + (desk.build ? " · " + desk.build : "");
   const ent = desk.entitlements || {};
   const missing = Object.keys(ent).filter(k => ent[k] === false);
   document.getElementById("rulesDot").className = "dot " + (over.length || missing.length ? "stale" : "live");
@@ -2321,7 +2429,20 @@ function liveFollow() {
    consolidated premarket price that the single-venue IEX feed may not show.
    The script loads once, on first use, and only when the card is on screen. */
 let WIDGET_SYMBOL = {}, WIDGET_LOADING = false;
+/* Which TradingView feed the widget asks for. "exchange" = the listing venue
+   (NASDAQ:/NYSE:), which TradingView shows delayed to a free account.
+   "cboe" = BATS: — TradingView's Cboe feed, which it has served real-time to
+   free accounts; volume there is Cboe's share only. The desk cannot verify
+   TradingView's entitlement rules; the desk's own panes are IBKR real-time. */
+function tvFeed() { try { return localStorage.getItem("tvFeed") || "exchange"; } catch (e) { return "exchange"; } }
+function toggleTvFeed() {
+  const next = tvFeed() === "cboe" ? "exchange" : "cboe";
+  try { localStorage.setItem("tvFeed", next); } catch (e) { /* private mode */ }
+  Object.keys(WIDGET_SYMBOL).forEach(k => delete WIDGET_SYMBOL[k]);
+  render();
+}
 function tvSymbol(sym, meta) {
+  if (tvFeed() === "cboe") return "BATS:" + sym;
   const ex = (meta && meta.exchange) || "";
   const prefix = ex === "NASDAQ" ? "NASDAQ:" : ex === "NYSE" ? "NYSE:" : (ex === "AMEX" || ex === "ARCA") ? "AMEX:" : "";
   return prefix + sym;
@@ -2358,7 +2479,9 @@ function renderWidgetIn(host, sym, meta) {
       symbol: tvSymbol(sym, meta), interval: host.dataset.interval || "1", timezone: "America/New_York", theme: "dark",
       range: host.dataset.range || "1D",
       style: "1", locale: "en", container_id: mount.id, autosize: true,
-      withdateranges: true, hide_side_toolbar: false, allow_symbol_change: true,
+      // Compact: no drawing toolbar, no legend, no date ranges, no symbol box
+      // (owner, 2026-09-08 — the chart, not the chrome).
+      withdateranges: false, hide_side_toolbar: true, hide_legend: true, allow_symbol_change: false,
       // Extended hours on by default, both spellings: the widget has used
       // `session` and `extended_hours` across versions and ignores the one it
       // does not know. Without it their chart starts at 09:30 and a premarket
@@ -2515,7 +2638,10 @@ function init() {
   document.body.appendChild(parked);
   loadLayout(); applyLayout(); applySizes(); wireLayout(); wireResizers(); renderTray();
 
-  $("#sessionLabel").textContent = S.tradingDate + " · " + S.sessionId +
+  // The line under the name is the date, nothing else (owner, 2026-09-08).
+  // Session id and feed mode live in its tooltip.
+  $("#sessionLabel").textContent = S.tradingDate;
+  $("#sessionLabel").title = S.sessionId +
     (S.streaming ? " · LIVE — " + PROVIDER + " read-only, streaming"
      : S.live ? " · LIVE — following the newest bar" : " · deterministic replay");
   // When the desk stepped back because today had no bars, say so in the header.

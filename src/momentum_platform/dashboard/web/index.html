@@ -153,8 +153,8 @@
     <article class="card chart-card" data-card="tv-widget">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 1 minute</span>
-        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
-        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, for comparison with the price on the chart. A gap this large means you are reading TradingView's delayed feed."></span>
+        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, beside TradingView's chart. If the two disagree by a lot, the widget is on TradingView's delayed feed: their data, their entitlement, not the desk's."></span>
+        <button class="icon-btn tv-feed" title="Switch the widget between the listing exchange feed and TradingView's Cboe feed (which TradingView has served real-time to free accounts). Reload the card after switching.">⇄</button>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget" data-interval="1" data-range="1D">
         <div class="chart-note">Loading TradingView…</div>
@@ -163,8 +163,8 @@
     <article class="card chart-card" data-card="tv-widget-5m">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">TradingView · 5 minute</span>
-        <span class="legend tiny" title="TradingView shows US stocks 15 minutes delayed to a viewer who is not signed in to tradingview.com (their D badge). Sign in there in this browser; the desk's own panes are IBKR real-time.">TradingView data · delayed unless signed in there</span>
-        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, for comparison with the price on the chart. A gap this large means you are reading TradingView's delayed feed."></span>
+        <span class="legend tiny tv-desk-price" title="The desk's own last print from IBKR, beside TradingView's chart. If the two disagree by a lot, the widget is on TradingView's delayed feed: their data, their entitlement, not the desk's."></span>
+        <button class="icon-btn tv-feed" title="Switch the widget between the listing exchange feed and TradingView's Cboe feed (which TradingView has served real-time to free accounts). Reload the card after switching.">⇄</button>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="chart-host tv-host" id="tvWidget5" data-interval="5" data-range="5D">
         <div class="chart-note">Loading TradingView…</div>
@@ -173,7 +173,7 @@
     <article class="card" data-card="pillars-board">
       <div class="card-head"><span class="grip">⠿</span>
         <span class="card-title">Five Pillars check</span>
-        <span class="muted tiny" id="pillarsBoardNote">price · gain · RVOL · float · news</span>
+        <span class="icon-btn note-btn" id="pillarsBoardNote" title="price · gain · RVOL · float · news">?</span>
         <button class="icon-btn expand" title="Maximize / restore (E)">⛶</button></div>
       <div class="card-body pillars-board" id="pillarsBoard"></div>
     </article>

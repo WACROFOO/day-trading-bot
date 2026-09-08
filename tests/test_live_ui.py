@@ -109,7 +109,9 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         assert not pg.is_visible("#frameCounter")
         assert pg.text_content("#feedText") == "LIVE"
         assert "IBKR" in pg.text_content("#feedAge") and "read-only" in pg.text_content("#feedAge")
-        assert "read-only, streaming" in pg.text_content("#sessionLabel")
+        # the line under the name is the date alone; the feed mode moved to its tooltip
+        assert pg.text_content("#sessionLabel").strip() == "2026-09-03"
+        assert "read-only, streaming" in pg.get_attribute("#sessionLabel", "title")
         pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
         before = pg.evaluate("(window.__SESSION__.bars10s.AAA || []).length")
         for i in range(2):
@@ -146,9 +148,10 @@ def test_page_is_live_only_and_draws_streamed_candles(desk_server):
         # the board carries the market-data columns and the desk band note
         heads = pg.eval_on_selector_all("[data-card=pillars-board] .pb-row.head span", "els => els.map(e => e.textContent)")
         assert heads == ["Symbol", "Last", "Gain", "P", "G", "R", "F", "N", "Score"], "compact form in the column"
-        note = pg.text_content("#pillarsBoardNote")
-        assert "$2–20" in note and "RVOL ≥5×" in note and len(note) < 70, note
-        assert "desk admits $1–30" in pg.get_attribute("#pillarsBoardNote", "title")
+        # the thresholds moved off the card head into the "?" tooltip
+        assert pg.text_content("#pillarsBoardNote").strip() == "?"
+        note = pg.get_attribute("#pillarsBoardNote", "title")
+        assert "$2–20" in note and "RVOL ≥5×" in note and "desk admits $1–30" in note, note
         # a server rebuild announces itself and the page refetches at once
         before_built = pg.evaluate("window.__SESSION__.builtAt")
         desk.refresh_session()
