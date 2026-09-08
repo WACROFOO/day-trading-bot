@@ -89,8 +89,10 @@ true to what the desk saw. Both are what the Round A fixes were about.
 one that is on the baseline list (`BASELINE-2026-09-06.md`:
 `test_ibkr_stream.py::test_read_only_connect_skips_the_startup_account_sync_when_ib_async_offers_it`).
 One browser test, `test_live_ui.py::test_the_verdict_card_renders_the_servers_cascade_not_its_own_score`,
-failed once under full-suite load and passed alone; it is a timing flake,
-not a defect in the page. `research/kronos-probe/tests` is not collected
+failed in the full run and passed alone. The cause was found and fixed: the
+new-trading-day test's cleanup restored the clock but not the minute bars
+the rollover had dropped, so every later test in that module saw an empty
+tape. A test-isolation gap, not a defect in the desk; the module passes. `research/kronos-probe/tests` is not collected
 (needs `torch`, as the baseline says).
 
 ## 6. What the owner does today

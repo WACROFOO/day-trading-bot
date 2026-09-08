@@ -312,6 +312,12 @@ def test_page_rolls_to_the_new_trading_day(desk_server):
         pg.wait_for_function("window.DeskLive && window.DeskLive.state === 'open'", timeout=5000)
         assert pg.text_content("#sessionLabel").startswith("2026-09-03")
         pg.evaluate("(() => { const m = window.__deskMemory(); m.log.push({symbol: 'AAA', _at: Date.now()}); m.keys.add('x'); m.seen.set('k', 1); })()")
+        # The rollover drops yesterday's minute cache for good — correct on a
+        # real desk, which never travels back in time. This module's desk does
+        # (the clock is reset below), so the cache is snapshotted and restored;
+        # without it every later test in the module saw an empty tape and the
+        # verdict card showed "no bars yet" instead of a banner.
+        saved_minutes = {k: list(v) for k, v in desk._minutes.items()}
         try:
             ib.daily["AAA"] = day_bars(31, 4.2, today="2026-09-04")
             clock.now = datetime(2026, 9, 4, 8, 5, tzinfo=UTC)
@@ -326,6 +332,7 @@ def test_page_rolls_to_the_new_trading_day(desk_server):
         finally:
             clock.now = T0
             ib.daily["AAA"] = day_bars(30, 4.0)
+            desk._minutes = saved_minutes
             desk.refresh_session()
         browser.close()
 
