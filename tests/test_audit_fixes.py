@@ -317,6 +317,7 @@ def _trade_journal():
                               pullback_candles=2, volume_ok=True),
                       cascade=res, inputs=inp, snapshot={}, session="regular")
     c.execute("UPDATE decisions SET verdict='REVIEW', plan_allowed=1, outcome='PENDING'"); c.commit()
+    L.set_state(c, phase="B")                      # entries exist from phase B on
     return c
 
 
@@ -489,8 +490,7 @@ def test_a_thin_time_of_day_baseline_is_not_trusted_and_the_daily_measure_stands
     from datetime import datetime as _dt
     from momentum_platform.formulas import enrich_snapshot, rvol_baseline_floor
     from momentum_platform.models import SymbolSnapshot
-    assert rvol_baseline_floor(None) == 5_000 and rvol_baseline_floor(120_000) == 5_000
-    assert rvol_baseline_floor(2_000_000) == 20_000
+    assert rvol_baseline_floor(None) == 5_000 and rvol_baseline_floor(2_200_000) == 5_000
     ts = _dt(2026, 9, 8, 12, 30, tzinfo=timezone.utc)                 # 08:30 ET = bucket 54
     thin = [100.0] * 60 + [5.0e5] * 140                                 # prior sessions: ~100 shares by 08:30
     s = SymbolSnapshot(symbol="ATRA", event_ts=ts, last=10.7, volume_today=738,
@@ -503,3 +503,94 @@ def test_a_thin_time_of_day_baseline_is_not_trusted_and_the_daily_measure_stands
                         avg_daily_volume=120_000, volume_profile=fat)
     enrich_snapshot(s2)
     assert s2.rvol_measure == "time_of_day" and round(s2.rvol) == 134
+
+
+
+# ---- review round 2 ---------------------------------------------------------------------
+def test_trade_mode_places_nothing_outside_phase_b_or_c():
+    from execution.runner import Runner
+    c = _trade_journal(); L.set_state(c, phase="A")
+    t = _Trader(conn=c)
+    (a,) = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q).step()
+    assert a.outcome == "REFUSED" and any("phase A" in x for x in a.reasons) and t.placed == []
+    assert c.execute("SELECT COUNT(*) FROM orders").fetchone()[0] == 0        # no intent either
+
+
+def test_the_live_command_refuses_trade_outside_phase_b(tmp_path, monkeypatch):
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    import exercise as X
+    db = tmp_path / "j.sqlite"; L.connect(db).close()
+    assert X.main(["--db", str(db), "live", "--trade"]) == 5
+
+
+def test_a_stop_cancelled_after_the_fill_is_written_to_the_ledger_and_flagged():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    r.step()
+    rec = t.placed[0]
+    rec.fill_price, rec.fill_time, rec.status, rec.stop_status, rec.protected = 6.02, "2026-09-08T14:06:00Z", "Filled", "PreSubmitted", True
+    r.sync_fills()
+    o = c.execute("SELECT stop_status, protected FROM orders").fetchone()
+    assert (o["stop_status"], o["protected"]) == ("PreSubmitted", 1)
+    rec.stop_status, rec.protected = "Cancelled", False                 # the broker cancelled the stop later
+    assert r.sync_fills() >= 1
+    o = c.execute("SELECT stop_status, protected FROM orders").fetchone()
+    assert (o["stop_status"], o["protected"]) == ("Cancelled", 0)
+    t.ib = NS(positions=lambda: [NS(position=100, contract=NS(symbol="T"))])
+    lines = r.reconcile_positions()
+    assert any("NO WORKING EXIT" in x for x in lines)
+    assert c.execute("SELECT stop_status FROM orders").fetchone()[0] == L.MANUAL
+
+
+def test_a_cancelled_exit_makes_the_row_exit_failed_and_is_never_resent():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    r.step()
+    oid = c.execute("SELECT order_id FROM orders").fetchone()[0]
+    L.record_fill(c, oid, fill_price=6.02, fill_ts="2026-09-08T14:06:00Z", stop_status="PreSubmitted")
+    L.record_exit(c, oid, reason="hard_stop", price=None, ts="2026-09-08T15:30:00Z", confirmed=False, exit_order_id=901)
+    rec = t.placed[0]; rec.fill_price = 6.02; rec.exit_order_id, rec.exit_confirmed, rec.exit_status = 901, False, "Cancelled"
+    r.sync_fills()
+    o = c.execute("SELECT status, stop_status FROM orders").fetchone()
+    assert (o["status"], o["stop_status"]) == ("ExitFailed", L.MANUAL)
+    assert L.positions_alive(c) == 1 and len(L.stuck_orders(c)) == 1
+    assert r.watch_stops() == []                                       # nothing resent by code
+    t.ib = NS(positions=lambda: [NS(position=100, contract=NS(symbol="T"))])
+    assert any("EXIT FAILED" in x for x in r.reconcile_positions())
+
+
+def test_a_later_partial_fill_updates_the_average_price_and_the_realised_risk():
+    from execution.runner import Runner
+    c = _trade_journal(); t = _Trader(conn=c)
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=_NOW, quote=_Q)
+    r.step()
+    rec = t.placed[0]
+    rec.fill_price, rec.filled_qty, rec.fill_time, rec.status = 6.02, 40, "2026-09-08T14:06:00Z", "Submitted"
+    r.sync_fills()
+    o = c.execute("SELECT fill_price, filled_qty, realised_risk FROM orders").fetchone()
+    assert (o["fill_price"], o["filled_qty"]) == (6.02, 40)
+    rec.fill_price, rec.filled_qty, rec.status = 6.05, 100, "Filled"    # the rest fills higher
+    r.sync_fills()
+    o = c.execute("SELECT fill_price, filled_qty, realised_risk FROM orders").fetchone()
+    assert (o["fill_price"], o["filled_qty"]) == (6.05, 100)
+    assert o["realised_risk"] == round((6.05 - 5.8) * 100, 2)
+
+
+def test_exit_management_runs_every_check_even_when_one_raises():
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    import exercise as X
+    calls = []
+    class R:
+        def sync_fills(self): calls.append("sync"); raise RuntimeError("socket")
+        def reconcile_positions(self): calls.append("reconcile"); return []
+        def watch_stops(self): calls.append("watch"); return ["T x100 SELL LMT 5.80"]
+        def flag_after_hours(self): calls.append("flag"); return []
+        def end_of_day(self): calls.append("flatten"); return ["T x100 MKT"]
+    from zoneinfo import ZoneInfo
+    late = datetime(2026, 9, 8, 11, 31, tzinfo=ZoneInfo("America/New_York"))
+    assert X.manage_exits(R(), False, late) is True
+    assert calls == ["sync", "reconcile", "watch", "flag", "flatten"]

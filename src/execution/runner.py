@@ -136,6 +136,14 @@ class Runner:
             # Armed on loaded history with inputs from later. Diagnostic
             # cohort only: not prospective evidence, never an order (audit F3).
             reasons.append("backfill decision: armed on loaded history, inputs not point-in-time")
+        if self.mode == "TRADE":
+            # The phase gate at the execution boundary, not only in the day
+            # command: `exercise.py live --trade` in phase A must place nothing
+            # (review round 2). Pre-market has its own check below.
+            phase = L.get_state(self.conn).get("phase", "A")
+            if phase not in ("B", "C"):
+                reasons.append(f"phase {phase}: log only — entries start in phase B "
+                               f"(docs/preregistration.md §3; exercise.py advance)")
         if self.mode == "TRADE" and not self.entries_enabled:
             reasons.append("day locked by the risk gate — no new entries")
         if self.mode == "TRADE" and L.positions_alive(self.conn) >= self.max_positions:
@@ -267,7 +275,7 @@ class Runner:
             sym = pos.contract.symbol
             rows = self.conn.execute(
                 "SELECT * FROM orders WHERE symbol=? AND fill_price IS NOT NULL "
-                "AND (exit_ts IS NULL OR status='ExitPending') "
+                "AND (exit_ts IS NULL OR status IN ('ExitPending','ExitFailed')) "
                 "AND status NOT IN ('Cancelled','ApiCancelled','Closed','NotFilled')", (sym,)).fetchall()
             if not rows:
                 out.append(f"UNTRACKED position {sym} x{qty} at the broker — no ledger row; "
@@ -282,6 +290,9 @@ class Runner:
             for r in rows:
                 has_exit = (r["status"] == "ExitPending"
                             or (r["stop_status"] or "") in working)
+                if r["status"] == "ExitFailed":
+                    out.append(f"EXIT FAILED {sym} x{qty} (order #{r['order_id']}) — held, needs a human")
+                    continue                          # already flagged by exit_failed
                 if not has_exit:
                     L.flag_manual(self.conn, r["order_id"],
                                   f"position {sym} x{qty} at the broker with no working exit "
@@ -332,20 +343,37 @@ class Runner:
                 L.record_exit(self.conn, r["order_id"], reason=p.exit_reason or "bracket",
                               price=p.exit_price, ts=p.exit_time or self.now())
                 n += 1
-        # Partial fills on a filled row, and exits that were sent earlier
-        # (monitored stop, flatten) and have now been reported filled.
-        for r in self.conn.execute("SELECT order_id, parent_id, filled_qty FROM orders "
-                                   "WHERE fill_price IS NOT NULL").fetchall():
+        # Filled rows: the CURRENT state of the stop leg, a later partial fill
+        # that moved the average price or the quantity, and exits sent earlier
+        # (monitored stop, flatten) now reported filled — or dead.
+        for r in self.conn.execute("SELECT order_id, parent_id, filled_qty, fill_price, stop_status, status "
+                                   "FROM orders WHERE fill_price IS NOT NULL "
+                                   "AND status NOT IN ('Closed','Cancelled','ApiCancelled','NotFilled')").fetchall():
             p = by_parent.get(r["parent_id"])
-            if p is not None and p.filled_qty is not None and r["filled_qty"] != p.filled_qty:
-                L.set_filled_qty(self.conn, r["order_id"], p.filled_qty)
+            if p is None:
+                continue
+            if p.fill_price is not None and (r["fill_price"] != p.fill_price
+                                             or (p.filled_qty is not None and r["filled_qty"] != p.filled_qty)):
+                if L.refresh_fill(self.conn, r["order_id"], fill_price=p.fill_price, filled_qty=p.filled_qty):
+                    n += 1
+            if p.stop_id and p.stop_status and r["stop_status"] not in (L.MANUAL, "monitored"):
+                if L.set_protection(self.conn, r["order_id"], stop_status=p.stop_status,
+                                    protected=bool(p.protected)):
+                    n += 1
         for r in L.pending_exits(self.conn):
             p = by_parent.get(r["parent_id"])
-            if p is not None and p.exit_confirmed and p.exit_price is not None:
+            if p is None:
+                continue
+            if p.exit_confirmed and p.exit_price is not None:
                 L.confirm_exit(self.conn, r["order_id"], price=p.exit_price,
                                ts=p.exit_time or self.now())
                 L.add_order_event(self.conn, r["order_id"],
                                   f"exit confirmed filled at {p.exit_price}")
+                n += 1
+            elif p.exit_status in ("Cancelled", "ApiCancelled", "Inactive", "Rejected"):
+                # "Sent once" is not "still working" (review round 2). The row
+                # is a held position again, flagged; nothing is resent by code.
+                L.exit_failed(self.conn, r["order_id"], status=p.exit_status)
                 n += 1
         self.conn.commit()
         return n

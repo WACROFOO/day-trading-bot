@@ -34,6 +34,7 @@ def journal():
     # placement tests here set REVIEW to exercise the order path itself; the
     # Layer 2 refusal has its own test in test_review_fixes.py.
     conn.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); conn.commit()
+    L.set_state(conn, phase="B")               # entries exist from phase B on (review round 2)
     yield conn
     conn.close()
 

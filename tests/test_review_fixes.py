@@ -143,6 +143,7 @@ class FakeTrader:
 
 def _review_ready(c):
     c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
+    L.set_state(c, phase="B")                  # entries exist from phase B on (review round 2)
 
 
 def test_a_filled_stop_leg_becomes_a_recorded_exit_with_realised_pnl():

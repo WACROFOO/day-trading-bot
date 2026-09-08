@@ -69,6 +69,23 @@ pinned by a test named next to it.
 | `scripts/ibkr_paper_preflight.py` | what-if only | manual |
 | desk (`momentum_platform`) | never | two tests fail if an order path appears |
 
+## 4b. Second round, same day — four blockers from a code inspection
+
+The reviewer then read the two commits and found four paths still open.
+All four were real. Fixed and pinned the same afternoon:
+
+| # | claim | verdict | what changed | pinned by |
+|---|---|---|---|---|
+| R1 | `exercise.py live --trade` bypasses phase A: the phase was checked only by the day command and for pre-market | **Confirmed** | The command refuses `--trade` outside phase B/C (exit 5), and `Runner._act` refuses every TRADE entry outside B/C with the reason recorded, so the gate holds at the execution boundary whoever starts the runner | `test_trade_mode_places_nothing_outside_phase_b_or_c`, `test_the_live_command_refuses_trade_outside_phase_b` |
+| R2 | A stop cancelled after the fill still reads healthy: the ledger kept the status seen at the first fill | **Confirmed** | `sync_fills` persists the stop leg's current status and protection on every filled row (`ledger.set_protection`), with an event when it degrades; `reconcile_positions` then flags the position | `test_a_stop_cancelled_after_the_fill_is_written_to_the_ledger_and_flagged` |
+| R3 | An exit that was sent and later cancelled stays `ExitPending` and counts as a working exit | **Confirmed** | The trader records the exit order's status; a cancelled, inactive or rejected exit makes the row `ExitFailed`: still a position, flagged for a human, counted by the one-position rule, never resent by code | `test_a_cancelled_exit_makes_the_row_exit_failed_and_is_never_resent` |
+| R4 | An exception in `runner.step()` skipped fill sync, the monitored stop and the flatten for that loop | **Confirmed** | The live loop falls through to exit management after an entry error; `manage_exits` runs each check under its own guard, and the hard-stop flatten is attempted whatever happened before it | `test_exit_management_runs_every_check_even_when_one_raises` |
+| R5 | A later partial fill updated the quantity but not the recorded average price or the realised risk | **Confirmed** | `ledger.refresh_fill` rewrites average price, quantity and realised risk from the shares actually held | `test_a_later_partial_fill_updates_the_average_price_and_the_realised_risk` |
+
+Still open from the reviewer's measurement notes, and stated as such: the
+matched-candidate selection control (owner decision 5) and the
+preservation of partial bars as separate observations.
+
 ## 5. What this response does not claim
 
 - Passing tests demonstrate the tested cases. The pre-market path has no

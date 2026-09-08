@@ -113,6 +113,17 @@ function ema(vals, n) {
   vals.forEach((v, i) => { prev = i === 0 ? v : v * k + prev * (1 - k); out.push(i + 1 < n ? null : prev); });
   return out;
 }
+/* MACD 12/26/9 histogram: (EMA12 − EMA26) − EMA9 of that difference. FILTERS.md
+   Layer 2 asks for it positive AND above the signal line, which is the
+   histogram above zero. Null-padded like ema() until enough bars exist. */
+function macdHist(closes) {
+  if (!closes || closes.length < 35) return [];
+  const e12 = ema(closes, 12), e26 = ema(closes, 26);
+  const diff = closes.map((_, i) => (e12[i] != null && e26[i] != null) ? e12[i] - e26[i] : null);
+  const firstIdx = diff.findIndex(v => v != null);
+  const sig = ema(diff.slice(firstIdx), 9);
+  return diff.map((v, i) => (v != null && i - firstIdx >= 0 && sig[i - firstIdx] != null) ? v - sig[i - firstIdx] : null);
+}
 function vwap(bars) {
   let pv = 0, vv = 0;
   return bars.map(b => { const tp = (b[2] + b[3] + b[4]) / 3; pv += tp * b[5]; vv += b[5]; return vv ? pv / vv : b[4]; });
@@ -303,8 +314,10 @@ function makePane(hostId, daily) {
   chart.timeScale().subscribeVisibleLogicalRangeChange(paintShade);
   chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
   const lines = {};
+  // VWAP is the reference line and reads as one: three pixels against one
+  // for the EMAs (owner, 2026-09-08).
   const lineFor = key => (lines[key] = lines[key] ||
-    chart.addLineSeries({ color: PALETTE[key], lineWidth: 1, priceLineVisible: false,
+    chart.addLineSeries({ color: PALETTE[key], lineWidth: key === "vwap" ? 3 : 1, priceLineVisible: false,
                           lastValueVisible: false, crosshairMarkerVisible: false }));
   let priceLines = [];
 
@@ -471,7 +484,7 @@ function drawChart(canvas, bars, opts) {
     g.stroke();
   };
   const closes = bars.map(b => b[4]);
-  if (opts.vwap) line(vwap(bars), PALETTE.vwap);
+  if (opts.vwap) { g.lineWidth = 3; line(vwap(bars), PALETTE.vwap); g.lineWidth = 1.2; }
   if (opts.ema9) line(ema(closes, 9), PALETTE.ema9);
   if (opts.ema20) line(ema(closes, 20), PALETTE.ema20);
   if (opts.ema200) line(ema(closes, 200), PALETTE.ema200);
@@ -624,11 +637,27 @@ function fillListCard(card, id, frame) {
   const rows = (frame.lists[id] || []).map(rowObj);
   const froz = state.frozen[id];
   const nowMs = deskNow();
-  let ordered = rows, pending = 0;
+  // Names that pass three or more of the five pillars but not the hard
+  // gates join the list with their score on the row (owner, 2026-09-08):
+  // a name one pillar short is a candidate to watch, not an absence. They
+  // are part of the visible order, so a freeze pins them too.
+  const scores = {};
+  const extra = [];
+  if (id === "five_pillars_list") {
+    const have = new Set(rows.map(r => r.symbol));
+    Object.keys(SYMS).forEach(sym => {
+      const sc = pillarScore(frame, sym, nowMs);
+      scores[sym] = sc.passed;
+      if (!have.has(sym) && sc.passed >= 3 && sc.row && sc.row.price != null) extra.push(sc.row);
+    });
+    extra.sort((a, b) => (scores[b.symbol] - scores[a.symbol]) || ((b.changePct || -1e9) - (a.changePct || -1e9)));
+  }
+  const all = rows.concat(extra);
+  let ordered = all, pending = 0;
   if (froz) {
-    const byS = {}; rows.forEach(r => byS[r.symbol] = r);
+    const byS = {}; all.forEach(r => byS[r.symbol] = r);
     ordered = froz.order.map(s => byS[s]).filter(Boolean);
-    pending = rows.filter(r => froz.order.indexOf(r.symbol) === -1).length;
+    pending = all.filter(r => froz.order.indexOf(r.symbol) === -1).length;
   }
   const age = el("span", "tile-age", etTime(frame.ts));
   const fz = el("button", "icon-btn", "❄");
@@ -636,11 +665,11 @@ function fillListCard(card, id, frame) {
   fz.setAttribute("aria-pressed", String(!!froz));
   fz.onclick = e => {
     e.stopPropagation();
-    state.frozen[id] = froz ? null : { order: rows.map(r => r.symbol) };
+    state.frozen[id] = froz ? null : { order: all.map(r => r.symbol) };
     if (!state.frozen[id]) delete state.frozen[id];
     render();
   };
-  const nb = el("span", "icon-btn note-btn", "?"); nb.title = meta.note;
+  const nb = el("span", "note-btn", "?"); nb.title = meta.note;
   cardHead(card, meta.title, froz ? "FROZEN" : feedLabel(), [age, nb, fz]);
   if (state.noteOpen[card.dataset.card]) card.classList.add("show-note");
   card.appendChild(el("div", "tile-note", meta.note));
@@ -650,22 +679,9 @@ function fillListCard(card, id, frame) {
   cols.appendChild(rvHead); cols.appendChild(el("span", null, "Float"));
   card.appendChild(cols);
   const body = el("div", "tile-rows");
-  // Names that pass three or more of the five pillars but not the hard
-  // gates join the list with their score on the row (owner, 2026-09-08):
-  // a name one pillar short is a candidate to watch, not an absence.
-  const scores = {};
-  if (id === "five_pillars_list" && frame) {
-    const have = new Set(ordered.map(r => r.symbol));
-    const extra = [];
-    Object.keys(SYMS).forEach(sym => {
-      const sc = pillarScore(frame, sym, nowMs);
-      scores[sym] = sc.passed;
-      if (!have.has(sym) && sc.passed >= 3 && sc.row && sc.row.price != null) extra.push(sc.row);
-    });
-    extra.sort((a, b) => (scores[b.symbol] - scores[a.symbol]) || ((b.changePct || -1e9) - (a.changePct || -1e9)));
-    if (!froz) ordered = ordered.concat(extra);
-  }
-  if (!ordered.length) {
+  // Nothing passes price, gain AND RVOL: say which pillar is closing the
+  // list, whether or not partial rows follow it.
+  if (!rows.length) {
     const b = deskBlockers(FRAMES[state.frame]);
     const T2 = S.pillarThresholds || {};
     let msg = "Nothing passes price, gain and RVOL. An empty list is a real answer.";
@@ -682,6 +698,7 @@ function fillListCard(card, id, frame) {
     const div = el("div", "empty", msg);
     const stale = tapeStalledNote();
     if (stale) div.appendChild(el("div", "tiny warn", stale));
+    if (ordered.length) div.appendChild(el("div", "tiny", "Below: names passing 3 or 4 of 5 — watched, not qualified."));
     body.appendChild(div);
   }
   const prevKeys = state.prevRowKeys[id] || [];
@@ -807,7 +824,7 @@ function shortBranch(branch, scannerId) {
 function fillAlertCard(card, cfg, idx) {
   card.textContent = "";
   const all = loggedAlerts(cfg.scanners).slice(0, 80);
-  const nb = el("span", "icon-btn note-btn", "?"); nb.title = cfg.note;
+  const nb = el("span", "note-btn", "?"); nb.title = cfg.note;
   const head = cardHead(card, cfg.title, feedLabel(), [nb]);
   head.insertBefore(el("span", "tile-count", String(all.length)), head.querySelector(".expand"));
   if (state.noteOpen[card.dataset.card]) card.classList.add("show-note");
@@ -1479,19 +1496,43 @@ function renderVerdict(frame, ctx) {
   // One glance: every gate as a chip, green / red / dashed-unknown, the
   // reason in its tooltip; then the plan on one line. The sentences and the
   // full table below open when the card is maximized (owner, 2026-09-08).
+  // Every condition on one line, always the same order, whatever killed the
+  // name (owner, 2026-09-08: a REJECT on float must still show VWAP, 9 EMA
+  // and MACD). Where the server judged a gate its state is used; where the
+  // cascade stopped early the chart is read here, and marked as such.
   const chips = el("div", "vchips");
-  const stateCls = st => st === "PASS" ? "ok" : (st === "FAIL" ? "no" : "unk");
-  if (sv && (sv.gates || []).length) {
-    sv.gates.filter(g => g.state !== "NOT_APPLICABLE").forEach(g => {
-      const c = el("span", "vchip " + stateCls(g.state), shortGate(g));
-      c.title = g.label + ": " + g.state + (g.value != null ? " · " + g.value : "") + (g.reason ? " — " + g.reason : "");
-      chips.appendChild(c);
-    });
-    (sv.warnings || []).forEach(w => { const c = el("span", "vchip unk", "!"); c.title = w; chips.appendChild(c); });
-  } else {
-    [["price", priceOk], ["gain", gainOk], ["RVOL", rvolOk], ["float", floatOk ? true : floatUnknown ? null : false], ["news", newsOk]]
-      .forEach(([k, ok]) => { const c = el("span", "vchip " + (ok === null ? "unk" : ok ? "ok" : "no"), k); chips.appendChild(c); });
-  }
+  const bars = barsUpTo(sym, frame.barIndex);
+  const closes = bars.map(b => b[4]);
+  const lastOf = a => (a && a.length ? a[a.length - 1] : null);
+  const vw = lastOf(vwap(bars)), e9 = lastOf(ema(closes, 9)), mh = lastOf(macdHist(closes));
+  const gateById = {};
+  (sv && sv.gates || []).forEach(g => { gateById[String(g.id || "").toLowerCase()] = g; });
+  const server = key => {
+    const g = Object.keys(gateById).map(k => gateById[k]).find(g => String(g.id).toLowerCase().indexOf(key) >= 0);
+    return g && g.state !== "NOT_APPLICABLE" ? g : null;
+  };
+  const local = (label, ok, value) => ({ label, state: ok === null ? "UNKNOWN" : ok ? "PASS" : "FAIL", value, src: "chart" });
+  const conds = [
+    ["price", () => local("price $" + T.priceMin + "–" + T.priceMax, priceOk, fx(last))],
+    ["gain", () => local("gain ≥ " + T.gainMinPct + "%", gainOk, pct(chg))],
+    ["rvol", () => local("RVOL ≥ " + T.rvolMin + "×", !!rvolOk, row ? fx(rowRvol(row)) + "×" : null)],
+    ["float", () => local("float < " + (T.floatMaxShares / 1e6) + "M", floatOk ? true : floatUnknown ? null : false,
+                          fl.shares ? (fl.shares / 1e6).toFixed(1) + "M" : "unknown")],
+    ["catalyst", () => local("news today", newsOk, nf ? fmtAge(nf.ageMin * 60000) : "none")],
+    ["vwap", () => local("above VWAP", vw != null && last != null ? last > vw : null, vw != null ? fx(vw) : null)],
+    ["ema9", () => local("holding the 9 EMA", e9 != null && last != null ? last > e9 : null, e9 != null ? fx(e9) : null)],
+    ["macd", () => local("MACD > 0 and above signal", mh != null ? mh > 0 : null, mh != null ? mh.toFixed(3) : null)],
+    ["pullback_volume", () => local("pullback lighter than impulse", plan ? !!plan.volumeOk : null, plan ? (plan.volumeOk ? "lighter" : "heavier") : "no plan")],
+  ];
+  conds.forEach(([key, fallback]) => {
+    const g = server(key), c = g || fallback();
+    const st = g ? g.state : c.state;
+    const chip = el("span", "vchip " + (st === "PASS" ? "ok" : st === "FAIL" ? "no" : "unk"), shortGate({ id: key, label: c.label }));
+    chip.title = (g ? g.label : c.label) + ": " + st + (c.value != null && !g ? " · " + c.value : g && g.value != null ? " · " + g.value : "")
+               + (g ? (g.reason ? " — " + g.reason : "") + " · server cascade" : " · read from the chart here");
+    chips.appendChild(chip);
+  });
+  (sv && sv.warnings || []).forEach(w => { const c = el("span", "vchip unk", "!"); c.title = w; chips.appendChild(c); });
   host.appendChild(chips);
   const planLine = el("div", "vplan");
   if (plan) {
@@ -1628,7 +1669,7 @@ function renderCharts(frame) {
     PANES.d.note(null);   // cleared, then re-set below only when the tape is thin
     // Micro-pullbacks live here: several 10-second candles can form a pause
     // inside a single green 1-minute candle.
-    PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, tf: "10s" }, common));
+    PANES.d.render(sub, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "10s" }, common));
     if (sub.length < 12) PANES.d.note("Only " + sub.length + " ten-second candles from " + PROVIDER + " in the last 30 minutes — thin tape, not a broken chart.");
   } else {
     PANES.d.render([], {});
@@ -1636,7 +1677,7 @@ function renderCharts(frame) {
     // this session carries no sub-minute data for this symbol.
     PANES.d.note("No sub-minute data for " + sym + " in this session. Empty rather than invented.");
   }
-  PANES.c.render(meta.dailyBars || [], { ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
+  PANES.c.render(meta.dailyBars || [], { ema9: true, ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
   if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back
     const r = PENDING_RANGES; PENDING_RANGES = null;
     ["a", "b", "d", "c"].forEach(k => { if (r[k] && PANES[k] && PANES[k].setRange) PANES[k].setRange(r[k]); });
@@ -1762,13 +1803,22 @@ function beep(severity) {
   if (!state.sound) return;
   try {
     if (!audioReady()) return;
-    const o = audioCtx.createOscillator(), g = audioCtx.createGain();
-    const freq = severity === "critical" ? 340 : severity === "high" ? 660 : 520;
-    o.frequency.value = freq; o.type = "sine";
-    g.gain.setValueAtTime(0.0001, audioCtx.currentTime);
-    g.gain.exponentialRampToValueAtTime(0.06, audioCtx.currentTime + 0.01);
-    g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.22);
-    o.connect(g); g.connect(audioCtx.destination); o.start(); o.stop(audioCtx.currentTime + 0.24);
+    // A short three-note chime, the shape of a phone's message tone (owner,
+    // 2026-09-08). Synthesised here — no vendor's sound file is shipped. The
+    // pitch set says the severity: the pillars list is the brightest.
+    const t0 = audioCtx.currentTime;
+    const notes = severity === "critical" ? [440, 349, 294]
+                : severity === "high"     ? [1318, 1568, 2093]
+                :                           [988, 1175, 1568];
+    notes.forEach((freq, i) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      const at = t0 + i * 0.12;
+      o.frequency.value = freq; o.type = "sine";
+      g.gain.setValueAtTime(0.0001, at);
+      g.gain.exponentialRampToValueAtTime(0.07, at + 0.012);
+      g.gain.exponentialRampToValueAtTime(0.0001, at + 0.30);
+      o.connect(g); g.connect(audioCtx.destination); o.start(at); o.stop(at + 0.32);
+    });
   } catch (e) { /* audio is a convenience; the visual alert always fires */ }
 }
 
@@ -2481,14 +2531,28 @@ function renderWidgetIn(host, sym, meta) {
       style: "1", locale: "en", container_id: mount.id, autosize: true,
       // Compact: no drawing toolbar, no legend, no date ranges, no symbol box
       // (owner, 2026-09-08 — the chart, not the chrome).
-      withdateranges: false, hide_side_toolbar: true, hide_legend: true, allow_symbol_change: false,
+      // The drawing tools stay (owner, 2026-09-08: "why remove the tooling?");
+      // what goes is the legend, the date ranges and the symbol box.
+      withdateranges: false, hide_side_toolbar: false, hide_legend: true, allow_symbol_change: false,
       // Extended hours on by default, both spellings: the widget has used
       // `session` and `extended_hours` across versions and ignores the one it
       // does not know. Without it their chart starts at 09:30 and a premarket
       // runner shows as a flat line beside a desk that is already moving.
       session: "extended", extended_hours: true,
       details: false, hotlist: false, calendar: false,
-      studies: ["VWAP@tv-basicstudies", "MAExp@tv-basicstudies"],
+      // VWAP and the 9 / 20 / 200 EMAs on every TradingView pane. The widget
+      // takes study inputs in this object form; colours and widths come from
+      // studies_overrides, which the widget applies per study TYPE — so the
+      // three EMAs share one colour there. The desk's own panes colour them
+      // apart (PALETTE); TradingView's cannot from the embed.
+      studies: ["VWAP@tv-basicstudies",
+                { id: "MAExp@tv-basicstudies", inputs: { length: 9 } },
+                { id: "MAExp@tv-basicstudies", inputs: { length: 20 } },
+                { id: "MAExp@tv-basicstudies", inputs: { length: 200 } }],
+      studies_overrides: {
+        "vwap.vwap.color": "#2962ff", "vwap.vwap.linewidth": 3,
+        "moving average exponential.plot.linewidth": 1,
+      },
     });
   };
   if (window.TradingView) { draw(); return; }

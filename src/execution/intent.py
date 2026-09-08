@@ -293,6 +293,7 @@ class PlacedOrder:
     # moment the order left, which is a plan, not a fill.
     exit_order_id: Optional[int] = None
     exit_confirmed: bool = True
+    exit_status: Optional[str] = None            # the broker's word on the sent exit
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 

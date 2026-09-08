@@ -377,6 +377,8 @@ class PaperTrader:
             # ledger row says ExitPending and the position counts as held.
             if rec.exit_order_id and not rec.exit_confirmed:
                 ex = by_id.get(rec.exit_order_id)
+                if ex is not None:
+                    rec.exit_status = ex.orderStatus.status
                 if (ex is not None and ex.orderStatus.status == "Filled"
                         and ex.orderStatus.avgFillPrice and ex.orderStatus.avgFillPrice > 0):
                     rec.exit_price = ex.orderStatus.avgFillPrice

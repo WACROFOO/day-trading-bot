@@ -120,6 +120,10 @@ Entry line, never `ARMED`.
   the ledger and the broker disagree about a position. New entries are
   blocked until you look: `exercise.py stuck`, then the Gateway's order and
   position windows.
+- **`phase A: the exercise is log-only — --trade is refused`** → the
+  runner will not trade before `exercise.py advance` has moved the exercise
+  to phase B. This holds at the execution boundary, not only in the day
+  command.
 - **`another runner already holds …lock`** → a runner is already attached to
   this ledger. Two would claim the same decision; the second refuses.
 - **Probe says `queued`** → pre-market entries are unprotected by design

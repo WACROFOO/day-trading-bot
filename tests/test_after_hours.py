@@ -43,6 +43,7 @@ def held(tmp_path):
     c = L.connect(db)
     build_session(FIXTURE, journal=c)
     c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
+    L.set_state(c, phase="B")                  # entries exist from phase B on (review round 2)
     t = FakeTrader()
     r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t,
                now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc), max_age_s=3600,

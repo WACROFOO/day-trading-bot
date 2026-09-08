@@ -183,6 +183,14 @@ def cmd_live(args) -> int:
     from journal.risk import JournalRiskGate, RiskVeto
     gate = JournalRiskGate(conn)
     if args.trade:
+        phase = L.get_state(conn).get("phase", "A")
+        if phase not in ("B", "C"):
+            # The phase gate at the execution boundary (review round 2): the
+            # day command chose the mode from the phase, but this command could
+            # be run by hand with --trade in phase A.
+            print(f"{BAD}phase {phase}: the exercise is log-only — --trade is refused{END}  "
+                  f"(docs/preregistration.md §3; python3 scripts/exercise.py advance)")
+            return 5
         from execution.ibkr_trader import PaperTrader
         # The daily risk gate reads THIS ledger and latches in it. Until the
         # 2026-09-07 review the trader was built with no gate at all.
@@ -205,6 +213,7 @@ def cmd_live(args) -> int:
     try:
         errors = 0
         while True:
+            acted = []
             try:
                 acted = runner.step()
                 errors = 0
@@ -215,45 +224,65 @@ def cmd_live(args) -> int:
                 print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}DAY LOCKED{END} {veto.reason} — "
                       f"no more entries today; exits, stops and the flatten continue")
                 runner.entries_enabled = False
-                acted = []
             except KeyboardInterrupt:
                 raise
             except Exception as exc:                     # noqa: BLE001
                 # The runner is idempotent: pending() re-offers unfinished rows.
                 # A locked database or a malformed row must not end the day —
-                # and until now it also took the desk (the recorder) down.
+                # and until now it also skipped the exit management below
+                # (review round 2): an entry error is not a reason to leave a
+                # position unwatched.
                 errors += 1
                 print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}runner error{END} {exc!r} — retrying"
                       + (f" ({errors} in a row)" if errors > 1 else ""))
-                time.sleep(min(30, args.every * errors))
-                continue
             for a in acted:
                 tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
                 print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
                       f"{a.trigger:.2f}/{a.stop:.2f}"
                       + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
             if args.trade:
-                runner.sync_fills()
-                for line in runner.reconcile_positions():
-                    print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}RECONCILE{END} {line}")
-                # The monitored stop lives here and nowhere else: for a
-                # `queued`-verdict pre-market entry this call IS the stop.
-                for line in runner.watch_stops():
-                    print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}STOP{END}     {line}")
-                for oid in runner.flag_after_hours():
-                    print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}HELD AFTER CLOSE{END} order {oid} — "
-                          f"exercise.py ah-exit {oid} --confirm")
-                if datetime.now(ET).time() >= HARD_STOP and not flattened:
-                    done = runner.end_of_day()
-                    print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
-                    flattened = True
-            time.sleep(args.every)
+                flattened = manage_exits(runner, flattened, datetime.now(ET))
+            time.sleep(min(30, args.every * errors) if errors else args.every)
     except KeyboardInterrupt:
         print("\nstopped")
     finally:
         if trader is not None:
             trader.disconnect()
     return 0
+
+
+def manage_exits(runner, flattened: bool, now_et) -> bool:
+    """Everything that watches a position, each step on its own: a failure in
+    one must not skip the next, and the hard-stop flatten is attempted
+    whatever happened before it (review round 2). Returns the flatten flag."""
+    from execution.intent import HARD_STOP
+
+    def guarded(label, fn):
+        try:
+            return fn()
+        except KeyboardInterrupt:
+            raise
+        except Exception as exc:                          # noqa: BLE001
+            print(f"  {now_et:%H:%M:%S}  {WARN}{label} error{END} {exc!r} — the other exit checks continue")
+            return None
+
+    guarded("fill sync", runner.sync_fills)
+    for line in guarded("reconcile", runner.reconcile_positions) or []:
+        print(f"  {now_et:%H:%M:%S}  {BAD}RECONCILE{END} {line}")
+    # The monitored stop lives here and nowhere else: for a `queued`-verdict
+    # pre-market entry this call IS the stop.
+    for line in guarded("monitored stop", runner.watch_stops) or []:
+        print(f"  {now_et:%H:%M:%S}  {WARN}STOP{END}     {line}")
+    for oid in guarded("after-hours flag", runner.flag_after_hours) or []:
+        print(f"  {now_et:%H:%M:%S}  {BAD}HELD AFTER CLOSE{END} order {oid} — "
+              f"exercise.py ah-exit {oid} --confirm")
+    if now_et.time() >= HARD_STOP and not flattened:
+        done = guarded("hard stop", runner.end_of_day)
+        if done is not None:
+            print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
+            return True
+        print(f"  {BAD}HARD STOP{END} the flatten raised — retrying next loop; check the broker")
+    return flattened
 
 
 def cmd_advance(args) -> int:

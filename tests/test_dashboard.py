@@ -874,7 +874,7 @@ def test_zoom_is_handed_back_after_a_live_reload():
 def test_tradingview_widget_card_exists_and_is_labelled_as_theirs():
     web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
     html = (web / "index.html").read_text(); app = (web / "app.js").read_text()
-    assert 'data-card="tv-widget"' in html and "TradingView data" in html
+    assert 'data-card="tv-widget"' in html and "TradingView · 1 minute" in html
     assert '"tv-widget"' in app and "s3.tradingview.com/tv.js" in app
     assert 'session: "extended"' in app, "premarket must be on in the widget"
 
@@ -1011,7 +1011,8 @@ def test_artifact_build_declares_its_charset():
 def test_ui_non_ascii_survives_the_artifact_build(page):
     """The band separator, the multiplication sign and the >= sign are the ones
     that break first when the charset is missing."""
-    note = page.text_content("#pillarsBoardNote")
+    # the thresholds live in the "?" tooltip since 2026-09-08
+    note = page.get_attribute("#pillarsBoardNote", "title")
     assert "–" in note and "≥" in note and "×" in note, note
     assert "â" not in note, "mojibake: the page is being decoded as windows-1252"
 

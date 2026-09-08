@@ -76,6 +76,7 @@ NOW = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
 
 def _review(c):
     c.execute("UPDATE decisions SET verdict='REVIEW' WHERE plan_allowed=1"); c.commit()
+    L.set_state(c, phase="B")                  # entries exist from phase B on (review round 2)
 
 
 def test_trade_mode_refuses_when_the_desk_has_no_fresh_quote_for_the_symbol():

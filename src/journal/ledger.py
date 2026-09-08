@@ -520,6 +520,56 @@ def record_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
          order_id))
 
 
+def set_protection(conn: sqlite3.Connection, order_id: int, *, stop_status: Optional[str],
+                   protected: bool) -> bool:
+    """Persist the stop leg's CURRENT state on a filled row. Until 2026-09-08
+    the ledger kept the state seen at the first fill, so a stop cancelled
+    later still read healthy (review round 2). Returns True when it changed."""
+    row = conn.execute("SELECT stop_status, protected FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    if row["stop_status"] == stop_status and bool(row["protected"]) == bool(protected):
+        return False
+    if row["stop_status"] in (MANUAL, "monitored") and stop_status in (None, ""):
+        return False                      # a monitored/flagged row has no broker stop to report
+    conn.execute("UPDATE orders SET stop_status=?, protected=?, updated_at=? WHERE order_id=?",
+                 (stop_status, int(protected), _now(), order_id))
+    add_order_event(conn, order_id, f"stop leg now {stop_status!r}; protected={int(protected)}"
+                    + ("" if protected else " — position has NO working stop at the broker"))
+    return True
+
+
+def exit_failed(conn: sqlite3.Connection, order_id: int, *, status: str) -> None:
+    """The sell that was sent did not work (cancelled, inactive, rejected).
+    The row is ExitFailed: still a position, flagged for a human, counted by
+    the one-position rule, and never resent by code (review round 2)."""
+    conn.execute("UPDATE orders SET status='ExitFailed', stop_status=?, updated_at=? WHERE order_id=?",
+                 (MANUAL, _now(), order_id))
+    add_order_event(conn, order_id, f"exit order {status}: the position is STILL HELD — a human must exit it "
+                                    f"(exercise.py stuck / ah-exit); nothing is resent automatically")
+
+
+def refresh_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
+                 filled_qty: Optional[float]) -> bool:
+    """A later partial fill moved the average price or the quantity: the
+    realised risk is (avg fill − stop) × shares actually held, and the row
+    says so (review round 2). Returns True when anything changed."""
+    row = conn.execute("SELECT fill_price, filled_qty, stop, shares, planned_risk FROM orders WHERE order_id=?",
+                       (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    if row["fill_price"] == fill_price and (filled_qty is None or row["filled_qty"] == filled_qty):
+        return False
+    qty = filled_qty if filled_qty else (row["filled_qty"] or row["shares"])
+    realised = round((fill_price - row["stop"]) * qty, 2)
+    ratio = round(realised / row["planned_risk"], 4) if row["planned_risk"] else None
+    conn.execute("""UPDATE orders SET fill_price=?, filled_qty=COALESCE(?, filled_qty), realised_risk=?,
+                    slippage_ratio=?, updated_at=? WHERE order_id=?""",
+                 (fill_price, filled_qty, realised, ratio, _now(), order_id))
+    add_order_event(conn, order_id, f"fill updated: avg {fill_price} × {qty:g} — realised risk {realised}")
+    return True
+
+
 def record_exit(conn: sqlite3.Connection, order_id: int, *, reason: str,
                 price: Optional[float], ts, confirmed_by: Optional[str] = None,
                 confirmed: bool = True, exit_order_id: Optional[int] = None) -> None:
@@ -748,7 +798,7 @@ def stuck_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Filled and not exited. After the hard-stop flatten there should be
     none; any that remain are the brief's third 'stuck' state."""
     return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL
-                           AND (exit_ts IS NULL OR status='ExitPending')
+                           AND (exit_ts IS NULL OR status IN ('ExitPending', 'ExitFailed'))
                            ORDER BY placed_at""").fetchall()
 
 
@@ -805,7 +855,7 @@ def positions_alive(conn: sqlite3.Connection) -> int:
     not exited, an exit sent but unconfirmed, an intent whose acknowledgement
     was never saved, or an unresolved intent. The one-position rule
     (docs/preregistration.md §2) counts every one of these."""
-    return conn.execute("""SELECT COUNT(*) FROM orders WHERE (exit_ts IS NULL OR status='ExitPending')
+    return conn.execute("""SELECT COUNT(*) FROM orders WHERE (exit_ts IS NULL OR status IN ('ExitPending', 'ExitFailed'))
                            AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled')""").fetchone()[0]
 
 

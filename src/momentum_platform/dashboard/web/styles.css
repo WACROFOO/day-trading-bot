@@ -244,7 +244,9 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .legend{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:9px;
   color:var(--ink-faint);text-transform:none;letter-spacing:0}
 .k{width:10px;height:2px;display:inline-block;margin-right:2px;vertical-align:middle}
-.k.vwap{background:#c39bff} .k.ema9{background:#4dd2ff} .k.ema20{background:#ff9ad2}
+/* The legend swatches ARE the series colours (PALETTE in app.js); VWAP is the
+   thick one on the chart and here. */
+.k.vwap{background:#2962ff;height:4px} .k.ema9{background:#26c6da} .k.ema20{background:#ff9ad2}
 .k.hod{background:var(--hi)} .k.ema200{background:#ffb648} .k.h52{background:#c39bff}
 .chart-host{flex:1 1 auto;min-height:0;position:relative}
 .chart-host canvas{display:block;width:100%}

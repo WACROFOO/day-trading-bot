@@ -77,17 +77,17 @@ def volume_profile_baseline(profile: Optional[Sequence[float]],
     return value if value and value > 0 else None
 
 
-RVOL_BASELINE_FLOOR_PCT = 0.01        # of the average full-day volume
-RVOL_BASELINE_FLOOR_MIN = 5_000       # shares; whichever is larger
+RVOL_BASELINE_FLOOR_MIN = 5_000       # shares
 
 
 def rvol_baseline_floor(avg_daily_volume: Optional[float]) -> Optional[float]:
     """The least a same-clock-time baseline may be before the time-of-day
-    multiple is trusted: 1% of the average day or 5,000 shares, whichever is
-    larger. This desk's own guard, not a course setting."""
-    if not avg_daily_volume or avg_daily_volume <= 0:
-        return RVOL_BASELINE_FLOOR_MIN
-    return max(RVOL_BASELINE_FLOOR_MIN, RVOL_BASELINE_FLOOR_PCT * avg_daily_volume)
+    multiple is trusted: 5,000 shares. An absolute count, not a share of the
+    average day — AOUT on 2026-09-04 had a 12,000-share baseline on a 2.2M
+    average day and its 7.7× matched an independent screener, while ATRA on
+    2026-09-08 had a baseline of about 100 shares and read 7.4× on 738
+    shares traded. This desk's own guard, not a course setting."""
+    return RVOL_BASELINE_FLOOR_MIN
 
 
 def effective_rvol(snap: SymbolSnapshot) -> Optional[float]:
