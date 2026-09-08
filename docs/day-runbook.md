@@ -17,49 +17,47 @@ and refuses to start on a weekend or holiday, naming which. 7 September
 2026 was Labor Day; the chain ran all morning on a stale feed before this
 check existed.
 
-## The competing-session question (read before Tuesday)
+## One login, one tape (the design since 8 September)
 
 On 7 September the paper session was refused market data with IBKR error
-10197, *"No market data during competing live session"*: the live TWS login
-holds the subscriptions and the paper Gateway cannot share them while TWS is
-logged in. The alignment probe now reports this as `competing`. Two tests on
-a trading day decide the design:
+10197, *"No market data during competing live session"*: a live TWS login
+holds the subscriptions and the paper Gateway cannot share them while TWS
+is logged in. The alignment probe reports this as `competing`.
 
-1. Log **out** of TWS, keep the Gateway up, run `python3 scripts/alignment_probe.py`.
-   If it reads `realtime`, the paper account can see prices when it is the only login.
-2. Run the whole desk off the paper Gateway for a day, TWS logged out:
-   `IBKR_PORT=4002 python3 scripts/day.py`. One login, one tape, no competition.
-   The desk connection stays read-only; only the executor's connection may write.
-
-**Recommended Tuesday sequence (single login):**
-
-1. Once, in Client Portal › Settings › Account Settings › Paper Trading
-   Account: share real-time market data subscriptions with the paper
-   account. Log the Gateway out and back in afterwards.
-2. Leave TWS **logged out**. Log the **Gateway** in on the paper account.
-3. Prove the paper session has the tape (any time after 07:00 ET):
-   `IBKR_PORT=4002 python3 scripts/ibkr_preflight.py` — wants
-   `market data type 1` and five-second bars arriving.
-4. `IBKR_PORT=4002 python3 scripts/day.py` at 12:55 France. The alignment
-   probe runs in single-login mode and reports whether the one tape is
-   real-time; the stop probe runs at 07:00 ET as before.
-
-If step 3 shows no data even with TWS out, the sharing setting has not
-taken effect yet. Run the day the original way (both logins) — log-only
-needs no paper prices — and retry step 3 the next morning.
+The fix is a single login. The **desk reads and the executor writes on the
+same paper session** (port 4002, `IBKR_PORT=4002`). The desk connection
+stays read-only; only the executor's connection may write. Decisions and
+orders then share one tape by construction, and the alignment probe runs in
+single-login mode.
 
 ## Before 06:55 ET (12:55 France)
 
-1. Log in to **TWS** (live, read-only data, port 7496).
-2. Log in to **IB Gateway** on the **paper** account, port 4002.
-3. That is all a human does before the bell. Both logins need 2FA, which
-   is why they are not automated.
+1. Once, in Client Portal › Settings › Account Settings › Paper Trading
+   Account: share real-time market data subscriptions with the paper
+   account. Log the Gateway out and back in afterwards. (Done 7 September.)
+2. **TWS logged out.** Log **IB Gateway** in on the **paper** account,
+   port 4002. That is the only login; it needs 2FA, which is why it is not
+   automated.
+3. First trading day only, or after any rehearsal: move the rehearsal
+   ledger aside so the exercise starts from a clean file. The rehearsals of
+   7 September wrote decisions and orders into it that are not sessions.
+   ```bash
+   cd ~/day-trading-bot && git pull origin claude/playbook-pullback-explanation-tg5c33
+   mv data/journal.sqlite data/journal-rehearsals-2026-09-07.sqlite
+   ```
+4. Prove the paper session has the tape (from 07:00 ET, when bars exist):
+   ```bash
+   IBKR_PORT=4002 python3 scripts/ibkr_preflight.py
+   ```
+   Wants `market data type 1` and five-second bars arriving. If it shows
+   type 3 (delayed) or no bars with TWS out, the sharing setting has not
+   taken effect: the day still runs, but `paper_data` will not read
+   `realtime` and the phase gate keeps orders off.
 
 ## 06:55–11:30 ET — one command
 
 ```bash
-cd ~/day-trading-bot && git pull origin claude/playbook-pullback-explanation-tg5c33
-python3 scripts/day.py
+IBKR_PORT=4002 python3 scripts/day.py
 ```
 
 What it does, in Ross's order (`scripts/day.py`):
@@ -67,7 +65,7 @@ What it does, in Ross's order (`scripts/day.py`):
 | step | what | where the rule lives |
 |---|---|---|
 | 1 | gap scan → watchlist: STAR then WATCH, rejects named; its finviz floats are handed to the desk so Layer 0 and Layer 1 agree on float | `scripts/premarket_stars.py` → the daily float file under `data/` |
-| 2 | two probes, once per day: is the paper account on the live tape (`scripts/alignment_probe.py`); does a pre-market stop hold (`scripts/premarket_probe.py`). Both verdicts recorded | `exercise_state` |
+| 2 | two probes, once per day: is the paper account on the live tape (`scripts/alignment_probe.py`, single-login mode); does a pre-market stop hold (`scripts/premarket_probe.py`, at 07:00 ET). Both verdicts recorded | `exercise_state` |
 | 3 | desk starts on the watchlist, journaling every rebuild | `JOURNAL_DB` → `src/journal/ledger.py` |
 | 4 | runner starts in the phase's mode (A = log only) | `docs/preregistration.md` §3 |
 | 5 | hard stop 11:30: runner flattens (TRADE mode) | `PARAMETERS.md` §2 · `src/execution/intent.py` |
@@ -95,8 +93,8 @@ Entry line, never `ARMED`.
 ## Optional: start it for you
 
 `bash scripts/install_daily.sh` installs a macOS launchd agent that runs
-`scripts/day.py` at 06:55 ET on weekdays and logs to
-`~/Library/Logs/day-trading-bot/`. The two logins above stay yours.
+`scripts/day.py` at 06:55 ET on weekdays with `IBKR_PORT=4002` and logs to
+`~/Library/Logs/day-trading-bot/`. The Gateway login stays yours.
 `bash scripts/install_daily.sh --remove` takes it out.
 
 ## If something looks wrong
@@ -107,6 +105,13 @@ Entry line, never `ARMED`.
   divergent decisions are listed with recorded vs replayed verdicts.
 - **A position after 16:00** → the runner flagged it and printed the
   `ah-exit` command. Nothing sells until you confirm.
+- **`exercise.py stuck` shows a row with status `ExitPending`** → a sell was
+  sent (monitored stop, hard-stop flatten or `ah-exit`) and its fill has not
+  been read back yet. The next runner sync closes it at the real fill price;
+  if the runner is gone, check the position in the Gateway.
+- **The runner restarted mid-morning** → it adopts its open orders from the
+  ledger and matches them at the broker by IBKR's permanent id. Nothing is
+  placed twice: a decision is acted on once, whatever the restart count.
 - **Probe says `queued`** → pre-market entries are unprotected by design
   (`src/execution/policy.py`); phase C needs your written acceptance in
   `docs/preregistration.md` §5.

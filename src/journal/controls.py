@@ -32,7 +32,10 @@ def series(conn: sqlite3.Connection) -> dict[str, list[float]]:
                a.first_hit, a.c_close, a.risk_share
         FROM decisions d JOIN actuals a USING(decision_id)
         WHERE a.risk_share IS NOT NULL AND a.risk_share > 0
+          AND COALESCE(a.trigger_hit, 1) = 1
     """).fetchall()
+    # Plans whose trigger was never touched are not trades; they are counted
+    # separately (see summary) instead of being charged −1 R.
     out = {"strategy": [], "hold_close": [], "random_bar": []}
     for r in rows:
         rps = r["risk_share"]
@@ -52,7 +55,11 @@ def series(conn: sqlite3.Connection) -> dict[str, list[float]]:
 
 def summary(conn: sqlite3.Connection) -> dict[str, dict]:
     s = series(conn)
-    return {k: {"n": len(v), "mean_R": round(mean(v), 4) if v else None,
-                "median_R": round(median(v), 4) if v else None,
-                "win_rate": round(sum(1 for x in v if x > 0) / len(v), 3) if v else None}
-            for k, v in s.items()}
+    out = {k: {"n": len(v), "mean_R": round(mean(v), 4) if v else None,
+               "median_R": round(median(v), 4) if v else None,
+               "win_rate": round(sum(1 for x in v if x > 0) / len(v), 3) if v else None}
+           for k, v in s.items()}
+    out["untriggered"] = {"n": conn.execute(
+        "SELECT COUNT(*) FROM actuals WHERE trigger_hit = 0").fetchone()[0],
+        "mean_R": None, "median_R": None, "win_rate": None}
+    return out

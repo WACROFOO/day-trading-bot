@@ -171,7 +171,19 @@ CREATE TABLE IF NOT EXISTS exercise_state (
     dollar_risk REAL,
     paper_data TEXT,                             -- realtime | delayed | none  (alignment probe)
     paper_data_date TEXT,
+    last_session_date TEXT,                      -- the ET date already counted in sessions_done
     updated_at TEXT NOT NULL
+);
+
+-- R1, the denominator BEFORE the desk: every name the morning gap scan
+-- returned, survivor or reject, with the reason. Without it the funnel began
+-- at the watchlist and the scan's own kills were invisible (audit 2026-09-08).
+CREATE TABLE IF NOT EXISTS candidates (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    ts_et TEXT NOT NULL, source TEXT NOT NULL, symbol TEXT NOT NULL,
+    verdict TEXT, reasons_json TEXT, price REAL, gap_pct REAL, float_shares REAL,
+    pm_volume REAL, recorded_at TEXT NOT NULL,
+    UNIQUE(ts_et, source, symbol)
 );
 
 -- Written later, from the forward tape. Separate table on purpose: a
@@ -184,7 +196,8 @@ CREATE TABLE IF NOT EXISTS actuals (
     h_close REAL, l_close REAL, c_close REAL,
     mfe_r_planned REAL, mae_r_planned REAL,      -- planned-R; the name says so
     stop_hit INTEGER, stop_hit_ts TEXT, target_hit INTEGER, target_hit_ts TEXT,
-    first_hit TEXT,                               -- stop | target | neither
+    first_hit TEXT,                               -- stop | target | neither | untriggered
+    trigger_hit INTEGER, trigger_hit_ts TEXT,     -- did price ever reach the entry?
     bars_available INTEGER NOT NULL, computed_at TEXT NOT NULL
 );
 """
@@ -200,6 +213,12 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
     # so SQLite's own locking is enough; nothing here holds a transaction open.
     conn = sqlite3.connect(str(path), timeout=10, check_same_thread=False)
     conn.row_factory = sqlite3.Row
+    if str(path) != ":memory:":
+        # Two processes share this file: the desk writes a whole rebuild per
+        # transaction, the runner reads and writes every 5 s. WAL lets the
+        # reader proceed during the writer's commit instead of hitting
+        # "database is locked" after the busy timeout.
+        conn.execute("PRAGMA journal_mode=WAL")
     conn.executescript(_SCHEMA)
     _migrate(conn)
     return conn
@@ -208,8 +227,11 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
 # Columns added after a table already existed somewhere. CREATE IF NOT EXISTS
 # does not add them; this does, once, and is a no-op afterwards.
 _ADDED_COLUMNS = {
-    "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT")),
-    "orders": (("perm_id", "INTEGER"),),
+    "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT"),
+                       ("last_session_date", "TEXT")),
+    "orders": (("perm_id", "INTEGER"), ("symbol", "TEXT"), ("exit_confirmed_by", "TEXT"),
+               ("filled_qty", "REAL"), ("exit_order_id", "INTEGER")),
+    "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
 
@@ -281,7 +303,7 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
              for g in cascade.gates]
     outcome = "PENDING" if cascade.plan_allowed else "SUPPRESSED"
     conn.execute("""
-        INSERT OR IGNORE INTO decisions (
+        INSERT INTO decisions (
             decision_id, ts_et, session, symbol, source, session_id, source_name,
             data_status, bar_resolution,
             last, bid, ask, session_high, volume, rvol, change_pct,
@@ -290,6 +312,19 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
             trigger, stop, target, risk_share, reward_multiple, pullback_candles,
             volume_ok, outcome, recorded_at)
         VALUES (?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?)
+        ON CONFLICT(decision_id) DO UPDATE SET
+            -- A row first seen during a STALE build is a fact about the FEED,
+            -- not the name. The next LIVE build may replace it; nothing else
+            -- may (audit 2026-09-08: first write won forever).
+            data_status=excluded.data_status, last=excluded.last, bid=excluded.bid,
+            ask=excluded.ask, session_high=excluded.session_high, volume=excluded.volume,
+            rvol=excluded.rvol, change_pct=excluded.change_pct,
+            verdict=excluded.verdict, killed_by=excluded.killed_by,
+            plan_allowed=excluded.plan_allowed, gates_json=excluded.gates_json,
+            warnings_json=excluded.warnings_json, inputs_json=excluded.inputs_json,
+            outcome=excluded.outcome, recorded_at=excluded.recorded_at
+        WHERE decisions.verdict='STALE' AND excluded.verdict<>'STALE'
+              AND decisions.outcome IN ('SUPPRESSED','PENDING')
     """, (
         did, _et(armed_at), session, symbol, source, session_id, source_name,
         data_status, bar_resolution,
@@ -382,17 +417,37 @@ def record_fill(conn: sqlite3.Connection, order_id: int, *, fill_price: float,
 
 
 def record_exit(conn: sqlite3.Connection, order_id: int, *, reason: str,
-                price: float, ts, confirmed_by: Optional[str] = None) -> None:
+                price: Optional[float], ts, confirmed_by: Optional[str] = None,
+                confirmed: bool = True, exit_order_id: Optional[int] = None) -> None:
+    """The trade's end. `confirmed=True` is a fill IBKR reported (a stop or
+    target leg read back). `confirmed=False` is a sell that was SENT — the
+    monitored stop, the hard-stop flatten, the after-hours exit — and the
+    row reads ExitPending until `confirm_exit` writes the fill. The limit
+    price of a sent order is a plan; the ledger must not call it a fill."""
+    status = "Closed" if confirmed else "ExitPending"
     conn.execute("""UPDATE orders SET exit_reason=?, exit_price=?, exit_ts=?,
-                    exit_confirmed_by=?, status='Closed', updated_at=? WHERE order_id=?""",
-                 (reason, price, _et(ts), confirmed_by, _now(), order_id))
+                    exit_confirmed_by=?, exit_order_id=COALESCE(?, exit_order_id),
+                    status=?, updated_at=? WHERE order_id=?""",
+                 (reason, price, _et(ts), confirmed_by, exit_order_id, status, _now(), order_id))
+
+
+def confirm_exit(conn: sqlite3.Connection, order_id: int, *, price: float, ts) -> None:
+    """The broker reported the pending exit filled: the real price, Closed."""
+    conn.execute("""UPDATE orders SET exit_price=?, exit_ts=?, status='Closed', updated_at=?
+                    WHERE order_id=? AND status='ExitPending'""",
+                 (price, _et(ts), _now(), order_id))
+
+
+def pending_exits(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    return conn.execute("SELECT * FROM orders WHERE status='ExitPending'").fetchall()
 
 
 def record_actuals(conn: sqlite3.Connection, decision_id: str, a: dict) -> None:
     cols = ["ref_price", "risk_share", "h5", "l5", "c5", "h15", "l15", "c15",
             "h30", "l30", "c30", "h60", "l60", "c60", "h_close", "l_close", "c_close",
             "mfe_r_planned", "mae_r_planned", "stop_hit", "stop_hit_ts",
-            "target_hit", "target_hit_ts", "first_hit", "bars_available"]
+            "target_hit", "target_hit_ts", "first_hit", "trigger_hit", "trigger_hit_ts",
+            "bars_available"]
     conn.execute(
         f"INSERT OR REPLACE INTO actuals (decision_id, {', '.join(cols)}, computed_at) "
         f"VALUES (?, {', '.join('?' * len(cols))}, ?)",
@@ -444,15 +499,24 @@ def funnel(conn: sqlite3.Connection) -> dict:
 # ----------------------------------------------------------- the tape
 def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
     """bars_by_symbol: symbol -> iterable of (ts, o, h, l, c, v[, bid, ask])."""
-    n = 0
+    before = conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0]
     for sym, rows in bars_by_symbol.items():
         for r in rows:
             bid, ask = (r[6], r[7]) if len(r) >= 8 else (None, None)
-            cur = conn.execute(
-                "INSERT OR IGNORE INTO bars (symbol, ts, open, high, low, close, volume, bid, ask) "
-                "VALUES (?,?,?,?,?,?,?,?,?)", (sym, r[0], r[1], r[2], r[3], r[4], r[5], bid, ask))
-            n += cur.rowcount
-    return n
+            conn.execute(
+                # UPSERT, replacing only when the new aggregate carries at least
+                # as much volume. The live desk hands the builder the CURRENT
+                # minute mid-way; INSERT OR IGNORE froze that first partial
+                # aggregate forever and every actual was computed on a
+                # truncated tape (audit 2026-09-08).
+                "INSERT INTO bars (symbol, ts, open, high, low, close, volume, bid, ask) "
+                "VALUES (?,?,?,?,?,?,?,?,?) "
+                "ON CONFLICT(symbol, ts) DO UPDATE SET open=excluded.open, high=excluded.high, "
+                "low=excluded.low, close=excluded.close, volume=excluded.volume, "
+                "bid=COALESCE(excluded.bid, bars.bid), ask=COALESCE(excluded.ask, bars.ask) "
+                "WHERE excluded.volume >= bars.volume",
+                (sym, r[0], r[1], r[2], r[3], r[4], r[5], bid, ask))
+    return conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0] - before
 
 
 def record_quotes(conn: sqlite3.Connection, quotes: dict) -> None:
@@ -479,10 +543,22 @@ def quote_source(conn: sqlite3.Connection, max_age_s: int = 30):
         r = conn.execute("SELECT * FROM quotes WHERE symbol=?", (symbol,)).fetchone()
         if r is None:
             return None
-        age = (datetime.now(timezone.utc)
-               - datetime.fromisoformat(r["recorded_at"])).total_seconds()
+        recorded = datetime.fromisoformat(r["recorded_at"])
+        age = (datetime.now(timezone.utc) - recorded).total_seconds()
         if age > max_age_s:
             return None
+        # recorded_at says when the desk WROTE the row; the desk rewrites it
+        # on every rebuild, so a stalled feed keeps re-recording an old quote
+        # with a fresh stamp. The quote's own ts must be recent too. The bound
+        # is loose (the desk's ts may be the minute bar's start) but finite.
+        try:
+            qts = datetime.fromisoformat(str(r["ts"]).replace("Z", "+00:00"))
+            if qts.tzinfo is None:
+                qts = qts.replace(tzinfo=timezone.utc)
+            if (recorded - qts).total_seconds() > max(120, 4 * max_age_s):
+                return None
+        except (TypeError, ValueError):
+            pass
         return {"bid": r["bid"], "ask": r["ask"], "bid_size": r["bid_size"],
                 "ask_size": r["ask_size"], "ts": r["ts"]}
     return quote
@@ -500,7 +576,7 @@ def get_state(conn: sqlite3.Connection) -> dict:
 
 def set_state(conn: sqlite3.Connection, **fields) -> dict:
     allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
-               "paper_data", "paper_data_date"}
+               "paper_data", "paper_data_date", "last_session_date"}
     bad = set(fields) - allowed
     if bad:
         raise ValueError(f"unknown state fields {sorted(bad)}")
@@ -533,7 +609,8 @@ MANUAL = "MANUAL_CONFIRMATION_REQUIRED"
 def stuck_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Filled and not exited. After the hard-stop flatten there should be
     none; any that remain are the brief's third 'stuck' state."""
-    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND exit_ts IS NULL
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL
+                           AND (exit_ts IS NULL OR status='ExitPending')
                            ORDER BY placed_at""").fetchall()
 
 
@@ -601,3 +678,22 @@ def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:
 def set_perm_id(conn: sqlite3.Connection, order_id: int, perm_id: int) -> None:
     conn.execute("UPDATE orders SET perm_id=?, updated_at=? WHERE order_id=? AND perm_id IS NULL",
                  (perm_id, _now(), order_id))
+
+
+def record_candidates(conn: sqlite3.Connection, ts, source: str, rows) -> int:
+    """R1 before the desk: every gap-scan row, survivor or reject."""
+    n = 0
+    for r in rows:
+        cur = conn.execute("""INSERT OR IGNORE INTO candidates
+            (ts_et, source, symbol, verdict, reasons_json, price, gap_pct, float_shares, pm_volume, recorded_at)
+            VALUES (?,?,?,?,?,?,?,?,?,?)""",
+            (_et(ts), source, str(r.get("sym") or r.get("symbol") or "").upper(), r.get("verdict"),
+             _json(r.get("reasons") or []), r.get("price") or r.get("last"), r.get("gap") or r.get("gap_pct"),
+             r.get("float"), r.get("pm_vol"), _now()))
+        n += cur.rowcount
+    conn.commit()
+    return n
+
+
+def set_filled_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:
+    conn.execute("UPDATE orders SET filled_qty=?, updated_at=? WHERE order_id=?", (qty, _now(), order_id))

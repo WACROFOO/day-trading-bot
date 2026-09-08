@@ -186,21 +186,25 @@ def test_bars_are_idempotent_and_come_back_in_fixture_shape(conn):
     rows = {"TEST": [("2026-09-08T14:05:00Z", 6.0, 6.1, 5.9, 6.05, 1000, 6.04, 6.06),
                      ("2026-09-08T14:06:00Z", 6.05, 6.2, 6.0, 6.15, 1200, 6.14, 6.16)]}
     assert L.record_bars(conn, rows) == 2
-    assert L.record_bars(conn, rows) == 0
+    assert L.record_bars(conn, rows) == 0                 # same rows: nothing new inserted
     tape = B.from_ledger(conn)
     assert list(tape) == ["TEST"] and len(tape["TEST"]) == 2
     assert tape["TEST"][0][:6] == ("2026-09-08T14:05:00Z", 6.0, 6.1, 5.9, 6.05, 1000)
 
 
 def test_quote_source_returns_the_latest_and_refuses_a_stale_one(conn):
-    L.record_quotes(conn, {"TEST": dict(bid=6.10, ask=6.12, bid_size=300, ask_size=100,
-                                        ts="2026-09-08T14:06:03Z")})
+    from datetime import datetime, timedelta, timezone
+    ts = datetime.now(timezone.utc).isoformat(timespec="seconds").replace("+00:00", "Z")
+    L.record_quotes(conn, {"TEST": dict(bid=6.10, ask=6.12, bid_size=300, ask_size=100, ts=ts)})
     q = L.quote_source(conn)("TEST")
-    assert q == {"bid": 6.10, "ask": 6.12, "bid_size": 300, "ask_size": 100,
-                 "ts": "2026-09-08T14:06:03Z"}
+    assert q == {"bid": 6.10, "ask": 6.12, "bid_size": 300, "ask_size": 100, "ts": ts}
     assert L.quote_source(conn)("NOPE") is None
     # age it: a stale NBBO recorded as current is the wrong number this repo exists to stop
     conn.execute("UPDATE quotes SET recorded_at='2026-01-01T14:00:00+00:00'")
+    assert L.quote_source(conn, max_age_s=30)("TEST") is None
+    # a stalled feed re-recorded with a fresh stamp: the quote's OWN ts is old
+    old = (datetime.now(timezone.utc) - timedelta(minutes=10)).isoformat(timespec="seconds").replace("+00:00", "Z")
+    L.record_quotes(conn, {"TEST": dict(bid=6.10, ask=6.12, bid_size=300, ask_size=100, ts=old)})
     assert L.quote_source(conn, max_age_s=30)("TEST") is None
 
 

@@ -135,9 +135,20 @@ def test_the_runner_is_the_stop_when_the_bid_touches_it(journal):
     quotes["PMX"]["bid"] = 5.90                            # touches
     done = r.watch_stops()
     assert len(done) == 1 and t.exits == [("PMX", t.monitored[0].shares, 5.80, True)]
-    o = journal.execute("SELECT exit_reason, exit_price, status FROM orders").fetchone()
-    assert o["exit_reason"] == "monitored_stop" and o["exit_price"] == 5.80 and o["status"] == "Closed"
-    assert r.watch_stops() == []                          # exited: no longer watched
+    o = journal.execute("SELECT exit_reason, exit_price, status, parent_id FROM orders").fetchone()
+    # Sent is not filled: the row is ExitPending with the LIMIT price, and the
+    # position still counts as held (stuck) until the broker reports the fill.
+    assert o["exit_reason"] == "monitored_stop" and o["exit_price"] == 5.80 and o["status"] == "ExitPending"
+    assert [x["order_id"] for x in L.stuck_orders(journal)] == [1]
+    assert r.watch_stops() == []                          # sent once: not re-sent
+    # the fill comes back through sync(): the real price replaces the plan
+    rec = t.placed[0]
+    assert rec.exit_confirmed is False
+    rec.exit_price, rec.exit_time, rec.exit_confirmed = 5.83, "2026-09-08T12:47:00Z", True
+    r.sync_fills()
+    o = journal.execute("SELECT exit_price, status FROM orders").fetchone()
+    assert (o["exit_price"], o["status"]) == (5.83, "Closed")
+    assert L.stuck_orders(journal) == []
 
 
 def test_no_fresh_quote_means_hold_and_say_so_never_guess_a_price(journal):

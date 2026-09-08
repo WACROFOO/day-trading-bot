@@ -278,6 +278,16 @@ class PlacedOrder:
     # read-back), so a restarted runner must be able to find its orders by
     # permId. None until the broker has reported it.
     perm_id: Optional[int] = None
+    # How many shares IBKR actually filled. A partial fill is a smaller
+    # position than `shares`; a monitored exit that sells `shares` would
+    # go short by the difference. None until the broker has reported it.
+    filled_qty: Optional[float] = None
+    # An exit that was SENT but not yet seen filled: the monitored stop and
+    # the hard-stop flatten both place a sell and learn the fill later.
+    # Until 2026-09-08 the limit price was written as the exit price the
+    # moment the order left, which is a plan, not a fill.
+    exit_order_id: Optional[int] = None
+    exit_confirmed: bool = True
     intent: Optional[EntryIntent] = None
     events: list[str] = field(default_factory=list)
 

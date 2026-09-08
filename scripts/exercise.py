@@ -88,10 +88,10 @@ def report(conn, *, source: str, synthetic: bool) -> None:
     print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows · no CIs at this n)")
     print(f"  {'series':<12}{'n':>4}{'mean R':>10}{'median R':>10}{'win':>7}")
     for k, v in ctl.items():
-        if v["n"]:
+        if v["n"] and v["mean_R"] is not None:
             print(f"  {k:<12}{v['n']:>4}{v['mean_R']:>10.3f}{v['median_R']:>10.3f}{v['win_rate']:>7.0%}")
         else:
-            print(f"  {k:<12}{0:>4}{'—':>10}{'—':>10}{'—':>7}")
+            print(f"  {k:<12}{v['n']:>4}{'—':>10}{'—':>10}{'—':>7}")
 
     st = L.get_state(conn)
     print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
@@ -130,6 +130,12 @@ def cmd_replay(args) -> int:
     from momentum_platform.dashboard.session_builder import build_session
 
     fixture = Path(args.fixture)
+    if not args.db:
+        # A fixture replay into the production ledger would sit next to live
+        # decisions with only HH:MM shown, indistinguishable from evidence
+        # (audit 2026-09-08). Replays name their own file.
+        print(f"{BAD}replay needs --db PATH{END}  (never the production ledger; try --db /tmp/replay.sqlite)")
+        return 2
     conn = L.connect(_db(args))
     build_session(fixture, journal=conn)
     conn.commit()
@@ -183,16 +189,30 @@ def cmd_live(args) -> int:
     print(f"{DIM}reading {_db(args)} every {args.every}s · hard stop {HARD_STOP:%H:%M} ET · Ctrl-C to stop{END}")
     flattened = False
     try:
+        errors = 0
         while True:
             try:
                 acted = runner.step()
+                errors = 0
             except RiskVeto as veto:
-                # The day is over for entries. Exits stay allowed; the loop
-                # keeps syncing fills and watching stops, but places nothing.
+                # The day is over for ENTRIES only. Flipping the mode to
+                # LOG_ONLY also switched off fill sync, the monitored stop and
+                # the 11:30 flatten (audit 2026-09-08); entries_enabled does not.
                 print(f"  {datetime.now(ET):%H:%M:%S}  {BAD}DAY LOCKED{END} {veto.reason} — "
-                      f"no more entries today; exits continue")
-                runner.mode = "LOG_ONLY"
+                      f"no more entries today; exits, stops and the flatten continue")
+                runner.entries_enabled = False
                 acted = []
+            except KeyboardInterrupt:
+                raise
+            except Exception as exc:                     # noqa: BLE001
+                # The runner is idempotent: pending() re-offers unfinished rows.
+                # A locked database or a malformed row must not end the day —
+                # and until now it also took the desk (the recorder) down.
+                errors += 1
+                print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}runner error{END} {exc!r} — retrying"
+                      + (f" ({errors} in a row)" if errors > 1 else ""))
+                time.sleep(min(30, args.every * errors))
+                continue
             for a in acted:
                 tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
                 print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
@@ -272,13 +292,27 @@ def cmd_ah_exit(args) -> int:
         print(f"{BAD}no fresh quote for {o['symbol']} in the ledger — start the desk first{END}"); return 1
     from execution.ibkr_trader import PaperTrader
     who = os.environ.get("USER") or "operator"
+    qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
     with PaperTrader() as t:
-        px = t.exit_limit(o["symbol"], int(o["shares"]), float(q["bid"]), outside_rth=True)
-    L.record_exit(conn, o["order_id"], reason="AH_exception", price=px,
-                  ts=datetime.now(timezone.utc), confirmed_by=who)
-    L.add_order_event(conn, o["order_id"], f"AH exception confirmed by {who}: SELL LMT {px} (bid {q['bid']})")
+        px = t.exit_limit(o["symbol"], qty, float(q["bid"]), outside_rth=True)
+        exit_id = getattr(t, "last_exit_order_id", None)
+        # Wait briefly for the fill so the row can close with the real price;
+        # otherwise it stays ExitPending and the next runner sync confirms it.
+        fill = None
+        for _ in range(10):
+            t.ib.sleep(1)
+            tr = next((x for x in t.ib.trades() if x.order.orderId == exit_id), None)
+            if tr is not None and tr.orderStatus.status == "Filled" and tr.orderStatus.avgFillPrice:
+                fill = tr.orderStatus.avgFillPrice
+                break
+    L.record_exit(conn, o["order_id"], reason="AH_exception", price=fill if fill else px,
+                  ts=datetime.now(timezone.utc), confirmed_by=who,
+                  confirmed=fill is not None, exit_order_id=exit_id)
+    L.add_order_event(conn, o["order_id"], f"AH exception confirmed by {who}: SELL LMT {px} x{qty} (bid {q['bid']})"
+                      + (f"; filled {fill}" if fill else "; fill NOT yet seen — row is ExitPending"))
     conn.commit()
-    print(f"{OK}sent{END} SELL {o['shares']} {o['symbol']} LMT {px}  recorded as AH_exception by {who}")
+    print(f"{OK}sent{END} SELL {qty} {o['symbol']} LMT {px}  recorded as AH_exception by {who}"
+          + (f" · filled {fill}" if fill else f" · {WARN}fill not yet seen; check exercise.py stuck{END}"))
     return 0
 
 

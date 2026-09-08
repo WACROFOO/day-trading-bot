@@ -91,7 +91,8 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
         blockers.append(f"replay check: {len(rep['diverged'])} decision(s) do not reproduce")
     if phase == "A":
         nxt = "B"
-        if state.get("sessions_done", 0) < 5 and f["plans_armed"] < 40:
+        # "5 sessions or 40 decisions, whichever is LATER" = both must be met.
+        if state.get("sessions_done", 0) < 5 or f["plans_armed"] < 40:
             blockers.append(f"phase A needs 5 sessions or 40 decisions; have "
                             f"{state.get('sessions_done', 0)} sessions, {f['plans_armed']} decisions")
         if state.get("probe_verdict") is None:
@@ -153,10 +154,10 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
     lines += ["", "## Controls (planned R · same rows · no CIs at this n)", "",
               "| series | n | mean R | median R | win |", "|---|---:|---:|---:|---:|"]
     for k, v in ctl.items():
-        if v["n"]:
+        if v["n"] and v["mean_R"] is not None:
             lines.append(f"| {k} | {v['n']} | {v['mean_R']:.3f} | {v['median_R']:.3f} | {v['win_rate']:.0%} |")
         else:
-            lines.append(f"| {k} | 0 | — | — | — |")
+            lines.append(f"| {k} | {v['n']} | — | — | — |")
     pd = st.get("paper_data")
     lines += ["", "## Alignment (decision tape → fill → fill tape)", "",
               f"Paper session data: **{pd or 'NOT MEASURED — run scripts/alignment_probe.py'}**"
@@ -251,12 +252,40 @@ def run_alignment_once(conn, today: str, dry: bool) -> None:
 
 def start_desk(symbols: list[str], dry: bool):
     cmd = [sys.executable, "-m", "momentum_platform.dashboard.server", "--host", "127.0.0.1",
-           "--port", os.environ.get("DESK_PORT", "8787"), "--ibkr", ",".join(symbols)]
+           "--port", os.environ.get("DESK_PORT", "8787"), "--ibkr", ",".join(symbols),
+           "--ibkr-required"]
     note("desk: " + " ".join(cmd))
     if dry:
         return None
     env = {**os.environ, "JOURNAL_DB": str(DB), "PYTHONPATH": str(ROOT / "src")}
     return subprocess.Popen(cmd, cwd=ROOT, env=env)
+
+
+def desk_is_on_ibkr(proc, timeout_s: int = 150) -> bool:
+    """Poll the desk's health until it reports a live IBKR session, or give up.
+
+    The old check was `proc.poll() is None`, which a desk serving the recorded
+    fixture after a failed Gateway connect passes all morning (audit
+    2026-09-08). --ibkr-required makes that fallback exit 3; this confirms the
+    positive case as well.
+    """
+    import json as _json
+    import urllib.request
+    port = os.environ.get("DESK_PORT", "8787")
+    deadline = time.time() + timeout_s
+    while time.time() < deadline:
+        if proc is not None and proc.poll() is not None:
+            return False
+        try:
+            with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/v1/health", timeout=3) as r:
+                h = _json.loads(r.read().decode())
+            if h.get("mode") == "live" and h.get("streaming"):
+                good(f"desk is live on IBKR (feed {h.get('provider', {}).get('state', '?')})")
+                return True
+        except Exception:                                 # noqa: BLE001
+            pass
+        time.sleep(3)
+    return False
 
 
 def start_runner(mode: str, risk: float, dry: bool):
@@ -289,8 +318,10 @@ def after_close(conn, today: str, dry: bool) -> None:
         # sessions would let the exercise leave phase A on days that taught
         # it nothing. 2026-09-07 (Labor Day) was the first such day.
         warn("no bars recorded today — market closed or feed dead; NOT counted as a session")
+    elif st.get("last_session_date") == today:
+        note("this session was already counted")
     else:
-        L.set_state(conn, sessions_done=st["sessions_done"] + 1)
+        L.set_state(conn, sessions_done=st["sessions_done"] + 1, last_session_date=today)
     nxt, blockers = gates_for_advance(conn, L.get_state(conn))
     if nxt:
         if blockers:
@@ -345,6 +376,8 @@ def main(argv=None) -> int:
         note(f"✗ {sym:<6} {why}")
     if rows and not args.dry_run:
         n = write_float_overrides(rows, today)
+        # R1 before the desk: every scan row, survivor or reject, into the ledger.
+        L.record_candidates(conn, datetime.now(timezone.utc), "gap_scan", rows)
         note(f"{n} finviz float(s) handed to the desk (data/float_overrides.json)")
     if symbols:
         good(f"{len(symbols)} names: {' '.join(symbols)}")
@@ -369,11 +402,19 @@ def main(argv=None) -> int:
     (good if ok else note)(f"pre-market entries: {'ON' if ok else 'off'} — {why}")
 
     say(f"\n{BOLD}3. Desk + runner{END}")
+    note(f"IBKR data port {os.environ.get('IBKR_PORT', '7496')} · ledger {DB}")
     desk = start_desk(symbols, args.dry_run)
-    time.sleep(0 if args.dry_run else 8)
+    if not args.dry_run and not desk_is_on_ibkr(desk):
+        bad("the desk did not come up on IBKR — stopping the day")
+        note("Gateway logged in on the paper account? IBKR_PORT=4002 exported? API enabled on 4002?")
+        if desk and desk.poll() is None:
+            desk.send_signal(signal.SIGINT)
+        return 1
     runner = start_runner(mode, risk, args.dry_run)
     if args.dry_run:
         say(f"\n{DIM}dry run — nothing started{END}"); return 0
+
+    restarts = 0
 
     def stop(*_):
         for p in (runner, desk):
@@ -391,10 +432,17 @@ def main(argv=None) -> int:
                 and L.get_state(conn).get("probe_date") != today):
             say(f"\n{BOLD}Pre-market stop probe{END}  ({t:%H:%M} ET)")
             run_probe_once(conn, today, False)
-        for name, p in (("desk", desk), ("runner", runner)):
-            if p and p.poll() is not None:
-                bad(f"{name} exited with {p.returncode} — stopping the day")
-                stop(); return 1
+        if desk and desk.poll() is not None:
+            bad(f"desk exited with {desk.returncode} — stopping the day")
+            stop(); return 1
+        if runner and runner.poll() is not None:
+            # The runner is the actor; the desk is the recorder. A dead runner
+            # must not take the recorder down with it (audit 2026-09-08).
+            restarts += 1
+            if restarts > 5:
+                bad(f"runner exited {restarts} times — stopping the day"); stop(); return 1
+            warn(f"runner exited with {runner.returncode} — restarting ({restarts}/5); the desk keeps recording")
+            runner = start_runner(mode, risk, False)
         time.sleep(15)
     if args.rehearsal:
         stop()

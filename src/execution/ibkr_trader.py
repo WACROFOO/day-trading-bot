@@ -91,6 +91,19 @@ def assert_paper(accounts) -> str:
     return accounts[0]
 
 
+def _fill_time(trade):
+    """The broker's own stamp for the fill, from the trade log; None if the
+    log carries none. The poll time is the wrong number here — it can lag the
+    fill by a whole loop interval."""
+    for e in reversed(getattr(trade, "log", []) or []):
+        if getattr(e, "status", "") == "Filled" and getattr(e, "time", None):
+            return e.time.isoformat()
+    log = getattr(trade, "log", None)
+    if log and getattr(log[-1], "time", None):
+        return log[-1].time.isoformat()
+    return None
+
+
 class PaperTrader:
     """A writable IBKR connection that cannot reach real money."""
 
@@ -258,7 +271,11 @@ class PaperTrader:
         order.tif = "DAY"
         order.outsideRth = outside_rth
         order.transmit = True
+        order.orderId = self.ib.client.getReqId()
         self.ib.placeOrder(stock, order)
+        # The caller records this id against the position so sync() can
+        # confirm the fill; the return value stays the price for compatibility.
+        self.last_exit_order_id = order.orderId
         return px
 
     def _bracket(self, intent: EntryIntent):
@@ -334,9 +351,30 @@ class PaperTrader:
                 rec.events.append(f"permId {rec.perm_id}")
             rec.status = trade.orderStatus.status
             filled = trade.orderStatus.avgFillPrice
+            qty = getattr(trade.orderStatus, "filled", None)
+            if qty and qty > 0 and rec.filled_qty != qty:
+                rec.filled_qty = qty
+                if qty < rec.shares:
+                    rec.events.append(f"PARTIAL fill {qty:g} of {rec.shares}")
             if filled and filled > 0 and rec.fill_price != filled:
                 rec.fill_price = filled
+                rec.fill_time = _fill_time(trade)
                 rec.events.append(f"filled {filled} vs trigger {rec.trigger}")
+
+            # A sent-but-unconfirmed exit (monitored stop, hard-stop flatten):
+            # the fill, when IBKR reports it, is the exit price. Until then the
+            # ledger row says ExitPending and the position counts as held.
+            if rec.exit_order_id and not rec.exit_confirmed:
+                ex = by_id.get(rec.exit_order_id)
+                if (ex is not None and ex.orderStatus.status == "Filled"
+                        and ex.orderStatus.avgFillPrice and ex.orderStatus.avgFillPrice > 0):
+                    rec.exit_price = ex.orderStatus.avgFillPrice
+                    rec.exit_time = _fill_time(ex)
+                    rec.exit_confirmed = True
+                    rec.events.append(f"exit order {rec.exit_order_id} filled at {rec.exit_price}")
+                elif ex is not None and ex.orderStatus.status in ("Cancelled", "ApiCancelled", "Inactive"):
+                    rec.events.append(f"exit order {rec.exit_order_id} {ex.orderStatus.status} — "
+                                      f"position may still be held; CHECK THE BROKER")
 
             # The exit legs. A filled stop or target is the trade's end and
             # its P&L; without reading them the ledger never learns either.
@@ -389,6 +427,12 @@ class PaperTrader:
                               fill_time=r["fill_ts"], protected=bool(r["protected"]),
                               stop_status=r["stop_status"],
                               perm_id=(r["perm_id"] if "perm_id" in r.keys() else None))
+            keys = r.keys()
+            if "filled_qty" in keys and r["filled_qty"] is not None:
+                rec.filled_qty = r["filled_qty"]
+            if "exit_order_id" in keys and r["exit_order_id"] and r["status"] == "ExitPending":
+                rec.exit_order_id = r["exit_order_id"]
+                rec.exit_confirmed = False
             rec.events.append("adopted from the ledger after a restart")
             self.placed.append(rec)
             n += 1
@@ -409,6 +453,8 @@ class PaperTrader:
         if self.ib is None:
             raise RuntimeError("not connected")
         done: list[str] = []
+        # What was sent, with ids, for the runner to record as pending exits.
+        self.last_flatten: list[dict] = []
         self.cancel_all()
         rth = in_regular_hours(now)
         for pos in self.ib.positions():
@@ -428,8 +474,12 @@ class PaperTrader:
                 order = LimitOrder("SELL", qty, round(bid - offset, 2))
                 order.outsideRth = True
             order.tif = "DAY"
+            order.orderId = self.ib.client.getReqId() if getattr(self.ib, "client", None) else 0
             self.ib.placeOrder(pos.contract, order)
             done.append(f"{sym} x{qty} {order.orderType}")
+            self.last_flatten.append({"symbol": sym, "qty": qty, "order_id": order.orderId,
+                                      "type": order.orderType,
+                                      "price": getattr(order, "lmtPrice", None)})
         return done
 
     def cancel_all(self) -> int:

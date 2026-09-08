@@ -74,9 +74,13 @@ def test_same_bar_touching_both_levels_counts_the_stop_first():
     assert a["mfe_r_planned"] == 3.0 and a["mae_r_planned"] == -2.0
 
 
-def test_no_forward_tape_yields_none_not_zeros():
+def test_no_forward_tape_is_recorded_as_no_tape_not_left_for_tomorrow():
+    """A decision with no same-day forward bars used to return None and be
+    re-scored on the NEXT day's tape when the symbol recurred."""
     row = dict(ts_et="2026-09-01T09:40:00-04:00", trigger=10.0, stop=9.5, target=None, last=10.0)
-    assert actuals.compute(row, [("2026-09-01T13:40:00Z", 10, 10, 10, 10, 1)]) is None
+    a = actuals.compute(row, [("2026-09-01T13:40:00Z", 10, 10, 10, 10, 1),
+                              ("2026-09-02T13:41:00Z", 10, 12, 9, 11, 1)])     # tomorrow's bar
+    assert a["bars_available"] == 0 and a["first_hit"] == "no_tape"
 
 
 def test_fill_all_is_idempotent(journal, tape):
@@ -108,13 +112,15 @@ def test_replay_detects_a_log_that_lost_an_input(journal):
 
 
 # --------------------------------------------------------------- controls
-def test_controls_run_on_the_same_rows_in_planned_r(journal):
+def test_controls_run_on_the_same_rows_in_planned_r_and_skip_untriggered(journal):
+    """Only plans whose trigger was touched are trades; the rest are counted
+    under 'untriggered' instead of being charged −1 R."""
+    triggered = journal.execute("SELECT COUNT(*) FROM actuals WHERE trigger_hit=1 AND risk_share>0").fetchone()[0]
     s = controls.series(journal)
-    assert len(s["strategy"]) == len(s["hold_close"]) == 5
+    assert len(s["strategy"]) == len(s["hold_close"]) == triggered
     summ = controls.summary(journal)
-    for k in ("strategy", "hold_close", "random_bar"):
-        assert summ[k]["n"] >= 1
-        assert summ[k]["mean_R"] is not None
+    assert "untriggered" in summ
+    assert summ["untriggered"]["n"] + triggered == 5
 
 
 def test_a_stopped_out_plan_scores_exactly_minus_one_planned_r(journal):

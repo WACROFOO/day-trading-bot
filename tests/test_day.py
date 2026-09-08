@@ -62,8 +62,20 @@ def test_phase_a_is_blocked_until_sessions_and_probe(journal):
     assert any("probe" in b for b in blockers)
     L.set_state(journal, sessions_done=5, probe_verdict="held", probe_date="2026-09-08")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
-    # still blocked: the paper session's tape has not been measured. The first
-    # real orders must not be judged against prices the decision never saw.
+    # still blocked twice over: "5 sessions or 40 decisions, whichever is
+    # later" means BOTH; the fixture has 5 decisions. And the paper tape has
+    # not been measured.
+    assert any("40 decisions" in b for b in blockers)
+    assert any("paper session data" in b for b in blockers)
+    # Fabricate the decision count by cloning a real row: the padding must
+    # replay (R11 runs inside the gate), so its inputs must reproduce its verdict.
+    tmpl = journal.execute("SELECT verdict, killed_by, plan_allowed, inputs_json FROM decisions LIMIT 1").fetchone()
+    for _ in range(35):
+        journal.execute("INSERT INTO decisions (decision_id, ts_et, session, symbol, source, verdict, killed_by, plan_allowed, gates_json, warnings_json, inputs_json, recorded_at) "
+                        "VALUES (?, '2026-09-01T10:00:00-04:00', 'regular', 'PAD', 'pullback', ?, ?, ?, '[]', '[]', ?, 'x')",
+                        (f"pad{_}", tmpl["verdict"], tmpl["killed_by"], tmpl["plan_allowed"], tmpl["inputs_json"]))
+    journal.commit()
+    nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert blockers and all("paper session data" in b for b in blockers)
     L.set_state(journal, paper_data="realtime", paper_data_date="2026-09-08")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))
@@ -167,6 +179,7 @@ def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(
         def send_signal(self, *_): pass
         def wait(self, timeout=None): pass
     monkeypatch.setattr(d, "start_desk", lambda syms, dry: started.append(("desk", syms)) or P())
+    monkeypatch.setattr(d, "desk_is_on_ibkr", lambda proc, timeout_s=150: True)
     monkeypatch.setattr(d, "start_runner", lambda mode, risk, dry: started.append(("runner", mode)) or P())
     # the loop must terminate: make the deadline already past on the second look
     calls = {"n": 0}

@@ -566,7 +566,7 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         float_shares=meta.get("floatShares"),
         float_is_shares_outstanding=(quality == "shares_outstanding_proxy"),
         float_verified=(quality in ("verified", "you verified")),
-        catalyst_today=bool(meta.get("news")),
+        catalyst_today=_catalyst_today(meta.get("news") or [], meta.get("tradingDate")),
         session_volume=m.get("volumeToday"),
         rvol=m.get("rvol"),
         halted=(halt == "halted"),
@@ -623,13 +623,19 @@ class _Collector:
 def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
                       session_id, source_name, data_status) -> None:
     from journal import ledger as _L
-    # Live minute bars carry no bid/ask; the fixture's do. The desk's stream
-    # quote on the reference record is the point-in-time quote that exists on
-    # both paths, so it is the source, with the bar's own as the fallback.
+    # Point in time (R2). The bar's own bid/ask when it has one (fixture).
+    # The desk's stream quote is a quote from NOW; it belongs only to the
+    # newest bar. A plan arming on an older bar gets None, never a quote
+    # labelled with a time it did not have (audit 2026-09-08).
+    newest = _newest_bar_ts(bar, meta)
+    bid = rec.get("bid"); ask = rec.get("ask")
+    if bid is None and newest:
+        bid = meta.get("iexBid")
+    if ask is None and newest:
+        ask = meta.get("iexAsk")
     snapshot = {
         "last": getattr(snap, "last", None) if snap else rec.get("close"),
-        "bid": meta.get("iexBid") if meta.get("iexBid") is not None else rec.get("bid"),
-        "ask": meta.get("iexAsk") if meta.get("iexAsk") is not None else rec.get("ask"),
+        "bid": bid, "ask": ask,
         "session_high": getattr(snap, "session_high", None) if snap else None,
         "volume": getattr(snap, "volume_today", None) if snap else None,
         "rvol": getattr(snap, "rvol", None) if snap else None,
@@ -684,3 +690,55 @@ def _journal_tape(journal, bar_records, symbols) -> None:
                            "ts": meta.get("iexLastTs") or latest.get(sym, {}).get("ts")}
     _L.record_bars(journal, by_sym)
     _L.record_quotes(journal, latest)
+
+
+def _newest_bar_ts(bar, meta) -> bool:
+    """Is this bar within 90 s of the desk's own quote stamp? Only then may
+    the stream quote stand in for the bar's bid/ask."""
+    stamp = meta.get("iexLastTs")
+    ts = getattr(bar, "ts", None)
+    if not stamp or ts is None:
+        return False
+    try:
+        q = datetime.fromisoformat(str(stamp).replace("Z", "+00:00"))
+        if q.tzinfo is None:
+            q = q.replace(tzinfo=timezone.utc)
+        return abs((q - ts).total_seconds()) <= 90
+    except (TypeError, ValueError):
+        return False
+
+
+def _catalyst_today(news: list, trading_date) -> bool:
+    """FILTERS.md gate 3: a catalyst DATED TODAY. A headline counts when it was
+    published after 16:00 ET of the previous calendar day (overnight news is
+    today's catalyst) and is not a market roundup. Anything older, or a "stocks
+    moving in pre-market" list, is not a reason (audit 2026-09-08: any item in
+    a 48-hour window used to pass the gate)."""
+    if not news:
+        return False
+    try:
+        day = datetime.fromisoformat(str(trading_date)).date() if trading_date else None
+    except (TypeError, ValueError):
+        day = None
+    from zoneinfo import ZoneInfo
+    et = ZoneInfo("America/New_York")
+    for item in news:
+        cat = str(item.get("category") or "").lower()
+        if "roundup" in cat or "movers" in cat:
+            continue
+        pub = item.get("publishedAt") or item.get("published_at")
+        if not pub:
+            continue
+        try:
+            p = datetime.fromisoformat(str(pub).replace("Z", "+00:00"))
+        except ValueError:
+            continue
+        if p.tzinfo is None:
+            p = p.replace(tzinfo=timezone.utc)
+        p_et = p.astimezone(et)
+        if day is None:
+            return True
+        cutoff = datetime.combine(day, datetime.min.time(), tzinfo=et).replace(hour=16) - timedelta(days=1)
+        if p_et >= cutoff:
+            return True
+    return False

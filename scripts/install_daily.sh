@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Install (or remove) a macOS launchd agent that runs scripts/day.py at
-# 06:55 America/New_York on weekdays. Logging in to TWS and the Gateway stays
-# a human step (2FA); the agent only starts the day once you have.
+# 06:55 America/New_York on weekdays. Logging in to the Gateway (paper
+# account, port 4002) stays a human step (2FA); the agent only starts the day
+# once you have. Single-login design: the desk reads and the executor writes
+# on the same paper session, so IBKR_PORT=4002 is set here for the desk.
 #
 #   bash scripts/install_daily.sh           # install / refresh
 #   bash scripts/install_daily.sh --remove  # uninstall
@@ -41,6 +43,7 @@ cat > "$PLIST" <<PL
   <key>WorkingDirectory</key><string>$REPO</string>
   <key>EnvironmentVariables</key><dict>
     <key>JOURNAL_DB</key><string>$REPO/data/journal.sqlite</string>
+    <key>IBKR_PORT</key><string>4002</string>
     <key>PATH</key><string>/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin</string>
   </dict>
   <key>StartCalendarInterval</key><array>
@@ -57,4 +60,4 @@ PL
 launchctl bootout "gui/$(id -u)" "$PLIST" 2>/dev/null || true
 launchctl bootstrap "gui/$(id -u)" "$PLIST"
 echo "installed $LABEL — weekdays at $HH:$MM local (06:55 ET) · logs in $LOGDIR"
-echo "log in to TWS and the Gateway before then; the agent does not."
+echo "log the Gateway in on the PAPER account before then (TWS logged out); the agent does not."

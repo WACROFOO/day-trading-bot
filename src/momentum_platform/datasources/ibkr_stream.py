@@ -521,7 +521,13 @@ class IbkrStream:
         if h.state == "DELAYED":
             return h
         thresh = stale_threshold_seconds(now)
-        fresh = h.last_bar_at or h.last_quote_at
+        # The NEWEST heartbeat, bar or quote. `last_bar_at or last_quote_at`
+        # consulted the quote clock only until the first bar ever arrived;
+        # after that a quiet pre-market minute with no TRADES bar marked the
+        # whole desk STALE while bid/ask ticked every second — and every plan
+        # arming on that rebuild was journaled SUPPRESSED (audit 2026-09-08).
+        beats = [t for t in (h.last_bar_at, h.last_quote_at) if t]
+        fresh = max(beats) if beats else None
         if self._symbols and (fresh is None or (now - fresh).total_seconds() > thresh):
             h.state = "STALE"
         else:

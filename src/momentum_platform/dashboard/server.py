@@ -439,6 +439,8 @@ def main(argv=None) -> int:
                     help="live IBKR desk over TWS (read-only). Optional comma-separated symbols; "
                          "with none, the scanner union picks today's runners. Needs TWS on "
                          "IBKR_HOST:IBKR_PORT (default 127.0.0.1:7496).")
+    ap.add_argument("--ibkr-required", action="store_true",
+                    help="with --ibkr: exit 3 instead of falling back to the recorded fixture")
     ap.add_argument("--ibkr-rescan", type=int, default=120, metavar="SECONDS",
                     help="with --ibkr: run the NASDAQ scanner union this often (0 = off)")
     ap.add_argument("--port", type=int, default=8787)
@@ -453,6 +455,13 @@ def main(argv=None) -> int:
     live = None
     if args.ibkr is not None:
         live = _ibkr_desk(args, refresh if args.refresh is not None else 3)
+        if live is None and args.ibkr_required:
+            # The day command asked for IBKR and nothing else. Serving the
+            # recorded fixture instead looked like a healthy desk to the
+            # supervisor while the ledger stayed empty all morning (audit
+            # 2026-09-08). Exit loudly; the supervisor stops the day.
+            print("IBKR desk required and not available — exiting (3).", flush=True)
+            return 3
     if live is None:
         live = LiveSession(source, refresh=refresh if args.alpaca else 0, rescan=args.rescan)
     else:

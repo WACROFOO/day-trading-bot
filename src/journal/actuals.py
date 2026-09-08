@@ -51,9 +51,15 @@ def compute(row: sqlite3.Row | dict, bars: list[Bar]) -> Optional[dict]:
     """The actuals dict for one decision, or None when there is no tape."""
     r = dict(row)
     t0 = _utc(r["ts_et"])
-    fwd = forward(bars, t0)
+    # Same session only. Without this a decision with no forward bars today
+    # was scored against the NEXT day's tape when the symbol recurred, and
+    # "close" silently meant the last bar the desk saw before the hard stop.
+    day = r["ts_et"][:10]
+    fwd = [b for b in forward(bars, t0) if _bar_dt(b[0]).astimezone(L.ET).date().isoformat() == day]
     if not fwd:
-        return None
+        return {"ref_price": float(r["trigger"]) if r.get("trigger") else float(r["last"] or 0),
+                "risk_share": None, "bars_available": 0, "first_hit": "no_tape",
+                "trigger_hit": 0, "stop_hit": 0, "target_hit": 0}
 
     ref = float(r["trigger"]) if r.get("trigger") else float(r["last"] or fwd[0][1])
     stop = float(r["stop"]) if r.get("stop") else None
@@ -65,7 +71,17 @@ def compute(row: sqlite3.Row | dict, bars: list[Bar]) -> Optional[dict]:
     hi = lo = None
     stop_hit = target_hit = None
     first_hit = "neither"
+    # The plan is a buy-stop at the trigger, above the market when armed. A
+    # stop or target "hit" before price ever reached the trigger is not a
+    # trade outcome; the controls used to charge −1 R for it (audit
+    # 2026-09-08). Tracking starts at the first bar that touches the trigger.
+    trigger_hit = None
     for ts, o, h, l, c, v in fwd:
+        if trigger_hit is None:
+            if r.get("trigger") and h >= float(r["trigger"]):
+                trigger_hit = ts
+            else:
+                continue
         hi = h if hi is None else max(hi, h)
         lo = l if lo is None else min(lo, l)
         if stop is not None and stop_hit is None and l <= stop:
@@ -90,8 +106,12 @@ def compute(row: sqlite3.Row | dict, bars: list[Bar]) -> Optional[dict]:
             out[f"l{m}"] = min(b[3] for b in win)
             out[f"c{m}"] = win[-1][4]
     out["h_close"], out["l_close"], out["c_close"] = hi, lo, fwd[-1][4]
+    out["trigger_hit"] = int(trigger_hit is not None)
+    out["trigger_hit_ts"] = trigger_hit
+    if trigger_hit is None:
+        first_hit = "untriggered"
 
-    if rps:
+    if rps and hi is not None:
         out["mfe_r_planned"] = round((hi - ref) / rps, 4)
         out["mae_r_planned"] = round((lo - ref) / rps, 4)
     out["stop_hit"] = int(stop_hit is not None)
@@ -108,8 +128,10 @@ def fill_all(conn: sqlite3.Connection, bars_by_symbol: dict[str, list[Bar]]) -> 
     for row in L.without_actuals(conn):
         bars = bars_by_symbol.get(row["symbol"], [])
         a = compute(row, bars)
-        if a is None:
+        if a is None or a.get("bars_available") == 0:
             no_tape.append(row["decision_id"])
+            if a is not None:
+                L.record_actuals(conn, row["decision_id"], a)   # recorded as no_tape, not left for tomorrow
             continue
         L.record_actuals(conn, row["decision_id"], a)
         done += 1

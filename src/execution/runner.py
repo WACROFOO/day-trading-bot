@@ -72,6 +72,10 @@ class Runner:
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.acted: list[Acted] = []
+        # Entries and exits are separate switches. A risk-gate lock closes
+        # entries for the day; the exit side (fill sync, monitored stops, the
+        # hard-stop flatten) must keep running in TRADE mode.
+        self.entries_enabled = True
         if self.mode == "TRADE":
             # Whatever the ledger says is still alive at the broker is ours to
             # track from the first loop, restart or not.
@@ -86,6 +90,10 @@ class Runner:
         for row in L.pending(self.conn):
             outcome, reasons = self._act(row)
             L.set_outcome(self.conn, row["decision_id"], outcome, reasons)
+            # Commit per decision: an order may already rest at the broker.
+            # A crash before the loop-end commit lost its ledger row and left
+            # the decision PENDING for a restarted runner to place again.
+            self.conn.commit()
             done.append(Acted(row["decision_id"], row["symbol"], row["ts_et"],
                               float(row["trigger"]), float(row["stop"]),
                               outcome, reasons))
@@ -115,6 +123,12 @@ class Runner:
                 reasons.append(f"pre-market entry not allowed: {why}")
             else:
                 shape = premarket_shape(state)
+        if self.mode == "TRADE" and not self.entries_enabled:
+            reasons.append("day locked by the risk gate — no new entries")
+        if self.mode == "TRADE" and not row["volume_ok"]:
+            # FILTERS.md Layer 2: pullback_volume < impulse_volume, all true at
+            # entry. The detector computes it; nothing enforced it.
+            reasons.append("Layer 2 not green: pullback volume was not lighter than the impulse")
         if self.mode == "TRADE" and row["verdict"] != "REVIEW":
             # FILTERS.md Layer 2: "Chart gates — all true at entry". The cascade
             # says REVIEW only when VWAP, 9 EMA and MACD are all green; WAIT is
@@ -177,6 +191,8 @@ class Runner:
             p = by_parent.get(r["parent_id"])
             if p is None or p.fill_price is None:
                 continue
+            if p.filled_qty is not None:
+                L.set_filled_qty(self.conn, r["order_id"], p.filled_qty)
             # NBBO is asked for AT THE MOMENT the fill is seen. Later is wrong
             # and earlier is impossible; the gap between fill and this call is
             # itself recorded through the two timestamps.
@@ -190,9 +206,24 @@ class Runner:
         for r in self.conn.execute("SELECT order_id, parent_id FROM orders WHERE fill_price IS NOT NULL "
                                    "AND exit_ts IS NULL").fetchall():
             p = by_parent.get(r["parent_id"])
-            if p is not None and p.exit_price is not None:
+            if p is not None and p.exit_price is not None and p.exit_confirmed:
                 L.record_exit(self.conn, r["order_id"], reason=p.exit_reason or "bracket",
                               price=p.exit_price, ts=p.exit_time or self.now())
+                n += 1
+        # Partial fills on a filled row, and exits that were sent earlier
+        # (monitored stop, flatten) and have now been reported filled.
+        for r in self.conn.execute("SELECT order_id, parent_id, filled_qty FROM orders "
+                                   "WHERE fill_price IS NOT NULL").fetchall():
+            p = by_parent.get(r["parent_id"])
+            if p is not None and p.filled_qty is not None and r["filled_qty"] != p.filled_qty:
+                L.set_filled_qty(self.conn, r["order_id"], p.filled_qty)
+        for r in L.pending_exits(self.conn):
+            p = by_parent.get(r["parent_id"])
+            if p is not None and p.exit_confirmed and p.exit_price is not None:
+                L.confirm_exit(self.conn, r["order_id"], price=p.exit_price,
+                               ts=p.exit_time or self.now())
+                L.add_order_event(self.conn, r["order_id"],
+                                  f"exit confirmed filled at {p.exit_price}")
                 n += 1
         self.conn.commit()
         return n
@@ -232,15 +263,28 @@ class Runner:
             bid = float(q["bid"])
             if bid > o["stop"]:
                 continue
-            px = self.trader.exit_limit(o["symbol"], int(o["shares"]), bid, offset=offset,
+            # Sell what was filled, not what was asked for: a partial fill
+            # sold at `shares` would leave the book short the difference.
+            qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+            px = self.trader.exit_limit(o["symbol"], qty, bid, offset=offset,
                                         outside_rth=True)
+            exit_id = getattr(self.trader, "last_exit_order_id", None)
+            # Sent, not filled: ExitPending until sync_fills reads the fill.
             L.record_exit(self.conn, o["order_id"], reason="monitored_stop", price=px,
-                          ts=self.now())
+                          ts=self.now(), confirmed=False, exit_order_id=exit_id)
+            self._mark_exit_sent(o["parent_id"], exit_id)
             L.add_order_event(self.conn, o["order_id"],
-                              f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px}")
-            done.append(f"{o['symbol']} x{o['shares']} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+                              f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px} x{qty} sent "
+                              f"(order {exit_id}); fill not yet confirmed")
+            done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
         self.conn.commit()
         return done
+
+    def _mark_exit_sent(self, parent_id, exit_id) -> None:
+        for p in getattr(self.trader, "placed", []):
+            if p.parent_id == parent_id:
+                p.exit_order_id = exit_id
+                p.exit_confirmed = False
 
     # -------------------------------------------------------- after 16:00
     def flag_after_hours(self) -> list[int]:
@@ -281,6 +325,22 @@ class Runner:
             return []
         done = self.trader.flatten_all(quote=lambda s: _bid_ask(self.quote, s),
                                        now=self.now())
+        # Every sell the flatten sent is recorded against the position it
+        # closes, as ExitPending. Until now the flatten left the ledger's
+        # rows open: the position was gone at the broker and 'stuck' here.
+        sent = {f["symbol"]: f for f in getattr(self.trader, "last_flatten", []) or []}
+        for o in L.stuck_orders(self.conn):
+            if o["status"] == "ExitPending":
+                continue
+            f = sent.get(o["symbol"])
+            if f is None:
+                continue
+            L.record_exit(self.conn, o["order_id"], reason="hard_stop", price=f.get("price"),
+                          ts=self.now(), confirmed=False, exit_order_id=f.get("order_id"))
+            self._mark_exit_sent(o["parent_id"], f.get("order_id"))
+            L.add_order_event(self.conn, o["order_id"],
+                              f"hard stop: SELL {f['type']} x{f['qty']} sent (order {f.get('order_id')}); "
+                              f"fill not yet confirmed")
         self.reconcile_unfilled()
         self.conn.commit()
         return done

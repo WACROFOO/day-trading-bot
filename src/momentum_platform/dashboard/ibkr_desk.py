@@ -131,6 +131,8 @@ class IbkrDesk:
         self.profile_days = int(prof["cadence"]["volumeProfileDays"])
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
+        self._news_at: Optional[datetime] = None      # last headline pull
+        self._halt_state: Dict[str, str] = {}         # sym -> halted | trading
         self._jobs: "queue.Queue[tuple]" = queue.Queue()
         self._stop = threading.Event()
         self._last_state: Optional[tuple] = None
@@ -346,6 +348,7 @@ class IbkrDesk:
                 seen = {(r["symbol"], r["provider_id"]) for r in self._news}
                 self._news += [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
             self._news_note = note
+            self._news_at = self.clock()
         return added
 
     def _set_reference(self, sym: str, c, bars: List[dict], sec: Optional[dict] = None,
@@ -592,7 +595,39 @@ class IbkrDesk:
             covered = {r["ts"][:17] + "00Z" for r in tens}
             records += [m for m in mins if m["ts"][:17] + "00Z" not in covered]
             records += tens
+        # Headlines were pulled once, at subscribe. A catalyst published at
+        # 08:00 never reached gate 3 and the name was killed all day (audit
+        # 2026-09-08). Re-pull every 120 s; dedupe on (symbol, provider_id).
+        if self.headlines and self.symbols and (
+                self._news_at is None or (now - self._news_at).total_seconds() >= 120):
+            try:
+                recs, note = news_records(self.symbols)
+                if recs:
+                    seen = {(r["symbol"], r["provider_id"]) for r in self._news}
+                    fresh = [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
+                    if fresh:
+                        self._news += fresh
+                        self.log(f"  headlines: {len(fresh)} new")
+                self._news_note = note
+            except Exception as exc:                      # noqa: BLE001
+                self.log(f"  headlines refresh failed: {exc}")
+            self._news_at = now
         records += self._news
+        # Halt state, from the ticker. The live path emitted no halt records,
+        # so `decisions.halted` was always 0 and the halts table never written
+        # (audit 2026-09-08). ib_async reports `halted` as 1/2 when halted.
+        for sym in self.symbols:
+            t = s._tickers.get(sym)
+            hv = getattr(t, "halted", None) if t is not None else None
+            if hv is None or hv != hv:
+                continue
+            status = "halted" if hv >= 1 else "trading"
+            prev = self._halt_state.get(sym)
+            if prev != status:
+                if prev is not None or status == "halted":
+                    records.append({"type": "halt", "symbol": sym, "status": status,
+                                    "ts": now.isoformat(timespec="seconds").replace("+00:00", "Z")})
+                self._halt_state[sym] = status
         h = s.health
         status = "live" if h.state == "LIVE" else h.state.lower()
         session = build_session_from_records(

@@ -20,7 +20,9 @@ class _Order:
     def __init__(self, action, qty, px=None):
         self.action, self.totalQuantity = action, qty
         self.orderId = 0; self.parentId = 0; self.ocaGroup = ""; self.transmit = True
-        self.tif = "DAY"; self.outsideRth = False; self.orderType = type(self).__name__[:3].upper()
+        self.tif = "DAY"; self.outsideRth = False
+        # IBKR's own strings, so the trader's leg lookup by orderType is exercised for real
+        self.orderType = {"LimitOrder": "LMT", "StopOrder": "STP", "MarketOrder": "MKT"}[type(self).__name__]
 
 class LimitOrder(_Order):
     def __init__(self, action, qty, lmt): super().__init__(action, qty, lmt); self.lmtPrice = lmt
@@ -79,7 +81,7 @@ def test_the_real_place_bracket_runs_end_to_end_and_records_before_sending(trade
     assert rec in trader.placed
     assert rec.protected is True and rec.stop_id and rec.parent_id
     legs = trader.ib.placed
-    assert [t.order.orderType for t in legs] == ["LIM", "STO"]          # entry then stop
+    assert [t.order.orderType for t in legs] == ["LMT", "STP"]          # entry then stop
     parent, stop = legs[0].order, legs[1].order
     assert parent.transmit is False and stop.transmit is True           # the group holds until the stop
     assert stop.parentId == parent.orderId and parent.outsideRth is False
@@ -99,7 +101,7 @@ def test_a_broker_error_mid_send_still_leaves_a_record_that_says_so(trader):
     from datetime import datetime
     from zoneinfo import ZoneInfo
     rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
-    trader.ib.fail_on = "STO"                                           # entry goes, stop is refused
+    trader.ib.fail_on = "STP"                                           # entry goes, stop is refused
     with pytest.raises(RuntimeError, match="refused"):
         trader.place_bracket(intent(), now=rth)
     assert len(trader.placed) == 1 and trader.placed[0].status == "error"
@@ -111,8 +113,6 @@ def test_sync_reads_the_exit_legs(trader):
     from zoneinfo import ZoneInfo
     rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
     rec = trader.place_bracket(intent(target=5.40), now=rth)
-    legs = {t.order.orderType: t for t in trader.ib.placed}
-    legs["LIM"].orderStatus = _Status("Filled", 5.02)                    # entry filled... but which LIM?
     # two limit orders exist (entry, target); find them by id
     by_id = {t.order.orderId: t for t in trader.ib.placed}
     by_id[rec.parent_id].orderStatus = _Status("Filled", 5.02)
