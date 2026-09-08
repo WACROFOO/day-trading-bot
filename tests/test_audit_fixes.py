@@ -594,3 +594,53 @@ def test_exit_management_runs_every_check_even_when_one_raises():
     late = datetime(2026, 9, 8, 11, 31, tzinfo=ZoneInfo("America/New_York"))
     assert X.manage_exits(R(), False, late) is True
     assert calls == ["sync", "reconcile", "watch", "flag", "flatten"]
+
+
+
+# ---- controls by cohort, and the one-off backfill retag ------------------------------------
+def _graded_fixture_ledger(tmp_path):
+    from journal import actuals as A, bars as B
+    from momentum_platform.dashboard.session_builder import build_session
+    fixture = ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl"
+    c = L.connect(tmp_path / "j.sqlite")
+    build_session(fixture, journal=c)
+    A.fill_all(c, B.from_fixture(fixture))
+    return c
+
+
+def test_controls_split_the_strategy_series_by_what_the_cascade_said(tmp_path):
+    from journal import controls
+    c = _graded_fixture_ledger(tmp_path)
+    s = controls.summary(c)
+    assert "strat·allowed" in s and "strat·killed" in s
+    assert s["strat·allowed"]["n"] + s["strat·killed"]["n"] == s["strategy"]["n"]
+    # a backfill row leaves every series — pick any row that IS in the series (trigger touched)
+    row = c.execute("""SELECT d.decision_id, d.plan_allowed FROM decisions d JOIN actuals a USING(decision_id)
+                       WHERE a.risk_share > 0 AND COALESCE(a.trigger_hit,1)=1 LIMIT 1""").fetchone()
+    assert row is not None, "the fixture must grade at least one triggered plan"
+    c.execute("UPDATE decisions SET data_status='replay-backfill' WHERE decision_id=?", (row[0],)); c.commit()
+    s2 = controls.summary(c)
+    key = "strat·allowed" if row[1] else "strat·killed"
+    assert s2["strategy"]["n"] == s["strategy"]["n"] - 1 and s2[key]["n"] == s[key]["n"] - 1
+
+
+def test_retag_backfill_marks_rows_before_the_desk_start_and_keeps_a_revision(tmp_path):
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    import exercise as X
+    c = _graded_fixture_ledger(tmp_path)
+    day = c.execute("SELECT substr(ts_et,1,10) FROM decisions LIMIT 1").fetchone()[0]
+    times = sorted(r[0] for r in c.execute("SELECT substr(ts_et,12,5) FROM decisions").fetchall())
+    cut = times[len(times) // 2]                                      # about half the rows are 'before'
+    before = f"{day}T{cut}"
+    n_before = sum(1 for t in times if t < cut)
+    db = str(tmp_path / "j.sqlite")
+    assert X.main(["--db", db, "retag-backfill", "--before", before]) == 2      # dry run changes nothing
+    assert L.funnel(c)["plans_backfill"] == 0
+    assert X.main(["--db", db, "retag-backfill", "--before", before, "--confirm"]) == 0
+    f = L.funnel(c)
+    assert f["plans_backfill"] == n_before and f["plans_prospective"] == f["plans_armed"] - n_before
+    did = c.execute("SELECT decision_id FROM decisions WHERE data_status LIKE '%-backfill' LIMIT 1").fetchone()[0]
+    assert L.revisions(c, did)[-1]["data_status"].endswith("-backfill")
+    assert X.main(["--db", db, "retag-backfill", "--before", before, "--confirm"]) == 0   # idempotent
+    assert L.funnel(c)["plans_backfill"] == n_before

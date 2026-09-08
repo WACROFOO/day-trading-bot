@@ -90,6 +90,7 @@ Entry line, never `ARMED`.
 | `python3 scripts/exercise.py review` | everything so far across sessions: what kills, what is refused, verdicts, fills, controls, replay, today's risk lock |
 | `python3 scripts/exercise.py ah-exit ID --confirm` | the after-hours exception: exit-only, records who confirmed |
 | `python3 scripts/exercise.py accept-a1 --confirm` | records YOUR acceptance of amendment A1 (pre-market entries with no stop at the broker). Never set by code; read §5 of the pre-registration first |
+| `python3 scripts/exercise.py retag-backfill --before 2026-09-08T08:06 --confirm` | one-off correction: tags the decisions recorded before the backfill tag existed (the morning of 8 September, armed on history loaded at 08:06) as backfill; dry run without `--confirm` |
 | `IBKR_PORT=4002 python3 scripts/day.py --probe-orders` | the only way the day command runs the pre-market stop probe, which places and cancels an unfillable paper bracket. Off by default: an observational day dispatches nothing order-shaped |
 
 ## Optional: start it for you

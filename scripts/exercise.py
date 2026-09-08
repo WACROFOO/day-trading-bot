@@ -442,6 +442,44 @@ def cmd_review(args) -> int:
     return 0
 
 
+def cmd_retag_backfill(args) -> int:
+    """Mark decisions armed before the desk's first start of a day as backfill.
+
+    The tag exists since 2026-09-08 midday; the morning of 8 September was
+    recorded by code without it, so 35 rows armed on history loaded at 08:06
+    ET count as prospective. This is the one-off correction: rows of that
+    date with a bar time before the given ET time get '-backfill' appended to
+    their data_status, each change kept as a revision. Dry run without
+    --confirm."""
+    conn = L.connect(_db(args))
+    day, hhmm = args.before[:10], args.before[11:16]
+    rows = conn.execute("""SELECT decision_id, ts_et, symbol, data_status FROM decisions
+                           WHERE substr(ts_et,1,10)=? AND substr(ts_et,12,5) < ?
+                             AND (data_status IS NULL OR data_status NOT LIKE '%-backfill')
+                           ORDER BY ts_et""", (day, hhmm)).fetchall()
+    print(f"{len(rows)} decision(s) on {day} armed before {hhmm} ET and not yet tagged backfill")
+    for r in rows[:8]:
+        print(f"  {r['ts_et'][11:16]}  {r['symbol']:<6} {r['data_status']}")
+    if len(rows) > 8:
+        print(f"  … {len(rows) - 8} more")
+    if not rows:
+        return 0
+    if not args.confirm:
+        print(f"{DIM}dry run — re-run with --confirm to tag them{END}"); return 2
+    for r in rows:
+        new = f"{r['data_status'] or 'live'}-backfill"
+        conn.execute("UPDATE decisions SET data_status=? WHERE decision_id=?", (new, r["decision_id"]))
+        conn.execute("""INSERT INTO decision_revisions (decision_id, recorded_at, data_status, verdict,
+                            killed_by, plan_allowed, outcome, last, bid, ask, gates_json, warnings_json, inputs_json)
+                        SELECT decision_id, ?, data_status, verdict, killed_by, plan_allowed, outcome, last,
+                               bid, ask, gates_json, warnings_json, inputs_json FROM decisions WHERE decision_id=?""",
+                     (datetime.now(timezone.utc).isoformat(timespec="seconds"), r["decision_id"]))
+    conn.commit()
+    f = L.funnel(conn)
+    print(f"{OK}tagged {len(rows)}{END} · now {f['plans_prospective']} prospective, {f['plans_backfill']} backfill")
+    return 0
+
+
 def cmd_state(args) -> int:
     conn = L.connect(_db(args))
     for k, v in L.get_state(conn).items():
@@ -459,13 +497,17 @@ def main(argv=None) -> int:
     ah = sub.add_parser("ah-exit"); ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     a1 = sub.add_parser("accept-a1", help="record the owner's acceptance of amendment A1 (monitored pre-market exit)")
     a1.add_argument("--confirm", action="store_true")
+    rb = sub.add_parser("retag-backfill", help="tag decisions armed before the desk's first start of a day as backfill")
+    rb.add_argument("--before", required=True, help="ET, e.g. 2026-09-08T08:06 — the desk's first start that day")
+    rb.add_argument("--confirm", action="store_true")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
-            "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1}[args.cmd](args)
+            "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
+            "retag-backfill": cmd_retag_backfill}[args.cmd](args)
 
 
 if __name__ == "__main__":
