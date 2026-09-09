@@ -4,6 +4,8 @@
 # account, port 4002) stays a human step (2FA); the agent only starts the day
 # once you have. Single-login design: the desk reads and the executor writes
 # on the same paper session, so IBKR_PORT=4002 is set here for the desk.
+# The job pulls the branch first (the code changes most days); a failed pull
+# runs what is on disk rather than skipping the day.
 #
 #   bash scripts/install_daily.sh           # install / refresh
 #   bash scripts/install_daily.sh --remove  # uninstall
@@ -38,7 +40,8 @@ cat > "$PLIST" <<PL
 <plist version="1.0"><dict>
   <key>Label</key><string>$LABEL</string>
   <key>ProgramArguments</key><array>
-    <string>$PY</string><string>$REPO/scripts/day.py</string>
+    <string>/bin/bash</string><string>-lc</string>
+    <string>cd "$REPO" &amp;&amp; (git pull -q origin claude/playbook-pullback-explanation-tg5c33 || echo "pull failed - running what is on disk"); exec "$PY" scripts/day.py</string>
   </array>
   <key>WorkingDirectory</key><string>$REPO</string>
   <key>EnvironmentVariables</key><dict>
