@@ -238,9 +238,14 @@ def run_probe_once(conn, today: str, dry: bool) -> None:
 def run_alignment_once(conn, today: str, dry: bool) -> None:
     """Is the paper session on the same tape as the live one? Once per day."""
     st = L.get_state(conn)
-    if st.get("paper_data_date") == today:
+    if st.get("paper_data_date") == today and st.get("paper_data") == "realtime":
         good(f"alignment probe already ran today — paper data {st['paper_data']!r}")
         return
+    if st.get("paper_data_date") == today:
+        # A 'competing' or 'delayed' reading is a condition to fix (TWS logged
+        # in, sharing not yet active), not a fact about the day: measure again
+        # on every start until it reads realtime (9 September 2026, 08:28 ET).
+        note(f"alignment probe read {st.get('paper_data')!r} earlier today — measuring again")
     if dry:
         note("would run scripts/alignment_probe.py"); return
     env = {**os.environ, "JOURNAL_DB": str(DB)}
@@ -403,6 +408,13 @@ def main(argv=None) -> int:
         note("skipped in a rehearsal")
     else:
         run_alignment_once(conn, today, args.dry_run)
+        if not args.dry_run and L.get_state(conn).get("paper_data") == "competing":
+            # 9 September 2026: TWS was logged in, IBKR refused the paper session
+            # every quote (10197), and the desk would have run a whole morning
+            # on no data. A competing login is a stop, not a warning.
+            bad("TWS is logged in — IBKR gives the market data to that session, not to the paper one")
+            note("log OUT of TWS (keep the Gateway on the paper account), then run this command again")
+            return 1
     # The stop probe needs 07:00-09:30 and this command starts at 06:55, so it
     # is deferred to the main loop below rather than run here and refused.
     # The first Monday run did exactly that: exit 6 at 06:55, no verdict.
