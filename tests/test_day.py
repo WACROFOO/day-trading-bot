@@ -194,3 +194,29 @@ def test_rehearsal_runs_on_a_closed_market_forced_log_only_and_is_not_a_session(
     assert ("desk", ["AAPL"]) in started
     assert ("runner", "LOG_ONLY") in started
     assert L.get_state(L.connect(tmp_path / "j.sqlite"))["sessions_done"] == 0
+
+
+
+def test_parse_scan_output_tolerates_a_stray_line_before_the_json():
+    assert day.parse_scan_output("") == []
+    assert day.parse_scan_output("warn: no network\n[{\"sym\": \"AAA\", \"float\": 1.0}]") == [{"sym": "AAA", "float": 1.0}]
+    assert day.parse_scan_output("[{\"sym\": \"AAA\"}]\ntrailing text") == [{"sym": "AAA"}]
+    assert day.parse_scan_output("not json at all") == []
+    assert day.parse_scan_output("{\"not\": \"a list\"}") == []
+
+
+def test_settle_counts_the_named_day_not_the_wall_clock_day(journal, tmp_path, monkeypatch):
+    """--settle 2026-09-09 must look for THAT day's bars and count THAT session,
+    whatever today is. Before, after_close asked for today's bars."""
+    import json as _json
+    monkeypatch.setattr(day, "REPORTS", tmp_path)
+    L.record_bars(journal, {"X": [("2026-09-09T14:05:00Z", 5.0, 5.1, 4.9, 5.05, 1000)]})
+    journal.commit()
+    st0 = L.get_state(journal)["sessions_done"]
+    day.after_close(journal, "2026-09-09", dry=False)
+    st = L.get_state(journal)
+    assert st["sessions_done"] == st0 + 1 and st["last_session_date"] == "2026-09-09"
+    day.after_close(journal, "2026-09-09", dry=False)                   # idempotent
+    assert L.get_state(journal)["sessions_done"] == st0 + 1
+    day.after_close(journal, "2026-09-10", dry=False)                   # a day with no bars: not counted
+    assert L.get_state(journal)["sessions_done"] == st0 + 1

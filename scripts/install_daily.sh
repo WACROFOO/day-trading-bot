@@ -4,8 +4,10 @@
 # account, port 4002) stays a human step (2FA); the agent only starts the day
 # once you have. Single-login design: the desk reads and the executor writes
 # on the same paper session, so IBKR_PORT=4002 is set here for the desk.
-# The job pulls the branch first (the code changes most days); a failed pull
-# runs what is on disk rather than skipping the day.
+# The job waits up to two minutes for the network (a Mac waking at 12:55 has
+# no DNS for a while — 2026-09-09: "Could not resolve host: github.com" and
+# the gap scan and probes failed), pulls the branch (the code changes most
+# days), and a failed pull runs what is on disk rather than skipping the day.
 #
 #   bash scripts/install_daily.sh           # install / refresh
 #   bash scripts/install_daily.sh --remove  # uninstall
@@ -41,7 +43,7 @@ cat > "$PLIST" <<PL
   <key>Label</key><string>$LABEL</string>
   <key>ProgramArguments</key><array>
     <string>/bin/bash</string><string>-lc</string>
-    <string>cd "$REPO" &amp;&amp; (git pull -q origin claude/playbook-pullback-explanation-tg5c33 || echo "pull failed - running what is on disk"); exec "$PY" scripts/day.py</string>
+    <string>cd "$REPO" &amp;&amp; for i in 1 2 3 4 5 6 7 8 9 10 11 12; do nslookup github.com >/dev/null 2>&amp;1 &amp;&amp; break; echo "waiting for the network ($i)"; sleep 10; done; (git pull -q origin claude/playbook-pullback-explanation-tg5c33 || echo "pull failed - running what is on disk"); exec "$PY" scripts/day.py</string>
   </array>
   <key>WorkingDirectory</key><string>$REPO</string>
   <key>EnvironmentVariables</key><dict>

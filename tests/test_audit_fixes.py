@@ -644,3 +644,29 @@ def test_retag_backfill_marks_rows_before_the_desk_start_and_keeps_a_revision(tm
     assert L.revisions(c, did)[-1]["data_status"].endswith("-backfill")
     assert X.main(["--db", db, "retag-backfill", "--before", before, "--confirm"]) == 0   # idempotent
     assert L.funnel(c)["plans_backfill"] == n_before
+
+
+
+def test_backfill_tape_records_the_day_and_resets_only_no_tape_gradings():
+    import sys as _sys
+    _sys.path.insert(0, str(ROOT / "scripts"))
+    import backfill_tape as BT
+    c = L.connect(":memory:")
+    inp = _inputs(); res = evaluate(inp)
+    plan = NS(entry=6.0, stop=5.8, target=6.4, risk_share=0.2, reward_multiple=2.0, pullback_candles=2, volume_ok=True)
+    L.record_decision(c, symbol="T", armed_at="2026-09-09T14:05:00Z", plan=plan, cascade=res, inputs=inp,
+                      snapshot={}, session="regular")
+    assert BT.symbols_for(c, "2026-09-09") == ["T"] and BT.symbols_for(c, "2026-09-08") == []
+    # a graded-as-no-tape row is reset; a real grading is kept
+    from journal import actuals as A
+    A.fill_all(c, {})                                            # no bars anywhere: no_tape
+    assert c.execute("SELECT bars_available FROM actuals").fetchone()[0] == 0
+    assert BT.reset_no_tape(c, "2026-09-09") == 1 and c.execute("SELECT COUNT(*) FROM actuals").fetchone()[0] == 0
+    bar = NS(date=datetime(2026, 9, 9, 14, 6, tzinfo=timezone.utc), open=6.0, high=6.5, low=5.9, close=6.4, volume=1000)
+    recs = BT.to_records([bar])
+    assert recs[0][0] == "2026-09-09T14:06:00Z"
+    L.record_bars(c, {"T": recs}); c.commit()
+    from journal import bars as B
+    A.fill_all(c, B.from_ledger(c))
+    assert c.execute("SELECT bars_available FROM actuals").fetchone()[0] == 1
+    assert BT.reset_no_tape(c, "2026-09-09") == 0

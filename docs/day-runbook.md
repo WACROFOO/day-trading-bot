@@ -91,6 +91,8 @@ Entry line, never `ARMED`.
 | `python3 scripts/exercise.py ah-exit ID --confirm` | the after-hours exception: exit-only, records who confirmed |
 | `python3 scripts/exercise.py accept-a1 --confirm` | records YOUR acceptance of amendment A1 (pre-market entries with no stop at the broker). Never set by code; read §5 of the pre-registration first |
 | `python3 scripts/exercise.py retag-backfill --before 2026-09-08T08:06 --confirm` | one-off correction: tags the decisions recorded before the backfill tag existed (the morning of 8 September, armed on history loaded at 08:06) as backfill; dry run without `--confirm` |
+| `python3 scripts/day.py --settle 2026-09-09` | the after-close block for a past day the hard stop never reached (the Mac slept, Ctrl-C): grading from the ledger's bars, replay, report, session counted once |
+| `IBKR_PORT=4002 python3 scripts/backfill_tape.py 2026-09-09` | when the desk stopped early: fetches that day's 1-minute bars from IBKR (read-only) for the names decided on, resets the 'no tape' gradings, grades again. Then `--settle` |
 | `IBKR_PORT=4002 python3 scripts/day.py --probe-orders` | the only way the day command runs the pre-market stop probe, which places and cancels an unfillable paper bracket. Off by default: an observational day dispatches nothing order-shaped |
 
 ## Optional: start it for you

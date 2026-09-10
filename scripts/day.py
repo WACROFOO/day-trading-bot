@@ -214,10 +214,29 @@ def gap_scan(dry: bool) -> list[dict]:
     try:
         out = subprocess.run([sys.executable, "scripts/premarket_stars.py", "--json", "--top", "20"],
                              cwd=ROOT, capture_output=True, text=True, timeout=180)
-        return json.loads(out.stdout) if out.returncode == 0 and out.stdout.strip() else []
+        return parse_scan_output(out.stdout) if out.returncode == 0 else []
     except Exception as exc:                            # noqa: BLE001
         warn(f"gap scan failed: {exc}")
         return []
+
+
+def parse_scan_output(text: str) -> list[dict]:
+    """The scan's JSON, tolerant of a stray line before it. 2026-09-09, 06:55
+    ET, no network yet after wake: the scan printed a warning ahead of its
+    JSON and the day read 'Extra data: line 1 column 5' instead of a list."""
+    text = (text or "").strip()
+    if not text:
+        return []
+    start = min([i for i in (text.find("["), text.find("{")) if i >= 0], default=-1)
+    if start < 0:
+        return []
+    try:
+        data = json.loads(text[start:])
+    except json.JSONDecodeError:
+        # the JSON may be followed by more text: take the first complete document
+        dec = json.JSONDecoder()
+        data, _ = dec.raw_decode(text[start:])
+    return data if isinstance(data, list) else []
 
 
 def run_probe_once(conn, today: str, dry: bool) -> None:
@@ -321,8 +340,10 @@ def after_close(conn, today: str, dry: bool) -> None:
     shown = path.relative_to(ROOT) if path.is_relative_to(ROOT) else path
     good(f"report: {shown}")
     st = L.get_state(conn)
+    # Bars of the day being settled (UTC date == ET date for an 04:00-16:00
+    # ET session), not of the wall-clock day: --settle runs this for a past day.
     bars_today = conn.execute("SELECT COUNT(*) FROM bars WHERE substr(ts,1,10)=?",
-                              (datetime.now(timezone.utc).date().isoformat(),)).fetchone()[0]
+                              (today,)).fetchone()[0]
     if bars_today == 0:
         # A holiday or a dead feed. Counting it toward the five log-only
         # sessions would let the exercise leave phase A on days that taught
@@ -351,6 +372,9 @@ def main(argv=None) -> int:
                     help="allow the pre-market stop probe, which PLACES (and cancels) an unfillable "
                          "paper bracket. Off by default: an observational day dispatches nothing "
                          "order-shaped (audit 2026-09-08 F6).")
+    ap.add_argument("--settle", metavar="YYYY-MM-DD",
+                    help="run the after-close block for a past day (actuals from the ledger's bars, replay, "
+                         "report, session count) — for a day the hard-stop block never ran, e.g. the Mac slept")
     ap.add_argument("--rehearsal", type=int, metavar="MINUTES", default=0,
                     help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
                          "for this many minutes, then stop. Not counted as a session; no probes.")
@@ -368,6 +392,10 @@ def main(argv=None) -> int:
     except Exception:        # noqa: BLE001
         pass
     say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk · {DB}")
+    if args.settle:
+        say(f"\n{BOLD}Settling {args.settle}{END}")
+        after_close(conn, args.settle, args.dry_run)
+        return 0
     closed = why_closed(now.date())
     if args.rehearsal:
         # The only way to exercise the desk → ledger → runner chain against
