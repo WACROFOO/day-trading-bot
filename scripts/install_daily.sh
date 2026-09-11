@@ -43,7 +43,7 @@ cat > "$PLIST" <<PL
   <key>Label</key><string>$LABEL</string>
   <key>ProgramArguments</key><array>
     <string>/bin/bash</string><string>-lc</string>
-    <string>cd "$REPO" &amp;&amp; for i in 1 2 3 4 5 6 7 8 9 10 11 12; do nslookup github.com >/dev/null 2>&amp;1 &amp;&amp; break; echo "waiting for the network ($i)"; sleep 10; done; (git pull -q origin claude/playbook-pullback-explanation-tg5c33 || echo "pull failed - running what is on disk"); exec "$PY" scripts/day.py</string>
+    <string>cd "$REPO" &amp;&amp; for i in 1 2 3 4 5 6 7 8 9 10 11 12; do nslookup github.com >/dev/null 2>&amp;1 &amp;&amp; break; echo "waiting for the network (\$i)"; sleep 10; done; (git pull -q origin claude/playbook-pullback-explanation-tg5c33 || echo "pull failed - running what is on disk"); exec "$PY" scripts/day.py</string>
   </array>
   <key>WorkingDirectory</key><string>$REPO</string>
   <key>EnvironmentVariables</key><dict>
