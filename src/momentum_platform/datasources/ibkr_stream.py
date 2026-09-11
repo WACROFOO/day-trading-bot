@@ -181,6 +181,26 @@ class BarStore:
 # -------------------------------------------------------------- health -----
 
 
+def detach_reconnect_resubscribe(ib) -> bool:
+    """Drop ib_async's own error-1102 handler. On every "connectivity restored"
+    it issues a fresh account-summary subscription and never cancels the one
+    before, so a flapping Gateway link piles them up until TWS answers error
+    322 ("Maximum number of account summary requests exceeded") — the whole
+    afternoon of 2026-09-11, on two clients at once. Nothing in this repo reads
+    the account summary through that path (the preflight asks for it once, by
+    name), so the handler is removed rather than rate-limited. Idempotent;
+    returns False when the object exposes neither the event nor the handler."""
+    handler = getattr(ib, "_onError", None)
+    event = getattr(ib, "errorEvent", None)
+    if handler is None or event is None:
+        return False
+    try:
+        event -= handler
+    except Exception:
+        return False
+    return True
+
+
 def read_only_connect(ib, host: str, port: int, client_id: int, timeout: float):
     """Connect a never-trading client. ib_async's connect() syncs positions,
     orders, executions and account updates by default; this desk uses none of
@@ -188,6 +208,7 @@ def read_only_connect(ib, host: str, port: int, client_id: int, timeout: float):
     answers with error 322 (account summary quota). readonly=True is kept on
     every path; the startup sync is skipped only where ib_async offers it."""
     kwargs = {"clientId": client_id, "readonly": True, "timeout": timeout}
+    detach_reconnect_resubscribe(ib)
     try:
         from ib_async.ib import StartupFetch
         if "fetchFields" in inspect.signature(ib.connect).parameters:

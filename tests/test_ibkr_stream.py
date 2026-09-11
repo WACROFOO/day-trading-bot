@@ -448,3 +448,41 @@ def test_only_a_changed_quote_counts_as_an_arrival():
     T.last = 4.05
     st.poll_tickers()
     assert st.health.last_quote_at == clock.now
+
+
+def test_ib_asyncs_reconnect_resubscribe_is_detached_so_a_flapping_link_cannot_hit_error_322():
+    """ib_async answers every error 1102 with a new account-summary request and
+    never cancels the previous one; 2026-09-11 the Gateway link flapped all
+    afternoon and TWS answered 322 on both clients. The desk never reads the
+    account summary, so read_only_connect removes that handler."""
+    ib_async = pytest.importorskip("ib_async")
+    ib = ib_async.IB()
+    assert len(ib.errorEvent) == 1                     # the library's own _onError
+    assert mod.detach_reconnect_resubscribe(ib) is True
+    assert len(ib.errorEvent) == 0
+    assert mod.detach_reconnect_resubscribe(ib) is True   # idempotent
+
+    class Recording:
+        def __init__(self):
+            self.removed = []
+            self.errorEvent = self
+
+        def __isub__(self, handler):
+            self.removed.append(handler)
+            return self
+
+        def _onError(self, *a):
+            pass
+
+        def connect(self, host, port, clientId=1, timeout=4, readonly=False):
+            pass
+
+    r = Recording()
+    mod.read_only_connect(r, "127.0.0.1", 4002, 27, 4)
+    assert r.removed == [r._onError]
+
+    class Bare:                                        # a fake without the event: no crash
+        def connect(self, host, port, clientId=1, timeout=4, readonly=False):
+            pass
+
+    assert mod.detach_reconnect_resubscribe(Bare()) is False

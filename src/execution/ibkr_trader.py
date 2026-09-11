@@ -51,6 +51,8 @@ from __future__ import annotations
 import os
 from typing import Optional
 
+from momentum_platform.datasources.ibkr_stream import detach_reconnect_resubscribe
+
 from .intent import (SIDE, EntryIntent, PlacedOrder, in_regular_hours,
                      refusals)
 
@@ -120,6 +122,7 @@ class PaperTrader:
         from ib_async import IB
 
         self.ib = IB()
+        detach_reconnect_resubscribe(self.ib)     # same 1102 → 322 leak as the desk; see ibkr_stream
         self.ib.connect(self.host, self.port, clientId=self.client_id,
                         readonly=False, timeout=timeout)
         try:
