@@ -1151,6 +1151,9 @@ function renderHeader(frame) {
   const stat = (lab, val, cls) => { const s = el("div", "stat"); s.appendChild(el("span", "lab", lab)); s.appendChild(el("span", cls || null, val)); stats.appendChild(s); };
   stat("Last", fx(last)); stat("Change", pct(chg), dirClass(chg)); stat("HOD", fx(hod));
   stat("RVOL", row ? fx(rowRvol(row)) + "×" : "—");
+  // The screener-comparable number: today ÷ the 10-day average FULL day.
+  // TradingView's "Vol Rel" is this; the time-of-day measure above is not.
+  stat("Day RVOL", row && row.rvolDaily != null ? fx(row.rvolDaily) + "×" : "—");
   stat("5m RVOL", row ? fx(row.rvol5m) + "×" : "—");
   const halted = frame.halts && frame.halts[sym] === "halted";
   stat("Halt", halted ? "HALTED" : "trading", halted ? "down" : null);
@@ -1221,7 +1224,7 @@ function renderCatalyst(host, ctx) {
     host.appendChild(head);
     const read = el("div", "cat-read");
     read.textContent = score === 4
-      ? "4/4 technical, no headline. The course allows a technical breakout to carry it."
+      ? "4/4 technical, no headline. Gate 3 kills it unless a live theme substitutes (FILTERS.md); the killed cohort records what it did anyway."
       : "No headline, " + score + "/4 technical. Nothing to build a thesis on.";
     host.appendChild(read);
     return;
