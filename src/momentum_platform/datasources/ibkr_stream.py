@@ -385,10 +385,19 @@ class IbkrStream:
                 Stock = _PlainStock
             c = Stock(symbol, "SMART", "USD", primaryExchange="NASDAQ")
             try:
-                self.ib.qualifyContracts(c)
+                res = self.ib.qualifyContracts(c)
             except Exception as exc:
                 self.health.messages.append(f"{symbol}: qualify failed: {exc}")
-            self._contracts[symbol] = c
+                res = [c]
+            # ib_async answers an unknown symbol with None in that slot and
+            # leaves the contract without a conId; the next reqMktData then
+            # raises and took the whole desk down (PSNYW, a warrant, 2026-09-15).
+            # Such a name is remembered as None and skipped everywhere.
+            if isinstance(res, list) and not any(x is c for x in res):
+                self.health.messages.append(f"{symbol}: unknown to IBKR (no security definition) — skipped")
+                self._contracts[symbol] = None
+            else:
+                self._contracts[symbol] = c
         return self._contracts[symbol]
 
     def subscribe(self, symbols: List[str], backfill_seconds: int = 1800) -> List[str]:
@@ -402,6 +411,8 @@ class IbkrStream:
                     self.health.messages.append(f"{sym}: not subscribed — market-data line limit {self.max_lines}")
                     continue
                 c = self._contract(sym)
+                if c is None:
+                    continue                          # unknown to IBKR; message already recorded
                 self._tickers[sym] = self.ib.reqMktData(c, "", False, False)
                 bars = self.ib.reqRealTimeBars(c, 5, "TRADES", False)
                 self._bar_lists[sym] = bars

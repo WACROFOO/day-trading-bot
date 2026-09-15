@@ -250,6 +250,27 @@ def test_subscribe_uses_two_lines_per_symbol_and_respects_the_limit():
     assert s.subscribe(["AAA"], backfill_seconds=0) == [], "already subscribed"
 
 
+def test_a_symbol_ibkr_does_not_know_is_skipped_not_fatal():
+    """ib_async returns None in the slot of an unknown contract and leaves it
+    without a conId; reqMktData on it raises. 2026-09-15 that took the desk
+    down on PSNYW, a warrant the gap scan had passed."""
+    class IB(FakeIB):
+        def qualifyContracts(self, *contracts):
+            return [None if c.symbol == "PSNYW" else c for c in contracts]
+
+        def reqMktData(self, contract, *args):
+            assert contract.symbol != "PSNYW", "an unknown contract must never reach reqMktData"
+            return super().reqMktData(contract, *args)
+
+    s, ib, _, _ = make(ib=IB())
+    s.connect()
+    added = s.subscribe(["VEEA", "PSNYW", "NAMI"], backfill_seconds=0)
+    assert added == ["VEEA", "NAMI"]
+    assert s._contract("PSNYW") is None
+    assert any("PSNYW" in m and "unknown to IBKR" in m for m in s.health.messages)
+    s.unsubscribe(["PSNYW"])                         # tolerated, nothing to cancel
+
+
 def test_unsubscribe_cancels_both_lines():
     s, ib, _, _ = make()
     s.connect()

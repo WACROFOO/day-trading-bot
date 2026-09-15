@@ -318,6 +318,11 @@ class IbkrDesk:
         wanted = []
         for sym in symbols:
             c = self.stream._contract(sym)
+            if c is None:
+                self.log(f"  {sym}: unknown to IBKR (no security definition) — not on the desk")
+                if sym in self.symbols:
+                    self.symbols.remove(sym)
+                continue
             st = stock_type_of(self.stream.ib, c, sym)
             if not is_common_stock(st):
                 self.log(f"  {sym}: not a common stock ({st}); funds and warrants do not join the desk")

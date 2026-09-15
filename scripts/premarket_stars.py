@@ -398,6 +398,13 @@ def grade(r):
         kill.append(f'instrument type "{typ}" — not common stock')
     elif typ and typ != 'stock':
         warn.append(f'instrument type "{typ}"')
+    # Nasdaq's fifth letter: W = warrant, R = right, U = unit. Finviz typed
+    # PSNYW as a stock on 2026-09-15; IBKR has no stock definition for it and
+    # the desk died on the name. Five letters only: TNON, GROW are stocks.
+    sym = (r.get('sym') or '')
+    suffix = {'W': 'warrant', 'R': 'right', 'U': 'unit'}
+    if len(sym) == 5 and sym[-1] in suffix and typ in (None, '', 'stock'):
+        kill.append(f'instrument suffix "{sym[-1]}" — a {suffix[sym[-1]]}, not common stock')
 
     if kill:
         return 'REJECT', kill
