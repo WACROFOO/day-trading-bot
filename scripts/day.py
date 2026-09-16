@@ -52,6 +52,7 @@ from momentum_platform.sessions import REGULAR_START  # noqa: E402
 PREMARKET_OPEN = datetime.strptime("06:55", "%H:%M").time()
 REPORTS = ROOT / "research" / "paper-exercise" / "reports"
 DB = Path(os.environ.get("JOURNAL_DB") or L.DEFAULT_DB)
+PROBE_ONCE = ROOT / "data" / "probe-orders.once"    # touch it the evening before; consumed at start
 
 DIM, BOLD, OK, BAD, WARN, END = "\033[2m", "\033[1m", "\033[92m", "\033[91m", "\033[93m", "\033[0m"
 
@@ -379,6 +380,13 @@ def main(argv=None) -> int:
                     help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
                          "for this many minutes, then stop. Not counted as a session; no probes.")
     args = ap.parse_args(argv)
+    # The scheduled day cannot take a flag. A file the owner creates the
+    # evening before stands in for --probe-orders, once: it is consumed here
+    # so the probe cannot run on a day nobody asked for it.
+    if not args.probe_orders and PROBE_ONCE.exists():
+        args.probe_orders = True
+        PROBE_ONCE.unlink()
+        note(f"stop probe: ON for today — {PROBE_ONCE.name} found and removed")
 
     now = datetime.now(ET)
     today = now.date().isoformat()

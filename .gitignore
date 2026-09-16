@@ -69,6 +69,8 @@ data/*.sqlite-wal
 data/*.sqlite-shm
 # The morning's finviz floats, handed from the gap scan to the desk. Daily, regenerated.
 data/float_overrides.json
+# The one-shot request for the pre-market stop probe: touch it the evening before, day.py consumes it.
+data/probe-orders.once
 
 # scratch / hook side-effects
 research/index-failures.log

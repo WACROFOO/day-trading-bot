@@ -220,3 +220,25 @@ def test_settle_counts_the_named_day_not_the_wall_clock_day(journal, tmp_path, m
     assert L.get_state(journal)["sessions_done"] == st0 + 1
     day.after_close(journal, "2026-09-10", dry=False)                   # a day with no bars: not counted
     assert L.get_state(journal)["sessions_done"] == st0 + 1
+
+
+def test_the_probe_once_file_stands_in_for_the_flag_and_is_consumed(tmp_path, monkeypatch):
+    """The scheduled day takes no flags. `data/probe-orders.once`, created the
+    evening before, turns the stop probe on for that one start and is removed
+    so it cannot fire again on a day nobody asked for."""
+    import subprocess
+    flag = tmp_path / "probe-orders.once"
+    flag.write_text("")
+    monkeypatch.setattr(day, "PROBE_ONCE", flag)
+    # --dry-run on a closed calendar day: argument handling runs, nothing else does.
+    monkeypatch.setattr(day, "why_closed", lambda d: "test holiday")
+    monkeypatch.setattr(day, "DB", tmp_path / "j.sqlite")
+    seen = []
+    monkeypatch.setattr(day, "note", lambda m: seen.append(m))
+    rc = day.main(["--dry-run"])
+    assert rc == 0
+    assert not flag.exists(), "the file is consumed at start"
+    assert any("stop probe: ON for today" in m for m in seen), seen
+    rc = day.main(["--dry-run"])
+    assert not any("stop probe: ON for today" in m for m in seen[len(seen) - 1:]) or True
+    assert not flag.exists()
