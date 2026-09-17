@@ -3,8 +3,8 @@
 ```
 WHAT THIS IS · a research plan, owner-specified 2026-09-17, to test the
      setup at the resolution the corpus says he actually trades it.
-     LOG_ONLY. No order path. Runs BESIDE the phase-A exercise and never
-     touches it.
+     Phase 0-1 LOG_ONLY; Phase 2 sends PAPER orders (owner, 2026-09-17).
+     Runs BESIDE the phase-A exercise and never touches it.
 STATUS · PROPOSED. Nothing here is built. Section 8 is the kill rule and
      it is written before any data is collected, on purpose.
 PAPER ONLY · the 1-minute version of this setup measured NEGATIVE over
@@ -154,12 +154,64 @@ median 25% of the stop**, and 5 of 39 planned trades had a spread wider than
 the entire stop. A 10-second dip is *smaller* than a 1-minute dip by
 construction, so this gets worse, not better.
 
-`k` is set in Phase 0 from measurement, not chosen. Proposed starting point
-`k = 4` (the spread may be at most a quarter of the risk), declared
-`LOCAL_ADDITION / REASONED_NOT_MEASURED` until Phase 0 replaces it.
+**`k = 8`, owner-confirmed 2026-09-17.** An earlier draft of this file
+proposed `k = 4` and that was wrong by arithmetic, not by taste. The
+strategy's own best theoretical case is 50% wins on the half-at-1R ladder,
+which is **+0.25 R per trade before costs** (`MICRO-PULLBACK-SPEC.md` §sizing).
+A round trip pays roughly one full spread, so the spread costs `1/k` R:
+
+| k | spread at most | spread costs | left of the +0.25 R |
+|---:|---:|---:|---:|
+| 4 | 25% of risk | 0.250 R | **0.000 R — the whole edge** |
+| 6 | 17% | 0.167 R | +0.083 R |
+| **8** | **12%** | **0.125 R** | **+0.125 R** |
+| 10 | 10% | 0.100 R | +0.150 R |
+
+Commissions take a further ~0.05–0.07 R (measured,
+`research/momentum-replication/reports/2026-08-pine-v8-benchmark.md`), so
+`k = 8` keeps roughly +0.06 R in the best case and `k = 4` keeps nothing.
+
+Cost of the strictness, on the 39 prospective 1-minute setups with a stored
+quote: `k=4` keeps 19, `k=8` keeps 16, `k=10` keeps 12. Three setups buy the
+difference between zero and positive expectancy.
+
+Declared `LOCAL_ADDITION / REASONED_NOT_MEASURED`. Phase 0 measures the
+10-second dip depth and may raise it; it may not lower it below 8 without a
+dated note here.
 
 *Breaks if not:* a stop inside the spread is hit by the quote, not by the
 market. You are not trading, you are paying.
+
+### M5b · Concurrent positions and the real binding constraint
+
+Owner decision 2026-09-17: **more than one position at a time is allowed,
+subject to margin.** Two facts make this less free than it sounds.
+
+**The PDT rule is no longer the limit.** It was eliminated in spring 2026;
+margin accounts now need a $2,000 minimum
+(`knowledge-base/warrior-blog/rules-regulation/pattern-day-trader-rule.md`,
+lastmod 2026-08-03). The paper account's $2,143.70 clears it. Trade count is
+not capped.
+
+**Cash is the limit, and it binds much earlier than risk does.** A tight stop
+produces a large share count: $20 of risk on a 3-cent stop is 666 shares, and
+at $3.50 that is $2,331 of stock — already the whole account for ONE position.
+`MICRO-PULLBACK-SPEC.md` states the same two caps: the risk budget and the
+cash, whichever binds first. At 10-second stops this gets tighter, not looser.
+
+**Correlation is the danger, not the count.** Every name on this desk is a
+low-float momentum runner on the same session. They are one factor, not three
+positions. Three concurrent trades in this universe is 3× the same bet.
+
+Therefore, mandatory, all three enforced together:
+
+| cap | value | why |
+|---|---|---|
+| concurrent positions | **3** | beyond this the correlation makes the risk figure fiction |
+| total open risk | **3 R** | one adverse market minute can take every open position at once |
+| position value | existing cash cap, no margin borrowing in v1 | the account is $2,143; leverage on a correlated basket is how it goes to zero |
+
+The daily risk gate (`src/journal/risk.py`) keeps running unchanged on top.
 
 ### M6 · Separate cohort, separate rules hash, phase A untouched
 
@@ -233,12 +285,36 @@ Mandatory tests before it runs live:
 **Deliverable:** replay of Phase 0's sessions reproduces 100% of its own
 setups, the same guarantee the 1-minute path already meets.
 
-### Phase 2 — Live, LOG_ONLY, beside phase A.
+### Phase 2 — Live, PAPER ORDERS, beside phase A.
 
-Same IBKR connection, same desk, same session. Writes `source='pullback10s'`
-into the same ledger as a separate cohort. Places nothing.
+**Revised 2026-09-17 on the owner's decision.** The original draft was
+LOG_ONLY for 20 sessions. That was over-cautious: logging can never answer
+the question that actually decides this, which is *does the stop hold at
+10-second resolution?* Only real fills produce real slippage. On the
+eleven-year data a stop meant to cost 1 R actually cost 2.06 R, and nothing
+but sending orders will show whether that happens here.
 
-Runs for **20 qualifying sessions**, or until the kill rule fires.
+Same IBKR connection, same desk, same paper account. Writes
+`source='pullback10s'` into the same ledger as a separate cohort.
+
+**Who sends orders.** The 10-second detector, and only it. The 1-minute
+detector keeps running LOG_ONLY as the paired control on the same names and
+instants. One thing touches the broker; the comparison is free.
+
+**Two questions, two very different sample sizes.** Conflating them is how a
+week of noise becomes a conviction:
+
+| question | needs | realistic |
+|---|---|---|
+| do fills happen at sane prices, does the stop hold, is `k` right | 20–30 fills, mechanical, low variance | **one week** |
+| does it make money | hundreds of trades, very high variance | months; no shortcut exists |
+
+**Week 1 is read as an execution report, not a profit report.** That is not
+caution, it is arithmetic: at this variance a 10-trade P&L is consistent with
+almost any true expectancy. The read-out in §8 is not evaluated until the
+sample exists.
+
+Runs until the kill rule fires or the sample is reached.
 
 Three series are recorded on every session, on identical names and instants:
 1. the 1-minute detector (the existing cohort)
@@ -304,7 +380,28 @@ trade money.
 
 ---
 
-*Owner decisions still required before Phase 0 starts: (a) confirm 20
-sessions for Phase 2, (b) confirm `k = 4` as the Phase-0 starting point for
-the spread gate, (c) confirm that a NO-GO at Phase 0 is an acceptable
-outcome.*
+## 9. Owner decisions — settled 2026-09-17
+
+| decision | value |
+|---|---|
+| spread gate `k` | **8** (was 4; corrected by arithmetic, §M5) |
+| Phase 2 shape | **paper orders from day one**, week 1 read as execution quality only |
+| who sends orders | the **10-second detector only**; the 1-minute detector stays LOG_ONLY as the paired control |
+| concurrent positions | **allowed, capped at 3 and at 3 R of open risk**, no margin borrowing in v1 (§M5b) |
+| a NO-GO at Phase 0 | accepted as a legitimate outcome |
+
+Still required before the first paper order: a pre-registration for the
+10-second cohort, written and committed before it, in the shape of
+`docs/preregistration.md`. It is a different strategy version, so it is a new
+document and not an amendment to the 1-minute one.
+
+## 10. Build log
+
+| date | what | commit |
+|---|---|---|
+| 2026-09-17 | **M1 done.** `bars_10s` table, `record_bars_10s`, `bars_10s_from_ledger`; the drain in `publish_closed_10s` takes a `sink`; the desk buffers 30 candles per write and flushes on stop. 8 tests, including the safety property that no 10-second row can reach the 1-minute tape the grader reads | this commit |
+
+---
+
+*Status: Phase 0 in progress. Nothing has been traded and no order path
+exists.*

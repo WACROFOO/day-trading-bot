@@ -177,6 +177,23 @@ CREATE TABLE IF NOT EXISTS bars (
     PRIMARY KEY (symbol, ts)
 );
 
+-- Ten-second candles, in their OWN table on purpose.
+--
+-- `bars` is the 1-minute tape the grader and the replay check read
+-- (`journal.bars.from_ledger` selects every row in it). Putting 10-second
+-- rows there would silently hand the grader six times the bars and re-grade
+-- the whole phase-A cohort against a different tape. So: separate table,
+-- same shape, no bid/ask (the quote is in `quote_ticks` with its own clock).
+--
+-- Written by the desk as the BarStore drains each closed candle; that drain
+-- is destructive, so a candle not captured here is gone for good.
+-- docs/PLAN-10s-micro-pullback.md M1.
+CREATE TABLE IF NOT EXISTS bars_10s (
+    symbol TEXT NOT NULL, ts TEXT NOT NULL,          -- ts is UTC ISO, bucket start
+    open REAL, high REAL, low REAL, close REAL, volume REAL,
+    PRIMARY KEY (symbol, ts)
+);
+
 -- Latest quote per symbol, overwritten on every desk rebuild. This is the
 -- runner's NBBO source at fill time (R4). The gap between a fill and the
 -- quote read is recorded through the two timestamps, never hidden.
@@ -677,6 +694,43 @@ def record_bars(conn: sqlite3.Connection, bars_by_symbol: dict) -> int:
                 "WHERE excluded.volume >= bars.volume",
                 (sym, r[0], r[1], r[2], r[3], r[4], r[5], bid, ask))
     return conn.execute("SELECT COUNT(*) FROM bars").fetchone()[0] - before
+
+
+def record_bars_10s(conn: sqlite3.Connection, bars) -> int:
+    """Persist closed 10-second candles. `bars` is an iterable of objects with
+    symbol/ts/open/high/low/close/volume, or of (symbol, ts, o, h, l, c, v).
+
+    INSERT OR IGNORE, not UPSERT: a 10-second candle is only ever emitted once
+    and already closed, unlike the 1-minute aggregate the builder re-sends
+    mid-minute. Returns the number of rows actually added.
+    """
+    before = conn.execute("SELECT COUNT(*) FROM bars_10s").fetchone()[0]
+    for b in bars:
+        if isinstance(b, (tuple, list)):
+            sym, ts, o, h, l, c, v = b[0], b[1], b[2], b[3], b[4], b[5], b[6]
+        else:
+            sym, o, h, l, c, v = b.symbol, b.open, b.high, b.low, b.close, b.volume
+            ts = b.ts
+        if hasattr(ts, "isoformat"):
+            ts = ts.isoformat().replace("+00:00", "Z")
+        conn.execute(
+            "INSERT OR IGNORE INTO bars_10s (symbol, ts, open, high, low, close, volume) "
+            "VALUES (?,?,?,?,?,?,?)", (sym, str(ts), o, h, l, c, v))
+    return conn.execute("SELECT COUNT(*) FROM bars_10s").fetchone()[0] - before
+
+
+def bars_10s_from_ledger(conn, symbol: str | None = None) -> dict:
+    """symbol -> [(ts, o, h, l, c, v)], the same shape as journal.bars."""
+    from collections import defaultdict
+    out = defaultdict(list)
+    q = "SELECT symbol, ts, open, high, low, close, volume FROM bars_10s"
+    args: tuple = ()
+    if symbol:
+        q += " WHERE symbol = ?"
+        args = (symbol,)
+    for r in conn.execute(q + " ORDER BY symbol, ts", args):
+        out[r["symbol"]].append((r["ts"], r["open"], r["high"], r["low"], r["close"], r["volume"]))
+    return dict(out)
 
 
 def record_quotes(conn: sqlite3.Connection, quotes: dict) -> None:

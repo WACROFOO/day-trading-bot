@@ -129,6 +129,8 @@ class IbkrDesk:
         self._profile_day: Dict[str, str] = {}
         self._float_retry: Dict[str, float] = {}     # monotonic time of the last EDGAR retry
         self.profile_days = int(prof["cadence"]["volumeProfileDays"])
+        self._buf10s: List[object] = []        # closed 10s candles awaiting a batched write
+        self._10s_warned = False
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._news_at: Optional[datetime] = None      # last headline pull
@@ -166,6 +168,7 @@ class IbkrDesk:
         return self.submit(self._bootstrap).result(timeout=timeout)
 
     def stop(self) -> None:
+        self._flush_10s()          # the tail of the buffer, or it dies with the desk
         self._stop.set()
 
     def submit(self, fn: Callable, *args) -> Future:
@@ -425,7 +428,7 @@ class IbkrDesk:
         s = self.stream
         s.poll_tickers()
         self._recover_stalled_bars()
-        self.publisher.publish_closed_10s(s.store, s.symbols)
+        self.publisher.publish_closed_10s(s.store, s.symbols, sink=self._keep_10s)
         h = s.check()
         key = (h.state, h.generation, h.subscriptions, h.market_data_type)
         if key != self._last_state:
@@ -434,6 +437,36 @@ class IbkrDesk:
             self.log(f"  feed {h.state} (gen {h.generation}, {h.subscriptions} lines)")
         if h.state == "OFFLINE":
             s.reconnect()
+
+    def _keep_10s(self, bar) -> None:
+        """Persist a closed ten-second candle as it is drained.
+
+        Buffered and flushed in batches: `tick` runs every rebuild and a
+        write per candle would put SQLite in the hot path of the feed. A
+        failure here is logged once and never raised — losing research data
+        must not take the desk down (2026-09-15: one unknown symbol did
+        exactly that).
+        """
+        self._buf10s.append(bar)
+        if len(self._buf10s) < 30:
+            return
+        self._flush_10s()
+
+    def _flush_10s(self) -> None:
+        if not self._buf10s:
+            return
+        batch, self._buf10s = self._buf10s, []
+        conn = _journal()
+        if conn is None:
+            return
+        try:
+            from journal import ledger as _L
+            _L.record_bars_10s(conn, batch)
+            conn.commit()
+        except Exception as exc:                          # noqa: BLE001
+            if not self._10s_warned:
+                self._10s_warned = True
+                self.log(f"  10s bars not persisted: {exc}")
 
     def _recover_stalled_bars(self) -> bool:
         """Re-request the bar streams when quotes arrive but bars have stopped.

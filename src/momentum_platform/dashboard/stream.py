@@ -204,10 +204,19 @@ class UpdatePublisher:
             "status": getattr(update.data_status, "value", str(update.data_status)),
         })
 
-    def publish_closed_10s(self, store, symbols) -> int:
+    def publish_closed_10s(self, store, symbols, sink=None) -> int:
+        """Drain each symbol's closed ten-second candles to the hub.
+
+        `sink`, when given, receives every drained candle before it is
+        published. The drain is DESTRUCTIVE — `closed_10s` emits a candle
+        exactly once — so a caller that wants to keep them has no second
+        chance and must hook here (docs/PLAN-10s-micro-pullback.md M1).
+        """
         n = 0
         for sym in symbols:
             for bar in store.closed_10s(sym):
+                if sink is not None:
+                    sink(bar)
                 self.hub.publish("bar10s", bar_payload(bar))
                 n += 1
         return n
