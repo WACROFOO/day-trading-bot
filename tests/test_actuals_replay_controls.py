@@ -43,7 +43,9 @@ def test_actuals_are_computed_for_every_decision_including_suppressed(journal, t
     # suppressed ones too — "the one I passed on" becomes a measurement
     sup = journal.execute("""SELECT COUNT(*) FROM decisions d JOIN actuals a USING(decision_id)
                              WHERE d.outcome='SUPPRESSED'""").fetchone()[0]
-    assert sup == 3
+    # Three before amendment A2 (2026-09-17); two of them were catalyst kills,
+    # which the gate now flags instead. One price/float kill remains.
+    assert sup == 1
 
 
 def test_actuals_start_strictly_after_the_decision_bar(journal, tape):

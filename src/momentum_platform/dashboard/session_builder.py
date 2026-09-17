@@ -180,9 +180,13 @@ def build_session_from_records(
     news_queue: list[dict] = []
     halt_queue: list[dict] = []
     bar_records: list[dict] = []
+    news_source_ok = True          # a `news_source` record from the desk says otherwise
 
     for rec in records:
         kind = rec.get("type")
+        if kind == "news_source":
+            news_source_ok = bool(rec.get("ok", True))
+            continue
         if kind == "reference":
             symbols[rec["symbol"]] = {
                 "symbol": rec["symbol"],
@@ -213,6 +217,11 @@ def build_session_from_records(
             halt_queue.append(rec)
         elif kind == "bar":
             bar_records.append(rec)
+
+    # Gate 3 must be able to say "unknown" rather than "none" when the desk
+    # never looked (A2). Every symbol carries the desk-level answer.
+    for _m in symbols.values():
+        _m["newsSourceOk"] = news_source_ok
 
     # 10-second fixtures are the single source of truth: the 1-minute bars the
     # scanner engine consumes are aggregated from them, so no chart timeframe
@@ -568,6 +577,7 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         float_is_shares_outstanding=(quality == "shares_outstanding_proxy"),
         float_verified=(quality in ("verified", "you verified")),
         catalyst_today=_catalyst_today(meta.get("news") or [], meta.get("tradingDate")),
+        catalyst_source_ok=bool(meta.get("newsSourceOk", True)),
         session_volume=m.get("volumeToday"),
         rvol=m.get("rvol"),
         halted=(halt == "halted"),

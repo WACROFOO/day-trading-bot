@@ -89,6 +89,18 @@ class Gate:
         return self.kills and self.state in self._TERMINAL
 
 
+# Amendment A2 (owner, 2026-09-17; docs/preregistration.md §5). FILTERS.md
+# gate 3 is a kill in Ross's method. In this paper exercise it is a FLAG:
+# the gate is evaluated and recorded (`decisions.catalyst`), the verdict is
+# not stopped by it, and the read-out splits every series by it. Evidence
+# behind the amendment: five sessions, 389 decisions, 389 REJECT, 254 of
+# them at this gate — and `catalyst_today` was False on every row because
+# the desk had no headline source since the 2026-09-11 reset. The kill had
+# been deciding on an absence of data, not an absence of news. Set True to
+# restore the rule as written.
+CATALYST_GATE_KILLS = False
+
+
 @dataclass
 class Inputs:
     """Everything the cascade needs. Absent values are None, never guessed."""
@@ -103,6 +115,7 @@ class Inputs:
     float_verified: bool = False
     catalyst_today: bool = False
     live_theme: bool = False                      # a running theme substitutes
+    catalyst_source_ok: bool = True               # False: the desk has no headline feed at all
     is_fund_or_etf: Optional[bool] = None
     tick_size: Optional[float] = None
     buyout_announced: bool = False
@@ -219,15 +232,27 @@ def evaluate(i: Inputs) -> CascadeResult:
                  kills=True))
 
     # -- gate 3 · catalyst (a live theme substitutes) -----------------------
+    # A2: `kills=CATALYST_GATE_KILLS` — a flag in this exercise, a kill in
+    # the method. "No headline source" is UNKNOWN, not "none": the desk
+    # cannot say there was no news when it never looked.
     if killed_by:
         gates.append(skipped("catalyst", "Catalyst"))
     elif i.catalyst_today or i.live_theme:
         add(Gate("catalyst", "Catalyst", GateState.PASS,
                  "news today" if i.catalyst_today else "live theme"))
+    elif not i.catalyst_source_ok:
+        add(Gate("catalyst", "Catalyst", GateState.UNKNOWN, "no headline source",
+                 "The desk has no news feed (no headline keys in .env); the gate "
+                 "could not be evaluated.", kills=CATALYST_GATE_KILLS))
+        if not CATALYST_GATE_KILLS:
+            warnings.append("Catalyst unknown — no headline source on this desk (A2: flagged, not killed).")
     else:
         add(Gate("catalyst", "Catalyst", GateState.FAIL, "none",
                  "No catalyst dated today and no live theme it belongs to.",
-                 kills=True))
+                 kills=CATALYST_GATE_KILLS))
+        if not CATALYST_GATE_KILLS:
+            warnings.append("No catalyst dated today and no live theme (A2: flagged, not killed; "
+                            "the read-out splits this cohort).")
 
     # -- gate 4 · still rising ---------------------------------------------
     if killed_by:
@@ -349,6 +374,12 @@ def evaluate(i: Inputs) -> CascadeResult:
         reasons.append("All gates green, but outside the session window.")
         return CascadeResult(Verdict.LOG, None, gates, reasons, warnings)
 
-    reasons.append("Every evaluable gate is green. Go read the chart, the tape "
-                   "and the book yourself.")
+    flagged = [g.id for g in gates
+               if g.id == "catalyst" and g.state in (GateState.FAIL, GateState.UNKNOWN)]
+    if flagged:
+        reasons.append("Layer 1 passed with the catalyst gate flagged, not killing (A2). "
+                       "Go read the chart, the tape and the book yourself.")
+    else:
+        reasons.append("Every evaluable gate is green. Go read the chart, the tape "
+                       "and the book yourself.")
     return CascadeResult(Verdict.REVIEW, None, gates, reasons, warnings)

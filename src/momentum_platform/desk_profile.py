@@ -160,11 +160,15 @@ def fingerprint(entitlements: Optional[Dict[str, Any]] = None) -> Dict[str, Any]
     the alerts. That is a real difference between two desks and it has to be
     visible without pretending the rules disagree."""
     prof = load()
+    from . import cascade as _cascade
     payload = {
         "rules": prof["rules"],
         "envOverrides": prof["envOverrides"],
         "confirmed": confirmed_constants(),
         "scanners": scanner_versions(),
+        # Cascade semantics that an amendment can move. A2 flipped gate 3
+        # from kill to flag on 2026-09-17; the hash must say so.
+        "cascade": {"catalystGateKills": _cascade.CATALYST_GATE_KILLS},
     }
     blob = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
     return {

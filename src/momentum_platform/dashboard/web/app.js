@@ -1224,7 +1224,7 @@ function renderCatalyst(host, ctx) {
     host.appendChild(head);
     const read = el("div", "cat-read");
     read.textContent = score === 4
-      ? "4/4 technical, no headline. Gate 3 kills it unless a live theme substitutes (FILTERS.md); the killed cohort records what it did anyway."
+      ? "4/4 technical, no headline. Gate 3 flags it, it does not kill (owner amendment A2, 2026-09-17); the no-news cohort is tracked on its own."
       : "No headline, " + score + "/4 technical. Nothing to build a thesis on.";
     host.appendChild(read);
     return;

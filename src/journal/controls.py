@@ -35,6 +35,10 @@ def series(conn: sqlite3.Connection, cohort: str | None = None) -> dict[str, lis
         where = "AND d.plan_allowed = 1"
     elif cohort == "killed":
         where = "AND d.plan_allowed = 0"
+    elif cohort == "news":            # A2: gate 3 flags; these two split by what it said
+        where = "AND d.catalyst = 1"
+    elif cohort == "no-news":
+        where = "AND d.catalyst = 0"
     rows = conn.execute(f"""
         SELECT d.decision_id, d.trigger, d.stop, d.target, d.last, d.reward_multiple,
                a.first_hit, a.c_close, a.risk_share
@@ -77,6 +81,10 @@ def summary(conn: sqlite3.Connection) -> dict[str, dict]:
     # "strategy" above mixes both; these two rows separate them.
     out["strat·allowed"] = _stats(series(conn, "allowed")["strategy"])
     out["strat·killed"] = _stats(series(conn, "killed")["strategy"])
+    # Amendment A2: the catalyst gate no longer kills, so whether a catalyst
+    # was present is the split the read-out needs to judge the rule itself.
+    out["strat·news"] = _stats(series(conn, "news")["strategy"])
+    out["strat·no-news"] = _stats(series(conn, "no-news")["strategy"])
     out["untriggered"] = {"n": conn.execute(
         "SELECT COUNT(*) FROM actuals WHERE trigger_hit = 0").fetchone()[0],
         "mean_R": None, "median_R": None, "win_rate": None}

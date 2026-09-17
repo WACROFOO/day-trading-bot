@@ -60,6 +60,12 @@ Definitions, fixed 2026-09-08 after the outside review:
   `data_status`, is refused by the runner in every mode, and is excluded
   from every count and comparison. It stays in the ledger as a diagnostic
   cohort and the report says how many were excluded.
+- **Known gap in the phase-A gate (noted 2026-09-17, PROPOSED, not
+  changed):** "40 prospective decisions" counts REJECT rows. Five sessions
+  cleared it with zero plans allowed, which would have sent phase B to
+  trade with a cascade that had never let a name through. The owner may
+  replace it with "40 prospective decisions **of which ≥ 10 allowed**"
+  by editing this line and `scripts/day.py` `gates_for_advance` together.
 - **Probe and smoke orders** (`premarket_probe.py`, `restart_probe.py`,
   `paper_trade_smoke.py`) never write `orders`; they are not enrolled
   trades. "Before the first order" means the first row in `orders`.
@@ -139,6 +145,43 @@ accepting that exposure by name.
 
 Result: `PROPOSED: not yet run` — replace with the date and the verdict line.
 
+**Amendment A2 — the catalyst gate flags, it does not kill (owner,
+2026-09-17).** What the ledger showed after five phase-A sessions
+(11, 14, 15, 16, 17 September): 389 decisions, **389 REJECT**, zero plans
+allowed, zero orders; 254 killed at gate 3 (catalyst), 88 at price, 47 at
+float; and `decisions.catalyst` was 0 on **every** row. Cause: the desk's
+only headline source is Alpaca's news endpoint, and the `.env` written after
+the 2026-09-11 laptop reset carried no Alpaca keys, so `news_records`
+returned "no headline source" all week and gate 3, which fails closed, read
+that absence of data as an absence of news. The 9 September review of the
+pre-reset ledger (lost with the reset; figure from that session's output)
+reported `strat·allowed n=16` under the same cascade with keys present.
+
+Two changes, in the same commit:
+
+1. **Gate 3 is a flag in this exercise.** `cascade.CATALYST_GATE_KILLS =
+   False`. The gate is still evaluated on every bar and written to
+   `decisions.catalyst`; it no longer stops the cascade. A desk with no
+   headline source reads **UNKNOWN** at the gate, never "none". The rule as
+   Ross teaches it (`knowledge-base/strategies/FILTERS.md` gate 3;
+   `PARAMETERS.md` `has_catalyst`) is unchanged and one constant away.
+2. **The read-out splits by it.** `controls.summary` adds `strat·news` and
+   `strat·no-news` next to `strat·allowed` / `strat·killed`, so phase D can
+   say whether catalyst-less names paid on this tape instead of assuming.
+
+This is a deviation from the method, made by the owner, before the first
+order (no row in `orders`), and it moves the rules hash: every phase-A
+decision keeps the hash it was made under (`33dfeedb3f51`). Counterfactual
+from the same ledger, planned 2 R targets, no slippage: of the 190
+catalyst-killed decisions whose trigger was touched, 47 % reached the target
+before the stop; of the 73 prospective ones, 52 %. Not evidence of edge —
+paper, and stops of 2–9 cents that no fill would honour — but evidence that
+the gate was not selecting on anything the tape rewarded.
+
+Owner action that remains: put Alpaca paper keys back in `.env`
+(`ALPACA_KEY_ID`, `ALPACA_SECRET_KEY`, see `.env.example`), or the gate
+reads UNKNOWN on every name and the split above has one empty side.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
@@ -163,6 +206,7 @@ the cause is written into `docs/paper-exercise-brief.md` §⑦ or fixed.
 | bar resolution **for archival only** — finer bars stored, decisions unchanged | the detector's entry/stop logic — and its **input resolution**: a finer bar feeding the detector is a new strategy version and starts a new cohort |
 | the NBBO source | the failure condition (§4) |
 | the report layout | n (§3) |
+| **gate 3 (catalyst): kill → flag** — Amendment A2, owner, 2026-09-17, before the first order; rules hash moved; phase-A decisions keep theirs | every other cascade gate and every threshold |
 
 Tuning the cascade or the detector mid-exercise on the ledger's own fills
 is specifically forbidden: paper fills are optimistic, and tuning on them

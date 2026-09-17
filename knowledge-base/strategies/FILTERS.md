@@ -1,7 +1,7 @@
 # The filter bible
 
 Every filter, in the order it fires. Post-audit values — where this disagrees
-with an older note, this wins (`reports/2026-08-parameter-audit.md`).
+with an older note, this wins (`research/momentum-replication/reports/2026-08-parameter-audit.md`).
 
 **The one idea that organises all of it:** a number he *types into a scanner* is
 not a number he *requires of a trade*. Dials are set loose so nothing is missed;
@@ -48,7 +48,7 @@ trick, and it is why this runs on published metrics.
 |---|---|---|---|
 | 1 | **price** | outside **$2.00 – 20.00** | preferred **$2.50 – 9** — but a **soft floor under a penny theme**, see below |
 | 2 | **float** | over **20M** | sweet spot **< 10M**; **< 5M in a cold market** |
-| 3 | **catalyst** | none dated **today** **AND no live theme** | a running theme substitutes — see below |
+| 3 | **catalyst** | none dated **today** **AND no live theme** | a running theme substitutes — see below. **Paper exercise only:** flagged, not killed, by owner amendment A2 (`docs/preregistration.md` §5, 2026-09-17) after five sessions in which a desk with no headline feed killed 254 names here; the method's rule is unchanged |
 | 4 | **still rising** | more than **25 %** off the pre-market high | *"stair stepping down… I'm not a buyer"* |
 | 5 | **reverse split** | the gap is *arithmetic* | see below — the split alone is not the veto |
 | 6 | **instrument** | fund / ETF | ADRs are fine — he trades them |
@@ -239,6 +239,6 @@ python3 scripts/size.py --entry X --stop Y          # after the chart says yes
 
 **Standing caveat.** All of the above is *selection*. None of it establishes
 that the strategy is profitable — replication over 894 sessions produced
-negative expectancy (`reports/2026-08-regime-filter.md`), and the documented
+negative expectancy (`research/momentum-replication/reports/2026-08-regime-filter.md`), and the documented
 edge in this population is on the short side and largely unharvestable
-(`reports/2026-08-known-edges.md`). Paper only.
+(`research/momentum-replication/reports/2026-08-known-edges.md`). Paper only.

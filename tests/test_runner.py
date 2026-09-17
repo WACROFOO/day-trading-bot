@@ -68,7 +68,9 @@ class FakeTrader:
 # ------------------------------------------------------------- LOG_ONLY
 def test_log_only_acts_on_every_pending_decision_once_and_opens_nothing(journal):
     before = len(L.pending(journal))
-    assert before == 2, "the fixture arms two plans the cascade allows"
+    # Two before amendment A2 (2026-09-17); the catalyst gate now flags
+    # instead of killing, and the fixture's two no-news names pass too.
+    assert before == 4, "the fixture arms four plans the cascade allows"
 
     r = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0)
     done = r.step()

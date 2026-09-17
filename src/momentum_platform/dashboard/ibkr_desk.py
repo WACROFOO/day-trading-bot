@@ -627,6 +627,11 @@ class IbkrDesk:
                 self.log(f"  headlines refresh failed: {exc}")
             self._news_at = now
         records += self._news
+        if self._news_note:
+            # No keys, or the endpoint is down: the cascade must read UNKNOWN
+            # at gate 3, not "no news" (2026-09-11 → 17: every name killed on
+            # a feed that did not exist).
+            records.append({"type": "news_source", "ok": False, "note": self._news_note})
         # Halt state, from the ticker. The live path emitted no halt records,
         # so `decisions.halted` was always 0 and the halts table never written
         # (audit 2026-09-08). ib_async reports `halted` as 1/2 when halted.

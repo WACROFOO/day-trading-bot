@@ -103,8 +103,33 @@ def test_unknown_float_fails_closed():
 
 
 # --------------------------------------------------------------- catalyst
-def test_no_catalyst_and_no_theme_kills():
+def test_no_catalyst_and_no_theme_flags_but_does_not_kill():
+    """Amendment A2 (owner, 2026-09-17): gate 3 is evaluated and recorded,
+    the cascade is not stopped by it. See docs/preregistration.md §5."""
+    r = evaluate(good(catalyst_today=False))
+    assert r.killed_by is None and r.plan_allowed
+    g = gate(r, "catalyst")
+    assert g.state is GateState.FAIL and g.kills is False and g.killed is False
+    assert any("A2" in w for w in r.warnings)
+    assert r.verdict is Verdict.REVIEW and "flagged" in r.reasons[-1]
+
+
+def test_no_headline_source_reads_unknown_not_none():
+    """Five sessions were killed on 'no catalyst' by a desk with no news feed."""
+    r = evaluate(good(catalyst_today=False, catalyst_source_ok=False))
+    assert r.killed_by is None
+    assert gate(r, "catalyst").state is GateState.UNKNOWN
+    assert gate(r, "catalyst").value == "no headline source"
+
+
+def test_the_rule_as_written_is_one_constant_away(monkeypatch):
+    """FILTERS.md gate 3 is a kill; A2 is the exercise's deviation, not a
+    rewrite of the method. Flip the constant and the kill is back, and the
+    unknown-source case fails closed with it."""
+    from momentum_platform import cascade as C
+    monkeypatch.setattr(C, "CATALYST_GATE_KILLS", True)
     assert evaluate(good(catalyst_today=False)).killed_by == "catalyst"
+    assert evaluate(good(catalyst_today=False, catalyst_source_ok=False)).killed_by == "catalyst"
 
 
 def test_a_live_theme_substitutes_for_the_catalyst():
@@ -160,7 +185,7 @@ def test_the_cascade_stops_at_the_first_kill():
 
 
 def test_only_one_killed_by_is_reported():
-    r = evaluate(good(last=1.00, catalyst_today=False, buyout_announced=True))
+    r = evaluate(good(last=1.00, float_shares=None, buyout_announced=True))
     assert r.killed_by == "price"
 
 
@@ -228,7 +253,7 @@ def test_pass_is_never_a_verdict():
 
 @pytest.mark.parametrize("bad", [
     dict(last=1.69), dict(float_shares=234e6, float_is_shares_outstanding=True),
-    dict(catalyst_today=False), dict(is_fund_or_etf=True),
+    dict(is_fund_or_etf=True),
     dict(buyout_announced=True), dict(tick_size=0.05),
 ])
 def test_no_killed_name_ever_allows_a_plan(bad):
