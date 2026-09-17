@@ -191,7 +191,8 @@ class FakeIB:
     def cancelRealTimeBars(self, lst):
         self.cancelled.append(("rtb", lst.contract.symbol))
 
-    def reqHistoricalData(self, contract, end, duration, size, what, use_rth, formatDate=2):
+    def reqHistoricalData(self, contract, end, duration, size, what, use_rth, formatDate=2, **kw):
+        self.hist_kw = kw
         return list(self.hist.get(contract.symbol, []))
 
     # helpers for tests
@@ -507,3 +508,12 @@ def test_ib_asyncs_reconnect_resubscribe_is_detached_so_a_flapping_link_cannot_h
             pass
 
     assert mod.detach_reconnect_resubscribe(Bare()) is False
+
+
+def test_history_requests_carry_a_short_timeout_so_a_dead_farm_cannot_stall_the_start():
+    """2026-09-17 07:00 ET: IBKR's history farm answered nothing; six 60-second
+    waits in a row and the desk was still loading when the day gave up."""
+    s, ib, _, _ = make()
+    s.connect()
+    s.subscribe(["AAA"], backfill_seconds=600)
+    assert 0 < ib.hist_kw.get("timeout", 999) <= 30

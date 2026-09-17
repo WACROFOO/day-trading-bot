@@ -291,7 +291,7 @@ def start_desk(symbols: list[str], dry: bool):
     return subprocess.Popen(cmd, cwd=ROOT, env=env)
 
 
-def desk_is_on_ibkr(proc, timeout_s: int = 150) -> bool:
+def desk_is_on_ibkr(proc, timeout_s: int = 420) -> bool:
     """Poll the desk's health until it reports a live IBKR session, or give up.
 
     The old check was `proc.poll() is None`, which a desk serving the recorded
@@ -471,6 +471,7 @@ def main(argv=None) -> int:
     if not args.dry_run and not desk_is_on_ibkr(desk):
         bad("the desk did not come up on IBKR — stopping the day")
         note("Gateway logged in on the paper account? IBKR_PORT=4002 exported? API enabled on 4002?")
+        note("'reqHistoricalData: Timeout' lines above = IBKR's history farm is slow; run the command again")
         if desk and desk.poll() is None:
             desk.send_signal(signal.SIGINT)
         return 1

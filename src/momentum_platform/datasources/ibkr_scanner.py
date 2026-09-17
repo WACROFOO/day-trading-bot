@@ -262,8 +262,16 @@ def _bar_date(b) -> str:
     return str(d)[:10]
 
 
+# ib_async waits 60 s per history request by default. At 07:00 ET on
+# 2026-09-17 IBKR's history farm answered nothing for two names, six requests
+# queued up serially, and the desk had not come up when the day command gave
+# up. History at start is a convenience; the live tape is the desk. 20 s.
+HISTORY_TIMEOUT = 20.0
+
+
 def daily_bars(ib, contract, lookback: str = "1 Y") -> List[dict]:
-    hist = ib.reqHistoricalData(contract, "", lookback, "1 day", "TRADES", True, formatDate=2)
+    hist = ib.reqHistoricalData(contract, "", lookback, "1 day", "TRADES", True, formatDate=2,
+                                timeout=HISTORY_TIMEOUT)
     return [{"d": _bar_date(b), "o": _num(b.open), "h": _num(b.high), "l": _num(b.low),
              "c": _num(b.close), "v": int(_num(b.volume) or 0)} for b in hist or []]
 
@@ -352,12 +360,14 @@ def minute_records(ib, contract, symbol: str, duration: str = "1 D",
     previous session, and a desk built from it showed yesterday's tape as
     "19 h behind" instead of today's first prints."""
     try:
-        hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2)
+        hist = ib.reqHistoricalData(contract, "", duration, "1 min", "TRADES", False, formatDate=2,
+                                    timeout=HISTORY_TIMEOUT)
     except Exception:
         # A seconds-form window IBKR will not take is not a reason to run the
         # desk on last night's tape: ask for the day and cut it to the window.
         if duration.endswith(" S"):
-            hist = ib.reqHistoricalData(contract, "", "2 D", "1 min", "TRADES", False, formatDate=2)
+            hist = ib.reqHistoricalData(contract, "", "2 D", "1 min", "TRADES", False, formatDate=2,
+                                        timeout=HISTORY_TIMEOUT)
         else:
             raise
     out = []
@@ -397,7 +407,7 @@ def intraday_volume_profile(ib, contract, days: int = 10,
     way is this desk's own method, not a Warrior production setting.
     """
     hist = ib.reqHistoricalData(contract, "", f"{int(days)} D", "5 mins",
-                                "TRADES", False, formatDate=2)
+                                "TRADES", False, formatDate=2, timeout=HISTORY_TIMEOUT)
     per_day: Dict[object, List[float]] = {}
     for b in hist or []:
         ts = b.date if isinstance(b.date, datetime) else datetime.fromisoformat(str(b.date))

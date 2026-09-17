@@ -460,7 +460,7 @@ class IbkrStream:
         c = self._contract(symbol)
         try:
             hist = self.ib.reqHistoricalData(c, "", f"{int(seconds)} S", "5 secs",
-                                             "TRADES", False, formatDate=2)
+                                             "TRADES", False, formatDate=2, timeout=20.0)
         except Exception as exc:
             self.health.messages.append(f"{symbol}: backfill failed: {exc}")
             self.health.pacing = "pacing" in str(exc).lower()
