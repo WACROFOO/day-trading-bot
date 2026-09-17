@@ -399,9 +399,32 @@ document and not an amendment to the 1-minute one.
 
 | date | what | commit |
 |---|---|---|
-| 2026-09-17 | **M1 done.** `bars_10s` table, `record_bars_10s`, `bars_10s_from_ledger`; the drain in `publish_closed_10s` takes a `sink`; the desk buffers 30 candles per write and flushes on stop. 8 tests, including the safety property that no 10-second row can reach the 1-minute tape the grader reads | this commit |
+| 2026-09-17 | **M1 done.** `bars_10s` table, `record_bars_10s`, `bars_10s_from_ledger`; the drain in `publish_closed_10s` takes a `sink`; the desk buffers 30 candles per write and flushes on stop. 8 tests, including the safety property that no 10-second row can reach the 1-minute tape the grader reads | `b3f644e` |
+| 2026-09-17 | **Package + Phase 0 tooling.** `src/momentum_platform/microflow/` — one module per responsibility, README carrying the contracts: `config.py` (every parameter with `origin` and `evidence_status`, nothing written twice), `bars.py` (fold to minutes, coverage, `assert_sync`, `forming_minute`), `spread.py` (the k gate, three states, fails closed on a missing quote), `measure.py` (dip shapes, the survival-by-k table, the GO/NO-GO with its thresholds stated first). `scripts/microflow.py capture / measure / config`. 23 tests. A test caught the first draft of `find_dips` treating sideways chop as a string of micro pullbacks, which would have biased the stop distribution small and risked a false NO-GO; the push must now set a new run high | this commit |
 
 ---
 
-*Status: Phase 0 in progress. Nothing has been traded and no order path
-exists.*
+## 11. The modules, and why the split is where it is
+
+`src/momentum_platform/microflow/README.md` holds the contracts. The split
+follows the plan's own sections so a later change lands in one file:
+
+| module | owns | a later change that touches only this |
+|---|---|---|
+| `config.py` | every parameter, with provenance | raising `k` after Phase 0; setting the retrace cap once measured |
+| `bars.py` | resolution mechanics | a different bucket size; a stricter sync tolerance |
+| `spread.py` | executability | a cost model with commissions in it |
+| `measure.py` | Phase 0 | a new measurement, a different GO threshold |
+| `context.py` | Layer A (Phase 1) | **adding the 5-minute trend check** — the v2 candidate |
+| `timing.py` | Layer B (Phase 1) | the dip definition; a 5-second variant |
+| `detector.py` | composition + ledger writes (Phase 1) | |
+| `risk.py` | position caps (Phase 2) | changing 3 positions / 3 R |
+
+Two package rules, both enforced by tests: a number is written once, in
+`config.py`; and no module here may name an order primitive — the order path
+stays in `src/execution/`.
+
+---
+
+*Status: Phase 0 tooling built, awaiting the first captured session
+(2026-09-18). Nothing has been traded and no order path exists.*
