@@ -29,9 +29,19 @@ from typing import List, Optional, Sequence
 # A market wrap ("12 Health Care Stocks Moving In Thursday's Session") names a
 # dozen tickers and says nothing about any of them. It is not a catalyst and
 # earns no flame; it used to read as fresh news and pass the pillar.
+#
+# Two families were added 2026-09-17 after reading the live endpoint: the
+# macro wrap ("Dow Tumbles Over 600 Points as Fed Raises Rates", "Crude Oil
+# Down Over 3%") and the literal provider category "market_roundup". Gate 3
+# in session_builder imports this list, so the desk, the card and the CLI all
+# draw the line in the same place.
 ROUNDUP_WORDS = [
-    "stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
-    "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday", "moving in",
+    "roundup", "stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
+    "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday",
+    "moving in", "dow ", "dow jones", "nasdaq ", "s&p", "russell", "crude oil",
+    "treasury yield", "retail sales", "business inventories", "jobless", "nonfarm", "cpi",
+    "inflation report", "fed raises", "fed cuts", "fomc", "market update", "sector update",
+    "investor sentiment",
 ]
 DILUTIVE_WORDS = [
     "offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",

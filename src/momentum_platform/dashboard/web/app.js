@@ -1173,9 +1173,16 @@ const CATALYST_RULES = [
   // A market wrap that lists twelve names "moving in Thursday's session" is
   // not news about the company. It used to earn a red flame and a News PASS.
   { grade: "roundup", label: "Market roundup",
-    words: ["stocks moving in", "stocks trading", "movers", "top gainers", "top losers",
-            "biggest gainers", "biggest losers", "stocks to watch", "market wrap", "midday", "moving in"],
-    note: "A list of names, not a story about this one. Not a catalyst; find the company's own headline." },
+    // Kept in step with session_builder.ROUNDUP_WORDS / MACRO_WORDS — the
+    // SERVER's copy is the one gate 3 reads; this one only labels the card.
+    words: ["roundup", "stocks moving in", "stocks trading", "movers", "top gainers",
+            "top losers", "biggest gainers", "biggest losers", "stocks to watch",
+            "market wrap", "midday", "moving in", "dow ", "dow jones", "nasdaq ", "s&p",
+            "russell", "crude oil", "treasury yield", "retail sales",
+            "business inventories", "jobless", "nonfarm", "cpi", "inflation report",
+            "fed raises", "fed cuts", "fomc", "market update", "sector update",
+            "investor sentiment"],
+    note: "A list of names or the market's day, not a story about this one. Not a catalyst; find the company's own headline." },
   { grade: "dilutive", label: "Dilutive",
     words: ["offering", "placement", "shelf", "s-3", "dilut", "warrant", "resale",
             "registered direct", "atm program", "convertible"],

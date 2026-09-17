@@ -745,6 +745,38 @@ def _newest_bar_ts(bar, meta) -> bool:
         return False
 
 
+# A market wrap listing twelve names "moving in Thursday's pre-market session"
+# is not news about this company. The 2026-09-08 audit added a roundup filter
+# that read `category` — but every live record carries the PROVIDER there
+# ("benzinga"), never a category, so the filter never fired once. Verified
+# 2026-09-17 against the live endpoint: VEEA read catalyst=True on four
+# headlines, all of them roundups. app.js has scanned the headline text since
+# the dashboard work; this is the same list, server-side, where the gate is.
+#: 3+ companies named before the verb is a list, not a headline about one name.
+LIST_MIN_NAMES = 3
+
+
+def is_roundup(headline: str, category: str = "") -> bool:
+    """True when the headline is a list of names, or the market's day, rather
+    than a story about this company.
+
+    The word list is `momentum_platform.catalyst.ROUNDUP_WORDS` — the same one
+    the browser card and `scripts/catalyst_score.py` use, so the three cannot
+    drift. A labelled heuristic, not a claim about the news: the headline stays
+    visible on the card and a human can overrule it in one read. It only
+    decides whether gate 3 reads "news today", and since amendment A2 that gate
+    flags rather than kills.
+    """
+    from ..catalyst import ROUNDUP_WORDS
+    hay = f"{headline or ''} {category or ''}".lower()
+    if any(w in hay for w in ROUNDUP_WORDS):
+        return True
+    lead = (headline or "").split(":")[0].split(" - ")[0]
+    if lead.count(",") >= LIST_MIN_NAMES - 1 and " and " in lead.lower():
+        return True                       # "A, B, C and D ..." — a list of names
+    return False
+
+
 def _catalyst_today(news: list, trading_date) -> bool:
     """FILTERS.md gate 3: a catalyst DATED TODAY. A headline counts when it was
     published after 16:00 ET of the previous calendar day (overnight news is
@@ -760,8 +792,7 @@ def _catalyst_today(news: list, trading_date) -> bool:
     from zoneinfo import ZoneInfo
     et = ZoneInfo("America/New_York")
     for item in news:
-        cat = str(item.get("category") or "").lower()
-        if "roundup" in cat or "movers" in cat:
+        if is_roundup(item.get("headline") or "", item.get("category") or ""):
             continue
         pub = item.get("publishedAt") or item.get("published_at")
         if not pub:
