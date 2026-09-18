@@ -132,6 +132,30 @@ function activePlan(sym, t) {
   const p = (S.plans || []).filter(x => x.symbol === sym && x.armedAt <= t);
   return p.length ? p[p.length - 1] : null;
 }
+/* THE PLAN THE DESK STILL STANDS BEHIND.
+
+   `activePlan` returns the last plan armed at or before now, and it has no
+   expiry: once armed it is returned for the rest of the session. That is right
+   for the ledger, which must remember what was armed and when, and wrong for
+   the screen.
+
+   CPOP, 2026-09-18 10:48. A plan was armed while it was rising. It then fell
+   from a 5.98 high to 3.63, the cascade killed it on the still-rising gate,
+   and the verdict card said in as many words "no plan is published for this
+   name" — directly above a line reading "entry 4.93 · stop 4.88 · target 5.03",
+   with all three drawn across every chart. Two statements, one card, opposite
+   meanings. The stale one is the dangerous one: it is the one that looks like
+   an instruction.
+
+   A plan is live only while the server's cascade has not killed the name. When
+   it has, the levels are withdrawn from the charts and the card says so. */
+function livePlan(sym, t) {
+  const plan = activePlan(sym, t);
+  if (!plan) return null;
+  const sv = serverVerdict(sym);
+  if (sv && sv.killedBy) return null;         // withdrawn, not merely unhighlighted
+  return plan;
+}
 /* A plan the detector armed and the server's cascade refused to publish. It is
    counted and named rather than absent, so the card can say "suppressed"
    instead of "N/A" — the two mean opposite things. */
@@ -228,6 +252,44 @@ function paneNote(host) {
   };
 }
 
+/* The indicator menu: an "ƒ" button on the pane that opens a checklist.
+   Lightweight Charts has no indicator UI at all — every overlay here is drawn
+   by this file — so the menu is what turns a fixed picture into a chart you
+   can ask questions of. It lists only overlays this desk computes, because an
+   entry that does nothing is worse than an absent one. */
+const INDICATORS = [
+  ["volume", "Volume"], ["vwap", "VWAP"], ["ema9", "EMA 9"], ["ema20", "EMA 20"],
+  ["ema200", "EMA 200"], ["macd", "MACD 12/26/9"], ["hod", "High of day"],
+  ["plan", "Entry · stop · target"],
+];
+function indicatorMenu(host, show, onChange) {
+  const btn = document.createElement("button");
+  btn.className = "ind-btn"; btn.textContent = "ƒ";
+  btn.title = "Indicators on this pane";
+  const panel = document.createElement("div");
+  panel.className = "ind-menu"; panel.hidden = true;
+  INDICATORS.forEach(([key, label]) => {
+    const row = document.createElement("label");
+    const box = document.createElement("input");
+    box.type = "checkbox"; box.checked = !!show[key];
+    box.addEventListener("change", () => {
+      const next = Object.assign({}, show);
+      next[key] = box.checked;
+      Object.keys(next).forEach(k => { show[k] = next[k]; });
+      onChange(show);
+    });
+    row.appendChild(box);
+    row.appendChild(document.createTextNode(label));
+    panel.appendChild(row);
+  });
+  btn.addEventListener("click", e => { e.stopPropagation(); panel.hidden = !panel.hidden; });
+  document.addEventListener("click", e => {
+    if (!panel.hidden && !panel.contains(e.target) && e.target !== btn) panel.hidden = true;
+  });
+  host.appendChild(btn); host.appendChild(panel);
+  return { btn, panel };
+}
+
 function makePane(hostId, daily) {
   const host = document.getElementById(hostId);
   if (!TV) return canvasPane(host);
@@ -269,6 +331,14 @@ function makePane(hostId, daily) {
   const volume = chart.addHistogramSeries({
     priceFormat: { type: "volume" }, priceScaleId: "vol", color: TVC.volUp,
     lastValueVisible: false, priceLineVisible: false,
+  });
+  /* MACD 12/26/9 as a histogram on its own scale under the volume band. It was
+     already computed for the cascade's MACD gate (`macdHist`) and shown as a
+     chip on the verdict card, but never drawn — so the one gate the trader
+     could not see for themselves was the one the desk judged silently. */
+  const macd = chart.addHistogramSeries({
+    priceScaleId: "macd", lastValueVisible: false, priceLineVisible: false,
+    priceFormat: { type: "price", precision: 3, minMove: 0.001 },
   });
 
   /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar. */
@@ -312,7 +382,15 @@ function makePane(hostId, daily) {
     else shadePost.style.width = "0";
   };
   chart.timeScale().subscribeVisibleLogicalRangeChange(paintShade);
-  chart.priceScale("vol").applyOptions({ scaleMargins: { top: 0.8, bottom: 0 } });
+  /* Lower band, split when MACD is on: volume 0.74-0.88, MACD 0.88-1.0. With
+     MACD off the volume band takes the whole quarter back, so nothing on a
+     pane that shows no MACD is squeezed to pay for one. */
+  const setBands = macdOn => {
+    chart.priceScale("vol").applyOptions({
+      scaleMargins: macdOn ? { top: 0.74, bottom: 0.12 } : { top: 0.8, bottom: 0 } });
+    chart.priceScale("macd").applyOptions({ scaleMargins: { top: 0.88, bottom: 0 } });
+  };
+  setBands(false);
   const lines = {};
   // VWAP is the reference line and reads as one: three pixels against one
   // for the EMAs (owner, 2026-09-08).
@@ -321,15 +399,40 @@ function makePane(hostId, daily) {
                           lastValueVisible: false, crosshairMarkerVisible: false }));
   let priceLines = [];
 
-  return {
+  /* Which overlays this pane shows. Stored per pane so the 1-minute chart can
+     carry MACD while the 10-second pane stays clean, and remembered across
+     reloads like every other thing the trader arranged on purpose. */
+  const SHOW_KEY = "momentum-workstation.show.v1." + hostId;
+  const SHOW_DEFAULT = { volume: true, vwap: true, ema9: true, ema20: true,
+                         ema200: true, macd: false, hod: true, plan: true };
+  let show = Object.assign({}, SHOW_DEFAULT);
+  try {
+    const saved = JSON.parse(localStorage.getItem(SHOW_KEY) || "null");
+    if (saved) Object.keys(SHOW_DEFAULT).forEach(k => { if (k in saved) show[k] = !!saved[k]; });
+  } catch (e) { /* blocked storage: the defaults are fine */ }
+  const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
+  const menu = indicatorMenu(host, show, next => {
+    show = next;
+    try { localStorage.setItem(SHOW_KEY, JSON.stringify(show)); } catch (e) {}
+    setBands(show.macd);
+    if (lastOpts) api.render(lastBars, lastOpts);
+  });
+  let lastBars = [], lastOpts = null;
+
+  const api = {
     engine: "tradingview",
     note: paneNote(host),
+    tools: tools,
     // Zoom is state the trader set on purpose. A live reload must hand it back.
     getRange() { try { return chart.timeScale().getVisibleLogicalRange(); } catch (e) { return null; } },
     setRange(r) { try { if (r) chart.timeScale().setVisibleLogicalRange(r); } catch (e) {} },
     snapToLive() { try { chart.timeScale().scrollToRealTime(); } catch (e) {} },
-    resize() { chart.applyOptions({ width: host.clientWidth, height: host.clientHeight }); },
+    resize() {
+      chart.applyOptions({ width: host.clientWidth, height: host.clientHeight });
+      if (tools) tools.repaint();        // the canvas is sized in CSS pixels
+    },
     render(bars, opts) {
+      lastBars = bars; lastOpts = opts;
       let atEdge = false;
       try {
         const vr = chart.timeScale().getVisibleLogicalRange();
@@ -342,10 +445,10 @@ function makePane(hostId, daily) {
         : { time: deskTime(b[0]), open: b[1], high: b[2], low: b[3], close: b[4] });
       candles.setData(rows);
       const vols = bars.map(b => daily ? b.v : b[5]);
-      volume.setData(bars.map((b, i) => ({
+      volume.setData(show.volume ? bars.map((b, i) => ({
         time: rows[i].time, value: vols[i],
         color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
-      })));
+      })) : []);
       lastRows = rows; lastVols = vols; showLegend(rows[rows.length - 1], vols[vols.length - 1]);
       sessionBounds = (!daily && opts.openTs)
         ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
@@ -366,10 +469,18 @@ function makePane(hostId, daily) {
         lineFor(key).setData(series.map((v, i) => v == null ? null : { time: rows[i].time, value: v })
                                    .filter(Boolean));
       };
-      put("vwap", opts.vwap ? vwap(bars) : null);
-      put("ema9", opts.ema9 ? ema(closes, 9) : null);
-      put("ema20", opts.ema20 ? ema(closes, 20) : null);
-      put("ema200", opts.ema200 ? ema(closes, 200) : null);
+      // The caller asks for an overlay; the pane's own menu can switch it off.
+      put("vwap", opts.vwap && show.vwap ? vwap(bars) : null);
+      put("ema9", opts.ema9 && show.ema9 ? ema(closes, 9) : null);
+      put("ema20", opts.ema20 && show.ema20 ? ema(closes, 20) : null);
+      put("ema200", opts.ema200 && show.ema200 ? ema(closes, 200) : null);
+      if (show.macd) {
+        const mh = macdHist(closes);
+        macd.setData(rows.map((r, i) => mh[i] == null ? null : {
+          time: r.time, value: mh[i],
+          color: mh[i] >= 0 ? "#26a69a90" : "#ef535090",
+        }).filter(Boolean));
+      } else macd.setData([]);
       priceLines.forEach(l => candles.removePriceLine(l));
       priceLines = [];
       const mark = (price, color, title) => {
@@ -380,18 +491,24 @@ function makePane(hostId, daily) {
           axisLabelVisible: true, title: title,
         }));
       };
-      if (opts.plan) {
+      if (opts.plan && show.plan) {
         mark(opts.plan.target, PALETTE.target, "TARGET");
         mark(opts.plan.entry, PALETTE.entry, "ENTRY");
         mark(opts.plan.stop, PALETTE.stop, "STOP");
       }
-      mark(opts.hod, PALETTE.hod, "HOD");
+      if (show.hod) mark(opts.hod, PALETTE.hod, "HOD");
       mark(opts.h52, PALETTE.h52, "52w");
+      // Drawings are anchored to (time, price) and belong to this symbol and
+      // timeframe only; the measure tool needs the live plan's risk per share
+      // to report a move in R.
+      if (tools) tools.sync(opts.symbol || null, opts.tf || (daily ? "D" : null), opts.plan || null);
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
       if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
     },
   };
+  void menu;
+  return api;
 }
 
 /* Canvas fallback — same inputs, no dependency. */
@@ -1431,7 +1548,7 @@ function renderVerdict(frame, ctx) {
   const { last, chg, hod, row, meta, nf, halted, sym } = ctx;
   const host = $("#verdictCard"); host.textContent = "";
   const T = S.pillarThresholds;
-  const plan = activePlan(sym, frame.t);
+  const plan = livePlan(sym, frame.t);
   // From the persistent log, not the sliding rebuild window: the verdict used
   // to flip ACTIVE -> WAIT while the tile still showed the alert on screen.
   const recent = ALERT_LOG.filter(a => a.symbol === sym && frame.t - Math.floor(a._at / 1000) <= 300);
@@ -1550,9 +1667,12 @@ function renderVerdict(frame, ctx) {
     planLine.appendChild(el("span", null, "entry " + fx(plan.entry) + " · stop " + fx(plan.stop) + " · target " + fx(plan.target)));
     planLine.appendChild(el("span", "muted", "  " + plan.rewardMultiple.toFixed(1) + "R · risk " + fx(plan.riskShare) + "/sh"));
   } else {
+    const withdrawn = sv && sv.killedBy ? activePlan(sym, frame.t) : null;
     const supp = suppressedPlan(sym, frame.t);
-    planLine.appendChild(el("span", "muted", supp ? "plan suppressed — killed on " + (sv && sv.killedBy || "a gate")
-                                                    : "no plan — no confirmed first pullback yet"));
+    planLine.appendChild(el("span", "muted",
+      withdrawn ? "plan WITHDRAWN — armed at " + fx(withdrawn.entry) + ", killed on " + sv.killedBy
+        : supp ? "plan suppressed — killed on " + (sv && sv.killedBy || "a gate")
+        : "no plan — no confirmed first pullback yet"));
   }
   host.appendChild(planLine);
 
@@ -1670,7 +1790,7 @@ function renderCharts(frame) {
   const bars1 = barsUpTo(sym, frame.barIndex);
   const hod = bars1.length ? Math.max(...bars1.map(b => b[2])) : null;
   const openTs = OPEN_INDEX >= 0 ? FRAMES[OPEN_INDEX].t : null;
-  const plan = activePlan(sym, frame.t);
+  const plan = livePlan(sym, frame.t);
   const common = { hod: hod, plan: plan, openTs: openTs, symbol: sym, snapToLive: snap };
   PANES.a.render(bars1, Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "1m" }, common));
   PANES.b.render(agg(bars1, 5), Object.assign({ vwap: true, ema9: true, ema20: true, ema200: true, tf: "5m" }, common));

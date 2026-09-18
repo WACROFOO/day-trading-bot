@@ -251,6 +251,36 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .chart-host{flex:1 1 auto;min-height:0;position:relative}
 .chart-host canvas{display:block;width:100%}
 
+/* ── drawing tools and the indicator menu ───────────────────────────────
+   The toolbar and the ƒ button sit above the chart canvases and only appear
+   on hover, so a pane being read is a chart and not a control panel. The
+   drawing canvas covers the pane and is transparent to the mouse until a tool
+   is picked — otherwise it would eat the crosshair, the zoom and the pan. */
+.draw-layer{position:absolute;inset:0;z-index:6;pointer-events:none}
+.draw-bar{position:absolute;left:4px;top:22px;z-index:7;display:flex;flex-direction:column;gap:2px;
+  opacity:0;transition:opacity .12s}
+.chart-host:hover .draw-bar,.draw-bar:focus-within{opacity:1}
+.draw-btn{width:20px;height:20px;padding:0;border:1px solid #223046;border-radius:4px;
+  background:#0f1722cc;color:var(--ink-dim,#9fb0c3);font-size:11px;line-height:1;cursor:pointer}
+.draw-btn:hover{border-color:#2b3a4d;color:var(--ink,#dbe6f3)}
+.draw-btn.on{border-color:var(--entry,#22c7e8);color:var(--entry,#22c7e8);background:#0d2430}
+.draw-btn.wipe{margin-top:4px;color:#7b8a9c}
+.draw-btn.wipe:hover{color:var(--down,#ff5f6e);border-color:#4a2530}
+
+.ind-btn{position:absolute;right:62px;top:3px;z-index:7;width:20px;height:18px;padding:0;
+  border:1px solid #223046;border-radius:4px;background:#0f1722cc;color:var(--ink-dim,#9fb0c3);
+  font:italic 600 11px var(--sans);cursor:pointer;opacity:0;transition:opacity .12s}
+.chart-host:hover .ind-btn,.ind-menu:not([hidden])+.ind-btn,.ind-btn:focus{opacity:1}
+.ind-btn:hover{border-color:#2b3a4d;color:var(--ink,#dbe6f3)}
+.ind-menu{position:absolute;right:62px;top:24px;z-index:8;background:var(--panel,#0f1722);
+  border:1px solid #223046;border-radius:5px;padding:6px 8px;display:flex;flex-direction:column;gap:3px;
+  box-shadow:0 6px 18px #0009}
+.ind-menu[hidden]{display:none}
+.ind-menu label{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-dim,#9fb0c3);
+  cursor:pointer;white-space:nowrap}
+.ind-menu label:hover{color:var(--ink,#dbe6f3)}
+.ind-menu input{accent-color:var(--entry,#22c7e8);margin:0}
+
 .timeline{flex:1 1 auto;min-height:0;overflow-y:auto}
 .tl-row{display:grid;grid-template-columns:44px 1fr auto;gap:7px;padding:4px 9px;
   border-bottom:1px solid #0e141c;cursor:pointer;font-size:11px;align-items:center}

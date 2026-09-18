@@ -445,3 +445,49 @@ def test_a_desk_with_no_bars_yet_renders_without_a_page_error():
             browser.close()
     finally:
         httpd.shutdown()
+
+
+@pytest.mark.skipif(not Path(CHROME).is_file(), reason="no chromium binary")
+def test_the_chart_panes_carry_drawing_tools_and_an_indicator_menu(desk_server):
+    """Lightweight Charts ships neither, and TradingView's Advanced Charting
+    Library — which ships both — is licensed to companies for public projects
+    only, so it is not available to this desk. The tools are drawn here.
+
+    The drawing canvas must be transparent to the mouse until a tool is picked,
+    or it eats the crosshair, the zoom and the pan on every pane.
+    """
+    pytest.importorskip("playwright.sync_api")
+    from playwright.sync_api import sync_playwright
+    with sync_playwright() as pw:
+        browser = pw.chromium.launch(executable_path=CHROME, args=["--no-sandbox"])
+        pg = browser.new_page(viewport={"width": 1500, "height": 900})
+        pg.goto(f"http://127.0.0.1:{desk_server['port']}/")
+        pg.wait_for_timeout(1200)
+
+        assert pg.evaluate("!!window.ChartTools"), "chartTools.js was not served"
+        # the real renderer, not the canvas fallback: the tools attach to it
+        assert pg.evaluate("window.LightweightCharts !== undefined")
+
+        for pane in ("chartA", "chartB", "chartD"):
+            assert pg.locator(f"#{pane} .draw-layer").count() == 1, pane
+            assert pg.locator(f"#{pane} .draw-bar .draw-btn").count() >= 6, pane
+            assert pg.locator(f"#{pane} .ind-btn").count() == 1, pane
+            assert pg.eval_on_selector(
+                f"#{pane} .draw-layer",
+                "e => getComputedStyle(e).pointerEvents") == "none", f"{pane} eats the crosshair"
+
+        # picking a tool arms the canvas; Escape disarms it
+        pg.eval_on_selector("#chartA .draw-btn[data-tool=level]", "e => e.click()")
+        assert pg.eval_on_selector("#chartA .draw-layer",
+                                   "e => getComputedStyle(e).pointerEvents") == "auto"
+        pg.keyboard.press("Escape")
+        assert pg.eval_on_selector("#chartA .draw-layer",
+                                   "e => getComputedStyle(e).pointerEvents") == "none"
+
+        # the indicator menu lists MACD, which the cascade judged but no pane drew
+        pg.eval_on_selector("#chartA .ind-btn", "e => e.click()")
+        labels = pg.eval_on_selector_all("#chartA .ind-menu label",
+                                         "els => els.map(e => e.textContent)")
+        for name in ("Volume", "VWAP", "EMA 9", "EMA 200", "MACD 12/26/9"):
+            assert any(name in t for t in labels), name
+        browser.close()

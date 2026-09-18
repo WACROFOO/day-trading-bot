@@ -1122,3 +1122,38 @@ def test_a_chart_does_not_swallow_a_card_drag():
     assert "card.contains(e.relatedTarget)" in app
     # the tray said "you may drop here" and listened for nothing
     assert 'tray.addEventListener("drop"' in app
+
+
+def test_a_plan_is_withdrawn_once_the_cascade_kills_the_name():
+    """CPOP, 2026-09-18 10:48. A plan armed while the name was rising stayed on
+    every chart after it fell from 5.98 to 3.63 and the cascade killed it on the
+    still-rising gate. The verdict card read "no plan is published for this
+    name" directly above "entry 4.93 · stop 4.88 · target 5.03", and all three
+    levels were drawn on the 1m, 5m and 10s panes.
+
+    `activePlan` has no expiry — correct for the ledger, which must remember
+    what was armed and when, wrong for the screen. The stale line is the
+    dangerous one: it is the one that looks like an instruction.
+
+    app.js runs inside an IIFE, so the rule is checked at its source.
+    """
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function livePlan")[1].split("\nfunction ")[0]
+    assert "activePlan(sym, t)" in body, "it must start from what was armed"
+    assert "serverVerdict(sym)" in body, "and ask the server's cascade about it"
+    assert "killedBy" in body and "return null" in body
+
+
+def test_the_charts_and_the_card_read_the_same_plan():
+    """The contradiction was possible because two call sites each resolved the
+    plan for themselves. Both must go through the one function that knows
+    whether the desk still stands behind it."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    charts = app.split("function renderCharts")[1].split("\nfunction ")[0]
+    card = app.split("function renderVerdict")[1].split("\nfunction ")[0]
+    assert "livePlan(sym, frame.t)" in charts and "activePlan(sym, frame.t)" not in charts
+    assert "livePlan(sym, frame.t)" in card
+    # the card may still name what was armed, but only to say it was withdrawn
+    assert "plan WITHDRAWN" in card
