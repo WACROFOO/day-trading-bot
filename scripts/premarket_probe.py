@@ -30,6 +30,7 @@ Exit codes:
   2  Gateway not reachable
   3  NOT A PAPER ACCOUNT
   6  not pre-market right now — nothing was sent
+  7  Gateway in Read-Only mode — nothing was transmitted, no verdict recorded
 """
 
 from __future__ import annotations
@@ -64,6 +65,8 @@ def verdict_from(trades, placed) -> tuple[str, str]:
     ignored for the order type, so the stop can only trigger in regular hours —
     it protects nothing pre-market either, and the verdict is `queued` with why
     '2109'. `held` needs a stop leg IBKR accepted with neither warning."""
+    if refused_read_only(trades):
+        return "not_run", "321"
     for t in trades:
         if t.order.orderId != placed.stop_id:
             continue
@@ -75,6 +78,29 @@ def verdict_from(trades, placed) -> tuple[str, str]:
     if placed.protected:
         return "held", ""
     return "inconclusive", ""
+
+
+def refused_read_only(trades) -> bool:
+    """Did the Gateway refuse the request outright for being in Read-Only mode?
+
+    IBKR answers warning 321 with "The API interface is currently in Read-Only
+    mode" and transmits nothing. That is not a murky answer about stops, it is
+    the probe never having run, and the two must not share a word: on
+    2026-09-18 the run was recorded as `inconclusive`, which set `probe_date`
+    so the day runner would not retry, and which cleared the phase A->B gate
+    because that gate only tested `is None`. A question nobody asked had
+    counted as a question answered.
+
+    Every leg must be refused. One leg refused and another accepted is a real
+    anomaly and stays inconclusive, which is the honest word for it.
+    """
+    seen = False
+    for t in trades:
+        codes = {e.errorCode for e in t.log if e.errorCode}
+        if 321 not in codes:
+            return False
+        seen = True
+    return seen
 
 
 def main() -> int:
@@ -144,6 +170,13 @@ def main() -> int:
             good("IBKR is holding the stop leg as live pre-market")
             note("A pre-market bracket is genuinely protected. Still verify")
             note("a real fill before trusting it with size.")
+        elif verdict == "not_run":
+            warn("the Gateway is in Read-Only mode — nothing was transmitted")
+            note("IB Gateway > Configure > Settings > API > Settings:")
+            note("  untick 'Read-Only API', click OK, then run this probe again.")
+            note("Orders 4/5 above were REFUSED, not placed: check the Gateway's")
+            note("order panel is empty, but expect it to be.")
+            note("No verdict is recorded. The question is still open.")
         else:
             verdict = "inconclusive"
             warn(f"inconclusive — stop status {placed.stop_status!r}")
@@ -152,6 +185,11 @@ def main() -> int:
         # pre-market gate read this out of exercise_state rather than a human
         # re-typing a word they read off a terminal.
         print(f"VERDICT: {verdict}")
+        if verdict == "not_run":
+            # Deliberately record nothing, so probe_date stays unset and the
+            # day runner retries on its next pass once Read-Only is off.
+            note("not recorded — the day runner will retry within 15 s")
+            return 7
         try:
             from journal import ledger as L
             conn = L.connect(os.environ.get("JOURNAL_DB") or L.DEFAULT_DB)

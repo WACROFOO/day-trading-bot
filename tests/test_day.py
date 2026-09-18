@@ -83,6 +83,22 @@ def test_phase_a_is_blocked_until_sessions_and_probe(journal):
     assert blockers == []
 
 
+def test_an_inconclusive_probe_does_not_clear_the_phase_a_gate(journal):
+    """A question nobody asked must not count as a question answered.
+
+    2026-09-18: the Gateway was still in Read-Only mode, IBKR refused both legs
+    with warning 321, and the probe recorded `inconclusive`. The gate tested
+    `is None`, so a recorded failure cleared it. §5 of the pre-registration
+    defines `held` and `queued` and has no row for a non-answer.
+    """
+    L.set_state(journal, probe_verdict="inconclusive", probe_date="2026-09-18")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert any("usable verdict" in b and "inconclusive" in b for b in blockers)
+    L.set_state(journal, probe_verdict="queued")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert not any("usable verdict" in b for b in blockers)   # `queued` IS an answer
+
+
 def test_phase_b_is_blocked_by_too_few_trades_and_by_any_unprotected_fill(journal):
     L.set_state(journal, phase="B", probe_verdict="held", paper_data="realtime")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))

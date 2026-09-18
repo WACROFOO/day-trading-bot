@@ -101,8 +101,16 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
             blockers.append(f"phase A needs 5 sessions AND 40 prospective decisions; have "
                             f"{state.get('sessions_done', 0)} sessions, {f['plans_prospective']} "
                             f"prospective decisions ({f['plans_backfill']} backfill excluded)")
-        if state.get("probe_verdict") is None:
-            blockers.append("pre-market probe has not recorded a verdict")
+        # `is None` alone was a loophole. On 2026-09-18 the Gateway was still
+        # in Read-Only mode, IBKR refused both legs with warning 321 and the
+        # probe recorded `inconclusive` — which is not None, so this gate
+        # cleared on a question that was never asked. §5 of the pre-registration
+        # defines two verdicts, `held` and `queued`; it has no row for a
+        # non-answer. Tightening a gate against oneself is always allowed.
+        if state.get("probe_verdict") in (None, "inconclusive"):
+            blockers.append(
+                "pre-market probe has not recorded a usable verdict "
+                f"(have {state.get('probe_verdict') or 'none'}; need held or queued)")
     if phase in ("A", "B") and state.get("paper_data") != "realtime":
         blockers.append(f"paper session data is {state.get('paper_data') or 'unmeasured'} — fills would "
                         f"be judged against a different tape than the decision (scripts/alignment_probe.py)")

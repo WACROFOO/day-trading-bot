@@ -288,6 +288,30 @@ def test_probe_calls_a_2109_stop_leg_queued_not_held():
     assert P.verdict_from([parent, clean], NS(stop_id=15, protected=False)) == ("inconclusive", "")
 
 
+# ---- pre-market stop probe: a refused run is not an inconclusive one --------------------
+def test_a_read_only_gateway_is_not_run_not_inconclusive():
+    """2026-09-18 08:36 ET: the Gateway was still in Read-Only mode, IBKR
+    refused both legs with warning 321 and transmitted nothing. The probe
+    recorded `inconclusive`, which set `probe_date` so the day runner would not
+    retry, and which cleared the phase A->B gate because that gate only tested
+    `is None`. A question nobody asked had counted as a question answered.
+
+    `not_run` records no verdict at all, so the retry happens by itself.
+    """
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import premarket_probe as P
+    placed = NS(stop_id=5, protected=False)
+    refused = [NS(order=NS(orderId=4), log=[NS(errorCode=0), NS(errorCode=321)]),
+               NS(order=NS(orderId=5), log=[NS(errorCode=0), NS(errorCode=321)])]
+    assert P.verdict_from(refused, placed) == ("not_run", "321")
+
+    # one leg refused and another accepted is a real anomaly, and stays the
+    # honest word for it rather than being waved through as "not run"
+    mixed = [refused[0], NS(order=NS(orderId=5), log=[NS(errorCode=0)])]
+    assert P.verdict_from(mixed, placed) == ("inconclusive", "")
+    assert P.refused_read_only([]) is False        # nothing sent is not a refusal
+
+
 # ---- decisions armed from loaded history are tagged, not passed off as live -----------
 def test_a_plan_armed_before_the_desk_started_is_tagged_backfill():
     from momentum_platform.dashboard.session_builder import _feed_is_stale, build_session

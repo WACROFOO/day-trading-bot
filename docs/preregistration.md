@@ -110,6 +110,24 @@ Settled by `scripts/premarket_probe.py` between 07:00 and 09:30 ET.
 | stop held live | brackets as in phase B, `outsideRth=True`, `protected` confirmed by read-back |
 | stop queued to 09:30 | **phase C does not start** until the owner accepts the monitored-exit amendment below by replacing its `PROPOSED` |
 
+**A non-answer is not a verdict** (added 2026-09-18). On 18 September at 08:36
+ET the probe ran with the Gateway still in Read-Only mode. IBKR refused both
+legs with warning 321, *"The API interface is currently in Read-Only mode"*,
+and transmitted nothing. The probe recorded `inconclusive`, and the phase A→B
+gate in `scripts/day.py` tested only `is None` — so a run that asked IBKR
+nothing cleared the gate that exists to make sure IBKR was asked.
+
+Two corrections, both tightening:
+
+- `premarket_probe.py` now returns `not_run` (exit 7) when every leg is refused
+  for read-only, records **no** verdict, and the day runner retries by itself
+  on its next pass. A refused run and a murky answer no longer share a word.
+- the A→B gate rejects `inconclusive` as well as `None`. This table has rows
+  for `held` and `queued` and none for a non-answer; the code now matches.
+
+No verdict has been recorded as of this edit. The question in this section is
+still open.
+
 **What "protected" means, field by field** (added 2026-09-08 — one boolean
 carried too much):
 
