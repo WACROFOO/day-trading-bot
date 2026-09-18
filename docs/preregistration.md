@@ -125,8 +125,26 @@ Two corrections, both tightening:
 - the A→B gate rejects `inconclusive` as well as `None`. This table has rows
   for `held` and `queued` and none for a non-answer; the code now matches.
 
-No verdict has been recorded as of this edit. The question in this section is
-still open.
+**SETTLED 2026-09-18, 08:43 ET — verdict `queued`.** With Read-Only unticked
+the probe placed the bracket on DUR339781 and IBKR answered the stop leg with
+warning 2109: *"Attribute 'Outside Regular Trading Hours' is ignored based on
+the order type and destination."* The parent read `Submitted`, the stop
+`PreSubmitted`, and both were cancelled cleanly with nothing resting.
+
+The leg looks alive and is not. IBKR accepts the stop and silently drops the
+`outsideRth` flag, so it cannot trigger before 09:30. **A pre-market bracket
+protects nothing.** This is the second observation of the same behaviour — the
+2026-09-08 run produced warning 2109 on the same leg and was miscalled `held`
+on the `PreSubmitted` status alone; `verdict_from` has read 2109 as `queued`
+since. Ten days apart, same answer.
+
+Consequences, per the table above:
+
+- the phase A→B gate's probe condition is met: `queued` is a definite verdict;
+- **phase C does not start** until the owner accepts Amendment A1 below by
+  replacing its `PROPOSED`. Accepting it means accepting an unprotected
+  pre-market position by name. It is not accepted as of this edit, and the
+  outside review of 2026-09-08 recommends against it.
 
 **What "protected" means, field by field** (added 2026-09-08 — one boolean
 carried too much):
@@ -161,7 +179,9 @@ by holding; no price is ever guessed. Every such position counts as
 **unprotected** in the report and in the B→C gate. Accepting A1 means
 accepting that exposure by name.
 
-Result: `PROPOSED: not yet run` — replace with the date and the verdict line.
+Result: `PROPOSED: triggered 2026-09-18 by the `queued` verdict above, NOT
+accepted`. `exercise.py accept-a1 --confirm` has not been run; the policy
+refuses the monitored shape without it.
 
 **Amendment A2 — the catalyst gate flags, it does not kill (owner,
 2026-09-17).** What the ledger showed after five phase-A sessions
