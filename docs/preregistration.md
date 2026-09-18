@@ -182,6 +182,36 @@ defect.
 Effective immediately in `scripts/day.py`, tested by
 `test_decisions_made_under_superseded_rules_do_not_count_toward_phase_a`.
 
+**What happened when it ran, 2026-09-18 09:0x ET: the gate cleared anyway, and
+phase B was entered.** Recorded here because the reason matters and because a
+gate that passes is worth auditing as carefully as one that fails.
+
+Of the ~425 decisions, 282 were classified superseded — the rows the blind
+catalyst gate had killed. The remainder reproduce under A2 for a reason that is
+correct but narrow: the cascade **stops at the first kill**, so a decision that
+died at price (88) or float (47) never reached the catalyst gate and therefore
+gives the same answer under both rule sets. Those rows are genuine evidence for
+the current rules, which is exactly the semantics chosen above, and there were
+more than 40 of them.
+
+**The weakness this exposes is a different one, and it is not fixed:** the
+A→B gate has never required a single decision with `plan_allowed=1`. It counts
+decisions, and a REJECT is a decision. Phase A therefore completed on a
+pipeline that, in five sessions, allowed **zero** plans and placed zero orders.
+Phase B is TRADE.
+
+This is NOT amended retroactively. The gate was pre-registered, it was met, and
+tightening a criterion after seeing that it passed is precisely what
+pre-registration exists to prevent. It is recorded as a known weakness of the
+phase-A evidence, and the mitigation is that phase B is itself the observation:
+it needs 30 taken trades to reach C, and if the desk allows no plans it takes no
+trades and phase B is simply inert.
+
+**Proposed for the next amendment, not applied:** A→B should require N
+prospective decisions with `plan_allowed=1`, not merely N decisions. The value
+of N is unset because setting it now, knowing the current count, would be the
+same offence.
+
 **What "protected" means, field by field** (added 2026-09-08 — one boolean
 carried too much):
 
