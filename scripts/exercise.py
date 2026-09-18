@@ -118,6 +118,7 @@ def report(conn, *, source: str, synthetic: bool) -> None:
     print(f"  {lamp} {rep['reproduced']}/{rep['checked']} decisions reproduce their recorded verdict from stored inputs")
     for d in rep["diverged"][:10]:
         print(f"    {d['ts_et'][11:16]} {d['symbol']}: recorded {d['recorded']} · replayed {d['replayed']}")
+    _print_superseded(rep)
 
     print(f"\n{DIM}NOT CHECKED: real fills (paper is simulated; NBBO plausibility only), halt-resume")
     print(f"fills, sub-minute entries, Level 2, borrow, fees beyond IBKR's estimate, regime.")
@@ -147,12 +148,31 @@ def cmd_replay(args) -> int:
     return 0
 
 
+def _print_superseded(rep: dict) -> None:
+    """A superseded cohort is not a pass in disguise: name it every time.
+
+    These rows reproduce, but under rules that no longer exist. That is a real
+    fact about what the evidence base measures, so it is printed beside the
+    replay result rather than folded into it.
+    """
+    if not rep.get("superseded"):
+        return
+    n = len(rep["superseded"])
+    sets = ", ".join(f"{k} {v}" for k, v in sorted(rep["by_rules"].items()))
+    print(f"  {WARN}!{END} {n} decision(s) reproduce only under SUPERSEDED rules — "
+          f"they were recorded before an amendment changed the answer")
+    print(f"    by rule set: {sets}  (current: {rep['current_rules']})")
+    print(f"    {DIM}not a defect and not evidence for the current rules; "
+          f"see docs/preregistration.md §5{END}")
+
+
 def cmd_check(args) -> int:
     conn = L.connect(_db(args))
     rep = replay.check(conn)
     for d in rep["diverged"]:
         print(f"{BAD}✗{END} {d}")
     print(f"{rep['reproduced']}/{rep['checked']} reproduced")
+    _print_superseded(rep)
     return 0 if not rep["diverged"] else 1
 
 
@@ -433,6 +453,7 @@ def cmd_review(args) -> int:
               f"median {v['median_R'] if v['median_R'] is not None else '—'}  win {v['win_rate'] if v['win_rate'] is not None else '—'}")
     lamp = f"{OK}✓{END}" if not rep["diverged"] else f"{BAD}✗{END}"
     print(f"\n{BOLD}REPLAY{END}  {lamp} {rep['reproduced']}/{rep['checked']}")
+    _print_superseded(rep)
     from journal.risk import JournalRiskGate
     rs = JournalRiskGate(conn).state()
     print(f"\n{BOLD}RISK TODAY{END}  day {rs['day_r']} R · streak {rs['consecutive_losses']} · "

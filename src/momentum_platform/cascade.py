@@ -100,6 +100,21 @@ class Gate:
 # restore the rule as written.
 CATALYST_GATE_KILLS = False
 
+# Every rule set this cascade has run under, newest first, with the date the
+# change took effect. The replay check walks this list so a decision recorded
+# under superseded rules is classified, not reported as an unreproducible log.
+#
+# Without it, every amendment silently voids the whole ledger: on 2026-09-18
+# `exercise.py advance` reported "282 decision(s) do not reproduce", which was
+# not corruption — it was Amendment A2 correctly changing the answer for the
+# 282 rows the broken catalyst gate had killed. A check that cannot tell a rule
+# change from a defect reports both as the same alarm, and an alarm that cries
+# wolf on every fix is worse than no alarm.
+RULE_SETS = (
+    {"name": "A2", "from": "2026-09-17", "catalyst_gate_kills": False},
+    {"name": "pre-A2", "from": "2026-09-01", "catalyst_gate_kills": True},
+)
+
 
 @dataclass
 class Inputs:
@@ -158,12 +173,20 @@ RVOL_TRADE_FLOOR = 1.5            # NOT the 5x scanner dial
 PREMARKET_VOLUME_CEILING = 1_000_000   # a ceiling with NO floor
 
 
-def evaluate(i: Inputs) -> CascadeResult:
+def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> CascadeResult:
     """Run the cascade in FILTERS.md's own order and stop at the first kill.
 
     Gates after a kill are still reported, as NOT_APPLICABLE, so the operator
     can see the cascade stopped rather than that the checks silently vanished.
+
+    `catalyst_gate_kills` overrides the module constant for one call, and
+    exists for exactly one caller: `journal.replay`, which must be able to
+    re-evaluate a decision under the rules that were in force when it was
+    made. Nothing on the live path passes it — the desk always runs the rules
+    of the day. See `RULE_SETS` below.
     """
+    if catalyst_gate_kills is None:
+        catalyst_gate_kills = CATALYST_GATE_KILLS
     gates: list[Gate] = []
     reasons: list[str] = []
     warnings: list[str] = []
@@ -243,14 +266,14 @@ def evaluate(i: Inputs) -> CascadeResult:
     elif not i.catalyst_source_ok:
         add(Gate("catalyst", "Catalyst", GateState.UNKNOWN, "no headline source",
                  "The desk has no news feed (no headline keys in .env); the gate "
-                 "could not be evaluated.", kills=CATALYST_GATE_KILLS))
-        if not CATALYST_GATE_KILLS:
+                 "could not be evaluated.", kills=catalyst_gate_kills))
+        if not catalyst_gate_kills:
             warnings.append("Catalyst unknown — no headline source on this desk (A2: flagged, not killed).")
     else:
         add(Gate("catalyst", "Catalyst", GateState.FAIL, "none",
                  "No catalyst dated today and no live theme it belongs to.",
-                 kills=CATALYST_GATE_KILLS))
-        if not CATALYST_GATE_KILLS:
+                 kills=catalyst_gate_kills))
+        if not catalyst_gate_kills:
             warnings.append("No catalyst dated today and no live theme (A2: flagged, not killed; "
                             "the read-out splits this cohort).")
 

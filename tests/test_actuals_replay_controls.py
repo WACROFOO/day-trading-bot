@@ -97,6 +97,33 @@ def test_every_recorded_verdict_is_reproduced_from_its_stored_inputs(journal):
     assert res["reproduced"] == res["checked"]
 
 
+def test_an_amendment_is_classified_superseded_not_reported_as_a_broken_log():
+    """2026-09-18: `advance` said "282 decision(s) do not reproduce". Nothing
+    was broken — Amendment A2 had correctly changed the answer for the rows the
+    blind catalyst gate killed. A check that cannot tell a rule change from a
+    defect reports both as the same alarm.
+
+    A row recorded under pre-A2 rules must land in `superseded`, named, and
+    must NOT land in `diverged`, which is what gates and reports act on.
+    """
+    conn = L.connect(":memory:")
+    build_session(FIXTURE, journal=conn)
+    row = conn.execute("SELECT decision_id, inputs_json FROM decisions LIMIT 1").fetchone()
+    inputs = json.loads(row["inputs_json"])
+    inputs["catalyst_today"], inputs["live_theme"] = False, None
+    inputs["catalyst_source_ok"] = True
+    # what the OLD rules recorded for these inputs: killed at the catalyst gate
+    conn.execute("UPDATE decisions SET inputs_json=?, verdict='REJECT', killed_by='catalyst' "
+                 "WHERE decision_id=?", (json.dumps(inputs), row["decision_id"]))
+    res = replay.check(conn)
+    assert res["diverged"] == [], "an amendment is not a broken log"
+    assert len(res["superseded"]) == 1
+    assert res["superseded"][0]["rules"] == "pre-A2"
+    assert res["by_rules"]["pre-A2"] == 1 and res["current_rules"] == "A2"
+    # and it is not quietly counted as reproducing under the current rules
+    assert res["reproduced"] == res["checked"] - 1
+
+
 def test_replay_detects_a_log_that_lost_an_input(journal):
     """Simulate the class of defect R11 exists for: a stored input that no
     longer matches the recorded verdict."""

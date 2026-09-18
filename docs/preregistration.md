@@ -146,6 +146,30 @@ Consequences, per the table above:
   pre-market position by name. It is not accepted as of this edit, and the
   outside review of 2026-09-08 recommends against it.
 
+**An amendment is not a broken log** (added 2026-09-18). The first
+`exercise.py advance` after Amendment A2 reported *"282 decision(s) do not
+reproduce"*. Nothing was corrupt: A2 had correctly changed the answer for the
+282 rows the blind catalyst gate had killed, and R11 re-ran every stored
+decision through today's cascade.
+
+R11 stands — a log that cannot reproduce its own decisions voids anything built
+on it — but it now distinguishes three outcomes instead of two, against
+`cascade.RULE_SETS`:
+
+| outcome | meaning | gate |
+|---|---|---|
+| `reproduced` | the current rules give the recorded answer | counts |
+| `superseded` | an older rule set gives it, and that set is named | printed everywhere the replay result is printed, never folded into it |
+| `diverged` | **no** rule set this cascade has run under gives it — the log lost something | still blocks, still a defect |
+
+A superseded cohort is not a pass in disguise. It is a statement that part of
+the evidence base was collected under rules that no longer exist, which is a
+real fact about a backtest even when it is nobody's bug.
+
+**Open, and the owner's call:** the phase A→B threshold of 40 prospective
+decisions still counts rows from every rule set. After A2 most of them are
+pre-A2. Whether that cohort should reset on an amendment is not settled here.
+
 **What "protected" means, field by field** (added 2026-09-08 — one boolean
 carried too much):
 

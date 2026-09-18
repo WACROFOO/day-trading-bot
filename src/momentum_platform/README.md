@@ -18,6 +18,7 @@ verdict. **It does not trade** — no order path exists in this package and
 | `datasources/` | the feeds — IBKR, Alpaca, Yahoo, SEC, replay |
 | `scanners/` | Five Pillars and the momentum-event approximations |
 | `dashboard/` | the server, the event stream and the browser desk |
+| `microflow/` | Phase 0 of the 10-second micro-pullback study — `config.py` (every parameter carries its provenance), `bars.py` (10s candles and the 1-minute sync assertion), `spread.py` (the gate that fails closed), `measure.py` (the GO/NO-GO read-out). Measures the tape; decides no trades. See `docs/PLAN-10s-micro-pullback.md` |
 
 Every non-pillar scanner branch is an **Approximation** and is labelled as one
 wherever it appears. The Confirmed pillars are price $2-20, gain >=10%, daily
