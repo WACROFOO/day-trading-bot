@@ -309,34 +309,39 @@ def test_ui_row_click_links_everything(page):
     assert page.locator("#verdictCard").inner_text().strip()
 
 
-def test_ui_chart_stack_is_tradingview_over_tradingview_5m_and_10s(page):
-    """The stack: TradingView's 1-minute chart large on top (their toolbar,
-    indicators and drawing tools, extended hours on), their 5-minute chart and
-    the desk's 10-second pane side by side beneath it; no strip under them,
-    so the charts own the centre. The right column is the Five Pillars check,
-    Level 2 and the verdict. The screener, the desk's own 1m/5m panes and the
-    timeline wait in the tray."""
+def test_ui_chart_stack_is_the_desks_own_1m_over_5m_and_10s(page):
+    """The stack, since 2026-09-18: the desk's REAL-TIME 1-minute chart large on
+    top, its 5-minute chart and its 10-second pane side by side beneath; no
+    strip under them, so the charts own the centre. The right column is the
+    Five Pillars check, Level 2 and the verdict. The screener, the timeline and
+    TradingView's two delayed widgets wait in the tray.
+
+    TradingView's embedded widget held the top two slots until the owner found
+    it was showing 1m and 5m candles fifteen minutes behind the tape the runner
+    was trading on — their feed, their entitlement, not the desk's. These panes
+    come off the same IBKR stream as every decision."""
     _seek(page, 124)
-    big = page.locator("[data-card=tv-widget]").bounding_box()
-    five = page.locator("[data-card=tv-widget-5m]").bounding_box()
+    big = page.locator("[data-card=chart-1m]").bounding_box()
+    five = page.locator("[data-card=chart-5m]").bounding_box()
     ten = page.locator("[data-card=chart-10s]").bounding_box()
-    assert big["height"] > five["height"]                 # TradingView 1m is the big one
+    assert big["height"] > five["height"]                 # the 1m is the big one
     assert big["width"] > five["width"] * 1.5             # and spans the pair
     assert abs(five["y"] - ten["y"]) < 4                  # 5m and 10s share a row
     assert ten["x"] > five["x"] + five["width"] - 4       # side by side
-    assert five["y"] > big["y"] + big["height"] - 4       # below the widget
+    assert five["y"] > big["y"] + big["height"] - 4       # below the 1m
     centre = page.locator("[data-col=center]").bounding_box()
     assert ten["y"] + ten["height"] > centre["y"] + centre["height"] - 12, "nothing under the charts"
-    for parked in ("screener", "chart-1m", "chart-5m", "timeline"):
+    for parked in ("screener", "tv-widget", "tv-widget-5m", "timeline"):
         assert page.locator(f".slot [data-card={parked}]").count() == 0
     right = [page.eval_on_selector(f'[data-slot={s}] .card', "e => e.dataset.card") for s in ("R1", "R2", "R3")]
     assert right == ["pillars-board", "level2", "verdict"]
-    host = page.locator("[data-card=chart-10s] .chart-host").bounding_box()
-    inner = page.locator("[data-card=chart-10s] .chart-host canvas").first.bounding_box()
-    assert inner and abs(inner["width"] - host["width"]) < 4
-    # the 200 EMA stays on the desk's own 1m and 5m panes (in the tray)
+    for card in ("chart-1m", "chart-5m", "chart-10s"):
+        host = page.locator(f"[data-card={card}] .chart-host").bounding_box()
+        inner = page.locator(f"[data-card={card}] .chart-host canvas").first.bounding_box()
+        assert inner and abs(inner["width"] - host["width"]) < 4, card
     for card in ("chart-1m", "chart-5m"):
         assert "200" in page.eval_on_selector(f"[data-card={card}] .legend", "e => e.textContent")
+    # the widgets keep their intervals for when they are dragged back in
     assert page.eval_on_selector("#tvWidget", "e => e.dataset.interval") == "1"
     assert page.eval_on_selector("#tvWidget5", "e => e.dataset.interval") == "5"
     # the top bar is one slim row, so the charts get the height
@@ -414,7 +419,7 @@ def test_ui_gutters_resize_panes_and_persist(page):
     page.wait_for_timeout(300)
     after = page.locator("[data-card=pillars-board]").bounding_box()
     assert after["height"] > before["height"] + 60
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v7'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v8'))")
     assert saved["sizes"]["slots"]["R1"] > saved["sizes"]["slots"]["R2"]
     # the page must still fit after a resize
     metrics = page.evaluate("() => ({sh: document.body.scrollHeight, ih: window.innerHeight})")
@@ -461,7 +466,10 @@ def test_ui_bottom_right_card_is_off_the_desk(page):
     page.wait_for_timeout(250)
     assert page.locator("[data-card=chart-daily]").count() == 1   # the card, not a tray row
     items = page.eval_on_selector_all(".tray-item", "els => els.map(e => e.dataset.trayCard)")
-    assert sorted(items) == ["chart-1m", "chart-5m", "chart-daily", "screener", "timeline"]
+    # 2026-09-18: the desk's live 1m/5m panes moved onto the desk and
+    # TradingView's delayed widgets took their place here.
+    assert sorted(items) == ["chart-daily", "screener", "timeline",
+                             "tv-widget", "tv-widget-5m"]
     page.locator("#btnTray").click()
     page.wait_for_timeout(150)
 
@@ -518,7 +526,7 @@ def test_ui_cards_swap_by_drag_and_persist(page):
     page.wait_for_timeout(300)
     assert page.eval_on_selector("[data-card=chart-10s]", "e => e.parentElement.dataset.slot") == target
     assert page.eval_on_selector("[data-card=level2]", "e => e.parentElement.dataset.slot") == before
-    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v7'))")
+    saved = page.evaluate("JSON.parse(localStorage.getItem('momentum-workstation.layout.v8'))")
     assert saved["layout"][target] == "chart-10s"
     page.locator("#btnLayout").click()
     page.wait_for_timeout(300)
@@ -618,12 +626,12 @@ def test_ui_alert_click_seeks_charts(page):
     """The alert timeline waits in the tray by default; put it in the bottom
     strip (a saved layout, as a drag would leave it) and it still seeks."""
     page.evaluate("""() => {
-      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v7') || '{}');
+      const saved = JSON.parse(localStorage.getItem('momentum-workstation.layout.v8') || '{}');
       saved.layout = Object.assign({}, saved.layout || {
         L1: 'scan-pillars', L2: 'scan-running', L3: 'scan-hod', L4: 'quote',
         C1: 'tv-widget', C2: 'tv-widget-5m', C3: 'chart-10s', R1: 'pillars-board', R2: 'level2', R3: 'verdict' });
       saved.layout.R2 = 'timeline';
-      localStorage.setItem('momentum-workstation.layout.v7', JSON.stringify(saved));
+      localStorage.setItem('momentum-workstation.layout.v8', JSON.stringify(saved));
     }""")
     page.reload()
     page.wait_for_timeout(400)
@@ -968,7 +976,7 @@ def test_ui_five_pillars_board_lists_every_desk_symbol(page):
     # the wide form comes back when the board has the width for it
     page.evaluate("""() => {
       const src = document.querySelector('[data-card=pillars-board] .card-head');
-      const dst = document.querySelector('[data-card=tv-widget]');
+      const dst = document.querySelector('[data-card=chart-1m]');
       const dt = new DataTransfer();
       src.dispatchEvent(new DragEvent('dragstart', { bubbles: true, dataTransfer: dt }));
       dst.dispatchEvent(new DragEvent('dragover', { bubbles: true, dataTransfer: dt }));
@@ -1062,3 +1070,55 @@ def test_ui_alert_timelines_are_ordered_by_the_alert_time(page):
         times = page.eval_on_selector_all(
             f"[data-card={card}] .alert-row .tl-time", "els => els.map(e => e.textContent)")
         assert times == sorted(times, reverse=True), (card, times)
+
+
+def test_the_desk_opens_on_its_own_real_time_charts_not_the_delayed_widget():
+    """Owner, 2026-09-18. TradingView's embedded widget held the two big
+    centre slots and shows whatever the viewer's tradingview.com account is
+    entitled to — here, 1m and 5m candles fifteen minutes behind the tape the
+    runner was trading on. Two charts of the same symbol disagreeing on one
+    screen is not a cosmetic problem.
+
+    The desk's own panes come off the IBKR stream (market data type 1) and are
+    drawn with the same TradingView library, vendored locally.
+    """
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    app = (web / "app.js").read_text()
+    default = app.split("const DEFAULT_LAYOUT = {")[1].split("};")[0]
+    assert '"chart-1m"' in default and '"chart-5m"' in default, "the live panes must be placed"
+    assert "tv-widget" not in default, "TradingView's delayed widget must not be a default pane"
+    assert '"chart-10s"' in default, "the 10-second pane stays — nothing retail has one"
+
+    # Still reachable: the widget's drawing tools are one drag from the tray.
+    spare = app.split("const ALL_CARDS = ")[1].split(";")[0]
+    assert '"tv-widget"' in spare and '"tv-widget-5m"' in spare
+
+    # A structurally valid older layout would restore the delayed charts.
+    assert 'LAYOUT_KEY = "momentum-workstation.layout.v8"' in app
+
+
+def test_a_chart_does_not_swallow_a_card_drag():
+    """TradingView's widget is an iframe and Lightweight Charts paints
+    canvases: both are their own event targets, so dragover/drop over a chart
+    never reached the grid listener. Swapping one chart for another means
+    dropping onto a chart, so the cards most worth rearranging were the ones
+    that could not be.
+    """
+    web = Path(__file__).resolve().parents[1] / "src" / "momentum_platform" / "dashboard" / "web"
+    app = (web / "app.js").read_text()
+    css = (web / "styles.css").read_text()
+
+    rule = "body.dragging-card" + css.split("body.dragging-card", 1)[1].split("}", 1)[0]
+    assert "pointer-events:none" in rule, "charts must stop taking pointer events mid-drag"
+    for surface in (".chart-host", "iframe", "canvas"):
+        assert surface in rule, f"{surface} still takes pointer events during a drag"
+    assert 'classList.add("dragging-card")' in app
+    assert 'classList.remove("dragging-card")' in app
+
+    # dragend on the document, not the grid: a drag that starts in the tray
+    # ends outside the grid and used to leave the highlight behind.
+    assert 'document.addEventListener("dragend", endCardDrag)' in app
+    # dragleave must ignore crossing into a child of the same card
+    assert "card.contains(e.relatedTarget)" in app
+    # the tray said "you may drop here" and listened for nothing
+    assert 'tray.addEventListener("drop"' in app

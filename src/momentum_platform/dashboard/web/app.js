@@ -1837,25 +1837,41 @@ function beep(severity) {
    per browser so the desk comes back the way it was left. */
 const DEFAULT_LAYOUT = {
   L1: "scan-pillars", L2: "scan-running", L3: "scan-hod", L4: "quote",
-  // TradingView's chart is the big pane: their toolbar, drawing tools and
-  // indicators, extended hours on, on the viewer's own TradingView data
-  // entitlement (signed in to tradingview.com in this browser, that is
-  // real-time). Their 5-minute chart and the desk's IBKR 10-second pane
-  // share the row beneath. The desk's own 1m/5m panes wait in the tray.
-  C1: "tv-widget", C2: "tv-widget-5m", C3: "chart-10s",
+  // THE DESK'S OWN CHARTS ARE THE BIG PANES (owner, 2026-09-18). They are
+  // drawn from the IBKR stream the runner trades on — market data type 1,
+  // real-time, no delay — with TradingView's own Lightweight Charts, vendored
+  // under web/vendor/ so a content blocker cannot take them out.
+  //
+  // TradingView's embedded widget used to hold C1 and C2. It shows whatever
+  // the viewer's tradingview.com account is entitled to, which on this desk
+  // meant 1- and 5-minute candles fifteen minutes behind the tape the desk
+  // was deciding on — two charts of the same symbol disagreeing on the same
+  // screen. The widget keeps its drawing tools and is one drag from the tray
+  // when they are wanted; it is no longer what the desk opens on.
+  //
+  // C1 1-minute is the execution chart and C2 5-minute the context chart,
+  // which is the arrangement
+  // CLAUDE_ROSS_TRADING_MASTERY_2026-08-31/references/dashboard-scanner-chart-knowledge.md
+  // §4 recommends. C3 keeps the 10-second pane: no retail platform has one.
+  C1: "chart-1m", C2: "chart-5m", C3: "chart-10s",
   // Right column, top to bottom: the Five Pillars check for every desk
   // name, Level 2 (simulated, and labelled so), the setup verdict. The
   // screener is one drag away in the tray.
   R1: "pillars-board", R2: "level2", R3: "verdict",
 };
 // Cards with no slot wait in the tray; drag one onto a card to swap it in.
-const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["screener", "chart-1m", "chart-5m", "chart-daily", "timeline"]);
+const ALL_CARDS = Object.values(DEFAULT_LAYOUT).concat(["screener", "tv-widget", "tv-widget-5m", "chart-daily", "timeline"]);
 const DEFAULT_SIZES = {
   wLeft: 330, wRight: 372,
   slots: { L1: 0.88, L2: 0.88, L3: 0.88, L4: 1.36, C1: 1.75, PAIR: 1.1, C2: 1, C3: 1,
            R1: 1.35, R2: 1, R3: 1.05 },
 };
-const LAYOUT_KEY = "momentum-workstation.layout.v7";
+// v8: the desk's real-time charts replace TradingView's delayed widget in C1
+// and C2. The version is bumped rather than migrated because a saved v7
+// layout is still structurally valid — same slots, same card names — so it
+// would load and quietly restore the delayed charts on the one desk that
+// most needed the fix.
+const LAYOUT_KEY = "momentum-workstation.layout.v8";
 let layout = Object.assign({}, DEFAULT_LAYOUT);
 let sizes = JSON.parse(JSON.stringify(DEFAULT_SIZES));
 
@@ -1995,6 +2011,7 @@ function renderTray() {
     item.addEventListener("dragstart", e => {
       e.dataTransfer.setData("text/plain", id);
       e.dataTransfer.effectAllowed = "move";
+      document.body.classList.add("dragging-card");   // charts must stop eating the drag
     });
     item.title = "Drag onto the desk, or click to put it where " + (LAST_CLICKED_CARD || "the screener slot") + " is";
     item.addEventListener("click", () => {
@@ -2047,6 +2064,35 @@ function toggleExpand(card) {
     renderCharts(FRAMES[state.frame]);
   });
 }
+/* Card drag and drop, and the four things that were wrong with it.
+
+   1. IFRAMES AND CANVASES ATE THE DRAG. TradingView's widget is an iframe and
+      Lightweight Charts paints canvases; both are their own event targets, so
+      dragover/drop over a chart never reached this listener. Swapping one
+      chart for another means dropping onto a chart, so the cards most worth
+      rearranging were the ones that could not be. `body.dragging-card` in
+      styles.css suspends their pointer events for the duration of the drag.
+   2. DRAGEND WAS ONLY ON THE GRID. A drag that starts in the tray ends
+      outside the grid, so the highlight was never cleared and the desk kept a
+      dashed outline until the next drag. It is on `document` now.
+   3. DRAGLEAVE FIRED ON EVERY CHILD. Moving across the elements inside a card
+      raised dragleave for the card itself, so the "Drop here to swap" overlay
+      flickered and could vanish while the pointer was still over the target.
+      The highlight is now recomputed from the card under the pointer.
+   4. THE TRAY LOOKED LIKE A DROP TARGET AND WAS NOT. `dragover` called
+      preventDefault over the tray — the cursor said "you may drop here" — but
+      nothing listened for the drop, so cards could go out of the tray and
+      never back into it. */
+function markDropTarget(card) {
+  document.querySelectorAll(".card.drop-target")
+    .forEach(c => { if (c !== card) c.classList.remove("drop-target"); });
+  if (card) card.classList.add("drop-target");
+}
+function endCardDrag() {
+  document.body.classList.remove("dragging-card");
+  document.querySelectorAll(".dragging,.drop-target")
+    .forEach(c => c.classList.remove("dragging", "drop-target"));
+}
 function wireLayout() {
   const grid = $("#grid");
   grid.addEventListener("dragstart", e => {
@@ -2056,21 +2102,22 @@ function wireLayout() {
     e.dataTransfer.setData("text/plain", card.dataset.card);
     e.dataTransfer.effectAllowed = "move";
     card.classList.add("dragging");
+    document.body.classList.add("dragging-card");
   });
-  grid.addEventListener("dragend", () => {
-    document.querySelectorAll(".dragging,.drop-target")
-      .forEach(c => c.classList.remove("dragging", "drop-target"));
-  });
+  document.addEventListener("dragend", endCardDrag);
+  document.addEventListener("drop", endCardDrag);
   grid.addEventListener("dragover", e => {
     const card = e.target.closest(".card");
     if (!card || card.classList.contains("dragging")) return;
     e.preventDefault();
     e.dataTransfer.dropEffect = "move";
-    card.classList.add("drop-target");
+    markDropTarget(card);
   });
   grid.addEventListener("dragleave", e => {
+    // Only when the pointer has actually left the card, not merely crossed
+    // into one of its children.
     const card = e.target.closest(".card");
-    if (card) card.classList.remove("drop-target");
+    if (card && !card.contains(e.relatedTarget)) card.classList.remove("drop-target");
   });
   grid.addEventListener("drop", e => {
     const card = e.target.closest(".card");
@@ -2112,8 +2159,16 @@ function wireLayout() {
     $("#btnTray").setAttribute("aria-pressed", String(!tray.hidden));
     if (!tray.hidden) renderTray();
   };
-  document.addEventListener("dragover", e => {
-    if (e.target.closest("#tray")) e.preventDefault();
+  const tray = $("#tray");
+  tray.addEventListener("dragover", e => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; });
+  tray.addEventListener("drop", e => {
+    e.preventDefault();
+    // Every slot must hold a card, so parking one means another takes its
+    // place. The first spare is used: deterministic, and reversible by
+    // dragging it straight back.
+    const id = e.dataTransfer.getData("text/plain");
+    const spare = ALL_CARDS.filter(c => placedCards().indexOf(c) === -1)[0];
+    if (spare && placedCards().indexOf(id) >= 0) swapCards(spare, id);
   });
 }
 
