@@ -87,6 +87,55 @@ def test_dotenv_reader_does_not_override_the_environment(tmp_path, monkeypatch):
     assert os.environ["ALPACA_FEED"] == "iex"            # file fills the gap
 
 
+def test_the_last_definition_in_the_file_wins(tmp_path, monkeypatch):
+    """Appending the real key below a stale line must work.
+
+    It did not. `setdefault` line by line kept the FIRST value, so a `.env`
+    carrying the setup template above the real key exported the template. The
+    news feed then read "no headline source" and gate 3, failing closed,
+    rejected 254 names for a missing catalyst they had. Same rule as `source`
+    and python-dotenv: later wins.
+    """
+    env = tmp_path / ".env"
+    env.write_text("ALPACA_KEY_ID=stale_one\nALPACA_KEY_ID=the_real_key\n")
+    monkeypatch.delenv("ALPACA_KEY_ID", raising=False)
+    al.load_dotenv(str(env))
+    import os
+    assert os.environ["ALPACA_KEY_ID"] == "the_real_key"
+
+
+def test_a_placeholder_value_is_dropped_not_exported(tmp_path, monkeypatch, capsys):
+    """A credential-shaped string that is not a credential fails far
+    downstream. Refuse it at the reader and say so."""
+    env = tmp_path / ".env"
+    env.write_text("ALPACA_KEY_ID=paste_key_id_here\n"
+                   "ALPACA_SECRET_KEY=your_secret_key_here\n"
+                   "ALPACA_FEED=iex\n")
+    for k in ("ALPACA_KEY_ID", "ALPACA_SECRET_KEY", "ALPACA_FEED"):
+        monkeypatch.delenv(k, raising=False)
+    al.load_dotenv(str(env))
+    import os
+    assert "ALPACA_KEY_ID" not in os.environ
+    assert "ALPACA_SECRET_KEY" not in os.environ
+    assert os.environ["ALPACA_FEED"] == "iex"          # a real value beside it survives
+    assert "placeholder" in capsys.readouterr().err
+
+
+def test_a_placeholder_above_the_real_key_does_not_shadow_it(tmp_path, monkeypatch):
+    """The owner's actual file on 18 September, in order."""
+    env = tmp_path / ".env"
+    env.write_text("ALPACA_KEY_ID=paste_key_id_here\n"
+                   "ALPACA_SECRET_KEY=paste_secret_here\n"
+                   "ALPACA_KEY_ID=PKREAL123\n"
+                   "ALPACA_SECRET_KEY=sEcReT456\n")
+    for k in ("ALPACA_KEY_ID", "ALPACA_SECRET_KEY"):
+        monkeypatch.delenv(k, raising=False)
+    al.load_dotenv(str(env))
+    import os
+    assert os.environ["ALPACA_KEY_ID"] == "PKREAL123"
+    assert os.environ["ALPACA_SECRET_KEY"] == "sEcReT456"
+
+
 def test_session_window_starts_at_premarket():
     start, end = al.session_window()
     assert start < end

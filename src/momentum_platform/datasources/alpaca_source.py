@@ -27,6 +27,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -222,11 +224,31 @@ def client_from_env(feed: Optional[str] = None) -> AlpacaClient:
     )
 
 
+PLACEHOLDER = re.compile(r"^(paste|your|my|xxx+|todo|changeme|<.*>)", re.I)
+
+
 def load_dotenv(path: str = ".env") -> None:
     """Tiny .env reader so there is nothing to install. Existing environment
-    variables always win, and quotes around values are tolerated."""
+    variables always win, quotes around values are tolerated, and **within the
+    file the LAST definition of a key wins** — the same rule as `source` and as
+    python-dotenv.
+
+    That last rule is not cosmetic. An earlier version applied
+    ``os.environ.setdefault`` line by line, so the FIRST definition won, and a
+    `.env` that had been appended to twice kept the stale value. The owner's
+    file held the setup template's ``ALPACA_KEY_ID=paste_key_id_here`` above the
+    real key; the news feed read "no headline source" for a whole session, and
+    gate 3 fails closed, so 254 names were rejected for having no catalyst they
+    in fact had. Appending to a config file is the normal way to fix it — the
+    reader was wrong, not the owner.
+
+    A value that is still a template placeholder is dropped with a warning
+    rather than exported, because a credential-shaped string that is not a
+    credential fails much further downstream than it should.
+    """
     if not os.path.exists(path):
         return
+    seen: dict[str, str] = {}
     with open(path, encoding="utf-8") as fh:
         for line in fh:
             line = line.strip()
@@ -234,7 +256,13 @@ def load_dotenv(path: str = ".env") -> None:
                 continue
             key, value = line.split("=", 1)
             key, value = key.strip(), value.strip().strip('"').strip("'")
-            os.environ.setdefault(key, value)
+            if value and PLACEHOLDER.match(value):
+                print(f"{path}: {key} still looks like a placeholder "
+                      f"({value!r}) — ignored", file=sys.stderr)
+                continue
+            seen[key] = value                       # later line replaces earlier
+    for key, value in seen.items():
+        os.environ.setdefault(key, value)           # the shell still wins
 
 
 # -- normalization ----------------------------------------------------------
