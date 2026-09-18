@@ -45,7 +45,7 @@ better than the free baselines on the same names at the same instants.
 
 | Phase | Mode | Runs until | Gate to the next phase |
 |---|---|---|---|
-| A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions** | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
+| A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions under the rules currently in force** (owner, 2026-09-18: the cohort resets on an amendment — see §5) | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
 | B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; zero unprotected entries |
 | C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** | only in the shape the probe dictates (§5) |
 | D | Read-out | at **PROPOSED: n = 60 taken trades** total | the failure condition in §4 is evaluated ONCE, here, not continuously |
@@ -166,9 +166,21 @@ A superseded cohort is not a pass in disguise. It is a statement that part of
 the evidence base was collected under rules that no longer exist, which is a
 real fact about a backtest even when it is nobody's bug.
 
-**Open, and the owner's call:** the phase A→B threshold of 40 prospective
-decisions still counts rows from every rule set. After A2 most of them are
-pre-A2. Whether that cohort should reset on an amendment is not settled here.
+**SETTLED — owner, 2026-09-18: the cohort resets on an amendment.** The phase
+A→B threshold of 40 prospective decisions counts only decisions that reproduce
+under the **current** rules. A row whose answer the amendment did not change
+still counts, because it does reproduce under them; a row that only reproduces
+under a superseded set does not.
+
+The reason is the gate's own question — *do the rules I am about to trade
+produce 40 decisions I have watched?* The pre-A2 cohort cannot answer it: 389
+decisions, 389 REJECT, produced by a catalyst gate that killed 254 names
+because a config file had no key in it. The cost of this decision is about a
+week; the alternative is starting to place orders on evidence gathered by a
+defect.
+
+Effective immediately in `scripts/day.py`, tested by
+`test_decisions_made_under_superseded_rules_do_not_count_toward_phase_a`.
 
 **What "protected" means, field by field** (added 2026-09-08 — one boolean
 carried too much):

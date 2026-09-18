@@ -80,6 +80,26 @@ def mode_for(state: dict) -> str:
     return "TRADE" if state.get("phase") in ("B", "C") else "LOG_ONLY"
 
 
+def _superseded_prospective(conn, rep: dict) -> int:
+    """How many PROSPECTIVE decisions reproduce only under superseded rules.
+
+    `replay.check` classifies every row; backfill rows are already excluded
+    from `plans_prospective`, so they must be excluded here too or they would
+    be subtracted twice.
+    """
+    ids = [r["decision_id"] for r in rep.get("superseded", ())]
+    if not ids:
+        return 0
+    n = 0
+    for chunk in (ids[i:i + 400] for i in range(0, len(ids), 400)):
+        marks = ",".join("?" * len(chunk))
+        n += conn.execute(
+            f"SELECT COUNT(*) FROM decisions WHERE decision_id IN ({marks}) "
+            "AND (data_status IS NULL OR data_status NOT LIKE '%-backfill')",
+            chunk).fetchone()[0]
+    return n
+
+
 def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
     """What blocks the next phase, per docs/preregistration.md §3. Empty list
     = may advance. Values here mirror the PROPOSED ones; when the owner sets
@@ -95,12 +115,21 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
                         f"a human must clear them (exercise.py stuck)")
     if phase == "A":
         nxt = "B"
-        # Both thresholds. Prospective decisions only: backfill rows (armed on
-        # loaded history) are a diagnostic cohort and count for nothing here.
-        if state.get("sessions_done", 0) < 5 or f["plans_prospective"] < 40:
-            blockers.append(f"phase A needs 5 sessions AND 40 prospective decisions; have "
-                            f"{state.get('sessions_done', 0)} sessions, {f['plans_prospective']} "
-                            f"prospective decisions ({f['plans_backfill']} backfill excluded)")
+        # Three exclusions, and each one is a cohort that cannot answer the
+        # question the gate asks — "do the rules I am about to trade produce 40
+        # decisions I have watched?"
+        #   backfill  : armed on history loaded at startup, with inputs from
+        #               later. Diagnostic only (audit F3).
+        #   superseded: made under a rule set an amendment has replaced. Owner's
+        #               decision, 2026-09-18: the cohort resets on an amendment.
+        #               A row whose answer the amendment did not change still
+        #               counts — it reproduces under the current rules.
+        current = f["plans_prospective"] - _superseded_prospective(conn, rep)
+        if state.get("sessions_done", 0) < 5 or current < 40:
+            blockers.append(f"phase A needs 5 sessions AND 40 prospective decisions under the "
+                            f"CURRENT rules; have {state.get('sessions_done', 0)} sessions, "
+                            f"{current} ({f['plans_backfill']} backfill and "
+                            f"{f['plans_prospective'] - current} superseded excluded)")
         # `is None` alone was a loophole. On 2026-09-18 the Gateway was still
         # in Read-Only mode, IBKR refused both legs with warning 321 and the
         # probe recorded `inconclusive` — which is not None, so this gate

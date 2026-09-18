@@ -2,6 +2,8 @@
 whether pre-market is allowed, what blocks a phase advance, and the report."""
 from __future__ import annotations
 
+import json
+
 import subprocess
 import sys
 from pathlib import Path
@@ -97,6 +99,35 @@ def test_an_inconclusive_probe_does_not_clear_the_phase_a_gate(journal):
     L.set_state(journal, probe_verdict="queued")
     _, blockers = day.gates_for_advance(journal, L.get_state(journal))
     assert not any("usable verdict" in b for b in blockers)   # `queued` IS an answer
+
+
+def test_decisions_made_under_superseded_rules_do_not_count_toward_phase_a(journal):
+    """Owner's decision, 2026-09-18: the cohort resets on an amendment.
+
+    The 40 decisions that let phase B start must have been made by the rules
+    phase B will trade. After A2 most of the ledger was pre-A2 — a cohort
+    produced by a catalyst gate that killed 254 of 389 names because a config
+    file had no key in it.
+    """
+    L.set_state(journal, sessions_done=5, probe_verdict="queued",
+                paper_data="realtime", paper_data_date="2026-09-18")
+    tmpl = journal.execute("SELECT inputs_json FROM decisions LIMIT 1").fetchone()
+    inputs = json.loads(tmpl["inputs_json"])
+    inputs["catalyst_today"], inputs["live_theme"] = False, None
+    inputs["catalyst_source_ok"] = True
+    for i in range(60):                      # comfortably over the threshold of 40
+        journal.execute(
+            "INSERT INTO decisions (decision_id, ts_et, session, symbol, source, verdict, "
+            "killed_by, plan_allowed, gates_json, warnings_json, inputs_json, recorded_at) "
+            "VALUES (?, '2026-09-15T10:00:00-04:00', 'regular', 'OLD', 'pullback', "
+            "'REJECT', 'catalyst', 0, '[]', '[]', ?, 'x')",
+            (f"pre-a2-{i}", json.dumps(inputs)))
+    journal.commit()
+
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert not any("do not reproduce" in b for b in blockers), "an amendment is not corruption"
+    gate = next(b for b in blockers if "CURRENT rules" in b)
+    assert "60 superseded excluded" in gate
 
 
 def test_phase_b_is_blocked_by_too_few_trades_and_by_any_unprotected_fill(journal):
