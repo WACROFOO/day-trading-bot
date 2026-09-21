@@ -1052,6 +1052,25 @@ def positions_alive(conn: sqlite3.Connection) -> int:
                            AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled')""").fetchone()[0]
 
 
+DEAD_ENTRY_STATUSES = ("Inactive", "Cancelled", "ApiCancelled", "Rejected")
+
+
+def mark_dead(conn: sqlite3.Connection, order_id: int, status: str, why: str) -> None:
+    """An entry the broker reports dead (rejected, cancelled) or no longer
+    reports at all: the row takes the broker's word and the decision reads
+    NOT_FILLED. 2026-09-21: VEEE was rejected at 09:37 (error 201) and its
+    row stayed 'submitted' all session — the runner only wrote fills back —
+    so the one-position rule refused every entry until 11:28 on a position
+    that never existed."""
+    row = conn.execute("SELECT decision_id, status FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    conn.execute("UPDATE orders SET status=?, updated_at=? WHERE order_id=?", (status, _now(), order_id))
+    add_order_event(conn, order_id, why)
+    conn.execute("UPDATE decisions SET outcome='NOT_FILLED', acted_at=? WHERE decision_id=? "
+                 "AND outcome IN ('TAKEN', 'CLAIMED')", (_now(), row["decision_id"]))
+
+
 def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:
     """An entry that never filled by the hard stop. The decision's outcome
     becomes NOT_FILLED — a different fact from TAKEN, and one the actuals

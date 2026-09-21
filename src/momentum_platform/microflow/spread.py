@@ -77,6 +77,13 @@ def gate(trigger: Optional[float], stop: Optional[float],
         return Verdict(State.UNKNOWN, f"Crossed quote (bid {bid} > ask {ask}).",
                        risk_per_share=rps)
     spread = ask - bid
+    if spread <= 0:
+        # A locked quote (bid == ask) is not a free round trip; it is a quote
+        # the gate cannot price. 2026-09-21: `measure` crashed on 1/ratio with
+        # ratio 0 on the owner's 28,708-candle tape. Fails closed.
+        return Verdict(State.UNKNOWN, f"Locked quote (bid {bid} == ask {ask}); the spread "
+                       "cannot be established, so the gate fails closed.",
+                       spread, rps, None)
     ratio = spread / rps
     need = cfg.spread_k * spread
     if rps >= need:

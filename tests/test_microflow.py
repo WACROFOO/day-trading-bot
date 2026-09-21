@@ -229,3 +229,10 @@ def test_dips_inside_the_spread_are_counted_directly(tmp_path):
     # and the same arithmetic inside measure(): built from the module's own rule
     src = (ROOT / "src/momentum_platform/microflow/measure.py").read_text()
     assert 'inside = [r for r in quoted if r["ratio"] >= 1.0]' in src
+
+
+def test_a_locked_quote_is_unknown_not_a_free_round_trip():
+    """2026-09-21: bid == ask on one dip crashed measure() with a division by
+    zero. A zero spread is a quote the gate cannot price: UNKNOWN, fail closed."""
+    v = S.gate(5.05, 5.00, 5.02, 5.02, DEFAULT)
+    assert v.state is S.State.UNKNOWN and v.ratio is None and "Locked" in v.reason

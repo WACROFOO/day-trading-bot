@@ -159,6 +159,11 @@ def catalyst_states(conn) -> dict:
     out = {"all": {}, "catalyst_killed": {}, "by_day": {}}
 
     def state(inp):
+        # `catalyst_source_ok` was added with A2 on 2026-09-17. A stored input
+        # without the key predates the UNKNOWN state: whether the feed was up
+        # is UNRECORDED, and calling it NONE would invent a healthy feed.
+        if "catalyst_source_ok" not in inp:
+            return "FOUND" if inp.get("catalyst_today") or inp.get("live_theme") else "UNRECORDED"
         if not inp.get("catalyst_source_ok", True):
             return "UNKNOWN"
         return "FOUND" if inp.get("catalyst_today") or inp.get("live_theme") else "NONE"
@@ -177,7 +182,7 @@ def print_catalyst_states(conn) -> None:
     c = catalyst_states(conn)
     fmt = lambda d: " · ".join(f"{k} {v}" for k, v in sorted(d.items())) or "none"   # noqa: E731
     print(f"\n{BOLD}catalyst states{END} (FOUND = catalyst dated today · NONE = healthy feed, none found · "
-          f"UNKNOWN = no feed)")
+          f"UNKNOWN = no feed · UNRECORDED = row predates the UNKNOWN state, 2026-09-17)")
     print(f"  all prospective decisions: {fmt(c['all'])}")
     print(f"  killed by the catalyst gate: {fmt(c['catalyst_killed'])}")
     for day, d in sorted(c["by_day"].items()):

@@ -107,3 +107,16 @@ def test_catalyst_states_keep_unknown_apart_from_none(capsys):
     assert sum(sum(d.values()) for d in c["by_day"].values()) == total
     gate_audit.print_catalyst_states(conn)
     assert "UNKNOWN 1" in capsys.readouterr().out
+
+
+def test_a_row_without_the_feed_flag_is_unrecorded_not_none():
+    """The owner's run, 2026-09-21: every pre-A2 catalyst kill read NONE
+    because the key did not exist yet and the default is True. That is not a
+    healthy feed; it is a state the ledger never recorded."""
+    import json
+    conn = _ledger()
+    r = conn.execute("SELECT decision_id, inputs_json FROM decisions LIMIT 1").fetchone()
+    inp = json.loads(r["inputs_json"]); inp.pop("catalyst_source_ok", None); inp["catalyst_today"] = False
+    conn.execute("UPDATE decisions SET inputs_json=? WHERE decision_id=?", (json.dumps(inp), r["decision_id"])); conn.commit()
+    c = gate_audit.catalyst_states(conn)
+    assert c["all"].get("UNRECORDED") == 1

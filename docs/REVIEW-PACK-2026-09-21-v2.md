@@ -167,6 +167,106 @@ detected" was unverified and stays so until a live pause is recorded.
 | Is one session enough for the micro NO-GO? | enough to pause; the stated stop condition was not shown | **Accepted.** The report says the median-dip condition did not fire (0.41), the k-survival condition did, the verdict is "poor initial execution feasibility; development paused", and session two is collected. |
 | What defect class next? | event ordering, within-bar look-ahead, order-state reconciliation, silent data-source failure | **Accepted and done** (item 13). The silent-failure class produced the halt collector finding. |
 
+## The owner's run — 2026-09-21 14:04 ET, `data/journal.sqlite`, 7 session days
+
+Every figure below is copied from the three command outputs the owner pasted
+after pulling `b163bb5`. Where a figure needs a caveat it is next to it.
+
+**Item 2 — the funnel reconciles.** 682 plans armed · 571 suppressed by the
+cascade · 111 allowed = 109 REFUSED + 2 NOT_FILLED · residual 0 · 2 order
+rows · 0 fills. The two NOT_FILLED rows are the VEEE order rejected at 09:37
+(error 201) and one other; both were marked at the hard stop by
+`reconcile_unfilled`. What the run also showed: the rejected order's row
+stayed `submitted` from 09:37 to 11:28 and every entry after it was refused
+"one position at a time" — the runner wrote fills back to the ledger but
+never a rejection, and after the restarts the broker no longer reported the
+order at all. Fixed the same evening (`ledger.mark_dead`,
+`Runner._resolve_gone_entries`): a rejected or cancelled entry, or one the
+broker no longer reports anywhere with no position in the name, is marked
+dead at sync and at every reconciliation. Two tests.
+
+**Item 3 — controls and exit variants** (planned R, no costs, "close" = the
+last bar recorded, 2026-09-21T15:31:00Z UTC at the latest):
+
+| series | n | mean R | median R | win |
+|---|---:|---:|---:|---:|
+| strategy (simulated +2 R / −1 R / close) | 259 | +0.395 | −1.000 | 47 % |
+| hold_close (NO stop) | 259 | +7.726 | 0.000 | 50 % |
+| random_bar (NO stop, entry at the bar close) | 259 | +7.613 | +0.031 | 51 % |
+| strat · allowed | 43 | +0.287 | −1.000 | 44 % |
+| strat · killed | 216 | +0.417 | −0.857 | 48 % |
+| strat · news | 30 | +0.167 | −1.000 | 37 % |
+| strat · no-news | 229 | +0.425 | −1.000 | 48 % |
+
+| exit variant (same entry, same initial stop, same cutoff) | n | mean R | median R | stopped | to close |
+|---|---:|---:|---:|---:|---:|
+| baseline — fixed +2 R target | 259 | +0.395 | −1.000 | 51 % | 4 % |
+| no_target — initial stop only (the rule in force until A3) | 259 | +2.965 | −1.000 | 77 % | 23 % |
+| trail_1r — A3, bar-ordered | 259 | +1.231 | 0.000 | 98 % | 2 % |
+
+Reading, with the same caveats as everything else here (192 of the 259 are
+cascade-killed rows in the original pack's sense, micro-cent stops, zero
+fills): hold_close and random_bar differ by 0.11 R on 259 rows, so the
+trigger buys almost nothing over entering at the bar close — the review's
+point, confirmed on the owner's ledger. Removing the target while keeping
+the stop (no_target) lifts the mean from +0.40 to +2.97 with 23 % of rows
+reaching the cutoff; the 1 R trail sits between at +1.23, exits by its stop
+on 98 % of rows, and its median is 0.0 — it mostly gives back to break-even,
+which is exactly the cost written into A3 (§5). None of this is a fill.
+
+**Item 9 — the statistical unit.** 259 rows = 259 unique setups on **58
+unique symbol-days** over 7 sessions. The three largest winning symbol-days
+(MEDS 09-16 +18.00 R over 12 rows, ELMT 09-14 +11.00 R over 7, RETO 09-16
++9.00 R over 12) carry **37 % of the total**; the mean without them is
++0.282 R. Per session the mean is positive on six of seven days and the
+median is −1.000 on four of them. R0 check: 0 fills, nothing to check yet.
+
+| session | n | mean R | median R |
+|---|---:|---:|---:|
+| 2026-09-11 | 36 | +0.333 | −1.000 |
+| 2026-09-14 | 31 | +0.839 | +2.000 |
+| 2026-09-15 | 15 | −0.009 | −1.000 |
+| 2026-09-16 | 58 | +0.500 | +0.500 |
+| 2026-09-17 | 33 | +0.663 | +2.000 |
+| 2026-09-18 | 26 | +0.115 | −1.000 |
+| 2026-09-21 | 60 | +0.177 | −1.000 |
+
+**Item 5 — the float-only cohort.** Of 36 prospective float kills, **23 fail
+nothing but float**; the other 13 also fail `rising`. On the armed-plan
+column the float-only rows read n = 23, mean +0.838, median +2.000 against
+the allowed cohort's n = 43, mean +0.287, median −1.000. That is the
+comparison the review asked for, and it is still 23 rows against 43 with the
+same contamination: a hypothesis, now with the right cohort behind it. (The
+per-gate block prints 35 float kills; the cohort block prints 36 because it
+includes one row without actuals.)
+
+**Item 6 — catalyst states, and an expectation that failed.** All
+prospective decisions: FOUND 33 · NONE 242 · UNKNOWN 3. Killed by the
+catalyst gate: NONE 104, UNKNOWN 0. The preregistration expected all
+catalyst kills to read UNKNOWN; they read NONE because the
+`catalyst_source_ok` input did not exist before the A2 commit of 2026-09-17,
+and a stored row without the key reads as a healthy feed when re-read
+through today's inputs. Those rows are **UNRECORDED**, not NONE;
+`gate_audit.py` now prints them so. The count that is real: 2026-09-18 FOUND
+19 · NONE 8 · UNKNOWN 3; 2026-09-21 FOUND 14 · NONE 48.
+
+**Gate audit, per gate (armed plan, capped +2 R / −1 R):** allowed n = 43
+mean +0.287 · catalyst-killed n = 99 mean +0.514 · float-killed n = 35 mean
++0.808 · pillars-killed n = 7 mean +0.286 · price-killed n = 59 mean +0.150 ·
+rising-killed n = 16 mean −0.000. Same hypotheses as the original pack, on
+one more session; nothing is tested.
+
+**Item 7 — `microflow.py measure` did not run.** It crashed on a division by
+zero: one dip on the 28,708-candle tape (2026-09-18 → 2026-09-21) carried a
+locked quote (bid = ask), and the spread gate divided by a zero ratio. Fixed
+the same evening (a locked quote is UNKNOWN, fail closed, tested); the owner
+re-runs it and the dips-inside-the-spread line goes here.
+
+**Replay (R11):** 309 of 682 reproduce under the current rules; 373 reproduce
+only under superseded sets (pre-A2 282, A2 91); 0 diverged. **Halts:** 0
+transitions in 7 sessions — before the collector fix of item 13, which is
+not yet in the run that produced this.
+
 ## Commands the owner runs to complete the numbers
 
 ```

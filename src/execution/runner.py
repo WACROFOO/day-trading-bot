@@ -333,6 +333,7 @@ class Runner:
             self.conn.commit()
             self.unreconciled = [x for x in out if x.startswith("STOP COVERS")]
             return out
+        out += self._resolve_gone_entries(ib)
         working = ("Submitted", "PreSubmitted", "monitored")
         for pos in ib.positions():
             qty = int(getattr(pos, "position", 0) or 0)
@@ -368,6 +369,45 @@ class Runner:
         self.unreconciled = [x for x in out if x.split(" ")[0] in ("UNTRACKED", "QUANTITY", "STOP")]
         return out
 
+    def _resolve_gone_entries(self, ib) -> list[str]:
+        """An unfilled entry the ledger still calls alive that the broker no
+        longer reports anywhere — not among its orders, not in today's
+        executions, no position in the name — is dead. After a restart IBKR
+        re-reports working orders and today's fills; a rejected or expired
+        order is in neither, and until 2026-09-21 such a row stayed alive in
+        the ledger for the rest of the session."""
+        out: list[str] = []
+        try:
+            trades = list(ib.trades())
+        except Exception:                                   # noqa: BLE001
+            return out
+        ids = {t.order.orderId for t in trades if getattr(t.order, "orderId", 0)}
+        perms = {getattr(t.order, "permId", 0) for t in trades}
+        refs = {getattr(t.order, "orderRef", "") for t in trades}
+        fills = []
+        if hasattr(ib, "fills"):
+            try:
+                fills = list(ib.fills())
+            except Exception:                               # noqa: BLE001
+                fills = []
+        fill_perms = {getattr(getattr(f, "execution", None), "permId", 0) for f in fills}
+        fill_refs = {getattr(getattr(f, "execution", None), "orderRef", "") for f in fills}
+        held = {p.contract.symbol for p in ib.positions() if int(getattr(p, "position", 0) or 0) > 0}
+        for r in L.open_orders(self.conn):
+            if r["fill_price"] is not None or not r["parent_id"]:
+                continue
+            at_broker = (r["parent_id"] in ids or (r["perm_id"] and r["perm_id"] in perms)
+                         or r["decision_id"] in refs or r["decision_id"] in fill_refs
+                         or (r["perm_id"] and r["perm_id"] in fill_perms))
+            if at_broker or r["symbol"] in held:
+                continue
+            L.mark_dead(self.conn, r["order_id"], "NotFilled",
+                        "not reported by the broker (no order, no execution, no position) — "
+                        "treated as never filled; it no longer counts as a live position")
+            out.append(f"GONE AT BROKER {r['symbol']} order #{r['order_id']} — marked NotFilled")
+        self.conn.commit()
+        return out
+
     # ------------------------------------------------------------- fills
     def sync_fills(self) -> int:
         """TRADE only. Pull fills from IBKR and write realised R + NBBO."""
@@ -387,10 +427,21 @@ class Runner:
             if p is not None and p.stop_qty is not None and p.stop_qty != r["stop_qty"]:
                 L.set_stop_qty(self.conn, r["order_id"], p.stop_qty)
         rows = self.conn.execute(
-            "SELECT order_id, parent_id, decision_id FROM orders WHERE fill_price IS NULL").fetchall()
+            "SELECT order_id, parent_id, decision_id, status FROM orders WHERE fill_price IS NULL").fetchall()
         for r in rows:
             p = by_parent.get(r["parent_id"])
-            if p is None or p.fill_price is None:
+            if p is None:
+                continue
+            # The broker's word on an entry that never filled: rejected or
+            # cancelled is dead, and the ledger must say so or the
+            # one-position rule counts a ghost (VEEE, 2026-09-21 09:37).
+            if p.fill_price is None and p.status in L.DEAD_ENTRY_STATUSES \
+                    and r["status"] not in L.DEAD_ENTRY_STATUSES + ("NotFilled",):
+                L.mark_dead(self.conn, r["order_id"], p.status,
+                            f"entry {p.status} at the broker before any fill — not a position")
+                n += 1
+                continue
+            if p.fill_price is None:
                 continue
             if p.filled_qty is not None:
                 L.set_filled_qty(self.conn, r["order_id"], p.filled_qty)

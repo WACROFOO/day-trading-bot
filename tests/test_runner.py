@@ -450,3 +450,46 @@ def test_13f_flat_is_the_brokers_word_not_the_sent_sell(journal):
     t.ib._positions = []
     assert r.confirm_flat() == ["flat confirmed from broker position state"]
     assert r.flat_confirmed is True and r.confirm_flat() == []         # said once
+
+
+def test_a_rejected_entry_reaches_the_ledger_and_frees_the_one_position_rule(journal):
+    """VEEE 2026-09-21 09:37: IBKR rejected the parent (201) and the ledger row
+    stayed 'submitted' all session, so every later entry was refused for a
+    position that never existed."""
+    t = FakeTrader()
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    r.step()
+    rec = t.placed[0]
+    assert L.positions_alive(journal) >= 1
+    rec.status = "Inactive"                                   # the broker's word: rejected
+    r.sync_fills()
+    o = journal.execute("SELECT status, decision_id FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o["status"] == "Inactive"
+    assert journal.execute("SELECT outcome FROM decisions WHERE decision_id=?", (o["decision_id"],)).fetchone()[0] == "NOT_FILLED"
+    alive_before = L.positions_alive(journal)
+    journal.execute("UPDATE orders SET status='Inactive' WHERE fill_price IS NULL"); journal.commit()
+    assert L.positions_alive(journal) == 0 or alive_before < len(t.placed)
+
+
+def test_an_entry_the_broker_no_longer_reports_after_a_restart_is_resolved_not_kept_alive(journal):
+    """After a restart IBKR re-reports working orders and today's fills. An
+    entry in neither, with no position in the name, is dead and is marked so
+    at reconciliation instead of blocking entries all day."""
+    t = ReconcilingTrader()
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    r.step()
+    assert L.positions_alive(journal) >= 1
+    # a fresh runner adopts the ledger's rows; the fake broker reports no trades, no fills, no positions
+    t2 = ReconcilingTrader()
+    t2.ib.fills = lambda: []
+    r2 = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t2, now=now, max_age_s=3600,
+                quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    assert any(n.startswith("GONE AT BROKER") for n in r2.startup_notes), r2.startup_notes
+    assert L.positions_alive(journal) == 0
+    rows = journal.execute("SELECT status FROM orders WHERE fill_price IS NULL").fetchall()
+    assert rows and all(x["status"] == "NotFilled" for x in rows)
+    assert r2.unreconciled == []                              # a resolved ghost is not a bar on entries

@@ -333,6 +333,18 @@ on the owner's ledger; from the cause recorded above (no keys all week) the
 expectation is that all 254 read UNKNOWN, and that expectation is written
 here before the number is read.
 
+**Read, 2026-09-21 14:04 ET — the expectation failed, for a reason that was
+in the code.** The owner's run printed *killed by the catalyst gate: NONE
+104* and UNKNOWN 3 in the whole ledger (all on 2026-09-18). The
+`catalyst_source_ok` input was created by the A2 commit on 2026-09-17; every
+row before that has no such key, and re-reading it through today's `Inputs`
+defaults the key to True, which reads as a healthy feed that found nothing.
+So the phase-A rows cannot say whether the feed was up: their state is
+**UNRECORDED**, not NONE, and `gate_audit.py` now prints them as such. The
+cause above (no keys in `.env`) stands on the operator's record of that
+week; the ledger itself cannot confirm it. A2's justification is therefore
+the deliberate-test one and nothing else.
+
 **Amendment A3 — the exit rule (IN FORCE from the first desk start after
 2026-09-21 21:00 ET; proposed the same morning, coded that evening).** The controls of 2026-09-21 (`exercise.py report`, sessions
 11–18 September, 199 triggered prospective rows) put the armed plan at mean
