@@ -125,6 +125,13 @@ def measure(conn, cfg, day: Optional[str] = None) -> dict:
     risks = [r["risk"] for r in rows if r["risk"] and r["risk"] > 0]
     ratios = [r["ratio"] for r in rows if r["ratio"] is not None]
     quoted = [r for r in rows if r["ratio"] is not None]
+    # The plan's own stop condition, measured directly (review 2026-09-21,
+    # item 7): a dip is INSIDE the spread when its depth — which IS the stop
+    # distance here, `Dip.risk_per_share = trigger − dip_low` — is at most
+    # one spread, i.e. spread ÷ risk ≥ 1. The median of that ratio was 0.41,
+    # so the median dip was NOT inside the spread; the NO-GO stood on the
+    # k-survival line instead, and the report must say which.
+    inside = [r for r in quoted if r["ratio"] >= 1.0]
     survive = {}
     for k in (2, 4, 6, 8, 10, 15, 20):
         n = sum(1 for r in quoted if r["ratio"] <= 1.0 / k)
@@ -139,6 +146,9 @@ def measure(conn, cfg, day: Optional[str] = None) -> dict:
         "dips_without_quote": len(rows) - len(quoted),
         "risk_per_share": _dist(risks),
         "spread_over_risk": _dist(ratios),
+        "dips_inside_spread": {"n": len(inside),
+                               "pct": round(100.0 * len(inside) / len(quoted), 1) if quoted else None,
+                               "median_dip_inside": bool(quoted) and median(ratios) >= 1.0},
         "survival_by_k": survive,
         "k_in_force": cfg.spread_k,
         "passing_at_k": sum(1 for r in rows if r["state"] == "PASS"),
@@ -179,7 +189,11 @@ def verdict(m: dict, cfg) -> tuple[str, list[str]]:
         reasons.append(f"only {pct}% of dips clear k={cfg.spread_k:g} — the spread "
                        f"eats a 10-second stop on this universe.")
     if med is not None and med >= 1.0:
-        reasons.append(f"the median spread is {med:.2f}x the whole stop.")
+        reasons.append(f"the plan's stop condition fired: the median dip is inside the spread "
+                       f"(median spread {med:.2f}x the whole stop).")
+    elif med is not None and reasons:
+        reasons.append(f"the plan's own stop condition (median dip inside the spread) did NOT fire: "
+                       f"median spread is {med:.2f} of the stop; this verdict rests on k-survival.")
     if reasons:
         return "NO-GO", reasons
 

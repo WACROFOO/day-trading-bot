@@ -76,8 +76,14 @@ def cmd_measure(conn, args) -> int:
             f"min ${r['min']} · max ${r['max']})")
         say(f"  spread ÷ risk    median {d['median']}  (p25 {d['p25']} · p75 {d['p75']} · "
             f"max {d['max']})")
-        say(f"  {DIM}the strategy's own best case is +0.25 R per trade, so a median "
-            f"of {d['median']} leaves {0.25 - (d['median'] or 0):+.3f} R{END}")
+        ins = m.get("dips_inside_spread") or {}
+        say(f"  dips INSIDE the spread (spread ≥ the whole stop): {ins.get('n', 0)} / {m['dips_with_quote']}"
+            f"  ({ins.get('pct')}%) — the plan's stop condition "
+            f"{'FIRED' if ins.get('median_dip_inside') else 'did NOT fire'} on the median")
+        say(f"  {DIM}best case +0.25 R per trade = 50% wins on the half-at-1R / half-at-2R ladder "
+            f"(MICRO-PULLBACK-SPEC.md §sizing: 25 x +1.5R, 25 x −1R over 50 trades = +12.5R); "
+            f"a median cost of {d['median']} leaves {0.25 - (d['median'] or 0):+.3f} R on the median "
+            f"setup — a median cost, not the expected cost of the subset a gate would select{END}")
     else:
         say("  — no quoted dip to measure")
     say()

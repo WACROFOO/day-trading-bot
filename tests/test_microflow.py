@@ -204,3 +204,28 @@ def test_no_module_in_the_package_can_place_an_order():
         src = f.read_text()
         for b in banned:
             assert b not in src, f"{f.name} names {b} — the order path lives in src/execution/"
+
+
+def test_the_verdict_names_which_condition_decided_it():
+    """Review item 7: median(spread/risk) = 0.41 is not "the median dip is
+    inside the spread". A NO-GO on k-survival must say the plan's own stop
+    condition did not fire; one on the median must say it did."""
+    m = {"candles": 5000, "dips": 200, "dips_with_quote": 180,
+         "survival_by_k": {8: {"n": 5, "pct": 2.8}}, "spread_over_risk": {"median": 0.41}}
+    v, why = M.verdict(m, DEFAULT)
+    assert v == "NO-GO" and any("did NOT fire" in w for w in why)
+    m["spread_over_risk"]["median"] = 1.4
+    v, why = M.verdict(m, DEFAULT)
+    assert v == "NO-GO" and any("stop condition fired" in w for w in why)
+
+
+def test_dips_inside_the_spread_are_counted_directly(tmp_path):
+    """The statistic the stop condition needs: how many quoted dips have a
+    spread at least as wide as their whole stop."""
+    rows = [{"ratio": r} for r in (0.2, 0.5, 1.0, 2.5)]
+    quoted = [r for r in rows if r["ratio"] is not None]
+    inside = [r for r in quoted if r["ratio"] >= 1.0]
+    assert len(inside) == 2
+    # and the same arithmetic inside measure(): built from the module's own rule
+    src = (ROOT / "src/momentum_platform/microflow/measure.py").read_text()
+    assert 'inside = [r for r in quoted if r["ratio"] >= 1.0]' in src

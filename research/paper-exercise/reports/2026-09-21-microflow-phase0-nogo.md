@@ -1,4 +1,18 @@
-# Phase 0 — the 10-second micro pullback: **NO-GO**
+# Phase 0 — the 10-second micro pullback: **poor initial execution feasibility; development paused**
+
+> **Corrected 2026-09-21 evening (external review, item 7).** The first
+> version of this report said the plan's pre-registered stop condition —
+> *"if the median dip is inside the spread, stop here"* — had fired "not by a
+> narrow margin". It had not. Dip depth and stop distance are the same
+> quantity here (`Dip.risk_per_share = trigger − dip_low`), so a dip is
+> inside the spread when spread ÷ risk ≥ 1. The measured median is
+> **0.4091**: the median dip is about two and a half spreads deep, outside
+> the spread. What did fire is the second, independent condition in
+> `measure.verdict`: fewer than 10 % of quoted dips clear k = 8 (2 of 37).
+> The verdict is renamed accordingly and the two conditions are now printed
+> separately by `scripts/microflow.py measure` ("dips INSIDE the spread: n /
+> quoted"). The economics below are unchanged and still serious; what
+> changed is which sentence they support.
 
 **PROVENANCE** · `data/journal.sqlite`, table `bars_10s` · 10,320 ten-second
 candles across 13 symbols, 2026-09-18 11:23:50Z → 15:31:30Z (one session,
@@ -20,7 +34,8 @@ check with one question able to end the project:
 > *"distribution of 10-second dip depth, in cents and in spread multiples —
 > sets `k` in M5; **if the median dip is inside the spread, stop here**"*
 
-It is. Not by a narrow margin.
+It is not: median spread ÷ dip 0.41 means the median dip is outside the
+spread. The pause rests on the k-survival line (§4), not on this condition.
 
 ## 2. The funnel
 
@@ -43,11 +58,18 @@ It is. Not by a narrow margin.
 | spread ÷ risk | **0.4091** | 0.25 | 0.6667 | — | 4.75 |
 
 A 10-second pullback puts the stop a **nickel** under the trigger. The spread
-on these names is two cents. **The round trip costs 0.41 R before the trade
-is right or wrong.**
+on these names is two cents. **The round trip costs 0.41 R on the median
+setup before the trade is right or wrong.**
 
-The strategy's own best case is +0.25 R per trade. A cost of 0.41 R leaves
-**−0.159 R**, every time, on the median setup.
+The strategy's own best case is +0.25 R per trade. That figure is derived,
+not measured: 50 % wins on the half-at-1 R / half-at-2 R ladder, so over 50
+trades 25 × +1.5 R and 25 × −1 R = +12.5 R, +0.25 R per trade before costs
+(`knowledge-base/strategies/MICRO-PULLBACK-SPEC.md` §Sizing). A cost of
+0.41 R leaves **−0.159 R** on the *median* setup. Two things that sentence
+does not say: a median cost is not the expected cost of the subset a gate
+would select (at k = 4 the qualifying dips cost at most 0.25 R and some cost
+less), and no context gate was applied, so the population is not the one a
+detector would trade. The arithmetic bounds the idea; it does not close it.
 
 ## 4. Survival by gate
 
@@ -78,7 +100,9 @@ survives them is a subset of a population that already fails.
 ## 6. What this does not establish
 
 - **One session, 13 symbols, 37 quoted dips.** Small, and not a claim about
-  any other universe or any other day.
+  any other universe or any other day. The 37 dips are not 37 independent
+  observations: they come from 13 names on one morning, several from the
+  same push, and one wide-spread name contributes many of them.
 - The quote is the last tick at or before the dip, **not the quote at a fill**.
 - No fill, no slippage, no partial fill, no commission is modelled — every one
   of which makes the number worse, none better.
@@ -89,10 +113,16 @@ survives them is a subset of a population that already fails.
 
 ## 7. Verdict
 
-**NO-GO. Phase 1 is not built.**
+**Poor initial execution feasibility; development paused. Phase 1 is not
+built.** The plan's second session of capture is kept: `bars_10s` costs
+nothing to record and `measure` re-runs in one command, so the pause is
+re-read after session two rather than declared closed on one.
 
-The pre-registered stop condition fired on the first session of captured tape:
-the median dip is inside the spread by a factor that no gate setting recovers.
+The pre-registered median-dip condition did **not** fire (0.41, see the
+correction at the top). The k-survival condition did: 2 of 37 quoted dips
+clear k = 8, and at every lower k the spread's cost meets or exceeds the
+best case. On one session that is a reason to build nothing yet, not a
+rejection of every filtered version of the idea.
 
 Phase 0 cost three days and one module. It was written to be able to say this,
 and saying it is the whole return on it.
@@ -103,11 +133,13 @@ measurement, and `measure.py` can be re-run on any later session in one
 command. What is abandoned is the *entry idea*: that a pause inside a pushing
 1-minute candle is a tradeable trigger on small caps at this spread.
 
-**Where the attention should go instead:** the exit rule. The controls in the
-same ledger say the 2 R target forfeits the tail that carries the whole
-distribution (`exercise.py report`, 2026-09-21: strategy mean +0.461 R against
-hold-to-close +6.301 R on the same 199 rows). That is a much larger effect than
-anything a finer entry resolution was ever going to produce.
+**Where the attention went next:** the exit rule, as a hypothesis. The
+controls in the same ledger put the simulated 2 R target at +0.461 R against
+a stop-less hold-to-close at +6.301 R on the same 199 rows (`exercise.py
+report`, 2026-09-21) — 192 of them cascade-killed, zero fills, micro-cent
+stops, no uncertainty estimate. Amendment A3 tests it forward with the
+fixed-target rule simulated beside it; nothing here shows which exit is
+better.
 
 ---
 
