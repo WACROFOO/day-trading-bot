@@ -242,9 +242,32 @@ class UptrendScanner(Scanner):
       4. liquidity  — 5-minute volume at or above the floor;
       5. price      — at or above `min_price`.
 
-    Every threshold is an Approximation: the Warrior formula is Unknown. The
-    event fires on the rising edge and re-arms after the condition has failed
-    for three snapshots, so a name that keeps trending fires once per leg."""
+    Every threshold is an Approximation: the Warrior formula is Unknown.
+
+    3.0.0 (2026-09-21) — three things the 2.0.0 rule got wrong on a live tape:
+
+      6. right now   — the print must be AT the window's high (within
+                      `at_high_tol_pct`). VEEE fired at 18.20 on a red bar
+                      with the 10-minute high at 18.71: "up 3% over ten
+                      minutes" was true, "squeezing up right now" was not.
+      7. below HOD   — `knowledge-base/strategies/SCANNERS.md` §B4, w97
+                      [01:00:52]: "it has to be below the high of day.
+                      Otherwise we'll put it on the high of day momentum
+                      scanner." At or above the session high this scanner
+                      is silent; that event belongs to HOD momentum. The two
+                      tiles are mutually exclusive by construction.
+      8. once per leg — a repeat alert on the same name needs a NEW LEG:
+                      at least one completed minute since the last alert that
+                      did not print a higher high (a pause or a pullback),
+                      followed by a print back at the window high that is
+                      HIGHER than the previous alert by `min_advance_pct`.
+                      Time alone never re-arms it: a name stalling at its
+                      high is still the same leg after five minutes. A name
+                      grinding higher on nothing but higher highs is one leg
+                      and one alert, however long it runs. The 2.0.0 re-arm
+                      was "three failed snapshots", and with a snapshot every
+                      three seconds that was nine seconds: VEEE alerted at
+                      09:55, 09:56 and 09:57 on one move."""
 
     def __init__(
         self,
@@ -253,8 +276,10 @@ class UptrendScanner(Scanner):
         fresh_minutes: int = 3,
         min_volume_5m: float = MIN_VOLUME_5M,
         min_price: float = 1.0,
-        version: str = "2.0.0",
+        version: str = "3.0.0",
         min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
+        at_high_tol_pct: float = 0.5,
+        min_advance_pct: float = 1.0,
     ) -> None:
         self.scanner_id = "running_up"
         self.definition_version = f"running_up@{version}"
@@ -263,8 +288,23 @@ class UptrendScanner(Scanner):
         self.fresh_minutes = fresh_minutes
         self.min_volume_5m = min_volume_5m
         self.min_price = min_price
-        self._edges = EdgeTracker(rearm_after_fails=3)
         self.min_pillars = min_pillars
+        self.at_high_tol_pct = at_high_tol_pct
+        self.min_advance_pct = min_advance_pct
+        self._last_alert: dict = {}          # symbol -> (ts, price)
+
+    def _new_leg_since(self, state: SymbolState, since, cutoff) -> bool:
+        """True when a completed minute after `since` failed to print a higher
+        high than every bar before it in the window: the move paused or pulled
+        back, so a print back at the window high is a new leg, not the same one."""
+        running_high = None
+        for b in state.minute_bars:
+            if b.ts < cutoff:
+                continue
+            if running_high is not None and b.ts > since and b.high <= running_high:
+                return True
+            running_high = b.high if running_high is None else max(running_high, b.high)
+        return False
 
     def _window(self, state: SymbolState, now) -> list:
         from datetime import timedelta
@@ -301,12 +341,32 @@ class UptrendScanner(Scanner):
         vwap_ok = vwap is not None and current.last >= vwap
         volume_ok, _vol_only, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
         price_ok = current.last >= self.min_price
-        qualifies = move_ok and fresh_ok and vwap_ok and volume_ok and price_ok
-        if not self._edges.rising_edge(current.symbol, qualifies):
+        # 6. right now: the print is at the window's high, not pulling back from it
+        at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
+        at_high_ok = current.last >= at_high_floor
+        # 7. below the high of day, or this is HOD momentum's event (§B4)
+        hod = current.session_high
+        below_hod_ok = hod is None or current.last < hod
+        qualifies = (move_ok and fresh_ok and vwap_ok and volume_ok and price_ok
+                     and at_high_ok and below_hod_ok)
+        if not qualifies:
             return []
+        # 8. once per leg: a repeat needs a new leg (a pause since the last alert,
+        #    then a print back at the high) AND a higher price than that alert
+        prev = self._last_alert.get(current.symbol)
+        if prev is not None:
+            prev_ts, prev_px = prev
+            cutoff = now - timedelta(minutes=self.window_minutes)
+            if not self._new_leg_since(state, prev_ts, cutoff):
+                return []
+            if current.last < prev_px * (1.0 + self.min_advance_pct / 100.0):
+                return []
+        self._last_alert[current.symbol] = (now, current.last)
         reasons = [
             Reason(f"move_{self.window_minutes}m_pct", _round(move_pct), move_ok, self.threshold_pct),
             Reason(f"fresh_high_{self.fresh_minutes}m", _round(recent_high), fresh_ok, _round(window_high)),
+            Reason("at_window_high", _round(current.last), at_high_ok, _round(at_high_floor)),
+            Reason("below_hod", _round(current.last), below_hod_ok, _round(hod)),
             Reason(f"above_vwap_{self.window_minutes}m", _round(current.last), vwap_ok, _round(vwap)),
             Reason("volume_5m", current.volume_5m, volume_ok, self.min_volume_5m),
             Reason("pillars_passed", pillars, volume_ok, self.min_pillars),

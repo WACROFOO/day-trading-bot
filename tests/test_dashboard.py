@@ -1208,3 +1208,13 @@ def test_the_simulated_book_never_reads_as_the_real_tape():
            / "dashboard" / "web" / "app.js").read_text()
     assert "caps the move until it is consumed" not in app
     assert "SIMULATED book" in app
+
+
+def test_top_gainers_are_ordered_by_change_on_the_day():
+    """GRML +141% · VEEE +109% · CPOP +25% · LOBO +128% · GLND +127% was the
+    tile at 09:58 on 2026-09-21: server rows first, desk additions after,
+    each sorted on its own. One order for the whole tile."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("const all = rows.concat(extra);")[1][:600]
+    assert "all.sort(" in body and "changePct" in body

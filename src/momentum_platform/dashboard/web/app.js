@@ -802,9 +802,17 @@ function fillListCard(card, id, frame) {
       scores[sym] = sc.passed;
       if (!have.has(sym) && sc.passed >= 3 && sc.row && sc.row.price != null) extra.push(sc.row);
     });
-    extra.sort((a, b) => (scores[b.symbol] - scores[a.symbol]) || ((b.changePct || -1e9) - (a.changePct || -1e9)));
   }
+  // The tile is called Top GAINERS: one order, by change on the day,
+  // descending, across the server's rows and the desk's additions alike.
+  // Until 2026-09-21 the server rows came first (sorted) and the additions
+  // after (sorted by score), so GRML +141% · VEEE +109% · CPOP +25% · LOBO
+  // +128% read as no order at all. Pillar score breaks ties only.
   const all = rows.concat(extra);
+  if (id === "five_pillars_list") {
+    all.sort((a, b) => ((b.changePct == null ? -1e9 : b.changePct) - (a.changePct == null ? -1e9 : a.changePct))
+                       || ((scores[b.symbol] || 0) - (scores[a.symbol] || 0)));
+  }
   let ordered = all, pending = 0;
   if (froz) {
     const byS = {}; all.forEach(r => byS[r.symbol] = r);

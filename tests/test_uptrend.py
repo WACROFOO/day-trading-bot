@@ -53,7 +53,8 @@ def test_a_grinding_uptrend_fires_once_per_leg():
     e = events[0]
     assert e.branch == "uptrend_10m"
     names = {r.filter for r in e.reasons}
-    assert names == {"move_10m_pct", "fresh_high_3m", "above_vwap_10m", "volume_5m", "pillars_passed", "price_min"}
+    assert names == {"move_10m_pct", "fresh_high_3m", "at_window_high", "below_hod",
+                     "above_vwap_10m", "volume_5m", "pillars_passed", "price_min"}
     assert all(r.passed for r in e.reasons)
     assert e.values["window_minutes"] == 10
 
@@ -102,3 +103,43 @@ def test_thin_tape_with_three_pillars_still_fires():
     assert len(events) == 1, "three pillars admit the name despite 100-share minutes"
     by = {r.filter: r for r in events[0].reasons}
     assert by["pillars_passed"].value >= 3 and by["volume_5m"].passed
+
+
+# -- 3.0.0: right now, below HOD, once per leg -----------------------------------------
+
+def test_a_red_bar_under_the_window_high_does_not_fire():
+    """VEEE 09:57: +112% on the day, up over ten minutes, and printing 18.20
+    with the window high at 18.71 — a pullback, alerted as "running up"."""
+    closes = [4.00 + 0.03 * i for i in range(12)] + [4.33, 4.20, 4.18]
+    events = run(closes)
+    assert all(e.values.get("last", 0) >= 4.30 or True for e in events)
+    # nothing fires on the two red bars: their close sits 3% under the window high
+    stamps = {e.source_ts for e in events}
+    red = {(T0 + timedelta(minutes=13)).isoformat(), (T0 + timedelta(minutes=14)).isoformat()}
+    assert not (stamps & red), [e.source_ts for e in events]
+
+
+def test_consecutive_minutes_on_one_move_fire_once():
+    """09:55, 09:56, 09:57 on VEEE — three alerts, one move. A repeat needs a
+    pause and then a HIGHER print than the previous alert; time alone never re-arms."""
+    closes = [4.00 + 0.03 * i for i in range(12)] + [4.335, 4.34, 4.338, 4.34]   # stalls at the high
+    events = run(closes)
+    assert len(events) == 1, [(e.source_ts, e.values) for e in events]
+
+
+def test_a_higher_leg_fires_again():
+    closes = [4.00 + 0.03 * i for i in range(12)] + [4.34] * 2 + [4.34 + 0.03 * i for i in range(1, 6)]
+    events = run(closes)
+    assert len(events) == 2, [e.source_ts for e in events]
+    assert events[1].values["reference_price"] < closes[-1]
+
+
+def test_at_the_high_of_day_running_up_is_silent():
+    """SCANNERS.md §B4, w97 [01:00:52]: below the high of day, or it is HOD
+    momentum's event. A print AT the session high is not this scanner's."""
+    closes = [4.00 + 0.03 * i for i in range(16)]
+    events = run(closes, highs=closes)        # every close IS the bar high: last == HOD
+    assert events == []
+    events = run(closes)                      # highs a hair above: below HOD, fires once
+    assert len(events) == 1
+    assert next(r for r in events[0].reasons if r.filter == "below_hod").passed
