@@ -565,3 +565,38 @@ def test_the_scan_ranks_ties_deterministically():
                 quotes={s: FakeTicker(last=4.4, close=4.0) for s in ("AAA", "BBB", "CCC")})
     out = sc.build_ibkr_screener(ib, 1.0, 20.0, min_gain=5.0, clock=Clock())
     assert [r["symbol"] for r in out["rows"]] == ["AAA", "BBB", "CCC"], "ties break on the symbol"
+
+
+# -- one name's bars stop while another's keep flowing ------------------------------
+
+def test_a_symbol_whose_bars_never_arrive_is_re_requested_on_its_own():
+    """GRML, 2026-09-21: joined from the scanner after 06:55, quotes and a
+    1-minute chart (from history), no five-second bars all morning — so no
+    10-second candles and a pane reading "empty rather than invented". The
+    connection-wide stall clock saw nothing: LGHL's bars kept it fresh.
+
+    Per-symbol: BBB's quotes arrive, BBB's bars do not, AAA is fine. Only BBB
+    is re-requested, AAA's stream is left alone, and the health payload names
+    BBB so the page can say why its pane is empty."""
+    desk, ib, clock = make_desk()
+    lines: list = []
+    desk.log = lines.append
+    desk._bootstrap()
+    ib.push_bar("AAA", T0, 4, 4, 4, 4, 100)
+    desk.tick()
+    for i in range(1, 4):                              # AAA keeps printing bars
+        ib.push_bar("AAA", T0 + timedelta(minutes=i), 4, 4, 4, 4, 100)
+    clock.now = T0 + timedelta(minutes=6)
+    ib.push_bar("AAA", clock.now, 4, 4, 4, 4, 100)     # global clock is fresh
+    ib.quotes["BBB"].last = 8.88                       # BBB: quotes only
+    desk.stream.poll_tickers()
+    assert desk.stream.bars_stalled_for(clock.now) < 60, "the connection looks healthy"
+    assert desk.stream.stalled_symbols(clock.now, threshold=300) == ["BBB"]
+    before = desk.stream.health.resubscribes
+    desk.tick()
+    assert desk.stream.health.resubscribes == before + 1
+    assert "BBB" in desk.stream.health.bars_stalled
+    assert desk.stream.health.as_dict()["barsStalled"] == ["BBB"]
+    assert any("re-requesting those streams" in m and "BBB" in m and "AAA" not in m
+               for m in lines), lines[-5:]
+    assert set(desk.stream.symbols) == {"AAA", "BBB"}

@@ -1848,7 +1848,10 @@ function renderCharts(frame) {
     PANES.d.render([], {});
     // What is true, rather than a claim about the provider's capabilities:
     // this session carries no sub-minute data for this symbol.
-    PANES.d.note("No sub-minute data for " + sym + " in this session. Empty rather than invented.");
+    const stalled = ((S.provider && S.provider.barsStalled) || []).indexOf(sym) >= 0;
+    PANES.d.note(stalled
+      ? "IBKR is sending quotes for " + sym + " but no five-second bars — the desk is re-requesting the stream. Empty rather than invented."
+      : "No sub-minute data for " + sym + " in this session. Empty rather than invented.");
   }
   PANES.c.render(meta.dailyBars || [], { ema9: true, ema20: true, ema200: true, h52: meta.high52w, symbol: sym, tf: "D" });
   if (PENDING_RANGES && !S.streaming) {   // first paint after a live reload: give the zoom back

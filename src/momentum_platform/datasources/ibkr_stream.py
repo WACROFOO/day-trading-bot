@@ -264,6 +264,7 @@ class Health:
     subscriptions: int = 0
     resubscribes: int = 0                   # bar streams re-requested after a stall
     farm_ok: bool = True                    # TWS market-data farm connection
+    bars_stalled: List[str] = field(default_factory=list)   # names with quotes but no bars
     messages: Deque[str] = field(default_factory=lambda: deque(maxlen=20))
 
     def as_dict(self) -> dict:
@@ -273,6 +274,7 @@ class Health:
             "readOnly": self.read_only, "marketDataType": self.market_data_type,
             "serverVersion": self.server_version, "generation": self.generation,
             "reconnects": self.reconnects, "lastQuoteAt": iso(self.last_quote_at),
+            "barsStalled": list(self.bars_stalled),
             "lastBarAt": iso(self.last_bar_at), "lastError": self.last_error,
             "pacing": self.pacing, "subscriptions": self.subscriptions,
             "resubscribes": self.resubscribes, "farmOk": self.farm_ok,
@@ -322,6 +324,9 @@ class IbkrStream:
         self._symbols: List[str] = []
         self._contracts: Dict[str, object] = {}
         self._tickers: Dict[str, object] = {}
+        self._quote_at: Dict[str, datetime] = {}
+        self._bar_at: Dict[str, datetime] = {}
+        self._subscribed_at: Dict[str, datetime] = {}
         self._last_quote: Dict[str, tuple] = {}      # last (price, bid, ask, size) seen
         self._bar_lists: Dict[str, object] = {}
         self._lock = threading.RLock()
@@ -421,11 +426,52 @@ class IbkrStream:
                 except Exception:
                     pass
                 self._symbols.append(sym)
+                self._subscribed_at[sym] = self.clock()
                 added.append(sym)
                 if backfill_seconds:
                     self.backfill(sym, backfill_seconds)
             self.health.subscriptions = len(self._symbols) * 2
         return added
+
+    def resubscribe(self, symbols: List[str], backfill_seconds: int = 900) -> List[str]:
+        """Re-request the quote and bar streams for THESE symbols only."""
+        wanted = [s for s in symbols if s in self._symbols]
+        if not wanted:
+            return []
+        with self._lock:
+            for sym in wanted:
+                self._unsubscribe(sym)
+            self.health.resubscribes += 1
+            self.health.messages.append(f"resubscribed {', '.join(wanted)} after a bar stall")
+        return self.subscribe(wanted, backfill_seconds=backfill_seconds)
+
+    def stalled_symbols(self, now: Optional[datetime] = None, threshold: float = 120.0) -> List[str]:
+        """Symbols whose quotes are arriving but whose five-second bars are not.
+
+        `bars_stalled_for` judges the CONNECTION: one `last_bar_at` for every
+        name. A symbol that joined the desk later — from the scanner, not the
+        06:55 watchlist — with a bar stream that never started, or died in a
+        farm flap, is invisible to it for as long as any other name's bars
+        keep the global clock fresh. GRML, 2026-09-21: quotes and a 1-minute
+        chart (from history), no 5-second bars, so no 10-second candles, for
+        the whole morning, and the watchdog saw nothing wrong.
+
+        A symbol counts as stalled when a quote arrived in the last 90 s and
+        either no bar has EVER arrived since it was subscribed `threshold`
+        seconds ago, or its last bar is older than `threshold`."""
+        now = now or self.clock()
+        out = []
+        for sym in list(self._symbols):
+            q = self._quote_at.get(sym)
+            if q is None or (now - q).total_seconds() > 90:
+                continue                                    # no quotes either: not a bar stall
+            b = self._bar_at.get(sym)
+            since = b if b is not None else self._subscribed_at.get(sym)
+            if since is None:
+                continue
+            if (now - since).total_seconds() >= threshold:
+                out.append(sym)
+        return out
 
     def _unsubscribe(self, sym: str) -> None:
         c = self._contracts.get(sym)
@@ -501,6 +547,7 @@ class IbkrStream:
         if not self.store.append(Bar5s(symbol, ts.astimezone(UTC), o, h, l, c, v)):
             return
         self.health.last_bar_at = self.clock()
+        self._bar_at[symbol] = self.health.last_bar_at
         self._emit_closed(symbol)
 
     def ingest_quote(self, symbol: str, price: Optional[float], size: float = 0.0,
@@ -512,6 +559,7 @@ class IbkrStream:
             self.health.messages.append(f"{symbol}: DELAYED market data type {market_data_type} rejected")
             return
         self.health.last_quote_at = self.clock()
+        self._quote_at[symbol] = self.health.last_quote_at
         self.on_update(MarketUpdate(symbol=symbol, ts=self.clock(), price=price, size=size,
                                     bid=bid, ask=ask, data_status=DataStatus.LIVE))
 

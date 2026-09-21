@@ -480,7 +480,12 @@ class IbkrDesk:
         see this: the socket never dropped."""
         s = self.stream
         stalled = s.bars_stalled_for(self.clock())
-        due = self._resubscribe_wanted or (stalled is not None and stalled >= self.bar_stall_seconds)
+        # Per-symbol: a late-joining name with no bar stream is invisible to the
+        # connection-wide clock above while any other name's bars flow.
+        per_symbol = s.stalled_symbols(self.clock(), threshold=self.bar_stall_seconds)
+        s.health.bars_stalled = per_symbol
+        due = (self._resubscribe_wanted or per_symbol
+               or (stalled is not None and stalled >= self.bar_stall_seconds))
         if not due:
             return False
         now = time.monotonic()
@@ -488,6 +493,17 @@ class IbkrDesk:
             return False
         self._next_resubscribe = now + self.resubscribe_every
         wanted, self._resubscribe_wanted = self._resubscribe_wanted, False
+        if per_symbol and not wanted and (stalled is None or stalled < self.bar_stall_seconds):
+            # Only some names are silent: re-request those, leave the rest alone.
+            self.log(f"  no five-second bars for {', '.join(per_symbol)} while their quotes "
+                     f"kept arriving — re-requesting those streams")
+            try:
+                s.resubscribe(per_symbol)
+            except Exception as exc:
+                self.log(f"  resubscribe failed: {exc}")
+                return False
+            self.publisher.publish_health(self.health())
+            return True
         # Name the condition that fired. 2026-09-08 the startup 'connection
         # restored' notice was logged as "no bars for 1s", which read as a
         # stall that never happened.
