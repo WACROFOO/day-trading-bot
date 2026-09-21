@@ -286,6 +286,52 @@ Owner action that remains: put Alpaca paper keys back in `.env`
 (`ALPACA_KEY_ID`, `ALPACA_SECRET_KEY`, see `.env.example`), or the gate
 reads UNKNOWN on every name and the split above has one empty side.
 
+**Amendment A3 — the exit rule (PROPOSED, 2026-09-21, design only; no code
+has changed).** The controls of 2026-09-21 (`exercise.py report`, sessions
+11–18 September, 199 triggered prospective rows) put the armed plan at mean
++0.461 R against hold-to-close at +6.301 R **on the same entries**, with all
+three medians negative: most trades lose, a few run enormously, and the fixed
+2 R target sells exactly the runners. This is failure condition ② of §6,
+observed in the ledger's own controls.
+
+Honesty constraint before adopting it: 192 of those 199 rows are plans the
+cascade KILLED; the allowed cohort is 7 rows. The signal is strong in
+direction and thin in the cohort that would actually have traded, so A3 is
+adopted as a **forward test**, not as a conclusion.
+
+The proposed rule, stated so it can be implemented and killed:
+
+- entry and sizing unchanged; initial stop unchanged; total planned risk
+  stays the owner's $20;
+- **no fixed profit target.** The protective stop trails the high since
+  entry at a distance of one initial risk (1 R per share), ratcheting up,
+  never down. A trade that reaches +2 R and retraces exits at about +1 R; a
+  trade that runs keeps running until it gives back 1 R from its peak;
+- the 11:30 flatten and every phase gate are untouched;
+- the OLD rule keeps being computed for every decision by `journal.controls`
+  ("strategy" series), so from the first fill the two exits are an A/B on
+  identical entries — the old rule survives as the control of the new one.
+
+Kill rule for A3, before its data exists: if after 30 taken trades the
+trailing exit's mean planned R is below the fixed-target control's on the
+same fills, A3 is reverted in one commit and the reversion recorded here.
+
+Implementation note: this changes `src/execution` order construction and is
+NOT in force until a commit lands it, its tests pass, and this PROPOSED is
+replaced with the owner's date. Until then the desk trades the old rule.
+
+**Amendment A4 — re-derive the `rising` gate threshold from measurement
+(PROPOSED, 2026-09-21; measurement first, no threshold has changed).** On
+2026-09-18 the cascade killed IMCC on `rising` at 3.65, 3.05, 6.00 and 6.25
+during a 3 → 8 run — the MSGY shape (rejected untested, ran 2.54 → 5.43).
+One sting is not a distribution, so the audit comes first:
+`python3 scripts/gate_audit.py` (read-only) reports, for every kill gate,
+how many killed plans later triggered, what the armed rule and hold-to-close
+would have returned on them, their MFE, and every kill that went on to run
+≥ 2 R, by name. A gate earns its keep only if the cohort it kills does worse
+than the cohort it allows. Any threshold change is written here with the
+audit's numbers beside it BEFORE the constant moves.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
