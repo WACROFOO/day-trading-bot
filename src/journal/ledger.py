@@ -685,6 +685,23 @@ def funnel(conn: sqlite3.Connection) -> dict:
     }
 
 
+def r0_violations(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """R0 = quantity × |fill − INITIAL stop| is the only realised-risk
+    denominator (review 2026-09-21, item 8). A trailed stop (A3) moves
+    `trail_stop`, never `stop`, and `record_fill` / `refresh_fill` divide by
+    `stop`; this lists any filled row whose stored realised_risk disagrees
+    with that arithmetic, so a future change that redefined R shows up in
+    the report instead of in a mean."""
+    out = []
+    for r in conn.execute("SELECT order_id, symbol, fill_price, stop, shares, filled_qty, realised_risk "
+                          "FROM orders WHERE fill_price IS NOT NULL"):
+        qty = r["filled_qty"] if r["filled_qty"] else r["shares"]
+        expect = round((r["fill_price"] - r["stop"]) * qty, 2)
+        if r["realised_risk"] is None or abs(r["realised_risk"] - expect) > 0.011:
+            out.append(r)
+    return out
+
+
 def reconcile_allowed(conn: sqlite3.Connection) -> dict:
     """plans_allowed against the sum of its outcomes. `residual` is the
     number of allowed decisions carrying an outcome outside OUTCOMES — zero

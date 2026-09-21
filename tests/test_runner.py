@@ -306,3 +306,23 @@ def test_a3_never_trails_in_log_only_and_leaves_a_sent_exit_alone(journal):
     journal.execute("UPDATE orders SET status='ExitPending' WHERE order_id=?", (o["order_id"],)); journal.commit()
     _bar(journal, rec.symbol, "2026-09-01T13:53:00+00:00", round(o["trigger"] + 3 * (o["trigger"] - o["stop"]), 2))
     assert r.trail_stops() == [] and not getattr(t, "moves", [])
+
+
+def test_r0_is_the_initial_stop_and_a_trailed_stop_never_moves_it(journal):
+    """Review item 8. realised_risk = qty × (fill − INITIAL stop). Three trail
+    moves later it is the same number, and the ledger's own check agrees."""
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    r0 = o["realised_risk"]
+    assert r0 == round((o["fill_price"] - o["stop"]) * o["shares"], 2)
+    rps = o["trigger"] - o["stop"]
+    for i, k in enumerate((1.5, 2.5, 4.0)):
+        _bar(journal, rec.symbol, f"2026-09-01T13:5{3 + i}:00+00:00", round(o["trigger"] + k * rps, 2))
+        assert len(r.trail_stops()) == 1
+    o2 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o2["trail_stop"] > o2["stop"] and o2["stop"] == o["stop"]
+    assert o2["realised_risk"] == r0 and o2["slippage_ratio"] == o["slippage_ratio"]
+    assert L.r0_violations(journal) == []
+    journal.execute("UPDATE orders SET realised_risk=realised_risk*3 WHERE order_id=?", (o["order_id"],)); journal.commit()
+    assert [v["order_id"] for v in L.r0_violations(journal)] == [o["order_id"]]
