@@ -256,11 +256,19 @@ mean +0.287 · catalyst-killed n = 99 mean +0.514 · float-killed n = 35 mean
 rising-killed n = 16 mean −0.000. Same hypotheses as the original pack, on
 one more session; nothing is tested.
 
-**Item 7 — `microflow.py measure` did not run.** It crashed on a division by
-zero: one dip on the 28,708-candle tape (2026-09-18 → 2026-09-21) carried a
-locked quote (bid = ask), and the spread gate divided by a zero ratio. Fixed
-the same evening (a locked quote is UNKNOWN, fail closed, tested); the owner
-re-runs it and the dips-inside-the-spread line goes here.
+**Item 7 — `microflow.py measure`, session two (owner's run after the
+locked-quote fix, 2026-09-21 evening).** 28,708 ten-second candles, 28
+symbols, 2026-09-18 → 2026-09-21. 104 shapes (no context gate, an upper
+bound), 80 quoted, 24 without a quote. Risk per share median $0.09 (p25
+$0.0263, p75 $0.22). Spread ÷ risk median **0.3333** (p25 0.2, p75 0.8).
+**Dips inside the spread: 15 / 80 (18.8 %)** — the plan's stop condition
+did not fire on the median, on two sessions now. Survival: k = 2 62.5 %,
+k = 4 36.2 %, k = 6 20.0 %, **k = 8 8.8 % (7 / 80)**. Verdict printed:
+NO-GO on the k-survival line, with the stop condition stated as not fired.
+The first run had crashed on one locked quote (bid = ask); that quote now
+reads UNKNOWN and fails closed. The status of the plan stays *poor initial
+execution feasibility; development paused*: two sessions say the same
+thing, and the population is still unfiltered shapes on one universe.
 
 **Replay (R11):** 309 of 682 reproduce under the current rules; 373 reproduce
 only under superseded sets (pre-A2 282, A2 91); 0 diverged. **Halts:** 0

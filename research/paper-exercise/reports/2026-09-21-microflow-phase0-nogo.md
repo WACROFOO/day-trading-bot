@@ -124,6 +124,12 @@ clear k = 8, and at every lower k the spread's cost meets or exceeds the
 best case. On one session that is a reason to build nothing yet, not a
 rejection of every filtered version of the idea.
 
+**Session two, read 2026-09-21 evening (tape 2026-09-18 → 2026-09-21,
+28,708 candles, 28 symbols, 104 shapes, 80 quoted):** spread ÷ risk median
+0.3333; dips inside the spread 15 / 80 (18.8 %); 7 / 80 clear k = 8 (8.8 %);
+verdict NO-GO on the k-survival line, stop condition not fired. Same answer
+as session one, on a tape twice the size. The pause stands.
+
 Phase 0 cost three days and one module. It was written to be able to say this,
 and saying it is the whole return on it.
 

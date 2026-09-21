@@ -210,7 +210,7 @@ def limitations() -> list[str]:
         "NOT applied, so the dip count is an optimistic upper bound.",
         "The quote is the last tick at or before the dip, not the quote at a fill.",
         "No fill, no slippage, no partial fill and no commission is modelled.",
-        "A halt inside a dip is not detected; the halts table has been empty for "
-        "five sessions and that is unexplained.",
+        "A halt inside a dip is not detected; the halts table was empty before the "
+        "collector fix of 2026-09-21, so no captured pause exists to test against yet.",
         "One universe, the days captured, no claim beyond them.",
     ]
