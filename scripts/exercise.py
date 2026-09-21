@@ -71,6 +71,12 @@ def report(conn, *, source: str, synthetic: bool) -> None:
     print(f"  {f['log_only']:>4}     LOG_ONLY  · {f['taken']} TAKEN · {f['orders']} orders · "
           f"{f['fills']} fills · {f['fills_with_nbbo']} with NBBO")
     print(f"  {f['actuals']:>4} actuals computed · {f['halts']} halt transitions")
+    rec = L.reconcile_allowed(conn)
+    parts = " + ".join(f"{n} {k}" for k, n in rec["by_outcome"].items()) or "nothing"
+    lamp = f"{OK}✓{END}" if rec["residual"] == 0 else f"{BAD}✗{END}"
+    print(f"  {lamp} allowed reconciliation: {rec['allowed']} allowed = {parts}"
+          f" · residual {rec['residual']}  {DIM}(every allowed decision carries one of "
+          f"{', '.join(L.OUTCOMES)}){END}")
 
     print(f"\n{BOLD}REJECTS{END}  (never hidden)")
     rows = conn.execute("""SELECT ts_et, symbol, verdict, killed_by, outcome, refusal_reasons_json, last

@@ -59,8 +59,13 @@ DEFAULT_DB = Path(os.environ.get(
 # CLAIMED: the runner wrote the intent and is about to send; a row left in
 # CLAIMED after a restart is an ambiguous send and is reconciled, never resent.
 # UNRESOLVED: the reconciliation could not find the order at the broker.
+# EXPIRED: an allowed plan the runner never acted on because no runner was
+# alive when it armed (desk up, runner down, or armed after the hard stop).
+# Set by the day's close-out, never by the runner. Review 2026-09-21: 66
+# allowed − 65 refused − 0 taken = 1 with no named state; every allowed
+# decision now reconciles to one of these words (`funnel`, `reconcile_allowed`).
 OUTCOMES = ("PENDING", "CLAIMED", "TAKEN", "REFUSED", "NOT_FILLED", "LOG_ONLY", "SUPPRESSED",
-            "UNRESOLVED")
+            "UNRESOLVED", "EXPIRED")
 
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS decisions (
@@ -671,7 +676,36 @@ def funnel(conn: sqlite3.Connection) -> dict:
         "fills_with_nbbo": q("SELECT COUNT(*) FROM orders WHERE fill_price IS NOT NULL AND nbbo_bid IS NOT NULL"),
         "actuals": q("SELECT COUNT(*) FROM actuals"),
         "halts": q("SELECT COUNT(*) FROM halts"),
+        # Every allowed decision, by the word the runner (or the close-out)
+        # left on it. The sum equals plans_allowed by construction; the
+        # report prints the residual so a reader never has to subtract.
+        "allowed_by_outcome": {r["outcome"]: r["n"] for r in conn.execute(
+            "SELECT outcome, COUNT(*) AS n FROM decisions WHERE plan_allowed=1 "
+            "GROUP BY outcome ORDER BY outcome")},
     }
+
+
+def reconcile_allowed(conn: sqlite3.Connection) -> dict:
+    """plans_allowed against the sum of its outcomes. `residual` is the
+    number of allowed decisions carrying an outcome outside OUTCOMES — zero
+    unless the schema and the code have drifted apart."""
+    f = funnel(conn)
+    by = f["allowed_by_outcome"]
+    known = sum(n for k, n in by.items() if k in OUTCOMES)
+    return {"allowed": f["plans_allowed"], "by_outcome": by,
+            "residual": f["plans_allowed"] - known}
+
+
+def expire_pending(conn: sqlite3.Connection, day: str) -> int:
+    """Close-out: an allowed plan still PENDING for `day` (ET date) was
+    armed while no runner was alive to judge it. Name it EXPIRED so it is
+    neither re-offered tomorrow nor counted as a trade that was refused."""
+    cur = conn.execute("""UPDATE decisions SET outcome='EXPIRED', acted_at=?,
+                              refusal_reasons_json=?
+                          WHERE outcome='PENDING' AND plan_allowed=1 AND substr(ts_et,1,10)=?""",
+                       (_now(), _json(["no runner was alive to act on this plan before the close-out"]), day))
+    conn.commit()
+    return cur.rowcount
 
 
 

@@ -319,3 +319,28 @@ def test_ibkr_port_prefers_env_then_detects_gateway(monkeypatch):
     monkeypatch.setattr(day, "IBKR_PORTS", ("1", "2"))
     env = {}
     assert day.ibkr_port(env) == ("1", "nothing listening; default")
+
+
+def test_every_allowed_decision_reconciles_to_a_named_outcome(journal):
+    """Review 2026-09-21: 66 allowed − 65 refused − 0 taken = 1 with no state.
+    The funnel now sums allowed decisions by outcome and the residual is zero;
+    a plan no runner ever judged is EXPIRED at the close-out, not PENDING forever."""
+    from execution.runner import Runner
+    rec = L.reconcile_allowed(journal)
+    assert rec["residual"] == 0 and rec["by_outcome"].get("PENDING", 0) == rec["allowed"]
+    # leave one plan PENDING: act on the others only
+    rows = L.pending(journal)
+    keep = rows[0]["decision_id"]
+    journal.execute("UPDATE decisions SET plan_allowed=0, outcome='SUPPRESSED' WHERE decision_id=?", (keep,))
+    journal.commit()
+    Runner(journal, mode="LOG_ONLY", dollar_risk=20.0).step()
+    journal.execute("UPDATE decisions SET plan_allowed=1, outcome='PENDING' WHERE decision_id=?", (keep,))
+    journal.commit()
+    rec = L.reconcile_allowed(journal)
+    assert rec["residual"] == 0 and rec["by_outcome"]["PENDING"] == 1
+    day = rows[0]["ts_et"][:10]
+    assert L.expire_pending(journal, day) == 1
+    assert L.pending(journal) == []                                 # never re-offered
+    rec = L.reconcile_allowed(journal)
+    assert rec["by_outcome"]["EXPIRED"] == 1 and rec["residual"] == 0
+    assert sum(rec["by_outcome"].values()) == rec["allowed"]

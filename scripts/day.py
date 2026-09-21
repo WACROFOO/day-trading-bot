@@ -400,6 +400,9 @@ def after_close(conn, today: str, dry: bool) -> None:
     if dry:
         note("would fill actuals from ledger bars, run replay, write the report, bump sessions_done")
         return
+    expired = L.expire_pending(conn, today)
+    if expired:
+        warn(f"{expired} allowed plan(s) armed with no runner alive to judge them — recorded EXPIRED")
     res = actuals.fill_all(conn, bars.from_ledger(conn))
     good(f"actuals: {res['computed']} computed, {len(res['no_tape'])} without tape")
     rep = replay.check(conn)
