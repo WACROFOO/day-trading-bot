@@ -5,6 +5,19 @@ WHAT THIS IS · a research plan, owner-specified 2026-09-17, to test the
      setup at the resolution the corpus says he actually trades it.
      Phase 0-1 LOG_ONLY; Phase 2 sends PAPER orders (owner, 2026-09-17).
      Runs BESIDE the phase-A exercise and never touches it.
+STATUS · **CLOSED, NO-GO, 2026-09-21.** Phase 0 ran on one session of
+captured tape and the pre-registered stop condition of §4 fired: the median
+10-second dip is inside the spread. 37 quoted dips, median spread ÷ risk
+0.4091 against a best case of +0.25 R, and no value of `k` recovers it. The
+read-out is `research/paper-exercise/reports/2026-09-21-microflow-phase0-nogo.md`.
+**Phases 1–3 below are not built and will not be.** What survives is the
+capture path (`bars_10s`) and `microflow/` as a measurement; what is abandoned
+is the entry idea. The plan is kept, unedited below this line, because a plan
+that was written to be killable and then got killed is the evidence that the
+method works.
+
+The original header follows.
+
 STATUS · PROPOSED. Nothing here is built. Section 8 is the kill rule and
      it is written before any data is collected, on purpose.
 PAPER ONLY · the 1-minute version of this setup measured NEGATIVE over
@@ -400,6 +413,7 @@ document and not an amendment to the 1-minute one.
 | date | what | commit |
 |---|---|---|
 | 2026-09-17 | **M1 done.** `bars_10s` table, `record_bars_10s`, `bars_10s_from_ledger`; the drain in `publish_closed_10s` takes a `sink`; the desk buffers 30 candles per write and flushes on stop. 8 tests, including the safety property that no 10-second row can reach the 1-minute tape the grader reads | `b3f644e` |
+| 2026-09-21 | **Phase 0 read-out: NO-GO.** 10,320 candles, 13 symbols, one session. 40 shapes (no context gate — an upper bound), 37 quoted. Median risk per share $0.05 against a 2-cent spread: **spread ÷ risk 0.4091**, so a round trip costs 0.41 R where the best case is 0.25 R. 5.4% clear k=8; loosening to k=4 spends the entire best case on the spread and two thirds still fail. Report: `research/paper-exercise/reports/2026-09-21-microflow-phase0-nogo.md`. Phase 1 not built | this commit |
 | 2026-09-17 | **Package + Phase 0 tooling.** `src/momentum_platform/microflow/` — one module per responsibility, README carrying the contracts: `config.py` (every parameter with `origin` and `evidence_status`, nothing written twice), `bars.py` (fold to minutes, coverage, `assert_sync`, `forming_minute`), `spread.py` (the k gate, three states, fails closed on a missing quote), `measure.py` (dip shapes, the survival-by-k table, the GO/NO-GO with its thresholds stated first). `scripts/microflow.py capture / measure / config`. 23 tests. A test caught the first draft of `find_dips` treating sideways chop as a string of micro pullbacks, which would have biased the stop distribution small and risked a false NO-GO; the push must now set a new run high | this commit |
 
 ---
