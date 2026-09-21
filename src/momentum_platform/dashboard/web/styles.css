@@ -464,6 +464,14 @@ body.resizing .gutter{pointer-events:auto}
 .flame-chip.orange{color:#ffdcb0;background:#33220c;border-color:#7a5320}
 .flame-chip.yellow{color:#ffeeb0;background:#2e2a0c;border-color:#6d6320}
 .flame-chip.none{color:var(--ink-faint);background:#12181f;border-color:var(--line)}
+.cat-verdict{font:700 11px/1 var(--mono);letter-spacing:.8px;padding:6px 9px;border-radius:4px;margin:2px 0 6px;
+  border:1px solid var(--line);color:var(--ink-dim);background:#12181f}
+.cat-verdict.STRONG{color:#0b0f14;background:var(--up);border-color:transparent}
+.cat-verdict.WEAK{color:#0b0f14;background:var(--hi);border-color:transparent}
+.cat-verdict.DILUTIVE{color:#0b0f14;background:var(--down);border-color:transparent}
+.cat-verdict.NONE{color:var(--ink-dim);background:#12181f;border-color:var(--line)}
+.cat-verdict.UNKNOWN{color:var(--ink-faint);background:#12181f;border-style:dashed}
+.cat-quality.reaction{color:var(--ink-dim);border-color:var(--line)}
 .cat-quality{font:600 9.5px/1 var(--mono);letter-spacing:.5px;padding:2px 6px;border-radius:3px;border:1px solid}
 .cat-quality.hard{color:#0b0f14;background:var(--up);border-color:transparent}
 .cat-quality.soft{color:#0b0f14;background:var(--hi);border-color:transparent}

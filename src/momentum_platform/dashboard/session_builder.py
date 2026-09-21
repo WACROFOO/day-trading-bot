@@ -579,6 +579,8 @@ def cascade_inputs(meta: dict, halt: Optional[str] = None,
         float_is_shares_outstanding=(quality == "shares_outstanding_proxy"),
         float_verified=(quality in ("verified", "you verified")),
         catalyst_today=_catalyst_today(meta.get("news") or [], meta.get("tradingDate")),
+        catalyst_verdict=_news_verdict(meta.get("news") or [], snap,
+                                       bool(meta.get("newsSourceOk", True))),
         catalyst_source_ok=bool(meta.get("newsSourceOk", True)),
         session_volume=m.get("volumeToday"),
         rvol=m.get("rvol"),
@@ -798,6 +800,17 @@ def shared_tag(headline: str, symbol: str, tagged) -> bool:
     return symbol.upper() not in (headline or "").upper()
 
 
+def _news_verdict(news: list, snap, source_ok: bool) -> str:
+    """The one word for the symbol's news at this bar (catalyst.news_verdict),
+    recorded on the decision. The clock is the snapshot's event time when
+    there is one, so a replay judges the news as the desk saw it then."""
+    from ..catalyst import news_verdict
+    now = getattr(snap, "event_ts", None) if snap is not None else None
+    if now is not None and now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    return news_verdict(news, now=now, source_ok=source_ok)[0]
+
+
 def _catalyst_today(news: list, trading_date) -> bool:
     """FILTERS.md gate 3: a catalyst DATED TODAY. A headline counts when it was
     published after 16:00 ET of the previous calendar day (overnight news is
@@ -812,11 +825,15 @@ def _catalyst_today(news: list, trading_date) -> bool:
         day = None
     from zoneinfo import ZoneInfo
     et = ZoneInfo("America/New_York")
+    from ..catalyst import NOT_A_CATALYST, classify
     for item in news:
         if is_roundup(item.get("headline") or "", item.get("category") or ""):
             continue
         if item.get("sharedTag"):
             continue                      # someone else's story, tagged here
+        grade = classify(item.get("headline") or "", item.get("category") or "").grade
+        if grade in NOT_A_CATALYST or grade == "dilutive":
+            continue                      # a story about the move, or a supply event: not a catalyst
         pub = item.get("publishedAt") or item.get("published_at")
         if not pub:
             continue

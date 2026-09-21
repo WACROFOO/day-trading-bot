@@ -145,6 +145,7 @@ class Inputs:
     float_is_shares_outstanding: bool = False     # an UPPER BOUND, not float
     float_verified: bool = False
     catalyst_today: bool = False
+    catalyst_verdict: str = ""                    # STRONG | WEAK | NONE | DILUTIVE | UNKNOWN (catalyst.news_verdict)
     live_theme: bool = False                      # a running theme substitutes
     catalyst_source_ok: bool = True               # False: the desk has no headline feed at all
     is_fund_or_etf: Optional[bool] = None
@@ -287,7 +288,8 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None,
         gates.append(skipped("catalyst", "Catalyst"))
     elif i.catalyst_today or i.live_theme:
         add(Gate("catalyst", "Catalyst", GateState.PASS,
-                 "news today" if i.catalyst_today else "live theme"))
+                 ("news today" + (f" · {i.catalyst_verdict}" if i.catalyst_verdict else ""))
+                 if i.catalyst_today else "live theme"))
     elif not i.catalyst_source_ok:
         add(Gate("catalyst", "Catalyst", GateState.UNKNOWN, "no headline source",
                  "The desk has no news feed (no headline keys in .env); the gate "
@@ -295,8 +297,10 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None,
         if not catalyst_gate_kills:
             warnings.append("Catalyst unknown — no headline source on this desk (A2: flagged, not killed).")
     else:
-        add(Gate("catalyst", "Catalyst", GateState.FAIL, "none",
-                 "No catalyst dated today and no live theme it belongs to.",
+        add(Gate("catalyst", "Catalyst", GateState.FAIL,
+                 i.catalyst_verdict.lower() if i.catalyst_verdict in ("DILUTIVE",) else "none",
+                 "The freshest headline is a supply event, not a catalyst." if i.catalyst_verdict == "DILUTIVE"
+                 else "No catalyst dated today and no live theme it belongs to.",
                  kills=catalyst_gate_kills))
         if not catalyst_gate_kills:
             warnings.append("No catalyst dated today and no live theme (A2: flagged, not killed; "

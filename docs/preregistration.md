@@ -436,6 +436,24 @@ both fixed the same hour:
   is `Inactive`; it was missing from the dead list, so the one-position rule
   blocked every entry after 09:37 ("1 order(s) alive or unresolved").
 
+**Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
+input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
+Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
+counted as the news pillar. A story about the move is not its cause. Two
+families no longer count as a catalyst dated today in `_catalyst_today`:
+**reaction pieces** (why-is / surging / soaring headlines with no catalyst
+word in them) and **dilutive** headlines (an offering is a supply event, not
+a reason to buy). Every decision now records `catalyst_verdict`, one of
+STRONG / WEAK / NONE / DILUTIVE / UNKNOWN (`momentum_platform.catalyst.
+news_verdict`), and the card leads with the same word: STRONG and WEAK pass
+the pillar, the other three fail it. Which families count is this desk's
+Approximation of "news today"; the word is on every row so the STRONG / WEAK
+/ NONE split can be measured once there are outcomes. Effect on verdicts: a
+name whose only headline is a reaction piece or an offering counts one pillar
+fewer, so a 4/5 built on such a headline is now 3/5 and killed on `pillars`
+(A5). Decisions before the next desk start keep their rules hash; R11
+classifies the difference as superseded, not diverged.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

@@ -13,7 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from momentum_platform.catalyst import (  # noqa: E402
-    DILUTIVE_WORDS, HARD_WORDS, ROUNDUP_WORDS, SOFT_WORDS, assess, classify, flame,
+    DILUTIVE_WORDS, HARD_WORDS, REACTION_WORDS, ROUNDUP_WORDS, SOFT_WORDS, assess, classify,
+    flame, news_verdict,
 )
 from momentum_platform.datasources.sec_source import (  # noqa: E402
     SecClient, SecError, _filing_url,
@@ -129,7 +130,69 @@ def test_python_and_javascript_grade_the_same_words():
     assert found["roundup"] == ROUNDUP_WORDS
     assert found["dilutive"] == DILUTIVE_WORDS
     assert found["hard"] == HARD_WORDS
+    assert found["reaction"] == REACTION_WORDS
     assert found["soft"] == SOFT_WORDS
+    # the families are tried in the same order on both sides
+    order = re.findall(r'grade:\s*"(\w+)"', block.group(1))
+    assert order == ["roundup", "dilutive", "hard", "reaction", "soft"]
+
+
+# -- the one word ---------------------------------------------------------------
+
+def _item(headline, minutes_ago, **kw):
+    pub = (NOW - timedelta(minutes=minutes_ago)).isoformat()
+    return {"headline": headline, "publishedAt": pub, "firstObservedAt": pub, **kw}
+
+
+def test_a_reaction_piece_is_not_a_catalyst():
+    """GRML, 2026-09-21 10:42: "Why Is Greenland Mines Stock Surging on Monday?"
+    read Unclassified and counted as the news pillar. It is a story about the
+    move, not its cause."""
+    assert classify("Why Is Greenland Mines Stock Surging on Monday?").grade == "reaction"
+    v, g, it = news_verdict([_item("Why Is Greenland Mines Stock Surging on Monday?", 30)], now=NOW)
+    assert v == "NONE" and it is None
+
+
+def test_a_hard_word_beats_the_reaction_wrapper():
+    """"Stock soars on $40M contract award": the cause is in the headline."""
+    assert classify("Stock soars after $40M contract award").grade == "hard"
+
+
+@pytest.mark.parametrize("headline,minutes,expected", [
+    ("FDA grants approval for lead candidate", 60, "STRONG"),
+    ("FDA grants approval for lead candidate", 700, "STRONG"),
+    ("FDA grants approval for lead candidate", 900, "WEAK"),        # hard but 12-24h: the crowd has seen it
+    ("Announces strategic partnership with distributor", 60, "WEAK"),
+    ("Company to present at healthcare conference", 60, "WEAK"),
+    ("Some headline no family matches", 60, "WEAK"),               # unclassified: own news, chart carries it
+    ("Announces $20M registered direct offering", 10, "DILUTIVE"),
+    ("Stocks moving in Monday's pre-market session", 10, "NONE"),
+    ("FDA grants approval for lead candidate", 1500, "NONE"),      # older than 24h
+])
+def test_news_verdict_words(headline, minutes, expected):
+    v, _, _ = news_verdict([_item(headline, minutes)], now=NOW)
+    assert v == expected
+
+
+def test_news_verdict_rests_on_the_freshest_own_headline():
+    items = [_item("FDA grants approval", 300), _item("Announces registered direct offering", 20)]
+    assert news_verdict(items, now=NOW)[0] == "DILUTIVE"
+    items = [_item("Announces registered direct offering", 300), _item("Awarded $9M contract", 20)]
+    assert news_verdict(items, now=NOW)[0] == "STRONG"
+
+
+def test_news_verdict_ignores_shared_tags_and_headlines_not_yet_seen():
+    shared = _item("Why Is Critical Metals Stock Soaring Monday?", 30, sharedTag=True)
+    assert news_verdict([shared], now=NOW)[0] == "NONE"
+    later = _item("Awarded $9M contract", 30)
+    later["firstObservedAt"] = (NOW + timedelta(minutes=5)).isoformat()   # the feed has not delivered it yet
+    assert news_verdict([later], now=NOW)[0] == "NONE"
+    assert news_verdict([later], now=NOW + timedelta(minutes=6))[0] == "STRONG"
+
+
+def test_no_feed_is_unknown_not_none():
+    assert news_verdict([], now=NOW, source_ok=False)[0] == "UNKNOWN"
+    assert news_verdict([], now=NOW, source_ok=True)[0] == "NONE"
 
 
 # -- SEC client ---------------------------------------------------------------

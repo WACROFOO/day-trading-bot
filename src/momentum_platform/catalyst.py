@@ -53,6 +53,16 @@ HARD_WORDS = [
     "acquire", "merger", "buyout", "earnings", "revenue", "guidance", "profit",
     "patent", "uplist", "nasdaq listing",
 ]
+# A story ABOUT the move is not the cause of the move. "Why Is Greenland Mines
+# Stock Surging on Monday?" (GRML's card, 2026-09-21 10:42) was graded
+# Unclassified and counted as the news pillar; it is a reaction piece — the
+# catalyst, if there is one, is inside the body, and the desk cannot read it.
+REACTION_WORDS = [
+    "why is", "why are", "why did", "here's why", "here is why", "what's going on",
+    "surging", "soaring", "skyrocket", "jumps", "jumped", "jumping", "rallies", "rallying",
+    "is up today", "shares are up", "shares rose", "shares climb", "climbing", "rocketing",
+    "spiking", "explodes", "on the move", "trading higher", "trading up",
+]
 SOFT_WORDS = [
     "partnership", "agreement", "mou", "collaboration", "analyst", "price target",
     "upgrade", "initiated", "appoint", "names", "joins", "announces", "reverse split",
@@ -68,6 +78,9 @@ RULES = [
      "read the size before anything else."),
     ("hard", "Hard catalyst", HARD_WORDS,
      "Quantifiable economic value — this is the catalyst family the funnel is built for."),
+    ("reaction", "Reaction piece", REACTION_WORDS,
+     "A story about the move, not its cause. Not a catalyst; the reason, if any, is in the "
+     "body and the desk cannot read it."),
     ("soft", "Soft catalyst", SOFT_WORDS,
      "Attention without quantifiable value. It can still move a low float, but it does "
      "not justify size on its own."),
@@ -105,6 +118,71 @@ def classify(headline: str, category: str = "") -> Grade:
         if any(w in hay for w in words):
             return Grade(grade, label, note)
     return UNCLASSIFIED
+
+
+# -- the one word the card and the cascade speak ------------------------------
+# Five states, chosen so a reader can act on the word without reading the
+# headline. STRONG and WEAK pass the news pillar; the other three fail it.
+# Ross's pillar is "news today" (FILTERS.md gate 3); which families count is
+# this desk's Approximation, and the ledger records the word on every decision
+# so the split can be measured instead of argued.
+CATALYST_VERDICTS = {
+    "STRONG":   "This company's own headline, hard family, inside 12 hours. "
+                "The news pillar passes; the chart decides the entry.",
+    "WEAK":     "This company's own headline, but soft, unclassified or 12-24 hours old. "
+                "The news pillar passes; the chart carries the whole case.",
+    "NONE":     "No headline of this company's own inside 24 hours. Roundups, reaction "
+                "pieces and other names' stories do not count. The news pillar fails.",
+    "DILUTIVE": "The freshest own headline is a supply event. Not a catalyst — a reason "
+                "against; read the size before anything else.",
+    "UNKNOWN":  "No headline feed on this desk. Nothing ruled in or out.",
+}
+NOT_A_CATALYST = ("roundup", "reaction")
+
+
+def _iso(ts) -> Optional[datetime]:
+    if ts is None:
+        return None
+    if isinstance(ts, datetime):
+        return ts if ts.tzinfo else ts.replace(tzinfo=timezone.utc)
+    try:
+        d = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
+
+
+def news_verdict(items, now: Optional[datetime] = None, source_ok: bool = True):
+    """One word for a symbol's news, from the session's news records
+    (`headline`, `category`, `publishedAt`, `firstObservedAt`, `sharedTag`).
+
+    Returns (verdict, grade, item): the item the verdict rests on, or None.
+    Only headlines already observed at `now` count — the replay must not see
+    a flame before the desk did."""
+    now = now or datetime.now(timezone.utc)
+    own = []
+    for it in items or []:
+        seen = _iso(it.get("firstObservedAt") or it.get("publishedAt"))
+        pub = _iso(it.get("publishedAt"))
+        if pub is None or (seen is not None and seen > now):
+            continue
+        age = (now - pub).total_seconds() / 60.0
+        if age < 0 or age > 1440:
+            continue
+        if it.get("sharedTag"):
+            continue
+        g = classify(it.get("headline") or "", it.get("category") or "")
+        if g.grade in NOT_A_CATALYST:
+            continue
+        own.append((pub, age, g, it))
+    if not own:
+        return ("NONE" if source_ok else "UNKNOWN"), None, None
+    pub, age, g, it = max(own, key=lambda t: t[0])
+    if g.grade == "dilutive":
+        return "DILUTIVE", g, it
+    if g.grade == "hard" and age <= 720:
+        return "STRONG", g, it
+    return "WEAK", g, it
 
 
 def flame(age_minutes: Optional[float]) -> str:

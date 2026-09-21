@@ -1174,8 +1174,54 @@ def test_a_headline_about_another_company_tagged_here_is_not_this_names_catalyst
     pub = datetime.now(timezone.utc).isoformat()
     assert _catalyst_today([{"headline": h, "publishedAt": pub, "sharedTag": True}],
                            datetime.now(timezone.utc).date().isoformat()) is False
+    # A7: the un-shared version is still a reaction piece — not a catalyst either.
     assert _catalyst_today([{"headline": h, "publishedAt": pub, "sharedTag": False}],
+                           datetime.now(timezone.utc).date().isoformat()) is False
+    assert _catalyst_today([{"headline": "GLND Announces Contract", "publishedAt": pub, "sharedTag": False}],
                            datetime.now(timezone.utc).date().isoformat()) is True
+
+
+def test_a_reaction_piece_or_an_offering_is_not_todays_catalyst():
+    """Gate 3 counts a catalyst dated today. A story ABOUT the move and a
+    supply event both used to count; neither is a reason to buy."""
+    from momentum_platform.dashboard.session_builder import _catalyst_today
+    from datetime import datetime, timezone
+    pub = datetime.now(timezone.utc).isoformat()
+    day = datetime.now(timezone.utc).date().isoformat()
+    assert _catalyst_today([{"headline": "Why Is Greenland Mines Stock Surging on Monday?", "publishedAt": pub}], day) is False
+    assert _catalyst_today([{"headline": "Announces $20M registered direct offering", "publishedAt": pub}], day) is False
+    assert _catalyst_today([{"headline": "Awarded $9M contract", "publishedAt": pub}], day) is True
+
+
+def test_the_decision_records_the_catalyst_word():
+    """The word the card shows is the word the ledger keeps: cascade_inputs
+    carries catalyst_verdict, and gate 3's reason names it."""
+    from momentum_platform.dashboard.session_builder import cascade_inputs
+    from momentum_platform.cascade import evaluate
+    from datetime import datetime, timezone
+    pub = datetime.now(timezone.utc).isoformat()
+    meta = {"symbol": "AAA", "floatQuality": "verified", "floatShares": 5e6, "newsSourceOk": True,
+            "metrics": {"last": 5.0, "changePct": 40.0, "sessionHigh": 5.2, "rvol": 8.0, "volumeToday": 900_000},
+            "news": [{"headline": "FDA grants approval", "publishedAt": pub, "firstObservedAt": pub}],
+            "tradingDate": datetime.now(timezone.utc).date().isoformat()}
+    i = cascade_inputs(meta)
+    assert i.catalyst_verdict == "STRONG" and i.catalyst_today is True
+    gate = next(g for g in evaluate(i).gates if g.id == "catalyst")
+    assert "STRONG" in gate.value
+    meta["news"] = [{"headline": "Announces registered direct offering", "publishedAt": pub, "firstObservedAt": pub}]
+    i = cascade_inputs(meta)
+    assert i.catalyst_verdict == "DILUTIVE" and i.catalyst_today is False
+
+
+def test_the_card_leads_with_one_of_five_words():
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function renderCatalyst")[1].split("\nfunction ")[0]
+    assert 'el("div", "cat-verdict " + cv' in body
+    for word in ("STRONG", "WEAK", "NONE", "DILUTIVE", "UNKNOWN"):
+        assert word + ":" in app.split("const CATALYST_VERDICTS")[1].split("};")[0]
+    pane = app.split("function makePane")[1].split("\nfunction ")[0]
+    assert "macdLine.setData" in pane and "macdSignal.setData" in pane, "MACD line and signal are drawn, not only the histogram"
 
 
 def test_the_desk_speaks_one_pillar_denominator():

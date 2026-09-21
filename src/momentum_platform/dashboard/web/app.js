@@ -116,14 +116,17 @@ function ema(vals, n) {
 /* MACD 12/26/9 histogram: (EMA12 − EMA26) − EMA9 of that difference. FILTERS.md
    Layer 2 asks for it positive AND above the signal line, which is the
    histogram above zero. Null-padded like ema() until enough bars exist. */
-function macdHist(closes) {
-  if (!closes || closes.length < 35) return [];
+function macdLines(closes) {
+  if (!closes || closes.length < 35) return { macd: [], signal: [], hist: [] };
   const e12 = ema(closes, 12), e26 = ema(closes, 26);
   const diff = closes.map((_, i) => (e12[i] != null && e26[i] != null) ? e12[i] - e26[i] : null);
   const firstIdx = diff.findIndex(v => v != null);
   const sig = ema(diff.slice(firstIdx), 9);
-  return diff.map((v, i) => (v != null && i - firstIdx >= 0 && sig[i - firstIdx] != null) ? v - sig[i - firstIdx] : null);
+  const signal = diff.map((v, i) => (v != null && i - firstIdx >= 0 && sig[i - firstIdx] != null) ? sig[i - firstIdx] : null);
+  const hist = diff.map((v, i) => (v != null && signal[i] != null) ? v - signal[i] : null);
+  return { macd: diff.map((v, i) => signal[i] == null ? null : v), signal, hist };
 }
+function macdHist(closes) { return macdLines(closes).hist; }
 function vwap(bars) {
   let pv = 0, vv = 0;
   return bars.map(b => { const tp = (b[2] + b[3] + b[4]) / 3; pv += tp * b[5]; vv += b[5]; return vv ? pv / vv : b[4]; });
@@ -340,6 +343,15 @@ function makePane(hostId, daily) {
     priceScaleId: "macd", lastValueVisible: false, priceLineVisible: false,
     priceFormat: { type: "price", precision: 3, minMove: 0.001 },
   });
+  /* The MACD line and its signal, on the histogram's scale, in TradingView's
+     colours (blue 2962ff, orange ff6d00). 10:42 on GRML: "MACD had no line
+     but only bars" — the histogram alone cannot show the cross. */
+  const macdLineOpts = (color) => ({
+    priceScaleId: "macd", color, lineWidth: 1, lastValueVisible: false, priceLineVisible: false,
+    crosshairMarkerVisible: false, priceFormat: { type: "price", precision: 3, minMove: 0.001 },
+  });
+  const macdLine = chart.addLineSeries(macdLineOpts("#2962ff"));
+  const macdSignal = chart.addLineSeries(macdLineOpts("#ff6d00"));
 
   /* OHLC legend, TradingView style: follows the crosshair, rests on the last bar. */
   const legend = document.createElement("div");
@@ -369,7 +381,8 @@ function makePane(hostId, daily) {
     };
     ind("vwap", "VWAP", PALETTE.vwap); ind("ema9", "EMA9", PALETTE.ema9);
     ind("ema20", "EMA20", PALETTE.ema20); ind("ema200", "EMA200", PALETTE.ema200);
-    ind("macd", "MACD", "#26a69a", 3);
+    ind("macdLine", "MACD", "#2962ff", 3); ind("macdSignal", "signal", "#ff6d00", 3);
+    ind("macd", "hist", "#26a69a", 3);
     if (parts.length) html += '<br>' + parts.join('<span class="k"> · </span>');
     legend.innerHTML = html;
   };
@@ -504,13 +517,18 @@ function makePane(hostId, daily) {
       put("ema20", opts.ema20 && show.ema20 ? ema(closes, 20) : null);
       put("ema200", opts.ema200 && show.ema200 ? ema(closes, 200) : null);
       if (show.macd) {
-        const mh = macdHist(closes);
-        lastInd.macd = mh;
+        const ml = macdLines(closes), mh = ml.hist;
+        lastInd.macd = mh; lastInd.macdLine = ml.macd; lastInd.macdSignal = ml.signal;
         macd.setData(rows.map((r, i) => mh[i] == null ? null : {
           time: r.time, value: mh[i],
           color: mh[i] >= 0 ? "#26a69a90" : "#ef535090",
         }).filter(Boolean));
-      } else { macd.setData([]); lastInd.macd = null; }
+        macdLine.setData(rows.map((r, i) => ml.macd[i] == null ? null : { time: r.time, value: ml.macd[i] }).filter(Boolean));
+        macdSignal.setData(rows.map((r, i) => ml.signal[i] == null ? null : { time: r.time, value: ml.signal[i] }).filter(Boolean));
+      } else {
+        macd.setData([]); macdLine.setData([]); macdSignal.setData([]);
+        lastInd.macd = null; lastInd.macdLine = null; lastInd.macdSignal = null;
+      }
       priceLines.forEach(l => candles.removePriceLine(l));
       priceLines = [];
       const mark = (price, color, title) => {
@@ -703,7 +721,9 @@ function newsFor(sym, nowMs) {
   // back to a shared-tag item so the card can say what it is instead of
   // reading "no news" on a name the feed clearly has something for.
   const own = visible.filter(n => !n.sharedTag);
-  const n = (own.length ? own : visible)[(own.length ? own : visible).length - 1];
+  const cause = own.filter(n => classifyCatalyst(n.headline, n.category).grade !== "reaction");
+  const pool = cause.length ? cause : (own.length ? own : visible);
+  const n = pool[pool.length - 1];
   const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
   const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
   return { item: n, ageMin, flame, shared: !!n.sharedTag };
@@ -1169,9 +1189,10 @@ function pillarScore(frame, sym, nowMs) {
   const checks = pillarChecks(row, meta);
   const nf = newsFor(sym, nowMs);
   const grade = nf ? classifyCatalyst(nf.item.headline, nf.item.category) : null;
-  checks.push({ k: "N", name: "news catalyst", v: nf ? grade.label : "none seen",
-                ok: !!(nf && nf.flame && grade.grade !== "dilutive"), unknown: !nf, grade: grade ? grade.grade : null });
-  return { row, meta, checks, passed: checks.filter(c => c.ok).length, grade };
+  const cv = catalystVerdict(nf, meta.newsSourceOk);
+  checks.push({ k: "N", name: "news catalyst", v: nf ? cv + " · " + grade.label : "none seen",
+                ok: cv === "STRONG" || cv === "WEAK", unknown: cv === "UNKNOWN", grade: grade ? grade.grade : null, verdict: cv });
+  return { row, meta, checks, passed: checks.filter(c => c.ok).length, grade, verdict: cv };
 }
 function renderPillarsBoard(frame) {
   if (!frame) return;
@@ -1193,9 +1214,10 @@ function renderPillarsBoard(frame) {
     const checks = pillarChecks(row, meta);
     const nf = newsFor(sym, nowMs);
     const grade = nf ? classifyCatalyst(nf.item.headline, nf.item.category) : null;
-    checks.push({ k: "N", name: "news catalyst" + (nf ? " — " + grade.label + ": " + nf.item.headline + " — " + grade.note : ""),
-                  v: nf ? grade.label.split(" ")[0] + " · " + fmtAge(nf.ageMin * 60000) : "none seen",
-                  ok: !!(nf && nf.flame && grade.grade !== "dilutive"), unknown: !nf, grade: grade ? grade.grade : null });
+    const cv = catalystVerdict(nf, meta.newsSourceOk);
+    checks.push({ k: "N", name: "news catalyst — " + CATALYST_VERDICTS[cv].label + (nf ? " — " + grade.label + ": " + nf.item.headline : "") + " — " + CATALYST_VERDICTS[cv].meaning,
+                  v: nf ? cv + " · " + fmtAge(nf.ageMin * 60000) : cv,
+                  ok: cv === "STRONG" || cv === "WEAK", unknown: cv === "UNKNOWN", grade: grade ? grade.grade : null, verdict: cv });
     const passed = checks.filter(c => c.ok).length;
     const volToday = row.volume || bars.reduce((a, b) => a + (b[5] || 0), 0);
     const hod = bars.length ? Math.max(...bars.map(b => b[2])) : null;
@@ -1353,6 +1375,12 @@ const CATALYST_RULES = [
             "acquire", "merger", "buyout", "earnings", "revenue", "guidance", "profit",
             "patent", "uplist", "nasdaq listing"],
     note: "Quantifiable economic value — this is the catalyst family the funnel is built for." },
+  { grade: "reaction", label: "Reaction piece",
+    words: ["why is", "why are", "why did", "here's why", "here is why", "what's going on",
+            "surging", "soaring", "skyrocket", "jumps", "jumped", "jumping", "rallies", "rallying",
+            "is up today", "shares are up", "shares rose", "shares climb", "climbing", "rocketing",
+            "spiking", "explodes", "on the move", "trading higher", "trading up"],
+    note: "A story about the move, not its cause. Not a catalyst; the reason, if any, is in the body and the desk cannot read it." },
   { grade: "soft", label: "Soft catalyst",
     words: ["partnership", "agreement", "mou", "collaboration", "analyst", "price target",
             "upgrade", "initiated", "appoint", "names", "joins", "announces", "reverse split",
@@ -1368,6 +1396,25 @@ function classifyCatalyst(headline, category) {
     "No familiar catalyst family matched. Read the headline yourself before treating it as a reason." };
 }
 const FLAME_BAND = { red: "0–2h", orange: "2–12h", yellow: "12–24h" };
+/* THE ONE WORD. Mirrors momentum_platform.catalyst.news_verdict, which the
+   cascade records on every decision: the card and the ledger must agree.
+   STRONG and WEAK pass the news pillar; NONE, DILUTIVE and UNKNOWN fail it. */
+const CATALYST_VERDICTS = {
+  STRONG:   { label: "STRONG CATALYST", meaning: "This company's own headline, hard family, inside 12 hours. News pillar passes; the chart decides the entry." },
+  WEAK:     { label: "WEAK CATALYST",   meaning: "This company's own headline, but soft, unclassified or 12–24 hours old. News pillar passes; the chart carries the whole case." },
+  NONE:     { label: "NO CATALYST",     meaning: "No headline of this company's own inside 24 hours. Roundups, reaction pieces and other names' stories do not count. News pillar fails." },
+  DILUTIVE: { label: "DILUTIVE",        meaning: "The freshest own headline is a supply event. Not a catalyst — a reason against; read the size before anything else." },
+  UNKNOWN:  { label: "NEWS UNKNOWN",    meaning: "No headline feed on this desk. Nothing ruled in or out." },
+};
+function catalystVerdict(nf, sourceOk) {
+  if (!nf) return sourceOk === false ? "UNKNOWN" : "NONE";
+  if (nf.shared || !nf.flame) return "NONE";
+  const g = classifyCatalyst(nf.item.headline, nf.item.category).grade;
+  if (g === "roundup" || g === "reaction") return "NONE";
+  if (g === "dilutive") return "DILUTIVE";
+  if (g === "hard" && nf.ageMin <= 720) return "STRONG";
+  return "WEAK";
+}
 
 function technicalScore(ctx) {
   const T = S.pillarThresholds, { last, chg, row, meta } = ctx;
@@ -1383,6 +1430,10 @@ function renderCatalyst(host, ctx) {
   const { nf } = ctx;
   const score = technicalScore(ctx);
   host.appendChild(el("div", "divider", "catalyst"));
+  const cv = catalystVerdict(nf, ctx.meta && ctx.meta.newsSourceOk);
+  const verdictEl = el("div", "cat-verdict " + cv, CATALYST_VERDICTS[cv].label);
+  verdictEl.title = CATALYST_VERDICTS[cv].meaning;
+  host.appendChild(verdictEl);
   if (!nf) {
     const head = el("div", "cat-head");
     const nfc = el("span", "flame-chip none");
@@ -1390,7 +1441,8 @@ function renderCatalyst(host, ctx) {
     head.appendChild(nfc);
     host.appendChild(head);
     const read = el("div", "cat-read");
-    read.textContent = score === 4
+    read.textContent = cv === "UNKNOWN" ? CATALYST_VERDICTS.UNKNOWN.meaning
+      : score === 4
       ? "4/5 pillars, no headline. Gate 3 flags it, it does not kill (A2); the no-news cohort is tracked on its own."
       : "No headline, " + score + "/5 pillars. Nothing to build a thesis on.";
     host.appendChild(read);
@@ -1440,12 +1492,14 @@ function renderCatalyst(host, ctx) {
   // say "3/4" (the four technical pillars) beside a board saying "4/5" for the
   // same stock — two counts, one name, and the reader asked which was Ross's.
   // Both are: 4/5 = technical + news. Only the 5-count is spoken now.
-  const five = score + (nf.shared ? 0 : 1);
-  const read = el("div", "cat-read " + cls.grade);
+  const five = score + ((cv === "STRONG" || cv === "WEAK") ? 1 : 0);
+  const read = el("div", "cat-read " + (cv === "NONE" ? "roundup" : cls.grade));
   if (nf.shared) {
     read.textContent = "Someone else's story tagged here — not this name's catalyst. " + score + "/5 pillars (news not counted).";
   } else if (cls.grade === "roundup") {
     read.textContent = "A list of movers, not this company's news. Not a catalyst.";
+  } else if (cls.grade === "reaction") {
+    read.textContent = "A story about the move, not its cause. Not a catalyst; " + score + "/5 pillars (news not counted).";
   } else if (cls.grade === "dilutive") {
     read.textContent = "Dilution risk. Read the size before anything else.";
   } else if (flame === "red" && five === 5) {
