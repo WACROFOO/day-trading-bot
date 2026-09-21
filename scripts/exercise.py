@@ -102,7 +102,7 @@ def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> N
     last_bar = controls.last_bar_time(conn)
     print(f"  {DIM}\"close\" = the last bar the desk recorded that day"
           + (f" (latest in this ledger: {last_bar} UTC)" if last_bar else "")
-          + "; hold_close and random_bar carry NO stop; no costs in any series{END}")
+          + f"; hold_close and random_bar carry NO stop; no costs in any series{END}")
     if tape is None:
         tape = bars.from_ledger(conn)
     ex = controls.exit_summary(conn, tape)
