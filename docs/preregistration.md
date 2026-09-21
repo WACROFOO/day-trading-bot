@@ -332,6 +332,34 @@ would have returned on them, their MFE, and every kill that went on to run
 than the cohort it allows. Any threshold change is written here with the
 audit's numbers beside it BEFORE the constant moves.
 
+**A4 RESULT, 2026-09-21 — the `rising` gate is JUSTIFIED; nothing changes.**
+The audit ran, and it contradicts the hypothesis that motivated it. Judged on
+the only trustworthy column — the armed plan, capped at +2R / −1R, the rule the
+desk would actually trade — the cohorts rank:
+
+| cohort | n (triggered) | armed-plan mean R | verdict |
+|---|---:|---:|---|
+| allowed | 7 | **+0.714** | the bar to beat |
+| `rising`-killed | 13 | **−0.231** | kills LOSERS — earning its keep, strongly |
+| `price`-killed | 50 | +0.237 | worse than allowed — earning its keep |
+| `catalyst`-killed | 99 | +0.514 | A2 already flags, does not kill |
+| `float`-killed | 30 | +0.900 | kills a BETTER cohort — the one real cost |
+
+The IMCC sting that motivated A4 was **one row**, and on the armed rule it was a
+loss (`first_hit stop`). Its +104 R MFE is an artefact, not a miss: the stop was
+a few cents, so a small dollar move is a huge R multiple that no real fill on a
+2–9-cent stop would honour. The same artefact inflates every `hold-to-close`
+and `MFE` figure in the audit (MEDS +281 R MFE, RETO +348 R) and is the very
+thing the microflow NO-GO named. **The `rising` threshold is not changed.** A4
+is closed: the measurement said the gate is right and the sting was noise.
+
+What the audit did surface is `float`: on the armed column it kills a
+better-than-allowed cohort (+0.900 vs +0.714). But float < 20M is a Confirmed
+Ross pillar, n=30 is small, and the same micro-stop contamination sits on top
+of it, so this is logged as **a question for a later amendment with clean
+stops, not a change now.** No constant moves on the strength of stops no fill
+would honour.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**
