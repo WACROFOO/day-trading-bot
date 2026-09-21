@@ -326,3 +326,37 @@ def test_r0_is_the_initial_stop_and_a_trailed_stop_never_moves_it(journal):
     assert L.r0_violations(journal) == []
     journal.execute("UPDATE orders SET realised_risk=realised_risk*3 WHERE order_id=?", (o["order_id"],)); journal.commit()
     assert [v["order_id"] for v in L.r0_violations(journal)] == [o["order_id"]]
+
+
+def test_every_judged_decision_records_its_clocks_and_a_refusal_names_the_one_that_failed(journal):
+    """Review item 12."""
+    import json
+    t = FakeTrader()
+    late = lambda: datetime(2026, 9, 1, 18, 0, tzinfo=timezone.utc)    # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=late,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    done = r.step()
+    assert done and all(a.outcome == "REFUSED" for a in done)
+    for a in done:
+        assert any(x.startswith("bar clock:") and "budget 120s" in x for x in a.reasons), a.reasons
+        row = journal.execute("SELECT clocks_json, bar_end_ts, recorded_at FROM decisions WHERE decision_id=?",
+                              (a.decision_id,)).fetchone()
+        c = json.loads(row["clocks_json"])
+        assert set(c) >= {"bar_end", "published", "runner_seen", "quote_ts", "bar_to_published_s", "published_to_seen_s"}
+        assert c["runner_seen"].startswith("2026-09-01T18:00") and c["quote_ts"] == "2026-09-01T13:52:00Z"
+        assert row["bar_end_ts"] is not None and c["bar_end"][:16] == row["bar_end_ts"][:16]
+
+
+def test_freshly_published_backfill_does_not_read_as_fresh(journal):
+    """A backfill row re-published a second ago is still armed on loaded
+    history: the bar clock refuses it and the reason says so."""
+    t = FakeTrader()
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    did = L.pending(journal)[0]["decision_id"]
+    journal.execute("UPDATE decisions SET data_status='live-backfill', recorded_at=? WHERE decision_id=?",
+                    (now().isoformat(), did)); journal.commit()
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    a = next(x for x in r.step() if x.decision_id == did)
+    assert a.outcome == "REFUSED"
+    assert any("loaded history" in x and "bar clock" in x for x in a.reasons), a.reasons

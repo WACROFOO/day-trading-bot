@@ -26,7 +26,7 @@ object. That is the whole reason the ledger exists as the bus.
 from __future__ import annotations
 
 import sqlite3
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import Callable, NamedTuple, Optional
 
 from journal import ledger as L
@@ -98,8 +98,9 @@ class Runner:
         """Act on every pending decision once. Returns what was done."""
         done = []
         for row in L.pending(self.conn):
+            self._clocks = None
             outcome, reasons = self._act(row)
-            L.set_outcome(self.conn, row["decision_id"], outcome, reasons)
+            L.set_outcome(self.conn, row["decision_id"], outcome, reasons, clocks=self._clocks)
             # Commit per decision: an order may already rest at the broker.
             # A crash before the loop-end commit lost its ledger row and left
             # the decision PENDING for a restarted runner to place again.
@@ -117,16 +118,39 @@ class Runner:
         clock = decision_clock(row)
         reasons = refusals(intent, now=clock)
 
+        # Several clocks, each recorded, each named when it fails (review
+        # 2026-09-21, item 12). bar_end = the age of the market information;
+        # published = when the desk wrote the decision (recorded_at — the
+        # rebuild that received the bar, so receipt and publication are one
+        # clock here); runner_seen = now; quote_ts = the desk quote's own
+        # stamp at the check. Freshly published backfill stays backfill: the
+        # bar clock is the one the budget applies to, never the publication.
+        now = self.now()
+        bar_end = clock + timedelta(seconds=bar_seconds(row))
+        published = _parse_ts(dict(row).get("recorded_at"))
+        q0 = self.quote(intent.symbol) if self.quote else None
+        self._clocks = {
+            "bar_end": bar_end.isoformat(timespec="seconds"),
+            "published": published.isoformat(timespec="seconds") if published else None,
+            "runner_seen": now.isoformat(timespec="seconds"),
+            "quote_ts": (q0 or {}).get("ts"),
+            "bar_to_published_s": round((published - bar_end).total_seconds()) if published else None,
+            "published_to_seen_s": round((now - published).total_seconds()) if published else None,
+        }
         if self.mode == "TRADE":
             # Age from the bar's CLOSE, not its open (clarification C1,
             # docs/preregistration.md §5). A 1-minute decision cannot exist
             # before its bar has closed, so measuring from the open charged
             # every plan 60 s it never had: a plan seen 70 s after the close
             # read as 130 s old and was refused (GRML, 2026-09-21 07:43).
-            age = (self.now() - clock).total_seconds() - bar_seconds(row)
+            age = (now - bar_end).total_seconds()
             if age > self.max_age_s:
-                reasons.append(f"decision is {age:.0f}s old (from its bar's close); a stale "
-                               f"plan is not the trade the cascade reviewed")
+                c = self._clocks
+                detail = (f" (bar close → published {c['bar_to_published_s']}s, published → runner "
+                          f"{c['published_to_seen_s']}s)" if published else "")
+                reasons.append(f"bar clock: the bar closed {age:.0f}s before the runner saw it "
+                               f"(budget {self.max_age_s}s); a stale plan is not the trade the "
+                               f"cascade reviewed{detail}")
         # Pre-market is an exercise decision before it is an order decision:
         # phase C only, and only in the shape the probe verdict dictates.
         # LOG_ONLY records the refusal too, so phase A shows how many
@@ -142,7 +166,9 @@ class Runner:
         if str(row["data_status"] or "").endswith("-backfill"):
             # Armed on loaded history with inputs from later. Diagnostic
             # cohort only: not prospective evidence, never an order (audit F3).
-            reasons.append("backfill decision: armed on loaded history, inputs not point-in-time")
+            reasons.append("backfill decision: armed on loaded history, inputs not point-in-time "
+                           "(bar clock: the bar predates the desk's start; a fresh publication "
+                           "time does not make it fresh)")
         if self.mode == "TRADE":
             # The phase gate at the execution boundary, not only in the day
             # command: `exercise.py live --trade` in phase A must place nothing
@@ -175,10 +201,11 @@ class Runner:
             # enforced here is that the desk's quote for THIS symbol is fresh
             # when the order leaves. `quote_source` returns None past 30s, so
             # a stalled desk cannot place an order on a price it no longer has.
-            q = self.quote(intent.symbol) if self.quote else None
+            q = q0
             if not q or q.get("bid") is None:
-                reasons.append("no fresh desk quote for this symbol — decision and order "
-                               "would not be on the same tape")
+                reasons.append("quote clock: no fresh desk quote for this symbol (older than the "
+                               "30 s bound, or none) — the execution price is not current and the "
+                               "decision and order would not be on the same tape")
             elif q.get("ask") is not None and q["ask"] > q["bid"]:
                 # Amendment A6: the stop must clear the spread by SPREAD_K or
                 # the round trip costs more than the trade can pay. Measured
@@ -554,6 +581,16 @@ class Runner:
         self.reconcile_unfilled()
         self.conn.commit()
         return done
+
+
+def _parse_ts(value) -> Optional[datetime]:
+    if not value:
+        return None
+    try:
+        d = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    return d if d.tzinfo else d.replace(tzinfo=timezone.utc)
 
 
 def _versions() -> tuple[Optional[str], Optional[str]]:

@@ -551,6 +551,28 @@ ran on the same thread as the 3-second session rebuild and starved it for most
 of every 120-second period. It runs on its own thread from the next desk start,
 and the rebuild logs its own duration when it exceeds 2 s.
 
+**Clarification C1b — several clocks, each recorded (2026-09-21 evening,
+review item 12).** C1 fixed the meaning of one clock. The review's point is
+that a valid trade needs acceptable data age AND acceptable processing delay
+AND a current market, and one number cannot say which failed. Every decision
+now carries `bar_end_ts` (the market-information clock: the armed bar's
+close) and, once the runner has judged it, `clocks_json`:
+
+| clock | establishes | where |
+|---|---|---|
+| `bar_end` | age of the market information | `decisions.bar_end_ts` |
+| `published` | when the desk wrote the decision; in this architecture the same rebuild that received the bar, so receipt and publication are one clock | `decisions.recorded_at` |
+| `runner_seen` | processing delay: when the runner judged the row | `clocks_json` |
+| `quote_ts` | whether the execution price is current: the desk quote's own stamp at the check | `clocks_json` |
+| `bar_to_published_s`, `published_to_seen_s` | the two delays, separately | `clocks_json` |
+
+The 120 s budget is unchanged and applies to the **bar clock** only; a
+refusal says "bar clock: …" with both delays in parentheses, or "quote
+clock: …" when the desk quote is absent or older than its 30 s bound. A
+backfill row is refused on the bar clock however fresh its publication time
+(tested). Changing the numerical tolerance stays a separate, dated decision
+in this file.
+
 **The first order, and Amendment A6 (2026-09-21, 09:37 ET).** VEEE, trigger
 16.33, stop 16.31: a 2-cent stop on a $16 stock, sized by the rule "the stop
 defines the size" to 1,000 shares — $16,330 of notional on $2,288 of equity.

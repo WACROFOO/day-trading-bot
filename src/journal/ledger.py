@@ -25,7 +25,7 @@ import json
 import os
 import sqlite3
 from dataclasses import asdict, is_dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Iterable, Optional
 from zoneinfo import ZoneInfo
@@ -282,7 +282,14 @@ _ADDED_COLUMNS = {
                        ("a1_accepted", "TEXT"), ("a1_accepted_by", "TEXT"),
                        ("a1_accepted_at", "TEXT"),
                        ("code_commit", "TEXT"), ("rules_hash", "TEXT")),
-    "decisions": (("rules_hash", "TEXT"), ("code_commit", "TEXT")),
+    # Several clocks, not one (review 2026-09-21, item 12): bar_end_ts is
+    # the age of the market information; recorded_at is when the desk
+    # published the decision (the same rebuild that received the bar, so
+    # receipt and publication coincide in this architecture); clocks_json is
+    # what the runner saw when it judged the row — its own clock and the
+    # desk quote's timestamp — written with the outcome.
+    "decisions": (("rules_hash", "TEXT"), ("code_commit", "TEXT"),
+                  ("bar_end_ts", "TEXT"), ("clocks_json", "TEXT")),
     "orders": (("perm_id", "INTEGER"), ("symbol", "TEXT"), ("exit_confirmed_by", "TEXT"),
                ("filled_qty", "REAL"), ("exit_order_id", "INTEGER"),
                ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT"),
@@ -357,6 +364,7 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
     volume, rvol, change_pct).
     """
     did = decision_key(symbol, armed_at, plan.entry, plan.stop)
+    bar_end = _bar_end(armed_at, bar_resolution)
     gates = [{"id": g.id, "state": getattr(g.state, "value", g.state),
               "value": g.value, "reason": g.reason, "kills": g.kills}
              for g in cascade.gates]
@@ -369,8 +377,8 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
             float_shares, float_quality, float_source, catalyst, halted,
             verdict, killed_by, plan_allowed, gates_json, warnings_json, inputs_json,
             trigger, stop, target, risk_share, reward_multiple, pullback_candles,
-            volume_ok, outcome, recorded_at, rules_hash, code_commit)
-        VALUES (?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?, ?,?)
+            volume_ok, outcome, recorded_at, rules_hash, code_commit, bar_end_ts)
+        VALUES (?,?,?,?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?,?,?,?, ?,?,?,?,?,?, ?,?,?,?,?,?,?, ?,?, ?,?, ?)
         ON CONFLICT(decision_id) DO UPDATE SET
             -- A row first seen during a STALE build is a fact about the FEED,
             -- not the name. The next LIVE build may replace it; nothing else
@@ -399,7 +407,7 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
         getattr(plan, "risk_share", None), getattr(plan, "reward_multiple", None),
         getattr(plan, "pullback_candles", None),
         int(bool(getattr(plan, "volume_ok", False))),
-        outcome, _now(), rules_hash, code_commit,
+        outcome, _now(), rules_hash, code_commit, bar_end,
     ))
     if cur.rowcount == 1:
         # The row was inserted or actually updated: keep what it now says as an
@@ -440,13 +448,29 @@ def record_halt(conn: sqlite3.Connection, ts, symbol: str, status: str,
                     VALUES (?,?,?,?,?)""", (_et(ts), symbol, status, last_before, _now()))
 
 
+def _bar_end(armed_at, bar_resolution) -> str:
+    """The bar's close — the market-information clock. ts_et is the OPEN."""
+    res = str(bar_resolution or "1m").strip().lower()
+    secs = 60
+    if res.endswith("s") and res[:-1].isdigit():
+        secs = int(res[:-1])
+    elif res.endswith("m") and res[:-1].isdigit():
+        secs = int(res[:-1]) * 60
+    ts = armed_at
+    if isinstance(ts, str):
+        ts = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=timezone.utc)
+    return _et(ts + timedelta(seconds=secs))
+
+
 def set_outcome(conn: sqlite3.Connection, decision_id: str, outcome: str,
-                reasons: Optional[list[str]] = None) -> None:
+                reasons: Optional[list[str]] = None, clocks: Optional[dict] = None) -> None:
     if outcome not in OUTCOMES:
         raise ValueError(f"outcome {outcome!r} not in {OUTCOMES}")
-    conn.execute("""UPDATE decisions SET outcome=?, refusal_reasons_json=?, acted_at=?
-                    WHERE decision_id=?""",
-                 (outcome, _json(reasons or []), _now(), decision_id))
+    conn.execute("""UPDATE decisions SET outcome=?, refusal_reasons_json=?, acted_at=?,
+                    clocks_json=COALESCE(?, clocks_json) WHERE decision_id=?""",
+                 (outcome, _json(reasons or []), _now(), _json(clocks) if clocks else None, decision_id))
 
 
 def record_order(conn: sqlite3.Connection, decision_id: str, *, symbol: str,
