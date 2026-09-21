@@ -470,6 +470,11 @@ def fetch_records(client: AlpacaClient, symbols: Iterable[str],
                         "first_observed_at": published,
                         "headline": headline,
                         "category": (item.get("source") or "news").lower(),
+                        # Every ticker the provider tagged this article with.
+                        # "Why Is Critical Metals Stock Soaring Monday?" arrived
+                        # on GLND's card on 2026-09-21 because Benzinga tagged
+                        # it to both; the card had no way to say so.
+                        "tagged": list(item.get("symbols", [])),
                     })
     except AlpacaError as exc:
         # Never silent. A swallowed failure renders as "no catalyst", which is

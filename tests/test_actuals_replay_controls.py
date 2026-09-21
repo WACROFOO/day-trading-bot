@@ -119,9 +119,27 @@ def test_an_amendment_is_classified_superseded_not_reported_as_a_broken_log():
     assert res["diverged"] == [], "an amendment is not a broken log"
     assert len(res["superseded"]) == 1
     assert res["superseded"][0]["rules"] == "pre-A2"
-    assert res["by_rules"]["pre-A2"] == 1 and res["current_rules"] == "A2"
+    assert res["by_rules"]["pre-A2"] == 1 and res["current_rules"] == "A5"   # A5 since 2026-09-21
     # and it is not quietly counted as reproducing under the current rules
     assert res["reproduced"] == res["checked"] - 1
+
+
+def test_a_pre_a5_float_kill_is_superseded_under_a2_not_diverged():
+    """A5 changed the float gate. A row the OLD rules killed on float must
+    reproduce under A2 (float still killed there) and be named as such."""
+    conn = L.connect(":memory:")
+    build_session(FIXTURE, journal=conn)
+    row = conn.execute("SELECT decision_id, inputs_json FROM decisions LIMIT 1").fetchone()
+    inputs = json.loads(row["inputs_json"])
+    inputs.update({"float_shares": 45_000_000.0, "float_verified": True,
+                   "catalyst_today": True, "catalyst_source_ok": True,
+                   "change_pct": 50.0, "rvol": 8.0, "last": 6.0})
+    conn.execute("UPDATE decisions SET inputs_json=?, verdict='REJECT', killed_by='float' "
+                 "WHERE decision_id=?", (json.dumps(inputs), row["decision_id"]))
+    res = replay.check(conn)
+    assert res["diverged"] == []
+    assert any(x["rules"] == "A2" for x in res["superseded"])
+    assert res["current_rules"] == "A5"
 
 
 def test_replay_detects_a_log_that_lost_an_input(journal):

@@ -15,7 +15,7 @@ def test_replay_then_check_on_the_fixture(tmp_path):
     assert out.returncode == 0, out.stderr
     assert "SYNTHETIC FIXTURE" in out.stdout          # labelled, always
     assert "5 plans armed" in out.stdout and "5/5 decisions reproduce" in out.stdout
-    assert "REJECTS" in out.stdout and "✗ float" in out.stdout
+    assert "REJECTS" in out.stdout and "✗ pillars" in out.stdout   # A5
 
     chk = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "check"],
                          cwd=ROOT, capture_output=True, text=True)

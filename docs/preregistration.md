@@ -360,6 +360,40 @@ of it, so this is logged as **a question for a later amendment with clean
 stops, not a change now.** No constant moves on the strength of stops no fill
 would honour.
 
+**Amendment A5 — the float gate flags; the Five Pillars become a count
+(owner, 2026-09-21).** Owner's words, 07:2x ET: *"even if the float is not
+respected and you see a potential, why not drop it and take the trade? … at
+least 4 should be satisfied."* Evidence the same morning, `scripts/gate_audit.py`
+on the armed-plan column (capped +2R/−1R): the float-killed cohort at
+**+0.900 R** against the allowed cohort's +0.714 — the only gate that killed a
+better cohort than it kept. The price gate, on the same column, kills a worse
+one (+0.237, median −1) and **stays a hard kill**.
+
+The rule, in `cascade.py`: `FLOAT_GATE_KILLS = False`; the float gate is still
+evaluated and still reads FAIL / MANUAL over the cap; a new gate `pillars`
+after gate 3 counts price, gain ≥ 10 %, RVOL ≥ 5×, float < 20 M and catalyst,
+UNKNOWN counting as not passed, and **kills below `PILLARS_MIN = 4`**. So a
+27 M float with the other four green is 4/5 and alive; the same float with no
+catalyst is 3/5 and killed on `pillars` — never silently through two flags.
+`RULE_SETS` carries A5; R11 classifies pre-A5 float kills as superseded under
+A2. Rules hash moves (`floatGateKills`, `pillarsMin` in the fingerprint). Not
+a Ross rule: float < 20 M is a Confirmed pillar and this is a deviation made
+by the owner, measured forward. **Effective from the next desk start** — the
+running desk of 2026-09-21 keeps the rules it started with.
+
+Kill rule for A5, before its data: if after 30 taken trades the
+`float`-flagged cohort's realised R is below the allowed-with-float cohort's,
+A5 is reverted.
+
+**Relevance of a headline — the shared-tag rule (2026-09-21, display and gate
+3 label; verdicts unaffected).** "Why Is Critical Metals Stock Soaring
+Monday?" arrived on GLND's card because the provider tagged it to both. News
+records now carry every tag; a headline tagged to several names that does not
+contain THIS ticker is labelled **Shared tag — about <other>** on the card and
+does not count as this name's catalyst in `_catalyst_today`. Gate 3 flags
+rather than kills (A2), so the change moves `decisions.catalyst` and the
+`strat·news` split, never a verdict — R11 is untouched.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

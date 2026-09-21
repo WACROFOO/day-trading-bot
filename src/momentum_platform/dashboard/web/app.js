@@ -297,7 +297,7 @@ function makePane(hostId, daily) {
      colours, a symbol/interval watermark, a dashed crosshair with axis labels,
      a last-price line, and an OHLC legend that follows the cursor. The engine
      is TradingView's own; what was missing was the dressing people recognise. */
-  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69a80", volDown: "#ef535080",
+  const TVC = { up: "#26a69a", down: "#ef5350", volUp: "#26a69ab3", volDown: "#ef5350b3",
                 cross: "#758696", label: "#2a2e39" };
   const hhmm = t => {
     const d = new Date(t * 1000);   // stamps are already shifted to the ET wall clock
@@ -345,22 +345,39 @@ function makePane(hostId, daily) {
   const legend = document.createElement("div");
   legend.className = "tv-legend";
   host.appendChild(legend);
-  let lastRows = [], lastVols = [];
-  const showLegend = (row, vol) => {
+  let lastRows = [], lastVols = [], lastInd = {};
+  /* Two legend lines, as TradingView draws them: OHLC + change + volume on
+     the first, every indicator's value at the crosshair on the second, in
+     the indicator's own colour. The overlays were drawn but never named
+     with a number; "which line is the 9?" is a question a chart should not
+     make you ask. */
+  const showLegend = (row, vol, idx) => {
     if (!row) { legend.textContent = ""; return; }
     const chg = row.open ? (row.close - row.open) / row.open * 100 : 0;
     const c = row.close >= row.open ? "u" : "d";
     const cell = (k, v) => '<span class="k">' + k + '</span><span class="' + c + '">' + v + '</span>';
-    legend.innerHTML = cell("O", row.open.toFixed(2)) + cell("H", row.high.toFixed(2)) +
+    let html = cell("O", row.open.toFixed(2)) + cell("H", row.high.toFixed(2)) +
       cell("L", row.low.toFixed(2)) + cell("C", row.close.toFixed(2)) +
       '<span class="' + c + '">' + (chg >= 0 ? "+" : "") + chg.toFixed(2) + '%</span>' +
       (vol != null ? cell("Vol", Math.round(vol).toLocaleString("en-US")) : "");
+    const parts = [];
+    const at = (arr) => (arr && idx != null && idx < arr.length) ? arr[idx] : (arr && arr.length ? arr[arr.length - 1] : null);
+    const ind = (key, label, color, digits) => {
+      const v = at(lastInd[key]);
+      if (v == null) return;
+      parts.push('<span style="color:' + color + '">' + label + ' ' + v.toFixed(digits == null ? 2 : digits) + '</span>');
+    };
+    ind("vwap", "VWAP", PALETTE.vwap); ind("ema9", "EMA9", PALETTE.ema9);
+    ind("ema20", "EMA20", PALETTE.ema20); ind("ema200", "EMA200", PALETTE.ema200);
+    ind("macd", "MACD", "#26a69a", 3);
+    if (parts.length) html += '<br>' + parts.join('<span class="k"> · </span>');
+    legend.innerHTML = html;
   };
   chart.subscribeCrosshairMove(param => {
     const tail = lastRows.length - 1;
-    if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail]); return; }
+    if (!param || !param.time || tail < 0) { showLegend(lastRows[tail], lastVols[tail], tail); return; }
     const i = lastRows.findIndex(r => r.time === param.time);
-    showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail]);
+    showLegend(i >= 0 ? lastRows[i] : lastRows[tail], i >= 0 ? lastVols[i] : lastVols[tail], i >= 0 ? i : tail);
   });
 
   /* Extended-hours shading, the way TradingView's ext-hours mode draws it:
@@ -387,8 +404,8 @@ function makePane(hostId, daily) {
      pane that shows no MACD is squeezed to pay for one. */
   const setBands = macdOn => {
     chart.priceScale("vol").applyOptions({
-      scaleMargins: macdOn ? { top: 0.74, bottom: 0.12 } : { top: 0.8, bottom: 0 } });
-    chart.priceScale("macd").applyOptions({ scaleMargins: { top: 0.88, bottom: 0 } });
+      scaleMargins: macdOn ? { top: 0.70, bottom: 0.14 } : { top: 0.76, bottom: 0 } });
+    chart.priceScale("macd").applyOptions({ scaleMargins: { top: 0.87, bottom: 0 } });
   };
   setBands(false);
   const lines = {};
@@ -403,8 +420,10 @@ function makePane(hostId, daily) {
      carry MACD while the 10-second pane stays clean, and remembered across
      reloads like every other thing the trader arranged on purpose. */
   const SHOW_KEY = "momentum-workstation.show.v1." + hostId;
+  // MACD is ON by default on the execution pane: it is a Layer 2 gate the
+  // cascade judges, so the trader must be able to see it without a menu.
   const SHOW_DEFAULT = { volume: true, vwap: true, ema9: true, ema20: true,
-                         ema200: true, macd: false, hod: true, plan: true };
+                         ema200: true, macd: hostId === "chartA", hod: true, plan: true };
   let show = Object.assign({}, SHOW_DEFAULT);
   try {
     const saved = JSON.parse(localStorage.getItem(SHOW_KEY) || "null");
@@ -449,7 +468,7 @@ function makePane(hostId, daily) {
         time: rows[i].time, value: vols[i],
         color: rows[i].close >= rows[i].open ? TVC.volUp : TVC.volDown,
       })) : []);
-      lastRows = rows; lastVols = vols; showLegend(rows[rows.length - 1], vols[vols.length - 1]);
+      lastRows = rows; lastVols = vols;
       sessionBounds = (!daily && opts.openTs)
         ? { open: deskTime(opts.openTs), close: deskTime(opts.openTs + 6.5 * 3600) } : null;
       if (candles.setMarkers) {          // 09:30 / 16:00 marked on the bars, as TradingView does
@@ -465,6 +484,7 @@ function makePane(hostId, daily) {
       paintShade();
       const closes = rows.map(r => r.close);
       const put = (key, series) => {
+        lastInd[key] = series || null;
         if (!series) { if (lines[key]) lines[key].setData([]); return; }
         lineFor(key).setData(series.map((v, i) => v == null ? null : { time: rows[i].time, value: v })
                                    .filter(Boolean));
@@ -476,11 +496,12 @@ function makePane(hostId, daily) {
       put("ema200", opts.ema200 && show.ema200 ? ema(closes, 200) : null);
       if (show.macd) {
         const mh = macdHist(closes);
+        lastInd.macd = mh;
         macd.setData(rows.map((r, i) => mh[i] == null ? null : {
           time: r.time, value: mh[i],
           color: mh[i] >= 0 ? "#26a69a90" : "#ef535090",
         }).filter(Boolean));
-      } else macd.setData([]);
+      } else { macd.setData([]); lastInd.macd = null; }
       priceLines.forEach(l => candles.removePriceLine(l));
       priceLines = [];
       const mark = (price, color, title) => {
@@ -502,6 +523,7 @@ function makePane(hostId, daily) {
       // timeframe only; the measure tool needs the live plan's risk per share
       // to report a move in R.
       if (tools) tools.sync(opts.symbol || null, opts.tf || (daily ? "D" : null), opts.plan || null);
+      showLegend(rows[rows.length - 1], vols[vols.length - 1], rows.length - 1);
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
       if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
@@ -668,10 +690,14 @@ function newsFor(sym, nowMs) {
   const visible = items.filter(n => new Date(n.firstObservedAt).getTime() <= nowMs &&
                                     classifyCatalyst(n.headline, n.category).grade !== "roundup");
   if (!visible.length) return null;
-  const n = visible[visible.length - 1];
+  // Prefer the newest headline that is actually about this company; fall
+  // back to a shared-tag item so the card can say what it is instead of
+  // reading "no news" on a name the feed clearly has something for.
+  const own = visible.filter(n => !n.sharedTag);
+  const n = (own.length ? own : visible)[(own.length ? own : visible).length - 1];
   const ageMin = (nowMs - new Date(n.publishedAt).getTime()) / 60000;
   const flame = ageMin <= 120 ? "red" : ageMin <= 720 ? "orange" : ageMin <= 1440 ? "yellow" : null;
-  return { item: n, ageMin, flame };
+  return { item: n, ageMin, flame, shared: !!n.sharedTag };
 }
 
 /* A card is rebuilt from scratch several times a second. Without this the
@@ -1348,8 +1374,8 @@ function renderCatalyst(host, ctx) {
     host.appendChild(head);
     const read = el("div", "cat-read");
     read.textContent = score === 4
-      ? "4/4 technical, no headline. Gate 3 flags it, it does not kill (owner amendment A2, 2026-09-17); the no-news cohort is tracked on its own."
-      : "No headline, " + score + "/4 technical. Nothing to build a thesis on.";
+      ? "4/5 pillars, no headline. Gate 3 flags it, it does not kill (A2); the no-news cohort is tracked on its own."
+      : "No headline, " + score + "/5 pillars. Nothing to build a thesis on.";
     host.appendChild(read);
     return;
   }
@@ -1362,6 +1388,16 @@ function renderCatalyst(host, ctx) {
   fc.title = flame === "none" ? "no headline inside 24h" : "news " + (FLAME_BAND[flame] || "") + " old — recency, not quality";
   head.appendChild(fc);
   head.appendChild(el("span", "cat-quality " + cls.grade, cls.label));
+  if (nf.shared) {
+    // "Why Is Critical Metals Stock Soaring Monday?" on GLND's card, 2026-09-21:
+    // the provider tagged it to both. Say so, in words, on the card.
+    const others = (nf.item.tagged || []).filter(t => t !== ctx.sym);
+    const st = el("span", "cat-quality roundup", "Shared tag");
+    st.title = "Tagged to " + (nf.item.tagged || []).length + " names (" + (nf.item.tagged || []).join(", ") +
+               "); the headline does not name " + ctx.sym + ". Someone else's story. Not this name's catalyst.";
+    head.appendChild(st);
+    head.appendChild(el("span", "tiny muted", "about " + (others.length ? others.join("/") : "another name")));
+  }
   if (nf.item.category) head.title = "source: " + nf.item.category.replace(/_/g, " ");
   host.appendChild(head);
   host.appendChild(el("p", "headline", nf.item.headline));
@@ -1383,18 +1419,25 @@ function renderCatalyst(host, ctx) {
   pub.title = "seen by the feed " + (latency >= 1 ? Math.round(latency) + " min later" : "immediately");
   host.appendChild(pub);
 
+  // One denominator on the whole desk: the Five Pillars. This card used to
+  // say "3/4" (the four technical pillars) beside a board saying "4/5" for the
+  // same stock — two counts, one name, and the reader asked which was Ross's.
+  // Both are: 4/5 = technical + news. Only the 5-count is spoken now.
+  const five = score + (nf.shared ? 0 : 1);
   const read = el("div", "cat-read " + cls.grade);
-  if (cls.grade === "roundup") {
+  if (nf.shared) {
+    read.textContent = "Someone else's story tagged here — not this name's catalyst. " + score + "/5 pillars (news not counted).";
+  } else if (cls.grade === "roundup") {
     read.textContent = "A list of movers, not this company's news. Not a catalyst.";
   } else if (cls.grade === "dilutive") {
     read.textContent = "Dilution risk. Read the size before anything else.";
-  } else if (flame === "red" && score === 4) {
-    read.textContent = "Fresh " + cls.label.toLowerCase() + " on a 4/4 candidate. The chart decides the entry.";
-  } else if (score === 4) {
-    read.textContent = "4/4 pillars, headline " + fmtAge(nf.ageMin * 60000) +
+  } else if (flame === "red" && five === 5) {
+    read.textContent = "Fresh " + cls.label.toLowerCase() + " on a 5/5 candidate. The chart decides the entry.";
+  } else if (five === 5) {
+    read.textContent = "5/5 pillars, headline " + fmtAge(nf.ageMin * 60000) +
       " old. The crowd has seen it; demand must show in volume.";
   } else {
-    read.textContent = "Recent news, " + score + "/4 pillars. A flame is recency, not compliance.";
+    read.textContent = "Recent news, " + five + "/5 pillars. A flame is recency, not compliance.";
   }
   read.title = cls.note;
   host.appendChild(read);

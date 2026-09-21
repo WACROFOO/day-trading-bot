@@ -161,7 +161,7 @@ def test_the_report_is_written_in_the_design_layout(journal, tmp_path, monkeypat
     assert "SYNTHETIC FIXTURE" in txt
     for h in ("## Funnel", "## Rejects", "## Controls", "## Replay", "## Not checked"):
         assert h in txt
-    assert "| EPHZ | REJECT | SUPPRESSED |" in txt and "float" in txt
+    assert "| EPHZ | REJECT | SUPPRESSED |" in txt and "pillars" in txt   # A5: 3/5, killed on the count
     assert "5/5 decisions reproduce" in txt
 
 

@@ -324,6 +324,8 @@ def build_session_from_records(
                 "id": rec["provider_id"], "publishedAt": rec["published_at"],
                 "firstObservedAt": observed, "headline": rec["headline"],
                 "category": rec.get("category"),
+                "tagged": list(rec.get("tagged") or [rec["symbol"]]),
+                "sharedTag": shared_tag(rec["headline"], rec["symbol"], rec.get("tagged")),
             })
 
         frame_alerts: list[dict] = []
@@ -777,6 +779,25 @@ def is_roundup(headline: str, category: str = "") -> bool:
     return False
 
 
+def shared_tag(headline: str, symbol: str, tagged) -> bool:
+    """True when the article is tagged to other names too and its headline
+    does not name THIS ticker — a story about someone else that the provider
+    attached here. Not a market roundup (those are lists); a single company's
+    story, wrong company. It stays visible on the card, labelled, and does not
+    count as this name's catalyst.
+
+    Only the ticker itself is matched, because the desk has no company-name
+    field to match against. That is conservative in the right direction: a
+    merger headline naming both companies by name but tagged to both tickers
+    reads as shared on both — a reader sees it and judges; the gate does not
+    credit it. Gate 3 flags rather than kills (A2), so the cost of that
+    conservatism is a label, never a lost trade."""
+    tags = [t for t in (tagged or []) if t]
+    if len(tags) <= 1:
+        return False
+    return symbol.upper() not in (headline or "").upper()
+
+
 def _catalyst_today(news: list, trading_date) -> bool:
     """FILTERS.md gate 3: a catalyst DATED TODAY. A headline counts when it was
     published after 16:00 ET of the previous calendar day (overnight news is
@@ -794,6 +815,8 @@ def _catalyst_today(news: list, trading_date) -> bool:
     for item in news:
         if is_roundup(item.get("headline") or "", item.get("category") or ""):
             continue
+        if item.get("sharedTag"):
+            continue                      # someone else's story, tagged here
         pub = item.get("publishedAt") or item.get("published_at")
         if not pub:
             continue

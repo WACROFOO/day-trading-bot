@@ -97,6 +97,7 @@ def fetch_records(symbols: Iterable[str], days: int = 1, daily_lookback: str = "
                     "first_observed_at": observed,
                     "headline": headline,
                     "category": (content.get("contentType") or "unclassified").lower(),
+                    "tagged": [symbol],          # this source asks per symbol
                 })
         except Exception:
             pass

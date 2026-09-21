@@ -71,10 +71,37 @@ def test_penny_theme_softens_the_floor_but_does_not_remove_it():
 
 
 # ------------------------------------------------------------------- float
-def test_float_over_cap_kills():
+def test_float_over_cap_flags_under_a5_and_kills_under_the_written_rule():
+    """A5 (owner, 2026-09-21): float FLAGS. The gate is still evaluated and
+    still reads FAIL; it no longer stops the cascade on its own — the pillar
+    count does. The rule as written is one keyword away, and reproduces."""
     r = evaluate(good(float_shares=45_000_000, float_verified=True))
-    assert r.killed_by == "float"
     assert gate(r, "float").state is GateState.FAIL
+    assert r.killed_by != "float"
+    assert any("A5" in w for w in r.warnings)
+    old = evaluate(good(float_shares=45_000_000, float_verified=True), float_gate_kills=True)
+    assert old.killed_by == "float"
+
+
+def test_pillar_count_gate_lets_a_4_of_5_name_through_and_kills_3_of_5():
+    """Owner's words: 'at least 4 should be satisfied'. Float over the cap
+    with the other four passing is 4/5 — alive. Float over the cap AND no
+    catalyst is 3/5 — killed on `pillars`, never silently on a flag."""
+    four = evaluate(good(float_shares=45_000_000, float_verified=True))
+    assert four.killed_by is None and gate(four, "pillars").state is GateState.PASS
+    assert "4/5" in gate(four, "pillars").value
+    three = evaluate(good(float_shares=45_000_000, float_verified=True, catalyst_today=False))
+    assert three.killed_by == "pillars"
+    assert "missing float, catalyst" in gate(three, "pillars").value
+    # the count gate is a rule-set knob: off, the pre-A5 behaviour returns
+    assert evaluate(good(float_shares=45_000_000, float_verified=True, catalyst_today=False),
+                    pillars_min=None).killed_by is None
+
+
+def test_unknown_pillar_inputs_count_as_not_passed():
+    """Fails closed: an unknown RVOL is not a passed RVOL."""
+    r = evaluate(good(float_shares=45_000_000, float_verified=True, rvol=None))
+    assert r.killed_by == "pillars" and "rvol" in gate(r, "pillars").value
 
 
 def test_over_cap_shares_outstanding_is_manual_not_unknown_and_still_kills():
@@ -83,9 +110,15 @@ def test_over_cap_shares_outstanding_is_manual_not_unknown_and_still_kills():
     cap it proves float is under; over the cap it proves nothing, which is a
     question for a human — and it must stop the cascade either way."""
     r = evaluate(good(float_shares=234_000_000,
-                      float_is_shares_outstanding=True, float_verified=False))
+                      float_is_shares_outstanding=True, float_verified=False),
+                 float_gate_kills=True)          # the rule as written
     assert gate(r, "float").state is GateState.MANUAL_CONFIRMATION_REQUIRED
     assert r.killed_by == "float" and r.plan_allowed is False
+    # under A5 the bound still reads MANUAL and does not pass the pillar count
+    r5 = evaluate(good(float_shares=234_000_000,
+                       float_is_shares_outstanding=True, float_verified=False))
+    assert gate(r5, "float").state is GateState.MANUAL_CONFIRMATION_REQUIRED
+    assert r5.killed_by != "float" and "float" in gate(r5, "pillars").value
 
 
 def test_under_cap_shares_outstanding_bound_passes():
@@ -97,9 +130,15 @@ def test_under_cap_shares_outstanding_bound_passes():
 
 
 def test_unknown_float_fails_closed():
+    """Unknown is never a pass. Under the written rule it kills; under A5 it
+    reads UNKNOWN and counts as a missing pillar — the name lives only if the
+    other four carry it."""
+    written = evaluate(good(float_shares=None), float_gate_kills=True)
+    assert written.killed_by == "float"
     r = evaluate(good(float_shares=None))
-    assert r.killed_by == "float"
     assert gate(r, "float").state is GateState.UNKNOWN
+    assert r.killed_by is None and "missing float" in gate(r, "pillars").value
+    assert evaluate(good(float_shares=None, catalyst_today=False)).killed_by == "pillars"
 
 
 # --------------------------------------------------------------- catalyst
@@ -252,7 +291,9 @@ def test_pass_is_never_a_verdict():
 
 
 @pytest.mark.parametrize("bad", [
-    dict(last=1.69), dict(float_shares=234e6, float_is_shares_outstanding=True),
+    dict(last=1.69),
+    # A5: an over-cap float alone no longer kills; with no catalyst it is 3/5
+    dict(float_shares=234e6, float_is_shares_outstanding=True, catalyst_today=False),
     dict(is_fund_or_etf=True),
     dict(buyout_announced=True), dict(tick_size=0.05),
 ])

@@ -168,7 +168,9 @@ def fingerprint(entitlements: Optional[Dict[str, Any]] = None) -> Dict[str, Any]
         "scanners": scanner_versions(),
         # Cascade semantics that an amendment can move. A2 flipped gate 3
         # from kill to flag on 2026-09-17; the hash must say so.
-        "cascade": {"catalystGateKills": _cascade.CATALYST_GATE_KILLS},
+        "cascade": {"catalystGateKills": _cascade.CATALYST_GATE_KILLS,
+                    "floatGateKills": _cascade.FLOAT_GATE_KILLS,
+                    "pillarsMin": _cascade.PILLARS_MIN},
     }
     blob = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
     return {

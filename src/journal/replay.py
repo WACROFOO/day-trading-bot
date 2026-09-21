@@ -37,6 +37,15 @@ from momentum_platform.cascade import RULE_SETS, Inputs, evaluate
 from . import ledger as L
 
 
+OVERRIDE_KEYS = ("catalyst_gate_kills", "float_gate_kills", "pillars_min")
+
+
+def _overrides(rs: dict) -> dict:
+    """The evaluate() keyword arguments a rule set carries. Every amendment
+    adds its key here and in cascade.RULE_SETS — nowhere else."""
+    return {k: rs[k] for k in OVERRIDE_KEYS if k in rs}
+
+
 def _matches(stored: dict, row, **kw) -> bool:
     res = evaluate(Inputs(**stored), **kw)
     return res.verdict.value == row["verdict"] and res.killed_by == row["killed_by"]
@@ -48,11 +57,11 @@ def check(conn: sqlite3.Connection) -> dict:
     current = RULE_SETS[0]
     for r in rows:
         stored = json.loads(r["inputs_json"])
-        if _matches(stored, r, catalyst_gate_kills=current["catalyst_gate_kills"]):
+        if _matches(stored, r, **_overrides(current)):
             by_rules[current["name"]] = by_rules.get(current["name"], 0) + 1
             continue
         for rs in RULE_SETS[1:]:
-            if _matches(stored, r, catalyst_gate_kills=rs["catalyst_gate_kills"]):
+            if _matches(stored, r, **_overrides(rs)):
                 by_rules[rs["name"]] = by_rules.get(rs["name"], 0) + 1
                 superseded.append({
                     "decision_id": r["decision_id"], "symbol": r["symbol"],

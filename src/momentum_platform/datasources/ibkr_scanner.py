@@ -526,7 +526,8 @@ def news_records(symbols: List[str], since: Optional[datetime] = None) -> tuple:
                 if symbol in symbols:
                     out.append({"type": "news", "symbol": symbol, "provider_id": str(item.get("id")),
                                 "published_at": published, "first_observed_at": published,
-                                "headline": headline, "category": item.get("source")})
+                                "headline": headline, "category": item.get("source"),
+                                "tagged": list(item.get("symbols", []))})
     except Exception as exc:
         return [], f"headlines unavailable: {exc}"
     return out, None

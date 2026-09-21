@@ -257,8 +257,8 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
    drawing canvas covers the pane and is transparent to the mouse until a tool
    is picked — otherwise it would eat the crosshair, the zoom and the pan. */
 .draw-layer{position:absolute;inset:0;z-index:6;pointer-events:none}
-.draw-bar{position:absolute;left:4px;top:22px;z-index:7;display:flex;flex-direction:column;gap:2px;
-  opacity:0;transition:opacity .12s}
+.draw-bar{position:absolute;left:4px;top:34px;z-index:7;display:flex;flex-direction:column;gap:2px;
+  opacity:.55;transition:opacity .12s}
 .chart-host:hover .draw-bar,.draw-bar:focus-within{opacity:1}
 .draw-btn{width:20px;height:20px;padding:0;border:1px solid #223046;border-radius:4px;
   background:#0f1722cc;color:var(--ink-dim,#9fb0c3);font-size:11px;line-height:1;cursor:pointer}
@@ -269,7 +269,7 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 
 .ind-btn{position:absolute;right:62px;top:3px;z-index:7;width:20px;height:18px;padding:0;
   border:1px solid #223046;border-radius:4px;background:#0f1722cc;color:var(--ink-dim,#9fb0c3);
-  font:italic 600 11px var(--sans);cursor:pointer;opacity:0;transition:opacity .12s}
+  font:italic 600 11px var(--sans);cursor:pointer;opacity:.7;transition:opacity .12s}
 .chart-host:hover .ind-btn,.ind-menu:not([hidden])+.ind-btn,.ind-btn:focus{opacity:1}
 .ind-btn:hover{border-color:#2b3a4d;color:var(--ink,#dbe6f3)}
 .ind-menu{position:absolute;right:62px;top:24px;z-index:8;background:var(--panel,#0f1722);
@@ -487,8 +487,9 @@ body.resizing .gutter{pointer-events:auto}
 .lag{min-width:96px;display:inline-flex;align-items:center;justify-content:center;
   font-variant-numeric:tabular-nums;white-space:nowrap}
 .tv-legend{position:absolute;top:4px;left:8px;z-index:4;pointer-events:none;
-  font:9.5px var(--mono);color:#b2b5be;display:flex;gap:5px;align-items:baseline;
+  font:9.5px var(--mono);color:#b2b5be;line-height:1.5;
   font-variant-numeric:tabular-nums;white-space:nowrap}
+.tv-legend>span{margin-right:5px}
 .tv-legend .k{color:#787b86;margin-left:4px}
 .tv-legend .u{color:#26a69a} .tv-legend .d{color:#ef5350}
 /* Extended-hours tint, drawn under the series and above the grid.

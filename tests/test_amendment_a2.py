@@ -31,7 +31,10 @@ def test_a_news_source_record_reaches_the_cascade_as_source_unknown():
     inp = SB.cascade_inputs(meta)
     assert inp.catalyst_source_ok is False and inp.catalyst_today is False
     res = C.evaluate(inp)
-    assert res.killed_by is None
+    # A2's claim is about gate 3 only: it reads UNKNOWN and does not kill.
+    # (Under A5 this thin fixture — no RVOL, no catalyst — dies on the pillar
+    # count instead, which is a different gate saying a different thing.)
+    assert res.killed_by != "catalyst"
     assert next(g for g in res.gates if g.id == "catalyst").state is C.GateState.UNKNOWN
 
 
@@ -55,7 +58,9 @@ def test_the_rules_hash_moves_with_the_amendment(monkeypatch):
     monkeypatch.setattr(C, "CATALYST_GATE_KILLS", not C.CATALYST_GATE_KILLS)
     after = DP.fingerprint()["hash"]
     assert before != after
-    assert DP.fingerprint()["cascade"] == {"catalystGateKills": C.CATALYST_GATE_KILLS}
+    fp = DP.fingerprint()["cascade"]
+    assert fp["catalystGateKills"] == C.CATALYST_GATE_KILLS
+    assert fp["floatGateKills"] == C.FLOAT_GATE_KILLS and fp["pillarsMin"] == C.PILLARS_MIN   # A5
 
 
 def test_controls_split_by_catalyst_presence(tmp_path):

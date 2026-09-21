@@ -110,9 +110,25 @@ CATALYST_GATE_KILLS = False
 # 282 rows the broken catalyst gate had killed. A check that cannot tell a rule
 # change from a defect reports both as the same alarm, and an alarm that cries
 # wolf on every fix is worse than no alarm.
+# A5 (owner, 2026-09-21): the float gate FLAGS, it does not kill, and a
+# pillar-count gate replaces it — at least PILLARS_MIN of the Five Pillars
+# (price, gain, RVOL, float, catalyst) must PASS or the name is killed on
+# `pillars`. Evidence: the 2026-09-21 gate audit, on the armed-plan column,
+# put the float-killed cohort at +0.900 R against the allowed cohort's +0.714
+# — the only gate that killed a better cohort than it kept. Price stays a
+# hard kill on the same evidence (its cohort: +0.237, median −1). Owner's
+# words: "if float is not respected and you see potential, why not take the
+# trade — at least 4 should be satisfied". Set True / None to restore.
+FLOAT_GATE_KILLS = False
+PILLARS_MIN: Optional[int] = 4
+
 RULE_SETS = (
-    {"name": "A2", "from": "2026-09-17", "catalyst_gate_kills": False},
-    {"name": "pre-A2", "from": "2026-09-01", "catalyst_gate_kills": True},
+    {"name": "A5", "from": "2026-09-21",
+     "catalyst_gate_kills": False, "float_gate_kills": False, "pillars_min": 4},
+    {"name": "A2", "from": "2026-09-17",
+     "catalyst_gate_kills": False, "float_gate_kills": True, "pillars_min": None},
+    {"name": "pre-A2", "from": "2026-09-01",
+     "catalyst_gate_kills": True, "float_gate_kills": True, "pillars_min": None},
 )
 
 
@@ -173,7 +189,9 @@ RVOL_TRADE_FLOOR = 1.5            # NOT the 5x scanner dial
 PREMARKET_VOLUME_CEILING = 1_000_000   # a ceiling with NO floor
 
 
-def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> CascadeResult:
+def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None,
+             float_gate_kills: Optional[bool] = None,
+             pillars_min: Optional[int] = -1) -> CascadeResult:
     """Run the cascade in FILTERS.md's own order and stop at the first kill.
 
     Gates after a kill are still reported, as NOT_APPLICABLE, so the operator
@@ -187,6 +205,10 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> Cascad
     """
     if catalyst_gate_kills is None:
         catalyst_gate_kills = CATALYST_GATE_KILLS
+    if float_gate_kills is None:
+        float_gate_kills = FLOAT_GATE_KILLS
+    if pillars_min == -1:                      # -1 = "use the module rule"; None = no count gate
+        pillars_min = PILLARS_MIN
     gates: list[Gate] = []
     reasons: list[str] = []
     warnings: list[str] = []
@@ -236,7 +258,7 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> Cascad
         gates.append(skipped("float", "Float"))
     elif i.float_shares is None:
         add(Gate("float", "Float", GateState.UNKNOWN, "unknown",
-                 "Float unknown; the cascade fails closed.", kills=True))
+                 "Float unknown; the cascade fails closed.", kills=float_gate_kills))
     elif i.float_shares < FLOAT_MAX:
         src = "verified" if i.float_verified else (
             "SO upper bound" if i.float_is_shares_outstanding else "reported")
@@ -247,12 +269,15 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> Cascad
                  f"{i.float_shares / 1e6:.1f}M shares outstanding",
                  f"{i.float_shares / 1e6:.1f}M outstanding is an upper bound "
                  "over the 20M cap — it proves nothing either way. Verify the "
-                 "float by hand.", kills=True))
+                 "float by hand.", kills=float_gate_kills))
     else:
         add(Gate("float", "Float", GateState.FAIL,
                  f"{i.float_shares / 1e6:.1f}M",
                  f"Float {i.float_shares / 1e6:.1f}M is over the 20M cap.",
-                 kills=True))
+                 kills=float_gate_kills))
+        if not float_gate_kills:
+            warnings.append(f"Float {i.float_shares / 1e6:.1f}M over the 20M cap "
+                            "(A5: flagged, not killed; the pillar count decides).")
 
     # -- gate 3 · catalyst (a live theme substitutes) -----------------------
     # A2: `kills=CATALYST_GATE_KILLS` — a flag in this exercise, a kill in
@@ -276,6 +301,29 @@ def evaluate(i: Inputs, *, catalyst_gate_kills: Optional[bool] = None) -> Cascad
         if not catalyst_gate_kills:
             warnings.append("No catalyst dated today and no live theme (A2: flagged, not killed; "
                             "the read-out splits this cohort).")
+
+    # -- gate 3b · pillar count (A5) ----------------------------------------
+    # The Five Pillars as a COUNT rather than five separate kills: price,
+    # gain, RVOL, float, catalyst. UNKNOWN counts as not passed (fails
+    # closed). Price is still a hard kill above; this gate is what stops a
+    # flagged float and a flagged catalyst from letting a 3/5 name through.
+    if killed_by:
+        gates.append(skipped("pillars", "Pillars"))
+    elif pillars_min is not None:
+        from .scanners.five_pillars import GAIN_MIN_PCT, RVOL_MIN
+        passes = {
+            "price": True,                                   # alive here = price passed
+            "gain": i.change_pct is not None and i.change_pct >= GAIN_MIN_PCT,
+            "rvol": i.rvol is not None and i.rvol >= RVOL_MIN,
+            "float": i.float_shares is not None and i.float_shares < FLOAT_MAX,
+            "catalyst": bool(i.catalyst_today or i.live_theme),
+        }
+        n = sum(1 for v in passes.values() if v)
+        missing = [k for k, v in passes.items() if not v]
+        add(Gate("pillars", "Pillars", GateState.PASS if n >= pillars_min else GateState.FAIL,
+                 f"{n}/5" + (f" — missing {', '.join(missing)}" if missing else ""),
+                 f"Only {n} of the Five Pillars pass (need {pillars_min}); "
+                 f"missing {', '.join(missing)}.", kills=True))
 
     # -- gate 4 · still rising ---------------------------------------------
     if killed_by:

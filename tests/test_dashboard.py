@@ -490,7 +490,7 @@ def test_ui_catalyst_card_grades_the_news(page):
     assert page.locator(".cat-quality").inner_text() == "Hard catalyst"
     assert page.locator(".age-bar i").count() == 1
     read = page.locator(".cat-read").inner_text()
-    assert "4/4 candidate" in read and "chart decides" in read
+    assert "5/5 candidate" in read and "chart decides" in read   # one denominator: the Five Pillars
 
 
 def test_ui_catalyst_flags_dilution(page):
@@ -1157,3 +1157,33 @@ def test_the_charts_and_the_card_read_the_same_plan():
     assert "livePlan(sym, frame.t)" in card
     # the card may still name what was armed, but only to say it was withdrawn
     assert "plan WITHDRAWN" in card
+
+
+def test_a_headline_about_another_company_tagged_here_is_not_this_names_catalyst():
+    """GLND, 2026-09-21 07:19: "Why Is Critical Metals Stock Soaring Monday?"
+    on GLND's catalyst card, graded Unclassified, counted as news. Benzinga
+    tagged the article to CRML and GLND both. A single company's story, wrong
+    company — not a roundup (no list), not this name's catalyst either."""
+    from momentum_platform.dashboard.session_builder import _catalyst_today, shared_tag
+    h = "Why Is Critical Metals Stock Soaring Monday?"
+    assert shared_tag(h, "GLND", ["CRML", "GLND"]) is True
+    assert shared_tag(h, "CRML", ["CRML", "GLND"]) is True     # ticker not in headline either — labelled, judged by a reader
+    assert shared_tag("GLND Announces Contract", "GLND", ["GLND", "XYZ"]) is False
+    assert shared_tag(h, "GLND", ["GLND"]) is False           # single tag: it is about this name
+    from datetime import datetime, timezone
+    pub = datetime.now(timezone.utc).isoformat()
+    assert _catalyst_today([{"headline": h, "publishedAt": pub, "sharedTag": True}],
+                           datetime.now(timezone.utc).date().isoformat()) is False
+    assert _catalyst_today([{"headline": h, "publishedAt": pub, "sharedTag": False}],
+                           datetime.now(timezone.utc).date().isoformat()) is True
+
+
+def test_the_desk_speaks_one_pillar_denominator():
+    """"3/4 pillars" on the catalyst card beside "4/5" on the board, same stock:
+    two counts, one name. Only the Five Pillars count is spoken now."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    body = app.split("function renderCatalyst")[1].split("\nfunction ")[0]
+    assert "/4 pillars" not in body and "/4 technical" not in body
+    assert "/5 pillars" in body
+    assert "Shared tag" in body
