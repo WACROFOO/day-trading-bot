@@ -308,13 +308,46 @@ The proposed rule, stated so it can be implemented and killed:
   never down. A trade that reaches +2 R and retraces exits at about +1 R; a
   trade that runs keeps running until it gives back 1 R from its peak;
 - the 11:30 flatten and every phase gate are untouched;
-- the OLD rule keeps being computed for every decision by `journal.controls`
-  ("strategy" series), so from the first fill the two exits are an A/B on
-  identical entries — the old rule survives as the control of the new one.
+- the A/B: **A3 runs live; `baseline` (fixed +2 R target) and `no_target`
+  (initial stop only, the rule actually in force until A3) are simulated on
+  the same entry fill, same initial stop and same cutoff by
+  `journal.controls.exit_variants`, bar-ordered with no within-bar
+  look-ahead.** The simulated exits share the entry fill; sharing it does not
+  make their exit fills real, and the report says so beside the table.
 
-Kill rule for A3, before its data exists: if after 30 taken trades the
-trailing exit's mean planned R is below the fixed-target control's on the
-same fills, A3 is reverted in one commit and the reversion recorded here.
+Kill rule for A3, before its data exists: a **prospective comparison from
+the first fill**, read at every session close-out. If, on the same fills,
+the live trailing exit's mean realised R is below the `baseline` control's
+simulated mean, that is the signal to revert A3 in one commit and record the
+reversion here. Thirty trades is a review of implementation and costs
+(does the stop move, does IBKR honour the modify, what does the trail cost
+in whipsaws), not a basis for choosing a tail-dependent exit rule: the
+review's illustration — detecting a 0.2 R improvement at 80 % power needs
+roughly 196 independent pairs at a 1 R standard deviation and 441 at 1.5 R —
+is an independence-assuming figure, and these pairs are not independent.
+
+**Execution specification, read from the code (2026-09-21, review item 4):**
+
+| question | answer | where |
+|---|---|---|
+| when does trailing begin | at the entry fill; the first high considered is the first print after `orders.fill_ts` | `Runner.trail_stops`, `ledger.high_since` |
+| what is "the high" | the higher of the 10-second bar highs and the quote-tick **bids** the desk wrote since the fill; the last-trade price is not used | `ledger.high_since` |
+| how often does the stop move | every runner loop, 5 s, after the fill sync; only when high − 1 R/share is at least one cent above the resting stop | `scripts/exercise.py` `manage_exits` |
+| what does a move do at the broker | re-prices the resting stop leg in place: same order id, new trigger, so the broker holds a stop at every instant | `PaperTrader.move_stop` |
+| a reconnect or restart | `orders.trail_stop` is carried into the adopted record; the next loop continues from the last level, never from the initial stop | `PaperTrader.adopt` |
+| a refused move (leg gone, broker error) | the stop stays where it rests; an `order_events` row names the level it would have reached and why it did not | `Runner.trail_stops` |
+| no tape since the fill | no move; the stop stays at its last level | `ledger.high_since` returns None |
+| what the exit is called | `trail` when the stop that filled had been raised above the initial stop, `stop` otherwise | `PaperTrader.sync` |
+
+**The stated cost of the rule (the review's example, adopted here).** A
+trade that reaches +1.2 R has its stop at about +0.2 R; an ordinary 1 R
+pullback then exits it — even if the stock later reaches +10 R. Evidence that
+*holding* captures large moves is not evidence that a 1 R trail captures
+them, and the hold-to-close control carries no stop at all. When the initial
+risk is a few cents, 1 R sits inside normal fluctuation and the trail becomes
+a coin-flip exit; the microflow NO-GO measured exactly that stop
+distribution. A3 is kept as a forward test with this cost written down, not
+as an improvement.
 
 Implementation (2026-09-21 evening). `Runner.trail_stops` runs every loop in
 TRADE mode after the fill sync: for each filled position whose stop rests at
