@@ -214,6 +214,25 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
               "bar-ordered, the low is tested before the high raises the stop. \"close\" = the last "
               f"bar the desk recorded ({controls.last_bar_time(conn) or 'none'} UTC); hold_close and "
               "random_bar carry no stop; no costs in any series."]
+    u = controls.units(conn)
+    lines += ["", "## Statistical unit", "",
+              f"{u['rows']} rows = {u['unique_setups']} unique setups on {u['unique_symbol_days']} unique "
+              f"symbol-days over {u['sessions']} session(s).", "",
+              "| session | n | mean R | median R |", "|---|---:|---:|---:|"]
+    for day, v in u["per_session"].items():
+        lines.append(f"| {day} | {v['n']} | {v['mean_R']:+.3f} | {v['median_R']:+.3f} |")
+    if u["top3_symbol_days"]:
+        lines += ["", "| largest winning symbol-day | rows | sum R |", "|---|---:|---:|"]
+        for t in u["top3_symbol_days"]:
+            lines.append(f"| {t['symbol']} {t['day']} | {t['rows']} | {t['sum_R']:+.2f} |")
+        share = (f"{u['top3_share_of_total']:.0%} of the total" if u["top3_share_of_total"] is not None
+                 else "total ≤ 0")
+        lines.append("")
+        lines.append(f"These three carry {share}; the mean without them is "
+                     + (f"{u['mean_R_without_top3']:+.3f} R." if u["mean_R_without_top3"] is not None else "undefined."))
+    viol = L.r0_violations(conn)
+    lines += ["", f"R0 check: {f['fills']} fill(s); realised risk = qty × (fill − initial stop) on "
+              + ("all." if not viol else f"all but {len(viol)}: " + ", ".join(f"#{v['order_id']}" for v in viol) + ".")]
     pd = st.get("paper_data")
     lines += ["", "## Alignment (decision tape → fill → fill tape)", "",
               f"Paper session data: **{pd or 'NOT MEASURED — run scripts/alignment_probe.py'}**"

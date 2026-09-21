@@ -117,6 +117,25 @@ def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> N
     print(f"  {DIM}baseline = fixed +2R target · no_target = initial stop only (the rule in force until A3)"
           f" · trail_1r = A3, bar-ordered, low tested before the high raises the stop{END}")
 
+    u = controls.units(conn)
+    print(f"\n{BOLD}STATISTICAL UNIT{END}  (what the strategy series is made of)")
+    print(f"  {u['rows']} rows = {u['unique_setups']} unique setups on {u['unique_symbol_days']} unique symbol-days "
+          f"over {u['sessions']} session(s)")
+    for day, v in u["per_session"].items():
+        print(f"    {day}: n {v['n']:>3}  mean {v['mean_R']:+.3f}  median {v['median_R']:+.3f}")
+    if u["top3_symbol_days"]:
+        top = " · ".join(f"{t['symbol']} {t['day'][5:]} {t['sum_R']:+.2f}R ({t['rows']} rows)" for t in u["top3_symbol_days"])
+        share = f"{u['top3_share_of_total']:.0%} of the total" if u["top3_share_of_total"] is not None else "total ≤ 0"
+        print(f"  largest winning symbol-days: {top} — {share}; "
+              f"mean without them {u['mean_R_without_top3']:+.3f}" if u["mean_R_without_top3"] is not None
+              else f"  largest winning symbol-days: {top} — {share}")
+    print(f"  {DIM}rows from one name on one morning are correlated, not independent; large winners stay "
+          f"in the primary result, and their weight is shown so it cannot hide{END}")
+    viol = L.r0_violations(conn)
+    lamp = f"{OK}✓{END}" if not viol else f"{BAD}✗{END}"
+    print(f"  {lamp} R0 check: {f['fills']} fill(s), realised risk = qty × (fill − INITIAL stop) on all"
+          + (f" but {len(viol)}: " + ", ".join(f"#{v['order_id']} {v['symbol']}" for v in viol) if viol else ""))
+
     st = L.get_state(conn)
     print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
     pd = st.get("paper_data")

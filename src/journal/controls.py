@@ -193,6 +193,58 @@ def exit_summary(conn: sqlite3.Connection, bars_by_symbol: dict) -> dict[str, di
     return out
 
 
+def units(conn: sqlite3.Connection) -> dict:
+    """The statistical unit, made visible (review 2026-09-21, item 9). The
+    strategy series has one row per triggered prospective decision; several
+    rows can be one name on one morning, so the report says how many unique
+    symbol-days and sessions the rows come from, gives the series per
+    session, and shows what the three largest winning symbol-days contribute
+    to the mean. Large winners stay in the primary result; a momentum method
+    may legitimately depend on them, and the reader must be able to see it."""
+    rows = conn.execute("""
+        SELECT d.decision_id, d.symbol, substr(d.ts_et, 1, 10) AS day, d.trigger, d.stop, d.target,
+               a.first_hit, a.c_close, a.risk_share
+        FROM decisions d JOIN actuals a USING(decision_id)
+        WHERE a.risk_share IS NOT NULL AND a.risk_share > 0
+          AND COALESCE(a.trigger_hit, 1) = 1
+          AND (d.data_status IS NULL OR d.data_status NOT LIKE '%-backfill')
+    """).fetchall()
+    per_row = []
+    for r in rows:
+        rps = r["risk_share"]
+        if r["first_hit"] == "stop":
+            v = -1.0
+        elif r["first_hit"] == "target" and r["target"]:
+            v = (r["target"] - r["trigger"]) / rps
+        else:
+            v = (r["c_close"] - r["trigger"]) / rps
+        per_row.append((r["symbol"], r["day"], round(v, 4)))
+    n = len(per_row)
+    sym_days: dict[tuple, list[float]] = {}
+    sessions: dict[str, list[float]] = {}
+    for sym, day, v in per_row:
+        sym_days.setdefault((sym, day), []).append(v)
+        sessions.setdefault(day, []).append(v)
+    total = sum(v for _, _, v in per_row)
+    by_symday = sorted(((k, sum(v)) for k, v in sym_days.items()), key=lambda kv: -kv[1])
+    top3 = by_symday[:3]
+    top3_sum = sum(v for _, v in top3)
+    rest = [v for (sym, day, v) in per_row if (sym, day) not in {k for k, _ in top3}]
+    return {
+        "rows": n,
+        "unique_setups": n,                                   # one decision_id per row
+        "unique_symbol_days": len(sym_days),
+        "sessions": len(sessions),
+        "mean_R": round(total / n, 4) if n else None,
+        "per_session": {day: {"n": len(v), "mean_R": round(mean(v), 4), "median_R": round(median(v), 4)}
+                        for day, v in sorted(sessions.items())},
+        "top3_symbol_days": [{"symbol": k[0], "day": k[1], "sum_R": round(v, 4), "rows": len(sym_days[k])}
+                             for k, v in top3],
+        "top3_share_of_total": (round(top3_sum / total, 3) if total > 0 else None),
+        "mean_R_without_top3": (round(mean(rest), 4) if rest else None),
+    }
+
+
 def last_bar_time(conn: sqlite3.Connection) -> str | None:
     """When the desk stopped writing bars — what "close" means in every series."""
     row = conn.execute("SELECT MAX(ts) FROM bars").fetchone()

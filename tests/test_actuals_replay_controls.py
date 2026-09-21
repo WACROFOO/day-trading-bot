@@ -250,3 +250,19 @@ def test_exit_variants_run_on_the_ledger_rows_from_the_same_entry_bar(journal, t
     for did, r in by_id["no_target"].items():
         if r["exit"] == "close" and by_id["trail_1r"][did]["exit"] == "close":
             assert by_id["trail_1r"][did]["r"] == r["r"]
+
+
+def test_the_statistical_unit_is_reported_beside_the_mean(journal, tape):
+    """Review item 9: rows, unique symbol-days, sessions, per-session series
+    and the share the three largest winning symbol-days carry."""
+    actuals.fill_all(journal, tape)
+    u = controls.units(journal)
+    n = len(controls.series(journal)["strategy"])
+    assert u["rows"] == u["unique_setups"] == n > 0
+    assert 1 <= u["unique_symbol_days"] <= n and u["sessions"] >= 1
+    assert sum(v["n"] for v in u["per_session"].values()) == n
+    assert len(u["top3_symbol_days"]) <= 3
+    if u["top3_share_of_total"] is not None:
+        assert 0 <= u["top3_share_of_total"]
+    if u["mean_R_without_top3"] is not None:
+        assert u["mean_R_without_top3"] <= (u["mean_R"] or 0) + 1e-9 or u["top3_share_of_total"] is None
