@@ -423,3 +423,77 @@ def test_ibkr_inactive_means_rejected_and_does_not_hold_the_one_position_rule():
     conn.execute("UPDATE orders SET status='Inactive' WHERE order_id=?", (oid,))
     assert L.positions_alive(conn) == 0
     assert L.open_orders(conn) == []
+
+
+# ------------------------------------------------------ A3: moving the stop leg
+def test_move_stop_reprices_the_resting_stop_leg_in_place():
+    """Same order id, new auxPrice, transmitted: IBKR's modify. The stop never
+    stops resting, and the record remembers where it sits now."""
+    pytest.importorskip("ib_async")
+    from ib_async import StopOrder
+    sent = []
+    stop = StopOrder("SELL", 100, 4.40); stop.orderId = 202; stop.parentId = 101
+
+    class Status:
+        status = "Submitted"
+
+    class Trade:
+        order = stop
+        contract = type("C", (), {"symbol": "TEST"})()
+        orderStatus = Status()
+
+    class FakeIB:
+        def trades(self): return [Trade()]
+        def placeOrder(self, c, o): sent.append((c, o))
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    rec = PlacedOrder(symbol="TEST", parent_id=101, stop_id=202, trigger=4.60, stop=4.40, shares=100)
+    assert t.move_stop(rec, 4.55) == 202
+    assert sent[0][1] is stop and stop.auxPrice == 4.55 and stop.transmit is True
+    assert rec.trail_stop == 4.55 and any("A3" in e for e in rec.events)
+
+
+def test_move_stop_refuses_a_leg_that_is_gone():
+    pytest.importorskip("ib_async")
+
+    class FakeIB:
+        def trades(self): return []
+        def placeOrder(self, c, o): raise AssertionError("nothing may be sent")
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    rec = PlacedOrder(symbol="TEST", parent_id=101, stop_id=202, trigger=4.60, stop=4.40, shares=100)
+    with pytest.raises(RuntimeError):
+        t.move_stop(rec, 4.55)
+    assert rec.trail_stop is None
+
+
+def test_a_raised_stop_that_fills_is_the_trailing_exit():
+    """sync() names the exit: a stop the runner moved above the initial stop
+    is 'trail', so the ledger can split the two rules."""
+    pytest.importorskip("ib_async")
+    from ib_async import LimitOrder, StopOrder
+
+    parent = LimitOrder("BUY", 100, 4.60); parent.orderId = 101
+    stop = StopOrder("SELL", 100, 4.55); stop.orderId = 202; stop.parentId = 101
+
+    class Status:
+        def __init__(self, status, px, filled=100):
+            self.status, self.avgFillPrice, self.filled = status, px, filled
+
+    class Trade:
+        def __init__(self, order, status):
+            self.order, self.orderStatus, self.log = order, status, []
+
+    class FakeIB:
+        def sleep(self, s): pass
+        def trades(self): return [Trade(parent, Status("Filled", 4.61)), Trade(stop, Status("Filled", 4.54))]
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    rec = PlacedOrder(symbol="TEST", parent_id=101, stop_id=202, trigger=4.60, stop=4.40, shares=100)
+    rec.trail_stop = 4.55
+    t.placed.append(rec)
+    t.sync()
+    assert rec.exit_reason == "trail" and rec.exit_price == 4.54

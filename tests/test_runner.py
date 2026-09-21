@@ -64,6 +64,12 @@ class FakeTrader:
         self.flattened = True
         return ["TEST x100 MKT"]
 
+    def move_stop(self, rec, new_stop):
+        self.moves = getattr(self, "moves", [])
+        self.moves.append((rec.symbol, new_stop))
+        rec.trail_stop = new_stop
+        return rec.stop_id
+
 
 # ------------------------------------------------------------- LOG_ONLY
 def test_log_only_acts_on_every_pending_decision_once_and_opens_nothing(journal):
@@ -215,3 +221,88 @@ def test_a_stop_inside_the_spread_is_refused_before_the_broker_sees_it():
     assert SPREAD_K == 4.0
     src = open(__file__.replace("tests/test_runner.py", "src/execution/runner.py")).read()
     assert "SPREAD_K * spread" in src and "(A6)" in src
+
+
+# ------------------------------------------------------ A3: the trailing stop
+def _take_and_fill(journal, t, fill_ts="2026-09-01T13:52:09Z"):
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    quotes = {s: dict(bid=7.30, ask=7.31, bid_size=300, ask_size=100, ts="2026-09-01T13:52:10Z")
+              for s in ("ABCD", "DVLT", "CYQN", "IMRN")}
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now,
+               max_age_s=3600, quote=lambda s: quotes.get(s))
+    r.step()
+    assert t.placed, "the fixture must place at least one bracket"
+    rec = t.placed[0]
+    rec.fill_price = rec.trigger; rec.fill_time = fill_ts; rec.status = "Filled"
+    r.sync_fills()
+    # the fixture's own tape continues past the fill; the tests write their own
+    journal.execute("DELETE FROM bars_10s WHERE symbol=?", (rec.symbol,))
+    journal.execute("DELETE FROM quote_ticks WHERE symbol=?", (rec.symbol,))
+    journal.commit()
+    return r, rec
+
+
+def _bar(journal, sym, ts, high):
+    journal.execute("INSERT OR REPLACE INTO bars_10s(symbol, ts, open, high, low, close, volume) "
+                    "VALUES (?,?,?,?,?,?,?)", (sym, ts, high - 0.02, high, high - 0.05, high - 0.01, 1000))
+    journal.commit()
+
+
+def test_a3_the_stop_trails_the_high_by_one_r_and_never_falls(journal):
+    """Amendment A3: no target; the resting stop follows the high since the
+    fill at one initial risk per share, up only."""
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    rps = round(o["trigger"] - o["stop"], 4)
+    assert o["target"] is None, "the live order path carries no target leg"
+
+    # nothing written since the fill: the stop stays where it is
+    assert r.trail_stops() == []
+    # a bar BEFORE the fill does not count
+    _bar(journal, rec.symbol, "2026-09-01T13:51:50+00:00", o["trigger"] + 10 * rps)
+    assert r.trail_stops() == []
+    # the high moves 1.5R above the trigger: the stop rises to high - 1R
+    high1 = round(o["trigger"] + 1.5 * rps, 2)
+    _bar(journal, rec.symbol, "2026-09-01T13:53:00+00:00", high1)
+    lines = r.trail_stops()
+    o1 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert len(lines) == 1 and t.moves == [(rec.symbol, round(high1 - rps, 2))]
+    assert o1["trail_stop"] == round(high1 - rps, 2) and o1["high_since_fill"] == high1
+    # a lower bar later: nothing moves, the high on record is unchanged
+    _bar(journal, rec.symbol, "2026-09-01T13:54:00+00:00", round(high1 - 0.5 * rps, 2))
+    assert r.trail_stops() == [] and len(t.moves) == 1
+    # a new high: the stop ratchets again
+    high2 = round(high1 + rps, 2)
+    _bar(journal, rec.symbol, "2026-09-01T13:55:00+00:00", high2)
+    assert len(r.trail_stops()) == 1
+    o2 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o2["trail_stop"] == round(high2 - rps, 2) > o1["trail_stop"]
+    events = [e["text"] for e in journal.execute("SELECT text FROM order_events WHERE order_id=?", (o["order_id"],))]
+    assert any("trail (A3)" in e for e in events)
+
+
+def test_a3_a_move_the_broker_refuses_leaves_the_stop_and_says_so(journal):
+    class RefusingTrader(FakeTrader):
+        def move_stop(self, rec, new_stop):
+            raise RuntimeError("stop leg not found at the broker")
+    t = RefusingTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    _bar(journal, rec.symbol, "2026-09-01T13:53:00+00:00", round(o["trigger"] + 3 * (o["trigger"] - o["stop"]), 2))
+    assert r.trail_stops() == []
+    o1 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o1["trail_stop"] is None
+    events = [e["text"] for e in journal.execute("SELECT text FROM order_events WHERE order_id=?", (o["order_id"],))]
+    assert any("stop left at" in e for e in events)
+
+
+def test_a3_never_trails_in_log_only_and_leaves_a_sent_exit_alone(journal):
+    r = Runner(journal, mode="LOG_ONLY", dollar_risk=25.0)
+    assert r.trail_stops() == []
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    journal.execute("UPDATE orders SET status='ExitPending' WHERE order_id=?", (o["order_id"],)); journal.commit()
+    _bar(journal, rec.symbol, "2026-09-01T13:53:00+00:00", round(o["trigger"] + 3 * (o["trigger"] - o["stop"]), 2))
+    assert r.trail_stops() == [] and not getattr(t, "moves", [])

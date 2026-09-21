@@ -280,7 +280,9 @@ _ADDED_COLUMNS = {
     "decisions": (("rules_hash", "TEXT"), ("code_commit", "TEXT")),
     "orders": (("perm_id", "INTEGER"), ("symbol", "TEXT"), ("exit_confirmed_by", "TEXT"),
                ("filled_qty", "REAL"), ("exit_order_id", "INTEGER"),
-               ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT")),
+               ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT"),
+               # A3: the stop leg's current level and the high it trails
+               ("trail_stop", "REAL"), ("high_since_fill", "REAL")),
     "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
@@ -836,6 +838,48 @@ def open_monitored(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Filled, un-exited orders with no resting stop. The runner's watch list."""
     return conn.execute("""SELECT * FROM orders WHERE protected=0 AND stop_status='monitored'
                            AND fill_price IS NOT NULL AND exit_ts IS NULL""").fetchall()
+
+
+def open_protected(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Filled, un-exited orders whose stop rests at the broker: the trailing
+    exit's list (A3). An exit already sent (ExitPending) is left alone."""
+    return conn.execute("""SELECT * FROM orders WHERE stop_id IS NOT NULL AND protected=1
+                           AND fill_price IS NOT NULL AND exit_ts IS NULL
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed',
+                                              'NotFilled', 'ExitPending', 'ExitFailed')""").fetchall()
+
+
+def set_trail(conn: sqlite3.Connection, order_id: int, *, trail_stop: Optional[float],
+              high: Optional[float]) -> None:
+    conn.execute("UPDATE orders SET trail_stop=COALESCE(?, trail_stop), "
+                 "high_since_fill=COALESCE(?, high_since_fill), updated_at=? WHERE order_id=?",
+                 (trail_stop, high, _now(), order_id))
+
+
+def high_since(conn: sqlite3.Connection, symbol: str, since_ts) -> Optional[float]:
+    """The highest print the desk recorded for `symbol` at or after `since_ts`:
+    10-second bar highs and quote-tick bids, whichever is higher. None when
+    the desk has written nothing since — the trail then waits rather than
+    guessing. Timestamps are compared as instants; the ledger stores fills
+    in ET and bars in UTC."""
+    if since_ts is None:
+        return None
+    since = since_ts if isinstance(since_ts, datetime) else datetime.fromisoformat(str(since_ts).replace("Z", "+00:00"))
+    if since.tzinfo is None:
+        since = since.replace(tzinfo=timezone.utc)
+    best: Optional[float] = None
+    for table, col in (("bars_10s", "high"), ("quote_ticks", "bid")):
+        for r in conn.execute(f"SELECT ts, {col} AS v FROM {table} WHERE symbol=? AND {col} IS NOT NULL",
+                              (symbol,)).fetchall():
+            try:
+                ts = datetime.fromisoformat(str(r["ts"]).replace("Z", "+00:00"))
+            except ValueError:
+                continue
+            if ts.tzinfo is None:
+                ts = ts.replace(tzinfo=timezone.utc)
+            if ts >= since and (best is None or r["v"] > best):
+                best = float(r["v"])
+    return best
 
 
 def add_order_event(conn: sqlite3.Connection, order_id: int, text: str) -> None:

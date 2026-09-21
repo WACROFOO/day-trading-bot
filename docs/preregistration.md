@@ -286,8 +286,8 @@ Owner action that remains: put Alpaca paper keys back in `.env`
 (`ALPACA_KEY_ID`, `ALPACA_SECRET_KEY`, see `.env.example`), or the gate
 reads UNKNOWN on every name and the split above has one empty side.
 
-**Amendment A3 — the exit rule (PROPOSED, 2026-09-21, design only; no code
-has changed).** The controls of 2026-09-21 (`exercise.py report`, sessions
+**Amendment A3 — the exit rule (IN FORCE from the first desk start after
+2026-09-21 21:00 ET; proposed the same morning, coded that evening).** The controls of 2026-09-21 (`exercise.py report`, sessions
 11–18 September, 199 triggered prospective rows) put the armed plan at mean
 +0.461 R against hold-to-close at +6.301 R **on the same entries**, with all
 three medians negative: most trades lose, a few run enormously, and the fixed
@@ -316,9 +316,27 @@ Kill rule for A3, before its data exists: if after 30 taken trades the
 trailing exit's mean planned R is below the fixed-target control's on the
 same fills, A3 is reverted in one commit and the reversion recorded here.
 
-Implementation note: this changes `src/execution` order construction and is
-NOT in force until a commit lands it, its tests pass, and this PROPOSED is
-replaced with the owner's date. Until then the desk trades the old rule.
+Implementation (2026-09-21 evening). `Runner.trail_stops` runs every loop in
+TRADE mode after the fill sync: for each filled position whose stop rests at
+the broker it reads the high since the fill from the ledger's own tape
+(10-second bars and quote ticks, `ledger.high_since`), and when
+high − 1 R/share is at least a cent above the resting stop it re-prices the
+stop leg in place (`PaperTrader.move_stop`: same order id, new trigger, so
+the broker never stops holding a stop). `orders.trail_stop` and
+`orders.high_since_fill` record every move; a stop that fills after being
+raised is recorded with `exit_reason = trail`, one still at its initial level
+with `stop`. Nothing written to the ledger since the fill means no move.
+`TRAIL_R = 1.0` in `src/execution/intent.py`.
+
+A finding made while landing it, recorded because it corrects this section:
+**the live order path never carried a profit target.** `intent_from_decision`
+is called without one, so every bracket the runner sent (VEEE, 09:37) was
+entry + stop only. The "old rule" with its fixed 2 R target existed in
+`journal.controls` (the *strategy* series) and on the verdict card, never at
+the broker; the rule actually in force until today was initial stop + the
+11:30 flatten. The A/B stated above still holds — controls keep computing the
+fixed-target exit on every decision — but the control is a simulation on the
+desk's tape, not a rule the desk ever traded.
 
 **Amendment A4 — re-derive the `rising` gate threshold from measurement
 (PROPOSED, 2026-09-21; measurement first, no threshold has changed).** On

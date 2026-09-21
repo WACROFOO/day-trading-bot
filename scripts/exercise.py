@@ -301,6 +301,9 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
     # pre-market entry this call IS the stop.
     for line in guarded("monitored stop", runner.watch_stops) or []:
         print(f"  {now_et:%H:%M:%S}  {WARN}STOP{END}     {line}")
+    # A3: the resting stop follows the high at one initial risk, never down.
+    for line in guarded("trailing stop", runner.trail_stops) or []:
+        print(f"  {now_et:%H:%M:%S}  {OK}TRAIL{END}    {line}")
     for oid in guarded("after-hours flag", runner.flag_after_hours) or []:
         print(f"  {now_et:%H:%M:%S}  {BAD}HELD AFTER CLOSE{END} order {oid} — "
               f"exercise.py ah-exit {oid} --confirm")

@@ -612,12 +612,13 @@ def test_exit_management_runs_every_check_even_when_one_raises():
         def sync_fills(self): calls.append("sync"); raise RuntimeError("socket")
         def reconcile_positions(self): calls.append("reconcile"); return []
         def watch_stops(self): calls.append("watch"); return ["T x100 SELL LMT 5.80"]
+        def trail_stops(self): calls.append("trail"); raise RuntimeError("broker")   # A3, guarded like the rest
         def flag_after_hours(self): calls.append("flag"); return []
         def end_of_day(self): calls.append("flatten"); return ["T x100 MKT"]
     from zoneinfo import ZoneInfo
     late = datetime(2026, 9, 8, 11, 31, tzinfo=ZoneInfo("America/New_York"))
     assert X.manage_exits(R(), False, late) is True
-    assert calls == ["sync", "reconcile", "watch", "flag", "flatten"]
+    assert calls == ["sync", "reconcile", "watch", "trail", "flag", "flatten"]
 
 
 

@@ -32,7 +32,7 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
-from .intent import SPREAD_K
+from .intent import SPREAD_K, TRAIL_R
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import ET, refusals
 from momentum_platform.sessions import REGULAR_END
@@ -443,6 +443,50 @@ class Runner:
                               f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px} x{qty} sent "
                               f"(order {exit_id}); fill not yet confirmed")
             done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+        self.conn.commit()
+        return done
+
+    # ------------------------------------------------- the trailing stop
+    def trail_stops(self) -> list[str]:
+        """TRADE only. Amendment A3: for every filled position whose stop rests
+        at the broker, raise that stop to (high since the fill − TRAIL_R ×
+        initial risk per share) whenever that is at least a cent above where
+        it rests. Never down. The high comes from the desk's own tape in the
+        ledger (10-second bars and quote ticks); with nothing written since
+        the fill the stop stays put."""
+        if self.mode != "TRADE":
+            return []
+        done: list[str] = []
+        by_parent = {p.parent_id: p for p in getattr(self.trader, "placed", [])}
+        for o in L.open_protected(self.conn):
+            rps = round(float(o["trigger"]) - float(o["stop"]), 4)
+            if rps <= 0:
+                continue
+            high = L.high_since(self.conn, o["symbol"], o["fill_ts"])
+            if high is None:
+                continue
+            current = float(o["trail_stop"]) if o["trail_stop"] is not None else float(o["stop"])
+            new = round(high - TRAIL_R * rps, 2)
+            if high > float(o["high_since_fill"] or 0):
+                L.set_trail(self.conn, o["order_id"], trail_stop=None, high=high)
+            if new < current + 0.01:
+                continue
+            rec = by_parent.get(o["parent_id"])
+            if rec is None:
+                L.add_order_event(self.conn, o["order_id"],
+                                  f"trail: high {high} would put the stop at {new}, but this process holds "
+                                  f"no broker record for parent {o['parent_id']}; stop left at {current}")
+                continue
+            try:
+                self.trader.move_stop(rec, new)
+            except Exception as exc:                        # noqa: BLE001
+                L.add_order_event(self.conn, o["order_id"],
+                                  f"trail: move {current} -> {new} raised {exc!r}; stop left at {current}")
+                continue
+            L.set_trail(self.conn, o["order_id"], trail_stop=new, high=high)
+            L.add_order_event(self.conn, o["order_id"],
+                              f"trail (A3): high {high} since fill, stop {current} -> {new} (1R/sh = {rps})")
+            done.append(f"{o['symbol']} stop {current:.2f} -> {new:.2f} (high {high:.2f}, 1R {rps:.2f})")
         self.conn.commit()
         return done
 

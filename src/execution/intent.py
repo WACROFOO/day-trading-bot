@@ -262,6 +262,12 @@ NOTIONAL_TOLERANCE = 1.02
 # (2-cent stop against a 1-2 cent spread). Amendment A6; lower by amendment.
 SPREAD_K = 4.0
 
+# Amendment A3 (docs/preregistration.md §5): no fixed target. The protective
+# stop trails the high since the fill at TRAIL_R initial risks per share,
+# ratcheting up and never down. The runner moves the resting stop leg; the
+# broker keeps holding the stop, so the trade stays protected between loops.
+TRAIL_R = 1.0
+
 
 def sized_for(trigger: float, stop: float, dollar_risk: float,
               max_notional: Optional[float] = None) -> tuple[int, str]:
@@ -323,7 +329,10 @@ class PlacedOrder:
     # The exit, read from the stop or target leg. Until the 2026-09-07 review
     # only the entry leg was ever synced, so no P&L or exit reason existed.
     exit_price: Optional[float] = None
-    exit_reason: Optional[str] = None            # stop | target
+    exit_reason: Optional[str] = None            # stop | trail | target
+    # A3: where the stop leg rests now, once the runner has moved it. None
+    # while it still sits at the initial stop.
+    trail_stop: Optional[float] = None
     exit_time: Optional[str] = None
     # IBKR's permanent id. orderId is per API session: orders from an earlier
     # connection come back as orderId 0 (seen 2026-09-07 in the smoke test's

@@ -417,7 +417,10 @@ class PaperTrader:
                         and leg.orderStatus.avgFillPrice
                         and leg.orderStatus.avgFillPrice > 0):
                     rec.exit_price = leg.orderStatus.avgFillPrice
-                    rec.exit_reason = why
+                    # A3: a stop that the runner had raised above the initial
+                    # stop is the trailing exit, and the ledger says so.
+                    rec.exit_reason = ("trail" if why == "stop" and rec.trail_stop is not None
+                                       and rec.trail_stop > rec.stop else why)
                     t = leg.log[-1].time if leg.log else None
                     rec.exit_time = t.isoformat() if t else None
                     rec.events.append(f"exit {why} at {rec.exit_price}")
@@ -432,6 +435,31 @@ class PaperTrader:
                                  ("ValidationError", "Inactive", "Cancelled",
                                   "ApiCancelled"))
         return self.placed
+
+    def move_stop(self, rec: PlacedOrder, new_stop: float) -> int:
+        """A3: re-price the resting stop leg. Same order id, new trigger price —
+        IBKR treats placeOrder on an existing id as a modification, so the
+        stop never stops resting. Returns the order id modified; raises when
+        the leg cannot be found, and the caller leaves the stop where it is."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        trades = list(self.ib.trades())
+        leg = next((t for t in trades if rec.stop_id and t.order.orderId == rec.stop_id), None)
+        if leg is None:
+            leg = next((t for t in trades if getattr(t.order, "parentId", 0) == rec.parent_id
+                        and t.order.orderType == "STP"), None)
+        if leg is None:
+            raise RuntimeError(f"stop leg {rec.stop_id} for {rec.symbol} not found at the broker")
+        if leg.orderStatus.status in ("Filled", "Cancelled", "ApiCancelled", "Inactive"):
+            raise RuntimeError(f"stop leg {rec.stop_id} is {leg.orderStatus.status}; nothing to move")
+        order = leg.order
+        was = order.auxPrice
+        order.auxPrice = round(new_stop, 2)
+        order.transmit = True
+        self.ib.placeOrder(leg.contract, order)
+        rec.trail_stop = round(new_stop, 2)
+        rec.events.append(f"stop moved {was} -> {rec.trail_stop} (A3 trail)")
+        return order.orderId
 
     def adopt(self, rows) -> int:
         """Rebuild the in-memory records from the ledger's open orders.
@@ -457,6 +485,8 @@ class PaperTrader:
             keys = r.keys()
             if "filled_qty" in keys and r["filled_qty"] is not None:
                 rec.filled_qty = r["filled_qty"]
+            if "trail_stop" in keys and r["trail_stop"] is not None:
+                rec.trail_stop = r["trail_stop"]
             if "exit_order_id" in keys and r["exit_order_id"] and r["status"] == "ExitPending":
                 rec.exit_order_id = r["exit_order_id"]
                 rec.exit_confirmed = False
