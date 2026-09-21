@@ -374,3 +374,18 @@ def test_phase_c_needs_one_reconciled_lifecycle_not_only_a_count(journal):
     L.record_fill(journal, oid2, fill_price=5.0, fill_ts="2026-09-01T12:00:00Z")
     L.record_exit(journal, oid2, reason="monitored_stop", price=4.79, ts="2026-09-01T12:30:00Z")
     assert [r["order_id"] for r in L.reconciled_lifecycles(journal)] == [oid]
+
+
+def test_the_day_report_lists_only_that_days_rejects(journal, tmp_path, monkeypatch):
+    """2026-09-21: seven sessions of rejects under one day's title."""
+    monkeypatch.setattr(day, "REPORTS", tmp_path)
+    did = journal.execute("SELECT decision_id FROM decisions WHERE outcome='SUPPRESSED' LIMIT 1").fetchone()
+    if did is None:
+        journal.execute("UPDATE decisions SET outcome='SUPPRESSED', plan_allowed=0 WHERE decision_id=(SELECT decision_id FROM decisions LIMIT 1)")
+        journal.commit()
+    txt = day.write_report(journal, "2026-09-01", "fixture", synthetic=True).read_text()
+    assert "## Rejects (today only)" in txt and "Today (2026-09-01):" in txt
+    assert txt.count("| SUPPRESSED |") == journal.execute(
+        "SELECT COUNT(*) FROM decisions WHERE outcome='SUPPRESSED' AND substr(ts_et,1,10)='2026-09-01'").fetchone()[0]
+    other = day.write_report(journal, "2026-08-31", "fixture", synthetic=True).read_text()
+    assert "| SUPPRESSED |" not in other and "no decisions" in other

@@ -196,9 +196,17 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
               f"| LOG_ONLY | {f['log_only']} |", f"| TAKEN | {f['taken']} |",
               f"| orders · fills · fills with NBBO | {f['orders']} · {f['fills']} · {f['fills_with_nbbo']} |",
               f"| halts | {f['halts']} |", ""]
-    lines += ["## Rejects", "", "| ET | symbol | verdict | outcome | last | why |", "|---|---|---|---|---:|---|"]
+    # The day's own decisions, by outcome — the funnel above is the whole
+    # ledger. 2026-09-21: the report's rejects table listed seven sessions
+    # of rows under one day's title, and the reader could not tell today's
+    # from last week's without the log beside it.
+    today_rows = conn.execute("SELECT outcome, COUNT(*) AS n FROM decisions WHERE substr(ts_et,1,10)=? "
+                              "GROUP BY outcome ORDER BY outcome", (day,)).fetchall()
+    lines += [f"Today ({day}): " + (" · ".join(f"{r['n']} {r['outcome']}" for r in today_rows) or "no decisions"), ""]
+    lines += ["## Rejects (today only)", "", "| ET | symbol | verdict | outcome | last | why |", "|---|---|---|---|---:|---|"]
     for r in conn.execute("""SELECT ts_et, symbol, verdict, killed_by, outcome, refusal_reasons_json, last
-                             FROM decisions WHERE outcome IN ('SUPPRESSED','REFUSED') ORDER BY ts_et"""):
+                             FROM decisions WHERE outcome IN ('SUPPRESSED','REFUSED')
+                             AND substr(ts_et,1,10)=? ORDER BY ts_et""", (day,)):
         why = r["killed_by"] or ""
         if r["outcome"] == "REFUSED" and r["refusal_reasons_json"]:
             why = "; ".join(json.loads(r["refusal_reasons_json"]))
