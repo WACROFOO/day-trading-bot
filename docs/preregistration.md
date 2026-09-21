@@ -409,6 +409,33 @@ ran on the same thread as the 3-second session rebuild and starved it for most
 of every 120-second period. It runs on its own thread from the next desk start,
 and the rebuild logs its own duration when it exceeds 2 s.
 
+**The first order, and Amendment A6 (2026-09-21, 09:37 ET).** VEEE, trigger
+16.33, stop 16.31: a 2-cent stop on a $16 stock, sized by the rule "the stop
+defines the size" to 1,000 shares — $16,330 of notional on $2,288 of equity.
+IBKR rejected it in the same second (error 201: initial margin 14,439 EUR
+against equity-with-loan 2,288 EUR; small caps carry ~100 % initial margin).
+The stop leg cancelled with the parent. Nothing rested. Two defects it exposed,
+both fixed the same hour:
+
+- **The account bounds the size.** `sized_for` takes the smaller of the
+  risk-sized count and what NetLiquidation can hold (read once at connect);
+  a position sized by funds carries LESS than the stated $20 of risk, never
+  more, and says so in its note. `refusals` guards the same bound.
+- **A6 — the spread gate on the 1-minute path (tightening).** The runner now
+  refuses an entry whose stop is inside `SPREAD_K = 4` × the desk's live
+  spread. Same arithmetic as the 10-second study — the spread costs 1/k R per
+  round trip against a +2 R target, so k=4 caps it at 0.25 R. The 10-second
+  study used k=8 because its dips are a nickel deep; on the 1-minute path the
+  18 September counterfactual put the median spread at 25 % of the stop, so
+  k=4 admits the median setup and refuses the fee-only tail (5 of 39 trades
+  there had a spread wider than the whole stop; VEEE's 2-cent stop against a
+  1–2 cent spread is the same case). Tightening against oneself needs no
+  owner acceptance; it is recorded so its refusals can be counted, and the
+  constant moved by amendment if it starves the exercise.
+- **A rejected order counted as a live position.** IBKR's word for rejected
+  is `Inactive`; it was missing from the dead list, so the one-position rule
+  blocked every entry after 09:37 ("1 order(s) alive or unresolved").
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

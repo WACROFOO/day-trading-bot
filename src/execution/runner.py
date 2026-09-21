@@ -32,6 +32,7 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
+from .intent import SPREAD_K
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import ET, refusals
 from momentum_platform.sessions import REGULAR_END
@@ -111,7 +112,8 @@ class Runner:
         return done
 
     def _act(self, row) -> tuple[str, list[str]]:
-        intent = intent_from_decision(row, self.dollar_risk)
+        cap = getattr(self.trader, "net_liq", None) if self.mode == "TRADE" else None
+        intent = intent_from_decision(row, self.dollar_risk, max_notional=cap)
         clock = decision_clock(row)
         reasons = refusals(intent, now=clock)
 
@@ -177,6 +179,15 @@ class Runner:
             if not q or q.get("bid") is None:
                 reasons.append("no fresh desk quote for this symbol — decision and order "
                                "would not be on the same tape")
+            elif q.get("ask") is not None and q["ask"] > q["bid"]:
+                # Amendment A6: the stop must clear the spread by SPREAD_K or
+                # the round trip costs more than the trade can pay. Measured
+                # in Phase 0 of the 10-second study; the 1-minute path had no
+                # such gate, and VEEE's 2-cent stop went to the broker.
+                spread = round(q["ask"] - q["bid"], 4)
+                if intent.risk_per_share < SPREAD_K * spread:
+                    reasons.append(f"stop ${intent.risk_per_share:.2f}/sh is inside {SPREAD_K:g}x "
+                                   f"the spread (${spread:.2f}) — the round trip would eat the trade (A6)")
         if reasons:
             return "REFUSED", reasons
         if self.mode == "LOG_ONLY":
@@ -281,7 +292,7 @@ class Runner:
             rows = self.conn.execute(
                 "SELECT * FROM orders WHERE symbol=? AND fill_price IS NOT NULL "
                 "AND (exit_ts IS NULL OR status IN ('ExitPending','ExitFailed')) "
-                "AND status NOT IN ('Cancelled','ApiCancelled','Closed','NotFilled')", (sym,)).fetchall()
+                "AND status NOT IN ('Cancelled','ApiCancelled','Inactive','Closed','NotFilled')", (sym,)).fetchall()
             if not rows:
                 out.append(f"UNTRACKED position {sym} x{qty} at the broker — no ledger row; "
                            f"exit by hand (exercise.py stuck)")
@@ -353,7 +364,7 @@ class Runner:
         # (monitored stop, flatten) now reported filled — or dead.
         for r in self.conn.execute("SELECT order_id, parent_id, filled_qty, fill_price, stop_status, status "
                                    "FROM orders WHERE fill_price IS NOT NULL "
-                                   "AND status NOT IN ('Closed','Cancelled','ApiCancelled','NotFilled')").fetchall():
+                                   "AND status NOT IN ('Closed','Cancelled','ApiCancelled','Inactive','NotFilled')").fetchall():
             p = by_parent.get(r["parent_id"])
             if p is None:
                 continue

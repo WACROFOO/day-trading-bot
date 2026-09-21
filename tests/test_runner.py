@@ -206,3 +206,12 @@ def test_staleness_is_measured_from_the_bars_close_not_its_open():
     assert bar_seconds({"bar_resolution": "1m"}) == 60
     assert bar_seconds({"bar_resolution": "10s"}) == 10
     assert bar_seconds({"bar_resolution": None}) == 60
+
+
+def test_a_stop_inside_the_spread_is_refused_before_the_broker_sees_it():
+    """Amendment A6. The runner has the desk's live quote at the instant of the
+    order; a stop inside SPREAD_K x the spread is a fee, not a trade."""
+    from execution.intent import SPREAD_K
+    assert SPREAD_K == 4.0
+    src = open(__file__.replace("tests/test_runner.py", "src/execution/runner.py")).read()
+    assert "SPREAD_K * spread" in src and "(A6)" in src

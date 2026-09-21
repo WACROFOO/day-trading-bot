@@ -114,6 +114,7 @@ class PaperTrader:
         self.host, self.port, self.client_id = host, port, client_id
         self.risk_gate = risk_gate
         self.account: Optional[str] = None
+        self.net_liq: Optional[float] = None
         self.ib = None
         self.placed: list[PlacedOrder] = []
 
@@ -127,6 +128,16 @@ class PaperTrader:
                         readonly=False, timeout=timeout)
         try:
             self.account = assert_paper(self.ib.managedAccounts())
+            # One read, at connect: what the account can hold. NetLiquidation,
+            # not BuyingPower — small caps carry ~100% initial margin at IBKR,
+            # and BuyingPower on this paper account reads 4x equity, which the
+            # margin check then refuses (VEEE, 2026-09-21 09:37, error 201).
+            try:
+                vals = {v.tag: v.value for v in self.ib.accountSummary()
+                        if v.tag == "NetLiquidation"}
+                self.net_liq = float(vals["NetLiquidation"]) if vals else None
+            except Exception:                        # noqa: BLE001
+                self.net_liq = None
         except NotPaperError:
             # Disconnect before raising. A refused-but-open writable socket
             # to a live account is the exact thing being refused.

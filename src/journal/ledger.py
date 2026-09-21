@@ -899,7 +899,7 @@ def open_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Orders that may still be alive at the broker: not exited, not cancelled.
     What a restarted runner must adopt before it can sync anything."""
     return conn.execute("""SELECT * FROM orders WHERE exit_ts IS NULL
-                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled',
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled',
                                               'intent', 'UNRESOLVED')
                            ORDER BY placed_at""").fetchall()
 
@@ -908,9 +908,14 @@ def positions_alive(conn: sqlite3.Connection) -> int:
     """How many orders could still become or be a position: resting, filled and
     not exited, an exit sent but unconfirmed, an intent whose acknowledgement
     was never saved, or an unresolved intent. The one-position rule
-    (docs/preregistration.md §2) counts every one of these."""
+    (docs/preregistration.md §2) counts every one of these.
+
+    `Inactive` is IBKR's word for REJECTED (error 201 — VEEE, 2026-09-21
+    09:37, margin). It was not in the dead list, so the first order the
+    exercise ever sent, refused by the broker inside a second, counted as a
+    live position and blocked every entry for the rest of the session."""
     return conn.execute("""SELECT COUNT(*) FROM orders WHERE (exit_ts IS NULL OR status IN ('ExitPending', 'ExitFailed'))
-                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Closed', 'NotFilled')""").fetchone()[0]
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled')""").fetchone()[0]
 
 
 def mark_not_filled(conn: sqlite3.Connection, order_id: int) -> None:

@@ -14,25 +14,31 @@ import sqlite3
 from datetime import datetime
 from typing import Optional
 
-from .intent import EntryIntent, shares_for
+from .intent import EntryIntent, shares_for, sized_for
 
 
 def intent_from_decision(row: sqlite3.Row | dict, dollar_risk: float,
-                         target: Optional[float] = None) -> EntryIntent:
-    """Size the plan and carry the verdict. Does not judge; `refusals` does."""
+                         target: Optional[float] = None,
+                         max_notional: Optional[float] = None) -> EntryIntent:
+    """Size the plan and carry the verdict. Does not judge; `refusals` does.
+
+    The stop defines the size; the account bounds it. With `max_notional`
+    the share count is the smaller of the two, and the note says which."""
     r = dict(row)
     trigger, stop = float(r["trigger"]), float(r["stop"])
+    shares, by = sized_for(round(trigger, 2), round(stop, 2), dollar_risk, max_notional)
     return EntryIntent(
         symbol=r["symbol"],
         trigger=round(trigger, 2),
         stop=round(stop, 2),
-        shares=shares_for(round(trigger, 2), round(stop, 2), dollar_risk),
+        shares=shares,
         dollar_risk=dollar_risk,
+        max_notional=max_notional,
         target=round(target, 2) if target is not None else None,
         plan_allowed=bool(r["plan_allowed"]),
         verdict=r["verdict"] or "",
         session=r["session"] if r["session"] in ("regular", "premarket") else "none",
-        note=f"decision {r['decision_id']}",
+        note=f"decision {r['decision_id']}" + (" · sized by funds, not risk" if by == "funds" else ""),
         ref=str(r["decision_id"]),
     )
 

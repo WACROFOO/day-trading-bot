@@ -118,6 +118,14 @@ class EntryIntent:
     # decision_id. A restarted runner finds an order whose acknowledgement
     # was never saved by this, not by an orderId it never learned (audit F4).
     ref: str = ""
+    # What the account can actually hold, in dollars of notional. None = not
+    # known (LOG_ONLY, or no account read). The stop defines the size; the
+    # account bounds it — see `sized_for`.
+    max_notional: Optional[float] = None
+
+    @property
+    def notional(self) -> float:
+        return round(self.trigger * self.shares, 2)
 
     @property
     def risk_per_share(self) -> float:
@@ -163,6 +171,17 @@ def refusals(i: EntryIntent,
 
     if i.target is not None and i.target <= i.trigger:
         out.append(f"target {i.target} is not above trigger {i.trigger}")
+
+    if i.max_notional is not None and i.trigger > 0 and i.shares > 0 \
+            and i.notional > i.max_notional * NOTIONAL_TOLERANCE:
+        # VEEE, 2026-09-21 09:37 — the first order this exercise ever sent:
+        # a 2-cent stop on a $16 stock sized to 1,000 shares, $16,330 of
+        # notional on $2,288 of equity. IBKR rejected it (201, margin) before
+        # anything here did. Small caps carry ~100% initial margin, so equity
+        # is the bound; `sized_for` shrinks to fit before this can fire, and
+        # this is the guard for a caller that did not.
+        out.append(f"notional ${i.notional:,.0f} exceeds what the account can hold "
+                   f"(${i.max_notional:,.0f})")
 
     if i.dollar_risk <= 0:
         out.append("no dollar risk stated")
@@ -228,6 +247,34 @@ def refusals(i: EntryIntent,
             out.append(f"{name} {px} is sub-penny; not on the tick grid")
 
     return out
+
+
+# A sized order may overshoot the account by rounding, not by design.
+NOTIONAL_TOLERANCE = 1.02
+
+# The stop must clear the spread by this factor or the round trip eats the
+# trade. Same arithmetic as `src/momentum_platform/microflow/config.py`: with the plan's +2 R target
+# the spread costs (1/k) R per round trip, so k=4 caps that cost at 0.25 R.
+# The 10-second study used k=8 because its dips are a nickel deep; on the
+# 1-minute path the Friday counterfactual put the median spread at 25% of
+# the stop, so k=4 admits the median setup and refuses the fee-only tail —
+# the 5 of 39 trades whose spread exceeded the whole stop, and VEEE at 09:37
+# (2-cent stop against a 1-2 cent spread). Amendment A6; lower by amendment.
+SPREAD_K = 4.0
+
+
+def sized_for(trigger: float, stop: float, dollar_risk: float,
+              max_notional: Optional[float] = None) -> tuple[int, str]:
+    """Shares and how they were bounded: 'risk' (the stop sized it) or 'funds'
+    (the account could not hold the risk-sized position; fewer shares, and so
+    LESS than the stated dollar risk — never more)."""
+    n = shares_for(trigger, stop, dollar_risk)
+    if max_notional is None or trigger <= 0 or n <= 0:
+        return n, "risk"
+    fit = int(max_notional // trigger)
+    if fit < n:
+        return max(fit, 0), "funds"
+    return n, "risk"
 
 
 def shares_for(trigger: float, stop: float, dollar_risk: float) -> int:

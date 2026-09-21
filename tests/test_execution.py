@@ -392,3 +392,34 @@ def test_1129_still_trades_and_1130_does_not():
 
 def test_the_hard_stop_does_not_reach_back_into_the_premarket_session():
     assert refusals(intent(session="premarket"), now=PREMARKET) == []
+
+
+def test_the_account_bounds_the_size_and_a_rejected_order_is_dead():
+    """VEEE, 2026-09-21 09:37: 2-cent stop, 1,000 shares, $16,330 on $2,288 of
+    equity, rejected by IBKR (201). The stop defines the size; the account
+    bounds it — and fewer shares is LESS risk, never more."""
+    from execution.intent import EntryIntent, refusals, shares_for, sized_for
+    assert shares_for(16.33, 16.31, 20.0) == 1000
+    n, by = sized_for(16.33, 16.31, 20.0, max_notional=2288.0)
+    assert n == 140 and by == "funds"
+    assert n * 16.33 <= 2288.0 and n * 0.02 < 20.0
+    assert sized_for(6.00, 5.80, 20.0, max_notional=2288.0) == (100, "risk")
+    big = EntryIntent(symbol="VEEE", trigger=16.33, stop=16.31, shares=1000, dollar_risk=20.0,
+                      plan_allowed=True, max_notional=2288.0)
+    assert any("exceeds what the account can hold" in r for r in refusals(big))
+
+
+def test_ibkr_inactive_means_rejected_and_does_not_hold_the_one_position_rule():
+    from journal import ledger as L
+    conn = L.connect(":memory:")
+    conn.execute("""INSERT INTO decisions (decision_id, ts_et, session, symbol, source, verdict,
+                    killed_by, plan_allowed, gates_json, warnings_json, inputs_json, recorded_at)
+                    VALUES ('d1', '2026-09-21T09:37:00-04:00', 'regular', 'VEEE', 'pullback',
+                            'REVIEW', NULL, 1, '[]', '[]', '{}', 'x')""")
+    oid = L.record_order(conn, "d1", symbol="VEEE", account="DUR339781", session="regular",
+                         parent_id=4, stop_id=5, target_id=None, trigger=16.33, stop=16.31,
+                         target=None, shares=1000, dollar_risk=20.0, protected=True)
+    assert L.positions_alive(conn) == 1
+    conn.execute("UPDATE orders SET status='Inactive' WHERE order_id=?", (oid,))
+    assert L.positions_alive(conn) == 0
+    assert L.open_orders(conn) == []
