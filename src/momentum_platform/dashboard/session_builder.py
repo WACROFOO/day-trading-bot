@@ -440,6 +440,35 @@ def build_session_from_records(
             "halts": dict(halt_state),
         })
 
+    # A halt stamped after the last completed minute has no frame to ride
+    # in, but it is a fact about the tape NOW: the ledger gets it here,
+    # the hot state gets it, and the newest frame carries it. Without this
+    # a pause seen in the forming minute was never journaled (review
+    # 2026-09-21, item 13; the halts table was empty for seven sessions).
+    while pending_halts:
+        rec = pending_halts.pop(0)
+        hot.set_halt(rec["symbol"], rec["status"])
+        previous = halt_state.get(rec["symbol"], "trading")
+        halt_state[rec["symbol"]] = rec["status"]
+        if previous != rec["status"]:
+            if journal is not None:
+                _hs = hot.symbols.get(rec["symbol"])
+                _journal_halt(journal, rec, _hs.snapshot.last if _hs else None)
+            if frames:
+                frames[-1]["halts"] = dict(halt_state)
+                frames[-1]["alerts"].append({
+                    "eventId": f"halt-{rec['symbol']}-{rec['ts']}",
+                    "symbol": rec["symbol"], "scannerId": "halt",
+                    "branch": "halt.started" if rec["status"] == "halted" else "halt.resumed",
+                    "severity": "critical", "sourceTime": rec["ts"], "observedTime": rec["ts"],
+                    "definitionVersion": "halt@1.0.0",
+                    "reasons": [{"field": "official_status", "value": rec["status"],
+                                 "passed": True, "evidence": "confirmed"}],
+                    "values": {"last": _num(hot.get(rec["symbol"]).snapshot.last, 4)},
+                })
+    if journal is not None:
+        journal.commit()
+
     # Every desk name carries its own numbers. The Five Pillars board used to
     # scavenge them out of whatever ranked list a symbol happened to reach, so
     # a name in no list read UNKNOWN on every pillar however much was known

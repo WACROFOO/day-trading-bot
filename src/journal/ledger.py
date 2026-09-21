@@ -294,7 +294,9 @@ _ADDED_COLUMNS = {
                ("filled_qty", "REAL"), ("exit_order_id", "INTEGER"),
                ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT"),
                # A3: the stop leg's current level and the high it trails
-               ("trail_stop", "REAL"), ("high_since_fill", "REAL")),
+               ("trail_stop", "REAL"), ("high_since_fill", "REAL"),
+               # the resting stop leg's quantity, from the broker (item 13c)
+               ("stop_qty", "REAL")),
     "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
@@ -1082,6 +1084,18 @@ def record_candidates(conn: sqlite3.Connection, ts, source: str, rows) -> int:
         n += cur.rowcount
     conn.commit()
     return n
+
+
+def set_stop_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:
+    conn.execute("UPDATE orders SET stop_qty=?, updated_at=? WHERE order_id=?", (qty, _now(), order_id))
+
+
+def exit_quantity_gaps(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Filled, un-exited rows whose resting stop covers fewer shares than
+    were filled. Every filled share needs its protective exit (item 13c)."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND exit_ts IS NULL
+                           AND filled_qty IS NOT NULL AND stop_qty IS NOT NULL AND stop_qty < filled_qty
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled')""").fetchall()
 
 
 def set_filled_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:

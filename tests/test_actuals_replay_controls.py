@@ -266,3 +266,21 @@ def test_the_statistical_unit_is_reported_beside_the_mean(journal, tape):
         assert 0 <= u["top3_share_of_total"]
     if u["mean_R_without_top3"] is not None:
         assert u["mean_R_without_top3"] <= (u["mean_R"] or 0) + 1e-9 or u["top3_share_of_total"] is None
+
+
+def test_13b_no_simulated_fill_inside_the_decision_candle(journal, tape):
+    """A decision on a completed candle can be filled no earlier than the next
+    candle: actuals start strictly after the decision bar, and the exit
+    simulation enters at the bar the trigger was first touched, never before."""
+    actuals.fill_all(journal, tape)
+    rows = journal.execute("SELECT d.ts_et, a.trigger_hit_ts FROM decisions d JOIN actuals a USING(decision_id) "
+                           "WHERE a.trigger_hit_ts IS NOT NULL").fetchall()
+    assert rows
+    for r in rows:
+        assert actuals._bar_dt(r["trigger_hit_ts"]) > actuals._utc(r["ts_et"])
+    ev = controls.exit_variants(journal, tape)
+    for v, items in ev.items():
+        for it in items:
+            d = journal.execute("SELECT ts_et FROM decisions WHERE decision_id=?", (it["decision_id"],)).fetchone()
+            hit = journal.execute("SELECT trigger_hit_ts FROM actuals WHERE decision_id=?", (it["decision_id"],)).fetchone()
+            assert actuals._bar_dt(hit[0]) > actuals._utc(d[0]) and it["bars_held"] >= 1

@@ -356,6 +356,10 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
             print(f"  {WARN}HARD STOP{END} flattened: {done or 'nothing open'}")
             return True
         print(f"  {BAD}HARD STOP{END} the flatten raised — retrying next loop; check the broker")
+    elif flattened:
+        # Sent is not filled: the broker's position state decides "flat".
+        for line in guarded("flat check", runner.confirm_flat) or []:
+            print(f"  {now_et:%H:%M:%S}  {BAD if line.startswith('NOT FLAT') else OK}FLAT{END}     {line}")
     return flattened
 
 

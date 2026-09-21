@@ -82,6 +82,12 @@ class Runner:
         # entries for the day; the exit side (fill sync, monitored stops, the
         # hard-stop flatten) must keep running in TRADE mode.
         self.entries_enabled = True
+        # Broker state the ledger cannot account for (an untracked position, a
+        # quantity mismatch). Set by reconcile_positions; while non-empty no
+        # new entry is placed (review 2026-09-21, item 13d): reconcile first,
+        # order second, after every start and every reconnect.
+        self.unreconciled: list[str] = []
+        self.flat_confirmed: Optional[bool] = None
         if self.mode == "TRADE":
             # An intent whose acknowledgement was never saved is matched at the
             # broker by orderRef, or marked UNRESOLVED. Never resent.
@@ -92,6 +98,10 @@ class Runner:
             adopted = self.trader.adopt(L.open_orders(self.conn))
             if adopted:
                 self.startup_notes.append(f"adopted {adopted} open order(s) from the ledger")
+            # Broker positions and working orders against the ledger BEFORE
+            # anything can be sent. Read-only.
+            for line in self.reconcile_positions():
+                self.startup_notes.append(line)
 
     # ------------------------------------------------------------- the loop
     def step(self) -> list["Acted"]:
@@ -179,6 +189,9 @@ class Runner:
                                f"(docs/preregistration.md §3; exercise.py advance)")
         if self.mode == "TRADE" and not self.entries_enabled:
             reasons.append("day locked by the risk gate — no new entries")
+        if self.mode == "TRADE" and self.unreconciled:
+            reasons.append("broker state not reconciled with the ledger — no new entries until a "
+                           "human clears it: " + "; ".join(self.unreconciled)[:160])
         if self.mode == "TRADE" and L.positions_alive(self.conn) >= self.max_positions:
             reasons.append(f"one position at a time (preregistration §2): "
                            f"{L.positions_alive(self.conn)} order(s) alive or unresolved")
@@ -306,10 +319,20 @@ class Runner:
         Read-only against the broker; it sends nothing."""
         if self.mode != "TRADE":
             return []
+        out: list[str] = []
+        # Every filled share needs its protective exit (item 13c): a stop leg
+        # covering fewer shares than were filled is flagged from the ledger
+        # alone, before the broker is consulted.
+        for r in L.exit_quantity_gaps(self.conn):
+            L.add_order_event(self.conn, r["order_id"],
+                              f"stop leg covers {r['stop_qty']:g} of {r['filled_qty']:g} filled shares")
+            out.append(f"STOP COVERS {r['stop_qty']:g} OF {r['filled_qty']:g} {r['symbol']} "
+                       f"(order #{r['order_id']}) — the uncovered shares have no exit")
         ib = getattr(self.trader, "ib", None)
         if ib is None or not hasattr(ib, "positions"):
-            return []
-        out: list[str] = []
+            self.conn.commit()
+            self.unreconciled = [x for x in out if x.startswith("STOP COVERS")]
+            return out
         working = ("Submitted", "PreSubmitted", "monitored")
         for pos in ib.positions():
             qty = int(getattr(pos, "position", 0) or 0)
@@ -342,6 +365,7 @@ class Runner:
                                   f"(stop status {r['stop_status']!r}) — a human must place one")
                     out.append(f"NO WORKING EXIT {sym} x{qty} (order #{r['order_id']})")
         self.conn.commit()
+        self.unreconciled = [x for x in out if x.split(" ")[0] in ("UNTRACKED", "QUANTITY", "STOP")]
         return out
 
     # ------------------------------------------------------------- fills
@@ -356,6 +380,12 @@ class Runner:
             p = by_parent.get(r["parent_id"])
             if p is not None and p.perm_id:
                 L.set_perm_id(self.conn, r["order_id"], p.perm_id)
+        # The stop leg's quantity, from the broker, on every row it is known for.
+        for r in self.conn.execute("SELECT order_id, parent_id, stop_qty FROM orders "
+                                   "WHERE stop_id IS NOT NULL AND exit_ts IS NULL").fetchall():
+            p = by_parent.get(r["parent_id"])
+            if p is not None and p.stop_qty is not None and p.stop_qty != r["stop_qty"]:
+                L.set_stop_qty(self.conn, r["order_id"], p.stop_qty)
         rows = self.conn.execute(
             "SELECT order_id, parent_id, decision_id FROM orders WHERE fill_price IS NULL").fetchall()
         for r in rows:
@@ -580,7 +610,28 @@ class Runner:
                               f"fill not yet confirmed")
         self.reconcile_unfilled()
         self.conn.commit()
-        return done
+        # "Flat" is the broker's word, never the fact that a sell was sent
+        # (item 13f). The market sells above may not have filled yet; the
+        # loop keeps asking until positions() is empty.
+        return done + self.confirm_flat()
+
+    def confirm_flat(self) -> list[str]:
+        """After the hard stop: what the broker still holds. Empty means flat,
+        recorded once; anything else is NOT FLAT and is repeated every loop."""
+        if self.mode != "TRADE" or not hasattr(self.trader, "positions_held"):
+            return []
+        held = self.trader.positions_held()
+        if held:
+            self.flat_confirmed = False
+            return [f"NOT FLAT {sym} x{qty} — sell sent or missing, fill not seen; check the broker"
+                    for sym, qty in held]
+        if self.flat_confirmed is not True:
+            self.flat_confirmed = True
+            for o in L.pending_exits(self.conn):
+                L.add_order_event(self.conn, o["order_id"], "flat confirmed from broker position state")
+            self.conn.commit()
+            return ["flat confirmed from broker position state"]
+        return []
 
 
 def _parse_ts(value) -> Optional[datetime]:

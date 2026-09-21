@@ -139,3 +139,25 @@ def test_a_log_only_day_never_reaches_an_order_function(live, monkeypatch):
     assert all(a.outcome in ("LOG_ONLY", "REFUSED") for a in acted)
     assert r.sync_fills() == 0 and r.watch_stops() == [] and r.flag_after_hours() == [] and r.end_of_day() == []
     assert live["conn"].execute("SELECT COUNT(*) FROM orders").fetchone()[0] == 0
+
+
+def test_a_recorded_luld_pause_reaches_the_halts_table(live):
+    """Known-positive for the halt collector (review item 13). Seven empty
+    sessions could mean no pauses, missing coverage or a dead collector; the
+    absence of rows cannot tell them apart. This feeds a ticker that reports
+    halted=1 through the live desk and asserts the `halts` row, then the
+    resumption."""
+    desk, ib, c = live["desk"], live["ib"], live["conn"]
+    assert c.execute("SELECT COUNT(*) FROM halts").fetchone()[0] == 0
+    ib.push_bar("AAA", T0, 4.13, 4.14, 4.12, 4.13, 500)       # a live minute at T0 so the halt has a frame
+    desk.tick()
+    ib.tickers["AAA"].halted = 1
+    desk.refresh_session()
+    rows = c.execute("SELECT symbol, status FROM halts ORDER BY id").fetchall()
+    assert [tuple(r) for r in rows] == [("AAA", "halted")], rows
+    ib.tickers["AAA"].halted = 0
+    desk.refresh_session()
+    rows = c.execute("SELECT symbol, status FROM halts ORDER BY id").fetchall()
+    assert [tuple(r) for r in rows] == [("AAA", "halted"), ("AAA", "trading")], rows
+    desk.refresh_session()                                     # unchanged state: no new row
+    assert c.execute("SELECT COUNT(*) FROM halts").fetchone()[0] == 2

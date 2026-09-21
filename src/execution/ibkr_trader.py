@@ -428,6 +428,8 @@ class PaperTrader:
             stop = by_id.get(rec.stop_id) if rec.stop_id else None
             if stop is not None:
                 rec.stop_status = stop.orderStatus.status
+                q = getattr(stop.order, "totalQuantity", None)
+                rec.stop_qty = float(q) if q is not None else rec.stop_qty
                 # Warning 399 on the stop leg is the tell: IBKR is holding it
                 # for the open, so it is not protecting anything right now.
                 queued = any(e.errorCode == 399 for e in stop.log)
@@ -538,6 +540,18 @@ class PaperTrader:
                                       "type": order.orderType,
                                       "price": getattr(order, "lmtPrice", None)})
         return done
+
+    def positions_held(self) -> list[tuple[str, int]]:
+        """Long positions the broker reports right now — the only source that
+        may say "flat" (review 2026-09-21, item 13f). Read-only."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        out = []
+        for pos in self.ib.positions():
+            qty = int(getattr(pos, "position", 0) or 0)
+            if qty > 0:
+                out.append((pos.contract.symbol, qty))
+        return out
 
     def cancel_all(self) -> int:
         """Cancel every open order on this connection. The kill switch.

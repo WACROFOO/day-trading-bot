@@ -360,3 +360,93 @@ def test_freshly_published_backfill_does_not_read_as_fresh(journal):
     a = next(x for x in r.step() if x.decision_id == did)
     assert a.outcome == "REFUSED"
     assert any("loaded history" in x and "bar clock" in x for x in a.reasons), a.reasons
+
+
+# ------------------------------------------------ review item 13: order state
+class _Pos:
+    def __init__(self, sym, qty):
+        self.position = qty
+        self.contract = type("C", (), {"symbol": sym})()
+
+
+class _IB:
+    def __init__(self, positions=()):
+        self._positions = list(positions)
+    def positions(self): return list(self._positions)
+    def trades(self): return []
+    def openTrades(self): return []
+
+
+class ReconcilingTrader(FakeTrader):
+    """A fake that also answers the broker-state questions the runner asks."""
+    def __init__(self, positions=()):
+        super().__init__()
+        self.ib = _IB(positions)
+    def positions_held(self):
+        return [(p.contract.symbol, int(p.position)) for p in self.ib.positions() if p.position > 0]
+
+
+def test_13c_a_partial_fill_whose_stop_covers_fewer_shares_is_flagged(journal):
+    """Every filled share needs its protective exit. The stop leg's quantity
+    is read from the broker on sync; a leg covering fewer than the filled
+    shares is a RECONCILE line, an order event, and a bar on new entries."""
+    t = ReconcilingTrader()
+    r, rec = _take_and_fill(journal, t)
+    rec.filled_qty, rec.stop_qty = 100, 40
+    r.sync_fills()
+    o = journal.execute("SELECT filled_qty, stop_qty FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert (o["filled_qty"], o["stop_qty"]) == (100, 40)
+    lines = r.reconcile_positions()
+    assert any(x.startswith("STOP COVERS 40 OF 100") for x in lines), lines
+    assert r.unreconciled
+    rec.stop_qty = 100
+    r.sync_fills()
+    assert r.reconcile_positions() == [] and r.unreconciled == []
+
+
+def test_13d_an_untracked_broker_position_blocks_new_entries_until_reconciled(journal):
+    """Reconcile first, order second: a runner that starts (or reconnects) with
+    a position the ledger does not know about places nothing until a human
+    has cleared it."""
+    t = ReconcilingTrader(positions=[_Pos("GHOST", 50)])
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600,
+               quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    assert any("UNTRACKED position GHOST" in n for n in r.startup_notes)
+    done = r.step()
+    assert done and all(a.outcome == "REFUSED" for a in done)
+    assert all(any("not reconciled" in x for x in a.reasons) for a in done)
+    assert t.intents == []
+    # the human flattens it by hand; the next reconciliation clears the bar
+    t.ib._positions = []
+    assert r.reconcile_positions() == [] and r.unreconciled == []
+    journal.execute("UPDATE decisions SET outcome='PENDING' WHERE plan_allowed=1"); journal.commit()
+    assert any(a.outcome == "TAKEN" for a in r.step())
+
+
+def test_13e_repeated_callbacks_and_a_second_step_never_duplicate_an_entry_or_an_exit(journal):
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    n_intents = len(t.intents)
+    assert r.step() == [] and len(t.intents) == n_intents            # nothing pending twice
+    assert r.sync_fills() == 0                                        # the fill is recorded once
+    rec.exit_price, rec.exit_reason, rec.exit_time = 7.50, "stop", "2026-09-01T14:10:00Z"
+    r.sync_fills()
+    o1 = journal.execute("SELECT exit_ts, exit_price, status FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    rec.exit_price, rec.exit_time = 7.40, "2026-09-01T14:20:00Z"     # the broker repeats the callback, differently
+    r.sync_fills(); r.sync_fills()
+    o2 = journal.execute("SELECT exit_ts, exit_price, status FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert tuple(o1) == tuple(o2) == (o1["exit_ts"], 7.50, "Closed")
+    assert journal.execute("SELECT COUNT(*) FROM orders").fetchone()[0] == len(t.placed)
+
+
+def test_13f_flat_is_the_brokers_word_not_the_sent_sell(journal):
+    t = ReconcilingTrader(positions=[_Pos("TEST", 100)])
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t)
+    lines = r.end_of_day()
+    assert "TEST x100 MKT" in lines and any(x.startswith("NOT FLAT TEST x100") for x in lines)
+    assert r.flat_confirmed is False
+    assert any(x.startswith("NOT FLAT") for x in r.confirm_flat())     # still held next loop
+    t.ib._positions = []
+    assert r.confirm_flat() == ["flat confirmed from broker position state"]
+    assert r.flat_confirmed is True and r.confirm_flat() == []         # said once

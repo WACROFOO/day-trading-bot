@@ -333,6 +333,10 @@ class PlacedOrder:
     # A3: where the stop leg rests now, once the runner has moved it. None
     # while it still sits at the initial stop.
     trail_stop: Optional[float] = None
+    # Quantity the resting stop leg covers, read back from the broker. After
+    # a partial fill this must cover every filled share (review 2026-09-21,
+    # item 13c); None until sync() has read the leg.
+    stop_qty: Optional[float] = None
     exit_time: Optional[str] = None
     # IBKR's permanent id. orderId is per API session: orders from an earlier
     # connection come back as orderId 0 (seen 2026-09-07 in the smoke test's

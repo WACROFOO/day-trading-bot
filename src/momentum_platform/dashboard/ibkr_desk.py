@@ -142,6 +142,14 @@ class IbkrDesk:
         self._news_at: Optional[datetime] = None      # last headline pull
         self._started: Optional[datetime] = None       # set once, at bootstrap
         self._halt_state: Dict[str, str] = {}         # sym -> halted | trading
+        # Every halt transition seen this session, re-offered on every
+        # rebuild like the headlines are. Until 2026-09-21 a transition was
+        # emitted ONCE, in the rebuild that saw it; the builder only journals
+        # a halt inside a minute frame at or after its stamp, and a halt is
+        # always observed in the forming minute, so the record was dropped
+        # and never re-sent — the halts table stayed empty for seven sessions.
+        # Found by the known-positive test the external review asked for.
+        self._halts: List[dict] = []
         self._jobs: "queue.Queue[tuple]" = queue.Queue()
         self._stop = threading.Event()
         self._last_state: Optional[tuple] = None
@@ -759,9 +767,10 @@ class IbkrDesk:
             prev = self._halt_state.get(sym)
             if prev != status:
                 if prev is not None or status == "halted":
-                    records.append({"type": "halt", "symbol": sym, "status": status,
-                                    "ts": now.isoformat(timespec="seconds").replace("+00:00", "Z")})
+                    self._halts.append({"type": "halt", "symbol": sym, "status": status,
+                                        "ts": now.isoformat(timespec="seconds").replace("+00:00", "Z")})
                 self._halt_state[sym] = status
+        records += self._halts
         h = s.health
         status = "live" if h.state == "LIVE" else h.state.lower()
         session = build_session_from_records(
