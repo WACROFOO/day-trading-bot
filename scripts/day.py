@@ -201,6 +201,19 @@ def write_report(conn, day: str, source: str, synthetic: bool = False) -> Path:
             lines.append(f"| {k} | {v['n']} | {v['mean_R']:.3f} | {v['median_R']:.3f} | {v['win_rate']:.0%} |")
         else:
             lines.append(f"| {k} | {v['n']} | — | — | — |")
+    ex = controls.exit_summary(conn, bars.from_ledger(conn))
+    lines += ["", "## Exit variants (simulated · same entry fill · same initial stop · same cutoff · planned R)", "",
+              "| variant | n | mean R | median R | stopped | to close |", "|---|---:|---:|---:|---:|---:|"]
+    for k, v in ex.items():
+        if v["n"] and v["mean_R"] is not None:
+            lines.append(f"| {k} | {v['n']} | {v['mean_R']:.3f} | {v['median_R']:.3f} | "
+                         f"{v['stopped']:.0%} | {v['to_close']:.0%} |")
+        else:
+            lines.append(f"| {k} | {v['n']} | — | — | — | — |")
+    lines += ["", "baseline = fixed +2 R target · no_target = initial stop only · trail_1r = A3, "
+              "bar-ordered, the low is tested before the high raises the stop. \"close\" = the last "
+              f"bar the desk recorded ({controls.last_bar_time(conn) or 'none'} UTC); hold_close and "
+              "random_bar carry no stop; no costs in any series."]
     pd = st.get("paper_data")
     lines += ["", "## Alignment (decision tape → fill → fill tape)", "",
               f"Paper session data: **{pd or 'NOT MEASURED — run scripts/alignment_probe.py'}**"

@@ -47,7 +47,7 @@ def _db(args) -> str:
 
 
 # ------------------------------------------------------------------ report
-def report(conn, *, source: str, synthetic: bool) -> None:
+def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> None:
     f = L.funnel(conn)
     rep = replay.check(conn)
     ctl = controls.summary(conn)
@@ -98,6 +98,24 @@ def report(conn, *, source: str, synthetic: bool) -> None:
             print(f"  {k:<12}{v['n']:>4}{v['mean_R']:>10.3f}{v['median_R']:>10.3f}{v['win_rate']:>7.0%}")
         else:
             print(f"  {k:<12}{v['n']:>4}{'—':>10}{'—':>10}{'—':>7}")
+
+    last_bar = controls.last_bar_time(conn)
+    print(f"  {DIM}\"close\" = the last bar the desk recorded that day"
+          + (f" (latest in this ledger: {last_bar} UTC)" if last_bar else "")
+          + "; hold_close and random_bar carry NO stop; no costs in any series{END}")
+    if tape is None:
+        tape = bars.from_ledger(conn)
+    ex = controls.exit_summary(conn, tape)
+    print(f"\n{BOLD}EXIT VARIANTS{END}  (simulated · same entry fill · same initial stop · same cutoff · planned R)")
+    print(f"  {'variant':<12}{'n':>4}{'mean R':>10}{'median R':>10}{'stopped':>9}{'to close':>10}")
+    for k, v in ex.items():
+        if v["n"] and v["mean_R"] is not None:
+            print(f"  {k:<12}{v['n']:>4}{v['mean_R']:>10.3f}{v['median_R']:>10.3f}"
+                  f"{v['stopped']:>9.0%}{v['to_close']:>10.0%}")
+        else:
+            print(f"  {k:<12}{v['n']:>4}{'—':>10}{'—':>10}{'—':>9}{'—':>10}")
+    print(f"  {DIM}baseline = fixed +2R target · no_target = initial stop only (the rule in force until A3)"
+          f" · trail_1r = A3, bar-ordered, low tested before the high raises the stop{END}")
 
     st = L.get_state(conn)
     print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
@@ -150,7 +168,7 @@ def cmd_replay(args) -> int:
     actuals.fill_all(conn, bars.from_fixture(fixture))
     synthetic = "SYNTHETIC" in fixture.read_text()[:400].upper()
     report(conn, source=f"{fixture.name} · replay · LOG_ONLY · ${args.risk:g} risk/trade",
-           synthetic=synthetic)
+           synthetic=synthetic, tape=bars.from_fixture(fixture))
     return 0
 
 

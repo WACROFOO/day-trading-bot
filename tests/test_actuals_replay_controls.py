@@ -191,3 +191,62 @@ def test_actuals_run_from_the_ledgers_own_tape_with_no_fixture():
         assert [b[:6] for b in from_ledger[sym]] == [b[:6] for b in from_file[sym]]
     res = actuals.fill_all(c, from_ledger)
     assert res["computed"] == 5 and res["no_tape"] == []
+
+
+# ---------------------------------------------------------------- exit variants (review item 3)
+def _bars(*rows):
+    """(high, low, close) per bar, minute-stamped from 14:31Z."""
+    return [(f"2026-09-01T14:{31 + i:02d}:00Z", c, h, l, c, 1000) for i, (h, l, c) in enumerate(rows)]
+
+
+def test_the_simulated_trail_tests_the_low_before_the_high_raises_the_stop():
+    """The within-bar look-ahead the review named: a bar that spikes to +2R
+    and touches the initial stop in the same minute. Raising the stop on the
+    high first would exit at +1R on a bar that actually stopped the trade."""
+    trigger, stop = 10.0, 9.0                        # 1R = $1
+    bars = _bars((12.0, 9.0, 11.0), (13.0, 11.5, 12.5))
+    res = controls.simulate_exit(bars, trigger, stop, "trail_1r")
+    assert res == {"r": -1.0, "exit": "stop", "bars_held": 1}, res
+    # what a look-ahead implementation returns on the same bar, written out so the
+    # difference is a number and not a sentence
+    lookahead_stop = max(stop, 12.0 - 1.0)            # raised first ...
+    assert bars[0][3] <= lookahead_stop               # ... then the low "hits" it at +1R
+    assert (lookahead_stop - trigger) / 1.0 == 1.0 != res["r"]
+
+
+def test_the_trail_ratchets_up_never_down_and_names_its_exit():
+    trigger, stop = 10.0, 9.0
+    bars = _bars((12.0, 10.5, 11.8), (12.5, 11.2, 12.0), (12.2, 10.9, 11.0), (14.0, 12.0, 13.0))
+    res = controls.simulate_exit(bars, trigger, stop, "trail_1r")
+    # bar1 raises to 11.0, bar2 to 11.5, bar3's low 10.9 <= 11.5: out at 11.5 = +1.5R
+    assert res == {"r": 1.5, "exit": "trail", "bars_held": 3}
+
+
+def test_the_three_variants_share_the_entry_and_differ_only_in_the_exit():
+    trigger, stop = 10.0, 9.0
+    runner = _bars((11.0, 9.8, 10.9), (12.5, 10.7, 12.4), (13.5, 12.0, 13.4), (15.0, 13.2, 14.9))
+    base = controls.simulate_exit(runner, trigger, stop, "baseline", target=12.0)
+    hold = controls.simulate_exit(runner, trigger, stop, "no_target")
+    trail = controls.simulate_exit(runner, trigger, stop, "trail_1r")
+    assert base == {"r": 2.0, "exit": "target", "bars_held": 2}
+    assert hold == {"r": 4.9, "exit": "close", "bars_held": 4}
+    assert trail == {"r": 4.9, "exit": "close", "bars_held": 4}     # never gave back 1R from its high
+    loser = _bars((10.4, 8.9, 9.0),)
+    for v in controls.VARIANTS:
+        assert controls.simulate_exit(loser, trigger, stop, v, target=12.0)["r"] == -1.0
+
+
+def test_exit_variants_run_on_the_ledger_rows_from_the_same_entry_bar(journal, tape):
+    actuals.fill_all(journal, tape)
+    ev = controls.exit_variants(journal, tape)
+    n = {v: len(rows) for v, rows in ev.items()}
+    assert n["baseline"] == n["no_target"] == n["trail_1r"] > 0
+    summ = controls.exit_summary(journal, tape)
+    for v in controls.VARIANTS:
+        assert summ[v]["n"] == n[v] and summ[v]["stopped"] is not None
+    # a variant can only differ from no_target by exiting earlier at a level: the
+    # rows the tape never stopped agree exactly
+    by_id = {v: {r["decision_id"]: r for r in ev[v]} for v in ev}
+    for did, r in by_id["no_target"].items():
+        if r["exit"] == "close" and by_id["trail_1r"][did]["exit"] == "close":
+            assert by_id["trail_1r"][did]["r"] == r["r"]

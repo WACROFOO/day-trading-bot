@@ -15,6 +15,40 @@ Three series, all in PLANNED R so they are comparable to each other:
   random_bar  enter at the CLOSE of the decision bar instead of the trigger,
               same stop distance, same close. Isolates the trigger
 
+DEFINITIONS, stated after the 2026-09-21 external review asked for them
+(each is a fact about the code below, not a choice defended here):
+
+  entry       the plan's trigger, on the first bar strictly after the
+              decision bar whose HIGH touches it (`actuals.compute`). A plan
+              the tape never touched is not in any series ("untriggered").
+  "close"     `actuals.c_close` = the close of the LAST bar the desk recorded
+              for that symbol on the decision's ET date. The desk stops
+              writing bars when `scripts/day.py` ends at the 11:30 ET hard
+              stop, so in a normal session this is the 11:30 cutoff, NOT the
+              16:00 market close. If the desk was stopped earlier or ran
+              later, it is that moment instead; the report prints the last
+              bar time so the reader can tell.
+  hold_close  keeps NO stop. It is exposure from the trigger to the cutoff
+              with nothing in between. So the +6.3 R against the strategy's
+              +0.46 R in the 2026-09-21 pack is the effect of removing the
+              stop AND the target together, not of the target alone.
+  random_bar  keeps NO stop either, and enters at the decision bar's own
+              close (`decisions.last`) instead of the trigger; the risk
+              denominator is the plan's trigger − stop, which was knowable at
+              that bar because the plan was armed on it. Hold_close and
+              random_bar therefore differ ONLY in entry price; their gap is
+              the value of waiting for the trigger, nothing else.
+  costs       none, in every series: no spread, no commission, no slippage,
+              a fill exactly at the level. Every series is optimistic by the
+              same amount and none is a claim about a fillable price.
+
+`exit_variants` below is the comparison the review asked for: three exit
+rules on the SAME entry fill, SAME initial stop and SAME cutoff, differing
+in nothing but the exit — baseline (fixed +2 R target), no_target (stop
+only) and trail_1r (Amendment A3, simulated bar by bar with no within-bar
+look-ahead). They are simulations on the desk's tape; the trailing exit that
+runs live is `execution.runner.Runner.trail_stops`.
+
 No confidence intervals are computed. With the sample sizes this exercise
 will have for months, a CI would be decoration; the honest output is n and
 the raw series, and the reader is told that.
@@ -24,6 +58,8 @@ from __future__ import annotations
 
 import sqlite3
 from statistics import mean, median
+
+from . import ledger as L
 
 
 def series(conn: sqlite3.Connection, cohort: str | None = None) -> dict[str, list[float]]:
@@ -65,6 +101,102 @@ def series(conn: sqlite3.Connection, cohort: str | None = None) -> dict[str, lis
         if r["last"]:
             out["random_bar"].append(round((r["c_close"] - r["last"]) / rps, 4))
     return out
+
+
+# ---------------------------------------------------------------- exit variants
+TRAIL_R_SIM = 1.0          # mirrors execution.intent.TRAIL_R; a simulation, restated here on purpose
+VARIANTS = ("baseline", "no_target", "trail_1r")
+
+
+def simulate_exit(entry_bars: list, trigger: float, stop: float, variant: str,
+                  target: float | None = None, trail_r: float = TRAIL_R_SIM) -> dict:
+    """One trade, one exit rule, bar by bar from the ENTRY bar onward.
+
+    `entry_bars` are (ts, o, h, l, c, v) starting at the bar whose high first
+    touched the trigger. The fill is at the trigger; exits fill at their level
+    with no slippage (stated in the module docstring).
+
+    Ordering inside a bar is unknown, so every bar is judged in the order
+    that cannot flatter the rule: the LOW is tested against the stop that was
+    in force BEFORE the bar, and only then may the bar's HIGH raise a trailing
+    stop or hit a target. A bar that touches both stop and target counts the
+    stop (same convention as `actuals.compute`).
+
+    Returns {"r", "exit", "bars_held"}; exit is stop | trail | target | close.
+    """
+    rps = trigger - stop
+    if rps <= 0 or not entry_bars:
+        return {"r": None, "exit": "none", "bars_held": 0}
+    live_stop = stop
+    for i, (ts, o, h, l, c, v) in enumerate(entry_bars):
+        # 1. the stop in force before this bar
+        if l <= live_stop:
+            why = "trail" if variant == "trail_1r" and live_stop > stop else "stop"
+            return {"r": round((live_stop - trigger) / rps, 4), "exit": why, "bars_held": i + 1}
+        # 2. the target, this bar's high
+        if variant == "baseline" and target is not None and h >= target:
+            return {"r": round((target - trigger) / rps, 4), "exit": "target", "bars_held": i + 1}
+        # 3. only now may this bar's high raise the trail
+        if variant == "trail_1r":
+            live_stop = max(live_stop, round(h - trail_r * rps, 4))
+    last_close = entry_bars[-1][4]
+    return {"r": round((last_close - trigger) / rps, 4), "exit": "close", "bars_held": len(entry_bars)}
+
+
+def exit_variants(conn: sqlite3.Connection, bars_by_symbol: dict,
+                  cohort: str | None = None) -> dict[str, list[dict]]:
+    """The three exit rules on the same rows `series()` uses, from the same
+    entry bar `actuals.compute` found. Needs the tape: the ledger stores the
+    decision, not the bars (`journal.bars.from_ledger` / `from_fixture`)."""
+    from . import actuals as A
+    where = ""
+    if cohort == "allowed":
+        where = "AND d.plan_allowed = 1"
+    elif cohort == "killed":
+        where = "AND d.plan_allowed = 0"
+    rows = conn.execute(f"""
+        SELECT d.decision_id, d.symbol, d.ts_et, d.trigger, d.stop, d.target, a.risk_share, a.trigger_hit_ts
+        FROM decisions d JOIN actuals a USING(decision_id)
+        WHERE a.risk_share IS NOT NULL AND a.risk_share > 0
+          AND COALESCE(a.trigger_hit, 1) = 1 AND a.trigger_hit_ts IS NOT NULL
+          AND (d.data_status IS NULL OR d.data_status NOT LIKE '%-backfill')
+          {where}
+    """).fetchall()
+    out: dict[str, list[dict]] = {v: [] for v in VARIANTS}
+    for r in rows:
+        bars = bars_by_symbol.get(r["symbol"], [])
+        day = r["ts_et"][:10]
+        fwd = [b for b in A.forward(bars, A._utc(r["ts_et"]))
+               if A._bar_dt(b[0]).astimezone(L.ET).date().isoformat() == day]
+        entry = [b for b in fwd if b[0] >= r["trigger_hit_ts"]]
+        if not entry:
+            continue
+        trigger, stop = float(r["trigger"]), float(r["stop"])
+        target = float(r["target"]) if r["target"] else round(trigger + 2.0 * (trigger - stop), 4)
+        for v in VARIANTS:
+            res = simulate_exit(entry, trigger, stop, v, target=target)
+            if res["r"] is not None:
+                out[v].append({"decision_id": r["decision_id"], "symbol": r["symbol"], **res})
+    return out
+
+
+def exit_summary(conn: sqlite3.Connection, bars_by_symbol: dict) -> dict[str, dict]:
+    """n, mean, median, share stopped, share reaching the close — per variant."""
+    ev = exit_variants(conn, bars_by_symbol)
+    out = {}
+    for v, rows in ev.items():
+        rs = [x["r"] for x in rows]
+        st = _stats(rs)
+        st["stopped"] = round(sum(1 for x in rows if x["exit"] in ("stop", "trail")) / len(rows), 3) if rows else None
+        st["to_close"] = round(sum(1 for x in rows if x["exit"] == "close") / len(rows), 3) if rows else None
+        out[v] = st
+    return out
+
+
+def last_bar_time(conn: sqlite3.Connection) -> str | None:
+    """When the desk stopped writing bars — what "close" means in every series."""
+    row = conn.execute("SELECT MAX(ts) FROM bars").fetchone()
+    return row[0] if row and row[0] else None
 
 
 def _stats(v: list[float]) -> dict:
