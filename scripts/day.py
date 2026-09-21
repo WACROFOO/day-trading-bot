@@ -455,7 +455,11 @@ def main(argv=None) -> int:
     if not args.rehearsal and now.time() >= HARD_STOP:
         after_close(conn, today, args.dry_run); return 0
     if not args.rehearsal and now.time() < PREMARKET_OPEN:
-        warn(f"before {PREMARKET_OPEN:%H:%M} ET — start TWS and the Gateway, come back at 06:55"); return 0
+        # One login only (docs/day-runbook.md): the paper GATEWAY is up, TWS
+        # stays logged out. The old text said "start TWS and the Gateway",
+        # which is the 10197 competing-session trap this desk moved away from.
+        warn(f"before {PREMARKET_OPEN:%H:%M} ET — Gateway up on paper, TWS logged out; "
+             f"run this again at {PREMARKET_OPEN:%H:%M}"); return 0
 
     say(f"\n{BOLD}1. Watchlist{END}  (gap scan — STAR then WATCH; rejects named)")
     rows: list[dict] = []          # the gap scan's rows; empty when --symbols bypasses it
