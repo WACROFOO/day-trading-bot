@@ -46,7 +46,7 @@ better than the free baselines on the same names at the same instants.
 | Phase | Mode | Runs until | Gate to the next phase |
 |---|---|---|---|
 | A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions under the rules currently in force** (owner, 2026-09-18: the cohort resets on an amendment — see §5) | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
-| B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; zero unprotected entries |
+| B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; zero unprotected entries; **and, from 2026-09-21, one fully reconciled paper trade lifecycle** (below) |
 | C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** | only in the shape the probe dictates (§5) |
 | D | Read-out | at **PROPOSED: n = 60 taken trades** total | the failure condition in §4 is evaluated ONCE, here, not continuously |
 
@@ -66,6 +66,21 @@ Definitions, fixed 2026-09-08 after the outside review:
   trade with a cascade that had never let a name through. The owner may
   replace it with "40 prospective decisions **of which ≥ 10 allowed**"
   by editing this line and `scripts/day.py` `gates_for_advance` together.
+- **Operational readiness (added 2026-09-21 evening, review item 11;
+  applies prospectively).** The original A→B gate passed on 2026-09-18. It
+  did not establish operational readiness: a decision count validates
+  activity, not order submission, protective exits, reconciliation or
+  recovery. The historical pass stands as recorded in §5 and is not
+  rewritten. A revised gate applies from here forward: phase C requires, in
+  addition to the counts, **one fully reconciled paper trade lifecycle** —
+  an entry IBKR reported filled, a protective stop leg that existed at the
+  broker, an exit IBKR reported filled (never a sent-but-unconfirmed sell),
+  the ledger row closed, and no human flag on it
+  (`ledger.reconciled_lifecycles`, `scripts/day.py` `gates_for_advance`).
+  Thirty taken trades do not unlock pre-market on their own, because
+  pre-market is a different execution regime. Until that lifecycle exists
+  the exercise's status is **paper commissioning**, whatever the phase
+  letter says.
 - **Probe and smoke orders** (`premarket_probe.py`, `restart_probe.py`,
   `paper_trade_smoke.py`) never write `orders`; they are not enrolled
   trades. "Before the first order" means the first row in `orders`.

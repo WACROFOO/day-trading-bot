@@ -344,3 +344,33 @@ def test_every_allowed_decision_reconciles_to_a_named_outcome(journal):
     rec = L.reconcile_allowed(journal)
     assert rec["by_outcome"]["EXPIRED"] == 1 and rec["residual"] == 0
     assert sum(rec["by_outcome"].values()) == rec["allowed"]
+
+
+def test_phase_c_needs_one_reconciled_lifecycle_not_only_a_count(journal):
+    """Review item 11. A decision count validates activity. Phase C needs one
+    trade that went the whole way on the broker's word; a sent-but-unconfirmed
+    exit or a stop-less entry does not qualify."""
+    L.set_state(journal, phase="B", probe_verdict="held", paper_data="realtime")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert any("reconciled paper trade lifecycle" in b and "paper commissioning" in b for b in blockers)
+    did = L.decisions(journal, plan_allowed=1)[0]["decision_id"]
+    oid = L.record_order(journal, did, symbol="X", account="DU1", session="regular", parent_id=1,
+                         stop_id=2, target_id=None, trigger=5.0, stop=4.8, target=None,
+                         shares=10, dollar_risk=2.0, protected=True)
+    L.record_fill(journal, oid, fill_price=5.02, fill_ts="2026-09-01T14:00:00Z")
+    L.record_exit(journal, oid, reason="hard_stop", price=None, ts="2026-09-01T15:30:00Z",
+                  confirmed=False, exit_order_id=9)
+    assert L.reconciled_lifecycles(journal) == []                     # ExitPending is not a lifecycle
+    L.confirm_exit(journal, oid, price=5.10, ts="2026-09-01T15:30:02Z")
+    assert [r["order_id"] for r in L.reconciled_lifecycles(journal)] == [oid]
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert not any("reconciled paper trade lifecycle" in b for b in blockers)
+    assert any("30 taken" in b for b in blockers)                     # the count still applies
+    # a monitored (stop-less) entry that closed does not count, however it ended
+    did2 = L.decisions(journal, plan_allowed=1)[-1]["decision_id"]
+    oid2 = L.record_order(journal, did2, symbol="Y", account="DU1", session="premarket", parent_id=3,
+                          stop_id=None, target_id=None, trigger=5.0, stop=4.8, target=None,
+                          shares=10, dollar_risk=2.0, protected=False)
+    L.record_fill(journal, oid2, fill_price=5.0, fill_ts="2026-09-01T12:00:00Z")
+    L.record_exit(journal, oid2, reason="monitored_stop", price=4.79, ts="2026-09-01T12:30:00Z")
+    assert [r["order_id"] for r in L.reconciled_lifecycles(journal)] == [oid]

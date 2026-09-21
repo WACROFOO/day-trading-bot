@@ -685,6 +685,19 @@ def funnel(conn: sqlite3.Connection) -> dict:
     }
 
 
+def reconciled_lifecycles(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Orders that went the whole way and every step is the broker's word:
+    a fill IBKR reported, a protective stop leg that existed at the broker
+    (stop_id), an exit IBKR reported filled (status Closed with a price —
+    never a sent-but-unconfirmed ExitPending), and no human flag on the row.
+    The B→C readiness gate (review 2026-09-21, item 11) needs at least one.
+    A monitored (stop-less) entry does not qualify however it ended."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND stop_id IS NOT NULL
+                           AND protected=1 AND status='Closed' AND exit_price IS NOT NULL
+                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop')
+                           AND COALESCE(stop_status, '') <> ?""", (MANUAL,)).fetchall()
+
+
 def r0_violations(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """R0 = quantity × |fill − INITIAL stop| is the only realised-risk
     denominator (review 2026-09-21, item 8). A trailed stop (A3) moves

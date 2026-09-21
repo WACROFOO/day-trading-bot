@@ -154,6 +154,16 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
         unprotected = conn.execute("SELECT COUNT(*) FROM orders WHERE protected=0 AND fill_price IS NOT NULL").fetchone()[0]
         if unprotected:
             blockers.append(f"{unprotected} filled entry(ies) were unprotected — zero allowed")
+        # Operational readiness, prospective (review 2026-09-21, item 11): a
+        # decision count validates activity, not order submission, protective
+        # exits, reconciliation or recovery. Phase C needs one trade that went
+        # the whole way on the broker's word — fill, stop leg, exit filled,
+        # row closed, no human flag — and 30 taken trades do not unlock
+        # pre-market on their own.
+        if not L.reconciled_lifecycles(conn):
+            blockers.append("phase C needs one fully reconciled paper trade lifecycle (fill, protective "
+                            "stop leg, exit confirmed by the broker, ledger row closed); have none — "
+                            "the exercise is in paper commissioning until then")
         if state.get("probe_verdict") not in ("held", "queued"):
             blockers.append("phase C needs a definite probe verdict (held or queued)")
     elif phase == "C":
