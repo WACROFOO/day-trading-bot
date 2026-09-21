@@ -394,6 +394,21 @@ does not count as this name's catalyst in `_catalyst_today`. Gate 3 flags
 rather than kills (A2), so the change moves `decisions.catalyst` and the
 `strat·news` split, never a verdict — R11 is untouched.
 
+**Clarification C1 — staleness is measured from the bar's close
+(2026-09-21).** The runner refuses a decision older than 120 s. `ts_et` is the
+bar's OPEN, and a 1-minute decision cannot exist before its bar has closed, so
+the old arithmetic charged every plan 60 s it never had: a plan the runner saw
+70 s after the close read as "130 s old" and was refused (GRML, 07:43). The
+budget is unchanged at 120 s; the clock now starts at open + bar length. This
+is a definition, not a loosening — the same plan is stale at the same moment
+of the market, and it is now named correctly.
+
+The refusals that motivated it (142–400 s on 2026-09-21, 08:47–09:25) had a
+second cause that C1 does not fix and is fixed separately: the scanner union
+ran on the same thread as the 3-second session rebuild and starved it for most
+of every 120-second period. It runs on its own thread from the next desk start,
+and the rebuild logs its own duration when it exceeds 2 s.
+
 ## 6. Stopping rules — the exercise halts and is reviewed if
 
 - the daily risk gate latches on **3 sessions out of any 10**

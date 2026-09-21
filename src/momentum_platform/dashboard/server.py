@@ -514,12 +514,21 @@ def main(argv=None) -> int:
         # read-only clients, say so once.
         print("\ndesk stopping — disconnecting from IBKR", flush=True)
     finally:
+        # A second Ctrl-C during shutdown used to land inside the ledger write
+        # that flushes the last ten-second candles (2026-09-21 09:29:
+        # KeyboardInterrupt in record_bars_10s) and lose them. The first
+        # Ctrl-C is the instruction; further ones are ignored until we are out.
+        import signal as _signal
+        try:
+            _signal.signal(_signal.SIGINT, _signal.SIG_IGN)
+        except (ValueError, OSError):
+            pass                                     # not the main thread: nothing to do
         httpd.server_close()
         stop = getattr(live, "stop", None)
         if callable(stop):
             try:
                 stop()
-            except Exception:                        # noqa: BLE001
+            except BaseException:                    # noqa: BLE001 — shutdown must finish
                 pass
     return 0
 

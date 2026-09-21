@@ -4,7 +4,7 @@ Why one thread: ib_async drives an asyncio loop, and its real-time bar and
 ticker events are dispatched only while that loop runs (inside ib.sleep or a
 blocking request). Spreading calls over HTTP handler threads would starve the
 events or race the loop. So every TWS call — desk stream (client 27), scanner
-union (client 28), history, snapshots — runs on this worker, which alternates
+union (client 28) runs on its own thread since 2026-09-21; history and the rebuild run on this worker, which alternates
 between pumping the loop and running queued jobs. HTTP handlers only read the
 last built session and enqueue work.
 
@@ -110,6 +110,12 @@ class IbkrDesk:
         self.publisher = UpdatePublisher(self.hub)
         self.stream: Optional[IbkrStream] = None
         self.scanner_ib = None
+        self._scan_thread: Optional[threading.Thread] = None
+        self.scan_in_thread: bool = True
+        # Names IBKR refused live data for on this account (errors 420 /
+        # 10089: no NYSE market-data permission for the API). A name with
+        # delayed data only must not be on a desk that decides from the tape.
+        self.no_live_data: set = set()
         self.screener = _ScreenerView(self)
         self.lock = threading.Lock()
         self.session: dict = {}
@@ -216,7 +222,40 @@ class IbkrDesk:
             # phases and spend the morning holding different names.
             wall = time.time()
             self._next_scan = now + max(1.0, self.rescan - (wall % self.rescan))
+            self._scan_in_background()
+
+    def _scan_in_background(self) -> None:
+        """Run the scanner union on its own thread, never on the worker.
+
+        Until 2026-09-21 `scan()` ran inline here. It quotes ~100 names in
+        snapshot batches (`reqTickers` blocks up to ~11 s per batch) on top of
+        ten scanner queries, and each pass took most of its 120-second period.
+        The 3-second session rebuild shares this worker, so while a scan ran
+        no decision was published: plans reached the runner 142–400 s after
+        their bar and were refused as stale — every setup of the morning, in
+        the one window that mattered. The scanner has its own IBKR client
+        (28), so it can run concurrently; only its RESULT touches desk state,
+        and `add_symbols` already enqueues onto the worker from any thread.
+        One scan at a time: a slow pass is not allowed to pile up."""
+        t = self._scan_thread
+        if t is not None and t.is_alive():
+            return                                   # the previous pass is still quoting
+        if not self.scan_in_thread:
+            self._guard(self.scan); return           # tests, and the bootstrap path
+        def run():
+            try:
+                import asyncio
+                asyncio.set_event_loop(asyncio.new_event_loop())
+            except Exception:
+                pass
             self._guard(self.scan)
+        self._scan_thread = threading.Thread(target=run, daemon=True, name="ibkr-scanner")
+        self._scan_thread.start()
+
+    def wait_for_scan(self, timeout: float = 30.0) -> None:
+        t = self._scan_thread
+        if t is not None:
+            t.join(timeout)
 
     def _guard(self, fn: Callable) -> None:
         try:
@@ -312,6 +351,22 @@ class IbkrDesk:
             self._resubscribe_wanted = True
         elif errorCode == 162 and h is not None:
             h.pacing = "pacing" in str(errorString).lower()
+        if errorCode in (420, 10089) and contract is not None and getattr(contract, "symbol", None):
+            sym = contract.symbol
+            if sym not in self.no_live_data:
+                # SPRU, 2026-09-21 09:30: an NYSE name on a Nasdaq-only data
+                # entitlement — "delayed market data is available". A desk that
+                # decides from the tape cannot hold a name it sees late.
+                self.no_live_data.add(sym)
+                self.log(f"  {sym}: no live market data for this account ({errorCode}) — "
+                         f"removed from the desk; delayed data is not a tape")
+                try:
+                    if self.stream is not None:
+                        self.stream._unsubscribe(sym)
+                except Exception:
+                    pass
+                if sym in self.symbols:
+                    self.symbols.remove(sym)
         if errorCode == 10358 and self.fundamentals is not False:
             self.fundamentals = False
             self.log("  IBKR fundamentals are not entitled on this account: float falls back to "
@@ -619,6 +674,17 @@ class IbkrDesk:
         return frames[-1]["ts"] if frames else None
 
     def refresh_session(self) -> dict:
+        t0 = time.monotonic()
+        try:
+            return self._refresh_session()
+        finally:
+            took = time.monotonic() - t0
+            if took > 2.0:
+                # Above the 3-second cadence this is the number that decides
+                # whether a decision reaches the runner young enough to trade.
+                self.log(f"  rebuild took {took:.1f}s")
+
+    def _refresh_session(self) -> dict:
         """Rebuild from memory: reference + minute history (for minutes the
         live store does not cover) + complete ten-second candles."""
         s = self.stream
@@ -762,6 +828,7 @@ class IbkrDesk:
         return session
 
     def scan(self, add: bool = True) -> dict:
+        t0 = time.monotonic()
         self._connect_scanner()
         out = build_ibkr_screener(self.scanner_ib, self.min_price, self.max_price, self.min_gain,
                                   self.top, log=self.log, clock=self.clock)
@@ -769,9 +836,11 @@ class IbkrDesk:
             self._screener = out
         self.hub.publish("screener", out)
         self.log(f"  scanner: {len(out['rows'])} names up ≥{self.min_gain:g}% in the band"
-                 + (": " + " ".join(r["symbol"] for r in out["rows"][:10]) if out["rows"] else ""))
+                 + (": " + " ".join(r["symbol"] for r in out["rows"][:10]) if out["rows"] else "")
+                 + f"  ({time.monotonic() - t0:.0f}s)")
         if add:
-            fresh = [r["symbol"] for r in out["rows"] if r["symbol"] not in self.symbols]
+            fresh = [r["symbol"] for r in out["rows"]
+                     if r["symbol"] not in self.symbols and r["symbol"] not in self.no_live_data]
             room = max(0, self.max_symbols - len(self.symbols))
             if fresh and room:
                 self.add_symbols(fresh[:room])
@@ -826,6 +895,7 @@ class IbkrDesk:
         return wanted
 
     def _add_now(self, wanted: List[str]) -> List[str]:
+        wanted = [s for s in wanted if s not in self.no_live_data]
         self.symbols += [s for s in wanted if s not in self.symbols]
         added = self._subscribe(wanted)
         for sym in added:

@@ -600,3 +600,50 @@ def test_a_symbol_whose_bars_never_arrive_is_re_requested_on_its_own():
     assert any("re-requesting those streams" in m and "BBB" in m and "AAA" not in m
                for m in lines), lines[-5:]
     assert set(desk.stream.symbols) == {"AAA", "BBB"}
+
+
+# -- a name the account has no live data for ------------------------------------------
+
+def test_a_name_without_live_data_entitlement_is_dropped_and_not_re_added():
+    """SPRU, 2026-09-21 09:30: NYSE, and the account's API entitlement is
+    Nasdaq-only — IBKR answered 420 / 10089 and offered delayed data. A desk
+    that decides from the tape cannot hold a name it sees late."""
+    from types import SimpleNamespace as NS
+    desk, ib, clock = make_desk()
+    lines: list = []
+    desk.log = lines.append
+    desk._bootstrap()
+    assert "BBB" in desk.symbols
+    desk._on_tws_error(13, 10089, "Requested market data requires additional subscription",
+                       NS(symbol="BBB"))
+    assert "BBB" not in desk.symbols and "BBB" in desk.no_live_data
+    assert any("no live market data" in m and "BBB" in m for m in lines)
+    desk.add_symbols(["BBB"])                       # the scanner offering it again
+    desk.run_pending()
+    assert "BBB" not in desk.symbols, "a refused entitlement is remembered"
+
+
+def test_the_scan_never_runs_on_the_worker_when_threaded():
+    """The scanner starved the 3-second rebuild for most of every 120-second
+    period on 2026-09-21; decisions reached the runner 142-400 s late. It
+    runs on its own thread now, one pass at a time."""
+    import threading
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    seen = {}
+    real_scan = desk.scan
+    def spy(add=True):
+        seen["thread"] = threading.current_thread().name
+        return real_scan(add=add)
+    desk.scan = spy
+    desk.scan_in_thread = True
+    desk._scan_in_background()
+    desk.wait_for_scan(10)
+    assert seen.get("thread") == "ibkr-scanner"
+    # a second call while one is alive does not start another
+    desk._scan_thread = threading.Thread(target=lambda: __import__("time").sleep(0.3), name="ibkr-scanner")
+    desk._scan_thread.start()
+    before = desk._scan_thread
+    desk._scan_in_background()
+    assert desk._scan_thread is before
+    before.join()

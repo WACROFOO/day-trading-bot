@@ -197,3 +197,12 @@ def test_end_of_day_flattens_only_in_trade_mode(journal):
     assert Runner(journal, mode="LOG_ONLY", dollar_risk=25.0).end_of_day() == []
     r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t)
     assert r.end_of_day() == ["TEST x100 MKT"] and t.flattened
+
+
+def test_staleness_is_measured_from_the_bars_close_not_its_open():
+    """Clarification C1. A 1-minute decision seen 70 s after its bar CLOSED is
+    70 s old, not 130 s. GRML 2026-09-21 07:43 was refused on the old sum."""
+    from execution.bridge import bar_seconds
+    assert bar_seconds({"bar_resolution": "1m"}) == 60
+    assert bar_seconds({"bar_resolution": "10s"}) == 10
+    assert bar_seconds({"bar_resolution": None}) == 60

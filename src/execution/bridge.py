@@ -37,6 +37,18 @@ def intent_from_decision(row: sqlite3.Row | dict, dollar_risk: float,
     )
 
 
+def bar_seconds(row: sqlite3.Row | dict) -> int:
+    """How long the bar that armed the plan lasted. `ts_et` is the bar's OPEN;
+    the decision could not exist before open + this. Unknown reads as one
+    minute, the desk's only decision resolution."""
+    res = str(dict(row).get("bar_resolution") or "1m").strip().lower()
+    if res.endswith("s") and res[:-1].isdigit():
+        return int(res[:-1])
+    if res.endswith("m") and res[:-1].isdigit():
+        return int(res[:-1]) * 60
+    return 60
+
+
 def decision_clock(row: sqlite3.Row | dict) -> datetime:
     """The bar that armed the plan, as an aware datetime. Point in time."""
     return datetime.fromisoformat(dict(row)["ts_et"])

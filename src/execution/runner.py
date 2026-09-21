@@ -31,7 +31,7 @@ from typing import Callable, NamedTuple, Optional
 
 from journal import ledger as L
 
-from .bridge import decision_clock, intent_from_decision
+from .bridge import bar_seconds, decision_clock, intent_from_decision
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import ET, refusals
 from momentum_platform.sessions import REGULAR_END
@@ -116,10 +116,15 @@ class Runner:
         reasons = refusals(intent, now=clock)
 
         if self.mode == "TRADE":
-            age = (self.now() - clock).total_seconds()
+            # Age from the bar's CLOSE, not its open (clarification C1,
+            # docs/preregistration.md §5). A 1-minute decision cannot exist
+            # before its bar has closed, so measuring from the open charged
+            # every plan 60 s it never had: a plan seen 70 s after the close
+            # read as 130 s old and was refused (GRML, 2026-09-21 07:43).
+            age = (self.now() - clock).total_seconds() - bar_seconds(row)
             if age > self.max_age_s:
-                reasons.append(f"decision is {age:.0f}s old; a stale plan is not "
-                               f"the trade the cascade reviewed")
+                reasons.append(f"decision is {age:.0f}s old (from its bar's close); a stale "
+                               f"plan is not the trade the cascade reviewed")
         # Pre-market is an exercise decision before it is an order decision:
         # phase C only, and only in the shape the probe verdict dictates.
         # LOG_ONLY records the refusal too, so phase A shows how many
