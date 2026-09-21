@@ -107,6 +107,84 @@ def audit_gate(conn, gate):
                   f"MFE {r['mfe_r_planned']:+.2f}R  first_hit {r['first_hit']}")
 
 
+def float_only_cohort(conn) -> dict:
+    """Review 2026-09-21, item 5: the cascade stops at the FIRST failing gate,
+    so `killed_by = 'float'` means float was the first gate to fail, not the
+    only one, and gates_json records the later gates as NOT_APPLICABLE. The
+    question the review asked — what happens to names that fail ONLY float —
+    is answered by re-running each float-killed decision's stored inputs with
+    the float gate switched off (and the catalyst gate, which A2 already made
+    a flag): a decision that is then allowed failed nothing but float.
+    Read-only; nothing is written."""
+    import json
+    from momentum_platform.cascade import Inputs, evaluate
+    rows = conn.execute(f"""
+        SELECT d.decision_id, d.symbol, d.ts_et, d.inputs_json, d.trigger, d.stop, d.target,
+               a.first_hit, a.c_close, a.risk_share, a.trigger_hit
+        FROM decisions d LEFT JOIN actuals a USING(decision_id)
+        WHERE d.killed_by = 'float' AND {PROSPECTIVE} ORDER BY d.ts_et""").fetchall()
+    only, also = [], {}
+    for r in rows:
+        res = evaluate(Inputs(**json.loads(r["inputs_json"])),
+                       float_gate_kills=False, catalyst_gate_kills=False, pillars_min=None)
+        if res.plan_allowed:
+            only.append(r)
+        else:
+            also[res.killed_by or "?"] = also.get(res.killed_by or "?", 0) + 1
+    triggered = [r for r in only if r["trigger_hit"] and r["risk_share"] and r["risk_share"] > 0]
+    strat = [x for x in (strat_r(r) for r in triggered) if x is not None]
+    return {"float_killed": len(rows), "float_only": len(only), "also_failed": also,
+            "float_only_triggered": len(triggered), "float_only_strat": strat}
+
+
+def print_float_only(conn) -> None:
+    c = float_only_cohort(conn)
+    print(f"\n{BOLD}float-only cohort{END} — of {c['float_killed']} prospective float kills, "
+          f"{c['float_only']} fail NOTHING but float"
+          + (f"; the rest also fail: " + ", ".join(f"{k} {v}" for k, v in sorted(c["also_failed"].items()))
+             if c["also_failed"] else ""))
+    print(f"  {c['float_only_triggered']} of the float-only rows would have triggered")
+    print(f"  armed plan (2R/stop) {_stats(c['float_only_strat'])}")
+    print(f"  {DIM}gates_json records the gates after the first kill as NOT_APPLICABLE; this cohort "
+          f"is a re-evaluation of the stored inputs with float (and catalyst) switched off{END}")
+
+
+def catalyst_states(conn) -> dict:
+    """Review item 6: three states that the phase-A ledger merged into one.
+    From each decision's stored inputs: `catalyst_source_ok` False = the feed
+    was unavailable (UNKNOWN); `catalyst_today` True = a catalyst dated today
+    was found; otherwise a healthy feed found none (NONE). Counted over every
+    prospective decision, over the rows the catalyst gate killed, and by day."""
+    import json
+    out = {"all": {}, "catalyst_killed": {}, "by_day": {}}
+
+    def state(inp):
+        if not inp.get("catalyst_source_ok", True):
+            return "UNKNOWN"
+        return "FOUND" if inp.get("catalyst_today") or inp.get("live_theme") else "NONE"
+
+    for r in conn.execute(f"SELECT ts_et, killed_by, inputs_json FROM decisions d WHERE {PROSPECTIVE}"):
+        st = state(json.loads(r["inputs_json"]))
+        out["all"][st] = out["all"].get(st, 0) + 1
+        if r["killed_by"] == "catalyst":
+            out["catalyst_killed"][st] = out["catalyst_killed"].get(st, 0) + 1
+        day = out["by_day"].setdefault(r["ts_et"][:10], {})
+        day[st] = day.get(st, 0) + 1
+    return out
+
+
+def print_catalyst_states(conn) -> None:
+    c = catalyst_states(conn)
+    fmt = lambda d: " · ".join(f"{k} {v}" for k, v in sorted(d.items())) or "none"   # noqa: E731
+    print(f"\n{BOLD}catalyst states{END} (FOUND = catalyst dated today · NONE = healthy feed, none found · "
+          f"UNKNOWN = no feed)")
+    print(f"  all prospective decisions: {fmt(c['all'])}")
+    print(f"  killed by the catalyst gate: {fmt(c['catalyst_killed'])}")
+    for day, d in sorted(c["by_day"].items()):
+        print(f"    {day}: {fmt(d)}")
+    print(f"  {DIM}a kill on UNKNOWN says the desk could not look, not that there was no news{END}")
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--db", default=os.environ.get("JOURNAL_DB") or str(L.DEFAULT_DB))
@@ -137,6 +215,8 @@ def main(argv=None) -> int:
     strat_allowed = [x for x in (strat_r(r) for r in allowed) if x is not None]
     print(f"\n{BOLD}the allowed cohort, same rule{END}")
     print(f"  armed plan (2R/stop) {_stats(strat_allowed)}")
+    print_float_only(conn)
+    print_catalyst_states(conn)
     print(f"\n{DIM}A gate is earning its keep when the cohort it kills does WORSE than the")
     print(f"cohort it allows. One that kills a better cohort than it keeps is a cost,")
     print(f"and its threshold is the thing to re-derive — via an amendment in")

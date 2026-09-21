@@ -436,6 +436,50 @@ Kill rule for A5, before its data: if after 30 taken trades the
 `float`-flagged cohort's realised R is below the allowed-with-float cohort's,
 A5 is reverted.
 
+**A5 truth table (review 2026-09-21, item 5).** The count is over exactly
+five pillars — price, gain ≥ 10 %, RVOL ≥ 5×, float < 20 M, catalyst dated
+today — and the gate passes at 4 or more. Price is a hard kill at gate 1, so
+a name that reaches the count has already passed it; the count is therefore
+1 + the number of the other four that pass, and the table has four columns
+that matter. UNKNOWN never counts: a float the desk does not have, or a
+catalyst the desk could not look for (no feed), is a pillar not passed.
+
+| gain | RVOL | float | catalyst | count | gate |
+|---|---|---|---|---:|---|
+| ✓ | ✓ | ✓ | ✓ | 5/5 | pass |
+| ✗ | ✓ | ✓ | ✓ | 4/5 | pass |
+| ✓ | ✗ | ✓ | ✓ | 4/5 | pass |
+| ✓ | ✓ | ✗ or UNKNOWN | ✓ | 4/5 | pass — the case the owner asked for |
+| ✓ | ✓ | ✓ | ✗ or UNKNOWN | 4/5 | pass — the A2 case, no longer silent: it is counted |
+| any two of the four ✗ / UNKNOWN | | | | 3/5 | **kill on `pillars`** |
+| three or four ✗ / UNKNOWN | | | | ≤ 2/5 | **kill on `pillars`** |
+
+What is **outside** the count and unchanged by A5: the price band (gate 1,
+hard kill), the instrument, tick-size, reverse-split and buyout checks, the
+`rising` gate (gate 4, hard kill — it is not a pillar and a name cannot
+"substitute" its way past it), the halt WAIT, the feed and session-window
+checks, and every Layer 2 chart gate. The review's concern that a name could
+fail `rising` and still pass the count does not arise: `rising` is evaluated
+after the count and kills on its own.
+
+Two consequences the table makes visible: with a dead news feed every name
+that also misses one of gain, RVOL or float is killed (UNKNOWN counts as
+not passed), so A5 is stricter than A2 alone on a desk with no headlines;
+and float and catalyst are jointly decisive in exactly one way — a name may
+lack one of them, never both.
+
+**The measurement the review asked for, separated from the four-of-five
+policy.** `scripts/gate_audit.py` now prints a *float-only cohort*: every
+prospective decision recorded `killed_by = float` is re-evaluated from its
+stored inputs with the float and catalyst gates switched off, and only the
+rows that are then allowed failed nothing but float. The cascade records the
+gates after the first kill as NOT_APPLICABLE (`gates_json`), so the
+first-kill column cannot answer this; the re-evaluation can. The read-out
+reports the float-only rows, the rows that also failed another gate (by
+gate), and the armed-plan series on the float-only rows beside the allowed
+cohort. This ledger is on the owner's machine; the numbers go in
+`docs/REVIEW-PACK-2026-09-21-v2.md` when the owner runs it.
+
 **Relevance of a headline — the shared-tag rule (2026-09-21, display and gate
 3 label; verdicts unaffected).** "Why Is Critical Metals Stock Soaring
 Monday?" arrived on GLND's card because the provider tagged it to both. News

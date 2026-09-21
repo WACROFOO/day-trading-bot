@@ -62,3 +62,48 @@ def test_backfill_kills_are_not_evidence(capsys):
         gate_audit.audit_gate(conn, g)
     out = capsys.readouterr().out
     assert "0 prospective kill(s)" in out
+
+
+def test_the_float_only_cohort_is_a_re_evaluation_not_the_first_kill_column(capsys):
+    """Review item 5. killed_by='float' is the FIRST gate to fail. Two crafted
+    rows: one fails nothing but float, one fails float and price. Only the
+    first is float-only."""
+    import json
+    conn = _ledger()
+    rows = conn.execute("SELECT decision_id, inputs_json FROM decisions WHERE plan_allowed=1 LIMIT 2").fetchall()
+    assert len(rows) == 2
+    for i, r in enumerate(rows):
+        inp = json.loads(r["inputs_json"])
+        inp["float_shares"] = 30_000_000
+        inp["float_is_shares_outstanding"] = False
+        inp["float_verified"] = True
+        if i == 1:
+            inp["last"] = 0.50                      # also fails the price gate
+        conn.execute("UPDATE decisions SET killed_by='float', plan_allowed=0, inputs_json=? WHERE decision_id=?",
+                     (json.dumps(inp), r["decision_id"]))
+    conn.commit()
+    c = gate_audit.float_only_cohort(conn)
+    assert c["float_killed"] == 2 and c["float_only"] == 1 and c["also_failed"] == {"price": 1}
+    before = conn.total_changes
+    gate_audit.print_float_only(conn)
+    assert conn.total_changes == before
+    out = capsys.readouterr().out
+    assert "1 fail NOTHING but float" in out and "price 1" in out
+
+
+def test_catalyst_states_keep_unknown_apart_from_none(capsys):
+    """Review item 6. A dead feed is UNKNOWN, a healthy feed with no headline
+    is NONE, and a kill on UNKNOWN is not evidence about catalysts."""
+    import json
+    conn = _ledger()
+    total = conn.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
+    r = conn.execute("SELECT decision_id, inputs_json FROM decisions LIMIT 1").fetchone()
+    inp = json.loads(r["inputs_json"]); inp["catalyst_source_ok"] = False; inp["catalyst_today"] = False
+    conn.execute("UPDATE decisions SET inputs_json=?, killed_by='catalyst' WHERE decision_id=?",
+                 (json.dumps(inp), r["decision_id"])); conn.commit()
+    c = gate_audit.catalyst_states(conn)
+    assert sum(c["all"].values()) == total
+    assert c["all"]["UNKNOWN"] == 1 and c["catalyst_killed"] == {"UNKNOWN": 1}
+    assert sum(sum(d.values()) for d in c["by_day"].values()) == total
+    gate_audit.print_catalyst_states(conn)
+    assert "UNKNOWN 1" in capsys.readouterr().out
