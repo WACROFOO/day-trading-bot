@@ -286,6 +286,38 @@ Owner action that remains: put Alpaca paper keys back in `.env`
 (`ALPACA_KEY_ID`, `ALPACA_SECRET_KEY`, see `.env.example`), or the gate
 reads UNKNOWN on every name and the split above has one empty side.
 
+**A2, re-justified (2026-09-21 evening, review item 6).** The paragraph
+above argues from a dead feed to a flag-only gate, and the review is right
+that this conflates two things: an infrastructure defect (no keys) and a
+strategy amendment (catalyst not mandatory). A dead feed establishes that
+the desk *could not assess* catalysts. It establishes nothing about whether
+catalysts matter. The 254 kills were kills on **missing information**, and
+the counterfactual quoted above (47 % of catalyst-killed rows reached the
+target) is a statement about names the desk never looked at, not about
+names with no news.
+
+Three states, kept apart from here on (`momentum_platform.catalyst.
+news_verdict`, A7; `scripts/gate_audit.py` `catalyst_states`):
+
+| state | meaning | how the ledger tells |
+|---|---|---|
+| **FOUND** | a catalyst dated today, this company's own headline | `inputs.catalyst_today = true` (A7: verdict STRONG or WEAK) |
+| **NONE** | the feed was healthy and found nothing inside its coverage | `catalyst_source_ok = true`, `catalyst_today = false` |
+| **UNKNOWN** | the feed was unavailable or refused; nothing was ruled in or out | `catalyst_source_ok = false` |
+
+A2's justification is therefore restated as what it is: **a deliberate test
+of trading without a mandatory catalyst**, chosen by the owner, with the
+read-out split by FOUND / NONE so that phase D can say whether NONE names
+paid on this tape. UNKNOWN rows sit in neither cohort; a kill on UNKNOWN is
+not evidence about catalysts and is reported on its own line. The `.env`
+repair (`86e0ded`) is the infrastructure half and stands on its own; A2
+would be the same amendment with a working feed. The count the review asked
+for — how many of the 254 A2-era catalyst kills were UNKNOWN and how many
+NONE — is printed by `python3 scripts/gate_audit.py` under *catalyst states*
+on the owner's ledger; from the cause recorded above (no keys all week) the
+expectation is that all 254 read UNKNOWN, and that expectation is written
+here before the number is read.
+
 **Amendment A3 — the exit rule (IN FORCE from the first desk start after
 2026-09-21 21:00 ET; proposed the same morning, coded that evening).** The controls of 2026-09-21 (`exercise.py report`, sessions
 11–18 September, 199 triggered prospective rows) put the armed plan at mean
