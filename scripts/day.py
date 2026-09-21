@@ -317,6 +317,33 @@ def run_alignment_once(conn, today: str, dry: bool) -> None:
         warn(f"alignment probe exit {r.returncode} — see its output above")
 
 
+IBKR_PORTS = ("4002", "7496")     # paper Gateway first, then TWS
+
+
+def ibkr_port(env: dict | None = None) -> tuple[str, str]:
+    """The IBKR API port for the desk and the runner. IBKR_PORT wins when set;
+    otherwise the first port that accepts a TCP connect, Gateway (4002) before
+    TWS (7496). 2026-09-21 10:11: the command was pasted without
+    IBKR_PORT=4002 and the desk tried 7496, which nothing was listening on,
+    while the Gateway sat logged in on 4002. The choice is written back to
+    the environment so the desk and the runner see the same port."""
+    import socket
+    env = os.environ if env is None else env
+    forced = (env.get("IBKR_PORT") or "").strip()
+    if forced:
+        return forced, "IBKR_PORT"
+    host = env.get("IBKR_HOST", "127.0.0.1")
+    for port in IBKR_PORTS:
+        try:
+            with socket.create_connection((host, int(port)), timeout=0.5):
+                env["IBKR_PORT"] = port
+                return port, "detected"
+        except OSError:
+            continue
+    env["IBKR_PORT"] = IBKR_PORTS[0]
+    return IBKR_PORTS[0], "nothing listening; default"
+
+
 def start_desk(symbols: list[str], dry: bool):
     cmd = [sys.executable, "-m", "momentum_platform.dashboard.server", "--host", "127.0.0.1",
            "--port", os.environ.get("DESK_PORT", "8787"), "--ibkr", ",".join(symbols),
@@ -546,11 +573,13 @@ def main(argv=None) -> int:
     (good if ok else note)(f"pre-market entries: {'ON' if ok else 'off'} — {why}")
 
     say(f"\n{BOLD}3. Desk + runner{END}")
-    note(f"IBKR data port {os.environ.get('IBKR_PORT', '7496')} · ledger {DB}")
+    port, how = ibkr_port()
+    note(f"IBKR data port {port} ({how}) · ledger {DB}")
     desk = start_desk(symbols, args.dry_run)
     if not args.dry_run and not desk_is_on_ibkr(desk):
         bad("the desk did not come up on IBKR — stopping the day")
-        note("Gateway logged in on the paper account? IBKR_PORT=4002 exported? API enabled on 4002?")
+        note(f"Gateway logged in on the paper account? API enabled on port {port}? "
+             "Set IBKR_PORT to force a port")
         note("'reqHistoricalData: Timeout' lines above = IBKR's history farm is slow; run the command again")
         if desk and desk.poll() is None:
             desk.send_signal(signal.SIGINT)

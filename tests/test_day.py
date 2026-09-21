@@ -303,3 +303,19 @@ def test_a_second_day_on_the_same_ledger_is_refused_before_it_reaches_the_gatewa
     held.close()                                   # released with the process
     third, _ = day.day_lock(lock)
     assert third is not None
+
+
+def test_ibkr_port_prefers_env_then_detects_gateway(monkeypatch):
+    import socket
+    import day
+    assert day.ibkr_port({"IBKR_PORT": "4002"}) == ("4002", "IBKR_PORT")
+    with socket.socket() as srv:
+        srv.bind(("127.0.0.1", 0)); srv.listen(1)
+        port = str(srv.getsockname()[1])
+        monkeypatch.setattr(day, "IBKR_PORTS", (port, "1"))
+        env = {}
+        assert day.ibkr_port(env) == (port, "detected")
+        assert env["IBKR_PORT"] == port
+    monkeypatch.setattr(day, "IBKR_PORTS", ("1", "2"))
+    env = {}
+    assert day.ibkr_port(env) == ("1", "nothing listening; default")

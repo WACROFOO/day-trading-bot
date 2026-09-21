@@ -267,7 +267,15 @@ def cmd_live(args) -> int:
         print("\nstopped")
     finally:
         if trader is not None:
-            trader.disconnect()
+            # a second Ctrl-C during the disconnect used to end in a traceback
+            import signal
+            previous = signal.signal(signal.SIGINT, signal.SIG_IGN)
+            try:
+                trader.disconnect()
+            except Exception as exc:          # the socket may already be gone
+                print(f"  disconnect: {exc!r}")
+            finally:
+                signal.signal(signal.SIGINT, previous)
     return 0
 
 
