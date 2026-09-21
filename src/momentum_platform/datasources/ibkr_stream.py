@@ -593,6 +593,10 @@ class IbkrStream:
         """Refresh the state from the clock and the socket. Call every second."""
         h = self.health
         now = self.clock()
+        # Derived, never carried: reconnect() builds a fresh Health(), and the
+        # health JSON of 2026-09-21 read "subscriptions": 0 over eight live
+        # names for the rest of the morning.
+        h.subscriptions = len(self._symbols) * 2
         if not self.ib.isConnected():
             if h.connected:
                 h.messages.append("socket dropped")

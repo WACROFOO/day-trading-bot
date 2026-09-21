@@ -347,7 +347,10 @@ def desk_is_on_ibkr(proc, timeout_s: int = 420) -> bool:
             with urllib.request.urlopen(f"http://127.0.0.1:{port}/api/v1/health", timeout=3) as r:
                 h = _json.loads(r.read().decode())
             if h.get("mode") == "live" and h.get("streaming"):
-                good(f"desk is live on IBKR (feed {h.get('provider', {}).get('state', '?')})")
+                state = h.get("provider", {}).get("state", "?")
+                # "ok ... (feed OFFLINE)" was printed on 2026-09-21: an ok beside
+                # the word OFFLINE. The desk is up; the feed is a separate fact.
+                (good if state == "LIVE" else warn)(f"desk is up on IBKR — feed {state}")
                 return True
         except Exception:                                 # noqa: BLE001
             pass
@@ -401,6 +404,32 @@ def after_close(conn, today: str, dry: bool) -> None:
             warn(f"phase {st['phase']} → {nxt} gates are ALL clear — run: python3 scripts/exercise.py advance")
 
 
+DAY_LOCK = Path(str(DB) + ".day.lock")
+
+
+def day_lock(path: Path = DAY_LOCK):
+    """One day per ledger. Returns the held lock file, or None if another
+    day.py holds it — with that process's pid written inside.
+
+    2026-09-21: the 06:55 launchd job was running; two manual starts at 07:04
+    and 07:05 connected as IBKR client 27 on top of it. IBKR answered 326 to
+    the newcomer — and the running desk's socket dropped ("socket dropped",
+    four connect failures, reconnect gen 2 in its health log). A second copy
+    is not merely refused, it can knock the live one offline. So the second
+    copy must never reach the Gateway at all."""
+    import fcntl
+    fd = open(path, "a+")
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except (BlockingIOError, OSError):
+        fd.seek(0)
+        pid = fd.read().strip() or "?"
+        fd.close()
+        return None, pid
+    fd.seek(0); fd.truncate(); fd.write(str(os.getpid())); fd.flush()
+    return fd, None
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dry-run", action="store_true")
@@ -417,6 +446,16 @@ def main(argv=None) -> int:
                     help="closed-market rehearsal: start the desk and the runner (forced LOG_ONLY) "
                          "for this many minutes, then stop. Not counted as a session; no probes.")
     args = ap.parse_args(argv)
+    if not args.dry_run and not args.settle:
+        held, other = day_lock()
+        if held is None:
+            warn(f"a trading day is already running on this ledger (day.py pid {other}) — "
+                 f"nothing started, nothing touched")
+            note("it is most likely the 06:55 launchd job. Watch it with:")
+            note("  tail -f ~/Library/Logs/day-trading-bot/day.out.log")
+            note("to stop it deliberately:  kill -INT " + other)
+            return 0
+        args._day_lock = held           # held for the life of this process
     # The scheduled day cannot take a flag. A file the owner creates the
     # evening before stands in for --probe-orders, once: it is consumed here
     # so the probe cannot run on a day nobody asked for it.

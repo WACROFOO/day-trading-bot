@@ -433,11 +433,16 @@ function makePane(hostId, daily) {
   // the volume band still at its MACD-off height, volume painted over the
   // MACD histogram: computed, legended, invisible (GRML, 2026-09-21 07:52).
   setBands(show.macd);
+  const macdTag = document.createElement("div");
+  macdTag.className = "band-tag"; macdTag.textContent = "MACD 12·26·9";
+  macdTag.hidden = !show.macd;
+  host.appendChild(macdTag);
   const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
   const menu = indicatorMenu(host, show, next => {
     show = next;
     try { localStorage.setItem(SHOW_KEY, JSON.stringify(show)); } catch (e) {}
     setBands(show.macd);
+    macdTag.hidden = !show.macd;
     if (lastOpts) api.render(lastBars, lastOpts);
   });
   let lastBars = [], lastOpts = null;
@@ -3058,6 +3063,17 @@ function init() {
   PANES.c = makePane("chartC", true);
   const usingTV = PANES.a.engine === "tradingview";
   $("#chartEngine").textContent = usingTV ? "TRADINGVIEW" : "CANVAS";
+  // Which app.js this page is running, as a short hash of its own source.
+  // 2026-09-21: three rounds of "no MACD yet" were the browser holding a
+  // previous build; nothing on screen said so. `python3 scripts/app_build.py`
+  // prints the same hash for the file on disk, so pull + reload is checkable.
+  fetch("app.js", { cache: "no-store" }).then(r => r.text()).then(txt => {
+    let h = 5381; for (let i = 0; i < txt.length; i++) h = ((h << 5) + h + txt.charCodeAt(i)) | 0;
+    const tag = (h >>> 0).toString(16).slice(0, 6);
+    const sub = $("#chartEngineSub");
+    if (sub) sub.textContent = sub.textContent + " · app " + tag;
+    window.__APP_BUILD__ = tag;
+  }).catch(() => {});
   $("#chartEngineSub").textContent = usingTV ? "lightweight-charts 4.1.3 · local"
     : "vendor/lightweight-charts…js missing — fallback";
   $("#chartDot").className = "dot " + (usingTV ? "live" : "stale");

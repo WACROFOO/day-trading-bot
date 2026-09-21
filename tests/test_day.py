@@ -289,3 +289,17 @@ def test_the_probe_once_file_stands_in_for_the_flag_and_is_consumed(tmp_path, mo
     rc = day.main(["--dry-run"])
     assert not any("stop probe: ON for today" in m for m in seen[len(seen) - 1:]) or True
     assert not flag.exists()
+
+
+def test_a_second_day_on_the_same_ledger_is_refused_before_it_reaches_the_gateway(tmp_path):
+    """2026-09-21: two manual starts on top of the 06:55 launchd job took IBKR
+    client 27 from the running desk and knocked it offline. The second copy
+    must be refused at the door, naming the pid that holds the day."""
+    lock = tmp_path / "j.sqlite.day.lock"
+    held, other = day.day_lock(lock)
+    assert held is not None and other is None
+    again, pid = day.day_lock(lock)
+    assert again is None and pid == str(__import__("os").getpid())
+    held.close()                                   # released with the process
+    third, _ = day.day_lock(lock)
+    assert third is not None

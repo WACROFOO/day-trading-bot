@@ -276,6 +276,9 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
   border:1px solid #223046;border-radius:5px;padding:6px 8px;display:flex;flex-direction:column;gap:3px;
   box-shadow:0 6px 18px #0009}
 .ind-menu[hidden]{display:none}
+.band-tag{position:absolute;left:8px;bottom:6px;z-index:4;pointer-events:none;
+  font:9px var(--mono);color:#26a69a;letter-spacing:.3px;opacity:.8}
+.band-tag[hidden]{display:none}
 .ind-menu label{display:flex;align-items:center;gap:6px;font-size:10.5px;color:var(--ink-dim,#9fb0c3);
   cursor:pointer;white-space:nowrap}
 .ind-menu label:hover{color:var(--ink,#dbe6f3)}

@@ -253,8 +253,8 @@ class IbkrDesk:
             pass
         if not h.connected:
             raise IbkrError(f"TWS not reachable at {self.host}:{self.port} (client {self.client_id}): "
-                            f"{h.last_error}. Start TWS, enable the read-only API on port {self.port}, "
-                            "and run: python3 scripts/ibkr_preflight.py")
+                            f"{h.last_error}. Log the paper GATEWAY in (TWS logged out — one login), "
+                            f"enable the API on port {self.port}, and run: python3 scripts/ibkr_preflight.py")
         self.log(f"  IBKR desk connected read-only, client {self.client_id}, server version {h.server_version}")
         if not self.symbols and self.rescan:
             self._connect_scanner()
