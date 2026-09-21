@@ -19,6 +19,17 @@ beside it. The questions for you are in §9.
 > replication of this strategy was negative expectancy.** Nothing here is a
 > claim of edge; the exercise measures selection and cost.
 
+**Reworded 2026-09-21 evening, after the external review (item 1 of the
+response; the full response is `docs/REVIEW-PACK-2026-09-21-v2.md`).** The
+numbers below are unchanged. Four conclusions were stated more strongly than
+the evidence supports and are now stated as hypotheses. Read every figure in
+this file with the following in front of it: five of the six sessions ran with
+a broken news feed, so the catalyst gate killed on missing data, not on
+absence of news; the sixth session started mid-morning and its decisions are
+backfill or stale; there were **zero fills**, so no R figure here is realised.
+Every number is exploratory. Disclosing that does not make a conclusion drawn
+from it reliable; it only tells the reader where the number came from.
+
 ---
 
 ## 1. What this is, in five lines
@@ -50,7 +61,7 @@ session with a working pipeline from 06:55.
 
 ## 3. The three measurements that decided this week
 
-### 3.1 Controls — the exit rule is the problem (`exercise.py report`, 199 triggered prospective rows)
+### 3.1 Controls — hypothesis: the fixed-target control forfeits the tail (`exercise.py report`, 199 triggered prospective rows)
 
 | series | n | mean R | median R | win |
 |---|---:|---:|---:|---:|
@@ -60,10 +71,18 @@ session with a working pipeline from 06:55.
 | strat · allowed only | **7** | +0.714 | +2.000 | 57% |
 | strat · killed only | 192 | +0.452 | −0.189 | 48% |
 
-Read mean and median together: most trades lose, a few run enormously, and the
-fixed 2 R target sells exactly the runners. This is failure condition ② of the
-pre-registration (`docs/preregistration.md` §6), observed in the ledger's own
-controls.
+Read mean and median together: most rows lose, a few run enormously, and the
+simulated fixed 2 R target sells the runners. **Hypothesis, not a finding:**
+n = 199 triggered rows, 192 of them cascade-killed, planned R with micro-cent
+stops, zero fills, and no uncertainty estimate. It resembles failure
+condition ② of the pre-registration (`docs/preregistration.md` §6) but is not
+an observation of it: ② is evaluated on realised R at phase D. Note also what
+the "strategy" series is: a simulation of a 2 R target on the desk's tape.
+The live order path never carried a target leg (found 2026-09-21 evening,
+`docs/preregistration.md` §5 A3), so this row was never a rule the desk traded.
+Hold-to-close and random-bar both carry **no stop** (`src/journal/controls.py`),
+so their +6.3 and +6.2 differ from each other only in entry price, and from
+the strategy row in both stop and target.
 
 **Contamination, stated:** 192 of the 199 rows are plans the cascade *killed*;
 the allowed cohort is 7. And the giant means are inflated by stops of a few
@@ -93,16 +112,20 @@ Phases 1–3 are not built. Report:
 | gate kills… | n triggered | armed-plan mean R | verdict |
 |---|---:|---:|---|
 | allowed cohort (the bar) | 7 | +0.714 | — |
-| `rising` (already faded) | 13 | **−0.231** | kills losers — **justified, unchanged** |
-| `price` ($2–20) | 50 | +0.237 | earning its keep — unchanged |
-| `catalyst` | 99 | +0.514 | already a flag (A2) |
-| `float` (< 20 M) | 30 | **+0.900** | kills a *better* cohort than it keeps — the one real cost |
+| `rising` (already faded) | 13 | **−0.231** | hypothesis: kills losers · n = 13, killed cohort, planned R, not tested · threshold unchanged |
+| `price` ($2–20) | 50 | +0.237 | hypothesis: the killed cohort does worse than the allowed 7 · not tested · unchanged |
+| `catalyst` | 99 | +0.514 | already a flag (A2); 254 of the week's catalyst kills were on a dead feed |
+| `float` (< 20 M) | 30 | **+0.900** | hypothesis: kills a better cohort than the 7 it keeps · first-kill cohort, not float-only · not tested |
 
 The audit was written to test a suspicion about `rising` (IMCC killed four
-times during a 3 → 8 run). The suspicion was wrong: on the tradeable column
-that cohort loses, and IMCC's +104 R "MFE" was a few-cent stop. The
-measurement contradicted the hypothesis that motivated it; the threshold did
-not move. The audit surfaced `float` instead — and that became A5 (§4).
+times during a 3 → 8 run). On 13 rows the killed cohort loses, and IMCC's
++104 R "MFE" was a few-cent stop; the measurement did not support loosening
+the gate, and the threshold did not move. Thirteen rows do not show the gate
+is right either. The float row is the reverse hypothesis on 30 rows against 7,
+and it is a **first-kill** cohort: the cascade stops at the first failing gate,
+so "killed by float" means "float was the first gate to fail", not "failed
+only float". A5 (§4) was the owner's decision on that evidence, pre-registered
+as an experiment; the float-only cohort is measured separately in the v2 pack.
 
 ## 4. Amendments to the pre-registration (all in `docs/preregistration.md` §5)
 
@@ -110,7 +133,7 @@ not move. The audit surfaced `float` instead — and that became A5 (§4).
 |---|---|---|---|
 | A2 | catalyst gate flags, does not kill | in force since 2026-09-17 | 254 of 389 kills were "no news" from a feed with no keys |
 | A3 | **exit rule**: no fixed target; stop trails the high since entry by 1 R, ratcheting up | **PROPOSED — designed, not coded** | §3.1; kill rule: 30 trades, revert if it loses to the fixed-target control on the same fills |
-| A4 | re-derive the `rising` threshold from measurement | **CLOSED — gate justified, no change** | §3.3 |
+| A4 | re-derive the `rising` threshold from measurement | **CLOSED — no change; the audit did not support loosening (n = 13)** | §3.3 |
 | A5 | float gate flags; the Five Pillars become a **count, ≥ 4 of 5 kills otherwise**; price stays a hard kill | **in force from the next desk start** (owner, 2026-09-21) | §3.3; owner's words: "at least 4 should be satisfied" |
 
 Every amendment moves the rules hash, is carried in `cascade.RULE_SETS`, and
@@ -182,9 +205,10 @@ parked in the tray. Its full library is company-licensed and unavailable.
   same-time baseline is near zero. Cosmetic, misleading; the pillar itself
   passes correctly.
 - **Micro-stop contamination** runs through every R figure that is not capped.
-  The fix is not a display change; it is A3 plus real fills, which give a
-  realised-risk denominator.
-- **Sample size.** 7 allowed rows. 0 fills. Nothing here is significant.
+  Real fills give a realised-risk denominator; A3 changes the exit, not the
+  denominator, and does not fix this on its own.
+- **Sample size.** 7 allowed rows. 0 fills. Nothing here is significant, and
+  the four gate and exit statements above are hypotheses for that reason.
 
 ## 9. Questions for the reviewer
 
