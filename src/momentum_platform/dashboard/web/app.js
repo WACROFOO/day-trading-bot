@@ -429,6 +429,10 @@ function makePane(hostId, daily) {
     const saved = JSON.parse(localStorage.getItem(SHOW_KEY) || "null");
     if (saved) Object.keys(SHOW_DEFAULT).forEach(k => { if (k in saved) show[k] = !!saved[k]; });
   } catch (e) { /* blocked storage: the defaults are fine */ }
+  // The bands must match what is shown from the first paint. With MACD on and
+  // the volume band still at its MACD-off height, volume painted over the
+  // MACD histogram: computed, legended, invisible (GRML, 2026-09-21 07:52).
+  setBands(show.macd);
   const tools = window.ChartTools ? window.ChartTools.attach(chart, candles, host, hostId) : null;
   const menu = indicatorMenu(host, show, next => {
     show = next;
@@ -1559,8 +1563,11 @@ function renderL2(frame, ctx) {
   }
   host.appendChild(ladder);
   const wall = book.asks.find(a => a.wall);
-  if (wall) host.appendChild(el("div", "note warn", "Large offer resting at " + fx(wall.price) +
-    " (" + wall.size + "). A seller above the trigger caps the move until it is consumed."));
+  // The book on this desk is SIMULATED (no Level 2 entitlement). A sentence
+  // that reads like a read of the real tape — "a seller above the trigger
+  // caps the move" — is the one thing this card must never say.
+  if (wall) host.appendChild(el("div", "note warn", "SIMULATED book: a large offer would rest at " + fx(wall.price) +
+    " (" + wall.size + "). Illustrates the shape to look for on a real Level 2; it is not this stock's book."));
   host.appendChild(el("div", "divider", "time & sales"));
   const tape = el("div", "tape");
   book.prints.forEach(p => {

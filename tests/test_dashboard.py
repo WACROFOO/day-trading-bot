@@ -1187,3 +1187,24 @@ def test_the_desk_speaks_one_pillar_denominator():
     assert "/4 pillars" not in body and "/4 technical" not in body
     assert "/5 pillars" in body
     assert "Shared tag" in body
+
+
+def test_the_macd_band_is_laid_out_from_the_first_paint():
+    """GRML, 2026-09-21 07:52: MACD computed, its value in the legend, nothing
+    on the chart. The volume band kept its MACD-off height and painted over
+    the MACD band; setBands(show.macd) was only reached from the menu."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    pane = app.split("function makePane")[1].split("\nfunction ")[0]
+    loaded = pane.index("blocked storage: the defaults are fine")
+    assert "setBands(show.macd);" in pane[loaded:loaded + 600], "bands must follow the loaded state"
+
+
+def test_the_simulated_book_never_reads_as_the_real_tape():
+    """The Level 2 card is SIMULATED (no entitlement). Its note read "a seller
+    above the trigger caps the move until it is consumed" — a claim about the
+    real book that the desk cannot make."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert "caps the move until it is consumed" not in app
+    assert "SIMULATED book" in app
