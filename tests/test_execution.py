@@ -438,9 +438,18 @@ def test_no_new_entry_after_the_1130_hard_stop():
     assert any("hard stop" in x for x in refusals(intent(), now=late))
 
 
-def test_1129_still_trades_and_1130_does_not():
-    assert refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 29, tzinfo=ET)) == []
-    assert refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 30, tzinfo=ET)) != []
+def test_1119_still_trades_1120_and_1129_do_not_a8():
+    """Amendment A8 (owner decision, delegated, 2026-09-22): GRML filled at
+    11:28 and was force-flattened at 11:30. No new entry inside the last ten
+    minutes before the hard stop; the refusal names A8, and 11:30 onward
+    still names the hard stop itself."""
+    assert refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 19, tzinfo=ET)) == []
+    r = refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 20, tzinfo=ET))
+    assert r and "A8" in r[0] and "last 10 minutes" in r[0]
+    r = refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 29, tzinfo=ET))
+    assert r and "A8" in r[0]
+    r = refusals(intent(), now=dt.datetime(2026, 9, 8, 11, 30, tzinfo=ET))
+    assert r and "hard stop" in r[0] and "A8" not in r[0]
 
 
 def test_the_hard_stop_does_not_reach_back_into_the_premarket_session():

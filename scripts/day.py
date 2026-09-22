@@ -151,9 +151,15 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
             blockers.append(f"phase B needs 30 taken trades; have {f['taken']}")
         if f["fills"] and f["fills_with_nbbo"] / f["fills"] < 0.9:
             blockers.append(f"only {f['fills_with_nbbo']}/{f['fills']} fills carry NBBO (need 90%)")
-        unprotected = conn.execute("SELECT COUNT(*) FROM orders WHERE protected=0 AND fill_price IS NOT NULL").fetchone()[0]
+        # Owner decision 2026-09-22 (delegated): the count restarts at a named
+        # defect fix, recorded by `exercise.py reset-unprotected`. Before that
+        # command the count runs from the start of the ledger.
+        since = state.get("unprotected_reset_at")
+        unprotected = L.unprotected_fills(conn, since)
         if unprotected:
-            blockers.append(f"{unprotected} filled entry(ies) were unprotected — zero allowed")
+            blockers.append(f"{unprotected} filled entry(ies) were unprotected"
+                            + (f" since the reset at fix {state.get('unprotected_reset_fix')} ({since[:16]})" if since else "")
+                            + " — zero allowed")
         # Operational readiness, prospective (review 2026-09-21, item 11): a
         # decision count validates activity, not order submission, protective
         # exits, reconciliation or recovery. Phase C needs one trade that went

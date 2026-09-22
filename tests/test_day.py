@@ -130,6 +130,35 @@ def test_decisions_made_under_superseded_rules_do_not_count_toward_phase_a(journ
     assert "60 superseded excluded" in gate
 
 
+def test_the_unprotected_count_restarts_at_a_named_defect_fix(journal, tmp_path):
+    """Owner decision 2026-09-22 (delegated): DCOY's unprotected fill was a
+    defect's; the B→C count restarts at the fix, recorded with name, time
+    and commit, and the blocker text names the reset."""
+    import subprocess, sys
+    L.set_state(journal, phase="B", paper_data="realtime", probe_verdict="queued")
+    did = L.decisions(journal, plan_allowed=1)[0]["decision_id"]
+    oid = L.record_order(journal, did, symbol="DCOY", account="DU1", session="regular", parent_id=10, stop_id=11,
+                         target_id=None, trigger=5.98, stop=5.50, target=None, shares=41, dollar_risk=20.0,
+                         protected=True)
+    L.record_fill(journal, oid, fill_price=5.98, fill_ts="2026-09-22T13:36:00Z")
+    journal.execute("UPDATE orders SET protected=0 WHERE order_id=?", (oid,)); journal.commit()
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert any("1 filled entry(ies) were unprotected — zero allowed" in b for b in blockers)
+    assert L.unprotected_fills(journal) == 1
+    L.set_state(journal, unprotected_reset_at="2026-09-22T20:00:00+00:00", unprotected_reset_by="ayman",
+                unprotected_reset_fix="d408644")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert not any("unprotected" in b for b in blockers)
+    # a later unprotected fill counts again, and the text names the reset
+    oid2 = L.record_order(journal, did, symbol="GRML", account="DU1", session="regular", parent_id=20, stop_id=21,
+                          target_id=None, trigger=14.71, stop=14.53, target=None, shares=111, dollar_risk=20.0,
+                          protected=True)
+    L.record_fill(journal, oid2, fill_price=14.71, fill_ts="2026-09-23T14:45:00Z")
+    journal.execute("UPDATE orders SET protected=0 WHERE order_id=?", (oid2,)); journal.commit()
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert any("1 filled entry(ies) were unprotected since the reset at fix d408644" in b for b in blockers)
+
+
 def test_phase_b_is_blocked_by_too_few_trades_and_by_any_unprotected_fill(journal):
     L.set_state(journal, phase="B", probe_verdict="held", paper_data="realtime")
     nxt, blockers = day.gates_for_advance(journal, L.get_state(journal))

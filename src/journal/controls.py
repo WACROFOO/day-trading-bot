@@ -252,6 +252,48 @@ def reason_key(d: dict) -> str:
     return d["outcome"]
 
 
+KILL_RULE_MIN_N = 10       # A3 kill rule binds from this many CLEAN fills (owner decision, delegated, 2026-09-22)
+
+
+def kill_rule_read(conn: sqlite3.Connection, bars_by_symbol: dict, min_n: int = KILL_RULE_MIN_N) -> dict:
+    """Amendment A3's kill rule, as amended 2026-09-22: on the CLEAN closed
+    fills (no defect note), compare the live exit's mean realised R with the
+    simulated `baseline` (fixed +2 R target) mean on the same fills. Printed
+    from the first fill; BINDING only from `min_n` clean fills. Returns the
+    per-fill rows and the verdict: READ-ONLY (n below min_n), MET (live below
+    baseline — revert A3), NOT MET. Rows without actuals are listed and
+    skipped in the means."""
+    from . import ledger as L
+    fills = L.clean_closed_fills(conn)
+    excluded = conn.execute("SELECT COUNT(*) FROM orders WHERE fill_price IS NOT NULL AND status='Closed' "
+                            "AND defect_note IS NOT NULL").fetchone()[0]
+    by_id = {d["decision_id"]: d for d in per_decision(conn, bars_by_symbol)}
+    rows, live, base, trail = [], [], [], []
+    for o in fills:
+        d = by_id.get(o["decision_id"])
+        qty = o["filled_qty"] if o["filled_qty"] else o["shares"]
+        live_r = round((o["exit_price"] - o["fill_price"]) * qty / o["planned_risk"], 4) if o["planned_risk"] else None
+        row = {"order_id": o["order_id"], "symbol": o["symbol"], "fill_ts": o["fill_ts"], "exit_reason": o["exit_reason"],
+               "live_r": live_r, "baseline_r": d["strategy_r"] if d else None, "trail_r": d["trail_r"] if d else None}
+        rows.append(row)
+        if live_r is not None and row["baseline_r"] is not None:
+            live.append(live_r); base.append(row["baseline_r"])
+            if row["trail_r"] is not None:
+                trail.append(row["trail_r"])
+    n = len(live)
+    live_mean = round(mean(live), 4) if live else None
+    base_mean = round(mean(base), 4) if base else None
+    trail_mean = round(mean(trail), 4) if trail else None
+    if n < min_n:
+        verdict = "READ-ONLY"
+    elif live_mean < base_mean:
+        verdict = "MET"
+    else:
+        verdict = "NOT MET"
+    return {"rows": rows, "n": n, "min_n": min_n, "excluded_defect": excluded,
+            "live_mean": live_mean, "baseline_mean": base_mean, "trail_sim_mean": trail_mean, "verdict": verdict}
+
+
 def exit_summary(conn: sqlite3.Connection, bars_by_symbol: dict) -> dict[str, dict]:
     """n, mean, median, share stopped, share reaching the close — per variant."""
     ev = exit_variants(conn, bars_by_symbol)

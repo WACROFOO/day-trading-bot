@@ -280,6 +280,10 @@ _ADDED_COLUMNS = {
                        # Amendment A1 (docs/preregistration.md §5) is accepted by a
                        # human, by command, with a name and a time — never by code.
                        ("a1_accepted", "TEXT"), ("a1_accepted_by", "TEXT"),
+                       # owner decision 2026-09-22: the B→C unprotected-fill count restarts
+                       # at a named defect fix, recorded by `exercise.py reset-unprotected`
+                       ("unprotected_reset_at", "TEXT"), ("unprotected_reset_by", "TEXT"),
+                       ("unprotected_reset_fix", "TEXT"),
                        ("a1_accepted_at", "TEXT"),
                        ("code_commit", "TEXT"), ("rules_hash", "TEXT")),
     # Several clocks, not one (review 2026-09-21, item 12): bar_end_ts is
@@ -296,7 +300,9 @@ _ADDED_COLUMNS = {
                # A3: the stop leg's current level and the high it trails
                ("trail_stop", "REAL"), ("high_since_fill", "REAL"),
                # the resting stop leg's quantity, from the broker (item 13c)
-               ("stop_qty", "REAL")),
+               ("stop_qty", "REAL"),
+               # a human named this fill's exit as a code defect's (A3 kill rule, 2026-09-22)
+               ("defect_note", "TEXT")),
     "actuals": (("trigger_hit", "INTEGER"), ("trigger_hit_ts", "TEXT")),
 }
 
@@ -711,6 +717,41 @@ def funnel(conn: sqlite3.Connection) -> dict:
     }
 
 
+def mark_defect(conn: sqlite3.Connection, order_id: int, note: str, *, by: str) -> None:
+    """A human names a fill whose EXIT was a code defect's, not the rule's
+    (owner decision 2026-09-22: DCOY x41 exited at the restart price after the
+    OCA modify killed its stop; GRML x62 sold by hand after the flatten was
+    refused). Such a row stays in every P&L and R figure — the loss was real
+    — but is excluded from the A3 kill-rule comparison, which judges the
+    exit RULE. The note and the name are written into the row."""
+    row = conn.execute("SELECT order_id FROM orders WHERE order_id=?", (order_id,)).fetchone()
+    if row is None:
+        raise KeyError(order_id)
+    conn.execute("UPDATE orders SET defect_note=?, updated_at=? WHERE order_id=?",
+                 (f"{note} — marked by {by} {_now()}", _now(), order_id))
+    add_order_event(conn, order_id, f"exit marked as a DEFECT exit by {by}: {note}; excluded from the A3 "
+                                    f"kill-rule comparison, kept in every P&L figure")
+
+
+def clean_closed_fills(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Closed fills whose exit was the rule's: a broker-confirmed exit with a
+    reason, no defect note. The rows the A3 kill rule is read on."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND status='Closed'
+                           AND exit_price IS NOT NULL AND defect_note IS NULL
+                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop')
+                           ORDER BY fill_ts""").fetchall()
+
+
+def unprotected_fills(conn: sqlite3.Connection, since: Optional[str] = None) -> int:
+    """Filled entries that lost their protection, counted from `since` (an
+    ISO instant, the owner's reset after a named defect fix) or from the
+    start of the ledger. The B→C gate's count."""
+    if since:
+        return conn.execute("SELECT COUNT(*) FROM orders WHERE protected=0 AND fill_price IS NOT NULL "
+                            "AND fill_ts > ?", (since,)).fetchone()[0]
+    return conn.execute("SELECT COUNT(*) FROM orders WHERE protected=0 AND fill_price IS NOT NULL").fetchone()[0]
+
+
 def reconciled_lifecycles(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Orders that went the whole way and every step is the broker's word:
     a fill IBKR reported, a protective stop leg that existed at the broker
@@ -910,7 +951,8 @@ def get_state(conn: sqlite3.Connection) -> dict:
 def set_state(conn: sqlite3.Connection, **fields) -> dict:
     allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
                "paper_data", "paper_data_date", "last_session_date",
-               "a1_accepted", "a1_accepted_by", "a1_accepted_at", "code_commit", "rules_hash"}
+               "a1_accepted", "a1_accepted_by", "a1_accepted_at", "code_commit", "rules_hash",
+               "unprotected_reset_at", "unprotected_reset_by", "unprotected_reset_fix"}
     bad = set(fields) - allowed
     if bad:
         raise ValueError(f"unknown state fields {sorted(bad)}")

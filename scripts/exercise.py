@@ -75,6 +75,28 @@ def print_trades(conn, last: int | None = None) -> None:
               f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}")
 
 
+def print_kill_rule(conn, tape) -> None:
+    """Amendment A3's kill rule, read at every close-out (preregistration §5,
+    amended 2026-09-22): clean fills only, binding from KILL_RULE_MIN_N."""
+    k = controls.kill_rule_read(conn, tape)
+    lamp = {"MET": f"{BAD}✗ MET — revert A3 in one commit and record it{END}",
+            "NOT MET": f"{OK}✓ not met{END}",
+            "READ-ONLY": f"{WARN}read-only{END} ({k['n']} clean fill(s); binds from {k['min_n']})"}[k["verdict"]]
+    print(f"\n{BOLD}A3 KILL RULE{END}  live trail vs simulated baseline, same fills · {lamp}")
+    if not k["rows"]:
+        print("  no clean closed fills yet" + (f" · {k['excluded_defect']} defect exit(s) excluded" if k["excluded_defect"] else ""))
+        return
+    print(f"  {'#':>3} {'day':<10} {'sym':<6}{'exit':<10}{'live R':>8}{'baseline':>10}{'trail sim':>10}")
+    for r in k["rows"]:
+        f = lambda v, w: f"{v:>+{w}.2f}" if v is not None else f"{'—':>{w}}"   # noqa: E731
+        print(f"  {r['order_id']:>3} {r['fill_ts'][:10]:<10} {r['symbol']:<6}{(r['exit_reason'] or '—'):<10}"
+              f"{f(r['live_r'], 8)}{f(r['baseline_r'], 10)}{f(r['trail_r'], 10)}")
+    f2 = lambda v: f"{v:+.2f}" if v is not None else "—"   # noqa: E731
+    print(f"  mean over {k['n']}: live {f2(k['live_mean'])} R · baseline {f2(k['baseline_mean'])} R · "
+          f"trail simulated {f2(k['trail_sim_mean'])} R"
+          + (f" · {k['excluded_defect']} defect exit(s) excluded (exercise.py defect)" if k["excluded_defect"] else ""))
+
+
 def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> None:
     f = L.funnel(conn)
     rep = replay.check(conn)
@@ -165,6 +187,7 @@ def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> N
           + (f" but {len(viol)}: " + ", ".join(f"#{v['order_id']} {v['symbol']}" for v in viol) if viol else ""))
 
     print_trades(conn)
+    print_kill_rule(conn, tape)
 
     st = L.get_state(conn)
     print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
@@ -506,6 +529,50 @@ def cmd_ah_exit(args) -> int:
     return 0
 
 
+def cmd_defect(args) -> int:
+    """Name a fill whose exit was a code defect's. The row keeps its P&L and
+    R everywhere; it leaves the A3 kill-rule comparison, which judges the
+    exit rule and not the plumbing. A human act, written with a name."""
+    conn = L.connect(_db(args))
+    o = conn.execute("SELECT * FROM orders WHERE order_id=?", (args.order_id,)).fetchone()
+    if o is None:
+        print(f"{BAD}no order {args.order_id}{END}"); return 1
+    if o["fill_price"] is None or o["exit_price"] is None:
+        print(f"{BAD}order {args.order_id} has no closed exit to mark{END}"); return 1
+    if o["defect_note"]:
+        print(f"order {args.order_id} already marked: {o['defect_note']}"); return 0
+    if not args.confirm:
+        print(f"{WARN}would mark{END} order {args.order_id} {o['symbol']} exit {o['exit_price']} ({o['exit_reason']}) as a "
+              f"DEFECT exit: \"{args.note}\". It stays in every P&L figure and leaves the A3 kill-rule "
+              f"comparison. Re-run with --confirm.")
+        return 2
+    who = os.environ.get("USER") or "operator"
+    L.mark_defect(conn, args.order_id, args.note, by=who); conn.commit()
+    print(f"{OK}marked{END} order {args.order_id} {o['symbol']} as a defect exit by {who}")
+    return 0
+
+
+def cmd_reset_unprotected(args) -> int:
+    """The B→C gate's 'zero unprotected fills' count restarts at the named
+    defect fix (owner decision 2026-09-22). Records who, when and which
+    commit; the gate prints all three."""
+    conn = L.connect(_db(args))
+    st = L.get_state(conn)
+    before = L.unprotected_fills(conn)
+    if not args.confirm:
+        print(f"{WARN}would restart{END} the unprotected-fill count from now, naming fix {args.fix}; "
+              f"{before} unprotected fill(s) in the ledger so far"
+              + (f"; last reset {st.get('unprotected_reset_at')} at fix {st.get('unprotected_reset_fix')}" if st.get("unprotected_reset_at") else "")
+              + ". Re-run with --confirm.")
+        return 2
+    who = os.environ.get("USER") or "operator"
+    now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    L.set_state(conn, unprotected_reset_at=now, unprotected_reset_by=who, unprotected_reset_fix=args.fix)
+    print(f"{OK}recorded{END} unprotected-fill count restarts at {now} (fix {args.fix}) by {who}; "
+          f"{before} earlier unprotected fill(s) stay in the ledger and the reports")
+    return 0
+
+
 def cmd_accept_a1(args) -> int:
     """Record the owner's acceptance of amendment A1 (docs/preregistration.md
     §5): pre-market entries on a `queued` probe verdict get NO resting stop;
@@ -638,6 +705,7 @@ def cmd_review(args) -> int:
         print(f"  {r['fill_ts'][11:16]} {r['symbol']:<6} trigger {r['trigger']:.2f} fill {r['fill_price']:.2f} "
               f"slip {r['slippage_ratio'] if r['slippage_ratio'] is not None else '—'}")
     print_trades(conn, last=10)
+    print_kill_rule(conn, bars.from_ledger(conn))
     print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows)")
     for k, v in ctl.items():
         print(f"  {k:<12} n={v['n']:<4} mean {v['mean_R'] if v['mean_R'] is not None else '—'}  "
@@ -712,6 +780,11 @@ def main(argv=None) -> int:
     ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
     ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     ah.add_argument("--market", action="store_true", help="SELL at market, SMART-routed, 09:30-16:00 ET only")
+    df = sub.add_parser("defect", help="mark a closed fill's exit as a code defect's (kept in P&L, out of the A3 kill rule)")
+    df.add_argument("order_id", type=int); df.add_argument("--note", required=True); df.add_argument("--confirm", action="store_true")
+    ru = sub.add_parser("reset-unprotected", help="restart the B→C 'zero unprotected fills' count at a named defect fix")
+    ru.add_argument("--fix", required=True, help="the commit that fixed the defect, e.g. d408644")
+    ru.add_argument("--confirm", action="store_true")
     a1 = sub.add_parser("accept-a1", help="record the owner's acceptance of amendment A1 (monitored pre-market exit)")
     a1.add_argument("--confirm", action="store_true")
     rb = sub.add_parser("retag-backfill", help="tag decisions armed before the desk's first start of a day as backfill")
@@ -723,7 +796,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
-            "missed": cmd_missed,
+            "missed": cmd_missed, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
             "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
             "retag-backfill": cmd_retag_backfill}[args.cmd](args)
 

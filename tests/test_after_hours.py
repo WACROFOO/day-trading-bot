@@ -183,3 +183,57 @@ def test_a_confirmed_exit_records_who_confirmed():
     assert o["exit_reason"] == "AH_exception" and o["exit_confirmed_by"] == "ayman"
     assert o["exit_ts"].startswith("2026-09-01T16:05")
     assert L.stuck_orders(c) == []
+
+
+def test_a_defect_exit_stays_in_pnl_and_leaves_the_a3_kill_rule(held):
+    """Owner decision 2026-09-22: DCOY's and GRML's exits were defects'. They
+    keep their R everywhere; the kill rule is read on clean fills only and
+    is read-only below ten of them."""
+    from journal import controls, bars
+    db, c, t = held
+    oid = L.stuck_orders(c)[0]["order_id"]
+    o = c.execute("SELECT * FROM orders WHERE order_id=?", (oid,)).fetchone()
+    L.record_exit(c, oid, reason="trail", price=round(o["fill_price"] + 0.5 * (o["fill_price"] - o["stop"]), 2),
+                  ts="2026-09-01T14:20:00Z"); c.commit()
+    k = controls.kill_rule_read(c, bars.from_ledger(c))
+    assert len(k["rows"]) == 1 and k["verdict"] == "READ-ONLY" and k["excluded_defect"] == 0
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "defect", str(oid),
+                        "--note", "stop killed by an OCA modify; exit at the restart price"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 2 and "would mark" in r.stdout
+    assert c.execute("SELECT defect_note FROM orders WHERE order_id=?", (oid,)).fetchone()[0] is None
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "defect", str(oid),
+                        "--note", "stop killed by an OCA modify; exit at the restart price", "--confirm"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 0 and "marked" in r.stdout, r.stdout
+    c2 = L.connect(db)
+    note = c2.execute("SELECT defect_note FROM orders WHERE order_id=?", (oid,)).fetchone()[0]
+    assert "OCA modify" in note and "marked by" in note
+    assert len(L.trade_rows(c2)) == 1 and L.trade_rows(c2)[0]["closed"] is True      # still in P&L
+    k = controls.kill_rule_read(c2, bars.from_ledger(c2))
+    assert k["rows"] == [] and k["excluded_defect"] == 1 and k["verdict"] == "READ-ONLY"
+    rv = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "review"],
+                        cwd=ROOT, capture_output=True, text=True)
+    assert rv.returncode == 0 and "A3 KILL RULE" in rv.stdout and "1 defect exit(s) excluded" in rv.stdout
+
+
+def test_the_kill_rule_binds_only_from_ten_clean_fills():
+    from journal import controls
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    did = L.decisions(c, plan_allowed=1)[0]["decision_id"]
+    for i in range(10):
+        oid = L.record_order(c, did, symbol="ABCD", account="DU1", session="regular", parent_id=100 + i,
+                             stop_id=200 + i, target_id=None, trigger=7.2, stop=7.05, target=None,
+                             shares=100, dollar_risk=15.0, protected=True)
+        L.record_fill(c, oid, fill_price=7.2, fill_ts=f"2026-09-01T14:{i:02d}:00Z")
+        L.record_exit(c, oid, reason="stop", price=7.05, ts=f"2026-09-01T14:{i:02d}:30Z")   # -1 R each, live
+    c.commit()
+    k = controls.kill_rule_read(c, {}, min_n=10)
+    # every fill carries the same decision; its actuals decide the baseline
+    if k["n"] >= 10:
+        assert k["verdict"] in ("MET", "NOT MET")
+        assert (k["verdict"] == "MET") == (k["live_mean"] < k["baseline_mean"])
+    else:
+        assert k["verdict"] == "READ-ONLY"
+    assert controls.kill_rule_read(c, {}, min_n=11)["verdict"] == "READ-ONLY"

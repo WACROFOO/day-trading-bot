@@ -64,6 +64,13 @@ SESSIONS = ("regular", "premarket")
 # downgrade is not a kill. But an executor reading only plan_allowed would
 # open a position at 14:00, which is the one thing §2 is most explicit about.
 HARD_STOP = time(11, 30)
+# Amendment A8 (owner decision, delegated, 2026-09-22): no NEW entry inside
+# the last ENTRY_BUFFER_MIN minutes before the hard stop. GRML was filled at
+# 11:28 and force-flattened at 11:30 — two minutes is not the strategy's
+# trade, it is a coin flip into a market exit. LOCAL_ADDITION, reasoned not
+# measured; `exercise.py missed` shows what the plans it refuses went on to do.
+ENTRY_BUFFER_MIN = 10
+ENTRY_CUTOFF = time(11, 20)
 
 
 def in_premarket(now: Optional[datetime] = None) -> bool:
@@ -227,6 +234,10 @@ def refusals(i: EntryIntent,
     if clock.time() >= HARD_STOP:
         out.append(f"{clock:%H:%M} ET is past the {HARD_STOP:%H:%M} hard stop; "
                    f"no new entries (exits are always allowed)")
+    elif clock.time() >= ENTRY_CUTOFF:
+        out.append(f"{clock:%H:%M} ET is inside the last {ENTRY_BUFFER_MIN} minutes before the "
+                   f"{HARD_STOP:%H:%M} hard stop (A8): a forced flatten is not the strategy's exit; "
+                   f"no new entries")
 
     if i.session not in SESSIONS:
         out.append(f"bar is outside the 07:00-16:00 ET session window (session {i.session!r}); "

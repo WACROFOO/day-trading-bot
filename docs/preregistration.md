@@ -40,13 +40,14 @@ better than the free baselines on the same names at the same instants.
 | Max concurrent positions, enforced | **1** | `Runner._act` refuses an entry while any order is alive — resting, filled and not exited, exit pending, or an unresolved intent (`ledger.positions_alive`). Enforced in code since 2026-09-08; before that it was a value in this table only |
 | Configuration and code, pinned | rules hash + commit | `desk_profile.fingerprint()` and the git commit are stamped on every decision, order and the exercise state |
 | Hard stop, new entries | **11:30 ET** | `PARAMETERS.md` §2 `session_close`, enforced in `src/execution/intent.py` |
+| **A8 — entry buffer before the hard stop** | **no new entry from 11:20 ET** (10 minutes) | LOCAL_ADDITION, reasoned not measured. GRML filled 11:28 on 2026-09-22 and was force-flattened at 11:30: two minutes is a coin flip into a market exit, not the strategy's trade. Owner decision, delegated (§5, 2026-09-22). `ENTRY_CUTOFF` in `src/execution/intent.py`; what the refused plans go on to do is printed by `exercise.py missed` |
 
 ## 3. Phases and sample sizes
 
 | Phase | Mode | Runs until | Gate to the next phase |
 |---|---|---|---|
 | A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions under the rules currently in force** (owner, 2026-09-18: the cohort resets on an amendment — see §5) | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
-| B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; zero unprotected entries; **and, from 2026-09-21, one fully reconciled paper trade lifecycle** (below) |
+| B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; **zero unprotected entries since the last named defect fix** (owner decision, delegated, 2026-09-22: the count restarts at a fix commit recorded by `exercise.py reset-unprotected` with a name and a time; DCOY's unprotected fill of 2026-09-22 was the OCA defect's, fixed in ec8ff72 and d408644, and stays in the ledger and every report); **and, from 2026-09-21, one fully reconciled paper trade lifecycle** (below) |
 | C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** | only in the shape the probe dictates (§5) |
 | D | Read-out | at **PROPOSED: n = 60 taken trades** total | the failure condition in §4 is evaluated ONCE, here, not continuously |
 
@@ -378,7 +379,24 @@ Kill rule for A3, before its data exists: a **prospective comparison from
 the first fill**, read at every session close-out. If, on the same fills,
 the live trailing exit's mean realised R is below the `baseline` control's
 simulated mean, that is the signal to revert A3 in one commit and record the
-reversion here. Thirty trades is a review of implementation and costs
+reversion here.
+
+**Amended 2026-09-22 (owner decision, delegated — the record is in §5).**
+On the first day with fills the rule as written was met: live trail −0.51 R
+against baseline +1.00 R on three fills. Two of the three live exits were
+code defects' (DCOY: stop cancelled by an OCA modify, exit at the restart
+price; GRML x62: stop cancelled by the flatten, sell refused, sold by hand),
+and on the one clean fill the trail beat the baseline (+3.22 R against
++2.00 R). The rule had no clause for a defect exit and no minimum sample.
+It now reads: (a) the comparison is made on **clean closed fills only** —
+a fill whose exit a human has named as a code defect's, by
+`exercise.py defect ORDER_ID --note ... --confirm`, keeps its R in every
+P&L figure and leaves this comparison; (b) it is **printed from the first
+fill** (`exercise.py report` and `review`, block A3 KILL RULE) and is
+**binding from ten clean fills** (`controls.KILL_RULE_MIN_N`); below ten it
+reads READ-ONLY. The letter-of-the-rule event of 2026-09-22 is recorded in
+`research/paper-exercise/reports/2026-09-22-analysis.md` §4 and is not
+erased by this amendment. Thirty trades is a review of implementation and costs
 (does the stop move, does IBKR honour the modify, what does the trail cost
 in whipsaws), not a basis for choosing a tail-dependent exit rule: the
 review's illustration — detecting a 0.2 R improvement at 80 % power needs
@@ -611,6 +629,25 @@ both fixed the same hour:
 - **A rejected order counted as a live position.** IBKR's word for rejected
   is `Inactive`; it was missing from the dead list, so the one-position rule
   blocked every entry after 09:37 ("1 order(s) alive or unresolved").
+
+**Owner decisions of 2026-09-22, delegated.** After the first day with
+fills the session put four decisions to the owner (the A3 kill rule met by
+defect exits; A8; A9; the phase-C gate wording). The owner's answer, verbatim:
+*"take the best assumptions you judge pertinent and optimal"*. The
+decisions below were therefore taken by the assistant under that delegation
+and are recorded as the owner's, with the reasoning so each can be undone
+by name:
+
+| decision | taken as | why this and not the alternative | what it costs |
+|---|---|---|---|
+| A3 kill rule, met by the letter on three fills | **amended**, not reverted: clean fills only, binding from ten | reverting an exit rule on two defect exits and one clean fill that beat the baseline would be deciding on the plumbing's failure, not the rule's; the event stays recorded | the rule is weaker until ten clean fills exist; a defect tag is a human act and can be abused — every tag carries a name and a note |
+| A8, entry buffer | **10 minutes**: no new entry from 11:20 ET | the A3 trail needs time to move; the one clean trade resolved in two minutes, the one entered two minutes before the flatten was a forced exit. Ten is a judgment, not a measurement | every plan armed 11:20–11:29 is refused; `missed` prints what they went on to do so the number can be revisited |
+| A9, a floor on risk per share | **measurement only** for now: `missed` marks plans with the stop inside 0.5 % of the trigger (‡) and sums them; the floor is written after a week of counts | two-cent stops on $8–$17 stocks appeared three times in two days (VEEE, GRML, AEHL), but three is not a distribution | plans that A6 does not catch keep sizing to notionals the account refuses until the floor exists |
+| phase-C gate, "zero unprotected fills" | **count restarts at a named defect fix**, recorded by `exercise.py reset-unprotected --fix d408644 --confirm` with name and time | the gate exists to catch unprotected fills the RULES produce; a defect's fill blocking phase C forever would make the gate unsatisfiable rather than informative. The earlier fill stays in the ledger and every report | a reset is a human act; the blocker text names the fix and the time so a pattern of resets is visible |
+
+Recorded 2026-09-22 by the assistant on the owner's delegation. The
+delegation covers these four decisions and nothing else; any further
+amendment goes back to the owner.
 
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
