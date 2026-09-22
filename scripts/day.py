@@ -513,6 +513,9 @@ def day_lock(path: Path = DAY_LOCK):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--early", action="store_true",
+                    help="start before 06:55 ET (owner's call, 2026-09-22); the 06:55 scheduled "
+                         "start then finds the instance lock and steps aside")
     ap.add_argument("--risk", type=float, default=None, help="overrides exercise_state.dollar_risk")
     ap.add_argument("--symbols", help="skip the gap scan; comma-separated watchlist")
     ap.add_argument("--probe-orders", action="store_true",
@@ -573,12 +576,15 @@ def main(argv=None) -> int:
         return 0
     if not args.rehearsal and now.time() >= HARD_STOP:
         after_close(conn, today, args.dry_run); return 0
-    if not args.rehearsal and now.time() < PREMARKET_OPEN:
+    if not args.rehearsal and now.time() < PREMARKET_OPEN and not args.early:
         # One login only (docs/day-runbook.md): the paper GATEWAY is up, TWS
         # stays logged out. The old text said "start TWS and the Gateway",
         # which is the 10197 competing-session trap this desk moved away from.
         warn(f"before {PREMARKET_OPEN:%H:%M} ET — Gateway up on paper, TWS logged out; "
-             f"run this again at {PREMARKET_OPEN:%H:%M}"); return 0
+             f"run this again at {PREMARKET_OPEN:%H:%M}, or pass --early to start now"); return 0
+    if args.early and now.time() < PREMARKET_OPEN:
+        warn(f"starting early at {now:%H:%M} ET — the tape before 07:00 is thin, phase {L.get_state(conn).get('phase', 'A')} "
+             f"refuses pre-market entries anyway, and the {PREMARKET_OPEN:%H:%M} scheduled start will be refused by the lock")
 
     say(f"\n{BOLD}1. Watchlist{END}  (gap scan — STAR then WATCH; rejects named)")
     rows: list[dict] = []          # the gap scan's rows; empty when --symbols bypasses it

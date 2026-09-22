@@ -389,3 +389,10 @@ def test_the_day_report_lists_only_that_days_rejects(journal, tmp_path, monkeypa
         "SELECT COUNT(*) FROM decisions WHERE outcome='SUPPRESSED' AND substr(ts_et,1,10)='2026-09-01'").fetchone()[0]
     other = day.write_report(journal, "2026-08-31", "fixture", synthetic=True).read_text()
     assert "| SUPPRESSED |" not in other and "no decisions" in other
+
+
+def test_early_flag_starts_before_0655_and_the_refusal_names_it():
+    src = (ROOT / "scripts/day.py").read_text()
+    assert "--early" in src and "not args.early" in src
+    assert "or pass --early to start now" in src
+    assert "starting early at" in src
