@@ -204,6 +204,14 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
         d = dict(r)
         d["backfill"] = bool(r["data_status"] and r["data_status"].endswith("-backfill"))
         d["has_actuals"] = r["risk_share"] is not None
+        # A9 measurement (not a gate): a stop within THIN_STOP_PCT of the
+        # trigger. Such a plan sizes to a notional the account refuses and its
+        # planned R inflates every excursion figure (VEEE 16.33/16.31 on
+        # 09-21 showed an MFE of 326 R; GRML 17.19/17.17 on 09-22 an MAE of
+        # -153 R). Counted so the amendment can be written from a number.
+        rps_plan = (r["trigger"] - r["stop"]) if r["trigger"] and r["stop"] else None
+        d["thin_stop"] = bool(rps_plan is not None and r["trigger"] > 0
+                              and rps_plan / r["trigger"] < THIN_STOP_PCT)
         rps = r["risk_share"]
         d["strategy_r"] = d["trail_r"] = d["trail_exit"] = None
         if rps and rps > 0 and r["trigger_hit"] == 1 and r["c_close"] is not None:
@@ -224,6 +232,9 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
                     d["trail_r"], d["trail_exit"] = res["r"], res["exit"]
         out.append(d)
     return out
+
+
+THIN_STOP_PCT = 0.005      # measurement cut for the A9 count; NOT a gate, nothing refuses on it
 
 
 def reason_key(d: dict) -> str:

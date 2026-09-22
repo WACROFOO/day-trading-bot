@@ -551,7 +551,7 @@ def cmd_missed(args) -> int:
             continue                                  # killed and never triggered: noise unless --all
         hit = "—" if d["trigger_hit"] is None else ("y" if d["trigger_hit"] else "n")
         f = lambda v, w=6: f"{v:>{w}.2f}" if v is not None else f"{'—':>{w}}"   # noqa: E731
-        tag = " [backfill]" if d["backfill"] else ""
+        tag = (" [backfill]" if d["backfill"] else "") + (" ‡thin stop" if d["thin_stop"] else "")
         print(f"  {d['ts_et'][11:16]:>5} {d['symbol']:<6}{d['verdict']:<8}{d['outcome']:<11}"
               f"{f(d['trigger'], 7)}{f(d['stop'], 7)} {hit:<4}{(d['first_hit'] or '—'):<12}"
               f"{f(d['mfe_r_planned'])}{f(d['mae_r_planned'])}{f(d['strategy_r'], 7)}{f(d['trail_r'], 7)}"
@@ -574,6 +574,20 @@ def cmd_missed(args) -> int:
         tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
         win = f"{sum(1 for x in st if x > 0)/len(st):>6.0%}" if st else f"{'—':>6}"
         print(f"  {len(ds):>4}{len(trig):>6}{_m(st)}{_s(st)}{_m(tr)}{_s(tr)}{win}  {key}")
+    thin = [d for d in rows if d["thin_stop"] and not d["backfill"]]
+    pct = controls.THIN_STOP_PCT * 100
+    if thin:
+        st = [d["strategy_r"] for d in thin if d["strategy_r"] is not None]
+        tr = [d["trail_r"] for d in thin if d["trail_r"] is not None]
+        print(f"\n{BOLD}THIN STOPS{END}  {len(thin)} prospective plan(s) with the stop inside {pct:g}% of the trigger (‡): "
+              f"strat sum {sum(st):+.2f} R over {len(st)} · trail sum {sum(tr):+.2f} R over {len(tr)}")
+        for d in thin:
+            print(f"    {d['ts_et'][11:16]} {d['symbol']:<6} {d['trigger']:.2f}/{d['stop']:.2f}  risk/share "
+                  f"{(d['trigger'] - d['stop']):.2f} = {(d['trigger'] - d['stop']) / d['trigger'] * 100:.2f}% of price  "
+                  f"{d['outcome']}  MFE {d['mfe_r_planned'] if d['mfe_r_planned'] is not None else '—'}  "
+                  f"MAE {d['mae_r_planned'] if d['mae_r_planned'] is not None else '—'}")
+        print(f"    {DIM}a measurement for amendment A9, not a gate: nothing refuses on it. Planned R on these rows is "
+              f"inflated by the tiny denominator.{END}")
     print(f"\n{DIM}'strat' = fixed +2R target, −1R stop, else close (the strategy series). 'trail' = A3 trail_1r, bar-ordered.")
     print(f"A refused plan scored here assumes a fill at the trigger the runner never sent: an upper bound, not a trade.")
     print(f"Killed plans that never touched their trigger are hidden; pass --all to see them.{END}\n")
