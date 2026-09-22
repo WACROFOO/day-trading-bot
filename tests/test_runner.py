@@ -518,3 +518,36 @@ def test_a_held_position_whose_stop_died_gets_a_fresh_stop_from_the_runner(journ
     assert o2["protected"] == 1 and o2["stop_status"] == "Submitted" and o2["stop_id"] == 901
     assert rec.stop_id == 901 and rec.protected is True
     assert r.reprotect() == []                                    # once
+
+
+def test_a_position_whose_hard_stop_sell_failed_gets_a_stop_and_its_fill_closes_the_row(journal):
+    """GRML x62, 2026-09-22 11:30: the flatten cancelled the stop, the market
+    sell was rejected, the row read ExitFailed — a held position with NO exit
+    at all, and `reprotect` skipped it. Now it gets a stop; a restarted runner
+    adopts the row; the stop's fill closes it."""
+    class ProtectingTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.stops = []
+        def place_stop(self, symbol, qty, stop_price, ref=None):
+            self.stops.append((symbol, qty, stop_price)); return 900 + len(self.stops)
+    t = ProtectingTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    L.record_exit(journal, o["order_id"], reason="hard_stop", price=None, ts="2026-09-01T15:30:00Z",
+                  confirmed=False, exit_order_id=901)
+    assert r.reprotect() == []                          # ExitPending: a sell is working, no stop on top
+    L.exit_failed(journal, o["order_id"], status="Inactive")
+    journal.execute("UPDATE orders SET protected=0, stop_status='Cancelled' WHERE order_id=?", (o["order_id"],))
+    journal.commit()                                    # the flatten's cancel_all killed the stop
+    assert [x["order_id"] for x in L.open_orders(journal)] == [o["order_id"]]   # a restart adopts it
+    lines = r.reprotect()
+    assert len(lines) == 1 and t.stops == [(rec.symbol, int(o["shares"]), float(o["stop"]))], (lines, t.stops)
+    o2 = journal.execute("SELECT * FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert (o2["status"], o2["protected"], o2["stop_status"], o2["stop_id"]) == ("ExitFailed", 1, "Submitted", 901)
+    assert r.reprotect() == []
+    # the fresh stop fills: the row closes at the stop's price, reason stop
+    rec.exit_price, rec.exit_time, rec.exit_confirmed, rec.exit_reason = float(o["stop"]), "2026-09-01T15:31:00Z", True, "stop"
+    r.sync_fills()
+    o3 = journal.execute("SELECT status, exit_reason, exit_price FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert (o3["status"], o3["exit_reason"], o3["exit_price"]) == ("Closed", "stop", float(o["stop"]))
+    assert L.stuck_orders(journal) == []

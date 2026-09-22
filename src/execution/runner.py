@@ -358,7 +358,10 @@ class Runner:
                 has_exit = (r["status"] == "ExitPending"
                             or (r["stop_status"] or "") in working)
                 if r["status"] == "ExitFailed":
-                    out.append(f"EXIT FAILED {sym} x{qty} (order #{r['order_id']}) — held, needs a human")
+                    cover = (f"stop {r['stop_id']} resting" if r["protected"] and (r["stop_status"] or "") in working
+                             else "NO stop")
+                    out.append(f"EXIT FAILED {sym} x{qty} (order #{r['order_id']}) — held, {cover}; "
+                               f"a human sells it: exercise.py ah-exit {r['order_id']} --confirm --market")
                     continue                          # already flagged by exit_failed
                 if not has_exit:
                     L.flag_manual(self.conn, r["order_id"],
@@ -460,8 +463,10 @@ class Runner:
                           protected=p.protected)
             n += 1
         # Exits: a filled stop or target leg closes the trade in the ledger.
+        # An ExitFailed row is still held; the fresh stop `reprotect` placed
+        # for it is a bracket leg like any other, and its fill closes the row.
         for r in self.conn.execute("SELECT order_id, parent_id FROM orders WHERE fill_price IS NOT NULL "
-                                   "AND exit_ts IS NULL").fetchall():
+                                   "AND (exit_ts IS NULL OR status='ExitFailed')").fetchall():
             p = by_parent.get(r["parent_id"])
             if p is not None and p.exit_price is not None and p.exit_confirmed:
                 L.record_exit(self.conn, r["order_id"], reason=p.exit_reason or "bracket",

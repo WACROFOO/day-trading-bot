@@ -102,6 +102,39 @@ def test_ah_exit_with_confirm_needs_a_fresh_quote_before_touching_the_broker(hel
     assert r.returncode == 1 and "no fresh quote" in r.stdout
 
 
+def test_ah_exit_takes_an_exit_failed_row_and_refuses_an_exit_pending_one(held):
+    """GRML x62 (order #5), 2026-09-22: the hard-stop sell was rejected, the
+    row read ExitFailed with the failed sell's exit_ts, and `ah-exit 5` said
+    "not a held position". It is held. An ExitPending row stays refused: its
+    sell is working and a second one would sell shares that are not held."""
+    db, c, t = held
+    oid = L.stuck_orders(c)[0]["order_id"]
+    L.record_exit(c, oid, reason="hard_stop", price=None, ts="2026-09-01T15:30:00Z",
+                  confirmed=False, exit_order_id=901)
+    c.commit()
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "ah-exit", str(oid), "--market"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 1 and "not a held position" in r.stdout and "ExitPending" in r.stdout
+    L.exit_failed(c, oid, status="Inactive"); c.commit()
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "ah-exit", str(oid), "--market"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 2, r.stdout
+    assert "MANUAL_CONFIRMATION_REQUIRED" in r.stdout and "ExitFailed" in r.stdout and "MARKET" in r.stdout
+    assert c.execute("SELECT status FROM orders WHERE order_id=?", (oid,)).fetchone()[0] == "ExitFailed"
+
+
+def test_held_row_is_the_single_definition_of_a_position_the_manual_exit_may_sell():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import exercise
+    row = lambda **k: {"fill_price": 6.0, "exit_ts": None, "status": "Filled", **k}   # noqa: E731
+    assert exercise.held_row(row()) is True
+    assert exercise.held_row(row(fill_price=None)) is False
+    assert exercise.held_row(row(exit_ts="x", status="Closed")) is False
+    assert exercise.held_row(row(exit_ts="x", status="ExitPending")) is False
+    assert exercise.held_row(row(exit_ts="x", status="ExitFailed")) is True
+    assert exercise.held_row(None) is False
+
+
 def test_stuck_lists_held_positions(held):
     db, c, t = held
     r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "stuck"],

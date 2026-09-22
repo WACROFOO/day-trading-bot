@@ -394,34 +394,67 @@ def cmd_stuck(args) -> int:
         print("no filled, un-exited positions in the ledger"); return 0
     for o in rows:
         print(f"  order {o['order_id']:>4}  {o['symbol']:<6} x{o['shares']}  filled {o['fill_price']} "
-              f"stop {o['stop']}  status {o['stop_status']}")
+              f"stop {o['stop']}  status {o['status']} / {o['stop_status']}")
     return 0
 
 
+def held_row(o) -> bool:
+    """A filled row the broker may still hold: never exited, or exited by a
+    sell that FAILED (ExitFailed keeps the failed sell's exit_ts; the shares
+    are still there — GRML x62 after the 2026-09-22 hard stop). An ExitPending
+    row is not offered: its sell is working and a second one would sell
+    shares that are not held."""
+    if o is None or o["fill_price"] is None:
+        return False
+    return o["exit_ts"] is None or o["status"] == "ExitFailed"
+
+
 def cmd_ah_exit(args) -> int:
-    """The after-hours exception, brief R10: exit-only, one order, a human
-    confirms it here, and who confirmed is written into the ledger."""
+    """The manual exit. Brief R10 after hours: exit-only, one order, a human
+    confirms it here, and who confirmed is written into the ledger. With
+    `--market`, inside regular hours: a SMART-routed market sell that needs no
+    desk quote — the path for a position the hard-stop flatten failed to
+    close (ExitFailed) when the desk is already down."""
     conn = L.connect(_db(args))
     o = conn.execute("SELECT * FROM orders WHERE order_id=?", (args.order_id,)).fetchone()
     if o is None:
         print(f"{BAD}no order {args.order_id}{END}"); return 1
-    if o["fill_price"] is None or o["exit_ts"] is not None:
-        print(f"{BAD}order {args.order_id} is not a held position{END}"); return 1
+    if not held_row(o):
+        print(f"{BAD}order {args.order_id} is not a held position{END} (status {o['status']})"); return 1
+    market = bool(getattr(args, "market", False))
     if not args.confirm:
-        print(f"{WARN}MANUAL_CONFIRMATION_REQUIRED{END}  {o['symbol']} x{o['shares']} filled {o['fill_price']}")
-        print("  after hours: no stops exist, margin is auto-liquidated at 16:00, and the")
-        print("  source is measured not net profitable there. Re-run with --confirm to SELL")
-        print("  at bid − 0.10, limit, extended hours. This is an exit; nothing is bought.")
+        print(f"{WARN}MANUAL_CONFIRMATION_REQUIRED{END}  {o['symbol']} x{o['shares']} filled {o['fill_price']}"
+              + (f"  status {o['status']}" if o["status"] == "ExitFailed" else ""))
+        if market:
+            print("  regular hours: re-run with --confirm to SELL at MARKET, SMART-routed. No quote")
+            print("  is read; the broker's fill is written back. This is an exit; nothing is bought.")
+        else:
+            print("  after hours: no stops exist, margin is auto-liquidated at 16:00, and the")
+            print("  source is measured not net profitable there. Re-run with --confirm to SELL")
+            print("  at bid − 0.10, limit, extended hours. This is an exit; nothing is bought.")
         return 2
-    q = L.quote_source(conn, max_age_s=120)(o["symbol"])
-    if not q or q.get("bid") is None:
-        print(f"{BAD}no fresh quote for {o['symbol']} in the ledger — start the desk first{END}"); return 1
+    from execution.intent import in_regular_hours
     from execution.ibkr_trader import PaperTrader
     who = os.environ.get("USER") or "operator"
     qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+    reason = "manual_market" if market else "AH_exception"
+    if market:
+        if not in_regular_hours():
+            print(f"{BAD}--market only inside 09:30-16:00 ET: no market orders exist outside; "
+                  f"use ah-exit without --market and a running desk{END}"); return 1
+        q = {"bid": None}
+    else:
+        q = L.quote_source(conn, max_age_s=120)(o["symbol"])
+        if not q or q.get("bid") is None:
+            print(f"{BAD}no fresh quote for {o['symbol']} in the ledger — start the desk first, "
+                  f"or inside regular hours use --market{END}"); return 1
     with PaperTrader() as t:
-        px = t.exit_limit(o["symbol"], qty, float(q["bid"]), outside_rth=True)
-        exit_id = getattr(t, "last_exit_order_id", None)
+        if market:
+            exit_id = t.exit_market(o["symbol"], qty)
+            px = None
+        else:
+            px = t.exit_limit(o["symbol"], qty, float(q["bid"]), outside_rth=True)
+            exit_id = getattr(t, "last_exit_order_id", None)
         # Wait briefly for the fill so the row can close with the real price;
         # otherwise it stays ExitPending and the next runner sync confirms it.
         fill = None
@@ -431,13 +464,14 @@ def cmd_ah_exit(args) -> int:
             if tr is not None and tr.orderStatus.status == "Filled" and tr.orderStatus.avgFillPrice:
                 fill = tr.orderStatus.avgFillPrice
                 break
-    L.record_exit(conn, o["order_id"], reason="AH_exception", price=fill if fill else px,
+    L.record_exit(conn, o["order_id"], reason=reason, price=fill if fill else px,
                   ts=datetime.now(timezone.utc), confirmed_by=who,
                   confirmed=fill is not None, exit_order_id=exit_id)
-    L.add_order_event(conn, o["order_id"], f"AH exception confirmed by {who}: SELL LMT {px} x{qty} (bid {q['bid']})"
+    sent = f"SELL MKT x{qty} (order {exit_id})" if market else f"SELL LMT {px} x{qty} (bid {q['bid']})"
+    L.add_order_event(conn, o["order_id"], f"{reason} confirmed by {who}: {sent}"
                       + (f"; filled {fill}" if fill else "; fill NOT yet seen — row is ExitPending"))
     conn.commit()
-    print(f"{OK}sent{END} SELL {qty} {o['symbol']} LMT {px}  recorded as AH_exception by {who}"
+    print(f"{OK}sent{END} {sent} {o['symbol']}  recorded as {reason} by {who}"
           + (f" · filled {fill}" if fill else f" · {WARN}fill not yet seen; check exercise.py stuck{END}"))
     return 0
 
@@ -576,7 +610,9 @@ def main(argv=None) -> int:
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
     sub.add_parser("stuck"); sub.add_parser("review")
-    ah = sub.add_parser("ah-exit"); ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
+    ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
+    ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
+    ah.add_argument("--market", action="store_true", help="SELL at market, SMART-routed, 09:30-16:00 ET only")
     a1 = sub.add_parser("accept-a1", help="record the owner's acceptance of amendment A1 (monitored pre-market exit)")
     a1.add_argument("--confirm", action="store_true")
     rb = sub.add_parser("retag-backfill", help="tag decisions armed before the desk's first start of a day as backfill")

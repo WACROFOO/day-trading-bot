@@ -372,6 +372,59 @@ def test_flatten_uses_a_market_order_inside_regular_hours():
     assert sent[0].orderType == "MKT"
 
 
+def test_flatten_routes_the_sell_on_smart_not_on_the_position_contract():
+    """GRML x62, 2026-09-22 11:30: the market sell went on `pos.contract`,
+    whose exchange is NASDAQ — a direct-routed order the API's precautionary
+    settings rejected (10311). The stop had already been cancelled; the
+    position sat naked. Every flatten sell now goes on a SMART contract."""
+    pytest.importorskip("ib_async")
+    sent = []
+
+    class FakePos:
+        position = 62
+        contract = type("C", (), {"symbol": "GRML", "exchange": "NASDAQ"})()
+
+    class FakeIB:
+        def positions(self): return [FakePos()]
+        def openTrades(self): return []
+        def cancelOrder(self, o): pass
+        def qualifyContracts(self, *c): return list(c)
+        def placeOrder(self, c, o): sent.append((c, o))
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    assert t.flatten_all(now=RTH) == ["GRML x62 MKT"]
+    c, o = sent[0]
+    assert c.exchange == "SMART" and c.symbol == "GRML" and c.currency == "USD"
+    assert c is not FakePos.contract
+    t.ib = FakeIB(); sent.clear()
+    t.flatten_all(quote=lambda s: (4.50, 4.60), now=PREMARKET)
+    assert sent[0][0].exchange == "SMART" and sent[0][1].orderType == "LMT"
+
+
+def test_exit_market_sells_on_smart_inside_regular_hours_and_refuses_outside():
+    """The manual exit that needs no desk quote, for the ExitFailed row."""
+    pytest.importorskip("ib_async")
+    sent = []
+
+    class FakeIB:
+        client = type("Cl", (), {"getReqId": staticmethod(lambda: 4242)})()
+        def qualifyContracts(self, *c): return list(c)
+        def placeOrder(self, c, o): sent.append((c, o))
+
+    t = PaperTrader()
+    t.ib = FakeIB()
+    assert t.exit_market("GRML", 62, now=RTH) == 4242
+    c, o = sent[0]
+    assert (c.exchange, o.orderType, o.action, o.totalQuantity) == ("SMART", "MKT", "SELL", 62)
+    assert t.last_exit_order_id == 4242
+    with pytest.raises(RuntimeError, match="outside regular hours"):
+        t.exit_market("GRML", 62, now=PREMARKET)
+    assert len(sent) == 1
+    with pytest.raises(ValueError):
+        t.exit_market("GRML", 0, now=RTH)
+
+
 # ------------------------------------------------------ the hard stop
 def test_no_new_entry_after_the_1130_hard_stop():
     """`PARAMETERS.md` §2: `session_close` 11:30 "outer edge, not the

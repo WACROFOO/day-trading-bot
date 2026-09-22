@@ -1032,7 +1032,7 @@ def alignment_rows(conn: sqlite3.Connection) -> list[dict]:
 def open_orders(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     """Orders that may still be alive at the broker: not exited, not cancelled.
     What a restarted runner must adopt before it can sync anything."""
-    return conn.execute("""SELECT * FROM orders WHERE exit_ts IS NULL
+    return conn.execute("""SELECT * FROM orders WHERE (exit_ts IS NULL OR status='ExitFailed')
                            AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed', 'NotFilled',
                                               'intent', 'UNRESOLVED')
                            ORDER BY placed_at""").fetchall()
@@ -1117,13 +1117,17 @@ def set_new_stop_leg(conn: sqlite3.Connection, order_id: int, *, stop_id: int, l
 
 
 def unprotected_positions(conn: sqlite3.Connection) -> list[sqlite3.Row]:
-    """Filled, un-exited bracket rows whose stop leg is dead or flagged: the
+    """Filled bracket rows still held whose stop leg is dead or flagged: the
     rows `Runner.reprotect` places a fresh stop for. Monitored (stop-less by
-    design) rows are not included."""
-    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND exit_ts IS NULL
+    design) rows are not included, nor ExitPending rows (a sell is working).
+    An ExitFailed row IS included: the flatten cancelled its stop and then
+    the sell was rejected (GRML x62, 2026-09-22), so it is a held position
+    with no exit at all — the fresh stop protects it until a human sells."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL
                            AND stop_id IS NOT NULL AND protected=0
-                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed',
-                                              'NotFilled', 'ExitPending', 'ExitFailed')""").fetchall()
+                           AND ((exit_ts IS NULL AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive',
+                                                                    'Closed', 'NotFilled', 'ExitPending'))
+                                OR status='ExitFailed')""").fetchall()
 
 
 def set_stop_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:

@@ -294,6 +294,31 @@ class PaperTrader:
         self.last_exit_order_id = order.orderId
         return px
 
+    def exit_market(self, symbol: str, qty: int, now=None) -> int:
+        """SELL qty at market, SMART-routed, regular hours only. Returns the
+        order id. The manual exit for a held position after a failed hard-stop
+        flatten: no quote is needed, so it works with the desk down. Outside
+        09:30-16:00 ET no market order exists and this refuses; use
+        `exit_limit` with a fresh quote there."""
+        from ib_async import MarketOrder, Stock
+
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        if qty <= 0:
+            raise ValueError("exit_market sells a long; qty must be > 0")
+        if not in_regular_hours(now):
+            raise RuntimeError("no market orders exist outside regular hours; "
+                               "use the limit exit with a fresh quote")
+        stock = Stock(symbol, "SMART", "USD")
+        self.ib.qualifyContracts(stock)
+        order = MarketOrder("SELL", qty)
+        order.tif = "DAY"
+        order.transmit = True
+        order.orderId = self.ib.client.getReqId()
+        self.ib.placeOrder(stock, order)
+        self.last_exit_order_id = order.orderId
+        return order.orderId
+
     def _bracket(self, intent: EntryIntent):
         """Build the three legs by hand rather than via `ib.bracketOrder`.
 
@@ -544,7 +569,7 @@ class PaperTrader:
         bid) - it sweeps the levels up to your cap and fills immediately".
         Prices never come from this session, so the quote is injected.
         """
-        from ib_async import LimitOrder, MarketOrder
+        from ib_async import LimitOrder, MarketOrder, Stock
 
         if self.ib is None:
             raise RuntimeError("not connected")
@@ -558,6 +583,14 @@ class PaperTrader:
             if qty <= 0:
                 continue        # long-only book; a short here is not ours
             sym = pos.contract.symbol
+            # The sell goes on a SMART contract, never on `pos.contract`: the
+            # position record names the listing exchange (NASDAQ), and a market
+            # order placed on it is DIRECT-ROUTED, which the API's precautionary
+            # settings reject (error 10311, GRML x62 on 2026-09-22 — the stop had
+            # already been cancelled, so the hard stop left the position naked).
+            stock = Stock(sym, "SMART", "USD")
+            if hasattr(self.ib, "qualifyContracts"):
+                self.ib.qualifyContracts(stock)
             if rth:
                 order = MarketOrder("SELL", qty)
             else:
@@ -571,7 +604,7 @@ class PaperTrader:
                 order.outsideRth = True
             order.tif = "DAY"
             order.orderId = self.ib.client.getReqId() if getattr(self.ib, "client", None) else 0
-            self.ib.placeOrder(pos.contract, order)
+            self.ib.placeOrder(stock, order)
             done.append(f"{sym} x{qty} {order.orderType}")
             self.last_flatten.append({"symbol": sym, "qty": qty, "order_id": order.orderId,
                                       "type": order.orderType,
