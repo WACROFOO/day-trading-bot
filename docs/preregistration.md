@@ -392,9 +392,9 @@ is an independence-assuming figure, and these pairs are not independent.
 | when does trailing begin | at the entry fill; the first high considered is the first print after `orders.fill_ts` | `Runner.trail_stops`, `ledger.high_since` |
 | what is "the high" | the higher of the 10-second bar highs and the quote-tick **bids** the desk wrote since the fill; the last-trade price is not used | `ledger.high_since` |
 | how often does the stop move | every runner loop, 5 s, after the fill sync; only when high − 1 R/share is at least one cent above the resting stop | `scripts/exercise.py` `manage_exits` |
-| what does a move do at the broker | re-prices the resting stop leg in place: same order id, new trigger, so the broker holds a stop at every instant | `PaperTrader.move_stop` |
+| what does a move do at the broker | re-prices the resting stop leg in place when the leg carries no OCA group (a single-leg bracket no longer does); a leg that does carry one is REPLACED — new stop placed, then the old one cancelled — because IBKR refuses a modify on an OCA leg and cancels it (10326, DCOY 2026-09-22 09:36) | `PaperTrader.move_stop`, `PaperTrader._bracket` |
 | a reconnect or restart | `orders.trail_stop` is carried into the adopted record; the next loop continues from the last level, never from the initial stop | `PaperTrader.adopt` |
-| a refused move (leg gone, broker error) | the stop stays where it rests; an `order_events` row names the level it would have reached and why it did not | `Runner.trail_stops` |
+| a refused move (leg gone, broker error) | the stop stays where it rests; an `order_events` row names the level it would have reached and why it did not. **First live read, 2026-09-22: this row was false for an OCA leg — the refused modify cancelled the stop and DCOY x41 held with no exit from 09:36 to 09:58. Since ec8ff72 `Runner.reprotect` places a fresh stop under any filled row whose leg died, at the trailed level, every loop** | `Runner.trail_stops`, `Runner.reprotect` |
 | no tape since the fill | no move; the stop stays at its last level | `ledger.high_since` returns None |
 | what the exit is called | `trail` when the stop that filled had been raised above the initial stop, `stop` otherwise | `PaperTrader.sync` |
 
