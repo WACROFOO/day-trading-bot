@@ -497,3 +497,61 @@ def test_a_raised_stop_that_fills_is_the_trailing_exit():
     t.placed.append(rec)
     t.sync()
     assert rec.exit_reason == "trail" and rec.exit_price == 4.54
+
+
+# ------------------------------------------------------ 2026-09-22: the stop that died
+def test_a_bracket_without_a_target_has_no_oca_group_so_the_stop_can_be_modified():
+    """DCOY 09:36: IBKR 10326 "OCA group revision is not allowed" cancelled the
+    stop when the trail first moved it. With one exit leg an OCA group has no
+    purpose and forbids the modify."""
+    pytest.importorskip("ib_async")
+
+    class Client:
+        _n = 100
+        def getReqId(self): Client._n += 1; return Client._n
+
+    class FakeIB:
+        client = Client()
+
+    t = PaperTrader(); t.ib = FakeIB()
+    intent = EntryIntent(symbol="TEST", trigger=6.0, stop=5.5, shares=41, dollar_risk=20.0,
+                         plan_allowed=True, verdict="REVIEW", session="regular")
+    parent, stop_leg, target_leg = t._bracket(intent)
+    assert target_leg is None and not getattr(stop_leg, "ocaGroup", "") and stop_leg.parentId == parent.orderId
+    with_target = EntryIntent(symbol="TEST", trigger=6.0, stop=5.5, shares=41, dollar_risk=20.0,
+                              plan_allowed=True, verdict="REVIEW", session="regular", target=7.0)
+    _, stop2, target2 = t._bracket(with_target)
+    assert target2 is not None and stop2.ocaGroup == target2.ocaGroup != ""
+
+
+def test_move_stop_on_an_oca_leg_places_the_new_stop_before_cancelling_the_old():
+    pytest.importorskip("ib_async")
+    from ib_async import StopOrder
+    sent, cancelled = [], []
+    stop = StopOrder("SELL", 41, 5.50); stop.orderId = 11; stop.parentId = 10; stop.ocaGroup = "px-old"
+
+    class Status:
+        status = "PreSubmitted"
+
+    class Trade:
+        order = stop
+        contract = type("C", (), {"symbol": "DCOY"})()
+        orderStatus = Status()
+
+    class Client:
+        _n = 200
+        def getReqId(self): Client._n += 1; return Client._n
+
+    class FakeIB:
+        client = Client()
+        def trades(self): return [Trade()]
+        def qualifyContracts(self, c): return [c]
+        def placeOrder(self, c, o): sent.append(o)
+        def cancelOrder(self, o): cancelled.append(o)
+
+    t = PaperTrader(); t.ib = FakeIB()
+    rec = PlacedOrder(symbol="DCOY", parent_id=10, stop_id=11, trigger=5.98, stop=5.50, shares=41)
+    new_id = t.move_stop(rec, 5.52)
+    assert sent and sent[0].orderType == "STP" and sent[0].auxPrice == 5.52 and sent[0].totalQuantity == 41
+    assert not getattr(sent[0], "ocaGroup", "")
+    assert cancelled == [stop] and rec.stop_id == new_id != 11 and rec.trail_stop == 5.52

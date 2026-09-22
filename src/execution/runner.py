@@ -554,6 +554,36 @@ class Runner:
         self.conn.commit()
         return done
 
+    # ------------------------------------------------- re-protection
+    def reprotect(self) -> list[str]:
+        """TRADE only. A filled position whose stop leg is dead (cancelled,
+        rejected, flagged) gets a fresh stop from the runner at the level it
+        should have — the trailed level if there is one, never below the
+        initial stop — for the quantity actually held. Flagging alone left
+        DCOY x41 without an exit for eleven minutes on 2026-09-22 while the
+        runner printed NO WORKING EXIT every five seconds."""
+        if self.mode != "TRADE" or not hasattr(self.trader, "place_stop"):
+            return []
+        done: list[str] = []
+        by_parent = {p.parent_id: p for p in getattr(self.trader, "placed", [])}
+        for o in L.unprotected_positions(self.conn):
+            qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+            level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))
+            try:
+                new_id = self.trader.place_stop(o["symbol"], qty, level, ref=o["decision_id"])
+            except Exception as exc:                        # noqa: BLE001
+                L.add_order_event(self.conn, o["order_id"],
+                                  f"reprotect: placing a stop at {level} x{qty} raised {exc!r}; still unprotected")
+                continue
+            L.set_new_stop_leg(self.conn, o["order_id"], stop_id=new_id, level=level, qty=qty)
+            rec = by_parent.get(o["parent_id"])
+            if rec is not None:
+                rec.stop_id, rec.stop_status, rec.protected, rec.stop_qty = new_id, "Submitted", True, float(qty)
+                rec.events.append(f"re-protected: new stop {new_id} at {level} x{qty}")
+            done.append(f"{o['symbol']} x{qty}: new stop {new_id} at {level:.2f} (old leg was {o['stop_status']})")
+        self.conn.commit()
+        return done
+
     # ------------------------------------------------- the trailing stop
     def trail_stops(self) -> list[str]:
         """TRADE only. Amendment A3: for every filled position whose stop rests

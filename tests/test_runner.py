@@ -493,3 +493,28 @@ def test_an_entry_the_broker_no_longer_reports_after_a_restart_is_resolved_not_k
     rows = journal.execute("SELECT status FROM orders WHERE fill_price IS NULL").fetchall()
     assert rows and all(x["status"] == "NotFilled" for x in rows)
     assert r2.unreconciled == []                              # a resolved ghost is not a bar on entries
+
+
+def test_a_held_position_whose_stop_died_gets_a_fresh_stop_from_the_runner(journal):
+    """DCOY 2026-09-22 09:36: the trail's modify cancelled the stop; the runner
+    printed NO WORKING EXIT for eleven minutes. Now it places one."""
+    class ProtectingTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.stops = []
+        def place_stop(self, symbol, qty, stop_price, ref=None):
+            self.stops.append((symbol, qty, stop_price)); return 900 + len(self.stops)
+    t = ProtectingTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert r.reprotect() == []                                    # a working stop is left alone
+    rec.stop_status, rec.protected, rec.filled_qty = "Cancelled", False, 41
+    L.set_trail(journal, o["order_id"], trail_stop=round(o["stop"] + 0.02, 2), high=None); journal.commit()
+    r.sync_fills()
+    o1 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o1["protected"] == 0 and o1["stop_status"] == "Cancelled"
+    lines = r.reprotect()
+    assert len(lines) == 1 and t.stops == [(rec.symbol, 41, round(o["stop"] + 0.02, 2))], (lines, t.stops)
+    o2 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o2["protected"] == 1 and o2["stop_status"] == "Submitted" and o2["stop_id"] == 901
+    assert rec.stop_id == 901 and rec.protected is True
+    assert r.reprotect() == []                                    # once

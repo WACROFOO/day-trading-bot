@@ -333,7 +333,13 @@ class PaperTrader:
         stop_leg = StopOrder("SELL", intent.shares, intent.stop)
         stop_leg.orderId = self.ib.client.getReqId()
         stop_leg.parentId = parent.orderId
-        stop_leg.ocaGroup = oca
+        # An OCA group only means something with TWO exit legs. With the stop
+        # alone it did nothing for the bracket and forbade every later
+        # modification: IBKR error 10326 "OCA group revision is not allowed"
+        # CANCELLED the stop when the A3 trail first moved it (DCOY,
+        # 2026-09-22 09:36, 41 shares held with no exit for eleven minutes).
+        if target_leg is not None:
+            stop_leg.ocaGroup = oca
         stop_leg.tif = "DAY"
         stop_leg.outsideRth = ext
         if intent.ref:
@@ -456,11 +462,42 @@ class PaperTrader:
             raise RuntimeError(f"stop leg {rec.stop_id} is {leg.orderStatus.status}; nothing to move")
         order = leg.order
         was = order.auxPrice
+        if getattr(order, "ocaGroup", ""):
+            # A leg inside an OCA group cannot be modified (10326). Replace it:
+            # the new stop is working BEFORE the old one is cancelled, so the
+            # position is never without an exit; the window in which both
+            # rest is one round trip to the broker.
+            qty = int(order.totalQuantity)
+            new_id = self.place_stop(rec.symbol, qty, round(new_stop, 2), ref=getattr(order, "orderRef", None))
+            self.ib.cancelOrder(order)
+            rec.stop_id = new_id
+            rec.trail_stop = round(new_stop, 2)
+            rec.events.append(f"stop replaced {was} -> {rec.trail_stop} (A3 trail; OCA leg cannot be modified) "
+                              f"new leg {new_id}")
+            return new_id
         order.auxPrice = round(new_stop, 2)
         order.transmit = True
         self.ib.placeOrder(leg.contract, order)
         rec.trail_stop = round(new_stop, 2)
         rec.events.append(f"stop moved {was} -> {rec.trail_stop} (A3 trail)")
+        return order.orderId
+
+    def place_stop(self, symbol: str, qty: int, stop_price: float, ref: Optional[str] = None) -> int:
+        """A standalone protective stop for a position already held. Used to
+        re-protect a filled position whose stop leg died, and to replace an
+        OCA-grouped leg the broker will not let us modify."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        from ib_async import Stock, StopOrder
+        stock = Stock(symbol, "SMART", "USD")
+        self.ib.qualifyContracts(stock)
+        order = StopOrder("SELL", qty, round(stop_price, 2))
+        order.orderId = self.ib.client.getReqId() if getattr(self.ib, "client", None) else 0
+        order.tif = "DAY"
+        order.transmit = True
+        if ref:
+            order.orderRef = ref
+        self.ib.placeOrder(stock, order)
         return order.orderId
 
     def adopt(self, rows) -> int:

@@ -1105,6 +1105,27 @@ def record_candidates(conn: sqlite3.Connection, ts, source: str, rows) -> int:
     return n
 
 
+def set_new_stop_leg(conn: sqlite3.Connection, order_id: int, *, stop_id: int, level: float,
+                     qty: Optional[float]) -> None:
+    """A fresh protective stop was placed for a held position (the old leg died
+    or could not be modified). The row is protected again at `level`."""
+    conn.execute("""UPDATE orders SET stop_id=?, trail_stop=CASE WHEN ? > stop THEN ? ELSE trail_stop END,
+                    stop_status='Submitted', protected=1, stop_qty=COALESCE(?, stop_qty), updated_at=?
+                    WHERE order_id=?""", (stop_id, level, level, qty, _now(), order_id))
+    add_order_event(conn, order_id, f"new protective stop {stop_id} placed at {level}"
+                    + (f" x{qty:g}" if qty else ""))
+
+
+def unprotected_positions(conn: sqlite3.Connection) -> list[sqlite3.Row]:
+    """Filled, un-exited bracket rows whose stop leg is dead or flagged: the
+    rows `Runner.reprotect` places a fresh stop for. Monitored (stop-less by
+    design) rows are not included."""
+    return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND exit_ts IS NULL
+                           AND stop_id IS NOT NULL AND protected=0
+                           AND status NOT IN ('Cancelled', 'ApiCancelled', 'Inactive', 'Closed',
+                                              'NotFilled', 'ExitPending', 'ExitFailed')""").fetchall()
+
+
 def set_stop_qty(conn: sqlite3.Connection, order_id: int, qty: float) -> None:
     conn.execute("UPDATE orders SET stop_qty=?, updated_at=? WHERE order_id=?", (qty, _now(), order_id))
 

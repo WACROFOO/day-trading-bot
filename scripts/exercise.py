@@ -340,6 +340,9 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
     guarded("fill sync", runner.sync_fills)
     for line in guarded("reconcile", runner.reconcile_positions) or []:
         print(f"  {now_et:%H:%M:%S}  {BAD}RECONCILE{END} {line}")
+    # A held position whose stop died gets a fresh one from the runner.
+    for line in guarded("re-protect", runner.reprotect) or []:
+        print(f"  {now_et:%H:%M:%S}  {OK}PROTECT{END}  {line}")
     # The monitored stop lives here and nowhere else: for a `queued`-verdict
     # pre-market entry this call IS the stop.
     for line in guarded("monitored stop", runner.watch_stops) or []:
