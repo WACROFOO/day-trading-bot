@@ -47,6 +47,34 @@ def _db(args) -> str:
 
 
 # ------------------------------------------------------------------ report
+def print_trades(conn, last: int | None = None) -> None:
+    """The trades as trades: entry, exit, reason, R. Held rows say so."""
+    rows = L.trade_rows(conn)
+    if last:
+        rows = rows[-last:]
+    closed = [r for r in rows if r["closed"]]
+    head = f"{BOLD}TRADES{END}  {len(rows)} filled · {len(closed)} closed"
+    if closed:
+        tot = round(sum(r["r"] or 0.0 for r in closed), 2)
+        wins = sum(1 for r in closed if (r["r"] or 0) > 0)
+        head += f" · {wins} won · net {tot:+.2f} R (planned R, no costs)"
+    print(f"\n{head}")
+    if not rows:
+        print("  no fills"); return
+    print(f"  {'#':>3} {'day':<10} {'in':>5} {'sym':<6}{'qty':>5}{'fill':>8}{'out':>6}{'exit':>8}  {'reason':<14}{'$':>9}{'R':>7}")
+    for r in rows:
+        if r["closed"]:
+            out_t, px = r["exit_ts"][11:16], f"{r['exit_price']:.2f}"
+            who = f" ({r['exit_confirmed_by']})" if r["exit_confirmed_by"] else ""
+            reason = f"{r['exit_reason'] or '—'}{who}"[:14]
+            pnl, rr = f"{r['pnl']:+.2f}", f"{r['r']:+.2f}" if r["r"] is not None else "—"
+        else:
+            out_t, px, pnl, rr = "—", "—", "—", "—"
+            reason = {"ExitPending": "sell working", "ExitFailed": "HELD, no exit"}.get(r["status"], "HELD")
+        print(f"  {r['order_id']:>3} {r['fill_ts'][:10]:<10} {r['fill_ts'][11:16]:>5} {r['symbol']:<6}{r['qty']:>5}"
+              f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}")
+
+
 def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> None:
     f = L.funnel(conn)
     rep = replay.check(conn)
@@ -135,6 +163,8 @@ def report(conn, *, source: str, synthetic: bool, tape: dict | None = None) -> N
     lamp = f"{OK}✓{END}" if not viol else f"{BAD}✗{END}"
     print(f"  {lamp} R0 check: {f['fills']} fill(s), realised risk = qty × (fill − INITIAL stop) on all"
           + (f" but {len(viol)}: " + ", ".join(f"#{v['order_id']} {v['symbol']}" for v in viol) if viol else ""))
+
+    print_trades(conn)
 
     st = L.get_state(conn)
     print(f"\n{BOLD}ALIGNMENT{END}  (decision tape → fill → fill tape)")
@@ -542,6 +572,7 @@ def cmd_review(args) -> int:
     for r in L.alignment_rows(conn)[-10:]:
         print(f"  {r['fill_ts'][11:16]} {r['symbol']:<6} trigger {r['trigger']:.2f} fill {r['fill_price']:.2f} "
               f"slip {r['slippage_ratio'] if r['slippage_ratio'] is not None else '—'}")
+    print_trades(conn, last=10)
     print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows)")
     for k, v in ctl.items():
         print(f"  {k:<12} n={v['n']:<4} mean {v['mean_R'] if v['mean_R'] is not None else '—'}  "

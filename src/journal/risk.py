@@ -46,13 +46,15 @@ def _today_et() -> str:
 
 def closed_trades(conn: sqlite3.Connection, day: str) -> list[dict]:
     """Orders filled and exited on `day`, oldest first, with realised R."""
-    rows = conn.execute("""SELECT order_id, symbol, fill_price, exit_price, shares, planned_risk,
+    rows = conn.execute("""SELECT order_id, symbol, fill_price, exit_price, shares, filled_qty, planned_risk,
                                   fill_ts, exit_ts FROM orders
                            WHERE fill_price IS NOT NULL AND exit_price IS NOT NULL
+                             AND status NOT IN ('ExitPending', 'ExitFailed')
                              AND substr(exit_ts, 1, 10) = ? ORDER BY exit_ts""", (day,)).fetchall()
     out = []
     for r in rows:
-        pnl = (r["exit_price"] - r["fill_price"]) * r["shares"]
+        qty = r["filled_qty"] if r["filled_qty"] else r["shares"]
+        pnl = (r["exit_price"] - r["fill_price"]) * qty
         out.append({**dict(r), "pnl": round(pnl, 2),
                     "r": round(pnl / r["planned_risk"], 4) if r["planned_risk"] else None})
     return out

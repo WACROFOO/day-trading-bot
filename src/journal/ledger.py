@@ -1003,6 +1003,26 @@ def flag_manual(conn: sqlite3.Connection, order_id: int, text: str) -> None:
 
 
 
+def trade_rows(conn: sqlite3.Connection) -> list[dict]:
+    """Every filled order with its exit, oldest first: entry, exit, reason,
+    who confirmed a manual exit, dollars and R. R is against the PLANNED
+    risk (trigger − initial stop) × shares, the exercise's unit; the dollar
+    figure uses the quantity actually filled. Rows still held carry exit
+    None. Until 2026-09-22 neither `report` nor `review` printed this, and
+    "how did the trades do" had no answer in any tool output."""
+    rows = conn.execute("""SELECT order_id, symbol, fill_ts, fill_price, exit_ts, exit_price, exit_reason,
+                                  exit_confirmed_by, status, shares, filled_qty, planned_risk, stop, trail_stop
+                           FROM orders WHERE fill_price IS NOT NULL ORDER BY fill_ts""").fetchall()
+    out = []
+    for r in rows:
+        qty = int(r["filled_qty"]) if r["filled_qty"] else int(r["shares"])
+        closed = r["exit_price"] is not None and r["status"] not in ("ExitPending", "ExitFailed")
+        pnl = round((r["exit_price"] - r["fill_price"]) * qty, 2) if closed else None
+        rr = round(pnl / r["planned_risk"], 2) if closed and r["planned_risk"] else None
+        out.append({**dict(r), "qty": qty, "closed": closed, "pnl": pnl, "r": rr})
+    return out
+
+
 def alignment_rows(conn: sqlite3.Connection) -> list[dict]:
     """Per fill: what the desk saw at the decision, what IBKR filled, what the
     desk saw at the fill, and the seconds between IBKR's fill stamp and the

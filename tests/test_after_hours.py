@@ -142,6 +142,33 @@ def test_stuck_lists_held_positions(held):
     assert r.returncode == 0 and "filled" in r.stdout
 
 
+def test_the_report_and_the_review_print_each_trade_with_its_exit_and_r(held):
+    """2026-09-22: three trades, and no tool output said how any of them
+    ended. TRADES lists entry, exit, reason and planned R per row; a held
+    row says HELD; an ExitFailed row says it has no exit."""
+    db, c, t = held
+    oid = L.stuck_orders(c)[0]["order_id"]
+    o = c.execute("SELECT * FROM orders WHERE order_id=?", (oid,)).fetchone()
+    rows = L.trade_rows(c)
+    assert len(rows) == 1 and rows[0]["closed"] is False and rows[0]["r"] is None
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "review"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 0 and "TRADES" in r.stdout and "HELD" in r.stdout, r.stdout[-800:]
+    L.record_exit(c, oid, reason="hard_stop", price=None, ts="2026-09-01T15:30:00Z", confirmed=False, exit_order_id=901)
+    L.exit_failed(c, oid, status="Inactive"); c.commit()
+    assert L.trade_rows(c)[0]["closed"] is False
+    exit_px = round(o["fill_price"] + 2 * (o["fill_price"] - o["stop"]), 2)      # a +2R exit
+    L.record_exit(c, oid, reason="manual_market", price=exit_px, ts="2026-09-01T15:40:00Z",
+                  confirmed_by="ayman", confirmed=True); c.commit()
+    row = L.trade_rows(c)[0]
+    assert row["closed"] is True and abs(row["r"] - 2.0) < 0.06, row
+    assert row["pnl"] == round((exit_px - o["fill_price"]) * row["qty"], 2)
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "report"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 0, r.stderr[-800:]
+    assert "TRADES" in r.stdout and "1 closed" in r.stdout and "manual_market" in r.stdout and "1 won" in r.stdout
+
+
 def test_a_confirmed_exit_records_who_confirmed():
     c = L.connect(":memory:")
     build_session(FIXTURE, journal=c)
