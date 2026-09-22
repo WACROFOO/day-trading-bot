@@ -529,6 +529,57 @@ def cmd_accept_a1(args) -> int:
     return 0
 
 
+def cmd_missed(args) -> int:
+    """What the plans the runner did NOT take went on to do, next to the ones
+    it did. Per row and per reason. Fill at the trigger, exits at their
+    level, no slippage, no costs, no halts: an upper bound on what was
+    'missed', never a P&L. Backfill rows are listed but kept out of the sums."""
+    conn = L.connect(_db(args))
+    day = args.day
+    if day is None:
+        row = conn.execute("SELECT MAX(substr(ts_et,1,10)) FROM decisions").fetchone()
+        day = row[0] if row and row[0] else None
+    if day is None:
+        print("no decisions in the ledger"); return 1
+    rows = controls.per_decision(conn, bars.from_ledger(conn), day)
+    if not rows:
+        print(f"no decisions on {day}"); return 1
+    print(f"\n{BOLD}NOT TAKEN vs TAKEN · {day}{END}  {len(rows)} armed plans · fill at trigger, no slippage, no costs · planned R")
+    print(f"  {'ET':>5} {'sym':<6}{'verdict':<8}{'outcome':<11}{'trig':>7}{'stop':>7} {'hit':<4}{'first':<12}{'MFE':>6}{'MAE':>6}{'strat':>7}{'trail':>7}  reason")
+    for d in rows:
+        if not args.all and d["outcome"] == "SUPPRESSED" and not d["trigger_hit"]:
+            continue                                  # killed and never triggered: noise unless --all
+        hit = "—" if d["trigger_hit"] is None else ("y" if d["trigger_hit"] else "n")
+        f = lambda v, w=6: f"{v:>{w}.2f}" if v is not None else f"{'—':>{w}}"   # noqa: E731
+        tag = " [backfill]" if d["backfill"] else ""
+        print(f"  {d['ts_et'][11:16]:>5} {d['symbol']:<6}{d['verdict']:<8}{d['outcome']:<11}"
+              f"{f(d['trigger'], 7)}{f(d['stop'], 7)} {hit:<4}{(d['first_hit'] or '—'):<12}"
+              f"{f(d['mfe_r_planned'])}{f(d['mae_r_planned'])}{f(d['strategy_r'], 7)}{f(d['trail_r'], 7)}"
+              f"  {controls.reason_key(d)[:52]}{tag}")
+    # per reason, prospective rows only
+    from collections import defaultdict
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for d in rows:
+        if not d["backfill"]:
+            groups[controls.reason_key(d)].append(d)
+    print(f"\n{BOLD}BY REASON{END}  (prospective rows only; 'trig' = plans whose trigger the tape touched; means over triggered rows)")
+    print(f"  {'n':>4}{'trig':>6}{'strat mean':>12}{'strat sum':>11}{'trail mean':>12}{'trail sum':>11}{'win':>6}  reason")
+    def _m(vs):
+        return f"{sum(vs)/len(vs):>+12.2f}" if vs else f"{'—':>12}"
+    def _s(vs):
+        return f"{sum(vs):>+11.2f}" if vs else f"{'—':>11}"
+    for key, ds in sorted(groups.items(), key=lambda kv: -len(kv[1])):
+        trig = [d for d in ds if d["trigger_hit"] == 1]
+        st = [d["strategy_r"] for d in trig if d["strategy_r"] is not None]
+        tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
+        win = f"{sum(1 for x in st if x > 0)/len(st):>6.0%}" if st else f"{'—':>6}"
+        print(f"  {len(ds):>4}{len(trig):>6}{_m(st)}{_s(st)}{_m(tr)}{_s(tr)}{win}  {key}")
+    print(f"\n{DIM}'strat' = fixed +2R target, −1R stop, else close (the strategy series). 'trail' = A3 trail_1r, bar-ordered.")
+    print(f"A refused plan scored here assumes a fill at the trigger the runner never sent: an upper bound, not a trade.")
+    print(f"Killed plans that never touched their trigger are hidden; pass --all to see them.{END}\n")
+    return 0
+
+
 def cmd_review(args) -> int:
     """Everything so far, across sessions. The continuous-improvement view:
     which gate kills most, which refusal dominates, how the strategy stands
@@ -641,6 +692,9 @@ def main(argv=None) -> int:
     r = sub.add_parser("replay"); r.add_argument("fixture"); r.add_argument("--risk", type=float, default=20.0)
     sub.add_parser("check"); sub.add_parser("report"); sub.add_parser("advance"); sub.add_parser("state")
     sub.add_parser("stuck"); sub.add_parser("review")
+    ms = sub.add_parser("missed", help="what the plans not taken went on to do, per row and per reason")
+    ms.add_argument("--day", help="ET date, e.g. 2026-09-22 (default: the latest day in the ledger)")
+    ms.add_argument("--all", action="store_true", help="also list killed plans whose trigger was never touched")
     ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
     ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     ah.add_argument("--market", action="store_true", help="SELL at market, SMART-routed, 09:30-16:00 ET only")
@@ -655,6 +709,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
+            "missed": cmd_missed,
             "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
             "retag-backfill": cmd_retag_backfill}[args.cmd](args)
 

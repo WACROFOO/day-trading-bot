@@ -20,3 +20,23 @@ def test_replay_then_check_on_the_fixture(tmp_path):
     chk = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "check"],
                          cwd=ROOT, capture_output=True, text=True)
     assert chk.returncode == 0 and "5/5 reproduced" in chk.stdout
+
+
+def test_missed_scores_every_armed_plan_of_the_day_and_groups_by_reason(tmp_path):
+    """2026-09-22: three taken, 18 refused, 72 killed, and no tool output on
+    what the refused and killed plans went on to do. `missed` scores each
+    one like a taken trade (fill at trigger, planned R) and sums per reason,
+    backfill rows excluded from the sums."""
+    db = tmp_path / "j.sqlite"
+    out = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "replay",
+                          str(FIXTURE), "--risk", "20"], cwd=ROOT, capture_output=True, text=True)
+    assert out.returncode == 0, out.stderr
+    ms = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "missed", "--all"],
+                        cwd=ROOT, capture_output=True, text=True)
+    assert ms.returncode == 0, ms.stderr[-1200:]
+    assert "NOT TAKEN vs TAKEN · 2026-09-01" in ms.stdout and "BY REASON" in ms.stdout
+    assert "killed: pillars" in ms.stdout                    # the fixture's A5 kills, scored
+    assert "upper bound, not a trade" in ms.stdout
+    none = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "missed", "--day", "2031-01-01"],
+                          cwd=ROOT, capture_output=True, text=True)
+    assert none.returncode == 1 and "no decisions on 2031-01-01" in none.stdout

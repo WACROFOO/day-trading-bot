@@ -57,6 +57,7 @@ the raw series, and the reader is told that.
 from __future__ import annotations
 
 import sqlite3
+import json
 from statistics import mean, median
 
 from . import ledger as L
@@ -178,6 +179,66 @@ def exit_variants(conn: sqlite3.Connection, bars_by_symbol: dict,
             if res["r"] is not None:
                 out[v].append({"decision_id": r["decision_id"], "symbol": r["symbol"], **res})
     return out
+
+
+def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None = None) -> list[dict]:
+    """Every armed plan of `day` (or all days), whatever the runner did with
+    it, with what the tape did next: was the trigger touched, best and worst
+    excursion in planned R, the strategy series' R (fixed +2R target, as
+    `series()` scores it) and the A3 trail_1r R from `simulate_exit`. This is
+    the "missed entry" question asked of the ledger instead of memory: a
+    REFUSED or SUPPRESSED row scored exactly like a TAKEN one, fill at the
+    trigger, no slippage, no costs. Backfill rows are returned flagged so
+    the caller can keep them out of any statistic."""
+    from . import actuals as A
+    where = "WHERE substr(d.ts_et, 1, 10) = ?" if day else ""
+    rows = conn.execute(f"""
+        SELECT d.decision_id, d.symbol, d.ts_et, d.session, d.verdict, d.outcome, d.killed_by,
+               d.refusal_reasons_json, d.plan_allowed, d.data_status, d.trigger, d.stop, d.target, d.last,
+               a.risk_share, a.trigger_hit, a.trigger_hit_ts, a.first_hit, a.c_close,
+               a.mfe_r_planned, a.mae_r_planned, a.bars_available
+        FROM decisions d LEFT JOIN actuals a USING(decision_id)
+        {where} ORDER BY d.ts_et""", (day,) if day else ()).fetchall()
+    out: list[dict] = []
+    for r in rows:
+        d = dict(r)
+        d["backfill"] = bool(r["data_status"] and r["data_status"].endswith("-backfill"))
+        d["has_actuals"] = r["risk_share"] is not None
+        rps = r["risk_share"]
+        d["strategy_r"] = d["trail_r"] = d["trail_exit"] = None
+        if rps and rps > 0 and r["trigger_hit"] == 1 and r["c_close"] is not None:
+            if r["first_hit"] == "stop":
+                d["strategy_r"] = -1.0
+            elif r["first_hit"] == "target" and r["target"]:
+                d["strategy_r"] = round((r["target"] - r["trigger"]) / rps, 4)
+            else:
+                d["strategy_r"] = round((r["c_close"] - r["trigger"]) / rps, 4)
+            bars = bars_by_symbol.get(r["symbol"], [])
+            if bars and r["trigger_hit_ts"]:
+                dd = r["ts_et"][:10]
+                fwd = [b for b in A.forward(bars, A._utc(r["ts_et"]))
+                       if A._bar_dt(b[0]).astimezone(L.ET).date().isoformat() == dd]
+                entry = [b for b in fwd if b[0] >= r["trigger_hit_ts"]]
+                if entry:
+                    res = simulate_exit(entry, float(r["trigger"]), float(r["stop"]), "trail_1r")
+                    d["trail_r"], d["trail_exit"] = res["r"], res["exit"]
+        out.append(d)
+    return out
+
+
+def reason_key(d: dict) -> str:
+    """One short label per row: the kill gate for a suppressed plan, the first
+    refusal reason for a refused one, the outcome otherwise."""
+    if d["outcome"] == "SUPPRESSED":
+        return f"killed: {d['killed_by'] or '?'}"
+    if d["outcome"] == "REFUSED":
+        try:
+            reasons = json.loads(d["refusal_reasons_json"] or "[]")
+        except ValueError:
+            reasons = []
+        first = reasons[0] if reasons else "?"
+        return "refused: " + first.split(" — ")[0].split(":")[0].split(";")[0][:44]
+    return d["outcome"]
 
 
 def exit_summary(conn: sqlite3.Connection, bars_by_symbol: dict) -> dict[str, dict]:
