@@ -738,7 +738,7 @@ def clean_closed_fills(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     reason, no defect note. The rows the A3 kill rule is read on."""
     return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND status='Closed'
                            AND exit_price IS NOT NULL AND defect_note IS NULL
-                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop')
+                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop', 'stop_enforced')
                            ORDER BY fill_ts""").fetchall()
 
 
@@ -761,7 +761,7 @@ def reconciled_lifecycles(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     A monitored (stop-less) entry does not qualify however it ended."""
     return conn.execute("""SELECT * FROM orders WHERE fill_price IS NOT NULL AND stop_id IS NOT NULL
                            AND protected=1 AND status='Closed' AND exit_price IS NOT NULL
-                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop')
+                           AND exit_reason IN ('stop', 'trail', 'target', 'hard_stop', 'stop_enforced')
                            AND COALESCE(stop_status, '') <> ?""", (MANUAL,)).fetchall()
 
 

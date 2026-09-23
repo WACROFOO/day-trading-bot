@@ -266,6 +266,23 @@ class UptrendScanner(Scanner):
                       high, `uptrend_10m` otherwise. This is a LOCAL display
                       choice for this desk and departs from the platform
                       rule quoted above; the two tiles now overlap by design.
+      9. right now,  — 3.2.0 (2026-09-23, measured). `scripts/alerts.py
+         measured       --why WHLR` over the desk's own bars: from 09:22 to
+                      09:45, on a stock moving twenty cents a minute, the ONLY
+                      failing condition on every climbing minute was rule 6 —
+                      the close sat 0.6 % to 2.5 % under the bar's own wick,
+                      and the 0.5 % tolerance called every one of them a
+                      pullback. The rule now reads: the current bar is the
+                      one that printed the window high (or the close is
+                      within the tolerance of it) AND the bar is not red
+                      (close ≥ open). VEEE's 18.20 red bar under an 18.71
+                      high from earlier bars still fails both halves.
+     10. once per leg — 3.2.0, same measurement: the "higher than the
+         bounded        previous alert" test now applies only while that
+                      alert is inside the window. WHLR alerted at 6.79 at
+                      09:13, fell to 4.74 and ran 4.94 → 8.38 from 09:22 with
+                      every condition green at 09:22 and nothing fired: the
+                      old alert price gated a run that began 30 % lower.
       8. once per leg — a repeat alert on the same name needs a NEW LEG:
                       at least one completed minute since the last alert that
                       did not print a higher high (a pause or a pullback),
@@ -286,7 +303,7 @@ class UptrendScanner(Scanner):
         fresh_minutes: int = 3,
         min_volume_5m: float = MIN_VOLUME_5M,
         min_price: float = 1.0,
-        version: str = "3.1.0",
+        version: str = "3.2.0",
         min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
         at_high_tol_pct: float = 0.5,
         min_advance_pct: float = 1.0,
@@ -347,10 +364,16 @@ class UptrendScanner(Scanner):
         volume_ok, _vol_only, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
         at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
         hod = current.session_high
+        cur = bars[-1]                                   # the bar being printed right now
+        this_bar_makes_high = cur.high >= window_high - 1e-9
+        not_red = cur.close >= cur.open
+        at_high_ok = (this_bar_makes_high or current.last >= at_high_floor) and not_red
+        at_high_val = (f"{'hi' if this_bar_makes_high else 'no-hi'}/{'green' if not_red else 'RED'}/"
+                       f"{_round(current.last)}vs{_round(window_high)}")
         return {
             f"move_{self.window_minutes}m_pct": (move_pct >= self.threshold_pct, _round(move_pct)),
             f"fresh_high_{self.fresh_minutes}m": (recent_high is not None and recent_high >= window_high, _round(recent_high)),
-            "at_window_high": (current.last >= at_high_floor, f"{_round(current.last)}≥{_round(at_high_floor)}"),
+            "at_window_high": (at_high_ok, at_high_val),
             f"above_vwap_{self.window_minutes}m": (vwap is not None and current.last >= vwap, _round(vwap)),
             "volume_5m": (volume_ok, current.volume_5m),
             "pillars_passed": (volume_ok, pillars),
@@ -391,6 +414,15 @@ class UptrendScanner(Scanner):
         if prev is not None:
             prev_ts, prev_px = prev
             cutoff = now - timedelta(minutes=self.window_minutes)
+            if prev_ts < cutoff:
+                # 3.2.0, measured: WHLR alerted at 6.79 at 09:13, fell to 4.74
+                # by 09:20 and ran 4.94 → 8.38 from 09:22 — every minute of it
+                # blocked because "higher than the previous alert" had no time
+                # bound. An alert older than the window is a different run;
+                # the once-per-leg rule starts over.
+                prev = None
+        if prev is not None:
+            prev_ts, prev_px = prev
             if not self._new_leg_since(state, prev_ts, cutoff):
                 return []
             if current.last < prev_px * (1.0 + self.min_advance_pct / 100.0):
@@ -399,7 +431,7 @@ class UptrendScanner(Scanner):
         reasons = [
             Reason(f"move_{self.window_minutes}m_pct", _round(move_pct), move_ok, self.threshold_pct),
             Reason(f"fresh_high_{self.fresh_minutes}m", _round(recent_high), fresh_ok, _round(window_high)),
-            Reason("at_window_high", _round(current.last), at_high_ok, _round(at_high_floor)),
+            Reason("at_window_high", c["at_window_high"][1], at_high_ok, "this bar makes the high, not red"),
             Reason("at_hod", at_hod, True, _round(hod)),
             Reason(f"above_vwap_{self.window_minutes}m", _round(current.last), vwap_ok, _round(vwap)),
             Reason("volume_5m", current.volume_5m, volume_ok, self.min_volume_5m),

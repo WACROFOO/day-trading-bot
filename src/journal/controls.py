@@ -248,6 +248,10 @@ def reason_key(d: dict) -> str:
         except ValueError:
             reasons = []
         first = reasons[0] if reasons else "?"
+        if "(A8)" in first:
+            return "refused: A8 entry buffer before the hard stop"
+        if "hard stop" in first and " ET is past" in first:
+            return "refused: past the hard stop"
         return "refused: " + first.split(" — ")[0].split(":")[0].split(";")[0][:44]
     return d["outcome"]
 

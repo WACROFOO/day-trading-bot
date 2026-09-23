@@ -630,3 +630,40 @@ def test_the_brokers_resting_stop_level_corrects_the_ledgers_trail(journal):
     rec.broker_stop_level = round(o["stop"] + 0.10, 2); rec.trail_stop = rec.broker_stop_level
     r.sync_fills()
     assert journal.execute("SELECT trail_stop FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()[0] == round(o["stop"] + 0.10, 2)
+
+
+
+def test_a_resting_stop_the_bid_has_passed_for_fifteen_seconds_is_enforced_by_the_runner(journal):
+    """WHLR 2026-09-23: stop resting at 7.34, tape at 7.05 then 6.99, no fill
+    for fifty minutes. After STOP_ENFORCE_SECONDS below the level the runner
+    cancels the leg and sells at market; the row is ExitPending, reason
+    stop_enforced. A bid back above the level resets the clock."""
+    from datetime import datetime, timedelta, timezone
+    class EnforcingTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.cancelled = []; self.sold = []
+        def cancel_order_id(self, oid): self.cancelled.append(oid); return True
+        def exit_market(self, symbol, qty, now=None):
+            self.sold.append((symbol, qty)); self.last_exit_order_id = 4242; return 4242
+    t = EnforcingTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    stop = float(o["stop"])
+    clock = {"t": datetime(2026, 9, 1, 14, 30, tzinfo=timezone.utc)}          # 10:30 ET, regular hours
+    r.now = lambda: clock["t"]
+    q = {"bid": stop - 0.05, "ask": stop - 0.03}
+    r.quote = lambda s: q
+    assert r.enforce_stops() == []                          # first sighting: the clock starts
+    clock["t"] += timedelta(seconds=10)
+    assert r.enforce_stops() == [] and t.sold == []         # 10 s: not yet
+    q["bid"] = stop + 0.20                                  # the bid recovers: the clock resets
+    assert r.enforce_stops() == []
+    q["bid"] = stop - 0.05
+    assert r.enforce_stops() == []
+    clock["t"] += timedelta(seconds=16)
+    lines = r.enforce_stops()
+    assert len(lines) == 1 and "no fill from the broker" in lines[0] and "MKT" in lines[0], lines
+    assert t.cancelled == [rec.stop_id] and t.sold == [(rec.symbol, int(o["shares"]))]
+    o2 = journal.execute("SELECT status, exit_reason, exit_order_id FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert (o2["status"], o2["exit_reason"], o2["exit_order_id"]) == ("ExitPending", "stop_enforced", 4242)
+    assert r.enforce_stops() == []                          # ExitPending rows are left alone

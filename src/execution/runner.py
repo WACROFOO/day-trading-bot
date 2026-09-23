@@ -32,9 +32,16 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
-from .intent import SPREAD_K, TRAIL_R
+from .intent import SPREAD_K, TRAIL_R, in_regular_hours
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import ET, refusals
+
+# The stop of last resort. WHLR 2026-09-23: the broker's stop rested at 7.34
+# ("PreSubmitted") while the stock printed 7.05 at 09:58 and 6.99 at 10:28,
+# and it did not execute for fifty minutes; only the restart's modify made it
+# fire, at 7.31. A resting stop the tape has passed by this long is not a
+# stop. The runner then cancels it and sells at market itself.
+STOP_ENFORCE_SECONDS = 15.0
 from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
@@ -580,6 +587,63 @@ class Runner:
                               f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px} x{qty} sent "
                               f"(order {exit_id}); fill not yet confirmed")
             done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+        self.conn.commit()
+        return done
+
+    # ------------------------------------------------- the stop of last resort
+    def enforce_stops(self, seconds: float = STOP_ENFORCE_SECONDS) -> list[str]:
+        """TRADE only. A resting stop whose level the desk's bid has been
+        below for `seconds` without the broker filling it has failed. The
+        runner cancels that leg and sells at market (regular hours) or at
+        bid − 0.10 (extended hours). Recorded as exit reason `stop_enforced`,
+        ExitPending until the fill is read. A stale or missing quote does
+        nothing: one more loop of exposure beats a sale at a guessed price."""
+        if self.mode != "TRADE":
+            return []
+        below = getattr(self, "_below_since", None)
+        if below is None:
+            below = self._below_since = {}
+        done: list[str] = []
+        now = self.now()
+        for o in L.open_protected(self.conn):
+            # a leg whose status was never read back ("") is still a resting
+            # stop the ledger relies on; only a human-flagged or monitored row is skipped
+            if (o["stop_status"] or "") not in ("", "Submitted", "PreSubmitted", "Triggered"):
+                continue
+            level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))
+            q = self.quote(o["symbol"]) if self.quote else None
+            if not q or q.get("bid") is None:
+                continue
+            bid = float(q["bid"])
+            if bid > level - 0.01:
+                below.pop(o["order_id"], None)
+                continue
+            since = below.setdefault(o["order_id"], now)
+            held_for = (now - since).total_seconds()
+            if held_for < seconds:
+                continue
+            qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+            if o["stop_id"] and hasattr(self.trader, "cancel_order_id"):
+                try:
+                    self.trader.cancel_order_id(int(o["stop_id"]))
+                except Exception as exc:                        # noqa: BLE001
+                    L.add_order_event(self.conn, o["order_id"], f"enforce_stops: cancelling stop leg {o['stop_id']} raised {exc!r}")
+            if in_regular_hours(now) and hasattr(self.trader, "exit_market"):
+                exit_id = self.trader.exit_market(o["symbol"], qty, now=now)
+                px, how = None, "MKT"
+            else:
+                px = self.trader.exit_limit(o["symbol"], qty, bid, offset=0.10, outside_rth=True)
+                exit_id = getattr(self.trader, "last_exit_order_id", None)
+                how = f"LMT {px}"
+            L.record_exit(self.conn, o["order_id"], reason="stop_enforced", price=px,
+                          ts=now, confirmed=False, exit_order_id=exit_id)
+            self._mark_exit_sent(o["parent_id"], exit_id)
+            L.add_order_event(self.conn, o["order_id"],
+                              f"enforce_stops: bid {bid} has been below the resting stop {level} for {held_for:.0f}s and the "
+                              f"broker did not fill it; stop leg {o['stop_id']} cancelled, SELL {how} x{qty} sent (order {exit_id})")
+            done.append(f"{o['symbol']} x{qty}: bid {bid:.2f} below the resting stop {level:.2f} for {held_for:.0f}s, "
+                        f"no fill from the broker — stop cancelled, SELL {how} sent (order {exit_id})")
+            below.pop(o["order_id"], None)
         self.conn.commit()
         return done
 

@@ -183,3 +183,38 @@ def test_conditions_explain_every_minute_and_agree_with_the_rule():
             assert all(ok for ok, _ in gates.values()), c
     red = judged[-1][0]
     assert red["at_window_high"][0] is False, red      # the pullback bar fails "right now"
+
+
+
+def test_a_climbing_bar_with_a_wick_over_its_close_still_fires_3_2_0():
+    """WHLR 2026-09-23 09:22-09:45, measured with alerts.py --why: every
+    climbing minute closed 0.6-2.5 % under its own wick and 3.1.0 called each
+    one a pullback. A bar that prints the window high and closes green is
+    running up right now; a red bar under an earlier high is not."""
+    closes = [4.00 + 0.05 * i for i in range(14)]
+    highs = [c * 1.02 for c in closes]                     # 2 % wicks, every bar makes the high
+    events = run(closes, highs=highs)
+    assert len(events) >= 1, "3.1.0 was silent on this tape"
+    r = next(x for x in events[0].reasons if x.filter == "at_window_high")
+    assert r.passed and r.value.startswith("hi/green")
+    # the VEEE case: red bars under a high printed earlier — silent
+    closes2 = [4.00 + 0.03 * i for i in range(12)] + [4.33, 4.20, 4.18]
+    events2 = run(closes2)
+    stamps = {e.source_ts for e in events2}
+    red = {(T0 + timedelta(minutes=13)).isoformat(), (T0 + timedelta(minutes=14)).isoformat()}
+    assert not (stamps & red)
+
+
+
+def test_an_alert_older_than_the_window_does_not_gate_a_new_run_from_lower_down():
+    """WHLR 09:13 → 09:22, measured: the new run began 30 % under the last
+    alert and stayed silent. A previous alert outside the window is history."""
+    up1 = [4.00 + 0.05 * i for i in range(12)]            # first run, alerts near 4.55
+    drop = [3.60 - 0.02 * i for i in range(14)]           # fourteen minutes down and flat: outside the window
+    up2 = [3.35 + 0.05 * i for i in range(12)]            # second run, from far below the first alert
+    events = run(up1 + drop + up2, highs=[c * 1.002 for c in up1 + drop + up2])
+    stamps = sorted(e.source_ts for e in events)
+    assert len(events) >= 2, [(e.source_ts, e.values.get("last")) for e in events]
+    second_run_start = T0 + timedelta(minutes=len(up1) + len(drop))
+    assert stamps[-1] >= second_run_start
+    assert events[-1].values["last"] < max(up1)           # fired below the first run's alert price

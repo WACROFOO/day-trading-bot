@@ -413,6 +413,10 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
     # pre-market entry this call IS the stop.
     for line in guarded("monitored stop", runner.watch_stops) or []:
         print(f"  {now_et:%H:%M:%S}  {WARN}STOP{END}     {line}")
+    # The stop of last resort: a resting stop the bid has passed by for 15 s
+    # without a fill is cancelled and the runner sells (WHLR 2026-09-23).
+    for line in guarded("stop enforcement", runner.enforce_stops) or []:
+        print(f"  {now_et:%H:%M:%S}  {BAD}STOP ENFORCED{END} {line}")
     # A3: the resting stop follows the high at one initial risk, never down.
     for line in guarded("trailing stop", runner.trail_stops) or []:
         print(f"  {now_et:%H:%M:%S}  {OK}TRAIL{END}    {line}")

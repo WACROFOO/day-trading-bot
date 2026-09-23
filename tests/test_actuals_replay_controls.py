@@ -284,3 +284,19 @@ def test_13b_no_simulated_fill_inside_the_decision_candle(journal, tape):
             d = journal.execute("SELECT ts_et FROM decisions WHERE decision_id=?", (it["decision_id"],)).fetchone()
             hit = journal.execute("SELECT trigger_hit_ts FROM actuals WHERE decision_id=?", (it["decision_id"],)).fetchone()
             assert actuals._bar_dt(hit[0]) > actuals._utc(d[0]) and it["bars_held"] >= 1
+
+
+
+def test_reason_key_names_the_a8_buffer_and_the_hard_stop_instead_of_a_clock_fragment():
+    """2026-09-23 missed: the first A8 refusal read 'refused: 11' — the label
+    was cut at the colon of '11:25 ET'."""
+    import json
+    from journal import controls
+    d = {"outcome": "REFUSED", "killed_by": None,
+         "refusal_reasons_json": json.dumps(["11:25 ET is inside the last 10 minutes before the 11:30 hard stop (A8): "
+                                             "a forced flatten is not the strategy's exit; no new entries"])}
+    assert controls.reason_key(d) == "refused: A8 entry buffer before the hard stop"
+    d["refusal_reasons_json"] = json.dumps(["14:00 ET is past the 11:30 hard stop; no new entries (exits are always allowed)"])
+    assert controls.reason_key(d) == "refused: past the hard stop"
+    d["refusal_reasons_json"] = json.dumps(["Layer 2 not green: verdict WAIT — chart gates"])
+    assert controls.reason_key(d) == "refused: Layer 2 not green"

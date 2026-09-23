@@ -414,7 +414,9 @@ is an independence-assuming figure, and these pairs are not independent.
 | a reconnect or restart | `orders.trail_stop` is carried into the adopted record; the next loop continues from the last level, never from the initial stop | `PaperTrader.adopt` |
 | a refused move (leg gone, broker error) | the stop stays where it rests; an `order_events` row names the level it would have reached and why it did not. **First live read, 2026-09-22: this row was false for an OCA leg — the refused modify cancelled the stop and DCOY x41 held with no exit from 09:36 to 09:58. Since ec8ff72 `Runner.reprotect` places a fresh stop under any filled row whose leg died, at the trailed level, every loop** | `Runner.trail_stops`, `Runner.reprotect` |
 | no tape since the fill | no move; the stop stays at its last level | `ledger.high_since` returns None |
-| what the exit is called | `trail` when the stop that filled had been raised above the initial stop, `stop` otherwise | `PaperTrader.sync` |
+| what the exit is called | `trail` when the stop that filled had been raised above the initial stop, `stop` otherwise; `stop_enforced` when the runner sold because the resting stop did not execute (below) | `PaperTrader.sync`, `Runner.enforce_stops` |
+| a resting stop the tape has passed by | **the stop of last resort (2026-09-23).** WHLR's stop rested at 7.34, `PreSubmitted`, while the tape printed 7.05 and 6.99, and did not execute for about fifty minutes; the broker answered a modify with "revision is disallowed after order has triggered". When the desk's bid has been below the resting level for `STOP_ENFORCE_SECONDS` (15) with no fill, the runner cancels the leg and sells at market in regular hours (bid − 0.10 outside), records `stop_enforced`, ExitPending until the fill. A mitigation for a broker behaviour seen once on paper; every enforcement is printed and counted | `Runner.enforce_stops` |
+| a refused modify | the broker's answer is awaited; a refused level is never recorded; the ledger's trail level follows the broker's resting level (WHLR 2026-09-23: three refused moves had left the ledger at 7.74 with the stop at 7.34) | `PaperTrader.move_stop`, `PaperTrader.sync` |
 
 **The stated cost of the rule (the review's example, adopted here).** A
 trade that reaches +1.2 R has its stop at about +0.2 R; an ordinary 1 R
@@ -648,6 +650,23 @@ by name:
 Recorded 2026-09-22 by the assistant on the owner's delegation. The
 delegation covers these four decisions and nothing else; any further
 amendment goes back to the owner.
+
+**Amendment A10 — the entry instrument (PROPOSED, 2026-09-23, owner's
+decision pending).** The executor's parent order is a plain limit at the
+plan's trigger. WHLR 2026-09-23 09:44: trigger 8.31, tape near 7.50, IBKR
+capped the limit to 7.87 (warning 2161) and filled there — the executor
+bought the pullback at 7.87 with a 0.53 risk, sized for the plan's 0.97,
+while every simulation and every `missed` row assumes the fill at the
+trigger touch. Proposed: a buy STOP-LIMIT resting at the trigger (stop =
+trigger, limit = trigger + a small offset), DAY, cancelled by the runner
+and recorded NOT_FILLED if untriggered after three completed minute bars;
+the resting entry counts as alive for the one-position rule as today. Not
+covered by the 2026-09-22 delegation. Evidence and the full argument:
+`research/paper-exercise/reports/2026-09-23-analysis.md` §2 and §5.
+
+**First refusal under A8 (2026-09-23 11:25 ET).** DCOY 4.01/3.95, refused
+inside the buffer; `missed` scores it +1.00 R at the close on both rules.
+Written down as the buffer's first cost, as the A8 row promised.
 
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
