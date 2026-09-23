@@ -40,6 +40,7 @@ better than the free baselines on the same names at the same instants.
 | Max concurrent positions, enforced | **1** | `Runner._act` refuses an entry while any order is alive — resting, filled and not exited, exit pending, or an unresolved intent (`ledger.positions_alive`). Enforced in code since 2026-09-08; before that it was a value in this table only |
 | Configuration and code, pinned | rules hash + commit | `desk_profile.fingerprint()` and the git commit are stamped on every decision, order and the exercise state |
 | Hard stop, new entries | **11:30 ET** | `PARAMETERS.md` §2 `session_close`, enforced in `src/execution/intent.py` |
+| **A10 — entry instrument** | **buy stop-limit at the trigger**, limit +0.3 % (1 ¢ floor), cancelled after 3 untriggered minutes | Owner instruction 2026-09-23 (§5). A plain limit sent with the tape below the trigger filled at once far under the plan (WHLR 09:44: plan 8.31, fill 7.87). `src/execution/intent.py` `entry_limit`, `ENTRY_TTL_MINUTES`; `Runner.expire_entries` |
 | **A8 — entry buffer before the hard stop** | **no new entry from 11:20 ET** (10 minutes) | LOCAL_ADDITION, reasoned not measured. GRML filled 11:28 on 2026-09-22 and was force-flattened at 11:30: two minutes is a coin flip into a market exit, not the strategy's trade. Owner decision, delegated (§5, 2026-09-22). `ENTRY_CUTOFF` in `src/execution/intent.py`; what the refused plans go on to do is printed by `exercise.py missed` |
 
 ## 3. Phases and sample sizes
@@ -651,17 +652,27 @@ Recorded 2026-09-22 by the assistant on the owner's delegation. The
 delegation covers these four decisions and nothing else; any further
 amendment goes back to the owner.
 
-**Amendment A10 — the entry instrument (PROPOSED, 2026-09-23, owner's
-decision pending).** The executor's parent order is a plain limit at the
-plan's trigger. WHLR 2026-09-23 09:44: trigger 8.31, tape near 7.50, IBKR
+**Amendment A10 — the entry instrument (IN FORCE from the first desk start
+after 2026-09-23 evening; owner's instruction the same afternoon, verbatim:
+*"fix it once at all, i'm starting to get upset"*, given after two days of
+stop and entry defects and taken as the answer to this proposal).** The
+executor's parent order was a plain limit at the plan's trigger. WHLR 2026-09-23 09:44: trigger 8.31, tape near 7.50, IBKR
 capped the limit to 7.87 (warning 2161) and filled there — the executor
 bought the pullback at 7.87 with a 0.53 risk, sized for the plan's 0.97,
 while every simulation and every `missed` row assumes the fill at the
 trigger touch. Proposed: a buy STOP-LIMIT resting at the trigger (stop =
 trigger, limit = trigger + a small offset), DAY, cancelled by the runner
 and recorded NOT_FILLED if untriggered after three completed minute bars;
-the resting entry counts as alive for the one-position rule as today. Not
-covered by the 2026-09-22 delegation. Evidence and the full argument:
+the resting entry counts as alive for the one-position rule as today.
+Built: `PaperTrader._bracket` and the monitored path place a
+`StopLimitOrder` with stop price = trigger and limit = `entry_limit(trigger)`
+(`ENTRY_LIMIT_OFFSET_PCT` 0.3 %, one-cent floor); `Runner.expire_entries`
+cancels an entry untriggered after `ENTRY_TTL_MINUTES` (3) and marks the
+decision NOT_FILLED; both constants in `src/execution/intent.py`, both
+reasoned not measured, printed with the entry. What changes for the
+record: from this start a live fill is at or within the offset of the
+plan's trigger or there is no trade, which is what every simulation has
+assumed all along. Evidence and the argument:
 `research/paper-exercise/reports/2026-09-23-analysis.md` §2 and §5.
 
 **First refusal under A8 (2026-09-23 11:25 ET).** DCOY 4.01/3.95, refused

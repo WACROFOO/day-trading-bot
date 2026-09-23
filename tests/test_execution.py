@@ -679,3 +679,25 @@ def test_working_stops_and_cancel_order_id_read_and_cancel_by_id():
     assert t.working_stops("OTHER") == []
     assert t.cancel_order_id(34) is True and cancelled == [34]
     assert t.cancel_order_id(33) is False                # filled: nothing to cancel
+
+
+
+def test_a10_the_entry_is_a_stop_limit_resting_at_the_trigger():
+    """WHLR 2026-09-23 09:44: a plain limit at 8.31 with the tape at 7.50 was
+    capped to 7.87 and filled there. The parent is now a STOP-LIMIT: stop
+    price = trigger, limit a small offset above; the children are unchanged."""
+    pytest.importorskip("ib_async")
+    from execution.intent import entry_limit
+
+    class FakeClient:
+        def __init__(self): self.n = 100
+        def getReqId(self): self.n += 1; return self.n
+
+    t = PaperTrader()
+    t.ib = type("FakeIB", (), {"client": FakeClient()})()
+    it = intent(target=None)
+    parent, stop_leg, target_leg = t._bracket(it)
+    assert parent.orderType == "STP LMT"
+    assert parent.auxPrice == it.trigger and parent.lmtPrice == entry_limit(it.trigger) > it.trigger
+    assert parent.transmit is False and stop_leg.parentId == parent.orderId
+    assert entry_limit(8.31) == 8.33 and entry_limit(2.00) == 2.01           # 0.3 %, one-cent floor

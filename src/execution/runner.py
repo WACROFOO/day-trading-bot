@@ -32,7 +32,7 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
-from .intent import SPREAD_K, TRAIL_R, in_regular_hours
+from .intent import ENTRY_TTL_MINUTES, SPREAD_K, TRAIL_R, in_regular_hours
 from .ibkr_trader import OrderRefused, PaperTrader
 from .intent import ET, refusals
 
@@ -587,6 +587,47 @@ class Runner:
                               f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px} x{qty} sent "
                               f"(order {exit_id}); fill not yet confirmed")
             done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+        self.conn.commit()
+        return done
+
+    # ------------------------------------------------- A10: an entry that did not trigger
+    def expire_entries(self, ttl_minutes: int = ENTRY_TTL_MINUTES) -> list[str]:
+        """TRADE only. A resting stop-limit entry the tape has not reached
+        within `ttl_minutes` of being placed is cancelled and its decision
+        reads NOT_FILLED: the break the plan waited for did not come, and a
+        resting entry blocks every other name under the one-position rule."""
+        if self.mode != "TRADE":
+            return []
+        done: list[str] = []
+        now = self.now()
+        for r in L.open_orders(self.conn):
+            if r["fill_price"] is not None or not r["parent_id"]:
+                continue
+            if r["status"] in L.DEAD_ENTRY_STATUSES + ("NotFilled", "intent", "UNRESOLVED", "Filled"):
+                continue
+            try:
+                placed = datetime.fromisoformat(str(r["placed_at"]).replace("Z", "+00:00"))
+            except ValueError:
+                continue
+            if placed.tzinfo is None:
+                placed = placed.replace(tzinfo=timezone.utc)
+            age_min = (now - placed).total_seconds() / 60.0
+            if age_min < ttl_minutes:
+                continue
+            if hasattr(self.trader, "cancel_order_id"):
+                try:
+                    self.trader.cancel_order_id(int(r["parent_id"]))
+                except Exception as exc:                        # noqa: BLE001
+                    L.add_order_event(self.conn, r["order_id"], f"expire_entries: cancel raised {exc!r}; left to the broker")
+                    continue
+            L.mark_dead(self.conn, r["order_id"], "Cancelled",
+                        f"entry not triggered within {ttl_minutes} minutes of placing (A10): cancelled by the runner; "
+                        f"the plan's break at {r['trigger']} did not come")
+            for p in getattr(self.trader, "placed", []):
+                if p.parent_id == r["parent_id"]:
+                    p.status = "Cancelled"
+                    p.events.append(f"entry expired after {ttl_minutes} min untriggered (A10)")
+            done.append(f"{r['symbol']} entry {r['trigger']:.2f} not reached in {ttl_minutes} min — cancelled, NOT_FILLED")
         self.conn.commit()
         return done
 

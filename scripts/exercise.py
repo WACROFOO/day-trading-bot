@@ -404,6 +404,9 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
             return None
 
     guarded("fill sync", runner.sync_fills)
+    # A10: a resting entry the tape did not reach in three minutes is cancelled.
+    for line in guarded("entry expiry", runner.expire_entries) or []:
+        print(f"  {now_et:%H:%M:%S}  {DIM}ENTRY EXPIRED{END} {line}")
     for line in guarded("reconcile", runner.reconcile_positions) or []:
         print(f"  {now_et:%H:%M:%S}  {BAD}RECONCILE{END} {line}")
     # A held position whose stop died gets a fresh one from the runner.

@@ -64,7 +64,7 @@ class StopMoveRejected(RuntimeError):
         self.code, self.text, self.triggered = code, text, triggered
 
 
-from .intent import (SIDE, EntryIntent, PlacedOrder, in_regular_hours,
+from .intent import (SIDE, EntryIntent, PlacedOrder, entry_limit, in_regular_hours,
                      refusals)
 
 HOST = os.environ.get("IBKR_PAPER_HOST", "127.0.0.1")
@@ -288,9 +288,11 @@ class PaperTrader:
         if self.ib is None:
             raise RuntimeError("not connected")
 
+        from ib_async import StopLimitOrder
         stock = Stock(intent.symbol, "SMART", "USD")
         self.ib.qualifyContracts(stock)
-        parent = LimitOrder(SIDE, intent.shares, intent.trigger)
+        # A10: rests at the trigger, fills only when the tape reaches it
+        parent = StopLimitOrder(SIDE, intent.shares, entry_limit(intent.trigger), intent.trigger)
         parent.orderId = self.ib.client.getReqId()
         parent.tif = "DAY"
         parent.outsideRth = True
@@ -369,7 +371,7 @@ class PaperTrader:
         did not choose or force every trade into a bracket shape the method
         does not use. Here the target is optional and the stop is not.
         """
-        from ib_async import LimitOrder, StopOrder
+        from ib_async import LimitOrder, StopLimitOrder, StopOrder
 
         oca = f"px-{intent.symbol}-{id(intent)}"
         # Pre-market legs must say so or IBKR holds them for 09:30. In regular
@@ -377,7 +379,12 @@ class PaperTrader:
         # open at 16:00 must die, not follow the name into after hours.
         ext = intent.session == "premarket"
 
-        parent = LimitOrder(SIDE, intent.shares, intent.trigger)
+        # A10 (owner, 2026-09-23): a buy STOP-LIMIT resting at the trigger.
+        # A plain limit at the trigger with the tape below it was marketable
+        # and filled at once, far under the plan (WHLR 09:44: plan 8.31, fill
+        # 7.87). The stop price is the trigger, the limit a small offset above
+        # it; the runner cancels it after ENTRY_TTL_MINUTES untriggered.
+        parent = StopLimitOrder(SIDE, intent.shares, entry_limit(intent.trigger), intent.trigger)
         parent.orderId = self.ib.client.getReqId()
         parent.transmit = False
         parent.tif = "DAY"

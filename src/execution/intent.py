@@ -71,6 +71,23 @@ HARD_STOP = time(11, 30)
 # measured; `exercise.py missed` shows what the plans it refuses went on to do.
 ENTRY_BUFFER_MIN = 10
 ENTRY_CUTOFF = time(11, 20)
+# Amendment A10 (owner, 2026-09-23: "fix it once and for all"): the entry is
+# a buy STOP-LIMIT resting at the plan's trigger, not a plain limit. WHLR
+# 2026-09-23 09:44: trigger 8.31, tape near 7.50, the plain limit was capped
+# by IBKR to 7.87 and filled there — the pullback was bought, not the break,
+# while every simulation assumes the fill at the trigger touch. The stop
+# price is the trigger; the limit sits ENTRY_LIMIT_OFFSET_PCT above it (one
+# cent floor) so a fast tape can still fill without a chase; an entry not
+# triggered within ENTRY_TTL_MINUTES completed minutes is cancelled by the
+# runner and the decision reads NOT_FILLED. Both numbers are reasoned, not
+# measured, and are printed with every entry.
+ENTRY_LIMIT_OFFSET_PCT = 0.3
+ENTRY_TTL_MINUTES = 3
+
+
+def entry_limit(trigger: float) -> float:
+    """The stop-limit's limit price for a plan whose trigger is `trigger`."""
+    return round(trigger + max(0.01, trigger * ENTRY_LIMIT_OFFSET_PCT / 100.0), 2)
 
 
 def in_premarket(now: Optional[datetime] = None) -> bool:

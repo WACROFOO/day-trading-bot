@@ -185,6 +185,7 @@ def test_sync_records_the_filled_quantity_and_the_brokers_fill_time(monkeypatch)
     import test_real_trader_path as F
     fake = types.ModuleType("ib_async")
     fake.LimitOrder, fake.StopOrder, fake.MarketOrder, fake.Stock = F.LimitOrder, F.StopOrder, F.MarketOrder, F.Stock
+    fake.StopLimitOrder = F.StopLimitOrder
     monkeypatch.setitem(_sys.modules, "ib_async", fake)
     from execution.ibkr_trader import PaperTrader
     from execution.intent import EntryIntent
@@ -610,6 +611,7 @@ def test_exit_management_runs_every_check_even_when_one_raises():
     calls = []
     class R:
         def sync_fills(self): calls.append("sync"); raise RuntimeError("socket")
+        def expire_entries(self): calls.append("expire"); return []
         def reconcile_positions(self): calls.append("reconcile"); return []
         def reprotect(self): calls.append("protect"); return []
         def watch_stops(self): calls.append("watch"); return ["T x100 SELL LMT 5.80"]
@@ -620,7 +622,7 @@ def test_exit_management_runs_every_check_even_when_one_raises():
     from zoneinfo import ZoneInfo
     late = datetime(2026, 9, 8, 11, 31, tzinfo=ZoneInfo("America/New_York"))
     assert X.manage_exits(R(), False, late) is True
-    assert calls == ["sync", "reconcile", "protect", "watch", "enforce", "trail", "flag", "flatten"]
+    assert calls == ["sync", "expire", "reconcile", "protect", "watch", "enforce", "trail", "flag", "flatten"]
 
 
 

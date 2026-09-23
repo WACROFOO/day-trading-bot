@@ -22,7 +22,8 @@ class _Order:
         self.orderId = 0; self.parentId = 0; self.ocaGroup = ""; self.transmit = True
         self.tif = "DAY"; self.outsideRth = False
         # IBKR's own strings, so the trader's leg lookup by orderType is exercised for real
-        self.orderType = {"LimitOrder": "LMT", "StopOrder": "STP", "MarketOrder": "MKT"}[type(self).__name__]
+        self.orderType = {"LimitOrder": "LMT", "StopOrder": "STP", "MarketOrder": "MKT",
+                          "StopLimitOrder": "STP LMT"}[type(self).__name__]
 
 class LimitOrder(_Order):
     def __init__(self, action, qty, lmt): super().__init__(action, qty, lmt); self.lmtPrice = lmt
@@ -31,6 +32,11 @@ class StopOrder(_Order):
     def __init__(self, action, qty, aux): super().__init__(action, qty, aux); self.auxPrice = aux
 
 class MarketOrder(_Order): pass
+
+class StopLimitOrder(_Order):
+    """A10: the entry parent. IBKR's own type string is 'STP LMT'."""
+    def __init__(self, action, qty, lmt, stop):
+        super().__init__(action, qty, lmt); self.lmtPrice, self.auxPrice = lmt, stop
 
 class Stock:
     def __init__(self, symbol, exchange, currency): self.symbol = symbol
@@ -59,6 +65,7 @@ class FakeIB:
 def trader(monkeypatch):
     fake = types.ModuleType("ib_async")
     fake.LimitOrder, fake.StopOrder, fake.MarketOrder, fake.Stock = LimitOrder, StopOrder, MarketOrder, Stock
+    fake.StopLimitOrder = StopLimitOrder
     fake.util = types.SimpleNamespace(run=lambda c: c)
     monkeypatch.setitem(sys.modules, "ib_async", fake)
     from execution.ibkr_trader import PaperTrader
@@ -81,7 +88,7 @@ def test_the_real_place_bracket_runs_end_to_end_and_records_before_sending(trade
     assert rec in trader.placed
     assert rec.protected is True and rec.stop_id and rec.parent_id
     legs = trader.ib.placed
-    assert [t.order.orderType for t in legs] == ["LMT", "STP"]          # entry then stop
+    assert [t.order.orderType for t in legs] == ["STP LMT", "STP"]      # entry (A10 stop-limit) then stop
     parent, stop = legs[0].order, legs[1].order
     assert parent.transmit is False and stop.transmit is True           # the group holds until the stop
     assert stop.parentId == parent.orderId and parent.outsideRth is False

@@ -667,3 +667,36 @@ def test_a_resting_stop_the_bid_has_passed_for_fifteen_seconds_is_enforced_by_th
     o2 = journal.execute("SELECT status, exit_reason, exit_order_id FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
     assert (o2["status"], o2["exit_reason"], o2["exit_order_id"]) == ("ExitPending", "stop_enforced", 4242)
     assert r.enforce_stops() == []                          # ExitPending rows are left alone
+
+
+
+def test_an_entry_not_triggered_within_three_minutes_is_cancelled_and_reads_not_filled(journal):
+    """A10: the resting stop-limit waits for the break; when it does not come
+    the runner cancels it, the row is dead and the decision NOT_FILLED, so the
+    one-position rule stops counting it."""
+    from datetime import datetime, timedelta, timezone
+    class CancellingTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.cancelled = []
+        def cancel_order_id(self, oid): self.cancelled.append(oid); return True
+    t = CancellingTrader()
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    quotes = {s: dict(bid=7.30, ask=7.31, bid_size=300, ask_size=100, ts="2026-09-01T13:52:10Z")
+              for s in ("ABCD", "DVLT", "CYQN", "IMRN")}
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=t, now=now, max_age_s=3600, quote=lambda s: quotes.get(s))
+    r.step()
+    assert t.placed, "the fixture must place at least one bracket"
+    rec = t.placed[0]
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o["fill_price"] is None
+    assert r.expire_entries() == []                                   # just placed: waits
+    later = datetime.fromisoformat(o["placed_at"]) + timedelta(minutes=3, seconds=5)
+    r.now = lambda: later
+    lines = r.expire_entries()
+    assert len(lines) >= 1 and "NOT_FILLED" in lines[0] and rec.parent_id in t.cancelled, lines
+    o2 = journal.execute("SELECT status FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert o2["status"] == "Cancelled"
+    d = journal.execute("SELECT outcome FROM decisions WHERE decision_id=?", (o["decision_id"],)).fetchone()
+    assert d["outcome"] == "NOT_FILLED"
+    assert L.positions_alive(journal) == 0 or all(x["order_id"] != o["order_id"] for x in L.open_orders(journal))
+    assert r.expire_entries() == []                                   # once
