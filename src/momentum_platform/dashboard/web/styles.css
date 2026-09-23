@@ -203,6 +203,9 @@ kbd{font:10px/1 var(--mono);background:var(--panel-2);border:1px solid var(--lin
 .branch{font-size:9px;color:var(--ink-dim);font-family:var(--mono);white-space:nowrap;
   max-width:58px;overflow:hidden;text-overflow:ellipsis}
 
+.row-why{margin-left:6px;font:600 9px/1 var(--mono);color:var(--ink-dim);background:none;border:1px solid var(--line);
+  border-radius:3px;padding:1px 4px;cursor:pointer;vertical-align:middle}
+.row-why:hover,.row-why.open{color:var(--ink);border-color:var(--focus)}
 .reasons{grid-column:1/-1;padding:6px 8px 8px;background:#0b1119;border-bottom:1px solid var(--line-soft)}
 .reason{display:flex;gap:6px;align-items:baseline;font:10.5px var(--mono);padding:1px 0}
 .reason .ok{color:var(--up)} .reason .no{color:var(--down)}

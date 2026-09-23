@@ -916,8 +916,16 @@ function fillListCard(card, id, frame) {
     const rv = el("span", null, fx(rowRvol(r)) + "×");
     rv.title = rowRvolTitle(r);
     tr.appendChild(rv);
-    tr.appendChild(el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—"));
-    tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };
+    const fl = el("span", "muted", sym.floatShares ? (sym.floatShares / 1e6).toFixed(1) + "M" : "—");
+    // "Why this row is here" opens from its own button, never from the row
+    // click: a click on a name is a selection, and the drawer it used to open
+    // pushed the other names out of a five-row tile (owner, 2026-09-23).
+    const why = el("button", "row-why" + (state.openRow === id + "|" + r.symbol ? " open" : ""), "?");
+    why.title = "Why this row is here (pillar checks)"; why.tabIndex = -1;
+    why.onclick = e => { e.stopPropagation(); toggleReasons(id, r.symbol); render(); };
+    fl.appendChild(why);
+    tr.appendChild(fl);
+    tr.onclick = () => { select(r.symbol, id, i); };
     tr.onkeydown = e => { if (e.key === "Enter") { select(r.symbol, id, i); e.preventDefault(); } };
     body.appendChild(tr);
     if (state.openRow === id + "|" + r.symbol) body.appendChild(reasonsDrawer(r, sym, id));

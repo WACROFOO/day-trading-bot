@@ -57,3 +57,25 @@ def test_missed_counts_thin_stops_as_a_measurement_not_a_gate(tmp_path):
     assert ms.returncode == 0, ms.stderr[-1200:]
     assert "‡thin stop" in ms.stdout and "THIN STOPS" in ms.stdout and "17.19/17.17" in ms.stdout
     assert "0.12% of price" in ms.stdout and "not a gate" in ms.stdout
+
+
+def test_alerts_script_filters_by_symbol_window_and_scanner_and_formats_reasons():
+    sys.path.insert(0, str(ROOT / "scripts"))
+    import alerts
+    ev = [
+        {"symbol": "WHLR", "scannerId": "squeeze_5_in_5", "branch": None, "severity": "medium",
+         "sourceTime": "2026-09-23T13:32:10+00:00", "values": {"last": 5.59},
+         "reasons": [{"field": "move_5m_pct", "value": 7.1, "passed": True, "threshold": 5.0}]},
+        {"symbol": "WHLR", "scannerId": "hod_momentum", "branch": "low_float_high_rvol_price_under_20",
+         "severity": "high", "sourceTime": "2026-09-23T13:41:00+00:00", "values": {"last": 6.7},
+         "reasons": [{"field": "new_hod", "value": 6.72, "passed": True, "threshold": 6.5}]},
+        {"symbol": "MSS", "scannerId": "squeeze_5_in_5", "severity": "medium",
+         "sourceTime": "2026-09-23T13:38:00+00:00", "values": {"last": 2.24}, "reasons": []},
+    ]
+    rows = alerts.select(ev, ["whlr"], "09:30", "09:40")
+    assert [e["scannerId"] for e in rows] == ["squeeze_5_in_5"]          # 09:41 is outside the window
+    rows = alerts.select(ev, [], "09:30", None, scanners=["hod_momentum"])
+    assert len(rows) == 1 and rows[0]["symbol"] == "WHLR"
+    line = alerts.format_event(ev[0])
+    assert "09:32:10 WHLR" in line and "squeeze_5_in_5" in line and "✓move_5m_pct=7.1/5.0" in line
+    assert alerts.main(["--url", "http://127.0.0.1:1"]) == 1               # desk down: says so, exit 1

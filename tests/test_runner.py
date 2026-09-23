@@ -551,3 +551,12 @@ def test_a_position_whose_hard_stop_sell_failed_gets_a_stop_and_its_fill_closes_
     o3 = journal.execute("SELECT status, exit_reason, exit_price FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
     assert (o3["status"], o3["exit_reason"], o3["exit_price"]) == ("Closed", "stop", float(o["stop"]))
     assert L.stuck_orders(journal) == []
+
+
+def test_acted_carries_the_backfill_flag(journal):
+    """The live log collapses history-loaded plans into one line; the flag
+    that makes that possible rides on Acted, from the decision's data_status."""
+    from execution.runner import Acted
+    a = Acted("d", "WHLR", "2026-09-23T04:22:00-04:00", 6.6, 6.02, "REFUSED", ["bar is outside"], True)
+    assert a.backfill is True
+    assert Acted("d", "WHLR", "t", 1.0, 0.9, "TAKEN", []).backfill is False

@@ -351,7 +351,20 @@ def cmd_live(args) -> int:
                 errors += 1
                 print(f"  {datetime.now(ET):%H:%M:%S}  {WARN}runner error{END} {exc!r} — retrying"
                       + (f" ({errors} in a row)" if errors > 1 else ""))
+            # Plans the detector armed on the history the desk loaded at start
+            # (04:00 onward on IBKR) are answered and refused like any other,
+            # tagged backfill, kept out of every statistic. Printed one per
+            # line they read as a morning of live refusals at 04:22; they are
+            # one fact, so they get one line (owner, 2026-09-23).
+            hist = [a for a in acted if a.backfill]
+            if hist:
+                syms = sorted({a.symbol for a in hist})
+                print(f"  {DIM}{len(hist)} plan(s) armed on history loaded at start "
+                      f"({hist[0].ts_et[11:16]}–{hist[-1].ts_et[11:16]} ET, {', '.join(syms)}) → refused, "
+                      f"tagged backfill, not counted; each row is in the ledger{END}")
             for a in acted:
+                if a.backfill:
+                    continue
                 tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
                 print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
                       f"{a.trigger:.2f}/{a.stop:.2f}"

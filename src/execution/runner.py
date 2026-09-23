@@ -55,6 +55,7 @@ class Acted(NamedTuple):
     stop: float
     outcome: str
     reasons: list[str]
+    backfill: bool = False      # armed on history loaded at the desk's start; diagnostic cohort
 
 Quote = Callable[[str], Optional[dict]]     # symbol -> {bid, ask, bid_size, ask_size, ts}
 
@@ -117,7 +118,8 @@ class Runner:
             self.conn.commit()
             done.append(Acted(row["decision_id"], row["symbol"], row["ts_et"],
                               float(row["trigger"]), float(row["stop"]),
-                              outcome, reasons))
+                              outcome, reasons,
+                              str(row["data_status"] or "").endswith("-backfill")))
         self.conn.commit()
         self.acted.extend(done)
         return done

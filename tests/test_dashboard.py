@@ -563,7 +563,11 @@ def test_ui_reasons_drawer_shows_pillar_arithmetic(page):
     _seek(page, 125)
     page.keyboard.press("Escape")
     page.wait_for_timeout(150)
+    # a row click selects only (owner, 2026-09-23); the drawer has its own button
     page.locator("[data-card=scan-pillars] .trow").first.click()
+    page.wait_for_timeout(250)
+    assert page.locator(".reasons").count() == 0
+    page.locator("[data-card=scan-pillars] .trow .row-why").first.click()
     page.wait_for_timeout(250)
     drawer = page.locator(".reasons")
     assert drawer.count() == 1
@@ -1264,3 +1268,17 @@ def test_top_gainers_are_ordered_by_change_on_the_day():
            / "dashboard" / "web" / "app.js").read_text()
     body = app.split("const all = rows.concat(extra);")[1][:600]
     assert "all.sort(" in body and "changePct" in body
+
+
+def test_a_list_row_click_selects_and_the_why_drawer_has_its_own_button():
+    """Owner, 2026-09-23: clicking a name in Top gainers opened the pillar
+    drawer under it and hid the other names in a five-row tile. The click now
+    selects only; the drawer opens from a ? button on the row."""
+    app = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "app.js").read_text()
+    assert 'tr.onclick = () => { toggleReasons(id, r.symbol); select(r.symbol, id, i); };' not in app
+    assert 'tr.onclick = () => { select(r.symbol, id, i); };' in app
+    assert 'el("button", "row-why"' in app and 'toggleReasons(id, r.symbol); render();' in app
+    css = (Path(__file__).resolve().parents[1] / "src" / "momentum_platform"
+           / "dashboard" / "web" / "styles.css").read_text()
+    assert ".row-why{" in css
