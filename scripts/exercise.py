@@ -522,11 +522,26 @@ def cmd_ah_exit(args) -> int:
         if o["stop_id"] and hasattr(t, "cancel_order_id"):
             try:
                 if t.cancel_order_id(int(o["stop_id"])):
-                    t.ib.sleep(1)
+                    gone = False
+                    for _ in range(6):
+                        t.ib.sleep(0.5)
+                        st = next((x.orderStatus.status for x in t.ib.trades() if x.order.orderId == int(o["stop_id"])), None)
+                        if st in (None, "Cancelled", "ApiCancelled", "Inactive", "Filled"):
+                            gone = True; break
+                    if not gone:
+                        # A stop the broker will not release is a sell in flight
+                        # (IBKR: "triggered"). Selling on top of it sells twice.
+                        print(f"{BAD}stop leg {o['stop_id']} is still working after the cancel (status {st}) — NOT selling: "
+                              f"a second sell on top of a stop in flight makes a short. Wait a minute and re-run; if it "
+                              f"persists, the stop is filling on resume or needs the broker's own screen{END}")
+                        L.add_order_event(conn, o["order_id"], f"manual exit ABORTED: stop leg {o['stop_id']} would not cancel (status {st})")
+                        conn.commit()
+                        return 1
                     print(f"  stop leg {o['stop_id']} cancelled first, so the position cannot be sold twice")
                     L.add_order_event(conn, o["order_id"], f"manual exit: stop leg {o['stop_id']} cancelled before the sell")
             except Exception as exc:                        # noqa: BLE001
-                print(f"  {WARN}could not cancel stop leg {o['stop_id']}: {exc!r} — selling anyway; check the broker for a resting SELL{END}")
+                print(f"{BAD}could not cancel stop leg {o['stop_id']}: {exc!r} — NOT selling; check the broker for a resting SELL{END}")
+                return 1
         if market:
             exit_id = t.exit_market(o["symbol"], qty)
             px = None
