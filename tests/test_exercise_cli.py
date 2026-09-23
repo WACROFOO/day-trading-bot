@@ -79,3 +79,14 @@ def test_alerts_script_filters_by_symbol_window_and_scanner_and_formats_reasons(
     line = alerts.format_event(ev[0])
     assert "09:32:10 WHLR" in line and "squeeze_5_in_5" in line and "✓move_5m_pct=7.1/5.0" in line
     assert alerts.main(["--url", "http://127.0.0.1:1"]) == 1               # desk down: says so, exit 1
+
+
+def test_missed_lists_chart_green_refusals_and_a_regular_hours_split(tmp_path):
+    db = tmp_path / "j.sqlite"
+    subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "replay", str(FIXTURE), "--risk", "20"],
+                   cwd=ROOT, capture_output=True, text=True, check=True)
+    ms = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "missed", "--all"],
+                        cwd=ROOT, capture_output=True, text=True)
+    assert ms.returncode == 0, ms.stderr[-1200:]
+    assert "CHART-GREEN PLANS REFUSED FOR A NON-CHART REASON" in ms.stdout
+    assert "BY REASON · REGULAR HOURS ONLY (09:30–11:30)" in ms.stdout

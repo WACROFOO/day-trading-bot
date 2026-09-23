@@ -688,6 +688,34 @@ def cmd_missed(args) -> int:
         tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
         win = f"{sum(1 for x in st if x > 0)/len(st):>6.0%}" if st else f"{'—':>6}"
         print(f"  {len(ds):>4}{len(trig):>6}{_m(st)}{_s(st)}{_m(tr)}{_s(tr)}{win}  {key}")
+    # The owner's daily question, answered by the tool: which plans the chart
+    # approved (verdict REVIEW) were refused for a reason that was not the
+    # chart, and what they did. Fill at trigger, no costs — an upper bound.
+    green = [d for d in rows if not d["backfill"] and d["verdict"] == "REVIEW" and d["outcome"] == "REFUSED"
+             and "Layer 2" not in controls.reason_key(d)]
+    print(f"\n{BOLD}CHART-GREEN PLANS REFUSED FOR A NON-CHART REASON{END}  {len(green)} row(s) · what they went on to do")
+    if not green:
+        print("  none")
+    for d in green:
+        f = lambda v: f"{v:+.2f}" if v is not None else "—"   # noqa: E731
+        print(f"  {d['ts_et'][11:16]} {d['symbol']:<6} {d['trigger']:.2f}/{d['stop']:.2f}  first {d['first_hit'] or '—':<11} "
+              f"strat {f(d['strategy_r'])}  trail {f(d['trail_r'])}  {controls.reason_key(d)[:60]}"
+              + ("  ‡thin stop" if d["thin_stop"] else ""))
+    # Regular hours only: pre-market rows are refused by phase B whatever the
+    # cascade says, so a kill there cost nothing yet. This is the cohort the
+    # gates actually decide today.
+    rth = [d for d in rows if not d["backfill"] and "09:30" <= d["ts_et"][11:16] < "11:30"]
+    groups_rth: dict[str, list[dict]] = defaultdict(list)
+    for d in rth:
+        groups_rth[controls.reason_key(d)].append(d)
+    print(f"\n{BOLD}BY REASON · REGULAR HOURS ONLY (09:30–11:30){END}  {len(rth)} prospective row(s)")
+    print(f"  {'n':>4}{'trig':>6}{'strat mean':>12}{'strat sum':>11}{'trail mean':>12}{'trail sum':>11}{'win':>6}  reason")
+    for key, ds in sorted(groups_rth.items(), key=lambda kv: -len(kv[1])):
+        trig = [d for d in ds if d["trigger_hit"] == 1]
+        st = [d["strategy_r"] for d in trig if d["strategy_r"] is not None]
+        tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
+        win = f"{sum(1 for x in st if x > 0)/len(st):>6.0%}" if st else f"{'—':>6}"
+        print(f"  {len(ds):>4}{len(trig):>6}{_m(st)}{_s(st)}{_m(tr)}{_s(tr)}{win}  {key}")
     thin = [d for d in rows if d["thin_stop"] and not d["backfill"]]
     pct = controls.THIN_STOP_PCT * 100
     if thin:
