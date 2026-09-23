@@ -454,6 +454,29 @@ def test_tws_connection_restored_asks_for_a_resubscribe():
     assert desk.stream.health.farm_ok is True
 
 
+def test_a_competing_live_session_is_named_once_in_plain_words_not_once_per_symbol():
+    """2026-09-23 05:5x: eight raw 10197 lines, twice, and the owner asked
+    what was wrong. The desk now says it: another login on the username holds
+    the market data. One line per five minutes, cleared on the next restore."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    lines = []
+    desk.log = lines.append
+    for sym in ("AAA", "BBB", "CCC"):
+        desk._on_tws_error(7, 10197, "No market data during competing live session",
+                           type("C", (), {"symbol": sym})())
+    notes = [x for x in lines if "COMPETING LIVE SESSION" in x]
+    assert len(notes) == 1 and "IBKR Mobile" in notes[0] and "No restart needed" in notes[0]
+    assert desk.competing_since is not None
+    assert any("competing live session" in m for m in desk.stream.health.messages)
+    desk._on_tws_error(-1, 1102, "Connectivity between IB and TWS has been restored")
+    assert desk.competing_since is None
+    assert any("connection restored after a competing session" in x for x in lines)
+    desk._on_tws_error(7, 10197, "No market data during competing live session",
+                       type("C", (), {"symbol": "AAA"})())
+    assert sum(1 for x in lines if "COMPETING LIVE SESSION" in x) == 2   # a new episode is named again
+
+
 def test_lost_connectivity_is_recorded_without_touching_the_socket():
     desk, ib, clock = make_desk()
     desk._bootstrap()

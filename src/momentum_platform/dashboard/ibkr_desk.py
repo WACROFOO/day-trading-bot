@@ -167,6 +167,12 @@ class IbkrDesk:
         self.resubscribe_every = 300.0
         self._next_resubscribe = 0.0
         self._resubscribe_wanted = False
+        # 10197 "no market data during competing live session": another login
+        # on the same IBKR username (TWS live, IBKR Mobile, Client Portal) has
+        # taken the one market-data session. Named in plain words, once every
+        # COMPETING_EVERY seconds, instead of one raw error line per symbol.
+        self.competing_since: Optional[datetime] = None
+        self._next_competing_note = 0.0
         self._worker_thread: Optional[threading.Thread] = None
         self.fundamentals: Optional[bool] = None      # None = untested, False = account not entitled
         self.log: Callable[[str], None] = lambda m: print(m, flush=True)
@@ -338,9 +344,24 @@ class IbkrDesk:
     # 2104/2106/2158 the same farms coming back.
     FARM_DOWN = (2103, 2105, 2157)
     FARM_UP = (2104, 2106, 2158)
+    COMPETING_EVERY = 300.0
 
     def _on_tws_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
         h = self.stream.health if self.stream is not None else None
+        if errorCode == 10197:
+            now = self.clock()
+            if self.competing_since is None:
+                self.competing_since = now
+            if now.timestamp() >= self._next_competing_note:
+                self._next_competing_note = now.timestamp() + self.COMPETING_EVERY
+                sym = getattr(contract, "symbol", None) or "?"
+                self.log(f"  !! COMPETING LIVE SESSION (10197, first seen {self.competing_since:%H:%M:%S}): another login "
+                         f"on this IBKR username — TWS live, IBKR Mobile or Client Portal — has taken the market data; "
+                         f"the desk has NO tape for {sym} and the other names until that login closes. Log it out; "
+                         f"the desk re-requests on its own when TWS reports the connection restored. No restart needed.")
+                if h is not None:
+                    h.messages.append("competing live session (10197): another login holds the market data")
+            return
         if errorCode == 1100 and h is not None:
             h.farm_ok = False
             h.messages.append("TWS lost its connection to IB (1100)")
@@ -352,6 +373,11 @@ class IbkrDesk:
             h.farm_ok = True
             h.messages.append(f"TWS connection restored ({errorCode})")
             self._resubscribe_wanted = True
+            if self.competing_since is not None:
+                self.log(f"  connection restored after a competing session first seen {self.competing_since:%H:%M:%S}; "
+                         f"if no 10197 line follows, the other login is gone and the tape is back")
+                self.competing_since = None
+                self._next_competing_note = 0.0
         elif errorCode in self.FARM_DOWN and h is not None:
             h.farm_ok = False
         elif errorCode in self.FARM_UP and h is not None:
