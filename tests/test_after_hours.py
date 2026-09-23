@@ -237,3 +237,16 @@ def test_the_kill_rule_binds_only_from_ten_clean_fills():
     else:
         assert k["verdict"] == "READ-ONLY"
     assert controls.kill_rule_read(c, {}, min_n=11)["verdict"] == "READ-ONLY"
+
+
+
+def test_open_phase_c_refuses_without_confirm_and_without_a1_on_a_queued_verdict(held):
+    db, c, t = held
+    L.set_state(c, phase="B", probe_verdict="queued", paper_data="realtime")
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "open-phase-c"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 2 and "would open phase C" in r.stdout
+    r = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "open-phase-c", "--confirm"],
+                       cwd=ROOT, capture_output=True, text=True)
+    assert r.returncode == 1 and "A1 not accepted" in r.stdout
+    assert L.get_state(L.connect(db)).get("phase") == "B"

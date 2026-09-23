@@ -49,7 +49,7 @@ better than the free baselines on the same names at the same instants.
 |---|---|---|---|
 | A | LOG_ONLY, live desk | **PROPOSED: 5 qualifying sessions AND 40 prospective decisions under the rules currently in force** (owner, 2026-09-18: the cohort resets on an amendment — see §5) | replay check 100% (`scripts/exercise.py check`) on every session; pre-market probe result recorded in §5; paper session measured `realtime` |
 | B | TRADE, regular hours only | **PROPOSED: 30 taken trades** | ≥90% of fills carry NBBO; median slippage ratio recorded; **zero unprotected entries since the last named defect fix** (owner decision, delegated, 2026-09-22: the count restarts at a fix commit recorded by `exercise.py reset-unprotected` with a name and a time; DCOY's unprotected fill of 2026-09-22 was the OCA defect's, fixed in ec8ff72 and d408644, and stays in the ledger and every report); **and, from 2026-09-21, one fully reconciled paper trade lifecycle** (below) |
-| C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** | only in the shape the probe dictates (§5) |
+| C | TRADE, pre-market added | **PROPOSED: 30 more taken trades** (counted from the opening) | only in the shape the probe dictates (§5). **Opened early by the owner, 2026-09-23** (`exercise.py open-phase-c --confirm`, recorded in `exercise_state` with name, time and words; §5): the 30-trade count of phase B was 1 taken trade and is waived by that act alone; every other B→C condition (reconciled lifecycle, NBBO, zero unprotected fills since the named fix, a definite probe verdict, A1 accepted on `queued`) still had to be clear |
 | D | Read-out | at **PROPOSED: n = 60 taken trades** total | the failure condition in §4 is evaluated ONCE, here, not continuously |
 
 Definitions, fixed 2026-09-08 after the outside review:
@@ -262,9 +262,13 @@ by holding; no price is ever guessed. Every such position counts as
 **unprotected** in the report and in the B→C gate. Accepting A1 means
 accepting that exposure by name.
 
-Result: `PROPOSED: triggered 2026-09-18 by the `queued` verdict above, NOT
-accepted`. `exercise.py accept-a1 --confirm` has not been run; the policy
-refuses the monitored shape without it.
+Result: `PROPOSED: triggered 2026-09-18 by the `queued` verdict above`.
+**Accepted by the owner on 2026-09-23** as part of the decision to trade
+pre-market (the record with the owner's words is below, *Owner decision of
+2026-09-23*); the acceptance itself is the owner's `exercise.py accept-a1
+--confirm`, whose name and time sit in `exercise_state`. The outside review's
+recommendation against it stands in the text above as written; it was read
+and overruled by the owner, not removed.
 
 **Amendment A2 — the catalyst gate flags, it does not kill (owner,
 2026-09-17).** What the ledger showed after five phase-A sessions
@@ -678,6 +682,29 @@ assumed all along. Evidence and the argument:
 **First refusal under A8 (2026-09-23 11:25 ET).** DCOY 4.01/3.95, refused
 inside the buffer; `missed` scores it +1.00 R at the close on both rules.
 Written down as the buffer's first cost, as the A8 row promised.
+
+**Owner decision of 2026-09-23 — phase C opened early; pre-market entries
+07:00–09:30 ET.** The owner's words, verbatim: *"I want to trade premarket
+in Ross recommended trading hours"*. The window is the one the corpus names:
+`.claude/skills/extended-hours/SKILL.md` gives pre-market as 04:00–09:30 with
+the active window **07:00–09:30** ("volume surges at 07:00 — the real
+window"), no market orders, no LULD halts outside 09:30–16:00. This is a
+decision, not a delegation: it overrides the phase-B count (1 taken trade
+against the proposed 30) and accepts Amendment A1 by name. Recorded here with
+what it changes and what it costs, so it can be undone by name:
+
+| what | before | from the first desk start after 2026-09-23 |
+|---|---|---|
+| phase | B, regular hours only | **C**: pre-market plans 07:00–09:30 ET are sent, regular hours as before |
+| the B→C count | 30 taken trades | **waived by the owner's command**; `exercise.py open-phase-c --confirm --why "..."` records name, time and words in `exercise_state.phase_c_opened_*`, and `scripts/day.py` reads that record instead of the count. Every other gate still had to be clear at the opening |
+| A1, monitored exit | PROPOSED, not accepted | **accepted** (`accept-a1 --confirm`, the owner's act; the probe verdict is `queued`, so the monitored shape is the only pre-market shape) |
+| the pre-market entry (A10 variant) | — | the broker would queue a resting stop-limit to 09:30, so **the runner is the trigger**: the plan is ARMED on its bar, and the entry is sent the moment the desk's ask reaches the trigger and is not above `entry_limit(trigger)` — a limit at that cap, `outsideRth`, no stop leg (`PaperTrader.place_entry_monitored`, `Runner.fire_armed`). An armed plan the ask never reaches within `ENTRY_TTL_MINUTES` (3) is REFUSED with the reason and nothing is sent. Printed as `ARMED` in the live loop |
+| the pre-market stop | — | **the runner** (`Runner.watch_stops`): bid ≤ level → SELL limit at bid − 0.10, extended hours, ExitPending until the fill. The level trails under A3 in the ledger (`Runner.trail_monitored`), never at the broker, because nothing rests there before 09:30 |
+| at 09:30 | — | a monitored position still open gets a **real stop at the broker at the trailed level** on the first loop in regular hours (`Runner.reprotect`); from then on it is a phase-B position: `protected=1`, stop of last resort, A3 at the broker |
+| what it costs | — | every pre-market position is **unprotected** in every report and in the gate wording, whatever the monitor's health: if the runner dies, the quote goes stale, the name halts, or the limit does not fill, the exposure is the owner's. The pre-market refusal cohort of the first three sessions measured **−6.00 R over 15 rows** at the trigger-touch fill (`research/paper-exercise/reports/2026-09-23-candidates.md`), so the count of phase C is expected to start negative; that is a measurement to make, not a reason to skip it |
+
+Recorded 2026-09-23 by the assistant on the owner's instruction. The owner
+runs the two commands; code sets neither.
 
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland

@@ -147,8 +147,9 @@ def gates_for_advance(conn, state: dict) -> tuple[str | None, list[str]]:
         pass
     elif phase == "B":
         nxt = "C"
-        if f["taken"] < 30:
-            blockers.append(f"phase B needs 30 taken trades; have {f['taken']}")
+        if f["taken"] < 30 and not state.get("phase_c_opened_by"):
+            blockers.append(f"phase B needs 30 taken trades; have {f['taken']} "
+                            f"(the owner may open phase C early: exercise.py open-phase-c --confirm)")
         if f["fills"] and f["fills_with_nbbo"] / f["fills"] < 0.9:
             blockers.append(f"only {f['fills_with_nbbo']}/{f['fills']} fills carry NBBO (need 90%)")
         # Owner decision 2026-09-22 (delegated): the count restarts at a named
@@ -589,8 +590,10 @@ def main(argv=None) -> int:
         warn(f"before {PREMARKET_OPEN:%H:%M} ET — Gateway up on paper, TWS logged out; "
              f"run this again at {PREMARKET_OPEN:%H:%M}, or pass --early to start now"); return 0
     if args.early and now.time() < PREMARKET_OPEN:
-        warn(f"starting early at {now:%H:%M} ET — the tape before 07:00 is thin, phase {L.get_state(conn).get('phase', 'A')} "
-             f"refuses pre-market entries anyway, and the {PREMARKET_OPEN:%H:%M} scheduled start will be refused by the lock")
+        _ph = L.get_state(conn).get("phase", "A")
+        warn(f"starting early at {now:%H:%M} ET — the tape before 07:00 is thin, entries before 07:00 are refused "
+             f"(session window){' and phase ' + _ph + ' refuses pre-market entries anyway' if _ph != 'C' else ''}, "
+             f"and the {PREMARKET_OPEN:%H:%M} scheduled start will be refused by the lock")
 
     say(f"\n{BOLD}1. Watchlist{END}  (gap scan — STAR then WATCH; rejects named)")
     rows: list[dict] = []          # the gap scan's rows; empty when --symbols bypasses it

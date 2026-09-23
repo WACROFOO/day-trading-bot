@@ -114,17 +114,39 @@ def test_held_verdict_places_a_bracket_and_protection_waits_for_read_back(journa
 
 def test_queued_verdict_places_a_monitored_entry_with_no_stop_leg(journal):
     L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
-    t = FakeTrader()
+    t = FakeTrader(); ask = [6.04]
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
-               quote=lambda s: dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
+               quote=lambda s: dict(bid=6.02, ask=ask[-1], bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z"))
+    # A10 pre-market (2026-09-23): the runner is the trigger. The plan is
+    # ARMED on the bar and sent on the touch, never as a resting entry that
+    # would queue to 09:30 at the broker.
     (a,) = r.step()
-    assert a.outcome == "TAKEN" and len(t.monitored) == 1 and not t.brackets
+    assert a.outcome == "PENDING" and any("armed" in x for x in a.reasons) and not t.monitored
+    assert r.fire_armed() == [] and not t.monitored           # ask 6.04 < trigger: wait
+    ask.append(round(a_trigger(r), 2))
+    (f,) = r.fire_armed()
+    assert f.outcome == "TAKEN" and len(t.monitored) == 1 and not t.brackets
     o = journal.execute("SELECT * FROM orders").fetchone()
-    assert o["stop_id"] is None and o["protected"] == 0
+    assert o["stop_id"] is None and o["protected"] == 0 and o["stop_status"] == "monitored"
 
 
-def _fill(journal, r, t):
+def a_trigger(r):
+    return list(r.armed.values())[0]["intent"].trigger if r.armed else None
+
+
+def _touch(r, quotes):
+    """A10: an armed pre-market plan sends when the ask reaches the trigger."""
+    trig = a_trigger(r)
+    if trig is not None:
+        for q in quotes.values():
+            q["ask"] = round(trig, 2)
+        r.fire_armed()
+
+
+def _fill(journal, r, t, quotes=None):
     r.step()
+    if quotes is not None:
+        _touch(r, quotes)
     t.placed[0].fill_price = 6.06; t.placed[0].fill_time = "2026-09-08T12:46:10Z"; t.placed[0].status = "Filled"
     r.sync_fills()
 
@@ -135,7 +157,7 @@ def test_the_runner_is_the_stop_when_the_bid_touches_it(journal):
     quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: quotes.get(s))
-    _fill(journal, r, t)
+    _fill(journal, r, t, quotes)
     assert r.watch_stops() == []                          # bid 6.02 > stop 5.90: hold
     quotes["PMX"]["bid"] = 5.90                            # touches
     done = r.watch_stops()
@@ -166,7 +188,7 @@ def test_no_fresh_quote_means_hold_and_say_so_never_guess_a_price(journal):
     quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:00Z")}
     r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=NOW, max_age_s=3600,
                quote=lambda s: quotes.get(s))
-    _fill(journal, r, t)                       # placed and filled while the quote was fresh
+    _fill(journal, r, t, quotes)               # placed and filled while the quote was fresh
     quotes.clear()                             # the desk goes quiet
     assert r.watch_stops() == [] and t.exits == []
     ev = journal.execute("SELECT text FROM order_events").fetchall()

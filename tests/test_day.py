@@ -425,3 +425,18 @@ def test_early_flag_starts_before_0655_and_the_refusal_names_it():
     assert "--early" in src and "not args.early" in src
     assert "or pass --early to start now" in src
     assert "starting early at" in src
+
+
+
+def test_the_owner_may_open_phase_c_before_thirty_trades_and_the_other_gates_still_hold(journal):
+    """Owner decision 2026-09-23: pre-market in the 07:00–09:30 window. The
+    count gate yields to a recorded opening; lifecycle, NBBO, unprotected
+    and probe gates do not."""
+    L.set_state(journal, phase="B", paper_data="realtime", probe_verdict="queued", a1_accepted="yes")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert any("30 taken trades" in b for b in blockers)
+    L.set_state(journal, phase_c_opened_by="ayman", phase_c_opened_at="2026-09-23T20:00:00+00:00",
+                phase_c_opened_why="I want to trade premarket in Ross recommended trading hours")
+    _, blockers = day.gates_for_advance(journal, L.get_state(journal))
+    assert not any("30 taken trades" in b for b in blockers)
+    assert any("reconciled paper trade lifecycle" in b for b in blockers)   # the safety gates still apply

@@ -331,7 +331,7 @@ def cmd_live(args) -> int:
         while True:
             acted = []
             try:
-                acted = runner.step()
+                acted = runner.step() + (runner.fire_armed() if hasattr(runner, "fire_armed") else [])
                 errors = 0
             except RiskVeto as veto:
                 # The day is over for ENTRIES only. Flipping the mode to
@@ -365,8 +365,9 @@ def cmd_live(args) -> int:
             for a in acted:
                 if a.backfill:
                     continue
-                tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM}.get(a.outcome, "")
-                print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{a.outcome:<8}{END} "
+                tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM, "PENDING": DIM}.get(a.outcome, "")
+                shown = "ARMED" if a.outcome == "PENDING" else a.outcome
+                print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{shown:<8}{END} "
                       f"{a.trigger:.2f}/{a.stop:.2f}"
                       + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
             if args.trade:
@@ -620,6 +621,40 @@ def cmd_reset_unprotected(args) -> int:
     return 0
 
 
+def cmd_open_phase_c(args) -> int:
+    """The owner opens phase C (pre-market entries) before the 30-trade count.
+    Every OTHER B→C gate must still be clear: a reconciled lifecycle, NBBO on
+    the fills, zero unprotected fills since the last fix, a definite probe
+    verdict, real-time paper data, and A1 accepted when the verdict is
+    `queued`. Recorded with the owner's name and words."""
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from day import gates_for_advance
+    conn = L.connect(_db(args))
+    st = L.get_state(conn)
+    if st.get("phase") != "B":
+        print(f"phase is {st.get('phase')}: open-phase-c applies to phase B only"); return 1
+    who = os.environ.get("USER") or "operator"
+    if not args.confirm:
+        print(f"{WARN}would open phase C now{END} by {who}, before the 30-trade gate (have {L.funnel(conn)['taken']}).")
+        print("  Pre-market entries then run in the shape the probe dictates (§5). On the `queued` verdict that is the")
+        print("  monitored exit (A1): no stop rests at the broker before 09:30; the runner is the stop. Re-run with --confirm.")
+        return 2
+    if st.get("probe_verdict") == "queued" and st.get("a1_accepted") != "yes":
+        print(f"{BAD}A1 not accepted{END} — the probe verdict is `queued`; run exercise.py accept-a1 --confirm first"); return 1
+    L.set_state(conn, phase_c_opened_by=who, phase_c_opened_at=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+                phase_c_opened_why=args.why or "owner instruction")
+    nxt, blockers = gates_for_advance(conn, L.get_state(conn))
+    if nxt != "C" or blockers:
+        print(f"{BAD}phase C cannot open yet{END} — the remaining gates:")
+        for b in blockers:
+            print(f"  ✗ {b}")
+        return 1
+    L.set_state(conn, phase="C")
+    print(f"{OK}phase B → C opened by {who}{END} at {L.funnel(conn)['taken']} taken trades · recorded in exercise_state · "
+          f"pre-market entries from the next desk start")
+    return 0
+
+
 def cmd_accept_a1(args) -> int:
     """Record the owner's acceptance of amendment A1 (docs/preregistration.md
     §5): pre-market entries on a `queued` probe verdict get NO resting stop;
@@ -860,6 +895,8 @@ def main(argv=None) -> int:
     ru = sub.add_parser("reset-unprotected", help="restart the B→C 'zero unprotected fills' count at a named defect fix")
     ru.add_argument("--fix", required=True, help="the commit that fixed the defect, e.g. d408644")
     ru.add_argument("--confirm", action="store_true")
+    oc = sub.add_parser("open-phase-c", help="owner: open phase C (pre-market entries) before the 30-trade count")
+    oc.add_argument("--confirm", action="store_true"); oc.add_argument("--why", default=None)
     a1 = sub.add_parser("accept-a1", help="record the owner's acceptance of amendment A1 (monitored pre-market exit)")
     a1.add_argument("--confirm", action="store_true")
     rb = sub.add_parser("retag-backfill", help="tag decisions armed before the desk's first start of a day as backfill")
@@ -872,6 +909,7 @@ def main(argv=None) -> int:
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
             "missed": cmd_missed, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
+            "open-phase-c": cmd_open_phase_c,
             "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
             "retag-backfill": cmd_retag_backfill}[args.cmd](args)
 

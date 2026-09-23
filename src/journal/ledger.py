@@ -284,6 +284,8 @@ _ADDED_COLUMNS = {
                        # at a named defect fix, recorded by `exercise.py reset-unprotected`
                        ("unprotected_reset_at", "TEXT"), ("unprotected_reset_by", "TEXT"),
                        ("unprotected_reset_fix", "TEXT"),
+                       # owner decision 2026-09-23: phase C opened before 30 trades, by command
+                       ("phase_c_opened_by", "TEXT"), ("phase_c_opened_at", "TEXT"), ("phase_c_opened_why", "TEXT"),
                        ("a1_accepted_at", "TEXT"),
                        ("code_commit", "TEXT"), ("rules_hash", "TEXT")),
     # Several clocks, not one (review 2026-09-21, item 12): bar_end_ts is
@@ -525,12 +527,15 @@ def record_intent(conn: sqlite3.Connection, decision_id: str, *, symbol: str, se
 def set_order_ids(conn: sqlite3.Connection, order_id: int, *, parent_id: int,
                   stop_id: Optional[int], target_id: Optional[int], account: str,
                   protected: bool, status: str = "submitted",
-                  perm_id: Optional[int] = None) -> None:
-    """The broker's acknowledgement, written against the intent."""
+                  perm_id: Optional[int] = None, stop_status: Optional[str] = None) -> None:
+    """The broker's acknowledgement, written against the intent. A pre-market
+    entry carries stop_status 'monitored' from the send: the runner is its
+    stop, and `open_monitored` must find the row even before the fill syncs."""
     conn.execute("""UPDATE orders SET parent_id=?, stop_id=?, target_id=?, account=?, protected=?,
-                    status=?, perm_id=COALESCE(?, perm_id), updated_at=? WHERE order_id=?""",
+                    status=?, perm_id=COALESCE(?, perm_id), stop_status=COALESCE(?, stop_status),
+                    updated_at=? WHERE order_id=?""",
                  (parent_id, stop_id, target_id, account, int(protected), status, perm_id,
-                  _now(), order_id))
+                  stop_status, _now(), order_id))
 
 
 def intents(conn: sqlite3.Connection) -> list[sqlite3.Row]:
@@ -952,7 +957,8 @@ def set_state(conn: sqlite3.Connection, **fields) -> dict:
     allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
                "paper_data", "paper_data_date", "last_session_date",
                "a1_accepted", "a1_accepted_by", "a1_accepted_at", "code_commit", "rules_hash",
-               "unprotected_reset_at", "unprotected_reset_by", "unprotected_reset_fix"}
+               "unprotected_reset_at", "unprotected_reset_by", "unprotected_reset_fix",
+               "phase_c_opened_by", "phase_c_opened_at", "phase_c_opened_why"}
     bad = set(fields) - allowed
     if bad:
         raise ValueError(f"unknown state fields {sorted(bad)}")

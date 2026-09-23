@@ -700,3 +700,113 @@ def test_an_entry_not_triggered_within_three_minutes_is_cancelled_and_reads_not_
     assert d["outcome"] == "NOT_FILLED"
     assert L.positions_alive(journal) == 0 or all(x["order_id"] != o["order_id"] for x in L.open_orders(journal))
     assert r.expire_entries() == []                                   # once
+
+
+
+def _premarket_journal():
+    """The fixture's ABCD plan moved to 08:40 ET as a pre-market REVIEW plan,
+    the exercise in phase C on a `queued` probe verdict with A1 accepted."""
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    c.execute("UPDATE decisions SET session='premarket', ts_et=replace(ts_et, 'T09:', 'T08:') WHERE symbol='ABCD'")
+    c.execute("UPDATE decisions SET verdict='REJECT', plan_allowed=0 WHERE symbol<>'ABCD'")
+    c.commit()
+    L.set_state(c, phase="C", probe_verdict="queued", a1_accepted="yes", a1_accepted_by="ayman",
+                paper_data="realtime")
+    return c
+
+
+class _MonitoredTrader(FakeTrader):
+    account = "DUR339781"
+    def __init__(self):
+        super().__init__(); self.monitored = []; self.stops = []
+    def place_entry_monitored(self, intent):
+        rec = PlacedOrder(symbol=intent.symbol, parent_id=700 + len(self.monitored), stop_id=None,
+                          trigger=intent.trigger, stop=intent.stop, shares=intent.shares,
+                          protected=False, stop_status="monitored")
+        self.monitored.append(intent); self.placed.append(rec); return rec
+    def place_stop(self, symbol, qty, stop_price, ref=None):
+        self.stops.append((symbol, qty, stop_price)); return 900 + len(self.stops)
+    def exit_limit(self, symbol, qty, bid, offset=0.10, outside_rth=True):
+        self.sold = getattr(self, "sold", []); self.sold.append((symbol, qty))
+        self.last_exit_order_id = 4242; return round(bid - offset, 2)
+
+
+def test_a_premarket_plan_is_armed_and_fires_only_when_the_ask_reaches_the_trigger():
+    """A10 pre-market: the broker would queue a resting entry to 09:30, so the
+    runner is the trigger. Armed on the bar, sent on the touch, at a limit
+    capped just above the trigger; nothing sent while the ask sits below."""
+    c = _premarket_journal(); t = _MonitoredTrader()
+    clock = {"t": datetime(2026, 9, 1, 12, 41, 10, tzinfo=timezone.utc)}      # 08:41:10 ET, 70 s after the bar
+    q = {"bid": 7.10, "ask": 7.12, "bid_size": 200, "ask_size": 200, "ts": "2026-09-01T12:41:05Z"}
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock["t"], max_age_s=120, quote=lambda s: q)
+    acted = r.step()
+    armed = [a for a in acted if a.outcome == "PENDING"]
+    assert len(armed) == 1 and "armed" in armed[0].reasons[0] and t.monitored == []
+    did = armed[0].decision_id
+    assert c.execute("SELECT outcome FROM decisions WHERE decision_id=?", (did,)).fetchone()[0] == "PENDING"
+    assert r.step() == []                                        # armed rows are not re-judged
+    assert r.fire_armed() == [] and t.monitored == []            # ask 7.12 < trigger 7.2045: wait
+    q["ask"] = 7.21; clock["t"] += timedelta(seconds=40)
+    fired = r.fire_armed()
+    assert len(fired) == 1 and fired[0].outcome == "TAKEN" and len(t.monitored) == 1
+    assert c.execute("SELECT outcome FROM decisions WHERE decision_id=?", (did,)).fetchone()[0] == "TAKEN"
+    o = c.execute("SELECT status, protected, stop_status FROM orders WHERE decision_id=?", (did,)).fetchone()
+    assert (o["status"], o["protected"], o["stop_status"]) == ("submitted", 0, "monitored")
+    assert r.armed == {}
+
+
+def test_an_armed_premarket_plan_the_tape_never_reaches_is_refused_after_three_minutes():
+    c = _premarket_journal(); t = _MonitoredTrader()
+    clock = {"t": datetime(2026, 9, 1, 12, 41, 10, tzinfo=timezone.utc)}
+    q = {"bid": 7.10, "ask": 7.12, "bid_size": 200, "ask_size": 200, "ts": "2026-09-01T12:41:05Z"}
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock["t"], max_age_s=120, quote=lambda s: q)
+    did = [a for a in r.step() if a.outcome == "PENDING"][0].decision_id
+    clock["t"] += timedelta(minutes=3, seconds=1)
+    out = r.fire_armed()
+    assert len(out) == 1 and out[0].outcome == "REFUSED" and "A10" in out[0].reasons[0] and "no order sent" in out[0].reasons[0]
+    assert c.execute("SELECT outcome FROM decisions WHERE decision_id=?", (did,)).fetchone()[0] == "REFUSED"
+    assert t.monitored == [] and r.armed == {}
+
+
+def test_a_monitored_position_trails_in_the_ledger_sells_at_the_trailed_level_and_gets_a_real_stop_at_0930():
+    """A3 applies pre-market too: the level watch_stops sells at follows the
+    high; and once regular hours open, reprotect places the resting stop the
+    broker could not hold pre-market."""
+    c = _premarket_journal(); t = _MonitoredTrader()
+    clock = {"t": datetime(2026, 9, 1, 12, 41, 10, tzinfo=timezone.utc)}
+    q = {"bid": 7.21, "ask": 7.22, "bid_size": 200, "ask_size": 200, "ts": "2026-09-01T12:41:05Z"}
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock["t"], max_age_s=120, quote=lambda s: q)
+    r.step(); fired = r.fire_armed()
+    assert fired and fired[0].outcome == "TAKEN"
+    rec = t.placed[-1]; rec.fill_price = rec.trigger; rec.fill_time = "2026-09-01T12:41:50Z"; rec.status = "Filled"
+    r.sync_fills()
+    o = c.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o["fill_price"] is not None and o["stop_status"] == "monitored"
+    rps = round(o["trigger"] - o["stop"], 4)
+    c.execute("DELETE FROM bars_10s WHERE symbol='ABCD'"); c.execute("DELETE FROM quote_ticks WHERE symbol='ABCD'")
+    high = round(o["trigger"] + 3 * rps, 2)
+    c.execute("INSERT INTO bars_10s (symbol, ts, open, high, low, close, volume) VALUES (?,?,?,?,?,?,?)",
+              ("ABCD", "2026-09-01T12:45:00Z", high, high, high, high, 100)); c.commit()
+    lines = r.trail_stops()
+    assert any("monitored level" in x for x in lines), lines
+    o2 = c.execute("SELECT trail_stop FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert o2["trail_stop"] == round(high - rps, 2) > o["stop"]
+    # the bid dips under the TRAILED level but above the initial stop: the monitored stop sells
+    q["bid"] = round(o2["trail_stop"] - 0.01, 2)
+    sold = r.watch_stops()
+    assert len(sold) == 1 and f"stop {o2['trail_stop']}" in sold[0], sold
+    # a second monitored position, still open at 09:30, gets its resting stop
+    c2 = _premarket_journal(); t2 = _MonitoredTrader()
+    clock2 = {"t": datetime(2026, 9, 1, 12, 41, 10, tzinfo=timezone.utc)}
+    q2 = {"bid": 7.21, "ask": 7.22, "bid_size": 200, "ask_size": 200, "ts": "2026-09-01T12:41:05Z"}
+    r2 = Runner(c2, mode="TRADE", dollar_risk=20.0, trader=t2, now=lambda: clock2["t"], max_age_s=120, quote=lambda s: q2)
+    r2.step(); r2.fire_armed()
+    rec2 = t2.placed[-1]; rec2.fill_price = rec2.trigger; rec2.fill_time = "2026-09-01T12:41:50Z"; rec2.status = "Filled"
+    r2.sync_fills()
+    assert r2.reprotect() == []                                   # pre-market: nothing can rest
+    clock2["t"] = datetime(2026, 9, 1, 13, 30, 5, tzinfo=timezone.utc)     # 09:30:05 ET
+    lines = r2.reprotect()
+    assert len(lines) == 1 and "regular hours" in lines[0] and len(t2.stops) == 1, lines
+    o3 = c2.execute("SELECT protected, stop_status, stop_id FROM orders WHERE parent_id=?", (rec2.parent_id,)).fetchone()
+    assert (o3["protected"], o3["stop_status"], o3["stop_id"]) == (1, "Submitted", 901)

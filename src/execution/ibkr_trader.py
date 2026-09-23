@@ -288,11 +288,14 @@ class PaperTrader:
         if self.ib is None:
             raise RuntimeError("not connected")
 
-        from ib_async import StopLimitOrder
         stock = Stock(intent.symbol, "SMART", "USD")
         self.ib.qualifyContracts(stock)
-        # A10: rests at the trigger, fills only when the tape reaches it
-        parent = StopLimitOrder(SIDE, intent.shares, entry_limit(intent.trigger), intent.trigger)
+        # A10 pre-market: the RUNNER is the trigger (`Runner.fire_armed` sends
+        # this only once the desk's ask has reached the plan's trigger). The
+        # order is a limit capped at entry_limit(trigger): it fills at once
+        # at or under that cap, or not at all. A resting stop-limit would be
+        # queued to 09:30 on this account (probe verdict `queued`).
+        parent = LimitOrder(SIDE, intent.shares, entry_limit(intent.trigger))
         parent.orderId = self.ib.client.getReqId()
         parent.tif = "DAY"
         parent.outsideRth = True

@@ -81,6 +81,11 @@ class Runner:
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.acted: list[Acted] = []
+        # Pre-market entries wait here for the tape to reach the trigger (A10,
+        # runner-triggered: the broker queues resting entry stops to 09:30
+        # on this account, probe verdict `queued`). Memory only: a restart
+        # re-judges the decision and the bar clock refuses it as stale.
+        self.armed: dict[str, dict] = {}
         self.startup_notes: list[str] = []
         # docs/preregistration.md §2: one name at a time. Counted from the
         # ledger — resting, filled, exit pending, or an unresolved intent.
@@ -116,6 +121,8 @@ class Runner:
         """Act on every pending decision once. Returns what was done."""
         done = []
         for row in L.pending(self.conn):
+            if row["decision_id"] in self.armed:
+                continue                                    # waiting for the tape; fire_armed decides
             self._clocks = None
             outcome, reasons = self._act(row)
             L.set_outcome(self.conn, row["decision_id"], outcome, reasons, clocks=self._clocks)
@@ -241,7 +248,19 @@ class Runner:
             return "REFUSED", reasons
         if self.mode == "LOG_ONLY":
             return "LOG_ONLY", []
+        if shape == "monitored":
+            # A10 pre-market: the runner is the trigger. Send only when the
+            # desk's ask reaches the plan's trigger (and is still within the
+            # entry limit), inside ENTRY_TTL_MINUTES; otherwise nothing is sent.
+            self.armed[row["decision_id"]] = {"intent": intent, "row": dict(row), "armed_at": now, "shape": shape}
+            return "PENDING", [f"armed: waiting for the ask to reach {intent.trigger:.2f} "
+                               f"(pre-market, runner-triggered A10; {ENTRY_TTL_MINUTES} min)"]
+        return self._send(row, intent, shape, clock)
 
+    def _send(self, row, intent, shape: str, clock) -> tuple[str, list[str]]:
+        """Record the intent, send the order, record the ids. Shared by the
+        bracket path (at once) and the armed pre-market path (on the touch)."""
+        oid = None
         # The intent is durable BEFORE the send (audit F4). The decision is
         # CLAIMED and an orders row exists with status 'intent'; a crash
         # between here and the acknowledgement leaves exactly that, and the
@@ -278,8 +297,51 @@ class Runner:
             self.conn, oid, parent_id=placed.parent_id, stop_id=placed.stop_id,
             target_id=placed.target_id, account=self.trader.account or "",
             protected=placed.protected, status="submitted",
-            perm_id=getattr(placed, "perm_id", None))
+            perm_id=getattr(placed, "perm_id", None),
+            stop_status=getattr(placed, "stop_status", None) if shape == "monitored" else None)
         return "TAKEN", []
+
+    def fire_armed(self) -> list["Acted"]:
+        """Pre-market, every loop: send an armed entry when the desk's ask has
+        reached the trigger and is not above the entry limit; drop it,
+        REFUSED with the reason, when ENTRY_TTL_MINUTES pass without the
+        touch. The same checks that gate a fresh entry are re-read at the
+        moment of sending: one position, the risk lock, reconciliation."""
+        from .intent import entry_limit
+        done: list[Acted] = []
+        now = self.now()
+        for did, a in list(self.armed.items()):
+            intent, row = a["intent"], a["row"]
+            waited = (now - a["armed_at"]).total_seconds() / 60.0
+            q = self.quote(intent.symbol) if self.quote else None
+            ask = q.get("ask") if q else None
+            outcome, reasons = None, []
+            if waited >= ENTRY_TTL_MINUTES:
+                outcome = "REFUSED"
+                reasons = [f"A10: the ask did not reach the trigger {intent.trigger:.2f} within "
+                           f"{ENTRY_TTL_MINUTES} min pre-market (last ask {ask}); no order sent"]
+            elif ask is not None and intent.trigger <= float(ask) <= entry_limit(intent.trigger):
+                if not self.entries_enabled:
+                    outcome, reasons = "REFUSED", ["day locked by the risk gate — no new entries"]
+                elif self.unreconciled:
+                    outcome, reasons = "REFUSED", ["broker state not reconciled with the ledger — no new entries"]
+                elif L.positions_alive(self.conn) >= self.max_positions:
+                    outcome, reasons = "REFUSED", [f"one position at a time (preregistration §2): "
+                                                   f"{L.positions_alive(self.conn)} order(s) alive or unresolved"]
+                else:
+                    outcome, reasons = self._send(row, intent, a["shape"], decision_clock(row))
+                    if outcome == "TAKEN":
+                        reasons = [f"tape reached {intent.trigger:.2f} (ask {float(ask):.2f}) after "
+                                   f"{waited * 60:.0f}s; monitored entry sent"]
+            if outcome is None:
+                continue
+            L.set_outcome(self.conn, did, outcome, reasons if outcome != "TAKEN" else [])
+            self.conn.commit()
+            del self.armed[did]
+            done.append(Acted(did, row["symbol"], row["ts_et"], float(row["trigger"]), float(row["stop"]),
+                              outcome, reasons))
+        self.acted.extend(done)
+        return done
 
     # ------------------------------------------------------ reconciliation
     def reconcile_intents(self) -> list[str]:
@@ -571,7 +633,8 @@ class Runner:
                 L.add_order_event(self.conn, o["order_id"], "watch_stops: no fresh quote; held")
                 continue
             bid = float(q["bid"])
-            if bid > o["stop"]:
+            level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))     # A3 trails the monitored stop too
+            if bid > level:
                 continue
             # Sell what was filled, not what was asked for: a partial fill
             # sold at `shares` would leave the book short the difference.
@@ -584,9 +647,9 @@ class Runner:
                           ts=self.now(), confirmed=False, exit_order_id=exit_id)
             self._mark_exit_sent(o["parent_id"], exit_id)
             L.add_order_event(self.conn, o["order_id"],
-                              f"watch_stops: bid {bid} <= stop {o['stop']}; SELL LMT {px} x{qty} sent "
+                              f"watch_stops: bid {bid} <= stop {level}; SELL LMT {px} x{qty} sent "
                               f"(order {exit_id}); fill not yet confirmed")
-            done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {o['stop']})")
+            done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {level})")
         self.conn.commit()
         return done
 
@@ -700,6 +763,25 @@ class Runner:
             return []
         done: list[str] = []
         by_parent = {p.parent_id: p for p in getattr(self.trader, "placed", [])}
+        # A monitored (pre-market) position carries no broker stop because
+        # IBKR would have queued it. Once regular hours open the stop can
+        # rest, so it is placed at the watched level and the row becomes a
+        # protected one: the trail and the stop of last resort then apply.
+        if in_regular_hours(self.now()):
+            for o in L.open_monitored(self.conn):
+                qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
+                level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))
+                try:
+                    new_id = self.trader.place_stop(o["symbol"], qty, level, ref=o["decision_id"])
+                except Exception as exc:                        # noqa: BLE001
+                    L.add_order_event(self.conn, o["order_id"], f"09:30 stop for the monitored position raised {exc!r}; still monitored")
+                    continue
+                L.set_new_stop_leg(self.conn, o["order_id"], stop_id=new_id, level=level, qty=qty)
+                rec = by_parent.get(o["parent_id"])
+                if rec is not None:
+                    rec.stop_id, rec.stop_status, rec.protected, rec.stop_qty = new_id, "Submitted", True, float(qty)
+                done.append(f"{o['symbol']} x{qty}: regular hours — resting stop {new_id} placed at {level:.2f} "
+                            f"for the pre-market (monitored) position")
         for o in L.unprotected_positions(self.conn):
             qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
             level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))
@@ -740,6 +822,33 @@ class Runner:
         return done
 
     # ------------------------------------------------- the trailing stop
+    def trail_monitored(self) -> list[str]:
+        """A3 for a monitored (stop-less) position: the level `watch_stops`
+        sells at follows the high at one initial risk, in the ledger, never
+        down. No broker order is touched because none rests."""
+        if self.mode != "TRADE":
+            return []
+        done: list[str] = []
+        for o in L.open_monitored(self.conn):
+            rps = round(float(o["trigger"]) - float(o["stop"]), 4)
+            if rps <= 0:
+                continue
+            high = L.high_since(self.conn, o["symbol"], o["fill_ts"])
+            if high is None:
+                continue
+            current = float(o["trail_stop"]) if o["trail_stop"] is not None else float(o["stop"])
+            new = round(high - TRAIL_R * rps, 2)
+            if high > float(o["high_since_fill"] or 0):
+                L.set_trail(self.conn, o["order_id"], trail_stop=None, high=high)
+            if new < current + 0.01:
+                continue
+            L.set_trail(self.conn, o["order_id"], trail_stop=new, high=high)
+            L.add_order_event(self.conn, o["order_id"],
+                              f"trail (A3, monitored): high {high} since fill, watch level {current} -> {new}")
+            done.append(f"{o['symbol']} monitored level {current:.2f} -> {new:.2f} (high {high:.2f}, 1R {rps:.2f})")
+        self.conn.commit()
+        return done
+
     def trail_stops(self) -> list[str]:
         """TRADE only. Amendment A3: for every filled position whose stop rests
         at the broker, raise that stop to (high since the fill − TRAIL_R ×
@@ -749,7 +858,7 @@ class Runner:
         the fill the stop stays put."""
         if self.mode != "TRADE":
             return []
-        done: list[str] = []
+        done: list[str] = self.trail_monitored()
         by_parent = {p.parent_id: p for p in getattr(self.trader, "placed", [])}
         for o in L.open_protected(self.conn):
             rps = round(float(o["trigger"]) - float(o["stop"]), 4)
