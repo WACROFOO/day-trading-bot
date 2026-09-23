@@ -53,6 +53,17 @@ from typing import Optional
 
 from momentum_platform.datasources.ibkr_stream import detach_reconnect_resubscribe
 
+class StopMoveRejected(RuntimeError):
+    """The broker refused to re-price a resting stop. `triggered` is True for
+    IBKR's "Stop price revision is disallowed after order has triggered": the
+    stop is no longer a resting order but a sell in flight, and the runner
+    must stop trying to move it and wait for the fill."""
+
+    def __init__(self, code: int, text: str, *, triggered: bool) -> None:
+        super().__init__(f"{code}: {text}")
+        self.code, self.text, self.triggered = code, text, triggered
+
+
 from .intent import (SIDE, EntryIntent, PlacedOrder, in_regular_hours,
                      refusals)
 
@@ -124,6 +135,16 @@ class PaperTrader:
 
         self.ib = IB()
         detach_reconnect_resubscribe(self.ib)     # same 1102 → 322 leak as the desk; see ibkr_stream
+        # Broker errors by order id. A modify is asynchronous: placeOrder
+        # returns, the rejection (201) arrives a few seconds later. WHLR
+        # 2026-09-23 10:15: three trail moves "accepted" and written to the
+        # ledger while IBKR refused every one; the stop stayed at 7.34 and
+        # the ledger said 7.74. The mover now waits for this and reads it.
+        self.order_errors: dict[int, list[tuple[int, str]]] = {}
+        try:
+            self.ib.errorEvent += self._on_order_error
+        except Exception:                            # noqa: BLE001
+            pass
         self.ib.connect(self.host, self.port, clientId=self.client_id,
                         readonly=False, timeout=timeout)
         try:
@@ -145,6 +166,27 @@ class PaperTrader:
             self.ib = None
             raise
         return self.account
+
+    def _on_order_error(self, reqId, errorCode, errorString, contract=None, *rest) -> None:
+        if reqId is None or reqId < 0:
+            return
+        self.order_errors.setdefault(int(reqId), []).append((int(errorCode), str(errorString)))
+
+    def _await_order_answer(self, order_id: int, seen: int, wait_s: float = 2.0):
+        """After a modify: give the broker `wait_s` to answer, return the first
+        new error for that order id, or None when none arrived. Works with a
+        fake broker that has no event loop (no sleep, no errors)."""
+        errors = getattr(self, "order_errors", None)
+        if errors is None or not hasattr(self.ib, "sleep"):
+            return None
+        waited = 0.0
+        while waited < wait_s:
+            self.ib.sleep(0.5)
+            waited += 0.5
+            new = errors.get(order_id, [])[seen:]
+            if new:
+                return new[0]
+        return None
 
     def disconnect(self) -> None:
         if self.ib is not None:
@@ -458,6 +500,21 @@ class PaperTrader:
 
             stop = by_id.get(rec.stop_id) if rec.stop_id else None
             if stop is not None:
+                # The resting level at the broker outranks the ledger's memory
+                # of where the trail put it (WHLR 2026-09-23: three refused
+                # moves left the ledger at 7.74 with the stop at 7.34).
+                try:
+                    resting = float(stop.order.auxPrice)
+                    if resting > 0 and stop.orderStatus.status in ("Submitted", "PreSubmitted"):
+                        rec.broker_stop_level = resting          # the mark the runner corrects the ledger from
+                        if resting > float(rec.stop) + 1e-9 and rec.trail_stop != resting:
+                            rec.events.append(f"stop rests at {resting} at the broker (record had {rec.trail_stop})")
+                            rec.trail_stop = resting
+                        elif abs(resting - float(rec.stop)) < 1e-9 and rec.trail_stop is not None:
+                            rec.events.append(f"stop rests at the initial {resting}; the trail {rec.trail_stop} was never accepted")
+                            rec.trail_stop = None
+                except (TypeError, ValueError, AttributeError):
+                    pass
                 rec.stop_status = stop.orderStatus.status
                 q = getattr(stop.order, "totalQuantity", None)
                 rec.stop_qty = float(q) if q is not None else rec.stop_qty
@@ -500,12 +557,49 @@ class PaperTrader:
             rec.events.append(f"stop replaced {was} -> {rec.trail_stop} (A3 trail; OCA leg cannot be modified) "
                               f"new leg {new_id}")
             return new_id
+        seen = len(getattr(self, "order_errors", {}).get(order.orderId, []))
         order.auxPrice = round(new_stop, 2)
         order.transmit = True
         self.ib.placeOrder(leg.contract, order)
+        answer = self._await_order_answer(order.orderId, seen)
+        if answer is not None and answer[0] in (201, 10147, 10148):
+            # The broker refused the modify. The stop still rests where it
+            # was: put the local order back so nothing downstream reads the
+            # refused level as the resting one, and tell the caller why.
+            order.auxPrice = was
+            code, text = answer
+            rec.events.append(f"stop move {was} -> {round(new_stop, 2)} REFUSED by the broker ({code}): {text[:120]}")
+            raise StopMoveRejected(code, text, triggered=("after order has triggered" in text.lower()))
         rec.trail_stop = round(new_stop, 2)
         rec.events.append(f"stop moved {was} -> {rec.trail_stop} (A3 trail)")
         return order.orderId
+
+    def cancel_order_id(self, order_id: int) -> bool:
+        """Cancel one resting order by id. True when it was found and the
+        cancel was sent. The manual exit cancels the stop leg before it
+        sells: a stop left resting after a hand sale fills into a SHORT."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        for t in self.ib.trades():
+            if t.order.orderId == order_id and t.orderStatus.status not in ("Filled", "Cancelled", "ApiCancelled", "Inactive"):
+                self.ib.cancelOrder(t.order)
+                return True
+        return False
+
+    def working_stops(self, symbol: str) -> list[tuple[int, float, float]]:
+        """(order id, stop price, quantity) of every SELL stop resting at the
+        broker for `symbol`. `Runner.reprotect` reads this before placing a
+        stop: a second stop under one position sells it twice."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        out = []
+        for t in self.ib.trades():
+            o = t.order
+            if (getattr(t.contract, "symbol", None) == symbol and o.action == "SELL"
+                    and o.orderType in ("STP", "STP LMT")
+                    and t.orderStatus.status in ("Submitted", "PreSubmitted", "PendingSubmit")):
+                out.append((o.orderId, float(o.auxPrice), float(o.totalQuantity)))
+        return out
 
     def place_stop(self, symbol: str, qty: int, stop_price: float, ref: Optional[str] = None) -> int:
         """A standalone protective stop for a position already held. Used to

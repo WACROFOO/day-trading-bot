@@ -336,7 +336,7 @@ class Runner:
             self.unreconciled = [x for x in out if x.startswith("STOP COVERS")]
             return out
         out += self._resolve_gone_entries(ib)
-        working = ("Submitted", "PreSubmitted", "monitored")
+        working = ("Submitted", "PreSubmitted", "monitored", "Triggered")
         for pos in ib.positions():
             qty = int(getattr(pos, "position", 0) or 0)
             if qty <= 0:
@@ -359,6 +359,12 @@ class Runner:
             for r in rows:
                 has_exit = (r["status"] == "ExitPending"
                             or (r["stop_status"] or "") in working)
+                if (r["stop_status"] or "") == "Triggered":
+                    out.append(f"STOP TRIGGERED {sym} x{qty} (order #{r['order_id']}) — the broker reports the stop "
+                               f"triggered but the position is still held: a sell is in flight (a halted name fills "
+                               f"on resume). If the name is trading and this line persists, a human sells: "
+                               f"exercise.py ah-exit {r['order_id']} --confirm --market")
+                    continue
                 if r["status"] == "ExitFailed":
                     cover = (f"stop {r['stop_id']} resting" if r["protected"] and (r["stop_status"] or "") in working
                              else "NO stop")
@@ -487,9 +493,25 @@ class Runner:
                                              or (p.filled_qty is not None and r["filled_qty"] != p.filled_qty)):
                 if L.refresh_fill(self.conn, r["order_id"], fill_price=p.fill_price, filled_qty=p.filled_qty):
                     n += 1
-            if p.stop_id and p.stop_status and r["stop_status"] not in (L.MANUAL, "monitored"):
+            if p.stop_id and p.stop_status and r["stop_status"] not in (L.MANUAL, "monitored", "Triggered"):
                 if L.set_protection(self.conn, r["order_id"], stop_status=p.stop_status,
                                     protected=bool(p.protected)):
+                    n += 1
+            # the broker's resting stop level, when sync read one (a fake broker
+            # that reads none leaves the ledger's trail alone)
+            if p.stop_id and getattr(p, "broker_stop_level", None) is not None:
+                row_trail = self.conn.execute("SELECT trail_stop FROM orders WHERE order_id=?",
+                                              (r["order_id"],)).fetchone()[0]
+                if p.trail_stop is None and row_trail is not None:
+                    self.conn.execute("UPDATE orders SET trail_stop=NULL, updated_at=? WHERE order_id=?",
+                                      (L._now(), r["order_id"]))
+                    L.add_order_event(self.conn, r["order_id"],
+                                      f"trail level {row_trail} corrected to the initial stop: the broker's stop rests there")
+                    n += 1
+                elif p.trail_stop is not None and (row_trail is None or abs(p.trail_stop - row_trail) > 1e-9):
+                    L.set_trail(self.conn, r["order_id"], trail_stop=p.trail_stop, high=None)
+                    L.add_order_event(self.conn, r["order_id"],
+                                      f"trail level {row_trail} corrected to {p.trail_stop}: the broker's resting level")
                     n += 1
         for r in L.pending_exits(self.conn):
             p = by_parent.get(r["parent_id"])
@@ -576,6 +598,27 @@ class Runner:
         for o in L.unprotected_positions(self.conn):
             qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
             level = max(float(o["stop"]), float(o["trail_stop"] or 0.0))
+            # The broker first: a stop the ledger lost track of may still rest
+            # there (a refused modify shows as Cancelled for a moment, then
+            # PreSubmitted again). A second stop under one position sells it
+            # twice — the second fill is a short.
+            resting = []
+            if hasattr(self.trader, "working_stops"):
+                try:
+                    resting = self.trader.working_stops(o["symbol"])
+                except Exception:                           # noqa: BLE001
+                    resting = []
+            if resting:
+                sid, lvl, rq = resting[0]
+                L.set_new_stop_leg(self.conn, o["order_id"], stop_id=sid, level=lvl, qty=rq)
+                L.add_order_event(self.conn, o["order_id"],
+                                  f"reprotect: a SELL stop already rests at the broker (order {sid} at {lvl} x{rq:g}); "
+                                  f"adopted, none placed")
+                rec = by_parent.get(o["parent_id"])
+                if rec is not None:
+                    rec.stop_id, rec.stop_status, rec.protected, rec.stop_qty = sid, "Submitted", True, float(rq)
+                done.append(f"{o['symbol']} x{qty}: stop {sid} at {lvl:.2f} already resting at the broker — adopted, none placed")
+                continue
             try:
                 new_id = self.trader.place_stop(o["symbol"], qty, level, ref=o["decision_id"])
             except Exception as exc:                        # noqa: BLE001
@@ -622,11 +665,26 @@ class Runner:
                                   f"trail: high {high} would put the stop at {new}, but this process holds "
                                   f"no broker record for parent {o['parent_id']}; stop left at {current}")
                 continue
+            if (o["stop_status"] or "") == "Triggered":
+                continue                                    # a sell in flight is not a resting stop to move
             try:
                 self.trader.move_stop(rec, new)
             except Exception as exc:                        # noqa: BLE001
-                L.add_order_event(self.conn, o["order_id"],
-                                  f"trail: move {current} -> {new} raised {exc!r}; stop left at {current}")
+                triggered = bool(getattr(exc, "triggered", False))
+                if triggered:
+                    # IBKR: "Stop price revision is disallowed after order has
+                    # triggered". The stop is a sell in flight (a halted name
+                    # fills on resume). Stop moving it; reconcile watches it.
+                    L.set_protection(self.conn, o["order_id"], stop_status="Triggered", protected=True)
+                    rec.stop_status = "Triggered"
+                    L.add_order_event(self.conn, o["order_id"],
+                                      f"trail: move {current} -> {new} refused — the broker reports the stop TRIGGERED; "
+                                      f"a sell is in flight at the resting level; no further moves")
+                    done.append(f"{o['symbol']} stop TRIGGERED at the broker ({current:.2f}); sell in flight, "
+                                f"no more trail moves — if the name is halted it fills on resume")
+                else:
+                    L.add_order_event(self.conn, o["order_id"],
+                                      f"trail: move {current} -> {new} raised {exc!r}; stop left at {current}")
                 continue
             L.set_trail(self.conn, o["order_id"], trail_stop=new, high=high)
             L.add_order_event(self.conn, o["order_id"],

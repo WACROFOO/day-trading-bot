@@ -560,3 +560,73 @@ def test_acted_carries_the_backfill_flag(journal):
     a = Acted("d", "WHLR", "2026-09-23T04:22:00-04:00", 6.6, 6.02, "REFUSED", ["bar is outside"], True)
     assert a.backfill is True
     assert Acted("d", "WHLR", "t", 1.0, 0.9, "TAKEN", []).backfill is False
+
+
+
+def test_a_triggered_stop_stops_the_trail_and_is_named_by_reconcile(journal):
+    """The broker says the stop has triggered: a sell is in flight. No more
+    modify attempts, the row reads Triggered, reconcile names it, and the
+    ledger's trail level is never advanced on a refused move."""
+    class TriggeredTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.moves = 0
+        def move_stop(self, rec, new_stop):
+            self.moves += 1
+            exc = RuntimeError("201: Stop price revision is disallowed after order has triggered")
+            exc.triggered = True
+            raise exc
+    t = TriggeredTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    high = round(o["trigger"] + 3 * (o["trigger"] - o["stop"]), 2)
+    journal.execute("INSERT INTO bars_10s (symbol, ts, open, high, low, close, volume) VALUES (?,?,?,?,?,?,?)",
+                    (rec.symbol, "2026-09-01T13:53:00Z", high, high, high, high, 100)); journal.commit()
+    lines = r.trail_stops()
+    assert t.moves == 1 and any("TRIGGERED" in x for x in lines), lines
+    o1 = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    assert o1["stop_status"] == "Triggered" and o1["protected"] == 1 and o1["trail_stop"] is None
+    assert r.trail_stops() == [] and t.moves == 1                  # never tried again
+    from types import SimpleNamespace as NS
+    t.ib = NS(positions=lambda: [NS(position=int(o["shares"]), contract=NS(symbol=rec.symbol))],
+              openTrades=lambda: [], fills=lambda: [], trades=lambda: [])
+    lines = r.reconcile_positions()
+    assert any("STOP TRIGGERED" in x and "ah-exit" in x for x in lines), lines
+    assert not any("NO WORKING EXIT" in x for x in lines)
+    assert r.reprotect() == []                                     # protected: a sell in flight is an exit
+
+
+def test_reprotect_adopts_a_stop_already_resting_at_the_broker_instead_of_doubling_it(journal):
+    """A refused modify shows the leg as Cancelled for a moment. Placing a
+    second stop under one position sells it twice; the second fill is a
+    short. The runner asks the broker first and adopts what rests there."""
+    class AdoptingTrader(FakeTrader):
+        def __init__(self):
+            super().__init__(); self.placed_stops = []
+        def working_stops(self, symbol): return [(777, 5.61, 41.0)]
+        def place_stop(self, symbol, qty, stop_price, ref=None):
+            self.placed_stops.append((symbol, qty, stop_price)); return 900
+    t = AdoptingTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    journal.execute("UPDATE orders SET protected=0, stop_status='Cancelled' WHERE order_id=?", (o["order_id"],)); journal.commit()
+    lines = r.reprotect()
+    assert len(lines) == 1 and "adopted, none placed" in lines[0] and t.placed_stops == []
+    o2 = journal.execute("SELECT * FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()
+    assert (o2["stop_id"], o2["protected"], o2["stop_status"]) == (777, 1, "Submitted")
+
+
+
+def test_the_brokers_resting_stop_level_corrects_the_ledgers_trail(journal):
+    """WHLR 2026-09-23: the ledger said 7.74 after three refused moves; the
+    broker held 7.34. When the trader's sync reads the resting level, the
+    ledger follows the broker, both up and back to the initial stop."""
+    t = FakeTrader()
+    r, rec = _take_and_fill(journal, t)
+    o = journal.execute("SELECT * FROM orders WHERE parent_id=?", (rec.parent_id,)).fetchone()
+    L.set_trail(journal, o["order_id"], trail_stop=round(o["stop"] + 0.40, 2), high=None); journal.commit()
+    rec.broker_stop_level = float(o["stop"]); rec.trail_stop = None      # what PaperTrader.sync would set
+    r.sync_fills()
+    assert journal.execute("SELECT trail_stop FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()[0] is None
+    rec.broker_stop_level = round(o["stop"] + 0.10, 2); rec.trail_stop = rec.broker_stop_level
+    r.sync_fills()
+    assert journal.execute("SELECT trail_stop FROM orders WHERE order_id=?", (o["order_id"],)).fetchone()[0] == round(o["stop"] + 0.10, 2)

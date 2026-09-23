@@ -65,10 +65,10 @@ def test_alerts_script_filters_by_symbol_window_and_scanner_and_formats_reasons(
     ev = [
         {"symbol": "WHLR", "scannerId": "squeeze_5_in_5", "branch": None, "severity": "medium",
          "sourceTime": "2026-09-23T13:32:10+00:00", "values": {"last": 5.59},
-         "reasons": [{"field": "move_5m_pct", "value": 7.1, "passed": True, "threshold": 5.0}]},
+         "reasons": [{"filter": "move_5m_pct", "value": 7.1, "passed": True, "threshold": 5.0}]},
         {"symbol": "WHLR", "scannerId": "hod_momentum", "branch": "low_float_high_rvol_price_under_20",
          "severity": "high", "sourceTime": "2026-09-23T13:41:00+00:00", "values": {"last": 6.7},
-         "reasons": [{"field": "new_hod", "value": 6.72, "passed": True, "threshold": 6.5}]},
+         "reasons": [{"filter": "new_hod", "value": 6.72, "passed": True, "threshold": 6.5}]},
         {"symbol": "MSS", "scannerId": "squeeze_5_in_5", "severity": "medium",
          "sourceTime": "2026-09-23T13:38:00+00:00", "values": {"last": 2.24}, "reasons": []},
     ]

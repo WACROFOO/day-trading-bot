@@ -60,20 +60,82 @@ def format_event(e: dict) -> str:
     for r in reasons:
         mark = "✓" if r.get("passed") else "✗"
         thr = r.get("threshold")
-        parts.append(f"{mark}{r.get('field')}={r.get('value')}" + (f"/{thr}" if thr is not None else ""))
+        parts.append(f"{mark}{r.get('filter')}={r.get('value')}" + (f"/{thr}" if thr is not None else ""))
     return (f"  {et_hhmm(e.get('sourceTime') or '')} {e.get('symbol', '?'):<6}{e.get('scannerId', '?'):<18}"
             f"{(e.get('branch') or '—'):<24}{(e.get('severity') or ''):<9}"
             f"{('last ' + str(last)) if last is not None else '':<12} {' '.join(parts)}")
 
 
+def why_running_up(db: str, symbol: str, day: str, t_from: str | None, t_to: str | None) -> list[str]:
+    """Replay the Running Up scanner over the ledger's one-minute bars for
+    `symbol` on `day` and print, per minute, each condition's value and
+    whether it passed. The scanner does not fire on a minute where any
+    condition is ✗; this is the list of ✗ marks. Bars are the desk's own,
+    written to the ledger as they closed."""
+    import sqlite3
+    sys.path.insert(0, str(__import__("pathlib").Path(__file__).resolve().parents[1] / "src"))
+    from momentum_platform.engine import ScannerEngine
+    from momentum_platform.models import Bar, DataStatus
+    from momentum_platform.notify import NotificationRouter, RouterConfig
+    from momentum_platform.scanners.momentum_events import UptrendScanner
+    from momentum_platform.state import HotState, MarketUpdate, ReferenceData
+
+    conn = sqlite3.connect(db); conn.row_factory = sqlite3.Row
+    rows = conn.execute("SELECT ts, open, high, low, close, volume FROM bars WHERE symbol=? ORDER BY ts", (symbol,)).fetchall()
+    bars = []
+    for r in rows:
+        ts = datetime.fromisoformat(r["ts"].replace("Z", "+00:00"))
+        if ts.astimezone(ET).date().isoformat() == day:
+            bars.append((ts, r))
+    if not bars:
+        return [f"no one-minute bars for {symbol} on {day} in {db}"]
+
+    class Explaining(UptrendScanner):
+        def __init__(self):
+            super().__init__(); self.rows = []
+        def on_snapshot(self, current, previous, state, hot):
+            c = self.conditions(current, state)
+            fired = super().on_snapshot(current, previous, state, hot)
+            if c is not None:
+                self.rows.append((current.event_ts, current.last, c, bool(fired)))
+            return fired
+
+    sc = Explaining()
+    hot = HotState()
+    hot.load_reference([ReferenceData(symbol=symbol, prev_close=bars[0][1]["open"], avg_daily_volume=None)])
+    engine = ScannerEngine(hot=hot, scanners=[sc], router=NotificationRouter(RouterConfig(), []))
+    for ts, r in bars:
+        bar = Bar(symbol, "1m", ts, r["open"], r["high"], r["low"], r["close"], r["volume"] or 0)
+        engine.process(MarketUpdate(symbol, ts, price=r["close"], size=r["volume"] or 0, bar=bar,
+                                    data_status=DataStatus.REPLAY))
+    out = [f"RUNNING UP · {symbol} · {day} · each minute's conditions (✗ = the reason it did not fire)"]
+    for ts, last, c, fired in sc.rows:
+        hhmm = ts.astimezone(ET).strftime("%H:%M")
+        if t_from and hhmm < t_from:
+            continue
+        if t_to and hhmm > t_to:
+            continue
+        marks = " ".join(f"{'✓' if ok else '✗'}{name}={val}" for name, (ok, val) in c.items())
+        out.append(f"  {hhmm} last {last:<7} {'FIRED ' if fired else '      '}{marks}")
+    return out
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("symbols", nargs="*", help="symbols to show (default: all)")
+    ap.add_argument("--why", metavar="SYM", help="replay Running Up over the ledger's 1-minute bars for SYM and show each minute's conditions")
+    ap.add_argument("--day", help="ET date for --why (default: today)")
+    ap.add_argument("--db", default="data/journal.sqlite", help="the ledger, for --why")
     ap.add_argument("--from", dest="t_from", help="ET HH:MM, inclusive")
     ap.add_argument("--to", dest="t_to", help="ET HH:MM, inclusive")
     ap.add_argument("--scanner", action="append", help="scanner id, repeatable (hod_momentum, running_up, squeeze_5_in_5, ...)")
     ap.add_argument("--url", default="http://127.0.0.1:8787", help="the desk (default 127.0.0.1:8787)")
     args = ap.parse_args(argv)
+    if args.why:
+        day = args.day or datetime.now(ET).date().isoformat()
+        for line in why_running_up(args.db, args.why.upper(), day, args.t_from, args.t_to):
+            print(line)
+        return 0
     try:
         with urllib.request.urlopen(f"{args.url}/api/v1/scanner-events", timeout=10) as r:
             payload = json.load(r)

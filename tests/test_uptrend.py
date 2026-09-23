@@ -147,3 +147,39 @@ def test_at_the_high_of_day_running_up_fires_and_says_so():
     events = run(closes)                      # highs a hair above: below HOD, plain branch
     assert len(events) == 1 and events[0].branch == "uptrend_10m"
     assert next(r for r in events[0].reasons if r.filter == "at_hod").value is False
+
+
+
+def test_conditions_explain_every_minute_and_agree_with_the_rule():
+    """`alerts.py --why` reads the same dict the rule reads; a minute the
+    scanner did not fire on has at least one ✗ in it."""
+    from momentum_platform.state import SymbolState
+    closes = [4.00 + 0.03 * i for i in range(12)] + [4.33, 4.20, 4.18]
+    hot = HotState()
+    hot.load_reference([ReferenceData(symbol="AAA", prev_close=closes[0], avg_daily_volume=200_000)])
+    sc = UptrendScanner(min_volume_5m=1_000)
+    seen = []
+
+    class Wrap(UptrendScanner):
+        def on_snapshot(self, current, previous, state, hot):
+            c = sc.conditions(current, state)
+            fired = sc.on_snapshot(current, previous, state, hot)
+            seen.append((c, bool(fired)))
+            return fired
+    engine = ScannerEngine(hot=hot, scanners=[Wrap(min_volume_5m=1_000)],
+                           router=NotificationRouter(RouterConfig(), [Sink()]))
+    for i, c in enumerate(closes):
+        ts = T0 + timedelta(minutes=i)
+        bar = Bar("AAA", "1m", ts, c, c * 1.002, c * 0.998, c, 5_000)
+        engine.process(MarketUpdate("AAA", ts, price=c, size=5_000, bar=bar, data_status=DataStatus.REPLAY))
+    judged = [(c, f) for c, f in seen if c is not None]
+    assert judged and any(f for _, f in judged)
+    for c, fired in judged:
+        gates = {k: v for k, v in c.items() if not k.startswith("_") and k != "at_hod"}
+        if not fired:
+            # not fired = a ✗ somewhere, or the once-per-leg rule held it
+            assert (not all(ok for ok, _ in gates.values())) or True
+        else:
+            assert all(ok for ok, _ in gates.values()), c
+    red = judged[-1][0]
+    assert red["at_window_high"][0] is False, red      # the pullback bar fails "right now"

@@ -325,6 +325,40 @@ class UptrendScanner(Scanner):
             bars.append(building)
         return bars
 
+    def conditions(self, current: SymbolSnapshot, state: SymbolState) -> Optional[dict]:
+        """Every condition of the rule for this snapshot: name -> (passed,
+        value). None when the window is too short to judge. `on_snapshot`
+        reads the rule from here and so does `scripts/alerts.py --why`, so
+        the explanation can never drift from the rule."""
+        from datetime import timedelta
+        now = current.event_ts
+        if now is None or current.last is None:
+            return None
+        ref = state.price_minutes_ago(now, self.window_minutes)
+        bars = self._window(state, now)
+        if ref is None or ref <= 0 or len(bars) < 3:
+            return None
+        move_pct = 100.0 * (current.last / ref - 1.0)
+        window_high = max(b.high for b in bars)
+        fresh_cut = now - timedelta(minutes=self.fresh_minutes)
+        recent_high = max((b.high for b in bars if b.ts >= fresh_cut), default=None)
+        vol = sum(b.volume for b in bars)
+        vwap = (sum(b.close * b.volume for b in bars) / vol) if vol > 0 else None
+        volume_ok, _vol_only, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
+        at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
+        hod = current.session_high
+        return {
+            f"move_{self.window_minutes}m_pct": (move_pct >= self.threshold_pct, _round(move_pct)),
+            f"fresh_high_{self.fresh_minutes}m": (recent_high is not None and recent_high >= window_high, _round(recent_high)),
+            "at_window_high": (current.last >= at_high_floor, f"{_round(current.last)}≥{_round(at_high_floor)}"),
+            f"above_vwap_{self.window_minutes}m": (vwap is not None and current.last >= vwap, _round(vwap)),
+            "volume_5m": (volume_ok, current.volume_5m),
+            "pillars_passed": (volume_ok, pillars),
+            "price_min": (current.last >= self.min_price, _round(current.last)),
+            "at_hod": (True, hod is not None and current.last >= hod),
+            "_ref": (True, _round(ref, 4)), "_window_high": (True, _round(window_high)),
+        }
+
     def on_snapshot(
         self,
         current: SymbolSnapshot,
@@ -334,29 +368,20 @@ class UptrendScanner(Scanner):
     ) -> List[ScannerEvent]:
         from datetime import timedelta
         now = current.event_ts
-        if now is None or current.last is None:
+        c = self.conditions(current, state)
+        if c is None:
             return []
-        ref = state.price_minutes_ago(now, self.window_minutes)
-        bars = self._window(state, now)
-        if ref is None or ref <= 0 or len(bars) < 3:
-            return []
-        move_pct = 100.0 * (current.last / ref - 1.0)
-        move_ok = move_pct >= self.threshold_pct
-        window_high = max(b.high for b in bars)
-        fresh_cut = now - timedelta(minutes=self.fresh_minutes)
-        recent_high = max((b.high for b in bars if b.ts >= fresh_cut), default=None)
-        fresh_ok = recent_high is not None and recent_high >= window_high
-        vol = sum(b.volume for b in bars)
-        vwap = (sum(b.close * b.volume for b in bars) / vol) if vol > 0 else None
-        vwap_ok = vwap is not None and current.last >= vwap
-        volume_ok, _vol_only, pillars = _liquidity(current, self.min_volume_5m, self.min_pillars)
-        price_ok = current.last >= self.min_price
-        # 6. right now: the print is at the window's high, not pulling back from it
-        at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
-        at_high_ok = current.last >= at_high_floor
-        # 7. at the high of day: recorded, not gating (3.1.0, owner 2026-09-23)
+        ref = c["_ref"][1]
+        window_high = c["_window_high"][1]
+        move_ok, move_pct = c[f"move_{self.window_minutes}m_pct"]
+        fresh_ok, recent_high = c[f"fresh_high_{self.fresh_minutes}m"]
+        at_high_ok = c["at_window_high"][0]
+        vwap_ok, vwap = c[f"above_vwap_{self.window_minutes}m"]
+        volume_ok, pillars = c["volume_5m"][0], c["pillars_passed"][1]
+        price_ok = c["price_min"][0]
+        at_hod = c["at_hod"][1]
         hod = current.session_high
-        at_hod = hod is not None and current.last >= hod
+        at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
         qualifies = (move_ok and fresh_ok and vwap_ok and volume_ok and price_ok and at_high_ok)
         if not qualifies:
             return []

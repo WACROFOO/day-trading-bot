@@ -515,6 +515,18 @@ def cmd_ah_exit(args) -> int:
             print(f"{BAD}no fresh quote for {o['symbol']} in the ledger — start the desk first, "
                   f"or inside regular hours use --market{END}"); return 1
     with PaperTrader() as t:
+        # The resting stop leg goes first. A stop left resting after a hand
+        # sale fills into a SHORT position; the flatten cancels first for the
+        # same reason. If the sell then fails, the row reads ExitFailed and
+        # the runner's reprotect places a fresh stop.
+        if o["stop_id"] and hasattr(t, "cancel_order_id"):
+            try:
+                if t.cancel_order_id(int(o["stop_id"])):
+                    t.ib.sleep(1)
+                    print(f"  stop leg {o['stop_id']} cancelled first, so the position cannot be sold twice")
+                    L.add_order_event(conn, o["order_id"], f"manual exit: stop leg {o['stop_id']} cancelled before the sell")
+            except Exception as exc:                        # noqa: BLE001
+                print(f"  {WARN}could not cancel stop leg {o['stop_id']}: {exc!r} — selling anyway; check the broker for a resting SELL{END}")
         if market:
             exit_id = t.exit_market(o["symbol"], qty)
             px = None

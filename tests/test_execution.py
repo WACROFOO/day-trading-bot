@@ -617,3 +617,65 @@ def test_move_stop_on_an_oca_leg_places_the_new_stop_before_cancelling_the_old()
     assert sent and sent[0].orderType == "STP" and sent[0].auxPrice == 5.52 and sent[0].totalQuantity == 41
     assert not getattr(sent[0], "ocaGroup", "")
     assert cancelled == [stop] and rec.stop_id == new_id != 11 and rec.trail_stop == 5.52
+
+
+
+def test_move_stop_reads_the_brokers_answer_and_reverts_a_refused_modify():
+    """WHLR 2026-09-23 10:15: IBKR answered 201 'Stop price revision is
+    disallowed after order has triggered' three times; the runner wrote each
+    refused level to the ledger. The mover now waits for the answer, puts the
+    local order back, and raises StopMoveRejected with `triggered` set."""
+    pytest.importorskip("ib_async")
+    from ib_async import StopOrder
+    from execution.ibkr_trader import StopMoveRejected
+    stop = StopOrder("SELL", 20, 7.34); stop.orderId = 34; stop.parentId = 33
+
+    class Status:
+        status = "PreSubmitted"
+
+    class Trade:
+        order = stop
+        contract = type("C", (), {"symbol": "WHLR"})()
+        orderStatus = Status()
+
+    class FakeIB:
+        def __init__(self, t): self.t = t; self.slept = 0
+        def trades(self): return [Trade()]
+        def placeOrder(self, c, o):
+            # the broker answers a beat later, on the error event
+            self.t.order_errors.setdefault(o.orderId, []).append(
+                (201, "Order rejected - reason:Stop price revision is disallowed after order has triggered"))
+        def sleep(self, s): self.slept += s
+
+    t = PaperTrader()
+    t.order_errors = {}
+    t.ib = FakeIB(t)
+    rec = PlacedOrder(symbol="WHLR", parent_id=33, stop_id=34, trigger=8.31, stop=7.34, shares=20)
+    with pytest.raises(StopMoveRejected) as ei:
+        t.move_stop(rec, 7.37)
+    assert ei.value.triggered is True and ei.value.code == 201
+    assert stop.auxPrice == 7.34, "the local order is put back where the broker kept it"
+    assert rec.trail_stop is None, "a refused level is never recorded as the resting one"
+    assert any("REFUSED by the broker" in e for e in rec.events)
+
+
+def test_working_stops_and_cancel_order_id_read_and_cancel_by_id():
+    pytest.importorskip("ib_async")
+    from ib_async import StopOrder, LimitOrder
+    stop = StopOrder("SELL", 20, 7.34); stop.orderId = 34
+    lim = LimitOrder("BUY", 20, 8.31); lim.orderId = 33
+    cancelled = []
+
+    def trade(order, status):
+        return type("T", (), {"order": order, "contract": type("C", (), {"symbol": "WHLR"})(),
+                              "orderStatus": type("S", (), {"status": status})()})()
+
+    class FakeIB:
+        def trades(self): return [trade(lim, "Filled"), trade(stop, "PreSubmitted")]
+        def cancelOrder(self, o): cancelled.append(o.orderId)
+
+    t = PaperTrader(); t.ib = FakeIB()
+    assert t.working_stops("WHLR") == [(34, 7.34, 20.0)]
+    assert t.working_stops("OTHER") == []
+    assert t.cancel_order_id(34) is True and cancelled == [34]
+    assert t.cancel_order_id(33) is False                # filled: nothing to cancel
