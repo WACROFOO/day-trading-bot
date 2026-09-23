@@ -250,12 +250,22 @@ class UptrendScanner(Scanner):
                       `at_high_tol_pct`). VEEE fired at 18.20 on a red bar
                       with the 10-minute high at 18.71: "up 3% over ten
                       minutes" was true, "squeezing up right now" was not.
-      7. below HOD   — `knowledge-base/strategies/SCANNERS.md` §B4, w97
+      7. at HOD      — `knowledge-base/strategies/SCANNERS.md` §B4, w97
                       [01:00:52]: "it has to be below the high of day.
                       Otherwise we'll put it on the high of day momentum
-                      scanner." At or above the session high this scanner
-                      is silent; that event belongs to HOD momentum. The two
-                      tiles are mutually exclusive by construction.
+                      scanner." In 3.0.0 this was a gate: at or above the
+                      session high the scanner was silent and the event
+                      belonged to HOD momentum. **3.1.0 (owner decision,
+                      2026-09-23): no longer a gate.** WHLR ran 5.51 → 6.72
+                      from 09:33 to 09:39 making new highs the whole way and
+                      the Running Up tile showed nothing after 09:33; the
+                      owner wants every runner in this tile whether or not
+                      it is at its high. The position is still recorded on
+                      the event: branch `uptrend_10m_hod` and reason
+                      `at_hod` when the print is at or above the session
+                      high, `uptrend_10m` otherwise. This is a LOCAL display
+                      choice for this desk and departs from the platform
+                      rule quoted above; the two tiles now overlap by design.
       8. once per leg — a repeat alert on the same name needs a NEW LEG:
                       at least one completed minute since the last alert that
                       did not print a higher high (a pause or a pullback),
@@ -276,7 +286,7 @@ class UptrendScanner(Scanner):
         fresh_minutes: int = 3,
         min_volume_5m: float = MIN_VOLUME_5M,
         min_price: float = 1.0,
-        version: str = "3.0.0",
+        version: str = "3.1.0",
         min_pillars: int = MIN_PILLARS_FOR_LIQUIDITY,
         at_high_tol_pct: float = 0.5,
         min_advance_pct: float = 1.0,
@@ -344,11 +354,10 @@ class UptrendScanner(Scanner):
         # 6. right now: the print is at the window's high, not pulling back from it
         at_high_floor = window_high * (1.0 - self.at_high_tol_pct / 100.0)
         at_high_ok = current.last >= at_high_floor
-        # 7. below the high of day, or this is HOD momentum's event (§B4)
+        # 7. at the high of day: recorded, not gating (3.1.0, owner 2026-09-23)
         hod = current.session_high
-        below_hod_ok = hod is None or current.last < hod
-        qualifies = (move_ok and fresh_ok and vwap_ok and volume_ok and price_ok
-                     and at_high_ok and below_hod_ok)
+        at_hod = hod is not None and current.last >= hod
+        qualifies = (move_ok and fresh_ok and vwap_ok and volume_ok and price_ok and at_high_ok)
         if not qualifies:
             return []
         # 8. once per leg: a repeat needs a new leg (a pause since the last alert,
@@ -366,16 +375,17 @@ class UptrendScanner(Scanner):
             Reason(f"move_{self.window_minutes}m_pct", _round(move_pct), move_ok, self.threshold_pct),
             Reason(f"fresh_high_{self.fresh_minutes}m", _round(recent_high), fresh_ok, _round(window_high)),
             Reason("at_window_high", _round(current.last), at_high_ok, _round(at_high_floor)),
-            Reason("below_hod", _round(current.last), below_hod_ok, _round(hod)),
+            Reason("at_hod", at_hod, True, _round(hod)),
             Reason(f"above_vwap_{self.window_minutes}m", _round(current.last), vwap_ok, _round(vwap)),
             Reason("volume_5m", current.volume_5m, volume_ok, self.min_volume_5m),
             Reason("pillars_passed", pillars, volume_ok, self.min_pillars),
             Reason("price_min", _round(current.last), price_ok, self.min_price),
         ]
         severity = "high" if move_pct >= 2 * self.threshold_pct else "medium"
+        branch = f"uptrend_{self.window_minutes}m" + ("_hod" if at_hod else "")
         return [
             self._event(
-                current, now, "qualified", severity, reasons, branch=f"uptrend_{self.window_minutes}m",
+                current, now, "qualified", severity, reasons, branch=branch,
                 extra_values={"reference_price": _round(ref, 4), "window_minutes": self.window_minutes,
                               "window_high": _round(window_high), "vwap_window": _round(vwap)},
             )

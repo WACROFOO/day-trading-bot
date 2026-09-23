@@ -987,7 +987,7 @@ function sessionOf(iso) {
 const BRANCH_SHORT = {
   low_float: "LF", medium_float: "MF", high_rvol: "HR", medium_rvol: "MR",
   price_20_plus: "20+", price_under_20: "<20",
-  unknown_float: "?F", uptrend_10m: "UP·10m", qualified: "QUAL",
+  unknown_float: "?F", uptrend_10m: "UP·10m", uptrend_10m_hod: "UP·10m·HOD", qualified: "QUAL",
 };
 /* The scanner id carries the branch on the squeeze scanners, where the branch
    itself is just "qualified". Two characters of column beat fourteen. */

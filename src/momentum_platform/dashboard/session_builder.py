@@ -85,7 +85,7 @@ LIST_META = {
 ALERT_META = {
     "five_pillars_alert": {"title": "Ross's 5 Pillars Alert", "severity": "high"},
     "hod_momentum": {"title": "Small Cap - High of Day Momentum", "severity": "high"},
-    "running_up": {"title": "Running Up · 10-minute uptrend", "severity": "medium"},
+    "running_up": {"title": "Running Up · 10-minute uptrend · HOD included", "severity": "medium"},
     "squeeze_5_in_5": {"title": "Squeeze - Up 5% in 5min", "severity": "medium"},
     "squeeze_10_in_10": {"title": "Squeeze - Up 10% in 10min", "severity": "medium"},
     "breakout_52w": {"title": "Squeeze - 52wk Breakout", "severity": "medium"},

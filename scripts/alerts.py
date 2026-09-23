@@ -91,8 +91,8 @@ def main(argv=None) -> int:
     for e in rows:
         print(format_event(e))
     scanners = sorted({e.get("scannerId") for e in rows})
-    print(f"  scanners present: {', '.join(scanners)}. Absent means silent: running_up is silent AT the high of day by rule "
-          f"(that event is hod_momentum's); the squeezes fire once per edge and stay silent while the move holds.")
+    print(f"  scanners present: {', '.join(scanners)}. Absent means silent: running_up fires once per leg (a repeat "
+          f"needs a pause, then a higher print); the squeezes fire once per edge and stay silent while the move holds.")
     return 0
 
 

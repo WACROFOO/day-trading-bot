@@ -53,7 +53,7 @@ def test_a_grinding_uptrend_fires_once_per_leg():
     e = events[0]
     assert e.branch == "uptrend_10m"
     names = {r.filter for r in e.reasons}
-    assert names == {"move_10m_pct", "fresh_high_3m", "at_window_high", "below_hod",
+    assert names == {"move_10m_pct", "fresh_high_3m", "at_window_high", "at_hod",
                      "above_vwap_10m", "volume_5m", "pillars_passed", "price_min"}
     assert all(r.passed for r in e.reasons)
     assert e.values["window_minutes"] == 10
@@ -134,12 +134,16 @@ def test_a_higher_leg_fires_again():
     assert events[1].values["reference_price"] < closes[-1]
 
 
-def test_at_the_high_of_day_running_up_is_silent():
-    """SCANNERS.md §B4, w97 [01:00:52]: below the high of day, or it is HOD
-    momentum's event. A print AT the session high is not this scanner's."""
+def test_at_the_high_of_day_running_up_fires_and_says_so():
+    """3.0.0 was silent at the session high (SCANNERS.md §B4: that event is
+    HOD momentum's). Owner decision 2026-09-23, after WHLR ran 5.51 → 6.72
+    at its high with an empty Running Up tile: every runner shows here; the
+    position is on the event. A LOCAL departure from the platform rule."""
     closes = [4.00 + 0.03 * i for i in range(16)]
     events = run(closes, highs=closes)        # every close IS the bar high: last == HOD
-    assert events == []
-    events = run(closes)                      # highs a hair above: below HOD, fires once
-    assert len(events) == 1
-    assert next(r for r in events[0].reasons if r.filter == "below_hod").passed
+    assert len(events) == 1 and events[0].branch == "uptrend_10m_hod"
+    r = next(r for r in events[0].reasons if r.filter == "at_hod")
+    assert r.value is True and r.passed
+    events = run(closes)                      # highs a hair above: below HOD, plain branch
+    assert len(events) == 1 and events[0].branch == "uptrend_10m"
+    assert next(r for r in events[0].reasons if r.filter == "at_hod").value is False
