@@ -298,5 +298,9 @@ def test_reason_key_names_the_a8_buffer_and_the_hard_stop_instead_of_a_clock_fra
     assert controls.reason_key(d) == "refused: A8 entry buffer before the hard stop"
     d["refusal_reasons_json"] = json.dumps(["14:00 ET is past the 11:30 hard stop; no new entries (exits are always allowed)"])
     assert controls.reason_key(d) == "refused: past the hard stop"
-    d["refusal_reasons_json"] = json.dumps(["Layer 2 not green: verdict WAIT — chart gates"])
-    assert controls.reason_key(d) == "refused: Layer 2 not green"
+    # 2026-09-24: the chart gates and the volume gate are two buckets, so the
+    # BY REASON table separates them; the per-gate split is its own block
+    d["refusal_reasons_json"] = json.dumps(["Layer 2 not green: below VWAP (verdict WAIT) — chart gates must all be true at entry"])
+    assert controls.reason_key(d) == "refused: Layer 2 not green (chart)"
+    d["refusal_reasons_json"] = json.dumps(["Layer 2 not green: pullback volume was not lighter than the impulse"])
+    assert controls.reason_key(d) == "refused: Layer 2 not green (volume)"

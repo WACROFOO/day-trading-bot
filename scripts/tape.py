@@ -7,13 +7,21 @@ VWAP, 9/20 EMA, MACD 12/26/9, halts, the 1-minute range distribution, fade
 off the high. If a number is not in this output or in finviz, it does not go
 in the answer.
 
+Source (2026-09-24): IBKR whenever the Gateway answers — the same tape the
+desk decides on, with the real pre-market volume — labelled `ibkr·rt :4002`
+in the header; Yahoo only when no IBKR API port answers, labelled `yahoo`
+with the reason. `scripts/ib_feed.py` holds the connection; TAPE_SOURCE=yahoo
+forces the fallback. Before this date the IBKR path existed but never
+switched on, so every hand check ran on Yahoo while the desk ran on IBKR.
+
 Conventions, matching how the analysis has been done by hand all along:
   * EMAs and MACD run over the full 1-minute series including pre-market,
     so the open does not reset the averages.
   * VWAP is regular-hours only.
   * A halt is >= 3 consecutive missing 1-minute bars during regular hours
     (09:30-16:00). Yahoo omits bars with no prints; LULD halts are 5 minutes
-    minimum, so 3 missing minutes separates a halt from a thin tape.
+    minimum, so 3 missing minutes separates a halt from a thin tape. On
+    IBKR the live HALTED flag is printed as well.
   * Stop check: the median 1-minute range of the last 30 regular-hours bars
     is the smallest stop the tape can honour. Below it is fiction.
 
@@ -72,18 +80,25 @@ def ema(vals, n):
 
 
 def compute(sym):
-    # IBKR real-time when a local gateway is up (IB_GATEWAY=1 in .env);
-    # yahoo otherwise. The source is carried into the output so the
+    # IBKR whenever a Gateway answers (scripts/ib_feed.py); yahoo otherwise,
+    # with the reason kept. The source is carried into the output so the
     # provenance line never lies about where a number came from.
     ib_meta = None
     rows = []
-    if True:
-        try:
-            import ib_feed
-            if ib_feed.enabled():
+    source_note = None
+    try:
+        import ib_feed
+        if ib_feed.enabled():
+            try:
                 rows, ib_meta = ib_feed.fetch(sym)
-        except Exception:
-            rows, ib_meta = [], None
+            except Exception as exc:          # noqa: BLE001
+                rows, ib_meta = [], None
+                source_note = f'ibkr unreachable: {exc.__class__.__name__}: {str(exc)[:70]} — yahoo instead'
+        else:
+            source_note = os.environ.get('TAPE_SOURCE') == 'yahoo' and 'TAPE_SOURCE=yahoo' or \
+                ib_feed.port()[1]
+    except ImportError:
+        source_note = 'ib_feed module missing — yahoo'
     if not rows:
         r = fetch(sym)
         meta = r['meta']
@@ -122,6 +137,9 @@ def compute(sym):
     d = {
         'sym': sym,
         'source': 'ibkr' if ib_meta else 'yahoo',
+        'source_note': source_note if not ib_meta else ib_meta.get('quote_error'),
+        'port': ib_meta.get('port') if ib_meta else None,
+        'port_label': ib_meta.get('port_label') if ib_meta else None,
         'bid': ib_meta['bid'] if ib_meta else None,
         'ask': ib_meta['ask'] if ib_meta else None,
         'halted_live': ib_meta['halted'] if ib_meta else None,
@@ -183,8 +201,10 @@ def render(d, nbars=8):
         return
     now = dt.datetime.now(ET)
     src = d.get('source', 'yahoo')
-    src_tag = GOOD('ibkr·rt') if src == 'ibkr' else DIM('yahoo')
+    src_tag = GOOD(f"ibkr·rt :{d.get('port')} {d.get('port_label') or ''}".rstrip()) if src == 'ibkr' else DIM('yahoo')
     print(f"## {d['sym']} · {now:%H:%M:%S} ET · {src_tag}")
+    if d.get('source_note'):
+        print(DIM(('   quote: ' if src == 'ibkr' else '   ') + str(d['source_note'])))
     if d.get('halted_live'):
         print(BAD('⚠ HALTED RIGHT NOW — exchange halt flag is live'))
     gap = f" ({d['gap']:+.1f}%)" if d['gap'] is not None else ''
@@ -194,7 +214,7 @@ def render(d, nbars=8):
     print(f"last {d['last']:.2f}{prev}{gap}{ba}")
     if d['pm_hi'] is not None:
         print(f"PM   hi {d['pm_hi']:.2f}  lo {d['pm_lo']:.2f}  vol {d['pm_vol']:,}"
-              + ('  (yahoo hides most PM volume)' if d['pm_vol'] == 0 else ''))
+              + ('  (yahoo hides most PM volume)' if d['pm_vol'] == 0 and src == 'yahoo' else ''))
     if d['vwap'] is not None:
         fade_s = f"{d['fade']:+.1f}%"
         fade_s = BAD(fade_s) if d['fade'] <= -25 else (

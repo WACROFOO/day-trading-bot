@@ -367,9 +367,14 @@ def cmd_live(args) -> int:
                     continue
                 tag = {"TAKEN": OK, "REFUSED": WARN, "LOG_ONLY": DIM, "PENDING": DIM}.get(a.outcome, "")
                 shown = "ARMED" if a.outcome == "PENDING" else a.outcome
+                # Every reason, each cut at its explanatory dash: the 2026-09-24
+                # log ended lines at "Layer 2 not green: ve" because two long
+                # reasons shared a 90-character budget and the gate names fell
+                # off the end.
+                short = "; ".join(r.split(" — ")[0] for r in a.reasons)
                 print(f"  {a.ts_et[11:16]}  {a.symbol:<6} {tag}{shown:<8}{END} "
                       f"{a.trigger:.2f}/{a.stop:.2f}"
-                      + (f"  ✗ {'; '.join(a.reasons)[:90]}" if a.reasons else ""))
+                      + (f"  ✗ {short[:170]}" if a.reasons else ""))
             if args.trade:
                 flattened = manage_exits(runner, flattened, datetime.now(ET))
             time.sleep(min(30, args.every * errors) if errors else args.every)
@@ -678,6 +683,73 @@ def cmd_accept_a1(args) -> int:
     return 0
 
 
+def _l2_window(d: dict) -> str:
+    t = d["ts_et"][11:16]
+    if "07:00" <= t < "09:30":
+        return "pre-market"
+    if "09:30" <= t < "11:30":
+        return "regular"
+    return "other"
+
+
+def _l2_stats(ds: list[dict]) -> str:
+    """n · triggered · strat sum · trail sum · win, over rows whose trigger the tape touched."""
+    trig = [d for d in ds if d["trigger_hit"] == 1]
+    st = [d["strategy_r"] for d in trig if d["strategy_r"] is not None]
+    tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
+    win = f"{sum(1 for x in st if x > 0)/len(st):>5.0%}" if st else f"{'—':>5}"
+    fs = f"{sum(st):>+9.2f}" if st else f"{'—':>9}"
+    ft = f"{sum(tr):>+9.2f}" if tr else f"{'—':>9}"
+    return f"{len(ds):>4}{len(trig):>6}{fs}{ft}{win}"
+
+
+def print_layer2(rows: list[dict], *, cumulative: bool = False) -> None:
+    """Layer 2 gate by gate, on the plans the chart DECIDED (plan_allowed,
+    prospective): which of VWAP / 9 EMA / MACD / pullback-volume was red,
+    per window, and what the plans each combination refused went on to do.
+    The last table is the amendment-ready number: plans where ONE gate was
+    the only red one — the cohort that gate alone turned away. Upper bound
+    as everywhere in `missed`: fill at the trigger, no costs. FILTERS.md
+    values are frozen until phase D (§7); this is the measurement an
+    amendment is written from, not a tuning."""
+    from collections import defaultdict
+    from journal import layer2 as Z
+    pool = [d for d in rows if not d["backfill"] and d["outcome"] != "SUPPRESSED"]
+    title = "LAYER 2 · GATE BY GATE" + (" · cumulative" if cumulative else "")
+    print(f"\n{BOLD}{title}{END}  {len(pool)} prospective plan(s) the chart decided · red = FAIL or UNKNOWN")
+    if not pool:
+        print("  none")
+        return
+    windows = [w for w in ("pre-market", "regular", "other") if any(_l2_window(d) == w for d in pool)]
+    print(f"  {'window':<12}{'n':>5}{'all green':>11}" + "".join(f"{g + ' red':>12}" for g in Z.GATES))
+    for w in windows:
+        ds = [d for d in pool if _l2_window(d) == w]
+        green = sum(1 for d in ds if not d["l2_red"])
+        reds = "".join(f"{sum(1 for d in ds if g in d['l2_red']):>12}" for g in Z.GATES)
+        print(f"  {w:<12}{len(ds):>5}{green:>11}{reds}")
+    for w in windows:
+        ds = [d for d in pool if _l2_window(d) == w]
+        groups: dict[str, list[dict]] = defaultdict(list)
+        for d in ds:
+            groups[d["l2_key"]].append(d)
+        print(f"\n  {BOLD}by red combination · {w}{END}" + " " * 12 + f"{'n':>4}{'trig':>6}{'strat':>9}{'trail':>9}{'win':>5}   (? = unknown)")
+        for k, g in sorted(groups.items(), key=lambda kv: (kv[0] != "all green", -len(kv[1]))):
+            print(f"    {k:<32}{_l2_stats(g)}")
+    print(f"\n  {BOLD}if ONE gate were dropped{END}  plans where that gate was the only red one — the cohort it alone refused")
+    print(f"    {'gate':<10}{'window':<12}{'n':>4}{'trig':>6}{'strat':>9}{'trail':>9}{'win':>5}")
+    any_row = False
+    for g in Z.GATES:
+        for w in windows:
+            ds = [d for d in pool if _l2_window(d) == w and d["l2_red"] == [g]]
+            if ds:
+                any_row = True
+                print(f"    {g:<10}{w:<12}{_l2_stats(ds)}")
+    if not any_row:
+        print("    none — every red plan had two or more gates red")
+    print(f"  {DIM}a red gate is the cascade's FAIL or an UNKNOWN it could not compute; both fail 'all true at entry'. "
+          f"Numbers are the upper bound of `missed` (fill at trigger, no costs, one position rule ignored).{END}")
+
+
 def cmd_missed(args) -> int:
     """What the plans the runner did NOT take went on to do, next to the ones
     it did. Per row and per reason. Fill at the trigger, exits at their
@@ -765,6 +837,7 @@ def cmd_missed(args) -> int:
                   f"MAE {d['mae_r_planned'] if d['mae_r_planned'] is not None else '—'}")
         print(f"    {DIM}a measurement for amendment A9, not a gate: nothing refuses on it. Planned R on these rows is "
               f"inflated by the tiny denominator.{END}")
+    print_layer2(rows)
     print(f"\n{DIM}'strat' = fixed +2R target, −1R stop, else close (the strategy series). 'trail' = A3 trail_1r, bar-ordered.")
     print(f"A refused plan scored here assumes a fill at the trigger the runner never sent: an upper bound, not a trade.")
     print(f"Killed plans that never touched their trigger are hidden; pass --all to see them.{END}\n")
@@ -815,7 +888,9 @@ def cmd_review(args) -> int:
         print(f"  {r['fill_ts'][11:16]} {r['symbol']:<6} trigger {r['trigger']:.2f} fill {r['fill_price']:.2f} "
               f"slip {r['slippage_ratio'] if r['slippage_ratio'] is not None else '—'}")
     print_trades(conn, last=10)
-    print_kill_rule(conn, bars.from_ledger(conn))
+    _bars = bars.from_ledger(conn)
+    print_kill_rule(conn, _bars)
+    print_layer2(controls.per_decision(conn, _bars), cumulative=True)
     print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows)")
     for k, v in ctl.items():
         print(f"  {k:<12} n={v['n']:<4} mean {v['mean_R'] if v['mean_R'] is not None else '—'}  "

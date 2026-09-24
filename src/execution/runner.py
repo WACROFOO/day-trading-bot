@@ -220,9 +220,14 @@ class Runner:
             # says REVIEW only when VWAP, 9 EMA and MACD are all green; WAIT is
             # a red chart gate, WATCH a gate it could not compute. LOG_ONLY
             # records those too, so the funnel shows how many pullbacks the
-            # chart turned away.
-            reasons.append(f"Layer 2 not green: verdict {row['verdict']} — chart gates must all "
-                           f"be true at entry")
+            # chart turned away. The reason NAMES the red gates (2026-09-24:
+            # thirteen pre-market refusals read "verdict WAIT" and nothing
+            # else; the per-gate split is what an amendment is written from).
+            from journal import layer2 as Z
+            states = Z.sub_gates(row["gates_json"], row["volume_ok"])
+            named = Z.describe(states, only=("vwap", "ema9", "macd"))
+            reasons.append(f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
+                           f"— chart gates must all be true at entry")
         if self.mode == "TRADE" and not reasons:
             # Alignment at the instant of the order. The decision was made on
             # the desk's tape; the order goes to a different session that may

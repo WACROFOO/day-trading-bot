@@ -61,6 +61,7 @@ import json
 from statistics import mean, median
 
 from . import ledger as L
+from . import layer2 as Z
 
 
 def series(conn: sqlite3.Connection, cohort: str | None = None) -> dict[str, list[float]]:
@@ -195,6 +196,7 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
     rows = conn.execute(f"""
         SELECT d.decision_id, d.symbol, d.ts_et, d.session, d.verdict, d.outcome, d.killed_by,
                d.refusal_reasons_json, d.plan_allowed, d.data_status, d.trigger, d.stop, d.target, d.last,
+               d.gates_json, d.volume_ok,
                a.risk_share, a.trigger_hit, a.trigger_hit_ts, a.first_hit, a.c_close,
                a.mfe_r_planned, a.mae_r_planned, a.bars_available
         FROM decisions d LEFT JOIN actuals a USING(decision_id)
@@ -212,6 +214,13 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
         rps_plan = (r["trigger"] - r["stop"]) if r["trigger"] and r["stop"] else None
         d["thin_stop"] = bool(rps_plan is not None and r["trigger"] > 0
                               and rps_plan / r["trigger"] < THIN_STOP_PCT)
+        # Layer 2 gate by gate, read back from the row (journal.layer2): which
+        # of VWAP / 9 EMA / MACD / pullback-volume was red at the plan. The
+        # per-gate score below is the measurement an amendment is written
+        # from; nothing here evaluates a gate.
+        d["l2"] = Z.sub_gates(r["gates_json"], r["volume_ok"])
+        d["l2_red"] = Z.red(d["l2"])
+        d["l2_key"] = Z.key(d["l2"])
         rps = r["risk_share"]
         d["strategy_r"] = d["trail_r"] = d["trail_exit"] = None
         if rps and rps > 0 and r["trigger_hit"] == 1 and r["c_close"] is not None:
@@ -252,6 +261,10 @@ def reason_key(d: dict) -> str:
             return "refused: A8 entry buffer before the hard stop"
         if "hard stop" in first and " ET is past" in first:
             return "refused: past the hard stop"
+        if first.startswith("Layer 2 not green"):
+            # one bucket for the chart, whatever gate the text names; the
+            # per-gate split has its own block in `missed`
+            return "refused: Layer 2 not green (" + ("volume" if "pullback volume" in first else "chart") + ")"
         return "refused: " + first.split(" — ")[0].split(":")[0].split(";")[0][:44]
     return d["outcome"]
 
