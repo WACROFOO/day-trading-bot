@@ -86,14 +86,14 @@ def print_kill_rule(conn, tape) -> None:
     if not k["rows"]:
         print("  no clean closed fills yet" + (f" · {k['excluded_defect']} defect exit(s) excluded" if k["excluded_defect"] else ""))
         return
-    print(f"  {'#':>3} {'day':<10} {'sym':<6}{'exit':<10}{'live R':>8}{'baseline':>10}{'trail sim':>10}")
+    print(f"  {'#':>3} {'day':<10} {'sym':<6}{'exit':<10}{'live R':>8}{'baseline':>10}{'trail sim':>10}{'BE+2R sim':>11}")
     for r in k["rows"]:
         f = lambda v, w: f"{v:>+{w}.2f}" if v is not None else f"{'—':>{w}}"   # noqa: E731
         print(f"  {r['order_id']:>3} {r['fill_ts'][:10]:<10} {r['symbol']:<6}{(r['exit_reason'] or '—'):<10}"
-              f"{f(r['live_r'], 8)}{f(r['baseline_r'], 10)}{f(r['trail_r'], 10)}")
+              f"{f(r['live_r'], 8)}{f(r['baseline_r'], 10)}{f(r['trail_r'], 10)}{f(r.get('be_r'), 11)}")
     f2 = lambda v: f"{v:+.2f}" if v is not None else "—"   # noqa: E731
     print(f"  mean over {k['n']}: live {f2(k['live_mean'])} R · baseline {f2(k['baseline_mean'])} R · "
-          f"trail simulated {f2(k['trail_sim_mean'])} R"
+          f"trail simulated {f2(k['trail_sim_mean'])} R · BE+2R simulated {f2(k.get('be_sim_mean'))} R"
           + (f" · {k['excluded_defect']} defect exit(s) excluded (exercise.py defect)" if k["excluded_defect"] else ""))
 
 
@@ -394,6 +394,23 @@ def cmd_live(args) -> int:
     return 0
 
 
+def exit_lines(conn, held_before: set) -> list[str]:
+    """One line per position that was held before the fill sync and is closed
+    after it: symbol, quantity, exit price, reason, planned R."""
+    still = {o["order_id"] for o in L.stuck_orders(conn)}
+    out = []
+    for oid in sorted(held_before - still):
+        o = conn.execute("SELECT symbol, filled_qty, shares, fill_price, exit_price, exit_reason, trigger, stop "
+                         "FROM orders WHERE order_id=?", (oid,)).fetchone()
+        if o is None or o["exit_price"] is None:
+            continue
+        qty = int(o["filled_qty"] or o["shares"] or 0)
+        rps = (o["trigger"] - o["stop"]) if o["trigger"] and o["stop"] else None
+        r = f" ({(o['exit_price'] - o['fill_price']) / rps:+.2f} R)" if rps and o["fill_price"] else ""
+        out.append(f"{o['symbol']} x{qty} @ {o['exit_price']:.2f} {o['exit_reason'] or 'exit'}{r}")
+    return out
+
+
 def manage_exits(runner, flattened: bool, now_et) -> bool:
     """Everything that watches a position, each step on its own: a failure in
     one must not skip the next, and the hard-stop flatten is attempted
@@ -409,7 +426,15 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
             print(f"  {now_et:%H:%M:%S}  {WARN}{label} error{END} {exc!r} — the other exit checks continue")
             return None
 
+    # A broker fill of a stop or a target used to close the row silently; the
+    # 09-24 log went quiet after the PFSA trail and the owner could not tell an
+    # executed stop from yesterday's failed one. Every close-out is printed.
+    conn = getattr(runner, "conn", None)
+    held_before = guarded("exit lines", lambda: {o["order_id"] for o in L.stuck_orders(conn)}) if conn is not None else set()
     guarded("fill sync", runner.sync_fills)
+    if held_before:
+        for line in guarded("exit lines", lambda: exit_lines(conn, held_before)) or []:
+            print(f"  {now_et:%H:%M:%S}  {OK}EXIT{END}     {line}")
     # A10: a resting entry the tape did not reach in three minutes is cancelled.
     for line in guarded("entry expiry", runner.expire_entries) or []:
         print(f"  {now_et:%H:%M:%S}  {DIM}ENTRY EXPIRED{END} {line}")
@@ -693,14 +718,63 @@ def _l2_window(d: dict) -> str:
 
 
 def _l2_stats(ds: list[dict]) -> str:
-    """n · triggered · strat sum · trail sum · win, over rows whose trigger the tape touched."""
+    """n · triggered · fixed-2R sum · A3-trail sum · BE+2R sum · win, over rows whose trigger the tape touched."""
     trig = [d for d in ds if d["trigger_hit"] == 1]
     st = [d["strategy_r"] for d in trig if d["strategy_r"] is not None]
     tr = [d["trail_r"] for d in trig if d["trail_r"] is not None]
+    be = [d.get("be_r") for d in trig if d.get("be_r") is not None]
     win = f"{sum(1 for x in st if x > 0)/len(st):>5.0%}" if st else f"{'—':>5}"
     fs = f"{sum(st):>+9.2f}" if st else f"{'—':>9}"
     ft = f"{sum(tr):>+9.2f}" if tr else f"{'—':>9}"
-    return f"{len(ds):>4}{len(trig):>6}{fs}{ft}{win}"
+    fb = f"{sum(be):>+9.2f}" if be else f"{'—':>9}"
+    return f"{len(ds):>4}{len(trig):>6}{fs}{ft}{fb}{win}"
+
+
+_STATS_HEAD = f"{'n':>4}{'trig':>6}{'fixed':>9}{'trail':>9}{'BE+2R':>9}{'win':>5}"
+
+
+def print_layer1(rows: list[dict], conn, day: str | None, *, cumulative: bool = False) -> None:
+    """The Layer 1 kills, gate by gate, scored like everything else in `missed`
+    (2026-09-24). Price is split at the band's two edges because they are two
+    different rules: the $2 floor bends under a live penny theme (FILTERS.md,
+    gate 1 softened), the $20 cap does not. The penny theme is read from the
+    ledger's own gap-scan rows (`controls.penny_theme_live`) and the sub-$2
+    cohort is split by it — the measurement the floor decision is written
+    from (docs/preregistration.md §5). Nothing here bends a gate."""
+    from collections import defaultdict
+    pool = [d for d in rows if not d["backfill"] and d["outcome"] == "SUPPRESSED"]
+    title = "KILLED PLANS BY GATE" + (" · cumulative" if cumulative else "")
+    print(f"\n{BOLD}{title}{END}  {len(pool)} prospective plan(s) the cascade killed · upper bound as above")
+    if not pool:
+        print("  none"); return
+    def gate(d):
+        k = d["killed_by"] or "?"
+        if k == "price" and d["trigger"] is not None:
+            return "price < $2" if d["trigger"] < 2.0 else ("price > $20" if d["trigger"] > 20.0 else "price")
+        return k
+    groups: dict = defaultdict(list)
+    for d in pool:
+        groups[(gate(d), _l2_window(d))].append(d)
+    print(f"  {'gate':<14}{'window':<12}{_STATS_HEAD}")
+    for (g, w), ds in sorted(groups.items(), key=lambda kv: (-len(kv[1]), kv[0])):
+        print(f"  {g:<14}{w:<12}{_l2_stats(ds)}")
+    # the sub-$2 cohort, split by whether the ledger's own scan shows a live penny theme
+    sub2 = [d for d in pool if gate(d) == "price < $2"]
+    if sub2:
+        days = sorted({d["ts_et"][:10] for d in sub2})
+        live_days = {dd: controls.penny_theme_live(conn, dd) for dd in days}
+        on = [d for d in sub2 if live_days.get(d["ts_et"][:10])]
+        off = [d for d in sub2 if not live_days.get(d["ts_et"][:10])]
+        print(f"\n  {BOLD}sub-$2 plans by penny theme{END}  (a name under $2 that gapped ≥100 % in the last 3 scan days)")
+        print(f"  {'theme':<26}{_STATS_HEAD}")
+        print(f"  {'live':<26}{_l2_stats(on)}")
+        print(f"  {'not live':<26}{_l2_stats(off)}")
+        for dd, hit in live_days.items():
+            print(f"    {dd}: " + (f"live — {hit['symbol']} {hit['day']} ${hit['price']:.2f} +{hit['gap_pct']:.0f}%" if hit else "not live"))
+    print(f"  {DIM}FILTERS.md gate 1 bends the $2 floor to $1.50 only under a live penny theme; nothing here bends it. "
+          f"'BE+2R' = stop to breakeven after +1 R, fixed 2 R target — a measured exit variant, not a rule.{END}")
+
+
 
 
 def print_layer2(rows: list[dict], *, cumulative: bool = False) -> None:
@@ -732,11 +806,11 @@ def print_layer2(rows: list[dict], *, cumulative: bool = False) -> None:
         groups: dict[str, list[dict]] = defaultdict(list)
         for d in ds:
             groups[d["l2_key"]].append(d)
-        print(f"\n  {BOLD}by red combination · {w}{END}" + " " * 12 + f"{'n':>4}{'trig':>6}{'strat':>9}{'trail':>9}{'win':>5}   (? = unknown)")
+        print(f"\n  {BOLD}by red combination · {w}{END}" + " " * 12 + _STATS_HEAD + "   (? = unknown)")
         for k, g in sorted(groups.items(), key=lambda kv: (kv[0] != "all green", -len(kv[1]))):
             print(f"    {k:<32}{_l2_stats(g)}")
     print(f"\n  {BOLD}if ONE gate were dropped{END}  plans where that gate was the only red one — the cohort it alone refused")
-    print(f"    {'gate':<10}{'window':<12}{'n':>4}{'trig':>6}{'strat':>9}{'trail':>9}{'win':>5}")
+    print(f"    {'gate':<10}{'window':<12}{_STATS_HEAD}")
     any_row = False
     for g in Z.GATES:
         for w in windows:
@@ -837,6 +911,7 @@ def cmd_missed(args) -> int:
                   f"MAE {d['mae_r_planned'] if d['mae_r_planned'] is not None else '—'}")
         print(f"    {DIM}a measurement for amendment A9, not a gate: nothing refuses on it. Planned R on these rows is "
               f"inflated by the tiny denominator.{END}")
+    print_layer1(rows, conn, day)
     print_layer2(rows)
     print(f"\n{DIM}'strat' = fixed +2R target, −1R stop, else close (the strategy series). 'trail' = A3 trail_1r, bar-ordered.")
     print(f"A refused plan scored here assumes a fill at the trigger the runner never sent: an upper bound, not a trade.")
@@ -890,7 +965,9 @@ def cmd_review(args) -> int:
     print_trades(conn, last=10)
     _bars = bars.from_ledger(conn)
     print_kill_rule(conn, _bars)
-    print_layer2(controls.per_decision(conn, _bars), cumulative=True)
+    _pd = controls.per_decision(conn, _bars)
+    print_layer1(_pd, conn, None, cumulative=True)
+    print_layer2(_pd, cumulative=True)
     print(f"\n{BOLD}CONTROLS{END}  (planned R · same rows)")
     for k, v in ctl.items():
         print(f"  {k:<12} n={v['n']:<4} mean {v['mean_R'] if v['mean_R'] is not None else '—'}  "

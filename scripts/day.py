@@ -443,6 +443,31 @@ def desk_is_on_ibkr(proc, timeout_s: int = 420) -> bool:
     return False
 
 
+def wait_for_gateway(host: str, port: str, timeout_s: float, sleep=time.sleep,
+                     connect=None) -> bool:
+    """True once the IBKR API port accepts a TCP connect, polling every 15 s
+    up to `timeout_s`; False when it never does. The Gateway restarts itself
+    after a lost link (2026-09-24, ~07:15: port 4002 refused for minutes, then
+    the paper disclaimer waited for a click) — the day waits for it instead of
+    ending."""
+    import socket
+    connect = connect or socket.create_connection
+    deadline = time.monotonic() + timeout_s
+    while True:
+        try:
+            with connect((host, int(port)), timeout=2):
+                return True
+        except OSError:
+            pass
+        if time.monotonic() >= deadline:
+            return False
+        sleep(15)
+
+
+DESK_RESTARTS_MAX = 5
+GATEWAY_WAIT_S = 20 * 60
+
+
 def start_runner(mode: str, risk: float, dry: bool):
     cmd = [sys.executable, "-u", "scripts/exercise.py", "--db", str(DB), "live", "--risk", str(risk)]
     if mode == "TRADE":
@@ -705,6 +730,7 @@ def main(argv=None) -> int:
         say(f"\n{DIM}dry run — nothing started{END}"); return 0
 
     restarts = 0
+    desk_restarts = 0
 
     def stop(*_):
         for p in (runner, desk):
@@ -724,8 +750,24 @@ def main(argv=None) -> int:
             say(f"\n{BOLD}Pre-market stop probe{END}  ({t:%H:%M} ET)")
             run_probe_once(conn, today, False)
         if desk and desk.poll() is not None:
-            bad(f"desk exited with {desk.returncode} — stopping the day")
-            stop(); return 1
+            # 2026-09-24: the Gateway lost IBKR twice (07:15, 10:40); the desk
+            # exited and the day ended with it, blind until a human restarted it
+            # 50 minutes later. The recorder is restarted once the Gateway's port
+            # answers again; the runner keeps managing any open position meanwhile.
+            desk_restarts += 1
+            if desk_restarts > DESK_RESTARTS_MAX:
+                bad(f"desk exited {desk_restarts} times — stopping the day"); stop(); return 1
+            warn(f"desk exited with {desk.returncode} — waiting for the Gateway, then restarting "
+                 f"({desk_restarts}/{DESK_RESTARTS_MAX}); the runner keeps watching any open position")
+            port, how = ibkr_port()
+            if not wait_for_gateway(os.environ.get("IBKR_HOST", "127.0.0.1"), port, GATEWAY_WAIT_S):
+                bad(f"the Gateway on port {port} did not come back within {GATEWAY_WAIT_S // 60} min — stopping the day")
+                note("if the Gateway shows the paper-trading disclaimer, click it, then run this command again")
+                stop(); return 1
+            desk = start_desk(symbols, False)
+            if not desk_is_on_ibkr(desk):
+                bad("the desk did not come back up on IBKR — stopping the day"); stop(); return 1
+            continue
         if runner and runner.poll() is not None:
             # The runner is the actor; the desk is the recorder. A dead runner
             # must not take the recorder down with it (audit 2026-09-08).

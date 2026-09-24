@@ -58,6 +58,7 @@ from __future__ import annotations
 
 import sqlite3
 import json
+from typing import Optional
 from statistics import mean, median
 
 from . import ledger as L
@@ -107,7 +108,13 @@ def series(conn: sqlite3.Connection, cohort: str | None = None) -> dict[str, lis
 
 # ---------------------------------------------------------------- exit variants
 TRAIL_R_SIM = 1.0          # mirrors execution.intent.TRAIL_R; a simulation, restated here on purpose
-VARIANTS = ("baseline", "no_target", "trail_1r")
+# be_target (2026-09-24, measured variant, not a rule): stop to BREAKEVEN once
+# the trade has shown +1 R, fixed +2 R target otherwise untouched. Between the
+# A3 trail (gives winners back: PFSA, GRML on 09-24 both +1 R then scratched)
+# and the fixed target (rides the full pullback to the stop). Scored beside
+# both on every fill and every refused plan; adopted only through the A3 kill
+# rule's own count (docs/preregistration.md §5).
+VARIANTS = ("baseline", "no_target", "trail_1r", "be_target")
 
 
 def simulate_exit(entry_bars: list, trigger: float, stop: float, variant: str,
@@ -133,14 +140,16 @@ def simulate_exit(entry_bars: list, trigger: float, stop: float, variant: str,
     for i, (ts, o, h, l, c, v) in enumerate(entry_bars):
         # 1. the stop in force before this bar
         if l <= live_stop:
-            why = "trail" if variant == "trail_1r" and live_stop > stop else "stop"
+            why = "trail" if variant in ("trail_1r", "be_target") and live_stop > stop else "stop"
             return {"r": round((live_stop - trigger) / rps, 4), "exit": why, "bars_held": i + 1}
         # 2. the target, this bar's high
-        if variant == "baseline" and target is not None and h >= target:
+        if variant in ("baseline", "be_target") and target is not None and h >= target:
             return {"r": round((target - trigger) / rps, 4), "exit": "target", "bars_held": i + 1}
         # 3. only now may this bar's high raise the trail
         if variant == "trail_1r":
             live_stop = max(live_stop, round(h - trail_r * rps, 4))
+        elif variant == "be_target" and h >= trigger + trail_r * rps:
+            live_stop = max(live_stop, trigger)                 # breakeven once +1 R has printed
     last_close = entry_bars[-1][4]
     return {"r": round((last_close - trigger) / rps, 4), "exit": "close", "bars_held": len(entry_bars)}
 
@@ -238,7 +247,7 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
         d["l2_red"] = Z.red(d["l2"])
         d["l2_key"] = Z.key(d["l2"])
         rps = d["risk_share"]
-        d["strategy_r"] = d["trail_r"] = d["trail_exit"] = None
+        d["strategy_r"] = d["trail_r"] = d["trail_exit"] = d["be_r"] = None
         if rps and rps > 0 and d["trigger_hit"] == 1 and d["c_close"] is not None:
             if d["first_hit"] == "stop":
                 d["strategy_r"] = -1.0
@@ -255,8 +264,29 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
                 if entry:
                     res = simulate_exit(entry, float(r["trigger"]), float(r["stop"]), "trail_1r")
                     d["trail_r"], d["trail_exit"] = res["r"], res["exit"]
+                    tgt = float(r["target"]) if r["target"] else round(float(r["trigger"]) + 2.0 * rps, 4)
+                    d["be_r"] = simulate_exit(entry, float(r["trigger"]), float(r["stop"]), "be_target", target=tgt)["r"]
         out.append(d)
     return out
+
+
+def penny_theme_live(conn: sqlite3.Connection, day: str, sessions: int = 3) -> Optional[dict]:
+    """FILTERS.md, gate 1 softened: 'when the theme lives below $2, the floor
+    moves to roughly $1.50', a theme being live when 'the last 1–3 sessions
+    produced a >100% runner of the same class'. Read from the ledger's own
+    gap-scan rows (`candidates`): a name under $2 that gapped 100 % or more
+    on one of the last `sessions` scan days before `day`. Returns the row
+    that makes the theme live, or None. A MEASUREMENT (2026-09-24): nothing
+    bends the floor on it; `missed` splits the sub-$2 cohort by it."""
+    days = [r[0] for r in conn.execute("""SELECT DISTINCT substr(ts_et, 1, 10) d FROM candidates
+                                          WHERE substr(ts_et, 1, 10) < ? ORDER BY d DESC LIMIT ?""", (day, sessions))]
+    if not days:
+        return None
+    r = conn.execute(f"""SELECT symbol, substr(ts_et, 1, 10) AS day, price, gap_pct FROM candidates
+                         WHERE substr(ts_et, 1, 10) IN ({",".join("?" * len(days))})
+                           AND price IS NOT NULL AND price < 2.0 AND gap_pct IS NOT NULL AND gap_pct >= 100
+                         ORDER BY gap_pct DESC LIMIT 1""", days).fetchone()
+    return dict(r) if r else None
 
 
 THIN_STOP_PCT = 0.005      # measurement cut for the A9 count; NOT a gate, nothing refuses on it
@@ -301,22 +331,26 @@ def kill_rule_read(conn: sqlite3.Connection, bars_by_symbol: dict, min_n: int = 
     excluded = conn.execute("SELECT COUNT(*) FROM orders WHERE fill_price IS NOT NULL AND status='Closed' "
                             "AND defect_note IS NOT NULL").fetchone()[0]
     by_id = {d["decision_id"]: d for d in per_decision(conn, bars_by_symbol)}
-    rows, live, base, trail = [], [], [], []
+    rows, live, base, trail, be = [], [], [], [], []
     for o in fills:
         d = by_id.get(o["decision_id"])
         qty = o["filled_qty"] if o["filled_qty"] else o["shares"]
         live_r = round((o["exit_price"] - o["fill_price"]) * qty / o["planned_risk"], 4) if o["planned_risk"] else None
         row = {"order_id": o["order_id"], "symbol": o["symbol"], "fill_ts": o["fill_ts"], "exit_reason": o["exit_reason"],
-               "live_r": live_r, "baseline_r": d["strategy_r"] if d else None, "trail_r": d["trail_r"] if d else None}
+               "live_r": live_r, "baseline_r": d["strategy_r"] if d else None, "trail_r": d["trail_r"] if d else None,
+               "be_r": d.get("be_r") if d else None}
         rows.append(row)
         if live_r is not None and row["baseline_r"] is not None:
             live.append(live_r); base.append(row["baseline_r"])
             if row["trail_r"] is not None:
                 trail.append(row["trail_r"])
+            if row["be_r"] is not None:
+                be.append(row["be_r"])
     n = len(live)
     live_mean = round(mean(live), 4) if live else None
     base_mean = round(mean(base), 4) if base else None
     trail_mean = round(mean(trail), 4) if trail else None
+    be_mean = round(mean(be), 4) if be else None
     if n < min_n:
         verdict = "READ-ONLY"
     elif live_mean < base_mean:
@@ -324,7 +358,8 @@ def kill_rule_read(conn: sqlite3.Connection, bars_by_symbol: dict, min_n: int = 
     else:
         verdict = "NOT MET"
     return {"rows": rows, "n": n, "min_n": min_n, "excluded_defect": excluded,
-            "live_mean": live_mean, "baseline_mean": base_mean, "trail_sim_mean": trail_mean, "verdict": verdict}
+            "live_mean": live_mean, "baseline_mean": base_mean, "trail_sim_mean": trail_mean,
+            "be_sim_mean": be_mean, "verdict": verdict}
 
 
 def exit_summary(conn: sqlite3.Connection, bars_by_symbol: dict) -> dict[str, dict]:

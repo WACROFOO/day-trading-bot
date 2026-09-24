@@ -726,6 +726,25 @@ Recorded 2026-09-24 by the assistant on the owner's delegation. The
 delegation covers these decisions and nothing else; any threshold in
 `FILTERS.md`, any cascade gate and the detector stay frozen (§7).
 
+**Same evening, the blocker pass (owner's prompt: "make the bot more
+profitable in R … releasing the blockers that are costing money, keeping the
+ones that are saving it").** Ranked by measured cost, nothing met a rule
+written before its data, so nothing was released. Three measurements and
+two pieces of plumbing were built instead, each with the rule that will
+decide it:
+
+| blocker | evidence in hand | what was built | the rule that decides it |
+|---|---|---|---|
+| the exit: A3 trail vs fixed target | 09-24 tape: the 4 all-green regular-hours plans all reached 2 R (+8 R fixed) while the trail kept +0.27; GRML 10:07 live −0.02 R vs +2 R fixed. Kill rule: 4 clean fills of the 10 required | a third variant, **BE+2R** (stop to breakeven after +1 R, fixed 2 R target), simulated on every fill and every refused plan, printed beside live / baseline / trail in the kill-rule block and in every cohort table (`controls.simulate_exit`, `be_target`) | the A3 kill rule, unchanged: at 10 clean fills, the live trail is compared with the baseline; the BE+2R column is there so the replacement, if the rule is met, is chosen from a measured pair and not by default |
+| the price band (gate 1) | 09-24 tape: 26 plans under $2 or over $20, +20 R fixed upper bound; cumulative `killed: price` 264, the second-largest killer; on graded days it read −3.14 / +5.49 R (09-23, 14 rows) and +2.00 / +2.59 R (09-22, 11 rows) | **KILLED PLANS BY GATE** in `missed` and `review`: every Layer 1 kill scored per window, price split at its two edges; the sub-$2 cohort split by whether the ledger's own gap-scan rows show a **live penny theme** (`controls.penny_theme_live`: a name under $2 that gapped ≥100 % in the last 3 scan days — FILTERS.md's own softening, read from the ledger instead of asserted) | the $2 floor bends to $1.50 (FILTERS.md gate 1, softened) **only on days the theme flag is live**, and only when the sub-$2, theme-live cohort reaches **20 rows positive on both exit rules** in regular hours. The $20 cap is not a candidate: it has no softening in the corpus |
+| still-rising (gate 4) | 09-24 tape: −3 R over 9 regular-hours plans it refused; 09-23 graded +14.91 / +13.97 over 22 (one 4-cent-stop row inflates it); 09-22 0.00 / +3.39 over 9 | scored in the same block, per window | no candidate rule: the sign flips day to day; it stays as written until the read-out |
+| one position at a time | genuine refusals 09-22 to 09-24: 8 rows, −2 R fixed, about −0.5 R trail (the 15-row +13 R figure of 09-21 was a ghost order, a defect) | nothing | stays at 1 until 60 taken trades (§2), as written |
+| blind windows | 07:15–08:07 and after 10:40 on 09-24 the desk was down and the day command had ended; SKYQ 10:51 (all green) was never seen | `scripts/day.py` **restarts the desk** after a Gateway outage: waits up to 20 min for the API port, restarts the recorder up to 5 times, the runner keeps managing any open position meanwhile (`wait_for_gateway`) | plumbing, no rule |
+| silence on a broker fill | the PFSA stop executed at 09:40 and the log said nothing; the owner could not tell it from the WHLR failure of 09-23 | the live loop prints an **EXIT** line for every position the fill sync closes, with price, reason and planned R (`exercise.exit_lines`) | plumbing, no rule |
+
+Recorded 2026-09-24 by the assistant on the owner's delegation. No threshold,
+gate or detector value changed.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
