@@ -33,6 +33,17 @@ class RiskVeto(RuntimeError):
         self.reason = reason
 
 
+# A closed trade inside ±SCRATCH_R is a scratch: an A3 trail that moved to
+# breakeven and was hit. Owner decision 2026-09-24 (docs/preregistration.md
+# §5): PFSA −0.04 R and GRML −0.02 R that morning read as two of the three
+# "consecutive losses" that lock the day, so a third breakeven trail would have
+# ended the session with the account down six cents. The streak counts trades
+# that lost at least a quarter of their planned risk; a scratch neither grows
+# it nor resets it. The daily-loss limit still sums every trade, scratches
+# included.
+SCRATCH_R = 0.25
+
+
 @dataclass(frozen=True)
 class Limits:
     max_daily_loss_r: float = 3.0        # PROPOSED
@@ -78,10 +89,12 @@ class JournalRiskGate:
         day_r = round(sum(t["r"] or 0.0 for t in trades), 4)
         streak = 0
         for t in reversed(trades):
-            if (t["r"] or 0) < 0:
+            r = t["r"] or 0.0
+            if r <= -SCRATCH_R:
                 streak += 1
-            else:
+            elif r >= SCRATCH_R:
                 break
+            # else a scratch: the streak neither grows nor resets
         return {"date": day, "locked": bool(row and row["locked"]),
                 "reason": row["reason"] if row else None, "day_r": day_r,
                 "consecutive_losses": streak, "entries": entries_today(self.conn, day),

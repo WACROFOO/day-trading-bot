@@ -140,6 +140,7 @@ class IbkrDesk:
         self._news: List[dict] = []
         self._news_note: Optional[str] = None
         self._news_at: Optional[datetime] = None      # last headline pull
+        self._news_thread: Optional[threading.Thread] = None   # the pull runs off the worker (2026-09-24)
         self._started: Optional[datetime] = None       # set once, at bootstrap
         self._halt_state: Dict[str, str] = {}         # sym -> halted | trading
         # Every halt transition seen this session, re-offered on every
@@ -718,6 +719,43 @@ class IbkrDesk:
                 # whether a decision reaches the runner young enough to trade.
                 self.log(f"  rebuild took {took:.1f}s")
 
+    def _pull_headlines(self, symbols: List[str]) -> None:
+        """Headlines are an HTTP call to Alpaca's news endpoint (30 s socket
+        timeout). Until 2026-09-24 it ran INSIDE the session rebuild, on the
+        worker: every "rebuild took 20-30s" line in that morning's log followed
+        a "headlines:" line, and while the worker waited on the endpoint no
+        decision was published, the feed read STALE and the history refresh
+        timed out behind it. The fetch now runs on its own thread, one at a
+        time; only the MERGE touches desk state, and it is queued onto the
+        worker like every other cross-thread result."""
+        if not self.scan_in_thread:                  # tests, and the bootstrap path: inline
+            self._merge_headlines(*self._fetch_headlines(symbols)); return
+        t = self._news_thread
+        if t is not None and t.is_alive():
+            return                                   # the previous pull is still on the wire
+        def run():
+            recs, note = self._fetch_headlines(symbols)
+            self.submit(self._merge_headlines, recs, note)
+        self._news_thread = threading.Thread(target=run, name="desk-headlines", daemon=True)
+        self._news_thread.start()
+
+    @staticmethod
+    def _fetch_headlines(symbols: List[str]) -> tuple:
+        try:
+            return news_records(symbols)
+        except Exception as exc:                     # noqa: BLE001
+            return [], f"headlines refresh failed: {exc}"
+
+    def _merge_headlines(self, recs: list, note: Optional[str]) -> None:
+        """On the worker: dedupe on (symbol, provider_id), keep the source note."""
+        if recs:
+            seen = {(r["symbol"], r["provider_id"]) for r in self._news}
+            fresh = [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
+            if fresh:
+                self._news += fresh
+                self.log(f"  headlines: {len(fresh)} new")
+        self._news_note = note
+
     def _refresh_session(self) -> dict:
         """Rebuild from memory: reference + minute history (for minutes the
         live store does not cover) + complete ten-second candles."""
@@ -763,18 +801,8 @@ class IbkrDesk:
         # 2026-09-08). Re-pull every 120 s; dedupe on (symbol, provider_id).
         if self.headlines and self.symbols and (
                 self._news_at is None or (now - self._news_at).total_seconds() >= 120):
-            try:
-                recs, note = news_records(self.symbols)
-                if recs:
-                    seen = {(r["symbol"], r["provider_id"]) for r in self._news}
-                    fresh = [r for r in recs if (r["symbol"], r["provider_id"]) not in seen]
-                    if fresh:
-                        self._news += fresh
-                        self.log(f"  headlines: {len(fresh)} new")
-                self._news_note = note
-            except Exception as exc:                      # noqa: BLE001
-                self.log(f"  headlines refresh failed: {exc}")
             self._news_at = now
+            self._pull_headlines(list(self.symbols))
         records += self._news
         if self._news_note:
             # No keys, or the endpoint is down: the cascade must read UNKNOWN

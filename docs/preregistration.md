@@ -706,6 +706,26 @@ what it changes and what it costs, so it can be undone by name:
 Recorded 2026-09-23 by the assistant on the owner's instruction. The owner
 runs the two commands; code sets neither.
 
+**Owner decisions of 2026-09-24, delegated.** After the first phase-C
+session the owner's instruction, verbatim: *"fix everything remaining for a
+better bot trading after today's session and old ones"*, given while unable
+to stay connected. The decisions below were taken by the assistant under
+that delegation and are recorded as the owner's, with the reasoning so each
+can be undone by name. The session's facts they rest on are in
+`research/paper-exercise/reports/2026-09-24-analysis.md`.
+
+| decision | taken as | why this and not the alternative | what it costs |
+|---|---|---|---|
+| the loss streak and A3 scratches | a closed trade inside **±0.25 R is a scratch**: it neither counts toward the three consecutive losses nor resets the streak. The daily-loss sum still counts it. `SCRATCH_R` in `src/journal/risk.py` | PFSA −0.04 R and GRML −0.02 R on 2026-09-24 were two A3 trails moved to breakeven and hit; the gate read `streak 2`, one breakeven from locking a day that was down six cents. The streak exists to stop a run of real losses, and A3 makes breakeven exits a normal outcome, an interaction nobody preregistered. A quarter of planned risk is a judgment, not a measurement | a run of scratches never locks the day; three −0.24 R exits read as no streak. The daily-loss limit (3 R) still ends such a day |
+| a Layer 2 amendment, the decision rule written before the data | **a gate becomes flag-only, regular hours only, when its alone-refused cohort in `missed`'s LAYER 2 block reaches 20 rows with both exit rules (fixed 2 R and A3 trail) positive, while the all-green cohort is itself positive.** Pre-market gates are not touched before five phase-C sessions are graded | the cumulative block on 2026-09-24 read, regular hours: all green 16 rows +6.35 / +12.48 R; MACD alone refused 9 rows +7.00 / +6.61 R; volume alone refused 6 rows +6.00 / +15.49 R; VWAP alone 9 rows +3.00 / +0.13 R. Pre-market: all green 13 rows −4.00 / −4.51 R. Nine and six rows are not a distribution and the ledger's refusals are the optimistic side of the tape; writing the rule now dates the decision before the data that decides it | the two gates keep refusing until the count is met; what they refuse goes on being scored |
+| a day the desk did not finish | **settled at the next start**: `scripts/day.py` completes that day's tape from IBKR (read-only, `backfill_tape`) and runs the after-close block for it before the new day begins (`settle_unsettled`). `missed` and `review` grade ungraded rows in memory from the ledger's bars meanwhile, writing nothing | the Gateway lost IBKR at 10:40 on 2026-09-24, the desk went OFFLINE and the day command exited; nothing graded the day, the report was not written, the session was not counted, and `missed` showed dashes on every row | none to the rules; a settle at 06:55 spends a few historical requests before the desk starts |
+| the headline fetch | **off the rebuild path**, on its own thread, merged on the worker (`IbkrDesk._pull_headlines`) | every "rebuild took 20–30 s" line in the 2026-09-24 log followed a "headlines:" line: the Alpaca call (30 s socket timeout) ran inside the 3-second rebuild, so while it waited no decision was published, the feed read STALE and history requests timed out behind it | none; a slow news endpoint now costs a late headline, not a late decision |
+| the engine's per-bar history queries | walk back from the newest bar, O(window) instead of O(session) (`SymbolState.price_minutes_ago`, `volume_last_minutes`, `completed_5m_volumes`); answers unchanged, tested against the old scan | a rebuild re-runs every scanner on every bar from 04:00 and each query scanned the session from the left, so the rebuild grew with the square of the session; 16 names × 400 minutes measured 3.7 s → 2.9 s here, more on the Mac under the GIL | none |
+
+Recorded 2026-09-24 by the assistant on the owner's delegation. The
+delegation covers these decisions and nothing else; any threshold in
+`FILTERS.md`, any cascade gate and the detector stay frozen (§7).
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

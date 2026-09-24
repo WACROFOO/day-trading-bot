@@ -8,6 +8,7 @@ queries here.
 from __future__ import annotations
 
 from collections import deque
+from itertools import islice
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from typing import Deque, Dict, Iterable, Optional
@@ -57,35 +58,43 @@ class SymbolState:
 
     # -- price history queries ------------------------------------------------
 
+    # These three run for every scanner on every bar of every rebuild. They
+    # used to scan the whole session from the left (or copy it), so a rebuild
+    # grew with the square of the session length: 2 s at 06:30, 30 s by 10:40
+    # on 2026-09-24 with sixteen names. Bars are appended in time order, so
+    # walking back from the newest bar and stopping at the window's edge gives
+    # the same answer in O(window). Nothing about the answers changed.
+
     def price_minutes_ago(self, now: datetime, minutes: int) -> Optional[float]:
-        """Close of the newest completed bar at least `minutes` old; falls back
-        to the oldest known bar so early-session moves are still measurable."""
+        """Close of the newest completed bar at least `minutes` old, or None
+        when no bar is that old yet."""
         cutoff = now - timedelta(minutes=minutes)
-        candidate = None
-        for bar in self.minute_bars:
+        for bar in reversed(self.minute_bars):
             if bar.ts <= cutoff:
-                candidate = bar.close
-            else:
-                break
-        return candidate
+                return bar.close
+        return None
 
     def volume_last_minutes(self, now: datetime, minutes: int) -> float:
         cutoff = now - timedelta(minutes=minutes)
-        total = sum(b.volume for b in self.minute_bars if b.ts >= cutoff)
+        total = 0.0
+        for b in reversed(self.minute_bars):
+            if b.ts < cutoff:
+                break
+            total += b.volume
         if self._building is not None and self._building.ts >= cutoff:
             total += self._building.volume
         return total
 
     def completed_5m_volumes(self, count: int = 20) -> list:
-        """Volumes of prior completed 5-minute windows (from 1m bars)."""
-        bars = list(self.minute_bars)
+        """Volumes of prior completed 5-minute windows (from 1m bars), oldest
+        first, at most `count`, counted back from the newest bar."""
+        # One pass over the newest 5*count bars (a deque indexes from its
+        # ends, so the tail is cheap); each block of five, newest first, is
+        # one completed window. Same windows and sums as slicing from the left.
+        tail = list(islice(reversed(self.minute_bars), 5 * count))
         out = []
-        for i in range(len(bars) - 5, -1, -5):
-            chunk = bars[i : i + 5]
-            if len(chunk) == 5:
-                out.append(sum(b.volume for b in chunk))
-            if len(out) >= count:
-                break
+        for k in range(0, len(tail) - len(tail) % 5, 5):
+            out.append(sum(b.volume for b in tail[k:k + 5]))
         out.reverse()
         return out
 

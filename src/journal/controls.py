@@ -206,6 +206,22 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
         d = dict(r)
         d["backfill"] = bool(r["data_status"] and r["data_status"].endswith("-backfill"))
         d["has_actuals"] = r["risk_share"] is not None
+        d["actuals_source"] = "ledger" if d["has_actuals"] else None
+        if not d["has_actuals"]:
+            # No actuals row yet: the after-close block has not run for this
+            # day (2026-09-24: the desk died at 10:40, `missed` showed dashes
+            # on every row until the day was settled). Grade in memory from
+            # the ledger's own bars — the same `actuals.compute` the settle
+            # uses — and write nothing; the settle remains the record.
+            bars_sym = bars_by_symbol.get(r["symbol"], [])
+            if bars_sym:
+                a = A.compute(dict(r), bars_sym)
+                if a and a.get("bars_available"):
+                    for k in ("risk_share", "trigger_hit", "trigger_hit_ts", "first_hit", "c_close",
+                              "mfe_r_planned", "mae_r_planned", "bars_available"):
+                        d[k] = a.get(k)
+                    d["has_actuals"] = True
+                    d["actuals_source"] = "in-memory"
         # A9 measurement (not a gate): a stop within THIN_STOP_PCT of the
         # trigger. Such a plan sizes to a notional the account refuses and its
         # planned R inflates every excursion figure (VEEE 16.33/16.31 on
@@ -221,21 +237,21 @@ def per_decision(conn: sqlite3.Connection, bars_by_symbol: dict, day: str | None
         d["l2"] = Z.sub_gates(r["gates_json"], r["volume_ok"])
         d["l2_red"] = Z.red(d["l2"])
         d["l2_key"] = Z.key(d["l2"])
-        rps = r["risk_share"]
+        rps = d["risk_share"]
         d["strategy_r"] = d["trail_r"] = d["trail_exit"] = None
-        if rps and rps > 0 and r["trigger_hit"] == 1 and r["c_close"] is not None:
-            if r["first_hit"] == "stop":
+        if rps and rps > 0 and d["trigger_hit"] == 1 and d["c_close"] is not None:
+            if d["first_hit"] == "stop":
                 d["strategy_r"] = -1.0
-            elif r["first_hit"] == "target" and r["target"]:
+            elif d["first_hit"] == "target" and r["target"]:
                 d["strategy_r"] = round((r["target"] - r["trigger"]) / rps, 4)
             else:
-                d["strategy_r"] = round((r["c_close"] - r["trigger"]) / rps, 4)
+                d["strategy_r"] = round((d["c_close"] - r["trigger"]) / rps, 4)
             bars = bars_by_symbol.get(r["symbol"], [])
-            if bars and r["trigger_hit_ts"]:
+            if bars and d["trigger_hit_ts"]:
                 dd = r["ts_et"][:10]
                 fwd = [b for b in A.forward(bars, A._utc(r["ts_et"]))
                        if A._bar_dt(b[0]).astimezone(L.ET).date().isoformat() == dd]
-                entry = [b for b in fwd if b[0] >= r["trigger_hit_ts"]]
+                entry = [b for b in fwd if b[0] >= d["trigger_hit_ts"]]
                 if entry:
                     res = simulate_exit(entry, float(r["trigger"]), float(r["stop"]), "trail_1r")
                     d["trail_r"], d["trail_exit"] = res["r"], res["exit"]

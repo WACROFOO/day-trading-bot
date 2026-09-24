@@ -31,6 +31,7 @@ What this file does NOT do, on purpose:
 from __future__ import annotations
 
 import argparse
+from typing import Optional
 import json
 import os
 import signal
@@ -491,6 +492,51 @@ def after_close(conn, today: str, dry: bool) -> None:
             warn(f"phase {st['phase']} → {nxt} gates are ALL clear — run: python3 scripts/exercise.py advance")
 
 
+def _backfill(day: str) -> Optional[int]:
+    """Best effort: the minute bars IBKR has for `day`, read-only, so the
+    grading of a day the desk did not finish sees the whole tape and not just
+    the bars recorded before it died. Returns the script's exit code, or None
+    when it could not run. Never raises."""
+    try:
+        import backfill_tape
+        os.environ.setdefault("JOURNAL_DB", str(DB))
+        return backfill_tape.main([day])
+    except Exception as exc:                          # noqa: BLE001
+        note(f"backfill skipped: {exc!r}")
+        return None
+
+
+def settle_unsettled(conn, today: str, dry: bool) -> Optional[str]:
+    """A previous day whose after-close block never ran.
+
+    2026-09-24: the Gateway lost IBKR at 10:40, the desk went OFFLINE and the
+    day command exited before 11:30, so nothing graded the day's decisions,
+    the report was not written and the session was not counted. `missed`
+    showed dashes on every row that evening. Now, at the next start, the most
+    recent earlier day with ungraded decisions is settled first: its bars are
+    completed from IBKR when the Gateway answers, then the normal after-close
+    block runs for THAT day. Idempotent — a day already counted is not
+    counted twice — and never for today."""
+    row = conn.execute("""SELECT substr(d.ts_et, 1, 10) AS day, COUNT(*) AS n,
+                                 SUM(a.decision_id IS NULL) AS ungraded
+                          FROM decisions d LEFT JOIN actuals a USING(decision_id)
+                          WHERE substr(d.ts_et, 1, 10) < ?
+                          GROUP BY day ORDER BY day DESC LIMIT 1""", (today,)).fetchone()
+    if row is None or not row["ungraded"]:
+        return None
+    day = row["day"]
+    warn(f"{day} was never settled: {row['ungraded']} of {row['n']} decision(s) ungraded — "
+         f"the after-close block did not run (the desk stopped before 11:30). Settling it now.")
+    if dry:
+        note("dry run — would fetch the day's bars from IBKR and run the after-close block for it")
+        return day
+    port, how = ibkr_port()
+    note(f"completing {day}'s tape from IBKR on port {port} ({how}), read-only, then grading")
+    _backfill(day)
+    after_close(conn, day, dry)
+    return day
+
+
 DAY_LOCK = Path(str(DB) + ".day.lock")
 
 
@@ -570,6 +616,8 @@ def main(argv=None) -> int:
         say(f"\n{BOLD}Settling {args.settle}{END}")
         after_close(conn, args.settle, args.dry_run)
         return 0
+    if not args.rehearsal:
+        settle_unsettled(conn, today, args.dry_run)
     closed = why_closed(now.date())
     if args.rehearsal:
         # The only way to exercise the desk → ledger → runner chain against
