@@ -61,7 +61,8 @@ def print_trades(conn, last: int | None = None) -> None:
     print(f"\n{head}")
     if not rows:
         print("  no fills"); return
-    print(f"  {'#':>3} {'day':<10} {'in':>5} {'sym':<6}{'qty':>5}{'fill':>8}{'out':>6}{'exit':>8}  {'reason':<14}{'$':>9}{'R':>7}")
+    print(f"  {'#':>3} {'day':<10} {'in':>5} {'sym':<6}{'qty':>5}{'fill':>8}{'out':>6}{'exit':>8}  {'reason':<14}{'$':>9}{'R':>7}"
+          f"{'slip':>7}{'rng30':>7}")
     for r in rows:
         if r["closed"]:
             out_t, px = r["exit_ts"][11:16], f"{r['exit_price']:.2f}"
@@ -71,8 +72,17 @@ def print_trades(conn, last: int | None = None) -> None:
         else:
             out_t, px, pnl, rr = "—", "—", "—", "—"
             reason = {"ExitPending": "sell working", "ExitFailed": "HELD, no exit"}.get(r["status"], "HELD")
+        slip = f"{r['stop_slip']:+.2f}" if r.get("stop_slip") is not None else "—"
+        rng = f"{r['range30']:.2f}" if r.get("range30") is not None else "—"
         print(f"  {r['order_id']:>3} {r['fill_ts'][:10]:<10} {r['fill_ts'][11:16]:>5} {r['symbol']:<6}{r['qty']:>5}"
-              f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}")
+              f"{r['fill_price']:>8.2f}{out_t:>6}{px:>8}  {reason:<14}{pnl:>9}{rr:>7}{slip:>7}{rng:>7}")
+    slips = [r for r in rows if r.get("stop_slip_r") is not None]
+    if slips:
+        tot = sum(r["stop_slip_r"] for r in slips)
+        under = [r for r in slips if r.get("range30") and r.get("rps") and r["rps"] < r["range30"]]
+        print(f"  {DIM}stop slippage: {len(slips)} stop exit(s), {tot:+.2f} R in total beyond the stop level · "
+              f"{len(under)} of them had a stop smaller than the tape's median 1-minute range at entry (rng30). "
+              f"A measurement, not a gate.{END}")
 
 
 def print_kill_rule(conn, tape) -> None:

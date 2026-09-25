@@ -745,6 +745,19 @@ decide it:
 Recorded 2026-09-24 by the assistant on the owner's delegation. No threshold,
 gate or detector value changed.
 
+**2026-09-25, stop slippage measured.** GRML 10:28: fill 16.44 against a
+16.39 trigger, 1 R of 0.28, trail to 16.22, stop filled at 15.99 — 0.23
+below its level, 0.82 R of slippage on a −0.79 R stop, −1.61 R realised.
+The `TRADES` block now carries two columns, `slip` (exit minus the stop level
+in force, stop-type exits) and `rng30` (the median 1-minute range of the 30
+bars before the fill, the smallest stop the tape can honour per the
+`tape.py` convention), and a footer summing the slippage in R
+(`ledger.trade_rows`, `ledger.median_range_before`). Measurement only. The
+rule it is written for, dated now: **a stop smaller than `rng30` becomes a
+refusal (A11 candidate, regular hours) when 10 stop exits with a stop under
+`rng30` have cost 3 R or more of slippage in total.** Nothing refuses on it
+today. Recorded by the assistant under the 2026-09-24 delegation.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

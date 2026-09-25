@@ -466,6 +466,7 @@ def wait_for_gateway(host: str, port: str, timeout_s: float, sleep=time.sleep,
 
 DESK_RESTARTS_MAX = 5
 GATEWAY_WAIT_S = 20 * 60
+STOP = {"requested": False}       # set by the SIGINT handler; read by the day loop
 
 
 def start_runner(mode: str, risk: float, dry: bool):
@@ -687,6 +688,19 @@ def main(argv=None) -> int:
     else:
         warn("gap scan returned nothing — the desk's own scanner picks (start.sh --ibkr behaviour)")
 
+    if not args.dry_run and not args.rehearsal:
+        # 2026-09-25 05:49: the Gateway was not up yet, the probe and the desk
+        # both failed and the day ended; the owner restarted it by hand a
+        # minute later. Wait for the API port instead, up to GATEWAY_WAIT_S.
+        port, how = ibkr_port()
+        if how.startswith("nothing listening"):
+            warn(f"no IBKR API port answers yet — waiting up to {GATEWAY_WAIT_S // 60} min for the Gateway "
+                 f"(log it in on the PAPER account, TWS logged out)")
+            if not wait_for_gateway(os.environ.get("IBKR_HOST", "127.0.0.1"), port, GATEWAY_WAIT_S):
+                bad(f"the Gateway did not answer on {port} within {GATEWAY_WAIT_S // 60} min — stopping"); return 1
+            os.environ.pop("IBKR_PORT", None)
+            port, how = ibkr_port()
+            good(f"Gateway answering on port {port} ({how})")
     say(f"\n{BOLD}2. Probes{END}  (once per day)")
     if args.rehearsal:
         note("skipped in a rehearsal")
@@ -731,8 +745,12 @@ def main(argv=None) -> int:
 
     restarts = 0
     desk_restarts = 0
+    STOP["requested"] = False
 
     def stop(*_):
+        # A Ctrl-C is the owner ending the day. 2026-09-25: the desk-restart
+        # logic read the resulting desk exit as an outage and started it again.
+        STOP["requested"] = True
         for p in (runner, desk):
             if p and p.poll() is None:
                 p.send_signal(signal.SIGINT)
@@ -743,6 +761,13 @@ def main(argv=None) -> int:
         else f"{DIM}running until {HARD_STOP:%H:%M} ET; Ctrl-C stops both{END}")
     from execution.intent import PREMARKET_START
     while (datetime.now(ET) < deadline) if deadline else (datetime.now(ET).time() < HARD_STOP):
+        if STOP["requested"]:
+            warn("stopped by Ctrl-C — the day is not settled; the next start settles it")
+            for p in (runner, desk):
+                if p:
+                    try: p.wait(timeout=30)
+                    except subprocess.TimeoutExpired: p.kill()
+            return 1
         t = datetime.now(ET).time()
         if (not args.rehearsal and PREMARKET_START <= t < REGULAR_START
                 and args.probe_orders

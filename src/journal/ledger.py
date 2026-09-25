@@ -1067,8 +1067,38 @@ def trade_rows(conn: sqlite3.Connection) -> list[dict]:
         closed = r["exit_price"] is not None and r["status"] not in ("ExitPending", "ExitFailed")
         pnl = round((r["exit_price"] - r["fill_price"]) * qty, 2) if closed else None
         rr = round(pnl / r["planned_risk"], 2) if closed and r["planned_risk"] else None
-        out.append({**dict(r), "qty": qty, "closed": closed, "pnl": pnl, "r": rr})
+        # Stop slippage (2026-09-25, GRML: trailed stop 16.22, filled 15.99):
+        # exit price minus the stop level in force, for stop-type exits; and
+        # the median 1-minute range of the 30 bars before the fill — the
+        # smallest stop the tape can honour (tape.py convention). Both are
+        # measurements for the read-out; nothing refuses on them.
+        level = max(float(r["stop"] or 0), float(r["trail_stop"] or 0)) or None
+        slip = (round(r["exit_price"] - level, 4)
+                if closed and level and (r["exit_reason"] or "") in ("stop", "trail", "stop_enforced", "monitored_stop", "bracket")
+                else None)
+        rps = (r["planned_risk"] / r["shares"]) if r["planned_risk"] and r["shares"] else None
+        out.append({**dict(r), "qty": qty, "closed": closed, "pnl": pnl, "r": rr,
+                    "stop_slip": slip, "stop_slip_r": round(slip / rps, 2) if slip is not None and rps else None,
+                    "range30": median_range_before(conn, r["symbol"], r["fill_ts"]), "rps": rps})
     return out
+
+
+def median_range_before(conn: sqlite3.Connection, symbol: str, fill_ts: Optional[str], n: int = 30) -> Optional[float]:
+    """Median high−low of the last `n` 1-minute bars before `fill_ts`, from
+    the ledger's own bars; None when fewer than 5 exist."""
+    if not fill_ts:
+        return None
+    try:
+        cut = datetime.fromisoformat(str(fill_ts).replace("Z", "+00:00")).astimezone(timezone.utc)
+    except ValueError:
+        return None
+    rows = conn.execute("""SELECT high, low FROM bars WHERE symbol=? AND ts < ? ORDER BY ts DESC LIMIT ?""",
+                        (symbol, cut.isoformat().replace("+00:00", "Z"), n)).fetchall()
+    ranges = sorted(float(h) - float(l) for h, l in rows if h is not None and l is not None)
+    if len(ranges) < 5:
+        return None
+    m = len(ranges) // 2
+    return round(ranges[m] if len(ranges) % 2 else (ranges[m - 1] + ranges[m]) / 2, 4)
 
 
 def alignment_rows(conn: sqlite3.Connection) -> list[dict]:

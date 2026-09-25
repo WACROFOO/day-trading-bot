@@ -77,6 +77,11 @@ class _ScreenerView:
         return self.desk.screener_current()
 
 
+HISTORY_SLOW_S = 15.0        # a refresh this slow with no bars is a timeout, not a quiet name
+HISTORY_SLOW_MAX = 3         # in a row, before the refresh backs off
+HISTORY_BACKOFF_S = 300.0
+
+
 class IbkrDesk:
     """Duck-types LiveSession for make_handler: current(), symbols,
     add_symbols(), screener.current(); adds hub (SSE) and health()."""
@@ -397,9 +402,15 @@ class IbkrDesk:
                          f"removed from the desk; delayed data is not a tape")
                 try:
                     if self.stream is not None:
+                        banned = getattr(self.stream, "banned", None)
+                        if banned is None:
+                            self.stream.banned = banned = set()
+                        banned.add(sym)                 # never subscribed again on this socket
                         self.stream._unsubscribe(sym)
                 except Exception:
                     pass
+                if sym in self.symbols:
+                    self.symbols.remove(sym)
                 if sym in self.symbols:
                     self.symbols.remove(sym)
         if errorCode == 10358 and self.fundamentals is not False:
@@ -424,6 +435,16 @@ class IbkrDesk:
                 continue
             wanted.append(sym)
         added = self.stream.subscribe(wanted, backfill_seconds=3600)
+        # The permission error for a name arrives while subscribe() is still
+        # running; a name refused meanwhile is dropped here, not loaded.
+        for sym in [a for a in added if a in self.no_live_data]:
+            added.remove(sym)
+            try:
+                self.stream._unsubscribe(sym)
+            except Exception:
+                pass
+            if sym in self.symbols:
+                self.symbols.remove(sym)
         for sym in added:
             self.log(f"  {sym}: subscribed (quote + 5-second bars); loading daily and minute history")
             c = self.stream._contract(sym)
@@ -634,12 +655,29 @@ class IbkrDesk:
         # for exactly once, at subscribe time. Retry it — the request goes to
         # EDGAR, not to TWS, so it costs nothing from the historical budget.
         self.retry_float(sym)
+        t0 = time.monotonic()
         try:
             fresh = minute_records(self.stream.ib, c, sym, duration="900 S",
                                    start=session_start(self.clock()))
         except Exception as exc:
             self.log(f"  {sym}: minute refresh failed: {exc}")
             return None
+        # Backoff (2026-09-25): with IBKR's history farm unresponsive every
+        # refresh waited the full timeout and returned nothing, one symbol
+        # after another, and the worker that publishes decisions spent the
+        # morning waiting — INLF 09:09 reached the runner 464 s late. Three
+        # slow, empty refreshes in a row pause the refresh for five minutes;
+        # the live five-second bars keep the session advancing meanwhile.
+        took = time.monotonic() - t0
+        if not fresh and took >= HISTORY_SLOW_S:
+            self._history_slow = getattr(self, "_history_slow", 0) + 1
+            if self._history_slow >= HISTORY_SLOW_MAX:
+                self._next_history = time.monotonic() + HISTORY_BACKOFF_S
+                self._history_slow = 0
+                self.log(f"  minute history: {HISTORY_SLOW_MAX} refreshes in a row timed out ({took:.0f}s each) — "
+                         f"paused for {HISTORY_BACKOFF_S // 60} min; live bars carry the session meanwhile")
+            return sym
+        self._history_slow = 0
         if not fresh:
             return sym
         merged = {m["ts"]: m for m in self._minutes.get(sym, [])}

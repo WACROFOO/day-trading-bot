@@ -412,6 +412,13 @@ class IbkrStream:
             for sym in [s.strip().upper() for s in symbols if s and s.strip()]:
                 if sym in self._symbols:
                     continue
+                if sym in getattr(self, "banned", ()):
+                    # 2026-09-25 APUS: IBKR answered 10089/420 (no AMEX data
+                    # permission) DURING the subscribe; the desk dropped the
+                    # name and this loop finished adding it anyway, so every
+                    # "connection restored" re-requested its bars and error
+                    # 420 returned all morning. A banned name stays out.
+                    continue
                 if len(self._symbols) * 2 >= self.max_lines:
                     self.health.messages.append(f"{sym}: not subscribed — market-data line limit {self.max_lines}")
                     continue
