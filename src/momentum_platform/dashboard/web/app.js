@@ -553,6 +553,13 @@ function makePane(hostId, daily) {
       showLegend(rows[rows.length - 1], vols[vols.length - 1], rows.length - 1);
       // Follow the tape only when the view is already parked at the newest
       // bar; a trader who scrolled back to read a pullback keeps their view.
+      if (opts.snapToLive) {
+        // A dragged price axis turns autoscale off and keeps its range. After
+        // a symbol change the old range stayed: SRZN at $33 drawn on PFSA's
+        // 0.5-5.5 axis, volume and MACD visible, candles off-screen
+        // (2026-09-24). A new symbol always starts autoscaled.
+        try { chart.priceScale("right").applyOptions({ autoScale: true }); } catch (e) {}
+      }
       if (opts.snapToLive || atEdge) chart.timeScale().scrollToRealTime();
     },
   };

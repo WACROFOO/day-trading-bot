@@ -754,9 +754,51 @@ bars before the fill, the smallest stop the tape can honour per the
 `tape.py` convention), and a footer summing the slippage in R
 (`ledger.trade_rows`, `ledger.median_range_before`). Measurement only. The
 rule it is written for, dated now: **a stop smaller than `rng30` becomes a
-refusal (A11 candidate, regular hours) when 10 stop exits with a stop under
+refusal (A12 candidate, regular hours) when 10 stop exits with a stop under
 `rng30` have cost 3 R or more of slippage in total.** Nothing refuses on it
 today. Recorded by the assistant under the 2026-09-24 delegation.
+
+**Amendment A11 — MACD flags, it does not refuse, in regular hours (IN
+FORCE from the first desk start after 2026-09-25 evening; owner's
+instruction, verbatim: *"simplify every non needed rule you judge
+objectively not consistent or blocking; do a full backtest review based
+upon that"*).** Decided by the rule written in the docstring of
+`scripts/backtest_recent.py` before its first run: a rule is relaxed only if,
+in regular hours, the plans it alone refuses number ≥ 15 triggered, sum
+positive under both the fixed 2 R and the A3 trail, are positive on at least
+half their days, and the one-position portfolio without the rule is at least
+as good on both exits. Seven sessions (2026-09-17 .. 09-25), 31 names, 422
+plans, Yahoo 1-minute bars:
+
+| rule, alone red, regular hours | triggered | fixed 2 R | A3 trail | days + (fixed / trail) | verdict |
+|---|---|---|---|---|---|
+| MACD | 17 | +11.50 | +7.62 | 4/6 · 4/6 | **meets all four: relaxed** |
+| pullback volume | 15 | +3.00 | +12.32 | 2/5 · 3/5 | fails "half the days" on the fixed exit: kept |
+| VWAP | 11 | +4.00 | +3.48 | 3/5 · 3/5 | under 15: kept |
+| still rising | 5 | +1.00 | +7.71 | 1/2 · 2/2 | under 15: kept |
+| price band | 7 | −1.24 | −2.96 | 1/4 · 1/4 | negative: kept, it earns its place |
+| 9 EMA | 1 | −1.00 | −1.00 | 0/1 | kept |
+
+Portfolio, one position, regular hours: current rules +12.00 fixed / +23.60
+trail over 22 trades; without the MACD refusal +23.50 / +31.22 over 39.
+**What changes:** `Runner._act` refuses a regular-hours plan on Layer 2 only
+when VWAP or the 9 EMA is red (or the volume gate, unchanged); a red MACD is
+recorded on the row and scored by `missed` as before
+(`MACD_FLAG_ONLY_REGULAR` in `src/execution/runner.py`). Pre-market keeps all
+three chart gates. The cascade's verdict is unchanged, so replay is
+unaffected. **What it costs:** more trades on a rule the method states
+(FILTERS.md Layer 2) and a sample of seven sessions, in sample, upper bound
+(fill at the trigger, no costs, no pillar gate, no A6). **Undo:** set
+`MACD_FLAG_ONLY_REGULAR = False`. **Kill rule:** revert A11 if, after 20
+regular-hours trades taken with a red MACD, their mean realised R is below
+the mean of the trades taken with all chart gates green.
+
+The same run settled two questions the other way, recorded so they are not
+reopened on one morning: **the A3 trail beats both alternatives** (portfolio
++23.60 R trail against +12.00 fixed and +14.73 BE+2R; my 2026-09-24 reading
+that "the trail gives winners back" was one day's pattern), and **a second
+concurrent position adds nothing** (+23.94 R trail with two against +23.60
+with one). A3 and the one-position rule stay.
 
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland

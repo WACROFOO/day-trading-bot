@@ -94,6 +94,16 @@ Reading, in the order a trader would rank it:
 - "PFSA's stop may have failed" — wrong; it executed at 09:40:00.
 - "GRML 09:39 was refused by Layer 2" — the desk's reason list started with the one-position rule; Layer 2 was second. Both were true on IBKR bars; on Yahoo bars the plan is all green. The tapes differ by cents around VWAP.
 
+## 5b. Correction, 2026-09-25
+
+This report scored GLND as **killed on float** (gate 2, 27.5M over 20M). That
+is wrong for this exercise: under amendment A5 (`docs/preregistration.md`
+§5, 2026-09-21) the float gate flags and the pillar count decides, and the
+desk's own board showed GLND 4/5 with the verdict REVIEW. The eight GLND
+plans belonged in the Layer 2 cohorts, not in a float cohort. The
+seven-session backtest in `2026-09-25-full-assessment.md` treats float as A5
+does.
+
 ## 6. Limitations
 
 Yahoo hides pre-market volume: VWAP and the volume gate are not evaluable

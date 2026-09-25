@@ -45,6 +45,9 @@ STOP_ENFORCE_SECONDS = 15.0
 from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
+#: A11 — MACD is a flag, not a refusal, in regular hours (owner decision 2026-09-25).
+MACD_FLAG_ONLY_REGULAR = True
+
 MODES = ("LOG_ONLY", "TRADE")
 
 
@@ -215,7 +218,17 @@ class Runner:
             # FILTERS.md Layer 2: pullback_volume < impulse_volume, all true at
             # entry. The detector computes it; nothing enforced it.
             reasons.append("Layer 2 not green: pullback volume was not lighter than the impulse")
-        if self.mode == "TRADE" and row["verdict"] != "REVIEW":
+        # A11 (2026-09-25, owner decision; docs/preregistration.md §5): in
+        # REGULAR hours the MACD gate flags and does not refuse — its
+        # alone-refused cohort met the rule written before the data
+        # (scripts/backtest_recent.py). VWAP and the 9 EMA still refuse, and
+        # pre-market keeps all three.
+        l2_red = None
+        if row["verdict"] != "REVIEW" and (row["session"] or "") == "regular" and MACD_FLAG_ONLY_REGULAR:
+            from journal import layer2 as _Z
+            _st = _Z.sub_gates(row["gates_json"], row["volume_ok"])
+            l2_red = [g for g in ("vwap", "ema9") if _st[g] != "PASS"]
+        if self.mode == "TRADE" and row["verdict"] != "REVIEW" and (l2_red is None or l2_red):
             # FILTERS.md Layer 2: "Chart gates — all true at entry". The cascade
             # says REVIEW only when VWAP, 9 EMA and MACD are all green; WAIT is
             # a red chart gate, WATCH a gate it could not compute. LOG_ONLY

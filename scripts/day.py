@@ -469,6 +469,23 @@ GATEWAY_WAIT_S = 20 * 60
 STOP = {"requested": False}       # set by the SIGINT handler; read by the day loop
 
 
+def keep_awake(dry: bool):
+    """macOS: hold an idle/system/display sleep assertion for the life of this
+    process (`caffeinate -dims -w PID`). The IBKR link dropped every few
+    minutes on 2026-09-25 when the laptop lost its network; a Mac that naps
+    also drops Wi-Fi. This removes the sleep half of that. Elsewhere, or when
+    caffeinate is missing, nothing happens."""
+    if dry or sys.platform != "darwin":
+        return None
+    try:
+        p = subprocess.Popen(["caffeinate", "-dims", "-w", str(os.getpid())],
+                             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        note("keeping the Mac awake until the day ends (caffeinate)")
+        return p
+    except OSError:
+        return None
+
+
 def start_runner(mode: str, risk: float, dry: bool):
     cmd = [sys.executable, "-u", "scripts/exercise.py", "--db", str(DB), "live", "--risk", str(risk)]
     if mode == "TRADE":
@@ -740,6 +757,7 @@ def main(argv=None) -> int:
             desk.send_signal(signal.SIGINT)
         return 1
     runner = start_runner(mode, risk, args.dry_run)
+    keep_awake(args.dry_run)
     if args.dry_run:
         say(f"\n{DIM}dry run — nothing started{END}"); return 0
 

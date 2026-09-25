@@ -133,7 +133,7 @@ millions of shares, it has.
 |---|---|
 | `price > vwap` | above VWAP |
 | `price > ema9` | holding the 9 EMA — a dip that **recovers** is bullish; only sustained trading below is bearish |
-| `macd_hist > 0` | MACD 12/26/9, positive **and** above the signal line |
+| `macd_hist > 0` | MACD 12/26/9, positive **and** above the signal line. **Paper exercise only:** in regular hours a red MACD is flagged, not refused, by owner amendment A11 (`docs/preregistration.md` §5, 2026-09-25) after a seven-session backtest met the rule written before it; the method's rule is unchanged |
 | `pullback_volume < impulse_volume` | the dip comes on lighter volume |
 | `pullback_index ≤ 2` | 1st or 2nd pullback; the **3rd is reduced size, not skipped** |
 | `at_support` | **two independent reasons at one price** — MA, whole/half dollar, daily level, flipped resistance, VWAP |

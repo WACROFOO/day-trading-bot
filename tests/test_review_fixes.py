@@ -61,7 +61,11 @@ def test_the_fixture_decisions_now_carry_evaluated_chart_gates():
 
 def test_trade_mode_refuses_anything_that_is_not_review():
     c = L.connect(":memory:"); build_session(FIXTURE, journal=c)
-    c.execute("UPDATE decisions SET verdict='WAIT' WHERE plan_allowed=1"); c.commit()
+    # A11 (2026-09-25): a WAIT caused by MACD alone no longer refuses in regular
+    # hours, so the red gate here is VWAP, which still does.
+    import json as _json
+    gj = _json.dumps([{"id": "vwap", "state": "FAIL"}, {"id": "ema9", "state": "PASS"}, {"id": "macd", "state": "PASS"}])
+    c.execute("UPDATE decisions SET verdict='WAIT', gates_json=? WHERE plan_allowed=1", (gj,)); c.commit()
 
     class T:
         account = "DU1"; placed = []
