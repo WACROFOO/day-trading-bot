@@ -1,0 +1,133 @@
+
+F2-premarket · 216 configurations · 168 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "tra     +0.044 (4006)     +0.131 (1757)      +0.136 (280)
+  {"entry": "pmh", "window": "08-09:30", "stop": "skip<2%", "exit": "tra     -0.025 (3098)     +0.018 (1581)      +0.007 (247)
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "tra     -0.048 (4006)     +0.019 (2161)      -0.004 (347)
+  {"entry": "pmh", "window": "08-09:30", "stop": "skip<2%", "exit": "fix     -0.049 (3098)     +0.001 (1676)      +0.036 (262)
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "fix     -0.055 (4006)     +0.015 (1899)      +0.075 (300)
+  chosen c2e255048705 — positive on validation, eligible for its one holdout opening
+
+  pre-market first? train, symbol-days with a trade in both windows: 780
+    pre-market mean -1.558 · regular mean -0.723 · pre-market better on 36% of them
+    all train pre-market  n  2863 gross +0.025 net -1.364
+    all train regular     n  4295 gross +0.041 net -0.931
+F2 universe audit · holdout · 40 sessions · config {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "trail2", "sel": "none"}
+  gapper pool queried per session ~3324 names · missing names that ran +10 % pre-market: 902
+  in the 09:30-gap universe    trades  178 · gross +0.495 · net -0.128 · win 39%
+  MISSING from it              trades  162 · gross +0.400 · net -0.243 · win 33%
+  combined (plan level)        trades  340 · net -0.183 · missing share 48%
+{
+ "n": 942,
+ "mean": 0.1061,
+ "lb_corrected": -0.0643,
+ "alpha_one_sided": 0.004166666666666667,
+ "years": {
+  "2024": [
+   0.2657,
+   347
+  ],
+  "2025": [
+   0.0219,
+   349
+  ],
+  "2026": [
+   0.0004,
+   246
+  ]
+ },
+ "vs_random_mean": -0.0273,
+ "vs_random_lb95": -0.1221,
+ "checks": {
+  "1 positive net mean": false,
+  "2 corrected lower bound > 0": false,
+  "3 at least 200 trades": true,
+  "4 positive in 2 of 3 years": true,
+  "5 beats random entry on the same names": false,
+  "1b audit-adjusted mean > 0": false
+ },
+ "adopted": false,
+ "plan_level": {
+  "n": 3205,
+  "mean": 0.0076,
+  "total": 24.36,
+  "win_rate": 0.3747,
+  "avg_win": 2.1017,
+  "avg_loss": 1.2474,
+  "win_loss_ratio": 1.685,
+  "exp_per_avg_loss": 0.006,
+  "lb95": -0.11,
+  "gross": 0.6022,
+  "cost": 0.5946
+ },
+ "portfolio": {
+  "n": 942,
+  "mean": 0.1061,
+  "total": 99.94,
+  "win_rate": 0.4066,
+  "avg_win": 1.9782,
+  "avg_loss": 1.1766,
+  "win_loss_ratio": 1.681,
+  "exp_per_avg_loss": 0.09,
+  "lb95": -0.0205,
+  "gross": 0.6333,
+  "cost": 0.5272
+ },
+ "tiered": {
+  "n": 942,
+  "mean": 0.1322,
+  "total": 124.51,
+  "win_rate": 0.4119,
+  "avg_win": 1.9771,
+  "avg_loss": 1.1599,
+  "win_loss_ratio": 1.704,
+  "exp_per_avg_loss": 0.114,
+  "lb95": 0.0059,
+  "gross": 0.6333,
+  "cost": 0.5011
+ },
+ "cost_light": {
+  "n": 942,
+  "mean": 0.203,
+  "total": 191.2,
+  "win_rate": 0.4268,
+  "avg_win": 1.9846,
+  "avg_loss": 1.1233,
+  "win_loss_ratio": 1.767,
+  "exp_per_avg_loss": 0.181,
+  "lb95": 0.0765,
+  "gross": 0.6333,
+  "cost": 0.4303
+ },
+ "cost_old": {
+  "n": 942,
+  "mean": 0.4268,
+  "total": 402.06,
+  "win_rate": 0.4628,
+  "avg_win": 2.04,
+  "avg_loss": 0.9632,
+  "win_loss_ratio": 2.118,
+  "exp_per_avg_loss": 0.443,
+  "lb95": 0.302,
+  "gross": 0.6333,
+  "cost": 0.2064
+ },
+ "audit": {
+  "split": "holdout",
+  "config": {
+   "entry": "pmh",
+   "window": "08-09:30",
+   "stop": "widen2%",
+   "exit": "trail2",
+   "sel": "none"
+  },
+  "sessions": 40,
+  "in_n": 178,
+  "in_net": -0.12779292994349734,
+  "miss_n": 162,
+  "miss_net": -0.2427477726607957,
+  "combined_net": -0.18256553147350424,
+  "missing_share": 0.4764705882352941,
+  "adjusted_mean": -0.0601
+ }
+}
