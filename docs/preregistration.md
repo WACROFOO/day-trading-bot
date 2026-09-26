@@ -837,6 +837,16 @@ trades). It was proposed, not confirmed by the owner; pre-market stays as the
 owner set it, and the evidence is recorded here. Detail and diagnosis:
 `research/paper-exercise/reports/2026-09-26-premarket-history.md` §7.
 
+**Every rule freed one at a time (2026-09-26).** `scripts/ablation_history.py`,
+adoption rule written before the run (positive net mean on 2024-2026 with the
+95 % lower bound above zero, ≥ 200 trades, 2 of 3 test years positive). No
+single lever and no train-chosen combination meets it; the best combination
+reads −0.10 R/trade on test. The largest improvement in both periods is a
+stop-width floor (≥ 2 % of price: train −0.48 → −0.25, test −0.61 → −0.35),
+recorded here as the strongest candidate for a harm-reducing amendment; it is
+not adopted without the owner's word because it does not make the strategy
+positive. Detail: the same report, §8.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

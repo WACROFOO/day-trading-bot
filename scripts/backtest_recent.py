@@ -144,7 +144,7 @@ def cost_r(entry: float, stop: float, stop_exit: bool, dollar_risk: float = 20.0
 
 
 def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool = False,
-                  gap_miss: bool = False) -> list[dict]:
+                  gap_miss: bool = False, hook=None) -> list[dict]:
     """Every pullback plan the desk's detector arms on one symbol-day.
 
     desk_vwap=False (Yahoo, no pre-market volume): regular-hours VWAP is
@@ -155,8 +155,13 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool =
     gap_miss=True: a touch bar that OPENS above A10's limit is no fill."""
     det = FirstPullbackDetector()
     hist, out, hi = [], [], None
+    cum_vol, pm_hi, n_plans = 0.0, None, 0
     for i, (ts, o, h, l, c, v) in enumerate(day_rows):
+        hi_before = hi
         hi = h if hi is None else max(hi, h)
+        cum_vol += v
+        if ts.time() < RTH_START:
+            pm_hi = h if pm_hi is None else max(pm_hi, h)
         hist.append([int(ts.timestamp()), o, h, l, c, v])
         plan = det.on_bar(Bar(symbol=sym, timeframe="1m", ts=ts.astimezone(timezone.utc),
                               open=o, high=h, low=l, close=c, volume=v))
@@ -201,7 +206,11 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool =
                     fill, fill_k = cap, back
             elif o_t > plan.entry:
                 fill = o_t                            # triggered on the open, filled there (inside the cap)
+        n_plans += 1
         rec = {"sym": sym, "day": ts.date().isoformat(), "t": ts.strftime("%H:%M"), "ts": ts, "window": window,
+               "cum_vol": cum_vol, "pm_high": pm_hi, "hod_before": hi_before, "pb_index": n_plans,
+               "price": round(plan.entry, 4), "stop_pct": round((plan.entry - plan.stop) / plan.entry * 100, 3),
+               "gap": round(o / prev_close - 1, 3) if prev_close else None,
                "entry": round(plan.entry, 4), "stop": round(plan.stop, 4), "red": red,
                "gain": round(c / prev_close - 1, 3) if prev_close else None, "touched": touch is not None,
                "gap_missed": missed}
@@ -212,6 +221,8 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool =
                 r, why, t_out = simulate(ent, plan.entry, plan.stop, v, fill=fill if gap_miss else None)
                 rec[v], rec[v + "_why"], rec[v + "_out"] = r, why, t_out
                 rec[v + "_net"] = round(r - cost_r(plan.entry, plan.stop, why in ("stop", "trail")), 3)
+            if hook is not None:
+                hook(rec, ent, fill if gap_miss else plan.entry)
             rec["t_in"] = ent[0][0]
         out.append(rec)
     return out
