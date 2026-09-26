@@ -76,3 +76,28 @@ history run, current-rules pre-market trades number at least 200 and their
 NET mean on the A3 trail is above zero in the TEST years (2024 onward).
 Otherwise pre-market returns to watch-only until a variant passes the same
 test.** Regular hours are judged by the same rule on their own cohort.
+
+## 6. MACD over eleven years (added 2026-09-26)
+
+A11 was decided on seven sessions. The study's trade ledger
+(`research/first-pullback-edge/data/trades.parquet`, variant A, common exits,
+pessimistic ambiguity) records VWAP, the 9 EMA and MACD at every setup, so the
+same question can be asked of 2016–2026. VWAP and 9 EMA read against the
+trigger price (the setup bar's close is not stored); MACD green = line and
+histogram above zero, as FILTERS.md states it.
+
+| 09:30–11:30, setups with VWAP and 9 EMA green | n | gross R/trade | net R/trade | years positive (net) |
+|---|---|---|---|---|
+| MACD green (the rule before A11) | 1,237 | −0.490 | −1.608 | 0 of 11 |
+| MACD red (what A11 lets through) | 133 | −0.385 | −1.408 | 0 of 11 |
+| MACD either (the rule after A11) | 1,370 | −0.479 | −1.589 | 0 of 11 |
+
+Reading: over eleven years MACD as a hard gate **removes setups that did
+slightly better, not worse**, than the ones it keeps (gross −0.39 against −0.49,
+net −1.41 against −1.61). A11 is supported in direction: dropping the MACD
+refusal does not make the strategy worse. It does not make it profitable
+either — every cohort, every year, is negative in this study. The study's
+detector and exits are the Pine port's, not the desk's (§2), and it recorded
+**zero pre-market entries in 11,399 variant-A trades**, so it says nothing
+about pre-market. Only `scripts/backtest_history.py` on the Mac, with
+pre-market volume and the desk's own detector, can.

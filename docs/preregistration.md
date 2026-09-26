@@ -800,6 +800,13 @@ that "the trail gives winners back" was one day's pattern), and **a second
 concurrent position adds nothing** (+23.94 R trail with two against +23.60
 with one). A3 and the one-position rule stay.
 
+**A11, checked over eleven years (2026-09-26).** On the first-pullback-edge
+trade ledger, 09:30–11:30 setups with VWAP and the 9 EMA green: MACD green
+−1.608 R net over 1,237, MACD red −1.408 R net over 133, 0 of 11 years positive
+either way. The MACD refusal removes setups that did slightly better than the
+ones it keeps; A11 stands on direction, and the whole cohort stays negative in
+that study. Detail: `research/paper-exercise/reports/2026-09-26-premarket-history.md` §6.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
