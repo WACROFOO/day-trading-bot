@@ -11,6 +11,7 @@ market data or the trading engine.
 | `search.py` | The main query tool: BM25 over claims and raw caption chunks, deep links with timestamps |
 | `mine_streams.py` | Topic-mines the live-stream transcripts; each topic tied to an open question in the research |
 | `run_scanner.py` | CLI wrapper for the paper-trading platform's scanner |
+| `edge_hunt/` | The holdout-guarded edge hunt (`research/edge-hunt/`): compact bar store, the desk's plans, point-in-time features, exit engine, costs, the holdout ledger |
 | `pipeline/` | The numbered corpus pipeline — see its README |
 | `corpus.py` | **Search every register at once, with citations.** Entry point for the `warrior-corpus` skill |
 | `fetch_warrior_blog.py` / `fetch_warrior_fast.py` | Fetch the written corpus from warriortrading.com |
