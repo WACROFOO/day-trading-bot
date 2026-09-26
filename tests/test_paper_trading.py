@@ -78,8 +78,10 @@ class TestLedger:
         assert curve[1]["equity"] == pytest.approx(10_050.0)
 
     def test_daily_pnl_fifo(self, db):
-        from datetime import datetime, timezone
-        today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        # the ledger buckets by the New York date; a UTC date fails 00:00-04:00 UTC
+        today = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d")
         ledger.record_fill("ABC", "BUY", 100, 5.0, db_path=db)
         ledger.record_fill("ABC", "BUY", 100, 6.0, db_path=db)
         ledger.record_fill("ABC", "SELL", 150, 7.0, db_path=db)

@@ -118,7 +118,35 @@ def simulate(bars: list, entry: float, stop: float, variant: str) -> tuple[float
     return round((bars[-1][4] - entry) / rps, 3), "close", bars[-1][0]
 
 
-def plans_for_day(sym: str, day_rows: list, prev_close: float) -> list[dict]:
+def entry_cap(entry: float) -> float:
+    """A10's limit: trigger + max(1 cent, 0.3 %) (execution.intent.entry_limit)."""
+    return round(entry + max(0.01, entry * 0.003), 4)
+
+
+def cost_r(entry: float, stop: float, stop_exit: bool, dollar_risk: float = 20.0) -> float:
+    """Costs in R for one round trip at the desk's sizing: IBKR fixed pricing
+    ($0.005/share, $1 minimum per order) both ways, plus one cent of slippage
+    on entry and one on a stop exit (a gap through the stop is modelled in
+    `simulate` itself)."""
+    rps = entry - stop
+    if rps <= 0:
+        return 0.0
+    shares = max(1, int(dollar_risk // rps))
+    comm = 2 * max(1.0, 0.005 * shares)
+    slip = 0.01 * shares * (2 if stop_exit else 1)
+    return round((comm + slip) / dollar_risk, 3)
+
+
+def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool = False,
+                  gap_miss: bool = False) -> list[dict]:
+    """Every pullback plan the desk's detector arms on one symbol-day.
+
+    desk_vwap=False (Yahoo, no pre-market volume): regular-hours VWAP is
+    RTH-anchored and pre-market VWAP / volume are not evaluated.
+    desk_vwap=True (a consolidated feed WITH pre-market volume): VWAP is
+    anchored at 04:00 like the live desk, and VWAP and the volume gate are
+    evaluated in both windows.
+    gap_miss=True: a touch bar that OPENS above A10's limit is no fill."""
     det = FirstPullbackDetector()
     hist, out, hi = [], [], None
     for i, (ts, o, h, l, c, v) in enumerate(day_rows):
@@ -138,25 +166,33 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float) -> list[dict]:
             red.append("price")
         if hi and c < (1 - RISING_MAX_OFF) * hi:
             red.append("rising")
-        if window == "regular":
+        if desk_vwap:
+            if gfull["above_vwap"] is not True:
+                red.append("vwap")
+        elif window == "regular":
             if g["above_vwap"] is not True:
                 red.append("vwap")
         if gfull["above_ema9"] is not True:
             red.append("ema9")
         if gfull["macd_positive_and_above_signal"] is not True:
             red.append("macd")
-        if window == "regular" and not plan.volume_ok:
+        if (window == "regular" or desk_vwap) and not plan.volume_ok:
             red.append("volume")
         fwd = day_rows[i + 1:]
         touch = next((k for k, b in enumerate(fwd[:TTL_BARS]) if b[2] >= plan.entry), None)
+        missed = False
+        if touch is not None and gap_miss and fwd[touch][1] > entry_cap(plan.entry):
+            touch, missed = None, True                # opened above the stop-limit's cap: no fill
         rec = {"sym": sym, "day": ts.date().isoformat(), "t": ts.strftime("%H:%M"), "ts": ts, "window": window,
                "entry": round(plan.entry, 4), "stop": round(plan.stop, 4), "red": red,
-               "gain": round(c / prev_close - 1, 3) if prev_close else None, "touched": touch is not None}
+               "gain": round(c / prev_close - 1, 3) if prev_close else None, "touched": touch is not None,
+               "gap_missed": missed}
         if touch is not None:
             ent = fwd[touch:]
             for v in EXITS:
                 r, why, t_out = simulate(ent, plan.entry, plan.stop, v)
                 rec[v], rec[v + "_why"], rec[v + "_out"] = r, why, t_out
+                rec[v + "_net"] = round(r - cost_r(plan.entry, plan.stop, why in ("stop", "trail")), 3)
             rec["t_in"] = ent[0][0]
         out.append(rec)
     return out
