@@ -149,9 +149,11 @@ def to_rows(raw: list) -> list:
 # ------------------------------------------------------------------ rules
 def current_rules(p: dict) -> bool:
     """What the desk refuses on today: price, still-rising, VWAP, 9 EMA,
-    pullback volume, and MACD only pre-market (A11)."""
+    pullback volume and MACD — MACD only pre-market while A11's switch is on
+    (`execution.runner.MACD_FLAG_ONLY_REGULAR`; reverted 2026-09-26)."""
+    from execution.runner import MACD_FLAG_ONLY_REGULAR
     red = set(p["red"])
-    if p["window"] == "regular":
+    if p["window"] == "regular" and MACD_FLAG_ONLY_REGULAR:
         red.discard("macd")
     return not red
 
@@ -228,7 +230,7 @@ def main(argv=None) -> int:
           f"the entry cap (no fill)\n")
 
     # 1. plan level, current rules, per window — gross and net
-    print("PLAN LEVEL · current rules (A11) · every plan scored as if taken")
+    print("PLAN LEVEL · current rules · every plan scored as if taken")
     for w in ("pre-market", "regular"):
         ok = [p for p in trig if p["window"] == w and current_rules(p)]
         allp = [p for p in trig if p["window"] == w]
@@ -273,7 +275,7 @@ def main(argv=None) -> int:
     for ex in ("trail",):
         for w in WINDOWS:
             tr = portfolio_net(train, current_rules, ex, w); te = portfolio_net(test, current_rules, ex, w)
-            print(f"  {'now':<5}{'current rules (A11)':<34}{ex:<7}{w:<12}"
+            print(f"  {'now':<5}{'current rules':<34}{ex:<7}{w:<12}"
                   f"{(tr['total'] / tr['trades'] if tr['trades'] else float('nan')):>+14.3f}"
                   f"{(te['total'] / te['trades'] if te['trades'] else float('nan')):>+14.3f}{te['trades']:>12}")
 

@@ -46,7 +46,10 @@ from momentum_platform.sessions import REGULAR_END
 from .policy import premarket_allowed, premarket_shape
 
 #: A11 — MACD is a flag, not a refusal, in regular hours (owner decision 2026-09-25).
-MACD_FLAG_ONLY_REGULAR = True
+#: REVERTED 2026-09-26: re-scored with realistic stop-limit fills the MACD-only cohort is
+#: negative on the trailing exit, so A11 fails the rule it was adopted under
+#: (docs/preregistration.md §5). Kept as a switch so the variant stays testable.
+MACD_FLAG_ONLY_REGULAR = False
 
 MODES = ("LOG_ONLY", "TRADE")
 

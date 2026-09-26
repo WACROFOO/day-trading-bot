@@ -807,6 +807,36 @@ either way. The MACD refusal removes setups that did slightly better than the
 ones it keeps; A11 stands on direction, and the whole cohort stays negative in
 that study. Detail: `research/paper-exercise/reports/2026-09-26-premarket-history.md` §6.
 
+**A11 REVERTED (2026-09-26).** The seven-session backtest behind A11 filled
+every trigger touch AT the trigger. A stop-limit cannot: when the bar opens
+above the limit it fills at the limit only if the price comes back, and
+otherwise not at all. Re-scored with that fill (`scripts/backtest_recent.py`,
+fills now realistic by default), the same seven sessions read, regular hours,
+current rules, one position: fixed 2 R −2.23 R net, trail −13.08 R net
+(against +10.76 / +17.03 before), and the MACD-only cohort +1.44 fixed but
+−7.51 trail. A11 fails its own rule (both exits positive) and is reverted:
+`MACD_FLAG_ONLY_REGULAR = False`. The ten-year run below agrees — its best
+walk-forward configuration REQUIRES MACD. My error: the fill model, which I
+wrote, not the data.
+
+**Ten years of the desk's own rules, pre-market included (2026-09-26).**
+`scripts/backtest_history.py`, Alpaca SIP bars WITH pre-market volume, 25,716
+gapper-days 2016–2026, 89,538 plans, realistic fills, IBKR commissions and a
+cent a side. Current rules (MACD required), every filled plan:
+
+| window | trades | gross R/trade (trail) | net R/trade (trail) |
+|---|---|---|---|
+| pre-market 07:00–09:30 | 5,796 | −0.099 | −0.605 |
+| regular 09:30–11:20 | 8,344 | −0.060 | −0.487 |
+
+One position, net, trail: negative in **every one of the eleven years** in
+both windows. Walk-forward optimizer, 288 configurations chosen on 2016–2023:
+the best scores −0.497 R/trade net on 2024–2026. **The pre-market rule
+proposed on 2026-09-26 is not met** (test years 2024+: −0.64 R net over 2,153
+trades). It was proposed, not confirmed by the owner; pre-market stays as the
+owner set it, and the evidence is recorded here. Detail and diagnosis:
+`research/paper-exercise/reports/2026-09-26-premarket-history.md` §7.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

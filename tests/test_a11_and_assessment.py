@@ -49,8 +49,13 @@ def _l2(acted):
     return [any(x.startswith("Layer 2 not green") for x in a.reasons) for a in acted]
 
 
-def test_a11_macd_alone_does_not_refuse_in_regular_hours():
-    assert RN.MACD_FLAG_ONLY_REGULAR is True
+def test_a11_is_reverted_and_macd_refuses_again():
+    assert RN.MACD_FLAG_ONLY_REGULAR is False            # reverted 2026-09-26
+    assert all(_l2(_run("regular", macd="FAIL")))
+
+
+def test_a11_switch_still_works_when_turned_on(monkeypatch):
+    monkeypatch.setattr(RN, "MACD_FLAG_ONLY_REGULAR", True)
     acted = _run("regular", macd="FAIL")
     assert acted and not any(_l2(acted)), [a.reasons for a in acted]
 

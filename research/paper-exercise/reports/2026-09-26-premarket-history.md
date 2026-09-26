@@ -101,3 +101,55 @@ detector and exits are the Pine port's, not the desk's (§2), and it recorded
 **zero pre-market entries in 11,399 variant-A trades**, so it says nothing
 about pre-market. Only `scripts/backtest_history.py` on the Mac, with
 pre-market volume and the desk's own detector, can.
+
+## 7. The ten-year run, done (2026-09-26, same day)
+
+Run from the cloud side with the owner's Alpaca paper keys (kept out of the
+repository). SIP bars carry real pre-market volume: GRML 2026-09-24 07:00 ET
+shows 48,339 shares in one minute where Yahoo shows 0.
+
+**First, a correction to my own tool.** The first version filled every
+trigger touch at the trigger. Scored on 300 sampled sessions, that fill model
+gives +1.45 R gross a trade in regular hours; a strict "no fill if the bar
+opens above the limit" gives +0.05 gross. The difference is fills that cannot
+happen: the stock had already jumped past the order. The tool now fills the
+way a stop-limit does (at the open inside the cap, at the cap only if the
+price returns within 3 minutes, else nothing). The two live fills agree with
+it: PFSA 3.73 → 3.74, GRML 14.47 → 14.49. The seven-session result that
+justified A11 was made with the wrong model; A11 is reverted
+(`docs/preregistration.md` §5).
+
+**The result, 25,716 gapper-days, 2016–2026, current rules, realistic fills:**
+
+| | pre-market | regular |
+|---|---|---|
+| filled trades | 5,796 | 8,344 |
+| gross R/trade, trail | −0.099 | −0.060 |
+| net R/trade, trail | −0.605 | −0.487 |
+| years positive (one position, net) | 0 of 11 | 0 of 11 |
+
+Pre-market by hour, gross / net trail: 07:00 −0.327 / −0.814 · 08:00 +0.058 /
+−0.461 · 09:00 −0.103 / −0.606.
+
+By stop width, both windows, gross / net trail: under 1 % of price −0.238 /
+−1.059 (costs 0.82 R a trade) · 1–2 % −0.019 / −0.449 · 2–4 % −0.019 / −0.310 ·
+4–8 % −0.048 / −0.242 · 8 % and over −0.024 / −0.166.
+
+Walk-forward optimizer (288 gate × exit × window combinations, chosen on
+2016–2023, scored once on 2024–2026): best −0.497 R/trade net on 3,895 test
+trades (VWAP + 9 EMA + MACD, trail, regular hours). Current rules on the same
+years: −0.615 regular, −0.640 pre-market.
+
+**What it means, simply.** The pullback entry has no edge on its own: before
+any cost the average trade is about zero. Costs are then 0.3–0.8 R a trade at
+$20 of risk, because the stops are tight, and that is the whole loss. No
+combination of the gates changes the sign; the best one loses half a R a
+trade out of sample. Pre-market is not where this mechanical version makes
+money; it loses slightly more than regular hours. What Ross does in the
+pre-market that this cannot see — tape and Level 2 reading, scaling in and
+out, 10-second entries, choosing one name out of twenty by feel — is not in
+these rules, and this study says nothing about it.
+
+**Limits.** No float, catalyst, pillar count or spread rule; universe chosen
+on the 09:30 gap (favours pre-market); one-minute bars; IBKR fixed commission
+pricing (tiered is about 30 % cheaper, which does not change any sign).

@@ -25,8 +25,12 @@ pre-market volume, so a VWAP verdict can differ near the line.
 
 Not modelled, and said so in every table: the pillar count (news is unknown
 for past days), the A6 spread rule (no historical quotes), halts, fees.
-Entries: A10 — the trigger must trade within 3 bars of the plan bar; fill at
-the trigger. Stops: a bar that OPENS below the stop fills at its open (the
+Entries: A10 — the trigger must trade within 3 bars of the plan bar. Fills are
+REALISTIC since 2026-09-26: at the trigger, at the bar's open when it opens
+between the trigger and the stop-limit's cap, at the cap when it opens above
+it and trades back down to it within 3 bars, otherwise no fill. The first
+version filled every touch at the trigger, which a stop-limit cannot do; that
+fill model produced the positive seven-session result behind A11, reverted. Stops: a bar that OPENS below the stop fills at its open (the
 GRML 2026-09-25 slippage), otherwise at the stop. Flatten at 11:30.
 
 Usage:
@@ -96,26 +100,28 @@ def fetch(sym: str, cache: Path) -> tuple[list, dict]:
     return rows, prev
 
 
-def simulate(bars: list, entry: float, stop: float, variant: str) -> tuple[float, str, datetime]:
+def simulate(bars: list, entry: float, stop: float, variant: str,
+             fill: float | None = None) -> tuple[float, str, datetime]:
     """One trade from the entry bar on. Stop tested first against the level in
     force before the bar (opening below it fills at the open), then target,
     then the trail may rise. Flatten at 11:30."""
     rps = entry - stop
+    px_in = entry if fill is None else fill
     level, target = stop, entry + 2 * rps
     for b in bars:
         ts, o, h, l, c, v = b
         if ts.time() >= FLAT:
-            return round((o - entry) / rps, 3), "flatten", ts
+            return round((o - px_in) / rps, 3), "flatten", ts
         if l <= level:
             px = min(level, o)
-            return round((px - entry) / rps, 3), ("stop" if level == stop else "trail"), ts
+            return round((px - px_in) / rps, 3), ("stop" if level == stop else "trail"), ts
         if variant in ("fixed", "be") and h >= target:
-            return 2.0, "target", ts
+            return round((target - px_in) / rps, 3), "target", ts
         if variant == "trail":
             level = max(level, h - rps)
         elif variant == "be" and h >= entry + rps:
             level = max(level, entry)
-    return round((bars[-1][4] - entry) / rps, 3), "close", bars[-1][0]
+    return round((bars[-1][4] - px_in) / rps, 3), "close", bars[-1][0]
 
 
 def entry_cap(entry: float) -> float:
@@ -180,17 +186,30 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool =
             red.append("volume")
         fwd = day_rows[i + 1:]
         touch = next((k for k, b in enumerate(fwd[:TTL_BARS]) if b[2] >= plan.entry), None)
-        missed = False
-        if touch is not None and gap_miss and fwd[touch][1] > entry_cap(plan.entry):
-            touch, missed = None, True                # opened above the stop-limit's cap: no fill
+        missed, fill, fill_k = False, plan.entry, touch
+        if touch is not None and gap_miss:
+            cap = entry_cap(plan.entry)
+            o_t = fwd[touch][1]
+            if o_t > cap:
+                # Triggered above the cap: the order rests as a buy limit at the
+                # cap and fills only if the tape comes back to it inside the
+                # TTL — the adverse-selection fill a real stop-limit gets.
+                back = next((k for k in range(touch, min(len(fwd), touch + TTL_BARS)) if fwd[k][3] <= cap), None)
+                if back is None:
+                    touch, missed = None, True
+                else:
+                    fill, fill_k = cap, back
+            elif o_t > plan.entry:
+                fill = o_t                            # triggered on the open, filled there (inside the cap)
         rec = {"sym": sym, "day": ts.date().isoformat(), "t": ts.strftime("%H:%M"), "ts": ts, "window": window,
                "entry": round(plan.entry, 4), "stop": round(plan.stop, 4), "red": red,
                "gain": round(c / prev_close - 1, 3) if prev_close else None, "touched": touch is not None,
                "gap_missed": missed}
         if touch is not None:
-            ent = fwd[touch:]
+            ent = fwd[fill_k:]
+            rec["fill"] = round(fill, 4)
             for v in EXITS:
-                r, why, t_out = simulate(ent, plan.entry, plan.stop, v)
+                r, why, t_out = simulate(ent, plan.entry, plan.stop, v, fill=fill if gap_miss else None)
                 rec[v], rec[v + "_why"], rec[v + "_out"] = r, why, t_out
                 rec[v + "_net"] = round(r - cost_r(plan.entry, plan.stop, why in ("stop", "trail")), 3)
             rec["t_in"] = ent[0][0]
@@ -214,7 +233,7 @@ def load(universe: list[str], cache: Path) -> list[dict]:
             early = [r[2] for r in rs if r[0].time() < FLAT]
             if not pc or not early or max(early) < (1 + GAIN_MIN) * pc:
                 continue                              # never up 10 % before 11:30: not on the scanner
-            plans += plans_for_day(sym, rs, pc)
+            plans += plans_for_day(sym, rs, pc, gap_miss=True)   # realistic stop-limit fills (2026-09-26)
     return plans
 
 
