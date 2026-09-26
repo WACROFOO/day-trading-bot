@@ -1,0 +1,14 @@
+
+F2-premarket · 216 configurations · 168 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "tra     +0.032 (3926)     +0.137 (1734)      +0.149 (274)
+  {"entry": "pmh", "window": "08-09:30", "stop": "skip<2%", "exit": "tra     -0.046 (3025)     +0.012 (1553)      +0.020 (241)
+  {"entry": "pmh", "window": "08-09:30", "stop": "skip<2%", "exit": "fix     -0.056 (3025)     -0.002 (1643)      +0.055 (256)
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "tra     -0.058 (3926)     +0.026 (2127)      +0.002 (342)
+  {"entry": "pmh", "window": "08-09:30", "stop": "widen2%", "exit": "fix     -0.059 (3926)     +0.014 (1871)      +0.090 (294)
+  chosen c2e255048705 — positive on validation, eligible for its one holdout opening
+
+  pre-market first? train, symbol-days with a trade in both windows: 758
+    pre-market mean -1.593 · regular mean -0.730 · pre-market better on 36% of them
+    all train pre-market  n  2748 gross +0.014 net -1.398
+    all train regular     n  4233 gross +0.026 net -0.945

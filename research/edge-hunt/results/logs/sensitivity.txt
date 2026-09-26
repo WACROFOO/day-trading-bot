@@ -1,0 +1,6 @@
+F2 holdout · cost prereg port +0.106 (n 942) · vs random -0.027 · audit in -0.128 missing -0.243 share 48% · adjusted -0.060
+F2 holdout · cost light  port +0.203 (n 942) · vs random -0.027 · audit in -0.017 missing -0.105 share 48% · adjusted +0.056
+F2 holdout · cost old    port +0.427 (n 942) · vs random -0.017 · audit in +0.273 missing +0.149 share 48% · adjusted +0.294
+cost prereg train: B0 -1.109 · F1 -0.358 · F4 -0.325 | valid: B0 -1.146 · F1 -0.400 · F4 -0.181
+cost light  train: B0 -0.850 · F1 -0.257 · F4 -0.228 | valid: B0 -0.873 · F1 -0.305 · F4 -0.085
+cost old    train: B0 -0.424 · F1 -0.175 · F4 -0.190 | valid: B0 -0.429 · F1 -0.225 · F4 -0.045

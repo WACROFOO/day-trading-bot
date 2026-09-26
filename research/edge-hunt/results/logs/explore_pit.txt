@@ -1,0 +1,11 @@
+train any gain at the arm                      plans  4006 gross +0.609 net +0.044 · port 1757 net +0.131 · vs random +0.098
+train up >= 10% at the arm (scanner)           plans  2854 gross +0.178 net -0.341 · port 1496 net -0.302 · vs random -0.230
+train up < 10% at the arm (look-ahead only)    plans  1152 gross +1.677 net +0.999 · port  756 net +1.163 · vs random +0.768
+valid any gain at the arm                      plans   561 gross +0.625 net +0.060 · port  280 net +0.136 · vs random -0.101
+valid up >= 10% at the arm (scanner)           plans   383 gross +0.173 net -0.340 · port  238 net -0.421 · vs random -0.430
+valid up < 10% at the arm (look-ahead only)    plans   178 gross +1.598 net +0.920 · port  135 net +1.023 · vs random +0.388
+Traceback (most recent call last):
+  File "<stdin>", line 40, in <module>
+NameError: name 'G' is not defined
+audit train/valid sessions, scanner-at-the-arm version · in    n   74 gross +0.412 net -0.114
+audit train/valid sessions, scanner-at-the-arm version · miss  n   17 gross -0.998 net -1.566

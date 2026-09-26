@@ -260,3 +260,12 @@ def test_former_runner_reads_earlier_sessions_only():
                     ("2024-03-04", "BBB", 4.0, m, a)])
     fr = F.former_runner(st, F.Grid(st))
     assert list(fr) == [False, True, False]
+
+
+def test_reverse_split_days_are_not_gappers():
+    """The universe's split flag never fires; a reverse split shows as a clean integer
+    ratio and a pre-split previous close (FRO 2016-02-03, 1-for-5): a fake 415 % gap."""
+    from edge_hunt.data import universe_rows
+    import backtest_history as H
+    assert "FRO" not in universe_rows().get("2016-02-03", {})
+    assert "FRO" not in H.load_universe("2016-02-03", "2016-02-03").get("2016-02-03", {})

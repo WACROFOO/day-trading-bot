@@ -1,0 +1,18 @@
+
+F4-exits-sizing (stop x exit) · 99 configurations · 99 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"stop": ["skip_pct", 3.0], "exit": "newlow"}                              -0.327 (1246)     -0.330 (1196)      -0.166 (210)
+  {"stop": ["skip_pct", 3.0], "exit": "trail0.5"}                            -0.365 (1246)     -0.370 (1204)      -0.311 (211)
+  {"stop": ["skip_pct", 3.0], "exit": "trail1"}                              -0.381 (1246)     -0.381 (1189)      -0.350 (209)
+  {"stop": ["skip_pct", 3.0], "exit": "time5_trail1"}                        -0.387 (1246)     -0.382 (1195)      -0.353 (211)
+  {"stop": ["skip_pct", 3.0], "exit": "trail1.5"}                            -0.404 (1246)     -0.402 (1163)      -0.243 (209)
+  chosen 8b26f67261f8 is not positive on validation (-0.166) — family FAILS at the validation gate, holdout stays closed
+
+F4-exits-sizing (+ discipline x sizing) · 174 configurations · 75 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"stop": ["skip_pct", 3.0], "exit": "newlow", "discipline": "none", "s     -0.314 (1196)     -0.314 (1196)      -0.216 (210)
+  {"stop": ["skip_pct", 3.0], "exit": "newlow", "discipline": "first_win     -0.327 (1098)     -0.327 (1098)      -0.203 (204)
+  {"stop": ["skip_pct", 3.0], "exit": "newlow", "discipline": "none", "s     -0.330 (1196)     -0.330 (1196)      -0.166 (210)
+  {"stop": ["skip_pct", 3.0], "exit": "newlow", "discipline": "minus2R",     -0.332 (1107)     -0.332 (1107)      -0.261 (204)
+  {"stop": ["skip_pct", 3.0], "exit": "newlow", "discipline": "first_win     -0.345 (1098)     -0.345 (1098)      -0.152 (204)
+  chosen f5e5b8e347d9 is not positive on validation (-0.152) — family FAILS at the validation gate, holdout stays closed

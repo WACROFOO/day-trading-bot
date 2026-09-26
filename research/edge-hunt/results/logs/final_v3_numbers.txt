@@ -1,0 +1,16 @@
+train · bot today (B0)                         n  5867 win 19% · avg win +1.50 · avg loss 1.76 · w/l 0.85 · net -1.135 · per avg loss -0.645 · gross -0.006 · cost 1.129
+train · B0 pre-market                          n  2486 win 18% · avg win +1.70 · avg loss 2.06 · w/l 0.82 · net -1.376 · per avg loss -0.669 · gross -0.002 · cost 1.375
+train · B0 regular                             n  3382 win 20% · avg win +1.37 · avg loss 1.54 · w/l 0.89 · net -0.956 · per avg loss -0.623 · gross -0.009 · cost 0.948
+train · B0 cost light                          n  5867 win 22% · avg win +1.50 · avg loss 1.55 · w/l 0.97 · net -0.874 · per avg loss -0.565 · gross -0.006 · cost 0.868
+train · B0 cost old                            n  5867 win 27% · avg win +1.53 · avg loss 1.17 · w/l 1.31 · net -0.443 · per avg loss -0.380 · gross -0.006 · cost 0.438
+   by stop width (plan level): {Interval(0, 1, closed='right'): {'n': 1593, 'gross': 0.148, 'cost': 2.706, 'net': -2.558}, Interval(1, 2, closed='right'): {'n': 2663, 'gross': -0.008, 'cost': 0.904, 'net': -0.912}, Interval(2, 3, closed='right'): {'n': 1479, 'gross': -0.023, 'cost': 0.561, 'net': -0.584}, Interval(3, 5, closed='right'): {'n': 977, 'gross': -0.008, 'cost': 0.384, 'net': -0.392}, Interval(5, 100, closed='right'): {'n': 269, 'gross': -0.085, 'cost': 0.259, 'net': -0.344}}
+valid · bot today (B0)                         n   891 win 20% · avg win +1.55 · avg loss 1.82 · w/l 0.85 · net -1.138 · per avg loss -0.626 · gross +0.024 · cost 1.162
+valid · B0 pre-market                          n   399 win 19% · avg win +1.94 · avg loss 2.06 · w/l 0.94 · net -1.302 · per avg loss -0.631 · gross +0.066 · cost 1.367
+valid · B0 regular                             n   492 win 21% · avg win +1.26 · avg loss 1.61 · w/l 0.78 · net -1.006 · per avg loss -0.623 · gross -0.011 · cost 0.995
+valid · B0 cost light                          n   891 win 23% · avg win +1.58 · avg loss 1.59 · w/l 0.99 · net -0.865 · per avg loss -0.544 · gross +0.024 · cost 0.888
+valid · B0 cost old                            n   891 win 26% · avg win +1.65 · avg loss 1.18 · w/l 1.40 · net -0.433 · per avg loss -0.368 · gross +0.024 · cost 0.457
+   by stop width (plan level): {Interval(0, 1, closed='right'): {'n': 213, 'gross': 0.192, 'cost': 2.824, 'net': -2.632}, Interval(1, 2, closed='right'): {'n': 325, 'gross': -0.143, 'cost': 0.967, 'net': -1.11}, Interval(2, 3, closed='right'): {'n': 212, 'gross': 0.093, 'cost': 0.58, 'net': -0.487}, Interval(3, 5, closed='right'): {'n': 171, 'gross': -0.078, 'cost': 0.383, 'net': -0.461}, Interval(5, 100, closed='right'): {'n': 44, 'gross': 0.298, 'cost': 0.257, 'net': 0.041}}
+train PMH scanner: up >= 10% at the arm      plans  2776 gross +0.160 net -0.364 · port 1464 net -0.317 · vs random -0.224
+train PMH up < 10% at the arm (hindsight)    plans  1150 gross +1.666 net +0.988 · port 754 net +1.147 · vs random +0.767
+valid PMH scanner: up >= 10% at the arm      plans   369 gross +0.160 net -0.361 · port 230 net -0.418 · vs random -0.471
+valid PMH up < 10% at the arm (hindsight)    plans   178 gross +1.598 net +0.920 · port 135 net +1.023 · vs random +0.406

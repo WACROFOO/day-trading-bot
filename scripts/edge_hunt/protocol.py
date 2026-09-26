@@ -85,8 +85,10 @@ def record_result(family: str, result: dict, path: Path = LEDGER) -> None:
 
 
 # v1 = the first search (2026-09-26), before the framework review; v2 = after its fixes (fill-bar
-# stop at the stop, A10 TTL in minutes, cap-return fills, mean spread). Both runs count as tried.
-RUN_TAG = "v2"
+# stop at the stop, A10 TTL in minutes, cap-return fills, mean spread); v3 = the 885 reverse-split
+# days removed from the universe (the review's finding; F2's holdout was already read under v2).
+# Every run counts as tried.
+RUN_TAG = "v3"
 
 
 def register(family: str, rows: list[dict], path: Path = REGISTRY) -> None:

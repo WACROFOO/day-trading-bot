@@ -1,0 +1,58 @@
+  best six singles on train: [('price_5-10', 'skip<2%'), ('shares<=10M', 'skip<2%'), ('shares<=20M', 'skip<2%'), ('price_10-20', 'skip<2%'), ('gain>=50%', 'skip<2%'), ('pm_vol<=2M', 'skip<2%')]
+
+F1-selection · 69 configurations · 51 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"conds": ["price_5-10", "pm_vol<=2M"], "stop": "skip<2%", "exit": "tr      -0.308 (482)      -0.314 (461)       -0.368 (80)
+  {"conds": ["price_5-10", "gain>=50%"], "stop": "skip<2%", "exit": "tra      -0.342 (304)      -0.350 (303)       -0.493 (49)
+  {"conds": ["shares<=20M", "pm_vol<=2M"], "stop": "skip<2%", "exit": "t      -0.368 (400)      -0.364 (397)       -0.699 (52)
+  {"conds": ["price_5-10"], "stop": "skip<2%", "exit": "trail1"}              -0.369 (783)      -0.378 (751)      -0.385 (134)
+  {"conds": ["gain>=50%", "pm_vol<=2M"], "stop": "skip<2%", "exit": "tra      -0.379 (385)      -0.389 (383)       -0.239 (39)
+  chosen f2ebefccd036 is not positive on validation (-0.239) — family FAILS at the validation gate, holdout stays closed
+
+  every single condition, train plan level (net R, n):
+    price_5-10          skip<2%   -0.369
+    shares<=10M         skip<2%   -0.415
+    shares<=20M         skip<2%   -0.433
+    price_10-20         skip<2%   -0.434
+    gain>=50%           skip<2%   -0.457
+    pm_vol<=2M          skip<2%   -0.462
+    headline            skip<2%   -0.474
+    gain>=30%           skip<2%   -0.479
+    rvol>=5             skip<2%   -0.483
+    first_move_07-09    skip<2%   -0.483
+    not_former_runner   skip<2%   -0.490
+    former_runner       skip<2%   -0.493
+    rvol>=3             skip<2%   -0.502
+    vol>=1M             skip<2%   -0.509
+    pm_vol>=250k        skip<2%   -0.511
+    gain>=20%           skip<2%   -0.512
+    rvol>=1.5           skip<2%   -0.515
+    rank<=3             skip<2%   -0.519
+    first_move<07:00    skip<2%   -0.529
+    rank1               skip<2%   -0.534
+    no_headline         skip<2%   -0.538
+    price_2-5           skip<2%   -0.568
+    gain>=50%           none      -0.723
+    rvol>=5             none      -0.748
+    gain>=100%          none      -0.793
+    gain>=30%           none      -0.793
+    vol>=1M             none      -0.799
+    rvol>=3             none      -0.808
+    pm_vol>=250k        none      -0.853
+    rank1               none      -0.866
+    shares<=10M         none      -0.870
+    rvol>=1.5           none      -0.875
+    shares<=20M         none      -0.920
+    rank<=3             none      -0.928
+    gain>=20%           none      -0.938
+    former_runner       none      -0.955
+    price_5-10          none      -0.971
+    headline            none      -1.064
+    price_2-5           none      -1.069
+    first_move_07-09    none      -1.094
+    first_move<07:00    none      -1.094
+    not_former_runner   none      -1.242
+    pm_vol<=2M          none      -1.278
+    no_headline         none      -1.281
+    price_10-20         none      -1.406
+    first_move>=09:00   none      -1.573

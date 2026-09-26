@@ -75,8 +75,8 @@ def load_universe(since: str | None, until: str | None) -> dict[str, dict[str, f
             d = r["day"]
             if (since and d < since) or (until and d > until):
                 continue
-            if r.get("split_on_day") in ("True", "true", "1"):
-                continue
+            if r.get("split_on_day") in ("True", "true", "1") or (r.get("reverse_split_ratio") or "").strip():
+                continue                            # the flag never fires; the ratio marks a reverse split
             try:
                 out[d][r["sym"]] = float(r["prev_close"])
             except (TypeError, ValueError):

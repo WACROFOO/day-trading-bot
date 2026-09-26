@@ -1,0 +1,1 @@
+F2 holdout, reverse-split days removed (sensitivity, same config): {"n": 937, "mean": 0.1081, "lb_corrected": -0.0619, "years": {"2024": [0.2508, 346], "2025": [0.0255, 347], "2026": [0.0231, 244]}, "vs_random_mean": -0.0329, "vs_random_lb95": -0.1291} audit-adjusted -0.0591

@@ -1,0 +1,9 @@
+
+F5-new · 45 configurations · 41 with >= 300 train plans
+  config                                                                        train plan        train port        valid port
+  {"h": "orb", "k": 3, "stop": "widen2", "exit": "trail1", "flat": 720}      -0.255 (1181)      -0.246 (968)      -0.218 (165)
+  {"h": "orb", "k": 1, "stop": "widen2", "exit": "fixed3", "flat": 720}       -0.256 (461)      -0.256 (461)       -0.560 (68)
+  {"h": "orb", "k": 1, "stop": "widen2", "exit": "trail1", "flat": 720}       -0.259 (461)      -0.259 (461)       -0.361 (68)
+  {"h": "orb", "k": 3, "stop": "widen2", "exit": "trail1", "flat": 450}      -0.262 (1181)      -0.254 (968)      -0.213 (165)
+  {"h": "orb", "k": 1, "stop": "widen2", "exit": "trail2", "flat": 720}       -0.270 (461)      -0.270 (461)       -0.315 (68)
+  chosen 0a55b0f8904e is not positive on validation (-0.213) — family FAILS at the validation gate, holdout stays closed

@@ -55,6 +55,10 @@ def universe_rows() -> dict[str, dict[str, dict]]:
         for r in csv.DictReader(f):
             if r.get("split_on_day") in ("True", "true", "1"):
                 continue
+            # the split flag never fires in this file (all False); a reverse split shows as a clean
+            # integer `reverse_split_ratio` and a pre-split prev_close — a fake gap (CLAUDE.md rule 6)
+            if (r.get("reverse_split_ratio") or "").strip():
+                continue
             out.setdefault(r["day"], {})[r["sym"]] = r
     return out
 

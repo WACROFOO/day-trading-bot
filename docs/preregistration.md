@@ -847,6 +847,29 @@ recorded here as the strongest candidate for a harm-reducing amendment; it is
 not adopted without the owner's word because it does not make the strategy
 positive. Detail: the same report, §8.
 
+**The edge hunt (2026-09-26) — nothing adopted, nothing switched on.**
+`research/edge-hunt/PREREGISTRATION.md`, committed before any run: train
+2016-2022, validation 2023, holdout 2024-2026 opened once per family, a
+five-part adoption rule (positive mean, Bonferroni-corrected day-clustered
+lower bound above zero, ≥ 200 trades, 2 of 3 years, beats random entry on the
+same names), real NBBO spreads in the costs. Five tracks, 516 configurations,
+three runs. Selection, ten-second micro-pullbacks, exits/sizing and new
+hypotheses fail on validation, and their holdouts stay closed. The
+pre-market-high break (08:00-09:30) passed validation and was opened once: 942
+holdout trades at +0.106 R, lower bound −0.064, no better than random entry on
+the same names (−0.027), −0.060 after the preregistered audit of pre-market
+runners the 09:30 universe cannot see. **Not adopted.** Its apparent edge was
+hindsight: an entry armed while the stock was still under +10 % already
+"knew" it would open +10 %. With a real-time scanner condition it is −0.36 R
+a trade. With real quoted spreads (median 3 cents at the desk's fills) the
+bot's own rules cost 1.13 R a trade at $20 of risk on a gross of −0.006 R, and
+lose −1.14 R net on train and validation. A stop floor of 3 % of price is the
+largest harm reduction measured (to about −0.33 R); it is still negative and
+remains the owner's decision, not adopted. The 885 reverse-split rows of the
+universe (their split flag never fired) are now dropped by
+`scripts/backtest_history.py`; the ten-year figures above included them.
+Detail: `research/edge-hunt/REPORT.md`.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
