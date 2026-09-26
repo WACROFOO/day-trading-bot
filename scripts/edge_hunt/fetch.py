@@ -200,7 +200,7 @@ def fetch_trades(symdays: list[tuple[str, str]], start_hm="07:00", end_hm="11:30
 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("what", choices=("news", "sec", "quotes", "trades"))
+    ap.add_argument("what", choices=("news", "sec", "quotes", "trades", "pm_audit"))
     ap.add_argument("--list", help="quotes: CSV sym,day,HH:MM · trades: CSV sym,day")
     args = ap.parse_args(argv)
     uni = universe()
@@ -210,9 +210,89 @@ def main(argv=None) -> int:
         fetch_sec(uni)
     elif args.what == "quotes":
         fetch_quotes([tuple(r) for r in csv.reader(open(args.list))])
-    else:
+    elif args.what == "trades":
         fetch_trades([tuple(r[:2]) for r in csv.reader(open(args.list))])
+    else:
+        fetch_pm_audit([r[0] for r in csv.reader(open(args.list))])
     return 0
+
+
+
+# ------------------------------------------------------------------ pre-market universe audit (F2)
+def fetch_pm_audit(days: list[str], per_min: int = 180) -> None:
+    """For each sampled session: names from the 2016-2026 gapper pool that
+    traded +10 % over their previous close at some pre-market minute
+    (07:00-09:30), priced $2-20 there, 20-day dollar volume >= $250k — and
+    are NOT in that day's 09:30-gap universe. Their bars 04:00-11:30 are
+    stored. The pool itself is a stated undercount: a name that never gapped
+    at an open in 2016-2026 is not queried."""
+    client, pacer = alpaca(), Pacer(per_min)
+    uni = universe()
+    out_dir = CACHE / "pm_audit"; out_dir.mkdir(parents=True, exist_ok=True)
+    all_days = sorted(uni)
+    pos = {d: k for k, d in enumerate(all_days)}
+    appear: dict[str, list[int]] = defaultdict(list)
+    for d, ss in uni.items():
+        for s in ss:
+            appear[s].append(pos[d])
+    for n_day, d in enumerate(days, 1):
+        f = out_dir / f"{d}.json"
+        if f.exists():
+            continue
+        k = pos[d]
+        pool = sorted(s for s, ks in appear.items() if s not in set(uni[d]) and any(abs(x - k) <= 500 for x in ks))
+        start_d = (date.fromisoformat(d) - timedelta(days=45)).isoformat()
+        found = {}
+        for i in range(0, len(pool), 100):
+            chunk = pool[i:i + 100]
+            daily: dict[str, list] = defaultdict(list); token = None
+            while True:
+                p = aget(client, pacer, "/v2/stocks/bars", {"symbols": ",".join(chunk), "timeframe": "1Day",
+                                                            "start": start_d, "end": d, "limit": 10000,
+                                                            "adjustment": "raw", "feed": client.feed, "page_token": token})
+                for s, rows in (p.get("bars") or {}).items():
+                    daily[s].extend(rows or [])
+                token = p.get("next_page_token")
+                if not token:
+                    break
+            prev = {}
+            for s, rows in daily.items():
+                past = [r for r in rows if r["t"][:10] < d]
+                if len(past) >= 5:
+                    last = past[-20:]
+                    dv20 = sum(r["c"] * r["v"] for r in last) / len(last)
+                    prev[s] = (past[-1]["c"], dv20)
+            cands = [s for s in chunk if s in prev and prev[s][1] >= 250_000 and prev[s][0] > 0]
+            if not cands:
+                continue
+            pm: dict[str, list] = defaultdict(list); token = None
+            while True:
+                p = aget(client, pacer, "/v2/stocks/bars", {"symbols": ",".join(cands), "timeframe": "1Min",
+                                                            "start": et_utc(d, 7, 0), "end": et_utc(d, 9, 30),
+                                                            "limit": 10000, "adjustment": "raw", "feed": client.feed,
+                                                            "page_token": token})
+                for s, rows in (p.get("bars") or {}).items():
+                    pm[s].extend(rows or [])
+                token = p.get("next_page_token")
+                if not token:
+                    break
+            for s, rows in pm.items():
+                pc = prev[s][0]
+                if any(r["h"] >= 1.10 * pc and 2.0 <= r["h"] <= 20.0 for r in rows):
+                    found[s] = {"pc": pc, "dv20": prev[s][1]}
+        for s in list(found):
+            rows, token = [], None
+            while True:
+                p = aget(client, pacer, "/v2/stocks/bars", {"symbols": s, "timeframe": "1Min", "start": et_utc(d, 4, 0),
+                                                            "end": et_utc(d, 11, 30), "limit": 10000,
+                                                            "adjustment": "raw", "feed": client.feed, "page_token": token})
+                rows.extend([[r["t"], r["o"], r["h"], r["l"], r["c"], r["v"]] for r in (p.get("bars") or {}).get(s, []) or []])
+                token = p.get("next_page_token")
+                if not token:
+                    break
+            found[s]["bars"] = rows
+        f.write_text(json.dumps({"pool": len(pool), "in_universe": len(uni[d]), "missing": found}))
+        print(f"pm_audit {n_day}/{len(days)} {d}: pool {len(pool)}, missing qualifiers {len(found)}", flush=True)
 
 
 if __name__ == "__main__":

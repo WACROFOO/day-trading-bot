@@ -84,12 +84,17 @@ def record_result(family: str, result: dict, path: Path = LEDGER) -> None:
                             "utc": datetime.now(timezone.utc).isoformat(timespec="seconds")}, default=str) + "\n")
 
 
+# v1 = the first search (2026-09-26), before the framework review; v2 = after its fixes (fill-bar
+# stop at the stop, A10 TTL in minutes, cap-return fills, mean spread). Both runs count as tried.
+RUN_TAG = "v2"
+
+
 def register(family: str, rows: list[dict], path: Path = REGISTRY) -> None:
     """Append every configuration evaluated on train/validation."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("a") as f:
         for r in rows:
-            f.write(json.dumps({"family": family, **r}, default=str) + "\n")
+            f.write(json.dumps({"family": family, "run": RUN_TAG, **r}, default=str) + "\n")
 
 
 def n_registered(family: str, path: Path = REGISTRY) -> int:

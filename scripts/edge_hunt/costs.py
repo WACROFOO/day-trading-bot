@@ -28,6 +28,8 @@ import json
 import math
 from pathlib import Path
 
+import numpy as np
+
 DOLLAR_RISK = 20.0
 ROOT = Path(__file__).resolve().parents[2]
 PROXY_FILE = ROOT / "research" / "edge-hunt" / "results" / "spread_proxy.json"
@@ -67,6 +69,16 @@ class SpreadProxy:
         rel = self.table["cells"].get(k, self.table["default"])     # median spread as a fraction of price
         return max(0.01, rel * price)
 
+    def spread_vec(self, price, premarket, dollar_vol_5m):
+        price = np.asarray(price, float); pm = np.asarray(premarket, bool); dv = np.asarray(dollar_vol_5m, float)
+        if not self.table:
+            return np.full(price.shape, 0.02)
+        tier = np.where(price < 5, "2-5", np.where(price < 10, "5-10", "10-20+"))
+        vol = np.where(dv < 50_000, "lo", np.where(dv < 500_000, "mid", "hi"))
+        keys = np.char.add(np.char.add(np.char.add(np.char.add(tier, "|"), np.where(pm, "pm", "rth")), "|"), vol)
+        rel = np.array([self.table["cells"].get(k, self.table["default"]) for k in keys])
+        return np.maximum(0.01, rel * price)
+
 
 def cost_r(entry: float, stop: float, fill: float, exit_px: float, orders: int, stop_side: bool,
            half_spread: float, plan: str = "fixed", slip: float = 0.01,
@@ -85,4 +97,37 @@ def cost_r(entry: float, stop: float, fill: float, exit_px: float, orders: int, 
         comm += commission(part, exit_px, plan, sell=True)
     marketable_sides = 1 + (1 if stop_side else 0)
     friction = q * (half_spread + slip) * marketable_sides
+    return (comm + friction) / (q * rps)
+
+
+def commission_vec(shares, price, plan: str = "fixed", sell: bool = False):
+    shares = np.asarray(shares, float); value = shares * np.asarray(price, float)
+    if plan == "fixed":
+        return np.minimum(np.maximum(1.0, 0.005 * shares), np.maximum(1.0, 0.01 * value))
+    base = np.minimum(np.maximum(0.35, 0.0035 * shares), np.maximum(0.35, 0.01 * value))
+    fees = 0.0032 * shares + (np.minimum(8.30, 0.000166 * shares) if sell else 0.0)
+    return base + fees
+
+
+def cost_r_vec(entry, stop, fill, exit_px, orders, stop_side, hs_in, hs_out, plan: str = "fixed",
+               slip: float = 0.01, dollar_risk: float = DOLLAR_RISK, model: str = "prereg"):
+    """Vectorised `cost_r`, with the half-spread at entry and at exit apart.
+
+    model "prereg" (PRIMARY, research/edge-hunt/PREREGISTRATION.md §5): half
+    spread + one cent a marketable side. "light": the larger of the two —
+    closer to the two live fills (PFSA +1c, GRML +2c over the trigger) but
+    chosen after seeing the quotes, so a sensitivity only. "old": one cent a
+    side, the model of the 2026-09-26 ten-year run."""
+    if model == "light":
+        hs_in = np.maximum(np.asarray(hs_in, float), slip) - slip
+        hs_out = np.maximum(np.asarray(hs_out, float), slip) - slip
+    elif model == "old":
+        hs_in = np.zeros_like(np.asarray(hs_in, float)); hs_out = np.zeros_like(np.asarray(hs_out, float))
+    entry, stop = np.asarray(entry, float), np.asarray(stop, float)
+    rps = entry - stop
+    q = np.maximum(1, np.floor(dollar_risk / np.where(rps > 0, rps, np.nan)))
+    orders = np.maximum(1, np.asarray(orders, float))
+    part = np.where(orders == 1, q, np.maximum(1, np.floor(q / orders)))
+    comm = commission_vec(q, fill, plan) + orders * commission_vec(part, exit_px, plan, sell=True)
+    friction = q * (np.asarray(hs_in, float) + slip) + q * (np.asarray(hs_out, float) + slip) * np.asarray(stop_side, float)
     return (comm + friction) / (q * rps)

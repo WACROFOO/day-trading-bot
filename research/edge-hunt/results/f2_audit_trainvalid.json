@@ -1,0 +1,17 @@
+{
+ "split": "trainvalid",
+ "config": {
+  "entry": "pmh",
+  "window": "08-09:30",
+  "stop": "widen2%",
+  "exit": "trail2",
+  "sel": "none"
+ },
+ "sessions": 40,
+ "in_n": 97,
+ "in_net": 0.020292306902479608,
+ "miss_n": 96,
+ "miss_net": -0.29853602123954875,
+ "combined_net": -0.1382958770438143,
+ "missing_share": 0.49740932642487046
+}

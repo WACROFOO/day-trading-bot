@@ -10,7 +10,7 @@ committed before the first run: `PREREGISTRATION.md`. Code in
 | `holdout_ledger.jsonl` | one line per holdout opening, written BEFORE the holdout is read; a family opens once |
 | `results/registry.jsonl` | every configuration evaluated on train and validation, counted |
 | results folder, spread_proxy.json | the spread model, calibrated on real NBBO quotes from train/validation fills |
-| `results/` | per-family tables |
+| `results/` | per-family tables; the fixed samples (tick subset, quote moments, audit sessions); F2's chosen configuration and audit |
 | `REPORT.md` | the verdict, in plain words, when the families are done |
 
 Data (not committed, regenerable): `data/cache/edge/` — the compact bar store

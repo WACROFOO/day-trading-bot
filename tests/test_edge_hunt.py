@@ -52,14 +52,39 @@ def test_trail_moves_only_for_the_next_bar():
 
 def test_stop_limit_fill_rules():
     m, o, h, l, c = arr([[1, 9.9, 10.0, 9.8, 9.95], [2, 9.95, 10.02, 9.9, 10.0]])
-    assert G.stop_limit_fill(o, h, l, 0, 10.0, 3, 0.003, 0.01) == (0, 10.0)
-    m, o, h, l, c = arr([[1, 10.02, 10.05, 10.0, 10.04]])
-    assert G.stop_limit_fill(o, h, l, 0, 10.0, 3, 0.003, 0.01) == (0, 10.02)       # opened inside the cap
-    m, o, h, l, c = arr([[1, 10.20, 10.30, 10.15, 10.25], [2, 10.2, 10.2, 10.02, 10.1]])
-    k, px = G.stop_limit_fill(o, h, l, 0, 10.0, 3, 0.003, 0.01)
-    assert k == 1 and px == pytest.approx(10.03)                                     # back to the cap
-    m, o, h, l, c = arr([[1, 10.20, 10.30, 10.15, 10.25], [2, 10.3, 10.4, 10.2, 10.3]])
-    assert G.stop_limit_fill(o, h, l, 0, 10.0, 3, 0.003, 0.01)[0] == -2             # never back: no fill
+    assert G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01) == (1, 10.0, 0)
+    m, o, h, l, c = arr([[1, 9.9, 9.95, 9.8, 9.9], [2, 10.02, 10.05, 10.0, 10.04]])
+    assert G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01) == (1, 10.02, 0)     # opened inside the cap
+    m, o, h, l, c = arr([[1, 9.9, 9.95, 9.8, 9.9], [2, 10.20, 10.30, 10.15, 10.25], [3, 10.2, 10.2, 10.02, 10.1]])
+    k, px, capf = G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01)
+    assert k == 2 and px == pytest.approx(10.03) and capf == 1                          # back to the cap
+    m, o, h, l, c = arr([[1, 9.9, 9.95, 9.8, 9.9], [2, 10.20, 10.30, 10.15, 10.25], [3, 10.01, 10.1, 10.0, 10.1]])
+    k, px, capf = G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01)
+    assert k == 2 and px == pytest.approx(10.01) and capf == 1                          # a later open under the cap fills there
+    m, o, h, l, c = arr([[1, 9.9, 9.95, 9.8, 9.9], [2, 10.20, 10.30, 10.15, 10.25], [3, 10.3, 10.4, 10.2, 10.3]])
+    assert G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01)[0] == -2              # never back: no fill
+
+
+def test_stop_limit_ttl_is_minutes_not_bars():
+    # sparse pre-market bars: armed at 08:01, the next bars print at 08:02 and 08:20; the TTL is 3 minutes
+    m, o, h, l, c = arr([[241, 9.9, 9.95, 9.8, 9.9], [242, 9.9, 9.95, 9.85, 9.9], [260, 10.0, 10.1, 9.99, 10.05]])
+    assert G.stop_limit_fill(m, o, h, l, 1, 10.0, 3, 0.003, 0.01)[0] == -1
+
+
+def test_fill_bar_stop_fills_at_the_stop_not_the_earlier_open():
+    # the fill bar opened at 9.85 (below the 9.90 stop), rose through 10.00 (fill), fell back to 9.80
+    m, o, h, l, c = arr([[330, 9.85, 10.05, 9.80, 9.82]])
+    r, n, k, why, s = G.simulate(m, o, h, l, c, 0, 10.0, 10.0, 9.90, G.spec(trail=1.0))
+    assert why == G.R_STOP and r == pytest.approx(-1.0)
+
+
+def test_cap_return_fill_earns_no_fill_bar_high():
+    # filled on a return to the cap; the bar's 10.30 high printed before the fill: no 2R target on that bar
+    m, o, h, l, c = arr([[330, 10.20, 10.30, 10.03, 10.10], [331, 10.10, 10.12, 10.05, 10.08]])
+    r, n, k, why, s = G.simulate(m, o, h, l, c, 0, 10.03, 10.0, 9.90, G.spec(target=2.0), False)
+    assert why != G.R_TARGET
+    r2, *_ = G.simulate(m, o, h, l, c, 0, 10.03, 10.0, 9.90, G.spec(target=2.0), True)
+    assert r2 == pytest.approx((10.20 - 10.03) / 0.10)
 
 
 def test_random_baseline_is_deterministic_and_window_bound():
@@ -83,6 +108,26 @@ def test_commissions():
     assert C.commission(400, 10.0, "fixed") == pytest.approx(2.0)
     assert C.commission(100, 10.0, "tiered") == pytest.approx(0.35 + 0.32)
     assert C.commission(100, 10.0, "tiered", sell=True) == pytest.approx(0.35 + 0.32 + 0.0166)
+
+
+def test_cost_models_prereg_light_old():
+    args = ([10.0], [9.9], [10.0], [9.9], [1], [1], [0.02], [0.02])
+    assert C.cost_r_vec(*args)[0] == pytest.approx((2.0 + 200 * 0.03 * 2) / 20.0)                    # hs + 1c
+    assert C.cost_r_vec(*args, model="light")[0] == pytest.approx((2.0 + 200 * 0.02 * 2) / 20.0)     # max(hs, 1c)
+    assert C.cost_r_vec(*args, model="old")[0] == pytest.approx((2.0 + 200 * 0.01 * 2) / 20.0)       # 1c
+    tight = ([10.0], [9.9], [10.0], [9.9], [1], [1], [0.004], [0.004])
+    assert C.cost_r_vec(*tight, model="light")[0] == pytest.approx((2.0 + 200 * 0.01 * 2) / 20.0)
+
+
+def test_holdout_rows_need_the_ledger(monkeypatch):
+    from edge_hunt import families as FM
+    df = pd.DataFrame({"split": ["train", "holdout"], "x": [1, 2]})
+    monkeypatch.setattr(FM.P, "opened", lambda fam, path=None: None)
+    assert len(FM.Ctx.frame(None, df, "train", "F1-selection")) == 1
+    with pytest.raises(FM.HoldoutClosed):
+        FM.Ctx.frame(None, df, "holdout", "F1-selection")
+    monkeypatch.setattr(FM.P, "opened", lambda fam, path=None: {"family": fam})
+    assert len(FM.Ctx.frame(None, df, "holdout", "F1-selection")) == 1
 
 
 def test_cost_r_hand_computed():
