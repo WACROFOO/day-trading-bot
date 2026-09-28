@@ -1,0 +1,9 @@
+1. DOLLAR RISK — same trades, costs at each risk size (train)
+   $  20 risk: n 2269 gross +0.171 cost 0.338 net -0.167
+   $  50 risk: n 2269 gross +0.171 cost 0.290 net -0.119
+   $ 100 risk: n 2269 gross +0.171 cost 0.282 net -0.111
+   $ 250 risk: n 2269 gross +0.171 cost 0.280 net -0.109
+   $ 500 risk: n 2269 gross +0.171 cost 0.280 net -0.109
+2. TIMING on the same leader symbol-days (train): breakout vs random minute in the window, same stop %, same exit, same costs
+   breakout net -0.167 · random minute net -0.224 · breakout minus random +0.057 (n 2269)
+   window 07-11: breakout -0.282 · random -0.407 · diff +0.125
