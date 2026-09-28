@@ -486,8 +486,10 @@ def keep_awake(dry: bool):
         return None
 
 
-def start_runner(mode: str, risk: float, dry: bool):
+def start_runner(mode: str, risk: float, dry: bool, account: float | None = None):
     cmd = [sys.executable, "-u", "scripts/exercise.py", "--db", str(DB), "live", "--risk", str(risk)]
+    if account:
+        cmd += ["--account", str(account)]
     if mode == "TRADE":
         cmd.append("--trade")
     note("runner: " + " ".join(cmd))
@@ -613,6 +615,8 @@ def main(argv=None) -> int:
                     help="start before 06:55 ET (owner's call, 2026-09-22); the 06:55 scheduled "
                          "start then finds the instance lock and steps aside")
     ap.add_argument("--risk", type=float, default=None, help="overrides exercise_state.dollar_risk")
+    ap.add_argument("--account", type=float, default=None,
+                    help="real account size in $; caps every position's value (default: exercise_state.account_size)")
     ap.add_argument("--symbols", help="skip the gap scan; comma-separated watchlist")
     ap.add_argument("--probe-orders", action="store_true",
                     help="allow the pre-market stop probe, which PLACES (and cancels) an unfillable "
@@ -648,13 +652,17 @@ def main(argv=None) -> int:
     conn = L.connect(DB)
     st = L.get_state(conn)
     risk = args.risk or st.get("dollar_risk") or 20.0
+    account = args.account or st.get("account_size")
+    acct_txt = f" · account ${account:,.0f}" if account else ""
+    if args.risk or args.account:           # remembered for the next days
+        L.set_state(conn, **({"dollar_risk": risk} if args.risk else {}), **({"account_size": account} if args.account else {}))
     mode = mode_for(st)
     try:                     # pin what ran: rules hash and code commit, in the ledger
         from momentum_platform import desk_profile as DP
         L.set_state(conn, rules_hash=DP.fingerprint().get("hash"), code_commit=DP.build_commit())
     except Exception:        # noqa: BLE001
         pass
-    say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk · {DB}")
+    say(f"\n{BOLD}Trading day {today} · {now:%H:%M ET}{END}  phase {st['phase']} · {mode} · ${risk:g} risk{acct_txt} · {DB}")
     if args.settle:
         say(f"\n{BOLD}Settling {args.settle}{END}")
         after_close(conn, args.settle, args.dry_run)
@@ -756,7 +764,7 @@ def main(argv=None) -> int:
         if desk and desk.poll() is None:
             desk.send_signal(signal.SIGINT)
         return 1
-    runner = start_runner(mode, risk, args.dry_run)
+    runner = start_runner(mode, risk, args.dry_run, *([account] if account else []))
     keep_awake(args.dry_run)
     if args.dry_run:
         say(f"\n{DIM}dry run — nothing started{END}"); return 0
@@ -818,7 +826,7 @@ def main(argv=None) -> int:
             if restarts > 5:
                 bad(f"runner exited {restarts} times — stopping the day"); stop(); return 1
             warn(f"runner exited with {runner.returncode} — restarting ({restarts}/5); the desk keeps recording")
-            runner = start_runner(mode, risk, False)
+            runner = start_runner(mode, risk, False, *([account] if account else []))
         time.sleep(15)
     if args.rehearsal:
         stop()

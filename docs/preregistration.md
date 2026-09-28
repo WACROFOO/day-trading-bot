@@ -878,6 +878,17 @@ F7 mechanises that on a point-in-time universe of every +10 % runner
 (gross +0.008). Validation gate not met; holdout closed; no switch. Detail:
 `research/ross-trades/REPORT.md`.
 
+**Owner decision 2026-09-28 — risk $20 → $40 a trade, account $2,000.** The
+owner asked for sizing fit for a $2,000 account. §7 allows the dollar risk to
+change only downward; this raises it, by the owner's explicit decision, on
+measured evidence: at $20 the $1 commission minimum costs about 0.05 R a trade
+more than at $40-50 (`research/ross-trades/results/f7_timing_and_risk.txt`:
+net −0.167 R at $20, −0.119 at $50, flat from $100). $40 is 2 % of the account;
+the daily lock (3 R) is then $120. New: `--account 2000` caps every position's
+value at the real account whatever the paper NetLiquidation (`execution.runner`,
+`tests/test_account_size.py`). Sessions from today are a new sizing cohort.
+Neither change makes the strategy positive; they make it lose less per trade.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

@@ -277,6 +277,8 @@ def connect(db_path: Path | str | None = None) -> sqlite3.Connection:
 _ADDED_COLUMNS = {
     "exercise_state": (("paper_data", "TEXT"), ("paper_data_date", "TEXT"),
                        ("last_session_date", "TEXT"),
+                       # owner decision 2026-09-28: the real account size caps position value
+                       ("account_size", "REAL"),
                        # Amendment A1 (docs/preregistration.md §5) is accepted by a
                        # human, by command, with a name and a time — never by code.
                        ("a1_accepted", "TEXT"), ("a1_accepted_by", "TEXT"),
@@ -954,7 +956,7 @@ def get_state(conn: sqlite3.Connection) -> dict:
 
 
 def set_state(conn: sqlite3.Connection, **fields) -> dict:
-    allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk",
+    allowed = {"phase", "sessions_done", "probe_verdict", "probe_date", "dollar_risk", "account_size",
                "paper_data", "paper_data_date", "last_session_date",
                "a1_accepted", "a1_accepted_by", "a1_accepted_at", "code_commit", "rules_hash",
                "unprotected_reset_at", "unprotected_reset_by", "unprotected_reset_fix",

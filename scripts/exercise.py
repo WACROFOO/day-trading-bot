@@ -327,7 +327,7 @@ def cmd_live(args) -> int:
     else:
         print(f"{DIM}LOG_ONLY — no connection opened; decisions are judged and recorded only{END}")
     runner = Runner(conn, mode="TRADE" if args.trade else "LOG_ONLY",
-                    dollar_risk=args.risk, trader=trader,
+                    dollar_risk=args.risk, trader=trader, account_size=args.account,
                     # NBBO at fill (brief R4) from the desk's latest quote in the
                     # ledger. None when older than 30s, and the fill is then
                     # recorded as unverified rather than decorated.
@@ -1065,6 +1065,7 @@ def main(argv=None) -> int:
     rb.add_argument("--before", required=True, help="ET, e.g. 2026-09-08T08:06 — the desk's first start that day")
     rb.add_argument("--confirm", action="store_true")
     lv = sub.add_parser("live"); lv.add_argument("--risk", type=float, default=20.0)
+    lv.add_argument("--account", type=float, default=None, help="the real account size: no position is worth more")
     lv.add_argument("--trade", action="store_true", help="place paper orders (default: LOG_ONLY)")
     lv.add_argument("--every", type=int, default=5)
     args = ap.parse_args(argv)

@@ -76,7 +76,8 @@ Quote = Callable[[str], Optional[dict]]     # symbol -> {bid, ask, bid_size, ask
 class Runner:
     def __init__(self, conn: sqlite3.Connection, *, mode: str, dollar_risk: float,
                  trader: Optional[PaperTrader] = None, quote: Optional[Quote] = None,
-                 max_age_s: int = 120, now: Optional[Callable[[], datetime]] = None):
+                 max_age_s: int = 120, now: Optional[Callable[[], datetime]] = None,
+                 account_size: Optional[float] = None):
         if mode not in MODES:
             raise ValueError(f"mode {mode!r} not in {MODES}")
         if mode == "TRADE" and trader is None:
@@ -84,6 +85,10 @@ class Runner:
         if dollar_risk <= 0:
             raise ValueError("dollar_risk must be the user's own stated risk, > 0")
         self.conn, self.mode, self.dollar_risk = conn, mode, dollar_risk
+        # The owner's REAL account size (2026-09-28: $2,000). A paper account's
+        # NetLiquidation is far larger, so without this a position could be
+        # sized to money the real account does not have.
+        self.account_size = account_size
         self.trader, self.quote, self.max_age_s = trader, quote, max_age_s
         self.now = now or (lambda: datetime.now(timezone.utc))
         self.acted: list[Acted] = []
@@ -146,6 +151,8 @@ class Runner:
 
     def _act(self, row) -> tuple[str, list[str]]:
         cap = getattr(self.trader, "net_liq", None) if self.mode == "TRADE" else None
+        if self.account_size:
+            cap = min(cap, self.account_size) if cap else self.account_size
         intent = intent_from_decision(row, self.dollar_risk, max_notional=cap)
         clock = decision_clock(row)
         reasons = refusals(intent, now=clock)
