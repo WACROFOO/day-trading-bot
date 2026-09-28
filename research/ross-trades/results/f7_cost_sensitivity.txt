@@ -1,0 +1,6 @@
+F7 best-train config · train · cost prereg n  2269 gross +0.171 cost 0.338 net -0.167 · win 31% · median stop 8.3%
+F7 best-train config · train · cost light  n  2269 gross +0.171 cost 0.263 net -0.092 · win 34% · median stop 8.3%
+F7 best-train config · train · cost old    n  2269 gross +0.171 cost 0.206 net -0.035 · win 36% · median stop 8.3%
+F7 best-train config · valid · cost prereg n   273 gross +0.008 cost 0.277 net -0.270 · win 29% · median stop 9.6%
+F7 best-train config · valid · cost light  n   273 gross +0.008 cost 0.217 net -0.209 · win 32% · median stop 9.6%
+F7 best-train config · valid · cost old    n   273 gross +0.008 cost 0.195 net -0.187 · win 33% · median stop 9.6%

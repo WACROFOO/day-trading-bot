@@ -870,6 +870,14 @@ universe (their split flag never fired) are now dropped by
 `scripts/backtest_history.py`; the ten-year figures above included them.
 Detail: `research/edge-hunt/REPORT.md`.
 
+**His trades against the bot, and F7 (2026-09-28) — nothing adopted.** 1,512 of
+his trades extracted from the corpus with verbatim quotes, 702 rebuilt on the
+tape: he buys the new high of the minute's #1 gainer and holds two minutes.
+F7 mechanises that on a point-in-time universe of every +10 % runner
+2016-2026: +0.171 R gross a trade on train but −0.167 net, −0.270 net on 2023
+(gross +0.008). Validation gate not met; holdout closed; no switch. Detail:
+`research/ross-trades/REPORT.md`.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
