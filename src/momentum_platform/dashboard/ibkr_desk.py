@@ -752,7 +752,7 @@ class IbkrDesk:
             return self._refresh_session()
         finally:
             took = time.monotonic() - t0
-            if took > 2.0:
+            if took > 5.0:
                 # Above the 3-second cadence this is the number that decides
                 # whether a decision reaches the runner young enough to trade.
                 self.log(f"  rebuild took {took:.1f}s")
