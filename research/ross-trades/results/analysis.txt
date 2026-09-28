@@ -1,0 +1,67 @@
+1. THE LEDGER
+  rows 1529 · his own 1512 · by register {'blog-recap': 1073, 'video-recap': 236, 'stream': 203}
+  with a stated entry price 914 · dated 918 (text 447, tape 471) · rebuilt on the tape 702 · stated price NEVER printed 15 · recounted from another day 124
+  outcome as he states it: {'win': 811, 'loss': 423, 'not stated': 240, 'scratch': 38}
+  by register × outcome:
+outcome      loss  not stated  scratch  win
+register                                   
+blog-recap    305         122       27  619
+stream         48          72        8   75
+video-recap    70          46        3  117
+
+2. HIS RESULTS, AS STATED ($)
+  trades with a $ P&L 750 · win rate 66% · avg win $2,934 · avg loss $3,244 · win/loss 0.90 · total $603,925
+  blog-recap   n  603 win 66% · win/loss 1.13 · total $331,300
+  stream       n   40 win 57% · win/loss 0.29 · total $-94,280
+  video-recap  n  107 win 67% · win/loss 0.94 · total $366,905
+  concentration: the top 10 % of trades make $1,101,650 of $603,925 (182% of the net); without them the rest net $-497,725
+
+3. WHERE HIS ENTRIES SIT (rebuilt on the tape, n 702)
+  gain over previous close             median +0.500 · IQR +0.241 .. +0.993 (n 681)
+  above VWAP                           median +0.097 · IQR +0.059 .. +0.166 (n 684)
+  vs high of day before the entry      median +0.031 · IQR +0.012 .. +0.066 (n 677)
+  vs pre-market high                   median +0.005 · IQR -0.021 .. +0.154 (n 616)
+  minutes since first +10 %            median +25.500 · IQR +3.000 .. +103.250 (n 680)
+  1-min range, median of 30 bars       median +0.016 · IQR +0.004 .. +0.033 (n 684)
+  breakout (entry >= high of day so far) 90% · pre-market 43% · 07:00-08:00 7% · 09:30-10:30 50% · after 10:30 5%
+  price: under $2 11% · $2-5 44% · $5-10 28% · $10-20 11% · over $20 3%
+  in the bot's 09:30-gap universe that day: 31%
+  point-in-time rank_gain  median 1 · share at rank 1 57% · top 3 88% (n 315)
+  point-in-time rank_dv    median 3 · share at rank 1 20% · top 3 51% (n 315)
+  point-in-time rank_vol5  median 2 · share at rank 1 45% · top 3 77% (n 315)
+  point-in-time n_runners  median 6 · share at rank 1 2% · top 3 22% (n 675)
+
+4. STOPS
+  stated stops 30 of 702 · width median 6.1 % · in cents median 0.34
+  stated  stop width median 6.1 %  (n 30)
+  bar     stop width median 9.8 %  (n 655)
+  pct3    stop width median 3.0 %  (n 677)
+
+5. SIZING AND EXITS
+  hold minutes median 2 · IQR 1-6 (n 349)
+  price move entry -> exits: median +1.95% · mean +3.06% · positive 76% (n 354)
+  60 min after his last exit: max above it median +7.7% · min below it median -14.5%
+  adds/scales: rows with >1 entry 29% · >1 exit 23%
+
+6. WALKING AWAY
+  trades described per file: median 4 · mean 4.9
+
+7. WHAT BARS CANNOT SEE
+  entry or exit reason cites Level 2 / tape: 7% of his trades · halt involved 9%
+  setups named: {'not stated': 137, '': 58, 'dip buy': 30, 'micro pullback': 19, 'first five-minute candle to make a new high': 17, 'pullback': 16, 'halt resumption': 15, 'scalp': 14, 'vwap break': 12, 'first five minute candle to make a new high': 10, 'whole/half dollar break': 10, 'one minute micro pullback': 9}
+
+8. THE BOT ON HIS SYMBOL-DAYS
+  a desk plan within 5 min of his entry 63% · and all gates green & filled 9%
+  gates red near his entry: {'macd': 226, 'volume': 203, 'price': 71, 'ema9': 34, 'vwap': 31, 'rising': 7}
+  bot on his symbol-days (one position): trades 221 · net -101.1 R over 408 symbol-days
+
+9. HIS ENTRY, THE BOT'S EXECUTION (net R, preregistered costs at $20 risk)
+  stop stated  exit trail1  n   30 · his entry -1.562 [-3.047, -0.754] · gross -1.061 · random same name ±15 min +0.154 · his minus random -1.716 [-2.902, -0.907]
+  stop stated  exit fixed2  n   30 · his entry -1.750 [-3.214, -0.923] · gross -1.248 · random same name ±15 min -0.150 · his minus random -1.600 [-2.731, -0.879]
+  stop bar     exit trail1  n  655 · his entry -0.441 [-0.526, -0.350] · gross -0.141 · random same name ±15 min +0.244 · his minus random -0.685 [-0.755, -0.612]
+  stop bar     exit fixed2  n  655 · his entry -0.578 [-0.694, -0.456] · gross -0.292 · random same name ±15 min +0.189 · his minus random -0.767 [-0.854, -0.675]
+  stop pct3    exit trail1  n  677 · his entry -1.338 [-1.412, -1.254] · gross -0.758 · random same name ±15 min +0.275 · his minus random -1.613 [-1.750, -1.483]
+  stop pct3    exit fixed2  n  677 · his entry -1.379 [-1.447, -1.305] · gross -0.812 · random same name ±15 min -0.089 · his minus random -1.289 [-1.368, -1.208]
+  by register blog-recap   his entry (bar stop, trail 1 R) -0.494 (n 465) · random same name +0.217
+  by register stream       his entry (bar stop, trail 1 R) -0.466 (n 128) · random same name +0.177
+  by register video-recap  his entry (bar stop, trail 1 R) +0.004 (n 62) · random same name +0.587

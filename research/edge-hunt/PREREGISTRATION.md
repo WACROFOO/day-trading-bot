@@ -216,3 +216,29 @@ calibration check, never an input.
   no feature and no plan up to t; the holdout guard refuses a second
   opening; the random baseline is deterministic and window-bound; costs
   match hand-computed cases.
+
+
+---
+
+## Addendum 2026-09-28 — F7, the leader breakout (from his own trades)
+
+Written before F7's first run, after `research/ross-trades/` measured his
+trades on the tape: at the minute before his entry his name was the #1 gainer
+among names then up ≥ 10 % in 57 % of cases (top 3: 88 %), 90 % of his entries
+buy a new high of day, and he holds a median 2 minutes. F7 mechanises exactly
+that, on the point-in-time runner universe (`scripts/edge_hunt/pit.py`,
+269,508 symbol-days 2016-2026 with 1-minute bars 04:00-12:00 ET, split days
+removed) — a universe no earlier family used, so its holdout is unread.
+
+* **Leader at minute t:** among names with last price ≥ +10 % over the
+  previous close, $1-20, ≥ 50,000 shares since 04:00, all from bars stamped ≤ t
+  — the one with the largest gain.
+* **Entry:** a buy stop-limit at the leader's high of day + 1 ¢ (A10: cap
+  +0.3 %, 3-minute TTL), armed at the close of t; one trade per symbol-day,
+  one position at a time.
+* **Grid (18):** stop {low of the arming bar − 1 ¢, 3 %} × exit {fixed 1 R,
+  trail 1 R, bail after 2 minutes unless +1 R then trail 1 R} × window
+  {07:00-09:30, 09:30-11:00, 07:00-11:00}; flat 11:30.
+* Same split, same five-part rule, same costs. Seven families are now allowed,
+  so the corrected one-sided α is 0.05 / 2 / 7 = 0.36 %. Random baseline: the
+  same leaders' symbol-days, random minutes in the window.

@@ -167,7 +167,7 @@ def test_adoption_rule_needs_all_five():
     assert not res["adopted"] and not res["checks"]["3 at least 200 trades"]
     res = P.adoption(good, days, random_diff=np.full(len(days), -0.1))
     assert not res["adopted"]
-    assert P.corrected_alpha() == pytest.approx(0.05 / 2 / 6)
+    assert P.corrected_alpha() == pytest.approx(0.05 / 2 / 7)
 
 
 def test_one_position_skips_overlaps():

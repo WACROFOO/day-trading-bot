@@ -90,3 +90,4 @@ data/sec_cache/
 
 # Process locks beside the ledger (day.py, exercise.py). Local state, never history.
 data/*.lock
+!research/ross-trades/results/
