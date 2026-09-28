@@ -889,6 +889,18 @@ value at the real account whatever the paper NetLiquidation (`execution.runner`,
 `tests/test_account_size.py`). Sessions from today are a new sizing cohort.
 Neither change makes the strategy positive; they make it lose less per trade.
 
+**VWAP as a flag in regular hours — proposed and withdrawn (2026-09-28).**
+After the 2026-09-28 session, `exercise.py review` showed plans refused only for
+a red VWAP at +27 R over 27 across the paper run (fill at the trigger, no
+costs), and the assistant proposed a flag-only amendment on the A11 pattern.
+Checked against the ten-year ablation (section 8 of
+`research/paper-exercise/reports/2026-09-26-premarket-history.md`) before any code: freeing VWAP takes
+the trail exit from −0.484 to −0.546 R a trade on train (13,325 plans) and from
+−0.610 to −0.626 on test (8,690). The paper cohort is 27 upper-bound plans; the
+history is 22,015 realistic-fill, costed ones, and it says the refusal helps.
+**Withdrawn before implementation; VWAP keeps refusing.** This is the A11
+mistake not repeated: a small in-sample cohort scored at the trigger.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
