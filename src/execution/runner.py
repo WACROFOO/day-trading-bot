@@ -51,6 +51,16 @@ from .policy import premarket_allowed, premarket_shape
 #: (docs/preregistration.md §5). Kept as a switch so the variant stays testable.
 MACD_FLAG_ONLY_REGULAR = False
 
+#: A13 — selective mode (owner decision 2026-09-29, docs/preregistration.md §5).
+#: The filter set the ten-year ablation chose on 2016-2023 and read once on
+#: 2024-2026 (2026-09-26 report §8): stop at least 2 % of price, price at least
+#: $5, first or second plan of the symbol's day. Harm reduction, not an edge:
+#: its test read is still negative. False restores the rules before A13.
+SELECTIVE = True
+SELECTIVE_MIN_STOP_PCT = 2.0
+SELECTIVE_MIN_PRICE = 5.0
+SELECTIVE_MAX_PLAN_INDEX = 2
+
 MODES = ("LOG_ONLY", "TRADE")
 
 
@@ -148,6 +158,24 @@ class Runner:
         self.conn.commit()
         self.acted.extend(done)
         return done
+
+    def _selective(self, row, intent) -> list[str]:
+        """A13's three refusals; the plan index counts this symbol's plans
+        armed earlier the same ET day, backfill included, as the ablation did."""
+        out = []
+        stop_pct = intent.risk_per_share / intent.trigger * 100 if intent.trigger else 0.0
+        if stop_pct < SELECTIVE_MIN_STOP_PCT:
+            out.append(f"selective (A13): stop {stop_pct:.1f}% of price, under "
+                       f"{SELECTIVE_MIN_STOP_PCT:g}%")
+        if intent.trigger < SELECTIVE_MIN_PRICE:
+            out.append(f"selective (A13): price {intent.trigger:.2f} under ${SELECTIVE_MIN_PRICE:g}")
+        ts = str(row["ts_et"] or "")
+        n = self.conn.execute("SELECT COUNT(*) FROM decisions WHERE symbol=? AND substr(ts_et,1,10)=? "
+                              "AND ts_et<=?", (row["symbol"], ts[:10], ts)).fetchone()[0]
+        if n > SELECTIVE_MAX_PLAN_INDEX:
+            out.append(f"selective (A13): plan {n} of the day on {row['symbol']}, only the first "
+                       f"{SELECTIVE_MAX_PLAN_INDEX} are taken")
+        return out
 
     def _act(self, row) -> tuple[str, list[str]]:
         cap = getattr(self.trader, "net_liq", None) if self.mode == "TRADE" else None
@@ -251,6 +279,8 @@ class Runner:
             named = Z.describe(states, only=("vwap", "ema9", "macd"))
             reasons.append(f"Layer 2 not green: {named or 'chart gate red'} (verdict {row['verdict']}) "
                            f"— chart gates must all be true at entry")
+        if self.mode == "TRADE" and SELECTIVE:
+            reasons.extend(self._selective(row, intent))
         if self.mode == "TRADE" and not reasons:
             # Alignment at the instant of the order. The decision was made on
             # the desk's tape; the order goes to a different session that may

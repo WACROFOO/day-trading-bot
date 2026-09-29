@@ -901,6 +901,25 @@ history is 22,015 realistic-fill, costed ones, and it says the refusal helps.
 **Withdrawn before implementation; VWAP keeps refusing.** This is the A11
 mistake not repeated: a small in-sample cohort scored at the trigger.
 
+**Amendment A13 — selective mode (IN FORCE from the first desk start after
+2026-09-29; owner decision).** The owner asked for either looser entries or
+fewer, higher-quality ones, and delegated the choice. Looser loses more in
+the ten-year ablation (section 8 of
+`research/paper-exercise/reports/2026-09-26-premarket-history.md`): freeing all chart gates takes the
+test read from −0.610 to −0.579 R a trade but train from −0.484 to −0.580,
+and freeing VWAP alone is worse on both. Stricter is the only direction that
+lost less on both periods. `Runner._selective` refuses a plan whose stop is
+under 2 % of price, whose price is under $5, or that is the third or later
+plan of its symbol's day — the three levers the ablation's greedy search chose
+on 2016-2023 for the fixed exits, read once on 2024-2026: −0.059 R a trade
+(fixed 2 R) over 337, against −0.708 for current rules on the same exit. With
+the A3 trail that the desk uses, the stop floor alone reads −0.346 on test
+against −0.610. **Still negative: harm reduction, not an edge.** It also cuts
+the number of trades, so phase D moves further away. **Undo:**
+`SELECTIVE = False` in `src/execution/runner.py`. **Kill rule:** revert if,
+after 20 trades taken under A13, their mean realised R is below the mean of
+the 7 trades taken before it (−0.54 R).
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
