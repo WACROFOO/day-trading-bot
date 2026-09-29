@@ -115,7 +115,10 @@ EXITS = {
 
 
 def net(r, orders, p, fill_stopish=True):
-    base = E.cost_r(p["entry"], p["stop"], fill_stopish)
+    base = E.cost_r(p["entry"], p["stop"], fill_stopish, pm=p.get("pm", False), dv5=p.get("dv5"))
+    if E.COST_MODEL == "live":
+        per = E.live_shares(p["entry"], p["stop"]) * (p["entry"] - p["stop"])
+        return r - base - max(0, orders - 1) * 1.0 / per
     return r - base - max(0, orders - 1) * 1.0 / 20.0
 
 
@@ -168,6 +171,7 @@ FILTER_LEVERS = {
     "+ stop >= $0.05": lambda p: base_ok(p) and p["entry"] - p["stop"] >= 0.05,
     "+ stop >= 1% of price": lambda p: base_ok(p) and p["stop_pct"] >= 1.0,
     "+ stop >= 2% of price": lambda p: base_ok(p) and p["stop_pct"] >= 2.0,
+    "+ A13 as live (stop >= 2%, >= $5)": lambda p: base_ok(p) and p["stop_pct"] >= 2.0 and p["price"] >= 5,
     "+ session volume >= 1M": lambda p: base_ok(p) and p["cum_vol"] >= 1_000_000,
     "+ 1st or 2nd pullback": lambda p: base_ok(p) and p["pb_index"] <= 2,
     "+ 07:00-11:00 only": lambda p: base_ok(p) and "07:00" <= p["t"] < "11:00",
@@ -206,7 +210,11 @@ def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--cache", default=str(H.CACHE))
     ap.add_argument("--json")
+    ap.add_argument("--costs", choices=("old", "live"), default="old",
+                    help="old: $20, one cent a side · live: $40 / $2,000 and the spread proxy (2026-09-29)")
     args = ap.parse_args(argv)
+    E.COST_MODEL = args.costs
+    print(f"cost model: {args.costs}")
     uni = H.load_universe(None, None)
     plans = collect(Path(args.cache), sorted(uni), uni)
     tr = [p for p in plans if p["day"] < SPLIT]; te = [p for p in plans if p["day"] >= SPLIT]

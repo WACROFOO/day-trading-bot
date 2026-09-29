@@ -57,6 +57,16 @@ def dv5(m, c, v, k):
     return float((c[lo:k] * v[lo:k]).sum())
 
 
+def sizing_risk(trig: float, stop: float, cfg: dict) -> float:
+    """Dollar risk the cost model sees: cfg's risk, capped by its position value
+    (F8, live sizing $40 / $2,000); F7's configs carry neither and keep $20."""
+    risk = float(cfg.get("risk", C.DOLLAR_RISK))
+    cap = cfg.get("notional")
+    if cap:
+        risk = min(risk, max(1, int(cap // trig)) * (trig - stop))
+    return risk
+
+
 def run_day(Pt: Pit, day: str, lead, hod, cfg: dict, model: str = "prereg") -> list[dict]:
     w0, w1 = WINDOWS[cfg["window"]]
     sp = G.spec(flat_min=minute(11, 30), **EXITS[cfg["exit"]])
@@ -75,6 +85,11 @@ def run_day(Pt: Pit, day: str, lead, hod, cfg: dict, model: str = "prereg") -> l
         if not (0 < stop < trig) or trig > 20.3:
             continue
         o, h, l, c, v = (Pt.o[s:e], Pt.h[s:e], Pt.l[s:e], Pt.c[s:e], Pt.v[s:e])
+        if cfg.get("spread_x") is not None:
+            # F8: the round-trip spread estimated at arming, against the stop.
+            sp_arm = PROXY.spread(trig, t < minute(9, 30), dv5(m, c, v, k_bar))
+            if sp_arm > cfg["spread_x"] * (trig - stop):
+                continue
         fk, fpx, capf = G.stop_limit_fill(m, o, h, l, k_bar + 1, trig, 3, 0.003, 0.01)
         if fk < 0:
             continue
@@ -82,7 +97,8 @@ def run_day(Pt: Pit, day: str, lead, hod, cfg: dict, model: str = "prereg") -> l
         px_out = fpx + r * (trig - stop)
         hs_in = PROXY.spread(fpx, m[fk] < minute(9, 30), dv5(m, c, v, fk)) / 2
         hs_out = PROXY.spread(px_out, m[ke] < minute(9, 30), dv5(m, c, v, ke)) / 2
-        cost = float(C.cost_r_vec([trig], [stop], [fpx], [px_out], [n_o], [st], [hs_in], [hs_out], model=model)[0])
+        cost = float(C.cost_r_vec([trig], [stop], [fpx], [px_out], [n_o], [st], [hs_in], [hs_out], model=model,
+                                     dollar_risk=sizing_risk(trig, stop, cfg))[0])
         out.append({"day": day, "sid": i, "sym": Pt.sd["sym"].iat[i], "arm_min": t, "fill_min": int(m[fk]),
                     "exit_min": int(m[ke]), "entry": trig, "stop": stop, "fill": fpx, "gross": r, "cost": cost,
                     "net": r - cost, "stop_pct": (trig - stop) / trig})
@@ -117,7 +133,9 @@ def random_diff(Pt: Pit, tr: pd.DataFrame, cfg: dict) -> np.ndarray:
             px_out = ff[q] + rr[q] * (ff[q] - stp[q])
             hi = PROXY.spread(ff[q], m[kk[q]] < minute(9, 30), dv5(m, c, v, kk[q])) / 2
             ho = PROXY.spread(px_out, m[kx[q]] < minute(9, 30), dv5(m, c, v, kx[q])) / 2
-            nets.append(rr[q] - float(C.cost_r_vec([ff[q]], [stp[q]], [ff[q]], [px_out], [oo[q]], [ss[q]], [hi], [ho])[0]))
+            dr = sizing_risk(ff[q], stp[q], cfg)
+            nets.append(rr[q] - float(C.cost_r_vec([ff[q]], [stp[q]], [ff[q]], [px_out], [oo[q]], [ss[q]], [hi], [ho],
+                                                    dollar_risk=dr)[0]))
         out[j] = r.net - float(np.mean(nets))
     return out
 
@@ -130,22 +148,36 @@ def summ(df):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", choices=("search", "holdout"), default="search")
+    ap.add_argument("--family", choices=("F7", "F8"), default="F7")
     args = ap.parse_args(argv)
     Pt = Pit()
     days = sorted(Pt.by_day)
     split = {d: ("train" if d <= "2022-12-31" else "valid" if d <= "2023-12-31" else "holdout") for d in days}
+    fam = FAM if args.family == "F7" else "F8-leader-spread"
     cfgs = [{"window": w, "stop": s, "exit": x} for w in WINDOWS for s in STOPS for x in EXITS]
     assert len(cfgs) == 18
+    if args.family == "F8":
+        # research/edge-hunt/PREREGISTRATION.md, addendum 2026-09-29
+        cfgs = [dict(c, spread_x=x, risk=40.0, notional=2000.0) for x in (0.05, 0.10, 0.20) for c in cfgs]
+        assert len(cfgs) == 54
+        base40 = [dict(c, risk=40.0, notional=2000.0) for c in
+                  [{"window": w, "stop": s, "exit": x} for w in WINDOWS for s in STOPS for x in EXITS]]
     cache: dict = {}
     tr = run(Pt, [d for d in days if split[d] == "train"], cfgs, cache)
     rows = [{"hash": P.config_hash(json.loads(k)), "config": json.loads(k), "train_port": summ(v)} for k, v in tr.items()]
+    if args.family == "F8":
+        ref = run(Pt, [d for d in days if split[d] == "train"], base40, cache)
+        print("F7 at the F8 sizing ($40 / $2,000), train, for comparison:")
+        for k, v in ref.items():
+            tp = summ(v)
+            print(f"  {k:<100} {tp.get('mean', float('nan')):+.3f} ({tp.get('n', 0)}) gross {tp.get('gross', float('nan')):+.3f}")
     rows.sort(key=lambda r: r["train_port"].get("mean", -9) if r["train_port"].get("n", 0) >= 300 else -9, reverse=True)
     top = rows[:5]
     va = run(Pt, [d for d in days if split[d] == "valid"], [r["config"] for r in top], cache)
     for r in top:
         r["valid_port"] = summ(va[json.dumps(r["config"], sort_keys=True)])
-    P.register(FAM, rows)
-    print(f"{FAM} · {len(cfgs)} configurations")
+    P.register(fam, rows)
+    print(f"{fam} · {len(cfgs)} configurations")
     for r in rows:
         tp, vp = r["train_port"], r.get("valid_port", {})
         print(f"  {json.dumps(r['config']):<62} train {tp.get('mean', float('nan')):+.3f} ({tp.get('n', 0)}) gross {tp.get('gross', float('nan')):+.3f}"
@@ -153,19 +185,19 @@ def main(argv=None) -> int:
     cands = [r for r in top if r.get("valid_port", {}).get("n", 0) >= 30]
     best = max(cands, key=lambda r: r["valid_port"]["mean"]) if cands else None
     if best is None or best["valid_port"]["mean"] <= 0:
-        print("  validation gate NOT met — F7's holdout stays closed")
+        print(f"  validation gate NOT met — {fam}'s holdout stays closed")
         return 0
     print(f"  chosen {best['hash']} {json.dumps(best['config'])} — positive on validation")
     if args.stage != "holdout":
         return 0
-    P.open_holdout(FAM, best["config"], len(cfgs), best["train_port"], best["valid_port"])
+    P.open_holdout(fam, best["config"], len(cfgs), best["train_port"], best["valid_port"])
     ho = run(Pt, [d for d in days if split[d] == "holdout"], [best["config"]], cache)[json.dumps(best["config"], sort_keys=True)]
     rd = random_diff(Pt, ho, best["config"])
     res = P.adoption(ho["net"].to_numpy(float), ho["day"].to_numpy(), rd)
     res["portfolio"] = summ(ho)
     for mdl in ("light", "old"):
         res["cost_" + mdl] = summ(run(Pt, [d for d in days if split[d] == "holdout"], [best["config"]], cache, mdl)[json.dumps(best["config"], sort_keys=True)])
-    P.record_result(FAM, res)
+    P.record_result(fam, res)
     print(json.dumps(res, indent=1, default=str))
     return 0
 

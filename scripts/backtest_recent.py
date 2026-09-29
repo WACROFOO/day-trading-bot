@@ -129,14 +129,40 @@ def entry_cap(entry: float) -> float:
     return round(entry + max(0.01, entry * 0.003), 4)
 
 
-def cost_r(entry: float, stop: float, stop_exit: bool, dollar_risk: float = 20.0) -> float:
-    """Costs in R for one round trip at the desk's sizing: IBKR fixed pricing
+#: "old": the model every run before 2026-09-29 used — $20 risk, IBKR fixed
+#: commissions, one cent a marketable side. "live": the owner's sizing ($40
+#: risk, at most $2,000 of position value) and the edge hunt's spread proxy
+#: (`edge_hunt.costs.SpreadProxy`, calibrated on real NBBO) on top of the cent,
+#: so the backtests and the edge hunt price a trade the same way.
+COST_MODEL = "old"
+LIVE_RISK, LIVE_NOTIONAL = 40.0, 2000.0
+_PROXY = None
+
+
+def live_shares(entry: float, stop: float) -> int:
+    rps = entry - stop
+    return max(1, min(int(LIVE_RISK // rps), int(LIVE_NOTIONAL // entry))) if rps > 0 else 0
+
+
+def cost_r(entry: float, stop: float, stop_exit: bool, dollar_risk: float = 20.0,
+           pm: bool = False, dv5: float | None = None) -> float:
+    """Costs in R for one round trip. Model "old": IBKR fixed pricing
     ($0.005/share, $1 minimum per order) both ways, plus one cent of slippage
     on entry and one on a stop exit (a gap through the stop is modelled in
-    `simulate` itself)."""
+    `simulate` itself). Model "live": see COST_MODEL."""
     rps = entry - stop
     if rps <= 0:
         return 0.0
+    if COST_MODEL == "live":
+        global _PROXY
+        if _PROXY is None:
+            from edge_hunt.costs import SpreadProxy
+            _PROXY = SpreadProxy()
+        shares = live_shares(entry, stop)
+        half = _PROXY.spread(entry, pm, dv5 if dv5 is not None else 100_000.0) / 2
+        comm = 2 * min(max(1.0, 0.005 * shares), max(1.0, 0.01 * shares * entry))
+        fric = shares * (half + 0.01) * (2 if stop_exit else 1)
+        return round((comm + fric) / (shares * rps), 3)
     shares = max(1, int(dollar_risk // rps))
     comm = 2 * max(1.0, 0.005 * shares)
     slip = 0.01 * shares * (2 if stop_exit else 1)
@@ -213,14 +239,16 @@ def plans_for_day(sym: str, day_rows: list, prev_close: float, desk_vwap: bool =
                "gap": round(o / prev_close - 1, 3) if prev_close else None,
                "entry": round(plan.entry, 4), "stop": round(plan.stop, 4), "red": red,
                "gain": round(c / prev_close - 1, 3) if prev_close else None, "touched": touch is not None,
-               "gap_missed": missed}
+               "gap_missed": missed, "pm": window == "pre-market",
+               "dv5": round(sum(b[4] * b[5] for b in hist[-5:]), 0)}
         if touch is not None:
             ent = fwd[fill_k:]
             rec["fill"] = round(fill, 4)
             for v in EXITS:
                 r, why, t_out = simulate(ent, plan.entry, plan.stop, v, fill=fill if gap_miss else None)
                 rec[v], rec[v + "_why"], rec[v + "_out"] = r, why, t_out
-                rec[v + "_net"] = round(r - cost_r(plan.entry, plan.stop, why in ("stop", "trail")), 3)
+                rec[v + "_net"] = round(r - cost_r(plan.entry, plan.stop, why in ("stop", "trail"),
+                                                  pm=rec["pm"], dv5=rec["dv5"]), 3)
             if hook is not None:
                 hook(rec, ent, fill if gap_miss else plan.entry)
             rec["t_in"] = ent[0][0]
