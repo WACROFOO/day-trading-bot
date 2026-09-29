@@ -1,0 +1,144 @@
+F7 at the F8 sizing ($40 / $2,000), train, for comparison:
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-09:30"}            -0.410 (2008) gross +0.046
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-09:30"}            -0.421 (2052) gross +0.165
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-09:30"}      -0.378 (2081) gross +0.204
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-09:30"}           -0.836 (2048) gross -0.292
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-09:30"}           -0.789 (2057) gross -0.159
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-09:30"}     -0.769 (2083) gross -0.136
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "09:30-11"}            -0.244 (2106) gross -0.010
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "09:30-11"}            -0.147 (2197) gross +0.147
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "09:30-11"}      -0.126 (2269) gross +0.171
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "09:30-11"}           -1.000 (2247) gross -0.505
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "09:30-11"}           -0.915 (2254) gross -0.367
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "09:30-11"}     -0.909 (2284) gross -0.360
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-11"}               -0.317 (3498) gross +0.050
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-11"}               -0.274 (3618) gross +0.196
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "bar", "window": "07-11"}         -0.246 (3713) gross +0.221
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-11"}              -0.889 (3617) gross -0.357
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-11"}              -0.819 (3635) gross -0.211
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "stop": "pct3", "window": "07-11"}        -0.804 (3724) gross -0.194
+F8-leader-spread · 54 configurations
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-09:30"} train -0.052 (1029) gross +0.130 · valid -0.127 (279)
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-09:30"} train -0.061 (370) gross +0.065 · valid +0.037 (147)
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-09:30"} train -0.072 (373) gross +0.054 · valid +0.003 (152)
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-09:30"} train -0.074 (1584) gross +0.170 · valid -0.146 (324)
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-09:30"} train -0.085 (1015) gross +0.097 · valid -0.112 (276)
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-11"} train -0.089 (1155) gross +0.044
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-11"} train -0.092 (2404) gross +0.091
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-11"} train -0.101 (3127) gross +0.136
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "09:30-11"} train -0.111 (887) gross +0.025
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-09:30"} train -0.121 (366) gross -0.013
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-11"} train -0.121 (1138) gross +0.012
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-11"} train -0.122 (2349) gross +0.061
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-09:30"} train -0.125 (1561) gross +0.120
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-11"} train -0.126 (3041) gross +0.111
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "09:30-11"} train -0.135 (1714) gross +0.043
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "09:30-11"} train -0.142 (2066) gross +0.073
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "09:30-11"} train -0.162 (879) gross -0.026
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-11"} train -0.165 (2275) gross -0.012
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "09:30-11"} train -0.166 (2002) gross +0.048
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "07-09:30"} train -0.167 (998) gross -0.016
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-11"} train -0.172 (1120) gross -0.057
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "09:30-11"} train -0.178 (1678) gross -0.001
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-11"} train -0.180 (2931) gross +0.015
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "bar", "window": "09:30-11"} train -0.198 (1632) gross -0.048
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "07-09:30"} train -0.200 (1519) gross +0.001
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "bar", "window": "09:30-11"} train -0.212 (1930) gross -0.036
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "09:30-11"} train -0.222 (870) gross -0.104
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-09:30"} train -0.762 (812) gross -0.314
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-09:30"} train -0.783 (812) gross -0.334
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-09:30"} train -0.814 (811) gross -0.415
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-11"} train -0.831 (2210) gross -0.395
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-11"} train -0.840 (2194) gross -0.403
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "07-11"} train -0.883 (2187) gross -0.489
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "09:30-11"} train -0.907 (1683) gross -0.483
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "09:30-11"} train -0.908 (1671) gross -0.484
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.2, "stop": "pct3", "window": "09:30-11"} train -0.957 (1666) gross -0.567
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-09:30"} train +nan (0) gross +nan
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "09:30-11"} train +nan (0) gross +nan
+  {"exit": "fixed1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  {"exit": "bail2_trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.1, "stop": "pct3", "window": "07-11"} train +nan (0) gross +nan
+  chosen b4a4502c1e37 {"exit": "trail1", "notional": 2000.0, "risk": 40.0, "spread_x": 0.05, "stop": "bar", "window": "07-09:30"} — positive on validation
+{
+ "n": 592,
+ "mean": -0.1884,
+ "lb_corrected": -0.2988,
+ "alpha_one_sided": 0.003125,
+ "years": {
+  "2024": [
+   -0.1915,
+   220
+  ],
+  "2025": [
+   -0.1725,
+   216
+  ],
+  "2026": [
+   -0.2062,
+   156
+  ]
+ },
+ "vs_random_mean": -0.243,
+ "vs_random_lb95": -0.3258,
+ "checks": {
+  "1 positive net mean": false,
+  "2 corrected lower bound > 0": false,
+  "3 at least 200 trades": true,
+  "4 positive in 2 of 3 years": false,
+  "5 beats random entry on the same names": false
+ },
+ "adopted": false,
+ "portfolio": {
+  "n": 592,
+  "mean": -0.1884,
+  "total": -111.55,
+  "win_rate": 0.2956,
+  "avg_win": 1.0647,
+  "avg_loss": 0.7143,
+  "win_loss_ratio": 1.49,
+  "exp_per_avg_loss": -0.264,
+  "lb95": -0.2682,
+  "gross": -0.0714,
+  "cost": 0.117
+ },
+ "cost_light": {
+  "n": 592,
+  "mean": -0.1635,
+  "total": -96.8,
+  "win_rate": 0.3057,
+  "avg_win": 1.054,
+  "avg_loss": 0.6997,
+  "win_loss_ratio": 1.506,
+  "exp_per_avg_loss": -0.234,
+  "lb95": -0.2434,
+  "gross": -0.0714,
+  "cost": 0.0921
+ },
+ "cost_old": {
+  "n": 592,
+  "mean": -0.1569,
+  "total": -92.87,
+  "win_rate": 0.3074,
+  "avg_win": 1.0569,
+  "avg_loss": 0.6957,
+  "win_loss_ratio": 1.519,
+  "exp_per_avg_loss": -0.225,
+  "lb95": -0.2367,
+  "gross": -0.0714,
+  "cost": 0.0855
+ }
+}

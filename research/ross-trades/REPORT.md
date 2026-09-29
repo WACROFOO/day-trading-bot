@@ -90,3 +90,19 @@ worth about +0.17 R a trade before costs. What turns it into money is what the b
 cannot copy: out in two minutes on a read of the tape, huge size on the one runner that
 pays for everything, executions better than the spread. At $20 of risk with real spreads
 it loses, and in 2023 the gross edge disappeared.
+
+## 7. F8 — the same rule where the spread is small (2026-09-29)
+
+Preregistered before the run (`research/edge-hunt/PREREGISTRATION.md`, addendum
+2026-09-29): F7, taken only when the estimated round-trip spread at arming is
+≤ 5 / 10 / 20 % of the stop, costed at $40 risk and a $2,000 cap.
+
+| chosen on 2016-2022 | train | validation 2023 | holdout 2024-2026 |
+|---|---|---|---|
+| trail 1 R, stop under the arming bar, 07:00-09:30, spread ≤ 5 % | −0.061 net (370) | +0.037 (147) | **−0.188 net (592), gross −0.071** |
+
+Holdout: 0 of 3 years positive, 0.243 R worse than random entry on the same
+names; four of five checks fail. **Not adopted.** Filtering on the spread made
+train and 2023 look close to breakeven, and the gross edge was gone in
+2024-2026. With F7 and F8 both closed, the leader breakout has been tested at
+both sizings and both cost levels; it does not carry a tradable edge here.

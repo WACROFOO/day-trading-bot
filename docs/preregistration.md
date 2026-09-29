@@ -929,6 +929,24 @@ stay. The move A13 was blamed for, BKYI 09:59 (3.33 → 4.05 in one minute), cam
 from the 09:55 plan, which the rules before A13 also refused: MACD histogram
 −0.0126 at 09:55 and pullback volume heavier than the impulse.
 
+**F8 and the live-cost ablation (2026-09-29) — nothing adopted.** F8, the
+leader breakout traded only where the estimated round-trip spread is small
+against the stop, preregistered and committed before its run
+(`research/edge-hunt/PREREGISTRATION.md`, addendum 2026-09-29), at the live
+sizing ($40, $2,000 cap). Best on 2016-2022: trail 1 R, stop under the arming
+bar, 07:00-09:30, spread ≤ 5 % of the stop, −0.061 R net (370). Validation
+2023: +0.037 (147), so the holdout opened once: **−0.188 R net over 592 trades,
+gross −0.071, 0 of 3 years positive, 0.243 R worse than random entry on the
+same names.** Four of the five checks fail. The gross edge F7 showed on
+2016-2022 is not there in 2024-2026. Detail: `research/ross-trades/results/f8_run.txt`.
+The ten-year ablation repriced at the live sizing with the spread proxy
+(`scripts/ablation_history.py --costs live`,
+`research/paper-exercise/reports/ablation_live_costs.txt`): current rules
+−1.218 R on train and −1.476 on test, against −0.484 / −0.610 under one cent a
+side — the spread, not the commission, is most of the cost. A13 as it runs
+live is the best single lever in both periods, −0.309 / −0.413; no
+configuration meets the adoption rule.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
