@@ -141,6 +141,8 @@ def random_diff(Pt: Pit, tr: pd.DataFrame, cfg: dict) -> np.ndarray:
 
 
 def summ(df):
+    if not len(df):
+        return {"n": 0}                  # F8: a tight spread filter can leave a config empty
     return P.summary(df["net"].to_numpy(float), df["day"].to_numpy()) | (
         {"gross": round(float(df["gross"].mean()), 4), "cost": round(float(df["cost"].mean()), 4)} if len(df) else {})
 
