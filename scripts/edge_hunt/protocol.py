@@ -27,7 +27,7 @@ LEDGER = ROOT / "research" / "edge-hunt" / "holdout_ledger.jsonl"
 REGISTRY = ROOT / "research" / "edge-hunt" / "results" / "registry.jsonl"
 
 # Fixed before the first run (PREREGISTRATION.md §3).
-FAMILIES = ("F1-selection", "F2-premarket", "F3-micro10s", "F4-exits-sizing", "F5-new", "F6-combined", "F7-leader")
+FAMILIES = ("F1-selection", "F2-premarket", "F3-micro10s", "F4-exits-sizing", "F5-new", "F6-combined", "F7-leader", "F8-leader-spread")
 ALPHA = 0.05
 MIN_TRADES = 200
 MIN_YEARS_POSITIVE = 2

@@ -242,3 +242,33 @@ removed) — a universe no earlier family used, so its holdout is unread.
 * Same split, same five-part rule, same costs. Seven families are now allowed,
   so the corrected one-sided α is 0.05 / 2 / 7 = 0.36 %. Random baseline: the
   same leaders' symbol-days, random minutes in the window.
+
+---
+
+## Addendum 2026-09-29 — F8, the leader breakout where the spread is small
+
+Written before F8's first run. F7 was +0.171 R gross a trade on train and lost
+it to costs (−0.167 net; spreads and commissions 0.2-0.34 R). F8 asks the one
+question that result leaves open: **does F7 survive when it only trades where
+the round-trip spread is small against the stop?**
+
+* **Base:** F7 exactly (leader, entry, one position, the 18-configuration grid).
+* **Filter, known at arming:** the estimated round-trip spread — twice the
+  `SpreadProxy` half-spread at the trigger price, from the arming bar's
+  pre-market flag and trailing 5-minute dollar volume — must be ≤ X × (trigger −
+  stop), X ∈ {0.05, 0.10, 0.20}. 54 configurations.
+* **Costs:** the preregistered model at the owner's live sizing: $40 risk a
+  trade and at most $2,000 of position value (`docs/preregistration.md` §5,
+  2026-09-28). F7 was costed at $20.
+* **Choice:** rank on train (2016-2022, n ≥ 300), top 5 read on validation
+  (2023), best with n ≥ 30. Holdout (2024-2026) opens once, only if that
+  validation mean is positive; five-part rule unchanged. **Eight families are
+  now allowed: one-sided α = 0.05 / 2 / 8.**
+
+**Known weaknesses, stated before the run.** (1) The filter and the cost model
+use the same spread proxy, so on paper the filter selects exactly the trades
+the model charges least; a proxy that under-states real spreads flatters F8
+twice. (2) F7's 2023 validation was already read (gross +0.008), so F8's
+validation is not blind to the base rule; only the holdout is. (3) The $40 /
+$2,000 sizing differs from F7's $20, so part of any F8-vs-F7 difference is the
+commission minimum, not the filter; F7 at the new sizing is printed beside it.
