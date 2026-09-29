@@ -38,7 +38,8 @@ def test_switch_is_on():
     assert RN.SELECTIVE is True
 
 
-def test_each_refusal_is_named_and_a_clean_plan_passes():
+def test_each_refusal_is_named_and_a_clean_plan_passes(monkeypatch):
+    monkeypatch.setattr(RN, "SELECTIVE_MAX_PLAN_INDEX", 2)
     c = sqlite3.connect(":memory:")
     c.execute("CREATE TABLE decisions (symbol TEXT, ts_et TEXT)")
     r = _runner(c)
@@ -53,3 +54,13 @@ def test_each_refusal_is_named_and_a_clean_plan_passes():
     row = _plan(c, "BBB", "2026-09-29T09:50:00", 3.00, 2.80)           # under $5
     out = r._selective(row, _intent(row))
     assert len(out) == 1 and "under $5" in out[0]
+
+
+def test_plan_index_lever_is_off_by_default():
+    assert RN.SELECTIVE_MAX_PLAN_INDEX is None
+    c = sqlite3.connect(":memory:")
+    c.execute("CREATE TABLE decisions (symbol TEXT, ts_et TEXT)")
+    r = _runner(c)
+    for m in range(5):
+        row = _plan(c, "AAA", f"2026-09-29T09:4{m}:00", 10.00, 9.70)
+    assert r._selective(row, _intent(row)) == []

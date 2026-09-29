@@ -59,7 +59,10 @@ MACD_FLAG_ONLY_REGULAR = False
 SELECTIVE = True
 SELECTIVE_MIN_STOP_PCT = 2.0
 SELECTIVE_MIN_PRICE = 5.0
-SELECTIVE_MAX_PLAN_INDEX = 2
+#: None = lever off (2026-09-29): the desk arms a plan on every qualifying bar
+#: from 04:00, backfill included, so BKYI's 08:12 plan was its 13th — "first
+#: or second plan" live meant "none after dawn", not the ablation's pullback count.
+SELECTIVE_MAX_PLAN_INDEX = None
 
 MODES = ("LOG_ONLY", "TRADE")
 
@@ -169,6 +172,8 @@ class Runner:
                        f"{SELECTIVE_MIN_STOP_PCT:g}%")
         if intent.trigger < SELECTIVE_MIN_PRICE:
             out.append(f"selective (A13): price {intent.trigger:.2f} under ${SELECTIVE_MIN_PRICE:g}")
+        if SELECTIVE_MAX_PLAN_INDEX is None:
+            return out
         ts = str(row["ts_et"] or "")
         n = self.conn.execute("SELECT COUNT(*) FROM decisions WHERE symbol=? AND substr(ts_et,1,10)=? "
                               "AND ts_et<=?", (row["symbol"], ts[:10], ts)).fetchone()[0]

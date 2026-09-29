@@ -920,6 +920,15 @@ the number of trades, so phase D moves further away. **Undo:**
 after 20 trades taken under A13, their mean realised R is below the mean of
 the 7 trades taken before it (−0.54 R).
 
+**A13, first session (2026-09-29) — the plan-count lever switched off.** The
+desk arms a plan on every qualifying bar from 04:00, backfill included: BKYI's
+08:12 plan was its 13th of the day, so "first or second plan" refused
+everything after dawn, which is not the ablation's pullback count. The lever
+is off (`SELECTIVE_MAX_PLAN_INDEX = None`); the stop floor and the $5 floor
+stay. The move A13 was blamed for, BKYI 09:59 (3.33 → 4.05 in one minute), came
+from the 09:55 plan, which the rules before A13 also refused: MACD histogram
+−0.0126 at 09:55 and pullback volume heavier than the impulse.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and
