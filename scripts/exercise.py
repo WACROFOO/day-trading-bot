@@ -834,6 +834,64 @@ def print_layer2(rows: list[dict], *, cumulative: bool = False) -> None:
           f"Numbers are the upper bound of `missed` (fill at trigger, no costs, one position rule ignored).{END}")
 
 
+def cmd_whatif(args) -> int:
+    """A rule, replayed on sessions already in the ledger, BEFORE it trades.
+
+    Written 2026-09-29: A13's plan-count lever was tested on ten years of the
+    backtest's pullback count and went live on the desk's, which counts every
+    armed plan from 04:00; it refused everything after dawn and nobody saw it
+    until BKYI. This runs the selective rule (A13, `execution.runner`) with
+    the values given, over every plan that passed Layer 1, and prints what it
+    would have refused and what those plans did — the same upper bound as
+    `missed` (fill at trigger, no costs). A rule whose refusals look nothing
+    like its backtest's is a defect to fix before the desk starts."""
+    from types import SimpleNamespace
+    from execution import runner as RN
+    conn = L.connect(_db(args))
+    days = [r[0] for r in conn.execute(
+        "SELECT DISTINCT substr(ts_et,1,10) FROM decisions WHERE substr(ts_et,1,10) >= ? ORDER BY 1",
+        (args.since or "0000",)).fetchall()]
+    if not args.since:
+        days = days[-1:]
+    if not days:
+        print("no decisions in the ledger"); return 1
+    RN.SELECTIVE_MIN_STOP_PCT = args.stop_pct
+    RN.SELECTIVE_MIN_PRICE = args.min_price
+    RN.SELECTIVE_MAX_PLAN_INDEX = args.plan_index
+    probe = RN.Runner.__new__(RN.Runner); probe.conn = conn
+    kept, cut, lines = [], [], []
+    bars_all = bars.from_ledger(conn)
+    for day in days:
+        for d in controls.per_decision(conn, bars_all, day):
+            if d["backfill"] or d["outcome"] == "SUPPRESSED" or not d["trigger"] or not d["stop"]:
+                continue
+            trig, stop = float(d["trigger"]), float(d["stop"])
+            why = probe._selective(d, SimpleNamespace(trigger=trig, risk_per_share=round(trig - stop, 4)))
+            (cut if why else kept).append(d)
+            if why:
+                lines.append(f"  {d['ts_et'][:16]} {d['symbol']:<6}{trig:>7.2f}{stop:>7.2f}"
+                             + "".join(f"{v:>+7.2f}" if v is not None else f"{'—':>7}"
+                                       for v in (d["strategy_r"], d["trail_r"])) + "  "
+                             + "; ".join(w.replace('selective (A13): ', '') for w in why)[:70])
+    idx = "off" if args.plan_index is None else args.plan_index
+    print(f"\n{BOLD}WHAT IF · selective rule{END}  stop >= {args.stop_pct:g}% · price >= ${args.min_price:g} · "
+          f"plan index <= {idx} · {days[0]}..{days[-1]} ({len(days)} session(s))")
+    print("  plans that passed Layer 1, prospective only · fill at trigger, no costs: an upper bound\n")
+    def row(name, ds):
+        s_ = [x["strategy_r"] for x in ds if x["strategy_r"] is not None]
+        t_ = [x["trail_r"] for x in ds if x["trail_r"] is not None]
+        print(f"  {name:<22}{len(ds):>5}{len(s_):>6}{sum(s_):>+10.2f}{sum(t_):>+10.2f}")
+    print(f"  {'':<22}{'n':>5}{'trig':>6}{'fixed 2R':>10}{'trail':>10}")
+    row("refused by the rule", cut)
+    row("kept by the rule", kept)
+    if lines:
+        print(f"\n  {'refused':<22}{'trig':>7}{'stop':>7}{'fixed':>7}{'trail':>7}  why")
+        print("\n".join(lines[:args.limit]))
+        if len(lines) > args.limit:
+            print(f"  … {len(lines) - args.limit} more (--limit)")
+    return 0
+
+
 def cmd_missed(args) -> int:
     """What the plans the runner did NOT take went on to do, next to the ones
     it did. Per row and per reason. Fill at the trigger, exits at their
@@ -1049,6 +1107,12 @@ def main(argv=None) -> int:
     ms = sub.add_parser("missed", help="what the plans not taken went on to do, per row and per reason")
     ms.add_argument("--day", help="ET date, e.g. 2026-09-22 (default: the latest day in the ledger)")
     ms.add_argument("--all", action="store_true", help="also list killed plans whose trigger was never touched")
+    wi = sub.add_parser("whatif", help="replay the selective rule (A13) on past sessions before it trades")
+    wi.add_argument("--since", help="first ET date (default: the last session only)")
+    wi.add_argument("--stop-pct", type=float, default=2.0)
+    wi.add_argument("--min-price", type=float, default=5.0)
+    wi.add_argument("--plan-index", type=int, default=None, help="refuse plans after the Nth of a symbol's day (off by default)")
+    wi.add_argument("--limit", type=int, default=40)
     ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
     ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
     ah.add_argument("--market", action="store_true", help="SELL at market, SMART-routed, 09:30-16:00 ET only")
@@ -1071,7 +1135,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
     return {"replay": cmd_replay, "check": cmd_check, "report": cmd_report, "live": cmd_live,
             "advance": cmd_advance, "state": cmd_state, "stuck": cmd_stuck, "review": cmd_review,
-            "missed": cmd_missed, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
+            "missed": cmd_missed, "whatif": cmd_whatif, "defect": cmd_defect, "reset-unprotected": cmd_reset_unprotected,
             "open-phase-c": cmd_open_phase_c,
             "ah-exit": cmd_ah_exit, "accept-a1": cmd_accept_a1,
             "retag-backfill": cmd_retag_backfill}[args.cmd](args)

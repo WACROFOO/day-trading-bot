@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import sys
 import threading
 from datetime import datetime, timedelta, timezone
@@ -670,3 +671,16 @@ def test_the_scan_never_runs_on_the_worker_when_threaded():
     desk._scan_in_background()
     assert desk._scan_thread is before
     before.join()
+
+
+def test_a_verified_float_over_the_gate_does_not_join_the_desk(tmp_path, monkeypatch):
+    """2026-09-29: SMMT 152M and NVTS 226M joined from the scanner and slowed
+    every rebuild; a verified float over 20M can never trade."""
+    desk, ib, clock = make_desk()
+    desk._bootstrap()
+    f = tmp_path / "floats.json"
+    f.write_text(json.dumps({"date": desk.session_day(), "source": "finviz",
+                             "floats": {"CCC": 152_300_000}}))
+    monkeypatch.setenv("FLOAT_OVERRIDES", str(f))
+    assert desk.add_symbols(["CCC"]) == []
+    assert "CCC" not in desk.symbols

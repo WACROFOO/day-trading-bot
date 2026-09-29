@@ -90,3 +90,17 @@ def test_missed_lists_chart_green_refusals_and_a_regular_hours_split(tmp_path):
     assert ms.returncode == 0, ms.stderr[-1200:]
     assert "CHART-GREEN PLANS REFUSED FOR A NON-CHART REASON" in ms.stdout
     assert "BY REASON · REGULAR HOURS ONLY (09:30–11:30)" in ms.stdout
+
+
+def test_whatif_replays_the_selective_rule_on_a_past_session(tmp_path):
+    """2026-09-29: the plan-count lever refused everything after dawn and was
+    only seen on BKYI. `whatif` shows a rule's refusals on ledger sessions
+    before the desk starts with it."""
+    db = tmp_path / "j.sqlite"
+    subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "replay",
+                    str(FIXTURE), "--risk", "20"], cwd=ROOT, capture_output=True, text=True, check=True)
+    wi = subprocess.run([sys.executable, "scripts/exercise.py", "--db", str(db), "whatif",
+                         "--plan-index", "1", "--min-price", "100"], cwd=ROOT, capture_output=True, text=True)
+    assert wi.returncode == 0, wi.stderr[-1200:]
+    assert "WHAT IF · selective rule" in wi.stdout and "plan index <= 1" in wi.stdout
+    assert "refused by the rule" in wi.stdout and "under $100" in wi.stdout

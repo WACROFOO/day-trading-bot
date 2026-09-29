@@ -997,6 +997,19 @@ class IbkrDesk:
 
     def _add_now(self, wanted: List[str]) -> List[str]:
         wanted = [s for s in wanted if s not in self.no_live_data]
+        # 2026-09-29: SMMT (152M) and NVTS (226M) joined from the scanner after
+        # the gap scan had rejected them on float; eleven names made rebuilds
+        # 13-33 s. A VERIFIED float over the gate can never trade, so it does
+        # not take a slot. An SEC upper bound over 20M proves nothing: kept.
+        from momentum_platform.scanners.five_pillars import FLOAT_MAX_SHARES
+        day, over = self.session_day(), []
+        for s in list(wanted):
+            ov = _float_override(s, day)
+            if ov and ov["float"] >= FLOAT_MAX_SHARES:
+                wanted.remove(s)
+                over.append(f"{s} {ov['float'] / 1e6:.0f}M")
+        if over:
+            self.log(f"  not added, verified float over {FLOAT_MAX_SHARES / 1e6:.0f}M: {', '.join(over)}")
         self.symbols += [s for s in wanted if s not in self.symbols]
         added = self._subscribe(wanted)
         for sym in added:
