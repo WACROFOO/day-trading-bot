@@ -58,7 +58,11 @@ MACD_FLAG_ONLY_REGULAR = False
 #: its test read is still negative. False restores the rules before A13.
 SELECTIVE = True
 SELECTIVE_MIN_STOP_PCT = 2.0
-SELECTIVE_MIN_PRICE = 5.0
+#: 2.0 from 2026-09-30 (owner, delegated): at live costs the $5 floor adds
+#: 0.09 R a trade (−0.502 → −0.413 on 2024-2026) and halves the trades
+#: (2,266 → 1,007); this week's gappers were all $2-5 and it refused every
+#: one. $2 is FILTERS.md gate 1's own floor, so the price lever is inert.
+SELECTIVE_MIN_PRICE = 2.0
 #: None = lever off (2026-09-29): the desk arms a plan on every qualifying bar
 #: from 04:00, backfill included, so BKYI's 08:12 plan was its 13th — "first
 #: or second plan" live meant "none after dawn", not the ablation's pullback count.

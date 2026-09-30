@@ -51,9 +51,9 @@ def test_each_refusal_is_named_and_a_clean_plan_passes(monkeypatch):
     row = _plan(c, "AAA", "2026-09-29T09:50:00", 10.00, 9.70)          # plan 3
     out = r._selective(row, _intent(row))
     assert len(out) == 1 and "plan 3" in out[0]
-    row = _plan(c, "BBB", "2026-09-29T09:50:00", 3.00, 2.80)           # under $5
+    row = _plan(c, "BBB", "2026-09-29T09:50:00", 1.90, 1.80)           # under $2
     out = r._selective(row, _intent(row))
-    assert len(out) == 1 and "under $5" in out[0]
+    assert len(out) == 1 and "under $2" in out[0]
 
 
 def test_plan_index_lever_is_off_by_default():

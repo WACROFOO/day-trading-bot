@@ -947,6 +947,19 @@ side — the spread, not the commission, is most of the cost. A13 as it runs
 live is the best single lever in both periods, −0.309 / −0.413; no
 configuration meets the adoption rule.
 
+**A13, second change (2026-09-30, owner, delegated) — the $5 floor off.** On
+09-29 and 09-30 every gapper the scanner found traded $2-5 (BKYI, YMT, MSGY,
+NCI, BIYA) and A13's $5 floor refused all of them; BKYI's 08:12, 09:28 and
+10:06 plans had no other reason against them. At the live sizing and spreads
+(`research/paper-exercise/reports/ablation_live_costs.txt`) the floor adds
+0.09 R a trade on 2024-2026 (stop ≥ 2 % alone −0.502 over 2,266; with ≥ $5
+−0.413 over 1,007) and halves the sample the exercise needs. Now
+`SELECTIVE_MIN_PRICE = 2.0`, FILTERS.md gate 1's own floor: A13 is the 2 %
+stop floor. Three combinations — the stop floor with the pullback-volume,
+VWAP or MACD refusal freed — are added to `scripts/ablation_history.py` and
+not yet run (the history cache lives on the owner's Mac); none changes until
+they are.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

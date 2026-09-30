@@ -1110,7 +1110,7 @@ def main(argv=None) -> int:
     wi = sub.add_parser("whatif", help="replay the selective rule (A13) on past sessions before it trades")
     wi.add_argument("--since", help="first ET date (default: the last session only)")
     wi.add_argument("--stop-pct", type=float, default=2.0)
-    wi.add_argument("--min-price", type=float, default=5.0)
+    wi.add_argument("--min-price", type=float, default=2.0)
     wi.add_argument("--plan-index", type=int, default=None, help="refuse plans after the Nth of a symbol's day (off by default)")
     wi.add_argument("--limit", type=int, default=40)
     ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
