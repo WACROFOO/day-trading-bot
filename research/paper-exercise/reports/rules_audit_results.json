@@ -1,0 +1,6273 @@
+{
+ "baseline": {
+  "train": {
+   "n": 2246,
+   "mean": -0.4112,
+   "total": -923.61,
+   "gross": -0.022,
+   "win": 0.24,
+   "max_dd": 933.29,
+   "lose_streak": 24,
+   "worst_day": -5.44,
+   "per_month": 23.6
+  },
+  "test": {
+   "n": 1492,
+   "mean": -0.4774,
+   "total": -712.22,
+   "gross": -0.1101,
+   "win": 0.233,
+   "max_dd": 712.22,
+   "lose_streak": 24,
+   "worst_day": -12.03,
+   "per_month": 46.6
+  },
+  "years": {
+   "2024": {
+    "n": 512,
+    "mean": -0.4911,
+    "total": -251.43,
+    "gross": -0.1182,
+    "win": 0.238,
+    "max_dd": 256.68,
+    "lose_streak": 17,
+    "worst_day": -5.35,
+    "per_month": 42.7
+   },
+   "2025": {
+    "n": 606,
+    "mean": -0.48,
+    "total": -290.88,
+    "gross": -0.1171,
+    "win": 0.226,
+    "max_dd": 290.88,
+    "lose_streak": 24,
+    "worst_day": -12.03,
+    "per_month": 50.5
+   },
+   "2026": {
+    "n": 374,
+    "mean": -0.4543,
+    "total": -169.91,
+    "gross": -0.0877,
+    "win": 0.235,
+    "max_dd": 174.74,
+    "lose_streak": 15,
+    "worst_day": -4.78,
+    "per_month": 46.8
+   }
+  },
+  "windows": {
+   "pre-market": {
+    "train": {
+     "n": 835,
+     "mean": -0.444,
+     "total": -370.73,
+     "gross": -0.0295,
+     "win": 0.242,
+     "max_dd": 377.4,
+     "lose_streak": 17,
+     "worst_day": -5.44,
+     "per_month": 10.3
+    },
+    "test": {
+     "n": 713,
+     "mean": -0.5747,
+     "total": -409.78,
+     "gross": -0.1975,
+     "win": 0.205,
+     "max_dd": 409.78,
+     "lose_streak": 20,
+     "worst_day": -12.03,
+     "per_month": 22.3
+    }
+   },
+   "09:30-10:30": {
+    "train": {
+     "n": 1100,
+     "mean": -0.3779,
+     "total": -415.7,
+     "gross": -0.0149,
+     "win": 0.244,
+     "max_dd": 421.46,
+     "lose_streak": 21,
+     "worst_day": -4.39,
+     "per_month": 11.8
+    },
+    "test": {
+     "n": 611,
+     "mean": -0.3912,
+     "total": -239.03,
+     "gross": -0.0431,
+     "win": 0.262,
+     "max_dd": 239.71,
+     "lose_streak": 18,
+     "worst_day": -4.0,
+     "per_month": 19.1
+    }
+   },
+   "10:30-11:30": {
+    "train": {
+     "n": 311,
+     "mean": -0.4411,
+     "total": -137.17,
+     "gross": -0.0267,
+     "win": 0.222,
+     "max_dd": 141.5,
+     "lose_streak": 23,
+     "worst_day": -3.48,
+     "per_month": 3.7
+    },
+    "test": {
+     "n": 168,
+     "mean": -0.3775,
+     "total": -63.41,
+     "gross": 0.0173,
+     "win": 0.244,
+     "max_dd": 66.64,
+     "lose_streak": 15,
+     "worst_day": -3.23,
+     "per_month": 5.2
+    }
+   }
+  }
+ },
+ "variants": [
+  {
+   "group": "5 still rising",
+   "variant": "off the high <= 15 %",
+   "stats": {
+    "train": {
+     "n": 2125,
+     "mean": -0.4071,
+     "total": -865.14,
+     "gross": -0.0171,
+     "win": 0.245,
+     "max_dd": 869.91,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 22.4
+    },
+    "test": {
+     "n": 1385,
+     "mean": -0.4803,
+     "total": -665.21,
+     "gross": -0.1113,
+     "win": 0.232,
+     "max_dd": 665.98,
+     "lose_streak": 18,
+     "worst_day": -12.03,
+     "per_month": 43.3
+    },
+    "years": {
+     "2024": {
+      "n": 478,
+      "mean": -0.511,
+      "total": -244.26,
+      "gross": -0.1397,
+      "win": 0.228,
+      "max_dd": 244.29,
+      "lose_streak": 16,
+      "worst_day": -4.76,
+      "per_month": 39.8
+     },
+     "2025": {
+      "n": 563,
+      "mean": -0.4881,
+      "total": -274.8,
+      "gross": -0.1229,
+      "win": 0.226,
+      "max_dd": 274.8,
+      "lose_streak": 18,
+      "worst_day": -12.03,
+      "per_month": 46.9
+     },
+     "2026": {
+      "n": 344,
+      "mean": -0.4249,
+      "total": -146.15,
+      "gross": -0.0528,
+      "win": 0.247,
+      "max_dd": 151.75,
+      "lose_streak": 15,
+      "worst_day": -5.15,
+      "per_month": 43.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 801,
+       "mean": -0.4394,
+       "total": -351.93,
+       "gross": -0.0242,
+       "win": 0.246,
+       "max_dd": 355.02,
+       "lose_streak": 15,
+       "worst_day": -5.44,
+       "per_month": 9.9
+      },
+      "test": {
+       "n": 639,
+       "mean": -0.5888,
+       "total": -376.23,
+       "gross": -0.2086,
+       "win": 0.194,
+       "max_dd": 376.23,
+       "lose_streak": 17,
+       "worst_day": -12.03,
+       "per_month": 20.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1039,
+       "mean": -0.3705,
+       "total": -384.92,
+       "gross": -0.0074,
+       "win": 0.248,
+       "max_dd": 390.72,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 11.2
+      },
+      "test": {
+       "n": 604,
+       "mean": -0.4033,
+       "total": -243.6,
+       "gross": -0.0509,
+       "win": 0.26,
+       "max_dd": 243.69,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 18.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 285,
+       "mean": -0.4501,
+       "total": -128.28,
+       "gross": -0.0322,
+       "win": 0.232,
+       "max_dd": 131.18,
+       "lose_streak": 19,
+       "worst_day": -3.48,
+       "per_month": 3.5
+      },
+      "test": {
+       "n": 142,
+       "mean": -0.3196,
+       "total": -45.38,
+       "gross": 0.0694,
+       "win": 0.282,
+       "max_dd": 49.91,
+       "lose_streak": 10,
+       "worst_day": -3.23,
+       "per_month": 4.4
+      }
+     }
+    }
+   },
+   "paired_lb": -0.03943955139808256,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "5 still rising",
+   "variant": "off the high <= 35 %",
+   "stats": {
+    "train": {
+     "n": 2273,
+     "mean": -0.4031,
+     "total": -916.18,
+     "gross": -0.0148,
+     "win": 0.242,
+     "max_dd": 925.86,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 23.9
+    },
+    "test": {
+     "n": 1507,
+     "mean": -0.472,
+     "total": -711.23,
+     "gross": -0.1058,
+     "win": 0.233,
+     "max_dd": 711.23,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.1
+    },
+    "years": {
+     "2024": {
+      "n": 515,
+      "mean": -0.4815,
+      "total": -247.98,
+      "gross": -0.1098,
+      "win": 0.239,
+      "max_dd": 257.21,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.9
+     },
+     "2025": {
+      "n": 611,
+      "mean": -0.475,
+      "total": -290.25,
+      "gross": -0.1116,
+      "win": 0.227,
+      "max_dd": 290.25,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.9
+     },
+     "2026": {
+      "n": 381,
+      "mean": -0.4541,
+      "total": -173.01,
+      "gross": -0.0909,
+      "win": 0.234,
+      "max_dd": 177.83,
+      "lose_streak": 19,
+      "worst_day": -4.78,
+      "per_month": 47.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 845,
+       "mean": -0.4424,
+       "total": -373.82,
+       "gross": -0.0285,
+       "win": 0.241,
+       "max_dd": 380.49,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 721,
+       "mean": -0.5686,
+       "total": -409.97,
+       "gross": -0.1919,
+       "win": 0.205,
+       "max_dd": 409.97,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.5
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1113,
+       "mean": -0.3605,
+       "total": -401.24,
+       "gross": 0.0016,
+       "win": 0.248,
+       "max_dd": 407.0,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 12.0
+      },
+      "test": {
+       "n": 614,
+       "mean": -0.3864,
+       "total": -237.24,
+       "gross": -0.0399,
+       "win": 0.262,
+       "max_dd": 237.92,
+       "lose_streak": 20,
+       "worst_day": -4.0,
+       "per_month": 19.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 315,
+       "mean": -0.448,
+       "total": -141.12,
+       "gross": -0.036,
+       "win": 0.222,
+       "max_dd": 145.45,
+       "lose_streak": 22,
+       "worst_day": -3.48,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 172,
+       "mean": -0.3722,
+       "total": -64.02,
+       "gross": 0.0203,
+       "win": 0.244,
+       "max_dd": 67.24,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.4
+      }
+     }
+    }
+   },
+   "paired_lb": -0.004709018210572461,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "5 still rising",
+   "variant": "off the high <= 50 %",
+   "stats": {
+    "train": {
+     "n": 2283,
+     "mean": -0.3999,
+     "total": -912.9,
+     "gross": -0.0121,
+     "win": 0.243,
+     "max_dd": 922.58,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.0
+    },
+    "test": {
+     "n": 1511,
+     "mean": -0.473,
+     "total": -714.65,
+     "gross": -0.1068,
+     "win": 0.232,
+     "max_dd": 714.65,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.2
+    },
+    "years": {
+     "2024": {
+      "n": 518,
+      "mean": -0.4861,
+      "total": -251.82,
+      "gross": -0.1146,
+      "win": 0.237,
+      "max_dd": 261.06,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.2
+     },
+     "2025": {
+      "n": 611,
+      "mean": -0.4754,
+      "total": -290.48,
+      "gross": -0.1121,
+      "win": 0.227,
+      "max_dd": 290.48,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.9
+     },
+     "2026": {
+      "n": 382,
+      "mean": -0.4512,
+      "total": -172.35,
+      "gross": -0.0877,
+      "win": 0.233,
+      "max_dd": 177.18,
+      "lose_streak": 19,
+      "worst_day": -4.78,
+      "per_month": 47.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 847,
+       "mean": -0.4419,
+       "total": -374.29,
+       "gross": -0.0283,
+       "win": 0.241,
+       "max_dd": 380.96,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.5
+      },
+      "test": {
+       "n": 725,
+       "mean": -0.5651,
+       "total": -409.67,
+       "gross": -0.1888,
+       "win": 0.207,
+       "max_dd": 409.67,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.7
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1120,
+       "mean": -0.3535,
+       "total": -395.93,
+       "gross": 0.0079,
+       "win": 0.251,
+       "max_dd": 401.69,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 12.0
+      },
+      "test": {
+       "n": 615,
+       "mean": -0.3882,
+       "total": -238.72,
+       "gross": -0.0417,
+       "win": 0.26,
+       "max_dd": 239.4,
+       "lose_streak": 20,
+       "worst_day": -4.0,
+       "per_month": 19.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 316,
+       "mean": -0.4515,
+       "total": -142.68,
+       "gross": -0.0394,
+       "win": 0.222,
+       "max_dd": 147.01,
+       "lose_streak": 22,
+       "worst_day": -3.48,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 171,
+       "mean": -0.3875,
+       "total": -66.26,
+       "gross": 0.0072,
+       "win": 0.24,
+       "max_dd": 69.48,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.3
+      }
+     }
+    }
+   },
+   "paired_lb": -0.008396666928275856,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "5 still rising",
+   "variant": "off",
+   "stats": {
+    "train": {
+     "n": 2286,
+     "mean": -0.398,
+     "total": -909.85,
+     "gross": -0.0104,
+     "win": 0.244,
+     "max_dd": 919.53,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.1
+    },
+    "test": {
+     "n": 1511,
+     "mean": -0.473,
+     "total": -714.65,
+     "gross": -0.1068,
+     "win": 0.232,
+     "max_dd": 714.65,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.2
+    },
+    "years": {
+     "2024": {
+      "n": 518,
+      "mean": -0.4861,
+      "total": -251.82,
+      "gross": -0.1146,
+      "win": 0.237,
+      "max_dd": 261.06,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.2
+     },
+     "2025": {
+      "n": 611,
+      "mean": -0.4754,
+      "total": -290.48,
+      "gross": -0.1121,
+      "win": 0.227,
+      "max_dd": 290.48,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.9
+     },
+     "2026": {
+      "n": 382,
+      "mean": -0.4512,
+      "total": -172.35,
+      "gross": -0.0877,
+      "win": 0.233,
+      "max_dd": 177.18,
+      "lose_streak": 19,
+      "worst_day": -4.78,
+      "per_month": 47.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 848,
+       "mean": -0.4411,
+       "total": -374.07,
+       "gross": -0.0277,
+       "win": 0.242,
+       "max_dd": 380.74,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.5
+      },
+      "test": {
+       "n": 725,
+       "mean": -0.5651,
+       "total": -409.67,
+       "gross": -0.1888,
+       "win": 0.207,
+       "max_dd": 409.67,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.7
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1122,
+       "mean": -0.3504,
+       "total": -393.1,
+       "gross": 0.0108,
+       "win": 0.251,
+       "max_dd": 398.86,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 12.1
+      },
+      "test": {
+       "n": 615,
+       "mean": -0.3882,
+       "total": -238.72,
+       "gross": -0.0417,
+       "win": 0.26,
+       "max_dd": 239.4,
+       "lose_streak": 20,
+       "worst_day": -4.0,
+       "per_month": 19.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 316,
+       "mean": -0.4515,
+       "total": -142.68,
+       "gross": -0.0394,
+       "win": 0.222,
+       "max_dd": 147.01,
+       "lose_streak": 22,
+       "worst_day": -3.48,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 171,
+       "mean": -0.3875,
+       "total": -66.26,
+       "gross": 0.0072,
+       "win": 0.24,
+       "max_dd": 69.48,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.3
+      }
+     }
+    }
+   },
+   "paired_lb": -0.008396666928275856,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E1 window",
+   "variant": "start 08:00",
+   "stats": {
+    "train": {
+     "n": 2053,
+     "mean": -0.404,
+     "total": -829.33,
+     "gross": -0.0158,
+     "win": 0.24,
+     "max_dd": 835.07,
+     "lose_streak": 24,
+     "worst_day": -4.85,
+     "per_month": 21.6
+    },
+    "test": {
+     "n": 1335,
+     "mean": -0.436,
+     "total": -582.02,
+     "gross": -0.0695,
+     "win": 0.242,
+     "max_dd": 582.02,
+     "lose_streak": 19,
+     "worst_day": -11.82,
+     "per_month": 41.7
+    },
+    "years": {
+     "2024": {
+      "n": 447,
+      "mean": -0.4402,
+      "total": -196.76,
+      "gross": -0.0684,
+      "win": 0.246,
+      "max_dd": 200.3,
+      "lose_streak": 16,
+      "worst_day": -4.51,
+      "per_month": 37.2
+     },
+     "2025": {
+      "n": 547,
+      "mean": -0.4465,
+      "total": -244.25,
+      "gross": -0.087,
+      "win": 0.23,
+      "max_dd": 244.25,
+      "lose_streak": 19,
+      "worst_day": -11.82,
+      "per_month": 45.6
+     },
+     "2026": {
+      "n": 341,
+      "mean": -0.4135,
+      "total": -141.01,
+      "gross": -0.0427,
+      "win": 0.255,
+      "max_dd": 145.84,
+      "lose_streak": 14,
+      "worst_day": -4.78,
+      "per_month": 42.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 569,
+       "mean": -0.4457,
+       "total": -253.61,
+       "gross": -0.0175,
+       "win": 0.243,
+       "max_dd": 254.53,
+       "lose_streak": 18,
+       "worst_day": -4.57,
+       "per_month": 7.3
+      },
+      "test": {
+       "n": 470,
+       "mean": -0.5348,
+       "total": -251.34,
+       "gross": -0.1514,
+       "win": 0.213,
+       "max_dd": 251.34,
+       "lose_streak": 18,
+       "worst_day": -11.82,
+       "per_month": 14.7
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1153,
+       "mean": -0.3712,
+       "total": -428.03,
+       "gross": -0.0097,
+       "win": 0.246,
+       "max_dd": 433.79,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 12.4
+      },
+      "test": {
+       "n": 669,
+       "mean": -0.392,
+       "total": -262.25,
+       "gross": -0.0455,
+       "win": 0.262,
+       "max_dd": 262.25,
+       "lose_streak": 14,
+       "worst_day": -4.0,
+       "per_month": 20.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 331,
+       "mean": -0.4462,
+       "total": -147.69,
+       "gross": -0.0342,
+       "win": 0.215,
+       "max_dd": 152.02,
+       "lose_streak": 28,
+       "worst_day": -3.48,
+       "per_month": 4.0
+      },
+      "test": {
+       "n": 196,
+       "mean": -0.3491,
+       "total": -68.43,
+       "gross": 0.0452,
+       "win": 0.245,
+       "max_dd": 71.65,
+       "lose_streak": 12,
+       "worst_day": -3.23,
+       "per_month": 6.1
+      }
+     }
+    }
+   },
+   "paired_lb": -0.002480030528586517,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E1 window",
+   "variant": "start 09:30",
+   "stats": {
+    "train": {
+     "n": 1576,
+     "mean": -0.3885,
+     "total": -612.33,
+     "gross": -0.0155,
+     "win": 0.239,
+     "max_dd": 618.07,
+     "lose_streak": 22,
+     "worst_day": -4.78,
+     "per_month": 16.6
+    },
+    "test": {
+     "n": 956,
+     "mean": -0.3832,
+     "total": -366.36,
+     "gross": -0.0243,
+     "win": 0.256,
+     "max_dd": 367.76,
+     "lose_streak": 14,
+     "worst_day": -6.9,
+     "per_month": 29.9
+    },
+    "years": {
+     "2024": {
+      "n": 325,
+      "mean": -0.3594,
+      "total": -116.8,
+      "gross": 0.0078,
+      "win": 0.255,
+      "max_dd": 123.59,
+      "lose_streak": 13,
+      "worst_day": -4.91,
+      "per_month": 27.1
+     },
+     "2025": {
+      "n": 399,
+      "mean": -0.4074,
+      "total": -162.55,
+      "gross": -0.0588,
+      "win": 0.243,
+      "max_dd": 162.55,
+      "lose_streak": 14,
+      "worst_day": -6.9,
+      "per_month": 33.2
+     },
+     "2026": {
+      "n": 232,
+      "mean": -0.3751,
+      "total": -87.02,
+      "gross": -0.0098,
+      "win": 0.28,
+      "max_dd": 93.11,
+      "lose_streak": 8,
+      "worst_day": -4.0,
+      "per_month": 29.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 0
+      },
+      "test": {
+       "n": 0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1211,
+       "mean": -0.3775,
+       "total": -457.11,
+       "gross": -0.0163,
+       "win": 0.244,
+       "max_dd": 462.87,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 13.0
+      },
+      "test": {
+       "n": 725,
+       "mean": -0.3973,
+       "total": -288.04,
+       "gross": -0.0476,
+       "win": 0.254,
+       "max_dd": 288.04,
+       "lose_streak": 14,
+       "worst_day": -4.0,
+       "per_month": 22.7
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 365,
+       "mean": -0.4253,
+       "total": -155.22,
+       "gross": -0.0128,
+       "win": 0.225,
+       "max_dd": 159.43,
+       "lose_streak": 26,
+       "worst_day": -3.48,
+       "per_month": 4.3
+      },
+      "test": {
+       "n": 231,
+       "mean": -0.3391,
+       "total": -78.33,
+       "gross": 0.0491,
+       "win": 0.264,
+       "max_dd": 82.83,
+       "lose_streak": 14,
+       "worst_day": -4.94,
+       "per_month": 7.2
+      }
+     }
+    }
+   },
+   "paired_lb": 0.0038433638493397984,
+   "verdict": "ADOPT",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": true,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E1 window",
+   "variant": "end 10:30",
+   "stats": {
+    "train": {
+     "n": 1935,
+     "mean": -0.4064,
+     "total": -786.43,
+     "gross": -0.0212,
+     "win": 0.243,
+     "max_dd": 795.45,
+     "lose_streak": 22,
+     "worst_day": -5.44,
+     "per_month": 20.8
+    },
+    "test": {
+     "n": 1324,
+     "mean": -0.49,
+     "total": -648.81,
+     "gross": -0.1263,
+     "win": 0.231,
+     "max_dd": 648.81,
+     "lose_streak": 21,
+     "worst_day": -12.03,
+     "per_month": 41.4
+    },
+    "years": {
+     "2024": {
+      "n": 454,
+      "mean": -0.5248,
+      "total": -238.26,
+      "gross": -0.1553,
+      "win": 0.233,
+      "max_dd": 240.07,
+      "lose_streak": 15,
+      "worst_day": -5.35,
+      "per_month": 37.8
+     },
+     "2025": {
+      "n": 533,
+      "mean": -0.4805,
+      "total": -256.13,
+      "gross": -0.1201,
+      "win": 0.227,
+      "max_dd": 256.13,
+      "lose_streak": 21,
+      "worst_day": -12.03,
+      "per_month": 44.4
+     },
+     "2026": {
+      "n": 337,
+      "mean": -0.4582,
+      "total": -154.42,
+      "gross": -0.0969,
+      "win": 0.234,
+      "max_dd": 159.25,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 42.1
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.444,
+       "total": -370.73,
+       "gross": -0.0295,
+       "win": 0.242,
+       "max_dd": 377.4,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5747,
+       "total": -409.78,
+       "gross": -0.1975,
+       "win": 0.205,
+       "max_dd": 409.78,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3779,
+       "total": -415.7,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 421.46,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 0
+      },
+      "test": {
+       "n": 0
+      }
+     }
+    }
+   },
+   "paired_lb": -0.0498922258754794,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E1 window",
+   "variant": "end 11:00",
+   "stats": {
+    "train": {
+     "n": 2141,
+     "mean": -0.4087,
+     "total": -875.1,
+     "gross": -0.0212,
+     "win": 0.241,
+     "max_dd": 885.07,
+     "lose_streak": 30,
+     "worst_day": -5.44,
+     "per_month": 22.5
+    },
+    "test": {
+     "n": 1433,
+     "mean": -0.4794,
+     "total": -686.94,
+     "gross": -0.1127,
+     "win": 0.232,
+     "max_dd": 686.94,
+     "lose_streak": 22,
+     "worst_day": -12.03,
+     "per_month": 44.8
+    },
+    "years": {
+     "2024": {
+      "n": 491,
+      "mean": -0.4861,
+      "total": -238.69,
+      "gross": -0.1161,
+      "win": 0.24,
+      "max_dd": 243.93,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 40.9
+     },
+     "2025": {
+      "n": 582,
+      "mean": -0.4754,
+      "total": -276.67,
+      "gross": -0.1122,
+      "win": 0.227,
+      "max_dd": 276.67,
+      "lose_streak": 22,
+      "worst_day": -12.03,
+      "per_month": 48.5
+     },
+     "2026": {
+      "n": 360,
+      "mean": -0.4766,
+      "total": -171.58,
+      "gross": -0.1087,
+      "win": 0.231,
+      "max_dd": 176.41,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 45.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.444,
+       "total": -370.73,
+       "gross": -0.0295,
+       "win": 0.242,
+       "max_dd": 377.4,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5747,
+       "total": -409.78,
+       "gross": -0.1975,
+       "win": 0.205,
+       "max_dd": 409.78,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3779,
+       "total": -415.7,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 421.46,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 206,
+       "mean": -0.4304,
+       "total": -88.67,
+       "gross": -0.0204,
+       "win": 0.228,
+       "max_dd": 96.47,
+       "lose_streak": 14,
+       "worst_day": -2.43,
+       "per_month": 2.7
+      },
+      "test": {
+       "n": 109,
+       "mean": -0.3498,
+       "total": -38.13,
+       "gross": 0.0523,
+       "win": 0.248,
+       "max_dd": 39.46,
+       "lose_streak": 13,
+       "worst_day": -3.23,
+       "per_month": 3.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.02099653883942638,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E1 window",
+   "variant": "end 11:30 (no A8 buffer)",
+   "stats": {
+    "train": {
+     "n": 2287,
+     "mean": -0.4146,
+     "total": -948.27,
+     "gross": -0.0245,
+     "win": 0.237,
+     "max_dd": 957.95,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.1
+    },
+    "test": {
+     "n": 1523,
+     "mean": -0.4734,
+     "total": -721.03,
+     "gross": -0.1062,
+     "win": 0.235,
+     "max_dd": 721.03,
+     "lose_streak": 17,
+     "worst_day": -12.03,
+     "per_month": 47.6
+    },
+    "years": {
+     "2024": {
+      "n": 524,
+      "mean": -0.481,
+      "total": -252.07,
+      "gross": -0.1089,
+      "win": 0.239,
+      "max_dd": 257.23,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.7
+     },
+     "2025": {
+      "n": 619,
+      "mean": -0.4748,
+      "total": -293.92,
+      "gross": -0.1118,
+      "win": 0.233,
+      "max_dd": 293.92,
+      "lose_streak": 15,
+      "worst_day": -12.03,
+      "per_month": 51.6
+     },
+     "2026": {
+      "n": 380,
+      "mean": -0.4606,
+      "total": -175.04,
+      "gross": -0.0934,
+      "win": 0.234,
+      "max_dd": 179.87,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 47.5
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.444,
+       "total": -370.73,
+       "gross": -0.0295,
+       "win": 0.242,
+       "max_dd": 377.4,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5747,
+       "total": -409.78,
+       "gross": -0.1975,
+       "win": 0.205,
+       "max_dd": 409.78,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3779,
+       "total": -415.7,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 421.46,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 352,
+       "mean": -0.4598,
+       "total": -161.84,
+       "gross": -0.0423,
+       "win": 0.207,
+       "max_dd": 164.13,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 4.2
+      },
+      "test": {
+       "n": 199,
+       "mean": -0.3629,
+       "total": -72.22,
+       "gross": 0.0272,
+       "win": 0.261,
+       "max_dd": 74.18,
+       "lose_streak": 11,
+       "worst_day": -3.23,
+       "per_month": 6.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.007306033579328589,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E2 stop floor",
+   "variant": "off",
+   "stats": {
+    "train": {
+     "n": 2358,
+     "mean": -0.4225,
+     "total": -996.17,
+     "gross": -0.0192,
+     "win": 0.239,
+     "max_dd": 1003.31,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 24.8
+    },
+    "test": {
+     "n": 1528,
+     "mean": -0.4876,
+     "total": -745.01,
+     "gross": -0.1108,
+     "win": 0.23,
+     "max_dd": 745.01,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.8
+    },
+    "years": {
+     "2024": {
+      "n": 525,
+      "mean": -0.4937,
+      "total": -259.2,
+      "gross": -0.1118,
+      "win": 0.24,
+      "max_dd": 263.07,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.8
+     },
+     "2025": {
+      "n": 621,
+      "mean": -0.4873,
+      "total": -302.63,
+      "gross": -0.1138,
+      "win": 0.224,
+      "max_dd": 302.63,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 51.8
+     },
+     "2026": {
+      "n": 382,
+      "mean": -0.4795,
+      "total": -183.17,
+      "gross": -0.1044,
+      "win": 0.228,
+      "max_dd": 188.0,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 47.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 849,
+       "mean": -0.4367,
+       "total": -370.74,
+       "gross": -0.0206,
+       "win": 0.243,
+       "max_dd": 377.41,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.5
+      },
+      "test": {
+       "n": 718,
+       "mean": -0.5767,
+       "total": -414.05,
+       "gross": -0.1983,
+       "win": 0.203,
+       "max_dd": 414.05,
+       "lose_streak": 21,
+       "worst_day": -12.03,
+       "per_month": 22.4
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1168,
+       "mean": -0.3983,
+       "total": -465.27,
+       "gross": -0.0158,
+       "win": 0.241,
+       "max_dd": 470.38,
+       "lose_streak": 22,
+       "worst_day": -4.64,
+       "per_month": 12.3
+      },
+      "test": {
+       "n": 633,
+       "mean": -0.395,
+       "total": -250.03,
+       "gross": -0.0311,
+       "win": 0.267,
+       "max_dd": 250.72,
+       "lose_streak": 17,
+       "worst_day": -4.16,
+       "per_month": 19.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 341,
+       "mean": -0.4697,
+       "total": -160.16,
+       "gross": -0.0276,
+       "win": 0.223,
+       "max_dd": 163.17,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 4.0
+      },
+      "test": {
+       "n": 177,
+       "mean": -0.4572,
+       "total": -80.92,
+       "gross": -0.0404,
+       "win": 0.209,
+       "max_dd": 84.14,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 5.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.031125006704317615,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E2 stop floor",
+   "variant": "1 %",
+   "stats": {
+    "train": {
+     "n": 2358,
+     "mean": -0.4225,
+     "total": -996.17,
+     "gross": -0.0192,
+     "win": 0.239,
+     "max_dd": 1003.31,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 24.8
+    },
+    "test": {
+     "n": 1528,
+     "mean": -0.4876,
+     "total": -745.01,
+     "gross": -0.1108,
+     "win": 0.23,
+     "max_dd": 745.01,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.8
+    },
+    "years": {
+     "2024": {
+      "n": 525,
+      "mean": -0.4937,
+      "total": -259.2,
+      "gross": -0.1118,
+      "win": 0.24,
+      "max_dd": 263.07,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.8
+     },
+     "2025": {
+      "n": 621,
+      "mean": -0.4873,
+      "total": -302.63,
+      "gross": -0.1138,
+      "win": 0.224,
+      "max_dd": 302.63,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 51.8
+     },
+     "2026": {
+      "n": 382,
+      "mean": -0.4795,
+      "total": -183.17,
+      "gross": -0.1044,
+      "win": 0.228,
+      "max_dd": 188.0,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 47.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 849,
+       "mean": -0.4367,
+       "total": -370.74,
+       "gross": -0.0206,
+       "win": 0.243,
+       "max_dd": 377.41,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.5
+      },
+      "test": {
+       "n": 718,
+       "mean": -0.5767,
+       "total": -414.05,
+       "gross": -0.1983,
+       "win": 0.203,
+       "max_dd": 414.05,
+       "lose_streak": 21,
+       "worst_day": -12.03,
+       "per_month": 22.4
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1168,
+       "mean": -0.3983,
+       "total": -465.27,
+       "gross": -0.0158,
+       "win": 0.241,
+       "max_dd": 470.38,
+       "lose_streak": 22,
+       "worst_day": -4.64,
+       "per_month": 12.3
+      },
+      "test": {
+       "n": 633,
+       "mean": -0.395,
+       "total": -250.03,
+       "gross": -0.0311,
+       "win": 0.267,
+       "max_dd": 250.72,
+       "lose_streak": 17,
+       "worst_day": -4.16,
+       "per_month": 19.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 341,
+       "mean": -0.4697,
+       "total": -160.16,
+       "gross": -0.0276,
+       "win": 0.223,
+       "max_dd": 163.17,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 4.0
+      },
+      "test": {
+       "n": 177,
+       "mean": -0.4572,
+       "total": -80.92,
+       "gross": -0.0404,
+       "win": 0.209,
+       "max_dd": 84.14,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 5.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.031125006704317615,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E2 stop floor",
+   "variant": "1.5 %",
+   "stats": {
+    "train": {
+     "n": 2358,
+     "mean": -0.4225,
+     "total": -996.17,
+     "gross": -0.0192,
+     "win": 0.239,
+     "max_dd": 1003.31,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 24.8
+    },
+    "test": {
+     "n": 1528,
+     "mean": -0.4876,
+     "total": -745.01,
+     "gross": -0.1108,
+     "win": 0.23,
+     "max_dd": 745.01,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 47.8
+    },
+    "years": {
+     "2024": {
+      "n": 525,
+      "mean": -0.4937,
+      "total": -259.2,
+      "gross": -0.1118,
+      "win": 0.24,
+      "max_dd": 263.07,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 43.8
+     },
+     "2025": {
+      "n": 621,
+      "mean": -0.4873,
+      "total": -302.63,
+      "gross": -0.1138,
+      "win": 0.224,
+      "max_dd": 302.63,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 51.8
+     },
+     "2026": {
+      "n": 382,
+      "mean": -0.4795,
+      "total": -183.17,
+      "gross": -0.1044,
+      "win": 0.228,
+      "max_dd": 188.0,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 47.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 849,
+       "mean": -0.4367,
+       "total": -370.74,
+       "gross": -0.0206,
+       "win": 0.243,
+       "max_dd": 377.41,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.5
+      },
+      "test": {
+       "n": 718,
+       "mean": -0.5767,
+       "total": -414.05,
+       "gross": -0.1983,
+       "win": 0.203,
+       "max_dd": 414.05,
+       "lose_streak": 21,
+       "worst_day": -12.03,
+       "per_month": 22.4
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1168,
+       "mean": -0.3983,
+       "total": -465.27,
+       "gross": -0.0158,
+       "win": 0.241,
+       "max_dd": 470.38,
+       "lose_streak": 22,
+       "worst_day": -4.64,
+       "per_month": 12.3
+      },
+      "test": {
+       "n": 633,
+       "mean": -0.395,
+       "total": -250.03,
+       "gross": -0.0311,
+       "win": 0.267,
+       "max_dd": 250.72,
+       "lose_streak": 17,
+       "worst_day": -4.16,
+       "per_month": 19.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 341,
+       "mean": -0.4697,
+       "total": -160.16,
+       "gross": -0.0276,
+       "win": 0.223,
+       "max_dd": 163.17,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 4.0
+      },
+      "test": {
+       "n": 177,
+       "mean": -0.4572,
+       "total": -80.92,
+       "gross": -0.0404,
+       "win": 0.209,
+       "max_dd": 84.14,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 5.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.031125006704317615,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E2 stop floor",
+   "variant": "3 %",
+   "stats": {
+    "train": {
+     "n": 1289,
+     "mean": -0.282,
+     "total": -363.55,
+     "gross": 0.0215,
+     "win": 0.268,
+     "max_dd": 375.55,
+     "lose_streak": 16,
+     "worst_day": -5.32,
+     "per_month": 14.0
+    },
+    "test": {
+     "n": 995,
+     "mean": -0.3865,
+     "total": -384.58,
+     "gross": -0.1017,
+     "win": 0.243,
+     "max_dd": 384.58,
+     "lose_streak": 24,
+     "worst_day": -4.76,
+     "per_month": 31.1
+    },
+    "years": {
+     "2024": {
+      "n": 330,
+      "mean": -0.401,
+      "total": -132.34,
+      "gross": -0.119,
+      "win": 0.248,
+      "max_dd": 132.34,
+      "lose_streak": 12,
+      "worst_day": -4.76,
+      "per_month": 27.5
+     },
+     "2025": {
+      "n": 403,
+      "mean": -0.3883,
+      "total": -156.49,
+      "gross": -0.1041,
+      "win": 0.233,
+      "max_dd": 156.49,
+      "lose_streak": 19,
+      "worst_day": -4.39,
+      "per_month": 33.6
+     },
+     "2026": {
+      "n": 262,
+      "mean": -0.3655,
+      "total": -95.75,
+      "gross": -0.0763,
+      "win": 0.252,
+      "max_dd": 95.75,
+      "lose_streak": 11,
+      "worst_day": -3.87,
+      "per_month": 32.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 424,
+       "mean": -0.3239,
+       "total": -137.32,
+       "gross": 0.0019,
+       "win": 0.264,
+       "max_dd": 142.92,
+       "lose_streak": 30,
+       "worst_day": -5.32,
+       "per_month": 5.9
+      },
+      "test": {
+       "n": 457,
+       "mean": -0.4707,
+       "total": -215.13,
+       "gross": -0.1823,
+       "win": 0.217,
+       "max_dd": 215.13,
+       "lose_streak": 18,
+       "worst_day": -4.76,
+       "per_month": 14.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 722,
+       "mean": -0.2616,
+       "total": -188.85,
+       "gross": 0.0303,
+       "win": 0.273,
+       "max_dd": 195.65,
+       "lose_streak": 15,
+       "worst_day": -3.54,
+       "per_month": 7.8
+      },
+      "test": {
+       "n": 433,
+       "mean": -0.3379,
+       "total": -146.29,
+       "gross": -0.0567,
+       "win": 0.259,
+       "max_dd": 148.27,
+       "lose_streak": 11,
+       "worst_day": -3.63,
+       "per_month": 13.5
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 143,
+       "mean": -0.2614,
+       "total": -37.39,
+       "gross": 0.035,
+       "win": 0.252,
+       "max_dd": 41.15,
+       "lose_streak": 20,
+       "worst_day": -1.97,
+       "per_month": 2.3
+      },
+      "test": {
+       "n": 105,
+       "mean": -0.2205,
+       "total": -23.15,
+       "gross": 0.0631,
+       "win": 0.295,
+       "max_dd": 27.66,
+       "lose_streak": 10,
+       "worst_day": -1.76,
+       "per_month": 3.4
+      }
+     }
+    }
+   },
+   "paired_lb": 0.010134296726092644,
+   "verdict": "ADOPT",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": true,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E3 stop vs spread",
+   "variant": "off",
+   "stats": {
+    "train": {
+     "n": 2595,
+     "mean": -0.456,
+     "total": -1183.2,
+     "gross": -0.0148,
+     "win": 0.239,
+     "max_dd": 1187.44,
+     "lose_streak": 25,
+     "worst_day": -5.44,
+     "per_month": 27.3
+    },
+    "test": {
+     "n": 1678,
+     "mean": -0.4976,
+     "total": -835.04,
+     "gross": -0.0769,
+     "win": 0.225,
+     "max_dd": 835.04,
+     "lose_streak": 23,
+     "worst_day": -12.03,
+     "per_month": 52.4
+    },
+    "years": {
+     "2024": {
+      "n": 583,
+      "mean": -0.4942,
+      "total": -288.14,
+      "gross": -0.0609,
+      "win": 0.238,
+      "max_dd": 288.27,
+      "lose_streak": 18,
+      "worst_day": -5.35,
+      "per_month": 48.6
+     },
+     "2025": {
+      "n": 668,
+      "mean": -0.4904,
+      "total": -327.62,
+      "gross": -0.0797,
+      "win": 0.219,
+      "max_dd": 327.62,
+      "lose_streak": 15,
+      "worst_day": -12.03,
+      "per_month": 55.7
+     },
+     "2026": {
+      "n": 427,
+      "mean": -0.5135,
+      "total": -219.28,
+      "gross": -0.0945,
+      "win": 0.215,
+      "max_dd": 224.11,
+      "lose_streak": 23,
+      "worst_day": -5.34,
+      "per_month": 53.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 1133,
+       "mean": -0.4968,
+       "total": -562.91,
+       "gross": -0.0043,
+       "win": 0.239,
+       "max_dd": 567.67,
+       "lose_streak": 19,
+       "worst_day": -5.44,
+       "per_month": 12.5
+      },
+      "test": {
+       "n": 827,
+       "mean": -0.5672,
+       "total": -469.07,
+       "gross": -0.1355,
+       "win": 0.207,
+       "max_dd": 469.07,
+       "lose_streak": 26,
+       "worst_day": -12.03,
+       "per_month": 25.8
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1136,
+       "mean": -0.4037,
+       "total": -458.63,
+       "gross": -0.0145,
+       "win": 0.244,
+       "max_dd": 464.39,
+       "lose_streak": 26,
+       "worst_day": -4.39,
+       "per_month": 12.2
+      },
+      "test": {
+       "n": 672,
+       "mean": -0.4342,
+       "total": -291.79,
+       "gross": -0.0364,
+       "win": 0.246,
+       "max_dd": 291.79,
+       "lose_streak": 22,
+       "worst_day": -5.2,
+       "per_month": 21.0
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 326,
+       "mean": -0.4959,
+       "total": -161.65,
+       "gross": -0.052,
+       "win": 0.218,
+       "max_dd": 163.63,
+       "lose_streak": 20,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 179,
+       "mean": -0.4144,
+       "total": -74.17,
+       "gross": 0.0415,
+       "win": 0.229,
+       "max_dd": 76.18,
+       "lose_streak": 14,
+       "worst_day": -3.23,
+       "per_month": 5.6
+      }
+     }
+    }
+   },
+   "paired_lb": -0.06746630716790816,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E3 stop vs spread",
+   "variant": "2x",
+   "stats": {
+    "train": {
+     "n": 2574,
+     "mean": -0.4469,
+     "total": -1150.25,
+     "gross": -0.0116,
+     "win": 0.24,
+     "max_dd": 1158.17,
+     "lose_streak": 25,
+     "worst_day": -5.44,
+     "per_month": 27.1
+    },
+    "test": {
+     "n": 1652,
+     "mean": -0.489,
+     "total": -807.8,
+     "gross": -0.0791,
+     "win": 0.227,
+     "max_dd": 807.8,
+     "lose_streak": 21,
+     "worst_day": -12.03,
+     "per_month": 51.6
+    },
+    "years": {
+     "2024": {
+      "n": 575,
+      "mean": -0.4734,
+      "total": -272.19,
+      "gross": -0.05,
+      "win": 0.242,
+      "max_dd": 272.31,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 47.9
+     },
+     "2025": {
+      "n": 657,
+      "mean": -0.4952,
+      "total": -325.35,
+      "gross": -0.0934,
+      "win": 0.219,
+      "max_dd": 325.35,
+      "lose_streak": 20,
+      "worst_day": -12.03,
+      "per_month": 54.8
+     },
+     "2026": {
+      "n": 420,
+      "mean": -0.5006,
+      "total": -210.27,
+      "gross": -0.0966,
+      "win": 0.219,
+      "max_dd": 215.1,
+      "lose_streak": 21,
+      "worst_day": -4.78,
+      "per_month": 52.5
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 1115,
+       "mean": -0.4854,
+       "total": -541.26,
+       "gross": -0.0018,
+       "win": 0.241,
+       "max_dd": 546.02,
+       "lose_streak": 19,
+       "worst_day": -5.44,
+       "per_month": 12.5
+      },
+      "test": {
+       "n": 809,
+       "mean": -0.5615,
+       "total": -454.26,
+       "gross": -0.1448,
+       "win": 0.209,
+       "max_dd": 454.26,
+       "lose_streak": 24,
+       "worst_day": -12.03,
+       "per_month": 25.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1135,
+       "mean": -0.4006,
+       "total": -454.66,
+       "gross": -0.0129,
+       "win": 0.245,
+       "max_dd": 460.42,
+       "lose_streak": 26,
+       "worst_day": -4.39,
+       "per_month": 12.2
+      },
+      "test": {
+       "n": 667,
+       "mean": -0.4216,
+       "total": -281.23,
+       "gross": -0.0304,
+       "win": 0.249,
+       "max_dd": 281.23,
+       "lose_streak": 21,
+       "worst_day": -4.29,
+       "per_month": 20.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 324,
+       "mean": -0.4763,
+       "total": -154.33,
+       "gross": -0.0404,
+       "win": 0.222,
+       "max_dd": 156.62,
+       "lose_streak": 20,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 176,
+       "mean": -0.4108,
+       "total": -72.3,
+       "gross": 0.0385,
+       "win": 0.227,
+       "max_dd": 74.99,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 5.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.05450024434326,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E3 stop vs spread",
+   "variant": "3x",
+   "stats": {
+    "train": {
+     "n": 2374,
+     "mean": -0.4114,
+     "total": -976.76,
+     "gross": -0.0145,
+     "win": 0.246,
+     "max_dd": 986.44,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 25.0
+    },
+    "test": {
+     "n": 1551,
+     "mean": -0.4739,
+     "total": -735.08,
+     "gross": -0.0997,
+     "win": 0.23,
+     "max_dd": 735.08,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 48.5
+    },
+    "years": {
+     "2024": {
+      "n": 537,
+      "mean": -0.4618,
+      "total": -248.01,
+      "gross": -0.0807,
+      "win": 0.242,
+      "max_dd": 258.75,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 44.8
+     },
+     "2025": {
+      "n": 626,
+      "mean": -0.4878,
+      "total": -305.36,
+      "gross": -0.1171,
+      "win": 0.219,
+      "max_dd": 305.36,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 52.2
+     },
+     "2026": {
+      "n": 388,
+      "mean": -0.4683,
+      "total": -181.71,
+      "gross": -0.0979,
+      "win": 0.229,
+      "max_dd": 186.54,
+      "lose_streak": 16,
+      "worst_day": -4.78,
+      "per_month": 48.5
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 945,
+       "mean": -0.4464,
+       "total": -421.81,
+       "gross": -0.0205,
+       "win": 0.246,
+       "max_dd": 428.47,
+       "lose_streak": 18,
+       "worst_day": -5.44,
+       "per_month": 11.1
+      },
+      "test": {
+       "n": 756,
+       "mean": -0.5689,
+       "total": -430.07,
+       "gross": -0.1847,
+       "win": 0.205,
+       "max_dd": 430.07,
+       "lose_streak": 22,
+       "worst_day": -12.03,
+       "per_month": 23.6
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1115,
+       "mean": -0.3734,
+       "total": -416.31,
+       "gross": -0.0058,
+       "win": 0.251,
+       "max_dd": 422.07,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 12.0
+      },
+      "test": {
+       "n": 627,
+       "mean": -0.3977,
+       "total": -249.36,
+       "gross": -0.0433,
+       "win": 0.25,
+       "max_dd": 250.04,
+       "lose_streak": 22,
+       "worst_day": -4.06,
+       "per_month": 19.6
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 314,
+       "mean": -0.4415,
+       "total": -138.64,
+       "gross": -0.0278,
+       "win": 0.229,
+       "max_dd": 142.97,
+       "lose_streak": 21,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.3313,
+       "total": -55.65,
+       "gross": 0.0724,
+       "win": 0.262,
+       "max_dd": 58.6,
+       "lose_streak": 13,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.021820294205553738,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E3 stop vs spread",
+   "variant": "6x",
+   "stats": {
+    "train": {
+     "n": 1376,
+     "mean": -0.3198,
+     "total": -440.1,
+     "gross": -0.0005,
+     "win": 0.261,
+     "max_dd": 449.67,
+     "lose_streak": 20,
+     "worst_day": -4.2,
+     "per_month": 14.8
+    },
+    "test": {
+     "n": 1018,
+     "mean": -0.398,
+     "total": -405.15,
+     "gross": -0.1045,
+     "win": 0.242,
+     "max_dd": 405.15,
+     "lose_streak": 24,
+     "worst_day": -4.76,
+     "per_month": 31.8
+    },
+    "years": {
+     "2024": {
+      "n": 338,
+      "mean": -0.4064,
+      "total": -137.35,
+      "gross": -0.1166,
+      "win": 0.243,
+      "max_dd": 141.39,
+      "lose_streak": 24,
+      "worst_day": -4.76,
+      "per_month": 28.2
+     },
+     "2025": {
+      "n": 410,
+      "mean": -0.3859,
+      "total": -158.22,
+      "gross": -0.0964,
+      "win": 0.239,
+      "max_dd": 158.22,
+      "lose_streak": 20,
+      "worst_day": -4.42,
+      "per_month": 34.2
+     },
+     "2026": {
+      "n": 270,
+      "mean": -0.4059,
+      "total": -109.59,
+      "gross": -0.1018,
+      "win": 0.244,
+      "max_dd": 109.59,
+      "lose_streak": 13,
+      "worst_day": -3.95,
+      "per_month": 33.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 381,
+       "mean": -0.3295,
+       "total": -125.54,
+       "gross": -0.0079,
+       "win": 0.265,
+       "max_dd": 131.17,
+       "lose_streak": 26,
+       "worst_day": -3.85,
+       "per_month": 5.9
+      },
+      "test": {
+       "n": 446,
+       "mean": -0.4766,
+       "total": -212.56,
+       "gross": -0.1902,
+       "win": 0.217,
+       "max_dd": 212.56,
+       "lose_streak": 20,
+       "worst_day": -4.76,
+       "per_month": 13.9
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 807,
+       "mean": -0.3187,
+       "total": -257.22,
+       "gross": -0.0038,
+       "win": 0.261,
+       "max_dd": 262.74,
+       "lose_streak": 20,
+       "worst_day": -3.71,
+       "per_month": 8.7
+      },
+      "test": {
+       "n": 454,
+       "mean": -0.369,
+       "total": -167.51,
+       "gross": -0.0719,
+       "win": 0.256,
+       "max_dd": 167.51,
+       "lose_streak": 15,
+       "worst_day": -3.63,
+       "per_month": 14.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 188,
+       "mean": -0.305,
+       "total": -57.34,
+       "gross": 0.0286,
+       "win": 0.25,
+       "max_dd": 59.32,
+       "lose_streak": 23,
+       "worst_day": -2.01,
+       "per_month": 2.8
+      },
+      "test": {
+       "n": 118,
+       "mean": -0.2125,
+       "total": -25.08,
+       "gross": 0.0938,
+       "win": 0.28,
+       "max_dd": 29.36,
+       "lose_streak": 17,
+       "worst_day": -1.76,
+       "per_month": 3.7
+      }
+     }
+    }
+   },
+   "paired_lb": 0.0012365071291278707,
+   "verdict": "ADOPT",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": true,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E6 positions",
+   "variant": "2 at once",
+   "stats": {
+    "train": {
+     "n": 2306,
+     "mean": -0.4119,
+     "total": -949.76,
+     "gross": -0.0223,
+     "win": 0.24,
+     "max_dd": 957.56,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.3
+    },
+    "test": {
+     "n": 1571,
+     "mean": -0.4815,
+     "total": -756.48,
+     "gross": -0.1159,
+     "win": 0.23,
+     "max_dd": 756.48,
+     "lose_streak": 28,
+     "worst_day": -12.03,
+     "per_month": 49.1
+    },
+    "years": {
+     "2024": {
+      "n": 531,
+      "mean": -0.5001,
+      "total": -265.58,
+      "gross": -0.1297,
+      "win": 0.234,
+      "max_dd": 271.02,
+      "lose_streak": 18,
+      "worst_day": -6.75,
+      "per_month": 44.2
+     },
+     "2025": {
+      "n": 647,
+      "mean": -0.4828,
+      "total": -312.37,
+      "gross": -0.1215,
+      "win": 0.226,
+      "max_dd": 313.58,
+      "lose_streak": 28,
+      "worst_day": -12.03,
+      "per_month": 53.9
+     },
+     "2026": {
+      "n": 393,
+      "mean": -0.4543,
+      "total": -178.54,
+      "gross": -0.088,
+      "win": 0.234,
+      "max_dd": 183.37,
+      "lose_streak": 16,
+      "worst_day": -4.78,
+      "per_month": 49.1
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 846,
+       "mean": -0.4456,
+       "total": -377.01,
+       "gross": -0.0306,
+       "win": 0.241,
+       "max_dd": 383.68,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 745,
+       "mean": -0.5842,
+       "total": -435.24,
+       "gross": -0.2078,
+       "win": 0.204,
+       "max_dd": 435.24,
+       "lose_streak": 22,
+       "worst_day": -12.03,
+       "per_month": 23.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1160,
+       "mean": -0.3796,
+       "total": -440.33,
+       "gross": -0.0154,
+       "win": 0.245,
+       "max_dd": 446.09,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 12.5
+      },
+      "test": {
+       "n": 665,
+       "mean": -0.3965,
+       "total": -263.68,
+       "gross": -0.05,
+       "win": 0.256,
+       "max_dd": 265.93,
+       "lose_streak": 16,
+       "worst_day": -4.73,
+       "per_month": 20.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 300,
+       "mean": -0.4414,
+       "total": -132.42,
+       "gross": -0.0261,
+       "win": 0.22,
+       "max_dd": 136.75,
+       "lose_streak": 21,
+       "worst_day": -3.48,
+       "per_month": 3.6
+      },
+      "test": {
+       "n": 161,
+       "mean": -0.3575,
+       "total": -57.56,
+       "gross": 0.0372,
+       "win": 0.248,
+       "max_dd": 60.73,
+       "lose_streak": 14,
+       "worst_day": -3.23,
+       "per_month": 5.0
+      }
+     }
+    }
+   },
+   "paired_lb": -0.03545778800994895,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E6 positions",
+   "variant": "no cap",
+   "stats": {
+    "train": {
+     "n": 2311,
+     "mean": -0.4134,
+     "total": -955.43,
+     "gross": -0.0243,
+     "win": 0.24,
+     "max_dd": 962.26,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.3
+    },
+    "test": {
+     "n": 1573,
+     "mean": -0.4809,
+     "total": -756.52,
+     "gross": -0.116,
+     "win": 0.229,
+     "max_dd": 756.52,
+     "lose_streak": 28,
+     "worst_day": -12.03,
+     "per_month": 49.2
+    },
+    "years": {
+     "2024": {
+      "n": 531,
+      "mean": -0.5001,
+      "total": -265.58,
+      "gross": -0.1297,
+      "win": 0.234,
+      "max_dd": 271.02,
+      "lose_streak": 18,
+      "worst_day": -6.75,
+      "per_month": 44.2
+     },
+     "2025": {
+      "n": 645,
+      "mean": -0.476,
+      "total": -307.01,
+      "gross": -0.1163,
+      "win": 0.223,
+      "max_dd": 308.22,
+      "lose_streak": 28,
+      "worst_day": -12.03,
+      "per_month": 53.8
+     },
+     "2026": {
+      "n": 397,
+      "mean": -0.4633,
+      "total": -183.94,
+      "gross": -0.0974,
+      "win": 0.232,
+      "max_dd": 188.77,
+      "lose_streak": 16,
+      "worst_day": -4.8,
+      "per_month": 49.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 846,
+       "mean": -0.4456,
+       "total": -377.01,
+       "gross": -0.0306,
+       "win": 0.241,
+       "max_dd": 383.68,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 744,
+       "mean": -0.5782,
+       "total": -430.19,
+       "gross": -0.2027,
+       "win": 0.203,
+       "max_dd": 430.19,
+       "lose_streak": 22,
+       "worst_day": -12.03,
+       "per_month": 23.2
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1169,
+       "mean": -0.3798,
+       "total": -443.94,
+       "gross": -0.016,
+       "win": 0.245,
+       "max_dd": 449.7,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 12.6
+      },
+      "test": {
+       "n": 669,
+       "mean": -0.404,
+       "total": -270.27,
+       "gross": -0.058,
+       "win": 0.253,
+       "max_dd": 272.53,
+       "lose_streak": 16,
+       "worst_day": -4.73,
+       "per_month": 20.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 296,
+       "mean": -0.4543,
+       "total": -134.48,
+       "gross": -0.0389,
+       "win": 0.216,
+       "max_dd": 139.34,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 3.6
+      },
+      "test": {
+       "n": 160,
+       "mean": -0.3504,
+       "total": -56.06,
+       "gross": 0.0443,
+       "win": 0.25,
+       "max_dd": 59.23,
+       "lose_streak": 14,
+       "worst_day": -3.23,
+       "per_month": 5.0
+      }
+     }
+    }
+   },
+   "paired_lb": -0.028382827422708874,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "all off",
+   "stats": {
+    "train": {
+     "n": 2472,
+     "mean": -0.4018,
+     "total": -993.22,
+     "gross": -0.0141,
+     "win": 0.242,
+     "max_dd": 1002.9,
+     "lose_streak": 24,
+     "worst_day": -10.32,
+     "per_month": 26.0
+    },
+    "test": {
+     "n": 1707,
+     "mean": -0.4655,
+     "total": -794.68,
+     "gross": -0.0986,
+     "win": 0.234,
+     "max_dd": 794.68,
+     "lose_streak": 16,
+     "worst_day": -13.4,
+     "per_month": 53.3
+    },
+    "years": {
+     "2024": {
+      "n": 571,
+      "mean": -0.4666,
+      "total": -266.44,
+      "gross": -0.0916,
+      "win": 0.24,
+      "max_dd": 275.81,
+      "lose_streak": 16,
+      "worst_day": -9.01,
+      "per_month": 47.6
+     },
+     "2025": {
+      "n": 704,
+      "mean": -0.4697,
+      "total": -330.69,
+      "gross": -0.109,
+      "win": 0.226,
+      "max_dd": 330.69,
+      "lose_streak": 16,
+      "worst_day": -13.4,
+      "per_month": 58.7
+     },
+     "2026": {
+      "n": 432,
+      "mean": -0.4573,
+      "total": -197.55,
+      "gross": -0.0906,
+      "win": 0.238,
+      "max_dd": 202.38,
+      "lose_streak": 15,
+      "worst_day": -7.4,
+      "per_month": 54.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 846,
+       "mean": -0.4445,
+       "total": -376.01,
+       "gross": -0.0299,
+       "win": 0.241,
+       "max_dd": 382.68,
+       "lose_streak": 17,
+       "worst_day": -6.86,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 732,
+       "mean": -0.5742,
+       "total": -420.31,
+       "gross": -0.1981,
+       "win": 0.204,
+       "max_dd": 420.31,
+       "lose_streak": 21,
+       "worst_day": -12.03,
+       "per_month": 22.9
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1215,
+       "mean": -0.3788,
+       "total": -460.28,
+       "gross": -0.0175,
+       "win": 0.244,
+       "max_dd": 466.04,
+       "lose_streak": 20,
+       "worst_day": -5.77,
+       "per_month": 13.1
+      },
+      "test": {
+       "n": 723,
+       "mean": -0.3923,
+       "total": -283.6,
+       "gross": -0.0422,
+       "win": 0.256,
+       "max_dd": 283.6,
+       "lose_streak": 14,
+       "worst_day": -4.38,
+       "per_month": 22.6
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 411,
+       "mean": -0.3818,
+       "total": -156.93,
+       "gross": 0.0283,
+       "win": 0.241,
+       "max_dd": 161.15,
+       "lose_streak": 17,
+       "worst_day": -3.95,
+       "per_month": 4.9
+      },
+      "test": {
+       "n": 252,
+       "mean": -0.3602,
+       "total": -90.77,
+       "gross": 0.0287,
+       "win": 0.258,
+       "max_dd": 95.27,
+       "lose_streak": 14,
+       "worst_day": -4.94,
+       "per_month": 7.9
+      }
+     }
+    }
+   },
+   "paired_lb": -0.018684652347143997,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": false
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "loss -2 R",
+   "stats": {
+    "train": {
+     "n": 2224,
+     "mean": -0.4096,
+     "total": -910.96,
+     "gross": -0.02,
+     "win": 0.241,
+     "max_dd": 920.64,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 23.4
+    },
+    "test": {
+     "n": 1471,
+     "mean": -0.4738,
+     "total": -696.93,
+     "gross": -0.1069,
+     "win": 0.233,
+     "max_dd": 696.93,
+     "lose_streak": 23,
+     "worst_day": -12.03,
+     "per_month": 46.0
+    },
+    "years": {
+     "2024": {
+      "n": 504,
+      "mean": -0.4913,
+      "total": -247.62,
+      "gross": -0.1183,
+      "win": 0.236,
+      "max_dd": 252.86,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.0
+     },
+     "2025": {
+      "n": 597,
+      "mean": -0.476,
+      "total": -284.17,
+      "gross": -0.1135,
+      "win": 0.228,
+      "max_dd": 284.17,
+      "lose_streak": 23,
+      "worst_day": -12.03,
+      "per_month": 49.8
+     },
+     "2026": {
+      "n": 370,
+      "mean": -0.4463,
+      "total": -165.15,
+      "gross": -0.0805,
+      "win": 0.238,
+      "max_dd": 169.98,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 46.2
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 831,
+       "mean": -0.4423,
+       "total": -367.52,
+       "gross": -0.0274,
+       "win": 0.243,
+       "max_dd": 374.19,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 705,
+       "mean": -0.5742,
+       "total": -404.83,
+       "gross": -0.1974,
+       "win": 0.203,
+       "max_dd": 404.83,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1085,
+       "mean": -0.3769,
+       "total": -408.91,
+       "gross": -0.0137,
+       "win": 0.243,
+       "max_dd": 414.67,
+       "lose_streak": 20,
+       "worst_day": -3.76,
+       "per_month": 11.7
+      },
+      "test": {
+       "n": 602,
+       "mean": -0.3818,
+       "total": -229.82,
+       "gross": -0.0334,
+       "win": 0.266,
+       "max_dd": 230.5,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 18.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 308,
+       "mean": -0.4368,
+       "total": -134.54,
+       "gross": -0.0224,
+       "win": 0.224,
+       "max_dd": 138.87,
+       "lose_streak": 23,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 164,
+       "mean": -0.3798,
+       "total": -62.28,
+       "gross": 0.0127,
+       "win": 0.244,
+       "max_dd": 65.51,
+       "lose_streak": 23,
+       "worst_day": -3.23,
+       "per_month": 5.1
+      }
+     }
+    }
+   },
+   "paired_lb": -0.006433991466527693,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "loss -4 R",
+   "stats": {
+    "train": {
+     "n": 2247,
+     "mean": -0.4116,
+     "total": -924.93,
+     "gross": -0.0224,
+     "win": 0.24,
+     "max_dd": 934.61,
+     "lose_streak": 24,
+     "worst_day": -6.23,
+     "per_month": 23.7
+    },
+    "test": {
+     "n": 1495,
+     "mean": -0.4778,
+     "total": -714.27,
+     "gross": -0.1105,
+     "win": 0.233,
+     "max_dd": 714.27,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 46.7
+    },
+    "years": {
+     "2024": {
+      "n": 513,
+      "mean": -0.4924,
+      "total": -252.62,
+      "gross": -0.119,
+      "win": 0.238,
+      "max_dd": 257.86,
+      "lose_streak": 17,
+      "worst_day": -5.5,
+      "per_month": 42.8
+     },
+     "2025": {
+      "n": 608,
+      "mean": -0.4798,
+      "total": -291.74,
+      "gross": -0.1173,
+      "win": 0.227,
+      "max_dd": 291.74,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.7
+     },
+     "2026": {
+      "n": 374,
+      "mean": -0.4543,
+      "total": -169.91,
+      "gross": -0.0877,
+      "win": 0.235,
+      "max_dd": 174.74,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 46.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 836,
+       "mean": -0.445,
+       "total": -372.05,
+       "gross": -0.0307,
+       "win": 0.242,
+       "max_dd": 378.72,
+       "lose_streak": 17,
+       "worst_day": -6.23,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 714,
+       "mean": -0.5758,
+       "total": -411.12,
+       "gross": -0.1987,
+       "win": 0.204,
+       "max_dd": 411.12,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3779,
+       "total": -415.7,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 421.46,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 613,
+       "mean": -0.3911,
+       "total": -239.73,
+       "gross": -0.0427,
+       "win": 0.263,
+       "max_dd": 240.41,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 311,
+       "mean": -0.4411,
+       "total": -137.17,
+       "gross": -0.0267,
+       "win": 0.222,
+       "max_dd": 141.5,
+       "lose_streak": 23,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.3775,
+       "total": -63.41,
+       "gross": 0.0173,
+       "win": 0.244,
+       "max_dd": 66.64,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.0035046985726499037,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "streak 2",
+   "stats": {
+    "train": {
+     "n": 2081,
+     "mean": -0.4035,
+     "total": -839.66,
+     "gross": -0.0148,
+     "win": 0.24,
+     "max_dd": 847.36,
+     "lose_streak": 24,
+     "worst_day": -4.91,
+     "per_month": 21.9
+    },
+    "test": {
+     "n": 1307,
+     "mean": -0.4954,
+     "total": -647.45,
+     "gross": -0.1293,
+     "win": 0.226,
+     "max_dd": 647.45,
+     "lose_streak": 19,
+     "worst_day": -12.03,
+     "per_month": 40.8
+    },
+    "years": {
+     "2024": {
+      "n": 457,
+      "mean": -0.4987,
+      "total": -227.89,
+      "gross": -0.1311,
+      "win": 0.236,
+      "max_dd": 234.47,
+      "lose_streak": 15,
+      "worst_day": -5.35,
+      "per_month": 38.1
+     },
+     "2025": {
+      "n": 527,
+      "mean": -0.4834,
+      "total": -254.75,
+      "gross": -0.119,
+      "win": 0.22,
+      "max_dd": 254.75,
+      "lose_streak": 19,
+      "worst_day": -12.03,
+      "per_month": 43.9
+     },
+     "2026": {
+      "n": 323,
+      "mean": -0.5103,
+      "total": -164.81,
+      "gross": -0.1434,
+      "win": 0.22,
+      "max_dd": 169.64,
+      "lose_streak": 15,
+      "worst_day": -4.11,
+      "per_month": 40.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 802,
+       "mean": -0.4311,
+       "total": -345.71,
+       "gross": -0.018,
+       "win": 0.247,
+       "max_dd": 352.38,
+       "lose_streak": 16,
+       "worst_day": -4.91,
+       "per_month": 9.9
+      },
+      "test": {
+       "n": 666,
+       "mean": -0.5854,
+       "total": -389.88,
+       "gross": -0.2098,
+       "win": 0.2,
+       "max_dd": 389.88,
+       "lose_streak": 18,
+       "worst_day": -12.03,
+       "per_month": 20.8
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 996,
+       "mean": -0.3722,
+       "total": -370.75,
+       "gross": -0.0103,
+       "win": 0.24,
+       "max_dd": 376.51,
+       "lose_streak": 23,
+       "worst_day": -3.41,
+       "per_month": 10.7
+      },
+      "test": {
+       "n": 517,
+       "mean": -0.3822,
+       "total": -197.57,
+       "gross": -0.0353,
+       "win": 0.267,
+       "max_dd": 198.46,
+       "lose_streak": 18,
+       "worst_day": -3.32,
+       "per_month": 16.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 283,
+       "mean": -0.4353,
+       "total": -123.2,
+       "gross": -0.0215,
+       "win": 0.219,
+       "max_dd": 125.55,
+       "lose_streak": 18,
+       "worst_day": -3.48,
+       "per_month": 3.4
+      },
+      "test": {
+       "n": 124,
+       "mean": -0.4838,
+       "total": -59.99,
+       "gross": -0.0888,
+       "win": 0.194,
+       "max_dd": 60.28,
+       "lose_streak": 19,
+       "worst_day": -3.23,
+       "per_month": 3.9
+      }
+     }
+    }
+   },
+   "paired_lb": -0.05596351966661974,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "streak 4",
+   "stats": {
+    "train": {
+     "n": 2291,
+     "mean": -0.4087,
+     "total": -936.32,
+     "gross": -0.02,
+     "win": 0.241,
+     "max_dd": 946.0,
+     "lose_streak": 24,
+     "worst_day": -5.86,
+     "per_month": 24.1
+    },
+    "test": {
+     "n": 1538,
+     "mean": -0.4705,
+     "total": -723.59,
+     "gross": -0.1043,
+     "win": 0.235,
+     "max_dd": 723.59,
+     "lose_streak": 26,
+     "worst_day": -12.03,
+     "per_month": 48.1
+    },
+    "years": {
+     "2024": {
+      "n": 526,
+      "mean": -0.4821,
+      "total": -253.6,
+      "gross": -0.1097,
+      "win": 0.24,
+      "max_dd": 258.85,
+      "lose_streak": 18,
+      "worst_day": -5.72,
+      "per_month": 43.8
+     },
+     "2025": {
+      "n": 628,
+      "mean": -0.4764,
+      "total": -299.19,
+      "gross": -0.1151,
+      "win": 0.228,
+      "max_dd": 299.19,
+      "lose_streak": 26,
+      "worst_day": -12.03,
+      "per_month": 52.3
+     },
+     "2026": {
+      "n": 384,
+      "mean": -0.4448,
+      "total": -170.79,
+      "gross": -0.0794,
+      "win": 0.242,
+      "max_dd": 175.62,
+      "lose_streak": 12,
+      "worst_day": -5.15,
+      "per_month": 48.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 839,
+       "mean": -0.4423,
+       "total": -371.11,
+       "gross": -0.0279,
+       "win": 0.242,
+       "max_dd": 377.78,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 722,
+       "mean": -0.5759,
+       "total": -415.79,
+       "gross": -0.1991,
+       "win": 0.204,
+       "max_dd": 415.79,
+       "lose_streak": 21,
+       "worst_day": -12.03,
+       "per_month": 22.6
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1131,
+       "mean": -0.3759,
+       "total": -425.19,
+       "gross": -0.0131,
+       "win": 0.246,
+       "max_dd": 430.96,
+       "lose_streak": 20,
+       "worst_day": -5.77,
+       "per_month": 12.2
+      },
+      "test": {
+       "n": 638,
+       "mean": -0.3837,
+       "total": -244.81,
+       "gross": -0.0366,
+       "win": 0.265,
+       "max_dd": 244.9,
+       "lose_streak": 15,
+       "worst_day": -4.0,
+       "per_month": 19.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 321,
+       "mean": -0.4362,
+       "total": -140.01,
+       "gross": -0.0237,
+       "win": 0.218,
+       "max_dd": 144.23,
+       "lose_streak": 25,
+       "worst_day": -3.48,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 178,
+       "mean": -0.3539,
+       "total": -62.99,
+       "gross": 0.037,
+       "win": 0.258,
+       "max_dd": 66.22,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.6
+      }
+     }
+    }
+   },
+   "paired_lb": -0.006443055576054974,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "orders 4",
+   "stats": {
+    "train": {
+     "n": 2052,
+     "mean": -0.424,
+     "total": -870.06,
+     "gross": -0.0354,
+     "win": 0.236,
+     "max_dd": 879.75,
+     "lose_streak": 25,
+     "worst_day": -5.44,
+     "per_month": 21.6
+    },
+    "test": {
+     "n": 1283,
+     "mean": -0.4966,
+     "total": -637.08,
+     "gross": -0.1306,
+     "win": 0.229,
+     "max_dd": 637.08,
+     "lose_streak": 23,
+     "worst_day": -12.03,
+     "per_month": 40.1
+    },
+    "years": {
+     "2024": {
+      "n": 453,
+      "mean": -0.52,
+      "total": -235.57,
+      "gross": -0.1504,
+      "win": 0.238,
+      "max_dd": 238.65,
+      "lose_streak": 16,
+      "worst_day": -5.35,
+      "per_month": 37.8
+     },
+     "2025": {
+      "n": 523,
+      "mean": -0.4871,
+      "total": -254.76,
+      "gross": -0.1241,
+      "win": 0.222,
+      "max_dd": 254.76,
+      "lose_streak": 23,
+      "worst_day": -12.03,
+      "per_month": 43.6
+     },
+     "2026": {
+      "n": 307,
+      "mean": -0.478,
+      "total": -146.75,
+      "gross": -0.1124,
+      "win": 0.228,
+      "max_dd": 151.58,
+      "lose_streak": 16,
+      "worst_day": -4.58,
+      "per_month": 38.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 806,
+       "mean": -0.4401,
+       "total": -354.72,
+       "gross": -0.0266,
+       "win": 0.242,
+       "max_dd": 361.38,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.0
+      },
+      "test": {
+       "n": 679,
+       "mean": -0.5726,
+       "total": -388.78,
+       "gross": -0.1971,
+       "win": 0.208,
+       "max_dd": 388.78,
+       "lose_streak": 19,
+       "worst_day": -12.03,
+       "per_month": 21.2
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 998,
+       "mean": -0.3943,
+       "total": -393.47,
+       "gross": -0.0322,
+       "win": 0.238,
+       "max_dd": 399.23,
+       "lose_streak": 20,
+       "worst_day": -4.39,
+       "per_month": 10.7
+      },
+      "test": {
+       "n": 499,
+       "mean": -0.3877,
+       "total": -193.45,
+       "gross": -0.041,
+       "win": 0.265,
+       "max_dd": 196.39,
+       "lose_streak": 15,
+       "worst_day": -4.0,
+       "per_month": 15.6
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 248,
+       "mean": -0.4914,
+       "total": -121.88,
+       "gross": -0.0769,
+       "win": 0.21,
+       "max_dd": 127.39,
+       "lose_streak": 16,
+       "worst_day": -3.48,
+       "per_month": 3.0
+      },
+      "test": {
+       "n": 105,
+       "mean": -0.5223,
+       "total": -54.84,
+       "gross": -0.1264,
+       "win": 0.2,
+       "max_dd": 56.28,
+       "lose_streak": 21,
+       "worst_day": -3.23,
+       "per_month": 3.6
+      }
+     }
+    }
+   },
+   "paired_lb": -0.05758116545919718,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "E7 daily limits",
+   "variant": "orders 8",
+   "stats": {
+    "train": {
+     "n": 2309,
+     "mean": -0.4072,
+     "total": -940.18,
+     "gross": -0.0188,
+     "win": 0.241,
+     "max_dd": 949.86,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 24.3
+    },
+    "test": {
+     "n": 1553,
+     "mean": -0.4746,
+     "total": -737.04,
+     "gross": -0.1067,
+     "win": 0.231,
+     "max_dd": 737.04,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 48.5
+    },
+    "years": {
+     "2024": {
+      "n": 533,
+      "mean": -0.4809,
+      "total": -256.32,
+      "gross": -0.1077,
+      "win": 0.238,
+      "max_dd": 260.66,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 44.4
+     },
+     "2025": {
+      "n": 629,
+      "mean": -0.4756,
+      "total": -299.15,
+      "gross": -0.1118,
+      "win": 0.224,
+      "max_dd": 299.15,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 52.4
+     },
+     "2026": {
+      "n": 391,
+      "mean": -0.4644,
+      "total": -181.57,
+      "gross": -0.0974,
+      "win": 0.233,
+      "max_dd": 186.4,
+      "lose_streak": 18,
+      "worst_day": -5.15,
+      "per_month": 48.9
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 837,
+       "mean": -0.4435,
+       "total": -371.22,
+       "gross": -0.0294,
+       "win": 0.241,
+       "max_dd": 377.89,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 714,
+       "mean": -0.5735,
+       "total": -409.48,
+       "gross": -0.1965,
+       "win": 0.206,
+       "max_dd": 409.48,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1137,
+       "mean": -0.378,
+       "total": -429.74,
+       "gross": -0.0163,
+       "win": 0.245,
+       "max_dd": 435.5,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 12.2
+      },
+      "test": {
+       "n": 647,
+       "mean": -0.3962,
+       "total": -256.35,
+       "gross": -0.0476,
+       "win": 0.258,
+       "max_dd": 257.04,
+       "lose_streak": 14,
+       "worst_day": -4.0,
+       "per_month": 20.2
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 335,
+       "mean": -0.4156,
+       "total": -139.23,
+       "gross": -0.0009,
+       "win": 0.23,
+       "max_dd": 143.56,
+       "lose_streak": 21,
+       "worst_day": -3.48,
+       "per_month": 4.0
+      },
+      "test": {
+       "n": 192,
+       "mean": -0.3709,
+       "total": -71.2,
+       "gross": 0.0278,
+       "win": 0.234,
+       "max_dd": 74.43,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 6.0
+      }
+     }
+    }
+   },
+   "paired_lb": -0.013897986069871417,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F1 sizing",
+   "variant": "$20 risk",
+   "stats": {
+    "train": {
+     "n": 2246,
+     "mean": -0.4395,
+     "total": -987.03,
+     "gross": -0.022,
+     "win": 0.232,
+     "max_dd": 995.99,
+     "lose_streak": 24,
+     "worst_day": -5.49,
+     "per_month": 23.6
+    },
+    "test": {
+     "n": 1492,
+     "mean": -0.5079,
+     "total": -757.79,
+     "gross": -0.1101,
+     "win": 0.225,
+     "max_dd": 757.79,
+     "lose_streak": 24,
+     "worst_day": -12.07,
+     "per_month": 46.6
+    },
+    "years": {
+     "2024": {
+      "n": 512,
+      "mean": -0.5206,
+      "total": -266.54,
+      "gross": -0.1182,
+      "win": 0.229,
+      "max_dd": 270.99,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.7
+     },
+     "2025": {
+      "n": 606,
+      "mean": -0.511,
+      "total": -309.68,
+      "gross": -0.1171,
+      "win": 0.218,
+      "max_dd": 309.68,
+      "lose_streak": 24,
+      "worst_day": -12.07,
+      "per_month": 50.5
+     },
+     "2026": {
+      "n": 374,
+      "mean": -0.4855,
+      "total": -181.56,
+      "gross": -0.0877,
+      "win": 0.23,
+      "max_dd": 186.37,
+      "lose_streak": 15,
+      "worst_day": -4.83,
+      "per_month": 46.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.4704,
+       "total": -392.8,
+       "gross": -0.0295,
+       "win": 0.231,
+       "max_dd": 399.19,
+       "lose_streak": 18,
+       "worst_day": -5.49,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.6039,
+       "total": -430.57,
+       "gross": -0.1975,
+       "win": 0.199,
+       "max_dd": 430.57,
+       "lose_streak": 20,
+       "worst_day": -12.07,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.4081,
+       "total": -448.96,
+       "gross": -0.0149,
+       "win": 0.235,
+       "max_dd": 454.42,
+       "lose_streak": 21,
+       "worst_day": -4.45,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.424,
+       "total": -259.08,
+       "gross": -0.0431,
+       "win": 0.25,
+       "max_dd": 259.2,
+       "lose_streak": 18,
+       "worst_day": -4.06,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 311,
+       "mean": -0.4671,
+       "total": -145.28,
+       "gross": -0.0267,
+       "win": 0.219,
+       "max_dd": 149.2,
+       "lose_streak": 23,
+       "worst_day": -3.49,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.4055,
+       "total": -68.13,
+       "gross": 0.0173,
+       "win": 0.238,
+       "max_dd": 71.17,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.032518766375920036,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F1 sizing",
+   "variant": "$80 risk",
+   "stats": {
+    "train": {
+     "n": 2246,
+     "mean": -0.4063,
+     "total": -912.61,
+     "gross": -0.022,
+     "win": 0.241,
+     "max_dd": 922.46,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 23.6
+    },
+    "test": {
+     "n": 1492,
+     "mean": -0.4707,
+     "total": -702.25,
+     "gross": -0.1101,
+     "win": 0.234,
+     "max_dd": 702.25,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 46.6
+    },
+    "years": {
+     "2024": {
+      "n": 512,
+      "mean": -0.485,
+      "total": -248.29,
+      "gross": -0.1182,
+      "win": 0.238,
+      "max_dd": 253.72,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.7
+     },
+     "2025": {
+      "n": 606,
+      "mean": -0.4731,
+      "total": -286.71,
+      "gross": -0.1171,
+      "win": 0.229,
+      "max_dd": 286.71,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.5
+     },
+     "2026": {
+      "n": 374,
+      "mean": -0.4472,
+      "total": -167.25,
+      "gross": -0.0877,
+      "win": 0.235,
+      "max_dd": 172.08,
+      "lose_streak": 15,
+      "worst_day": -4.76,
+      "per_month": 46.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.4398,
+       "total": -367.25,
+       "gross": -0.0295,
+       "win": 0.243,
+       "max_dd": 374.02,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5685,
+       "total": -405.32,
+       "gross": -0.1975,
+       "win": 0.206,
+       "max_dd": 405.32,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3722,
+       "total": -409.43,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 415.27,
+       "lose_streak": 21,
+       "worst_day": -4.37,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3839,
+       "total": -234.58,
+       "gross": -0.0431,
+       "win": 0.264,
+       "max_dd": 235.38,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 311,
+       "mean": -0.4371,
+       "total": -135.93,
+       "gross": -0.0267,
+       "win": 0.228,
+       "max_dd": 140.33,
+       "lose_streak": 23,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.3712,
+       "total": -62.36,
+       "gross": 0.0173,
+       "win": 0.244,
+       "max_dd": 65.61,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": 0.005838727658936438,
+   "verdict": "ADOPT",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": true,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F1 sizing",
+   "variant": "no $2,000 cap",
+   "stats": {
+    "train": {
+     "n": 2246,
+     "mean": -0.4112,
+     "total": -923.61,
+     "gross": -0.022,
+     "win": 0.24,
+     "max_dd": 933.29,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 23.6
+    },
+    "test": {
+     "n": 1492,
+     "mean": -0.4774,
+     "total": -712.22,
+     "gross": -0.1101,
+     "win": 0.233,
+     "max_dd": 712.22,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 46.6
+    },
+    "years": {
+     "2024": {
+      "n": 512,
+      "mean": -0.4911,
+      "total": -251.43,
+      "gross": -0.1182,
+      "win": 0.238,
+      "max_dd": 256.68,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.7
+     },
+     "2025": {
+      "n": 606,
+      "mean": -0.48,
+      "total": -290.88,
+      "gross": -0.1171,
+      "win": 0.226,
+      "max_dd": 290.88,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.5
+     },
+     "2026": {
+      "n": 374,
+      "mean": -0.4543,
+      "total": -169.91,
+      "gross": -0.0877,
+      "win": 0.235,
+      "max_dd": 174.74,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 46.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.444,
+       "total": -370.73,
+       "gross": -0.0295,
+       "win": 0.242,
+       "max_dd": 377.4,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5747,
+       "total": -409.78,
+       "gross": -0.1975,
+       "win": 0.205,
+       "max_dd": 409.78,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3779,
+       "total": -415.7,
+       "gross": -0.0149,
+       "win": 0.244,
+       "max_dd": 421.46,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 311,
+       "mean": -0.4411,
+       "total": -137.17,
+       "gross": -0.0267,
+       "win": 0.222,
+       "max_dd": 141.5,
+       "lose_streak": 23,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.3775,
+       "total": -63.41,
+       "gross": 0.0173,
+       "win": 0.244,
+       "max_dd": 66.64,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": 0.0,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F2 entry order",
+   "variant": "expiry 1 bar",
+   "stats": {
+    "train": {
+     "n": 1875,
+     "mean": -0.4023,
+     "total": -754.37,
+     "gross": -0.0098,
+     "win": 0.242,
+     "max_dd": 759.67,
+     "lose_streak": 23,
+     "worst_day": -4.91,
+     "per_month": 19.7
+    },
+    "test": {
+     "n": 1231,
+     "mean": -0.4728,
+     "total": -582.03,
+     "gross": -0.1029,
+     "win": 0.229,
+     "max_dd": 582.03,
+     "lose_streak": 21,
+     "worst_day": -7.41,
+     "per_month": 38.5
+    },
+    "years": {
+     "2024": {
+      "n": 417,
+      "mean": -0.5268,
+      "total": -219.68,
+      "gross": -0.1535,
+      "win": 0.23,
+      "max_dd": 225.69,
+      "lose_streak": 21,
+      "worst_day": -5.35,
+      "per_month": 34.8
+     },
+     "2025": {
+      "n": 515,
+      "mean": -0.4499,
+      "total": -231.7,
+      "gross": -0.0832,
+      "win": 0.223,
+      "max_dd": 233.36,
+      "lose_streak": 20,
+      "worst_day": -7.41,
+      "per_month": 42.9
+     },
+     "2026": {
+      "n": 299,
+      "mean": -0.4369,
+      "total": -130.64,
+      "gross": -0.0661,
+      "win": 0.237,
+      "max_dd": 135.47,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 37.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 681,
+       "mean": -0.403,
+       "total": -274.42,
+       "gross": 0.0183,
+       "win": 0.254,
+       "max_dd": 278.7,
+       "lose_streak": 13,
+       "worst_day": -4.91,
+       "per_month": 8.6
+      },
+      "test": {
+       "n": 576,
+       "mean": -0.5922,
+       "total": -341.1,
+       "gross": -0.2145,
+       "win": 0.193,
+       "max_dd": 341.1,
+       "lose_streak": 21,
+       "worst_day": -7.41,
+       "per_month": 18.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 940,
+       "mean": -0.3885,
+       "total": -365.16,
+       "gross": -0.0223,
+       "win": 0.241,
+       "max_dd": 368.6,
+       "lose_streak": 22,
+       "worst_day": -4.01,
+       "per_month": 10.1
+      },
+      "test": {
+       "n": 524,
+       "mean": -0.3605,
+       "total": -188.91,
+       "gross": -0.0084,
+       "win": 0.267,
+       "max_dd": 193.25,
+       "lose_streak": 14,
+       "worst_day": -3.95,
+       "per_month": 16.4
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 254,
+       "mean": -0.4519,
+       "total": -114.79,
+       "gross": -0.0387,
+       "win": 0.209,
+       "max_dd": 118.88,
+       "lose_streak": 17,
+       "worst_day": -3.48,
+       "per_month": 3.1
+      },
+      "test": {
+       "n": 131,
+       "mean": -0.3972,
+       "total": -52.03,
+       "gross": 0.01,
+       "win": 0.237,
+       "max_dd": 55.25,
+       "lose_streak": 12,
+       "worst_day": -2.19,
+       "per_month": 4.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.05284668224556963,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F2 entry order",
+   "variant": "expiry 5 bars",
+   "stats": {
+    "train": {
+     "n": 2380,
+     "mean": -0.4056,
+     "total": -965.29,
+     "gross": -0.0177,
+     "win": 0.242,
+     "max_dd": 973.66,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 25.1
+    },
+    "test": {
+     "n": 1563,
+     "mean": -0.4883,
+     "total": -763.15,
+     "gross": -0.1245,
+     "win": 0.227,
+     "max_dd": 763.15,
+     "lose_streak": 17,
+     "worst_day": -12.03,
+     "per_month": 48.8
+    },
+    "years": {
+     "2024": {
+      "n": 544,
+      "mean": -0.5001,
+      "total": -272.03,
+      "gross": -0.1307,
+      "win": 0.237,
+      "max_dd": 278.52,
+      "lose_streak": 16,
+      "worst_day": -7.78,
+      "per_month": 45.3
+     },
+     "2025": {
+      "n": 624,
+      "mean": -0.4969,
+      "total": -310.06,
+      "gross": -0.1373,
+      "win": 0.215,
+      "max_dd": 310.06,
+      "lose_streak": 17,
+      "worst_day": -12.03,
+      "per_month": 52.0
+     },
+     "2026": {
+      "n": 395,
+      "mean": -0.4584,
+      "total": -181.05,
+      "gross": -0.0959,
+      "win": 0.233,
+      "max_dd": 186.63,
+      "lose_streak": 16,
+      "worst_day": -5.24,
+      "per_month": 49.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 891,
+       "mean": -0.4423,
+       "total": -394.1,
+       "gross": -0.0312,
+       "win": 0.242,
+       "max_dd": 402.4,
+       "lose_streak": 18,
+       "worst_day": -5.44,
+       "per_month": 11.0
+      },
+      "test": {
+       "n": 751,
+       "mean": -0.5788,
+       "total": -434.65,
+       "gross": -0.207,
+       "win": 0.201,
+       "max_dd": 434.65,
+       "lose_streak": 24,
+       "worst_day": -12.03,
+       "per_month": 23.5
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1162,
+       "mean": -0.3765,
+       "total": -437.53,
+       "gross": -0.0131,
+       "win": 0.245,
+       "max_dd": 443.29,
+       "lose_streak": 21,
+       "worst_day": -4.45,
+       "per_month": 12.4
+      },
+      "test": {
+       "n": 636,
+       "mean": -0.4021,
+       "total": -255.76,
+       "gross": -0.0563,
+       "win": 0.255,
+       "max_dd": 256.76,
+       "lose_streak": 19,
+       "worst_day": -4.0,
+       "per_month": 19.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 327,
+       "mean": -0.4087,
+       "total": -133.66,
+       "gross": 0.0024,
+       "win": 0.226,
+       "max_dd": 136.53,
+       "lose_streak": 24,
+       "worst_day": -3.48,
+       "per_month": 3.9
+      },
+      "test": {
+       "n": 176,
+       "mean": -0.4133,
+       "total": -72.73,
+       "gross": -0.0192,
+       "win": 0.239,
+       "max_dd": 76.49,
+       "lose_streak": 16,
+       "worst_day": -3.23,
+       "per_month": 5.5
+      }
+     }
+    }
+   },
+   "paired_lb": -0.04315646414296683,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F2 entry order",
+   "variant": "cap +0.5 %",
+   "stats": {
+    "train": {
+     "n": 2279,
+     "mean": -0.4163,
+     "total": -948.78,
+     "gross": -0.0274,
+     "win": 0.241,
+     "max_dd": 957.92,
+     "lose_streak": 24,
+     "worst_day": -5.48,
+     "per_month": 24.0
+    },
+    "test": {
+     "n": 1508,
+     "mean": -0.4867,
+     "total": -733.89,
+     "gross": -0.1197,
+     "win": 0.231,
+     "max_dd": 733.89,
+     "lose_streak": 24,
+     "worst_day": -12.08,
+     "per_month": 47.1
+    },
+    "years": {
+     "2024": {
+      "n": 515,
+      "mean": -0.509,
+      "total": -262.14,
+      "gross": -0.1366,
+      "win": 0.237,
+      "max_dd": 266.92,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.9
+     },
+     "2025": {
+      "n": 614,
+      "mean": -0.4862,
+      "total": -298.5,
+      "gross": -0.1229,
+      "win": 0.223,
+      "max_dd": 298.5,
+      "lose_streak": 24,
+      "worst_day": -12.08,
+      "per_month": 51.2
+     },
+     "2026": {
+      "n": 379,
+      "mean": -0.4571,
+      "total": -173.25,
+      "gross": -0.0915,
+      "win": 0.237,
+      "max_dd": 178.08,
+      "lose_streak": 15,
+      "worst_day": -4.82,
+      "per_month": 47.4
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 844,
+       "mean": -0.449,
+       "total": -378.94,
+       "gross": -0.0356,
+       "win": 0.242,
+       "max_dd": 385.34,
+       "lose_streak": 17,
+       "worst_day": -5.48,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 723,
+       "mean": -0.5818,
+       "total": -420.65,
+       "gross": -0.2052,
+       "win": 0.202,
+       "max_dd": 420.65,
+       "lose_streak": 20,
+       "worst_day": -12.08,
+       "per_month": 22.6
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1118,
+       "mean": -0.3855,
+       "total": -430.94,
+       "gross": -0.0227,
+       "win": 0.243,
+       "max_dd": 436.48,
+       "lose_streak": 22,
+       "worst_day": -4.87,
+       "per_month": 11.9
+      },
+      "test": {
+       "n": 618,
+       "mean": -0.3981,
+       "total": -246.05,
+       "gross": -0.0503,
+       "win": 0.269,
+       "max_dd": 246.46,
+       "lose_streak": 18,
+       "worst_day": -4.02,
+       "per_month": 19.3
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 317,
+       "mean": -0.4382,
+       "total": -138.9,
+       "gross": -0.0219,
+       "win": 0.23,
+       "max_dd": 142.81,
+       "lose_streak": 22,
+       "worst_day": -3.48,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 167,
+       "mean": -0.4023,
+       "total": -67.18,
+       "gross": -0.0062,
+       "win": 0.222,
+       "max_dd": 70.3,
+       "lose_streak": 15,
+       "worst_day": -3.28,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.02248515808409219,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "F2 entry order",
+   "variant": "cap +1 %",
+   "stats": {
+    "train": {
+     "n": 2370,
+     "mean": -0.4081,
+     "total": -967.15,
+     "gross": -0.0181,
+     "win": 0.251,
+     "max_dd": 974.97,
+     "lose_streak": 24,
+     "worst_day": -5.23,
+     "per_month": 24.9
+    },
+    "test": {
+     "n": 1551,
+     "mean": -0.4999,
+     "total": -775.41,
+     "gross": -0.1324,
+     "win": 0.233,
+     "max_dd": 775.94,
+     "lose_streak": 24,
+     "worst_day": -12.21,
+     "per_month": 48.5
+    },
+    "years": {
+     "2024": {
+      "n": 537,
+      "mean": -0.5136,
+      "total": -275.8,
+      "gross": -0.1412,
+      "win": 0.233,
+      "max_dd": 281.6,
+      "lose_streak": 15,
+      "worst_day": -5.35,
+      "per_month": 44.8
+     },
+     "2025": {
+      "n": 625,
+      "mean": -0.5176,
+      "total": -323.48,
+      "gross": -0.1547,
+      "win": 0.224,
+      "max_dd": 323.48,
+      "lose_streak": 24,
+      "worst_day": -12.21,
+      "per_month": 52.1
+     },
+     "2026": {
+      "n": 389,
+      "mean": -0.4528,
+      "total": -176.14,
+      "gross": -0.0846,
+      "win": 0.249,
+      "max_dd": 181.5,
+      "lose_streak": 12,
+      "worst_day": -5.27,
+      "per_month": 48.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 886,
+       "mean": -0.4231,
+       "total": -374.91,
+       "gross": -0.0103,
+       "win": 0.256,
+       "max_dd": 381.87,
+       "lose_streak": 17,
+       "worst_day": -5.05,
+       "per_month": 10.8
+      },
+      "test": {
+       "n": 748,
+       "mean": -0.5867,
+       "total": -438.88,
+       "gross": -0.2082,
+       "win": 0.201,
+       "max_dd": 438.88,
+       "lose_streak": 21,
+       "worst_day": -12.21,
+       "per_month": 23.4
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1158,
+       "mean": -0.3824,
+       "total": -442.87,
+       "gross": -0.0175,
+       "win": 0.251,
+       "max_dd": 447.88,
+       "lose_streak": 22,
+       "worst_day": -5.23,
+       "per_month": 12.3
+      },
+      "test": {
+       "n": 636,
+       "mean": -0.4096,
+       "total": -260.53,
+       "gross": -0.0628,
+       "win": 0.274,
+       "max_dd": 261.49,
+       "lose_streak": 14,
+       "worst_day": -4.23,
+       "per_month": 19.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 326,
+       "mean": -0.4582,
+       "total": -149.37,
+       "gross": -0.0415,
+       "win": 0.233,
+       "max_dd": 152.24,
+       "lose_streak": 22,
+       "worst_day": -3.48,
+       "per_month": 3.9
+      },
+      "test": {
+       "n": 167,
+       "mean": -0.4551,
+       "total": -76.0,
+       "gross": -0.0582,
+       "win": 0.228,
+       "max_dd": 76.09,
+       "lose_streak": 15,
+       "worst_day": -3.53,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.05652936673974417,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "G1 trail",
+   "variant": "0.5 R",
+   "stats": {
+    "train": {
+     "n": 2280,
+     "mean": -0.3999,
+     "total": -911.83,
+     "gross": -0.0104,
+     "win": 0.217,
+     "max_dd": 912.64,
+     "lose_streak": 24,
+     "worst_day": -5.18,
+     "per_month": 24.0
+    },
+    "test": {
+     "n": 1553,
+     "mean": -0.4503,
+     "total": -699.39,
+     "gross": -0.0852,
+     "win": 0.215,
+     "max_dd": 699.39,
+     "lose_streak": 22,
+     "worst_day": -12.03,
+     "per_month": 48.5
+    },
+    "years": {
+     "2024": {
+      "n": 528,
+      "mean": -0.4524,
+      "total": -238.89,
+      "gross": -0.0834,
+      "win": 0.222,
+      "max_dd": 239.37,
+      "lose_streak": 21,
+      "worst_day": -5.35,
+      "per_month": 44.0
+     },
+     "2025": {
+      "n": 639,
+      "mean": -0.4301,
+      "total": -274.86,
+      "gross": -0.0692,
+      "win": 0.221,
+      "max_dd": 275.0,
+      "lose_streak": 22,
+      "worst_day": -12.03,
+      "per_month": 53.2
+     },
+     "2026": {
+      "n": 386,
+      "mean": -0.4809,
+      "total": -185.64,
+      "gross": -0.1143,
+      "win": 0.197,
+      "max_dd": 186.02,
+      "lose_streak": 15,
+      "worst_day": -4.96,
+      "per_month": 48.2
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 842,
+       "mean": -0.4131,
+       "total": -347.85,
+       "gross": 0.0013,
+       "win": 0.232,
+       "max_dd": 351.92,
+       "lose_streak": 30,
+       "worst_day": -5.18,
+       "per_month": 10.4
+      },
+      "test": {
+       "n": 735,
+       "mean": -0.5281,
+       "total": -388.13,
+       "gross": -0.152,
+       "win": 0.201,
+       "max_dd": 388.13,
+       "lose_streak": 22,
+       "worst_day": -12.03,
+       "per_month": 23.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1126,
+       "mean": -0.3818,
+       "total": -429.93,
+       "gross": -0.0166,
+       "win": 0.213,
+       "max_dd": 429.93,
+       "lose_streak": 19,
+       "worst_day": -4.39,
+       "per_month": 12.1
+      },
+      "test": {
+       "n": 649,
+       "mean": -0.3785,
+       "total": -245.65,
+       "gross": -0.032,
+       "win": 0.223,
+       "max_dd": 246.14,
+       "lose_streak": 15,
+       "worst_day": -4.44,
+       "per_month": 20.3
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 312,
+       "mean": -0.4296,
+       "total": -134.05,
+       "gross": -0.0193,
+       "win": 0.189,
+       "max_dd": 134.92,
+       "lose_streak": 32,
+       "worst_day": -3.2,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 169,
+       "mean": -0.3882,
+       "total": -65.6,
+       "gross": 0.0008,
+       "win": 0.243,
+       "max_dd": 65.6,
+       "lose_streak": 13,
+       "worst_day": -2.73,
+       "per_month": 5.3
+      }
+     }
+    }
+   },
+   "paired_lb": -0.04172121263846102,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "G1 trail",
+   "variant": "1.5 R",
+   "stats": {
+    "train": {
+     "n": 2187,
+     "mean": -0.4327,
+     "total": -946.26,
+     "gross": -0.0453,
+     "win": 0.246,
+     "max_dd": 959.26,
+     "lose_streak": 18,
+     "worst_day": -5.96,
+     "per_month": 23.0
+    },
+    "test": {
+     "n": 1429,
+     "mean": -0.5132,
+     "total": -733.35,
+     "gross": -0.1445,
+     "win": 0.235,
+     "max_dd": 733.35,
+     "lose_streak": 17,
+     "worst_day": -12.23,
+     "per_month": 44.7
+    },
+    "years": {
+     "2024": {
+      "n": 490,
+      "mean": -0.5668,
+      "total": -277.72,
+      "gross": -0.1921,
+      "win": 0.239,
+      "max_dd": 280.19,
+      "lose_streak": 13,
+      "worst_day": -5.35,
+      "per_month": 40.8
+     },
+     "2025": {
+      "n": 581,
+      "mean": -0.5187,
+      "total": -301.35,
+      "gross": -0.1544,
+      "win": 0.224,
+      "max_dd": 301.35,
+      "lose_streak": 17,
+      "worst_day": -12.23,
+      "per_month": 48.4
+     },
+     "2026": {
+      "n": 358,
+      "mean": -0.431,
+      "total": -154.28,
+      "gross": -0.0633,
+      "win": 0.249,
+      "max_dd": 158.61,
+      "lose_streak": 17,
+      "worst_day": -5.17,
+      "per_month": 44.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 811,
+       "mean": -0.397,
+       "total": -321.94,
+       "gross": 0.0159,
+       "win": 0.265,
+       "max_dd": 328.9,
+       "lose_streak": 20,
+       "worst_day": -5.96,
+       "per_month": 10.0
+      },
+      "test": {
+       "n": 702,
+       "mean": -0.595,
+       "total": -417.67,
+       "gross": -0.2169,
+       "win": 0.221,
+       "max_dd": 417.67,
+       "lose_streak": 18,
+       "worst_day": -12.23,
+       "per_month": 21.9
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1072,
+       "mean": -0.4343,
+       "total": -465.62,
+       "gross": -0.073,
+       "win": 0.237,
+       "max_dd": 477.85,
+       "lose_streak": 23,
+       "worst_day": -4.39,
+       "per_month": 11.5
+      },
+      "test": {
+       "n": 563,
+       "mean": -0.452,
+       "total": -254.49,
+       "gross": -0.1041,
+       "win": 0.249,
+       "max_dd": 259.82,
+       "lose_streak": 20,
+       "worst_day": -4.7,
+       "per_month": 17.6
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 304,
+       "mean": -0.522,
+       "total": -158.7,
+       "gross": -0.111,
+       "win": 0.23,
+       "max_dd": 169.05,
+       "lose_streak": 15,
+       "worst_day": -4.31,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 164,
+       "mean": -0.3731,
+       "total": -61.19,
+       "gross": 0.0262,
+       "win": 0.25,
+       "max_dd": 63.91,
+       "lose_streak": 15,
+       "worst_day": -3.73,
+       "per_month": 5.1
+      }
+     }
+    }
+   },
+   "paired_lb": -0.1042923912158813,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "G1 trail",
+   "variant": "2 R",
+   "stats": {
+    "train": {
+     "n": 2120,
+     "mean": -0.5,
+     "total": -1060.06,
+     "gross": -0.1124,
+     "win": 0.223,
+     "max_dd": 1069.86,
+     "lose_streak": 27,
+     "worst_day": -6.46,
+     "per_month": 22.3
+    },
+    "test": {
+     "n": 1368,
+     "mean": -0.5794,
+     "total": -792.68,
+     "gross": -0.2111,
+     "win": 0.222,
+     "max_dd": 792.68,
+     "lose_streak": 26,
+     "worst_day": -12.73,
+     "per_month": 42.8
+    },
+    "years": {
+     "2024": {
+      "n": 462,
+      "mean": -0.6938,
+      "total": -320.54,
+      "gross": -0.3193,
+      "win": 0.203,
+      "max_dd": 323.15,
+      "lose_streak": 26,
+      "worst_day": -6.12,
+      "per_month": 38.5
+     },
+     "2025": {
+      "n": 561,
+      "mean": -0.5471,
+      "total": -306.9,
+      "gross": -0.1829,
+      "win": 0.226,
+      "max_dd": 308.79,
+      "lose_streak": 17,
+      "worst_day": -12.73,
+      "per_month": 46.8
+     },
+     "2026": {
+      "n": 345,
+      "mean": -0.479,
+      "total": -165.24,
+      "gross": -0.1123,
+      "win": 0.241,
+      "max_dd": 169.07,
+      "lose_streak": 18,
+      "worst_day": -5.19,
+      "per_month": 43.1
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 793,
+       "mean": -0.5378,
+       "total": -426.45,
+       "gross": -0.124,
+       "win": 0.221,
+       "max_dd": 432.98,
+       "lose_streak": 20,
+       "worst_day": -6.46,
+       "per_month": 9.8
+      },
+      "test": {
+       "n": 680,
+       "mean": -0.6339,
+       "total": -431.04,
+       "gross": -0.2554,
+       "win": 0.212,
+       "max_dd": 431.04,
+       "lose_streak": 17,
+       "worst_day": -12.73,
+       "per_month": 21.2
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1027,
+       "mean": -0.4749,
+       "total": -487.75,
+       "gross": -0.1145,
+       "win": 0.222,
+       "max_dd": 498.87,
+       "lose_streak": 21,
+       "worst_day": -4.58,
+       "per_month": 11.0
+      },
+      "test": {
+       "n": 533,
+       "mean": -0.5359,
+       "total": -285.63,
+       "gross": -0.1895,
+       "win": 0.233,
+       "max_dd": 292.08,
+       "lose_streak": 24,
+       "worst_day": -4.78,
+       "per_month": 16.7
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 300,
+       "mean": -0.4862,
+       "total": -145.86,
+       "gross": -0.0745,
+       "win": 0.233,
+       "max_dd": 161.73,
+       "lose_streak": 12,
+       "worst_day": -3.22,
+       "per_month": 3.6
+      },
+      "test": {
+       "n": 155,
+       "mean": -0.4904,
+       "total": -76.01,
+       "gross": -0.0916,
+       "win": 0.232,
+       "max_dd": 76.3,
+       "lose_streak": 24,
+       "worst_day": -3.73,
+       "per_month": 4.8
+      }
+     }
+    }
+   },
+   "paired_lb": -0.1972311557296629,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "G4 flat time",
+   "variant": "11:00",
+   "stats": {
+    "train": {
+     "n": 2248,
+     "mean": -0.4076,
+     "total": -916.3,
+     "gross": -0.0184,
+     "win": 0.234,
+     "max_dd": 924.92,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 23.7
+    },
+    "test": {
+     "n": 1493,
+     "mean": -0.4728,
+     "total": -705.86,
+     "gross": -0.1055,
+     "win": 0.23,
+     "max_dd": 705.86,
+     "lose_streak": 17,
+     "worst_day": -12.03,
+     "per_month": 46.7
+    },
+    "years": {
+     "2024": {
+      "n": 512,
+      "mean": -0.4738,
+      "total": -242.61,
+      "gross": -0.1009,
+      "win": 0.236,
+      "max_dd": 247.85,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.7
+     },
+     "2025": {
+      "n": 608,
+      "mean": -0.4737,
+      "total": -287.99,
+      "gross": -0.111,
+      "win": 0.225,
+      "max_dd": 287.99,
+      "lose_streak": 15,
+      "worst_day": -12.03,
+      "per_month": 50.7
+     },
+     "2026": {
+      "n": 373,
+      "mean": -0.4699,
+      "total": -175.27,
+      "gross": -0.1029,
+      "win": 0.228,
+      "max_dd": 180.1,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 46.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.4439,
+       "total": -370.64,
+       "gross": -0.0294,
+       "win": 0.242,
+       "max_dd": 377.31,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5751,
+       "total": -410.03,
+       "gross": -0.1978,
+       "win": 0.205,
+       "max_dd": 410.03,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3785,
+       "total": -416.31,
+       "gross": -0.0155,
+       "win": 0.243,
+       "max_dd": 422.07,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 313,
+       "mean": -0.4133,
+       "total": -129.35,
+       "gross": 0.0008,
+       "win": 0.182,
+       "max_dd": 131.64,
+       "lose_streak": 29,
+       "worst_day": -2.82,
+       "per_month": 3.8
+      },
+      "test": {
+       "n": 169,
+       "mean": -0.3361,
+       "total": -56.81,
+       "gross": 0.0586,
+       "win": 0.219,
+       "max_dd": 57.96,
+       "lose_streak": 17,
+       "worst_day": -3.23,
+       "per_month": 5.3
+      }
+     }
+    }
+   },
+   "paired_lb": -0.01602561473167888,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "G4 flat time",
+   "variant": "12:00",
+   "stats": {
+    "train": {
+     "n": 2246,
+     "mean": -0.4098,
+     "total": -920.48,
+     "gross": -0.0206,
+     "win": 0.239,
+     "max_dd": 930.16,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 23.6
+    },
+    "test": {
+     "n": 1492,
+     "mean": -0.4772,
+     "total": -711.94,
+     "gross": -0.1099,
+     "win": 0.233,
+     "max_dd": 711.94,
+     "lose_streak": 24,
+     "worst_day": -12.03,
+     "per_month": 46.6
+    },
+    "years": {
+     "2024": {
+      "n": 512,
+      "mean": -0.4911,
+      "total": -251.43,
+      "gross": -0.1182,
+      "win": 0.238,
+      "max_dd": 256.68,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 42.7
+     },
+     "2025": {
+      "n": 606,
+      "mean": -0.48,
+      "total": -290.91,
+      "gross": -0.1171,
+      "win": 0.226,
+      "max_dd": 290.91,
+      "lose_streak": 24,
+      "worst_day": -12.03,
+      "per_month": 50.5
+     },
+     "2026": {
+      "n": 374,
+      "mean": -0.4535,
+      "total": -169.6,
+      "gross": -0.0869,
+      "win": 0.235,
+      "max_dd": 174.43,
+      "lose_streak": 15,
+      "worst_day": -4.78,
+      "per_month": 46.8
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 835,
+       "mean": -0.444,
+       "total": -370.77,
+       "gross": -0.0296,
+       "win": 0.241,
+       "max_dd": 377.44,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.3
+      },
+      "test": {
+       "n": 713,
+       "mean": -0.5743,
+       "total": -409.5,
+       "gross": -0.1971,
+       "win": 0.205,
+       "max_dd": 409.5,
+       "lose_streak": 20,
+       "worst_day": -12.03,
+       "per_month": 22.3
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1100,
+       "mean": -0.3783,
+       "total": -416.18,
+       "gross": -0.0154,
+       "win": 0.244,
+       "max_dd": 421.95,
+       "lose_streak": 21,
+       "worst_day": -4.39,
+       "per_month": 11.8
+      },
+      "test": {
+       "n": 611,
+       "mean": -0.3912,
+       "total": -239.03,
+       "gross": -0.0431,
+       "win": 0.262,
+       "max_dd": 239.71,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 19.1
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 311,
+       "mean": -0.4294,
+       "total": -133.53,
+       "gross": -0.015,
+       "win": 0.219,
+       "max_dd": 137.4,
+       "lose_streak": 23,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 168,
+       "mean": -0.3775,
+       "total": -63.41,
+       "gross": 0.0173,
+       "win": 0.244,
+       "max_dd": 66.64,
+       "lose_streak": 15,
+       "worst_day": -3.23,
+       "per_month": 5.2
+      }
+     }
+    }
+   },
+   "paired_lb": -0.0004989413737849224,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "Ross volume",
+   "variant": "push volume rising",
+   "stats": {
+    "train": {
+     "n": 1810,
+     "mean": -0.4175,
+     "total": -755.68,
+     "gross": -0.0267,
+     "win": 0.237,
+     "max_dd": 762.23,
+     "lose_streak": 26,
+     "worst_day": -5.44,
+     "per_month": 19.1
+    },
+    "test": {
+     "n": 1248,
+     "mean": -0.5244,
+     "total": -654.43,
+     "gross": -0.1585,
+     "win": 0.212,
+     "max_dd": 654.43,
+     "lose_streak": 27,
+     "worst_day": -12.03,
+     "per_month": 39.0
+    },
+    "years": {
+     "2024": {
+      "n": 425,
+      "mean": -0.5513,
+      "total": -234.3,
+      "gross": -0.1756,
+      "win": 0.214,
+      "max_dd": 240.4,
+      "lose_streak": 21,
+      "worst_day": -5.35,
+      "per_month": 35.4
+     },
+     "2025": {
+      "n": 514,
+      "mean": -0.4854,
+      "total": -249.5,
+      "gross": -0.1258,
+      "win": 0.214,
+      "max_dd": 249.5,
+      "lose_streak": 27,
+      "worst_day": -12.03,
+      "per_month": 42.8
+     },
+     "2026": {
+      "n": 309,
+      "mean": -0.5522,
+      "total": -170.63,
+      "gross": -0.1896,
+      "win": 0.207,
+      "max_dd": 170.63,
+      "lose_streak": 12,
+      "worst_day": -5.15,
+      "per_month": 38.6
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 635,
+       "mean": -0.472,
+       "total": -299.75,
+       "gross": -0.0525,
+       "win": 0.231,
+       "max_dd": 302.25,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 8.2
+      },
+      "test": {
+       "n": 576,
+       "mean": -0.6456,
+       "total": -371.84,
+       "gross": -0.2682,
+       "win": 0.172,
+       "max_dd": 371.84,
+       "lose_streak": 33,
+       "worst_day": -12.03,
+       "per_month": 18.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 908,
+       "mean": -0.3942,
+       "total": -357.9,
+       "gross": -0.0297,
+       "win": 0.237,
+       "max_dd": 362.59,
+       "lose_streak": 27,
+       "worst_day": -4.39,
+       "per_month": 9.8
+      },
+      "test": {
+       "n": 511,
+       "mean": -0.4191,
+       "total": -214.15,
+       "gross": -0.0771,
+       "win": 0.256,
+       "max_dd": 214.15,
+       "lose_streak": 18,
+       "worst_day": -3.95,
+       "per_month": 16.0
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 267,
+       "mean": -0.3672,
+       "total": -98.04,
+       "gross": 0.0446,
+       "win": 0.251,
+       "max_dd": 101.17,
+       "lose_streak": 19,
+       "worst_day": -2.1,
+       "per_month": 3.4
+      },
+      "test": {
+       "n": 161,
+       "mean": -0.4251,
+       "total": -68.44,
+       "gross": -0.0247,
+       "win": 0.217,
+       "max_dd": 70.2,
+       "lose_streak": 14,
+       "worst_day": -3.23,
+       "per_month": 5.0
+      }
+     }
+    }
+   },
+   "paired_lb": -0.10697370975185941,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": false,
+    ">=200 test trades": true,
+    "2 of 3 test years": false,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "Ross volume",
+   "variant": "push volume elevated",
+   "stats": {
+    "train": {
+     "n": 2043,
+     "mean": -0.4011,
+     "total": -819.35,
+     "gross": -0.0178,
+     "win": 0.241,
+     "max_dd": 827.33,
+     "lose_streak": 21,
+     "worst_day": -6.35,
+     "per_month": 21.7
+    },
+    "test": {
+     "n": 1353,
+     "mean": -0.447,
+     "total": -604.82,
+     "gross": -0.0879,
+     "win": 0.237,
+     "max_dd": 604.82,
+     "lose_streak": 24,
+     "worst_day": -5.35,
+     "per_month": 42.3
+    },
+    "years": {
+     "2024": {
+      "n": 468,
+      "mean": -0.4776,
+      "total": -223.53,
+      "gross": -0.1172,
+      "win": 0.239,
+      "max_dd": 227.59,
+      "lose_streak": 16,
+      "worst_day": -5.35,
+      "per_month": 39.0
+     },
+     "2025": {
+      "n": 541,
+      "mean": -0.4243,
+      "total": -229.57,
+      "gross": -0.0656,
+      "win": 0.233,
+      "max_dd": 229.57,
+      "lose_streak": 24,
+      "worst_day": -4.75,
+      "per_month": 45.1
+     },
+     "2026": {
+      "n": 344,
+      "mean": -0.441,
+      "total": -151.72,
+      "gross": -0.0829,
+      "win": 0.238,
+      "max_dd": 156.55,
+      "lose_streak": 13,
+      "worst_day": -4.78,
+      "per_month": 43.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 770,
+       "mean": -0.4345,
+       "total": -334.55,
+       "gross": -0.0255,
+       "win": 0.245,
+       "max_dd": 341.22,
+       "lose_streak": 15,
+       "worst_day": -6.35,
+       "per_month": 9.5
+      },
+      "test": {
+       "n": 621,
+       "mean": -0.5364,
+       "total": -333.12,
+       "gross": -0.1652,
+       "win": 0.203,
+       "max_dd": 333.12,
+       "lose_streak": 19,
+       "worst_day": -5.35,
+       "per_month": 19.4
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 983,
+       "mean": -0.3797,
+       "total": -373.25,
+       "gross": -0.0231,
+       "win": 0.239,
+       "max_dd": 379.29,
+       "lose_streak": 18,
+       "worst_day": -4.3,
+       "per_month": 10.7
+      },
+      "test": {
+       "n": 574,
+       "mean": -0.3816,
+       "total": -219.01,
+       "gross": -0.0396,
+       "win": 0.267,
+       "max_dd": 219.47,
+       "lose_streak": 12,
+       "worst_day": -4.0,
+       "per_month": 17.9
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 290,
+       "mean": -0.3846,
+       "total": -111.55,
+       "gross": 0.0209,
+       "win": 0.234,
+       "max_dd": 114.23,
+       "lose_streak": 20,
+       "worst_day": -3.48,
+       "per_month": 3.5
+      },
+      "test": {
+       "n": 158,
+       "mean": -0.3335,
+       "total": -52.69,
+       "gross": 0.0407,
+       "win": 0.259,
+       "max_dd": 55.91,
+       "lose_streak": 15,
+       "worst_day": -2.31,
+       "per_month": 4.9
+      }
+     }
+    }
+   },
+   "paired_lb": -0.016083854554734267,
+   "verdict": "keep B",
+   "checks": {
+    "train better": true,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  },
+  {
+   "group": "MACD reading",
+   "variant": "line above zero and signal",
+   "stats": {
+    "train": {
+     "n": 2164,
+     "mean": -0.4134,
+     "total": -894.66,
+     "gross": -0.0266,
+     "win": 0.239,
+     "max_dd": 904.34,
+     "lose_streak": 24,
+     "worst_day": -5.44,
+     "per_month": 22.8
+    },
+    "test": {
+     "n": 1428,
+     "mean": -0.4635,
+     "total": -661.84,
+     "gross": -0.1022,
+     "win": 0.237,
+     "max_dd": 661.84,
+     "lose_streak": 23,
+     "worst_day": -6.92,
+     "per_month": 44.6
+    },
+    "years": {
+     "2024": {
+      "n": 490,
+      "mean": -0.4738,
+      "total": -232.14,
+      "gross": -0.1073,
+      "win": 0.245,
+      "max_dd": 235.74,
+      "lose_streak": 17,
+      "worst_day": -5.35,
+      "per_month": 40.8
+     },
+     "2025": {
+      "n": 579,
+      "mean": -0.466,
+      "total": -269.8,
+      "gross": -0.11,
+      "win": 0.23,
+      "max_dd": 269.8,
+      "lose_streak": 23,
+      "worst_day": -6.92,
+      "per_month": 48.2
+     },
+     "2026": {
+      "n": 359,
+      "mean": -0.4454,
+      "total": -159.9,
+      "gross": -0.0828,
+      "win": 0.24,
+      "max_dd": 164.73,
+      "lose_streak": 15,
+      "worst_day": -4.58,
+      "per_month": 44.9
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 824,
+       "mean": -0.4479,
+       "total": -369.11,
+       "gross": -0.0344,
+       "win": 0.242,
+       "max_dd": 375.78,
+       "lose_streak": 17,
+       "worst_day": -5.44,
+       "per_month": 10.2
+      },
+      "test": {
+       "n": 673,
+       "mean": -0.5446,
+       "total": -366.49,
+       "gross": -0.1735,
+       "win": 0.21,
+       "max_dd": 366.49,
+       "lose_streak": 20,
+       "worst_day": -6.92,
+       "per_month": 21.0
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1039,
+       "mean": -0.3834,
+       "total": -398.33,
+       "gross": -0.0245,
+       "win": 0.242,
+       "max_dd": 404.09,
+       "lose_streak": 21,
+       "worst_day": -4.45,
+       "per_month": 11.2
+      },
+      "test": {
+       "n": 592,
+       "mean": -0.4074,
+       "total": -241.21,
+       "gross": -0.0635,
+       "win": 0.258,
+       "max_dd": 243.34,
+       "lose_streak": 18,
+       "worst_day": -4.0,
+       "per_month": 18.5
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 301,
+       "mean": -0.4227,
+       "total": -127.22,
+       "gross": -0.0129,
+       "win": 0.226,
+       "max_dd": 131.55,
+       "lose_streak": 21,
+       "worst_day": -3.48,
+       "per_month": 3.7
+      },
+      "test": {
+       "n": 163,
+       "mean": -0.3322,
+       "total": -54.15,
+       "gross": 0.0513,
+       "win": 0.276,
+       "max_dd": 57.37,
+       "lose_streak": 12,
+       "worst_day": -2.71,
+       "per_month": 5.1
+      }
+     }
+    }
+   },
+   "paired_lb": -0.02051160466699667,
+   "verdict": "keep B",
+   "checks": {
+    "train better": false,
+    "test better": true,
+    ">=200 test trades": true,
+    "2 of 3 test years": true,
+    "paired lower bound > 0": false,
+    "drawdown ok": true
+   }
+  }
+ ],
+ "sensitivities": [
+  {
+   "group": "entry model",
+   "variant": "intrabar fill (live-like)",
+   "stats": {
+    "train": {
+     "n": 2956,
+     "mean": -0.3359,
+     "total": -992.97,
+     "gross": 0.048,
+     "win": 0.279,
+     "max_dd": 999.79,
+     "lose_streak": 22,
+     "worst_day": -8.94,
+     "per_month": 31.1
+    },
+    "test": {
+     "n": 1963,
+     "mean": -0.3499,
+     "total": -686.9,
+     "gross": 0.0116,
+     "win": 0.281,
+     "max_dd": 691.34,
+     "lose_streak": 21,
+     "worst_day": -9.42,
+     "per_month": 61.3
+    },
+    "years": {
+     "2024": {
+      "n": 680,
+      "mean": -0.3655,
+      "total": -248.57,
+      "gross": -0.0093,
+      "win": 0.279,
+      "max_dd": 257.2,
+      "lose_streak": 21,
+      "worst_day": -5.42,
+      "per_month": 56.7
+     },
+     "2025": {
+      "n": 787,
+      "mean": -0.3608,
+      "total": -283.92,
+      "gross": 0.003,
+      "win": 0.276,
+      "max_dd": 283.92,
+      "lose_streak": 18,
+      "worst_day": -9.42,
+      "per_month": 65.6
+     },
+     "2026": {
+      "n": 496,
+      "mean": -0.3113,
+      "total": -154.41,
+      "gross": 0.0537,
+      "win": 0.29,
+      "max_dd": 163.67,
+      "lose_streak": 14,
+      "worst_day": -8.74,
+      "per_month": 62.0
+     }
+    },
+    "windows": {
+     "pre-market": {
+      "train": {
+       "n": 1133,
+       "mean": -0.3776,
+       "total": -427.83,
+       "gross": 0.0273,
+       "win": 0.28,
+       "max_dd": 433.18,
+       "lose_streak": 24,
+       "worst_day": -8.94,
+       "per_month": 13.7
+      },
+      "test": {
+       "n": 988,
+       "mean": -0.3957,
+       "total": -390.91,
+       "gross": -0.0255,
+       "win": 0.271,
+       "max_dd": 390.91,
+       "lose_streak": 15,
+       "worst_day": -9.42,
+       "per_month": 30.9
+      }
+     },
+     "09:30-10:30": {
+      "train": {
+       "n": 1450,
+       "mean": -0.2838,
+       "total": -411.48,
+       "gross": 0.0776,
+       "win": 0.287,
+       "max_dd": 416.73,
+       "lose_streak": 18,
+       "worst_day": -4.65,
+       "per_month": 15.4
+      },
+      "test": {
+       "n": 794,
+       "mean": -0.2782,
+       "total": -220.86,
+       "gross": 0.0654,
+       "win": 0.295,
+       "max_dd": 238.28,
+       "lose_streak": 16,
+       "worst_day": -4.07,
+       "per_month": 24.8
+      }
+     },
+     "10:30-11:30": {
+      "train": {
+       "n": 373,
+       "mean": -0.4119,
+       "total": -153.66,
+       "gross": -0.0041,
+       "win": 0.247,
+       "max_dd": 159.5,
+       "lose_streak": 24,
+       "worst_day": -3.73,
+       "per_month": 4.3
+      },
+      "test": {
+       "n": 181,
+       "mean": -0.4151,
+       "total": -75.13,
+       "gross": -0.0225,
+       "win": 0.271,
+       "max_dd": 75.19,
+       "lose_streak": 13,
+       "worst_day": -2.78,
+       "per_month": 5.7
+      }
+     }
+    }
+   }
+  }
+ ],
+ "alpha": 0.0012195121951219512,
+ "K": 41
+}
