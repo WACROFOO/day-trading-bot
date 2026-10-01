@@ -960,6 +960,22 @@ VWAP or MACD refusal freed — are added to `scripts/ablation_history.py` and
 not yet run (the history cache lives on the owner's Mac); none changes until
 they are.
 
+**Amendment A14 — pullback volume flags, it does not refuse (IN FORCE from the
+first desk start after 2026-10-01; owner, delegated: "implement any optimal fix
+you judge profitable").** The three combinations added on 2026-09-30, run on ten
+years at the live sizing and spreads
+(`research/paper-exercise/reports/ablation_live_costs_v2.txt`, trail 1 R, R per
+trade, train 2016-2023 / test 2024-2026): stop ≥ 2 % alone −0.430 / −0.502
+(2,266 test trades); with pullback volume freed −0.424 / −0.489 (3,840); with
+VWAP freed −0.502 / −0.544; with MACD freed −0.453 / −0.495. Only the volume
+gate loses less in both periods, and it adds 70 % more trades.
+`VOLUME_FLAG_ONLY = True` in `src/execution/runner.py`: a red volume gate is
+recorded on the row and scored by `missed`; VWAP, the 9 EMA and MACD still
+refuse. Still negative in both periods: harm reduction, not an edge. **Undo:**
+`VOLUME_FLAG_ONLY = False`. **Kill rule:** revert if, after 20 trades taken
+with the volume gate red, their mean realised R is below the mean of the trades
+taken with it green.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

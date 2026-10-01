@@ -134,8 +134,10 @@ def test_entries_lock_keeps_trade_mode_for_exits():
     assert r.mode == "TRADE"                              # exits, stops and the flatten still run
 
 
-def test_trade_refuses_when_pullback_volume_was_not_lighter():
+def test_trade_refuses_when_pullback_volume_was_not_lighter(monkeypatch):
+    from execution import runner as RN
     from execution.runner import Runner
+    monkeypatch.setattr(RN, "VOLUME_FLAG_ONLY", False)       # the refusal itself, with A14 off
     from momentum_platform.dashboard.session_builder import build_session
     c = L.connect(":memory:"); build_session(ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
     c.execute("UPDATE decisions SET verdict='REVIEW', volume_ok=0 WHERE plan_allowed=1"); c.commit()
@@ -699,3 +701,23 @@ def test_backfill_tape_records_the_day_and_resets_only_no_tape_gradings():
     A.fill_all(c, B.from_ledger(c))
     assert c.execute("SELECT bars_available FROM actuals").fetchone()[0] == 1
     assert BT.reset_no_tape(c, "2026-09-09") == 0
+
+
+def test_a14_volume_red_is_not_a_refusal():
+    """A14 (2026-10-01): a red pullback-volume gate is recorded, not refused."""
+    from execution import runner as RN
+    from execution.runner import Runner
+    from momentum_platform.dashboard.session_builder import build_session
+    assert RN.VOLUME_FLAG_ONLY is True
+    c = L.connect(":memory:"); build_session(ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
+    c.execute("UPDATE decisions SET verdict='REVIEW', volume_ok=0 WHERE plan_allowed=1"); c.commit()
+    class T:
+        account = "DU1"; placed = []
+        def place_bracket(self, *a, **k): raise AssertionError("refused before placing in this test")
+        def adopt(self, rows): return 0
+        def sync(self): pass
+    r = Runner(c, mode="TRADE", dollar_risk=20.0, trader=T(), max_age_s=3600,
+               now=lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc),
+               quote=lambda s: None)                       # no quote: refused on the quote clock instead
+    done = r.step()
+    assert done and not any(any("pullback volume" in x for x in a.reasons) for a in done)

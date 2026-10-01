@@ -57,6 +57,14 @@ MACD_FLAG_ONLY_REGULAR = False
 #: $5, first or second plan of the symbol's day. Harm reduction, not an edge:
 #: its test read is still negative. False restores the rules before A13.
 SELECTIVE = True
+
+#: A14 — the pullback-volume gate flags, it does not refuse (owner, delegated,
+#: 2026-10-01). Ten years at the live sizing and spreads, with the 2 % stop
+#: floor (`research/paper-exercise/reports/ablation_live_costs_v2.txt`): freeing
+#: it reads −0.424 / −0.489 R on train / test against −0.430 / −0.502, over 3,840
+#: test trades against 2,266. Freeing VWAP loses more in both periods and MACD
+#: is mixed, so those still refuse. False restores the refusal.
+VOLUME_FLAG_ONLY = True
 SELECTIVE_MIN_STOP_PCT = 2.0
 #: 2.0 from 2026-09-30 (owner, delegated): at live costs the $5 floor adds
 #: 0.09 R a trade (−0.502 → −0.413 on 2024-2026) and halves the trades
@@ -261,7 +269,7 @@ class Runner:
         if self.mode == "TRADE" and L.positions_alive(self.conn) >= self.max_positions:
             reasons.append(f"one position at a time (preregistration §2): "
                            f"{L.positions_alive(self.conn)} order(s) alive or unresolved")
-        if self.mode == "TRADE" and not row["volume_ok"]:
+        if self.mode == "TRADE" and not row["volume_ok"] and not VOLUME_FLAG_ONLY:
             # FILTERS.md Layer 2: pullback_volume < impulse_volume, all true at
             # entry. The detector computes it; nothing enforced it.
             reasons.append("Layer 2 not green: pullback volume was not lighter than the impulse")
