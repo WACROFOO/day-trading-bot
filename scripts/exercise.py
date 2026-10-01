@@ -1033,7 +1033,7 @@ def cmd_review(args) -> int:
     reasons = Counter()
     for (j,) in conn.execute("SELECT refusal_reasons_json FROM decisions WHERE outcome='REFUSED'"):
         for r in _json.loads(j or "[]"):
-            reasons[r.split(" — ")[0].split(":")[0][:60]] += 1
+            reasons[controls.refusal_key(r)] += 1
     for r, n in reasons.most_common(8):
         print(f"  {n:>4}  {r}")
     if not reasons:

@@ -378,15 +378,20 @@ def build_session_from_records(
                 _st = hot.symbols.get(rec["symbol"])
                 _snap = _st.snapshot if _st else None
                 _meta = symbols.get(rec["symbol"], {})
+                _cg = chart_gates(bars_by_symbol[rec["symbol"]])
                 _inputs = cascade_inputs(_meta, halt_state.get(rec["symbol"]),
                                          feed_stale=_feed_is_stale(data_status), snap=_snap,
-                                         chart=chart_gates(bars_by_symbol[rec["symbol"]]))
+                                         chart=_cg)
                 _res = evaluate_cascade(_inputs) if _meta else None
                 allowed = bool(_res and _res.plan_allowed)
                 if journal is not None and _res is not None:
                     _tj = _time.perf_counter()
                     _journal_decision(journal, rec, bar, plan, _res, _inputs, _snap,
-                                      _meta, session_id, source_name, data_status, journal_since)
+                                      _meta, session_id, source_name, data_status, journal_since,
+                                      chart={"last": bar.close, "vwap": _cg.get("vwap"),
+                                             "ema9": _cg.get("ema9"), "macd_hist": _cg.get("macd_hist"),
+                                             "bar": [bar.open, bar.high, bar.low, bar.close, bar.volume],
+                                             "bars": len(bars_by_symbol[rec["symbol"]])})
                     _jt += _time.perf_counter() - _tj
                 if allowed:
                     plans.append({
@@ -675,7 +680,7 @@ class _Collector:
 # neutral ground, and a test asserts the desk imports nothing of the order path.
 
 def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
-                      session_id, source_name, data_status, since=None) -> None:
+                      session_id, source_name, data_status, since=None, chart=None) -> None:
     from journal import ledger as _L
     # A plan armed on a bar older than the desk's own start was found in the
     # history the desk loaded, not watched live: the catalyst, float and
@@ -711,7 +716,7 @@ def _journal_decision(journal, rec, bar, plan, res, inputs, snap, meta,
         source_name=source_name, data_status=data_status,
         bar_resolution=getattr(bar, "timeframe", "1m"),
         float_quality=meta.get("floatQuality"), float_source=meta.get("floatSource"),
-        rules_hash=rules_hash, code_commit=code_commit,
+        rules_hash=rules_hash, code_commit=code_commit, chart=chart,
     )
     journal.commit()      # a decision is visible to the runner the moment it exists
 

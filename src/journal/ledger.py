@@ -297,7 +297,11 @@ _ADDED_COLUMNS = {
     # what the runner saw when it judged the row — its own clock and the
     # desk quote's timestamp — written with the outcome.
     "decisions": (("rules_hash", "TEXT"), ("code_commit", "TEXT"),
-                  ("bar_end_ts", "TEXT"), ("clocks_json", "TEXT")),
+                  ("bar_end_ts", "TEXT"), ("clocks_json", "TEXT"),
+                  # the chart values the Layer 2 gates were judged on, at the
+                  # moment the plan armed — the trigger minute may still have been
+                  # forming, so `bars` alone cannot reproduce them (audit 2026-10-01)
+                  ("chart_json", "TEXT")),
     "orders": (("perm_id", "INTEGER"), ("symbol", "TEXT"), ("exit_confirmed_by", "TEXT"),
                ("filled_qty", "REAL"), ("exit_order_id", "INTEGER"),
                ("rules_hash", "TEXT"), ("code_commit", "TEXT"), ("nbbo_source", "TEXT"),
@@ -366,7 +370,8 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
                     float_quality: Optional[str] = None,
                     float_source: Optional[str] = None,
                     rules_hash: Optional[str] = None,
-                    code_commit: Optional[str] = None) -> str:
+                    code_commit: Optional[str] = None,
+                    chart: Optional[dict] = None) -> str:
     """One plan, one row. Returns the decision_id. Repeats are no-ops.
 
     `plan` is the detector's PullbackPlan (or anything with entry/stop/target
@@ -421,6 +426,10 @@ def record_decision(conn: sqlite3.Connection, *, symbol: str, armed_at, plan,
         int(bool(getattr(plan, "volume_ok", False))),
         outcome, _now(), rules_hash, code_commit, bar_end,
     ))
+    if chart is not None:
+        # First write wins, like gates_json: the values at the arming instant.
+        conn.execute("UPDATE decisions SET chart_json=? WHERE decision_id=? AND chart_json IS NULL",
+                     (_json(chart), did))
     if cur.rowcount == 1:
         # The row was inserted or actually updated: keep what it now says as an
         # immutable revision. A no-op conflict (the same plan re-armed by the

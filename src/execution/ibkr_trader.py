@@ -117,6 +117,26 @@ def _fill_time(trade):
     return None
 
 
+def _capped_below(trade, trigger: float):
+    """The cap price IBKR put on a buy limit (warning 2161), when it is below
+    `trigger`; else None. Read from orderStatus.mktCapPrice, or from the
+    warning's own text ('cap ... your Limit Order to 2.97')."""
+    import re as _re
+    if not any(getattr(e, "errorCode", 0) == 2161 for e in (getattr(trade, "log", None) or [])):
+        return None
+    cap = getattr(getattr(trade, "orderStatus", None), "mktCapPrice", None)
+    if not cap:
+        for e in trade.log:
+            m = _re.search(r"Limit Order to ([0-9]+(?:\.[0-9]+)?)", getattr(e, "message", "") or "")
+            if getattr(e, "errorCode", 0) == 2161 and m:
+                cap = float(m.group(1))
+    try:
+        cap = float(cap)
+    except (TypeError, ValueError):
+        return None
+    return cap if 0 < cap < float(trigger) - 1e-9 else None
+
+
 class PaperTrader:
     """A writable IBKR connection that cannot reach real money."""
 
@@ -464,6 +484,22 @@ class PaperTrader:
                 rec.filled_qty = qty
                 if qty < rec.shares:
                     rec.events.append(f"PARTIAL fill {qty:g} of {rec.shares}")
+            # Warning 2161: IBKR caps a buy limit near its reference price. When
+            # the cap lands BELOW the trigger, the stop-limit can only fill on a
+            # break that already failed (BIYA 2026-09-30: trigger 3.00, capped
+            # to 2.97, filled there, stopped). No backtest fills below the
+            # trigger, and A10 never meant to. Unfilled: cancel and let the
+            # NotFilled path record it (rules audit 2026-10-01).
+            if not (qty and qty > 0) and not getattr(rec, "cap_cancelled", False):
+                cap = _capped_below(trade, rec.trigger)
+                if cap is not None:
+                    try:
+                        self.ib.cancelOrder(trade.order)
+                        rec.cap_cancelled = True
+                        rec.events.append(f"IBKR capped the buy limit to {cap} below the trigger {rec.trigger} "
+                                          f"(warning 2161): cancelled — a below-trigger limit fills only on a failed break")
+                    except Exception as exc:                   # noqa: BLE001
+                        rec.events.append(f"capped to {cap} below the trigger; cancel failed: {exc!r}")
             if filled and filled > 0 and rec.fill_price != filled:
                 rec.fill_price = filled
                 rec.fill_time = _fill_time(trade)

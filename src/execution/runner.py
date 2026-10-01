@@ -34,6 +34,7 @@ from journal import ledger as L
 from .bridge import bar_seconds, decision_clock, intent_from_decision
 from .intent import ENTRY_TTL_MINUTES, SPREAD_K, TRAIL_R, in_regular_hours
 from .ibkr_trader import OrderRefused, PaperTrader
+from journal.risk import RiskVeto
 from .intent import ET, refusals
 
 # The stop of last resort. WHLR 2026-09-23: the broker's stop rested at 7.34
@@ -356,11 +357,27 @@ class Runner:
                 placed = self.trader.place_bracket(intent, now=clock)
         except OrderRefused as exc:
             # Nothing was sent: the trader refuses before it touches the socket.
-            self.conn.execute("UPDATE orders SET status='Refused', updated_at=? WHERE order_id=?",
+            # 'NotFilled', not 'Refused': every one-position query counts an
+            # unexited row alive unless its status is in the dead list, and
+            # 'Refused' was not in it (rules audit 2026-10-01) — one refusal
+            # here blocked every later entry of the day.
+            self.conn.execute("UPDATE orders SET status='NotFilled', updated_at=? WHERE order_id=?",
                               (L._now(), oid))
             L.add_order_event(self.conn, oid, "refused by the trader before sending: "
                               + "; ".join(exc.reasons))
             return "REFUSED", list(exc.reasons)
+        except RiskVeto as exc:
+            # The risk gate is asked inside place_bracket, before anything is
+            # sent. The row used to stay 'intent': open_orders skips intents,
+            # so the 11:30 cleanup never cleared it, the next start marked it
+            # UNRESOLVED, and the one-position rule refused every entry until a
+            # human cleared it (rules audit 2026-10-01, reproduced). Nothing
+            # reached the broker, so the row is dead; the veto still propagates.
+            self.conn.execute("UPDATE orders SET status='NotFilled', updated_at=? WHERE order_id=?",
+                              (L._now(), oid))
+            L.add_order_event(self.conn, oid, f"risk gate vetoed before sending: {exc.reason}")
+            self.conn.commit()
+            raise
         except Exception as exc:                        # noqa: BLE001
             # The send may or may not have reached the broker. The row stays
             # 'intent' and the decision CLAIMED; reconcile_intents() decides.

@@ -131,3 +131,16 @@ def test_paper_data_verdict_is_persisted_and_migrated_onto_an_old_db(tmp_path):
     c = L.connect(db)
     st = L.set_state(c, paper_data="delayed", paper_data_date="2026-09-08")
     assert st["paper_data"] == "delayed" and st["phase"] == "A"
+
+
+def test_a_decision_stores_the_chart_values_its_gates_were_judged_on():
+    """Rules audit 2026-10-01: gates_json is judged on a minute that may still
+    be forming; the ledger now keeps the values, so an audit can tell a formula
+    difference from a timing one."""
+    c = L.connect(":memory:")
+    build_session(FIXTURE, journal=c)
+    rows = c.execute("SELECT chart_json FROM decisions").fetchall()
+    assert rows
+    for (j,) in rows:
+        ch = json.loads(j)
+        assert {"last", "vwap", "ema9", "macd_hist", "bar", "bars"} <= set(ch) and len(ch["bar"]) == 5

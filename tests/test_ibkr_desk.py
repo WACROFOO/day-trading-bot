@@ -684,3 +684,23 @@ def test_a_verified_float_over_the_gate_does_not_join_the_desk(tmp_path, monkeyp
     monkeypatch.setenv("FLOAT_OVERRIDES", str(f))
     assert desk.add_symbols(["CCC"]) == []
     assert "CCC" not in desk.symbols
+
+
+def test_a_partly_streamed_minute_does_not_replace_the_complete_ibkr_minute():
+    """Rules audit 2026-10-01: one ten-second candle used to hand the whole
+    minute to the stream, truncating its volume."""
+    from momentum_platform.dashboard.ibkr_desk import merge_minutes
+    m = lambda ts, v: {"type": "bar", "tf": "1m", "ts": ts, "volume": v}                # noqa: E731
+    t = lambda ts, v: {"type": "bar", "tf": "10s", "ts": ts, "volume": v}               # noqa: E731
+    mins = [m("2026-09-30T13:40:00Z", 6000), m("2026-09-30T13:41:00Z", 6000), m("2026-09-30T13:42:00Z", 6000)]
+    tens = ([t("2026-09-30T13:40:50Z", 900)]                                            # half-covered: IBKR wins
+            + [t(f"2026-09-30T13:41:{s:02d}Z", 1000) for s in range(0, 60, 10)]          # complete: stream wins
+            + [t("2026-09-30T13:42:00Z", 400), t("2026-09-30T13:43:00Z", 300)])          # 13:43 newest, no IBKR bar
+    out = merge_minutes(mins, tens)
+    by = {}
+    for r in out:
+        by.setdefault(r["ts"][:17] + "00Z", []).append(r["tf"])
+    assert by["2026-09-30T13:40:00Z"] == ["1m"]
+    assert by["2026-09-30T13:41:00Z"] == ["10s"] * 6
+    assert by["2026-09-30T13:42:00Z"] == ["1m"]                     # partial and not the newest
+    assert by["2026-09-30T13:43:00Z"] == ["10s"]                    # the forming minute streams

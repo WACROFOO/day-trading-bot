@@ -65,7 +65,12 @@ class FirstPullbackDetector:
 
     Definitions (independent approximations, all configurable):
     - impulse: >= min_impulse_bars consecutive green bars whose total range
-      is >= min_impulse_range_pct of price, with rising/elevated volume;
+      is >= min_impulse_range_pct of price. Volume is NOT checked on the
+      impulse (an earlier version of this line said "with rising/elevated
+      volume"; the code never did — rules audit 2026-10-01). Ross states rising
+      push volume as a preference with no threshold; the two measured versions
+      lost more than the current rule (research/paper-exercise/reports/
+      rules_audit_output.txt, "Ross volume" rows);
     - pullback: 1..max_pullback_bars bars that do not make a new high;
       more than max_pullback_bars expires the setup (course: 5-6 candles
       means lost interest);

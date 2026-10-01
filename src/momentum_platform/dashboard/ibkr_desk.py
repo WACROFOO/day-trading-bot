@@ -840,9 +840,7 @@ class IbkrDesk:
                     ref["iex_ask_size"] = _num(getattr(t, "askSize", None))
             records.append(ref)
             tens = [r for r in store_records(s.store, sym) if r["ts"] >= start_iso]
-            covered = {r["ts"][:17] + "00Z" for r in tens}
-            records += [m for m in mins if m["ts"][:17] + "00Z" not in covered]
-            records += tens
+            records += merge_minutes(mins, tens)
         # Headlines were pulled once, at subscribe. A catalyst published at
         # 08:00 never reached gate 3 and the name was killed all day (audit
         # 2026-09-08). Re-pull every 120 s; dedupe on (symbol, provider_id).
@@ -1036,6 +1034,26 @@ class IbkrDesk:
         self.refresh_session()
         self.log(f"  {', '.join(added)} joined the desk" if added else "  nothing joined the desk")
         return added
+
+
+def merge_minutes(mins: List[dict], tens: List[dict]) -> List[dict]:
+    """IBKR 1-minute history plus the streamed 10-second candles, one source per
+    minute. A minute goes to the stream when all six candles are there, when
+    it is the newest (still forming) minute, or when IBKR has no bar for it;
+    otherwise the IBKR minute wins. It used to go to the stream on ONE candle,
+    so a minute half-covered by the stream (the first minute of the subscribe
+    backfill, a missing five-second half) replaced the complete IBKR minute
+    with a truncated one, undercounting the volume VWAP and the pullback-volume
+    gate read (rules audit 2026-10-01)."""
+    def key(r):
+        return r["ts"][:17] + "00Z"
+    n10: dict = {}
+    for r in tens:
+        n10[key(r)] = n10.get(key(r), 0) + 1
+    newest = max(n10) if n10 else None
+    have_min = {key(m) for m in mins}
+    stream = {k for k, n in n10.items() if n >= 6 or k == newest or k not in have_min}
+    return [m for m in mins if key(m) not in stream] + [r for r in tens if key(r) in stream]
 
 
 def _num(v):

@@ -346,6 +346,7 @@ class PlacedOrder:
     shares: int = 0
     status: str = "submitted"
     stop_status: str = ""
+    cap_cancelled: bool = False     # warning 2161 put the limit below the trigger; cancelled
     # False until the stop leg is known to be resting and active. Always True
     # for a regular-hours bracket once placed; for a pre-market one it stays
     # False until sync() has read the stop leg back without warning 399.

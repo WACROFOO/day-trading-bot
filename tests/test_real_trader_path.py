@@ -159,3 +159,39 @@ def test_ledger_persists_permid_once(tmp_path):
     L.set_perm_id(c, oid, 111); L.set_perm_id(c, oid, 222)          # second write is ignored
     assert c.execute("SELECT perm_id FROM orders WHERE order_id=?", (oid,)).fetchone()[0] == 111
     assert L.open_orders(c)[0]["perm_id"] == 111
+
+
+def test_a_buy_limit_capped_below_the_trigger_is_cancelled(trader):
+    """BIYA 2026-09-30: IBKR warning 2161 capped the 3.01 limit to 2.97, under
+    the 3.00 trigger; it filled on the failed break and stopped out."""
+    from datetime import datetime
+    from types import SimpleNamespace
+    from zoneinfo import ZoneInfo
+    rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
+    cancelled = []
+    trader.ib.cancelOrder = lambda order: cancelled.append(order.orderId)
+    rec = trader.place_bracket(intent(), now=rth)
+    parent = trader.ib.placed[0]
+    parent.order.orderId = rec.parent_id
+    parent.orderStatus.mktCapPrice = 4.97
+    parent.log.append(SimpleNamespace(errorCode=2161, message="... cap (or limit) the price of your Limit Order to 4.97 ..."))
+    trader.sync()
+    assert cancelled == [rec.parent_id] and rec.cap_cancelled
+    assert any("warning 2161" in e for e in rec.events)
+    trader.sync()
+    assert cancelled == [rec.parent_id]                      # once
+
+
+def test_a_cap_above_the_trigger_is_left_alone(trader):
+    from datetime import datetime
+    from types import SimpleNamespace
+    from zoneinfo import ZoneInfo
+    rth = datetime(2026, 9, 8, 10, 15, tzinfo=ZoneInfo("America/New_York"))
+    cancelled = []
+    trader.ib.cancelOrder = lambda order: cancelled.append(order.orderId)
+    rec = trader.place_bracket(intent(), now=rth)
+    parent = trader.ib.placed[0]
+    parent.order.orderId = rec.parent_id
+    parent.log.append(SimpleNamespace(errorCode=2161, message="... cap your Limit Order to 5.01 ..."))
+    trader.sync()
+    assert cancelled == [] and not rec.cap_cancelled

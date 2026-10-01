@@ -810,3 +810,38 @@ def test_a_monitored_position_trails_in_the_ledger_sells_at_the_trailed_level_an
     assert len(lines) == 1 and "regular hours" in lines[0] and len(t2.stops) == 1, lines
     o3 = c2.execute("SELECT protected, stop_status, stop_id FROM orders WHERE parent_id=?", (rec2.parent_id,)).fetchone()
     assert (o3["protected"], o3["stop_status"], o3["stop_id"]) == (1, "Submitted", 901)
+
+
+def test_a_risk_veto_leaves_no_live_order_row_behind(journal):
+    """Rules audit 2026-10-01: the veto left an 'intent' row that the 11:30
+    cleanup skipped and the next start marked UNRESOLVED, so the one-position
+    rule refused every entry until a human cleared it."""
+    from journal.risk import RiskVeto
+
+    class Latched(FakeTrader):
+        def place_bracket(self, intent, now=None):
+            raise RiskVeto("daily loss -3.0 R reached")
+
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=Latched(), now=now,
+               max_age_s=3600, quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    with pytest.raises(RiskVeto):
+        r.step()
+    rows = journal.execute("SELECT status FROM orders").fetchall()
+    assert rows and all(x["status"] == "NotFilled" for x in rows)
+    assert L.positions_alive(journal) == 0
+
+
+def test_an_order_refused_by_the_trader_does_not_hold_the_position_slot(journal):
+    from execution.ibkr_trader import OrderRefused
+
+    class Refusing(FakeTrader):
+        def place_bracket(self, intent, now=None):
+            raise OrderRefused(["stop is not below trigger"])
+
+    now = lambda: datetime(2026, 9, 1, 13, 52, tzinfo=timezone.utc)   # noqa: E731
+    r = Runner(journal, mode="TRADE", dollar_risk=25.0, trader=Refusing(), now=now,
+               max_age_s=3600, quote=lambda s: dict(bid=1.0, ask=1.01, bid_size=1, ask_size=1, ts="2026-09-01T13:52:00Z"))
+    r.step()
+    assert journal.execute("SELECT COUNT(*) FROM orders").fetchone()[0] >= 1
+    assert L.positions_alive(journal) == 0

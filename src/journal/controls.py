@@ -292,6 +292,39 @@ def penny_theme_live(conn: sqlite3.Connection, day: str, sessions: int = 3) -> O
 THIN_STOP_PCT = 0.005      # measurement cut for the A9 count; NOT a gate, nothing refuses on it
 
 
+def refusal_key(text: str) -> str:
+    """One stable label for one refusal reason, so tallies count rules rather
+    than strings. The review used the text before the first colon, which filed
+    A8 under '11' (from '11:25 ET is inside...'), gave every A6 (stop, spread)
+    pair and every stale age its own key, and split the selective rule by
+    price (rules audit 2026-10-01)."""
+    t = text or "?"
+    if "(A8)" in t:
+        return "A8 entry buffer before the hard stop"
+    if "hard stop" in t and " ET is past" in t:
+        return "past the hard stop"
+    if t.startswith("Layer 2 not green"):
+        return "Layer 2 not green (" + ("volume" if "pullback volume" in t else "chart") + ")"
+    if "x the spread" in t or "(A6)" in t:
+        return "A6 stop inside the spread multiple"
+    if t.startswith("selective (A13)"):
+        return "selective (A13): " + ("stop floor" if "stop" in t.split(":", 1)[-1][:12] else
+                                      "price floor" if "price" in t else "plan count")
+    if t.startswith("bar clock") or (t.startswith("decision is ") and " old" in t):
+        return "bar clock (stale plan)"
+    if t.startswith("quote clock"):
+        return "quote clock (no fresh quote)"
+    if t.startswith("backfill decision"):
+        return "backfill decision"
+    if t.startswith("one position at a time"):
+        return "one position at a time"
+    if t.startswith("bar is outside the"):
+        return "outside the 07:00-16:00 session window"
+    if t.startswith("no new entries before 09:30"):
+        return "no pre-market entries (A15)"
+    return t.split(" — ")[0].split(":")[0].split(";")[0][:44]
+
+
 def reason_key(d: dict) -> str:
     """One short label per row: the kill gate for a suppressed plan, the first
     refusal reason for a refused one, the outcome otherwise."""
@@ -303,15 +336,9 @@ def reason_key(d: dict) -> str:
         except ValueError:
             reasons = []
         first = reasons[0] if reasons else "?"
-        if "(A8)" in first:
-            return "refused: A8 entry buffer before the hard stop"
-        if "hard stop" in first and " ET is past" in first:
-            return "refused: past the hard stop"
-        if first.startswith("Layer 2 not green"):
-            # one bucket for the chart, whatever gate the text names; the
-            # per-gate split has its own block in `missed`
-            return "refused: Layer 2 not green (" + ("volume" if "pullback volume" in first else "chart") + ")"
-        return "refused: " + first.split(" — ")[0].split(":")[0].split(";")[0][:44]
+        # one bucket for the chart, whatever gate the text names; the
+        # per-gate split has its own block in `missed`
+        return "refused: " + refusal_key(first)
     return d["outcome"]
 
 

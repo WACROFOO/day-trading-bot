@@ -304,3 +304,17 @@ def test_reason_key_names_the_a8_buffer_and_the_hard_stop_instead_of_a_clock_fra
     assert controls.reason_key(d) == "refused: Layer 2 not green (chart)"
     d["refusal_reasons_json"] = json.dumps(["Layer 2 not green: pullback volume was not lighter than the impulse"])
     assert controls.reason_key(d) == "refused: Layer 2 not green (volume)"
+
+
+def test_refusal_key_counts_rules_not_strings():
+    """Rules audit 2026-10-01: the review filed A8 under '11' and gave every
+    A6 (stop, spread) pair and every stale age its own key."""
+    from journal.controls import refusal_key as k
+    assert k("11:25 ET is inside the last 10 minutes before the 11:30 hard stop (A8): x") == "A8 entry buffer before the hard stop"
+    assert k("stop $0.27/sh is inside 4x the spread ($0.10) — the round trip would eat the trade (A6)") == \
+        k("stop $0.05/sh is inside 4x the spread ($0.02) — the round trip would eat the trade (A6)") == \
+        "A6 stop inside the spread multiple"
+    assert k("decision is 5247s old; a stale plan is not the trade") == k("bar clock: the bar closed 584s before") \
+        == "bar clock (stale plan)"
+    assert k("selective (A13): stop 1.7% of price, under 2%") == "selective (A13): stop floor"
+    assert k("Layer 2 not green: pullback volume was not lighter than the impulse") == "Layer 2 not green (volume)"
