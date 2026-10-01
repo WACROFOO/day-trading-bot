@@ -214,6 +214,13 @@ def main(argv=None) -> int:
         try:
             bars = fetch_day(client, d, sorted(uni[d]), cache)
         except Exception as exc:                                     # noqa: BLE001
+            if "401" in str(exc) or "403" in str(exc):
+                # 2026-09-30: a rejected key printed 2,608 identical lines. An
+                # auth failure is not a bad day; it fails every day the same way.
+                print(f"  {d}: {str(exc)[:200]}\nstopped: Alpaca refused the credentials, so every "
+                      f"session would fail the same way. Generate new keys (app.alpaca.markets → "
+                      f"API Keys), put them in .env as ALPACA_KEY_ID / ALPACA_SECRET_KEY, run again.")
+                return 2
             print(f"  {d}: fetch failed ({str(exc)[:120]})"); continue
         for sym, raw in bars.items():
             rows = [r for r in to_rows(raw) if E.dtime(4, 0) <= r[0].time() < E.dtime(16, 0)]

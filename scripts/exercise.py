@@ -876,12 +876,27 @@ def cmd_whatif(args) -> int:
     idx = "off" if args.plan_index is None else args.plan_index
     print(f"\n{BOLD}WHAT IF · selective rule{END}  stop >= {args.stop_pct:g}% · price >= ${args.min_price:g} · "
           f"plan index <= {idx} · {days[0]}..{days[-1]} ({len(days)} session(s))")
-    print("  plans that passed Layer 1, prospective only · fill at trigger, no costs: an upper bound\n")
+    print("  plans that passed Layer 1, prospective only · fill at trigger · 'net' = after costs at "
+          "$40 / $2,000 with the spread proxy\n")
+    # Costs (2026-09-30): the plans a stop floor refuses are the tight-stop
+    # ones, where a few cents of spread are a large share of R. Scored at the
+    # live sizing with the edge hunt's spread proxy (`backtest_recent`
+    # COST_MODEL "live"); 5-minute dollar volume is not on the ledger row, so
+    # the proxy's middle volume tier stands in.
+    import backtest_recent as BR
+    BR.COST_MODEL = "live"
+    def cost(x):
+        t, st = float(x["trigger"]), float(x["stop"])
+        return BR.cost_r(t, st, True, pm=x["ts_et"][11:16] < "09:30")
     def row(name, ds):
         s_ = [x["strategy_r"] for x in ds if x["strategy_r"] is not None]
         t_ = [x["trail_r"] for x in ds if x["trail_r"] is not None]
-        print(f"  {name:<22}{len(ds):>5}{len(s_):>6}{sum(s_):>+10.2f}{sum(t_):>+10.2f}")
-    print(f"  {'':<22}{'n':>5}{'trig':>6}{'fixed 2R':>10}{'trail':>10}")
+        c_ = [cost(x) for x in ds if x["strategy_r"] is not None]
+        ct = [cost(x) for x in ds if x["trail_r"] is not None]
+        print(f"  {name:<22}{len(ds):>5}{len(s_):>6}{sum(s_):>+10.2f}{sum(t_):>+10.2f}"
+              f"{sum(s_) - sum(c_):>+12.2f}{sum(t_) - sum(ct):>+12.2f}"
+              f"{(sum(c_) / len(c_) if c_ else 0):>9.2f}")
+    print(f"  {'':<22}{'n':>5}{'trig':>6}{'fixed 2R':>10}{'trail':>10}{'fixed net':>12}{'trail net':>12}{'cost/tr':>9}")
     row("refused by the rule", cut)
     row("kept by the rule", kept)
     if lines:
