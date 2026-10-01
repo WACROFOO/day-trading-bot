@@ -867,6 +867,8 @@ def cmd_whatif(args) -> int:
                 continue
             trig, stop = float(d["trigger"]), float(d["stop"])
             why = probe._selective(d, SimpleNamespace(trigger=trig, risk_per_share=round(trig - stop, 4)))
+            if args.start and d["ts_et"][11:16] < args.start:
+                why = why + [f"armed {d['ts_et'][11:16]}, before {args.start}"]
             (cut if why else kept).append(d)
             if why:
                 lines.append(f"  {d['ts_et'][:16]} {d['symbol']:<6}{trig:>7.2f}{stop:>7.2f}"
@@ -875,7 +877,8 @@ def cmd_whatif(args) -> int:
                              + "; ".join(w.replace('selective (A13): ', '') for w in why)[:70])
     idx = "off" if args.plan_index is None else args.plan_index
     print(f"\n{BOLD}WHAT IF · selective rule{END}  stop >= {args.stop_pct:g}% · price >= ${args.min_price:g} · "
-          f"plan index <= {idx} · {days[0]}..{days[-1]} ({len(days)} session(s))")
+          f"plan index <= {idx}" + (f" · entries from {args.start}" if args.start else "")
+          + f" · {days[0]}..{days[-1]} ({len(days)} session(s))")
     print("  plans that passed Layer 1, prospective only · fill at trigger · 'net' = after costs at "
           "$40 / $2,000 with the spread proxy\n")
     # Costs (2026-09-30): the plans a stop floor refuses are the tight-stop
@@ -1127,6 +1130,7 @@ def main(argv=None) -> int:
     wi.add_argument("--stop-pct", type=float, default=2.0)
     wi.add_argument("--min-price", type=float, default=2.0)
     wi.add_argument("--plan-index", type=int, default=None, help="refuse plans after the Nth of a symbol's day (off by default)")
+    wi.add_argument("--start", help="refuse plans armed before this ET time, e.g. 09:30 (the rules audit's candidate)")
     wi.add_argument("--limit", type=int, default=40)
     ah = sub.add_parser("ah-exit", help="manual exit of one held position; --market inside regular hours needs no desk")
     ah.add_argument("order_id", type=int); ah.add_argument("--confirm", action="store_true")
