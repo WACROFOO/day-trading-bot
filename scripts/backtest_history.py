@@ -51,7 +51,7 @@ import sqlite3
 import sys
 import time
 from collections import defaultdict
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from statistics import mean
 
@@ -109,6 +109,16 @@ def fetch_day(client, day: str, symbols: list[str], cache: Path) -> dict[str, li
     if need:
         start = datetime.fromisoformat(f"{day}T04:00:00").replace(tzinfo=E.ET).astimezone(timezone.utc)
         end = datetime.fromisoformat(f"{day}T16:00:00").replace(tzinfo=E.ET).astimezone(timezone.utc)
+        # A free Alpaca plan refuses SIP bars from the last 15 minutes (HTTP 403
+        # "subscription does not permit querying recent SIP data"), so a session
+        # still open, or closed under 15 minutes ago, is read up to 16 minutes
+        # ago — and not cached, because the day is not complete yet.
+        recent = datetime.now(timezone.utc) - timedelta(minutes=16)
+        partial = end > recent
+        if partial:
+            end = recent
+        if end <= start:
+            return {s: have.get(s, []) for s in symbols}
         for i in range(0, len(need), 100):
             chunk = need[i:i + 100]
             token = None
@@ -132,8 +142,9 @@ def fetch_day(client, day: str, symbols: list[str], cache: Path) -> dict[str, li
                 if not token:
                     break
             have.update(got)
-        cache.mkdir(parents=True, exist_ok=True)
-        f.write_text(json.dumps(have))
+        if not partial:
+            cache.mkdir(parents=True, exist_ok=True)
+            f.write_text(json.dumps(have))
     return {s: have.get(s, []) for s in symbols}
 
 
