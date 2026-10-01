@@ -377,3 +377,34 @@ first impulse bar's open) — with rule 5, and instead of it. His words:
 *"50% is a hard cut ... I prefer to be consolidating in the top 20% 25%"*
 (DP4ayEWhmvM 00:30:17); *"I never want to see the price retrace more than 50%
 of the move"* (HYoQYCBW4sw 00:34:22). Never run before this addendum.
+
+### Addendum 2026-10-01c — three opening-risk candidates, written before any run
+
+**Origin.** One live paper trade, outside the data: NXL 2026-10-01, a plan
+(trigger 8.87, stop 8.58, 3.3 %) built on two pre-market candles that moved
+0.28 and 0.27, filled at 09:30:23 and stopped five seconds later at 8.48
+(−1.41 R) in an opening minute that ranged 8.26–9.08 (Alpaca SIP). It was
+NXL's fifth armed plan of the day. The ten-year plan cache ends 2026-08-21,
+so the trade that suggested these rules is not in the sample. None of the
+three has been computed on any data before this addendum.
+
+**The three deciding variants (K becomes 46, α = 0.05 / 46 for these three).**
+
+| id | rule | plan field |
+|---|---|---|
+| O1 | stop distance ≥ 1.0 × the mean high–low range of the 5 completed 1-minute bars before the trigger bar | `range5` |
+| O2 | no fill in the first 2 minutes of regular hours (a fill bar of 09:30 or 09:31 is cancelled) | fill-bar time |
+| O3 | at most 3 armed plans per name per day; the 4th onwards is refused (count includes plans the filters killed) | `plan_index` |
+
+**Adoption rule:** unchanged and as strict as addendum 2026-10-01b — train
+and test better than B, ≥ 200 test trades, better in 2 of 3 test years,
+day-paired bootstrap lower bound > 0 at α = 0.05 / 46, under BOTH mode A and
+mode C. **Reported, never deciding:** O1 at 0.5× and 1.5×, O2 at 1 and 5
+minutes, O3 at 1, 2 and 5 plans, and all three together.
+
+**Contamination, stated in advance.** O2 sits next to E1 "start 09:30"
+(read on 2024-2026, fails) and O1 next to E2 "stop floor" (read, fails). They
+are different rules (a two-minute window, not the whole pre-market; a stop
+relative to recent volatility, not to price), but a pass by O1 or O2 is
+flagged as adjacent to a read lever. Any pass goes live only behind a switch,
+OFF, until ≥ 200 prospective paper trades confirm it.
