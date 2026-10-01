@@ -664,6 +664,13 @@ def confirm_exit(conn: sqlite3.Connection, order_id: int, *, price: float, ts) -
                  (price, _et(ts), _now(), order_id))
 
 
+def reprice_exit(conn: sqlite3.Connection, order_id: int, *, price: float, ts) -> None:
+    """A16: the pending exit's limit was moved; the row keeps ExitPending."""
+    conn.execute("""UPDATE orders SET exit_price=?, exit_ts=?, updated_at=?
+                    WHERE order_id=? AND status='ExitPending'""",
+                 (price, _et(ts), _now(), order_id))
+
+
 def pending_exits(conn: sqlite3.Connection) -> list[sqlite3.Row]:
     return conn.execute("SELECT * FROM orders WHERE status='ExitPending'").fetchall()
 

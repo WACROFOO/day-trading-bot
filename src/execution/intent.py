@@ -84,10 +84,32 @@ ENTRY_CUTOFF = time(11, 20)
 ENTRY_LIMIT_OFFSET_PCT = 0.3
 ENTRY_TTL_MINUTES = 3
 
+# A16 (owner, 2026-10-01: "make the pre-market exit offset scale with price and
+# spread, and check that an unfilled exit is re-sent"). The extended-hours sell
+# is a limit at bid − offset (`.claude/skills/extended-hours/SKILL.md`: "10–15¢
+# ... below the bid — it sweeps the levels up to your cap"). A fixed 10¢ is up
+# to ~1.7 R of slip on a $2 name with a 6¢ stop, so the offset is 1% of the bid
+# or one spread, whichever is wider, between 3¢ and 10¢: unchanged at $10 and
+# up, smaller on cheap names. A smaller offset may not sweep, so an exit the
+# bid has run below is re-priced every EXIT_CHASE_SECONDS on the SAME order
+# (`Runner.chase_exits`), which can never sell twice. All four numbers are
+# reasoned, not measured (Approximation), and printed with every exit.
+EXIT_OFFSET_PCT = 1.0
+EXIT_OFFSET_MIN = 0.03
+EXIT_OFFSET_MAX = 0.10
+EXIT_CHASE_SECONDS = 5.0
+
 
 def entry_limit(trigger: float) -> float:
     """The stop-limit's limit price for a plan whose trigger is `trigger`."""
     return round(trigger + max(0.01, trigger * ENTRY_LIMIT_OFFSET_PCT / 100.0), 2)
+
+
+def exit_offset(bid: float, ask: Optional[float] = None) -> float:
+    """A16: how far under the bid an extended-hours limit sell is priced."""
+    spread = (ask - bid) if ask is not None and ask > bid else 0.0
+    raw = max(bid * EXIT_OFFSET_PCT / 100.0, spread)
+    return round(min(EXIT_OFFSET_MAX, max(EXIT_OFFSET_MIN, raw)), 2)
 
 
 def in_premarket(now: Optional[datetime] = None) -> bool:

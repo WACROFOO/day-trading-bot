@@ -92,3 +92,30 @@ def test_corrected_modes_change_only_the_ambiguous_bars():
     rc = RA.run_exit([first, spike, tail], entry, stop, entry, 1.0, dtime(11, 30), "C", "entry")
     assert rh[2] == 1 and abs(rh[0] - 2.0) < 1e-9              # H: trail raised to 5.40 by the spike, faded through
     assert rc[2] == 2 and rc[0] < 0.5 + 1e-9 or rc[2] == 2     # C: the low is tested before the spike raises the stop
+
+
+def _plan(t="09:31", arm_et=(9, 31), fill_et=(9, 30), **kw):
+    ET = ZoneInfo("America/New_York")
+    arm = int(datetime(2025, 3, 3, *arm_et, tzinfo=ET).timestamp())
+    t_in = int(datetime(2025, 3, 3, *fill_et, tzinfo=ET).timestamp())
+    p = {"sym": "X", "day": "2025-03-03", "t": t, "arm": arm, "entry": 5.0, "stop": 4.85, "stop_pct": 3.0,
+         "fade": 0.0, "fade_prev": 0.0, "red": [], "red_prev": [], "retrace": 0.3, "macd_line_pos": True,
+         "push_rising": True, "push_elevated": True, "pm": False, "dv5": 1e6, "spread_ratio": 50.0,
+         "out": {("A", "base"): (t_in, t_in + 120, 1.0, False, 5.0)}}
+    p.update(kw)
+    return p
+
+
+def test_opening_risk_hooks_addendum_2026_10_01c():
+    base = dict(RA.BASE)
+    assert RA.passes(_plan(range5=0.10), dict(base, range_k=1.0))           # 0.15 stop >= 0.10 range
+    assert not RA.passes(_plan(range5=0.20), dict(base, range_k=1.0))       # 0.15 < 0.20
+    assert not RA.passes(_plan(range5=None), dict(base, range_k=1.0))       # unknown range: refused
+    assert RA.passes(_plan(plan_index=3), dict(base, max_index=3))
+    assert not RA.passes(_plan(plan_index=4), dict(base, max_index=3))
+    assert RA.passes(_plan(range5=None, plan_index=9), base)                 # B ignores both fields
+    p = _plan(t="09:29", arm_et=(9, 29), fill_et=(9, 30))
+    assert len(RA.portfolio({"2025-03-03": [p]}, base)) == 1
+    assert RA.portfolio({"2025-03-03": [p]}, dict(base, lockout="09:32")) == []        # 09:30 fill cancelled
+    late = _plan(t="09:31", arm_et=(9, 31), fill_et=(9, 32))
+    assert len(RA.portfolio({"2025-03-03": [late]}, dict(base, lockout="09:32"))) == 1

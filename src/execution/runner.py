@@ -32,7 +32,8 @@ from typing import Callable, NamedTuple, Optional
 from journal import ledger as L
 
 from .bridge import bar_seconds, decision_clock, intent_from_decision
-from .intent import ENTRY_TTL_MINUTES, SPREAD_K, TRAIL_R, in_regular_hours
+from .intent import (ENTRY_TTL_MINUTES, EXIT_CHASE_SECONDS, SPREAD_K, TRAIL_R, exit_offset,
+                     in_regular_hours)
 from .ibkr_trader import OrderRefused, PaperTrader
 from journal.risk import RiskVeto
 from .intent import ET, refusals
@@ -726,7 +727,7 @@ class Runner:
         return done
 
     # ------------------------------------------------- the monitored stop
-    def watch_stops(self, offset: float = 0.10) -> list[str]:
+    def watch_stops(self, offset: Optional[float] = None) -> list[str]:
         """TRADE only. For every filled position with no resting stop, exit at
         bid − offset the moment the bid touches the stop.
 
@@ -752,7 +753,8 @@ class Runner:
             # Sell what was filled, not what was asked for: a partial fill
             # sold at `shares` would leave the book short the difference.
             qty = int(o["filled_qty"]) if o["filled_qty"] else int(o["shares"])
-            px = self.trader.exit_limit(o["symbol"], qty, bid, offset=offset,
+            off = offset if offset is not None else exit_offset(bid, q.get("ask"))
+            px = self.trader.exit_limit(o["symbol"], qty, bid, offset=off,
                                         outside_rth=True)
             exit_id = getattr(self.trader, "last_exit_order_id", None)
             # Sent, not filled: ExitPending until sync_fills reads the fill.
@@ -763,6 +765,52 @@ class Runner:
                               f"watch_stops: bid {bid} <= stop {level}; SELL LMT {px} x{qty} sent "
                               f"(order {exit_id}); fill not yet confirmed")
             done.append(f"{o['symbol']} x{qty} SELL LMT {px} (bid {bid} <= stop {level})")
+        self.conn.commit()
+        return done
+
+    # ------------------------------------------------- A16: an exit the tape ran past
+    def chase_exits(self, seconds: float = EXIT_CHASE_SECONDS) -> list[str]:
+        """TRADE only. A limit sell from the monitored or enforced stop that
+        has not filled after `seconds`, with the bid now UNDER its limit, is
+        re-priced to bid − offset on the same order. Until 2026-10-01 nothing
+        did this: the row read ExitPending and the sell sat above the market
+        until the 11:30 flatten. A limit the bid is still at or above is
+        marketable and is left to fill; market exits are never chased."""
+        if self.mode != "TRADE" or not hasattr(self.trader, "reprice_exit"):
+            return []
+        done: list[str] = []
+        now = self.now()
+        for o in L.pending_exits(self.conn):
+            if o["exit_reason"] not in ("monitored_stop", "stop_enforced") or o["exit_price"] is None \
+                    or not o["exit_order_id"]:
+                continue
+            try:
+                sent = datetime.fromisoformat(str(o["exit_ts"]).replace("Z", "+00:00"))
+            except ValueError:
+                continue
+            if sent.tzinfo is None:
+                sent = sent.replace(tzinfo=timezone.utc)
+            if (now - sent).total_seconds() < seconds:
+                continue
+            q = self.quote(o["symbol"]) if self.quote else None
+            if not q or q.get("bid") is None:
+                continue
+            bid, was = float(q["bid"]), float(o["exit_price"])
+            if bid >= was:
+                continue
+            px = round(bid - exit_offset(bid, q.get("ask")), 2)
+            try:
+                moved = self.trader.reprice_exit(int(o["exit_order_id"]), px)
+            except Exception as exc:                            # noqa: BLE001
+                L.add_order_event(self.conn, o["order_id"], f"chase_exits: re-price raised {exc!r}; left as is")
+                continue
+            if not moved:
+                continue
+            L.reprice_exit(self.conn, o["order_id"], price=px, ts=now)
+            L.add_order_event(self.conn, o["order_id"],
+                              f"chase_exits (A16): bid {bid} under the unfilled SELL LMT {was}; "
+                              f"re-priced to {px} (order {o['exit_order_id']})")
+            done.append(f"{o['symbol']} SELL LMT {was:.2f} -> {px:.2f} (bid {bid:.2f}, not filled)")
         self.conn.commit()
         return done
 
@@ -849,7 +897,8 @@ class Runner:
                 exit_id = self.trader.exit_market(o["symbol"], qty, now=now)
                 px, how = None, "MKT"
             else:
-                px = self.trader.exit_limit(o["symbol"], qty, bid, offset=0.10, outside_rth=True)
+                px = self.trader.exit_limit(o["symbol"], qty, bid, offset=exit_offset(bid, q.get("ask")),
+                                            outside_rth=True)
                 exit_id = getattr(self.trader, "last_exit_order_id", None)
                 how = f"LMT {px}"
             L.record_exit(self.conn, o["order_id"], reason="stop_enforced", price=px,

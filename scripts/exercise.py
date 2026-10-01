@@ -461,6 +461,9 @@ def manage_exits(runner, flattened: bool, now_et) -> bool:
     # without a fill is cancelled and the runner sells (WHLR 2026-09-23).
     for line in guarded("stop enforcement", runner.enforce_stops) or []:
         print(f"  {now_et:%H:%M:%S}  {BAD}STOP ENFORCED{END} {line}")
+    # A16: a limit sell the bid ran below is re-priced on the same order.
+    for line in guarded("exit chase", runner.chase_exits) or []:
+        print(f"  {now_et:%H:%M:%S}  {WARN}EXIT CHASE{END} {line}")
     # A3: the resting stop follows the high at one initial risk, never down.
     for line in guarded("trailing stop", runner.trail_stops) or []:
         print(f"  {now_et:%H:%M:%S}  {OK}TRAIL{END}    {line}")

@@ -322,6 +322,11 @@ def passes(p: dict, c: dict) -> bool:
         return False
     if c["macd_line"] and not p["macd_line_pos"]:
         return False
+    # addendum 2026-10-01c (scripts/rules_audit_open.py adds the fields)
+    if c.get("range_k") is not None and (p.get("range5") is None or p["entry"] - p["stop"] < c["range_k"] * p["range5"]):
+        return False
+    if c.get("max_index") is not None and p.get("plan_index", 1) > c["max_index"]:
+        return False
     return True
 
 
@@ -359,6 +364,11 @@ def portfolio(plans_by_day: dict, c: dict) -> list[dict]:
                 busy.append((t_order + c["ttl"] * 60, p["sym"]))
                 continue
             t_in, t_out, r, stopish, px = o
+            if c.get("lockout"):
+                hm = datetime.fromtimestamp(t_in, timezone.utc).astimezone(E.ET).strftime("%H:%M")
+                if "09:30" <= hm < c["lockout"]:            # O2: the opening-minutes fill is cancelled
+                    busy.append((t_order + c["ttl"] * 60, p["sym"]))
+                    continue
             busy.append((t_out + 60, p["sym"]))
             pending.append((t_out + 60, r))
             net = r - cost_live(p["entry"], p["stop"], stopish, p["pm"], p["dv5"], c["risk"], c["notional"],
@@ -400,7 +410,8 @@ def split_stats(trades: list[dict]) -> dict:
     return out
 
 
-def paired_lb(var: list[dict], base: list[dict], draws: int = 20000, seed: int = 20261001) -> float:
+def paired_lb(var: list[dict], base: list[dict], draws: int = 20000, seed: int = 20261001,
+              alpha: float | None = None) -> float:
     """Day-paired bootstrap of (variant - B) mean net R per trade on test days,
     lower bound at one-sided ALPHA."""
     days = sorted({t["day"] for t in var + base if t["day"] >= SPLIT})
@@ -418,7 +429,7 @@ def paired_lb(var: list[dict], base: list[dict], draws: int = 20000, seed: int =
     pick = rng.integers(0, len(days), size=(draws, len(days)))
     mv = sv[pick].sum(1) / np.maximum(1, nv[pick].sum(1))
     mb = sb[pick].sum(1) / np.maximum(1, nb[pick].sum(1))
-    return float(np.quantile(mv - mb, ALPHA))
+    return float(np.quantile(mv - mb, ALPHA if alpha is None else alpha))
 
 
 VARIANTS = [

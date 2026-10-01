@@ -1002,6 +1002,28 @@ longer replaces IBKR's complete minute; refusal tallies count rules, not
 strings; decisions store the chart values their gates were judged on.
 Detail: `research/paper-exercise/reports/2026-10-01-rules-audit.md`.
 
+**Amendment A16 — the extended-hours exit scales and chases (owner, 2026-10-01).**
+The monitored stop and the enforced stop sold at a fixed bid − 10¢, the
+figure in `.claude/skills/extended-hours/SKILL.md` ("10–15¢ ... below the
+bid"). On a $2 name with a 6¢ stop that is up to about 1.7 R of slip. The
+offset is now 1 % of the bid or one spread, whichever is wider, between 3¢
+and 10¢ (`execution.intent.exit_offset`): unchanged at $10 and up. And an
+exit was never re-sent: once sent, the row read ExitPending and a limit the
+bid had run below sat above the market until the 11:30 flatten.
+`Runner.chase_exits` now re-prices such a sell every 5 s to bid − offset on
+the SAME order id, so a chase can never sell twice. Execution only — no
+selection rule moves, no cohort starts. All four numbers are reasoned, not
+measured (Approximation). **Undo:** `EXIT_OFFSET_MIN = EXIT_OFFSET_MAX = 0.10`
+and drop the `chase_exits` call in `scripts/exercise.py`.
+
+**Opening-risk candidates (2026-10-01, addendum 2026-10-01c) — none adopted.**
+After the NXL loss (a plan built on two pre-market candles, filled at 09:30:23
+into an 82¢ opening minute, stopped five seconds later at −1.41 R), three
+rules were preregistered and run on ten years (`scripts/rules_audit_open.py`):
+stop ≥ 1× the recent 1-minute range, no fill in the first two minutes, at
+most three plans per name per day. None passes in either mode; B stays.
+Output: `research/paper-exercise/reports/rules_audit_open_output.txt`.
+
 **Amendment A7 — the catalyst gets one word (2026-09-21, 10:42 ET; gate 3
 input, flag-only under A2; the `pillars` count moves).** "Why Is Greenland
 Mines Stock Surging on Monday?" sat on GRML's card graded *Unclassified* and

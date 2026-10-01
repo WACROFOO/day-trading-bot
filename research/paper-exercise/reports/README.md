@@ -14,5 +14,6 @@ says **SYNTHETIC FIXTURE** in its second line.
 |---|---|
 | `2026-10-01-rules-audit.md` | every operating rule (5, E, F, G) one at a time on ten years, the indicator audit, the defects fixed — verdict: no rule change, one candidate (A15) built OFF |
 | `rules_audit_output*.txt`, `rules_audit_results.json`, `indicator_audit_output.txt` | the raw outputs behind it |
+| `rules_audit_open_output.txt`, `rules_audit_open_results.json` | addendum 2026-10-01c: three opening-risk candidates (stop vs recent range, opening lockout, plans per name) after the NXL loss — none passes; the first plan of the day is the least-bad cohort but still negative |
 | `ablation_live_costs*.txt` | the ten-year ablation at live costs (2026-09-29/30) |
 | `2026-09-26-premarket-history.md`, `2026-09-25-full-assessment.md` | earlier assessments |

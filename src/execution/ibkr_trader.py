@@ -620,6 +620,23 @@ class PaperTrader:
         rec.events.append(f"stop moved {was} -> {rec.trail_stop} (A3 trail)")
         return order.orderId
 
+    def reprice_exit(self, order_id: int, new_px: float) -> bool:
+        """A16: move a working limit SELL to a new price. Same order id, so IBKR
+        treats it as a modification: there is only ever one sell working and
+        a chase can never sell the position twice. False when the order is
+        not found or no longer working (filled, cancelled) — sync confirms."""
+        if self.ib is None:
+            raise RuntimeError("not connected")
+        t = next((x for x in self.ib.trades() if x.order.orderId == order_id), None)
+        if t is None or t.order.orderType != "LMT" or t.order.action != "SELL":
+            return False
+        if t.orderStatus.status in ("Filled", "Cancelled", "ApiCancelled", "Inactive"):
+            return False
+        t.order.lmtPrice = round(new_px, 2)
+        t.order.transmit = True
+        self.ib.placeOrder(t.contract, t.order)
+        return True
+
     def cancel_order_id(self, order_id: int) -> bool:
         """Cancel one resting order by id. True when it was found and the
         cancel was sent. The manual exit cancels the stop leg before it

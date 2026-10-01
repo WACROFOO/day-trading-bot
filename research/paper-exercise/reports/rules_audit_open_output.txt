@@ -1,0 +1,40 @@
+88823 plans on 2576 sessions (2016-02-03..2026-08-21) · range5 known for 88391 · alpha 0.05/46 · costs live ($40 / $2,000)
+
+=== MODE A ===
+  rule · variant                                    tr n    tr R  te n    te R   te tot  te DD  yrs 2024/25/26        lb      verdict
+  B (live rules)                                    2246  -0.411  1492  -0.477   -712.2  712.2  -0.49/-0.48/-0.45             
+  O1 stop vs range · stop >= 1.0x recent 1-min range  1229  -0.429   742  -0.453   -335.9  338.0  -0.49/-0.50/-0.34     -0.090  keep B
+  O2 opening lockout · no fill 09:30-09:31          2225  -0.401  1468  -0.483   -709.7  709.7  -0.49/-0.50/-0.46     -0.023  keep B
+  O3 plans per name · at most 3 a day                971  -0.368   712  -0.468   -333.5  335.8  -0.51/-0.43/-0.49     -0.090  keep B
+  -- reported, never deciding --
+  O1 stop vs range · 0.5x                           2217  -0.413  1460  -0.476   -694.6  694.6  -0.47/-0.50/-0.44     -0.024  (keep B)
+  O1 stop vs range · 1.5x                            217  -0.438   137  -0.352    -48.2   50.1  -0.36/-0.34/-0.36     -0.153  (keep B)
+  O2 opening lockout · 1 minute                     2239  -0.410  1476  -0.477   -704.8  704.8  -0.49/-0.48/-0.45     -0.012  (keep B)
+  O2 opening lockout · 5 minutes                    2188  -0.404  1442  -0.482   -695.4  695.4  -0.49/-0.50/-0.45     -0.024  (keep B)
+  O3 plans per name · 1 a day                        315  -0.251   244  -0.310    -75.7   77.6  -0.24/-0.36/-0.32     -0.028  (keep B)
+  O3 plans per name · 2 a day                        645  -0.334   495  -0.374   -185.3  187.3  -0.40/-0.35/-0.38     -0.027  (keep B)
+  O3 plans per name · 5 a day                       1536  -0.440  1047  -0.489   -512.3  515.1  -0.52/-0.47/-0.48     -0.076  (keep B)
+  O1+O2+O3 · all three                               495  -0.367   336  -0.443   -148.7  153.1  -0.49/-0.53/-0.27     -0.126  (keep B)
+
+=== MODE C ===
+  rule · variant                                    tr n    tr R  te n    te R   te tot  te DD  yrs 2024/25/26        lb      verdict
+  B (live rules)                                    2231  -0.436  1479  -0.475   -701.9  701.9  -0.53/-0.48/-0.38             
+  O1 stop vs range · stop >= 1.0x recent 1-min range  1222  -0.453   735  -0.462   -339.6  341.6  -0.49/-0.49/-0.38     -0.115  keep B
+  O2 opening lockout · no fill 09:30-09:31          2210  -0.426  1455  -0.481   -700.4  700.4  -0.53/-0.50/-0.39     -0.027  keep B
+  O3 plans per name · at most 3 a day                964  -0.398   709  -0.439   -311.4  313.7  -0.54/-0.36/-0.42     -0.073  keep B
+  -- reported, never deciding --
+  O1 stop vs range · 0.5x                           2202  -0.440  1444  -0.477   -689.4  689.4  -0.51/-0.50/-0.40     -0.036  (keep B)
+  O1 stop vs range · 1.5x                            216  -0.448   137  -0.350    -48.0   49.9  -0.38/-0.30/-0.41     -0.171  (keep B)
+  O2 opening lockout · 1 minute                     2224  -0.435  1463  -0.475   -694.3  694.3  -0.53/-0.49/-0.38     -0.015  (keep B)
+  O2 opening lockout · 5 minutes                    2173  -0.430  1431  -0.485   -693.7  693.7  -0.53/-0.51/-0.38     -0.033  (keep B)
+  O3 plans per name · 1 a day                        311  -0.266   242  -0.307    -74.2   76.2  -0.29/-0.33/-0.29     -0.049  (keep B)
+  O3 plans per name · 2 a day                        640  -0.352   493  -0.352   -173.8  175.7  -0.45/-0.32/-0.28     -0.021  (keep B)
+  O3 plans per name · 5 a day                       1526  -0.457  1041  -0.470   -488.8  492.7  -0.56/-0.45/-0.38     -0.064  (keep B)
+  O1+O2+O3 · all three                               490  -0.388   332  -0.445   -147.8  152.2  -0.51/-0.50/-0.30     -0.151  (keep B)
+
+=== ADOPTION: must pass under BOTH A and C ===
+  O1 stop vs range · stop >= 1.0x recent 1-min range      A keep B  C keep B  -> keep B
+  O2 opening lockout · no fill 09:30-09:31                  A keep B  C keep B  -> keep B
+  O3 plans per name · at most 3 a day                      A keep B  C keep B  -> keep B
+
+written /home/user/day-trading-bot/research/paper-exercise/reports/rules_audit_open_results.json

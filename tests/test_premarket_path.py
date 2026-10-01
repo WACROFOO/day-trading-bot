@@ -207,3 +207,46 @@ def test_no_fresh_quote_at_order_time_refuses_the_entry(journal):
 
 def test_watch_stops_is_inert_in_log_only(journal):
     assert Runner(journal, mode="LOG_ONLY", dollar_risk=20.0).watch_stops() == []
+
+
+# ---- A16: exit offset scales with price; an unfilled exit is re-priced on the same order ----
+def test_exit_offset_scales_with_price_and_spread():
+    from execution.intent import exit_offset
+    assert exit_offset(2.00, 2.01) == 0.03          # cheap name: the 3-cent floor, not 10
+    assert exit_offset(5.00, 5.02) == 0.05          # 1% of the bid
+    assert exit_offset(5.00, 5.08) == 0.08          # a wide spread wins
+    assert exit_offset(25.0, 25.05) == 0.10         # capped at the old fixed 10 cents
+    assert exit_offset(3.00) == 0.03                # no ask: price alone
+
+
+def test_an_exit_the_bid_ran_below_is_repriced_not_resent(journal):
+    from datetime import timedelta
+    L.set_state(journal, phase="C", probe_verdict="queued", probe_date="2026-09-08", a1_accepted="yes")
+    t = FakeTrader()
+    reprices = []
+    t.last_exit_order_id = 77
+    t.reprice_exit = lambda oid, px: reprices.append((oid, px)) or True
+    quotes = {"PMX": dict(bid=6.02, ask=6.04, bid_size=100, ask_size=100, ts="2026-09-08T12:46:10Z")}
+    clock = [NOW()]
+    r = Runner(journal, mode="TRADE", dollar_risk=20.0, trader=t, now=lambda: clock[0], max_age_s=3600,
+               quote=lambda s: quotes.get(s))
+    _fill(journal, r, t, quotes)
+    quotes["PMX"].update(bid=5.90, ask=5.92)
+    (line,) = r.watch_stops()
+    sent = journal.execute("SELECT exit_price, exit_order_id FROM orders").fetchone()
+    assert sent["exit_price"] == 5.84 and sent["exit_order_id"] == 77      # 5.90 - 1% (6c), not 10c
+    assert r.chase_exits() == []                                           # not yet 5 s
+    clock[0] = clock[0] + timedelta(seconds=6)
+    quotes["PMX"].update(bid=5.86, ask=5.88)
+    assert r.chase_exits() == [] and reprices == []                        # bid still above the limit: it fills
+    quotes["PMX"].update(bid=5.70, ask=5.74)
+    (moved,) = r.chase_exits()
+    assert reprices == [(77, 5.64)] and "5.84 -> 5.64" in moved
+    o = journal.execute("SELECT exit_price, status FROM orders").fetchone()
+    assert (o["exit_price"], o["status"]) == (5.64, "ExitPending")
+    assert len(t.exits) == 1                                               # one sell order, ever
+    assert r.chase_exits() == []                                           # clock restarts on a re-price
+
+
+def test_chase_never_touches_market_exits_or_log_only(journal):
+    assert Runner(journal, mode="LOG_ONLY", dollar_risk=20.0).chase_exits() == []
