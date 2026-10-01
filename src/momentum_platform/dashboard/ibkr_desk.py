@@ -462,6 +462,8 @@ class IbkrDesk:
                 self.log(f"  {sym}: minute history failed: {exc}")
                 self._minutes[sym] = []
             sec = sec_profile(sym) if self.sec else {}
+            if self.sec:
+                self._finviz_float(sym)
             fl = float_from_ibkr(self.stream.ib, c) if self.fundamentals is not False else {}
             self._set_reference(sym, c, bars, sec=sec, ibkr_float=fl)
             r = self._reference[sym]
@@ -503,6 +505,31 @@ class IbkrDesk:
             self._reference[sym]["float_quality"] = "verified"
             self._reference[sym]["float_source"] = ov["source"]
         self._reference_day[sym] = day
+
+    def _finviz_float(self, sym: str) -> None:
+        """Look up finviz's float for a name that joined after the gap scan.
+
+        2026-10-01, NXL: it joined at 08:3x from the live scanner, so the
+        06:55 gap scan never read its float; the desk fell back to SEC shares
+        outstanding (22.0M, an upper bound) and killed three plans on
+        `pillars: missing float`. finviz said 0.65M. The gap scan's own source,
+        asked once per joining name; a miss leaves the SEC fallback as before."""
+        day = self.session_day()
+        if _float_override(sym, day):
+            return
+        try:
+            import sys
+            scripts = os.path.join(_repo_root(), "scripts")
+            if scripts not in sys.path:
+                sys.path.append(scripts)
+            import premarket_stars
+            shares = premarket_stars.finviz(sym).get("float")
+        except Exception as exc:                                  # noqa: BLE001
+            self.log(f"  {sym}: finviz float lookup failed: {exc}")
+            return
+        if shares and shares > 0:
+            _remember_float_override(sym, day, float(shares), "finviz on join")
+            self.log(f"  {sym}: finviz float {shares / 1e6:.2f}M (looked up on join)")
 
     def session_day(self) -> str:
         """The trading day the desk shows (ISO date), by the 04:00 ET rule."""
@@ -1098,11 +1125,8 @@ def _float_override(sym: str, day: str) -> Optional[dict]:
     is a point-in-time fact and yesterday's is not evidence about today.
     """
     import json
-    path = os.environ.get("FLOAT_OVERRIDES") or os.path.join(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))),
-        "data", "float_overrides.json")
     try:
-        with open(path) as fh:
+        with open(_overrides_path()) as fh:
             doc = json.load(fh)
     except (OSError, ValueError):
         return None
@@ -1111,4 +1135,34 @@ def _float_override(sym: str, day: str) -> Optional[dict]:
     val = (doc.get("floats") or {}).get(sym.upper())
     if not val or val <= 0:
         return None
-    return {"float": float(val), "source": doc.get("source") or "gap scan"}
+    source = (doc.get("sources") or {}).get(sym.upper()) or doc.get("source") or "gap scan"
+    return {"float": float(val), "source": source}
+
+
+def _repo_root() -> str:
+    return os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+
+
+def _overrides_path() -> str:
+    return os.environ.get("FLOAT_OVERRIDES") or os.path.join(_repo_root(), "data", "float_overrides.json")
+
+
+def _remember_float_override(sym: str, day: str, shares: float, source: str) -> None:
+    """Add one float to today's override file (a file from another day is
+    replaced), with its own source so the gap scan's label stays true."""
+    import json
+    path = _overrides_path()
+    try:
+        with open(path) as fh:
+            doc = json.load(fh)
+    except (OSError, ValueError):
+        doc = {}
+    if doc.get("date") != day:
+        doc = {"date": day, "source": "gap scan", "floats": {}}
+    doc.setdefault("floats", {})[sym.upper()] = shares
+    doc.setdefault("sources", {})[sym.upper()] = source
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = path + ".tmp"
+    with open(tmp, "w") as fh:
+        json.dump(doc, fh, indent=1)
+    os.replace(tmp, path)
