@@ -272,3 +272,68 @@ twice. (2) F7's 2023 validation was already read (gross +0.008), so F8's
 validation is not blind to the base rule; only the holdout is. (3) The $40 /
 $2,000 sizing differs from F7's $20, so part of any F8-vs-F7 difference is the
 commission minimum, not the filter; F7 at the new sizing is printed beside it.
+
+---
+
+## Addendum 2026-10-01 — R-audit: the bot's operating rules, one at a time
+
+Written and committed before `scripts/rules_audit.py` first runs. The owner
+asked which of the bot's operating rules hide profit and which protect it:
+rule 5 (still rising) and every safety, order and exit rule (E, F, G in the
+plain-language list of 2026-10-01). This is not a search for an edge — every
+configuration measured so far loses after costs — it is a measurement of what
+each rule does to net R, drawdown and trade count.
+
+**Data.** The 2,608-session Alpaca SIP 1-minute cache (`data/cache/history`,
+04:00-16:00 ET, pre-market volume included) over the candidate-day universe of
+`scripts/backtest_history.py` (opened $2-20 with a ≥ 10 % gap; reverse-split
+days dropped). Train 2016-2023, test 2024-2026. **The test years are not
+pristine:** the 2026-09-26, 09-29 and 09-30 ablations read them for filter
+levers. That is why the rule below demands consistency on both periods and a
+multiple-comparison correction.
+
+**Baseline B = the live rules on 2026-10-01.** The desk's detector; price
+$2-20; still rising (≤ 25 % off the day's high); VWAP, 9 EMA, MACD and pullback
+volume green; stop ≥ 2 % of price (A13); stop ≥ 4× the spread, the spread from
+the edge hunt's proxy at the arming bar (A6 — never modelled in a backtest
+before); plans armed 07:00-11:20; one position, the slot held from the order to
+the exit (an unfilled stop-limit holds it until its 3-minute expiry, as
+`positions_alive` does live); daily limits as `journal.risk` (−3 R, 3 losses
+≤ −0.25 R in a row with scratches skipped, 6 orders, all on gross R as the live
+gate reads); entry A10 as `backtest_recent` (re-touch within 3 bars, cap +0.3 %,
+1 ¢ minimum, opening above the cap fills only on a return); exit A3 trail 1 R;
+flat 11:30; costs `backtest_recent.cost_r` model "live" ($40, $2,000 cap,
+spread proxy + 1 ¢). Not modelled: the pillar count (no historical float or
+news), halts, the 2-minute signal clock, the 30-second quote clock, the
+15-second stop enforcement and the monitored pre-market stop — those are
+judged on the live ledger and the incident record, not here.
+
+**Variants, one at a time against B (K = 41):**
+
+| rule | variants |
+|---|---|
+| 5 still rising | off-the-high limit 15 % · 35 % · 50 % · off |
+| E1 window | start 08:00 · 09:30; end 10:30 · 11:00 · 11:30 (no A8 buffer) |
+| E2 stop floor | off · 1 % · 1.5 % · 3 % |
+| E3 stop vs spread | off · 2× · 3× · 6× |
+| E6 positions | 2 at once · no cap (one per symbol) |
+| E7 daily limits | all off · loss −2 R · loss −4 R · streak 2 · streak 4 · orders 4 · orders 8 |
+| F1 sizing | $20 risk · $80 risk · no $2,000 cap |
+| F2 entry order | expiry 1 · 5 bars; cap +0.5 % · +1 % |
+| G1 trail | 0.5 R · 1.5 R · 2 R |
+| G4 flat time | 11:00 · 12:00 |
+| Ross volume (new, tightening) | push volume rising (second-half mean ≥ first-half mean) · push volume elevated (push mean ≥ mean of the 10 bars before it) |
+| MACD reading | MACD line above zero AND above its signal |
+
+**Adoption rule.** A variant replaces B only if, in the one-position portfolio
+with costs: (1) its mean net R per trade beats B's on train AND on test;
+(2) it has ≥ 200 test trades; (3) it beats B in at least 2 of the 3 test years;
+(4) the day-paired bootstrap lower bound of (variant − B) mean net R per trade
+on test is above zero at one-sided α = 0.05 / 41. For the risk rules (E6, E7,
+F1) a change must also not worsen the test-period maximum drawdown in R by more
+than 10 %, and a variant that only lowers drawdown is reported, never adopted
+on that alone. A rule Ross states in his own words is never relaxed on this
+test alone: if it passes, it is flagged to the owner with the data.
+**Sensitivities, never deciding:** an intrabar entry model (fill on the
+trigger bar itself, the way the live desk arms while the bar forms) and the
+"old" cost model (one cent a side).
