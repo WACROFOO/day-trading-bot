@@ -64,7 +64,10 @@ SELECTIVE = True
 #: it reads −0.424 / −0.489 R on train / test against −0.430 / −0.502, over 3,840
 #: test trades against 2,266. Freeing VWAP loses more in both periods and MACD
 #: is mixed, so those still refuse. False restores the refusal.
-VOLUME_FLAG_ONLY = True
+#: REVERTED the same day by the owner: the method states it ("we want to see if
+#: the pullback volume is lighter relative to the buying volume", DP4ayEWhmvM
+#: 00:17:28) and the measured gain was 0.006-0.013 R a trade, inside noise.
+VOLUME_FLAG_ONLY = False
 SELECTIVE_MIN_STOP_PCT = 2.0
 #: 2.0 from 2026-09-30 (owner, delegated): at live costs the $5 floor adds
 #: 0.09 R a trade (−0.502 → −0.413 on 2024-2026) and halves the trades

@@ -960,6 +960,13 @@ VWAP or MACD refusal freed — are added to `scripts/ablation_history.py` and
 not yet run (the history cache lives on the owner's Mac); none changes until
 they are.
 
+**A14 REVERTED (2026-10-01, owner).** Before any session ran under it. The
+owner: the method requires the pullback on lighter volume than the push before
+it — *"we want to see if the pullback volume is lighter relative to the buying
+volume"* (DP4ayEWhmvM 00:17:28), FILTERS.md Layer 2 — and the measured gain
+(0.006 R on train, 0.013 R on test) is inside the noise of 3,840 trades. The
+volume gate refuses again: `VOLUME_FLAG_ONLY = False`.
+
 **Amendment A14 — pullback volume flags, it does not refuse (IN FORCE from the
 first desk start after 2026-10-01; owner, delegated: "implement any optimal fix
 you judge profitable").** The three combinations added on 2026-09-30, run on ten

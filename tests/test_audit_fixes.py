@@ -703,12 +703,14 @@ def test_backfill_tape_records_the_day_and_resets_only_no_tape_gradings():
     assert BT.reset_no_tape(c, "2026-09-09") == 0
 
 
-def test_a14_volume_red_is_not_a_refusal():
-    """A14 (2026-10-01): a red pullback-volume gate is recorded, not refused."""
+def test_a14_volume_red_is_not_a_refusal(monkeypatch):
+    """A14 (2026-10-01, reverted the same day): with the switch on, a red
+    pullback-volume gate is recorded, not refused. Off by default."""
     from execution import runner as RN
     from execution.runner import Runner
     from momentum_platform.dashboard.session_builder import build_session
-    assert RN.VOLUME_FLAG_ONLY is True
+    assert RN.VOLUME_FLAG_ONLY is False                     # reverted by the owner
+    monkeypatch.setattr(RN, "VOLUME_FLAG_ONLY", True)
     c = L.connect(":memory:"); build_session(ROOT / "fixtures/market_replay/workstation_open_2026-09-01.jsonl", journal=c)
     c.execute("UPDATE decisions SET verdict='REVIEW', volume_ok=0 WHERE plan_allowed=1"); c.commit()
     class T:
